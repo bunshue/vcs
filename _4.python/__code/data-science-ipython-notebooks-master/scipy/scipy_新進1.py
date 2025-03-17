@@ -25,20 +25,16 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # Random Sampling
 
-import numpy
 import scipy.stats
-
-#from IPython.html.widgets import interact, fixed
-#from IPython.html import widgets
 
 COLOR1 = '#7fc97f'
 COLOR2 = '#beaed4'
@@ -49,9 +45,12 @@ COLOR5 = '#386cb0'
 #Part One
 
 weight = scipy.stats.lognorm(0.23, 0, 70.8)
-weight.mean(), weight.std()
 
-#(72.697645732966876, 16.944043048498038)
+cc = weight.mean()
+print(cc)
+
+cc = weight.std()
+print(cc)
 
 #Here's what that distribution looks like:
 
@@ -62,19 +61,12 @@ plt.xlabel('weight (kg)')
 plt.ylabel('PDF')
 show()
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-#from __future__ import print_function, division
-
-import numpy
+'''
 import scipy.stats
 
 import matplotlib.pyplot as pyplot
-
-#from IPython.html.widgets import interact, fixed
-#from IPython.html import widgets
 
 # some nice colors from http://colorbrewer2.org/
 COLOR1 = '#7fc97f'
@@ -91,7 +83,9 @@ male_height = scipy.stats.norm(mu1, sig1)
 mu2, sig2 = 163, 7.3
 female_height = scipy.stats.norm(mu2, sig2)
 
-#The following function evaluates the normal (Gaussian) probability density function (PDF) within 4 standard deviations of the mean. It takes and rv object and returns a pair of NumPy arrays.
+# The following function evaluates the normal (Gaussian) probability density function (PDF)
+# within 4 standard deviations of the mean. It takes and rv object and
+# returns a pair of NumPy arrays.
 
 def eval_pdf(rv, num=4):
     mean, std = rv.mean(), rv.std()
@@ -111,7 +105,8 @@ male_sample = male_height.rvs(1000)
 
 female_sample = female_height.rvs(1000)
 
-# Both samples are NumPy arrays. Now we can compute sample statistics like the mean and standard deviation.
+# Both samples are NumPy arrays. Now we can compute sample statistics
+# like the mean and standard deviation.
 
 mean1, std1 = male_sample.mean(), male_sample.std()
 cc = mean1, std1
@@ -250,7 +245,6 @@ def overlap_superiority(control, treatment, n=1000):
 
 def plot_pdfs(cohen_d=2):
     """Plot PDFs for distributions that differ by some number of stds.
-    
     cohen_d: number of standard deviations between the means
     """
     control = scipy.stats.norm(0, 1)
@@ -273,14 +267,6 @@ show()
 #overlap 0.278
 #superiority 0.932
 
-"""
-slider = widgets.FloatSliderWidget(min=0, max=4, value=2)
-interact(plot_pdfs, cohen_d=slider)
-show()
-"""
-#overlap 0.305
-#superiority 0.931
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -302,3 +288,4 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+

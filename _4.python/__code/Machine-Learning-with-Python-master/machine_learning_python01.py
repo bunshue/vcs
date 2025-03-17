@@ -47,7 +47,7 @@ def show():
     plt.show()
     pass
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -178,6 +178,437 @@ test_size = 0.2
 degree = 3
 
 func_fit(model_type,test_size,degree)
+'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.datasets import make_classification
+from sklearn.datasets import make_blobs
+
+n_features = 8
+n_cluster = 5
+cluster_std = 1.5
+n_samples = 1000
+
+data1 = make_blobs(n_samples=n_samples,n_features=n_features,centers=n_cluster,cluster_std=cluster_std)
+d1 = data1[0]
+df1=pd.DataFrame(data=d1,columns=['Feature_'+str(i) for i in range(1,n_features+1)])
+cc = df1.head()
+print(cc)
+
+
+from itertools import combinations
+
+lst_vars=list(combinations(df1.columns,2))
+cc = len(lst_vars)
+print(cc)
+
+plt.figure(figsize=(21,35))
+for i in range(1,29):
+    plt.subplot(7,4,i)
+    dim1=lst_vars[i-1][0]
+    dim2=lst_vars[i-1][1]
+    plt.scatter(df1[dim1],df1[dim2],c=data1[1],edgecolor='k')
+    plt.xlabel(f"{dim1}",fontsize=13)
+    plt.ylabel(f"{dim2}",fontsize=13)
+
+show()
+
+print("------------------------------")  # 30個
+
+cc = df1.describe().transpose()
+print(cc)
+
+# How are the classes separated (boxplots)
+plt.figure(figsize=(21,15))
+
+for i,c in enumerate(df1.columns):
+    plt.subplot(3,3,i+1)
+    sns.boxplot(y=df1[c],x=data1[1])
+    plt.xticks(fontsize=15)
+    plt.yticks(fontsize=15)
+    plt.xlabel("Class",fontsize=15)
+    plt.ylabel(c,fontsize=15)
+
+show()
+
+print("------------------------------")  # 30個
+
+# k-means clustering
+from sklearn.cluster import KMeans
+X=df1
+#X.head()
+y=data1[1]
+
+#Scaling
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+X_scaled=scaler.fit_transform(X)
+
+print("------------------------------")  # 30個
+
+# Metrics
+from sklearn.metrics import silhouette_score, adjusted_rand_score, completeness_score, v_measure_score
+
+# Running k-means and computing inter-cluster distance score for various *k* values
+
+km_scores= []
+km_silhouette = []
+vmeasure_score =[]
+for i in range(2,12):
+    km = KMeans(n_clusters=i, random_state=0).fit(X_scaled)
+    preds = km.predict(X_scaled)
+    print("Score for number of cluster(s) {}: {}".format(i,km.score(X_scaled)))
+    km_scores.append(-km.score(X_scaled))
+    silhouette = silhouette_score(X_scaled,preds)
+    km_silhouette.append(silhouette)
+    print("Silhouette score for number of cluster(s) {}: {}".format(i,silhouette))
+    v_measure = v_measure_score(y,preds)
+    vmeasure_score.append(v_measure)
+    print("V-measure score for number of cluster(s) {}: {}".format(i,v_measure))
+    print("-"*100)
+    
+plt.scatter(x=[i for i in range(2,12)],y=km_scores,s=150,edgecolor='k')
+plt.grid(True)
+plt.xlabel("K-means score")
+show()
+
+print("------------------------------")  # 30個
+
+plt.scatter(x=[i for i in range(2,12)],y=vmeasure_score,s=150,edgecolor='k')
+plt.grid(True)
+plt.xlabel("V-measure score")
+plt.show()
+
+print("------------------------------")  # 30個
+
+km = KMeans(n_clusters=5,n_init=10,max_iter=500).fit(X=X_scaled)
+preds_km = km.predict(X_scaled)
+plt.figure(figsize=(21,35))
+for i in range(1,29):
+    plt.subplot(7,4,i)
+    dim1=lst_vars[i-1][0]
+    dim2=lst_vars[i-1][1]
+    plt.scatter(df1[dim1],df1[dim2],c=preds_km,edgecolor='k')
+    plt.xlabel(f"{dim1}",fontsize=13)
+    plt.ylabel(f"{dim2}",fontsize=13)
+
+plt.show()
+
+print("------------------------------")  # 30個
+
+# Expectation-maximization (Gaussian Mixture Model)
+
+from sklearn.mixture import GaussianMixture
+
+gm_bic= []
+gm_score=[]
+for i in range(2,12):
+    gm = GaussianMixture(n_components=i,n_init=10,tol=1e-3,max_iter=1000).fit(X_scaled)
+    print("BIC for number of cluster(s) {}: {}".format(i,gm.bic(X_scaled)))
+    print("Log-likelihood score for number of cluster(s) {}: {}".format(i,gm.score(X_scaled)))
+    print("-"*100)
+    gm_bic.append(-gm.bic(X_scaled))
+    gm_score.append(gm.score(X_scaled))
+
+plt.scatter(x=[i for i in range(2,12)],y=gm_bic,s=150,edgecolor='k')
+plt.grid(True)
+plt.xlabel("Gaussian mixture BIC score")
+plt.show()
+
+
+plt.scatter(x=[i for i in range(2,12)],y=gm_score,s=150,edgecolor='k')
+plt.show()
+
+
+print("------------------------------")  # 30個
+
+gm = GaussianMixture(n_components=5,verbose=1,n_init=10,tol=1e-2,covariance_type='full',max_iter=1000).fit(X_scaled)
+
+cc = gm.means_
+print(cc)
+
+cc = km.cluster_centers_
+print(cc)
+
+cc = gm.means_/km.cluster_centers_
+print(cc)
+
+preds_gm=gm.predict(X_scaled)
+
+km_rand_score = adjusted_rand_score(preds_km,y)
+
+gm_rand_score = adjusted_rand_score(preds_gm,y)
+
+print("Adjusted Rand score for k-means",km_rand_score)
+print("Adjusted Rand score for Gaussian Mixture model",gm_rand_score)
+
+cc = silhouette_score(X_scaled,preds_km)
+print(cc)
+
+cc = silhouette_score(X_scaled,preds_gm)
+print(cc)
+
+plt.figure(figsize=(21,35))
+for i in range(1,29):
+    plt.subplot(7,4,i)
+    dim1=lst_vars[i-1][0]
+    dim2=lst_vars[i-1][1]
+    plt.scatter(df1[dim1],df1[dim2],c=preds_gm,edgecolor='k')
+    plt.xlabel(f"{dim1}",fontsize=13)
+    plt.ylabel(f"{dim2}",fontsize=13)
+plt.show()
+
+print("------------------------------")  # 30個
+
+# PCA
+from sklearn.decomposition import PCA
+n_prin_comp = 3
+
+pca_partial = PCA(n_components=n_prin_comp,svd_solver='full')
+pca_partial.fit(X_scaled)
+
+pca_full = PCA(n_components=n_features,svd_solver='full')
+pca_full.fit(X_scaled)
+
+# How much variance is explained by principal components?
+
+pca_explained_var = pca_full.explained_variance_ratio_
+cum_explaiend_var = pca_explained_var.cumsum()
+print(cum_explaiend_var)
+
+plt.figure(figsize=(12,5))
+plt.bar(x=['PrComp'+str(i) for i in range(1,9)],height=cum_explaiend_var,width=0.6)
+plt.xticks(fontsize=14)
+plt.hlines(y=0.8,xmin='PrComp1',xmax='PrComp8',linestyles='dashed',lw=3)
+plt.text(x='PrComp1',y=0.82,s="80% variance explained",fontsize=15)
+plt.show()
+
+print("------------------------------")  # 30個
+
+# Transform the original variables in principal component space and create a DataFrame
+X_pca = pca_partial.fit_transform(X_scaled)
+df_pca=pd.DataFrame(data=X_pca,columns=['Principal_comp'+str(i) for i in range(1,n_prin_comp+1)])
+
+# Running k-means on the transformed features
+km_scores= []
+km_silhouette = []
+vmeasure_score =[]
+for i in range(2,12):
+    km = KMeans(n_clusters=i, random_state=0).fit(X_pca)
+    preds = km.predict(X_pca)
+    print("Score for number of cluster(s) {}: {}".format(i,km.score(X_pca)))
+    km_scores.append(-km.score(X_pca))
+    silhouette = silhouette_score(X_pca,preds)
+    km_silhouette.append(silhouette)
+    print("Silhouette score for number of cluster(s) {}: {}".format(i,silhouette))
+    v_measure = v_measure_score(y,preds)
+    vmeasure_score.append(v_measure)
+    print("V-measure score for number of cluster(s) {}: {}".format(i,v_measure))
+    print("-"*100)
+
+plt.scatter(x=[i for i in range(2,12)],y=km_scores,s=150,edgecolor='k')
+plt.grid(True)
+plt.xlabel("K-means scores")
+plt.show()
+
+plt.scatter(x=[i for i in range(2,12)],y=vmeasure_score,s=150,edgecolor='k')
+plt.grid(True)
+plt.xlabel("V-measures scores")
+plt.show()
+
+# K-means fitting with PCA-transformed data
+km_pca = KMeans(n_clusters=5,n_init=10,max_iter=500).fit(X=X_pca)
+preds_km_pca = km_pca.predict(X_pca)
+
+# Visualizing the clusters after running k-means on PCA-transformed features
+col_pca_combi=list(combinations(df_pca.columns,2))
+num_pca_combi = len(col_pca_combi)
+
+plt.figure(figsize=(21,20))
+for i in range(1,num_pca_combi+1):
+    plt.subplot(int(num_pca_combi/3)+1,3,i)
+    dim1=col_pca_combi[i-1][0]
+    dim2=col_pca_combi[i-1][1]
+    plt.scatter(df_pca[dim1],df_pca[dim2],c=preds_km_pca,edgecolor='k')
+    plt.xlabel(f"{dim1}",fontsize=13)
+    plt.ylabel(f"{dim2}",fontsize=13)
+show()
+
+# ICA
+
+from sklearn.decomposition import FastICA
+n_ind_comp = 3
+ica_partial = FastICA(n_components=n_ind_comp)
+ica_partial.fit(X_scaled)
+
+ica_full = FastICA(max_iter=1000)
+ica_full.fit(X_scaled)
+
+X_ica = ica_partial.fit_transform(X_scaled)
+df_ica=pd.DataFrame(data=X_ica,columns=['Independent_comp'+str(i) for i in range(1,n_ind_comp+1)])
+
+# Running k-means on the independent features
+km_scores= []
+km_silhouette = []
+vmeasure_score =[]
+for i in range(2,12):
+    km = KMeans(n_clusters=i, random_state=0).fit(X_ica)
+    preds = km.predict(X_ica)
+    print("Score for number of cluster(s) {}: {}".format(i,km.score(X_ica)))
+    km_scores.append(-km.score(X_ica))
+    silhouette = silhouette_score(X_ica,preds)
+    km_silhouette.append(silhouette)
+    print("Silhouette score for number of cluster(s) {}: {}".format(i,silhouette))
+    v_measure = v_measure_score(y,preds)
+    vmeasure_score.append(v_measure)
+    print("V-measure score for number of cluster(s) {}: {}".format(i,v_measure))
+    print("-"*100)
+
+plt.scatter(x=[i for i in range(2,12)],y=km_scores)
+plt.show()
+
+plt.scatter(x=[i for i in range(2,12)],y=vmeasure_score)
+plt.show()
+
+# K-means fitting with ICA-transformed data
+km_ica = KMeans(n_clusters=5,n_init=10,max_iter=500).fit(X=X_ica)
+preds_km_ica = km_ica.predict(X_ica)
+
+# Visualizing the clusters after running k-means on ICA-transformed features
+col_ica_combi=list(combinations(df_ica.columns,2))
+num_ica_combi = len(col_ica_combi)
+
+plt.figure(figsize=(21,20))
+for i in range(1,num_ica_combi+1):
+    plt.subplot(int(num_ica_combi/3)+1,3,i)
+    dim1=col_ica_combi[i-1][0]
+    dim2=col_ica_combi[i-1][1]
+    plt.scatter(df_ica[dim1],df_ica[dim2],c=preds_km_ica,edgecolor='k')
+    plt.xlabel(f"{dim1}",fontsize=13)
+    plt.ylabel(f"{dim2}",fontsize=13)
+show()
+
+# Random Projection
+from sklearn.random_projection import GaussianRandomProjection
+n_random_comp = 3
+random_proj = GaussianRandomProjection(n_components=n_random_comp)
+X_random_proj = random_proj.fit_transform(X_scaled)
+df_random_proj=pd.DataFrame(data=X_random_proj,columns=['Random_projection'+str(i) for i in range(1,n_random_comp+1)])
+
+# Running k-means on random projections
+
+km_scores= []
+km_silhouette = []
+vmeasure_score = []
+for i in range(2,12):
+    km = KMeans(n_clusters=i, random_state=0).fit(X_random_proj)
+    preds = km.predict(X_random_proj)
+    print("Score for number of cluster(s) {}: {}".format(i,km.score(X_random_proj)))
+    km_scores.append(-km.score(X_random_proj))
+    silhouette = silhouette_score(X_random_proj,preds)
+    km_silhouette.append(silhouette)
+    print("Silhouette score for number of cluster(s) {}: {}".format(i,silhouette))
+    v_measure = v_measure_score(y,preds)
+    vmeasure_score.append(v_measure)
+    print("V-measure score for number of cluster(s) {}: {}".format(i,v_measure))
+    print("-"*100)
+
+plt.scatter(x=[i for i in range(2,12)],y=km_scores)
+plt.show()
+
+plt.scatter(x=[i for i in range(2,12)],y=vmeasure_score)
+plt.show()
+
+# K-means fitting with random-projected data
+
+km_random_proj = KMeans(n_clusters=5,n_init=10,max_iter=500).fit(X=X_random_proj)
+preds_km_random_proj = km_random_proj.predict(X_random_proj)
+
+# Visualizing the clusters after running k-means on random-projected features
+
+col_random_proj_combi=list(combinations(df_random_proj.columns,2))
+num_random_proj_combi = len(col_random_proj_combi)
+
+plt.figure(figsize=(21,20))
+for i in range(1,num_random_proj_combi+1):
+    plt.subplot(int(num_random_proj_combi/3)+1,3,i)
+    dim1=col_random_proj_combi[i-1][0]
+    dim2=col_random_proj_combi[i-1][1]
+    plt.scatter(df_random_proj[dim1],df_random_proj[dim2],c=preds_km_random_proj,edgecolor='k')
+    plt.xlabel(f"{dim1}",fontsize=13)
+    plt.ylabel(f"{dim2}",fontsize=13)
+plt.show()
+
+def plot_cluster_rp(df_rp,preds_rp):
+    """
+    Plots clusters after running random projection
+    """
+    plt.figure(figsize=(21,12))
+    for i in range(1,num_random_proj_combi+1):
+        plt.subplot(int(num_random_proj_combi/3)+1,3,i)
+        dim1=col_random_proj_combi[i-1][0]
+        dim2=col_random_proj_combi[i-1][1]
+        plt.scatter(df_rp[dim1],df_rp[dim2],c=preds_rp,edgecolor='k')
+        plt.xlabel(f"{dim1}",fontsize=13)
+        plt.ylabel(f"{dim2}",fontsize=13)
+    plt.show()
+
+# Running the random projections many times
+
+rp_score= []
+rp_silhouette = []
+rp_vmeasure = []
+for i in range(20):
+    random_proj = GaussianRandomProjection(n_components=n_random_comp)
+    X_random_proj = random_proj.fit_transform(X_scaled)
+    df_random_proj=pd.DataFrame(data=X_random_proj,columns=['Random_projection'+str(i) for i in range(1,n_random_comp+1)])
+    
+    km = KMeans(n_clusters=5, random_state=0).fit(X_random_proj)
+    preds = km.predict(X_random_proj)
+    print("Score for iteration {}: {}".format(i,km.score(X_random_proj)))
+    rp_score.append(-km.score(X_random_proj))
+    
+    silhouette = silhouette_score(X_random_proj,preds)
+    rp_silhouette.append(silhouette)
+    print("Silhouette score for iteration {}: {}".format(i,silhouette))
+    
+    v_measure = v_measure_score(y,preds)
+    rp_vmeasure.append(v_measure)
+    print("V-measure score for iteration {}: {}".format(i,v_measure))
+    print("-"*100)
+    
+    plot_cluster_rp(df_random_proj,preds)
+
+
+plt.scatter(x=[i for i in range(20)],y=rp_score)
+plt.show()
+
+plt.scatter(x=[i for i in range(20)],y=rp_silhouette)
+plt.show()
+
+plt.scatter(x=[i for i in range(20)],y=rp_vmeasure)
+plt.show()
+
+# This kind of variation does not happen with PCA
+pca_score= []
+pca_silhouette = []
+pca_vmeasure = []
+for i in range(20):
+    pca_partial = PCA(n_components=n_prin_comp,svd_solver='full')
+    X_pca=pca_partial.fit_transform(X_scaled)
+    km = KMeans(n_clusters=5, random_state=0).fit(X_pca)
+    preds = km.predict(X_pca)
+    print("Score for iteration {}: {}".format(i,km.score(X_pca)))
+    rp_score.append(-km.score(X_pca))
+    silhouette = silhouette_score(X_pca,preds)
+    rp_silhouette.append(silhouette)
+    print("Silhouette score for iteration {}: {}".format(i,silhouette))
+    v_measure = v_measure_score(y,preds)
+    rp_vmeasure.append(v_measure)
+    print("V-measure score for iteration {}: {}".format(i,v_measure))
+    print("-"*100)
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -187,8 +618,24 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個
@@ -201,6 +648,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
+
 
 

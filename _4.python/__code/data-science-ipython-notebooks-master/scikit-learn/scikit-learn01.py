@@ -265,9 +265,6 @@ plt.scatter(
 show()
 
 
-# from IPython.html.widgets import interact
-
-
 def plot_svm(N=100):
     X, y = make_blobs(n_samples=200, centers=2, random_state=0, cluster_std=0.60)
     X = X[:N]
@@ -282,12 +279,12 @@ def plot_svm(N=100):
         clf.support_vectors_[:, 0], clf.support_vectors_[:, 1], s=200, facecolors="none"
     )
 
+N = 100
+plot_svm(N)
 
-# NG interact(plot_svm, N=[10, 200], kernel='linear')
 show()
 
-sys.exit()
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Support Vector Machine with Kernels Classifier
@@ -305,18 +302,18 @@ r = np.exp(-(X[:, 0] ** 2 + X[:, 1] ** 2))
 
 from mpl_toolkits import mplot3d
 
+elev=30
+azim=30
 
-def plot_3D(elev=30, azim=30):
-    ax = plt.subplot(projection="3d")
-    ax.scatter3D(X[:, 0], X[:, 1], r, c=y, s=50, cmap="spring")
-    ax.view_init(elev=elev, azim=azim)
-    ax.set_xlabel("x")
-    ax.set_ylabel("y")
-    ax.set_zlabel("r")
+ax = plt.subplot(projection="3d")
+ax.scatter3D(X[:, 0], X[:, 1], r, c=y, s=50, cmap="spring")
+ax.view_init(elev=elev, azim=azim)
+ax.set_xlabel("x")
+ax.set_ylabel("y")
+ax.set_zlabel("r")
 
-
-# NG interact(plot_3D, elev=[-90, 90], azip=(-180, 180))
 show()
+
 
 # In three dimensions, there is a clear separation between the data. Run the SVM with the rbf kernel:
 
@@ -530,26 +527,21 @@ plt.title("mean squared error: {0:.3g}".format(mean_squared_error(model.predict(
 plt.ylim(-4, 14)
 show()
 
-# from IPython.html.widgets import interact
 
+degree=1
+Npts=50
+X, y = make_data(Npts, error=1)
+X_test = np.linspace(-0.1, 1.1, 500)[:, None]
 
-def plot_fit(degree=1, Npts=50):
-    X, y = make_data(Npts, error=1)
-    X_test = np.linspace(-0.1, 1.1, 500)[:, None]
+model = PolynomialRegression(degree=degree)
+model.fit(X, y)
+y_test = model.predict(X_test)
 
-    model = PolynomialRegression(degree=degree)
-    model.fit(X, y)
-    y_test = model.predict(X_test)
+plt.scatter(X.ravel(), y)
+plt.plot(X_test.ravel(), y_test)
+plt.ylim(-4, 14)
+plt.title("mean squared error: {0:.2f}".format(mean_squared_error(model.predict(X), y)))
 
-    plt.scatter(X.ravel(), y)
-    plt.plot(X_test.ravel(), y_test)
-    plt.ylim(-4, 14)
-    plt.title(
-        "mean squared error: {0:.2f}".format(mean_squared_error(model.predict(X), y))
-    )
-
-
-# NG interact(plot_fit, degree=[1, 30], Npts=[2, 100])
 show()
 
 # Detecting Over-fitting with Validation Curves
@@ -658,11 +650,6 @@ show()
 
 # We have some convenience functions in the repository that help
 from fig_code import visualize_tree
-from fig_code import plot_tree_interactive
-
-# Now using IPython's ``interact`` (available in IPython 2.0+, and requires a live kernel) we can view the decision tree splits:
-# plot_tree_interactive(X, y)
-show()
 
 # Decision Trees and over-fitting
 
@@ -678,26 +665,21 @@ show()
 
 # Ensembles of Estimators: Random Forests
 
+random_state=0
+X, y = make_blobs(n_samples=300, centers=4, random_state=0, cluster_std=2.0)
+clf = DecisionTreeClassifier(max_depth=15)
 
-def fit_randomized_tree(random_state=0):
-    X, y = make_blobs(n_samples=300, centers=4, random_state=0, cluster_std=2.0)
-    clf = DecisionTreeClassifier(max_depth=15)
-
-    rng = np.random.RandomState(random_state)
-    i = np.arange(len(y))
-    rng.shuffle(i)
-    visualize_tree(
-        clf,
-        X[i[:250]],
-        y[i[:250]],
-        boundaries=False,
-        xlim=(X[:, 0].min(), X[:, 0].max()),
-        ylim=(X[:, 1].min(), X[:, 1].max()),
-    )
-
-
-# from IPython.html.widgets import interact
-# interact(fit_randomized_tree, random_state=[0, 100])
+rng = np.random.RandomState(random_state)
+i = np.arange(len(y))
+rng.shuffle(i)
+visualize_tree(
+    clf,
+    X[i[:250]],
+    y[i[:250]],
+    boundaries=False,
+    xlim=(X[:, 0].min(), X[:, 0].max()),
+    ylim=(X[:, 1].min(), X[:, 1].max()),
+)
 show()
 
 clf = RandomForestClassifier(n_estimators=100, random_state=0, n_jobs=-1)
@@ -746,3 +728,4 @@ sys.exit()
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
