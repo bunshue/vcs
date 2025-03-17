@@ -4289,8 +4289,6 @@ y=[200000,180000,175000,215000,280000,320000,90000,365000,318000,198000,268000,3
 
 plt.plot(x, y, marker='D',ms=10, mfc='y', mec='r')
 
-os.chdir(r"D:\Python_book\19Case\19_1Bankcredit")
-
 
 """
 fontfile = requests.get("https://drive.google.com/uc?id=1QdaqR8Setf4HEulrIW79UEV_Lg_fuoWz&export=download")
@@ -5308,17 +5306,7 @@ print('----------------')
 # Colab 使用，本機環境請刪除
 from flask_ngrok import run_with_ngrok
 
-# import os
-# os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-import os
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
-
 
 vcs待尋找
 目前用webbrowser顯示pdf檔案, 無法用程式的方法得知此時看到第幾頁 也無法得知目前頁面顯示比例
@@ -5368,10 +5356,7 @@ t1.grid(row = 0, column = 0)
 t2.grid(row = 0, column = 1)
 t3.grid(columnspan = 2)
 
-
 print("------------------------------------------------------------")  # 60個
-
-
 
              /* info
             richTextBox1.Text += "aaa: " + pfc.Families.Length.ToString() + "\n";
@@ -5386,15 +5371,7 @@ print("------------------------------------------------------------")  # 60個
             //richTextBox1.Text += "字型名稱: " + f.Name + "\n";    same
             */
 
- 
-
-
-
 with open(filename, encoding='utf-8-sig') as file_Obj: # utf-8-sig
-
-
-
-
 
 指定 ZIP 檔名的編碼方式
 ・cp932　…日文

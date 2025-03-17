@@ -28,6 +28,10 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 print("讀取一個資料夾內的所有csv檔, 用區域變數存起來")
+foldername = "D:/_git/vcs/_big_files/Bankcredit"
+os.chdir(foldername)
+print('目前目錄 :', os.getcwd())
+
 loanfile = os.listdir()
 createVar = locals()  # 字典
 print(type(createVar))
@@ -198,8 +202,6 @@ print("训练集样本量：%i\n测试集样本量：%i" % (len(train), len(test
 # 测试集样本量：84
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 '''
@@ -253,6 +255,10 @@ print("------------------------------------------------------------")  # 60個
 """
 
 #第三部分：数据提取
+
+print("讀取一個資料夾內的所有csv檔, 用區域變數存起來")
+foldername = "D:/_git/vcs/_big_files/Bankcredit"
+os.chdir(foldername)
 
 loanfile = os.listdir()
 createVar = locals()

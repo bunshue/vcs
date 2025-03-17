@@ -495,13 +495,6 @@ self.text.insert(tkinter.END, "傳送錯誤\n")
         self.entryPort.insert(tkinter.END, "25")
 
 
-
-import os
-print('Current directory is ',os.getcwd())
-
-
-import os  # 匯入os模組
-
 i = 1
 for path in os.sys.path:  # 使用os模組
     print(i, " ", path)
@@ -755,8 +748,13 @@ BLOB	多媒體物件 ex : 圖片 音樂
 UNIQUE 唯一
 NOT NULL	不能空白
 
-
 print("------------------------------------------------------------")  # 60個
+
+# import os
+# os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
+
+import os
+os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 import os
 
