@@ -650,6 +650,28 @@ for i in features:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# ShuffleSplit 随机排列交叉验证器
+
+from sklearn.model_selection import ShuffleSplit
+
+X = np.array([[1, 2], [3, 4], [5, 6], [7, 8], [3, 4], [5, 6]])
+y = np.array([1, 2, 1, 2, 1, 2])
+rs = ShuffleSplit(n_splits=5, test_size=.25, random_state=0)
+cc = rs.get_n_splits(X)
+print(cc)
+
+print(rs)
+ShuffleSplit(n_splits=5, random_state=0, test_size=0.25, train_size=None)
+for train_index, test_index in rs.split(X):
+    print("TRAIN:", train_index, "TEST:", test_index)
+
+rs = ShuffleSplit(n_splits=5, train_size=0.5, test_size=.25, random_state=0)
+for train_index, test_index in rs.split(X):
+    print("TRAIN:", train_index, "TEST:", test_index)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 from sklearn.model_selection import learning_curve
 from sklearn.model_selection import ShuffleSplit
 
@@ -743,6 +765,8 @@ plt.ylabel("Score")
 plt.title("Learning Curves (Over Fitting)")
 
 show()
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

@@ -62,7 +62,7 @@ from sklearn.metrics import recall_score
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 資料一, 使用 make_blobs 資料
 N = 30  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)
@@ -2829,6 +2829,7 @@ plot_error_rate(er_train, er_test)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+'''
 
 data = pd.read_excel("data/loan.xlsx")
 target = data["Type"]
@@ -2839,6 +2840,9 @@ train_data, test_data, train_target, test_target = train_test_split(
     data, target, test_size=0.2
 )
 
+print("------------------------------")  # 30個
+
+print("使用 DecisionTreeClassifier")
 clf_1 = tree.DecisionTreeClassifier(criterion="entropy")
 clf_1.fit(train_data, train_target)
 train_est = clf_1.predict(train_data)
@@ -2853,6 +2857,9 @@ print(accuracy_score(test_target, test_est))
 cm = confusion_matrix(test_target, test_est)
 print("混淆矩陣 :\n", cm, sep="")
 
+print("------------------------------")  # 30個
+
+print("使用 SVC")
 clf_2 = svm.SVC()
 clf_2.fit(train_data, train_target)
 train_est = clf_2.predict(train_data)
@@ -2863,6 +2870,10 @@ print(accuracy_score(test_target, test_est))
 # 混淆矩陣
 cm = confusion_matrix(test_target, test_est)
 print("混淆矩陣 :\n", cm, sep="")
+
+print("------------------------------")  # 30個
+
+print("使用 GaussianNB")
 
 from sklearn.naive_bayes import GaussianNB
 
@@ -2876,6 +2887,10 @@ print(accuracy_score(test_target, test_est))
 # 混淆矩陣
 cm = confusion_matrix(test_target, test_est)
 print("混淆矩陣 :\n", cm, sep="")
+
+print("------------------------------")  # 30個
+
+print("使用 MLPClassifier")
 
 from sklearn.neural_network import MLPClassifier  # 多層感知器分類器 函數學習機
 
@@ -2891,52 +2906,6 @@ print(accuracy_score(test_target, test_est))
 # 混淆矩陣
 cm = confusion_matrix(test_target, test_est)
 print("混淆矩陣 :\n", cm, sep="")
-
-y_pred = [0, 2, 1, 3]
-y_true = [0, 1, 2, 3]
-print(accuracy_score(y_true, y_pred))
-print(accuracy_score(y_true, y_pred, normalize=False))
-
-print("混淆矩陣")
-y_true = [2, 0, 2, 2, 0, 1]
-y_pred = [0, 0, 2, 2, 0, 2]
-
-# 混淆矩陣
-cm = confusion_matrix(y_true, y_pred)
-print("混淆矩陣 :\n", cm, sep="")
-
-print("混淆矩陣")
-y_true = ["cat", "ant", "cat", "cat", "ant", "bird"]
-y_pred = ["ant", "ant", "cat", "cat", "ant", "cat"]
-
-# 混淆矩陣
-cm = confusion_matrix(y_true, y_pred, labels=["ant", "bird", "cat"])
-print("混淆矩陣 :\n", cm, sep="")
-
-y = np.array([1, 1, 2, 2])
-scores = np.array([0.1, 0.4, 0.35, 0.8])
-fpr, tpr, thresholds = roc_curve(y, scores, pos_label=2)
-print(fpr)
-print(tpr)
-print(thresholds)
-
-plt.plot(fpr, tpr)
-
-show()
-
-y_true = [0, 1, 2, 0, 1, 2]
-y_pred = [0, 2, 1, 0, 0, 1]
-cc = recall_score(y_true, y_pred, average="macro")  # doctest: +ELLIPSIS
-print(cc)
-
-cc = recall_score(y_true, y_pred, average="micro")
-print(cc)
-
-cc = recall_score(y_true, y_pred, average="weighted")
-print(cc)
-
-cc = recall_score(y_true, y_pred, average=None)
-print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3050,8 +3019,10 @@ dt_clf = DecisionTreeClassifier(
     class_weight="balanced",
 )
 rf_clf = RandomForestClassifier(class_weight="balanced")
-# randomize the data, and run the cross validation for 5 times
-cv = ShuffleSplit(X_data.shape[0], n_iter=5, test_size=0.3, random_state=0)
+
+# 為了讓學習曲線更平滑，交叉驗證數據集的得分計算 10 次，每次都重新選中 20% 的數據計算一遍
+cv = ShuffleSplit(n_splits=5, test_size=0.2, random_state=9487)
+
 print(cross_val_score(dt_clf, X_data, y_data, cv=cv, scoring="f1").mean())
 print(cross_val_score(rf_clf, X_data, y_data, cv=cv, scoring="f1").mean())
 
@@ -3062,10 +3033,6 @@ print(cross_val_score(rf_clf, X_data, y_data, cv=cv, scoring="f1").mean())
 
 # print(rf_clf.predict(X_test.iloc[10, :][np.newaxis, :]))
 # print(y_test.iloc[10])
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

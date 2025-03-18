@@ -1,10 +1,9 @@
 """
-單純貝氏分類器 naive Bayes classifier
-
-單純貝氏分類器（英語：Naive Bayes classifier，中國大陸稱為樸素貝葉斯分類器），
+單純貝氏分類器/樸素貝葉斯分類器（Naive Bayes classifier）
 在機器學習中是一系列以假設特徵之間強（樸素）獨立下運用貝氏定理為基礎的簡單機率分類器。
 
-
+朴素贝叶斯
+朴素贝叶斯是基于贝叶斯定理与特征条件独立假设的分类方法。
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -39,14 +38,9 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-"""
-朴素贝叶斯
-朴素贝叶斯是基于贝叶斯定理与特征条件独立假设的分类方法。
-"""
 
 """
 API Reference: http://scikit-learn.org/stable/modules/naive_bayes.html#naive-bayes
@@ -58,18 +52,15 @@ class MultinomialNB(object):
     def __init__(self, alpha=1.0, fit_prior=True, class_prior=None):
         """
         多项式模型的朴素贝叶斯分类器。多项式朴素贝叶斯分类器适用于具有离散特征的分类。
-
         参数
         ----------
         alpha : 平滑参数(float类型)，默认为1.0;
         如果alpha=0则不平滑。
         如果 0 < alpha < 1 则为Lidstone平滑
         如果 alpha = 1 则为Laplace 平滑
-
         fit_prior : 布尔型
         是否学习类别先验概率。
         如果设置为False，将使用统一的优先权。
-
         class_prior : array-like, size (n_classes,)
                 类别的先验概率。如果指定，则不会根据数据调整优先级。
         """
@@ -206,7 +197,7 @@ class GaussianNB(MultinomialNB):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Naive Bayes Classification using Wine data (UCI ML Repo)
+# Naive Bayes Classification using Wine data
 
 df = pd.read_csv("data/wine.data.csv")
 df.head(10)
@@ -218,9 +209,10 @@ df.head(10)
 # Boxplots by output labels/classes
 
 for c in df.columns[1:]:
-    df.boxplot(c, by="Class", figsize=(7, 4), fontsize=14)
-    plt.title("{}\n".format(c), fontsize=16)
-    plt.xlabel("Wine Class", fontsize=16)
+    print("檢視欄位 :", c)
+    df.boxplot(c, by="Class", figsize=(7, 4))
+    plt.title("{}\n".format(c))
+    plt.xlabel("Wine Class")
     plt.show()
 
 plt.figure(figsize=(10, 6))
@@ -233,12 +225,9 @@ plt.scatter(
     s=100,
 )
 plt.grid(True)
-plt.title(
-    "Scatter plot of two features showing the \ncorrelation and class seperation",
-    fontsize=15,
-)
-plt.xlabel("OD280/OD315 of diluted wines", fontsize=15)
-plt.ylabel("Flavanoids", fontsize=15)
+plt.title("Scatter plot of two features showing the \ncorrelation and class seperation")
+plt.xlabel("OD280/OD315 of diluted wines")
+plt.ylabel("Flavanoids")
 plt.show()
 
 # Are the features independent? Plot co-variance matrix
@@ -253,10 +242,10 @@ def correlation_matrix(df):
     cmap = cm.get_cmap("jet", 30)
     cax = ax1.imshow(df.corr(), interpolation="nearest", cmap=cmap)
     ax1.grid(True)
-    plt.title("Wine data set features correlation", fontsize=15)
+    plt.title("Wine data set features correlation")
     labels = df.columns
-    ax1.set_xticklabels(labels, fontsize=9)
-    ax1.set_yticklabels(labels, fontsize=9)
+    ax1.set_xticklabels(labels)
+    ax1.set_yticklabels(labels)
     # Add colorbar, make sure to specify tick locations to match desired ticklabels
     fig.colorbar(cax, ticks=[0.1 * i for i in range(-11, 11)])
     plt.show()
@@ -266,6 +255,7 @@ cc = correlation_matrix(df)
 print(cc)
 
 # Naive Bayes Classification
+
 # Test/train split
 
 test_size = 0.3  # Test-set fraction
@@ -314,10 +304,80 @@ cmdf = pd.DataFrame(
 )
 print("The confusion matrix looks like following...\n")
 cmdf
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+from sklearn.naive_bayes import GaussianNB
+
+
+X = np.array(
+    [
+        [9, 9],
+        [9.2, 9.2],
+        [9.6, 9.2],
+        [9.2, 9.2],
+        [6.7, 7.1],
+        [7, 7.4],
+        [7.6, 7.5],
+        [7.2, 10.3],
+        [7.3, 10.5],
+        [7.2, 9.2],
+        [7.3, 10.2],
+        [7.2, 9.7],
+        [7.3, 10.1],
+        [7.3, 10.1],
+    ]
+)
+Y = np.array([1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2])
+
+
+model = GaussianNB()
+model.fit(X, Y)
+print(model.class_prior_)
+print(model.get_params())
+
+
+# Predict Output
+x_test = np.array([[8, 8], [8.3, 8.3]])
+predicted = model.predict(x_test)
+print(predicted)
+print(model.predict_proba(x_test))
+
+t1 = np.array([[1, 2], [3, 4]])
+print(t1.ravel())  # 轉成一維 輸出為[1, 2, 3, 4]
+t2 = np.linspace(0, 10, 3)
+print(t2)  # 輸出為[ 0.  5. 10.]
+t3 = np.linspace(0, 10, 2)
+print(t3)  # 輸出為[ 0. 10.]
+t4, t5 = np.meshgrid(t2, t3)
+print(t4)  # 輸出為[[ 0.  5. 10.][ 0.  5. 10.]]
+print(t5)  # 輸出為[[ 0.  0.  0.] [10. 10. 10.]]
+t4, t5 = np.meshgrid(t3, t2)
+print(t4)  # 輸出為[[ 0. 10.][ 0. 10.][ 0. 10.]]
+print(t5)  # 輸出為[[ 0.  0.][ 5.  5.][10. 10.]]
+t6 = np.c_[np.array([1, 2, 3]), np.array([4, 5, 6])]
+print(t6)
+
+# 繪圖
+plt.plot(X[:7, 0], X[:7, 1], "yx")
+plt.plot(X[7:, 0], X[7:, 1], "g.")
+plt.plot(x_test[:, 0], x_test[:, 1], "r^")  # 綠色點
+plt.ylabel("W")
+plt.xlabel("H")
+plt.legend(("Citrus", "Lemon"), loc="upper left")
+
+x_min = X[:, 0].min() - 0.5
+x_max = X[:, 0].max() + 0.5
+y_min = X[:, 1].min() - 0.5
+y_max = X[:, 1].max() + 0.5
+
+xx, yy = np.meshgrid(np.linspace(x_min, x_max, 30), np.linspace(y_min, y_max, 30))
+Z = model.predict_proba(np.c_[xx.ravel(), yy.ravel()])
+Z1 = Z[:, 1].reshape(xx.shape)
+plt.contour(xx, yy, -Z1, [-0.5], colors="k")
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

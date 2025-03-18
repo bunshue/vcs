@@ -60,7 +60,7 @@ def fft_combine(bins, n, loops=1):
 
 
 df = pd.read_csv("AirPassengers.csv")
-ts = df["#Passengers"] # Series
+ts = df["#Passengers"]  # Series
 
 plt.subplot(211)
 plt.plot(ts, "r")
@@ -68,15 +68,15 @@ plt.plot(ts, "r")
 
 # 平穩化
 ts_log = np.log(ts)
-#print("ts_log :", ts_log)
+# print("ts_log :", ts_log)
 
 ts_diff = ts_log.diff(1)  # 差分 A[n] = A[n]-A[n-1], 故第0項為NaN, 總數少1項
-#print("ts_diff :", ts_diff)
+# print("ts_diff :", ts_diff)
 
 ts_diff = ts_diff.dropna()  # 去除空數據NaN
-#print("ts_diff :", ts_diff)
+# print("ts_diff :", ts_diff)
 
-fy = np.fft.fft(ts_diff) # np.array 做 fft
+fy = np.fft.fft(ts_diff)  # np.array 做 fft
 print("fy :", fy)
 print(fy[:10])  # 顯示前10個頻域數據
 

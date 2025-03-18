@@ -1,5 +1,5 @@
 """
-machine_learning_python01
+
 
 """
 
@@ -26,7 +26,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-from common1 import *
+# from common1 import *
 import scipy
 import sklearn.linear_model
 from sklearn import datasets

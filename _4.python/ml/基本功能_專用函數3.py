@@ -864,6 +864,73 @@ When bandwidth is 1.00 ----> MSE(estimate, truth): 3.059
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix  # 混淆矩陣
+from sklearn.metrics import roc_curve
+from sklearn.metrics import recall_score
+
+print("測試 accuracy_score")
+      
+y_pred = [0, 2, 1, 3]
+y_true = [0, 1, 2, 3]
+print(accuracy_score(y_true, y_pred))
+print(accuracy_score(y_true, y_pred, normalize=False))
+
+print("測試 混淆矩陣")
+
+y_true = [2, 0, 2, 2, 0, 1]
+y_pred = [0, 0, 2, 2, 0, 2]
+
+# 混淆矩陣
+cm = confusion_matrix(y_true, y_pred)
+print("混淆矩陣 :\n", cm, sep="")
+
+print("混淆矩陣")
+y_true = ["cat", "ant", "cat", "cat", "ant", "bird"]
+y_pred = ["ant", "ant", "cat", "cat", "ant", "cat"]
+
+# 混淆矩陣
+cm = confusion_matrix(y_true, y_pred, labels=["ant", "bird", "cat"])
+print("混淆矩陣 :\n", cm, sep="")
+
+print("測試 roc_curve")
+
+y = np.array([1, 1, 2, 2])
+scores = np.array([0.1, 0.4, 0.35, 0.8])
+fpr, tpr, thresholds = roc_curve(y, scores, pos_label=2)
+print(fpr)
+print(tpr)
+print(thresholds)
+
+plt.plot(fpr, tpr)
+
+show()
+
+print("測試 recall_score")
+
+y_true = [0, 1, 2, 0, 1, 2]
+y_pred = [0, 2, 1, 0, 0, 1]
+cc = recall_score(y_true, y_pred, average="macro")  # doctest: +ELLIPSIS
+print("recall_score :", cc)
+
+cc = recall_score(y_true, y_pred, average="micro")
+print("recall_score :", cc)
+
+cc = recall_score(y_true, y_pred, average="weighted")
+print("recall_score :", cc)
+
+cc = recall_score(y_true, y_pred, average=None)
+print("recall_score :", cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
