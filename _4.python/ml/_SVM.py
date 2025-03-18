@@ -2881,13 +2881,7 @@ show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 """
-支持向量机
-
 支持向量机(support vector machines,SVM)
 
 支持向量机方法包括：
@@ -2896,8 +2890,6 @@ print("------------------------------------------------------------")  # 60個
 3.非线性支持向量机
 """
 from sklearn import svm
-import numpy as np
-import matplotlib.pyplot as plt
 
 # 构建正态分布来产生数字,20行2列*2
 train_x = np.r_[np.random.randn(20, 2) - [2, 2], np.random.randn(20, 2) + [2, 2]]
@@ -2945,14 +2937,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # 非线性支持向量机
 
-import matplotlib.pyplot as plt
-import numpy as np
 import tensorflow as tf
 from sklearn import datasets
 from tensorflow.python.framework import ops
@@ -3090,11 +3076,6 @@ plt.xlabel("Generation")
 plt.ylabel("Loss")
 show()
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -3102,8 +3083,6 @@ print("------------------------------------------------------------")  # 60個
 # 线性支持向量机
 # 线性支持向量机的TensorFlw实现
 
-import matplotlib.pyplot as plt
-import numpy as np
 import tensorflow as tf
 from sklearn import datasets
 from tensorflow.python.framework import ops
@@ -3256,14 +3235,87 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# Support Vector Machine practice notebook with breast cancer data set
+
 from sklearn.datasets import load_breast_cancer
 
 cancer = load_breast_cancer()
 
+# The data set is presented in a dictionary form
+
+
 cc = cancer.keys()
 print(cc)
 
+# dict_keys(['data', 'target', 'target_names', 'DESCR', 'feature_names'])
+
+# We can grab information and arrays out of this dictionary to create data frame and understand the features
+
+# The description of features are as follows
+
 print(cancer["DESCR"])
+
+"""
+    :Number of Instances: 569
+    :Number of Attributes: 30 numeric, predictive attributes and the class
+
+    :Attribute Information:
+        - radius (mean of distances from center to points on the perimeter)
+        - texture (standard deviation of gray-scale values)
+        - perimeter
+        - area
+        - smoothness (local variation in radius lengths)
+        - compactness (perimeter^2 / area - 1.0)
+        - concavity (severity of concave portions of the contour)
+        - concave points (number of concave portions of the contour)
+        - symmetry 
+        - fractal dimension ("coastline approximation" - 1)
+
+        The mean, standard error, and "worst" or largest (mean of the three
+        largest values) of these features were computed for each image,
+        resulting in 30 features.  For instance, field 3 is Mean Radius, field
+        13 is Radius SE, field 23 is Worst Radius.
+
+        - class:
+                - WDBC-Malignant
+                - WDBC-Benign
+    ===================================== ====== ======
+                                           Min    Max
+    ===================================== ====== ======
+    radius (mean):                        6.981  28.11
+    texture (mean):                       9.71   39.28
+    perimeter (mean):                     43.79  188.5
+    area (mean):                          143.5  2501.0
+    smoothness (mean):                    0.053  0.163
+    compactness (mean):                   0.019  0.345
+    concavity (mean):                     0.0    0.427
+    concave points (mean):                0.0    0.201
+    symmetry (mean):                      0.106  0.304
+    fractal dimension (mean):             0.05   0.097
+    radius (standard error):              0.112  2.873
+    texture (standard error):             0.36   4.885
+    perimeter (standard error):           0.757  21.98
+    area (standard error):                6.802  542.2
+    smoothness (standard error):          0.002  0.031
+    compactness (standard error):         0.002  0.135
+    concavity (standard error):           0.0    0.396
+    concave points (standard error):      0.0    0.053
+    symmetry (standard error):            0.008  0.079
+    fractal dimension (standard error):   0.001  0.03
+    radius (worst):                       7.93   36.04
+    texture (worst):                      12.02  49.54
+    perimeter (worst):                    50.41  251.2
+    area (worst):                         185.2  4254.0
+    smoothness (worst):                   0.071  0.223
+    compactness (worst):                  0.027  1.058
+    concavity (worst):                    0.0    1.252
+    concave points (worst):               0.0    0.291
+    symmetry (worst):                     0.156  0.664
+    fractal dimension (worst):            0.055  0.208
+    ===================================== ====== ======
+"""
+
+# Show the feature names
 
 cc = cancer["feature_names"]
 print(cc)
@@ -3296,6 +3348,7 @@ cc = df.head()
 print(cc)
 
 # Exploratory Data Analysis
+# Check the relative counts of benign (0) vs malignant (1) cases of cancer
 
 sns.set_style("whitegrid")
 sns.countplot(x="Cancer", data=df, palette="RdBu_r")
@@ -3349,23 +3402,26 @@ from sklearn.svm import SVC
 model = SVC()
 
 model.fit(X_train, y_train)
-"""
-SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
-  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
-  max_iter=-1, probability=False, random_state=None, shrinking=True,
-  tol=0.001, verbose=False)
-"""
+
 # Predictions and Evaluations
 
 predictions = model.predict(X_test)
 
 from sklearn.metrics import classification_report, confusion_matrix
 
+# Notice that we are classifying everything into a single class! This means our model needs to have it parameters adjusted (it may also help to normalize the data)
+
 print(confusion_matrix(y_test, predictions))
+
+# As expected, the classification report card is bad
 
 print(classification_report(y_test, predictions))
 
 # Gridsearch
+
+# Finding the right parameters (like what C or gamma values to use) is a tricky task! But luckily, Scikit-learn has the functionality of trying a bunch of combinations and see what works best, built in with GridSearchCV! The CV stands for cross-validation.
+
+# GridSearchCV takes a dictionary that describes the parameters that should be tried and a model to train. The grid of parameters is defined as a dictionary, where the keys are the parameters and the values are the settings to be tested.
 
 param_grid = {
     "C": [0.1, 1, 10, 100, 1000],
@@ -3375,34 +3431,25 @@ param_grid = {
 
 from sklearn.model_selection import GridSearchCV
 
+# One of the great things about GridSearchCV is that it is a meta-estimator. It takes an estimator like SVC, and creates a new estimator, that behaves exactly the same - in this case, like a classifier. You should add refit=True and choose verbose to whatever number you want, higher the number, the more verbose (verbose just means the text output describing the process).
+
 grid = GridSearchCV(SVC(), param_grid, refit=True, verbose=1)
 
-# 久
+# First, it runs the same loop with cross-validation, to find the best parameter combination. Once it has the best combination, it runs fit again on all data passed to fit (without cross-validation), to built a single new model using the best parameter setting.
+
+# May take awhile!
 grid.fit(X_train, y_train)
 
-"""
-GridSearchCV(cv=None, error_score='raise',
-       estimator=SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
-  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
-  max_iter=-1, probability=False, random_state=None, shrinking=True,
-  tol=0.001, verbose=False),
-       fit_params={}, iid=True, n_jobs=1,
-       param_grid={'C': [0.1, 1, 10, 100, 1000], 'gamma': [1, 0.1, 0.01, 0.001, 0.0001], 'kernel': ['rbf']},
-       pre_dispatch='2*n_jobs', refit=True, return_train_score=True,
-       scoring=None, verbose=1)
-"""
+# Fitting 3 folds for each of 25 candidates, totalling 75 fits
+
+# You can inspect the best parameters found by GridSearchCV in the best_params_ attribute, and the best estimator in the best_estimator_ attribute
+
 cc = grid.best_params_
 print(cc)
 
 cc = grid.best_estimator_
 print(cc)
 
-"""
-SVC(C=10, cache_size=200, class_weight=None, coef0=0.0,
-  decision_function_shape=None, degree=3, gamma=0.0001, kernel='rbf',
-  max_iter=-1, probability=False, random_state=None, shrinking=True,
-  tol=0.001, verbose=False)
-"""
 
 # Then you can re-run predictions on this grid object just like you would with a normal model
 
@@ -3416,6 +3463,7 @@ print(confusion_matrix(y_test, grid_predictions))
 
 print(classification_report(y_test, grid_predictions))
 
+
 # Another set of parameters for GridSearch
 
 param_grid = {
@@ -3425,17 +3473,10 @@ param_grid = {
 }
 grid = GridSearchCV(SVC(tol=1e-5), param_grid, refit=True, verbose=1)
 grid.fit(X_train, y_train)
-"""
-GridSearchCV(cv=None, error_score='raise',
-       estimator=SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
-  decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
-  max_iter=-1, probability=False, random_state=None, shrinking=True,
-  tol=1e-05, verbose=False),
-       fit_params={}, iid=True, n_jobs=1,
-       param_grid={'C': [50, 75, 100, 125, 150], 'gamma': [0.01, 0.001, 0.0001, 1e-05, 1e-06], 'kernel': ['rbf']},
-       pre_dispatch='2*n_jobs', refit=True, return_train_score=True,
-       scoring=None, verbose=1)
-"""
+
+# Fitting 3 folds for each of 25 candidates, totalling 75 fits
+
+
 cc = grid.best_estimator_
 print(cc)
 """
@@ -3446,7 +3487,6 @@ SVC(C=125, cache_size=200, class_weight=None, coef0=0.0,
 """
 grid_predictions = grid.predict(X_test)
 print(confusion_matrix(y_test, grid_predictions))
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

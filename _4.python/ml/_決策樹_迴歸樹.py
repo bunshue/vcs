@@ -421,8 +421,7 @@ plt.text(
     "    * each decision node splits dataset based on one of the attributes\n\n"
     "    * each leaf node defines a class label",
 )
-plt.show()
-
+show()
 
 plt.scatter(*set01.T)
 plt.scatter(*set02.T)
@@ -438,8 +437,7 @@ plt.text(
     "Green line split dataset in [10, 6] (bottom) and [10, 14] (top)\n\n"
     "Red line is a winner and should be the root of our tree",
 )
-plt.show()
-
+show()
 
 tree = Digraph()
 
@@ -486,8 +484,7 @@ plt.plot(x, -np.log(x), label="nat")
 plt.plot(x, -np.log10(x), label="dit")
 
 plt.legend()
-plt.show()
-
+show()
 
 p = np.arange(0.01, 1.0, 0.01)
 
@@ -510,8 +507,7 @@ plt.annotate(
 
 plt.plot(p, -p * np.log2(p) - (1 - p) * np.log2(1 - p))
 
-plt.show()
-
+show()
 
 from mpl_toolkits import mplot3d
 
@@ -530,7 +526,7 @@ h = -p * np.log2(p) - q * np.log2(q) - (1 - p - q) * np.log2(1 - p - q)
 # make a plot
 plt.axes(projection="3d").plot_surface(p, q, h)
 
-plt.show()
+show()
 
 
 def entropy(*probs):
@@ -711,7 +707,7 @@ set02 = np.delete(set02, [0, 1, 5, 6, 8], axis=0)
 
 plt.scatter(*set01.T)
 plt.scatter(*set02.T)
-plt.show()
+show()
 
 # Validation set
 
@@ -732,7 +728,7 @@ plt.scatter(*blue_train.T)
 plt.scatter(*blue_valid.T, color="C0", marker="x")
 plt.scatter(*orange_train.T)
 plt.scatter(*orange_valid.T, color="C1", marker="x")
-plt.show()
+show()
 
 # Thresholds finder
 
@@ -798,7 +794,7 @@ plt.xlim([5.5, 14.5])
 
 plt.scatter(*blue_train.T)
 plt.scatter(*orange_train.T)
-plt.show()
+show()
 
 # Check x maximum information gain ratio
 
@@ -856,7 +852,7 @@ plt.xlim([5.5, 8.5])
 
 plt.scatter(*blue_train.T)
 plt.scatter(*orange_train.T)
-plt.show()
+show()
 
 # Again, the best cut may be pretty obvious, but lets check the math
 # We have one possible cut in x
@@ -905,7 +901,7 @@ plt.ylim([3.5, 8.5])
 
 plt.scatter(*blue_train.T)
 plt.scatter(*orange_train.T)
-plt.show()
+show()
 
 
 Nb = 1
@@ -1118,14 +1114,12 @@ p = np.arange(0.01, 1.0, 0.01)
 
 plt.xlabel("p")
 plt.ylabel("surprise factor")
-
 plt.plot(p, -p * np.log2(p) - (1 - p) * np.log2(1 - p), label="Entropy")
-plt.show()
+show()
 
 plt.plot(p, -2 * p * (p - 1), label="Gini impurity")
-
 plt.legend()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1233,9 +1227,8 @@ target = np.array(golf_data_num.iloc[:, 4])
 from sklearn import tree
 
 golf_tree = tree.DecisionTreeClassifier()
-
 golf_tree.fit(data, target)
-plt.show()
+show()
 
 # sklearn.tree supports drawing a tree using graphviz
 
@@ -1268,7 +1261,7 @@ plt.ylabel("y")
 plt.scatter(X, Y, color="b")
 plt.plot([0.3, 0.3], [-0.2, 1.2], "g--")
 plt.plot([0.6, 0.6], [-0.2, 1.2], "g--")
-plt.show()
+show()
 
 # The corresponding tree would look like this
 
@@ -1309,7 +1302,7 @@ plt.plot([0.3, 0.6], [y, y], "r")
 
 y = avg(X, Y, 0.6, 1)
 plt.plot([0.6, 1.0], [y, y], "r")
-plt.show()
+show()
 
 # Growing a tree
 
@@ -1320,7 +1313,7 @@ fit = DecisionTreeRegressor()
 
 # and grow it (note that X must be reshaped)
 fit.fit(np.reshape(X, (-1, 1)), Y)
-plt.show()
+show()
 
 # prepare test sample with "newaxis" trick
 X_test = np.arange(0.0, 1.0, 0.01)[:, np.newaxis]
@@ -1328,7 +1321,7 @@ Y_test = fit.predict(X_test)
 
 plt.scatter(X, Y, color="b")
 plt.plot(X_test, Y_test)
-plt.show()
+show()
 
 # Tree: cross-validation
 from sklearn.tree import DecisionTreeRegressor
@@ -1404,14 +1397,14 @@ Y = np.array([x**2 + np.random.normal(0, 0.05) for x in X])
 tree_handler = TreeCV(X, Y)
 tree_handler.cross_me(*range(1, 10))
 tree_handler.plot()
-plt.show()
+show()
 
 # min_samples_leaf
 
 tree_handler.set_method("min_samples_leaf")
 tree_handler.cross_me(*range(1, 10))
 tree_handler.plot()
-plt.show()
+show()
 
 """ OLD
 # min_impurity_split
@@ -1422,7 +1415,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 tree_handler.set_method("min_impurity_split")
 tree_handler.cross_me(*np.arange(0.0, 5e-3, 1e-4))
 tree_handler.plot()
-plt.show()
+show()
 """
 
 # min_impurity_decrease
@@ -1430,7 +1423,7 @@ plt.show()
 tree_handler.set_method("min_impurity_decrease")
 tree_handler.cross_me(*np.arange(0.0, 5e-4, 1e-5))
 tree_handler.plot()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1464,7 +1457,7 @@ plt.text(1.0, 7, "$\longleftarrow$ better chance of generalizing", color="C0")
 plt.text(1.6, 7, "better chance of approximating $\longrightarrow$", color="C1")
 
 plt.legend()
-plt.show()
+show()
 
 # Quick math
 
@@ -1490,7 +1483,7 @@ x_ = np.arange(-1, 1, 0.01)
 
 plt.scatter(X, Y, color="C1")
 plt.plot(x_, np.sin(np.pi * x_), "C0--")
-plt.show()
+show()
 
 # generate 100 datasets with default settings
 datasets = [get_dataset() for i in range(100)]
@@ -1500,7 +1493,7 @@ for i in range(100):
     plt.scatter(datasets[i][0], datasets[i][1], marker=".")
 
 plt.plot(x_, np.sin(np.pi * x_), "C0--")
-plt.show()
+show()
 
 # Now we need to fit each polynomial to each dataset separately
 
@@ -1527,7 +1520,7 @@ for order in range(1, 10):
     plt.title("Polynomial of order {}".format(order))
 
 plt.tight_layout()
-plt.show()
+show()
 
 # Training and test errors
 
@@ -1549,7 +1542,7 @@ plt.text(0.1, 0.25, "$\longleftarrow$ high bias", color="C0")
 plt.text(1.5, 0.25, "high variance $\longrightarrow$", color="C1")
 
 plt.legend()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1570,7 +1563,7 @@ from sklearn.datasets import make_blobs
 X, Y = make_blobs(n_samples=500, centers=8, random_state=300)
 
 plt.scatter(*X.T, c=Y, marker=".", cmap="Dark2")
-plt.show()
+show()
 
 # Train and visualize
 
@@ -1608,11 +1601,8 @@ def train_and_look(classifier, X, Y, ax=None, title="", cmap="Dark2"):
 
 # Let check how it works on a decision tree classifier with default sklearn setting
 
-from sklearn.tree import DecisionTreeClassifier as DT
-
-train_and_look(DT(), X, Y)
-plt.show()
-
+train_and_look(DecisionTreeClassifier(), X, Y)
+show()
 
 # Decision tree
 
@@ -1622,13 +1612,13 @@ fig, ax = plt.subplots(3, 3, figsize=(15, 15))
 # train and look at decision trees with different max depth
 for max_depth in range(0, 9):
     train_and_look(
-        DT(max_depth=max_depth + 1),
+        DecisionTreeClassifier(max_depth=max_depth + 1),
         X,
         Y,
         ax=ax[max_depth // 3][max_depth % 3],
         title="Max depth = {}".format(max_depth + 1),
     )
-plt.show()
+show()
 """
     max_depth <= 3 - undefitting
     max_depth <= 6 - quite good
@@ -1653,7 +1643,7 @@ for max_depth in range(0, 9):
         ax=ax[max_depth // 3][max_depth % 3],
         title="Max depth = {}".format(max_depth + 1),
     )
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2273,7 +2263,7 @@ y[::5] += 3 * (0.5 - rng.rand(16))  # 加上雜訊
 
 plt.plot(X, y)
 plt.title("原始資料")
-plt.show()
+show()
 
 # 訓練兩個迴歸樹模型 最大深度不同
 clf_1 = DecisionTreeRegressor(max_depth=2)  # 迴歸樹函數學習機
@@ -3182,7 +3172,325 @@ os.environ["PATH"] += os.pathsep + 'C:\\Users\\070601\\Desktop\\'
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+# Random Forest applied to LendingClub data set
+"""
+    credit.policy: 1 if the customer meets the credit underwriting criteria of LendingClub.com, and 0 otherwise.
+    purpose: The purpose of the loan (takes values "credit_card", "debt_consolidation", "educational", "major_purchase", "small_business", and "all_other").
+    int.rate: The interest rate of the loan, as a proportion (a rate of 11% would be stored as 0.11). Borrowers judged by LendingClub.com to be more risky are assigned higher interest rates.
+    installment: The monthly installments owed by the borrower if the loan is funded.
+    log.annual.inc: The natural log of the self-reported annual income of the borrower.
+    dti: The debt-to-income ratio of the borrower (amount of debt divided by annual income).
+    fico: The FICO credit score of the borrower.
+    days.with.cr.line: The number of days the borrower has had a credit line.
+    revol.bal: The borrower's revolving balance (amount unpaid at the end of the credit card billing cycle).
+    revol.util: The borrower's revolving line utilization rate (the amount of the credit line used relative to total credit available).
+    inq.last.6mths: The borrower's number of inquiries by creditors in the last 6 months.
+    delinq.2yrs: The number of times the borrower had been 30+ days past due on a payment in the past 2 years.
+    pub.rec: The borrower's number of derogatory public records (bankruptcy filings, tax liens, or judgments).
+    not.fully.paid: The quantity of interest for classification - whether the borrower paid back the money in full or not
+"""
+df = pd.read_csv("data/loan_data.csv")
+
+# Check out the info(), head(), and describe() methods on loans
+
+# df.info()
+
+# df.describe()
+
+# df.head()
+
+print(
+    "Follwoing is a breakup of credit approval status. 1 means approved credit, 0 means not approved."
+)
+print(df["credit.policy"].value_counts())
+
+# Exploratory Data Analysis
+
+df[df["credit.policy"] == 1]["fico"].plot.hist(
+    bins=30, alpha=0.5, color="blue", label="Credit.Policy=1"
+)
+df[df["credit.policy"] == 0]["fico"].plot.hist(
+    bins=30, alpha=0.5, color="red", label="Credit.Policy=0"
+)
+plt.legend(fontsize=15)
+plt.title(
+    "Histogram of FICO score by approved or disapproved credit policies", fontsize=16
+)
+plt.xlabel("FICO score", fontsize=14)
+show()
+
+# Presence or absence of statistical difference of various factors between credit approval status
+
+sns.boxplot(x=df["credit.policy"], y=df["int.rate"])
+plt.title("Interest rate varies between risky and non-risky borrowers", fontsize=15)
+plt.xlabel("Credit policy", fontsize=15)
+plt.ylabel("Interest rate", fontsize=15)
+show()
+
+sns.boxplot(x=df["credit.policy"], y=df["log.annual.inc"])
+plt.title(
+    "Income level does not make a big difference in credit approval odds", fontsize=15
+)
+plt.xlabel("Credit policy", fontsize=15)
+plt.ylabel("Log. annual income", fontsize=15)
+show()
+
+sns.boxplot(x=df["credit.policy"], y=df["days.with.cr.line"])
+plt.title(
+    "Credit-approved users have a slightly higher days with credit line", fontsize=15
+)
+plt.xlabel("Credit policy", fontsize=15)
+plt.ylabel("Days with credit line", fontsize=15)
+show()
+
+sns.boxplot(x=df["credit.policy"], y=df["dti"])
+plt.title(
+    "Debt-to-income level does not make a big difference in credit approval odds",
+    fontsize=15,
+)
+plt.xlabel("Credit policy", fontsize=15)
+plt.ylabel("Debt-to-income ratio", fontsize=15)
+show()
+
+# Countplot of loans by purpose, with the color hue defined by not.fully.paid
+
+plt.figure(figsize=(10, 6))
+sns.countplot(x="purpose", hue="not.fully.paid", data=df, palette="Set1")
+plt.title("Bar chart of loan purpose colored by not fully paid status", fontsize=17)
+plt.xlabel("Purpose", fontsize=15)
+show()
+
+# Trend between FICO score and interest rate
+
+sns.jointplot(x="fico", y="int.rate", data=df, color="purple", size=12)
+show()
+
+# lmplot to see if the trend differed between not.fully.paid and credit.policy
+
+plt.figure(figsize=(14, 7))
+sns.lmplot(
+    y="int.rate",
+    x="fico",
+    data=df,
+    hue="credit.policy",
+    col="not.fully.paid",
+    palette="Set1",
+)
+show()
+
+# Setting up the Data
+# Categorical Features
+
+df_final = pd.get_dummies(df, ["purpose"], drop_first=True)
+
+df_final.head()
+
+# Train Test Split
+
+X = df_final.drop("not.fully.paid", axis=1)
+y = df_final["not.fully.paid"]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
+
+# X.head()
+
+# Training a Decision Tree Model
+
+# Create an instance of DecisionTreeClassifier() called dtree and fit it to the training data.
+
+dtree = DecisionTreeClassifier(criterion="gini", max_depth=None)
+
+dtree.fit(X_train, y_train)
+
+# Predictions and Evaluation of Decision Tree
+
+# Create predictions from the test set and create a classification report and a confusion matrix.
+
+predictions = dtree.predict(X_test)
+
+from sklearn.metrics import classification_report, confusion_matrix
+
+print(classification_report(y_test, predictions))
+
+cm = confusion_matrix(y_test, predictions)
+print(cm)
+print("Accuracy of prediction:", round((cm[0, 0] + cm[1, 1]) / cm.sum(), 3))
+
+# Training the Random Forest model
+
+from sklearn.ensemble import RandomForestClassifier
+
+rfc = RandomForestClassifier(n_estimators=600)
+
+rfc.fit(X_train, y_train)
+
+# Predictions and Evaluation
+
+rfc_pred = rfc.predict(X_test)
+
+cr = classification_report(y_test, predictions)
+
+print(cr)
+
+# Show the Confusion Matrix for the predictions.
+
+cm = confusion_matrix(y_test, rfc_pred)
+print(cm)
+
+# Running a loop with increasing number of trees in the random forest and checking accuracy of confusion matrix
+
+# Criterion 'gini' or 'entropy'
+
+nsimu = 21
+accuracy = [0] * nsimu
+ntree = [0] * nsimu
+for i in range(1, nsimu):
+    rfc = RandomForestClassifier(
+        n_estimators=i * 5, min_samples_split=10, max_depth=None, criterion="gini"
+    )
+    rfc.fit(X_train, y_train)
+    rfc_pred = rfc.predict(X_test)
+    cm = confusion_matrix(y_test, rfc_pred)
+    accuracy[i] = (cm[0, 0] + cm[1, 1]) / cm.sum()
+    ntree[i] = i * 5
+
+plt.figure(figsize=(10, 6))
+plt.scatter(x=ntree[1:nsimu], y=accuracy[1:nsimu], s=60, c="red")
+plt.title(
+    "Number of trees in the Random Forest vs. prediction accuracy (criterion: 'gini')",
+    fontsize=18,
+)
+plt.xlabel("Number of trees", fontsize=15)
+plt.ylabel("Prediction accuracy from confusion matrix", fontsize=15)
+show()
+
+nsimu = 21
+accuracy = [0] * nsimu
+ntree = [0] * nsimu
+for i in range(1, nsimu):
+    rfc = RandomForestClassifier(
+        n_estimators=i * 5, min_samples_split=10, max_depth=None, criterion="entropy"
+    )
+    rfc.fit(X_train, y_train)
+    rfc_pred = rfc.predict(X_test)
+    cm = confusion_matrix(y_test, rfc_pred)
+    accuracy[i] = (cm[0, 0] + cm[1, 1]) / cm.sum()
+    ntree[i] = i * 5
+
+plt.figure(figsize=(10, 6))
+plt.scatter(x=ntree[1:nsimu], y=accuracy[1:nsimu], s=60, c="red")
+plt.title(
+    "Number of trees in the Random Forest vs. prediction accuracy (criterion: 'entropy')",
+    fontsize=18,
+)
+plt.xlabel("Number of trees", fontsize=15)
+plt.ylabel("Prediction accuracy from confusion matrix", fontsize=15)
+show()
+
+# Fixing max tree depth
+
+nsimu = 21
+accuracy = [0] * nsimu
+ntree = [0] * nsimu
+for i in range(1, nsimu):
+    rfc = RandomForestClassifier(
+        n_estimators=i * 5, min_samples_split=10, max_depth=None, criterion="gini"
+    )
+    rfc.fit(X_train, y_train)
+    rfc_pred = rfc.predict(X_test)
+    cm = confusion_matrix(y_test, rfc_pred)
+    accuracy[i] = (cm[0, 0] + cm[1, 1]) / cm.sum()
+    ntree[i] = i * 5
+
+plt.figure(figsize=(10, 6))
+plt.scatter(x=ntree[1:nsimu], y=accuracy[1:nsimu], s=60, c="red")
+plt.title(
+    "Number of trees in the Random Forest vs. prediction accuracy (max depth: None)",
+    fontsize=18,
+)
+plt.xlabel("Number of trees", fontsize=15)
+plt.ylabel("Prediction accuracy from confusion matrix", fontsize=15)
+show()
+
+nsimu = 21
+accuracy = [0] * nsimu
+ntree = [0] * nsimu
+for i in range(1, nsimu):
+    rfc = RandomForestClassifier(
+        n_estimators=i * 5, min_samples_split=10, max_depth=5, criterion="gini"
+    )
+    rfc.fit(X_train, y_train)
+    rfc_pred = rfc.predict(X_test)
+    cm = confusion_matrix(y_test, rfc_pred)
+    accuracy[i] = (cm[0, 0] + cm[1, 1]) / cm.sum()
+    ntree[i] = i * 5
+
+plt.figure(figsize=(10, 6))
+plt.scatter(x=ntree[1:nsimu], y=accuracy[1:nsimu], s=60, c="red")
+plt.title(
+    "Number of trees in the Random Forest vs. prediction accuracy (max depth: 5)",
+    fontsize=18,
+)
+plt.xlabel("Number of trees", fontsize=15)
+plt.ylabel("Prediction accuracy from confusion matrix", fontsize=15)
+show()
+
+# Minimum sample split criteria
+
+nsimu = 21
+accuracy = [0] * nsimu
+ntree = [0] * nsimu
+for i in range(1, nsimu):
+    rfc = RandomForestClassifier(
+        n_estimators=i * 5, min_samples_split=2, max_depth=None, criterion="gini"
+    )
+    rfc.fit(X_train, y_train)
+    rfc_pred = rfc.predict(X_test)
+    cm = confusion_matrix(y_test, rfc_pred)
+    accuracy[i] = (cm[0, 0] + cm[1, 1]) / cm.sum()
+    ntree[i] = i * 5
+
+plt.figure(figsize=(10, 6))
+plt.scatter(x=ntree[1:nsimu], y=accuracy[1:nsimu], s=60, c="red")
+plt.title(
+    "Number of trees in the Random Forest vs. prediction accuracy (minimum sample split: 2)",
+    fontsize=18,
+)
+plt.xlabel("Number of trees", fontsize=15)
+plt.ylabel("Prediction accuracy from confusion matrix", fontsize=15)
+show()
+
+nsimu = 21
+accuracy = [0] * nsimu
+ntree = [0] * nsimu
+for i in range(1, nsimu):
+    rfc = RandomForestClassifier(
+        n_estimators=i * 5, min_samples_split=20, max_depth=None, criterion="gini"
+    )
+    rfc.fit(X_train, y_train)
+    rfc_pred = rfc.predict(X_test)
+    cm = confusion_matrix(y_test, rfc_pred)
+    accuracy[i] = (cm[0, 0] + cm[1, 1]) / cm.sum()
+    ntree[i] = i * 5
+
+plt.figure(figsize=(10, 6))
+plt.scatter(x=ntree[1:nsimu], y=accuracy[1:nsimu], s=60, c="red")
+plt.title(
+    "Number of trees in the Random Forest vs. prediction accuracy (minimum sample split: 20)",
+    fontsize=18,
+)
+plt.xlabel("Number of trees", fontsize=15)
+plt.ylabel("Prediction accuracy from confusion matrix", fontsize=15)
+show()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

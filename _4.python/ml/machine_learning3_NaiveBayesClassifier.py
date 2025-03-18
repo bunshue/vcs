@@ -206,10 +206,16 @@ class GaussianNB(MultinomialNB):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# Naive Bayes Classification using Wine data (UCI ML Repo)
+
 df = pd.read_csv("data/wine.data.csv")
 df.head(10)
 
+# Basic statistics of the features
+
 # df.iloc[:,1:].describe()
+
+# Boxplots by output labels/classes
 
 for c in df.columns[1:]:
     df.boxplot(c, by="Class", figsize=(7, 4), fontsize=14)
@@ -235,6 +241,9 @@ plt.xlabel("OD280/OD315 of diluted wines", fontsize=15)
 plt.ylabel("Flavanoids", fontsize=15)
 plt.show()
 
+# Are the features independent? Plot co-variance matrix
+# It can be seen that there are some good amount of correlation between features i.e. they are not independent #of each other, as assumed in Naive Bayes technique. However, we will still go ahead and apply yhe classifier #to see its performance.
+
 
 def correlation_matrix(df):
     from matplotlib import cm as cm
@@ -244,7 +253,7 @@ def correlation_matrix(df):
     cmap = cm.get_cmap("jet", 30)
     cax = ax1.imshow(df.corr(), interpolation="nearest", cmap=cmap)
     ax1.grid(True)
-    plt.title("Wine data set features correlation\n", fontsize=15)
+    plt.title("Wine data set features correlation", fontsize=15)
     labels = df.columns
     ax1.set_xticklabels(labels, fontsize=9)
     ax1.set_yticklabels(labels, fontsize=9)
@@ -257,6 +266,7 @@ cc = correlation_matrix(df)
 print(cc)
 
 # Naive Bayes Classification
+# Test/train split
 
 test_size = 0.3  # Test-set fraction
 

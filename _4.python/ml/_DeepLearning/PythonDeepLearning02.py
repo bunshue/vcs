@@ -55,7 +55,7 @@ def get_dataset(N=20, sigma=0.1):
 
     return X, Y
 
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
@@ -157,7 +157,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 # tf.logging.set_verbosity(tf.logging.ERROR)
 
 # one hot -> label 0-9 -> 0...01, 0...10, ...
-mnist = input_data.read_data_sets("/tmp/", one_hot=True)
+mnist = input_data.read_data_sets("./tmp_mnist/", one_hot=True)
 
 # Create placeholders for tensors to fed
 
@@ -811,11 +811,10 @@ for i in range(4):
     ax.scatter(X_test.T[0], X_test.T[1], probs.T[i], marker=".")
 
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-'''
 """
 Neural Networks
     Here are some helpful functions to draw neural networks
@@ -1136,8 +1135,7 @@ X, Y = get_dataset(100, 0.25)
 draw_net(2, 1, [4], w=10)
 
 print('最後一次出現 draw_net(')
-sys.exit()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1218,7 +1216,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 tf.logging.set_verbosity(tf.logging.ERROR)
 
 # one hot -> label 0-9 -> 0...01, 0...10, ...
-mnist = input_data.read_data_sets("/tmp/", one_hot=True)
+mnist = input_data.read_data_sets("./tmp_mnist/", one_hot=True)
 
 print(mnist.train.images.shape)
 

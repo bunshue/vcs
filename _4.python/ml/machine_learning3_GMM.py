@@ -526,10 +526,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # 高斯混合模型(Gaussian Mixture Models)
 
 from numpy import random
@@ -1445,6 +1441,276 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# k-means clustering, Gaussian Mixture Models (GMM)
+
+sns.set()  # Plot styling
+
+X, y_true = make_blobs(n_samples=300, centers=4, cluster_std=0.60, random_state=0)
+plt.scatter(X[:, 0], X[:, 1], s=50, color="blue")
+show()
+
+# Import KMeans class from Scikit-learn and fit the data
+
+from sklearn.cluster import KMeans
+
+kmeans = KMeans(n_clusters=4)
+kmeans.fit(X)
+y_kmeans = kmeans.predict(X)
+
+# Visualize the fitted data by coloring the blobs by assigned label numbers
+
+plt.scatter(X[:, 0], X[:, 1], c=y_kmeans, s=50, cmap="viridis")
+centers = kmeans.cluster_centers_
+plt.scatter(centers[:, 0], centers[:, 1], c="black", s=200, alpha=0.5)
+show()
+
+from IPython.display import HTML
+
+HTML(
+    '<iframe width="550" height="450" src="https://www.youtube.com/embed/5I3Ei69I40s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+)
+
+# How k-means is a special case of Expectation-maximization (EM) algorithm
+
+# Implementing k-means from scratch
+
+from sklearn.metrics import pairwise_distances_argmin
+
+
+def find_clusters(X, n_clusters, rseed=2):
+    # 1. Randomly choose clusters
+    rng = np.random.RandomState(rseed)
+    i = rng.permutation(X.shape[0])[:n_clusters]
+    centers = X[i]
+
+    while True:
+        # 2a. Assign labels based on closest center
+        labels = pairwise_distances_argmin(X, centers)
+
+        # 2b. Find new centers from means of points
+        new_centers = np.array([X[labels == i].mean(0) for i in range(n_clusters)])
+
+        # 2c. Check for convergence
+        if np.all(centers == new_centers):
+            break
+        centers = new_centers
+
+    return centers, labels
+
+
+centers, labels = find_clusters(X, 4)
+plt.scatter(X[:, 0], X[:, 1], c=labels, s=50, cmap="viridis")
+show()
+
+# Not optimally guaranteed and initialization
+
+centers, labels = find_clusters(X, 4, rseed=0)
+plt.scatter(X[:, 0], X[:, 1], c=labels, s=50, cmap="viridis")
+show()
+
+# Number of clusters?
+
+labels = KMeans(6, random_state=0).fit_predict(X)
+plt.scatter(X[:, 0], X[:, 1], c=labels, s=50, cmap="viridis")
+show()
+
+print("------------------------------")  # 30個
+
+# Limitations - example
+
+from sklearn.datasets import make_moons
+
+X, y = make_moons(200, noise=0.05, random_state=0)
+
+labels = KMeans(2, random_state=0).fit_predict(X)
+plt.scatter(X[:, 0], X[:, 1], c=labels, s=50, cmap="viridis")
+show()
+
+# Kernel transformations?
+
+from sklearn.cluster import SpectralClustering
+
+model = SpectralClustering(
+    n_clusters=2, affinity="nearest_neighbors", assign_labels="kmeans"
+)
+labels = model.fit_predict(X)
+plt.scatter(X[:, 0], X[:, 1], c=labels, s=50, cmap="viridis")
+show()
+
+print("------------------------------")  # 30個
+
+# Limitation of k-means
+
+X, y_true = make_blobs(n_samples=400, centers=4, cluster_std=0.7, random_state=0)
+X = X[:, ::-1]  # flip axes for better plotting
+
+from sklearn.cluster import KMeans
+
+kmeans = KMeans(4, random_state=0)
+labels = kmeans.fit(X).predict(X)
+plt.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis")
+show()
+
+from sklearn.cluster import KMeans
+from scipy.spatial.distance import cdist
+
+
+def plot_kmeans(kmeans, X, n_clusters=4, rseed=0, ax=None):
+    labels = kmeans.fit_predict(X)
+
+    # plot the input data
+    ax = ax or plt.gca()
+    ax.axis("equal")
+    ax.scatter(
+        X[:, 0], X[:, 1], c=labels, s=50, cmap="viridis", edgecolor="k", zorder=2
+    )
+
+    # plot the representation of the KMeans model
+    centers = kmeans.cluster_centers_
+    radii = [cdist(X[labels == i], [center]).max() for i, center in enumerate(centers)]
+    for c, r in zip(centers, radii):
+        ax.add_patch(plt.Circle(c, r, fc="#CCCCCC", lw=3, alpha=0.5, zorder=1))
+
+
+kmeans = KMeans(n_clusters=4, random_state=0)
+plot_kmeans(kmeans, X)
+show()
+
+print("------------------------------")  # 30個
+
+# k-means fails for non-circular blobs of data
+
+rng = np.random.RandomState(13)
+X_stretched = np.dot(X, rng.randn(2, 2))
+
+kmeans = KMeans(n_clusters=4, random_state=0)
+plot_kmeans(kmeans, X_stretched)
+show()
+
+# Generalizing to Gaussian Mixture Models (GMM)
+
+from sklearn.mixture import GaussianMixture
+
+gmm = GaussianMixture(n_components=4).fit(X)
+labels = gmm.predict(X)
+plt.scatter(X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis")
+show()
+
+probs = gmm.predict_proba(X)
+print(probs[:5].round(3))
+
+# Visualize uncertainty by making data point size proportional to probability
+
+size = probs.max(1) / 0.02  # square emphasizes differences
+plt.scatter(X[:, 0], X[:, 1], c=labels, edgecolor="k", cmap="viridis", s=size)
+show()
+
+from matplotlib.patches import Ellipse
+
+
+def draw_ellipse(position, covariance, ax=None, **kwargs):
+    """Draw an ellipse with a given position and covariance"""
+    ax = ax or plt.gca()
+
+    # Convert covariance to principal axes
+    if covariance.shape == (2, 2):
+        U, s, Vt = np.linalg.svd(covariance)
+        angle = np.degrees(np.arctan2(U[1, 0], U[0, 0]))
+        width, height = 2 * np.sqrt(s)
+    else:
+        angle = 0
+        width, height = 2 * np.sqrt(covariance)
+
+    # Draw the Ellipse
+    for nsig in range(1, 4):
+        ax.add_patch(Ellipse(position, nsig * width, nsig * height, angle, **kwargs))
+
+
+def plot_gmm(gmm, X, label=True, ax=None):
+    ax = ax or plt.gca()
+    labels = gmm.fit(X).predict(X)
+    if label:
+        ax.scatter(
+            X[:, 0], X[:, 1], c=labels, s=40, cmap="viridis", zorder=2, edgecolor="k"
+        )
+    else:
+        ax.scatter(X[:, 0], X[:, 1], s=40, zorder=2, cmap="viridis", edgecolor="k")
+    ax.axis("equal")
+
+    w_factor = 0.2 / gmm.weights_.max()
+    for pos, covar, w in zip(gmm.means_, gmm.covariances_, gmm.weights_):
+        draw_ellipse(pos, covar, alpha=w * w_factor)
+
+
+gmm = GaussianMixture(n_components=4, covariance_type="full", random_state=42)
+plot_gmm(gmm, X_stretched)
+show()
+
+# GMM as density estimation and generative model algorithm
+
+from sklearn.datasets import make_moons
+
+Xmoon, ymoon = make_moons(200, noise=0.05, random_state=0)
+plt.scatter(Xmoon[:, 0], Xmoon[:, 1], edgecolor="k")
+show()
+
+gmm2 = GaussianMixture(n_components=2, covariance_type="full", random_state=0)
+plt.figure(figsize=(8, 5))
+plot_gmm(gmm2, Xmoon)
+show()
+
+gmm4 = GaussianMixture(n_components=4, covariance_type="full", random_state=0)
+plot_gmm(gmm4, Xmoon, label=False)
+show()
+
+gmm8 = GaussianMixture(n_components=8, covariance_type="full", random_state=0)
+plot_gmm(gmm8, Xmoon, label=False)
+show()
+
+gmm16 = GaussianMixture(n_components=16, covariance_type="full", random_state=0)
+plot_gmm(gmm16, Xmoon, label=False)
+show()
+
+Xnew, _ = gmm4.sample(400)
+plt.scatter(Xnew[:, 0], Xnew[:, 1], edgecolor="k")
+show()
+
+Xnew, _ = gmm8.sample(400)
+plt.scatter(Xnew[:, 0], Xnew[:, 1], edgecolor="k")
+show()
+
+Xnew, _ = gmm16.sample(400)
+plt.scatter(Xnew[:, 0], Xnew[:, 1], edgecolor="k")
+show()
+
+# This generative model works for any type of data shape
+
+X, y_true = make_blobs(n_samples=300, centers=4, cluster_std=0.60, random_state=0)
+plt.scatter(X[:, 0], X[:, 1], s=50, color="blue", edgecolor="k")
+show()
+
+gmm_gen = GaussianMixture(
+    n_components=16,
+    covariance_type="full",
+    random_state=0,
+    tol=1e-6,
+    max_iter=1000,
+    n_init=10,
+)
+
+gmm_gen.fit(X)
+
+Xnew, _ = gmm_gen.sample(300)
+plt.scatter(Xnew[:, 0], Xnew[:, 1], color="green", edgecolor="k")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
@@ -1457,4 +1723,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
