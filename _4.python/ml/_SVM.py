@@ -144,9 +144,10 @@ print("原始 x 資料 :", x)
 print("原始 y 資料 :", y, "\t=> 目標")
 print("用原始 x 資料預測的結果 :", y_pred)
 
-print("預測結果")
 xx, yy = -0.8, -1
-print(clf.predict([[xx, yy]]))  # 預測.predict
+cc = clf.predict([[xx, yy]])  # 預測.predict
+
+print("預測結果 :\n", cc, sep="")
 
 xx = yy = np.arange(-7, 7, 0.2)
 X, Y = np.meshgrid(xx, yy)
@@ -278,9 +279,9 @@ clf.fit(x, y)  # 學習訓練.fit
 
 y_pred = clf.predict(x)  # 預測.predict
 """
-print("真實答案 :", y)
-print("預測結果 :", y_pred)
-print("預測差值 :", y_pred - y)
+print("真實答案 :\n", y, sep="")
+print("預測結果 :\n", y_pred, sep="")
+print("預測差值 :\n", y_pred - y, sep="")
 """
 # 直接用SVC的方法算正確率
 cc = clf.score(x, y)

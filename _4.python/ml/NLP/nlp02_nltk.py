@@ -446,9 +446,8 @@ classifier.fit(counts, targets)  # 學習訓練.fit
 
 examples = ["這 本 書 真差", "這個 電影 還 可 以"]
 example_counts = cv.transform(examples)
-predictions = classifier.predict(example_counts)  # 預測.predict
-
-print("預測結果 :", predictions)
+y_pred = classifier.predict(example_counts)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

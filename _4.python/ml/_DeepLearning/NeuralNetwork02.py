@@ -802,7 +802,7 @@ model = load_model("data/Mnist_cnn_model.h5")
 predict_x = model.predict(test_feature_normalize)
 classes_x = np.argmax(predict_x, axis=1)
 y_pred = classes_x
-print("預測結果 :", y_pred)
+print("預測結果 :\n", y_pred, sep="")
 
 show_images_predictions(test_feature, y_pred, len(test_feature))
 

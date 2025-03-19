@@ -651,9 +651,9 @@ print(np.array_equal(clf.labels_, clf.predict(X)))
 # 一次做完訓練+預測 same
 # y_pred = clf.fit_predict(X)  # 學習訓練 + 預測 .fit_predict
 
-print("真實答案 :", y)
-print("預測結果 :", y_pred)
-print("預測差值 :", y_pred - y)
+print("真實答案 :\n", y, sep="")
+print("預測結果 :\n", y_pred, sep="")
+print("預測差值 :\n", y_pred - y, sep="")
 
 cc = np.sum(y_pred.reshape(-1, 1) == y.reshape(-1, 1))
 print(cc)
@@ -1063,7 +1063,7 @@ print("預測")
 # 花萼長度 6.6 公分、花萼寬度 3.1 公分、花瓣長度 5.2 公分、花寬度 2.4 公分
 xx = [[6.6, 3.1, 5.2, 2.4]]
 y_pred = clf.predict(xx)  # 預測.predict
-print("預測結果為：", y_pred)
+print("預測結果 :\n", y_pred, sep="")
 
 plt.figure(figsize=(12, 6))
 
@@ -1124,9 +1124,9 @@ clf.fit(X)  # 學習訓練.fit
 y_pred = np.choose(clf.labels_, [2, 1, 0]).astype(np.int64)
 
 """
-print("真實答案 :", y)
-print("預測結果 :", y_pred)
-print("預測差值 :", y_pred - y)
+print("真實答案 :\n", y, sep="")
+print("預測結果 :\n", y_pred, sep="")
+print("預測差值 :\n", y_pred - y, sep="")
 """
 
 score = accuracy_score(y, y_pred)

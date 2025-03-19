@@ -41,7 +41,6 @@ import sklearn
 import sklearn.linear_model
 import sklearn.svm as svm
 import sklearn.tree as tree
-from sklearn import tree
 from sklearn import metrics
 from sklearn import datasets
 from sklearn.datasets import make_blobs  # 集群資料集
@@ -62,7 +61,7 @@ from sklearn.metrics import recall_score
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 資料一, 使用 make_blobs 資料
 N = 30  # n_samples, 樣本數
 M = 2  # n_features, 特徵數(資料的維度)
@@ -88,8 +87,8 @@ clf.fit(x_train, y_train)  # 學習訓練.fit
 
 # 對測試數據做預測
 y_pred = clf.predict(x_test)  # 預測.predict
-print("預測結果 :", y_pred[:30])
-print("測試目標 :", y_test[:30])
+print("預測結果 :\n", y_pred[:30], sep="")
+print("測試目標 :\n", y_test[:30], sep="")
 
 # 輸出準確性
 print(f"訓練資料的準確性 = {clf.score(x_train, y_train)}")
@@ -520,7 +519,7 @@ p[idx] = 0
 q[idx] = 0
 
 # calculate entropy (disable warnings - we are aware of log(0))
-np.warnings.filterwarnings("ignore")
+# np.warnings.filterwarnings("ignore")
 h = -p * np.log2(p) - q * np.log2(q) - (1 - p - q) * np.log2(1 - p - q)
 
 # make a plot
@@ -705,8 +704,8 @@ grid = np.mgrid[6:16:2, 0:10:2]
 set02 = np.vstack([grid[0].ravel(), grid[1].ravel()]).T
 set02 = np.delete(set02, [0, 1, 5, 6, 8], axis=0)
 
-plt.scatter(*set01.T)
-plt.scatter(*set02.T)
+# NG in kilo plt.scatter(*set01.T)
+# NG in kilo plt.scatter(*set02.T)
 show()
 
 # Validation set
@@ -724,10 +723,10 @@ orange_train = np.delete(set02, valid_idx, axis=0)
 
 # circles - training set
 # x - validation set
-plt.scatter(*blue_train.T)
-plt.scatter(*blue_valid.T, color="C0", marker="x")
-plt.scatter(*orange_train.T)
-plt.scatter(*orange_valid.T, color="C1", marker="x")
+# NG in kilo plt.scatter(*blue_train.T)
+# NG in kilo plt.scatter(*blue_valid.T, color="C0", marker="x")
+# NG in kilo plt.scatter(*orange_train.T)
+# NG in kilo plt.scatter(*orange_valid.T, color="C1", marker="x")
 show()
 
 # Thresholds finder
@@ -792,8 +791,8 @@ print(tree)
 
 plt.xlim([5.5, 14.5])
 
-plt.scatter(*blue_train.T)
-plt.scatter(*orange_train.T)
+# NG in kilo plt.scatter(*blue_train.T)
+# NG in kilo plt.scatter(*orange_train.T)
 show()
 
 # Check x maximum information gain ratio
@@ -850,8 +849,8 @@ print(tree)
 
 plt.xlim([5.5, 8.5])
 
-plt.scatter(*blue_train.T)
-plt.scatter(*orange_train.T)
+# NG in kilo plt.scatter(*blue_train.T)
+# NG in kilo plt.scatter(*orange_train.T)
 show()
 
 # Again, the best cut may be pretty obvious, but lets check the math
@@ -899,8 +898,8 @@ tree
 plt.xlim([5.5, 8.5])
 plt.ylim([3.5, 8.5])
 
-plt.scatter(*blue_train.T)
-plt.scatter(*orange_train.T)
+# NG in kilo plt.scatter(*blue_train.T)
+# NG in kilo plt.scatter(*orange_train.T)
 show()
 
 
@@ -1224,9 +1223,7 @@ target = np.array(golf_data_num.iloc[:, 4])
 
 # Once data is prepared, creating a tree is as easy as 2 + 2 -1
 
-from sklearn import tree
-
-golf_tree = tree.DecisionTreeClassifier()
+golf_tree = DecisionTreeClassifier()  # 決策樹函數學習機
 golf_tree.fit(data, target)
 show()
 
@@ -1236,7 +1233,7 @@ import graphviz
 
 # dot is a graph description language
 # 決策樹可視化存檔
-dot = tree.export_graphviz(
+dot = sklearn.tree.export_graphviz(
     golf_tree,
     out_file=None,
     feature_names=golf_data.columns.values[:4],
@@ -1258,7 +1255,7 @@ Y = np.array([x**2 + np.random.normal(0, 0.05) for x in X])
 plt.xlabel("x")
 plt.ylabel("y")
 
-plt.scatter(X, Y, color="b")
+# NG in kilo plt.scatter(X, Y, color="b")
 plt.plot([0.3, 0.3], [-0.2, 1.2], "g--")
 plt.plot([0.6, 0.6], [-0.2, 1.2], "g--")
 show()
@@ -1289,7 +1286,7 @@ def avg(X, Y, x_min, x_max):
     return avg / n
 
 
-plt.scatter(X, Y, color="b")
+# NG in kilo plt.scatter(X, Y, color="b")
 
 plt.plot([0.3, 0.3], [-0.2, 1.2], "g--")
 plt.plot([0.6, 0.6], [-0.2, 1.2], "g--")
@@ -1306,8 +1303,6 @@ show()
 
 # Growing a tree
 
-from sklearn.tree import DecisionTreeRegressor
-
 # create a decision tree regressor
 fit = DecisionTreeRegressor()
 
@@ -1319,12 +1314,11 @@ show()
 X_test = np.arange(0.0, 1.0, 0.01)[:, np.newaxis]
 Y_test = fit.predict(X_test)
 
-plt.scatter(X, Y, color="b")
+# NG in kilo plt.scatter(X, Y, color="b")
 plt.plot(X_test, Y_test)
 show()
 
 # Tree: cross-validation
-from sklearn.tree import DecisionTreeRegressor
 
 
 class TreeCV:
@@ -1557,10 +1551,11 @@ print("------------------------------------------------------------")  # 60個
 
 # AdaBoost
 
-from sklearn.datasets import make_blobs
-
-# generate 5 blobs with fixed random generator
-X, Y = make_blobs(n_samples=500, centers=8, random_state=300)
+N = 500  # n_samples, 樣本數
+M = 2  # n_features, 特徵數(資料的維度)
+GROUPS = 8  # centers, 分群數
+print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
+X, Y = make_blobs(n_samples=N, centers=GROUPS, random_state=9487)
 
 plt.scatter(*X.T, c=Y, marker=".", cmap="Dark2")
 show()
@@ -1767,12 +1762,10 @@ info_gain_train(np.array(datasets))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 决策树的生成, 常见的算法有ID3、C4.5
 
-"""
-决策树的生成
-常见的算法有ID3、C4.5
-ID3算法的具体操作为：从根结点开始，对结点计算所有可能的特征信息增益，然后选择信息增益最大的特征作为结点特征，由该特征的不同取值建立子结点；再对子结点递归调用以上方法，构建决策树；知道所有特征的信息增益均很小或者没有特征可以选择为止。最后生成一个决策树。
-"""
+# 決策樹的生成 之一 ID3算法
+# ID3算法的具体操作为：从根结点开始，对结点计算所有可能的特征信息增益，然后选择信息增益最大的特征作为结点特征，由该特征的不同取值建立子结点；再对子结点递归调用以上方法，构建决策树；知道所有特征的信息增益均很小或者没有特征可以选择为止。最后生成一个决策树。
 
 
 # ID3算法
@@ -1962,12 +1955,11 @@ imgs = data[::, 1::]
 features = binaryzation_features(imgs)  # 图片二值化(很重要，不然预测准确率很低)
 labels = data[::, 0]
 
-# 避免过拟合，采用交叉验证，随机选取33%数据作为测试集，剩余为训练集
-train_features, test_features, train_labels, test_labels = train_test_split(
-    features, labels, test_size=0.33, random_state=0
-)
-time1 = time.time()
+# 避免过拟合，采用交叉验证，随机选取20%数据作为测试集，剩余为训练集
+# 資料分割
+train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.2)
 
+time1 = time.time()
 
 # 通过ID3算法生成决策树
 print("开始训练")
@@ -1994,15 +1986,11 @@ print("精度为 %f" % score)
 精度为 0.861833
 """
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 決策樹的生成 之二 C4.5算法
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# C4.5算法
 # C4.5算法是基于ID3算法的改进，C4.5在生成的过程中使用信息增益比来选择特征。
 
 
@@ -2182,11 +2170,9 @@ imgs = data[::, 1::]
 features = binaryzation_features(imgs)  # 图片二值化(很重要，不然预测准确率很低)
 labels = data[::, 0]
 
-# 避免过拟合，采用交叉验证，随机选取33%数据作为测试集，剩余为训练集
-train_features, test_features, train_labels, test_labels = train_test_split(
-    features, labels, test_size=0.33, random_state=0
-)
-
+# 避免过拟合，采用交叉验证，随机选取20%数据作为测试集，剩余为训练集
+# 資料分割
+train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.2)
 
 # 通过C4.5算法生成决策树
 print("开始训练")
@@ -2609,7 +2595,7 @@ X, y = wine.data, wine.target
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-clf = DecisionTreeClassifier()  # criterion='entropy')
+clf = DecisionTreeClassifier()  # criterion='entropy'   # 決策樹函數學習機
 
 clf.fit(X_train, y_train)  # 學習訓練.fit
 
@@ -2783,11 +2769,11 @@ def plot_error_rate(er_train, er_test):
     plot1 = df_error.plot(
         linewidth=3, figsize=(8, 6), color=["lightblue", "darkblue"], grid=True
     )
-    plot1.set_xlabel("Number of iterations", fontsize=12)
+    plot1.set_xlabel("Number of iterations")
     label_format = "{:,.0f}"
     plot1.set_xticklabels([label_format.format(x) for x in range(0, 450, 50)])
-    plot1.set_ylabel("Error rate", fontsize=12)
-    plot1.set_title("Error rate vs number of iterations", fontsize=16)
+    plot1.set_ylabel("Error rate")
+    plot1.set_title("Error rate vs number of iterations")
     plt.axhline(y=er_test[0], linewidth=1, color="red", ls="dashed")
     show()
 
@@ -2809,7 +2795,7 @@ X_test, Y_test = test.iloc[:, :-1], test.iloc[:, -1]
 print("cc")
 
 # Fit a simple decision tree first
-clf_tree = DecisionTreeClassifier(max_depth=1, random_state=1)
+clf_tree = DecisionTreeClassifier(max_depth=1, random_state=1)  # 決策樹函數學習機
 er_tree = generic_clf(Y_train, X_train, Y_test, X_test, clf_tree)
 
 print("dd")
@@ -2829,7 +2815,6 @@ plot_error_rate(er_train, er_test)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
 
 data = pd.read_excel("data/loan.xlsx")
 target = data["Type"]
@@ -2843,7 +2828,7 @@ train_data, test_data, train_target, test_target = train_test_split(
 print("------------------------------")  # 30個
 
 print("使用 DecisionTreeClassifier")
-clf_1 = tree.DecisionTreeClassifier(criterion="entropy")
+clf_1 = DecisionTreeClassifier(criterion="entropy")  # 決策樹函數學習機
 clf_1.fit(train_data, train_target)
 train_est = clf_1.predict(train_data)
 train_est_p = clf_1.predict_proba(train_data)[:, 1]
@@ -3017,7 +3002,7 @@ X_train, X_test, y_train, y_test = train_test_split(X_data, y_data, test_size=0.
 
 dt_clf = DecisionTreeClassifier(
     class_weight="balanced",
-)
+)  # 決策樹函數學習機
 rf_clf = RandomForestClassifier(class_weight="balanced")
 
 # 為了讓學習曲線更平滑，交叉驗證數據集的得分計算 10 次，每次都重新選中 20% 的數據計算一遍
@@ -3073,10 +3058,11 @@ y = wine.target
 # print(pd.DataFrame(y))
 print(wine.feature_names)
 
+# 資料分割
 xtrain, xtest, ytrain, ytest = train_test_split(X, y, test_size=0.2)
 
-# 构建模型
-clf = tree.DecisionTreeClassifier()
+clf = DecisionTreeClassifier()  # 決策樹函數學習機
+
 clf.fit(xtrain, ytrain)
 
 # 评估模型使用十次交叉验证
@@ -3120,14 +3106,14 @@ X_train = pca.fit_transform(X_train)
 x_train, x_test, y_train, y_test = train_test_split(X_train, y, test_size=0.2)
 
 ###############模型###########
-dtc = tree.DecisionTreeClassifier(criterion="entropy")
+dtc = DecisionTreeClassifier(criterion="entropy")  # 決策樹函數學習機
 clf = dtc.fit(x_train, y_train)
 # print(clf.predict(x_test))
 # print(y_test)
 print("精确率", ms.precision_score(y_test, clf.predict(x_test), average="micro"))
 
 # 決策樹可視化存檔
-dot_data = tree.export_graphviz(clf, out_file="tmp_iris.dot")
+dot_data = sklearn.tree.export_graphviz(clf, out_file="tmp_iris.dot")
 print(dot_data)
 
 """ 上述的 out_file="None" 才可以使用
@@ -3181,52 +3167,43 @@ df[df["credit.policy"] == 1]["fico"].plot.hist(
 df[df["credit.policy"] == 0]["fico"].plot.hist(
     bins=30, alpha=0.5, color="red", label="Credit.Policy=0"
 )
-plt.legend(fontsize=15)
-plt.title(
-    "Histogram of FICO score by approved or disapproved credit policies", fontsize=16
-)
-plt.xlabel("FICO score", fontsize=14)
+plt.legend()
+plt.title("Histogram of FICO score by approved or disapproved credit policies")
+plt.xlabel("FICO score")
 show()
 
 # Presence or absence of statistical difference of various factors between credit approval status
 
 sns.boxplot(x=df["credit.policy"], y=df["int.rate"])
-plt.title("Interest rate varies between risky and non-risky borrowers", fontsize=15)
-plt.xlabel("Credit policy", fontsize=15)
-plt.ylabel("Interest rate", fontsize=15)
+plt.title("Interest rate varies between risky and non-risky borrowers")
+plt.xlabel("Credit policy")
+plt.ylabel("Interest rate")
 show()
 
 sns.boxplot(x=df["credit.policy"], y=df["log.annual.inc"])
-plt.title(
-    "Income level does not make a big difference in credit approval odds", fontsize=15
-)
-plt.xlabel("Credit policy", fontsize=15)
-plt.ylabel("Log. annual income", fontsize=15)
+plt.title("Income level does not make a big difference in credit approval odds")
+plt.xlabel("Credit policy")
+plt.ylabel("Log. annual income")
 show()
 
 sns.boxplot(x=df["credit.policy"], y=df["days.with.cr.line"])
-plt.title(
-    "Credit-approved users have a slightly higher days with credit line", fontsize=15
-)
-plt.xlabel("Credit policy", fontsize=15)
-plt.ylabel("Days with credit line", fontsize=15)
+plt.title("Credit-approved users have a slightly higher days with credit line")
+plt.xlabel("Credit policy")
+plt.ylabel("Days with credit line")
 show()
 
 sns.boxplot(x=df["credit.policy"], y=df["dti"])
-plt.title(
-    "Debt-to-income level does not make a big difference in credit approval odds",
-    fontsize=15,
-)
-plt.xlabel("Credit policy", fontsize=15)
-plt.ylabel("Debt-to-income ratio", fontsize=15)
+plt.title("Debt-to-income level does not make a big difference in credit approval odds")
+plt.xlabel("Credit policy")
+plt.ylabel("Debt-to-income ratio")
 show()
 
 # Countplot of loans by purpose, with the color hue defined by not.fully.paid
 
 plt.figure(figsize=(10, 6))
 sns.countplot(x="purpose", hue="not.fully.paid", data=df, palette="Set1")
-plt.title("Bar chart of loan purpose colored by not fully paid status", fontsize=17)
-plt.xlabel("Purpose", fontsize=15)
+plt.title("Bar chart of loan purpose colored by not fully paid status")
+plt.xlabel("Purpose")
 show()
 
 # Trend between FICO score and interest rate
@@ -3258,7 +3235,9 @@ df_final.head()
 
 X = df_final.drop("not.fully.paid", axis=1)
 y = df_final["not.fully.paid"]
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # X.head()
 
@@ -3266,7 +3245,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
 
 # Create an instance of DecisionTreeClassifier() called dtree and fit it to the training data.
 
-dtree = DecisionTreeClassifier(criterion="gini", max_depth=None)
+dtree = DecisionTreeClassifier(criterion="gini", max_depth=None)  # 決策樹函數學習機
 
 dtree.fit(X_train, y_train)
 
@@ -3324,12 +3303,9 @@ for i in range(1, nsimu):
 
 plt.figure(figsize=(10, 6))
 plt.scatter(x=ntree[1:nsimu], y=accuracy[1:nsimu], s=60, c="red")
-plt.title(
-    "Number of trees in the Random Forest vs. prediction accuracy (criterion: 'gini')",
-    fontsize=18,
-)
-plt.xlabel("Number of trees", fontsize=15)
-plt.ylabel("Prediction accuracy from confusion matrix", fontsize=15)
+plt.title("Number of trees in the Random Forest vs. prediction accuracy (criterion: 'gini')")
+plt.xlabel("Number of trees")
+plt.ylabel("Prediction accuracy from confusion matrix")
 show()
 
 nsimu = 21
@@ -3347,12 +3323,9 @@ for i in range(1, nsimu):
 
 plt.figure(figsize=(10, 6))
 plt.scatter(x=ntree[1:nsimu], y=accuracy[1:nsimu], s=60, c="red")
-plt.title(
-    "Number of trees in the Random Forest vs. prediction accuracy (criterion: 'entropy')",
-    fontsize=18,
-)
-plt.xlabel("Number of trees", fontsize=15)
-plt.ylabel("Prediction accuracy from confusion matrix", fontsize=15)
+plt.title("Number of trees in the Random Forest vs. prediction accuracy (criterion: 'entropy')")
+plt.xlabel("Number of trees")
+plt.ylabel("Prediction accuracy from confusion matrix")
 show()
 
 # Fixing max tree depth
@@ -3372,12 +3345,9 @@ for i in range(1, nsimu):
 
 plt.figure(figsize=(10, 6))
 plt.scatter(x=ntree[1:nsimu], y=accuracy[1:nsimu], s=60, c="red")
-plt.title(
-    "Number of trees in the Random Forest vs. prediction accuracy (max depth: None)",
-    fontsize=18,
-)
-plt.xlabel("Number of trees", fontsize=15)
-plt.ylabel("Prediction accuracy from confusion matrix", fontsize=15)
+plt.title("Number of trees in the Random Forest vs. prediction accuracy (max depth: None)")
+plt.xlabel("Number of trees")
+plt.ylabel("Prediction accuracy from confusion matrix")
 show()
 
 nsimu = 21
@@ -3395,12 +3365,9 @@ for i in range(1, nsimu):
 
 plt.figure(figsize=(10, 6))
 plt.scatter(x=ntree[1:nsimu], y=accuracy[1:nsimu], s=60, c="red")
-plt.title(
-    "Number of trees in the Random Forest vs. prediction accuracy (max depth: 5)",
-    fontsize=18,
-)
-plt.xlabel("Number of trees", fontsize=15)
-plt.ylabel("Prediction accuracy from confusion matrix", fontsize=15)
+plt.title("Number of trees in the Random Forest vs. prediction accuracy (max depth: 5)")
+plt.xlabel("Number of trees")
+plt.ylabel("Prediction accuracy from confusion matrix")
 show()
 
 # Minimum sample split criteria
@@ -3420,12 +3387,9 @@ for i in range(1, nsimu):
 
 plt.figure(figsize=(10, 6))
 plt.scatter(x=ntree[1:nsimu], y=accuracy[1:nsimu], s=60, c="red")
-plt.title(
-    "Number of trees in the Random Forest vs. prediction accuracy (minimum sample split: 2)",
-    fontsize=18,
-)
-plt.xlabel("Number of trees", fontsize=15)
-plt.ylabel("Prediction accuracy from confusion matrix", fontsize=15)
+plt.title("Number of trees in the Random Forest vs. prediction accuracy (minimum sample split: 2)")
+plt.xlabel("Number of trees")
+plt.ylabel("Prediction accuracy from confusion matrix")
 show()
 
 nsimu = 21
@@ -3443,12 +3407,9 @@ for i in range(1, nsimu):
 
 plt.figure(figsize=(10, 6))
 plt.scatter(x=ntree[1:nsimu], y=accuracy[1:nsimu], s=60, c="red")
-plt.title(
-    "Number of trees in the Random Forest vs. prediction accuracy (minimum sample split: 20)",
-    fontsize=18,
-)
-plt.xlabel("Number of trees", fontsize=15)
-plt.ylabel("Prediction accuracy from confusion matrix", fontsize=15)
+plt.title("Number of trees in the Random Forest vs. prediction accuracy (minimum sample split: 20)")
+plt.xlabel("Number of trees")
+plt.ylabel("Prediction accuracy from confusion matrix")
 show()
 
 
@@ -3498,3 +3459,4 @@ print("------------------------------------------------------------")  # 60個
 
 X_combined = np.vstack((x_train, x_test))
 y_combined = np.hstack((y_train, y_test))
+
