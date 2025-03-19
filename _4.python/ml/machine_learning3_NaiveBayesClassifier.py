@@ -38,6 +38,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
+
 '''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

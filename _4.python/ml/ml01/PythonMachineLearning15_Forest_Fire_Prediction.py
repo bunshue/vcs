@@ -81,16 +81,16 @@ print(cc)
 df["Log-area"] = np.log10(df["area"] + 1)
 """
 for i in df.describe().columns[:-2]:
-    df.plot.scatter(i,'Log-area',grid=True)
+    df.plot.scatter(i, "Log-area",grid=True)
     show()
     
 # Plot boxplots of how the categorical features (month and day) affect the outcome
 
-df.boxplot(column='Log-area',by='day')
+df.boxplot(column="Log-area",by="day")
 
 show()
 
-df.boxplot(column='Log-area',by='month')
+df.boxplot(column="Log-area",by="month")
 
 show()
 """
@@ -120,11 +120,12 @@ enc.fit(df["day"])
 
 print(enc.classes_)
 
-# array(['fri', 'mon', 'sat', 'sun', 'thu', 'tue', 'wed'], dtype=object)
 
 df["day_encoded"] = enc.transform(df["day"])
 cc = df.head(15)
 print(cc)
+
+# Test set fraction
 
 test_size = 0.4
 
@@ -140,6 +141,11 @@ y_train = np.array(y_train)
 y_train = y_train.reshape(y_train.size, 1)
 
 # Regression Error Characteristic (REC) estimation
+
+# Receiver Operating Characteristic (ROC) curves provide a powerful tool for visualizing and comparing classification results.
+# Regression Error Characteristic (REC) curves generalize ROC curves to regression.
+# REC curves plot the error tolerance on the
+# The area-over-the-curve (AOC) is a biased estimate of the expected error.
 
 
 def rec(m, n, tol):
@@ -161,6 +167,9 @@ tol_max = 20
 
 # Gridsearch
 
+# Finding the right parameters for machine learning models is a tricky task! But luckily, Scikit-learn has the functionality of trying a bunch of combinations and see what works best, built in with GridSearchCV! The CV stands for cross-validation.
+
+# GridSearchCV takes a dictionary that describes the parameters that should be tried and a model to train. The grid of parameters is defined as a dictionary, where the keys are the parameters and the values are the settings to be tested.
 # Support Vector Regressor (SVR)
 
 from sklearn.svm import SVR
@@ -348,6 +357,8 @@ show()
 from keras.models import Sequential
 import keras.optimizers as opti
 from keras.layers import Dense, Activation, Dropout
+
+# Layers
 
 model = Sequential()
 model.add(Dense(100, input_dim=12))

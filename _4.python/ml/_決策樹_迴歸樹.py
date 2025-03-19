@@ -704,8 +704,9 @@ grid = np.mgrid[6:16:2, 0:10:2]
 set02 = np.vstack([grid[0].ravel(), grid[1].ravel()]).T
 set02 = np.delete(set02, [0, 1, 5, 6, 8], axis=0)
 
-# NG in kilo plt.scatter(*set01.T)
-# NG in kilo plt.scatter(*set02.T)
+plt.scatter(*set01.T)
+plt.scatter(*set02.T)
+
 show()
 
 # Validation set
@@ -723,10 +724,11 @@ orange_train = np.delete(set02, valid_idx, axis=0)
 
 # circles - training set
 # x - validation set
-# NG in kilo plt.scatter(*blue_train.T)
-# NG in kilo plt.scatter(*blue_valid.T, color="C0", marker="x")
-# NG in kilo plt.scatter(*orange_train.T)
-# NG in kilo plt.scatter(*orange_valid.T, color="C1", marker="x")
+plt.scatter(*blue_train.T)
+plt.scatter(*blue_valid.T, color="C0", marker="x")
+plt.scatter(*orange_train.T)
+plt.scatter(*orange_valid.T, color="C1", marker="x")
+
 show()
 
 # Thresholds finder
@@ -791,8 +793,9 @@ print(tree)
 
 plt.xlim([5.5, 14.5])
 
-# NG in kilo plt.scatter(*blue_train.T)
-# NG in kilo plt.scatter(*orange_train.T)
+plt.scatter(*blue_train.T)
+plt.scatter(*orange_train.T)
+
 show()
 
 # Check x maximum information gain ratio
@@ -849,8 +852,9 @@ print(tree)
 
 plt.xlim([5.5, 8.5])
 
-# NG in kilo plt.scatter(*blue_train.T)
-# NG in kilo plt.scatter(*orange_train.T)
+plt.scatter(*blue_train.T)
+plt.scatter(*orange_train.T)
+
 show()
 
 # Again, the best cut may be pretty obvious, but lets check the math
@@ -898,10 +902,10 @@ tree
 plt.xlim([5.5, 8.5])
 plt.ylim([3.5, 8.5])
 
-# NG in kilo plt.scatter(*blue_train.T)
-# NG in kilo plt.scatter(*orange_train.T)
-show()
+plt.scatter(*blue_train.T)
+plt.scatter(*orange_train.T)
 
+show()
 
 Nb = 1
 No = 4
@@ -1252,12 +1256,12 @@ graph
 X = np.random.sample(50)
 Y = np.array([x**2 + np.random.normal(0, 0.05) for x in X])
 
+plt.scatter(X, Y, color="b")
+plt.plot([0.3, 0.3], [-0.2, 1.2], "g--")
+plt.plot([0.6, 0.6], [-0.2, 1.2], "g--")
 plt.xlabel("x")
 plt.ylabel("y")
 
-# NG in kilo plt.scatter(X, Y, color="b")
-plt.plot([0.3, 0.3], [-0.2, 1.2], "g--")
-plt.plot([0.6, 0.6], [-0.2, 1.2], "g--")
 show()
 
 # The corresponding tree would look like this
@@ -1286,7 +1290,7 @@ def avg(X, Y, x_min, x_max):
     return avg / n
 
 
-# NG in kilo plt.scatter(X, Y, color="b")
+plt.scatter(X, Y, color="b")
 
 plt.plot([0.3, 0.3], [-0.2, 1.2], "g--")
 plt.plot([0.6, 0.6], [-0.2, 1.2], "g--")
@@ -1314,7 +1318,7 @@ show()
 X_test = np.arange(0.0, 1.0, 0.01)[:, np.newaxis]
 Y_test = fit.predict(X_test)
 
-# NG in kilo plt.scatter(X, Y, color="b")
+plt.scatter(X, Y, color="b")
 plt.plot(X_test, Y_test)
 show()
 
@@ -1957,7 +1961,9 @@ labels = data[::, 0]
 
 # 避免过拟合，采用交叉验证，随机选取20%数据作为测试集，剩余为训练集
 # 資料分割
-train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.2)
+train_features, test_features, train_labels, test_labels = train_test_split(
+    features, labels, test_size=0.2
+)
 
 time1 = time.time()
 
@@ -2172,7 +2178,9 @@ labels = data[::, 0]
 
 # 避免过拟合，采用交叉验证，随机选取20%数据作为测试集，剩余为训练集
 # 資料分割
-train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.2)
+train_features, test_features, train_labels, test_labels = train_test_split(
+    features, labels, test_size=0.2
+)
 
 # 通过C4.5算法生成决策树
 print("开始训练")
@@ -3303,7 +3311,9 @@ for i in range(1, nsimu):
 
 plt.figure(figsize=(10, 6))
 plt.scatter(x=ntree[1:nsimu], y=accuracy[1:nsimu], s=60, c="red")
-plt.title("Number of trees in the Random Forest vs. prediction accuracy (criterion: 'gini')")
+plt.title(
+    "Number of trees in the Random Forest vs. prediction accuracy (criterion: 'gini')"
+)
 plt.xlabel("Number of trees")
 plt.ylabel("Prediction accuracy from confusion matrix")
 show()
@@ -3323,7 +3333,9 @@ for i in range(1, nsimu):
 
 plt.figure(figsize=(10, 6))
 plt.scatter(x=ntree[1:nsimu], y=accuracy[1:nsimu], s=60, c="red")
-plt.title("Number of trees in the Random Forest vs. prediction accuracy (criterion: 'entropy')")
+plt.title(
+    "Number of trees in the Random Forest vs. prediction accuracy (criterion: 'entropy')"
+)
 plt.xlabel("Number of trees")
 plt.ylabel("Prediction accuracy from confusion matrix")
 show()
@@ -3345,7 +3357,9 @@ for i in range(1, nsimu):
 
 plt.figure(figsize=(10, 6))
 plt.scatter(x=ntree[1:nsimu], y=accuracy[1:nsimu], s=60, c="red")
-plt.title("Number of trees in the Random Forest vs. prediction accuracy (max depth: None)")
+plt.title(
+    "Number of trees in the Random Forest vs. prediction accuracy (max depth: None)"
+)
 plt.xlabel("Number of trees")
 plt.ylabel("Prediction accuracy from confusion matrix")
 show()
@@ -3387,7 +3401,9 @@ for i in range(1, nsimu):
 
 plt.figure(figsize=(10, 6))
 plt.scatter(x=ntree[1:nsimu], y=accuracy[1:nsimu], s=60, c="red")
-plt.title("Number of trees in the Random Forest vs. prediction accuracy (minimum sample split: 2)")
+plt.title(
+    "Number of trees in the Random Forest vs. prediction accuracy (minimum sample split: 2)"
+)
 plt.xlabel("Number of trees")
 plt.ylabel("Prediction accuracy from confusion matrix")
 show()
@@ -3407,7 +3423,9 @@ for i in range(1, nsimu):
 
 plt.figure(figsize=(10, 6))
 plt.scatter(x=ntree[1:nsimu], y=accuracy[1:nsimu], s=60, c="red")
-plt.title("Number of trees in the Random Forest vs. prediction accuracy (minimum sample split: 20)")
+plt.title(
+    "Number of trees in the Random Forest vs. prediction accuracy (minimum sample split: 20)"
+)
 plt.xlabel("Number of trees")
 plt.ylabel("Prediction accuracy from confusion matrix")
 show()
@@ -3459,4 +3477,3 @@ print("------------------------------------------------------------")  # 60個
 
 X_combined = np.vstack((x_train, x_test))
 y_combined = np.hstack((y_train, y_test))
-
