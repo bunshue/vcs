@@ -62,14 +62,7 @@ from sklearn.metrics import recall_score
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 資料一, 使用 make_blobs 資料
-N = 30  # n_samples, 樣本數
-M = 2  # n_features, 特徵數(資料的維度)
-GROUPS = 3  # centers, 分群數
-print("make_blobs,", N, "個樣本, ", M, "個特徵, 分成", GROUPS, "群")
-X, y = make_blobs(n_samples=N, centers=GROUPS, n_features=M)
-
-# 資料二, 使用 iris 資料
+# 使用 iris 資料
 # X, y = datasets.load_iris(return_X_y=True) # same
 iris = datasets.load_iris()
 X = iris.data  # 取出4欄資料
@@ -87,8 +80,10 @@ clf.fit(x_train, y_train)  # 學習訓練.fit
 
 # 對測試數據做預測
 y_pred = clf.predict(x_test)  # 預測.predict
-print("預測結果 :\n", y_pred[:30], sep="")
-print("測試目標 :\n", y_test[:30], sep="")
+
+print("真實答案 :\n", y_test, sep="")
+print("預測結果 :\n", y_pred, sep="")
+print("預測差值 :\n", y_pred - y_test, sep="")
 
 # 輸出準確性
 print(f"訓練資料的準確性 = {clf.score(x_train, y_train)}")
@@ -153,7 +148,7 @@ print("決策樹")
 
 iris = datasets.load_iris()
 
-X = iris.data[:, [2, 3]]  # 取出2欄資料
+X = iris.data[:, [2, 3]]  # 取出2欄資料, 為了畫圖
 y = iris.target
 
 # 資料分割
@@ -164,7 +159,11 @@ clf = DecisionTreeClassifier(criterion="entropy", max_depth=3)  # 決策樹函�
 clf.fit(x_train, y_train)  # 學習訓練.fit
 
 y_pred = clf.predict(x_test)  # 預測.predict
-
+"""
+print("真實答案 :\n", y, sep="")
+print("預測結果 :\n", y_pred, sep="")
+print("預測差值 :\n", y_pred - y, sep="")
+"""
 X_combined = np.vstack((x_train, x_test))
 y_combined = np.hstack((y_train, y_test))
 

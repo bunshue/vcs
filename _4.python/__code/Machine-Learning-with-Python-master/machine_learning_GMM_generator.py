@@ -1,5 +1,5 @@
 """
-
+GMM_generator
 
 """
 
@@ -51,6 +51,97 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# Synthesizing a Gaussian Mixture Model (GMM) dataset
+
+# The generating function
+
+
+def gen_GMM(N=1000, n_comp=3, mu=[-1, 0, 1], sigma=[1, 1, 1], mult=[1, 1, 1]):
+    """
+    Generates a Gaussian mixture model data, from a given list of Gaussian components
+    N: Number of total samples (data points)
+    n_comp: Number of Gaussian components
+    mu: List of mean values of the Gaussian components
+    sigma: List of sigma (std. dev) values of the Gaussian components
+    mult: (Optional) list of multiplier for the Gaussian components
+    """
+    assert n_comp == len(
+        mu
+    ), "The length of the list of mean values does not match number of Gaussian components"
+    assert n_comp == len(
+        sigma
+    ), "The length of the list of sigma values does not match number of Gaussian components"
+    assert n_comp == len(
+        mult
+    ), "The length of the list of multiplier values does not match number of Gaussian components"
+    rand_samples = []
+    for i in range(N):
+        pivot = random.uniform(0, n_comp)
+        j = int(pivot)
+        rand_samples.append(mult[j] * random.gauss(mu[j], sigma[j]))
+
+    return np.array(rand_samples)
+
+
+# Testing the function including AssertionError
+
+cc = gen_GMM(10)
+print(cc)
+
+""" NG
+cc = gen_GMM(N=10,n_comp=4,mu=[1,2,0],sigma=[1,1,1,2])
+print(cc)
+
+gen_GMM(N=10,n_comp=4,mu=[1,2,0,-1],sigma=[1,1,2])
+"""
+
+# Data and plot examples
+
+data = gen_GMM(N=100, mu=[-6, 0, 6])
+
+plt.scatter(x=np.arange(100), y=data, color="k")
+plt.grid(True)
+show()
+
+data = gen_GMM(N=10000, mu=[-6, 0, 6])
+
+sns.distplot(
+    data,
+    bins=50,
+    hist_kws={"color": "blue", "edgecolor": "k"},
+    kde_kws={"lw": 3, "color": "k"},
+)
+show()
+
+data = gen_GMM(N=10000, mu=[-3, 0, 3])
+
+sns.distplot(
+    data,
+    bins=50,
+    hist_kws={"color": "blue", "edgecolor": "k"},
+    kde_kws={"lw": 3, "color": "k"},
+)
+show()
+
+data = gen_GMM(N=10000, mu=[-5, 0, 5], sigma=[1, 2, 1.5])
+
+sns.distplot(
+    data,
+    bins=50,
+    hist_kws={"color": "blue", "edgecolor": "k"},
+    kde_kws={"lw": 3, "color": "k"},
+)
+show()
+
+data = gen_GMM(N=10000, mu=[-5, 0, 5], sigma=[1.8, 0.3, 1.1], mult=[0.7, 1.8, 1.1])
+
+sns.distplot(
+    data,
+    bins=50,
+    hist_kws={"color": "blue", "edgecolor": "k"},
+    kde_kws={"lw": 3, "color": "k"},
+)
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

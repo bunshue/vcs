@@ -1,3 +1,101 @@
+Regression
+
+    Simple linear regression with t-statistic generation
+    Linear regression as a statistical estimation problem
+    Multiple ways to perform linear regression in Python and their speed comparison. Also check the article I wrote on freeCodeCamp
+    Multi-variate regression with regularization
+    Polynomial regression using scikit-learn pipeline feature. Also check the article I wrote on Towards Data Science.
+    Decision trees and Random Forest regression (showing how the Random Forest works as a robust/regularized meta-estimator rejecting overfitting).
+    Detailed visual analytics and goodness-of-fit diagnostic tests for a linear regression problem.
+
+Classification
+
+    Logistic regression/classification.
+    k-nearest neighbor classification.
+    Decision trees and Random Forest Classification.
+    Support vector machine classification. Also check the article I wrote in Towards Data Science on SVM and sorting algorithm.
+    Naive Bayes classification.
+    Classification using Stochastic Gradient Descent (SGD).
+
+Clustering
+
+    K-means clustering.
+    Affinity propagation (showing its time complexity and the effect of damping factor).
+    Mean-shift technique (showing its time complexity and the effect of noise on cluster discovery).
+    DBSCAN (showing how it can generically detect areas of high density irrespective of cluster shapes, which the k-means fails to do).
+    Hierarchical clustering with Dendograms showing how to choose optimal number of clusters.
+    Clustering metrics better than the elbow-method.
+
+Dimensionality reduction
+
+    Principal component analysis
+    Clustering combined with dimensionality reduction technqieus
+
+recurrent neural network (RNN)
+
+
+
+
+資料		資料分割	資料取得、資料清理、資料分割
+
+模型訓練	模型訓練	模型訓練、讀取模型
+
+預測		預測		預測、儲存模型、模型評估、資料輸出、資料畫圖
+
+資料來源
+1. 標準資料範本：iris、titanic、wine、cancer、糖、、
+2. sklearn合成資料：、、、
+3. 抓網路資料分析：、、、
+4. 自己建立資料
+
+
+
+ML四大部分
+regression			SVR、Ridge、Lasso、SGD、、、
+classification			SVC、KNN、SGD、NaiveBayes、、、
+clustering			KMeans、MeanShift、GMM、、、
+dimensionality-reduction	PCA、、、
+
+
+
+Python Machine Learning
+
+regression, classification, clustering, dimensionality reduction, 
+
+and some basic neural network algorithms
+
+Regression
+    Simple linear regression with t-statistic generation
+    Multiple ways to do linear regression in Python and their speed comparison (check the article I wrote on freeCodeCamp)
+    Multi-variate regression with regularization
+    Polynomial regression with how to use scikit-learn pipeline feature (check the article I wrote on Towards Data Science)
+    Decision trees and Random Forest regression (showing how the Random Forest works as a robust/regularized meta-estimator rejecting overfitting)
+
+Classification
+    Logistic regression/classification
+    k-nearest neighbor classification
+    Decision trees and Random Forest Classification
+    Support vector machine classification
+    Naive Bayes classification
+
+Clustering
+    K-means clustering
+    Affinity propagation (showing its time complexity and the effect of damping factor)
+    Mean-shift technique (showing its time complexity and the effect of noise on cluster discovery)
+    Hierarchical clustering with Dendograms showing how to choose optimal number of clusters
+    DBSCAN (showing how it can generically detect areas of high density irrespective of cluster shapes, which the k-means fails to do)
+
+Dimensionality reduction
+    Principal component analysis(PCA)
+
+Deep Learning/Neural Network
+
+    Demo notebook to illustrate the superiority of deep neural network for complex nonlinear function approximation task.
+    Step-by-step building of 1-hidden-layer and 2-hidden-layer dense network using basic TensorFlow methods
+
+
+
+
 Sepal花萼
 Petal花瓣
 

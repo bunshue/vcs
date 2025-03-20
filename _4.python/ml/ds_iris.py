@@ -54,9 +54,11 @@ import sklearn.linear_model
 
 # import tensorflow as tf
 from common1 import *
+from sklearn import tree
 from sklearn import datasets
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn.cluster import KMeans  # 聚類方法, K-平均演算法
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import ConfusionMatrixDisplay
@@ -180,6 +182,7 @@ print("花瓣寬度")
 print(df["petal width (cm)"].head())
 """
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("鳶尾花數據庫 基本數據 csv檔轉df, 再看iris資料")
@@ -425,8 +428,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import tree
-
 print("load_iris()轉df")
 iris = datasets.load_iris()
 X = iris.data
@@ -437,23 +438,23 @@ df = pd.DataFrame(X, columns=iris.feature_names)
 target = pd.DataFrame(y, columns=["target"])
 y = target["target"]
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 XTrain, XTest, yTrain, yTest = train_test_split(df, y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
-dtree = tree.DecisionTreeClassifier(max_depth=8)  # 決策樹函數學習機
+clf = tree.DecisionTreeClassifier(max_depth=8)  # 決策樹函數學習機
 
-dtree.fit(XTrain, yTrain)  # 學習訓練.fit
+clf.fit(XTrain, yTrain)  # 學習訓練.fit
 
-print("準確率:", dtree.score(XTest, yTest))
-print(dtree.predict(XTest))
+print("準確率:", clf.score(XTest, yTest))
+
+y_pred = clf.predict(XTest)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
+
 print(yTest.values)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import tree
-
 print("load_iris()轉df")
 iris = datasets.load_iris()
 X = iris.data
@@ -464,17 +465,16 @@ df = pd.DataFrame(X, columns=iris.feature_names)
 target = pd.DataFrame(y, columns=["target"])
 y = target["target"]
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 XTrain, XTest, yTrain, yTest = train_test_split(df, y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
-dtree = tree.DecisionTreeClassifier(max_depth=8)  # 決策樹函數學習機
+clf = tree.DecisionTreeClassifier(max_depth=8)  # 決策樹函數學習機
 
-dtree.fit(XTrain, yTrain)  # 學習訓練.fit
+clf.fit(XTrain, yTrain)  # 學習訓練.fit
 
 # 決策樹可視化存檔
 with open("tmp_tree2.dot", "w") as f:
-    f = tree.export_graphviz(dtree, feature_names=iris.feature_names, out_file=f)
+    f = tree.export_graphviz(clf, feature_names=iris.feature_names, out_file=f)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -487,6 +487,7 @@ y = iris.target  # 資料集目標
 df = pd.DataFrame(X, columns=iris.feature_names)
 
 y = pd.DataFrame(y, columns=["Species"])
+
 df = pd.concat([df, y], axis=1)
 
 print(df.head())
@@ -494,9 +495,7 @@ print(df.head())
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("模型篩選特徵")
-
-from sklearn import tree
+print("決策樹")
 
 iris = datasets.load_iris()
 X = iris.data
@@ -506,38 +505,36 @@ clf = tree.DecisionTreeClassifier()  # 決策樹函數學習機
 
 clf = clf.fit(X, y)  # 學習訓練.fit
 
-print(clf.feature_importances_)
+print("模型篩選特徵 :", clf.feature_importances_)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("決策樹 (decision tree)")
+print("決策樹")
 
-from sklearn.tree import DecisionTreeClassifier  # 決策樹函數學習機
+X, y = datasets.load_iris(return_X_y=True)  # 分別回傳兩種資料
 
-X, y = datasets.load_iris(return_X_y=True)
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 dx_train, dx_test, dy_train, dy_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
-tree = DecisionTreeClassifier()  # 決策樹函數學習機
+clf = tree.DecisionTreeClassifier()  # 決策樹函數學習機
 
-tree.fit(dx_train, dy_train)  # 學習訓練.fit
+clf.fit(dx_train, dy_train)  # 學習訓練.fit
 
-predictions = tree.predict(dx_test)
+print("模型篩選特徵 :", clf.feature_importances_)
+
+y_pred = clf.predict(dx_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 print("dx_test資料.形狀 :", dx_test.shape)
 
-print("predictions")
-print(predictions)
-print("predictions資料.形狀 :", predictions.shape)
+print("y_pred資料.形狀 :", y_pred.shape)
 
 print("測試分數 train")
-print(tree.score(dx_train, dy_train))
+print(clf.score(dx_train, dy_train))
 
 print("測試分數 test")
-print(tree.score(dx_test, dy_test))
+print(clf.score(dx_test, dy_test))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -546,23 +543,21 @@ print("隨機森林 (random forest)")
 
 from sklearn.ensemble import RandomForestClassifier
 
-X, y = datasets.load_iris(return_X_y=True)
+X, y = datasets.load_iris(return_X_y=True)  # 分別回傳兩種資料
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 dx_train, dx_test, dy_train, dy_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
 forest = RandomForestClassifier()
 
 forest.fit(dx_train, dy_train)  # 學習訓練.fit
 
-predictions = forest.predict(dx_test)
+y_pred = forest.predict(dx_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 print("dx_test資料.形狀 :", dx_test.shape)
 
-print("predictions")
-print(predictions)
-print("predictions資料.形狀 :", predictions.shape)
+print("y_pred資料.形狀 :", y_pred.shape)
 
 print("測試分數 train")
 print(forest.score(dx_train, dy_train))
@@ -610,18 +605,17 @@ model.fit(X_train, Y_train, epochs=100, batch_size=5)  # 學習訓練.fit
 loss, accuracy = model.evaluate(X_test, Y_test)
 print("Accuracy = {:.2f}".format(accuracy))
 
-Y_pred = np.argmax(model.predict(X_test), axis=-1)
-print(Y_pred)
+y_pred = np.argmax(model.predict(X_test), axis=-1)
+print("預測結果 :\n", y_pred, sep="")
 
-Y_target = dataset[:, 4][120:].astype(int)
-print(Y_target)
+y_target = dataset[:, 4][120:].astype(int)
+print(y_target)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("決策樹")
 
-from sklearn import tree  # 決策樹工具
 import pydotplus  # 做圖工具
 import io
 
@@ -629,9 +623,8 @@ iris = datasets.load_iris()
 X = iris.data  # 獲取自變量??
 y = iris.target  # 獲取因變量??  # 資料集目標
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
 clf = tree.DecisionTreeClassifier(max_depth=5)  # 決策樹函數學習機
 
@@ -782,7 +775,7 @@ clf = joblib.load("iris_clf_01.pkl")
 
 # 真的可以用了嗎?
 
-print(clf.predict([[2, 3]]))
+print(clf.predict([[2, 3]]))  # 預測.predict
 
 # 看看我們分類的全貌
 
@@ -814,7 +807,7 @@ print(np.c_[xt.ravel(), yt.ravel()])
 
 xx, yy = np.meshgrid(np.arange(3, 8.5, 0.2), np.arange(1.5, 5.0, 0.2))
 
-Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
+Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])  # 預測.predict
 
 plt.scatter(xx.ravel(), yy.ravel(), s=50, c=Z)
 show()
@@ -910,12 +903,12 @@ class KNN:
         return list(map(most_common, neighbors))
 
     def evaluate(self, X_test, y_test):
-        y_pred = self.predict(X_test)
+        y_pred = self.predict(X_test)  # 預測.predict
         accuracy = sum(y_pred == y_test) / len(y_test)
         return accuracy
 
 
-X, y = datasets.load_iris(return_X_y=True)
+X, y = datasets.load_iris(return_X_y=True)  # 分別回傳兩種資料
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -929,7 +922,8 @@ clf = KNN()
 
 clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
-y_pred = clf.predict(X_test_std)
+y_pred = clf.predict(X_test_std)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 print("計算準確率")
 cc = accuracy_score(y_test, y_pred)
@@ -1001,15 +995,17 @@ class NaiveBayesClassifier:
         return preds
 
 
-X, y = datasets.load_iris(return_X_y=True)
+X, y = datasets.load_iris(return_X_y=True)  # 分別回傳兩種資料
 
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 clf = NaiveBayesClassifier()
 
 clf.fit(X_train, y_train)  # 學習訓練.fit
 
-y_pred = clf.predict(X_test)
+y_pred = clf.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 print("計算準確率")
 cc = accuracy_score(y_test, y_pred)
@@ -1023,8 +1019,9 @@ print("------------------------------------------------------------")  # 60個
 
 # 以單純貝氏分類器進行鳶尾花(Iris)品種的辨識
 
-X, y = datasets.load_iris(return_X_y=True)
+X, y = datasets.load_iris(return_X_y=True)  # 分別回傳兩種資料
 
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 from sklearn.naive_bayes import GaussianNB
@@ -1033,9 +1030,8 @@ clf = GaussianNB()
 
 clf.fit(X_train, y_train)  # 學習訓練.fit
 
-# 模型評分
-
-y_pred = clf.predict(X_test)
+y_pred = clf.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 print("計算準確率")
 cc = accuracy_score(y_test, y_pred)
@@ -1050,7 +1046,8 @@ clf = BernoulliNB()
 
 clf.fit(X_train, y_train)  # 學習訓練.fit
 
-y_pred = clf.predict(X_test)
+y_pred = clf.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 print("計算準確率")
 cc = accuracy_score(y_test, y_pred)
@@ -1065,7 +1062,8 @@ clf = MultinomialNB()
 
 clf.fit(X_train, y_train)  # 學習訓練.fit
 
-y_pred = clf.predict(X_test)
+y_pred = clf.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 print("計算準確率")
 cc = accuracy_score(y_test, y_pred)
@@ -1106,7 +1104,7 @@ def plot_dendrogram(model, **kwargs):
     dendrogram(linkage_matrix, **kwargs)
 
 
-X, y = datasets.load_iris(return_X_y=True)
+X, y = datasets.load_iris(return_X_y=True)  # 分別回傳兩種資料
 
 # distance_threshold=0 表示會建立完整的樹狀圖(dendrogram)
 clf = AgglomerativeClustering(distance_threshold=0, n_clusters=None)
@@ -1181,11 +1179,14 @@ iris = datasets.load_iris()
 X = iris.data[:, :2]  # use only 'sepal length and sepal width'
 y = iris.target  # 資料集目標
 
-kmr = cluster.KMeans(n_clusters=3, random_state=9487)
+CLUSTERS = 3  # 要分成的群數
+print("使用KMeans分成", CLUSTERS, "群")
+kmr = KMeans(n_clusters=CLUSTERS, random_state=9487)  # K-平均演算法
 
 kmr.fit(X)  # 學習訓練.fit
 
-labels_r = kmr.predict(X)
+labels_r = kmr.predict(X)  # 預測.predict
+print("預測結果 :\n", labels_r, sep="")
 
 nboot = 500
 orig_all = np.arange(X.shape[0])
@@ -1195,13 +1196,15 @@ for boot_i in range(nboot):
     np.random.seed(boot_i)
     boot_idx = np.random.choice(orig_all, size=len(orig_all), replace=True)
     # boot_idx = orig_all
-    kmb = cluster.KMeans(n_clusters=3, random_state=94587)
+    CLUSTERS = 3  # 要分成的群數
+    print("使用KMeans分成", CLUSTERS, "群")
+    kmb = KMeans(n_clusters=CLUSTERS, random_state=94587)  # K-平均演算法
     kmb.fit(X[boot_idx, :])  # 學習訓練.fit
     dist = scipy.spatial.distance.cdist(kmb.cluster_centers_, kmr.cluster_centers_)
     reorder = np.argmin(dist, axis=1)
     # print(reorder)
     # kmb.cluster_centers_ = kmb.cluster_centers_[reorder]
-    labels_b = kmb.predict(X)
+    labels_b = kmb.predict(X)  # 預測.predict
     labels_b = np.array([reorder[lab] for lab in labels_b])
     scores_boot[boot_i] = np.sum(labels_b == labels_r) / len(labels_b)
 
@@ -1301,6 +1304,7 @@ y = iris.target  # 資料集目標
 category = 3
 dim = 4
 
+# 資料分割
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 y_train2 = tf.keras.utils.to_categorical(y_train, num_classes=(category))
@@ -1341,6 +1345,8 @@ score = model.evaluate(x_test, y_test2, batch_size=128)
 print("score:", score)
 
 predict = model.predict(x_test)  # 預測.predict
+print("預測結果 :\n", predict, sep="")
+
 print(
     "Ans:",
     np.argmax(predict[0]),
@@ -1351,6 +1357,8 @@ print(
 
 # y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
 predict_x = model.predict(x_test)  # 預測.predict
+print("預測結果 :\n", predict_x, sep="")
+
 classes_x = np.argmax(predict_x, axis=1)
 y_pred = classes_x
 
@@ -1369,7 +1377,9 @@ y = iris.target  # 資料集目標
 category = 3
 dim = 4
 
+# 資料分割
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
 y_train2 = tf.keras.utils.to_categorical(y_train, num_classes=(category))
 y_test2 = tf.keras.utils.to_categorical(y_test, num_classes=(category))
 
@@ -1400,6 +1410,8 @@ score = model.evaluate(x_test, y_test2, batch_size=128)
 print("score:", score)
 
 predict = model.predict(x_test)  # 預測.predict
+print("預測結果 :\n", predict, sep="")
+
 print(
     "Ans:",
     np.argmax(predict[0]),
@@ -1410,6 +1422,8 @@ print(
 
 # y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
 predict_x = model.predict(x_test)  # 預測.predict
+print("預測結果 :\n", predict_x, sep="")
+
 classes_x = np.argmax(predict_x, axis=1)
 y_pred = classes_x
 
@@ -1436,7 +1450,10 @@ y = iris.target  # 資料集目標
 
 category = 3
 dim = 4
+
+# 資料分割
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
 y_train2 = tf.keras.utils.to_categorical(y_train, num_classes=(category))
 y_test2 = tf.keras.utils.to_categorical(y_test, num_classes=(category))
 
@@ -1473,10 +1490,14 @@ score = model.evaluate(x_test, y_test2, batch_size=128)
 print("score:",score)
 
 predict = model.predict(x_test)  # 預測.predict
+print("預測結果 :\n", predict, sep="")
+
 print("Ans:",np.argmax(predict[0]),np.argmax(predict[1]),np.argmax(predict[2]),np.argmax(predict[3]))
 
 # y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
 predict_x = model.predict(x_test)  # 預測.predict
+print("預測結果 :\n", predict_x, sep="")
+
 classes_x = np.argmax(predict_x, axis=1)
 y_pred = classes_x
 
@@ -1494,7 +1515,10 @@ y = iris.target  # 資料集目標
 
 category = 3
 dim = 4
+
+# 資料分割
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
 y_train2 = tf.keras.utils.to_categorical(y_train, num_classes=(category))
 y_test2 = tf.keras.utils.to_categorical(y_test, num_classes=(category))
 
@@ -1538,10 +1562,14 @@ score = model.evaluate(x_test, y_test2, batch_size=128)
 print("score:",score)
 
 predict = model.predict(x_test)  # 預測.predict
+print("預測結果 :\n", predict, sep="")
+
 print("Ans:",np.argmax(predict[0]),np.argmax(predict[1]),np.argmax(predict[2]),np.argmax(predict[3]))
 
 # y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
 predict_x = model.predict(x_test)  # 預測.predict
+print("預測結果 :\n", predict_x, sep="")
+
 classes_x = np.argmax(predict_x, axis=1)
 y_pred = classes_x
 
@@ -1559,7 +1587,10 @@ y = iris.target  # 資料集目標
 
 category = 3
 dim = 4
+
+# 資料分割
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
 y_train2 = tf.keras.utils.to_categorical(y_train, num_classes=(category))
 y_test2 = tf.keras.utils.to_categorical(y_test, num_classes=(category))
 
@@ -1589,6 +1620,8 @@ score = model.evaluate(x_test, y_test2, batch_size=128)
 print("score:", score)
 
 predict = model.predict(x_test)  # 預測.predict
+print("預測結果 :\n", predict, sep="")
+
 print(
     "Ans:",
     np.argmax(predict[0]),
@@ -1599,6 +1632,8 @@ print(
 
 # y_pred = model.predict_classes(x_test) # TensorFlow2.6已刪除predict_classes()
 predict_x = model.predict(x_test)  # 預測.predict
+print("預測結果 :\n", predict_x, sep="")
+
 classes_x = np.argmax(predict_x, axis=1)
 y_pred = classes_x
 
@@ -1615,9 +1650,17 @@ iris = datasets.load_iris()
 X = iris.data[:, :2]  # use only 'sepal length and sepal width'
 y_iris = iris.target
 
-km2 = cluster.KMeans(n_clusters=2).fit(X)  # 學習訓練.fit
-km3 = cluster.KMeans(n_clusters=3).fit(X)  # 學習訓練.fit
-km4 = cluster.KMeans(n_clusters=4).fit(X)  # 學習訓練.fit
+CLUSTERS = 2  # 要分成的群數
+print("使用KMeans分成", CLUSTERS, "群")
+km2 = KMeans(n_clusters=CLUSTERS).fit(X)  # K-平均演算法  # 學習訓練.fit
+
+CLUSTERS = 3  # 要分成的群數
+print("使用KMeans分成", CLUSTERS, "群")
+km3 = KMeans(n_clusters=CLUSTERS).fit(X)  # K-平均演算法  # 學習訓練.fit
+
+CLUSTERS = 4  # 要分成的群數
+print("使用KMeans分成", CLUSTERS, "群")
+km4 = KMeans(n_clusters=CLUSTERS).fit(X)  # K-平均演算法  # 學習訓練.fit
 
 plt.figure(figsize=(9, 3))
 plt.subplot(131)
