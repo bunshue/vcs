@@ -28,7 +28,7 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 from pylab import figure, show
 
 fig = figure()
@@ -54,24 +54,23 @@ ax.annotate(
 plt.text(0.2, 1.2, "螺旋圖", fontsize=20)
 
 show()
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import matplotlib.pyplot as plt
 import numpy as np
 
-x=np.random.random(size=1000)
-y=x**(2*x**2+3)
+x = np.random.random(size=1000)
+y = x ** (2 * x**2 + 3)
 
-plt.figure(figsize=(8,5))
+plt.figure(figsize=(8, 5))
 plt.grid(True)
-plt.title("Plot of $y=g(x)=\oint_{a}^{b}{{f(x)}^{[2x^2+3]}}$\n",fontsize=20)
-plt.xlabel("Variable: $\mathbf{x}$",fontsize=20)
-plt.ylabel("Output: $\mathbf{y=g(x)}$",fontsize=20)
-plt.fill(x,y)
+plt.title("Plot of $y=g(x)=\oint_{a}^{b}{{f(x)}^{[2x^2+3]}}$\n", fontsize=20)
+plt.xlabel("Variable: $\mathbf{x}$", fontsize=20)
+plt.ylabel("Output: $\mathbf{y=g(x)}$", fontsize=20)
+plt.fill(x, y)
 plt.show()
-
 
 
 print("------------------------------------------------------------")  # 60個
