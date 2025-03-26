@@ -10,6 +10,7 @@ C:\\Users\\070601\\.pydicom\\data
 C:\_git\vcs\_4.python\__code\pydicom-data-master\data_store\data
 
 """
+
 import pydicom
 from pydicom.data import get_testdata_file
 from pydicom.data import get_testdata_files
@@ -39,6 +40,64 @@ print("------------------------------------------------------------")  # 60個
 filename1 = "data/test.dcm"
 filename2 = "data/ims000525.dcm"
 filename3 = "data/CT_small.dcm"
+
+
+ds = pydicom.dcmread(filename3, force=True)
+print(ds.file_meta.MediaStorageSOPClassUID)
+print(ds.file_meta.TransferSyntaxUID)
+
+# there is valid dose in there? Try:
+
+doseV = pydicom.dcmread(filename3)
+cc = len(doseV)
+print(cc)
+
+# cc = pydicom.dicominfo(filename3)
+# print(cc)
+
+doseV = pydicom.dcmread(filename3)
+cc = len(doseV)
+print(cc)
+
+
+# cc = pydicom.dicominfo(filename3)
+# print(cc)
+
+
+info = {}
+# 读取dicom文件
+dcm = pydicom.read_file(filename3)
+# 通过字典关键字来获取图像的数据元信息（当然也可以根据TAG号）
+# 这里获取几种常用信息
+info["PatientID"] = dcm.PatientID  # 患者ID
+info["PatientName"] = dcm.PatientName  # 患者姓名
+info["PatientAge"] = dcm.PatientAge  # 患者年龄
+info["PatientSex"] = dcm.PatientSex  # 患者性别
+info["StudyID"] = dcm.StudyID  # 检查ID
+info["StudyDate"] = dcm.StudyDate  # 检查日期
+info["StudyTime"] = dcm.StudyTime  # 检查时间
+info["InstitutionName"] = dcm.InstitutionName  # 机构名称
+info["Manufacturer"] = dcm.Manufacturer  # 设备制造商
+info["StudyDescription"] = dcm.StudyDescription  # 检查项目描述
+print(info)
+
+# 单张影像的读取
+
+# 使用 pydicom.dcmread() 函数进行单张影像的读取,返回一个pydicom.dataset.FileDataset对象.
+
+dcm = pydicom.dcmread(filename3)
+
+# 获取图像像素矩阵和大小
+
+img_array = dcm.pixel_array  # 获取图像像素矩阵
+lens = img_array.shape[0] * img_array.shape[1]  # 获取像素矩阵大小
+print(lens)
+
+print(ds.PatientID)
+print(ds.StudyDate)
+print(ds.Modality)
+
+print("------------------------------------------------------------")  # 60個
 
 ds = pydicom.dcmread(filename1)
 # ds = pydicom.dcmread(filename2, force=True)
@@ -130,14 +189,12 @@ print("------------------------------------------------------------")  # 60個
 
 
 def show_patient_IDs(file_list=None):
-    
     if file_list is None:
         file_list = []
     for file_name in file_list:
         try:
-            
             f = pydicom.dcmread(file_name)
-            
+
             patient_id = f.get("PatientID", "No ID")
             print(file_name, "has patient id of", patient_id)
         except Exception:
@@ -199,7 +256,7 @@ print(is_dicom(filename1))
 
 print("------------------------------------------------------------")  # 60個
 
-#取得pydicom內建的dicom檔案
+# 取得pydicom內建的dicom檔案
 
 filename = get_testdata_file("CT_small.dcm")
 print(filename)
@@ -207,7 +264,7 @@ print(filename)
 ds = pydicom.dcmread(filename)
 pixel_bytes = ds.PixelData
 
-#使用 array
+# 使用 array
 arr = ds.pixel_array
 print(arr.shape)
 print(len(arr))
@@ -234,8 +291,8 @@ del ds.SoftwareVersions  #刪除資料
 
 from pydicom.tag import Tag
 
-t1 = Tag(0x00100010) # all of these are equivalent
-t2 = Tag(0x10,0x10)
+t1 = Tag(0x00100010)  # all of these are equivalent
+t2 = Tag(0x10, 0x10)
 t3 = Tag((0x10, 0x10))
 t4 = Tag("PatientName")
 print(t1)
@@ -252,13 +309,13 @@ ds.PatientName
 #'Last^First^mid^pre'
 cc = ds.dir("setup")  # get a list of tags with "setup" somewhere in the name
 print(cc)
-#['PatientSetupSequence']
+# ['PatientSetupSequence']
 cc = ds.PatientSetupSequence[0]
 print(cc)
 
-#(0018, 5100) Patient Position                    CS: 'HFS'
-#(300a, 0182) Patient Setup Number                IS: '1'
-#(300a, 01b2) Setup Technique Description         ST: ''
+# (0018, 5100) Patient Position                    CS: 'HFS'
+# (300a, 0182) Patient Setup Number                IS: '1'
+# (300a, 01b2) Setup Technique Description         ST: ''
 
 cc = ds.PatientSetupSequence[0].PatientPosition = "HFP"
 print(cc)
@@ -283,7 +340,7 @@ ds.is_implicit_VR = False
 
 print("------------------------------------------------------------")  # 60個
 
-#壓縮
+# 壓縮
 from pydicom.uid import RLELossless
 
 ds = get_testdata_file("CT_small.dcm", read=True)
@@ -299,7 +356,7 @@ ds.save_as("tmp_CT_small_rle2.dcm")
 # Requires a JPEG 2000 compatible image data handler
 ds = get_testdata_file("US1_J2KR.dcm", read=True)
 arr = ds.pixel_array
-ds.PhotometricInterpretation = 'RGB'
+ds.PhotometricInterpretation = "RGB"
 ds.compress(RLELossless, arr)
 ds.save_as("tmp_US1_RLE.dcm")
 
@@ -316,28 +373,28 @@ cc = ds[0x00091001].value
 print(cc)
 
 
-block = ds.private_block(0x0009, 'GEMS_IDEN_01')
+block = ds.private_block(0x0009, "GEMS_IDEN_01")
 cc = block[0x01]
 print(cc)
-#(0009, 1001) [Full fidelity]                     LO: 'GE_GENESIS_FF'
+# (0009, 1001) [Full fidelity]                     LO: 'GE_GENESIS_FF'
 cc = block[0x01].value
 print(cc)
 #'GE_GENESIS_FF'
 
-print('設定新值')
+print("設定新值")
 
-block = ds.private_block(0x000b, "Insight Medical Solutions", create=True)
+block = ds.private_block(0x000B, "Insight Medical Solutions", create=True)
 block.add_new(0x01, "SH", "Aries 1.0.5")
 print(ds)
 
-#移除設定
-#ds.remove_private_tags()
+# 移除設定
+# ds.remove_private_tags()
 
 print("------------------------------------------------------------")  # 60個
 
 filename = get_testdata_files("CT_small.dcm")[0]
 ds = pydicom.dcmread(filename)
-plt.imshow(ds.pixel_array, cmap=plt.cm.bone) # doctest: +ELLIPSIS
+plt.imshow(ds.pixel_array, cmap=plt.cm.bone)  # doctest: +ELLIPSIS
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -346,7 +403,7 @@ fpath = get_testdata_files("MR-SIEMENS-DICOM-WithOverlays.dcm")[0]
 ds = pydicom.dcmread(fpath)
 elem = ds[0x6000, 0x3000]  # returns a DataElement
 print(elem)
-#(6000, 3000) Overlay Data
+# (6000, 3000) Overlay Data
 
 print("------------------------------------------------------------")  # 60個
 
@@ -357,18 +414,16 @@ ds = dcmread(fpath)
 cc = ds.WaveformSequence
 print(cc)
 
-#<Sequence, length 2>
+# <Sequence, length 2>
 multiplex = ds.WaveformSequence[0]
 cc = multiplex.NumberOfWaveformChannels
 print(cc)
-#12
+# 12
 cc = multiplex.SamplingFrequency
 print(cc)
-#"1000.0"
-cc = multiplex['WaveformData']
+# "1000.0"
+cc = multiplex["WaveformData"]
 print(cc)
-#(5400, 1010) Waveform Data
+# (5400, 1010) Waveform Data
 
 print("------------------------------------------------------------")  # 60個
-
-

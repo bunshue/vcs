@@ -23,6 +23,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+
 def get_LUT_value(data, window, level):
     """Apply the RGB Look-Up Table for the given
     data and window/level value."""
@@ -49,24 +50,24 @@ def loadPIL_LUT(dataset):
 
     # can only apply LUT if these values exist
     if ("WindowWidth" not in dataset) or ("WindowCenter" not in dataset):
-        print('1111')
+        print("1111")
         bits = dataset.BitsAllocated
         samples = dataset.SamplesPerPixel
         if bits == 8 and samples == 1:
-            print('L')
+            print("L")
             mode = "L"
         elif bits == 8 and samples == 3:
-            print('RGB')
+            print("RGB")
             mode = "RGB"
         # not sure about this -- PIL source says is
         # 'experimental' and no documentation.
         elif bits == 16:
-            print('16')
+            print("16")
             # Also, should bytes swap depending
             # on endian of file and system??
             mode = "I;16"
         else:
-            print('XXXX')
+            print("XXXX")
             msg = "Don't know PIL mode for %d BitsAllocated" % (bits)
             msg += " and %d SamplesPerPixel" % (samples)
             raise TypeError(msg)
@@ -75,7 +76,7 @@ def loadPIL_LUT(dataset):
 
         im = PIL.Image.frombuffer(mode, size, dataset.PixelData, "raw", mode, 0, 1)
     else:
-        print('2222')
+        print("2222")
         ew = dataset["WindowWidth"]
         ec = dataset["WindowCenter"]
         print(ew)
@@ -98,16 +99,16 @@ ds = pydicom.dcmread(filename3)
 ds.decode()
 
 if "PixelData" in ds:
-    print('有 影像資料')
+    print("有 影像資料")
     dImage = loadPIL_LUT(ds)
     if dImage is not None:
         print("有 影像資料")
-        #dImage.show() #  直接顯示
+        # dImage.show() #  直接顯示
         plt.imshow(dImage, cmap="gray")  # 顯示黑白圖片
         plt.title("原始圖像")
         plt.show()
 else:
-    print('無 影像資料')
+    print("無 影像資料")
 
 print("------------------------------------------------------------")  # 60個
 

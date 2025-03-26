@@ -4,6 +4,7 @@ import sys
 import pydicom
 import collections
 
+
 class DicomTree(object):
     def __init__(self, filename):
         self.filename = filename
@@ -14,7 +15,7 @@ class DicomTree(object):
         array = []
         for data_element in ds:
             array.append(self.data_element_to_dic(data_element))
-        
+
         dic = self.dataset_to_dic(ds)
         self.display()
 
@@ -23,10 +24,10 @@ class DicomTree(object):
         return dataset
 
     def data_element_to_dic(self, data_element):
-        #print(data_element)
+        # print(data_element)
         dic = collections.OrderedDict()
         if data_element.VR == "SQ":
-            print('Get SQ')
+            print("Get SQ")
             items = collections.OrderedDict()
             dic[data_element.name] = items
             i = 0
@@ -36,19 +37,19 @@ class DicomTree(object):
         elif data_element.name != "Pixel Data":
             dic[data_element.name] = data_element.value
         else:
-            print('Get Pixel Data')
-        #print(dic)
+            print("Get Pixel Data")
+        # print(dic)
         return dic
 
     def dataset_to_dic(self, dataset):
         dic = collections.OrderedDict()
         for data_element in dataset:
             dic.update(self.data_element_to_dic(data_element))
-        #print(dic)
+        # print(dic)
         return dic
 
     def display(self):
-        print('display 現在的檔案是 :', self.filename)
+        print("display 現在的檔案是 :", self.filename)
 
 
 filename1 = "data/test.dcm"
@@ -56,4 +57,3 @@ filename2 = "data/ims000525.dcm"
 
 dicomTree = DicomTree(filename1)
 dicomTree.show_tree()
-

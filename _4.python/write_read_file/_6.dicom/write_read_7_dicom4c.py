@@ -33,23 +33,23 @@ def get_PIL_image(dataset):
         )
     # can only apply LUT if these window info exists
     if ("WindowWidth" not in dataset) or ("WindowCenter" not in dataset):
-        print('1111')
+        print("1111")
         bits = dataset.BitsAllocated
         samples = dataset.SamplesPerPixel
         if bits == 8 and samples == 1:
-            print('L')
+            print("L")
             mode = "L"
         elif bits == 8 and samples == 3:
-            print('RGB')
+            print("RGB")
             mode = "RGB"
         elif bits == 16:
-            print('16')
+            print("16")
             # not sure about this -- PIL source says is 'experimental'
             # and no documentation. Also, should bytes swap depending
             # on endian of file and system??
             mode = "I;16"
         else:
-            print('XXXX')
+            print("XXXX")
             raise TypeError(
                 "Don't know PIL mode for %d BitsAllocated "
                 "and %d SamplesPerPixel" % (bits, samples)
@@ -61,7 +61,7 @@ def get_PIL_image(dataset):
 
         im = PIL.Image.frombuffer(mode, size, dataset.PixelData, "raw", mode, 0, 1)
     else:
-        print('2222')
+        print("2222")
         ew = dataset["WindowWidth"]
         ec = dataset["WindowCenter"]
         print(ew)

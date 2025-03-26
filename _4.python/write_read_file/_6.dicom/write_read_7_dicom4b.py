@@ -52,23 +52,23 @@ def get_PIL_image(ds):
         )
     # can only apply LUT if these window info exists
     if ("WindowWidth" not in ds) or ("WindowCenter" not in ds):
-        print('1111')
+        print("1111")
         bits = ds.BitsAllocated
         samples = ds.SamplesPerPixel
         if bits == 8 and samples == 1:
-            print('L')
+            print("L")
             mode = "L"
         elif bits == 8 and samples == 3:
-            print('RGB')
+            print("RGB")
             mode = "RGB"
         elif bits == 16:
-            print('16')
+            print("16")
             # not sure about this -- PIL source says is 'experimental'
             # and no documentation. Also, should bytes swap depending
             # on endian of file and system??
             mode = "I;16"
         else:
-            print('XXXX')
+            print("XXXX")
             raise TypeError(
                 "Don't know PIL mode for %d BitsAllocated "
                 "and %d SamplesPerPixel" % (bits, samples)
@@ -81,7 +81,7 @@ def get_PIL_image(ds):
         im = PIL.Image.frombuffer(mode, size, ds.PixelData, "raw", mode, 0, 1)
 
     else:
-        print('2222')
+        print("2222")
         ew = ds["WindowWidth"]
         ec = ds["WindowCenter"]
         print(ew)
@@ -94,6 +94,7 @@ def get_PIL_image(ds):
 
     return im
 
+
 print("讀取dicom檔案內的圖片")
 
 filename1 = "data/CT_small.dcm"
@@ -104,7 +105,7 @@ ds = pydicom.dcmread(filename3)
 dImage = get_PIL_image(ds)
 
 print("有 影像資料")
-#dImage.show() #  直接顯示
+# dImage.show() #  直接顯示
 plt.imshow(dImage, cmap="gray")  # 顯示黑白圖片
 plt.title("原始圖像")
 plt.show()
@@ -113,6 +114,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-
