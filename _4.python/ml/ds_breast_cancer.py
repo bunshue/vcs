@@ -1653,27 +1653,6 @@ print("決定係數R2(R-squared) :", weak_learner.score(X_test, y_test))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 使用分類模型
-
-from xgboost import XGBClassifier
-
-X, y = datasets.load_breast_cancer(return_X_y=True)
-
-# 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-model = XGBClassifier()
-
-model.fit(X_train, y_train)  # 學習訓練.fit
-
-scores = cross_val_score(model, X_test, y_test, cv=10)
-print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
-
-# 平均分數: 0.9484848484848485, 標準差: 0.05626498372008225
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # 堆疊(Stacking)測試
 
 X, y = datasets.load_breast_cancer(return_X_y=True)

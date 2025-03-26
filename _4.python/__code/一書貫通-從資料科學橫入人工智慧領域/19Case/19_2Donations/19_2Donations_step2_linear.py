@@ -31,7 +31,7 @@ print("------------------------------------------------------------")  # 60個
 DATA_CLEAN = []
 
 
-model_data = pd.read_csv("donations2.csv").drop(["ID", "TARGET_B"], axis=1)
+model_data = pd.read_csv("data_donations/donations2.csv").drop(["ID", "TARGET_B"], axis=1)
 cc = model_data.head()
 print(cc)
 
@@ -278,8 +278,8 @@ StatusCat96NK_class = (
     .agg({"mean": "mean", "count": "count", "median": "median"})
     .sort_values(["median", "mean"])
 )
-
-print(StatusCat96NK_class)
+cc = StatusCat96NK_class
+print(cc)
 
 new_StatusCat96NK = {"S": 1, "A": 2, "E": 2, "N": 2, "F": 2, "L": 2}
 
@@ -359,7 +359,8 @@ print(var_d_s)
 
 
 model_final = pd.concat([X[var_d_s + var_c_s], Y], axis=1)
-print(model_final.columns)
+cc = model_final.columns
+print(cc)
 
 # 建立线性回归模型:
 

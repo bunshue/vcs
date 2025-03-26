@@ -31,7 +31,7 @@ from woe import WoE  # 从本地导入
 
 # 创建一个列表，用来保存所有的建模数据清洗的相关信息
 DATA_CLEAN = []
-model_data = pd.read_csv("donations2.csv").drop(["ID", "TARGET_D"], axis=1)
+model_data = pd.read_csv("data_donations/donations2.csv").drop(["ID", "TARGET_D"], axis=1)
 cc = model_data.head()
 print(cc)
 
@@ -95,6 +95,8 @@ Y = model_data[y].copy()
 # + **iv**:变量的信息价值
 
 # 根据IV值筛选变量 - 分类变量
+
+from woe import WoE
 
 iv_d = {}
 for i in var_d:
@@ -319,6 +321,7 @@ print(pca.explained_variance_)  # 建议保留9个主成分
 print(pca.explained_variance_ratio_)  # 建议保留8个主成分
 
 from VarSelec import Var_Select
+from VarSelec import Var_Select_auto
 
 # Var_Select(orgdata, k,alphaMin=10, alphaMax=20, alphastep=0.2)
 
@@ -424,6 +427,8 @@ print(cc)
 # 模型验证A（验证）阶段
 
 # 对逻辑回归模型进行评估
+
+# ROC曲线
 
 test_est = logistic_model.predict(test_data)
 train_est = logistic_model.predict(train_data)
