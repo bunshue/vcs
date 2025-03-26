@@ -110,15 +110,13 @@ print("Completeness score:", metrics.completeness_score(labels_true, labels))
 
 # Time complexity and model quality as the data size grows
 
-from tqdm import tqdm
-
 n_samples = [10, 20, 50, 100, 200, 500, 1000, 2000, 3000, 5000, 7500, 10000]
 centers = [[1, 1], [-1, -1], [1, -1]]
 t_ms = []
 homo_ms = []
 complete_ms = []
 
-for i in tqdm(n_samples):
+for i in n_samples:
     X, labels_true = make_blobs(
         n_samples=i, centers=centers, cluster_std=0.4, random_state=101
     )
@@ -726,15 +724,13 @@ print("New point ({},{}) will belong to cluster {}".format(x_new[0], x_new[1], x
 
 # Time complexity and model quality as the data size grows
 
-from tqdm import tqdm
-
 n_samples = [10, 20, 50, 100, 200, 500, 1000, 2000, 3000, 5000, 7500, 10000]
 centers = [[1, 1], [-1, -1], [1, -1]]
 t_aff = []
 homo_aff = []
 complete_aff = []
 
-for i in tqdm(n_samples):
+for i in n_samples:
     X, labels_true = make_blobs(
         n_samples=i, centers=centers, cluster_std=0.5, random_state=0
     )

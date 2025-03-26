@@ -123,7 +123,7 @@ from sklearn.decomposition import PCA
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
@@ -401,9 +401,8 @@ model = MultinomialNB()
 
 model.fit(X_train, y_train)  # 學習訓練.fit
 
-#預測
 y_pred = model.predict([[0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0]])  # 預測.predict
-print(y_pred)
+print("預測結果 :\n", y_pred, sep="")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -766,8 +765,6 @@ plt.title("Learning Curves (Over Fitting)")
 
 show()
 
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1068,8 +1065,8 @@ classifier = RandomForestClassifier(
 
 classifier.fit(X_train, y_train)  # 學習訓練.fit
 
-# Predicting the Test set results
-y_pred = classifier.predict(X_test)
+y_pred = classifier.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 # 生成混淆矩陣(Confusion Matrix)，也稱作誤差矩陣
 
@@ -1486,7 +1483,7 @@ us_canada_user_rating_matrix = csr_matrix(us_canada_user_rating_pivot.values)
 
 # 找出相似商品，X為每一個讀者的評分
 model_knn = NearestNeighbors(metric="cosine", algorithm="brute")
-model_knn.fit(us_canada_user_rating_matrix)
+model_knn.fit(us_canada_user_rating_matrix)  # 學習訓練.fit
 
 # 測試
 
@@ -1558,6 +1555,20 @@ print("------------------------------------------------------------")  # 60個
 
 # 計算及繪製混淆矩陣
 
+"""
+creditcard.csv 284807筆資料, 31欄位
+"Time","V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16","V17","V18","V19","V20","V21","V22","V23","V24","V25","V26","V27","V28","Amount","Class"
+0,-1.3598071336738,-0.0727811733098497,2.53634673796914,1.37815522427443,-0.338320769942518,0.462387777762292,0.239598554061257,0.0986979012610507,0.363786969611213,0.0907941719789316,-0.551599533260813,-0.617800855762348,-0.991389847235408,-0.311169353699879,1.46817697209427,-0.470400525259478,0.207971241929242,0.0257905801985591,0.403992960255733,0.251412098239705,-0.018306777944153,0.277837575558899,-0.110473910188767,0.0669280749146731,0.128539358273528,-0.189114843888824,0.133558376740387,-0.0210530534538215,149.62,"0"
+0,1.19185711131486,0.26615071205963,0.16648011335321,0.448154078460911,0.0600176492822243,-0.0823608088155687,-0.0788029833323113,0.0851016549148104,-0.255425128109186,-0.166974414004614,1.61272666105479,1.06523531137287,0.48909501589608,-0.143772296441519,0.635558093258208,0.463917041022171,-0.114804663102346,-0.183361270123994,-0.145783041325259,-0.0690831352230203,-0.225775248033138,-0.638671952771851,0.101288021253234,-0.339846475529127,0.167170404418143,0.125894532368176,-0.00898309914322813,0.0147241691924927,2.69,"0"
+1,-1.35835406159823,-1.34016307473609,1.77320934263119,0.379779593034328,-0.503198133318193,1.80049938079263,0.791460956450422,0.247675786588991,-1.51465432260583,0.207642865216696,0.624501459424895,0.066083685268831,0.717292731410831,-0.165945922763554,2.34586494901581,-2.89008319444231,1.10996937869599,-0.121359313195888,-2.26185709530414,0.524979725224404,0.247998153469754,0.771679401917229,0.909412262347719,-0.689280956490685,-0.327641833735251,-0.139096571514147,-0.0553527940384261,-0.0597518405929204,378.66,"0"
+
+"Time",
+"V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10",
+"V11","V12","V13","V14","V15","V16","V17","V18","V19","V20",
+"V21","V22","V23","V24","V25","V26","V27","V28",
+"Amount","Class"
+"""
+
 df = pd.read_csv("D:/_git/vcs/_big_files/Scikit-learn_data/creditcard.csv")
 cc = df.head()
 print(cc)
@@ -1572,7 +1583,8 @@ show()
 
 # 模型訓練與預測
 
-X, y = df.drop(["Time", "Amount", "Class"], axis=1), df["Class"]
+X = df.drop(["Time", "Amount", "Class"], axis=1)
+y = df["Class"]
 
 # 分割資料
 X_train, X_test, y_train, y_test = train_test_split(X, y)
@@ -1582,8 +1594,8 @@ clf = LogisticRegression()
 
 clf.fit(X_train, y_train)  # 學習訓練.fit
 
-# 預測
-y_pred = clf.predict(X_test)
+y_pred = clf.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 # 準確率
 cc = accuracy_score(y_test, y_pred)
@@ -1759,7 +1771,8 @@ print(cc)
 sns.countplot(x="Class", data=df)
 show()
 
-X, y = df.drop(["Time", "Amount", "Class"], axis=1), df["Class"]
+X = df.drop(["Time", "Amount", "Class"], axis=1)
+y = df["Class"]
 
 # 分割資料
 X_train, X_test, y_train, y_test = train_test_split(X, y)
@@ -1769,8 +1782,8 @@ clf = LogisticRegression()
 
 clf.fit(X_train, y_train)  # 學習訓練.fit
 
-# 預測
-y_pred = clf.predict(X_test)
+y_pred = clf.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 # 準確率
 cc = accuracy_score(y_test, y_pred)
@@ -1832,8 +1845,8 @@ clf = LogisticRegression()
 
 clf.fit(X_train, y_train)  # 學習訓練.fit
 
-# 預測
-y_pred = clf.predict(X_test)
+y_pred = clf.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 # 準確率
 cc = accuracy_score(y_test, y_pred)
@@ -1874,6 +1887,7 @@ print(X)
 model = DBSCAN(eps=3, min_samples=2)
 
 model.fit(X)  # 學習訓練.fit
+
 print(model.labels_)
 
 X, y = make_moons(n_samples=200, noise=0.05)
@@ -1885,6 +1899,7 @@ show()
 db = DBSCAN(eps=0.2, min_samples=5, metric="euclidean")
 
 y_pred = db.fit_predict(X)
+print("預測結果 :\n", y_pred, sep="")
 
 plt.scatter(
     X[y_pred == 0, 0],
@@ -2192,7 +2207,7 @@ from sklearn.model_selection import train_test_split  # 資料分割 => 訓練�
 model = KNNBasic()
 
 # 訓練
-model.fit(trainset)
+model.fit(trainset)  # 學習訓練.fit
 
 # 模型評分
 
@@ -2207,8 +2222,11 @@ accuracy.rmse(predictions)
 # SVD
 
 model = SVD()
-model.fit(trainset)
+
+model.fit(trainset)  # 學習訓練.fit
+
 predictions = model.test(testset)
+
 accuracy.rmse(predictions)
 
 # RMSE: 0.9405
@@ -2424,8 +2442,10 @@ y = np.array([0] * X0.shape[0] + [1] * X1.shape[0])
 
 # LDA with scikit-learn
 lda = LDA()
-proj = lda.fit(X, y).transform(X)
-y_pred_lda = lda.predict(X)
+
+proj = lda.fit(X, y).transform(X)  # 學習訓練.fit
+
+y_pred_lda = lda.predict(X)  # 預測.predict
 
 errors = y_pred_lda != y
 print("Nb errors=%i, error rate=%.2f" % (errors.sum(), errors.sum() / len(y_pred_lda)))
@@ -2443,14 +2463,15 @@ plt.plot(x, logistic(x))
 plt.grid(True)
 plt.title("Logistic (sigmoid)")
 
-logreg = sklearn.linear_model.LogisticRegression().fit(X, y)
+logreg = sklearn.linear_model.LogisticRegression().fit(X, y)  # 學習訓練.fit
 
 # This class implements regularized logistic regression.
 # C is the Inverse of regularization strength.
 # Large value => no regularization.
 
-logreg.fit(X, y)
-y_pred_logreg = logreg.predict(X)
+logreg.fit(X, y)  # 學習訓練.fit
+
+y_pred_logreg = logreg.predict(X)  # 預測.predict
 
 errors = y_pred_logreg != y
 print(
@@ -2474,22 +2495,22 @@ X, y = datasets.make_classification(
     shuffle=False,
 )
 
-lr = sklearn.linear_model.LogisticRegression().fit(X, y)
+lr = sklearn.linear_model.LogisticRegression().fit(X, y)  # 學習訓練.fit
 
 l2 = sklearn.linear_model.LogisticRegression(penalty="l2", C=0.1).fit(
     X, y
-)  # lambda = 1 / C!
+)  # lambda = 1 / C!  # 學習訓練.fit
 
 # use solver 'saga' to handle L1 penalty
 l1 = sklearn.linear_model.LogisticRegression(penalty="l1", C=0.1, solver="saga").fit(
     X, y
-)  # lambda = 1 / C!
+)  # lambda = 1 / C!  # 學習訓練.fit
 
 l1l2 = sklearn.linear_model.LogisticRegression(
     penalty="elasticnet", C=0.1, l1_ratio=0.5, solver="saga"
 ).fit(
     X, y
-)  # lambda = 1 / C!
+)  # lambda = 1 / C!  # 學習訓練.fit
 
 df = pd.DataFrame(
     np.vstack((lr.coef_, l2.coef_, l1.coef_, l1l2.coef_)),
@@ -2506,8 +2527,10 @@ lrl2 = sklearn.linear_model.LogisticRegression(penalty="l2", C=0.1)
 # This class implements regularized logistic regression. C is the Inverse of regularization strength.
 # Large value => no regularization.
 
-lrl2.fit(X, y)
-y_pred_l2 = lrl2.predict(X)
+lrl2.fit(X, y)  # 學習訓練.fit
+
+y_pred_l2 = lrl2.predict(X)  # 預測.predict
+
 prob_pred_l2 = lrl2.predict_proba(X)
 
 print("Probas of 5 first samples for class 0 and class 1:")
@@ -2534,9 +2557,9 @@ lrl1 = sklearn.linear_model.LogisticRegression(
 # This class implements regularized logistic regression. C is the Inverse of regularization strength.
 # Large value => no regularization.
 
-lrl1.fit(X, y)
+lrl1.fit(X, y)  # 學習訓練.fit
 
-y_pred_lrl1 = lrl1.predict(X)
+y_pred_lrl1 = lrl1.predict(X)  # 預測.predict
 
 errors = y_pred_lrl1 != y
 print("Nb errors=%i, error rate=%.2f" % (errors.sum(), errors.sum() / len(y_pred_lrl1)))
@@ -2547,9 +2570,11 @@ print(lrl1.coef_)
 print("------------------------------")  # 30個
 
 svmlin = svm.LinearSVC(C=0.1)
+
 # Remark: by default LinearSVC uses squared_hinge as loss
-svmlin.fit(X, y)
-y_pred_svmlin = svmlin.predict(X)
+svmlin.fit(X, y)  # 學習訓練.fit
+
+y_pred_svmlin = svmlin.predict(X)  # 預測.predict
 
 errors = y_pred_svmlin != y
 print(
@@ -2563,8 +2588,9 @@ print("------------------------------")  # 30個
 svmlinl1 = svm.LinearSVC(penalty="l1", dual=False)
 # Remark: by default LinearSVC uses squared_hinge as loss
 
-svmlinl1.fit(X, y)
-y_pred_svmlinl1 = svmlinl1.predict(X)
+svmlinl1.fit(X, y)  # 學習訓練.fit
+
+y_pred_svmlinl1 = svmlinl1.predict(X)  # 預測.predict
 
 errors = y_pred_svmlinl1 != y
 print(
@@ -2580,7 +2606,8 @@ print("------------------------------")  # 30個
 enetlog = sklearn.linear_model.SGDClassifier(
     loss="log_loss", penalty="elasticnet", alpha=0.1, l1_ratio=0.5
 )
-enetlog.fit(X, y)
+
+enetlog.fit(X, y)  # 學習訓練.fit
 
 # Or saga solver:
 # enetloglike = sklearn.linear_model.LogisticRegression(penalty='elasticnet',
@@ -2589,7 +2616,8 @@ enetlog.fit(X, y)
 enethinge = sklearn.linear_model.SGDClassifier(
     loss="hinge", penalty="elasticnet", alpha=0.1, l1_ratio=0.5
 )
-enethinge.fit(X, y)
+
+enethinge.fit(X, y)  # 學習訓練.fit
 
 print("Hinge loss and logistic loss provide almost the same predictions.")
 print("Confusion matrix")
@@ -2618,8 +2646,11 @@ print(*["#samples of class %i = %i;" % (lev, np.sum(y == lev)) for lev in np.uni
 
 print("# No Reweighting balanced dataset")
 lr_inter = sklearn.linear_model.LogisticRegression(C=1)
-lr_inter.fit(X, y)
+
+lr_inter.fit(X, y)  # 學習訓練.fit
+
 p, r, f, s = precision_recall_fscore_support(y, lr_inter.predict(X))
+
 print("SPC: %0.3f; SEN: %0.3f" % tuple(r))
 print("# => The predictions are balanced in sensitivity and specificity\n")
 
@@ -2639,9 +2670,10 @@ print(
 print("# No Reweighting on imbalanced dataset")
 lr_inter = sklearn.linear_model.LogisticRegression(C=1)
 
-lr_inter.fit(Ximb, yimb)
+lr_inter.fit(Ximb, yimb)  # 學習訓練.fit
 
 p, r, f, s = precision_recall_fscore_support(yimb, lr_inter.predict(Ximb))
+
 print("SPC: %0.3f; SEN: %0.3f" % tuple(r))
 print("# => Sensitivity >> specificity\n")
 
@@ -2650,7 +2682,7 @@ lr_inter_reweight = sklearn.linear_model.LogisticRegression(
     C=1, class_weight="balanced"
 )
 
-lr_inter_reweight.fit(Ximb, yimb)
+lr_inter_reweight.fit(Ximb, yimb)  # 學習訓練.fit
 
 p, r, f, s = precision_recall_fscore_support(yimb, lr_inter_reweight.predict(Ximb))
 print("SPC: %0.3f; SEN: %0.3f" % tuple(r))
@@ -2677,21 +2709,28 @@ y = 100 * y + 1000  # bias and scale the output
 
 print("== Linear regression: scaling is not required ==")
 model = sklearn.linear_model.LinearRegression()
-model.fit(X, y)
+
+model.fit(X, y)  # 學習訓練.fit
+
 print("Coefficients:", model.coef_, model.intercept_)
 print("Test R2:%.2f" % cross_val_score(estimator=model, X=X, y=y, cv=5).mean())
 
 print("== Lasso without scaling ==")
 model = sklearn.linear_model.LassoCV(cv=3)
-model.fit(X, y)
+
+model.fit(X, y)  # 學習訓練.fit
+
 print("Coefficients:", model.coef_, model.intercept_)
 print("Test R2:%.2f" % cross_val_score(estimator=model, X=X, y=y, cv=5).mean())
 
 print("== Lasso with scaling ==")
 model = sklearn.linear_model.LassoCV(cv=3)
 scaler = preprocessing.StandardScaler()
+
 Xc = scaler.fit(X).transform(X)
-model.fit(Xc, y)
+
+model.fit(Xc, y)  # 學習訓練.fit
+
 print("Coefficients:", model.coef_, model.intercept_)
 print("Test R2:%.2f" % cross_val_score(estimator=model, X=Xc, y=y, cv=5).mean())
 
@@ -3061,7 +3100,9 @@ y = Xbeta + eps
 
 # Fit model on all data (!! risk of overfit)
 model = sklearn.linear_model.RidgeCV()
-model.fit(X, y)
+
+model.fit(X, y)  # 學習訓練.fit
+
 print("Coefficients on all data:")
 print(model.coef_)
 
@@ -3076,8 +3117,8 @@ coefs_perm[0, :] = model.coef_
 
 orig_all = np.arange(X.shape[0])
 for perm_i in range(1, nperm + 1):
-    model.fit(X, np.random.permutation(y))
-    y_pred = model.predict(X).ravel()
+    model.fit(X, np.random.permutation(y))  # 學習訓練.fit
+    y_pred = model.predict(X).ravel()  # 預測.predict
     scores_perm[perm_i, :] = r2_score(y, y_pred)
     coefs_perm[perm_i, :] = model.coef_
 
@@ -3151,8 +3192,8 @@ for boot_i in range(nboot):
     boot_te = np.setdiff1d(orig_all, boot_tr, assume_unique=False)
     Xtr, ytr = X[boot_tr, :], y[boot_tr]
     Xte, yte = X[boot_te, :], y[boot_te]
-    model.fit(Xtr, ytr)
-    y_pred = model.predict(Xte).ravel()
+    model.fit(Xtr, ytr)  # 學習訓練.fit
+    y_pred = model.predict(Xte).ravel()  # 預測.predict
     scores_boot[boot_i, :] = r2_score(yte, y_pred)
     coefs_boot[boot_i, :] = model.coef_
 
@@ -3801,7 +3842,7 @@ y = train["SalePrice"].values
 
 
 def johnson(y):
-    gamma, eta, epsilon, lbda = stats.johnsonsu.fit(y)
+    gamma, eta, epsilon, lbda = stats.johnsonsu.fit(y)  # 學習訓練.fit
     yt = gamma + eta * np.arcsinh((y - epsilon) / lbda)
     return yt, gamma, eta, epsilon, lbda
 
@@ -3900,6 +3941,7 @@ lasso.fit(X, np.log(Y))  # 學習訓練.fit
 
 #反log1p變換
 Ypred = np.exp(lasso.predict(X))  # 預測.predict
+
 print(error(Y, Ypred))
 
 """
@@ -3932,7 +3974,7 @@ for i in range(1000):
     if i % 50 == 0:
         print(evaluator.compute_accuracy(test_data.xs, test_data.ys))
 # print(test_data.ys.iloc[:,0].value_counts())
-print(network.predict(test_data.xs.iloc[20:30, :]))
+print(network.predict(test_data.xs.iloc[20:30, :]))  # 預測.predict
 print(test_data.ys.iloc[20:30, :])
 """
 print("------------------------------------------------------------")  # 60個
@@ -4181,3 +4223,6 @@ print(
     "Silhouette Coefficient: %0.3f"
     % metrics.silhouette_score(X, kmean.labels_, sample_size=1000)
 )
+
+
+print("預測結果 :\n", y_pred, sep="")

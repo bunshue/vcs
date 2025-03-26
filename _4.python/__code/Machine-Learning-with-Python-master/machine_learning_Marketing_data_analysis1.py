@@ -541,11 +541,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 X_train = StandardScaler().fit_transform(X_train)
 X_test = StandardScaler().fit_transform(X_test)
 
-from tqdm import tqdm
 
-for n in tqdm(no_neurons):
+for n in no_neurons:
     print("n :", n)
-    for a in tqdm(alpha):
+    for a in alpha:
         print("a :", a)
         for l in learning_rate:
             print("l :", l)

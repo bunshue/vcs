@@ -529,7 +529,6 @@ print("------------------------------------------------------------")  # 60個
 # 高斯混合模型(Gaussian Mixture Models)
 
 from numpy import random
-from tqdm.notebook import tqdm
 
 # MNIST Dataset
 
@@ -568,7 +567,7 @@ def _binary_search_perplexity(neighbors, neighbors_index, perplexity, verbose):
     beta_sum = 0.0
     desired_entropy = math.log(perplexity)
     P = np.zeros((n_samples, n_samples), dtype=np.float64)
-    for i in tqdm(range(n_samples)):
+    for i in range(n_samples):
         beta_min = -np.Inf
         beta_max = np.Inf
         beta = 1.0
@@ -622,7 +621,7 @@ def _kl_divergence(X_embedded, P, N, n_components):
 
 
 def gradient_descent(Y, P, gradient, max_iter, learning_rate, momentum):
-    for t in tqdm(range(max_iter)):
+    for t in range(max_iter):
         if t < 1:
             pre_pre_Y = Y.copy()
             Y = pre_pre_Y - learning_rate * gradient
@@ -702,7 +701,7 @@ for i in range(k):
 alpha = np.ones(k) / k
 gaussian_tmp = np.zeros((k, N))
 max_iter = 100
-for itr in tqdm(range(max_iter)):
+for itr in range(max_iter):
     for i in range(k):
         const = 1 / np.sqrt(((2 * np.pi) ** d) * np.linalg.det(var[i]))
         var_inv = np.linalg.inv(var[i])

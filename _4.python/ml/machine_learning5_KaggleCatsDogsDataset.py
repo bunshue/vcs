@@ -33,13 +33,9 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 
-
 """ 將圖片分成兩大群
 img_directory = 'D:/_git/vcs/_big_files/kagglecatsanddogs_5340/PetImages/'
 validation_split = 0.1
-
-import os
-import random
 
 subclasses = os.listdir(img_directory)
 
@@ -59,7 +55,6 @@ print("------------------------------------------------------------")  # 60個
 # 要先對數據集中的圖片進行處理，可能需要進行的任務有圖像尺寸統一、顏色處理等
 
 import cv2
-from tqdm import tqdm
 
 # 數據集的路徑
 DATADIR = "D:/_git/vcs/_big_files/kagglecatsanddogs_5340_1000/PetImages/"
@@ -109,7 +104,7 @@ def create_training_data():
         path = os.path.join(DATADIR, category)
         class_num = CATEGORIES.index(category)  # 得到分類，其中 0=dog 1=cat
 
-        for img in tqdm(os.listdir(path)):
+        for img in os.listdir(path):
             try:
                 img_array = cv2.imread(os.path.join(path, img), cv2.IMREAD_GRAYSCALE)
                 new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE))  # 大小轉換

@@ -230,9 +230,8 @@ l1=['Polyfit', 'Stats.lingress','Optimize.curve_fit', 'linalg.lstsq',
  'statsmodels.OLS', 'Moore-Penrose matrix inverse', 'Simple matrix inverse', 'sklearn.linear_model']
 time_dict = {key:[] for key in l1}
 
-from tqdm import tqdm
 
-for i in tqdm(range(len(n_data))):
+for i in range(len(n_data)):
     t=np.linspace(-10,10,n_data[i])
     #parameters
     a=3.25; b=-6.5

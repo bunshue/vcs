@@ -46,8 +46,10 @@ for x in find_dicom_files(directory=foldername, pattern="*.dcm", directory_exclu
         print("新增資料")
         patients.append(Patient(dicom_dataset = f))
             
-print("Found", len(patients), "patients")
+print("共找到 :", len(patients), " 份病歷資料")
+
 for x in patients:
+    print(x)
     print(repr(x))
-    print("\n")
+    print()
 

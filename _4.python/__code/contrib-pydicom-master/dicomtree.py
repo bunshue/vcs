@@ -1,17 +1,3 @@
-# Copyright pydicom authors 2019. See LICENSE file for details
-"""
-sudo apt install tix-dev
-sudo pip install -U pydicom
-python3 dicomtree.py file.dcm
-Or in file browser, right click on file, open with custom command:
-python3 dicomtree.py
-=========================================
-Show a dicom file using hierarchical tree
-=========================================
-Show a dicom file using a hierarchical tree in a graphical window.
-"""
-
-
 import tkinter.tix as tkinter_tix
 
 print(__doc__)
@@ -75,8 +61,9 @@ if __name__ == '__main__':
     root = tkinter_tix.Tk()
     root.title("DICOM tree viewer - " + filename)
     root.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(1200, 900, 0, 0))
-    print("{0:d}x{1:d}+{2:d}+{3:d}".format(1200, 900, 0, 0))
+    # print("{0:d}x{1:d}+{2:d}+{3:d}".format(1200, 900, 0, 0))
 
     RunTree(root, filename)
+    
     root.mainloop()
 

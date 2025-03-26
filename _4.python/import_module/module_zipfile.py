@@ -17,7 +17,7 @@ import zipfile
 zip_filename = "C:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip"
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("判斷是否為一個壓縮檔")
 
 zip_filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_zip/PIL.zip"
@@ -371,8 +371,7 @@ print("------------------------------------------------------------")  # 60個
 tmptmp
 
     def test_write_default_name():
-        """Check that calling ZipFile.write without arcname specified
-        produces the expected result."""
+        # Check that calling ZipFile.write without arcname specified produces the expected result.
         with zipfile.ZipFile(zip_filename, 'w') as zipfp:   #開啟壓縮檔
             zipfp.write('test10_new09.py')
             with open('test10_new09.py', "rb") as f:
@@ -399,21 +398,32 @@ files.extractall()
 
 files.close()
 """
-
-'''
 print("------------------------------------------------------------")  # 60個
 
-import zipfile
+print("解壓縮 zip 檔")
 
-with zipfile.ZipFile("data/kagglecatsanddogs_3367a.zip", "r") as zip:
+zip_filename = "data/kagglecatsanddogs_3367a.zip"
+
+with zipfile.ZipFile(zip_filename, "r") as zip:
     for i in zip.namelist():
-        # print(i)
+        print("取得檔名 :", i)
         if i.startswith("kagglecatsanddogs_3367a/PetImages"):
-            print(i)
+            print("解壓縮檔案 :", i)
             zip.extract(i)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+import gzip
+import pydicom
+
+print("解壓縮 gz 檔")
+zip_filename = "data/zipMR.gz"
+
+with gzip.open(zip_filename, "rb") as f_in:
+    print(f_in)
+    ds = pydicom.dcmread(f_in, force=True)
+    print(ds)
 
 print("------------------------------------------------------------")  # 60個
 

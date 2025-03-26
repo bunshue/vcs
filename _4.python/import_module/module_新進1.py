@@ -201,6 +201,54 @@ for char in tlist:
     tlist.set_description("處理串列元素……")
     sleep(0.5)
 """
+
+# tqdm 顯示迴圈或任務的進度條
+
+
+from tqdm import tqdm
+
+n_samples = [10, 20, 50, 100, 200, 500, 1000, 2000, 3000, 5000, 7500, 10000]
+
+for i in tqdm(n_samples):
+    time.sleep(0.5)  # 模擬耗時任務
+    print()
+    #print(i)
+
+print("------------------------------")  # 30個
+
+from tqdm import tqdm
+
+for i in tqdm(range(10)):
+    time.sleep(0.5)  # 模擬耗時任務
+    print()
+
+print("------------------------------")  # 30個
+
+# 進度條描述:可以添加一段描述，說明正在處理的內容
+for i in tqdm(range(10), desc="處理進度 :"):
+    time.sleep(0.5)
+    print()
+
+print("------------------------------")  # 30個
+
+# 處理數據集合:可以使用 tqdm 包裝任何可迭代對象
+data = [1, 2, 3, 4, 5]
+for item in tqdm(data, desc="讀取進度 :"):
+    time.sleep(0.5)
+    print()
+
+print("------------------------------")  # 30個
+
+# 手動更新進度:適合用於非迴圈任務
+from tqdm import tqdm
+
+with tqdm(total=100) as pbar:
+    for i in range(10):
+        time.sleep(0.5)
+        pbar.update(10)  # 每次更新進度條 10%
+        print()
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # dist：經緯度距離

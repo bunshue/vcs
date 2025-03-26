@@ -1266,7 +1266,6 @@ print("------------------------------------------------------------")  # 60個
 
 # Iteration with Pandas
 
-from tqdm import tqdm
 from time import time
 
 np.random.seed(101)

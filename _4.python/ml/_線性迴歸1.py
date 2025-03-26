@@ -2259,9 +2259,8 @@ l1 = [
 ]
 time_dict = {key: [] for key in l1}
 
-from tqdm import tqdm
 
-for i in tqdm(range(len(n_data))):
+for i in range(len(n_data)):
     t = np.linspace(-10, 10, n_data[i])
     # parameters
     a = 3.25

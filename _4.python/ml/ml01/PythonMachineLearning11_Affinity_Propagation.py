@@ -49,7 +49,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.cluster import AffinityPropagation
 from sklearn import metrics
 from sklearn.datasets import make_blobs  # 集群資料集
-
+'''
 # Generate sample data
 centers = [[1, 1], [-1, -1], [1, -1]]
 X, labels_true = make_blobs(
@@ -108,10 +108,8 @@ print("New point ({},{}) will belong to cluster {}".format(x_new[0], x_new[1], x
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # Time complexity and model quality as the data size grows
-
-from tqdm import tqdm
 
 n_samples = [10, 20, 50, 100, 200, 500, 1000, 2000, 3000, 5000, 7500, 10000]
 centers = [[1, 1], [-1, -1], [1, -1]]
@@ -119,7 +117,7 @@ t_aff = []
 homo_aff = []
 complete_aff = []
 
-for i in tqdm(n_samples):
+for i in n_samples:
     X, labels_true = make_blobs(
         n_samples=i, centers=centers, cluster_std=0.5, random_state=0
     )
@@ -140,6 +138,8 @@ plt.xlabel("Number of samples", fontsize=15)
 plt.yticks(fontsize=15)
 plt.ylabel("Time taken for model (sec)", fontsize=15)
 plt.show()
+
+sys.exit()
 
 plt.figure(figsize=(8, 5))
 plt.title("Homogeneity score with data set size\n", fontsize=20)

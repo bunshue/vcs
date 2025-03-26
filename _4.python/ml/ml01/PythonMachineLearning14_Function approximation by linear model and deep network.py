@@ -152,8 +152,6 @@ poly_degree = []
 rmse = []
 t_linear = []
 
-import time
-
 # Iterate over increasing degree of polynomial complexity
 for degree in range(degree_min, degree_max + 1):
     t1 = time.time()
@@ -281,9 +279,6 @@ optimizer = tf.compat.v1.train.GradientDescentOptimizer(
 
 # TensorFlow Session for training and loss estimation
 
-from tqdm import tqdm
-import time
-
 # Initializing the variables
 init = tf.global_variables_initializer()
 
@@ -299,7 +294,7 @@ t1 = time.time()
 with tf.Session() as sess:
     sess.run(init)
     # Loop over epochs
-    for epoch in tqdm(range(training_epochs)):
+    for epoch in range(training_epochs):
         # Run optimization process (backprop) and cost function (to get loss value)
         _, l = sess.run([optimizer, cost], feed_dict={x: X_train, y: y_train})
         loss_epoch.append(l)  # Save the loss for every epoch
@@ -434,9 +429,6 @@ optimizer = tf.compat.v1.train.GradientDescentOptimizer(
 
 # TensorFlow Session for training and loss estimation
 
-from tqdm import tqdm
-import time
-
 # Initializing the variables
 init = tf.global_variables_initializer()
 
@@ -452,7 +444,7 @@ t1 = time.time()
 with tf.Session() as sess:
     sess.run(init)
     # Loop over epochs
-    for epoch in tqdm(range(training_epochs)):
+    for epoch in range(training_epochs):
         # Run optimization process (backprop) and cost function (to get loss value)
         _, l = sess.run([optimizer, cost], feed_dict={x: X_train, y: y_train})
         loss_epoch.append(l)  # Save the loss for every epoch
