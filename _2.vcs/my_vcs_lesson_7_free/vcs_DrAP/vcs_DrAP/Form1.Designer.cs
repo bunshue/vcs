@@ -79,20 +79,6 @@
             this.bt_save_file_data = new System.Windows.Forms.Button();
             this.bt_clear3 = new System.Windows.Forms.Button();
             this.cb_option2 = new System.Windows.Forms.CheckBox();
-            this.bt_edit_python_files = new System.Windows.Forms.Button();
-            this.bt_search_pattern_opengl = new System.Windows.Forms.Button();
-            this.bt_open_dir2 = new System.Windows.Forms.Button();
-            this.bt_search_pattern_cuda = new System.Windows.Forms.Button();
-            this.bt_copy_rtb_data = new System.Windows.Forms.Button();
-            this.bt_setup = new System.Windows.Forms.Button();
-            this.bt_search_pattern_matlab = new System.Windows.Forms.Button();
-            this.bt_save_rtb_data = new System.Windows.Forms.Button();
-            this.bt_search_pattern_python = new System.Windows.Forms.Button();
-            this.bt_search_pattern_vcs = new System.Windows.Forms.Button();
-            this.bt_delete_file = new System.Windows.Forms.Button();
-            this.bt_start_files = new System.Windows.Forms.Button();
-            this.bt_open_dir = new System.Windows.Forms.Button();
-            this.bt_save_data = new System.Windows.Forms.Button();
             this.cb_option3 = new System.Windows.Forms.CheckBox();
             this.groupbox_python = new System.Windows.Forms.GroupBox();
             this.rb_python_search3 = new System.Windows.Forms.RadioButton();
@@ -100,8 +86,23 @@
             this.rb_python_search1 = new System.Windows.Forms.RadioButton();
             this.rb_python_search0 = new System.Windows.Forms.RadioButton();
             this.groupbox_result = new System.Windows.Forms.GroupBox();
-            this.lb_search_result1 = new System.Windows.Forms.Label();
             this.lb_search_result2 = new System.Windows.Forms.Label();
+            this.lb_search_result1 = new System.Windows.Forms.Label();
+            this.bt_compare = new System.Windows.Forms.Button();
+            this.bt_edit_python_files = new System.Windows.Forms.Button();
+            this.bt_search_pattern_python = new System.Windows.Forms.Button();
+            this.bt_search_pattern_opengl = new System.Windows.Forms.Button();
+            this.bt_open_dir2 = new System.Windows.Forms.Button();
+            this.bt_search_pattern_cuda = new System.Windows.Forms.Button();
+            this.bt_copy_rtb_data = new System.Windows.Forms.Button();
+            this.bt_setup = new System.Windows.Forms.Button();
+            this.bt_search_pattern_matlab = new System.Windows.Forms.Button();
+            this.bt_save_rtb_data = new System.Windows.Forms.Button();
+            this.bt_search_pattern_vcs = new System.Windows.Forms.Button();
+            this.bt_delete_file = new System.Windows.Forms.Button();
+            this.bt_start_files = new System.Windows.Forms.Button();
+            this.bt_open_dir = new System.Windows.Forms.Button();
+            this.bt_save_data = new System.Windows.Forms.Button();
             this.groupBox_video.SuspendLayout();
             this.groupBox_file.SuspendLayout();
             this.groupbox_python.SuspendLayout();
@@ -377,7 +378,7 @@
             this.bt_test1.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_test1.Location = new System.Drawing.Point(1194, 71);
             this.bt_test1.Name = "bt_test1";
-            this.bt_test1.Size = new System.Drawing.Size(38, 23);
+            this.bt_test1.Size = new System.Drawing.Size(30, 25);
             this.bt_test1.TabIndex = 35;
             this.bt_test1.Text = "T1";
             this.bt_test1.UseVisualStyleBackColor = true;
@@ -629,7 +630,7 @@
             this.bt_test2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_test2.Location = new System.Drawing.Point(1235, 71);
             this.bt_test2.Name = "bt_test2";
-            this.bt_test2.Size = new System.Drawing.Size(38, 23);
+            this.bt_test2.Size = new System.Drawing.Size(30, 25);
             this.bt_test2.TabIndex = 55;
             this.bt_test2.Text = "T2";
             this.bt_test2.UseVisualStyleBackColor = true;
@@ -669,6 +670,119 @@
             this.cb_option2.UseVisualStyleBackColor = true;
             this.cb_option2.CheckedChanged += new System.EventHandler(this.cb_option2_CheckedChanged);
             // 
+            // cb_option3
+            // 
+            this.cb_option3.AutoSize = true;
+            this.cb_option3.Location = new System.Drawing.Point(1271, 75);
+            this.cb_option3.Name = "cb_option3";
+            this.cb_option3.Size = new System.Drawing.Size(72, 16);
+            this.cb_option3.TabIndex = 63;
+            this.cb_option3.Text = "只找範例";
+            this.cb_option3.UseVisualStyleBackColor = true;
+            // 
+            // groupbox_python
+            // 
+            this.groupbox_python.Controls.Add(this.rb_python_search3);
+            this.groupbox_python.Controls.Add(this.rb_python_search2);
+            this.groupbox_python.Controls.Add(this.bt_edit_python_files);
+            this.groupbox_python.Controls.Add(this.rb_python_search1);
+            this.groupbox_python.Controls.Add(this.rb_python_search0);
+            this.groupbox_python.Controls.Add(this.bt_search_pattern_python);
+            this.groupbox_python.Location = new System.Drawing.Point(239, 113);
+            this.groupbox_python.Name = "groupbox_python";
+            this.groupbox_python.Size = new System.Drawing.Size(173, 132);
+            this.groupbox_python.TabIndex = 64;
+            this.groupbox_python.TabStop = false;
+            this.groupbox_python.Text = "Python";
+            // 
+            // rb_python_search3
+            // 
+            this.rb_python_search3.AutoSize = true;
+            this.rb_python_search3.Location = new System.Drawing.Point(19, 97);
+            this.rb_python_search3.Name = "rb_python_search3";
+            this.rb_python_search3.Size = new System.Drawing.Size(70, 16);
+            this.rb_python_search3.TabIndex = 3;
+            this.rb_python_search3.Text = "python all";
+            this.rb_python_search3.UseVisualStyleBackColor = true;
+            // 
+            // rb_python_search2
+            // 
+            this.rb_python_search2.AutoSize = true;
+            this.rb_python_search2.Location = new System.Drawing.Point(19, 75);
+            this.rb_python_search2.Name = "rb_python_search2";
+            this.rb_python_search2.Size = new System.Drawing.Size(94, 16);
+            this.rb_python_search2.TabIndex = 2;
+            this.rb_python_search2.Text = "python bookcd";
+            this.rb_python_search2.UseVisualStyleBackColor = true;
+            // 
+            // rb_python_search1
+            // 
+            this.rb_python_search1.AutoSize = true;
+            this.rb_python_search1.Checked = true;
+            this.rb_python_search1.Location = new System.Drawing.Point(19, 53);
+            this.rb_python_search1.Name = "rb_python_search1";
+            this.rb_python_search1.Size = new System.Drawing.Size(80, 16);
+            this.rb_python_search1.TabIndex = 1;
+            this.rb_python_search1.TabStop = true;
+            this.rb_python_search1.Text = "python only";
+            this.rb_python_search1.UseVisualStyleBackColor = true;
+            // 
+            // rb_python_search0
+            // 
+            this.rb_python_search0.AutoSize = true;
+            this.rb_python_search0.Location = new System.Drawing.Point(19, 31);
+            this.rb_python_search0.Name = "rb_python_search0";
+            this.rb_python_search0.Size = new System.Drawing.Size(60, 16);
+            this.rb_python_search0.TabIndex = 0;
+            this.rb_python_search0.Text = "___new";
+            this.rb_python_search0.UseVisualStyleBackColor = true;
+            // 
+            // groupbox_result
+            // 
+            this.groupbox_result.Controls.Add(this.lb_search_result2);
+            this.groupbox_result.Controls.Add(this.lb_search_result1);
+            this.groupbox_result.Location = new System.Drawing.Point(439, 115);
+            this.groupbox_result.Name = "groupbox_result";
+            this.groupbox_result.Size = new System.Drawing.Size(173, 132);
+            this.groupbox_result.TabIndex = 65;
+            this.groupbox_result.TabStop = false;
+            this.groupbox_result.Text = "搜尋結果";
+            // 
+            // lb_search_result2
+            // 
+            this.lb_search_result2.AutoSize = true;
+            this.lb_search_result2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_search_result2.ForeColor = System.Drawing.Color.Red;
+            this.lb_search_result2.Location = new System.Drawing.Point(18, 65);
+            this.lb_search_result2.Name = "lb_search_result2";
+            this.lb_search_result2.Size = new System.Drawing.Size(78, 24);
+            this.lb_search_result2.TabIndex = 67;
+            this.lb_search_result2.Text = "result2";
+            // 
+            // lb_search_result1
+            // 
+            this.lb_search_result1.AutoSize = true;
+            this.lb_search_result1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_search_result1.ForeColor = System.Drawing.Color.Red;
+            this.lb_search_result1.Location = new System.Drawing.Point(18, 29);
+            this.lb_search_result1.Name = "lb_search_result1";
+            this.lb_search_result1.Size = new System.Drawing.Size(78, 24);
+            this.lb_search_result1.TabIndex = 66;
+            this.lb_search_result1.Text = "result1";
+            // 
+            // bt_compare
+            // 
+            this.bt_compare.BackColor = System.Drawing.Color.White;
+            this.bt_compare.BackgroundImage = global::vcs_DrAP.Properties.Resources.winmerge;
+            this.bt_compare.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_compare.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_compare.Location = new System.Drawing.Point(1517, 63);
+            this.bt_compare.Name = "bt_compare";
+            this.bt_compare.Size = new System.Drawing.Size(50, 50);
+            this.bt_compare.TabIndex = 66;
+            this.bt_compare.UseVisualStyleBackColor = false;
+            this.bt_compare.Click += new System.EventHandler(this.bt_compare_Click);
+            // 
             // bt_edit_python_files
             // 
             this.bt_edit_python_files.BackgroundImage = global::vcs_DrAP.Properties.Resources.python2;
@@ -680,6 +794,18 @@
             this.bt_edit_python_files.TabIndex = 62;
             this.bt_edit_python_files.UseVisualStyleBackColor = true;
             this.bt_edit_python_files.Click += new System.EventHandler(this.bt_edit_python_files_Click);
+            // 
+            // bt_search_pattern_python
+            // 
+            this.bt_search_pattern_python.BackgroundImage = global::vcs_DrAP.Properties.Resources.python;
+            this.bt_search_pattern_python.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_search_pattern_python.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_search_pattern_python.Location = new System.Drawing.Point(105, 14);
+            this.bt_search_pattern_python.Name = "bt_search_pattern_python";
+            this.bt_search_pattern_python.Size = new System.Drawing.Size(50, 50);
+            this.bt_search_pattern_python.TabIndex = 39;
+            this.bt_search_pattern_python.UseVisualStyleBackColor = true;
+            this.bt_search_pattern_python.Click += new System.EventHandler(this.bt_search_pattern_python_Click);
             // 
             // bt_search_pattern_opengl
             // 
@@ -767,18 +893,6 @@
             this.bt_save_rtb_data.UseVisualStyleBackColor = true;
             this.bt_save_rtb_data.Click += new System.EventHandler(this.bt_save_rtb_data_Click);
             // 
-            // bt_search_pattern_python
-            // 
-            this.bt_search_pattern_python.BackgroundImage = global::vcs_DrAP.Properties.Resources.python;
-            this.bt_search_pattern_python.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_search_pattern_python.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_search_pattern_python.Location = new System.Drawing.Point(105, 14);
-            this.bt_search_pattern_python.Name = "bt_search_pattern_python";
-            this.bt_search_pattern_python.Size = new System.Drawing.Size(50, 50);
-            this.bt_search_pattern_python.TabIndex = 39;
-            this.bt_search_pattern_python.UseVisualStyleBackColor = true;
-            this.bt_search_pattern_python.Click += new System.EventHandler(this.bt_search_pattern_python_Click);
-            // 
             // bt_search_pattern_vcs
             // 
             this.bt_search_pattern_vcs.BackgroundImage = global::vcs_DrAP.Properties.Resources.vcs;
@@ -839,111 +953,12 @@
             this.bt_save_data.UseVisualStyleBackColor = true;
             this.bt_save_data.Click += new System.EventHandler(this.bt_save_data_Click);
             // 
-            // cb_option3
-            // 
-            this.cb_option3.AutoSize = true;
-            this.cb_option3.Location = new System.Drawing.Point(1271, 75);
-            this.cb_option3.Name = "cb_option3";
-            this.cb_option3.Size = new System.Drawing.Size(72, 16);
-            this.cb_option3.TabIndex = 63;
-            this.cb_option3.Text = "只找範例";
-            this.cb_option3.UseVisualStyleBackColor = true;
-            // 
-            // groupbox_python
-            // 
-            this.groupbox_python.Controls.Add(this.rb_python_search3);
-            this.groupbox_python.Controls.Add(this.rb_python_search2);
-            this.groupbox_python.Controls.Add(this.bt_edit_python_files);
-            this.groupbox_python.Controls.Add(this.rb_python_search1);
-            this.groupbox_python.Controls.Add(this.rb_python_search0);
-            this.groupbox_python.Controls.Add(this.bt_search_pattern_python);
-            this.groupbox_python.Location = new System.Drawing.Point(239, 113);
-            this.groupbox_python.Name = "groupbox_python";
-            this.groupbox_python.Size = new System.Drawing.Size(173, 132);
-            this.groupbox_python.TabIndex = 64;
-            this.groupbox_python.TabStop = false;
-            this.groupbox_python.Text = "Python";
-            // 
-            // rb_python_search3
-            // 
-            this.rb_python_search3.AutoSize = true;
-            this.rb_python_search3.Location = new System.Drawing.Point(19, 97);
-            this.rb_python_search3.Name = "rb_python_search3";
-            this.rb_python_search3.Size = new System.Drawing.Size(70, 16);
-            this.rb_python_search3.TabIndex = 3;
-            this.rb_python_search3.Text = "python all";
-            this.rb_python_search3.UseVisualStyleBackColor = true;
-            // 
-            // rb_python_search2
-            // 
-            this.rb_python_search2.AutoSize = true;
-            this.rb_python_search2.Location = new System.Drawing.Point(19, 75);
-            this.rb_python_search2.Name = "rb_python_search2";
-            this.rb_python_search2.Size = new System.Drawing.Size(94, 16);
-            this.rb_python_search2.TabIndex = 2;
-            this.rb_python_search2.Text = "python bookcd";
-            this.rb_python_search2.UseVisualStyleBackColor = true;
-            // 
-            // rb_python_search1
-            // 
-            this.rb_python_search1.AutoSize = true;
-            this.rb_python_search1.Checked = true;
-            this.rb_python_search1.Location = new System.Drawing.Point(19, 53);
-            this.rb_python_search1.Name = "rb_python_search1";
-            this.rb_python_search1.Size = new System.Drawing.Size(80, 16);
-            this.rb_python_search1.TabIndex = 1;
-            this.rb_python_search1.TabStop = true;
-            this.rb_python_search1.Text = "python only";
-            this.rb_python_search1.UseVisualStyleBackColor = true;
-            // 
-            // rb_python_search0
-            // 
-            this.rb_python_search0.AutoSize = true;
-            this.rb_python_search0.Location = new System.Drawing.Point(19, 31);
-            this.rb_python_search0.Name = "rb_python_search0";
-            this.rb_python_search0.Size = new System.Drawing.Size(60, 16);
-            this.rb_python_search0.TabIndex = 0;
-            this.rb_python_search0.Text = "___new";
-            this.rb_python_search0.UseVisualStyleBackColor = true;
-            // 
-            // groupbox_result
-            // 
-            this.groupbox_result.Controls.Add(this.lb_search_result2);
-            this.groupbox_result.Controls.Add(this.lb_search_result1);
-            this.groupbox_result.Location = new System.Drawing.Point(439, 115);
-            this.groupbox_result.Name = "groupbox_result";
-            this.groupbox_result.Size = new System.Drawing.Size(173, 132);
-            this.groupbox_result.TabIndex = 65;
-            this.groupbox_result.TabStop = false;
-            this.groupbox_result.Text = "搜尋結果";
-            // 
-            // lb_search_result1
-            // 
-            this.lb_search_result1.AutoSize = true;
-            this.lb_search_result1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_search_result1.ForeColor = System.Drawing.Color.Red;
-            this.lb_search_result1.Location = new System.Drawing.Point(18, 29);
-            this.lb_search_result1.Name = "lb_search_result1";
-            this.lb_search_result1.Size = new System.Drawing.Size(78, 24);
-            this.lb_search_result1.TabIndex = 66;
-            this.lb_search_result1.Text = "result1";
-            // 
-            // lb_search_result2
-            // 
-            this.lb_search_result2.AutoSize = true;
-            this.lb_search_result2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_search_result2.ForeColor = System.Drawing.Color.Red;
-            this.lb_search_result2.Location = new System.Drawing.Point(18, 65);
-            this.lb_search_result2.Name = "lb_search_result2";
-            this.lb_search_result2.Size = new System.Drawing.Size(78, 24);
-            this.lb_search_result2.TabIndex = 67;
-            this.lb_search_result2.Text = "result2";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1886, 1008);
+            this.Controls.Add(this.bt_compare);
             this.Controls.Add(this.groupbox_result);
             this.Controls.Add(this.groupbox_python);
             this.Controls.Add(this.cb_option3);
@@ -1091,6 +1106,7 @@
         private System.Windows.Forms.GroupBox groupbox_result;
         private System.Windows.Forms.Label lb_search_result2;
         private System.Windows.Forms.Label lb_search_result1;
+        private System.Windows.Forms.Button bt_compare;
     }
 }
 

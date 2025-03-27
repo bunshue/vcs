@@ -36,7 +36,9 @@ from matplotlib.colors import ListedColormap
 from sklearn import tree
 
 import warnings
+
 warnings.filterwarnings("ignore")
+
 
 def show():
     plt.show()
@@ -48,37 +50,46 @@ print("------------------------------------------------------------")  # 60個
 
 # OLS 迴歸
 
-import statsmodels.api as sm     #回歸模型套件
+import statsmodels.api as sm  # 回歸模型套件
 
-df0 = pd.read_csv("data/TaipeiAllBus0105.csv")   #輸入資料
+df0 = pd.read_csv("data/TaipeiAllBus0105.csv")  # 輸入資料
 print(df0)
 
 
-df0_X = df0.drop("volumn", axis=1)           #將作為y的變數volunm刪去，並另存為x
-df0_X1 = df0_X.drop("transfer01", axis=1)    #之後要做相關係數，而因為transfer01變數為虛擬變數，故不須納入做相關係數，故刪除
+df0_X = df0.drop("volumn", axis=1)  # 將作為y的變數volunm刪去，並另存為x
+df0_X1 = df0_X.drop(
+    "transfer01", axis=1
+)  # 之後要做相關係數，而因為transfer01變數為虛擬變數，故不須納入做相關係數，故刪除
 
-df0_y = df0[["volumn"]]      #製作變數y
+df0_y = df0[["volumn"]]  # 製作變數y
 
-#4. 相關係數檢驗。
+# 4. 相關係數檢驗。
 
-rDf0 = df0_X1.corr()  #查看數據間的相關係數
+rDf0 = df0_X1.corr()  # 查看數據間的相關係數
 print(rDf0)
 
 
-#%matplotlib inline
+# %matplotlib inline
 sns.set(font_scale=1.5)
 
-sns.set_context({"figure.figsize":(8,8)})
-sns.heatmap(data = rDf0, square = True, cmap="RdBu_r", annot = True)
+sns.set_context({"figure.figsize": (8, 8)})
+sns.heatmap(data=rDf0, square=True, cmap="RdBu_r", annot=True)
 
 show()
 
-sns.pairplot(df0, x_vars=["People","MRTpax", "shift", "kilometer"], y_vars='volumn', size=7, aspect=0.8, kind='reg')  
+sns.pairplot(
+    df0,
+    x_vars=["People", "MRTpax", "shift", "kilometer"],
+    y_vars="volumn",
+    size=7,
+    aspect=0.8,
+    kind="reg",
+)
 show()
 
-df0_X = sm.add_constant(df0_X)   #增加模型的常數，使更為符合回歸模型
+df0_X = sm.add_constant(df0_X)  # 增加模型的常數，使更為符合回歸模型
 
-model0 = sm.OLS(df0_y, df0_X)    #OLS回歸
+model0 = sm.OLS(df0_y, df0_X)  # OLS回歸
 results0 = model0.fit()
 
 print(results0.summary())
@@ -670,6 +681,7 @@ def get_features(MODEL, width, height, lambda_func=None):
         h.create_dataset("test", data=test)
         h.create_dataset("label", data=train_generator.classes)
     """
+
 
 """ some NG
 get_features(ResNet50, 224, 224)

@@ -42,7 +42,6 @@ def show():
     pass
 
 
-
 from math import sin, cos, pi, exp
 
 
@@ -257,7 +256,7 @@ device_name = tf.test.gpu_device_name()
 
 print("device_name :", device_name)
 
-print('無 GPU 跳過')
+print("無 GPU 跳過")
 """
 if device_name != "/device:GPU:0":
     raise SystemError("無 GPU")
@@ -1134,7 +1133,7 @@ X, Y = get_dataset(100, 0.25)
 
 draw_net(2, 1, [4], w=10)
 
-print('最後一次出現 draw_net(')
+print("最後一次出現 draw_net(")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

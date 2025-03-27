@@ -30,6 +30,7 @@ namespace vcs_DrAP
             lb_setup3.Text = "文字編輯程式";
             lb_setup4.Text = "預設搜尋路徑";
             lb_setup5.Text = "Python編輯路徑";
+            lb_setup6.Text = "WinMerge程式路徑";
 
             tb_setup0.Text = Properties.Settings.Default.video_player_path;
             tb_setup1.Text = Properties.Settings.Default.audio_player_path;
@@ -37,6 +38,7 @@ namespace vcs_DrAP
             tb_setup3.Text = Properties.Settings.Default.text_editor_path;
             tb_setup4.Text = Properties.Settings.Default.search_path;
             tb_setup5.Text = Properties.Settings.Default.python_editor_path;
+            tb_setup6.Text = Properties.Settings.Default.winmerge_path;
 
             show_item_location();
         }
@@ -55,7 +57,7 @@ namespace vcs_DrAP
 
             x_st = 20;
             y_st = 50;
-            dx = 150;
+            dx = 170;
             dy = 55;
 
             lb_setup0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -64,6 +66,7 @@ namespace vcs_DrAP
             lb_setup3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             lb_setup4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             lb_setup5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            lb_setup6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
 
             tb_setup0.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             tb_setup1.Location = new Point(x_st + dx * 1, y_st + dy * 1);
@@ -71,14 +74,17 @@ namespace vcs_DrAP
             tb_setup3.Location = new Point(x_st + dx * 1, y_st + dy * 3);
             tb_setup4.Location = new Point(x_st + dx * 1, y_st + dy * 4);
             tb_setup5.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            tb_setup6.Location = new Point(x_st + dx * 1, y_st + dy * 6);
 
-            bt_setup0.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            bt_setup1.Location = new Point(x_st + dx * 5, y_st + dy * 1);
-            bt_setup2.Location = new Point(x_st + dx * 5, y_st + dy * 2);
-            bt_setup3.Location = new Point(x_st + dx * 5, y_st + dy * 3);
-            bt_setup4.Location = new Point(x_st + dx * 5, y_st + dy * 4);
-            bt_setup5.Location = new Point(x_st + dx * 5, y_st + dy * 5);
-            bt_setup6.Location = new Point(x_st + dx * 5, y_st + dy * 6);
+            int dxx = 80;
+            bt_setup0.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 0);
+            bt_setup1.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 1);
+            bt_setup2.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 2);
+            bt_setup3.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 3);
+            bt_setup4.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 4);
+            bt_setup5.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 5);
+            bt_setup6.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 6);
+            bt_setup_save.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 6);
 
             bt_exit_setup();
         }
@@ -190,6 +196,11 @@ namespace vcs_DrAP
 
         private void bt_setup6_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void bt_setup_save_Click(object sender, EventArgs e)
+        {
             //儲存
             Properties.Settings.Default.video_player_path = tb_setup0.Text;
             Properties.Settings.Default.audio_player_path = tb_setup1.Text;
@@ -197,6 +208,7 @@ namespace vcs_DrAP
             Properties.Settings.Default.text_editor_path = tb_setup3.Text;
             Properties.Settings.Default.search_path = tb_setup4.Text;
             Properties.Settings.Default.python_editor_path = tb_setup5.Text;
+            Properties.Settings.Default.winmerge_path = tb_setup6.Text;
 
             Properties.Settings.Default.Save();
             show_main_message("儲存設定完成", S_OK, 30);
@@ -223,5 +235,6 @@ namespace vcs_DrAP
                 }
             }
         }
+
     }
 }

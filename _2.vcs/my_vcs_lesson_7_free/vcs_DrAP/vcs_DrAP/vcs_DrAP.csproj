@@ -122,6 +122,7 @@
     <None Include="img\cuda.png" />
     <None Include="img\opengl.bmp" />
     <None Include="img\python2.png" />
+    <None Include="img\winmerge.png" />
     <Content Include="MediaInfo.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

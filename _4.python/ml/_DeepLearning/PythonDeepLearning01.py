@@ -75,7 +75,7 @@ class NeuralNetwork:
 
         for k in range(training):
             if k % self.steps_per_epoch == 0:
-                print('epochs:', k/self.steps_per_epoch)
+                print("epochs:", k / self.steps_per_epoch)
                 print("epochs: {}".format(k / self.steps_per_epoch))
                 for s in data:
                     print(s, self.predict(s))

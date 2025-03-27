@@ -94,5 +94,17 @@ namespace vcs_DrAP.Properties {
                 this["python_editor_path"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string winmerge_path {
+            get {
+                return ((string)(this["winmerge_path"]));
+            }
+            set {
+                this["winmerge_path"] = value;
+            }
+        }
     }
 }

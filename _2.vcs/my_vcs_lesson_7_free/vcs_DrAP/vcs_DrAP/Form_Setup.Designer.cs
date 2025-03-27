@@ -47,11 +47,14 @@
             this.bt_setup4 = new System.Windows.Forms.Button();
             this.bt_setup5 = new System.Windows.Forms.Button();
             this.bt_setup0 = new System.Windows.Forms.Button();
-            this.bt_setup6 = new System.Windows.Forms.Button();
+            this.bt_setup_save = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.lb_main_mesg = new System.Windows.Forms.Label();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
+            this.bt_setup6 = new System.Windows.Forms.Button();
+            this.tb_setup6 = new System.Windows.Forms.TextBox();
+            this.lb_setup6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lb_setup1
@@ -228,16 +231,16 @@
             this.bt_setup0.UseVisualStyleBackColor = true;
             this.bt_setup0.Click += new System.EventHandler(this.bt_setup0_Click);
             // 
-            // bt_setup6
+            // bt_setup_save
             // 
-            this.bt_setup6.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup6.Location = new System.Drawing.Point(689, 385);
-            this.bt_setup6.Name = "bt_setup6";
-            this.bt_setup6.Size = new System.Drawing.Size(94, 32);
-            this.bt_setup6.TabIndex = 18;
-            this.bt_setup6.Text = "儲存";
-            this.bt_setup6.UseVisualStyleBackColor = true;
-            this.bt_setup6.Click += new System.EventHandler(this.bt_setup6_Click);
+            this.bt_setup_save.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_setup_save.Location = new System.Drawing.Point(689, 385);
+            this.bt_setup_save.Name = "bt_setup_save";
+            this.bt_setup_save.Size = new System.Drawing.Size(94, 32);
+            this.bt_setup_save.TabIndex = 18;
+            this.bt_setup_save.Text = "儲存";
+            this.bt_setup_save.UseVisualStyleBackColor = true;
+            this.bt_setup_save.Click += new System.EventHandler(this.bt_setup_save_Click);
             // 
             // openFileDialog1
             // 
@@ -258,13 +261,45 @@
             // 
             this.timer_display.Tick += new System.EventHandler(this.timer_display_Tick);
             // 
+            // bt_setup6
+            // 
+            this.bt_setup6.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_setup6.Location = new System.Drawing.Point(689, 312);
+            this.bt_setup6.Name = "bt_setup6";
+            this.bt_setup6.Size = new System.Drawing.Size(94, 32);
+            this.bt_setup6.TabIndex = 22;
+            this.bt_setup6.Text = "修改";
+            this.bt_setup6.UseVisualStyleBackColor = true;
+            this.bt_setup6.Click += new System.EventHandler(this.bt_setup6_Click);
+            // 
+            // tb_setup6
+            // 
+            this.tb_setup6.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_setup6.Location = new System.Drawing.Point(127, 336);
+            this.tb_setup6.Name = "tb_setup6";
+            this.tb_setup6.Size = new System.Drawing.Size(574, 30);
+            this.tb_setup6.TabIndex = 21;
+            // 
+            // lb_setup6
+            // 
+            this.lb_setup6.AutoSize = true;
+            this.lb_setup6.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_setup6.Location = new System.Drawing.Point(25, 341);
+            this.lb_setup6.Name = "lb_setup6";
+            this.lb_setup6.Size = new System.Drawing.Size(99, 19);
+            this.lb_setup6.TabIndex = 20;
+            this.lb_setup6.Text = "lb_setup6";
+            // 
             // Form_Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(899, 469);
-            this.Controls.Add(this.lb_main_mesg);
             this.Controls.Add(this.bt_setup6);
+            this.Controls.Add(this.tb_setup6);
+            this.Controls.Add(this.lb_setup6);
+            this.Controls.Add(this.lb_main_mesg);
+            this.Controls.Add(this.bt_setup_save);
             this.Controls.Add(this.bt_setup0);
             this.Controls.Add(this.bt_setup5);
             this.Controls.Add(this.bt_setup4);
@@ -311,10 +346,13 @@
         private System.Windows.Forms.Button bt_setup4;
         private System.Windows.Forms.Button bt_setup5;
         private System.Windows.Forms.Button bt_setup0;
-        private System.Windows.Forms.Button bt_setup6;
+        private System.Windows.Forms.Button bt_setup_save;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Label lb_main_mesg;
         private System.Windows.Forms.Timer timer_display;
+        private System.Windows.Forms.Button bt_setup6;
+        private System.Windows.Forms.TextBox tb_setup6;
+        private System.Windows.Forms.Label lb_setup6;
     }
 }

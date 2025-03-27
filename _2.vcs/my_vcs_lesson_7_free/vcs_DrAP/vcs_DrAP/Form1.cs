@@ -237,30 +237,30 @@ namespace vcs_DrAP
             bt_help.Location = new Point(x_st, y_st + dy * 0);
 
             x_st += bt_help.Size.Width + dx;
-            bt_delete_file.Location = new Point(x_st, y_st + dy * 0);
+            bt_delete_file.Location = new Point(x_st-8, y_st + dy * 0);
 
 
             x_st = 1000;
             y_st = 15;
 
-            textBox4.Location = new Point(x_st, y_st);
-            label3.Location = new Point(x_st + 50, y_st + 8);
+            textBox4.Location = new Point(x_st-10, y_st);
+            label3.Location = new Point(x_st + 35, y_st + 8);
 
-            bt_find_empty_folders.Location = new Point(x_st + 80, y_st);
-            bt_find_small_folders.Location = new Point(x_st+80, y_st + 30);
-            bt_find_same_files2.Location = new Point(x_st + 80, y_st + 60);
+            bt_find_empty_folders.Location = new Point(x_st + 55, y_st);
+            bt_find_small_folders.Location = new Point(x_st+55, y_st + 30);
+            bt_find_same_files2.Location = new Point(x_st + 55, y_st + 60);
 
-            textBox3.Location = new Point(x_st + 100 + 100, y_st);
-            checkBox7.Location = new Point(x_st + 100 + 100, y_st + 50 + 6-20);
-            bt_test1.Location = new Point(x_st + 100 + 100, y_st + 50+10);
-            bt_test2.Location = new Point(x_st + 100 + 100 + 40, y_st + 50+10);
+            textBox3.Location = new Point(x_st + 100 + 100-26, y_st);
+            checkBox7.Location = new Point(x_st + 100 + 100 - 26, y_st + 50 + 6 - 20);
+            bt_test1.Location = new Point(x_st + 100 + 100 - 26, y_st + 50 + 10);
+            bt_test2.Location = new Point(x_st + 100 + 100 + 40 - 10 - 26, y_st + 50 + 10);
             dx = 85;
             dy = 35;
-            cb_option1.Location = new Point(x_st + 100 + 100 + dx * 1, y_st + dy);
-            cb_option2.Location = new Point(x_st + 100 + 100 + dx * 1, y_st + dy + 17);
-            cb_option3.Location = new Point(x_st + 100 + 100 + dx * 1, y_st + dy + 34);
+            cb_option1.Location = new Point(x_st + 100 + 100 + dx * 1-50, y_st + dy);
+            cb_option2.Location = new Point(x_st + 100 + 100 + dx * 1-50, y_st + dy + 17);
+            cb_option3.Location = new Point(x_st + 100 + 100 + dx * 1-50, y_st + dy + 34);
 
-            x_st = 1370;
+            x_st = 1318;
             y_st = 6;
             dx = 55;
             dy = 55;
@@ -272,6 +272,8 @@ namespace vcs_DrAP
 
             bt_open_dir2.Location = new Point(x_st + dx * 2, y_st);
             bt_save_file_data.Location = new Point(x_st + dx * 2, y_st+dy);
+
+            bt_compare.Location = new Point(x_st + dx * 3, y_st);
 
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
             bt_copy_rtb_data.Location = new Point(bt_clear2.Location.X, bt_copy_rtb_data.Location.Y);
@@ -3310,6 +3312,11 @@ namespace vcs_DrAP
             richTextBox2.Text += "已複製資料到系統剪貼簿\n";
         }
 
+        private void bt_compare_Click(object sender, EventArgs e)
+        {
+
+        }
+
         //檢查空資料夾 ST
 
 
@@ -3512,5 +3519,6 @@ namespace vcs_DrAP
                 specified_search_path = String.Empty;
             }
         }
+
     }
 }

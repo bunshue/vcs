@@ -2733,7 +2733,9 @@ for step in range(301):
 
 # save
 print("test before save: ", model.predict(X_test[0:2]))
-model.save("tmp_my_model.h5")  # HDF5 file, you have to pip3 install h5py if don't have it
+model.save(
+    "tmp_my_model.h5"
+)  # HDF5 file, you have to pip3 install h5py if don't have it
 del model  # deletes the existing model
 
 # load
