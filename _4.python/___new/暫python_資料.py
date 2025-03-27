@@ -52,44 +52,7 @@ http://tw.gitbook.net/python/index.html
 
 http://tw.gitbook.net/index.html
 
-
-
-
 https://matplotlib.org/
-
-
-
-xlrd安装成功，版本：2.0.1
-
-解决方案：
-
-xlrd版本过高，卸载旧版本重新安装1.2.0
-
-pip install xlrd==1.2.0
-
-C:\Users\070601>pip install xlrd==1.2.0
-Collecting xlrd==1.2.0
-Uninstalling xlrd-2.0.1:
-Successfully uninstalled xlrd-2.0.1
-Successfully installed xlrd-1.2.0
-
-
-		     
-使用 SimpleGUICS2Pygame 替換 simplegui
-
-C:\Users\070601>pip install SimpleGUICS2Pygame
-pip install SimpleGUICS2Pygame
-pip install SimpleGUICS2Pygame --upgrade
-
-python -m pip install SimpleGUICS2Pygame --user --upgrade
-
-
-import simplegui
-
-改成
-import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
-
-
 
 ----------------wwww----------------
 
@@ -209,8 +172,6 @@ matplotlib.pyplot.figure
 無法全螢幕
 無法指定視窗顯示位置
 
-
-
 #設定圖表在整個視窗的位置與大小
 x_st = 0.15
 y_st = 0.10
@@ -219,9 +180,7 @@ h = 0.3
 pic2 = fig.add_axes([x_st, y_st, w, h])
 #pic2.set_xlabel('Time [s]')
 
-
 ----------------------------------------------------------------
-
 
 # The function for finding a key in the list 
 def linearSearch(lst, key):
@@ -366,9 +325,6 @@ http://www.runoob.com/python/python-chinese-encoding.html
 	You should consider upgrading via the 'python -m pip install --upgrade pip' command.
 	
 ----------------------------------------------------------------
-
-
-pip install numpy	安裝NumPy
 
 C:\Users\david>pip install pillow
 Collecting pillow
@@ -704,18 +660,13 @@ windows command line下:
 >pip3 install matplotlib	//安裝matplotlib
 >pip3 install pygame		//安裝pygame
 
-
 python -m pip install -U pip
 python -m pip install -U matplotlib
-
-
 
 重裝Pillow套件
 pip uninstall PIL
 pip uninstall Pillow
 pip install Pillow
-
-
 
 romeo無法使用opencv
 
@@ -748,13 +699,9 @@ BeautifulSoup：方便對特定的目標加以分析、擷取的強大模組。
 
 Python的網頁解析套件 -- BeautifulSoup
 
+html5lib 1.1 
 
-
-
- html5lib 1.1 
-
- pip install html5lib
- 
+pip install html5lib
  
 ----------------------------------------------------------------
 
@@ -886,49 +833,18 @@ python目前不會做的事情：
 3.
 4.
 
-
-pip list	#看目前已經安裝的套件
-
-把所有要安裝的套件條列式的寫在一張txt檔案裡面
-
-beautifulsoup4
-requests
-html5lib
-matplotlib
-selenium
-jieba
-wordcloud
-Pillow==4.0.0
-
-再來使用以下指令一次安裝所有套件:
-$ pip install -r [txt_file_name]
-
-
-
-
-
-
-
 Python 與 OpenCV 基本讀取、顯示與儲存圖片教學
 https://blog.gtwang.org/programming/opencv-basic-image-read-and-write-tutorial/
-
-
 
 Python 使用 OpenCV、Dlib 實作即時人臉偵測程式教學
 https://blog.gtwang.org/programming/python-opencv-dlib-face-detection-implementation-tutorial/
 
-
 https://steam.oxxostudio.tw/category/python/ai/opencv.html
 https://steam.oxxostudio.tw/category/python/ai/opencv-index.html
-
-
 
 OpenCV播放影片
 
 應該無法做到倒轉、快轉慢轉....
-
-
-
 
 PIL有九种不同模式: 1，L，P，RGB，RGBA，CMYK，YCbCr，I，F。
 
@@ -963,23 +879,10 @@ https://pydicom.github.io/pydicom/dev/old/pydicom_user_guide.html
 
 ----------------Python Reserved 暫存 候用 SP----------------
 
-
 單底線 _ : 無名暫時變數
 for _ in range(10):
 	do_something()
 
-
 抽象基礎類別
 Abstract Base Class, ABC
-
-
-
-
-
-更新PIP程式
-python.exe -m pip install --upgrade pip
-
-
-
-
 

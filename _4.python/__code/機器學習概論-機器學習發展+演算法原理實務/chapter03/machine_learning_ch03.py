@@ -1,5 +1,5 @@
 """
-machine_learning_Read_data_various_sources02
+machine_learning_ch02
 
 """
 
@@ -23,6 +23,24 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+# from common1 import *
+import scipy
+import sklearn.linear_model
+from sklearn import datasets
+from sklearn.datasets import make_blobs  # 集群資料集
+from sklearn.datasets import make_moons
+from sklearn.datasets import make_circles
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn import metrics
+from sklearn.decomposition import PCA
+from sklearn.decomposition import KernelPCA  # KernelPCA 萃取特徵
+
+from matplotlib.colors import ListedColormap
+from sklearn.preprocessing import MinMaxScaler
+from sklearn import tree
 
 
 def show():

@@ -1315,65 +1315,6 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# XGBoost測試
-#!pip install xgboost -U
-
-"""
-Requirement already satisfied: xgboost in c:\anaconda3\lib\site-packages (1.6.1)
-Collecting xgboost
-  Downloading xgboost-1.7.3-py3-none-win_amd64.whl (89.1 MB)
-     ---------------------------------------- 89.1/89.1 MB 8.7 MB/s eta 0:00:00
-Requirement already satisfied: numpy in c:\anaconda3\lib\site-packages (from xgboost) (1.23.5)
-Requirement already satisfied: scipy in c:\anaconda3\lib\site-packages (from xgboost) (1.9.3)
-Installing collected packages: xgboost
-  Attempting uninstall: xgboost
-    Found existing installation: xgboost 1.6.1
-    Uninstalling xgboost-1.6.1:
-      Successfully uninstalled xgboost-1.6.1
-Successfully installed xgboost-1.7.3
-"""
-
-X, y = datasets.load_diabetes(return_X_y=True)
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-# 模型訓練
-from xgboost import XGBRegressor
-
-model = XGBRegressor()
-
-model.fit(X_train, y_train)  # 學習訓練.fit
-
-"""
-XGBRegressor(base_score=None, booster=None, callbacks=None,
-             colsample_bylevel=None, colsample_bynode=None,
-             colsample_bytree=None, early_stopping_rounds=None,
-             enable_categorical=False, eval_metric=None, feature_types=None,
-             gamma=None, gpu_id=None, grow_policy=None, importance_type=None,
-             interaction_constraints=None, learning_rate=None, max_bin=None,
-             max_cat_threshold=None, max_cat_to_onehot=None,
-             max_delta_step=None, max_depth=None, max_leaves=None,
-             min_child_weight=None, missing=nan, monotone_constraints=None,
-             n_estimators=100, n_jobs=None, num_parallel_tree=None,
-             predictor=None, random_state=None, ...)
-"""
-
-# 模型評估
-
-from sklearn.model_selection import cross_val_score
-
-scores = cross_val_score(model, X_test, y_test, cv=10, scoring="neg_mean_squared_error")
-print(scores)
-
-# 平均分數與標準差
-
-print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
-
-# 平均分數: -5473.1857409034155, 標準差: 3004.388074594913
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # 使用迴歸模型
 
 from sklearn.linear_model import RidgeCV

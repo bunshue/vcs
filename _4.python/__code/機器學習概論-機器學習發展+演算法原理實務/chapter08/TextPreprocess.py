@@ -2,7 +2,7 @@ import sys
 import os
 import jieba 
 #引入Bunch类
-from sklearn.datasets.base import Bunch
+from sklearn.datasets._base import Bunch
 #引入持久化类
 import pickle
 from sklearn import feature_extraction  

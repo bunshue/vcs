@@ -181,13 +181,12 @@ MyDictionary
 
 csv檔 => 字典 = > 資料庫
 
-資料庫曾刪改查搜尋
+資料庫增刪改查搜尋
 
 增刪查改	CDRU
 CRUD
 
 CRUD (新增:Create , 讀取:Read, 更新: Update, 刪除:Delete)
-CRUD
 增	新增:Create	POST
 查	讀取:Read	GET
 改	更新:Update	PUT
@@ -240,19 +239,13 @@ out = cv2.VideoWriter(record_filename, cv2.VideoWriter_fourcc(*'XVID'), 1, Image
         out.release()
         cv2.destroyAllWindows()
 
-
-
-
-
 莫煩 python
 https://mofanpy.com/
 
 https://github.com/MorvanZhou
 
-
 turtle 指令
 turtle.Screen().reset()
-
 
 做一個完整版 TextEditor 大整理
 
@@ -1031,25 +1024,6 @@ webbrowser如何增加頁箋
 cmd / where python	//了解目前電腦安裝多少版本
 
 cmd / python --version	//了解目前命令提示字元視窗執行Python的版本
-
-
-列出所安裝的模組
-    可以使用list列出所安裝的模組，如果使用’-o’可列出有新版本的模組。
-pip list		# 列出安裝的模組
-pip list –o    # 列出有新版本的模組  		
-E-5：安裝更新版模組
-未來如果有更新版，可用下列方式更新至最新版模組。
-pip install -U 模組名稱			# 更新至最新版模組
-
-
-
-刪除模組
-    安裝了模組之後，若是想刪除可以使用uninstall，例如：若是想刪除basemap，可以使用下列指令。
-    pip uninstall basemap
-
-
-
-
 
 
 Python IDLE設定
