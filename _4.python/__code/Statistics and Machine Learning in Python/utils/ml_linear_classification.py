@@ -1,14 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Feb 17 18:23:23 2016
-
-@author: edouard.duchesnay@cea.fr
-"""
-
-'''
-Fisher's linear discriminant
-============================
-'''
 
 import numpy as np
 import scipy
@@ -111,16 +101,15 @@ y_pred = np.asarray(y_proj > thres, dtype=int)
 errors = y_pred != y 
 print("Nb errors=%i, error rate=%.2f" % (errors.sum(), errors.sum() / len(y_pred)))
 
-#%matplotlib inline
-%matplotlib qt
-
 from matplotlib import rc
+
 plt.rc('text', usetex=True)
 font = {'family' : 'serif'}
 plt.rc('font', **font)
 palette = sns.color_palette()
 
 fig = plt.figure(figsize=(7, 7))
+
 plot_linear_disc(beta, thres, X, y)
 
 # RGBA S_W 8172b2ff
@@ -140,10 +129,7 @@ plt.figure(figsize=(7, 2))
 for lab in np.unique(y_true):
     sns.histplot(X[y == lab, 1], label=str(lab))
 
-'''
-Linear discriminant analysis (LDA)
-==================================
-'''
+# Linear discriminant analysis (LDA)
 
 import numpy as np
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA

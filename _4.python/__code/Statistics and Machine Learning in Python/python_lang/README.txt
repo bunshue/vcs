@@ -1,6 +1,0 @@
-Scientific Python
-=================
-
-- Python language
-
-
