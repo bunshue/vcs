@@ -9,7 +9,7 @@ print("------------------------------------------------------------")  # 60個
 
 字 dict  字典 dddd 大括號 {} 無順序 不可重複 = 集合 + list  d = {"key :value", "key :value", ...}
 集 set   集合 ssss 大括號 {} 無順序 不可重複 set元素具有唯一性
-串 lsit  串列 llll 中括號 [] 有順序 允許重複 list中的data type不用一致
+串 list  串列 llll 中括號 [] 有順序 允許重複 list中的data type不用一致
 元 tuple 元組 tttt 小括號 () 有順序 允許重複 不可變清單	常數list
 
 Collections總整理

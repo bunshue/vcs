@@ -61,6 +61,7 @@ import sys
 import time
 import math
 import random
+import datetime
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -560,6 +561,11 @@ print("------------------------------------------------------------")  # 60個
 
 print("準備工作 SP")
 
+current_time = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
+print("現在時間 :", current_time)
+
+time_st = time.time()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -590,6 +596,16 @@ model.add(
 model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
 
 do_cnn_test()
+
+
+timeElapsed = time.time() - time_st
+
+timeElapsed = round(timeElapsed, 4)
+
+print("所花時間={}".format(timeElapsed))
+
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

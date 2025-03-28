@@ -68,7 +68,6 @@ X.shape
 
 plt.figure(figsize=(8, 5))
 plt.scatter(X[:, 0], X[:, 1], edgecolors="k", c="orange", s=75)
-plt.grid(True)
 plt.xticks()
 plt.yticks()
 show()
@@ -91,7 +90,6 @@ print("Cluster centers detected at:\n\n", cluster_centers)
 
 plt.figure(figsize=(8, 5))
 plt.scatter(X[:, 0], X[:, 1], edgecolors="k", c=ms_model.labels_, s=75)
-plt.grid(True)
 plt.xticks()
 plt.yticks()
 show()
@@ -131,7 +129,6 @@ plt.figure(figsize=(8, 5))
 plt.title("Time complexity of Mean Shift\n")
 plt.scatter(n_samples, t_ms, edgecolors="k", c="green", s=100)
 plt.plot(n_samples, t_ms, "k--", lw=3)
-plt.grid(True)
 plt.xticks()
 plt.xlabel("Number of samples")
 plt.yticks()
@@ -142,7 +139,6 @@ plt.figure(figsize=(8, 5))
 plt.title("Homogeneity score with data set size\n")
 plt.scatter(n_samples, homo_ms, edgecolors="k", c="green", s=100)
 plt.plot(n_samples, homo_ms, "k--", lw=3)
-plt.grid(True)
 plt.xticks()
 plt.xlabel("Number of samples")
 plt.yticks()
@@ -153,7 +149,6 @@ plt.figure(figsize=(8, 5))
 plt.title("Completeness score with data set size\n")
 plt.scatter(n_samples, complete_ms, edgecolors="k", c="green", s=100)
 plt.plot(n_samples, complete_ms, "k--", lw=3)
-plt.grid(True)
 plt.xticks()
 plt.xlabel("Number of samples")
 plt.yticks()
@@ -193,7 +188,6 @@ print("Detected number of clusters:", n_clusters)
 plt.figure(figsize=(8, 5))
 plt.title("Cluster detection with noisy data\n")
 plt.scatter(noise, n_clusters, edgecolors="k", c="green", s=100)
-plt.grid(True)
 plt.xticks()
 plt.xlabel("Noise std.dev")
 plt.yticks()
@@ -231,7 +225,7 @@ plt.scatter(
     alpha=0.75,
     s=150,
 )
-plt.grid(True)
+
 plt.title("Scatter plot of two features showing the \ncorrelation and class seperation")
 plt.xlabel("OD280/OD315 of diluted wines")
 plt.ylabel("Flavanoids")
@@ -297,7 +291,6 @@ plt.scatter(
     c="orange",
     edgecolor="k",
 )
-plt.grid(True)
 plt.title("Explained variance ratio of the \nfitted principal component vector\n")
 plt.xlabel("Principal components")
 plt.xticks([i + 1 for i in range(len(dfx_pca.explained_variance_ratio_))])
@@ -321,7 +314,6 @@ plt.figure(figsize=(10, 6))
 plt.scatter(
     dfx_trans[0], dfx_trans[1], c=df["Class"], edgecolors="k", alpha=0.75, s=150
 )
-plt.grid(True)
 plt.title("Class separation using first two principal components\n")
 plt.xlabel("Principal component-1")
 plt.ylabel("Principal component-2")
@@ -368,8 +360,8 @@ for i in range(1, 7):
     dim1 = lst_vars[i - 1][0]
     dim2 = lst_vars[i - 1][1]
     plt.scatter(df1[dim1], df1[dim2], c=data1[1], edgecolor="k", s=150)
-    plt.xlabel(f"{dim1}", fontsize=13)
-    plt.ylabel(f"{dim2}", fontsize=13)
+    plt.xlabel(f"{dim1}")
+    plt.ylabel(f"{dim2}")
 show()
 
 # How are the classes separated (boxplots)
@@ -378,10 +370,10 @@ plt.figure(figsize=(16, 14))
 for i, c in enumerate(df1.columns):
     plt.subplot(3, 2, i + 1)
     sns.boxplot(y=df1[c], x=data1[1])
-    plt.xticks(fontsize=15)
-    plt.yticks(fontsize=15)
-    plt.xlabel("Class", fontsize=15)
-    plt.ylabel(c, fontsize=15)
+    plt.xticks()
+    plt.yticks()
+    plt.xlabel("Class")
+    plt.ylabel(c)
     # plt.show()
 show()
 
@@ -435,35 +427,28 @@ for i in range(2, 12):
     print("-" * 100)
 
 plt.figure(figsize=(7, 4))
-plt.title("The elbow method for determining number of clusters\n", fontsize=16)
+plt.title("The elbow method for determining number of clusters\n")
 plt.scatter(x=[i for i in range(2, 12)], y=km_scores, s=150, edgecolor="k")
-plt.grid(True)
-plt.xlabel("Number of clusters", fontsize=14)
-plt.ylabel("K-means score", fontsize=15)
-plt.xticks([i for i in range(2, 12)], fontsize=14)
-plt.yticks(fontsize=15)
+plt.xlabel("Number of clusters")
+plt.ylabel("K-means score")
+plt.xticks([i for i in range(2, 12)])
+plt.yticks()
 plt.show()
 
 plt.scatter(x=[i for i in range(2, 12)], y=vmeasure_score, s=150, edgecolor="k")
-plt.grid(True)
 plt.xlabel("V-measure score")
 plt.show()
 
 plt.figure(figsize=(7, 4))
-plt.title(
-    "The silhouette coefficient method \nfor determining number of clusters\n",
-    fontsize=16,
-)
+plt.title("The silhouette coefficient method \nfor determining number of clusters")
 plt.scatter(x=[i for i in range(2, 12)], y=km_silhouette, s=150, edgecolor="k")
-plt.grid(True)
-plt.xlabel("Number of clusters", fontsize=14)
-plt.ylabel("Silhouette score", fontsize=15)
-plt.xticks([i for i in range(2, 12)], fontsize=14)
-plt.yticks(fontsize=15)
+plt.xlabel("Number of clusters")
+plt.ylabel("Silhouette score")
+plt.xticks([i for i in range(2, 12)])
+plt.yticks()
 plt.show()
 
 plt.scatter(x=[i for i in range(2, 12)], y=db_score, s=150, edgecolor="k")
-plt.grid(True)
 plt.xlabel("Davies-Bouldin score")
 plt.show()
 
@@ -488,15 +473,12 @@ for i in range(2, 12):
     gm_score.append(gm.score(X_scaled))
 
 plt.figure(figsize=(7, 4))
-plt.title(
-    "The Gaussian Mixture model BIC \nfor determining number of clusters\n", fontsize=16
-)
+plt.title("The Gaussian Mixture model BIC \nfor determining number of clusters\n")
 plt.scatter(x=[i for i in range(2, 12)], y=np.log(gm_bic), s=150, edgecolor="k")
-plt.grid(True)
-plt.xlabel("Number of clusters", fontsize=14)
-plt.ylabel("Log of Gaussian mixture BIC score", fontsize=15)
-plt.xticks([i for i in range(2, 12)], fontsize=14)
-plt.yticks(fontsize=15)
+plt.xlabel("Number of clusters")
+plt.ylabel("Log of Gaussian mixture BIC score")
+plt.xticks([i for i in range(2, 12)])
+plt.yticks()
 plt.show()
 
 plt.scatter(x=[i for i in range(2, 12)], y=gm_score, s=150, edgecolor="k")
@@ -519,26 +501,23 @@ cc = df.describe()
 print(cc)
 
 plt.figure(figsize=(8, 5))
-plt.title("Annual income distribution", fontsize=16)
-plt.xlabel("Annual income (k$)", fontsize=14)
-plt.grid(True)
+plt.title("Annual income distribution")
+plt.xlabel("Annual income (k$)")
 plt.hist(df["Annual Income (k$)"], color="orange", edgecolor="k")
 plt.show()
 
 plt.figure(figsize=(8, 5))
-plt.title("Spending Score distribution", fontsize=16)
-plt.xlabel("Spending Score (1-100)", fontsize=14)
-plt.grid(True)
+plt.title("Spending Score distribution")
+plt.xlabel("Spending Score (1-100)")
 plt.hist(df["Spending Score (1-100)"], color="green", edgecolor="k")
 plt.show()
 
 # So, is there a definitive correlation between annual income and spending score? - Apparently not
 
 plt.figure(figsize=(8, 5))
-plt.title("Annual Income and Spending Score correlation", fontsize=18)
-plt.xlabel("Annual Income (k$)", fontsize=14)
-plt.ylabel("Spending Score (1-100)", fontsize=14)
-plt.grid(True)
+plt.title("Annual Income and Spending Score correlation")
+plt.xlabel("Annual Income (k$)")
+plt.ylabel("Spending Score (1-100)")
 plt.scatter(
     df["Annual Income (k$)"],
     df["Spending Score (1-100)"],
@@ -552,10 +531,9 @@ plt.show()
 # How about correlation between age and spending score? - Apparently not
 
 plt.figure(figsize=(8, 5))
-plt.title("Age and Spending Score correlation", fontsize=18)
-plt.xlabel("Age", fontsize=14)
-plt.ylabel("Spending Score (1-100)", fontsize=14)
-plt.grid(True)
+plt.title("Age and Spending Score correlation")
+plt.xlabel("Age")
+plt.ylabel("Spending Score (1-100)")
 plt.scatter(
     df["Age"],
     df["Spending Score (1-100)"],
@@ -580,7 +558,6 @@ plt.figure(figsize=(15, 6))
 plt.title("Dendrogram")
 plt.xlabel("Customers")
 plt.ylabel("Euclidean distances")
-# plt.grid(True)
 dendrogram = sch.dendrogram(sch.linkage(X, method="ward"))
 plt.show()
 
@@ -591,8 +568,7 @@ plt.title("Dendrogram")
 plt.xlabel("Customers")
 plt.ylabel("Euclidean distances")
 plt.hlines(y=190, xmin=0, xmax=2000, lw=3, linestyles="--")
-plt.text(x=900, y=220, s="Horizontal line crossing 5 vertical lines", fontsize=20)
-# plt.grid(True)
+plt.text(x=900, y=220, s="Horizontal line crossing 5 vertical lines")
 dendrogram = sch.dendrogram(sch.linkage(X, method="ward"))
 plt.show()
 
@@ -611,11 +587,10 @@ plt.scatter(X[y_hc == 1, 0], X[y_hc == 1, 1], s=100, c="blue", label="Standard")
 plt.scatter(X[y_hc == 2, 0], X[y_hc == 2, 1], s=100, c="green", label="Target group")
 plt.scatter(X[y_hc == 3, 0], X[y_hc == 3, 1], s=100, c="orange", label="Careless")
 plt.scatter(X[y_hc == 4, 0], X[y_hc == 4, 1], s=100, c="magenta", label="Sensible")
-plt.title("Clustering of customers", fontsize=20)
-plt.xlabel("Annual Income (k$)", fontsize=16)
-plt.ylabel("Spending Score (1-100)", fontsize=16)
-plt.legend(fontsize=16)
-plt.grid(True)
+plt.title("Clustering of customers")
+plt.xlabel("Annual Income (k$)")
+plt.ylabel("Spending Score (1-100)")
+plt.legend()
 plt.axhspan(ymin=60, ymax=100, xmin=0.4, xmax=0.96, alpha=0.3, color="yellow")
 plt.show()
 
@@ -632,9 +607,9 @@ for i in range(1, 16):
 with plt.style.context(("fivethirtyeight")):
     plt.figure(figsize=(10, 6))
     plt.plot(range(1, 16), wcss)
-    plt.title("The Elbow Method with k-means++\n", fontsize=25)
+    plt.title("The Elbow Method with k-means++")
     plt.xlabel("Number of clusters")
-    plt.xticks(fontsize=20)
+    plt.xticks()
     plt.ylabel("WCSS (within-cluster sums of squares)")
     plt.vlines(x=5, ymin=0, ymax=250000, linestyles="--")
     plt.text(
@@ -666,9 +641,8 @@ X.shape
 
 plt.figure(figsize=(8, 5))
 plt.scatter(X[:, 0], X[:, 1], edgecolors="k", c="orange", s=75)
-plt.grid(True)
-plt.xticks(fontsize=15)
-plt.yticks(fontsize=15)
+plt.xticks()
+plt.yticks()
 plt.show()
 
 # Clustering
@@ -689,9 +663,8 @@ print("Cluster centers detected at:\n\n", X[cluster_centers_indices])
 
 plt.figure(figsize=(8, 5))
 plt.scatter(X[:, 0], X[:, 1], edgecolors="k", c=af_model.labels_, s=75)
-plt.grid(True)
-plt.xticks(fontsize=15)
-plt.yticks(fontsize=15)
+plt.xticks()
+plt.yticks()
 plt.show()
 
 # Homogeneity
@@ -742,36 +715,33 @@ for i in n_samples:
     complete_aff.append(metrics.completeness_score(labels_true, af_model.labels_))
 
 plt.figure(figsize=(8, 5))
-plt.title("Time complexity of Affinity Propagation\n", fontsize=20)
+plt.title("Time complexity of Affinity Propagation")
 plt.scatter(n_samples, t_aff, edgecolors="k", c="green", s=100)
 plt.plot(n_samples, t_aff, "k--", lw=3)
-plt.grid(True)
-plt.xticks(fontsize=15)
-plt.xlabel("Number of samples", fontsize=15)
-plt.yticks(fontsize=15)
-plt.ylabel("Time taken for model (sec)", fontsize=15)
+plt.xticks()
+plt.xlabel("Number of samples")
+plt.yticks()
+plt.ylabel("Time taken for model (sec)")
 plt.show()
 
 plt.figure(figsize=(8, 5))
-plt.title("Homogeneity score with data set size\n", fontsize=20)
+plt.title("Homogeneity score with data set size")
 plt.scatter(n_samples, homo_aff, edgecolors="k", c="green", s=100)
 plt.plot(n_samples, homo_aff, "k--", lw=3)
-plt.grid(True)
-plt.xticks(fontsize=15)
-plt.xlabel("Number of samples", fontsize=15)
-plt.yticks(fontsize=15)
-plt.ylabel("Homogeneity score", fontsize=15)
+plt.xticks()
+plt.xlabel("Number of samples")
+plt.yticks()
+plt.ylabel("Homogeneity score")
 plt.show()
 
 plt.figure(figsize=(8, 5))
-plt.title("Completeness score with data set size\n", fontsize=20)
+plt.title("Completeness score with data set size")
 plt.scatter(n_samples, complete_aff, edgecolors="k", c="green", s=100)
 plt.plot(n_samples, complete_aff, "k--", lw=3)
-plt.grid(True)
-plt.xticks(fontsize=15)
-plt.xlabel("Number of samples", fontsize=15)
-plt.yticks(fontsize=15)
-plt.ylabel("Completeness score", fontsize=15)
+plt.xticks()
+plt.xlabel("Number of samples")
+plt.yticks()
+plt.ylabel("Completeness score")
 plt.show()
 
 # How well the cluster detection works in the presence of noise? Can damping help?
@@ -807,13 +777,12 @@ for i in noise:
 
 print("Detected number of clusters:", n_clusters)
 plt.figure(figsize=(8, 5))
-plt.title("Cluster detection with noisy data for low damping=0.5\n", fontsize=16)
+plt.title("Cluster detection with noisy data for low damping=0.5\n")
 plt.scatter(noise, n_clusters, edgecolors="k", c="green", s=100)
-plt.grid(True)
-plt.xticks(fontsize=15)
-plt.xlabel("Noise std.dev", fontsize=15)
-plt.yticks(fontsize=15)
-plt.ylabel("Number of clusters detected", fontsize=15)
+plt.xticks()
+plt.xlabel("Noise std.dev")
+plt.yticks()
+plt.ylabel("Number of clusters detected")
 plt.show()
 
 # Detected number of clusters: [200, 67, 1, 68, 60, 3, 3, 3, 4, 4, 5, 6, 6, 7, 9, 9]
@@ -848,14 +817,14 @@ for i in noise:
     n_clusters.append(len(af_model.cluster_centers_indices_))
 
 print("Detected number of clusters:", n_clusters)
+
 plt.figure(figsize=(8, 5))
-plt.title("Cluster detection with noisy data for high damping=0.9\n", fontsize=16)
+plt.title("Cluster detection with noisy data for high damping=0.9\n")
 plt.scatter(noise, n_clusters, edgecolors="k", c="green", s=100)
-plt.grid(True)
-plt.xticks(fontsize=15)
-plt.xlabel("Noise std.dev", fontsize=15)
-plt.yticks([i for i in range(2, 10)], fontsize=15)
-plt.ylabel("Number of clusters detected", fontsize=15)
+plt.xticks()
+plt.xlabel("Noise std.dev")
+plt.yticks([i for i in range(2, 10)])
+plt.ylabel("Number of clusters detected")
 plt.show()
 
 # Detected number of clusters: [3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 5, 5, 5, 6, 6, 7]
@@ -863,73 +832,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# DBSCAN Clustering
-
-from sklearn import cluster, datasets
-
-n_samples = 1500
-noisy_circles, circle_labels = datasets.make_circles(
-    n_samples=n_samples, factor=0.5, noise=0.05
-)
-noisy_moons, moon_labels = datasets.make_moons(n_samples=n_samples, noise=0.1)
-
-noisy_moons = np.array(noisy_moons)
-noisy_circles = np.array(noisy_circles)
-
-plt.figure(figsize=(8, 5))
-plt.title("Half-moon shaped data", fontsize=18)
-plt.grid(True)
-plt.scatter(noisy_moons[:, 0], noisy_moons[:, 1])
-plt.show()
-
-plt.figure(figsize=(8, 5))
-plt.title("Concentric circles of data points", fontsize=18)
-plt.grid(True)
-plt.scatter(noisy_circles[:, 0], noisy_circles[:, 1])
-plt.show()
-
-# Can k-means identify the right clusters?
-
-km = cluster.KMeans(n_clusters=2)
-
-km.fit(noisy_moons)
-
-plt.figure(figsize=(8, 5))
-plt.title("Half-moon shaped data", fontsize=18)
-plt.grid(True)
-plt.scatter(noisy_moons[:, 0], noisy_moons[:, 1], c=km.labels_)
-plt.show()
-
-km.fit(noisy_circles)
-
-plt.figure(figsize=(8, 5))
-plt.title("Concentric circles of data points", fontsize=18)
-plt.grid(True)
-plt.scatter(noisy_circles[:, 0], noisy_circles[:, 1], c=km.labels_)
-plt.show()
-
-# How does DBSCAN perform?
-
-dbs = cluster.DBSCAN(eps=0.1)
-
-dbs.fit(noisy_moons)
-
-plt.figure(figsize=(8, 5))
-plt.title("Half-moon shaped data", fontsize=18)
-plt.grid(True)
-plt.scatter(noisy_moons[:, 0], noisy_moons[:, 1], c=dbs.labels_)
-plt.show()
-
-dbs.fit(noisy_circles)
-
-plt.figure(figsize=(8, 5))
-plt.title("Concentric circles of data points", fontsize=18)
-plt.grid(True)
-plt.scatter(noisy_circles[:, 0], noisy_circles[:, 1], c=dbs.labels_)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

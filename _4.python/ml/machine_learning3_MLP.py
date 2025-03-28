@@ -41,7 +41,6 @@ from time import time
 
 
 def show():
-    # return
     plt.show()
     pass
 

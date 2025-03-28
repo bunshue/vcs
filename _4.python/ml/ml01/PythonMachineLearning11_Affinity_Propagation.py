@@ -49,7 +49,8 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.cluster import AffinityPropagation
 from sklearn import metrics
 from sklearn.datasets import make_blobs  # 集群資料集
-'''
+
+"""
 # Generate sample data
 centers = [[1, 1], [-1, -1], [1, -1]]
 X, labels_true = make_blobs(
@@ -108,7 +109,7 @@ print("New point ({},{}) will belong to cluster {}".format(x_new[0], x_new[1], x
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 # Time complexity and model quality as the data size grows
 
 n_samples = [10, 20, 50, 100, 200, 500, 1000, 2000, 3000, 5000, 7500, 10000]

@@ -411,9 +411,7 @@ print(df1.equals(store["dataframes/df1"]))
 
 """
     LINK
-
     http://pytables.github.io/usersguide/libref/hierarchy_classes.html
-
     pytables官方文件
 """
 
@@ -515,16 +513,21 @@ t = np.linspace(0, 10, 400)
 x = np.sin(0.5*2*np.pi*t)
 x[np.random.randint(0, len(t), 40)] += np.random.normal(0, 0.3, 40)
 s = pd.Series(x, index=t)
-#s_mean = pd.rolling_mean(s, 5, center=True)
-#s_median = pd.rolling_median(s, 5, center=True)
+
+# 移動平均
+s_mean = s.rolling(5).mean()
+
+# 移動中值
+s_median = s.rolling(5).median()
 
 ax = s.plot(label=u"噪聲訊號")
-#(s_median - 0.2).plot(ax=ax, label=u"中值濾波")
-#(s_mean + 0.2).plot(ax=ax, label=u"搬移平均")
+(s_median - 0.2).plot(ax=ax, label=u"中值濾波")
+(s_mean + 0.2).plot(ax=ax, label=u"搬移平均")
 ax.legend(loc="best", ncol=3, bbox_to_anchor=(0., 1.02, 1., .102))
 
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 #請讀者思考如何使用NumPy提供的ufunc函數計算ref:fig-next中的三條曲線。

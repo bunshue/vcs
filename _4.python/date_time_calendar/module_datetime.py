@@ -5,6 +5,9 @@ import datetime
 
 print("------------------------------------------------------------")  # 60個
 
+current_time = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
+print("現在時間 :", current_time)
+
 print("現在時間")
 now = datetime.datetime.now()
 print(now)
@@ -1004,12 +1007,13 @@ while True:
 print("------------------------------------------------------------")  # 60個
 
 import datetime
+
 now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 print("現在時間 :", now)
 
 print("------------------------------------------------------------")  # 60個
 
-# # Python的日期和时间处理 
+# # Python的日期和时间处理
 
 # ## datetime模块
 
@@ -1018,12 +1022,12 @@ from datetime import datetime
 now = datetime.now()
 print(now)
 
-print('年: {}, 月: {}, 日: {}'.format(now.year, now.month, now.day))
+print("年: {}, 月: {}, 日: {}".format(now.year, now.month, now.day))
 
 diff = datetime(2017, 3, 4, 17) - datetime(2017, 2, 18, 15)
 print(type(diff))
 print(diff)
-print('经历了{}天, {}秒。'.format(diff.days, diff.seconds))
+print("经历了{}天, {}秒。".format(diff.days, diff.seconds))
 
 # ## 字符串和datetime转换
 
@@ -1036,39 +1040,45 @@ print(type(str_obj))
 print(str_obj)
 
 # datetime.strftime()
-str_obj2 = dt_obj.strftime('%d-%m-%Y')
+str_obj2 = dt_obj.strftime("%d-%m-%Y")
 print(str_obj2)
 
 # ### str -> datetime
 
 # strptime
-dt_str = '2017-02-18'
-dt_obj2 = datetime.strptime(dt_str, '%Y-%m-%d')
+dt_str = "2017-02-18"
+dt_obj2 = datetime.strptime(dt_str, "%Y-%m-%d")
 print(type(dt_obj2))
 print(dt_obj2)
 
 # dateutil.parser.parse
 from dateutil.parser import parse
-dt_str2 = '2017/02/18'
+
+dt_str2 = "2017/02/18"
 dt_obj3 = parse(dt_str2)
 print(type(dt_obj3))
 print(dt_obj3)
 
 # pd.to_datetime
 import pandas as pd
-s_obj = pd.Series(['2017/02/18', '2017/02/19', '2017-02-25', '2017-02-26'], name='course_time')
+
+s_obj = pd.Series(
+    ["2017/02/18", "2017/02/19", "2017-02-25", "2017-02-26"], name="course_time"
+)
 print(s_obj)
 
 s_obj2 = pd.to_datetime(s_obj)
 print(s_obj2)
 
 # 处理缺失值
-s_obj3 = pd.Series(['2017/02/18', '2017/02/19', '2017-02-25', '2017-02-26'] + [None], 
-                   name='course_time')
+s_obj3 = pd.Series(
+    ["2017/02/18", "2017/02/19", "2017-02-25", "2017-02-26"] + [None],
+    name="course_time",
+)
 print(s_obj3)
 
 s_obj4 = pd.to_datetime(s_obj3)
-print(s_obj4) # NAT-> Not a Time
+print(s_obj4)  # NAT-> Not a Time
 
 
 print("------------------------------------------------------------")  # 60個

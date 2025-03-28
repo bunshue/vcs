@@ -40,7 +40,6 @@ from sklearn.decomposition import NMF
 
 
 def show():
-    # return
     plt.show()
     pass
 

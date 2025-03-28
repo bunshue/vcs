@@ -526,7 +526,6 @@ class RBM:
         # plt.figure()
         E = numpy.array(self.Errors)
         E = pd.DataFrame(E)
-        # plt.plot(pandas.rolling_mean(E, 50)[50:])
         plt.plot(E.rolling(50).mean()[50:])
         show()
 

@@ -647,6 +647,7 @@ from contextlib import contextmanager
 
 from time import perf_counter
 
+
 def do_something():
     time.sleep(1.2345)
 
