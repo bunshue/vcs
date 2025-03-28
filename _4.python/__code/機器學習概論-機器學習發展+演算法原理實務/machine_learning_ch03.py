@@ -319,7 +319,7 @@ import treeExplore
 
 # 主程序
 # 加载数据集
-fileName = "ex0.txt"
+fileName = "data03/ex0.txt"
 dataSet = loadDataSet(fileName)
 # 转换为矩阵
 dataSet = mat(dataSet)
