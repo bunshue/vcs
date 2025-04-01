@@ -1,5 +1,4 @@
 Regression
-
     Simple linear regression with t-statistic generation
     Linear regression as a statistical estimation problem
     Multiple ways to perform linear regression in Python and their speed comparison. Also check the article I wrote on freeCodeCamp
@@ -9,7 +8,6 @@ Regression
     Detailed visual analytics and goodness-of-fit diagnostic tests for a linear regression problem.
 
 Classification
-
     Logistic regression/classification.
     k-nearest neighbor classification.
     Decision trees and Random Forest Classification.
@@ -18,7 +16,6 @@ Classification
     Classification using Stochastic Gradient Descent (SGD).
 
 Clustering
-
     K-means clustering.
     Affinity propagation (showing its time complexity and the effect of damping factor).
     Mean-shift technique (showing its time complexity and the effect of noise on cluster discovery).
@@ -27,9 +24,13 @@ Clustering
     Clustering metrics better than the elbow-method.
 
 Dimensionality reduction
-
     Principal component analysis
     Clustering combined with dimensionality reduction technqieus
+
+
+
+
+
 
 recurrent neural network (RNN)
 
@@ -207,7 +208,6 @@ print("------------------------------------------------------------")	#60個
 Machine Learning
 
 Regression
-
     Simple linear regression with t-statistic generation
     Multiple ways to do linear regression in Python and their speed comparison (check the article I wrote on freeCodeCamp)
     Multi-variate regression with regularization
@@ -215,7 +215,6 @@ Regression
     Decision trees and Random Forest regression (showing how the Random Forest works as a robust/regularized meta-estimator rejecting overfitting)
 
 Classification
-
     Logistic regression/classification
     k-nearest neighbor classification
     Decision trees and Random Forest Classification
@@ -223,7 +222,6 @@ Classification
     Naive Bayes classification
 
 Clustering
-
     K-means clustering
     Affinity propagation (showing its time complexity and the effect of damping factor)
     Mean-shift technique (showing its time complexity and the effect of noise on cluster discovery)
@@ -231,7 +229,6 @@ Clustering
     DBSCAN (showing how it can generically detect areas of high density irrespective of cluster shapes, which the k-means fails to do)
 
 Dimensionality reduction
-
     Principal component analysis
 
 Deep Learning/Neural Network

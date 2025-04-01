@@ -34,6 +34,10 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+def show():
+    # plt.show()
+    pass
+
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
@@ -126,7 +130,7 @@ plt.xlabel("Measured")
 plt.ylabel("Predicted")
 plt.title("Linear Regression Predicted vs Actual")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -135,16 +139,6 @@ print("使用 多層感知機(Multi-Layer Perceptron, MLP)")
 mlp = MLPRegressor()
 
 mlp.fit(X_train, y_train)
-
-"""
-MLPRegressor(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
-       beta_2=0.999, early_stopping=False, epsilon=1e-08,
-       hidden_layer_sizes=(100,), learning_rate='constant',
-       learning_rate_init=0.001, max_iter=200, momentum=0.9,
-       n_iter_no_change=10, nesterovs_momentum=True, power_t=0.5,
-       random_state=None, shuffle=True, solver='adam', tol=0.0001,
-       validation_fraction=0.1, verbose=False, warm_start=False)
-"""
 
 # Score the model
 neural_network_regression_score = mlp.score(X_test, y_test)
@@ -168,7 +162,7 @@ plt.xlabel("Measured")
 plt.ylabel("Predicted")
 plt.title("Neural Network Regression Predicted vs Actual")
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -179,20 +173,6 @@ Lasso算法(least absolute shrinkage and selection operator）
 lasso = Lasso()
 
 lasso.fit(X_train, y_train)
-
-Lasso(
-    alpha=1.0,
-    copy_X=True,
-    fit_intercept=True,
-    max_iter=1000,
-    #normalize=False,
-    positive=False,
-    precompute=False,
-    random_state=None,
-    selection="cyclic",
-    tol=0.0001,
-    warm_start=False,
-)
 
 # Score the model
 lasso_score = lasso.score(X_test, y_test)
@@ -213,7 +193,7 @@ plt.xlabel("Measured")
 plt.ylabel("Predicted")
 plt.title("Lasso Predicted vs Actual")
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -221,11 +201,6 @@ elasticnet = ElasticNet()
 
 elasticnet.fit(X_train, y_train)
 
-"""
-ElasticNet(alpha=1.0, copy_X=True, fit_intercept=True, l1_ratio=0.5,
-      max_iter=1000, normalize=False, positive=False, precompute=False,
-      random_state=None, selection='cyclic', tol=0.0001, warm_start=False)
-"""
 elasticnet_score = elasticnet.score(X_test, y_test)
 cc = elasticnet_score
 print(cc)
@@ -242,19 +217,11 @@ print(
 # Root mean squared error: 4.16
 
 # Create Random Forrest Regressor object
-regr_rf = RandomForestRegressor(n_estimators=200, random_state=1234)
+regr_rf = RandomForestRegressor(n_estimators=200, random_state=9487)
 
 # Train the model using the training sets
 regr_rf.fit(X_train, y_train)
 
-"""
-RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
-           max_features='auto', max_leaf_nodes=None,
-           min_impurity_decrease=0.0, min_impurity_split=None,
-           min_samples_leaf=1, min_samples_split=2,
-           min_weight_fraction_leaf=0.0, n_estimators=200, n_jobs=None,
-           oob_score=False, random_state=1234, verbose=0, warm_start=False)
-"""
 # Score the model
 decision_forest_score = regr_rf.score(X_test, y_test)
 cc = decision_forest_score
@@ -281,7 +248,7 @@ plt.barh(range(len(indices)), importances[indices], color="b", align="center")
 plt.yticks(range(len(indices)), features[indices])
 plt.xlabel("Relative Importance")
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -290,22 +257,14 @@ plt.xlabel("Measured")
 plt.ylabel("Predicted")
 plt.title("Decision Forest Predicted vs Actual")
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
-extra_tree = ExtraTreesRegressor(n_estimators=200, random_state=1234)
+extra_tree = ExtraTreesRegressor(n_estimators=200, random_state=9487)
 
 extra_tree.fit(X_train, y_train)
 
-"""
-ExtraTreesRegressor(bootstrap=False, criterion='mse', max_depth=None,
-          max_features='auto', max_leaf_nodes=None,
-          min_impurity_decrease=0.0, min_impurity_split=None,
-          min_samples_leaf=1, min_samples_split=2,
-          min_weight_fraction_leaf=0.0, n_estimators=200, n_jobs=None,
-          oob_score=False, random_state=1234, verbose=0, warm_start=False)
-"""
 extratree_score = extra_tree.score(X_test, y_test)
 cc = extratree_score
 print(cc)
@@ -329,7 +288,7 @@ plt.barh(range(len(indices)), importances[indices], color="b", align="center")
 plt.yticks(range(len(indices)), features[indices])
 plt.xlabel("Relative Importance")
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -338,7 +297,7 @@ plt.xlabel("Measured")
 plt.ylabel("Predicted")
 plt.title("Extra Trees Predicted vs Actual")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -350,15 +309,6 @@ tree_1 = DecisionTreeRegressor()
 tree_1.fit(X_train, y_train)
 # NG tree_2.fit(X_train, y_train)
 
-"""
-AdaBoostRegressor(base_estimator=DecisionTreeRegressor(criterion='mse', max_depth=None, max_features=None,
-           max_leaf_nodes=None, min_impurity_decrease=0.0,
-           min_impurity_split=None, min_samples_leaf=1,
-           min_samples_split=2, min_weight_fraction_leaf=0.0,
-           presort=False, random_state=None, splitter='best'),
-         learning_rate=0.1, loss='linear', n_estimators=200,
-         random_state=None)
-"""
 # Score the decision tree model
 cc = tree_1.score(X_test, y_test)
 print(cc)
@@ -409,7 +359,7 @@ plt.barh(range(len(indices)), importances[indices], color="b", align="center")
 plt.yticks(range(len(indices)), features[indices])
 plt.xlabel("Relative Importance")
 
-plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -418,7 +368,7 @@ plt.xlabel("Measured")
 plt.ylabel("Predicted")
 plt.title("Decision Tree Predicted vs Actual")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -428,11 +378,10 @@ plt.xlabel("Measured")
 plt.ylabel("Predicted")
 plt.title("Boosted Decision Tree Predicted vs Actual")
 
-plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 
-# kilo 不能用 xgboost
 # Fitting XGB regressor
 xboost = XGBRegressor(n_estimators=200)
 
@@ -456,7 +405,7 @@ plt.xlabel("Measured")
 plt.ylabel("Predicted")
 plt.title("XGBoost Predicted vs Actual")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -490,13 +439,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
+
 
 print("------------------------------------------------------------")  # 60個
-
-
-#plt.style.use("ggplot")
-#plt.rcParams["figure.figsize"] = [16, 9]
-
 
 
 print("------------------------------")  # 30個

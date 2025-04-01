@@ -139,6 +139,7 @@ clf = SVC()  # 非線性SVM函數學習機
 clf.fit(x, y)  # 學習訓練.fit
 
 y_pred = clf.predict(x)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 print("原始 x 資料 :", x)
 print("原始 y 資料 :", y, "\t=> 目標")
@@ -146,7 +147,7 @@ print("用原始 x 資料預測的結果 :", y_pred)
 
 xx, yy = -0.8, -1
 cc = clf.predict([[xx, yy]])  # 預測.predict
-
+#print("預測結果 :\n", y_pred, sep="")
 print("預測結果 :\n", cc, sep="")
 
 xx = yy = np.arange(-7, 7, 0.2)
@@ -278,6 +279,8 @@ clf = SVC()  # 非線性SVM函數學習機
 clf.fit(x, y)  # 學習訓練.fit
 
 y_pred = clf.predict(x)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
+
 """
 print("真實答案 :\n", y, sep="")
 print("預測結果 :\n", y_pred, sep="")
@@ -362,6 +365,7 @@ clf = SVC()  # 非線性SVM函數學習機
 clf.fit(X_train, y_train)
 
 y_pred = clf.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 # 直接用SVC的方法算正確率
 cc = clf.score(X_test, y_test)
@@ -387,6 +391,7 @@ model = LinearSVC()  # 線性支援向量機 (Linear SVM)
 model.fit(X_train, y_train)  # 學習訓練.fit
 
 y_pred = model.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 print(accuracy_score(y_pred, y_test))  # 評価
 
@@ -415,6 +420,7 @@ svm_model.fit(dx_train, label_train)  # 學習訓練.fit
 
 # 對測試數據做預測
 pred = svm_model.predict(dx_test)
+print("預測結果 :\n", pred, sep="")
 
 # 輸出測試數據的 label
 print(label_test)
@@ -444,6 +450,7 @@ svm_model = LinearSVC()  # 線性支援向量機 (Linear SVM)
 svm_model.fit(dx_train, label_train)  # 學習訓練.fit
 
 pred = svm_model.predict(dx_test)
+print("預測結果 :\n", pred, sep="")
 
 # 輸出線性SVM準確性
 print(f"線性訓練資料的準確性 = {svm_model.score(dx_train, label_train)}")
@@ -452,7 +459,8 @@ print(f"線性測試資料的準確性 = {svm_model.score(dx_test, label_test)}"
 # 非線性SVM 建立分類模型, 建立訓練數據模型, 對測試數據做預測
 clf = SVC()
 clf.fit(dx_train, label_train)
-pred = clf.predict(dx_test)
+y_pred = clf.predict(dx_test)
+print("預測結果 :\n", y_pred, sep="")
 
 # 輸出非線性SVM準確性
 print(f"非線性訓練資料的準確性 = {clf.score(dx_train, label_train)}")
@@ -497,6 +505,7 @@ print("2. 使用 SVC() 非線性SVM函數學習機")
 clf = SVC()  # 非線性SVM函數學習機
 clf.fit(X_train, y_train)  # 學習訓練.fit
 y_pred = clf.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 cc = clf.score(X_train, y_train)
 print("正確率 :", cc)
@@ -640,9 +649,10 @@ clf = SVC()
 
 clf.fit(X_SVM, Y)  # 學習訓練.fit
 
-y_predict = clf.predict(X_SVM)
+y_pred = clf.predict(X_SVM)
+print("預測結果 :\n", y_pred, sep="")
 
-plt.scatter(X_SVM[:, 0], X_SVM[:, 1], c=y_predict)
+plt.scatter(X_SVM[:, 0], X_SVM[:, 1], c=y_pred)
 
 show()
 
@@ -720,7 +730,7 @@ clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 # 7. 模型計分
 y_pred = clf.predict(X_test_std)  # 預測.predict
-print(y_pred)
+print("預測結果 :\n", y_pred, sep="")
 
 print("計算準確率")
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
@@ -759,6 +769,7 @@ clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 print("模型計分")
 y_pred = clf.predict(X_test_std)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 # 93.33%
 
@@ -811,7 +822,7 @@ clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 # 7. 模型計分
 y_pred = clf.predict(X_test_std)  # 預測.predict
-print(y_pred)
+print("預測結果 :\n", y_pred, sep="")
 
 # 計算準確率
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
@@ -849,6 +860,7 @@ clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
 # 模型計分
 y_pred = clf.predict(X_test_std)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # (120, 4) (30, 4) (120,) (30,)
@@ -980,6 +992,7 @@ SVC(
 # 第六步：预测测试集合结果
 # Predicting the Test set results
 y_pred = classifier.predict(X_test)
+print("預測結果 :\n", y_pred, sep="")
 
 # 第七步：创建混淆矩阵
 # Making the Confusion Matrix
@@ -1159,6 +1172,7 @@ clf = SVC(kernel="linear")  # 非線性SVM函數學習機, linear模式
 clf.fit(X, y)  # 學習訓練.fit
 
 y_pred = clf.predict(X)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 # 計算正確率
 accuracy = accuracy_score(y, y_pred)
@@ -1182,6 +1196,7 @@ clf = SVC(kernel="linear", C=0.01)  # 非線性SVM函數學習機, linear模式
 clf.fit(X_train, y_train)  # 學習訓練.fit
 
 y_pred = clf.predict(X_test)
+print("預測結果 :\n", y_pred, sep="")
 
 # 設定顯示小數點位數
 np.set_printoptions(precision=2)
@@ -1293,6 +1308,8 @@ clf.fit(X_train_std, y_train)
 
 # 計算準確率
 y_pred = clf.predict(X_test_std)
+print("預測結果 :\n", y_pred, sep="")
+
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 # 73.33%
 
@@ -1319,6 +1336,8 @@ clf.fit(X_train_std, y_train)
 
 # 計算準確率
 y_pred = clf.predict(X_test_std)
+print("預測結果 :\n", y_pred, sep="")
+
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # 100.00%
@@ -1684,11 +1703,15 @@ SVC(class_weight='balanced')
 
 # 計算準確率
 y_pred = clf.predict(X_test_pca)
+print("預測結果 :\n", y_pred, sep="")
+
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
 
 # 分類報告
 
 y_pred = clf.predict(X_test_pca)
+print("預測結果 :\n", y_pred, sep="")
+
 print(classification_report(y_test, y_pred, target_names=target_names))
 
 # 混淆矩陣圖
@@ -1791,6 +1814,8 @@ print(clf.best_estimator_)
 print("Predicting people's names on the test set")
 t0 = time.time()
 y_pred = clf.predict(X_test_pca)
+print("預測結果 :\n", y_pred, sep="")
+
 print("done in %0.3fs" % (time.time() - t0))
 
 print(classification_report(y_test, y_pred, target_names=target_names))
@@ -1876,12 +1901,14 @@ clf = SVC()
 clf.fit(x_train, y_train)
 
 y_predict = clf.predict(x_test)
+print("預測結果 :\n", y_predict, sep="")
 
 print("看看我們模型預測和真實狀況差多少?")
 print(y_predict - y_test)
 
 # 看看有沒有不準的?
 y_predict = clf.predict(x_test)
+print("預測結果 :\n", y_predict, sep="")
 
 # 這時因為如果答對了, 我們和正確答案相減就是 0。學得不錯就會大部份是 0, 錯的不是 0 畫出來就會不同色。我們來試試看。
 plt.scatter(x_test[:, 0], x_test[:, 1], c=y_predict - y_test)
@@ -2120,6 +2147,8 @@ SVC(C=1.0, break_ties=False, cache_size=200, class_weight=None, coef0=0.0,
 # 選擇 features 真的很重要！
 
 y_predict = clf.predict(x_test)
+print("預測結果 :\n", y_predict, sep="")
+
 print(y_predict - y_test)
 y_predict - y_test
 
@@ -2135,6 +2164,7 @@ show()
 # 也可以畫這種的
 
 y_predict = clf.predict(x_test)
+print("預測結果 :\n", y_predict, sep="")
 
 plt.scatter(x_test[:, 0], x_test[:, 1], c=y_predict)
 show()
@@ -2162,6 +2192,8 @@ NuSVC(break_ties=False, cache_size=200, class_weight=None, coef0=0.0,
 """
 
 y_predict = clf1.predict(x_test)
+print("預測結果 :\n", y_predict, sep="")
+
 plt.scatter(x_test[:, 0], x_test[:, 1], c=y_predict - y_test)
 
 show()
@@ -2190,6 +2222,7 @@ clf = SVC(gamma="scale")
 clf.fit(x_train, y_train)
 
 y_pred = clf.predict(x_test)
+print("預測結果 :\n", y_pred, sep="")
 
 print(y_pred - y_test)
 

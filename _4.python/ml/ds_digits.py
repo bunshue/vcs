@@ -30,6 +30,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 import sklearn
+from sklearn import svm
 from sklearn import datasets
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
@@ -38,6 +39,7 @@ from sklearn.model_selection import train_test_split  # 資料分割 => 訓練�
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_val_predict
 from sklearn.model_selection import learning_curve
+from sklearn.ensemble import RandomForestClassifier
 
 print("------------------------------------------------------------")  # 60個
 
@@ -112,6 +114,41 @@ print("------------------------------------------------------------")  # 60個
 
 print("畫出前100張圖")
 
+digits = datasets.load_digits()
+
+X = digits.data
+y = digits.target
+
+
+print('畫出手寫數字資料集前N筆')
+
+# 查看预测的情况
+fig, axes = plt.subplots(10, 10, figsize=(8, 8))
+fig.subplots_adjust(hspace=0.1, wspace=0.1)
+
+for i, ax in enumerate(axes.flat):
+    ax.imshow(X[i].reshape(8, 8), cmap=plt.cm.gray_r, interpolation="nearest")
+    ax.text(
+        0.05,
+        0.05,
+        str(y[i]),
+        fontsize=12,
+        transform=ax.transAxes,
+        color="red",
+    )
+    ax.text(
+        0.8, 0.05, str(y[i]), fontsize=12, transform=ax.transAxes, color="black"
+    )
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("畫出前100張圖")
+
 digits = datasets.load_digits(n_class=10)
 
 X = digits.data
@@ -134,7 +171,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 # 以sklearn中的手寫數字集合來舉例：
 
@@ -168,14 +204,13 @@ model = RandomForestClassifier(n_estimators=1000)  # 隨機森林分類函數學
 
 model.fit(Xtrain, ytrain)
 
-ypred = model.predict(Xtest)
+y_pred = model.predict(Xtest)  # 預測.predict
 
-print(classification_report(ypred, ytest))
-
+print(classification_report(y_pred, ytest))
 
 # 可以看到上圖，最左邊為數字0~9的類別，主要回傳精確值以及support，看這些數字很難懂，先看下圖
 
-mat = confusion_matrix(ytest, ypred)
+mat = confusion_matrix(ytest, y_pred)
 sns.heatmap(mat.T, square=True, annot=True, fmt="d", cbar=False)
 plt.xlabel("true label")
 plt.ylabel("predicted label")
@@ -190,13 +225,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # 変換後のベクトルデータを入力として機械学習モデルを適用する
-
-from sklearn.ensemble import RandomForestClassifier
 
 digits = datasets.load_digits()
 
@@ -208,57 +237,40 @@ model = RandomForestClassifier(n_estimators=10)
 model.fit(data[: N // 2], digits.target[: N // 2])  # 學習訓練.fit
 
 expected = digits.target[N // 2 :]
-predicted = model.predict(data[N // 2 :])  # 預測.predict
 
-print(classification_report(expected, predicted))
+y_pred = model.predict(data[N // 2 :])  # 預測.predict
+
+print(classification_report(expected, y_pred))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 digits = datasets.load_digits()
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-Xtrain, Xtest, Ytrain, Ytest = train_test_split(
-    digits.data, digits.target, test_size=0.2
-)
-# 訓練組8成, 測試組2成
+X = digits.data
+y = digits.target
+
+# 資料分割
+Xtrain, Xtest, Ytrain, Ytest = train_test_split(X, y, test_size=0.2)
 
 # 使用支持向量机来训练模型
-from sklearn import svm
 
 clf = svm.SVC(gamma=0.001, C=100.0, probability=True)
 
 clf.fit(Xtrain, Ytrain)  # 學習訓練.fit
 
-Ypred = clf.predict(Xtest)
+y_pred = clf.predict(Xtest)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
-cc = accuracy_score(Ytest, Ypred)
-print("計算分類模型的準確率 accuracy_score :")
-print(cc)
+cc = accuracy_score(Ytest, y_pred)
+print("計算分類模型的準確率 accuracy_score :", cc)
 
-print(clf.score(Xtest, Ytest))
+cc = clf.score(Xtest, Ytest)
+print("score :", cc)
 
-# 查看预测的情况
-fig, axes = plt.subplots(4, 4, figsize=(8, 8))
-fig.subplots_adjust(hspace=0.1, wspace=0.1)
-
-for i, ax in enumerate(axes.flat):
-    ax.imshow(Xtest[i].reshape(8, 8), cmap=plt.cm.gray_r, interpolation="nearest")
-    ax.text(
-        0.05,
-        0.05,
-        str(Ypred[i]),
-        fontsize=32,
-        transform=ax.transAxes,
-        color="green" if Ypred[i] == Ytest[i] else "red",
-    )
-    ax.text(
-        0.8, 0.05, str(Ytest[i]), fontsize=32, transform=ax.transAxes, color="black"
-    )
-    ax.set_xticks([])
-    ax.set_yticks([])
-
-show()
+N = 30
+print('測試資料前N筆 :', Ytest[:N])
+print('預測結果前N筆 :', y_pred[:N])
 
 print("------------------------------")  # 30個
 
@@ -273,30 +285,28 @@ joblib.dump(clf, 'digits_svm.pkl')
 
 print('导入模型参数，直接进行预测')
 clf = joblib.load('digits_svm.pkl')
-Ypred = clf.predict(Xtest)
+y_pred = clf.predict(Xtest)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
+
 print(clf.score(Xtest, Ytest))
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import svm
-
-# 识别手写体数字
-svc = svm.SVC(gamma=0.001, C=100.0)
-
 digits = datasets.load_digits()
 
+X = digits.data
+y = digits.target
 
-def svms():
-    # 学习并返回识别结果
-    svc.fit(digits.data[:1791], digits.target[:1791])  # 學習訓練.fit
-    res = svc.predict(digits.data[1791:1797])  # 识别
-    return list(res)
+clf = svm.SVC(gamma=0.001, C=100.0)
 
+clf.fit(X[:1791], y[:1791])  # 學習訓練.fit
 
-result = svms()
+res = clf.predict(X[1791:1797])  # 預測.predict
 
-duibi = digits.target[1791:1797]
+result = list(res)
+
+duibi = y[1791:1797]
 print("识别的数字: {}\n实际的结果: {}".format(result, list(duibi)))
 
 # 显示要识别的数字图片
@@ -318,15 +328,13 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.svm import SVC
-
 digits = datasets.load_digits()
 
 X = digits.data
 y = digits.target
 
 train_sizes, train_loss, test_loss = learning_curve(
-    SVC(gamma=0.01),
+    svm.SVC(gamma=0.01),
     X,
     y,
     cv=10,
@@ -341,31 +349,21 @@ plt.plot(train_sizes, test_loss_mean, "o-", color="g", label="Cross-validation")
 
 plt.xlabel("Training examples")
 plt.ylabel("Loss")
-plt.legend(loc="best")
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.model_selection import learning_curve
-from sklearn.svm import SVC
-
 digits = datasets.load_digits()
 
 X = digits.data
 y = digits.target
-param_range = np.logspace(-6, -2.3, 5)
-print(param_range)
-
-# train_size_abs, train_scores, test_scores = learning_curve(
 
 train_size_abs, train_loss, test_loss = learning_curve(
-    SVC(),
+    svm.SVC(),
     X,
     y,
     # train_sizes=np.array([0.1, 0.33, 0.55, 0.78, 1. ]),
-    # param_range=param_range,
-    # train_sizes=param_range,
     cv=10,
     # cv='warn',
     scoring="neg_mean_squared_error",
@@ -373,6 +371,9 @@ train_size_abs, train_loss, test_loss = learning_curve(
 
 train_loss_mean = -np.mean(train_loss, axis=1)
 test_loss_mean = -np.mean(test_loss, axis=1)
+
+param_range = np.logspace(-6, -2.3, 5)
+print(param_range)
 
 plt.plot(param_range, train_loss_mean, "o-", color="r", label="Training")
 plt.plot(param_range, test_loss_mean, "o-", color="g", label="Cross-validation")
@@ -382,6 +383,9 @@ plt.ylabel("Loss")
 plt.legend(loc="best")
 
 show()
+
+print('dddddddddddddddd')
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -554,7 +558,8 @@ y = digits.target
 
 y = LabelBinarizer().fit_transform(y)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 
 def add_layer(
@@ -719,15 +724,14 @@ print(type(digits))
 X = digits.images.reshape(len(digits.images), -1)
 y = digits.target
 
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
 
 mlp = MLPClassifier(hidden_layer_sizes=(16,))  # 多層感知器分類器 函數學習機
 
 mlp.fit(X_train, y_train)  # 學習訓練.fit
 
-y_pred = mlp.predict(X_test)
+y_pred = mlp.predict(X_test)  # 預測.predict
 print(accuracy_score(y_pred, y_test))  # 評価
 
 print("------------------------------------------------------------")  # 60個
