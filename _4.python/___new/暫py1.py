@@ -5265,11 +5265,6 @@ print(response)
 print('----------------')
 """
 
-
-
-# Colab 使用，本機環境請刪除
-from flask_ngrok import run_with_ngrok
-
 print("------------------------------------------------------------")  # 60個
 
 vcs待尋找
@@ -5437,5 +5432,69 @@ pip install h5py==2.10.0
 
 更新套件
 pip install yfinance -U
+
+
+
+
+
+
+----------------colab ST----------------
+
+
+"""
+!mkdir -p /drive
+#umount /drive
+!mount --bind /content/drive/My\ Drive /drive
+!mkdir -p /drive/ngrok-ssh
+!mkdir -p ~/.ssh
+
+----
+
+!mkdir -p /drive/ngrok-ssh
+%cd /drive/ngrok-ssh
+!wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -O ngrok-stable-linux-amd64.zip
+!unzip -u ngrok-stable-linux-amd64.zip
+!cp /drive/ngrok-ssh/ngrok /ngrok
+!chmod +x /ngrok
+"""
+print("------------------------------------------------------------")  # 60個
+
+"""
+!mkdir -p /drive
+!mount --bind /content/drive/My\ Drive /drive
+!mkdir -p /drive/ngrok-ssh
+!mkdir -p ~/.ssh
+
+print("------------------------------------------------------------")  # 60個
+
+!mkdir -p /drive/ngrok-ssh
+%cd /drive/ngrok-ssh
+!wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -O ngrok-stable-linux-amd64.zip
+!unzip -u ngrok-stable-linux-amd64.zip
+!cp /drive/ngrok-ssh/ngrok /ngrok
+!chmod +x /ngrok
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+!pip install google.colab
+
+print("------------------------------------------------------------")  # 60個
+
+#!cp /content/db.sqlite3 "/content/drive/MyDrive/Colab Notebooks/package/tchinese_db.sqlite3"
+#!cp "/content/drive/MyDrive/Colab Notebooks/package/tchinese_db.sqlite3" /content/db.sqlite3
+
+
+-----------------------
+
+#Colab資料夾設定方法
+#!pip install google.colab 
+     
+
+
+
+
+----------------colab SP----------------
+
 
 
