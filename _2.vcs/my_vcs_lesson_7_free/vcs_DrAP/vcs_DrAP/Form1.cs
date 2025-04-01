@@ -55,6 +55,7 @@ namespace vcs_DrAP
         string picture_viewer_path = String.Empty;
         string text_editor_path = String.Empty;
         string python_editor_path = String.Empty;
+        string winmerge_path = String.Empty;
         string search_path = @"C:\_git\vcs\_2.vcs";
         string specified_search_path = @"C:\_git\vcs\_4.python\__code";
         string default_vcs_path = @"C:\_git\vcs\_2.vcs";
@@ -237,28 +238,28 @@ namespace vcs_DrAP
             bt_help.Location = new Point(x_st, y_st + dy * 0);
 
             x_st += bt_help.Size.Width + dx;
-            bt_delete_file.Location = new Point(x_st-8, y_st + dy * 0);
+            bt_delete_file.Location = new Point(x_st - 8, y_st + dy * 0);
 
 
             x_st = 1000;
             y_st = 15;
 
-            textBox4.Location = new Point(x_st-10, y_st);
+            textBox4.Location = new Point(x_st - 10, y_st);
             label3.Location = new Point(x_st + 35, y_st + 8);
 
             bt_find_empty_folders.Location = new Point(x_st + 55, y_st);
-            bt_find_small_folders.Location = new Point(x_st+55, y_st + 30);
+            bt_find_small_folders.Location = new Point(x_st + 55, y_st + 30);
             bt_find_same_files2.Location = new Point(x_st + 55, y_st + 60);
 
-            textBox3.Location = new Point(x_st + 100 + 100-26, y_st);
+            textBox3.Location = new Point(x_st + 100 + 100 - 26, y_st);
             checkBox7.Location = new Point(x_st + 100 + 100 - 26, y_st + 50 + 6 - 20);
             bt_test1.Location = new Point(x_st + 100 + 100 - 26, y_st + 50 + 10);
             bt_test2.Location = new Point(x_st + 100 + 100 + 40 - 10 - 26, y_st + 50 + 10);
             dx = 85;
             dy = 35;
-            cb_option1.Location = new Point(x_st + 100 + 100 + dx * 1-50, y_st + dy);
-            cb_option2.Location = new Point(x_st + 100 + 100 + dx * 1-50, y_st + dy + 17);
-            cb_option3.Location = new Point(x_st + 100 + 100 + dx * 1-50, y_st + dy + 34);
+            cb_option1.Location = new Point(x_st + 100 + 100 + dx * 1 - 50, y_st + dy);
+            cb_option2.Location = new Point(x_st + 100 + 100 + dx * 1 - 50, y_st + dy + 17);
+            cb_option3.Location = new Point(x_st + 100 + 100 + dx * 1 - 50, y_st + dy + 34);
 
             x_st = 1318;
             y_st = 6;
@@ -271,7 +272,7 @@ namespace vcs_DrAP
             bt_search_pattern_opengl.Location = new Point(x_st + dx * 1, y_st + dy);
 
             bt_open_dir2.Location = new Point(x_st + dx * 2, y_st);
-            bt_save_file_data.Location = new Point(x_st + dx * 2, y_st+dy);
+            bt_save_file_data.Location = new Point(x_st + dx * 2, y_st + dy);
 
             bt_compare.Location = new Point(x_st + dx * 3, y_st);
 
@@ -302,9 +303,9 @@ namespace vcs_DrAP
             rb_python_search3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
             bt_search_pattern_python.Size = new Size(45, 45);
-            bt_search_pattern_python.Location = new Point(x_st + dx * 1, y_st + dy * 0-5);
+            bt_search_pattern_python.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 5);
             bt_edit_python_files.Size = new Size(45, 45);
-            bt_edit_python_files.Location = new Point(x_st + dx * 1, y_st + dy * 2-2);
+            bt_edit_python_files.Location = new Point(x_st + dx * 1, y_st + dy * 2 - 2);
 
 
             /*
@@ -3249,6 +3250,7 @@ namespace vcs_DrAP
             picture_viewer_path = Properties.Settings.Default.picture_viewer_path;
             text_editor_path = Properties.Settings.Default.text_editor_path;
             python_editor_path = Properties.Settings.Default.python_editor_path;
+            winmerge_path = Properties.Settings.Default.winmerge_path;
 
             if (Properties.Settings.Default.search_path != "")
                 search_path = Properties.Settings.Default.search_path;
@@ -3277,6 +3279,11 @@ namespace vcs_DrAP
             {
                 richTextBox2.Text += "python編輯程式不存在 : " + Properties.Settings.Default.python_editor_path + "\n使用Windows預設文字編輯程式\n";
                 python_editor_path = String.Empty;
+            }
+            if (System.IO.File.Exists(Properties.Settings.Default.winmerge_path) == false)
+            {
+                richTextBox2.Text += "winmerge程式不存在 : " + Properties.Settings.Default.winmerge_path + "\n使用Windows預設文字編輯程式\n";
+                winmerge_path = String.Empty;
             }
 
             //預設搜尋路徑
@@ -3314,11 +3321,52 @@ namespace vcs_DrAP
 
         private void bt_compare_Click(object sender, EventArgs e)
         {
+            richTextBox2.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
+            for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            {
+                richTextBox2.Text += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
+            }
 
+            if (listView1.SelectedIndices.Count != 2)
+            {
+                richTextBox2.Text += "必須要選取2個檔案才能比較\n";
+                return;
+            }
+
+            int selNdx;
+            string all_filename = string.Empty;
+
+            //richTextBox2.Text += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
+            //for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            for (int i = 0; i < listView1.SelectedItems.Count; i++)
+            {
+                selNdx = listView1.SelectedIndices[i];
+                listView1.Items[selNdx].Selected = true;    //選到的項目
+                //richTextBox2.Text += listView1.Items[selNdx].Text + "\n";
+
+                if (flag_function == FUNCTION_SEARCH_TEXT)
+                {
+                    all_filename += " \"" + listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].Text + "\"";
+                }
+                else
+                {
+                    all_filename += " \"" + listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text + "\"";
+                }
+            }
+
+            richTextBox2.Text += "all_filename : " + all_filename + "\n";
+
+            string prog = @"C:/Program Files (x86)/WinMerge/WinMergeU.exe";
+
+            if (winmerge_path == string.Empty)
+            {
+                winmerge_path = prog;
+            }
+
+            Process.Start(winmerge_path, all_filename);
+            return;
         }
-
         //檢查空資料夾 ST
-
 
         int total_show_empty_folder_cnt = 0;
         int total_delete_empty_folder_cnt = 0;
@@ -3519,6 +3567,5 @@ namespace vcs_DrAP
                 specified_search_path = String.Empty;
             }
         }
-
     }
 }

@@ -29,6 +29,7 @@ def show():
     plt.show()
     pass
 
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -304,35 +305,38 @@ print("------------------------------------------------------------")  # 60個
 
 import pyarrow.parquet as pq
 import matplotlib as mpl
-mpl.rcParams['figure.dpi']=125
+
+mpl.rcParams["figure.dpi"] = 125
 
 # Create CSV files of various sizes
 
-for i in range(1,11):
-    a = np.random.normal(size=(int(5325*i), int(1e2)))
+for i in range(1, 11):
+    a = np.random.normal(size=(int(5325 * i), int(1e2)))
     df = pd.DataFrame(a, columns=["C" + str(i) for i in range(100)])
-    fname = "tmp_test"+str(i)+".csv"
+    fname = "tmp_test" + str(i) + ".csv"
     df.to_csv(fname)
-    print(f"Size of file with {5325*i} rows: {round(os.path.getsize(fname)/(1024*1024),3)} MB")
+    print(
+        f"Size of file with {5325*i} rows: {round(os.path.getsize(fname)/(1024*1024),3)} MB"
+    )
 
 # Create Parquet (compressed) files from the same CSV files
 
-for i in range(1,11):
-    fname = "tmp_test"+str(i)+".csv"
-    parquet_name = "tmp_test"+str(i)+"_parquet.zip"
+for i in range(1, 11):
+    fname = "tmp_test" + str(i) + ".csv"
+    parquet_name = "tmp_test" + str(i) + "_parquet.zip"
     df = pd.read_csv(fname)
-    df.to_parquet(parquet_name,compression="gzip")
+    df.to_parquet(parquet_name, compression="gzip")
     print(f"Created {parquet_name}")
 
-#The directory should look like this now...
+# The directory should look like this now...
 
-#Reading speed of CSV (in Pandas) and Parquet files (with PyArrow)
+# Reading speed of CSV (in Pandas) and Parquet files (with PyArrow)
 
-t_read_pd,t_read_arrow = [],[]
+t_read_pd, t_read_arrow = [], []
 
-for i in range(1,11):
-    fname = "tmp_test"+str(i)+".csv"
-    parquet_name = "tmp_test"+str(i)+"_parquet.zip"
+for i in range(1, 11):
+    fname = "tmp_test" + str(i) + ".csv"
+    parquet_name = "tmp_test" + str(i) + "_parquet.zip"
     t1 = time.time()
     df1 = pd.read_csv(fname)
     t2 = time.time()
@@ -350,14 +354,18 @@ t_read_arrow = np.array(t_read_arrow)
 
 plt.figure(figsize=(11, 5))
 plt.plot(
-    [10*i for i in range(1, 11)], t_read_pd/t_read_arrow, "bo--", linewidth=2, markersize=8
+    [10 * i for i in range(1, 11)],
+    t_read_pd / t_read_arrow,
+    "bo--",
+    linewidth=2,
+    markersize=8,
 )
 plt.grid(True)
 plt.title(
     "Ratio of Pandas to Arrow time to read files with increasing size",
     fontsize=16,
 )
-plt.xticks([10*i for i in range(1, 11)],fontsize=14)
+plt.xticks([10 * i for i in range(1, 11)], fontsize=14)
 plt.xlabel("Size (MB)", fontsize=14)
 plt.ylabel("Ratio of Pandas/Arrow read time", fontsize=14)
 show()
@@ -399,9 +407,9 @@ print(
 df3 = df2.to_pandas()
 df3.head()
 
-#The dataframes df1 and df3 are the same, as expected.
+# The dataframes df1 and df3 are the same, as expected.
 
-#Reading a small number of columns is much faster with Arrow
+# Reading a small number of columns is much faster with Arrow
 
 all_cols = ["C" + str(i) for i in range(100)]
 t_pandas, t_arrow = [], []
@@ -431,7 +439,7 @@ plt.title(
     "Ratio of Pandas to Arrow time to read a 100 MB CSV file with increasing # of columns",
     fontsize=15,
 )
-plt.xticks([i for i in range(0, 100, 10)],fontsize=14)
+plt.xticks([i for i in range(0, 100, 10)], fontsize=14)
 plt.xlabel("No. of columns", fontsize=14)
 plt.ylabel("Ratio of Pandas/Arrow read time", fontsize=14)
 show()
@@ -439,46 +447,49 @@ show()
 # PyArrow (Parquet) reading time varies with sparsity in the file
 
 pct_nan = []
-for i in range(11,21):
-    a = np.random.normal(size=(int(5325*5), int(1e2)))
-    cutoff = -2+0.4*(i-11)
+for i in range(11, 21):
+    a = np.random.normal(size=(int(5325 * 5), int(1e2)))
+    cutoff = -2 + 0.4 * (i - 11)
     a = np.where(a < cutoff, np.nan, a)
-    p_nan = round(100*np.count_nonzero(np.isnan(a))/a.size,2)
+    p_nan = round(100 * np.count_nonzero(np.isnan(a)) / a.size, 2)
     pct_nan.append(p_nan)
     df = pd.DataFrame(a, columns=["C" + str(i) for i in range(100)])
-    fname = "tmp_test"+str(i)+".csv"
+    fname = "tmp_test" + str(i) + ".csv"
     df.to_csv(fname)
     print(f"NaN-filled file written with {p_nan}%")
 
-for i in range(11,21):
-    fname = "tmp_test"+str(i)+".csv"
-    parquet_name = "tmp_test"+str(i)+"_parquet.zip"
+for i in range(11, 21):
+    fname = "tmp_test" + str(i) + ".csv"
+    parquet_name = "tmp_test" + str(i) + "_parquet.zip"
     df = pd.read_csv(fname)
-    df.to_parquet(parquet_name,compression="gzip")
+    df.to_parquet(parquet_name, compression="gzip")
     print(f"Created {parquet_name}")
 
 t_read_nan = []
 # m_read_nan = []
 
-for i in range(11,21):
-    parquet_name = "tmp_test"+str(i)+"_parquet.zip"
+for i in range(11, 21):
+    parquet_name = "tmp_test" + str(i) + "_parquet.zip"
     t1 = time.time()
     df2 = pq.read_table(parquet_name)
     t2 = time.time()
-    delta_t = round(1000*(t2 - t1), 3)
+    delta_t = round(1000 * (t2 - t1), 3)
     t_read_nan.append(delta_t)
     # m_read_nan.append()
     print(f"Done for file # {i}")
-t_read_nan=np.array(t_read_nan)
+t_read_nan = np.array(t_read_nan)
 
 plt.figure(figsize=(11, 5))
-plt.plot(pct_nan,t_read_nan, "bo--", linewidth=2, markersize=8)
+plt.plot(pct_nan, t_read_nan, "bo--", linewidth=2, markersize=8)
 plt.grid(True)
-plt.title("PyArrow (Parquet) reading time varies with sparsity in the file",fontsize=16,)
-#plt.xticks([10*i for i in range(1, 11)],fontsize=14)
+plt.title(
+    "PyArrow (Parquet) reading time varies with sparsity in the file",
+    fontsize=16,
+)
+# plt.xticks([10*i for i in range(1, 11)],fontsize=14)
 plt.xlabel("Sparsity (% of NaN values)", fontsize=14)
 plt.ylabel("Read time (milliseconds)", fontsize=14)
-plt.ylim(int(t_read_nan.min()*0.9),int(t_read_nan.max()*1.1))
+plt.ylim(int(t_read_nan.min() * 0.9), int(t_read_nan.max() * 1.1))
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -491,15 +502,25 @@ print("------------------------------------------------------------")  # 60個
 from tabula import read_pdf
 
 # Define a list of page numbers to read
-pages_to_read = [68,69,70,71,72]
+pages_to_read = [68, 69, 70, 71, 72]
 
-column_names = ['Country','Population','Surface area','Population density','Urban pop %',
-                'GNI Atlas Method (Billions)','GNI Atlas Method (Per capita)','Purchasing power (Billions)',
-                'Purchasing power (Per capita)','GDP % growth', 'GDP per capita growth']
+column_names = [
+    "Country",
+    "Population",
+    "Surface area",
+    "Population density",
+    "Urban pop %",
+    "GNI Atlas Method (Billions)",
+    "GNI Atlas Method (Per capita)",
+    "Purchasing power (Billions)",
+    "Purchasing power (Per capita)",
+    "GDP % growth",
+    "GDP per capita growth",
+]
 
 # Test a PDF table extraction by using the read_pdf function from Tabula
 
-lst_tbl1=read_pdf("data/WDI-2016.pdf",pages=70,multiple_tables=True)
+lst_tbl1 = read_pdf("data/WDI-2016.pdf", pages=70, multiple_tables=True)
 
 cc = len(lst_tbl1)
 print(cc)
@@ -527,9 +548,9 @@ df.head()
 list_of_df = []
 # Loop for reading tables from the PDF file page by page
 for pg in pages_to_read:
-    lst_tbl=read_pdf("data/WDI-2016.pdf",pages=pg,multiple_tables=True)
+    lst_tbl = read_pdf("data/WDI-2016.pdf", pages=pg, multiple_tables=True)
     df = lst_tbl[1]
-    df.columns=column_names
+    df.columns = column_names
     list_of_df.append(df)
     print("Finished processing page: {}".format(pg))
 
@@ -539,7 +560,7 @@ list_of_df[4]
 
 # Concetenate all the DataFrames in the list into a single DataFrame so that we can use it for further wrangling and analysis.
 
-df = pd.concat(list_of_df,axis=0)
+df = pd.concat(list_of_df, axis=0)
 
 df.shape
 

@@ -377,7 +377,7 @@ def print_y_data(y):
         else:
             print(end=" ")
 
-
+'''
 print("準備工作 ST")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -560,7 +560,7 @@ print(y_train[0])
 print("------------------------------------------------------------")  # 60個
 
 print("準備工作 SP")
-
+'''
 current_time = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
 print("現在時間 :", current_time)
 
@@ -603,9 +603,6 @@ timeElapsed = time.time() - time_st
 timeElapsed = round(timeElapsed, 4)
 
 print("所花時間={}".format(timeElapsed))
-
-
-sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2144,42 +2141,25 @@ train_generator = gen.flow(x_train, y_train, batch_size=128)
 try:
     with open("data/model_ImageDataGenerator.h5", "r") as load_weights:
         # 讀取模型權重
+        print('讀取模型權重')
         model.load_weights("data/model_ImageDataGenerator.h5")
 
 except IOError:
     print("File not accessible")
 
-""" NG
-checkpoint = tf.keras.callbacks.ModelCheckpoint(
-    "tmp_model_ImageDataGenerator.h5",
-    monitor="accuracy",
-    verbose=1,
-    save_best_only=True,
-    mode="auto",
-    save_freq=1,
-)
-"""
 
 # 保存模型架構
 with open("tmp_model_ImageDataGenerator.json", "w") as json_file:
     json_file.write(model.to_json())
-
-"""
-# 學習訓練.fit 使用 callbacks
-# 共有N個樣品, 一次做 BATCH_SIZE 個, 一輪需要做 N / BATCH_SIZE 次
-history = model.fit(train_generator, callbacks=[checkpoint], epochs=EPOCHS)
-"""
 
 # 全部拿來測試
 # TBD do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 # 學習訓練.fit 一般
 do_model_fit1(x_train, y_train)
 
-# history = model.fit_generator(train_generator, y_train, epochs=EPOCHS)
-
 # 學習訓練.fit
 # 共有N個樣品, 一次做 BATCH_SIZE 個, 一輪需要做 N / BATCH_SIZE 次
-# history = model.fit(train_generator, epochs=EPOCHS)
+history = model.fit(train_generator, epochs=EPOCHS)
 
 # 模型評估
 evaluate_model(x_test, y_test)
@@ -3020,8 +3000,6 @@ model = tf.keras.models.load_model(mnist_model_filename)
     path="mnist.npz"
 )
 
-
-"""
 # 做可視化處理
 
 acc = history.history["accuracy"]
@@ -3036,7 +3014,6 @@ plt.ylabel("accuracy")
 plt.xlabel("epoch")
 plt.suptitle("model")
 show()
-"""
 
 plt.plot(history.history["acc"])
 plt.plot(history.history["loss"])

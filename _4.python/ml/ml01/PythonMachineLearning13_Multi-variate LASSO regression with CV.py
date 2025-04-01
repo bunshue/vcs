@@ -32,6 +32,7 @@ from sklearn.datasets import make_blobs  # 集群資料集
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn import metrics
 from matplotlib.colors import ListedColormap
+from sklearn.linear_model import LinearRegression  # 函數學習機
 
 from sklearn import tree
 
@@ -44,11 +45,20 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# Multi-variate LASSO regression with CV
+
 # Multi-variate Rregression Metamodel with DOE based on random sampling
+
+N_points = 20  # Number of sample points
+# start with small < 40 points and see how the regularized model makes a difference.
+# Then increase the number is see the difference
+noise_mult = 50  # Multiplier for the noise term
+noise_mean = 10  # Mean for the Gaussian noise adder
+noise_sd = 10  # Std. Dev. for the Gaussian noise adder
 
 # Generate random (equivalent to Latin Hypercube sampling done in Optislang) feature vectors
 
-X = np.array(10 * np.random.randn(37, 5))
+X = np.array(10 * np.random.randn(N_points, 5))
 
 df = pd.DataFrame(X, columns=["Feature" + str(l) for l in range(1, 6)])
 
@@ -61,6 +71,7 @@ for i in df.columns:
     df.hist(i, bins=5, xlabelsize=15, ylabelsize=15, figsize=(8, 6))
 show()
 
+# Generate the output variable by analytic function + Gaussian noise (our goal will be to 'learn' this function)
 
 df["y"] = (
     5 * df["Feature1"] ** 2
@@ -69,7 +80,7 @@ df["y"] = (
     + 2 * df["Feature4"] * df["Feature5"]
     + 0.1 * df["Feature5"] ** 3
     + 0.8 * df["Feature1"] * df["Feature4"] * df["Feature5"]
-    + 30 * np.random.normal(loc=5, scale=2)
+    + noise_mult * np.random.normal(loc=noise_mean, scale=noise_sd)
 )
 
 cc = df.head()
@@ -83,7 +94,7 @@ show()
 
 # Standard linear regression
 
-linear_model = sklearn.linear_model.LinearRegression()  # 函數學習機
+linear_model = LinearRegression()  # 函數學習機
 
 X_linear = df.drop("y", axis=1)
 y_linear = df["y"]
@@ -112,8 +123,8 @@ print("R2 value of linear model:", linear_model.score(X_linear, y_linear))
 # R2 value of linear model: 0.347548929728
 
 plt.figure(figsize=(12, 8))
-plt.xlabel("Predicted value with linear fit", fontsize=20)
-plt.ylabel("Actual y-values", fontsize=20)
+plt.xlabel("Predicted value with linear fit")
+plt.ylabel("Actual y-values")
 plt.grid(1)
 plt.scatter(y_pred_linear, y_linear, edgecolors=(0, 0, 0), lw=2, s=80)
 plt.plot(y_pred_linear, y_pred_linear, "k--", lw=2)
@@ -123,14 +134,14 @@ show()
 
 from sklearn.preprocessing import PolynomialFeatures
 
-poly = PolynomialFeatures(3, include_bias=False)
+poly1 = PolynomialFeatures(3, include_bias=False)
 
-X_poly = poly.fit_transform(X)
-X_poly_feature_name = poly.get_feature_names_out(
+X_poly = poly1.fit_transform(X)
+X_poly_feature_name = poly1.get_feature_names_out(
     ["Feature" + str(l) for l in range(1, 6)]
 )
-print(X_poly_feature_name)
-print(len(X_poly_feature_name))
+print("The feature vector list:\n", X_poly_feature_name)
+print("\nLength of the feature vector:", len(X_poly_feature_name))
 
 df_poly = pd.DataFrame(X_poly, columns=X_poly_feature_name)
 cc = df_poly.head()
@@ -145,14 +156,16 @@ y_train = df_poly["y"]
 
 # Polynomial model without regularization and cross-validation
 
-poly = sklearn.linear_model.LinearRegression()  # 函數學習機
+poly2 = LinearRegression()  # 函數學習機
 
-model_poly = poly.fit(X_train, y_train)
-y_poly = poly.predict(X_train)
+model_poly = poly2.fit(X_train, y_train)
+y_poly = poly2.predict(X_train)
 RMSE_poly = np.sqrt(np.sum(np.square(y_poly - y_train)))
 print("Root-mean-square error of simple polynomial model:", RMSE_poly)
 
 # Root-mean-square error of simple polynomial model: 1.89910302223e-11
+
+# The non-regularized polunomial model (notice the coeficients are not learned properly)
 
 coeff_poly = pd.DataFrame(
     model_poly.coef_,
@@ -161,11 +174,13 @@ coeff_poly = pd.DataFrame(
 )
 print(coeff_poly)
 
+# R-square value of the simple polynomial model is perfect but the model is flawed as shown above i.e. it learned wrong coefficients and overfitted the to the data
+
 print("R2 value of simple polynomial model:", model_poly.score(X_train, y_train))
 
 # R2 value of simple polynomial model: 1.0
 
-# Metamodel (Optislang style :) - polynomial model with cross-validation and LASSO regularization
+# Polynomial model with cross-validation and LASSO regularization
 
 from sklearn.linear_model import LassoCV
 
@@ -196,14 +211,14 @@ print(model1.alpha_)
 
 # 0.11791796322572394
 
-# Printing only the non-zero coefficients of the metamodel
+# Printing only the non-zero coefficients of the regularized model (notice the coeficients are learned well enough)
 
 cc = coeff1[coeff1["Coefficients Metamodel"] != 0]
 print(cc)
 
 plt.figure(figsize=(12, 8))
-plt.xlabel("Predicted value with Metamodel", fontsize=20)
-plt.ylabel("Actual y-values", fontsize=20)
+plt.xlabel("Predicted value with Regularized Metamodel")
+plt.ylabel("Actual y-values")
 plt.grid(1)
 plt.scatter(y_pred1, y_train, edgecolors=(0, 0, 0), lw=2, s=80)
 plt.plot(y_pred1, y_pred1, "k--", lw=2)
@@ -231,7 +246,6 @@ plt.xlabel("-log(alpha)")
 plt.ylabel("Mean square error")
 plt.axis("tight")
 show()
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

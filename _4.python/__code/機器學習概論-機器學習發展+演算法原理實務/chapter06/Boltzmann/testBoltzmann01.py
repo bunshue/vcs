@@ -65,9 +65,9 @@ while iteration <= MAX_ITER:
 bestd = min(di) 
 indx = argmin(di)
 bestx = xx[indx]
-print "循环迭代",k,"次"
-print "最优解:",bestd
-print "最佳路线:",bestx	
+print("循环迭代",k,"次")
+print("最优解:",bestd)
+print("最佳路线:",bestx)
 
 # 优化前城市图,路径图
 Untils.drawScatter(cityPosition,flag=False)

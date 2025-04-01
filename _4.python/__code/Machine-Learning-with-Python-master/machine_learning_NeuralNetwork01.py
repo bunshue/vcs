@@ -37,7 +37,7 @@ from sklearn.model_selection import train_test_split  # 資料分割 => 訓練�
 from sklearn import metrics
 from sklearn.decomposition import PCA
 from sklearn.decomposition import KernelPCA  # KernelPCA 萃取特徵
-
+from sklearn.linear_model import LinearRegression  # 函數學習機
 from matplotlib.colors import ListedColormap
 from sklearn.preprocessing import MinMaxScaler
 from sklearn import tree
@@ -47,7 +47,7 @@ def show():
     plt.show()
     pass
 
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -63,14 +63,13 @@ This is a very simple example of using two scipy tools for linear regression.
     numpy.linalg.lstsq
     statsmodels.OLS
     Analytic solution using Moore-Penrose generalized inverse or simple multiplicative matrix inverse
-    sklearn.linear_model.LinearRegression
+    LinearRegression 線性迴歸機
 """
 from scipy import stats, optimize
 
 from numpy import linspace, polyval, polyfit,sqrt
 
 import statsmodels.api as sm
-from sklearn.linear_model import LinearRegression
 
 # Generate random data of a sufficiently large size
 
@@ -220,21 +219,21 @@ print("Time taken: {} seconds".format(t_simple_inv))
 #parameters: a=3.25 b=-6.50
 #Time taken: 0.13125276565551758 seconds
 
-#Method: sklearn.linear_model.LinearRegression
+#線性迴歸機
 
 t1=time.time()
-lm = LinearRegression()
+lm = LinearRegression()  # 函數學習機
 lm.fit(t,x)
 ar=lm.coef_[1]
 br=lm.intercept_
 t2=time.time()
 t_sklearn_linear = float(t2-t1)
 
-print('Linear regression using sklearn.linear_model.LinearRegression')
+print('Linear regression using LinearRegression 線性迴歸機')
 print('parameters: a=%.2f b=%.2f'% (ar,br))
 print("Time taken: {} seconds".format(t_sklearn_linear)) 
 
-#Linear regression using sklearn.linear_model.LinearRegression
+#Linear regression using LinearRegression 線性迴歸機
 #parameters: a=3.25 b=-6.50
 #Time taken: 0.5318112373352051 seconds
 
@@ -337,7 +336,7 @@ for i in tqdm(range(len(n_data))):
     
     # Linear regression using scikit-learn's linear_model
     t1=time.time()
-    lm = LinearRegression()
+    lm = LinearRegression()  # 函數學習機
     lm.fit(t,x)
     ar=lm.coef_[1]
     br=lm.intercept_
@@ -351,12 +350,12 @@ print(df)
 plt.figure(figsize=(15,10))
 for i in df.columns:
     plt.semilogx((n_data),df[i],lw=3)
-plt.xticks([1e5,2e5,5e5,1e6,2e6,5e6,1e7],fontsize=15)
-plt.xlabel("\nSize of the data set (number of samples)",fontsize=15)
-plt.yticks(fontsize=15)
-plt.ylabel("Milliseconds needed for simple linear regression model fit\n",fontsize=15)
+plt.xticks([1e5,2e5,5e5,1e6,2e6,5e6,1e7])
+plt.xlabel("\nSize of the data set (number of samples)")
+plt.yticks()
+plt.ylabel("Milliseconds needed for simple linear regression model fit")
 plt.grid(True)
-plt.legend([name for name in df.columns],fontsize=20)
+plt.legend([name for name in df.columns])
 
 show()
 
@@ -409,6 +408,7 @@ df['Ideal y']=df['X'].apply(func)
 df['y']=y
 df['X_sampled']=X_sample
 df['y_sampled']=y_sampled
+
 cc = df.head()
 print(cc)
 
@@ -427,7 +427,6 @@ show()
 
 # Import scikit-learn librares and prepare train/test splits
 
-from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LassoCV
 from sklearn.linear_model import RidgeCV
 from sklearn.ensemble import AdaBoostRegressor
@@ -459,15 +458,15 @@ for degree in range(degree_min,degree_max+1):
     print("Test score of model with degree {}: {}\n".format(degree,test_score))
     
     #plt.figure()
-    #plt.title("RMSE: {}".format(RMSE),fontsize=10)
-    #plt.suptitle("Polynomial of degree {}".format(degree),fontsize=15)
+    #plt.title("RMSE: {}".format(RMSE))
+    #plt.suptitle("Polynomial of degree {}".format(degree))
     #plt.xlabel("X training values")
     #plt.ylabel("Fitted and training values")
     #plt.scatter(X_train,y_pred)
     #plt.scatter(X_train,y_train)
     
     plt.figure()
-    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree),fontsize=15)
+    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree))
     plt.xlabel("Actual values")
     plt.ylabel("Predicted values")
     plt.scatter(y_test,test_pred)
@@ -501,15 +500,15 @@ for degree in range(degree_min,degree_max+1):
     print("Test score of model with degree {}: {}\n".format(degree,test_score))
     
     #plt.figure()
-    #plt.title("RMSE: {}".format(RMSE),fontsize=10)
-    #plt.suptitle("Polynomial of degree {}".format(degree),fontsize=15)
+    #plt.title("RMSE: {}".format(RMSE))
+    #plt.suptitle("Polynomial of degree {}".format(degree))
     #plt.xlabel("X training values")
     #plt.ylabel("Fitted and training values")
     #plt.scatter(X_train,y_pred)
     #plt.scatter(X_train,y_train)
     
     plt.figure()
-    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree),fontsize=15)
+    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree))
     plt.xlabel("Actual values")
     plt.ylabel("Predicted values")
     plt.scatter(y_test,test_pred)
@@ -528,9 +527,9 @@ plt.figure(figsize=(8,5))
 plt.grid(True)
 plt.plot(df_score['degree'],df_score['Linear sample score'],lw=2)
 plt.plot(df_score['degree'],df_score['Random sample score'],lw=2)
-plt.xlabel ("Model Complexity: Degree of polynomial",fontsize=20)
-plt.ylabel ("Model Score: R^2 score on test set",fontsize=15)
-plt.legend(fontsize=15)
+plt.xlabel ("Model Complexity: Degree of polynomial")
+plt.ylabel ("Model Score: R^2 score on test set")
+plt.legend()
 
 show()
 
@@ -748,8 +747,8 @@ df['Ideal y']=df['X'].apply(func)
 df['y']=y
 df['X_sampled']=X_sample
 df['y_sampled']=y_sampled
-cc = df.head()
 
+cc = df.head()
 print(cc)
 
 # Plot the function(s), both the ideal characteristic and the observed output (with process and observation noise)
@@ -772,7 +771,6 @@ show()
 
 # Import scikit-learn librares and prepare train/test splits
 
-from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LassoCV
 from sklearn.linear_model import RidgeCV
 from sklearn.ensemble import AdaBoostRegressor
@@ -803,15 +801,15 @@ for degree in range(degree_min,degree_max+1):
     print("Test score of model with degree {}: {}\n".format(degree,test_score))
     
     #plt.figure()
-    #plt.title("RMSE: {}".format(RMSE),fontsize=10)
-    #plt.suptitle("Polynomial of degree {}".format(degree),fontsize=15)
+    #plt.title("RMSE: {}".format(RMSE))
+    #plt.suptitle("Polynomial of degree {}".format(degree))
     #plt.xlabel("X training values")
     #plt.ylabel("Fitted and training values")
     #plt.scatter(X_train,y_pred)
     #plt.scatter(X_train,y_train)
     
     plt.figure()
-    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree),fontsize=15)
+    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree))
     plt.xlabel("Actual values")
     plt.ylabel("Predicted values")
     plt.scatter(y_test,test_pred)
@@ -844,15 +842,15 @@ for degree in range(degree_min,degree_max+1):
     print("Test score of model with degree {}: {}\n".format(degree,test_score))
     
     #plt.figure()
-    #plt.title("RMSE: {}".format(RMSE),fontsize=10)
-    #plt.suptitle("Polynomial of degree {}".format(degree),fontsize=15)
+    #plt.title("RMSE: {}".format(RMSE))
+    #plt.suptitle("Polynomial of degree {}".format(degree))
     #plt.xlabel("X training values")
     #plt.ylabel("Fitted and training values")
     #plt.scatter(X_train,y_pred)
     #plt.scatter(X_train,y_train)
     
     plt.figure()
-    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree),fontsize=15)
+    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree))
     plt.xlabel("Actual values")
     plt.ylabel("Predicted values")
     plt.scatter(y_test,test_pred)
@@ -871,9 +869,9 @@ plt.figure(figsize=(8,5))
 plt.grid(True)
 plt.plot(df_score['degree'],df_score['Linear sample score'],lw=2)
 plt.plot(df_score['degree'],df_score['Random sample score'],lw=2)
-plt.xlabel ("Model Complexity: Degree of polynomial",fontsize=20)
-plt.ylabel ("Model Score: R^2 score on test set",fontsize=15)
-plt.legend(fontsize=15)
+plt.xlabel ("Model Complexity: Degree of polynomial")
+plt.ylabel ("Model Score: R^2 score on test set")
+plt.legend()
 
 show()
 
@@ -889,7 +887,6 @@ print("------------------------------------------------------------")  # 60個
 
 # Ridge/LASSO polynomial regression with linear and random sampling
 
-from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LassoCV
 from sklearn.linear_model import RidgeCV
 from sklearn.preprocessing import PolynomialFeatures
@@ -1057,6 +1054,7 @@ y = func_trans(X)+noise_x
 df = pd.DataFrame(data=X,columns=['X'])
 df['Ideal y']=df['X'].apply(func_trans)
 df['y']=y
+
 cc = df.head()
 print(cc)
 
@@ -1068,7 +1066,6 @@ plt.plot(x_smooth,y_smooth,'k')
 
 show()
 
-from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LassoCV
 from sklearn.linear_model import RidgeCV
 from sklearn.ensemble import AdaBoostRegressor
@@ -1131,7 +1128,7 @@ for degree in range(degree_min,degree_max+1):
     #print("Test score of model with degree {}: {}\n".format(degree,test_score))
        
     plt.figure()
-    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree),fontsize=15)
+    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree))
     plt.xlabel("Actual values")
     plt.ylabel("Predicted values")
     plt.scatter(y_test,test_pred)
@@ -1141,8 +1138,8 @@ for degree in range(degree_min,degree_max+1):
 plt.figure(figsize=(8,5))
 plt.grid(True)
 plt.plot(poly_degree,rmse,lw=3,c='red')
-plt.xlabel ("\nModel Complexity: Degree of polynomial",fontsize=20)
-plt.ylabel ("Root-mean-square error on test set",fontsize=15)
+plt.xlabel ("\nModel Complexity: Degree of polynomial")
+plt.ylabel ("Root-mean-square error on test set")
 
 show()
 
@@ -1155,8 +1152,8 @@ time_linear=np.sum(t_linear)
 plt.figure(figsize=(8,5))
 plt.grid(True)
 plt.plot(poly_degree,linear_sample_score,lw=3,c='red')
-plt.xlabel ("\nModel Complexity: Degree of polynomial",fontsize=20)
-plt.ylabel ("R^2 score on test set",fontsize=15)
+plt.xlabel ("\nModel Complexity: Degree of polynomial")
+plt.ylabel ("R^2 score on test set")
 
 show()
 
@@ -1277,7 +1274,7 @@ print("R^2 value of the shallow neural network:",r2_SNN)
 # Plot residuals plots
 
 plt.figure(figsize=(10,6))
-plt.title("Predicted vs. actual (test set) for shallow (1-hidden layer) neural network\n",fontsize=15)
+plt.title("Predicted vs. actual (test set) for shallow (1-hidden layer) neural network")
 plt.xlabel("Actual values (test set)")
 plt.ylabel("Predicted values")
 plt.scatter(y_test,yhat,edgecolors='k',s=100,c='green')
@@ -1288,9 +1285,9 @@ show()
 
 plt.figure(figsize=(10,6))
 plt.scatter(yhat,y_test-yhat,edgecolors='k',s=100,c='red')
-plt.title("Residual vs. fitted values for shallow (1-hidden layer) neural network\n",fontsize=15)
-plt.xlabel("\nFitted values",fontsize=15)
-plt.ylabel("Residuals: Difference between actual (test set)\n and predicted values",fontsize=15)
+plt.title("Residual vs. fitted values for shallow (1-hidden layer) neural network")
+plt.xlabel("\nFitted values")
+plt.ylabel("Residuals: Difference between actual (test set)\n and predicted values")
 plt.grid(True)
 plt.axhline(y=0,lw=2,c='red')
 
@@ -1411,9 +1408,9 @@ print("R^2 value of the deep neural network:",r2_DNN)
 # Plot residuals plots
 
 plt.figure(figsize=(10,6))
-plt.title("Predicted vs. actual (test set) for deep (2-layer) neural network\n",fontsize=15)
-plt.xlabel("Actual values (test set)",fontsize=15)
-plt.ylabel("Predicted values",fontsize=15)
+plt.title("Predicted vs. actual (test set) for deep (2-layer) neural network")
+plt.xlabel("Actual values (test set)")
+plt.ylabel("Predicted values")
 plt.scatter(y_test,yhat,edgecolors='k',s=100,c='green')
 plt.grid(True)
 plt.plot(y_test,y_test,'r',lw=2)
@@ -1422,18 +1419,18 @@ show()
 
 plt.figure(figsize=(10,6))
 plt.scatter(yhat,y_test-yhat,edgecolors='k',s=100,c='red')
-plt.title("Residual vs. fitted values for deep (2-layer) neural network\n",fontsize=15)
-plt.xlabel("\nFitted values",fontsize=15)
-plt.ylabel("Residuals: Difference between actual (test set)\n and predicted values",fontsize=15)
+plt.title("Residual vs. fitted values for deep (2-layer) neural network")
+plt.xlabel("\nFitted values")
+plt.ylabel("Residuals: Difference between actual (test set)\n and predicted values")
 plt.grid(True)
 plt.axhline(y=0,lw=2,c='red')
 
 show()
 
 plt.figure(figsize=(10,6))
-plt.title("Time taken for building/fitting models\n", fontsize=16)
-plt.ylabel("Time taken to build model",fontsize=12)
-plt.xlabel("Various types of models",fontsize=14)
+plt.title("Time taken for building/fitting models")
+plt.ylabel("Time taken to build model")
+plt.xlabel("Various types of models")
 plt.grid(True)
 plt.bar(x=[1,2,3],height=[time_linear,time_SNN,time_DNN], 
         align='center',tick_label=['Linear model with regularization','1-hidden layer NN','2-hidden layer NN'])
@@ -1441,9 +1438,9 @@ plt.bar(x=[1,2,3],height=[time_linear,time_SNN,time_DNN],
 show()
 
 plt.figure(figsize=(10,6))
-plt.title("$R^2$-fit values of the models\n", fontsize=16)
-plt.ylabel("$R^2$-fit value achieved by the model",fontsize=12)
-plt.xlabel("Various types of models",fontsize=14)
+plt.title("$R^2$-fit values of the models")
+plt.ylabel("$R^2$-fit value achieved by the model")
+plt.xlabel("Various types of models")
 plt.grid(True)
 plt.bar(x=[1,2,3],height=[max(linear_sample_score),r2_SNN,r2_DNN], 
         align='center',tick_label=['Linear model with regularization','1-hidden layer NN','2-hidden layer NN'])
@@ -1497,7 +1494,9 @@ df = pd.DataFrame(data=X,columns=['X'])
 df['Ideal y']=df['X'].apply(func_trans)
 df['Sin_X']=df['X'].apply(math.sin)
 df['y']=y
-df.head()
+
+cc = df.head()
+print(cc)
 
 # Plot the function(s), both the ideal characteristic and the observed output (with process and observation noise)
 
@@ -1509,7 +1508,6 @@ show()
 
 # Import scikit-learn librares and prepare train/test splits
 
-from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LassoCV
 from sklearn.linear_model import RidgeCV
 from sklearn.ensemble import AdaBoostRegressor
@@ -1569,7 +1567,7 @@ for degree in range(degree_min,degree_max+1):
     #print("Test score of model with degree {}: {}\n".format(degree,test_score))
        
     plt.figure()
-    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree),fontsize=15)
+    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree))
     plt.xlabel("Actual values")
     plt.ylabel("Predicted values")
     plt.scatter(y_test,test_pred)
@@ -1581,9 +1579,9 @@ print(linear_sample_score)
 plt.figure(figsize=(8,5))
 plt.grid(True)
 plt.plot(poly_degree,rmse,lw=3,c='red')
-plt.title("Model complexity (highest polynomial degree) vs. test score\n",fontsize=20)
-plt.xlabel ("\nDegree of polynomial",fontsize=20)
-plt.ylabel ("Root-mean-square error on test set",fontsize=15)
+plt.title("Model complexity (highest polynomial degree) vs. test score")
+plt.xlabel ("\nDegree of polynomial")
+plt.ylabel ("Root-mean-square error on test set")
 
 show()
 
@@ -1599,8 +1597,8 @@ print("Best R^2 score for linear polynomial degree models:",r2_linear)
 plt.figure(figsize=(8,5))
 plt.grid(True)
 plt.plot(poly_degree,linear_sample_score,lw=3,c='red')
-plt.xlabel ("\nModel Complexity: Degree of polynomial",fontsize=20)
-plt.ylabel ("R^2 score on test set",fontsize=15)
+plt.xlabel ("\nModel Complexity: Degree of polynomial")
+plt.ylabel ("R^2 score on test set")
 
 show()
 
@@ -1699,7 +1697,7 @@ print("RMSE error of the shallow neural network:",RMSE_SNN)
 print("R^2 value of the shallow neural network:",r2_SNN)
 
 plt.figure(figsize=(10,6))
-plt.title("Predicted vs. actual (test set) for shallow (1-hidden layer) neural network\n",fontsize=15)
+plt.title("Predicted vs. actual (test set) for shallow (1-hidden layer) neural network")
 plt.xlabel("Actual values (test set)")
 plt.ylabel("Predicted values")
 plt.scatter(y_test,yhat,edgecolors='k',s=100,c='green')
@@ -1808,184 +1806,22 @@ for i in range(5):
 # Plot R2 score corss-validation results
 
 plt.figure(figsize=(10,6))
-plt.title("\nR2-score for cross-validation runs of \ndeep (2-layer) neural network\n",fontsize=25)
-plt.xlabel("\nCross-validation run with random test/train split #",fontsize=15)
-plt.ylabel("R2 score (test set)\n",fontsize=15)
+plt.title("\nR2-score for cross-validation runs of \ndeep (2-layer) neural network")
+plt.xlabel("\nCross-validation run with random test/train split #")
+plt.ylabel("R2 score (test set)")
 plt.scatter([i+1 for i in range(5)],r2_DNN,edgecolors='k',s=100,c='green')
 plt.grid(True)
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# Multi-variate LASSO regression with CV
-
-# Multi-variate Rregression Metamodel with DOE based on random sampling
-
-N_points = 20 # Number of sample points
-# start with small < 40 points and see how the regularized model makes a difference. 
-# Then increase the number is see the difference
-noise_mult = 50 # Multiplier for the noise term
-noise_mean = 10 # Mean for the Gaussian noise adder
-noise_sd = 10 # Std. Dev. for the Gaussian noise adder
-
-X=np.array(10*np.random.randn(N_points,5))
-
-df=pd.DataFrame(X,columns=['Feature'+str(l) for l in range(1,6)])
-
-df.head()
-
-# Plot the random distributions of input features
-
-for i in df.columns:
-    df.hist(i,bins=5,xlabelsize=15,ylabelsize=15,figsize=(8,6))
-    show()
-
-# Generate the output variable by analytic function + Gaussian noise (our goal will be to 'learn' this function)
-
-df['y']=5*df['Feature1']**2+13*df['Feature2']+0.1*df['Feature3']**2*df['Feature1'] \
-+2*df['Feature4']*df['Feature5']+0.1*df['Feature5']**3+0.8*df['Feature1']*df['Feature4']*df['Feature5'] \
-+noise_mult*np.random.normal(loc=noise_mean,scale=noise_sd)
-
-df.head()
-
-# Plot single-variable scatterplots
-
-
-for i in df.columns:
-    df.plot.scatter(i,'y', edgecolors=(0,0,0),s=50,c='g',grid=True)
-    show()
-
-# Standard linear regression
-
-from sklearn.linear_model import LinearRegression
-
-linear_model = LinearRegression()
-
-X_linear=df.drop('y',axis=1)
-y_linear=df['y']
-
-linear_model.fit(X_linear,y_linear)
-
-# LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=True)
-
-y_pred_linear = linear_model.predict(X_linear)
-
-# R-square of simple linear fit is very bad, coefficients have no meaning i.e. we did not 'learn' the function
-
-RMSE_linear = np.sqrt(np.sum(np.square(y_pred_linear-y_linear)))
-
-print("Root-mean-square error of linear model:",RMSE_linear)
-
-# Root-mean-square error of linear model: 4591.42864942
-
-coeff_linear = pd.DataFrame(linear_model.coef_,index=df.drop('y',axis=1).columns, columns=['Linear model coefficients'])
-coeff_linear
-
-print ("R2 value of linear model:",linear_model.score(X_linear,y_linear))
-
-# R2 value of linear model: 0.329123897412
-
-plt.figure(figsize=(12,8))
-plt.xlabel("Predicted value with linear fit",fontsize=20)
-plt.ylabel("Actual y-values",fontsize=20)
-plt.grid(1)
-plt.scatter(y_pred_linear,y_linear,edgecolors=(0,0,0),lw=2,s=80)
-plt.plot(y_pred_linear,y_pred_linear, 'k--', lw=2)
-
-show()
-
-# Create polynomial features
-
-from sklearn.preprocessing import PolynomialFeatures
-
-poly1 = PolynomialFeatures(3,include_bias=False)
-
-X_poly = poly1.fit_transform(X)
-X_poly_feature_name = poly1.get_feature_names_out(['Feature'+str(l) for l in range(1,6)])
-print("The feature vector list:\n",X_poly_feature_name)
-print("\nLength of the feature vector:",len(X_poly_feature_name))
-
-# Length of the feature vector: 55
-
-df_poly = pd.DataFrame(X_poly, columns=X_poly_feature_name)
-df_poly.head()
-
-df_poly['y']=df['y']
-df_poly.head()
-
-X_train=df_poly.drop('y',axis=1)
-y_train=df_poly['y']
-
-# Polynomial model without regularization and cross-validation
-
-poly2 = LinearRegression()
-
-model_poly=poly2.fit(X_train,y_train)
-y_poly = poly2.predict(X_train)
-RMSE_poly=np.sqrt(np.sum(np.square(y_poly-y_train)))
-print("Root-mean-square error of simple polynomial model:",RMSE_poly)
-
-# Root-mean-square error of simple polynomial model: 1.64850814918e-11
-
-# The non-regularized polunomial model (notice the coeficients are not learned properly)
-
-coeff_poly = pd.DataFrame(model_poly.coef_,index=df_poly.drop('y',axis=1).columns, 
-                          columns=['Coefficients polynomial model'])
-coeff_poly
-
-# R-square value of the simple polynomial model is perfect but the model is flawed as shown above i.e. it learned wrong coefficients and overfitted the to the data
-
-print ("R2 value of simple polynomial model:",model_poly.score(X_train,y_train))
-
-# R2 value of simple polynomial model: 1.0
-
-# Polynomial model with cross-validation and LASSO regularization
-
-from sklearn.linear_model import LassoCV
-
-model1 = LassoCV(cv=10,verbose=0,eps=0.001,n_alphas=100, tol=0.0001,max_iter=5000)
-
-model1.fit(X_train,y_train)
-
-y_pred1 = np.array(model1.predict(X_train))
-
-RMSE_1=np.sqrt(np.sum(np.square(y_pred1-y_train)))
-print("Root-mean-square error of Metamodel:",RMSE_1)
-
-# Root-mean-square error of Metamodel: 14.6011217949
-
-coeff1 = pd.DataFrame(model1.coef_,index=df_poly.drop('y',axis=1).columns, columns=['Coefficients Metamodel'])
-coeff1
-
-model1.score(X_train,y_train)
-
-model1.alpha_
-
-# Printing only the non-zero coefficients of the regularized model (notice the coeficients are learned well enough)
-
-coeff1[coeff1['Coefficients Metamodel']!=0]
-
-plt.figure(figsize=(12,8))
-plt.xlabel("Predicted value with Regularized Metamodel",fontsize=20)
-plt.ylabel("Actual y-values",fontsize=20)
-plt.grid(1)
-plt.scatter(y_pred1,y_train,edgecolors=(0,0,0),lw=2,s=80)
-plt.plot(y_pred1,y_pred1, 'k--', lw=2)
-
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

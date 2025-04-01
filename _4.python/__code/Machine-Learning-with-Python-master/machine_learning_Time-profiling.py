@@ -60,7 +60,7 @@ SIZE = 10_000_000
 a = np.arange(SIZE)
 b = np.random.normal(size=SIZE)
 
-cProfile.run('a+b')
+cProfile.run("a+b")
 
 print("------------------------------")  # 60個
 
@@ -75,38 +75,44 @@ cProfile.run(code)
 
 print("------------------------------")  # 60個
 
+
 def add():
     SIZE = 10_000_000
     a = np.arange(SIZE)
     b = np.random.normal(size=SIZE)
-    c=a+b
+    c = a + b
 
-cProfile.run('add()')
+
+cProfile.run("add()")
 
 print("------------------------------")  # 60個
+
 
 def add(size):
     a = np.arange(size)
     b = np.random.normal(size=size)
-    c=a+b
+    c = a + b
+
 
 SIZE = 10_000_000
-cProfile.run('add(SIZE)')
+cProfile.run("add(SIZE)")
 
 print("------------------------------")  # 60個
 
 SIZE = 20_000_000
-cProfile.run('add(SIZE)')
+cProfile.run("add(SIZE)")
 
 print("------------------------------")  # 60個
 
-def ops(a,b):
-    x1 = a+b
-    x2 = a-b
-    x3 = a*b
-    x4 = a/b
 
-cProfile.run('ops(a,b)')
+def ops(a, b):
+    x1 = a + b
+    x2 = a - b
+    x3 = a * b
+    x4 = a / b
+
+
+cProfile.run("ops(a,b)")
 
 print("------------------------------")  # 60個
 
@@ -126,23 +132,23 @@ stats = pstats.Stats(profiler)
 print("Total function calls:", stats.total_calls)
 print("Total time (seconds):", stats.total_tt)
 
-#Total function calls: 48
-#Total time (seconds): 1.1839559
+# Total function calls: 48
+# Total time (seconds): 1.1839559
 
 stats = pstats.Stats(profiler)
 stats.print_stats()
 
 type(stats)
 
-#pstats.Stats
+# pstats.Stats
 
 stats.total_tt
 
-#1.1839559
+# 1.1839559
 
 stats.fcn_list
 
-size = [int(i*1e6) for i in range(5,26,5)]
+size = [int(i * 1e6) for i in range(5, 26, 5)]
 total_tt = []
 for s in size:
     profiler = cProfile.Profile()
@@ -150,19 +156,21 @@ for s in size:
     add(s)
     profiler.disable()
     stats = pstats.Stats(profiler)
-    total_tt.append(round(stats.total_tt,3))       
+    total_tt.append(round(stats.total_tt, 3))
 
 total_tt
 
 [0.274, 0.464, 0.706, 0.94, 1.187]
 
-plt.figure(figsize=(6,3),dpi=120)
-plt.bar(x=[str(i)+'-million' for i in range(5,26,5)],
-        height=total_tt, 
-        edgecolor='k',
-        color="#2c75b0")
+plt.figure(figsize=(6, 3), dpi=120)
+plt.bar(
+    x=[str(i) + "-million" for i in range(5, 26, 5)],
+    height=total_tt,
+    edgecolor="k",
+    color="#2c75b0",
+)
 plt.xlabel("Array size", fontsize=16)
-plt.ylabel("Time taken (seconds)",fontsize=16)
+plt.ylabel("Time taken (seconds)", fontsize=16)
 
 show()
 

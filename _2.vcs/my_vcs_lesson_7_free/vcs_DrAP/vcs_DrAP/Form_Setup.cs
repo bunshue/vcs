@@ -67,6 +67,7 @@ namespace vcs_DrAP
             lb_setup4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             lb_setup5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             lb_setup6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            lb_main_mesg.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
             tb_setup0.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             tb_setup1.Location = new Point(x_st + dx * 1, y_st + dy * 1);
@@ -84,7 +85,7 @@ namespace vcs_DrAP
             bt_setup4.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 4);
             bt_setup5.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 5);
             bt_setup6.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 6);
-            bt_setup_save.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 6);
+            bt_setup_save.Location = new Point(x_st + dx * 4 + dxx, y_st + dy * 7);
 
             bt_exit_setup();
         }
@@ -196,7 +197,16 @@ namespace vcs_DrAP
 
         private void bt_setup6_Click(object sender, EventArgs e)
         {
-
+            openFileDialog1.Title = "選取WinMerge程式";
+            openFileDialog1.FileName = "";
+            openFileDialog1.Filter = "程式|*.exe|所有檔|*.*";   //限定檔案格式
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.RestoreDirectory = true;
+            openFileDialog1.InitialDirectory = "C:\\";         //從目前目錄開始尋找檔案
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                tb_setup6.Text = openFileDialog1.FileName;
+            }
         }
 
         private void bt_setup_save_Click(object sender, EventArgs e)

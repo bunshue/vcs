@@ -47,7 +47,9 @@ print("------------------------------------------------------------")  # 60個
 
 # OpenAI Gym
 
-# RL 訓練都需要一個環境。OpenAI Gym 是一個開源的 RL 開發框架，提供數個知名專案的環境建設，包括我們今天要實作的 CartPole。其他還有 Atari、轉筆、賽車等等模擬環境，對想要上手 RL 的人是非常方便的框架。
+# RL 訓練都需要一個環境。OpenAI Gym 是一個開源的 RL 開發框架，
+# 提供數個知名專案的環境建設，包括我們今天要實作的 CartPole。
+# 其他還有 Atari、轉筆、賽車等等模擬環境，對想要上手 RL 的人是非常方便的框架。
 
 # Gym 從環境庫中使用設定好的環境：
 
@@ -73,7 +75,6 @@ Agent taking random actions.
 Based on the example in OpenAI docs: https://gym.openai.com/docs/
 """
 import gym
-import matplotlib.pyplot as plt
 
 # RL 訓練長度
 N_EPISODES = 200
@@ -86,7 +87,7 @@ def plot_rewards(rewards, n_episodes, algo):
     plt.ylabel("rewards")
     plt.ylim(0, EPISODE_LENGTH + 5)
     plt.title("Rewards over episodes ({})".format(algo))
-    plt.savefig("{}.png".format("_".join(algo.split(" "))))
+    plt.savefig("tmp_{}.png".format("_".join(algo.split(" "))))
 
 
 # 建立環境
