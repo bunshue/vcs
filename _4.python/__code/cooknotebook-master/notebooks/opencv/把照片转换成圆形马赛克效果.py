@@ -120,34 +120,6 @@ def find_circles(filename, n):
 
 circles = find_circles("beauty05.jpg", 1500)
 
-# 下面使用JavaScript的Raphael绘图库绘制圆形：
-
-# import embedjs
-# embedjs.embed_resources("raphael")
-
-
-def draw_circles_js(uid, parameter):
-    cellwidth = 10
-    width = parameter.width
-    height = parameter.height
-
-    def draw(Raphael):
-        paper = Raphael(uid, width, height)
-        for i, circle in enumerate(parameter.circles):
-            x, y, radius, r, g, b = circle
-            c = paper.circle(x, y, radius)
-            c.attr({"fill": Raphael.rgb(r, g, b), "stroke-width": 0})
-
-    require(["raphael"], draw)
-
-
-def draw_circles(parameter):
-    from py2js import py2js_call
-
-    py2js_call(draw_circles_js, parameter)
-
-
-draw_circles(circles)
 
 # 变形动画
 
@@ -161,100 +133,11 @@ for fn in glob("beauty*.jpg"):
     with open(fn.replace(".jpg", ".json"), "w") as f:
         json.dump(circles, f)
 
-# 下面使用Bokeh绘制动画，为了保证动画流畅，使用webgl绘制圆形。output_notebook()缺省不载入bokeh-gl库，需要我们手工创建Resources对象指定载入的模块。
-
-from bokeh.io import output_notebook, show
-from bokeh.models import ColumnDataSource
-from bokeh.plotting import figure
-from bokeh.models.callbacks import CustomJS
-from bokeh.resources import Resources
-
-output_notebook(Resources(mode="cdn", components=["bokeh", "bokeh-gl"]))
-
-# Loading BokehJS ...
-
 data = []
 for fn in glob("*.json"):
     with open(fn) as f:
         data.append(json.load(f))
 
-circle_source = ColumnDataSource(data={"x": [], "y": [], "r": [], "color": []})
-data_source = ColumnDataSource(data={"images": data})
-
-fig = figure(
-    output_backend="webgl",
-    tools="",
-    toolbar_location=None,
-    x_range=(0, 500),
-    y_range=(0, 500),
-    x_axis_type=None,
-    y_axis_type=None,
-    plot_width=500,
-    plot_height=500,
-    min_border_left=0,
-    min_border_right=0,
-    min_border_bottom=0,
-    min_border_top=0,
-)
-
-
-def animate(circle_source=circle_source, data_source=data_source):
-    frame = 0
-    total_frame = 200
-    images = data_source.data.images
-    current_image = 0
-
-    def rgb(red, green, blue):
-        color = 0x1000000 + (blue | 0) + 0x100 * (green | 0) + 0x10000 * (red | 0)
-        return "#" + color.toString(16).substr(1)
-
-    def load_frame(frame):
-        next_image = (current_image + 1) % len(images)
-        k = frame / total_frame * 2
-        if k > 1:
-            k = 1
-        circle_source.data.x = x = []
-        circle_source.data.y = y = []
-        circle_source.data.r = r = []
-        circle_source.data.color = color = []
-
-        for i, c1 in enumerate(images[current_image].circles):
-            c2 = images[next_image].circles[i]
-            x1, y1, radius1, r1, g1, b1 = c1
-            x2, y2, radius2, r2, g2, b2 = c2
-            x.append(x1 + (x2 - x1) * k)
-            y.append(500 - (y1 + (y2 - y1) * k))
-            r.append(radius1 + (radius2 - radius1) * k)
-            color.append(
-                rgb(r1 + (r2 - r1) * k, g1 + (g2 - g1) * k, b1 + (b2 - b1) * k)
-            )
-
-        circle_source.change.emit()
-
-    def start():
-        nonlocal frame, current_image
-        load_frame(frame)
-        frame += 1
-        if frame == total_frame:
-            frame = 0
-            current_image = (current_image + 1) % len(images)
-
-    tid = window.setInterval(start, 20)
-
-
-fig.circle(
-    x="x",
-    y="y",
-    radius="r",
-    fill_color="color",
-    line_width=0,
-    line_color=None,
-    source=circle_source,
-)
-cjs = CustomJS.from_py_func(animate)
-
-fig.js_on_change("inner_width", CustomJS.from_py_func(animate))
-show(fig)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
