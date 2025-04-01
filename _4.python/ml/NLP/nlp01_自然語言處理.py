@@ -366,11 +366,6 @@ trainer.train('chatterbot.corpus.tchinese')
 
 print('------------------------------------------------------------')	#60個
 
-#!cp /content/db.sqlite3 "/content/drive/MyDrive/Colab Notebooks/package/tchinese_db.sqlite3"
-#!cp "/content/drive/MyDrive/Colab Notebooks/package/tchinese_db.sqlite3" /content/db.sqlite3
-
-print('------------------------------------------------------------')	#60個
-
 bot = ChatBot(
     'SimpleBot',
     storage_adapter='chatterbot.storage.SQLStorageAdapter',

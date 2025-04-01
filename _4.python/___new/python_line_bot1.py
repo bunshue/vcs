@@ -19,32 +19,6 @@ import sys
 import time
 import random
 
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-#檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch3\cmd1.txt
-
-from google.colab import drive
-drive.mount('/content/drive', force_remount=True)
- 
-!mkdir -p /drive
-!mount --bind /content/drive/My\ Drive /drive
-!mkdir -p /drive/ngrok-ssh
-!mkdir -p ~/.ssh
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch3\cmd2.txt
-
-!mkdir -p /drive/ngrok-ssh
-%cd /drive/ngrok-ssh
-!wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -O ngrok-stable-linux-amd64.zip
-!unzip -u ngrok-stable-linux-amd64.zip
-!cp /drive/ngrok-ssh/ngrok /ngrok
-!chmod +x /ngrok
-"""
-
 print("------------------------------------------------------------")  # 60個
 
 from flask import Flask
@@ -1369,20 +1343,3 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-# import os
-# os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
-
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code11.py
-
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch3\code01.py
-
-
-# Colab 才需要，本機環境請刪除
-
-# import os
-# os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
-
-# import os
-# os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用

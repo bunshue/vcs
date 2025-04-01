@@ -19,71 +19,24 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+def show():
+    plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-'''
-#df = pd.read_csv("data/198207-201811.csv")
-df = pd.read_csv("data/200811-201811.csv")
-cc = df.head()
-print(cc)
-
-print('屬性轉換 前, 顯示 df 之屬性')
-cc1 = df.dtypes
-print(cc1)
-
-# 屬性轉換
-df["SO2"] = pd.to_numeric(df.SO2, errors="coerce")
-df["CO"] = pd.to_numeric(df.CO, errors="coerce")
-#df["CO2"] = pd.to_numeric(df.CO2, errors="coerce")
-df["O3"] = pd.to_numeric(df.O3, errors="coerce")
-df["PM25"] = pd.to_numeric(df.PM25, errors="coerce")
-df["Nox"] = pd.to_numeric(df.Nox, errors="coerce")
-df["NO"] = pd.to_numeric(df.NO, errors="coerce")
-df["NO2"] = pd.to_numeric(df.NO2, errors="coerce")
-df["THC"] = pd.to_numeric(df.THC, errors="coerce")
-df["NMHC"] = pd.to_numeric(df.NMHC, errors="coerce")
-df["CH4"] = pd.to_numeric(df.CH4, errors="coerce")
-df["WindSpeed"] = pd.to_numeric(df.WindSpeed, errors="coerce")
-df["TEMP"] = pd.to_numeric(df.TEMP, errors="coerce")
-df["Humidity"] = pd.to_numeric(df.Humidity, errors="coerce")
-
-print('屬性轉換 後, 顯示 df 之屬性, 看不出差異')
-cc2 = df.dtypes
-print(cc2)
-'''
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-#df = pd.read_excel("data/KH-1982-2018.xlsx")
-
-df = pd.read_csv(r"data/AQI_20231124.csv") # 共 85 筆資料
-
-cc = df[["aqi"]]  # 顯示Columns(列)為aqi的數據
-print(cc)
-
-# 4.2 iloc,loc,ix方法
-cc = df.iloc[4]  # 顯示第4筆資料的所有數據
-print(cc)
-
-print(df.columns)
-
-df.plot(x="sitename", y=["aqi"])  # 進行繪圖(X軸為地點,Y軸為aqi數值)
-
-#plt.show()
-
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/AQI_20231124.csv"
 df = pd.read_csv(filename)
 print(df["aqi"])
 
+# 過濾資料
 # print(df[(df.aqi < 30)&(df.wind_speed>2)])
 
-# mpl.rcParams['font.sans-serif'] = ['Microsoft YaHei']    # 指定默认字体：解决plot不能显示中文问题
-# mpl.rcParams['axes.unicode_minus'] = False
-df.plot(x="sitename", y=["aqi"])
+df.plot(x="sitename", y=["aqi"])  # 進行繪圖(X軸為地點,Y軸為aqi數值)
 
-#plt.show()
+show()
 
 print(df["aqi"])
 print(df.sort_index(ascending=True).head())
@@ -97,7 +50,7 @@ print(YYY.head())
 
 pic = df.plot(kind="scatter", x="pm10", y="aqi", title="PM10指數與AQI之關係")
 
-#plt.show()
+show()
 
 print(pic)
 
@@ -113,7 +66,7 @@ y = df.PM25
 
 plt.scatter(x, y)
 
-#plt.show()
+show()
 
 """
 由於政府公開資料的格式問題，導致風向與PM2.5的視覺化呈現有困難(僅每小時資料提供風向)
@@ -137,7 +90,7 @@ plt.xlabel("溫度")  # X軸名稱
 plt.ylabel("PM2.5")  # Y軸名稱
 plt.title("北京PM2.5與溫度比較")  # 標題
 plt.scatter(x, y)
-#plt.show()
+show()
 
 print("瀋陽")
 
@@ -150,7 +103,7 @@ plt.xlabel("溫度")  # X軸名稱
 plt.ylabel("PM2.5")  # Y軸名稱
 plt.title("瀋陽PM2.5與溫度比較")  # 標題
 plt.scatter(x, y)
-#plt.show()
+show()
 
 """ fail
 print('伊朗大不里士')
@@ -181,41 +134,41 @@ print("------------------------------------------------------------")  # 60個
 df = pd.read_excel("1129-0900.xlsx")  # 2018/11/29日早上9點00分的資料
 
 df.plot()
-#plt.show()
+show()
 
 sns.pairplot(df)
-#plt.show()
+show()
 
 sns.pairplot(df, vars=["PM2.5", "AQI", "WindSpeed"], kind="reg")
-#plt.show()
+show()
 
 pic = df.plot(
     kind="scatter", x="WindSpeed", y="PM2.5", title="風速與PM2.5之關係"
 )  # 風速越小，PM2.5指數越高
-#plt.show()
+show()
 
 pic = df.plot(kind="scatter", x="WindSpeed", y="AQI", title="風速與AQI之關係")
-#plt.show()
+show()
 
 pic = df.plot(
     kind="scatter", x="PM2.5", y="AQI", title="PM2.5指數與AQI之關係"
 )  # PM2.5指數與AQI似乎出現正相關
-#plt.show()
+show()
 
 df.plot(kind="kde")
-#plt.show()
+show()
 
 plt.scatter(df["WindSpeed"], df["PM2.5"], color="red")
-#plt.show()
+show()
 
 plt.scatter(df["WindSpeed"], df["AQI"], color="blue")
-#plt.show()
+show()
 
 plt.scatter(df["WindSpeed"], df["PM2.5"], color="red")
-#plt.show()
+show()
 
 plt.scatter(df["WindSpeed"], df["AQI"], color="blue")
-#plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -227,126 +180,126 @@ cc = df.head(12)
 print(cc)
 
 df.plot(x="監測月份", y=["PM25"], title="2017年度鳳山區PM2.5變化圖")
-#plt.show()
+show()
 
 df.plot(x="監測月份", y=["PM10"], title="2017年度鳳山區PM10變化圖")
-#plt.show()
+show()
 
 df.plot(x="監測月份", y=["SO2"], title="2017年度鳳山區SO2變化圖")
-#plt.show()
+show()
 
 df.plot(x="監測月份", y=["CO"], title="2017年度鳳山區CO變化圖")
-#plt.show()
+show()
 
 df.plot(x="監測月份", y=["O3"], title="2017年度鳳山區O3變化圖")
-#plt.show()
+show()
 
 df.plot(kind="scatter", x="PM10", y="PM25", title="PM2.5與PM10的關係")
-#plt.show()
+show()
 
 df.plot(kind="scatter", x="NO", y="PM25", title="PM2.5與NO的關係")
-#plt.show()
+show()
 
 df.plot(kind="scatter", x="NO2", y="PM25", title="PM2.5與NO2的關係")
-#plt.show()
+show()
 
 df.plot(kind="scatter", x="O3", y="PM25", title="PM2.5與O3的關係")
-#plt.show()
+show()
 
 df.plot(kind="scatter", x="CO", y="PM25", title="PM2.5與CO的關係")
-#plt.show()
+show()
 
 df.plot(kind="scatter", x="SO2", y="PM25", title="PM2.5與SO2的關係")
-#plt.show()
+show()
 
 df.plot(kind="scatter", x="TEMP", y="PM25", title="PM2.5與溫度的關係")
-#plt.show()
+show()
 
 df.plot(kind="scatter", x="RAIN", y="PM25", title="PM2.5與降雨的關係")
-#plt.show()
+show()
 
 df.plot(kind="scatter", x="Humidity", y="PM25", title="PM2.5與濕度的關係")
-#plt.show()
+show()
 
 df.plot(kind="scatter", x="WIND_SPEED", y="PM25", title="PM2.5與風速的關係")
-#plt.show()
+show()
 
 # 正相關 PM10和PM2.5
 sns.lmplot(x="PM10", y="PM25", data=df)
 plt.title("正相關 PM10和PM2.5")
-#plt.show()
+show()
 
 # 正相關 NO和PM2.5
 sns.lmplot(x="NO", y="PM25", data=df)
 plt.title("正相關 NO和PM2.5")
-#plt.show()
+show()
 
 # 正相關 NO2和PM2.5
 sns.lmplot(x="NO2", y="PM25", data=df)
 plt.title("正相關 NO2和PM2.5")
-#plt.show()
+show()
 
 # 正相關 O3和PM2.5
 sns.lmplot(x="O3", y="PM25", data=df)
 plt.title("正相關 O3和PM2.5")
-#plt.show()
+show()
 
 # 正相關 CO和PM2.5
 sns.lmplot(x="CO", y="PM25", data=df)
 plt.title("正相關 CO和PM2.5")
-#plt.show()
+show()
 
 # 正相關 SO2和PM2.5
 sns.lmplot(x="SO2", y="PM25", data=df)
 plt.title("正相關 SO2和PM2.5")
-#plt.show()
+show()
 
 # NOX,THC,NMCH,CH4和PM2.5皆呈現正相關
 
 # 正相關 NOX和PM2.5
 sns.lmplot(x="Nox", y="PM25", data=df)
 plt.title("正相關 NOX和PM2.5")
-#plt.show()
+show()
 
 # 正相關 THC和PM2.5
 sns.lmplot(x="THC", y="PM25", data=df)
 plt.title("正相關 THC和PM2.5")
-#plt.show()
+show()
 
 # 正相關 NMHC和PM2.5
 sns.lmplot(x="NMHC", y="PM25", data=df)
 plt.title("正相關 NMHC和PM2.5")
-#plt.show()
+show()
 
 # 正相關 CH4和PM2.5
 sns.lmplot(x="CH4", y="PM25", data=df)
 plt.title("正相關 CH4和PM2.5")
-#plt.show()
+show()
 
 # 負相關 溫度和PM2.5
 sns.lmplot(x="TEMP", y="PM25", data=df)
 plt.title("負相關 溫度和PM2.5")
-#plt.show()
+show()
 
 # 負相關 雨量和PM2.5
 sns.lmplot(x="RAIN", y="PM25", data=df)
 plt.title("負相關 雨量和PM2.5")
-#plt.show()
+show()
 
 # 負相關 濕度和PM2.5
 sns.lmplot(x="Humidity", y="PM25", data=df)
 plt.title("負相關 濕度和PM2.5")
-#plt.show()
+show()
 
 # 負相關 風速和PM2.5
 sns.lmplot(x="WIND_SPEED", y="PM25", data=df)
 plt.title("負相關 風速和PM2.5")
-#plt.show()
+show()
 
 # 負相關 降雨量和PM2.5
 sns.lmplot(x="RAIN_COND", y="PM25", data=df)
 plt.title("負相關 降雨量和PM2.5")
-#plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -365,7 +318,7 @@ print(cc)
 ax = df.plot(kind="scatter", x="TEMP", y="PM25")
 
 ax.set_title("TEMP v.s. PM25")
-#plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -390,61 +343,61 @@ print(cc)
 
 ax = df.plot(kind="scatter", x="TEMP", y="PM25")
 ax.set_title("TEMP v.s. PM25")
-#plt.show()
+show()
 
 ax = df.plot(kind="scatter", x="Humidity", y="PM25")
 ax.set_title("Humidity v.s. PM25")
-#plt.show()
+show()
 
 ax = df.plot(kind="scatter", x="WindSpeed", y="PM25")
 ax.set_title("WindSpeed v.s. PM25")
-#plt.show()
+show()
 
 ax = df.plot(kind="scatter", x="CH4", y="PM25")
 ax.set_title("CH4 v.s. PM25")
-#plt.show()
+show()
 
 ax = df.plot(kind="scatter", x="NMHC", y="PM25")
 ax.set_title("NMHC v.s. PM25")
-#plt.show()
+show()
 
 ax = df.plot(kind="scatter", x="THC", y="PM25")
 ax.set_title("THC v.s. PM25")
-#plt.show()
+show()
 
 ax = df.plot(kind="scatter", x="NO2", y="PM25")
 ax.set_title("NO2 v.s. PM25")
-#plt.show()
+show()
 
 ax = df.plot(kind="scatter", x="NO", y="PM25")
 ax.set_title("NO v.s. PM25")
-#plt.show()
+show()
 
 ax = df.plot(kind="scatter", x="Nox", y="PM25")
 ax.set_title("Nox v.s. PM25")
-#plt.show()
+show()
 
 ax = df.plot(kind="scatter", x="PM25", y="PM25")
 ax.set_title("PM25 v.s. PM25")
-#plt.show()
+show()
 
 ax = df.plot(kind="scatter", x="O3", y="PM25")
 ax.set_title("O3 v.s. PM25")
-#plt.show()
+show()
 
 ax = df.plot(kind="scatter", x="CO", y="PM25")
 ax.set_title("CO v.s. PM25")
-#plt.show()
+show()
 
 ax = df.plot(kind="scatter", x="SO2", y="PM25")
 ax.set_title("SO2 v.s. PM25")
-#plt.show()
+show()
 
 # 取相關係數, 得到各變數間的相關係數，再用heatmap作圖
 heatmap = df.corr()
 sns.heatmap(heatmap, cmap="coolwarm")
 plt.title("相關係數")
-#plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -459,6 +412,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -496,6 +451,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -513,5 +469,26 @@ print("------------------------------------------------------------")  # 60個
 
 #df畫兩欄位的 散布圖
 df.plot(kind="scatter", x="TEMP", y="PM25", title="溫度與PM2.5之關係")
-plt.show()
+show()
+
+
+print('屬性轉換 前, 顯示 df 之屬性')
+cc1 = df.dtypes
+print(cc1)
+
+# df屬性轉換
+df["SO2"] = pd.to_numeric(df.SO2, errors="coerce")
+df["CO"] = pd.to_numeric(df.CO, errors="coerce")
+
+print('屬性轉換 後, 顯示 df 之屬性, 看不出差異')
+cc2 = df.dtypes
+print(cc2)
+
+
+
+#df = pd.read_csv("C:/_git/vcs/_4.python/ml/data/198207-201811.csv")
+df = pd.read_csv("C:/_git/vcs/_4.python/ml/data/200811-201811.csv")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 

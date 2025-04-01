@@ -72,16 +72,6 @@ np.meshgrid為numpy之函數
 用scatter 用3d表示之
 
 
-#Colab資料夾設定方法
-#!pip install google.colab 
-#安裝python-docx
-!pip install python-docx
-
-import os
-from google.colab import drive
-drive.mount('/content/drive')
-
-
 唐三藏 Tang
 孫悟空 Monkey
 豬八戒 Pig

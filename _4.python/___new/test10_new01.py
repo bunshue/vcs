@@ -9034,28 +9034,6 @@ with open(kernel_fn, "w") as f:
 
 print("------------------------------------------------------------")  # 60個
 
-
-"""
-from google.colab import drive
-drive.mount('/content/drive', force_remount=True)
-
-!mkdir -p /drive
-#umount /drive
-!mount --bind /content/drive/My\ Drive /drive
-!mkdir -p /drive/ngrok-ssh
-!mkdir -p ~/.ssh
-
-----
-
-!mkdir -p /drive/ngrok-ssh
-%cd /drive/ngrok-ssh
-!wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -O ngrok-stable-linux-amd64.zip
-!unzip -u ngrok-stable-linux-amd64.zip
-!cp /drive/ngrok-ssh/ngrok /ngrok
-!chmod +x /ngrok
-"""
-print("------------------------------------------------------------")  # 60個
-
 print("網址編碼解碼")
 
 from urllib.request import quote, unquote

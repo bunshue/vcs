@@ -46,18 +46,6 @@ mpl.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
 mpl.rcParams["axes.unicode_minus"] = False
 
 
-from google.colab import drive
-drive.mount("/content/drive")
-     
-import os
-os.listdir("/content/drive/My Drive/Colab Notebooks")
-     
-import pandas as pd
-
-df = pd.read_csv("/content/drive/My Drive/Colab Notebooks/iris.csv")
-df.head()
-     
-
 df.to_excel('closeprice.xls')
 
 pandas.plot是matplotlib.pyplot.plot的简单包装
@@ -423,15 +411,6 @@ locs1, labels = plt.xticks()
 locs2, labels = plt.yticks()
 plt.title(str(locs1) + "\n" + str(locs2))
 
-    start = time.time()
-    print('aaaa')
-
-    end = time.time()
-    print(f'耗时: {end - start}秒')
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 面板上三類 Button LED燈號
@@ -750,19 +729,6 @@ NOT NULL	不能空白
 
 print("------------------------------------------------------------")  # 60個
 
-# import os
-# os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
-
-import os
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
-
-import os
-
-from google.colab import drive
-drive.mount('/content/drive', force_remount=True)
-
-
-os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
 
     elif k == ord('r'):
         draw = np.zeros((h,w,4), dtype='uint8')
