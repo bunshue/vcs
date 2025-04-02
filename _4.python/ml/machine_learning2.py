@@ -887,13 +887,13 @@ scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test = scaler.transform(X_test)  # STD特徵縮放
 
-classifier = RandomForestClassifier(
+clf = RandomForestClassifier(
     n_estimators=10, criterion="entropy", random_state=0
 )
 
-classifier.fit(X_train, y_train)  # 學習訓練.fit
+clf.fit(X_train, y_train)  # 學習訓練.fit
 
-y_pred = classifier.predict(X_test)  # 預測.predict
+y_pred = clf.predict(X_test)  # 預測.predict
 print("預測結果 :\n", y_pred, sep="")
 
 # 生成混淆矩陣(Confusion Matrix)，也稱作誤差矩陣
@@ -910,7 +910,7 @@ X1, X2 = np.meshgrid(
 plt.contourf(
     X1,
     X2,
-    classifier.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
+    clf.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
     alpha=0.75,
     cmap=ListedColormap(("red", "green")),
 )
@@ -940,7 +940,7 @@ X1, X2 = np.meshgrid(
 plt.contourf(
     X1,
     X2,
-    classifier.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
+    clf.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
     alpha=0.75,
     cmap=ListedColormap(("red", "green")),
 )

@@ -43,10 +43,10 @@ from sklearn import tree
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
-
+'''
 print(__doc__)
 
 print("------------------------------------------------------------")  # 60個
@@ -59,10 +59,10 @@ N = 500  # 散點的數量
 X = np.random.randint(0, 100, size=(N, 4))  # 產生 N x 4 陣列，內容為 0～100 隨機數字
 
 n_components = 2  # 降維後的維度
+
 clf = PCA(n_components=n_components)
 
 clf = clf.fit(X)
-
 X2 = clf.transform(X)
 
 print("轉換前 4維 :", X.shape)
@@ -244,9 +244,11 @@ print(clf.explained_variance_ratio_)
 
 df = pd.read_csv("data/machine_learning4_iris.csv")
 
-print(df.head())
+cc = df.head()
+print(cc)
 
-print(df.describe())
+cc = df.describe()
+print(cc)
 
 X = np.array(df.iloc[:, :4])
 # np.around(np.corrcoef(X.T), 3)
@@ -410,7 +412,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 實現PCA演算法
 
 # 建立測試資料
@@ -591,8 +593,8 @@ print("------------------------------------------------------------")  # 60個
 
 X, y = make_circles(n_samples=1_000, factor=0.3, noise=0.05, random_state=0)
 
-# 資料切割
-X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=0)
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y)
 
 # 繪製訓練及測試資料
 _, (train_ax, test_ax) = plt.subplots(ncols=2, sharex=True, sharey=True, figsize=(8, 4))
@@ -658,7 +660,9 @@ show()
 
 # X, y = make_moons(n_samples=1_000, noise=0.05, random_state=0)
 X, y = make_moons(n_samples=1000, random_state=123)
-X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=0)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y)
 
 _, (train_ax, test_ax) = plt.subplots(ncols=2, sharex=True, sharey=True, figsize=(8, 4))
 
@@ -771,7 +775,8 @@ show()
 
 # PCA
 n_components = 1  # 降維後的維度
-X_pca = PCA(n_components=n_components).fit_transform(X)
+X_pca = PCA(n_components=n_components).fit_transform(X)  # .fit + .transform一起做
+
 for i in range(3):
     plt.scatter(X_pca[i * 50 : (i + 1) * 50], np.zeros(50), c=colors[i])
 show()
@@ -782,7 +787,8 @@ show()
 perplexity = 2
 X_embedded = TSNE(
     n_components=1, perplexity=perplexity, learning_rate="auto", init="random"
-).fit_transform(X)
+).fit_transform(X)  # .fit + .transform一起做
+
 for i in range(3):
     plt.scatter(X_embedded[i * 50 : (i + 1) * 50], np.zeros(50), c=colors[i])
 show()
@@ -791,7 +797,8 @@ show()
 perplexity = 130
 X_embedded = TSNE(
     n_components=1, perplexity=perplexity, learning_rate="auto", init="random"
-).fit_transform(X)
+).fit_transform(X)  # .fit + .transform一起做
+
 for i in range(3):
     plt.scatter(X_embedded[i * 50 : (i + 1) * 50], np.zeros(50), c=colors[i])
 show()
@@ -965,7 +972,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 df = pd.read_csv("data/wine.data.csv")
-df.head(10)
+
+cc = df.head()
+print(cc)
 
 # df.iloc[:,1:].describe()
 
@@ -975,7 +984,7 @@ for c in df.columns[1:]:
     df.boxplot(c, by="Class", figsize=(7, 4))
     plt.title("{}\n".format(c))
     plt.xlabel("Wine Class")
-    plt.show()
+    show()
 
 
 plt.figure(figsize=(10, 6))
@@ -988,13 +997,10 @@ plt.scatter(
     s=150,
 )
 plt.grid(True)
-plt.title(
-    "Scatter plot of two features showing the \ncorrelation and class seperation",
-    fontsize=15,
-)
+plt.title("Scatter plot of two features showing the \ncorrelation and class seperation")
 plt.xlabel("OD280/OD315 of diluted wines")
 plt.ylabel("Flavanoids")
-plt.show()
+show()
 
 # Are the features independent? Plot co-variance matrix
 
@@ -1014,7 +1020,7 @@ def correlation_matrix(df):
     ax1.set_yticklabels(labels)
     # Add colorbar, make sure to specify tick locations to match desired ticklabels
     fig.colorbar(cax, ticks=[0.1 * i for i in range(-11, 11)])
-    plt.show()
+    show()
 
 
 cc = correlation_matrix(df)
@@ -1030,13 +1036,15 @@ scaler = StandardScaler()
 X = df.drop("Class", axis=1)
 y = df["Class"]
 
-X = scaler.fit_transform(X)
+X = scaler.fit_transform(X)  # .fit + .transform一起做
 
 dfx = pd.DataFrame(data=X, columns=df.columns[1:])
 
-dfx.head(10)
+cc = dfx.head()
+print(cc)
 
-dfx.describe()
+cc = dfx.describe()
+print(cc)
 
 # PCA class import and analysis
 
@@ -1061,18 +1069,18 @@ plt.grid(True)
 plt.title("Explained variance ratio of the \nfitted principal component vector")
 plt.xlabel("Principal components")
 plt.xticks([i + 1 for i in range(len(dfx_pca.explained_variance_ratio_))])
-plt.yticks(fontsize=15)
+plt.yticks()
 plt.ylabel("Explained variance ratio")
-plt.show()
-
+show()
 
 dfx_trans = pca.transform(dfx)
 
 # Put it in a data frame
 
 dfx_trans = pd.DataFrame(data=dfx_trans)
-dfx_trans.head(10)
 
+cc = dfx_trans.head()
+print(cc)
 
 plt.figure(figsize=(10, 6))
 plt.scatter(
@@ -1082,7 +1090,7 @@ plt.grid(True)
 plt.title("Class separation using first two principal components")
 plt.xlabel("Principal component-1")
 plt.ylabel("Principal component-2")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

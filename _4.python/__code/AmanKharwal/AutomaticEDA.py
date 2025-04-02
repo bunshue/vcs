@@ -28,12 +28,8 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 from dataprep.eda import plot, plot_correlation, create_report, plot_missing
-from google.colab import files
 
-uploaded = files.upload()
-import pandas as pd
-
-data = pd.read_csv("housing.csv")
+data = pd.read_csv("data/housing.csv")
 
 data.head()
 

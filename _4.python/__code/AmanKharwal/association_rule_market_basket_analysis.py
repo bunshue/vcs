@@ -28,7 +28,7 @@ print("------------------------------------------------------------")  # 60個
 
 import plotly.express as px
 
-#import apyori
+# import apyori
 
 from apyori import apriori
 
@@ -40,29 +40,37 @@ print(cc)
 cc = data.isnull().any()
 print(cc)
 
-print("Total number of unique products are:", len(data['itemDescription'].unique()))
+print("Total number of unique products are:", len(data["itemDescription"].unique()))
 
-#Total number of unique products are: 167
+# Total number of unique products are: 167
 
-#Top 10 frequently sold products
+# Top 10 frequently sold products
 print("Top 10 frequently sold products(Tabular Representation)")
-x = data['itemDescription'].value_counts().sort_values(ascending=False)[:10]
+x = data["itemDescription"].value_counts().sort_values(ascending=False)[:10]
 print(x)
 
-fig = px.bar(x= x.index, y= x.values)
-fig.update_layout(title_text= "Top 10 frequently sold products (Graphical Representation)", xaxis_title= "Products", yaxis_title="Count")
+fig = px.bar(x=x.index, y=x.values)
+fig.update_layout(
+    title_text="Top 10 frequently sold products (Graphical Representation)",
+    xaxis_title="Products",
+    yaxis_title="Count",
+)
 fig.show()
 
 # Exploring Higher sales by time of the year:
-data["Year"] = data['Date'].str.split("-").str[-1]
-data["Month-Year"] = data['Date'].str.split("-").str[1] + "-" + data['Date'].str.split("-").str[-1]
+data["Year"] = data["Date"].str.split("-").str[-1]
+data["Month-Year"] = (
+    data["Date"].str.split("-").str[1] + "-" + data["Date"].str.split("-").str[-1]
+)
 cc = data.head()
 print(cc)
 
-fig1 = px.bar(data["Month-Year"].value_counts(ascending=False), 
-              orientation= "v", 
-              color = data["Month-Year"].value_counts(ascending=False),
-               labels={'value':'Count', 'index':'Date','color':'Meter'})
+fig1 = px.bar(
+    data["Month-Year"].value_counts(ascending=False),
+    orientation="v",
+    color=data["Month-Year"].value_counts(ascending=False),
+    labels={"value": "Count", "index": "Date", "color": "Meter"},
+)
 
 fig1.update_layout(title_text="Exploring higher sales by the date")
 
@@ -74,12 +82,12 @@ Observations
 - The most purchases are during August/Sepetember, while February/March has the leats demands
 """
 
-products = data['itemDescription'].unique()
+products = data["itemDescription"].unique()
 
-#one hot encoding the products:
+# one hot encoding the products:
 
-dummy = pd.get_dummies(data['itemDescription'])
-data.drop(['itemDescription'], inplace =True, axis=1)
+dummy = pd.get_dummies(data["itemDescription"])
+data.drop(["itemDescription"], inplace=True, axis=1)
 
 data = data.join(dummy)
 
@@ -88,20 +96,22 @@ print(cc)
 
 # Transaction: If a customer bought multiple products in one day, it will be considered as 1 transaction:
 
-data1 = data.groupby(['Member_number', 'Date'])[products[:]].sum()
+data1 = data.groupby(["Member_number", "Date"])[products[:]].sum()
 data1 = data1.reset_index()[products]
 
 print("New Dimension", data1.shape)
 cc = data1.head()
 print(cc)
 
-#Replacing all non-zero values with the name of the product:
+# Replacing all non-zero values with the name of the product:
+
 
 def product_names(x):
     for product in products:
-        if x[product] >0:
+        if x[product] > 0:
             x[product] = product
     return x
+
 
 data1 = data1.apply(product_names, axis=1)
 cc = data1.head()
@@ -109,33 +119,39 @@ print(cc)
 
 print("Total Number of Transactions:", len(data1))
 
-#Total Number of Transactions: 14963
+# Total Number of Transactions: 14963
 
-#Removing Zeros, Extracting the list of items bought per customer
+# Removing Zeros, Extracting the list of items bought per customer
 
 x = data1.values
-x = [sub[~(sub==0)].tolist() for sub in x if sub [sub != 0].tolist()]
+x = [sub[~(sub == 0)].tolist() for sub in x if sub[sub != 0].tolist()]
 transactions = x
 cc = transactions[0:10]
 print(cc)
 
-rules = apriori(transactions, min_support = 0.00030, min_confidence = 0.05, min_lift = 3, max_length = 2, target = "rules")
+rules = apriori(
+    transactions,
+    min_support=0.00030,
+    min_confidence=0.05,
+    min_lift=3,
+    max_length=2,
+    target="rules",
+)
 association_results = list(rules)
 print(association_results[0])
 
-#RelationRecord(items=frozenset({'liver loaf', 'fruit/vegetable juice'}), support=0.00040098910646260775, ordered_statistics=[OrderedStatistic(items_base=frozenset({'liver loaf'}), items_add=frozenset({'fruit/vegetable juice'}), confidence=0.12, lift=3.5276227897838903)])
+# RelationRecord(items=frozenset({'liver loaf', 'fruit/vegetable juice'}), support=0.00040098910646260775, ordered_statistics=[OrderedStatistic(items_base=frozenset({'liver loaf'}), items_add=frozenset({'fruit/vegetable juice'}), confidence=0.12, lift=3.5276227897838903)])
 
 for item in association_results:
-    
     pair = item[0]
     items = [x for x in pair]
-    
+
     print("Rule : ", items[0], " -> " + items[1])
     print("Support : ", str(item[1]))
-    print("Confidence : ",str(item[2][0][2]))
+    print("Confidence : ", str(item[2][0][2]))
     print("Lift : ", str(item[2][0][3]))
-    
-    print("=============================") 
+
+    print("=============================")
 
 
 print("------------------------------------------------------------")  # 60個

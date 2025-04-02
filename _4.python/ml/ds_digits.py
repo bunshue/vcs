@@ -34,11 +34,13 @@ from sklearn import svm
 from sklearn import datasets
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.metrics import accuracy_score  # 計算分類模型的準確率
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_val_predict
 from sklearn.model_selection import learning_curve
+from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 
 print("------------------------------------------------------------")  # 60個
@@ -55,156 +57,76 @@ print("------------------------------------------------------------")  # 60個
 print("數字 基本數據 load_digits()")
 
 digits = datasets.load_digits()
+#digits = datasets.load_digits(n_class=6)  # 多了 n_class 參數，只要數字 0 ~ n_class-1
 
-print("data形狀 :", digits.data.shape)
+print(type(digits))
+
+X = digits.data
+y = digits.target
+
+#X = digits["data"] same
+#y = digits["target"] same
+
+print("digits.keys() :", digits.keys())
+# 資料keys包含'data', 'target', 'target_names', 'images', 'DESCR'
+print("data形狀 :", X.shape)
 print("data影像形狀 :", digits.images.shape)
-
+print("影像個數 :", len(digits.images))
 # print(digits.DESCR)  # 查看数据集的说明信息
 
-N = len(digits.images)
-print("影像個數 :", N)
-
-indices = np.arange(len(digits.data))
-print(indices)
-
-X = digits.data
-y = digits.target
-print(X.shape)
-print(digits.target)
-
-digits = datasets.load_digits(n_class=6)  # 多了 n_class 參數
-
-X = digits.data
-y = digits.target
-print(X.shape)
-print(digits.target)
-
 index = 3
-image = digits.images[index]
-print(image)
-print(image.shape)
-
 print("看第", index, "張圖")
-# plt.matshow(image, cmap=plt.cm.gray) same as imshow
-plt.imshow(image, cmap=plt.cm.gray)
+print("圖的內容 :\n", digits.images[index], sep="")
+print("圖的形狀 :", digits.images[index].shape)
+plt.imshow(digits.images[index], cmap=plt.cm.gray)
+#plt.imshow(X[index].reshape(8, 8), cmap=plt.cm.gray)
 show()
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("畫出前12張圖")
-
-digits = datasets.load_digits()
-
-# 把数据所代表的图片显示出来
-images_and_labels = list(zip(digits.images, digits.target))
-
-plt.figure(figsize=(8, 6))
-
-for index, (image, label) in enumerate(images_and_labels[:12]):
-    plt.subplot(3, 4, index + 1)
-    plt.imshow(image, cmap=plt.cm.gray_r, interpolation="nearest")
-    plt.title("Digit: %i" % label, fontsize=20)
-    plt.axis("off")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("畫出前100張圖")
 
-digits = datasets.load_digits()
-
-X = digits.data
-y = digits.target
-
-
-print('畫出手寫數字資料集前N筆')
-
-# 查看预测的情况
-fig, axes = plt.subplots(10, 10, figsize=(8, 8))
-fig.subplots_adjust(hspace=0.1, wspace=0.1)
-
-for i, ax in enumerate(axes.flat):
-    ax.imshow(X[i].reshape(8, 8), cmap=plt.cm.gray_r, interpolation="nearest")
-    ax.text(
-        0.05,
-        0.05,
-        str(y[i]),
-        fontsize=12,
-        transform=ax.transAxes,
-        color="red",
-    )
-    ax.text(
-        0.8, 0.05, str(y[i]), fontsize=12, transform=ax.transAxes, color="black"
-    )
-    ax.set_xticks([])
-    ax.set_yticks([])
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("畫出前100張圖")
-
-digits = datasets.load_digits(n_class=10)
-
-X = digits.data
-y = digits.target
-
-# n_samples, n_features = X.shape
-# n_neighbors = 30
-
-print(X.shape)
-print(y.shape)
-
-plt.figure(figsize=(8, 6))
+plt.figure(figsize=(8, 8))
 
 for i in range(100):
     plt.subplot(10, 10, i + 1)
-    plt.imshow(digits.data[i].reshape(8, 8), cmap=plt.cm.gray)
+    plt.imshow(X[i].reshape(8, 8), cmap=plt.cm.gray)
     plt.axis("off")
-
+plt.suptitle("畫出前100張圖")
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# RandomForestClassifier
 # 以sklearn中的手寫數字集合來舉例：
 
 digits = datasets.load_digits()
-cc = digits.keys()
-print(cc)
-
-# 可以看到上圖，資料keys包含'data', 'target', 'target_names', 'images', 'DESCR'
+X = digits.data
+y = digits.target
 
 # 將手寫的資料視覺化呈現，可以看到每個數字(images)的左下角會記錄該數字的正確值(target)
 
 # set up the figure
-fig = plt.figure(figsize=(6, 6))  # figure size in inches
+fig = plt.figure(figsize=(8, 8))  # figure size in inches
 fig.subplots_adjust(left=0, right=1, bottom=0, top=1, hspace=0.05, wspace=0.05)
 
-# plot the digits: each image is 8x8 pixels
+print('畫64張圖')
 for i in range(64):
     tx = fig.add_subplot(8, 8, i + 1, xticks=[], yticks=[])
     tx.imshow(digits.images[i], cmap=plt.cm.binary, interpolation="nearest")
-
-    # label the image with the target value
     tx.text(0, 7, str(digits.target[i]))
-
-
 show()
 
 # 用 隨機森林分類函數學習機 將手寫資料進行分類
 
-Xtrain, Xtest, ytrain, ytest = train_test_split(digits.data, digits.target)
+Xtrain, Xtest, ytrain, ytest = train_test_split(X, digits.target)
 model = RandomForestClassifier(n_estimators=1000)  # 隨機森林分類函數學習機
 
 model.fit(Xtrain, ytrain)
 
 y_pred = model.predict(Xtest)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 print(classification_report(y_pred, ytest))
 
@@ -225,9 +147,11 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 変換後のベクトルデータを入力として機械学習モデルを適用する
+# RandomForestClassifier
 
 digits = datasets.load_digits()
+X = digits.data
+y = digits.target
 
 N = len(digits.images)
 data = digits.images.reshape((N, -1))
@@ -239,14 +163,41 @@ model.fit(data[: N // 2], digits.target[: N // 2])  # 學習訓練.fit
 expected = digits.target[N // 2 :]
 
 y_pred = model.predict(data[N // 2 :])  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 print(classification_report(expected, y_pred))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-digits = datasets.load_digits()
+# MLPClassifier
 
+from sklearn.neural_network import MLPClassifier  # 多層感知器分類器 函數學習機
+
+digits = datasets.load_digits()
+X = digits.data
+y = digits.target
+
+N = len(digits.images)
+X = digits.images.reshape(N, -1)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+mlp = MLPClassifier(hidden_layer_sizes=(16,))  # 多層感知器分類器 函數學習機
+
+mlp.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = mlp.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
+
+print(accuracy_score(y_pred, y_test))  # 評価
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# SVC
+digits = datasets.load_digits()
 X = digits.data
 y = digits.target
 
@@ -293,8 +244,9 @@ print(clf.score(Xtest, Ytest))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-digits = datasets.load_digits()
+# SVC
 
+digits = datasets.load_digits()
 X = digits.data
 y = digits.target
 
@@ -302,36 +254,20 @@ clf = svm.SVC(gamma=0.001, C=100.0)
 
 clf.fit(X[:1791], y[:1791])  # 學習訓練.fit
 
-res = clf.predict(X[1791:1797])  # 預測.predict
-
-result = list(res)
-
-duibi = y[1791:1797]
-print("识别的数字: {}\n实际的结果: {}".format(result, list(duibi)))
-
-# 显示要识别的数字图片
-plt.subplot(321)
-plt.imshow(digits.images[1791], cmap=plt.cm.gray_r, interpolation="nearest")
-plt.subplot(322)
-plt.imshow(digits.images[1792], cmap=plt.cm.gray_r, interpolation="nearest")
-plt.subplot(323)
-plt.imshow(digits.images[1793], cmap=plt.cm.gray_r, interpolation="nearest")
-plt.subplot(324)
-plt.imshow(digits.images[1794], cmap=plt.cm.gray_r, interpolation="nearest")
-plt.subplot(325)
-plt.imshow(digits.images[1795], cmap=plt.cm.gray_r, interpolation="nearest")
-plt.subplot(326)
-plt.imshow(digits.images[1796], cmap=plt.cm.gray_r, interpolation="nearest")
-
-show()
+y_pred = clf.predict(X[1791:1797])  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+# SVC 學習曲線
 
 digits = datasets.load_digits()
-
 X = digits.data
 y = digits.target
+print(X.shape)
+print(y.shape)
+print("------------------------------")  # 30個
 
 train_sizes, train_loss, test_loss = learning_curve(
     svm.SVC(gamma=0.01),
@@ -341,23 +277,27 @@ train_sizes, train_loss, test_loss = learning_curve(
     scoring="neg_mean_squared_error",
     train_sizes=[0.1, 0.25, 0.5, 0.75, 1],
 )
-train_loss_mean = -np.mean(train_loss, axis=1)
-test_loss_mean = -np.mean(test_loss, axis=1)
+
+# 全部樣本(1797個)9成拿來訓練 照比例做訓練
+print("訓練大小(5比例) :", train_sizes)
+print("訓練損失(10輪 X 5比例) :\n", train_loss, sep="")
+print("測試損失(10輪 X 5比例) :\n", test_loss, sep="")
+
+train_loss_mean = -np.mean(train_loss, axis=1)#取平均, 取相反數
+test_loss_mean = -np.mean(test_loss, axis=1)#取平均, 取相反數
+
+print("訓練損失 10輪平均 :", train_loss_mean)
+print("測試損失 10輪平均 :", test_loss_mean)
 
 plt.plot(train_sizes, train_loss_mean, "o-", color="r", label="Training")
 plt.plot(train_sizes, test_loss_mean, "o-", color="g", label="Cross-validation")
 
-plt.xlabel("Training examples")
-plt.ylabel("Loss")
+plt.xlabel("訓練樣本數")
+plt.ylabel("損失")
+plt.legend()
 show()
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-digits = datasets.load_digits()
-
-X = digits.data
-y = digits.target
+print("------------------------------")  # 30個
 
 train_size_abs, train_loss, test_loss = learning_curve(
     svm.SVC(),
@@ -369,26 +309,41 @@ train_size_abs, train_loss, test_loss = learning_curve(
     scoring="neg_mean_squared_error",
 )
 
-train_loss_mean = -np.mean(train_loss, axis=1)
-test_loss_mean = -np.mean(test_loss, axis=1)
+print(A*0.9*0.1)#ok
+print(A*0.9*0.32)
+print(A*0.9*0.55)#ok
+print(A*0.9*0.77)
+print(A*0.9*1)#ok
+print(A*0.9*0.1)
+print(A*0.9*0.33)
+print(A*0.9*0.55)
+print(A*0.9*0.78)
+print(A*0.9*1)
+
+print("訓練大小(5比例) abs:", train_size_abs)
+print("訓練損失(10輪 X 5比例) :\n", train_loss, sep="")
+print("測試損失(10輪 X 5比例) :\n", test_loss, sep="")
+
+train_loss_mean = -np.mean(train_loss, axis=1)#取平均, 取相反數
+test_loss_mean = -np.mean(test_loss, axis=1)#取平均, 取相反數
+print("訓練損失 10輪平均 :", train_loss_mean)
+print("測試損失 10輪平均 :", test_loss_mean)
 
 param_range = np.logspace(-6, -2.3, 5)
-print(param_range)
+print("x軸範圍 :", param_range)
 
 plt.plot(param_range, train_loss_mean, "o-", color="r", label="Training")
 plt.plot(param_range, test_loss_mean, "o-", color="g", label="Cross-validation")
 
 plt.xlabel("gamma")
-plt.ylabel("Loss")
-plt.legend(loc="best")
+plt.ylabel("損失")
 
 show()
 
-print('dddddddddddddddd')
-sys.exit()
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+# DecisionTreeClassifier AdaBoostClassifier
 
 # scikit-learn_adaBoost
 
@@ -398,47 +353,46 @@ from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 
 digits = datasets.load_digits()
+# X = digits.data
+# y = digits.target
 
 X = digits["data"]
 y = digits["target"]
 
-index = 4
-print("看第", index, "張圖")
-plt.imshow(X[index].reshape(8, 8), cmap=plt.cm.gray)
-
-show()
-
-# 個別模型評估
+# 決策樹分類器 模型評估
 
 clf = DecisionTreeClassifier()
 scores_ada = cross_val_score(clf, X, y, cv=6)
-cc = scores_ada.mean()
-print(cc)
+print('決策樹分類器 6次成績 :', scores_ada)
+print('決策樹分類器 6次成績平均 :', scores_ada.mean())
 
-# 0.7952173913043478
-
-# AdaBoost模型評估
+# AdaBoost分類器 模型評估
 
 clf = AdaBoostClassifier(DecisionTreeClassifier())
 scores_ada = cross_val_score(clf, X, y, cv=6)
-cc = scores_ada.mean()
-print(cc)
-# 0.8019435154217764
+
+print('AdaBoost分類器 6次成績 :', scores_ada)
+print('AdaBoost分類器 6次成績平均 :', scores_ada.mean())
 
 clf.fit(X, y)  # 學習訓練.fit
 
 cc = clf.estimator_errors_
-print(cc)
+print("errors :\n", cc, sep="")
 
 cc = clf.estimator_weights_
-print(cc)
+print("weights :\n", cc, sep="")
+
+print('不同深度AdaBoostClassifier(DecisionTreeClassifier())')
 
 score = []
 for depth in [1, 2, 10]:
+    print('深度 :', depth)
     clf = AdaBoostClassifier(DecisionTreeClassifier(max_depth=depth))
     scores_ada = cross_val_score(clf, X, y, cv=6)
     score.append(scores_ada.mean())
-print(score)
+
+print('深度 :', [1, 2, 10])
+print("成績 :", score)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -451,9 +405,12 @@ from scipy import stats
 from sklearn.semi_supervised import LabelSpreading
 
 digits = datasets.load_digits()
+X = digits.data
+y = digits.target
 
 rng = np.random.RandomState(0)
-indices = np.arange(len(digits.data))
+
+indices = np.arange(len(X))
 rng.shuffle(indices)
 
 # 取前 330 筆資料
@@ -540,23 +497,14 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# View more python learning tutorial on my Youtube and Youku channel!!!
-
-# Youtube video tutorial: https://www.youtube.com/channel/UCdyjiB5H8Pu7aDTNVXTTpcg
-# Youku video tutorial: http://i.youku.com/pythontutorial
-
-"""
-Please note, this code is only for python 3+. If you are using python 2+, please modify the code accordingly.
-"""
 import tensorflow as tf
 from sklearn.preprocessing import LabelBinarizer
 
 digits = datasets.load_digits()
-
 X = digits.data
 y = digits.target
 
-y = LabelBinarizer().fit_transform(y)
+y = LabelBinarizer().fit_transform(y)  # .fit + .transform一起做
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -649,9 +597,11 @@ def plot_digits(data):
 
 
 digits = datasets.load_digits()
+X = digits.data
+y = digits.target
 
-print("顯示前 100 筆手寫阿拉伯數字")
-plot_digits(digits.data)
+plot_digits(X)
+plt.suptitle("顯示前 100 筆手寫阿拉伯數字")
 show()
 
 # 降維
@@ -659,8 +609,9 @@ show()
 from sklearn.decomposition import PCA
 
 pca = PCA(0.99, whiten=True)
-data = pca.fit_transform(digits.data)
-print("PCA前 :", digits.data.shape)  ## (1797, 64)
+data = pca.fit_transform(X)  # .fit + .transform一起做
+
+print("PCA前 :", X.shape)  ## (1797, 64)
 print("PCA後 :", data.shape)  # (1797, 41)
 
 # 以AIC決定最佳集群數量
@@ -673,6 +624,7 @@ n_components = np.arange(50, 210, 10)
 
 aics = []
 for n in n_components:
+    print('GaussianMixture, n =', n)
     gmm = GaussianMixture(n, covariance_type="full")
     aic = gmm.fit(data).aic(data)
     aics.append(aic)
@@ -681,8 +633,8 @@ for n in n_components:
 plt.plot(n_components, aics)
 
 # 畫直線
-# plt.plot([110, 0], [110, min(aic)], linewidth=5, color='0.8')
-plt.plot([110, 110], [110, -250000], linewidth=5, color="0.8")
+plt.plot([110, 110], [110, min(aics)], linewidth=5, color='0.3')
+#plt.plot([110, 110], [110, -250000], linewidth=5, color="0.8")
 
 show()
 
@@ -705,38 +657,14 @@ print("data_new.shape :", data_new.shape)  # (100, 41)
 
 digits_new = pca.inverse_transform(data_new)
 
-print("顯示前 100 筆手寫阿拉伯數字")
 plot_digits(digits_new)
+plt.suptitle("顯示前 100 筆手寫阿拉伯數字")
 show()
+
 print("digits_new.shape :", digits_new.shape)  # (100, 64)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.neural_network import MLPClassifier  # 多層感知器分類器 函數學習機
-
-digits = datasets.load_digits()
-print(type(digits))
-
-# X = digits.data
-# y = digits.target
-
-X = digits.images.reshape(len(digits.images), -1)
-y = digits.target
-
-# 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-mlp = MLPClassifier(hidden_layer_sizes=(16,))  # 多層感知器分類器 函數學習機
-
-mlp.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = mlp.predict(X_test)  # 預測.predict
-print(accuracy_score(y_pred, y_test))  # 評価
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 # SelectPercentile 單變數特徵選取(Univariate feature selection)
 
@@ -745,12 +673,11 @@ from sklearn.feature_selection import chi2
 
 print("數字資料集")
 X, y = datasets.load_digits(return_X_y=True)
-print(X.shape)
 
 # SelectPercentile 特徵選取
 
 logistic_regression = SelectPercentile(chi2, percentile=10)
-X_new = logistic_regression.fit_transform(X, y)
+X_new = logistic_regression.fit_transform(X, y)  # .fit + .transform一起做
 print(X_new.shape)
 
 print("顯示特徵分數")
@@ -769,7 +696,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 特徵縮放
 scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
+X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放  # .fit + .transform一起做
 X_test_std = scaler.transform(X_test)  # STD特徵縮放
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
@@ -801,7 +728,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 特徵縮放
 scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
+X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放  # .fit + .transform一起做
 X_test_std = scaler.transform(X_test)  # STD特徵縮放
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
@@ -823,14 +750,13 @@ from sklearn.feature_selection import chi2
 
 print("數字資料集")
 X, y = datasets.load_digits(return_X_y=True)
-print(X.shape)
 
 # GenericUnivariateSelect 特徵選取
 
 # 使用 SelectKBest, 20 個特徵
 clf = GenericUnivariateSelect(chi2, mode="k_best", param=20)
 
-X_new = clf.fit_transform(X, y)
+X_new = clf.fit_transform(X, y)  # .fit + .transform一起做
 print(X_new.shape)
 
 print("顯示特徵分數")
@@ -849,7 +775,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 特徵縮放
 scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
+X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放  # .fit + .transform一起做
 X_test_std = scaler.transform(X_test)  # STD特徵縮放
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
@@ -877,7 +803,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 特徵縮放
 scaler = StandardScaler()
-X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放
+X_train_std = scaler.fit_transform(X_train)  # STD特徵縮放  # .fit + .transform一起做
 X_test_std = scaler.transform(X_test)  # STD特徵縮放
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
@@ -935,3 +861,15 @@ import matplotlib as mpl
 plt.cmap = mpl.colors.ListedColormap(colors)
 # plt.rcParams['savefig.dpi'] = 300
 # plt.rcParams['figure.dpi'] = 300
+
+
+plt.imshow(image, cmap=plt.cm.gray_r, interpolation="nearest")
+ax.imshow(X[i].reshape(8, 8), cmap=plt.cm.gray_r, interpolation="nearest")
+
+
+plt.imshow(digits.images[1791], cmap=plt.cm.gray_r, interpolation="nearest")
+plt.imshow(digits.images[1792], cmap=plt.cm.gray_r, interpolation="nearest")
+plt.imshow(digits.images[1793], cmap=plt.cm.gray_r, interpolation="nearest")
+plt.imshow(digits.images[1794], cmap=plt.cm.gray_r, interpolation="nearest")
+plt.imshow(digits.images[1795], cmap=plt.cm.gray_r, interpolation="nearest")
+plt.imshow(digits.images[1796], cmap=plt.cm.gray_r, interpolation="nearest")
