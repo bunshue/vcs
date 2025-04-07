@@ -72,6 +72,7 @@ print(data)
 
 # 利用one-hot encoding編碼的方式，可以有效率的判斷所指示值為1或0代表存在或不存在。
 
+# DictVectorizer 对使用字典储存的数据进行特征提取与向量化
 from sklearn.feature_extraction import DictVectorizer
 
 dv = DictVectorizer(sparse=False, dtype=int)
@@ -88,6 +89,8 @@ dv.fit_transform(data)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# DictVectorizer 对使用字典储存的数据进行特征提取与向量化
+
 print("DictVectorizer, sparse=True")  # 可以解決為稀疏矩陣的問題
 from sklearn.feature_extraction import DictVectorizer
 
@@ -102,6 +105,8 @@ print("特徵名稱 :\n", dv.get_feature_names_out(), sep="")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+# DictVectorizer 对使用字典储存的数据进行特征提取与向量化
 
 print("DictVectorizer, sparse=False")
 from sklearn.feature_extraction import DictVectorizer

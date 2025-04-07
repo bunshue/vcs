@@ -1,5 +1,5 @@
 """
-machine_learning_ch02
+text01
 
 """
 
@@ -64,7 +64,7 @@ def readfile(path):
 
 # 读取bunch对象
 def readbunchobj(path):
-    print(path)
+    print("讀取檔案 :", path)
     file_obj = open(path, "rb")
     bunch = pickle.load(file_obj)
     file_obj.close()
@@ -73,6 +73,7 @@ def readbunchobj(path):
 
 # 写入bunch对象
 def writebunchobj(path, bunchobj):
+    print("寫入檔案 :", path)
     file_obj = open(path, "wb")
     pickle.dump(bunchobj, file_obj)
     file_obj.close()
@@ -214,7 +215,7 @@ print(classify(testdata, dataSet, labels, k))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Nbayes_lib.py
+# Nbayes.py
 
 
 def loadDataSet():
@@ -372,18 +373,11 @@ k = 3
 # dataSet,labels = createDataSet()
 # print classify(mat(testdata), mat(dataSet), labels, k)
 dataSet, listClasses = loadDataSet()
+
 nb = NBayes()
 nb.train_set(dataSet, listClasses)
 print(classify(nb.tf[3], nb.tf, listClasses, k))
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# Nbayes.py
-
-dataSet, listClasses = loadDataSet()
-nb = NBayes()
-nb.train_set(dataSet, listClasses)
 nb.map2vocab(dataSet[3])
 
 print(nb.predict(nb.testset))
@@ -409,12 +403,12 @@ train_set = readbunchobj(trainpath)
 # 导入测试集
 testpath = "test_word_bag/testspace.dat"
 test_set = readbunchobj(testpath)
+
 # 应用朴素贝叶斯算法
 # 1. 输入词袋向量和分类标签
 # alpha:0.001 alpha越小，迭代次数越多，精度越高
 clf = MultinomialNB(alpha=0.001).fit(train_set.tdm, train_set.label)
 
-"""
 # 预测分类结果
 predicted = clf.predict(test_set.tdm)
 total = len(predicted)
@@ -426,9 +420,7 @@ for flabel, file_name, expct_cate in zip(test_set.label, test_set.filenames, pre
 # 精度
 print("error rate:", float(rate) * 100 / float(total), "%")
 print("预测完毕!!!")
-"""
 
-""" NG
 print()
 print("test_set.label")
 print(test_set.label)
@@ -436,9 +428,10 @@ print()
 print("predicted")
 print(predicted)
 print()
+
+""" 計算分類精度 NG
 metrics_result(test_set.label, predicted)
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
