@@ -54,7 +54,7 @@ print("------------------------------------------------------------")  # 60個
 # 單純貝氏分類器 naive Bayes classifier
 
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.naive_bayes import MultinomialNB
+from sklearn.naive_bayes import MultinomialNB  # 多項單純貝氏分類器
 
 news = datasets.fetch_20newsgroups(subset="all")
 
@@ -66,7 +66,8 @@ tf = TfidfVectorizer()
 x_train = tf.fit_transform(x_train)
 x_test = tf.transform(x_test)
 
-mlt = MultinomialNB(alpha=1.0)
+mlt = MultinomialNB(alpha=1.0)  # 多項單純貝氏分類器
+
 mlt.fit(x_train, y_train)
 score = mlt.score(x_test, y_test)
 print(score)
@@ -114,7 +115,7 @@ test = datasets.fetch_20newsgroups(subset="test", categories=categories)
 print(train.data[5])
 
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.naive_bayes import MultinomialNB
+from sklearn.naive_bayes import MultinomialNB  # 多項單純貝氏分類器
 from sklearn.pipeline import make_pipeline
 
 model = make_pipeline(TfidfVectorizer(), MultinomialNB())

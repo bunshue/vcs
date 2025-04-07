@@ -91,7 +91,7 @@ def metrics_result(actual, predict):
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # corpus_segment.py
 
 import jieba
@@ -122,7 +122,7 @@ print("中文语料分词结束！！！")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # kNN.py
 
 import operator
@@ -146,7 +146,7 @@ def cosdist(vector1, vector2):
 # 训练集：dataSet
 # 类别标签：labels
 # k:k个邻居数
-def classify(testdata, dataSet, labels, k):
+def classify1(testdata, dataSet, labels, k):
     # 返回样本集的行数
     dataSetSize = dataSet.shape[0]
     # 计算测试集与训练集之间的距离：标准欧氏距离
@@ -185,32 +185,22 @@ k = 3
 testdata = [0.2, 0.2]
 dataSet, labels = createDataSet()
 
-# 绘图
-fig = plt.figure()
-ax = fig.add_subplot(111)
-indx = 0
+# KNN 分類結果
+print(classify1(testdata, dataSet, labels, k))
+
+idx = 0
 for point in dataSet:
-    if labels[indx] == "A":
-        ax.scatter(point[0], point[1], c="blue", marker="o", linewidths=0, s=300)
-        plt.annotate(
-            "(" + str(point[0]) + "," + str(point[1]) + ")", xy=(point[0], point[1])
-        )
+    print("(" + str(point[0]) + ", " + str(point[1]) + ")")
+    if labels[idx] == "A":
+        plt.scatter(point[0], point[1], c="r", marker="o", s=300, label="A")
     else:
-        ax.scatter(point[0], point[1], c="red", marker="^", linewidths=0, s=300)
-        plt.annotate(
-            "(" + str(point[0]) + ", " + str(point[1]) + ")", xy=(point[0], point[1])
-        )
-    indx += 1
+        plt.scatter(point[0], point[1], c="g", marker="^", s=300, label="B")
+    idx += 1
 
-ax.scatter(testdata[0], testdata[1], c="green", marker="s", linewidths=0, s=300)
-plt.annotate(
-    "(" + str(testdata[0]) + ", " + str(testdata[1]) + ")",
-    xy=(testdata[0], testdata[1]),
-)
+plt.scatter(testdata[0], testdata[1], c="b", marker="s", s=300, label="測試資料")
 
+plt.legend()
 show()
-
-print(classify(testdata, dataSet, labels, k))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -259,12 +249,12 @@ class NBayes(object):
     def calc_tfidf(self, trainset):
         self.idf = np.zeros([1, self.vocablen])
         self.tf = np.zeros([self.doclength, self.vocablen])
-        for indx in range(self.doclength):
-            for word in trainset[indx]:
-                self.tf[indx, self.vocabulary.index(word)] += 1
+        for idx in range(self.doclength):
+            for word in trainset[idx]:
+                self.tf[idx, self.vocabulary.index(word)] += 1
             # 消除不同句长导致的偏差
-            self.tf[indx] = self.tf[indx] / float(len(trainset[indx]))
-            for signleword in set(trainset[indx]):
+            self.tf[idx] = self.tf[idx] / float(len(trainset[idx]))
+            for signleword in set(trainset[idx]):
                 self.idf[0, self.vocabulary.index(signleword)] += 1
         self.idf = np.log(float(self.doclength) / self.idf)
         self.tf = np.multiply(self.tf, self.idf)  # 矩阵与向量的点乘
@@ -273,10 +263,10 @@ class NBayes(object):
     def calc_wordfreq(self, trainset):
         self.idf = np.zeros([1, self.vocablen])  # 1*词典数
         self.tf = np.zeros([self.doclength, self.vocablen])  # 训练集文件数*词典数
-        for indx in range(self.doclength):  # 遍历所有的文本
-            for word in trainset[indx]:  # 遍历文本中的每个词
-                self.tf[indx, self.vocabulary.index(word)] += 1  # 找到文本的词在字典中的位置+1
-            for signleword in set(trainset[indx]):
+        for idx in range(self.doclength):  # 遍历所有的文本
+            for word in trainset[idx]:  # 遍历文本中的每个词
+                self.tf[idx, self.vocabulary.index(word)] += 1  # 找到文本的词在字典中的位置+1
+            for signleword in set(trainset[idx]):
                 self.idf[0, self.vocabulary.index(signleword)] += 1
 
     # 计算每个分类在数据集中的概率：P(yi)
@@ -293,10 +283,10 @@ class NBayes(object):
     def build_tdm(self):
         self.tdm = np.zeros([len(self.Pcates), self.vocablen])  # 类别行*词典列
         sumlist = np.zeros([len(self.Pcates), 1])  # 统计每个分类的总值
-        for indx in range(self.doclength):
-            self.tdm[self.labels[indx]] += self.tf[indx]  # 将同一类别的词向量空间值加总
-            sumlist[self.labels[indx]] = np.sum(
-                self.tdm[self.labels[indx]]
+        for idx in range(self.doclength):
+            self.tdm[self.labels[idx]] += self.tf[idx]  # 将同一类别的词向量空间值加总
+            sumlist[self.labels[idx]] = np.sum(
+                self.tdm[self.labels[idx]]
             )  # 统计每个分类的总值--是个标量
         self.tdm = self.tdm / sumlist  # P(x|yi)
 
@@ -339,13 +329,13 @@ def cosdist(vector1, vector2):
 # 训练集：trainSet
 # 类别标签：listClasses
 # k:k个邻居数
-def classify(testdata, trainSet, listClasses, k):
+def classify2(testdata, trainSet, listClasses, k):
     # 返回样本集的行数
     dataSetSize = trainSet.shape[0]
     # 计算测试集与训练集之间的距离：夹角余弦
     distances = np.array(np.zeros(dataSetSize))
-    for indx in range(dataSetSize):
-        distances[indx] = cosdist(testdata, trainSet[indx])
+    for idx in range(dataSetSize):
+        distances[idx] = cosdist(testdata, trainSet[idx])
     # 5.根据生成的夹角余弦按从大到小排序,结果为索引号
     sortedDistIndicies = np.argsort(-distances)
     classCount = {}
@@ -371,12 +361,12 @@ def classify(testdata, trainSet, listClasses, k):
 k = 3
 # testdata=[0.2,0.2]
 # dataSet,labels = createDataSet()
-# print classify(mat(testdata), mat(dataSet), labels, k)
+# print classify2(mat(testdata), mat(dataSet), labels, k)
 dataSet, listClasses = loadDataSet()
 
 nb = NBayes()
 nb.train_set(dataSet, listClasses)
-print(classify(nb.tf[3], nb.tf, listClasses, k))
+print(classify2(nb.tf[3], nb.tf, listClasses, k))
 
 nb.map2vocab(dataSet[3])
 
@@ -393,7 +383,7 @@ from sklearn import feature_extraction
 from sklearn.datasets._base import Bunch
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.naive_bayes import MultinomialNB  # 导入多项式贝叶斯算法
+from sklearn.naive_bayes import MultinomialNB  # 多項單純貝氏分類器
 
 
 # 导入训练集
@@ -407,7 +397,7 @@ test_set = readbunchobj(testpath)
 # 应用朴素贝叶斯算法
 # 1. 输入词袋向量和分类标签
 # alpha:0.001 alpha越小，迭代次数越多，精度越高
-clf = MultinomialNB(alpha=0.001).fit(train_set.tdm, train_set.label)
+clf = MultinomialNB(alpha=0.001).fit(train_set.tdm, train_set.label)  # 多項單純貝氏分類器
 
 # 预测分类结果
 predicted = clf.predict(test_set.tdm)
@@ -432,6 +422,9 @@ print()
 """ 計算分類精度 NG
 metrics_result(test_set.label, predicted)
 """
+
+sys.exit()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -501,8 +494,10 @@ testspace = Bunch(
     tdm=[],
     vocabulary={},
 )
+
 # 4. 导入训练集的词袋
 trainbunch = readbunchobj("train_word_bag/tfdifspace.dat")
+
 # 5. 使用TfidfVectorizer初始化向量空间模型
 vectorizer = TfidfVectorizer(
     stop_words=stpwrdlst,
@@ -511,6 +506,7 @@ vectorizer = TfidfVectorizer(
     vocabulary=trainbunch.vocabulary,
 )
 transformer = TfidfTransformer()  # 该类会统计每个词语的tf-idf权值
+
 # 文本转为tf-idf矩阵,单独保存字典文件
 testspace.tdm = vectorizer.fit_transform(bunch.contents)
 testspace.vocabulary = trainbunch.vocabulary

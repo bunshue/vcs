@@ -92,8 +92,7 @@ print(message.shape)
 
 print("c")
 
-# create and train the Naive Bayes Classifier
-from sklearn.naive_bayes import MultinomialNB
+from sklearn.naive_bayes import MultinomialNB  # 多項單純貝氏分類器
 
 classifier = MultinomialNB().fit(xtrain, ytrain)
 

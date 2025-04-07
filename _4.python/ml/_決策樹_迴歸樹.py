@@ -61,7 +61,7 @@ from sklearn.metrics import recall_score
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 使用 iris 資料
 # X, y = datasets.load_iris(return_X_y=True) # same
 iris = datasets.load_iris()
@@ -359,7 +359,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 from graphviz import Digraph
 
 styles = {
@@ -486,24 +486,24 @@ show()
 
 p = np.arange(0.01, 1.0, 0.01)
 
-plt.xlabel("p")
-plt.ylabel("H")
-
 plt.annotate(
     "we are surprised",
-    xy=(0.5, 1),
-    xytext=(0.5, 0.75),
+    xy=(0.5, 1),  # 箭頭尾
+    xytext=(0.5, 0.75),  # 字的位置
     arrowprops=dict(facecolor="black", shrink=0.1),
 )
 
 plt.annotate(
     "we are not that surprised",
-    xy=(1, 0.1),
-    xytext=(0.5, 0.25),
+    xy=(1, 0.1),  # 箭頭尾
+    xytext=(0.5, 0.25),  # 字的位置
     arrowprops=dict(facecolor="black", shrink=0.1),
 )
 
 plt.plot(p, -p * np.log2(p) - (1 - p) * np.log2(1 - p))
+
+plt.xlabel("p")
+plt.ylabel("H")
 
 show()
 

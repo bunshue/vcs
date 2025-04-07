@@ -508,7 +508,7 @@ print("------------------------------------------------------------")  # 60個
 # select_test.py
 
 import pickle
-from sklearn.naive_bayes import MultinomialNB  # 导入多项式贝叶斯算法
+from sklearn.naive_bayes import MultinomialNB  # 多項單純貝氏分類器
 
 
 # 读取bunch对象
@@ -527,7 +527,7 @@ testpath = "test_word_bag/testspace.dat"
 test_set = _readbunchobj(testpath)
 
 # 训练分类器：输入词袋向量和分类标签，alpha:0.001 alpha越小，迭代次数越多，精度越高
-clf = MultinomialNB(alpha=0.001).fit(train_set.tdm, train_set.label)
+clf = MultinomialNB(alpha=0.001).fit(train_set.tdm, train_set.label)  # 多項單純貝氏分類器
 
 # 预测分类结果
 predicted = clf.predict(test_set.tdm)

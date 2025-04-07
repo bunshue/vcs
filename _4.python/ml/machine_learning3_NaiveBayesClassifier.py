@@ -4,6 +4,9 @@
 
 朴素贝叶斯
 朴素贝叶斯是基于贝叶斯定理与特征条件独立假设的分类方法。
+
+GaussianNB()
+MultinomialNB()  # 多項單純貝氏分類器
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -35,21 +38,82 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 
+from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 
-'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# Scikit-learn_naive_bayes
+
+# 以單純貝氏分類器進行鳶尾花(Iris)品種的辨識
+
+X, y = datasets.load_iris(return_X_y=True)  # 分別回傳兩種資料
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+from sklearn.naive_bayes import GaussianNB
+
+clf = GaussianNB()
+
+clf.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = clf.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
+
+print("計算準確率")
+cc = accuracy_score(y_test, y_pred)
+print(f"{cc*100:.2f}%")
+# 93.33%
+
+# 使用伯努利單純貝氏分類器
+
+from sklearn.naive_bayes import BernoulliNB
+
+clf = BernoulliNB()
+
+clf.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = clf.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
+
+print("計算準確率")
+cc = accuracy_score(y_test, y_pred)
+print(f"{cc*100:.2f}%")
+# 20.00%
+
+from sklearn.naive_bayes import MultinomialNB  # 多項單純貝氏分類器
+
+clf = MultinomialNB()  # 多項單純貝氏分類器
+
+clf.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = clf.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
+
+print("計算準確率")
+cc = accuracy_score(y_test, y_pred)
+print(f"{cc*100:.2f}%")
+# 80.00%
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+sys.exit()
+
+
+'''
 """
 API Reference: http://scikit-learn.org/stable/modules/naive_bayes.html#naive-bayes
-定义一个MultinomialNB类
+定义一个MultinomialNB类   # 多項單純貝氏分類器
 """
 
 
-class MultinomialNB(object):
+class my_MultinomialNB(object):  # 多項單純貝氏分類器
     def __init__(self, alpha=1.0, fit_prior=True, class_prior=None):
         """
         多项式模型的朴素贝叶斯分类器。多项式朴素贝叶斯分类器适用于具有离散特征的分类。
@@ -166,16 +230,16 @@ X = np.array(
 X = X.T
 y = np.array([-1, -1, 1, 1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1, -1])
 
-nb = MultinomialNB(alpha=1.0, fit_prior=True)
+nb = my_MultinomialNB(alpha=1.0, fit_prior=True)  # 多項單純貝氏分類器
 nb.fit(X, y)
 print(nb.predict(np.array([2, 4])))  # 输出-1
 
 # 高斯模型 GaussianNB
 
 
-# GaussianNB differ from MultinomialNB in these two method:
+# GaussianNB differ from my_MultinomialNB in these two method:  # 多項單純貝氏分類器
 # _calculate_feature_prob, _get_xj_prob
-class GaussianNB(MultinomialNB):
+class my_GaussianNB(my_MultinomialNB):
     # 计算给定特征的平均值（mu）和标准偏差（sigma）
     def _calculate_feature_prob(self, feature):
         mu = np.mean(feature)
@@ -201,7 +265,6 @@ print("------------------------------------------------------------")  # 60個
 # Naive Bayes Classification using Wine data
 
 df = pd.read_csv("data/wine.data.csv")
-df.head(10)
 
 # Basic statistics of the features
 
@@ -214,7 +277,7 @@ for c in df.columns[1:]:
     df.boxplot(c, by="Class", figsize=(7, 4))
     plt.title("{}\n".format(c))
     plt.xlabel("Wine Class")
-    plt.show()
+    show()
 
 plt.figure(figsize=(10, 6))
 plt.scatter(
@@ -229,7 +292,7 @@ plt.grid(True)
 plt.title("Scatter plot of two features showing the \ncorrelation and class seperation")
 plt.xlabel("OD280/OD315 of diluted wines")
 plt.ylabel("Flavanoids")
-plt.show()
+show()
 
 # Are the features independent? Plot co-variance matrix
 # It can be seen that there are some good amount of correlation between features i.e. they are not independent #of each other, as assumed in Naive Bayes technique. However, we will still go ahead and apply yhe classifier #to see its performance.
@@ -249,7 +312,7 @@ def correlation_matrix(df):
     ax1.set_yticklabels(labels)
     # Add colorbar, make sure to specify tick locations to match desired ticklabels
     fig.colorbar(cax, ticks=[0.1 * i for i in range(-11, 11)])
-    plt.show()
+    show()
 
 
 cc = correlation_matrix(df)
@@ -259,17 +322,16 @@ print(cc)
 
 # Test/train split
 
-test_size = 0.3  # Test-set fraction
-
 X = df.drop("Class", axis=1)
 y = df["Class"]
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size)
 
-X_train.shape
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-(124, 13)
+cc = X_train.shape
+print(cc)
 
-X_train.head()
+cc = X_train.head()
+print(cc)
 
 # Classification using GaussianNB
 
@@ -304,8 +366,8 @@ cmdf = pd.DataFrame(
     columns=["Class 1", "Class 2", " Class 3"],
 )
 print("The confusion matrix looks like following...\n")
-cmdf
-'''
+print(cmdf)
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -378,7 +440,31 @@ Z = model.predict_proba(np.c_[xx.ravel(), yy.ravel()])
 Z1 = Z[:, 1].reshape(xx.shape)
 plt.contour(xx, yy, -Z1, [-0.5], colors="k")
 
-plt.show()
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+'''
+from sklearn.naive_bayes import MultinomialNB  # 多項單純貝氏分類器
+
+# 6個row的訓練資料
+X_train = [
+    [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1],
+]
+# 6個row的訓練目標
+y_train = [1, 1, 1, 0, 0, 0]
+
+model = MultinomialNB()  # 多項單純貝氏分類器
+
+model.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = model.predict([[0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0]])  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

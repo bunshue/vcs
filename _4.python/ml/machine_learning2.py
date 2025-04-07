@@ -131,81 +131,80 @@ print("------------------------------------------------------------")  # 60個
 
 print("Sklearn verion is {}".format(sklearn.__version__))
 
-"""
-print('房價, 共 1460 筆資料 81欄位')
+print("房價, 共 1460 筆資料 81欄位")
 
 import scipy.stats as stats
 
-train = pd.read_csv(u'data/houseprice.csv') # 共 1460 筆資料 81欄位
+train = pd.read_csv("data/houseprice.csv")  # 共 1460 筆資料 81欄位
 print(len(train))
 print(train.shape)
 print(train.head(3))
 
-y = train['SalePrice']
+y = train["SalePrice"]
 
 sns.histplot(y)
-plt.xlabel('售價區間')
-plt.ylabel('賣出件數')
-plt.title('統計 售價區間 / 賣出件數')
+plt.xlabel("售價區間")
+plt.ylabel("賣出件數")
+plt.title("統計 售價區間 / 賣出件數")
 show()
 
-#另一種查看是否服從正態分布的可視化方法
+# 另一種查看是否服從正態分布的可視化方法
 import scipy.stats as st
 
 res = st.probplot(y, plot=plt)
-plt.ylabel('售價區間')
-plt.xlabel('賣出件數')
-plt.title('統計 售價區間 / 賣出件數')
+plt.ylabel("售價區間")
+plt.xlabel("賣出件數")
+plt.title("統計 售價區間 / 賣出件數")
 show()
 
-sns.histplot(y,kde=False)
-plt.xlabel('售價區間')
-plt.ylabel('賣出件數')
-plt.title('統計 售價區間 / 賣出件數')
+sns.histplot(y, kde=False)
+plt.xlabel("售價區間")
+plt.ylabel("賣出件數")
+plt.title("統計 售價區間 / 賣出件數")
 show()
 
 sns.histplot(y, kde=True, fit=st.johnsonsu)
-plt.title('使用 Johnson SU')
+plt.title("使用 Johnson SU")
 show()
 
 sns.histplot(y, kde=False, fit=st.norm)
-plt.title('使用 Normal')
+plt.title("使用 Normal")
 show()
 
 sns.histplot(y, kde=False, fit=st.lognorm)
-plt.title('使用 Log Normal')
+plt.title("使用 Log Normal")
 show()
 
-#另一種查看是否服從正態分布的可視化方法
+# 另一種查看是否服從正態分布的可視化方法
 
 sns.histplot(y, fit=st.norm)
-plt.title('使用 Normal')
+plt.title("使用 Normal")
 show()
 
 res = st.probplot(y, plot=plt)
-plt.title('SalePrice')
+plt.title("SalePrice")
 show()
 
-print('------------------------------')	#30個
+print("------------------------------")  # 30個
 
-#把房價做對數變換後再看
+# 把房價做對數變換後再看
 SalePrice_log = np.log(y)
- 
-#transformed histogram and normal probability plot
-sns.histplot(SalePrice_log, fit=st.norm);
-plt.title('使用 Normal')
-#plt.title('SalePrice log')
+
+# transformed histogram and normal probability plot
+sns.histplot(SalePrice_log, fit=st.norm)
+plt.title("使用 Normal")
+# plt.title('SalePrice log')
 show()
 
-#另一種查看是否服從正態分布的可視化方法
+# 另一種查看是否服從正態分布的可視化方法
 res = st.probplot(SalePrice_log, plot=plt)
 print(res)
-plt.title('SalePrice log')
+plt.title("SalePrice log")
 show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
+
 from scipy.stats import norm
 
 
@@ -226,16 +225,16 @@ mu, sigma = 1.6, 0.2
 
 h = 1.8
 
-#rvs: 隨機變量
+# rvs: 隨機變量
 data = norm.rvs(loc=mu, scale=sigma, size=N)
-#print(data)
+# print(data)
 
 bins = 50  # 束
 plt.hist(data, bins=bins)
-plt.title('normal distribution')
+plt.title("normal distribution")
 show()
 
-#pdf: 概率密度函數
+# pdf: 概率密度函數
 cc = norm.pdf(x=1.8, loc=1.6, scale=0.2)
 print(cc)
 
@@ -248,10 +247,10 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 1. 建立空的df
+# 建立空的df
 df = pd.DataFrame()
 
-# 2. 增加 Gender 欄位 目標欄位
+# 增加 Gender 欄位 目標欄位
 df["Gender"] = [
     "male",
     "male",
@@ -263,7 +262,7 @@ df["Gender"] = [
     "female",
 ]
 
-# 3. 增加 4欄位 為 feature variables
+# 增加 4欄位 為 feature variables
 df["Height"] = [6, 5.92, 5.58, 5.92, 5, 5.5, 5.42, 5.75]
 df["Weight"] = [180, 190, 170, 165, 100, 150, 130, 150]
 df["Size"] = [12, 11, 12, 10, 6, 8, 7, 9]
@@ -326,12 +325,12 @@ print("------------------------------------------------------------")  # 60個
 
 # 計算高斯分布的概率
 
-# 1. 建立空的df
+# 建立空的df
 df = pd.DataFrame()
 
 # Create some feature values for this single row
-# 2. 增加 Gender 欄位 目標欄位 ??
-# 3. 增加 4欄位 為 feature variables ??
+# 增加 Gender 欄位 目標欄位 ??
+# 增加 4欄位 為 feature variables ??
 df["Height"] = [6]
 df["Weight"] = [130]
 df["Size"] = [8]
@@ -355,9 +354,7 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
 
-"""
 train_size = 20
 test_size = 12
 train_X = np.random.uniform(low=0, high=1.2, size=train_size)
@@ -378,30 +375,6 @@ train_pred_y = model.predict(train_poly_X)  # 預測.predict
 test_pred_y = model.predict(test_poly_X)  # 預測.predict
 print(mean_squared_error(train_pred_y, train_y))
 print(mean_squared_error(test_pred_y, test_y))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.naive_bayes import MultinomialNB
-
-# 6個row的訓練資料
-X_train = [
-    [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
-    [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1],
-]
-# 6個row的訓練目標
-y_train = [1, 1, 1, 0, 0, 0]
-
-model = MultinomialNB()
-
-model.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = model.predict([[0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0]])  # 預測.predict
-print("預測結果 :\n", y_pred, sep="")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -427,7 +400,7 @@ model.fit(data)  # 學習訓練.fit
 print(model.transform(data))  # 変換したデータ
 print(model.explained_variance_ratio_)  # 寄與率
 print(sum(model.explained_variance_ratio_))  # 累積寄與率
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2067,6 +2040,7 @@ show()
 SVD分解是奇异值分解（Singular Value Decomposition）的缩写，
 是一种矩阵分解的方法。它将一个矩阵分解为三个矩阵的乘积，
 分别是左奇异矩阵、奇异值矩阵和右奇异矩阵。
+
 2. 如何在Python中进行SVD分解？
 在Python中，可以使用NumPy库来进行SVD分解。首先，需要导入NumPy库，
 然後使用numpy.linalg.svd()函数进行分解。
@@ -3053,7 +3027,6 @@ show()
 ,  array([ 10.46024211,  10.47194981,  10.54270639, ...,  13.34550693,
 ,          13.5211395 ,  13.53447303])),
 , (0.39826223081618845, 12.024050901109383, 0.99537614756366088))
-
 顯然，房價本身不服從正態分布，是不能直接用來做回歸建模的。但是經過對數轉換之後，就好了很多。
 對于其它的數值型變量，也同樣要做分布的正態性檢驗.
 檢驗方法就用：夏皮羅-威爾克(Shapiro-Wilk)法檢驗數據正態性,即W檢驗。
@@ -3261,7 +3234,6 @@ sns.barplot(data=a, x="feature", y="disparity")
 x = plt.xticks(rotation=90)
 show()
 
-
 """
 這里我們用了方差分析，來看每一個類別變量和預測變量Sale_price之間是否有相關關系。
 因為我們最後得到了個p值，p>0.05說明樣本的分組之間沒有顯著性差異，
@@ -3269,7 +3241,8 @@ p值越小說明差異越顯著。
 因為我們想用一個類似于“變異度”的指標——“差異度”，
 我們希望這個指標越大，說明差異越明顯。也就是想要一個同向變化的指標，所以對p值取了個倒數。
 僅此而已。
-3.3 對于這些分類變量的每個值做正確編碼
+
+對于這些分類變量的每個值做正確編碼
 另一種編碼方式是OneHotEncoding或者dummy
 """
 
@@ -3306,11 +3279,7 @@ print(train.head(3))
 0	1	60	RL	65.0	8450	Pave	NaN	Reg	Lvl	AllPub	...	3.0	5.0	5.0	3.0	3.0	8.0	1.0	86.0	3.0	7.0
 1	2	20	RL	80.0	9600	Pave	NaN	Reg	Lvl	AllPub	...	3.0	5.0	5.0	3.0	2.0	5.0	2.0	57.0	3.0	6.0
 2	3	60	RL	68.0	11250	Pave	NaN	IR1	Lvl	AllPub	...	3.0	5.0	5.0	3.0	3.0	5.0	2.0	91.0	3.0	7.0
-,
-
 3 rows × 127 columns
-,
-
 """
 
 print(train["GarageQual_E"].value_counts())
@@ -3323,7 +3292,6 @@ print(train["GarageQual_E"].value_counts())
 ,6.0       3
 ,1.0       3
 ,Name: GarageQual_E, dtype: int64
-
 3.4.查看衍生變量和房價的Spearman相關性
 對于相關性的檢測我們使用的是Spearman correlation，
 這種檢驗方法的好處是即使是非線性相關也能檢測出來。
@@ -3347,7 +3315,8 @@ show()
 
 """
 顯然，OverallQual和房價的關系最明顯。房子的鄰居和位置看起來也是有影響的。
-3.5 觀察變量之間的相關性
+
+觀察變量之間的相關性
 回歸模型對于變量共線的容忍度差，所以，我們需要考慮變量之間的相關性。
 用相關系數矩陣的熱力圖即可。
 """
@@ -3383,7 +3352,8 @@ sns.heatmap(corr, cbar=True, annot=True, square=True, fmt=".2f", annot_kws={"siz
 show()
 
 """
-3.6 觀察所有變量（包括衍生變量）和目標變量之間的關系
+觀察所有變量（包括衍生變量）和目標變量之間的關系
+
 現在所有類別型變量也做了重新編碼，編碼成數值型。所有所有的特征都可以看作是數值型的了。
 于是，我們可以再次全景式觀察變量和目標變量之間的關系。
 """
@@ -3417,7 +3387,7 @@ But on the other hand this will most probably provoke overfit.
 
 觀察的結果提示我們，有些變量可以嘗試做些變換，比如平方變換。
 
-4.高級內容
+高級內容
 
 考慮數據本身是否分群，如果分群，就可以用分段回歸。
 
@@ -3484,7 +3454,6 @@ show()
 33	MiscVal	-0.559517
 34	MoSold	0.052589
 35	YrSold	-0.000021
-
 
 我們用tnse方法，把每個高維樣本映射到二維平面上的點。
 然後我們對樣本做標準化處理，處理之後做PCA，提取前30個主成分。也就是把樣本的特征降維到30個特征。
@@ -3631,7 +3600,6 @@ lasso.fit(X, np.log(Y))  # 學習訓練.fit
 Ypred = np.exp(lasso.predict(X))  # 預測.predict
 
 print(error(Y, Ypred))
-
 """
 print("一個很大的範例 SP")
 

@@ -436,9 +436,9 @@ from sklearn.feature_extraction.text import CountVectorizer
 cv = CountVectorizer()
 counts = cv.fit_transform(corpus_df["content"].values)
 
-from sklearn.naive_bayes import MultinomialNB
+from sklearn.naive_bayes import MultinomialNB  # 多項單純貝氏分類器
 
-classifier = MultinomialNB()
+classifier = MultinomialNB()  # 多項單純貝氏分類器
 
 targets = corpus_df["label"].values
 
@@ -510,13 +510,13 @@ print("done in {0} seconds".format(time.time() - t))
 
 print("------------------------------")  # 30個
 
-from sklearn.naive_bayes import MultinomialNB
+from sklearn.naive_bayes import MultinomialNB  # 多項單純貝氏分類器
 
 print("traning models ...".format(time.time() - t))
 t = time.time()
 y_train = news_train.target
 
-clf = MultinomialNB(alpha=0.0001)
+clf = MultinomialNB(alpha=0.0001)  # 多項單純貝氏分類器
 
 clf.fit(X_train, y_train)
 

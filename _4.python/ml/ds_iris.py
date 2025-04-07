@@ -1015,64 +1015,6 @@ print(f"{cc*100:.2f}%")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Scikit-learn_naive_bayes
-
-# 以單純貝氏分類器進行鳶尾花(Iris)品種的辨識
-
-X, y = datasets.load_iris(return_X_y=True)  # 分別回傳兩種資料
-
-# 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-from sklearn.naive_bayes import GaussianNB
-
-clf = GaussianNB()
-
-clf.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = clf.predict(X_test)  # 預測.predict
-print("預測結果 :\n", y_pred, sep="")
-
-print("計算準確率")
-cc = accuracy_score(y_test, y_pred)
-print(f"{cc*100:.2f}%")
-# 93.33%
-
-# 使用伯努利單純貝氏分類器
-
-from sklearn.naive_bayes import BernoulliNB
-
-clf = BernoulliNB()
-
-clf.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = clf.predict(X_test)  # 預測.predict
-print("預測結果 :\n", y_pred, sep="")
-
-print("計算準確率")
-cc = accuracy_score(y_test, y_pred)
-print(f"{cc*100:.2f}%")
-# 20.00%
-
-# 使用多項單純貝氏分類器
-
-from sklearn.naive_bayes import MultinomialNB
-
-clf = MultinomialNB()
-
-clf.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = clf.predict(X_test)  # 預測.predict
-print("預測結果 :\n", y_pred, sep="")
-
-print("計算準確率")
-cc = accuracy_score(y_test, y_pred)
-print(f"{cc*100:.2f}%")
-# 80.00%
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # Scikit-learn AgglomerativeClustering
 from sklearn.cluster import AgglomerativeClustering
 

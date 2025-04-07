@@ -23,6 +23,15 @@ TFIDF最常被使用的一個目的是，找到文件當中的關鍵字。怎樣
 IDF會去計算一個字出現在文件的逆向頻率，這表示出現頻率越高，出現在越多文件之中，
 但是得分會越低。透過TF和IDF相乘：TFxIDF，得到的綜合分數就是TFIDF。
 """
+
+"""
+tfidf
+
+sklearn: TfidfVectorizer 中文处理及一些使用参数
+
+TfidfVectorizer可以把原始文本转化为tf-idf的特征矩阵，从而为后续的文本相似度计算，
+主题模型(如LSI)，文本搜索排序等一系列应用奠定基础。
+"""
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -46,7 +55,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
@@ -95,11 +104,11 @@ print("DictVectorizer, sparse=True")  # 可以解決為稀疏矩陣的問題
 from sklearn.feature_extraction import DictVectorizer
 
 dv = DictVectorizer(sparse=True)
-data = dv.fit_transform(
+X = dv.fit_transform(
     [{"膚色": "黃", "身高": 176}, {"膚色": "白", "身高": 183}, {"膚色": "黑", "身高": 158}]
 )
 print("sparse編碼：")
-print(data)
+print(X)
 
 print("特徵名稱 :\n", dv.get_feature_names_out(), sep="")
 
@@ -112,11 +121,11 @@ print("DictVectorizer, sparse=False")
 from sklearn.feature_extraction import DictVectorizer
 
 dv = DictVectorizer(sparse=False)
-data = dv.fit_transform(
+X = dv.fit_transform(
     [{"膚色": "黃", "身高": 176}, {"膚色": "白", "身高": 183}, {"膚色": "黑", "身高": 158}]
 )
 print("one-hot編碼：")
-print(data)
+print(X)
 
 print("特徵名稱 :\n", dv.get_feature_names_out(), sep="")
 
@@ -126,11 +135,10 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.feature_extraction.text import CountVectorizer
 
 cv = CountVectorizer()
-data = cv.fit_transform(
+X = cv.fit_transform(
     ["code is is easy, i like python", "code is too hard, i dislike python"]
 )
-print("one-hot編碼：")
-print(data.toarray())
+print("one-hot編碼 :", X.toarray())
 
 print("特徵名稱 :\n", cv.get_feature_names_out(), sep="")
 
@@ -196,45 +204,81 @@ texts = [
 
 tv = TfidfVectorizer()
 
-X = tv.fit_transform(texts)
+X = tv.fit_transform(texts)  # fit+transform
 
+""" 不等於??
+tv.fit(texts)
+X = tv.transform(texts)     # 得到tf-idf矩阵，稀疏矩阵表示法
+"""
 print("特徵名稱 :\n", tv.get_feature_names_out(), sep="")
+
+print(X)
 
 print(X.shape)
 # (4, 9)
 
+print(X.todense())  # 转化为更直观的一般矩阵
+
+print(tv.vocabulary_)  # 词语与列的对应关系
+# {'have': 2, 'pen': 3, 'an': 0, 'apple': 1}
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.feature_extraction.text import TfidfVectorizer
+texts = ["I have a pen.", "I have an apple."]
+
+tv = TfidfVectorizer().fit(texts)
+
+X = tv.transform(texts)  # 得到tf-idf矩阵，稀疏矩阵表示法
+print(X)
+print(X.shape)
+# (0, 3)	0.814802474667   # 第0个字符串，对应词典序号为3的词的TFIDF为0.8148
+# (0, 2)	0.579738671538
+# (1, 2)	0.449436416524
+# (1, 1)	0.631667201738
+# (1, 0)	0.631667201738
+
+print(X.todense())  # 转化为更直观的一般矩阵
+# [[ 0.          0.          0.57973867  0.81480247]
+#  [ 0.6316672   0.6316672   0.44943642  0.        ]]
+
+print(tv.vocabulary_)  # 词语与列的对应关系
+# {'have': 2, 'pen': 3, 'an': 0, 'apple': 1}
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 t1 = list(jieba.cut("今天台北天氣晴朗，風景區擠滿了人潮。"))
 t2 = list(jieba.cut("台北的天氣常常下雨。"))
 c1 = " ".join(t1)
 c2 = " ".join(t2)
+print("第一句分詞： {}".format(c1))
+print("第二句分詞： {}".format(c2))
+
+print("------------------------------")  # 30個
+
+print("使用TV")
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 tv = TfidfVectorizer()
-data = tv.fit_transform([c1, c2])
-print("one-hot編碼：")
-print(data.toarray())
+
+X = tv.fit_transform([c1, c2])
+
+print("one-hot編碼 :", X.toarray())
 
 print("特徵名稱 :\n", tv.get_feature_names_out(), sep="")
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
+
+print("使用CV")
 
 from sklearn.feature_extraction.text import CountVectorizer
 
-t1 = list(jieba.cut("今天台北天氣晴朗，風景區擠滿了人潮。"))
-t2 = list(jieba.cut("台北的天氣常常下雨。"))
-c1 = " ".join(t1)
-print("第一句分詞： {}".format(c1))
-c2 = " ".join(t2)
-print("第二句分詞： {}".format(c2))
-
 cv = CountVectorizer()
-data = cv.fit_transform([c1, c2])
-print("one-hot編碼：")
-print(data.toarray())
+X = cv.fit_transform([c1, c2])
+
+print("one-hot編碼 :", X.toarray())
 
 print("特徵名稱 :\n", cv.get_feature_names_out(), sep="")
 
@@ -257,6 +301,7 @@ print(arr)
 cv = CountVectorizer()
 X = cv.fit_transform(arr)
 word = cv.get_feature_names_out()
+
 df = pd.DataFrame(X.toarray(), columns=word)
 print(df)
 
@@ -334,17 +379,17 @@ texts = [
 
 print("二值化、詞頻")
 cv = CountVectorizer(min_df=1, binary=True)  # Transformer
-data = cv.fit_transform(texts)
+X = cv.fit_transform(texts)
 features = cv.get_feature_names_out()
 for word in features:
     print(word)
 print(len(features))
 
-print(data.todense())
+print(X.todense())
 
-doc_df = pd.DataFrame(
-    data.toarray(), index=text, columns=cv.get_feature_names_out()
-).head(10)
+doc_df = pd.DataFrame(X.toarray(), index=text, columns=cv.get_feature_names_out()).head(
+    10
+)
 
 print(doc_df)
 print(doc_df.columns)
@@ -364,14 +409,15 @@ print("------------------------------")  # 30個
 # tf-idf
 
 tv = TfidfVectorizer(min_df=1)
-data = tv.fit_transform(texts)
+
+X = tv.fit_transform(texts)
 
 print("特徵名稱 :\n", tv.get_feature_names_out(), sep="")
 
 pd.set_option("display.precision", 2)
-doc_df = pd.DataFrame(
-    data.toarray(), index=text, columns=tv.get_feature_names_out()
-).head(10)
+doc_df = pd.DataFrame(X.toarray(), index=text, columns=tv.get_feature_names_out()).head(
+    10
+)
 print(doc_df)
 
 print("------------------------------------------------------------")  # 60個
@@ -395,8 +441,7 @@ X = cv.fit_transform([text])
 print("特徵名稱 :\n", cv.get_feature_names_out(), sep="")
 
 print("單字對應的出現次數")
-cc = X.toarray()
-print(cc)
+print("one-hot編碼 :", X.toarray())
 
 print("找出較常出現的單字")
 
@@ -459,7 +504,9 @@ texts = [
 
 # BOW 轉換
 cv = CountVectorizer()
+
 X = cv.fit_transform(texts)
+
 # 生字表
 print("特徵名稱 :\n", cv.get_feature_names_out(), sep="")
 
@@ -493,20 +540,19 @@ texts = [
 ]
 
 cv = CountVectorizer(min_df=1, stop_words="english")
-data = cv.fit_transform(texts)
+
+X = cv.fit_transform(texts)
 
 print("特徵名稱 :\n", cv.get_feature_names_out(), sep="")
 
-df = pd.DataFrame(data.toarray(), index=texts, columns=cv.get_feature_names_out()).head(
-    10
-)
+df = pd.DataFrame(X.toarray(), index=texts, columns=cv.get_feature_names_out()).head(10)
 print(df)
 
 print("------------------------------")  # 30個
 
 # Singular value decomposition and LSA
 model = TruncatedSVD(2)
-data_n = model.fit_transform(data)
+data_n = model.fit_transform(X)
 data_n = Normalizer(copy=False).fit_transform(data_n)
 print(data_n)
 
@@ -609,7 +655,9 @@ tv = TfidfVectorizer(max_df=0.4,
                              min_df=2, 
                              max_features=max_features, 
                              encoding='latin-1')
+
 X = tv.fit_transform((d for d in docs.data))
+
 print("n_samples: %d, n_features: %d" % X.shape)
 print("number of non-zero features in sample [{0}]: {1}".format(
     docs.filenames[0], X[0].getnnz()))

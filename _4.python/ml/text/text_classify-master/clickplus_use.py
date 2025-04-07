@@ -2,7 +2,7 @@ from ci_seg import *
 from tfidf_test import *
 from to_bunch import *
 import pickle
-from sklearn.naive_bayes import MultinomialNB  # 导入多项式贝叶斯算法
+from sklearn.naive_bayes import MultinomialNB  # 多項單純貝氏分類器
 
 
 # 对测试集进行分词
@@ -37,7 +37,7 @@ def test(test_txt):
     test_set = _readbunchobj(space_path)
 
     # 训练分类器：输入词袋向量和分类标签，alpha:0.001 alpha越小，迭代次数越多，精度越高
-    clf = MultinomialNB(alpha=0.001).fit(train_set.tdm, train_set.label)
+    clf = MultinomialNB(alpha=0.001).fit(train_set.tdm, train_set.label)  # 多項單純貝氏分類器
 
     # 预测分类结果
     predicted = clf.predict(test_set.tdm)
