@@ -304,34 +304,8 @@ https://www.kancloud.cn/thinkphp/python-guide/39428
 http://www.codedata.com.tw/python/python-tutorial-the-1st-class-4-unicode-support-basic-input-output/
 http://www.runoob.com/python/python-chinese-encoding.html
 
-安裝pySimpleGUI
-	C:\Users\user>pip install pysimplegui
-	Collecting pysimplegui
-	  Downloading https://files.pythonhosted.org/packages/73/8f/1ef0e7b4c8dfafe7148dbdf4ae509884812f4c7c0834b1305a48e8ce5a36/PySimpleGUI-4.4.1-py3-none-any.whl (249kB)
-	    100% |████████████████████████████████| 256kB 272kB/s
-	Installing collected packages: pysimplegui
-	Successfully installed pysimplegui-4.4.1
-	You are using pip version 18.1, however version 19.2.3 is available.
-	You should consider upgrading via the 'python -m pip install --upgrade pip' command.
-
-安裝pySerial
-	C:\Users\user>pip install pyserial
-	Collecting pyserial
-	  Downloading https://files.pythonhosted.org/packages/0d/e4/2a744dd9e3be04a0c0907414e2a01a7c88bb3915cbe3c8cc06e209f59c30/pyserial-3.4-py2.py3-none-any.whl (193kB)
-	    100% |████████████████████████████████| 194kB 305kB/s
-	Installing collected packages: pyserial
-	Successfully installed pyserial-3.4
-	You are using pip version 18.1, however version 19.2.3 is available.
-	You should consider upgrading via the 'python -m pip install --upgrade pip' command.
 	
 ----------------------------------------------------------------
-
-C:\Users\david>pip install pillow
-Collecting pillow
-
-#PIL：Python Imaging Library
-安裝Pillow
->pip install pillow
 
 from PIL import Image, ImageFilter
 
@@ -636,51 +610,6 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> tkinter._test()
 >>> tkinter._test()
 
-新版本取消了raw_input()，改為input()了 
-
-pygame.org/download.shtml
-
-pygame-1.9.1.win32-py2.7.msi 3.1MB
-
-----------------pypy python test ST 安裝與升級 pip----------------
-
-Python的套件管理程式	PIP
-
-python -m pip install -U matplotlib	//Windows
-pip install -U matplotlib		//Linux
- 
-
-在Windows下安裝Python套件:
-用windows command line安裝 BeautifulSoup
-C:\Users\david>pip3 install beautifulsoup4
-
-windows command line下:
-
->pip list	//查看目前有安裝的Python套件
->pip3 install matplotlib	//安裝matplotlib
->pip3 install pygame		//安裝pygame
-
-python -m pip install -U pip
-python -m pip install -U matplotlib
-
-重裝Pillow套件
-pip uninstall PIL
-pip uninstall Pillow
-pip install Pillow
-
-romeo無法使用opencv
-
-Traceback (most recent call last):
-    import cv2	#導入 OpenCV 模組
-ModuleNotFoundError: No module named 'cv2'
-
-到安裝目錄下
-
-C:\Users\david\AppData\Local\Programs\Python\Python38-32>python.exe -m pip install opencv-python
-
-
-pip : the package installer for Python
-
 各種python簡易說明
 
 Firebase 即時資料庫
@@ -699,10 +628,6 @@ BeautifulSoup：方便對特定的目標加以分析、擷取的強大模組。
 
 Python的網頁解析套件 -- BeautifulSoup
 
-html5lib 1.1 
-
-pip install html5lib
- 
 ----------------------------------------------------------------
 
 
@@ -718,108 +643,6 @@ https://www.python.org/downloads/
 
 官網下載最新版
 python-3.11.2-amd64.exe
-
-要Windows8以上
-
-
-安裝 python-3.7.7.exe
-
-
-C:\Users\david>python --version
-Python 3.7.7
-
-
-C:\Users\david>pip --version
-pip 19.2.3 from c:\program files\python37-32\lib\site-packages\pip (python 3.7)
-
-C:\Users\david>pip3 --version
-pip 19.2.3 from c:\program files\python37-32\lib\site-packages\pip (python 3.7)
-
-
-更新pip程式
-C:\Users\david>python -m pip install --upgrade pip
-
-安裝 matplotlib
-C:\Users\david>pip install matplotlib
-
-
-安裝 pygame
-
-C:\Users\david>pip install pygame
-
-安裝 pygame requests
-C:\Users\david>pip install requests
-
-C:\Users\david>pip install BeautifulSoup	有問題 kilo/sugar不可用
-
-C:\Users\david>pip install beautifulsoup4	 kilo/sugar 可用
-
-C:\Users\david>pip install opencv-python
-
-sugar 的 python 的位置
-
-C:\Users\070601\AppData\Local\Programs\Python\Python311>python
-
-Python 3.11.2 (tags/v3.11.2:878ead1, Feb  7 2023, 16:38:35) [MSC v.1934 64 bit (AMD64)] on win32
-Type "help", "copyright", "credits" or "license" for more information.
-
-sugar 的 pip 的位置
-
-C:\Users\070601\AppData\Local\Programs\Python\Python311\Scripts>pip --version
-pip 22.3.1 from C:\Users\070601\AppData\Local\Programs\Python\Python311\Lib\site-packages\pip (python 3.11)
-
-sugar 更新 pip
-C:\Users\070601\AppData\Local\Programs\Python\Python311\python.exe -m pip install --upgrade pip
-
-sugar 安裝 matplotlib
-C:\Users\070601\AppData\Local\Programs\Python\Python311\Scripts>pip install matplotlib
-
-sugar 安裝 serial
-C:\Users\070601\AppData\Local\Programs\Python\Python311\Scripts>pip install serial
-
-sugar 安裝 PySimpleGUI
-
-sugar 安裝 requests
-C:\Users\070601\AppData\Local\Programs\Python\Python311\Scripts>pip install requests
-
-pip install flask
-
-pip install twstock
-
-pip install plotly
-
-twstock 台灣股市股票價格擷取
-https://pypi.org/project/twstock/
-
-
-以 Python Imaging Library 進行影像資料處理
-需先 pip install pillow
-
-
-
-
-C:\Users\070601\AppData\Local\Programs\Python\Python311\Scripts>pip install lxml
-
-
-
-
-升級pip
-
-C:\Users\david>python -m pip install -U pip
-
-安装 matplotlib 库：
-C:\Users\david>python -m pip install -U matplotlib
-
-
-ModuleNotFoundError: No module named matplotlib 问题解决方案
-解决方案：
-打开cmd ,切换到python的安装路径下，然后输入：python -m pip install matplotlib  
-稍等片刻，成功！
-C:\Users\david\AppData\Local\Programs\Python\Python38-32>
-C:\Users\david\AppData\Local\Programs\Python\Python38-32>python -m pip install matplotlib
-
-
-
 
 ----------------pypy python test SP----------------
 
@@ -885,4 +708,3 @@ for _ in range(10):
 
 抽象基礎類別
 Abstract Base Class, ABC
-

@@ -57,15 +57,15 @@ print("------------------------------------------------------------")  # 60個
 print("數字 基本數據 load_digits()")
 
 digits = datasets.load_digits()
-#digits = datasets.load_digits(n_class=6)  # 多了 n_class 參數，只要數字 0 ~ n_class-1
+# digits = datasets.load_digits(n_class=6)  # 多了 n_class 參數，只要數字 0 ~ n_class-1
 
 print(type(digits))
 
 X = digits.data
 y = digits.target
 
-#X = digits["data"] same
-#y = digits["target"] same
+# X = digits["data"] same
+# y = digits["target"] same
 
 print("digits.keys() :", digits.keys())
 # 資料keys包含'data', 'target', 'target_names', 'images', 'DESCR'
@@ -79,7 +79,7 @@ print("看第", index, "張圖")
 print("圖的內容 :\n", digits.images[index], sep="")
 print("圖的形狀 :", digits.images[index].shape)
 plt.imshow(digits.images[index], cmap=plt.cm.gray)
-#plt.imshow(X[index].reshape(8, 8), cmap=plt.cm.gray)
+# plt.imshow(X[index].reshape(8, 8), cmap=plt.cm.gray)
 show()
 
 print("------------------------------")  # 30個
@@ -111,7 +111,7 @@ y = digits.target
 fig = plt.figure(figsize=(8, 8))  # figure size in inches
 fig.subplots_adjust(left=0, right=1, bottom=0, top=1, hspace=0.05, wspace=0.05)
 
-print('畫64張圖')
+print("畫64張圖")
 for i in range(64):
     tx = fig.add_subplot(8, 8, i + 1, xticks=[], yticks=[])
     tx.imshow(digits.images[i], cmap=plt.cm.binary, interpolation="nearest")
@@ -220,8 +220,8 @@ cc = clf.score(Xtest, Ytest)
 print("score :", cc)
 
 N = 30
-print('測試資料前N筆 :', Ytest[:N])
-print('預測結果前N筆 :', y_pred[:N])
+print("測試資料前N筆 :", Ytest[:N])
+print("預測結果前N筆 :", y_pred[:N])
 
 print("------------------------------")  # 30個
 
@@ -283,8 +283,8 @@ print("訓練大小(5比例) :", train_sizes)
 print("訓練損失(10輪 X 5比例) :\n", train_loss, sep="")
 print("測試損失(10輪 X 5比例) :\n", test_loss, sep="")
 
-train_loss_mean = -np.mean(train_loss, axis=1)#取平均, 取相反數
-test_loss_mean = -np.mean(test_loss, axis=1)#取平均, 取相反數
+train_loss_mean = -np.mean(train_loss, axis=1)  # 取平均, 取相反數
+test_loss_mean = -np.mean(test_loss, axis=1)  # 取平均, 取相反數
 
 print("訓練損失 10輪平均 :", train_loss_mean)
 print("測試損失 10輪平均 :", test_loss_mean)
@@ -309,23 +309,23 @@ train_size_abs, train_loss, test_loss = learning_curve(
     scoring="neg_mean_squared_error",
 )
 
-print(A*0.9*0.1)#ok
-print(A*0.9*0.32)
-print(A*0.9*0.55)#ok
-print(A*0.9*0.77)
-print(A*0.9*1)#ok
-print(A*0.9*0.1)
-print(A*0.9*0.33)
-print(A*0.9*0.55)
-print(A*0.9*0.78)
-print(A*0.9*1)
+print(A * 0.9 * 0.1)  # ok
+print(A * 0.9 * 0.32)
+print(A * 0.9 * 0.55)  # ok
+print(A * 0.9 * 0.77)
+print(A * 0.9 * 1)  # ok
+print(A * 0.9 * 0.1)
+print(A * 0.9 * 0.33)
+print(A * 0.9 * 0.55)
+print(A * 0.9 * 0.78)
+print(A * 0.9 * 1)
 
 print("訓練大小(5比例) abs:", train_size_abs)
 print("訓練損失(10輪 X 5比例) :\n", train_loss, sep="")
 print("測試損失(10輪 X 5比例) :\n", test_loss, sep="")
 
-train_loss_mean = -np.mean(train_loss, axis=1)#取平均, 取相反數
-test_loss_mean = -np.mean(test_loss, axis=1)#取平均, 取相反數
+train_loss_mean = -np.mean(train_loss, axis=1)  # 取平均, 取相反數
+test_loss_mean = -np.mean(test_loss, axis=1)  # 取平均, 取相反數
 print("訓練損失 10輪平均 :", train_loss_mean)
 print("測試損失 10輪平均 :", test_loss_mean)
 
@@ -363,16 +363,16 @@ y = digits["target"]
 
 clf = DecisionTreeClassifier()
 scores_ada = cross_val_score(clf, X, y, cv=6)
-print('決策樹分類器 6次成績 :', scores_ada)
-print('決策樹分類器 6次成績平均 :', scores_ada.mean())
+print("決策樹分類器 6次成績 :", scores_ada)
+print("決策樹分類器 6次成績平均 :", scores_ada.mean())
 
 # AdaBoost分類器 模型評估
 
 clf = AdaBoostClassifier(DecisionTreeClassifier())
 scores_ada = cross_val_score(clf, X, y, cv=6)
 
-print('AdaBoost分類器 6次成績 :', scores_ada)
-print('AdaBoost分類器 6次成績平均 :', scores_ada.mean())
+print("AdaBoost分類器 6次成績 :", scores_ada)
+print("AdaBoost分類器 6次成績平均 :", scores_ada.mean())
 
 clf.fit(X, y)  # 學習訓練.fit
 
@@ -382,16 +382,16 @@ print("errors :\n", cc, sep="")
 cc = clf.estimator_weights_
 print("weights :\n", cc, sep="")
 
-print('不同深度AdaBoostClassifier(DecisionTreeClassifier())')
+print("不同深度AdaBoostClassifier(DecisionTreeClassifier())")
 
 score = []
 for depth in [1, 2, 10]:
-    print('深度 :', depth)
+    print("深度 :", depth)
     clf = AdaBoostClassifier(DecisionTreeClassifier(max_depth=depth))
     scores_ada = cross_val_score(clf, X, y, cv=6)
     score.append(scores_ada.mean())
 
-print('深度 :', [1, 2, 10])
+print("深度 :", [1, 2, 10])
 print("成績 :", score)
 
 print("------------------------------------------------------------")  # 60個
@@ -624,7 +624,7 @@ n_components = np.arange(50, 210, 10)
 
 aics = []
 for n in n_components:
-    print('GaussianMixture, n =', n)
+    print("GaussianMixture, n =", n)
     gmm = GaussianMixture(n, covariance_type="full")
     aic = gmm.fit(data).aic(data)
     aics.append(aic)
@@ -633,8 +633,8 @@ for n in n_components:
 plt.plot(n_components, aics)
 
 # 畫直線
-plt.plot([110, 110], [110, min(aics)], linewidth=5, color='0.3')
-#plt.plot([110, 110], [110, -250000], linewidth=5, color="0.8")
+plt.plot([110, 110], [110, min(aics)], linewidth=5, color="0.3")
+# plt.plot([110, 110], [110, -250000], linewidth=5, color="0.8")
 
 show()
 

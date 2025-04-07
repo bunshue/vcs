@@ -53,9 +53,7 @@ print("------------------------------------------------------------")  # 60個
 
 # svmplatt.py
 
-from numpy import *
 import operator
-from time import sleep
 
 
 class PlattSVM(object):
@@ -82,8 +80,8 @@ class PlattSVM(object):
         # 核函数列表
 
     def kernels(self, dataMat, A):
-        m, n = shape(dataMat)
-        K = mat(zeros((m, 1)))
+        m, n = np.shape(dataMat)
+        K = np.mat(np.zeros((m, 1)))
         cc = list(self.kValue.keys())
         # print(cc[0])
         if cc[0] == "linear":
@@ -92,18 +90,18 @@ class PlattSVM(object):
             for j in range(m):
                 deltaRow = dataMat[j, :] - A
                 K[j] = deltaRow * deltaRow.T
-            K = exp(K / (-1 * self.kValue["Gaussian"] ** 2))
+            K = np.exp(K / (-1 * self.kValue["Gaussian"] ** 2))
         else:
             raise NameError("无法识别的核函数")
         return K
 
     def initparam(self):
-        self.X = mat(self.X)  # 数据集
-        self.labelMat = mat(self.labelMat).T  # 类别标签
-        self.m = shape(self.X)[0]  # 数据集行数
-        self.lambdas = mat(zeros((self.m, 1)))  # 拉格朗日乘子
-        self.eCache = mat(zeros((self.m, 2)))  # 误差缓存
-        self.K = mat(zeros((self.m, self.m)))  # 存储用于核函数计算的向量
+        self.X = np.mat(self.X)  # 数据集
+        self.labelMat = np.mat(self.labelMat).T  # 类别标签
+        self.m = np.shape(self.X)[0]  # 数据集行数
+        self.lambdas = np.mat(np.zeros((self.m, 1)))  # 拉格朗日乘子
+        self.eCache = np.mat(np.zeros((self.m, 2)))  # 误差缓存
+        self.K = np.mat(np.zeros((self.m, self.m)))  # 存储用于核函数计算的向量
         for i in range(self.m):
             self.K[:, i] = self.kernels(self.X, self.X[i, :])  # kValue
 
@@ -124,7 +122,7 @@ class PlattSVM(object):
 
     def calcEk(self, k):
         return float(
-            multiply(self.lambdas, self.labelMat).T * self.K[:, k] + self.b
+            np.multiply(self.lambdas, self.labelMat).T * self.K[:, k] + self.b
         ) - float(self.labelMat[k])
 
     # 选择lambda,从缓存中寻找具有最大误差的行索引作为j
@@ -133,7 +131,7 @@ class PlattSVM(object):
         maxDeltaE = 0
         Ej = 0
         self.eCache[i] = [1, Ei]  # 更新误差缓存
-        validEcacheList = nonzero(self.eCache[:, 0].A)[0]
+        validEcacheList = np.nonzero(self.eCache[:, 0].A)[0]
         if (len(validEcacheList)) > 1:
             for k in validEcacheList:
                 if k == i:
@@ -220,7 +218,9 @@ class PlattSVM(object):
                     lambdaPairsChanged += self.innerLoop(i)  # 进入内循环
                 step += 1
             else:  # 遍历非边界的lambdas
-                nonBoundIs = nonzero((self.lambdas.A > 0) * (self.lambdas.A < self.C))[
+                nonBoundIs = np.nonzero(
+                    (self.lambdas.A > 0) * (self.lambdas.A < self.C)
+                )[
                     0
                 ]  # 通过KKT确定lambdas的位置
                 for i in nonBoundIs:
@@ -230,23 +230,23 @@ class PlattSVM(object):
                 entireflag = False  # 转换标志位 切换到两种遍历方式的另一种
             elif lambdaPairsChanged == 0:
                 entireflag = True  # 转换标志位 遍历整个数据集
-        self.svIndx = nonzero(self.lambdas.A > 0)[0]  # 输出计算后的支持向量索引
+        self.svIndx = np.nonzero(self.lambdas.A > 0)[0]  # 输出计算后的支持向量索引
         self.sptVects = self.X[self.svIndx]  # 计算完成的支持向量
         self.SVlabel = self.labelMat[self.svIndx]  # 计算完成后的支持向量的类别标签
 
     # 计算权重向量
     def calcWs(self):
-        m, n = shape(self.X)
-        w = zeros((n, 1))
+        m, n = np.shape(self.X)
+        w = np.zeros((n, 1))
         for i in range(m):
-            w += multiply(self.lambdas[i] * self.labelMat[i], self.X[i, :].T)
+            w += np.multiply(self.lambdas[i] * self.labelMat[i], self.X[i, :].T)
         return w
 
     # 绘制散点图
     def scatterplot(self, plt):
         fig = plt.figure()
         ax = fig.add_subplot(111)
-        for i in range(shape(self.X)[0]):
+        for i in range(np.shape(self.X)[0]):
             if self.lambdas[i] != 0:  # KKT条件
                 ax.scatter(self.X[i, 0], self.X[i, 1], c="green", marker="s", s=50)
             elif self.labelMat[i] == 1:
@@ -257,15 +257,15 @@ class PlattSVM(object):
     # 分类器
     def classify(self, testSet, testLabel):
         errorCount = 0
-        testMat = mat(testSet)
-        m, n = shape(testMat)
+        testMat = np.mat(testSet)
+        m, n = np.shape(testMat)
         for i in range(m):  # 用核函数划分测试集
             kernelEval = self.kernels(self.sptVects, testMat[i, :])
             predict = (
-                kernelEval.T * multiply(self.SVlabel, self.lambdas[self.svIndx])
+                kernelEval.T * np.multiply(self.SVlabel, self.lambdas[self.svIndx])
                 + self.b
             )
-            if sign(predict) != sign(testLabel[i]):
+            if np.sign(predict) != np.sign(testLabel[i]):
                 errorCount += 1
         return float(errorCount) / float(m)
 
@@ -274,8 +274,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # PlattSMOTest01.py
-
-from numpy import *
 
 svm = PlattSVM()
 svm.C = 70  # 惩罚因子C: 0.6,
@@ -287,7 +285,7 @@ svm.loadDataSet("nolinear.txt")
 svm.train()
 # 根据拉格朗日alphas乘子计算W向量
 print(svm.svIndx)
-print(shape(svm.sptVects)[0])
+print(np.shape(svm.sptVects)[0])
 print("b:", svm.b)
 # print("lambdas[lambdas > 0]:",svm.lambdas[svm.lambdas > 0])
 svm.scatterplot(plt)
@@ -299,8 +297,6 @@ print("------------------------------------------------------------")  # 60個
 
 # PlattSMOTest02.py
 
-from numpy import *
-
 svm = PlattSVM()
 svm.C = 100  # 惩罚因子C: 0.6,
 svm.tol = 0.001  # 容错率:0.001
@@ -311,7 +307,7 @@ svm.loadDataSet("svm.txt")
 svm.train()
 # 根据拉格朗日alphas乘子计算W向量
 print(svm.svIndx)
-print(shape(svm.sptVects)[0])
+print(np.shape(svm.sptVects)[0])
 print("b:", svm.b)
 # print("lambdas[lambdas > 0]:",svm.lambdas[svm.lambdas > 0])
 svm.scatterplot(plt)
@@ -325,10 +321,6 @@ print("------------------------------------------------------------")  # 60個
 
 # Predict.py
 
-import sys
-import os
-
-# 引入Bunch类
 from sklearn.datasets._base import Bunch
 
 # 引入持久化类
@@ -338,11 +330,6 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.svm import LinearSVC  # 导入线性SVM算法
 from sklearn import metrics
-
-
-# 配置utf-8输出环境
-# reload(sys)
-# sys.setdefaultencoding("utf-8")
 
 
 # 读取文件
@@ -408,7 +395,6 @@ print("------------------------------------------------------------")  # 60個
 
 import jieba
 
-# 引入Bunch类
 from sklearn.datasets._base import Bunch
 
 # 引入持久化类

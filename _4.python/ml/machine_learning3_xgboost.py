@@ -42,7 +42,7 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 使用分類模型
 
 from xgboost import XGBClassifier
@@ -204,6 +204,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+'''
 
 
 # 提取特徵
@@ -311,6 +312,18 @@ def do_score(real_data, predict_data):
     return count_1 / count_2
 
 
+"""
+weibo_train_data2.txt 1999筆資料 7欄位
+d38e9bed5d98110dc2489d0d1cac3c2a	7d45833d9865727a88b960b0603c19f6	2015-02-23 17:41:29	0	0	0	麗江旅遊(sz002033)#股票##炒股##財經##理財##投資#推薦包贏股，盈利對半分成，不算本金，羣：46251412
+fa13974743d3fe6ff40d21b872325e9e	8169f1d45051e08ef213bf1106b1225d	2015-02-14 12:49:58	0	0	0	#丁辰靈的紅包#掙錢是一種能力，搶紅包拼的是技術。我搶到了丁辰靈 和@闞洪巖 一起發出的現金紅包，幸福感爆棚！情人節，一起來和粉絲紅包約個會吧╮ (￣ 3￣) ╭http://t.cn/RZDIVjf
+da534fe87e7a52777bee5c30573ed5fd	68cd0258c31c2c525f94febea2d9523b	2015-03-31 13:58:06	0	0	0	淘寶網這些傻逼。。。氣的勞資有火沒地兒發~尼瑪，你們都瞎了
+e06a22b7e065e559a1f0bf7841a85c51	00b9f86b4915aedb7db943c54fd19d59	2015-06-11 20:39:57	0	4	3	看點不能說的，你們都懂[笑cry]
+f9828598f9664d4e347ef2048ce17734	c7f6f66044c0c5a3330e2c5371be6824	2015-03-10 18:02:38	0	0	0	111多張
+d80f3d3c5c1d658e82b837a4dd1af849	bfc0819b83ec59ce767287077f2b3507	2015-02-13 01:09:41	0	0	0	有生之年！我最喜歡的up主跟我的三體勾搭到一起了！幸福感爆棚！ @黑桐谷歌  http://t.cn/RwGp4wk
+
+
+"""
+
 # 讀訓練數據
 data = pd.read_csv("data/weibo_train_data2.txt", sep="\t", header=None)
 data = prepare(data)
@@ -397,12 +410,22 @@ params = {
 
 print("------------------------------")  # 30個
 
+print("開始使用 jieba")
 # 提取關鍵詞
 import jieba
 
-# tmp=data.sample(n = 100000) # adjust
-tmp = data.sample(n=1000)
+print(data.shape)
+tmp = data.sample(n=1000)  # df 隨機抽出1000筆
+
+print(tmp.shape)
+
+print(tmp.head())
+
 arr = tmp["content"].unique()
+
+print(type(arr))
+
+
 print(len(arr))
 arr_all = []
 for i in arr:

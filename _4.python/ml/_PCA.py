@@ -46,6 +46,7 @@ def show():
     # plt.show()
     pass
 
+
 '''
 print(__doc__)
 
@@ -787,7 +788,9 @@ show()
 perplexity = 2
 X_embedded = TSNE(
     n_components=1, perplexity=perplexity, learning_rate="auto", init="random"
-).fit_transform(X)  # .fit + .transform一起做
+).fit_transform(
+    X
+)  # .fit + .transform一起做
 
 for i in range(3):
     plt.scatter(X_embedded[i * 50 : (i + 1) * 50], np.zeros(50), c=colors[i])
@@ -797,7 +800,9 @@ show()
 perplexity = 130
 X_embedded = TSNE(
     n_components=1, perplexity=perplexity, learning_rate="auto", init="random"
-).fit_transform(X)  # .fit + .transform一起做
+).fit_transform(
+    X
+)  # .fit + .transform一起做
 
 for i in range(3):
     plt.scatter(X_embedded[i * 50 : (i + 1) * 50], np.zeros(50), c=colors[i])

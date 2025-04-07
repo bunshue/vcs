@@ -887,9 +887,7 @@ scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)  # STD特徵縮放
 X_test = scaler.transform(X_test)  # STD特徵縮放
 
-clf = RandomForestClassifier(
-    n_estimators=10, criterion="entropy", random_state=0
-)
+clf = RandomForestClassifier(n_estimators=10, criterion="entropy", random_state=0)
 
 clf.fit(X_train, y_train)  # 學習訓練.fit
 

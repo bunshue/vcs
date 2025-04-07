@@ -174,28 +174,10 @@ print("max",state3Mat.max(),"path1:",state3Mat.argmax())
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# jieba_seg.py
-
-import jieba
-import jieba.posseg as pseg
-
-# NG reload(sys)
-# NG sys.setdefaultencoding('utf-8')
-
-seg_list = pseg.cut("把这篇文章修改一下。")  # 默认是精确模式
-
-for word in seg_list:
-    print(word.word, " ", word.flag)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # markovtest1.py
 
-from numpy import *
-
 A = [[0.8, 0.2], [0.7, 0.3]]
-A = mat(A)
+A = np.mat(A)
 print(A)
 A1 = A * A
 print(A1)

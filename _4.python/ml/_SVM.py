@@ -147,7 +147,7 @@ print("用原始 x 資料預測的結果 :", y_pred)
 
 xx, yy = -0.8, -1
 cc = clf.predict([[xx, yy]])  # 預測.predict
-#print("預測結果 :\n", y_pred, sep="")
+# print("預測結果 :\n", y_pred, sep="")
 print("預測結果 :\n", cc, sep="")
 
 xx = yy = np.arange(-7, 7, 0.2)

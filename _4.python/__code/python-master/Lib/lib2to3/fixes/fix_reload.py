@@ -1,8 +1,3 @@
-"""Fixer for reload().
-
-reload(s) -> imp.reload(s)"""
-
-# Local imports
 from .. import fixer_base
 from ..fixer_util import ImportAndCall, touch_import
 

@@ -1,68 +1,7 @@
 
-
 python 之 ''' 與  ''' 內, 不可以存在 \
 
 程式內不允許有 \ 反切
-
-
-C:\Users\070601>pip show scikit-learn
-C:\Users\070601>pip show pytube
-C:\Users\070601>python --version
-C:\Users\070601>python -m pip install --upgrade pip
-C:\Users\070601>pip --version
-
-
-也可以針對特定套件顯示更詳細的套件資訊
-pip show <package-name>
-pip show pytube
-
-
-如何使用 pip 一次安裝多個套件
-
-每次換環境就需要重新安裝套件，輸入指令重新安裝很麻煩，所以我們通常都會將要安裝的套件寫在 txt 檔案裡面，只需要 install 這個文字檔就可以一次安裝所有需要的套件囉！
-
- pip 安裝 requirements.txt 內的清單：
-$ pip install -r requirements.txt 
-
-2. 將安裝過的套件建立成 requirements.txt 文件清單：
-$ pip freeze > requirements.txt
-
-Python PIP 使用 requirements.txt 管理套件相依性
-
-PIP 倒出現有環境套件
-
-    $ pip freeze > requirements.txt # requirements.txt 如下述格式
-    pylint==1.6.5
-    PyMySQL==0.6.7
-
-PIP 安裝 requirements.txt 的套件
-
-    $ pip install -r requirements.txt
-
-
-
-
-更新pip程式
-python.exe -m pip install --upgrade pip
-
-
-Python Requirements File
-
-將目前電腦上的安裝套件存成檔案
-pip freeze > requirements.txt
-
-由requirements.txt安裝套件
-pip install -r requirements.txt
-
-檢查所有套件有無更新版本
-pip list --outdated
-
-更新套件
-pip install -U XXXXXXX
-
-
-又安裝又更新所有套件
-pip install -U -r requirements.txt
 
 
 在tk內顯示opencv
@@ -360,8 +299,6 @@ pypy
 只需要改短檔名即可
 
 fx內也可以建立fx
-
-準備撈出所有 python pip install 相關
 
 Dictionaries Set List Tuple
 
@@ -814,43 +751,6 @@ uncompromising
     比較級：more uncompro
 
 
-# 更新pip程式
-cmd > python.exe -m pip install --upgrade pip
-
-指定安裝版本
-pip install imageai==2.0.2
-
-安裝opencv
-pip install opencv-python
-
-pip install pytube3
-pip install jupyter
-
-pip install -r requirements.txt
-
-requirements.txt
-
-azure-functions
-requests
-pandas
-pymysql
-PIL==1.1.7
-greenlet==0.4.5
-gunicorn==19.1.1
-oauthlib==0.7.2
-paho-mqtt==1.0
-paramiko==1.15.1
-psycopg2==2.5.4
-pycrypto==2.6.1
-pytz==2014.9
-tzlocal==1.1.2
-redis==2.10.3
-requests==2.4.3
-requests-oauthlib==0.4.2
-whitenoise==1.0.3
-openpyxl==2.1.5
-
-
 
 《幸運的基督徒》
 有15個基督徒和15個非基督徒在海上遇險，為了能讓一部分人活下來不得不將其中15個人扔到海里面去，有個人想了個辦法就是大家圍成一個圈，由某個人開始從1報數，報到9的人就扔到海里面，他後面的人接著從1開始報數，報到9的人繼續扔到海里面，直到扔掉15個人。由於上帝的保佑，15個基督徒都倖免於難，問這些人最開始是怎麼站的，哪些位置是基督徒哪些位置是非基督徒。
@@ -964,12 +864,6 @@ Text		多行文字標籤
 Toplevel	建立子視窗容器
 
 
-
-
-本地安裝套件
-
-下載 XXXX.whl
-pip install XXXX.whl
 
 套件(package) : 多個模組組合在一起
 套件就是一個模組庫 函式庫
@@ -4868,23 +4762,6 @@ https://www.youtube.com/playlist?list=PLA5TE2ITfeXSNSoqvV8u4QZjOqfK1L-_W
 
 
 
-
-
-
-
-
-pip install "scikit_learn==0.22.2.post1"
-
-pip show scikit-learn
-
-pip install scikit-learn scipy matplotlib numpy
-pip install scikit-learn scipy matplotlib numpy
-
-#alternative if you get permissions error
-pip install scikit-learn scipy matplotlib numpy --user
-
-
-
 plt.title('$ y = sinc(x^2) $') #直接支援LaTeX超棒ㄝㄝ
 
 
@@ -5358,8 +5235,6 @@ chardet模块
 
 >pip install chardet
 
-
-
 import this
 
 #網頁連線https://xkcd.com/353/
@@ -5381,57 +5256,6 @@ print("------------------------------------------------------------")  # 60個
 ----------------tkinter SP tktk----------------
 
 
-
-
-本書各章pip安裝的套件清單
-
-第9章: Python 3.9
-pip install pywin32==303
-第10章: Python 3.9
-pip install opencv-python==4.5.4.60
-pip install imutils==0.5.4
-第12章: Python 3.9
-pip install mediapipe==0.8.9.1
-pip install cvzone==1.5.3
-pip install <下載的Dlib的.whl檔>
-pip install face-recognition==1.3.0
-第15章: Python 3.9
-pip install https://github.com/google-coral/pycoral/releases/download/v2.0.0/tflite_runtime-2.5.0.post1-cp39-cp39-win_amd64.whl
-pip install pytesseract==0.3.8
-第16章: Python 3.9
-pip install torch==1.10.2
-pip install torchvision==0.11.3
-pip install torchaudio==0.10.2
-
-
-
-
-pip install 套件名稱
-
-pip uninstall 想移除的套件名稱
-
-pip show 想查詢的套件名稱
-
-
-pip list
-
-
-pip語法
-
-pip uninstall keras -y
-pip uninstall keras-nightly -y
-pip uninstall keras-Preprocessing -y
-pip uninstall keras-vis -y
-pip uninstall tensorflow -y
-pip uninstall h5py -y
-
-pip install tensorflow==1.13.1
-pip install keras==2.0.8
-pip install h5py==2.10.0
-
-
-更新套件
-pip install yfinance -U
 
 
 
@@ -5484,17 +5308,13 @@ print("------------------------------------------------------------")  # 60個
 #!cp /content/db.sqlite3 "/content/drive/MyDrive/Colab Notebooks/package/tchinese_db.sqlite3"
 #!cp "/content/drive/MyDrive/Colab Notebooks/package/tchinese_db.sqlite3" /content/db.sqlite3
 
-
 -----------------------
 
 #Colab資料夾設定方法
 #!pip install google.colab 
-     
-
-
-
 
 ----------------colab SP----------------
+
 
 
 

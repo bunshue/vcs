@@ -80,11 +80,11 @@ def writebunchobj(path, bunchobj):
 
 # 计算分类精度：
 def metrics_result(actual, predict):
-    print('aaaa')
+    print("aaaa")
     print("精度:{0:.3f}".format(metrics.precision_score(actual, predict)))
-    print('bbbb')
+    print("bbbb")
     print("召回:{0:0.3f}".format(metrics.recall_score(actual, predict)))
-    print('cccc')
+    print("cccc")
     print("f1-score:{0:.3f}".format(metrics.f1_score(actual, predict)))
 
 
@@ -99,6 +99,7 @@ corpus_path = "train_corpus_small/"  # 未分词分类语料库路径
 seg_path = "tmp_train_corpus_seg/"  # 分词后分类语料库路径
 
 catelist = os.listdir(corpus_path)  # 获取corpus_path下的所有子目录
+print(catelist)
 
 # 获取每个目录下所有的文件
 for mydir in catelist:
@@ -108,13 +109,13 @@ for mydir in catelist:
         os.makedirs(seg_dir)
     file_list = os.listdir(class_path)  # 获取class_path下的所有文件
     for file_path in file_list:  # 遍历类别目录下文件
-        print(file_path)
         fullname = class_path + file_path  # 拼出文件名全路径
-        print(fullname)
+        print("分詞前之檔案 :", fullname)
         content = readfile(fullname).strip()  # 读取文件内容
         content = content.replace("\r\n", "")  # 删除换行和多余的空格
         content_seg = jieba.cut(content.strip())  # 为文件内容分词
-        # savefile(seg_dir + file_path, " ".join(content_seg))  # 将处理后的文件保存到分词后语料目录
+        print("分詞後之檔案 :", seg_dir + file_path)
+        savefile(seg_dir + file_path, " ".join(content_seg))  # 将处理后的文件保存到分词后语料目录
 
 print("中文语料分词结束！！！")
 
@@ -123,12 +124,11 @@ print("------------------------------------------------------------")  # 60個
 
 # kNN.py
 
-from numpy import *
 import operator
 
 
 def createDataSet():
-    group = array([[1.0, 1.1], [1.0, 1.0], [0, 0], [0, 0.1]])
+    group = np.array([[1.0, 1.1], [1.0, 1.0], [0, 0], [0, 0.1]])
     labels = ["A", "A", "B", "B"]
     return group, labels
 
@@ -150,7 +150,7 @@ def classify(testdata, dataSet, labels, k):
     dataSetSize = dataSet.shape[0]
     # 计算测试集与训练集之间的距离：标准欧氏距离
     # 1.计算测试项与训练集各项的差
-    diffMat = tile(testdata, (dataSetSize, 1)) - dataSet
+    diffMat = np.tile(testdata, (dataSetSize, 1)) - dataSet
     # 2.计算差的平方和
     sqDiffMat = diffMat**2
     # 3.按列求和
@@ -323,13 +323,14 @@ class NBayes(object):
 
 # kNN2.py
 
-from numpy import *
 import operator
 
 
 # 夹角余弦距离公式
 def cosdist(vector1, vector2):
-    return dot(vector1, vector2) / (linalg.norm(vector1) * linalg.norm(vector2))
+    return np.dot(vector1, vector2) / (
+        np.linalg.norm(vector1) * np.linalg.norm(vector2)
+    )
 
 
 # kNN分类器
@@ -341,11 +342,11 @@ def classify(testdata, trainSet, listClasses, k):
     # 返回样本集的行数
     dataSetSize = trainSet.shape[0]
     # 计算测试集与训练集之间的距离：夹角余弦
-    distances = array(zeros(dataSetSize))
+    distances = np.array(np.zeros(dataSetSize))
     for indx in range(dataSetSize):
         distances[indx] = cosdist(testdata, trainSet[indx])
     # 5.根据生成的夹角余弦按从大到小排序,结果为索引号
-    sortedDistIndicies = argsort(-distances)
+    sortedDistIndicies = np.argsort(-distances)
     classCount = {}
     # 获取角度最小的前三项作为参考项
     for i in range(k):  # i = 0~(k-1)
@@ -380,8 +381,6 @@ print("------------------------------------------------------------")  # 60個
 
 # Nbayes.py
 
-from numpy import *
-
 dataSet, listClasses = loadDataSet()
 nb = NBayes()
 nb.train_set(dataSet, listClasses)
@@ -415,7 +414,7 @@ test_set = readbunchobj(testpath)
 # alpha:0.001 alpha越小，迭代次数越多，精度越高
 clf = MultinomialNB(alpha=0.001).fit(train_set.tdm, train_set.label)
 
-'''
+"""
 # 预测分类结果
 predicted = clf.predict(test_set.tdm)
 total = len(predicted)
@@ -427,7 +426,7 @@ for flabel, file_name, expct_cate in zip(test_set.label, test_set.filenames, pre
 # 精度
 print("error rate:", float(rate) * 100 / float(total), "%")
 print("预测完毕!!!")
-'''
+"""
 
 """ NG
 print()
@@ -445,7 +444,6 @@ print("------------------------------------------------------------")  # 60個
 
 # segment2Bunch.py
 
-import jieba
 import pickle
 from sklearn.datasets._base import Bunch
 
@@ -535,7 +533,6 @@ print("------------------------------------------------------------")  # 60個
 
 # test2Bunch.py
 
-import jieba
 import pickle
 from sklearn.datasets._base import Bunch
 
