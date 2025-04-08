@@ -1,5 +1,5 @@
 """
-machine_learning_ch02
+machine_learning_ch10
 
 """
 
@@ -44,7 +44,7 @@ from sklearn import tree
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
