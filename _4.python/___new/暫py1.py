@@ -2400,7 +2400,6 @@ print("------------------------------------------------------------")  # 60個
 
 import timeit
 import itertools
-import operator
 import re
 import sys
 import datetime

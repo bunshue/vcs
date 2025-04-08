@@ -19,6 +19,12 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+
+def show():
+    plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.svm import SVC  # 非線性SVM函數學習機
@@ -117,7 +123,7 @@ def do_svm():
     plt.xlabel("萼長 sepal length [標準化]")
     plt.ylabel("瓣長 petal length [標準化]")
     plt.legend(loc="upper left")
-    plt.show()
+    show()
 
 
 print("SVM")
@@ -142,7 +148,7 @@ def do_svm_kernel():
     )
     plt.ylim(-3.0)
     plt.legend()
-    plt.show()
+    show()
 
     svm = SVC(kernel="rbf", random_state=9487, gamma=0.6, C=10.0)  # 非線性SVM函數學習機
 
@@ -151,7 +157,7 @@ def do_svm_kernel():
     print('使用 SVM RBF 畫結果')
     plot_decision_regions(X_xor, y_xor, classifier=svm)
     plt.legend(loc="upper left")
-    plt.show()
+    show()
 
 
 print("SVM Kernel")
@@ -188,7 +194,7 @@ def do_random_forest():
     plt.xlabel("瓣長 petal length")
     plt.ylabel("瓣寬 petal width")
     plt.legend(loc="upper left")
-    plt.show()
+    show()
 
 
 print("隨機森林")
@@ -240,7 +246,7 @@ def do_perceptrons():
     plt.xlabel("瓣長 petal length")
     plt.ylabel("萼長 sepal length")
     plt.legend(loc="upper left")
-    plt.show()
+    show()
 
 
 print("perceptrons 感知器 前饋神經網路")
@@ -315,15 +321,59 @@ def do_adative_learning_rate():
         plt.title("rms")
         for xt, yt in zip(start_x, start_y):
             plt.scatter(xt, yt, c="b")
-        plt.show()
+        show()
 
 
 print("adative_learning_rate")
 do_adative_learning_rate()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+# 夹角余弦距离公式
+def cosdist1(vector1, vector2):
+    Lv1 = np.sqrt(vector1 * vector1.T)
+    Lv2 = np.sqrt(vector2 * vector2.T)
+    return vector1 * vector2.T / (Lv1 * Lv2)
+"""
 
 
+# 夹角余弦距离公式
+def cosdist2(vector1, vector2):
+    return np.dot(vector1, vector2) / (
+        np.linalg.norm(vector1) * np.linalg.norm(vector2)
+    )
+
+
+vectors = np.array(
+    [[5, 0], [5, 5], [0, 5], [-5, 5], [-5, 0], [-5, -5], [0, -5], [5, -5]]
+)
+test_vector = [2, 2]
+
+distances = np.array(np.zeros(len(vectors)))
+for idx in range(len(vectors)):
+    dist = cosdist2(test_vector, vectors[idx])
+    print("向量", test_vector, "和 向量", vectors[idx], "的距離 :", dist)
+    distances[idx] = dist
+
+print(distances)
+
+idx = 0
+for point in vectors:
+    print("(" + str(point[0]) + ", " + str(point[1]) + ")")
+    plt.scatter(point[0], point[1], c="r", marker="o", s=300)
+    idx += 1
+
+plt.scatter(test_vector[0], test_vector[1], c="b", marker="s", s=300)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
@@ -331,6 +381,8 @@ sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

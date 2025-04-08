@@ -135,7 +135,6 @@ print("------------------------------------------------------------")  # 60個
 # leastSquare.py
 
 from numpy import *
-import operator
 
 
 def loadDataSet(fileName):

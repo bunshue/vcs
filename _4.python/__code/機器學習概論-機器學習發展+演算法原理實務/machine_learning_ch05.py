@@ -47,14 +47,13 @@ def show():
     plt.show()
     pass
 
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # common_libs.py
 
 from numpy import *
-import operator
 
 # import scipy.spatial.distance.cdist as dist
 
@@ -169,7 +168,6 @@ print("------------------------------------------------------------")  # 60個
 
 # data.py
 
-import operator
 from numpy import *
 
 Input = file2matrix("data05/testSet.txt", "\t")
@@ -185,7 +183,6 @@ print("------------------------------------------------------------")  # 60個
 
 # gradient_test.py
 
-import operator
 from numpy import *
 
 # 输入数据
@@ -266,7 +263,6 @@ print("------------------------------------------------------------")  # 60個
 
 # log_evalue_weight.py
 
-import operator
 from numpy import *
 
 Input = file2matrix("data05/testSet.txt", "\t")
@@ -311,7 +307,6 @@ print("------------------------------------------------------------")  # 60個
 
 # log_evalue_weight2.py
 
-import operator
 from numpy import *
 
 Input = file2matrix("data05/testSet.txt", "\t")
@@ -366,7 +361,6 @@ print("------------------------------------------------------------")  # 60個
 
 # log_evalue_weight3.py
 
-import operator
 from numpy import *
 
 Input = file2matrix("data05/testSet.txt", "\t")
@@ -422,7 +416,6 @@ print("------------------------------------------------------------")  # 60個
 
 # log_evalue_weight4.py
 
-import operator
 from numpy import *
 
 Input = file2matrix("data05/testSet.txt", "\t")
@@ -470,7 +463,6 @@ print("------------------------------------------------------------")  # 60個
 
 # logistic_test.py
 
-import operator
 from numpy import *
 
 Input = file2matrix("data05/testSet.txt", "\t")
@@ -506,7 +498,6 @@ print("------------------------------------------------------------")  # 60個
 
 # logistic_test2.py
 
-import operator
 from numpy import *
 
 weights = mat([[4.12414349], [0.48007329], [-0.6168482]])
@@ -595,7 +586,6 @@ print("------------------------------------------------------------")  # 60個
 
 # stoc_evalue_alpha.py
 
-import operator
 from numpy import *
 
 Input = file2matrix("data05/testSet.txt", "\t")
@@ -648,7 +638,6 @@ print("------------------------------------------------------------")  # 60個
 
 # stoc_evalue_weight.py
 
-import operator
 from numpy import *
 
 Input = file2matrix("data05/testSet.txt", "\t")
@@ -706,7 +695,6 @@ print("------------------------------------------------------------")  # 60個
 
 # stoc_evalue_weight2.py
 
-import operator
 from numpy import *
 
 Input = file2matrix("data05/testSet.txt", "\t")
@@ -765,7 +753,6 @@ print("------------------------------------------------------------")  # 60個
 
 # stoc_test.py
 
-import operator
 from numpy import *
 
 Input = file2matrix("data05/testSet.txt", "\t")
@@ -808,13 +795,9 @@ plt.plot(X, Y)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-'''
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from numpy import *
-import operator
 import scipy.spatial.distance as dist
 
 

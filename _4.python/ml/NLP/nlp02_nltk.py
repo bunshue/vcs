@@ -136,7 +136,9 @@ mails_message, labels = mails["message"].values, mails["label"].values
 mails_message = mails_message.astype(str)
 
 tfidf_vectorizer = TfidfVectorizer()
+
 tfidf_matrix = tfidf_vectorizer.fit_transform(mails_message)
+
 print(tfidf_matrix.shape)
 
 # (5572, 8111)
@@ -261,7 +263,9 @@ mails_message, labels = mails["message"].values, mails["label"].values
 mails_message = mails_message.astype(str)
 
 tfidf_vectorizer = TfidfVectorizer()
+
 tfidf_matrix = tfidf_vectorizer.fit_transform(mails_message)
+
 print(tfidf_matrix.shape)
 
 # (5572, 8114)
@@ -279,12 +283,10 @@ print(no)
 X_train, X_test, y_train, y_test = train_test_split(
     tfidf_matrix.toarray(), labels, test_size=0.2
 )
-# 模型訓練
 
 clf = GaussianNB()
-clf.fit(X_train, y_train)
 
-# 模型評分
+clf.fit(X_train, y_train)  # 學習訓練.fit
 
 y_pred = clf.predict(X_test)
 cc = accuracy_score(y_pred, y_test)
@@ -366,14 +368,17 @@ x = np.array(data["tweet"])
 y = np.array(data["labels"])
 
 cv = CountVectorizer()
-X = cv.fit_transform(x)  # Fit the Data
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.33, random_state=42
-)
 
+X = cv.fit_transform(x)  # 學習訓練.fit
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.33)
 
 clf = DecisionTreeClassifier()
-clf.fit(X_train, y_train)
+
+clf.fit(X_train, y_train)  # 學習訓練.fit
+
 clf.score(X_test, y_test)
 
 # user = input("Enter a Text: ")
@@ -434,6 +439,7 @@ print("------------------------------")  # 30個
 from sklearn.feature_extraction.text import CountVectorizer
 
 cv = CountVectorizer()
+
 counts = cv.fit_transform(corpus_df["content"].values)
 
 from sklearn.naive_bayes import MultinomialNB  # 多項單純貝氏分類器
@@ -501,7 +507,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 print("vectorizing train dataset ...")
 t = time.time()
+
 vectorizer = TfidfVectorizer(encoding='latin-1')
+
 X_train = vectorizer.fit_transform((d for d in news_train.data))
 print("n_samples: %d, n_features: %d" % X_train.shape)
 print("number of non-zero features in sample [{0}]: {1}".format(

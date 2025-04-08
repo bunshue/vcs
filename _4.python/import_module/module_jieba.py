@@ -177,9 +177,10 @@ print(" | ".join(cut_text))
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-filename = "data/_jieba/cna_news.txt"
-with open(filename, "r", encoding="utf-8") as f:
+filename = "data/_jieba/蘇軾_赤壁賦.utf-16-le.txt"
+with open(filename, "r", encoding="utf-16-le") as f:
     original_text = f.read()
 
 print("清理資料, 清除 標點符號 換行 空白")
@@ -196,12 +197,38 @@ for word in cut_text:
         word_freq[word] = 1
     else:
         word_freq[word] += 1
-ordered_freq = sorted(word_freq.items(), key=operator.itemgetter(1), reverse=True)
+
+print("所有斷句 字典格式 :")
+print(word_freq)
+
+word_freq_sorted = sorted(word_freq.items(), key=operator.itemgetter(1), reverse=True)
+
+print("依字典的第1項(出現次數)排序(降冪) :")
+print(word_freq_sorted)
 
 print("打印結果")
-for w, c in ordered_freq:
+for w, c in word_freq_sorted:
     print(w, c)
 
+print("中文语料分词结束！！！")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 斷句後存檔
+filename = "data/_jieba/蘇軾_赤壁賦.utf-16-le.txt"
+filename_save = "tmp_蘇軾_赤壁賦.txt"
+
+with open(filename, "r", encoding="utf-16-le") as f:
+    content = f.read().strip()  # 读取文件内容
+    content = content.replace("\r\n", "")  # 删除换行和多余的空格
+    content_seg = jieba.cut(content.strip())  # 为文件内容分词
+    print("分詞後之檔案 :", filename_save)
+    fp = open(filename_save, "w", encoding="UTF-8-sig")
+    fp.write("|".join(content_seg))  # 将处理后的文件保存到分词后语料目录
+    fp.close()
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from collections import Counter
@@ -278,14 +305,18 @@ print(" | ".join(jieba.cut(original_text)))
 
 keywords = jieba.analyse.extract_tags(
     # original_text, topK=20, withWeight=True, allowPOS=()
-    original_text, topK=20, withWeight=True
+    original_text,
+    topK=20,
+    withWeight=True,
 )
 for item in keywords:
     print(" %s =  %f " % (item[0], item[1]))
 
 keywords = jieba.analyse.textrank(
     # original_text, topK=20, withWeight=True, allowPOS=("ns", "n", "vn", "v")
-    original_text, topK=20, withWeight=True
+    original_text,
+    topK=20,
+    withWeight=True,
 )
 for item in keywords:
     print(" %s =  %f " % (item[0].encode("utf_8"), item[1]))
@@ -353,14 +384,16 @@ print(",".join(jieba.analyse.extract_tags(original_text, topK=10)))
 jieba.analyse.set_stop_words("data/_jieba/stop_words.txt")
 print(",".join(jieba.analyse.extract_tags(original_text, topK=10)))
 
-print('default idf')
+print("default idf")
 # keywords = jieba.analyse.extract_tags(original_text, topK=10, withWeight=True, allowPOS=()) #topK=TF/IDF
-keywords = jieba.analyse.extract_tags(original_text, topK=10, withWeight=True) #topK=TF/IDF 
+keywords = jieba.analyse.extract_tags(
+    original_text, topK=10, withWeight=True
+)  # topK=TF/IDF
 print(" topK=TF/IDF , TF=%d" % len(keywords))
 for item in keywords:
-        print(" %s =  %f "  %  (item[0], item[1]))      # 分別為關鍵詞和相應的權重
+    print(" %s =  %f " % (item[0], item[1]))  # 分別為關鍵詞和相應的權重
 
-print('set_idf_path')
+print("set_idf_path")
 """ NG
 jieba.analyse.set_idf_path("data/_jieba/idf.txt")
 keywords = jieba.analyse.extract_tags(original_text, topK=10, withWeight=True, allowPOS=())
@@ -482,13 +515,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個

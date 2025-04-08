@@ -212,7 +212,7 @@ n_samples = [10, 20, 50, 100, 200, 500, 1000, 2000, 3000, 5000, 7500, 10000]
 for i in tqdm(n_samples):
     time.sleep(0.5)  # 模擬耗時任務
     print()
-    #print(i)
+    # print(i)
 
 print("------------------------------")  # 30個
 
@@ -308,7 +308,7 @@ for f in files:
     codetype = chardet.detect(text)
     print("檔案 :", f)
     print("編碼格式 :", codetype)
-    print('讀取文件')
+    print("讀取文件")
     with open(f, "rb") as fp:
         content = fp.read()
         cod = chardet.detect(content)["encoding"]
@@ -328,7 +328,7 @@ text = open(filename, "rb").read()
 codetype = chardet.detect(text)
 
 print(chardet.detect(text))
-cod=chardet.detect(text)['encoding']
+cod = chardet.detect(text)["encoding"]
 print(cod)
 print(text.decode(cod))
 

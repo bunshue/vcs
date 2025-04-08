@@ -50,7 +50,6 @@ from sklearn.model_selection import train_test_split  # 資料分割 => 訓練�
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier  # 隨機森林
-from sklearn.naive_bayes import GaussianNB  # 數據集和數據處理
 from sklearn.tree import DecisionTreeClassifier
 
 

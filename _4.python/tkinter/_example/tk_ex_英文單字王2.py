@@ -185,7 +185,6 @@ def DoSearch():
 # 導入套件
 import tkinter as tk
 import math
-import operator
 
 # 建立主視窗
 window = tk.Tk()

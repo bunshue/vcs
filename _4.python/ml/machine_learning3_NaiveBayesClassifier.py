@@ -5,8 +5,10 @@
 朴素贝叶斯
 朴素贝叶斯是基于贝叶斯定理与特征条件独立假设的分类方法。
 
+NB分類器
 GaussianNB()
 MultinomialNB()  # 多項單純貝氏分類器
+BernoulliNB  # 伯努利單純貝氏分類器
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -38,6 +40,7 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 
+import sklearn.metrics as metrics
 from sklearn import datasets
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.metrics import accuracy_score
@@ -56,6 +59,8 @@ X, y = datasets.load_iris(return_X_y=True)  # 分別回傳兩種資料
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
+print("------------------------------")  # 30個
+
 from sklearn.naive_bayes import GaussianNB
 
 clf = GaussianNB()
@@ -70,21 +75,7 @@ cc = accuracy_score(y_test, y_pred)
 print(f"{cc*100:.2f}%")
 # 93.33%
 
-# 使用伯努利單純貝氏分類器
-
-from sklearn.naive_bayes import BernoulliNB
-
-clf = BernoulliNB()
-
-clf.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = clf.predict(X_test)  # 預測.predict
-print("預測結果 :\n", y_pred, sep="")
-
-print("計算準確率")
-cc = accuracy_score(y_test, y_pred)
-print(f"{cc*100:.2f}%")
-# 20.00%
+print("------------------------------")  # 30個
 
 from sklearn.naive_bayes import MultinomialNB  # 多項單純貝氏分類器
 
@@ -100,13 +91,372 @@ cc = accuracy_score(y_test, y_pred)
 print(f"{cc*100:.2f}%")
 # 80.00%
 
+print("------------------------------")  # 30個
+
+from sklearn.naive_bayes import BernoulliNB  # 伯努利單純貝氏分類器
+
+clf = BernoulliNB()
+
+clf.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = clf.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
+
+print("計算準確率")
+cc = accuracy_score(y_test, y_pred)
+print(f"{cc*100:.2f}%")
+# 20.00%
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Naive Bayes Classification using Wine data
+
+df = pd.read_csv("data/wine.data.csv")
+
+# Basic statistics of the features
+
+# df.iloc[:,1:].describe()
+
+# Boxplots by output labels/classes
+
+"""
+for c in df.columns[1:]:
+    print("檢視欄位 :", c)
+    df.boxplot(c, by="Class", figsize=(7, 4))
+    plt.title("{}\n".format(c))
+    plt.xlabel("Wine Class")
+    show()
+"""
+plt.figure(figsize=(10, 6))
+plt.scatter(
+    df["OD280/OD315 of diluted wines"],
+    df["Flavanoids"],
+    c=df["Class"],
+    edgecolors="k",
+    alpha=0.8,
+    s=100,
+)
+plt.grid(True)
+plt.title("Scatter plot of two features showing the \ncorrelation and class seperation")
+plt.xlabel("OD280/OD315 of diluted wines")
+plt.ylabel("Flavanoids")
+show()
+
+# Are the features independent? Plot co-variance matrix
+# It can be seen that there are some good amount of correlation between features i.e. they are not independent #of each other, as assumed in Naive Bayes technique. However, we will still go ahead and apply yhe classifier #to see its performance.
+
+from matplotlib import cm as cm
+
+fig = plt.figure(figsize=(16, 12))
+ax1 = fig.add_subplot(111)
+cmap = cm.get_cmap("jet", 30)
+cax = ax1.imshow(df.corr(), interpolation="nearest", cmap=cmap)
+ax1.grid(True)
+plt.title("Wine data set features correlation")
+labels = df.columns
+ax1.set_xticklabels(labels)
+ax1.set_yticklabels(labels)
+# Add colorbar, make sure to specify tick locations to match desired ticklabels
+fig.colorbar(cax, ticks=[0.1 * i for i in range(-11, 11)])
+show()
+
+# Naive Bayes Classification
+
+# Test/train split
+
+X = df.drop("Class", axis=1)
+y = df["Class"]
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+cc = X_train.shape
+print(cc)
+
+cc = X_train.head()
+print(cc)
+
+# Classification using GaussianNB
+
+from sklearn.naive_bayes import GaussianNB
+
+nbc = GaussianNB()
+
+nbc.fit(X_train, y_train)
+
+GaussianNB(priors=None)
+
+# Prediction, classification report, and confusion matrix
+
+y_pred = nbc.predict(X_test)
+mislabel = np.sum((y_test != y_pred))
+print(
+    "Total number of mislabelled data points from {} test samples is {}".format(
+        len(y_test), mislabel
+    )
+)
+
+# Total number of mislabelled data points from 54 test samples is 2
+
+print("The classification report is as follows...\n")
+print(classification_report(y_pred, y_test))
+
+
+cm = confusion_matrix(y_test, y_pred)
+cmdf = pd.DataFrame(
+    cm,
+    index=["Class 1", "Class 2", " Class 3"],
+    columns=["Class 1", "Class 2", " Class 3"],
+)
+print("The confusion matrix looks like following...\n")
+print(cmdf)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.naive_bayes import GaussianNB
+
+
+X = np.array(
+    [
+        [9, 9],
+        [9.2, 9.2],
+        [9.6, 9.2],
+        [9.2, 9.2],
+        [6.7, 7.1],
+        [7, 7.4],
+        [7.6, 7.5],
+        [7.2, 10.3],
+        [7.3, 10.5],
+        [7.2, 9.2],
+        [7.3, 10.2],
+        [7.2, 9.7],
+        [7.3, 10.1],
+        [7.3, 10.1],
+    ]
+)
+Y = np.array([1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2])
+
+
+model = GaussianNB()
+model.fit(X, Y)
+print(model.class_prior_)
+print(model.get_params())
+
+
+# Predict Output
+x_test = np.array([[8, 8], [8.3, 8.3]])
+predicted = model.predict(x_test)
+print(predicted)
+print(model.predict_proba(x_test))
+
+t1 = np.array([[1, 2], [3, 4]])
+print(t1.ravel())  # 轉成一維 輸出為[1, 2, 3, 4]
+t2 = np.linspace(0, 10, 3)
+print(t2)  # 輸出為[ 0.  5. 10.]
+t3 = np.linspace(0, 10, 2)
+print(t3)  # 輸出為[ 0. 10.]
+t4, t5 = np.meshgrid(t2, t3)
+print(t4)  # 輸出為[[ 0.  5. 10.][ 0.  5. 10.]]
+print(t5)  # 輸出為[[ 0.  0.  0.] [10. 10. 10.]]
+t4, t5 = np.meshgrid(t3, t2)
+print(t4)  # 輸出為[[ 0. 10.][ 0. 10.][ 0. 10.]]
+print(t5)  # 輸出為[[ 0.  0.][ 5.  5.][10. 10.]]
+t6 = np.c_[np.array([1, 2, 3]), np.array([4, 5, 6])]
+print(t6)
+
+# 繪圖
+plt.plot(X[:7, 0], X[:7, 1], "yx")
+plt.plot(X[7:, 0], X[7:, 1], "g.")
+plt.plot(x_test[:, 0], x_test[:, 1], "r^")  # 綠色點
+plt.ylabel("W")
+plt.xlabel("H")
+plt.legend(("Citrus", "Lemon"), loc="upper left")
+
+x_min = X[:, 0].min() - 0.5
+x_max = X[:, 0].max() + 0.5
+y_min = X[:, 1].min() - 0.5
+y_max = X[:, 1].max() + 0.5
+
+xx, yy = np.meshgrid(np.linspace(x_min, x_max, 30), np.linspace(y_min, y_max, 30))
+Z = model.predict_proba(np.c_[xx.ravel(), yy.ravel()])
+Z1 = Z[:, 1].reshape(xx.shape)
+plt.contour(xx, yy, -Z1, [-0.5], colors="k")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn.naive_bayes import MultinomialNB  # 多項單純貝氏分類器
+
+# 6個row的訓練資料
+X_train = [
+    [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1],
+]
+# 6個row的訓練目標
+y_train = [1, 1, 1, 0, 0, 0]
+
+model = MultinomialNB()  # 多項單純貝氏分類器
+
+model.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = model.predict([[0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0]])  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# KNN 分类器
+
+from scipy import stats
+
+orgData = pd.read_csv("data/date_data2.csv")
+cc = orgData.describe()
+print(cc)
+
+# 选取自变量
+
+X = orgData.iloc[:, :4]
+Y = orgData[["Dated"]]
+X.head()
+
+# 极值标准化, MMS特徵縮放
+from sklearn import preprocessing
+
+min_max_scaler = preprocessing.MinMaxScaler()
+X_scaled = min_max_scaler.fit_transform(X)
+
+cc = X_scaled[1:5]
+print(cc)
+
+# 資料分割
+train_data, test_data, train_target, test_target = train_test_split(
+    X_scaled, Y, test_size=0.2
+)
+
+# 建模
+
+from sklearn.neighbors import KNeighborsClassifier
+
+model = KNeighborsClassifier(n_neighbors=3)  # 默认欧氏距离
+model.fit(train_data, train_target.values.flatten())
+test_est = model.predict(test_data)  # 預測.predict
+
+# 验证
+print(metrics.confusion_matrix(test_target, test_est, labels=[0, 1]))  # 混淆矩阵
+print(metrics.classification_report(test_target, test_est))
+
+model.score(test_data, test_target)
+
+# 选择k值
+
+for k in range(1, 15):
+    k_model = KNeighborsClassifier(n_neighbors=k)
+    k_model.fit(train_data, train_target.values.flatten())
+    score = k_model.score(test_data, test_target)
+    print(k, "\t", score)
+
+# 交叉验证选择k值
+
+from sklearn.model_selection import ParameterGrid
+from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import KFold
+
+"""
+n_samples = len(train_data)
+#KFold(n_splits=5, *, shuffle=False, random_state=None)
+kf = KFold(n=n_samples, n_folds=3) # 參數錯誤
+grid = ParameterGrid({"n_neighbors": [range(1, 15)]})
+estimator = KNeighborsClassifier()
+gridSearchCV = GridSearchCV(estimator, grid, cv=kf)
+gridSearchCV.fit(train_data, train_target.values.flatten())
+gridSearchCV.cv_results_  # cv_results_ : 具體用法模型不同參數下交叉驗證的結果
+
+gridSearchCV.best_params_
+
+best = gridSearchCV.best_estimator_
+best.score(test_data, test_target)
+
+# 练习：试一试哪些参数会影响结果
+
+# 朴素贝叶斯
+
+cc = orgData.head()
+print(cc)
+
+orgData1 = orgData.ix[:, -3:]
+
+orgData1.income_rank = orgData1.income_rank.astype("category")
+orgData1.describe(include="all")
+
+# 資料分割
+train_data1, test_data1, train_target1, test_target1 = train_test_split(orgData1, Y, test_size=0.2)
+
+from sklearn.naive_bayes import BernoulliNB  # 伯努利單純貝氏分類器
+
+NB = BernoulliNB(alpha=1)
+NB.fit(train_data1, train_target1.values.flatten())
+test_est1 = NB.predict(test_data1)  # 預測.predict
+
+# 验证
+
+print(metrics.classification_report(test_target1, test_est1))
+
+NB.score(train_data1, train_target1)
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+orgData = pd.read_csv("data/date_data2.csv")
+# # 朴素贝叶斯
+
+orgData.head()
+
+Y = orgData[["Dated"]]
+orgData1 = orgData.iloc[:, -3:]
+
+orgData1.income_rank = orgData1.income_rank.astype("category")
+orgData1.describe(include="all")
+
+# 資料分割
+train_data1, test_data1, train_target1, test_target1 = train_test_split(
+    orgData1, Y, test_size=0.2
+)
+
+from sklearn.naive_bayes import BernoulliNB  # 伯努利單純貝氏分類器
+
+NB = BernoulliNB(alpha=1)
+NB.fit(train_data1, train_target1.values.flatten())
+test_est1 = NB.predict(test_data1)  # 預測.predict
+
+# 验证
+print(metrics.classification_report(test_target1, test_est1))
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 sys.exit()
 
 
-'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 """
 API Reference: http://scikit-learn.org/stable/modules/naive_bayes.html#naive-bayes
 定义一个MultinomialNB类   # 多項單純貝氏分類器
@@ -262,209 +612,10 @@ class my_GaussianNB(my_MultinomialNB):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Naive Bayes Classification using Wine data
-
-df = pd.read_csv("data/wine.data.csv")
-
-# Basic statistics of the features
-
-# df.iloc[:,1:].describe()
-
-# Boxplots by output labels/classes
-
-for c in df.columns[1:]:
-    print("檢視欄位 :", c)
-    df.boxplot(c, by="Class", figsize=(7, 4))
-    plt.title("{}\n".format(c))
-    plt.xlabel("Wine Class")
-    show()
-
-plt.figure(figsize=(10, 6))
-plt.scatter(
-    df["OD280/OD315 of diluted wines"],
-    df["Flavanoids"],
-    c=df["Class"],
-    edgecolors="k",
-    alpha=0.8,
-    s=100,
-)
-plt.grid(True)
-plt.title("Scatter plot of two features showing the \ncorrelation and class seperation")
-plt.xlabel("OD280/OD315 of diluted wines")
-plt.ylabel("Flavanoids")
-show()
-
-# Are the features independent? Plot co-variance matrix
-# It can be seen that there are some good amount of correlation between features i.e. they are not independent #of each other, as assumed in Naive Bayes technique. However, we will still go ahead and apply yhe classifier #to see its performance.
-
-
-def correlation_matrix(df):
-    from matplotlib import cm as cm
-
-    fig = plt.figure(figsize=(16, 12))
-    ax1 = fig.add_subplot(111)
-    cmap = cm.get_cmap("jet", 30)
-    cax = ax1.imshow(df.corr(), interpolation="nearest", cmap=cmap)
-    ax1.grid(True)
-    plt.title("Wine data set features correlation")
-    labels = df.columns
-    ax1.set_xticklabels(labels)
-    ax1.set_yticklabels(labels)
-    # Add colorbar, make sure to specify tick locations to match desired ticklabels
-    fig.colorbar(cax, ticks=[0.1 * i for i in range(-11, 11)])
-    show()
-
-
-cc = correlation_matrix(df)
-print(cc)
-
-# Naive Bayes Classification
-
-# Test/train split
-
-X = df.drop("Class", axis=1)
-y = df["Class"]
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-cc = X_train.shape
-print(cc)
-
-cc = X_train.head()
-print(cc)
-
-# Classification using GaussianNB
-
-from sklearn.naive_bayes import GaussianNB
-
-nbc = GaussianNB()
-
-nbc.fit(X_train, y_train)
-
-GaussianNB(priors=None)
-
-# Prediction, classification report, and confusion matrix
-
-y_pred = nbc.predict(X_test)
-mislabel = np.sum((y_test != y_pred))
-print(
-    "Total number of mislabelled data points from {} test samples is {}".format(
-        len(y_test), mislabel
-    )
-)
-
-# Total number of mislabelled data points from 54 test samples is 2
-
-print("The classification report is as follows...\n")
-print(classification_report(y_pred, y_test))
-
-
-cm = confusion_matrix(y_test, y_pred)
-cmdf = pd.DataFrame(
-    cm,
-    index=["Class 1", "Class 2", " Class 3"],
-    columns=["Class 1", "Class 2", " Class 3"],
-)
-print("The confusion matrix looks like following...\n")
-print(cmdf)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.naive_bayes import GaussianNB
-
-
-X = np.array(
-    [
-        [9, 9],
-        [9.2, 9.2],
-        [9.6, 9.2],
-        [9.2, 9.2],
-        [6.7, 7.1],
-        [7, 7.4],
-        [7.6, 7.5],
-        [7.2, 10.3],
-        [7.3, 10.5],
-        [7.2, 9.2],
-        [7.3, 10.2],
-        [7.2, 9.7],
-        [7.3, 10.1],
-        [7.3, 10.1],
-    ]
-)
-Y = np.array([1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2])
-
-
-model = GaussianNB()
-model.fit(X, Y)
-print(model.class_prior_)
-print(model.get_params())
-
-
-# Predict Output
-x_test = np.array([[8, 8], [8.3, 8.3]])
-predicted = model.predict(x_test)
-print(predicted)
-print(model.predict_proba(x_test))
-
-t1 = np.array([[1, 2], [3, 4]])
-print(t1.ravel())  # 轉成一維 輸出為[1, 2, 3, 4]
-t2 = np.linspace(0, 10, 3)
-print(t2)  # 輸出為[ 0.  5. 10.]
-t3 = np.linspace(0, 10, 2)
-print(t3)  # 輸出為[ 0. 10.]
-t4, t5 = np.meshgrid(t2, t3)
-print(t4)  # 輸出為[[ 0.  5. 10.][ 0.  5. 10.]]
-print(t5)  # 輸出為[[ 0.  0.  0.] [10. 10. 10.]]
-t4, t5 = np.meshgrid(t3, t2)
-print(t4)  # 輸出為[[ 0. 10.][ 0. 10.][ 0. 10.]]
-print(t5)  # 輸出為[[ 0.  0.][ 5.  5.][10. 10.]]
-t6 = np.c_[np.array([1, 2, 3]), np.array([4, 5, 6])]
-print(t6)
-
-# 繪圖
-plt.plot(X[:7, 0], X[:7, 1], "yx")
-plt.plot(X[7:, 0], X[7:, 1], "g.")
-plt.plot(x_test[:, 0], x_test[:, 1], "r^")  # 綠色點
-plt.ylabel("W")
-plt.xlabel("H")
-plt.legend(("Citrus", "Lemon"), loc="upper left")
-
-x_min = X[:, 0].min() - 0.5
-x_max = X[:, 0].max() + 0.5
-y_min = X[:, 1].min() - 0.5
-y_max = X[:, 1].max() + 0.5
-
-xx, yy = np.meshgrid(np.linspace(x_min, x_max, 30), np.linspace(y_min, y_max, 30))
-Z = model.predict_proba(np.c_[xx.ravel(), yy.ravel()])
-Z1 = Z[:, 1].reshape(xx.shape)
-plt.contour(xx, yy, -Z1, [-0.5], colors="k")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-'''
-from sklearn.naive_bayes import MultinomialNB  # 多項單純貝氏分類器
-
-# 6個row的訓練資料
-X_train = [
-    [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
-    [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1],
-]
-# 6個row的訓練目標
-y_train = [1, 1, 1, 0, 0, 0]
-
-model = MultinomialNB()  # 多項單純貝氏分類器
-
-model.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = model.predict([[0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0]])  # 預測.predict
-print("預測結果 :\n", y_pred, sep="")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

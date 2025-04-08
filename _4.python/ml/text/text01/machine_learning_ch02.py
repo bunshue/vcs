@@ -91,13 +91,15 @@ def metrics_result(actual, predict):
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # corpus_segment.py
 
 import jieba
 
 corpus_path = "train_corpus_small/"  # 未分词分类语料库路径
-seg_path = "tmp_train_corpus_seg/"  # 分词后分类语料库路径
+seg_path = "train_corpus_small_after/"  # 分词后分类语料库路径
+print('分詞前資料夾 :', corpus_path)
+print('分詞後資料夾 :', seg_path)
 
 catelist = os.listdir(corpus_path)  # 获取corpus_path下的所有子目录
 print(catelist)
@@ -119,258 +121,6 @@ for mydir in catelist:
         savefile(seg_dir + file_path, " ".join(content_seg))  # 将处理后的文件保存到分词后语料目录
 
 print("中文语料分词结束！！！")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-'''
-# kNN.py
-
-import operator
-
-
-def createDataSet():
-    group = np.array([[1.0, 1.1], [1.0, 1.0], [0, 0], [0, 0.1]])
-    labels = ["A", "A", "B", "B"]
-    return group, labels
-
-
-# 夹角余弦距离公式
-def cosdist(vector1, vector2):
-    Lv1 = sqrt(vector1 * vector1.T)
-    Lv2 = sqrt(vector2 * vector2.T)
-    return vector1 * vector2.T / (Lv1 * Lv2)
-
-
-# kNN分类器
-# 测试集：inX
-# 训练集：dataSet
-# 类别标签：labels
-# k:k个邻居数
-def classify1(testdata, dataSet, labels, k):
-    # 返回样本集的行数
-    dataSetSize = dataSet.shape[0]
-    # 计算测试集与训练集之间的距离：标准欧氏距离
-    # 1.计算测试项与训练集各项的差
-    diffMat = np.tile(testdata, (dataSetSize, 1)) - dataSet
-    # 2.计算差的平方和
-    sqDiffMat = diffMat**2
-    # 3.按列求和
-    sqDistances = sqDiffMat.sum(axis=1)
-    # 4.生成标准化欧氏距离
-    distances = sqDistances**0.5
-    print(distances)
-    # 5.根据生成的欧氏距离大小排序,结果为索引号
-    sortedDistIndicies = distances.argsort()
-    classCount = {}
-    # 获取欧氏距离的前三项作为参考项
-    for i in range(k):  # i = 0~(k-1)
-        # 按序号顺序返回样本集对应的类别标签
-        voteIlabel = labels[sortedDistIndicies[i]]
-        # 为字典classCount赋值,相同key，其value加1
-        # key:voteIlabel，value: 符合voteIlabel标签的训练集数
-        classCount[voteIlabel] = classCount.get(voteIlabel, 0) + 1
-    # 对分类字典classCount按value重新排序
-    # sorted(data.items(), key=operator.itemgetter(1), reverse=True)
-    # 该句是按字典值排序的固定用法
-    # classCount.items()：字典迭代器函数
-    # key：排序参数；operator.itemgetter(1)：多级排序
-    sortedClassCount = sorted(
-        classCount.items(), key=operator.itemgetter(1), reverse=True
-    )
-    # 返回序最高的一项
-    return sortedClassCount[0][0]
-
-
-k = 3
-testdata = [0.2, 0.2]
-dataSet, labels = createDataSet()
-
-# KNN 分類結果
-print(classify1(testdata, dataSet, labels, k))
-
-idx = 0
-for point in dataSet:
-    print("(" + str(point[0]) + ", " + str(point[1]) + ")")
-    if labels[idx] == "A":
-        plt.scatter(point[0], point[1], c="r", marker="o", s=300, label="A")
-    else:
-        plt.scatter(point[0], point[1], c="g", marker="^", s=300, label="B")
-    idx += 1
-
-plt.scatter(testdata[0], testdata[1], c="b", marker="s", s=300, label="測試資料")
-
-plt.legend()
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# Nbayes.py
-
-
-def loadDataSet():
-    postingList = [
-        ["my", "dog", "has", "flea", "problems", "help", "please"],
-        ["maybe", "not", "take", "him", "to", "dog", "park", "stupid"],
-        ["my", "dalmation", "is", "so", "cute", "I", "love", "him", "my"],
-        ["stop", "posting", "stupid", "worthless", "garbage"],
-        ["mr", "licks", "ate", "my", "steak", "how", "to", "stop", "him"],
-        ["quit", "buying", "worthless", "dog", "food", "stupid"],
-    ]
-    classVec = [0, 1, 0, 1, 0, 1]  # 1 is abusive, 0 not
-    return postingList, classVec
-
-
-class NBayes(object):
-    def __init__(self):
-        self.vocabulary = []  # 词典
-        self.idf = 0  # 词典的idf权值向量
-        self.tf = 0  # 训练集的权值矩阵
-        self.tdm = 0  # P(x|yi)
-        self.Pcates = {}  # P(yi)--是个类别字典
-        self.labels = []  # 对应每个文本的分类，是个外部导入的列表
-        self.doclength = 0  # 训练集文本数
-        self.vocablen = 0  # 词典词长
-        self.testset = 0  # 测试集
-
-    # 	加载训练集并生成词典，以及tf, idf值
-    def train_set(self, trainset, classVec):
-        self.cate_prob(classVec)  # 计算每个分类在数据集中的概率：P(yi)
-        self.doclength = len(trainset)
-        tempset = set()
-        [tempset.add(word) for doc in trainset for word in doc]  # 生成词典
-        self.vocabulary = list(tempset)
-        self.vocablen = len(self.vocabulary)
-        self.calc_wordfreq(trainset)
-        # self.calc_tfidf(trainset)  # 生成tf-idf权值
-        self.build_tdm()  # 按分类累计向量空间的每维值：P(x|yi)
-
-    # 生成 tf-idf
-    def calc_tfidf(self, trainset):
-        self.idf = np.zeros([1, self.vocablen])
-        self.tf = np.zeros([self.doclength, self.vocablen])
-        for idx in range(self.doclength):
-            for word in trainset[idx]:
-                self.tf[idx, self.vocabulary.index(word)] += 1
-            # 消除不同句长导致的偏差
-            self.tf[idx] = self.tf[idx] / float(len(trainset[idx]))
-            for signleword in set(trainset[idx]):
-                self.idf[0, self.vocabulary.index(signleword)] += 1
-        self.idf = np.log(float(self.doclength) / self.idf)
-        self.tf = np.multiply(self.tf, self.idf)  # 矩阵与向量的点乘
-
-    # 生成普通的词频向量
-    def calc_wordfreq(self, trainset):
-        self.idf = np.zeros([1, self.vocablen])  # 1*词典数
-        self.tf = np.zeros([self.doclength, self.vocablen])  # 训练集文件数*词典数
-        for idx in range(self.doclength):  # 遍历所有的文本
-            for word in trainset[idx]:  # 遍历文本中的每个词
-                self.tf[idx, self.vocabulary.index(word)] += 1  # 找到文本的词在字典中的位置+1
-            for signleword in set(trainset[idx]):
-                self.idf[0, self.vocabulary.index(signleword)] += 1
-
-    # 计算每个分类在数据集中的概率：P(yi)
-    def cate_prob(self, classVec):
-        self.labels = classVec
-        labeltemps = set(self.labels)  # 获取全部分类
-        for labeltemp in labeltemps:
-            # 统计列表中重复的值：self.labels.count(labeltemp)
-            self.Pcates[labeltemp] = float(self.labels.count(labeltemp)) / float(
-                len(self.labels)
-            )
-
-    # 按分类累计向量空间的每维值：P(x|yi)
-    def build_tdm(self):
-        self.tdm = np.zeros([len(self.Pcates), self.vocablen])  # 类别行*词典列
-        sumlist = np.zeros([len(self.Pcates), 1])  # 统计每个分类的总值
-        for idx in range(self.doclength):
-            self.tdm[self.labels[idx]] += self.tf[idx]  # 将同一类别的词向量空间值加总
-            sumlist[self.labels[idx]] = np.sum(
-                self.tdm[self.labels[idx]]
-            )  # 统计每个分类的总值--是个标量
-        self.tdm = self.tdm / sumlist  # P(x|yi)
-
-    # 测试集映射到当前词典
-    def map2vocab(self, testdata):
-        self.testset = np.zeros([1, self.vocablen])
-        for word in testdata:
-            self.testset[0, self.vocabulary.index(word)] += 1
-
-    # 输出分类类别
-    def predict(self, testset):
-        if np.shape(testset)[1] != self.vocablen:
-            print("输入错误")
-            exit(0)
-        predvalue = 0
-        predclass = ""
-        for tdm_vect, keyclass in zip(self.tdm, self.Pcates):
-            # P(x|yi)P(yi)
-            temp = np.sum(testset * tdm_vect * self.Pcates[keyclass])
-            if temp > predvalue:
-                predvalue = temp
-                predclass = keyclass
-        return predclass
-
-
-# kNN2.py
-
-import operator
-
-
-# 夹角余弦距离公式
-def cosdist(vector1, vector2):
-    return np.dot(vector1, vector2) / (
-        np.linalg.norm(vector1) * np.linalg.norm(vector2)
-    )
-
-
-# kNN分类器
-# 测试集：testdata
-# 训练集：trainSet
-# 类别标签：listClasses
-# k:k个邻居数
-def classify2(testdata, trainSet, listClasses, k):
-    # 返回样本集的行数
-    dataSetSize = trainSet.shape[0]
-    # 计算测试集与训练集之间的距离：夹角余弦
-    distances = np.array(np.zeros(dataSetSize))
-    for idx in range(dataSetSize):
-        distances[idx] = cosdist(testdata, trainSet[idx])
-    # 5.根据生成的夹角余弦按从大到小排序,结果为索引号
-    sortedDistIndicies = np.argsort(-distances)
-    classCount = {}
-    # 获取角度最小的前三项作为参考项
-    for i in range(k):  # i = 0~(k-1)
-        # 按序号顺序返回样本集对应的类别标签
-        voteIlabel = listClasses[sortedDistIndicies[i]]
-        # 为字典classCount赋值,相同key，其value加1
-        # key:voteIlabel，value: 符合voteIlabel标签的训练集数
-        classCount[voteIlabel] = classCount.get(voteIlabel, 0) + 1
-    # 对分类字典classCount按value重新排序
-    # sorted(data.items(), key=operator.itemgetter(1), reverse=True)
-    # 该句是按字典值排序的固定用法
-    # classCount.items()：字典迭代器函数
-    # key：排序参数；operator.itemgetter(1)：多级排序
-    sortedClassCount = sorted(
-        classCount.items(), key=operator.itemgetter(1), reverse=True
-    )
-    # 返回序最高的一项
-    return sortedClassCount[0][0]
-
-
-k = 3
-# testdata=[0.2,0.2]
-# dataSet,labels = createDataSet()
-# print classify2(mat(testdata), mat(dataSet), labels, k)
-dataSet, listClasses = loadDataSet()
-
-nb = NBayes()
-nb.train_set(dataSet, listClasses)
-print(classify2(nb.tf[3], nb.tf, listClasses, k))
-
-nb.map2vocab(dataSet[3])
-
-print(nb.predict(nb.testset))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -399,6 +149,7 @@ test_set = readbunchobj(testpath)
 # alpha:0.001 alpha越小，迭代次数越多，精度越高
 clf = MultinomialNB(alpha=0.001).fit(train_set.tdm, train_set.label)  # 多項單純貝氏分類器
 
+""" NG
 # 预测分类结果
 predicted = clf.predict(test_set.tdm)
 total = len(predicted)
@@ -418,13 +169,11 @@ print()
 print("predicted")
 print(predicted)
 print()
+"""
 
 """ 計算分類精度 NG
 metrics_result(test_set.label, predicted)
 """
-
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -441,7 +190,9 @@ from sklearn.datasets._base import Bunch
 bunch = Bunch(target_name=[], label=[], filenames=[], contents=[])
 
 wordbag_path = "train_word_bag/train_set.dat"  # 未分词分类语料库路径
-seg_path = "tmp_train_corpus_seg/"  # 分词后分类语料库路径
+seg_path = "train_corpus_small_after/"  # 分词后分类语料库路径
+print('分詞前資料夾 :', wordbag_path)
+print('分詞後資料夾 :', seg_path)
 
 catelist = os.listdir(seg_path)  # 获取seg_path下的所有子目录
 bunch.target_name.extend(catelist)
@@ -456,6 +207,7 @@ for mydir in catelist:
         bunch.contents.append(readfile(fullname).strip())  # 读取文件内容
 
 # 对象持久化
+wordbag_path = "train_word_bag/train_set_tmp.dat"  # 未分词分类语料库路径
 file_obj = open(wordbag_path, "wb")
 pickle.dump(bunch, file_obj)
 file_obj.close()
@@ -535,6 +287,8 @@ bunch = Bunch(target_name=[], label=[], filenames=[], contents=[])
 
 wordbag_path = "test_word_bag/test_set.dat"  # 未分词分类语料库路径
 seg_path = "test_corpus_seg/"  # 分词后分类语料库路径
+print('分詞前資料夾 :', wordbag_path)
+print('分詞後資料夾 :', seg_path)
 
 catelist = os.listdir(seg_path)  # 获取seg_path下的所有子目录
 bunch.target_name.extend(catelist)
@@ -571,7 +325,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 
 # 计算训练语料的tfidf权值并持久化为词袋
-
 
 # 1. 读取停用词表
 stopword_path = "train_word_bag/hlt_stop_words.txt"

@@ -1,4 +1,7 @@
+import sys
 import operator
+
+print("------------------------------------------------------------")  # 60個
 
 cal_dict = {
     "加": operator.add,
@@ -17,10 +20,7 @@ def calculator(x, operator, y):
 
 print(calculator(10, "整除", 3))
 
-
 print("------------------------------------------------------------")  # 60個
-
-import operator
 
 print("統計字數")
 
@@ -52,8 +52,6 @@ rows = [
     {"ename": "rabbit", "cname": "兔", "weight": 8},
 ]
 
-import operator
-
 rows_by_ename = sorted(rows, key=operator.itemgetter("ename"))
 rows_by_weight = sorted(rows, key=operator.itemgetter("weight"))
 print(rows_by_ename)
@@ -64,10 +62,7 @@ print(rows_by_cename)
 
 print("------------------------------------------------------------")  # 60個
 
-
 # 用排版格式輸出容器資料
-
-import operator
 
 
 def sorted_grades(grades):
@@ -92,8 +87,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 尋找單字中重複最多次的字母
 
-import operator
-
 
 def most_repeated_letter(word):
     letters = list(set(word))
@@ -110,8 +103,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 簡易前序式計算機
 
-import operator
-
 
 def prefix_cal(to_solve):
     operation = {
@@ -127,9 +118,52 @@ def prefix_cal(to_solve):
 print(prefix_cal("+ 2 3"))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("operator.itemgetter用在排序上")
+
+# 完整的動物字典
+animals = {
+    "mouse": "鼠",
+    "ox": "牛",
+    "tiger": "虎",
+    "rabbit": "兔",
+    "dragon": "龍",
+    "snake": "蛇",
+    "horse": "馬",
+    "goat": "羊",
+    "monkey": "猴",
+    "chicken": "雞",
+    "dog": "狗",
+    "pig": "豬",
+}
+
+sorted_animals = sorted(animals.items(), key=operator.itemgetter(1), reverse=True)
+print(sorted_animals)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# operator.itemgetter 定義取位函數
+
+animals = ["鼠", "牛", "虎", "兔", "龍"]  # 串列
+get_function = operator.itemgetter(2)  # 定义函数get，获取对象的第2个域的值
+cc = get_function(animals)
+print(cc)
+
+get_function = operator.itemgetter(2, 3, 4)  # 定义函数get，获取对象的第2, 3, 4个域的值
+cc = get_function(animals)
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
 
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個

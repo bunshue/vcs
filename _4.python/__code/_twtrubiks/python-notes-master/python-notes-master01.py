@@ -58,7 +58,7 @@ if __name__ == "__main__":
     print(InventoryItem("twtrubiks", 100, 2))
 
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\__call__tutorial.py
+# __call__tutorial.py
 
 
 class A:
@@ -82,7 +82,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\__getattr__tutorial.py
+# __getattr__tutorial.py
 
 """
 ref
@@ -115,7 +115,7 @@ print(getattr(a, "name"))  # not trigger __getattr__
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\__getitem__tutorial.py
+# __getitem__tutorial.py
 
 """
 ref
@@ -146,7 +146,7 @@ print(a["c"])
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\__iter__tutorial.py
+# __iter__tutorial.py
 
 
 class Product(object):
@@ -171,7 +171,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\__len__tutorial.py
+# __len__tutorial.py
 
 
 class Product(object):
@@ -196,7 +196,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\__new__tutorial.py
+# __new__tutorial.py
 
 
 class A:
@@ -253,8 +253,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\assert_tutorial.py
+# assert_tutorial.py
 
 
 def ex1():
@@ -279,7 +278,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\attribute_obj.py
+# attribute_obj.py
 
 
 class Person(object):
@@ -312,7 +311,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\built-in-functions_tutorial.py
+# built-in-functions_tutorial.py
 
 # Built-in Functions
 # ref. https://docs.python.org/3.6/library/functions.html
@@ -380,7 +379,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\bytesio_tutorial.py
+# bytesio_tutorial.py
 
 # https://docs.python.org/3/library/io.html#binary-i-o
 
@@ -415,7 +414,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\check_is_in_list.py
+# check_is_in_list.py
 
 if __name__ == "__main__":
     # check is target in list
@@ -427,7 +426,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\classmethod_tutorial.py
+# classmethod_tutorial.py
 
 # ref. https://www.programiz.com/python-programming/methods/built-in/classmethod
 
@@ -495,7 +494,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\compare_list_difference.py
+# compare_list_difference.py
 
 # compare_list_difference
 
@@ -522,7 +521,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\context_manager_tutorial.py
+# context_manager_tutorial.py
 
 from contextlib import contextmanager
 
@@ -600,7 +599,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\counter_tutorial.py
+# counter_tutorial.py
 
 from collections import Counter
 
@@ -656,7 +655,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\datetime_tutorial.py
+# datetime_tutorial.py
 
 from datetime import datetime, date, timedelta, time as dtime
 from calendar import monthrange
@@ -724,7 +723,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\decimal_tutorial.py
+# decimal_tutorial.py
 
 # ref.
 # https://docs.python.org/3.9/library/decimal.html
@@ -839,7 +838,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\decorator_inspect.py
+# decorator_inspect.py
 
 
 import inspect
@@ -891,7 +890,7 @@ AutoVacuum()._run_vacuum_cleaner()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\decorator_lib.py
+# decorator_lib.py
 
 from functools import wraps
 from decorator import decorator
@@ -935,7 +934,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\decorator_tutorial.py
+# decorator_tutorial.py
 
 from functools import wraps
 
@@ -1051,7 +1050,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\defaultdict_tutorial.py
+# defaultdict_tutorial.py
 
 # defaultdict means that if a key is not found in the dictionary,
 # then instead of a KeyError being thrown, a new entry is created.
@@ -1087,7 +1086,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\dict.fromkeys_tutorial.py
+# dict.fromkeys_tutorial.py
 
 if __name__ == "__main__":
     """
@@ -1102,7 +1101,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\dictionary_get.py
+# dictionary_get.py
 
 # dict.get(key, default=None)
 
@@ -1142,7 +1141,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\dictionary_update.py
+# dictionary_update.py
 
 # dict.update([other])
 
@@ -1169,7 +1168,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\dictionary_using_items.py
+# dictionary_using_items.py
 
 if __name__ == "__main__":
     # common way
@@ -1186,7 +1185,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\division_operators_tutorial.py
+# division_operators_tutorial.py
 
 # division operators
 # python3
@@ -1204,7 +1203,7 @@ print("5//5:", 5 // 5)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\eafp.py
+# eafp.py
 
 # LBYL: Look Before You Leap
 # EAFP: Easier to Ask for Forgiveness than Permission -> python
@@ -1223,7 +1222,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\Enum_tutorial.py
+# Enum_tutorial.py
 
 from enum import Enum
 
@@ -1263,7 +1262,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\enumerate_tutorial.py
+# enumerate_tutorial.py
 
 if __name__ == "__main__":
     # The enumerate() method adds counter to an iterable and returns it (the enumerate object).
@@ -1274,7 +1273,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\escape_tutorial.py
+# escape_tutorial.py
 
 # ref. https://docs.python.org/3/library/html.html
 import html.parser
@@ -1289,7 +1288,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\filter.py
+# filter.py
 
 
 def fn(x):
@@ -1321,7 +1320,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\format.py
+# format.py
 
 from datetime import datetime
 
@@ -1364,7 +1363,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\freezegun_tutorial.py
+# freezegun_tutorial.py
 
 # freezegun (https://github.com/spulec/freezegun)
 # pip3 install freezegun
@@ -1421,7 +1420,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\function_default.py
+# function_default.py
 
 # REF.
 # http://blog.thedigitalcatonline.com/blog/2015/02/11/default-arguments-in-python/#.WPg_61OGPwc
@@ -1444,7 +1443,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\functools_partial_tutorial.py
+# functools_partial_tutorial.py
 
 from functools import partial
 
@@ -1483,7 +1482,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\groupby_tutorial.py
+# groupby_tutorial.py
 
 from itertools import groupby
 
@@ -1516,7 +1515,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\groupby_tutorial_find_consecutive_numbers.py
+# groupby_tutorial_find_consecutive_numbers.py
 
 # ref. https://docs.python.org/3.0/library/itertools.html#examples
 from itertools import groupby
@@ -1544,7 +1543,7 @@ for key, group in groupby(enumerate(data), lambda x: x[0] - x[1]):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\is_integer_tutorial.py
+# is_integer_tutorial.py
 
 # ref. https://docs.python.org/3.6/library/stdtypes.html#float.is_integer
 
@@ -1584,7 +1583,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\isdigit.py
+# isdigit.py
 
 if __name__ == "__main__":
     # The isdigit() method returns True if all characters in a string are digits. If not, it returns False.
@@ -1599,7 +1598,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\isinstance.py
+# isinstance.py
 
 if __name__ == "__main__":
     # The isinstance() function checks if the object (first argument)
@@ -1632,7 +1631,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\itemgetter_tutorial.py
+# itemgetter_tutorial.py
 
 # ref. https://docs.python.org/3/library/operator.html#operator.itemgetter
 
@@ -1754,7 +1753,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\itertools_islice_tutorial.py
+# itertools_islice_tutorial.py
 
 # https://docs.python.org/3.7/library/itertools.html#itertools.islice
 from itertools import islice
@@ -1780,7 +1779,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\itertools_tee_tutorial.py
+# itertools_tee_tutorial.py
 
 # https://docs.python.org/3.7/library/itertools.html#itertools.tee
 from itertools import tee
@@ -1802,7 +1801,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\itertools_tutorial.py
+# itertools_tutorial.py
 
 import itertools
 import operator
@@ -1935,7 +1934,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\join.py
+# join.py
 
 if __name__ == "__main__":
     # The join() is a string method which returns a string concatenated with the elements of an iterable.
@@ -1981,7 +1980,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\lambda.py
+# lambda.py
 
 
 def show_max(m, n):
@@ -2001,7 +2000,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\list_tutorial.py
+# list_tutorial.py
 
 if __name__ == "__main__":
     data_list = ["a", "e", "i", "o", "i", "u"]
@@ -2050,7 +2049,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\map_tutorial.py
+# map_tutorial.py
 
 if __name__ == "__main__":
     # The map() function applies a given function to each item of an iterable (list, tuple etc.)
@@ -2091,7 +2090,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\MappingProxyType_tutorial.py
+# MappingProxyType_tutorial.py
 
 # ref.
 # https://docs.python.org/3/library/types.html#types.MappingProxyType
@@ -2140,7 +2139,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\methodcaller_tutorial.py
+# methodcaller_tutorial.py
 
 # ref.
 # https://docs.python.org/3/library/operator.html#operator.methodcaller
@@ -2187,7 +2186,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\namedtuple_tutorial.py
+# namedtuple_tutorial.py
 
 from collections import namedtuple
 
@@ -2229,7 +2228,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\nested_loop_tutorial.py
+# nested_loop_tutorial.py
 
 if __name__ == "__main__":
     """
@@ -2284,7 +2283,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\parse_dateutil.py
+# parse_dateutil.py
 
 from dateutil.parser import parse
 from dateutil.relativedelta import relativedelta
@@ -2309,7 +2308,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\pathlib_tutorial.py
+# pathlib_tutorial.py
 
 from pathlib import Path
 
@@ -2488,7 +2487,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\queue_tutorial.py
+# queue_tutorial.py
 
 from queue import Queue
 
@@ -2567,7 +2566,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\raise_an_exception_from_function_call.py
+# raise_an_exception_from_function_call.py
 
 # If a function that is supposed to return a given type (e.g. list, tuple, dict)
 # suddenly returns something else (e.g. None) the caller of that function will always
@@ -2910,7 +2909,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\remove_trailing_zeros_tutorial.py
+# remove_trailing_zeros_tutorial.py
 
 # ref. https://docs.python.org/3.6/library/decimal.html
 
@@ -2958,7 +2957,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\repr_tutorial.py
+# repr_tutorial.py
 
 # repr
 # Return a string representing the object as the developer wants to see it.
@@ -2986,7 +2985,7 @@ print("repr(a)", repr(a))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\rjust_ljust_tutorial.py
+# rjust_ljust_tutorial.py
 
 """
 https://docs.python.org/3/library/stdtypes.html#str.rjust
@@ -3000,7 +2999,7 @@ print(my_str.ljust(12, "7"))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\set_tutorial.py
+# set_tutorial.py
 
 if __name__ == "__main__":
     """
@@ -3039,7 +3038,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\setdefault_tutorial.py
+# setdefault_tutorial.py
 
 # The method setdefault() is similar to get(),
 # but will set dict[key]=default if key is not already in dict.
@@ -3151,7 +3150,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\stringio_tutorial.py
+# stringio_tutorial.py
 
 # https://docs.python.org/3/library/io.html#io.StringIO
 
@@ -3193,7 +3192,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\strtobool_tutorial.py
+# strtobool_tutorial.py
 
 from distutils.util import strtobool
 
@@ -3277,7 +3276,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\yield_tutorial.py
+# yield_tutorial.py
 
 
 # yield occurs and the generator pauses.
@@ -3359,7 +3358,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\zip_tutorial.py
+# zip_tutorial.py
 
 # The zip() function take iterables (can be zero or more),
 # makes iterator that aggregates elements based on the iterables passed, and returns an iterator of tuples.
@@ -3413,10 +3412,8 @@ pickle.loads(payload)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\__str__tutorial.py
-
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\convert_class_object_to_json.py
+# __str__tutorial.py
+# convert_class_object_to_json.py
 
 import json
 
@@ -3438,7 +3435,7 @@ print(json_str)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\convert_json_to_class_object.py
+# convert_json_to_class_object.py
 
 import json
 
@@ -3469,7 +3466,7 @@ print(stock_obj)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\copy_tutorial.py
+# copy_tutorial.py
 
 
 import json
@@ -3505,13 +3502,13 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\kwargs.py
+# kwargs.py
 
 # You would use *args when you're not sure how many arguments might be passed to
 # your function, i.e. it allows you pass an arbitrary number of arguments to your function
 
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\logging_tutorial.py
+# logging_tutorial.py
 
 import logging
 
@@ -3584,7 +3581,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\loop_if_else_break.py
+# loop_if_else_break.py
 
 import pickle
 
@@ -3607,7 +3604,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_twtrubiks\python-notes-master\property_decorator.py
+# property_decorator.py
 
 
 from random import choice, sample

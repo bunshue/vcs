@@ -930,6 +930,7 @@ import operator
 
 
 def classify(inX, dataSet, labels, k):
+    # print('do classify')
     # S=np.cov(dataSet.T)   #協方差矩陣，爲計算馬氏距離
     # SI = np.linalg.inv(S)  #協方差矩陣的逆矩陣
     # distances = np.array(distance.cdist(dataSet, [inX], 'mahalanobis', VI=SI)).reshape(-1)
@@ -945,7 +946,11 @@ def classify(inX, dataSet, labels, k):
     return sortedClassCount[0][0]  # 取最多的分類
 
 
+print(x_test)
+print(len(x_test))
+
 ret = [classify(x_test[i], x_train, y_train, 5) for i in range(len(x_test))]
+print(ret)
 
 print(f"計算準確率 : {accuracy_score(y_test, ret)*100:.2f}%")
 
@@ -973,14 +978,9 @@ print(max1, min1)
 cc = (data - min1) / (max1 - min1)
 print(cc)
 
-# 載入資料集
-
 # X, y = datasets.load_iris(return_X_y=True)
 X, y = datasets.load_breast_cancer(return_X_y=True)
 
-# 3. 不須進行特徵工程
-
-# 4. 資料分割
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -988,11 +988,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 # 查看陣列維度
 cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
 print(cc)
-
 # ((455, 30), (114, 30), (455,), (114,))
 
 # 特徵縮放
-
 scaler = MinMaxScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
@@ -1056,14 +1054,8 @@ print(mean1, std1)
 cc = (data - mean1) / std1
 print(cc)
 
-# 載入資料集
-
 # X, y = datasets.load_iris(return_X_y=True)
 X, y = datasets.load_breast_cancer(return_X_y=True)
-
-# 3. 不須進行特徵工程
-
-# 4. 資料分割
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -1079,17 +1071,9 @@ X_test_std = scaler.transform(X_test)
 
 clf = LogisticRegression()
 
-# 6. 模型訓練
-
 clf.fit(X_train_std, y_train)
-"""
-LogisticRegression()
 
-In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook.
-On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.
-"""
-
-# 7. 模型計分
+# 模型計分
 
 y_pred = clf.predict(X_test_std)
 print(y_pred)
@@ -1144,21 +1128,15 @@ print("------------------------------------------------------------")  # 60個
 # X, y = datasets.load_iris(return_X_y=True)
 X, y = datasets.load_breast_cancer(return_X_y=True)
 
-# 3. 不須進行特徵工程
-
-# 4. 資料分割
-
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 查看陣列維度
 cc = X_train.shape, X_test.shape, y_train.shape, y_test.shape
 print(cc)
-
 # ((455, 30), (114, 30), (455,), (114,))
 
 # 特徵縮放
-
 scaler = MaxAbsScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
@@ -1167,13 +1145,7 @@ clf = LogisticRegression()
 
 clf.fit(X_train_std, y_train)
 
-"""
-LogisticRegression()
-
-In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook.
-On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.
-"""
-# 7. 模型計分
+# 模型計分
 
 y_pred = clf.predict(X_test_std)
 print(y_pred)
@@ -1201,10 +1173,6 @@ print("------------------------------------------------------------")  # 60個
 
 # X, y = datasets.load_iris(return_X_y=True)
 X, y = datasets.load_breast_cancer(return_X_y=True)
-
-# 3. 不須進行特徵工程
-
-# 4. 資料分割
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -1416,7 +1384,7 @@ K折分數: [1.         1.         0.91666667 0.91666667 0.90909091 1.
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 10_03_bagging_classifier
+# bagging_classifier
 
 # Bagging演算法測試
 
@@ -1576,7 +1544,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 10_04_adaboost_from_scratch
+# adaboost_from_scratch
 
 # 自行開發Adaboost
 

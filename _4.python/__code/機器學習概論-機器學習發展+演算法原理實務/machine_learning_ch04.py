@@ -324,7 +324,6 @@ print("------------------------------------------------------------")  # 60個
 # kMeans_test.py
 
 from numpy import *
-import operator
 
 # 从文件构建的数据集
 dataMat = file2matrix("data04/4k2_far.txt", "\t")
@@ -624,7 +623,6 @@ print("------------------------------------------------------------")  # 60個
 # Filename : testRecomm01.py
 
 from numpy import *
-import operator
 
 eps = 1.0e-6
 # 加载修正后数据
@@ -660,7 +658,6 @@ print("------------------------------------------------------------")  # 60個
 # testRecomm01.py
 
 from numpy import *
-import operator
 
 eps = 1.0e-6
 # 加载修正后数据
@@ -684,7 +681,6 @@ print("------------------------------------------------------------")  # 60個
 # testRecommsvd.py
 
 from numpy import *
-import operator
 
 eps = 1.0e-6
 
@@ -730,7 +726,6 @@ print("------------------------------------------------------------")  # 60個
 # testRecommsvd2.py
 
 from numpy import *
-import operator
 
 # 加载修正后数据
 A = mat(

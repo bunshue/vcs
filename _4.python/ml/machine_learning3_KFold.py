@@ -34,13 +34,13 @@ import sklearn
 import sklearn.linear_model
 from sklearn import datasets
 from sklearn import preprocessing
+from sklearn.model_selection import KFold
+from sklearn.model_selection import StratifiedKFold
+from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_validate
 from sklearn.model_selection import PredefinedSplit
-from sklearn.model_selection import KFold
-from sklearn.model_selection import StratifiedKFold
-from sklearn.model_selection import GridSearchCV
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import r2_score  # R-Squared擬合度, 決定係數
@@ -450,6 +450,16 @@ print(
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+X = np.array([[1, 2], [3, 4], [1, 2], [3, 4]])
+y = np.array([1, 2, 3, 4])
+
+kf = KFold(n_splits=2)
+kf.get_n_splits(X)
+print(kf)
+for train_index, test_index in kf.split(X):
+    print("TRAIN:", train_index, "TEST:", test_index)
+    X_train, X_test = X[train_index], X[test_index]
+    y_train, y_test = y[train_index], y[test_index]
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

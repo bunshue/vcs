@@ -492,6 +492,7 @@ show()
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
 xlim = y_test.max()
 X_train = StandardScaler().fit_transform(X_train)
 X_test = StandardScaler().fit_transform(X_test)
@@ -538,6 +539,7 @@ y = d_reg["Campaign Period Sales"]
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
 X_train = StandardScaler().fit_transform(X_train)
 X_test = StandardScaler().fit_transform(X_test)
 

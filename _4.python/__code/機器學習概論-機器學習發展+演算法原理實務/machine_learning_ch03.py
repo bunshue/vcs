@@ -314,7 +314,6 @@ def createForeCast(tree, testData, modelEval=regTreeEval):
 # 02classReg.py
 
 from numpy import *
-import operator
 import treeExplore
 
 # 主程序
@@ -584,7 +583,6 @@ def grabTree(filename):
 # classify01.py
 
 from numpy import *
-import operator
 from math import log
 import copy
 
