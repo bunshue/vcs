@@ -6,22 +6,22 @@ import copy
 import Untils
 import Boltzmann
 from numpy import *
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 
 dataSet = Untils.loadDataSet("dataSet25.txt")
 cityPosition = mat(dataSet)
-m,n = shape(cityPosition)
-bestx,di = Boltzmann.boltzmann(cityPosition,MAX_ITER = 1000,T0 = 100)
+m, n = shape(cityPosition)
+bestx, di = Boltzmann.boltzmann(cityPosition, MAX_ITER=1000, T0=100)
 
 
 # 优化前城市图,路径图
-Untils.drawScatter(cityPosition,flag=False)
-Untils.drawPath(range(m),cityPosition)
+Untils.drawScatter(cityPosition, flag=False)
+Untils.drawPath(range(m), cityPosition)
 
 # 显示优化后城市图,路径图
-Untils.drawScatter(cityPosition,flag=False)
-Untils.drawPath(bestx,cityPosition,color='b')
+Untils.drawScatter(cityPosition, flag=False)
+Untils.drawPath(bestx, cityPosition, color="b")
 
 # 绘制误差趋势线
-x0 = range(len(di));
-Untils.TrendLine(x0,di)
+x0 = range(len(di))
+Untils.TrendLine(x0, di)

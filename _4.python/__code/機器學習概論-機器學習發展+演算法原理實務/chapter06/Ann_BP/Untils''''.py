@@ -1,10 +1,10 @@
 # -*- coding: UTF-8 -*-
 # Filename : BackPropgation.py
-'''
+"""
 Created on Oct 27, 2010
 Logistic Regression Working Module
 @author: jack zheng
-'''
+"""
 from numpy import *
 import operator
 import matplotlib.pyplot as plt 

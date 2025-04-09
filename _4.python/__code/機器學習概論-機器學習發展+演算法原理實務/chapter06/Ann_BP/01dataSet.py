@@ -1,14 +1,14 @@
 # -*- coding: GBK -*-
 # Filename : 01dataSet.py
 
-import numpy as np 
+import numpy as np
 import operator
 import Untils
 import BackPropgation
 from numpy import *
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 
-dataMat,classLabels = Untils.loadDataSet("student.txt")
+dataMat, classLabels = Untils.loadDataSet("student.txt")
 
 # 绘制图形：二维散点,无分类
 # Untils.drawScatter(dataMat)
