@@ -1,7 +1,4 @@
-﻿# -*- coding: utf-8 -*-
-# Filename : dataSet.py
-
-import numpy as np 
+﻿import numpy as np 
 import operator
 import Untils
 import Kohonen
@@ -11,12 +8,12 @@ import matplotlib.pyplot as plt
 # 加载坐标数据文件
 dataSet = Untils.loadDataSet("dataset.txt");
 dataMat = mat(dataSet)
-# print dataMat
+print(dataMat)
 normDataset = Kohonen.mapMinMax(dataMat)
-# print normDataset
+print(normDataset)
 
 # 生成int随机数，不包含高值
-# print random.randint(0,30)
+print(random.randint(0,30))
 
 # 计算向量中最小值的索引值
 xx = mat([1,9])
@@ -28,7 +25,7 @@ jdpx = mat([[0,0],[0,1],[1,0],[1,1]])
 d1 = ceil(minIndx/4)
 d2 = mod(minIndx,4)
 mydist = Kohonen.distM(mat([d1,d2]),jdpx.transpose())
-# print mydist
+print(mydist)
 
 
 

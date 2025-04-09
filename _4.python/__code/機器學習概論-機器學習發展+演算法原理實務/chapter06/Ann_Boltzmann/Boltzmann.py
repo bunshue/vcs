@@ -1,7 +1,4 @@
-﻿# -*- coding: utf-8 -*-
-# Filename : Boltzmann.py
-
-import operator
+﻿import operator
 import Untils
 from numpy import *
 import copy
@@ -103,7 +100,7 @@ def boltzmann(cityPosition,MAX_ITER = 2000,T0 = 1000,Lambda = 0.97):
   bestd = min(di) 
   indx = argmin(di)
   bestx = xx[indx]
-  print "循环迭代",k,"次"
-  print "最优解:",bestd
-  print "最佳路线:",bestx	
+  print("循环迭代",k,"次")
+  print("最优解:",bestd)
+  print("最佳路线:",bestx)
   return bestx,di	

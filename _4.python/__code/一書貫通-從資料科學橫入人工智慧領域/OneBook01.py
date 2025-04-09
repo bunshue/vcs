@@ -1025,7 +1025,7 @@ print("------------------------------------------------------------")  # 60個
 
 from scipy import stats
 
-orgData = pd.read_csv("data/date_data2.csv")
+orgData = pd.read_csv("data/date_data.csv")
 cc = orgData.describe()
 print(cc)
 

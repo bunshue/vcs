@@ -734,7 +734,7 @@ sns.set_style("whitegrid")
 print("------------------------------")  # 30個
 
 titanic_df = pd.read_csv("data/train.csv")
-test_df = pd.read_csv("data/test.csv")
+test_df = pd.read_csv("data/titanic_test2.csv")
 
 print(titanic_df.head())
 # titanic_df.info()  # 這樣就已經把資料集彙總資訊印出來

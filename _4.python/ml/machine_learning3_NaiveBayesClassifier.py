@@ -313,7 +313,7 @@ print("------------------------------------------------------------")  # 60個
 
 from scipy import stats
 
-orgData = pd.read_csv("data/date_data2.csv")
+orgData = pd.read_csv("data/date_data.csv")
 cc = orgData.describe()
 print(cc)
 
@@ -410,7 +410,7 @@ NB.score(train_data1, train_target1)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-orgData = pd.read_csv("data/date_data2.csv")
+orgData = pd.read_csv("data/date_data.csv")
 # # 朴素贝叶斯
 
 orgData.head()

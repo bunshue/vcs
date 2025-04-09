@@ -191,9 +191,9 @@ def decisionTree(dataSet, labellist, D):
         # 最小值
         rangeMax = dataMat[:, i].max()
         # 最大值
-        print('rangeMax :', rangeMax)
-        print('rangeMin :', rangeMin)
-        print('numSteps :', numSteps) # 10.0
+        print("rangeMax :", rangeMax)
+        print("rangeMin :", rangeMin)
+        print("numSteps :", numSteps)  # 10.0
         stepSize = (rangeMax - rangeMin) / numSteps  # 步长 = (最大值-最小值)/步长数
         for j in range(-1, int(numSteps) + 1):  # 对每个步长数迭代: -1~(numSteps)
             threshVal = rangeMin + float(j) * stepSize  # 计算域值:(最小值+迭代步数*步长数)

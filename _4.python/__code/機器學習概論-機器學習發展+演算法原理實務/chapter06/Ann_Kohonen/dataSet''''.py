@@ -1,7 +1,4 @@
-﻿# -*- coding: utf-8 -*-
-# Filename : dataSet.py
-
-import numpy as np 
+﻿import numpy as np 
 import operator
 import Untils
 import Kohonen
@@ -29,6 +26,3 @@ d1 = ceil(minIndx/4)
 d2 = mod(minIndx,4)
 mydist = Kohonen.distM(mat([d1,d2]),jdpx.transpose())
 # print mydist
-
-
-
