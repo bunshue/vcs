@@ -65,21 +65,18 @@ def file2matrix(path, delimiter):
     # print("content")
     # print(content)
     rowlist = content.splitlines()  # 按行转换为一维表
-    print("rowlist")
-    # print(rowlist)
-    print(len(rowlist))
-    print(type(rowlist))
+    # print("rowlist :", rowlist)
     recordlist = []
     for idx in range(len(rowlist)):
-        # print(idx)
-        recordlist.append(rowlist[idx].split(delimiter))
+        cc = rowlist[idx].split(delimiter)
+        for i in range(len(cc)):
+            cc[i] = float(cc[i])
+        recordlist.append(cc)
     # print(recordlist)
     return np.mat(recordlist)  # 返回转换后的矩阵形式
-    """
     # 逐行遍历 		# 结果按分隔符分割为行向量
-    recordlist = [map(eval, row.split(delimiter)) for row in rowlist if row.strip()]
-    return np.mat(recordlist)  # 返回转换后的矩阵形式
-    """
+    # recordlist = [map(eval, row.split(delimiter)) for row in rowlist if row.strip()]
+    # return np.mat(recordlist)  # 返回转换后的矩阵形式
 
 
 def createPlot(inTree):
@@ -96,27 +93,22 @@ def createPlot(inTree):
     show()
 
 
-# def createPlot():
-#     fig = plt.figure(1, facecolor='white')
-#     fig.clf()
-#     createPlot.ax1 = plt.subplot(111, frameon=False) #ticks for demo puropses
-#     plotNode('a decision node', (0.5, 0.1), (0.1, 0.5), decisionNode)
-#     plotNode('a leaf node', (0.8, 0.1), (0.3, 0.8), leafNode)
-#     show()
+""" old
+def createPlot():
+    fig = plt.figure(1, facecolor='white')
+    fig.clf()
+    createPlot.ax1 = plt.subplot(111, frameon=False) #ticks for demo puropses
+    plotNode('a decision node', (0.5, 0.1), (0.1, 0.5), decisionNode)
+    plotNode('a leaf node', (0.8, 0.1), (0.3, 0.8), leafNode)
+    show()
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# common_libs.py
+print("common_libs.py")
 
 # import scipy.spatial.distance.cdist as dist
-
-
-def savefile(savepath, content):
-    fp = open(savepath, "wb")
-    fp.write(content)
-    fp.close()
-
 
 # 欧氏距离
 eps = 1.0e-6
@@ -132,9 +124,11 @@ def distCorrcoef(vecA, vecB):
 
 
 # Jaccard距离
-# def distJaccard(vecA, vecB):
-# 	temp = mat([array(vecA.tolist()[0]),array(vecB.tolist()[0])])
-# 	return dist.pdist(temp,'jaccard')
+def distJaccard(vecA, vecB):
+    temp = np.mat([np.array(vecA.tolist()[0]), np.array(vecB.tolist()[0])])
+    return dist.pdist(temp, "jaccard")
+
+
 # 余弦相似度
 def cosSim(vecA, vecB):
     return (
@@ -142,8 +136,14 @@ def cosSim(vecA, vecB):
     )[0, 0]
 
 
+# Jaccard距离
+# def distJaccard(vecA, vecB):
+# 	temp = mat([array(vecA.tolist()[0]),array(vecB.tolist()[0])])
+# 	return dist.pdist(temp,'jaccard')
+
+
 # 绘制散点图
-def drawScatter(plt, mydata, size=20, color="blue", mrkr="o"):
+def drawScatter1(plt, mydata, size=20, color="blue", mrkr="o"):
     m, n = np.shape(mydata)
     if m > n and m > 2:
         plt.scatter(mydata.T[0], mydata.T[1], s=size, c=color, marker=mrkr)
@@ -151,12 +151,31 @@ def drawScatter(plt, mydata, size=20, color="blue", mrkr="o"):
         plt.scatter(mydata[0], mydata[1], s=size, c=color, marker=mrkr)
 
 
+# 绘制散点图
+def drawScatter2(plt, mydata, size=20, color="blue", mrkr="o"):
+    plt.scatter(mydata.T[0], mydata.T[1], s=size, c=color, marker=mrkr)
+
+
 # 绘制分类点
-def drawScatterbyLabel(plt, Input):
+def drawScatterbyLabel1(plt, Input):
+    # print("原始資料 :\n", Input, sep="")
+    m, n = np.shape(Input)
+    # print("shape :", m, n)
+    target = Input[:, -1]
+    # print("目標 :\n", target, sep="")
+    for i in range(m):
+        if target[i] == 0:
+            plt.scatter(Input[i, 0], Input[i, 1], c="blue", marker="o")
+        else:
+            plt.scatter(Input[i, 0], Input[i, 1], c="red", marker="s")
+
+
+# 绘制分类点
+def drawScatterbyLabel2(plt, Input):
     m, n = np.shape(Input)
     target = Input[:, -1]
     for i in range(m):
-        if target[i] == 0:
+        if target[i] == 1:
             plt.scatter(Input[i, 0], Input[i, 1], c="blue", marker="o")
         else:
             plt.scatter(Input[i, 0], Input[i, 1], c="red", marker="s")
@@ -193,8 +212,8 @@ def classifier(testData, weights):
 
 # 最小二乘回归，用于测试
 def standRegres(xArr, yArr):
-    xMat = np.mat(ones((len(xArr), 2)))
-    yMat = np.mat(ones((len(yArr), 1)))
+    xMat = np.mat(np.ones((len(xArr), 2)))
+    yMat = np.mat(np.ones((len(yArr), 1)))
     xMat[:, 1:] = (np.mat(xArr).T)[:, 0:]
     yMat[:, 0:] = (np.mat(yArr).T)[:, 0:]
     xTx = xMat.T * xMat
@@ -205,11 +224,7 @@ def standRegres(xArr, yArr):
     return ws
 
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-def loadDataSet(fileName):  # general function to parse tab -delimited floats
+def loadDataSet1(fileName):  # general function to parse tab -delimited floats
     dataMat = []  # assume last column is target value
     fr = open(fileName)
     for line in fr.readlines():
@@ -219,23 +234,89 @@ def loadDataSet(fileName):  # general function to parse tab -delimited floats
     return dataMat
 
 
+def loadDataSet2(fileName):
+    numFeat = len(open(fileName).readline().split("\t")) - 1  # get number of fields
+    dataMat = []
+    labelMat = []
+    fr = open(fileName)
+    for line in fr.readlines():
+        lineArr = []
+        curLine = line.strip().split("\t")
+        for i in range(numFeat):
+            lineArr.append(float(curLine[i]))
+        dataMat.append(lineArr)
+        labelMat.append(float(curLine[-1]))
+    return dataMat, labelMat
+
+
+def loadDataSet3(fileName):
+    X = []
+    Y = []
+    fr = open(fileName)
+    for line in fr.readlines():
+        curLine = line.strip().split("\t")
+        X.append(float(curLine[0]))
+        Y.append(float(curLine[-1]))
+    return X, Y
+
+
+def loadDataSet4(fileName):
+    numFeat = len(open(fileName).readline().split("\t")) - 1
+    X = []
+    Y = []
+    fr = open(fileName)
+    for line in fr.readlines():
+        curLine = line.strip().split("\t")
+        X.append([float(curLine[i]) for i in range(numFeat)])
+        Y.append(float(curLine[-1]))
+    return X, Y
+
+
+def plotscatter1(Xmat, Ymat, a, b, plt):
+    fig = plt.figure()
+    ax = fig.add_subplot(111)  # 绘制图形位置
+    ax.scatter(Xmat, Ymat, c="blue", marker="o")  # 绘制散点图
+    Xmat.sort()  # 对Xmat各元素进行排序
+    yhat = [a * float(xi) + b for xi in Xmat]  # 计算预测值
+    plt.plot(Xmat, yhat, "r")  # 绘制回归线
+    show()
+
+
+def plotscatter2(Xmat, Ymat, a, b, plt):
+    fig = plt.figure()
+    ax = fig.add_subplot(111)  # 绘制图形位置
+    ax.scatter(Xmat, Ymat, c="blue", marker="o")  # 绘制散点图
+    Xmat.sort()  # 对Xmat各元素进行排序
+    yhat = [a * float(xi) + b for xi in Xmat]  # 计算预测值
+    plt.plot(Xmat, yhat, "r")  # 绘制回归线
+    show()
+    return yhat
+
+
+def plotscatter3(Xmat, Ymat, yHat, plt):
+    fig = plt.figure()
+    ax = fig.add_subplot(111)  # 绘制图形位置
+    ax.scatter(Xmat, Ymat, c="blue", marker="o")  # 绘制散点图
+    plt.plot(Xmat, yHat, "r")  # 绘制散点图
+    show()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("classReg.py")
 
-# 02classReg.py
-
-# 主程序
-# 加载数据集
 fileName = "data03/ex0.txt"
-dataSet = loadDataSet(fileName)
+dataSet = loadDataSet1(fileName)
 # 转换为矩阵
 dataSet = np.mat(dataSet)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# builddataset.py
+print("builddataset.py")
 
 labels = ["年龄", "收入", "学生", "信誉"]
 dataset = [
@@ -272,7 +353,7 @@ fp.write("\n".join(datalines))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# trees2.py
+print("trees2.py")
 
 import operator
 
@@ -322,7 +403,7 @@ def grabTree(filename):
     return pickle.load(fr)
 
 
-# classify01.py
+print("classify01.py")
 
 import copy
 
@@ -334,7 +415,7 @@ treelabels = copy.deepcopy(labels)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# treePlotter2.py
+print("treePlotter2.py")
 
 decisionNode = dict(boxstyle="sawtooth", fc="0.8")
 leafNode = dict(boxstyle="round4", fc="0.8")
@@ -417,25 +498,10 @@ def plotTree(
     plotTree.yOff = plotTree.yOff + 1.0 / plotTree.totalD
 
 
-def retrieveTree(i):
-    listOfTrees = [
-        {"no surfacing": {0: "no", 1: {"flippers": {0: "no", 1: "yes"}}}},
-        {
-            "no surfacing": {
-                0: "no",
-                1: {"flippers": {0: {"head": {0: "no", 1: "yes"}}, 1: "no"}},
-            }
-        },
-    ]
-    return listOfTrees[i]
-
-
-# createPlot(thisTree)
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# classify07.py
+print("classify07.py")
 
 from sklearn.tree import DecisionTreeRegressor
 
@@ -473,7 +539,7 @@ plotfigure(X, X_test, y, y_pred)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# test1.py
+print("test1.py")
 
 
 def splitDataSet(dataSet, axis, value):
@@ -521,40 +587,10 @@ print(0.9544 - 0.6877)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Recommand_Lib.py
+print("Recommand_Lib.py")
 
 import operator
 import scipy.spatial.distance as dist
-
-# 欧氏距离
-eps = 1.0e-6
-
-
-def distEclud(vecA, vecB):
-    return np.linalg.norm(vecA - vecB) + eps
-
-
-# 相关系数
-def distCorrcoef(vecA, vecB):
-    return corrcoef(vecA, vecB, rowvar=0)[0][1]
-
-
-# Jaccard距离
-def distJaccard(vecA, vecB):
-    temp = np.mat([np.array(vecA.tolist()[0]), np.array(vecB.tolist()[0])])
-    return dist.pdist(temp, "jaccard")
-
-
-# 余弦相似度
-def cosSim(vecA, vecB):
-    return (
-        np.dot(vecA, vecB.T) / ((np.linalg.norm(vecA) * np.linalg.norm(vecB)) + eps)
-    )[0, 0]
-
-
-# 绘制散点图
-def drawScatter(plt, mydata, size=20, color="blue", mrkr="o"):
-    plt.scatter(mydata.T[0], mydata.T[1], s=size, c=color, marker=mrkr)
 
 
 # dataSet 训练集
@@ -582,7 +618,7 @@ def recommand(dataSet, testVect, r=3, rank=1, distCalc=cosSim):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# bikMeans_test.py
+print("bikMeans_test.py")
 
 # 从文件构建的数据集
 dataMat = file2matrix("data04/4k2_far.txt", "\t")
@@ -596,11 +632,7 @@ print(dataSet)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# kMeans_test.py
+print("kMeans_test.py")
 
 # 从文件构建的数据集
 dataMat = file2matrix("data04/4k2_far.txt", "\t")
@@ -617,7 +649,7 @@ ClustDist = np.mat(np.zeros((m, 2)))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# svdRec.py
+print("svdRec.py")
 
 
 def loadExData():
@@ -772,7 +804,7 @@ def recommend(dataMat, user, N=3, simMeas=cosSim, estMethod=svdEst):
 
 
 """ no file
-# testRecomm01.py
+print("testRecomm01.py")
 
 eps = 1.0e-6
 # 加载修正后数据
@@ -793,9 +825,7 @@ print(output1)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# svdtest01.py
-
-# Filename : testRecomm01.py
+print("svdtest01.py")
 
 eps = 1.0e-6
 # 加载修正后数据
@@ -826,7 +856,7 @@ print(S)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# testRecommsvd.py
+print("testRecommsvd.py")
 
 eps = 1.0e-6
 
@@ -870,7 +900,7 @@ print(maxv, maxi)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# testRecommsvd2.py
+print("testRecommsvd2.py")
 
 # 加载修正后数据
 A = np.mat(
@@ -895,7 +925,7 @@ print(resultarray)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# data.py
+print("data.py")
 
 Input = file2matrix("data05/testSet.txt", "\t")
 m, n = np.shape(Input)
@@ -908,23 +938,28 @@ print(newdata[:100, :])
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# gradient_test.py
+print("gradient_test.py")
 
 # 输入数据
 Input = file2matrix("data05/testSet.txt", "\t")
+# print("原始資料 :\n", Input, sep="")
+
 target = Input[:, -1]  # 获取分类标签列表
+# print("目標 :\n", target, sep="")
+
 [m, n] = np.shape(Input)
+# print("shape :", m, n)
 
 # 按分类绘制散点图
-drawScatterbyLabel(plt, Input)
+drawScatterbyLabel1(plt, Input)
 
 # 构建x+b 系数矩阵：b这里默认为1
 dataMat = buildMat(Input)
-print(dataMat)
+# print("dataMat :\n", dataMat, sep="")
+
 alpha = 0.001  # 步长
 steps = 500  # 迭代次数
 
-""" NG
 weights = np.ones((n, 1))  # 初始化权重向量
 # 主程序
 for k in range(steps):
@@ -933,19 +968,19 @@ for k in range(steps):
     errors = target - output  # 计算误差
     weights = weights + alpha * dataMat.T * errors
 
-print(weights)  # 输出权重
+print("輸出權重 :\n", weights, sep="")  # 输出权重
 
 X = np.linspace(-5, 5, 100)
 # y=w*x+b: b:weights[0]/weights[2]; w:weights[1]/weights[2]
-Y = -(double(weights[0]) + X * (double(weights[1]))) / double(weights[2])
+Y = -(np.double(weights[0]) + X * (np.double(weights[1]))) / np.double(weights[2])
 plt.plot(X, Y)
+
 show()
-"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# iterate_test.py
+print("iterate_test.py")
 
 # 求解原方程
 A = np.mat([[8, -3, 2], [4, 11, -1], [6, 3, 12]])
@@ -980,77 +1015,78 @@ print(xk)  # 输出计算结果
 matpts = np.zeros((2, k + 1))
 matpts[0] = np.linspace(1, k + 1, k + 1)
 matpts[1] = np.array(errorlist)
-drawScatter(plt, matpts)
+drawScatter2(plt, matpts)
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# log_evalue_weight.py
-
-from numpy import *
+print("log_evalue_weight.py")
 
 Input = file2matrix("data05/testSet.txt", "\t")
 target = Input[:, -1]  # 获取分类标签列表
-[m, n] = shape(Input)
+[m, n] = np.shape(Input)
 
-# 2.按分类绘制散点图
-drawScatterbyLabel(plt, Input)
+# 按分类绘制散点图
+drawScatterbyLabel1(plt, Input)
 
-# 3.构建b+x 系数矩阵：b这里默认为1
+# 构建b+x 系数矩阵：b这里默认为1
 dataMat = buildMat(Input)
+
 # print dataMat
-# 4. 定义步长和迭代次数
+
+# 定义步长和迭代次数
 alpha = 0.001  # 步长
 steps = 500  # 迭代次数
-weights = ones((n, 1))  # 初始化权重向量
+weights = np.ones((n, 1))  # 初始化权重向量
 weightlist = []
 
-""" NG
-# 5. 主程序
+# 主程序
 for k in range(steps):
-    gradient = dataMat * mat(weights)  # 梯度
+    gradient = dataMat * np.mat(weights)  # 梯度
     output = logistic(gradient)  # logistic函数
     errors = target - output  # 计算误差
     weights = weights + alpha * dataMat.T * errors
     weightlist.append(weights)
 
 print(weights)  # 输出训练后的权重
-# 6. 绘制训练后超平面
+# 绘制训练后超平面
 X = np.linspace(-5, 5, 100)
 Ylist = []
 lenw = len(weightlist)
 for indx in range(lenw):
     if indx % 20 == 0:  # 每20次输出一次分类超平面
         weight = weightlist[indx]
-        Y = -(double(weight[0]) + X * (double(weight[1]))) / double(weight[2])
+        Y = -(np.double(weight[0]) + X * (np.double(weight[1]))) / np.double(weight[2])
         plt.plot(X, Y)
         # 分类超平面注释
         plt.annotate("hplane:" + str(indx), xy=(X[99], Y[99]))
 show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# log_evalue_weight2.py
+print("log_evalue_weight2.py")
 
 Input = file2matrix("data05/testSet.txt", "\t")
 target = Input[:, -1]  # 获取分类标签列表
 [m, n] = np.shape(Input)
 
-# 3.构建b+x 系数矩阵：b这里默认为1
+# 构建b+x 系数矩阵：b这里默认为1
 dataMat = buildMat(Input)
+
 # print dataMat
-# 4. 定义步长和迭代次数
+
+# 定义步长和迭代次数
 alpha = 0.001  # 步长
 steps = 500  # 迭代次数
 weights = np.ones((n, 1))  # 初始化权重向量
 weightlist = []
 
-# 5. 主程序
-""" NG
+# 主程序
+
 for k in range(steps):
-    gradient = dataMat * mat(weights)  # 梯度
+    gradient = dataMat * np.mat(weights)  # 梯度
     output = logistic(gradient)  # logistic函数
     errors = target - output  # 计算误差
     weights = weights + alpha * dataMat.T * errors
@@ -1060,12 +1096,12 @@ print(weights)  # 输出训练后的权重
 fig = plt.figure()
 axes1 = plt.subplot(211)
 axes2 = plt.subplot(212)
-weightmat = mat(zeros((steps, n)))
+weightmat = np.mat(np.zeros((steps, n)))
 i = 0
 for weight in weightlist:
     weightmat[i, :] = weight.T
     i += 1
-X = linspace(0, steps, steps)
+X = np.linspace(0, steps, steps)
 # 输出前10个点的截距变化
 axes1.plot(
     X[0:10],
@@ -1082,31 +1118,30 @@ axes2.plot(
     linestyle="-",
 )
 show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# log_evalue_weight3.py
-
-from numpy import *
+print("log_evalue_weight3.py")
 
 Input = file2matrix("data05/testSet.txt", "\t")
 target = Input[:, -1]  # 获取分类标签列表
-[m, n] = shape(Input)
+[m, n] = np.shape(Input)
 
-# 3.构建b+x 系数矩阵：b这里默认为1
+# 构建b+x 系数矩阵：b这里默认为1
 dataMat = buildMat(Input)
+
 # print dataMat
-# 4. 定义步长和迭代次数
+
+# 定义步长和迭代次数
 alpha = 0.001  # 步长
 steps = 500  # 迭代次数
-weights = ones((n, 1))  # 初始化权重向量
+weights = np.ones((n, 1))  # 初始化权重向量
 weightlist = []
 
-""" NG
-# 5. 主程序
+# 主程序
 for k in range(steps):
-    gradient = dataMat * mat(weights)  # 梯度
+    gradient = dataMat * np.mat(weights)  # 梯度
     output = logistic(gradient)  # logistic函数
     errors = target - output  # 计算误差
     weights = weights + alpha * dataMat.T * errors
@@ -1116,12 +1151,12 @@ print(weights)  # 输出训练后的权重
 fig = plt.figure()
 axes1 = plt.subplot(211)
 axes2 = plt.subplot(212)
-weightmat = mat(zeros((steps, n)))
+weightmat = np.mat(np.zeros((steps, n)))
 i = 0
 for weight in weightlist:
     weightmat[i, :] = weight.T
     i += 1
-X = linspace(0, steps, steps)
+X = np.linspace(0, steps, steps)
 # 输出前10个点的截距变化
 axes1.plot(
     X[0:10],
@@ -1138,31 +1173,30 @@ axes2.plot(
     linestyle="-",
 )
 show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# log_evalue_weight4.py
-
-from numpy import *
+print("log_evalue_weight4.py")
 
 Input = file2matrix("data05/testSet.txt", "\t")
 target = Input[:, -1]  # 获取分类标签列表
-[m, n] = shape(Input)
+[m, n] = np.shape(Input)
 
-# 3.构建b+x 系数矩阵：b这里默认为1
+# 构建b+x 系数矩阵：b这里默认为1
 dataMat = buildMat(Input)
+
 # print dataMat
-# 4. 定义步长和迭代次数
+
+# 定义步长和迭代次数
 alpha = 0.001  # 步长
 steps = 500  # 迭代次数
-weights = ones((n, 1))  # 初始化权重向量
+weights = np.ones((n, 1))  # 初始化权重向量
 weightlist = []
 
-"""
-# 5. 主程序
+# 主程序
 for k in range(steps):
-    gradient = dataMat * mat(weights)  # 梯度
+    gradient = dataMat * np.mat(weights)  # 梯度
     output = logistic(gradient)  # logistic函数
     errors = target - output  # 计算误差
     weights = weights + alpha * dataMat.T * errors
@@ -1173,12 +1207,12 @@ fig = plt.figure()
 axes1 = plt.subplot(311)
 axes2 = plt.subplot(312)
 axes3 = plt.subplot(313)
-weightmat = mat(zeros((steps, n)))
+weightmat = np.mat(np.zeros((steps, n)))
 i = 0
 for weight in weightlist:
     weightmat[i, :] = weight.T
     i += 1
-X = linspace(0, steps, steps)
+X = np.linspace(0, steps, steps)
 # 输出前10个点的截距变化
 axes1.plot(X, weightmat[:, 0], color="blue", linewidth=1, linestyle="-")
 axes1.set_ylabel("weight[0]")
@@ -1187,50 +1221,47 @@ axes2.set_ylabel("weight[1]")
 axes3.plot(X, weightmat[:, 2], color="green", linewidth=1, linestyle="-")
 axes3.set_ylabel("weight[2]")
 show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# logistic_test.py
-
-from numpy import *
+print("logistic_test.py")
 
 Input = file2matrix("data05/testSet.txt", "\t")
 target = Input[:, -1]  # 获取分类标签列表
-[m, n] = shape(Input)
-# 2.按分类绘制散点图
-drawScatterbyLabel(plt, Input)
+[m, n] = np.shape(Input)
 
-# 3.构建b+x 系数矩阵：b这里默认为1
+# 按分类绘制散点图
+drawScatterbyLabel1(plt, Input)
+
+# 构建b+x 系数矩阵：b这里默认为1
 dataMat = buildMat(Input)
 print(dataMat[:10, :])
-# 4. 定义步长和迭代次数
+
+# 定义步长和迭代次数
 alpha = 0.001  # 步长
 steps = 500  # 迭代次数
-weights = ones((n, 1))  # 初始化权重向量
+weights = np.ones((n, 1))  # 初始化权重向量
 
-""" NG
-# 5. 主程序
+# 主程序
 for k in range(steps):
-    gradient = dataMat * mat(weights)  # 梯度
+    gradient = dataMat * np.mat(weights)  # 梯度
     output = logistic(gradient)  # logistic函数
     errors = target - output  # 计算误差
     weights = weights + alpha * dataMat.T * errors
 
 print(weights)  # 输出训练后的权重
-# 6. 绘制训练后超平面
+# 绘制训练后超平面
 X = np.linspace(-7, 7, 100)
 # y=w*x+b: b:weights[0]/weights[2]; w:weights[1]/weights[2]
-Y = -(double(weights[0]) + X * (double(weights[1]))) / double(weights[2])
+Y = -(np.double(weights[0]) + X * (np.double(weights[1]))) / np.double(weights[2])
 plt.plot(X, Y)
 show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# logistic_test2.py
-
-from numpy import *
+print("logistic_test2.py")
 
 weights = np.mat([[4.12414349], [0.48007329], [-0.6168482]])
 testdata = np.mat([-0.147324, 2.874846])
@@ -1243,7 +1274,7 @@ print(classifier(testmat, weights))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# plotGD.py
+print("plotGD.py")
 
 import matplotlib
 import matplotlib.cm as cm
@@ -1265,7 +1296,6 @@ Z2 = -(Y**2)
 # Z2 = mlab.bivariate_normal(X, Y, 1.5, 0.5, 1, 1)
 # difference of Gaussians
 Z = 1.0 * (Z2 + Z1) + 5.0  # 计算获取Z轴取值
-
 
 plt.figure()
 CS = plt.contour(X, Y, Z)
@@ -1316,7 +1346,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# stoc_evalue_alpha.py
+print("stoc_evalue_alpha.py")
 
 Input = file2matrix("data05/testSet.txt", "\t")
 target = Input[:, -1]  # 获取分类标签列表
@@ -1335,7 +1365,7 @@ alphahlist = []
 # 2.对抽取之后的行向量应用动态步长
 # 3.进行梯度计算
 # 4.求得行向量的权值，合并为矩阵的权值
-""" NG
+
 for j in range(steps):
     dataIndex = range(m)  # 以导入数据的行数m为个数产生索引向量:0~99
     for i in range(m):
@@ -1349,7 +1379,7 @@ for j in range(steps):
         grad = logistic(vectSum)  # 计算点积和的梯度
         errors = target[randIndex] - grad  # 计算误差
         weights = weights + alpha * errors * dataMat[randIndex]  # 计算行向量权重
-        del dataIndex[randIndex]  # 从数据集中删除选取的随机索引
+        # del dataIndex[randIndex]  # 从数据集中删除选取的随机索引
 
 # print weights	# 输出训练后的权重
 weights = weights.tolist()[0]
@@ -1363,13 +1393,11 @@ X2 = np.linspace(0, lenalh, lenalh)
 axes1.plot(X1, alphalist)
 axes2.plot(X2, alphahlist)
 show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# stoc_evalue_weight.py
-
-from numpy import *
+print("stoc_evalue_weight.py")
 
 Input = file2matrix("data05/testSet.txt", "\t")
 target = Input[:, -1]  # 获取分类标签列表
@@ -1381,7 +1409,6 @@ dataMat = buildMat(Input)
 steps = 500  # 迭代次数
 weights = np.ones(n)  # 初始化权重向量
 
-""" NG
 weightlist = []
 # 算法主程序:
 # 1.对数据集的每个行向量进行m次随机抽取
@@ -1389,7 +1416,7 @@ weightlist = []
 # 3.进行梯度计算
 # 4.求得行向量的权值，合并为矩阵的权值
 for j in range(steps):
-    dataIndex = np.range(m)  # 以导入数据的行数m为个数产生索引向量:0~99
+    dataIndex = range(m)  # 以导入数据的行数m为个数产生索引向量:0~99
     for i in range(m):
         alpha = 2 / (1.0 + j + i) + 0.0001  # 动态修改alpha步长从4->0.016
         randIndex = int(random.uniform(0, len(dataIndex)))  # 生成0~m之间随机索引
@@ -1397,7 +1424,7 @@ for j in range(steps):
         grad = logistic(vectSum)  # 计算点积和的梯度
         errors = target[randIndex] - grad  # 计算误差
         weights = weights + alpha * errors * dataMat[randIndex]  # 计算行向量权重
-        del dataIndex[randIndex]  # 从数据集中删除选取的随机索引
+        # del dataIndex[randIndex]  # 从数据集中删除选取的随机索引
     weightlist.append(weights)
 
 lenwl = len(weightlist)
@@ -1421,13 +1448,11 @@ ws = standRegres(X1, -weightmat[:, 0] / weightmat[:, 2])
 Y1 = ws[0, 0] + X1 * ws[1, 0]
 axes1.plot(X1, Y1, color="red", linewidth=2, linestyle="-")
 show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# stoc_evalue_weight2.py
-
-from numpy import *
+print("stoc_evalue_weight2.py")
 
 Input = file2matrix("data05/testSet.txt", "\t")
 target = Input[:, -1]  # 获取分类标签列表
@@ -1439,7 +1464,6 @@ dataMat = buildMat(Input)
 steps = 500  # 迭代次数
 weights = np.ones(n)  # 初始化权重向量
 
-""" NG
 weightlist = []
 # 算法主程序:
 # 1.对数据集的每个行向量进行m次随机抽取
@@ -1448,14 +1472,14 @@ weightlist = []
 # 4.求得行向量的权值，合并为矩阵的权值
 for j in range(steps):
     dataIndex = range(m)  # 以导入数据的行数m为个数产生索引向量:0~99
-    for i in np.range(m):
+    for i in range(m):
         alpha = 2 / (1.0 + j + i) + 0.0001  # 动态修改alpha步长从4->0.016
         randIndex = int(random.uniform(0, len(dataIndex)))  # 生成0~m之间随机索引
         vectSum = sum(dataMat[randIndex] * weights.T)  # 计算dataMat随机索引与权重的点积和
         grad = logistic(vectSum)  # 计算点积和的梯度
         errors = target[randIndex] - grad  # 计算误差
         weights = weights + alpha * errors * dataMat[randIndex]  # 计算行向量权重
-        del dataIndex[randIndex]  # 从数据集中删除选取的随机索引
+        # del dataIndex[randIndex]  # 从数据集中删除选取的随机索引
     weightlist.append(weights)
 
 lenwl = len(weightlist)
@@ -1464,6 +1488,7 @@ i = 0
 for weight in weightlist:
     weightmat[i, :] = weight
     i += 1
+
 fig = plt.figure()
 axes1 = plt.subplot(311)
 axes2 = plt.subplot(312)
@@ -1480,197 +1505,77 @@ axes3.plot(X1, weightmat[:, 2])
 axes3.set_ylabel("weight[2]")
 
 show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# stoc_test.py
-
-from numpy import *
+print("stoc_test.py")
 
 Input = file2matrix("data05/testSet.txt", "\t")
 target = Input[:, -1]  # 获取分类标签列表
 [m, n] = np.shape(Input)
 
-# 2.按分类绘制散点图
-drawScatterbyLabel(plt, Input)
+# 按分类绘制散点图
+drawScatterbyLabel1(plt, Input)
 
-# 3.构建b+x 系数矩阵：b这里默认为1
+# 构建b+x 系数矩阵：b这里默认为1
 dataMat = buildMat(Input)
+
 # print dataMat
-# 4. 定义步长和迭代次数
+
+# 定义步长和迭代次数
 steps = 500  # 迭代次数
 weights = np.ones(n)  # 初始化权重向量
 
-""" NG
 # 算法主程序:
 # 1.对数据集的每个行向量进行m次随机抽取
 # 2.对抽取之后的行向量应用动态步长
 # 3.进行梯度计算
 # 4.求得行向量的权值，合并为矩阵的权值
-for j in np.range(steps):
-    dataIndex = np.range(m)  # 以导入数据的行数m为个数产生索引向量:0~99
-    for i in np.range(m):
+for j in range(steps):
+    dataIndex = range(m)  # 以导入数据的行数m为个数产生索引向量:0~99
+    for i in range(m):
         alpha = 2 / (1.0 + j + i) + 0.0001  # 动态修改alpha步长从4->0.016
         randIndex = int(random.uniform(0, len(dataIndex)))  # 生成0~m之间随机索引
         vectSum = sum(dataMat[randIndex] * weights.T)  # 计算dataMat随机索引与权重的点积和
         grad = logistic(vectSum)  # 计算点积和的梯度
         errors = target[randIndex] - grad  # 计算误差
         weights = weights + alpha * errors * dataMat[randIndex]  # 计算行向量权重
-        del dataIndex[randIndex]  # 从数据集中删除选取的随机索引
+        # del dataIndex[randIndex]  # 从数据集中删除选取的随机索引
 
 print(weights)  # 输出训练后的权重
 weights = weights.tolist()[0]
 # 6. 绘制训练后超平面
 X = np.linspace(-5, 5, 100)
 # y=w*x+b: b:weights[0]/weights[2]; w:weights[1]/weights[2]
-Y = -(double(weights[0]) + X * (double(weights[1]))) / double(weights[2])
+Y = -(np.double(weights[0]) + X * (np.double(weights[1]))) / np.double(weights[2])
 plt.plot(X, Y)
 show()
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from numpy import *
-import scipy.spatial.distance as dist
-
-
-def savefile(savepath, content):
-    fp = open(savepath, "w", encoding="UTF-8-sig")
-    fp.write(content)
-    fp.close()
-
-
-# 欧氏距离
-eps = 1.0e-6
-
-
-def distEclud(vecA, vecB):
-    return linalg.norm(vecA - vecB) + eps
-
-
-# 相关系数
-def distCorrcoef(vecA, vecB):
-    return corrcoef(vecA, vecB, rowvar=0)[0][1]
-
-
-# Jaccard距离
-def distJaccard(vecA, vecB):
-    temp = mat([array(vecA.tolist()[0]), array(vecB.tolist()[0])])
-    return dist.pdist(temp, "jaccard")
-
-
-# 余弦相似度
-def cosSim(vecA, vecB):
-    return (dot(vecA, vecB.T) / ((linalg.norm(vecA) * linalg.norm(vecB)) + eps))[0, 0]
-
-
-# 绘制散点图
-def drawScatter(plt, mydata, size=20, color="blue", mrkr="o"):
-    m, n = shape(mydata)
-    if m > n and m > 2:
-        plt.scatter(mydata.T[0], mydata.T[1], s=size, c=color, marker=mrkr)
-    else:
-        plt.scatter(mydata[0], mydata[1], s=size, c=color, marker=mrkr)
-
-
-# 绘制分类点
-def drawScatterbyLabel(plt, Input):
-    m, n = shape(Input)
-    target = Input[:, -1]
-    for i in range(m):
-        if target[i] == 1:
-            plt.scatter(Input[i, 0], Input[i, 1], c="blue", marker="o")
-        else:
-            plt.scatter(Input[i, 0], Input[i, 1], c="red", marker="s")
-
-
-# 硬限幅函数
-def hardlim(dataSet):
-    dataSet[nonzero(dataSet.A > 0)[0]] = 1
-    dataSet[nonzero(dataSet.A <= 0)[0]] = 0
-    return dataSet
-
-
-# Logistic函数
-def logistic(wTx):
-    return 1.0 / (1.0 + exp(-wTx))
-
-
-def buildMat(dataSet):
-    m, n = shape(dataSet)
-    dataMat = zeros((m, n))
-    dataMat[:, 0] = 1
-    dataMat[:, 1:] = dataSet[:, :-1]
-    return dataMat
-
-
-# 分类函数
-def classifier(testData, weights):
-    prob = logistic(sum(testData * weights))  # 求取概率--判别算法
-    if prob > 0.5:
-        return 1.0  # prob>0.5 返回为1
-    else:
-        return 0.0  # prob<=0.5 返回为0
-
-
-# 最小二乘回归，用于测试
-def standRegres(xArr, yArr):
-    xMat = mat(ones((len(xArr), 2)))
-    yMat = mat(ones((len(yArr), 1)))
-    xMat[:, 1:] = (mat(xArr).T)[:, 0:]
-    yMat[:, 0:] = (mat(yArr).T)[:, 0:]
-    xTx = xMat.T * xMat
-    if linalg.det(xTx) == 0.0:
-        print("This matrix is singular, cannot do inverse")
-        return
-    ws = xTx.I * (xMat.T * yMat)
-    return ws
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import copy
-from numpy import *
 
 # 输入数据
 Input = file2matrix("data05/test.txt", "\t")
 target = Input[:, 0].copy()
 Input[:, 0] = Input[:, 2].copy()
 Input[:, 2] = target.copy()
-[m, n] = shape(Input)
+[m, n] = np.shape(Input)
 
 print(m)
 print(n)
 
 # 按分类绘制散点图
-drawScatterbyLabel(plt, Input)
+drawScatterbyLabel2(plt, Input)
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# lassoReg.py
-
-
-def loadDataSet(fileName):
-    numFeat = len(open(fileName).readline().split("\t")) - 1  # get number of fields
-    dataMat = []
-    labelMat = []
-    fr = open(fileName)
-    for line in fr.readlines():
-        lineArr = []
-        curLine = line.strip().split("\t")
-        for i in range(numFeat):
-            lineArr.append(float(curLine[i]))
-        dataMat.append(lineArr)
-        labelMat.append(float(curLine[-1]))
-    return dataMat, labelMat
+print("lassoReg.py")
 
 
 # 矩阵标准化
@@ -1697,7 +1602,7 @@ def scatterplot(wMat, k):  # 绘制图形
 
 
 # 前8列为xArr,后1列为yArr
-xArr, yArr = loadDataSet("data07/ridgedata2.txt")
+xArr, yArr = loadDataSet2("data07/ridgedata2.txt")
 # 数据矩阵转换
 xMat, yMat = normData(xArr, yArr)
 m, n = np.shape(xMat)
@@ -1734,33 +1639,10 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# leastSquare.py
-
-
-def loadDataSet(fileName):
-    X = []
-    Y = []
-    fr = open(fileName)
-    for line in fr.readlines():
-        curLine = line.strip().split("\t")
-        X.append(float(curLine[0]))
-        Y.append(float(curLine[-1]))
-    return X, Y
-
-
-# 绘制图形
-def plotscatter(Xmat, Ymat, a, b, plt):
-    fig = plt.figure()
-    ax = fig.add_subplot(111)  # 绘制图形位置
-    ax.scatter(Xmat, Ymat, c="blue", marker="o")  # 绘制散点图
-    Xmat.sort()  # 对Xmat各元素进行排序
-    yhat = [a * float(xi) + b for xi in Xmat]  # 计算预测值
-    plt.plot(Xmat, yhat, "r")  # 绘制回归线
-    show()
-
+print("leastSquare.py")
 
 # 数据文件名
-Xmat, Ymat = loadDataSet("data07/regdataset.txt")
+Xmat, Ymat = loadDataSet3("data07/regdataset.txt")
 meanX = np.mean(Xmat)  # 原始数据集的均值
 meanY = np.mean(Ymat)
 dX = Xmat - meanX  # 各元素与均值的差
@@ -1768,8 +1650,8 @@ dY = Ymat - meanY
 # 手工计算：
 # sumXY = 0; SqX = 0
 # for i in range(len(dX)):
-# 	sumXY += double(dX[i])*double(dY[i])
-# 	SqX += double(dX[i])**2
+# 	sumXY += np.double(dX[i])*np.double(dY[i])
+# 	SqX += np.double(dX[i])**2
 sumXY = np.vdot(dX, dY)  # 返回两个向量的点乘 multiply
 SqX = sum(np.power(dX, 2))  # 向量的平方：(X-meanX)^2
 
@@ -1778,12 +1660,12 @@ a = sumXY / SqX
 b = meanY - a * meanX
 print(a, b)
 # 绘制图形
-plotscatter(Xmat, Ymat, a, b, plt)
+plotscatter1(Xmat, Ymat, a, b, plt)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# logistic_k.py
+print("logistic_k.py")
 
 
 def scatterplot(k, x1, x2):  # 绘制图形
@@ -1808,58 +1690,48 @@ x1 = logistic_map(3.6, 0.1)
 x2 = logistic_map(3.6, 0.9)
 scatterplot(3.6, x1, x2)
 
-"""
-x1 = logistic_map(3.5,0.1)
-x2 = logistic_map(3.5,0.9)
-scatterplot(3.5,x1,x2)	
-"""
+
+x1 = logistic_map(3.5, 0.1)
+x2 = logistic_map(3.5, 0.9)
+scatterplot(3.5, x1, x2)
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
-# logistic_map.py
+
+print("logistic_map.py")
 
 
-def scatterplot(k,wMat):# 绘制图形
-	fig = plt.figure();	ax = fig.add_subplot(111) 
-	m,n=np.shape(wMat)
-	for i in range(m): #逐列描点
-		ax.scatter(np.mat(k),wMat[:,i],s=0.1,marker=".")
-	show()
-	
-maxIter =1000 # 最大迭代数和系数分辨率区间
-k= linspace(2.1,4.0,maxIter) # logisitic区间
+def scatterplot(k, wMat):  # 绘制图形
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    m, n = np.shape(wMat)
+    for i in range(m):  # 逐列描点
+        ax.scatter(np.mat(k), wMat[:, i], s=0.1, marker=".")
+    show()
+
+
+maxIter = 1000  # 最大迭代数和系数分辨率区间
+k = np.linspace(2.1, 4.0, maxIter)  # logisitic区间
 klen = len(k)
-xMat =np.mat(np.zeros((klen,maxIter)))  # 初始化结果矩阵
-x = 1.0/float(maxIter)
-for i in range(klen) :   # 沿系数方向循环
-	for j in range(maxIter):  
-		x = float(k[i])*x*(1.0-x) # 变量迭代
-		xMat[i,j]=x
+xMat = np.mat(np.zeros((klen, maxIter)))  # 初始化结果矩阵
+x = 1.0 / float(maxIter)
+for i in range(klen):  # 沿系数方向循环
+    for j in range(maxIter):
+        x = float(k[i]) * x * (1.0 - x)  # 变量迭代
+        xMat[i, j] = x
+
 # 绘制图形
-scatterplot(k,xMat)	
-"""
+print(k.shape)
+print(xMat.shape)
+# NG scatterplot(k, xMat)
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# multilinear.py
-
+print("multilinear.py")
 
 # 岭回归函数
-# 加载数据集
-def loadDataSet(fileName):
-    numFeat = len(open(fileName).readline().split("\t")) - 1  # get number of fields
-    dataMat = []
-    labelMat = []
-    fr = open(fileName)
-    for line in fr.readlines():
-        lineArr = []
-        curLine = line.strip().split("\t")
-        for i in range(numFeat):
-            lineArr.append(float(curLine[i]))
-        dataMat.append(lineArr)
-        labelMat.append(float(curLine[-1]))
-    return dataMat, labelMat
 
 
 # 矩阵标准化
@@ -1898,41 +1770,18 @@ def Multicollinear(xMat):
 
 
 # 前8列为xArr,后1列为yArr
-xArr, yArr = loadDataSet("data07/ridgedata.txt")
+xArr, yArr = loadDataSet2("data07/ridgedata.txt")
 xMat, yMat = normData(xArr, yArr)  # 标准化数据集
 Multicollinear(xMat)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# normalequation.py
-
-
-def loadDataSet(fileName):
-    X = []
-    Y = []
-    fr = open(fileName)
-    for line in fr.readlines():
-        curLine = line.strip().split("\t")
-        X.append(float(curLine[0]))
-        Y.append(float(curLine[-1]))
-    return X, Y
-
-
-# 绘制图形
-def plotscatter(Xmat, Ymat, a, b, plt):
-    fig = plt.figure()
-    ax = fig.add_subplot(111)  # 绘制图形位置
-    ax.scatter(Xmat, Ymat, c="blue", marker="o")  # 绘制散点图
-    Xmat.sort()  # 对Xmat各元素进行排序
-    yhat = [a * float(xi) + b for xi in Xmat]  # 计算预测值
-    plt.plot(Xmat, yhat, "r")  # 绘制回归线
-    show()
-    return yhat
+print("normalequation.py")
 
 
 # 数据矩阵,分类标签
-xArr, yArr = loadDataSet("data07/regdataset.txt")
+xArr, yArr = loadDataSet3("data07/regdataset.txt")
 # 生成X坐标列
 m = len(xArr)
 Xmat = np.mat(np.ones((m, 2)))
@@ -1952,41 +1801,19 @@ else:
     sys.exit(0)  # 退出程序
 print("ws:", ws)
 
-"""
-yHat = plotscatter(Xmat[:,1],Ymat,ws[1,0],ws[0,0],plt)
+
+# NG yHat = plotscatter2(Xmat[:,1],Ymat,ws[1,0],ws[0,0],plt)
 
 # 计算相关系数:
-print(np.corrcoef(yHat,Ymat.T))
-"""
+# NG print(np.corrcoef(yHat, Ymat.T))
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# rbfNettest.py
-
-
-def loadDataSet(fileName):
-    numFeat = len(open(fileName).readline().split("\t")) - 1
-    X = []
-    Y = []
-    fr = open(fileName)
-    for line in fr.readlines():
-        curLine = line.strip().split("\t")
-        X.append([float(curLine[i]) for i in range(numFeat)])
-        Y.append(float(curLine[-1]))
-    return X, Y
-
-
-# 绘制图形
-def plotscatter(Xmat, Ymat, yHat, plt):
-    fig = plt.figure()
-    ax = fig.add_subplot(111)  # 绘制图形位置
-    ax.scatter(Xmat, Ymat, c="blue", marker="o")  # 绘制散点图
-    plt.plot(Xmat, yHat, "r")  # 绘制散点图
-    show()
-
+print("rbfNettest.py")
 
 # 数据矩阵,分类标签
-xArr, yArr = loadDataSet("data07/nolinear.txt")
+xArr, yArr = loadDataSet4("data07/nolinear.txt")
 # 局部加权线性回归算法：回归线矩阵
 
 # RBF函数的平滑系数
@@ -2013,16 +1840,16 @@ for i in range(m):
         print("This matrix is singular, cannot do inverse")
         sys.exit(0)  # 退出程序
 
-"""
-plotscatter(xMat[:,1],yMat,yHat,plt) # 绘制图形
+
+# NG plotscatter3(xMat[:,1],yMat,yHat,plt) # 绘制图形
 
 # 计算相关系数:
-print(np.corrcoef(yHat,yMat.T))
-"""
+# NG print(np.corrcoef(yHat,yMat.T))
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# rbm.py
+print("rbm.py")
 
 from scipy import sparse as S
 from scipy.sparse.csr import csr_matrix
@@ -2150,24 +1977,9 @@ rbm.learning_curve()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# ridgeReg.py
-
+print("ridgeReg.py")
 
 # 岭回归函数
-# 加载数据集
-def loadDataSet(fileName):
-    numFeat = len(open(fileName).readline().split("\t")) - 1  # get number of fields
-    dataMat = []
-    labelMat = []
-    fr = open(fileName)
-    for line in fr.readlines():
-        lineArr = []
-        curLine = line.strip().split("\t")
-        for i in range(numFeat):
-            lineArr.append(float(curLine[i]))
-        dataMat.append(lineArr)
-        labelMat.append(float(curLine[-1]))
-    return dataMat, labelMat
 
 
 # 矩阵标准化
@@ -2194,7 +2006,7 @@ def scatterplot(wMat, k):  # 绘制图形
 
 
 # 前8列为xArr,后1列为yArr
-xArr, yArr = loadDataSet("data07/ridgedata.txt")
+xArr, yArr = loadDataSet2("data07/ridgedata.txt")
 xMat, yMat = normData(xArr, yArr)  # 标准化数据集
 
 Knum = 30  # 确定lam的范围exp(-10~20)
@@ -2218,23 +2030,9 @@ scatterplot(wMat, klist)  # 岭回归
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("ridgeRegtest1.py")
 
-# ridgeRegtest1.py
 # 岭回归函数
-# 加载数据集
-def loadDataSet(fileName):
-    numFeat = len(open(fileName).readline().split("\t")) - 1  # get number of fields
-    dataMat = []
-    labelMat = []
-    fr = open(fileName)
-    for line in fr.readlines():
-        lineArr = []
-        curLine = line.strip().split("\t")
-        for i in range(numFeat):
-            lineArr.append(float(curLine[i]))
-        dataMat.append(lineArr)
-        labelMat.append(float(curLine[-1]))
-    return dataMat, labelMat
 
 
 # 矩阵标准化
@@ -2261,7 +2059,7 @@ def scatterplot(wMat, logk):  # 绘制图形
 
 
 # 前8列为xArr,后1列为yArr
-xArr, yArr = loadDataSet("data07/ridgedata2.txt")
+xArr, yArr = loadDataSet2("data07/ridgedata2.txt")
 xMat, yMat = normData(xArr, yArr)  # 标准化数据集
 
 Knum = 100  # 确定lam的范围exp(-10~20)
@@ -2281,6 +2079,127 @@ for i in range(Knum):
 print(klist)
 scatterplot(klist, klist)  # k值的变化
 scatterplot(wMat, klist)  # 岭回归
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# hmm01.py
+
+# 起始概率
+startP = np.mat([0.63, 0.17, 0.20])
+# 状态转移概率[i,j]:i(t),j(t+1)
+stateP = np.mat([[0.5, 0.25, 0.25], [0.375, 0.125, 0.375], [0.125, 0.675, 0.375]])
+# 发射（混合）概率
+# 列向量：emitP[:,i] = 隐含层状态; emitP[j,:] = 显式层状态
+emitP = np.mat([[0.6, 0.20, 0.05], [0.25, 0.25, 0.25], [0.05, 0.10, 0.50]])
+
+# 计算概率：干旱－干燥－潮湿
+# 初始化概率：干旱：startP*emitP
+state1Emit = np.multiply(startP, emitP[:, 0].T)
+print(state1Emit)
+print("argmax:", state1Emit.argmax())
+
+# 计算干燥的概率:
+state2Emit = stateP * state1Emit.T
+state2Emit = np.multiply(state2Emit, emitP[:, 1])
+print(state2Emit.T)
+print("argmax:", state2Emit.argmax())
+
+# 计算潮湿的概率:
+state3Emit = stateP * state2Emit
+state3Emit = np.multiply(state3Emit, emitP[:, 2])
+print(state3Emit.T)
+print("argmax:", state3Emit.argmax())
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# hmm02.py
+
+# 起始概率
+startP = np.mat([0.63, 0.17, 0.20])
+# 状态转移概率[i,j]:i(t),j(t+1)
+stateP = np.mat([[0.5, 0.375, 0.125], [0.25, 0.125, 0.675], [0.25, 0.375, 0.375]])
+# 发射（混合）概率
+emitP = np.mat(
+    [[0.6, 0.20, 0.15, 0.05], [0.25, 0.25, 0.25, 0.25], [0.05, 0.10, 0.35, 0.50]]
+)
+
+# 计算概率：干旱－干燥－潮湿
+state1Emit = np.multiply(startP.T, emitP[:, 0])
+print(state1Emit)
+best = state1Emit.argmax()
+print("max", state1Emit.max(), "path1:", state1Emit.argmax())
+
+# 计算干燥的概率:
+print(state1Emit[best], stateP)
+state2Mat = np.multiply(state1Emit[best], stateP)
+print(state2Mat)
+state2Mat = np.dot(state2Mat, emitP[:, 1])
+print("max", state2Mat.max(), "path1:", state2Mat.argmax())
+"""
+# 计算潮湿的概率:
+state3Mat = np.multiply(state2Mat[best],stateP)
+state3Mat = np.dot(state3Mat,emitP[:,1])
+print("max",state3Mat.max(),"path1:",state3Mat.argmax())
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# markovtest1.py
+
+# 建立二維list
+A = [[0.8, 0.2], [0.7, 0.3]]
+print(type(A))
+
+# list 轉 matrix
+A = np.mat(A)
+print(type(A))
+
+print(A)
+
+A1 = A * A
+print(A1)
+
+A10 = A
+for i in range(9):
+    A10 = A10 * A
+print(A10)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# test01.py
+
+# 1:1                            #3.6E                #1.3E-4
+A11 = 3.9e-4 + 1.3e-5 + 5.0e-9 + 9.5e-8 + 4.7e-3 + 4.0e-4 + 7.0e-6 + 5.0e-4
+print(A11)
+# 1:0       #5.7E-6
+A10 = 5.1e-5 + 7.0e-6 + 4.9e-7 + 9.4e-6 + 1.6e-3 + 1.7e-4 + 6.9e-4 + 1.3e-2
+print(A10)
+# 0:1
+A01 = 5.8e-3 + 6.5e-4 + 2.9e-7 + 5.6e-6 + 6.1e-4 + 6.8e-5 + 4.8e-4 + 9.2e-3
+print(A01)
+# 0:0
+A00 = 2.5e-3 + 2.8e-4 + 2.9e-5 + 5.5e-4 + 2.6e-4 + 2.9e-5 + 4.8e-2 + 9.1e-1
+print(A00)
+print(A11 + A10 + A01 + A00)
+print(1 - (A11 + A10 + A01 + A00))
+
+print(0.0060101 / (0.01681389 + 0.0060101))
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2313,34 +2232,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------")  # 60個
-
-
-"""
-# 数据文件转矩阵
-# path: 数据文件路径
-# delimiter: 文件分隔符
-def file2matrix(path, delimiter):
-    recordlist = []
-    fp = open(path, "rb")  # 读取文件内容
-    content = fp.read()
-    fp.close()
-    rowlist = content.splitlines()  # 按行转换为一维表
-    # 逐行遍历 		# 结果按分隔符分割为行向量
-    recordlist = [map(eval, row.split(delimiter)) for row in rowlist if row.strip()]
-    return mat(recordlist)  # 返回转换后的矩阵形式
-"""
-
-
-# 数据文件转矩阵
-# path: 数据文件路径
-# delimiter: 文件分隔符
-def file2matrix(path, delimiter):
-    print("ddddddddddddddddddd")
-    recordlist = []
-    fp = open(path, "r", encoding="UTF-8-sig")  # 读取文件内容
-    content = fp.read()
-    fp.close()
-    rowlist = content.splitlines()  # 按行转换为一维表
-    # 逐行遍历 		# 结果按分隔符分割为行向量
-    recordlist = [map(eval, row.split(delimiter)) for row in rowlist if row.strip()]
-    return mat(recordlist)  # 返回转换后的矩阵形式

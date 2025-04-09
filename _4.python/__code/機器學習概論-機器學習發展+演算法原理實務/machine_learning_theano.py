@@ -1,6 +1,12 @@
 """
 machine_learning_ch10
 
+全都是有用到 theano 的
+
+檔案mnist.pkl.gz放在big_files
+
+mnist_filename = "D:/_git/vcs/_big_files/mnist.pkl.gz"
+
 """
 
 print("------------------------------------------------------------")  # 60個

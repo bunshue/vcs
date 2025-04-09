@@ -88,7 +88,7 @@ def mergMatrix(matrix1,matrix2):
     [m1,n1] = shape(matrix1)
     [m2,n2] = shape(matrix2)
     if m1 != m2:
-    	print "different rows,can not merge matrix"
+    	print("different rows,can not merge matrix")
     	return; 	
     mergMat = zeros((m1,n1+n2))
     mergMat[:,0:n1] = matrix1[:,0:n1]

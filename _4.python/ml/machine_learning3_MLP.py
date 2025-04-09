@@ -2,7 +2,6 @@
 MLPClassifier（多層感知器分類器）
 
 
-
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -204,9 +203,6 @@ print("------------------------------------------------------------")  # 60個
 
 mnist_filename = "D:/_git/vcs/_big_files/mnist.pkl.gz"
 
-# 使用sklearn中的神经网络模块MLPClassifier处理分类问题
-# MLPClassifier（多层感知器分类器）
-
 """
 二.MNIST数据集的下载
 MNIST是一些手写数字的图片，通过http://www.iro.umontreal.ca/~lisa/deep/data/mnist/mnist.pkl.gz下载数据集。
@@ -227,7 +223,6 @@ classes = np.unique(y_test_data)
 # 将验证集和训练集合并
 x_training_data_final = np.vstack((x_training_data, x_valid_data))
 y_training_data_final = np.append(y_training_data, y_valid_data)
-
 
 # 设置神经网络模型参数
 # mlp = MLPClassifier(solver='lbfgs', activation='relu',alpha=1e-4,hidden_layer_sizes=(50,50), random_state=1,max_iter=10,verbose=10,learning_rate_init=.1)
