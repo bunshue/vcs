@@ -22,7 +22,7 @@ vectorizer = CountVectorizer()
 # 计算个词语出现的次数
 X = vectorizer.fit_transform(corpus)
 # 获取词袋中所有文本关键词
-word = vectorizer.get_feature_names()
+word = vectorizer.get_feature_names_out()
 print(word)
 # 查看词频结果
 x_weight = X.toarray()

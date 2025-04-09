@@ -57,7 +57,6 @@ def show():
     pass
 
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 print("測試 PolynomialFeatures")
@@ -201,7 +200,7 @@ print(type(X))
 print(X.shape)
 
 plt.scatter(X[:, 0], X[:, 1], s=30, c="b", label="真實資料")  # 真實資料, 藍點
-plt.show()
+show()
 
 fig = plt.figure(figsize=(8, 8))
 ax = fig.add_subplot(111, projection="3d")
@@ -2359,10 +2358,9 @@ plt.figure(figsize=(12, 5))
 plt.grid(True)
 plt.bar(x=[l * 0.8 for l in range(8)], height=a1, width=0.4, tick_label=list(a1.index))
 show()
-'''
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # Linear Regrssion on US Housing Price
 

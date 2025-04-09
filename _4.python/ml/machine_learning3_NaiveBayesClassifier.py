@@ -47,6 +47,9 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 
+from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import MultinomialNB  # 多項單純貝氏分類器
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -61,8 +64,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 print("------------------------------")  # 30個
 
-from sklearn.naive_bayes import GaussianNB
-
 clf = GaussianNB()
 
 clf.fit(X_train, y_train)  # 學習訓練.fit
@@ -76,8 +77,6 @@ print(f"{cc*100:.2f}%")
 # 93.33%
 
 print("------------------------------")  # 30個
-
-from sklearn.naive_bayes import MultinomialNB  # 多項單純貝氏分類器
 
 clf = MultinomialNB()  # 多項單純貝氏分類器
 
@@ -179,8 +178,6 @@ print(cc)
 
 # Classification using GaussianNB
 
-from sklearn.naive_bayes import GaussianNB
-
 nbc = GaussianNB()
 
 nbc.fit(X_train, y_train)
@@ -214,9 +211,6 @@ print(cmdf)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.naive_bayes import GaussianNB
-
 
 X = np.array(
     [
@@ -288,8 +282,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.naive_bayes import MultinomialNB  # 多項單純貝氏分類器
 
 # 6個row的訓練資料
 X_train = [
@@ -612,6 +604,50 @@ class my_GaussianNB(my_MultinomialNB):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# SMS-Spam-Detection
+
+import pickle
+from sklearn.feature_extraction.text import CountVectorizer
+
+
+# from sklearn.externals import joblib
+
+df = pd.read_csv("data/spam.csv", encoding="latin-1")
+df.drop(["Unnamed: 2", "Unnamed: 3", "Unnamed: 4"], axis=1, inplace=True)
+# Features and Labels
+df["label"] = df["class"].map({"ham": 0, "spam": 1})
+X = df["message"]
+y = df["label"]
+
+# Extract Feature With CountVectorizer
+cv = CountVectorizer()
+
+X = cv.fit_transform(X)  # Fit the Data
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+clf = MultinomialNB()  # 多項單純貝氏分類器
+
+clf.fit(X_train, y_train)
+
+clf.score(X_test, y_test)
+
+# Alternative Usage of Saved Model
+# joblib.dump(clf, 'NB_spam_model.pkl')
+# NB_spam_model = open('NB_spam_model.pkl','rb')
+# clf = joblib.load(NB_spam_model)
+
+text = "I am a good boy"
+
+""" NG
+vect = cv.transform(text).toarray()
+
+y_pred = clf.predict(vect)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

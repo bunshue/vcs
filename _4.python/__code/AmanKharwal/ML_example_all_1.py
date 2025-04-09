@@ -22,6 +22,10 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 """
 print("------------------------------------------------------------")  # 60個
 
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+
+print("------------------------------------------------------------")  # 60個
+
 # Best_Streaming_Service_Analysis
 
 # TV Shows on Streaming Platforms
@@ -119,8 +123,7 @@ print(cc)
 housing.hist(bins=50, figsize=(10, 8))
 plt.show()
 
-from sklearn.model_selection import train_test_split
-
+# 資料分割
 train_set, test_set = train_test_split(housing, test_size=0.2)
 
 housing["income_cat"] = pd.cut(
@@ -130,7 +133,6 @@ housing["income_cat"] = pd.cut(
 )
 housing["income_cat"].hist()
 plt.show()
-
 
 # stratified sampling
 from sklearn.model_selection import StratifiedShuffleSplit
@@ -203,7 +205,8 @@ housing["total_bedrooms"].fillna(median, inplace=True)
 
 housing_num = housing.drop("ocean_proximity", axis=1)
 
-from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.base import BaseEstimator
+from sklearn.base import TransformerMixin
 
 # column index
 rooms_ix, bedrooms_ix, population_ix, households_ix = 3, 4, 5, 6
@@ -254,7 +257,6 @@ full_pipeline = ColumnTransformer(
 )
 housing_prepared = full_pipeline.fit_transform(housing)
 
-
 from sklearn.linear_model import LinearRegression
 
 lin_reg = LinearRegression()
@@ -270,15 +272,12 @@ Predictions:  [210644.60459286 317768.80697211 210956.43331178  59218.98886849
  189747.55849879]
 """
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 # Hate_Speech_Detection_Model
 
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 import re
 import nltk
@@ -329,9 +328,9 @@ y = np.array(data["labels"])
 
 cv = CountVectorizer()
 X = cv.fit_transform(x)  # Fit the Data
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.33, random_state=42
-)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 clf = DecisionTreeClassifier()
 clf.fit(X_train, y_train)
@@ -759,7 +758,6 @@ print("------------------------------------------------------------")  # 60個
 # Saving BTC-USD.csv to BTC-USD.csv
 
 # from fbprophet import Prophet
-
 
 df = pd.read_csv("data/BTC-USD.csv")
 df = df[["Date", "Close"]]
