@@ -36,7 +36,6 @@ from sklearn.linear_model import LinearRegression
 
 
 def show():
-    # return
     plt.show()
     pass
 

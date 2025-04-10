@@ -1,5 +1,3 @@
-# testKohonen02.py
-
 import numpy as np
 from Kohonen import *
 from numpy import *
@@ -19,3 +17,4 @@ print(SOMNet.w)
 SOMNet.showCluster(plt)
 SOMNet.TrendLine(plt, SOMNet.lratelist)
 SOMNet.TrendLine(plt, SOMNet.rlist)
+

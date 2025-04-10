@@ -8,12 +8,12 @@ import matplotlib.pyplot as plt
 
 # 传递函数:
 def logistic(inX):
-    return 1.0 / (1 + exp(-inX))
+    return 1.0 / (1.0 + exp(-inX))
 
 
 # 传递函数的导函数
 def dlogit(inX1, inX2):
-    return multiply(inX2, (1 - inX2))
+    return multiply(inX2, (1.0 - inX2))
 
 
 # 矩阵各元素平方之和
@@ -57,7 +57,7 @@ def bpNet(dataSet, classLabels):
     eta = 0.05  # 学习率
     mc = 0.2  # 动量因子
     maxiter = 2000  # 最大迭代次数
-    errRec = []  # 误差
+    errRec = []  # 误差列表
     # 构造网络
 
     # 初始化网络

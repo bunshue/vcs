@@ -72,11 +72,8 @@ def file2matrix(path, delimiter):
         for i in range(len(cc)):
             cc[i] = float(cc[i])
         recordlist.append(cc)
-    # print(recordlist)
     return np.mat(recordlist)  # 返回转换后的矩阵形式
-    # 逐行遍历 		# 结果按分隔符分割为行向量
-    # recordlist = [map(eval, row.split(delimiter)) for row in rowlist if row.strip()]
-    # return np.mat(recordlist)  # 返回转换后的矩阵形式
+
 
 
 def createPlot(inTree):
@@ -107,6 +104,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # import scipy.spatial.distance.cdist as dist
+import scipy.spatial.distance as dist
 
 # 欧氏距离
 eps = 1.0e-6
@@ -120,6 +118,10 @@ def distEclud(vecA, vecB):
 def distCorrcoef(vecA, vecB):
     return np.corrcoef(vecA, vecB, rowvar=0)[0][1]
 
+# Jaccard距离
+def distJaccard(vecA, vecB):
+    temp = np.mat([np.array(vecA.tolist()[0]), np.array(vecB.tolist()[0])])
+    return dist.pdist(temp,'jaccard')
 
 # Jaccard距离
 def distJaccard(vecA, vecB):
@@ -134,12 +136,6 @@ def cosSim(vecA, vecB):
     )[0, 0]
 
 
-# Jaccard距离
-# def distJaccard(vecA, vecB):
-# 	temp = mat([array(vecA.tolist()[0]),array(vecB.tolist()[0])])
-# 	return dist.pdist(temp,'jaccard')
-
-
 # 绘制散点图
 def drawScatter1(plt, mydata, size=20, color="blue", mrkr="o"):
     m, n = np.shape(mydata)
@@ -147,46 +143,6 @@ def drawScatter1(plt, mydata, size=20, color="blue", mrkr="o"):
         plt.scatter(mydata.T[0], mydata.T[1], s=size, c=color, marker=mrkr)
     else:
         plt.scatter(mydata[0], mydata[1], s=size, c=color, marker=mrkr)
-
-
-# 绘制散点图
-def drawScatter2(plt, mydata, size=20, color="blue", mrkr="o"):
-    plt.scatter(mydata.T[0], mydata.T[1], s=size, c=color, marker=mrkr)
-
-
-# 绘制分类点
-def drawScatterbyLabel1(plt, Input):
-    # print("原始資料 :\n", Input, sep="")
-    m, n = np.shape(Input)
-    # print("shape :", m, n)
-    target = Input[:, -1]
-    # print("目標 :\n", target, sep="")
-    for i in range(m):
-        if target[i] == 0:
-            plt.scatter(Input[i, 0], Input[i, 1], c="blue", marker="o")
-        else:
-            plt.scatter(Input[i, 0], Input[i, 1], c="red", marker="s")
-
-
-# 硬限幅函数
-def hardlim(dataSet):
-    dataSet[np.nonzero(dataSet.A > 0)[0]] = 1
-    dataSet[np.nonzero(dataSet.A <= 0)[0]] = 0
-    return dataSet
-
-
-# Logistic函数
-def logistic(wTx):
-    return 1.0 / (1.0 + np.exp(-wTx))
-
-
-# 分类函数
-def classifier(testData, weights):
-    prob = logistic(sum(testData * weights))  # 求取概率--判别算法
-    if prob > 0.5:
-        return 1.0  # prob>0.5 返回为1
-    else:
-        return 0.0  # prob<=0.5 返回为0
 
 
 def buildMat(dataSet):
@@ -206,7 +162,7 @@ def loadDataSet1(filename):  # general function to parse tab -delimited floats
         dataMat.append(fltLine)
     return dataMat
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -373,10 +329,9 @@ plotfigure(X, X_test, y, y_pred)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("Recommand_Lib.py")
+print("Recommand.py")
 
 import operator
-import scipy.spatial.distance as dist
 
 
 # dataSet 训练集
@@ -400,6 +355,26 @@ def recommand(dataSet, testVect, r=3, rank=1, distCalc=cosSim):
     descindx = np.argsort(-resultarray)[:rank]  # 排序结果--降序
     return descindx, resultarray[descindx]  # 排序后的索引和值
 
+
+# 加载修正后数据
+A = np.mat(
+    [
+        [0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 5],
+        [0, 0, 0, 3, 0, 4, 0, 0, 0, 0, 3],
+        [0, 0, 0, 0, 4, 0, 0, 1, 0, 4, 0],
+        [3, 3, 4, 0, 0, 0, 0, 2, 2, 0, 0],
+        [5, 4, 5, 0, 0, 0, 0, 5, 5, 0, 0],
+        [0, 0, 0, 0, 5, 0, 1, 0, 0, 5, 0],
+        [4, 3, 4, 0, 0, 0, 0, 5, 5, 0, 1],
+        [0, 0, 0, 4, 0, 4, 0, 0, 0, 0, 4],
+        [0, 0, 0, 2, 0, 2, 5, 0, 0, 1, 2],
+        [0, 0, 0, 0, 5, 0, 0, 0, 0, 4, 0],
+    ]
+)
+new = np.mat([[1, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0]])
+indx, resultarray = recommand(A, new, r=2, rank=2, distCalc=cosSim)
+print(indx)
+print(resultarray)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -651,123 +626,17 @@ print(maxv, maxi)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("testRecommsvd2.py")
+# Logistic函数
+def logistic(wTx):
+    return 1.0 / (1.0 + np.exp(-wTx))
 
-# 加载修正后数据
-A = np.mat(
-    [
-        [0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 5],
-        [0, 0, 0, 3, 0, 4, 0, 0, 0, 0, 3],
-        [0, 0, 0, 0, 4, 0, 0, 1, 0, 4, 0],
-        [3, 3, 4, 0, 0, 0, 0, 2, 2, 0, 0],
-        [5, 4, 5, 0, 0, 0, 0, 5, 5, 0, 0],
-        [0, 0, 0, 0, 5, 0, 1, 0, 0, 5, 0],
-        [4, 3, 4, 0, 0, 0, 0, 5, 5, 0, 1],
-        [0, 0, 0, 4, 0, 4, 0, 0, 0, 0, 4],
-        [0, 0, 0, 2, 0, 2, 5, 0, 0, 1, 2],
-        [0, 0, 0, 0, 5, 0, 0, 0, 0, 4, 0],
-    ]
-)
-new = np.mat([[1, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0]])
-indx, resultarray = recommand(A, new, r=2, rank=2, distCalc=cosSim)
-print(indx)
-print(resultarray)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("gradient_test.py")
-
-# 输入数据
-Input = file2matrix("data2/testSet.txt", "\t")
-# print("原始資料 :\n", Input, sep="")
-
-target = Input[:, -1]  # 获取分类标签列表
-# print("目標 :\n", target, sep="")
-
-[m, n] = np.shape(Input)
-# print("shape :", m, n)
-
-# 按分类绘制散点图
-drawScatterbyLabel1(plt, Input)
-
-# 构建x+b 系数矩阵：b这里默认为1
-dataMat = buildMat(Input)
-# print("dataMat :\n", dataMat, sep="")
-
-alpha = 0.001  # 步长
-steps = 500  # 迭代次数
-
-weights = np.ones((n, 1))  # 初始化权重向量
-# 主程序
-for k in range(steps):
-    gradient = dataMat * np.mat(weights)  # 梯度
-    output = hardlim(gradient)  # 硬限幅函数
-    errors = target - output  # 计算误差
-    weights = weights + alpha * dataMat.T * errors
-
-print("輸出權重 :\n", weights, sep="")  # 输出权重
 
 X = np.linspace(-5, 5, 100)
-# y=w*x+b: b:weights[0]/weights[2]; w:weights[1]/weights[2]
-Y = -(np.double(weights[0]) + X * (np.double(weights[1]))) / np.double(weights[2])
+
+Y = logistic(X)
 plt.plot(X, Y)
 
 show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("iterate_test.py")
-
-# 求解原方程
-A = np.mat([[8, -3, 2], [4, 11, -1], [6, 3, 12]])
-b = np.mat([20, 33, 36])
-result = np.linalg.solve(A, b.T)
-print(result)
-
-# 迭代求原方程组的解：x(k+1)=B0*x(k)+f
-B0 = np.mat(
-    [
-        [0.0, 3.0 / 8.0, -2.0 / 8.0],
-        [-4.0 / 11.0, 0.0, 1.0 / 11.0],
-        [-6.0 / 12.0, -3.0 / 12.0, 0.0],
-    ]
-)
-m, n = np.shape(B0)
-f = np.mat([[20.0 / 8.0], [33.0 / 11.0], [36.0 / 12.0]])
-
-error = 1.0e-6  # 误差阈值
-steps = 100  # 迭代次数
-xk = np.zeros((n, 1))  # 初始化 xk=x0
-errorlist = []  # 记录逐次逼近的误差列表
-for k in range(steps):  # 主程序
-    xk_1 = xk  # 上一次的xk
-    xk = B0 * xk + f  # 本次xk
-    errorlist.append(np.linalg.norm(xk - xk_1))  # 计算并存储误差
-    if errorlist[-1] < error:  # 判断误差是否小于阈值
-        print(k + 1)  # 输出迭代次数
-        break
-print(xk)  # 输出计算结果
-# 绘制误差收敛散点图
-matpts = np.zeros((2, k + 1))
-matpts[0] = np.linspace(1, k + 1, k + 1)
-matpts[1] = np.array(errorlist)
-drawScatter2(plt, matpts)
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("logistic_test2.py")
-
-weights = np.mat([[4.12414349], [0.48007329], [-0.6168482]])
-testdata = np.mat([-0.147324, 2.874846])
-m, n = np.shape(testdata)
-testmat = np.zeros((m, n + 1))
-testmat[:, 0] = 1
-testmat[:, 1:] = testdata
-print(classifier(testmat, weights))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -843,42 +712,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("stoc_test.py")
-
-Input = file2matrix("data2/testSet.txt", "\t")
-target = Input[:, -1]  # 获取分类标签列表
-[m, n] = np.shape(Input)
-
-# 按分类绘制散点图
-drawScatterbyLabel1(plt, Input)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 保留 讀取檔案 ok
-print("normalequation.py")
-
-
-def loadDataSet3(filename):
-    X = []
-    Y = []
-    fr = open(filename)
-    for line in fr.readlines():
-        curLine = line.strip().split("\t")
-        X.append(float(curLine[0]))
-        Y.append(float(curLine[-1]))
-    return X, Y
-
-
-# 数据矩阵,分类标签
-xArr, yArr = loadDataSet3("data2/regdataset.txt")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+'''
 # hmm01.py
 
 # 起始概率
@@ -985,12 +819,29 @@ print(1 - (A11 + A10 + A01 + A00))
 
 print(0.0060101 / (0.01681389 + 0.0060101))
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+# 求解原方程
+A = np.mat([[8, -3, 2], [4, 11, -1], [6, 3, 12]])
+b = np.mat([20, 33, 36])
+result = np.linalg.solve(A, b.T)
+print(result)
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1009,9 +860,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+

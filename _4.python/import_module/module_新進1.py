@@ -1,6 +1,7 @@
 import os
 import sys
 import random
+import chardet  # 檔案編碼格式
 
 print("------------------------------------------------------------")  # 60個
 
@@ -326,8 +327,8 @@ print(a)
 
 text = open(filename, "rb").read()
 codetype = chardet.detect(text)
+print(codetype)
 
-print(chardet.detect(text))
 cod = chardet.detect(text)["encoding"]
 print(cod)
 print(text.decode(cod))
@@ -345,7 +346,6 @@ print("------------------------------")  # 30個
 
 import time
 import random
-
 import glob
 
 

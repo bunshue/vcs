@@ -311,6 +311,23 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+iris = datasets.load_iris()  # 回傳iris包含data和target兩欄位資料
+X = iris.data
+y = iris.target  # 資料集目標
+print(y)
+for i in range(len(y)):
+    if y[i] == 0:
+        plt.scatter(X[i, 0], X[i, 1], c="r", marker="o")
+    elif y[i] == 1:
+        plt.scatter(X[i, 0], X[i, 1], c="g", marker="o")
+    else:
+        plt.scatter(X[i, 0], X[i, 1], c="b", marker="s")
+
+show()            
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("讀取csv檔案成df 2")
 filename = "data/iris.csv"
 df = pd.read_csv(filename)

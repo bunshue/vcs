@@ -1,4 +1,10 @@
-# coding=utf-8
+"""
+    ci_seg.py 文本分词
+        分词：jieba
+        文本编码问题：统一utf-8编码
+
+"""
+
 import sys
 import os
 import jieba

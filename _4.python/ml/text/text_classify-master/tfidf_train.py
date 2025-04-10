@@ -1,8 +1,18 @@
-import sys
+"""
+###词向量空间
 
-# 引入Bunch类
+    tfidf_train.py
+        bunch_path = "train_word_bag/train_set.dat" #导入训练集Bunch的路径
+        space_path = "train_word_bag/tfdifspace.dat" # 词向量空间保存路径
+    tfidf_test.py
+        bunch_path = "test_word_bag/test_set.dat" # 导入训练集Bunch的路径
+        space_path = "test_word_bag/testspace.dat" # 词向量空间保存路径
+
+"""
+
+import sys
 from sklearn.datasets._base import Bunch
-import pickle  # 之前已经说过，不再赘述
+import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer  # 这个东西下面会讲
 
 """

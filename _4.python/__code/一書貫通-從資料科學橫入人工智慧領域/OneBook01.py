@@ -27,7 +27,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
 import ssl
@@ -2618,14 +2618,12 @@ cc = camp.Age_group2.head()
 print(cc)
 
 # df存檔 camp.to_csv("tmp_tele_camp_ok.csv")
-'''
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
 第6讲 统计推断基础
-
     数据说明：本数据是地区房价增长率数据
     名称-中文含义
     dis_name-小区名称
@@ -3481,7 +3479,6 @@ for i, s in enumerate(cross_table.index):
     x, y = G[i, 0], G[i, 1]
     plt.plot(x, y, "r^")
     plt.text(x, y, s, va="bottom", ha="left", color="r")
-
 
 show()
 

@@ -1,4 +1,9 @@
-# coding=utf-8
+"""
+
+###分类器 *select_test.py
+
+"""
+
 from ci_seg import *
 from tfidf_test import *
 from to_bunch import *

@@ -261,8 +261,6 @@ def adaClassify(datToClass, classdictList):
 
 
 def plotROC(predStrengths, labellist):
-    import matplotlib.pyplot as plt
-
     cur = (1.0, 1.0)  # cursor
     ySum = 0.0  # variable to calculate AUC
     numPosClas = sum(array(labellist) == 1.0)
@@ -306,11 +304,233 @@ print(dataArr)
 print("labelArr")
 print(labelArr)
 
-print()
+""" NG
+weakClassArr, aggClassEst = adaBoostTrain(dataArr, labelArr, numIt=10)  # 训练分类器
+print("weakClassArr:", weakClassArr)  # 输出弱分类器
+# plotROC(aggClassEst.T, labelArr) # 绘制ROC曲线
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from numpy import *
+import cv2
+
+win_name = "mypicture"  # 窗口名称
+# cv2.WINDOW_NORMAL:可以手动调整窗口大小
+cv2.namedWindow(win_name, cv2.WINDOW_NORMAL)
+img = cv2.imread("snapshot0001.jpg", 0)  # 0 黑白图片；1 原色图片
+cv2.imshow(win_name, img)  # 显示图片
+cv2.waitKey(0)
+cv2.destroyAllWindows()  # 销毁创建的对象
+# 保存图片
+# cv2.imwrite("paulwalker.mono.pgm", img)
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from numpy import *
+import cv2
+from matplotlib import pyplot as plt
+
+# 读取图片
+img = cv2.imread("paulwalker.mono.pgm", 0)  # 黑白图片
+plt.imshow(img, cmap="gray", interpolation="bicubic")
+plt.xticks([]), plt.yticks([])  # 隐藏 X Y 坐标
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+from numpy import *
+import cv2
+
+# Create a black image
+img = zeros((512, 512, 3))
+# Draw a diagonal blue line with thickness of 5 px
+# 起点:(0,0),终点:(511,511)，颜色:( 255,0,0)，宽度:2
+cv2.line(img, (0, 0), (511, 511), (255, 0, 0), 2)
+cv2.imshow("image", img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from numpy import *
+import cv2
+
+img = zeros((512, 512, 3))
+cv2.rectangle(img, (384, 0), (510, 128), (0, 255, 0), 3)  # 矩形
+cv2.circle(img, (447, 63), 63, (0, 0, 255), -1)  # 圆
+cv2.ellipse(img, (256, 256), (100, 50), 0, 0, 360, 255, -1)  # 椭圆
+# 画多边形
+pts = array([[10, 5], [20, 30], [70, 20], [50, 10]])
+cv2.polylines(img, [pts], True, (0, 255, 255), 1)
+# 写入文字
+font = cv2.FONT_HERSHEY_SIMPLEX
+cv2.putText(img, "OpenCV", (10, 500), font, 4, (255, 255, 255), 2)
+cv2.imshow("image", img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from numpy import *
+import cv2
+
+img = zeros((512, 512, 3))
+# 绘制圆：圆心(255, 255), 半径60, 颜色( 0, 255, 255), 像素1
+cv2.circle(img, (255, 150), 60, (0, 255, 255), 2)  # 圆
+# 绘制椭圆
+# 中心点的位置(255, 255), 短半径50,长半径100
+# 360表示整个椭圆；颜色 0, 255, 255；像素2；
+cv2.ellipse(img, (255, 350), (100, 50), 0, 0, 360, (255, 255, 0), 2)  # 椭圆
+cv2.imshow("image", img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# adaboost_traincase.py
+
+from numpy import *
+from adaboostlib import *
+
+# 导入训练集
+dataArr, labelArr = loadDataSet("train.dat")
+
 weakClassArr, aggClassEst = adaBoostTrain(dataArr, labelArr, numIt=10)  # 训练分类器
 print("weakClassArr:", weakClassArr)  # 输出弱分类器
 # plotROC(aggClassEst.T, labelArr) # 绘制ROC曲线
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# eigencog_face.py
+
+from numpy import *
+from pca import *
+
+ef = Eigenfaces()
+ef.dist_metric = ef.distEclud
+ef.loadimgs("orl_faces/")
+ef.compute()
+E = []
+X = mat(zeros((10, 10304)))
+for i in range(16):
+    X = ef.Mat[i * 10 : (i + 1) * 10, :].copy()
+    # X = ef.normalize(X.mean(axis =0),0,255)
+    X = X.mean(axis=0)
+    imgs = X.reshape(112, 92)
+    E.append(imgs)
+ef.subplot(title="AT&T Eigen Facedatabase", images=E)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# eigencog_test.py
+
+from numpy import *
+from pca import *
+
+ef = Eigenfaces()
+ef.dist_metric = ef.distEclud
+ef.loadimgs("orl_faces/")
+ef.compute()
+# 创建测试集
+testImg = ef.X[30]
+print("实际值 =", ef.y[30], "->", "预测值 =", ef.predict(testImg))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# haar_face_detect.py
+
+from numpy import *
+import cv2
+
+face_cascade = cv2.CascadeClassifier(
+    "E:\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_alt_tree.xml"
+)
+
+img = cv2.imread("mypicture.jpg")
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# 识别输入图片中的人脸对象.返回对象的矩形尺寸
+# 函数原型detectMultiScale(gray, 1.2,3,CV_HAAR_SCALE_IMAGE,Size(30, 30))
+# gray需要识别的图片
+# 1.2：表示每次图像尺寸减小的比例
+# 3：表示每一个目标至少要被检测到4次才算是真的目标(因为周围的像素和不同的窗口大小都可以检测到人脸)
+# CV_HAAR_SCALE_IMAGE表示不是缩放分类器来检测，而是缩放图像，Size(30, 30)为目标的最小最大尺寸
+# faces：表示检测到的人脸目标序列
+faces = face_cascade.detectMultiScale(gray, 1.2, 3)
+for x, y, w, h in faces:
+    img2 = cv2.rectangle(img, (x, y), (x + w, y + h), (255, 255, 255), 4)
+    roi_gray = gray[y : y + h, x : x + w]
+    roi_color = img[y : y + h, x : x + w]
+
+cv2.imshow("img", img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+cv2.imwrite("paulwalker.head.jpg", img)  # 保存图片
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# lbp_face_detect.py
+
+from numpy import *
+import cv2
+
+face_cascade = cv2.CascadeClassifier(
+    "E:\\opencv\\sources\\data\\lbpcascades\\lbpcascade_frontalface.xml"
+)
+
+img = cv2.imread("snapshot0001.jpg")
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+faces = face_cascade.detectMultiScale(gray, 1.2, 3)
+for x, y, w, h in faces:
+    img2 = cv2.rectangle(img, (x, y), (x + w, y + h), (255, 255, 255), 4)
+    roi_gray = gray[y : y + h, x : x + w]
+    roi_color = img[y : y + h, x : x + w]
+
+cv2.imshow("img", img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+cv2.imwrite("paulwalker.head.jpg", img)  # 保存图片
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# testcase.py
+
+from numpy import *
+from adaboostlib import *
+
+# 导入训练集
+dataArr, labelArr = loadDataSet("horseColicTraining.txt")
+# 训练分类器
+weakClassArr, aggClassEst = adaBoostTrain(dataArr, labelArr, numIt=10)
+print("weakClassArr:", weakClassArr)
+# print "aggClassEst:",aggClassEst
+# 绘制ROC曲线
+plotROC(aggClassEst.T, labelArr)
+
+# 导入测试集
+testArr, testLabelArr = loadDataSet("horseColicTest.txt")
+ClassEst100 = adaClassify(testArr, weakClassArr)  # 用学习好的分类器进行分类
+errArr = mat(ones((67, 1)))
+totalError = errArr[ClassEst100 != mat(testLabelArr).T].sum()
+print("totalError:", totalError)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -318,6 +538,28 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

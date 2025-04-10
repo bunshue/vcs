@@ -81,6 +81,9 @@ import sys
 import time
 import random
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 poem_text = """黃河遠上白雲間\n
 一片孤城萬仞山\n
 羌笛何須怨楊柳\n
@@ -126,7 +129,7 @@ with open(filename, "w", encoding="cp950") as f:
     while True:
         if offset > size:
             break
-        count=f.write(poem_text[offset : offset + chunk])
+        count = f.write(poem_text[offset : offset + chunk])
         print("這個 f.write() 指令 寫了", count, "個字元")
         offset += chunk
 
@@ -169,12 +172,12 @@ cc = f.read()  # read(無參數), 從目前檔案位置讀到檔尾
 f.close()
 print("檔案內容 :", cc)
 
-print('用read()取得檔案大小')
+print("用read()取得檔案大小")
 filename = "data/abc.txt"
 f = open(filename, "r")
-cc = f.read()#一次讀完全部
+cc = f.read()  # 一次讀完全部
 f.close()
-print("檔案大小 :", len(cc), '拜')
+print("檔案大小 :", len(cc), "拜")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -184,9 +187,9 @@ chunk = 10
 msg = ""
 with open(filename, "r", encoding="utf-8") as f:
     while True:
-        print('讀N個字元出來')
+        print("讀N個字元出來")
         cc = f.read(chunk)  # 一次讀取chunk數量
-        #print(cc)
+        # print(cc)
         if not cc:
             break
         msg += cc
@@ -216,7 +219,7 @@ print("讀出1行")
 line = f.readline()
 print(line)
 
-print('跳回檔頭')
+print("跳回檔頭")
 f.seek(0)
 
 print("讀出5個字元 readline(N)")
@@ -233,7 +236,7 @@ filename = "data/王之渙_涼州詞.big5.txt"
 f = open(filename, "r")
 
 while True:
-    #print("讀出1行")
+    # print("讀出1行")
     line = f.readline()
     if len(line) == 0:  # Zero length indicates EOF
         break
@@ -243,7 +246,7 @@ f.close()
 # 一樣
 
 f = open(filename, "r")
-#print("讀出1行")
+# print("讀出1行")
 line = f.readline()
 while line != "":
     print(line.strip())
@@ -284,7 +287,7 @@ f = open(filename, "r")
 # 通过for-in循环逐行读取
 for line in f:  # 逐行讀取檔案到變數line
     print(line)
-    #print(line.strip())
+    # print(line.strip())
 f.close()
 
 print("------------------------------------------------------------")  # 60個
@@ -303,7 +306,7 @@ print("------------------------------------------------------------")  # 60個
 print("seek tell truncate")
 print("------------------------------------------------------------")  # 60個
 
-print('檔案指標操作 fseek ftell')
+print("檔案指標操作 fseek ftell")
 
 filename = "tmp_write_text04_seek1.txt"
 
@@ -313,7 +316,7 @@ f.flush()
 
 print("目前檔案指標位置 :", f.tell())
 
-print('跳到檔案位置5')
+print("跳到檔案位置5")
 f.seek(5)
 
 print("預計讀到的位置 15")
@@ -334,7 +337,7 @@ f.seek(6)  # 移到索引第 6 (第7個字元)位置
 string1 = f.read(7)  # 讀取 7 個字元
 print(string1)  # b'Python\n'
 
-print('跳回檔頭')
+print("跳回檔頭")
 f.seek(0)  # 回文件最前端
 
 string2 = f.read(5)  # 讀取 5 個字元
@@ -345,7 +348,7 @@ f.seek(-8, 2)  # 移至最尾端，向前取 8 個字元
 string3 = f.read()  # read(無參數), 從目前檔案位置讀到檔尾
 print(string3)  # b'Welcome\n'
 
-#f.seek(8, 0)
+# f.seek(8, 0)
 
 f.close()
 
@@ -369,7 +372,7 @@ string = f.read(5)
 print("讀取10拜 : ", string)
 
 print("將檔案位置調到檔頭")
-print('跳回檔頭')
+print("跳回檔頭")
 f.seek(0)
 
 print("讀取N字元")
@@ -427,7 +430,7 @@ def wordcount(filename):
         print(f"{key}: {value}")
 
 
-filename = "data/text.txt" 
+filename = "data/text.txt"
 wordcount(filename)
 
 print("------------------------------------------------------------")  # 60個
@@ -637,6 +640,7 @@ print("------------------------------------------------------------")  # 60個
 print("7. 應用範例")
 print("------------------------------------------------------------")  # 60個
 
+
 def wordsNum(filename):
     # 適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數
     try:
@@ -648,7 +652,7 @@ def wordsNum(filename):
         print("找不到 %s 檔案" % filename)
     else:
         wordList = data.split()  # 將文章轉成串列
-        print("檔案 :", filename, "字數 :", len(wordList), '字')  # 列印文章字數
+        print("檔案 :", filename, "字數 :", len(wordList), "字")  # 列印文章字數
 
 
 filename = "data/song1.txt"
@@ -768,6 +772,8 @@ print("程式執行完畢！")
 print("------------------------------------------------------------")  # 60個
 
 1111
+
+
 def modifySong(songStr):  # 將歌曲的標點符號用空字元取代
     for ch in songStr:
         if ch in ".,?":
@@ -784,6 +790,7 @@ def wordCount(songCount):
             mydict[wd] += 1
         else:
             mydict[wd] = 1
+
 
 filename = "data/AreYouSleeping.txt"
 with open(filename) as f:  # 開啟歌曲檔案
@@ -833,6 +840,7 @@ for key, val in dictList:
 """
 print("------------------------------------------------------------")  # 60個
 
+
 def disp_area():
     i = 0
     for a in climate_data:
@@ -874,12 +882,12 @@ count = 0
 print("讀出1行")
 line = f.readline()
 len1 = len(line)
-while len1>0:
+while len1 > 0:
     count += 1
-    #print(count, line.strip()) many
+    # print(count, line.strip()) many
     line = f.readline()
     len1 = len(line)
-    
+
 
 print("total", count, "lines")
 f.close()
@@ -913,56 +921,80 @@ print("使用 print 寫入檔案")
 
 filename = "tmp_write_text06_by_print.txt"
 
-#f = open(filename, "wt")
+# f = open(filename, "wt")
 f = open(filename, "w")
-print('王之渙 涼州詞', file=f)
-print('', file=f)  #寫一個空白列
-print('黃河遠上白雲間', file=f)
-print('一片孤城萬仞山', file=f)
-print('羌笛何須怨楊柳', file=f)
-print('春風不度玉門關', file=f)
+print("王之渙 涼州詞", file=f)
+print("", file=f)  # 寫一個空白列
+print("黃河遠上白雲間", file=f)
+print("一片孤城萬仞山", file=f)
+print("羌笛何須怨楊柳", file=f)
+print("春風不度玉門關", file=f)
 f.close()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+print("純文字檔 用 tab 分隔")
+
+
+def loadDataSet3(filename):
+    X = []
+    Y = []
+    fr = open(filename)
+    for line in fr.readlines():
+        curLine = line.strip().split("\t")
+        X.append(float(curLine[0]))
+        Y.append(float(curLine[-1]))
+    return X, Y
+
+
+# 数据矩阵,分类标签
+xArr, yArr = loadDataSet3("data/sep_tab_regdataset.txt")
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
 
 
 def compareString(string):
-    #檢查是否是搜尋的字串
+    # 檢查是否是搜尋的字串
     if string == searchStr:
         return True
     else:
         return False
 
+
 def parseString(string):
     global num
     # notFoundSignal = True     # 註記沒有找到電話號碼為True
     for i in range(len(data)):  # 用迴圈逐步抽取字串長度做測試
-        msg = data[i:i+len(string)]
+        msg = data[i : i + len(string)]
         if compareString(msg):
             num += 1
 
-#filename = 'C:/_git/vcs/_4.python/_data/射鵰英雄傳.big5.txt'
-filename = 'C:/_git/vcs/_4.python/_data/python_word_count1.txt'
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/琵琶行.txt'
-with open(filename) as f:      # 讀取ex21_2.txt
+
+# filename = 'C:/_git/vcs/_4.python/_data/射鵰英雄傳.big5.txt'
+filename = "C:/_git/vcs/_4.python/_data/python_word_count1.txt"
+filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/琵琶行.txt"
+with open(filename) as f:  # 讀取ex21_2.txt
     data = f.read()  # read(無參數), 從目前檔案位置讀到檔尾
-    #print(data)
+    # print(data)
 
 searchStr = "琵琶"
 num = 0
@@ -992,8 +1024,8 @@ except FileNotFoundError:
     print(f"找不到 {filename} 檔案")
 else:
     wordList = data.split()  # 將文章轉成串列
-    print('檔案 :', filename)
-    print('字數 :', len(wordList))
+    print("檔案 :", filename)
+    print("字數 :", len(wordList))
     for _ in wordList:
         continue
         print(_)
@@ -1002,7 +1034,9 @@ print("------------------------------------------------------------")  # 60個
 
 print("統計一個檔案的字數")
 
-filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/little_women.txt"
+filename = (
+    "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/little_women.txt"
+)
 
 try:
     with open(filename, encoding="utf-8") as f:
@@ -1012,8 +1046,8 @@ except FileNotFoundError:
 else:
     words = contents.split()
     num_words = len(words)
-    print('檔案 :', filename)
-    print('字數 :', num_words)
+    print("檔案 :", filename)
+    print("字數 :", num_words)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1029,8 +1063,8 @@ except FileNotFoundError:
 else:
     words = contents.split()
     num_words = len(words)
-    print('檔案 :', filename)
-    print('字數 :', num_words)
+    print("檔案 :", filename)
+    print("字數 :", num_words)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1062,7 +1096,7 @@ with open("tmp_resolution.txt", "wt") as f:
 
 print("------------------------------------------------------------")  # 60個
 
-#以下不能單獨執行
+# 以下不能單獨執行
 sys.exit()
 
 
@@ -1093,7 +1127,7 @@ print(data)
 
 print("------------------------------------------------------------")  # 60個
 
-print('讀txt的第1欄資料出來')
+print("讀txt的第1欄資料出來")
 
 filename = "data/school.txt"
 with open(filename, "r") as fp:
@@ -1105,7 +1139,7 @@ for s in schools:
 
 print(school)
 
-print('讀txt的資料進字典')
+print("讀txt的資料進字典")
 
 filename = "data/yrborn.txt"
 with open(filename, "r") as fp:
@@ -1133,5 +1167,3 @@ for yr in yrlist:
     bp_g.append(girls)
 
 print(yrlist)
-
-

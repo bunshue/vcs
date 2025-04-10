@@ -1,7 +1,17 @@
-import sys
+"""
+###转为bunch对象
+    to_bunch.py 分词后的预料库转为bunch
+        bunch对象
+            target_name:是一个list，存放的是整个数据集的类别集合。
+            label:是一个list，存放的是所有文本的标签。
+            filenames:是一个list，存放的是所有文本文件的名字。
+            contents:是一个list，分词后文本文件词向量形式
 
-import os  # python内置的包，用于进行文件目录操作，我们将会用到os.listdir函数
-import pickle  # 导入pickle
+"""
+
+import sys
+import os
+import pickle
 
 """'' 
 事实上python中还有一个也叫作pickle的包，与这里的名字相同了，无所谓 

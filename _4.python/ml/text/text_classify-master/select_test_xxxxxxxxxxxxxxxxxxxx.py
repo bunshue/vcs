@@ -1,6 +1,4 @@
 import sys
-
-
 import pickle
 from sklearn.naive_bayes import MultinomialNB  # 导入多项式贝叶斯算法
 

@@ -1,4 +1,3 @@
-# coding:utf-8
 from sklearn.feature_extraction.text import CountVectorizer
 
 # CountVectorizer类会将文本中的词语转换为词频矩阵
