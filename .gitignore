@@ -105,6 +105,19 @@ MANIFEST
 #*.manifest
 #*.spec
 
+# 臨時檔案
+_2.vcs/__ok_program/vcs_SendTo_All.exe
+_2.vcs/my_vcs_lesson_6/_Video/Form1_tmp.cs
+_4.python/__code/Machine-Learning-with-Python-master/Deployment/rnn_app/models/train-embeddings-rnn.h5
+_4.python/__code/Python大數據特訓班(第二版)/data/PythonConnectGsheet1-6a6086d149c5.json
+_4.python/audio_video/ffmpeg.exe
+_4.python/common/cccc.dpl
+_4.python/pygame/test_wave.wav
+_4.python/pygame/tk_ex_MusicPlayer1.txt
+_4.python/qiita_cmap-main.zip
+_4.python/web_crawler/bankRate.csv
+
+
 # 以下應該無用了
 
 # Installer logs
