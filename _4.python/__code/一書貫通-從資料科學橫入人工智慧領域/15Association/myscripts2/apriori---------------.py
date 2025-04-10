@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-
-'''
-Created on Sep. 7, 2017
-Apriori modified script
-@author: ZRQ
-'''
-
 import itertools
 import pandas as pd
 

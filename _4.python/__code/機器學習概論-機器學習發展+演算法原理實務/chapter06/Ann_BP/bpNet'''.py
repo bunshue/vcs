@@ -1,10 +1,5 @@
-# -*- coding: UTF-8 -*-
-# Filename : BackPropgation.py
-"""
-Created on Oct 27, 2010
-BP Working Module
-@author: jack zheng
-"""
+# BackPropgation.py
+
 from numpy import *
 import matplotlib.pyplot as plt
 

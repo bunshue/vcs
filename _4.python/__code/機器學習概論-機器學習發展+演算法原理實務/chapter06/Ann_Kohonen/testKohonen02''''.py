@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Filename : testKohonen02.py
+# testKohonen02.py
 
 import numpy as np
 from Kohonen import *

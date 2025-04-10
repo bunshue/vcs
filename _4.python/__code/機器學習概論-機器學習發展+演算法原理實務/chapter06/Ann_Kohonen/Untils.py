@@ -1,9 +1,5 @@
-﻿# -*- coding: utf-8 -*-
-# Filename : Untils.py
-"""
-Created on Oct 27, 2010
-@author: jack zheng
-"""
+﻿# Untils.py
+
 from numpy import *
 import operator
 import matplotlib.pyplot as plt

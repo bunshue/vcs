@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
-"""Test suite for valuerep.py"""
+# Test suite for valuerep.py
 
 import copy
 from datetime import datetime, date, time, timedelta, timezone

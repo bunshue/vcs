@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Filename : testKohonen.py
+# testKohonen.py
 
 import numpy as np
 import operator
@@ -55,7 +54,7 @@ for i in range(ITER):
     minIndx = (Kohonen.distM(myndSet, w1)).argmin()
     d1 = ceil(minIndx / M)
     d2 = mod(minIndx, N)
-    distMat = Kohonen.distM(mat([d1, d2]), jdpx.transpose())
+    distMat = Kohonen.distM(mat([d1, d2]), jdpx.T)
     nodelindx = (distMat < r).nonzero()[1]
     for j in range(K):
         if sum(nodelindx == j):

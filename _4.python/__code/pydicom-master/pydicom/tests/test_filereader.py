@@ -1,5 +1,3 @@
-# Copyright 2008-2018 pydicom authors. See LICENSE file for details.
-# -*- coding: utf-8 -*-
 """Unit tests for the pydicom.filereader module."""
 
 import gzip

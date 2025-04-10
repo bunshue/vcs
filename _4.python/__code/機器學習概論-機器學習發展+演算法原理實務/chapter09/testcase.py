@@ -1,5 +1,4 @@
-﻿# -*- encoding: utf-8 -*-
-# Filename : testAdaboost2.py
+﻿# testAdaboost2.py
 
 from numpy import *
 import sys

@@ -1,17 +1,11 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
-Reformat the UID list (tables A-1 and A-2) from the PS3.6 docbook file to
-Python syntax.
+Reformat the UID list (tables A-1 and A-2) from the PS3.6 docbook file to Python syntax.
 
 Write the dict element as:
     UID: (name, type, info, is_retired, keyword)
-
     * info is extra information extracted from very long names, e.g.
         which bit size a particular transfer syntax is default for
     * is_retired is 'Retired' if true, else ''
-
 Based on Rickard Holmberg's docbook_to_uiddict2013.py.
 """
 

@@ -1,43 +1,42 @@
-# -*- coding: GBK -*-
-# Filename :gradDecent.py
+# gradDecent.py
 
 from numpy import *
 import operator
 import Untils
 import matplotlib.pyplot as plt
 
-# BPÉñ¾­ÍøÂç
+# BPç¥ç»ç½‘ç»œ
 
-# Êı¾İ¼¯: ÁĞ1:½Ø¾à 1;ÁĞ2:x×ø±ê; ÁĞ3:y×ø±ê
+# æ•°æ®é›†: åˆ—1:æˆªè· 1;åˆ—2:xåæ ‡; åˆ—3:yåæ ‡
 dataMat, classLabels = Untils.loadDataSet("student.txt")
 dataMat = mat(dataMat)
 classMat = mat(classLabels)
 
-# Êı¾İ¹éÒ»»¯
+# æ•°æ®å½’ä¸€åŒ–
 dataMat = Untils.normalize(dataMat)
 
-# »æÖÆÊı¾İ¼¯×ø±êÉ¢µãÍ¼
+# ç»˜åˆ¶æ•°æ®é›†åæ ‡æ•£ç‚¹å›¾
 Untils.drawClassScatter(dataMat, classLabels, False)
 
-# mĞĞÊı nÁĞÊı
+# mè¡Œæ•° nåˆ—æ•°
 m, n = shape(dataMat)
-labelMat = classMat.transpose()
-# ²½³¤
+labelMat = classMat.T
+# æ­¥é•¿
 alpha = 0.001
-# µü´ú´ÎÊı
+# è¿­ä»£æ¬¡æ•°
 maxCycles = 500
-# ¹¹³ÉÏßĞÔ·Ö¸îÏß y=a*x+b: b:weights[0]; a:weights[1]/weights[2]
+# æ„æˆçº¿æ€§åˆ†å‰²çº¿ y=a*x+b: b:weights[0]; a:weights[1]/weights[2]
 weights = ones((n, 1))
-# ¼ÆËã»Ø¹éÏµÊı weights
+# è®¡ç®—å›å½’ç³»æ•° weights
 for k in range(maxCycles):
-    # Í¨¹ısigmoidº¯Êı·µ»Ø½á¹û£¬hÊÇÌİ¶È¼ÆËãµÄ½á¹û£¬ÊÇÒ»¸öÁĞÏòÁ¿
+    # é€šè¿‡sigmoidå‡½æ•°è¿”å›ç»“æœï¼Œhæ˜¯æ¢¯åº¦è®¡ç®—çš„ç»“æœï¼Œæ˜¯ä¸€ä¸ªåˆ—å‘é‡
     # h = logRegres2.sigmoid(dataMatrix*weights)
     h = 1.0 / (1 + exp(-dataMat * weights))
-    # Îó²î¼ÆËã:·ÖÀà±êÇ©(0,1)-h
+    # è¯¯å·®è®¡ç®—:åˆ†ç±»æ ‡ç­¾(0,1)-h
     error = labelMat - h
-    # »Ø¹éÏµÊı£º¸üĞÂÈ¨ÖØ
-    weights = weights + alpha * dataMat.transpose() * error
+    # å›å½’ç³»æ•°ï¼šæ›´æ–°æƒé‡
+    weights = weights + alpha * dataMat.T * error
 print(weights)
 
-# »æÖÆ·ÖÀàÏßÍ¼ĞÎ
+# ç»˜åˆ¶åˆ†ç±»çº¿å›¾å½¢
 Untils.ClassifyLine(-3, 3, weights)

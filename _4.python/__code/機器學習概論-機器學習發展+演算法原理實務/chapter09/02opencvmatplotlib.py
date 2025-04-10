@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from numpy import *
 import cv2
 from matplotlib import pyplot as plt

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from numpy import *
 import numpy as np
 import cv2

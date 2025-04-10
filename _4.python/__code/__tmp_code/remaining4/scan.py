@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import mcpi.minecraft as minecraft
 import mcpi.block as block
 import glob

@@ -1,5 +1,4 @@
-# -*- coding: GBK -*-
-# Filename : 03BPTest.py
+# 03BPTest.py
 
 from numpy import *
 import operator
@@ -7,30 +6,30 @@ import Untils
 import BackPropgation
 import matplotlib.pyplot as plt
 
-# Êı¾İ¼¯
+# æ•°æ®é›†
 dataSet, classLabels = BackPropgation.loadDataSet(
     "testSet2.txt"
-)  # ³õÊ¼»¯Ê±µÚ1ÁĞÎªÈ«1ÏòÁ¿, studentTest.txt
+)  # åˆå§‹åŒ–æ—¶ç¬¬1åˆ—ä¸ºå…¨1å‘é‡, studentTest.txt
 dataSet = BackPropgation.normalize(mat(dataSet))
 
-# »æÖÆÊı¾İµã
-# ÖØ¹¹dataSetÊı¾İ¼¯
+# ç»˜åˆ¶æ•°æ®ç‚¹
+# é‡æ„dataSetæ•°æ®é›†
 dataMat = mat(ones((shape(dataSet)[0], shape(dataSet)[1])))
 dataMat[:, 1] = mat(dataSet)[:, 0]
 dataMat[:, 2] = mat(dataSet)[:, 1]
 
-# »æÖÆÊı¾İ¼¯É¢µãÍ¼
+# ç»˜åˆ¶æ•°æ®é›†æ•£ç‚¹å›¾
 Untils.drawClassScatter(dataMat, transpose(classLabels), False)
 
-# BPÉñ¾­ÍøÂç½øĞĞÊı¾İ·ÖÀà
+# BPç¥ç»ç½‘ç»œè¿›è¡Œæ•°æ®åˆ†ç±»
 errRec, WEX, wex = BackPropgation.bpNet(dataSet, classLabels)
 
-# ¼ÆËãºÍ»æÖÆ·ÖÀàÏß
+# è®¡ç®—å’Œç»˜åˆ¶åˆ†ç±»çº¿
 x, z = BackPropgation.BPClassfier(-3.0, 3.0, WEX, wex)
 
 Untils.classfyContour(x, x, z)
 
-# »æÖÆÎó²îÇúÏß
+# ç»˜åˆ¶è¯¯å·®æ›²çº¿
 X = linspace(0, 2000, 2000)
 Y = log2(errRec) + 1.0e-6
 Untils.TrendLine(X, Y)

@@ -1,10 +1,3 @@
-'''
-Created on Jan 6, 2017
-Apriori modified script
-@author: Zengke
-'''
-# -*- coding: utf-8 -*-
-
 from numpy import *
 import pandas as pd
 

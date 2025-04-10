@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Jun 29 20:10:26 2018
-
-@author: Ben
-"""
-
 
 def Var_Select(orgdata, k, alphaMin=0.1, alphaMax=200, alphastep=0.2):
     """

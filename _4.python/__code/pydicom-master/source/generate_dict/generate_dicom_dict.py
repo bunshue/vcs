@@ -1,13 +1,9 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 # Encoding required to deal with 'micro' character
 
 """
 Create the _dicom_dict.py DICOM dictionary file from the Standard.
-
 Reformat The DICOM dictionary PS3.6 and PS3.7 docbook xml files (from e.g.
 standard docs) to Python syntax.
-
 DicomDictionary
 ---------------
 Write the main DICOM dictionary elements as a python dict called

@@ -1,5 +1,4 @@
-# -*- coding: GBK -*-
-# Filename : 01dataSet.py
+# 01dataSet.py
 
 import numpy as np
 import operator
@@ -10,22 +9,22 @@ import matplotlib.pyplot as plt
 
 dataMat, classLabels = Untils.loadDataSet("student.txt")
 
-# »æÖÆÍ¼ĞÎ£º¶şÎ¬É¢µã,ÎŞ·ÖÀà
+# ç»˜åˆ¶å›¾å½¢ï¼šäºŒç»´æ•£ç‚¹,æ— åˆ†ç±»
 # Untils.drawScatter(dataMat)
 
-# »æÖÆÍ¼ĞÎ£º¶şÎ¬É¢µã,ÓĞ·ÖÀà,ÊÊºÏÑµÁ·¼¯
+# ç»˜åˆ¶å›¾å½¢ï¼šäºŒç»´æ•£ç‚¹,æœ‰åˆ†ç±»,é€‚åˆè®­ç»ƒé›†
 # Untils.drawClassScatter(mat(dataMat),classLabels)
 
-# ºÏ²¢Á½¸ö¶àÎ¬µÄmatrix£¬²¢·µ»ØºÏ²¢ºóµÄMatrix
-# ÊäÈë²ÎÊıÓĞÏÈºóË³Ğò
+# åˆå¹¶ä¸¤ä¸ªå¤šç»´çš„matrixï¼Œå¹¶è¿”å›åˆå¹¶åçš„Matrix
+# è¾“å…¥å‚æ•°æœ‰å…ˆåé¡ºåº
 # [m,n]=shape(dataMat)
 # classMat = transpose(mat(classLabels))
 # matMerge = Untils.mergMatrix(mat(dataMat),classMat)
 
-# ÔªËØ³Ë·¨
+# å…ƒç´ ä¹˜æ³•
 # a = mat([1,1,1]) ;b = mat([2,2,2])
 # print multiply(a,b)
 
-# ²âÊÔBackPropgation.dlogsig(hp,tau)
+# æµ‹è¯•BackPropgation.dlogsig(hp,tau)
 # A = mat([0,1,2]);
 # print "A*(1-A)",multiply(A,(1-A))

@@ -1,5 +1,4 @@
-# -*- coding: UTF-8 -*-
-# Filename : BPTest.py
+# BPTest.py
 
 from numpy import *
 import operator

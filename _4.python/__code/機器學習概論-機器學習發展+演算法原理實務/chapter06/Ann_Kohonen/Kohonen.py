@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Filename : Kohonen.py
+# Kohonen.py
 
 import operator
 import Untils
@@ -27,7 +26,7 @@ def distM(matA, matB):
     rtnmat = zeros((ma, nb))
     for i in range(ma):
         for j in range(nb):
-            rtnmat[i, j] = sqrt(sum(power(matA[i, :] - matB[:, j].transpose(), 2)))
+            rtnmat[i, j] = sqrt(sum(power(matA[i, :] - matB[:, j].T, 2)))
     return rtnmat
 
 
@@ -73,7 +72,7 @@ def kohonen(dataMat, M=2, N=2, ITER=200):
         minIndx = (distM(myndSet, w1)).argmin()
         d1 = ceil(minIndx / M)
         d2 = mod(minIndx, M)
-        distMat = distM(mat([d1, d2]), jdpx.transpose())
+        distMat = distM(mat([d1, d2]), jdpx.T)
         nodelindx = (distMat < r).nonzero()[1]
         for j in range(K):
             if sum(nodelindx == j):

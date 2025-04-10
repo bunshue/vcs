@@ -1,5 +1,4 @@
-﻿# -*- coding: utf-8 -*-
-# Filename : dataSet.py
+﻿# dataSet.py
 
 import operator
 import Untils
@@ -28,7 +27,8 @@ for i in range(m):
 # Untils.drawScatter(dataSet)
 
 # 将城市的坐标矩阵转换为邻接矩阵（城市间距离矩阵）
-dist = Boltzmann.distM(cityPosition, cityPosition.transpose())
+dist = Boltzmann.distM(cityPosition, cityPosition.T)
+
 path = arange(m)
 # print(Boltzmann.pathLen(dist,path))
 

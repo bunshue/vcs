@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Aug 29 10:58:31 2016
-
-@author: edouard.duchesnay@cea.fr
-"""
-
-
 import numpy as np
 import scipy
 import matplotlib.pyplot as plt

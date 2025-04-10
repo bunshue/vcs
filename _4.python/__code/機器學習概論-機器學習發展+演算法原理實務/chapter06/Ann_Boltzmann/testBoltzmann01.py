@@ -1,5 +1,4 @@
-﻿# -*- coding:utf-8 -*-
-# Filename : testBoltzmann01.py
+﻿# testBoltzmann01.py
 
 import operator
 import copy
@@ -13,7 +12,7 @@ cityPosition = mat(dataSet)
 m, n = shape(cityPosition)
 pn = m
 # 将城市的坐标矩阵转换为邻接矩阵（城市间距离矩阵）
-dist = Boltzmann.distM(cityPosition, cityPosition.transpose())
+dist = Boltzmann.distM(cityPosition, cityPosition.T)
 
 # 初始化
 MAX_ITER = 2000  # 1000-2000

@@ -1,10 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 # Encoding required to deal with 'micro' character
-"""Script for auto-generating DICOM SR context groups from FHIR JSON value set
-resources.
-
-
+"""Script for auto-generating DICOM SR context groups from FHIR JSON value set resources.
 """
 
 from io import BytesIO

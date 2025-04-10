@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
-
 from numpy import *
 import cv2
-
 
 # Create a black image
 img = zeros((512, 512, 3))

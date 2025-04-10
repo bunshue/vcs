@@ -12,7 +12,7 @@ def distM(matA, matB):
     rtnmat = zeros((ma, nb))
     for i in range(ma):
         for j in range(nb):
-            rtnmat[i, j] = sqrt(sum(power(matA[i, :] - matB[:, j].transpose(), 2)))
+            rtnmat[i, j] = sqrt(sum(power(matA[i, :] - matB[:, j].T, 2)))
     return rtnmat
 
 
@@ -57,7 +57,7 @@ def boltzmann(cityPosition, MAX_ITER=2000, T0=1000, Lambda=0.97):
     m, n = shape(cityPosition)
     pn = m
     # 将城市的坐标矩阵转换为邻接矩阵（城市间距离矩阵）
-    dist = distM(cityPosition, cityPosition.transpose())
+    dist = distM(cityPosition, cityPosition.T)
 
     # 初始化
     MAX_M = m

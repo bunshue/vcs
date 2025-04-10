@@ -1,5 +1,4 @@
-# -*- coding: GBK -*-
-# Filename :gradDecent.py
+# gradDecent.py
 
 from numpy import *
 import operator
@@ -7,54 +6,54 @@ import Untils
 import BackPropgation
 import matplotlib.pyplot as plt
 
-# BPÉñ¾­ÍøÂç: XORÊµÀı
+# BPç¥ç»ç½‘ç»œ: XORå®ä¾‹
 
-# Êı¾İ¼¯
+# æ•°æ®é›†
 dataSet = [[0, 0, 1], [0, 1, 1], [1, 0, 1], [1, 1, 1]]
 classLabels = [0, 1, 1, 0]
 
-# Êı¾İ¼¯¾ØÕó»¯
-SampIn = mat(dataSet).transpose()
+# æ•°æ®é›†çŸ©é˜µåŒ–
+SampIn = mat(dataSet).T
 expected = mat(classLabels)
-# ÍøÂç²ÎÊı
-eb = 0.01  # Îó²îÈİÏŞ
-eta = 0.6  # Ñ§Ï°ÂÊ
-mc = 0.8  # ¶¯Á¿Òò×Ó
-maxiter = 1000  # ×î´óµü´ú´ÎÊı
-itera = 0  # µÚÒ»´ú
+# ç½‘ç»œå‚æ•°
+eb = 0.01  # è¯¯å·®å®¹é™
+eta = 0.6  # å­¦ä¹ ç‡
+mc = 0.8  # åŠ¨é‡å› å­
+maxiter = 1000  # æœ€å¤§è¿­ä»£æ¬¡æ•°
+itera = 0  # ç¬¬ä¸€ä»£
 
-# ¹¹ÔìÍøÂç
+# æ„é€ ç½‘ç»œ
 
-# ³õÊ¼»¯ÍøÂç
+# åˆå§‹åŒ–ç½‘ç»œ
 nSampNum = 4
-# Ñù±¾ÊıÁ¿
+# æ ·æœ¬æ•°é‡
 nSampDim = 2
-# Ñù±¾Î¬¶È
+# æ ·æœ¬ç»´åº¦
 nHidden = 3
-# Òşº¬²ãÉñ¾­Ôª
+# éšå«å±‚ç¥ç»å…ƒ
 nOut = 1
-# Êä³ö²ã
+# è¾“å‡ºå±‚
 
-# ÊäÈë²ã²ÎÊı
+# è¾“å…¥å±‚å‚æ•°
 
-# Òşº¬²ã²ÎÊı
-# net_Hidden * 3 Ò»ĞĞ´ú±íÒ»¸öÒşº¬²ã½Úµã
+# éšå«å±‚å‚æ•°
+# net_Hidden * 3 ä¸€è¡Œä»£è¡¨ä¸€ä¸ªéšå«å±‚èŠ‚ç‚¹
 w = 2 * (random.rand(nHidden, nSampDim) - 1 / 2)
 b = 2 * (random.rand(nHidden, 1) - 1 / 2)
 wex = mat(Untils.mergMatrix(mat(w), mat(b)))
 
-# Êä³ö²ã²ÎÊı
+# è¾“å‡ºå±‚å‚æ•°
 W = 2 * (random.rand(nOut, nHidden) - 1 / 2)
 B = 2 * (random.rand(nOut, 1) - 1 / 2)
 WEX = mat(Untils.mergMatrix(mat(W), mat(B)))
 
 dWEXOld = 0
 dwexOld = 0
-# ÑµÁ·
+# è®­ç»ƒ
 iteration = 0
 errRec = []
 for i in range(maxiter):
-    # ¹¤×÷ĞÅºÅÕıÏò´«²¥
+    # å·¥ä½œä¿¡å·æ­£å‘ä¼ æ’­
     hp = wex * SampIn
     tau = BackPropgation.logsig(hp)
     tauex = Untils.mergMatrix(tau.T, ones((nSampNum, 1))).T
@@ -64,20 +63,20 @@ for i in range(maxiter):
     err = expected - out
     sse = BackPropgation.sumsqr(err)
     errRec.append(sse)
-    # ÅĞ¶ÏÊÇ·ñÊÕÁ²
+    # åˆ¤æ–­æ˜¯å¦æ”¶æ•›
     iteration = iteration + 1
     if sse <= eb:
         print("iteration:", i)
         break
 
-    # Îó²îĞÅºÅ·´Ïò´«²¥
-    # DELTAºÍdeltaÎª¾Ö²¿Ìİ¶È
+    # è¯¯å·®ä¿¡å·åå‘ä¼ æ’­
+    # DELTAå’Œdeltaä¸ºå±€éƒ¨æ¢¯åº¦
     DELTA = multiply(err, BackPropgation.dlogsig(HM, out))
     wDelta = W.T * DELTA
     delta = multiply(wDelta, BackPropgation.dlogsig(hp, tau))
     dWEX = DELTA * tauex.T
     dwex = delta * SampIn.T
-    # ¸üĞÂÈ¨Öµ
+    # æ›´æ–°æƒå€¼
     if i == 0:
         WEX = WEX + eta * dWEX
         wex = wex + eta * dwex
@@ -89,17 +88,17 @@ for i in range(maxiter):
     dwexOld = dwex
     W = WEX[:, 0:nHidden]
 
-# ÖØ¹¹dataSetÊı¾İ¼¯
+# é‡æ„dataSetæ•°æ®é›†
 dataMat = mat(ones((shape(dataSet)[0], shape(dataSet)[1])))
 dataMat[:, 1] = mat(dataSet)[:, 0]
 dataMat[:, 2] = mat(dataSet)[:, 1]
 
-# »æÖÆÊı¾İµã
+# ç»˜åˆ¶æ•°æ®ç‚¹
 Untils.drawClassScatter(dataMat, transpose(expected))
 
-# »æÖÆ·ÖÀàÏß
+# ç»˜åˆ¶åˆ†ç±»çº¿
 
 
-# »æÖÆÎó²îÇúÏß
+# ç»˜åˆ¶è¯¯å·®æ›²çº¿
 X = linspace(0, 1000, 1000)
 Untils.TrendLine(X, errRec)

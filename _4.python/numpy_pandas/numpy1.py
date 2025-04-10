@@ -480,6 +480,8 @@ print(A[A2])
 
 print("------------------------------------------------------------")  # 60個
 
+# .transpose() 和 .T 是一樣的, 一律用.T
+
 print("陣列轉置 (transpose)")
 
 A = np.arange(10).reshape(2, 5)
@@ -500,6 +502,8 @@ print(B)
 print(B.T)
 print(B.transpose())
 print(np.transpose(B))
+
+
 
 print("------------------------------------------------------------")  # 60個
 

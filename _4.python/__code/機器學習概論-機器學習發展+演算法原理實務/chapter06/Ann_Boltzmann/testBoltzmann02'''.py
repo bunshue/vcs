@@ -1,5 +1,4 @@
-﻿# -*- coding:utf-8 -*-
-# Filename : testBoltzmann01.py
+﻿# testBoltzmann01.py
 
 import operator
 import copy
@@ -12,7 +11,6 @@ dataSet = Untils.loadDataSet("dataSet25.txt")
 cityPosition = mat(dataSet)
 m, n = shape(cityPosition)
 bestx, di = Boltzmann.boltzmann(cityPosition, MAX_ITER=1000, T0=100)
-
 
 # 优化前城市图,路径图
 Untils.drawScatter(cityPosition, flag=False)

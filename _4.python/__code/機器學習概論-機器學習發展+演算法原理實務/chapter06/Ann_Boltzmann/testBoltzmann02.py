@@ -1,5 +1,4 @@
-﻿# -*- coding:utf-8 -*-
-# Filename : testBoltzmann01.py
+﻿# testBoltzmann01.py
 
 import operator
 import copy

@@ -1,10 +1,5 @@
-# -*- coding: UTF-8 -*-
-# Filename : BackPropgation.py
-"""
-Created on Oct 27, 2010
-Logistic Regression Working Module
-@author: jack zheng
-"""
+# BackPropgation.py
+
 from numpy import *
 import operator
 import Untils
@@ -148,7 +143,7 @@ def BPClassfier(start, end, WEX, wex):
             taumrow, taucol = shape(tau)
             tauex = mat(ones((1, taumrow + 1)))
             tauex[:, 0:taumrow] = (tau.T)[:, 0:taumrow]
-            HM = WEX * (mat(tauex).transpose())
+            HM = WEX * (mat(tauex).T)
             out = logistic(HM)
             z[i, j] = out
     return x, z

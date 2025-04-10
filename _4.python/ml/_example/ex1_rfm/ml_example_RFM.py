@@ -1,6 +1,13 @@
 """
+RFM 是一種客戶分析模型，根據客戶的消費行為以進行客戶區分的一種方法。
 
+RFM
+Recency (最近一次交易)
+Frequency (交易頻率)
+Monetary (交易金額)
 
+通過這三個消費行為的維度，對客戶進行分類，找出最有價值、最活躍的顧客，
+同時也能對不同層級的客戶進行相對應的行銷活動，進而實現精準分群行銷。
 
 """
 
@@ -25,20 +32,6 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print("------------------------------------------------------------")  # 60個
-
-import tensorflow as tf
-from sklearn import datasets
-from sklearn import preprocessing
-from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-from sklearn.preprocessing import StandardScaler
-from tensorflow.keras.callbacks import TensorBoard
-from tensorflow.keras.models import model_from_json
-from sklearn.metrics import accuracy_score
-
-from sklearn.decomposition import NMF
-
-
 def show():
     plt.show()
     pass
@@ -46,22 +39,7 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-"""
-RFM 是一種客戶分析模型，根據客戶的消費行為以進行客戶區分的一種方法。
-
-RFM
-Recency (最近一次交易)
-Frequency (交易頻率)
-Monetary (交易金額)
-
-通過這三個消費行為的維度，對客戶進行分類，找出最有價值、最活躍的顧客，
-同時也能對不同層級的客戶進行相對應的行銷活動，進而實現精準分群行銷。
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+'''
 trad_flow = pd.read_csv("data/RFM_TRAD_FLOW.csv", encoding="gbk")
 cc = trad_flow.head(10)
 print(cc)
@@ -524,10 +502,233 @@ print("貼標籤後 :\n", cc, sep="")
 #                 客户，进行邮件短信关怀及时发送优惠信息。
 # '一般保持客户'：消费额度不高，购物频率高，最近购物时间较远——该类客户可能是快要流失的一般客户，可进行一般性低成本营销。
 # '一般挽留客户'：消费额度不高，购物频率不高，最近购物时间也较远——该类客户不是我们的目标客户，经费有限可忽略此类客户。
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# RFM 模型
+
+data = pd.read_csv("data/RFM_TRAD_FLOW.csv", encoding="gbk")
+
+cc = data.head()
+print(cc)
+
+# 查看数据的基本信息
+data.info()
+
+#查看数据缺失值
+cc = data.isnull().sum()   #缺失数量
+print(cc)
+
+cc = data.isnull().mean()   #缺失比例
+print(cc)
+
+cc = data.time
+print(cc)
+
+
+# 特征工程
+
+#封装成一个函数，对整理数据进行格式化
+def to_time(t):
+    out_t=pd.to_datetime(time.mktime(time.strptime(t,'%d%b%y:%H:%M:%S')),unit='s') 
+    return out_t
+
+#调用函数
+data["time_new"]= data.time.apply(to_time)
+cc = data.head()
+print(cc)
+
+# RFM模型计算
+# R计算
+
+# 最近一次消费时间
+data.time_new.max()  #定义2010-09-26为取数时间
+# Timestamp('2010-09-25 13:17:30')
+
+R_trans = pd.DataFrame(data.groupby(['cumid'])['time_new'].max())
+R_trans.columns=['time']
+cc = R_trans.head()
+print(cc)
+
+R_trans['R'] = (data.time_new.max() - R_trans.time).dt.days
+cc = R_trans
+print(cc)
+
+# F计算
+
+# 消费频率
+F = data.groupby(['cumid', 'type'])[['transID']].count()
+cc = F.head(10)
+print(cc)
+
+# 取消堆叠
+F_trans = F.unstack()
+cc = F_trans.head()
+print(cc)
+
+cc = F_trans.columns
+print(cc)
+
+F_trans.columns = F_trans.columns.droplevel(0)
+cc = F_trans.head()
+print(cc)
+
+cc = F_trans.isnull().sum()
+print(cc)
+
+F_trans['Special_offer'] = F_trans['Special_offer'].fillna(0)
+cc = F_trans.head(10)
+print(cc)
+
+#填补缺失，因为退回、赠送商品不计入客户价值，不填充
+#特价商品用0填充
+F_trans["F"]=F_trans['Special_offer']/(F_trans['Special_offer']+F_trans['Normal'])
+cc = F_trans.head()
+print(cc)
+
+cc = F_trans.isnull().sum()
+print(cc)
+
+# M计算
+
+# 消费金额
+M = data.groupby(['cumid', 'type'])[['amount']].count()
+cc = M.head(10)
+print(cc)
+
+# 取消堆叠
+M_trans = M.unstack()
+cc = M_trans.head()
+print(cc)
+
+M_trans.columns = M_trans.columns.droplevel(0)
+cc = M_trans.head()
+print(cc)
+
+# 填补缺失值
+M_trans['Special_offer'] = M_trans['Special_offer'].fillna(0)
+M_trans['returned_goods'] = M_trans['returned_goods'].fillna(0)
+cc = M_trans.head()
+
+M_trans["M"]=M_trans['Normal']+M_trans['Special_offer']+M_trans['returned_goods']
+cc = M_trans.head()
+
+# 模型整合
+#拼接
+analysis=pd.concat([R_trans["R"],F_trans["F"],M_trans["M"]],axis=1)
+cc = analysis.head()
+
+# RFM分段打分
+# 5.1 F1 函数映射
+
+#等频分箱
+cc = pd.qcut(R_trans['R'],2,retbins=True)[0].value_counts()
+print(cc)
+
+#获取分箱阈值
+cc = pd.qcut(R_trans['R'],2,retbins=True)[1][1]
+print(cc)
+
+#定义分段函数
+def R_cut(x):
+    if x<=12:
+        return 1 
+    else:
+        return 0
+analysis.R = analysis.R.apply(R_cut)
+print(analysis)
+
+# F 同理 
+pd.qcut(F_trans['F'],2,retbins=True)[1][1]
+
+# 定义F分段函数
+def F_cut(x):
+    if x<=pd.qcut(F_trans['F'],2,retbins=True)[1][1]:
+        return 0
+    else:
+        return 1
+
+analysis.F = analysis.F.apply(F_cut)
+print(analysis)
+
+# M同理
+pd.qcut(M_trans['M'],2,retbins=True)[1][1]
+
+def M_cut(x):
+    if x<=pd.qcut(M_trans['M'],2,retbins=True)[1][1]:
+        return 0
+    else:
+        return 1
+
+analysis.M = analysis.M.apply(M_cut)
+print(analysis)
+
+# 5.2 算法库
+
+# 3.构建模型，筛选目标客户：进行分段打分
+# 导入sklearn中的预处理库：主要有编码、分箱、数值化转换……
+from sklearn import preprocessing
+cc = pd.qcut(F_trans['F'], 2, retbins=True)
+print(cc)
+
+threshold = pd.qcut(F_trans['F'], 2, retbins=True)[1][1]
+preprocessing.Binarizer(threshold=threshold)
+
+# Binarizer
+# Binarizer(threshold=0.08333333333333333)
+
+cc = F_trans['F'].values.reshape(-1, 1)
+print(cc)
+
+#通过等频分箱 取出阈值
+threshold = pd.qcut(R_trans["R"], q=2, retbins=True)[1][1]
+#用取出的阈值通过Binarizer进行二值化 01转换，相当于01编码
+binarizer = preprocessing.Binarizer(threshold=threshold) #实例化
+R_q = pd.DataFrame(binarizer.transform(R_trans["R"].values.reshape(-1, 1)))
+R_q.index=R_trans.index
+R_q.columns=["R"]
+print(R_q)
+
+# F同理
+threshold = pd.qcut(F_trans['F'], 2, retbins=True)[1][1]
+binarizer = preprocessing.Binarizer(threshold=threshold)
+F_q = pd.DataFrame(binarizer.transform(F_trans['F'].values.reshape(-1, 1))) 
+F_q.index=F_trans.index
+F_q.columns=["F"]
+print(F_q)
+
+# M同理
+threshold = pd.qcut(M_trans['M'], 2, retbins=True)[1][1]
+binarizer = preprocessing.Binarizer(threshold=threshold)
+M_q = pd.DataFrame(binarizer.transform(M_trans['M'].values.reshape(-1, 1)))
+M_q.index=M_trans.index
+M_q.columns=["M"]
+print(M_q)
+
+analysis1=pd.concat([F_q, M_q,R_q], axis=1)
+analysis1 = analysis1[['F','M','R']]
+cc = analysis1.head()
+print(cc)
+
+# RFM定性输出
+label = {
+    (0,0,0):'无兴趣-低价值-沉默',
+    (1,0,0):'有兴趣-低价值-沉默',
+    (1,0,1):'有兴趣-低价值-活跃',
+    (0,0,1):'无兴趣-低价值-活跃',
+    (0,1,0):'无兴趣-高价值-沉默',
+    (1,1,0):'有兴趣-高价值-沉默',
+    (1,1,1):'有兴趣-高价值-活跃',
+    (0,1,1):'无兴趣-高价值-活跃'
+}
+analysis['label'] = analysis[['F','M','R']].apply(lambda x: label[(x[0],x[1],x[2])], axis = 1) 
+cc = analysis.head()
+print(cc)
+
+analysis1['label'] = analysis1[['F','M','R']].apply(lambda x: label[(x[0],x[1],x[2])], axis = 1) 
+cc = analysis1.head()
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

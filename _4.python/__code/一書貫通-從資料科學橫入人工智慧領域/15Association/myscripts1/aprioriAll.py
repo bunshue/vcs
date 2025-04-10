@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-
-'''
-Created on Sep. 30, 2017
-Apriori modified script
-@author: ZRQ
-'''
-
 import sys
 sys.path.append('E:/myscripts')
 
