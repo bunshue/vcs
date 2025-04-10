@@ -1,139 +1,154 @@
 # -*- coding: UTF-8 -*-
 # Filename : BackPropgation.py
-'''
+"""
 Created on Oct 27, 2010
 Logistic Regression Working Module
 @author: jack zheng
-'''
+"""
 from numpy import *
 import operator
 import Untils
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 
-# ´«µİº¯Êı:
+
+# ä¼ é€’å‡½æ•°:
 def logistic(inX):
-    return 1.0/(1+exp(-inX))
+    return 1.0 / (1 + exp(-inX))
 
-# ´«µİº¯ÊıµÄµ¼º¯Êı
-def dlogit(inX1,inX2):
-    return multiply(inX2,(1-inX2))
 
-# ¾ØÕó¸÷ÔªËØÆ½·½Ö®ºÍ
+# ä¼ é€’å‡½æ•°çš„å¯¼å‡½æ•°
+def dlogit(inX1, inX2):
+    return multiply(inX2, (1 - inX2))
+
+
+# çŸ©é˜µå„å…ƒç´ å¹³æ–¹ä¹‹å’Œ
 def sumsqr(inX):
-    return sum(power(inX,2))
-    
-# ¼ÓÔØstudent.txtÊı¾İ¼¯
+    return sum(power(inX, 2))
+
+
+# åŠ è½½student.txtæ•°æ®é›†
 def loadDataSet(filename):
-    dataMat = []; labelMat = []
-    fr = open(filename) #testSet.txt
+    dataMat = []
+    labelMat = []
+    fr = open(filename)  # testSet.txt
     for line in fr.readlines():
         lineArr = line.strip().split()
         dataMat.append([float(lineArr[0]), float(lineArr[1]), 1.0])
         labelMat.append(int(lineArr[2]))
-    return dataMat,labelMat   
+    return dataMat, labelMat
 
-# Êı¾İ±ê×¼»¯(¹éÒ»»¯):student.txtÊı¾İ¼¯
+
+# æ•°æ®æ ‡å‡†åŒ–(å½’ä¸€åŒ–):student.txtæ•°æ®é›†
 def normalize(dataMat):
-    # ¼ÆËã¾ùÖµ
-    height = mean(dataMat[:,0])
-    weight = mean(dataMat[:,1])	 
-    # ¼ÆËã¾ù·½²î
-    stdh = std(dataMat[:,0])
-    stdw = std(dataMat[:,1])
-    # ±ê×¼»¯
-    dataMat[:,0] = (dataMat[:,0]-height)/stdh
-    dataMat[:,1] = (dataMat[:,1]-weight)/stdw	 
+    # è®¡ç®—å‡å€¼
+    height = mean(dataMat[:, 0])
+    weight = mean(dataMat[:, 1])
+    # è®¡ç®—å‡æ–¹å·®
+    stdh = std(dataMat[:, 0])
+    stdw = std(dataMat[:, 1])
+    # æ ‡å‡†åŒ–
+    dataMat[:, 0] = (dataMat[:, 0] - height) / stdh
+    dataMat[:, 1] = (dataMat[:, 1] - weight) / stdw
     return dataMat
 
-def bpNet(dataSet,classLabels):
-    # Êı¾İ¼¯¾ØÕó»¯
+
+def bpNet(dataSet, classLabels):
+    # æ•°æ®é›†çŸ©é˜µåŒ–
     SampIn = mat(dataSet).T
     expected = mat(classLabels)
-    [m,n] = shape(dataSet) 
-    # ÍøÂç²ÎÊı
-    eb = 0.01                   # Îó²îÈİÏŞ 
-    eta = 0.05                   # Ñ§Ï°ÂÊ 
-    mc = 0.2                    # ¶¯Á¿Òò×Ó 
-    maxiter = 2000              # ×î´óµü´ú´ÎÊı 
-    errRec = []                 # Îó²î
-    # ¹¹ÔìÍøÂç
-    
-    # ³õÊ¼»¯ÍøÂç
-    nSampNum = m;  # Ñù±¾ÊıÁ¿
-    nSampDim = n-1;  # Ñù±¾Î¬¶È
-    nHidden = 4;   # Òşº¬²ãÉñ¾­Ôª 
-    nOut = 1;      # Êä³ö²ã
+    [m, n] = shape(dataSet)
+    # ç½‘ç»œå‚æ•°
+    eb = 0.01  # è¯¯å·®å®¹é™
+    eta = 0.05  # å­¦ä¹ ç‡
+    mc = 0.2  # åŠ¨é‡å› å­
+    maxiter = 2000  # æœ€å¤§è¿­ä»£æ¬¡æ•°
+    errRec = []  # è¯¯å·®
+    # æ„é€ ç½‘ç»œ
 
-    # ÊäÈë²ã²ÎÊı
-    
-    # Òşº¬²ã²ÎÊı
-    # net_Hidden * 3 Ò»ĞĞ´ú±íÒ»¸öÒşº¬²ã½Úµã
-    w = 2.0*(random.rand(nHidden,nSampDim)-1.0/2.0)  
-    b = 2.0*(random.rand(nHidden,1)-1.0/2.0) 
-    wex = mat(Untils.mergMatrix(mat(w),mat(b)))
-    
-    # Êä³ö²ã²ÎÊı
-    W = 2.0*(random.rand(nOut,nHidden)-1.0/2.0) 
-    B = 2.0*(random.rand(nOut,1)-1.0/2.0) 
-    WEX = mat(Untils.mergMatrix(mat(W),mat(B)))
-    
-    dWEXOld = 0.0 ; dwexOld = 0.0 
-    # ÑµÁ·
-    iteration = 0.0;  
-    for i in range(maxiter):   
-        # 1. ¹¤×÷ĞÅºÅÕıÏò´«²¥
-        hp = wex*SampIn
+    # åˆå§‹åŒ–ç½‘ç»œ
+    nSampNum = m
+    # æ ·æœ¬æ•°é‡
+    nSampDim = n - 1
+    # æ ·æœ¬ç»´åº¦
+    nHidden = 4
+    # éšå«å±‚ç¥ç»å…ƒ
+    nOut = 1
+    # è¾“å‡ºå±‚
+
+    # è¾“å…¥å±‚å‚æ•°
+
+    # éšå«å±‚å‚æ•°
+    # net_Hidden * 3 ä¸€è¡Œä»£è¡¨ä¸€ä¸ªéšå«å±‚èŠ‚ç‚¹
+    w = 2.0 * (random.rand(nHidden, nSampDim) - 1.0 / 2.0)
+    b = 2.0 * (random.rand(nHidden, 1) - 1.0 / 2.0)
+    wex = mat(Untils.mergMatrix(mat(w), mat(b)))
+
+    # è¾“å‡ºå±‚å‚æ•°
+    W = 2.0 * (random.rand(nOut, nHidden) - 1.0 / 2.0)
+    B = 2.0 * (random.rand(nOut, 1) - 1.0 / 2.0)
+    WEX = mat(Untils.mergMatrix(mat(W), mat(B)))
+
+    dWEXOld = 0.0
+    dwexOld = 0.0
+    # è®­ç»ƒ
+    iteration = 0.0
+    for i in range(maxiter):
+        # 1. å·¥ä½œä¿¡å·æ­£å‘ä¼ æ’­
+        hp = wex * SampIn
         tau = logistic(hp)
-        tauex  = Untils.mergMatrix(tau.T, ones((nSampNum,1))).T
-    
-        HM = WEX*tauex
-        out = logistic(HM)    
-        err = expected - out 
-        sse = sumsqr(err) 
-        errRec.append(sse); 
-        # ÅĞ¶ÏÊÇ·ñÊÕÁ²
-        iteration = iteration + 1    
+        tauex = Untils.mergMatrix(tau.T, ones((nSampNum, 1))).T
+
+        HM = WEX * tauex
+        out = logistic(HM)
+        err = expected - out
+        sse = sumsqr(err)
+        errRec.append(sse)
+        # åˆ¤æ–­æ˜¯å¦æ”¶æ•›
+        iteration = iteration + 1
         if sse <= eb:
-            print "iteration:",i    
-            break;
-         
-        # 2.Îó²îĞÅºÅ·´Ïò´«²¥
-        # DELTAºÍdeltaÎª¾Ö²¿Ìİ¶È  
-        DELTA = multiply(err,dlogit(HM,out))
-        wDelta = W.T*DELTA
-        delta = multiply(wDelta,dlogit(hp,tau))
-        dWEX = DELTA*tauex.T 
-        dwex = delta*SampIn.T        
-        
-        # 3.¸üĞÂÈ¨Öµ
-        if i == 0:  
+            print("iteration:", i)
+            break
+
+        # 2.è¯¯å·®ä¿¡å·åå‘ä¼ æ’­
+        # DELTAå’Œdeltaä¸ºå±€éƒ¨æ¢¯åº¦
+        DELTA = multiply(err, dlogit(HM, out))
+        wDelta = W.T * DELTA
+        delta = multiply(wDelta, dlogit(hp, tau))
+        dWEX = DELTA * tauex.T
+        dwex = delta * SampIn.T
+
+        # 3.æ›´æ–°æƒå€¼
+        if i == 0:
             WEX = WEX + eta * dWEX
             wex = wex + eta * dwex
-        else :    
-            WEX = WEX + (1.0 - mc)*eta*dWEX + mc * dWEXOld
-            wex = wex + (1.0 - mc)*eta*dwex + mc * dwexOld
-     
-        dWEXOld = dWEX
-        dwexOld = dwex 
-        W  = WEX[:,0:nHidden]
-    return errRec,WEX,wex 
+        else:
+            WEX = WEX + (1.0 - mc) * eta * dWEX + mc * dWEXOld
+            wex = wex + (1.0 - mc) * eta * dwex + mc * dwexOld
 
-def BPClassfier(start,end,WEX,wex):
-    x = linspace(start,end,30)
-    xx = mat(ones((30,30)))
-    xx[:,0:30] = x 
+        dWEXOld = dWEX
+        dwexOld = dwex
+        W = WEX[:, 0:nHidden]
+    return errRec, WEX, wex
+
+
+def BPClassfier(start, end, WEX, wex):
+    x = linspace(start, end, 30)
+    xx = mat(ones((30, 30)))
+    xx[:, 0:30] = x
     yy = xx.T
-    z = ones((len(xx),len(yy))) ;
+    z = ones((len(xx), len(yy)))
     for i in range(len(xx)):
-    	for j in range(len(yy)):
-         xi = []; tauex=[] ; tautemp=[]
-         mat(xi.append([xx[i,j],yy[i,j],1])) 
-         hp = wex*(mat(xi).T)
-         tau = logistic(hp) 
-         taumrow,taucol= shape(tau)
-         tauex = mat(ones((1,taumrow+1)))
-         tauex[:,0:taumrow] = (tau.T)[:,0:taumrow]
-         HM = WEX*(mat(tauex).transpose())
-         out = logistic(HM) 
-         z[i,j] = out 
-    return x,z             
+        for j in range(len(yy)):
+            xi = []
+            tauex = []
+            tautemp = []
+            mat(xi.append([xx[i, j], yy[i, j], 1]))
+            hp = wex * (mat(xi).T)
+            tau = logistic(hp)
+            taumrow, taucol = shape(tau)
+            tauex = mat(ones((1, taumrow + 1)))
+            tauex[:, 0:taumrow] = (tau.T)[:, 0:taumrow]
+            HM = WEX * (mat(tauex).transpose())
+            out = logistic(HM)
+            z[i, j] = out
+    return x, z

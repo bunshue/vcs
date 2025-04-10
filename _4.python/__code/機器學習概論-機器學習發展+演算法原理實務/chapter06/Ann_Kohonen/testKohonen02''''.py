@@ -1,20 +1,22 @@
 # -*- coding: utf-8 -*-
 # Filename : testKohonen02.py
 
-import numpy as np 
+import numpy as np
 from Kohonen import *
 from numpy import *
-import matplotlib.pyplot as plt 
-# ¾ØÕó¸÷ÔªËØÆ½·½Ö®ºÍ
+import matplotlib.pyplot as plt
+
+
+# çŸ©é˜µå„å…ƒç´ å¹³æ–¹ä¹‹å’Œ
 def errorfunc(inX):
-	return sum(power(inX,2))*0.5
-# ¼ÓÔØ×ø±êÊı¾İÎÄ¼ş
+    return sum(power(inX, 2)) * 0.5
+
+
+# åŠ è½½åæ ‡æ•°æ®æ–‡ä»¶
 SOMNet = Kohonen()
-SOMNet.loadDataSet("dataset2.txt");
+SOMNet.loadDataSet("dataset2.txt")
 SOMNet.train()
-print SOMNet.w
+print(SOMNet.w)
 SOMNet.showCluster(plt)
-SOMNet.TrendLine(plt,SOMNet.lratelist)
-SOMNet.TrendLine(plt,SOMNet.rlist)
-
-
+SOMNet.TrendLine(plt, SOMNet.lratelist)
+SOMNet.TrendLine(plt, SOMNet.rlist)

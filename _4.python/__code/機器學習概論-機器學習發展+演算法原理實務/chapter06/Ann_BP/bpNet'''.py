@@ -1,168 +1,190 @@
 # -*- coding: UTF-8 -*-
 # Filename : BackPropgation.py
-'''
+"""
 Created on Oct 27, 2010
 BP Working Module
 @author: jack zheng
-'''
+"""
 from numpy import *
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
+
 
 class BPNet(object):
-	def __init__(self):
-		# ÍøÂç²ÎÊı    
-		self.eb = 0.01              # Îó²îÈİÏŞ 
-		self.eta = 0.1             # Ñ§Ï°ÂÊ 
-		self.mc = 0.3               # ¶¯Á¿Òò×Ó 
-		self.maxiter = 2000         # ×î´óµü´ú´ÎÊı 
-		self.errlist = []           # Îó²îÁĞ±í		
-		self.dataMat = 0            # Êı¾İ¼¯
-		self.classLabels = 0        # ·ÖÀà¼¯
-		self.nSampNum=0             # Ñù±¾¼¯ĞĞÊı
-		self.nSampDim=0             # Ñù±¾Î¬¶È
-		self.nHidden = 4;           # Òşº¬²ãÉñ¾­Ôª 
-		self.nOut = 1;              # Êä³ö²ã
-		self.iterator =0            # ×îÓÅÊ±µü´ú´ÎÊı
-	# ´«µİº¯Êı:
-	def logistic(self,net):
-		return 1.0/(1.0+exp(-net))
+    def __init__(self):
+        # ç½‘ç»œå‚æ•°
+        self.eb = 0.01  # è¯¯å·®å®¹é™
+        self.eta = 0.1  # å­¦ä¹ ç‡
+        self.mc = 0.3  # åŠ¨é‡å› å­
+        self.maxiter = 2000  # æœ€å¤§è¿­ä»£æ¬¡æ•°
+        self.errlist = []  # è¯¯å·®åˆ—è¡¨
+        self.dataMat = 0  # æ•°æ®é›†
+        self.classLabels = 0  # åˆ†ç±»é›†
+        self.nSampNum = 0  # æ ·æœ¬é›†è¡Œæ•°
+        self.nSampDim = 0  # æ ·æœ¬ç»´åº¦
+        self.nHidden = 4
+        # éšå«å±‚ç¥ç»å…ƒ
+        self.nOut = 1
+        # è¾“å‡ºå±‚
+        self.iterator = 0  # æœ€ä¼˜æ—¶è¿­ä»£æ¬¡æ•°
 
-	# ´«µİº¯ÊıµÄµ¼º¯Êı
-	def dlogit(self,net):
-		return multiply(net,(1.0-net))
-	
-	# ¾ØÕó¸÷ÔªËØÆ½·½Ö®ºÍ
-	def errorfunc(self,inX):
-		return sum(power(inX,2))*0.5
+    # ä¼ é€’å‡½æ•°:
+    def logistic(self, net):
+        return 1.0 / (1.0 + exp(-net))
 
-	# Êı¾İ±ê×¼»¯(¹éÒ»»¯):		# ±ê×¼»¯
-	def normalize(self,dataMat):
-		[m,n]=shape(dataMat)
-		for i in xrange(n-1):
-			dataMat[:,i] = (dataMat[:,i]-mean(dataMat[:,i]))/(std(dataMat[:,i])+1.0e-10)
-		return dataMat
-	
-	# ¼ÓÔØÊı¾İ¼¯		
-	def loadDataSet(self,filename):
-		self.dataMat = []; self.classLabels = []
-		fr = open(filename)
-		for line in fr.readlines():
-			lineArr = line.strip().split()
-			self.dataMat.append([float(lineArr[0]), float(lineArr[1]), 1.0])
-			self.classLabels.append(int(lineArr[2]))
-		self.dataMat = mat(self.dataMat)
-		m,n = shape(self.dataMat)
-		self.nSampNum = m;    # Ñù±¾ÊıÁ¿
-		self.nSampDim = n-1;  # Ñù±¾Î¬¶È
-	# Ôö¼ÓĞÂÁĞ			
-	def addcol(self,matrix1,matrix2):
-		[m1,n1] = shape(matrix1)
-		[m2,n2] = shape(matrix2)
-		if m1 != m2:
-			print "different rows,can not merge matrix"
-			return; 	
-		mergMat = zeros((m1,n1+n2))
-		mergMat[:,0:n1] = matrix1[:,0:n1]
-		mergMat[:,n1:(n1+n2)] = matrix2[:,0:n2]
-		return mergMat 		
-		
-	# Òş²Ø²ã³õÊ¼»¯
-	def init_hiddenWB(self):
-		self.hi_w = 2.0*(random.rand(self.nHidden,self.nSampDim)-0.5)
-		self.hi_b = 2.0*(random.rand(self.nHidden,1)-0.5)
-		self.hi_wb = mat(self.addcol(mat(self.hi_w),mat(self.hi_b)))
-	# Êä³ö²ã³õÊ¼»¯
-	def init_OutputWB(self):
-		self.out_w = 2.0*(random.rand(self.nOut,self.nHidden)-0.5)
-		self.out_b = 2.0*(random.rand(self.nOut,1)-0.5)
-		self.out_wb = mat(self.addcol(mat(self.out_w),mat(self.out_b)))
-				
-	# bpÍøÖ÷³ÌĞò	
-	def bpTrain(self):
-		# Êı¾İ¼¯¾ØÕó»¯
-		SampIn = self.dataMat.T
-		expected = mat(self.classLabels)
-		self.init_hiddenWB()
-		self.init_OutputWB()
-		# Ä¬ÈÏ¾ÉÈ¨Öµ
-		dout_wbOld = 0.0 ; dhi_wbOld = 0.0 
-				
-		for i in xrange(self.maxiter):   
-			#1. ¹¤×÷ĞÅºÅÕıÏò´«²¥
-			
-			#1.1 ÊäÈë²ãµ½Òşº¬²ã
-			hi_input = self.hi_wb*SampIn
-			hi_output = self.logistic(hi_input)
-			hi2out  = self.addcol(hi_output.T, ones((self.nSampNum,1))).T
-			#1.2 Òşº¬²ãµ½Êä³ö²ã
-			out_input = self.out_wb*hi2out
-			out_output = self.logistic(out_input)
-			
-			#2. Îó²î¼ÆËã     
-			err = expected - out_output 
-			sse = self.errorfunc(err)
-			self.errlist.append(sse);
-			#2.1 ÅĞ¶ÏÊÇ·ñÊÕÁ²ÖÁ×îÓÅ
-			if sse <= self.eb:
-				self.iterator = i+1
-				break;
-			
-			#3.Îó²îĞÅºÅ·´Ïò´«²¥
-			# 3.1 DELTAÎªÊä³ö²ãÌİ¶È  
-			DELTA = multiply(err,self.dlogit(out_output))
-			# 3.2 deltaÎªÒşº¬²ãÌİ¶È
-			delta = multiply(self.out_wb[:,:-1].T*DELTA,self.dlogit(hi_output)) 
-			# 3.3 Êä³ö²ãÈ¨ÖµÎ¢·Ö
-			dout_wb = DELTA*hi2out.T
-			# 3.4 Òşº¬²ãÈ¨ÖµÎ¢·Ö
-			dhi_wb = delta*SampIn.T
-			#3.5 ¸üĞÂÊä³ö²ãºÍÒşº¬²ãÈ¨Öµ
-			if i == 0:
-				self.out_wb = self.out_wb + self.eta * dout_wb 
-				self.hi_wb = self.hi_wb + self.eta * dhi_wb
-			else :
-				self.out_wb = self.out_wb + (1.0 - self.mc)*self.eta*dout_wb  + self.mc * dout_wbOld
-				self.hi_wb = self.hi_wb + (1.0 - self.mc)*self.eta*dhi_wb + self.mc * dhi_wbOld
-			dout_wbOld = dout_wb
-			dhi_wbOld = dhi_wb
-	
-	# bpÍø·ÖÀàÆ÷	
-	def BPClassfier(self,start,end,steps=30):
-		x = linspace(start,end,steps)
-		xx = mat(ones((steps,steps)))
-		xx[:,0:steps] = x 
-		yy = xx.T
-		z = ones((len(xx),len(yy))) ;
-		for i in xrange(len(xx)):
-			for j in xrange(len(yy)):
-				xi = []; tauex=[] ; tautemp=[]
-				mat(xi.append([xx[i,j],yy[i,j],1])) 
-				hi_input = self.hi_wb*(mat(xi).T)
-				hi_out = self.logistic(hi_input) 
-				taumrow,taucol= shape(hi_out)
-				tauex = mat(ones((1,taumrow+1)))
-				tauex[:,0:taumrow] = (hi_out.T)[:,0:taumrow]
-				out_input = self.out_wb*(mat(tauex).T)
-				out = self.logistic(out_input) 
-				z[i,j] = out 
-		return x,z
-		
-# »æÖÆ·ÖÀàÏß
-	def classfyLine(self,plt,x,z):
-		plt.contour(x,x,z,1,colors='black')
-	
-# »æÖÆÇ÷ÊÆÏß: ¿Éµ÷ÕûÑÕÉ«		
-	def TrendLine(self,plt,color='r'):
-		X = linspace(0,self.maxiter,self.maxiter)
-		Y = log2(self.errlist)		
-		plt.plot(X,Y,color)
-	
-	# »æÖÆ·ÖÀàµã
-	def drawClassScatter(self,plt):
-		i=0
-		for mydata in self.dataMat:
-			if self.classLabels[i]==0:
-				plt.scatter(mydata[0,0],mydata[0,1],c='blue',marker='o')
-			else:
-				plt.scatter(mydata[0,0],mydata[0,1],c='red',marker='s')
-			i += 1		
+    # ä¼ é€’å‡½æ•°çš„å¯¼å‡½æ•°
+    def dlogit(self, net):
+        return multiply(net, (1.0 - net))
+
+    # çŸ©é˜µå„å…ƒç´ å¹³æ–¹ä¹‹å’Œ
+    def errorfunc(self, inX):
+        return sum(power(inX, 2)) * 0.5
+
+    # æ•°æ®æ ‡å‡†åŒ–(å½’ä¸€åŒ–):		# æ ‡å‡†åŒ–
+    def normalize(self, dataMat):
+        [m, n] = shape(dataMat)
+        for i in xrange(n - 1):
+            dataMat[:, i] = (dataMat[:, i] - mean(dataMat[:, i])) / (
+                std(dataMat[:, i]) + 1.0e-10
+            )
+        return dataMat
+
+    # åŠ è½½æ•°æ®é›†
+    def loadDataSet(self, filename):
+        self.dataMat = []
+        self.classLabels = []
+        fr = open(filename)
+        for line in fr.readlines():
+            lineArr = line.strip().split()
+            self.dataMat.append([float(lineArr[0]), float(lineArr[1]), 1.0])
+            self.classLabels.append(int(lineArr[2]))
+        self.dataMat = mat(self.dataMat)
+        m, n = shape(self.dataMat)
+        self.nSampNum = m
+        # æ ·æœ¬æ•°é‡
+        self.nSampDim = n - 1
+        # æ ·æœ¬ç»´åº¦
+
+    # å¢åŠ æ–°åˆ—
+    def addcol(self, matrix1, matrix2):
+        [m1, n1] = shape(matrix1)
+        [m2, n2] = shape(matrix2)
+        if m1 != m2:
+            print("different rows,can not merge matrix")
+            return
+        mergMat = zeros((m1, n1 + n2))
+        mergMat[:, 0:n1] = matrix1[:, 0:n1]
+        mergMat[:, n1 : (n1 + n2)] = matrix2[:, 0:n2]
+        return mergMat
+
+    # éšè—å±‚åˆå§‹åŒ–
+    def init_hiddenWB(self):
+        self.hi_w = 2.0 * (random.rand(self.nHidden, self.nSampDim) - 0.5)
+        self.hi_b = 2.0 * (random.rand(self.nHidden, 1) - 0.5)
+        self.hi_wb = mat(self.addcol(mat(self.hi_w), mat(self.hi_b)))
+
+    # è¾“å‡ºå±‚åˆå§‹åŒ–
+    def init_OutputWB(self):
+        self.out_w = 2.0 * (random.rand(self.nOut, self.nHidden) - 0.5)
+        self.out_b = 2.0 * (random.rand(self.nOut, 1) - 0.5)
+        self.out_wb = mat(self.addcol(mat(self.out_w), mat(self.out_b)))
+
+    # bpç½‘ä¸»ç¨‹åº
+    def bpTrain(self):
+        # æ•°æ®é›†çŸ©é˜µåŒ–
+        SampIn = self.dataMat.T
+        expected = mat(self.classLabels)
+        self.init_hiddenWB()
+        self.init_OutputWB()
+        # é»˜è®¤æ—§æƒå€¼
+        dout_wbOld = 0.0
+        dhi_wbOld = 0.0
+
+        for i in xrange(self.maxiter):
+            # 1. å·¥ä½œä¿¡å·æ­£å‘ä¼ æ’­
+
+            # 1.1 è¾“å…¥å±‚åˆ°éšå«å±‚
+            hi_input = self.hi_wb * SampIn
+            hi_output = self.logistic(hi_input)
+            hi2out = self.addcol(hi_output.T, ones((self.nSampNum, 1))).T
+            # 1.2 éšå«å±‚åˆ°è¾“å‡ºå±‚
+            out_input = self.out_wb * hi2out
+            out_output = self.logistic(out_input)
+
+            # 2. è¯¯å·®è®¡ç®—
+            err = expected - out_output
+            sse = self.errorfunc(err)
+            self.errlist.append(sse)
+            # 2.1 åˆ¤æ–­æ˜¯å¦æ”¶æ•›è‡³æœ€ä¼˜
+            if sse <= self.eb:
+                self.iterator = i + 1
+                break
+
+            # 3.è¯¯å·®ä¿¡å·åå‘ä¼ æ’­
+            # 3.1 DELTAä¸ºè¾“å‡ºå±‚æ¢¯åº¦
+            DELTA = multiply(err, self.dlogit(out_output))
+            # 3.2 deltaä¸ºéšå«å±‚æ¢¯åº¦
+            delta = multiply(self.out_wb[:, :-1].T * DELTA, self.dlogit(hi_output))
+            # 3.3 è¾“å‡ºå±‚æƒå€¼å¾®åˆ†
+            dout_wb = DELTA * hi2out.T
+            # 3.4 éšå«å±‚æƒå€¼å¾®åˆ†
+            dhi_wb = delta * SampIn.T
+            # 3.5 æ›´æ–°è¾“å‡ºå±‚å’Œéšå«å±‚æƒå€¼
+            if i == 0:
+                self.out_wb = self.out_wb + self.eta * dout_wb
+                self.hi_wb = self.hi_wb + self.eta * dhi_wb
+            else:
+                self.out_wb = (
+                    self.out_wb
+                    + (1.0 - self.mc) * self.eta * dout_wb
+                    + self.mc * dout_wbOld
+                )
+                self.hi_wb = (
+                    self.hi_wb
+                    + (1.0 - self.mc) * self.eta * dhi_wb
+                    + self.mc * dhi_wbOld
+                )
+            dout_wbOld = dout_wb
+            dhi_wbOld = dhi_wb
+
+    # bpç½‘åˆ†ç±»å™¨
+    def BPClassfier(self, start, end, steps=30):
+        x = linspace(start, end, steps)
+        xx = mat(ones((steps, steps)))
+        xx[:, 0:steps] = x
+        yy = xx.T
+        z = ones((len(xx), len(yy)))
+        for i in xrange(len(xx)):
+            for j in xrange(len(yy)):
+                xi = []
+                tauex = []
+                tautemp = []
+                mat(xi.append([xx[i, j], yy[i, j], 1]))
+                hi_input = self.hi_wb * (mat(xi).T)
+                hi_out = self.logistic(hi_input)
+                taumrow, taucol = shape(hi_out)
+                tauex = mat(ones((1, taumrow + 1)))
+                tauex[:, 0:taumrow] = (hi_out.T)[:, 0:taumrow]
+                out_input = self.out_wb * (mat(tauex).T)
+                out = self.logistic(out_input)
+                z[i, j] = out
+        return x, z
+
+    # ç»˜åˆ¶åˆ†ç±»çº¿
+    def classfyLine(self, plt, x, z):
+        plt.contour(x, x, z, 1, colors="black")
+
+    # ç»˜åˆ¶è¶‹åŠ¿çº¿: å¯è°ƒæ•´é¢œè‰²
+    def TrendLine(self, plt, color="r"):
+        X = linspace(0, self.maxiter, self.maxiter)
+        Y = log2(self.errlist)
+        plt.plot(X, Y, color)
+
+    # ç»˜åˆ¶åˆ†ç±»ç‚¹
+    def drawClassScatter(self, plt):
+        i = 0
+        for mydata in self.dataMat:
+            if self.classLabels[i] == 0:
+                plt.scatter(mydata[0, 0], mydata[0, 1], c="blue", marker="o")
+            else:
+                plt.scatter(mydata[0, 0], mydata[0, 1], c="red", marker="s")
+            i += 1

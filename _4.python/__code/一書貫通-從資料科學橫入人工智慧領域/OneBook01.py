@@ -27,7 +27,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
 import ssl
@@ -196,10 +196,12 @@ f = lambda x: x * x
 f(4)
 
 df = pd.DataFrame({"key": ["b", "b", "a", "c", "a", "a", "b"], "data1": range(7)})
-df.head(2)
+cc = df.head(2)
+print(cc)
 
 df1 = pd.DataFrame({"key": ["b", "b", "a", "c", "a", "a", "b"], "data1": range(7)})
-df1.head(5)
+cc = df1.head(5)
+print(cc)
 
 df2 = pd.DataFrame({"key": ["b", "b", "a", "c", "a", "a", "b"], "data1": range(7)})
 cc = pd.crosstab(df2.key, df2.data1)
@@ -214,7 +216,6 @@ one = pd.read_csv("data/One.csv", sep=",")  # same
 one = pd.read_csv("data/One.csv")
 cc = one.head()
 print(cc)
-
 
 hsb2 = pd.read_table("data/hsb2.txt")
 cc = hsb2.head()
@@ -231,125 +232,6 @@ cc = xls.head()
 print(cc)
 
 # df存檔  xls.to_csv("tmp_copyofhsb2.csv")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-RFM 是一種客戶分析模型，根據客戶的消費行為以進行客戶區分的一種方法。
-
-RFM
-Recency (最近一次交易)
-Frequency (交易頻率)
-Monetary (交易金額)
-
-通過這三個消費行為的維度，對客戶進行分類，找出最有價值、最活躍的顧客，
-同時也能對不同層級的客戶進行相對應的行銷活動，進而實現精準分群行銷。
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 1. 导入数据
-
-trad_flow = pd.read_csv(r"data/RFM_TRAD_FLOW.csv", encoding="gbk")
-cc = trad_flow.head(10)
-
-print(cc)
-
-# 2.通过 RFM方法 建立 模型
-
-# 2.1 通过计算F反应客户对打折产品的偏好
-F = trad_flow.groupby(["cumid", "type"])[["transID"]].count()
-F.head()
-
-F_trans = pd.pivot_table(F, index="cumid", columns="type", values="transID")
-F_trans.head()
-
-F_trans["Special_offer"] = F_trans["Special_offer"].fillna(0)
-F_trans.head()
-
-F_trans["interest"] = F_trans["Special_offer"] / (
-    F_trans["Special_offer"] + F_trans["Normal"]
-)
-F_trans.head()
-
-# 2.2 通过计算M反应客户的价值信息
-M = trad_flow.groupby(["cumid", "type"])[["amount"]].sum()
-M.head()
-
-M_trans = pd.pivot_table(M, index="cumid", columns="type", values="amount")
-M_trans["Special_offer"] = M_trans["Special_offer"].fillna(0)
-M_trans["returned_goods"] = M_trans["returned_goods"].fillna(0)
-M_trans["value"] = (
-    M_trans["Normal"] + M_trans["Special_offer"] + M_trans["returned_goods"]
-)
-M_trans.head()
-
-# 2.3 通过计算R反应客户是否为沉默客户
-# 定义一个从文本转化为时间的函数
-from datetime import datetime
-
-
-def to_time(t):
-    out_t = time.mktime(
-        time.strptime(t, "%d%b%y:%H:%M:%S")
-    )  ########此处修改为时间戳方便后面qcut函数分箱
-    return out_t
-
-
-a = "14JUN09:17:58:34"
-print(to_time(a))
-
-trad_flow["time_new"] = trad_flow.time.apply(to_time)
-trad_flow.head()
-
-R = trad_flow.groupby(["cumid"])[["time_new"]].max()
-R.head()
-
-# 3.构建模型，筛选目标客户
-
-from sklearn import preprocessing
-
-threshold = pd.qcut(F_trans["interest"], 2, retbins=True)[1][1]
-binarizer = preprocessing.Binarizer(threshold=threshold)
-interest_q = pd.DataFrame(
-    binarizer.transform(F_trans["interest"].values.reshape(-1, 1))
-)
-interest_q.index = F_trans.index
-interest_q.columns = ["interest"]
-
-threshold = pd.qcut(M_trans["value"], 2, retbins=True)[1][1]
-binarizer = preprocessing.Binarizer(threshold=threshold)
-value_q = pd.DataFrame(binarizer.transform(M_trans["value"].values.reshape(-1, 1)))
-value_q.index = M_trans.index
-value_q.columns = ["value"]
-
-threshold = pd.qcut(R["time_new"], 2, retbins=True)[1][1]
-binarizer = preprocessing.Binarizer(threshold=threshold)
-time_new_q = pd.DataFrame(binarizer.transform(R["time_new"].values.reshape(-1, 1)))
-time_new_q.index = R.index
-time_new_q.columns = ["time"]
-
-analysis = pd.concat([interest_q, value_q, time_new_q], axis=1)
-
-# analysis['rank']=analysis.interest_q+analysis.interest_q
-analysis = analysis[["interest", "value", "time"]]
-analysis.head()
-
-label = {
-    (0, 0, 0): "无兴趣-低价值-沉默",
-    (1, 0, 0): "有兴趣-低价值-沉默",
-    (1, 0, 1): "有兴趣-低价值-活跃",
-    (0, 0, 1): "无兴趣-低价值-活跃",
-    (0, 1, 0): "无兴趣-高价值-沉默",
-    (1, 1, 0): "有兴趣-高价值-沉默",
-    (1, 1, 1): "有兴趣-高价值-活跃",
-    (0, 1, 1): "无兴趣-高价值-活跃",
-}
-analysis["label"] = analysis[["interest", "value", "time"]].apply(
-    lambda x: label[(x[0], x[1], x[2])], axis=1
-)
-analysis.head()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -379,10 +261,9 @@ print("------------------------------------------------------------")  # 60個
 
 from statsmodels.formula.api import ols
 
-# 导入数据和数据清洗
-
 raw = pd.read_csv(r"data/creditcard_exp.csv", skipinitialspace=True)
-raw.head()
+cc = raw.head()
+print(cc)
 
 exp = raw[raw["avg_exp"].notnull()].copy().iloc[:, 2:].drop("age2", axis=1)
 
@@ -413,8 +294,8 @@ print(cc)
 cc = lm_s.summary()
 print(cc)
 
-pd.DataFrame([lm_s.predict(exp), lm_s.resid], index=["predict", "resid"]).T.head()
-
+cc = pd.DataFrame([lm_s.predict(exp), lm_s.resid], index=["predict", "resid"]).T.head()
+print(cc)
 
 # 在待预测数据集上得到预测值
 
@@ -1440,7 +1321,8 @@ import matplotlib
 snd = pd.read_csv("data/sndHsPr.csv")
 
 snd["all_pr2"] = snd[["price", "AREA"]].apply(lambda x: x[0] * x[1], axis=1)
-snd.head()
+cc = snd.head()
+print(cc)
 
 # 1、把dist變量重新編碼為中文，比如chaoyang改為朝陽區。1）先作頻次統計，然后繪制柱形圖圖展現每個區樣本的數量；
 
@@ -1456,7 +1338,8 @@ district = {
 }
 snd["district"] = snd.dist.map(district)
 # snd_new = snd.drop('dist',axis = 1)
-snd.head()
+cc = snd.head()
+print(cc)
 
 # 4.1 描述性統計與探索型數據分析
 # 1單因子頻數:描述名義變量的分布
@@ -1500,7 +1383,8 @@ type(t1)
 
 sub_sch = pd.crosstab(snd.district, snd.school)
 sub_sch["sum1"] = sub_sch.sum(1)
-sub_sch.head()
+cc = sub_sch.head()
+print(cc)
 
 sub_sch = sub_sch.div(sub_sch.sum1, axis=0)
 sub_sch
@@ -1572,7 +1456,8 @@ snd.plot.scatter(x="AREA", y="price")
 # 按年度匯總GDP，并計算GDP增長率。繪制雙軸圖。GDP為柱子，GDP增長率為線。
 
 gdp = pd.read_csv("data/gdp_gdpcr.csv", encoding="gbk")
-gdp.head()
+cc = gdp.head()
+print(cc)
 
 x = list(gdp.year)
 GDP = list(gdp.GDP)
@@ -2420,7 +2305,8 @@ sample.sort_values(["group", "score"])
 # 分组汇总
 
 sample = pd.read_csv("data/sample.csv", encoding="gbk")
-sample.head()
+cc = sample.head()
+print(cc)
 
 sample.groupby("class")[["math"]].max()
 
@@ -2524,14 +2410,14 @@ sale.to_sql("sale", con)  # 将DataFrame注册成可用sql查询的表
 newTable = pd.read_sql_query(
     "select year, market, sale, profit from sale", con
 )  # 也可使用read_sql
-newTable.head()
-
+cc = newTable.head()
+print(cc)
 
 # 选择表中所有列
 
 sqlResult = pd.read_sql_query("select * from sale", con)
-sqlResult.head()
-
+cc = sqlResult.head()
+print(cc)
 
 # 删除重复的行
 
@@ -2586,11 +2472,13 @@ pd.concat([one, two], axis=0, join="outer", ignore_index=True)  # 更多参数�
 
 table1 = pd.read_csv("data/Table1.csv")
 table1.to_sql("table1", con, index=False)
-table1.head()
+cc = table1.head()
+print(cc)
 
 table2 = pd.read_csv("data/Table2.csv")
 table2.to_sql("table2", con, index=False)
-table2.head()
+cc = table2.head()
+print(cc)
 
 # 笛卡尔积
 
@@ -2616,7 +2504,8 @@ print("------------------------------------------------------------")  # 60個
 # 发现数据问题类型
 
 camp = pd.read_csv("data/teleco_camp_orig.csv")
-camp.head()
+cc = camp.head()
+print(cc)
 
 # 脏数据或数据不正确
 
@@ -2657,12 +2546,14 @@ camp["AvgHomeValue"].describe(include="all")
 # 数据重复
 
 camp["dup"] = camp.duplicated()  # 生成重复标识变量
-camp.dup.head()
+cc = camp.dup.head()
+print(cc)
 
 # 本数据没有重复记录，此处只是示例
 camp_dup = camp[camp["dup"] == True]  # 把有重复的数据保存出来，以备核查
 camp_nodup = camp[camp["dup"] == False]  # 注意与camp.drop_duplicates()的区别
-camp_nodup.head()
+cc = camp_nodup.head()
+print(cc)
 
 camp["dup1"] = camp["ID"].duplicated()  # 按照主键进行重复记录标识
 # accepts['fico_score'].duplicated() # 没有实际意义
@@ -2717,350 +2608,17 @@ camp["Age"].describe()
 # 分箱法——等宽分箱
 
 camp["Age_group1"] = pd.qcut(camp["Age"], 4)  # 这里以age_oldest_tr字段等宽分为4段
-camp.Age_group1.head()
+cc = camp.Age_group1.head()
+print(cc)
 
 # 分箱法——等深分箱
 
 camp["Age_group2"] = pd.cut(camp["Age"], 4)  # 这里以age_oldest_tr字段等宽分为4段
-camp.Age_group2.head()
+cc = camp.Age_group2.head()
+print(cc)
 
 # df存檔 camp.to_csv("tmp_tele_camp_ok.csv")
-
-print("------------------------------------------------------------")  # 60個
-# reshape
-print("------------------------------------------------------------")  # 60個
-
-# # 第5章 数据整合和数据清洗
-# pandas学习参考： [十分钟搞定pandas](http://www.cnblogs.com/chaosimple/p/4153083.html)
-
-# ## 5.1　数据整合
-
-# 行列操作
-
-# 1. 单列
-
-# 拆分、堆叠列
-
-table = pd.DataFrame(
-    {
-        "cust_id": [10001, 10001, 10002, 10002, 10003],
-        "type": ["Normal", "Special_offer", "Normal", "Special_offer", "Special_offer"],
-        "Monetary": [3608, 420, 1894, 3503, 4567],
-    }
-)
-
-
-table
-
-result = pd.pivot_table(table, index="cust_id", columns="type", values="Monetary")
-
-pd.pivot_table(
-    table,
-    index="cust_id",
-    columns="type",
-    values="Monetary",
-    fill_value=0,
-    aggfunc="sum",
-)
-
-table1 = pd.pivot_table(
-    table,
-    index="cust_id",
-    columns="type",
-    values="Monetary",
-    fill_value=0,
-    aggfunc=np.sum,
-).reset_index()
-table1
-
-pd.melt(
-    table1,
-    id_vars="cust_id",
-    value_vars=["Normal", "Special_offer"],
-    value_name="Monetary",
-    var_name="TYPE",
-)
-
-# # 第5章3 RFM
-# pandas学习参考： [十分钟搞定pandas](http://www.cnblogs.com/chaosimple/p/4153083.html)
-
-# 1. 导入数据
-
-# 無檔案??
-trad_flow = pd.read_csv("data/RFM_TRAD_FLOW.csv", encoding="gbk")
-trad_flow.head(10)
-
-# 2.计算 RFM
-
-M = trad_flow.groupby(["cumid", "type"])[["amount"]].sum()
-
-M_trans = pd.pivot_table(M, index="cumid", columns="type", values="amount")
-
-F = trad_flow.groupby(["cumid", "type"])[["transID"]].count()
-F.head()
-
-F_trans = pd.pivot_table(F, index="cumid", columns="type", values="transID")
-F_trans.head()
-
-R = trad_flow.groupby(["cumid", "type"])[["time"]].max()
-R.head()
-
-# R_trans=pd.pivot_table(R,index='cumid',columns='type',values='time')
-# R_trans.head()
-
-# 3.衡量客户对打折商品的偏好
-
-M_trans["Special_offer"] = M_trans["Special_offer"].fillna(0)
-
-M_trans["spe_ratio"] = M_trans["Special_offer"] / (
-    M_trans["Special_offer"] + M_trans["Normal"]
-)
-M_rank = M_trans.sort_values("spe_ratio", ascending=False, na_position="last").head()
-
-M_rank["spe_ratio_group"] = pd.qcut(M_rank["spe_ratio"], 4)  # 这里以age_oldest_tr字段等宽分为4段
-M_rank.head()
-
-print("------------------------------------------------------------")  # 60個
-# sampling
-print("------------------------------------------------------------")  # 60個
-
-
-def get_sample(df, sampling="simple_random", k=1, stratified_col=None):
-    """
-    对输入的 dataframe 进行抽样的函数
-
-    参数:
-        - df: 输入的数据框 pandas.dataframe 对象
-
-        - sampling:抽样方法 str
-            可选值有 ["simple_random", "stratified", "systematic"]
-            按顺序分别为: 简单随机抽样、分层抽样、系统抽样
-
-        - k: 抽样个数或抽样比例 int or float
-            (int, 则必须大于0; float, 则必须在区间(0,1)中)
-            如果 0 < k < 1 , 则 k 表示抽样对于总体的比例
-            如果 k >= 1 , 则 k 表示抽样的个数；当为分层抽样时，代表每层的样本量
-
-        - stratified_col: 需要分层的列名的列表 list
-            只有在分层抽样时才生效
-
-    返回值:
-        pandas.dataframe 对象, 抽样结果
-    """
-    from functools import reduce
-
-    len_df = len(df)
-    if k <= 0:
-        raise AssertionError("k不能为负数")
-    elif k >= 1:
-        assert isinstance(k, int), "选择抽样个数时, k必须为正整数"
-        sample_by_n = True
-        if sampling == "stratified":
-            alln = (
-                k * df.groupby(by=stratified_col)[stratified_col[0]].count().count()
-            )  # 有问题的
-            # alln=k*df[stratified_col].value_counts().count()
-            if alln >= len_df:
-                raise AssertionError("请确认k乘以层数不能超过总样本量")
-    else:
-        sample_by_n = False
-        if sampling in ("simple_random", "systematic"):
-            k = math.ceil(len_df * k)
-
-    # print(k)
-
-    if sampling == "simple_random":
-        print("使用简单随机抽样")
-        idx = random.sample(range(len_df), k)
-        res_df = df.iloc[idx, :].copy()
-        return res_df
-
-    elif sampling == "systematic":
-        print("使用系统抽样")
-        step = len_df // k + 1  # step=len_df//k-1
-        start = 0  # start=0
-        idx = range(len_df)[start::step]  # idx=range(len_df+1)[start::step]
-        res_df = df.iloc[idx, :].copy()
-        # print("k=%d,step=%d,idx=%d"%(k,step,len(idx)))
-        return res_df
-
-    elif sampling == "stratified":
-        assert stratified_col is not None, "请传入包含需要分层的列名的列表"
-        assert all(np.in1d(stratified_col, df.columns)), "请检查输入的列名"
-
-        grouped = df.groupby(by=stratified_col)[stratified_col[0]].count()
-        if sample_by_n == True:
-            group_k = grouped.map(lambda x: k)
-        else:
-            group_k = grouped.map(lambda x: math.ceil(x * k))
-
-        res_df = pd.DataFrame(columns=df.columns)
-        for df_idx in group_k.index:
-            df1 = df
-            if len(stratified_col) == 1:
-                df1 = df1[df1[stratified_col[0]] == df_idx]
-            else:
-                for i in range(len(df_idx)):
-                    df1 = df1[df1[stratified_col[i]] == df_idx[i]]
-            idx = random.sample(range(len(df1)), group_k[df_idx])
-            group_df = df1.iloc[idx, :].copy()
-            res_df = pd.concat([res_df, group_df], axis=0, ignore_index=True)
-        return res_df
-
-    else:
-        raise AssertionError("sampling is illegal")
-
-
-clients = pd.read_csv("data/clients.csv", encoding="gbk")
-# clients["district_id_c"]=clients["district_id"].map(lambda x:"id"+str(x))
-
-# 在每个地区分别用简单随机抽样、分层抽样、系统抽样，三种方式抽取样本
-
-# 简单随机抽样
-# 简单随机抽样-按数量取
-srn = get_sample(clients, sampling="simple_random", k=22, stratified_col=None)
-# 简单随机抽样-按百分比取
-srp = get_sample(clients, sampling="simple_random", k=0.1, stratified_col=None)
-
-# 分层抽样
-# 分层抽样-按每层数量取
-strn = get_sample(clients, sampling="stratified", k=2, stratified_col=["district_id"])
-# 分层抽样-按每层百分比取
-strp = get_sample(clients, sampling="stratified", k=0.1, stratified_col=["district_id"])
-
-# 系统抽样
-# 系统抽样-按数量取
-sysn = get_sample(clients, sampling="systematic", k=4, stratified_col=None)
-# 系统抽样-按百分比取
-sysp = get_sample(clients, sampling="systematic", k=0.1, stratified_col=None)
-
-print("------------------------------------------------------------")  # 60個
-# RFM2
-print("------------------------------------------------------------")  # 60個
-
-# # 第5章3 RFM
-# pandas学习参考： [十分钟搞定pandas](http://www.cnblogs.com/chaosimple/p/4153083.html)
-
-trad_flow = pd.read_csv("data/RFM_TRAD_FLOW.csv", encoding="gbk")
-trad_flow.head()
-
-# 2.计算 RFM
-
-# 先将非标准字符串时间格式化为时间数组，再转换为时间戳便于计算
-trad_flow["time"] = trad_flow["time"].map(
-    lambda x: time.mktime(time.strptime(x, "%d%b%y:%H:%M:%S"))
-)
-
-# 查找每个购物ID每个销售类型下的最近时间
-R = trad_flow.groupby(["cumid", "type"])[["time"]].max()
-
-# 转化为透视表
-R_trans = pd.pivot_table(R, index="cumid", columns="type", values="time")
-
-# 用最久远的购物时间替换缺失值
-R_trans[["Special_offer", "returned_goods"]] = R_trans[
-    ["Special_offer", "returned_goods"]
-].apply(lambda x: x.replace(np.nan, min(x)), axis=0)
-R_trans["R_max"] = R_trans[["Normal", "Presented", "Special_offer"]].apply(
-    lambda x: max(x), axis=1
-)
-
-R_trans.head()
-
-# 对购物频率按照购物ID和购物类型进行汇总统计
-F = trad_flow.groupby(["cumid", "type"])[["transID"]].count()
-
-# 转化为透视表
-F_trans = pd.pivot_table(F, index="cumid", columns="type", values="transID")
-
-# 用0填补缺失值
-F_trans[["Special_offer", "returned_goods"]] = F_trans[
-    ["Special_offer", "returned_goods"]
-].fillna(0)
-
-# 将退货的频数转化为负数
-F_trans["returned_goods"] = F_trans["returned_goods"].map(lambda x: -x)
-
-# 求每个购物ID的购物总次数
-F_trans["F_total"] = F_trans.apply(lambda x: sum(x), axis=1)
-
-F_trans.head()
-
-# 对购物金额按照购物ID和购物类型进行汇总统计
-M = trad_flow.groupby(["cumid", "type"])[["amount"]].sum()
-
-# 转化为透视表
-M_trans = pd.pivot_table(M, index="cumid", columns="type", values="amount")
-
-# 用0填补缺失值
-M_trans[["Special_offer", "returned_goods"]] = M_trans[
-    ["Special_offer", "returned_goods"]
-].fillna(0)
-
-# 求每个购物ID的购物总金额
-M_trans["M_total"] = M_trans.apply(lambda x: sum(x), axis=1)
-
-M_trans.head()
-
-# 合并表
-RFM = pd.concat([R_trans["R_max"], F_trans["F_total"], M_trans["M_total"]], axis=1)
-# RFM三个维度等宽分箱打分
-RFM["R_score"] = pd.cut(RFM.R_max, 3, labels=[1, 2, 3], precision=2)
-RFM["F_score"] = pd.cut(RFM.F_total, 3, labels=[1, 2, 3], precision=2)
-RFM["M_score"] = pd.cut(RFM.M_total, 3, labels=[1, 2, 3], precision=2)
-
-print("依據 R_score F_score M_score 三欄位, 建立 Label 欄位")
-
-
-# RFM各三类，总共有27种组合，为方便营销简化分类为8种
-def score_label(a, b, c):
-    """
-    a: 'R_score'
-    b: 'F_score'
-    c: 'M_score'
-    """
-    if a == 3 and b == 3 and c == 3:
-        return "重要价值客户"
-    elif a == 3 and (b in [1, 2]) and c == 3:
-        return "重要发展客户"
-    elif (a in [1, 2]) and b == 3 and c == 3:
-        return "重要保持客户"
-    elif (a in [1, 2]) and (b in [1, 2]) and c == 3:
-        return "重要挽留客户"
-    elif a == 3 and b == 3 and (c in [1, 2]):
-        return "一般价值客户"
-    elif a == 3 and (b in [1, 2]) and (c in [1, 2]):
-        return "一般发展客户"
-    elif (a in [1, 2]) and b == 3 and (c in [1, 2]):
-        return "一般保持客户"
-    elif (a in [1, 2]) and (b in [1, 2]) and (c in [1, 2]):
-        return "一般挽留客户"
-
-
-cc = RFM.head()
-print("貼標籤前 :\n", cc, sep="")
-
-# 为每个购物ID贴标签
-RFM["Label"] = RFM[["R_score", "F_score", "M_score"]].apply(
-    lambda x: score_label(x[0], x[1], x[2]), axis=1
-)
-
-cc = RFM.head()
-print("貼標籤後 :\n", cc, sep="")
-
-# '重要价值客户'：消费额度高，购物频率高，最近购物时间也较近——该类客户是重要且忠实的大客户，要细心维护。
-# '重要发展客户'：消费额度高，购物频率不高，最近购物时间较近——该类客户只是购物频率不高，有巨大的挖掘潜力，可根据该客户以往购物信息，进行个性
-#                 化推荐，并发放购物优惠券刺激消费，增加客户粘性。
-# '重要保持客户'：消费额度高，购物频率高，但最近购物时间较远——该类客户最近一次购物时间较久远，可能是快要流失的重要客户，可以让客户沟通了解其
-#                 是不是哪项环节不够人性化体验不好，导致购物频率过低。
-# '重要挽留客户'：消费额度高，购物频率不高，最近购物时间也较远——该类客户可能是已经流失的重要客户，如果还能联系上，可跟进了解其流失原因，对有
-#                 相似客户特征的群体进行预警，针对性改进。
-# '一般价值客户'：消费额度不高，购物频率高，最近购物时间也较近——该类客户对我们的产品感兴趣，很活跃，但购物金额过低，可能是价格敏感性客户，可
-#                 对其组合金融产品增加其购买力。
-# '一般发展客户'：消费额度不高，购物频率不高，最近购物时间较近——该类客户可能是我们的新晋客户，对我们的服务和产品进行试探性体验，可多留意此类
-#                 客户，进行邮件短信关怀及时发送优惠信息。
-# '一般保持客户'：消费额度不高，购物频率高，最近购物时间较远——该类客户可能是快要流失的一般客户，可进行一般性低成本营销。
-# '一般挽留客户'：消费额度不高，购物频率不高，最近购物时间也较远——该类客户不是我们的目标客户，经费有限可忽略此类客户。
+'''
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3144,8 +2702,6 @@ print("t-statistic=%6.4f, p-value=%6.4f, df=%s" % d1.ttest_mean(0.1))
     AvgIncome 当地人均收入
 """
 
-# 导入数据
-
 camp = pd.read_csv("data/tele_camp_okaaa.csv", skipinitialspace=True)
 cc = camp.head()
 print(cc)
@@ -3218,7 +2774,8 @@ print("------------------------------------------------------------")  # 60個
 # rate-房价同比增长率
 
 house_price_gr = pd.read_csv(r"data/house_price_gr.csv", encoding="gbk")
-house_price_gr.head()
+cc = house_price_gr.head()
+print(cc)
 
 # ## 6.1 参数估计
 # 进行描述性统计分析
@@ -3275,7 +2832,6 @@ print("t-statistic=%6.4f, p-value=%6.4f, df=%s" % d1.ttest_mean(0.1))
 
 
 # ## 6.3 两样本T检验
-# 导入数据
 # 数据说明：本数据是一份汽车贷款数据
 
 # |字段名|中文含义|
@@ -3368,7 +2924,6 @@ print(
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 # chapter6_tele_camp_ok.py
 
 # # 第6讲 统计推断基础
@@ -3378,7 +2933,8 @@ print("------------------------------------------------------------")  # 60個
 # rate-房价同比增长率
 
 house_price_gr = pd.read_csv(r"data/house_price_gr.csv", encoding="gbk")
-house_price_gr.head()
+cc = house_price_gr.head()
+print(cc)
 
 # ## 6.1 参数估计
 # 进行描述性统计分析
@@ -3450,9 +3006,9 @@ print("t-statistic=%6.4f, p-value=%6.4f, df=%s" % d1.ttest_mean(0.1))
 # AvgHomeValue	当地房屋均价
 # AvgIncome	当地人均收入
 
-# 导入数据
 camp = pd.read_csv(r"data/tele_camp_ok.csv", skipinitialspace=True)
-camp.head()
+cc = camp.head()
+print(cc)
 
 # 检验当地客户平均客户价值对是否入网的影响
 
@@ -3527,11 +3083,8 @@ print(
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
 """
 主成分分析
-
 某金融服务公司为了了解贷款客户的信用程度，评价客户的信用等级，采用信用评级常用的5C方法，说明客户违约的可能性。
 
     品格：指客户的名誉；
@@ -3666,12 +3219,9 @@ data_scaled = scale(data)
 telecom_pca = PCA(n_components=2, whiten=True).fit(data_scaled)
 telecom_pca.explained_variance_ratio_
 
-
 telecom_pca.components_
 
-
 telecom_pca.transform(data_scaled)
-
 
 telecom_fa = FactorAnalysis(n_components=2).fit(data_scaled)
 cc = pd.DataFrame(fa.components_).T
@@ -3753,10 +3303,12 @@ X5 环境：指外部经济、政策环境对客户的影响
 # 引入数据
 
 model_data = pd.read_csv("data/Loan_aply.csv", encoding="gbk")
-model_data.head()
+cc = model_data.head()
+print(cc)
 
 data = model_data.loc[:, "X1":]
-data.head()
+cc = data.head()
+print(cc)
 
 # 查看相关系数矩阵，判定做变量降维的必要性（非必须）
 
@@ -4005,7 +3557,9 @@ print(cc)
 # 数据标准化的方法 http://www.cnblogs.com/chaosimple/p/4153167.html
 
 model_data = pd.read_csv("data/cities_10.csv", encoding="gbk")
-model_data.head()
+cc = model_data.head()
+print(cc)
+
 data = model_data.loc[:, "X1":]
 cc = data.head()
 print(cc)
@@ -4082,10 +3636,12 @@ X9	地方财政收入
 # 引入数据
 
 model_data = pd.read_csv("data/cities_10.csv", encoding="gbk")
-model_data.head()
+cc = model_data.head()
+print(cc)
 
 data = model_data.loc[:, "X1":]
-data.head()
+cc = data.head()
+print(cc)
 
 # 查看相关系数矩阵，判定做变量降维的必要性（非必须）
 
@@ -4241,7 +3797,9 @@ def Var_Select(orgdata, k, alphaMax=10, alphastep=0.2):
 
 
 model_data = pd.read_csv("data/cities_10.csv", encoding="gbk")
-model_data.head()
+cc = model_data.head()
+print(cc)
+
 data = model_data.loc[:, "X1":]
 
 Varseled_data = Var_Select(data, k=2)
@@ -4490,7 +4048,9 @@ def Var_Select(orgdata, k, alphaMax=10, alphastep=0.2):
 
 
 model_data = pd.read_csv("data/creditcard_exp.csv")
-model_data.head()
+cc = model_data.head()
+print(cc)
+
 data = model_data.loc[:, "gender":]
 
 Varseled_data = Var_Select(data, k=5)
@@ -4575,14 +4135,16 @@ from sklearn import cluster
 
 print("------------------------------------------------------------")  # 60個
 
-# 导入数据
 orgData = pd.read_csv("data/cities_10.csv", index_col="AREA", encoding="gbk")
-orgData.head()
+cc = orgData.head()
+print(cc)
+
 # orgData.describe()
 
 # 标准化
 x_scaled = preprocessing.scale(orgData + 0.0)  # 归一化，但是只能用于浮点类型变量
-pd.DataFrame(x_scaled).head()
+cc = pd.DataFrame(x_scaled).head()
+print(cc)
 
 # 变量压缩
 pca = PCA(n_components=2)
@@ -4671,10 +4233,12 @@ print("------------------------------------------------------------")  # 60個
 # 第一步：手动测试主成分数量
 
 model_data = pd.read_csv("data/cities_10.csv", encoding="gbk")
-model_data.head()
+cc = model_data.head()
+print(cc)
 
 data = model_data.loc[:, "X1":]
-data.head()
+cc = data.head()
+print(cc)
 
 # 查看相关系数矩阵，判定做变量降维的必要性（非必须）
 
@@ -4769,7 +4333,8 @@ print("------------------------------------------------------------")  # 60個
 
 model_data = pd.read_csv("data/profile_bank.csv")
 data = model_data.loc[:, "CNT_TBM":"CNT_CSC"]
-data.head()
+cc = data.head()
+print(cc)
 
 # 查看相关系数矩阵，判定做变量降维的必要性（非必须）
 
@@ -4831,7 +4396,8 @@ score = pd.DataFrame(np.dot(data, fas))
 # 第三步：根据因子得分进行数据分析
 
 fa_scores = score.rename(columns={0: "ATM_POS", 1: "TBM", 2: "CSC"})
-fa_scores.head()
+cc = fa_scores.head()
+print(cc)
 
 # 第四步：使用因子得分进行k-means聚类
 
@@ -4859,7 +4425,8 @@ result = kmeans.fit(fa_scores)
 
 model_data_l = model_data.join(pd.DataFrame(result.labels_))
 model_data_l = model_data_l.rename(columns={0: "clustor"})
-model_data_l.head()
+cc = model_data_l.head()
+print(cc)
 
 import matplotlib
 
@@ -4879,7 +4446,8 @@ quantile_transformer = preprocessing.QuantileTransformer(
 fa_scores_trans = quantile_transformer.fit_transform(fa_scores)
 fa_scores_trans = pd.DataFrame(fa_scores_trans)
 fa_scores_trans = fa_scores_trans.rename(columns={0: "ATM_POS", 1: "TBM", 2: "CSC"})
-fa_scores_trans.head()
+cc = fa_scores_trans.head()
+print(cc)
 
 var = ["ATM_POS", "TBM", "CSC"]
 skew_var = {}
@@ -4901,8 +4469,8 @@ result = kmeans.fit(fa_scores_trans)
 
 model_data_l = model_data.join(pd.DataFrame(result.labels_))
 model_data_l = model_data_l.rename(columns={0: "clustor"})
-model_data_l.head()
-
+cc = model_data_l.head()
+print(cc)
 
 import matplotlib
 
@@ -4972,3 +4540,11 @@ print(keyword.kwlist)
 # normed 改成 density
 
 # In[19]:
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個

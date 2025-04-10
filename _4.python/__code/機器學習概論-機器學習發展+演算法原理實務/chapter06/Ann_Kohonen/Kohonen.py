@@ -6,75 +6,83 @@ import Untils
 from numpy import *
 import matplotlib.pyplot as plt
 
-# ¹éÒ»»¯Êı¾İ¼¯
+
+# å½’ä¸€åŒ–æ•°æ®é›†
 def mapMinMax(dataMat):
-	ymin = -1; ymax = 1
-	m,n = shape(dataMat)
-	rtnMat = mat(zeros((m,n)))
-	for i in range(n):
-		xmin = dataMat[:,i].min()
-		xmax = dataMat[:,i].max()
-		rtnMat[:,i] = (ymax-ymin)*(dataMat[:,i]-xmin)/(xmax-xmin) + ymin;		
-	return rtnMat;
-	
-# ¼ÆËã¾ØÕó¸÷ÏòÁ¿Ö®¼äµÄ¾àÀë:·µ»ØÒ»¸ö¶Ô³ÆµÄn*n¾ØÕó	
-def distM(matA,matB):
-	ma,na = shape(matA);
-	mb,nb = shape(matB);
-	rtnmat= zeros((ma,nb))
-	for i in range(ma):
-		for j in range(nb):
-			rtnmat[i,j] = sqrt(sum(power(matA[i,:] - matB[:,j].transpose(),2)))
-	return 	rtnmat
+    ymin = -1
+    ymax = 1
+    m, n = shape(dataMat)
+    rtnMat = mat(zeros((m, n)))
+    for i in range(n):
+        xmin = dataMat[:, i].min()
+        xmax = dataMat[:, i].max()
+        rtnMat[:, i] = (ymax - ymin) * (dataMat[:, i] - xmin) / (xmax - xmin) + ymin
+    return rtnMat
 
-# Ö÷Ëã·¨	
-def kohonen(dataMat,M=2,N=2,ITER = 200):
-	dm,dn = shape(dataMat)
-	# ¹éÒ»»¯Êı¾İ
-	normDataset = mapMinMax(dataMat)
-	# ²ÎÊı
-	# Ñ§Ï°ÂÊ
-	rate1max=0.8; rate1min=0.05
-	# Ñ§Ï°°ë¾¶
-	r1max=3; r1min=0.8
-  
-	## ÍøÂç¹¹½¨
-	Inum = 2;	K=M*N          #Kohonen×Ü½ÚµãÊı  
-   
-	# Kohonen²ã½ÚµãÅÅĞò
-	k=0;
-	jdpx = mat(zeros((K,2)));
-	for i in range(M):
-		for j in range(N):
-			jdpx[k,:]=[i,j]
-			k=k+1;
-	
-	# È¨Öµ³õÊ¼»¯
-	w1 = random.rand(Inum,K); #µÚÒ»²ãÈ¨Öµ
-  
-	## µü´úÇó½â
-	for i in range(ITER):  	
-		#×ÔÊÊÓ¦Ñ§Ï°ÂÊºÍÏàÓ¦°ë¾¶
-		rate1 = rate1max-(i+1)/float(ITER)*(rate1max-rate1min)
-		r = r1max-(i+1)/float(ITER)*(r1max-r1min)
-		# Ëæ»ú³éÈ¡Ò»¸öÑù±¾
-		k = random.randint(0,dm) # Éú³ÉÑù±¾µÄË÷Òı,²»°üÀ¨×î¸ßÖµ
-		myndSet = normDataset[k,:] #xx
-			
-		# ¼ÆËã×îÓÅ½Úµã£º·µ»Ø×îĞ¡¾àÀëµÄË÷ÒıÖµ
-		minIndx= (distM(myndSet,w1)).argmin()
-		d1 = ceil(minIndx/M)
-		d2 = mod(minIndx,M)
-		distMat = distM(mat([d1,d2]),jdpx.transpose())
-		nodelindx = (distMat<r).nonzero()[1]
-		for j in range(K):
-			if sum(nodelindx==j):
-				w1[:,j] = w1[:,j]+rate1*(myndSet.tolist()[0]-w1[:,j])
-  
-	# Ñ§Ï°½×¶Î
-	classLabel = range(dm)
-	for i in range(dm):
-		classLabel[i] = distM(normDataset[i,:],w1).argmin()
 
-  # ·µ»ØÀà±ğ±êÇ©
-	return mat(classLabel)		
+# è®¡ç®—çŸ©é˜µå„å‘é‡ä¹‹é—´çš„è·ç¦»:è¿”å›ä¸€ä¸ªå¯¹ç§°çš„n*nçŸ©é˜µ
+def distM(matA, matB):
+    ma, na = shape(matA)
+    mb, nb = shape(matB)
+    rtnmat = zeros((ma, nb))
+    for i in range(ma):
+        for j in range(nb):
+            rtnmat[i, j] = sqrt(sum(power(matA[i, :] - matB[:, j].transpose(), 2)))
+    return rtnmat
+
+
+# ä¸»ç®—æ³•
+def kohonen(dataMat, M=2, N=2, ITER=200):
+    dm, dn = shape(dataMat)
+    # å½’ä¸€åŒ–æ•°æ®
+    normDataset = mapMinMax(dataMat)
+    # å‚æ•°
+    # å­¦ä¹ ç‡
+    rate1max = 0.8
+    rate1min = 0.05
+    # å­¦ä¹ åŠå¾„
+    r1max = 3
+    r1min = 0.8
+
+    ## ç½‘ç»œæ„å»º
+    Inum = 2
+    K = M * N  # Kohonenæ€»èŠ‚ç‚¹æ•°
+
+    # Kohonenå±‚èŠ‚ç‚¹æ’åº
+    k = 0
+    jdpx = mat(zeros((K, 2)))
+    for i in range(M):
+        for j in range(N):
+            jdpx[k, :] = [i, j]
+            k = k + 1
+
+    # æƒå€¼åˆå§‹åŒ–
+    w1 = random.rand(Inum, K)
+    # ç¬¬ä¸€å±‚æƒå€¼
+
+    ## è¿­ä»£æ±‚è§£
+    for i in range(ITER):
+        # è‡ªé€‚åº”å­¦ä¹ ç‡å’Œç›¸åº”åŠå¾„
+        rate1 = rate1max - (i + 1) / float(ITER) * (rate1max - rate1min)
+        r = r1max - (i + 1) / float(ITER) * (r1max - r1min)
+        # éšæœºæŠ½å–ä¸€ä¸ªæ ·æœ¬
+        k = random.randint(0, dm)  # ç”Ÿæˆæ ·æœ¬çš„ç´¢å¼•,ä¸åŒ…æ‹¬æœ€é«˜å€¼
+        myndSet = normDataset[k, :]  # xx
+
+        # è®¡ç®—æœ€ä¼˜èŠ‚ç‚¹ï¼šè¿”å›æœ€å°è·ç¦»çš„ç´¢å¼•å€¼
+        minIndx = (distM(myndSet, w1)).argmin()
+        d1 = ceil(minIndx / M)
+        d2 = mod(minIndx, M)
+        distMat = distM(mat([d1, d2]), jdpx.transpose())
+        nodelindx = (distMat < r).nonzero()[1]
+        for j in range(K):
+            if sum(nodelindx == j):
+                w1[:, j] = w1[:, j] + rate1 * (myndSet.tolist()[0] - w1[:, j])
+
+    # å­¦ä¹ é˜¶æ®µ
+    classLabel = range(dm)
+    for i in range(dm):
+        classLabel[i] = distM(normDataset[i, :], w1).argmin()
+
+        # è¿”å›ç±»åˆ«æ ‡ç­¾
+    return mat(classLabel)

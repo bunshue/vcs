@@ -1,117 +1,136 @@
 # -*- coding: utf-8 -*-
 from numpy import *
 import matplotlib.pyplot as plt
+
+
 class Kohonen(object):
-	def __init__(self):	
-		self.lratemax=0.8;  # ×î´óÑ§Ï°ÂÊ	
-		self.lratemin=0.05  # ×îĞ¡Ñ§Ï°ÂÊ	
-		self.rmax=5.0;      # ×î´ó¾ÛÀà°ë¾¶
-		self.rmin=0.5       # ×îĞ¡¾ÛÀà°ë¾¶
-		self.Steps = 1000    # µü´ú´ÎÊı
-		self.lratelist=[]
-		self.rlist=[]
-		self.w=[]
-		self.M=2;	          # ¶şÎ¬¾ÛÀàÍø¸ñ²ÎÊı
-		self.N=2            # ¶şÎ¬¾ÛÀàÍø¸ñ²ÎÊı
-		self.dataMat=[]
-		self.classLabel=[]
-		
-	def loadDataSet(self,fileName): # ¼ÓÔØÊı¾İÎÄ¼ş
-		numFeat = len(open(fileName).readline().split('\t')) - 1 
-		fr = open(fileName)
-		for line in fr.readlines():
-			lineArr =[]
-			curLine = line.strip().split('\t')
-			lineArr.append(float(curLine[0]));
-			lineArr.append(float(curLine[1]));
-			self.dataMat.append(lineArr)
-		self.dataMat = mat(self.dataMat)
-		
-	# Êı¾İ±ê×¼»¯(¹éÒ»»¯):		# ±ê×¼»¯
-	def normalize(self,dataMat):
-		[m,n]=shape(dataMat)
-		for i in xrange(n-1):
-			dataMat[:,i] = (dataMat[:,i]-mean(dataMat[:,i]))/(std(dataMat[:,i])+1.0e-10)
-		return dataMat	
-	
-	# ¼ÆËã¾ØÕó¸÷ÏòÁ¿Ö®¼äµÄ¾àÀë--Å·ÊÏ¾àÀë	
-	def distEclud(self,matA,matB):
-		ma,na = shape(matA);
-		mb,nb = shape(matB);
-		rtnmat= zeros((ma,nb))
-		for i in xrange(ma):
-			for j in xrange(nb):
-	 			rtnmat[i,j] = linalg.norm(matA[i,:]-matB[:,j].T) 
-		return 	rtnmat
-	# Ñ§Ï°ÂÊºÍÑ§Ï°°ë¾¶º¯Êı	
-	def ratecalc(self,indx):
-		lrate = self.lratemax-(float(indx)+1.0)/float(self.Steps)*(self.lratemax-self.lratemin) 
-		r = self.rmax-(float(indx)+1.0)/float(self.Steps)*(self.rmax-self.rmin)
-		return lrate,r
-	# ³õÊ¼»¯µÚ¶ş²ãÍø¸ñ	
-	def init_grid(self):
-		k=0;# ¹¹½¨µÚ¶ş²ãÍø¸ñÄ£ĞÍ
-		grid = mat(zeros((self.M*self.N ,2)));
-		for i in xrange(self.M):
-			for j in xrange(self.N):
-				grid[k,:]=[i,j]
-				k +=1;
-		return grid		
-# Ö÷Ëã·¨	
-	def train(self):
-    #1 ¹¹½¨ÊäÈë²ãÍøÂç
-		dm,dn = shape(self.dataMat) 
-		normDataset = self.normalize(self.dataMat) # ¹éÒ»»¯Êı¾İx
-		#2 ¹¹½¨·ÖÀàÍø¸ñ
-		grid = self.init_grid() # ³õÊ¼»¯µÚ¶ş²ã·ÖÀàÍø¸ñ 
-		#3 ¹¹½¨Á½²ãÖ®¼äµÄÈ¨ÖØÏòÁ¿
-		self.w = random.rand(dn,self.M*self.N); #Ëæ»ú³õÊ¼»¯È¨Öµ w
-		distM = self.distEclud   # È·¶¨¾àÀë¹«Ê½
-		#4 µü´úÇó½â
-		if self.Steps < 10*dm:	self.Steps = 10*dm   # Éè¶¨×îĞ¡µü´ú´ÎÊı
-		for i in xrange(self.Steps): 	
-			lrate,r = self.ratecalc(i) # ¼ÆËãÑ§Ï°ÂÊºÍ·ÖÀà°ë¾¶
-			self.lratelist.append(lrate);self.rlist.append(r)
-			# Ëæ»úÉú³ÉÑù±¾Ë÷Òı£¬²¢³éÈ¡Ò»¸öÑù±¾
-			k = random.randint(0,dm) 
-			mySample = normDataset[k,:] 	
-	
-			# ¼ÆËã×îÓÅ½Úµã£º·µ»Ø×îĞ¡¾àÀëµÄË÷ÒıÖµ
-			minIndx= (distM(mySample,self.w)).argmin()
-			d1 = ceil(minIndx/self.M)   # ¼ÆËã×î½ü¾àÀëÔÚµÚ¶ş²ã¾ØÕóÖĞµÄÎ»ÖÃ
-			d2 = mod(minIndx,self.M)    
-			distMat = distM(mat([d1,d2]),grid.T)
-			nodelindx = (distMat<r).nonzero()[1] # ¸ù¾İÑ§Ï°¾àÀë»ñÈ¡ÁÚÓòÄÚ×óÓÒ½Úµã
-			# ¸üĞÂÈ¨ÖØÁĞ
-			for j in xrange(shape(self.w)[1]):
-				if sum(nodelindx==j):
-		 			self.w[:,j] = self.w[:,j]+lrate*(mySample[0]-self.w[:,j])
-		# ·ÖÅäÀà±ğ±êÇ©
-		self.classLabel = range(dm)
-		for i in xrange(dm):
-			self.classLabel[i] = distM(normDataset[i,:],self.w).argmin()
-		self.classLabel = mat(self.classLabel)		
-	
-	def showCluster(self,plt):
-		lst = unique(self.classLabel.tolist()[0]) # È¥ÖØ
-		# »æÍ¼
-		i = 0;
-		for cindx in lst:
-			myclass = nonzero(self.classLabel==cindx)[1]	
-			xx = self.dataMat[myclass].copy()
-			if i ==0:
-				plt.plot(xx[:,0],xx[:,1],'bo')
-			elif i ==1:
-				plt.plot(xx[:,0],xx[:,1],'rd')
-			elif i ==2:
-				plt.plot(xx[:,0],xx[:,1],'gD')			
-			elif i ==3:
-				plt.plot(xx[:,0],xx[:,1],'c^')						
-			i +=1			
-		plt.show()
-# »æÖÆÇ÷ÊÆÏß: ¿Éµ÷ÕûÑÕÉ«		
-	def TrendLine(self,plt,mylist,color='r'):
-		X = linspace(0,len(mylist),len(mylist))
-		Y = mylist
-		plt.plot(X,Y,color)
-		plt.show()
+    def __init__(self):
+        self.lratemax = 0.8
+        # æœ€å¤§å­¦ä¹ ç‡
+        self.lratemin = 0.05  # æœ€å°å­¦ä¹ ç‡
+        self.rmax = 5.0
+        # æœ€å¤§èšç±»åŠå¾„
+        self.rmin = 0.5  # æœ€å°èšç±»åŠå¾„
+        self.Steps = 1000  # è¿­ä»£æ¬¡æ•°
+        self.lratelist = []
+        self.rlist = []
+        self.w = []
+        self.M = 2
+        # äºŒç»´èšç±»ç½‘æ ¼å‚æ•°
+        self.N = 2  # äºŒç»´èšç±»ç½‘æ ¼å‚æ•°
+        self.dataMat = []
+        self.classLabel = []
+
+    def loadDataSet(self, fileName):  # åŠ è½½æ•°æ®æ–‡ä»¶
+        numFeat = len(open(fileName).readline().split("\t")) - 1
+        fr = open(fileName)
+        for line in fr.readlines():
+            lineArr = []
+            curLine = line.strip().split("\t")
+            lineArr.append(float(curLine[0]))
+            lineArr.append(float(curLine[1]))
+            self.dataMat.append(lineArr)
+        self.dataMat = mat(self.dataMat)
+
+    # æ•°æ®æ ‡å‡†åŒ–(å½’ä¸€åŒ–):		# æ ‡å‡†åŒ–
+    def normalize(self, dataMat):
+        [m, n] = shape(dataMat)
+        for i in xrange(n - 1):
+            dataMat[:, i] = (dataMat[:, i] - mean(dataMat[:, i])) / (
+                std(dataMat[:, i]) + 1.0e-10
+            )
+        return dataMat
+
+    # è®¡ç®—çŸ©é˜µå„å‘é‡ä¹‹é—´çš„è·ç¦»--æ¬§æ°è·ç¦»
+    def distEclud(self, matA, matB):
+        ma, na = shape(matA)
+        mb, nb = shape(matB)
+        rtnmat = zeros((ma, nb))
+        for i in xrange(ma):
+            for j in xrange(nb):
+                rtnmat[i, j] = linalg.norm(matA[i, :] - matB[:, j].T)
+        return rtnmat
+
+    # å­¦ä¹ ç‡å’Œå­¦ä¹ åŠå¾„å‡½æ•°
+    def ratecalc(self, indx):
+        lrate = self.lratemax - (float(indx) + 1.0) / float(self.Steps) * (
+            self.lratemax - self.lratemin
+        )
+        r = self.rmax - (float(indx) + 1.0) / float(self.Steps) * (
+            self.rmax - self.rmin
+        )
+        return lrate, r
+
+    # åˆå§‹åŒ–ç¬¬äºŒå±‚ç½‘æ ¼
+    def init_grid(self):
+        k = 0
+        # æ„å»ºç¬¬äºŒå±‚ç½‘æ ¼æ¨¡å‹
+        grid = mat(zeros((self.M * self.N, 2)))
+        for i in xrange(self.M):
+            for j in xrange(self.N):
+                grid[k, :] = [i, j]
+                k += 1
+        return grid
+
+    # ä¸»ç®—æ³•
+    def train(self):
+        # 1 æ„å»ºè¾“å…¥å±‚ç½‘ç»œ
+        dm, dn = shape(self.dataMat)
+        normDataset = self.normalize(self.dataMat)  # å½’ä¸€åŒ–æ•°æ®x
+        # 2 æ„å»ºåˆ†ç±»ç½‘æ ¼
+        grid = self.init_grid()  # åˆå§‹åŒ–ç¬¬äºŒå±‚åˆ†ç±»ç½‘æ ¼
+        # 3 æ„å»ºä¸¤å±‚ä¹‹é—´çš„æƒé‡å‘é‡
+        self.w = random.rand(dn, self.M * self.N)
+        # éšæœºåˆå§‹åŒ–æƒå€¼ w
+        distM = self.distEclud  # ç¡®å®šè·ç¦»å…¬å¼
+        # 4 è¿­ä»£æ±‚è§£
+        if self.Steps < 10 * dm:
+            self.Steps = 10 * dm  # è®¾å®šæœ€å°è¿­ä»£æ¬¡æ•°
+        for i in xrange(self.Steps):
+            lrate, r = self.ratecalc(i)  # è®¡ç®—å­¦ä¹ ç‡å’Œåˆ†ç±»åŠå¾„
+            self.lratelist.append(lrate)
+            self.rlist.append(r)
+            # éšæœºç”Ÿæˆæ ·æœ¬ç´¢å¼•ï¼Œå¹¶æŠ½å–ä¸€ä¸ªæ ·æœ¬
+            k = random.randint(0, dm)
+            mySample = normDataset[k, :]
+
+            # è®¡ç®—æœ€ä¼˜èŠ‚ç‚¹ï¼šè¿”å›æœ€å°è·ç¦»çš„ç´¢å¼•å€¼
+            minIndx = (distM(mySample, self.w)).argmin()
+            d1 = ceil(minIndx / self.M)  # è®¡ç®—æœ€è¿‘è·ç¦»åœ¨ç¬¬äºŒå±‚çŸ©é˜µä¸­çš„ä½ç½®
+            d2 = mod(minIndx, self.M)
+            distMat = distM(mat([d1, d2]), grid.T)
+            nodelindx = (distMat < r).nonzero()[1]  # æ ¹æ®å­¦ä¹ è·ç¦»è·å–é‚»åŸŸå†…å·¦å³èŠ‚ç‚¹
+            # æ›´æ–°æƒé‡åˆ—
+            for j in xrange(shape(self.w)[1]):
+                if sum(nodelindx == j):
+                    self.w[:, j] = self.w[:, j] + lrate * (mySample[0] - self.w[:, j])
+        # åˆ†é…ç±»åˆ«æ ‡ç­¾
+        self.classLabel = range(dm)
+        for i in xrange(dm):
+            self.classLabel[i] = distM(normDataset[i, :], self.w).argmin()
+        self.classLabel = mat(self.classLabel)
+
+    def showCluster(self, plt):
+        lst = unique(self.classLabel.tolist()[0])  # å»é‡
+        # ç»˜å›¾
+        i = 0
+        for cindx in lst:
+            myclass = nonzero(self.classLabel == cindx)[1]
+            xx = self.dataMat[myclass].copy()
+            if i == 0:
+                plt.plot(xx[:, 0], xx[:, 1], "bo")
+            elif i == 1:
+                plt.plot(xx[:, 0], xx[:, 1], "rd")
+            elif i == 2:
+                plt.plot(xx[:, 0], xx[:, 1], "gD")
+            elif i == 3:
+                plt.plot(xx[:, 0], xx[:, 1], "c^")
+            i += 1
+        plt.show()
+
+    # ç»˜åˆ¶è¶‹åŠ¿çº¿: å¯è°ƒæ•´é¢œè‰²
+    def TrendLine(self, plt, mylist, color="r"):
+        X = linspace(0, len(mylist), len(mylist))
+        Y = mylist
+        plt.plot(X, Y, color)
+        plt.show()

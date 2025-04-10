@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-
-__author__ = "alexander"
-__date__ = "$05.06.2011 21:30:11$"
-
 from ImageContainer import ImageContainer
 from ImageContainer import ImagePattern
 

@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-
-__author__ = "alexander@philippov.su"
-__date__ = "$05.06.2011 23:58:41$"
-
 from abc import ABCMeta, abstractmethod, abstractproperty
 
 

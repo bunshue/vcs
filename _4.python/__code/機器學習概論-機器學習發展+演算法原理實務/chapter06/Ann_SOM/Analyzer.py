@@ -1,8 +1,3 @@
-#! /usr/bin/python
-
-__author__ = "alexander"
-__date__ = "$07.06.2011 18:48:02$"
-
 if __name__ == "__main__":
     import csv
 

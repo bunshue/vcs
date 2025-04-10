@@ -45,7 +45,7 @@ from sklearn import tree
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
@@ -180,26 +180,21 @@ def logistic(wTx):
     return 1.0 / (1.0 + np.exp(-wTx))
 
 
+# 分类函数
+def classifier(testData, weights):
+    prob = logistic(sum(testData * weights))  # 求取概率--判别算法
+    if prob > 0.5:
+        return 1.0  # prob>0.5 返回为1
+    else:
+        return 0.0  # prob<=0.5 返回为0
+
+
 def buildMat(dataSet):
     m, n = np.shape(dataSet)
     dataMat = np.zeros((m, n))
     dataMat[:, 0] = 1
     dataMat[:, 1:] = dataSet[:, :-1]
     return dataMat
-
-
-# 最小二乘回归，用于测试
-def standRegres(xArr, yArr):
-    xMat = np.mat(np.ones((len(xArr), 2)))
-    yMat = np.mat(np.ones((len(yArr), 1)))
-    xMat[:, 1:] = (np.mat(xArr).T)[:, 0:]
-    yMat[:, 0:] = (np.mat(yArr).T)[:, 0:]
-    xTx = xMat.T * xMat
-    if np.linalg.det(xTx) == 0.0:
-        print("This matrix is singular, cannot do inverse")
-        return
-    ws = xTx.I * (xMat.T * yMat)
-    return ws
 
 
 def loadDataSet1(filename):  # general function to parse tab -delimited floats
@@ -210,48 +205,6 @@ def loadDataSet1(filename):  # general function to parse tab -delimited floats
         fltLine = map(float, curLine)  # map all elements to float()
         dataMat.append(fltLine)
     return dataMat
-
-
-def loadDataSet3(filename):
-    X = []
-    Y = []
-    fr = open(filename)
-    for line in fr.readlines():
-        curLine = line.strip().split("\t")
-        X.append(float(curLine[0]))
-        Y.append(float(curLine[-1]))
-    return X, Y
-
-
-def loadDataSet4(filename):
-    numFeat = len(open(filename).readline().split("\t")) - 1
-    X = []
-    Y = []
-    fr = open(filename)
-    for line in fr.readlines():
-        curLine = line.strip().split("\t")
-        X.append([float(curLine[i]) for i in range(numFeat)])
-        Y.append(float(curLine[-1]))
-    return X, Y
-
-
-def plotscatter2(Xmat, Ymat, a, b, plt):
-    fig = plt.figure()
-    ax = fig.add_subplot(111)  # 绘制图形位置
-    ax.scatter(Xmat, Ymat, c="blue", marker="o")  # 绘制散点图
-    Xmat.sort()  # 对Xmat各元素进行排序
-    yhat = [a * float(xi) + b for xi in Xmat]  # 计算预测值
-    plt.plot(Xmat, yhat, "r")  # 绘制回归线
-    show()
-    return yhat
-
-
-def plotscatter3(Xmat, Ymat, yHat, plt):
-    fig = plt.figure()
-    ax = fig.add_subplot(111)  # 绘制图形位置
-    ax.scatter(Xmat, Ymat, c="blue", marker="o")  # 绘制散点图
-    plt.plot(Xmat, yHat, "r")  # 绘制散点图
-    show()
 
 
 print("------------------------------------------------------------")  # 60個
@@ -292,68 +245,6 @@ for element, num in zip(dataset, numlist):
 
 fp = open("tmp_dataset.dat", "w")
 fp.write("\n".join(datalines))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("trees2.py")
-
-import operator
-
-
-# 创建数据集
-def createDataSet():
-    # 无需浮出水面,脚蹼,是否是鱼类
-    dataSet = [[1, 1, "yes"], [1, 1, "yes"], [1, 0, "no"], [0, 1, "no"], [0, 1, "no"]]
-    labels = ["no surfacing", "flippers"]  # [无需浮出水面,脚蹼]
-    # change to discrete values
-    return dataSet, labels
-
-
-# 分隔数据集：删除特征轴所在的数据列，返回剩余的数据集
-# dataSet：数据集
-# axis：特征轴
-# value：特征轴的取值
-def splitDataSet(dataSet, axis, value):
-    # 初始化划分后的数据集:list
-    retDataSet = []
-    # 遍历数据集中所有行
-    for featVec in dataSet:
-        # 如果featVec[axis]取值等于value
-        if featVec[axis] == value:
-            # 从数据集中删除掉特征轴所在列
-            reducedFeatVec = featVec[:axis]  # list操作 提取0~(axis-1)的元素
-            # print "reducedFeatVec1:",reducedFeatVec
-            reducedFeatVec.extend(featVec[axis + 1 :])  # list操作 将特征轴（列）之后的元素加回
-            # print "reducedFeatVec2:",reducedFeatVec
-            # 把删除特征轴的划分数据附加到返回矩阵中
-            retDataSet.append(reducedFeatVec)
-            # print "retDataSet:",retDataSet
-    # 返回划分后的特征矩阵
-    return retDataSet
-
-
-# 存储树到文件
-def storeTree(inputTree, filename):
-    fw = open(filename, "w")
-    pickle.dump(inputTree, fw)
-    fw.close()
-
-
-# 从文件抓取树
-def grabTree(filename):
-    fr = open(filename)
-    return pickle.load(fr)
-
-
-print("classify01.py")
-
-import copy
-
-dataSet, labels = createDataSet()
-print(dataSet, labels)
-treelabels = copy.deepcopy(labels)
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -479,54 +370,6 @@ y_pred = clf.predict(X_test)
 
 plotfigure(X, X_test, y, y_pred)
 """
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("test1.py")
-
-
-def splitDataSet(dataSet, axis, value):
-    retDataSet = []
-    for featVec in dataSet:
-        if featVec[axis] == value:
-            reducedFeatVec = featVec[:axis]  # list操作 提取0~(axis-1)的元素
-            reducedFeatVec.extend(featVec[axis + 1 :])  # list操作 将特征轴（列）之后的元素加回
-            retDataSet.append(reducedFeatVec)
-    # 返回划分后的特征矩阵
-    return retDataSet
-
-
-# P1=128.0/384.0
-# P2=256.0/384.0
-P1 = 257.0 / 384.0
-P2 = 127.0 / 384.0
-Ip1p2 = -P1 * np.log2(P1) - P2 * np.log2(P2)
-print(Ip1p2)
-
-mylist = [1, 0, 1, 0, 1, 0, 0]
-items = dict([(mylist.count(i), i) for i in mylist])
-print(items[max(items.keys())])
-dataset = [[1, 0], [0, 1], [1, 0]]
-numEntries = len(dataset)  # 得到数据集行数
-labelCounts = {}  # 初始化类别标签	for featVec in dataset: # 这段代码计算了数据集中各个特征向量的和
-for featVec in dataset:
-    currentLabel = featVec[-1]
-    if currentLabel not in labelCounts.keys():
-        labelCounts[currentLabel] = 0
-    labelCounts[currentLabel] += 1
-print(labelCounts)
-cateList = [data[-1] for data in dataset]  # 从数据集中得到类别标签
-items = dict([(cateList.count(i), i) for i in cateList])  # 得到类别为key，出现次数value的字典
-print(items)
-
-print(splitDataSet(dataset, 0, 0))
-
-P1 = 640.0 / 1024.0
-P2 = 384.0 / 1024.0
-Ip1p2 = -P1 * np.log2(P1) - P2 * np.log2(P2)
-print(Ip1p2)
-print(0.9544 - 0.6877)
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -833,19 +676,6 @@ print(resultarray)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("data.py")
-
-Input = file2matrix("data2/testSet.txt", "\t")
-m, n = np.shape(Input)
-print(m, n)
-newdata = np.zeros((m, 3))
-newdata[:, :2] = Input[:, :2]
-newdata[:, 2:2] = Input[:, 3:3]
-print(newdata[:100, :])
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("gradient_test.py")
 
 # 输入数据
@@ -929,262 +759,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("log_evalue_weight.py")
-
-Input = file2matrix("data2/testSet.txt", "\t")
-target = Input[:, -1]  # 获取分类标签列表
-[m, n] = np.shape(Input)
-
-# 按分类绘制散点图
-drawScatterbyLabel1(plt, Input)
-
-# 构建b+x 系数矩阵：b这里默认为1
-dataMat = buildMat(Input)
-
-# print dataMat
-
-# 定义步长和迭代次数
-alpha = 0.001  # 步长
-steps = 500  # 迭代次数
-weights = np.ones((n, 1))  # 初始化权重向量
-weightlist = []
-
-# 主程序
-for k in range(steps):
-    gradient = dataMat * np.mat(weights)  # 梯度
-    output = logistic(gradient)  # logistic函数
-    errors = target - output  # 计算误差
-    weights = weights + alpha * dataMat.T * errors
-    weightlist.append(weights)
-
-print(weights)  # 输出训练后的权重
-# 绘制训练后超平面
-X = np.linspace(-5, 5, 100)
-Ylist = []
-lenw = len(weightlist)
-for indx in range(lenw):
-    if indx % 20 == 0:  # 每20次输出一次分类超平面
-        weight = weightlist[indx]
-        Y = -(np.double(weight[0]) + X * (np.double(weight[1]))) / np.double(weight[2])
-        plt.plot(X, Y)
-        # 分类超平面注释
-        plt.annotate("hplane:" + str(indx), xy=(X[99], Y[99]))
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("log_evalue_weight2.py")
-
-Input = file2matrix("data2/testSet.txt", "\t")
-target = Input[:, -1]  # 获取分类标签列表
-[m, n] = np.shape(Input)
-
-# 构建b+x 系数矩阵：b这里默认为1
-dataMat = buildMat(Input)
-
-# print dataMat
-
-# 定义步长和迭代次数
-alpha = 0.001  # 步长
-steps = 500  # 迭代次数
-weights = np.ones((n, 1))  # 初始化权重向量
-weightlist = []
-
-# 主程序
-
-for k in range(steps):
-    gradient = dataMat * np.mat(weights)  # 梯度
-    output = logistic(gradient)  # logistic函数
-    errors = target - output  # 计算误差
-    weights = weights + alpha * dataMat.T * errors
-    weightlist.append(weights)
-
-print(weights)  # 输出训练后的权重
-fig = plt.figure()
-axes1 = plt.subplot(211)
-axes2 = plt.subplot(212)
-weightmat = np.mat(np.zeros((steps, n)))
-i = 0
-for weight in weightlist:
-    weightmat[i, :] = weight.T
-    i += 1
-X = np.linspace(0, steps, steps)
-# 输出前10个点的截距变化
-axes1.plot(
-    X[0:10],
-    -weightmat[0:10, 0] / weightmat[0:10, 2],
-    color="blue",
-    linewidth=1,
-    linestyle="-",
-)
-axes2.plot(
-    X[10:],
-    -weightmat[10:, 0] / weightmat[10:, 2],
-    color="blue",
-    linewidth=1,
-    linestyle="-",
-)
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("log_evalue_weight3.py")
-
-Input = file2matrix("data2/testSet.txt", "\t")
-target = Input[:, -1]  # 获取分类标签列表
-[m, n] = np.shape(Input)
-
-# 构建b+x 系数矩阵：b这里默认为1
-dataMat = buildMat(Input)
-
-# print dataMat
-
-# 定义步长和迭代次数
-alpha = 0.001  # 步长
-steps = 500  # 迭代次数
-weights = np.ones((n, 1))  # 初始化权重向量
-weightlist = []
-
-# 主程序
-for k in range(steps):
-    gradient = dataMat * np.mat(weights)  # 梯度
-    output = logistic(gradient)  # logistic函数
-    errors = target - output  # 计算误差
-    weights = weights + alpha * dataMat.T * errors
-    weightlist.append(weights)
-
-print(weights)  # 输出训练后的权重
-fig = plt.figure()
-axes1 = plt.subplot(211)
-axes2 = plt.subplot(212)
-weightmat = np.mat(np.zeros((steps, n)))
-i = 0
-for weight in weightlist:
-    weightmat[i, :] = weight.T
-    i += 1
-X = np.linspace(0, steps, steps)
-# 输出前10个点的截距变化
-axes1.plot(
-    X[0:10],
-    -weightmat[0:10, 1] / weightmat[0:10, 2],
-    color="blue",
-    linewidth=1,
-    linestyle="-",
-)
-axes2.plot(
-    X[10:],
-    -weightmat[10:, 1] / weightmat[10:, 2],
-    color="blue",
-    linewidth=1,
-    linestyle="-",
-)
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("log_evalue_weight4.py")
-
-Input = file2matrix("data2/testSet.txt", "\t")
-target = Input[:, -1]  # 获取分类标签列表
-[m, n] = np.shape(Input)
-
-# 构建b+x 系数矩阵：b这里默认为1
-dataMat = buildMat(Input)
-
-# print dataMat
-
-# 定义步长和迭代次数
-alpha = 0.001  # 步长
-steps = 500  # 迭代次数
-weights = np.ones((n, 1))  # 初始化权重向量
-weightlist = []
-
-# 主程序
-for k in range(steps):
-    gradient = dataMat * np.mat(weights)  # 梯度
-    output = logistic(gradient)  # logistic函数
-    errors = target - output  # 计算误差
-    weights = weights + alpha * dataMat.T * errors
-    weightlist.append(weights)
-
-print(weights)  # 输出训练后的权重
-fig = plt.figure()
-axes1 = plt.subplot(311)
-axes2 = plt.subplot(312)
-axes3 = plt.subplot(313)
-weightmat = np.mat(np.zeros((steps, n)))
-i = 0
-for weight in weightlist:
-    weightmat[i, :] = weight.T
-    i += 1
-X = np.linspace(0, steps, steps)
-# 输出前10个点的截距变化
-axes1.plot(X, weightmat[:, 0], color="blue", linewidth=1, linestyle="-")
-axes1.set_ylabel("weight[0]")
-axes2.plot(X, weightmat[:, 1], color="red", linewidth=1, linestyle="-")
-axes2.set_ylabel("weight[1]")
-axes3.plot(X, weightmat[:, 2], color="green", linewidth=1, linestyle="-")
-axes3.set_ylabel("weight[2]")
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("logistic_test.py")
-
-Input = file2matrix("data2/testSet.txt", "\t")
-target = Input[:, -1]  # 获取分类标签列表
-[m, n] = np.shape(Input)
-
-# 按分类绘制散点图
-drawScatterbyLabel1(plt, Input)
-
-# 构建b+x 系数矩阵：b这里默认为1
-dataMat = buildMat(Input)
-print(dataMat[:10, :])
-
-# 定义步长和迭代次数
-alpha = 0.001  # 步长
-steps = 500  # 迭代次数
-weights = np.ones((n, 1))  # 初始化权重向量
-
-# 主程序
-for k in range(steps):
-    gradient = dataMat * np.mat(weights)  # 梯度
-    output = logistic(gradient)  # logistic函数
-    errors = target - output  # 计算误差
-    weights = weights + alpha * dataMat.T * errors
-
-print(weights)  # 输出训练后的权重
-# 绘制训练后超平面
-X = np.linspace(-7, 7, 100)
-# y=w*x+b: b:weights[0]/weights[2]; w:weights[1]/weights[2]
-Y = -(np.double(weights[0]) + X * (np.double(weights[1]))) / np.double(weights[2])
-plt.plot(X, Y)
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("logistic_test2.py")
-
-
-# Logistic函数
-def logistic(wTx):
-    return 1.0 / (1.0 + np.exp(-wTx))
-
-
-# 分类函数
-def classifier(testData, weights):
-    prob = logistic(sum(testData * weights))  # 求取概率--判别算法
-    if prob > 0.5:
-        return 1.0  # prob>0.5 返回为1
-    else:
-        return 0.0  # prob<=0.5 返回为0
-
 
 weights = np.mat([[4.12414349], [0.48007329], [-0.6168482]])
 testdata = np.mat([-0.147324, 2.874846])
@@ -1269,169 +844,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("stoc_evalue_alpha.py")
-
-Input = file2matrix("data2/testSet.txt", "\t")
-target = Input[:, -1]  # 获取分类标签列表
-[m, n] = np.shape(Input)
-
-dataMat = buildMat(Input)
-
-# 4. 定义迭代次数
-steps = 500  # 迭代次数
-weights = np.ones(n)  # 初始化权重向量
-
-alphalist = []
-alphahlist = []
-# 算法主程序:
-# 1.对数据集的每个行向量进行m次随机抽取
-# 2.对抽取之后的行向量应用动态步长
-# 3.进行梯度计算
-# 4.求得行向量的权值，合并为矩阵的权值
-
-for j in range(steps):
-    dataIndex = range(m)  # 以导入数据的行数m为个数产生索引向量:0~99
-    for i in range(m):
-        alpha = 2 / (1.0 + j + i) + 0.0001  # 动态修改alpha步长从4->0.016
-        if j == 0:
-            alphalist.append(alpha)
-        if i == 0:
-            alphahlist.append(alpha)
-        randIndex = int(random.uniform(0, len(dataIndex)))  # 生成0~m之间随机索引
-        vectSum = sum(dataMat[randIndex] * weights.T)  # 计算dataMat随机索引与权重的点积和
-        grad = logistic(vectSum)  # 计算点积和的梯度
-        errors = target[randIndex] - grad  # 计算误差
-        weights = weights + alpha * errors * dataMat[randIndex]  # 计算行向量权重
-        # del dataIndex[randIndex]  # 从数据集中删除选取的随机索引
-
-# print weights	# 输出训练后的权重
-weights = weights.tolist()[0]
-lenal = len(alphalist)
-lenalh = len(alphahlist)
-fig = plt.figure()
-axes1 = plt.subplot(211)
-axes2 = plt.subplot(212)
-X1 = np.linspace(0, lenal, lenal)
-X2 = np.linspace(0, lenalh, lenalh)
-axes1.plot(X1, alphalist)
-axes2.plot(X2, alphahlist)
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("stoc_evalue_weight.py")
-
-Input = file2matrix("data2/testSet.txt", "\t")
-target = Input[:, -1]  # 获取分类标签列表
-[m, n] = np.shape(Input)
-
-dataMat = buildMat(Input)
-
-# 4. 定义迭代次数
-steps = 500  # 迭代次数
-weights = np.ones(n)  # 初始化权重向量
-
-weightlist = []
-# 算法主程序:
-# 1.对数据集的每个行向量进行m次随机抽取
-# 2.对抽取之后的行向量应用动态步长
-# 3.进行梯度计算
-# 4.求得行向量的权值，合并为矩阵的权值
-for j in range(steps):
-    dataIndex = range(m)  # 以导入数据的行数m为个数产生索引向量:0~99
-    for i in range(m):
-        alpha = 2 / (1.0 + j + i) + 0.0001  # 动态修改alpha步长从4->0.016
-        randIndex = int(random.uniform(0, len(dataIndex)))  # 生成0~m之间随机索引
-        vectSum = sum(dataMat[randIndex] * weights.T)  # 计算dataMat随机索引与权重的点积和
-        grad = logistic(vectSum)  # 计算点积和的梯度
-        errors = target[randIndex] - grad  # 计算误差
-        weights = weights + alpha * errors * dataMat[randIndex]  # 计算行向量权重
-        # del dataIndex[randIndex]  # 从数据集中删除选取的随机索引
-    weightlist.append(weights)
-
-lenwl = len(weightlist)
-weightmat = np.zeros((lenwl, n))
-i = 0
-for weight in weightlist:
-    weightmat[i, :] = weight
-    i += 1
-fig = plt.figure()
-axes1 = plt.subplot(211)
-axes2 = plt.subplot(212)
-X1 = np.linspace(0, lenwl, lenwl)
-axes1.plot(X1, -weightmat[:, 0] / weightmat[:, 2])
-# 截距
-axes1.set_ylabel("Intercept")
-axes2.plot(X1, -weightmat[:, 1] / weightmat[:, 2])
-# 斜率
-axes2.set_ylabel("Slope")
-# 生成回归线
-ws = standRegres(X1, -weightmat[:, 0] / weightmat[:, 2])
-Y1 = ws[0, 0] + X1 * ws[1, 0]
-axes1.plot(X1, Y1, color="red", linewidth=2, linestyle="-")
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("stoc_evalue_weight2.py")
-
-Input = file2matrix("data2/testSet.txt", "\t")
-target = Input[:, -1]  # 获取分类标签列表
-[m, n] = np.shape(Input)
-
-dataMat = buildMat(Input)
-
-# 4. 定义迭代次数
-steps = 500  # 迭代次数
-weights = np.ones(n)  # 初始化权重向量
-
-weightlist = []
-# 算法主程序:
-# 1.对数据集的每个行向量进行m次随机抽取
-# 2.对抽取之后的行向量应用动态步长
-# 3.进行梯度计算
-# 4.求得行向量的权值，合并为矩阵的权值
-for j in range(steps):
-    dataIndex = range(m)  # 以导入数据的行数m为个数产生索引向量:0~99
-    for i in range(m):
-        alpha = 2 / (1.0 + j + i) + 0.0001  # 动态修改alpha步长从4->0.016
-        randIndex = int(random.uniform(0, len(dataIndex)))  # 生成0~m之间随机索引
-        vectSum = sum(dataMat[randIndex] * weights.T)  # 计算dataMat随机索引与权重的点积和
-        grad = logistic(vectSum)  # 计算点积和的梯度
-        errors = target[randIndex] - grad  # 计算误差
-        weights = weights + alpha * errors * dataMat[randIndex]  # 计算行向量权重
-        # del dataIndex[randIndex]  # 从数据集中删除选取的随机索引
-    weightlist.append(weights)
-
-lenwl = len(weightlist)
-weightmat = np.zeros((lenwl, n))
-i = 0
-for weight in weightlist:
-    weightmat[i, :] = weight
-    i += 1
-
-fig = plt.figure()
-axes1 = plt.subplot(311)
-axes2 = plt.subplot(312)
-axes3 = plt.subplot(313)
-X1 = np.linspace(0, lenwl, lenwl)
-axes1.plot(X1, weightmat[:, 0])
-#
-axes1.set_ylabel("weight[0]")
-axes2.plot(X1, weightmat[:, 1])
-#
-axes2.set_ylabel("weight[1]")
-axes3.plot(X1, weightmat[:, 2])
-#
-axes3.set_ylabel("weight[2]")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("stoc_test.py")
 
 Input = file2matrix("data2/testSet.txt", "\t")
@@ -1441,126 +853,28 @@ target = Input[:, -1]  # 获取分类标签列表
 # 按分类绘制散点图
 drawScatterbyLabel1(plt, Input)
 
-# 构建b+x 系数矩阵：b这里默认为1
-dataMat = buildMat(Input)
-
-# print dataMat
-
-# 定义步长和迭代次数
-steps = 500  # 迭代次数
-weights = np.ones(n)  # 初始化权重向量
-
-# 算法主程序:
-# 1.对数据集的每个行向量进行m次随机抽取
-# 2.对抽取之后的行向量应用动态步长
-# 3.进行梯度计算
-# 4.求得行向量的权值，合并为矩阵的权值
-for j in range(steps):
-    dataIndex = range(m)  # 以导入数据的行数m为个数产生索引向量:0~99
-    for i in range(m):
-        alpha = 2 / (1.0 + j + i) + 0.0001  # 动态修改alpha步长从4->0.016
-        randIndex = int(random.uniform(0, len(dataIndex)))  # 生成0~m之间随机索引
-        vectSum = sum(dataMat[randIndex] * weights.T)  # 计算dataMat随机索引与权重的点积和
-        grad = logistic(vectSum)  # 计算点积和的梯度
-        errors = target[randIndex] - grad  # 计算误差
-        weights = weights + alpha * errors * dataMat[randIndex]  # 计算行向量权重
-        # del dataIndex[randIndex]  # 从数据集中删除选取的随机索引
-
-print(weights)  # 输出训练后的权重
-weights = weights.tolist()[0]
-# 6. 绘制训练后超平面
-X = np.linspace(-5, 5, 100)
-# y=w*x+b: b:weights[0]/weights[2]; w:weights[1]/weights[2]
-Y = -(np.double(weights[0]) + X * (np.double(weights[1]))) / np.double(weights[2])
-plt.plot(X, Y)
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-def scatterplot(wMat, k):  # 绘制图形
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    wMatT = wMat.T
-    m, n = np.shape(wMatT)
-    for i in range(m):
-        ax.plot(k, wMatT[i, :])
-        ax.annotate("feature[" + str(i) + "]", xy=(0, wMatT[i, 0]), color="black")
-    show()
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+# 保留 讀取檔案 ok
 print("normalequation.py")
+
+
+def loadDataSet3(filename):
+    X = []
+    Y = []
+    fr = open(filename)
+    for line in fr.readlines():
+        curLine = line.strip().split("\t")
+        X.append(float(curLine[0]))
+        Y.append(float(curLine[-1]))
+    return X, Y
+
 
 # 数据矩阵,分类标签
 xArr, yArr = loadDataSet3("data2/regdataset.txt")
-# 生成X坐标列
-m = len(xArr)
-Xmat = np.mat(np.ones((m, 2)))
-for i in range(m):
-    Xmat[i, 1] = xArr[i]
-Ymat = np.mat(yArr).T  # 转换为y列
-
-xTx = Xmat.T * Xmat  # 矩阵左乘自身的转置
-
-ws = []
-if np.linalg.det(xTx) != 0.0:
-    # 计算直线的斜率和截距
-    # 矩阵正规方程组公式:inv(X.T*X)*X.T*Y
-    ws = xTx.I * (Xmat.T * Ymat)
-else:
-    print("This matrix is singular, cannot do inverse")
-    sys.exit(0)  # 退出程序
-print("ws:", ws)
-
-
-# NG yHat = plotscatter2(Xmat[:,1],Ymat,ws[1,0],ws[0,0],plt)
-
-# 计算相关系数:
-# NG print(np.corrcoef(yHat, Ymat.T))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("rbfNettest.py")
-
-# 数据矩阵,分类标签
-xArr, yArr = loadDataSet4("data2/nolinear.txt")
-# 局部加权线性回归算法：回归线矩阵
-
-# RBF函数的平滑系数
-miu = 0.02
-k = 0.03
-
-# 数据集坐标数组转换为矩阵
-# 二維list 轉 np.matrix ?
-xMat = np.mat(xArr)
-yMat = np.mat(yArr).T
-testArr = xArr  # 测试数组
-m, n = np.shape(xArr)  # xArr的行数
-yHat = np.zeros(m)  # yHat是y的预测值,yHat的数据是y的回归线矩阵
-for i in range(m):
-    weights = np.mat(np.eye(m))
-    for j in range(m):
-        diffMat = testArr[i] - xMat[j, :]
-        # 利用高斯核函数计算权重矩阵,计算后的权重是一个对角阵
-        weights[j, j] = np.exp(diffMat * diffMat.T / (-miu * k**2))
-    xTx = xMat.T * (weights * xMat)  # 矩阵左乘自身的转置
-    if np.linalg.det(xTx) != 0.0:
-        ws = xTx.I * (xMat.T * (weights * yMat))
-        yHat[i] = testArr[i] * ws  # 计算回归线坐标矩阵
-    else:
-        print("This matrix is singular, cannot do inverse")
-        sys.exit(0)  # 退出程序
-
-
-# NG plotscatter3(xMat[:,1],yMat,yHat,plt) # 绘制图形
-
-# 计算相关系数:
-# NG print(np.corrcoef(yHat,yMat.T))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1678,17 +992,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
@@ -1704,6 +1007,10 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

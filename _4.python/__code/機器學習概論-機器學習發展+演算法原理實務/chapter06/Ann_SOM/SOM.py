@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-
-__author__ = "alexander philippov"
-__date__ = "$06.06.2011 2:36:42$"
-
 import sys
 import random
 import math

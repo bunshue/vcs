@@ -1,87 +1,86 @@
 # -*- coding: utf-8 -*-
 # Filename : testKohonen.py
 
-import numpy as np 
+import numpy as np
 import operator
 import Untils
 import Kohonen
 from numpy import *
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 
-# ¼ÓÔØ×ø±êÊı¾İÎÄ¼ş
-dataSet = Untils.loadDataSet("dataset.txt");
+# åŠ è½½åæ ‡æ•°æ®æ–‡ä»¶
+dataSet = Untils.loadDataSet("dataset.txt")
 dataMat = mat(dataSet)
-dm,dn = shape(dataMat)
-# ¹éÒ»»¯Êı¾İ
+dm, dn = shape(dataMat)
+# å½’ä¸€åŒ–æ•°æ®
 normDataset = Kohonen.mapMinMax(dataMat)
-# ²ÎÊı
-# Ñ§Ï°ÂÊ
-rate1max=0.8  #0.8
-rate1min=0.05;
-# Ñ§Ï°°ë¾¶
-r1max=3;
-r1min=0.8 #0.8
+# å‚æ•°
+# å­¦ä¹ ç‡
+rate1max = 0.8  # 0.8
+rate1min = 0.05
+# å­¦ä¹ åŠå¾„
+r1max = 3
+r1min = 0.8  # 0.8
 
-## ÍøÂç¹¹½¨
-Inum=2;
-M=2;
-N=2;
-K=M*N;          #Kohonen×Ü½ÚµãÊı  
- 
-# Kohonen²ã½ÚµãÅÅĞò
-k=0;
-jdpx = mat(zeros((K,2)));
+## ç½‘ç»œæ„å»º
+Inum = 2
+M = 2
+N = 2
+K = M * N
+# Kohonenæ€»èŠ‚ç‚¹æ•°
+
+# Kohonenå±‚èŠ‚ç‚¹æ’åº
+k = 0
+jdpx = mat(zeros((K, 2)))
 for i in range(M):
     for j in range(N):
-        jdpx[k,:]=[i,j];
-        k=k+1;
+        jdpx[k, :] = [i, j]
+        k = k + 1
 
-# È¨Öµ³õÊ¼»¯
-w1 = random.rand(Inum,K); #µÚÒ»²ãÈ¨Öµ
+# æƒå€¼åˆå§‹åŒ–
+w1 = random.rand(Inum, K)
+# ç¬¬ä¸€å±‚æƒå€¼
 
-## µü´úÇó½â
+## è¿­ä»£æ±‚è§£
 ITER = 200
 for i in range(ITER):
-	
-	#×ÔÊÊÓ¦Ñ§Ï°ÂÊºÍÏàÓ¦°ë¾¶
-	rate1 = rate1max-(i+1)/float(ITER)*(rate1max-rate1min)
-	r = r1max-(i+1)/float(ITER)*(r1max-r1min)
-	# Ëæ»ú³éÈ¡Ò»¸öÑù±¾
-	k = random.randint(0,dm) #Éú³ÉÑù±¾µÄË÷Òı,²»°üÀ¨×î¸ßÖµ
-	myndSet = normDataset[k,:] #xx
-		
-	# ¼ÆËã×îÓÅ½Úµã£º·µ»Ø×îĞ¡¾àÀëµÄË÷ÒıÖµ
-	minIndx= (Kohonen.distM(myndSet,w1)).argmin()
-	d1 = ceil(minIndx/M)
-	d2 = mod(minIndx,N)
-	distMat = Kohonen.distM(mat([d1,d2]),jdpx.transpose())
-	nodelindx = (distMat<r).nonzero()[1]
-	for j in range(K):
-		if sum(nodelindx==j):
-			w1[:,j] = w1[:,j]+rate1*(myndSet.tolist()[0]-w1[:,j])
+    # è‡ªé€‚åº”å­¦ä¹ ç‡å’Œç›¸åº”åŠå¾„
+    rate1 = rate1max - (i + 1) / float(ITER) * (rate1max - rate1min)
+    r = r1max - (i + 1) / float(ITER) * (r1max - r1min)
+    # éšæœºæŠ½å–ä¸€ä¸ªæ ·æœ¬
+    k = random.randint(0, dm)  # ç”Ÿæˆæ ·æœ¬çš„ç´¢å¼•,ä¸åŒ…æ‹¬æœ€é«˜å€¼
+    myndSet = normDataset[k, :]  # xx
 
-# Ñ§Ï°½×¶Î
-classLabel = range(dm);
+    # è®¡ç®—æœ€ä¼˜èŠ‚ç‚¹ï¼šè¿”å›æœ€å°è·ç¦»çš„ç´¢å¼•å€¼
+    minIndx = (Kohonen.distM(myndSet, w1)).argmin()
+    d1 = ceil(minIndx / M)
+    d2 = mod(minIndx, N)
+    distMat = Kohonen.distM(mat([d1, d2]), jdpx.transpose())
+    nodelindx = (distMat < r).nonzero()[1]
+    for j in range(K):
+        if sum(nodelindx == j):
+            w1[:, j] = w1[:, j] + rate1 * (myndSet.tolist()[0] - w1[:, j])
+
+# å­¦ä¹ é˜¶æ®µ
+classLabel = range(dm)
 for i in range(dm):
-    classLabel[i] = Kohonen.distM(normDataset[i,:],w1).argmin()
-# È¥ÖØ
+    classLabel[i] = Kohonen.distM(normDataset[i, :], w1).argmin()
+# å»é‡
 lst = unique(classLabel)
-print lst
+print(lst)
 classLabel = mat(classLabel)
-# »æÍ¼
-i = 0;
+# ç»˜å›¾
+i = 0
 for cindx in lst:
-	myclass = nonzero(classLabel==cindx)[1]	
-	xx = dataMat[myclass].copy()
-	if i ==0:
-		plt.plot(xx[:,0],xx[:,1],'bo')
-	if i ==1:
-		plt.plot(xx[:,0],xx[:,1],'r*')
-	if i ==2:
-		plt.plot(xx[:,0],xx[:,1],'gD')			
-	if i ==3:
-		plt.plot(xx[:,0],xx[:,1],'c^')						
-	i +=1			
+    myclass = nonzero(classLabel == cindx)[1]
+    xx = dataMat[myclass].copy()
+    if i == 0:
+        plt.plot(xx[:, 0], xx[:, 1], "bo")
+    if i == 1:
+        plt.plot(xx[:, 0], xx[:, 1], "r*")
+    if i == 2:
+        plt.plot(xx[:, 0], xx[:, 1], "gD")
+    if i == 3:
+        plt.plot(xx[:, 0], xx[:, 1], "c^")
+    i += 1
 plt.show()
-
-    	

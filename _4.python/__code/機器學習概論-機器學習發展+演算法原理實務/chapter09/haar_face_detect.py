@@ -1,27 +1,27 @@
-# -*- coding: utf-8 -*-
-
 from numpy import *
 import numpy as np
 import cv2
 
-face_cascade = cv2.CascadeClassifier('E:\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_alt_tree.xml')
+face_cascade = cv2.CascadeClassifier(
+    "E:\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_alt_tree.xml"
+)
 
-img = cv2.imread('mypicture.jpg')
+img = cv2.imread("mypicture.jpg")
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-# Ê¶±ğÊäÈëÍ¼Æ¬ÖĞµÄÈËÁ³¶ÔÏó.·µ»Ø¶ÔÏóµÄ¾ØĞÎ³ß´ç
-# º¯ÊıÔ­ĞÍdetectMultiScale(gray, 1.2,3,CV_HAAR_SCALE_IMAGE,Size(30, 30))
-# grayĞèÒªÊ¶±ğµÄÍ¼Æ¬
-# 1.2£º±íÊ¾Ã¿´ÎÍ¼Ïñ³ß´ç¼õĞ¡µÄ±ÈÀı
-# 3£º±íÊ¾Ã¿Ò»¸öÄ¿±êÖÁÉÙÒª±»¼ì²âµ½4´Î²ÅËãÊÇÕæµÄÄ¿±ê(ÒòÎªÖÜÎ§µÄÏñËØºÍ²»Í¬µÄ´°¿Ú´óĞ¡¶¼¿ÉÒÔ¼ì²âµ½ÈËÁ³)
-# CV_HAAR_SCALE_IMAGE±íÊ¾²»ÊÇËõ·Å·ÖÀàÆ÷À´¼ì²â£¬¶øÊÇËõ·ÅÍ¼Ïñ£¬Size(30, 30)ÎªÄ¿±êµÄ×îĞ¡×î´ó³ß´ç
-# faces£º±íÊ¾¼ì²âµ½µÄÈËÁ³Ä¿±êĞòÁĞ
+# è¯†åˆ«è¾“å…¥å›¾ç‰‡ä¸­çš„äººè„¸å¯¹è±¡.è¿”å›å¯¹è±¡çš„çŸ©å½¢å°ºå¯¸
+# å‡½æ•°åŸå‹detectMultiScale(gray, 1.2,3,CV_HAAR_SCALE_IMAGE,Size(30, 30))
+# grayéœ€è¦è¯†åˆ«çš„å›¾ç‰‡
+# 1.2ï¼šè¡¨ç¤ºæ¯æ¬¡å›¾åƒå°ºå¯¸å‡å°çš„æ¯”ä¾‹
+# 3ï¼šè¡¨ç¤ºæ¯ä¸€ä¸ªç›®æ ‡è‡³å°‘è¦è¢«æ£€æµ‹åˆ°4æ¬¡æ‰ç®—æ˜¯çœŸçš„ç›®æ ‡(å› ä¸ºå‘¨å›´çš„åƒç´ å’Œä¸åŒçš„çª—å£å¤§å°éƒ½å¯ä»¥æ£€æµ‹åˆ°äººè„¸)
+# CV_HAAR_SCALE_IMAGEè¡¨ç¤ºä¸æ˜¯ç¼©æ”¾åˆ†ç±»å™¨æ¥æ£€æµ‹ï¼Œè€Œæ˜¯ç¼©æ”¾å›¾åƒï¼ŒSize(30, 30)ä¸ºç›®æ ‡çš„æœ€å°æœ€å¤§å°ºå¯¸
+# facesï¼šè¡¨ç¤ºæ£€æµ‹åˆ°çš„äººè„¸ç›®æ ‡åºåˆ—
 faces = face_cascade.detectMultiScale(gray, 1.2, 3)
-for (x,y,w,h) in faces:
-	img2 = cv2.rectangle(img,(x,y),(x+w,y+h),(255,255,255),4)
-	roi_gray = gray[y:y+h, x:x+w]
-	roi_color = img[y:y+h, x:x+w]
+for x, y, w, h in faces:
+    img2 = cv2.rectangle(img, (x, y), (x + w, y + h), (255, 255, 255), 4)
+    roi_gray = gray[y : y + h, x : x + w]
+    roi_color = img[y : y + h, x : x + w]
 
-cv2.imshow('img',img)
+cv2.imshow("img", img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-cv2.imwrite("paulwalker.head.jpg", img) # ±£´æÍ¼Æ¬
+cv2.imwrite("paulwalker.head.jpg", img)  # ä¿å­˜å›¾ç‰‡

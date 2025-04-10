@@ -30,7 +30,7 @@ print("------------------------------------------------------------")  # 60個
 print("讀取一個資料夾內的所有csv檔, 用區域變數存起來")
 foldername = "D:/_git/vcs/_big_files/Bankcredit"
 os.chdir(foldername)
-print('目前目錄 :', os.getcwd())
+print("目前目錄 :", os.getcwd())
 
 loanfile = os.listdir()
 createVar = locals()  # 字典
