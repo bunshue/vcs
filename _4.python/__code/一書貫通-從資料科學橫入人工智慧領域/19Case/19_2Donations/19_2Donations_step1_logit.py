@@ -31,7 +31,9 @@ from woe import WoE  # 从本地导入
 
 # 创建一个列表，用来保存所有的建模数据清洗的相关信息
 DATA_CLEAN = []
-model_data = pd.read_csv("data_donations/donations2.csv").drop(["ID", "TARGET_D"], axis=1)
+model_data = pd.read_csv("data_donations/donations2.csv").drop(
+    ["ID", "TARGET_D"], axis=1
+)
 cc = model_data.head()
 print(cc)
 

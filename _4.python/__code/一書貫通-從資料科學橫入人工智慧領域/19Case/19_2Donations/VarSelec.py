@@ -1,4 +1,3 @@
-
 def Var_Select(orgdata, k, alphaMin=0.1, alphaMax=200, alphastep=0.2):
     """
     orgdata-需要信息压缩的数据框
