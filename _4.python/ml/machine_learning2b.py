@@ -75,30 +75,15 @@ def file2matrix(path, delimiter):
     return np.mat(recordlist)  # 返回转换后的矩阵形式
 
 
-
 def createPlot(inTree):
     fig = plt.figure(1, facecolor="white")
     fig.clf()
     axprops = dict(xticks=[], yticks=[])
     createPlot.ax1 = plt.subplot(111, frameon=False, **axprops)  # no ticks
     # createPlot.ax1 = plt.subplot(111, frameon=False) #ticks for demo puropses
-    plotTree.totalW = float(getNumLeafs(inTree))
-    plotTree.totalD = float(getTreeDepth(inTree))
-    plotTree.xOff = -0.5 / plotTree.totalW
-    plotTree.yOff = 1.0
-    plotTree(inTree, (0.5, 1.0), "")
+
     show()
 
-
-""" old
-def createPlot():
-    fig = plt.figure(1, facecolor='white')
-    fig.clf()
-    createPlot.ax1 = plt.subplot(111, frameon=False) #ticks for demo puropses
-    plotNode('a decision node', (0.5, 0.1), (0.1, 0.5), decisionNode)
-    plotNode('a leaf node', (0.8, 0.1), (0.3, 0.8), leafNode)
-    show()
-"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -118,10 +103,12 @@ def distEclud(vecA, vecB):
 def distCorrcoef(vecA, vecB):
     return np.corrcoef(vecA, vecB, rowvar=0)[0][1]
 
+
 # Jaccard距离
 def distJaccard(vecA, vecB):
     temp = np.mat([np.array(vecA.tolist()[0]), np.array(vecB.tolist()[0])])
-    return dist.pdist(temp,'jaccard')
+    return dist.pdist(temp, "jaccard")
+
 
 # Jaccard距离
 def distJaccard(vecA, vecB):
@@ -162,7 +149,7 @@ def loadDataSet1(filename):  # general function to parse tab -delimited floats
         dataMat.append(fltLine)
     return dataMat
 
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -201,92 +188,6 @@ for element, num in zip(dataset, numlist):
 
 fp = open("tmp_dataset.dat", "w")
 fp.write("\n".join(datalines))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("treePlotter2.py")
-
-decisionNode = dict(boxstyle="sawtooth", fc="0.8")
-leafNode = dict(boxstyle="round4", fc="0.8")
-arrow_args = dict(arrowstyle="<-")
-
-
-def getNumLeafs(myTree):
-    numLeafs = 0
-    firstStr = myTree.keys()[0]
-    secondDict = myTree[firstStr]
-    for key in secondDict.keys():
-        if (
-            type(secondDict[key]).__name__ == "dict"
-        ):  # test to see if the nodes are dictonaires, if not they are leaf nodes
-            numLeafs += getNumLeafs(secondDict[key])
-        else:
-            numLeafs += 1
-    return numLeafs
-
-
-def getTreeDepth(myTree):
-    maxDepth = 0
-    firstStr = myTree.keys()[0]
-    secondDict = myTree[firstStr]
-    for key in secondDict.keys():
-        if (
-            type(secondDict[key]).__name__ == "dict"
-        ):  # test to see if the nodes are dictonaires, if not they are leaf nodes
-            thisDepth = 1 + getTreeDepth(secondDict[key])
-        else:
-            thisDepth = 1
-        if thisDepth > maxDepth:
-            maxDepth = thisDepth
-    return maxDepth
-
-
-def plotNode(nodeTxt, centerPt, parentPt, nodeType):
-    createPlot.ax1.annotate(
-        nodeTxt,
-        xy=parentPt,
-        xycoords="axes fraction",
-        xytext=centerPt,
-        textcoords="axes fraction",
-        va="center",
-        ha="center",
-        bbox=nodeType,
-        arrowprops=arrow_args,
-    )
-
-
-def plotMidText(cntrPt, parentPt, txtString):
-    xMid = (parentPt[0] - cntrPt[0]) / 2.0 + cntrPt[0]
-    yMid = (parentPt[1] - cntrPt[1]) / 2.0 + cntrPt[1]
-    createPlot.ax1.text(xMid, yMid, txtString, va="center", ha="center", rotation=30)
-
-
-def plotTree(
-    myTree, parentPt, nodeTxt
-):  # if the first key tells you what feat was split on
-    numLeafs = getNumLeafs(myTree)  # this determines the x width of this tree
-    depth = getTreeDepth(myTree)
-    firstStr = myTree.keys()[0]  # the text label for this node should be this
-    cntrPt = (
-        plotTree.xOff + (1.0 + float(numLeafs)) / 2.0 / plotTree.totalW,
-        plotTree.yOff,
-    )
-    plotMidText(cntrPt, parentPt, nodeTxt)
-    plotNode(firstStr, cntrPt, parentPt, decisionNode)
-    secondDict = myTree[firstStr]
-    plotTree.yOff = plotTree.yOff - 1.0 / plotTree.totalD
-    for key in secondDict.keys():
-        if (
-            type(secondDict[key]).__name__ == "dict"
-        ):  # test to see if the nodes are dictonaires, if not they are leaf nodes
-            plotTree(secondDict[key], cntrPt, str(key))  # recursion
-        else:  # it's a leaf node print the leaf node
-            plotTree.xOff = plotTree.xOff + 1.0 / plotTree.totalW
-            plotNode(secondDict[key], (plotTree.xOff, plotTree.yOff), cntrPt, leafNode)
-            plotMidText((plotTree.xOff, plotTree.yOff), cntrPt, str(key))
-    plotTree.yOff = plotTree.yOff + 1.0 / plotTree.totalD
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -379,268 +280,6 @@ print(resultarray)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("svdRec.py")
-
-
-def loadExData():
-    return [
-        [0, 0, 0, 2, 2],
-        [0, 0, 0, 3, 3],
-        [0, 0, 0, 1, 1],
-        [1, 1, 1, 0, 0],
-        [2, 2, 2, 0, 0],
-        [5, 5, 5, 0, 0],
-        [1, 1, 1, 0, 0],
-    ]
-
-
-def loadReData():
-    return [
-        [4, 4, 0, 2, 2],
-        [4, 0, 0, 3, 3],
-        [4, 0, 0, 1, 1],
-        [1, 1, 1, 0, 0],
-        [2, 2, 2, 0, 0],
-        [5, 5, 5, 0, 0],
-        [1, 1, 1, 0, 0],
-    ]
-
-
-def loadExData2():
-    return [
-        [0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 5],
-        [0, 0, 0, 3, 0, 4, 0, 0, 0, 0, 3],
-        [0, 0, 0, 0, 4, 0, 0, 1, 0, 4, 0],
-        [3, 3, 4, 0, 0, 0, 0, 2, 2, 0, 0],
-        [5, 4, 5, 0, 0, 0, 0, 5, 5, 0, 0],
-        [0, 0, 0, 0, 5, 0, 1, 0, 0, 5, 0],
-        [4, 3, 4, 0, 0, 0, 0, 5, 5, 0, 1],
-        [0, 0, 0, 4, 0, 4, 0, 0, 0, 0, 4],
-        [0, 0, 0, 2, 0, 2, 5, 0, 0, 1, 2],
-        [0, 0, 0, 0, 5, 0, 0, 0, 0, 4, 0],
-        [1, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0],
-    ]
-
-
-# 欧氏距离：
-# 二维空间的欧氏距离公式：sqrt((x1-x2)^2+(y1-y2)^2)
-def ecludSim(inA, inB):
-    return 1.0 / (1.0 + np.linalg.norm(inA - inB))
-
-
-# 皮尔逊相似度：corrcoef相关系数:衡量X与Y线性相关程度,其绝对值越大,则表明X与Y相关度越高。
-# E((X-EX)(Y-EY))/sqrt(D(X)D(Y))
-def pearsSim(inA, inB):
-    if len(inA) < 3:
-        return 1.0
-    return 0.5 + 0.5 * corrcoef(inA, inB, rowvar=0)[0][1]
-
-
-# 夹角余弦：计算空间内两点之间的夹角余弦
-# 两个n维样本点a(x11,x12,…,x1n)和b(x21,x22,…,x2n)的夹角余弦
-# cos(theta) = a*b/(|a|*|b|)
-def cosSim(inA, inB):
-    num = float(inA.T * inB)
-    denom = np.linalg.norm(inA) * np.linalg.norm(inB)
-    return 0.5 + 0.5 * (num / denom)
-
-
-# 标准相似度计算方法下的用户估计值
-def standEst(dataMat, user, simMeas, item):
-    n = np.shape(dataMat)[1]  # 列数
-    simTotal = 0.0
-    ratSimTotal = 0.0
-    for j in range(n):
-        userRating = dataMat[user, j]  # 数据集第user行第j列的元素值
-        if userRating == 0:
-            continue  # 跳过未评估项目
-        # logical_and:矩阵逐个元素运行逻辑与,返回值为每个元素的True,False
-        # dataMat[:,item].A>0: 第item列中大于0的元素
-        # dataMat[:,j].A: 第j列中大于0的元素
-        # overLap: dataMat[:,item],dataMat[:,j]中同时都大于0的那个元素的行下标
-        overLap = nonzero(logical_and(dataMat[:, item].A > 0, dataMat[:, j].A > 0))[0]
-        # 计算相似度
-        if len(overLap) == 0:
-            similarity = 0
-        else:
-            similarity = simMeas(
-                dataMat[overLap, item], dataMat[overLap, j]
-            )  # 计算overLap矩阵的相似度
-        # print "第%d列和第%d列的相似度是: %f" %(item, j, similarity)
-        # 累计总相似度
-        simTotal += similarity
-        # ratSimTotal = 相似度*元素值
-        ratSimTotal += similarity * userRating
-    if simTotal == 0:
-        return 0  # 如果总相似度为0，返回0
-    # 返回相似度*元素值/总相似度
-    else:
-        # print "ratSimTotal:",ratSimTotal
-        # print "simTotal:",simTotal
-        return ratSimTotal / simTotal
-
-
-# 使用svd进行估计
-def svdEst(dataMat, user, simMeas, item):
-    n = np.shape(dataMat)[1]
-    simTotal = 0.0
-    ratSimTotal = 0.0
-    # svd相似性计算的核心
-    U, Sigma, VT = np.linalg.svd(dataMat)  # 计算矩阵的奇异值分解
-    # Sig4 = np.mat(eye(4)*Sigma[:4]) # 取Svd特征值的前4个构成对角阵
-    # xformedItems = dataMat.T * U[:,:4] * Sig4.I  # 创建变换后的项目矩阵create transformed items
-    V = VT.T  # V是dataMat的相似矩阵
-    xformedItems = V[:, :4]
-    # print "xformedItems:",xformedItems
-    # 逐列遍历数据集
-    for j in range(n):
-        userRating = dataMat[user, j]  # 未评级用户为0,因此不会计算。其他的均有值
-        # print "userRating:",userRating
-        # 跳过未评级的项目
-        if userRating == 0 or j == item:
-            continue
-        # 使用指定的计算公式计算向量间的相似度
-        similarity = simMeas(xformedItems[item, :].T, xformedItems[j, :].T)  # 相似度计算公式
-        # print "待评估%d列和第%d列的相似度是: %f" % (item, j, similarity)
-        simTotal += similarity  # 计算累计总相似度
-        ratSimTotal += similarity * userRating  # ratSim = 相似度*项目评估值
-    if simTotal == 0:
-        return 0
-    else:
-        return ratSimTotal / simTotal
-
-
-# 产生推荐结果的主方法
-# simMeas取值:cosSim, pearsSim, ecludSim
-# estMethod取值:standEst,svdEst
-# user 用户项目矩阵中进行评估的行下标
-# N=3返回前3项
-def recommend(dataMat, user, N=3, simMeas=cosSim, estMethod=svdEst):
-    unratedItems = nonzero(dataMat[user, :].A == 0)[1]  # 查找未评级的项目--即用户--项目矩阵中user行对应的零值
-    # print "unratedItems:",unratedItems
-    # unratedItems: 未评估的项目--项目矩阵中user行对应零值的列下标
-    if len(unratedItems) == 0:
-        return "已经对所有项目评级"
-    # 初始化项目积分数据类型,是一个二维矩阵
-    # 元素1:item;元素2:评分值
-    itemScores = []
-    # 循环进行评估:将每个未评估项目于已评估比较，计算相似度
-    # 本例中未评估项目取值1,2
-    for item in unratedItems:
-        estimatedScore = estMethod(dataMat, user, simMeas, item)  # 使用评估方法对数据评估，返回评估积分
-        itemScores.append((item, estimatedScore))  # 并在项目积分内加入项目和对应的评估积分
-    # 返回排好序的项目和积分，N=3返回前3项
-    return sorted(itemScores, key=lambda jj: jj[1], reverse=True)[:N]
-
-
-""" no file
-print("testRecomm01.py")
-
-# 加载修正后数据
-dataMat = file2matrix("ml_data/training.txt", "\t")
-print(dataMat[0][0])
-# 相似公式：夹角余弦
-output1 = recommend(dataMat, 1)
-print(output1)
-
-# 相似公式：欧氏距离
-# output2 = recommend(dataMat,1,simMeas=ecludSim)
-# print(output2)
-
-# 相似公式：相关系数
-# output3 = recommend(dataMat,1,simMeas=pearsSim)
-# print(output3)
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("svdtest01.py")
-
-# 加载修正后数据
-A = np.mat(
-    [[5, 5, 3, 0, 5, 5], [5, 0, 4, 0, 4, 4], [0, 3, 0, 5, 4, 5], [5, 4, 3, 3, 5, 5]]
-)
-
-# 手工分解求矩阵的svd
-U = A * A.T
-lamda, hU = np.linalg.eig(U)  # hU:U特征向量
-VT = A.T * A
-eV, hVT = np.linalg.eig(VT)  # hVT:VT特征向量
-hV = hVT.T
-# print "hU:",hU
-# print "hV:",hV
-sigma = np.sqrt(lamda)  # 特征值
-print("sigma:", sigma)
-
-Sigma = np.zeros([np.shape(A)[0], np.shape(A)[1]])
-U, S, VT = np.linalg.svd(A)
-# Sigma[:np.shape(A)[0], :np.shape(A)[0]] = np.diag(S)
-# print(U)
-print(S)
-# print(VT)
-
-# print(U*Sigma*VT)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("testRecommsvd.py")
-
-
-# 夹角余弦，避免除0
-def cosSim(inA, inB):
-    denom = np.linalg.norm(inA) * np.linalg.norm(inB)
-    return float(inA * inB.T) / (denom + eps)
-
-
-# 加载修正后数据
-A = np.mat(
-    [[5, 5, 3, 0, 5, 5], [5, 0, 4, 0, 4, 4], [0, 3, 0, 5, 4, 5], [5, 4, 3, 3, 5, 5]]
-)
-new = np.mat([[5, 5, 0, 0, 0, 5]])
-
-U, S, VT = np.linalg.svd(A.T)
-V = VT.T
-Sigma = np.diag(S)
-r = 2  # 取前两个奇异值
-# 近似后的U,S,V值
-Ur = U[:, :r]
-Sr = Sigma[:r, :r]
-Vr = V[:, :r]
-# 计算new的坐标值
-newresult = new * Ur * np.linalg.inv(Sr)
-print(newresult)
-
-maxv = 0  # 最大的余弦值
-maxi = 0  # 最大值的下标
-indx = 0
-# 计算最近似的结果
-for vi in Vr:
-    temp = cosSim(newresult, vi)
-    if temp > maxv:
-        maxv = temp
-        maxi = indx
-    indx += 1
-print(maxv, maxi)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# Logistic函数
-def logistic(wTx):
-    return 1.0 / (1.0 + np.exp(-wTx))
-
-
-X = np.linspace(-5, 5, 100)
-
-Y = logistic(X)
-plt.plot(X, Y)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("plotGD.py")
 
 import matplotlib
@@ -712,70 +351,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
-# hmm01.py
-
-# 起始概率
-startP = np.mat([0.63, 0.17, 0.20])
-# 状态转移概率[i,j]:i(t),j(t+1)
-stateP = np.mat([[0.5, 0.25, 0.25], [0.375, 0.125, 0.375], [0.125, 0.675, 0.375]])
-# 发射（混合）概率
-# 列向量：emitP[:,i] = 隐含层状态; emitP[j,:] = 显式层状态
-emitP = np.mat([[0.6, 0.20, 0.05], [0.25, 0.25, 0.25], [0.05, 0.10, 0.50]])
-
-# 计算概率：干旱－干燥－潮湿
-# 初始化概率：干旱：startP*emitP
-state1Emit = np.multiply(startP, emitP[:, 0].T)
-print(state1Emit)
-print("argmax:", state1Emit.argmax())
-
-# 计算干燥的概率:
-state2Emit = stateP * state1Emit.T
-state2Emit = np.multiply(state2Emit, emitP[:, 1])
-print(state2Emit.T)
-print("argmax:", state2Emit.argmax())
-
-# 计算潮湿的概率:
-state3Emit = stateP * state2Emit
-state3Emit = np.multiply(state3Emit, emitP[:, 2])
-print(state3Emit.T)
-print("argmax:", state3Emit.argmax())
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# hmm02.py
-
-# 起始概率
-startP = np.mat([0.63, 0.17, 0.20])
-# 状态转移概率[i,j]:i(t),j(t+1)
-stateP = np.mat([[0.5, 0.375, 0.125], [0.25, 0.125, 0.675], [0.25, 0.375, 0.375]])
-# 发射（混合）概率
-emitP = np.mat(
-    [[0.6, 0.20, 0.15, 0.05], [0.25, 0.25, 0.25, 0.25], [0.05, 0.10, 0.35, 0.50]]
-)
-
-# 计算概率：干旱－干燥－潮湿
-state1Emit = np.multiply(startP.T, emitP[:, 0])
-print(state1Emit)
-best = state1Emit.argmax()
-print("max", state1Emit.max(), "path1:", state1Emit.argmax())
-
-# 计算干燥的概率:
-print(state1Emit[best], stateP)
-state2Mat = np.multiply(state1Emit[best], stateP)
-print(state2Mat)
-state2Mat = np.dot(state2Mat, emitP[:, 1])
-print("max", state2Mat.max(), "path1:", state2Mat.argmax())
-"""
-# 计算潮湿的概率:
-state3Mat = np.multiply(state2Mat[best],stateP)
-state3Mat = np.dot(state3Mat,emitP[:,1])
-print("max",state3Mat.max(),"path1:",state3Mat.argmax())
-"""
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 # markovtest1.py
 
@@ -831,17 +406,78 @@ print(result)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("建立字典的語法")
 
+decisionNode = dict(boxstyle="sawtooth", fc="0.8")
+leafNode = dict(boxstyle="round4", fc="0.8")
+arrow_args = dict(arrowstyle="<-")
+
+print("decisionNode")
+print(decisionNode)
+print("leafNode")
+print(leafNode)
+print("arrow_args")
+print(arrow_args)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("奇异值分解(SVD）")
+
+# 加载修正后数据
+A = np.mat(
+    [[5, 5, 3, 0, 5, 5], [5, 0, 4, 0, 4, 4], [0, 3, 0, 5, 4, 5], [5, 4, 3, 3, 5, 5]]
+)
+
+# 手工分解求矩阵的svd
+U = A * A.T
+lamda, hU = np.linalg.eig(U)  # hU:U特征向量
+VT = A.T * A
+eV, hVT = np.linalg.eig(VT)  # hVT:VT特征向量
+hV = hVT.T
+
+print("hU:", hU)
+print("hV:", hV)
+
+sigma = np.sqrt(lamda)  # 特征值
+print("sigma:", sigma)
+
+Sigma = np.zeros([np.shape(A)[0], np.shape(A)[1]])
+U, S, VT = np.linalg.svd(A)
+
+# Sigma[:np.shape(A)[0], :np.shape(A)[0]] = np.diag(S)
+
+print(U)
+print(S)
+print(VT)
+print(U * Sigma * VT)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# Logistic函数
+def logistic(wTx):
+    return 1.0 / (1.0 + np.exp(-wTx))
+
+
+X = np.linspace(-5, 5, 100)
+
+Y = logistic(X)
+plt.plot(X, Y)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -858,8 +494,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------")  # 60個
-
-
-
-
-

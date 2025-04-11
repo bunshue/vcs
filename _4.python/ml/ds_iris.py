@@ -172,13 +172,13 @@ print(cc)
 
 """
 # 印出一些資料
-print("花萼長度")
+print("萼長SL")
 print(df["sepal length (cm)"].head())
-print("花萼寬度")
+print("萼寬SW")
 print(df["sepal width (cm)"].head())
-print("花瓣長度")
+print("瓣長PL")
 print(df["petal length (cm)"].head())
-print("花瓣寬度")
+print("瓣寬PW")
 print(df["petal width (cm)"].head())
 """
 
@@ -323,28 +323,27 @@ for i in range(len(y)):
     else:
         plt.scatter(X[i, 0], X[i, 1], c="b", marker="s")
 
-show()            
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("讀取csv檔案成df 2")
 filename = "data/iris.csv"
-df = pd.read_csv(filename)
+df = pd.read_csv(filename)  # 150 X 5
 
-# many print(df)
+# 5欄位 : sepal_length(萼長SL)  sepal_width(萼寬SW)  petal_length(瓣長PL)  petal_width(瓣寬PW)     target(品種)
 
 plt.scatter(x=df.petal_width, y=df.petal_length, color="r")
-plt.xlabel("花瓣寬度")
-plt.ylabel("花瓣長度")
-plt.title("鳶尾花的花瓣寬度與長度關係")
+plt.xlabel("瓣寬PW")
+plt.ylabel("瓣長PL")
 
 show()
 
 # pd畫散點圖Virginica
-df.plot(x="petal_width", y="petal_length", kind="scatter", title="鳶尾花的花瓣寬度與長度關係")
-plt.xlabel("花瓣寬度")
-plt.ylabel("花瓣長度")
+df.plot(x="petal_width", y="petal_length", kind="scatter", title="瓣寬PW vs 瓣長PL")
+plt.xlabel("瓣寬PW")
+plt.ylabel("瓣長PL")
 
 show()
 
@@ -357,9 +356,8 @@ sns.lmplot(
     legend_out=False,  # 將圖例呈現在圖框內
     truncate=True,  # 根據實際的數據範圍，對擬合線作截斷操作
 )
-plt.xlabel("花瓣寬度")
-plt.ylabel("花瓣長度")
-plt.title("鳶尾花的花瓣寬度與長度關係")
+plt.xlabel("瓣寬PW")
+plt.ylabel("瓣長PL")
 
 show()
 
@@ -382,13 +380,13 @@ colmap = np.array(["r", "g", "y"])
 
 plt.subplot(121)
 plt.scatter(df["sepal_length"], df["sepal_width"], color=colmap[y])
-plt.xlabel("花萼長度(Sepal Length)")
-plt.ylabel("花萼寬度(Sepal Width)")
+plt.xlabel("萼長SL")
+plt.ylabel("萼寬SW")
 
 plt.subplot(122)
 plt.scatter(df["petal_length"], df["petal_width"], color=colmap[y])
-plt.xlabel("花瓣長度(Petal Length)")
-plt.ylabel("花瓣寬度(Petal Width)")
+plt.xlabel("瓣長PL")
+plt.ylabel("瓣寬PW")
 
 show()
 
@@ -407,13 +405,13 @@ colmap = np.array(["r", "g", "y"])
 
 plt.subplot(121)
 plt.scatter(df["sepal_length"], df["sepal_width"], color=colmap[Y])
-plt.xlabel("花萼長度(Sepal Length)")
-plt.ylabel("花萼寬度(Sepal Width)")
+plt.xlabel("萼長SL")
+plt.ylabel("萼寬SW")
 
 plt.subplot(122)
 plt.scatter(df["petal_length"], df["petal_width"], color=colmap[Y])
-plt.xlabel("花瓣長度(Petal Length)")
-plt.ylabel("花瓣寬度(Petal Width)")
+plt.xlabel("瓣長PL")
+plt.ylabel("瓣寬PW")
 
 show()
 
@@ -432,13 +430,13 @@ colmap = np.array(["r", "g", "y"])
 
 plt.subplot(121)
 plt.scatter(df["sepal_length"], df["sepal_width"], color=colmap[Y])
-plt.xlabel("花萼長度(Sepal Length)")
-plt.ylabel("花萼寬度(Sepal Width)")
+plt.xlabel("萼長SL")
+plt.ylabel("萼寬SW")
 
 plt.subplot(122)
 plt.scatter(df["petal_length"], df["petal_width"], color=colmap[Y])
-plt.xlabel("花瓣長度(Petal Length)")
-plt.ylabel("花瓣寬度(Petal Width)")
+plt.xlabel("瓣長PL")
+plt.ylabel("瓣寬PW")
 
 show()
 
@@ -670,10 +668,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
-萼長 花萼長度(Sepal.Length)(cm)
-萼寬 花萼寬度(Sepal.Width)(cm)
-瓣長 花瓣長度(Petal.Length)(cm)
-瓣寬 花瓣寬度(Petal.Width)(cm)
+萼長SL 花萼長度(Sepal.Length)(cm)
+萼寬SW 花萼寬度(Sepal.Width)(cm)
+瓣長PL 花瓣長度(Petal.Length)(cm)
+瓣寬PW 花瓣寬度(Petal.Width)(cm)
 """
 print("讀取csv檔案成df 6")
 filename = "data/Iris2.csv"
@@ -1762,7 +1760,65 @@ plt.ylabel("Accuracy")
 plt.legend(loc="lower right")
 plt.ylim([0.6, 1.0])
 plt.tight_layout()
-plt.show()
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("看相關係數")
+
+print("load_iris()轉df")
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target  # 資料集目標
+
+df = pd.DataFrame(X, columns=iris.feature_names)
+
+print("觀察資料集彙總資訊")  # 了解行資料的標題與資料型別(整數、浮點數、字串等)
+# many df.info()  # 這樣就已經把資料集彙總資訊印出來
+
+print("描述統計量")
+cc = df.describe()
+# many print(cc)
+
+M, N = df.shape
+print("df之大小", M, "X", N)
+
+print("iris 資料集欄名columns")
+cc = df.columns
+print(cc)
+"""
+print("萼長SL")
+print(df["sepal length (cm)"].head())
+print("萼寬SW")
+print(df["sepal width (cm)"].head())
+print("瓣長PL")
+print(df["petal length (cm)"].head())
+print("瓣寬PW")
+print(df["petal width (cm)"].head())
+"""
+print(df)
+
+
+df.columns = ["SL", "SW", "PL", "PW"]
+
+corr = df.corr()  # 查看數據間的相關係數
+print(corr)
+
+sns.set(font_scale=1.5)
+
+sns.set_context({"figure.figsize": (8, 8)})
+sns.heatmap(data=corr, square=True, cmap="RdBu_r", annot=True)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
