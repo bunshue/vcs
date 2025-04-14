@@ -182,7 +182,6 @@ y = pickle.load(pickle_in)
 #完全連接的層是典型的神經網絡（多層感知器）類型的層，與輸出層相同。
 #注意 本次代碼中所需的X.pickle和y.pickle為上一篇的輸出，路徑請根據自己的情況更改！
 
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import Dropout
@@ -252,7 +251,6 @@ tensorboard = TensorBoard(log_dir="logs/{}".format(NAME))
 #請注意，這callbacks是一個列表。您也可以將其他回調傳遞到此列表中。
 #我們的模型還沒有定義，所以現在讓我們把它們放在一起：
 
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import Dropout

@@ -376,8 +376,8 @@ model = Sequential()
 model.add(
     Conv2D(
         input_shape=(28, 28, 1),
-        filters=32,
-        kernel_size=(2, 2),
+        filters=32,  # 幾個filter
+        kernel_size=(2, 2),  # 每個Filter多大
         strides=(1, 1),
         padding="same",
     )

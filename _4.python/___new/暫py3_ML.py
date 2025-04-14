@@ -133,6 +133,10 @@ testing: 25个数据，其中20个属于A类，5个属于B类。
 
 
 
+監督式學習 : 迴歸、分類
+非監督式學習 : 分群、降維	K-Means, DBSCAN
+
+深度學習：MLP、CNN、RNN、LSTM、、
 
 
 t-分佈隨機鄰居嵌入 t-distributed Stochastic Neighbor Embedding, t-SNE	降維演算法

@@ -543,7 +543,7 @@ from keras.models import *
 from keras.layers import *
 from keras.applications import *
 from keras.preprocessing.image import *
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import ImageDataGenerator  # 資料擴增
 import h5py
 
 
@@ -557,6 +557,7 @@ def get_features(MODEL, width, height, lambda_func=None):
     model = Model(base_model.input, GlobalAveragePooling2D()(base_model.output))
 
     gen = ImageDataGenerator()
+    
     # 注意 train 和 test 是圖片存儲路徑
     train_generator = gen.flow_from_directory(
         "train", (width, height), shuffle=False, batch_size=16
@@ -652,7 +653,7 @@ from keras.models import *
 from keras.layers import *
 from keras.applications import *
 from keras.preprocessing.image import *
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import ImageDataGenerator  # 資料擴增
 import h5py
 
 
@@ -666,6 +667,7 @@ def get_features(MODEL, width, height, lambda_func=None):
     model = Model(base_model.input, GlobalAveragePooling2D()(base_model.output))
 
     gen = ImageDataGenerator()
+    
     # 注意 train 和 test 是圖片存儲路徑
     train_generator = gen.flow_from_directory(
         "train", (width, height), shuffle=False, batch_size=16

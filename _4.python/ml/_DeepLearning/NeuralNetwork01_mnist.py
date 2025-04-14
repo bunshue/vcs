@@ -1851,14 +1851,23 @@ do_model_fit1(x_train, y_train)
 # 模型評估
 evaluate_model(x_test, y_test)
 
-y_pred = model.predict(x_test)  # 取得每一個結果的機率
+y_pred = model.predict(x_test)  # 取得每一個結果的機率, 出現0~9的機率
+
+# y_pred : <class 'numpy.ndarray'> 10000 筆資料
+
+# np.argmax() 取出 最大值索引, 10個機率裏 最大的機率 就是預測的結果
+# np.argmax() 求最大值對應的索引, 將預測的機率轉換成類別
 print(
-    "預測結果 :",
+    "前4項 預測結果 :",
     np.argmax(y_pred[0]),
     np.argmax(y_pred[1]),
     np.argmax(y_pred[2]),
     np.argmax(y_pred[3]),
 )
+
+ans = np.argmax(y_pred, axis=-1)
+#print("ans :", ans)
+print("前20項 預測結果 :", ans[:20])
 
 # 預測
 y_pred = do_prediction(x_test[:20])
@@ -2108,6 +2117,7 @@ model.compile(
 
 tensorboard = TensorBoard(log_dir="logs")
 
+# 資料擴增
 gen = tf.keras.preprocessing.image.ImageDataGenerator(
     rotation_range=8,
     width_shift_range=0.08,

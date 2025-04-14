@@ -1,10 +1,8 @@
 """
 chest_xray
 
-
 Chest X-Ray Images (Pneumonia)
 https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia
-
 
 
 """
@@ -29,6 +27,15 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+import tensorflow as tf
+
+
+def show():
+    plt.show()
+    pass
 
 print("------------------------------------------------------------")  # 60個
 
@@ -64,7 +71,7 @@ def plotPerColumnDistribution(df, nGraphShown, nGraphPerRow):
         plt.xticks(rotation=90)
         plt.title(f"{columnNames[i]} (column {i})")
     plt.tight_layout(pad=1.0, w_pad=1.0, h_pad=1.0)
-    plt.show()
+    show()
 
 
 # Correlation matrix
@@ -88,8 +95,8 @@ def plotCorrelationMatrix(df, graphWidth):
     plt.yticks(range(len(corr.columns)), corr.columns)
     plt.gca().xaxis.tick_bottom()
     plt.colorbar(corrMat)
-    plt.title(f"Correlation Matrix for {filename}", fontsize=15)
-    plt.show()
+    plt.title(f"Correlation Matrix for {filename}")
+    show()
 
 
 # Scatter and density plots
@@ -120,7 +127,7 @@ def plotScatterMatrix(df, plotSize, textSize):
             size=textSize,
         )
     plt.suptitle("Scatter and Density Plot")
-    plt.show()
+    show()
 
 
 """
@@ -140,20 +147,20 @@ print("------------------------------------------------------------")  # 60個
 import cv2
 
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from tensorflow.keras.layers import Conv2D
+from tensorflow.keras.layers import MaxPooling2D
+from tensorflow.keras.layers import Flatten
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dropout
 from tensorflow.keras.optimizers import SGD
-from tensorflow.keras.activations import (
-    swish,
-)  # available as a built-in activation in TF 2.4+
-import tensorflow as tf
-
-from sklearn.metrics import classification_report, confusion_matrix
+from tensorflow.keras.activations import swish
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
 from sklearn.utils import class_weight
 
 
 def preprocess_image(image_path, target_size=(128, 128)):
-    # Read image with OpenCV
-    img = cv2.imread(image_path)
+    img = cv2.imread(image_path)# Read image with OpenCV
     if img is None:
         raise ValueError(f"Image not found: {image_path}")
 
@@ -287,31 +294,30 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import PIL
-import tensorflow as tf
 
 image = PIL.Image.open(
     "D:/_git/vcs/_big_files/chest_xray/train/PNEUMONIA/person1000_bacteria_2931.jpeg"
 )
 plt.imshow(image, cmap="gray")
-plt.show()
+show()
 
 image_normal = PIL.Image.open(
     "D:/_git/vcs/_big_files/chest_xray/train/NORMAL/IM-0115-0001.jpeg"
 )
 plt.imshow(image_normal, cmap="gray")
-plt.show()
+show()
 
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import ImageDataGenerator  # 資料擴增
 
 training_dir = "D:/_git/vcs/_big_files/chest_xray/train"
 training_generator = ImageDataGenerator(
     rescale=1 / 255,
-    rotation_range=30,  # Rotate images up to 30 degrees
-    width_shift_range=0.2,  # Shift width by 20%
-    height_shift_range=0.2,  # Shift height by 20%
+    rotation_range=30,  # 旋轉角度 +-30度
+    width_shift_range=0.2,  # 平移範圍 W 20%
+    height_shift_range=0.2,  # 平移範圍 H 20%
     shear_range=0.2,  # Shear effect
     zoom_range=0.2,  # Zoom in/out
-    horizontal_flip=True,  # Flip images horizontally
+    horizontal_flip=True,  # 左右翻轉
     fill_mode="nearest",  # Fill in missing pixels
 )
 data_train = training_generator.flow_from_directory(
@@ -391,17 +397,30 @@ plt.plot(epochs, acc, 'b', label='Training accurarcy')
 plt.plot(epochs, val_acc, 'r', label='Validation accurarcy')
 plt.title('Training and Validation accurarcy')
 plt.legend()
-plt.show()
+show()
 
 #Train and validation loss
 plt.plot(epochs, loss, 'b', label='Training loss')
 plt.plot(epochs, val_loss, 'r', label='Validation loss')
 plt.title('Training and Validation loss')
 plt.legend()
-plt.show()
+show()
 
 #I tried to minimize the gap between training and testing accuracy
 """
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
