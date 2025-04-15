@@ -77,7 +77,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
@@ -377,6 +377,15 @@ def print_y_data(y):
         else:
             print(end=" ")
 
+
+def get_elapsed_time():
+    current_time = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
+    print("現在時間 :", current_time)
+    timeElapsed = time.time() - time_st
+    timeElapsed = round(timeElapsed, 4)
+    print("所花時間 : {} 秒".format(timeElapsed))
+
+
 '''
 print("準備工作 ST")
 print("------------------------------------------------------------")  # 60個
@@ -597,12 +606,7 @@ model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accur
 
 do_cnn_test()
 
-
-timeElapsed = time.time() - time_st
-
-timeElapsed = round(timeElapsed, 4)
-
-print("所花時間={}".format(timeElapsed))
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1961,9 +1965,13 @@ y_pred = do_prediction(x_test)
 print("真實目標 :", y_test[:])
 print("預測結果 :\n", y_pred, sep="")
 
+get_elapsed_time()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 久
+"""
 from tensorflow.keras.callbacks import TensorBoard
 
 print("建立神經網路24 正確率XXXX")
@@ -2059,7 +2067,7 @@ print(
 # 預測
 y_pred = do_prediction(x_test[:20])
 print("預測結果 :\n", y_pred[:20], sep="")
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2190,23 +2198,6 @@ print("預測結果 :\n", y_pred[:20], sep="")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("建立神經網路26")
-model = Sequential(
-    [
-        Flatten(input_shape=(28, 28)),
-        Dense(128, activation="relu"),
-        Dense(10, activation="softmax"),
-    ]
-)
-
-# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-model.compile(
-    optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"]
-)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("先到此")
 sys.exit()
 
@@ -2295,12 +2286,11 @@ print(x_train[0])
 plt.imshow(x_train[0], cmap=plt.cm.binary)
 show()
 
-
-model = tf.keras.models.Sequential()
-model.add(tf.keras.layers.Flatten(input_shape=(28, 28)))
-model.add(tf.keras.layers.Dense(128, activation=tf.nn.relu))
-model.add(tf.keras.layers.Dense(128, activation=tf.nn.relu))
-model.add(tf.keras.layers.Dense(10, activation=tf.nn.softmax))
+model = Sequential()
+model.add(Flatten(input_shape=(28, 28)))
+model.add(Dense(128, activation=tf.nn.relu))
+model.add(Dense(128, activation=tf.nn.relu))
+model.add(Dense(10, activation=tf.nn.softmax))
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(

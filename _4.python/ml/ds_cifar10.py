@@ -203,11 +203,11 @@ esa = EarlyStopping(
 from tensorflow.keras.preprocessing.image import ImageDataGenerator  # 資料擴增
 
 datagen = ImageDataGenerator(
-    width_shift_range=0.1, # 平移範圍 W 10%
+    width_shift_range=0.1,  # 平移範圍 W 10%
     height_shift_range=0.1,  # 平移範圍 H 10%
     shear_range=0.1,
-    rotation_range=20,# 旋轉角度 +-20度
-    horizontal_flip=True, # 左右翻轉
+    rotation_range=20,  # 旋轉角度 +-20度
+    horizontal_flip=True,  # 左右翻轉
 )
 
 # 資料分割

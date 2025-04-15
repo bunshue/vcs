@@ -34,6 +34,7 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("np.fft 01")
 
@@ -502,6 +503,60 @@ for n in range(4, 14):
 print("fft SP")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("傅里葉變換")
+
+df = pd.read_csv("data/AirPassengers222.csv")
+ts = df["#Passengers"]  # Series
+
+plt.subplot(211)
+plt.plot(ts, "r")
+# print("ts :", ts)
+
+# 平穩化
+ts_log = np.log(ts)
+# print("ts_log :", ts_log)
+
+ts_diff = ts_log.diff(1)  # 差分 A[n] = A[n]-A[n-1], 故第0項為NaN, 總數少1項
+# print("ts_diff :", ts_diff)
+
+ts_diff = ts_diff.dropna()  # 去除空數據NaN
+# print("ts_diff :", ts_diff)
+
+fy = np.fft.fft(ts_diff)  # np.array 做 fft
+print("fy :", fy)
+print(fy[:10])  # 顯示前10個頻域數據
+
+conv1 = np.real(np.fft.ifft(fy))  # 逆變換
+
+plt.subplot(212)
+
+plt.plot(ts_diff, "r")
+plt.plot(conv1 - 0.5, "g")  # 爲看清楚，將顯示區域下拉0.5
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("小波變換")
+
+import pywt
+
+data = pd.read_csv("data/AirPassengers222.csv")
+ts = data["#Passengers"]
+ts_log = np.log(ts)
+ts_diff = ts_log.diff(1)
+ts_diff = ts_diff.dropna()
+
+cA, cD = pywt.dwt(ts_diff, "db2")
+cD = np.zeros(len(cD))
+new_data = pywt.idwt(cA, cD, "db2")
+
+plt.plot(ts_diff)
+plt.plot(new_data - 0.5)
+show()
 
 
 print("------------------------------------------------------------")  # 60個

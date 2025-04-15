@@ -28,6 +28,11 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+
+def show():
+    plt.show()
+    pass
+
 print("------------------------------------------------------------")  # 60個
 
 # 忽略ARIMA模型无法估计出结果时的报警信息
@@ -83,7 +88,7 @@ plt.plot(results_AR.fittedvalues, "g", label="AR model")
 plt.title("自回归模型AR（Autoregressive model/AR）")
 plt.legend()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -108,7 +113,7 @@ plt.plot(results_MA.fittedvalues, color="red", label="MA")
 plt.legend(fontsize=15)
 plt.title("滑动平均模型（moving average model/MA）")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -132,7 +137,7 @@ plt.plot(results_ARMA.fittedvalues, "r", label="ARMA model")
 plt.legend()
 plt.title("自回归滑动平均（Autoregressive moving average model/ARMA）模型")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -164,7 +169,7 @@ plt.plot(results_ARIMA.fittedvalues, "r", label="ARIMA model")
 plt.legend()
 plt.title("自回归差分滑动平均（Autoregressive Integrated Moving Average model/ARIMA）模型")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -210,14 +215,14 @@ dta = ts_simu200["AR1_a"]
 
 dta.plot(figsize=(12, 8))
 
-plt.show()
+show()
 
 # 自相关和偏自相关
 fig = plt.figure(figsize=(12, 8))
 fig = sm.graphics.tsa.plot_acf(dta, lags=20)  # lags 表示滞后的阶数
 fig = sm.graphics.tsa.plot_pacf(dta, lags=20)
 
-plt.show()
+show()
 
 """
 ar10 = sm.tsa.ARMA(dta,(1,0)).fit()
@@ -228,7 +233,7 @@ fig = plt.figure(figsize=(12,8))
 fig = sm.graphics.tsa.plot_acf(resid.values.squeeze(), lags=20)
 fig = sm.graphics.tsa.plot_pacf(resid, lags=20)
 
-plt.show()
+show()
 
 #残差的ACF和PACF图，可以看到序列残差基本为白噪声
 #进一步进行D-W检验，是目前检验自相关性最常用的方法，但它只使用于检验一阶自相关性。
@@ -242,7 +247,7 @@ print(stats.normaltest(resid))
 fig = plt.figure(figsize=(12,8))
 fig = qqplot(resid, line='q', fit=True)
 
-plt.show()
+show()
 
 #结果表明基本符合正态分布
 
@@ -250,7 +255,7 @@ predict_dta = ar10.forecast(steps=5)
 fig = ar10.plot_predict(pd.to_datetime('2017-01-01')+datetime.timedelta(days=190),
                         pd.to_datetime('2017-01-01')+datetime.timedelta(days=220), dynamic=False, plot_insample=True)
 
-plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -272,7 +277,7 @@ fig = plt.figure(figsize=(12, 8))
 fig = sm.graphics.tsa.plot_acf(dta, lags=20)  # lags 表示滞后的阶数
 fig = sm.graphics.tsa.plot_pacf(dta, lags=20)
 
-plt.show()
+show()
 
 """
 ma01 = sm.tsa.ARMA(dta,(0,1)).fit()
@@ -283,7 +288,7 @@ fig = plt.figure(figsize=(12,8))
 fig = sm.graphics.tsa.plot_acf(resid.values.squeeze(), lags=20)
 fig = sm.graphics.tsa.plot_pacf(resid, lags=20)
 
-plt.show()
+show()
 
 #进一步进行D-W检验，是目前检验自相关性最常用的方法，但它只使用于检验一阶自相关性。
 #DW＝４＜＝＞ρ＝－１　即存在负自相关性
@@ -296,7 +301,7 @@ print(stats.normaltest(resid))
 fig = plt.figure(figsize=(12,8))
 fig = qqplot(resid, line='q', fit=True)
 
-plt.show()
+show()
 
 #结果表明基本符合正态分布
 
@@ -304,7 +309,7 @@ fig = ma01.plot_predict(pd.to_datetime('2017-01-01'),
                         pd.to_datetime('2017-01-01')+datetime.timedelta(days=220), 
                         dynamic=False, plot_insample=True)
 
-plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -327,7 +332,7 @@ fig = plt.figure(figsize=(12, 8))
 fig = sm.graphics.tsa.plot_acf(dta, lags=20)  # lags 表示滞后的阶数
 fig = sm.graphics.tsa.plot_pacf(dta, lags=20)
 
-plt.show()
+show()
 
 import itertools
 
@@ -363,7 +368,7 @@ fig = plt.figure(figsize=(12,8))
 fig = sm.graphics.tsa.plot_acf(resid.values.squeeze(), lags=20)
 fig = sm.graphics.tsa.plot_pacf(resid, lags=20)
 
-plt.show()
+show()
 
 #残差的ACF和PACF图，可以看到序列残差基本为白噪声
 
@@ -378,13 +383,12 @@ print(stats.normaltest(resid))
 fig = plt.figure(figsize=(12,8))
 fig = qqplot(resid, line='q', fit=True)
 
-plt.show()
+show()
 
 fig = arma11.plot_predict(pd.to_datetime('2017-01-01'),
                         pd.to_datetime('2017-01-01')+datetime.timedelta(days=220), 
                           dynamic=False, plot_insample=True)
-
-plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -415,7 +419,7 @@ fig = plt.figure(figsize=(12, 8))
 fig = sm.graphics.tsa.plot_acf(dta, lags=20)
 fig = sm.graphics.tsa.plot_pacf(dta, lags=20)
 
-plt.show()
+show()
 
 # print(dta)
 
@@ -423,7 +427,7 @@ plt.show()
 diff1 = dta.diff(1)
 diff1.plot(figsize=(12, 8))
 
-plt.show()
+show()
 
 # 差分序列的自相关和偏自相关图
 ddta = diff1
@@ -432,7 +436,7 @@ fig = plt.figure(figsize=(12, 8))
 fig = sm.graphics.tsa.plot_acf(ddta, lags=20)
 fig = sm.graphics.tsa.plot_pacf(ddta, lags=20)
 
-plt.show()
+show()
 
 """ NG
 arima110 = sm.tsa.ARIMA(dta,(1,1,0)).fit()
@@ -443,7 +447,7 @@ fig = plt.figure(figsize=(12,8))
 fig = sm.graphics.tsa.plot_acf(resid.values.squeeze(), lags=20)
 fig = sm.graphics.tsa.plot_pacf(resid, lags=20)
 
-plt.show()
+show()
 
 #残差的ACF和PACF图，可以看到序列残差基本为白噪声
 
@@ -458,13 +462,12 @@ print(stats.normaltest(resid))
 fig = plt.figure(figsize=(12,8))
 fig = qqplot(resid, line='q', fit=True)
 
-plt.show()
+show()
 
 fig = arima110.plot_predict(pd.to_datetime('2017-01-01'),
                         pd.to_datetime('2017-01-01')+datetime.timedelta(days=220), 
                             dynamic=False, plot_insample=True)
-
-plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -505,10 +508,79 @@ print("Best ARIMA{} model - AIC:{}".format(best_pdq, best_aic))
 # Best ARIMA(1, 1, 0) model - AIC:545.9023842214676
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 做時序圖觀察基本的趨勢和週期
+data = pd.read_csv("data/AirPassengers.csv")
+ts = data["#Passengers"]
+
+plt.plot(ts)
+plt.title('旅客人數')
+show()
+
+print("------------------------------")  # 30個
+
+# 分析平穩性，正態性，週期性；並對數據進行轉換
+ts_log = np.log(ts)
+ts_diff = ts_log.diff(1)
+ts_diff = ts_diff.dropna()
+
+plt.plot(ts_diff)
+plt.title('旅客人數 => log => diff')
+show()
+
+print("------------------------------")  # 30個
+
+# 做自相關和偏自相關圖，確定模型階次
+from statsmodels.graphics.tsaplots import plot_acf
+from statsmodels.graphics.tsaplots import plot_pacf
+
+f = plot_acf(ts_diff)
+plt.title('plot_acf 自相關圖')
+show()
+
+f = plot_pacf(ts_diff, method="ols")
+plt.title('plot_pacf 偏自相關圖')
+show()
+
+print("------------------------------")  # 30個
+
+# 訓練模型
+import statsmodels.api as smapi
+
+model = smapi.tsa.arima.ARIMA(ts_log, order=(2, 1, 2))
+
+results_ARIMA = model.fit()
+
+plt.plot(ts_diff, color="r")
+plt.plot(results_ARIMA.fittedvalues, color="g")
+
+plt.title("ARIMA")
+show()
+
+cc = sum((results_ARIMA.fittedvalues - ts_log) ** 2)
+print("RSS: %.4f" % cc)
+
+print("------------------------------")  # 30個
+
+# 轉換回原始波形
+pred_diff = pd.Series(results_ARIMA.fittedvalues, copy=True)
+pred_diff_cumsum = pred_diff.cumsum()
+pred_log = pd.Series(ts_log, index=ts_log.index)
+pred_log = pred_log.add(pred_diff_cumsum, fill_value=0)
+pred = np.exp(pred_log)
+plt.plot(ts)
+plt.plot(pred)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

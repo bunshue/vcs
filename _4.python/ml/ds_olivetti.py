@@ -280,6 +280,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 print("Fitting train datasets ...")
 clf = SVC(class_weight="balanced")
+
 clf.fit(X_train, y_train)
 
 print("Predicting test dataset ...")
@@ -629,6 +630,7 @@ print("------------------------------")  # 30個
 
 # 主成分分析 (Principal Component Analysis, PCA), 降低數據維度
 pca_estimator = PCA(n_components=n_components, svd_solver="randomized", whiten=True)
+
 pca_estimator.fit(faces_centered)
 
 title = "Eigenfaces - PCA using randomized SVD 經過 PCA"

@@ -2265,4 +2265,3 @@ from sklearn import (
 # PCA結果參數
 print(pca.explained_variance_)  # 建议保留9个主成分
 print(pca.explained_variance_ratio_)  # 建议保留8个主成分
-

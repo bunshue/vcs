@@ -37,6 +37,7 @@ def show():
     plt.show()
     pass
 
+
 print("------------------------------------------------------------")  # 60個
 
 from mpl_toolkits.mplot3d import Axes3D
@@ -160,7 +161,7 @@ from sklearn.utils import class_weight
 
 
 def preprocess_image(image_path, target_size=(128, 128)):
-    img = cv2.imread(image_path)# Read image with OpenCV
+    img = cv2.imread(image_path)  # Read image with OpenCV
     if img is None:
         raise ValueError(f"Image not found: {image_path}")
 

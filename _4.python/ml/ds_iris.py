@@ -88,30 +88,23 @@ iris = datasets.load_iris()  # 回傳iris包含data和target兩欄位資料
 X = iris.data
 y = iris.target  # 資料集目標
 
+print("資料集目標名稱：")
+print(iris.target_names)
+
+print("特徵名稱(資料集欄位)：")
+print(iris.feature_names)
+
+print("鳶尾花資料集描述")
+# many print(iris.DESCR)
+
+print("filename :", iris.filename)
+print("data_module :", iris.data_module)
+
+print("keys :")
+print(iris.keys())
+
 print("dir(iris)", dir(iris))
 print("iris.feature_names=", iris.feature_names)
-
-"""
-#只取出一些資料來測試
-iris.data = iris.data[45:55]
-iris.target = iris.target[45:55]
-"""
-"""
-#自己建立10筆資料來測試
-irisdata = [[5.1, 3.5, 1.4, 0.2],
-            [4.9, 3.0, 1.4, 0.2],
-            [4.7, 3.2, 1.3, 0.2],
-            [7.0, 3.2, 4.7, 1.4],
-            [6.4, 3.2, 4.5, 1.5],
-            [6.9, 3.1, 4.9, 1.5],
-            [6.3, 2.5, 5.0, 1.9],
-            [6.5, 3.0, 5.2, 2.0],
-            [6.2, 3.4, 5.4, 2.3],
-            [5.9, 3.0, 5.1, 1.8]]
-iris.data = np.array(irisdata)
-iristarget = [0, 0, 0, 1, 1, 1, 2, 2, 2, 2]
-iris.target = np.array(iristarget)
-"""
 
 print("所有資料 :")
 # many print(iris)
@@ -121,21 +114,6 @@ print("資料集目標/答案/target/y")
 print(iris.target)
 
 print("共有 :", len(X), "筆資料")
-
-print("資料集目標名稱：")
-print(iris.target_names)
-
-print("鳶尾花資料集描述")
-# many print(iris.DESCR)
-
-print("特徵名稱(資料集欄位)：")
-print(iris.feature_names)
-
-print("filename :", iris.filename)
-print("data_module :", iris.data_module)
-
-print("keys :")
-print(iris.keys())
 
 print("X資料.形狀 :", X.shape)
 print("y資料.形狀 :", y.shape)

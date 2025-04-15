@@ -68,8 +68,6 @@ df0_y = df0[["volumn"]]  # 製作變數y
 rDf0 = df0_X1.corr()  # 查看數據間的相關係數
 print(rDf0)
 
-
-# %matplotlib inline
 sns.set(font_scale=1.5)
 
 sns.set_context({"figure.figsize": (8, 8)})
@@ -93,59 +91,6 @@ model0 = sm.OLS(df0_y, df0_X)  # OLS回歸
 results0 = model0.fit()
 
 print(results0.summary())
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("傅里葉變換")
-
-
-# 將頻域數據轉換成時序數據
-# bins爲頻域數據，n設置使用前多少個頻域數據，loop設置生成數據的長度
-def fft_combine(bins, n, loops=1):
-    length = int(len(bins) * loops)
-    data = np.zeros(length)
-    index = loops * np.arange(0, length, 1.0) / length * (2 * np.pi)
-    for k, p in enumerate(bins[:n]):
-        if k != 0:
-            p *= 2  # 除去直流成分之外, 其餘的係數都乘2
-        data += np.real(p) * np.cos(k * index)  # 餘弦成分的係數爲實數部分
-        data -= np.imag(p) * np.sin(k * index)  # 正弦成分的係數爲負的虛數部分
-    return index, data
-
-
-df = pd.read_csv("AirPassengers.csv")
-ts = df["#Passengers"]  # Series
-
-plt.subplot(211)
-plt.plot(ts, "r")
-# print("ts :", ts)
-
-# 平穩化
-ts_log = np.log(ts)
-# print("ts_log :", ts_log)
-
-ts_diff = ts_log.diff(1)  # 差分 A[n] = A[n]-A[n-1], 故第0項為NaN, 總數少1項
-# print("ts_diff :", ts_diff)
-
-ts_diff = ts_diff.dropna()  # 去除空數據NaN
-# print("ts_diff :", ts_diff)
-
-fy = np.fft.fft(ts_diff)  # np.array 做 fft
-print("fy :", fy)
-print(fy[:10])  # 顯示前10個頻域數據
-
-conv1 = np.real(np.fft.ifft(fy))  # 逆變換
-
-index, conv2 = fft_combine(fy / len(ts_diff), int(len(fy) / 2 - 1), 1.3)  # 只關心一半數據
-
-plt.subplot(212)
-
-plt.plot(ts_diff, "r")
-plt.plot(conv1 - 0.5, "g")  # 爲看清楚，將顯示區域下拉0.5
-plt.plot(conv2 - 1, "b")
-
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -288,6 +233,7 @@ print(test_X)
 print(test, "分類", predict(test_X, p0_vec, p1_vec, percent))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("Hyperopt")
 
@@ -302,108 +248,15 @@ best = fmin(
     trials=trials,  # 保存每次迭代的具體信息
     max_evals=50,
 )  # 評估次數
+
+print('------')
 print(best)  # 返回結果：{'x': 0.980859461591201}
+print('------')
+print(len(trials.trials))
+print(trials.trials)
+print('------')
 for t in trials.trials:
     print(t["result"])
-
-print("------------------------------------------------------------")  # 60個
-
-# 做時序圖觀察基本的趨勢和週期
-data = pd.read_csv("AirPassengers.csv")
-ts = data["#Passengers"]
-plt.plot(ts)
-
-show()
-
-print("------------------------------")  # 30個
-
-# 分析平穩性，正態性，週期性；並對數據進行轉換
-ts_log = np.log(ts)
-ts_diff = ts_log.diff(1)
-ts_diff = ts_diff.dropna()
-plt.plot(ts_diff)
-
-show()
-
-print("------------------------------")  # 30個
-
-# 做自相關和偏自相關圖，確定模型階次
-from statsmodels.graphics.tsaplots import plot_acf
-from statsmodels.graphics.tsaplots import plot_pacf
-
-f = plot_acf(ts_diff)
-show()
-
-f = plot_pacf(ts_diff, method="ols")
-show()
-
-print("------------------------------")  # 30個
-
-# 訓練模型
-import statsmodels.api as smapi
-
-model = smapi.tsa.arima.ARIMA(ts_log, order=(2, 1, 2))
-
-results_ARIMA = model.fit()
-
-plt.plot(ts_diff, color="r")
-plt.plot(results_ARIMA.fittedvalues, color="g")
-
-plt.title("ARIMA")
-show()
-
-cc = sum((results_ARIMA.fittedvalues - ts_log) ** 2)
-print("RSS: %.4f" % cc)
-
-print("------------------------------")  # 30個
-
-# 轉換回原始波形
-pred_diff = pd.Series(results_ARIMA.fittedvalues, copy=True)
-pred_diff_cumsum = pred_diff.cumsum()
-pred_log = pd.Series(ts_log, index=ts_log.index)
-pred_log = pred_log.add(pred_diff_cumsum, fill_value=0)
-pred = np.exp(pred_log)
-plt.plot(ts)
-plt.plot(pred)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("小波變換")
-
-import pywt
-
-data = pd.read_csv("AirPassengers.csv")
-ts = data["#Passengers"]
-ts_log = np.log(ts)
-ts_diff = ts_log.diff(1)
-ts_diff = ts_diff.dropna()
-
-cA, cD = pywt.dwt(ts_diff, "db2")
-cD = np.zeros(len(cD))
-new_data = pywt.idwt(cA, cD, "db2")
-
-plt.plot(ts_diff)
-plt.plot(new_data - 0.5)
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# SnowNLP用法
-
-from snownlp import SnowNLP
-
-s = SnowNLP("跟框架學代碼設計，跟應用學功能設計")
-print(s.words)  # 分詞
-print(s.sentiments)  # 消極or積極，結果在0-1之間
-print(s.tags)  # 詞性標註
-print(s.keywords(3))  # 　關鍵詞
-print(s.summary(3))  # 摘要
-print(s.tf)  # tf
-print(s.idf)  # idf
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -519,7 +372,7 @@ def get_features(MODEL, width, height, lambda_func=None):
     model = Model(base_model.input, GlobalAveragePooling2D()(base_model.output))
 
     gen = ImageDataGenerator()
-    
+
     # 注意 train 和 test 是圖片存儲路徑
     train_generator = gen.flow_from_directory(
         "train", (width, height), shuffle=False, batch_size=16
@@ -629,7 +482,7 @@ def get_features(MODEL, width, height, lambda_func=None):
     model = Model(base_model.input, GlobalAveragePooling2D()(base_model.output))
 
     gen = ImageDataGenerator()
-    
+
     # 注意 train 和 test 是圖片存儲路徑
     train_generator = gen.flow_from_directory(
         "train", (width, height), shuffle=False, batch_size=16
@@ -728,10 +581,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
@@ -742,3 +591,8 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
