@@ -1,5 +1,8 @@
 """
 隨機森林
+
+RandomForestClassifier
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -176,8 +179,6 @@ plt.plot(xfit, ytrue, "-k", alpha=0.5)
 plt.title("隨機森林迴歸 Random Forests Regression")
 
 show()
-
-sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -826,9 +827,95 @@ df_importance = pd.DataFrame(data=[model.feature_importances_,stat_result.tvalue
                              index=['RF Regressor relative importance', 'OLS method normalized t-statistic'])
 df_importance
 """
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+df = pd.read_csv("data/Social_Network_Ads.csv")
+
+X = df.iloc[:, [2, 3]].values
+y = df.iloc[:, 4].values
+
+# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# 訓練組8成, 測試組2成
+
+# Feature Scaling 特征縮放
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)  # STD特徵縮放
+X_test = scaler.transform(X_test)  # STD特徵縮放
+
+clf = RandomForestClassifier(n_estimators=10, criterion="entropy", random_state=0)
+
+clf.fit(X_train, y_train)  # 學習訓練.fit
+
+y_pred = clf.predict(X_test)  # 預測.predict
+print("預測結果 :\n", y_pred, sep="")
+
+# 生成混淆矩陣(Confusion Matrix)，也稱作誤差矩陣
+
+cm = confusion_matrix(y_test, y_pred)
+
+from matplotlib.colors import ListedColormap
+
+X_set, y_set = X_train, y_train
+X1, X2 = np.meshgrid(
+    np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
+    np.arange(start=X_set[:, 1].min() - 1, stop=X_set[:, 1].max() + 1, step=0.01),
+)
+plt.contourf(
+    X1,
+    X2,
+    clf.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
+    alpha=0.75,
+    cmap=ListedColormap(("red", "green")),
+)
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(
+        X_set[y_set == j, 0],
+        X_set[y_set == j, 1],
+        c=ListedColormap(("red", "green"))(i),
+        label=j,
+    )
+plt.title("Random Forest Classification (Training set)")
+plt.xlabel("Age")
+plt.ylabel("Estimated Salary")
+plt.legend()
+
+show()
+
+from matplotlib.colors import ListedColormap
+
+X_set, y_set = X_test, y_test
+X1, X2 = np.meshgrid(
+    np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
+    np.arange(start=X_set[:, 1].min() - 1, stop=X_set[:, 1].max() + 1, step=0.01),
+)
+plt.contourf(
+    X1,
+    X2,
+    clf.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
+    alpha=0.75,
+    cmap=ListedColormap(("red", "green")),
+)
+plt.xlim(X1.min(), X1.max())
+plt.ylim(X2.min(), X2.max())
+for i, j in enumerate(np.unique(y_set)):
+    plt.scatter(
+        X_set[y_set == j, 0],
+        X_set[y_set == j, 1],
+        c=ListedColormap(("red", "green"))(i),
+        label=j,
+    )
+plt.title("Random Forest Classification (Test set)")
+plt.xlabel("Age")
+plt.ylabel("Estimated Salary")
+plt.legend()
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

@@ -51,88 +51,41 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 01loadimg.py
+# eigencog_face.py
 
-import cv2
+from pca import *
 
-win_name = "mypicture"  # 窗口名称
-# cv2.WINDOW_NORMAL:可以手动调整窗口大小
-cv2.namedWindow(win_name, cv2.WINDOW_NORMAL)
-img = cv2.imread("snapshot0001.jpg", 0)  # 0 黑白图片；1 原色图片
-cv2.imshow(win_name, img)  # 显示图片
-cv2.waitKey(0)
-cv2.destroyAllWindows()  # 销毁创建的对象
-# 保存图片
-# cv2.imwrite("paulwalker.mono.pgm", img)
-
+ef = Eigenfaces()
+ef.dist_metric = ef.distEclud
+ef.loadimgs("orl_faces/")
+"""NG
+ef.compute()
+E = []
+X = np.mat(np.zeros((10, 10304)))
+for i in range(16):
+    X = ef.Mat[i * 10 : (i + 1) * 10, :].copy()
+    # X = ef.normalize(X.mean(axis =0),0,255)
+    X = X.mean(axis=0)
+    imgs = X.reshape(112, 92)
+    E.append(imgs)
+ef.subplot(title="AT&T Eigen Facedatabase", images=E)
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 02opencvmatplotlib.py
+# eigencog_test.py
 
-import cv2
+from pca import *
 
-# 读取图片
-img = cv2.imread("paulwalker.mono.pgm", 0)  # 黑白图片
-plt.imshow(img, cmap="gray", interpolation="bicubic")
-plt.xticks([]), plt.yticks([])  # 隐藏 X Y 坐标
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 03drawrectangle.py
-
-import cv2
-
-# Create a black image
-img = np.zeros((512, 512, 3))
-# Draw a diagonal blue line with thickness of 5 px
-# 起点:(0,0),终点:(511,511)，颜色:( 255,0,0)，宽度:2
-cv2.line(img, (0, 0), (511, 511), (255, 0, 0), 2)
-cv2.imshow("image", img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 04drawGeometry.py
-
-import cv2
-
-img = np.zeros((512, 512, 3))
-cv2.rectangle(img, (384, 0), (510, 128), (0, 255, 0), 3)  # 矩形
-cv2.circle(img, (447, 63), 63, (0, 0, 255), -1)  # 圆
-cv2.ellipse(img, (256, 256), (100, 50), 0, 0, 360, 255, -1)  # 椭圆
-# 画多边形
-pts = np.array([[10, 5], [20, 30], [70, 20], [50, 10]])
-cv2.polylines(img, [pts], True, (0, 255, 255), 1)
-# 写入文字
-font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(img, "OpenCV", (10, 500), font, 4, (255, 255, 255), 2)
-cv2.imshow("image", img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 05drawcirlcle.py
-
-import cv2
-
-img = np.zeros((512, 512, 3))
-# 绘制圆：圆心(255, 255), 半径60, 颜色( 0, 255, 255), 像素1
-cv2.circle(img, (255, 150), 60, (0, 255, 255), 2)  # 圆
-# 绘制椭圆
-# 中心点的位置(255, 255), 短半径50,长半径100
-# 360表示整个椭圆；颜色 0, 255, 255；像素2；
-cv2.ellipse(img, (255, 350), (100, 50), 0, 0, 360, (255, 255, 0), 2)  # 椭圆
-cv2.imshow("image", img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
+ef = Eigenfaces()
+ef.dist_metric = ef.distEclud
+ef.loadimgs("orl_faces/")
+""" NG
+ef.compute()
+# 创建测试集
+testImg = ef.X[30]
+print("实际值 =", ef.y[30], "->", "预测值 =", ef.predict(testImg))
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -145,6 +98,7 @@ def loadDataSet(fileName):
     recordlist = []
     print(fileName)
     fp = open(fileName, "r")
+    # fp = open(fileName, "rb")
     content = fp.read()
     fp.close()
     rowlist = content.splitlines()
@@ -159,7 +113,7 @@ def loadDataSet(fileName):
 # threshVal:阈值
 # threshSymb:分类分隔符,lt,gt符号
 def splitDataSet(dataMat, Column, threshVal, operator):
-    retArray = np.ones((shape(dataMat)[0], 1))  # 与数据集行数相同的全1向量
+    retArray = np.ones((np.shape(dataMat)[0], 1))  # 与数据集行数相同的全1向量
     if operator == "lt":  # '小于'
         retArray[dataMat[:, Column] <= threshVal] = -1.0
     else:  # '大于'
@@ -174,13 +128,13 @@ def splitDataSet(dataMat, Column, threshVal, operator):
 def decisionTree(dataSet, labellist, D):
     dataMat = np.mat(dataSet)
     labelMat = np.mat(labellist).T
-    m, n = shape(dataMat)  # 数据集行、列数
+    m, n = np.shape(dataMat)  # 数据集行、列数
     numSteps = 10.0
     # 迭代步数
     bestFeat = {}
     # 最优项列
     bestClass = np.mat(np.zeros((m, 1)))  # 最优预测分类
-    minError = inf  # 初始化最小误差为无穷大
+    minError = np.inf  # 初始化最小误差为无穷大
     for i in range(n):  # 按列迭代
         rangeMin = dataMat[:, i].min()
         # 最小值
@@ -214,7 +168,7 @@ def decisionTree(dataSet, labellist, D):
 # numIt:迭代次数
 def adaBoostTrain(dataSet, labellist, numIt=40):
     weakClassSet = []  # 初始化弱分类器
-    m = shape(dataSet)[0]
+    m = np.shape(dataSet)[0]
     D = np.mat(np.ones((m, 1)) / m)  # 初始化D为平均权重
     aggClassSet = np.mat(np.zeros((m, 1)))
     for i in range(numIt):
@@ -226,10 +180,10 @@ def adaBoostTrain(dataSet, labellist, numIt=40):
         weakClassSet.append(bestFeat)  # 以数组形式存储弱分类器
         # 算法核心：D--权重修改公式：D*exp((+-)alpha)/sum(D)（Logistic）
         # +-号取决于是否错分，+正确划分，-错误划分
-        wtx = multiply(
+        wtx = np.multiply(
             -1 * alpha * np.mat(labellist).T, EstClass
         )  # 矩阵对应元素相乘:multiply矩阵点积
-        D = multiply(D, exp(wtx))  # 为下次迭代计算新的D
+        D = np.multiply(D, exp(wtx))  # 为下次迭代计算新的D
         D = D / D.sum()
         aggClassSet += alpha * EstClass  # 累计预测类：
         # 如果 x>0 sign(x)=1; x<0 sign(x)=-1
@@ -246,7 +200,7 @@ def adaClassify(datToClass, classdictList):
     dataMat = np.mat(
         datToClass
     )  # do stuff similar to last aggClassSet in adaBoostTrainDS
-    m = shape(dataMat)[0]
+    m = np.shape(dataMat)[0]
     aggClassSet = np.mat(np.zeros((m, 1)))
     for i in range(len(classdictList)):
         EstClass = splitDataSet(
@@ -301,132 +255,28 @@ print(dataArr)
 print("labelArr")
 print(labelArr)
 
-""" NG
 weakClassArr, aggClassEst = adaBoostTrain(dataArr, labelArr, numIt=10)  # 训练分类器
 print("weakClassArr:", weakClassArr)  # 输出弱分类器
 # plotROC(aggClassEst.T, labelArr) # 绘制ROC曲线
-"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # adaboost_traincase.py
 
-from adaboostlib import *
-
-""" NG
 # 导入训练集
 dataArr, labelArr = loadDataSet("train.dat")
 
 weakClassArr, aggClassEst = adaBoostTrain(dataArr, labelArr, numIt=10)  # 训练分类器
 print("weakClassArr:", weakClassArr)  # 输出弱分类器
 # plotROC(aggClassEst.T, labelArr) # 绘制ROC曲线
-"""
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# eigencog_face.py
-
-from pca import *
-
-ef = Eigenfaces()
-ef.dist_metric = ef.distEclud
-ef.loadimgs("orl_faces/")
-"""NG
-ef.compute()
-E = []
-X = np.mat(np.zeros((10, 10304)))
-for i in range(16):
-    X = ef.Mat[i * 10 : (i + 1) * 10, :].copy()
-    # X = ef.normalize(X.mean(axis =0),0,255)
-    X = X.mean(axis=0)
-    imgs = X.reshape(112, 92)
-    E.append(imgs)
-ef.subplot(title="AT&T Eigen Facedatabase", images=E)
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# eigencog_test.py
-
-from pca import *
-
-ef = Eigenfaces()
-ef.dist_metric = ef.distEclud
-ef.loadimgs("orl_faces/")
-""" NG
-ef.compute()
-# 创建测试集
-testImg = ef.X[30]
-print("实际值 =", ef.y[30], "->", "预测值 =", ef.predict(testImg))
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# haar_face_detect.py
-
-import cv2
-
-face_cascade = cv2.CascadeClassifier(
-    "E:\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_alt_tree.xml"
-)
-
-img = cv2.imread("mypicture.jpg")
-""" NG
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-# 识别输入图片中的人脸对象.返回对象的矩形尺寸
-# 函数原型detectMultiScale(gray, 1.2,3,CV_HAAR_SCALE_IMAGE,Size(30, 30))
-# gray需要识别的图片
-# 1.2：表示每次图像尺寸减小的比例
-# 3：表示每一个目标至少要被检测到4次才算是真的目标(因为周围的像素和不同的窗口大小都可以检测到人脸)
-# CV_HAAR_SCALE_IMAGE表示不是缩放分类器来检测，而是缩放图像，Size(30, 30)为目标的最小最大尺寸
-# faces：表示检测到的人脸目标序列
-faces = face_cascade.detectMultiScale(gray, 1.2, 3)
-for x, y, w, h in faces:
-    img2 = cv2.rectangle(img, (x, y), (x + w, y + h), (255, 255, 255), 4)
-    roi_gray = gray[y : y + h, x : x + w]
-    roi_color = img[y : y + h, x : x + w]
-
-cv2.imshow("img", img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-cv2.imwrite("paulwalker.head.jpg", img)  # 保存图片
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# lbp_face_detect.py
-
-import cv2
-
-face_cascade = cv2.CascadeClassifier(
-    "E:\\opencv\\sources\\data\\lbpcascades\\lbpcascade_frontalface.xml"
-)
-
-img = cv2.imread("snapshot0001.jpg")
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-""" NG
-faces = face_cascade.detectMultiScale(gray, 1.2, 3)
-for x, y, w, h in faces:
-    img2 = cv2.rectangle(img, (x, y), (x + w, y + h), (255, 255, 255), 4)
-    roi_gray = gray[y : y + h, x : x + w]
-    roi_color = img[y : y + h, x : x + w]
-
-cv2.imshow("img", img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-cv2.imwrite("paulwalker.head.jpg", img)  # 保存图片
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # testcase.py
 
-from adaboostlib import *
-
 # 导入训练集
-""" NG
 dataArr, labelArr = loadDataSet("horseColicTraining.txt")
 # 训练分类器
 weakClassArr, aggClassEst = adaBoostTrain(dataArr, labelArr, numIt=10)
@@ -441,7 +291,8 @@ ClassEst100 = adaClassify(testArr, weakClassArr)  # 用学习好的分类器进�
 errArr = np.mat(np.ones((67, 1)))
 totalError = errArr[ClassEst100 != np.mat(testLabelArr).T].sum()
 print("totalError:", totalError)
-"""
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

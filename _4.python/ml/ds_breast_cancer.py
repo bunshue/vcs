@@ -258,7 +258,7 @@ print("決定係數R2(R-squared) test_score :", test_score)
 
 
 from common.utils import plot_param_curve
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 
 gammas = np.linspace(0, 0.0003, 30)
 param_grid = {"gamma": gammas}
@@ -555,7 +555,7 @@ y = breast_cancer.target
 
 X = X[:, :10]  # 原本有30個特徵, 取出前10個特徵
 
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 from sklearn.model_selection import KFold
 
 cv = KFold(5, shuffle=True)
@@ -609,7 +609,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 用 GridSearchCV 自動搜尋最佳 k 值
 
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 
 dx, dy = datasets.load_breast_cancer(return_X_y=True)
 
@@ -701,7 +701,7 @@ print("------------------------------------------------------------")  # 60個
 
 # C, gamma 與 kernel 參數
 
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 from sklearn.model_selection import RandomizedSearchCV
 
 dx, dy = datasets.load_breast_cancer(return_X_y=True)

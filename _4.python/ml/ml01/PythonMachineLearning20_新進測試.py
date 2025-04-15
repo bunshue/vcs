@@ -392,44 +392,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-""" pip 失敗
-import tushare as ts
-from fbprophet import Prophet
-import datetime
-
-# 數據準備
-base = ts.get_hist_data('000002')
-df = pd.DataFrame()
-df['y'] = base['volume']
-df['ds'] = base.index
-
-# 日期插補
-ds = df['ds'].min()
-arr = []
-while ds < df['ds'].max():
-    ds = str(pd.to_datetime(ds) + datetime.timedelta(days=1))[:10]
-    if ds not in np.array(df['ds']):
-        arr.append({'ds':ds, 'y':0}) # 以字典方式加入數組
-tmp = pd.DataFrame(arr)
-df = pd.concat([tmp, df])
-df = df.reset_index(drop=True)
-df = df.sort_values(['ds'])
-
-
-holidays = pd.read_csv('holiday.csv')
-
-prophet = Prophet(holidays=holidays) 
-prophet.fit(df)  
-future = prophet.make_future_dataframe(freq='D',periods=30)  # 測試之後三十天
-forecasts = prophet.predict(future)  
-
-prophet.plot(forecasts).show() 
-prophet.plot_components(forecasts).show() 
-show()
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # SnowNLP用法
 
 from snownlp import SnowNLP

@@ -6,26 +6,26 @@ import Untils
 import BackPropgation
 import matplotlib.pyplot as plt
 
-# 杅擂摩
+# 數據集
 dataSet = [[0, 0, 1], [0, 1, 1], [1, 0, 1], [1, 1, 1]]
 classLabels = [0, 1, 1, 0]
 expected = mat(classLabels)
 
-# 餅秶杅擂萸
-# 笭凳dataSet杅擂摩
+# 繪製數據點
+# 重構dataSet數據集
 dataMat = mat(ones((shape(dataSet)[0], shape(dataSet)[1])))
 dataMat[:, 1] = mat(dataSet)[:, 0]
 dataMat[:, 2] = mat(dataSet)[:, 1]
 
-# 餅秶杅擂摩汃萸芞
+# 繪製數據集散點圖
 Untils.drawClassScatter(dataMat, transpose(expected), False)
 
-# BP朸冪厙釐輛俴杅擂煦濬
+# BP神經網絡進行數據分類
 errRec, WEX, wex = BackPropgation.bpNet(dataSet, classLabels)
 
 print(errRec, WEX, wex)
 
-# 數呾睿餅秶煦濬盄
+# 計算和繪製分類線
 x = linspace(-0.2, 1.2, 30)
 xx = mat(ones((30, 30)))
 xx[:, 0:30] = x

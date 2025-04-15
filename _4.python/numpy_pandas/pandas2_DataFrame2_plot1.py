@@ -1516,7 +1516,7 @@ print(dfm.tail())
 # 畫個最近 2 個月的圖試試看
 dfm[-60:].plot()
 plt.title("最近2個月的圖")
-plt.show()
+show()
 
 print("看各國疫情最高峰的數目大概是多少, 這樣也知道台灣的狀況應該算如何")
 print(dfm.max(axis=0))
@@ -1538,7 +1538,7 @@ ma = period.rolling(window=7).mean()[6:]
 period[6:].plot()
 ma.plot()
 plt.title("德國的情況")
-plt.show()
+show()
 
 # 把剛剛的想法寫成一個函式, 簡簡單單就應用到不同國家。
 
@@ -1554,12 +1554,12 @@ def peak_period(country):
 # 日本的情況
 peak_period(jp)
 plt.title("日本的情況")
-plt.show()
+show()
 
 # 韓國的情況
 peak_period(kr)
 plt.title("韓國的情況")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1782,7 +1782,7 @@ Index(['survived', 'sex', 'age', 'sibsp', 'parch', 'fare', 'embarked', 'class',
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('測試滾動均值')
+print("測試滾動均值")
 
 N = 100
 x = np.linspace(0, 2 * np.pi, N)
@@ -1795,14 +1795,42 @@ df = pd.DataFrame({"Y": y})
 # df.plot()
 
 df.plot()
-#print(df)
+# print(df)
 
 ma = df.rolling(window=10).mean()
 ma.plot()
-#print(ma)
+# print(ma)
 
 plt.title("測試滾動均值")
-plt.show()
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+df = pd.read_csv("data/AirPassengers.csv")
+df["DATE"] = pd.to_datetime(df["DATE"])
+df.head(2)
+
+df.dtypes
+
+df["DATE"] = pd.DatetimeIndex(df["DATE"])
+df.dtypes
+
+df = df.rename(columns={"DATE": "ds", "AIR": "y"})
+df.head(2)
+
+ax = df.set_index("ds").plot(figsize=(12, 8))
+ax.set_ylabel("Monthly Number of Airline Passengers")
+ax.set_xlabel("Date")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
@@ -1903,7 +1931,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------")  # 30個
 
 weather_2012 = pd.concat(data_by_month)
-
-
-
-

@@ -785,7 +785,7 @@ print(X.shape)
 
 # 2、得到最佳带宽作为真实值（我认为比较合理的方式去选取真实值）
 # from sklearn.grid_search import GridSearchCV
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 from sklearn.model_selection import LeaveOneOut
 
 bandwidths = 10 ** np.linspace(-1, 1, 100)

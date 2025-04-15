@@ -36,7 +36,7 @@ from sklearn import datasets
 from sklearn import preprocessing
 from sklearn.model_selection import KFold
 from sklearn.model_selection import StratifiedKFold
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_validate

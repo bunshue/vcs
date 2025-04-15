@@ -211,7 +211,7 @@ cross_val_score(GaussianNB(), X_train, y_train)
 # array([0.96112702, 0.986741  , 0.98900105, 0.99261715, 0.98885038])
 
 from sklearn.svm import LinearSVC
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 
 grid = GridSearchCV(LinearSVC(), {"C": [1.0, 2.0, 4.0, 8.0]})
 grid.fit(X_train, y_train)

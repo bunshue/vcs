@@ -438,7 +438,7 @@ print("------------------------------------------------------------")  # 60個
 
 import matplotlib.ticker as ticker
 from sklearn import preprocessing
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 
 diabetes = datasets.load_diabetes()
 
@@ -634,7 +634,7 @@ show()
 
 # Text(0.5, 0, 'Model Simplicity$\\longrightarrow$')
 
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 
 # ols for comparison
 print("OLS R-squared:", round(ols_r_squared, 4))
@@ -993,7 +993,7 @@ print(f"標準差: {np.std(score)}")
 
 # 效能調校
 
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 
 lasso = Lasso(random_state=9487, max_iter=10000)
 
@@ -1092,7 +1092,7 @@ print(f"平均值: {np.mean(scores):.3f}, 標準差: {np.std(scores):.3f}")
 
 # 管線結合K折交叉驗證、效能調校
 
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 
 # 正則化強度：3種選擇
 alphas = np.logspace(-4, -0.5, 30)

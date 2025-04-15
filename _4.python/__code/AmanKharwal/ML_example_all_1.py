@@ -20,10 +20,18 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 """
+
+
+def show():
+    plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
 
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Best_Streaming_Service_Analysis
@@ -741,46 +749,6 @@ ax2.set_ylabel("Run Rate (Runs per ball)")
 ax2.legend()
 
 plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# Bitcoin_Price_Prediction
-"""
-!pip install pystan
-!pip install fbprophet
-"""
-
-# Saving BTC-USD.csv to BTC-USD.csv
-
-# from fbprophet import Prophet
-
-df = pd.read_csv("data/BTC-USD.csv")
-df = df[["Date", "Close"]]
-df.columns = ["ds", "y"]
-print(df)
-
-prophet = Prophet()
-prophet.fit(df)
-
-future = prophet.make_future_dataframe(periods=365)
-print(future)
-
-forecast = prophet.predict(future)
-forecast[["ds", "yhat", "yhat_lower", "yhat_upper"]].tail(200)
-
-data = forecast.copy()
-data = pd.DataFrame(data)
-cc = data.tail(200)
-print(cc)
-
-from fbprophet.plot import plot
-
-prophet.plot(forecast, figsize=(20, 10))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

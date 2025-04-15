@@ -695,7 +695,7 @@ for k in range(1, 30, 5):
 
 # 交叉验证选择k值
 from sklearn.model_selection import ParameterGrid
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 from sklearn.model_selection import KFold
 
 print(help(sklearn.model_selection.KFold()))
@@ -1310,7 +1310,7 @@ print(lr_scores)
 
 # Grid Search
 
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 
 # Define parameter grid
 params = {"n_neighbors": np.arange(1, 3), "weights": ["uniform", "distance"]}

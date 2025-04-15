@@ -55,8 +55,6 @@ from sklearn import preprocessing
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.model_selection import cross_val_score
 
-from imblearn.metrics import classification_report_imbalanced
-
 # 載入迴歸常見的評估指標
 from sklearn.metrics import mean_squared_error  # 均方誤差 Mean Squared Error (MSE)
 from sklearn.metrics import mean_absolute_error  # 平均絕對誤差 Mean Absolute Error (MAE)
@@ -98,7 +96,7 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_regression
 from sklearn.feature_selection import f_classif
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 from sklearn.model_selection import KFold
 from sklearn.model_selection import PredefinedSplit
 from sklearn.pipeline import Pipeline
@@ -125,7 +123,7 @@ def show():
     plt.show()
     pass
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -846,94 +844,6 @@ print(X_test)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-df = pd.read_csv("data/Social_Network_Ads.csv")
-
-X = df.iloc[:, [2, 3]].values
-y = df.iloc[:, 4].values
-
-# 資料分割, x_train, y_train 訓練資料, x_test, y_test 測試資料
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-# 訓練組8成, 測試組2成
-
-# Feature Scaling 特征縮放
-scaler = StandardScaler()
-X_train = scaler.fit_transform(X_train)  # STD特徵縮放
-X_test = scaler.transform(X_test)  # STD特徵縮放
-
-clf = RandomForestClassifier(n_estimators=10, criterion="entropy", random_state=0)
-
-clf.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = clf.predict(X_test)  # 預測.predict
-print("預測結果 :\n", y_pred, sep="")
-
-# 生成混淆矩陣(Confusion Matrix)，也稱作誤差矩陣
-
-cm = confusion_matrix(y_test, y_pred)
-
-from matplotlib.colors import ListedColormap
-
-X_set, y_set = X_train, y_train
-X1, X2 = np.meshgrid(
-    np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
-    np.arange(start=X_set[:, 1].min() - 1, stop=X_set[:, 1].max() + 1, step=0.01),
-)
-plt.contourf(
-    X1,
-    X2,
-    clf.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
-    alpha=0.75,
-    cmap=ListedColormap(("red", "green")),
-)
-plt.xlim(X1.min(), X1.max())
-plt.ylim(X2.min(), X2.max())
-for i, j in enumerate(np.unique(y_set)):
-    plt.scatter(
-        X_set[y_set == j, 0],
-        X_set[y_set == j, 1],
-        c=ListedColormap(("red", "green"))(i),
-        label=j,
-    )
-plt.title("Random Forest Classification (Training set)")
-plt.xlabel("Age")
-plt.ylabel("Estimated Salary")
-plt.legend()
-
-show()
-
-from matplotlib.colors import ListedColormap
-
-X_set, y_set = X_test, y_test
-X1, X2 = np.meshgrid(
-    np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
-    np.arange(start=X_set[:, 1].min() - 1, stop=X_set[:, 1].max() + 1, step=0.01),
-)
-plt.contourf(
-    X1,
-    X2,
-    clf.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
-    alpha=0.75,
-    cmap=ListedColormap(("red", "green")),
-)
-plt.xlim(X1.min(), X1.max())
-plt.ylim(X2.min(), X2.max())
-for i, j in enumerate(np.unique(y_set)):
-    plt.scatter(
-        X_set[y_set == j, 0],
-        X_set[y_set == j, 1],
-        c=ListedColormap(("red", "green"))(i),
-        label=j,
-    )
-plt.title("Random Forest Classification (Test set)")
-plt.xlabel("Age")
-plt.ylabel("Estimated Salary")
-plt.legend()
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # 類別變數編碼
 # 測試資料
 
@@ -1349,105 +1259,7 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# 08_06_performance_metrics
-
-# 計算及繪製混淆矩陣
-
-"""
-creditcard.csv 284807筆資料, 31欄位
-"Time","V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16","V17","V18","V19","V20","V21","V22","V23","V24","V25","V26","V27","V28","Amount","Class"
-0,-1.3598071336738,-0.0727811733098497,2.53634673796914,1.37815522427443,-0.338320769942518,0.462387777762292,0.239598554061257,0.0986979012610507,0.363786969611213,0.0907941719789316,-0.551599533260813,-0.617800855762348,-0.991389847235408,-0.311169353699879,1.46817697209427,-0.470400525259478,0.207971241929242,0.0257905801985591,0.403992960255733,0.251412098239705,-0.018306777944153,0.277837575558899,-0.110473910188767,0.0669280749146731,0.128539358273528,-0.189114843888824,0.133558376740387,-0.0210530534538215,149.62,"0"
-0,1.19185711131486,0.26615071205963,0.16648011335321,0.448154078460911,0.0600176492822243,-0.0823608088155687,-0.0788029833323113,0.0851016549148104,-0.255425128109186,-0.166974414004614,1.61272666105479,1.06523531137287,0.48909501589608,-0.143772296441519,0.635558093258208,0.463917041022171,-0.114804663102346,-0.183361270123994,-0.145783041325259,-0.0690831352230203,-0.225775248033138,-0.638671952771851,0.101288021253234,-0.339846475529127,0.167170404418143,0.125894532368176,-0.00898309914322813,0.0147241691924927,2.69,"0"
-1,-1.35835406159823,-1.34016307473609,1.77320934263119,0.379779593034328,-0.503198133318193,1.80049938079263,0.791460956450422,0.247675786588991,-1.51465432260583,0.207642865216696,0.624501459424895,0.066083685268831,0.717292731410831,-0.165945922763554,2.34586494901581,-2.89008319444231,1.10996937869599,-0.121359313195888,-2.26185709530414,0.524979725224404,0.247998153469754,0.771679401917229,0.909412262347719,-0.689280956490685,-0.327641833735251,-0.139096571514147,-0.0553527940384261,-0.0597518405929204,378.66,"0"
-
-"Time",
-"V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10",
-"V11","V12","V13","V14","V15","V16","V17","V18","V19","V20",
-"V21","V22","V23","V24","V25","V26","V27","V28",
-"Amount","Class"
-"""
-
-df = pd.read_csv("D:/_git/vcs/_big_files/Scikit-learn_data/creditcard.csv")
-cc = df.head()
-print(cc)
-
-# 觀察目標變數的各類別筆數
-
-cc = df.Class.value_counts()
-print(cc)
-
-sns.countplot(x="Class", data=df)
-show()
-
-# 模型訓練與預測
-
-X = df.drop(["Time", "Amount", "Class"], axis=1)
-y = df["Class"]
-
-# 分割資料
-X_train, X_test, y_train, y_test = train_test_split(X, y)
-
-# 模型訓練
-clf = LogisticRegression()
-
-clf.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = clf.predict(X_test)  # 預測.predict
-print("預測結果 :\n", y_pred, sep="")
-
-# 準確率
-cc = accuracy_score(y_test, y_pred)
-print(cc)
-
-# 計算混淆矩陣
-
-# 取得混淆矩陣的4個格子
-
-tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
-print(tn, fp, fn, tp)
-
-# (71072, 10, 40, 80)
-
-# 常用的效能衡量指標計算
-
-print(f"準確率(Accuracy)={(tn+tp) / (tn+fp+fn+tp)}")
-print(f"精確率(Precision)={(tp) / (fp+tp)}")
-print(f"召回率(Recall)={(tp) / (fn+tp)}")
-print(f"F1 score={(2*tp) / (2*tp+fp+fn)}")
-
-"""
-準確率(Accuracy)=0.9992977725344794
-精確率(Precision)=0.8888888888888888
-召回率(Recall)=0.6666666666666666
-F1 score=0.7619047619047619
-"""
-
-# Scikit-learn 分類報表
-
-print(classification_report(y_test, y_pred))
-
-# weighted average 驗算
-cc = (1.00 * 71082 + 0.89 * 120) / (71082 + 120)
-print(cc)
-
-# 多類別的分類報表
-
-# 3 類別
-y_true = [0, 1, 2, 2, 2]
-y_pred = [0, 0, 2, 2, 1]
-print(classification_report(y_true, y_pred))
-
-# 多類別的分類報表
-
-# 3 類別
-y_pred = [1, 2, 0]
-y_true = [1, 1, 1]
-print(classification_report(y_true, y_pred, labels=[1, 2, 3]))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+'''
 """
 ROC曲線
 Receiver operating characteristic curve
@@ -1551,126 +1363,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-# 08_09_ credit_card_fraud_detection
-
-# 信用卡詐欺偵測
-
-# 載入資料
-
-df = pd.read_csv("D:/_git/vcs/_big_files/Scikit-learn_data/creditcard.csv")
-cc = df.head()
-print(cc)
-
-# 觀察目標變數的各類別筆數
-
-cc = df.Class.value_counts()
-print(cc)
-
-sns.countplot(x="Class", data=df)
-show()
-
-X = df.drop(["Time", "Amount", "Class"], axis=1)
-y = df["Class"]
-
-# 分割資料
-X_train, X_test, y_train, y_test = train_test_split(X, y)
-
-# 模型訓練
-clf = LogisticRegression()
-
-clf.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = clf.predict(X_test)  # 預測.predict
-print("預測結果 :\n", y_pred, sep="")
-
-# 準確率
-cc = accuracy_score(y_test, y_pred)
-print(cc)
-
-# K折交叉驗證
-scores = cross_val_score(estimator=clf, X=X_test, y=y_test, cv=10, n_jobs=-1)
-print(f"K折分數: %s" % scores)
-print(f"平均值: {np.mean(scores):.3f}, 標準差: {np.std(scores):.3f}")
-
-"""
-K折分數: [0.99915742 0.99929785 0.9988764  0.9997191  0.99901685 0.99901685
- 0.9991573  0.99957865 0.9988764  0.9994382 ]
-平均值: 0.999, 標準差: 0.000
-"""
-
-# 分類報告
-print(classification_report(y_test, y_pred))
-
-# 繪製ROC曲線
-y_pred_proba = clf.predict_proba(X_test)[:, 1]
-fpr, tpr, threshold = roc_curve(y_test, y_pred_proba)
-auc1 = auc(fpr, tpr)
-plt.title("ROC 曲線")
-plt.plot(fpr, tpr, color="orange", label="AUC = %0.2f" % auc1)
-plt.legend(loc="lower right")
-plt.plot([0, 1], [0, 1], "r--")
-plt.xlim([0, 1])
-plt.ylim([0, 1])
-plt.ylabel("真陽率")
-plt.xlabel("偽陽率")
-show()
-
-# 從寬認定詐欺行為
-
-y_pred_proba = clf.predict_proba(X_test)[:, 1]
-y_pred = y_pred_proba >= 0.3
-print(classification_report(y_test, y_pred))
-
-# Over-sampling -- SMOTE
-
-# !pip install -U imbalanced-learn
-
-from imblearn.over_sampling import SMOTE
-
-print(df.Class.value_counts())
-smote = SMOTE()
-X_new, y_new = smote.fit_resample(X, y)
-cc = len(y_new[y_new == 0]), len(y_new[y_new == 1])
-print(cc)
-
-# 模型訓練與評估
-
-# 分割資料
-X_train, X_test, y_train, y_test = train_test_split(X_new, y_new)
-
-# 模型訓練
-clf = LogisticRegression()
-
-clf.fit(X_train, y_train)  # 學習訓練.fit
-
-y_pred = clf.predict(X_test)  # 預測.predict
-print("預測結果 :\n", y_pred, sep="")
-
-# 準確率
-cc = accuracy_score(y_test, y_pred)
-print(cc)
-
-# K折交叉驗證
-scores = cross_val_score(estimator=clf, X=X_test, y=y_test, cv=10, n_jobs=-1)
-print(f"K折分數: %s" % scores)
-print(f"平均值: {np.mean(scores):.3f}, 標準差: {np.std(scores):.3f}")
-
-"""
-K折分數: [0.94499156 0.94379572 0.94569499 0.94541362 0.94442881 0.94288126
- 0.94231851 0.95040799 0.94336968 0.94379177]
-平均值: 0.945, 標準差: 0.002
-"""
-
-# 分類報告
-print(classification_report(y_test, y_pred))
-
-# imbalanced-learn 分類報告
-print(classification_report_imbalanced(y_test, y_pred))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # 整體學習的錯誤率計算
 
 from scipy.special import comb
@@ -1712,128 +1404,6 @@ plt.legend(loc="upper left", fontsize=14)
 plt.grid(alpha=0.5)
 
 show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 標註傳播(Label propagation)測試
-
-from sklearn.semi_supervised import LabelPropagation
-
-X, y = make_classification(n_samples=1000, n_features=2, n_informative=2, n_redundant=0)
-
-# 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, stratify=y)
-
-# 設定 50% 資料為沒有標註(-1)
-X_train_lab, X_test_unlab, y_train_lab, y_test_unlab = train_test_split(
-    X_train, y_train, test_size=0.5, stratify=y_train
-)
-X_train_mixed = np.concatenate((X_train_lab, X_test_unlab))
-nolabel = [-1 for _ in range(len(y_test_unlab))]
-y_train_mixed = np.concatenate((y_train_lab, nolabel))
-cc = y_train_mixed.shape
-print(cc)
-
-# (500,)
-
-# Label propagation 模型訓練與評估
-
-clf = LabelPropagation()
-
-clf.fit(X_train_mixed, y_train_mixed)  # 學習訓練.fit
-
-cc = clf.score(X_test, y_test)
-print(cc)
-
-# 0.856
-
-clf2 = LogisticRegression()
-
-clf2.fit(X_train_lab, y_train_lab)  # 學習訓練.fit
-
-cc = clf2.score(X_test, y_test)
-print(cc)
-
-# 0.848
-
-# 取得訓練資料標註
-
-tran_labels = clf.transduction_
-cc = tran_labels.shape
-print(cc)
-# (500,)
-
-# 再依Label propagation傳播結果進行模型訓練與評估
-
-clf3 = LogisticRegression()
-
-clf3.fit(X_train_mixed, tran_labels)  # 學習訓練.fit
-
-cc = clf3.score(X_test, y_test)
-print(cc)
-# 0.862
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# LabelSpreading 測試
-
-from sklearn.semi_supervised import LabelSpreading
-
-# 載入資料集
-X, y = make_classification(n_samples=1000, n_features=2, n_informative=2, n_redundant=0)
-
-# 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, stratify=y)
-
-# 設定 50% 資料為沒有標註(-1)
-
-X_train_lab, X_test_unlab, y_train_lab, y_test_unlab = train_test_split(
-    X_train, y_train, test_size=0.5, random_state=1, stratify=y_train
-)
-X_train_mixed = np.concatenate((X_train_lab, X_test_unlab))
-nolabel = [-1 for _ in range(len(y_test_unlab))]
-y_train_mixed = np.concatenate((y_train_lab, nolabel))
-cc = y_train_mixed.shape
-print(cc)
-# (500,)
-
-# LabelSpreading 模型訓練與評估
-
-clf = LabelSpreading()
-
-clf.fit(X_train_mixed, y_train_mixed)  # 學習訓練.fit
-
-cc = clf.score(X_test, y_test)
-print(cc)
-# 0.854
-
-clf2 = LogisticRegression()
-
-clf2.fit(X_train_lab, y_train_lab)  # 學習訓練.fit
-
-cc = clf2.score(X_test, y_test)
-print(cc)
-
-# 0.848
-
-# 取得訓練資料標註
-
-tran_labels = clf.transduction_
-cc = tran_labels.shape
-print(cc)
-# (500,)
-
-# 再依LabelSpreading傳播結果進行模型訓練與評估
-
-clf3 = LogisticRegression()
-
-clf3.fit(X_train_mixed, tran_labels)  # 學習訓練.fit
-
-cc = clf3.score(X_test, y_test)
-print(cc)
-# 0.858
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

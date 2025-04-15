@@ -362,7 +362,7 @@ for k in range(1, 15):
 # 交叉验证选择k值
 
 from sklearn.model_selection import ParameterGrid
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 from sklearn.model_selection import KFold
 
 """

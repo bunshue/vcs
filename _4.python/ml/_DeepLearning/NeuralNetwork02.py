@@ -1223,7 +1223,7 @@ plt.show()
 
 print("AUC = %6.4f" % metrics.auc(fpr_test, tpr_test))
 
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 from sklearn import metrics
 
 param_grid = {

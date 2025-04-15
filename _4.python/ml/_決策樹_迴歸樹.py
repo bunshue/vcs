@@ -48,7 +48,6 @@ from sklearn.datasets import make_hastie_10_2
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.model_selection import cross_val_score  # Cross Validation
-from sklearn.model_selection import GridSearchCV
 from sklearn.tree import DecisionTreeClassifier  # 決策樹分類(Decision Tree Classifier)
 from sklearn.tree import DecisionTreeRegressor  # 迴歸樹
 from sklearn.tree import plot_tree  # 繪製樹狀圖

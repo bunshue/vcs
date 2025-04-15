@@ -64,7 +64,7 @@ from common1 import *
 from sklearn import datasets
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression  # 邏輯回歸
 from sklearn.svm import SVC  # 支持向量機

@@ -592,7 +592,7 @@ print(metrics.classification_report(test_target, test_est1))  # 计算评估指�
 
 # 选择最优模型
 from sklearn.model_selection import ParameterGrid
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 
 kernel = ("linear", "rbf")
 gamma = np.arange(0.01, 1, 0.1)
@@ -2210,8 +2210,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("模型調參")
 
-# 網格搜索
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 
 iris = datasets.load_iris()
 
@@ -3298,7 +3297,7 @@ param_grid = {
     "kernel": ["rbf"],
 }
 
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 
 # One of the great things about GridSearchCV is that it is a meta-estimator. It takes an estimator like SVC, and creates a new estimator, that behaves exactly the same - in this case, like a classifier. You should add refit=True and choose verbose to whatever number you want, higher the number, the more verbose (verbose just means the text output describing the process).
 
@@ -3404,7 +3403,7 @@ print(metrics.classification_report(test_target, test_est1))  # 计算评估指�
 # 选择最优模型
 
 from sklearn.model_selection import ParameterGrid
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 
 kernel = ("linear", "rbf")
 gamma = np.arange(0.01, 1, 0.1)

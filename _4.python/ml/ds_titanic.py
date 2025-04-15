@@ -670,7 +670,7 @@ def plot_curve(train_sizes, cv_results, xlabel):
     plt.legend(loc="best")
 
 
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 
 thresholds = np.linspace(0, 0.005, 50)
 # Set the parameters by cross-validation

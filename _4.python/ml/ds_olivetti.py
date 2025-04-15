@@ -373,7 +373,7 @@ print("Projecting input data for PCA ...")
 X_train_pca = pca.transform(X_train)
 X_test_pca = pca.transform(X_test)
 
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 
 print("Searching the best parameters for SVC ...")
 param_grid = {"C": [1, 5, 10, 50, 100], "gamma": [0.0001, 0.0005, 0.001, 0.005, 0.01]}
