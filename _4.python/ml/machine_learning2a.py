@@ -81,7 +81,6 @@ from sklearn.datasets import make_hastie_10_2
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression
 from sklearn.linear_model import Lasso
-from sklearn.linear_model import Ridge
 
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
@@ -114,7 +113,7 @@ from sklearn.decomposition import PCA
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
@@ -346,30 +345,6 @@ def p_x_given_y_2(x, mean_y, variance_y):
 
 cc = df["Gender"][0]
 print(cc)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-train_size = 20
-test_size = 12
-train_X = np.random.uniform(low=0, high=1.2, size=train_size)
-test_X = np.random.uniform(low=0.1, high=1.3, size=test_size)
-train_y = np.sin(train_X * 2 * np.pi) + np.random.normal(0, 0.2, train_size)
-test_y = np.sin(test_X * 2 * np.pi) + np.random.normal(0, 0.2, test_size)
-
-poly = PolynomialFeatures(6)  # 次數は6
-
-train_poly_X = poly.fit_transform(train_X.reshape(train_size, 1))
-test_poly_X = poly.fit_transform(test_X.reshape(test_size, 1))
-
-model = Ridge(alpha=1.0)
-
-model.fit(train_poly_X, train_y)  # 學習訓練.fit
-
-train_pred_y = model.predict(train_poly_X)  # 預測.predict
-test_pred_y = model.predict(test_poly_X)  # 預測.predict
-print(mean_squared_error(train_pred_y, train_y))
-print(mean_squared_error(test_pred_y, test_y))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1532,6 +1507,7 @@ anova_ridge = Pipeline(
         ("ridge", sklearn.linear_model.Ridge()),
     ]
 )
+
 param_grid = {
     "selectkbest__k": np.arange(10, 110, 10),
     "ridge__alpha": [0.001, 0.01, 0.1, 1, 10, 100],
@@ -1553,7 +1529,6 @@ print("----------------------------")
 anova_ridge_cv = GridSearchCV(anova_ridge, cv=5, param_grid=param_grid)
 scores = cross_val_score(estimator=anova_ridge_cv, X=X, y=y, cv=5, n_jobs=-1)
 print("Test r2:%.2f" % scores.mean())
-
 
 print("=====================================")
 print("== Scaler + Elastic-net regression ==")
@@ -1645,11 +1620,11 @@ anova_ridge = Pipeline(
         ),
     ]
 )
+
 param_grid = {
     "selectkbest__k": np.arange(10, 110, 10),
     "ridge__C": [0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000],
 }
-
 
 # Expect execution in ipython, for python remove the %time
 print("----------------------------")
@@ -2090,9 +2065,7 @@ YrSold          True
 LowQualFinSF    True
 LotFrontage     True
 LotArea         True
-dtype: bool
-True
-
+dtype: bool     True
 可以發現所有的數值型變量都沒能通過正態性分布檢驗，都需要做轉換。
 我們可以把所有的數值型變量的分布曲線都畫出來，從可視化角度進一步驗證這個判斷
 """
@@ -2192,7 +2165,7 @@ print("類別型變量共有：{}".format(len(qualitative)))
 類別型變量共有：46
 """
 
-# 2.4 用散點圖觀察數值型變量之間的關系
+# 用散點圖觀察數值型變量之間的關系
 # scatterplot
 
 from copy import copy
