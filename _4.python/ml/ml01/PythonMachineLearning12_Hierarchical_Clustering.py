@@ -1,6 +1,9 @@
 """
 Hierarchical_Clustering
 
+聚合式階層分群法(Agglomerative Hierarchical Clustering)
+AgglomerativeClustering
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -56,23 +59,23 @@ df.head(10)
 df.describe()
 
 plt.figure(figsize=(8, 5))
-plt.title("Annual income distribution", fontsize=16)
-plt.xlabel("Annual income (k$)", fontsize=14)
+plt.title("Annual income distribution")
+plt.xlabel("Annual income (k$)")
 plt.grid(True)
 plt.hist(df["Annual Income (k$)"], color="orange", edgecolor="k")
 plt.show()
 
 plt.figure(figsize=(8, 5))
-plt.title("Spending Score distribution", fontsize=16)
-plt.xlabel("Spending Score (1-100)", fontsize=14)
+plt.title("Spending Score distribution")
+plt.xlabel("Spending Score (1-100)")
 plt.grid(True)
 plt.hist(df["Spending Score (1-100)"], color="green", edgecolor="k")
 plt.show()
 
 plt.figure(figsize=(8, 5))
-plt.title("Annual Income and Spending Score correlation", fontsize=18)
-plt.xlabel("Annual Income (k$)", fontsize=14)
-plt.ylabel("Spending Score (1-100)", fontsize=14)
+plt.title("Annual Income and Spending Score correlation")
+plt.xlabel("Annual Income (k$)")
+plt.ylabel("Spending Score (1-100)")
 plt.grid(True)
 plt.scatter(
     df["Annual Income (k$)"],
@@ -85,9 +88,9 @@ plt.scatter(
 plt.show()
 
 plt.figure(figsize=(8, 5))
-plt.title("Age and Spending Score correlation", fontsize=18)
-plt.xlabel("Age", fontsize=14)
-plt.ylabel("Spending Score (1-100)", fontsize=14)
+plt.title("Age and Spending Score correlation")
+plt.xlabel("Age")
+plt.ylabel("Spending Score (1-100)")
 plt.grid(True)
 plt.scatter(
     df["Age"],
@@ -120,7 +123,7 @@ plt.title("Dendrogram")
 plt.xlabel("Customers")
 plt.ylabel("Euclidean distances")
 plt.hlines(y=190, xmin=0, xmax=2000, lw=3, linestyles="--")
-plt.text(x=900, y=220, s="Horizontal line crossing 5 vertical lines", fontsize=20)
+plt.text(x=900, y=220, s="Horizontal line crossing 5 vertical lines")
 # plt.grid(True)
 dendrogram = sch.dendrogram(sch.linkage(X, method="ward"))
 plt.show()
@@ -131,6 +134,7 @@ from sklearn.cluster import AgglomerativeClustering
 
 # hc = AgglomerativeClustering(n_clusters = 5, affinity = 'euclidean', linkage = 'ward')
 hc = AgglomerativeClustering(n_clusters=5, linkage="ward")
+
 y_hc = hc.fit_predict(X)
 
 plt.figure(figsize=(12, 7))
@@ -139,10 +143,10 @@ plt.scatter(X[y_hc == 1, 0], X[y_hc == 1, 1], s=100, c="blue", label="Standard")
 plt.scatter(X[y_hc == 2, 0], X[y_hc == 2, 1], s=100, c="green", label="Target group")
 plt.scatter(X[y_hc == 3, 0], X[y_hc == 3, 1], s=100, c="orange", label="Careless")
 plt.scatter(X[y_hc == 4, 0], X[y_hc == 4, 1], s=100, c="magenta", label="Sensible")
-plt.title("Clustering of customers", fontsize=20)
-plt.xlabel("Annual Income (k$)", fontsize=16)
-plt.ylabel("Spending Score (1-100)", fontsize=16)
-plt.legend(fontsize=16)
+plt.title("Clustering of customers")
+plt.xlabel("Annual Income (k$)")
+plt.ylabel("Spending Score (1-100)")
+plt.legend()
 plt.grid(True)
 plt.axhspan(ymin=60, ymax=100, xmin=0.4, xmax=0.96, alpha=0.3, color="yellow")
 plt.show()
@@ -160,16 +164,15 @@ for i in range(1, 16):
 with plt.style.context(("fivethirtyeight")):
     plt.figure(figsize=(10, 6))
     plt.plot(range(1, 16), wcss)
-    plt.title("The Elbow Method with k-means++\n", fontsize=25)
+    plt.title("The Elbow Method with k-means++")
     plt.xlabel("Number of clusters")
-    plt.xticks(fontsize=20)
+    plt.xticks()
     plt.ylabel("WCSS (within-cluster sums of squares)")
     plt.vlines(x=5, ymin=0, ymax=250000, linestyles="--")
     plt.text(
         x=5.5,
         y=110000,
         s="5 clusters seem optimal choice \nfrom the elbow position",
-        fontsize=25,
         fontdict={"family": "Times New Roman"},
     )
     plt.show()

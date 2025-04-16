@@ -32,11 +32,16 @@ print("------------------------------------------------------------")  # 60個
 import sklearn.linear_model
 from sklearn import datasets
 from sklearn.datasets import make_blobs  # 集群資料集
+from sklearn.pipeline import make_pipeline
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn import metrics
 from matplotlib.colors import ListedColormap
-
 from sklearn import tree
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LassoCV
+from sklearn.linear_model import RidgeCV
+from sklearn.ensemble import AdaBoostRegressor
+from sklearn.preprocessing import PolynomialFeatures
 
 
 def show():
@@ -98,7 +103,7 @@ df.plot.scatter(
     figsize=(10, 5),
 )
 plt.plot(x_smooth, func(x_smooth), "k")
-plt.show()
+show()
 
 df.plot.scatter(
     "X_sampled",
@@ -111,7 +116,7 @@ df.plot.scatter(
     figsize=(10, 5),
 )
 plt.plot(x_smooth, func(x_smooth), "k")
-plt.show()
+show()
 
 df.plot.scatter(
     "X",
@@ -124,16 +129,9 @@ df.plot.scatter(
     figsize=(10, 5),
 )
 plt.plot(x_smooth, func(x_smooth), "k")
-plt.show()
+show()
 
-from sklearn.linear_model import LinearRegression
-from sklearn.linear_model import LassoCV
-from sklearn.linear_model import RidgeCV
-from sklearn.ensemble import AdaBoostRegressor
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-from sklearn.pipeline import make_pipeline
-
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(df["X"], df["y"], test_size=0.33)
 X_train = X_train.values.reshape(-1, 1)
 X_test = X_test.values.reshape(-1, 1)
@@ -157,17 +155,15 @@ for degree in range(degree_min, degree_max + 1):
     print("Test score of model with degree {}: {}\n".format(degree, test_score))
 
     # plt.figure()
-    # plt.title("RMSE: {}".format(RMSE),fontsize=10)
-    # plt.suptitle("Polynomial of degree {}".format(degree),fontsize=15)
+    # plt.title("RMSE: {}".format(RMSE))
+    # plt.suptitle("Polynomial of degree {}".format(degree))
     # plt.xlabel("X training values")
     # plt.ylabel("Fitted and training values")
     # plt.scatter(X_train,y_pred)
     # plt.scatter(X_train,y_train)
 
     plt.figure()
-    plt.title(
-        "Predicted vs. actual for polynomial of degree {}".format(degree), fontsize=15
-    )
+    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree))
     plt.xlabel("Actual values")
     plt.ylabel("Predicted values")
     plt.scatter(y_test, test_pred)
@@ -185,8 +181,9 @@ print(linear_sample_score)
 
 # Modeling with randomly sampled data set
 
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(
-    df["X_sampled"], df["y_sampled"], test_size=0.33
+    df["X_sampled"], df["y_sampled"], test_size=0.2
 )
 X_train = X_train.values.reshape(-1, 1)
 X_test = X_test.values.reshape(-1, 1)
@@ -211,17 +208,15 @@ for degree in range(degree_min, degree_max + 1):
     print("Test score of model with degree {}: {}\n".format(degree, test_score))
 
     # plt.figure()
-    # plt.title("RMSE: {}".format(RMSE),fontsize=10)
-    # plt.suptitle("Polynomial of degree {}".format(degree),fontsize=15)
+    # plt.title("RMSE: {}".format(RMSE))
+    # plt.suptitle("Polynomial of degree {}".format(degree))
     # plt.xlabel("X training values")
     # plt.ylabel("Fitted and training values")
     # plt.scatter(X_train,y_pred)
     # plt.scatter(X_train,y_train)
 
     plt.figure()
-    plt.title(
-        "Predicted vs. actual for polynomial of degree {}".format(degree), fontsize=15
-    )
+    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree))
     plt.xlabel("Actual values")
     plt.ylabel("Predicted values")
     plt.scatter(y_test, test_pred)
@@ -251,11 +246,11 @@ plt.figure(figsize=(8, 5))
 plt.grid(True)
 plt.plot(df_score["degree"], df_score["Linear sample score"], lw=2)
 plt.plot(df_score["degree"], df_score["Random sample score"], lw=2)
-plt.xlabel("Model Complexity: Degree of polynomial", fontsize=20)
-plt.ylabel("Model Score: R^2 score on test set", fontsize=15)
-plt.legend(fontsize=15)
+plt.xlabel("Model Complexity: Degree of polynomial")
+plt.ylabel("Model Score: R^2 score on test set")
+plt.legend()
 
-plt.show()
+show()
 
 # Checking the regularization strength from the cross-validated model pipeline
 

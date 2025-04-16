@@ -32,6 +32,13 @@ from sklearn.datasets import make_blobs  # 集群資料集
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn import metrics
 from matplotlib.colors import ListedColormap
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LassoCV
+from sklearn.linear_model import RidgeCV
+from sklearn.ensemble import AdaBoostRegressor
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import make_pipeline
+
 
 from sklearn import tree
 
@@ -106,17 +113,8 @@ plt.plot(x_smooth, y_smooth, "k")
 
 show()
 
-# Import scikit-learn librares and prepare train/test splits
-
-from sklearn.linear_model import LinearRegression
-from sklearn.linear_model import LassoCV
-from sklearn.linear_model import RidgeCV
-from sklearn.ensemble import AdaBoostRegressor
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.model_selection import train_test_split
-from sklearn.pipeline import make_pipeline
-
-X_train, X_test, y_train, y_test = train_test_split(df["X"], df["y"], test_size=0.33)
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(df["X"], df["y"], test_size=0.2)
 
 X_train = X_train.values.reshape(X_train.size, 1)
 y_train = y_train.values.reshape(y_train.size, 1)
@@ -173,9 +171,7 @@ for degree in range(degree_min, degree_max + 1):
     # print("Test score of model with degree {}: {}\n".format(degree,test_score))
 
     plt.figure()
-    plt.title(
-        "Predicted vs. actual for polynomial of degree {}".format(degree), fontsize=15
-    )
+    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree))
     plt.xlabel("Actual values")
     plt.ylabel("Predicted values")
     plt.scatter(y_test, test_pred)
@@ -185,8 +181,8 @@ for degree in range(degree_min, degree_max + 1):
 plt.figure(figsize=(8, 5))
 plt.grid(True)
 plt.plot(poly_degree, rmse, lw=3, c="red")
-plt.xlabel("\nModel Complexity: Degree of polynomial", fontsize=20)
-plt.ylabel("Root-mean-square error on test set", fontsize=15)
+plt.xlabel("Model Complexity: Degree of polynomial")
+plt.ylabel("Root-mean-square error on test set")
 
 show()
 
@@ -203,8 +199,8 @@ time_linear = np.sum(t_linear)
 plt.figure(figsize=(8, 5))
 plt.grid(True)
 plt.plot(poly_degree, linear_sample_score, lw=3, c="red")
-plt.xlabel("\nModel Complexity: Degree of polynomial", fontsize=20)
-plt.ylabel("R^2 score on test set", fontsize=15)
+plt.xlabel("Model Complexity: Degree of polynomial")
+plt.ylabel("R^2 score on test set")
 
 show()
 
@@ -335,10 +331,7 @@ print("R^2 value of the shallow neural network:", r2_SNN)
 # Plot residuals plots
 
 plt.figure(figsize=(10, 6))
-plt.title(
-    "Predicted vs. actual (test set) for shallow (1-hidden layer) neural network\n",
-    fontsize=15,
-)
+plt.title("Predicted vs. actual (test set) for shallow (1-hidden layer) neural network")
 plt.xlabel("Actual values (test set)")
 plt.ylabel("Predicted values")
 plt.scatter(y_test, yhat, edgecolors="k", s=100, c="green")
@@ -349,15 +342,9 @@ show()
 
 plt.figure(figsize=(10, 6))
 plt.scatter(yhat, y_test - yhat, edgecolors="k", s=100, c="red")
-plt.title(
-    "Residual vs. fitted values for shallow (1-hidden layer) neural network\n",
-    fontsize=15,
-)
-plt.xlabel("\nFitted values", fontsize=15)
-plt.ylabel(
-    "Residuals: Difference between actual (test set)\n and predicted values",
-    fontsize=15,
-)
+plt.title("Residual vs. fitted values for shallow (1-hidden layer) neural network")
+plt.xlabel("Fitted values")
+plt.ylabel("Residuals: Difference between actual (test set)\n and predicted values")
 plt.grid(True)
 plt.axhline(y=0, lw=2, c="red")
 
@@ -485,11 +472,9 @@ print("R^2 value of the deep neural network:", r2_DNN)
 # Plot residuals plots
 
 plt.figure(figsize=(10, 6))
-plt.title(
-    "Predicted vs. actual (test set) for deep (2-layer) neural network\n", fontsize=15
-)
-plt.xlabel("Actual values (test set)", fontsize=15)
-plt.ylabel("Predicted values", fontsize=15)
+plt.title("Predicted vs. actual (test set) for deep (2-layer) neural network")
+plt.xlabel("Actual values (test set)")
+plt.ylabel("Predicted values")
 plt.scatter(y_test, yhat, edgecolors="k", s=100, c="green")
 plt.grid(True)
 plt.plot(y_test, y_test, "r", lw=2)
@@ -498,21 +483,18 @@ show()
 
 plt.figure(figsize=(10, 6))
 plt.scatter(yhat, y_test - yhat, edgecolors="k", s=100, c="red")
-plt.title("Residual vs. fitted values for deep (2-layer) neural network\n", fontsize=15)
-plt.xlabel("\nFitted values", fontsize=15)
-plt.ylabel(
-    "Residuals: Difference between actual (test set)\n and predicted values",
-    fontsize=15,
-)
+plt.title("Residual vs. fitted values for deep (2-layer) neural network")
+plt.xlabel("Fitted values")
+plt.ylabel("Residuals: Difference between actual (test set)\n and predicted values")
 plt.grid(True)
 plt.axhline(y=0, lw=2, c="red")
 
 show()
 
 plt.figure(figsize=(10, 6))
-plt.title("Time taken for building/fitting models\n", fontsize=16)
-plt.ylabel("Time taken to build model", fontsize=12)
-plt.xlabel("Various types of models", fontsize=14)
+plt.title("Time taken for building/fitting models")
+plt.ylabel("Time taken to build model")
+plt.xlabel("Various types of models")
 plt.grid(True)
 plt.bar(
     left=[1, 2, 3],
@@ -528,9 +510,9 @@ plt.bar(
 show()
 
 plt.figure(figsize=(10, 6))
-plt.title("$R^2$-fit values of the models\n", fontsize=16)
-plt.ylabel("$R^2$-fit value achieved by the model", fontsize=12)
-plt.xlabel("Various types of models", fontsize=14)
+plt.title("$R^2$-fit values of the models")
+plt.ylabel("$R^2$-fit value achieved by the model")
+plt.xlabel("Various types of models")
 plt.grid(True)
 plt.bar(
     left=[1, 2, 3],

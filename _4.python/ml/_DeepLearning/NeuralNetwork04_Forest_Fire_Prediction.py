@@ -205,8 +205,8 @@ plt.scatter(10 ** (y_test), 10 ** (a) - 10 ** (y_test))
 
 show()
 
-plt.title("Histogram of prediction errors\n", fontsize=18)
-plt.xlabel("Prediction error ($ha$)", fontsize=14)
+plt.title("Histogram of prediction errors")
+plt.xlabel("Prediction error ($ha$)")
 plt.grid(True)
 plt.hist(
     10
@@ -226,7 +226,7 @@ for i in range(tol_max):
     rec_SVR.append(rec(a, y_test, i))
 
 plt.figure(figsize=(5, 5))
-plt.title("REC curve for the Support Vector Regressor\n", fontsize=15)
+plt.title("REC curve for the Support Vector Regressor")
 plt.xlabel("Absolute error (tolerance) in prediction ($ha$)")
 plt.ylabel("Percentage of correct prediction")
 plt.xticks([i * 5 for i in range(tol_max + 1)])
@@ -257,8 +257,8 @@ plt.scatter(10 ** (y_test), 10 ** (a) - 10 ** (y_test))
 
 show()
 
-plt.title("Histogram of prediction errors\n", fontsize=18)
-plt.xlabel("Prediction error ($ha$)", fontsize=14)
+plt.title("Histogram of prediction errors")
+plt.xlabel("Prediction error ($ha$)")
 plt.grid(True)
 plt.hist(
     10
@@ -279,7 +279,7 @@ for i in range(tol_max):
     rec_DT.append(rec(a, y_test, i))
 
 plt.figure(figsize=(5, 5))
-plt.title("REC curve for the single Decision Tree\n", fontsize=15)
+plt.title("REC curve for the single Decision Tree")
 plt.xlabel("Absolute error (tolerance) in prediction ($ha$)")
 plt.ylabel("Percentage of correct prediction")
 plt.xticks([i for i in range(0, tol_max + 1, 5)])
@@ -320,8 +320,8 @@ plt.scatter(10 ** (y_test), 10 ** (a) - 10 ** (y_test))
 
 show()
 
-plt.title("Histogram of prediction errors\n", fontsize=18)
-plt.xlabel("Prediction error ($ha$)", fontsize=14)
+plt.title("Histogram of prediction errors")
+plt.xlabel("Prediction error ($ha$)")
 plt.grid(True)
 plt.hist(
     10
@@ -341,7 +341,7 @@ for i in range(tol_max):
     rec_RF.append(rec(a, y_test, i))
 
 plt.figure(figsize=(5, 5))
-plt.title("REC curve for the Random Forest\n", fontsize=15)
+plt.title("REC curve for the Random Forest")
 plt.xlabel("Absolute error (tolerance) in prediction ($ha$)")
 plt.ylabel("Percentage of correct prediction")
 plt.xticks([i for i in range(0, tol_max + 1, 5)])
@@ -422,8 +422,8 @@ plt.scatter(
 
 show()
 
-plt.title("Histogram of prediction errors\n", fontsize=18)
-plt.xlabel("Prediction error ($ha$)", fontsize=14)
+plt.title("Histogram of prediction errors")
+plt.xlabel("Prediction error ($ha$)")
 plt.grid(True)
 plt.hist(
     10
@@ -443,7 +443,7 @@ for i in range(tol_max):
     rec_NN.append(rec(a, y_test, i))
 
 plt.figure(figsize=(5, 5))
-plt.title("REC curve for the Deep Network\n", fontsize=15)
+plt.title("REC curve for the Deep Network")
 plt.xlabel("Absolute error (tolerance) in prediction ($ha$)")
 plt.ylabel("Percentage of correct prediction")
 plt.xticks([i for i in range(0, tol_max + 1, 5)])
@@ -457,19 +457,19 @@ show()
 # Relative performance of various models (REC curves)
 
 plt.figure(figsize=(10, 8))
-plt.title("REC curve for various models\n", fontsize=20)
-plt.xlabel("Absolute error (tolerance) in prediction ($ha$)", fontsize=15)
-plt.ylabel("Percentage of correct prediction", fontsize=15)
-plt.xticks([i for i in range(0, tol_max + 1, 1)], fontsize=13)
+plt.title("REC curve for various models")
+plt.xlabel("Absolute error (tolerance) in prediction ($ha$)")
+plt.ylabel("Percentage of correct prediction")
+plt.xticks([i for i in range(0, tol_max + 1, 1)])
 plt.ylim(-10, 100)
 plt.xlim(-2, tol_max)
-plt.yticks([i * 20 for i in range(6)], fontsize=18)
+plt.yticks([i * 20 for i in range(6)])
 plt.grid(True)
 plt.plot(range(tol_max), rec_SVR, "--", lw=3)
 plt.plot(range(tol_max), rec_DT, "*-", lw=3)
 plt.plot(range(tol_max), rec_RF, "o-", lw=3)
 plt.plot(range(tol_max), rec_NN, "k-", lw=3)
-plt.legend(["SVR", "Decision Tree", "Random Forest", "Deep NN"], fontsize=13)
+plt.legend(["SVR", "Decision Tree", "Random Forest", "Deep NN"])
 
 show()
 

@@ -859,7 +859,7 @@ def draw_net(input_size, output_size, hidden_layers=[], w=6, h=4):
     y_hidden = [np.arange(-(n - 1) / 2, (n + 1) / 2, 1) for n in hidden_layers]
 
     # draw input layer
-    plt.text(x, h / 2 + 0.5, "Input\nLayer", ha="center", va="top", fontsize=16)
+    plt.text(x, h / 2 + 0.5, "Input\nLayer", ha="center", va="top")
 
     for i, y in enumerate(y_input):
         draw_circle(ax, (x, y), radius)
@@ -869,7 +869,6 @@ def draw_net(input_size, output_size, hidden_layers=[], w=6, h=4):
             "$x_%i$" % (input_size - 1 - i),
             ha="right",
             va="center",
-            fontsize=16,
         )
         draw_connecting_arrow(ax, (x - 0.9, y), 0.1, (x, y), radius)
 
@@ -879,7 +878,7 @@ def draw_net(input_size, output_size, hidden_layers=[], w=6, h=4):
     for ys in y_hidden:
         # shift x
         x += 2
-        plt.text(x, h / 2 + 0.5, "Hidden\nLayer", ha="center", va="top", fontsize=16)
+        plt.text(x, h / 2 + 0.5, "Hidden\nLayer", ha="center", va="top")
 
         # draw neurons for each hidden layer
         for i, y1 in enumerate(ys):
@@ -896,11 +895,11 @@ def draw_net(input_size, output_size, hidden_layers=[], w=6, h=4):
     x += 2  # update position for output layer
 
     # draw output layer
-    plt.text(x, h / 2 + 0.5, "Output\nLayer", ha="center", va="top", fontsize=16)
+    plt.text(x, h / 2 + 0.5, "Output\nLayer", ha="center", va="top")
 
     for i, y1 in enumerate(y_output):
         draw_circle(ax, (x, y1), radius)
-        ax.text(x + 0.8, y1, "Output", ha="left", va="center", fontsize=16)
+        ax.text(x + 0.8, y1, "Output", ha="left", va="center")
         draw_connecting_arrow(ax, (x, y1), radius, (x + 0.8, y1), 0.1)
 
         # connect each output neuron with all neurons from previous layer
@@ -989,7 +988,7 @@ for i, Y in enumerate([Y_and, Y_or, Y_xor]):
     elif i == 1:
         plt.plot([-0.5, 1], [1, -0.5])
     else:
-        plt.text(0.5, 0.5, s="?", fontsize=16, ha="center", va="center")
+        plt.text(0.5, 0.5, s="?", ha="center", va="center")
 
 plt.tight_layout()
 show()

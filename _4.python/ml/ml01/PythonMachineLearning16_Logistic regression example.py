@@ -32,6 +32,10 @@ from sklearn.datasets import make_blobs  # 集群資料集
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn import metrics
 from matplotlib.colors import ListedColormap
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+
 
 from sklearn import tree
 
@@ -147,8 +151,6 @@ print("Test set shape", X_test.shape)
 
 # We are using the L2 regularization by default
 
-from sklearn.linear_model import LogisticRegression
-
 clf1 = LogisticRegression(penalty="l2", solver="newton-cg")
 
 clf1.fit(X_train, y_train)
@@ -176,10 +178,6 @@ prob_df["Decision"] = (prob_df["Prob of YES"] > prob_threshold).apply(int)
 prob_df
 
 y_test[:10]
-
-# Classification report, and confusion matrix
-
-from sklearn.metrics import classification_report, confusion_matrix
 
 print(classification_report(y_test, clf1.predict(X_test)))
 

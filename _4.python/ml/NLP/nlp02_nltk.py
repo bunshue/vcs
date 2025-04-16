@@ -2,7 +2,6 @@
 WordNet是一個由普林斯頓大學認識科學實驗室 在
 心理學教授喬治·A·米勒 的指導下建立和維護的英語字典
 
-import nltk
 nltk.download('wordnet')
 nltk.download('stopwords')
 
@@ -35,17 +34,21 @@ from sklearn.model_selection import train_test_split  # 資料分割 => 訓練�
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix  # 混淆矩陣
 from sklearn.metrics import classification_report  # 分類報告
+
 from sklearn.naive_bayes import GaussianNB
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+import nltk
+import re
+import string
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
@@ -54,13 +57,48 @@ from wordcloud import WordCloud
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.tree import DecisionTreeClassifier
-import string
-import re
 
-import nltk
-
-'''
 stemmer = nltk.SnowballStemmer("english")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("sumy：對網頁或文章進行摘要")
+
+# pip install sumy
+
+nltk.download("punkt")
+
+from sumy.parsers.html import HtmlParser
+from sumy.parsers.plaintext import PlaintextParser
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.summarizers.lsa import LsaSummarizer as Summarizer
+from sumy.nlp.stemmers import Stemmer
+from sumy.utils import get_stop_words
+
+
+LANGUAGE = "chinese"
+# LANGUAGE = "english"
+SENTENCES_COUNT = 5
+# SENTENCES_COUNT = 10
+url = "https://news.ltn.com.tw/news/life/breakingnews/3649202"
+# url = "https://en.wikipedia.org/wiki/Automatic_summarization"
+parser = HtmlParser.from_url(url, Tokenizer(LANGUAGE))
+summarizer = Summarizer(Stemmer(LANGUAGE))
+summarizer.stop_words = get_stop_words(LANGUAGE)
+sumies = summarizer(parser.document, SENTENCES_COUNT)
+for i, sentence in enumerate(sumies):
+    print("{}. {}".format(i + 1, sentence))
+
+
+LANGUAGE = "chinese"
+SENTENCES_COUNT = 5
+parser = PlaintextParser.from_file("data/article1.txt", Tokenizer(LANGUAGE))
+summarizer = Summarizer(Stemmer(LANGUAGE))
+summarizer.stop_words = get_stop_words(LANGUAGE)
+sumies = summarizer(parser.document, SENTENCES_COUNT)
+for i, sentence in enumerate(sumies):
+    print("{}. {}".format(i + 1, sentence))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -320,21 +358,21 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 data = pd.read_csv("data/twitter.csv")
-cc = data.head()
 
+cc = data.head()
 print(cc)
 
 data["labels"] = data["class"].map(
     {0: "Hate Speech", 1: "Offensive Language", 2: "No Hate and Offensive"}
 )
-cc = data.head()
 
+cc = data.head()
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
-
 data = data[["tweet", "labels"]]
+
 cc = data.head()
 print(cc)
 
@@ -359,10 +397,11 @@ def clean(text):
 
 
 data["tweet"] = data["tweet"].apply(clean)
-data.head()
+
+cc = data.head()
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
-
 
 x = np.array(data["tweet"])
 y = np.array(data["labels"])
@@ -372,8 +411,7 @@ cv = CountVectorizer()
 X = cv.fit_transform(x)  # 學習訓練.fit
 
 # 資料分割
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.33)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 clf = DecisionTreeClassifier()
 
@@ -393,7 +431,7 @@ Enter a Text: Let's unite and kill all the people who don't value our religion.
 Enter a Text: this is a lion
 ['No Hate and Offensive']
 """
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -526,7 +564,7 @@ y_train = news_train.target
 
 clf = MultinomialNB(alpha=0.0001)  # 多項單純貝氏分類器
 
-clf.fit(X_train, y_train)
+clf.fit(X_train, y_train)  # 學習訓練.fit
 
 train_score = clf.score(X_train, y_train)
 print("train score: {0}".format(train_score))
@@ -601,6 +639,323 @@ plt.colorbar()
 
 show()
 """
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Hate_Speech_Detection_Model
+
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.tree import DecisionTreeClassifier
+
+stemmer = nltk.SnowballStemmer("english")
+
+data = pd.read_csv("data/twitter.csv")
+
+cc = data.head()
+print(cc)
+
+data["labels"] = data["class"].map(
+    {0: "Hate Speech", 1: "Offensive Language", 2: "No Hate and Offensive"}
+)
+
+cc = data.head()
+print(cc)
+
+data = data[["tweet", "labels"]]
+
+cc = data.head()
+print(cc)
+
+nltk.download("stopwords")
+stopword = set(stopwords.words("english"))
+
+
+def clean(text):
+    text = str(text).lower()
+    text = re.sub("", "", text)
+    text = re.sub("https?://\S+|www\.\S+", "", text)
+    text = re.sub("<.*?>+", "", text)
+    text = re.sub("[%s]" % re.escape(string.punctuation), "", text)
+    text = re.sub("\n", "", text)
+    text = re.sub("\w*\d\w*", "", text)
+    text = [word for word in text.split(" ") if word not in stopword]
+    text = " ".join(text)
+    text = [stemmer.stem(word) for word in text.split(" ")]
+    text = " ".join(text)
+    return text
+
+
+data["tweet"] = data["tweet"].apply(clean)
+
+cc = data.head()
+print(cc)
+
+x = np.array(data["tweet"])
+y = np.array(data["labels"])
+
+cv = CountVectorizer()
+
+X = cv.fit_transform(x)  # 學習訓練.fit
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+clf = DecisionTreeClassifier()
+
+clf.fit(X_train, y_train)  # 學習訓練.fit
+
+clf.score(X_test, y_test)
+user = input("Enter a Text: ")
+data = cv.transform([user]).toarray()
+
+output = clf.predict(data)
+print(output)
+
+"""
+Enter a Text: Let's unite and kill all the people who don't value our religion.
+['Hate Speech']
+Enter a Text: this is a lion
+['No Hate and Offensive']
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Facebook-Posts-Sentiment-Analysis-main
+# facebook_sentiment_analysis
+
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+
+# OPTIONAL (more relevant for individual words)
+from nltk.stem import LancasterStemmer, WordNetLemmatizer
+from nltk.probability import FreqDist
+import unicodedata
+import json
+import inflect
+
+# create empty list
+empty_lst = []
+
+""" no json file
+# load json into python, assign to 'data'
+with open("your_posts_1.json") as file:
+    data = json.load(file)
+print(type(data))  # a list
+print(type(data[0]))  # first object in the list: a dictionary
+print(len(data))
+
+# multiple nested loops to store all post in empty list
+for dct in data:
+    for k, v in dct.items():
+        if k == "data":
+            if len(v) > 0:
+                for k_i, v_i in v[0].items():
+                    if k_i == "post":
+                        empty_lst.append(v_i)
+print("This is the empty list: ", empty_lst)
+print("\nLength of list: ", len(empty_lst))
+for i in empty_lst:
+    print(i)
+"""
+
+nltk.download("punkt")
+nested_sent_token = [nltk.sent_tokenize(lst) for lst in empty_lst]
+# flatten list, len: 3241
+flat_sent_token = [item for sublist in nested_sent_token for item in sublist]
+print("Flatten sentence token: ", len(flat_sent_token))
+
+
+def remove_non_ascii(words):
+    """Remove non-ASCII character from List of tokenized words"""
+    new_words = []
+    for word in words:
+        new_word = (
+            unicodedata.normalize("NFKD", word)
+            .encode("ascii", "ignore")
+            .decode("utf-8", "ignore")
+        )
+        new_words.append(new_word)
+    return new_words
+
+
+# To LowerCase
+def to_lowercase(words):
+    """Convert all characters to lowercase from List of tokenized words"""
+    new_words = []
+    for word in words:
+        new_word = word.lower()
+        new_words.append(new_word)
+    return new_words
+
+
+# Remove Punctuation , then Re-Plot Frequency Graph
+def remove_punctuation(words):
+    # Remove punctuation from list of tokenized words
+    new_words = []
+    for word in words:
+        new_word = re.sub(r"[^\w\s]", "", word)
+        if new_word != "":
+            new_words.append(new_word)
+    return new_words
+
+
+# Replace Numbers with Textual Representations
+def replace_numbers(words):
+    # Replace all interger occurrences in list of tokenized words with textual representation
+    p = inflect.engine()
+    new_words = []
+    for word in words:
+        if word.isdigit():
+            new_word = p.number_to_words(word)
+            new_words.append(new_word)
+        else:
+            new_words.append(word)
+    return new_words
+
+
+# Remove Stopwords
+def remove_stopwords(words):
+    # Remove stop words from list of tokenized words
+    new_words = []
+    for word in words:
+        if word not in stopwords.words("english"):
+            new_words.append(word)
+    return new_words
+
+
+# Combine all functions into Normalize() function
+def normalize(words):
+    words = remove_non_ascii(words)
+    words = to_lowercase(words)
+    words = remove_punctuation(words)
+    words = replace_numbers(words)
+    words = remove_stopwords(words)
+    return words
+
+
+nltk.download("stopwords")
+sents = normalize(flat_sent_token)
+print("Length of sentences list: ", len(sents))
+
+from nltk.probability import FreqDist
+
+# Find frequency of sentence
+fdist_sent = FreqDist(sents)
+fdist_sent.most_common(10)
+# Plot
+fdist_sent.plot(10)
+
+
+nltk.download("vader_lexicon")
+sid = SentimentIntensityAnalyzer()
+sentiment = []
+sentiment2 = []
+for sent in sents:
+    sent1 = sent
+    sent_scores = sid.polarity_scores(sent1)
+    for x, y in sent_scores.items():
+        sentiment2.append((x, y))
+    sentiment.append((sent1, sent_scores))
+    # print(sentiment)
+
+# sentiment
+cols = ["sentence", "numbers"]
+result = pd.DataFrame(sentiment, columns=cols)
+print("First five rows of results: ", result.head())
+
+# sentiment2
+cols2 = ["label", "values"]
+result2 = pd.DataFrame(sentiment2, columns=cols2)
+print("First five rows of results2: ", result2.head())
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# email_spam_detection
+
+# email_spam_detection_small.csv 30筆資料 2欄位
+# email_spam_detection.csv 5728筆資料 2欄位
+
+df = pd.read_csv("data/email_spam_detection_small.csv")
+
+cc = df.head()
+print(cc)
+
+cc = df.shape
+print(cc)
+
+cc = df.columns
+print(cc)
+
+df.drop_duplicates(inplace=True)
+print(df.shape)
+
+# 檢查資料缺失 to show the number of missing data
+print(df.isnull().sum())
+
+# download the stopwords package
+nltk.download("stopwords")
+
+# [nltk_data] Downloading package stopwords to /root/nltk_data...
+# [nltk_data] Unzipping corpora/stopwords.zip.
+
+
+def process(text):
+    nopunc = [char for char in text if char not in string.punctuation]
+    nopunc = "".join(nopunc)
+
+    clean = [
+        word
+        for word in nopunc.split()
+        if word.lower() not in stopwords.words("english")
+    ]
+    return clean
+
+
+# to show the tokenization
+cc = df["text"].head().apply(process)
+print(cc)
+
+from sklearn.feature_extraction.text import CountVectorizer
+
+print("久~~~~~~~~~~")
+message = CountVectorizer(analyzer=process).fit_transform(df["text"])
+print("OK")
+
+# 資料分割
+xtrain, xtest, ytrain, ytest = train_test_split(message, df["spam"], test_size=0.2)
+
+print(message.shape)
+
+print("c")
+
+from sklearn.naive_bayes import MultinomialNB  # 多項單純貝氏分類器
+
+classifier = MultinomialNB().fit(xtrain, ytrain)
+
+print("d")
+
+print(classifier.predict(xtrain))
+
+print(ytrain.values)
+
+pred = classifier.predict(xtrain)
+print(classification_report(ytrain, pred))
+print()
+print("Confusion Matrix: \n", confusion_matrix(ytrain, pred))
+print("Accuracy: \n", accuracy_score(ytrain, pred))
+
+# print the predictions
+print(classifier.predict(xtest))
+# print the actual values
+print(ytest.values)
+
+pred = classifier.predict(xtest)
+print(classification_report(ytest, pred))
+print()
+print("Confusion Matrix: \n", confusion_matrix(ytest, pred))
+print("Accuracy: \n", accuracy_score(ytest, pred))
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

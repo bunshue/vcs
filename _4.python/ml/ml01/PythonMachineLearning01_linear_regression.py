@@ -35,13 +35,17 @@ from sklearn.model_selection import train_test_split  # 資料分割 => 訓練�
 from sklearn import metrics
 from matplotlib.colors import ListedColormap
 from sklearn.linear_model import LinearRegression
-
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LassoCV
+from sklearn.linear_model import RidgeCV
+from sklearn.linear_model import LinearRegression
+from sklearn.pipeline import make_pipeline
 from scipy import stats
 from scipy import optimize
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
@@ -101,17 +105,6 @@ display(p)
 
 # NG x,y,x1,y1 = p.result
 
-# Load scikit-learn libraries
-
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LassoCV
-from sklearn.linear_model import RidgeCV
-from sklearn.linear_model import LinearRegression
-from sklearn.pipeline import make_pipeline
-
-# Machine learning (regression) model encapsulated within a function
-
 lasso_eps = 0.01
 lasso_nalpha = 20
 lasso_iter = 3000
@@ -119,9 +112,8 @@ ridge_alphas = (0.001, 0.01, 0.1, 1)
 
 
 def func_fit(model_type, test_size, degree):
-    X_train, X_test, y_train, y_test = train_test_split(
-        x, y, test_size=test_size, random_state=55
-    )
+    # 資料分割
+    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=test_size)
 
     t1 = np.min(X_test)
     t2 = np.max(X_test)

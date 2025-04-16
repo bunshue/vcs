@@ -68,7 +68,6 @@ print('pywordseg：繁體中文斷詞')
 
 from pywordseg import *
 
-
 seg = Wordseg(batch_size=64, device="cuda:0", embedding='elmo', elmo_use_cuda=True, mode="TW")
 words = seg.cut(["這部電影很好看，是我的朋友陳國文主演的。"])
 print('|'.join(words[0]))
@@ -91,93 +90,46 @@ for word in words[0]:
     if word not in stops:
         stopwords.append(word)
 print('|'.join(stopwords))   
-
 """
-
 print("------------------------------------------------------------")  # 60個
-
-print("sumy：對網頁或文章進行摘要")
-
-# pip install sumy
-
-import nltk
-
-nltk.download("punkt")
-
-from sumy.parsers.html import HtmlParser
-from sumy.parsers.plaintext import PlaintextParser
-from sumy.nlp.tokenizers import Tokenizer
-from sumy.summarizers.lsa import LsaSummarizer as Summarizer
-from sumy.nlp.stemmers import Stemmer
-from sumy.utils import get_stop_words
-
-
-LANGUAGE = "chinese"
-# LANGUAGE = "english"
-SENTENCES_COUNT = 5
-# SENTENCES_COUNT = 10
-url = "https://news.ltn.com.tw/news/life/breakingnews/3649202"
-# url = "https://en.wikipedia.org/wiki/Automatic_summarization"
-parser = HtmlParser.from_url(url, Tokenizer(LANGUAGE))
-summarizer = Summarizer(Stemmer(LANGUAGE))
-summarizer.stop_words = get_stop_words(LANGUAGE)
-sumies = summarizer(parser.document, SENTENCES_COUNT)
-for i, sentence in enumerate(sumies):
-    print("{}. {}".format(i + 1, sentence))
-
-
-LANGUAGE = "chinese"
-SENTENCES_COUNT = 5
-parser = PlaintextParser.from_file("data/article1.txt", Tokenizer(LANGUAGE))
-summarizer = Summarizer(Stemmer(LANGUAGE))
-summarizer.stop_words = get_stop_words(LANGUAGE)
-sumies = summarizer(parser.document, SENTENCES_COUNT)
-for i, sentence in enumerate(sumies):
-    print("{}. {}".format(i + 1, sentence))
-
-print("------------------------------------------------------------")  # 60個
-# snownlp：完整自然語言處理功能
-print("------------------------------------------------------------")  # 60個
-
-# SnowNLP用法
-
-from snownlp import SnowNLP
-
-s = SnowNLP("跟框架學代碼設計，跟應用學功能設計")
-print(s.words)  # 分詞
-print(s.sentiments)  # 消極or積極，結果在0-1之間
-print(s.tags)  # 詞性標註
-print(s.keywords(3))  # 　關鍵詞
-print(s.summary(3))  # 摘要
-print(s.tf)  # tf
-print(s.idf)  # idf
-
-print("------------------------------------------------------------")  # 60個
+print("snownlp：完整自然語言處理功能 ST")
 print("------------------------------------------------------------")  # 60個
 
 import snownlp
 
 text = "自然語言認知和理解是讓電腦把輸入的語言變成有意思的符號和關係，然後根據目的再處理。自然語言生成系統則是把計算機數據轉化為自然語言。"
+
 s = snownlp.SnowNLP(text)
+
+print("詞性標註 :", s.tags)
+print("關鍵詞 :", s.keywords(3))  # 填入個數
+print("摘要 :", s.summary(3))  # 填入個數
+print("tf :", s.tf)
+print("idf :", s.idf)
+
+print("轉簡中")
 print(s.han)
 
-print("------------------------------------------------------------")  # 60個
-
-text = "我今天要到台北松山機場出差！"
-s = snownlp.SnowNLP(text)
+print("分詞")
 print("|".join(s.words))
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-text1 = "昨天我的錢不見了"
-s1 = snownlp.SnowNLP(text1)
-print("負面情緒：{}".format(s1.sentiments))
+print("檢測一段文字的 正面/負面 情緒")
 
-text2 = "今天天氣很好"
-s2 = snownlp.SnowNLP(text2)
-print("正面情緒：{}".format(s2.sentiments))
+text = "昨天我的錢不見了"
+s = snownlp.SnowNLP(text)
+# print(s.sentiments)  # 消極or積極，結果在0-1之間
 
-print("------------------------------------------------------------")  # 60個
+print("文字 :", text)
+print("情緒 :", s.sentiments)
+
+text = "今天天氣很好"
+s = snownlp.SnowNLP(text)
+print("文字 :", text)
+print("情緒 :", s.sentiments)
+
+print("------------------------------")  # 30個
 
 text = """
 自然語言處理是一門融語言學、計算機科學、數學於一體的科學。
@@ -188,29 +140,27 @@ text = """
 特別是其中的軟體系統。因而它是計算機科學的一部分。
 """
 s = snownlp.SnowNLP(text)
-for i, sen in enumerate(s.sentences):
-    print("第 {} 句：{}。".format(i + 1, sen))
+
+print("取得句數 :", len(s.sentences), ", 依序是 :")
+
+for _ in s.sentences:
+    print(_)
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
-
-t_key = s.keywords(3)
-print(t_key)
-
 print("------------------------------------------------------------")  # 60個
 
-t_keysen = s.summary(3)
-print(t_keysen)
-
-print("------------------------------------------------------------")  # 60個
-
-# 應用：旅館評論情緒分析
+# 應用：旅館評論情緒分析 使用 snownlp
 
 pd_all = pd.read_csv("data/hotel_all.csv")
 
 print("正面評論有", len(pd_all[pd_all["label"] == 1]), "則")
 print("負面評論有", len(pd_all[pd_all["label"] == 0]), "則")
 
-print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------")  # 30個
 
 pd_all = pd.read_csv("data/hotel_all.csv")
 pd_posall = pd_all[pd_all.label == 1]
@@ -220,7 +170,7 @@ pd_pos = pd_pos.drop(columns="label")
 pos_train = pd_pos.iloc[100:]
 pos_train.to_csv("tmp_pos_train.csv", header=False, index=False)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 pd_neg = pd_all[pd_all.label == 0]
 pd_neg_label = pd_neg.sample(frac=1.0)
@@ -229,59 +179,58 @@ pd_neg = pd_neg_label.drop(columns="label")
 neg_train = pd_neg.iloc[100:]
 neg_train.to_csv("tmp_neg_train.csv", header=False, index=False)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 test_all = pd.concat([pos_test_label, neg_test_label], axis=0)
 test_all = test_all.sample(frac=1.0)
 test_all.to_csv("tmp_test_all.csv", header=False, index=False)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-"""
 score = 0
-with open("tmp_test_all.csv", "r") as f:
+with open("tmp_test_all.csv", "r", encoding="utf-8") as f:
     datas = f.readlines()
     for data in datas:
-        label = data.split(',')[0]
-        text = data.split(',')[1]
-        if snownlp.SnowNLP(text).sentiments<0.5:
+        label = data.split(",")[0]
+        text = data.split(",")[1]
+        if snownlp.SnowNLP(text).sentiments < 0.5:
             ss = 0
         else:
             ss = 1
         if int(label) == ss:
-            score +=1
-print(" 正確率{}".format(score/len(datas)))
-"""
+            score += 1
 
-print("------------------------------------------------------------")  # 60個
+print("a正確率 {} %".format(score * 100 / len(datas)))
 
+print("------------------------------")  # 30個
+
+print("snownlp 訓練 並 存檔")
 snownlp.sentiment.train("tmp_neg_train.csv", "tmp_pos_train.csv")
 snownlp.sentiment.save("tmp_hotel_sentiment.marshal")
+print("snownlp 訓練 並 存檔 OK")
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-"""
-!rm /usr/local/lib/python3.7/dist-packages/snownlp/sentiment/sentiment.marshal.3
-!cp 'hotel_sentiment.marshal.3' /usr/local/lib/python3.7/dist-packages/snownlp/sentiment/sentiment.marshal.3
-"""
-print("------------------------------------------------------------")  # 60個
+# !rm /usr/local/lib/python3.7/dist-packages/snownlp/sentiment/sentiment.marshal.3
+# !cp 'hotel_sentiment.marshal.3' /usr/local/lib/python3.7/dist-packages/snownlp/sentiment/sentiment.marshal.3
 
-"""
 score = 0
-with open("tmp_test_all.csv", "r") as f:
+with open("tmp_test_all.csv", "r", encoding="utf-8") as f:
     datas = f.readlines()
     for data in datas:
-        label = data.split(',')[0]
-        text = data.split(',')[1]
-        if snownlp.SnowNLP(text).sentiments<0.5:
+        label = data.split(",")[0]
+        text = data.split(",")[1]
+        if snownlp.SnowNLP(text).sentiments < 0.5:
             ss = 0
         else:
             ss = 1
         if int(label) == ss:
-            score +=1
-print(" 正確率{}".format(score/len(datas)))
-"""
+            score += 1
 
+print("b正確率 {} %".format(score * 100 / len(datas)))
+
+print("------------------------------------------------------------")  # 60個
+print("snownlp：完整自然語言處理功能 SP")
 print("------------------------------------------------------------")  # 60個
 
 """ 安裝 chatterbot 模組失敗
@@ -412,24 +361,20 @@ question = '如何借用「輪椅」、「推床」？'
 print('問：{}'.format(question))
 response = chatbot.get_response(question)
 print('答：{}\n'.format(response))
-
-print('------------------------------------------------------------')	#60個
-
 """
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -444,4 +389,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
