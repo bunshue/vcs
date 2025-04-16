@@ -172,8 +172,8 @@ model.add(Dense(units=10, activation="softmax"))
 
 model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
 
-print("印出CNN模型參數")
-model.summary()
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 from tensorflow.keras.callbacks import (
     ModelCheckpoint,
@@ -373,8 +373,8 @@ pred = np.argmax(model.predict(X_test[0:10]), axis=1)
 
 print(pred)
 
-print("檢視神經網路")
-model.summary()  #檢視神經網路
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 """
 print("------------------------------------------------------------")  # 60個

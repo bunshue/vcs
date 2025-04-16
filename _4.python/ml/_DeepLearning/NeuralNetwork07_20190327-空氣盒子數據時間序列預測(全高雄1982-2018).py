@@ -28,7 +28,8 @@ from matplotlib.pylab import rcParams
 
 rcParams["figure.figsize"] = 20, 10
 
-from sklearn.preprocessing import MinMaxScaler# MMS特徵縮放
+from sklearn.preprocessing import MinMaxScaler  # MMS特徵縮放
+
 scaler = MinMaxScaler(feature_range=(0, 1))
 
 df = pd.read_excel("data/TimeSeries_198211-201811.xlsx")
@@ -95,7 +96,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn.preprocessing import MinMaxScaler # MMS特徵縮放
+from sklearn.preprocessing import MinMaxScaler  # MMS特徵縮放
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, LSTM
 
@@ -118,7 +119,7 @@ valid = dataset[2825:, :]
 
 # converting dataset into x_train and y_train
 scaler = MinMaxScaler(feature_range=(0, 1))
-scaled_data = scaler.fit_transform(dataset)# MMS特徵縮放
+scaled_data = scaler.fit_transform(dataset)  # MMS特徵縮放
 
 x_train, y_train = [], []
 for i in range(60, len(train)):
@@ -130,11 +131,13 @@ x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
 
 # create and fit the LSTM network
 model = Sequential()
+
 model.add(LSTM(units=50, return_sequences=True, input_shape=(x_train.shape[1], 1)))
 model.add(LSTM(units=50))
 model.add(Dense(1))
 
 model.compile(loss="mean_squared_error", optimizer="adam")
+
 model.fit(x_train, y_train, epochs=1, batch_size=1, verbose=2)
 
 # predicting 246 values, using past 60 from the train data
@@ -160,10 +163,7 @@ plt.plot(valid[["PM25", "Predictions"]])
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個

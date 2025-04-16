@@ -688,7 +688,9 @@ model.add(Dense(1, activation='linear'))
 sgd = SGD(momentum=0.9, nesterov=True)
 model.compile(loss = 'mean_squared_error', optimizer='sgd')
 
-# NG model.summary()
+# NG
+# print("檢視模型架構")
+# model.summary()  # 檢視模型架構
 
 """ NG
 

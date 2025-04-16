@@ -136,10 +136,24 @@ for i, sentence in enumerate(sumies):
     print("{}. {}".format(i + 1, sentence))
 
 print("------------------------------------------------------------")  # 60個
-
 # snownlp：完整自然語言處理功能
+print("------------------------------------------------------------")  # 60個
 
-# pip install snownlp
+# SnowNLP用法
+
+from snownlp import SnowNLP
+
+s = SnowNLP("跟框架學代碼設計，跟應用學功能設計")
+print(s.words)  # 分詞
+print(s.sentiments)  # 消極or積極，結果在0-1之間
+print(s.tags)  # 詞性標註
+print(s.keywords(3))  # 　關鍵詞
+print(s.summary(3))  # 摘要
+print(s.tf)  # tf
+print(s.idf)  # idf
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 import snownlp
 
@@ -406,18 +420,7 @@ print('------------------------------------------------------------')	#60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# SnowNLP用法
 
-from snownlp import SnowNLP
-
-s = SnowNLP("跟框架學代碼設計，跟應用學功能設計")
-print(s.words)  # 分詞
-print(s.sentiments)  # 消極or積極，結果在0-1之間
-print(s.tags)  # 詞性標註
-print(s.keywords(3))  # 　關鍵詞
-print(s.summary(3))  # 摘要
-print(s.tf)  # tf
-print(s.idf)  # idf
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

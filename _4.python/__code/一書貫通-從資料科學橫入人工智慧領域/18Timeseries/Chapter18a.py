@@ -151,6 +151,9 @@ best_model = sm.tsa.statespace.SARIMAX(sales_ts_log,
                                       enforce_invertibility=True)
 best_results = best_model.fit()
 
+print("檢視模型架構")
+best_results.summary()  # 檢視模型架構
+
 print(best_results.summary().tables[0])
 print(best_results.summary().tables[1])
 

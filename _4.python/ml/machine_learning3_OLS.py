@@ -99,13 +99,11 @@ exp[["Income", "avg_exp", "Age", "dist_home_val"]].corr(method="pearson")
 # 简单线性回归
 
 lm_s = ols("avg_exp ~ Income+Age+dist_home_val", data=exp).fit()
-cc = lm_s.summary()
-print(cc)
+
+print("檢視模型架構")
+lm_s.summary()  # 檢視模型架構
 
 # Predict-在原始数据集上得到预测值和残差
-
-cc = lm_s.summary()
-print(cc)
 
 cc = pd.DataFrame([lm_s.predict(exp), lm_s.resid], index=["predict", "resid"]).T.head()
 print(cc)
@@ -522,8 +520,9 @@ print(cc)
 # 简单线性回归
 
 lm_s = ols("ARPU ~ AvgARPU", data=arpu_known).fit()
-cc = lm_s.summary()
-print(cc)
+
+print("檢視模型架構")
+lm_s.summary()  # 檢視模型架構
 
 # 多元线性回归
 
@@ -1528,9 +1527,9 @@ Y = model_final.iloc[:, -1]
 formula = "TARGET_D ~ " + "+".join(final_var)
 
 donation_model = ols(formula, model_final).fit()
-# summarize our model
-print(donation_model.summary())
 
+print("檢視模型架構")
+donation_model.summary()  # 檢視模型架構
 
 # # 模型验证A（验证）阶段
 

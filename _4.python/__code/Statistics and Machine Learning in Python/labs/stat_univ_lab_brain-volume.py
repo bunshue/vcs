@@ -186,7 +186,10 @@ print("Oneway Anova gm_f ~ site F=%.2f, p-value=%E" % (fstat, pval))
 # Stats with statsmodels
 
 anova = smfrmla.ols("gm_f ~ site", data=brain_vol1).fit()
-# print(anova.summary())
+
+print("檢視模型架構")
+anova.summary()  # 檢視模型架構
+
 print("Site explains %.2f%% of the grey matter fraction variance" %
       (anova.rsquared * 100))
 
@@ -230,13 +233,19 @@ print("Decrease seems faster in patient than in control population")
 
 print("--- In control population ---")
 lr = smfrmla.ols("gm_f ~ age", data=brain_vol1_ctl).fit()
-print(lr.summary())
+
+print("檢視模型架構")
+lr.summary()  # 檢視模型架構
+
 print("Age explains %.2f%% of the grey matter fraction variance" %
       (lr.rsquared * 100))
 
 print("--- In patient population ---")
 lr = smfrmla.ols("gm_f ~ age", data=brain_vol1_pat).fit()
-print(lr.summary())
+
+print("檢視模型架構")
+lr.summary()  # 檢視模型架構
+
 print("Age explains %.2f%% of the grey matter fraction variance" %
       (lr.rsquared * 100))
 

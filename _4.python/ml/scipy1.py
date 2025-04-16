@@ -13,7 +13,6 @@ scipy.stats
 scipy.signal
 
 scipy.stats.norm
-
 """
 
 import scipy
@@ -748,8 +747,8 @@ model = sm.OLS(
     endog=data["AVGEXP"], exog=data[["AGE", "INCOME", "INCOMESQ", "OWNRENT"]]
 ).fit()
 
-print("多元線性迴歸 總結")
-print(model.summary())
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 print("------------------------------------------------------------")  # 60個
 
@@ -763,8 +762,8 @@ model = sm.Logit(
     endog=data["OWNRENT"], exog=data[["AVGEXP", "AGE", "INCOME", "INCOMESQ"]]
 ).fit()
 
-print("邏輯迴歸 總結")
-print(model.summary())
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1685,7 +1684,9 @@ import statsmodels.api as sm
 
 ## Fit and summary:
 model = sm.OLS(y, X).fit()
-print(model.summary())
+
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 # prediction of new values
 ypred = model.predict(X)
@@ -1702,7 +1703,9 @@ df = pd.DataFrame(np.column_stack([X, y]), columns=["inter", "x1", "x2", "x3", "
 print(df.columns, df.shape)
 # Build a model excluding the intercept, it is implicit
 model = smf.ols("y~x1 + x2 + x3", df).fit()
-print(model.summary())
+
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2015,7 +2018,9 @@ pval = stats.f.sf(fval, 1, n - 2)
 from statsmodels.formula.api import ols
 
 model = ols("salary ~ experience", salary)
+
 results = model.fit()
+
 print(results.summary())
 
 ## With sklearn

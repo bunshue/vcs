@@ -47,7 +47,9 @@ import statsmodels.api as sm
 
 ## Fit and summary:
 model = sm.OLS(y, X).fit()
-print(model.summary())
+
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 # prediction of new values
 ypred = model.predict(X)
@@ -66,9 +68,9 @@ df = pd.DataFrame(np.column_stack([X[:, 1:], y]), columns=['x1','x2', 'x3', 'y']
 
 ## Fit and summary:
 model = smfrmla.ols("y ~ x1 + x2 + x2", df).fit()
-print(model.summary())
 
-
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 oneway = smfrmla.ols('salary ~ management + experience', salary).fit()
 

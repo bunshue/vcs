@@ -92,9 +92,8 @@ model.add(Dense(1))
 model.add(Activation("sigmoid"))
 model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
 
-print("檢視神經網路")
-model.summary()  # 檢視神經網路
-
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 """ TBD
 model.fit(x_train, yb_train, batch_size=100, epochs=20)  # 學習訓練.fit
@@ -152,8 +151,8 @@ model.add(Dense(6, input_shape=(4,), activation="relu"))
 model.add(Dense(6, activation="relu"))
 model.add(Dense(3, activation="softmax"))
 
-print("檢視神經網路")
-model.summary()  # 檢視神經網路
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
@@ -395,8 +394,8 @@ model.add(Dense(256, activation="sigmoid"))
 model.add(Dense(128, activation="relu"))
 model.add(Dense(10, activation="softmax"))
 
-print("檢視神經網路")
-model.summary()  # 檢視神經網路
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -506,8 +505,8 @@ model.add(Dense(1, activation="sigmoid"))
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
 
-print("檢視神經網路1")
-model.summary()  # 檢視神經網路
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 # (128+128+1)*4*128 = 131584
 
@@ -589,8 +588,8 @@ model.add(Dense(1, activation="sigmoid"))
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
 
-print("檢視神經網路2")
-model.summary()  # 檢視神經網路
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 # (4*7 + 4)*K = 128
 

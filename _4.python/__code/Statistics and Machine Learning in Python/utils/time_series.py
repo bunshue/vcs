@@ -384,7 +384,10 @@ from statsmodels.tsa.arima_model import ARMA
 
 model = ARMA(x, order=(1,1)).fit() # fit model
 
-print(model.summary())
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
+
 plt.plot(x)
 plt.plot(model.predict(), color='red')
 plt.title('RSS: %.4f'% sum((model.fittedvalues-x)**2))
+

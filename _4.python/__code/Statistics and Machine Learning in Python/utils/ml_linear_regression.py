@@ -137,7 +137,9 @@ def plot3d(X, Y, Z, point, zlim=None, ax=None, fig=None, xylabelsize=33):
 import statsmodels.api as sm
 ## Fit and summary:
 model = sm.OLS(y, X).fit()
-print(model.summary())
+
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 dx = dy = 50
 beta1, beta2 = np.meshgrid(

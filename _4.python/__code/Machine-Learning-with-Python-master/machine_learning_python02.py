@@ -908,7 +908,8 @@ optimizer=keras.optimizers.Adam(lr=0.01)
 
 model.compile(loss='binary_crossentropy', optimizer=optimizer,metrics=['accuracy'])
 
-model.summary()
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 hist=run_NN(model,X_train_scaled,y_train,X_val_scaled,y_val,verbosity=1,batch_size=256,
             num_epochs=100,plot_loss=True)

@@ -561,52 +561,6 @@ print(forest.score(dx_test, dy_test))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.utils import to_categorical
-
-print("讀取csv檔案成df 5")
-filename = "data/iris.csv"
-df = pd.read_csv(filename)
-
-label_encoder = preprocessing.LabelEncoder()
-df["target"] = label_encoder.fit_transform(df["target"])
-
-dataset = df.values
-np.random.shuffle(dataset)
-X = dataset[:, 0:4].astype(float)
-Y = to_categorical(dataset[:, 4])
-
-scaler = preprocessing.StandardScaler()
-X = scaler.fit_transform(X)
-
-X_train, Y_train = X[:120], Y[:120]
-X_test, Y_test = X[120:], Y[120:]
-
-model = Sequential()
-model.add(Dense(6, input_shape=(4,), activation="relu"))
-model.add(Dense(6, activation="relu"))
-model.add(Dense(3, activation="softmax"))
-
-cc = model.summary()
-print(cc)
-
-model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
-
-model.fit(X_train, Y_train, epochs=100, batch_size=5)  # 學習訓練.fit
-
-loss, accuracy = model.evaluate(X_test, Y_test)
-print("Accuracy = {:.2f}".format(accuracy))
-
-y_pred = np.argmax(model.predict(X_test), axis=-1)
-print("預測結果 :\n", y_pred, sep="")
-
-y_target = dataset[:, 4][120:].astype(int)
-print(y_target)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("決策樹")
 
 import pydotplus  # 做圖工具
@@ -1230,6 +1184,271 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
+# clustering
+from sklearn import cluster
+
+iris = datasets.load_iris()
+X = iris.data[:, :2]  # use only 'sepal length and sepal width'
+y_iris = iris.target
+
+CLUSTERS = 2  # 要分成的群數
+print("使用KMeans分成", CLUSTERS, "群")
+km2 = KMeans(n_clusters=CLUSTERS).fit(X)  # K-平均演算法  # 學習訓練.fit
+
+CLUSTERS = 3  # 要分成的群數
+print("使用KMeans分成", CLUSTERS, "群")
+km3 = KMeans(n_clusters=CLUSTERS).fit(X)  # K-平均演算法  # 學習訓練.fit
+
+CLUSTERS = 4  # 要分成的群數
+print("使用KMeans分成", CLUSTERS, "群")
+km4 = KMeans(n_clusters=CLUSTERS).fit(X)  # K-平均演算法  # 學習訓練.fit
+
+plt.figure(figsize=(9, 3))
+plt.subplot(131)
+plt.scatter(X[:, 0], X[:, 1], c=km2.labels_)
+plt.title("K=2, J=%.2f" % km2.inertia_)
+
+plt.subplot(132)
+plt.scatter(X[:, 0], X[:, 1], c=km3.labels_)
+plt.title("K=3, J=%.2f" % km3.inertia_)
+
+plt.subplot(133)
+plt.scatter(X[:, 0], X[:, 1], c=km4.labels_)  # .astype(np.float))
+plt.title("K=4, J=%.2f" % km4.inertia_)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import cluster
+
+iris = datasets.load_iris()
+X = iris.data[:, :2]  # 'sepal length (cm)''sepal width (cm)'
+y_iris = iris.target
+
+ward2 = cluster.AgglomerativeClustering(n_clusters=2, linkage="ward").fit(X)  # 學習訓練.fit
+ward3 = cluster.AgglomerativeClustering(n_clusters=3, linkage="ward").fit(X)  # 學習訓練.fit
+ward4 = cluster.AgglomerativeClustering(n_clusters=4, linkage="ward").fit(X)  # 學習訓練.fit
+
+plt.figure(figsize=(9, 3))
+plt.subplot(131)
+plt.scatter(X[:, 0], X[:, 1], c=ward2.labels_)
+plt.title("K=2")
+
+plt.subplot(132)
+plt.scatter(X[:, 0], X[:, 1], c=ward3.labels_)
+plt.title("K=3")
+
+plt.subplot(133)
+plt.scatter(X[:, 0], X[:, 1], c=ward4.labels_)  # .astype(np.float))
+plt.title("K=4")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+sklearn.model_selection.learning_curve学习曲线
+这个函数的作用为：对于不同大小的训练集，确定交叉验证训练和测试的分数。一个交叉验证发生器将整个数据集分割k次，分割成训练集和测试集。不同大小的训练集的子集将会被用来训练评估器并且对于每一个大小的训练子集都会产生一个分数，然后测试集的分数也会计算。然后，对于每一个训练子集，运行k次之后的所有这些分数将会被平均
+sklearn.model_selection.learning_curve(estimator, X, y, *, groups=None, train_sizes=array([0.1, 0.33, 0.55, 0.78, 1. ]), 
+cv=None, scoring=None, exploit_incremental_learning=False, n_jobs=None, pre_dispatch='all', verbose=0, shuffle=False, random_state=None, error_score=nan, return_times=False)
+参数：
+（1）estimator：基模型（如决策树、逻辑回归等）
+（2）x：特征值（不包括label），如果不支持df格式，我们就用df.values
+（3）y：label 目标值
+（4）groups：将数据集拆分为训练/测试集时使用的样本的标签分组
+（5）train_sizes:array-like, shape (n_ticks,), dtype float or int：训练示例的相对或绝对数量，将用于生成学习曲线。如果dtype为float，默认为np.linspace（0.1，1.0，5）
+（6）cv：交叉验证折数，默认的5折交叉验证，如果基模型是分类器，且y是二分类或者是多分类，这使用StratifiedKFold，其他情况默认使用KFold
+
+返回：
+train_sizes_abs：array, shape = (n_unique_ticks,), dtype int：用于生成learning curve的训练集的样本数。由于重复的输入将会被删除，所以ticks可能会少于n_ticks.
+train_scores : array, shape (n_ticks, n_cv_folds)：在训练集上的分数
+test_scores : array, shape (n_ticks, n_cv_folds)：在测试集上的分数
+"""
+
+"""
+sklearn.learning_curve	学习曲线函数：
+
+from sklearn.learning_curve import learning_curve
+调用格式：
+learning_curve(estimator, X, y, train_sizes=array([0.1, 0.325, 0.55, 0.775, 1. ]), cv=None, scoring=None, exploit_incremental_learning=False, n_jobs=1, pre_dispatch='all', verbose=0)　　
+# exploit 开发，开拓　　incremental 增加的　　dispatch 派遣，分派　　verbose 冗长的
+参数：
+estimator：分类器
+X：训练向量
+y：目标相对于X分类或者回归
+train_sizes：训练样本相对的或绝对的数字，这些量的样本将会生成learning curve。
+cv：确定交叉验证的分离策略（None：使用默认的3-fold cross-validation；integer：确定几折交叉验证）
+verbose：整型，可选择的。控制冗余：越高，有越多的信息。
+返回值：
+train_sizes_abs：生成learning curve的训练集的样本数。重复的输入会被删除。
+train_scores：在训练集上的分数
+test_scores：在测试集上的分数
+"""
+
+
+from sklearn.datasets import load_iris
+from sklearn.model_selection import learning_curve
+from sklearn.linear_model import LogisticRegression  # 用于模型预测
+
+iris = load_iris()
+x = iris.data
+y = iris.target
+
+train_sizes, train_scores, test_scores = learning_curve(
+    estimator=LogisticRegression(random_state=1),
+    X=x,
+    y=y,
+    train_sizes=np.linspace(0.5, 1.0, 5),  # 在0.1和1间线性的取10个值
+    cv=10,
+    n_jobs=1,
+)
+
+train_sizes, train_scores, test_scores
+train_mean = np.mean(train_scores, axis=1)
+train_std = np.std(train_scores, axis=1)
+test_mean = np.mean(test_scores, axis=1)
+test_std = np.std(test_scores, axis=1)
+plt.plot(
+    train_sizes,
+    train_mean,
+    color="blue",
+    marker="o",
+    markersize=5,
+    label="training accuracy",
+)
+plt.fill_between(
+    train_sizes,
+    train_mean + train_std,
+    train_mean - train_std,
+    alpha=0.15,
+    color="blue",
+)
+plt.plot(
+    train_sizes,
+    test_mean,
+    color="green",
+    linestyle="--",
+    marker="s",
+    markersize=5,
+    label="validation accuracy",
+)
+plt.fill_between(
+    train_sizes, test_mean + test_std, test_mean - test_std, alpha=0.15, color="green"
+)
+plt.grid()
+plt.xlabel("Number of training samples")
+plt.ylabel("Accuracy")
+plt.legend(loc="lower right")
+plt.ylim([0.6, 1.0])
+plt.tight_layout()
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("看相關係數")
+
+print("load_iris()轉df")
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target  # 資料集目標
+
+df = pd.DataFrame(X, columns=iris.feature_names)
+
+print("觀察資料集彙總資訊")  # 了解行資料的標題與資料型別(整數、浮點數、字串等)
+# many df.info()  # 這樣就已經把資料集彙總資訊印出來
+
+print("描述統計量")
+cc = df.describe()
+# many print(cc)
+
+M, N = df.shape
+print("df之大小", M, "X", N)
+
+print("iris 資料集欄名columns")
+cc = df.columns
+print(cc)
+"""
+print("萼長SL")
+print(df["sepal length (cm)"].head())
+print("萼寬SW")
+print(df["sepal width (cm)"].head())
+print("瓣長PL")
+print(df["petal length (cm)"].head())
+print("瓣寬PW")
+print(df["petal width (cm)"].head())
+"""
+print(df)
+
+
+df.columns = ["SL", "SW", "PL", "PW"]
+
+corr = df.corr()  # 查看數據間的相關係數
+print(corr)
+
+sns.set(font_scale=1.5)
+
+sns.set_context({"figure.figsize": (8, 8)})
+sns.heatmap(data=corr, square=True, cmap="RdBu_r", annot=True)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("神經網路")
+print("------------------------------------------------------------")  # 60個
+
+
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.utils import to_categorical
+
+print("讀取csv檔案成df 5")
+filename = "data/iris.csv"
+df = pd.read_csv(filename)
+
+label_encoder = preprocessing.LabelEncoder()
+df["target"] = label_encoder.fit_transform(df["target"])
+
+dataset = df.values
+np.random.shuffle(dataset)
+X = dataset[:, 0:4].astype(float)
+Y = to_categorical(dataset[:, 4])
+
+scaler = preprocessing.StandardScaler()
+X = scaler.fit_transform(X)
+
+X_train, Y_train = X[:120], Y[:120]
+X_test, Y_test = X[120:], Y[120:]
+
+model = Sequential()
+model.add(Dense(6, input_shape=(4,), activation="relu"))
+model.add(Dense(6, activation="relu"))
+model.add(Dense(3, activation="softmax"))
+
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
+
+model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+
+model.fit(X_train, Y_train, epochs=100, batch_size=5)  # 學習訓練.fit
+
+loss, accuracy = model.evaluate(X_test, Y_test)
+print("Accuracy = {:.2f}".format(accuracy))
+
+y_pred = np.argmax(model.predict(X_test), axis=-1)
+print("預測結果 :\n", y_pred, sep="")
+
+y_target = dataset[:, 4][120:].astype(int)
+print(y_target)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 # 以下很久
 
 iris = datasets.load_iris()
@@ -1574,221 +1793,6 @@ y_pred = classes_x
 
 print("predict_classes:", y_pred)
 print("y_test", y_test[:])
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# clustering
-from sklearn import cluster
-
-iris = datasets.load_iris()
-X = iris.data[:, :2]  # use only 'sepal length and sepal width'
-y_iris = iris.target
-
-CLUSTERS = 2  # 要分成的群數
-print("使用KMeans分成", CLUSTERS, "群")
-km2 = KMeans(n_clusters=CLUSTERS).fit(X)  # K-平均演算法  # 學習訓練.fit
-
-CLUSTERS = 3  # 要分成的群數
-print("使用KMeans分成", CLUSTERS, "群")
-km3 = KMeans(n_clusters=CLUSTERS).fit(X)  # K-平均演算法  # 學習訓練.fit
-
-CLUSTERS = 4  # 要分成的群數
-print("使用KMeans分成", CLUSTERS, "群")
-km4 = KMeans(n_clusters=CLUSTERS).fit(X)  # K-平均演算法  # 學習訓練.fit
-
-plt.figure(figsize=(9, 3))
-plt.subplot(131)
-plt.scatter(X[:, 0], X[:, 1], c=km2.labels_)
-plt.title("K=2, J=%.2f" % km2.inertia_)
-
-plt.subplot(132)
-plt.scatter(X[:, 0], X[:, 1], c=km3.labels_)
-plt.title("K=3, J=%.2f" % km3.inertia_)
-
-plt.subplot(133)
-plt.scatter(X[:, 0], X[:, 1], c=km4.labels_)  # .astype(np.float))
-plt.title("K=4, J=%.2f" % km4.inertia_)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from sklearn import cluster
-
-iris = datasets.load_iris()
-X = iris.data[:, :2]  # 'sepal length (cm)''sepal width (cm)'
-y_iris = iris.target
-
-ward2 = cluster.AgglomerativeClustering(n_clusters=2, linkage="ward").fit(X)  # 學習訓練.fit
-ward3 = cluster.AgglomerativeClustering(n_clusters=3, linkage="ward").fit(X)  # 學習訓練.fit
-ward4 = cluster.AgglomerativeClustering(n_clusters=4, linkage="ward").fit(X)  # 學習訓練.fit
-
-plt.figure(figsize=(9, 3))
-plt.subplot(131)
-plt.scatter(X[:, 0], X[:, 1], c=ward2.labels_)
-plt.title("K=2")
-
-plt.subplot(132)
-plt.scatter(X[:, 0], X[:, 1], c=ward3.labels_)
-plt.title("K=3")
-
-plt.subplot(133)
-plt.scatter(X[:, 0], X[:, 1], c=ward4.labels_)  # .astype(np.float))
-plt.title("K=4")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-sklearn.model_selection.learning_curve学习曲线
-这个函数的作用为：对于不同大小的训练集，确定交叉验证训练和测试的分数。一个交叉验证发生器将整个数据集分割k次，分割成训练集和测试集。不同大小的训练集的子集将会被用来训练评估器并且对于每一个大小的训练子集都会产生一个分数，然后测试集的分数也会计算。然后，对于每一个训练子集，运行k次之后的所有这些分数将会被平均
-sklearn.model_selection.learning_curve(estimator, X, y, *, groups=None, train_sizes=array([0.1, 0.33, 0.55, 0.78, 1. ]), 
-cv=None, scoring=None, exploit_incremental_learning=False, n_jobs=None, pre_dispatch='all', verbose=0, shuffle=False, random_state=None, error_score=nan, return_times=False)
-参数：
-（1）estimator：基模型（如决策树、逻辑回归等）
-（2）x：特征值（不包括label），如果不支持df格式，我们就用df.values
-（3）y：label 目标值
-（4）groups：将数据集拆分为训练/测试集时使用的样本的标签分组
-（5）train_sizes:array-like, shape (n_ticks,), dtype float or int：训练示例的相对或绝对数量，将用于生成学习曲线。如果dtype为float，默认为np.linspace（0.1，1.0，5）
-（6）cv：交叉验证折数，默认的5折交叉验证，如果基模型是分类器，且y是二分类或者是多分类，这使用StratifiedKFold，其他情况默认使用KFold
-
-返回：
-train_sizes_abs：array, shape = (n_unique_ticks,), dtype int：用于生成learning curve的训练集的样本数。由于重复的输入将会被删除，所以ticks可能会少于n_ticks.
-train_scores : array, shape (n_ticks, n_cv_folds)：在训练集上的分数
-test_scores : array, shape (n_ticks, n_cv_folds)：在测试集上的分数
-"""
-
-"""
-sklearn.learning_curve	学习曲线函数：
-
-from sklearn.learning_curve import learning_curve
-调用格式：
-learning_curve(estimator, X, y, train_sizes=array([0.1, 0.325, 0.55, 0.775, 1. ]), cv=None, scoring=None, exploit_incremental_learning=False, n_jobs=1, pre_dispatch='all', verbose=0)　　
-# exploit 开发，开拓　　incremental 增加的　　dispatch 派遣，分派　　verbose 冗长的
-参数：
-estimator：分类器
-X：训练向量
-y：目标相对于X分类或者回归
-train_sizes：训练样本相对的或绝对的数字，这些量的样本将会生成learning curve。
-cv：确定交叉验证的分离策略（None：使用默认的3-fold cross-validation；integer：确定几折交叉验证）
-verbose：整型，可选择的。控制冗余：越高，有越多的信息。
-返回值：
-train_sizes_abs：生成learning curve的训练集的样本数。重复的输入会被删除。
-train_scores：在训练集上的分数
-test_scores：在测试集上的分数
-"""
-
-
-from sklearn.datasets import load_iris
-from sklearn.model_selection import learning_curve
-from sklearn.linear_model import LogisticRegression  # 用于模型预测
-
-iris = load_iris()
-x = iris.data
-y = iris.target
-
-train_sizes, train_scores, test_scores = learning_curve(
-    estimator=LogisticRegression(random_state=1),
-    X=x,
-    y=y,
-    train_sizes=np.linspace(0.5, 1.0, 5),  # 在0.1和1间线性的取10个值
-    cv=10,
-    n_jobs=1,
-)
-
-train_sizes, train_scores, test_scores
-train_mean = np.mean(train_scores, axis=1)
-train_std = np.std(train_scores, axis=1)
-test_mean = np.mean(test_scores, axis=1)
-test_std = np.std(test_scores, axis=1)
-plt.plot(
-    train_sizes,
-    train_mean,
-    color="blue",
-    marker="o",
-    markersize=5,
-    label="training accuracy",
-)
-plt.fill_between(
-    train_sizes,
-    train_mean + train_std,
-    train_mean - train_std,
-    alpha=0.15,
-    color="blue",
-)
-plt.plot(
-    train_sizes,
-    test_mean,
-    color="green",
-    linestyle="--",
-    marker="s",
-    markersize=5,
-    label="validation accuracy",
-)
-plt.fill_between(
-    train_sizes, test_mean + test_std, test_mean - test_std, alpha=0.15, color="green"
-)
-plt.grid()
-plt.xlabel("Number of training samples")
-plt.ylabel("Accuracy")
-plt.legend(loc="lower right")
-plt.ylim([0.6, 1.0])
-plt.tight_layout()
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("看相關係數")
-
-print("load_iris()轉df")
-iris = datasets.load_iris()
-X = iris.data
-y = iris.target  # 資料集目標
-
-df = pd.DataFrame(X, columns=iris.feature_names)
-
-print("觀察資料集彙總資訊")  # 了解行資料的標題與資料型別(整數、浮點數、字串等)
-# many df.info()  # 這樣就已經把資料集彙總資訊印出來
-
-print("描述統計量")
-cc = df.describe()
-# many print(cc)
-
-M, N = df.shape
-print("df之大小", M, "X", N)
-
-print("iris 資料集欄名columns")
-cc = df.columns
-print(cc)
-"""
-print("萼長SL")
-print(df["sepal length (cm)"].head())
-print("萼寬SW")
-print(df["sepal width (cm)"].head())
-print("瓣長PL")
-print(df["petal length (cm)"].head())
-print("瓣寬PW")
-print(df["petal width (cm)"].head())
-"""
-print(df)
-
-
-df.columns = ["SL", "SW", "PL", "PW"]
-
-corr = df.corr()  # 查看數據間的相關係數
-print(corr)
-
-sns.set(font_scale=1.5)
-
-sns.set_context({"figure.figsize": (8, 8)})
-sns.heatmap(data=corr, square=True, cmap="RdBu_r", annot=True)
-
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

@@ -73,47 +73,6 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-机器学习classification_report方法及precision精确率和recall召回率
-
-classification_report简介
-
-classification_report函数主要用于显示主要分类指标的文本报告
-
-sklearn中的classification_report函数用于显示主要分类指标的文本报告．在报告中显示每个类的精确度，召回率，F1值等信息。 
-主要参数: 
-y_true：1维数组，或标签指示器数组/稀疏矩阵，目标值。 
-y_pred：1维数组，或标签指示器数组/稀疏矩阵，分类器返回的估计值。 
-labels：array，shape = [n_labels]，报表中包含的标签索引的可选列表。 
-target_names：字符串列表，与标签匹配的可选显示名称（相同顺序）。 
-sample_weight：类似于shape = [n_samples]的数组，可选项，样本权重。 
-digits：int，输出浮点值的位数．
-"""
-
-from sklearn.metrics import classification_report
-
-y_true = [0, 1, 2, 2, 2]
-y_pred = [0, 0, 2, 2, 1]
-target_names = ["class 0", "class 1", "class 2"]
-print(classification_report(y_true, y_pred, target_names=target_names))
-
-"""
-其中列表左边的一列为分类的标签名，右边support列为每个标签的出现次数．avg / total行为各列的均值（support列为总和）． 
-precision recall f1-score三列分别为各个类别的精确度/召回率及 F1 F1值．
-"""
-
-from sklearn.metrics import classification_report
-
-y_true = [0, 1, 2, 2, 2]
-y_pred = [0, 0, 2, 2, 1]
-print(classification_report(y_true, y_pred))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-sys.exit()
-
-'''
 print("1維/2維/3維/4維 線性SVC")
 
 iris = datasets.load_iris()
@@ -546,7 +505,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 高级分类器：支持向量机( SVM)与凸优化
 
 from scipy import stats
@@ -668,8 +627,11 @@ iris = datasets.load_iris()
 X = iris.data
 y = iris.target  # 資料集目標
 
+print("全部資料 :")
 print(X)
-X = X[:, :2]  # 取出前兩欄
+
+X = X[:, :2]  # 取出前2欄
+print("取出前2欄 :")
 print(X)
 
 # 資料分割
@@ -787,6 +749,7 @@ from sklearn.feature_selection import SelectFromModel
 
 X, y = datasets.load_iris(return_X_y=True)
 print("X.shape :", X.shape)
+print("y.shape :", y.shape)
 
 # SelectFromModel特徵選取
 
@@ -800,10 +763,6 @@ print("X_new.shape :", X_new.shape)
 print("特徵是否被選取")
 cc = clf.get_support()
 print(cc)
-
-# 3. 不須進行特徵工程
-
-# 4. 資料分割
 
 print("選擇2個特徵")
 X = X_new
@@ -828,7 +787,7 @@ clf = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
 
 clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
-# 7. 模型計分
+# 模型計分
 y_pred = clf.predict(X_test_std)  # 預測.predict
 print("預測結果 :\n", y_pred, sep="")
 
@@ -893,10 +852,6 @@ print("X_new.shape :", X_new.shape)
 cc = clf.get_support()
 print(cc)
 
-# 3. 不須進行特徵工程
-
-# 4. 資料分割
-
 # 選擇2個特徵
 X = X_new
 
@@ -918,7 +873,7 @@ clf = sklearn.linear_model.LogisticRegression()
 
 clf.fit(X_train_std, y_train)  # 學習訓練.fit
 
-# 7. 模型計分
+# 模型計分
 y_pred = clf.predict(X_test_std)  # 預測.predict
 print("預測結果 :\n", y_pred, sep="")
 
@@ -966,13 +921,12 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-def plot_hyperplane(clf, X, y, h=0.02, draw_sv=True, title="hyperplan"):
+def plot_hyperplane(clf, X, y, h=0.02, draw_sv=True):
     # create a mesh to plot in
     x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
     y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
     xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
 
-    plt.title(title)
     plt.xlim(xx.min(), xx.max())
     plt.ylim(yy.min(), yy.max())
     plt.xticks(())
@@ -1010,8 +964,9 @@ clf = SVC(C=1.0, kernel="linear")
 
 clf.fit(X, y)
 
-plt.figure(figsize=(12, 4))
-plot_hyperplane(clf, X, y, h=0.01, title="Maximum Margin Hyperplan")
+plt.figure(figsize=(10, 4))
+plot_hyperplane(clf, X, y, h=0.01)
+plt.title("Maximum Margin Hyperplan")
 
 show()
 
@@ -1032,17 +987,25 @@ clf_rbf2 = SVC(C=1.0, kernel="rbf", gamma=0.1)
 
 plt.figure(figsize=(10, 10))
 
-clfs = [clf_linear, clf_poly, clf_rbf, clf_rbf2]
-titles = [
-    "Linear Kernel",
-    "Polynomial Kernel with Degree=3",
-    "Gaussian Kernel with $\gamma=0.5$",
-    "Gaussian Kernel with $\gamma=0.1$",
-]
-for clf, i in zip(clfs, range(len(clfs))):
-    clf.fit(X, y)
-    plt.subplot(2, 2, i + 1)
-    plot_hyperplane(clf, X, y, title=titles[i])
+plt.subplot(221)
+clf_linear.fit(X, y)
+plot_hyperplane(clf_linear, X, y)
+plt.title("Linear Kernel")
+
+plt.subplot(222)
+clf_poly.fit(X, y)
+plot_hyperplane(clf_poly, X, y)
+plt.title("Polynomial Kernel with Degree=3")
+
+plt.subplot(223)
+clf_rbf.fit(X, y)
+plot_hyperplane(clf_rbf, X, y)
+plt.title("Gaussian Kernel with $\gamma=0.5$")
+
+plt.subplot(224)
+clf_rbf2.fit(X, y)
+plot_hyperplane(clf_rbf2, X, y)
+plt.title("Gaussian Kernel with $\gamma=0.1$")
 
 show()
 

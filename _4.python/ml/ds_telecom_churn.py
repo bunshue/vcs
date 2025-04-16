@@ -698,7 +698,9 @@ lg = smf.glm(
     data=train,
     family=sm.families.Binomial(sm.families.links.logit()),
 ).fit()
-lg.summary()
+
+print("檢視模型架構")
+lg.summary()  # 檢視模型架構
 
 # 預測
 train["proba"] = lg.predict(train)  # 預測.predict
@@ -753,7 +755,9 @@ formula = "churn ~ C(avgplan)"
 lg_m = smf.glm(
     formula=formula, data=train, family=sm.families.Binomial(sm.families.links.logit())
 ).fit()
-lg_m.summary()
+
+print("檢視模型架構")
+lg_m.summary()  # 檢視模型架構
 
 
 # 多元邏輯回歸
@@ -812,7 +816,9 @@ candidates = [
 data_for_select = train[candidates]
 
 lg_m1 = forward_select(data=data_for_select, response="churn")
-lg_m1.summary()
+
+print("檢視模型架構")
+lg_m1.summary()  # 檢視模型架構
 
 # Seemingly wrong when using 'statsmmodels.stats.outliers_influence.variance_inflation_factor'
 

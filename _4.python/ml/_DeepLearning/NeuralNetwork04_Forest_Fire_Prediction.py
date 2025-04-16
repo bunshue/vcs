@@ -370,7 +370,9 @@ model.add(Activation("selu"))
 model.add(Dense(50))
 model.add(Activation("elu"))
 model.add(Dense(1))
-model.summary()
+
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 # Learning rate and optimizer
 

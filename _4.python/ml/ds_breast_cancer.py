@@ -6,7 +6,8 @@ breast_cancer
 569組資料 30個特徵
 
 特徵：
-feature_names : ['mean radius' 'mean texture' 'mean perimeter' 'mean area'
+feature_names : [
+ 'mean radius' 'mean texture' 'mean perimeter' 'mean area'
  'mean smoothness' 'mean compactness' 'mean concavity'
  'mean concave points' 'mean symmetry' 'mean fractal dimension'
  'radius error' 'texture error' 'perimeter error' 'area error'
@@ -14,7 +15,8 @@ feature_names : ['mean radius' 'mean texture' 'mean perimeter' 'mean area'
  'concave points error' 'symmetry error' 'fractal dimension error'
  'worst radius' 'worst texture' 'worst perimeter' 'worst area'
  'worst smoothness' 'worst compactness' 'worst concavity'
- 'worst concave points' 'worst symmetry' 'worst fractal dimension']
+ 'worst concave points' 'worst symmetry' 'worst fractal dimension'
+]
 
 半徑(radius) 平均值、標準誤、最差值
 紋理(texture) 平均值、標準誤、最差值
@@ -69,6 +71,9 @@ from sklearn.metrics import ConfusionMatrixDisplay  # 混淆矩陣圖
 from sklearn.datasets import make_classification
 from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import AdaBoostClassifier
+from sklearn.pipeline import make_pipeline
+
+import sklearn
 
 # 不要顯示一些警告
 import warnings
@@ -77,7 +82,7 @@ warnings.filterwarnings("ignore")
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
@@ -1229,18 +1234,10 @@ X_train, X_test, y_train, y_test = train_test_split(
     breast_cancer.data[:, :6], breast_cancer.target, test_size=0.20
 )
 
-# 模型訓練
-from sklearn.pipeline import make_pipeline
-
 # 特徵縮放
 pipe = make_pipeline(sklearn.preprocessing.StandardScaler(), SVC(probability=True))
 
 pipe.fit(X_train, y_train)  # 學習訓練.fit
-
-"""
-Pipeline(steps=[('standardscaler', StandardScaler()),
-                ('svc', SVC(probability=True))])
-"""
 
 # 模型預測
 y_pred_proba = pipe.predict_proba(X_test)
@@ -1380,7 +1377,6 @@ K折分數: [1.         1.         0.91666667 0.91666667 0.90909091 1.
  0.81818182 0.90909091 1.         1.        ]
 平均值: 0.95, 標準差: 0.06
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1405,13 +1401,9 @@ from sklearn.naive_bayes import GaussianNB
 
 base_estimator = GaussianNB()
 
-clf = BaggingClassifier(estimator=base_estimator, n_estimators=50)
+clf = BaggingClassifier(base_estimator, n_estimators=50)
 
 clf.fit(X_train_std, y_train)  # 學習訓練.fit
-
-"""
-BaggingClassifier(estimator=GaussianNB(), n_estimators=50)
-"""
 
 print("計算準確率")
 print(f"{clf.score(X_test_std, y_test)*100:.2f}%")
@@ -1433,7 +1425,7 @@ cc = clf.predict(X_test_std)
 print(cc)
 
 # 交叉驗證
-clf2 = BaggingClassifier(estimator=base_estimator, n_estimators=50)
+clf2 = BaggingClassifier(base_estimator, n_estimators=50)
 scores = cross_val_score(estimator=clf2, X=X_test_std, y=y_test, cv=10, n_jobs=-1)
 
 print(f"K折分數: %s" % scores)
@@ -1466,7 +1458,7 @@ X, y = make_classification(
 
 # BaggingClassifier 交叉驗證
 base_estimator = GaussianNB()
-clf3 = BaggingClassifier(estimator=base_estimator)
+clf3 = BaggingClassifier(base_estimator)
 scores = cross_val_score(estimator=clf3, X=X, y=y, cv=10, n_jobs=-1)
 print(f"K折分數: %s" % scores)
 print(f"平均值: {np.mean(scores):.2f}, 標準差: {np.std(scores):.2f}")
@@ -1642,31 +1634,22 @@ def get_models():
 
 
 estimators = get_models()
+
 model = StackingClassifier(estimators=estimators, final_estimator=LogisticRegression())
 
 model.fit(X_train, y_train)  # 學習訓練.fit
 
-"""
-StackingClassifier(estimators=[('knn', KNeighborsClassifier()),
-                               ('cart', DecisionTreeClassifier()),
-                               ('svm', SVC()), ('bayes', GaussianNB())],
-                   final_estimator=LogisticRegression())
-"""
-
 # 模型評估
 scores = cross_val_score(model, X_test, y_test, cv=10)
 print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
-# 平均分數: 0.9303030303030303, 標準差: 0.08393720596645175
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#  11_05_shapley_value_from_scratch
+# shapley_value_from_scratch
 
 # 自行計算 Shapley value
 # How to calculate shapley values from scratch
-
-from sklearn.pipeline import make_pipeline
 
 X, y = datasets.load_breast_cancer(return_X_y=True, as_frame=True)
 
@@ -1677,11 +1660,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 clf = make_pipeline(sklearn.preprocessing.StandardScaler(), LogisticRegression())
 
 clf.fit(X_train.values, y_train)  # 學習訓練.fit
-
-"""
-Pipeline(steps=[('standardscaler', StandardScaler()),
-                ('logisticregression', LogisticRegression())])
-"""
 
 # 自行計算第16個特徵的Shapley value
 
@@ -1730,6 +1708,7 @@ print(cc)
 
 #'compactness error'
 
+''' NG in kilo
 # 以 SHAP 套件驗證
 
 import shap
@@ -1746,7 +1725,7 @@ print(f"Shaply value calulated from shap: {shap_values[1][j]:.5}")
 # or shap.kmeans(data, K) to summarize the background as K samples.
 
 # Shaply value calulated from shap: 0.01366
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

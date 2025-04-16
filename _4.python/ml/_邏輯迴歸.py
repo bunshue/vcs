@@ -1505,8 +1505,10 @@ show()
 
 import statsmodels.api as sm
 
-model=sm.Logit(y_train, X_train)
-result=model.fit()
+model = sm.Logit(y_train, X_train)
+
+result = model.fit()
+
 print(result.summary())
 
 #顯示權重資訊
@@ -1533,9 +1535,9 @@ X=df2[significant_params]
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-model=sm.Logit(y_train,X_train)
+model = sm.Logit(y_train,X_train)
 
-result=model.fit()
+result = model.fit()
 
 print(result.summary())
 """
@@ -1732,7 +1734,9 @@ lg = smf.glm(
     data=train,
     family=sm.families.Binomial(sm.families.links.logit()),
 ).fit()
-lg.summary()
+
+print("檢視模型架構")
+lg.summary()  # 檢視模型架構
 
 # 预测
 train["proba"] = lg.predict(train)  # 預測.predict
@@ -1781,8 +1785,9 @@ formula = """bad_ind ~ C(used_ind)"""
 lg_m = smf.glm(
     formula=formula, data=train, family=sm.families.Binomial(sm.families.links.logit())
 ).fit()
-lg_m.summary()
 
+print("檢視模型架構")
+lg_m.summary()  # 檢視模型架構
 
 # 多元逻辑回归
 # 向前法
@@ -1846,7 +1851,9 @@ candidates = [
 data_for_select = train[candidates]
 
 lg_m1 = forward_select(data=data_for_select, response="bad_ind")
-lg_m1.summary()
+
+print("檢視模型架構")
+lg_m1.summary()  # 檢視模型架構
 
 
 # Seemingly wrong when using 'statsmmodels.stats.outliers_influence.variance_inflation_factor'
@@ -1903,7 +1910,9 @@ formula = """bad_ind ~ fico_score+ltv+age_oldest_tr+tot_derog+nth+tot_open_tr+ve
 lg_m = smf.glm(
     formula=formula, data=train, family=sm.families.Binomial(sm.families.links.logit())
 ).fit()
-lg_m.summary()
+
+print("檢視模型架構")
+lg_m.summary()  # 檢視模型架構
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

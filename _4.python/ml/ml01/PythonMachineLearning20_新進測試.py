@@ -333,7 +333,9 @@ from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
 
 model = ResNet50(weights="imagenet")
-print(model.summary())  # 顯示模型基本信息
+
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 img_path = "elephant.jpg"
 # img = image.load_img(img_path, target_size=(224, 224))

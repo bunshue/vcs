@@ -333,7 +333,8 @@ model = sm.ols(formula=formula_str, data=df1)
 
 fitted = model.fit()
 
-print(fitted.summary())
+print("檢視模型架構")
+fitted.summary()  # 檢視模型架構
 
 # A new Result dataframe: p-values and statistical significance of the features
 

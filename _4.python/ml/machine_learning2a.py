@@ -109,22 +109,15 @@ from sklearn import svm
 from sklearn import cluster
 from sklearn import decomposition
 from sklearn import model_selection
-from sklearn.ensemble import AdaBoostClassifier
-from sklearn.ensemble import BaggingClassifier
-from sklearn.ensemble import RandomForestClassifier  # 分類模型
-from sklearn.ensemble import GradientBoostingClassifier  # 分類模型
-from sklearn.ensemble import RandomForestRegressor  # 迴歸模型
-from sklearn.ensemble import GradientBoostingRegressor  # 迴歸模型
 
 from sklearn.decomposition import PCA
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
-'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -162,6 +155,7 @@ plt.ylabel("賣出件數")
 plt.title("統計 售價區間 / 賣出件數")
 show()
 
+""" 不能使用參數fit
 sns.histplot(y, kde=True, fit=st.johnsonsu)
 plt.title("使用 Johnson SU")
 show()
@@ -179,6 +173,7 @@ show()
 sns.histplot(y, fit=st.norm)
 plt.title("使用 Normal")
 show()
+"""
 
 res = st.probplot(y, plot=plt)
 plt.title("SalePrice")
@@ -189,12 +184,13 @@ print("------------------------------")  # 30個
 # 把房價做對數變換後再看
 SalePrice_log = np.log(y)
 
+"""
 # transformed histogram and normal probability plot
 sns.histplot(SalePrice_log, fit=st.norm)
 plt.title("使用 Normal")
 # plt.title('SalePrice log')
 show()
-
+"""
 # 另一種查看是否服從正態分布的可視化方法
 res = st.probplot(SalePrice_log, plot=plt)
 print(res)
@@ -374,31 +370,6 @@ train_pred_y = model.predict(train_poly_X)  # 預測.predict
 test_pred_y = model.predict(test_poly_X)  # 預測.predict
 print(mean_squared_error(train_pred_y, train_y))
 print(mean_squared_error(test_pred_y, test_y))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from sklearn.decomposition import TruncatedSVD
-
-data = [
-    [1, 0, 0, 0],
-    [1, 0, 0, 0],
-    [1, 1, 0, 0],
-    [0, 1, 0, 0],
-    [0, 0, 1, 1],
-    [0, 0, 1, 0],
-    [0, 0, 1, 1],
-    [0, 0, 0, 1],
-]
-n_components = 2  # 潛在変數の數
-
-model = TruncatedSVD(n_components=n_components)
-
-model.fit(data)  # 學習訓練.fit
-
-print(model.transform(data))  # 変換したデータ
-print(model.explained_variance_ratio_)  # 寄與率
-print(sum(model.explained_variance_ratio_))  # 累積寄與率
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -963,311 +934,12 @@ print(df2)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-# 06_06_knn_book_recommender
 
-# 以KNN演算法實作書籍推薦
-
-# 書籍資料
-books = pd.read_csv(
-    "D:/_git/vcs/_big_files/Scikit-learn_data/BX-Books.csv",
-    sep=";",
-    on_bad_lines="skip",
-    low_memory=False,
-    encoding="latin-1",
-)
-books.columns = [
-    "ISBN",
-    "bookTitle",
-    "bookAuthor",
-    "yearOfPublication",
-    "publisher",
-    "imageUrlS",
-    "imageUrlM",
-    "imageUrlL",
-]
-
-# 讀者資料
-users = pd.read_csv(
-    "D:/_git/vcs/_big_files/Scikit-learn_data/BX-Users.csv",
-    sep=";",
-    on_bad_lines="skip",
-    encoding="latin-1",
-)
-users.columns = ["userID", "Location", "Age"]
-
-
-# 評價資料
-ratings = pd.read_csv(
-    "D:/_git/vcs/_big_files/Scikit-learn_data/BX-Book-Ratings.csv",
-    sep=";",
-    on_bad_lines="skip",
-    encoding="latin-1",
-)
-ratings.columns = ["userID", "ISBN", "bookRating"]
-
-# 資料探索與分析
-
-# 評價資料筆數
-print(ratings.shape)
-
-cc = ratings.head(10)
-print(cc)
-
-# 評價筆數繪圖
-plt.rc("font", size=15)
-sns.countplot(x="bookRating", data=ratings)
-plt.title("Rating Distribution")
-plt.xlabel("Rating")
-plt.ylabel("Count")
-
-show()
-
-print("大部份書籍都未被評價")
-
-print("書籍資料筆數")
-print(books.shape)
-
-print("讀者資料筆數")
-print(users.shape)
-
-print("讀者年齡分析")
-
-users.Age.hist(bins=[0, 10, 20, 30, 40, 50, 100])
-plt.title("Age Distribution")
-plt.xlabel("Age")
-plt.ylabel("Count")
-# 存圖 plt.savefig("tmp_system2.png", bbox_inches="tight")
-
-show()
-
-print("最多人評分的書籍")
-
-rating_count = pd.DataFrame(ratings.groupby("ISBN")["bookRating"].count())
-top_rating = rating_count.sort_values("bookRating", ascending=False).head()
-print(top_rating)
-
-print("最多人評分的書籍明細")
-
-most_rated_books = pd.DataFrame(top_rating.index, index=np.arange(5), columns=["ISBN"])
-most_rated_books_summary = pd.merge(most_rated_books, books, on="ISBN")
-print(most_rated_books_summary)
-
-print("書籍評價的平均得分")
-
-average_rating = pd.DataFrame(ratings.groupby("ISBN")["bookRating"].mean())
-average_rating["ratingCount"] = pd.DataFrame(
-    ratings.groupby("ISBN")["bookRating"].count()
-)
-cc = average_rating.sort_values("ratingCount", ascending=False).head()
-print(cc)
-
-
-# 觀察: 最多人評分書籍的平均得分並沒有相對比較高
-# 為確保統計顯著性，只保留讀者評分超過200次者，書籍評分超過100次者
-
-counts1 = ratings["userID"].value_counts()
-ratings = ratings[ratings["userID"].isin(counts1[counts1 >= 200].index)]
-counts = ratings["bookRating"].value_counts()
-ratings = ratings[ratings["bookRating"].isin(counts[counts >= 100].index)]
-
-# User-Item matrix
-
-ratings_pivot = ratings.pivot(index="userID", columns="ISBN").bookRating
-userID = ratings_pivot.index
-ISBN = ratings_pivot.columns
-print(ratings_pivot.shape)
-cc = ratings_pivot.head()
-print(cc)
-
-# 任選一本書 0316666343，計算與其他書籍的相關係數
-
-test_book = "0316666343"
-bones_ratings = ratings_pivot[test_book]
-# 計算與其他書籍的相關係數
-similar_to_bones = ratings_pivot.corrwith(bones_ratings)
-corr_bones = pd.DataFrame(similar_to_bones, columns=["pearsonR"])
-corr_bones.dropna(inplace=True)
-
-# 結合書籍評價的平均得分
-corr_summary = corr_bones.join(average_rating["ratingCount"])
-
-# 只保留評價的平均得分>=300
-high_corr_book = (
-    corr_summary[corr_summary["ratingCount"] >= 300]
-    .sort_values("pearsonR", ascending=False)
-    .head(10)
-)
-print(high_corr_book)
-
-# 取得書名
-
-# 取得書名，扣除自己，取前9名
-books_corr_to_bones = pd.DataFrame(
-    high_corr_book.index[1:], index=np.arange(9), columns=["ISBN"]
-)
-corr_books = pd.merge(books_corr_to_bones, books, on="ISBN")
-print(corr_books)
-
-# KNN
-
-# 合併評價表及書籍基本資料
-combine_book_rating = pd.merge(ratings, books, on="ISBN")
-columns = [
-    "yearOfPublication",
-    "publisher",
-    "bookAuthor",
-    "imageUrlS",
-    "imageUrlM",
-    "imageUrlL",
-]
-combine_book_rating = combine_book_rating.drop(columns, axis=1)
-cc = combine_book_rating.head()
-print(cc)
-
-# 去除未評價書籍
-combine_book_rating = combine_book_rating.dropna(axis=0, subset=["bookTitle"])
-# 統計書籍的評價次數
-book_ratingCount = (
-    combine_book_rating.groupby(by=["bookTitle"])["bookRating"]
-    .count()
-    .reset_index()
-    .rename(columns={"bookRating": "totalRatingCount"})[
-        ["bookTitle", "totalRatingCount"]
-    ]
-)
-cc = book_ratingCount.head()
-print(cc)
-
-# 合併評價次數及書籍基本資料
-rating_with_totalRatingCount = combine_book_rating.merge(
-    book_ratingCount, left_on="bookTitle", right_on="bookTitle", how="left"
-)
-cc = rating_with_totalRatingCount.head()
-print(cc)
-
-# 顯示評價次數的統計量
-pd.set_option("display.float_format", lambda x: "%0.3f" % x)
-print(book_ratingCount["totalRatingCount"].describe())
-
-# 顯示百分位數
-print(book_ratingCount["totalRatingCount"].quantile(np.arange(0.9, 1, 0.01)))
-
-# 熱門書籍：只有1%的書籍有超過50次的評分
-
-# 篩選有超過50次評分的書籍
-popularity_threshold = 50
-rating_popular_book = rating_with_totalRatingCount.query(
-    "totalRatingCount >= @popularity_threshold"
-)
-cc = rating_popular_book.head()
-print(cc)
-
-# 合併熱門書籍及讀者基本資料，使用美國及加拿大資料
-
-# 合併熱門書籍及讀者基本資料
-combined = rating_popular_book.merge(
-    users, left_on="userID", right_on="userID", how="left"
-)
-
-# 只考慮美國及加拿大讀者
-us_canada_user_rating = combined[combined["Location"].str.contains("usa|canada")]
-us_canada_user_rating = us_canada_user_rating.drop("Age", axis=1)
-cc = us_canada_user_rating.head()
-print(cc)
-
-print(us_canada_user_rating.shape)
-
-# KNN模型訓練
-
-from scipy.sparse import csr_matrix
-from sklearn.neighbors import NearestNeighbors
-
-# 去除重複值
-us_canada_user_rating = us_canada_user_rating.drop_duplicates(["userID", "bookTitle"])
-# 產生商品與讀者的樞紐分析表，會有很多 null value，均以0替代
-us_canada_user_rating_pivot = us_canada_user_rating.pivot(
-    index="bookTitle", columns="userID", values="bookRating"
-).fillna(0)
-# csr_matrix：壓縮稀疏矩陣，加速矩陣計算
-us_canada_user_rating_matrix = csr_matrix(us_canada_user_rating_pivot.values)
-
-# 找出相似商品，X為每一個讀者的評分
-model_knn = NearestNeighbors(metric="cosine", algorithm="brute")
-model_knn.fit(us_canada_user_rating_matrix)  # 學習訓練.fit
-
-# 測試
-
-# 隨機抽取一件商品作預測
-query_index = np.random.choice(us_canada_user_rating_pivot.shape[0])
-distances, indices = model_knn.kneighbors(
-    np.array(us_canada_user_rating_pivot.iloc[query_index, :]).reshape(1, -1),
-    n_neighbors=6,
-)
-
-# 顯示最相似的前5名商品，並顯示距離(相似性)
-for i in range(0, len(distances.flatten())):
-    if i == 0:  # 第一筆是自己
-        print(f"{us_canada_user_rating_pivot.index[query_index]} 的推薦:")
-    else:
-        print(
-            f"{i}: {us_canada_user_rating_pivot.index[indices.flatten()[i]]}"
-            + f", 距離: {distances.flatten()[i]:.2f}:"
-        )
-
-# SVD 矩陣分解(Matrix Factorization)
-
-# User-Item Matrix
-us_canada_user_rating_pivot2 = us_canada_user_rating.pivot(
-    index="userID", columns="bookTitle", values="bookRating"
-).fillna(0)
-cc = us_canada_user_rating_pivot2.head()
-print(cc)
-
-cc = us_canada_user_rating_pivot2.shape
-print(cc)
-
-X = us_canada_user_rating_pivot2.values.T
-print(X.shape)
-
-# TruncatedSVD 降維至 12 個
-
-# 萃取 12 個特徵
-from sklearn.decomposition import TruncatedSVD
-
-SVD = TruncatedSVD(n_components=12, random_state=17)
-matrix = SVD.fit_transform(X)
-print(matrix.shape)
-
-# 依據 12 個特徵計算 相關係數
-corr = np.corrcoef(matrix)
-print(corr.shape)
-
-# 測試
-
-# 取得 "The Green Mile" 書籍索引值
-us_canada_book_list = list(us_canada_user_rating_pivot2.columns)
-coffey_hands = us_canada_book_list.index("The Green Mile")
-print("The Green Mile 書籍索引值:", coffey_hands)
-
-# 依照索引值找出與其他書的相關係數
-corr_coffey_hands = corr[coffey_hands]
-print(corr_coffey_hands)
-
-# 列出相關係數 > 80% 的書籍
-us_canada_book_title = us_canada_user_rating_pivot2.columns
-cc = list(us_canada_book_title[(corr_coffey_hands >= 0.8)])
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-'''
 """
 ROC曲線
 Receiver operating characteristic curve
 接收者操作特徵曲線
 """
-# 08_07_ draw_roc
-
 # 繪製ROC曲線
 
 # 載入資料
@@ -1382,7 +1054,6 @@ def ensemble_error(n_classifier, error):
 
 cc = ensemble_error(n_classifier=11, error=0.25)
 print(cc)
-
 # 0.03432750701904297
 
 # 測試各種錯誤率，並繪圖
@@ -1390,101 +1061,16 @@ print(cc)
 error_range = np.arange(0.0, 1.01, 0.01)
 ens_errors = [ensemble_error(n_classifier=11, error=error) for error in error_range]
 
-# 修正中文亂碼
-plt.rcParams["font.sans-serif"] = ["Arial Unicode MS"]
-plt.rcParams["axes.unicode_minus"] = False
-
 plt.plot(error_range, ens_errors, label="整體學習", linewidth=2)
 
 plt.plot(error_range, error_range, linestyle="--", label="個別模型", linewidth=2)
 
-plt.title("錯誤率比較", fontsize=18)
-plt.xlabel("個別模型錯誤率", fontsize=14)
-plt.ylabel("整體學習錯誤率", fontsize=14)
-plt.legend(loc="upper left", fontsize=14)
+plt.title("錯誤率比較")
+plt.xlabel("個別模型錯誤率")
+plt.ylabel("整體學習錯誤率")
 plt.grid(alpha=0.5)
 
 show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 06_07_surprise_test
-
-# Surprise 測試
-
-from surprise import SVD
-from surprise import KNNBasic
-from surprise import Dataset
-from surprise import accuracy
-
-# 載入內建 movielens-100k 資料集
-data = Dataset.load_builtin("ml-100k")
-print("user id\titem id\trating\ttimestamp")
-cc = data.raw_ratings[:10]
-print(cc)
-
-# 資料分割, 使用特殊的資料分割函數
-from surprise.model_selection import train_test_split
-
-# 切分為訓練及測試資料，測試資料佔 20%
-trainset, testset = train_test_split(data, test_size=0.2)
-
-# 恢復原本的函數
-from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
-
-# 模型訓練
-
-# 使用 KNN 演算法
-model = KNNBasic()
-
-# 訓練
-model.fit(trainset)  # 學習訓練.fit
-
-# 模型評分
-
-# 測試
-predictions = model.test(testset)
-
-# 計算 RMSE
-accuracy.rmse(predictions)
-
-# RMSE: 0.9874
-
-# SVD
-
-model = SVD()
-
-model.fit(trainset)  # 學習訓練.fit
-
-predictions = model.test(testset)
-
-accuracy.rmse(predictions)
-
-# RMSE: 0.9405
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-y_pred = [0, 1, 0, 0]
-y_true = [0, 1, 0, 1]
-
-accuracy_score(y_true, y_pred)
-
-# The overall precision an recall
-precision_score(y_true, y_pred)
-recall_score(y_true, y_pred)
-
-# Recalls on individual classes: SEN & SPC
-recalls = recall_score(y_true, y_pred, average=None)
-recalls[0]  # is the recall of class 0: specificity
-recalls[1]  # is the recall of class 1: sensitivity
-
-# Balanced accuracy
-b_acc = recalls.mean()
-
-# The overall precision an recall on each individual class
-p, r, f, s = precision_recall_fscore_support(y_true, y_pred)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1513,118 +1099,6 @@ print(
 auc = roc_auc_score(y_true, score_pred)
 print("But the AUC of %.2f demonstrate a good classes separation." % auc)
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-Python如何分解SVD(奇異值分解)
-
-在这个示例中，我们首先创建了一个矩阵 ( A )，然後使用numpy.linalg.svd函数对其进行SVD分解。
-函数返回三个矩阵：( U )、( Sigma ) 和 ( V^T )。
-需要注意的是，numpy.linalg.svd返回的 ( Sigma ) 是一个向量，而不是一个对角矩阵。
-
-#一、使用NumPy库的linalg.svd函数
-#二、使用Scipy库的linalg.svd函数
-"""
-
-A = np.array([[1, 0, 0, 0, 2], [0, 0, 3, 0, 0], [0, 0, 0, 0, 0], [0, 4, 0, 0, 0]])
-print("A矩陣 :")
-print(A)
-print(A.shape)
-
-# 使用NumPy进行SVD分解
-U, Sigma, VT = np.linalg.svd(A)
-
-# 使用Scipy进行SVD分解
-U, Sigma, VT = scipy.linalg.svd(A)
-
-print("U矩阵 :")
-print(U)
-print(U.shape)
-
-print("Sigma对角矩阵 :")
-print(Sigma)
-print(Sigma.shape)
-
-print("VT矩阵 :")
-print(VT)
-print(VT.shape)
-
-"""
-#五、SVD分解的应用
-5.1 数据降维
-SVD在数据降维中有广泛的应用。
-通过SVD分解，我们可以将高维数据映射到低维空间，从而减少计算复杂度和存储空间。
-以下是一个使用SVD进行数据降维的示例：
-"""
-from sklearn.decomposition import TruncatedSVD
-
-X = np.random.rand(100, 50)
-
-# 使用TruncatedSVD进行数据降维
-svd = TruncatedSVD(n_components=10)
-
-X_reduced = svd.fit_transform(X)
-
-print("原始数据形状：", X.shape)
-print("降维後数据形状：", X_reduced.shape)
-
-"""
-5.2 图像压缩
-SVD在图像压缩中也有重要应用。
-通过SVD分解，我们可以将图像数据表示为低秩矩阵，从而减少存储空间和传输带宽。
-以下是一个使用SVD进行图像压缩的示例：
-"""
-
-from skimage import io
-
-# 读取图像
-# filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
-filename = "data/circle.bmp"
-image = io.imread(filename, as_gray=True)
-
-# 使用NumPy进行SVD分解
-U, Sigma, VT = np.linalg.svd(image)
-
-# 选择前k个奇异值进行图像压缩
-k = 50
-
-compressed_image = np.dot(U[:, :k], np.dot(np.diag(Sigma[:k]), VT[:k, :]))
-
-# 显示原图和压缩後的图像
-plt.subplot(1, 2, 1)
-plt.title("Original Image")
-plt.imshow(image, cmap="gray")
-
-plt.subplot(1, 2, 2)
-plt.title("Compressed Image")
-plt.imshow(compressed_image, cmap="gray")
-
-show()
-
-# 在这个示例中，我们首先读取了一张灰度图像，
-# 然後使用NumPy的numpy.linalg.svd函数对其进行SVD分解。
-# 通过选择前 ( k ) 个奇异值，我们可以重构出压缩後的图像。
-
-"""
-1. 什么是SVD分解？
-SVD分解是奇异值分解（Singular Value Decomposition）的缩写，
-是一种矩阵分解的方法。它将一个矩阵分解为三个矩阵的乘积，
-分别是左奇异矩阵、奇异值矩阵和右奇异矩阵。
-
-2. 如何在Python中进行SVD分解？
-在Python中，可以使用NumPy库来进行SVD分解。首先，需要导入NumPy库，
-然後使用numpy.linalg.svd()函数进行分解。
-例如，如果有一个矩阵A，可以使用以下代码进行SVD分解：
-A = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-U, S, V = np.linalg.svd(A)
-
-3. SVD分解有什么应用场景？
-SVD分解在数据分析和机器学习中有广泛的应用。
-它可以用于降维，帮助去除数据中的噪声和冗余信息，从而提取出数据的主要特征。
-此外，SVD分解还可以用于图像压缩、推荐系统、文本挖掘等领域。
-通过SVD分解，我们可以对复杂的数据进行简化和分析，从而得到更有用的信息。
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1671,7 +1145,6 @@ X0 = np.random.multivariate_normal(mean0, Cov, n_samples)
 X1 = np.random.multivariate_normal(mean1, Cov, n_samples)
 X = np.vstack([X0, X1])
 y = np.array([0] * X0.shape[0] + [1] * X1.shape[0])
-
 
 # LDA with scikit-learn
 lda = LDA()
@@ -2318,7 +1791,6 @@ scores = cross_val_score(estimator=model, X=X, y=y, cv=5)
 print("Test  r2:%.2f" % scores.mean())
 
 # Regression dataset where first 2 features are predictives
-np.random.seed(0)
 n_features = 5
 n_features_info = 2
 n_samples = 100
@@ -3232,11 +2704,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-# plt.rcParams['figure.figsize'] = 12, 8
-
-np.random.seed(10)  # Setting seed for reproducability
-
-
 # 以下OK 可搬出
 
 """ NG
@@ -3453,3 +2920,15 @@ print(
 
 
 print("預測結果 :\n", y_pred, sep="")
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個

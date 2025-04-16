@@ -33,6 +33,7 @@ def show():
     plt.show()
     pass
 
+
 print("------------------------------------------------------------")  # 60個
 
 # 忽略ARIMA模型无法估计出结果时的报警信息
@@ -515,7 +516,7 @@ data = pd.read_csv("data/AirPassengers.csv")
 ts = data["#Passengers"]
 
 plt.plot(ts)
-plt.title('旅客人數')
+plt.title("旅客人數")
 show()
 
 print("------------------------------")  # 30個
@@ -526,7 +527,7 @@ ts_diff = ts_log.diff(1)
 ts_diff = ts_diff.dropna()
 
 plt.plot(ts_diff)
-plt.title('旅客人數 => log => diff')
+plt.title("旅客人數 => log => diff")
 show()
 
 print("------------------------------")  # 30個
@@ -536,11 +537,11 @@ from statsmodels.graphics.tsaplots import plot_acf
 from statsmodels.graphics.tsaplots import plot_pacf
 
 f = plot_acf(ts_diff)
-plt.title('plot_acf 自相關圖')
+plt.title("plot_acf 自相關圖")
 show()
 
 f = plot_pacf(ts_diff, method="ols")
-plt.title('plot_pacf 偏自相關圖')
+plt.title("plot_pacf 偏自相關圖")
 show()
 
 print("------------------------------")  # 30個
@@ -580,7 +581,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

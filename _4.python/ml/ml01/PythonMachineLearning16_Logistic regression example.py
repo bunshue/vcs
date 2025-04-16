@@ -235,7 +235,9 @@ formula
 "response ~ age+TSH+T3+TT4+T4U+FTI"
 
 model = smf.glm(formula=formula, data=df_dummies, family=sm.families.Binomial())
+
 result = model.fit()
+
 print(result.summary())
 
 y_pred = (result.predict(X_test) > prob_threshold).apply(int)

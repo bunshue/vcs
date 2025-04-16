@@ -43,7 +43,7 @@ from sklearn import tree
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
@@ -54,20 +54,37 @@ print("------------------------------------------------------------")  # 60個
 
 print("PCA 降維度, 4維 => 2維")
 
-N = 500  # 散點的數量
+N = 20  # 散點的數量
 
-X = np.random.randint(0, 100, size=(N, 4))  # 產生 N x 4 陣列，內容為 0～100 隨機數字
+X = np.random.randint(0, 100, size=(N, 2))  # 產生 N x 4 陣列，內容為 0～100 隨機數字
 
-n_components = 2  # 降維後的維度
+n_components = 1  # 降維後的維度
 
 clf = PCA(n_components=n_components)
 
 clf = clf.fit(X)
+
 X2 = clf.transform(X)
 
-print("轉換前 4維 :", X.shape)
-print("轉換後 2維 :", X2.shape)
+# X2 = clf.fit_transform(X)  # .fit + .transform一起做
 
+print("轉換前 維度 :", X.shape)
+print("轉換後 維度 :", X2.shape)
+
+print(X2)
+plt.subplot(211)
+plt.scatter(X[:, 0], X[:, 1], c="r")
+plt.scatter(X[8, 0], X[8, 1], c="g")
+plt.title("轉換前之第0 1維")
+
+plt.subplot(212)
+plt.scatter(X2[:], X2[:], c="g")
+plt.scatter(X2[8], X2[8], c="r")
+plt.title("轉換前之第2 3維")
+
+show()
+
+"""
 plt.subplot(221)
 plt.scatter(X[:, 0], X[:, 1])
 plt.title("轉換前之第0 1維")
@@ -86,7 +103,7 @@ plt.subplot(224)
 # plt.title('轉換後之第2 3維')
 
 show()
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -187,56 +204,7 @@ print("------------------------------------------------------------")  # 60個
 # decomposition_solutions
 print("------------------------------------------------------------")  # 60個
 
-
-class BasicPCA:
-    def fit(self, X):
-        # U : Unitary matrix having left singular vectors as columns.
-        #     Of shape (n_samples,n_samples) or (n_samples,n_comps), depending on
-        #     full_matrices.
-        #
-        # s : The singular values, sorted in non-increasing order. Of shape (n_comps,),
-        #     with n_comps = min(n_samples, n_features).
-        #
-        # Vh: Unitary matrix having right singular vectors as rows.
-        #     Of shape (n_features, n_features) or (n_comps, n_features) depending on full_matrices.
-        self.mean = X.mean(axis=0)
-        Xc = X - self.mean  # Centering is required
-        U, s, V = scipy.linalg.svd(Xc, full_matrices=False)
-        self.explained_variance_ = (s**2) / X.shape[0]
-        self.explained_variance_ratio_ = (
-            self.explained_variance_ / self.explained_variance_.sum()
-        )
-        self.princ_comp_dir = V
-
-    def transform(self, X):
-        Xc = X - self.mean
-        return np.dot(Xc, self.princ_comp_dir.T)
-
-
-# 1. 自建資料 做 PCA
-# dataset
-n_samples = 100
-experience = np.random.normal(size=n_samples)
-salary = 1500 + experience + np.random.normal(size=n_samples, scale=0.5)
-X = np.column_stack([experience, salary])
-
-X = np.column_stack([experience, salary])
-
-n_components = 2  # 降維後的維度
-clf = PCA(n_components=n_components)
-
-clf.fit(X)
-
-basic_pca = BasicPCA()
-
-basic_pca.fit(X)
-
-print("主成分的方差比例 explained_variance_ratio_")
-print(clf.explained_variance_ratio_)
-# assert np.all(basic_pca.transform(X) == clf.transform(X))
-
-
-# 2. 使用iris資料 做 PCA
+# 使用iris資料 做 PCA
 
 # Apply PCA on iris dataset
 
@@ -308,117 +276,9 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("PCA 算法模擬")
-
-A = np.array([[3, 2000], [2, 3000], [4, 5000], [5, 8000], [1, 2000]], dtype="float")
-
-# 數據歸一化
-mean = np.mean(A, axis=0)
-norm = A - mean
-# 數據縮放
-scope = np.max(norm, axis=0) - np.min(norm, axis=0)
-norm = norm / scope
-print(norm)
-
-U, S, V = np.linalg.svd(np.dot(norm.T, norm))
-print(U)
-
-U_reduce = U[:, 0].reshape(2, 1)
-print(U_reduce)
-
-R = np.dot(norm, U_reduce)
-print(R)
-
-Z = np.dot(R, U_reduce.T)
-print(Z)
-
-print(np.multiply(Z, scope) + mean)
-
-print("------------------------------")  # 30個
-
-print("使用 sklearn 包實現")
-
-from sklearn.pipeline import Pipeline
-
-
-def std_PCA(**argv):
-    scaler = MinMaxScaler()
-    clf = PCA(**argv)
-    pipeline = Pipeline([("scaler", scaler), ("pca", clf)])
-    return pipeline
-
-
-n_components = 1  # 降維後的維度
-clf = std_PCA(n_components=n_components)
-R2 = clf.fit_transform(A)  # .fit + .transform一起做
-print(R2)
-
-print(clf.inverse_transform(R2))
-
-print("------------------------------")  # 30個
-
-print("降維及恢復示意圖")
-
-plt.figure(figsize=(8, 8))
-
-plt.title("Physcial meanings of PCA")
-
-ymin = xmin = -1
-ymax = xmax = 1
-plt.xlim(xmin, xmax)
-plt.ylim(ymin, ymax)
-ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
-ax.spines["right"].set_color("none")  # 隱藏坐標軸
-ax.spines["top"].set_color("none")
-
-plt.scatter(norm[:, 0], norm[:, 1], marker="s", c="b")
-plt.scatter(Z[:, 0], Z[:, 1], marker="o", c="r")
-plt.arrow(0, 0, U[0][0], U[1][0], color="r", linestyle="-")
-plt.arrow(0, 0, U[0][1], U[1][1], color="r", linestyle="--")
-plt.annotate(
-    r"$U_{reduce} = u^{(1)}$",
-    xy=(U[0][0], U[1][0]),
-    xycoords="data",
-    xytext=(U_reduce[0][0] + 0.2, U_reduce[1][0] - 0.1),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-plt.annotate(
-    r"$u^{(2)}$",
-    xy=(U[0][1], U[1][1]),
-    xycoords="data",
-    xytext=(U[0][1] + 0.2, U[1][1] - 0.1),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-plt.annotate(
-    r"raw data",
-    xy=(norm[0][0], norm[0][1]),
-    xycoords="data",
-    xytext=(norm[0][0] + 0.2, norm[0][1] - 0.2),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-plt.annotate(
-    r"projected data",
-    xy=(Z[0][0], Z[0][1]),
-    xycoords="data",
-    xytext=(Z[0][0] + 0.2, Z[0][1] - 0.1),
-    fontsize=10,
-    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
-)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # 實現PCA演算法
 
 # 建立測試資料
-
-# 固定隨機種子
-np.random.seed(2342347)
 
 # 第一個類別
 mu_vec1 = np.array([0, 0, 0])  # 平均數
@@ -729,7 +589,6 @@ from sklearn.manifold import TSNE
 
 # 生成3個集群資料
 
-np.random.seed(10)
 num_points_per_class = 50
 
 # Class 1
@@ -749,12 +608,10 @@ X = np.concatenate([X1, X2, X3], axis=0)
 cc = X.shape
 print(cc)
 
-# 特徵縮放
-scaler = MinMaxScaler()
+scaler = MinMaxScaler()  # 特徵縮放
 X = scaler.fit_transform(X)  # .fit + .transform一起做
 
 # 繪圖
-
 colors = ["red", "green", "blue"]
 for i in range(3):
     plt.scatter(X[i * 50 : (i + 1) * 50, 0], X[i * 50 : (i + 1) * 50, 1], c=colors[i])
@@ -780,7 +637,6 @@ X_pca = PCA(n_components=n_components).fit_transform(X)  # .fit + .transform一�
 for i in range(3):
     plt.scatter(X_pca[i * 50 : (i + 1) * 50], np.zeros(50), c=colors[i])
 show()
-
 
 # 困惑度(perplexity)測試
 
@@ -1035,7 +891,7 @@ print(cc)
 
 from sklearn.preprocessing import StandardScaler
 
-scaler = StandardScaler()
+scaler = StandardScaler()  # 特徵縮放
 
 X = df.drop("Class", axis=1)
 y = df["Class"]
@@ -1301,7 +1157,9 @@ print(pca.explained_variance_)  # 建议保留1个主成分
 print(pca.explained_variance_ratio_)  # 建议保留1个主成分
 
 pca = PCA(n_components=1).fit(data)  # 综上,2个主成分
+
 newdata = pca.fit_transform(data)
+
 citi10_pca = model_data.join(pd.DataFrame(newdata))
 
 # 通过主成分在每个变量上的权重的绝对值大小，确定每个主成分的代表性
@@ -1501,12 +1359,15 @@ print(corr_matrix)
 # 初次查看主成分的解释方差占比
 
 pca = PCA(n_components=3, whiten=True)
+
 newData = pca.fit_transform(data)
+
 pca.explained_variance_ratio_
 
 pca.components_
 
 pca = PCA(n_components=1, whiten=True)
+
 newData = pca.fit_transform(data)
 print(newData.T)
 
@@ -1631,7 +1492,9 @@ print(pca.explained_variance_)  # 建议保留2个主成分
 print(pca.explained_variance_ratio_)  # 建议保留2个主成分
 
 pca = PCA(n_components=2).fit(data)  # 综上,2个主成分
+
 newdata = pca.fit_transform(data)
+
 # 通过主成分在每个变量上的权重的绝对值大小，确定每个主成分的代表性
 pd.DataFrame(pca.components_).T
 # 第一个主成分在第2个变量权重低,其余均高
@@ -1729,6 +1592,7 @@ print(pca.explained_variance_)  # 建议保留2个主成分
 print(pca.explained_variance_ratio_)  # 建议保留3个主成分
 
 pca = PCA(n_components=3).fit(data)  # 综上,2个主成分
+
 newdata = pca.fit_transform(data)
 
 # 通过主成分在每个变量上的权重的绝对值大小，确定每个主成分的代表性
@@ -1813,6 +1677,7 @@ pca_model = SparsePCA(n_components=n_components, alpha=best_alpha)
 pca_model.fit(data)
 pca = pd.DataFrame(pca_model.components_).T
 data = pd.DataFrame(data)
+
 score = pd.DataFrame(pca_model.fit_transform(data))
 
 r = []
@@ -1875,6 +1740,7 @@ print(cc)
 # 变量压缩
 pca = PCA(n_components=2)
 newData = pca.fit_transform(x_scaled)
+
 cc = pca.explained_variance_ratio_
 print(cc)
 
@@ -1903,6 +1769,7 @@ print(cc)
 
 pca = PCA(n_components=3)
 newData = pca.fit_transform(x_scaled)
+
 cc = pca.explained_variance_ratio_
 print(cc)
 
@@ -2265,3 +2132,28 @@ from sklearn import (
 # PCA結果參數
 print(pca.explained_variance_)  # 建议保留9个主成分
 print(pca.explained_variance_ratio_)  # 建议保留8个主成分
+
+
+print("------------------------------------------------------------")  # 60個
+
+n_samples = 100
+experience = np.random.normal(size=n_samples)
+salary = 1500 + experience + np.random.normal(size=n_samples, scale=0.5)
+X = np.column_stack([experience, salary])
+
+X = np.column_stack([experience, salary])
+
+n_components = 2  # 降維後的維度
+clf = PCA(n_components=n_components)
+
+clf.fit(X)
+
+print("主成分的方差比例 explained_variance_ratio_")
+print(clf.explained_variance_ratio_)
+
+
+R2 = clf.fit_transform(A)  # .fit + .transform一起做
+print(R2)
+print(clf.inverse_transform(R2))
+
+ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'

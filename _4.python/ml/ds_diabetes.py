@@ -63,7 +63,7 @@ from sklearn.datasets import make_hastie_10_2
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
@@ -1472,7 +1472,6 @@ rf = DecisionTreeClassifier(max_features=max_features)
 
 num_trees = 100
 
-# model = BaggingClassifier(base_estimator=rf, n_estimators=num_trees, random_state=9487)
 model = BaggingClassifier(rf, n_estimators=num_trees, random_state=9487)
 results = model_selection.cross_val_score(model, x, y, cv=kfold)
 print("Accuracy: %0.2f (+/- %0.2f)" % (results.mean(), results.std()))

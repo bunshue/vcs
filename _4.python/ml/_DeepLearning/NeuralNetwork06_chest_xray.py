@@ -256,17 +256,14 @@ optimizer = SGD(learning_rate=0.01, momentum=0.9)
 
 model.compile(optimizer=optimizer, loss="binary_crossentropy", metrics=["accuracy"])
 
-print("打印模型參數")
-model.summary()
-
-# Model: "sequential"
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 class_weights_arr = class_weight.compute_class_weight(
     class_weight="balanced", classes=np.unique(y_train), y=y_train
 )
 class_weights = dict(enumerate(class_weights_arr))
 print("Class weights:", class_weights)
-
 # Class weights: {0: 1.9448173005219984, 1: 0.6730322580645162}
 
 """ 以下很久
@@ -371,8 +368,8 @@ model_cnn = tf.keras.Sequential(
     ]
 )
 
-print("打印模型參數")
-model_cnn.summary()
+print("檢視模型架構")
+model_cnn.summary()  # 檢視模型架構
 
 model_cnn.compile(
     optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),

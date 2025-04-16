@@ -739,8 +739,8 @@ with plt.style.context(("seaborn-dark")):
     for i, col in enumerate(df.columns[:-1]):
         plt.figure(figsize=(6, 4))
         plt.grid(True)
-        plt.xlabel("Feature:" + col, fontsize=12)
-        plt.ylabel("Output: y", fontsize=12)
+        plt.xlabel("Feature:" + col)
+        plt.ylabel("Output: y")
         plt.scatter(df[col], df["y"], c="red", s=50, alpha=0.6)
 show()
 
@@ -748,8 +748,8 @@ with plt.style.context(("fivethirtyeight")):
     for i, col in enumerate(df.columns[:-1]):
         plt.figure(figsize=(6, 4))
         plt.grid(True)
-        plt.xlabel("Feature:" + col, fontsize=12)
-        plt.ylabel("Output: y", fontsize=12)
+        plt.xlabel("Feature:" + col)
+        plt.ylabel("Output: y")
         plt.hist(df[col], alpha=0.6, facecolor="g")
 show()
 
@@ -762,9 +762,9 @@ print("Relative importance of the features: ", tree_model.feature_importances_)
 with plt.style.context("dark_background"):
     plt.figure(figsize=(10, 7))
     plt.grid(True)
-    plt.yticks(range(n_features + 1, 1, -1), df.columns[:-1], fontsize=20)
-    plt.xlabel("Relative (normalized) importance of parameters", fontsize=15)
-    plt.ylabel("Features\n", fontsize=20)
+    plt.yticks(range(n_features + 1, 1, -1), df.columns[:-1])
+    plt.xlabel("Relative (normalized) importance of parameters")
+    plt.ylabel("Features")
     plt.barh(
         range(n_features + 1, 1, -1), width=tree_model.feature_importances_, height=0.5
     )
@@ -796,9 +796,9 @@ print("Relative importance of the features: ",model.feature_importances_)
 with plt.style.context('dark_background'):
     plt.figure(figsize=(10,7))
     plt.grid(True)
-    plt.yticks(range(n_features+1,1,-1),df.columns[:-1],fontsize=20)
-    plt.xlabel("Relative (normalized) importance of parameters",fontsize=15)
-    plt.ylabel("Features\n",fontsize=20)
+    plt.yticks(range(n_features+1,1,-1),df.columns[:-1])
+    plt.xlabel("Relative (normalized) importance of parameters")
+    plt.ylabel("Features")
     plt.barh(range(n_features+1,1,-1),width=model.feature_importances_,height=0.5)
 show()
 

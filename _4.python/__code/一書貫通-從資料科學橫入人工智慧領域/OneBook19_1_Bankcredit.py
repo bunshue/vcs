@@ -398,6 +398,10 @@ candidates = ['bad_good', 'A1', 'GDP', 'A4', 'A10', 'A11', 'A12','amount', 'dura
 data_for_select = train[candidates]
 
 lg_m1 = forward_select(data=data_for_select, response='bad_good')
+
+print("檢視模型架構")
+lg_m1.summary()  # 檢視模型架構
+
 lg_m1.summary().tables[1]
 
 第五部分：评估模型

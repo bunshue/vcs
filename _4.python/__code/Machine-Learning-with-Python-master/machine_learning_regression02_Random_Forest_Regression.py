@@ -165,7 +165,8 @@ Xs = sm.add_constant(X)
 stat_model = sm.OLS(y, Xs)
 stat_result = stat_model.fit()
 
-print(stat_result.summary())
+print("檢視模型架構")
+stat_result.summary()  # 檢視模型架構
 
 # Make arrays of regression coefficients estimated by the models
 

@@ -510,8 +510,8 @@ logit = sm.Logit(df['Engaged'], df[continuous_vars])
 
 logit_fit = logit.fit()
 
-print('打印.summbary()資料')
-print(logit_fit.summary())
+print("檢視模型架構")
+logit_fit.summary()  # 檢視模型架構
 
 print('------------------------------------------------------------')	#60個
 
@@ -591,8 +591,8 @@ logit_fit = logit.fit()
 
 print(logit_fit)
 
-print('打印.summbary()資料')
-print(logit_fit.summary())
+print("檢視模型架構")
+logit_fit.summary()  # 檢視模型架構
 
 print('------------------------------------------------------------')	#60個
 
@@ -617,8 +617,8 @@ logit_fit = logit.fit()
 
 print(logit_fit)
 
-print('打印.summbary()資料')
-print(logit_fit.summary())
+print("檢視模型架構")
+logit_fit.summary()  # 檢視模型架構
 
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個

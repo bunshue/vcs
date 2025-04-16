@@ -1241,8 +1241,8 @@ ar = ARIMA(df, order=(1, 0, 0))
 
 model = ar.fit()  # 學習訓練.fit
 
-print("檢視神經網路")
-model.summary()  # 檢視神經網路
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 cc = model.params
 print(cc)

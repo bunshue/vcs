@@ -41,14 +41,96 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("多指標評分")
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import precision_recall_fscore_support
 
+y_pred = [0, 1, 0, 0]
+y_true = [0, 1, 0, 1]
+
+accuracy_score(y_true, y_pred)
+
+# The overall precision an recall
+precision_score(y_true, y_pred)
+recall_score(y_true, y_pred)
+
+# Recalls on individual classes: SEN & SPC
+recalls = recall_score(y_true, y_pred, average=None)
+recalls[0]  # is the recall of class 0: specificity
+recalls[1]  # is the recall of class 1: sensitivity
+
+# Balanced accuracy
+b_acc = recalls.mean()
+
+# The overall precision an recall on each individual class
+p, r, f, s = precision_recall_fscore_support(y_true, y_pred)
+
+print("------------------------------------------------------------")  # 60個
 from sklearn.metrics import classification_report
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+机器学习classification_report方法及precision精确率和recall召回率
+
+classification_report简介
+classification_report函数主要用于显示主要分类指标的文本报告
+sklearn中的classification_report函数用于显示主要分类指标的文本报告．在报告中显示每个类的精确度，召回率，F1值等信息。 
+主要参数: 
+y_true：1维数组，或标签指示器数组/稀疏矩阵，目标值。 
+y_pred：1维数组，或标签指示器数组/稀疏矩阵，分类器返回的估计值。 
+labels：array，shape = [n_labels]，报表中包含的标签索引的可选列表。 
+target_names：字符串列表，与标签匹配的可选显示名称（相同顺序）。 
+sample_weight：类似于shape = [n_samples]的数组，可选项，样本权重。
+digits：int，输出浮点值的位数．
+"""
+
+print("多指標評分 classification_report")
 
 y_real = [0, 1, 1, 1, 1, 1, 0, 0, 0, 0]
 y_score = [0.9, 0.75, 0.86, 0.47, 0.55, 0.56, 0.74, 0.22, 0.5, 0.26]
 y_pred = [round(i) for i in y_score]
 print(classification_report(y_real, y_pred))
+
+print("------------------------------")  # 30個
+
+y_true = [0, 1, 2, 2, 2]
+y_pred = [0, 0, 2, 2, 1]
+target_names = ["class 0", "class 1", "class 2"]
+print(classification_report(y_true, y_pred, target_names=target_names))
+
+"""
+其中列表左边的一列为分类的标签名，右边support列为每个标签的出现次数．avg / total行为各列的均值（support列为总和）． 
+precision recall f1-score三列分别为各个类别的精确度/召回率及 F1 F1值．
+"""
+
+print("------------------------------")  # 30個
+
+y_true = [0, 1, 2, 2, 2]
+y_pred = [0, 0, 2, 2, 1]
+print(classification_report(y_true, y_pred))
+
+print("------------------------------------------------------------")  # 60個
+from sklearn.metrics import recall_score
+
+print("------------------------------------------------------------")  # 60個
+
+print("測試 召回率 recall_score")
+
+y_true = [0, 1, 2, 0, 1, 2]
+y_pred = [0, 2, 1, 0, 0, 1]
+cc = recall_score(y_true, y_pred, average="macro")  # doctest: +ELLIPSIS
+print("recall_score :", cc)
+
+cc = recall_score(y_true, y_pred, average="micro")
+print("recall_score :", cc)
+
+cc = recall_score(y_true, y_pred, average="weighted")
+print("recall_score :", cc)
+
+cc = recall_score(y_true, y_pred, average=None)
+print("recall_score :", cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -248,12 +330,12 @@ for i in range(cm.shape[0] - 1, -1, -1):
         ax.text(x=j, y=i, s=cm[i, j], va="center", ha="center")
 
 # 置換刻度
-ax.set_xticks(range(cm.shape[0]), labels=["真", "偽"], fontsize=14)
-ax.set_yticks(range(cm.shape[1]), labels=["真", "偽"], fontsize=14)
+ax.set_xticks(range(cm.shape[0]), labels=["真", "偽"])
+ax.set_yticks(range(cm.shape[1]), labels=["真", "偽"])
 
 # 設定標籤
-plt.xlabel("Predicted label", fontsize=16)
-plt.ylabel("True label", fontsize=16)
+plt.xlabel("Predicted label")
+plt.ylabel("True label")
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -294,12 +376,12 @@ for i in range(cm.shape[0]):
         ax.text(x=j, y=i, s=cm[i, j], va="center", ha="center")
 
 # 置換刻度 NG
-# ax.set_xticks(range(cm.shape[0]), fontsize=14)
-# ax.set_yticks(range(cm.shape[1]), fontsize=14)
+# ax.set_xticks(range(cm.shape[0]))
+# ax.set_yticks(range(cm.shape[1]))
 
 # 設定標籤
-plt.xlabel("Predicted label", fontsize=16)
-plt.ylabel("True label", fontsize=16)
+plt.xlabel("Predicted label")
+plt.ylabel("True label")
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -867,7 +949,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix  # 混淆矩陣
 from sklearn.metrics import roc_curve
-from sklearn.metrics import recall_score
+from sklearn.metrics import recall_score  # 召回率
 
 print("測試 accuracy_score")
 
@@ -906,26 +988,6 @@ plt.plot(fpr, tpr)
 
 show()
 
-print("測試 recall_score")
-
-y_true = [0, 1, 2, 0, 1, 2]
-y_pred = [0, 2, 1, 0, 0, 1]
-cc = recall_score(y_true, y_pred, average="macro")  # doctest: +ELLIPSIS
-print("recall_score :", cc)
-
-cc = recall_score(y_true, y_pred, average="micro")
-print("recall_score :", cc)
-
-cc = recall_score(y_true, y_pred, average="weighted")
-print("recall_score :", cc)
-
-cc = recall_score(y_true, y_pred, average=None)
-print("recall_score :", cc)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -947,4 +1009,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個

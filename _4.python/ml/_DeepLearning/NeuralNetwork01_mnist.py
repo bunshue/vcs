@@ -1,4 +1,51 @@
 """
+深度神經網路 Deep Neural Networks (DNN)
+1.捲積神經網路 Convolutional Neural Network (CNN)
+2.循環神經網路 Recurrent Neural Network (RNN)
+
+CNN包括了3個小層次
+
+卷積層(Convolutional layer) 處理多數的計算、檢查圖像特徵。
+
+池化層(Pooling layer)	圖像掃描及過濾，與卷積層不同的是降低了許多參數，提高了效率降低了複雜性。
+
+全連接層(Fully connected layer) 根據前幾層處理程序來提取特徵進行圖像分類的地方，層層相扣每一層都有相連節點。
+
+神經網路模型(CNN)
+
+隱藏層的數量、隱藏層設計多少神經元
+
+# 設定輸出層 softmax
+
+activation="relu"))
+
+model.add(Flatten(input_shape=(28, 28)))  # 向量輸入拉平
+
+幾個隱藏層、每層要幾個神經元, 用哪個激活函數
+
+假如
+    使用 3 個 hidden layers
+    Hidden layer 1 用 6 個神經元
+    Hidden layer 2 用 28 個神經元
+    Hidden layer 3 用 2 個神經元
+    激活函數 Activation Function 唯一指名 relu
+
+# 組裝神經網路
+1. 決定使用的 loss function, 一般是 mse
+2. 決定 optimizer(優化器), 我們用標準的 SGD
+3. 設 learning rate
+
+為了一邊訓練一邊看到結果, 我們加設
+metrics=["accuracy"]
+
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accuracy"])
+
+
+"""
+
+
+"""
 分析顯示 mnist 資料集
 
 MNIST手寫數字辨識資料集
@@ -38,7 +85,7 @@ Keras 很貼心的幫我們準備好 MNIST 數據庫, 我們可以這樣讀進�
 http://yann.lecun.com/exdb/mnist/
 
 Dense        全連接層
-Conv2D       二維卷積層
+Conv2D       二維卷積層 Convolution Layer, Conv2D
 MaxPooling2D 最大池化層
 Dropout      隨機失活層
 
@@ -96,12 +143,12 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import Dropout
 from tensorflow.keras.layers import Flatten
-from tensorflow.keras.layers import Activation
-from tensorflow.keras.layers import Conv2D
+from tensorflow.keras.layers import Activation # 激活函數
+from tensorflow.keras.layers import Conv2D  # 二維卷積層 Convolution Layer
 from tensorflow.keras.layers import MaxPooling2D
-from tensorflow.keras.layers import BatchNormalization
+from tensorflow.keras.layers import BatchNormalization # 批次正規化
 from tensorflow.python.keras.layers.core import Dense
-from tensorflow.python.keras.layers.core import Activation
+from tensorflow.python.keras.layers.core import Activation # 激活函數
 """
 from tensorflow.keras import optimizers
 from tensorflow.keras.models import load_model
@@ -115,19 +162,20 @@ from keras import utils
 # from tensorflow.keras.optimizers import SGD  # 優化器
 from keras.optimizers import SGD  # 優化器
 from keras.optimizers import Adam  # 優化器
+from keras.optimizers import RMSprop
 from keras.models import load_model
 
 # 共用的, 從 Keras 把相關套件讀進來。
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Dropout
-from keras.layers import Activation
+from keras.layers import Activation  # 激活函數
 from keras.layers import Flatten
-from keras.layers import Conv2D
-from keras.layers import MaxPool2D
+from keras.layers import Conv2D  # 二維卷積層 Convolution Layer
+from keras.layers import MaxPool2D  # 最大值池化
 from keras.layers import Convolution2D
 from keras.layers import MaxPooling2D
-from keras.layers import BatchNormalization
+from keras.layers import BatchNormalization  # 批次正規化
 
 print("------------------------------------------------------------")  # 60個
 
@@ -139,20 +187,22 @@ INPUT_DIM = 784  # 輸入層: 28*28 = 784
 VALIDATION_SPLIT = 0.2  # 驗證資料佔比
 
 mnist_npz_filename = "D:/_git/vcs/_big_files/mnist.npz"
+time_st = time.time()
 
 
 def load_mnist_data():
     # 載入 MNIST 資料庫的訓練資料，並自動分為『訓練組』及『測試組』
     RATIO = 10  # debug, 一律 1/10
+    print("資料量縮小 ", RATIO, "倍")
     (x_train, y_train), (x_test, y_test) = mnist.load_data()
     x_train = x_train[: int(len(x_train) // RATIO)]
     y_train = y_train[: int(len(y_train) // RATIO)]
     x_test = x_test[: int(len(x_test) // RATIO)]
     y_test = y_test[: int(len(y_test) // RATIO)]
-    # print("訓練資料x長度 :", len(x_train))
-    # print("訓練資料y長度 :", len(y_train))
-    # print("測試資料x長度 :", len(x_test))
-    # print("測試資料y長度 :", len(y_test))
+    print("訓練資料x長度 :", len(x_train))
+    print("訓練資料y長度 :", len(y_train))
+    print("測試資料x長度 :", len(x_test))
+    print("測試資料y長度 :", len(y_test))
     return (x_train, y_train), (x_test, y_test)
 
 
@@ -386,9 +436,8 @@ def get_elapsed_time():
     print("所花時間 : {} 秒".format(timeElapsed))
 
 
-'''
-print("準備工作 ST")
 print("------------------------------------------------------------")  # 60個
+print("準備工作 ST")
 print("------------------------------------------------------------")  # 60個
 
 print("各種讀取資料集的方法")
@@ -441,11 +490,13 @@ print("MNIST手寫數字辨識資料集 資料內容")
 
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 
+# 訓練
 print("訓練資料 X(image)長度 :", len(x_train))
 print("訓練資料 X(image)大小 :", x_train.shape)
 print("訓練資料 Y(label)長度 :", len(y_train))
 print("訓練資料 Y(label)大小 :", y_train.shape)
 
+# 測試
 print("測試資料 X(image)長度 :", len(x_test))
 print("測試資料 X(image)大小 :", x_test.shape)
 print("測試資料 Y(label)長度 :", len(y_test))
@@ -567,16 +618,10 @@ print("印出 第0筆 目標")
 print(y_train[0])
 
 print("------------------------------------------------------------")  # 60個
-
 print("準備工作 SP")
-'''
-current_time = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
-print("現在時間 :", current_time)
-
-time_st = time.time()
-
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+
+get_elapsed_time()
 
 # david : 簡單又正確率高, 以此為準
 """
@@ -586,20 +631,21 @@ print("------------------------------------------------------------")  # 60個
 """
 
 print("建立神經網路01 正確率高")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
-# Add Input layer, 隱藏層(hidden layer) 有 256個輸出變數
-# 隱藏層256
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
+# 設定隱藏層HL第1層, 用 256 個神經元
 model.add(
     Dense(
         units=256, input_dim=INPUT_DIM, kernel_initializer="normal", activation="relu"
     )
 )
 
-# 設定輸出層 softmax
-model.add(
-    Dense(units=10, kernel_initializer="normal", activation="softmax")
-)  # 輸出層的神經元 10 個
+# 設定輸出層, 用 10 個神經元, 激活函數選 softmax
+model.add(Dense(units=10, kernel_initializer="normal", activation="softmax"))
+
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
@@ -612,15 +658,17 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("建立神經網路02 正確率高")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
-# 超參數設定(一)：隱藏層的數量、隱藏層設計多少神經元
-# 隱藏層256
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
+# 設定隱藏層HL第1層, 用 256 個神經元
 model.add(Dense(256, activation="sigmoid", input_dim=INPUT_DIM))
+
+# 設定隱藏層HL第2層, 用 128 個神經元
 model.add(Dense(128, activation="relu"))
 
-# 設定輸出層 softmax
-model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
+# 設定輸出層, 用 10 個神經元, 激活函數選 softmax
+model.add(Dense(10, activation="softmax"))
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accuracy"])
@@ -631,20 +679,22 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("建立神經網路03")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
-# 超參數設定(一)：隱藏層的數量、隱藏層設計多少神經元
-# 隱藏層256
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
+# 設定隱藏層HL第1層, 用 256 個神經元
 model.add(Dense(256, activation="sigmoid", input_dim=INPUT_DIM))
+
+# 設定隱藏層HL第2層, 用 128 個神經元
 model.add(Dense(128, activation="relu"))
 
-# 超參數設定(二)：加入Dropout層
+# 設定隨機失活層(Dropout層)
 model.add(Dropout(rate=0.5))
 
-# 設定輸出層 softmax
-model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
+# 設定輸出層, 用 10 個神經元, 激活函數選 softmax
+model.add(Dense(10, activation="softmax"))
 
-# 超參數設定(三)：損失函數與優化器
+# 先設定優化器, 再組裝神經網路
 sgd = optimizers.SGD(learning_rate=0.01)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
@@ -657,17 +707,26 @@ print("------------------------------------------------------------")  # 60個
 
 print("建立神經網路04")
 print("建立 3 層神經網路 100 100 100")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
+# 設定隱藏層HL第1層, 用 100 個神經元
 model.add(Dense(100, input_dim=INPUT_DIM, activation="relu"))
-model.add(Dense(100, activation="relu"))
+
+# 設定隱藏層HL第2層, 用 100 個神經元
 model.add(Dense(100, activation="relu"))
 
-# 設定輸出層 softmax
-model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
+# 設定隱藏層HL第3層, 用 100 個神經元
+model.add(Dense(100, activation="relu"))
+
+# 設定輸出層, 用 10 個神經元, 激活函數選 softmax
+model.add(Dense(10, activation="softmax"))
+
+# 先設定優化器, 再組裝神經網路
+sgd = SGD(learning_rate=0.087)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-model.compile(optimizer=SGD(learning_rate=0.087), loss="mse", metrics=["accuracy"])
+model.compile(optimizer=sgd, loss="mse", metrics=["accuracy"])
 
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
@@ -677,9 +736,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("建立神經網路05 正確率高 僅正規化 沒有one-hot")
+
 model = Sequential(
     [
-        Flatten(input_shape=(28, 28)),
+        Flatten(input_shape=(28, 28)),  # 向量輸入拉平
         Dense(128, activation="relu"),
         Dropout(0.2),
         Dense(10, activation="softmax"),
@@ -713,8 +773,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("建立神經網路06 Conv2D 正確率高 4D 張量")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
+# 設定二維卷積層Convolution Layer, Conv2D
 model.add(
     Conv2D(
         16,
@@ -724,16 +786,30 @@ model.add(
         activation="relu",
     )
 )
+
+# 設定池化層(Pooling layer, PL)	為 最大池化(Max Pooling)
 model.add(MaxPooling2D(pool_size=(2, 2)))
+
+# 再 設定二維卷積層Convolution Layer, Conv2D
 model.add(Conv2D(32, kernel_size=(5, 5), padding="same", activation="relu"))
+
+# 設定池化層(Pooling layer, PL)	為 最大池化(Max Pooling)
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.5))
-model.add(Flatten())
-model.add(Dense(128, activation="relu"))
+
+# 設定隨機失活層(Dropout層)
 model.add(Dropout(0.5))
 
-# 設定輸出層 softmax
-model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
+# 設定向量輸入拉平, 將 2D 影像轉為 1D 向量
+model.add(Flatten())
+
+# 設定隱藏層HL第1層, 用 128 個神經元
+model.add(Dense(128, activation="relu"))
+
+# 設定隨機失活層(Dropout層)
+model.add(Dropout(0.5))
+
+# 設定輸出層, 用 10 個神經元, 激活函數選 softmax
+model.add(Dense(10, activation="softmax"))
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
@@ -789,7 +865,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("建立神經網路07 正確率高")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
+
+model = Sequential()  # 建立空白的神經網路模型(CNN)
 
 # 隱藏層256
 model.add(
@@ -801,10 +878,8 @@ model.add(
     )
 )
 
-# 設定輸出層 softmax
-model.add(
-    Dense(units=10, kernel_initializer="normal", activation="softmax")
-)  # 輸出層的神經元 10 個
+# 設定輸出層, 用 10 個神經元, 激活函數選 softmax
+model.add(Dense(units=10, kernel_initializer="normal", activation="softmax"))
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
@@ -815,7 +890,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("建立神經網路08 正確率高")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
+
+model = Sequential()  # 建立空白的神經網路模型(CNN)
 
 # 隱藏層256
 model.add(
@@ -827,10 +903,8 @@ model.add(
     )
 )
 
-# 設定輸出層 softmax
-model.add(
-    Dense(units=10, kernel_initializer="normal", activation="softmax")
-)  # 輸出層的神經元 10 個
+# 設定輸出層, 用 10 個神經元, 激活函數選 softmax
+model.add(Dense(units=10, kernel_initializer="normal", activation="softmax"))
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
@@ -860,11 +934,10 @@ y_train = to_categorical(y_train)
 y_test = to_categorical(y_test)
 
 print("建立神經網路09")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
-# 第1層 用 16 個神經元, 使用參數 160 個
-# 3*3 (權重) + 1 (bias)
-# (3*3+1)*16 = 160
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
+# 設定二維卷積層Convolution Layer, Conv2D, 用 16 個神經元, 參數 (3*3+1)*16=160 個
 model.add(
     Conv2D(16, (3, 3), padding="same", input_shape=(28, 28, 1), activation="relu")
 )
@@ -872,27 +945,41 @@ model.add(
 # 輸出 16 個 28x28 矩陣
 # 事實上是 (28, 28, 16)
 
+# 設定池化層(Pooling layer, PL)	為 最大池化(Max Pooling)
 model.add(MaxPooling2D(pool_size=(2, 2)))
 # (14,14,16)
 
 # 第2層 用 32 個神經元, 使用參數 4640 個
 # (3*3*16+1)*32 = 4640
+
+# 設定二維卷積層Convolution Layer, Conv2D
 model.add(Conv2D(32, (3, 3), padding="same", activation="relu"))
 # output (14, 14, 32)
 
+# 設定池化層(Pooling layer, PL)	為 最大池化(Max Pooling)
 model.add(MaxPooling2D(pool_size=(2, 2)))
 # output (7, 7, 32)
 
+# 設定二維卷積層Convolution Layer, Conv2D
 model.add(Conv2D(64, (3, 3), padding="same", activation="relu"))
+
+# 設定池化層(Pooling layer, PL)	為 最大池化(Max Pooling)
 model.add(MaxPooling2D(pool_size=(2, 2)))
+
+# 設定向量輸入拉平, 將 2D 影像轉為 1D 向量
 model.add(Flatten())
+
+# 設定隱藏層HL第1層, 用 54 個神經元
 model.add(Dense(54, activation="relu"))
 
-# 設定輸出層 softmax
-model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
+# 設定輸出層, 用 10 個神經元, 激活函數選 softmax
+model.add(Dense(10, activation="softmax"))
+
+# 先設定優化器, 再組裝神經網路
+sgd = SGD(learning_rate=0.087)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-model.compile(optimizer=SGD(learning_rate=0.087), loss="mse", metrics=["accuracy"])
+model.compile(optimizer=sgd, loss="mse", metrics=["accuracy"])
 
 do_the_same2(x_train, y_train, x_test, y_test)  # 做一樣的事
 
@@ -929,7 +1016,7 @@ x_test = x_test / 255
 # print(x_train[1234].shape)
 # (28, 28, 1)
 
-X = x_train[1234]
+X = x_train[345]
 X = X.reshape(28, 28)
 plt.imshow(X, cmap="Greys")
 
@@ -967,45 +1054,53 @@ CNN 一個小技巧是每層的 filters 數目是越來越多, 上課同學建�
 """
 
 print("建立神經網路10 正確率XXXX")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
+
+model = Sequential()  # 建立空白的神經網路模型(CNN)
 
 # 第一個隱藏層一樣要告訴 Keras 我們輸入長什麼樣子。padding 設成 same 是每個 filter 會輸出原來 28x28 一樣大小的矩陣。
+# 設定二維卷積層Convolution Layer, Conv2D
 model.add(
     Conv2D(10, (3, 3), padding="same", input_shape=(28, 28, 1), activation="relu")
 )
 
-# Max-Pooling!
+# 設定池化層(Pooling layer, PL)	為 最大池化(Max Pooling)
 model.add(MaxPool2D(pool_size=(2, 2)))
 
-# 第二次 Convolution!
+# 再 設定二維卷積層Convolution Layer, Conv2D
 model.add(Conv2D(20, (3, 3), padding="same", activation="relu"))
 
-# 再 Max-Pooling!
+# 再 設定池化層(Pooling layer, PL)	為 最大池化(Max Pooling)
 model.add(MaxPool2D(pool_size=(2, 2)))
 
-# 第三次 Convolution!
+# 再 設定二維卷積層Convolution Layer, Conv2D
 model.add(Conv2D(40, (3, 3), padding="same", activation="relu"))
 
-# Max-Pooling 最終回。
+# 再 設定池化層(Pooling layer, PL)	為 最大池化(Max Pooling)
 model.add(MaxPool2D(pool_size=(2, 2)))
 
-# 然後我們要送進一般的神經網路了。記得這是要拉平的, 還在 Keras 會幫我們做!
+# 設定向量輸入拉平, 將 2D 影像轉為 1D 向量
 model.add(Flatten())
+
+# 設定隱藏層HL第1層, 用 5 個神經元
 model.add(Dense(5, activation="relu"))
+
+# 設定隱藏層HL第2層, 用 8 個神經元
 model.add(Dense(8, activation="relu"))
+
+# 設定隱藏層HL第3層, 用 20 個神經元
 model.add(Dense(20, activation="relu"))
 
-# 設定輸出層 softmax
-model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
-
-# 組裝
-# 和之前比較不一樣的是我們還要做 compile 才正式把我們的神經網路建好。
+# 設定輸出層, 用 10 個神經元, 激活函數選 softmax
+model.add(Dense(10, activation="softmax"))
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-# model.compile(optimizer=Adadelta(), loss="categorical_crossentropy", metrics=['accuracy'])
+# model.compile(optimizer=Adadelta(), loss="categorical_crossentropy", metrics=["accuracy"])
+
+# 先設定優化器, 再組裝神經網路
+sgd = SGD(learning_rate=0.07)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-model.compile(optimizer=SGD(learning_rate=0.07), loss="mse", metrics=["accuracy"])
+model.compile(optimizer=sgd, loss="mse", metrics=["accuracy"])
 
 # 全部拿來測試
 do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
@@ -1032,63 +1127,69 @@ print("------------------------------------------------------------")  # 60個
 """
 打造第一個神經網路
 我們又說第一次要用標準神網路試試,
-所以我們只需要再決定要幾個隱藏層、每層要幾個神經元, 用哪個激發函數就可以了。
+所以我們只需要再決定要幾個隱藏層、每層要幾個神經元, 用哪個激活函數就可以了。
 2.3.1 決定神經網路架構、讀入相關套件
 假如我們要這麼做:
     使用 3 個 hidden layers
     Hidden layer 1 用 6 個神經元
     Hidden layer 2 用 28 個神經元
     Hidden layer 3 用 2 個神經元
-    Activation Function 唯一指名 relu
+    激活函數 Activation Function 唯一指名 relu
 """
 
 print("建立神經網路11 正確率XXXX")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
-"""
-我們每次用 add 去加一層, 從第一個隱藏層開始。
-而第一個隱藏層因為 Keras 當然猜不到輸入長什麼樣子, 所以我們要告訴它。
-而全連結的神經網路其實都是一個向量輸入, 也就是要先「拉平」。
-"""
+model = Sequential()  # 建立空白的神經網路模型(CNN)
 
-model.add(Flatten(input_shape=(28, 28)))
+model.add(Flatten(input_shape=(28, 28)))  # 向量輸入拉平
 
-# 第1層 用 6 個神經元, 使用參數 28 * 28 * 6 + 6 = 4710 個
+# 設定隱藏層HL第1層, 用 100 個神經元, 使用參數 28 * 28 * 6 + 6 = 4710 個
 model.add(Dense(6, activation="relu"))
 
-"""
-第二層 hidden layer 因為前面輸出是 6, 現在輸入是 28, 就不用再說了!
-這裡的 28 只告訴 Keras, 我們第二層是用 28 個神經元!
-"""
-# 第2層 用 28 個神經元, 使用參數 6 * 28 + 28 = 196 個
+# 設定隱藏層HL第2層, 用 28 個神經元, 使用參數 6 * 28 + 28 = 196 個
 model.add(Dense(28, activation="relu"))
 
-# 第3層 用 2 個神經元, 使用參數 28 * 2 + 2 = 58 個
+# 設定隱藏層HL第3層, 用 2 個神經元, 使用參數 28 * 2 + 2 = 58 個
 model.add(Dense(2, activation="relu"))
 
 # 輸出有 10 個數字, 所以輸出層的神經元是 10 個
 # 而如果我們的網路輸出是 (y1,y2,…,y10) 我們還希望 10∑i=1yi=1
-# 這可能嗎, 結果是很容易, 就用 softmax 當激發函數就可以!!
+# 這可能嗎, 結果是很容易, 就用 softmax 當激活函數就可以!!
 
-# 設定輸出層 softmax, 使用參數 2 * 10 + 10 = 30 個
-model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
+# 設定輸出層, 用 10 個神經元, 激活函數選 softmax
+model.add(Dense(10, activation="softmax"))
 
 # 共使用參數 4994 個
 
 """
-組裝
-和之前比較不一樣的是我們還要做 compile 才正式把我們的神經網路建好。
-你可以發現我們還需要做幾件事:
-    1. 決定使用的 loss function, 一般是 mse
-    2. 決定 optimizer(優化器), 我們用標準的 SGD
-    3. 設 learning rate
-為了一邊訓練一邊看到結果, 我們加設
-metrics=['accuracy']
-本行基本上和我們的神經網路功能沒有什麼關係。
+檢視模型架構
+Model: "sequential"
+┌──────────────────┬──────────┐
+│ Layer (type)      │ Output Shape  │  Param # 參數個數  │
+├──────────────────┼──────────┤
+│ flatten (Flatten) │ (None, 784)   │      0   │ 28 * 28 = 784 
+├──────────────────┼─────┤
+│ dense (Dense)     │ (None, 6)     │  4710    │ 28 * 28 * 6 + 6 = 4710
+├──────────────────┼─────┤
+│ dense_1 (Dense)   │ (None, 28)    │    196   │  6 * 28 + 28 = 196
+├──────────────────┼─────┤
+│ dense_2 (Dense)   │ (None, 2)     │     58   │ 28 * 2 + 2 = 58
+├──────────────────┼─────┤
+│ dense_3 (Dense)   │ (None, 10)    │     30   │  2 * 10 + 10 = 30
+└──────────────────┴─────┘
+ Total params: 4,994 (19.51 KB)
+ Trainable params: 4,994 (19.51 KB)
+ Non-trainable params: 0 (0.00 B)
 """
 
+# 先設定優化器, 再組裝神經網路
+sgd = SGD(learning_rate=0.087)
+
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-model.compile(optimizer=SGD(learning_rate=0.087), loss="mse", metrics=["accuracy"])
+model.compile(optimizer=sgd, loss="mse", metrics=["accuracy"])
+
+print("檢視模型架構222")
+model.summary()  # 檢視模型架構
 
 """
 訓練神經網路
@@ -1106,24 +1207,34 @@ print("------------------------------------------------------------")  # 60個
 
 """
 print("建立神經網路12 4D")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
-model.add(Flatten(input_shape=(28, 28)))
+
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
+model.add(Flatten(input_shape=(28, 28)))  # 向量輸入拉平
+
+# 設定隱藏層HL第1層, 用 20 個神經元
 model.add(Dense(20, activation="relu"))
 """
 # ----------------------
 
 print("建立神經網路13 XXXX")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
-# 第1層 用 87 個神經元, 使用參數 28 * 28 * 87 + 87 = 68295 個
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
+# 設定隱藏層HL第1層, 用 87 個神經元, 使用參數 28 * 28 * 87 + 87 = 68295 個
 model.add(Dense(87, input_dim=INPUT_DIM, activation="relu"))
+
+# 設定隱藏層HL第2層, 用 87 個神經元
 model.add(Dense(87, activation="relu"))
 
-# 設定輸出層 softmax
-model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
+# 設定輸出層, 用 10 個神經元, 激活函數選 softmax
+model.add(Dense(10, activation="softmax"))
+
+# 先設定優化器, 再組裝神經網路
+sgd = SGD(learning_rate=0.087)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-model.compile(optimizer=SGD(learning_rate=0.087), loss="mse", metrics=["accuracy"])
+model.compile(optimizer=sgd, loss="mse", metrics=["accuracy"])
 
 do_cnn_test()
 
@@ -1131,41 +1242,24 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("建立神經網路14 XXXX")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
-# 超參數設定(一)：隱藏層的數量、隱藏層設計多少神經元
-# 隱藏層256
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
+# 設定隱藏層HL第1層, 用 256 個神經元
 model.add(Dense(256, activation="sigmoid", input_dim=INPUT_DIM))
 
-# 比較參數
+# 3層隱藏層HL, 每層 128 個神經元
+model.add(Dense(128, activation="sigmoid"))
+model.add(Dense(128, activation="sigmoid"))
+model.add(Dense(128, activation="sigmoid"))
 
-
-def funcA():
-    model.add(Dense(128, activation="sigmoid"))
-
-
-def funcB():
-    model.add(Dense(128, activation="sigmoid"))
-    model.add(Dense(128, activation="sigmoid"))
-    model.add(Dense(128, activation="sigmoid"))
-
-
-def funcC():
-    model.add(Dense(1568, activation="sigmoid"))
-
-
-# 選用模型A時就將B和C這兩行註解掉
-# ---------------------------
-funcA()
-# funcB()
-# funcC()
-# ---------------------------
-
+# 設定隨機失活層(Dropout層)
 model.add(Dropout(rate=0.5))
 
-# 設定輸出層 softmax
-model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
+# 設定輸出層, 用 10 個神經元, 激活函數選 softmax
+model.add(Dense(10, activation="softmax"))
 
+# 先設定優化器, 再組裝神經網路
 sgd = optimizers.SGD(learning_rate=0.01)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
@@ -1176,25 +1270,24 @@ do_cnn_test()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 15-4 超參數設定(三)：損失函數與優化器
-
 print("建立神經網路15")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
+# 設定隱藏層HL第1層, 用 256 個神經元
 model.add(Dense(256, activation="sigmoid", input_dim=INPUT_DIM))
+
+# 設定隱藏層HL第2層, 用 128 個神經元
 model.add(Dense(128, activation="relu"))
+
+# 設定隨機失活層(Dropout層)
 model.add(Dropout(rate=0.5))
 
-# 設定輸出層 softmax
-model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
+# 設定輸出層, 用 10 個神經元, 激活函數選 softmax
+model.add(Dense(10, activation="softmax"))
 
-# 超參數設定(三)：優化器與學習率
-
-# 比較參數
-# lr = 0.01/0.1/1.0
-lr = 0.01
-
-sgd = optimizers.SGD(learning_rate=lr)
+# 先設定優化器, 再組裝神經網路
+sgd = optimizers.SGD(learning_rate=0.01)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer="sgd", loss="categorical_crossentropy", metrics=["accuracy"])
@@ -1205,19 +1298,33 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("建立神經網路16 正確率高")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
+
+model = Sequential()  # 建立空白的神經網路模型(CNN)
 
 # 計算準確率
+# 設定二維卷積層Convolution Layer, Conv2D
 model.add(Conv2D(32, kernel_size=(3, 3), activation="relu", input_shape=(28, 28, 1)))
+
+# 設定二維卷積層Convolution Layer, Conv2D
 model.add(Conv2D(filters=64, kernel_size=(3, 3), activation="relu"))
+
+# 設定池化層(Pooling layer, PL)	為 最大池化(Max Pooling)
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.5))
-model.add(Flatten())
-model.add(Dense(128, activation="relu"))
+
+# 設定隨機失活層(Dropout層)
 model.add(Dropout(0.5))
 
-# 設定輸出層 softmax
-model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
+# 設定向量輸入拉平, 將 2D 影像轉為 1D 向量
+model.add(Flatten())
+
+# 設定隱藏層HL第1層, 用 128 個神經元
+model.add(Dense(128, activation="relu"))
+
+# 設定隨機失活層(Dropout層)
+model.add(Dropout(0.5))
+
+# 設定輸出層, 用 10 個神經元, 激活函數選 softmax
+model.add(Dense(10, activation="softmax"))
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer="sgd", loss="categorical_crossentropy", metrics=["accuracy"])
@@ -1257,8 +1364,10 @@ y_test = to_categorical(y_test)
 # 使用 ReLU 函數當做啟動函數
 
 print("建立神經網路17")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
+# 設定二維卷積層Convolution Layer, Conv2D
 model.add(
     Conv2D(
         input_shape=(28, 28, 1),
@@ -1269,23 +1378,39 @@ model.add(
     )
 )
 
+# 設定池化層(Pooling layer, PL)	為 最大池化(Max Pooling)
 model.add(MaxPooling2D(pool_size=(2, 2)))
+
+# 設定二維卷積層Convolution Layer, Conv2D
 model.add(Conv2D(filters=32, kernel_size=(2, 2), strides=(1, 1), padding="same"))
+
+# 再 設定池化層(Pooling layer, PL)	為 最大池化(Max Pooling)
 model.add(MaxPooling2D(pool_size=(2, 2)))
+
+# 設定向量輸入拉平, 將 2D 影像轉為 1D 向量
 model.add(Flatten())
+
+# 設定隱藏層HL第1層, 用 256 個神經元
 model.add(Dense(256))
 
-# 批次正規化
+# 設定批次正規化層
 model.add(BatchNormalization())
+
 model.add(Activation("relu"))
+
+# 設定隱藏層HL第1層, 用 128 個神經元
 model.add(Dense(128))
 
-# 批次正規化
+# 設定批次正規化層
 model.add(BatchNormalization())
+
 model.add(Activation("relu"))
 
 classes = 10  # 輸出神經元預設10個
+
+# 設定隱藏層HL第1層, 用 10 個神經元
 model.add(Dense(classes))
+
 # 設定輸出層 softmax
 model.add(Activation("softmax"))
 
@@ -1312,7 +1437,7 @@ ESC = 27
 import cv2
 
 """ NG 無檔案 keras_model.h5
-model = tf.keras.models.load_model('keras_model.h5', compile=False)   # 載入 model
+model = tf.keras.models.load_model("keras_model.h5", compile=False)   # 載入 model
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)           # 設定資料陣列
 
 cap = cv2.VideoCapture(0)
@@ -1333,11 +1458,11 @@ while True:
     prediction = model.predict(data)       # 預測結果
     a,b= prediction[0]                     # 取得預測結果
     if a>0.9:
-        print('oxxo')
+        print("oxxo")
     if b>0.9:
-        print('維他命')
+        print("維他命")
         
-    cv2.imshow('ImageShow', img)
+    cv2.imshow("ImageShow", img)
     k = cv2.waitKey(1)
     if k == ESC:
         break
@@ -1349,7 +1474,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ NG 無檔案 keras_model.h5
-model = tf.keras.models.load_model('keras_model.h5', compile=False)  # 載入模型
+model = tf.keras.models.load_model("keras_model.h5", compile=False)  # 載入模型
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
 
 def text(text):      # 建立顯示文字的函式
@@ -1380,13 +1505,13 @@ while True:
     prediction = model.predict(data)
     a,b,c,bg= prediction[0]
     if a>0.9:
-        text('a')  # 使用 text() 函式，顯示文字
+        text("a")  # 使用 text() 函式，顯示文字
     if b>0.9:
-        text('b')
+        text("b")
     if c>0.9:
-        text('c')
+        text("c")
         
-    cv2.imshow('ImageShow', img)
+    cv2.imshow("ImageShow", img)
     
     k = cv2.waitKey(1)
     if k == ESC:
@@ -1402,9 +1527,9 @@ print("------------------------------------------------------------")  # 60個
 """ NG 無檔案 keras_model.h5
 from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
 
-fontpath = 'NotoSansTC-Regular.otf'          # 設定字型路徑
+fontpath = "NotoSansTC-Regular.otf"          # 設定字型路徑
 
-model = tf.keras.models.load_model('keras_model.h5', compile=False)  # 載入模型
+model = tf.keras.models.load_model("keras_model.h5", compile=False)  # 載入模型
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
 
 def text(text):   # 建立顯示文字的函式
@@ -1433,13 +1558,13 @@ while True:
     prediction = model.predict(data)
     a,b,c,bg= prediction[0]
     if a>0.9:
-        text('剪刀')  # 使用 text() 函式，顯示文字
+        text("剪刀")  # 使用 text() 函式，顯示文字
     if b>0.9:
-        text('石頭')
+        text("石頭")
     if c>0.9:
-        text('布')
+        text("布")
 
-    cv2.imshow('ImageShow', img)
+    cv2.imshow("ImageShow", img)
     k = cv2.waitKey(1)
     if k == ESC:
         break
@@ -1451,7 +1576,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ NG 無檔案 keras_model.h5
-model = tf.keras.models.load_model('keras_model.h5', compile=False)  # 載入模型
+model = tf.keras.models.load_model("keras_model.h5", compile=False)  # 載入模型
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
 
 def text(text):      # 建立顯示文字的函式
@@ -1483,11 +1608,11 @@ while True:
     a,b,bg= prediction[0]    # 印出每個項目的數值資訊
     print(a,b,bg)
     if a>0.999:              # 判斷有戴口罩
-        text('ok~')
+        text("ok~")
     if b>0.001:              # 判斷沒戴口罩
-        text('no mask!!')
+        text("no mask!!")
 
-    cv2.imshow('ImageShow', img)
+    cv2.imshow("ImageShow", img)
     k = cv2.waitKey(1)
     if k == ESC:
         break
@@ -1501,9 +1626,9 @@ print("------------------------------------------------------------")  # 60個
 """ NG 無檔案 keras_model_3.h5
 from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
 
-fontpath = 'NotoSansTC-Regular.otf'          # 設定字型路徑
+fontpath = "NotoSansTC-Regular.otf"          # 設定字型路徑
 
-model = tf.keras.models.load_model('keras_model_3.h5', compile=False)  # 載入模型
+model = tf.keras.models.load_model("keras_model_3.h5", compile=False)  # 載入模型
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
 
 def text(text):   # 建立顯示文字的函式
@@ -1533,11 +1658,11 @@ while True:
     a,b,bg= prediction[0]
     print(a,b,bg)
     if a>0.999:
-        text('很乖')
+        text("很乖")
     if b>0.001:
-        text('沒戴口罩!!')
+        text("沒戴口罩!!")
 
-    cv2.imshow('ImageShow', img)
+    cv2.imshow("ImageShow", img)
     k = cv2.waitKey(1)
     if k == ESC:
         break
@@ -1646,8 +1771,10 @@ print("------------------------------------------------------------")  # 60個
 hidden_neurons = 100
 
 print("建立神經網路18")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
+# 設定隱藏層HL第1層, 用 100 個神經元
 model.add(Dense(hidden_neurons, input_dim=INPUT_DIM))
 
 model.add(Activation("sigmoid"))
@@ -1701,8 +1828,10 @@ print("------------------------------------------------------------")  # 60個
 hidden_neurons = 400
 
 print("建立神經網路19")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
+# 設定隱藏層HL第1層, 用 400 個神經元
 model.add(Dense(hidden_neurons, input_dim=INPUT_DIM))
 
 model.add(Activation("relu"))
@@ -1726,17 +1855,24 @@ print("------------------------------------------------------------")  # 60個
 hidden_neurons = 200
 
 print("建立神經網路20 4D")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
+
+model = Sequential()  # 建立空白的神經網路模型(CNN)
 
 model.add(Convolution2D(32, (3, 3), input_shape=(28, 28, 1)))
 model.add(Activation("relu"))
 model.add(Convolution2D(32, (3, 3)))
 model.add(Activation("relu"))
+
+# 設定池化層(Pooling layer, PL)	為 最大池化(Max Pooling)
 model.add(MaxPooling2D(pool_size=(2, 2)))
+
+# 設定隨機失活層(Dropout層)
 model.add(Dropout(0.25))
 
+# 設定向量輸入拉平, 將 2D 影像轉為 1D 向量
 model.add(Flatten())
 
+# 設定隱藏層HL第1層, 用 200 個神經元
 model.add(Dense(hidden_neurons))
 
 model.add(Activation("relu"))
@@ -1757,27 +1893,28 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("建立神經網路21")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
+
+model = Sequential()  # 建立空白的神經網路模型(CNN)
 
 # Conv layer 1 output shape (32, 28, 28)
 model.add(
     Convolution2D(
         filters=32,
         kernel_size=(5, 5),
-        # border_mode='same',     # Padding method
-        # dim_ordering='th',      # if use tensorflow, to set the input dimension order to theano ("th") style, but you can change it.
+        # border_mode="same",     # Padding method
+        # dim_ordering="th",      # if use tensorflow, to set the input dimension order to theano ("th") style, but you can change it.
         input_shape=(28, 28, 1),
     )
 )
 
 model.add(Activation("relu"))
 
-# Pooling layer 1 (max pooling) output shape (32, 14, 14)
+# 設定池化層(Pooling layer, PL)	為 最大池化(Max Pooling)
 model.add(
     MaxPooling2D(
         pool_size=(2, 2),
         strides=(2, 2),
-        # border_mode='same',    # Padding method
+        # border_mode="same",    # Padding method
     )
 )
 
@@ -1785,11 +1922,15 @@ model.add(
 model.add(Convolution2D(64, 5, 5))
 model.add(Activation("relu"))
 
-# Pooling layer 2 (max pooling) output shape (64, 7, 7)
+# 再 設定池化層(Pooling layer, PL)	為 最大池化(Max Pooling)
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 # Fully connected layer 1 input shape (64 * 7 * 7) = (3136), output shape (1024)
+
+# 設定向量輸入拉平, 將 2D 影像轉為 1D 向量
 model.add(Flatten())
+
+# 設定隱藏層HL第1層, 用 1024 個神經元
 model.add(Dense(1024))
 model.add(Activation("relu"))
 
@@ -1799,7 +1940,7 @@ model.add(Dense(classes))
 # 設定輸出層 softmax
 model.add(Activation("softmax"))
 
-# Another way to define your optimizer(優化器)
+# 先設定優化器, 再組裝神經網路
 adam = Adam(learning_rate=1e-4)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
@@ -1811,15 +1952,19 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("建立神經網路22")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
 
-model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.relu, input_dim=INPUT_DIM))
-model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.relu))
-model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
+model.add(Dense(units=10, activation=tf.nn.relu, input_dim=INPUT_DIM))
+model.add(Dense(units=10, activation=tf.nn.relu))
+model.add(Dense(units=10, activation=tf.nn.softmax))
+
+# 先設定優化器, 再組裝神經網路
+adam = Adam(learning_rate=0.001)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(
-    optimizer=Adam(learning_rate=0.001),
+    optimizer=adam,
     loss=tf.keras.losses.categorical_crossentropy,
     metrics=["accuracy"],
 )
@@ -1857,7 +2002,7 @@ evaluate_model(x_test, y_test)
 
 y_pred = model.predict(x_test)  # 取得每一個結果的機率, 出現0~9的機率
 
-# y_pred : <class 'numpy.ndarray'> 10000 筆資料
+# y_pred : <class "numpy.ndarray"> 10000 筆資料
 
 # np.argmax() 取出 最大值索引, 10個機率裏 最大的機率 就是預測的結果
 # np.argmax() 求最大值對應的索引, 將預測的機率轉換成類別
@@ -1870,7 +2015,7 @@ print(
 )
 
 ans = np.argmax(y_pred, axis=-1)
-#print("ans :", ans)
+# print("ans :", ans)
 print("前20項 預測結果 :", ans[:20])
 
 # 預測
@@ -1881,9 +2026,11 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("建立神經網路23 正確率XXXX")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
+
+model = Sequential()  # 建立空白的神經網路模型(CNN)
 
 # 加入 2D 的 Convolution Layer，接著一層 ReLU 的 Activation 函數
+# 設定二維卷積層Convolution Layer, Conv2D
 model.add(
     tf.keras.layers.Conv2D(
         filters=3,
@@ -1893,29 +2040,34 @@ model.add(
         input_shape=(28, 28, 1),
     )
 )
-# 2D 的 Max-Pooling Layer
+
+# 設定池化層(Pooling layer, PL)	為 最大池化(Max Pooling)
 model.add(tf.keras.layers.MaxPool2D(pool_size=(2, 2)))
+
 # 2D 的 Convolution Layer
+# 設定二維卷積層Convolution Layer, Conv2D
 model.add(
     tf.keras.layers.Conv2D(
         filters=9, kernel_size=(2, 2), padding="same", activation="relu"
     )  # or filters=3
 )
-# Dropout Layer
+
+# 設定隨機失活層(Dropout層)
 model.add(tf.keras.layers.Dropout(rate=0.33))
 
-# 將 2D 影像轉為 1D 向量
+# 設定向量輸入拉平, 將 2D 影像轉為 1D 向量
 model.add(tf.keras.layers.Flatten())
+
 # 連接 Fully Connected Layer，接著一層 ReLU 的 Activation 函數
-model.add(tf.keras.layers.Dense(10, activation="relu"))
+model.add(Dense(10, activation="relu"))
 
 # or
-# model.add(tf.keras.layers.Dense(50, activation="relu"))
-# model.add(tf.keras.layers.Dense(50, activation="relu"))
-# model.add(tf.keras.layers.Dense(50, activation="relu"))
+# model.add(Dense(50, activation="relu"))
+# model.add(Dense(50, activation="relu"))
+# model.add(Dense(50, activation="relu"))
 
 # 連接 Fully Connected Layer，接著一層 Softmax 的 Activation 函數
-model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
+model.add(Dense(units=10, activation=tf.nn.softmax))
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(
@@ -1975,9 +2127,11 @@ print("------------------------------------------------------------")  # 60個
 from tensorflow.keras.callbacks import TensorBoard
 
 print("建立神經網路24 正確率XXXX")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
+
+model = Sequential()  # 建立空白的神經網路模型(CNN)
 
 # 加入 2D 的 Convolution Layer，接著一層 ReLU 的 Activation 函數
+# 設定二維卷積層Convolution Layer, Conv2D
 model.add(
     tf.keras.layers.Conv2D(
         filters=32,
@@ -1988,34 +2142,38 @@ model.add(
     )
 )
 
+# 設定二維卷積層Convolution Layer, Conv2D
 model.add(
     tf.keras.layers.Conv2D(
         filters=40, kernel_size=(2, 2), padding="same", activation="relu"
     )
 )
 
-# 2D 的 Max-Pooling Layer
+# 設定池化層(Pooling layer, PL)	為 最大池化(Max Pooling)
 model.add(tf.keras.layers.MaxPool2D(pool_size=(2, 2)))
 
 # 2D 的 Convolution Layer
+# 設定二維卷積層Convolution Layer, Conv2D
 model.add(
     tf.keras.layers.Conv2D(
         filters=40, kernel_size=(2, 2), padding="same", activation="relu"
     )
 )
 
-# Dropout Layer
+# 設定隨機失活層(Dropout層)
 model.add(tf.keras.layers.Dropout(rate=0.01))
 
-# 將 2D 影像轉為 1D 向量
+# 設定向量輸入拉平, 將 2D 影像轉為 1D 向量
 model.add(tf.keras.layers.Flatten())
+
 # 連接 Fully Connected Layer，接著一層 ReLU 的 Activation 函數
-model.add(tf.keras.layers.Dense(100, activation="relu"))
+model.add(Dense(100, activation="relu"))
+
 # 連接 Fully Connected Layer，接著一層 Softmax 的 Activation 函數
-model.add(tf.keras.layers.Dense(100, activation="relu"))
-model.add(tf.keras.layers.Dense(100, activation="relu"))
+model.add(Dense(100, activation="relu"))
+model.add(Dense(100, activation="relu"))
 # 連接 Fully Connected Layer，接著一層 Softmax 的 Activation 函數
-model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
+model.add(Dense(units=10, activation=tf.nn.softmax))
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(
@@ -2074,9 +2232,11 @@ print("------------------------------------------------------------")  # 60個
 from tensorflow.keras.callbacks import TensorBoard
 
 print("建立神經網路25 Conv2D 正確率高")
-model = Sequential()  # 建立空白的神經網路模型(CNN), 函數學習機, 簡單的線性執行的模型
+
+model = Sequential()  # 建立空白的神經網路模型(CNN)
 
 # 加入 2D 的 Convolution Layer，接著一層 ReLU 的 Activation 函數
+# 設定二維卷積層Convolution Layer, Conv2D
 model.add(
     tf.keras.layers.Conv2D(
         filters=32,
@@ -2087,34 +2247,38 @@ model.add(
     )
 )
 
+# 設定二維卷積層Convolution Layer, Conv2D
 model.add(
     tf.keras.layers.Conv2D(
         filters=40, kernel_size=(2, 2), padding="same", activation="relu"
     )
 )
 
-# 2D 的 Max-Pooling Layer
+# 設定池化層(Pooling layer, PL)	為 最大池化(Max Pooling)
 model.add(tf.keras.layers.MaxPool2D(pool_size=(2, 2)))
 
 # 2D 的 Convolution Layer
+# 設定二維卷積層Convolution Layer, Conv2D
 model.add(
     tf.keras.layers.Conv2D(
         filters=40, kernel_size=(2, 2), padding="same", activation="relu"
     )
 )
 
-# Dropout Layer
+# 設定隨機失活層(Dropout層)
 model.add(tf.keras.layers.Dropout(rate=0.01))
 
-# 將 2D 影像轉為 1D 向量
+# 設定向量輸入拉平, 將 2D 影像轉為 1D 向量
 model.add(tf.keras.layers.Flatten())
+
 # 連接 Fully Connected Layer，接著一層 ReLU 的 Activation 函數
-model.add(tf.keras.layers.Dense(100, activation="relu"))
+model.add(Dense(100, activation="relu"))
+
 # 連接 Fully Connected Layer，接著一層 Softmax 的 Activation 函數
-model.add(tf.keras.layers.Dense(100, activation="relu"))
-model.add(tf.keras.layers.Dense(100, activation="relu"))
+model.add(Dense(100, activation="relu"))
+model.add(Dense(100, activation="relu"))
 # 連接 Fully Connected Layer，接著一層 Softmax 的 Activation 函數
-model.add(tf.keras.layers.Dense(units=10, activation=tf.nn.softmax))
+model.add(Dense(units=10, activation=tf.nn.softmax))
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(
@@ -2159,7 +2323,7 @@ train_generator = gen.flow(x_train, y_train, batch_size=128)
 try:
     with open("data/model_ImageDataGenerator.h5", "r") as load_weights:
         # 讀取模型權重
-        print('讀取模型權重')
+        print("讀取模型權重")
         model.load_weights("data/model_ImageDataGenerator.h5")
 
 except IOError:
@@ -2194,6 +2358,257 @@ print(
 # 預測
 y_pred = do_prediction(x_test[:20])
 print("預測結果 :\n", y_pred[:20], sep="")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+mnist = tf.keras.datasets.mnist
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+print(x_train[0])
+
+plt.imshow(x_train[0], cmap=plt.cm.binary)
+show()
+
+print("答案")
+print(y_train[0])
+
+x_train = tf.keras.utils.normalize(x_train, axis=1)
+x_test = tf.keras.utils.normalize(x_test, axis=1)
+
+print(x_train[0])
+
+plt.imshow(x_train[0], cmap=plt.cm.binary)
+show()
+
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
+model.add(Flatten(input_shape=(28, 28)))  # 向量輸入拉平
+
+# 設定隱藏層HL第1層, 用 128 個神經元
+model.add(Dense(128, activation=tf.nn.relu))
+
+# 設定隱藏層HL第2層, 用 128 個神經元
+model.add(Dense(128, activation=tf.nn.relu))
+
+# 設定隱藏層HL第3層, 用 10 個神經元
+model.add(Dense(10, activation=tf.nn.softmax))
+
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(
+    optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"]
+)
+
+""" 做很久
+model.fit(x_train, y_train, epochs=EPOCHS)  # 學習訓練.fit
+
+val_loss, val_acc = model.evaluate(x_test, y_test)
+print("val_loss :", val_loss)
+print("val_acc :", val_acc)
+
+y_pred = model.predict(x_test)  # 取得每一個結果的機率
+print("預測結果 :\n", y_pred, sep="")
+
+print(np.argmax(y_pred[0]))
+
+plt.imshow(x_test[0], cmap=plt.cm.binary)
+show()
+
+# 保存模型
+model.save("tmp_epic_num_reader.model")
+
+# 加载保存的模型
+new_model = tf.keras.models.load_model("tmp_epic_num_reader.model")
+
+# 测试保存的模型
+y_pred = new_model.predict(x_test)
+print(np.argmax(y_pred[0]))
+
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+model = Sequential([Dense(units=1, input_shape=[1])])
+
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer="sgd", loss="mean_squared_error")
+
+# y = x
+xs = np.array([0.0, 1.0, 2.0, 3.0, 4.0, 5.0], dtype=float)
+ys = np.array([0.0, 1.0, 2.0, 5.0, 4.0, 5.0], dtype=float)
+print(type(xs))
+print(xs)
+print(type(ys))
+print(ys)
+
+model.fit(xs, ys, epochs=EPOCHS)
+
+print("keras 預測")
+xx = np.linspace(0.0, 10.0, 21)
+yy = model.predict(xx)
+
+"""
+print(model.predict([2.5]))
+print(model.predict([4.5]))
+print(model.predict([6.0]))
+print(model.predict([10.0]))
+print(xx)
+print(yy)
+"""
+
+x = np.linspace(0, 10, 100)
+plt.plot(x, x, "b", lw=2, label="y = x")
+plt.plot(xs, ys, "g-o", lw=1, ms=10, label="實驗點")
+plt.scatter(xx, yy, c="red", marker="o", lw=4, label="預測點")
+
+xmin, xmax, ymin, ymax = -1, 11, -1, 11
+plt.axis([xmin, xmax, ymin, ymax])  # 設定各軸顯示範圍
+plt.legend()
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Classifier example
+
+(X_train, y_train), (X_test, y_test) = mnist.load_data()
+
+# data pre-processing
+X_train = X_train.reshape(len(X_train), -1) / 255.0  # normalize
+X_test = X_test.reshape(len(X_test), -1) / 255.0  # normalize
+y_train = to_categorical(y_train, num_classes=10)
+y_test = to_categorical(y_test, num_classes=10)
+
+# Another way to build your neural net
+model = Sequential(
+    [
+        Dense(32, input_dim=INPUT_DIM),
+        Activation("relu"),
+        Dense(10),
+        Activation("softmax"),
+    ]
+)
+
+# 先設定優化器, 再組裝神經網路
+rmsprop = RMSprop(learning_rate=0.001, rho=0.9, epsilon=1e-08, decay=0.0)
+
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(
+    optimizer="rmsprop", loss="categorical_crossentropy", metrics=["accuracy"]
+)
+
+""" 久
+# model.fit(X_train, y_train, epoch=2, batch_size=32)
+model.fit(X_train, y_train, batch_size=32)
+
+print("預測")
+loss, accuracy = model.evaluate(X_test, y_test)
+print("test loss: ", loss)
+print("test accuracy: ", accuracy)
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Regressor example
+
+# create some data
+X = np.linspace(-1, 1, 200)
+np.random.shuffle(X)  # randomize the data
+Y = 0.5 * X + 2 + np.random.normal(0, 0.05, (200,))
+
+plt.scatter(X, Y)
+show()
+
+X_train, Y_train = X[:160], Y[:160]  # first 160 data points
+X_test, Y_test = X[160:], Y[160:]  # last 40 data points
+
+# build a neural network from the 1st layer to the last layer
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
+# model.add(Dense(input_dim=1, output_dim=1))
+# 設定隱藏層HL第1層, 用 256 個神經元
+model.add(Dense(256, activation="sigmoid", input_dim=INPUT_DIM))
+
+# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
+model.compile(optimizer="sgd", loss="mse")
+
+""" NG
+# training
+print("Training -----------")
+for step in range(301):
+    cost = model.train_on_batch(X_train, Y_train)
+    if step % 100 == 0:
+        print("train cost: ", cost)
+
+# test
+print("\nTesting ------------")
+cost = model.evaluate(X_test, Y_test, batch_size=40)
+print("test cost:", cost)
+W, b = model.layers[0].get_weights()
+print("Weights=", W, "\nbiases=", b)
+
+Y_pred = model.predict(X_test)  # 取得每一個結果的機率
+plt.scatter(X_test, Y_test)
+plt.plot(X_test, Y_pred)
+
+show()
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+import keras
+
+# from tensorflow import keras
+
+
+def preprocess(labels, images):
+    """
+    最简单的预处理函数:
+            转numpy为Tensor、分类问题需要处理label为one_hot编码、处理训练数据
+    """
+    # 把numpy数据转为Tensor
+    labels = tf.cast(labels, dtype=tf.int32)
+    # labels 转为one_hot编码
+    labels = tf.one_hot(labels, depth=10)
+    # 顺手归一化
+    images = tf.cast(images, dtype=tf.float32) / 255
+    return labels, images
+
+
+# abs_path_to_dataset=" ... dataset/MNIST/database3/mnist.npz"
+# (x, y), (x_test, y_test) = keras.datasets.mnist.load_data(path=abs_path_to_dataset)#绝对路径
+(x, y), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
+
+db_train = tf.data.Dataset.from_tensor_slices((x, y))
+print(db_train)
+print(type(db_train))
+db_train.shuffle(1000)
+db_train.map(preprocess)
+db_train.batch(64)
+db_train.repeat(2)
+
+print(type(db_train))
+# print(db_train.output_shapes)
+# (TensorShape([Dimension(28), Dimension(28)]), TensorShape([]))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+import tensorflow.examples.tutorials.mnist.input_data as input_data
+ 
+mnist = input_data.read_data_sets("./database2/", one_hot=True)#相对路径
+#tensorflow.contrib.learn.python.learn.datasets.mnist.DataSet
+print(type(mnist))#<class "tensorflow.contrib.learn.python.learn.datasets.base.Datasets">
+ 
+batch = mnist.train.next_batch(100)
+print(type(batch))#<class "tuple">
+ 
+x=mnist.train.images
+y=mnist.train.labels
+print(type(x),x.shape)#<class "numpy.ndarray"> (55000, 784)
+print(type(y),y.shape)#<class "numpy.ndarray"> (55000, 10)
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2259,257 +2674,6 @@ session.run(tf.initialize_all_variables())
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-下载mnist数据
-keras默认从(https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz)下载，
-但国内很难连上， 可以参考(http://www.cnblogs.com/shinny/p/9283372.html)。
-手动下载mnist.npz，然后修改mnist.py中的引用路径。 如果找不到mnist.py，可以用everthing搜索。
-mnist.npz已上传到datasets文件夹，可从这里下载。
-"""
-
-mnist = tf.keras.datasets.mnist
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
-print(x_train[0])
-
-plt.imshow(x_train[0], cmap=plt.cm.binary)
-show()
-
-print("答案")
-print(y_train[0])
-
-
-x_train = tf.keras.utils.normalize(x_train, axis=1)
-x_test = tf.keras.utils.normalize(x_test, axis=1)
-
-print(x_train[0])
-
-plt.imshow(x_train[0], cmap=plt.cm.binary)
-show()
-
-model = Sequential()
-model.add(Flatten(input_shape=(28, 28)))
-model.add(Dense(128, activation=tf.nn.relu))
-model.add(Dense(128, activation=tf.nn.relu))
-model.add(Dense(10, activation=tf.nn.softmax))
-
-# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-model.compile(
-    optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"]
-)
-
-model.fit(x_train, y_train, epochs=3)  # 學習訓練.fit
-
-val_loss, val_acc = model.evaluate(x_test, y_test)
-print("val_loss :", val_loss)
-print("val_acc :", val_acc)
-
-y_pred = model.predict(x_test)  # 取得每一個結果的機率
-print("預測結果 :\n", y_pred, sep="")
-
-print(np.argmax(y_pred[0]))
-
-plt.imshow(x_test[0], cmap=plt.cm.binary)
-show()
-
-# 保存模型
-model.save("tmp_epic_num_reader.model")
-
-# 加载保存的模型
-new_model = tf.keras.models.load_model("tmp_epic_num_reader.model")
-
-# 测试保存的模型
-y_pred = new_model.predict(x_test)
-print(np.argmax(y_pred[0]))
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-model = keras.Sequential([keras.layers.Dense(units=1, input_shape=[1])])
-
-# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-model.compile(optimizer="sgd", loss="mean_squared_error")
-
-# y = x
-xs = np.array([0.0, 1.0, 2.0, 3.0, 4.0, 5.0], dtype=float)
-ys = np.array([0.0, 1.0, 2.0, 5.0, 4.0, 5.0], dtype=float)
-print(type(xs))
-print(xs)
-print(type(ys))
-print(ys)
-
-ITERATIONS = 50  # 迭代次數
-model.fit(xs, ys, epochs=ITERATIONS)
-
-print("keras 預測")
-xx = np.linspace(0.0, 10.0, 21)
-yy = model.predict(xx)
-
-"""
-print(model.predict([2.5]))
-print(model.predict([4.5]))
-print(model.predict([6.0]))
-print(model.predict([10.0]))
-print(xx)
-print(yy)
-"""
-
-x = np.linspace(0, 10, 100)
-plt.plot(x, x, "b", lw=2, label="y = x")
-plt.plot(xs, ys, "g-o", lw=1, ms=10, label="實驗點")
-plt.scatter(xx, yy, c="red", marker="o", lw=4, label="預測點")
-
-xmin, xmax, ymin, ymax = -1, 11, -1, 11
-plt.axis([xmin, xmax, ymin, ymax])  # 設定各軸顯示範圍
-plt.legend()
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-import tensorflow.examples.tutorials.mnist.input_data as input_data
- 
-mnist = input_data.read_data_sets('./database2/', one_hot=True)#相对路径
-#tensorflow.contrib.learn.python.learn.datasets.mnist.DataSet
-print(type(mnist))#<class 'tensorflow.contrib.learn.python.learn.datasets.base.Datasets'>
- 
-batch = mnist.train.next_batch(100)
-print(type(batch))#<class 'tuple'>
- 
-x=mnist.train.images
-y=mnist.train.labels
-print(type(x),x.shape)#<class 'numpy.ndarray'> (55000, 784)
-print(type(y),y.shape)#<class 'numpy.ndarray'> (55000, 10)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-import keras
-
-# from tensorflow import keras
-
-
-def preprocess(labels, images):
-    """
-    最简单的预处理函数:
-            转numpy为Tensor、分类问题需要处理label为one_hot编码、处理训练数据
-    """
-    # 把numpy数据转为Tensor
-    labels = tf.cast(labels, dtype=tf.int32)
-    # labels 转为one_hot编码
-    labels = tf.one_hot(labels, depth=10)
-    # 顺手归一化
-    images = tf.cast(images, dtype=tf.float32) / 255
-    return labels, images
-
-
-# abs_path_to_dataset='H:/Leon/CODE/python_projects/master_ImRecognition/dataset/MNIST/database3/mnist.npz'
-# (x, y), (x_test, y_test) = keras.datasets.mnist.load_data(path=abs_path_to_dataset)#绝对路径
-(x, y), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
-
-db_train = tf.data.Dataset.from_tensor_slices((x, y))
-print(db_train)
-print(type(db_train))
-db_train.shuffle(1000)
-db_train.map(preprocess)
-db_train.batch(64)
-db_train.repeat(2)
-
-print(type(db_train))
-# print(db_train.output_shapes)
-# (TensorShape([Dimension(28), Dimension(28)]), TensorShape([]))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# Regressor example
-
-# create some data
-X = np.linspace(-1, 1, 200)
-np.random.shuffle(X)  # randomize the data
-Y = 0.5 * X + 2 + np.random.normal(0, 0.05, (200,))
-
-plt.scatter(X, Y)
-show()
-
-X_train, Y_train = X[:160], Y[:160]  # first 160 data points
-X_test, Y_test = X[160:], Y[160:]  # last 40 data points
-
-# build a neural network from the 1st layer to the last layer
-model = Sequential()
-
-# model.add(Dense(input_dim=1, output_dim=1))
-model.add(Dense(256, activation="sigmoid", input_dim=INPUT_DIM))
-
-# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-model.compile(optimizer="sgd", loss="mse")
-
-# training
-print("Training -----------")
-for step in range(301):
-    cost = model.train_on_batch(X_train, Y_train)
-    if step % 100 == 0:
-        print("train cost: ", cost)
-
-# test
-print("\nTesting ------------")
-cost = model.evaluate(X_test, Y_test, batch_size=40)
-print("test cost:", cost)
-W, b = model.layers[0].get_weights()
-print("Weights=", W, "\nbiases=", b)
-
-Y_pred = model.predict(X_test)  # 取得每一個結果的機率
-plt.scatter(X_test, Y_test)
-plt.plot(X_test, Y_pred)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# Classifier example
-
-from keras.optimizers import RMSprop
-
-(X_train, y_train), (X_test, y_test) = mnist.load_data()
-
-# data pre-processing
-X_train = X_train.reshape(len(X_train), -1) / 255.0  # normalize
-X_test = X_test.reshape(len(X_test), -1) / 255.0  # normalize
-y_train = to_categorical(y_train, num_classes=10)
-y_test = to_categorical(y_test, num_classes=10)
-
-# Another way to build your neural net
-model = Sequential(
-    [
-        Dense(32, input_dim=INPUT_DIM),
-        Activation("relu"),
-        Dense(10),
-        Activation("softmax"),
-    ]
-)
-
-# Another way to define your optimizer
-rmsprop = RMSprop(learning_rate=0.001, rho=0.9, epsilon=1e-08, decay=0.0)
-
-# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-model.compile(
-    optimizer="rmsprop", loss="categorical_crossentropy", metrics=["accuracy"]
-)
-
-model.fit(X_train, y_train, epoch=2, batch_size=32)
-
-print("預測")
-loss, accuracy = model.evaluate(X_test, y_test)
-print("test loss: ", loss)
-print("test accuracy: ", accuracy)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # RNN Classifier example
 
 from keras.layers import SimpleRNN
@@ -2519,7 +2683,6 @@ INPUT_SIZE = 28  # same as the width of the image
 BATCH_SIZE = 50
 BATCH_INDEX = 0
 CELL_SIZE = 50
-LR = 0.001
 
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
@@ -2530,7 +2693,7 @@ y_train = to_categorical(y_train, num_classes=10)
 y_test = to_categorical(y_test, num_classes=10)
 
 # build RNN model
-model = Sequential()
+model = Sequential()  # 建立空白的神經網路模型(CNN)
 
 # RNN cell
 model.add(
@@ -2549,12 +2712,13 @@ model.add(
 
 # 輸出層
 classes = 10  # 輸出神經元預設10個
+# 設定隱藏層HL第1層, 用 10 個神經元
 model.add(Dense(classes))
 
 model.add(Activation("softmax"))
 
-# 優化器 optimizer
-adam = Adam(LR)
+# 先設定優化器, 再組裝神經網路
+adam = Adam(learning_rate=0.001)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
@@ -2587,7 +2751,6 @@ TIME_STEPS = 20
 BATCH_SIZE = 50
 INPUT_SIZE = 1
 CELL_SIZE = 20
-LR = 0.006
 
 
 def get_batch():
@@ -2599,12 +2762,13 @@ def get_batch():
     seq = np.sin(xs)
     res = np.cos(xs)
     BATCH_START += TIME_STEPS
-    # plt.plot(xs[0, :], res[0, :], 'r', xs[0, :], seq[0, :], 'b--')
+    # plt.plot(xs[0, :], res[0, :], "r", xs[0, :], seq[0, :], "b--")
     show()
     return [seq[:, :, np.newaxis], res[:, :, np.newaxis], xs]
 
 
-model = Sequential()
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
 # build a LSTM RNN
 model.add(
     LSTM(
@@ -2622,7 +2786,9 @@ model.add(
 # add output layer
 OUTPUT_SIZE = 1
 model.add(TimeDistributed(Dense(OUTPUT_SIZE)))
-adam = Adam(LR)
+
+# 先設定優化器, 再組裝神經網路
+adam = Adam(learning_rate=0.006)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(
@@ -2716,9 +2882,10 @@ Y = 0.5 * X + 2 + np.random.normal(0, 0.05, (200,))
 X_train, Y_train = X[:160], Y[:160]  # first 160 data points
 X_test, Y_test = X[160:], Y[160:]  # last 40 data points
 
-model = Sequential()
+model = Sequential()  # 建立空白的神經網路模型(CNN)
 
 # model.add(Dense(output_dim=1, input_dim=1))  # fails here
+# 設定隱藏層HL第1層, 用 256 個神經元
 model.add(Dense(256, activation="sigmoid", input_dim=INPUT_DIM))
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
@@ -2740,8 +2907,8 @@ print("test after load: ", model.predict(X_test[0:2]))
 
 """
 # save and load weights
-model.save_weights('tmp_my_model_weights.h5')
-model.load_weights('tmp_my_model_weights.h5')
+model.save_weights("tmp_my_model_weights.h5")
+model.load_weights("tmp_my_model_weights.h5")
 
 # save and load fresh network without trained weights
 from keras.models import model_from_json
@@ -2791,10 +2958,8 @@ mnist = np.load(mnist_npz_filename)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("檢視神經網路")
-model.summary()  # 檢視神經網路
-
+print("檢視模型架構")
+model.summary()  # 檢視模型架構
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2969,15 +3134,15 @@ print("------------------------------------------------------------")  # 60個
 
 """ 讀取 mnist
 
-DATA_URL = 'https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz'
+DATA_URL = "https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz"
 
-path = tf.keras.utils.get_file('mnist.npz', DATA_URL)
+path = tf.keras.utils.get_file("mnist.npz", DATA_URL)
 with np.load(path) as data:
-    train_examples = data['x_train']
-    train_labels = data['y_train']
-    test_examples = data['x_test']
-    test_labels = data['y_test']
-print('done')
+    train_examples = data["x_train"]
+    train_labels = data["y_train"]
+    test_examples = data["x_test"]
+    test_labels = data["y_test"]
+print("done")
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3025,7 +3190,7 @@ show()
 
 
 """ 一些 fail
-print('Auto-Keras')
+print("Auto-Keras")
 
 from autokeras import ImageClassifier
 from autokeras.constant import Constant
@@ -3046,7 +3211,7 @@ clf.final_fit(x_train, y_train, x_test, y_test, retrain=True)
 y = clf.evaluate(x_test, y_test)
 print(y * 100)
 
-clf.export_keras_model('tmp_model.h5')
+clf.export_keras_model("tmp_model.h5")
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3065,7 +3230,7 @@ show()
 y_pred = do_prediction(x_test)
 
 """
-print('任意挑幾個畫出來')
+print("任意挑幾個畫出來")
 pick = np.random.randint(0, len(y_pred), 5)
 print(pick)
 
@@ -3145,20 +3310,26 @@ x_test = x_test.reshape(len(x_test), 784).astype("float32")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 第1層 用 20 個神經元
+# 設定隱藏層HL第1層, 用 20 個神經元
 model.add(Dense(20, activation="relu"))
-# 第1層 用 80 個神經元
+
+# 設定隱藏層HL第2層, 用 80 個神經元
 model.add(Dense(80, activation="relu"))
-# 第1層 用 100 個神經元
+
+# 設定隱藏層HL第3層, 用 100 個神經元
 model.add(Dense(100, activation="relu"))
-# 第1層 用 160 個神經元
+
+# 設定隱藏層HL第4層, 用 160 個神經元
 model.add(Dense(160, activation="relu"))
 
-# 設定輸出層 softmax
-model.add(Dense(10, activation="softmax"))  # 輸出層的神經元 10 個
+# 設定輸出層, 用 10 個神經元, 激活函數選 softmax
+model.add(Dense(10, activation="softmax"))
+
+# 先設定優化器, 再組裝神經網路
+sgd = SGD(learning_rate=0.087)
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-model.compile(optimizer=SGD(learning_rate=0.087), loss="mse", metrics=["accuracy"])
+model.compile(optimizer=sgd, loss="mse", metrics=["accuracy"])
 
 # 數據庫的內容
 # 每筆輸入 (x) 就是一個手寫的 0-9 中一個數字的圖檔, 大小為 28x28
@@ -3206,4 +3377,16 @@ plt.imshow(image, "gray")
 
 
 """
-data
+
+# 第1層 用 16 個神經元, 使用參數 160 個
+# 3*3 (權重) + 1 (bias)
+# (3*3+1)*16 = 160
+
+
+"""
+下载mnist数据
+keras默认从(https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz)下载，
+但国内很难连上， 可以参考(http://www.cnblogs.com/shinny/p/9283372.html)。
+手动下载mnist.npz，然后修改mnist.py中的引用路径。 如果找不到mnist.py，可以用everthing搜索。
+mnist.npz已上传到datasets文件夹，可从这里下载。
+"""
