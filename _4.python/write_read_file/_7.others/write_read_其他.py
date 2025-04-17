@@ -11,21 +11,21 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-print('讀寫HDF5文件')
+print("讀寫HDF5文件")
 
 import h5py
 import numpy as np
 
-f = h5py.File('tmp.h5','w')
-f['data'] = np.zeros((3,3))
-f['labels'] = np.array([1,2,3,4,5])
+f = h5py.File("tmp.h5", "w")
+f["data"] = np.zeros((3, 3))
+f["labels"] = np.array([1, 2, 3, 4, 5])
 f.close()
 
-f = h5py.File('tmp.h5','r')
+f = h5py.File("tmp.h5", "r")
 for key in f.keys():
     print(f[key].name)
     print(f[key].shape)
-    #print(f[key].value)
+    # print(f[key].value)
 f.close()
 
 print("------------------------------------------------------------")  # 60個
