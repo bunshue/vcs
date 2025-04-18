@@ -12,6 +12,10 @@ print("------------------------------------------------------------")  # 60個
 filename_r = "data/python_docx1.docx"
 
 doc = docx.Document(filename_r)
+
+for i, paragraph in enumerate(doc.paragraphs):
+    print(paragraph.text)
+
 for p in doc.paragraphs:
     print(p.text)
 
@@ -99,11 +103,9 @@ print("------------------------------------------------------------")  # 60個
 
 # 讀取Word文件
 
-from docx import Document
-
 filename_r = "./data/用函數還是用復雜的表達式.docx"
 
-doc = Document(filename_r)
+doc = docx.Document(filename_r)
 print(len(doc.paragraphs))
 print(doc.paragraphs[0].text)
 # print(doc.paragraphs[1].runs[0].text)
@@ -115,32 +117,31 @@ print("".join(content))
 
 print("------------------------------------------------------------")  # 60個
 
-from docx import Document  # 引入套件
 from docx.shared import Cm
 from docx.shared import Inches
 
 # 開新的Word檔案
-document = Document()
+doc = docx.Document()
 # 標題 段落樣式
-document.add_heading("標題 段落樣式", 0)
+doc.add_heading("標題 段落樣式", 0)
 # 內文 段落樣式
-p = document.add_paragraph("內文 段落樣式包含一些 ")
+p = doc.add_paragraph("內文 段落樣式包含一些 ")
 p.add_run("粗體").bold = True
 p.add_run(" 還有一些 ")
 p.add_run("斜體字.").italic = True
 # 標題1 段落樣式
-document.add_heading("標題1 段落樣式", level=1)
+doc.add_heading("標題1 段落樣式", level=1)
 # 鮮明引文 段落樣式
-document.add_paragraph("鮮明引文 段落樣式", style="Intense Quote")
+doc.add_paragraph("鮮明引文 段落樣式", style="Intense Quote")
 # 項目符號 段落樣式
-document.add_paragraph("項目符號 段落樣式,1", style="List Bullet")
-document.add_paragraph("項目符號 段落樣式,2", style="List Bullet")
-document.add_paragraph("清單號碼 段落樣式,1", style="List Number")
-document.add_paragraph("清單號碼 段落樣式,2", style="List Number")
+doc.add_paragraph("項目符號 段落樣式,1", style="List Bullet")
+doc.add_paragraph("項目符號 段落樣式,2", style="List Bullet")
+doc.add_paragraph("清單號碼 段落樣式,1", style="List Number")
+doc.add_paragraph("清單號碼 段落樣式,2", style="List Number")
 # 插入圖片，指定寬度5cm
-document.add_picture("data/Google-Colab-Guide-1024x683.jpg", width=Cm(5))
+doc.add_picture("data/Google-Colab-Guide-1024x683.jpg", width=Cm(5))
 # 插入表格，先增加1列標題列
-table = document.add_table(rows=1, cols=3, style="Table Grid")
+table = doc.add_table(rows=1, cols=3, style="Table Grid")
 # 表格標題列
 header_cells = table.rows[0].cells
 header_cells[0].text = "班級"
@@ -157,9 +158,9 @@ row_cells[0].text = "101"
 row_cells[1].text = "02"
 row_cells[2].text = "郭付錢"
 # 換頁符號
-document.add_page_break()
+doc.add_page_break()
 # 儲存檔案
-document.save("tmp_word1.docx")
+doc.save("tmp_word1.docx")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

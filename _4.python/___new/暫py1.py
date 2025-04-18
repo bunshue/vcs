@@ -375,16 +375,6 @@ Python資料型態
 
 Python字串 不允許變更內容
 
-python_install_faq.txt
-
-1. python IDLE, anaconda, thonny
-2. pip install
-3. 處理模組不能使用問題
-  1. 特殊版本安裝法
-  2. 特殊安裝法
-  3. 修改程式
-  4. 修改模組
-
 使用豆瓣源 安裝moviepy	ok in kilo	2024/1/20 12:08上午
 
  pip install moviepy==1.0.3 -i https://pypi.doubanio.com/simple
@@ -5315,5 +5305,333 @@ print("------------------------------------------------------------")  # 60個
 ----------------colab SP----------------
 
 
+
+python_install_faq.txt
+
+1. python IDLE, anaconda, thonny
+2. pip install
+3. 處理模組不能使用問題
+  1. 特殊版本安裝法
+  2. 特殊安裝法
+  3. 修改程式
+  4. 修改模組
+
+
+
+
+
+目前 sugar 的 python 版本
+
+C:\Users\070601\Desktop>python --version
+Python 3.11.2
+
+---------------- Python PIP 使用 requirements.txt 管理套件相依性 ----------------
+
+如何使用 pip 一次安裝多個套件
+將安裝過的套件建立成 requirements.txt 套件清單：
+pip freeze > requirements_sugar.txt
+
+安裝 requirements.txt 內的套件清單：
+
+pip install -r requirements.txt
+
+
+安裝又更新所有套件
+pip install -U -r requirements.txt
+
+----------------安裝 反安裝 更新----------------
+
+更新pip程式
+python.exe -m pip install --upgrade pip
+
+更新套件
+
+
+指定版本安裝套件
+
+pip install urllib3==1.26.6
+
+
+C:\Users\david>python -m pip install -U scipy==1.9.1
+C:\Users\david>python -m pip install -U scikit-image==0.19.3
+C:\Users\david>python -m pip install -U scikit-learn==1.1.1
+
+更新套件
+pip install -U XXXXXXX
+
+pip install xlrd==1.2.0
+
+C:\Users\070601>pip install xlrd==1.2.0
+Collecting xlrd==1.2.0
+Uninstalling xlrd-2.0.1:
+Successfully uninstalled xlrd-2.0.1
+Successfully installed xlrd-1.2.0
+
+----------------list----------------
+
+列出所安裝的模組
+    可以使用list列出所安裝的模組，如果使用’-o’可列出有新版本的模組。
+pip list		# 列出安裝的模組
+pip list –o    # 列出有新版本的模組  		
+E-5：安裝更新版模組
+未來如果有更新版，可用下列方式更新至最新版模組。
+pip install -U 模組名稱			# 更新至最新版模組
+
+pip show sklearn命令查看sklearn包的路径
+
+使用 SimpleGUICS2Pygame 替換 simplegui
+
+C:\Users\070601>pip install SimpleGUICS2Pygame
+pip install SimpleGUICS2Pygame
+pip install SimpleGUICS2Pygame --upgrade
+
+python -m pip install SimpleGUICS2Pygame --user --upgrade
+
+
+import simplegui
+
+改成
+import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
+
+
+刪除模組
+    安裝了模組之後，若是想刪除可以使用uninstall，例如：若是想刪除basemap，可以使用下列指令。
+    pip uninstall basemap
+
+pip list	#看目前已經安裝的套件
+
+把所有要安裝的套件條列式的寫在一張txt檔案裡面
+
+beautifulsoup4
+requests
+html5lib
+matplotlib
+selenium
+jieba
+wordcloud
+Pillow==4.0.0
+
+再來使用以下指令一次安裝所有套件:
+$ pip install -r [txt_file_name]
+
+安裝pySimpleGUI
+	C:\Users\user>pip install pysimplegui
+
+安裝pySerial
+	C:\Users\user>pip install pyserial
+
+
+C:\Users\david>pip install pillow
+Collecting pillow
+
+#PIL：Python Imaging Library
+安裝Pillow
+>pip install pillow
+
+
+----------------pypy python test ST 安裝與升級 pip----------------
+
+Python的套件管理程式	PIP
+
+python -m pip install -U matplotlib	//Windows
+pip install -U matplotlib		//Linux
+
+在Windows下安裝Python套件:
+用windows command line安裝 BeautifulSoup
+C:\Users\david>pip3 install beautifulsoup4
+
+windows command line下:
+
+>pip list	//查看目前有安裝的Python套件
+>pip3 install matplotlib	//安裝matplotlib
+>pip3 install pygame		//安裝pygame
+
+升級pip
+python -m pip install -U pip
+python -m pip install -U matplotlib
+C:\Users\david>python -m pip install -U pip
+安装 matplotlib 库：
+C:\Users\david>python -m pip install -U matplotlib
+
+重裝Pillow套件
+pip uninstall PIL
+pip uninstall Pillow
+pip install Pillow
+
+C:\Users\david\AppData\Local\Programs\Python\Python38-32>python.exe -m pip install opencv-python
+
+
+pip : the package installer for Python
+
+
+
+安裝 python-3.7.7.exe
+
+
+C:\Users\david>python --version
+Python 3.7.7
+
+
+C:\Users\david>pip --version
+C:\Users\david>pip3 --version
+
+安裝 matplotlib
+C:\Users\david>pip install matplotlib
+
+安裝 pygame
+
+C:\Users\david>pip install pygame
+
+安裝 pygame requests
+C:\Users\david>pip install requests
+C:\Users\david>pip install BeautifulSoup	有問題 kilo/sugar不可用
+C:\Users\david>pip install beautifulsoup4	 kilo/sugar 可用
+C:\Users\david>pip install opencv-python
+
+sugar 的 python 的位置
+
+C:\Users\070601\AppData\Local\Programs\Python\Python311>python
+
+Python 3.11.2 (tags/v3.11.2:878ead1, Feb  7 2023, 16:38:35) [MSC v.1934 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+
+sugar 的 pip 的位置
+
+C:\Users\070601\AppData\Local\Programs\Python\Python311\Scripts>pip --version
+pip 22.3.1 from C:\Users\070601\AppData\Local\Programs\Python\Python311\Lib\site-packages\pip (python 3.11)
+
+sugar 安裝 matplotlib
+C:\Users\070601\AppData\Local\Programs\Python\Python311\Scripts>pip install matplotlib
+
+sugar 安裝 serial
+C:\Users\070601\AppData\Local\Programs\Python\Python311\Scripts>pip install serial
+
+sugar 安裝 PySimpleGUI
+
+sugar 安裝 requests
+C:\Users\070601\AppData\Local\Programs\Python\Python311\Scripts>pip install requests
+
+pip install flask
+
+pip install twstock
+
+pip install plotly
+
+twstock 台灣股市股票價格擷取
+https://pypi.org/project/twstock/
+
+以 Python Imaging Library 進行影像資料處理
+需先 pip install pillow
+
+C:\Users\070601\AppData\Local\Programs\Python\Python311\Scripts>pip install lxml
+
+
+
+ModuleNotFoundError: No module named matplotlib 问题解决方案
+解决方案：
+打开cmd ,切换到python的安装路径下，然后输入：python -m pip install matplotlib  
+稍等片刻，成功！
+C:\Users\david\AppData\Local\Programs\Python\Python38-32>
+C:\Users\david\AppData\Local\Programs\Python\Python38-32>python -m pip install matplotlib
+
+
+
+
+
+
+
+C:\Users\070601>pip show scikit-learn
+C:\Users\070601>pip show pytube
+C:\Users\070601>python --version
+C:\Users\070601>pip --version
+
+
+也可以針對特定套件顯示更詳細的套件資訊
+pip show <package-name>
+pip show pytube
+
+檢查所有套件有無更新版本
+pip list --outdated
+
+
+指定安裝版本
+pip install imageai==2.0.2
+
+安裝opencv
+pip install opencv-python
+
+pip install pytube3
+pip install jupyter
+
+
+
+本地安裝套件
+
+下載 XXXX.whl
+pip install XXXX.whl
+
+
+pip install "scikit_learn==0.22.2.post1"
+
+pip show scikit-learn
+
+pip install scikit-learn scipy matplotlib numpy
+pip install scikit-learn scipy matplotlib numpy
+
+#alternative if you get permissions error
+pip install scikit-learn scipy matplotlib numpy --user
+
+
+
+
+
+本書各章pip安裝的套件清單
+
+第9章: Python 3.9
+pip install pywin32==303
+第10章: Python 3.9
+pip install opencv-python==4.5.4.60
+pip install imutils==0.5.4
+第12章: Python 3.9
+pip install mediapipe==0.8.9.1
+pip install cvzone==1.5.3
+pip install <下載的Dlib的.whl檔>
+pip install face-recognition==1.3.0
+第15章: Python 3.9
+pip install https://github.com/google-coral/pycoral/releases/download/v2.0.0/tflite_runtime-2.5.0.post1-cp39-cp39-win_amd64.whl
+pip install pytesseract==0.3.8
+第16章: Python 3.9
+pip install torch==1.10.2
+pip install torchvision==0.11.3
+pip install torchaudio==0.10.2
+
+
+
+
+pip install 套件名稱
+
+pip uninstall 想移除的套件名稱
+
+pip show 想查詢的套件名稱
+
+
+pip list
+
+
+pip語法
+
+pip uninstall keras -y
+pip uninstall keras-nightly -y
+pip uninstall keras-Preprocessing -y
+pip uninstall keras-vis -y
+pip uninstall tensorflow -y
+pip uninstall h5py -y
+
+pip install tensorflow==1.13.1
+pip install keras==2.0.8
+pip install h5py==2.10.0
+
+更新套件
+pip install yfinance -U
 
 

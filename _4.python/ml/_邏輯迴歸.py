@@ -32,10 +32,12 @@ import sklearn.linear_model
 import sklearn.metrics as metrics
 from common1 import *
 from sklearn import datasets
+from sklearn import preprocessing
 from sklearn.datasets import make_blobs  # 集群資料集
 from sklearn.datasets import make_circles  # 圓形分佈的資料集
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn.model_selection import GridSearchCV  # 網格搜索
 from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import StandardScaler  # 特徵縮放
 from sklearn.preprocessing import Normalizer
@@ -44,6 +46,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix  # 混淆矩陣
 from sklearn.metrics import ConfusionMatrixDisplay  # 混淆矩陣圖
 from sklearn.metrics import classification_report  # 分類報告
+from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import recall_score
 from sklearn.metrics import roc_curve
@@ -51,6 +54,14 @@ from sklearn.metrics import auc
 from sklearn import tree
 from sklearn import metrics
 from sklearn import linear_model
+from sklearn.pipeline import Pipeline
+from sklearn.pipeline import make_pipeline
+from sklearn.feature_selection import f_regression
+from sklearn.feature_selection import f_classif
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import RFE
+from sklearn.feature_selection import chi2
+
 from matplotlib.colors import ListedColormap
 
 
@@ -59,7 +70,6 @@ def show():
     pass
 
 
-'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -837,9 +847,6 @@ print("------------------------------------------------------------")  # 60個
 # SelectKBest 單變數特徵選取(Univariate feature selection)
 # SelectKBest 挑選出K個分數最高的特徵
 
-from sklearn.feature_selection import SelectKBest
-from sklearn.feature_selection import chi2
-
 print("鳶尾花資料集")
 X, y = datasets.load_iris(return_X_y=True)
 print(X.shape)  # 150 X 4
@@ -929,7 +936,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 遞迴特徵消去法(Recursive feature elimination, RFE)
 
-from sklearn.feature_selection import RFE
 from sklearn.svm import SVC
 
 print("鳶尾花資料集")
@@ -1788,6 +1794,7 @@ lg_m = smf.glm(
 
 print("檢視模型架構")
 lg_m.summary()  # 檢視模型架構
+
 
 # 多元逻辑回归
 # 向前法
@@ -3444,7 +3451,7 @@ print(classification_report(y_true, y_pred))
 y_pred = [1, 2, 0]
 y_true = [1, 1, 1]
 print(classification_report(y_true, y_pred, labels=[1, 2, 3]))
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -3692,6 +3699,633 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# linear_classification
+
+# 線性判別分析, Linear discriminant analysis, LDA
+
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
+
+# Dataset 2 two multivariate normal
+n_samples, n_features = 100, 2
+mean0, mean1 = np.array([0, 0]), np.array([0, 2])
+Cov = np.array([[1, 0.8], [0.8, 1]])
+
+X0 = np.random.multivariate_normal(mean0, Cov, n_samples)
+X1 = np.random.multivariate_normal(mean1, Cov, n_samples)
+X = np.vstack([X0, X1])
+y = np.array([0] * X0.shape[0] + [1] * X1.shape[0])
+
+# LDA with scikit-learn
+lda = LDA()
+
+proj = lda.fit(X, y).transform(X)  # 學習訓練.fit
+
+y_pred_lda = lda.predict(X)  # 預測.predict
+
+errors = y_pred_lda != y
+print("Nb errors=%i, error rate=%.2f" % (errors.sum(), errors.sum() / len(y_pred_lda)))
+
+print("------------------------------")  # 30個
+
+
+# Logistic regression
+def logistic(x):
+    return 1 / (1 + np.exp(-x))
+
+
+x = np.linspace(-6, 6, 100)
+plt.plot(x, logistic(x))
+plt.grid(True)
+plt.title("Logistic (sigmoid)")
+
+logreg = sklearn.linear_model.LogisticRegression().fit(X, y)  # 學習訓練.fit
+
+# This class implements regularized logistic regression.
+# C is the Inverse of regularization strength.
+# Large value => no regularization.
+
+logreg.fit(X, y)  # 學習訓練.fit
+
+y_pred_logreg = logreg.predict(X)  # 預測.predict
+
+errors = y_pred_logreg != y
+print(
+    "Nb errors=%i, error rate=%.2f" % (errors.sum(), errors.sum() / len(y_pred_logreg))
+)
+print(logreg.coef_)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Dataset with some correlation
+N = 100  # n_samples, 樣本數
+M = 10  # n_features, 特徵數(資料的維度)
+print("make_classification,", N, "個樣本, ", M, "個特徵")
+X, y = datasets.make_classification(
+    n_samples=N,
+    n_features=M,
+    n_informative=5,
+    n_redundant=3,
+    n_classes=2,
+    shuffle=False,
+)
+
+lr = sklearn.linear_model.LogisticRegression().fit(X, y)  # 學習訓練.fit
+
+l2 = sklearn.linear_model.LogisticRegression(penalty="l2", C=0.1).fit(
+    X, y
+)  # lambda = 1 / C!  # 學習訓練.fit
+
+# use solver 'saga' to handle L1 penalty
+l1 = sklearn.linear_model.LogisticRegression(penalty="l1", C=0.1, solver="saga").fit(
+    X, y
+)  # lambda = 1 / C!  # 學習訓練.fit
+
+l1l2 = sklearn.linear_model.LogisticRegression(
+    penalty="elasticnet", C=0.1, l1_ratio=0.5, solver="saga"
+).fit(
+    X, y
+)  # lambda = 1 / C!  # 學習訓練.fit
+
+df = pd.DataFrame(
+    np.vstack((lr.coef_, l2.coef_, l1.coef_, l1l2.coef_)),
+    index=["lr", "l2", "l1", "l1l2"],
+)
+print(df)
+
+print("------------------------------")  # 30個
+
+# Ridge Fisher's linear classification (L2-regularization)
+# Ridge logistic regression (L2-regularization)
+
+lrl2 = sklearn.linear_model.LogisticRegression(penalty="l2", C=0.1)
+# This class implements regularized logistic regression. C is the Inverse of regularization strength.
+# Large value => no regularization.
+
+lrl2.fit(X, y)  # 學習訓練.fit
+
+y_pred_l2 = lrl2.predict(X)  # 預測.predict
+
+prob_pred_l2 = lrl2.predict_proba(X)
+
+print("Probas of 5 first samples for class 0 and class 1:")
+print(prob_pred_l2[:5, :])
+
+print("Coef vector:")
+print(lrl2.coef_)
+
+# Retrieve proba from coef vector
+probas = 1 / (1 + np.exp(-(np.dot(X, lrl2.coef_.T) + lrl2.intercept_))).ravel()
+print("Diff", np.max(np.abs(prob_pred_l2[:, 1] - probas)))
+
+errors = y_pred_l2 != y
+print("Nb errors=%i, error rate=%.2f" % (errors.sum(), errors.sum() / len(y)))
+
+print("------------------------------")  # 30個
+
+# Lasso logistic regression (L1-regularization)
+
+lrl1 = sklearn.linear_model.LogisticRegression(
+    penalty="l1", C=0.1, solver="saga"
+)  # lambda = 1 / C!
+
+# This class implements regularized logistic regression. C is the Inverse of regularization strength.
+# Large value => no regularization.
+
+lrl1.fit(X, y)  # 學習訓練.fit
+
+y_pred_lrl1 = lrl1.predict(X)  # 預測.predict
+
+errors = y_pred_lrl1 != y
+print("Nb errors=%i, error rate=%.2f" % (errors.sum(), errors.sum() / len(y_pred_lrl1)))
+
+print("Coef vector:")
+print(lrl1.coef_)
+
+print("------------------------------")  # 30個
+
+from sklearn import svm
+
+svmlin = svm.LinearSVC(C=0.1)
+
+# Remark: by default LinearSVC uses squared_hinge as loss
+svmlin.fit(X, y)  # 學習訓練.fit
+
+y_pred_svmlin = svmlin.predict(X)  # 預測.predict
+
+errors = y_pred_svmlin != y
+print(
+    "Nb errors=%i, error rate=%.2f" % (errors.sum(), errors.sum() / len(y_pred_svmlin))
+)
+print("Coef vector:")
+print(svmlin.coef_)
+
+print("------------------------------")  # 30個
+
+svmlinl1 = svm.LinearSVC(penalty="l1", dual=False)
+# Remark: by default LinearSVC uses squared_hinge as loss
+
+svmlinl1.fit(X, y)  # 學習訓練.fit
+
+y_pred_svmlinl1 = svmlinl1.predict(X)  # 預測.predict
+
+errors = y_pred_svmlinl1 != y
+print(
+    "Nb errors=%i, error rate=%.2f"
+    % (errors.sum(), errors.sum() / len(y_pred_svmlinl1))
+)
+print("Coef vector:")
+print(svmlinl1.coef_)
+
+print("------------------------------")  # 30個
+
+# Use SGD solver
+enetlog = sklearn.linear_model.SGDClassifier(
+    loss="log_loss", penalty="elasticnet", alpha=0.1, l1_ratio=0.5
+)
+
+enetlog.fit(X, y)  # 學習訓練.fit
+
+# Or saga solver:
+# enetloglike = sklearn.linear_model.LogisticRegression(penalty='elasticnet',
+#                                    C=.1, l1_ratio=0.5, solver='saga')
+
+enethinge = sklearn.linear_model.SGDClassifier(
+    loss="hinge", penalty="elasticnet", alpha=0.1, l1_ratio=0.5
+)
+
+enethinge.fit(X, y)  # 學習訓練.fit
+
+print("Hinge loss and logistic loss provide almost the same predictions.")
+print("Confusion matrix")
+confusion_matrix(enetlog.predict(X), enethinge.predict(X))
+
+print("Decision_function log x hinge losses:")
+_ = plt.plot(enetlog.decision_function(X), enethinge.decision_function(X), "o")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+N = 500  # n_samples, 樣本數
+M = 5  # n_features, 特徵數(資料的維度)
+print("make_classification,", N, "個樣本, ", M, "個特徵")
+X, y = datasets.make_classification(
+    n_samples=N,
+    n_features=M,
+    n_informative=2,
+    n_redundant=0,
+    n_repeated=0,
+    n_classes=2,
+    shuffle=False,
+)
+
+print(*["#samples of class %i = %i;" % (lev, np.sum(y == lev)) for lev in np.unique(y)])
+
+print("# No Reweighting balanced dataset")
+lr_inter = sklearn.linear_model.LogisticRegression(C=1)
+
+lr_inter.fit(X, y)  # 學習訓練.fit
+
+p, r, f, s = precision_recall_fscore_support(y, lr_inter.predict(X))
+
+print("SPC: %0.3f; SEN: %0.3f" % tuple(r))
+print("# => The predictions are balanced in sensitivity and specificity\n")
+
+# Create imbalanced dataset, by subsampling sample of class 0: keep only 10% of
+# class 0's samples and all class 1's samples.
+n0 = int(np.rint(np.sum(y == 0) / 20))
+subsample_idx = np.concatenate((np.where(y == 0)[0][:n0], np.where(y == 1)[0]))
+Ximb = X[subsample_idx, :]
+yimb = y[subsample_idx]
+print(
+    *[
+        "#samples of class %i = %i;" % (lev, np.sum(yimb == lev))
+        for lev in np.unique(yimb)
+    ]
+)
+
+print("# No Reweighting on imbalanced dataset")
+lr_inter = sklearn.linear_model.LogisticRegression(C=1)
+
+lr_inter.fit(Ximb, yimb)  # 學習訓練.fit
+
+p, r, f, s = precision_recall_fscore_support(yimb, lr_inter.predict(Ximb))
+
+print("SPC: %0.3f; SEN: %0.3f" % tuple(r))
+print("# => Sensitivity >> specificity\n")
+
+print("# Reweighting on imbalanced dataset")
+lr_inter_reweight = sklearn.linear_model.LogisticRegression(
+    C=1, class_weight="balanced"
+)
+
+lr_inter_reweight.fit(Ximb, yimb)  # 學習訓練.fit
+
+p, r, f, s = precision_recall_fscore_support(yimb, lr_inter_reweight.predict(Ximb))
+print("SPC: %0.3f; SEN: %0.3f" % tuple(r))
+print("# => The predictions are balanced in sensitivity and specificity\n")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# Scikit-learn processing pipelines
+
+# Standardization of input features
+
+n_samples, n_features, n_features_info = 100, 5, 3
+X = np.random.randn(n_samples, n_features)
+beta = np.zeros(n_features)
+beta[:n_features_info] = 1
+Xbeta = np.dot(X, beta)
+eps = np.random.randn(n_samples)
+y = Xbeta + eps
+
+X[:, 0] *= 1e6  # inflate the first feature
+X[:, 1] += 1e6  # bias the second feature
+y = 100 * y + 1000  # bias and scale the output
+
+print("== Linear regression: scaling is not required ==")
+model = sklearn.linear_model.LinearRegression()
+
+model.fit(X, y)  # 學習訓練.fit
+
+print("Coefficients:", model.coef_, model.intercept_)
+print("Test R2:%.2f" % cross_val_score(estimator=model, X=X, y=y, cv=5).mean())
+
+print("== Lasso without scaling ==")
+model = sklearn.linear_model.LassoCV(cv=3)
+
+model.fit(X, y)  # 學習訓練.fit
+
+print("Coefficients:", model.coef_, model.intercept_)
+print("Test R2:%.2f" % cross_val_score(estimator=model, X=X, y=y, cv=5).mean())
+
+print("== Lasso with scaling ==")
+model = sklearn.linear_model.LassoCV(cv=3)
+scaler = preprocessing.StandardScaler()
+
+Xc = scaler.fit(X).transform(X)
+
+model.fit(Xc, y)  # 學習訓練.fit
+
+print("Coefficients:", model.coef_, model.intercept_)
+print("Test R2:%.2f" % cross_val_score(estimator=model, X=Xc, y=y, cv=5).mean())
+
+# Scikit-learn pipelines
+
+# Standardization of input features
+
+model = make_pipeline(
+    preprocessing.StandardScaler(), sklearn.linear_model.LassoCV(cv=3)
+)
+
+model = Pipeline(
+    [
+        ("standardscaler", preprocessing.StandardScaler()),
+        ("lassocv", sklearn.linear_model.LassoCV(cv=3)),
+    ]
+)
+
+scores = cross_val_score(estimator=model, X=X, y=y, cv=5)
+print("Test  r2:%.2f" % scores.mean())
+
+# Features selection
+
+n_samples, n_features, n_features_info = 100, 100, 3
+X = np.random.randn(n_samples, n_features)
+beta = np.zeros(n_features)
+beta[:n_features_info] = 1
+Xbeta = np.dot(X, beta)
+eps = np.random.randn(n_samples)
+y = Xbeta + eps
+
+X[:, 0] *= 1e6  # inflate the first feature
+X[:, 1] += 1e6  # bias the second feature
+y = 100 * y + 1000  # bias and scale the output
+
+model = Pipeline(
+    [
+        ("anova", SelectKBest(f_regression, k=3)),
+        ("lm", sklearn.linear_model.LinearRegression()),
+    ]
+)
+scores = cross_val_score(estimator=model, X=X, y=y, cv=5)
+print("Anova filter + linear regression, test  r2:%.2f" % scores.mean())
+
+model = Pipeline(
+    [
+        ("standardscaler", preprocessing.StandardScaler()),
+        ("lassocv", sklearn.linear_model.LassoCV(cv=3)),
+    ]
+)
+scores = cross_val_score(estimator=model, X=X, y=y, cv=5)
+print("Standardize + Lasso, test  r2:%.2f" % scores.mean())
+
+# Regression pipelines with CV for parameters selection
+
+# Datasets
+N = 100  # n_samples, 樣本數
+M = 100  # n_features, 特徵數(資料的維度)
+T = 1  # n_targets, 標籤類別
+NOISE = 20  # noise, 分散程度
+
+print("make_regression,", N, "個樣本, ", M, "個特徵")
+
+X, y, coef = datasets.make_regression(
+    n_samples=N,
+    n_features=M,
+    noise=NOISE,
+    n_informative=5,
+    random_state=9487,
+    coef=True,
+)
+
+# Use this to tune the noise parameter such that snr < 5
+print("SNR:", np.std(np.dot(X, coef)) / NOISE)
+
+print("=============================")
+print("== Basic linear regression ==")
+print("=============================")
+
+scores = cross_val_score(
+    estimator=sklearn.linear_model.LinearRegression(), X=X, y=y, cv=5
+)
+print("Test  r2:%.2f" % scores.mean())
+
+print("==============================================")
+print("== Scaler + anova filter + ridge regression ==")
+print("==============================================")
+
+anova_ridge = Pipeline(
+    [
+        ("standardscaler", preprocessing.StandardScaler()),
+        ("selectkbest", SelectKBest(f_regression)),
+        ("ridge", sklearn.linear_model.Ridge()),
+    ]
+)
+
+param_grid = {
+    "selectkbest__k": np.arange(10, 110, 10),
+    "ridge__alpha": [0.001, 0.01, 0.1, 1, 10, 100],
+}
+
+# Expect execution in ipython, for python remove the %time
+print("----------------------------")
+print("-- Parallelize inner loop --")
+print("----------------------------")
+
+anova_ridge_cv = GridSearchCV(anova_ridge, cv=5, param_grid=param_grid, n_jobs=-1)
+cores = cross_val_score(estimator=anova_ridge_cv, X=X, y=y, cv=5)
+print("Test r2:%.2f" % scores.mean())
+
+print("----------------------------")
+print("-- Parallelize outer loop --")
+print("----------------------------")
+
+anova_ridge_cv = GridSearchCV(anova_ridge, cv=5, param_grid=param_grid)
+scores = cross_val_score(estimator=anova_ridge_cv, X=X, y=y, cv=5, n_jobs=-1)
+print("Test r2:%.2f" % scores.mean())
+
+print("=====================================")
+print("== Scaler + Elastic-net regression ==")
+print("=====================================")
+
+alphas = [0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1000]
+l1_ratio = [0.1, 0.5, 0.9]
+
+print("----------------------------")
+print("-- Parallelize outer loop --")
+print("----------------------------")
+
+enet = Pipeline(
+    [
+        ("standardscaler", preprocessing.StandardScaler()),
+        ("enet", sklearn.linear_model.ElasticNet(max_iter=10000)),
+    ]
+)
+param_grid = {"enet__alpha": alphas, "enet__l1_ratio": l1_ratio}
+enet_cv = GridSearchCV(enet, cv=5, param_grid=param_grid)
+scores = cross_val_score(estimator=enet_cv, X=X, y=y, cv=5, n_jobs=-1)
+print("Test r2:%.2f" % scores.mean())
+
+print("-----------------------------------------------")
+print("-- Parallelize outer loop + built-in CV      --")
+print("-- Remark: scaler is only done on outer loop --")
+print("-----------------------------------------------")
+
+enet_cv = Pipeline(
+    [
+        ("standardscaler", preprocessing.StandardScaler()),
+        (
+            "enet",
+            sklearn.linear_model.ElasticNetCV(
+                max_iter=10000, l1_ratio=l1_ratio, alphas=alphas, cv=3
+            ),
+        ),
+    ]
+)
+
+scores = cross_val_score(estimator=enet_cv, X=X, y=y, cv=5)
+print("Test r2:%.2f" % scores.mean())
+
+
+# Classification pipelines with CV for parameters selection
+
+# Datasets
+N = 100  # n_samples, 樣本數
+M = 100  # n_features, 特徵數(資料的維度)
+print("make_classification,", N, "個樣本, ", M, "個特徵")
+X, y = datasets.make_classification(
+    n_samples=N, n_features=M, n_informative=5, random_state=9487
+)
+
+
+def balanced_acc(estimator, X, y, **kwargs):
+    # Balanced acuracy scorer
+    return recall_score(y, estimator.predict(X), average=None).mean()
+
+
+print("=============================")
+print("== Basic logistic regression ==")
+print("=============================")
+
+scores = cross_val_score(
+    estimator=sklearn.linear_model.LogisticRegression(
+        C=1e8, class_weight="balanced", solver="lbfgs"
+    ),
+    X=X,
+    y=y,
+    cv=5,
+    scoring=balanced_acc,
+)
+print("Test  bACC:%.2f" % scores.mean())
+
+print("=======================================================")
+print("== Scaler + anova filter + ridge logistic regression ==")
+print("=======================================================")
+
+anova_ridge = Pipeline(
+    [
+        ("standardscaler", preprocessing.StandardScaler()),
+        ("selectkbest", SelectKBest(f_classif)),
+        (
+            "ridge",
+            sklearn.linear_model.LogisticRegression(
+                penalty="l2", class_weight="balanced", solver="lbfgs"
+            ),
+        ),
+    ]
+)
+
+param_grid = {
+    "selectkbest__k": np.arange(10, 110, 10),
+    "ridge__C": [0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000],
+}
+
+# Expect execution in ipython, for python remove the %time
+print("----------------------------")
+print("-- Parallelize inner loop --")
+print("----------------------------")
+
+anova_ridge_cv = GridSearchCV(
+    anova_ridge, cv=5, param_grid=param_grid, scoring=balanced_acc, n_jobs=-1
+)
+scores = cross_val_score(estimator=anova_ridge_cv, X=X, y=y, cv=5, scoring=balanced_acc)
+print("Test bACC:%.2f" % scores.mean())
+
+print("----------------------------")
+print("-- Parallelize outer loop --")
+print("----------------------------")
+
+anova_ridge_cv = GridSearchCV(
+    anova_ridge, cv=5, param_grid=param_grid, scoring=balanced_acc
+)
+scores = cross_val_score(
+    estimator=anova_ridge_cv, X=X, y=y, cv=5, scoring=balanced_acc, n_jobs=-1
+)
+print("Test bACC:%.2f" % scores.mean())
+
+print("========================================")
+print("== Scaler + lasso logistic regression ==")
+print("========================================")
+
+Cs = np.array([0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000])
+alphas = 1 / Cs
+l1_ratio = [0.1, 0.5, 0.9]
+
+print("----------------------------")
+print("-- Parallelize outer loop --")
+print("----------------------------")
+
+lasso = Pipeline(
+    [
+        ("standardscaler", preprocessing.StandardScaler()),
+        (
+            "lasso",
+            sklearn.linear_model.LogisticRegression(
+                penalty="l1", class_weight="balanced"
+            ),
+        ),
+    ]
+)
+param_grid = {"lasso__C": Cs}
+enet_cv = GridSearchCV(lasso, cv=5, param_grid=param_grid, scoring=balanced_acc)
+""" NG
+scores = cross_val_score(estimator=enet_cv, X=X, y=y, cv=5,\
+                               scoring=balanced_acc, n_jobs=-1)
+print("Test bACC:%.2f" % scores.mean())
+"""
+
+print("-----------------------------------------------")
+print("-- Parallelize outer loop + built-in CV      --")
+print("-- Remark: scaler is only done on outer loop --")
+print("-----------------------------------------------")
+
+lasso_cv = Pipeline(
+    [
+        ("standardscaler", preprocessing.StandardScaler()),
+        (
+            "lasso",
+            sklearn.linear_model.LogisticRegressionCV(Cs=Cs, scoring=balanced_acc),
+        ),
+    ]
+)
+
+scores = cross_val_score(estimator=lasso_cv, X=X, y=y, cv=5)
+print("Test bACC:%.2f" % scores.mean())
+
+print("=============================================")
+print("== Scaler + Elasticnet logistic regression ==")
+print("=============================================")
+
+print("----------------------------")
+print("-- Parallelize outer loop --")
+print("----------------------------")
+
+enet = Pipeline(
+    [
+        ("standardscaler", preprocessing.StandardScaler()),
+        (
+            "enet",
+            sklearn.linear_model.SGDClassifier(
+                loss="log",
+                penalty="elasticnet",
+                alpha=0.0001,
+                l1_ratio=0.15,
+                class_weight="balanced",
+            ),
+        ),
+    ]
+)
+
+param_grid = {"enet__alpha": alphas, "enet__l1_ratio": l1_ratio}
+
+enet_cv = GridSearchCV(enet, cv=5, param_grid=param_grid, scoring=balanced_acc)
+""" NG
+scores = cross_val_score(estimator=enet_cv, X=X, y=y, cv=5, scoring=balanced_acc, n_jobs=-1)
+print("Test bACC:%.2f" % scores.mean())
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

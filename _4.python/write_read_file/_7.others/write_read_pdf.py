@@ -1,16 +1,13 @@
 """
 pdf 讀寫
 
-
-
 pdf2image 需要先下載 poppler, 在 
+https://github.com/oschwartz10612/poppler-windows
 
 """
 
 import sys
 
-# pdf_filename = "C:/_git/vcs/_4.python/import_module/aaaa.pdf"
-pdf_filename = "aaaa.pdf"
 
 print("------------------------------------------------------------")  # 60個
 print("使用  pdf2image, pdf 轉 jpg")
@@ -22,11 +19,12 @@ from pdf2image import convert_from_path
 
 pages = convert_from_path(
     pdf_filename,
-    500,
+    100,
     poppler_path=r"D:\___backup\Release-24.08.0-0\poppler-24.08.0\Library\bin",
 )
+
 for i, page in enumerate(pages):
-    pic_filename = "tmp_page" + str(i) + ".png"
+    pic_filename = "tmp_page" + str(i+1) + ".png"
     # page.save(pic_filename, "PNG") # JPEG
     print("存檔檔名 :", pic_filename)
 
