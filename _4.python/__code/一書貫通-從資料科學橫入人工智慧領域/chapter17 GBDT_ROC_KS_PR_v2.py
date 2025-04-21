@@ -41,7 +41,7 @@ model_data = pd.read_csv("data/broadband.csv")
 model_data.head()
 
 target = model_data["BROADBAND"]
-orgData1 = model_data.ix[:, 1:-2]
+orgData1 = model_data.ix[:, 1:-2]  # 所有 .ix[ 改成 .loc[
 
 from sklearn.metrics import (
     confusion_matrix,

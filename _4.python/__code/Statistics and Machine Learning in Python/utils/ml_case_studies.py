@@ -189,8 +189,8 @@ print(df.isnull().sum())
 #default payment next month      0
 #dtype: int64
 
-df.ix[df["EDUCATION"].isnull(), "EDUCATION"] = df["EDUCATION"].mean()
-df.ix[df["MARRIAGE"].isnull(), "MARRIAGE"] = df["MARRIAGE"].mean()
+df.ix[df["EDUCATION"].isnull(), "EDUCATION"] = df["EDUCATION"].mean()  # 所有 .ix[ 改成 .loc[
+df.ix[df["MARRIAGE"].isnull(), "MARRIAGE"] = df["MARRIAGE"].mean()  # 所有 .ix[ 改成 .loc[
 print(df.isnull().sum().sum())
 # O
 

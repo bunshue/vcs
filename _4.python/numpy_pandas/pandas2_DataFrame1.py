@@ -5798,7 +5798,7 @@ df.reindex(index = ['a', 'b', 'c', 'd'],
               method = 'ffill')
 
 #.ix[ ] 的索引方式很方便，只需傳入rows, columns 方向的索引列表
-
+# 所有 .ix[ 改成 .loc[
 # 用 ix函式來重新索引
 df.ix[['a', 'b', 'c', 'd'],
          ['Texas', 'Ohio', 'California']]
@@ -5884,8 +5884,10 @@ data[data < 5]
 
 """
 #ix 是重新索引的簡單方法####
+# 所有 .ix[ 改成 .loc[
 
 # ix 是重新索引的簡單方法
+# 所有 .ix[ 改成 .loc[
 data.ix['Colorado', ['two', 'four']]
 
 # ix 對兩軸重新索引，依照指定的順序
@@ -5971,7 +5973,7 @@ df = pd.DataFrame(
 df
 
 """
-s = df.ix[0]
+s = df.ix[0]  # 所有 .ix[ 改成 .loc[
 s
 """
 
@@ -6235,8 +6237,8 @@ df = pd.DataFrame(np.random.randn(7, 3))
 df
 
 """
-df.ix[:4, 1] = np.nan
-df.ix[:2, 2] = np.nan
+df.ix[:4, 1] = np.nan  # 所有 .ix[ 改成 .loc[
+df.ix[:2, 2] = np.nan  # 所有 .ix[ 改成 .loc[
 df
 """
 
@@ -6258,8 +6260,8 @@ df
 """
 # 差值的方法 ffill, bfill
 df = pd.DataFrame(np.random.randn(6, 3))
-df.ix[2:, 1] = np.nan
-df.ix[4:, 2] = np.nan
+df.ix[2:, 1] = np.nan  # 所有 .ix[ 改成 .loc[
+df.ix[4:, 2] = np.nan  # 所有 .ix[ 改成 .loc[
 df
 """
 
@@ -6285,7 +6287,7 @@ s.index
 # 選取數據 子集合
 s["b"]
 s["b":"c"]
-# s.ix[['b', 'c']]
+# s.ix[['b', 'c']]  # 所有 .ix[ 改成 .loc[
 
 # 選取 內層 的數據
 s[:, 2]
@@ -7054,7 +7056,7 @@ people = pd.DataFrame(
     index=["Joe", "Steve", "Wes", "Jim", "Travis"],
 )
 # NG
-# people.ix[2:3, ['b', 'c']] = np.nan
+# people.ix[2:3, ['b', 'c']] = np.nan  # 所有 .ix[ 改成 .loc[
 people
 
 # 已經知道 列的分組關係

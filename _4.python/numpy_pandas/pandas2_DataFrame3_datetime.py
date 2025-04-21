@@ -138,7 +138,7 @@ print(df.loc["20130102", ["A", "B"]])
 
 """ no ix
 # mixed selection: ix
-print(df.ix[:3, ["A", "C"]])
+print(df.ix[:3, ["A", "C"]])  # 所有 .ix[ 改成 .loc[
 # Boolean indexing
 print(df[df.A > 0])
 """

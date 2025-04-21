@@ -118,7 +118,7 @@ grid = {
     "min_samples_split": np.arange(50, 301, 50),
 }
 cv = GridSearchCV(dt, grid, scoring="roc_auc", cv=4, n_jobs=-1)
-cv.fit(train.ix[:, 1:], train["target_flag"])
+cv.fit(train.ix[:, 1:], train["target_flag"])  # 所有 .ix[ 改成 .loc[
 
 print("best_score:%2.4f" % cv.best_score_)
 print("best_params: %s" % cv.best_params_)
@@ -134,7 +134,7 @@ print("best_params: %s" % cv.best_params_)
 
 from sklearn.metrics import roc_auc_score, roc_curve
 
-test_p = cv.predict_proba(test.ix[:, 1:])
+test_p = cv.predict_proba(test.ix[:, 1:])  # 所有 .ix[ 改成 .loc[
 print(roc_auc_score(test.target_flag, test_p[:, 1]))
 
 """
@@ -148,7 +148,7 @@ print(roc_auc_score(test.target_flag, test_p[:, 1]))
 # 决策树生长中，每一步都会计算变量的重要性，最终能够汇总各变量对整个模型的重要性。因此自然会想到利用决策树本身计算的变量重要性进行变量筛选
 """
 imp = cv.best_estimator_.feature_importances_
-list(zip(train.ix[:, 1:].columns, imp))
+list(zip(train.ix[:, 1:].columns, imp))  # 所有 .ix[ 改成 .loc[
 """
 .ix is deprecated. Please use
 .loc for label based indexing or
@@ -180,7 +180,7 @@ test = test.drop(["poc", "home_owner", "mortgage", "region", "home_income"], axi
 # 重新拟合模型
 
 
-cv.fit(train.ix[:, 1:], train["target_flag"])
+cv.fit(train.ix[:, 1:], train["target_flag"])  # 所有 .ix[ 改成 .loc[
 
 print("best_score:%2.4f" % cv.best_score_)
 print("best_params: %s" % cv.best_params_)
@@ -194,8 +194,8 @@ best_params: {'max_leaf_nodes': 56, 'min_samples_split': 300}
 
 当去除了部分变量后，模型的表现有所提升
 """
-train_p = cv.predict_proba(train.ix[:, 1:])
-test_p = cv.predict_proba(test.ix[:, 1:])
+train_p = cv.predict_proba(train.ix[:, 1:])  # 所有 .ix[ 改成 .loc[
+test_p = cv.predict_proba(test.ix[:, 1:])  # 所有 .ix[ 改成 .loc[
 print(roc_auc_score(test.target_flag, test_p[:, 1]))
 """
 0.7397821997821997
@@ -445,9 +445,9 @@ def tree(gender, education, home_value, age, buy_online, mosaic_group, marital, 
 from sklearn.ensemble import GradientBoostingClassifier
 
 gbc = GradientBoostingClassifier()
-gbc.fit(train.ix[:, 1:], train.target_flag)
-gbc_train_p = gbc.predict_proba(train.ix[:, 1:])
-gbc_test_p = gbc.predict_proba(test.ix[:, 1:])
+gbc.fit(train.ix[:, 1:], train.target_flag)  # 所有 .ix[ 改成 .loc[
+gbc_train_p = gbc.predict_proba(train.ix[:, 1:])  # 所有 .ix[ 改成 .loc[
+gbc_test_p = gbc.predict_proba(test.ix[:, 1:])  # 所有 .ix[ 改成 .loc[
 
 print(roc_auc_score(train.target_flag, gbc_train_p[:, 1]))
 print(roc_auc_score(test.target_flag, gbc_test_p[:, 1]))

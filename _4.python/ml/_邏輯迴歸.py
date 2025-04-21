@@ -48,6 +48,8 @@ from sklearn.metrics import ConfusionMatrixDisplay  # 混淆矩陣圖
 from sklearn.metrics import classification_report  # 分類報告
 from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import f1_score
+from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 from sklearn.metrics import roc_curve
 from sklearn.metrics import auc
@@ -212,33 +214,40 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# logistic_regression_with_nonlinear_data
-
 N = 1000  # n_samples, 樣本數
-M = 4  # n_features, 特徵數(資料的維度)
-GROUPS = 3  # centers, 分群數
-STD = 1  # cluster_std, 資料標準差
 print("make_circles,", N, "個樣本")
 
 X, y = make_circles(n_samples=N, factor=0.3, noise=0.05)
+print(X)
+print(X.shape)
 
 # 資料分割 多了一個 stratify=y
 # X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y)
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 
-# 繪製訓練及測試資料
+plt.figure(figsize=(12, 4))
 
-plt.figure(figsize=(8, 4))
+plt.subplot(131)
+plt.scatter(X[:, 0], X[:, 1], c=y)
+for i in range(len(X)):
+    # plt.text(X[i, 0], X[i, 1], str(i)+"_"+str(y[i]), color="r")
+    pass
+plt.title("全部資料")
 
-plt.subplot(121)
+plt.subplot(132)
 plt.scatter(X_train[:, 0], X_train[:, 1], c=y_train)
+for i in range(len(X_train)):
+    # plt.text(X_train[i, 0], X_train[i, 1], str(i)+"_"+str(y_train[i]), color="r")
+    pass
 plt.title("訓練資料")
 
-plt.subplot(122)
+plt.subplot(133)
 plt.scatter(X_test[:, 0], X_test[:, 1], c=y_test)
-plt.title("測試資料")
+for i in range(len(X_test)):
+    # plt.text(X_test[i, 0], X_test[i, 1], str(i)+"_"+str(y_test[i]), color="r")
+    pass
 
-show()
+plt.title("測試資料")
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
@@ -246,13 +255,17 @@ logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸�
 logistic_regression.fit(X_train, y_train)  # 學習訓練.fit
 
 y_pred = logistic_regression.predict(X_test)  # 預測.predict
+print("y :\n", y, sep="")
+print("y_test :\n", y_test, sep="")
 print("y_pred :\n", y_pred, sep="")
 
 y_pred_prob = logistic_regression.predict_proba(X)  # 預測機率.predict_proba
-print("y_pred_prob :\n", y_pred_prob, sep="")
+print("預測機率 y_pred_prob :\n", y_pred_prob, sep="")
 
 print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 # 48.80%
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1472,10 +1485,6 @@ print("指定特徵(X)及目標變數(Y)")
 X = df2.drop("Attrition_Yes", axis=1)
 y = df2["Attrition_Yes"]
 
-# 不須進行特徵工程
-
-# 資料分割
-
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
@@ -1483,9 +1492,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 scaler = StandardScaler()
 X_train_std = scaler.fit_transform(X_train)
 X_test_std = scaler.transform(X_test)
-
-# 選擇演算法
-# 模型訓練
 
 # 做邏輯迴歸, 用 sklearn 裡的 LogisticRegression 來做邏輯迴歸
 logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸函數學習機
@@ -1711,7 +1717,6 @@ print("交叉表 :\n", cross_table, sep="")
 
 # 列聯表
 
-
 def percConvert(ser):
     return ser / float(ser[-1])
 
@@ -1761,18 +1766,6 @@ pd.crosstab(test.bad_ind, test.prediction, margins=True)
 # 计算准确率
 acc = sum(test["prediction"] == test["bad_ind"]) / np.float(len(test))
 print("The accurancy is %.2f" % acc)
-
-for i in np.arange(0.02, 0.3, 0.02):
-    prediction = (test["proba"] > i).astype("int")
-    confusion_matrix = pd.crosstab(prediction, test.bad_ind, margins=True)
-    precision = confusion_matrix.loc[0, 0] / confusion_matrix.loc["All", 0]
-    recall = confusion_matrix.loc[0, 0] / confusion_matrix.loc[0, "All"]
-    Specificity = confusion_matrix.loc[1, 1] / confusion_matrix.loc[1, "All"]
-    f1_score = 2 * (precision * recall) / (precision + recall)
-    print(
-        "threshold: %s, precision: %.2f, recall:%.2f ,Specificity:%.2f , f1_score:%.2f"
-        % (i, precision, recall, Specificity, f1_score)
-    )
 
 # 绘制ROC曲线
 fpr_test, tpr_test, th_test = metrics.roc_curve(test.bad_ind, test.proba)
@@ -1838,7 +1831,7 @@ def forward_select(data, response):
     return model
 
 
-# 只有连续变量可以进行变量筛选，分类变量需要进行WOE转换才可以进行变量筛选
+# 只有连续变量可以进行变量筛选
 candidates = [
     "bad_ind",
     "tot_derog",
@@ -1910,7 +1903,7 @@ print("AUC = %.4f" % metrics.auc(fpr_test, tpr_test))
 # 解决方案：
 # 1、逐一根据显著性测试
 # 2、使用决策树等方法筛选变量，但是多分类变量需要事先进行变量概化
-# 3、使用WOE转换，多分类变量也需要事先进行概化，使用scorecardpy包中的woe算法可以自动进行概化
+
 # 使用第一种方法
 # formula = """bad_ind ~ fico_score+ltv+age_oldest_tr+tot_derog+nth+tot_open_tr+veh_mileage+rev_util+C(used_ind)+C(vehicle_year)+C(bankruptcy_ind)"""
 formula = """bad_ind ~ fico_score+ltv+age_oldest_tr+tot_derog+nth+tot_open_tr+veh_mileage+rev_util+C(bankruptcy_ind)"""
@@ -1923,382 +1916,6 @@ lg_m.summary()  # 檢視模型架構
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-class WoE:
-    """
-    Basic functionality for WoE bucketing of continuous and discrete variables
-    :param self.bins: DataFrame WoE transformed variable and all related statistics
-    :param self.iv: Information Value of the transformed variable
-    """
-
-    def __init__(
-        self,
-        qnt_num=16,
-        min_block_size=16,
-        spec_values=None,
-        v_type="c",
-        bins=None,
-        t_type="b",
-    ):
-        """
-        :param qnt_num: Number of buckets (quartiles) for continuous variable split
-        :param min_block_size: minimum number of observation in each bucket (continuous variables)
-        :param spec_values: List or Dictionary {'label': value} of special values (frequent items etc.)
-        :param v_type: 'c' for continuous variable, 'd' - for discrete
-        :param bins: Predefined bucket borders for continuous variable split
-        :t_type : Binary 'b' or continous 'c' target variable
-        :return: initialized class
-        """
-        self.__qnt_num = qnt_num  # Num of buckets/quartiles
-        self._predefined_bins = (
-            None if bins is None else np.array(bins)
-        )  # user bins for continuous variables
-        self.type = v_type  # if 'c' variable should be continuous, if 'd' - discrete
-        self._min_block_size = min_block_size  # Min num of observation in bucket
-        self._gb_ratio = None  # Ratio of good and bad in the sample
-        self.bins = None  # WoE Buckets (bins) and related statistics
-        self.df = None  # Training sample DataFrame with initial data and assigned woe
-        self.qnt_num = (
-            None  # Number of quartiles used for continuous part of variable binning
-        )
-        self.t_type = t_type  # Type of target variable
-        if (
-            type(spec_values) == dict
-        ):  # Parsing special values to dict for cont variables
-            self.spec_values = {}
-            for k, v in spec_values.items():
-                if v.startswith("d_"):
-                    self.spec_values[k] = v
-                else:
-                    self.spec_values[k] = "d_" + v
-        else:
-            if spec_values is None:
-                self.spec_values = {}
-            else:
-                self.spec_values = {i: "d_" + str(i) for i in spec_values}
-
-    def fit(self, x, y):
-        """
-        Fit WoE transformation
-        :param x: continuous or discrete predictor
-        :param y: binary target variable
-        :return: WoE class
-        """
-        # Data quality checks
-        if not isinstance(x, pd.Series) or not isinstance(y, pd.Series):
-            raise TypeError("pandas.Series type expected")
-        if not x.size == y.size:
-            raise Exception("Y size don't match Y size")
-        # Calc total good bad ratio in the sample
-        t_bad = np.sum(y)
-        if t_bad == 0 or t_bad == y.size:
-            raise ValueError("There should be BAD and GOOD observations in the sample")
-        if np.max(y) > 1 or np.min(y) < 0:
-            raise ValueError("Y range should be between 0 and 1")
-        # setting discrete values as special values
-        if self.type == "d":
-            sp_values = {i: "d_" + str(i) for i in x.unique()}
-            if len(sp_values) > 100:
-                raise type(
-                    "DiscreteVarOverFlowError",
-                    (Exception,),
-                    {
-                        "args": (
-                            "Discrete variable with too many unique values (more than 100)",
-                        )
-                    },
-                )
-            else:
-                if self.spec_values:
-                    sp_values.update(self.spec_values)
-                self.spec_values = sp_values
-        # Make data frame for calculations
-        df = pd.DataFrame({"X": x, "Y": y, "order": np.arange(x.size)})
-        # Separating NaN and Special values
-        df_sp_values, df_cont = self._split_sample(df)
-        # # labeling data
-        df_cont, c_bins = self._cont_labels(df_cont)
-        df_sp_values, d_bins = self._disc_labels(df_sp_values)
-        # getting continuous and discrete values together
-        self.df = df_sp_values.append(df_cont)
-        self.bins = d_bins.append(c_bins)
-        # calculating woe and other statistics
-        self._calc_stat()
-        # sorting appropriately for further cutting in transform method
-        self.bins.sort_values("bins", inplace=True)
-        # returning to original observation order
-        self.df.sort_values("order", inplace=True)
-        self.df.set_index(x.index, inplace=True)
-        return self
-
-    def fit_transform(self, x, y):
-        """
-        Fit WoE transformation
-        :param x: continuous or discrete predictor
-        :param y: binary target variable
-        :return: WoE transformed variable
-        """
-        self.fit(x, y)
-        return self.df["woe"]
-
-    def _split_sample(self, df):
-        if self.type == "d":
-            return df, None
-        sp_values_flag = (
-            df["X"].isin(self.spec_values.keys()).values | df["X"].isnull().values
-        )
-        df_sp_values = df[sp_values_flag].copy()
-        df_cont = df[np.logical_not(sp_values_flag)].copy()
-        return df_sp_values, df_cont
-
-    def _disc_labels(self, df):
-        df["labels"] = df["X"].apply(
-            lambda x: self.spec_values[x]
-            if x in self.spec_values.keys()
-            else "d_" + str(x)
-        )
-        d_bins = pd.DataFrame({"bins": df["X"].unique()})
-        d_bins["labels"] = d_bins["bins"].apply(
-            lambda x: self.spec_values[x]
-            if x in self.spec_values.keys()
-            else "d_" + str(x)
-        )
-        return df, d_bins
-
-    def _cont_labels(self, df):
-        # check whether there is a continuous part
-        if df is None:
-            return None, None
-        # Max buckets num calc
-        self.qnt_num = (
-            int(
-                np.minimum(df["X"].unique().size / self._min_block_size, self.__qnt_num)
-            )
-            + 1
-        )
-        # cuts - label num for each observation, bins - quartile thresholds
-        bins = None
-        cuts = None
-        if self._predefined_bins is None:
-            try:
-                cuts, bins = pd.qcut(df["X"], self.qnt_num, retbins=True, labels=False)
-            except ValueError as ex:
-                if ex.args[0].startswith("Bin edges must be unique"):
-                    ex.args = (
-                        "Please reduce number of bins or encode frequent items as special values",
-                    ) + ex.args
-                    raise
-            bins = np.append((-float("inf"),), bins[1:-1])
-        else:
-            bins = self._predefined_bins
-            if bins[0] != float("-Inf"):
-                bins = np.append((-float("inf"),), bins)
-            cuts = pd.cut(
-                df["X"],
-                bins=np.append(bins, (float("inf"),)),
-                labels=np.arange(len(bins)).astype(str),
-            )
-        df["labels"] = cuts.astype(str)
-        c_bins = pd.DataFrame(
-            {"bins": bins, "labels": np.arange(len(bins)).astype(str)}
-        )
-        return df, c_bins
-
-    def _calc_stat(self):
-        # calculating WoE
-        stat = (
-            self.df.groupby("labels")["Y"]
-            .agg({"mean": np.mean, "bad": np.count_nonzero, "obs": np.size})
-            .copy()
-        )
-        if self.t_type != "b":
-            stat["bad"] = stat["mean"] * stat["obs"]
-        stat["good"] = stat["obs"] - stat["bad"]
-        t_good = np.maximum(stat["good"].sum(), 0.5)
-        t_bad = np.maximum(stat["bad"].sum(), 0.5)
-        stat["woe"] = stat.apply(self._bucket_woe, axis=1) + np.log(t_good / t_bad)
-        iv_stat = (stat["bad"] / t_bad - stat["good"] / t_good) * stat["woe"]
-        self.iv = iv_stat.sum()
-        # adding stat data to bins
-        self.bins = pd.merge(stat, self.bins, left_index=True, right_on=["labels"])
-        label_woe = self.bins[["woe", "labels"]].drop_duplicates()
-        self.df = pd.merge(self.df, label_woe, left_on=["labels"], right_on=["labels"])
-
-    def transform(self, x):
-        """
-        Transforms input variable according to previously fitted rule
-        :param x: input variable
-        :return: DataFrame with transformed with original and transformed variables
-        """
-        if not isinstance(x, pd.Series):
-            raise TypeError("pandas.Series type expected")
-        if self.bins is None:
-            raise Exception("Fit the model first, please")
-        df = pd.DataFrame({"X": x, "order": np.arange(x.size)})
-        # splitting to discrete and continous pars
-        df_sp_values, df_cont = self._split_sample(df)
-
-        # function checks existence of special values, raises error if sp do not exist in training set
-        def get_sp_label(x_):
-            if x_ in self.spec_values.keys():
-                return self.spec_values[x_]
-            else:
-                str_x = "d_" + str(x_)
-                if str_x in list(self.bins["labels"]):
-                    return str_x
-                else:
-                    raise ValueError(
-                        "Value " + str_x + " does not exist in the training set"
-                    )
-
-        # assigning labels to discrete part
-        df_sp_values["labels"] = df_sp_values["X"].apply(get_sp_label)
-        # assigning labels to continuous part
-        c_bins = self.bins[self.bins["labels"].apply(lambda z: not z.startswith("d_"))]
-        if not self.type == "d":
-            cuts = pd.cut(
-                df_cont["X"],
-                bins=np.append(c_bins["bins"], (float("inf"),)),
-                labels=c_bins["labels"],
-            )
-            df_cont["labels"] = cuts.astype(str)
-        # Joining continuous and discrete parts
-        df = df_sp_values.append(df_cont)
-        # assigning woe
-        df = pd.merge(
-            df, self.bins[["woe", "labels"]], left_on=["labels"], right_on=["labels"]
-        )
-        # returning to original observation order
-        df.sort_values("order", inplace=True)
-        return df.set_index(x.index)
-
-    def merge(self, label1, label2=None):
-        """
-        Merge of buckets with given labels
-        In case of discrete variable, both labels should be provided. As the result labels will be marget to one bucket.
-        In case of continous variable, only label1 should be provided. It will be merged with the next label.
-        :param label1: first label to merge
-        :param label2: second label to merge
-        :return:
-        """
-        spec_values = self.spec_values.copy()
-        c_bins = self.bins[
-            self.bins["labels"].apply(lambda x: not x.startswith("d_"))
-        ].copy()
-        if label2 is None and not label1.startswith(
-            "d_"
-        ):  # removing bucket for continuous variable
-            c_bins = c_bins[c_bins["labels"] != label1]
-        else:
-            if not (label1.startswith("d_") and label2.startswith("d_")):
-                raise Exception("Labels should be discrete simultaneously")
-            bin1 = self.bins[self.bins["labels"] == label1]["bins"].iloc[0]
-            bin2 = self.bins[self.bins["labels"] == label2]["bins"].iloc[0]
-            spec_values[bin1] = label1 + "_" + label2
-            spec_values[bin2] = label1 + "_" + label2
-        new_woe = WoE(
-            self.__qnt_num,
-            self._min_block_size,
-            spec_values,
-            self.type,
-            c_bins["bins"],
-            self.t_type,
-        )
-        return new_woe.fit(self.df["X"], self.df["Y"])
-
-    def plot(self, figsize):
-        """
-        Plot WoE transformation and default rates
-        :return: plotting object
-        """
-        index = np.arange(self.bins.shape[0])
-        bar_width = 0.8
-        woe_fig = plt.figure(figsize=figsize)
-        plt.title("Number of Observations and WoE per bucket")
-        ax = woe_fig.add_subplot(111)
-        ax.set_ylabel("Observations")
-        plt.xticks(index + bar_width / 2, self.bins["labels"])
-        plt.bar(index, self.bins["obs"], bar_width, color="b", label="Observations")
-        ax2 = ax.twinx()
-        ax2.set_ylabel("Weight of Evidence")
-        ax2.plot(
-            index + bar_width / 2,
-            self.bins["woe"],
-            "bo-",
-            linewidth=4.0,
-            color="r",
-            label="WoE",
-        )
-        handles1, labels1 = ax.get_legend_handles_labels()
-        handles2, labels2 = ax2.get_legend_handles_labels()
-        handles = handles1 + handles2
-        labels = labels1 + labels2
-        plt.legend(handles, labels)
-        woe_fig.autofmt_xdate()
-        return woe_fig
-
-    def optimize(self, criterion=None, fix_depth=None, max_depth=None, cv=3):
-        """
-        WoE bucketing optimization (continuous variables only)
-        :param criterion: binary tree split criteria
-        :param fix_depth: use tree of a fixed depth (2^fix_depth buckets)
-        :param max_depth: maximum tree depth for a optimum cross-validation search
-        :param cv: number of cv buckets
-        :return: WoE class with optimized continuous variable split
-        """
-        if self.t_type == "b":
-            tree_type = tree.DecisionTreeClassifier
-        else:
-            tree_type = tree.DecisionTreeRegressor
-        m_depth = int(np.log2(self.__qnt_num)) + 1 if max_depth is None else max_depth
-        cont = self.df["labels"].apply(lambda z: not z.startswith("d_"))
-        x_train = np.array(self.df[cont]["X"])
-        y_train = np.array(self.df[cont]["Y"])
-        x_train = x_train.reshape(x_train.shape[0], 1)
-        start = 1
-        cv_scores = []
-        if fix_depth is None:
-            for i in range(start, m_depth):
-                if criterion is None:
-                    d_tree = tree_type(max_depth=i)
-                else:
-                    d_tree = tree_type(criterion=criterion, max_depth=i)
-                scores = cross_val_score(d_tree, x_train, y_train, cv=cv)
-                cv_scores.append(scores.mean())
-            best = np.argmax(cv_scores) + start
-        else:
-            best = fix_depth
-        final_tree = tree_type(max_depth=best)
-        final_tree.fit(x_train, y_train)
-        opt_bins = final_tree.tree_.threshold[final_tree.tree_.threshold > 0]
-        opt_bins = np.sort(opt_bins)
-        new_woe = WoE(
-            self.__qnt_num,
-            self._min_block_size,
-            self.spec_values,
-            self.type,
-            opt_bins,
-            self.t_type,
-        )
-        return new_woe.fit(self.df["X"], self.df["Y"])
-
-    @staticmethod
-    def _bucket_woe(x):
-        t_bad = x["bad"]
-        t_good = x["good"]
-        t_bad = 0.5 if t_bad == 0 else t_bad
-        t_good = 0.5 if t_good == 0 else t_good
-        return np.log(t_bad / t_good)
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# <h1>Table of Contents<span class="tocSkip"></span></h1>
-# <div class="toc" style="margin-top: 1em;"><ul class="toc-item"><li><ul class="toc-item"><li><span><a href="#拒绝推断" data-toc-modified-id="拒绝推断-0.1"><span class="toc-item-num">0.1&nbsp;&nbsp;</span>拒绝推断</a></span><ul class="toc-item"><li><span><a href="#第一步准备数据集：把解释变量和被解释变量分开，这是KNN这个函数的要求" data-toc-modified-id="第一步准备数据集：把解释变量和被解释变量分开，这是KNN这个函数的要求-0.1.1"><span class="toc-item-num">0.1.1&nbsp;&nbsp;</span>第一步准备数据集：把解释变量和被解释变量分开，这是KNN这个函数的要求</a></span></li><li><span><a href="#第二步：进行缺失值填补和标准化，这也是knn这个函数的要求" data-toc-modified-id="第二步：进行缺失值填补和标准化，这也是knn这个函数的要求-0.1.2"><span class="toc-item-num">0.1.2&nbsp;&nbsp;</span>第二步：进行缺失值填补和标准化，这也是knn这个函数的要求</a></span></li><li><span><a href="#第三步：建模并预测" data-toc-modified-id="第三步：建模并预测-0.1.3"><span class="toc-item-num">0.1.3&nbsp;&nbsp;</span>第三步：建模并预测</a></span></li><li><span><a href="#第四步：将审核通过的申请者和未通过的申请者进行合并" data-toc-modified-id="第四步：将审核通过的申请者和未通过的申请者进行合并-0.1.4"><span class="toc-item-num">0.1.4&nbsp;&nbsp;</span>第四步：将审核通过的申请者和未通过的申请者进行合并</a></span></li></ul></li><li><span><a href="#建立违约预测模型" data-toc-modified-id="建立违约预测模型-0.2"><span class="toc-item-num">0.2&nbsp;&nbsp;</span>建立违约预测模型</a></span><ul class="toc-item"><li><span><a href="#粗筛变量" data-toc-modified-id="粗筛变量-0.2.1"><span class="toc-item-num">0.2.1&nbsp;&nbsp;</span>粗筛变量</a></span></li><li><span><a href="#变量细筛与数据清洗" data-toc-modified-id="变量细筛与数据清洗-0.2.2"><span class="toc-item-num">0.2.2&nbsp;&nbsp;</span>变量细筛与数据清洗</a></span></li><li><span><a href="#变量分箱WOE转换" data-toc-modified-id="变量分箱WOE转换-0.2.3"><span class="toc-item-num">0.2.3&nbsp;&nbsp;</span>变量分箱WOE转换</a></span></li><li><span><a href="#构造分类模型" data-toc-modified-id="构造分类模型-0.2.4"><span class="toc-item-num">0.2.4&nbsp;&nbsp;</span>构造分类模型</a></span></li><li><span><a href="#检验模型" data-toc-modified-id="检验模型-0.2.5"><span class="toc-item-num">0.2.5&nbsp;&nbsp;</span>检验模型</a></span></li><li><span><a href="#评分卡开发" data-toc-modified-id="评分卡开发-0.2.6"><span class="toc-item-num">0.2.6&nbsp;&nbsp;</span>评分卡开发</a></span></li></ul></li></ul></li></ul></div>
-
-# get_ipython().magic('matplotlib inline')
 
 accepts = pd.read_csv("data/accepts.csv")
 rejects = pd.read_csv("data/rejects.csv")
@@ -2459,244 +2076,21 @@ col = [i[1] for i in col_top]
 
 # ### 变量细筛与数据清洗
 
-data_filled.head()
-
-iv_c = {}
-for i in col:
-    try:
-        iv_c[i] = (
-            WoE(v_type="c").fit(data_filled[i], data_filled["bad_ind"]).optimize().iv
-        )
-    except:
-        print(i)
-
-pd.Series(iv_c).sort_values(ascending=False)
-
-""" NG
-# ### 变量分箱WOE转换
-
-WOE_c = data_filled[col].apply(lambda col:WoE(v_type='c',qnt_num=5).fit(col,data_filled['bad_ind']).optimize().fit_transform(col,data_filled['bad_ind']))
-
-WOE_c.head()
-
-# ### 构造分类模型
-
-# 資料分割
-
-X = WOE_c
-y = data_filled['bad_ind']
-
-# 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2)
-
-
-def plot_confusion_matrix(cm, classes,
-                          title='Confusion matrix',
-                          cmap=plt.cm.Blues):
-    #This function prints and plots the confusion matrix.
-    plt.imshow(cm, interpolation='nearest', cmap=cmap)
-    plt.title(title)
-    plt.colorbar()
-    tick_marks = np.arange(len(classes))
-    plt.xticks(tick_marks, classes, rotation=0)
-    plt.yticks(tick_marks, classes)
-
-    thresh = cm.max() / 2.
-    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
-        plt.text(j, i, cm[i, j],
-                 horizontalalignment="center",
-                 color="white" if cm[i, j] > thresh else "black")
-
-    plt.tight_layout()
-    plt.ylabel('True label')
-    plt.xlabel('Predicted label')
-
-
-# 构建逻辑回归模型，进行违约概率预测
-lr = LogisticRegression(C = 1, penalty = 'l1')
-lr.fit(X_train,y_train.values.ravel())
-y_pred = lr.predict(X_test.values)  # 預測.predict
-
-# Compute confusion matrix
-cnf_matrix = confusion_matrix(y_test,y_pred)
-np.set_printoptions(precision=2)
-
-print("Recall metric in the testing dataset: ", cnf_matrix[1,1]/(cnf_matrix[1,0]+cnf_matrix[1,1]))
-
-# Plot non-normalized confusion matrix
-class_names = [0,1]
-plt.figure()
-plot_confusion_matrix(cnf_matrix
-                      , classes=class_names
-                      , title='Confusion matrix')
-show()
-
-
-## 加入代价敏感参数，重新计算
-lr = LogisticRegression(C = 1, penalty = 'l1', class_weight='balanced')
-lr.fit(X_train,y_train.values.ravel())
-y_pred = lr.predict(X_test.values)  # 預測.predict
-
-# Compute confusion matrix
-cnf_matrix = confusion_matrix(y_test,y_pred)
-np.set_printoptions(precision=2)
-
-print("Recall metric in the testing dataset: ", cnf_matrix[1,1]/(cnf_matrix[1,0]+cnf_matrix[1,1]))
-
-# Plot non-normalized confusion matrix
-class_names = [0,1]
-plt.figure()
-plot_confusion_matrix(cnf_matrix
-                      , classes=class_names
-                      , title='Confusion matrix')
-show()
-
-# ### 检验模型
-
-fpr,tpr,threshold = roc_curve(y_test,y_pred, drop_intermediate=False) ###计算真正率和假正率  
-roc_auc = auc(fpr,tpr) ###计算auc的值  
-  
-plt.figure()  
-lw = 2  
-plt.figure(figsize=(10,10))  
-plt.plot(fpr, tpr, color='darkorange',  
-         lw=lw, label='ROC curve (area = %0.2f)' % roc_auc) ###假正率为横坐标，真正率为纵坐标做曲线  
-plt.plot([0, 1], [0, 1], color='navy', lw=lw, linestyle='--')  
-plt.xlim([0.0, 1.0])  
-plt.ylim([0.0, 1.05])  
-plt.xlabel('False Positive Rate')  
-plt.ylabel('True Positive Rate')  
-plt.title('Receiver operating characteristic example')  
-plt.legend(loc="lower right")  
-show()
-
-# 利用sklearn.metrics中的roc_curve算出tpr，fpr作图
-
-fig, ax = plt.subplots()
-ax.plot(1 - threshold, tpr, label='tpr') # ks曲线要按照预测概率降序排列，所以需要1-threshold镜像
-ax.plot(1 - threshold, fpr, label='fpr')
-ax.plot(1 - threshold, tpr-fpr,label='KS')
-plt.xlabel('score')
-plt.title('KS Curve')
-#plt.xticks(np.arange(0,1,0.2), np.arange(1,0,-0.2))
-#plt.xticks(np.arange(0,1,0.2), np.arange(score.max(),score.min(),-0.2*(data['反欺诈评分卡总分'].max() - data['反欺诈评分卡总分'].min())))
-plt.figure(figsize=(20,20))
-legend = ax.legend(loc='upper left', shadow=True, fontsize='x-large')
-
-show()
-"""
-
-print("測試使用 WoE()")
-
-# Set target type: 'b' for default/non-default, 'c' for continous pd values
-t_type_ = "c"
-# Set sample size
-N = 20
-# Random variables
-x1 = np.random.rand(N)
-x2 = np.random.rand(N)
-if t_type_ == "b":
-    y_ = np.where(
-        np.random.rand(
-            N,
-        )
-        + x1
-        + x2
-        > 2,
-        1,
-        0,
-    )
-else:
-    y_ = np.random.rand(N) + x1 + x2
-    y_ = (y_ - np.min(y_)) / (np.max(y_) - np.min(y_)) / 2
-# Inserting special values
-x1[0:20] = float("nan")
-x1[30:50] = float(0)
-x1[60:80] = float(1)
-x2[0:20] = float("nan")
-# Initialize WoE object
-woe_def = WoE()
-woe = WoE(7, 30, spec_values={0: "0", 1: "1"}, v_type="c", t_type=t_type_)
-# Transform x1
-""" NG
-woe.fit(pd.Series(x1), pd.Series(y_))
-# Transform x2 using x1 transformation rules
-woe.transform(pd.Series(x2))
-# Optimize x1 transformation using tree with maximal depth = 5 (optimal depth is chosen by cross-validation)
-woe2 = woe.optimize(max_depth=5)
-# Merge discrete buckets
-woe3 = woe.merge('d_0', 'd_1')
-# Merge 2 and 3 continuous buckets
-woe4 = woe3.merge('2')
-# Print Statistics
-print(woe.bins)
-# print(woe2.bins)
-# print(woe3.bins)
-print(woe4.bins)
-# Plot and show WoE graph
-fig = woe.plot()
-plt.show(fig)
-fig = woe2.plot()
-plt.show(fig)
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+cc = data_filled.head()
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
 逻辑斯谛回归
-逻辑斯谛回归(Logistic Regression, LR)是统计学习中的经典分类方法。常见的逻辑斯谛回归模型包括二项逻辑斯谛回归、多项逻辑斯谛回归(多项逻辑斯谛回归可以看做是二项LR的扩展).
+逻辑斯谛回归(Logistic Regression, LR)是统计学习中的经典分类方法。
+常见的逻辑斯谛回归模型包括二项逻辑斯谛回归、多项逻辑斯谛回归(多项逻辑斯谛回归可以看做是二项LR的扩展)
 """
 
 # LogisticRegression算法案例 python实现(iris数据)
 
 from math import exp
 from sklearn.datasets import load_iris
-
-# 定义LR回归模型
-
-
-class LogisticReression:
-    def __init__(self, max_iter=200, learning_rate=0.01):
-        self.max_iter = max_iter
-        self.learning_rate = learning_rate
-
-    def sigmoid(self, x):
-        return 1 / (1 + exp(-x))
-
-    def data_matrix(self, X):
-        data_mat = []
-        for d in X:
-            data_mat.append([1.0, *d])
-        return data_mat
-
-    # 训练
-    def train(self, X, y):
-        # label = np.mat(y)
-        data_mat = self.data_matrix(X)  # m*n
-        self.weights = np.zeros((len(data_mat[0]), 1), dtype=np.float32)
-
-        for iter_ in range(self.max_iter):
-            for i in range(len(X)):
-                result = self.sigmoid(np.dot(data_mat[i], self.weights))
-                error = y[i] - result
-                self.weights += self.learning_rate * error * np.transpose([data_mat[i]])
-        print("LR模型学习率={},最大迭代次数={}".format(self.learning_rate, self.max_iter))
-
-    # 准确率
-    def accuracy(self, X_test, y_test):
-        right = 0
-        X_test = self.data_matrix(X_test)
-        for x, y in zip(X_test, y_test):
-            result = np.dot(x, self.weights)
-            if (result > 0 and y == 1) or (result < 0 and y == 0):
-                right += 1
-        return right / len(X_test)
-
-
-# 构建数据
 
 
 def create_data():
@@ -2711,25 +2105,10 @@ def create_data():
 X, y = create_data()
 
 # 資料分割
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-
-# 训练数据
-LR = LogisticReression()
-LR.train(X_train, y_train)
-
-# LR模型学习率=0.01,最大迭代次数=200
-
-# 计算测试精度
-
-LR.accuracy(X_test, y_test)
-
-# 1.0
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # 效果展示
-
 x_ponits = np.arange(3, 9)
-y_ = -(LR.weights[1] * x_ponits + LR.weights[0]) / LR.weights[2]
-plt.plot(x_ponits, y_)
 
 # 绘制图
 plt.scatter(X[:50, 0], X[:50, 1], label="0")
@@ -2738,10 +2117,7 @@ plt.legend()
 
 show()
 
-
 # sklearn中的LogisticRegression案例代码
-
-import seaborn as sn
 
 # 第一步：构建数据集
 
@@ -2936,173 +2312,10 @@ y_pred = logistic_regression.predict(X_test)
 confusion_matrix = pd.crosstab(
     y_test, y_pred, rownames=["Actual"], colnames=["Predicted"]
 )
-sn.heatmap(confusion_matrix, annot=True)
+sns.heatmap(confusion_matrix, annot=True)
 show()
 print("精度: ", metrics.accuracy_score(y_test, y_pred))
-
 # 精度:  0.8
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-"""
-最大熵模型
-
-最大熵模型(maximum entropy model)可以用于二分类，也可以用于多分类。其是由最大熵原理推导实现的，所以讲最大熵模型时，绕不开最大熵原理。
-最大熵原理
-
-什么是最大熵原理？ 最大熵原理认为，学习概率模型时，在所有可能的概率模型（概率分布）中，熵最大的模型就是最好的模型。最大熵原理通常表述为在满足约束条件的模型集合中选取熵最大的模型。
-"""
-
-# 求解上述最优化问题的对偶问题便可得到最大熵模型。
-
-import math
-from copy import deepcopy
-
-
-class MaxEntropy:
-    def __init__(self, EPS=0.005):
-        self._samples = []
-        self._label_y = set()  # 标签集合，相当去去重后的y
-        self._numXY = {}  # key为(x,y)，value为出现次数
-        self._samples_num = 0  # 样本数
-        self._Ep_ = []  # 样本分布的特征期望值
-        self._xyID = {}  # key记录(x,y),value记录id号
-        self._xy_num = 0  # 特征键值(x,y)的个数
-        self._max_feature_num = 0  # 最大特征数
-        self._IDxy = {}  # key为(x,y)，value为对应的id号
-        self._weights = []
-        self._EPS = EPS  # 收敛条件
-        self._last_weights = []  # 上一次w参数值
-
-    def loadData(self, dataset):
-        self._samples = deepcopy(dataset)
-        for items in self._samples:
-            y = items[0]
-            X = items[1:]
-            self._label_y.add(y)  # 集合中y若已存在则会自动忽略
-            for x in X:
-                if (x, y) in self._numXY:
-                    self._numXY[(x, y)] += 1
-                else:
-                    self._numXY[(x, y)] = 1
-
-        self._samples_num = len(self._samples)
-        self._xy_num = len(self._numXY)
-        self._max_feature_num = max([len(sample) - 1 for sample in self._samples])
-        self._weights = [0] * self._xy_num
-        self._last_weights = self._weights[:]
-
-        self._Ep_ = [0] * self._xy_num
-        for i, xy in enumerate(self._numXY):  # 计算特征函数fi关于经验分布的期望
-            self._Ep_[i] = self._numXY[xy] / self._samples_num
-            self._xyID[xy] = i
-            self._IDxy[i] = xy
-
-    # 计算每个Z(x)值
-    def _calc_zx(self, X):
-        zx = 0
-        for y in self._label_y:
-            temp = 0
-            for x in X:
-                if (x, y) in self._numXY:
-                    temp += self._weights[self._xyID[(x, y)]]
-            zx += math.exp(temp)
-        return zx
-
-    # 计算每个P(y|x)
-    def _calu_model_pyx(self, y, X):
-        zx = self._calc_zx(X)
-        temp = 0
-        for x in X:
-            if (x, y) in self._numXY:
-                temp += self._weights[self._xyID[(x, y)]]
-        pyx = math.exp(temp) / zx
-        return pyx
-
-    # 计算特征函数fi关于模型的期望
-    def _calc_model_ep(self, index):
-        x, y = self._IDxy[index]
-        ep = 0
-        for sample in self._samples:
-            if x not in sample:
-                continue
-            pyx = self._calu_model_pyx(y, sample)
-            ep += pyx / self._samples_num
-        return ep
-
-    # 判断是否全部收敛
-    def _convergence(self):
-        for last, now in zip(self._last_weights, self._weights):
-            if abs(last - now) >= self._EPS:
-                return False
-        return True
-
-    # 计算预测概率
-    def predict(self, X):
-        Z = self._calc_zx(X)
-        result = {}
-        for y in self._label_y:
-            ss = 0
-            for x in X:
-                if (x, y) in self._numXY:
-                    ss += self._weights[self._xyID[(x, y)]]
-            pyx = math.exp(ss) / Z
-            result[y] = pyx
-        return result
-
-    # 训练
-    def train(self, maxiter=1000):
-        for loop in range(maxiter):
-            print("迭代次数:%d" % loop)
-            self._last_weights = self._weights[:]
-            for i in range(self._xy_num):
-                ep = self._calc_model_ep(i)  # 计算第i个特征的模型期望
-                self._weights[i] += (
-                    math.log(self._Ep_[i] / ep) / self._max_feature_num
-                )  # 更新参数
-            print("权值:", self._weights)
-            if self._convergence():  # 判断是否收敛
-                break
-
-
-dataset = [
-    ["no", "sunny", "hot", "high", "FALSE"],
-    ["no", "sunny", "hot", "high", "TRUE"],
-    ["yes", "overcast", "hot", "high", "FALSE"],
-    ["yes", "rainy", "mild", "high", "FALSE"],
-    ["yes", "rainy", "cool", "normal", "FALSE"],
-    ["no", "rainy", "cool", "normal", "TRUE"],
-    ["yes", "overcast", "cool", "normal", "TRUE"],
-    ["no", "sunny", "mild", "high", "FALSE"],
-    ["yes", "sunny", "cool", "normal", "FALSE"],
-    ["yes", "rainy", "mild", "normal", "FALSE"],
-    ["yes", "sunny", "mild", "normal", "TRUE"],
-    ["yes", "overcast", "mild", "high", "TRUE"],
-    ["yes", "overcast", "hot", "normal", "FALSE"],
-    ["no", "rainy", "mild", "high", "TRUE"],
-]
-
-maxent = MaxEntropy()
-x = ["overcast", "mild", "high", "FALSE"]
-
-maxent.loadData(dataset)
-maxent.train(maxiter=100)
-
-print("精度:", maxent.predict(x))
-
-# 精度: {'no': 0.0015600198042872487, 'yes': 0.9984399801957127}
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 # 用邏輯迴歸做 titanic ST
@@ -3197,13 +2410,12 @@ show()
 
 """
 Data wrangling (impute and drop)
-
     Impute age (by averaging)
     Drop unncessary features
     Convert categorical features to dummy variables
-
 Define a function to impute (fill-up missing values) age feature
 """
+print('aa')
 
 a = list(f_class_Age["Age"])
 
@@ -3237,6 +2449,8 @@ plt.title("Bar plot of the count of numeric features b")
 
 show()
 
+print('bb')
+
 # Drop the 'Cabin' feature and any other null value
 
 train.drop("Cabin", axis=1, inplace=True)
@@ -3266,12 +2480,12 @@ print(cc)
 
 # 資料分割
 X_train, X_test, y_train, y_test = train_test_split(
-    train.drop("Survived", axis=1), train["Survived"], test_size=0.2, random_state=9487
+    train.drop("Survived", axis=1), train["Survived"], test_size=0.2
 )
 
 # F1-score as a fucntion of regularization (penalty) parameter
 
-from sklearn.metrics import classification_report
+print('cc')
 
 nsimu = 201
 penalty = [0] * nsimu
@@ -3308,7 +2522,6 @@ for i in range(1, nsimu):
         train.drop("Survived", axis=1),
         train["Survived"],
         test_size=0.1 + (i - 1) * 0.007,
-        random_state=9487,
     )
     logmodel = LogisticRegression(C=1, tol=1e-4, max_iter=1000, n_jobs=4)  # 邏輯迴歸函數學習機
     logmodel.fit(X_train, y_train)  # 學習訓練.fit
@@ -3324,6 +2537,8 @@ plt.xlabel("Test set size (fraction)")
 plt.ylabel("F1-score on test data")
 show()
 
+print('dd')
+
 # F1-score as a function of random seed of test/train split
 
 nsimu = 101
@@ -3336,7 +2551,6 @@ for i in range(1, nsimu):
         train.drop("Survived", axis=1),
         train["Survived"],
         test_size=0.3,
-        random_state=9487 + i,
     )
     logmodel = LogisticRegression(C=1, tol=1e-5, max_iter=1000, n_jobs=4)  # 邏輯迴歸函數學習機
     logmodel.fit(X_train, y_train)  # 學習訓練.fit
@@ -3537,12 +2751,9 @@ X_new, y_new = smote.fit_resample(X, y)
 cc = len(y_new[y_new == 0]), len(y_new[y_new == 1])
 print(cc)
 
-# 模型訓練與評估
-
 # 分割資料
 X_train, X_test, y_train, y_test = train_test_split(X_new, y_new)
 
-# 模型訓練
 clf = LogisticRegression()
 
 clf.fit(X_train, y_train)  # 學習訓練.fit
@@ -3575,7 +2786,6 @@ print(classification_report_imbalanced(y_test, y_pred))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 # 標註傳播(Label propagation)測試
 
@@ -3895,7 +3105,7 @@ enethinge = sklearn.linear_model.SGDClassifier(
 )
 
 enethinge.fit(X, y)  # 學習訓練.fit
-
+""" NG
 print("Hinge loss and logistic loss provide almost the same predictions.")
 print("Confusion matrix")
 confusion_matrix(enetlog.predict(X), enethinge.predict(X))
@@ -3903,6 +3113,7 @@ confusion_matrix(enetlog.predict(X), enethinge.predict(X))
 print("Decision_function log x hinge losses:")
 _ = plt.plot(enetlog.decision_function(X), enethinge.decision_function(X), "o")
 
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -4110,7 +3321,6 @@ param_grid = {
     "ridge__alpha": [0.001, 0.01, 0.1, 1, 10, 100],
 }
 
-# Expect execution in ipython, for python remove the %time
 print("----------------------------")
 print("-- Parallelize inner loop --")
 print("----------------------------")
@@ -4223,7 +3433,6 @@ param_grid = {
     "ridge__C": [0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000],
 }
 
-# Expect execution in ipython, for python remove the %time
 print("----------------------------")
 print("-- Parallelize inner loop --")
 print("----------------------------")
@@ -4334,6 +3543,174 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+LogisticRegressionCV
+
+"""
+
+# Use scikit-learn's built-in make_classification method to generate syntehtic classificiation data
+
+# I used two informative features (Temp, Humidity) and one redundant feature 'Crime'
+
+X, y = make_classification(
+    n_samples=35040,
+    n_classes=2,
+    n_features=3,
+    n_informative=2,
+    n_redundant=1,
+    weights=[0.999, 0.001],
+    class_sep=1.0,
+)
+
+df = pd.DataFrame(data=X, columns=["Temp", "Humidity", "Crime"])
+
+df["y"] = y
+
+df["Temp"] = df["Temp"] - min(df["Temp"])
+maxt = max(df["Temp"])
+df["Temp"] = 90 * df["Temp"] / maxt
+
+df["Humidity"] = df["Humidity"] - min(df["Humidity"])
+maxh = max(df["Humidity"])
+df["Humidity"] = 100 * df["Humidity"] / maxh
+
+df["Crime"] = df["Crime"] - min(df["Crime"])
+maxc = max(df["Crime"])
+df["Crime"] = 10 * df["Crime"] / maxc
+
+df.hist("Temp")
+plt.show()
+# array([[<matplotlib.axes._subplots.AxesSubplot object at 0x000002A1F3DE1358>]], dtype=object)
+
+df.hist("Humidity")
+plt.show()
+# array([[<matplotlib.axes._subplots.AxesSubplot object at 0x000002A1F5ECCE10>]], dtype=object)
+
+df.hist("Crime")
+plt.show()
+# array([[<matplotlib.axes._subplots.AxesSubplot object at 0x000002A1F63B6320>]], dtype=object)
+
+# Take a sum on the Boolean array with df['y']==1 to count the number of positive examples
+
+sum(df["y"] == 1)
+
+# 208
+
+# ** That means only 223 responses out of 35040 samples are positive **
+
+cc = df.head(10)
+print(cc)
+
+cc = df.describe()
+print(cc)
+
+# Logistic Regression undersampling
+
+from sklearn.model_selection import StratifiedKFold
+from sklearn.linear_model import LogisticRegressionCV
+
+# Under-sampling the negative class to limited number
+
+df0 = df[df["y"] == 0].sample(800)
+df1 = df[df["y"] == 1]
+df_balanced = pd.concat([df0, df1], axis=0)
+df_balanced.describe()
+
+df_balanced.hist("y")
+plt.title(
+    "Relative frequency of positive and negative classes\n in the balanced (under-sampled) dataset"
+)
+
+plt.show()
+
+log_model_balanced = LogisticRegressionCV(cv=5, class_weight="balanced")
+
+X_train, X_test, y_train, y_test = train_test_split(
+    df_balanced.drop("y", axis=1), df_balanced["y"], test_size=0.30
+)
+
+from sklearn.preprocessing import MinMaxScaler
+
+scaler = MinMaxScaler()
+
+X_train = scaler.fit_transform(X_train)
+
+log_model_balanced.fit(X_train, y_train)
+"""
+LogisticRegressionCV(Cs=10, class_weight='balanced', cv=5, dual=False,
+           fit_intercept=True, intercept_scaling=1.0, max_iter=100,
+           multi_class='ovr', n_jobs=1, penalty='l2', random_state=None,
+           refit=True, scoring=None, solver='lbfgs', tol=0.0001, verbose=0)
+"""
+print(classification_report(y_test, log_model_balanced.predict(X_test)))
+
+# I did an experiment with how the degree of under-sampling affects F1-score, precision, and recall
+
+n_neg = [i for i in range(200, 4200, 200)]
+
+df1 = df[df["y"] == 1]
+F1_scores = []
+precision_scores = []
+recall_scores = []
+
+for num in n_neg:
+    # Create under-sampled data sets
+    df0 = df[df["y"] == 0].sample(num)
+    df_balanced = pd.concat([df0, df1], axis=0)
+    # Create model with 'class_weight=balanced' and 5-fold cross-validation
+    log_models = LogisticRegressionCV(cv=5, class_weight="balanced")
+    # Create test/train splits
+    X_train, X_test, y_train, y_test = train_test_split(
+        df_balanced.drop("y", axis=1), df_balanced["y"], test_size=0.30
+    )
+    # Min-max scale the training data
+    X_train = scaler.fit_transform(X_train)
+
+    # Fit the logistic regression model
+    log_models.fit(X_train, y_train)
+
+    # Calculate various scores
+    F1_scores.append(f1_score(y_test, log_models.predict(X_test)))
+    precision_scores.append(precision_score(y_test, log_models.predict(X_test)))
+    recall_scores.append(recall_score(y_test, log_models.predict(X_test)))
+
+plt.scatter(n_neg, F1_scores, color="green", edgecolor="black", alpha=0.6, s=100)
+plt.title("F1-score as function of negative samples")
+plt.grid(True)
+plt.ylabel("F1-score")
+plt.xlabel("Number of negative samples")
+
+plt.show()
+
+plt.scatter(
+    n_neg, precision_scores, color="orange", edgecolor="black", alpha=0.6, s=100
+)
+plt.title("Precision score as function of negative samples")
+plt.grid(True)
+plt.ylabel("Precision score")
+plt.xlabel("Number of negative samples")
+
+plt.show()
+
+plt.scatter(n_neg, recall_scores, color="blue", edgecolor="black", alpha=0.6, s=100)
+plt.title("Recall score as function of negative samples")
+plt.grid(True)
+plt.ylabel("Recall score")
+plt.xlabel("Number of negative samples")
+
+plt.show()
+
+"""
+So, precision goes down rapidly with more negative samples and so does F1-score. Recall is largely unaffected by mixing negative samples with the positive ones.
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -4365,3 +3742,136 @@ print(logistic_regression.classes_)
 # 用heatmap(.isnull())來找出缺失的資料在哪些欄位
 sns.heatmap(df.isnull(), yticklabels=False, cbar=False, cmap="viridis")
 show()
+
+
+
+
+
+
+
+def plot_confusion_matrix(cm, classes,
+                          title='Confusion matrix',
+                          cmap=plt.cm.Blues):
+    #This function prints and plots the confusion matrix.
+    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+    tick_marks = np.arange(len(classes))
+    plt.xticks(tick_marks, classes, rotation=0)
+    plt.yticks(tick_marks, classes)
+
+    thresh = cm.max() / 2.
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        plt.text(j, i, cm[i, j],
+                 horizontalalignment="center",
+                 color="white" if cm[i, j] > thresh else "black")
+
+    plt.tight_layout()
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
+
+
+
+
+# 构建逻辑回归模型
+lr = LogisticRegression(C = 1, penalty = 'l1')
+lr.fit(X_train,y_train.values.ravel())
+y_pred = lr.predict(X_test.values)  # 預測.predict
+
+# Compute confusion matrix
+cnf_matrix = confusion_matrix(y_test,y_pred)
+np.set_printoptions(precision=2)
+
+print("Recall metric in the testing dataset: ", cnf_matrix[1,1]/(cnf_matrix[1,0]+cnf_matrix[1,1]))
+
+# Plot non-normalized confusion matrix
+class_names = [0,1]
+plt.figure()
+plot_confusion_matrix(cnf_matrix
+                      , classes=class_names
+                      , title='Confusion matrix')
+show()
+
+
+
+## 加入代价敏感参数，重新计算
+lr = LogisticRegression(C = 1, penalty = 'l1', class_weight='balanced')
+lr.fit(X_train,y_train.values.ravel())
+y_pred = lr.predict(X_test.values)  # 預測.predict
+
+# Compute confusion matrix
+cnf_matrix = confusion_matrix(y_test,y_pred)
+np.set_printoptions(precision=2)
+
+print("Recall metric in the testing dataset: ", cnf_matrix[1,1]/(cnf_matrix[1,0]+cnf_matrix[1,1]))
+
+# Plot non-normalized confusion matrix
+class_names = [0,1]
+plt.figure()
+plot_confusion_matrix(cnf_matrix
+                      , classes=class_names
+                      , title='Confusion matrix')
+show()
+
+# ### 检验模型
+
+fpr,tpr,threshold = roc_curve(y_test,y_pred, drop_intermediate=False) ###计算真正率和假正率  
+roc_auc = auc(fpr,tpr) ###计算auc的值  
+  
+plt.figure()  
+lw = 2  
+plt.figure(figsize=(10,10))  
+plt.plot(fpr, tpr, color='darkorange',  
+         lw=lw, label='ROC curve (area = %0.2f)' % roc_auc) ###假正率为横坐标，真正率为纵坐标做曲线  
+plt.plot([0, 1], [0, 1], color='navy', lw=lw, linestyle='--')  
+plt.xlim([0.0, 1.0])  
+plt.ylim([0.0, 1.05])  
+plt.xlabel('False Positive Rate')  
+plt.ylabel('True Positive Rate')  
+plt.title('Receiver operating characteristic example')  
+plt.legend(loc="lower right")  
+show()
+
+# 利用sklearn.metrics中的roc_curve算出tpr，fpr作图
+
+fig, ax = plt.subplots()
+ax.plot(1 - threshold, tpr, label='tpr') # ks曲线要按照预测概率降序排列，所以需要1-threshold镜像
+ax.plot(1 - threshold, fpr, label='fpr')
+ax.plot(1 - threshold, tpr-fpr,label='KS')
+plt.xlabel('score')
+plt.title('KS Curve')
+#plt.xticks(np.arange(0,1,0.2), np.arange(1,0,-0.2))
+#plt.xticks(np.arange(0,1,0.2), np.arange(score.max(),score.min(),-0.2*(data['反欺诈评分卡总分'].max() - data['反欺诈评分卡总分'].min())))
+plt.figure(figsize=(20,20))
+legend = ax.legend(loc='upper left', shadow=True, fontsize='x-large')
+
+show()
+
+
+# Set target type: 'b' for default/non-default, 'c' for continous pd values
+t_type_ = "c"
+# Set sample size
+N = 20
+# Random variables
+x1 = np.random.rand(N)
+x2 = np.random.rand(N)
+if t_type_ == "b":
+    y_ = np.where(
+        np.random.rand(
+            N,
+        )
+        + x1
+        + x2
+        > 2,
+        1,
+        0,
+    )
+else:
+    y_ = np.random.rand(N) + x1 + x2
+    y_ = (y_ - np.min(y_)) / (np.max(y_) - np.min(y_)) / 2
+# Inserting special values
+x1[0:20] = float("nan")
+x1[30:50] = float(0)
+x1[60:80] = float(1)
+x2[0:20] = float("nan")
+

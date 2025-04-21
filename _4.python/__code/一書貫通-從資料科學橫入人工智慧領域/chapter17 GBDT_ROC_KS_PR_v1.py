@@ -39,7 +39,7 @@ print("------------------------------------------------------------")  # 60個
 model_data = pd.read_csv("data/broadband.csv")
 
 target = model_data["BROADBAND"]
-orgData1 = model_data.ix[:, 1:-2]
+orgData1 = model_data.ix[:, 1:-2]  # 所有 .ix[ 改成 .loc[
 
 # from sklearn.metrics import confusion_matrix, roc_curve, roc_auc_score,  precision_recall_curve, average_precision_score
 from sklearn import metrics

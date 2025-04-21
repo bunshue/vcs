@@ -1266,8 +1266,8 @@ print(cc)
 train, test = cross_validation.train_test_split(data, test_size=1000)
 
 # 进行极差标准化
-train_X = train.ix[:, 3:-1]
-test_X = test.ix[:, 3:-1]
+train_X = train.ix[:, 3:-1]  # 所有 .ix[ 改成 .loc[
+test_X = test.ix[:, 3:-1]  # 所有 .ix[ 改成 .loc[
 scaler = preprocessing.MinMaxScaler().fit(train_X)
 train_X = scaler.transform(train_X)
 test_X = scaler.transform(test_X)
@@ -1328,8 +1328,8 @@ data.head()
 train, test = cross_validation.train_test_split(data, test_size=1000)
 
 # 进行极差标准化
-train_X = train.ix[:, 0:-1]
-test_X = test.ix[:, 0:-1]
+train_X = train.ix[:, 0:-1]  # 所有 .ix[ 改成 .loc[
+test_X = test.ix[:, 0:-1]  # 所有 .ix[ 改成 .loc[
 scaler = preprocessing.MinMaxScaler().fit(train_X)
 train_X = scaler.transform(train_X)
 test_X = scaler.transform(test_X)

@@ -1397,10 +1397,35 @@ sns.heatmap(data=corr, square=True, cmap="RdBu_r", annot=True)
 
 show()
 
+print("------------------------------")  # 30個
+
+print("相關係數")
+
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target  # 資料集目標
+
+df = pd.DataFrame(X, columns=["萼長", "萼寬", "瓣長", "瓣寬"])
+print(df)
+
+corr = df.corr()  # 純數字的df才可以做corr
+print("相關係數 :\n", corr, sep="")
+
+sns.heatmap(
+    corr,
+    annot=True,
+    vmax=1,
+    vmin=-1,
+    xticklabels=True,
+    yticklabels=True,
+    square=True,
+    cmap="jet", # gray....
+)
+show()
+
 print("------------------------------------------------------------")  # 60個
 print("神經網路")
 print("------------------------------------------------------------")  # 60個
-
 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense

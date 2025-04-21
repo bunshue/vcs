@@ -91,7 +91,7 @@ def dataconvert(arulesdata,tidvar='tid',itemvar='item',data_type = 'BOOL'):
         print('BOOL type dataSet!')
         dataSet=[]            
         for i in range(len(arulesdata)):
-            item=arulesdata.columns[arulesdata.ix[i,:].values==True].tolist()
+            item=arulesdata.columns[arulesdata.ix[i,:].values==True].tolist()  # 所有 .ix[ 改成 .loc[
             if item:
                 dataSet.append(item)
         return dataSet
@@ -101,7 +101,7 @@ def dataconvert(arulesdata,tidvar='tid',itemvar='item',data_type = 'BOOL'):
         group_index=list(arulesdata.groupby(tidvar).groups.values())
         dataSet=[]
         for i in range(len(group_index)):
-            item=arulesdata.ix[group_index[i],itemvar].values.tolist()
+            item=arulesdata.ix[group_index[i],itemvar].values.tolist()  # 所有 .ix[ 改成 .loc[
             if item:
                 dataSet.append(item)
         return dataSet

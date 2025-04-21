@@ -94,19 +94,27 @@ print("乳癌診斷預測 基本數據")
 breast_cancer = datasets.load_breast_cancer()
 
 print("feature_names :", breast_cancer.feature_names)
+print("target_names :", breast_cancer.target_names)
 
 X = breast_cancer.data
 y = breast_cancer.target
 
-X = X[:, :10]  # 原本有30個特徵, 取出前10個特徵
+# X = X[:, :10]  # 原本有30個特徵, 取出前10個特徵
+print(X.shape)
 
+print("全部資料 做邏輯迴歸")
 logistic_regression = LogisticRegression()
-
 logistic_regression.fit(X, y)
-
 y_pred = logistic_regression.predict(X)
-
 print(f"計算準確率 : {accuracy_score(y, y_pred)*100:.2f}%")
+
+print("資料分割 做邏輯迴歸")
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+logistic_regression = LogisticRegression()
+logistic_regression.fit(X_train, y_train)
+y_pred = logistic_regression.predict(X_test)
+print(f"計算準確率 : {accuracy_score(y_test, y_pred)*100:.2f}%")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -396,7 +404,6 @@ print("------------------------------------------------------------")  # 60個
 """
 Non-linear models
 =================
-
 Here we focuse on non-linear models for classification. Nevertheless, each
 classification model has its regression counterpart.
 """
@@ -460,9 +467,7 @@ forest.fit(X_train, y_train)
 y_pred = forest.predict(X_test)
 y_prob = forest.predict_proba(X_test)[:, 1]
 
-
 # Scores
-
 print(
     "bAcc: %.2f, AUC: %.2f "
     % (
@@ -472,7 +477,6 @@ print(
 )
 
 # Extra Trees (Low Variance)
-#
 # Extra Trees is like Random Forest, in that it builds multiple trees and splits nodes using random
 # subsets of features, but with two key differences: it does not bootstrap observations
 # (meaning it samples without replacement), and nodes are split on random splits, not best splits.
@@ -1708,7 +1712,6 @@ print(cc)
 
 #'compactness error'
 
-''' NG in kilo
 # 以 SHAP 套件驗證
 
 import shap
@@ -1725,7 +1728,7 @@ print(f"Shaply value calulated from shap: {shap_values[1][j]:.5}")
 # or shap.kmeans(data, K) to summarize the background as K samples.
 
 # Shaply value calulated from shap: 0.01366
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

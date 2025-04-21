@@ -51,12 +51,22 @@ from sklearn.model_selection import cross_val_score  # Cross Validation
 from sklearn.tree import DecisionTreeClassifier  # 決策樹分類(Decision Tree Classifier)
 from sklearn.tree import DecisionTreeRegressor  # 迴歸樹
 from sklearn.tree import plot_tree  # 繪製樹狀圖
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.model_selection import ShuffleSplit
+from sklearn import preprocessing
 from matplotlib.colors import ListedColormap
+
 from sklearn.metrics import confusion_matrix  # 混淆矩陣
 from sklearn.metrics import classification_report  # 分類報告
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import roc_curve
 from sklearn.metrics import recall_score
+
+import sklearn.model_selection as cross_validation
+import sklearn.metrics as metrics
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -359,7 +369,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from graphviz import Digraph
+import graphviz
 
 styles = {
     "top": {"shape": "ellipse", "style": "filled", "color": "lightblue"},
@@ -368,7 +378,7 @@ styles = {
     "qst": {"shape": "rect"},
 }
 
-example_tree = Digraph()
+example_tree = graphviz.Digraph()
 
 example_tree.node("top", "Should I attend the ML lecture?", styles["top"])
 example_tree.node("q1", "Do I fulfill requirements?", styles["qst"])
@@ -436,7 +446,7 @@ plt.text(
 )
 show()
 
-tree = Digraph()
+tree = graphviz.Digraph()
 
 tree.edge("x > 5?\n[20, 20]", "blue\n[15, 0]", "No")
 tree.edge("x > 5?\n[20, 20]", "y > 3?\n[5, 20]", "Yes")
@@ -451,7 +461,7 @@ tree.edge("almost orange\n[1, 14]", "Should we continue?\nOr would it be overfit
 
 tree
 
-tree = Digraph()
+tree = graphviz.Digraph()
 
 tree.edge("y > 3?\n[20, 20]", "x > 9?\n[10, 6]", "No")
 tree.edge("y > 3?\n[20, 20]", "x > 5?\n[10, 14]", "Yes")
@@ -525,18 +535,6 @@ plt.axes(projection="3d").plot_surface(p, q, h)
 
 show()
 
-
-def entropy(*probs):
-    """Calculate information entropy"""
-    try:
-        total = sum(probs)
-        return sum([-p / total * math.log(p / total, 2) for p in probs])
-    except:
-        return 0
-
-
-print(entropy(4, 5), entropy(2, 1), entropy(2, 2))
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -563,21 +561,9 @@ golf_data = pd.read_csv(src)
 
 print(golf_data)
 
-# Play golf entropy
-
-cc = entropy(9, 5)
-print(cc)
-
-# Play golf vs outlook
-
-cc = entropy(3, 2), 0, entropy(2, 3)
-print(cc)
-
-# (0.9709505944546686, 0, 0.9709505944546686)
-
 # Results for all features
 
-tree = Digraph()
+tree = graphviz.Digraph()
 
 tree.edge("outlook", "sunny")
 tree.edge("outlook", "overcast")
@@ -619,80 +605,6 @@ print(tree)
 
 # Information gain for name
 
-h = entropy(4, 6)  # dataset entropy H(T)
-
-# one John plays and the other one doesn't
-# in other cases entropy = 0
-g_name = h - 2 / 10 * entropy(1, 1)
-
-print(g_name)
-
-# 0.7709505944546686
-
-# Information gain for sex
-
-# 5 men - 3 play
-# 5 women - 3 play
-g_sex = h - 5 / 10 * entropy(2, 3) - 5 / 10 * entropy(2, 3)
-
-print(g_sex)
-
-# 0.0
-
-# Information gain for age
-
-# 4 old people - 1 plays
-# 6 young people - 5 play
-g_age = h - 4 / 10 * entropy(1, 3) - 6 / 10 * entropy(1, 5)
-
-print(g_age)
-
-# 0.256425891682003
-
-# Information gain ratio for name
-
-# 2x John, 2x Alex, 6x unique name
-cc = g_name / entropy(2, 2, *[1] * 6)
-print(cc)
-
-# 0.26384995435159336
-
-# Information gain ratio for sex
-
-# 5 males and 5 females - zero stays zero though
-cc = g_sex / entropy(5, 5)
-print(cc)
-
-# 0.0
-
-#  Information gain ratio for age
-
-# 4x old and 6x young
-cc = g_age / entropy(4, 6)
-print(cc)
-
-# 0.26409777505314147
-
-print("Two possible values:\n")
-
-for i in range(0, 11):
-    print("\t({}, {}) split -> entropy = {}".format(i, 10 - i, entropy(i, 10 - i)))
-
-print("\n10 possible values:", entropy(*[1] * 10))
-
-# calculate entropy for all possible thresholds
-e18 = 2 / 10 * entropy(1, 1) + 8 / 10 * entropy(3, 5)
-e24 = 4 / 10 * entropy(1, 3) + 6 / 10 * entropy(3, 3)
-e31 = 6 / 10 * entropy(1, 5) + 4 / 10 * entropy(3, 1)
-e50 = 9 / 10 * entropy(4, 5) + 1 / 10 * entropy(0, 1)
-
-print("With threshold = {}, entropy = {}".format(18, e18))
-print("With threshold = {}, entropy = {}".format(24, e24))
-print("With threshold = {}, entropy = {}".format(31, e31))
-print("With threshold = {}, entropy = {}".format(50, e50))
-
-# First example - step by step
-
 # first define some points representing two classes
 grid = np.mgrid[0:10:2, 0:10:2]
 set01 = np.vstack([grid[0].ravel(), grid[1].ravel()]).T
@@ -704,7 +616,6 @@ set02 = np.delete(set02, [0, 1, 5, 6, 8], axis=0)
 
 plt.scatter(*set01.T)
 plt.scatter(*set02.T)
-
 show()
 
 # Validation set
@@ -726,63 +637,19 @@ plt.scatter(*blue_train.T)
 plt.scatter(*blue_valid.T, color="C0", marker="x")
 plt.scatter(*orange_train.T)
 plt.scatter(*orange_valid.T, color="C1", marker="x")
-
 show()
 
-# Thresholds finder
-
-
-def info_gain(Nb, No, nb, no):
-    """Calculate information gain for given split"""
-    h = entropy(Nb, No)  # H(S)
-    total = Nb + No  # total number of samples
-    subtotal = nb + no  # number of samples in subset
-
-    return (
-        h
-        - subtotal / total * entropy(nb, no)
-        - (total - subtotal) / total * entropy(Nb - nb, No - no)
-    )
-
-
 # Feature X
-
 Nb = 15
 No = 15
-
-splits = {
-    "0": (4, 0),
-    "2 ": (8, 0),
-    "4": (11, 0),
-    "6": (13, 3),
-    "8": (15, 4),
-    "10": (15, 8),
-    "12": (15, 11),
-}
-
-for threshold, (no, nb) in splits.items():
-    print("Threshold = {}\t -> {}".format(threshold, info_gain(Nb, No, no, nb)))
-
-# 4 samples with x = 0, 4 samples with x = 2 etc
-cc = info_gain(Nb, No, *splits["4"]) / entropy(4, 4, 3, 5, 3, 4, 3, 4)
-print(cc)
-
+  
 # Feature Y
-
 Nb = 15
 No = 15
 
 splits = {"0": (4, 2), "2": (8, 5), "4": (10, 8), "6": (13, 11)}
 
-for threshold, (no, nb) in splits.items():
-    print("Threshold = {}\t -> {}".format(threshold, info_gain(Nb, No, no, nb)))
-
-cc = info_gain(Nb, No, *splits["2"]) / entropy(6, 7, 5, 6, 6)
-print(cc)
-
-# The root
-
-tree = Digraph()
+tree = graphviz.Digraph()
 
 tree.edge("x > 4?\n[15, 15]", "blue\n[11, 0]", "No")
 tree.edge("x > 4?\n[15, 15]", "[4, 15]", "Yes")
@@ -793,48 +660,28 @@ plt.xlim([5.5, 14.5])
 
 plt.scatter(*blue_train.T)
 plt.scatter(*orange_train.T)
-
 show()
 
 # Check x maximum information gain ratio
-
 Nb = 4
 No = 15
 
 splits = {"6": (2, 3), "8": (4, 4), "10": (4, 8), "12": (4, 11)}
 
-for threshold, (no, nb) in splits.items():
-    print("Threshold = {}\t -> {}".format(threshold, info_gain(Nb, No, no, nb)))
-
-print(
-    "Information gain ratio with x > 8:",
-    info_gain(Nb, No, *splits["8"]) / entropy(5, 3, 4, 3, 4),
-)
-
 # Information gain ratio with x > 8: 0.14010311259651076
 
 # Check y maximum information gain ratio
-
 Nb = 4
 No = 15
 
 splits = {"0": (2, 2), "2": (3, 5), "4": (3, 6), "6": (4, 9)}
-
-for threshold, (no, nb) in splits.items():
-    print("Threshold = {}\t -> {}".format(threshold, info_gain(Nb, No, no, nb)))
-
-
-print(
-    "Information gain ratio with y > 6:",
-    info_gain(Nb, No, *splits["6"]) / entropy(4, 4, 3, 4, 4),
-)
 
 # Information gain ratio with y > 6: 0.05757775370755489
 
 # Once again x is a winner
 # And we have a new node
 
-tree = Digraph()
+tree = graphviz.Digraph()
 
 tree.edge("x > 4?\n[15, 15]", "blue\n[11, 0]", "No")
 tree.edge("x > 4?\n[15, 15]", "x > 8?\n[4, 15]", "Yes")
@@ -852,37 +699,22 @@ plt.xlim([5.5, 8.5])
 
 plt.scatter(*blue_train.T)
 plt.scatter(*orange_train.T)
-
 show()
 
 # Again, the best cut may be pretty obvious, but lets check the math
 # We have one possible cut in x
-
 Nb = 4
 No = 4
-
-
-print("Information gain ratio with x > 6:", info_gain(Nb, No, 2, 3) / entropy(5, 3))
-
-# Information gain ratio with x > 6: 0.05112447853477686
 
 # And usual threshold candidates in y
 
 splits = {"0": (2, 0), "2": (3, 0), "4": (3, 1), "6": (4, 2)}
 
-for threshold, (no, nb) in splits.items():
-    print("Threshold = {}\t -> {}".format(threshold, info_gain(Nb, No, no, nb)))
-
-print(
-    "Information gain ratio with y > 2:",
-    info_gain(Nb, No, *splits["2"]) / entropy(2, 1, 1, 2, 2),
-)
-
 # Information gain ratio with y > 2: 0.24390886253128827
 
 # And the tree is growing
 
-tree = Digraph()
+tree = graphviz.Digraph()
 
 tree.edge("x > 4?\n[15, 15]", "blue\n[11, 0]", "No")
 tree.edge("x > 4?\n[15, 15]", "x > 8?\n[4, 15]", "Yes")
@@ -902,26 +734,14 @@ plt.ylim([3.5, 8.5])
 
 plt.scatter(*blue_train.T)
 plt.scatter(*orange_train.T)
-
 show()
 
 Nb = 1
 No = 4
 
-print("Information gain ratio with x > 6:", info_gain(Nb, No, 0, 3) / entropy(3, 2))
-
-# Information gain ratio with x > 6: 0.33155970728682876
-
-print("Information gain ratio with y > 4:", info_gain(Nb, No, 0, 1) / entropy(1, 2, 2))
-
-print("Information gain ratio with y > 6:", info_gain(Nb, No, 1, 2) / entropy(1, 2, 2))
-
-# Information gain ratio with y > 4: 0.047903442721748145
-# Information gain ratio with y > 6: 0.11232501392736344
-
 # The final tree
 
-tree = Digraph()
+tree = graphviz.Digraph()
 
 tree.edge("x > 4?\n[15, 15]", "blue\n[11, 0]", "No")
 tree.edge("x > 4?\n[15, 15]", "x > 8?\n[4, 15]", "Yes")
@@ -987,73 +807,16 @@ def accuracy(samples, tree):
 cc = accuracy(blue_valid, tree_nominal)
 print(cc)
 
-""" NG
-cc = accuracy(orange_valid, tree)
-print(cc)
-"""
-
-"""
-Pruning I
-    We want to prune last decision node 
-    In general, majority decides about the leaf node class
-    As it is a tie here, lets check both
-"""
-
-
-def tree_prune01a(x, y):
-    """Implementation of above tree"""
-    if x <= 4:
-        return "blue"
-    elif x > 8:
-        return "orange"
-    elif y <= 2:
-        return "blue"
-    elif x <= 6:
-        return "orange"
-    else:
-        return "blue"
-
-
-def tree_prune01b(x, y):
-    """Implementation of above tree"""
-    if x <= 4:
-        return "blue"
-    elif x > 8:
-        return "orange"
-    elif y <= 2:
-        return "blue"
-    else:
-        return "orange"
-
-
-cc = accuracy(blue_valid, tree_prune01a)
-print(cc)
-
-cc = accuracy(orange_valid, tree_prune01a)
+cc = accuracy(orange_valid, tree_nominal)
 print(cc)
 
 """
-    Pruning does not change the accuracy
-
-    We always use Occam's razor and prune01a is preferred over nominal tree
-
-    But lets see how prune01b works
-"""
-cc = accuracy(blue_valid, tree_prune01b)
-print(cc)
-
-cc = accuracy(orange_valid, tree_prune01b)
-print(cc)
-
-"""
-    In this case we even get the increase of the accuracy
-
-    We decide to prune a tree by replacing y>6 decision node with "orange" leaf node
-
+In this case we even get the increase of the accuracy
+We decide to prune a tree by replacing y>6 decision node with "orange" leaf node
 Which automatically removes x> 6    decision node
 """
 
-tree = Digraph()
+tree = graphviz.Digraph()
 
 tree.edge("x > 4?\n[15, 15]", "blue\n[11, 0]", "No")
 tree.edge("x > 4?\n[15, 15]", "x > 8?\n[4, 15]", "Yes")
@@ -1065,45 +828,6 @@ tree.edge("y > 2?\n[4, 4]", "blue\n[3, 0]", "No")
 tree.edge("y > 2?\n[4, 4]", "orange\n[1, 4]", "Yes")
 
 tree
-
-"""
-Pruning II
-
-    Now, lets see the accuracy after removing y>2 node
-
-    It is once again a tie, so lets check both scenarios
-"""
-
-
-def tree_prune02a(x, y):
-    """Implementation of above tree"""
-    if x <= 4:
-        return "blue"
-    else:
-        return "orange"
-
-
-def tree_prune02b(x, y):
-    """Implementation of above tree"""
-    if x <= 4:
-        return "blue"
-    elif x > 8:
-        return "orange"
-    else:
-        return "blue"
-
-
-cc = accuracy(blue_valid, tree_prune02a)
-print(cc)
-
-cc = accuracy(orange_valid, tree_prune02a)
-print(cc)
-
-cc = accuracy(blue_valid, tree_prune02b)
-print(cc)
-
-cc = accuracy(orange_valid, tree_prune02b)
-print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1136,73 +860,6 @@ src = "data/weather-nominal-weka.csv"
 golf_data = pd.read_csv(src)
 
 print(golf_data)
-
-# Gini impurity
-
-
-def gini(*distribution):
-    """Calculate gini impurity for given ditribution of samples"""
-    sum2 = sum(distribution) ** 2  # normalization factor
-
-    return 1 - sum([p**2 for p in distribution]) / sum2
-
-
-def gini_split(s1, s2, g1, g2):
-    """Calcualte impurity for given split
-
-    s1 -- the size of S1 subset
-    s1 -- the size of S2 subset
-    g1 -- I(S1)
-    g2 -- I(S2)
-    """
-    s = s1 + s2  # the total set size
-
-    return s1 / s * g1 + s2 / s * g2
-
-
-"""
-            | Play golf |
-            =============
-            | yes | no  |
-      -------------------
-      | yes |  2  |  3  | 5
-rainy | no  |  7  |  2  | 9
-      -------------------
-               9     5
-"""
-cc = gini_split(5, 9, gini(2, 3), gini(7, 2))
-print(cc)
-
-# 0.3936507936507937
-"""
-            | Play golf |
-            =============
-            | yes | no  |
-      -------------------
-      | yes |  3  |  2  | 5
-sunny | no  |  6  |  3  | 9
-      -------------------
-               9     5
-
-"""
-cc = gini_split(5, 9, gini(3, 2), gini(6, 3))
-print(cc)
-
-# 0.45714285714285713
-"""
-               | Play golf |
-               =============
-               | yes | no  |
-         -------------------
-         | yes |  4  |  0  | 4
-overcast | no  |  5  |  5  | 10
-         -------------------
-                  9     5
-"""
-cc = gini_split(4, 10, gini(4, 0), gini(5, 5))
-print(cc)
-
-# 0.35714285714285715
 
 # Scikit learn
 
@@ -1259,12 +916,11 @@ plt.plot([0.3, 0.3], [-0.2, 1.2], "g--")
 plt.plot([0.6, 0.6], [-0.2, 1.2], "g--")
 plt.xlabel("x")
 plt.ylabel("y")
-
 show()
 
 # The corresponding tree would look like this
 
-tree = Digraph()
+tree = graphviz.Digraph()
 
 tree.edge("x < 0.3?", "?", "No")
 tree.edge("x < 0.3?", "x < 0.6?", "Yes")
@@ -1320,107 +976,6 @@ plt.scatter(X, Y, color="b")
 plt.plot(X_test, Y_test)
 show()
 
-# Tree: cross-validation
-
-
-class TreeCV:
-    """Perform a cross-validation for chosen hyperparameter"""
-
-    def __init__(self, X, Y, hp="max_depth"):
-        """Save training data"""
-        self.X = X  # features
-        self.Y = Y  # targets
-        self.hp = hp  # hyperparameter
-
-    def set_method(self, hp):
-        """Set hyperparameter to use"""
-        self.hp = hp
-
-    def cross_me(self, *hp_vals):
-        """Perform cross validation for given hyperparameter values"""
-        self.scores = []  # the accuracy table
-        self.best = None  # the best fit
-
-        best_score = 0
-
-        for hp in hp_vals:
-            # create a tree with given hyperparameter cut
-            fit = DecisionTreeRegressor(**{self.hp: hp})
-
-            # calculate a cross validation scores and a mean value
-            score = cross_val_score(fit, np.reshape(X, (-1, 1)), Y).mean()
-
-            # update best fit if necessary
-            if score > best_score:
-                self.best = fit
-                best_score = score
-
-            self.scores.append([hp, score])
-
-        # train the best fit
-        self.best.fit(np.reshape(X, (-1, 1)), Y)
-
-    def plot(self):
-        """Plot accuracy as a function of hyperparameter values and best fit"""
-        plt.figure(figsize=(15, 5))
-
-        plt.subplot(1, 2, 1)
-
-        plt.xlabel(self.hp)
-        plt.ylabel("accuracy")
-
-        plt.plot(*zip(*self.scores))
-
-        plt.subplot(1, 2, 2)
-
-        X_test = np.arange(0.0, 1.0, 0.01)[:, np.newaxis]
-        Y_test = self.best.predict(X_test)
-
-        plt.scatter(self.X, self.Y, color="b", marker=".", label="Training data")
-        plt.plot(X_test, X_test * X_test, "g", label="True distribution")
-        plt.plot(X_test, Y_test, "r", label="Decision tree")
-
-        plt.legend()
-
-
-# Traning dataset
-
-X = np.random.sample(200)
-Y = np.array([x**2 + np.random.normal(0, 0.05) for x in X])
-
-# max_depth
-
-tree_handler = TreeCV(X, Y)
-tree_handler.cross_me(*range(1, 10))
-tree_handler.plot()
-show()
-
-# min_samples_leaf
-
-tree_handler.set_method("min_samples_leaf")
-tree_handler.cross_me(*range(1, 10))
-tree_handler.plot()
-show()
-
-""" OLD
-# min_impurity_split
-# min_impurity_split is depracated so lets disable warnings
-import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning)
-
-tree_handler.set_method("min_impurity_split")
-tree_handler.cross_me(*np.arange(0.0, 5e-3, 1e-4))
-tree_handler.plot()
-show()
-"""
-
-# min_impurity_decrease
-
-tree_handler.set_method("min_impurity_decrease")
-tree_handler.cross_me(*np.arange(0.0, 5e-4, 1e-5))
-tree_handler.plot()
-show()
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1459,16 +1014,13 @@ show()
 
 # Example
 
-from math import sin, cos, pi, exp
-
 
 def get_dataset(N=20, sigma=0.1):
-    """Generate N training samples"""
+    # Generate N training samples
     # X is a set of random points from [-1, 1]
     X = 2 * np.random.sample(N) - 1
     # Y are corresponding target values (with noise included)
-    Y = np.array([sin(pi * x) + np.random.normal(0, sigma) for x in X])
-
+    Y = np.array([math.sin(math.pi * x) + np.random.normal(0, sigma) for x in X])
     return X, Y
 
 
@@ -1490,6 +1042,7 @@ for i in range(100):
 
 plt.plot(x_, np.sin(np.pi * x_), "C0--")
 show()
+
 
 # Now we need to fit each polynomial to each dataset separately
 
@@ -1599,6 +1152,7 @@ def train_and_look(classifier, X, Y, ax=None, title="", cmap="Dark2"):
 # Let check how it works on a decision tree classifier with default sklearn setting
 
 train_and_look(DecisionTreeClassifier(), X, Y)
+
 show()
 
 # Decision tree
@@ -1623,18 +1177,14 @@ show()
 """
 
 # Random forest
-
 # Lets do the same with random forests (100 trees in each forest)
 
-from sklearn.ensemble import RandomForestClassifier as RF
-
-# create a figure with 9 axes 3x3
 fig, ax = plt.subplots(3, 3, figsize=(15, 15))
 
 # train and look at decision trees with different max depth
 for max_depth in range(0, 9):
     train_and_look(
-        RF(n_estimators=100, max_depth=max_depth + 1),
+        RandomForestClassifier(n_estimators=100, max_depth=max_depth + 1),
         X,
         Y,
         ax=ax[max_depth // 3][max_depth % 3],
@@ -1645,23 +1195,17 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 """
 决策树
-
 决策树(decision tree)是一种基本的分类与回归方法。在处理分类问题中，其主要优点是模型具有可读性，分类速度快。
-
 决策树模型定义：
-
 分类决策树模型是一种描述对实例进行分类的树形结构。决策树又结点和有向边组成。结点类型包括：内部结点和叶结点。其中内部结点表示一个特征或属性，叶结点表示一个类。
-
 决策树的学习通常包括3个步骤：
 第一步：特征选择；
 第二步：决策树的生成；
 第三步：决策树的修剪。
 常用的算法有ID3、 C4.5和CART。
 特征选择
-
 特征选择的目的在于选取对训练数据能够分类的特征，即特征选择是决定用哪个特征来划分特征空间。在实际场景中，特征的种类是多种多样的，选择不同的特征会决定产生不同的决策树。那究竟如何选择特征会更好？这里的关键就是确定选择特征的准则。信息增益(information gain)就是这样一种准则。
 """
 
@@ -1756,134 +1300,14 @@ info_gain_train(np.array(datasets))
 特征-(有工作) - info_gain - 0.324
 特征-(有自己的房子) - info_gain - 0.420
 特征-(信贷情况) - info_gain - 0.363
-
 '特征-(有自己的房子)的信息增益最大，选择为根节点特征'
 """
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# 决策树的生成, 常见的算法有ID3、C4.5
-
-# 決策樹的生成 之一 ID3算法
-# ID3算法的具体操作为：从根结点开始，对结点计算所有可能的特征信息增益，然后选择信息增益最大的特征作为结点特征，由该特征的不同取值建立子结点；再对子结点递归调用以上方法，构建决策树；知道所有特征的信息增益均很小或者没有特征可以选择为止。最后生成一个决策树。
-
-
-# ID3算法
-def recurse_train_ID3(train_set, train_label, features):
-    LEAF = "leaf"
-    INTERNAL = "internal"
-
-    # 步骤1—如果训练集train_set中的所有实例都属于同一类Ck
-    label_set = set(train_label)
-    if len(label_set) == 1:
-        return Tree(LEAF, Class=label_set.pop())
-
-    # 步骤2—如果特征集features为空
-    class_len = [
-        (i, len(list(filter(lambda x: x == i, train_label)))) for i in range(class_num)
-    ]  # 计算每一个类出现的个数
-    (max_class, max_len) = max(class_len, key=lambda x: x[1])
-
-    if len(features) == 0:
-        return Tree(LEAF, Class=max_class)
-
-    # 步骤3—计算信息增益,并选择信息增益最大的特征
-    max_feature = 0
-    max_gda = 0
-    D = train_label
-    for feature in features:
-        # print(type(train_set))
-        A = np.array(train_set[:, feature].flat)  # 选择训练集中的第feature列（即第feature个特征）
-        gda = calc_ent_grap(A, D)
-        if gda > max_gda:
-            max_gda, max_feature = gda, feature
-
-    # 步骤4—信息增益小于阈值
-    if max_gda < epsilon:
-        return Tree(LEAF, Class=max_class)
-
-    # 步骤5—构建非空子集
-    sub_features = list(filter(lambda x: x != max_feature, features))
-    tree = Tree(INTERNAL, feature=max_feature)
-
-    max_feature_col = np.array(train_set[:, max_feature].flat)
-    feature_value_list = set(
-        [max_feature_col[i] for i in range(max_feature_col.shape[0])]
-    )  # 保存信息增益最大的特征可能的取值 (shape[0]表示计算行数)
-    for feature_value in feature_value_list:
-        index = []
-        for i in range(len(train_label)):
-            if train_set[i][max_feature] == feature_value:
-                index.append(i)
-
-        sub_train_set = train_set[index]
-        sub_train_label = train_label[index]
-
-        sub_tree = recurse_train_ID3(sub_train_set, sub_train_label, sub_features)
-        tree.add_tree(feature_value, sub_tree)
-
-    return tree
-
-
-# 定义经验熵、条件熵、信息增益等
-
-
-# 计算数据集x的经验熵H(x)
-def calc_ent(x):
-    x_value_list = set([x[i] for i in range(x.shape[0])])
-    ent = 0.0
-    for x_value in x_value_list:
-        p = float(x[x == x_value].shape[0]) / x.shape[0]
-        logp = np.log2(p)
-        ent -= p * logp
-
-    return ent
-
-
-# 计算条件熵H(y/x)
-def calc_condition_ent(x, y):
-    x_value_list = set([x[i] for i in range(x.shape[0])])
-    ent = 0.0
-    for x_value in x_value_list:
-        sub_y = y[x == x_value]
-        temp_ent = calc_ent(sub_y)
-        ent += (float(sub_y.shape[0]) / y.shape[0]) * temp_ent
-
-    return ent
-
-
-# 计算信息增益
-def calc_ent_grap(x, y):
-    base_ent = calc_ent(y)
-    condition_ent = calc_condition_ent(x, y)
-    ent_grap = base_ent - condition_ent
-
-    return ent_grap
 
 
 import cv2
-
-# 定义树结构
-
-
-class Tree(object):
-    def __init__(self, node_type, Class=None, feature=None):
-        self.node_type = node_type  # 节点类型（internal或leaf）
-        self.dict = {}  # dict的键表示特征Ag的可能值ai，值表示根据ai得到的子树
-        self.Class = Class  # 叶节点表示的类，若是内部节点则为none
-        self.feature = feature  # 表示当前的树即将由第feature个特征划分（即第feature特征是使得当前树中信息增益最大的特征）
-
-    def add_tree(self, key, tree):
-        self.dict[key] = tree
-
-    def predict(self, features):
-        if self.node_type == "leaf" or (features[self.feature] not in self.dict):
-            return self.Class
-
-        tree = self.dict.get(features[self.feature])
-        return tree.predict(features)
 
 
 # 图像处理需要用到二值化
@@ -1912,18 +1336,6 @@ def binaryzation_features(trainset):
 
     return features
 
-
-# 训练
-def train(train_set, train_label, features):
-    return recurse_train_ID3(train_set, train_label, features)
-
-
-def predict(test_set, tree):
-    result = []
-    for features in test_set:
-        tmp_predict = tree.predict(features)
-        result.append(tmp_predict)
-    return np.array(result)
 
 
 # 训练测试
@@ -1946,7 +1358,7 @@ class_num = 10
 feature_len = 784
 epsilon = 0.001  # 设定阈值
 
-print("读取数据")
+print("读取数据1")
 
 time_1 = time.time()
 
@@ -1957,257 +1369,6 @@ imgs = data[::, 1::]
 features = binaryzation_features(imgs)  # 图片二值化(很重要，不然预测准确率很低)
 labels = data[::, 0]
 
-# 避免过拟合，采用交叉验证，随机选取20%数据作为测试集，剩余为训练集
-# 資料分割
-train_features, test_features, train_labels, test_labels = train_test_split(
-    features, labels, test_size=0.2
-)
-
-time1 = time.time()
-
-# 通过ID3算法生成决策树
-print("开始训练")
-tree = train(train_features, train_labels, list(range(feature_len)))
-time2 = time.time()
-print("训练花费时间: %f seconds" % (time2 - time1))
-
-print("开始预测")
-test_predict = predict(test_features, tree)
-time3 = time.time()
-print("预测花费时间 %f seconds" % (time3 - time2))
-
-for i in range(len(test_predict)):
-    if test_predict[i] == None:
-        test_predict[i] = epsilon
-score = accuracy_score(test_labels, test_predict)
-print("精度为 %f" % score)
-"""
-读取数据
-开始训练
-训练花费时间: 317.695612 seconds
-开始预测
-预测花费时间 0.147270 seconds
-精度为 0.861833
-"""
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 決策樹的生成 之二 C4.5算法
-
-# C4.5算法是基于ID3算法的改进，C4.5在生成的过程中使用信息增益比来选择特征。
-
-
-def recurse_train_C45(train_set, train_label, features):
-    LEAF = "leaf"
-    INTERNAL = "internal"
-
-    # 步骤1—如果训练集train_set中的所有实例都属于同一类Ck
-    label_set = set(train_label)
-    if len(label_set) == 1:
-        return Tree(LEAF, Class=label_set.pop())
-
-    # 步骤2—如果特征集features为空
-    class_len = [
-        (i, len(list(filter(lambda x: x == i, train_label)))) for i in range(class_num)
-    ]  # 计算每一个类出现的个数
-    (max_class, max_len) = max(class_len, key=lambda x: x[1])
-
-    if len(features) == 0:
-        return Tree(LEAF, Class=max_class)
-
-    # 步骤3—计算信息增益,并选择信息增益最大的特征
-    max_feature = 0
-    max_gda = 0
-    D = train_label
-    for feature in features:
-        # print(type(train_set))
-        A = np.array(train_set[:, feature].flat)  # 选择训练集中的第feature列（即第feature个特征）
-        gda = calc_ent_grap(A, D)
-        if calc_ent(A) != 0:  # 计算信息增益比，这是与ID3算法唯一的不同
-            gda /= calc_ent(A)
-        if gda > max_gda:
-            max_gda, max_feature = gda, feature
-
-    # 步骤4—信息增益小于阈值
-    if max_gda < epsilon:
-        return Tree(LEAF, Class=max_class)
-
-    # 步骤5—构建非空子集
-    sub_features = list(filter(lambda x: x != max_feature, features))
-    tree = Tree(INTERNAL, feature=max_feature)
-
-    max_feature_col = np.array(train_set[:, max_feature].flat)
-    # 保存信息增益最大的特征可能的取值 (shape[0]表示计算行数)
-    feature_value_list = set(
-        [max_feature_col[i] for i in range(max_feature_col.shape[0])]
-    )
-    for feature_value in feature_value_list:
-        index = []
-        for i in range(len(train_label)):
-            if train_set[i][max_feature] == feature_value:
-                index.append(i)
-
-        sub_train_set = train_set[index]
-        sub_train_label = train_label[index]
-
-        sub_tree = recurse_train_C45(sub_train_set, sub_train_label, sub_features)
-        tree.add_tree(feature_value, sub_tree)
-
-    return tree
-
-
-# 定义经验熵、条件熵、信息增益等
-
-
-# 计算数据集x的经验熵H(x)
-def calc_ent(x):
-    x_value_list = set([x[i] for i in range(x.shape[0])])
-    ent = 0.0
-    for x_value in x_value_list:
-        p = float(x[x == x_value].shape[0]) / x.shape[0]
-        logp = np.log2(p)
-        ent -= p * logp
-
-    return ent
-
-
-# 计算条件熵H(y/x)
-def calc_condition_ent(x, y):
-    x_value_list = set([x[i] for i in range(x.shape[0])])
-    ent = 0.0
-    for x_value in x_value_list:
-        sub_y = y[x == x_value]
-        temp_ent = calc_ent(sub_y)
-        ent += (float(sub_y.shape[0]) / y.shape[0]) * temp_ent
-
-    return ent
-
-
-# 计算信息增益
-def calc_ent_grap(x, y):
-    base_ent = calc_ent(y)
-    condition_ent = calc_condition_ent(x, y)
-    ent_grap = base_ent - condition_ent
-
-    return ent_grap
-
-
-# 训练
-
-
-import cv2
-
-
-# 定义树结构
-class Tree(object):
-    def __init__(self, node_type, Class=None, feature=None):
-        self.node_type = node_type  # 节点类型（internal或leaf）
-        self.dict = {}  # dict的键表示特征Ag的可能值ai，值表示根据ai得到的子树
-        self.Class = Class  # 叶节点表示的类，若是内部节点则为none
-        self.feature = feature  # 表示当前的树即将由第feature个特征划分（即第feature特征是使得当前树中信息增益最大的特征）
-
-    def add_tree(self, key, tree):
-        self.dict[key] = tree
-
-    def predict(self, features):
-        if self.node_type == "leaf" or (features[self.feature] not in self.dict):
-            return self.Class
-
-        tree = self.dict.get(features[self.feature])
-        return tree.predict(features)
-
-
-# 图像处理需要用到二值化
-
-
-# 二值化
-def binaryzation(img):
-    cv_img = img.astype(np.uint8)
-    cv2.threshold(cv_img, 50, 1, cv2.THRESH_BINARY_INV, cv_img)
-    return cv_img
-
-
-def binaryzation_features(trainset):
-    features = []
-
-    for img in trainset:
-        img = np.reshape(img, (28, 28))
-        cv_img = img.astype(np.uint8)
-
-        img_b = binaryzation(cv_img)
-        # hog_feature = np.transpose(hog_feature)
-        features.append(img_b)
-
-    features = np.array(features)
-    features = np.reshape(features, (-1, feature_len))
-
-    return features
-
-
-def train(train_set, train_label, features):
-    return recurse_train_C45(train_set, train_label, features)
-
-
-def predict(test_set, tree):
-    result = []
-    for features in test_set:
-        tmp_predict = tree.predict(features)
-        result.append(tmp_predict)
-    return np.array(result)
-
-
-# 训练测试
-
-import cv2
-
-class_num = 10
-feature_len = 784
-epsilon = 0.001  # 设定阈值
-
-print("读取数据")
-
-raw_data = pd.read_csv("D:/_git/vcs/_big_files/lihang-dl-train.csv", header=0)
-data = raw_data.values
-
-imgs = data[::, 1::]
-features = binaryzation_features(imgs)  # 图片二值化(很重要，不然预测准确率很低)
-labels = data[::, 0]
-
-# 避免过拟合，采用交叉验证，随机选取20%数据作为测试集，剩余为训练集
-# 資料分割
-train_features, test_features, train_labels, test_labels = train_test_split(
-    features, labels, test_size=0.2
-)
-
-# 通过C4.5算法生成决策树
-print("开始训练")
-time1 = time.time()
-tree = train(train_features, train_labels, list(range(feature_len)))
-time2 = time.time()
-print("训练花费时间： %f seconds" % (time2 - time1))
-
-print("开始预测")
-test_predict = predict(test_features, tree)
-time3 = time.time()
-print("预测花费时间 %f seconds" % (time3 - time2))
-
-# 预测精度
-for i in range(len(test_predict)):
-    if test_predict[i] == None:
-        test_predict[i] = epsilon
-score = accuracy_score(test_labels, test_predict)
-print("精度为： %f" % score)
-
-"""
-读取数据
-开始训练
-训练花费时间： 1861.676888 seconds
-开始预测
-预测花费时间 0.972255 seconds
-精度为： 0.842424
-"""
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2218,34 +1379,10 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
+print("迴歸樹(Decision Tree Regression / Regression Tree)")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 迴歸樹
 
 # 生成隨機資料
 rng = np.random.RandomState(1)
@@ -2568,7 +1705,7 @@ class my_DecisionTreeClassifier(object):
         else:
             return cur_layer.get("val") if cur_layer is not None else None
 
-
+from sklearn import datasets
 wine = datasets.load_wine()
 
 feature_names = wine.feature_names
@@ -2922,10 +2059,6 @@ The 'bank-full.csv' data set has:
 We will use this data set for training and testing.
 """
 
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import ShuffleSplit
-from sklearn import preprocessing
-
 
 def feature_utility(data, selected_feature_name, target_name):
     target_classes = data[target_name].unique()
@@ -3009,6 +2142,7 @@ X_train, X_test, y_train, y_test = train_test_split(X_data, y_data, test_size=0.
 dt_clf = DecisionTreeClassifier(
     class_weight="balanced",
 )  # 決策樹函數學習機
+
 rf_clf = RandomForestClassifier(class_weight="balanced")
 
 # 為了讓學習曲線更平滑，交叉驗證數據集的得分計算 10 次，每次都重新選中 20% 的數據計算一遍
@@ -3053,7 +2187,6 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.datasets import load_wine
 from sklearn.tree import export_graphviz
-
 import graphviz
 
 # 加载数据集，将数据和类别区分呢
@@ -3088,9 +2221,7 @@ export_graphviz(clf, out_file="tmp_wine4.dot", feature_names=wine.feature_names)
 
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import preprocessing
 from sklearn.decomposition import PCA
-from sklearn import preprocessing
 from sklearn import metrics as ms
 import graphviz
 
@@ -3111,7 +2242,6 @@ X_train = pca.fit_transform(X_train)
 # 資料分割
 x_train, x_test, y_train, y_test = train_test_split(X_train, y, test_size=0.2)
 
-###############模型###########
 dtc = DecisionTreeClassifier(criterion="entropy")  # 決策樹函數學習機
 clf = dtc.fit(x_train, y_train)
 # print(clf.predict(x_test))
@@ -3261,8 +2391,6 @@ dtree.fit(X_train, y_train)
 
 predictions = dtree.predict(X_test)
 
-from sklearn.metrics import classification_report, confusion_matrix
-
 print(classification_report(y_test, predictions))
 
 cm = confusion_matrix(y_test, predictions)
@@ -3270,8 +2398,6 @@ print(cm)
 print("Accuracy of prediction:", round((cm[0, 0] + cm[1, 1]) / cm.sum(), 3))
 
 # Training the Random Forest model
-
-from sklearn.ensemble import RandomForestClassifier
 
 rfc = RandomForestClassifier(n_estimators=600)
 
@@ -3461,96 +2587,48 @@ print(cc)
 
 # 过采样SMOTE
 
-from imblearn.over_sampling import SMOTE
-
-oversampler = SMOTE(random_state=0)
-""" NG
-os_features, os_labels = oversampler.fit_resample(features_train, labels_train)
-
 cc = len(os_labels[os_labels == 1])
 print(cc)
 
-# 综合采样
-
-from imblearn.combine import SMOTETomek
-
-smote_tomek = SMOTETomek(random_state=0)
-os_features, os_labels = smote_tomek.fit_sample(features_train, labels_train)
-
-# CART分类树
-
-from sklearn.tree import DecisionTreeClassifier
-
-clf = DecisionTreeClassifier(
-    criterion="gini", max_depth=3, class_weight=None, random_state=1234
-)  # 支持计算Entropy和GINI
-clf.fit(os_features, os_labels)
-
-import sklearn.metrics as metrics
-
-print(metrics.classification_report(labels_test, clf.predict(features_test)))
-
-train_est = clf.predict(features_train)
-train_est_p = clf.predict_proba(features_train)[:, 1]
-test_est = clf.predict(features_test)
-test_est_p = clf.predict_proba(features_test)[:, 1]
-fpr_test, tpr_test, th_test = metrics.roc_curve(labels_test, test_est_p)
-
-fpr_train, tpr_train, th_train = metrics.roc_curve(labels_train, train_est_p)
-
-plt.figure(figsize=[3, 3])
-plt.plot(fpr_test, tpr_test, "b--")
-plt.plot(fpr_train, tpr_train, "r-")
-plt.title("ROC curve")
-plt.show()
-
-print(metrics.roc_auc_score(labels_test, test_est_p))
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# chapter16 Imbalance
-
-import pandas as pd
-import matplotlib.pyplot as plt
+# Imbalance
 
 train = pd.read_csv("data/imb_train.csv")
 test = pd.read_csv("data/imb_test.csv")
 train.head()
 
-""" NG
 y_train = train["cls"]
-X_train = train.ix[:, :"X5"]
+X_train = train.loc[:, :"X5"]
 y_test = test["cls"]
-X_test = test.ix[:, :"X5"]
+X_test = test.loc[:, :"X5"]
 
 print("train_size: %s" % len(y_train), "test_size: %s" % len(y_test))
 
-plt.figure(figsize=[3, 2])
 count_classes = pd.value_counts(y_train, sort=True)
 count_classes.plot(kind="bar")
 
-plt.show()
+show()
 
 # 1、采用抽样的方法
 
-from imblearn.over_sampling import RandomOverSampler, SMOTE
+from imblearn.over_sampling import RandomOverSampler
+from imblearn.over_sampling import SMOTE
 from imblearn.combine import SMOTETomek
 
-ros = RandomOverSampler(random_state=0, ratio="auto")  # 随机过采样
+ros = RandomOverSampler(random_state=0)  # 随机过采样
 sos = SMOTE(random_state=0)  # SMOTE过采样
 kos = SMOTETomek(random_state=0)  # 综合采样
 
-X_ros, y_ros = ros.fit_sample(X_train, y_train)
-X_sos, y_sos = sos.fit_sample(X_train, y_train)
-X_kos, y_kos = kos.fit_sample(X_train, y_train)
+X_ros, y_ros = ros.fit_resample(X_train, y_train)
+X_sos, y_sos = sos.fit_resample(X_train, y_train)
+X_kos, y_kos = kos.fit_resample(X_train, y_train)
 
 print("ros: %s, sos:%s, kos:%s" % (len(y_ros), len(y_sos), len(y_kos)))
 
 y_ros.sum(), y_sos.sum(), y_kos.sum()
 
-from sklearn.tree import DecisionTreeClassifier
-from sklearn import metrics
 from sklearn.model_selection import GridSearchCV
 
 clf = DecisionTreeClassifier(criterion="gini", random_state=1234)
@@ -3589,19 +2667,12 @@ print(
 
 cv2.best_params_
 
-"""
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from sklearn import linear_model, metrics
-from sklearn.model_selection import train_test_split
+from sklearn import linear_model
 from sklearn.neural_network import BernoulliRBM  # 二值型的RBM网络
 from sklearn.model_selection import GridSearchCV
-import sklearn.model_selection as cross_validation
-import sklearn.tree as tree
-import sklearn.ensemble as ensemble
-import sklearn.metrics as metrics
 
 # 宽带营销的数据"broadband.csv"
 model_data = pd.read_csv("data/broadband.csv")
@@ -3609,39 +2680,7 @@ cc = model_data.head()
 print(cc)
 
 target = model_data["BROADBAND"]
-""" NG
-orgData1 = model_data.ix[:, 1:-2]
 
-train_data, test_data, train_target, test_target = cross_validation.train_test_split(
-    orgData1, target, test_size=0.2
-)
-
-clf = tree.DecisionTreeClassifier(criterion="entropy", max_depth=3, min_samples_split=5)
-clf.fit(train_data, train_target)
-test_est = clf.predict(test_data)
-print("decision tree accuracy:")
-print(metrics.classification_report(test_target, test_est))
-
-gbc = ensemble.GradientBoostingClassifier()
-gbc.fit(train_data, train_target)
-test_est = gbc.predict(test_data)
-print("gradient boosting accuracy:")
-print(metrics.classification_report(test_target, test_est))
-
-abc = ensemble.AdaBoostClassifier(n_estimators=100)
-abc.fit(train_data, train_target)
-test_est = abc.predict(test_data)
-print("abc classifier accuracy:")
-print(metrics.classification_report(test_target, test_est))
-
-rfc = ensemble.RandomForestClassifier(
-    criterion="entropy", n_estimators=3, max_features=0.5, min_samples_split=5
-)
-rfc.fit(train_data, train_target)
-test_est = rfc.predict(test_data)
-print("random forest accuracy:")
-print(metrics.classification_report(test_target, test_est))
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -3652,8 +2691,9 @@ print(cc)
 
 target = model_data["BROADBAND"]
 """ NG
-orgData1 = model_data.ix[:, 1:-2]
+orgData1 = model_data.loc[:, 1:-2]
 
+# 資料分割
 train_data, test_data, train_target, test_target = train_test_split(
     orgData1, target, test_size=0.2
 )
@@ -3684,7 +2724,7 @@ param_grid = {
     "min_samples_split": [4, 8, 12, 16],
 }
 
-rfc = ensemble.RandomForestClassifier()
+rfc = RandomForestClassifier()
 rfccv = GridSearchCV(estimator=rfc, param_grid=param_grid, scoring="roc_auc", cv=4)
 rfccv.fit(train_data, train_target)
 test_est = rfccv.predict(test_data)
@@ -3705,7 +2745,7 @@ param_grid = {
     #'base_estimator':['DecisionTreeClassifier'],
     "learning_rate": [0.1, 0.3, 0.5, 0.7, 1]
 }
-abc = ensemble.AdaBoostClassifier(n_estimators=100, algorithm="SAMME")
+abc = AdaBoostClassifier(n_estimators=100, algorithm="SAMME")
 abccv = GridSearchCV(estimator=abc, param_grid=param_grid, scoring="roc_auc", cv=4)
 abccv.fit(train_data, train_target)
 test_est = abccv.predict(test_data)
@@ -3726,7 +2766,7 @@ param_grid = {
     "min_samples_split": [2, 4, 8, 12, 16, 20],
 }
 
-gbc = ensemble.GradientBoostingClassifier()
+gbc = GradientBoostingClassifier()
 gbccv = GridSearchCV(estimator=gbc, param_grid=param_grid, scoring="roc_auc", cv=4)
 gbccv.fit(train_data, train_target)
 test_est = gbccv.predict(test_data)
@@ -3785,3 +2825,35 @@ print("------------------------------------------------------------")  # 60個
 
 X_combined = np.vstack((x_train, x_test))
 y_combined = np.hstack((y_train, y_test))
+
+
+
+# Traning dataset
+
+X = np.random.sample(200)
+Y = np.array([x**2 + np.random.normal(0, 0.05) for x in X])
+
+
+
+clf = DecisionTreeClassifier(
+    criterion="gini", max_depth=3, class_weight=None, random_state=1234
+)  # 支持计算Entropy和GINI
+
+
+
+
+clf = tree.DecisionTreeClassifier(criterion="entropy", max_depth=3, min_samples_split=5)
+print(metrics.classification_report(test_target, test_est))
+
+gbc = GradientBoostingClassifier()
+print(metrics.classification_report(test_target, test_est))
+
+abc = AdaBoostClassifier(n_estimators=100)
+print(metrics.classification_report(test_target, test_est))
+
+rfc = RandomForestClassifier(
+    criterion="entropy", n_estimators=3, max_features=0.5, min_samples_split=5
+)
+print("random forest accuracy:")
+print(metrics.classification_report(test_target, test_est))
+

@@ -52,13 +52,15 @@ print(__doc__)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 考慮畫一個 3維降成2維的
+
 print("PCA 降維度, 4維 => 2維")
 
 N = 20  # 散點的數量
 
-X = np.random.randint(0, 100, size=(N, 2))  # 產生 N x 4 陣列，內容為 0～100 隨機數字
+X = np.random.randint(0, 100, size=(N, 4))  # 產生 N x 4 陣列，內容為 0～100 隨機數字
 
-n_components = 1  # 降維後的維度
+n_components = 2  # 降維後的維度
 
 clf = PCA(n_components=n_components)
 
@@ -71,20 +73,6 @@ X2 = clf.transform(X)
 print("轉換前 維度 :", X.shape)
 print("轉換後 維度 :", X2.shape)
 
-print(X2)
-plt.subplot(211)
-plt.scatter(X[:, 0], X[:, 1], c="r")
-plt.scatter(X[8, 0], X[8, 1], c="g")
-plt.title("轉換前之第0 1維")
-
-plt.subplot(212)
-plt.scatter(X2[:], X2[:], c="g")
-plt.scatter(X2[8], X2[8], c="r")
-plt.title("轉換前之第2 3維")
-
-show()
-
-"""
 plt.subplot(221)
 plt.scatter(X[:, 0], X[:, 1])
 plt.title("轉換前之第0 1維")
@@ -103,7 +91,7 @@ plt.subplot(224)
 # plt.title('轉換後之第2 3維')
 
 show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -114,25 +102,8 @@ X = iris.data
 y = iris.target  # 資料集目標
 
 df = pd.DataFrame(X, columns=["萼長", "萼寬", "瓣長", "瓣寬"])
-# print(df)
+print(df)
 
-mat = df.corr()
-print("相關係數 :\n", mat, sep="")
-
-sns.heatmap(
-    mat,
-    annot=True,
-    vmax=1,
-    vmin=-1,
-    xticklabels=True,
-    yticklabels=True,
-    square=True,
-    cmap="gray",
-)
-
-show()
-
-print("------------------------------")  # 30個
 
 plt.subplot(121)
 plt.scatter(X[:, 0], X[:, 1], c=np.array(y))
@@ -742,45 +713,6 @@ import matplotlib.image as img
 import pylab
 import cv2
 
-# 创建 eigValPct(eigVals, percentage)
-# 函数传入的参数是特征值eigVals和百分比percentage，返回需要降到的维度数num
-
-
-def eigValPct(eigVals, percentage):
-    sortArray = np.sort(eigVals)[::-1]  # 特征值从大到小排序
-    pct = np.sum(sortArray) * percentage
-    tmp = 0
-    num = 0
-    for eigVal in sortArray:
-        tmp += eigVal
-        num += 1
-        if tmp >= pct:
-            return num
-
-
-"""
-创建 im_PCA(dataMat, percentage=0.9)
-函数有两个参数，其中dataMat是已经转换成矩阵matrix形式的数据集，每列表示一个维度；
-其中的percentage表示取前多少个特征需要达到的方差占比，默认为0.9
-"""
-
-
-def im_PCA(dataMat, percentage=0.9):
-    meanVals = np.mean(dataMat, axis=0)
-    meanRemoved = dataMat - meanVals
-    # 这里不管是对去中心化数据或原始数据计算协方差矩阵，结果都一样，特征值大小会变，但相对大小不会改变
-    # 标准的计算需要除以(dataMat.shape[0]-1)，不算也不会影响结果，理由同上
-    covMat = np.dot(np.transpose(meanRemoved), meanRemoved)
-    eigVals, eigVects = np.linalg.eig(np.mat(covMat))
-    k = eigValPct(eigVals, percentage)  # 要达到方差的百分比percentage，需要前k个向量
-    print("K =", k)
-    eigValInd = np.argsort(eigVals)[::-1]  # 对特征值eigVals从大到小排序
-    eigValInd = eigValInd[:k]
-    redEigVects = eigVects[:, eigValInd]  # 主成分
-    lowDDataMat = meanRemoved * redEigVects  # 将原始数据投影到主成分上得到新的低维数据lowDDataMat
-    reconMat = (lowDDataMat * redEigVects.T) + meanVals  # 得到重构数据reconMat
-    return lowDDataMat, reconMat
-
 
 def PrintError(data, recdata):
     sum1 = 0
@@ -799,31 +731,30 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.j
 img = cv2.imread(filename)
 blue = img[:, :, 0]
 dataMat = np.mat(blue)
-lowDDataMat, reconMat = im_PCA(dataMat, 1)
-print("原始数据", blue.shape, "降维数据", lowDDataMat.shape)
-print(dataMat)
-print(reconMat)
-# 格式必须转换为uint8格式，这里丢失了很多信息！！！
-reconMat = np.array(reconMat, dtype="uint8")
 
+print("轉換前 維度 :", blue.shape)
+print(dataMat)
 plt.imshow(cv2.cvtColor(blue, cv2.COLOR_BGR2RGB))
 plt.title("blue")
 show()
 
-plt.imshow(cv2.cvtColor(np.array(reconMat, dtype="uint8"), cv2.COLOR_BGR2RGB))
-plt.title("reconMat")
-show()
-
 n_components = 426  # 降維後的維度
 clf = PCA(n_components=n_components).fit(blue)
+
 # 降维
 x_new = clf.transform(blue)
+
+print("轉換後 維度 :", x_new.shape)
+print(x_new)
+plt.imshow(cv2.cvtColor(np.array(x_new, dtype="uint8"), cv2.COLOR_BGR2RGB))
+plt.title("sklearn-recdata x_new")
+show()
+
 # 还原降维后的数据到原空间
 recdata = clf.inverse_transform(x_new)
-print(recdata)
-# 计算误差
-PrintError(np.array(blue, dtype="double"), np.array(reconMat, dtype="double"))
 
+print("轉換後 維度 :", recdata.shape)
+print(recdata)
 plt.imshow(cv2.cvtColor(np.array(recdata, dtype="uint8"), cv2.COLOR_BGR2RGB))
 plt.title("sklearn-recdata")
 show()
@@ -839,7 +770,7 @@ print(cc)
 # df.iloc[:,1:].describe()
 
 # Boxplots by output labels/classes
-
+"""
 for c in df.columns[1:]:
     df.boxplot(c, by="Class", figsize=(7, 4))
     plt.title("{}\n".format(c))
@@ -861,7 +792,7 @@ plt.title("Scatter plot of two features showing the \ncorrelation and class sepe
 plt.xlabel("OD280/OD315 of diluted wines")
 plt.ylabel("Flavanoids")
 show()
-
+"""
 # Are the features independent? Plot co-variance matrix
 
 
@@ -954,7 +885,6 @@ print("------------------------------------------------------------")  # 60個
 """
 主成分分析
 某金融服务公司为了了解贷款客户的信用程度，评价客户的信用等级，采用信用评级常用的5C方法，说明客户违约的可能性。
-
     品格：指客户的名誉；
     能力：指客户的偿还能力；
     资本：指客户的财务势力和财务状况；
@@ -1200,125 +1130,12 @@ df.average.replace(average_dict, inplace=True)
 cross_table = pd.crosstab(df.purpose, df.average)
 cross_table
 
-from numpy.linalg import svd
-
-
-class CA(object):
-    """Simple corresondence analysis.
-
-    Inputs
-    ------
-    ct : array_like, shape (n_samples, n_features)
-      Two-way contingency table, training set, where `n_samples`
-      is the number of samples and `n_features` is the number of features.
-
-    Attributes
-    ------
-    F_ : array, shape (n_features, K)
-      principal coordinates of columns. Where `K` = min(`n_features`, `n_samples`).
-
-    G_ : array, shape (n_samples, K)
-      principal coordinates of rows. Where `K` = min(`n_features`, `n_samples`).
-
-    explained_variance_ratio_ : array, shape(K, )
-      Percentage of variance explained by each of the selected components.
-
-    Notes
-    -----
-    The implementation follows that presented in 'Correspondence
-    Analysis in R, with Two- and Three-dimensional Graphics: The ca
-    Package,' Journal of Statistical Software, May 2007, Volume 20,
-    Issue 3.
-    """
-
-    def __init__(self, cross_table):
-        N = np.matrix(cross_table, dtype=float)
-
-        # correspondence matrix from contingency table
-        P = N / N.sum()
-
-        # row and column marginal totals of P as vectors
-        r = P.sum(axis=1)
-        c = P.sum(axis=0).T
-
-        # diagonal matrices of row/column sums
-        D_r_rsq = np.diag(1.0 / np.sqrt(r.A1))
-        D_c_rsq = np.diag(1.0 / np.sqrt(c.A1))
-
-        # the matrix of standarized residuals
-        Z = D_r_rsq * (P - r * c.T) * D_c_rsq
-
-        # compute the SVD
-        U, D_a, V = svd(Z, full_matrices=False)
-        D_a = np.asmatrix(np.diag(D_a))
-        V = V.T
-
-        # principal coordinates of columns
-        F = D_c_rsq * V * D_a
-
-        # principal coordinates of rows
-        G = D_r_rsq * U * D_a
-
-        # standard coordinates of rows
-        X = D_r_rsq * U
-
-        # standard coordinates of columns
-        Y = D_c_rsq * V
-
-        eigenvals = np.diagonal(D_a) ** 2
-        explained_variance_ratio = eigenvals.cumsum() / eigenvals.sum()
-
-        # the total variance of the data matrix
-        inertia = sum(
-            [
-                (P[i, j] - r[i, 0] * c[j, 0]) ** 2 / (r[i, 0] * c[j, 0])
-                for i in range(N.shape[0])
-                for j in range(N.shape[1])
-            ]
-        )  # equals np.power(S, 2).sum() or eigenvalus.sum() or np.trace(S.T * S)
-
-        self.F_ = F.A
-        self.G_ = G.A
-        self.inertia_ = inertia
-        self.eigenvals_ = eigenvals
-        self.explained_variance_ratio_ = explained_variance_ratio
-
-
-ca = CA(cross_table)
-
-print(ca.explained_variance_ratio_)
-
-# [ 0.51057984  0.92001143  0.96850523  1.          1.        ]
-
-# R型和Q型分析的特征向量（加权后）
-
-F = ca.F_
-G = ca.G_
-
-print(F[:, :2])
-
-# 绘制感知图
-
-for i, s in enumerate(cross_table.columns):
-    x, y = F[i, 0], F[i, 1]
-    plt.plot(x, y, "bo")
-    plt.text(x, y, s, va="bottom", ha="left", color="b")
-
-for i, s in enumerate(cross_table.index):
-    x, y = G[i, 0], G[i, 1]
-    plt.plot(x, y, "r^")
-    plt.text(x, y, s, va="bottom", ha="left", color="r")
-
-show()
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
 第十三讲 信息压缩
-
 -- 第一部分 连续变量压缩
-
     AvgIncome 当地人均收入
     ID 员工ID
     gender 性别
@@ -1447,7 +1264,7 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# chapter13_2 PCA_FCA_Varselect_city10
+# PCA_FCA_Varselect_city10
 
 """
 X1	GDP
@@ -1545,7 +1362,6 @@ for a, b, l in zip(x, y, label):
 
 show()
 
-
 model_data = pd.read_csv("data/cities_10.csv", encoding="gbk")
 cc = model_data.head()
 print(cc)
@@ -1555,7 +1371,7 @@ data = model_data.loc[:, "X1":]
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# chapter13_3 PCA_FCA_Varselect_bank
+# PCA_FCA_Varselect_bank
 
 """
 CNT_TBM 柜台交易次数	
@@ -1714,8 +1530,8 @@ data_vc = orgdata.iloc[:, np.array(news_ids).reshape(len(news_ids))]
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 第十四讲 聚类
-# 1、层次聚类
+# 聚类
+# 层次聚类
 
 import scipy
 import scipy.cluster.hierarchy as sch
@@ -1747,6 +1563,7 @@ print(cc)
 print(newData)
 
 # 1. 层次聚类
+
 # 生成点与点之间的距离矩阵,这里用的欧氏距离:
 disMat = sch.distance.pdist(newData, "euclidean")
 # 进行层次聚类:
@@ -1817,9 +1634,9 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# chapter14_1 Hclus_FCA_city10.py
+# Hclus_FCA_city10.py
 
-# 第十四讲 聚类
+# 聚类
 
 # 层次聚类
 
@@ -1897,7 +1714,6 @@ label = citi10_fa["AREA"]
 plt.scatter(x, y)
 for a, b, l in zip(x, y, label):
     plt.text(a, b + 0.1, "%s." % l, ha="center", va="bottom", fontsize=14)
-
 show()
 
 import scipy.cluster.hierarchy as sch
@@ -2157,3 +1973,9 @@ print(R2)
 print(clf.inverse_transform(R2))
 
 ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
+
+
+plt.plot(x, y, "bo")
+plt.text(x, y, s, va="bottom", ha="left", color="b")
+plt.plot(x, y, "r^")
+plt.text(x, y, s, va="bottom", ha="left", color="r")

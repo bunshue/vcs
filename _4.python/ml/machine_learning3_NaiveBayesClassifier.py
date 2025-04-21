@@ -387,7 +387,7 @@ best.score(test_data, test_target)
 cc = orgData.head()
 print(cc)
 
-orgData1 = orgData.ix[:, -3:]
+orgData1 = orgData.ix[:, -3:]  # 所有 .ix[ 改成 .loc[
 
 orgData1.income_rank = orgData1.income_rank.astype("category")
 orgData1.describe(include="all")

@@ -105,7 +105,7 @@ scores_boot = pd.DataFrame(scores_boot, columns=scores_names)
 scores_stat = scores_boot.describe(percentiles=[.99, .95, .5, .1, .05, 0.01])
 
 print("r-squared: Mean=%.2f, SE=%.2f, CI=(%.2f %.2f)" %\
-      tuple(scores_stat.ix[["mean", "std", "5%", "95%"], "r2"]))
+      tuple(scores_stat.ix[["mean", "std", "5%", "95%"], "r2"]))  # 所有 .ix[ 改成 .loc[
 
 
 coefs_boot = pd.DataFrame(coefs_boot)

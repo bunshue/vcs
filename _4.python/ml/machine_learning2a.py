@@ -113,7 +113,7 @@ from sklearn.decomposition import PCA
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
@@ -622,19 +622,22 @@ XT = imp_mean.transform(X)
 print("原陣列 :\n", X, sep="")
 print("轉換後 :\n", XT, sep="")
 
-print("------------------------------")  # 30個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("OneHotEncoder 獨熱編碼")
 
 onehotencoder = OneHotEncoder(handle_unknown="ignore")
+
 X = [["Male", 1], ["Female", 3], ["Female", 2]]
 
 print("原陣列 :\n", X, sep="")
 
 onehotencoder.fit(X)
 
+# 類別
 cc = onehotencoder.categories_
-print("a")
+print("類別")
 print(cc)
 
 cc = onehotencoder.transform([["Female", 1], ["Male", 4]]).toarray()
@@ -1203,7 +1206,6 @@ print(pval_coef_perm_tmax)
 
 def hist_pvalue(perms, ax, name):
     """Plot statistic distribution as histogram.
-
     Paramters
     ---------
     perms: 1d array, statistics under the null hypothesis.
@@ -1231,7 +1233,6 @@ for i in range(n_coef):
     hist_pvalue(coefs_perm[:, i], axes[i], str(i))
 
 _ = axes[-1].set_xlabel("Coefficient distribution under null hypothesis")
-
 
 # Bootstrap loop
 nboot = 100  # !! Should be at least 1000

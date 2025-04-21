@@ -650,7 +650,7 @@ print(orgData.shape)
 print(orgData.head())
 
 # 取出後4欄位當訓練資料
-# X = orgData.ix[:, :4]
+# X = orgData.ix[:, :4]  # 所有 .ix[ 改成 .loc[
 print("取出3欄資料")
 X = orgData[["income_rank", "attractive_rank", "assets_rank"]]
 
