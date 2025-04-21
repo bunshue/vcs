@@ -41,7 +41,6 @@ metrics=["accuracy"]
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accuracy"])
 
-
 """
 
 
@@ -397,7 +396,6 @@ def do_cnn_test():
     """
     (x_train, y_train), (x_test, y_test) = load_mnist_data()
     x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
-
     # 分割測試資料以驗證
     do_the_same_with_validation(x_train, y_train, x_test, y_test, VALIDATION_SPLIT)
     """
@@ -429,11 +427,13 @@ def print_y_data(y):
 
 
 def get_elapsed_time():
+    global time_st
     current_time = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
     print("現在時間 :", current_time)
     timeElapsed = time.time() - time_st
     timeElapsed = round(timeElapsed, 4)
     print("所花時間 : {} 秒".format(timeElapsed))
+    time_st = time.time()
 
 
 print("------------------------------------------------------------")  # 60個
@@ -855,7 +855,7 @@ plt.axis("off")
 plt.subplot(122)
 probs = model.predict(x_test_digit, batch_size=1)[0]
 print("預測結果的機率 :", probs)
-plt.title("預測結果的機率\nProbabilities for Each Digit Class")
+plt.title("預測結果的機率\n每個數字的機率")
 plt.bar(np.arange(10), probs.reshape(10), align="center")
 plt.xticks(np.arange(10), np.arange(10).astype(str))
 
@@ -1673,6 +1673,8 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+get_elapsed_time()
+
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 
 # 訓練集資料
@@ -1689,10 +1691,12 @@ x_test = x_test.reshape(len(x_test), -1)  # 轉換資料形狀
 x_test = x_test.astype("float32") / 255  # 轉換資料型別
 y_test = y_test.astype(np.float32)
 
+import cv2
+
 knn = cv2.ml.KNearest_create()  # 建立 KNN 訓練方法
 knn.setDefaultK(5)  # 參數設定
 knn.setIsClassifier(True)
-""" 久
+
 print("training...")
 knn.train(x_train, cv2.ml.ROW_SAMPLE, y_train)  # 開始訓練
 knn.save("tmp_mnist_knn.xml")  # 儲存訓練模型
@@ -1707,7 +1711,9 @@ test_ret = test_ret.reshape(
 test_sum = test_ret == y_test
 acc = test_sum.mean()  # 得到準確率
 print(acc)
-"""
+
+get_elapsed_time()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """ need Webcam
@@ -1768,6 +1774,8 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+get_elapsed_time()
+
 hidden_neurons = 100
 
 print("建立神經網路18")
@@ -1798,7 +1806,7 @@ x_test = x_test.reshape(len(x_test), 784)
 y_train = to_categorical(y_train)
 y_test = to_categorical(y_test)
 
-""" 久
+print("久1")
 
 # 學習訓練.fit
 do_model_fit1(x_train, y_train)
@@ -1808,19 +1816,20 @@ evaluate_model(x_test, y_test)
 
 weights = model.layers[0].get_weights()
 
-import matplotlib.cm as cm 
+import matplotlib.cm as cm
 
 fig = plt.figure()
-  
-w = weights[0].T          
-for neuron in range(hidden_neurons):         
-    ax = fig.add_subplot(10, 10, neuron+1)
-    ax.axis("off")
-    ax.imshow(np.reshape(w[neuron], (28, 28)), cmap = cm.Greys_r)
 
-plt.savefig("neuron_images.png", dpi=300)    
-show()  
-"""
+w = weights[0].T
+for neuron in range(hidden_neurons):
+    ax = fig.add_subplot(10, 10, neuron + 1)
+    ax.axis("off")
+    ax.imshow(np.reshape(w[neuron], (28, 28)), cmap=cm.Greys_r)
+
+plt.savefig("neuron_images.png", dpi=300)
+show()
+
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2122,7 +2131,7 @@ get_elapsed_time()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 久
+print("久2")
 """
 from tensorflow.keras.callbacks import TensorBoard
 
@@ -2398,7 +2407,9 @@ model.compile(
     optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"]
 )
 
-""" 做很久
+
+print("久3")
+
 model.fit(x_train, y_train, epochs=EPOCHS)  # 學習訓練.fit
 
 val_loss, val_acc = model.evaluate(x_test, y_test)
@@ -2423,7 +2434,6 @@ new_model = tf.keras.models.load_model("tmp_epic_num_reader.model")
 y_pred = new_model.predict(x_test)
 print(np.argmax(y_pred[0]))
 
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2497,7 +2507,8 @@ model.compile(
     optimizer="rmsprop", loss="categorical_crossentropy", metrics=["accuracy"]
 )
 
-""" 久
+print("久4")
+
 # model.fit(X_train, y_train, epoch=2, batch_size=32)
 model.fit(X_train, y_train, batch_size=32)
 
@@ -2505,11 +2516,11 @@ print("預測")
 loss, accuracy = model.evaluate(X_test, y_test)
 print("test loss: ", loss)
 print("test accuracy: ", accuracy)
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Regressor example
+print("Regressor example")
 
 # create some data
 X = np.linspace(-1, 1, 200)
@@ -3245,7 +3256,6 @@ for i in range(5):
 show()
 """
 
-
 # 將前10張圖片畫出來
 for i in range(10):
     plt.subplot(2, 5, i + 1)
@@ -3257,20 +3267,17 @@ show()
 
 # 顯示前10張圖片的預測結果
 
-
 for i in range(10):
     plt.subplot(1, 10, i + 1)
     plt.imshow(x_test[i].reshape((28, 28)), "gray")
 
 show()
 
-
 # 比較參數
 # EOPCHS = 5/10/60
 
 # 比較參數
 # BATCH_SIZE = 16 / 32 / 64
-
 
 print("看 graph seems useless")
 
@@ -3302,7 +3309,6 @@ print(tf.__version__)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# x訓練/測試資料 N個 二維影像 (28, 28) 轉成 N個 一維向量 (28*28,)
 # x訓練/測試資料 N個 二維影像 (28, 28) 轉成 N個 一維向量 (28*28,) 再轉成 28*28個 float32 數字
 x_train = x_train.reshape(len(x_train), 784).astype("float32")
 x_test = x_test.reshape(len(x_test), 784).astype("float32")
@@ -3341,7 +3347,6 @@ plt.imshow(image, "gray")
 # plt.imshow(X_test[i].reshape((28,28)), "gray")
 
 """
-
 訓練目標 前300
 5 0 4 1 9 2 1 3 1 4 3 5 3 6 1 7 2 8 6 9 4 0 9 1 1 2 4 3 2 7
 3 8 6 9 0 5 6 0 7 6 1 8 7 9 3 9 8 5 9 3 3 0 7 4 9 8 0 9 4 1
@@ -3364,24 +3369,19 @@ plt.imshow(image, "gray")
 4 5 9 3 9 0 3 6 5 5 7 2 2 7 1 2 8 4 1 7 3 3 8 8 7 9 2 2 4 1
 5 9 8 7 2 3 0 4 4 2 4 1 9 5 7 7 2 8 2 6 8 5 7 7 9 1 8 1 8 0
 3 0 1 9 9 4 1 8 2 1 2 9 7 5 9 2 6 4 1 5 8 2 9 2 0 4 0 0 2 8
-
 """
 
 """
-
     fig = plt.gcf()  # 設定顯示圖形的大小
     fig.set_size_inches(2, 2)
 
     fig = plt.gcf()  # 設定顯示圖形的大小
     fig.set_size_inches(10, 6)
-
-
 """
 
 # 第1層 用 16 個神經元, 使用參數 160 個
 # 3*3 (權重) + 1 (bias)
 # (3*3+1)*16 = 160
-
 
 """
 下载mnist数据

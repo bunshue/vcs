@@ -7,52 +7,59 @@
 
 """
 
-print('------------------------------------------------------------')	#60個
-
 import sys
-openai_api_key = 'sk-xxxxxxxxx'
-
-#C:\_git\vcs\_1.data\______test_files1\_key
-
-print('------------------------------------------------------------')	#60個
-
 import openai
+
+print("------------------------------------------------------------")  # 60個
+
+openai_api_key = "sk-xxxxxxxxx"
+
+# C:\_git\vcs\_1.data\______test_files1\_key
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 openai.api_key = openai_api_key  # 設定API金鑰
 
+reply = openai.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    # model = "gpt-4",
+    messages=[{"role": "user", "content": "你好"}],
+)
+
+print(reply)
+
 response = openai.ChatCompletion.create(
-  model="gpt-3.5-turbo",
-  messages=[
+    model="gpt-3.5-turbo",
+    messages=[
         {"role": "system", "content": "你是一個非常溫暖的對話機器人，回應都簡短，儘量不要超過二十個字，而且有同理心。"},
         {"role": "user", "content": "我很難過"},
-        {"role": "assistant", "content": "很抱歉聽到你感到難過，可以跟我說說你正在遭遇什麼困難嗎？我們可以一起找尋解決問題的方式。"},
-        {"role": "user", "content": "Python程式都不會寫"}
-    ]
+        {
+            "role": "assistant",
+            "content": "很抱歉聽到你感到難過，可以跟我說說你正在遭遇什麼困難嗎？我們可以一起找尋解決問題的方式。",
+        },
+        {"role": "user", "content": "Python程式都不會寫"},
+    ],
 )
 
 print(response["choices"][0]["message"]["content"])
 
-print('------------------------------------------------------------')	#60個
-
-import openai
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 openai.api_key = openai_api_key  # 設定API金鑰
 
 user_input = "Ask ChatGPT something, say hello!"
 
 response = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",
-    messages=[
-        {"role": "user", "content": user_input}
-    ]
+    model="gpt-3.5-turbo", messages=[{"role": "user", "content": user_input}]
 )
 
 cc = response.choices[0].message.content
 print(cc)
 
-print('------------------------------------------------------------')	#60個
-
-import openai
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 openai.api_key = openai_api_key  # 設定API金鑰
 
@@ -69,27 +76,21 @@ completed_text = response["choices"][0]["text"]
 print(completed_text)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print('AI繪圖')
-
-import openai
+print("AI繪圖")
 
 openai.api_key = openai_api_key  # 設定API金鑰
 
-user_input = "cat wearing red cape"  #AI繪圖提示詞 DALL-E 2
+user_input = "cat wearing red cape"  # AI繪圖提示詞 DALL-E 2
 
-response = openai.Image.create(
-    prompt=user_input,
-    n=1,
-    size="1024x1024"
-)
+response = openai.Image.create(prompt=user_input, n=1, size="1024x1024")
 
-image_url = response['data'][0]['url']
+image_url = response["data"][0]["url"]
 print(image_url)
 
-print('------------------------------------------------------------')	#60個
-
-import openai
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 openai.api_key = openai_api_key  # 設定API金鑰
 
@@ -101,6 +102,7 @@ prompt = "Hi!"
 temperature = 0.7
 max_tokens = 60
 top_p = 1.0
+
 
 # 定義對話函數
 def chat(prompt):
@@ -114,6 +116,7 @@ def chat(prompt):
     message = response.choices[0].text.strip()
     return message
 
+
 print("歡迎來到深智 Deepmind 客服中心")
 # 執行對話
 while True:
@@ -125,34 +128,29 @@ while True:
     print("ChatGPT  : " + response)
     prompt += response + "\n"
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print('AI繪圖')
+print("AI繪圖")
 
-import openai
 import urllib.request
 from datetime import datetime
 
 openai.api_key = openai_api_key  # 設定API金鑰
 
-user_input = "cat wearing red cape"  #AI繪圖提示詞 DALL-E 2
+user_input = "cat wearing red cape"  # AI繪圖提示詞 DALL-E 2
 
-response = openai.Image.create(
-    prompt=user_input,
-    n=1,
-    size="1024x1024"
-)
+response = openai.Image.create(prompt=user_input, n=1, size="1024x1024")
 
-image_url = response['data'][0]['url']
+image_url = response["data"][0]["url"]
 print(image_url)
 
 
-file_name = "image" + datetime.now().strftime('%Y-%m-%d-%H-%M-%S') + ".png"
+file_name = "image" + datetime.now().strftime("%Y-%m-%d-%H-%M-%S") + ".png"
 urllib.request.urlretrieve(image_url, file_name)
 
-print('------------------------------------------------------------')	#60個
-
-import openai
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 prompt = "Please generate 10 ideas for coding projects. "
 
@@ -163,39 +161,34 @@ prompt += "The difficulty is " + difficulty + ". "
 prompt += "The project should include a database. "
 prompt += "The project should include an API."
 print(prompt)
-    
+
 openai.api_key = openai_api_key  # 設定API金鑰
-    
+
 response = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",
-    messages=[
-        {"role": "user", "content": prompt}
-    ]
+    model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}]
 )
 cc = response.choices[0].message.content
 print("結果 :", cc)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print('AI繪圖')
+print("AI繪圖")
 
-import openai
 from PIL import Image, ImageTk
 import requests, io
 
 openai.api_key = openai_api_key  # 設定API金鑰
-user_input = "cat wearing red cape"  #AI繪圖提示詞 DALL-E 2
+user_input = "cat wearing red cape"  # AI繪圖提示詞 DALL-E 2
 user_input += "in style: Realistic"
 
 response = openai.Image.create(
-    prompt=user_input,
-    n=int(number_slider.get()),
-    size="512x512"
+    prompt=user_input, n=int(number_slider.get()), size="512x512"
 )
 
 image_urls = []
-for i in range(len(response['data'])):
-    image_urls.append(response['data'][i]['url'])
+for i in range(len(response["data"])):
+    image_urls.append(response["data"][i]["url"])
 print(image_urls)
 
 images = []
@@ -205,9 +198,8 @@ for url in image_urls:
     photo_image = ImageTk.PhotoImage(image)
     images.append(photo_image)
 
-print('------------------------------------------------------------')	#60個
-
-import openai
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 openai.api_key = openai_api_key  # 設定API金鑰
 
@@ -221,53 +213,53 @@ openai.api_key = openai_api_key  # 設定API金鑰
     assistant: ChatGPT 的回應。
 """
 response = openai.ChatCompletion.create(
-  model="gpt-3.5-turbo",
-  messages=[
+    model="gpt-3.5-turbo",
+    messages=[
         {"role": "system", "content": "你是一個非常溫暖的對話機器人，回應都簡短，儘量不要超過二十個字，而且有同理心。"},
         {"role": "user", "content": "我很難過"},
-        {"role": "assistant", "content": "很抱歉聽到你感到難過，可以跟我說說你正在遭遇什麼困難嗎？我們可以一起找尋解決問題的方式。"},
-        {"role": "user", "content": "Python程式都不會寫"}
-    ]
+        {
+            "role": "assistant",
+            "content": "很抱歉聽到你感到難過，可以跟我說說你正在遭遇什麼困難嗎？我們可以一起找尋解決問題的方式。",
+        },
+        {"role": "user", "content": "Python程式都不會寫"},
+    ],
 )
 
-#再來就是看我們怎麼讀出 ChatGPT 的回應。
+# 再來就是看我們怎麼讀出 ChatGPT 的回應。
 
 print(response["choices"][0]["message"]["content"])
 
-#3. 打造可以一直聊下去的 ChatGPT!
+# 3. 打造可以一直聊下去的 ChatGPT!
 
 messages = [{"role": "system", "content": "你是一個非常溫暖的對話機器人，回應都簡短，儘量不要超過二十個字，而且有同理心。"}]
 
 while True:
-    prompt = input('> ')
-    if 'bye' in prompt:
-        print('再見, 下次再聊!')
+    prompt = input("> ")
+    if "bye" in prompt:
+        print("再見, 下次再聊!")
         break
 
     messages.append({"role": "user", "content": prompt})
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=messages)
+    response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
 
-    reply = response['choices'][0]['message']["content"]
+    reply = response["choices"][0]["message"]["content"]
     print(chatbot + reply)
     print()
     messages.append({"role": "assistant", "content": reply})
 
-print('------------------------------------------------------------')	#60個
-
-import openai
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 openai.api_key = openai_api_key  # 設定API金鑰
+
 
 # 定義對話函數
 def chat(messages):
     response = openai.ChatCompletion.create(
-        model = "gpt-4",
-        messages = messages,
-        max_tokens = 150            # 限制回應token數
+        model="gpt-4", messages=messages, max_tokens=150  # 限制回應token數
     )
-    return response.choices[0].message['content']
+    return response.choices[0].message["content"]
+
 
 print("歡迎來到深智 Deepwisdom 客服中心")
 
@@ -286,19 +278,18 @@ while True:
     messages.append({"role": "assistant", "content": response})
 
 print("------------------------------------------------------------")  # 60個
-
-import openai
+print("------------------------------------------------------------")  # 60個
 
 openai.api_key = openai_api_key  # 設定API金鑰
+
 
 # 定義對話函數
 def chat(messages):
     response = openai.ChatCompletion.create(
-        model = "gpt-4",
-        messages = messages,
-        max_tokens = 150     # 限制回應token數
+        model="gpt-4", messages=messages, max_tokens=150  # 限制回應token數
     )
-    return response.choices[0].message['content']
+    return response.choices[0].message["content"]
+
 
 print("歡迎使用Emoji Translation工具")
 
@@ -321,9 +312,7 @@ while True:
 print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
