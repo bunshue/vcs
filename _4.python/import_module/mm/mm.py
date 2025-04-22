@@ -61,3 +61,10 @@ inventory_month_data = {
     "Nov": 450,
     "Dec": 1300,
 }
+
+
+def show():
+	print('I am a moudle!')
+name = 'mmmm mymodule.py'
+
+

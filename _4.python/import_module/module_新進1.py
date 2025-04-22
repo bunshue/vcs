@@ -433,20 +433,6 @@ print("相除", num1 / num2)
 
 print("------------------------------------------------------------")  # 60個
 
-# 取得另外一個檔案內的資料
-from module_my import (
-    sales_data,
-    inventory_data,
-    product_data,
-    sales_year_data,
-    inventory_month_data,
-)
-
-print(sales_data)
-print(inventory_month_data)
-
-print("------------------------------------------------------------")  # 60個
-
 import pathlib
 
 print(pathlib.Path.cwd())

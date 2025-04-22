@@ -31,6 +31,37 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 
+N = 100
+index = np.arange(N)
+bar_width = 0.8
+figsize = (8, 8)
+
+woe_fig = plt.figure(figsize=figsize)
+
+plt.title("Number of Observations and WoE per bucket")
+ax = woe_fig.add_subplot(111)
+ax.set_ylabel("Observations")
+# plt.xticks(index + bar_width / 2, self.bins["labels"])
+# plt.bar(index, self.bins["obs"], bar_width, color="b", label="Observations")
+ax2 = ax.twinx()
+ax2.set_ylabel("Weight of Evidence")
+ax2.plot(
+    index + bar_width / 2,
+    # self.bins["woe"],
+    "bo-",
+    linewidth=4.0,
+    color="r",
+    label="WoE",
+)
+handles1, labels1 = ax.get_legend_handles_labels()
+handles2, labels2 = ax2.get_legend_handles_labels()
+handles = handles1 + handles2
+labels = labels1 + labels2
+plt.legend(handles, labels)
+woe_fig.autofmt_xdate()
+
+show()
+
 
 print("------------------------------------------------------------")  # 60個
 

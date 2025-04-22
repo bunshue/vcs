@@ -92,11 +92,19 @@ A single exception is defined: StatisticsError is a subclass of ValueError.
 
 """
 
-__all__ = [ 'StatisticsError',
-            'pstdev', 'pvariance', 'stdev', 'variance',
-            'median',  'median_low', 'median_high', 'median_grouped',
-            'mean', 'mode',
-          ]
+__all__ = [
+    "StatisticsError",
+    "pstdev",
+    "pvariance",
+    "stdev",
+    "variance",
+    "median",
+    "median_low",
+    "median_high",
+    "median_grouped",
+    "mean",
+    "mode",
+]
 
 
 import collections
@@ -108,11 +116,13 @@ from decimal import Decimal
 
 # === Exceptions ===
 
+
 class StatisticsError(ValueError):
     pass
 
 
 # === Private utilities ===
+
 
 def _sum(data, start=0):
     """_sum(data [, start]) -> value
@@ -180,7 +190,7 @@ def _sum(data, start=0):
         assert total.denominator == 1
         return T(total.numerator)
     if issubclass(T, Decimal):
-        return T(total.numerator)/total.denominator
+        return T(total.numerator) / total.denominator
     return T(total)
 
 
@@ -189,7 +199,7 @@ def _check_type(T, allowed):
         if len(allowed) == 1:
             allowed.add(T)
         else:
-            types = ', '.join([t.__name__ for t in allowed] + [T.__name__])
+            types = ", ".join([t.__name__ for t in allowed] + [T.__name__])
             raise TypeError("unsupported mixed types: %s" % types)
 
 
@@ -237,12 +247,12 @@ def _decimal_to_ratio(d):
 
     """
     sign, digits, exp = d.as_tuple()
-    if exp in ('F', 'n', 'N'):  # INF, NAN, sNAN
+    if exp in ("F", "n", "N"):  # INF, NAN, sNAN
         assert not d.is_finite()
         raise ValueError
     num = 0
     for digit in digits:
-        num = num*10 + digit
+        num = num * 10 + digit
     if exp < 0:
         den = 10**-exp
     else:
@@ -269,6 +279,7 @@ def _counts(data):
 
 # === Measures of central tendency (averages) ===
 
+
 def mean(data):
     """Return the sample arithmetic mean of data.
 
@@ -289,8 +300,8 @@ def mean(data):
         data = list(data)
     n = len(data)
     if n < 1:
-        raise StatisticsError('mean requires at least one data point')
-    return _sum(data)/n
+        raise StatisticsError("mean requires at least one data point")
+    return _sum(data) / n
 
 
 # FIXME: investigate ways to calculate medians without sorting? Quickselect?
@@ -311,11 +322,11 @@ def median(data):
     n = len(data)
     if n == 0:
         raise StatisticsError("no median for empty data")
-    if n%2 == 1:
-        return data[n//2]
+    if n % 2 == 1:
+        return data[n // 2]
     else:
-        i = n//2
-        return (data[i - 1] + data[i])/2
+        i = n // 2
+        return (data[i - 1] + data[i]) / 2
 
 
 def median_low(data):
@@ -334,10 +345,10 @@ def median_low(data):
     n = len(data)
     if n == 0:
         raise StatisticsError("no median for empty data")
-    if n%2 == 1:
-        return data[n//2]
+    if n % 2 == 1:
+        return data[n // 2]
     else:
-        return data[n//2 - 1]
+        return data[n // 2 - 1]
 
 
 def median_high(data):
@@ -356,11 +367,11 @@ def median_high(data):
     n = len(data)
     if n == 0:
         raise StatisticsError("no median for empty data")
-    return data[n//2]
+    return data[n // 2]
 
 
 def median_grouped(data, interval=1):
-    """"Return the 50th percentile (median) of grouped continuous data.
+    """ "Return the 50th percentile (median) of grouped continuous data.
 
     >>> median_grouped([1, 2, 2, 3, 4, 4, 4, 4, 4, 5])
     3.7
@@ -393,19 +404,19 @@ def median_grouped(data, interval=1):
         return data[0]
     # Find the value at the midpoint. Remember this corresponds to the
     # centre of the class interval.
-    x = data[n//2]
+    x = data[n // 2]
     for obj in (x, interval):
         if isinstance(obj, (str, bytes)):
-            raise TypeError('expected number but got %r' % obj)
+            raise TypeError("expected number but got %r" % obj)
     try:
-        L = x - interval/2  # The lower limit of the median interval.
+        L = x - interval / 2  # The lower limit of the median interval.
     except TypeError:
         # Mixed type. For now we just coerce to float.
-        L = float(x) - float(interval)/2
+        L = float(x) - float(interval) / 2
     cf = data.index(x)  # Number of values below the median interval.
     # FIXME The following line could be more efficient for big lists.
     f = data.count(x)  # Number of data points in the median interval.
-    return L + interval*(n/2 - cf)/f
+    return L + interval * (n / 2 - cf) / f
 
 
 def mode(data):
@@ -431,10 +442,10 @@ def mode(data):
         return table[0][0]
     elif table:
         raise StatisticsError(
-                'no unique mode; found %d equally common values' % len(table)
-                )
+            "no unique mode; found %d equally common values" % len(table)
+        )
     else:
-        raise StatisticsError('no mode for empty data')
+        raise StatisticsError("no mode for empty data")
 
 
 # === Measures of spread ===
@@ -450,6 +461,7 @@ def mode(data):
 # See a comparison of three computational methods here:
 # http://www.johndcook.com/blog/2008/09/26/comparing-three-methods-of-computing-standard-deviation/
 
+
 def _ss(data, c=None):
     """Return sum of square deviations of sequence data.
 
@@ -460,11 +472,11 @@ def _ss(data, c=None):
     """
     if c is None:
         c = mean(data)
-    ss = _sum((x-c)**2 for x in data)
+    ss = _sum((x - c) ** 2 for x in data)
     # The following sum should mathematically equal zero, but due to rounding
     # error may not.
-    ss -= _sum((x-c) for x in data)**2/len(data)
-    assert not ss < 0, 'negative sum of square deviations: %f' % ss
+    ss -= _sum((x - c) for x in data) ** 2 / len(data)
+    assert not ss < 0, "negative sum of square deviations: %f" % ss
     return ss
 
 
@@ -510,9 +522,9 @@ def variance(data, xbar=None):
         data = list(data)
     n = len(data)
     if n < 2:
-        raise StatisticsError('variance requires at least two data points')
+        raise StatisticsError("variance requires at least two data points")
     ss = _ss(data, xbar)
-    return ss/(n-1)
+    return ss / (n - 1)
 
 
 def pvariance(data, mu=None):
@@ -558,9 +570,9 @@ def pvariance(data, mu=None):
         data = list(data)
     n = len(data)
     if n < 1:
-        raise StatisticsError('pvariance requires at least one data point')
+        raise StatisticsError("pvariance requires at least one data point")
     ss = _ss(data, mu)
-    return ss/n
+    return ss / n
 
 
 def stdev(data, xbar=None):
@@ -595,29 +607,26 @@ def pstdev(data, mu=None):
         return math.sqrt(var)
 
 
-
-aaa= mean([-1.0, 2.5, 3.25, 5.75])
+aaa = mean([-1.0, 2.5, 3.25, 5.75])
 print(aaa)
-#2.625
+# 2.625
 
 
 bbb = median([2, 3, 4, 5])
 print(bbb)
-#3.5
+# 3.5
 
-ccc = median_grouped([2, 2, 3, 3, 3, 4])  #doctest: +ELLIPSIS
+ccc = median_grouped([2, 2, 3, 3, 3, 4])  # doctest: +ELLIPSIS
 print(ccc)
-#2.8333333333...
+# 2.8333333333...
 
 
-ddd = stdev([2.5, 3.25, 5.5, 11.25, 11.75])  #doctest: +ELLIPSIS
+ddd = stdev([2.5, 3.25, 5.5, 11.25, 11.75])  # doctest: +ELLIPSIS
 print(ddd)
-#4.38961843444...
+# 4.38961843444...
 
 data = [1, 2, 2, 4, 4, 4, 5, 6]
 mu = mean(data)
 eee = pvariance(data, mu)
 print(eee)
-#2.5
-
-
+# 2.5

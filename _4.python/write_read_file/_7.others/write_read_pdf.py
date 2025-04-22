@@ -24,7 +24,7 @@ pages = convert_from_path(
 )
 
 for i, page in enumerate(pages):
-    pic_filename = "tmp_page" + str(i+1) + ".png"
+    pic_filename = "tmp_page" + str(i + 1) + ".png"
     # page.save(pic_filename, "PNG") # JPEG
     print("存檔檔名 :", pic_filename)
 

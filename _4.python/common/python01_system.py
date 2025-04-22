@@ -635,37 +635,6 @@ print("目前Python視窗版本是: ", sys.getwindowsversion())
 print("目前Python可執行檔路徑", sys.executable)
 
 print("------------------------------------------------------------")  # 60個
-
-print(sys.path)  # 查詢模組路徑
-
-print("加入路徑")
-
-foldername = "C:/_git/vcs/_1.data/______test_files5"
-
-sys.path.append(foldername)
-
-print(sys.path)  # 查詢模組路徑
-
-print("------------------------------------------------------------")  # 60個
-
-print("使用自定義模組")
-
-foldername = "C:/_git/vcs/_4.python/import_module"
-sys.path.append(foldername)
-
-import module_my  # 引用後, 出現 __pycache__
-
-cc = module_my.numRand2(14, 52)
-print(cc)
-
-print(module_my.__name__)
-
-print(__name__)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
