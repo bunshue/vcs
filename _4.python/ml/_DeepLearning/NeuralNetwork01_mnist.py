@@ -436,6 +436,7 @@ def get_elapsed_time():
     time_st = time.time()
 
 
+'''
 print("------------------------------------------------------------")  # 60個
 print("準備工作 ST")
 print("------------------------------------------------------------")  # 60個
@@ -620,7 +621,7 @@ print(y_train[0])
 print("------------------------------------------------------------")  # 60個
 print("準備工作 SP")
 print("------------------------------------------------------------")  # 60個
-
+'''
 get_elapsed_time()
 
 # david : 簡單又正確率高, 以此為準
@@ -674,6 +675,7 @@ model.add(Dense(10, activation="softmax"))
 model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accuracy"])
 
 do_cnn_test()
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -701,6 +703,7 @@ sgd = optimizers.SGD(learning_rate=0.01)
 model.compile(optimizer="sgd", loss="categorical_crossentropy", metrics=["accuracy"])
 
 do_cnn_test()
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -731,6 +734,8 @@ model.compile(optimizer=sgd, loss="mse", metrics=["accuracy"])
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 x_train, y_train, x_test, y_test = transform_data(x_train, y_train, x_test, y_test)
 do_the_same2(x_train, y_train, x_test, y_test)  # 做一樣的事
+
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -768,6 +773,7 @@ do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 # 方法二 分割測試資料以驗證
 do_the_same_with_validation(x_train, y_train, x_test, y_test, VALIDATION_SPLIT)
 """
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -861,6 +867,8 @@ plt.xticks(np.arange(10), np.arange(10).astype(str))
 
 show()
 
+get_elapsed_time()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -885,6 +893,7 @@ model.add(Dense(units=10, kernel_initializer="normal", activation="softmax"))
 model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
 
 # 後續一樣
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -910,6 +919,7 @@ model.add(Dense(units=10, kernel_initializer="normal", activation="softmax"))
 model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
 
 do_cnn_test()
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -982,6 +992,7 @@ sgd = SGD(learning_rate=0.087)
 model.compile(optimizer=sgd, loss="mse", metrics=["accuracy"])
 
 do_the_same2(x_train, y_train, x_test, y_test)  # 做一樣的事
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1121,6 +1132,8 @@ del model
 # 有些同學在不斷試驗的過程中, 可能會發現有時會出現很糟糕的結果。
 # 因此, 接下來我們要介紹怎麼樣用些簡單的手法, 能讓學習效果比較穩定, 而且有可能可以增加學習效率。
 
+get_elapsed_time()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1201,6 +1214,7 @@ model.summary()  # 檢視模型架構
 """
 
 do_cnn_test4d()
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1237,6 +1251,7 @@ sgd = SGD(learning_rate=0.087)
 model.compile(optimizer=sgd, loss="mse", metrics=["accuracy"])
 
 do_cnn_test()
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1266,6 +1281,7 @@ sgd = optimizers.SGD(learning_rate=0.01)
 model.compile(optimizer="sgd", loss="categorical_crossentropy", metrics=["accuracy"])
 
 do_cnn_test()
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1293,6 +1309,7 @@ sgd = optimizers.SGD(learning_rate=0.01)
 model.compile(optimizer="sgd", loss="categorical_crossentropy", metrics=["accuracy"])
 
 do_cnn_test()
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1346,6 +1363,8 @@ do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
 # 改成縮寫後, 正確率變低很多~~~~~~~
 # do_cnn_test4d()
+
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1428,6 +1447,7 @@ history = model.fit(
 )
 
 check_model_fit_history2(history)
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1857,6 +1877,7 @@ model.compile(
 )
 
 do_cnn_test()
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1897,6 +1918,7 @@ model.compile(
 )
 
 do_cnn_test4d()
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1956,6 +1978,7 @@ adam = Adam(learning_rate=1e-4)
 model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
 
 do_cnn_test4d()
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2030,6 +2053,8 @@ print("前20項 預測結果 :", ans[:20])
 # 預測
 y_pred = do_prediction(x_test[:20])
 print("預測結果 :\n", y_pred[:20], sep="")
+
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2132,7 +2157,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("久2")
-"""
+
 from tensorflow.keras.callbacks import TensorBoard
 
 print("建立神經網路24 正確率XXXX")
@@ -2213,6 +2238,7 @@ print("真實目標 :", y_test[:20])
 y_train = to_categorical(y_train)
 y_test = to_categorical(y_test)
 
+""" 久
 # 全部拿來測試
 # TBD do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
@@ -2234,6 +2260,8 @@ print(
 # 預測
 y_pred = do_prediction(x_test[:20])
 print("預測結果 :\n", y_pred[:20], sep="")
+
+get_elapsed_time()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2343,6 +2371,7 @@ except IOError:
 with open("tmp_model_ImageDataGenerator.json", "w") as json_file:
     json_file.write(model.to_json())
 
+""" 久
 # 全部拿來測試
 # TBD do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 # 學習訓練.fit 一般
@@ -2367,6 +2396,9 @@ print(
 # 預測
 y_pred = do_prediction(x_test[:20])
 print("預測結果 :\n", y_pred[:20], sep="")
+
+"""
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2434,6 +2466,8 @@ new_model = tf.keras.models.load_model("tmp_epic_num_reader.model")
 y_pred = new_model.predict(x_test)
 print(np.argmax(y_pred[0]))
 
+get_elapsed_time()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2476,6 +2510,8 @@ plt.legend()
 
 show()
 
+get_elapsed_time()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2516,6 +2552,8 @@ print("預測")
 loss, accuracy = model.evaluate(X_test, y_test)
 print("test loss: ", loss)
 print("test accuracy: ", accuracy)
+
+get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2564,6 +2602,9 @@ plt.plot(X_test, Y_pred)
 
 show()
 """
+
+get_elapsed_time()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
