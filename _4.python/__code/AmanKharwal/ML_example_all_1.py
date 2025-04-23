@@ -82,8 +82,7 @@ tv_shows_both_ratings = tv_shows_combined[
 ]
 
 tv_shows_combined.groupby("StreamingOn").Title.count().plot(kind="bar")
-
-plt.show()
+show()
 
 figure = []
 figure.append(
@@ -103,9 +102,8 @@ for i in range(2):
 fig.update_layout(autosize=False, width=800, height=800)
 fig.show()
 
-
 px.scatter(tv_shows_both_ratings, x="IMDb", y="Rotten Tomatoes", color="StreamingOn")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -127,7 +125,7 @@ cc = housing.describe()
 print(cc)
 
 housing.hist(bins=50, figsize=(10, 8))
-plt.show()
+show()
 
 # 資料分割
 train_set, test_set = train_test_split(housing, test_size=0.2)
@@ -138,7 +136,7 @@ housing["income_cat"] = pd.cut(
     labels=[1, 2, 3, 4, 5],
 )
 housing["income_cat"].hist()
-plt.show()
+show()
 
 # stratified sampling
 from sklearn.model_selection import StratifiedShuffleSplit
@@ -171,8 +169,7 @@ housing.plot(
     colorbar=True,
 )
 plt.legend()
-plt.show()
-
+show()
 """
 # looking at coorelation between features
 corr_matrix = housing.corr()
@@ -188,10 +185,10 @@ attributes = [
     "housing_median_age",
 ]
 scatter_matrix(housing[attributes], figsize=(12, 8))
-plt.show()
+show()
 
 housing.plot(kind="scatter", x="median_income", y="median_house_value", alpha=0.1)
-plt.show()
+show()
 
 housing["rooms_per_household"] = housing["total_rooms"] / housing["households"]
 housing["bedrooms_per_room"] = housing["total_bedrooms"] / housing["total_rooms"]
@@ -277,14 +274,12 @@ print("Predictions: ", lin_reg.predict(data_preparation))
 Predictions:  [210644.60459286 317768.80697211 210956.43331178  59218.98886849
  189747.55849879]
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 # Copy_of_RCB_vs_DC
 
-deliveries_df = pd.read_csv("innings_deliveries.csv")
+deliveries_df = pd.read_csv("data/innings_deliveries.csv")
 
 cc = deliveries_df.head()
 print(cc)
@@ -307,8 +302,7 @@ plt.xlabel("Over Number")
 plt.ylabel("Runs Scored")
 plt.xticks(range(0, 21))  # over numbers from 0 to 20
 plt.legend(title="Team")
-plt.show()
-
+show()
 
 # calculating top scorers for each team
 top_scorers = (
@@ -324,8 +318,7 @@ plt.title("Top Scorers from Each Team")
 plt.xlabel("Total Runs")
 plt.ylabel("Batter")
 plt.legend(title="Team", loc="center right")
-plt.show()
-
+show()
 
 # preparing data for bowling analysis
 deliveries_df["wickets_taken"] = deliveries_df["wicket_kind"].notna().astype(int)
@@ -384,8 +377,7 @@ sns.lineplot(
 ax2.set_ylabel("Economy Rate")
 
 plt.tight_layout()
-plt.show()
-
+show()
 
 # counting dismissal types
 dismissal_types = deliveries_df["wicket_kind"].dropna().value_counts()
@@ -399,8 +391,7 @@ plt.pie(
     colors=sns.color_palette("Set2"),
 )
 plt.title("Types of Dismissals")
-plt.show()
-
+show()
 
 # function to calculate partnerships
 def calculate_partnerships(df):
@@ -452,8 +443,7 @@ plt.title("Significant Batting Partnerships")
 plt.xlabel("Runs Scored")
 plt.ylabel("Batter 1 (Partnership Initiated)")
 plt.legend(title="Team")
-plt.show()
-
+show()
 
 # function to classify the phase of the game based on the over number
 def classify_phase(over):
@@ -502,9 +492,7 @@ sns.lineplot(
     legend=False,
 )
 ax2.set_ylabel("Wickets Lost")
-
-plt.show()
-
+show()
 
 # calculate runs and balls faced for each batter
 batter_stats = (
@@ -552,8 +540,7 @@ plt.title("Strike Rate Across Different Phases for Top Performers")
 plt.xlabel("Batter")
 plt.ylabel("Strike Rate")
 plt.legend(title="Match Phase")
-plt.show()
-
+show()
 
 # calculate cumulative runs and wickets for each ball for both teams
 deliveries_df["cumulative_runs"] = deliveries_df.groupby("team")["runs_total"].cumsum()
@@ -610,7 +597,7 @@ ax.set_title("Cumulative Runs with Wickets for RCB and DC")
 ax.set_xlabel("Over")
 ax.set_ylabel("Cumulative Runs")
 ax.legend()
-plt.show()
+show()
 
 # calculate runs and wickets per over for both teams
 per_over_stats = (
@@ -671,8 +658,7 @@ ax2.set_title("DC Run Rate Per Over")
 ax2.set_xlabel("Over")
 ax2.set_ylabel("Run Rate (Runs per ball)")
 ax2.legend()
-
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

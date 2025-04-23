@@ -16,6 +16,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -26,10 +27,6 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 sns.set()
 
@@ -67,10 +64,7 @@ print(Total_Active_Cases)
 df.plot(kind="bar", x="Name of State / UT", y="Total Cases")
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 

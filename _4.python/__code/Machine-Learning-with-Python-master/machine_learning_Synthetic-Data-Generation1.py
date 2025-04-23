@@ -1,6 +1,7 @@
 """
 machine_learning_Synthetic-Data-Generation1
 
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -533,77 +534,6 @@ plt.grid(True)
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-# Random regression/classification problem generation using symbolic function
-
-from Symbolic_regression_classification_generator import gen_regression_symbolic
-
-# Generate regression data with a symbolic expression of:
-
-data8 = gen_regression_symbolic(
-    m="((x1^2)/2-3*x2)+20*sin(x3)", n_samples=50, noise=0.01
-)
-df8 = pd.DataFrame(data8, columns=["x" + str(i) for i in range(1, 4)] + ["y"])
-
-df8.head()
-
-plt.figure(figsize=(18, 5))
-for i in range(1, 4):
-    plt.subplot(1, 3, i)
-    plt.scatter(df8[df8.columns[i - 1]], df8["y"], s=200, c="orange", edgecolor="k")
-    plt.grid(True)
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-from Symbolic_regression_classification_generator import gen_regression_symbolic
-
-# Generate regression data with a symbolic expression of:
-
-data8 = 0.1 * gen_regression_symbolic(m="x1^2*sin(x1)", n_samples=200, noise=0.05)
-df8 = pd.DataFrame(data8, columns=["x" + str(i) for i in range(1, 2)] + ["y"])
-
-plt.figure(figsize=(8, 5))
-plt.scatter(df8["x1"], df8["y"], s=100, c="orange", edgecolor="k")
-plt.grid(True)
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-from Symbolic_regression_classification_generator import gen_classification_symbolic
-
-# Generate classification data with a symbolic expression of:
-
-data9 = gen_classification_symbolic(
-    m="((x1^2)/3-(x2^2)/15)", n_samples=500, flip_y=0.01
-)
-df9 = pd.DataFrame(data9, columns=["x" + str(i) for i in range(1, 3)] + ["y"])
-
-df9.head()
-
-plt.figure(figsize=(8, 5))
-plt.scatter(df9["x1"], df9["x2"], c=df9["y"], s=100, edgecolors="k")
-plt.xlabel("x1", fontsize=14)
-plt.ylabel("x2", fontsize=14)
-plt.grid(True)
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-from Symbolic_regression_classification_generator import gen_classification_symbolic
-
-# Generate classification data with a symbolic expression of:
-
-data9 = gen_classification_symbolic(m="x1-3*sin(x2/2)", n_samples=500, flip_y=0.01)
-df9 = pd.DataFrame(data9, columns=["x" + str(i) for i in range(1, 3)] + ["y"])
-
-plt.figure(figsize=(8, 5))
-plt.scatter(df9["x1"], df9["x2"], c=df9["y"], s=100, edgecolors="k")
-plt.xlabel("x1", fontsize=14)
-plt.ylabel("x2", fontsize=14)
-plt.grid(True)
-show()
-
 print("------------------------------------------------------------")  # 60個
 
 # Generate name, address, phone number, email etc. using pydbgen package

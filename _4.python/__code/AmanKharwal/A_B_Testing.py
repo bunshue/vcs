@@ -27,27 +27,22 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-
-import pandas as pd
 import datetime
-from datetime import date, timedelta
 import plotly.graph_objects as go
 import plotly.express as px
 import plotly.io as pio
+from datetime import date, timedelta
 
 pio.templates.default = "plotly_white"
 
-control_data = pd.read_csv("control_group.csv", sep=";")
-test_data = pd.read_csv("test_group.csv", sep=";")
-
+control_data = pd.read_csv("data/control_group.csv", sep=";")
+test_data = pd.read_csv("data/test_group.csv", sep=";")
 
 print(control_data.head())
 
 print(test_data.head())
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 control_data.columns = [
     "Campaign Name",
@@ -62,9 +57,7 @@ control_data.columns = [
     "Purchases",
 ]
 
-
 print(control_data.head())
-
 
 test_data.columns = [
     "Campaign Name",
@@ -81,7 +74,6 @@ test_data.columns = [
 
 
 print(control_data.isnull().sum())
-
 
 control_data["Number of Impressions"].fillna(
     value=control_data["Number of Impressions"].mean(), inplace=True
@@ -103,19 +95,15 @@ control_data["Purchases"].fillna(value=control_data["Purchases"].mean(), inplace
 
 print(test_data.isnull().sum())
 
-
 ab_data = control_data.merge(test_data, how="outer").sort_values(["Date"])
 print(ab_data.head())
-
 
 ab_data = ab_data.reset_index(drop=True)
 print(ab_data.head())
 
 print(ab_data.isnull().sum())
 
-
 print(ab_data["Campaign Name"].value_counts())
-
 
 figure = px.scatter(
     data_frame=ab_data,
@@ -126,7 +114,6 @@ figure = px.scatter(
     trendline="ols",
 )
 figure.show()
-
 
 label = ["Total Searches from Control Campaign", "Total Searches from Test Campaign"]
 counts = [sum(control_data["Searches Received"]), sum(test_data["Searches Received"])]
@@ -141,7 +128,6 @@ fig.update_traces(
 )
 fig.show()
 
-
 label = ["Website Clicks from Control Campaign", "Website Clicks from Test Campaign"]
 counts = [sum(control_data["Website Clicks"]), sum(test_data["Website Clicks"])]
 colors = ["gold", "lightgreen"]
@@ -154,7 +140,6 @@ fig.update_traces(
     marker=dict(colors=colors, line=dict(color="black", width=3)),
 )
 fig.show()
-
 
 label = ["Content Viewed from Control Campaign", "Content Viewed from Test Campaign"]
 counts = [sum(control_data["Content Viewed"]), sum(test_data["Content Viewed"])]
@@ -186,7 +171,6 @@ fig.update_traces(
 )
 fig.show()
 
-
 label = ["Amount Spent in Control Campaign", "Amount Spent in Test Campaign"]
 counts = [sum(control_data["Amount Spent"]), sum(test_data["Amount Spent"])]
 colors = ["gold", "lightgreen"]
@@ -199,7 +183,6 @@ fig.update_traces(
     marker=dict(colors=colors, line=dict(color="black", width=3)),
 )
 fig.show()
-
 
 label = ["Purchases Made by Control Campaign", "Purchases Made by Test Campaign"]
 counts = [sum(control_data["Purchases"]), sum(test_data["Purchases"])]

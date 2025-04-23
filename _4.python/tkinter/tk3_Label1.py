@@ -222,7 +222,7 @@ label3 = tk.Label(window, text="Hello No3!")
 label3.pack(side="top", anchor="w")
 label4 = tk.Label(window, text="Hello No4!")
 label4.place(x=120, y=160)
-label5 = tk.Label(window, text="Powen Ko", bg="#ff0000")
+label5 = tk.Label(window, text="AAAAAAA", bg="#ff0000")
 label5.place(x=120, y=140)
 
 window.mainloop()

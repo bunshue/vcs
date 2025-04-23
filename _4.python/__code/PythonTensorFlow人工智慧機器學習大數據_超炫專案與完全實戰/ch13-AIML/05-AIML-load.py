@@ -1,6 +1,3 @@
-# -*- coding: UTF-8 -*-
-__author__ = "Powen Ko, www.powenko.com"
-
 import aiml
 # Create the kernel and learn AIML files
 kernel = aiml.Kernel()

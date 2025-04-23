@@ -1,6 +1,3 @@
-# -*- coding: UTF-8 -*-
-__author__ = "柯博文老師 Powen Ko, www.powenko.com"
-
 import sys
 import time
 

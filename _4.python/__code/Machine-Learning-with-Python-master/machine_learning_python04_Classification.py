@@ -1,14 +1,12 @@
 """
 machine_learning_python04_Classification
 
-
 Classification algorithms
 Logistic regression with Titanic data
 Naive bayes
 Support vector machine with breast cancer data
 Skewed logistic regression (imbalanced class divisions)
 k-Nearest neighbor classification
-
 """
 
 print("------------------------------------------------------------")  # 60個

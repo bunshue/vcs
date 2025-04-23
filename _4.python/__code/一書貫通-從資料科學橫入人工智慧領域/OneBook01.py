@@ -48,7 +48,7 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 日期时间
 
 now = time.strptime("2016-07-20", "%Y-%m-%d")
@@ -692,7 +692,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 
 print("------------------------------------------------------------")  # 60個
 import sqlite3
@@ -1428,7 +1428,7 @@ def metrics_roc(ts_real_Y, tr_real_Y, ts_pred_prob, tr_pred_prob):
     plt.title("ROC curve::Test is Blue")
     print("Test AUC = %.4f" % metrics.auc(fpr_test, tpr_test))
     print("Train AUC = %.4f" % metrics.auc(fpr_train, tpr_train))
-    plt.show()
+    show()
 
 
 def metrics_pr(ts_real_Y, tr_real_Y, ts_pred_prob, tr_pred_prob):
@@ -1444,7 +1444,7 @@ def metrics_pr(ts_real_Y, tr_real_Y, ts_pred_prob, tr_pred_prob):
     plt.title("precision-Recall curve:Test is Blue")
     print("Test AP = %.4f" % metrics.average_precision_score(ts_real_Y, ts_pred_prob))
     print("Train AP = %.4f" % metrics.average_precision_score(tr_real_Y, tr_pred_prob))
-    plt.show()
+    show()
 
 
 # https://pypi.org/project/scikit-plot/0.3.4/
@@ -1454,16 +1454,16 @@ import scikitplot as skplt  # pip install scikit-plot
 def plot_result(Y, pred, pred_proba):
     # 输出混淆矩阵
     skplt.metrics.plot_confusion_matrix(Y, pred)
-    plt.show()
+    show()
     # 输出roc曲线
     skplt.metrics.plot_roc_curve(Y, pred_proba, curves=("each_class"))
-    plt.show()
+    show()
     # 输出pr曲线
     skplt.metrics.plot_precision_recall_curve(Y, pred_proba, curves=("each_class"))
-    plt.show()
+    show()
     # 输出ks曲线
     skplt.metrics.plot_ks_statistic(Y, pred_proba)
-    plt.show()
+    show()
 
 
 train_data, test_data, train_target, test_target = train_test_split(
@@ -1528,7 +1528,6 @@ from sklearn.metrics import average_precision_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 from sklearn.metrics import auc
-
 from sklearn.utils.multiclass import unique_labels
 import itertools
 
@@ -1920,10 +1919,8 @@ sys.exit()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 # 查看一下关键字有哪些，避免关键字做自定义标识符
 import keyword
-
 print(keyword.kwlist)
 
 

@@ -1,40 +1,44 @@
 from pathlib import Path
 from PIL import Image
 
-#¡i2. ³]©w©óÀ³¥Îµ{¦¡Åã¥Üªº¦r¦ê¡j
+# ã€2. è¨­å®šæ–¼æ‡‰ç”¨ç¨‹å¼é¡¯ç¤ºçš„å­—ä¸²ã€‘
 infolder = "testfolder"
-label1, value1 = "Âà¦s¸ê®Æ§¨", "outputfolder4"
-extlist = ["*.jpg","*.png"]
+label1, value1 = "è½‰å­˜è³‡æ–™å¤¾", "outputfolder4"
+extlist = ["*.jpg", "*.png"]
 
-#¡i3.¨ç¼Æ: Àx¦spngÀÉ®×¡j
+
+# ã€3.å‡½æ•¸: å„²å­˜pngæª”æ¡ˆã€‘
 def savepng(readfile, savefolder):
     try:
-        img = Image.open(readfile)              #¸ü¤J¹Ï¤ùÀÉ
+        img = Image.open(readfile)  # è¼‰å…¥åœ–ç‰‡æª”
         savedir = Path(savefolder)
-        savedir.mkdir(exist_ok=True)            #«Ø¥ßÂà¦s¸ê®Æ§¨
-        #-----------------------------------
-        filename = Path(readfile).stem+".jpg"   #«Ø¥ßÀÉ®×¦WºÙ
+        savedir.mkdir(exist_ok=True)  # å»ºç«‹è½‰å­˜è³‡æ–™å¤¾
+        # -----------------------------------
+        filename = Path(readfile).stem + ".jpg"  # å»ºç«‹æª”æ¡ˆåç¨±
         savepath = savedir.joinpath(filename)
         if img.format == "PNG":
-          newimg = Image.new("RGB", img.size, "white")
-          newimg.paste(img, mask=img.split()[3])  #¦b¥Õ©³­I´ºÃ¸»s¹Ï¤ù
-          newimg.save(savepath, format="JPEG", quality=95)    #Âà¦s¬°JPG¹ÏÀÉ
+            newimg = Image.new("RGB", img.size, "white")
+            newimg.paste(img, mask=img.split()[3])  # åœ¨ç™½åº•èƒŒæ™¯ç¹ªè£½åœ–ç‰‡
+            newimg.save(savepath, format="JPEG", quality=95)  # è½‰å­˜ç‚ºJPGåœ–æª”
         elif img.format == "JPEG":
-          img.save(savepath, format="JPEG", quality=95)   #Âà¦s¬°JPG¹ÏÀÉ
-        #-----------------------------------
-        msg = "¦b"+savefolder + "Âà¦s" + filename + "¤F³é¡C\n"
+            img.save(savepath, format="JPEG", quality=95)  # è½‰å­˜ç‚ºJPGåœ–æª”
+        # -----------------------------------
+        msg = "åœ¨" + savefolder + "è½‰å­˜" + filename + "äº†å–²ã€‚\n"
         return msg
     except:
-        return readfile + "¡Gµ{¦¡°õ¦æ¥¢±Ñ¡C"
-#¡i¨ç¼Æ: ³B²z¸ê®Æ§¨¤§¤ºªº¹Ï¤ùÀÉ¡j
+        return readfile + "ï¼šç¨‹å¼åŸ·è¡Œå¤±æ•—ã€‚"
+
+
+# ã€å‡½æ•¸: è™•ç†è³‡æ–™å¤¾ä¹‹å…§çš„åœ–ç‰‡æª”ã€‘
 def savefiles(infolder, savefolder):
     msg = ""
-    for ext in extlist:                     #¥H¦h­Ó°ÆÀÉ¦W½Õ¬d
+    for ext in extlist:  # ä»¥å¤šå€‹å‰¯æª”åèª¿æŸ¥
         filelist = []
-        for p in Path(infolder).glob(ext):  #±N³o­Ó¸ê®Æ§¨ªºÀÉ®×
-            filelist.append(str(p))         #·s¼W¦Ü¦Cªí
-        for filename in sorted(filelist):   #¦A´À¨C­ÓÀÉ®×±Æ§Ç
+        for p in Path(infolder).glob(ext):  # å°‡é€™å€‹è³‡æ–™å¤¾çš„æª”æ¡ˆ
+            filelist.append(str(p))  # æ–°å¢è‡³åˆ—è¡¨
+        for filename in sorted(filelist):  # å†æ›¿æ¯å€‹æª”æ¡ˆæ’åº
             msg += savepng(filename, savefolder)
     return msg
+
 
 msg = savefiles(infolder, value1)

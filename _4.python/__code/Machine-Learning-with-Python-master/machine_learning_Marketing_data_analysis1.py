@@ -75,9 +75,7 @@ from sklearn.ensemble import BaggingClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 
-# Load (cleaned and formatted) dataset
-
-df = pd.read_csv("AddedFeatures_campaign_sale.csv")
+df = pd.read_csv("data/AddedFeatures_campaign_sale.csv")
 
 df.info()
 

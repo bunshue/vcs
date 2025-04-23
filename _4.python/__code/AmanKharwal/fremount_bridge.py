@@ -34,7 +34,6 @@ data.columns = ["West", "East"]
 cc = data.head()
 print(cc)
 
-
 data["Total"] = data["West"] + data["East"]
 cc = data.head()
 print(cc)
@@ -58,27 +57,16 @@ daily.rolling(30, center=True).sum().plot(style=[":", "--", "-"])
 plt.ylabel("mean hourly count")
 plt.show()
 
-
 daily.rolling(50, center=True, win_type="gaussian").sum(std=10).plot(
     style=[":", "--", "-"]
 )
 plt.show()
-
 
 by_time = data.groupby(data.index.time).mean()
 hourly_ticks = 4 * 60 * 60 * np.arange(6)
 by_time.plot(xticks=hourly_ticks, style=[":", "--", "-"])
 plt.ylabel("Traffic according to time")
 plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -95,8 +83,3 @@ sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------")  # 30個

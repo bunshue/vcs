@@ -1,6 +1,3 @@
-# -*- coding: UTF-8 -*-
-__author__ = "柯博文老師 Powen Ko, www.powenko.com"
-
 import sys
 
 if (sys.version_info > (3, 0)):    # python 3.x
