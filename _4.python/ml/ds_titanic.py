@@ -202,7 +202,8 @@ logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸�
 
 logistic_regression.fit(X_train_std, y_train)  # 學習訓練.fit
 
-y_pred = logistic_regression.predict(X_test_std)
+y_pred = logistic_regression.predict(X_test_std)  # 預測.predict
+print("y_pred :\n", y_pred, sep="")
 
 # 計算準確率
 print(f"{accuracy_score(y_test, y_pred)*100:.2f}%")
@@ -447,8 +448,10 @@ logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸�
 
 logistic_regression.fit(X, y)  # 學習訓練.fit
 
-preds = logistic_regression.predict(X)
-print(pd.crosstab(preds, titanic["Survived"]))
+y_pred = logistic_regression.predict(X)  # 預測.predict
+print("y_pred :\n", y_pred, sep="")
+
+print(pd.crosstab(y_pred, titanic["Survived"]))
 
 print("---------------------------")
 print((805 + 265) / (805 + 185 + 58 + 265))
@@ -475,11 +478,16 @@ logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸�
 logistic_regression.fit(X, y)  # 學習訓練.fit
 print("迴歸係數:", logistic_regression.coef_)
 print("截距:", logistic_regression.intercept_)
-print("---------------------------")
-preds = logistic_regression.predict(X)
-print(pd.crosstab(preds, titanic["Survived"]))
 
 print("---------------------------")
+
+y_pred = logistic_regression.predict(X)  # 預測.predict
+print("y_pred :\n", y_pred, sep="")
+
+print(pd.crosstab(y_pred, titanic["Survived"]))
+
+print("---------------------------")
+
 print((840 + 222) / (840 + 222 + 23 + 228))
 print(logistic_regression.score(X, y))
 
@@ -507,9 +515,12 @@ clf.fit(XTrain, yTrain)  # 學習訓練.fit
 
 print("準確率:", clf.score(XTest, yTest))
 print("---------------------------")
-preds = clf.predict_proba(X=XTest)
-print(pd.crosstab(preds[:, 0], columns=[XTest["PClass"], XTest["SexCode"]]))
-pd.crosstab(preds[:, 0], columns=[XTest["PClass"], XTest["SexCode"]]).to_html(
+
+y_pred = clf.predict_proba(X=XTest)
+print("y_pred :\n", y_pred, sep="")
+
+print(pd.crosstab(y_pred[:, 0], columns=[XTest["PClass"], XTest["SexCode"]]))
+pd.crosstab(y_pred[:, 0], columns=[XTest["PClass"], XTest["SexCode"]]).to_html(
     "tmp_titanic.html"
 )
 
@@ -733,7 +744,8 @@ sns.set_style("whitegrid")
 
 print("------------------------------")  # 30個
 
-titanic_df = pd.read_csv("data/train.csv")
+titanic_df = pd.read_csv("data/titanic.csv")
+
 test_df = pd.read_csv("data/titanic_test2.csv")
 
 print(titanic_df.head())
@@ -795,9 +807,10 @@ logistic_regression = sklearn.linear_model.LogisticRegression()  # 邏輯迴歸�
 
 logistic_regression.fit(X_train, Y_train)  # 學習訓練.fit
 
-print(logistic_regression.score(X_train, Y_train))  # 模型評分
+print("模型評分 :", logistic_regression.score(X_train, Y_train))  # 模型評分
 
-Y_pred = logistic_regression.predict(X_test)  # 預測
+y_pred = logistic_regression.predict(X_test)  # 預測.predict
+print("y_pred :\n", y_pred, sep="")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -843,24 +856,25 @@ X_new = test.loc[:, feature_cols]
 print("X_new資料.形狀 :", X_new.shape)
 
 # use the fitted model to make predictions for the testing set observations
-new_pred_class = logistic_regression.predict(X_new)
+y_pred = logistic_regression.predict(X_new)  # 預測.predict
+print("y_pred :\n", y_pred, sep="")
 
 # create a DataFrame of passenger IDs and testing set predictions
 print("檢視前幾行")
-cc = pd.DataFrame({"PassengerId": test.PassengerId, "Survived": new_pred_class}).head()
+cc = pd.DataFrame({"PassengerId": test.PassengerId, "Survived": y_pred}).head()
 print(cc)
 
 # ensure that PassengerID is the first column by setting it as the index
 print("檢視前幾行")
 cc = (
-    pd.DataFrame({"PassengerId": test.PassengerId, "Survived": new_pred_class})
+    pd.DataFrame({"PassengerId": test.PassengerId, "Survived": y_pred})
     .set_index("PassengerId")
     .head()
 )
 print(cc)
 
 print("df轉csv")
-pd.DataFrame({"PassengerId": test.PassengerId, "Survived": new_pred_class}).set_index(
+pd.DataFrame({"PassengerId": test.PassengerId, "Survived": y_pred}).set_index(
     "PassengerId"
 ).to_csv("tmp_sub.csv")
 
@@ -1364,7 +1378,7 @@ train_features = train_data[:, 1:]
 train_target = train_data[:, 0]
 
 # Fit the model to our training data
-clf = clf.fit(train_features, train_target)
+clf = clf.fit(train_features, train_target)  # 學習訓練.fit
 score = clf.score(train_features, train_target)
 cc = "Mean accuracy of Random Forest: {0}".format(score)
 print(cc)
@@ -1388,7 +1402,8 @@ test_data = df_test.values
 test_x = test_data[:, 1:]
 
 # Predict the Survival values for the test data
-test_y = clf.predict(test_x)
+test_y = clf.predict(test_x)  # 預測.predict
+# print("y_pred :\n", y_pred, sep="")
 
 # Random Forest: Prepare for Kaggle Submission
 
@@ -1405,10 +1420,12 @@ train_x, test_x, train_y, test_y = train_test_split(
 
 # Use the new training data to fit the model, predict, and get the accuracy score:
 
-clf = clf.fit(train_x, train_y)
-predict_y = clf.predict(test_x)
+clf = clf.fit(train_x, train_y)  # 學習訓練.fit
 
-print("Accuracy = %.2f" % (accuracy_score(test_y, predict_y)))
+y_pred = clf.predict(test_x)  # 預測.predict
+print("y_pred :\n", y_pred, sep="")
+
+print("Accuracy = %.2f" % (accuracy_score(test_y, y_pred)))
 # Accuracy = 0.83
 
 from IPython.core.display import Image
@@ -1420,7 +1437,7 @@ Image(filename="data/titanic_confusion_matrix.png", width=800)
 model_score = clf.score(test_x, test_y)
 print("Model Score %.2f \n" % (model_score))
 
-confusion_matrix = metrics.confusion_matrix(test_y, predict_y)
+confusion_matrix = metrics.confusion_matrix(test_y, y_pred)
 print("Confusion Matrix ", confusion_matrix)
 
 print("          Predicted")
@@ -1449,7 +1466,7 @@ Actual   |-----|-----|
 from sklearn.metrics import classification_report
 
 print(
-    classification_report(test_y, predict_y, target_names=["Not Survived", "Survived"])
+    classification_report(test_y, y_pred, target_names=["Not Survived", "Survived"])
 )
 
 """

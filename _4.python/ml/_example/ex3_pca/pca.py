@@ -44,7 +44,15 @@ class Eigenfaces(object):
         if (pc_num <= 0) or (pc_num > n):
             pc_num = n
         self.mu = self.Mat.mean(axis=0)
-        self.Mat -= self.mu
+        """
+        print("type Mat :", type(self.Mat))
+        print("type mu :", type(self.mu))
+        print("type Mat :", type(self.Mat[0]))
+        print("type mu :", type(self.mu[0]))
+        print("len Mat :", len(self.Mat))
+        print("len mu :", len(self.mu))
+        """
+        self.Mat -= uint8(self.mu)
         if n > d:
             XTX = np.dot(self.Mat.T, self.Mat)
             [self.eig_v, self.eig_vect] = linalg.eigh(XTX)
