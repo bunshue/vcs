@@ -1,4 +1,22 @@
 """
+CNN 手寫辨識
+Yann LeCun 被譽為 Deep Learning 的三巨頭之一。
+他的 CNN (Convolutional Neural Networks) 是讓 Neural Network 重新受到重視的主因之一。
+
+------------------------------
+
+# 將minst資料集放在 系統 位置
+
+下載minst資料集檔案 :
+https://s3.amazonaws.com/img-datasets/mnist.npz
+or
+https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz
+
+放在 :
+C:/Users/xxxxxx/.keras/datasets/mnist.npz
+
+------------------------------
+
 深度神經網路 Deep Neural Networks (DNN)
 1.捲積神經網路 Convolutional Neural Network (CNN)
 2.循環神經網路 Recurrent Neural Network (RNN)
@@ -16,8 +34,7 @@ CNN包括了3個小層次
 隱藏層的數量、隱藏層設計多少神經元
 
 # 設定輸出層 softmax
-
-activation="relu"))
+activation="relu"
 
 model.add(Flatten(input_shape=(28, 28)))  # 向量輸入拉平
 
@@ -41,10 +58,6 @@ metrics=["accuracy"]
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer="rmsprop", loss="binary_crossentropy", metrics=["accuracy"])
 
-"""
-
-
-"""
 分析顯示 mnist 資料集
 
 MNIST手寫數字辨識資料集
@@ -87,17 +100,6 @@ Dense        全連接層
 Conv2D       二維卷積層 Convolution Layer, Conv2D
 MaxPooling2D 最大池化層
 Dropout      隨機失活層
-
-CNN 手寫辨識
-Yann LeCun 被譽為 Deep Learning 的三巨頭之一。
-他的 CNN (Convolutional Neural Networks) 是讓 Neural Network 重新受到重視的主因之一。
-
-針對無法連線到官方直接使用MNIST資料集的用戶，可以根據下面步驟執行MNIST Demo
-
-可以使用先從PC上下載MNIST資料集
-https://s3.amazonaws.com/img-datasets/mnist.npz
-
-https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -191,7 +193,7 @@ time_st = time.time()
 
 def load_mnist_data():
     # 載入 MNIST 資料庫的訓練資料，並自動分為『訓練組』及『測試組』
-    RATIO = 10  # debug, 一律 1/10
+    RATIO = 20  # debug, 一律 1/10
     print("資料量縮小 ", RATIO, "倍")
     (x_train, y_train), (x_test, y_test) = mnist.load_data()
     x_train = x_train[: int(len(x_train) // RATIO)]
@@ -442,10 +444,6 @@ print("準備工作 ST")
 print("------------------------------------------------------------")  # 60個
 
 print("各種讀取資料集的方法")
-
-# 將minst資料集放在 系統 位置
-# 下載minst資料集檔案
-# 資料集檔案位置: C:/Users/070601/.keras/datasets/mnist.npz
 
 # 用tensorflow讀入 MNSIT 數據集
 from tensorflow.keras.datasets import mnist
@@ -742,14 +740,18 @@ print("------------------------------------------------------------")  # 60個
 
 print("建立神經網路05 正確率高 僅正規化 沒有one-hot")
 
-model = Sequential(
-    [
-        Flatten(input_shape=(28, 28)),  # 向量輸入拉平
-        Dense(128, activation="relu"),
-        Dropout(0.2),
-        Dense(10, activation="softmax"),
-    ]
-)
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
+model.add(Flatten(input_shape=(28, 28)))  # 向量輸入拉平
+
+# 設定隱藏層HL第2層, 用 128 個神經元
+model.add(Dense(128, activation="relu"))
+
+# 設定隨機失活層(Dropout層)
+model.add(Dropout(rate=0.2))
+
+# 設定輸出層, 用 10 個神經元, 激活函數選 softmax
+model.add(Dense(10, activation="softmax"))
 
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(
@@ -1846,7 +1848,7 @@ for neuron in range(hidden_neurons):
     ax.axis("off")
     ax.imshow(np.reshape(w[neuron], (28, 28)), cmap=cm.Greys_r)
 
-plt.savefig("neuron_images.png", dpi=300)
+plt.savefig("tmp_neuron_images.png", dpi=300)
 show()
 
 get_elapsed_time()
@@ -2238,7 +2240,7 @@ print("真實目標 :", y_test[:20])
 y_train = to_categorical(y_train)
 y_test = to_categorical(y_test)
 
-""" 久
+print("久3")
 # 全部拿來測試
 # TBD do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
@@ -2262,7 +2264,7 @@ y_pred = do_prediction(x_test[:20])
 print("預測結果 :\n", y_pred[:20], sep="")
 
 get_elapsed_time()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2371,7 +2373,7 @@ except IOError:
 with open("tmp_model_ImageDataGenerator.json", "w") as json_file:
     json_file.write(model.to_json())
 
-""" 久
+print("久4")
 # 全部拿來測試
 # TBD do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 # 學習訓練.fit 一般
@@ -2397,7 +2399,6 @@ print(
 y_pred = do_prediction(x_test[:20])
 print("預測結果 :\n", y_pred[:20], sep="")
 
-"""
 get_elapsed_time()
 
 print("------------------------------------------------------------")  # 60個
@@ -2439,8 +2440,8 @@ model.compile(
     optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"]
 )
 
-
-print("久3")
+"""
+print("久5 long")
 
 model.fit(x_train, y_train, epochs=EPOCHS)  # 學習訓練.fit
 
@@ -2467,9 +2468,11 @@ y_pred = new_model.predict(x_test)
 print(np.argmax(y_pred[0]))
 
 get_elapsed_time()
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+# 不是手寫數字的 CNN
 
 model = Sequential([Dense(units=1, input_shape=[1])])
 
@@ -2525,15 +2528,13 @@ X_test = X_test.reshape(len(X_test), -1) / 255.0  # normalize
 y_train = to_categorical(y_train, num_classes=10)
 y_test = to_categorical(y_test, num_classes=10)
 
-# Another way to build your neural net
-model = Sequential(
-    [
-        Dense(32, input_dim=INPUT_DIM),
-        Activation("relu"),
-        Dense(10),
-        Activation("softmax"),
-    ]
-)
+model = Sequential()  # 建立空白的神經網路模型(CNN)
+
+# 設定隱藏層HL第1層, 用 32 個神經元
+model.add(Dense(32, input_dim=INPUT_DIM, activation="relu"))
+
+# 設定輸出層, 用 10 個神經元, 激活函數選 softmax
+model.add(Dense(10, activation="softmax"))
 
 # 先設定優化器, 再組裝神經網路
 rmsprop = RMSprop(learning_rate=0.001, rho=0.9, epsilon=1e-08, decay=0.0)
@@ -2543,7 +2544,8 @@ model.compile(
     optimizer="rmsprop", loss="categorical_crossentropy", metrics=["accuracy"]
 )
 
-print("久4")
+"""
+print("久6 long")
 
 # model.fit(X_train, y_train, epoch=2, batch_size=32)
 model.fit(X_train, y_train, batch_size=32)
@@ -2554,7 +2556,7 @@ print("test loss: ", loss)
 print("test accuracy: ", accuracy)
 
 get_elapsed_time()
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2665,6 +2667,8 @@ print(type(y),y.shape)#<class "numpy.ndarray"> (55000, 10)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+get_elapsed_time()
+
 print("先到此")
 sys.exit()
 
@@ -2672,69 +2676,9 @@ print("------------------------------------------------------------")  # 60個
 print("新")
 print("------------------------------------------------------------")  # 60個
 
-print("不知道這段是什麼東西")
-
-# restricted_boltzmann_machine
-import tensorflow.compat.v1 as tf  # 強制使用tensorflow 1.0
-
-tf.disable_v2_behavior()
-
-VISIBLE_NODES = 784
-HIDDEN_NODES = 400
-LEARNING_RATE = 0.01
-
-input_placeholder = tf.placeholder("float", shape=(None, VISIBLE_NODES))
-
-weights = tf.Variable(
-    tf.random_normal(
-        (VISIBLE_NODES, HIDDEN_NODES), mean=0.0, stddev=1.0 / VISIBLE_NODES
-    )
-)
-hidden_bias = tf.Variable(tf.zeros([HIDDEN_NODES]))
-visible_bias = tf.Variable(tf.zeros([VISIBLE_NODES]))
-
-hidden_activation = tf.nn.sigmoid(tf.matmul(input_placeholder, weights) + hidden_bias)
-visible_reconstruction = tf.nn.sigmoid(
-    tf.matmul(hidden_activation, tf.transpose(weights)) + visible_bias
-)
-
-final_hidden_activation = tf.nn.sigmoid(
-    tf.matmul(visible_reconstruction, weights) + hidden_bias
-)
-
-positive_phase = tf.matmul(tf.transpose(input_placeholder), hidden_activation)
-negative_phase = tf.matmul(
-    tf.transpose(visible_reconstruction), final_hidden_activation
-)
-
-weight_update = weights.assign_add(LEARNING_RATE * (positive_phase - negative_phase))
-visible_bias_update = visible_bias.assign_add(
-    LEARNING_RATE * tf.reduce_mean(input_placeholder - visible_reconstruction, 0)
-)
-hidden_bias_update = hidden_bias.assign_add(
-    LEARNING_RATE * tf.reduce_mean(hidden_activation - final_hidden_activation, 0)
-)
-
-train_op = tf.group(weight_update, visible_bias_update, hidden_bias_update)
-
-loss_op = tf.reduce_sum(tf.square(input_placeholder - visible_reconstruction))
-
-session = tf.Session()  # tensorflow 1.0才有的指令
-
-session.run(tf.initialize_all_variables())
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # RNN Classifier example
 
 from keras.layers import SimpleRNN
-
-TIME_STEPS = 28  # same as the height of the image
-INPUT_SIZE = 28  # same as the width of the image
-BATCH_SIZE = 50
-BATCH_INDEX = 0
-CELL_SIZE = 50
 
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
@@ -2747,27 +2691,27 @@ y_test = to_categorical(y_test, num_classes=10)
 # build RNN model
 model = Sequential()  # 建立空白的神經網路模型(CNN)
 
-# RNN cell
-model.add(
-    SimpleRNN(
-        # for batch_input_shape, if using tensorflow as the backend, we have to put None for the batch_size.
-        # Otherwise, model.evaluate() will get error.
+#建立SimpleRNN層
+model.add(SimpleRNN(input_shape=(28,28),units=256,unroll=True))
+
+#建立拋棄層
+model.add(Dropout(0,1))
+
+#建立輸出層
+model.add(Dense(units=10,kernel_initializer='normal',activation='softmax'))
+
+"""
         batch_input_shape=(
             None,
             TIME_STEPS,
             INPUT_SIZE,
         ),  # Or: input_dim=INPUT_SIZE, input_length=TIME_STEPS,
+        units=256,
         output_dim=CELL_SIZE,
         unroll=True,
     )
 )
-
-# 輸出層
-classes = 10  # 輸出神經元預設10個
-# 設定隱藏層HL第1層, 用 10 個神經元
-model.add(Dense(classes))
-
-model.add(Activation("softmax"))
+"""
 
 # 先設定優化器, 再組裝神經網路
 adam = Adam(learning_rate=0.001)
@@ -2775,7 +2719,13 @@ adam = Adam(learning_rate=0.001)
 # 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
 model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
 
-# training
+TIME_STEPS = 28  # same as the height of the image
+INPUT_SIZE = 28  # same as the width of the image
+BATCH_SIZE = 50
+BATCH_INDEX = 0
+CELL_SIZE = 50
+
+# 訓練
 for step in range(4001):
     # data shape = (batch_num, steps, inputs/outputs)
     X_batch = X_train[BATCH_INDEX : BATCH_INDEX + BATCH_SIZE, :, :]
@@ -2793,7 +2743,7 @@ for step in range(4001):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 8 - RNN LSTM Regressor example
+# RNN LSTM Regressor example
 
 from keras.layers import LSTM
 from keras.layers import TimeDistributed
@@ -2904,23 +2854,6 @@ decoded = Dense(64, activation="relu")(decoded)
 decoded = Dense(128, activation="relu")(decoded)
 decoded = Dense(784, activation="tanh")(decoded)
 
-# construct the autoencoder model
-autoencoder = Model(input=input_img, output=decoded)
-
-# construct the encoder model for plotting
-encoder = Model(input=input_img, output=encoder_output)
-
-# compile autoencoder
-# 組裝神經網路, 編譯模型 : 選擇優化器(optimizer)、損失函數(loss)、效能衡量指標(metrics)
-autoencoder.compile(optimizer="adam", loss="mse")
-
-# training
-autoencoder.fit(x_train, x_train, nb_epoch=20, batch_size=256, shuffle=True)
-
-encoded_imgs = encoder.predict(x_test)
-plt.scatter(encoded_imgs[:, 0], encoded_imgs[:, 1], c=y_test)
-plt.colorbar()
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2948,6 +2881,7 @@ for step in range(301):
 
 # save
 print("test before save: ", model.predict(X_test[0:2]))
+
 model.save(
     "tmp_my_model.h5"
 )  # HDF5 file, you have to pip3 install h5py if don't have it
@@ -3259,7 +3193,7 @@ clf.fit(x_train, y_train, time_limit=500 * 60)  # 學習訓練.fit
 
 clf.final_fit(x_train, y_train, x_test, y_test, retrain=True)
 
-# 模型評估.evaluate, 評估準確率, 久
+# 模型評估.evaluate, 評估準確率, 久7
 y = clf.evaluate(x_test, y_test)
 print(y * 100)
 
@@ -3424,10 +3358,3 @@ plt.imshow(image, "gray")
 # 3*3 (權重) + 1 (bias)
 # (3*3+1)*16 = 160
 
-"""
-下载mnist数据
-keras默认从(https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz)下载，
-但国内很难连上， 可以参考(http://www.cnblogs.com/shinny/p/9283372.html)。
-手动下载mnist.npz，然后修改mnist.py中的引用路径。 如果找不到mnist.py，可以用everthing搜索。
-mnist.npz已上传到datasets文件夹，可从这里下载。
-"""

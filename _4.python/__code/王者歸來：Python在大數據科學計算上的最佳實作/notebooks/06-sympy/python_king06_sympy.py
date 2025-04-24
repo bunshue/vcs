@@ -185,8 +185,8 @@ diff_status = kane.mass_matrix_full.inv() * kane.forcing_full
 
 from sympy.utilities.autowrap import autowrap
 
-status_symbols = [Symbol(sym.func.__name__) for sym in status] #❶
-expr = diff_status.subs(zip(status, status_symbols)) #❷
+status_symbols = [Symbol(sym.func.__name__) for sym in status]
+expr = diff_status.subs(zip(status, status_symbols))
 
 from sympy.utilities.autowrap import autowrap
 

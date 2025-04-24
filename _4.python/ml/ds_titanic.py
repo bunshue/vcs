@@ -1465,9 +1465,7 @@ Actual   |-----|-----|
 
 from sklearn.metrics import classification_report
 
-print(
-    classification_report(test_y, y_pred, target_names=["Not Survived", "Survived"])
-)
+print(classification_report(test_y, y_pred, target_names=["Not Survived", "Survived"]))
 
 """
               precision    recall  f1-score   support

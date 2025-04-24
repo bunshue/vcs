@@ -182,24 +182,6 @@ print("------------------------------------------------------------")  # 60個
 
 import urllib.request
 
-# 定義卷積層運算的類別
-
-
-class Conv:
-    # 為了方便解釋, W固定為3x3, 並且不考慮stride和padding
-    def __init__(self, W):
-        self.W = W
-
-    def f_prop(self, X):
-        out = np.zeros((X.shape[0] - 2, X.shape[1] - 2))
-        for i in range(out.shape[0]):
-            for j in range(out.shape[1]):
-                x = X[i : i + 3, j : j + 3]
-                # 元素執行內積加總
-                out[i, j] = np.dot(self.W.flatten(), x.flatten())
-        return out
-
-
 local_filename, headers = urllib.request.urlretrieve(
     "https://aidemyexcontentsdata.blob.core.windows.net/data/5100_cnn/circle.npy"
 )
@@ -210,7 +192,7 @@ plt.imshow(X)
 
 plt.title("The original image")
 
-plt.show()
+show()
 
 # 參考過濾器W2和W3, 來設置程式碼中的過濾器W1, 使其具有檢測垂直線條的能力
 
@@ -228,73 +210,12 @@ plt.imshow(W3)
 plt.subplot(144)
 plt.imshow(W4)
 plt.suptitle("kernel")
-plt.show()
+show()
 
-# 卷積運算
-conv1 = Conv(W1)
-C1 = conv1.f_prop(X)
-conv2 = Conv(W2)
-C2 = conv2.f_prop(X)
-conv3 = Conv(W3)
-C3 = conv3.f_prop(X)
-conv4 = Conv(W4)
-C4 = conv4.f_prop(X)
-
-plt.subplot(141)
-plt.imshow(C1)
-plt.subplot(142)
-plt.imshow(C2)
-plt.subplot(143)
-plt.imshow(C3)
-plt.subplot(144)
-plt.imshow(C4)
-
-plt.suptitle("Convolution result")
-
-plt.show()
 
 # Final 池化層的實作
 
 import urllib.request
-
-# 定義卷積層運算的類別
-
-
-class Conv:
-    # 為了方便解釋, W固定為3x3, 並且不考慮stride和padding
-    def __init__(self, W):
-        self.W = W
-
-    def f_prop(self, X):
-        out = np.zeros((X.shape[0] - 2, X.shape[1] - 2))
-        for i in range(out.shape[0]):
-            for j in range(out.shape[1]):
-                x = X[i : i + 3, j : j + 3]
-                out[i, j] = np.dot(self.W.flatten(), x.flatten())
-        return out
-
-
-# 定義池化運算的類別
-
-
-class Pool:
-    # 為了方便解釋, 不考慮strides和padding
-
-    def __init__(self, l):
-        self.l = l
-
-    def f_prop(self, X):
-        l = self.l
-
-        out = np.zeros((X.shape[0] // self.l, X.shape[1] // self.l))
-
-        for i in range(out.shape[0]):
-            for j in range(out.shape[1]):
-                # 從檢視窗口所劃分出的子區域當中，用np.max()取各區域的最大值出來
-
-                out[i, j] = np.max(X[i * l : (i + 1) * l, j * l : (j + 1) * l])
-
-        return out
 
 
 local_filename, headers = urllib.request.urlretrieve(
@@ -307,61 +228,13 @@ plt.imshow(X)
 
 plt.title("The original image")
 
-plt.show()
+show()
 
 # 過濾器
 W1 = np.array([[0, 1, 0], [0, 1, 0], [0, 1, 0]])
 W2 = np.array([[0, 0, 0], [1, 1, 1], [0, 0, 0]])
 W3 = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
 W4 = np.array([[0, 0, 1], [0, 1, 0], [1, 0, 0]])
-
-# 卷積運算
-conv1 = Conv(W1)
-C1 = conv1.f_prop(X)
-conv2 = Conv(W2)
-C2 = conv2.f_prop(X)
-conv3 = Conv(W3)
-C3 = conv3.f_prop(X)
-conv4 = Conv(W4)
-C4 = conv4.f_prop(X)
-
-plt.subplot(141)
-plt.imshow(C1)
-plt.subplot(142)
-plt.imshow(C2)
-plt.subplot(143)
-plt.imshow(C3)
-plt.subplot(144)
-plt.imshow(C4)
-
-plt.suptitle("Convolution result")
-
-plt.show()
-
-# 最大池化運算
-
-pool = Pool(2)
-
-P1 = pool.f_prop(C1)
-P2 = pool.f_prop(C2)
-P3 = pool.f_prop(C3)
-P4 = pool.f_prop(C4)
-
-plt.subplot(141)
-plt.imshow(P1)
-
-plt.subplot(142)
-plt.imshow(P2)
-
-plt.subplot(143)
-plt.imshow(P3)
-
-plt.subplot(144)
-plt.imshow(P4)
-
-plt.suptitle("Pooling result")
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -774,7 +647,7 @@ def show_images_predictions(images, y_pred, num=10):
         ax.set_title("p=" + str(y_pred[i]))
         ax.set_xticks([])
         ax.set_yticks([])
-    plt.show()
+    show()
 
 
 files = glob.glob("data\imagedata\*.jpg")  # 建立測試資料
@@ -1218,7 +1091,7 @@ plt.figure(figsize=[4, 4])
 plt.plot(fpr_test, tpr_test, "b-")
 plt.plot(fpr_train, tpr_train, "r-")
 plt.title("ROC curve")
-plt.show()
+show()
 
 print("AUC = %6.4f" % metrics.auc(fpr_test, tpr_test))
 
@@ -1309,7 +1182,7 @@ plt.figure(figsize=[6, 6])
 plt.plot(fpr_test, tpr_test, color="red")
 plt.plot(fpr_train, tpr_train, color="black")
 plt.title("ROC curve")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1541,3 +1414,8 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+
+

@@ -1717,6 +1717,7 @@ print("交叉表 :\n", cross_table, sep="")
 
 # 列聯表
 
+
 def percConvert(ser):
     return ser / float(ser[-1])
 
@@ -2415,7 +2416,7 @@ Data wrangling (impute and drop)
     Convert categorical features to dummy variables
 Define a function to impute (fill-up missing values) age feature
 """
-print('aa')
+print("aa")
 
 a = list(f_class_Age["Age"])
 
@@ -2449,7 +2450,7 @@ plt.title("Bar plot of the count of numeric features b")
 
 show()
 
-print('bb')
+print("bb")
 
 # Drop the 'Cabin' feature and any other null value
 
@@ -2485,7 +2486,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 # F1-score as a fucntion of regularization (penalty) parameter
 
-print('cc')
+print("cc")
 
 nsimu = 201
 penalty = [0] * nsimu
@@ -2537,7 +2538,7 @@ plt.xlabel("Test set size (fraction)")
 plt.ylabel("F1-score on test data")
 show()
 
-print('dd')
+print("dd")
 
 # F1-score as a function of random seed of test/train split
 
@@ -3711,7 +3712,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -3744,106 +3744,103 @@ sns.heatmap(df.isnull(), yticklabels=False, cbar=False, cmap="viridis")
 show()
 
 
-
-
-
-
-
-def plot_confusion_matrix(cm, classes,
-                          title='Confusion matrix',
-                          cmap=plt.cm.Blues):
-    #This function prints and plots the confusion matrix.
-    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+def plot_confusion_matrix(cm, classes, title="Confusion matrix", cmap=plt.cm.Blues):
+    # This function prints and plots the confusion matrix.
+    plt.imshow(cm, interpolation="nearest", cmap=cmap)
     plt.title(title)
     plt.colorbar()
     tick_marks = np.arange(len(classes))
     plt.xticks(tick_marks, classes, rotation=0)
     plt.yticks(tick_marks, classes)
 
-    thresh = cm.max() / 2.
+    thresh = cm.max() / 2.0
     for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
-        plt.text(j, i, cm[i, j],
-                 horizontalalignment="center",
-                 color="white" if cm[i, j] > thresh else "black")
+        plt.text(
+            j,
+            i,
+            cm[i, j],
+            horizontalalignment="center",
+            color="white" if cm[i, j] > thresh else "black",
+        )
 
     plt.tight_layout()
-    plt.ylabel('True label')
-    plt.xlabel('Predicted label')
-
-
+    plt.ylabel("True label")
+    plt.xlabel("Predicted label")
 
 
 # 构建逻辑回归模型
-lr = LogisticRegression(C = 1, penalty = 'l1')
-lr.fit(X_train,y_train.values.ravel())
+lr = LogisticRegression(C=1, penalty="l1")
+lr.fit(X_train, y_train.values.ravel())
 y_pred = lr.predict(X_test.values)  # 預測.predict
 
 # Compute confusion matrix
-cnf_matrix = confusion_matrix(y_test,y_pred)
+cnf_matrix = confusion_matrix(y_test, y_pred)
 np.set_printoptions(precision=2)
 
-print("Recall metric in the testing dataset: ", cnf_matrix[1,1]/(cnf_matrix[1,0]+cnf_matrix[1,1]))
+print(
+    "Recall metric in the testing dataset: ",
+    cnf_matrix[1, 1] / (cnf_matrix[1, 0] + cnf_matrix[1, 1]),
+)
 
 # Plot non-normalized confusion matrix
-class_names = [0,1]
+class_names = [0, 1]
 plt.figure()
-plot_confusion_matrix(cnf_matrix
-                      , classes=class_names
-                      , title='Confusion matrix')
+plot_confusion_matrix(cnf_matrix, classes=class_names, title="Confusion matrix")
 show()
 
 
-
 ## 加入代价敏感参数，重新计算
-lr = LogisticRegression(C = 1, penalty = 'l1', class_weight='balanced')
-lr.fit(X_train,y_train.values.ravel())
+lr = LogisticRegression(C=1, penalty="l1", class_weight="balanced")
+lr.fit(X_train, y_train.values.ravel())
 y_pred = lr.predict(X_test.values)  # 預測.predict
 
 # Compute confusion matrix
-cnf_matrix = confusion_matrix(y_test,y_pred)
+cnf_matrix = confusion_matrix(y_test, y_pred)
 np.set_printoptions(precision=2)
 
-print("Recall metric in the testing dataset: ", cnf_matrix[1,1]/(cnf_matrix[1,0]+cnf_matrix[1,1]))
+print(
+    "Recall metric in the testing dataset: ",
+    cnf_matrix[1, 1] / (cnf_matrix[1, 0] + cnf_matrix[1, 1]),
+)
 
 # Plot non-normalized confusion matrix
-class_names = [0,1]
+class_names = [0, 1]
 plt.figure()
-plot_confusion_matrix(cnf_matrix
-                      , classes=class_names
-                      , title='Confusion matrix')
+plot_confusion_matrix(cnf_matrix, classes=class_names, title="Confusion matrix")
 show()
 
 # ### 检验模型
 
-fpr,tpr,threshold = roc_curve(y_test,y_pred, drop_intermediate=False) ###计算真正率和假正率  
-roc_auc = auc(fpr,tpr) ###计算auc的值  
-  
-plt.figure()  
-lw = 2  
-plt.figure(figsize=(10,10))  
-plt.plot(fpr, tpr, color='darkorange',  
-         lw=lw, label='ROC curve (area = %0.2f)' % roc_auc) ###假正率为横坐标，真正率为纵坐标做曲线  
-plt.plot([0, 1], [0, 1], color='navy', lw=lw, linestyle='--')  
-plt.xlim([0.0, 1.0])  
-plt.ylim([0.0, 1.05])  
-plt.xlabel('False Positive Rate')  
-plt.ylabel('True Positive Rate')  
-plt.title('Receiver operating characteristic example')  
-plt.legend(loc="lower right")  
+fpr, tpr, threshold = roc_curve(y_test, y_pred, drop_intermediate=False)  ###计算真正率和假正率
+roc_auc = auc(fpr, tpr)  ###计算auc的值
+
+plt.figure()
+lw = 2
+plt.figure(figsize=(10, 10))
+plt.plot(
+    fpr, tpr, color="darkorange", lw=lw, label="ROC curve (area = %0.2f)" % roc_auc
+)  ###假正率为横坐标，真正率为纵坐标做曲线
+plt.plot([0, 1], [0, 1], color="navy", lw=lw, linestyle="--")
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel("False Positive Rate")
+plt.ylabel("True Positive Rate")
+plt.title("Receiver operating characteristic example")
+plt.legend(loc="lower right")
 show()
 
 # 利用sklearn.metrics中的roc_curve算出tpr，fpr作图
 
 fig, ax = plt.subplots()
-ax.plot(1 - threshold, tpr, label='tpr') # ks曲线要按照预测概率降序排列，所以需要1-threshold镜像
-ax.plot(1 - threshold, fpr, label='fpr')
-ax.plot(1 - threshold, tpr-fpr,label='KS')
-plt.xlabel('score')
-plt.title('KS Curve')
-#plt.xticks(np.arange(0,1,0.2), np.arange(1,0,-0.2))
-#plt.xticks(np.arange(0,1,0.2), np.arange(score.max(),score.min(),-0.2*(data['反欺诈评分卡总分'].max() - data['反欺诈评分卡总分'].min())))
-plt.figure(figsize=(20,20))
-legend = ax.legend(loc='upper left', shadow=True, fontsize='x-large')
+ax.plot(1 - threshold, tpr, label="tpr")  # ks曲线要按照预测概率降序排列，所以需要1-threshold镜像
+ax.plot(1 - threshold, fpr, label="fpr")
+ax.plot(1 - threshold, tpr - fpr, label="KS")
+plt.xlabel("score")
+plt.title("KS Curve")
+# plt.xticks(np.arange(0,1,0.2), np.arange(1,0,-0.2))
+# plt.xticks(np.arange(0,1,0.2), np.arange(score.max(),score.min(),-0.2*(data['反欺诈评分卡总分'].max() - data['反欺诈评分卡总分'].min())))
+plt.figure(figsize=(20, 20))
+legend = ax.legend(loc="upper left", shadow=True, fontsize="x-large")
 
 show()
 
@@ -3874,4 +3871,3 @@ x1[0:20] = float("nan")
 x1[30:50] = float(0)
 x1[60:80] = float(1)
 x2[0:20] = float("nan")
-

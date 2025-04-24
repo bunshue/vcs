@@ -642,7 +642,7 @@ show()
 # Feature X
 Nb = 15
 No = 15
-  
+
 # Feature Y
 Nb = 15
 No = 15
@@ -1337,7 +1337,6 @@ def binaryzation_features(trainset):
     return features
 
 
-
 # 训练测试
 
 import cv2
@@ -1705,7 +1704,9 @@ class my_DecisionTreeClassifier(object):
         else:
             return cur_layer.get("val") if cur_layer is not None else None
 
+
 from sklearn import datasets
+
 wine = datasets.load_wine()
 
 feature_names = wine.feature_names
@@ -2827,19 +2828,15 @@ X_combined = np.vstack((x_train, x_test))
 y_combined = np.hstack((y_train, y_test))
 
 
-
 # Traning dataset
 
 X = np.random.sample(200)
 Y = np.array([x**2 + np.random.normal(0, 0.05) for x in X])
 
 
-
 clf = DecisionTreeClassifier(
     criterion="gini", max_depth=3, class_weight=None, random_state=1234
 )  # 支持计算Entropy和GINI
-
-
 
 
 clf = tree.DecisionTreeClassifier(criterion="entropy", max_depth=3, min_samples_split=5)
@@ -2856,4 +2853,3 @@ rfc = RandomForestClassifier(
 )
 print("random forest accuracy:")
 print(metrics.classification_report(test_target, test_est))
-

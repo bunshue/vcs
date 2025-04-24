@@ -1419,7 +1419,7 @@ sns.heatmap(
     xticklabels=True,
     yticklabels=True,
     square=True,
-    cmap="jet", # gray....
+    cmap="jet",  # gray....
 )
 show()
 

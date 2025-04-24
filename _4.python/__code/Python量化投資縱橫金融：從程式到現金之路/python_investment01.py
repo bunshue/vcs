@@ -32,66 +32,14 @@ from sklearn import metrics
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
 
-print("------------------------------------------------------------")  # 60個
 
-np.random.rand(3, 2)
+def show():
+    plt.show()
+    pass
 
-a = 2
-b = 4
-np.random.rand(3, 2) * (b - a) + a
-
-size = 1000
-rn1 = np.random.rand(size, 2)
-rn2 = np.random.randn(size)
-rn3 = np.random.randint(0, 10, size)
-rang = [0, 10, 20, 30, 40]
-rn4 = np.random.choice(rang, size = size)
-
-fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(nrows = 2, ncols = 2, figsize = (8, 8))
-ax1.hist(rn1, bins = 25, stacked = True)
-ax1.set_title('rand')
-ax1.set_ylabel('frequency')
-ax1.grid(True)
-ax2.hist(rn2, bins = 25)
-ax2.set_title('randn')
-ax2.grid(True)
-ax3.hist(rn3, bins = 25)
-ax3.set_title('randint')
-ax3.set_ylabel('frequency')
-ax3.grid(True)
-ax4.hist(rn4, bins = 25)
-ax4.set_title('choice')
-ax4.grid(True)
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-rn5 = np.random.binomial(100, 0.3, size)
-rn6 = np.random.normal(10, 20, size)
-rn7 = np.random.chisquare(0.5, size)
-rn8 = np.random.poisson(2.0, size)
-
-fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(nrows = 2, ncols = 2, figsize = (10, 10))
-ax1.hist(rn5, bins = 25)
-ax1.set_title('binomial')
-ax1.set_ylabel('frequency')
-ax1.grid(True)
-ax2.hist(rn6, bins = 25)
-ax2.set_title('normal')
-ax2.grid(True)
-ax3.hist(rn7, bins = 25)
-ax3.set_title('chisquare')
-ax3.set_ylabel('frequency')
-ax3.grid(True)
-ax4.hist(rn8, bins = 25)
-ax4.set_title('poisson')
-ax4.grid(True)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
+'''
 pd.set_option("display.max_rows",1000)
 pd.set_option("display.max_columns",20)
 #pd.set_option('precision',7)
@@ -142,7 +90,6 @@ print(cc)
 cc = a.rename(columns={'Unnamed: 0':'id'})
 print(cc)
 
-
 a=pd.read_csv('data/closeprice.csv',encoding='gbk')
 print(a)
 
@@ -151,7 +98,6 @@ print(cc)
 
 cc = a.iloc[:4,[1,4]]
 print(cc)
-
 
 cc = a[a.closePrice>10]
 print(cc)
@@ -198,10 +144,9 @@ print(cc)
 cc = df[['marketValue', 'industryName1']].groupby(df['ticker']).agg ({'marketValue':[t_range],  'industryName1':['count']}).head()
 print(cc)
 
-
 cc = df.groupby('ticker').apply(lambda x: x[:3]).head(6)
 print(cc)
-
+'''
 print("------------------------------------------------------------")  # 60個
 #3.3 Scipy的初步使用
 print("------------------------------------------------------------")  # 60個
@@ -216,7 +161,7 @@ print(cc)
 
 data.plot(figsize=(10, 6))
 plt.ylabel('涨跌幅')
-plt.show()
+show()
 
 import statsmodels.api as sm
 
@@ -236,7 +181,7 @@ plt.legend()
 plt.xlabel('沪深300')
 plt.ylabel('中国平安')
 plt.grid(True)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -285,28 +230,25 @@ ax2.set_ylabel('指数')
 ax2.set_title('三次样条插值')
 ax2.legend()
 
-plt.show()
+show()
 
 data2 = pd.read_csv('data/data2.csv', index_col='Date')
 data2.index = [dt.datetime.strptime(x, '%Y-%m-%d') for x in data2.index]
 cc = data2.head()
 print(cc)
 
-
-
 (data2 / data2.iloc[0]*100).plot(figsize=(10,6))
 plt.xlabel('股价')
 plt.legend(loc='upper left')
 plt.grid(True)
-plt.show()
+show()
 
 log_returns = np.log(data2.pct_change() + 1)
 cc = log_returns.head()
 print(cc)
 
-
 log_returns.hist(bins=50, figsize=(10,6), layout=(2, 3))
-plt.show()
+show()
 
 fig, axes = plt.subplots(3, 2, figsize=(10, 12))
 for i in range(0, 3):
@@ -318,7 +260,7 @@ for i in range(0, 3):
         axes[i, j].set_ylabel('样本分位数')
 plt.subplots_adjust(wspace=0.3, hspace=0.4)
 
-plt.show()
+show()
 
 cc = log_returns.mean()
 print(cc)
@@ -337,7 +279,7 @@ plt.xlabel('预期波动率')
 plt.ylabel('预期收益率')
 plt.colorbar(label='夏普率')
 
-plt.show()
+show()
 
 import scipy.optimize as sco
 
@@ -407,7 +349,7 @@ plt.ylabel('预期收益率')
 plt.colorbar(label='夏普率')
 plt.legend()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 #3.5 Seaborn的使用
@@ -422,12 +364,12 @@ def sinplot(flip=1):
 
 sinplot()
 
-plt.show()
+show()
 
 sns.set_style({"font.sans-serif":['Microsoft JhengHei', 'Microsoft JhengHei']})  #显示中文
 sinplot()
 
-plt.show()
+show()
 
 plt.figure(figsize=(12, 8))
 sns.set_context('paper')
@@ -447,7 +389,7 @@ plt.subplot(224)
 sinplot()
 plt.title('notebook')
 
-plt.show()
+show()
 
 plt.figure(figsize=(12, 8))
 sns.set_palette("muted")
@@ -467,7 +409,7 @@ plt.subplot(224)
 sinplot()
 plt.title('混合（红-蓝）')
 
-plt.show()
+show()
 
 size = 1000
 rn1 = np.random.standard_normal(size)
@@ -483,18 +425,18 @@ ax3.set_title('fig3')
 sns.histplot(rn1, bins=25, kde=True, rug=True, ax=ax4)
 ax4.set_title('fig4')
 
-plt.show()
+show()
 
 """ NG
 rn2 = pd.read_csv('data/data.csv', index_col='Date')
 sns.jointplot(rn2['沪深300'], rn2['中国平安'], size=8)
-plt.show()
+show()
 
 sns.lmplot('沪深300', '中国平安', data = rn2, size=8)
-plt.show()
+show()
 
 sns.jointplot(rn2['沪深300'], rn2['中国平安'], kind='reg', size=8)
-plt.show()
+show()
 """
 
 rn3 = pd.read_csv('data/data2.csv', index_col='Date')  #读取数据
@@ -509,11 +451,11 @@ print(rn3_group)
 plt.figure(figsize=(10, 8))
 sns.heatmap(rn3_group, annot=True,  linewidths=.5)
 
-plt.show()
+show()
 
 sns.pairplot(rn3_rets.dropna())
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

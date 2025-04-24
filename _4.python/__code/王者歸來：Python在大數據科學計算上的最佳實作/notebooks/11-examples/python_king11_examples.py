@@ -33,7 +33,7 @@ from scipy import optimize
 from scipy import signal
 
 def show():
-    #plt.show()
+    plt.show()
     pass
 
 # 各種長度的懸鏈線
@@ -41,7 +41,7 @@ def catenary(x, a):
     return a * np.cosh((x - 0.5) / a) - a * np.cosh((-0.5) / a)
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 使用泊松混合合成圖形
 # 泊松混合算法
 
@@ -56,32 +56,32 @@ mask = cv2.imread("vinci_mask.png", 0)
 
 src_mask = (mask > 128).astype(np.uint8)
 
-src_y, src_x = np.where(src_mask)  # ❶
+src_y, src_x = np.where(src_mask)
 
-src_laplacian = cv2.Laplacian(src, cv2.CV_16S, ksize=1)[src_y, src_x, :]  # ❷
+src_laplacian = cv2.Laplacian(src, cv2.CV_16S, ksize=1)[src_y, src_x, :]
 
 dst_mask = np.zeros(dst.shape[:2], np.uint8)
 dst_x, dst_y = src_x + offset_x, src_y + offset_y
-dst_mask[dst_y, dst_x] = 1  # ❶
+dst_mask[dst_y, dst_x] = 1
 
 kernel = np.array([[0, 1, 0], [1, 1, 1], [0, 1, 0]], dtype=np.uint8)
-dst_mask2 = cv2.dilate(dst_mask, kernel=kernel)  # ❷
+dst_mask2 = cv2.dilate(dst_mask, kernel=kernel)
 
-dst_y2, dst_x2 = np.where(dst_mask2)  # ❸
-dst_ye, dst_xe = np.where(dst_mask2 - dst_mask)  # ❹
+dst_y2, dst_x2 = np.where(dst_mask2)
+dst_ye, dst_xe = np.where(dst_mask2 - dst_mask)
 
 variable_count = len(dst_x2)
-variable_index = np.arange(variable_count)  # ❶
+variable_index = np.arange(variable_count)
 
 variables = np.zeros(dst.shape[:2], np.int)
 variables[dst_y2, dst_x2] = variable_index
 
-x0 = variables[dst_y, dst_x]  # ❷
+x0 = variables[dst_y, dst_x]
 x1 = variables[dst_y - 1, dst_x]
 x2 = variables[dst_y + 1, dst_x]
 x3 = variables[dst_y, dst_x - 1]
 x4 = variables[dst_y, dst_x + 1]
-x_edge = variables[dst_ye, dst_xe]  # ❸
+x_edge = variables[dst_ye, dst_xe]
 
 from scipy.sparse import coo_matrix
 
@@ -97,15 +97,15 @@ A = coo_matrix((v, (r, c))).tocsc()
 
 from scipy.sparse.linalg import spsolve
 
-order = np.argsort(np.r_[variables[dst_y, dst_x], variables[dst_ye, dst_xe]])  # ❶
+order = np.argsort(np.r_[variables[dst_y, dst_x], variables[dst_ye, dst_xe]])
 
 result = dst.copy()
 
-for ch in (0, 1, 2):  # ❷
-    b = np.r_[src_laplacian[:, ch], dst[dst_ye, dst_xe, ch]]  # ❸
-    u = spsolve(A, b[order])  # ❹
+for ch in (0, 1, 2):
+    b = np.r_[src_laplacian[:, ch], dst[dst_ye, dst_xe, ch]]
+    u = spsolve(A, b[order])
     u = np.clip(u, 0, 255)
-    result[dst_y2, dst_x2, ch] = u  # ❺
+    result[dst_y2, dst_x2, ch] = u
 
 # 使用泊松混合算法將吉內薇拉·班琪肖像中的眼睛和鼻子部分複製到蒙娜麗莎的肖像之上
 fig, axes = plt.subplots(1, 4, figsize=(10, 4))
@@ -134,8 +134,6 @@ from scipy import optimize
 # 經典力學類比
 # 懸鏈線
 
-
-
 x = np.linspace(0, 1, 100)
 for a in [0.35, 0.5, 0.8]:
     pl.plot(x, catenary(x, a), label="$a={:g}$".format(a))
@@ -153,10 +151,6 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-'''
-
-
-'''
 from sympy import symbols, cosh, S, sqrt, lambdify
 
 x, a = symbols("x, a")
@@ -271,11 +265,11 @@ def P(theta):
 
 
 theta0 = np.arccos(1.0 / length)
-theta_init = [-theta0] * (N // 2) + [theta0] * (N // 2)  # ❶
+theta_init = [-theta0] * (N // 2) + [theta0] * (N // 2)
 
 theta = optimize.fmin_slsqp(
-    P, theta_init, eqcons=[g1, g2], bounds=[(-np.pi / 2, np.pi / 2)] * N  # ❷
-)  # ❸
+    P, theta_init, eqcons=[g1, g2], bounds=[(-np.pi / 2, np.pi / 2)] * N
+)
 
 # 使用fmin_slsqp()計算能量最低的狀態，叉點表示最佳化的起始狀態
 x_init = np.r_[0, np.cumsum(l * np.cos(theta_init))]
@@ -291,10 +285,10 @@ pl.plot(x_init, y_init, "x")
 pl.margins(0.1)
 
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 最速降線
 
 x, _ = integrate.quad(lambda y: np.sqrt(y / (1.0 - y)), 0, 1)
@@ -308,8 +302,8 @@ def brachistochrone_curve(D, N=1000):
     eps = 1e-8
 
     def f(y, x):
-        y = min(max(eps, y), D)  # ❶
-        flag = -1 if x >= D * np.pi / 2 else 1  # ❷
+        y = min(max(eps, y), D)
+        flag = -1 if x >= D * np.pi / 2 else 1
         return flag * ((D - y) / y) ** 0.5
 
     x0 = np.linspace(0, D * np.pi, N)
@@ -336,9 +330,9 @@ g = 9.8
 
 
 def total_time(y):
-    s = np.hypot(np.diff(x), np.diff(y))  # ❶
-    v = np.sqrt(2 * g * np.abs(y))  # ❷
-    avg_v = np.maximum((v[1:] + v[:-1]) * 0.5, 1e-10)  # ❸
+    s = np.hypot(np.diff(x), np.diff(y))
+    v = np.sqrt(2 * g * np.abs(y))
+    avg_v = np.maximum((v[1:] + v[:-1]) * 0.5, 1e-10)
     t = s / avg_v
     return t.sum()
 
@@ -349,7 +343,7 @@ def fix_two_ends(y):
 
 from scipy import optimize
 
-y_opt = optimize.fmin_slsqp(total_time, y0, eqcons=[fix_two_ends])  # ❹
+y_opt = optimize.fmin_slsqp(total_time, y0, eqcons=[fix_two_ends])
 pl.plot(x, y0, "k--", label="初值")
 pl.plot(x, y_opt, label="改善結果")
 x2, y2 = brachistochrone_curve(target / np.pi)
@@ -357,10 +351,10 @@ pl.plot(x2, -y2, label="最速降線")
 pl.legend(loc="best")
 
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 單擺類比
 
 # 起始角度為1弧度的單擺擺動角度和時間的關系
@@ -442,10 +436,10 @@ pl.xlabel("起始擺角(弧度)")
 pl.ylabel("擺動周期(秒)")
 
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 import cython
 
 # 推薦算法
@@ -548,14 +542,14 @@ import gc
 def uv_decompose(arrays, loop_count, k, maxiter, mu, damp):
     u_train, v_train, r_train, u_test, v_test, r_test = arrays
 
-    U = np.random.rand(nu, k) * 0.1 / k**0.5  # ❶
+    U = np.random.rand(nu, k) * 0.1 / k**0.5
     V = np.random.rand(nv, k) * 0.1 / k**0.5
 
     idxv_col = (u_train[:, None] * k + np.arange(k)).ravel()
     idx_row = np.repeat(np.arange(nr), k)
     Av = sparse.coo_matrix(
         (V[v_train].ravel(), (idx_row, idxv_col)), shape=(nr, nu * k)
-    ).tocsr()  # ❷
+    ).tocsr()
 
     idxu_col = (v_train[:, None] * k + np.arange(k)).ravel()
     Au = sparse.coo_matrix(
@@ -567,19 +561,19 @@ def uv_decompose(arrays, loop_count, k, maxiter, mu, damp):
     rmse_list = []
 
     for i in range(loop_count):
-        U.ravel()[:] = linalg.lsmr(Av, r_train, maxiter=maxiter, damp=damp)[0]  # ❸
-        Au.data[:] = Au.data[:] * (1 - mu) + U[u_train].ravel() * mu  # ❹
+        U.ravel()[:] = linalg.lsmr(Av, r_train, maxiter=maxiter, damp=damp)[0]
+        Au.data[:] = Au.data[:] * (1 - mu) + U[u_train].ravel() * mu
 
         V.ravel()[:] = linalg.lsmr(Au, r_train, maxiter=maxiter, damp=damp)[0]
         Av.data[:] = Av.data[:] * (1 - mu) + V[v_train].ravel() * mu
 
-        r_pred = U.dot(V.T)[u_test, v_test]  # ❺
+        r_pred = U.dot(V.T)[u_test, v_test]
         rmse = rmse_score(r_test, r_pred)
         rmse_list.append(rmse)
         if rmse < best_rmse:
             best_rmse = rmse
             best_U, best_V = U.copy(), V.copy()
-        gc.collect()  # ❻
+        gc.collect()
 
     return best_U, best_V, best_rmse, rmse_list
 
@@ -710,7 +704,7 @@ for i in range(int(len(x) / N)):
     # 將卷冊積的結果加入到緩沖中
     buffer += yslice
     # 輸出快取中的前N個資料，注意使用copy，否則輸出的是buffer的一個檢視
-    output.append(buffer[:N].copy())  # ❶
+    output.append(buffer[:N].copy())
     # 快取中的資料左搬移N個元素
     buffer[0:-N] = buffer[N:]
     # 後面的補0
@@ -731,19 +725,19 @@ print("------------------------------------------------------------")  # 60個
 from sympy import symbols
 from sympy.logic.boolalg import to_cnf
 
-A, B, C, D = symbols("A:D")  # ❶
+A, B, C, D = symbols("A:D")
 S1 = ~A
 S2 = D
 S3 = B
 S4 = ~D
 dnf = (
     (S1 & ~S2 & ~S3 & ~S4)
-    | (~S1 & S2 & ~S3 & ~S4)  # ❷
+    | (~S1 & S2 & ~S3 & ~S4)
     | (~S1 & ~S2 & S3 & ~S4)
     | (~S1 & ~S2 & ~S3 & S4)
 )
 
-cnf = to_cnf(dnf)  # ❸
+cnf = to_cnf(dnf)
 # %sympy_latex cnf
 
 from sympy.logic.inference import satisfiable
@@ -761,12 +755,12 @@ from itertools import combinations
 def get_conditions(bools):
     conditions = []
     n = bools.shape[-1]
-    index = np.array(list(combinations(range(n), 2)))  # ❶
+    index = np.array(list(combinations(range(n), 2)))
     # 以最後一軸為群組
     # 第一個條件: 每群組只能有一個為真
-    conditions.extend(bools.reshape(-1, n).tolist())  # ❷
+    conditions.extend(bools.reshape(-1, n).tolist())
     # 第二個條件: 每群組中沒有兩個同時為真
-    conditions.extend((-bools[..., index].reshape(-1, 2)).tolist())  # ❸
+    conditions.extend((-bools[..., index].reshape(-1, 2)).tolist())
     return conditions
 
 
@@ -783,8 +777,8 @@ conditions = c1 + c2 + c3 + c4
 
 
 def format_solution(solution):
-    solution = np.array(solution).reshape(9, 9, 9)  # ❶
-    return (np.where(solution == 1)[2] + 1).reshape(9, 9)  # ❷
+    solution = np.array(solution).reshape(9, 9, 9)
+    return (np.where(solution == 1)[2] + 1).reshape(9, 9)
 
 
 sudoku_str = """
@@ -802,7 +796,7 @@ sudoku = np.array([[int(x) for x in line] for line in sudoku_str.strip().split()
 r, c = np.where(sudoku != 0)
 v = sudoku[r, c] - 1
 
-conditions2 = [[x] for x in bools[r, c, v]]  # ❶
+conditions2 = [[x] for x in bools[r, c, v]]
 print("conditions2:")
 print(conditions2)
 
@@ -816,13 +810,13 @@ import cv2
 X0, Y0, SIZE, COLS, ROWS = 30, 30, 18, 30, 16
 SHAPE = ROWS, SIZE, COLS, SIZE, -1
 
-mine_area = np.s_[Y0 : Y0 + SIZE * ROWS, X0 : X0 + SIZE * COLS, :]  # ❶
+mine_area = np.s_[Y0 : Y0 + SIZE * ROWS, X0 : X0 + SIZE * COLS, :]
 
 img_init = cv2.imread("mine_init.png")[mine_area]
 
 img_mine = cv2.imread("mine01.png")[mine_area]
 
-img_numbers = cv2.imread("mine_numbers.png")  # ❷
+img_numbers = cv2.imread("mine_numbers.png")
 
 img_numbers.shape
 
@@ -923,9 +917,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
 
-'''
 # 分形
 # Mandelbrot集合
 # 純Python實現
@@ -934,7 +926,7 @@ print("------------------------------------------------------------")  # 60個
 from matplotlib import cm
 
 
-def iter_point(c):  # ❶
+def iter_point(c):
     z = c
     for i in range(1, 100):  # 最多迭代100次
         if abs(z) > 2:
@@ -946,15 +938,15 @@ def iter_point(c):  # ❶
 def mandelbrot(cx, cy, d, n=200):
     x0, x1, y0, y1 = cx - d, cx + d, cy - d, cy + d
     y, x = np.ogrid[y0 : y1 : n * 1j, x0 : x1 : n * 1j]
-    c = x + y * 1j  # ❸
-    return np.frompyfunc(iter_point, 1, 1)(c).astype(np.float)  # ❹
+    c = x + y * 1j
+    return np.frompyfunc(iter_point, 1, 1)(c).astype(np.float)
 
 
-def draw_mandelbrot(cx, cy, d, n=200):  # ❷
+def draw_mandelbrot(cx, cy, d, n=200):
     """
     繪制點(cx, cy)附近正負d的範圍的Mandelbrot
     """
-    pl.imshow(mandelbrot(cx, cy, d, n), cmap=cm.Blues_r)  # ❺
+    pl.imshow(mandelbrot(cx, cy, d, n), cmap=cm.Blues_r)
     pl.gca().set_axis_off()
 
 
@@ -984,10 +976,10 @@ Mandelbrot示範程式
     使用TraitsUI和matplotlib實時繪制Mandelbrot圖形，
     按住滑鼠左鍵進行平移，使用滑鼠滾軸進行縮放。
 """
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 def ifs(p, eq, init, n):
     """
     進行函數迭代
@@ -1000,13 +992,13 @@ def ifs(p, eq, init, n):
     """
 
     # 迭代向量的起始化
-    pos = np.ones(3, dtype=np.float)  # ❶
+    pos = np.ones(3, dtype=np.float)
     pos[:2] = init
 
     # 透過函數機率，計算函數的選取序列
     p = np.cumsum(p)
     rands = np.random.rand(n)
-    select = np.searchsorted(p, rands)  # ❷
+    select = np.searchsorted(p, rands)
 
     # 結果的起始化
     result = np.zeros((n, 2), dtype=np.float)
@@ -1033,10 +1025,10 @@ for ax in axes:
     ax.axis("off")
 pl.subplots_adjust(left=0, right=1, bottom=0, top=1, wspace=0, hspace=0)
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 2D仿射變換
 # 迭代函數系統設計器
 """
@@ -1088,7 +1080,7 @@ def triangle_area(triangle):
 # from scpy2.examples.fractal.fastfractal import IFS
 
 triangles = np.array(
-    [  # ❶
+    [
         [-1.945392491467576, -5.331010452961673],
         [6.109215017064848, -0.8710801393728236],
         [-1.1945392491467572, 5.400696864111497],
@@ -1105,12 +1097,12 @@ base_triangle = triangles[:3]
 triangle1 = triangles[3:6]
 triangle2 = triangles[6:]
 
-area1 = triangle_area(triangle1)  # ❷
+area1 = triangle_area(triangle1)
 area2 = triangle_area(triangle2)
 total_area = area1 + area2
 p = [area1 / total_area, area2 / total_area]
 
-eq1 = solve_eq(base_triangle, triangle1)  # ❸
+eq1 = solve_eq(base_triangle, triangle1)
 eq2 = solve_eq(base_triangle, triangle2)
 eqs = np.vstack([eq1, eq2])
 
@@ -1123,10 +1115,10 @@ ax.axis("off")
 # shape of counts: (600, 477)
 
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # L-System分形
 
 rules = [
@@ -1225,9 +1217,9 @@ def draw(ax, rule, iter=None):
 
     if iter != None:
         rule["iter"] = iter
-    lines = L_System(rule).get_lines()  # ❶
-    linecollections = collections.LineCollection(lines, lw=0.7, color="black")  # ❷
-    ax.add_collection(linecollections, autolim=True)  # ❸
+    lines = L_System(rule).get_lines()
+    linecollections = collections.LineCollection(lines, lw=0.7, color="black")
+    ax.add_collection(linecollections, autolim=True)
     ax.axis("equal")
     ax.set_axis_off()
     ax.set_xlim(ax.dataLim.xmin, ax.dataLim.xmax)
@@ -1246,10 +1238,10 @@ for i in range(6):
 fig.subplots_adjust(left=0, right=1, bottom=0, top=1, wspace=0, hspace=0)
 
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 分形山脈
 # 一維中點移位法
 
@@ -1259,33 +1251,31 @@ def hill1d(n, d):
     """
     繪制山脈曲線，2**n+1為曲線在X軸上的長度，d為衰減系數
     """
-    a = np.zeros(2**n + 1)  # ❶
+    a = np.zeros(2**n + 1)
     scale = 1.0
-    for i in range(n, 0, -1):  # ❷
-        s = 2 ** (i - 1)  # ❸
+    for i in range(n, 0, -1):
+        s = 2 ** (i - 1)
         s2 = 2 * s
         tmp = a[::s2]
-        a[s::s2] += (tmp[:-1] + tmp[1:]) * 0.5  # ❹
-        a[s::s2] += np.random.normal(size=len(tmp) - 1, scale=scale)  # ❺
-        scale *= d  # ❻
+        a[s::s2] += (tmp[:-1] + tmp[1:]) * 0.5
+        a[s::s2] += np.random.normal(size=len(tmp) - 1, scale=scale)
+        scale *= d
     return a
 
 
 pl.figure(figsize=(8, 4))
 for i, d in enumerate([0.4, 0.5, 0.6]):
-    np.random.seed(8)  # ❼
+    np.random.seed(8)
     a = hill1d(9, d)
     pl.plot(a, label="d=%s" % d, linewidth=3 - i)
 pl.xlim(0, len(a))
 pl.legend()
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-'''
-# 二維中點移位法
-# 二維中點移位法計算山脈曲面
+# 二維中點移位法 計算山脈曲面
 def hill2d(n, d):
     """
     繪制山脈曲面，曲面是一個(2**n + 1)*(2**n + 1)的圖形，
@@ -1318,8 +1308,8 @@ from scipy.ndimage.filters import convolve
 
 np.random.seed(42)
 a = hill2d(8, 0.5)
-a /= np.ptp(a) / (0.5 * 2**8)  # ❶
-a = convolve(a, np.ones((3, 3)) / 9)  # ❷
+a /= np.ptp(a) / (0.5 * 2**8)
+a = convolve(a, np.ones((3, 3)) / 9)
 
 mlab.options.offscreen = True
 scene = mlab.figure(size=(800, 600))
@@ -1327,12 +1317,13 @@ scene.scene.background = 1, 1, 1
 mlab.surf(a)
 # img = vtk_scene_to_array(scene.scene)
 # %array_image img
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from mayavi import mlab
 from scipy.ndimage.filters import convolve
+
 # 菱形方形算法
 
 
@@ -1426,5 +1417,3 @@ with open(filename, "r", encoding='UTF-8-sig') as f:
 
 """
 
-
-# from matplotlib import pyplot as plt
