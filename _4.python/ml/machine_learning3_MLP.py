@@ -36,6 +36,7 @@ from sklearn.preprocessing import StandardScaler
 from tensorflow.keras.callbacks import TensorBoard
 from tensorflow.keras.models import model_from_json
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix  # 混淆矩陣
 from time import time
 
 
@@ -43,6 +44,35 @@ def show():
     plt.show()
     pass
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("使用 MLPClassifier")
+
+from sklearn.neural_network import MLPClassifier  # 多層感知器分類器 函數學習機
+
+data = pd.read_excel("data/loan.xlsx")
+target = data["Type"]
+data.drop("Type", axis="columns", inplace=True)
+
+# 資料分割
+train_data, test_data, train_target, test_target = train_test_split(
+    data, target, test_size=0.2
+)
+
+clf_4 = MLPClassifier()  # 多層感知器分類器 函數學習機
+
+clf_4.fit(train_data, train_target)
+
+train_est = clf_4.predict(train_data)
+test_est = clf_4.predict(test_data)
+
+print(accuracy_score(test_target, test_est))
+
+# 混淆矩陣
+cm = confusion_matrix(test_target, test_est)
+print("混淆矩陣 :\n", cm, sep="")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

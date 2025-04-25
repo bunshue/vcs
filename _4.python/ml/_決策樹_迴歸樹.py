@@ -67,7 +67,6 @@ from sklearn.metrics import recall_score
 import sklearn.model_selection as cross_validation
 import sklearn.metrics as metrics
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2010,25 +2009,6 @@ clf_3 = GaussianNB()
 clf_3.fit(train_data, train_target)
 train_est = clf_3.predict(train_data)
 test_est = clf_3.predict(test_data)
-
-print(accuracy_score(test_target, test_est))
-
-# 混淆矩陣
-cm = confusion_matrix(test_target, test_est)
-print("混淆矩陣 :\n", cm, sep="")
-
-print("------------------------------")  # 30個
-
-print("使用 MLPClassifier")
-
-from sklearn.neural_network import MLPClassifier  # 多層感知器分類器 函數學習機
-
-clf_4 = MLPClassifier()  # 多層感知器分類器 函數學習機
-
-clf_4.fit(train_data, train_target)
-
-train_est = clf_4.predict(train_data)
-test_est = clf_4.predict(test_data)
 
 print(accuracy_score(test_target, test_est))
 

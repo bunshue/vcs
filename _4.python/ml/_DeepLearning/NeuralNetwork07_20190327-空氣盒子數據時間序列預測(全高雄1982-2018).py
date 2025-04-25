@@ -98,7 +98,9 @@ print("------------------------------------------------------------")  # 60個
 
 from sklearn.preprocessing import MinMaxScaler  # MMS特徵縮放
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, LSTM
+from keras.layers import Dense
+from keras.layers import Dropout
+from keras.layers import LSTM
 
 # creating dataframe
 data = df.sort_index(ascending=True, axis=0)
@@ -153,7 +155,6 @@ X_test = np.array(X_test)
 X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
 PM25 = model.predict(X_test)
 PM25 = scaler.inverse_transform(PM25)
-
 
 train = new_data[:2825]
 valid = new_data[2825:]

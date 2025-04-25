@@ -2691,14 +2691,14 @@ y_test = to_categorical(y_test, num_classes=10)
 # build RNN model
 model = Sequential()  # 建立空白的神經網路模型(CNN)
 
-#建立SimpleRNN層
-model.add(SimpleRNN(input_shape=(28,28),units=256,unroll=True))
+# 建立SimpleRNN層
+model.add(SimpleRNN(input_shape=(28, 28), units=256, unroll=True))
 
-#建立拋棄層
-model.add(Dropout(0,1))
+# 建立拋棄層
+model.add(Dropout(0, 1))
 
-#建立輸出層
-model.add(Dense(units=10,kernel_initializer='normal',activation='softmax'))
+# 建立輸出層
+model.add(Dense(units=10, kernel_initializer="normal", activation="softmax"))
 
 """
         batch_input_shape=(
@@ -3357,4 +3357,3 @@ plt.imshow(image, "gray")
 # 第1層 用 16 個神經元, 使用參數 160 個
 # 3*3 (權重) + 1 (bias)
 # (3*3+1)*16 = 160
-
