@@ -1,5 +1,6 @@
 """
-machine_learning_python01
+
+
 
 """
 
@@ -33,18 +34,19 @@ from sklearn import datasets
 from sklearn.datasets import make_blobs  # 集群資料集
 from sklearn.datasets import make_moons
 from sklearn.datasets import make_circles
+from sklearn.datasets import make_regression
+from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn import metrics
 from sklearn.decomposition import PCA
 from sklearn.decomposition import KernelPCA  # KernelPCA 萃取特徵
-
 from matplotlib.colors import ListedColormap
 from sklearn.preprocessing import MinMaxScaler
 from sklearn import tree
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
@@ -83,7 +85,6 @@ show()
 
 # Load scikit-learn libraries
 
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LassoCV
 from sklearn.linear_model import RidgeCV
@@ -166,7 +167,7 @@ def func_fit(model_type,test_size,degree):
     plt.legend(['Actual training values','Fitted values'])
     plt.text(x=posx_train,y=posy_train,s='Training score: %.3f'%(train_score),fontsize=15)
     
-    plt.show()
+    show()
        
     return (train_score,test_score)    
 
@@ -182,9 +183,6 @@ func_fit(model_type,test_size,degree)
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from sklearn.datasets import make_classification
-from sklearn.datasets import make_blobs
 
 n_features = 8
 n_cluster = 5
@@ -293,7 +291,7 @@ print("------------------------------")  # 30個
 plt.scatter(x=[i for i in range(2, 12)], y=vmeasure_score, s=150, edgecolor="k")
 plt.grid(True)
 plt.xlabel("V-measure score")
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -308,7 +306,7 @@ for i in range(1, 29):
     plt.xlabel(f"{dim1}", fontsize=13)
     plt.ylabel(f"{dim2}", fontsize=13)
 
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -335,11 +333,11 @@ for i in range(2, 12):
 plt.scatter(x=[i for i in range(2, 12)], y=gm_bic, s=150, edgecolor="k")
 plt.grid(True)
 plt.xlabel("Gaussian mixture BIC score")
-plt.show()
+show()
 
 
 plt.scatter(x=[i for i in range(2, 12)], y=gm_score, s=150, edgecolor="k")
-plt.show()
+show()
 
 
 print("------------------------------")  # 30個
@@ -385,7 +383,7 @@ for i in range(1, 29):
     plt.scatter(df1[dim1], df1[dim2], c=preds_gm, edgecolor="k")
     plt.xlabel(f"{dim1}", fontsize=13)
     plt.ylabel(f"{dim2}", fontsize=13)
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -411,7 +409,7 @@ plt.bar(x=["PrComp" + str(i) for i in range(1, 9)], height=cum_explaiend_var, wi
 plt.xticks(fontsize=14)
 plt.hlines(y=0.8, xmin="PrComp1", xmax="PrComp8", linestyles="dashed", lw=3)
 plt.text(x="PrComp1", y=0.82, s="80% variance explained", fontsize=15)
-plt.show()
+show()
 
 print("------------------------------")  # 30個
 
@@ -441,12 +439,12 @@ for i in range(2, 12):
 plt.scatter(x=[i for i in range(2, 12)], y=km_scores, s=150, edgecolor="k")
 plt.grid(True)
 plt.xlabel("K-means scores")
-plt.show()
+show()
 
 plt.scatter(x=[i for i in range(2, 12)], y=vmeasure_score, s=150, edgecolor="k")
 plt.grid(True)
 plt.xlabel("V-measures scores")
-plt.show()
+show()
 
 # K-means fitting with PCA-transformed data
 km_pca = KMeans(n_clusters=5, n_init=10, max_iter=500).fit(X=X_pca)
@@ -500,10 +498,10 @@ for i in range(2, 12):
     print("-" * 100)
 
 plt.scatter(x=[i for i in range(2, 12)], y=km_scores)
-plt.show()
+show()
 
 plt.scatter(x=[i for i in range(2, 12)], y=vmeasure_score)
-plt.show()
+show()
 
 # K-means fitting with ICA-transformed data
 km_ica = KMeans(n_clusters=5, n_init=10, max_iter=500).fit(X=X_ica)
@@ -553,10 +551,10 @@ for i in range(2, 12):
     print("-" * 100)
 
 plt.scatter(x=[i for i in range(2, 12)], y=km_scores)
-plt.show()
+show()
 
 plt.scatter(x=[i for i in range(2, 12)], y=vmeasure_score)
-plt.show()
+show()
 
 # K-means fitting with random-projected data
 
@@ -581,7 +579,7 @@ for i in range(1, num_random_proj_combi + 1):
     )
     plt.xlabel(f"{dim1}", fontsize=13)
     plt.ylabel(f"{dim2}", fontsize=13)
-plt.show()
+show()
 
 
 def plot_cluster_rp(df_rp, preds_rp):
@@ -596,7 +594,7 @@ def plot_cluster_rp(df_rp, preds_rp):
         plt.scatter(df_rp[dim1], df_rp[dim2], c=preds_rp, edgecolor="k")
         plt.xlabel(f"{dim1}", fontsize=13)
         plt.ylabel(f"{dim2}", fontsize=13)
-    plt.show()
+    show()
 
 
 # Running the random projections many times
@@ -630,13 +628,13 @@ for i in range(20):
 
 
 plt.scatter(x=[i for i in range(20)], y=rp_score)
-plt.show()
+show()
 
 plt.scatter(x=[i for i in range(20)], y=rp_silhouette)
-plt.show()
+show()
 
 plt.scatter(x=[i for i in range(20)], y=rp_vmeasure)
-plt.show()
+show()
 
 # This kind of variation does not happen with PCA
 pca_score = []
@@ -1397,11 +1395,11 @@ def make_NN_model(
     model.add(Dense(1, activation="sigmoid"))
 
     if optimizer == "SGD":
-        optimizer = keras.optimizers.SGD(lr=learning_rate)
+        optimizer = keras.optimizers.SGD()  # lr=learning_rate)
     if optimizer == "Adam":
-        optimizer = keras.optimizers.Adam(lr=learning_rate)
+        optimizer = keras.optimizers.Adam()  # lr=learning_rate)
     if optimizer == "RMSprop":
-        optimizer = keras.optimizers.RMSprop(lr=learning_rate)
+        optimizer = keras.optimizers.RMSprop()  # lr=learning_rate)
 
     model.compile(loss="binary_crossentropy", optimizer=optimizer, metrics=["accuracy"])
 
@@ -3115,9 +3113,6 @@ print("------------------------------------------------------------")  # 60個
 
 # Clustering metrics - alternatives to the elbow method
 
-from sklearn.datasets import make_classification
-from sklearn.datasets import make_blobs
-
 n_features = 4
 n_cluster = 5
 cluster_std = 1.2
@@ -3165,7 +3160,7 @@ for i, c in enumerate(df1.columns):
     plt.yticks()
     plt.xlabel("Class")
     plt.ylabel(c)
-    # plt.show()
+    # show()
 show()
 
 # k-means clustering
@@ -3224,11 +3219,11 @@ plt.xlabel("Number of clusters")
 plt.ylabel("K-means score")
 plt.xticks([i for i in range(2, 12)])
 plt.yticks()
-plt.show()
+show()
 
 plt.scatter(x=[i for i in range(2, 12)], y=vmeasure_score, s=150, edgecolor="k")
 plt.xlabel("V-measure score")
-plt.show()
+show()
 
 plt.figure(figsize=(7, 4))
 plt.title("The silhouette coefficient method \nfor determining number of clusters")
@@ -3237,11 +3232,11 @@ plt.xlabel("Number of clusters")
 plt.ylabel("Silhouette score")
 plt.xticks([i for i in range(2, 12)])
 plt.yticks()
-plt.show()
+show()
 
 plt.scatter(x=[i for i in range(2, 12)], y=db_score, s=150, edgecolor="k")
 plt.xlabel("Davies-Bouldin score")
-plt.show()
+show()
 
 # Expectation-maximization (Gaussian Mixture Model)
 
@@ -3270,10 +3265,10 @@ plt.xlabel("Number of clusters")
 plt.ylabel("Log of Gaussian mixture BIC score")
 plt.xticks([i for i in range(2, 12)])
 plt.yticks()
-plt.show()
+show()
 
 plt.scatter(x=[i for i in range(2, 12)], y=gm_score, s=150, edgecolor="k")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3295,13 +3290,13 @@ plt.figure(figsize=(8, 5))
 plt.title("Annual income distribution")
 plt.xlabel("Annual income (k$)")
 plt.hist(df["Annual Income (k$)"], color="orange", edgecolor="k")
-plt.show()
+show()
 
 plt.figure(figsize=(8, 5))
 plt.title("Spending Score distribution")
 plt.xlabel("Spending Score (1-100)")
 plt.hist(df["Spending Score (1-100)"], color="green", edgecolor="k")
-plt.show()
+show()
 
 # So, is there a definitive correlation between annual income and spending score? - Apparently not
 
@@ -3317,7 +3312,7 @@ plt.scatter(
     alpha=0.6,
     s=100,
 )
-plt.show()
+show()
 
 # How about correlation between age and spending score? - Apparently not
 
@@ -3333,7 +3328,7 @@ plt.scatter(
     alpha=0.6,
     s=100,
 )
-plt.show()
+show()
 
 # Strategy
 
@@ -3350,7 +3345,7 @@ plt.title("Dendrogram")
 plt.xlabel("Customers")
 plt.ylabel("Euclidean distances")
 dendrogram = sch.dendrogram(sch.linkage(X, method="ward"))
-plt.show()
+show()
 
 # Optimal number of clusters
 
@@ -3361,7 +3356,7 @@ plt.ylabel("Euclidean distances")
 plt.hlines(y=190, xmin=0, xmax=2000, lw=3, linestyles="--")
 plt.text(x=900, y=220, s="Horizontal line crossing 5 vertical lines")
 dendrogram = sch.dendrogram(sch.linkage(X, method="ward"))
-plt.show()
+show()
 
 # Hierarchical Clustering
 
@@ -3383,7 +3378,7 @@ plt.xlabel("Annual Income (k$)")
 plt.ylabel("Spending Score (1-100)")
 plt.legend()
 plt.axhspan(ymin=60, ymax=100, xmin=0.4, xmax=0.96, alpha=0.3, color="yellow")
-plt.show()
+show()
 
 # Verifying the optimal number of clusters by k-means algorithm
 
@@ -3410,7 +3405,2099 @@ with plt.style.context(("fivethirtyeight")):
         fontsize=25,
         fontdict={"family": "Times New Roman"},
     )
-    plt.show()
+    show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# machine_learning_Synthetic-Data-Generation1
+
+# Synthetic Data Generation
+
+# Regression problem generation
+
+data1 = make_regression(
+    n_samples=20,
+    n_features=4,
+    n_informative=2,
+    n_targets=1,
+    bias=0.0,
+    effective_rank=None,
+    tail_strength=0.5,
+    noise=0.0,
+    shuffle=True,
+    coef=False,
+    random_state=None,
+)
+df1 = pd.DataFrame(data1[0], columns=["x" + str(i) for i in range(1, 5)])
+df1["y"] = data1[1]
+
+df1.head()
+
+plt.figure(figsize=(15, 10))
+for i in range(1, 5):
+    fit = np.polyfit(df1[df1.columns[i - 1]], df1["y"], 1)
+    fit_fn = np.poly1d(fit)
+    plt.subplot(2, 2, i)
+    plt.scatter(df1[df1.columns[i - 1]], df1["y"], s=200, c="orange", edgecolor="k")
+    plt.plot(df1[df1.columns[i - 1]], fit_fn(df1[df1.columns[i - 1]]), "b-", lw=3)
+    plt.grid(True)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Data with Gaussian noise
+
+data2 = make_regression(
+    n_samples=20,
+    n_features=4,
+    n_informative=2,
+    n_targets=1,
+    bias=0.0,
+    effective_rank=None,
+    tail_strength=0.5,
+    noise=2.0,
+    shuffle=True,
+    coef=False,
+    random_state=None,
+)
+df2 = pd.DataFrame(data2[0], columns=["x" + str(i) for i in range(1, 5)])
+df2["y"] = data2[1]
+
+plt.figure(figsize=(15, 10))
+for i in range(1, 5):
+    fit = np.polyfit(df2[df2.columns[i - 1]], df2["y"], 1)
+    fit_fn = np.poly1d(fit)
+    plt.subplot(2, 2, i)
+    plt.scatter(df2[df2.columns[i - 1]], df2["y"], s=200, c="orange", edgecolor="k")
+    plt.plot(df2[df2.columns[i - 1]], fit_fn(df2[df2.columns[i - 1]]), "b-", lw=3)
+    plt.grid(True)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Plot datasets with varying degree of noise
+
+plt.figure(figsize=(15, 6))
+df2 = pd.DataFrame(data=np.zeros((20, 1)))
+for i in range(3):
+    data2 = make_regression(
+        n_samples=20,
+        n_features=1,
+        n_informative=1,
+        n_targets=1,
+        bias=0.0,
+        effective_rank=None,
+        tail_strength=0.5,
+        noise=i * 10,
+        shuffle=True,
+        coef=False,
+        random_state=None,
+    )
+    df2["x" + str(i + 1)] = data2[0]
+    df2["y" + str(i + 1)] = data2[1]
+
+for i in range(3):
+    fit = np.polyfit(df2["x" + str(i + 1)], df2["y" + str(i + 1)], 1)
+    fit_fn = np.poly1d(fit)
+    plt.subplot(1, 3, i + 1)
+    plt.scatter(
+        df2["x" + str(i + 1)], df2["y" + str(i + 1)], s=200, c="orange", edgecolor="k"
+    )
+    plt.plot(df2["x" + str(i + 1)], fit_fn(df2["x" + str(i + 1)]), "b-", lw=3)
+    plt.grid(True)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Classification problem generation
+
+data3 = make_classification(
+    n_samples=20,
+    n_features=4,
+    n_informative=4,
+    n_redundant=0,
+    n_repeated=0,
+    n_classes=2,
+    n_clusters_per_class=1,
+    weights=None,
+    flip_y=0.01,
+    class_sep=1.0,
+    hypercube=True,
+    shift=0.0,
+    scale=1.0,
+    shuffle=True,
+    random_state=None,
+)
+df3 = pd.DataFrame(data3[0], columns=["x" + str(i) for i in range(1, 5)])
+df3["y"] = data3[1]
+
+df3.head()
+
+from itertools import combinations
+
+lst_var = list(combinations(df3.columns[:-1], 2))
+len_var = len(lst_var)
+plt.figure(figsize=(18, 10))
+for i in range(1, len_var + 1):
+    plt.subplot(2, math.ceil(len_var / 2), i)
+    var1 = lst_var[i - 1][0]
+    var2 = lst_var[i - 1][1]
+    plt.scatter(df3[var1], df3[var2], s=200, c=df3["y"], edgecolor="k")
+    plt.xlabel(var1)
+    plt.ylabel(var2)
+    plt.grid(True)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Making class separation easy by tweaking class_sep
+
+data3 = make_classification(
+    n_samples=20,
+    n_features=4,
+    n_informative=4,
+    n_redundant=0,
+    n_repeated=0,
+    n_classes=2,
+    n_clusters_per_class=1,
+    weights=None,
+    flip_y=0.01,
+    class_sep=3.0,
+    hypercube=True,
+    shift=0.0,
+    scale=1.0,
+    shuffle=True,
+    random_state=None,
+)
+df3 = pd.DataFrame(data3[0], columns=["x" + str(i) for i in range(1, 5)])
+df3["y"] = data3[1]
+
+from itertools import combinations
+
+lst_var = list(combinations(df3.columns[:-1], 2))
+len_var = len(lst_var)
+plt.figure(figsize=(18, 10))
+for i in range(1, len_var + 1):
+    plt.subplot(2, math.ceil(len_var / 2), i)
+    var1 = lst_var[i - 1][0]
+    var2 = lst_var[i - 1][1]
+    plt.scatter(df3[var1], df3[var2], s=200, c=df3["y"], edgecolor="k")
+    plt.xlabel(var1)
+    plt.ylabel(var2)
+    plt.grid(True)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Making class separation hard by tweaking class_sep
+
+data3 = make_classification(
+    n_samples=20,
+    n_features=4,
+    n_informative=4,
+    n_redundant=0,
+    n_repeated=0,
+    n_classes=2,
+    n_clusters_per_class=1,
+    weights=None,
+    flip_y=0.01,
+    class_sep=0.5,
+    hypercube=True,
+    shift=0.0,
+    scale=1.0,
+    shuffle=True,
+    random_state=None,
+)
+df3 = pd.DataFrame(data3[0], columns=["x" + str(i) for i in range(1, 5)])
+df3["y"] = data3[1]
+
+from itertools import combinations
+
+lst_var = list(combinations(df3.columns[:-1], 2))
+len_var = len(lst_var)
+plt.figure(figsize=(18, 10))
+for i in range(1, len_var + 1):
+    plt.subplot(2, math.ceil(len_var / 2), i)
+    var1 = lst_var[i - 1][0]
+    var2 = lst_var[i - 1][1]
+    plt.scatter(df3[var1], df3[var2], s=200, c=df3["y"], edgecolor="k")
+    plt.xlabel(var1)
+    plt.ylabel(var2)
+    plt.grid(True)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Making data noisy by increasing flip_y
+
+plt.figure(figsize=(18, 10))
+for i in range(6):
+    data3 = make_classification(
+        n_samples=20,
+        n_features=4,
+        n_informative=4,
+        n_redundant=0,
+        n_repeated=0,
+        n_classes=2,
+        n_clusters_per_class=1,
+        weights=None,
+        flip_y=0.1 * i,
+        class_sep=1.0,
+        hypercube=True,
+        shift=0.0,
+        scale=1.0,
+        shuffle=False,
+        random_state=101,
+    )
+    df3 = pd.DataFrame(data3[0], columns=["x" + str(i) for i in range(1, 5)])
+    df3["y"] = data3[1]
+    plt.subplot(2, 3, i + 1)
+    plt.title(f"Plot for flip_y={round(0.1*i,2)}")
+    plt.scatter(df3["x1"], df3["x2"], s=200, c=df3["y"], edgecolor="k")
+    plt.xlabel("x1")
+    plt.ylabel("x2")
+    plt.grid(True)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Plot datasets with varying degree of class separation
+
+plt.figure(figsize=(18, 5))
+df2 = pd.DataFrame(data=np.zeros((20, 1)))
+for i in range(3):
+    data2 = make_classification(
+        n_samples=20,
+        n_features=2,
+        n_informative=2,
+        n_redundant=0,
+        n_repeated=0,
+        n_classes=2,
+        n_clusters_per_class=1,
+        weights=None,
+        flip_y=0,
+        class_sep=i + 0.5,
+        hypercube=True,
+        shift=0.0,
+        scale=1.0,
+        shuffle=False,
+        random_state=101,
+    )
+    df2["x" + str(i + 1) + "1"] = data2[0][:, 0]
+    df2["x" + str(i + 1) + "2"] = data2[0][:, 1]
+    df2["y" + str(i + 1)] = data2[1]
+
+for i in range(3):
+    plt.subplot(1, 3, i + 1)
+    plt.scatter(
+        df2["x" + str(i + 1) + "1"],
+        df2["x" + str(i + 1) + "2"],
+        s=200,
+        c=df2["y" + str(i + 1)],
+        edgecolor="k",
+    )
+    plt.grid(True)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Clustering problem generation
+
+data4 = make_blobs(
+    n_samples=60,
+    n_features=4,
+    centers=3,
+    cluster_std=1.0,
+    center_box=(-5.0, 5.0),
+    shuffle=True,
+    random_state=None,
+)
+df4 = pd.DataFrame(data4[0], columns=["x" + str(i) for i in range(1, 5)])
+df4["y"] = data4[1]
+
+from itertools import combinations
+
+lst_var = list(combinations(df4.columns[:-1], 2))
+len_var = len(lst_var)
+plt.figure(figsize=(18, 10))
+for i in range(1, len_var + 1):
+    plt.subplot(2, math.ceil(len_var / 2), i)
+    var1 = lst_var[i - 1][0]
+    var2 = lst_var[i - 1][1]
+    plt.scatter(df4[var1], df4[var2], s=200, c=df4["y"], edgecolor="k")
+    plt.xlabel(var1)
+    plt.ylabel(var2)
+    plt.grid(True)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Making clusters compact and easily separable by tweaking cluster_std
+
+data4 = make_blobs(
+    n_samples=60,
+    n_features=4,
+    centers=3,
+    cluster_std=0.3,
+    center_box=(-5.0, 5.0),
+    shuffle=True,
+    random_state=None,
+)
+df4 = pd.DataFrame(data4[0], columns=["x" + str(i) for i in range(1, 5)])
+df4["y"] = data4[1]
+
+from itertools import combinations
+
+lst_var = list(combinations(df4.columns[:-1], 2))
+len_var = len(lst_var)
+plt.figure(figsize=(18, 10))
+for i in range(1, len_var + 1):
+    plt.subplot(2, math.ceil(len_var / 2), i)
+    var1 = lst_var[i - 1][0]
+    var2 = lst_var[i - 1][1]
+    plt.scatter(df4[var1], df4[var2], s=200, c=df4["y"], edgecolor="k")
+    plt.xlabel(var1)
+    plt.ylabel(var2)
+    plt.grid(True)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Making clusters spread out and difficult to separate by tweaking cluster_std
+
+data4 = make_blobs(
+    n_samples=60,
+    n_features=4,
+    centers=3,
+    cluster_std=2.5,
+    center_box=(-5.0, 5.0),
+    shuffle=True,
+    random_state=None,
+)
+df4 = pd.DataFrame(data4[0], columns=["x" + str(i) for i in range(1, 5)])
+df4["y"] = data4[1]
+
+from itertools import combinations
+
+lst_var = list(combinations(df4.columns[:-1], 2))
+len_var = len(lst_var)
+plt.figure(figsize=(18, 10))
+for i in range(1, len_var + 1):
+    plt.subplot(2, math.ceil(len_var / 2), i)
+    var1 = lst_var[i - 1][0]
+    var2 = lst_var[i - 1][1]
+    plt.scatter(df4[var1], df4[var2], s=200, c=df4["y"], edgecolor="k")
+    plt.xlabel(var1)
+    plt.ylabel(var2)
+    plt.grid(True)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Making anisotropically distributed clustering problem
+
+data5 = make_blobs(n_samples=50, n_features=2, centers=3, cluster_std=1.5)
+
+transformation = [[0.5, -0.5], [-0.4, 0.8]]
+
+data5_0 = np.dot(data5[0], transformation)
+df5 = pd.DataFrame(data5_0, columns=["x" + str(i) for i in range(1, 3)])
+df5["y"] = data5[1]
+
+plt.figure(figsize=(8, 5))
+plt.scatter(df5["x1"], df5["x2"], c=df5["y"], s=200, edgecolors="k")
+plt.xlabel("x1")
+plt.ylabel("x2")
+plt.grid(True)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Making concentric circle clusters
+
+data6 = make_circles(
+    n_samples=50, shuffle=True, noise=None, random_state=None, factor=0.6
+)
+df6 = pd.DataFrame(data6[0], columns=["x" + str(i) for i in range(1, 3)])
+df6["y"] = data6[1]
+
+plt.figure(figsize=(8, 5))
+plt.scatter(df6["x1"], df6["x2"], c=df6["y"], s=200, edgecolors="k")
+plt.xlabel("x1")
+plt.ylabel("x2")
+plt.grid(True)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Introdue noise in the circle clusters
+
+data6 = make_circles(
+    n_samples=50, shuffle=True, noise=0.15, random_state=None, factor=0.6
+)
+df6 = pd.DataFrame(data6[0], columns=["x" + str(i) for i in range(1, 3)])
+df6["y"] = data6[1]
+
+plt.figure(figsize=(8, 5))
+plt.scatter(df6["x1"], df6["x2"], c=df6["y"], s=200, edgecolors="k")
+plt.xlabel("x1")
+plt.ylabel("x2")
+plt.grid(True)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Make moon shape clusters
+
+data7 = make_moons(n_samples=50, shuffle=True, noise=None, random_state=None)
+df7 = pd.DataFrame(data7[0], columns=["x" + str(i) for i in range(1, 3)])
+df7["y"] = data7[1]
+
+plt.figure(figsize=(8, 5))
+plt.scatter(df7["x1"], df7["x2"], c=df7["y"], s=200, edgecolors="k")
+plt.xlabel("x1")
+plt.ylabel("x2")
+plt.grid(True)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# Introduce noise in the moon-shaped clusters
+
+data7 = make_moons(n_samples=50, shuffle=True, noise=0.1, random_state=None)
+df7 = pd.DataFrame(data7[0], columns=["x" + str(i) for i in range(1, 3)])
+df7["y"] = data7[1]
+
+plt.figure(figsize=(8, 5))
+plt.scatter(df7["x1"], df7["x2"], c=df7["y"], s=200, edgecolors="k")
+plt.xlabel("x1")
+plt.ylabel("x2")
+plt.grid(True)
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Generate name, address, phone number, email etc. using pydbgen package
+
+from pydbgen import pydbgen
+
+generator = pydbgen.pydb()
+
+# Generate a license-plate (US style)
+cc = generator.license_plate()
+print(cc)
+# 'OKY-2318'
+
+""" NG
+# Generate few random names
+cc = generator.gen_data_series(num=10,data_type='name')
+print(cc)
+"""
+
+# Generate random phone numbers
+cc = generator.simple_ph_num()
+print(cc)
+
+# '389-066-8154'
+""" NG
+cc = generator.gen_data_series(num=10,data_type='phone_number_full')
+print(cc)
+"""
+# Generate a full data frame with random name, street address, SSN, email, date
+""" NG
+df10 = generator.gen_dataframe(fields=['name','street_address','ssn','email','date'])
+print(df10)
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+Synth_Time_series
+"""
+
+# machine_learning_Synth_Time_series
+
+# Synthesizing time series data
+
+# Functions
+
+
+# cylinder bell funnel based on "Learning comprehensible descriptions of multivariate time series"
+def generate_bell(length, amplitude, default_variance):
+    bell = (
+        np.random.normal(0, default_variance, length)
+        + amplitude * np.arange(length) / length
+    )
+    return bell
+
+
+def generate_funnel(length, amplitude, default_variance):
+    funnel = (
+        np.random.normal(0, default_variance, length)
+        + amplitude * np.arange(length)[::-1] / length
+    )
+    return funnel
+
+
+def generate_cylinder(length, amplitude, default_variance):
+    cylinder = np.random.normal(0, default_variance, length) + amplitude
+    return cylinder
+
+
+std_generators = [generate_bell, generate_funnel, generate_cylinder]
+
+
+def generate_pattern_data(
+    length=100,
+    avg_pattern_length=5,
+    avg_amplitude=1,
+    default_variance=1,
+    variance_pattern_length=10,
+    variance_amplitude=2,
+    generators=std_generators,
+    include_negatives=True,
+):
+    data = np.random.normal(0, default_variance, length)
+    current_start = random.randint(0, avg_pattern_length)
+    current_length = current_length = max(
+        1, math.ceil(random.gauss(avg_pattern_length, variance_pattern_length))
+    )
+
+    while current_start + current_length < length:
+        generator = random.choice(generators)
+        current_amplitude = random.gauss(avg_amplitude, variance_amplitude)
+
+        while current_length <= 0:
+            current_length = -(current_length - 1)
+        pattern = generator(current_length, current_amplitude, default_variance)
+
+        if include_negatives and random.random() > 0.5:
+            pattern = -1 * pattern
+
+        data[current_start : current_start + current_length] = pattern
+
+        current_start = (
+            current_start + current_length + random.randint(0, avg_pattern_length)
+        )
+        current_length = max(
+            1, math.ceil(random.gauss(avg_pattern_length, variance_pattern_length))
+        )
+
+    return np.array(data)
+
+
+# Generate time series and plot
+
+n_data = [50, 150, 500]
+n_pattern_length = [5, 10, 20]
+
+from itertools import product
+
+config_ = list(product(n_data, n_pattern_length))
+
+fig, axes = plt.subplots(nrows=3, ncols=3, figsize=(12, 9))
+ax = axes.ravel()
+i = 0
+for n1, n2 in config_:
+    data = generate_pattern_data(length=n1, avg_pattern_length=n2)
+    ax[i].plot(data, color="k")
+    ax[i].grid(True)
+    i += 1
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Time-profiling
+
+# Time-profiling Data Science code using cProfile
+
+import cProfile
+
+SIZE = 10_000_000
+a = np.arange(SIZE)
+b = np.random.normal(size=SIZE)
+
+cProfile.run("a+b")
+
+print("------------------------------")  # 60個
+
+code = """SIZE = 10_000_000
+a = np.arange(SIZE)
+b = np.random.normal(size=SIZE)
+a+b"""
+
+print(code)
+
+cProfile.run(code)
+
+print("------------------------------")  # 60個
+
+
+def add():
+    SIZE = 10_000_000
+    a = np.arange(SIZE)
+    b = np.random.normal(size=SIZE)
+    c = a + b
+
+
+cProfile.run("add()")
+
+print("------------------------------")  # 60個
+
+
+def add(size):
+    a = np.arange(size)
+    b = np.random.normal(size=size)
+    c = a + b
+
+
+SIZE = 10_000_000
+cProfile.run("add(SIZE)")
+
+print("------------------------------")  # 60個
+
+SIZE = 20_000_000
+cProfile.run("add(SIZE)")
+
+print("------------------------------")  # 60個
+
+
+def ops(a, b):
+    x1 = a + b
+    x2 = a - b
+    x3 = a * b
+    x4 = a / b
+
+
+cProfile.run("ops(a,b)")
+
+print("------------------------------")  # 60個
+
+import cProfile
+import pstats
+
+profiler = cProfile.Profile()
+# Enable profiler
+profiler.enable()
+# Function execution
+add(SIZE)
+# Disable profiler
+profiler.disable()
+# pstats
+stats = pstats.Stats(profiler)
+# Print the total time and function calls
+print("Total function calls:", stats.total_calls)
+print("Total time (seconds):", stats.total_tt)
+
+# Total function calls: 48
+# Total time (seconds): 1.1839559
+
+stats = pstats.Stats(profiler)
+stats.print_stats()
+
+type(stats)
+
+# pstats.Stats
+
+stats.total_tt
+
+# 1.1839559
+
+stats.fcn_list
+
+size = [int(i * 1e6) for i in range(5, 26, 5)]
+total_tt = []
+for s in size:
+    profiler = cProfile.Profile()
+    profiler.enable()
+    add(s)
+    profiler.disable()
+    stats = pstats.Stats(profiler)
+    total_tt.append(round(stats.total_tt, 3))
+
+total_tt
+
+[0.274, 0.464, 0.706, 0.94, 1.187]
+
+plt.figure(figsize=(6, 3), dpi=120)
+plt.bar(
+    x=[str(i) + "-million" for i in range(5, 26, 5)],
+    height=total_tt,
+    edgecolor="k",
+    color="#2c75b0",
+)
+plt.xlabel("Array size")
+plt.ylabel("Time taken (seconds)")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Timing-decorator-ML-optimization
+
+from functools import wraps
+from time import time, sleep
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.ensemble import RandomForestClassifier
+
+# Timing decorator with functools.wraps
+
+
+def timing(func):
+    @wraps(func)
+    def wrap(*args, **kw):
+        ts = time()
+        result = func(*args, **kw)
+        te = time()
+        tdelta = round(1000 * (te - ts), 3)
+        print(f"Function '{func.__name__}' took {tdelta} milliseconds to run")
+        return result
+
+    return wrap
+
+
+@timing
+def list_length(a):
+    if isinstance(a, list):
+        sleep(0.1)
+        s = len(a)
+        return s
+    else:
+        print("Argument is not a list")
+
+
+list_length([1, 2, 3])
+
+
+list_length(5)
+
+
+def time_return(func):
+    @wraps(func)
+    def wrap(*args, **kw):
+        ts = time()
+        result = func(*args, **kw)
+        te = time()
+        tdelta = round(1000 * (te - ts), 3)
+        return tdelta
+
+    return wrap
+
+
+@time_return
+def numpy_matmul(a, b):
+    return np.matmul(a, b)
+
+
+SIZE = 1000
+a = np.random.beta(1.0, 2.0, size=(SIZE, SIZE))
+b = np.random.beta(1.0, 2.0, size=(SIZE, SIZE))
+numpy_matmul(a, b)
+
+# 16.48
+
+SIZE = 2000
+a = np.random.beta(1.0, 2.0, size=(SIZE, SIZE))
+b = np.random.beta(1.0, 2.0, size=(SIZE, SIZE))
+numpy_matmul(a, b)
+
+# 111.301
+
+SIZE = [500, 1000, 2000, 3000, 4000, 5000]
+for s in SIZE:
+    a = np.random.beta(1.0, 2.0, size=(s, s))
+    b = np.random.beta(1.0, 2.0, size=(s, s))
+    t = numpy_matmul(a, b)
+    print(f"Matrix multiplication of size ({s}x{s}) took {t} milliseconds")
+
+# Throwing an ML estimator into the mix
+
+
+def time_estimator(func):
+    @wraps(func)
+    def wrap(*args, **kw):
+        ts = time()
+        result = func(*args, **kw)
+        te = time()
+        tdelta = round(1000 * (te - ts), 3)
+        return (tdelta, result)
+
+    return wrap
+
+
+@time_estimator
+def classifier_accuracy(estimator, x, y):
+    X_train, X_test, y_train, y_test = train_test_split(
+        x, y, test_size=0.33, random_state=42
+    )
+    estimator.fit(X_train, y_train)
+    score = estimator.score(X_test, y_test)
+    return round(score, 3)
+
+
+data = make_classification(
+    n_samples=1000,
+    n_features=20,
+    n_informative=20,
+    n_redundant=0,
+    flip_y=0.05,
+    class_sep=1.5,
+)
+x, y = data[0], data[1]
+
+log_model = LogisticRegressionCV()
+
+classifier_accuracy(log_model, x, y)
+
+# (312.083, 0.836)
+
+# Change the data and record execution time
+
+SIZE = [1000 + 500 * i for i in range(21)]
+log_model = LogisticRegressionCV()
+model_time, model_acc = [], []
+
+for s in SIZE:
+    data = make_classification(
+        n_samples=s,
+        n_features=20,
+        n_informative=20,
+        n_redundant=0,
+        flip_y=0.05,
+        class_sep=1.5,
+    )
+    x, y = data[0], data[1]
+    m_time, m_acc = classifier_accuracy(log_model, x, y)
+    model_time.append(m_time)
+    model_acc.append(m_acc)
+
+fig, ax = plt.subplots(1, 2, figsize=(12, 4))
+ax[0].scatter(SIZE, model_acc, edgecolor="k", s=100)
+ax[0].plot(SIZE, model_acc)
+ax[0].set_title("Accuracy score with data size")
+ax[0].set_xlabel("Data size")
+ax[0].grid(True)
+ax[1].scatter(SIZE, model_time, edgecolor="k", s=100)
+ax[1].plot(SIZE, model_time)
+ax[1].set_title("Training time (msec) with data size")
+ax[1].set_xlabel("Data size")
+ax[1].grid(True)
+show()
+
+# Change the model and optimize
+
+num_trees = [5 * x for x in range(1, 21)]
+model_time, model_acc = [], []
+data = make_classification(
+    n_samples=1000,
+    n_features=20,
+    n_informative=20,
+    n_redundant=0,
+    flip_y=0.05,
+    class_sep=1.0,
+)
+x, y = data[0], data[1]
+for n in num_trees:
+    rf_model = RandomForestClassifier(n_estimators=n)
+    m_time, m_acc = classifier_accuracy(rf_model, x, y)
+    model_time.append(m_time)
+    model_acc.append(m_acc)
+
+fig, ax = plt.subplots(1, 2, figsize=(12, 4))
+ax[0].scatter(num_trees, model_acc, edgecolor="k", s=100)
+ax[0].plot(num_trees, model_acc)
+ax[0].set_title("Accuracy score with Random Forest")
+ax[0].set_xlabel("Number of trees")
+ax[0].grid(True)
+ax[1].scatter(num_trees, model_time, edgecolor="k", s=100)
+ax[1].plot(num_trees, model_time)
+ax[1].set_title("Training time (msec) with Random Forest")
+ax[1].set_xlabel("Number of trees")
+ax[1].grid(True)
+show()
+
+model_time = np.array(model_time)
+model_acc = np.array(model_acc)
+model_opt = model_acc + 1 / model_time
+
+plt.figure(dpi=120)
+plt.title("Model optimization with number of trees")
+plt.plot(num_trees, model_opt)
+plt.scatter(num_trees, model_opt, s=100, edgecolor="k")
+plt.xlabel("Number of trees")
+plt.grid(True)
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# machine_learning_regression01
+
+# Linear_Regression_Methods
+# Linear regression with various methods
+"""
+This is a very simple example of using two scipy tools for linear regression.
+    Scipy.Polyfit
+    Stats.linregress
+    Optimize.curve_fit
+    numpy.linalg.lstsq
+    statsmodels.OLS
+    Analytic solution using Moore-Penrose generalized inverse or simple multiplicative matrix inverse
+    sklearn.linear_model.LinearRegression
+"""
+from numpy import linspace, polyval, polyfit, sqrt  # , stats, randn, optimize
+from scipy import stats, optimize
+import statsmodels.api as sm
+from sklearn.linear_model import LinearRegression
+
+# Generate random data of a sufficiently large size
+
+# Sample data creation
+# number of points
+n = int(5e6)
+t = np.linspace(-10, 10, n)
+# parameters
+a = 3.25
+b = -6.5
+x = polyval([a, b], t)
+# add some noise
+xn = x + 3 * np.random.randn(n)
+
+# Draw few random sample points and plot
+
+xvar = np.random.choice(t, size=20)
+yvar = polyval([a, b], xvar) + 3 * np.random.randn(20)
+plt.scatter(xvar, yvar, c="green", edgecolors="k")
+plt.grid(True)
+show()
+
+# Method: Scipy.Polyfit
+
+# Linear regressison -polyfit - polyfit can be used other orders polynomials
+(ar, br) = polyfit(t, xn, 1)
+xr = polyval([ar, br], t)
+# compute the mean square error
+err = sqrt(sum((xr - xn) ** 2) / n)
+
+print("Linear regression using polyfit")
+print("parameters: a=%.2f b=%.2f, ms error= %.3f" % (ar, br, err))
+
+# Method: Stats.linregress
+
+# Linear regression using stats.linregress
+(a_s, b_s, r, tt, stderr) = stats.linregress(t, xn)
+
+print("Linear regression using stats.linregress")
+print("a=%.2f b=%.2f, std error= %.3f, r^2 coefficient= %.3f" % (a_s, b_s, stderr, r))
+
+# Method: Optimize.curve_fit
+
+
+def flin(t, a, b):
+    result = a * t + b
+    return result
+
+
+p1, _ = optimize.curve_fit(flin, xdata=t, ydata=xn, method="lm")
+
+print("Linear regression using optimize.curve_fit")
+print("parameters: a=%.2f b=%.2f" % (p1[0], p1[1]))
+
+# Method: numpy.linalg.lstsq
+
+A = np.vstack([t, np.ones(len(t))]).T
+result = np.linalg.lstsq(A, xn)
+ar, br = result[0]
+err = np.sqrt(result[1] / len(xn))
+
+print("Linear regression using numpy.linalg.lstsq")
+print("parameters: a=%.2f b=%.2f, ms error= %.3f" % (ar, br, err))
+
+# Method: Statsmodels.OLS
+
+t = sm.add_constant(t)
+model = sm.OLS(x, t)
+results = model.fit()
+ar = results.params[1]
+br = results.params[0]
+
+print("Linear regression using statsmodels.OLS")
+print("parameters: a=%.2f b=%.2f" % (ar, br))
+
+print(results.summary())
+
+# Analytic solution using Moore-Penrose pseudoinverse
+
+mpinv = np.linalg.pinv(t)
+result = mpinv.dot(x)
+ar = result[1]
+br = result[0]
+
+print("Linear regression using Moore-Penrose inverse")
+print("parameters: a=%.2f b=%.2f" % (ar, br))
+
+# Analytic solution using simple multiplicative matrix inverse
+
+m = np.dot((np.dot(np.linalg.inv(np.dot(t.T, t)), t.T)), x)
+ar = m[1]
+br = m[0]
+
+print("Linear regression using simple inverse")
+print("parameters: a=%.2f b=%.2f" % (ar, br))
+
+# Method: sklearn.linear_model.LinearRegression
+
+lm = LinearRegression()
+lm.fit(t, x)
+ar = lm.coef_[1]
+br = lm.intercept_
+
+print("Linear regression using sklearn.linear_model.LinearRegression")
+print("parameters: a=%.2f b=%.2f" % (ar, br))
+
+n_min = 50000
+n_max = int(1e7)
+n_levels = 25
+r = np.log10(n_max / n_min)
+l = np.linspace(0, r, n_levels)
+n_data = list((n_min * np.power(10, l)))
+n_data = [int(n) for n in n_data]
+
+for i in range(len(n_data)):
+    print("i =", i)
+    t = np.linspace(-10, 10, n_data[i])
+    # parameters
+    a = 3.25
+    b = -6.5
+    x = polyval([a, b], t)
+    # add some noise
+    xn = x + 3 * np.random.randn(n_data[i])
+
+    # Linear regressison -polyfit - polyfit can be used other orders polynomials
+    (ar, br) = polyfit(t, xn, 1)
+
+    # Linear regression using stats.linregress
+    (a_s, b_s, r, tt, stderr) = stats.linregress(t, xn)
+
+    # Linear regression using optimize.curve_fit
+    p1, _ = optimize.curve_fit(flin, xdata=t, ydata=xn, method="lm")
+
+    # Linear regression using np.linalg.lstsq (solving Ax=B equation system)
+    A = np.vstack([t, np.ones(len(t))]).T
+    result = np.linalg.lstsq(A, xn)
+    ar, br = result[0]
+
+    # Linear regression using statsmodels.OLS
+    t = sm.add_constant(t)
+    model = sm.OLS(x, t)
+    results = model.fit()
+    ar = results.params[1]
+    br = results.params[0]
+
+    # Linear regression using Moore-Penrose pseudoinverse matrix
+    mpinv = np.linalg.pinv(t)
+    result = mpinv.dot(x)
+    ar = result[1]
+    br = result[0]
+
+    # Linear regression using simple multiplicative inverse matrix
+    m = np.dot((np.dot(np.linalg.inv(np.dot(t.T, t)), t.T)), x)
+    ar = m[1]
+    br = m[0]
+
+    # Linear regression using scikit-learn's linear_model
+    lm = LinearRegression()
+    lm.fit(t, x)
+    ar = lm.coef_[1]
+    br = lm.intercept_
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Linear_Regression_Practice
+# Linear Regrssion on US Housing Price
+
+df = pd.read_csv("data/USA_Housing.csv")
+
+cc = df.head()
+print(cc)
+
+# Check basic info on the data set
+
+df.info(verbose=True)
+
+# 'describe()' method to get the statistical summary of the various features of the data set
+
+df.describe(percentiles=[0.1, 0.25, 0.5, 0.75, 0.9])
+
+#'columns' method to get the names of the columns (features)
+
+df.columns
+
+# Basic plotting and visualization on the data set
+
+# Pairplots using seaborn
+
+sns.pairplot(df)
+show()
+
+# Distribution of price (the predicted quantity)
+
+df["Price"].plot.hist(bins=25, figsize=(8, 4))
+
+show()
+
+df["Price"].plot.density()
+
+show()
+
+# Correlation matrix and heatmap
+
+""" NG
+df.corr()
+
+plt.figure(figsize=(10,7))
+sns.heatmap(df.corr(),annot=True,linewidths=2)
+
+show()
+"""
+
+# Feature and variable sets
+
+# Make a list of data frame column names
+
+l_column = list(df.columns)  # Making a list out of column names
+len_feature = len(l_column)  # Length of column vector list
+l_column
+
+# Put all the numerical features in X and Price in y, ignore Address which is string for linear regression
+
+X = df[l_column[0 : len_feature - 2]]
+y = df[l_column[len_feature - 2]]
+
+print("Feature set size:", X.shape)
+print("Variable set size:", y.shape)
+
+cc = X.head()
+print(cc)
+
+cc = y.head()
+print(cc)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+print("Training feature set size:", X_train.shape)
+print("Test feature set size:", X_test.shape)
+print("Training variable set size:", y_train.shape)
+print("Test variable set size:", y_test.shape)
+
+# Model fit and training
+
+# Import linear regression model estimator from scikit-learn and instantiate
+
+from sklearn.linear_model import LinearRegression
+from sklearn import metrics
+
+lm = LinearRegression()  # Creating a Linear Regression object 'lm'
+
+# Fit the model on to the instantiated object itself
+
+lm.fit(
+    X_train, y_train
+)  # Fit the linear model on to the 'lm' object itself i.e. no need to set this to another variable
+
+# LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)
+
+# Check the intercept and coefficients and put them in a DataFrame
+
+print("The intercept term of the linear model:", lm.intercept_)
+
+# The intercept term of the linear model: -2631028.90175
+
+print("The coefficients of the linear model:", lm.coef_)
+
+# idict = {'Coefficients':lm.intercept_}
+# idf = pd.DataFrame(data=idict,index=['Intercept'])
+cdf = pd.DataFrame(data=lm.coef_, index=X_train.columns, columns=["Coefficients"])
+# cdf=pd.concat([idf,cdf], axis=0)
+cdf
+
+# Calculation of standard errors and t-statistic for the coefficients
+
+n = X_train.shape[0]
+k = X_train.shape[1]
+dfN = n - k
+train_pred = lm.predict(X_train)
+train_error = np.square(train_pred - y_train)
+sum_error = np.sum(train_error)
+se = [0, 0, 0, 0, 0]
+for i in range(k):
+    r = sum_error / dfN
+    r = r / np.sum(
+        np.square(
+            X_train[list(X_train.columns)[i]] - X_train[list(X_train.columns)[i]].mean()
+        )
+    )
+    se[i] = np.sqrt(r)
+cdf["Standard Error"] = se
+cdf["t-statistic"] = cdf["Coefficients"] / cdf["Standard Error"]
+cdf
+
+print(
+    "Therefore, features arranged in the order of importance for predicting the house price\n",
+    "-" * 90,
+    sep="",
+)
+l = list(cdf.sort_values("t-statistic", ascending=False).index)
+print(" > \n".join(l))
+
+l = list(cdf.index)
+
+from matplotlib import gridspec
+
+fig = plt.figure(figsize=(14, 8))
+
+gs = gridspec.GridSpec(2, 3)
+# f, ax = plt.subplots(nrows=1,ncols=len(l), sharey=True)
+ax0 = plt.subplot(gs[0])
+ax0.scatter(df[l[0]], df["Price"])
+ax0.set_title(l[0] + " vs. Price", fontdict={"fontsize": 20})
+
+ax1 = plt.subplot(gs[1])
+ax1.scatter(df[l[1]], df["Price"])
+ax1.set_title(l[1] + " vs. Price", fontdict={"fontsize": 20})
+
+ax2 = plt.subplot(gs[2])
+ax2.scatter(df[l[2]], df["Price"])
+ax2.set_title(l[2] + " vs. Price", fontdict={"fontsize": 20})
+
+ax3 = plt.subplot(gs[3])
+ax3.scatter(df[l[3]], df["Price"])
+ax3.set_title(l[3] + " vs. Price", fontdict={"fontsize": 20})
+
+ax4 = plt.subplot(gs[4])
+ax4.scatter(df[l[4]], df["Price"])
+ax4.set_title(l[4] + " vs. Price", fontdict={"fontsize": 20})
+
+show()
+
+# R-square of the model fit
+
+print("R-squared value of this fit:", round(metrics.r2_score(y_train, train_pred), 3))
+
+# R-squared value of this fit: 0.917
+
+# Prediction, error estimate, and regression evaluation matrices
+
+# Prediction using the lm model
+
+predictions = lm.predict(X_test)
+print("Type of the predicted object:", type(predictions))
+print("Size of the predicted object:", predictions.shape)
+
+# Scatter plot of predicted price and y_test set to see if the data fall on a 45 degree straight line
+
+plt.figure(figsize=(10, 7))
+plt.title("Actual vs. predicted house prices")
+plt.xlabel("Actual test set house prices")
+plt.ylabel("Predicted house prices")
+plt.scatter(x=y_test, y=predictions)
+
+show()
+
+# Plotting histogram of the residuals i.e. predicted errors (expect a normally distributed pattern)
+
+plt.figure(figsize=(10, 7))
+plt.title("Histogram of residuals to check for normality")
+plt.xlabel("Residuals")
+plt.ylabel("Kernel density")
+sns.distplot([y_test - predictions])
+
+show()
+
+# Scatter plot of residuals and predicted values (Homoscedasticity)
+
+plt.figure(figsize=(10, 7))
+plt.title("Residuals vs. predicted values plot (Homoscedasticity)")
+plt.xlabel("Predicted house prices")
+plt.ylabel("Residuals")
+plt.scatter(x=predictions, y=y_test - predictions)
+
+show()
+
+# Regression evaluation metrices
+
+print("Mean absolute error (MAE):", metrics.mean_absolute_error(y_test, predictions))
+print("Mean square error (MSE):", metrics.mean_squared_error(y_test, predictions))
+print(
+    "Root mean square error (RMSE):",
+    np.sqrt(metrics.mean_squared_error(y_test, predictions)),
+)
+
+# R-square value
+
+print(
+    "R-squared value of predictions:", round(metrics.r2_score(y_test, predictions), 3)
+)
+
+# R-squared value of predictions: 0.919
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Linear regression as a statistical estimation problem
+
+df = pd.read_csv("data/slump_test.csv", sep=",")
+
+df.drop("No", axis=1, inplace=True)
+
+cc = df.head()
+print(cc)
+
+print(df.shape)
+# (103, 10)
+
+"""
+# Import MyLinearRegression from MLR and fit
+
+from mlr.MLR import MyLinearRegression as mlr
+
+m = mlr()
+
+predictors = list(df.columns[:7])
+
+print(predictors)
+
+response = 'Compressive Strength (28-day)(Mpa)'
+
+m.fit_dataframe(X=predictors,y=response,dataframe=df)
+
+# Print all the coefficients and the intercept
+
+m.coef_
+
+m.intercept_
+
+# 139.7814998489339
+
+# Print metrics
+
+print ("R-squared: ",m.r_squared())
+print ("Adjusted R-squared: ",m.adj_r_squared())
+print("MSE: ",m.mse())
+
+# All metrics at once!
+
+cc = m.print_metrics()
+print(cc)
+
+n = df.shape[0]
+p = df.shape[1]-3
+
+r2 = 1-(m.sse()/m.sst())
+adjr2 = 1 - (m.sse()/m.sst())*((n-1)/(n-p-1))
+
+print("R^2 from first principles:",round(r2,4))
+print("Adjusted-R^2 from first principles:",round(adjr2,4))
+
+#R^2 from first principles: 0.8968
+#Adjusted-R^2 from first principles: 0.8892
+
+#AIC and BIC
+
+# AIC : Akaike information criterion
+# BIC : Bayesian information criterion
+
+# Residuals plots
+
+m.fitted_vs_residual()
+
+m.fitted_vs_features()
+
+# Histogram and Q-Q plot of the standardized residuals
+
+m.histogram_resid()
+
+m.qqplot_resid()
+
+# F-test of overall significance
+
+m.ftest()
+
+# (117.98260528684814, 5.444633963386908e-44)
+
+# Standard errors, t-statistic, p-values
+
+print("Standard errors:",m.std_err())
+print()
+print("t-test values:",m.tvalues())
+print()
+print("P-values:",m.pvalues())
+
+for i in range(7):
+    print(f"Predictor: {df.columns[i]}, Standard error: {m.std_err()[i+1]}, t-statistic: {m.tvalues()[i+1]}, p-value: {m.pvalues()[i+1]}")
+    print()
+
+# We can print the confidence interval of the regression coefficients directly
+
+m.conf_int()[1:]
+
+# If we change the statistical significance level to 0.01 from 0.05, then two more variables show range including zero
+
+m.conf_int(alpha=0.01)[1:]
+
+# Now, we can build a model removing those three variables who showed p-val > 0.05
+
+m2 = mlr()
+
+predictors = ['Cement', 'Fly ash', 'Water', 'Coarse Aggr.']
+
+m2.fit_dataframe(X=predictors,y=response,dataframe=df)
+
+print("Metrics of the old (full) model\n"+"-"*40)
+m.print_metrics()
+
+print("Metrics of the new (smaller) model\n"+"-"*40)
+m2.print_metrics()
+
+# We can also plot something called Cook's distance plot to see if there is any outliers in the data
+
+m.cook_distance()
+
+# We can plot the full pairwise scatterplots
+
+m.pairplot()
+
+# This may take a little time. Have patience...
+
+# You can also use Seaborn library for visualization like pairplots and correlation heatmaps
+
+sns.pairplot(data=df[df.columns[:7]])
+show()
+
+corr = np.corrcoef(df[df.columns[:7]],rowvar=False)
+plt.figure(figsize=(10,10))
+sns.heatmap(data=corr,linewidths=1,annot=True)
+show()
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Robust linear regression
+
+from sklearn.linear_model import HuberRegressor, LinearRegression
+from sklearn.datasets import make_regression
+
+# Creating a regression problem using make_regression method
+
+rng = np.random.RandomState(0)
+
+X, y, coef = make_regression(
+    n_samples=200, n_features=2, noise=4.0, coef=True, random_state=0
+)
+
+# Plot
+
+fix, ax = plt.subplots(1, 2, figsize=(10, 3))
+ax[0].scatter(X[:, 0], y)
+ax[0].grid(True)
+ax[1].scatter(X[:, 1], y)
+ax[1].grid(True)
+show()
+
+# Inserting random outliers in the data
+
+X[:4] = rng.uniform(10, 20, (4, 2))
+y[:4] = rng.uniform(100, 200, 4)
+
+# Plot to show the inserted outliers
+
+fix, ax = plt.subplots(1, 2, figsize=(10, 3))
+ax[0].scatter(X[:, 0], y)
+ax[0].grid(True)
+ax[1].scatter(X[:, 1], y)
+ax[1].grid(True)
+show()
+
+# Create a HuberRegressor object and fit
+
+huber = HuberRegressor()
+
+huber.fit(X, y)
+
+cc = X[1].reshape(1, -1)
+print(cc)
+
+cc = huber.predict(X[1].reshape(1, -1))
+print(cc)
+
+# A simple linear regression fit for comparison
+
+linear = LinearRegression()
+
+linear.fit(X, y)
+
+# Compare the estimated coefficients
+
+print("True coefficients:", coef)
+print("Huber coefficients:", huber.coef_)
+print("Linear Regression coefficients:", linear.coef_)
+
+fix, ax = plt.subplots(1, 2, figsize=(12, 3), sharey=True)
+ax[0].barh(
+    ["True coef", "Huber coef", "Linear fit coef"],
+    width=[coef[0], huber.coef_[0], linear.coef_[0]],
+)
+ax[0].set_title("1st coefficients")
+ax[1].barh(
+    ["True coef", "Huber coef", "Linear fit coef"],
+    width=[coef[1], huber.coef_[1], linear.coef_[1]],
+)
+ax[1].set_title("2nd coefficients")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Support vector regression
+
+# A simple nonlinear function
+
+
+def nonlinear(array):
+    return (
+        10 * array[:, 0] - np.exp(0.01 * array[:, 1] + np.log(1 + array[:, 2] ** 2))
+    ) / (array[:, 3] ** 2 + 5)
+
+
+# Generate features and target data for regression
+
+n_samples = 200
+n_features = 4
+
+x = 5 * np.random.rand(n_samples, n_features)
+
+y = nonlinear(x) + np.random.randn(n_samples)
+
+y = y.reshape(n_samples, 1)
+
+df = pd.DataFrame(data=np.hstack((x, y)), columns=["X1", "X2", "X3", "X4", "y"])
+
+cc = df.head()
+print(cc)
+
+# Plotting the data
+
+fig, ax = plt.subplots(2, 2, figsize=(10, 8))
+ax = ax.ravel()
+for i in range(4):
+    ax[i].scatter(df[df.columns[i]], df["y"], edgecolor="k", color="red", alpha=0.75)
+    ax[i].set_title(f"{df.columns[i]} vs. y")
+    ax[i].grid(True)
+show()
+
+X = df[["X1", "X2", "X3", "X4"]]
+y = df["y"]
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Support vector regressor with linear kernel
+
+from sklearn.svm import SVR
+
+svr_linear = SVR(kernel="linear", gamma="scale", C=1.0, epsilon=0.1)
+svr_linear.fit(X_train, y_train)
+
+# Test score
+
+svr_linear.score(X_test, y_test)
+
+# 0.5039103904226544
+
+# Linear regression as a baseline
+
+from sklearn.linear_model import LinearRegression
+
+linear = LinearRegression()
+
+linear.fit(X_train, y_train)
+
+LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None)
+
+linear.score(X_test, y_test)
+
+# 0.5131204583471316
+
+# Support vector regressor with Gaussian (radial basis function) kernel
+
+svr_rbf = SVR(kernel="rbf", gamma="scale", C=1.0, epsilon=0.1)
+svr_rbf.fit(X_train, y_train)
+
+svr_rbf.score(X_test, y_test)
+
+# 0.6473177483091139
+
+# So, clearly, the RBF kernel showed better accuracy on the test set
+
+from sklearn.metrics import mean_squared_error
+
+print(
+    "RMSE for linear SVR:",
+    np.sqrt(mean_squared_error(y_test, svr_linear.predict(X_test))),
+)
+print(
+    "RMSE for RBF kernelized SVR:",
+    np.sqrt(mean_squared_error(y_test, svr_rbf.predict(X_test))),
+)
+
+# We can do a grid search of hyperparameters (with 5-fold cross-validation) to see if the test/validation score be improved
+
+from sklearn.model_selection import GridSearchCV
+
+params = {"C": [0.01, 0.05, 0.1, 0.5, 1, 2, 5], "epsilon": [0.1, 0.2, 0.5, 1]}
+
+grid = GridSearchCV(
+    svr_rbf, param_grid=params, cv=5, scoring="r2", verbose=1, return_train_score=True
+)
+
+grid.fit(X_train, y_train)
+
+# Fitting 5 folds for each of 28 candidates, totalling 140 fits
+
+# Check which was deemed best estimator by the grid search
+
+cc = grid.best_estimator_
+print(cc)
+
+# Fit that estimator to the data and see
+
+svr_best = SVR(kernel="rbf", gamma="scale", C=5.0, epsilon=0.5)
+svr_best.fit(X_train, y_train)
+
+svr_best.score(X_test, y_test)
+
+# 0.6776661577094625
+
+print(
+    "RMSE for RBF kernelized SVR:",
+    np.sqrt(mean_squared_error(y_test, svr_best.predict(X_test))),
+)
+
+# RMSE for RBF kernelized SVR: 1.163125361525394
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Regression_Diagnostics
+
+# Visual analytics and diagnostics of model fit for linear regression
+
+import statsmodels.formula.api as sm
+
+# The dataset path may be different in your situation. Please use the correct path
+df = pd.read_excel("data/Concrete_Data.xls")
+
+cc = df.head()
+print(cc)
+
+cc = df.describe().T
+print(cc)
+
+# Taking a peek at the relationship between the predicting variables and the response
+
+for c in df.columns[:-1]:
+    print(c)
+    plt.figure(figsize=(8, 5))
+    plt.title("{} vs. \nConcrete Compressive Strength".format(c))
+    plt.scatter(
+        x=df[c],
+        y=df["Concrete compressive strength(MPa, megapascals) "],
+        color="blue",
+        edgecolor="k",
+    )
+    plt.grid(True)
+    plt.xlabel(c)
+    plt.ylabel("Concrete compressive strength\n(MPa, megapascals)")
+    show()
+
+# Creating a copy with suitable column names for processing with statsmodels.OLS()
+
+df1 = df.copy()
+
+df1.columns = ["Component" + str(i) for i in range(1, 8)] + ["Age"] + ["y"]
+
+cc = df1.head()
+print(cc)
+
+# Pairwise scatter plots
+
+from seaborn import pairplot
+
+pairplot(df1)
+show()
+
+# Correlation matrix and heatmap to visually check for multicollinearity
+
+corr = df1[:-1].corr()
+
+print(corr)
+
+from statsmodels.graphics.correlation import plot_corr
+
+fig = plot_corr(corr, xnames=corr.columns)
+show()
+
+# Creating a formula string for using in the statsmodels.OLS()
+
+formula_str = df1.columns[-1] + " ~ " + "+".join(df1.columns[:-1])
+
+print(formula_str)
+
+# "y ~ Component1+Component2+Component3+Component4+Component5+Component6+Component7+Age"
+
+# Construct and fit the model. Print summary of the fitted model
+
+model = sm.ols(formula=formula_str, data=df1)
+
+fitted = model.fit()
+
+print("檢視模型架構")
+fitted.summary()  # 檢視模型架構
+
+# A new Result dataframe: p-values and statistical significance of the features
+
+df_result = pd.DataFrame()
+
+df_result["pvalues"] = fitted.pvalues[1:]
+
+df_result["Features"] = df.columns[:-1]
+
+df_result.set_index("Features", inplace=True)
+
+
+def yes_no(b):
+    if b:
+        return "Yes"
+    else:
+        return "No"
+
+
+df_result["Statistically significant?"] = df_result["pvalues"].apply(yes_no)
+
+print(df_result)
+
+# Residuals vs. predicting variables plots
+
+for c in df.columns[:-1]:
+    print(c)
+    plt.figure(figsize=(8, 5))
+    plt.title("{} vs. \nModel residuals".format(c))
+    plt.scatter(x=df[c], y=fitted.resid, color="blue", edgecolor="k")
+    plt.grid(True)
+    xmin = min(df[c])
+    xmax = max(df[c])
+    plt.hlines(y=0, xmin=xmin * 0.9, xmax=xmax * 1.1, color="red", linestyle="--", lw=3)
+    plt.xlabel(c)
+    plt.ylabel("Residuals")
+    show()
+
+# Residual plots show some bit of clustering but overall the assumptions linearity and independence seem to hold because the distribution seem random around the 0 axis.
+
+# Fitted vs. residuals
+
+plt.figure(figsize=(8, 5))
+p = plt.scatter(x=fitted.fittedvalues, y=fitted.resid, edgecolor="k")
+xmin = min(fitted.fittedvalues)
+xmax = max(fitted.fittedvalues)
+plt.hlines(y=0, xmin=xmin * 0.9, xmax=xmax * 1.1, color="red", linestyle="--", lw=3)
+plt.xlabel("Fitted values")
+plt.ylabel("Residuals")
+plt.title("Fitted vs. residuals plot")
+plt.grid(True)
+show()
+
+# The fitted vs. residuals plot shows violation of the constant variance assumption - Heteroscedasticity.
+
+# Histogram of normalized residuals
+
+plt.figure(figsize=(8, 5))
+plt.hist(fitted.resid_pearson, bins=20, edgecolor="k")
+plt.ylabel("Count")
+plt.xlabel("Normalized residuals")
+plt.title("Histogram of normalized residuals")
+show()
+
+# Q-Q plot of the residuals
+
+from statsmodels.graphics.gofplots import qqplot
+
+plt.figure(figsize=(8, 5))
+fig = qqplot(fitted.resid_pearson, line="45", fit="True")
+plt.xticks()
+plt.yticks()
+plt.xlabel("Theoretical quantiles")
+plt.ylabel("Sample quantiles")
+plt.title("Q-Q plot of normalized residuals")
+plt.grid(True)
+show()
+
+# The Q-Q plot (and the histogram above) shows that the normality assumption is satisfied pretty good
+
+# Normality (Shapiro-Wilk) test of the residuals
+
+from scipy.stats import shapiro
+
+_, p = shapiro(fitted.resid)
+
+if p < 0.01:
+    print("The residuals seem to come from Gaussian process")
+else:
+    print("The normality assumption may not hold")
+
+# The residuals seem to come from Gaussian process
+
+# Cook"s distance (checking for outliers in residuals)
+
+from statsmodels.stats.outliers_influence import OLSInfluence as influence
+
+inf = influence(fitted)
+
+(c, p) = inf.cooks_distance
+plt.figure(figsize=(8, 5))
+plt.title("Cook's distance plot for the residuals")
+plt.stem(np.arange(len(c)), c, markerfmt=",")
+plt.grid(True)
+show()
+
+# There are few data points with residuals being possible outliers
+
+# Variance inflation factor
+
+from statsmodels.stats.outliers_influence import variance_inflation_factor as vif
+
+for i in range(len(df1.columns[:-1])):
+    v = vif(np.matrix(df1[:-1]), i)
+    print("Variance inflation factor for {}: {}".format(df.columns[i], round(v, 2)))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Ridge/LASSO polynomial regression with linear and random sampling
+
+# Global variables for the program
+
+N_points = 41  # Number of points for constructing function
+x_min = 1  # Min of the range of x (feature)
+x_max = 10  # Max of the range of x (feature)
+noise_mean = 0  # Mean of the Gaussian noise adder
+noise_sd = 2  # Std.Dev of the Gaussian noise adder
+ridge_alpha = tuple(
+    [10 ** (x) for x in range(-3, 0, 1)]
+)  # Alpha (regularization strength) of ridge regression
+lasso_eps = 0.001
+lasso_nalpha = 20
+lasso_iter = 1000
+degree_min = 2
+degree_max = 8
+
+x_smooth = np.array(np.linspace(x_min, x_max, 1001))
+
+# Linearly spaced sample points
+X = np.array(np.linspace(x_min, x_max, N_points))
+
+# Samples drawn from uniform random distribution
+X_sample = x_min + np.random.rand(N_points) * (x_max - x_min)
+
+
+def func(x):
+    result = x**2 * np.sin(x) * np.exp(-(1 / x_max) * x)
+    return result
+
+
+noise_x = np.random.normal(loc=noise_mean, scale=noise_sd, size=N_points)
+
+y = func(X) + noise_x
+y_sampled = func(X_sample) + noise_x
+
+df = pd.DataFrame(data=X, columns=["X"])
+df["Ideal y"] = df["X"].apply(func)
+df["y"] = y
+df["X_sampled"] = X_sample
+df["y_sampled"] = y_sampled
+
+cc = df.head()
+print(cc)
+
+# Plot the function(s), both the ideal characteristic and the observed output (with process and observation noise)
+
+df.plot.scatter(
+    "X",
+    "Ideal y",
+    title="Ideal y",
+    grid=True,
+    edgecolors=(0, 0, 0),
+    c="blue",
+    s=40,
+    figsize=(10, 5),
+)
+plt.plot(x_smooth, func(x_smooth), "k")
+show()
+
+df.plot.scatter(
+    "X_sampled",
+    y="y_sampled",
+    title="Randomly sampled y",
+    grid=True,
+    edgecolors=(0, 0, 0),
+    c="orange",
+    s=40,
+    figsize=(10, 5),
+)
+plt.plot(x_smooth, func(x_smooth), "k")
+show()
+
+df.plot.scatter(
+    "X",
+    y="y",
+    title="Linearly sampled y",
+    grid=True,
+    edgecolors=(0, 0, 0),
+    c="orange",
+    s=40,
+    figsize=(10, 5),
+)
+plt.plot(x_smooth, func(x_smooth), "k")
+show()
+
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LassoCV
+from sklearn.linear_model import RidgeCV
+from sklearn.ensemble import AdaBoostRegressor
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import make_pipeline
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(df["X"], df["y"], test_size=0.2)
+
+X_train = X_train.values.reshape(-1, 1)
+X_test = X_test.values.reshape(-1, 1)
+
+# Polynomial model with Ridge regularization (pipelined) with lineary spaced samples
+
+linear_sample_score = []
+poly_degree = []
+for degree in range(degree_min, degree_max + 1):
+    # model = make_pipeline(PolynomialFeatures(degree), RidgeCV(alphas=ridge_alpha,normalize=True,cv=5))
+    model = make_pipeline(
+        PolynomialFeatures(degree),
+        LassoCV(eps=lasso_eps, n_alphas=lasso_nalpha, max_iter=lasso_iter, cv=5),
+    )
+    # model = make_pipeline(PolynomialFeatures(degree), LinearRegression(normalize=True))
+    model.fit(X_train, y_train)
+    y_pred = np.array(model.predict(X_train))
+    test_pred = np.array(model.predict(X_test))
+    RMSE = np.sqrt(np.sum(np.square(y_pred - y_train)))
+    test_score = model.score(X_test, y_test)
+    linear_sample_score.append(test_score)
+    poly_degree.append(degree)
+    print("Test score of model with degree {}: {}\n".format(degree, test_score))
+
+    # plt.figure()
+    # plt.title("RMSE: {}".format(RMSE))
+    # plt.suptitle("Polynomial of degree {}".format(degree))
+    # plt.xlabel("X training values")
+    # plt.ylabel("Fitted and training values")
+    # plt.scatter(X_train,y_pred)
+    # plt.scatter(X_train,y_train)
+
+    plt.figure()
+    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree))
+    plt.xlabel("Actual values")
+    plt.ylabel("Predicted values")
+    plt.scatter(y_test, test_pred)
+    plt.plot(y_test, y_test, "r", lw=2)
+
+print(linear_sample_score)
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(
+    df["X_sampled"], df["y_sampled"], test_size=0.2
+)
+
+X_train = X_train.values.reshape(-1, 1)
+X_test = X_test.values.reshape(-1, 1)
+
+random_sample_score = []
+poly_degree = []
+for degree in range(degree_min, degree_max + 1):
+    # model = make_pipeline(PolynomialFeatures(degree), RidgeCV(alphas=ridge_alpha,normalize=True,cv=5))
+    model = make_pipeline(
+        PolynomialFeatures(degree),
+        LassoCV(eps=lasso_eps, n_alphas=lasso_nalpha, max_iter=lasso_iter, cv=5),
+    )
+    # model = make_pipeline(PolynomialFeatures(degree), LinearRegression(normalize=True))
+    model.fit(X_train, y_train)
+    y_pred = np.array(model.predict(X_train))
+    test_pred = np.array(model.predict(X_test))
+    RMSE = np.sqrt(np.sum(np.square(y_pred - y_train)))
+    test_score = model.score(X_test, y_test)
+    random_sample_score.append(test_score)
+    poly_degree.append(degree)
+
+    print("Test score of model with degree {}: {}\n".format(degree, test_score))
+
+    # plt.figure()
+    # plt.title("RMSE: {}".format(RMSE))
+    # plt.suptitle("Polynomial of degree {}".format(degree))
+    # plt.xlabel("X training values")
+    # plt.ylabel("Fitted and training values")
+    # plt.scatter(X_train,y_pred)
+    # plt.scatter(X_train,y_train)
+
+    plt.figure()
+    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree))
+    plt.xlabel("Actual values")
+    plt.ylabel("Predicted values")
+    plt.scatter(y_test, test_pred)
+    plt.plot(y_test, y_test, "r", lw=2)
+    show()
+
+print(random_sample_score)
+
+df_score = pd.DataFrame(
+    data={
+        "degree": [d for d in range(degree_min, degree_max + 1)],
+        "Linear sample score": linear_sample_score,
+        "Random sample score": random_sample_score,
+    }
+)
+print(df_score)
+
+plt.figure(figsize=(8, 5))
+plt.grid(True)
+plt.plot(df_score["degree"], df_score["Linear sample score"], lw=2)
+plt.plot(df_score["degree"], df_score["Random sample score"], lw=2)
+plt.xlabel("Model Complexity: Degree of polynomial")
+plt.ylabel("Model Score: R^2 score on test set")
+plt.legend()
+show()
+
+
+# Cehcking the regularization strength from the cross-validated model pipeline
+
+m = model.steps[1][1]
+print(m.alpha_)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3422,19 +5509,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3454,4 +5528,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------")  # 30個
+print("------------------------------------------------------------")  # 60個

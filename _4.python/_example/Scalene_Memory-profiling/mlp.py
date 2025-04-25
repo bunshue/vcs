@@ -23,7 +23,7 @@ def test_train(data):
 
 # Fitting
 def fitting(X_train,y_train):
-    mlp = MLPRegressor(max_iter=50)
+    mlp = MLPRegressor(max_iter=5000)
     mlp.fit(X_train,y_train)
     del X_train
     del y_train
@@ -46,7 +46,7 @@ def model_run(model,testfile):
 if __name__ == '__main__':
     data = make_data()
     X_train,y_train,X_test,y_test = test_train(data)
-    X_test.to_csv("Test.csv",index=False)
+    X_test.to_csv("tmp_Test.csv",index=False)
     mlp = fitting(X_train,y_train)
     save(mlp)
     model_run('MultiLayerPerceptron.sav','Test.csv')

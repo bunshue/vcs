@@ -1,3 +1,8 @@
+曲線下方面積		Area Under the Curve, AUC
+接收者操作特性曲線	Receiver Operating Characteristic, ROC
+驗證曲線
+學習曲線
+
 Regression
     Simple linear regression with t-statistic generation
     Linear regression as a statistical estimation problem
@@ -52,10 +57,11 @@ recurrent neural network (RNN)
 
 
 ML四大部分
-regression			SVR、Ridge、Lasso、SGD、、、
-classification			SVC、KNN、SGD、NaiveBayes、、、
-clustering			KMeans、MeanShift、GMM、、、
-dimensionality-reduction	PCA、、、
+迴歸 regression			SVR、Ridge、Lasso、SGD、、、
+分類 classification		SVC、KNN、SGD、NaiveBayes、、、
+-----
+分群 clustering			KMeans、MeanShift、GMM、、、
+降維 dimensionality-reduction	PCA、t-SNE、、
 
 
 
@@ -192,7 +198,7 @@ f(x)=y
 
 機器學習 Machine Learning
 1. 監督式學習 supervised learning
-	分類學習 classification learning / 回歸學習 regression learning
+	分類學習 classification learning / 迴歸學習 regression learning
 	傳統監督式學習模型(6)
 	1. 線性迴歸 linear regression
 	2. 邏輯迴歸 logistic regression
@@ -262,7 +268,7 @@ YOLO(You Only Look Once) 是一個即時物件偵測網路
 
 Scikit-learn的基本功能主要被分為六大部分：
 1. 分類（Classification），
-2. 回歸（Regression），
+2. 迴歸（Regression），
 3. 集群(聚類)（Clustering）
 4. 數據降維（Dimensionality reduction）
 5. 模型選擇（Model selection）
