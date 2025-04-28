@@ -411,7 +411,7 @@ namespace vcs_WebCam2
                         }
 
                         string webcam_name;
-                        if (USBWebcams[i].Name.Contains("Virtual"))
+                        if (USBWebcams[i].Name.Contains("Virtualcccc"))
                         {
                             richTextBox1.Text += "跳過 Virtual\n";
                             webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name;
@@ -896,7 +896,7 @@ namespace vcs_WebCam2
             Cam_tmp = new VideoCaptureDevice(USBWebcams[i].MonikerString);  //實例化對象
 
             string webcam_name;
-            if (USBWebcams[i].Name.Contains("Virtual"))
+            if (USBWebcams[i].Name.Contains("Virtualcccc"))
             {
                 richTextBox1.Text += "跳過 Virtual\n";
                 webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name;
@@ -972,6 +972,11 @@ namespace vcs_WebCam2
         bool camera_start = false;
         private void bt_start_Click(object sender, EventArgs e)
         {
+            if (camera_short_name[comboBox1.SelectedIndex].Contains("Virtual"))
+            {
+                richTextBox1.Text += "不支援虛擬相機\n";
+                return;
+            }
             camera_start = true;
             Start_Webcam();
             bt_start.Enabled = false;
