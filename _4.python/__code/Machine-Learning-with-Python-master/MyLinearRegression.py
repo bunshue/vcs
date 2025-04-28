@@ -6,7 +6,6 @@ import statsmodels.api as sm
 class Metrics:
     """
     Methods for computing useful regression metrics
-
     sse: Sum of squared errors
     sst: Total sum of squared errors (actual vs avg(actual))
     r_squared: Regression coefficient (R^2)
@@ -17,7 +16,7 @@ class Metrics:
     """
 
     def sse(self):
-        """Returns sum of squared errors (model vs. actual)"""
+        # Returns sum of squared errors (model vs. actual)
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -26,7 +25,7 @@ class Metrics:
         return self.sq_error_
 
     def sst(self):
-        """Returns total sum of squared errors (actual vs avg(actual))"""
+        # Returns total sum of squared errors (actual vs avg(actual))
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -36,7 +35,7 @@ class Metrics:
         return self.sst_
 
     def r_squared(self):
-        """Returns calculated value of r^2"""
+        # Returns calculated value of r^2
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -44,7 +43,7 @@ class Metrics:
         return self.r_sq_
 
     def adj_r_squared(self):
-        """Returns calculated value of adjusted r^2"""
+        # Returns calculated value of adjusted r^2
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -52,7 +51,7 @@ class Metrics:
         return self.adj_r_sq_
 
     def mse(self):
-        """Returns calculated value of mse"""
+        # Returns calculated value of mse
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -60,9 +59,7 @@ class Metrics:
         return self.mse_
 
     def aic(self):
-        """
-        Returns AIC (Akaike information criterion)
-        """
+        # Returns AIC (Akaike information criterion)
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -70,9 +67,7 @@ class Metrics:
         return lm.aic
 
     def bic(self):
-        """
-        Returns BIC (Bayesian information criterion)
-        """
+        # Returns BIC (Bayesian information criterion)
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -80,7 +75,7 @@ class Metrics:
         return lm.bic
 
     def print_metrics(self):
-        """Prints a report of the useful metrics for a given model object"""
+        # Prints a report of the useful metrics for a given model object
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -97,7 +92,7 @@ class Metrics:
             print("{0:8} {1:.4f}".format(item[0], item[1]))
 
     def summary_metrics(self):
-        """Returns a dictionary of the useful metrics"""
+        # Returns a dictionary of the useful metrics
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -129,9 +124,7 @@ class Inference:
         pass
 
     def std_err(self):
-        """
-        Returns standard error values of the features
-        """
+        # Returns standard error values of the features
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -139,9 +132,7 @@ class Inference:
         return lm.bse
 
     def pvalues(self):
-        """
-        Returns p-values of the features
-        """
+        # Returns p-values of the features
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -149,9 +140,7 @@ class Inference:
         return lm.pvalues
 
     def tvalues(self):
-        """
-        Returns t-test values of the features
-        """
+        # Returns t-test values of the features
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -159,9 +148,7 @@ class Inference:
         return lm.tvalues
 
     def ftest(self):
-        """
-        Returns the F-statistic of the overall regression and corresponding p-value
-        """
+        # Returns the F-statistic of the overall regression and corresponding p-value
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -172,7 +159,6 @@ class Inference:
 class Diagnostics_plots:
     """
     Diagnostics plots and methods
-
     Arguments:
     fitted_vs_residual: Plots fitted values vs. residuals
     fitted_vs_features: Plots residuals vs all feature variables in a grid
@@ -185,11 +171,11 @@ class Diagnostics_plots:
         pass
 
     def fitted_vs_residual(self):
-        """Plots fitted values vs. residuals"""
+        # Plots fitted values vs. residuals
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
-        plt.title("Fitted vs. residuals plot", fontsize=14)
+        plt.title("Fitted vs. residuals plot")
         plt.scatter(self.fitted_, self.resid_, edgecolor="k")
         plt.hlines(
             y=0,
@@ -203,7 +189,7 @@ class Diagnostics_plots:
         plt.show()
 
     def fitted_vs_features(self):
-        """Plots residuals vs all feature variables in a grid"""
+        # Plots residuals vs all feature variables in a grid
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -238,7 +224,7 @@ class Diagnostics_plots:
         plt.show()
 
     def histogram_resid(self, normalized=True):
-        """Plots a histogram of the residuals (can be normalized)"""
+        # Plots a histogram of the residuals (can be normalized)
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -254,7 +240,7 @@ class Diagnostics_plots:
         plt.show()
 
     def shapiro_test(self, normalized=True):
-        """Performs Shapiro-Wilk normality test on the residuals"""
+        # Performs Shapiro-Wilk normality test on the residuals
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -273,7 +259,7 @@ class Diagnostics_plots:
             )
 
     def qqplot_resid(self, normalized=True):
-        """Creates a quantile-quantile plot for residuals comparing with a normal distribution"""
+        # Creates a quantile-quantile plot for residuals comparing with a normal distribution
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -293,7 +279,6 @@ class Diagnostics_plots:
 class Data_plots:
     """
     Methods for data related plots
-
     pairplot: Creates pairplot of all variables and the target
     plot_fitted: Plots fitted values against the true output values from the data
     """
@@ -302,7 +287,7 @@ class Data_plots:
         pass
 
     def pairplot(self):
-        """Creates pairplot of all variables and the target using the Seaborn library"""
+        # Creates pairplot of all variables and the target using the Seaborn library
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -318,14 +303,13 @@ class Data_plots:
     def plot_fitted(self, reference_line=False):
         """
         Plots fitted values against the true output values from the data
-
         Arguments:
         reference_line: A Boolean switch to draw a 45-degree reference line on the plot
         """
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
-        plt.title("True vs. fitted values", fontsize=14)
+        plt.title("True vs. fitted values")
         plt.scatter(y, self.fitted_, s=100, alpha=0.75, color="red", edgecolor="k")
         if reference_line:
             plt.plot(y, y, c="k", linestyle="dotted")
@@ -338,7 +322,6 @@ class Data_plots:
 class Outliers:
     """
     Methods for plotting outliers, leverage, influence points
-
     cook_distance: Computes and plots Cook's distance
     influence_plot: Creates the influence plot
     leverage_resid_plot: Plots leverage vs normalized residuals' square
@@ -348,7 +331,7 @@ class Outliers:
         pass
 
     def cook_distance(self):
-        """Computes and plots Cook\'s distance"""
+        # Computes and plots Cook\'s distance
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -359,13 +342,13 @@ class Outliers:
         inf = influence(lm)
         (c, p) = inf.cooks_distance
         plt.figure(figsize=(8, 5))
-        plt.title("Cook's distance plot for the residuals", fontsize=14)
+        plt.title("Cook's distance plot for the residuals")
         plt.stem(np.arange(len(c)), c, markerfmt=",", use_line_collection=True)
         plt.grid(True)
         plt.show()
 
     def influence_plot(self):
-        """Creates the influence plot"""
+        # Creates the influence plot
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -377,7 +360,7 @@ class Outliers:
         plt.show()
 
     def leverage_resid_plot(self):
-        """Plots leverage vs normalized residuals' square"""
+        # Plots leverage vs normalized residuals' square
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -392,7 +375,6 @@ class Outliers:
 class Multicollinearity:
     """
     Methods for checking multicollinearity in the dataset features
-
     vif:Computes variance influence factors for each feature variable
     """
 
@@ -400,7 +382,7 @@ class Multicollinearity:
         pass
 
     def vif(self):
-        """Computes variance influence factors for each feature variable"""
+        # Computes variance influence factors for each feature variable
         if not self.is_fitted:
             print("Model not fitted yet!")
             return None
@@ -432,7 +414,6 @@ class MyLinearRegression(
     def ingest_data(self, X, y):
         """
         Ingests the given data
-
          Arguments:
          X: 1D or 2D numpy array
          y: 1D numpy array
@@ -500,7 +481,6 @@ class MyLinearRegression(
     def fit(self, X=None, y=None, fit_intercept_=True):
         """
         Fits model coefficients.
-
         Arguments:
         X: 1D or 2D numpy array
         y: 1D numpy array
@@ -554,7 +534,6 @@ class MyLinearRegression(
     def fit_dataframe(self, X, y, dataframe, fit_intercept_=True):
         """
         Fit model coefficients from a Pandas DataFrame.
-
         Arguments:
         X: A list of columns of the dataframe acting as features. Must be only numerical.
         y: Name of the column of the dataframe acting as the target
@@ -620,7 +599,7 @@ class MyLinearRegression(
         return self.predicted_
 
     def run_diagnostics(self):
-        """Runs diagnostics tests and plots"""
+        # Runs diagnostics tests and plots
         Diagnostics_plots.fitted_vs_residual(self)
         Diagnostics_plots.histogram_resid(self)
         Diagnostics_plots.qqplot_resid(self)
@@ -628,7 +607,7 @@ class MyLinearRegression(
         Diagnostics_plots.shapiro_test(self)
 
     def outlier_plots(self):
-        """Creates various outlier plots"""
+        # Creates various outlier plots
         Outliers.cook_distance(self)
         Outliers.influence_plot(self)
         Outliers.leverage_resid_plot(self)

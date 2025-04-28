@@ -38,149 +38,174 @@ from sklearn.datasets import make_regression
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn import metrics
+from sklearn.metrics import adjusted_rand_score
+from sklearn.metrics import completeness_score
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import f1_score
+from sklearn.metrics import silhouette_score
+from sklearn.metrics import davies_bouldin_score
+from sklearn.metrics import v_measure_score
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LassoCV
+from sklearn.linear_model import RidgeCV
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import HuberRegressor
+from sklearn.cluster import KMeans  # k-means clustering
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.decomposition import PCA
 from sklearn.decomposition import KernelPCA  # KernelPCA 萃取特徵
 from matplotlib.colors import ListedColormap
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler  # Scaling
 from sklearn import tree
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
-"""
+RATIO = 10
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#Linear Regression and Regularization
+# Linear Regression and Regularization
 
 N_samples = 25
 x_min = -5
 x_max = 5
-x1= np.linspace(x_min,x_max,N_samples*5)
-x= np.random.choice(x1,size=N_samples)
-noise_std=1
-noise_mean=0
+x1 = np.linspace(x_min, x_max, N_samples * 5)
+x = np.random.choice(x1, size=N_samples)
+noise_std = 1
+noise_mean = 0
 noise_magnitude = 2
 
-x1= np.linspace(x_min,x_max,N_samples*5)
-x= np.random.choice(x1,size=N_samples)
-y=2*x-0.6*x**2+0.2*x**3+18*np.sin(x)
-y1=2*x1-0.6*x1**2+0.2*x1**3+18*np.sin(x1)
-y= y+noise_magnitude*np.random.normal(loc=noise_mean,scale=noise_std,size=N_samples)
-plt.figure(figsize=(8,5))
-plt.plot(x1,y1,c='k',lw=2)
-plt.scatter(x,y,edgecolors='k',c='yellow',s=60)
+x1 = np.linspace(x_min, x_max, N_samples * 5)
+x = np.random.choice(x1, size=N_samples)
+y = 2 * x - 0.6 * x**2 + 0.2 * x**3 + 18 * np.sin(x)
+y1 = 2 * x1 - 0.6 * x1**2 + 0.2 * x1**3 + 18 * np.sin(x1)
+y = y + noise_magnitude * np.random.normal(
+    loc=noise_mean, scale=noise_std, size=N_samples
+)
+plt.figure(figsize=(8, 5))
+plt.plot(x1, y1, c="k", lw=2)
+plt.scatter(x, y, edgecolors="k", c="yellow", s=60)
 plt.grid(True)
 
 show()
 
-#return (x,y,x1,y1)
+# return (x,y,x1,y1)
 
 # Extract the data
 
 # x,y,x1,y1 = p.result
 
-# Load scikit-learn libraries
-
 from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LassoCV
-from sklearn.linear_model import RidgeCV
-from sklearn.linear_model import LinearRegression
 from sklearn.pipeline import make_pipeline
 
 # Machine learning (regression) model encapsulated within a function
 
 lasso_eps = 0.01
-lasso_nalpha=20
-lasso_iter=3000
-ridge_alphas = (0.001,0.01,0.1,1)
+lasso_nalpha = 20
+lasso_iter = 3000
+ridge_alphas = (0.001, 0.01, 0.1, 1)
 
-def func_fit(model_type,test_size,degree):
-    X_train, X_test, y_train, y_test = train_test_split(x,y,test_size=test_size,random_state=55)
-    
-    t1=np.min(X_test)
-    t2=np.max(X_test)
-    t3=np.min(y_test)
-    t4=np.max(y_test)
-    
-    t5=np.min(X_train)
-    t6=np.max(X_train)
-    t7=np.min(y_train)
-    t8=np.max(y_train)
-    
-    posx_test=t1+(t2-t1)*0.7
-    posx_train=t5+(t6-t5)*0.7
-    posy_test=t3+(t4-t3)*0.2
-    posy_train=t7+(t8-t7)*0.2
-    
-    if (model_type=='Linear regression'):
-        model = make_pipeline(PolynomialFeatures(degree,interaction_only=False), 
-                          LinearRegression())
-    if (model_type=='LASSO with CV'):    
-        model = make_pipeline(PolynomialFeatures(degree,interaction_only=False), 
-                              LassoCV(eps=lasso_eps,n_alphas=lasso_nalpha,max_iter=lasso_iter,cv=5))
-        
-    if (model_type=='Ridge with CV'):    
-        model = make_pipeline(PolynomialFeatures(degree,interaction_only=False), 
-                              RidgeCV(alphas=ridge_alphas,cv=5))
-    
-    X_train=X_train.reshape(-1,1)
-    X_test=X_test.reshape(-1,1)
-    
-    model.fit(X_train,y_train)
-    
+
+def func_fit(model_type, test_size, degree):
+    print("model_type :", model_type)
+    # 資料分割
+    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=test_size)
+
+    t1 = np.min(X_test)
+    t2 = np.max(X_test)
+    t3 = np.min(y_test)
+    t4 = np.max(y_test)
+
+    t5 = np.min(X_train)
+    t6 = np.max(X_train)
+    t7 = np.min(y_train)
+    t8 = np.max(y_train)
+
+    posx_test = t1 + (t2 - t1) * 0.7
+    posx_train = t5 + (t6 - t5) * 0.7
+    posy_test = t3 + (t4 - t3) * 0.2
+    posy_train = t7 + (t8 - t7) * 0.2
+
+    if model_type == "Linear regression":
+        model = make_pipeline(
+            PolynomialFeatures(degree, interaction_only=False), LinearRegression()
+        )
+    if model_type == "LASSO with CV":
+        model = make_pipeline(
+            PolynomialFeatures(degree, interaction_only=False),
+            LassoCV(eps=lasso_eps, n_alphas=lasso_nalpha, max_iter=lasso_iter, cv=5),
+        )
+
+    if model_type == "Ridge with CV":
+        model = make_pipeline(
+            PolynomialFeatures(degree, interaction_only=False),
+            RidgeCV(alphas=ridge_alphas, cv=5),
+        )
+
+    X_train = X_train.reshape(-1, 1)
+    X_test = X_test.reshape(-1, 1)
+
+    model.fit(X_train, y_train)
+
     train_pred = np.array(model.predict(X_train))
-    train_score = model.score(X_train,y_train)
-    
+    train_score = model.score(X_train, y_train)
+
     test_pred = np.array(model.predict(X_test))
-    test_score = model.score(X_test,y_test)
-    
-    RMSE_test=np.sqrt(np.mean(np.square(test_pred-y_test)))
-    RMSE_train=np.sqrt(np.mean(np.square(train_pred-y_train)))
-    
-    print("Test score: {}, Training score: {}".format(test_score,train_score))
-    
-    print("RMSE Test: {}, RMSE train: {}".format(RMSE_test,RMSE_train))
-    
-    plt.figure(figsize=(12,4))
-    
-    plt.subplot(1,2,1)
-    plt.title("Test set performance\n",fontsize=16)
-    plt.xlabel("X-test",fontsize=13)
-    plt.ylabel("y-test",fontsize=13)
-    plt.scatter(X_test,y_test,edgecolors='k',c='blue',s=60)
-    plt.scatter(X_test,test_pred,edgecolors='k',c='yellow',s=60)
+    test_score = model.score(X_test, y_test)
+
+    RMSE_test = np.sqrt(np.mean(np.square(test_pred - y_test)))
+    RMSE_train = np.sqrt(np.mean(np.square(train_pred - y_train)))
+
+    print("Test score: {}, Training score: {}".format(test_score, train_score))
+
+    print("RMSE Test: {}, RMSE train: {}".format(RMSE_test, RMSE_train))
+
+    plt.figure(figsize=(12, 4))
+
+    plt.subplot(121)
+    plt.title("Test set performance")
+    plt.xlabel("X-test")
+    plt.ylabel("y-test")
+    plt.scatter(X_test, y_test, edgecolors="k", c="blue", s=60)
+    plt.scatter(X_test, test_pred, edgecolors="k", c="yellow", s=60)
     plt.grid(True)
-    plt.legend(['Actual test values','Predicted values'])
-    plt.text(x=posx_test,y=posy_test,s='Test score: %.3f'%(test_score),fontsize=15)
-    
-    plt.subplot(1,2,2)
-    plt.title("Training set performance\n",fontsize=16)
-    plt.xlabel("X-train",fontsize=13)
-    plt.ylabel("y-train",fontsize=13)
-    plt.scatter(X_train,y_train,c='blue')
-    plt.scatter(X_train,train_pred,c='yellow')
+    plt.legend(["Actual test values", "Predicted values"])
+    plt.text(x=posx_test, y=posy_test, s="Test score: %.3f" % (test_score))
+
+    plt.subplot(122)
+    plt.title("Training set performance")
+    plt.xlabel("X-train")
+    plt.ylabel("y-train")
+    plt.scatter(X_train, y_train, c="blue")
+    plt.scatter(X_train, train_pred, c="yellow")
     plt.grid(True)
-    plt.legend(['Actual training values','Fitted values'])
-    plt.text(x=posx_train,y=posy_train,s='Training score: %.3f'%(train_score),fontsize=15)
-    
+    plt.legend(["Actual training values", "Fitted values"])
+    plt.text(x=posx_train, y=posy_train, s="Training score: %.3f" % (train_score))
+
     show()
-       
-    return (train_score,test_score)    
 
+    return (train_score, test_score)
 
-model_type='Linear regression'
-model_type='LASSO with CV'
-model_type='Ridge with CV'
 
 test_size = 0.2
 degree = 3
 
-func_fit(model_type,test_size,degree)
-"""
+model_type = "Linear regression"
+func_fit(model_type, test_size, degree)
+
+model_type = "LASSO with CV"
+func_fit(model_type, test_size, degree)
+
+model_type = "Ridge with CV"
+func_fit(model_type, test_size, degree)
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -202,15 +227,15 @@ df1 = pd.DataFrame(
 cc = df1.head()
 print(cc)
 
-
 from itertools import combinations
 
 lst_vars = list(combinations(df1.columns, 2))
 cc = len(lst_vars)
 print(cc)
 
-plt.figure(figsize=(21, 35))
+plt.figure(figsize=(16, 8))
 for i in range(1, 29):
+    print("i =", i)
     plt.subplot(7, 4, i)
     dim1 = lst_vars[i - 1][0]
     dim2 = lst_vars[i - 1][1]
@@ -226,7 +251,7 @@ cc = df1.describe().transpose()
 print(cc)
 
 # How are the classes separated (boxplots)
-plt.figure(figsize=(21, 15))
+plt.figure(figsize=(16, 8))
 
 for i, c in enumerate(df1.columns):
     plt.subplot(3, 3, i + 1)
@@ -240,28 +265,16 @@ show()
 
 print("------------------------------")  # 30個
 
-# k-means clustering
-from sklearn.cluster import KMeans
-
 X = df1
-# X.head()
-y = data1[1]
+# cc = X.head()
+# print(cc)
 
-# Scaling
-from sklearn.preprocessing import MinMaxScaler
+y = data1[1]
 
 scaler = MinMaxScaler()
 X_scaled = scaler.fit_transform(X)
 
 print("------------------------------")  # 30個
-
-# Metrics
-from sklearn.metrics import (
-    silhouette_score,
-    adjusted_rand_score,
-    completeness_score,
-    v_measure_score,
-)
 
 # Running k-means and computing inter-cluster distance score for various *k* values
 
@@ -269,6 +282,7 @@ km_scores = []
 km_silhouette = []
 vmeasure_score = []
 for i in range(2, 12):
+    print("i =", i)
     km = KMeans(n_clusters=i, random_state=0).fit(X_scaled)
     preds = km.predict(X_scaled)
     print("Score for number of cluster(s) {}: {}".format(i, km.score(X_scaled)))
@@ -297,8 +311,10 @@ print("------------------------------")  # 30個
 
 km = KMeans(n_clusters=5, n_init=10, max_iter=500).fit(X=X_scaled)
 preds_km = km.predict(X_scaled)
-plt.figure(figsize=(21, 35))
+
+plt.figure(figsize=(16, 8))
 for i in range(1, 29):
+    print("i =", i)
     plt.subplot(7, 4, i)
     dim1 = lst_vars[i - 1][0]
     dim2 = lst_vars[i - 1][1]
@@ -317,6 +333,7 @@ from sklearn.mixture import GaussianMixture
 gm_bic = []
 gm_score = []
 for i in range(2, 12):
+    print("i =", i)
     gm = GaussianMixture(n_components=i, n_init=10, tol=1e-3, max_iter=1000).fit(
         X_scaled
     )
@@ -335,10 +352,8 @@ plt.grid(True)
 plt.xlabel("Gaussian mixture BIC score")
 show()
 
-
 plt.scatter(x=[i for i in range(2, 12)], y=gm_score, s=150, edgecolor="k")
 show()
-
 
 print("------------------------------")  # 30個
 
@@ -375,20 +390,21 @@ print(cc)
 cc = silhouette_score(X_scaled, preds_gm)
 print(cc)
 
-plt.figure(figsize=(21, 35))
+plt.figure(figsize=(16, 8))
 for i in range(1, 29):
+    print("i =", i)
     plt.subplot(7, 4, i)
     dim1 = lst_vars[i - 1][0]
     dim2 = lst_vars[i - 1][1]
     plt.scatter(df1[dim1], df1[dim2], c=preds_gm, edgecolor="k")
     plt.xlabel(f"{dim1}", fontsize=13)
     plt.ylabel(f"{dim2}", fontsize=13)
+
 show()
 
 print("------------------------------")  # 30個
 
 # PCA
-from sklearn.decomposition import PCA
 
 n_prin_comp = 3
 
@@ -409,6 +425,7 @@ plt.bar(x=["PrComp" + str(i) for i in range(1, 9)], height=cum_explaiend_var, wi
 plt.xticks(fontsize=14)
 plt.hlines(y=0.8, xmin="PrComp1", xmax="PrComp8", linestyles="dashed", lw=3)
 plt.text(x="PrComp1", y=0.82, s="80% variance explained", fontsize=15)
+
 show()
 
 print("------------------------------")  # 30個
@@ -424,6 +441,7 @@ km_scores = []
 km_silhouette = []
 vmeasure_score = []
 for i in range(2, 12):
+    print("i =", i)
     km = KMeans(n_clusters=i, random_state=0).fit(X_pca)
     preds = km.predict(X_pca)
     print("Score for number of cluster(s) {}: {}".format(i, km.score(X_pca)))
@@ -454,8 +472,9 @@ preds_km_pca = km_pca.predict(X_pca)
 col_pca_combi = list(combinations(df_pca.columns, 2))
 num_pca_combi = len(col_pca_combi)
 
-plt.figure(figsize=(21, 20))
+plt.figure(figsize=(16, 8))
 for i in range(1, num_pca_combi + 1):
+    print("i =", i)
     plt.subplot(int(num_pca_combi / 3) + 1, 3, i)
     dim1 = col_pca_combi[i - 1][0]
     dim2 = col_pca_combi[i - 1][1]
@@ -485,6 +504,7 @@ km_scores = []
 km_silhouette = []
 vmeasure_score = []
 for i in range(2, 12):
+    print("i =", i)
     km = KMeans(n_clusters=i, random_state=0).fit(X_ica)
     preds = km.predict(X_ica)
     print("Score for number of cluster(s) {}: {}".format(i, km.score(X_ica)))
@@ -511,8 +531,9 @@ preds_km_ica = km_ica.predict(X_ica)
 col_ica_combi = list(combinations(df_ica.columns, 2))
 num_ica_combi = len(col_ica_combi)
 
-plt.figure(figsize=(21, 20))
+plt.figure(figsize=(16, 8))
 for i in range(1, num_ica_combi + 1):
+    print("i =", i)
     plt.subplot(int(num_ica_combi / 3) + 1, 3, i)
     dim1 = col_ica_combi[i - 1][0]
     dim2 = col_ica_combi[i - 1][1]
@@ -538,6 +559,7 @@ km_scores = []
 km_silhouette = []
 vmeasure_score = []
 for i in range(2, 12):
+    print("i =", i)
     km = KMeans(n_clusters=i, random_state=0).fit(X_random_proj)
     preds = km.predict(X_random_proj)
     print("Score for number of cluster(s) {}: {}".format(i, km.score(X_random_proj)))
@@ -566,8 +588,9 @@ preds_km_random_proj = km_random_proj.predict(X_random_proj)
 col_random_proj_combi = list(combinations(df_random_proj.columns, 2))
 num_random_proj_combi = len(col_random_proj_combi)
 
-plt.figure(figsize=(21, 20))
+plt.figure(figsize=(16, 8))
 for i in range(1, num_random_proj_combi + 1):
+    print("i =", i)
     plt.subplot(int(num_random_proj_combi / 3) + 1, 3, i)
     dim1 = col_random_proj_combi[i - 1][0]
     dim2 = col_random_proj_combi[i - 1][1]
@@ -583,11 +606,10 @@ show()
 
 
 def plot_cluster_rp(df_rp, preds_rp):
-    """
-    Plots clusters after running random projection
-    """
-    plt.figure(figsize=(21, 12))
+    # Plots clusters after running random projection
+    plt.figure(figsize=(16, 8))
     for i in range(1, num_random_proj_combi + 1):
+        print("i =", i)
         plt.subplot(int(num_random_proj_combi / 3) + 1, 3, i)
         dim1 = col_random_proj_combi[i - 1][0]
         dim2 = col_random_proj_combi[i - 1][1]
@@ -603,6 +625,7 @@ rp_score = []
 rp_silhouette = []
 rp_vmeasure = []
 for i in range(20):
+    print("i =", i)
     random_proj = GaussianRandomProjection(n_components=n_random_comp)
     X_random_proj = random_proj.fit_transform(X_scaled)
     df_random_proj = pd.DataFrame(
@@ -640,7 +663,9 @@ show()
 pca_score = []
 pca_silhouette = []
 pca_vmeasure = []
+
 for i in range(20):
+    print("i =", i)
     pca_partial = PCA(n_components=n_prin_comp, svd_solver="full")
     X_pca = pca_partial.fit_transform(X_scaled)
     km = KMeans(n_clusters=5, random_state=0).fit(X_pca)
@@ -655,7 +680,6 @@ for i in range(20):
     print("V-measure score for iteration {}: {}".format(i, v_measure))
     print("-" * 100)
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -664,8 +688,6 @@ print("------------------------------------------------------------")  # 60個
 # Synthetic data set from scikit-learn
 
 sns.set_style("white")
-
-from sklearn import datasets
 
 X, y = datasets.make_hastie_10_2(n_samples=12000, random_state=1)
 
@@ -680,7 +702,7 @@ print(cc)
 # Basic visualizations
 
 i = 1
-plt.figure(figsize=(20, 20))
+plt.figure(figsize=(12, 8))
 for c in df.columns[:-1]:
     plt.subplot(4, 3, i)
     plt.title(f"Histogram of variable {c}")
@@ -691,7 +713,7 @@ for c in df.columns[:-1]:
 show()
 
 i = 1
-plt.figure(figsize=(20, 20))
+plt.figure(figsize=(12, 8))
 for c in df.columns[:-1]:
     plt.subplot(4, 3, i)
     plt.title(f"Boxplot of {c}")
@@ -703,22 +725,20 @@ show()
 
 df_sample = df.sample(frac=0.01)
 sns.set(style="ticks")
+
 """ NG pairplot
 g=sns.pairplot(df_sample,vars=["X1","X2","X3"],
                hue="y",markers=["o", "s"],
                diag_kind="kde",diag_kws=dict(shade=True),plot_kws=dict(s=100,alpha=0.75))
 """
-# Test/train/validation split
 
 X = df.drop("y", axis=1)
 y = df["y"]
 
-# First divide train and test data in 70:30 ratio
-
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
 
-# Then further divide the test set in 50:50 ratio into validation set and test set
-
+# 資料分割
 X_test, X_val, y_test, y_val = train_test_split(X_test, y_test, test_size=0.50)
 
 cc = X_test.head()
@@ -734,9 +754,6 @@ print("Shape of test set:", X_test.shape)
 print("Shape of training set:", X_train.shape)
 
 # Decision Tree model
-
-from sklearn.tree import DecisionTreeClassifier
-
 dtree = DecisionTreeClassifier(criterion="gini", max_depth=10, min_samples_leaf=5)
 
 dtree.fit(X_train, y_train)
@@ -744,9 +761,6 @@ dtree.fit(X_train, y_train)
 # Predictions and evaluation
 
 predictions = dtree.predict(X_val)
-
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import f1_score
 
 score1 = accuracy_score(y_val, predictions)
 print(score1)
@@ -760,8 +774,12 @@ val_acc_max_depth = []
 val_f1_max_depth = []
 train_acc_max_depth = []
 train_f1_max_depth = []
+
 val_range = (1, 81, 1)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     dtree = DecisionTreeClassifier(criterion="gini", max_depth=i, min_samples_leaf=1)
     dtree.fit(X_train, y_train)
     pred_train = dtree.predict(X_train)
@@ -775,8 +793,14 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     val_acc_max_depth.append(acc_val)
     val_f1_max_depth.append(f1_val)
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_max_depth, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_max_depth, c="blue")
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    train_acc_max_depth,
+    c="red",
+)
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO), val_acc_max_depth, c="blue"
+)
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks()
@@ -792,8 +816,12 @@ val_acc_min_samples_leaf = []
 val_f1_min_samples_leaf = []
 train_acc_min_samples_leaf = []
 train_f1_min_samples_leaf = []
+
 val_range = (1, 41, 1)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     dtree = DecisionTreeClassifier(criterion="gini", max_depth=20, min_samples_leaf=i)
     dtree.fit(X_train, y_train)
     pred_train = dtree.predict(X_train)
@@ -808,10 +836,14 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     val_f1_min_samples_leaf.append(f1_val)
 
 plt.plot(
-    range(val_range[0], val_range[1], val_range[2]), train_acc_min_samples_leaf, c="red"
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    train_acc_min_samples_leaf,
+    c="red",
 )
 plt.plot(
-    range(val_range[0], val_range[1], val_range[2]), val_acc_min_samples_leaf, c="blue"
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    val_acc_min_samples_leaf,
+    c="blue",
 )
 plt.legend(["Training", "Validation"])
 plt.grid(True)
@@ -828,8 +860,12 @@ val_acc_train_size = []
 val_f1_train_size = []
 train_acc_train_size = []
 train_f1_train_size = []
+
 val_range = (10, 101, 5)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Fitting
     percentage = i * 0.01
     dtree = DecisionTreeClassifier(criterion="gini", max_depth=20, min_samples_leaf=5)
@@ -852,11 +888,19 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     val_acc_train_size.append(acc_val)
     val_f1_train_size.append(f1_val)
     if i % 10 == 0:
-        print(f"Done for: {i}% training set size")
+        print(f"aaa Done for: {i}% training set size")
 
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_train_size, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_train_size, c="blue")
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    train_acc_train_size,
+    c="red",
+)
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    val_acc_train_size,
+    c="blue",
+)
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks()
@@ -867,7 +911,6 @@ plt.ylim(0.75, 1.0)
 show()
 
 # Boosting algorithm model
-
 from sklearn.ensemble import AdaBoostClassifier
 
 adaboost = AdaBoostClassifier(
@@ -894,8 +937,12 @@ val_f1_num_trees = []
 train_acc_num_trees = []
 train_f1_num_trees = []
 time_adaboost = []
+
 val_range = (1, 152, 5)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     t1 = time.time()
     # Fitting
     adaboost = AdaBoostClassifier(
@@ -918,11 +965,17 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     val_f1_num_trees.append(f1_val)
     t2 = time.time()
     time_adaboost.append(t2 - t1)
-    print(f"Done for number of trees: {i}")
+    print(f"aaa Done for number of trees: {i}")
 
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_num_trees, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_num_trees, c="blue")
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    train_acc_num_trees,
+    c="red",
+)
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO), val_acc_num_trees, c="blue"
+)
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks()
@@ -932,7 +985,9 @@ plt.ylabel("Accuracy")
 plt.ylim(0.5, 1.05)
 show()
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), time_adaboost, c="red")
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO), time_adaboost, c="red"
+)
 # plt.plot(range(val_range[0],val_range[1],val_range[2]),val_acc_num_trees,c='blue')
 # plt.legend(["Training","Validation"])
 plt.grid(True)
@@ -949,9 +1004,13 @@ val_acc_lr = []
 val_f1_lr = []
 train_acc_lr = []
 train_f1_lr = []
+
 val_range = (1, 21, 1)
+print("val_range :", val_range)
+
 lr_range = []
-for i in range(val_range[0], val_range[1], val_range[2]):
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Fitting
     lr = 0.1 * i
     lr_range.append(lr)
@@ -993,8 +1052,12 @@ val_acc_train_size = []
 val_f1_train_size = []
 train_acc_train_size = []
 train_f1_train_size = []
+
 val_range = (10, 101, 1)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Model
     percentage = i * 0.01
     adaboost = adaboost = AdaBoostClassifier(
@@ -1022,11 +1085,19 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     val_f1_train_size.append(f1_val)
 
     if i % 10 == 0:
-        print(f"Done for: {i}% training set size")
+        print(f"bbb Done for: {i}% training set size")
 
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_train_size, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_train_size, c="blue")
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    train_acc_train_size,
+    c="red",
+)
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    val_acc_train_size,
+    c="blue",
+)
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks()
@@ -1037,9 +1108,6 @@ plt.ylabel("Accuracy")
 show()
 
 # SVM model
-# Scaling the data using StandardScaler
-
-from sklearn.preprocessing import StandardScaler
 
 X_train_scaled = StandardScaler().fit_transform(X_train)
 X_val_scaled = StandardScaler().fit_transform(X_val)
@@ -1065,8 +1133,12 @@ val_acc_degree = []
 val_f1_degree = []
 train_acc_degree = []
 train_f1_degree = []
+
 val_range = (1, 11, 1)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Fitting
     svc_clf = SVC(kernel="poly", C=0.01, degree=i)
     svc_clf.fit(X_train_scaled, y_train)
@@ -1082,11 +1154,15 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     train_f1_degree.append(f1_train)
     val_acc_degree.append(acc_val)
     val_f1_degree.append(f1_val)
-    print(f"Done for number of degree: {i}")
+    print(f"bbb Done for number of degree: {i}")
 
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_degree, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_degree, c="blue")
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO), train_acc_degree, c="red"
+)
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO), val_acc_degree, c="blue"
+)
 plt.grid(True)
 plt.legend(["Training", "Validation"])
 plt.xticks()
@@ -1102,8 +1178,12 @@ val_acc_degree = []
 val_f1_degree = []
 train_acc_degree = []
 train_f1_degree = []
+
 val_range = (1, 11, 1)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Fitting
     svc_clf = SVC(kernel="poly", C=10, degree=i)
     svc_clf.fit(X_train_scaled, y_train)
@@ -1119,11 +1199,15 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     train_f1_degree.append(f1_train)
     val_acc_degree.append(acc_val)
     val_f1_degree.append(f1_val)
-    print(f"Done for number of degree: {i}")
+    print(f"ccc Done for number of degree: {i}")
 
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_degree, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_degree, c="blue")
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO), train_acc_degree, c="red"
+)
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO), val_acc_degree, c="blue"
+)
 plt.grid(True)
 plt.xticks()
 plt.yticks()
@@ -1139,8 +1223,12 @@ val_f1_C = []
 train_acc_C = []
 train_f1_C = []
 C_range = []
+
 val_range = (-8, 2, 1)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     C = 2 ** (i)
     C_range.append(C)
     # Fitting
@@ -1158,7 +1246,7 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     train_f1_C.append(f1_train)
     val_acc_C.append(acc_val)
     val_f1_C.append(f1_val)
-    print(f"Done for number of C: {2**(i)}")
+    print(f"ddd111 Done for number of C: {2**(i)}")
 
 
 plt.semilogx(C_range, train_acc_C, c="red")
@@ -1178,8 +1266,12 @@ val_f1_gamma = []
 train_acc_gamma = []
 train_f1_gamma = []
 gamma_range = []
+
 val_range = (-25, 10, 1)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     gamma = 10 ** (i / 5.0)
     gamma_range.append(gamma)
     # Fitting9
@@ -1197,7 +1289,7 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     train_f1_gamma.append(f1_train)
     val_acc_gamma.append(acc_val)
     val_f1_gamma.append(f1_val)
-    print(f"Done for gamma: {gamma}")
+    print(f"aaa Done for gamma: {gamma}")
 
 
 plt.semilogx(gamma_range, train_acc_gamma, c="red")
@@ -1217,8 +1309,12 @@ val_acc_train_size = []
 val_f1_train_size = []
 train_acc_train_size = []
 train_f1_train_size = []
+
 val_range = (10, 101, 5)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Fitting
     percentage = i * 0.01
     svc_clf = SVC(kernel="rbf", C=1, gamma=0.01)
@@ -1241,12 +1337,18 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     train_f1_train_size.append(f1_train)
     val_acc_train_size.append(acc_val)
     val_f1_train_size.append(f1_val)
+    print(f"ccc Done for: {i}% training set size")
 
-    print(f"Done for: {i}% training set size")
-
-
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_train_size, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_train_size, c="blue")
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    train_acc_train_size,
+    c="red",
+)
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    val_acc_train_size,
+    c="blue",
+)
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks()
@@ -1277,8 +1379,12 @@ val_acc_k = []
 val_f1_k = []
 train_acc_k = []
 train_f1_k = []
+
 val_range = (1, 21, 1)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Fitting
     knn = KNeighborsClassifier(i)
     knn.fit(X_train_scaled, y_train)
@@ -1294,11 +1400,11 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     train_f1_k.append(f1_train)
     val_acc_k.append(acc_val)
     val_f1_k.append(f1_val)
-    print(f"Done for number of neighbors: {i}")
+    print(f"eee Done for number of neighbors: {i}")
 
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_k, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_k, c="blue")
+plt.plot(range(val_range[0], val_range[1], val_range[2] * RATIO), train_acc_k, c="red")
+plt.plot(range(val_range[0], val_range[1], val_range[2] * RATIO), val_acc_k, c="blue")
 plt.grid(True)
 plt.xticks()
 plt.yticks()
@@ -1313,8 +1419,12 @@ val_acc_train_size = []
 val_f1_train_size = []
 train_acc_train_size = []
 train_f1_train_size = []
+
 val_range = (10, 101, 5)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Fitting
     percentage = i * 0.01
     knn = KNeighborsClassifier(10)
@@ -1339,11 +1449,19 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     val_f1_train_size.append(f1_val)
 
     if i % 10 == 0:
-        print(f"Done for: {i}% training set size")
+        print(f"ddd222 Done for: {i}% training set size")
 
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_train_size, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_train_size, c="blue")
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    train_acc_train_size,
+    c="red",
+)
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    val_acc_train_size,
+    c="blue",
+)
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks(np.arange(0, 110, step=10))
@@ -1351,16 +1469,18 @@ plt.yticks()
 plt.xlabel("Percentage of training data fed")
 plt.ylabel("Accuracy")
 # plt.ylim(0.7,0.9)
-plt.xlim(0, 110)
+# plt.xlim(0, 110)
 show()
 
+''' no keras in kilo
 # Neural Networks (Multi-layer perceptron)
 
 import keras
 
 # from keras.utils import np_utils
 from keras.models import Sequential
-from keras.layers import Dense, Dropout
+from keras.layers import Dense
+from keras.layers import Dropout
 
 n_input = X_train_scaled.shape[0]
 num_classes = len(y_train.unique())
@@ -1519,7 +1639,10 @@ train_acc_n = []
 val_acc_n = []
 
 val_range = (10, 200, 10)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Fitting
     nn_model = make_NN_model(
         input_dim=input_dim,
@@ -1547,11 +1670,10 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     # Appending to the lists
     train_acc_n.append(acc_train)
     val_acc_n.append(acc_val)
-    print(f"Done for number of neurons (each hidden layer): {i}")
+    print(f"fff Done for number of neurons (each hidden layer): {i}")
 
-
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_n, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_n, c="blue")
+plt.plot(range(val_range[0], val_range[1], val_range[2] * RATIO), train_acc_n, c="red")
+plt.plot(range(val_range[0], val_range[1], val_range[2] * RATIO), val_acc_n, c="blue")
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks()
@@ -1567,8 +1689,11 @@ train_acc_lr = []
 val_acc_lr = []
 
 val_range = (-40, -10, 1)
+print("val_range :", val_range)
+
 lr_range = []
-for i in range(val_range[0], val_range[1], val_range[2]):
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     t1 = time.time()
     lr = 10 ** (i / 10.0)
     lr_range.append(lr)
@@ -1651,7 +1776,10 @@ val_acc_train_size = []
 train_acc_train_size = []
 
 val_range = (10, 101, 5)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     t1 = time.time()
     percentage = i * 0.01
     # Sampling
@@ -1688,11 +1816,11 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     val_acc_train_size.append(acc_val)
 
     t2 = time.time()
-    print(f"Done for: {i}% training set size. Took {round((t2-t1),2)} seconds.")
+    print(f"eee Done for: {i}% training set size. Took {round((t2-t1),2)} seconds.")
 
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_train_size, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_train_size, c="blue")
+plt.plot(range(val_range[0], val_range[1], val_range[2] * RATIO), train_acc_train_size, c="red")
+plt.plot(range(val_range[0], val_range[1], val_range[2] * RATIO), val_acc_train_size, c="blue")
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks(np.arange(0, 110, step=10))
@@ -1700,12 +1828,10 @@ plt.yticks()
 plt.xlabel("Percentage of training data fed")
 plt.ylabel("Accuracy")
 # plt.ylim(0.8,0.9)
-plt.xlim(0, 110)
+# plt.xlim(0, 110)
 show()
 
 # At the end, comparison of performance (accuracy) on test set and wall time
-
-from sklearn.tree import DecisionTreeClassifier
 
 dtree = DecisionTreeClassifier(criterion="gini", max_depth=20, min_samples_leaf=10)
 dtree.fit(X_train, y_train)
@@ -1784,7 +1910,7 @@ plt.bar(
 plt.xticks()
 plt.yticks()
 show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1795,7 +1921,8 @@ sns.set_style("white")
 df = pd.read_csv("Datasets/loan_data.csv")
 
 # Look at first 5 rows
-# df.head()
+# cc = df.head()
+# print(cc)
 
 # Basic descriptive statistics
 
@@ -1806,13 +1933,14 @@ df = pd.read_csv("Datasets/loan_data.csv")
 df_final = pd.get_dummies(df, ["purpose"], drop_first=True)
 df_final = df_final.drop("credit.policy", axis=1)
 
-# df_final.shape
+# cc = df_final.shape
+# print(cc)
 # (9578, 18)
 
 # Basic visualizations
 
 i = 1
-plt.figure(figsize=(20, 20))
+plt.figure(figsize=(12, 8))
 for c in df.describe().columns[:-1]:
     plt.subplot(4, 3, i)
     plt.title(f"Histogram of {c}")
@@ -1824,7 +1952,7 @@ show()
 
 """ plot NG
 i=1
-plt.figure(figsize=(20,33))
+plt.figure(figsize=(16, 8))
 for c in df_final.columns[:-1]:
     plt.subplot(6,3,i)
     plt.title(f"Boxplot of {c}")
@@ -1843,26 +1971,26 @@ g=sns.pairplot(df_final,vars=["log.annual.inc","dti","fico","revol.bal"],
                diag_kind="kde",diag_kws=dict(shade=True))
 """
 
-# Test/train/validation split
-
 X = df_final.drop("not.fully.paid", axis=1)
 y = df["not.fully.paid"]
 
-# First divide train and test data in 70:30 ratio
-
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
 
-# X_train.head(10)
+# cc = X_train.head()
+# print(cc)
 
-# y.head()
+# cc = y.head()
+# print(cc)
 
-# Then further divide the test set in 50:50 ratio into validation set and test set
-
+# 資料分割
 X_test, X_val, y_test, y_val = train_test_split(X_test, y_test, test_size=0.50)
 
-# X_test.head()
+# cc = X_test.head()
+# print(cc)
 
-# X_val.head()
+# cc = X_val.head()
+# print(cc)
 
 # Show the shape of these sets
 
@@ -1871,9 +1999,6 @@ print("Shape of test set:", X_test.shape)
 print("Shape of training set:", X_train.shape)
 
 # Decision Tree model
-
-from sklearn.tree import DecisionTreeClassifier
-
 dtree = DecisionTreeClassifier(criterion="gini", max_depth=10, min_samples_leaf=5)
 
 dtree.fit(X_train, y_train)
@@ -1881,9 +2006,6 @@ dtree.fit(X_train, y_train)
 # Predictions and evaluation
 
 predictions = dtree.predict(X_val)
-
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import f1_score
 
 score1 = accuracy_score(y_val, predictions)
 print(score1)
@@ -1899,6 +2021,7 @@ val_f1_max_depth = []
 train_acc_max_depth = []
 train_f1_max_depth = []
 for i in range(3, 21):
+    print("i =", i)
     dtree = DecisionTreeClassifier(criterion="gini", max_depth=i, min_samples_leaf=1)
     dtree.fit(X_train, y_train)
     pred_train = dtree.predict(X_train)
@@ -1929,7 +2052,9 @@ val_acc_min_samples_leaf = []
 val_f1_min_samples_leaf = []
 train_acc_min_samples_leaf = []
 train_f1_min_samples_leaf = []
+
 for i in range(1, 41):
+    print("i =", i)
     dtree = DecisionTreeClassifier(criterion="gini", max_depth=20, min_samples_leaf=i)
     dtree.fit(X_train, y_train)
     pred_train = dtree.predict(X_train)
@@ -1960,8 +2085,12 @@ val_acc_train_size = []
 val_f1_train_size = []
 train_acc_train_size = []
 train_f1_train_size = []
+
 val_range = (10, 101, 1)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Fitting
     percentage = i * 0.01
     dtree = DecisionTreeClassifier(criterion="gini", max_depth=20, min_samples_leaf=20)
@@ -1984,11 +2113,19 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     val_acc_train_size.append(acc_val)
     val_f1_train_size.append(f1_val)
     if i % 10 == 0:
-        print(f"Done for: {i}% training set size")
+        print(f"fff Done for: {i}% training set size")
 
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_train_size, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_train_size, c="blue")
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    train_acc_train_size,
+    c="red",
+)
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    val_acc_train_size,
+    c="blue",
+)
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks()
@@ -2023,8 +2160,12 @@ val_acc_num_trees = []
 val_f1_num_trees = []
 train_acc_num_trees = []
 train_f1_num_trees = []
+
 val_range = (1, 53, 3)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Fitting
     adaboost = AdaBoostClassifier(
         DecisionTreeClassifier(min_samples_leaf=20, max_depth=20),
@@ -2044,11 +2185,17 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     train_f1_num_trees.append(f1_train)
     val_acc_num_trees.append(acc_val)
     val_f1_num_trees.append(f1_val)
-    print(f"Done for number of trees: {i}")
+    print(f"ggg Done for number of trees: {i}")
 
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_num_trees, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_num_trees, c="blue")
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    train_acc_num_trees,
+    c="red",
+)
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO), val_acc_num_trees, c="blue"
+)
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks()
@@ -2064,8 +2211,12 @@ val_acc_train_size = []
 val_f1_train_size = []
 train_acc_train_size = []
 train_f1_train_size = []
+
 val_range = (10, 101, 1)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Model
     percentage = i * 0.01
     adaboost = AdaBoostClassifier(
@@ -2093,10 +2244,18 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     val_f1_train_size.append(f1_val)
 
     if i % 10 == 0:
-        print(f"Done for: {i}% training set size")
+        print(f"ggg Done for: {i}% training set size")
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_train_size, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_train_size, c="blue")
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    train_acc_train_size,
+    c="red",
+)
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    val_acc_train_size,
+    c="blue",
+)
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks()
@@ -2107,10 +2266,6 @@ plt.ylim(0.75, 1.05)
 show()
 
 # SVM model
-
-# Scaling the data using StandardScaler
-
-from sklearn.preprocessing import StandardScaler
 
 X_train_scaled = StandardScaler().fit_transform(X_train)
 X_val_scaled = StandardScaler().fit_transform(X_val)
@@ -2136,8 +2291,12 @@ val_acc_degree = []
 val_f1_degree = []
 train_acc_degree = []
 train_f1_degree = []
+
 val_range = (1, 11, 1)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Fitting
     svc_clf = SVC(kernel="poly", C=0.01, degree=i)
     svc_clf.fit(X_train_scaled, y_train)
@@ -2153,10 +2312,14 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     train_f1_degree.append(f1_train)
     val_acc_degree.append(acc_val)
     val_f1_degree.append(f1_val)
-    print(f"Done for number of degree: {i}")
+    print(f"hhh Done for number of degree: {i}")
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_degree, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_degree, c="blue")
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO), train_acc_degree, c="red"
+)
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO), val_acc_degree, c="blue"
+)
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks()
@@ -2172,8 +2335,12 @@ val_acc_degree = []
 val_f1_degree = []
 train_acc_degree = []
 train_f1_degree = []
+
 val_range = (1, 11, 1)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Fitting
     svc_clf = SVC(kernel="poly", C=1, degree=i)
     svc_clf.fit(X_train_scaled, y_train)
@@ -2189,10 +2356,14 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     train_f1_degree.append(f1_train)
     val_acc_degree.append(acc_val)
     val_f1_degree.append(f1_val)
-    print(f"Done for number of degree: {i}")
+    print(f"iii Done for number of degree: {i}")
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_degree, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_degree, c="blue")
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO), train_acc_degree, c="red"
+)
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO), val_acc_degree, c="blue"
+)
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks()
@@ -2209,8 +2380,12 @@ val_f1_C = []
 train_acc_C = []
 train_f1_C = []
 C_range = []
+
 val_range = (-8, 2, 1)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     C = 2 ** (i)
     C_range.append(C)
     # Fitting
@@ -2228,7 +2403,7 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     train_f1_C.append(f1_train)
     val_acc_C.append(acc_val)
     val_f1_C.append(f1_val)
-    print(f"Done for number of C: {2**(i)}")
+    print(f"jjj Done for number of C: {2**(i)}")
 
 
 plt.plot(C_range, train_acc_C, c="red")
@@ -2248,8 +2423,12 @@ val_f1_gamma = []
 train_acc_gamma = []
 train_f1_gamma = []
 gamma_range = []
+
 val_range = (-5, 2, 1)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     gamma = 10 ** (i)
     gamma_range.append(gamma)
     # Fitting
@@ -2267,7 +2446,7 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     train_f1_gamma.append(f1_train)
     val_acc_gamma.append(acc_val)
     val_f1_gamma.append(f1_val)
-    print(f"Done for gamma: {gamma}")
+    print(f"bbb Done for gamma: {gamma}")
 
 
 plt.semilogx(gamma_range, train_acc_gamma, c="red")
@@ -2286,8 +2465,12 @@ val_acc_train_size = []
 val_f1_train_size = []
 train_acc_train_size = []
 train_f1_train_size = []
+
 val_range = (10, 101, 5)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Fitting
     percentage = i * 0.01
     svc_clf = SVC(kernel="poly", C=0.001, degree=2)
@@ -2311,11 +2494,19 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     val_acc_train_size.append(acc_val)
     val_f1_train_size.append(f1_val)
 
-    print(f"Done for: {i}% training set size")
+    print(f"hhh Done for: {i}% training set size")
 
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_train_size, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_train_size, c="blue")
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    train_acc_train_size,
+    c="red",
+)
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    val_acc_train_size,
+    c="blue",
+)
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks()
@@ -2346,8 +2537,12 @@ val_acc_k = []
 val_f1_k = []
 train_acc_k = []
 train_f1_k = []
+
 val_range = (1, 21, 1)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Fitting
     knn = KNeighborsClassifier(i)
     knn.fit(X_train_scaled, y_train)
@@ -2363,11 +2558,11 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     train_f1_k.append(f1_train)
     val_acc_k.append(acc_val)
     val_f1_k.append(f1_val)
-    print(f"Done for number of neighbors: {i}")
+    print(f"kkk Done for number of neighbors: {i}")
 
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_k, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_k, c="blue")
+plt.plot(range(val_range[0], val_range[1], val_range[2] * RATIO), train_acc_k, c="red")
+plt.plot(range(val_range[0], val_range[1], val_range[2] * RATIO), val_acc_k, c="blue")
 plt.grid(True)
 plt.xticks()
 plt.yticks()
@@ -2382,8 +2577,12 @@ val_acc_train_size = []
 val_f1_train_size = []
 train_acc_train_size = []
 train_f1_train_size = []
+
 val_range = (10, 101, 5)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Fitting
     percentage = i * 0.01
     knn = KNeighborsClassifier(5)
@@ -2408,10 +2607,18 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     val_f1_train_size.append(f1_val)
 
     if i % 10 == 0:
-        print(f"Done for: {i}% training set size")
+        print(f"iii Done for: {i}% training set size")
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_train_size, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_train_size, c="blue")
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    train_acc_train_size,
+    c="red",
+)
+plt.plot(
+    range(val_range[0], val_range[1], val_range[2] * RATIO),
+    val_acc_train_size,
+    c="blue",
+)
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks(np.arange(0, 110, step=10))
@@ -2419,16 +2626,18 @@ plt.yticks()
 plt.xlabel("Percentage of training data fed")
 plt.ylabel("Accuracy")
 plt.ylim(0.7, 0.9)
-plt.xlim(0, 110)
+# plt.xlim(0, 110)
 show()
 
+''' no keras in kilo
 # Neural Networks (Multi-layer perceptron)
 
 import keras
 
 # from keras.utils import np_utils
 from keras.models import Sequential
-from keras.layers import Dense, Dropout
+from keras.layers import Dense
+from keras.layers import Dropout
 
 n_input = X_train_scaled.shape[0]
 num_classes = len(y_train.unique())
@@ -2588,7 +2797,10 @@ train_acc_n = []
 val_acc_n = []
 
 val_range = (2, 21, 1)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Fitting
     nn_model = make_NN_model(
         input_dim=input_dim,
@@ -2616,11 +2828,11 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     # Appending to the lists
     train_acc_n.append(acc_train)
     val_acc_n.append(acc_val)
-    print(f"Done for number of neurons (each hidden layer): {i}")
+    print(f"lll Done for number of neurons (each hidden layer): {i}")
 
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_n, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_n, c="blue")
+plt.plot(range(val_range[0], val_range[1], val_range[2] * RATIO), train_acc_n, c="red")
+plt.plot(range(val_range[0], val_range[1], val_range[2] * RATIO), val_acc_n, c="blue")
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks()
@@ -2636,7 +2848,10 @@ train_acc_n = []
 val_acc_n = []
 
 val_range = (2, 21, 1)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Fitting
     nn_model = make_NN_model(
         input_dim=input_dim,
@@ -2664,11 +2879,11 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     # Appending to the lists
     train_acc_n.append(acc_train)
     val_acc_n.append(acc_val)
-    print(f"Done for number of neurons (each hidden layer): {i}")
+    print(f"mmm Done for number of neurons (each hidden layer): {i}")
 
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_n, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_n, c="blue")
+plt.plot(range(val_range[0], val_range[1], val_range[2] * RATIO), train_acc_n, c="red")
+plt.plot(range(val_range[0], val_range[1], val_range[2] * RATIO), val_acc_n, c="blue")
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks()
@@ -2684,7 +2899,10 @@ train_acc_n = []
 val_acc_n = []
 
 val_range = (2, 21, 1)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     # Fitting
     nn_model = make_NN_model(
         input_dim=input_dim,
@@ -2712,11 +2930,11 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     # Appending to the lists
     train_acc_n.append(acc_train)
     val_acc_n.append(acc_val)
-    print(f"Done for number of neurons (each hidden layer): {i}")
+    print(f"nnn Done for number of neurons (each hidden layer): {i}")
 
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_n, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_n, c="blue")
+plt.plot(range(val_range[0], val_range[1], val_range[2] * RATIO), train_acc_n, c="red")
+plt.plot(range(val_range[0], val_range[1], val_range[2] * RATIO), val_acc_n, c="blue")
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks()
@@ -2732,7 +2950,10 @@ val_acc_train_size = []
 train_acc_train_size = []
 
 val_range = (10, 101, 5)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     percentage = i * 0.01
     # Sampling
     df_sampled = df_final.sample(frac=percentage)
@@ -2767,11 +2988,11 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     train_acc_train_size.append(acc_train)
     val_acc_train_size.append(acc_val)
 
-    print(f"Done for: {i}% training set size")
+    print(f"jjj Done for: {i}% training set size")
 
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_train_size, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_train_size, c="blue")
+plt.plot(range(val_range[0], val_range[1], val_range[2] * RATIO), train_acc_train_size, c="red")
+plt.plot(range(val_range[0], val_range[1], val_range[2] * RATIO), val_acc_train_size, c="blue")
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks(np.arange(0, 110, step=10))
@@ -2779,7 +3000,7 @@ plt.yticks()
 plt.xlabel("Percentage of training data fed")
 plt.ylabel("Accuracy")
 # plt.ylim(0.8,0.9)
-plt.xlim(0, 110)
+# plt.xlim(0, 110)
 show()
 
 # To smooth out the dependence on training set size, can we tweak the learning rate?
@@ -2788,7 +3009,10 @@ val_acc_train_size = []
 train_acc_train_size = []
 
 val_range = (10, 101, 5)
-for i in range(val_range[0], val_range[1], val_range[2]):
+print("val_range :", val_range)
+
+for i in range(val_range[0], val_range[1], val_range[2] * RATIO):
+    print("i =", i)
     percentage = i * 0.01
     # Sampling
     df_sampled = df_final.sample(frac=percentage)
@@ -2823,10 +3047,10 @@ for i in range(val_range[0], val_range[1], val_range[2]):
     train_acc_train_size.append(acc_train)
     val_acc_train_size.append(acc_val)
 
-    print(f"Done for: {i}% training set size")
+    print(f"kkk Done for: {i}% training set size")
 
-plt.plot(range(val_range[0], val_range[1], val_range[2]), train_acc_train_size, c="red")
-plt.plot(range(val_range[0], val_range[1], val_range[2]), val_acc_train_size, c="blue")
+plt.plot(range(val_range[0], val_range[1], val_range[2] * RATIO), train_acc_train_size, c="red")
+plt.plot(range(val_range[0], val_range[1], val_range[2] * RATIO), val_acc_train_size, c="blue")
 plt.legend(["Training", "Validation"])
 plt.grid(True)
 plt.xticks(np.arange(0, 110, step=10))
@@ -2834,25 +3058,23 @@ plt.yticks()
 plt.xlabel("Percentage of training data fed (lr=0.001)")
 plt.ylabel("Accuracy")
 plt.ylim(0.5, 0.9)
-plt.xlim(0, 110)
+# plt.xlim(0, 110)
 show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Mean-shift Clustering Technique
 
 from sklearn.cluster import MeanShift
-from sklearn import metrics
 
-# Generate sample data
 centers = [[1, 1], [-1, -1], [1, -1]]
+
 X, labels_true = make_blobs(
     n_samples=300, centers=centers, cluster_std=0.4, random_state=101
 )
 
-X.shape
-
+print(X.shape)
 # (300, 2)
 
 plt.figure(figsize=(8, 5))
@@ -2871,11 +3093,11 @@ labels = ms_model.labels_
 
 # Number of detected clusters and their centers
 
-print("Number of clusters detected by the algorithm:", n_clusters)
+print("Number of clusters detected by the algorithm :", n_clusters)
 
 # Number of clusters detected by the algorithm: 3
 
-print("Cluster centers detected at:\n\n", cluster_centers)
+print("Cluster centers detected at :", cluster_centers)
 
 plt.figure(figsize=(8, 5))
 plt.scatter(X[:, 0], X[:, 1], edgecolors="k", c=ms_model.labels_, s=75)
@@ -2915,7 +3137,7 @@ for i in n_samples:
     complete_ms.append(metrics.completeness_score(labels_true, ms_model.labels_))
 
 plt.figure(figsize=(8, 5))
-plt.title("Time complexity of Mean Shift\n")
+plt.title("Time complexity of Mean Shift")
 plt.scatter(n_samples, t_ms, edgecolors="k", c="green", s=100)
 plt.plot(n_samples, t_ms, "k--", lw=3)
 plt.xticks()
@@ -2925,7 +3147,7 @@ plt.ylabel("Time taken for model (sec)")
 show()
 
 plt.figure(figsize=(8, 5))
-plt.title("Homogeneity score with data set size\n")
+plt.title("Homogeneity score with data set size")
 plt.scatter(n_samples, homo_ms, edgecolors="k", c="green", s=100)
 plt.plot(n_samples, homo_ms, "k--", lw=3)
 plt.xticks()
@@ -2935,7 +3157,7 @@ plt.ylabel("Homogeneity score")
 show()
 
 plt.figure(figsize=(8, 5))
-plt.title("Completeness score with data set size\n")
+plt.title("Completeness score with data set size")
 plt.scatter(n_samples, complete_ms, edgecolors="k", c="green", s=100)
 plt.plot(n_samples, complete_ms, "k--", lw=3)
 plt.xticks()
@@ -2975,7 +3197,7 @@ for i in noise:
 
 print("Detected number of clusters:", n_clusters)
 plt.figure(figsize=(8, 5))
-plt.title("Cluster detection with noisy data\n")
+plt.title("Cluster detection with noisy data")
 plt.scatter(noise, n_clusters, edgecolors="k", c="green", s=100)
 plt.xticks()
 plt.xlabel("Noise std.dev")
@@ -2989,7 +3211,7 @@ print("------------------------------------------------------------")  # 60個
 # Principal Component Analysis (PCA)
 
 df = pd.read_csv("./Datasets/wine.data.csv")
-cc = df.head(10)
+cc = df.head()
 print(cc)
 
 # Basic statistics
@@ -3001,7 +3223,7 @@ print(cc)
 
 for c in df.columns[1:]:
     df.boxplot(c, by="Class", figsize=(7, 4))
-    plt.title("{}\n".format(c))
+    plt.title("{}".format(c))
     plt.xlabel("Wine Class")
     show()
 
@@ -3022,15 +3244,14 @@ show()
 
 
 def correlation_matrix(df):
-    from matplotlib import pyplot as plt
     from matplotlib import cm as cm
 
-    fig = plt.figure(figsize=(16, 12))
+    fig = plt.figure(figsize=(16, 8))
     ax1 = fig.add_subplot(111)
     cmap = cm.get_cmap("jet", 30)
     cax = ax1.imshow(df.corr(), interpolation="nearest", cmap=cmap)
     ax1.grid(True)
-    plt.title("Wine data set features correlation\n")
+    plt.title("Wine data set features correlation")
     labels = df.columns
     ax1.set_xticklabels(labels)
     ax1.set_yticklabels(labels)
@@ -3041,10 +3262,7 @@ def correlation_matrix(df):
 
 correlation_matrix(df)
 
-# Principal Component Analysis
-# Data scaling
-
-from sklearn.preprocessing import StandardScaler
+# Principal Component Analysis, PCA
 
 scaler = StandardScaler()
 
@@ -3055,15 +3273,13 @@ X = scaler.fit_transform(X)
 
 dfx = pd.DataFrame(data=X, columns=df.columns[1:])
 
-cc = dfx.head(10)
+cc = dfx.head()
 print(cc)
 
 cc = dfx.describe()
 print(cc)
 
-# PCA class import and analysis
-
-from sklearn.decomposition import PCA
+# PCA
 
 pca = PCA(n_components=None)
 
@@ -3080,7 +3296,7 @@ plt.scatter(
     c="orange",
     edgecolor="k",
 )
-plt.title("Explained variance ratio of the \nfitted principal component vector\n")
+plt.title("Explained variance ratio of the \nfitted principal component vector")
 plt.xlabel("Principal components")
 plt.xticks([i + 1 for i in range(len(dfx_pca.explained_variance_ratio_))])
 plt.yticks()
@@ -3094,7 +3310,7 @@ dfx_trans = pca.transform(dfx)
 # Put it in a data frame
 
 dfx_trans = pd.DataFrame(data=dfx_trans)
-cc = dfx_trans.head(10)
+cc = dfx_trans.head()
 print(cc)
 
 # Plot the first two columns of this transformed data set with the color set to original ground truth class label
@@ -3103,7 +3319,7 @@ plt.figure(figsize=(10, 6))
 plt.scatter(
     dfx_trans[0], dfx_trans[1], c=df["Class"], edgecolors="k", alpha=0.75, s=150
 )
-plt.title("Class separation using first two principal components\n")
+plt.title("Class separation using first two principal components")
 plt.xlabel("Principal component-1")
 plt.ylabel("Principal component-2")
 show()
@@ -3142,6 +3358,7 @@ print(cc)
 
 plt.figure(figsize=(15, 8))
 for i in range(1, 7):
+    print("i =", i)
     plt.subplot(2, 3, i)
     dim1 = lst_vars[i - 1][0]
     dim2 = lst_vars[i - 1][1]
@@ -3152,7 +3369,7 @@ show()
 
 # How are the classes separated (boxplots)
 
-plt.figure(figsize=(16, 14))
+plt.figure(figsize=(16, 8))
 for i, c in enumerate(df1.columns):
     plt.subplot(3, 2, i + 1)
     sns.boxplot(y=df1[c], x=data1[1])
@@ -3163,10 +3380,6 @@ for i, c in enumerate(df1.columns):
     # show()
 show()
 
-# k-means clustering
-
-from sklearn.cluster import KMeans
-
 X = df1
 
 cc = X.head()
@@ -3174,17 +3387,9 @@ print(cc)
 
 y = data1[1]
 
-# Scaling
-
-from sklearn.preprocessing import MinMaxScaler
-
 scaler = MinMaxScaler()
 
 X_scaled = scaler.fit_transform(X)
-
-# Metrics
-
-from sklearn.metrics import silhouette_score, davies_bouldin_score, v_measure_score
 
 # Running k-means and computing inter-cluster distance score for various k values
 
@@ -3193,6 +3398,7 @@ km_silhouette = []
 vmeasure_score = []
 db_score = []
 for i in range(2, 12):
+    print("i =", i)
     km = KMeans(n_clusters=i, random_state=0).fit(X_scaled)
     preds = km.predict(X_scaled)
 
@@ -3213,7 +3419,7 @@ for i in range(2, 12):
     print("-" * 100)
 
 plt.figure(figsize=(7, 4))
-plt.title("The elbow method for determining number of clusters\n")
+plt.title("The elbow method for determining number of clusters")
 plt.scatter(x=[i for i in range(2, 12)], y=km_scores, s=150, edgecolor="k")
 plt.xlabel("Number of clusters")
 plt.ylabel("K-means score")
@@ -3245,6 +3451,7 @@ from sklearn.mixture import GaussianMixture
 gm_bic = []
 gm_score = []
 for i in range(2, 12):
+    print("i =", i)
     gm = GaussianMixture(n_components=i, n_init=10, tol=1e-3, max_iter=1000).fit(
         X_scaled
     )
@@ -3259,7 +3466,7 @@ for i in range(2, 12):
     gm_score.append(gm.score(X_scaled))
 
 plt.figure(figsize=(7, 4))
-plt.title("The Gaussian Mixture model BIC \nfor determining number of clusters\n")
+plt.title("The Gaussian Mixture model BIC \nfor determining number of clusters")
 plt.scatter(x=[i for i in range(2, 12)], y=np.log(gm_bic), s=150, edgecolor="k")
 plt.xlabel("Number of clusters")
 plt.ylabel("Log of Gaussian mixture BIC score")
@@ -3280,7 +3487,7 @@ print("------------------------------------------------------------")  # 60個
 # Clustering with a shopping trend data set
 
 df = pd.read_csv("Datasets/Mall_Customers.csv")
-cc = df.head(10)
+cc = df.head()
 print(cc)
 
 cc = df.describe()
@@ -3380,12 +3587,9 @@ plt.legend()
 plt.axhspan(ymin=60, ymax=100, xmin=0.4, xmax=0.96, alpha=0.3, color="yellow")
 show()
 
-# Verifying the optimal number of clusters by k-means algorithm
-
-from sklearn.cluster import KMeans
-
 wcss = []
 for i in range(1, 16):
+    print("i =", i)
     kmeans = KMeans(n_clusters=i, init="k-means++")
     kmeans.fit(X)
     wcss.append(kmeans.inertia_)
@@ -3432,10 +3636,12 @@ data1 = make_regression(
 df1 = pd.DataFrame(data1[0], columns=["x" + str(i) for i in range(1, 5)])
 df1["y"] = data1[1]
 
-df1.head()
+cc = df1.head()
+print(cc)
 
 plt.figure(figsize=(15, 10))
 for i in range(1, 5):
+    print("i =", i)
     fit = np.polyfit(df1[df1.columns[i - 1]], df1["y"], 1)
     fit_fn = np.poly1d(fit)
     plt.subplot(2, 2, i)
@@ -3466,6 +3672,7 @@ df2["y"] = data2[1]
 
 plt.figure(figsize=(15, 10))
 for i in range(1, 5):
+    print("i =", i)
     fit = np.polyfit(df2[df2.columns[i - 1]], df2["y"], 1)
     fit_fn = np.poly1d(fit)
     plt.subplot(2, 2, i)
@@ -3481,6 +3688,7 @@ print("------------------------------------------------------------")  # 60個
 plt.figure(figsize=(15, 6))
 df2 = pd.DataFrame(data=np.zeros((20, 1)))
 for i in range(3):
+    print("i =", i)
     data2 = make_regression(
         n_samples=20,
         n_features=1,
@@ -3498,6 +3706,7 @@ for i in range(3):
     df2["y" + str(i + 1)] = data2[1]
 
 for i in range(3):
+    print("i =", i)
     fit = np.polyfit(df2["x" + str(i + 1)], df2["y" + str(i + 1)], 1)
     fit_fn = np.poly1d(fit)
     plt.subplot(1, 3, i + 1)
@@ -3532,7 +3741,8 @@ data3 = make_classification(
 df3 = pd.DataFrame(data3[0], columns=["x" + str(i) for i in range(1, 5)])
 df3["y"] = data3[1]
 
-df3.head()
+cc = df3.head()
+print(cc)
 
 from itertools import combinations
 
@@ -3540,6 +3750,7 @@ lst_var = list(combinations(df3.columns[:-1], 2))
 len_var = len(lst_var)
 plt.figure(figsize=(18, 10))
 for i in range(1, len_var + 1):
+    print("i =", i)
     plt.subplot(2, math.ceil(len_var / 2), i)
     var1 = lst_var[i - 1][0]
     var2 = lst_var[i - 1][1]
@@ -3579,6 +3790,7 @@ lst_var = list(combinations(df3.columns[:-1], 2))
 len_var = len(lst_var)
 plt.figure(figsize=(18, 10))
 for i in range(1, len_var + 1):
+    print("i =", i)
     plt.subplot(2, math.ceil(len_var / 2), i)
     var1 = lst_var[i - 1][0]
     var2 = lst_var[i - 1][1]
@@ -3618,6 +3830,7 @@ lst_var = list(combinations(df3.columns[:-1], 2))
 len_var = len(lst_var)
 plt.figure(figsize=(18, 10))
 for i in range(1, len_var + 1):
+    print("i =", i)
     plt.subplot(2, math.ceil(len_var / 2), i)
     var1 = lst_var[i - 1][0]
     var2 = lst_var[i - 1][1]
@@ -3633,6 +3846,7 @@ print("------------------------------------------------------------")  # 60個
 
 plt.figure(figsize=(18, 10))
 for i in range(6):
+    print("i =", i)
     data3 = make_classification(
         n_samples=20,
         n_features=4,
@@ -3667,6 +3881,7 @@ print("------------------------------------------------------------")  # 60個
 plt.figure(figsize=(18, 5))
 df2 = pd.DataFrame(data=np.zeros((20, 1)))
 for i in range(3):
+    print("i =", i)
     data2 = make_classification(
         n_samples=20,
         n_features=2,
@@ -3689,6 +3904,7 @@ for i in range(3):
     df2["y" + str(i + 1)] = data2[1]
 
 for i in range(3):
+    print("i =", i)
     plt.subplot(1, 3, i + 1)
     plt.scatter(
         df2["x" + str(i + 1) + "1"],
@@ -3723,6 +3939,7 @@ lst_var = list(combinations(df4.columns[:-1], 2))
 len_var = len(lst_var)
 plt.figure(figsize=(18, 10))
 for i in range(1, len_var + 1):
+    print("i =", i)
     plt.subplot(2, math.ceil(len_var / 2), i)
     var1 = lst_var[i - 1][0]
     var2 = lst_var[i - 1][1]
@@ -3754,6 +3971,7 @@ lst_var = list(combinations(df4.columns[:-1], 2))
 len_var = len(lst_var)
 plt.figure(figsize=(18, 10))
 for i in range(1, len_var + 1):
+    print("i =", i)
     plt.subplot(2, math.ceil(len_var / 2), i)
     var1 = lst_var[i - 1][0]
     var2 = lst_var[i - 1][1]
@@ -3785,6 +4003,7 @@ lst_var = list(combinations(df4.columns[:-1], 2))
 len_var = len(lst_var)
 plt.figure(figsize=(18, 10))
 for i in range(1, len_var + 1):
+    print("i =", i)
     plt.subplot(2, math.ceil(len_var / 2), i)
     var1 = lst_var[i - 1][0]
     var2 = lst_var[i - 1][1]
@@ -4143,7 +4362,6 @@ print("------------------------------------------------------------")  # 60個
 
 from functools import wraps
 from time import time, sleep
-from sklearn.linear_model import LogisticRegressionCV
 from sklearn.ensemble import RandomForestClassifier
 
 # Timing decorator with functools.wraps
@@ -4233,9 +4451,8 @@ def time_estimator(func):
 
 @time_estimator
 def classifier_accuracy(estimator, x, y):
-    X_train, X_test, y_train, y_test = train_test_split(
-        x, y, test_size=0.33, random_state=42
-    )
+    # 資料分割
+    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.33)
     estimator.fit(X_train, y_train)
     score = estimator.score(X_test, y_test)
     return round(score, 3)
@@ -4253,8 +4470,8 @@ x, y = data[0], data[1]
 
 log_model = LogisticRegressionCV()
 
-classifier_accuracy(log_model, x, y)
-
+cc = classifier_accuracy(log_model, x, y)
+print(cc)
 # (312.083, 0.836)
 
 # Change the data and record execution time
@@ -4354,7 +4571,6 @@ This is a very simple example of using two scipy tools for linear regression.
 from numpy import linspace, polyval, polyfit, sqrt  # , stats, randn, optimize
 from scipy import stats, optimize
 import statsmodels.api as sm
-from sklearn.linear_model import LinearRegression
 
 # Generate random data of a sufficiently large size
 
@@ -4469,6 +4685,7 @@ l = np.linspace(0, r, n_levels)
 n_data = list((n_min * np.power(10, l)))
 n_data = [int(n) for n in n_data]
 
+""" NG somewhere
 for i in range(len(n_data)):
     print("i =", i)
     t = np.linspace(-10, 10, n_data[i])
@@ -4516,7 +4733,7 @@ for i in range(len(n_data)):
     lm.fit(t, x)
     ar = lm.coef_[1]
     br = lm.intercept_
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -4598,13 +4815,6 @@ print("Test feature set size:", X_test.shape)
 print("Training variable set size:", y_train.shape)
 print("Test variable set size:", y_test.shape)
 
-# Model fit and training
-
-# Import linear regression model estimator from scikit-learn and instantiate
-
-from sklearn.linear_model import LinearRegression
-from sklearn import metrics
-
 lm = LinearRegression()  # Creating a Linear Regression object 'lm'
 
 # Fit the model on to the instantiated object itself
@@ -4639,6 +4849,7 @@ train_error = np.square(train_pred - y_train)
 sum_error = np.sum(train_error)
 se = [0, 0, 0, 0, 0]
 for i in range(k):
+    print("i =", i)
     r = sum_error / dfN
     r = r / np.sum(
         np.square(
@@ -4651,7 +4862,7 @@ cdf["t-statistic"] = cdf["Coefficients"] / cdf["Standard Error"]
 cdf
 
 print(
-    "Therefore, features arranged in the order of importance for predicting the house price\n",
+    "Therefore, features arranged in the order of importance for predicting the house price",
     "-" * 90,
     sep="",
 )
@@ -4829,8 +5040,8 @@ m.qqplot_resid()
 
 # F-test of overall significance
 
-m.ftest()
-
+cc = m.ftest()
+print(cc)
 # (117.98260528684814, 5.444633963386908e-44)
 
 # Standard errors, t-statistic, p-values
@@ -4842,8 +5053,8 @@ print()
 print("P-values:",m.pvalues())
 
 for i in range(7):
+    print("i =", i)
     print(f"Predictor: {df.columns[i]}, Standard error: {m.std_err()[i+1]}, t-statistic: {m.tvalues()[i+1]}, p-value: {m.pvalues()[i+1]}")
-    print()
 
 # We can print the confidence interval of the regression coefficients directly
 
@@ -4891,9 +5102,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Robust linear regression
-
-from sklearn.linear_model import HuberRegressor, LinearRegression
-from sklearn.datasets import make_regression
 
 # Creating a regression problem using make_regression method
 
@@ -4998,6 +5206,7 @@ print(cc)
 fig, ax = plt.subplots(2, 2, figsize=(10, 8))
 ax = ax.ravel()
 for i in range(4):
+    print("i =", i)
     ax[i].scatter(df[df.columns[i]], df["y"], edgecolor="k", color="red", alpha=0.75)
     ax[i].set_title(f"{df.columns[i]} vs. y")
     ax[i].grid(True)
@@ -5024,8 +5233,6 @@ svr_linear.score(X_test, y_test)
 
 # Linear regression as a baseline
 
-from sklearn.linear_model import LinearRegression
-
 linear = LinearRegression()
 
 linear.fit(X_train, y_train)
@@ -5046,8 +5253,6 @@ svr_rbf.score(X_test, y_test)
 # 0.6473177483091139
 
 # So, clearly, the RBF kernel showed better accuracy on the test set
-
-from sklearn.metrics import mean_squared_error
 
 print(
     "RMSE for linear SVR:",
@@ -5284,6 +5489,7 @@ show()
 from statsmodels.stats.outliers_influence import variance_inflation_factor as vif
 
 for i in range(len(df1.columns[:-1])):
+    print("i =", i)
     v = vif(np.matrix(df1[:-1]), i)
     print("Variance inflation factor for {}: {}".format(df.columns[i], round(v, 2)))
 
@@ -5377,9 +5583,6 @@ df.plot.scatter(
 plt.plot(x_smooth, func(x_smooth), "k")
 show()
 
-from sklearn.linear_model import LinearRegression
-from sklearn.linear_model import LassoCV
-from sklearn.linear_model import RidgeCV
 from sklearn.ensemble import AdaBoostRegressor
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import make_pipeline
@@ -5408,7 +5611,7 @@ for degree in range(degree_min, degree_max + 1):
     test_score = model.score(X_test, y_test)
     linear_sample_score.append(test_score)
     poly_degree.append(degree)
-    print("Test score of model with degree {}: {}\n".format(degree, test_score))
+    print("Test score of model with degree {}: {}".format(degree, test_score))
 
     # plt.figure()
     # plt.title("RMSE: {}".format(RMSE))
@@ -5452,7 +5655,7 @@ for degree in range(degree_min, degree_max + 1):
     random_sample_score.append(test_score)
     poly_degree.append(degree)
 
-    print("Test score of model with degree {}: {}\n".format(degree, test_score))
+    print("Test score of model with degree {}: {}".format(degree, test_score))
 
     # plt.figure()
     # plt.title("RMSE: {}".format(RMSE))

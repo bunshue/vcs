@@ -37,6 +37,10 @@ from sklearn.model_selection import train_test_split  # 資料分割 => 訓練�
 from sklearn import metrics
 from sklearn.decomposition import PCA
 from sklearn.decomposition import KernelPCA  # KernelPCA 萃取特徵
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import f1_score
 
 from matplotlib.colors import ListedColormap
 from sklearn.preprocessing import MinMaxScaler
@@ -71,7 +75,7 @@ for c in df.columns[:-1]:
     plt.xticks()
     sns.boxplot(y=df[c], x=df["y"])
     i += 1
-plt.show()
+show()
 
 """
 df_sample=df.sample(frac=0.01)
@@ -81,32 +85,19 @@ g=sns.pairplot(df_sample,vars=["X1","X2","X3"],
                diag_kind="kde",diag_kws=dict(shade=True),plot_kws=dict(s=100,alpha=0.75))
 """
 
-# Data preparation and test/train split
-
-from sklearn.model_selection import train_test_split
-
 X = df.drop("y", axis=1)
 y = df["y"]
 
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
-
+# 資料分割
 X_test, X_val, y_test, y_val = train_test_split(X_test, y_test, test_size=0.50)
 
 print("Shape of validation set:", X_val.shape)
 print("Shape of test set:", X_test.shape)
 print("Shape of training set:", X_train.shape)
 
-# Classification algorithms and the metrics - accuracy_score and f1_score
-
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import AdaBoostClassifier
-
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import f1_score
-
 # Run the classification over a range of trees in the AdaBoost meta-estimator and record accuracy and compute time
-
-import time
 
 val_acc_num_trees = []
 val_f1_num_trees = []
@@ -150,7 +141,7 @@ plt.yticks()
 plt.xlabel("Number of trees in the meta-estimator")
 plt.ylabel("Accuracy")
 plt.ylim(0.5, 1.05)
-plt.show()
+show()
 
 plt.plot(range(val_range[0], val_range[1], val_range[2]), time_adaboost, c="red")
 plt.grid(True)
@@ -159,7 +150,7 @@ plt.yticks()
 plt.xlabel("Number of trees in the meta-estimator")
 plt.ylabel("Model training time (seconds)")
 # plt.ylim(0.7,1.05)
-plt.show()
+show()
 
 # A simple linear objective function for the business-centric optimization
 
@@ -191,7 +182,7 @@ plt.yticks()
 plt.xlabel("Number of trees in the meta-estimator")
 plt.ylabel("Linear objective function")
 plt.xticks([i for i in range(2, 21, 2)])
-plt.show()
+show()
 
 # Constructing the objective function formally for Scipy run
 
@@ -250,14 +241,13 @@ plt.yticks()
 plt.xlabel("Number of trees in the meta-estimator")
 plt.ylabel("Linear objective function")
 plt.xticks([i for i in range(2, 21, 2)])
-plt.show()
+show()
 
 # Calling minimize_scalar from Scipy
 
 from scipy.optimize import minimize_scalar
 
 r = minimize_scalar(objective, bounds=(2, 21), options={"disp": True}, method="Bounded")
-
 
 cc = r.items()
 print(cc)
@@ -309,7 +299,9 @@ def objective_dataset(x, X_train, y_train, X_val, y_val, v_th=0.5, alpha=3, beta
 
 for _ in range(5):
     X, y = datasets.make_hastie_10_2(n_samples=2000, random_state=1)
+    # 資料分割
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
+    # 資料分割
     X_test, X_val, y_test, y_val = train_test_split(X_test, y_test, test_size=0.50)
     result = minimize_scalar(
         objective_dataset,
