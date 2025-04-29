@@ -63,7 +63,7 @@ from sklearn.datasets import make_hastie_10_2
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
@@ -82,13 +82,52 @@ print("diabetes.feature_names=", diabetes.feature_names)
 # 觀察資料
 
 df = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
-# 透過data.data來呼叫數據　回傳numpy.ndarray型態
+# 透過data.data來呼叫數據　回傳np.ndarray型態
 # 透過data.feature_names來呼叫特徵名稱
-# 將原先的data由numpy.ndarray變更為pandas.DataFrame型態
+# 將原先的data由np.ndarray變更為pandas.DataFrame型態
 # 將特徵名稱與資料放入對應的行(columns)
 
 cc = df.head()
 print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 將 糖尿病 資料 儲存成 csv/excel 檔案
+
+# Load the diabetes dataset
+diabetes = datasets.load_diabetes()
+
+import xlsxwriter
+
+df = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
+
+df["target"] = diabetes.target
+
+print(df.head())
+df.to_csv("tmp_diabetes.csv", sep="\t")
+
+writer = pd.ExcelWriter("tmp_diabetes.xlsx", engine="xlsxwriter")
+df.to_excel(writer, sheet_name="Sheet1")
+writer._save()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("df轉excel")
+from sklearn import datasets
+
+diabetes = datasets.load_diabetes()
+
+import xlsxwriter
+
+df = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
+
+df["target"] = diabetes.target
+
+writer = pd.ExcelWriter("tmp_diabetes.xlsx", engine="xlsxwriter")
+df.to_excel(writer, sheet_name="Sheet1")
+writer._save()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -368,7 +407,6 @@ diabetes_y_test = diabetes.target[-20:]
 # Create linear regression object
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-# Train the model using the training sets
 linear_regression.fit(diabetes_X_train, diabetes_y_train)  # 學習訓練.fit
 
 # The coefficients
@@ -418,7 +456,6 @@ diabetes_y_test = diabetes.target[-20:]
 # Create linear regression object
 linear_regression = sklearn.linear_model.LinearRegression()  # 函數學習機
 
-# Train the model using the training sets
 linear_regression.fit(diabetes_X_train, diabetes_y_train)  # 學習訓練.fit
 
 # The coefficients
@@ -751,6 +788,70 @@ print('5')
 #模型評估
 
 mlflow.sklearn.log_model(model, "model")
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+dataset = pd.read_csv("datasets/pima-indians-diabetes/diabetes.csv")
+print("dataset shape {}".format(dataset.shape))
+
+print(dataset.head())
+print(dataset.shape)
+print(type(dataset))
+
+dataset = list(dataset)
+print(type(dataset))
+"""
+
+from keras.models import Sequential
+from keras.layers import Dense
+
+# fix random seed for reproducibility
+seed = 7
+np.random.seed(seed)
+# load pima indians dataset
+dataset = np.loadtxt("data/pima-indians-diabetes.csv", delimiter=",")
+# Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age,Outcome
+# split into input (X) and output (Y) variables
+print("aa")
+X = dataset[0:8]
+print("bb")
+Y = dataset[8]
+print("cc")
+
+# create model
+model = Sequential()
+model.add(Dense(12, input_dim=8, activation="relu"))
+model.add(Dense(8, activation="relu"))
+model.add(Dense(1, activation="sigmoid"))
+# Compile model
+model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
+
+""" NG
+# Fit the model
+history = model.fit(
+    X, Y, validation_split=0.33, batch_size=10, verbose=0
+)  # list all data in history  # nb_epoch=150
+
+print(history.history.keys())
+
+# summarize history for accuracy
+plt.plot(history.history["accuracy"])
+plt.plot(history.history["val_accuracy"])
+plt.title("model accuracy")
+plt.ylabel("accuracy")
+plt.xlabel("epoch")
+plt.legend(["train", "test"], loc="upper left")
+plt.show()
+# summarize history for loss
+plt.plot(history.history["loss"])
+plt.plot(history.history["val_loss"])
+plt.title("model loss")
+plt.ylabel("loss")
+plt.xlabel("epoch")
+plt.legend(["train", "test"], loc="upper left")
+plt.show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1436,6 +1537,7 @@ print(f"平均分數: {np.mean(scores)}, 標準差: {np.std(scores)}")
 svc = LinearSVR()
 
 svc.fit(X_train_std, y_train)  # 學習訓練.fit
+
 from sklearn.model_selection import cross_val_score
 
 scores = cross_val_score(svc, X_test_std, y_test, cv=10)

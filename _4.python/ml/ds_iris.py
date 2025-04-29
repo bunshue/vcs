@@ -421,6 +421,30 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("df轉excel")
+from sklearn import datasets
+
+print("load_iris()轉df")
+
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target  # 資料集目標
+
+import xlsxwriter
+
+df = pd.DataFrame(X, columns=iris.feature_names)
+
+df["target"] = y
+
+print(df)
+
+writer = pd.ExcelWriter("tmp_iris.xlsx", engine="xlsxwriter")
+df.to_excel(writer, sheet_name="Sheet1")
+writer.close()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("load_iris()轉df")
 iris = datasets.load_iris()
 X = iris.data

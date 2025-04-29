@@ -163,65 +163,6 @@ df.columns = ["_".join(col).strip() for col in df.columns.values]  # 重置字�
 print(df)
 
 print("------------------------------------------------------------")  # 60個
-
-print("df轉excel")
-from sklearn import datasets
-
-print("load_iris()轉df")
-
-iris = datasets.load_iris()
-X = iris.data
-y = iris.target  # 資料集目標
-
-import xlsxwriter
-
-df = pd.DataFrame(X, columns=iris.feature_names)
-
-df["target"] = y
-
-print(df)
-
-writer = pd.ExcelWriter("tmp_iris.xlsx", engine="xlsxwriter")
-df.to_excel(writer, sheet_name="Sheet1")
-writer.close()
-
-print("------------------------------------------------------------")  # 60個
-
-print("df轉excel")
-from sklearn import datasets
-
-diabetes = datasets.load_diabetes()
-
-import xlsxwriter
-
-df = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
-
-df["target"] = diabetes.target
-
-writer = pd.ExcelWriter("tmp_diabetes.xlsx", engine="xlsxwriter")
-df.to_excel(writer, sheet_name="Sheet1")
-writer._save()
-
-print("------------------------------------------------------------")  # 60個
-
-# 將 糖尿病 資料 儲存成 csv/excel 檔案
-
-# Load the diabetes dataset
-diabetes = datasets.load_diabetes()
-
-import xlsxwriter
-
-df = pd.DataFrame(diabetes.data, columns=diabetes.feature_names)
-
-df["target"] = diabetes.target
-
-print(df.head())
-df.to_csv("tmp_diabetes.csv", sep="\t")
-
-writer = pd.ExcelWriter("tmp_diabetes.xlsx", engine="xlsxwriter")
-df.to_excel(writer, sheet_name="Sheet1")
-writer._save()
-
 print("------------------------------------------------------------")  # 60個
 
 # pip install xlsxwriter
@@ -248,6 +189,7 @@ writer.save()
 
 print("df寫入excel檔案 :", filename)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # pip install xlsxwriter
@@ -402,7 +344,6 @@ print(df.info())
 print(df.describe())
 
 # 3 filter'
-
 print("--------------------")
 print(df["Date"] == "2018-01-05")
 print(df[df["Date"] == "2018-01-05"])
@@ -430,7 +371,6 @@ print(df.info())
 print(df.describe())
 
 # 3 filter'
-
 print("--------------------")
 print(df[df["Date"] == "2018-01-05"])
 print(df[(df["Date"] >= "2018-07-05") & (df["Date"] <= "2018-07-10")])
@@ -463,7 +403,6 @@ print(df.columns)
 print(df.index)
 print(df.info())
 print(df.describe())
-
 
 # 3 filter'
 print("--------------------")
@@ -521,9 +460,17 @@ df1 = pd.read_pickle("tmp.pkl")
 print(df1.info())
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
