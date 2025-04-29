@@ -49,7 +49,9 @@ from sklearn import preprocessing
 from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import Ridge
+from sklearn.linear_model import RidgeCV
 from sklearn.linear_model import Lasso
+from sklearn.linear_model import LassoCV
 
 
 def show():
@@ -1644,7 +1646,9 @@ Y = np.sin(X) + 0.2 * np.random.rand(N) - 0.1
 X = X.reshape(-1, 1)
 Y = Y.reshape(-1, 1)
 
+# 使用 PolynomialFeatures 產生多項式
 from sklearn.preprocessing import PolynomialFeatures
+
 from sklearn.pipeline import Pipeline
 
 
@@ -2589,6 +2593,651 @@ print(
 )
 
 # R-squared value of predictions: 0.919
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from sklearn import metrics
+from matplotlib.colors import ListedColormap
+from sklearn import tree
+
+# Multi-variate LASSO regression with CV
+
+# Multi-variate Rregression Metamodel with DOE based on random sampling
+
+N_points = 20  # Number of sample points
+# start with small < 40 points and see how the regularized model makes a difference.
+# Then increase the number is see the difference
+noise_mult = 50  # Multiplier for the noise term
+noise_mean = 10  # Mean for the Gaussian noise adder
+noise_sd = 10  # Std. Dev. for the Gaussian noise adder
+
+# Generate random (equivalent to Latin Hypercube sampling done in Optislang) feature vectors
+
+X = np.array(10 * np.random.randn(N_points, 5))
+
+df = pd.DataFrame(X, columns=["Feature" + str(l) for l in range(1, 6)])
+
+cc = df.head()
+print(cc)
+
+# Plot the random distributions of input features
+
+for i in df.columns:
+    df.hist(i, bins=5, xlabelsize=15, ylabelsize=15, figsize=(8, 6))
+show()
+
+# Generate the output variable by analytic function + Gaussian noise (our goal will be to 'learn' this function)
+
+df["y"] = (
+    5 * df["Feature1"] ** 2
+    + 13 * df["Feature2"]
+    + 0.1 * df["Feature3"] ** 2 * df["Feature1"]
+    + 2 * df["Feature4"] * df["Feature5"]
+    + 0.1 * df["Feature5"] ** 3
+    + 0.8 * df["Feature1"] * df["Feature4"] * df["Feature5"]
+    + noise_mult * np.random.normal(loc=noise_mean, scale=noise_sd)
+)
+
+cc = df.head()
+print(cc)
+
+# Plot single-variable scatterplots
+
+for i in df.columns:
+    df.plot.scatter(i, "y", edgecolors=(0, 0, 0), s=50, c="g", grid=True)
+show()
+
+# Standard linear regression
+
+linear_model = LinearRegression()  # 函數學習機
+
+X_linear = df.drop("y", axis=1)
+y_linear = df["y"]
+
+linear_model.fit(X_linear, y_linear)
+
+y_pred_linear = linear_model.predict(X_linear)
+
+# R-square of simple linear fit is very bad, coefficients have no meaning i.e. we did not 'learn' the function
+
+RMSE_linear = np.sqrt(np.sum(np.square(y_pred_linear - y_linear)))
+
+print("Root-mean-square error of linear model:", RMSE_linear)
+
+# Root-mean-square error of linear model: 4838.87696595
+
+coeff_linear = pd.DataFrame(
+    linear_model.coef_,
+    index=df.drop("y", axis=1).columns,
+    columns=["Linear model coefficients"],
+)
+print(coeff_linear)
+
+print("R2 value of linear model:", linear_model.score(X_linear, y_linear))
+
+# R2 value of linear model: 0.347548929728
+
+plt.figure(figsize=(12, 8))
+plt.xlabel("Predicted value with linear fit")
+plt.ylabel("Actual y-values")
+plt.grid(1)
+plt.scatter(y_pred_linear, y_linear, edgecolors=(0, 0, 0), lw=2, s=80)
+plt.plot(y_pred_linear, y_pred_linear, "k--", lw=2)
+show()
+
+# 使用 PolynomialFeatures 產生多項式
+from sklearn.preprocessing import PolynomialFeatures
+
+poly1 = PolynomialFeatures(3, include_bias=False)
+
+X_poly = poly1.fit_transform(X)
+X_poly_feature_name = poly1.get_feature_names_out(
+    ["Feature" + str(l) for l in range(1, 6)]
+)
+print("The feature vector list:\n", X_poly_feature_name)
+print("\nLength of the feature vector:", len(X_poly_feature_name))
+
+df_poly = pd.DataFrame(X_poly, columns=X_poly_feature_name)
+cc = df_poly.head()
+print(cc)
+
+df_poly["y"] = df["y"]
+cc = df_poly.head()
+print(cc)
+
+X_train = df_poly.drop("y", axis=1)
+y_train = df_poly["y"]
+
+# Polynomial model without regularization and cross-validation
+
+poly2 = LinearRegression()  # 函數學習機
+
+model_poly = poly2.fit(X_train, y_train)
+y_poly = poly2.predict(X_train)
+RMSE_poly = np.sqrt(np.sum(np.square(y_poly - y_train)))
+print("Root-mean-square error of simple polynomial model:", RMSE_poly)
+
+# Root-mean-square error of simple polynomial model: 1.89910302223e-11
+
+# The non-regularized polunomial model (notice the coeficients are not learned properly)
+
+coeff_poly = pd.DataFrame(
+    model_poly.coef_,
+    index=df_poly.drop("y", axis=1).columns,
+    columns=["Coefficients polynomial model"],
+)
+print(coeff_poly)
+
+# R-square value of the simple polynomial model is perfect but the model is flawed as shown above i.e. it learned wrong coefficients and overfitted the to the data
+
+print("R2 value of simple polynomial model:", model_poly.score(X_train, y_train))
+
+# R2 value of simple polynomial model: 1.0
+
+# Polynomial model with cross-validation and LASSO regularization
+
+model1 = LassoCV(cv=10, verbose=0, eps=0.001, n_alphas=100, tol=0.0001, max_iter=5000)
+
+model1.fit(X_train, y_train)
+
+y_pred1 = np.array(model1.predict(X_train))
+
+RMSE_1 = np.sqrt(np.sum(np.square(y_pred1 - y_train)))
+print("Root-mean-square error of Metamodel:", RMSE_1)
+
+# Root-mean-square error of Metamodel: 10.6254345131
+
+coeff1 = pd.DataFrame(
+    model1.coef_,
+    index=df_poly.drop("y", axis=1).columns,
+    columns=["Coefficients Metamodel"],
+)
+print(coeff1)
+
+cc = model1.score(X_train, y_train)
+print(cc)
+
+# 0.99999685404731742
+
+print(model1.alpha_)
+
+# 0.11791796322572394
+
+# Printing only the non-zero coefficients of the regularized model (notice the coeficients are learned well enough)
+
+cc = coeff1[coeff1["Coefficients Metamodel"] != 0]
+print(cc)
+
+plt.figure(figsize=(12, 8))
+plt.xlabel("Predicted value with Regularized Metamodel")
+plt.ylabel("Actual y-values")
+plt.grid(1)
+plt.scatter(y_pred1, y_train, edgecolors=(0, 0, 0), lw=2, s=80)
+plt.plot(y_pred1, y_pred1, "k--", lw=2)
+show()
+
+# Display results
+m_log_alphas = -np.log10(model1.alphas_)
+
+plt.figure()
+ymin, ymax = 2300, 3800
+plt.plot(m_log_alphas, model1.mse_path_, ":")
+plt.plot(
+    m_log_alphas,
+    model1.mse_path_.mean(axis=-1),
+    "k",
+    label="Average across the folds",
+    linewidth=2,
+)
+plt.axvline(
+    -np.log10(model1.alpha_), linestyle="--", color="k", label="alpha: CV estimate"
+)
+plt.legend()
+
+plt.xlabel("-log(alpha)")
+plt.ylabel("Mean square error")
+plt.axis("tight")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+PythonMachineLearning-master 01
+Regularized polynomial regression with linear and random sampling
+Ridge/LASSO polynomial regression with linear and random sampling
+"""
+
+from sklearn.datasets import make_blobs  # 集群資料集
+from sklearn.pipeline import make_pipeline
+from sklearn import metrics
+from matplotlib.colors import ListedColormap
+from sklearn import tree
+from sklearn.ensemble import AdaBoostRegressor
+
+# 使用 PolynomialFeatures 產生多項式
+from sklearn.preprocessing import PolynomialFeatures
+
+N_points = 41  # Number of points for constructing function
+x_min = 1  # Min of the range of x (feature)
+x_max = 10  # Max of the range of x (feature)
+noise_mean = 0  # Mean of the Gaussian noise adder
+noise_sd = 2  # Std.Dev of the Gaussian noise adder
+ridge_alpha = tuple(
+    [10 ** (x) for x in range(-3, 0, 1)]
+)  # Alpha (regularization strength) of ridge regression
+lasso_eps = 0.001
+lasso_nalpha = 20
+lasso_iter = 1000
+degree_min = 2
+degree_max = 8
+
+x_smooth = np.array(np.linspace(x_min, x_max, 1001))
+
+# Linearly spaced sample points
+X = np.array(np.linspace(x_min, x_max, N_points))
+
+# Samples drawn from uniform random distribution
+X_sample = x_min + np.random.rand(N_points) * (x_max - x_min)
+
+
+def func(x):
+    result = x**2 * np.sin(x) * np.exp(-(1 / x_max) * x)
+    return result
+
+
+noise_x = np.random.normal(loc=noise_mean, scale=noise_sd, size=N_points)
+
+y = func(X) + noise_x
+y_sampled = func(X_sample) + noise_x
+
+df = pd.DataFrame(data=X, columns=["X"])
+df["Ideal y"] = df["X"].apply(func)
+df["y"] = y
+df["X_sampled"] = X_sample
+df["y_sampled"] = y_sampled
+df.head()
+
+df.plot.scatter(
+    "X",
+    "Ideal y",
+    title="Ideal y",
+    grid=True,
+    edgecolors=(0, 0, 0),
+    c="blue",
+    s=40,
+    figsize=(10, 5),
+)
+plt.plot(x_smooth, func(x_smooth), "k")
+show()
+
+df.plot.scatter(
+    "X_sampled",
+    y="y_sampled",
+    title="Randomly sampled y",
+    grid=True,
+    edgecolors=(0, 0, 0),
+    c="orange",
+    s=40,
+    figsize=(10, 5),
+)
+plt.plot(x_smooth, func(x_smooth), "k")
+show()
+
+df.plot.scatter(
+    "X",
+    y="y",
+    title="Linearly sampled y",
+    grid=True,
+    edgecolors=(0, 0, 0),
+    c="orange",
+    s=40,
+    figsize=(10, 5),
+)
+plt.plot(x_smooth, func(x_smooth), "k")
+show()
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(df["X"], df["y"], test_size=0.33)
+X_train = X_train.values.reshape(-1, 1)
+X_test = X_test.values.reshape(-1, 1)
+
+linear_sample_score = []
+poly_degree = []
+for degree in range(degree_min, degree_max + 1):
+    # model = make_pipeline(PolynomialFeatures(degree), RidgeCV(alphas=ridge_alpha,normalize=True,cv=5))
+    model = make_pipeline(
+        PolynomialFeatures(degree),
+        LassoCV(eps=lasso_eps, n_alphas=lasso_nalpha, max_iter=lasso_iter, cv=5),
+    )
+    # model = make_pipeline(PolynomialFeatures(degree), LinearRegression(normalize=True))
+    model.fit(X_train, y_train)
+    y_pred = np.array(model.predict(X_train))
+    test_pred = np.array(model.predict(X_test))
+    RMSE = np.sqrt(np.sum(np.square(y_pred - y_train)))
+    test_score = model.score(X_test, y_test)
+    linear_sample_score.append(test_score)
+    poly_degree.append(degree)
+    print("Test score of model with degree {}: {}\n".format(degree, test_score))
+
+    # plt.figure()
+    # plt.title("RMSE: {}".format(RMSE))
+    # plt.suptitle("Polynomial of degree {}".format(degree))
+    # plt.xlabel("X training values")
+    # plt.ylabel("Fitted and training values")
+    # plt.scatter(X_train,y_pred)
+    # plt.scatter(X_train,y_train)
+
+    plt.figure()
+    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree))
+    plt.xlabel("Actual values")
+    plt.ylabel("Predicted values")
+    plt.scatter(y_test, test_pred)
+    plt.plot(y_test, y_test, "r", lw=2)
+
+# Test score of model with degree 2: -0.04323708983722585
+# Test score of model with degree 3: -0.04323708983722607
+# Test score of model with degree 4: 0.09365803380879467
+# Test score of model with degree 5: 0.2942094903725706
+# Test score of model with degree 6: 0.5078727869614987
+# Test score of model with degree 7: 0.6519272435828123
+# Test score of model with degree 8: 0.6929923646710744
+
+print(linear_sample_score)
+
+# Modeling with randomly sampled data set
+
+# 資料分割
+X_train, X_test, y_train, y_test = train_test_split(
+    df["X_sampled"], df["y_sampled"], test_size=0.2
+)
+X_train = X_train.values.reshape(-1, 1)
+X_test = X_test.values.reshape(-1, 1)
+
+random_sample_score = []
+poly_degree = []
+for degree in range(degree_min, degree_max + 1):
+    # model = make_pipeline(PolynomialFeatures(degree), RidgeCV(alphas=ridge_alpha,normalize=True,cv=5))
+    model = make_pipeline(
+        PolynomialFeatures(degree),
+        LassoCV(eps=lasso_eps, n_alphas=lasso_nalpha, max_iter=lasso_iter, cv=5),
+    )
+    # model = make_pipeline(PolynomialFeatures(degree), LinearRegression(normalize=True))
+    model.fit(X_train, y_train)
+    y_pred = np.array(model.predict(X_train))
+    test_pred = np.array(model.predict(X_test))
+    RMSE = np.sqrt(np.sum(np.square(y_pred - y_train)))
+    test_score = model.score(X_test, y_test)
+    random_sample_score.append(test_score)
+    poly_degree.append(degree)
+
+    print("Test score of model with degree {}: {}\n".format(degree, test_score))
+
+    # plt.figure()
+    # plt.title("RMSE: {}".format(RMSE))
+    # plt.suptitle("Polynomial of degree {}".format(degree))
+    # plt.xlabel("X training values")
+    # plt.ylabel("Fitted and training values")
+    # plt.scatter(X_train,y_pred)
+    # plt.scatter(X_train,y_train)
+
+    plt.figure()
+    plt.title("Predicted vs. actual for polynomial of degree {}".format(degree))
+    plt.xlabel("Actual values")
+    plt.ylabel("Predicted values")
+    plt.scatter(y_test, test_pred)
+    plt.plot(y_test, y_test, "r", lw=2)
+"""
+Test score of model with degree 2: -0.12434801463459723
+Test score of model with degree 3: -0.0769230959117706
+Test score of model with degree 4: 0.6735234335237947
+Test score of model with degree 5: 0.7969653226807432
+Test score of model with degree 6: 0.8321225592878035
+Test score of model with degree 7: 0.8124366657216142
+Test score of model with degree 8: 0.7813750489160156
+"""
+print(random_sample_score)
+
+
+df_score = pd.DataFrame(
+    data={
+        "degree": [d for d in range(degree_min, degree_max + 1)],
+        "Linear sample score": linear_sample_score,
+        "Random sample score": random_sample_score,
+    }
+)
+print(df_score)
+
+plt.figure(figsize=(8, 5))
+plt.grid(True)
+plt.plot(df_score["degree"], df_score["Linear sample score"], lw=2)
+plt.plot(df_score["degree"], df_score["Random sample score"], lw=2)
+plt.xlabel("Model Complexity: Degree of polynomial")
+plt.ylabel("Model Score: R^2 score on test set")
+plt.legend()
+
+show()
+
+# Checking the regularization strength from the cross-validated model pipeline
+
+m = model.steps[1][1]
+print(m.alpha_)
+
+# 0.021486111550969477
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+import sklearn.linear_model
+import statsmodels.api as sm
+from sklearn import tree
+from sklearn import datasets
+from sklearn.datasets import make_blobs  # 集群資料集
+from sklearn.model_selection import train_test_split  # 資料分割 => 訓練資料 + 測試資料
+from sklearn import metrics
+from matplotlib.colors import ListedColormap
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LassoCV
+from sklearn.linear_model import RidgeCV
+from sklearn.linear_model import LinearRegression
+from sklearn.pipeline import make_pipeline
+from scipy import stats
+from scipy import optimize
+
+# Interactive Machine Learning Demo
+
+from ipywidgets import interact, interactive, IntSlider, Layout, interact_manual
+import ipywidgets as widgets
+from IPython.display import display
+
+# Linear Regression and Regularization
+
+N_samples = 25
+x_min = -5
+x_max = 5
+x1 = np.linspace(x_min, x_max, N_samples * 5)
+x = np.random.choice(x1, size=N_samples)
+noise_std = 1
+noise_mean = 0
+noise_magnitude = 2
+
+# Function definitions (ideal fitting function and actual data generating function with noise)
+
+
+def func_gen(N_samples, x_min, x_max, noise_magnitude, noise_sd, noise_mean):
+    x1 = np.linspace(x_min, x_max, N_samples * 5)
+    x = np.random.choice(x1, size=N_samples)
+    y = 2 * x - 0.6 * x**2 + 0.2 * x**3 + 18 * np.sin(x)
+    y1 = 2 * x1 - 0.6 * x1**2 + 0.2 * x1**3 + 18 * np.sin(x1)
+    y = y + noise_magnitude * np.random.normal(
+        loc=noise_mean, scale=noise_sd, size=N_samples
+    )
+    plt.figure(figsize=(8, 5))
+    plt.plot(x1, y1, c="k", lw=2)
+    plt.scatter(x, y, edgecolors="k", c="yellow", s=60)
+    plt.grid(True)
+    show()
+    return (x, y, x1, y1)
+
+
+# Call the 'interactive' widget with the data generating function, which also plots the data real-time
+
+p = interactive(
+    func_gen,
+    N_samples={"Low (50 samples)": 50, "High (200 samples)": 200},
+    x_min=(-5, 0, 1),
+    x_max=(0, 5, 1),
+    noise_magnitude=(0, 5, 1),
+    noise_sd=(0.1, 1, 0.1),
+    noise_mean=(-2, 2, 0.5),
+)
+display(p)
+
+# Extract the data
+
+# NG x,y,x1,y1 = p.result
+
+lasso_eps = 0.01
+lasso_nalpha = 20
+lasso_iter = 3000
+ridge_alphas = (0.001, 0.01, 0.1, 1)
+
+
+def func_fit(model_type, test_size, degree):
+    # 資料分割
+    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=test_size)
+
+    t1 = np.min(X_test)
+    t2 = np.max(X_test)
+    t3 = np.min(y_test)
+    t4 = np.max(y_test)
+
+    t5 = np.min(X_train)
+    t6 = np.max(X_train)
+    t7 = np.min(y_train)
+    t8 = np.max(y_train)
+
+    posx_test = t1 + (t2 - t1) * 0.7
+    posx_train = t5 + (t6 - t5) * 0.7
+    posy_test = t3 + (t4 - t3) * 0.2
+    posy_train = t7 + (t8 - t7) * 0.2
+
+    if model_type == "Linear regression":
+        model = make_pipeline(
+            PolynomialFeatures(degree, interaction_only=False),
+            LinearRegression(normalize=True),
+        )
+    if model_type == "LASSO with CV":
+        model = make_pipeline(
+            PolynomialFeatures(degree, interaction_only=False),
+            LassoCV(
+                eps=lasso_eps,
+                n_alphas=lasso_nalpha,
+                max_iter=lasso_iter,
+                normalize=True,
+                cv=5,
+            ),
+        )
+
+    if model_type == "Ridge with CV":
+        model = make_pipeline(
+            PolynomialFeatures(degree, interaction_only=False),
+            RidgeCV(alphas=ridge_alphas, normalize=True, cv=5),
+        )
+
+    X_train = X_train.reshape(-1, 1)
+    X_test = X_test.reshape(-1, 1)
+
+    model.fit(X_train, y_train)
+
+    train_pred = np.array(model.predict(X_train))
+    train_score = model.score(X_train, y_train)
+
+    test_pred = np.array(model.predict(X_test))
+    test_score = model.score(X_test, y_test)
+
+    RMSE_test = np.sqrt(np.mean(np.square(test_pred - y_test)))
+    RMSE_train = np.sqrt(np.mean(np.square(train_pred - y_train)))
+
+    print("Test score: {}, Training score: {}".format(test_score, train_score))
+
+    print("RMSE Test: {}, RMSE train: {}".format(RMSE_test, RMSE_train))
+
+    plt.figure(figsize=(12, 4))
+
+    plt.subplot(1, 2, 1)
+    plt.title("Test set performance\n", fontsize=16)
+    plt.xlabel("X-test", fontsize=13)
+    plt.ylabel("y-test", fontsize=13)
+    plt.scatter(X_test, y_test, edgecolors="k", c="blue", s=60)
+    plt.scatter(X_test, test_pred, edgecolors="k", c="yellow", s=60)
+    plt.grid(True)
+    plt.legend(["Actual test values", "Predicted values"])
+    plt.text(x=posx_test, y=posy_test, s="Test score: %.3f" % (test_score), fontsize=15)
+
+    plt.subplot(1, 2, 2)
+    plt.title("Training set performance\n", fontsize=16)
+    plt.xlabel("X-train", fontsize=13)
+    plt.ylabel("y-train", fontsize=13)
+    plt.scatter(X_train, y_train, c="blue")
+    plt.scatter(X_train, train_pred, c="yellow")
+    plt.grid(True)
+    plt.legend(["Actual training values", "Fitted values"])
+    plt.text(
+        x=posx_train,
+        y=posy_train,
+        s="Training score: %.3f" % (train_score),
+        fontsize=15,
+    )
+
+    show()
+
+    return (train_score, test_score)
+
+
+# Run the encapsulated ML function with ipywidget interactive
+
+style = {"description_width": "initial"}
+# Continuous_update = False for IntSlider control to stop continuous model evaluation while the slider is being dragged
+m = interactive(
+    func_fit,
+    model_type=widgets.RadioButtons(
+        options=["Linear regression", "LASSO with CV", "Ridge with CV"],
+        description="Choose Model",
+        style=style,
+        layout=Layout(width="250px"),
+    ),
+    test_size=widgets.Dropdown(
+        options={
+            "10% of data": 0.1,
+            "20% of data": 0.2,
+            "30% of data": 0.3,
+            "40% of data": 0.4,
+            "50% of data": 0.5,
+        },
+        description="Test set size",
+        style=style,
+    ),
+    degree=widgets.IntSlider(
+        min=1,
+        max=10,
+        step=1,
+        description="Polynomial degree",
+        stye=style,
+        continuous_update=False,
+    ),
+)
+
+# Set the height of the control.children[-1] so that the output does not jump and flicker
+output = m.children[-1]
+output.layout.height = "350px"
+
+# Display the control
+display(m)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
