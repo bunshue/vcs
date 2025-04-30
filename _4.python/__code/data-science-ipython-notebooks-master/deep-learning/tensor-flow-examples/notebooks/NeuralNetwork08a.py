@@ -42,7 +42,7 @@ def show():
     plt.show()
     pass
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -83,10 +83,33 @@ n_samples = train_X.shape[0]
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+'''
+
+# import tensorflow as tf
+import tensorflow.compat.v1 as tf  # 強制使用tensorflow 1.0
+
+import tensorflow_datasets
+
+# mnist = tensorflow_datasets.load("/tmp/data/")
+
+mnist_npz_filename = "D:/_git/vcs/_big_files/mnist.npz"
+
+mnist = np.load(mnist_npz_filename)
+x_train, y_train = mnist["x_train"], mnist["y_train"]
+x_test, y_test = mnist["x_test"], mnist["y_test"]
+mnist.close()
+
+
+# Parameters
+learning_rate = 0.01
+training_epochs = 25
+batch_size = 100
+display_step = 1
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個
