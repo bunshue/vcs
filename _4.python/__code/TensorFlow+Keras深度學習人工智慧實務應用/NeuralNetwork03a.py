@@ -422,7 +422,7 @@ sum_result = tf.reduce_sum(mul, name="sum")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Keras_Mnist_Introduce
+print("Keras_Mnist_Introduce")
 
 np.random.seed(10)
 
@@ -521,7 +521,7 @@ print(y_TrainOneHot[:5])
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Keras_Mnist_CNN
+print("Keras_Mnist_CNN")
 
 from keras.datasets import mnist
 
@@ -646,8 +646,6 @@ prediction = np.argmax(predict_x, axis=1)
 
 print("ccccccc")
 
-# 9888/10000 [============================>.] - ETA: 0s
-
 cc = prediction[:10]
 print(cc)
 
@@ -693,7 +691,7 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Keras_Mnist_MLP_h256
+print("Keras_Mnist_MLP_h256")
 
 np.random.seed(10)
 
@@ -810,7 +808,7 @@ plot_images_labels_prediction(x_test_image, y_test_label, prediction, idx=1289, 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Keras_Mnist_MLP_h1000
+print("Keras_Mnist_MLP_h1000")
 
 import tensorflow as tf
 import tensorflow.examples.tutorials.mnist.input_data as input_data
@@ -992,7 +990,7 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Keras_Mnist_MLP_h1000_DropOut
+print("Keras_Mnist_MLP_h1000_DropOut")
 
 np.random.seed(10)
 
@@ -1121,7 +1119,7 @@ plot_images_labels_prediction(x_test_image, y_test_label, prediction, idx=1289, 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Keras_Mnist_MLP_h1000_DropOut_h1000_DropOut
+print("Keras_Mnist_MLP_h1000_DropOut_h1000_DropOut")
 
 np.random.seed(10)
 
@@ -1250,13 +1248,12 @@ plot_images_labels_prediction(x_test_image, y_test_label, prediction, idx=1289, 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Keras_Taianic_Introduce
+print("Keras_Taianic_Introduce")
 
 
 # 下載鐵達尼號旅客資料集
 
 import urllib.request
-import os
 
 url = "http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic3.xls"  # old
 url = "https://hbiostat.org/data/repo/titanic3.xls"
@@ -1453,7 +1450,7 @@ print(train_Label[:2])  # 訓練資料標籤欄位
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Keras_Taianic_MLP
+print("Keras_Taianic_MLP")
 
 from sklearn import preprocessing
 
@@ -1609,7 +1606,7 @@ print(pd[:5])
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Keras_Cifar_CNN-Introduce.ipynb
+print("Keras_Cifar_CNN-Introduce")
 
 from keras.datasets import cifar10
 
@@ -1702,7 +1699,7 @@ print(y_label_train_OneHot[:5])
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Keras_Cifar_CNN
+print("Keras_Cifar_CNN")
 
 from keras.datasets import cifar10
 
@@ -1926,7 +1923,7 @@ print("Saved model to disk")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Keras_Cifar_CNN_Continue_Train
+print("Keras_Cifar_CNN_Continue_Train")
 
 from keras.datasets import cifar10
 
@@ -2129,7 +2126,7 @@ print("Saved model to disk")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Keras_Cifar_CNN_Deeper_Conv3
+print("Keras_Cifar_CNN_Deeper_Conv3")
 
 # Simple CNN model for the CIFAR-10 Dataset
 
@@ -2323,9 +2320,1281 @@ print("Saved model to disk")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("Keras_Imdb_Introduce")
+
+import urllib.request
+import tarfile
+
+url = "http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz"
+filename = "D:/_git/vcs/_big_files/tmp_aclImdb_v1.tar.gz"
+if not os.path.isfile(filename):
+    result = urllib.request.urlretrieve(url, filename)
+    print("downloaded:", result)
+
+# downloaded: ('data/aclImdb_v1.tar.gz', <http.client.HTTPMessage object at 0x00000256F5C98DD8>)
+
+"""
+if not os.path.exists("data/aclImdb"):
+    tfile = tarfile.open(filename, 'r:gz')
+    result=tfile.extractall('data/')
+"""
+
+from keras.datasets import imdb
+from keras.preprocessing import sequence
+from tensorflow.keras.preprocessing.text import Tokenizer
+import re
+
+
+def rm_tags(text):
+    re_tag = re.compile(r"<[^>]+>")
+    return re_tag.sub("", text)
+
+
+def read_files(filetype):
+    path = "data/aclImdb/"
+    file_list = []
+
+    positive_path = path + filetype + "/pos/"
+    for f in os.listdir(positive_path):
+        file_list += [positive_path + f]
+
+    negative_path = path + filetype + "/neg/"
+    for f in os.listdir(negative_path):
+        file_list += [negative_path + f]
+
+    print("read", filetype, "files:", len(file_list))
+
+    all_labels = [1] * 12500 + [0] * 12500
+
+    all_texts = []
+    for fi in file_list:
+        with open(fi, encoding="utf8") as file_input:
+            all_texts += [rm_tags(" ".join(file_input.readlines()))]
+
+    return all_labels, all_texts
+
+
+y_train, train_text = read_files("train")
+
+# read train files: 25000
+
+y_test, test_text = read_files("test")
+
+# read test files: 25000
+
+# 查看正面評價的影評
+
+print(train_text[0])
+
+print(y_train[0])
+
+# 查看負面評價的影評
+
+print(train_text[12499])
+
+print(y_train[12499])
+
+print("先讀取所有文章建立字典，限制字典的數量為nb_words=2000")
+
+token = Tokenizer(num_words=2000)
+token.fit_on_texts(train_text)
+
+# Tokenizer屬性
+
+# fit_on_texts 讀取多少文章
+
+print(token.document_count)
+
+# 25000
+
+# manyu print(token.word_index)
+
+# 將每一篇文章的文字轉換一連串的數字
+# 只有在字典中的文字會轉換為數字
+
+x_train_seq = token.texts_to_sequences(train_text)
+x_test_seq = token.texts_to_sequences(test_text)
+
+print(train_text[0])
+
+print(x_train_seq[0])
+
+# 讓轉換後的數字長度相同
+
+# 文章內的文字，轉換為數字後，每一篇的文章地所產生的數字長度都不同，因為後需要進行類神經網路的訓練，所以每一篇文章所產生的數字長度必須相同
+# 以下列程式碼為例maxlen=100，所以每一篇文章轉換為數字都必須為100
+# bj6eji3t03g/ 2k
+
+x_train = sequence.pad_sequences(x_train_seq, maxlen=100)
+x_test = sequence.pad_sequences(x_test_seq, maxlen=100)
+
+# 如果文章轉成數字大於0,pad_sequences處理後，會truncate前面的數字
+
+print("before pad_sequences length=", len(x_train_seq[0]))
+print(x_train_seq[0])
+
+print("after pad_sequences length=", len(x_train[0]))
+print(x_train[0])
+
+# 如果文章轉成數字不足100,pad_sequences處理後，前面會加上0
+
+print("before pad_sequences length=", len(x_train_seq[1]))
+print(x_train_seq[1])
+
+print("after pad_sequences length=", len(x_train[1]))
+print(x_train[1])
+
+# 資料預處理
+
+token = Tokenizer(num_words=2000)
+token.fit_on_texts(train_text)
+
+x_train_seq = token.texts_to_sequences(train_text)
+x_test_seq = token.texts_to_sequences(test_text)
+
+x_train = sequence.pad_sequences(x_train_seq, maxlen=100)
+x_test = sequence.pad_sequences(x_test_seq, maxlen=100)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print("Keras_Imdb_MLP")
+
+from keras.datasets import imdb
+from keras.preprocessing import sequence
+from tensorflow.keras.preprocessing.text import Tokenizer
+
+np.random.seed(10)
+
+import re
+
+re_tag = re.compile(r"<[^>]+>")
+
+
+def rm_tags(text):
+    return re_tag.sub("", text)
+
+
+def read_files(filetype):
+    path = "data/aclImdb/"
+    file_list = []
+
+    positive_path = path + filetype + "/pos/"
+    for f in os.listdir(positive_path):
+        file_list += [positive_path + f]
+
+    negative_path = path + filetype + "/neg/"
+    for f in os.listdir(negative_path):
+        file_list += [negative_path + f]
+
+    print("read", filetype, "files:", len(file_list))
+
+    all_labels = [1] * 12500 + [0] * 12500
+
+    all_texts = []
+
+    for fi in file_list:
+        with open(fi, encoding="utf8") as file_input:
+            all_texts += [rm_tags(" ".join(file_input.readlines()))]
+
+    return all_labels, all_texts
+
+
+y_train, train_text = read_files("train")
+
+# read train files: 25000
+
+y_test, test_text = read_files("test")
+
+# read test files: 25000
+
+token = Tokenizer(num_words=2000)
+token.fit_on_texts(train_text)
+
+x_train_seq = token.texts_to_sequences(train_text)
+x_test_seq = token.texts_to_sequences(test_text)
+
+x_train = sequence.pad_sequences(x_train_seq, maxlen=100)
+x_test = sequence.pad_sequences(x_test_seq, maxlen=100)
+
+# 建立模型
+
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Activation, Flatten
+from keras.layers import Embedding
+
+model = Sequential()
+
+model.add(Embedding(output_dim=32, input_dim=2000, input_length=100))
+model.add(Dropout(0.2))
+
+model.add(Flatten())
+
+model.add(Dense(units=256, activation="relu"))
+model.add(Dropout(0.2))
+
+model.add(Dense(units=1, activation="sigmoid"))
+
+model.summary()
+
+# 訓練模型
+
+model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
+
+''' NG
+train_history = model.fit(
+    x_train, y_train, batch_size=100, epochs=10, verbose=2, validation_split=0.2
+)
+
+
+def show_train_history(train_history, train, validation):
+    plt.plot(train_history.history[train])
+    plt.plot(train_history.history[validation])
+    plt.title("Train History")
+    plt.ylabel(train)
+    plt.xlabel("Epoch")
+    plt.legend(["train", "validation"], loc="upper left")
+    plt.show()
+
+
+# Populating the interactive namespace from numpy and matplotlib
+
+show_train_history(train_history, "accuracy", "val_accuracy")
+
+show_train_history(train_history, "loss", "val_loss")
+
+# 評估模型準確率
+
+scores = model.evaluate(x_test, y_test, verbose=1)
+print(scores[1])
+
+# 0.80288000000000004
+
+# 預測機率
+
+probility = model.predict(x_test)
+
+print(probility[:10])
+
+for p in probility[12500:12510]:
+    print(p)
+
+# 預測結果
+
+predict = model.predict_classes(x_test)
+
+print(predict[:10])
+
+predict_classes = predict.reshape(-1)
+print(predict_classes[:10])
+
+# 查看預測結果
+
+SentimentDict = {1: "正面的", 0: "負面的"}
+
+
+def display_test_Sentiment(i):
+    print(test_text[i])
+    print(
+        "標籤label:", SentimentDict[y_test[i]], "預測結果:", SentimentDict[predict_classes[i]]
+    )
+
+
+display_test_Sentiment(2)
+
+"""
+As a recreational golfer with some knowledge of the sport's history, I was pleased with Disney's sensitivity to the issues of class in golf in the early twentieth century. The movie depicted well the psychological battles that Harry Vardon fought within himself, from his childhood trauma of being evicted to his own inability to break that glass ceiling that prevents him from being accepted as an equal in English golf society. Likewise, the young Ouimet goes through his own class struggles, being a mere caddie in the eyes of the upper crust Americans who scoff at his attempts to rise above his standing. What I loved best, however, is how this theme of class is manifested in the characters of Ouimet's parents. His father is a working-class drone who sees the value of hard work but is intimidated by the upper class; his mother, however, recognizes her son's talent and desire and encourages him to pursue his dream of competing against those who think he is inferior.Finally, the golf scenes are well photographed. Although the course used in the movie was not the actual site of the historical tournament, the little liberties taken by Disney do not detract from the beauty of the film. There's one little Disney moment at the pool table; otherwise, the viewer does not really think Disney. The ending, as in "Miracle," is not some Disney creation, but one that only human history could have written.
+標籤label: 正面的 預測結果: 正面的
+"""
+
+print(predict_classes[12500:12510])
+
+display_test_Sentiment(12502)
+
+"""
+First of all I hate those moronic rappers, who could'nt act if they had a gun pressed against their foreheads. All they do is curse and shoot each other and acting like cliché'e version of gangsters.The movie doesn't take more than five minutes to explain what is going on before we're already at the warehouse There is not a single sympathetic character in this movie, except for the homeless guy, who is also the only one with half a brain.Bill Paxton and William Sadler are both hill billies and Sadlers character is just as much a villain as the gangsters. I did'nt like him right from the start.The movie is filled with pointless violence and Walter Hills specialty: people falling through windows with glass flying everywhere. There is pretty much no plot and it is a big problem when you root for no-one. Everybody dies, except from Paxton and the homeless guy and everybody get what they deserve.The only two black people that can act is the homeless guy and the junkie but they're actors by profession, not annoying ugly brain dead rappers.Stay away from this crap and watch 48 hours 1 and 2 instead. At lest they have characters you care about, a sense of humor and nothing but real actors in the cast.
+標籤label: 負面的 預測結果: 負面的
+"""
+
+# 預測新的影評
+
+input_text = """
+Oh dear, oh dear, oh dear: where should I start folks. I had low expectations already because I hated each and every single trailer so far, but boy did Disney make a blunder here. I'm sure the film will still make a billion dollars - hey: if Transformers 11 can do it, why not Belle? - but this film kills every subtle beautiful little thing that had made the original special, and it does so already in the very early stages. It's like the dinosaur stampede scene in Jackson's King Kong: only with even worse CGI (and, well, kitchen devices instead of dinos).
+The worst sin, though, is that everything (and I mean really EVERYTHING) looks fake. What's the point of making a live-action version of a beloved cartoon if you make every prop look like a prop? I know it's a fairy tale for kids, but even Belle's village looks like it had only recently been put there by a subpar production designer trying to copy the images from the cartoon. There is not a hint of authenticity here. Unlike in Jungle Book, where we got great looking CGI, this really is the by-the-numbers version and corporate filmmaking at its worst. Of course it's not really a "bad" film; those 200 million blockbusters rarely are (this isn't 'The Room' after all), but it's so infuriatingly generic and dull - and it didn't have to be. In the hands of a great director the potential for this film would have been huge.
+Oh and one more thing: bad CGI wolves (who actually look even worse than the ones in Twilight) is one thing, and the kids probably won't care. But making one of the two lead characters - Beast - look equally bad is simply unforgivably stupid. No wonder Emma Watson seems to phone it in: she apparently had to act against an guy with a green-screen in the place where his face should have been. 
+"""
+
+input_seq = token.texts_to_sequences([input_text])
+
+print(len(input_seq[0]))
+
+# 285
+
+pad_input_seq = sequence.pad_sequences(input_seq, maxlen=100)
+
+print(len(pad_input_seq[0]))
+
+predict_result = model.predict_classes(pad_input_seq)
+
+print(predict_result[0][0])
+
+SentimentDict[predict_result[0][0]]
+
+# "負面的"
+
+
+def predict_review(input_text):
+    input_seq = token.texts_to_sequences([input_text])
+    pad_input_seq = sequence.pad_sequences(input_seq, maxlen=100)
+    predict_result = model.predict_classes(pad_input_seq)
+    print(SentimentDict[predict_result[0][0]])
+
+
+# http://www.imdb.com/title/tt2771200/
+# http://www.imdb.com/title/tt2771200
+
+predict_review(
+    """
+It's hard to believe that the same talented director who made the influential cult action classic The Road Warrior had anything to do with this disaster.
+Road Warrior was raw, gritty, violent and uncompromising, and this movie is the exact opposite. It's like Road Warrior for kids who need constant action in their movies.
+This is the movie. The good guys get into a fight with the bad guys, outrun them, they break down in their vehicle and fix it. Rinse and repeat. The second half of the movie is the first half again just done faster.
+The Road Warrior may have been a simple premise but it made you feel something, even with it's opening narration before any action was even shown. And the supporting characters were given just enough time for each of them to be likable or relatable.
+In this movie there is absolutely nothing and no one to care about. We're supposed to care about the characters because... well we should. George Miller just wants us to, and in one of the most cringe worthy moments Charlize Theron's character breaks down while dramatic music plays to try desperately to make us care.
+Tom Hardy is pathetic as Max. One of the dullest leading men I've seen in a long time. There's not one single moment throughout the entire movie where he comes anywhere near reaching the same level of charisma Mel Gibson did in the role. Gibson made more of an impression just eating a tin of dog food. I'm still confused as to what accent Hardy was even trying to do.
+I was amazed that Max has now become a cartoon character as well. Gibson's Max was a semi-realistic tough guy who hurt, bled, and nearly died several times. Now he survives car crashes and tornadoes with ease?
+In the previous movies, fuel and guns and bullets were rare. Not anymore. It doesn't even seem Post-Apocalyptic. There's no sense of desperation anymore and everything is too glossy looking. And the main villain's super model looking wives with their perfect skin are about as convincing as apocalyptic survivors as Hardy's Australian accent is. They're so boring and one-dimensional, George Miller could have combined them all into one character and you wouldn't miss anyone.
+Some of the green screen is very obvious and fake looking, and the CGI sandstorm is laughably bad. It wouldn't look out of place in a Pixar movie.
+There's no tension, no real struggle, or any real dirt and grit that Road Warrior had. Everything George Miller got right with that masterpiece he gets completely wrong here. 
+"""
+)
+
+# 負面的
+
+predict_review(
+    """
+Sure, I'm a huge film snob who (on the surface) only likes artsy-fartsy foreign films from before the 60's, but that hasn't stopped me from loving Disney's Beauty & The Beast; in fact, it's probably my favorite American animated film and is easily Disney's finest work. It's beautiful, it's breathtaking, it's warm, it's hilarious, it's captivating, and, in Disney fashion, it's magical. When I learned that Disney would be remaking their classic films, B&TB was undeniably the best wrapped package. How could they go wrong?
+Oh man, they went wrong.
+First thing's first: this film is so flat. The directing was dull and uninteresting throughout the entire film and it honestly felt like one of the Twilight sequels...and then I looked it up and found out that, yes, director Bill Condon was the man behind Breaking Dawn parts 1 & 2. Every shot looks bored and uninterested, which contrasts heavily with the original animated film that was constantly popping with vibrancy. The script too is boring because it's almost a complete remake of the original, though I guess most people won't mind that.
+Next: the CGI is horrid. Although I didn't care for The Jungle Book from last year, I could at least admit that the CGI was breathtaking. The same cant be said for this film. Characters like Lumière, Cogsworth, Mrs Potts, and most of the cursed appliances have very strange, lifeless faces that are pretty off putting to be looking at for such a long time. All of the sets too look artificial and fake, especially the town towards the beginning. However, the biggest offender is easily and infuriatingly the character that mattered most: The Beast. The CGI on the Beast's face is so distracting that it completely takes you out of the film. His eyes are completely devoid of soul, and his mouth is a gaping video game black hole of fiction. Klaus Kinski looked much better in the Faerie Tale Theatre episode of Beauty & The Beast, and that was a 1984 TV show episode. But do you know why it looked better? Because it was an actual face with actual eyes, not some video game computerized synthetic monstrosity. When will studios learn that practical effects will always top CGI?
+Finally: wasted casting. Emma Watson is beautiful, but she's no Belle. She is completely devoid of the warmth and humanity that made the animated Belle so beloved. Instead, she is cold and heartless throughout most of the film. Kevin Kline is 100% wasted and does nothing except look old. Ian McKellan, Ewan McGregor, Emma Thompson, and even Dan Stevens as the Beast are very expendable and could've been played by anyone else. The only good characters are Gaston and LeFou, mostly because they are fun and played by actors who breathe new life into their original shapes. If anything, this film should've been about Gaston and LeFou, but that would never happen because that would mean Disney couldn't cater to blind nostalgic 90's kids.
+Overall, this film is a complete bore. It could've been better if even the special effects were good, but the CGI in particular is horrendous. I'm all for Disney remaking their nostalgia- catering 90's films, but they need to be interesting. This film, sadly, is not. Even the Christmas sequel is better than this film because it's at least something. 
+"""
+)
+
+# 負面的
+
+predict_review(
+    """
+I was really looking forward to this film. Not only has Disney recently made excellent live-action versions of their animated masterpieces (Jungle Book, Cinderella), but the cast alone (Emma Watson, Ian McKellen, Kevin Kline) already seemed to make this one a sure hit. Well, not so much as it turns out.
+Some of the animation is fantastic, but because characters like Cogsworth (the clock), Lumière (the candelabra) and Chip (the little tea cup) now look "realistic", they lose a lot of their animated predecessors' charm and actually even look kind of creepy at times. And ironically - unlike in the animated original - in this new realistic version they only have very limited facial expressions (which is a creative decision I can't for the life of me understand).
+Even when it works: there can be too much of a good thing. The film is overstuffed with lush production design and cgi (which is often weirdly artificial looking though) but sadly lacking in charm and genuine emotion. If this were a music album, I'd say it is "over-produced" and in need of more soul and swing. The great voice talent in some cases actually seems wasted, because it drowns in a sea of visual effects that numbs all senses. The most crucial thing that didn't work for me, though, is the Beast. He just never looks convincing. The eyes somehow don't look like real eyes and they're always slightly off.
+On the positive side, I really liked Gaston, and the actor who played him, Luke Evans, actually gave the perhaps most energized performance of all. Kevin Kline as Belle's father has little to do but to look fatherly and old, but he makes the most of his part. Speaking of Belle, now that I've seen the film, I think her role was miscast. I think someone like Rachel McAdams would actually have been a more natural, lively and perhaps a bit more feisty Belle than Emma Watson.
+If you love the original, you might want to give this one a pass, it's really not that good (although at least the songs were OK). Also, I'd think twice before bringing small children; without cute animated faces, all those "realistic" looking creatures and devices can be rather frightening for a child. """
+)
+
+# 正面的
+
+predict_review(
+    """
+Up front: I'm probably not the right audience for this film. I only went because I was invited, and I wouldn't have gone to check this one out otherwise.
+Firstly, some of the production values are really beautiful and reminded me of the animated classic in a good way. Also, the voice cast for the clock and the kitchen devices are great.
+Secondly, the actors, well... this may sound kind of harsh, but I've never seen Emma Watson act so stiff in a movie. Her performance is wooden, which is pretty bad considering she's supposed to be the heart of the film. Also, she probably won't start a singing career anytime soon.
+Thirdly (and most importantly), Beast. That's where they really dropped the ball. Giving him a lifeless CGI face was an unforgivable mistake, and it's such a constant distraction that I could never really get into the movie.
+Overall, I'm afraid I wouldn't recommend this movie, at least not to adults. I'm sure most kids would enjoy it though, and it's not really a bad film: just a very mediocre one. 6 stars out of 10. 
+"""
+)
+
+# 負面的
+
+predict_review(
+    """
+Full disclosure, I didn't think the first movie was as bad as it was made out to be. It wasn't good in almost any sense, but it was to be expected given the combination of source material, resources and constraints.
+That said, this sequel is 20x better than the first. Having established the characters in the first movie, the actors seem to be able to act now comfortably in their parts. The story becomes much more nuanced with plenty of dynamics on the go.
+SPOILERS from now on
+Can they maintain a "vanilla" relationship? Is he going to become controlling again and ruin things? Will she let it get out of control and ruin things also or stay on it? Who is that stalky girl and what happened to her exactly? what about his mother? and that ex of his? Will something occur with her infatuated boss?
+On top of all of this, I realised while watching that the series was never about a bizarre sadist control freak, it's actually about all men and the story of a woman trying to find the balance between accepting or desiring the dominant behaviour of the male archetype and maintaining strength and independence in such a relationship.
+While of course the fact that he is rich, while possibly relating to the power struggle, looks like it is going to be more and more used for generating further drama. The romance is much more evident in this movie to/ 
+"""
+)
+
+# 正面的
+
+# serialize model to JSON
+
+model_json = model.to_json()
+with open("SaveModel/Imdb_RNN_model.json", "w") as json_file:
+    json_file.write(model_json)
+
+model.save_weights("SaveModel/Imdb_RNN_model.h5")
+print("Saved model to disk")
+
+# Saved model to disk
+NG '''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("Keras_Imdb_MLP_Large")
+
+from keras.datasets import imdb
+from keras.preprocessing import sequence
+from tensorflow.keras.preprocessing.text import Tokenizer
+
+np.random.seed(10)
+
+import re
+
+re_tag = re.compile(r"<[^>]+>")
+
+
+def rm_tags(text):
+    return re_tag.sub("", text)
+
+
+def read_files(filetype):
+    path = "data/aclImdb/"
+    file_list = []
+
+    positive_path = path + filetype + "/pos/"
+    for f in os.listdir(positive_path):
+        file_list += [positive_path + f]
+
+    negative_path = path + filetype + "/neg/"
+    for f in os.listdir(negative_path):
+        file_list += [negative_path + f]
+
+    print("read", filetype, "files:", len(file_list))
+
+    all_labels = [1] * 12500 + [0] * 12500
+
+    all_texts = []
+
+    for fi in file_list:
+        with open(fi, encoding="utf8") as file_input:
+            all_texts += [rm_tags(" ".join(file_input.readlines()))]
+
+    return all_labels, all_texts
+
+
+y_train, train_text = read_files("train")
+
+# read train files: 25000
+
+y_test, test_text = read_files("test")
+
+# read test files: 25000
+
+# 先讀取所有文章建立字典，限制字典的數量為nb_words=3800
+
+token = Tokenizer(num_words=3800)
+token.fit_on_texts(train_text)
+
+# 將文字轉為數字序列
+
+x_train_seq = token.texts_to_sequences(train_text)
+x_test_seq = token.texts_to_sequences(test_text)
+
+# 截長補短，讓所有影評所產生的數字序列長度一樣
+
+x_train = sequence.pad_sequences(x_train_seq, maxlen=380)
+x_test = sequence.pad_sequences(x_test_seq, maxlen=380)
+
+# 建立模型
+
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Activation, Flatten
+from keras.layers import Embedding
+
+model = Sequential()
+
+model.add(Embedding(output_dim=32, input_dim=3800, input_length=380))
+model.add(Dropout(0.2))
+
+model.add(Flatten())
+
+model.add(Dense(units=256, activation="relu"))
+model.add(Dropout(0.2))
+
+model.add(Dense(units=1, activation="sigmoid"))
+
+model.summary()
+
+# 訓練模型
+
+model.compile(
+    loss="binary_crossentropy",
+    # optimizer='rmsprop',
+    optimizer="adam",
+    metrics=["accuracy"],
+)
+
+''' NG
+train_history = model.fit(
+    x_train, y_train, batch_size=100, epochs=10, verbose=2, validation_split=0.2
+)
+
+
+def show_train_history(train_history, train, validation):
+    plt.plot(train_history.history[train])
+    plt.plot(train_history.history[validation])
+    plt.title("Train History")
+    plt.ylabel(train)
+    plt.xlabel("Epoch")
+    plt.legend(["train", "validation"], loc="upper left")
+    plt.show()
+
+
+# Populating the interactive namespace from numpy and matplotlib
+
+show_train_history(train_history, "accuracy", "val_accuracy")
+
+show_train_history(train_history, "loss", "val_loss")
+
+# 評估模型準確率
+
+scores = model.evaluate(x_test, y_test, verbose=1)
+print(scores[1])
+
+# 0.84863999999999995
+
+# 預測機率
+
+probility = model.predict(x_test)
+
+print(probility[:10])
+
+for p in probility[12500:12510]:
+    print(p)
+
+# 預測結果
+
+predict = model.predict_classes(x_test)
+
+print(predict.shape)
+
+predict_classes = predict.reshape(25000)
+print(predict_classes)
+
+# 查看預測結果
+
+SentimentDict = {1: "正面的", 0: "負面的"}
+
+
+def display_test_Sentiment(i):
+    print(test_text[i])
+    print(
+        "標籤label:", SentimentDict[y_test[i]], "預測結果:", SentimentDict[predict_classes[i]]
+    )
+
+
+display_test_Sentiment(2)
+"""
+As a recreational golfer with some knowledge of the sport's history, I was pleased with Disney's sensitivity to the issues of class in golf in the early twentieth century. The movie depicted well the psychological battles that Harry Vardon fought within himself, from his childhood trauma of being evicted to his own inability to break that glass ceiling that prevents him from being accepted as an equal in English golf society. Likewise, the young Ouimet goes through his own class struggles, being a mere caddie in the eyes of the upper crust Americans who scoff at his attempts to rise above his standing. What I loved best, however, is how this theme of class is manifested in the characters of Ouimet's parents. His father is a working-class drone who sees the value of hard work but is intimidated by the upper class; his mother, however, recognizes her son's talent and desire and encourages him to pursue his dream of competing against those who think he is inferior.Finally, the golf scenes are well photographed. Although the course used in the movie was not the actual site of the historical tournament, the little liberties taken by Disney do not detract from the beauty of the film. There's one little Disney moment at the pool table; otherwise, the viewer does not really think Disney. The ending, as in "Miracle," is not some Disney creation, but one that only human history could have written.
+標籤label: 正面的 預測結果: 正面的
+"""
+display_test_Sentiment(3)
+"""
+I saw this film in a sneak preview, and it is delightful. The cinematography is unusually creative, the acting is good, and the story is fabulous. If this movie does not do well, it won't be because it doesn't deserve to. Before this film, I didn't realize how charming Shia Lebouf could be. He does a marvelous, self-contained, job as the lead. There's something incredibly sweet about him, and it makes the movie even better. The other actors do a good job as well, and the film contains moments of really high suspense, more than one might expect from a movie about golf. Sports movies are a dime a dozen, but this one stands out. This is one I'd recommend to anyone.
+標籤label: 正面的 預測結果: 正面的
+"""
+print(predict_classes[12500:12510])
+
+display_test_Sentiment(12500)
+"""
+Once again Mr. Costner has dragged out a movie for far longer than necessary. Aside from the terrific sea rescue sequences, of which there are very few I just did not care about any of the characters. Most of us have ghosts in the closet, and Costner's character are realized early on, and then forgotten until much later, by which time I did not care. The character we should really care about is a very cocky, overconfident Ashton Kutcher. The problem is he comes off as kid who thinks he's better than anyone else around him and shows no signs of a cluttered closet. His only obstacle appears to be winning over Costner. Finally when we are well past the half way point of this stinker, Costner tells us all about Kutcher's ghosts. We are told why Kutcher is driven to be the best with no prior inkling or foreshadowing. No magic here, it was all I could do to keep from turning it off an hour in.
+標籤label: 負面的 預測結果: 負面的
+"""
+
+# 預測新的影評
+
+input_text = """
+Oh dear, oh dear, oh dear: where should I start folks. I had low expectations already because I hated each and every single trailer so far, but boy did Disney make a blunder here. I'm sure the film will still make a billion dollars - hey: if Transformers 11 can do it, why not Belle? - but this film kills every subtle beautiful little thing that had made the original special, and it does so already in the very early stages. It's like the dinosaur stampede scene in Jackson's King Kong: only with even worse CGI (and, well, kitchen devices instead of dinos).
+The worst sin, though, is that everything (and I mean really EVERYTHING) looks fake. What's the point of making a live-action version of a beloved cartoon if you make every prop look like a prop? I know it's a fairy tale for kids, but even Belle's village looks like it had only recently been put there by a subpar production designer trying to copy the images from the cartoon. There is not a hint of authenticity here. Unlike in Jungle Book, where we got great looking CGI, this really is the by-the-numbers version and corporate filmmaking at its worst. Of course it's not really a "bad" film; those 200 million blockbusters rarely are (this isn't 'The Room' after all), but it's so infuriatingly generic and dull - and it didn't have to be. In the hands of a great director the potential for this film would have been huge.
+Oh and one more thing: bad CGI wolves (who actually look even worse than the ones in Twilight) is one thing, and the kids probably won't care. But making one of the two lead characters - Beast - look equally bad is simply unforgivably stupid. No wonder Emma Watson seems to phone it in: she apparently had to act against an guy with a green-screen in the place where his face should have been. 
+"""
+input_seq = token.texts_to_sequences([input_text])
+
+print(len(input_seq[0]))
+
+# 297
+
+pad_input_seq = sequence.pad_sequences(input_seq, maxlen=380)
+
+print(len(pad_input_seq[0]))
+
+# 380
+
+predict_result = model.predict_classes(pad_input_seq)
+
+print(predict_result)
+
+print(predict_result[0][0])
+
+SentimentDict[predict_result[0][0]]
+
+# '負面的'
+
+
+def predict_review(input_text):
+    input_seq = token.texts_to_sequences([input_text])
+    pad_input_seq = sequence.pad_sequences(input_seq, maxlen=380)
+    predict_result = model.predict_classes(pad_input_seq)
+    print(SentimentDict[predict_result[0][0]])
+
+
+# http://www.imdb.com/title/tt2771200/
+# http://www.imdb.com/title/tt2771200
+
+predict_review(
+    """
+It's hard to believe that the same talented director who made the influential cult action classic The Road Warrior had anything to do with this disaster.
+Road Warrior was raw, gritty, violent and uncompromising, and this movie is the exact opposite. It's like Road Warrior for kids who need constant action in their movies.
+This is the movie. The good guys get into a fight with the bad guys, outrun them, they break down in their vehicle and fix it. Rinse and repeat. The second half of the movie is the first half again just done faster.
+The Road Warrior may have been a simple premise but it made you feel something, even with it's opening narration before any action was even shown. And the supporting characters were given just enough time for each of them to be likable or relatable.
+In this movie there is absolutely nothing and no one to care about. We're supposed to care about the characters because... well we should. George Miller just wants us to, and in one of the most cringe worthy moments Charlize Theron's character breaks down while dramatic music plays to try desperately to make us care.
+Tom Hardy is pathetic as Max. One of the dullest leading men I've seen in a long time. There's not one single moment throughout the entire movie where he comes anywhere near reaching the same level of charisma Mel Gibson did in the role. Gibson made more of an impression just eating a tin of dog food. I'm still confused as to what accent Hardy was even trying to do.
+I was amazed that Max has now become a cartoon character as well. Gibson's Max was a semi-realistic tough guy who hurt, bled, and nearly died several times. Now he survives car crashes and tornadoes with ease?
+In the previous movies, fuel and guns and bullets were rare. Not anymore. It doesn't even seem Post-Apocalyptic. There's no sense of desperation anymore and everything is too glossy looking. And the main villain's super model looking wives with their perfect skin are about as convincing as apocalyptic survivors as Hardy's Australian accent is. They're so boring and one-dimensional, George Miller could have combined them all into one character and you wouldn't miss anyone.
+Some of the green screen is very obvious and fake looking, and the CGI sandstorm is laughably bad. It wouldn't look out of place in a Pixar movie.
+There's no tension, no real struggle, or any real dirt and grit that Road Warrior had. Everything George Miller got right with that masterpiece he gets completely wrong here. 
+"""
+)
+
+# 正面的
+
+predict_review(
+    """
+Sure, I'm a huge film snob who (on the surface) only likes artsy-fartsy foreign films from before the 60's, but that hasn't stopped me from loving Disney's Beauty & The Beast; in fact, it's probably my favorite American animated film and is easily Disney's finest work. It's beautiful, it's breathtaking, it's warm, it's hilarious, it's captivating, and, in Disney fashion, it's magical. When I learned that Disney would be remaking their classic films, B&TB was undeniably the best wrapped package. How could they go wrong?
+Oh man, they went wrong.
+First thing's first: this film is so flat. The directing was dull and uninteresting throughout the entire film and it honestly felt like one of the Twilight sequels...and then I looked it up and found out that, yes, director Bill Condon was the man behind Breaking Dawn parts 1 & 2. Every shot looks bored and uninterested, which contrasts heavily with the original animated film that was constantly popping with vibrancy. The script too is boring because it's almost a complete remake of the original, though I guess most people won't mind that.
+Next: the CGI is horrid. Although I didn't care for The Jungle Book from last year, I could at least admit that the CGI was breathtaking. The same cant be said for this film. Characters like Lumière, Cogsworth, Mrs Potts, and most of the cursed appliances have very strange, lifeless faces that are pretty off putting to be looking at for such a long time. All of the sets too look artificial and fake, especially the town towards the beginning. However, the biggest offender is easily and infuriatingly the character that mattered most: The Beast. The CGI on the Beast's face is so distracting that it completely takes you out of the film. His eyes are completely devoid of soul, and his mouth is a gaping video game black hole of fiction. Klaus Kinski looked much better in the Faerie Tale Theatre episode of Beauty & The Beast, and that was a 1984 TV show episode. But do you know why it looked better? Because it was an actual face with actual eyes, not some video game computerized synthetic monstrosity. When will studios learn that practical effects will always top CGI?
+Finally: wasted casting. Emma Watson is beautiful, but she's no Belle. She is completely devoid of the warmth and humanity that made the animated Belle so beloved. Instead, she is cold and heartless throughout most of the film. Kevin Kline is 100% wasted and does nothing except look old. Ian McKellan, Ewan McGregor, Emma Thompson, and even Dan Stevens as the Beast are very expendable and could've been played by anyone else. The only good characters are Gaston and LeFou, mostly because they are fun and played by actors who breathe new life into their original shapes. If anything, this film should've been about Gaston and LeFou, but that would never happen because that would mean Disney couldn't cater to blind nostalgic 90's kids.
+Overall, this film is a complete bore. It could've been better if even the special effects were good, but the CGI in particular is horrendous. I'm all for Disney remaking their nostalgia- catering 90's films, but they need to be interesting. This film, sadly, is not. Even the Christmas sequel is better than this film because it's at least something. 
+"""
+)
+
+# 負面的
+
+predict_review(
+    """
+I was really looking forward to this film. Not only has Disney recently made excellent live-action versions of their animated masterpieces (Jungle Book, Cinderella), but the cast alone (Emma Watson, Ian McKellen, Kevin Kline) already seemed to make this one a sure hit. Well, not so much as it turns out.
+Some of the animation is fantastic, but because characters like Cogsworth (the clock), Lumière (the candelabra) and Chip (the little tea cup) now look "realistic", they lose a lot of their animated predecessors' charm and actually even look kind of creepy at times. And ironically - unlike in the animated original - in this new realistic version they only have very limited facial expressions (which is a creative decision I can't for the life of me understand).
+Even when it works: there can be too much of a good thing. The film is overstuffed with lush production design and cgi (which is often weirdly artificial looking though) but sadly lacking in charm and genuine emotion. If this were a music album, I'd say it is "over-produced" and in need of more soul and swing. The great voice talent in some cases actually seems wasted, because it drowns in a sea of visual effects that numbs all senses. The most crucial thing that didn't work for me, though, is the Beast. He just never looks convincing. The eyes somehow don't look like real eyes and they're always slightly off.
+On the positive side, I really liked Gaston, and the actor who played him, Luke Evans, actually gave the perhaps most energized performance of all. Kevin Kline as Belle's father has little to do but to look fatherly and old, but he makes the most of his part. Speaking of Belle, now that I've seen the film, I think her role was miscast. I think someone like Rachel McAdams would actually have been a more natural, lively and perhaps a bit more feisty Belle than Emma Watson.
+If you love the original, you might want to give this one a pass, it's really not that good (although at least the songs were OK). Also, I'd think twice before bringing small children; without cute animated faces, all those "realistic" looking creatures and devices can be rather frightening for a child. """
+)
+
+# 正面的
+
+predict_review(
+    """
+Up front: I'm probably not the right audience for this film. I only went because I was invited, and I wouldn't have gone to check this one out otherwise.
+Firstly, some of the production values are really beautiful and reminded me of the animated classic in a good way. Also, the voice cast for the clock and the kitchen devices are great.
+Secondly, the actors, well... this may sound kind of harsh, but I've never seen Emma Watson act so stiff in a movie. Her performance is wooden, which is pretty bad considering she's supposed to be the heart of the film. Also, she probably won't start a singing career anytime soon.
+Thirdly (and most importantly), Beast. That's where they really dropped the ball. Giving him a lifeless CGI face was an unforgivable mistake, and it's such a constant distraction that I could never really get into the movie.
+Overall, I'm afraid I wouldn't recommend this movie, at least not to adults. I'm sure most kids would enjoy it though, and it's not really a bad film: just a very mediocre one. 6 stars out of 10. 
+"""
+)
+
+# 負面的
+
+predict_review(
+    """
+Full disclosure, I didn't think the first movie was as bad as it was made out to be. It wasn't good in almost any sense, but it was to be expected given the combination of source material, resources and constraints.
+That said, this sequel is 20x better than the first. Having established the characters in the first movie, the actors seem to be able to act now comfortably in their parts. The story becomes much more nuanced with plenty of dynamics on the go.
+SPOILERS from now on
+Can they maintain a "vanilla" relationship? Is he going to become controlling again and ruin things? Will she let it get out of control and ruin things also or stay on it? Who is that stalky girl and what happened to her exactly? what about his mother? and that ex of his? Will something occur with her infatuated boss?
+On top of all of this, I realised while watching that the series was never about a bizarre sadist control freak, it's actually about all men and the story of a woman trying to find the balance between accepting or desiring the dominant behaviour of the male archetype and maintaining strength and independence in such a relationship.
+While of course the fact that he is rich, while possibly relating to the power struggle, looks like it is going to be more and more used for generating further drama. The romance is much more evident in this movie to/ 
+"""
+)
+
+# 正面的
+
+# serialize model to JSON
+
+model_json = model.to_json()
+with open("SaveModel/Imdb_RNN_model.json", "w") as json_file:
+    json_file.write(model_json)
+
+model.save_weights("SaveModel/Imdb_RNN_model.h5")
+print("Saved model to disk")
+
+# Saved model to disk
+NG '''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("Keras_Imdb_RNN")
+
+from keras.datasets import imdb
+from keras.preprocessing import sequence
+from tensorflow.keras.preprocessing.text import Tokenizer
+
+import re
+
+re_tag = re.compile(r"<[^>]+>")
+
+
+def rm_tags(text):
+    return re_tag.sub("", text)
+
+
+def read_files(filetype):
+    path = "data/aclImdb/"
+    file_list = []
+
+    positive_path = path + filetype + "/pos/"
+    for f in os.listdir(positive_path):
+        file_list += [positive_path + f]
+
+    negative_path = path + filetype + "/neg/"
+    for f in os.listdir(negative_path):
+        file_list += [negative_path + f]
+
+    print("read", filetype, "files:", len(file_list))
+
+    all_labels = [1] * 12500 + [0] * 12500
+
+    all_texts = []
+
+    for fi in file_list:
+        with open(fi, encoding="utf8") as file_input:
+            all_texts += [rm_tags(" ".join(file_input.readlines()))]
+
+    return all_labels, all_texts
+
+
+y_train, train_text = read_files("train")
+
+# read train files: 25000
+
+y_test, test_text = read_files("test")
+
+# read test files: 25000
+
+token = Tokenizer(num_words=3800)
+token.fit_on_texts(train_text)
+
+x_train_seq = token.texts_to_sequences(train_text)
+x_test_seq = token.texts_to_sequences(test_text)
+
+x_train = sequence.pad_sequences(x_train_seq, maxlen=380)
+x_test = sequence.pad_sequences(x_test_seq, maxlen=380)
+
+# 建立模型
+
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Activation
+from keras.layers import Embedding
+
+# from keras.layers.recurrent import SimpleRNN
+from keras.layers import SimpleRNN
+
+model = Sequential()
+
+model.add(Embedding(output_dim=32, input_dim=3800, input_length=380))
+model.add(Dropout(0.35))
+
+model.add(SimpleRNN(units=16))
+
+model.add(Dense(units=256, activation="relu"))
+model.add(Dropout(0.35))
+
+model.add(Dense(units=1, activation="sigmoid"))
+
+model.summary()
+
+# 訓練模型
+
+model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
+''' NG
+train_history = model.fit(
+    x_train, y_train, batch_size=100, epochs=10, verbose=2, validation_split=0.2
+)
+
+
+def show_train_history(train_history, train, validation):
+    plt.plot(train_history.history[train])
+    plt.plot(train_history.history[validation])
+    plt.title("Train History")
+    plt.ylabel(train)
+    plt.xlabel("Epoch")
+    plt.legend(["train", "validation"], loc="upper left")
+    plt.show()
+
+
+show_train_history(train_history, "accuracy", "val_accuracy")
+
+show_train_history(train_history, "loss", "val_loss")
+
+# 評估模型準確率
+
+scores = model.evaluate(x_test, y_test, verbose=1)
+print(scores[1])
+
+# 0.83443999999999996
+
+# 預測機率
+
+probility = model.predict(x_test)
+
+print(probility[:10])
+
+
+for p in probility[12500:12510]:
+    print(p)
+
+# 預測結果
+
+predict = model.predict_classes(x_test)
+
+print(predict[:10])
+
+print(predict.shape)
+
+# (25000, 1)
+
+predict_classes = predict.reshape(25000)
+print(predict_classes)
+
+# array([1, 1, 1, ..., 0, 1, 1])
+
+# 查看預測結果
+
+SentimentDict = {1: "正面的", 0: "負面的"}
+
+
+def display_test_Sentiment(i):
+    print(test_text[i])
+    print(
+        "label真實值:",
+        SentimentDict[y_test[i]],
+        "預測結果:",
+        SentimentDict[predict_classes[i]],
+    )
+
+
+display_test_Sentiment(2)
+"""
+As a recreational golfer with some knowledge of the sport's history, I was pleased with Disney's sensitivity to the issues of class in golf in the early twentieth century. The movie depicted well the psychological battles that Harry Vardon fought within himself, from his childhood trauma of being evicted to his own inability to break that glass ceiling that prevents him from being accepted as an equal in English golf society. Likewise, the young Ouimet goes through his own class struggles, being a mere caddie in the eyes of the upper crust Americans who scoff at his attempts to rise above his standing. What I loved best, however, is how this theme of class is manifested in the characters of Ouimet's parents. His father is a working-class drone who sees the value of hard work but is intimidated by the upper class; his mother, however, recognizes her son's talent and desire and encourages him to pursue his dream of competing against those who think he is inferior.Finally, the golf scenes are well photographed. Although the course used in the movie was not the actual site of the historical tournament, the little liberties taken by Disney do not detract from the beauty of the film. There's one little Disney moment at the pool table; otherwise, the viewer does not really think Disney. The ending, as in "Miracle," is not some Disney creation, but one that only human history could have written.
+label真實值: 正面的 預測結果: 正面的
+"""
+display_test_Sentiment(3)
+"""
+I saw this film in a sneak preview, and it is delightful. The cinematography is unusually creative, the acting is good, and the story is fabulous. If this movie does not do well, it won't be because it doesn't deserve to. Before this film, I didn't realize how charming Shia Lebouf could be. He does a marvelous, self-contained, job as the lead. There's something incredibly sweet about him, and it makes the movie even better. The other actors do a good job as well, and the film contains moments of really high suspense, more than one might expect from a movie about golf. Sports movies are a dime a dozen, but this one stands out. This is one I'd recommend to anyone.
+label真實值: 正面的 預測結果: 正面的
+"""
+print(predict_classes[12500:12510])
+
+display_test_Sentiment(12502)
+"""
+First of all I hate those moronic rappers, who could'nt act if they had a gun pressed against their foreheads. All they do is curse and shoot each other and acting like cliché'e version of gangsters.The movie doesn't take more than five minutes to explain what is going on before we're already at the warehouse There is not a single sympathetic character in this movie, except for the homeless guy, who is also the only one with half a brain.Bill Paxton and William Sadler are both hill billies and Sadlers character is just as much a villain as the gangsters. I did'nt like him right from the start.The movie is filled with pointless violence and Walter Hills specialty: people falling through windows with glass flying everywhere. There is pretty much no plot and it is a big problem when you root for no-one. Everybody dies, except from Paxton and the homeless guy and everybody get what they deserve.The only two black people that can act is the homeless guy and the junkie but they're actors by profession, not annoying ugly brain dead rappers.Stay away from this crap and watch 48 hours 1 and 2 instead. At lest they have characters you care about, a sense of humor and nothing but real actors in the cast.
+label真實值: 負面的 預測結果: 負面的
+"""
+# 預測新的影評
+
+input_text = """
+I can't vote because I have not watched this movie yet. I've been wanting to watch this movie since the time they announced making it which is about 2 years ago (!)
+I was planning to go with the family to see the anticipated movie but my nieces had school exams at the opening time so we all decided to wait for the next weekend. I was utterly shocked to learn yesterday that they pulled the movie from the Kuwaiti theaters "temporarily" so that the outrageous censorship system can remove some unwanted scenes.
+The controversial gay "moment" according to my online research is barely there, so I can't find any logical reason for all the fuss that's been going on. And it was bad enough when fanatics and haters tried (in vain) to kill the movie with low ratings and negative reviews even before it was in the cinemas and I'm pretty sure most of those trolls never got the chance to watch the movie at that time.
+Based on the trailers, I think the movie is very promising and entertaining and you can't simply overlook the tremendous efforts made to bring this beloved tale to life. To knock down hundreds of people's obvious hard work with unprofessional critique and negative reviews just for the sake of hatred is unfathomable. I hope people won't judge a movie before having the experience of watching it in the first place.
+Impatiently waiting for the Kuwaiti cinemas to bring back the movie... 
+"""
+
+input_seq = token.texts_to_sequences([input_text])
+
+print(input_seq[0])
+
+# [9, 187, 2310, 83, 9, 24, 20, 292, 10, 16, 242, 203, 73, 1780, 5, 102, 10, 16, 233, 1, 54, 32, 227, 8, 59, 6, 40, 237, 149, 592, 9, 12, 3599, 5, 136, 15, 1, 219, 5, 63, 1, 16, 17, 57, 65, 391, 29, 1, 632, 54, 34, 71, 28, 867, 5, 854, 14, 1, 372, 2488, 9, 12, 1247, 2407, 5, 848, 11, 32, 1907, 1, 16, 35, 1, 2257, 34, 11, 1, 3585, 1503, 66, 45, 135, 1, 3112, 989, 557, 1787, 5, 57, 2297, 6, 1196, 46, 34, 9, 187, 165, 97, 3683, 279, 14, 28, 1, 194, 73, 166, 19, 2, 8, 12, 75, 191, 50, 2, 799, 7, 5, 511, 1, 16, 15, 360, 2891, 2, 1560, 852, 56, 154, 8, 12, 7, 1, 2, 142, 180, 248, 87, 4, 144, 111, 184, 1, 577, 5, 102, 1, 16, 29, 11, 54, 444, 19, 1, 9, 100, 1, 16, 6, 51, 2428, 2, 438, 2, 21, 187, 327, 1, 3515, 2047, 89, 5, 717, 10, 2760, 782, 5, 109, 5, 3290, 176, 3097, 4, 2857, 573, 250, 153, 15, 2, 1560, 852, 39, 14, 1, 2107, 4, 3677, 6, 9, 436, 80, 524, 1918, 3, 16, 154, 256, 1, 581, 4, 145, 8, 7, 1, 82, 269, 1061, 14, 1, 5, 717, 141, 1, 16]
+
+print(len(input_seq[0]))
+
+# 223
+
+pad_input_seq = sequence.pad_sequences(input_seq, maxlen=380)
+
+print(len(pad_input_seq[0]))
+
+# 380
+
+predict_result = model.predict_classes(pad_input_seq)
+
+print(predict_result)
+
+print(array([[0]]))
+
+predict_result[0][0]
+
+# 0
+
+SentimentDict[predict_result[0][0]]
+
+# '負面的'
+
+
+def predict_review(input_text):
+    input_seq = token.texts_to_sequences([input_text])
+    pad_input_seq = sequence.pad_sequences(input_seq, maxlen=380)
+    predict_result = model.predict_classes(pad_input_seq)
+    print(SentimentDict[predict_result[0][0]])
+
+
+# http://www.imdb.com/title/tt2771200/
+# http://www.imdb.com/title/tt2771200
+
+predict_review(
+    """
+As a fan of the original Disney film (Personally I feel it's their masterpiece) I was taken aback to the fact that a new version was in the making. Still excited I had high hopes for the film. Most of was shattered in the first 10 minutes. Campy acting with badly performed singing starts off a long journey holding hands with some of the worst CGI Hollywood have managed to but to screen in ages.
+A film that is over 50% GCI, should focus on making that part believable, unfortunately for this film, it's far from that. It looks like the original film was ripped apart frame by frame and the beautiful hand-painted drawings have been replaced with digital caricatures. Besides CGI that is bad, it's mostly creepy. As the little teacup boy will give me nightmares for several nights to come. Emma Watson plays the same character as she always does, with very little acting effort and very little conviction as Belle. Although I can see why she was cast in the film based on merits, she is far from the right choice for the role. Dan Stevens does alright under as some motion captured dead-eyed Beast, but his performance feels flat as well. Luke Evans makes for a great pompous Gaston, but a character that has little depth doesn't really make for a great viewing experience. Josh Gad is a great comic relief just like the original movie's LeFou. Other than that, none of the cast stands out enough for me to remember them. Human or CHI creature. I was just bored through out the whole experience. And for a project costing $160 000 000, I can see why the PR department is pushing it so hard because they really need to get some cash back on this pile of wet stinky CGI-fur!
+All and all, I might be bias from really loving Disney's first adaptation. That for me marks the high-point of all their work, perfectly combining the skills of their animators along with some CGI in a majestic blend. This film however is more like the bucket you wash off your paintbrush in, it has all the same colors, but muddled with water and to thin to make a captivating story from. The film is quite frankly not worth your time, you would be better off watching the original one more time. 
+"""
+)
+
+# 正面的
+
+predict_review(
+    """
+I was really looking forward to this film. Not only has Disney recently made excellent live-action versions of their animated masterpieces (Jungle Book, Cinderella), but the cast alone (Emma Watson, Ian McKellen, Kevin Kline) already seemed to make this one a sure hit. Well, not so much as it turns out.
+Some of the animation is fantastic, but because characters like Cogsworth (the clock), Lumière (the candelabra) and Chip (the little tea cup) now look "realistic", they lose a lot of their animated predecessors' charm and actually even look kind of creepy at times. And ironically - unlike in the animated original - in this new realistic version they only have very limited facial expressions (which is a creative decision I can't for the life of me understand).
+Even when it works: there can be too much of a good thing. The film is overstuffed with lush production design and cgi (which is often weirdly artificial looking though) but sadly lacking in charm and genuine emotion. If this were a music album, I'd say it is "over-produced" and in need of more soul and swing. The great voice talent in some cases actually seems wasted, because it drowns in a sea of visual effects that numbs all senses. The most crucial thing that didn't work for me, though, is the Beast. He just never looks convincing. The eyes somehow don't look like real eyes and they're always slightly off.
+On the positive side, I really liked Gaston, and the actor who played him, Luke Evans, actually gave the perhaps most energized performance of all. Kevin Kline as Belle's father has little to do but to look fatherly and old, but he makes the most of his part. Speaking of Belle, now that I've seen the film, I think her role was miscast. I think someone like Rachel McAdams would actually have been a more natural, lively and perhaps a bit more feisty Belle than Emma Watson.
+If you love the original, you might want to give this one a pass, it's really not that good (although at least the songs were OK). Also, I'd think twice before bringing small children; without cute animated faces, all those "realistic" looking creatures and devices can be rather frightening for a child. """
+)
+
+# 正面的
+
+predict_review(
+    """
+The original Beauty and the Beast was my favorite cartoon as a kid but it did have major plot holes. Why had no one else ever seen the castle or knew where it was? Didn't anyone miss the people who were cursed? All of that gets an explanation when the enchantress places her curse in the beginning. Why did Belle and her Father move to a small town? Her mother died and the father thought it as best to leave. I love the new songs and added lyrics to the originals. I like the way the cgi beast looks (just the face is CGi). I think Emma Watson is a perfect Belle who is outspoken, fearless, and different. The set design is perfect for the era in France.
+I know a lot of people disagree but I found this remake with all its changes to be more enchanting, beautiful, and complete than the original 1991 movie. To each his own but I think everyone should see it for themselves. 
+"""
+)
+
+# 正面的
+
+predict_review(
+    """
+"Beauty and the Beast" was stunning and gorgeous. Beautifully and artfully performed. Dazzlingly colorful and charming. Fresh and lighthearted. Wonderfully and magically enthralling. I laughed, I cried, I floated along with the music, I bawled and bawled as the spellbinding elegance and splendor took me to another place and time. I was 5 years old again enjoying the Wonderful World of Magic that is Disney, as if for the first time. I will gladly spend my money over and over to see that magic unfold. I willingly and happily concede Emma Watson to be Belle, for this generation of children, instead of Hermione. She has earned her place as a Disney princess and I applaud everyone who had a part in this piece of magic. Truly, Disney knows how to make us all children again. 
+"""
+)
+
+# 正面的
+
+# serialize model to JSON
+
+model_json = model.to_json()
+with open("SaveModel/Imdb_RNN_model.json", "w") as json_file:
+    json_file.write(model_json)
+
+model.save_weights("SaveModel/Imdb_RNN_model.h5")
+print("Saved model to disk")
+
+# Saved model to disk
+
+# [1.02,2.03,-1.2,2,2],[1,2.1,3,2.2,3.4,3.6]
+
+# ([1.02, 2.03, -1.2, 2, 2], [1, 2.1, 3, 2.2, 3.4, 3.6])
+NG '''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("Keras_Imdb_LSTM")
+
+from keras.datasets import imdb
+from keras.preprocessing import sequence
+from tensorflow.keras.preprocessing.text import Tokenizer
+
+np.random.seed(10)
+
+import re
+
+re_tag = re.compile(r"<[^>]+>")
+
+
+def rm_tags(text):
+    return re_tag.sub("", text)
+
+
+def read_files(filetype):
+    path = "data/aclImdb/"
+    file_list = []
+
+    positive_path = path + filetype + "/pos/"
+    for f in os.listdir(positive_path):
+        file_list += [positive_path + f]
+
+    negative_path = path + filetype + "/neg/"
+    for f in os.listdir(negative_path):
+        file_list += [negative_path + f]
+
+    print("read", filetype, "files:", len(file_list))
+
+    all_labels = [1] * 12500 + [0] * 12500
+
+    all_texts = []
+
+    for fi in file_list:
+        with open(fi, encoding="utf8") as file_input:
+            all_texts += [rm_tags(" ".join(file_input.readlines()))]
+
+    return all_labels, all_texts
+
+
+y_train, train_text = read_files("train")
+
+# read train files: 25000
+
+y_test, test_text = read_files("test")
+
+# read test files: 25000
+
+# 先讀取所有文章建立字典，限制字典的數量為nb_words=2000
+
+token = Tokenizer(num_words=3800)
+token.fit_on_texts(train_text)
+
+# 將文字轉為數字序列
+
+x_train_seq = token.texts_to_sequences(train_text)
+x_test_seq = token.texts_to_sequences(test_text)
+
+# 截長補短，讓所有影評所產生的數字序列長度一樣
+
+x_train = sequence.pad_sequences(x_train_seq, maxlen=380)
+x_test = sequence.pad_sequences(x_test_seq, maxlen=380)
+
+# 建立模型
+
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Activation, Flatten
+from keras.layers import Embedding
+from keras.layers import LSTM
+
+model = Sequential()
+
+model.add(Embedding(output_dim=32, input_dim=3800, input_length=380))
+model.add(Dropout(0.2))
+
+model.add(LSTM(32))
+
+model.add(Dense(units=256, activation="relu"))
+model.add(Dropout(0.2))
+
+model.add(Dense(units=1, activation="sigmoid"))
+
+model.summary()
+
+# 訓練模型
+
+model.compile(
+    loss="binary_crossentropy",
+    # optimizer='rmsprop',
+    optimizer="adam",
+    metrics=["accuracy"],
+)
+
+''' NG
+train_history = model.fit(
+    x_train, y_train, batch_size=100, epochs=10, verbose=2, validation_split=0.2
+)
+
+
+def show_train_history(train_history, train, validation):
+    plt.plot(train_history.history[train])
+    plt.plot(train_history.history[validation])
+    plt.title("Train History")
+    plt.ylabel(train)
+    plt.xlabel("Epoch")
+    plt.legend(["train", "validation"], loc="upper left")
+    plt.show()
+
+
+# Populating the interactive namespace from numpy and matplotlib
+
+show_train_history(train_history, "accuracy", "val_accuracy")
+
+show_train_history(train_history, "loss", "val_loss")
+
+# 評估模型準確率
+
+scores = model.evaluate(x_test, y_test, verbose=1)
+print(scores[1])
+
+# 0.85792000000000002
+
+# 預測機率
+
+probility = model.predict(x_test)
+
+print(probility[:10])
+
+for p in probility[12500:12510]:
+    print(p)
+
+# 預測結果
+
+predict = model.predict_classes(x_test)
+
+print(predict.shape)
+
+predict_classes = predict.reshape(25000)
+print(predict_classes)
+
+# 查看預測結果
+
+SentimentDict = {1: "正面的", 0: "負面的"}
+
+
+def display_test_Sentiment(i):
+    print(test_text[i])
+    print(
+        "標籤label:", SentimentDict[y_test[i]], "預測結果:", SentimentDict[predict_classes[i]]
+    )
+
+
+display_test_Sentiment(2)
+"""
+As a recreational golfer with some knowledge of the sport's history, I was pleased with Disney's sensitivity to the issues of class in golf in the early twentieth century. The movie depicted well the psychological battles that Harry Vardon fought within himself, from his childhood trauma of being evicted to his own inability to break that glass ceiling that prevents him from being accepted as an equal in English golf society. Likewise, the young Ouimet goes through his own class struggles, being a mere caddie in the eyes of the upper crust Americans who scoff at his attempts to rise above his standing. What I loved best, however, is how this theme of class is manifested in the characters of Ouimet's parents. His father is a working-class drone who sees the value of hard work but is intimidated by the upper class; his mother, however, recognizes her son's talent and desire and encourages him to pursue his dream of competing against those who think he is inferior.Finally, the golf scenes are well photographed. Although the course used in the movie was not the actual site of the historical tournament, the little liberties taken by Disney do not detract from the beauty of the film. There's one little Disney moment at the pool table; otherwise, the viewer does not really think Disney. The ending, as in "Miracle," is not some Disney creation, but one that only human history could have written.
+標籤label: 正面的 預測結果: 正面的
+"""
+
+display_test_Sentiment(3)
+
+"""
+I saw this film in a sneak preview, and it is delightful. The cinematography is unusually creative, the acting is good, and the story is fabulous. If this movie does not do well, it won't be because it doesn't deserve to. Before this film, I didn't realize how charming Shia Lebouf could be. He does a marvelous, self-contained, job as the lead. There's something incredibly sweet about him, and it makes the movie even better. The other actors do a good job as well, and the film contains moments of really high suspense, more than one might expect from a movie about golf. Sports movies are a dime a dozen, but this one stands out. This is one I'd recommend to anyone.
+標籤label: 正面的 預測結果: 正面的
+"""
+
+print(predict_classes[12500:12510])
+
+display_test_Sentiment(12500)
+
+"""
+Once again Mr. Costner has dragged out a movie for far longer than necessary. Aside from the terrific sea rescue sequences, of which there are very few I just did not care about any of the characters. Most of us have ghosts in the closet, and Costner's character are realized early on, and then forgotten until much later, by which time I did not care. The character we should really care about is a very cocky, overconfident Ashton Kutcher. The problem is he comes off as kid who thinks he's better than anyone else around him and shows no signs of a cluttered closet. His only obstacle appears to be winning over Costner. Finally when we are well past the half way point of this stinker, Costner tells us all about Kutcher's ghosts. We are told why Kutcher is driven to be the best with no prior inkling or foreshadowing. No magic here, it was all I could do to keep from turning it off an hour in.
+標籤label: 負面的 預測結果: 負面的
+"""
+
+# 預測新的影評
+
+input_text = """
+Oh dear, oh dear, oh dear: where should I start folks. I had low expectations already because I hated each and every single trailer so far, but boy did Disney make a blunder here. I'm sure the film will still make a billion dollars - hey: if Transformers 11 can do it, why not Belle? - but this film kills every subtle beautiful little thing that had made the original special, and it does so already in the very early stages. It's like the dinosaur stampede scene in Jackson's King Kong: only with even worse CGI (and, well, kitchen devices instead of dinos).
+The worst sin, though, is that everything (and I mean really EVERYTHING) looks fake. What's the point of making a live-action version of a beloved cartoon if you make every prop look like a prop? I know it's a fairy tale for kids, but even Belle's village looks like it had only recently been put there by a subpar production designer trying to copy the images from the cartoon. There is not a hint of authenticity here. Unlike in Jungle Book, where we got great looking CGI, this really is the by-the-numbers version and corporate filmmaking at its worst. Of course it's not really a "bad" film; those 200 million blockbusters rarely are (this isn't 'The Room' after all), but it's so infuriatingly generic and dull - and it didn't have to be. In the hands of a great director the potential for this film would have been huge.
+Oh and one more thing: bad CGI wolves (who actually look even worse than the ones in Twilight) is one thing, and the kids probably won't care. But making one of the two lead characters - Beast - look equally bad is simply unforgivably stupid. No wonder Emma Watson seems to phone it in: she apparently had to act against an guy with a green-screen in the place where his face should have been. 
+"""
+
+input_seq = token.texts_to_sequences([input_text])
+
+print(len(input_seq[0]))
+
+# 297
+
+pad_input_seq = sequence.pad_sequences(input_seq, maxlen=380)
+
+print(len(pad_input_seq[0]))
+
+# 380
+
+predict_result = model.predict_classes(pad_input_seq)
+
+print(predict_result)
+
+print(predict_result[0][0])
+
+SentimentDict[predict_result[0][0]]
+
+"負面的"
+
+
+def predict_review(input_text):
+    input_seq = token.texts_to_sequences([input_text])
+    pad_input_seq = sequence.pad_sequences(input_seq, maxlen=380)
+    predict_result = model.predict_classes(pad_input_seq)
+    print(SentimentDict[predict_result[0][0]])
+
+
+# http://www.imdb.com/title/tt2771200/
+# http://www.imdb.com/title/tt2771200
+
+predict_review(
+    """
+It's hard to believe that the same talented director who made the influential cult action classic The Road Warrior had anything to do with this disaster.
+Road Warrior was raw, gritty, violent and uncompromising, and this movie is the exact opposite. It's like Road Warrior for kids who need constant action in their movies.
+This is the movie. The good guys get into a fight with the bad guys, outrun them, they break down in their vehicle and fix it. Rinse and repeat. The second half of the movie is the first half again just done faster.
+The Road Warrior may have been a simple premise but it made you feel something, even with it's opening narration before any action was even shown. And the supporting characters were given just enough time for each of them to be likable or relatable.
+In this movie there is absolutely nothing and no one to care about. We're supposed to care about the characters because... well we should. George Miller just wants us to, and in one of the most cringe worthy moments Charlize Theron's character breaks down while dramatic music plays to try desperately to make us care.
+Tom Hardy is pathetic as Max. One of the dullest leading men I've seen in a long time. There's not one single moment throughout the entire movie where he comes anywhere near reaching the same level of charisma Mel Gibson did in the role. Gibson made more of an impression just eating a tin of dog food. I'm still confused as to what accent Hardy was even trying to do.
+I was amazed that Max has now become a cartoon character as well. Gibson's Max was a semi-realistic tough guy who hurt, bled, and nearly died several times. Now he survives car crashes and tornadoes with ease?
+In the previous movies, fuel and guns and bullets were rare. Not anymore. It doesn't even seem Post-Apocalyptic. There's no sense of desperation anymore and everything is too glossy looking. And the main villain's super model looking wives with their perfect skin are about as convincing as apocalyptic survivors as Hardy's Australian accent is. They're so boring and one-dimensional, George Miller could have combined them all into one character and you wouldn't miss anyone.
+Some of the green screen is very obvious and fake looking, and the CGI sandstorm is laughably bad. It wouldn't look out of place in a Pixar movie.
+There's no tension, no real struggle, or any real dirt and grit that Road Warrior had. Everything George Miller got right with that masterpiece he gets completely wrong here. 
+"""
+)
+
+# 負面的
+
+predict_review(
+    """
+Sure, I'm a huge film snob who (on the surface) only likes artsy-fartsy foreign films from before the 60's, but that hasn't stopped me from loving Disney's Beauty & The Beast; in fact, it's probably my favorite American animated film and is easily Disney's finest work. It's beautiful, it's breathtaking, it's warm, it's hilarious, it's captivating, and, in Disney fashion, it's magical. When I learned that Disney would be remaking their classic films, B&TB was undeniably the best wrapped package. How could they go wrong?
+Oh man, they went wrong.
+First thing's first: this film is so flat. The directing was dull and uninteresting throughout the entire film and it honestly felt like one of the Twilight sequels...and then I looked it up and found out that, yes, director Bill Condon was the man behind Breaking Dawn parts 1 & 2. Every shot looks bored and uninterested, which contrasts heavily with the original animated film that was constantly popping with vibrancy. The script too is boring because it's almost a complete remake of the original, though I guess most people won't mind that.
+Next: the CGI is horrid. Although I didn't care for The Jungle Book from last year, I could at least admit that the CGI was breathtaking. The same cant be said for this film. Characters like Lumière, Cogsworth, Mrs Potts, and most of the cursed appliances have very strange, lifeless faces that are pretty off putting to be looking at for such a long time. All of the sets too look artificial and fake, especially the town towards the beginning. However, the biggest offender is easily and infuriatingly the character that mattered most: The Beast. The CGI on the Beast's face is so distracting that it completely takes you out of the film. His eyes are completely devoid of soul, and his mouth is a gaping video game black hole of fiction. Klaus Kinski looked much better in the Faerie Tale Theatre episode of Beauty & The Beast, and that was a 1984 TV show episode. But do you know why it looked better? Because it was an actual face with actual eyes, not some video game computerized synthetic monstrosity. When will studios learn that practical effects will always top CGI?
+Finally: wasted casting. Emma Watson is beautiful, but she's no Belle. She is completely devoid of the warmth and humanity that made the animated Belle so beloved. Instead, she is cold and heartless throughout most of the film. Kevin Kline is 100% wasted and does nothing except look old. Ian McKellan, Ewan McGregor, Emma Thompson, and even Dan Stevens as the Beast are very expendable and could've been played by anyone else. The only good characters are Gaston and LeFou, mostly because they are fun and played by actors who breathe new life into their original shapes. If anything, this film should've been about Gaston and LeFou, but that would never happen because that would mean Disney couldn't cater to blind nostalgic 90's kids.
+Overall, this film is a complete bore. It could've been better if even the special effects were good, but the CGI in particular is horrendous. I'm all for Disney remaking their nostalgia- catering 90's films, but they need to be interesting. This film, sadly, is not. Even the Christmas sequel is better than this film because it's at least something. 
+"""
+)
+
+# 負面的
+
+predict_review(
+    """
+I was really looking forward to this film. Not only has Disney recently made excellent live-action versions of their animated masterpieces (Jungle Book, Cinderella), but the cast alone (Emma Watson, Ian McKellen, Kevin Kline) already seemed to make this one a sure hit. Well, not so much as it turns out.
+Some of the animation is fantastic, but because characters like Cogsworth (the clock), Lumière (the candelabra) and Chip (the little tea cup) now look "realistic", they lose a lot of their animated predecessors' charm and actually even look kind of creepy at times. And ironically - unlike in the animated original - in this new realistic version they only have very limited facial expressions (which is a creative decision I can't for the life of me understand).
+Even when it works: there can be too much of a good thing. The film is overstuffed with lush production design and cgi (which is often weirdly artificial looking though) but sadly lacking in charm and genuine emotion. If this were a music album, I'd say it is "over-produced" and in need of more soul and swing. The great voice talent in some cases actually seems wasted, because it drowns in a sea of visual effects that numbs all senses. The most crucial thing that didn't work for me, though, is the Beast. He just never looks convincing. The eyes somehow don't look like real eyes and they're always slightly off.
+On the positive side, I really liked Gaston, and the actor who played him, Luke Evans, actually gave the perhaps most energized performance of all. Kevin Kline as Belle's father has little to do but to look fatherly and old, but he makes the most of his part. Speaking of Belle, now that I've seen the film, I think her role was miscast. I think someone like Rachel McAdams would actually have been a more natural, lively and perhaps a bit more feisty Belle than Emma Watson.
+If you love the original, you might want to give this one a pass, it's really not that good (although at least the songs were OK). Also, I'd think twice before bringing small children; without cute animated faces, all those "realistic" looking creatures and devices can be rather frightening for a child. """
+)
+
+# 正面的
+
+predict_review(
+    """
+Up front: I'm probably not the right audience for this film. I only went because I was invited, and I wouldn't have gone to check this one out otherwise.
+Firstly, some of the production values are really beautiful and reminded me of the animated classic in a good way. Also, the voice cast for the clock and the kitchen devices are great.
+Secondly, the actors, well... this may sound kind of harsh, but I've never seen Emma Watson act so stiff in a movie. Her performance is wooden, which is pretty bad considering she's supposed to be the heart of the film. Also, she probably won't start a singing career anytime soon.
+Thirdly (and most importantly), Beast. That's where they really dropped the ball. Giving him a lifeless CGI face was an unforgivable mistake, and it's such a constant distraction that I could never really get into the movie.
+Overall, I'm afraid I wouldn't recommend this movie, at least not to adults. I'm sure most kids would enjoy it though, and it's not really a bad film: just a very mediocre one. 6 stars out of 10. 
+"""
+)
+
+# 負面的
+
+predict_review(
+    """
+Full disclosure, I didn't think the first movie was as bad as it was made out to be. It wasn't good in almost any sense, but it was to be expected given the combination of source material, resources and constraints.
+That said, this sequel is 20x better than the first. Having established the characters in the first movie, the actors seem to be able to act now comfortably in their parts. The story becomes much more nuanced with plenty of dynamics on the go.
+SPOILERS from now on
+Can they maintain a "vanilla" relationship? Is he going to become controlling again and ruin things? Will she let it get out of control and ruin things also or stay on it? Who is that stalky girl and what happened to her exactly? what about his mother? and that ex of his? Will something occur with her infatuated boss?
+On top of all of this, I realised while watching that the series was never about a bizarre sadist control freak, it's actually about all men and the story of a woman trying to find the balance between accepting or desiring the dominant behaviour of the male archetype and maintaining strength and independence in such a relationship.
+While of course the fact that he is rich, while possibly relating to the power struggle, looks like it is going to be more and more used for generating further drama. The romance is much more evident in this movie to/ 
+"""
+)
+
+# 正面的
+
+# serialize model to JSON
+
+model_json = model.to_json()
+with open("SaveModel/Imdb_RNN_model.json", "w") as json_file:
+    json_file.write(model_json)
+
+model.save_weights("SaveModel/Imdb_RNN_model.h5")
+print("Saved model to disk")
+
+# Saved model to disk
+NG '''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

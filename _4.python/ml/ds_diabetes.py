@@ -1,4 +1,6 @@
 """
+Pima Indians Diabetes
+
 糖尿病資料集 => 迴歸問題
 
 Sklearn Diabetes Dataset : Scikit-learn Toy Datasets in Python
@@ -843,7 +845,8 @@ plt.title("model accuracy")
 plt.ylabel("accuracy")
 plt.xlabel("epoch")
 plt.legend(["train", "test"], loc="upper left")
-plt.show()
+show()
+
 # summarize history for loss
 plt.plot(history.history["loss"])
 plt.plot(history.history["val_loss"])
@@ -851,7 +854,7 @@ plt.title("model loss")
 plt.ylabel("loss")
 plt.xlabel("epoch")
 plt.legend(["train", "test"], loc="upper left")
-plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1603,6 +1606,97 @@ print("Accuracy: %0.2f (+/- %0.2f)" % (results.mean(), results.std()))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+"""
+理解Keras中的History对象
+
+调参在深度学习中十分重要，一组好的超参数能够直接决定系统的好坏。
+网络的超参数主要包括网络结构，学习率，正则化等，
+之前在做毕设的过程中，看到过一些调整超参数的blog和paper，改天可以整理一下。
+这篇blog主要是要介绍Keras框架中的History对象。
+History对象记录的是网络训练过程中的train_acc/train_loss/val_acc/val_loss等数值，
+而调整网络的超参数都是要通过这些数值进行调整。
+"""
+
+# History对象
+
+from keras.models import Sequential
+from keras.layers import Dense
+
+# fix random seed for reproducibility
+seed = 7
+np.random.seed(seed)
+
+# load pima indians dataset
+dataset = np.loadtxt("data/pima-indians-diabetes.csv", delimiter=",")
+# split into input (X) and output (Y) variables
+X = dataset[:, 0:8]
+Y = dataset[:, 8]
+
+# create model
+model = Sequential()
+model.add(Dense(12, input_dim=8, activation="relu"))
+model.add(Dense(8, activation="relu"))
+model.add(Dense(1, activation="sigmoid"))
+
+# Compile model
+model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
+# Fit the model
+history = model.fit(
+    X, Y, validation_split=0.33, batch_size=10, verbose=0
+)  # list all data in history
+# nb_epoch=150
+print(history.history.keys())
+# summarize history for accuracy
+plt.plot(history.history["accuracy"])
+plt.plot(history.history["val_accuracy"])
+plt.title("model accuracy")
+plt.ylabel("accuracy")
+plt.xlabel("epoch")
+plt.legend(["train", "test"], loc="upper left")
+show()
+
+# summarize history for loss
+plt.plot(history.history["loss"])
+plt.plot(history.history["val_loss"])
+plt.title("model loss")
+plt.ylabel("loss")
+plt.xlabel("epoch")
+plt.legend(["train", "test"], loc="upper left")
+show()
+
+# 看一下model.fit()到底返回什么
+# 返回的是keras中的callback.History对象。Keras中的history回调函数会被自动启动到每一个Keras模型中，由fit返回。其中history字典记录的是训练过程中的训练集和验证集的精度。
+# 打印一下history.history.keys()
+
+# print(dict_keys(['val_loss', 'val_accuracy', 'loss', 'accuracy']))
+
+# 有四个key - > val_loss/val_acc/loss/acc
+
+# 画误差率曲线和精度曲线
+
+# summarize history for accuracy
+plt.plot(history.history["accuracy"])
+plt.plot(history.history["val_accuracy"])
+show()
+
+# summarize history for loss
+plt.plot(history.history["loss"])
+plt.plot(history.history["val_loss"])
+show()
+
+"""
+总结
+model.fit()会一个History()回调函数对象（这里说的可能不是很准确），该对象中，包括4个属性
+1.epoch
+2.history - > 网络训练过程中的acc和loos，可视化训练过程
+3.model
+4.params - > batch_size等超参数
+
+参考资料
+https://cnbeining.github.io/deep-learning-with-python-cn/4-advanced-multi-layer-perceptrons-and-keras/ch15-understand-model-behavior-during-training-by-plotting-history.html
+http://kyunsmile.github.io/2019/02/16/keras_CallBacks/
+"""
 
 
 print("------------------------------------------------------------")  # 60個
