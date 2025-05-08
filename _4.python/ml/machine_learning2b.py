@@ -1796,9 +1796,9 @@ def get_dataset(N=20, sigma=0.1):
 '''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 """
 Deep learning(DL)
-
 convolutional neural networks (CNN卷積神經網路) - deep feed-forward neural networks (discussed today)
 recurrent neural networks (RNN) - connections between nodes can go backward (used e.g. for speech recognition)
 generative adversarial networks (GAN) - system of two neural networks competing with each other (one generates fake data and the other compare them with real data)

@@ -388,13 +388,13 @@ namespace vcs_SendTo_All
 
                 if ((f.InfoAvailable == true) && (f.Video.Count > 0))
                 {
-                    richTextBox1.Text += "影片檔案\t";
-
                     int w = f.Video[0].Width;
                     int h = f.Video[0].Height;
-                    richTextBox1.Text += w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\t";
+                    /*
+                    richTextBox1.Text += "影片檔案\t"+w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\t";
                     richTextBox1.Text += f.Video[0].FrameRate.ToString() + "\t";
                     richTextBox1.Text += f.General.DurationString + "\n";
+                    */
                 }
                 else
                 {
@@ -563,20 +563,72 @@ namespace vcs_SendTo_All
 
         private void bt_save_Click(object sender, EventArgs e)
         {
-            string filename = "filename_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+            int i;
+            if (fileinfos.Count == 0)
+            {
+                richTextBox1.Text += "show_filename_data 找不到資料\n";
+                richTextBox1.Text += "無資料, 不存檔\n";
+            }
+            else
+                richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
 
-            // 直接存檔
+            string save_filename = "filename_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
 
-            FileStream filestream = System.IO.File.Open(filename, FileMode.Create);
+            FileStream filestream = System.IO.File.Open(save_filename, FileMode.Create);
             StreamWriter str_writer = new StreamWriter(filestream);
 
-            str_writer.WriteLine(richTextBox1.Text);
+            // RTB 直接存檔
+            //str_writer.WriteLine(richTextBox1.Text);
+
+            // 只存檔案名稱資料
+            for (i = 0; i < fileinfos.Count; i++)
+            {
+                string filename = fileinfos[i].filename;
+                string mesg = string.Empty;
+                //richTextBox1.Text += filename + "\n";
+
+                FileInfo fi = new FileInfo(fileinfos[i].filepath + "\\" + filename);
+                richTextBox1.Text += fi.FullName + "\t";
+                richTextBox1.Text += ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                //mesg += fi.FullName + "\t";
+                mesg += String.Format("{0,-50}", filename);
+                //mesg += filename + "\t";
+                //mesg += ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\t";
+                mesg += String.Format("{0,-30}", ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)));
+                richTextBox1.Text += "len = " + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)).Length.ToString() + "\n";
+
+                MediaFile f = new MediaFile(fileinfos[i].filepath + "\\" + filename);
+
+                if ((f.InfoAvailable == true) && (f.Video.Count > 0))
+                {
+                    int w = f.Video[0].Width;
+                    int h = f.Video[0].Height;
+                    /*
+                    richTextBox1.Text += "影片檔案\t"+w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\t";
+                    richTextBox1.Text += f.Video[0].FrameRate.ToString() + "\t";
+                    richTextBox1.Text += f.General.DurationString + "\n";
+                    */
+                    //mesg += "\t" + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\t";
+                    //mesg += f.Video[0].FrameRate.ToString() + "\t";
+                    //mesg += f.General.DurationString;
+                }
+                else
+                {
+                    richTextBox1.Text += "非 影片檔案\n";
+                }
+
+                richTextBox1.Text += mesg+"\n";
+                str_writer.WriteLine(mesg);
+
+
+            }
+
             // Dispose StreamWriter
             str_writer.Dispose();
             // Close FileStream
             filestream.Close();
 
-            richTextBox1.Text += "儲存資料完畢，檔案：" + filename + "\n";
+            richTextBox1.Text += "儲存資料完畢，檔案：" + save_filename + "\n";
 
             /* 使用對話框選取檔案再存檔
             saveFileDialog1.Title = "儲存資料";

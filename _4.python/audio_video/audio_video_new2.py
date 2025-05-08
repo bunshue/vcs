@@ -88,12 +88,7 @@ print("------------------------------------------------------------")  # 60個
 #SpeechRecognition：語音轉文字(麥克風)
 !pip install pydub
 !pip install ffmpeg
-!pip install google.colab
-
 """
-
-print("------------------------------------------------------------")  # 60個
-
 import speech_recognition
 from pydub import AudioSegment
 from IPython.display import display  # 用IPython

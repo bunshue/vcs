@@ -10759,6 +10759,7 @@ totaldeath = df.loc[0, "死亡"]
 print("累積死亡人數", totaldeath)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 import json
 import csv
@@ -10802,8 +10803,6 @@ df.drop(["昨日確診", "昨日排除", "昨日送驗"], inplace=True, axis=1)
 totaldeath = df.loc[0, "死亡"]
 print("累積死亡人數", totaldeath)
 
-# 切換至指定的資料夾為工作資料夾
-os.chdir("/content/drive/MyDrive/Book")
 # 開啟指定的Word檔案
 my_doc = Document("指揮中心快訊.docx")
 # 設定要取代的串列list
