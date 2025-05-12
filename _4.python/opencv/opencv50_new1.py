@@ -57,6 +57,7 @@ def cvshow(title, image):
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 01")
 print("練習組合成一張大圖 picasa效果")
 
 filename1 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
@@ -109,6 +110,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 02")
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
 
 # 檔案 => cv2影像
@@ -150,6 +152,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 03")
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
 
 # 檔案 => cv2影像
@@ -188,6 +191,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 04")
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
 
 # 檔案 => cv2影像
@@ -217,6 +221,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 05")
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 
 # 檔案 => cv2影像
@@ -252,6 +257,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 06")
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 
 # 檔案 => cv2影像
@@ -287,6 +293,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 07")
 # 檔案 => cv2影像
 image = cv2.imread("images/lena4.bmp", 0)
 
@@ -310,6 +317,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 08")
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 檔案 => cv2影像
@@ -335,6 +343,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 09")
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 
 # 檔案 => cv2影像
@@ -360,6 +369,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 10")
 filename = "data/PerspectiveTransform.jpg"
 # 檔案 => cv2影像
 image = cv2.imread(filename)
@@ -394,6 +404,8 @@ plt.suptitle("PerspectiveTransform")
 show()
 
 print("------------------------------------------------------------")  # 60個
+
+print("opencv 11")
 
 
 def saltpepper(image, n):
@@ -445,6 +457,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 12")
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
 
 # 檔案 => cv2影像
@@ -470,6 +483,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 13")
 print("去除圖片的雜訊 fastNlMeansDenoisingColored")
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
@@ -493,6 +507,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 14")
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 print("absolute")
@@ -562,6 +577,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 15")
 print("對比度增強 CLAHE")
 print("生成自適應均衡化圖像 createCLAHE")
 
@@ -594,6 +610,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 16")
 print("gradient 邊緣檢測 梯度處理")
 
 
@@ -668,7 +685,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("imaeg_laplace 邊緣檢測 銳化處理")
+print("opencv 17 imaeg_laplace 邊緣檢測 銳化處理")
 
 # 檔案 => cv2影像
 original_image_test1 = cv2.imread("data/lena.png", 0)
@@ -742,7 +759,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("image_cv2")
+print("opencv 18 image_cv2")
 
 
 # 用原始圖像減去拉普拉斯模板直接計算得到的邊緣信息
@@ -769,7 +786,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("optimize")
+print("opencv 19 optimize")
 
 
 def ComputeMinLevel(hist, pnum):
@@ -834,7 +851,7 @@ cv2.imshow("Optimize", newimage / 255)
 """
 print("------------------------------------------------------------")  # 60個
 
-print("Y對稱一張圖片")
+print("opencv 20 Y對稱一張圖片")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
@@ -862,7 +879,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("XY對稱一張圖片")
+print("opencv 21 XY對稱一張圖片")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
@@ -892,7 +909,8 @@ plt.imshow(cv2.cvtColor(output, cv2.COLOR_BGR2RGB))
 show()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_01")
+
+print("opencv 22")
 
 # 檔案 => cv2影像
 image = cv2.imread(filename)  # 預設為彩色 1號
@@ -927,7 +945,8 @@ image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)  # 轉換成 BGRA 色彩模式
 print(image.shape)                             # (400, 300, 4)  第三個數值變成 4
 """
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_03")
+
+print("opencv 23")
 
 # 檔案 => cv2影像
 image_b = cv2.imread(filename)
@@ -950,7 +969,8 @@ cvshow("image G", image_g)
 cvshow("image B", image_b)
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_04")
+
+print("opencv 24")
 
 # 檔案 => cv2影像
 image = cv2.imread(filename)
@@ -964,7 +984,8 @@ image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
 cvshow("image", image)
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_05")
+
+print("opencv 25")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
@@ -985,9 +1006,8 @@ for row in range(int(rows / 2)):  # 只取 rows 的一半 ( 使用 int 取整數
 cvshow("image", image)
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_06")
 
-print("像素操作 全張負片")
+print("opencv 26 像素操作 全張負片")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
@@ -999,8 +1019,8 @@ image = 255 - image  # 使用 255 減去陣列中所有數值
 cvshow("image", image)
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_07")
 
+print("opencv 27")
 # 檔案 => cv2影像
 image = cv2.imread(filename)
 
@@ -1017,7 +1037,8 @@ output = np.uint8(output)
 cvshow("image", output)
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_08")
+
+print("opencv 28")
 
 # 檔案 => cv2影像
 image = cv2.imread(filename)
@@ -1033,7 +1054,7 @@ cvshow("image", image)
 
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV_11 三原色疊加")
+print("opencv 29 三原色疊加")
 
 filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
 filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
@@ -1054,6 +1075,8 @@ image = cv2.add(image, image_b)  # 疊加藍色
 cvshow("image", image)
 
 print("------------------------------------------------------------")  # 60個
+
+print("opencv 30")
 
 # 改用 製造數據 自己畫出來
 
@@ -1083,8 +1106,8 @@ image = cv2.add(image, image_b)  # 疊加藍色
 cvshow("RGB Model", image)
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_14 漸層色")
+
+print("opencv 31 漸層色")
 
 w, h = 400, 400
 image = np.zeros([h, w, 3])
@@ -1097,7 +1120,7 @@ cvshow("image", image)
 
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV_17 logo處理")
+print("opencv 32 logo處理")
 
 logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 
@@ -1121,7 +1144,8 @@ for x in range(w):
 cvshow("image", image)
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_18 logo處理")
+
+print("opencv 33 logo處理")
 
 logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 
@@ -1142,8 +1166,8 @@ for x in range(w):
 cvshow("image", image)
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_19")
 
+print("opencv 34")
 filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
 filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 
@@ -1174,7 +1198,7 @@ cvshow("image", image)
 
 print("------------------------------------------------------------")  # 60個
 
-print("測試 cv2.floodFill()")
+print("opencv 35 cv2.floodFill()")
 
 
 def floodFill(
@@ -1219,7 +1243,7 @@ cvshow("image2", image2)
 
 print("------------------------------------------------------------")  # 60個
 
-print("測試 凸透鏡 效果")
+print("opencv 36 測試 凸透鏡 效果")
 
 
 def convex(src_image, raw, effect):
@@ -1246,9 +1270,7 @@ cvshow("image", image)
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_32")
+print("opencv 37")
 
 filename1 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
 filename2 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
@@ -1273,14 +1295,13 @@ for i in range(w):
         i / 300
     )  # 綠色按照比例混合
 
-# cv2.imwrite('tmp_image.png', image1)
-
 image = image1.astype("float32") / 255  # 如果要使用 imshow 必須要轉換類型
 
 cvshow("image", image)
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_33")
+
+print("opencv 38 加上logo")
 
 logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 
@@ -1311,14 +1332,12 @@ for i in range(logo_w):
         logo[:, i, 3] / 255
     )
 
-# cv2.imwrite('tmp_image.png', mona)
-
 image = mona.astype("float32") / 255  # 如果要使用 imshow 必須要轉換類型
 
 cvshow("image", image)
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_38")
+print("opencv 39")
 
 """ barcode
 
@@ -1357,7 +1376,8 @@ if ok:
 cvshow("image", image)
 """
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_40 按上下調整亮度 按左右調整對比度 按ESC離開")
+
+print("opencv 40 cv讀取鍵盤 按上下調整亮度 按左右調整對比度 按ESC離開")
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
@@ -1400,7 +1420,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("三種二值化方法")
+print("opencv 41 三種二值化方法")
 
 THRESHOLD = 127
 
@@ -1442,6 +1462,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 42")
+
 THRESHOLD = 127
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/tiffany.bmp"
@@ -1471,7 +1493,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("圖片的二值化處理, 要先轉成灰階, 再二值化")
+print("opencv 43 圖片的二值化處理, 要先轉成灰階, 再二值化")
 
 THRESHOLD = 30
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
@@ -1488,7 +1510,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV_09 各種二值化")
+print("opencv 44 各種二值化")
 
 THRESHOLD = 127
 
@@ -1526,7 +1548,8 @@ cvshow("image4", output4)
 cvshow("image5", output5)
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_10")
+
+print("opencv 45")
 
 THRESHOLD = 127
 
@@ -1537,9 +1560,11 @@ image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
 
 # 轉換前，都先將圖片轉換成灰階色彩
 ret, output1 = cv2.threshold(image_gray, THRESHOLD, 255, cv2.THRESH_BINARY)
+
 output2 = cv2.adaptiveThreshold(
     image_gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2
 )
+
 output3 = cv2.adaptiveThreshold(
     image_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
 )
@@ -1625,22 +1650,15 @@ def getSobelKernel(winSize):
 
 print("------------------------------------------------------------")  # 60個
 
-print("測試 cv2.linearPolar")
-print("空間變換 極座標變換 linearPolar_OpenCV3")
+print("opencv 46 測試 cv2.linearPolar 空間變換 極座標變換")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 檔案 => cv2影像
 src = cv2.imread(filename, cv2.IMREAD_ANYCOLOR)
 
-# 顯示原圖
-cvshow("src", src)
-
 # 圖像的極坐標變換
 dst = cv2.linearPolar(src, (508, 503), 550, cv2.INTER_LINEAR)
-
-# 顯示極坐標變化的結果
-cvshow("dst", dst)
 
 plt.subplot(121)
 plt.title("原圖")
@@ -1654,9 +1672,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("測試 cv2.logPolar")
-
-print("空間變換 極座標變換 logPolar")
+print("opencv 47 測試 cv2.logPolar 空間變換 極座標變換")
 
 # 檔案 => cv2影像
 src = cv2.imread(filename, cv2.IMREAD_ANYCOLOR)
@@ -1675,7 +1691,7 @@ cvshow("dst", dst)
 
 print("------------------------------------------------------------")  # 60個
 
-print("對比度增強2")
+print("opencv 48 對比度增強2")
 
 
 # 分段線性變換
@@ -1749,7 +1765,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("對比度增強3 histNormalized")
+print("opencv 49 對比度增強3 histNormalized")
 
 
 # 直方圖正規化
@@ -1825,7 +1841,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("對比度增強5 equalHist")
+print("opencv 50 對比度增強5 equalHist")
 
 
 # 計算圖像灰度直方圖
@@ -1909,7 +1925,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("邊緣擴充/擴充邊界 copyMakeBorder")
+print("opencv 51 邊緣擴充/擴充邊界 copyMakeBorder")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
@@ -1929,7 +1945,7 @@ print("------------------------------------------------------------")  # 60個
 
 from scipy import signal
 
-print("圖像平滑 sameConv2d")
+print("opencv 52 圖像平滑 sameConv2d")
 
 # 輸入矩陣
 I = np.array([[1, 2], [3, 4]], np.float32)
@@ -1949,7 +1965,7 @@ print(c_same)
 
 print("------------------------------------------------------------")  # 60個
 
-print("圖像平滑 sepConv")
+print("opencv 53 圖像平滑 sepConv")
 
 from scipy import signal
 
@@ -1960,7 +1976,7 @@ kernel = signal.convolve2d(kernel1, kernel2, mode="full")
 
 print("------------------------------------------------------------")  # 60個
 
-print("圖像平滑 conv")
+print("opencv 54 圖像平滑 conv")
 
 from scipy import signal
 
@@ -2008,7 +2024,7 @@ print(I_kernel1_kernel2)
 
 print("------------------------------------------------------------")  # 60個
 
-print("圖像平滑 conv2")
+print("opencv 55 圖像平滑 conv2")
 
 from scipy import signal
 
@@ -2038,6 +2054,8 @@ print(validConv)
 print("------------------------------------------------------------")  # 60個
 
 from scipy import signal
+
+print("opencv 56")
 
 # 得到高斯平滑算子：
 # getGaussKernel(sigma,H,W),使用過程中一般H和W一般為奇數，sigma大於零
@@ -2084,7 +2102,7 @@ print(gaussKernel_xy)
 
 print("------------------------------------------------------------")  # 60個
 
-print("圖像平滑 gaussBlur")
+print("opencv 57 圖像平滑 gaussBlur")
 
 from scipy import signal
 
@@ -2132,7 +2150,7 @@ blurImage_0_1 = gaussBlur(image_0_1, 4, 5, 5, "symm")
 
 print("------------------------------------------------------------")  # 60個
 
-print("圖像平滑 fastMeanBlur")
+print("opencv 58 圖像平滑 fastMeanBlur")
 
 
 # 圖像積分
@@ -2205,7 +2223,7 @@ cvshow("fastMeanBlur", meanBlurImage)
 
 print("------------------------------------------------------------")  # 60個
 
-print("圖像平滑 medianBlur")
+print("opencv 59 圖像平滑 medianBlur")
 
 
 # 中值濾波
@@ -2246,7 +2264,7 @@ cvshow("medianBlurImage", medianBlurImage)
 
 print("------------------------------------------------------------")  # 60個
 
-print("圖像平滑 BFilter")
+print("opencv 60 圖像平滑 BFilter")
 
 
 # 基於空間距離的權重因子 ( 和計算高斯算子的過程是一樣的 )
@@ -2327,7 +2345,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("圖像平滑 BilateralFiltering")
+print("opencv 61 圖像平滑 BilateralFiltering")
 
 
 # 基於空間距離的權重模板 ( 和計算高斯算子的過程是一樣的 )
@@ -2398,7 +2416,7 @@ bfltImage = bfltImage.astype(np.uint8)
 
 print("------------------------------------------------------------")  # 60個
 
-print("圖像平滑 blfFilterColor")
+print("opencv 62 圖像平滑 blfFilterColor")
 
 
 # 基於空間距離的權重因子 ( 和計算高斯核的過程類似 )
@@ -2479,7 +2497,7 @@ cvshow("blfFilterColor", blfColorImage)
 
 print("------------------------------------------------------------")  # 60個
 
-print("圖像平滑 JointBilterFilter")
+print("opencv 63 圖像平滑 JointBilterFilter")
 
 
 # 基於空間距離的權重模板 ( 和計算高斯算子的過程是一樣的 )
@@ -2548,7 +2566,7 @@ cvshow("jblf", jblf)
 
 print("------------------------------------------------------------")  # 60個
 
-print("圖像平滑 fastGuidedFilter")
+print("opencv 64 圖像平滑 fastGuidedFilter")
 
 
 # 快速導向濾波，輸入的圖像數據類型為歸一到[0,1]的浮點型
@@ -2640,7 +2658,7 @@ cvshow("fGFEnchance",enchanced)
 """
 print("------------------------------------------------------------")  # 60個
 
-print("圖像平滑 guidedFilter")
+print("opencv 65 圖像平滑 guidedFilter")
 
 
 # 導向濾波
@@ -2689,7 +2707,7 @@ result = result.astype(np.uint8)
 
 print("------------------------------------------------------------")  # 60個
 
-print("圖像平滑 guidedFilter_color")
+print("opencv 66 圖像平滑 guidedFilter_color")
 
 
 # 導向濾波
@@ -2752,7 +2770,7 @@ result = result.astype(np.uint8)
 
 print("------------------------------------------------------------")  # 60個
 
-print("閾值分割 threshold_OpenCV3")
+print("opencv 67 閾值分割 threshold")
 
 src = np.array(
     [[123, 234, 68], [33, 51, 17], [48, 98, 234], [129, 89, 27], [45, 167, 134]],
@@ -2773,7 +2791,7 @@ print(triThe, dst_tri)
 
 print("------------------------------------------------------------")  # 60個
 
-print("閾值分割 threshTwoPeaks")
+print("opencv 68 閾值分割 threshTwoPeaks")
 
 
 # 計算圖像灰度直方圖
@@ -2833,7 +2851,7 @@ cvshow("threshTwoPeaks", threshImage_out)
 
 print("------------------------------------------------------------")  # 60個
 
-print("閾值分割 threshEntroy")
+print("opencv 69 閾值分割 threshEntroy")
 
 
 # 計算圖像灰度直方圖
@@ -2935,7 +2953,7 @@ print(thresh)
 
 print("------------------------------------------------------------")  # 60個
 
-print("閾值分割 otsu")
+print("opencv 70 閾值分割 otsu")
 
 
 # 計算圖像灰度直方圖
@@ -2999,7 +3017,7 @@ cvshow("ostu_threshold", ostu_threshold)
 
 print("------------------------------------------------------------")  # 60個
 
-print("閾值分割 adaptive")
+print("opencv 71 閾值分割 adaptive")
 
 
 # 圖像積分
@@ -3068,7 +3086,7 @@ cvshow("threshImage", threshImage)
 
 print("------------------------------------------------------------")  # 60個
 
-print("閾值分割 adaptiveThresh")
+print("opencv 72 閾值分割 adaptiveThresh")
 
 
 def adaptiveThresh(I, winSize, ratio=0.15):
@@ -3092,7 +3110,7 @@ cvshow("out", out)
 
 print("------------------------------------------------------------")  # 60個
 
-print("邊緣檢測 roberts")
+print("opencv 73 邊緣檢測 roberts")
 
 from scipy import signal
 
@@ -3152,7 +3170,7 @@ cvshow("edge", edge)
 
 print("------------------------------------------------------------")  # 60個
 
-print("邊緣檢測 Marr_Hildreth 1")
+print("opencv 74 邊緣檢測 Marr_Hildreth 1")
 
 from scipy import signal
 
@@ -3258,7 +3276,7 @@ cvshow("Marr-Hildreth", result)
 
 print("------------------------------------------------------------")  # 60個
 
-print("邊緣檢測 Marr_Hildreth 2")
+print("opencv 75 邊緣檢測 Marr_Hildreth 2")
 
 from scipy import signal
 
@@ -3371,7 +3389,7 @@ cvshow("Marr-Hildreth", result)
 
 print("------------------------------------------------------------")  # 60個
 
-print("邊緣檢測 prewitt")
+print("opencv 76 邊緣檢測 prewitt")
 
 from scipy import signal
 
@@ -3437,7 +3455,7 @@ cvshow("edge", edge)
 
 print("------------------------------------------------------------")  # 60個
 
-print("邊緣檢測 sobel")
+print("opencv 77 邊緣檢測 sobel")
 
 from scipy import signal
 
@@ -3477,7 +3495,7 @@ cvshow("pencilSketch", pencilSketch)
 
 print("------------------------------------------------------------")  # 60個
 
-print("邊緣檢測 Sobel_normalize")
+print("opencv 78 邊緣檢測 Sobel_normalize")
 
 from scipy import signal
 
@@ -3496,7 +3514,8 @@ edge = edge.astype(np.uint8)
 cvshow("sobel edge", edge)
 
 print("------------------------------------------------------------")  # 60個
-print("邊緣檢測 canny")
+
+print("opencv 79 邊緣檢測 canny")
 
 # sobel邊緣檢測
 
@@ -3708,7 +3727,7 @@ if __name__ == "__main__":
 """
 print("------------------------------------------------------------")  # 60個
 
-print("邊緣檢測 laplacian")
+print("opencv 80 邊緣檢測 laplacian")
 from scipy import signal
 
 # laplacian 邊緣檢測算法:
@@ -3787,7 +3806,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-print("邊緣檢測 LoG_edge")
+print("opencv 81 邊緣檢測 LoG_edge")
 from scipy import signal
 
 
@@ -3840,7 +3859,7 @@ cvshow("edge_binary", edge_binary)
 
 print("------------------------------------------------------------")  # 60個
 
-print("邊緣檢測 LoG")
+print("opencv 82 邊緣檢測 LoG")
 from scipy import signal
 
 
@@ -3885,7 +3904,7 @@ cvshow("edge_binary", edge_binary)
 
 print("------------------------------------------------------------")  # 60個
 
-print("邊緣檢測 DoG")
+print("opencv 83 邊緣檢測 DoG")
 from scipy import signal
 
 
@@ -3949,7 +3968,7 @@ asbstraction = asbstraction.astype(np.uint8)
 
 print("------------------------------------------------------------")  # 60個
 
-print("幾何形狀的檢測和擬合 HTLine")
+print("opencv 84 幾何形狀的檢測和擬合 HTLine")
 
 from mpl_toolkits.mplot3d import Axes3D
 
@@ -4026,7 +4045,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-print("幾何形狀的檢測和擬合 HTCircle")
+print("opencv 85 幾何形狀的檢測和擬合 HTCircle")
 
 """ 跑不完
 cv2.imshow("image", image)
@@ -4088,7 +4107,7 @@ cvshow("I",I)
 """
 print("------------------------------------------------------------")  # 60個
 
-print("幾何形狀的檢測和擬合 contours")
+print("opencv 86 幾何形狀的檢測和擬合 contours")
 
 # 輸入圖像
 # 檔案 => cv2影像
@@ -4140,7 +4159,7 @@ cvshow("contoursImg", contoursImg)
 
 print("------------------------------------------------------------")  # 60個
 
-print("幾何形狀的檢測和擬合")
+print("opencv 87 幾何形狀的檢測和擬合")
 
 # 檔案 => cv2影像
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
@@ -4168,7 +4187,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("幾何形狀的檢測和擬合 findContours_OpenCV3")
+print("opencv 88 幾何形狀的檢測和擬合 findContours")
 
 # filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
@@ -4241,7 +4260,7 @@ cvshow("dst", image)
 """
 print("------------------------------------------------------------")  # 60個
 
-print("將一彩圖做RGB分離")
+print("opencv 89 將一彩圖做RGB分離")
 
 filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
@@ -4270,6 +4289,8 @@ cvshow("f G", fg)
 cvshow("f R", fr)
 
 print("------------------------------------------------------------")  # 60個
+
+print("opencv 90")
 
 img = cv2.resize(cv2.imread("images/soccer_practice.jpg", 0), (0, 0), fx=0.8, fy=0.8)
 template = cv2.resize(cv2.imread("images/shoe.PNG", 0), (0, 0), fx=0.8, fy=0.8)
@@ -4303,6 +4324,8 @@ for method in methods:
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 91")
+
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 temp = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
@@ -4330,6 +4353,7 @@ _sum = np.double(np.sum(product_array[0]))
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 92")
 """
 #例外的寫法
 img = cv2.imread('digits.png',0)
@@ -4337,6 +4361,8 @@ if img is None:
     raise Exception("we need the digits.png image from samples/data here !")
 """
 print("------------------------------------------------------------")  # 60個
+
+print("opencv 93")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
@@ -4361,6 +4387,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 94")
 filename = "data/lena.jpg"
 img = cv2.imread(filename)
 print(type(img), img.shape, img.dtype)
@@ -4369,6 +4396,7 @@ cvshow("demo1", img)
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 95")
 filename = "data/lena.jpg"
 img = cv2.imread(filename)
 
@@ -4376,10 +4404,13 @@ cvshow("demo1", img)
 
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 96")
 img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 print(img_gray.shape)
 
 print("------------------------------------------------------------")  # 60個
+
+print("opencv 97")
 
 # 圖形型態
 
@@ -4495,10 +4526,8 @@ for quantizer in [1, 10, 20, 30, 40]:
     print("quantizer = {:02d}, size = {:07d} bytes".format(quantizer, fsize))
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
+print("opencv 98")
 
 # 圖形變換
 # 幾何變換
@@ -4534,6 +4563,8 @@ show()
 
 print("------------------------------")  # 30個
 
+print("opencv 99")
+
 # 對圖形進行透視變換
 src = np.array([[0, 0], [w - 1, 0], [w - 1, h - 1], [0, h - 1]], dtype=np.float32)
 dst = np.array([[300, 350], [800, 300], [900, 923], [161, 923]], dtype=np.float32)
@@ -4562,6 +4593,8 @@ for p1, p2 in zip(src, dst):
 show()
 
 print("------------------------------------------------------------")  # 60個
+
+print("opencv 100")
 
 """
     scpy2.opencv.warp_demo：仿射變換和透視變換的示範程式，
@@ -4620,6 +4653,9 @@ fig.subplots_adjust(0, 0, 1, 1, 0.02, 0)
 show()
 """
 print("------------------------------------------------------------")  # 60個
+
+print("opencv 101")
+
 """
     scpy2.opencv.remap_demo：示範remap()的拖曳效果。
     在圖形上按住滑鼠左鍵進行拖曳，每次拖曳完成之後，都將修改原始圖形，
@@ -4661,6 +4697,8 @@ ax.axis("off")
 show()
 
 print("------------------------------------------------------------")  # 60個
+
+print("opencv 102")
 
 # 直方圖
 
@@ -4704,6 +4742,8 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 103")
+
 # 直方圖反向映射
 
 # 使用calcBackProject()尋找圖形中橙子部分
@@ -4741,6 +4781,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 104")
 # 直方圖比對
 
 
@@ -4798,6 +4839,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 105")
+
 # 用二元視覺圖形計算深度訊息
 
 img_left = cv2.pyrDown(cv2.imread("data/aloeL.jpg"))
@@ -4845,6 +4888,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 106")
+
 # 圖形識別
 # 用Hough變換檢驗直線和圓
 
@@ -4878,6 +4923,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 107")
+
 # %figonly=霍夫變換示意圖
 k = 1.2
 b = 3
@@ -4908,7 +4955,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
+print("opencv 108")
 # add_collection 只能用 ax
 
 # 使用HoughLinesP()檢驗圖形中的直線
@@ -4937,6 +4984,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 109")
 # 檢驗圓形
 
 # 使用HoughCircles()檢驗圖形中的圓形
@@ -4977,18 +5025,21 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print("opencv 110")
+
 """
 # 無 SURF() 函數
 #SURF特征比對
 
 #SURF()找到的關鍵點和每個關鍵點的局部圖形
-img_gray1 = cv2.imread("data/lena.jpg", cv2.IMREAD_GRAYSCALE) #❶
-surf = cv2.SURF(2000, 2)  #❷
-key_points1 = surf.detect(img_gray1) #❸
-key_points1.sort(key=lambda kp:kp.size, reverse=True) #❹
+img_gray1 = cv2.imread("data/lena.jpg", cv2.IMREAD_GRAYSCALE)
+surf = cv2.SURF(2000, 2)
+key_points1 = surf.detect(img_gray1)
+key_points1.sort(key=lambda kp:kp.size, reverse=True)
 
 img_color1 = cv2.cvtColor(img_gray1, cv2.COLOR_GRAY2RGB)
-cv2.drawKeypoints(img_color1, key_points1[:25], img_color1, color=(255, 0, 0),  #❺
+cv2.drawKeypoints(img_color1, key_points1[:25], img_color1, color=(255, 0, 0),
                   flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 
 from scpy2.utils.image import concat_keypoints
@@ -5013,8 +5064,8 @@ FLANN_INDEX_KDTREE = 1
 index_params = dict(algorithm=FLANN_INDEX_KDTREE, trees=5)
 search_params = dict(checks=100)   
 
-fbm = cv2.FlannBasedMatcher(index_params, search_params) #❶
-match_list = fbm.knnMatch(features1, features2, k=1) #❷
+fbm = cv2.FlannBasedMatcher(index_params, search_params)
+match_list = fbm.knnMatch(features1, features2, k=1)
 
 m = match_list[0][0]
 
@@ -5030,11 +5081,11 @@ index2 = np.array([m[0].trainIdx for m in match_list])
 
 distances = np.array([m[0].distance for m in match_list])
 
-best_index = np.argsort(distances)[:50] #❶
+best_index = np.argsort(distances)[:50]
 matched_positions1 = key_positions1[index1[best_index]]
 matched_positions2 = key_positions2[index2[best_index]]
 
-matrix, mask = cv2.findHomography(matched_positions1, matched_positions2, cv2.RANSAC) #❷
+matrix, mask = cv2.findHomography(matched_positions1, matched_positions2, cv2.RANSAC)
 
 #scpy2.opencv.surf_demo：SURF圖形比對示範程式。
 #用滑鼠修改右側圖形的四個角的位置計算出透視變換之後的圖形，
@@ -5065,6 +5116,8 @@ show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print("opencv 111")
 
 # 形狀與結構分析
 # 輪廓檢驗
@@ -5103,6 +5156,8 @@ cvshow("demo1", img_coin)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print("opencv 112")
 
 img_pattern = cv2.imread("data/nested_patterns.png")
 img_pattern_gray = cv2.cvtColor(img_pattern, cv2.COLOR_BGR2GRAY)
@@ -5171,6 +5226,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 113")
 # 輪廓比對
 
 img_patterns = cv2.imread("data/patterns.png", cv2.IMREAD_GRAYSCALE)
@@ -5259,6 +5315,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 114")
+
 # 型態轉換
 
 points = np.random.rand(20, 2).astype(np.float32)
@@ -5267,8 +5325,7 @@ points = np.random.rand(20, 2).astype(np.float32)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
+print("opencv 115")
 
 # [OpenCV][Python]印出圖像中文字的位置及高寬
 # 本文將說明如何去辨識出圖片文字​位置及高寬。
@@ -5364,6 +5421,8 @@ return merged_components
 """
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 116")
+
 # [Python]使用NumPy 進行影像黑白反轉
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
@@ -5383,6 +5442,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print("opencv 117")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 cv_img = cv2.imread(filename)
@@ -5406,6 +5467,8 @@ occlusion = np.logical_not(mask[:, :, -1]).astype(np.uint8)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print("opencv 118")
 
 """
 # 圖形處理
@@ -5438,7 +5501,7 @@ for ax, (name, kernel) in zip(axes, kernels):
     ax.axis("off")
 fig.subplots_adjust(0.02, 0, 0.98, 1, 0.02, 0)
 
-plt.show()
+show()
 
 kernel1_name = "低通濾波器"
 kernel1 = np.array([[1, 1, 1], [1, 2, 1], [1, 1, 1]]) * 0.1
@@ -5469,6 +5532,8 @@ plt.tight_layout()  # 緊密排列，並填滿原圖大小
 show()
 
 print("------------------------------------------------------------")  # 60個
+
+print("opencv 119")
 
 """
 有些特殊的卷积核可以表示成一个列矢量和一个行矢量的乘积，
@@ -5563,10 +5628,12 @@ fig, axes = plt.subplots(1, 2, figsize=(9, 4))
 axes[0].imshow(~mask, cmap="gray")
 axes[1].imshow(img)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print("opencv 120")
 
 # 使用到 scpy2
 
@@ -5698,3 +5765,5 @@ cv2.destroyAllWindows()
 # 存圖以比較之
 # cv2.imwrite('building.png', image)
 # cv2.imwrite('building_clahe.png', cl1)
+# cv2.imwrite('tmp_image.png', image1)
+# cv2.imwrite('tmp_image.png', mona)

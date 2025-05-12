@@ -54,18 +54,19 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+from keras.datasets import mnist
+
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import Dropout
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # U6 MNIST 手寫數字辨識
 # 1.查看資料集 train data 和test data
 
-import numpy as np
-import pandas as pd
-
-
 np.random.seed(10)
-
-# 匯入資料
-from keras.datasets import mnist
 
 (x_train_image, y_train_label), (x_test_image, y_test_label) = mnist.load_data()
 print("train data= ", len(x_train_image))
@@ -73,8 +74,6 @@ print("test data=", len(x_test_image))
 
 # train data=  60000
 # test data= 10000
-
-import matplotlib.pyplot as plt
 
 
 def plot_image(image):
@@ -90,8 +89,6 @@ plot_image(x_train_image[0])
 y_train_label[0]
 
 # 5
-
-import matplotlib.pyplot as plt
 
 
 # 建立函數要來畫多圖的
@@ -187,9 +184,6 @@ print(y_TrainOneHot[:1])
 
 # 5.建立模型 多元感知器Multilayer perceptron 模型
 
-from keras.models import Sequential
-from keras.layers import Dense
-
 # 建立模型
 model = Sequential()
 
@@ -254,8 +248,6 @@ train_history = model.fit(
 
 # 來把訓練過程畫出來
 
-import matplotlib.pyplot as plt
-
 
 def show_train_history(train_history, train, validation):
     plt.plot(train_history.history[train])
@@ -276,21 +268,23 @@ show_train_history(train_history, "loss", "val_loss")
 
 scores = model.evaluate(x_Test_normalize, y_TestOneHot)
 print()
-print("accuracy", scores[1])
+print("111 accuracy", scores[1])
 
 # accuracy 0.9782999753952026
 
 # 8.執行預測
 
-prediction = model.predict_classes(x_Test)
+# prediction = model.predict_classes(x_Test)  # TensorFlow2.6已刪除predict_classes()
+predict_x = model.predict(x_Test)
+classes_x = np.argmax(predict_x, axis=1)
+prediction = classes_x
+
 prediction
 
 plot_images_labels_prediction(x_test_image, y_test_label, prediction, idx=340)
 
 
 # 9.顯示混淆矩陣 confussion table
-
-import pandas as pd
 
 pd.crosstab(y_test_label, prediction, rownames=["label"], colnames=["prediction"])
 
@@ -328,12 +322,6 @@ show_train_history(train_history, "accuracy", "val_accuracy")
 
 # 11.加入 dropout 避免overfitting
 
-from keras.models import Sequential
-from keras.layers import Dense
-
-# 主要加入這個 dropout
-from keras.layers import Dropout
-
 model = Sequential()
 
 model.add(
@@ -358,13 +346,20 @@ show_train_history(train_history, "accuracy", "val_accuracy")
 
 scores = model.evaluate(x_Test_normalize, y_TestOneHot)
 print()
-print("accuracy", scores[1])
+print("222 accuracy", scores[1])
 
 # accuracy 0.9362999796867371
 
 # 12.建立多層感知模型包含2 個隱藏層
 
 model = Sequential()
+
+print("先到此")
+
+# 以下NG
+
+sys.exit()
+
 
 model(Dense(units=1000, input_dim=784, kernel_initializer="normal", activation="relu"))
 model.add(Dropout(0.5))
@@ -390,7 +385,7 @@ show_train_history(train_history, "accuracy", "val_accuracy")
 
 scores = model.evaluate(x_Test_normalize, y_TestOneHot)
 print()
-print("accuracy", scores[1])
+print("333 accuracy", scores[1])
 
 print(model.summary())
 
