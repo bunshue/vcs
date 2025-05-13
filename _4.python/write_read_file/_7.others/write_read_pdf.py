@@ -6,13 +6,45 @@ https://github.com/oschwartz10612/poppler-windows
 
 """
 
+import re
 import sys
+
+pdf_filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text1.pdf"
+
+print("------------------------------------------------------------")  # 60個
+
+import PyPDF2
+
+print('印出前10筆合法的密碼')
+with open('data/dictionary.txt', 'r') as txt_file_stream:
+    file_iter = iter(lambda: txt_file_stream.readline(), '')
+    print(type(file_iter))
+    cnt = 0
+    for word in file_iter:
+        word = re.sub(r'\s', '', word)
+        print(word)
+        cnt += 1
+        if cnt > 10:
+            break;
+        
+
+with open('data/Python_Tricks_encrypted.pdf', 'rb') as pdf_file_stream:
+    reader = PyPDF2.PdfReader(pdf_file_stream)
+    with open('data/dictionary.txt', 'r') as txt_file_stream:
+        file_iter = iter(lambda: txt_file_stream.readline(), '')
+        for word in file_iter:
+            word = re.sub(r'\s', '', word)
+            if reader.decrypt(word):
+                print('取得密碼')
+                print(word)
+                break
+
+
+print('------------------------------------------------------------')	#60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("使用  pdf2image, pdf 轉 jpg")
-print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 from pdf2image import convert_from_path
@@ -27,9 +59,6 @@ for i, page in enumerate(pages):
     pic_filename = "tmp_page" + str(i + 1) + ".png"
     # page.save(pic_filename, "PNG") # JPEG
     print("存檔檔名 :", pic_filename)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -643,7 +672,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from pathlib import Path
-import re
 from pdfminer.high_level import extract_text
 
 infolder = "data/test_pdf_folder"
