@@ -3789,20 +3789,19 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+# LogisticRegressionCV 是基于交叉验证的逻辑回归模型，用于自动选择最佳的正则化强度。
 
-"""
-LogisticRegressionCV
-
-"""
-
-# Use scikit-learn's built-in make_classification method to generate syntehtic classificiation data
 
 # I used two informative features (Temp, Humidity) and one redundant feature 'Crime'
 
+N = 35040  # n_samples, 樣本數
+M = 3  # n_features, 特徵數(資料的維度)
+print("make_classification,", N, "個樣本, ", M, "個特徵")
+
 X, y = make_classification(
-    n_samples=35040,
+    n_samples=N,
     n_classes=2,
-    n_features=3,
+    n_features=M,
     n_informative=2,
     n_redundant=1,
     weights=[0.999, 0.001],
@@ -3826,16 +3825,13 @@ maxc = max(df["Crime"])
 df["Crime"] = 10 * df["Crime"] / maxc
 
 df.hist("Temp")
-plt.show()
-# array([[<matplotlib.axes._subplots.AxesSubplot object at 0x000002A1F3DE1358>]], dtype=object)
+show()
 
 df.hist("Humidity")
-plt.show()
-# array([[<matplotlib.axes._subplots.AxesSubplot object at 0x000002A1F5ECCE10>]], dtype=object)
+show()
 
 df.hist("Crime")
-plt.show()
-# array([[<matplotlib.axes._subplots.AxesSubplot object at 0x000002A1F63B6320>]], dtype=object)
+show()
 
 # Take a sum on the Boolean array with df['y']==1 to count the number of positive examples
 
@@ -3868,12 +3864,12 @@ plt.title(
     "Relative frequency of positive and negative classes\n in the balanced (under-sampled) dataset"
 )
 
-plt.show()
+show()
 
 log_model_balanced = LogisticRegressionCV(cv=5, class_weight="balanced")
 
 X_train, X_test, y_train, y_test = train_test_split(
-    df_balanced.drop("y", axis=1), df_balanced["y"], test_size=0.30
+    df_balanced.drop("y", axis=1), df_balanced["y"], test_size=0.2
 )
 
 from sklearn.preprocessing import MinMaxScaler
@@ -3927,7 +3923,7 @@ plt.grid(True)
 plt.ylabel("F1-score")
 plt.xlabel("Number of negative samples")
 
-plt.show()
+show()
 
 plt.scatter(
     n_neg, precision_scores, color="orange", edgecolor="black", alpha=0.6, s=100
@@ -3937,7 +3933,7 @@ plt.grid(True)
 plt.ylabel("Precision score")
 plt.xlabel("Number of negative samples")
 
-plt.show()
+show()
 
 plt.scatter(n_neg, recall_scores, color="blue", edgecolor="black", alpha=0.6, s=100)
 plt.title("Recall score as function of negative samples")
@@ -3945,10 +3941,11 @@ plt.grid(True)
 plt.ylabel("Recall score")
 plt.xlabel("Number of negative samples")
 
-plt.show()
+show()
 
 """
-So, precision goes down rapidly with more negative samples and so does F1-score. Recall is largely unaffected by mixing negative samples with the positive ones.
+So, precision goes down rapidly with more negative samples and so does F1-score.
+Recall is largely unaffected by mixing negative samples with the positive ones.
 """
 
 print("------------------------------------------------------------")  # 60個

@@ -1,9 +1,6 @@
-'''
+"""
 Case studies of ML
 ==================
-'''
-
-'''
 
 Default of credit card clients Data Set
 ---------------------------------------
@@ -20,34 +17,40 @@ This research aimed at the case of customers default payments in Taiwan.
 Attribute Information:
 
 This research employed a binary variable, default payment (Yes = 1, No = 0), as the response variable. This study reviewed the literature and used the following 23 variables as explanatory variables:
-
 - X1: Amount of the given credit (NT dollar): it includes both the individual consumer credit and his/her family (supplementary) credit.
-
 - X2: Gender (1 = male; 2 = female).
-
 - X3: Education (1 = graduate school; 2 = university; 3 = high school; 4 = others).
-
 - X4: Marital status (1 = married; 2 = single; 3 = others).
-
 - X5: Age (year).
-
 - X6 - X11: History of past payment. We tracked the past monthly payment records (from April to September, 2005) as follows: X6 = the repayment status in September, 2005; X7 = the repayment status in August, 2005;...;X11 = the repayment status in April, 2005. The measurement scale for the repayment status is: -1 = pay duly; 1 = payment delay for one month; 2 = payment delay for two months;...; 8 = payment delay for eight months; 9 = payment delay for nine months and above.
-
 - X12-X17: Amount of bill statement (NT dollar). X12 = amount of bill statement in September, 2005; X13 = amount of bill statement in August, 2005;...; X17 = amount of bill statement in April, 2005.
-
 - X18-X23: Amount of previous payment (NT dollar). X18 = amount paid in September, 2005; X19 = amount paid in August, 2005;...;X23 = amount paid in April, 2005.
+"""
 
-'''
+print("------------------------------------------------------------")  # 60個
 
-'''
-Read dataset
-~~~~~~~~~~~~
-'''
+# 共同
+import os
+import sys
+import time
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
 
 from __future__ import print_function
-
-import pandas as pd
-import numpy as np
 
 url = 'https://github.com/neurospin/pystatsml/tree/master/datasets/default%20of%20credit%20card%20clients.xls'
 data = pd.read_excel(url, skiprows=1, sheetname='Data')
@@ -63,15 +66,14 @@ print(df.columns)
 #       'default payment next month'],
 #      dtype='object')
 
-
-'''
+"""
 Data recoding of categorial factors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 - Categorial factors with 2 levels are kept
 - Categorial that are ordinal are kept
 - Undocumented values are replaced with NaN
-'''
+"""
+
 def describe_factor(x):
     ret = dict()
     for lvl in x.unique():
@@ -156,11 +158,7 @@ print(df.describe())
 #75%      4013.250000    4031.500000    4000.000000                    0.000000  
 #max    621000.000000  426529.000000  528666.000000                    1.000000  
 
-''' 
-Missing data
-~~~~~~~~~~~~
-'''
-
+# Missing data
 print(df.isnull().sum())
 #ID                              0
 #LIMIT_BAL                       0
@@ -197,29 +195,21 @@ print(df.isnull().sum().sum())
 describe_factor(df[target])
 {0: 23364, 1: 6636}
 
-'''
-Prepare Data set
-~~~~~~~~~~~~~~~~
-'''
+# Prepare Data set
 
 predictors = df.columns.drop(['ID', target])
 X = np.asarray(df[predictors])
 y = np.asarray(df[target])
 
-'''
-Univariate analysis
-~~~~~~~~~~~~~~~~~~~
-'''
+# Univariate analysis
 
-'''
+"""
 Machine Learning with SVM
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-
 On this large dataset, we can afford to set aside some test samples. This will
 also save computation time. However we will have to do some manual work. 
-'''
+"""
 
-import numpy as np
 from sklearn import datasets
 import sklearn.svm as svm
 from sklearn import preprocessing
@@ -347,12 +337,9 @@ print("SVM-Lasso, test bACC:%.2f" % balanced_acc(svc_lasso_cv, Xtes, yte))
 
 ## SKIP
 ###############################################################################
-'''
-Machine Learning: Logistic regression
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-'''
 
-import numpy as np
+# Machine Learning: Logistic regression
+
 from sklearn import datasets
 import sklearn.linear_model as lm
 from sklearn import preprocessing

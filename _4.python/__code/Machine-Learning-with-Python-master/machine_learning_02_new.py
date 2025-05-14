@@ -1472,7 +1472,6 @@ plt.ylabel("Accuracy")
 # plt.xlim(0, 110)
 show()
 
-''' no keras in kilo
 # Neural Networks (Multi-layer perceptron)
 
 import keras
@@ -1910,7 +1909,7 @@ plt.bar(
 plt.xticks()
 plt.yticks()
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2629,7 +2628,6 @@ plt.ylim(0.7, 0.9)
 # plt.xlim(0, 110)
 show()
 
-''' no keras in kilo
 # Neural Networks (Multi-layer perceptron)
 
 import keras
@@ -3060,7 +3058,7 @@ plt.ylabel("Accuracy")
 plt.ylim(0.5, 0.9)
 # plt.xlim(0, 110)
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

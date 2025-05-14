@@ -11,11 +11,11 @@ pclass          Passenger Class
 name            Name
 sex             Sex
 age             Age
-sibsp           Number of Siblings/Spouses Aboard
+sibsp           Number of Siblings(兄弟姊妹)/Spouses(配偶) Aboard
 parch           Number of Parents/Children Aboard
 ticket          Ticket Number
-fare            Passenger Fare
-cabin           Cabin
+fare            Passenger Fare票價
+cabin           Cabin艙
 embarked        Port of Embarkation(POE) # 登船港
                 (C = Cherbourg(瑟堡); Q = Queenstown(皇后鎮); S = Southampton(南安普敦))
 """
