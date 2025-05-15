@@ -574,38 +574,7 @@ for char in ascii:
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-def msg(str):
-    sys.stderr.write(str + "\n")
-
-
-longlist = "-l"
-filename = "test01_io.py"
-
-sts = os.system("ls " + longlist + " " + filename)
-if sts:
-    msg('"ls -l" exit status: ' + repr(sts))
-
-sts = os.system("ls " + filename)
-if sts:
-    msg('"ls -l" exit status: ' + repr(sts))
-
-sts = os.system("dir")
-if sts:
-    msg('"ls -l" exit status: ' + repr(sts))
-else:
-    print(sts)
-
-
-print("------------------------------------------------------------")  # 60個
-
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
 
 err = sys.stderr.write
 dbg = err

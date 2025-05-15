@@ -20,10 +20,17 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+
+def show():
+    plt.tight_layout()
+    plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
-"""
+
 # == Parameters =======================================================================
 BLUR = 21
 CANNY_THRESH_1 = 10
@@ -70,7 +77,7 @@ plt.subplot(236)
 plt.title("Erode")
 plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
 
-plt.show()
+show()
 
 # cv2存圖
 # cv2.imwrite('person-masked.jpg', masked)
@@ -81,18 +88,18 @@ print("------------------------------------------------------------")  # 60個
 c_red, c_green, c_blue = cv2.split(image)
 
 plt.imshow(cv2.cvtColor(c_red, cv2.COLOR_BGR2RGB))
-plt.show()
+show()
 
 plt.imshow(cv2.cvtColor(c_green, cv2.COLOR_BGR2RGB))
-plt.show()
+show()
 
 plt.imshow(cv2.cvtColor(c_blue, cv2.COLOR_BGR2RGB))
-plt.show()
+show()
 
 # merge with mask got on one of a previous steps
 # img_a = cv2.merge((c_red, c_green, c_blue, mask.astype('float32') / 255.0))
 # plt.imshow(img_a)
-# plt.show()
+# show()
 
 # save to disk
 # cv2.imwrite('image/girl_1.png', img_a*255)
@@ -121,7 +128,7 @@ ret, th1 = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
 
 plt.imshow(cv2.cvtColor(th1, cv2.COLOR_BGR2RGB))
 
-plt.show()
+show()
 
 plt.figure("影像處理", figsize=(16, 12))
 plt.subplot(121)
@@ -132,8 +139,7 @@ plt.subplot(122)
 plt.title("th1")
 plt.imshow(cv2.cvtColor(th1, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -150,7 +156,7 @@ edges = cv2.Canny(blur_gray, threshold_1, threshold_2)
 plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
 plt.title("Canny")
 
-plt.show()
+show()
 
 plt.figure("影像處理", figsize=(16, 12))
 plt.subplot(121)
@@ -161,8 +167,7 @@ plt.subplot(122)
 plt.title("Canny")
 plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 
 print("------------------------------------------------------------")  # 60個
@@ -191,8 +196,7 @@ sobel_image = sobel(gray_image)
 plt.imshow(cv2.cvtColor(sobel_image, cv2.COLOR_BGR2RGB))
 plt.title("Sobel")
 
-plt.show()
-
+show()
 
 plt.figure("影像處理", figsize=(16, 12))
 plt.subplot(121)
@@ -203,8 +207,7 @@ plt.subplot(122)
 plt.title("Sobel")
 plt.imshow(cv2.cvtColor(sobel_image, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -272,8 +275,7 @@ plt.subplot(236)
 plt.title("Sobel 效果 5 先x 再y 方向")
 plt.imshow(cv2.cvtColor(sobelxy, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -302,8 +304,7 @@ plt.subplot(133)
 plt.title("Sobel xy11")
 plt.imshow(cv2.cvtColor(sobelxy11, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -343,8 +344,7 @@ plt.subplot(224)
 plt.title("Scharr 效果 3")
 plt.imshow(cv2.cvtColor(scharrxy, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -366,8 +366,7 @@ plt.subplot(122)
 plt.title("Scharr 效果")
 plt.imshow(cv2.cvtColor(scharrxy11, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -394,8 +393,7 @@ plt.subplot(133)
 plt.title("Sobel y")
 plt.imshow(cv2.cvtColor(scharry, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -428,8 +426,7 @@ plt.subplot(133)
 plt.title("Scharr xy")
 plt.imshow(cv2.cvtColor(scharrxy, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -450,8 +447,7 @@ plt.subplot(122)
 plt.title("Laplacian")
 plt.imshow(cv2.cvtColor(Laplacian, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -476,8 +472,7 @@ plt.subplot(122)
 plt.title("輸出邊緣和結構信息")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -507,7 +502,7 @@ for i in range(n):
     plt.title("輪廓 " + str(i + 1))
     plt.imshow(cv2.cvtColor(contoursImg[i], cv2.COLOR_BGR2RGB))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -536,8 +531,7 @@ plt.subplot(133)
 plt.title("location")
 plt.imshow(cv2.cvtColor(loc, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -572,7 +566,7 @@ print("觀察各個輪廓的面積:")
 for i in range(n):
     print("輪廓" + str(i) + "的面積:%d" % cv2.moments(contours[i])["m00"])
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -602,7 +596,7 @@ for i in range(n):
     plt.title("輪廓 " + str(i + 1))
     plt.imshow(cv2.cvtColor(contoursImg[i], cv2.COLOR_BGR2RGB))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -635,7 +629,7 @@ for i in range(n):
         plt.title("輪廓 " + str(i + 1))
         plt.imshow(cv2.cvtColor(contoursImg[i], cv2.COLOR_BGR2RGB))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -751,10 +745,17 @@ plt.subplot(133)
 plt.title("original3")
 plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
+
+# Opencv之利用matchshape算子实现简单的形状匹配
+"""
+使用OpenCV的matchShape算子进行形状匹配。
+通过将待识别图像和模板图像转换为灰度并进行阈值处理，然后找到轮廓，
+最后通过比较轮廓的Hu不变矩来确定匹配度。匹配分值越小，轮廓越相似。
+matchShapes函数适用于识别大物体的形状，但对纹理复杂的图像识别率较低。
+"""
 
 # --------------讀取3幅原始圖像--------------------
 image1 = cv2.imread("data/cs1.bmp")
@@ -765,21 +766,23 @@ image3 = cv2.imread("data/cc.bmp")
 print("image1.shape=", image1.shape)
 print("image2.shape=", image2.shape)
 print("image3.shape=", image3.shape)
+
 # --------------色彩空間轉換--------------------
 gray1 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)
 gray2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
 gray3 = cv2.cvtColor(image3, cv2.COLOR_BGR2GRAY)
+
 # -------------進行Hu矩匹配--------------------
 ret0 = cv2.matchShapes(gray1, gray1, 1, 0.0)
 ret1 = cv2.matchShapes(gray1, gray2, 1, 0.0)
 ret2 = cv2.matchShapes(gray1, gray3, 1, 0.0)
+
 # --------------打印差值--------------------
 print("相同圖像的matchShape=", ret0)
 print("相似圖像的matchShape=", ret1)
 print("不相似圖像的matchShape=", ret2)
 
 # --------------顯示3幅原始圖像--------------------
-
 plt.figure("影像處理7", figsize=(16, 12))
 
 plt.subplot(131)
@@ -794,9 +797,96 @@ plt.subplot(133)
 plt.title("original3")
 plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
+print("------------------------------------------------------------")  # 60個
+
+print("opencv 輪廓比對")
+
+img_patterns = cv2.imread("data/patterns.png", cv2.IMREAD_GRAYSCALE)
+patterns, _ = cv2.findContours(img_patterns, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+img_targets = cv2.imread("data/targets.png", cv2.IMREAD_GRAYSCALE)
+targets, _ = cv2.findContours(img_targets, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+patterns = [pattern - np.min(pattern, 0, keepdims=True) for pattern in patterns]
+targets = [target - np.min(target, 0, keepdims=True) for target in targets]
+
+patterns_simple = [cv2.approxPolyDP(pattern, 5, True) for pattern in patterns]
+targets_simple = [cv2.approxPolyDP(target, 8, True) for target in targets]
+
+
+for method in [1, 2, 3]:
+    method_str = "CONTOURS_MATCH_I{}".format(method)
+    method = getattr(cv2, method_str)
+    scores = [
+        cv2.matchShapes(targets_simple[0], patterns_simple[pidx], method, 0)
+        for pidx in range(5)
+    ]
+    print(method_str, ", ".join("{: 8.4f}".format(score) for score in scores))
+
+"""
+CV_CONTOURS_MATCH_I1  11.3737,   0.3456,   0.0289,   1.0495,   0.0020
+CV_CONTOURS_MATCH_I2   4.8051,   2.2220,   0.0179,   0.3624,   0.0013
+CV_CONTOURS_MATCH_I3   0.9164,   0.4778,   0.0225,   0.4552,   0.0016
+"""
+
+# %figonly=使用`matchShapes()`比較由`approxPolyDP()`近似之後的輪廓
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.set_aspect("equal")
+
+width = 180
+for tidx, (target, target_simple) in enumerate(zip(targets, targets_simple)):
+    scores = []
+    texts = []
+    for pidx, (pattern, pattern_simple) in enumerate(zip(patterns, patterns_simple)):
+        index = np.s_[:, 0, :]
+        pattern2 = pattern[index]
+        target2 = target[index]
+        pattern_simple2 = pattern_simple[index]
+        target_simple2 = target_simple[index]
+
+        x0 = pidx * width + width
+        y0 = tidx * width + width
+
+        if tidx == 0:
+            pattern_poly = plt.Polygon(pattern2 + [x0, 0], color="black", alpha=0.6)
+            ax.add_patch(pattern_poly)
+            text = ax.text(x0 + width * 0.3, -50, str(pidx), fontsize=14, ha="center")
+        if pidx == 0:
+            target_poly = plt.Polygon(target2 + [0, y0], color="green", alpha=0.6)
+            ax.add_patch(target_poly)
+            text = ax.text(-50, y0 + width * 0.3, str(tidx), fontsize=14, ha="center")
+
+        pattern_simple_poly = plt.Polygon(
+            pattern_simple2 + [x0, 0], facecolor="none", alpha=0.6
+        )
+        ax.add_patch(pattern_simple_poly)
+        target_simple_poly = plt.Polygon(
+            target_simple2 + [0, y0], facecolor="none", alpha=0.6
+        )
+        ax.add_patch(target_simple_poly)
+
+        score = cv2.matchShapes(target_simple, pattern_simple, cv2.CONTOURS_MATCH_I3, 0)
+        text = ax.text(
+            x0 + width * 0.3,
+            y0 + width * 0.2,
+            "{:5.4f}".format(score),
+            ha="center",
+            va="center",
+            fontsize=16,
+        )
+        scores.append(score)
+        texts.append(text)
+    best_index = np.argmin(scores)
+    texts[best_index].set_color("red")
+
+ax.relim()
+ax.set_axis_off()
+ax.autoscale()
+
+show()
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # ---------------讀取并顯示原始圖像------------------
@@ -849,8 +939,7 @@ plt.subplot(122)
 plt.title("result")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -885,12 +974,11 @@ plt.subplot(122)
 plt.title("result")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cc.bmp")
@@ -915,8 +1003,7 @@ plt.subplot(122)
 plt.title("result")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -945,8 +1032,7 @@ plt.subplot(122)
 plt.title("result")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -963,7 +1049,6 @@ plt.subplot(121)
 plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
@@ -978,8 +1063,7 @@ plt.subplot(122)
 plt.title("result")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1011,8 +1095,7 @@ plt.subplot(122)
 plt.title("result")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
+show()
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1774,3 +1857,14 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+matchShapes

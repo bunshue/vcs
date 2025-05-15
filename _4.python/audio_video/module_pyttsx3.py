@@ -9,6 +9,37 @@ import pyttsx3
 
 print("------------------------------------------------------------")  # 60個
 
+# 設定語音引擎
+engine = pyttsx3.init()
+engine.setProperty("rate", 145)  # 設定語速
+engine.setProperty("volume", 1.0)  # 設定音量 (1.0 為最大值)
+
+# 向使用者解釋程序
+engine.say(
+    "當螢幕提示時，請輸入你的訊息。\
+           直到聽到提示喊停為止。"
+)
+engine.runAndWait()
+
+engine.stop()  # 停止 pyttsx3 引擎
+
+print("------------------------------------------------------------")  # 60個
+
+engine = pyttsx3.init()
+
+test_txt="I am a good student 新手一定要玩的MNIST手寫數字辨識"
+
+voices = engine.getProperty('voices')
+rate = engine.getProperty('rate')
+engine.setProperty('rate', rate-30)                                                     #you can change the rate here
+for voice in voices:
+    print(voice)
+    engine.setProperty('voice',voice.id)
+    engine.say(test_txt)       
+    engine.runAndWait()
+
+print("------------------------------------------------------------")  # 60個
+
 text = "Welcome to the United Stated and have a nice day."
 
 engine = pyttsx3.init()
@@ -71,8 +102,6 @@ engine.stop()  # 停止 pyttsx3 引擎
 
 print("------------------------------------------------------------")  # 60個
 
-import pyttsx3
-
 engine = pyttsx3.init("sapi5")
 voices = engine.getProperty("voices")
 engine.setProperty("voice", voices[0].id)
@@ -94,8 +123,21 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+

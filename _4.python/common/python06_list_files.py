@@ -2599,7 +2599,6 @@ video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
 cmd = "D:/___backup/PotPlayer/PotPlayerMini64.exe cccc.dpl"
 os.system(cmd)
 
-
 cmd = video_player_path_sugar + " " + video_filename
 print(cmd)
 os.system(cmd)
@@ -2841,42 +2840,9 @@ sys.exit()
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-"""
-os.system 整理
-
-import os
-
-開啟外部程式
-#rc = os.system("nasm -f win64 -DNEAR -Ox -g ms\\uptable.asm")
-
-rc = os.system('calc')
-
-os.system('cls') #在cmd視窗下清除螢幕
-
-os.system('cls' if os.name == 'nt' else 'clear')
-
-
-
-
-file=cur_path + "\dir2\copyfile.py" 
-os.system("notepad " + file)  # 以記事本開啟 copyfile.py 檔
-
-os.system("cls")  # 清除螢幕
-os.system("mkdir dir2")  # 建立 dir2 目錄
-os.system("copy ossystem.py dir2\copyfile.py") # 複製檔案 
-file=cur_path + "\dir2\copyfile.py" 
-os.system("notepad " + file)  # 以記事本開啟 copyfile.py 檔
-
-
-
-
-#os.system("notepad " + filename_r)
-
-"""

@@ -952,7 +952,6 @@ help(random.choice)
 
 print("------------------------------------------------------------")  # 60個
 
-
 # 用預設程式開啟檔案
 # os.system('cccc.mp3')
 
@@ -1099,13 +1098,11 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 os.system(filename)  # 用系統內建的程式開啟檔案
-
 
 """
 import glob,cv2
@@ -1151,3 +1148,129 @@ os.system("notepad " + file)  # 以記事本開啟 copyfile.py 檔
 
 
 os.system("leaks %d" % os.getpid())
+
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+os.system 整理
+
+import os
+
+開啟外部程式
+#rc = os.system("nasm -f win64 -DNEAR -Ox -g ms\\uptable.asm")
+
+rc = os.system('calc')
+
+os.system('cls') #在cmd視窗下清除螢幕
+
+os.system('cls' if os.name == 'nt' else 'clear')
+
+file=cur_path + "\dir2\copyfile.py" 
+os.system("notepad " + file)  # 以記事本開啟 copyfile.py 檔
+
+os.system("cls")  # 清除螢幕
+os.system("mkdir dir2")  # 建立 dir2 目錄
+os.system("copy ossystem.py dir2\copyfile.py") # 複製檔案 
+file=cur_path + "\dir2\copyfile.py" 
+os.system("notepad " + file)  # 以記事本開啟 copyfile.py 檔
+
+#os.system("notepad " + filename_r)
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+def msg(str):
+    sys.stderr.write(str + "\n")
+
+
+longlist = "-l"
+filename = "test01_io.py"
+
+sts = os.system("ls " + longlist + " " + filename)
+if sts:
+    msg('"ls -l" exit status: ' + repr(sts))
+
+sts = os.system("ls " + filename)
+if sts:
+    msg('"ls -l" exit status: ' + repr(sts))
+
+sts = os.system("dir")
+if sts:
+    msg('"ls -l" exit status: ' + repr(sts))
+else:
+    print(sts)
+
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+如何将Python调用的os.system命令的错误信息反馈回来（Window）
+本文探讨了Python中os.system与os.popen两种执行外部命令的方法。os.system仅反馈执行成功与否，无法直接获取错误信息；os.popen返回命令输出，但非同步且无法直接反馈错误。通过重定向输出至文件，可以解决获取错误信息的问题。
+
+os.system只能反馈执行是否成功的标志位，想要获取错误信息，只能使用重定向其输出结果到文件中。 
+
+"""
+
+"""
+os.popen方式：
+返回值：cmd的输出信息。本身是异步调用，返回为一个Io文件指针，读取IO才会导致同步阻塞
+"""
+
+import os
+
+cmd = "dir"
+f = os.popen(cmd)
+print(f.read())
+
+"""
+如果正确输出可以看到信息。但是有两个问题：
+1.正确的输出信息不是同步反馈的
+2.如果调用该命令出错，返回信息为空，并不返回错误信息。
+"""
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+hostname = "google.com"
+response = os.system("ping -c 3 -i 1 " + hostname)
+print(response)
+
+response = os.popen(f"ping -c 3 -i 1 {hostname}").read()
+print(response)
+
+
+
+"""
+
