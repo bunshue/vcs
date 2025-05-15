@@ -36,8 +36,17 @@ from matplotlib.colors import ListedColormap
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
+
+
+def get_dataset(N=20, sigma=0.1):
+    """Generate N training samples"""
+    # X is a set of random points from [-1, 1]
+    X = 2 * np.random.sample(N) - 1
+    # Y are corresponding target values (with noise included)
+    Y = np.array([math.sin(math.pi * x) + np.random.normal(0, sigma) for x in X])
+    return X, Y
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1774,27 +1783,6 @@ for _ in range(50):
     )
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-from math import sin, cos, pi, exp
-
-
-def get_dataset(N=20, sigma=0.1):
-    """Generate N training samples"""
-    # X is a set of random points from [-1, 1]
-    X = 2 * np.random.sample(N) - 1
-    # Y are corresponding target values (with noise included)
-    Y = np.array([sin(pi * x) + np.random.normal(0, sigma) for x in X])
-
-    return X, Y
-
-
-'''
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -1895,7 +1883,9 @@ from tensorflow.examples.tutorials.mnist import input_data
 # tf.logging.set_verbosity(tf.logging.ERROR)
 
 # one hot -> label 0-9 -> 0...01, 0...10, ...
-mnist = input_data.read_data_sets("./tmp_mnist/", one_hot=True)
+mnist = input_data.read_data_sets(
+    "C:/_git/vcs/_4.python/ml/data/MNIST_data/", one_hot=True
+)
 
 # Create placeholders for tensors to fed
 
@@ -2180,14 +2170,8 @@ plt.tight_layout()
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-'''
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-'''
 # sugar不能用 import theano 失敗
 
 """
@@ -2303,52 +2287,23 @@ plt.plot(range(len(costs)), costs)
 
 plt.tight_layout()
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# Logistic regression
-
-p_ = np.arange(0.01, 0.99, 0.01)
-
-plt.title("Logit function")
-plt.xlabel("p")
-plt.ylabel("$\ln(p/(1-p))$")
-
-plt.plot(p_, np.log(p_ / (1 - p_)))
-show()
-
 print("------------------------------------------------------------")  # 60個
 
 x_ = np.arange(-10, 10, 0.1)
 
-plt.title("Logistic function")
+plt.plot(x_, 1 / (1 + np.exp(-x_)))
+
 plt.xlabel("x")
 plt.ylabel("$1/(1 + e^{-x})$")
+plt.title("Logistic function 邏輯斯函數")
 
-plt.plot(x_, 1 / (1 + np.exp(-x_)))
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# Cost function
-
-N = 50  # number of students per class
-
-X = np.concatenate((np.random.random((N)) * 35, 30 + np.random.random((N)) * 25))
-
-Y = np.concatenate(([0] * N, [1] * N))
-
-plt.xlabel("Study time [h]")
-plt.ylabel("Success")
-
-plt.scatter(X, Y)
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-'''
 # Once again lets use theano
 
 import theano
@@ -2549,15 +2504,13 @@ for i in range(4):
     ax.scatter(X_test.T[0], X_test.T[1], probs.T[i], marker=".")
 
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# Neural Networks
+# Here are some helpful functions to draw neural networks
 """
-Neural Networks
-    Here are some helpful functions to draw neural networks
-"""
-
 radius = 0.3
 
 arrow_kwargs = dict(head_width=0.05, fc="black")
@@ -2649,88 +2602,13 @@ def draw_net(input_size, output_size, hidden_layers=[], w=6, h=4):
 
 draw_net(3, 1)
 
-
-def binary_step(x):
-    return 0 if x < 0 else 1
-
-
-def logistic(x):
-    return 1 / (1 + math.exp(-x))
-
-
-def tanh(x):
-    return math.tanh(x)
-
-
-def relu(x):
-    return 0 if x < 0 else x
-
-
-x = np.linspace(-5, 5, 100)
-
-bs = [binary_step(x_) for x_ in x]
-lf = [logistic(x_) for x_ in x]
-th = [tanh(x_) for x_ in x]
-re = [relu(x_) for x_ in x]
-
-_, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(10, 10))
-
-ax1.set_title("Binary step")
-ax2.set_title("TanH")
-ax3.set_title("Logistic")
-ax4.set_title("ReLU")
-
-ax1.plot(x, bs)
-ax2.plot(x, lf)
-ax3.plot(x, th)
-ax4.plot(x, re)
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# Neural networks
-
 draw_net(3, 1, [5], w=9, h=6)
 
 draw_net(3, 1, [5, 7, 9, 5], w=14, h=10)
 
 draw_net(3, 4, [5, 7, 9, 5], w=14, h=10)
 
-# Backpropagation
-
 draw_net(3, 2, [3], w=9, h=4)
-
-print("------------------------------------------------------------")  # 60個
-
-# AND, OR vs XOR
-
-X = [[0, 0], [0, 1], [1, 0], [1, 1]]
-Y_and = [0, 0, 0, 1]
-Y_or = [0, 1, 1, 1]
-Y_xor = [0, 1, 1, 0]
-
-titles = ("AND", "OR", "XOR")
-
-for i, Y in enumerate([Y_and, Y_or, Y_xor]):
-    ax = plt.subplot(131 + i)
-
-    ax.set_xlim([-0.5, 1.5])
-    ax.set_ylim([-0.5, 1.5])
-
-    ax.set_aspect("equal")
-
-    plt.title(titles[i])
-    plt.scatter(*zip(*X), c=Y)
-
-    if i == 0:
-        plt.plot([0, 1.5], [1.5, 0])
-    elif i == 1:
-        plt.plot([-0.5, 1], [1, -0.5])
-    else:
-        plt.text(0.5, 0.5, s="?", ha="center", va="center")
-
-plt.tight_layout()
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2873,7 +2751,7 @@ X, Y = get_dataset(100, 0.25)
 draw_net(2, 1, [4], w=10)
 
 print("最後一次出現 draw_net(")
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2935,10 +2813,10 @@ print("------------------------------------------------------------")  # 60個
 
 """
 MNIST
-    THE MNIST DATABASE of handwritten digits
-    The MNIST database of handwritten digits, available from this page, has a training set of 60,000 examples, and a test set of 10,000 examples. It is a subset of a larger set available from NIST. The digits have been size-normalized and centered in a fixed-size image.
-    It is a good database for people who want to try learning techniques and pattern recognition methods on real-world data while spending minimal efforts on preprocessing and formatting.
-    We can grab MNIST dataset using tensorflow.examples.tutorials.mnist
+THE MNIST DATABASE of handwritten digits
+The MNIST database of handwritten digits, available from this page, has a training set of 60,000 examples, and a test set of 10,000 examples. It is a subset of a larger set available from NIST. The digits have been size-normalized and centered in a fixed-size image.
+It is a good database for people who want to try learning techniques and pattern recognition methods on real-world data while spending minimal efforts on preprocessing and formatting.
+We can grab MNIST dataset using tensorflow.examples.tutorials.mnist
 """
 
 import tensorflow as tf
@@ -2954,7 +2832,9 @@ from tensorflow.examples.tutorials.mnist import input_data
 tf.logging.set_verbosity(tf.logging.ERROR)
 
 # one hot -> label 0-9 -> 0...01, 0...10, ...
-mnist = input_data.read_data_sets("./tmp_mnist/", one_hot=True)
+mnist = input_data.read_data_sets(
+    "C:/_git/vcs/_4.python/ml/data/MNIST_data/", one_hot=True
+)
 
 print(mnist.train.images.shape)
 
@@ -3060,7 +2940,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Regularization
+print("Regularization")
 
 # plot a sample
 X, Y = get_dataset(50)

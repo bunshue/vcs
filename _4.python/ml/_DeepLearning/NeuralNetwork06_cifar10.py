@@ -561,7 +561,7 @@ from keras.layers import Convolution2D
 from keras.layers import MaxPooling2D
 from keras.layers import Flatten
 from keras.layers import Dropout
-from tensorflow.python.keras.utils import np_utils
+from tensorflow.keras.utils import to_categorical  # One-Hot Encoding
 
 batch_size = 100
 hidden_neurons = 200
@@ -570,8 +570,8 @@ epochs = 20
 
 (X_train, Y_train), (X_test, Y_test) = cifar10.load_data()
 
-Y_train = np_utils.to_categorical(Y_train, classes)
-Y_test = np_utils.to_categorical(Y_test, classes)
+Y_train = to_categorical(Y_train, classes)
+Y_test = to_categorical(Y_test, classes)
 
 model = Sequential()
 model.add(Convolution2D(32, (3, 3), input_shape=(32, 32, 3)))

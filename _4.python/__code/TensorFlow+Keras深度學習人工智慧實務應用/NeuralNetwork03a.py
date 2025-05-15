@@ -813,9 +813,7 @@ print("Keras_Mnist_MLP_h1000")
 import tensorflow as tf
 import tensorflow.examples.tutorials.mnist.input_data as input_data
 
-mnist = input_data.read_data_sets(
-    "C:/_git/vcs/_4.python/ml/data/MNIST_data/", one_hot=True
-)
+mnist = input_data.read_data_sets("C:/_git/vcs/_4.python/ml/data/MNIST_data/", one_hot=True)
 
 print(
     "train images     :", mnist.train.images.shape, "labels:", mnist.train.labels.shape
@@ -3614,9 +3612,8 @@ sys.exit()
 # from keras.utils import np_utils
 # np_utils.to_categorical(y_Train)
 改成
-y_Train_OneHot = tf.keras.utils.to_categorical(y_train_label)
-# from keras.utils import np_utils
-# np_utils.to_categorical(y_Train)
+from tensorflow.keras.utils import to_categorical  # One-Hot Encoding
+y_Train_OneHot = to_categorical(y_train_label)
 """
 
 

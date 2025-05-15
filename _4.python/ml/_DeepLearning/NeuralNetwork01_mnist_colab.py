@@ -155,9 +155,6 @@ from tensorflow.keras import optimizers
 from tensorflow.keras.models import load_model
 from tensorflow.keras.utils import to_categorical  # One-Hot Encoding
 
-# from tensorflow.python.keras.utils import np_utils
-# np_utils.to_categorical  # 用來後續將 label 標籤轉為 one-hot-encoding
-
 from keras import utils
 
 # from tensorflow.keras.optimizers import SGD  # 優化器

@@ -1,7 +1,6 @@
 """
 manifold
-
-# Manifold(岐管, 流形) learning: non-linear dimension reduction
+Manifold(岐管, 流形) learning: non-linear dimension reduction
 
 """
 print("------------------------------------------------------------")  # 60個
@@ -48,12 +47,11 @@ def show():
     pass
 
 
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('多维缩放（Multiple Dimensional Scaling，MDS）')
-print('原本 1797X64 轉成 100X2')
+print("多维缩放（Multiple Dimensional Scaling，MDS）")
+print("原本 1797X64 轉成 100X2")
 X, _ = datasets.load_digits(return_X_y=True)
 print(X.shape)  # (1797, 64)
 
@@ -125,7 +123,7 @@ print(model.fit_transform(digits.data))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
+
 # load images of the digits 0 through 5 and visualize several of them
 
 digits = datasets.load_digits(n_class=6)
@@ -502,25 +500,6 @@ for i, perplexity in enumerate(perplexities):
 
 show()
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-""" import fail
-
-from sklearn.datasets import make_swiss_roll
-
-data, color = make_swiss_roll(n_samples=1500)
-n_neighbors = 12 # 近傍點の數 
-n_components = 2 # 削減後の次元數
-
-model = LocallyLinearEmbedding(n_neighbors=n_neighbors,
-
-n_components=n_components)
-
-model.fit(data)  # 學習訓練.fit
-
-print(model.transform(data)) # 変換したデータ
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

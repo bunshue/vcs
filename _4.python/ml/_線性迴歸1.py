@@ -61,23 +61,6 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 
-print("測試 PolynomialFeatures")
-
-# 使用 PolynomialFeatures 產生多項式
-from sklearn.preprocessing import PolynomialFeatures
-
-X = np.array([[1.0, 2.0, 3.0]])
-
-for DEGREE in range(5):
-    print(DEGREE, "次方")
-    poly = PolynomialFeatures(degree=DEGREE)  # DEGREE 次方
-    print("原陣列 :", X)
-    X_poly = poly.fit_transform(X)  # 轉換
-    print("轉換後 :", X_poly)
-    print(X_poly.shape)
-
-print("------------------------------------------------------------")  # 60個
-
 # 簡單資料 y = x
 xx = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 xx2d = np.array(
@@ -3439,3 +3422,21 @@ x = np.array([1, 2, 3, 4, 5])
 y = np.array([2, 3, 4, 5, 6])
 X = x.reshape((-1, 1))
 """
+
+
+print("測試 PolynomialFeatures")
+
+# 使用 PolynomialFeatures 產生多項式
+from sklearn.preprocessing import PolynomialFeatures
+
+X = np.array([[1.0, 2.0, 3.0]])
+
+for DEGREE in range(4):
+    print(DEGREE, "次方")
+    poly = PolynomialFeatures(degree=DEGREE)  # DEGREE 次方
+    print("原陣列 :", X)
+    X_poly = poly.fit_transform(X)  # 轉換
+    print("轉換後 :", X_poly)
+    # print(X_poly.shape)
+
+print("------------------------------------------------------------")  # 60個

@@ -635,18 +635,24 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 瑞士捲
-"""
-===================================
-Swiss Roll reduction with LLE
-===================================
-An illustration of Swiss Roll reduction
-with locally linear embedding
-"""
+# Swiss Roll reduction with LLE(locally linear embedding)
+# Locally linear embedding of the swiss roll
 
-# This import is needed to modify the way figure behaves
-from mpl_toolkits.mplot3d import Axes3D
+data, color = datasets.make_swiss_roll(n_samples=1500)
+n_neighbors = 12  # 近傍點の數
+n_components = 2  # 削減後の次元數
 
-# ----------------------------------------------------------------------
+model = LocallyLinearEmbedding(n_neighbors=n_neighbors, n_components=n_components)
+
+model.fit(data)  # 學習訓練.fit
+
+print(model.transform(data))  # 変換したデータ
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 瑞士捲
+# Swiss Roll reduction with LLE(locally linear embedding)
 # Locally linear embedding of the swiss roll
 
 from sklearn import manifold

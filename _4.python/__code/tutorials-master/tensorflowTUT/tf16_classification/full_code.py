@@ -9,8 +9,8 @@ Please note, this code is only for python 3+. If you are using python 2+, please
 from __future__ import print_function
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
-# number 1 to 10 data
-mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
+
+mnist = input_data.read_data_sets("C:/_git/vcs/_4.python/ml/data/MNIST_data/", one_hot=True)
 
 def add_layer(inputs, in_size, out_size, activation_function=None,):
     # add one more layer and return the output of this layer

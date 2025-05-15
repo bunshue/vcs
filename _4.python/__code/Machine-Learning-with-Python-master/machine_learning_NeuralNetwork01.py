@@ -740,8 +740,6 @@ from keras.layers import Activation
 
 from keras.optimizers import SGD
 
-# from keras.utils import np_utils
-
 # Building the model
 model = Sequential()
 model.add(Dense(25, activation="linear", input_dim=1))

@@ -1476,7 +1476,6 @@ show()
 
 import keras
 
-# from keras.utils import np_utils
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Dropout
@@ -2632,7 +2631,6 @@ show()
 
 import keras
 
-# from keras.utils import np_utils
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Dropout

@@ -155,9 +155,6 @@ from tensorflow.keras import optimizers
 from tensorflow.keras.models import load_model
 from tensorflow.keras.utils import to_categorical  # One-Hot Encoding
 
-# from tensorflow.python.keras.utils import np_utils
-# np_utils.to_categorical  # 用來後續將 label 標籤轉為 one-hot-encoding
-
 from keras import utils
 
 # from tensorflow.keras.optimizers import SGD  # 優化器
@@ -437,8 +434,7 @@ def get_elapsed_time():
     print("所花時間 : {} 秒".format(timeElapsed))
     time_st = time.time()
 
-
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 print("準備工作 ST")
 print("------------------------------------------------------------")  # 60個
@@ -452,6 +448,7 @@ from tensorflow.keras.datasets import mnist
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 """
+"""
 # 標準 2 本地檔案
 mnist_npz_filename = "D:/_git/vcs/_big_files/mnist.npz"
 
@@ -459,6 +456,7 @@ mnist = np.load(mnist_npz_filename)
 x_train, y_train = mnist["x_train"], mnist["y_train"]
 x_test, y_test = mnist["x_test"], mnist["y_test"]
 mnist.close()
+"""
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -619,7 +617,7 @@ print(y_train[0])
 print("------------------------------------------------------------")  # 60個
 print("準備工作 SP")
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 get_elapsed_time()
 
 # david : 簡單又正確率高, 以此為準
@@ -2648,12 +2646,13 @@ print(type(db_train))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-import tensorflow.examples.tutorials.mnist.input_data as input_data
- 
-mnist = input_data.read_data_sets("./database2/", one_hot=True)#相对路径
-#tensorflow.contrib.learn.python.learn.datasets.mnist.DataSet
-print(type(mnist))#<class "tensorflow.contrib.learn.python.learn.datasets.base.Datasets">
+import tensorflow as tf
+from tensorflow.examples.tutorials.mnist import input_data
+
+mnist = input_data.read_data_sets("C:/_git/vcs/_4.python/ml/data/MNIST_data/", one_hot=True)
+print(mnist.train.images.shape)
+
+print(type(mnist))
  
 batch = mnist.train.next_batch(100)
 print(type(batch))#<class "tuple">
@@ -2662,7 +2661,6 @@ x=mnist.train.images
 y=mnist.train.labels
 print(type(x),x.shape)#<class "numpy.ndarray"> (55000, 784)
 print(type(y),y.shape)#<class "numpy.ndarray"> (55000, 10)
-"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3317,6 +3315,7 @@ model.compile(optimizer=sgd, loss="mse", metrics=["accuracy"])
 # 而輸出 (y) 當然就是「正確答案」
 
 # mnist = input_data.read_data_sets("MNIST_data/")
+# mnist = input_data.read_data_sets("C:/_git/vcs/_4.python/ml/data/MNIST_data/", one_hot=True)
 
 plt.imshow(image, "gray")
 # plt.imshow(X_test[i].reshape((28,28)), "gray")
