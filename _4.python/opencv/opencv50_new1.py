@@ -5685,4 +5685,3 @@ cv2.destroyAllWindows()
 # cv2.imwrite('building_clahe.png', cl1)
 # cv2.imwrite('tmp_image.png', image1)
 # cv2.imwrite('tmp_image.png', mona)
-

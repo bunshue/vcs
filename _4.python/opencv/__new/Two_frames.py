@@ -35,7 +35,7 @@ while True:
     ret, frame = cap.read()  # 從影片擷取一張影像
     frameNum += 1
     if ret == True:
-        frame = cv2.resize(frame, (W//3, H//3))
+        frame = cv2.resize(frame, (W // 3, H // 3))
         tempframe = frame
         if frameNum == 1:  # 第1張圖
             previousframe = cv2.cvtColor(tempframe, cv2.COLOR_BGR2GRAY)
@@ -58,7 +58,7 @@ while True:
                 break
         previousframe = cv2.cvtColor(tempframe, cv2.COLOR_BGR2GRAY)
     else:
-        print('播放結束')
+        print("播放結束")
         break
 
 cap.release()
@@ -70,4 +70,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
