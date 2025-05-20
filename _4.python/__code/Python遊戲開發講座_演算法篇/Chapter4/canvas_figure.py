@@ -1,4 +1,5 @@
 import tkinter
+
 root = tkinter.Tk()
 root.title("在畫布繪製圖形")
 cvs = tkinter.Canvas(width=720, height=400, bg="black")

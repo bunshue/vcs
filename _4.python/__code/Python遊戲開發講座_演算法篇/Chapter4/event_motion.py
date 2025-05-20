@@ -1,10 +1,13 @@
 import tkinter
 
 FNT = ("Times New Roman", 40)
+
+
 def move(e):
     cvs.delete("all")
     s = "({}, {})".format(e.x, e.y)
     cvs.create_text(300, 200, text=s, font=FNT)
+
 
 root = tkinter.Tk()
 root.title("滑鼠游標的座標")

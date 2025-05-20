@@ -1,4 +1,5 @@
 import tkinter
+
 root = tkinter.Tk()
 root.title("在畫布顯示圖片")
 cvs = tkinter.Canvas(width=540, height=720)
