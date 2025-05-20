@@ -466,8 +466,6 @@ show()
 
 # Lightness of Matplotlib colormaps
 
-mpl.rcParams.update({"font.size": 12})
-
 # Number of colormap per subplot for particular cmap categories
 _DSUBS = {
     "Perceptually Uniform Sequential": 5,
@@ -564,8 +562,6 @@ for cmap_category, cmap_list in cmaps.items():
     show()
 
 # Grayscale conversion
-
-mpl.rcParams.update({"font.size": 14})
 
 # Indices to step through colormap.
 x = np.linspace(0.0, 1.0, 100)

@@ -62,23 +62,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-#組態檔
-import matplotlib
-
-os.path.abspath(matplotlib.get_configdir())
-os.path.abspath(matplotlib.matplotlib_fname())
-
-#print(matplotlib.rc_params())
-#print(matplotlib.rcParams)
-
-matplotlib.rc("lines", marker="x", linewidth=2, color="red")
-matplotlib.rcdefaults()
-matplotlib.rcParams.update( matplotlib.rc_params() )
-
-"""
-print("------------------------------------------------------------")  # 60個
-"""
 from matplotlib import style
 
 print(style.available)
@@ -172,9 +155,9 @@ cc = ax.get_yaxis().get_label().get_text()
 print('y軸 :', cc)
 
 plt.show()
-"""
+
 print("------------------------------------------------------------")  # 60個
-"""
+
 #Artist的屬性
 
 fig = plt.figure()
@@ -193,10 +176,10 @@ cc = plt.getp(fig.patch)
 print(cc)
 
 plt.show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
+
 fig = plt.figure()
 
 ax1 = fig.add_subplot(211)
@@ -219,9 +202,9 @@ line2 = Line2D(
 fig.lines.extend([line1, line2])
 
 plt.show()
-"""
+
 print("------------------------------------------------------------")  # 60個
-"""
+
 #Axes容器
 
 fig = plt.figure()
@@ -804,7 +787,7 @@ for ax, fname in zip(axes.ravel(), functions):
     ax.set_ylim(0, 1.5)
 
 plt.show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -976,7 +959,6 @@ plt.margins(0.1, 0.1)
 
 plt.show()
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

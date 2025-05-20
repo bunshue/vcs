@@ -28,7 +28,7 @@ def show():
     plt.show()
     pass
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 N = 100
@@ -120,21 +120,114 @@ for ticker in tickers:
 
 print("------------------------------------------------------------")  # 60個
 
+import tensorflow as tf
+
+# Check that we are using a GPU, if not switch runtimes
+#   using Runtime > Change Runtime Type > GPU
+# assert len(tf.config.list_physical_devices('GPU')) > 0
+
+length = len(tf.config.list_physical_devices('GPU'))
+print('GPU個數 :', length)
+
+cwd = os.getcwd()
+print(cwd)
 
 print("------------------------------------------------------------")  # 60個
 
+def plot_transition_model(T_track, episode = 0):
+    fig = plt.figure(figsize=(10,8))
+    ax = fig.add_subplot(111, projection='3d')
+    ax.view_init(elev=20, azim=50)
 
+    color_left = '#008fd5' # ax._get_lines.get_next_color()
+    color_right = '#fc4f30' #ax._get_lines.get_next_color()
+
+    left_prob = np.array([1,2,3,4,5,6,7,8,9])
+
+    right_prob = np.array([1,2,3,4,5,6,7,8,9])
+
+    for s in np.arange(9):
+        ax.bar3d(s+0.1, np.arange(9)+0.1, np.zeros(9),
+                 np.zeros(9)+0.3,
+                 np.zeros(9)+0.3, 
+                 left_prob[s], 
+                 color=color_left, 
+                 alpha=0.75,
+                 shade=True)
+        ax.bar3d(s+0.1, np.arange(9)+0.1, left_prob[s],
+                 np.zeros(9)+0.3,
+                 np.zeros(9)+0.3, 
+                 right_prob[s], 
+                 color=color_right, 
+                 alpha=0.75,
+                 shade=True)
+
+    ax.tick_params(axis='x', which='major', pad=10)
+    ax.tick_params(axis='y', which='major', pad=10)
+    ax.tick_params(axis='z', which='major', pad=10)
+
+    ax.xaxis.set_rotate_label(False)
+    ax.yaxis.set_rotate_label(False)
+    ax.zaxis.set_rotate_label(False)
+    ax.set_xticks(np.arange(9))
+    ax.set_yticks(np.arange(9))
+
+    plt.title('SWS learned MDP after {} episodes'.format(episode+1))
+    ax.set_xlabel('Initial\nstate', labelpad=75, rotation=0)
+    ax.set_ylabel('Landing\nstate', labelpad=75, rotation=0)
+    ax.set_zlabel('Transition\nprobabilities', labelpad=75, rotation=0)
+
+    left_proxy = plt.Rectangle((0, 0), 1, 1, fc=color_left)
+    right_proxy = plt.Rectangle((0, 0), 1, 1, fc=color_right)
+
+    plt.legend((left_proxy, right_proxy), 
+               ('Left', 'Right'), 
+               bbox_to_anchor=(0.15, 0.9), 
+               borderaxespad=0.)
+
+    ax.dist = 12
+    #plt.gcf().subplots_adjust(left=0.1, right=0.9)
+    plt.tight_layout()
+
+    plt.show()
+
+T_track_dq=[1,2,3,4,5]
+plot_transition_model(T_track_dq, episode=0)
+
+'''
 print("------------------------------------------------------------")  # 60個
 
+fff = 123.456
+training_start = time.time()
 
-print("------------------------------------------------------------")  # 60個
+print('a')
+time.sleep(1.234)
+print('b')
+
+elapsed_str = time.strftime("%H:%M:%S", time.gmtime(time.time() - training_start))
+
+debug_message = 'el {}, ep {:04}, ts {:07},\n'
+debug_message += 'ar 10  {:05.1f}\u00B1{:05.1f},\n'
+debug_message += '100    {:05.1f}\u00B1{:05.1f},\n'
+debug_message += 'ex 100 {:02.1f}\u00B1{:02.1f},\n'
+debug_message += 'ev     {:05.1f}\u00B1{:05.1f}\n'
+debug_message = debug_message.format(
+elapsed_str, elapsed_str, elapsed_str, fff, fff,
+fff, fff, fff, fff,
+fff, fff)
+                
+print(debug_message, end='\r', flush=True)
 
 
-print("------------------------------------------------------------")  # 60個
 
+print(u'--> reached_max_minutes \u2715')
+print(u'--> reached_max_episodes \u2715')
+print(u'--> reached_goal_mean_reward \u2713')
 
-print("------------------------------------------------------------")  # 60個
-
+print('Final evaluation score {:.2f}\u00B1{:.2f} in {:.2f}s training time,'
+      ' {:.2f}s wall-clock time.\n'.format(
+          fff, fff, fff, fff))
+        
 
 print("------------------------------------------------------------")  # 60個
 

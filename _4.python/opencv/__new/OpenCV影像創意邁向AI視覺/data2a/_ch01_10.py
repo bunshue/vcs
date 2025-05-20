@@ -8,7 +8,7 @@ print("------------------------------------------------------------")  # 60個
 import cv2
 
 filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
 filename3 = "C:/_git/vcs/_1.data/______test_files1/ims01.bmp"
 
 print("------------------------------------------------------------")  # 60個
@@ -41,49 +41,56 @@ def show():
 print("------------------------------------------------------------")  # 60個
 
 """
-img = cv2.imread("jk.jpg")  # 讀取影像
-cv2.imshow("MyPicture", img)  # 顯示影像
-cv2.imshow("MyPicture", img)  # 顯示影像
-cv2.destroyWindow("MyPicture")  # 關閉視窗
+img = cv2.imread(filename1)  # 讀取影像
+cv2.imshow("Peony", img)  # 顯示影像
+cv2.imshow("Peony", img)  # 顯示影像
+cv2.destroyWindow("Peony")  # 關閉視窗
 
 ret_value = cv2.waitKey(0)  # 無限等待
-cv2.destroyWindow("MyPicture")  # 關閉視窗
+cv2.destroyWindow("Peony")  # 關閉視窗
 
 ret_value = cv2.waitKey(5000)  # 等待 5 秒
-cv2.destroyWindow("MyPicture")  # 關閉視窗
+cv2.destroyWindow("Peony")  # 關閉視窗
 
 ret_value = cv2.waitKey(0)  # 無限等待
 if ret_value == ord("Q") or ret_value == ord("q"):
-    cv2.destroyWindow("MyPicture")  # 關閉視窗
+    cv2.destroyWindow("Peony")  # 關閉視窗
 
 print("------------------------------------------------------------")  # 60個
 """
-img = cv2.imread("jk.jpg")  # 讀取影像
-cv2.imshow("MyPicture", img)  # 顯示影像
+img = cv2.imread(filename1)  # 讀取影像
+cv2.imshow("Peony", img)  # 顯示影像
+
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
 # ch1_6.py
 
-cv2.namedWindow("MyPicture1")  # 使用預設
-cv2.namedWindow("MyPicture2", cv2.WINDOW_NORMAL)  # 可以調整大小
-img1 = cv2.imread("jk.jpg")  # 彩色讀取
-img2 = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)  # 灰色讀取
-cv2.imshow("MyPicture1", img1)  # 顯示影像img1
-cv2.imshow("MyPicture2", img2)  # 顯示影像img2
+cv2.namedWindow("Peony1")  # 使用預設
+cv2.namedWindow("Peony2", cv2.WINDOW_NORMAL)  # 可以調整大小
+img1 = cv2.imread(filename1)  # 彩色讀取
+img2 = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰色讀取
+cv2.imshow("Peony1", img1)  # 顯示影像img1
+cv2.imshow("Peony2", img2)  # 顯示影像img2
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
 print("------------------------------------------------------------")  # 60個
 
 # ch1_6_1.py
 
-cv2.namedWindow("MyPicture1")  # 使用預設
-cv2.namedWindow("MyPicture2", cv2.WINDOW_NORMAL)  # 可以調整大小
-img1 = cv2.imread("jk.jpg")  # 彩色讀取
-img2 = cv2.imread("jk.jpg", 0)  # 灰色讀取
-cv2.imshow("MyPicture1", img1)  # 顯示影像img1
-cv2.imshow("MyPicture2", img2)  # 顯示影像img2
+cv2.namedWindow("Peony1")  # 使用預設
+cv2.namedWindow("Peony2", cv2.WINDOW_NORMAL)  # 可以調整大小
+img1 = cv2.imread(filename1)  # 彩色讀取
+img2 = cv2.imread(filename1, 0)  # 灰色讀取
+cv2.imshow("Peony1", img1)  # 顯示影像img1
+cv2.imshow("Peony2", img2)  # 顯示影像img2
 
-cv2.destroyWindow("MyPicture1")  # 刪除MyPicture1
-
+cv2.waitKey()
+cv2.destroyWindow("Peony1")  # 刪除Peony1
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -93,20 +100,20 @@ print("------------------------------------------------------------")  # 60個
 pt_y = 169
 pt_x = 118
 
-img = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 px = img[pt_y, pt_x]  # 讀px點
 
 print(type(px))
 print(f"BGR = {px}")
 
-img = cv2.imread("jk.jpg")  # 彩色讀取
+img = cv2.imread(filename1)  # 彩色讀取
 px = img[pt_y, pt_x]  # 讀px點
 print(type(px))
 print(f"BGR = {px}")
 
 pt_y = 169
 pt_x = 118
-img = cv2.imread("jk.jpg")  # 彩色讀取
+img = cv2.imread(filename1)  # 彩色讀取
 blue = img[pt_y, pt_x, 0]  # 讀 B 通道值
 green = img[pt_y, pt_x, 1]  # 讀 G 通道值
 red = img[pt_y, pt_x, 2]  # 讀 R 通道值
@@ -118,7 +125,7 @@ print("------------------------------------------------------------")  # 60個
 
 pt_y = 169
 pt_x = 118
-img = cv2.imread("jk.jpg")  # 彩色讀取
+img = cv2.imread(filename1)  # 彩色讀取
 px = img[pt_y, pt_x]  # 讀取 px 點
 print(f"更改前BGR = {px}")
 px = [255, 255, 255]  # 修改 px 點
@@ -128,14 +135,14 @@ print("------------------------------------------------------------")  # 60個
 
 # ch2_7.py
 
-print("把影像的一塊改成白色")
+print("把影像的一塊改成藍色")
 
-img = cv2.imread("jk.jpg")  # 彩色讀取
-cv2.imshow("Before the change", img)
-for y in range(img.shape[0] - 50, img.shape[0]):
-    for x in range(img.shape[1] - 50, img.shape[1]):
-        img[y, x] = [255, 255, 255]
-cv2.imshow("After the change", img)
+img = cv2.imread(filename1)  # 彩色讀取
+cv2.imshow("Before", img)
+for y in range(img.shape[0] - 100, img.shape[0]):
+    for x in range(img.shape[1] - 100, img.shape[1]):
+        img[y, x] = [255, 0, 0]
+cv2.imshow("After", img)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -452,7 +459,7 @@ print("------------------------------------------------------------")  # 60個
 
 pt_x = 169
 pt_y = 118
-img = cv2.imread("jk.jpg")  # BGR讀取
+img = cv2.imread(filename1)  # BGR讀取
 
 print("BGR 轉 GRAY")
 img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -473,7 +480,7 @@ print("------------------------------------------------------------")  # 60個
 
 # ch4_6.py
 
-img = cv2.imread("mountain.jpg")  # BGR讀取
+img = cv2.imread(filename1)  # BGR讀取
 cv2.imshow("BGR Color Space", img)
 
 print("BGR 轉 HSV")
@@ -487,7 +494,9 @@ print("------------------------------------------------------------")  # 60個
 
 # ch4_7.py
 
-image = cv2.imread("colorbar.jpg")
+filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
+
+image = cv2.imread(filename)
 cv2.imshow("bgr", image)
 
 blue, green, red = cv2.split(image)
@@ -499,42 +508,11 @@ print(f"B通道影像屬性 shape = {blue.shape}")
 print("列印B通道內容")
 print(blue)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch4_8.py
-
-image = cv2.imread("mountain.jpg")
-cv2.imshow("bgr", image)
-
-blue, green, red = cv2.split(image)
-cv2.imshow("blue", blue)
-cv2.imshow("green", green)
-cv2.imshow("red", red)
-
 print(f"BGR  影像 : {image.shape}")
 print(f"B通道影像 : {blue.shape}")
 print(f"G通道影像 : {green.shape}")
 print(f"R通道影像 : {red.shape}")
 
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch4_8_1.py
-
-image = cv2.imread("mountain.jpg")
-cv2.imshow("bgr", image)
-
-blue, green, red = cv2.split(image)
-cv2.imshow("blue", blue)
-cv2.imshow("green", green)
-cv2.imshow("red", red)
-
-print(f"BGR  影像 : {image.shape}")
 print("B通道內容 : ")
 print(blue)
 print("G通道內容 : ")
@@ -549,7 +527,7 @@ print("------------------------------------------------------------")  # 60個
 
 # ch4_9.py
 
-image = cv2.imread("mountain.jpg")
+image = cv2.imread(filename1)
 cv2.imshow("bgr", image)
 
 print("BGR 轉 HSV")
@@ -566,7 +544,7 @@ print("------------------------------------------------------------")  # 60個
 
 # ch4_10.py
 
-image = cv2.imread("street.jpg")
+image = cv2.imread(filename1)
 blue, green, red = cv2.split(image)
 bgr_image = cv2.merge([blue, green, red])  # 依據 B G R 順序合併
 cv2.imshow("B -> G -> R ", bgr_image)
@@ -581,7 +559,7 @@ print("------------------------------------------------------------")  # 60個
 
 # ch4_11.py
 
-image = cv2.imread("street.jpg")
+image = cv2.imread(filename1)
 
 print("BGR 轉 HSV")
 hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -599,7 +577,7 @@ print("------------------------------------------------------------")  # 60個
 
 # ch4_12.py
 
-image = cv2.imread("street.jpg")
+image = cv2.imread(filename1)
 
 print("BGR 轉 HSV")
 hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -621,7 +599,7 @@ print("------------------------------------------------------------")  # 60個
 
 # ch4_12_1.py
 
-image = cv2.imread("street.jpg")
+image = cv2.imread(filename1)
 
 print("BGR 轉 HSV")
 hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -643,7 +621,7 @@ print("------------------------------------------------------------")  # 60個
 
 # ch4_13.py
 
-image = cv2.imread("street.jpg")
+image = cv2.imread(filename1)
 
 print("BGR 轉 HSV")
 hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -665,7 +643,7 @@ print("------------------------------------------------------------")  # 60個
 
 # ch4_14.py
 
-image = cv2.imread("street.jpg")
+image = cv2.imread(filename1)
 
 print("BGR 轉 HSV")
 hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -687,7 +665,7 @@ print("------------------------------------------------------------")  # 60個
 
 # ch4_15.py
 
-image = cv2.imread("street.jpg")
+image = cv2.imread(filename1)
 cv2.imshow("The Image", image)  # 顯示BGR影像
 
 print("BGR 轉 BGRA")
@@ -870,12 +848,12 @@ print("------------------------------------------------------------")  # 60個
 
 # ch6_2.py
 
-img = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)  # 灰色讀取
-cv2.imshow("Before modify", img)  # 顯示修改前影像img
-for y in range(120, 140):  # 修改影像
-    for x in range(110, 210):
-        img[y, x] = 255
-cv2.imshow("After modify", img)  # 顯示修改後影像img
+img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰色讀取
+cv2.imshow("Before", img)  # 顯示修改前影像img
+for y in range(30, 80):  # 修改影像
+    for x in range(150, 250):
+        img[y, x] = 127
+cv2.imshow("After", img)  # 顯示修改後影像img
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -903,20 +881,22 @@ print("------------------------------------------------------------")  # 60個
 
 # ch6_4.py
 
+width, height = 640, 480  # 影像寬, 影像高
+
 # 建立藍色blue底的彩色影像陣列
-blue_img = np.zeros((100, 150, 3), np.uint8)
+blue_img = np.zeros((height, width, 3), np.uint8)
 blue_img[:, :, 0] = 255  # 填滿藍色
 print(f"blue image =\n{blue_img}")  # 顯示blue_img影像陣列
 cv2.imshow("Blue Image", blue_img)  # 顯示藍色影像
 
 # 建立綠色green底的彩色影像陣列
-green_img = np.zeros((100, 150, 3), np.uint8)
+green_img = np.zeros((height, width, 3), np.uint8)
 green_img[:, :, 1] = 255  # 填滿綠色
 print(f"green image =\n{green_img}")  # 顯示green_img影像陣列
 cv2.imshow("Green Image", green_img)  # 顯示綠色影像
 
 # 建立紅色red底的彩色影像陣列
-red_img = np.zeros((100, 150, 3), np.uint8)
+red_img = np.zeros((height, width, 3), np.uint8)
 red_img[:, :, 2] = 255  # 填滿紅色
 print(f"red image =\n{red_img}")  # 顯示red_img影像陣列
 cv2.imshow("Red Image", red_img)  # 顯示紅色影像
@@ -975,7 +955,7 @@ for z in range(125, 135):  # 修改影像:一次一個通道值
 for y in range(135, 145):  # 修改影像
     for x in range(110, 210):
         img[y, x] = [0, 255, 255]  # 黃色取代
-cv2.imshow("After modify", img)  # 顯示修改後影像img
+cv2.imshow("After", img)  # 顯示修改後影像img
 print(f"修改後img[115,110] = {img[115,110]}")
 print(f"修改後img[125,110] = {img[125,110]}")
 print(f"修改後img[135,110] = {img[135,110]}")
@@ -990,7 +970,7 @@ print("------------------------------------------------------------")  # 60個
 # 看不出差異
 
 img = cv2.imread("street.png", cv2.IMREAD_UNCHANGED)  # PNG讀取
-cv2.imshow("Before modify", img)  # 顯示修改前影像img
+cv2.imshow("Before", img)  # 顯示修改前影像img
 print(f"修改前img[10,50] = {img[10,50]}")
 print(f"修改前img[50,99] = {img[50,99]}")
 
@@ -1001,7 +981,7 @@ for z in range(0, 200):  # 一次一個修改alpha通道值
 print(f"修改後img[10,50] = {img[10,50]}")
 print(f"修改後img[50,99] = {img[50,99]}")
 
-cv2.imshow("After modify", img)  # 顯示修改前影像img
+cv2.imshow("After", img)  # 顯示修改前影像img
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1011,7 +991,7 @@ print("------------------------------------------------------------")  # 60個
 # ch6_8_1.py
 
 img = cv2.imread("street.png", cv2.IMREAD_UNCHANGED)  # PNG讀取
-cv2.imshow("Before modify", img)  # 顯示修改前影像img
+cv2.imshow("Before", img)  # 顯示修改前影像img
 print(f"修改前img[10,50] = {img[10,50]}")
 print(f"修改前img[50,99] = {img[50,99]}")
 
@@ -1041,11 +1021,11 @@ print("------------------------------------------------------------")  # 60個
 print("灰階讀取, 部分塗成白色")
 
 img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰色讀取
-cv2.imshow("Before modify", img)  # 顯示修改前影像img
+cv2.imshow("Before", img)  # 顯示修改前影像img
 for y in range(120, 140):  # 修改影像
     for x in range(110, 210):
         img.itemset((y, x), 255)
-cv2.imshow("After modify", img)  # 顯示修改後影像img
+cv2.imshow("After", img)  # 顯示修改後影像img
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1072,7 +1052,7 @@ print("------------------------------------------------------------")  # 60個
 # ch6_12.py
 
 img = cv2.imread(filename1)  # 彩色讀取
-cv2.imshow("Before modify", img)  # 顯示修改前影像img
+cv2.imshow("Before", img)  # 顯示修改前影像img
 print(f"修改前img[115,110,1] = {img.item(115,110,1)}")
 print(f"修改前img[125,110,1] = {img.item(125,110,1)}")
 print(f"修改前img[135,110,1] = {img.item(135,110,1)}")
@@ -1081,7 +1061,7 @@ for z in range(115, 145):  # 修改影像:一次一個通道值
     for y in range(110, 210):
         for x in range(0, 3):  # 一次一個通道值
             img.itemset((z, y, x), 255)  # 白色取代
-cv2.imshow("After modify", img)  # 顯示修改後影像img
+cv2.imshow("After", img)  # 顯示修改後影像img
 print(f"修改後img[115,110,1] = {img.item(115,110,1)}")
 print(f"修改後img[125,110,1] = {img.item(125,110,1)}")
 print(f"修改後img[135,110,1] = {img.item(135,110,1)}")
@@ -1118,13 +1098,16 @@ print("------------------------------------------------------------")  # 60個
 
 # ch6_15.py
 
-img = cv2.imread("jk.jpg")  # 彩色讀取
-cv2.imshow("Peony", img)  # 顯示影像
-usa = cv2.imread("money.jpg")  # 彩色讀取
-cv2.imshow("Money Image", usa)  # 顯示影像
-face = img[30:220, 80:250]  # ROI, 先高後寬
-usa[30:220, 120:290] = face  # 複製到usa影像
-cv2.imshow("Image", usa)  # 顯示影像
+filenamea = "C:/_git/vcs/_4.python/opencv/data/lena.jpg"
+filenameb = "C:/_git/vcs/_4.python/opencv/data/contours.bmp"
+
+lena = cv2.imread(filenamea)  # 彩色讀取, 大圖
+img = cv2.imread(filenameb)  # 彩色讀取, 小圖
+
+face = img[130:420, 280:550]  # ROI, 先高後寬
+lena[130:420, 120:390] = face  # 複製到lena影像
+
+cv2.imshow("Image", lena)  # 顯示影像
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1144,10 +1127,10 @@ print("------------------------------------------------------------")  # 60個
 
 # ch8_2.py
 
-img = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)  # 灰色讀取
+img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰色讀取
 res = cv2.add(img, img)
-cv2.imshow("MyPicture1", img)  # 顯示影像img
-cv2.imshow("MyPicture2", res)  # 顯示影像res
+cv2.imshow("Peony1", img)  # 顯示影像img
+cv2.imshow("Peony2", res)  # 顯示影像res
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1156,10 +1139,10 @@ print("------------------------------------------------------------")  # 60個
 
 # ch8_3.py
 
-img = cv2.imread("jk.jpg")  # 彩色讀取
+img = cv2.imread(filename1)  # 彩色讀取
 res = cv2.add(img, img)  # 調整亮度結果
-cv2.imshow("MyPicture1", img)  # 顯示影像img
-cv2.imshow("MyPicture2", res)  # 顯示影像res
+cv2.imshow("Peony1", img)  # 顯示影像img
+cv2.imshow("Peony2", res)  # 顯示影像res
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1169,12 +1152,12 @@ print("------------------------------------------------------------")  # 60個
 # ch8_3_1.py
 
 value = 20  # 亮度調整值
-img = cv2.imread("jk.jpg")  # 彩色讀取
+img = cv2.imread(filename1)  # 彩色讀取
 coff = np.ones(img.shape, dtype=np.uint8) * value
 
 res = cv2.add(img, coff)  # 調整亮度結果
-cv2.imshow("MyPicture1", img)  # 顯示影像img
-cv2.imshow("MyPicture2", res)  # 顯示影像res
+cv2.imshow("Peony1", img)  # 顯示影像img
+cv2.imshow("Peony2", res)  # 顯示影像res
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1194,12 +1177,12 @@ print("------------------------------------------------------------")  # 60個
 
 # ch8_5.py
 
-img = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)  # 灰色讀取
+img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰色讀取
 res1 = cv2.add(img, img)
 res2 = img + img
-cv2.imshow("MyPicture1", img)  # 顯示影像img
-cv2.imshow("MyPicture2", res1)  # 顯示影像res1
-cv2.imshow("MyPicture3", res2)  # 顯示影像res2
+cv2.imshow("Peony1", img)  # 顯示影像img
+cv2.imshow("Peony2", res1)  # 顯示影像res1
+cv2.imshow("Peony3", res2)  # 顯示影像res2
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1208,12 +1191,12 @@ print("------------------------------------------------------------")  # 60個
 
 # ch8_6.py
 
-img = cv2.imread("jk.jpg")  # 彩色讀取
+img = cv2.imread(filename1)  # 彩色讀取
 res1 = cv2.add(img, img)
 res2 = img + img
-cv2.imshow("MyPicture1", img)  # 顯示影像img
-cv2.imshow("MyPicture2", res1)  # 顯示影像res1
-cv2.imshow("MyPicture3", res2)  # 顯示影像res2
+cv2.imshow("Peony1", img)  # 顯示影像img
+cv2.imshow("Peony2", res1)  # 顯示影像res1
+cv2.imshow("Peony3", res2)  # 顯示影像res2
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1222,9 +1205,11 @@ print("------------------------------------------------------------")  # 60個
 
 # ch8_7.py
 
-b = np.zeros((200, 250, 3), np.uint8)  # b影像
-g = np.zeros((200, 250, 3), np.uint8)  # g影像
-r = np.zeros((200, 250, 3), np.uint8)  # r影像
+width, height = 640, 480  # 影像寬, 影像高
+
+b = np.zeros((height, width, 3), np.uint8)  # b影像
+g = np.zeros((height, width, 3), np.uint8)  # g影像
+r = np.zeros((height, width, 3), np.uint8)  # r影像
 b[:, :, 0] = 255  # 設定藍色
 g[:, :, 1] = 255  # 設定綠色
 r[:, :, 2] = 255  # 設定紅色
@@ -1248,9 +1233,12 @@ print("------------------------------------------------------------")  # 60個
 
 img1 = np.ones((4, 5), dtype=np.uint8) * 8
 img2 = np.ones((4, 5), dtype=np.uint8) * 9
+
 mask = np.zeros((4, 5), dtype=np.uint8)
-mask[1:3, 1:4] = 255
+mask[1:3, 1:4] = 255  # 設定mask, 先高後寬
+
 dst = np.random.randint(0, 256, (4, 5), np.uint8)
+
 print("img1 = \n", img1)
 print("img2 = \n", img2)
 print("mask = \n", mask)
@@ -1262,18 +1250,23 @@ print("------------------------------------------------------------")  # 60個
 
 # ch8_8_1.py
 
-img1 = np.zeros((200, 300, 3), np.uint8)  # 建立img1影像
+width, height = 640, 480  # 影像寬, 影像高
+
+img1 = np.zeros((height, width, 3), np.uint8)  # 建立img1影像
 img1[:, :, 1] = 255
 cv2.imshow("img1", img1)  # 顯示影像img1
-img2 = np.zeros((200, 300, 3), np.uint8)  # 建立img2影像
+
+img2 = np.zeros((height, width, 3), np.uint8)  # 建立img2影像
 img2[:, :, 2] = 255
 cv2.imshow("img2", img2)  # 顯示影像img2
-m = np.zeros((200, 300, 1), np.uint8)  # 建立mask(m)影像
+
+m = np.zeros((height, width, 1), np.uint8)  # 建立mask(m)影像
 m[50:150, 100:200, :] = 255  # 建立 ROI
 cv2.imshow("mask", m)  # 顯示影像m
 
 img3 = cv2.add(img1, img2)  # 不含mask的影像相加
 cv2.imshow("img1 + img2", img3)
+
 img4 = cv2.add(img1, img2, mask=m)  # 含mask的影像相加
 cv2.imshow("img1 + img2 + mask", img4)
 
@@ -1296,6 +1289,7 @@ print(f"dst = \n {dst}")
 
 print("------------------------------------------------------------")  # 60個
 
+""" NG
 # ch8_10.py
 
 src1 = cv2.imread("lake.jpg")  # 影像 src1
@@ -1310,15 +1304,18 @@ cv2.imshow("lake+geneva", dst)  # 顯示結果
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 # ch8_11.py
 
 src1 = np.random.randint(0, 255, (3, 5), dtype=np.uint8)
+
 src2 = np.zeros((3, 5), dtype=np.uint8)
-src2[0:2, 0:2] = 255
+src2[0:2, 0:2] = 255  # 設定mask, 先高後寬
+
 dst = cv2.bitwise_and(src1, src2)
+
 print(f"src1 = \n {src1}")
 print(f"src2 = \n {src2}")
 print(f"dst = \n {dst}")
@@ -1327,14 +1324,18 @@ print("------------------------------------------------------------")  # 60個
 
 # ch8_12.py
 
-src1 = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)  # 讀取影像
-src2 = np.zeros(src1.shape, dtype=np.uint8)  # 建立mask
+# 灰階 mask 運算
 
-src2[30:260, 70:260] = 255
+src1 = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 讀取影像
+
+src2 = np.zeros(src1.shape, dtype=np.uint8)  # 建立mask
+src2[50:520, 150:360] = 255  # 設定mask, 先高後寬
+
 dst = cv2.bitwise_and(src1, src2)  # 執行and運算
-cv2.imshow("Hung", src1)
+
+cv2.imshow("Before", src1)
 cv2.imshow("Mask", src2)
-cv2.imshow("Result", dst)
+cv2.imshow("After", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1343,14 +1344,18 @@ print("------------------------------------------------------------")  # 60個
 
 # ch8_13.py
 
-src1 = cv2.imread("jk.jpg")  # 讀取影像
-src2 = np.zeros(src1.shape, dtype=np.uint8)  # 建立mask
+# 彩色 mask 運算
 
-src2[30:260, 70:260, :] = 255  # 這是3維陣列
+src1 = cv2.imread(filename2)  # 讀取影像
+
+src2 = np.zeros(src1.shape, dtype=np.uint8)  # 建立mask
+src2[50:520, 150:360, :] = 255  # 設定mask, 先高後寬  # 這是3維陣列
+
 dst = cv2.bitwise_and(src1, src2)  # 執行and運算
-cv2.imshow("Hung", src1)
+
+cv2.imshow("Before", src1)
 cv2.imshow("Mask", src2)
-cv2.imshow("Result", dst)
+cv2.imshow("After", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1360,9 +1365,12 @@ print("------------------------------------------------------------")  # 60個
 # ch8_14.py
 
 src1 = np.random.randint(0, 255, (3, 5), dtype=np.uint8)
+
 src2 = np.zeros((3, 5), dtype=np.uint8)
-src2[0:2, 0:2] = 255
+src2[0:2, 0:2] = 255  # 設定mask, 先高後寬
+
 dst = cv2.bitwise_or(src1, src2)
+
 print(f"src1 = \n {src1}")
 print(f"src2 = \n {src2}")
 print(f"dst = \n {dst}")
@@ -1371,14 +1379,16 @@ print("------------------------------------------------------------")  # 60個
 
 # ch8_15.py
 
-src1 = cv2.imread("jk.jpg")  # 讀取影像
-src2 = np.zeros(src1.shape, dtype=np.uint8)  # 建立mask
+src1 = cv2.imread(filename2)  # 讀取影像
 
-src2[30:260, 70:260, :] = 255  # 這是3維陣列
+src2 = np.zeros(src1.shape, dtype=np.uint8)  # 建立mask
+src2[50:520, 150:360, :] = 255  # 設定mask, 先高後寬  # 這是3維陣列
+
 dst = cv2.bitwise_or(src1, src2)  # 執行or運算
-cv2.imshow("Hung", src1)
+
+cv2.imshow("Before", src1)
 cv2.imshow("Mask", src2)
-cv2.imshow("Result", dst)
+cv2.imshow("After", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1387,10 +1397,12 @@ print("------------------------------------------------------------")  # 60個
 
 # ch8_16.py
 
-src = cv2.imread("forest.jpg")  # 讀取影像
+src = cv2.imread(filename1)  # 讀取影像
+
 dst = cv2.bitwise_not(src)  # 執行or運算
-cv2.imshow("Forest", src)
-cv2.imshow("Not Forest", dst)
+
+cv2.imshow("Before", src)
+cv2.imshow("After", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1399,14 +1411,16 @@ print("------------------------------------------------------------")  # 60個
 
 # ch8_17.py
 
-src1 = cv2.imread("forest.jpg")  # 讀取影像
-src2 = np.zeros(src1.shape, np.uint8)
+src1 = cv2.imread(filename1)  # 讀取影像
 
-src2[:, 120:360, :] = 255  # 建立mask白色區塊
+src2 = np.zeros(src1.shape, np.uint8)
+src2[:, 140:280, :] = 255  # 設定mask, 先高後寬  # 建立mask白色區塊
+
 dst = cv2.bitwise_xor(src1, src2)  # 執行xor運算
-cv2.imshow("Forest", src1)  # forest.jpg
-cv2.imshow("Mask", src2)  # mask
-cv2.imshow("Forest xor operation", dst)  # 結果
+
+cv2.imshow("Before", src1)
+cv2.imshow("Mask", src2)
+cv2.imshow("After", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1415,16 +1429,18 @@ print("------------------------------------------------------------")  # 60個
 
 # ch8_18.py
 
-src = cv2.imread("forest.jpg")  # 讀取影像
+src = cv2.imread(filename1)  # 讀取影像
 key = np.random.randint(0, 256, src.shape, np.uint8)  # 密鑰影像
 print(src.shape)
-cv2.imshow("forest", src)  # 原始影像
+
+cv2.imshow("Before", src)  # 原始影像
 cv2.imshow("key", key)  # 密鑰影像
 
-img_encry = cv2.bitwise_xor(src, key)  # 加密結果的影像
-img_decry = cv2.bitwise_xor(key, img_encry)  # 解密結果的影像
-cv2.imshow("encrytion", img_encry)  # 加密結果影像
-cv2.imshow("decrytion", img_decry)  # 解密結果影像
+img_encryp = cv2.bitwise_xor(src, key)  # 加密結果的影像
+cv2.imshow("encryption", img_encryp)  # 加密結果影像
+
+img_decryp = cv2.bitwise_xor(key, img_encryp)  # 解密結果的影像
+cv2.imshow("decryption", img_decryp)  # 解密結果影像
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1445,15 +1461,18 @@ print("------------------------------------------------------------")  # 60個
 
 # ch9_2.py
 
-thresh = 127  # 定義閾值
 maxval = 255  # 定義像素最大值
-src = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)
+
+src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
+cv2.imshow("Before", src)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
-cv2.imshow("Src", src)
-cv2.imshow("Dst - 127", dst)  # threshold = 127
-thresh = 80  # 修訂所定義的閾值
+cv2.imshow("threshold 127", dst)
+
+thresh = 80  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
-cv2.imshow("Dst - 80", dst)  # threshold = 80
+cv2.imshow("threshold 80", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1462,15 +1481,18 @@ print("------------------------------------------------------------")  # 60個
 
 # ch9_3.py
 
-thresh = 127  # 定義閾值
 maxval = 255  # 定義像素最大值
-src = cv2.imread("jk.jpg")
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+src = cv2.imread(filename2)
 cv2.imshow("Src", src)
-cv2.imshow("Dst - 127", dst)  # threshold = 127
-thresh = 80  # 修訂所定義的閾值
+
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
-cv2.imshow("Dst - 80", dst)  # threshold = 80
+cv2.imshow("threshold 127", dst)
+
+thresh = 80  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
+cv2.imshow("threshold 80", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1479,15 +1501,18 @@ print("------------------------------------------------------------")  # 60個
 
 # ch9_4.py
 
-src = cv2.imread("numbers.jpg")
-thresh = 127  # 閾值 = 10
 maxval = 255  # 二值化的極大值
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
+
+src = cv2.imread("numbers.jpg")
 cv2.imshow("Src", src)
-cv2.imshow("Dst - 127", dst)  # threshold = 127
+
+thresh = 127  # 閾值 = 10
+ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
+cv2.imshow("threshold 127", dst)
+
 thresh = 10  # 更改閾值 = 10
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
-cv2.imshow("Dst - 10", dst)  # threshold = 10
+cv2.imshow("threshold 10", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1513,10 +1538,12 @@ maxval = 255  # 定義像素最大值
 src = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
 cv2.imshow("Src", src)
-cv2.imshow("Dst - 127", dst)  # threshold = 127
+
+cv2.imshow("threshold 127", dst)
+
 thresh = 80  # 修訂所定義的閾值
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
-cv2.imshow("Dst - 80", dst)  # threshold = 80
+cv2.imshow("threshold 80", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1530,10 +1557,12 @@ maxval = 255  # 定義像素最大值
 src = cv2.imread("jk.jpg")
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
 cv2.imshow("Src", src)
-cv2.imshow("Dst - 127", dst)  # threshold = 127
+
+cv2.imshow("threshold 127", dst)
+
 thresh = 80  # 修訂所定義的閾值
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
-cv2.imshow("Dst - 80", dst)  # threshold = 80
+cv2.imshow("threshold 80", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1547,10 +1576,12 @@ thresh = 127  # 閾值 = 10
 maxval = 255  # 二值化的極大值
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
 cv2.imshow("Src", src)
-cv2.imshow("Dst - 127", dst)  # threshold = 127
+
+cv2.imshow("threshold 127", dst)
+
 thresh = 10  # 更改閾值 = 10
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
-cv2.imshow("Dst - 10", dst)  # threshold = 10
+cv2.imshow("threshold 10", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1576,10 +1607,12 @@ maxval = 255  # 定義像素最大值
 src = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
 cv2.imshow("Src", src)
-cv2.imshow("Dst - 127", dst)  # threshold = 127
+
+cv2.imshow("threshold 127", dst)
+
 thresh = 80  # 修訂所定義的閾值
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
-cv2.imshow("Dst - 80", dst)  # threshold = 80
+cv2.imshow("threshold 80", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1593,10 +1626,11 @@ maxval = 255  # 定義像素最大值
 src = cv2.imread("jk.jpg")
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
 cv2.imshow("Src", src)
-cv2.imshow("Dst - 127", dst)  # threshold = 127
+cv2.imshow("threshold 127", dst)
+
 thresh = 80  # 修訂所定義的閾值
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
-cv2.imshow("Dst - 80", dst)  # threshold = 80
+cv2.imshow("threshold 127", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1622,10 +1656,12 @@ maxval = 255  # 定義像素最大值
 src = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
 cv2.imshow("Src", src)
-cv2.imshow("Dst - 127", dst)  # threshold = 127
+
+cv2.imshow("threshold 127", dst)
+
 thresh = 80  # 修訂所定義的閾值
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
-cv2.imshow("Dst - 80", dst)  # threshold = 80
+cv2.imshow("threshold 80", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1639,10 +1675,12 @@ maxval = 255  # 定義像素最大值
 src = cv2.imread("jk.jpg")
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
 cv2.imshow("Src", src)
-cv2.imshow("Dst - 127", dst)  # threshold = 127
+
+cv2.imshow("threshold 127", dst)
+
 thresh = 80  # 修訂所定義的閾值
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
-cv2.imshow("Dst - 80", dst)  # threshold = 80
+cv2.imshow("threshold 80", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1668,10 +1706,12 @@ maxval = 255  # 定義像素最大值
 src = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
 cv2.imshow("Src", src)
-cv2.imshow("Dst - 127", dst)  # threshold = 127
+
+cv2.imshow("threshold 127", dst)
+
 thresh = 80  # 修訂所定義的閾值
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
-cv2.imshow("Dst - 80", dst)  # threshold = 80
+cv2.imshow("threshold 80", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1685,10 +1725,12 @@ maxval = 255  # 定義像素最大值
 src = cv2.imread("jk.jpg")
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
 cv2.imshow("Src", src)
-cv2.imshow("Dst - 127", dst)  # threshold = 127
+
+cv2.imshow("threshold 127", dst)
+
 thresh = 80  # 修訂所定義的閾值
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
-cv2.imshow("Dst - 80", dst)  # threshold = 80
+cv2.imshow("threshold 80", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -2227,7 +2269,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 cv2.waitKey(3000)  # 等待3秒
-cv2.destroyWindow("MyPicture1")  # 刪除MyPicture1
+cv2.destroyWindow("Peony1")  # 刪除Peony1
 cv2.waitKey(8000)  # 等待8秒
 cv2.destroyAllWindows()
 

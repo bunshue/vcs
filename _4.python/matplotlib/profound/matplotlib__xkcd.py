@@ -1,14 +1,8 @@
 import sys
-
 import numpy as np
 import matplotlib.pyplot as plt
 
 print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 # import pandas as pd
 
@@ -40,8 +34,6 @@ xkcd
 """
 
 """
-import numpy as np
-
 #  使用动漫风格
 
 bo = np.arange(5)
@@ -127,8 +119,6 @@ class _xkcd:
 
 
 """
-import matplotlib.pyplot as plt
-
 plt.rcParams.update({'font.family': "Comic Sans"})
 
 with plt.xkcd():
@@ -136,8 +126,6 @@ with plt.xkcd():
     plt.title('test')
 plt.show()
 """
-
-import matplotlib.pyplot as plt
 
 plt.xkcd()
 plt.rcParams.update({"font.family": "FZKaTong-M19S"})

@@ -25,6 +25,46 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
+"""
+#組態檔
+import matplotlib
+
+cc = os.path.abspath(matplotlib.get_configdir())
+print(cc)
+cc = os.path.abspath(matplotlib.matplotlib_fname())
+print(cc)
+
+print(matplotlib.rc_params())
+print(matplotlib.rcParams)
+
+matplotlib.rc("lines", marker="x", linewidth=2, color="red")
+matplotlib.rcdefaults()
+matplotlib.rcParams.update( matplotlib.rc_params() )
+"""
+print("------------------------------------------------------------")  # 60個
+
+# 設定參數
+# mpl.rcParams.update({"font.size": 14})
+# plt.rcParams.update({"font.family": "FZKaTong-M19S"})
+# plt.rcParams.update({'font.family': "Microsoft YaHei"})
+# plt.rcParams.update({'font.family': "Comic Sans"})
+
+# 一次設定所有參數
+import matplotlib.pylab as pylab
+plt.style.use('fivethirtyeight')
+params = {
+    'figure.figsize': (8, 8),
+    'font.size': 24,
+    'legend.fontsize': 20,
+    'axes.titlesize': 28,
+    'axes.labelsize': 24,
+    'xtick.labelsize': 20,
+    'ytick.labelsize': 20
+}
+pylab.rcParams.update(params)
+# np.set_printoptions(suppress=True)
+
+print("------------------------------------------------------------")  # 60個
 
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
@@ -205,7 +245,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
 d01 = [10 for y in range(1, 9)]  # data1線條之y值
 d02 = [20 for y in range(1, 9)]  # data2線條之y值
 d03 = [30 for y in range(1, 9)]  # data3線條之y值
@@ -383,7 +422,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
+
+print("------------------------------------------------------------")  # 60個
 
 """
 --- plt.plot 連線樣式 -------------------------------------------------------------
