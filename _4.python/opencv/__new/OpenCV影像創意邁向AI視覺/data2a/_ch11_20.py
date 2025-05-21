@@ -1,101 +1,136 @@
-import sys
-import cv2
-import numpy as np
-import math
-import time
-import matplotlib.pyplot as plt
+"""
+OpenCV影像創意邁向AI視覺王者歸來
 
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+import cv2
+
+filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
+filename3 = "C:/_git/vcs/_4.python/opencv/data/lena.jpg"
+filename4 = "C:/_git/vcs/_1.data/______test_files1/ims01.bmp"
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import time
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+
+def show():
+    plt.show()
+    pass
+
+'''
+print("------------------------------------------------------------")  # 60個
+# OpenCV_11_刪除影像雜訊_濾波
 print("------------------------------------------------------------")  # 60個
 
 # ch11_1.py
+print('使用 均值濾波器.blur()')
 
-src = cv2.imread("hung.jpg")
+src = cv2.imread(filename2)
+cv2.imshow("src", src)
+
 dst1 = cv2.blur(src, (3, 3))  # 使用 3x3 濾波核
 dst2 = cv2.blur(src, (5, 5))  # 使用 5x5 濾波核
 dst3 = cv2.blur(src, (7, 7))  # 使用 7x7 濾波核
-cv2.imshow("src", src)
+dst4 = cv2.blur(src, (29, 29))  # 使用 29x29 濾波核
+
 cv2.imshow("dst 3 x 3", dst1)
 cv2.imshow("dst 5 x 5", dst2)
 cv2.imshow("dst 7 x 7", dst3)
+cv2.imshow("dst 29 x 29", dst4)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch11_2.py
+print('使用 方框濾波器.boxFilter()')
 
-src = cv2.imread("hung.jpg")
-dst1 = cv2.blur(src, (29, 29))  # 使用 29x29 濾波核
+src = cv2.imread(filename2)
 cv2.imshow("src", src)
-cv2.imshow("dst 29 x 29", dst1)
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch11_2_1.py
-
-src = cv2.imread("hung.jpg")
 dst1 = cv2.boxFilter(src, -1, (2, 2), normalize=0)  # ksize是 2x2 的濾波核
 dst2 = cv2.boxFilter(src, -1, (3, 3), normalize=0)  # ksize是 3x3 的濾波核
 dst3 = cv2.boxFilter(src, -1, (5, 5), normalize=0)  # ksize是 5x5 的濾波核
-cv2.imshow("src", src)
+
 cv2.imshow("dst 2 x 2", dst1)
 cv2.imshow("dst 3 x 3", dst2)
 cv2.imshow("dst 5 x 5", dst3)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch11_3.py
+'''
+print('使用 中值濾波器.medianBlur()')
 
 src = np.ones((3, 3), np.float32) * 150
 src[1, 1] = 20
-print(f"src = \n {src}")
+print(f"原陣列 src = \n {src}")
+
 dst = cv2.medianBlur(src, 3)
-print(f"dst = \n {dst}")
+print(f"中值濾波後 dst = \n {dst}")
 
 print("------------------------------------------------------------")  # 60個
 
-# ch11_4.py
+print('使用 中值濾波器.medianBlur()')
 
-src = cv2.imread("hung.jpg")
+src = cv2.imread(filename2)
+cv2.imshow("src", src)
+
 dst1 = cv2.medianBlur(src, 3)  # 使用邊長是 3 的濾波核
 dst2 = cv2.medianBlur(src, 5)  # 使用邊長是 5 的濾波核
 dst3 = cv2.medianBlur(src, 7)  # 使用邊長是 7 的濾波核
-cv2.imshow("src", src)
 cv2.imshow("dst 3 x 3", dst1)
 cv2.imshow("dst 5 x 5", dst2)
 cv2.imshow("dst 7 x 7", dst3)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch11_5.py
+print('使用 高斯濾波器.GaussianBlur()')
 
-src = cv2.imread("hung.jpg")
+src = cv2.imread(filename2)
+cv2.imshow("src", src)
+
 dst1 = cv2.GaussianBlur(src, (3, 3), 0, 0)  # 使用 3 x 3 的濾波核
 dst2 = cv2.GaussianBlur(src, (5, 5), 0, 0)  # 使用 5 x 5 的濾波核
 dst3 = cv2.GaussianBlur(src, (29, 29), 0, 0)  # 使用 29 x 29 的濾波核
-cv2.imshow("src", src)
 cv2.imshow("dst 3 x 3", dst1)
 cv2.imshow("dst 5 x 5", dst2)
 cv2.imshow("dst 15 x 15", dst3)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch11_6.py
+print('使用 均值濾波器.blur() / 高斯濾波器.GaussianBlur()')
 
 src = cv2.imread("border.jpg")
+
 dst1 = cv2.blur(src, (3, 3))  # 均值濾波器 - 3x3 濾波核
 dst2 = cv2.blur(src, (7, 7))  # 均值濾波器 - 7x7 濾波核
 
@@ -107,47 +142,51 @@ cv2.imshow("dst 7 x 7", dst2)
 cv2.imshow("Gauss dst 3 x 3", dst3)
 cv2.imshow("Gauss dst 7 x 7", dst4)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch11_7.py
+print('使用 均值濾波器.blur() / 高斯濾波器.GaussianBlur() / 雙邊濾波器.bilateralFilter()')
 
-src = cv2.imread("hung.jpg")
+src = cv2.imread(filename2)
+cv2.imshow("src", src)
+
 dst1 = cv2.blur(src, (15, 15))  # 均值濾波器
 dst2 = cv2.GaussianBlur(src, (15, 15), 0, 0)  # 高斯濾波器
 dst2 = cv2.bilateralFilter(src, 15, 100, 100)  # 雙邊濾波器
 
-cv2.imshow("src", src)
 cv2.imshow("blur", dst1)
 cv2.imshow("GaussianBlur", dst1)
 cv2.imshow("bilateralFilter", dst2)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch11_8.py
+print('使用 2D濾波核.filter2D()')
 
-src = cv2.imread("hung.jpg")
+src = cv2.imread(filename2)
+cv2.imshow("src", src)
+
 kernel = np.ones((11, 11), np.float32) / 121  # 自訂卷積核
 dst = cv2.filter2D(src, -1, kernel)  # 自定義濾波器
-cv2.imshow("src", src)
 cv2.imshow("dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+# OpenCV_12_數學形態學
+print("------------------------------------------------------------")  # 60個
 
-# ch12_1.py
+print('腐蝕(Erosion)')
 
 src = np.zeros((7, 7), np.uint8)
 src[1:6, 1:6] = 1  # 建立前景影像
 kernel = np.ones((3, 3), np.uint8)  # 建立內核
-dst = cv2.erode(src, kernel)  # 腐蝕操作
+dst = cv2.erode(src, kernel)  # 腐蝕.erode
 print(f"src = \n {src}")
 print(f"kernel = \n {kernel}")
 print(f"Erosion = \n {dst}")
@@ -157,13 +196,14 @@ print("------------------------------------------------------------")  # 60個
 # ch12_10.py
 
 src = cv2.imread("night.jpg")
-kernel = np.ones((9, 9), np.uint8)  # 建立9x9內核
-dst = cv2.morphologyEx(src, cv2.MORPH_OPEN, kernel)  # 開運算
-
 cv2.imshow("src", src)
+
+kernel = np.ones((9, 9), np.uint8)  # 建立9x9內核
+
+dst = cv2.morphologyEx(src, cv2.MORPH_OPEN, kernel)  # 開運算
 cv2.imshow("after Opening 9 x 9", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -171,15 +211,17 @@ print("------------------------------------------------------------")  # 60個
 # ch12_11.py
 
 src = cv2.imread("night.jpg")
-kernel = np.ones((9, 9), np.uint8)  # 建立9x9內核
-mid = cv2.erode(src, kernel)  # erosion
-dst = cv2.dilate(mid, kernel)  # dilation
-
 cv2.imshow("src", src)
+
+kernel = np.ones((9, 9), np.uint8)  # 建立9x9內核
+
+mid = cv2.erode(src, kernel)  # 腐蝕.erode
 cv2.imshow("after erosion 9 x 9", mid)
+
+dst = cv2.dilate(mid, kernel)  # 膨脹.dilate
 cv2.imshow("after dilation 9 x 9", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -187,13 +229,14 @@ print("------------------------------------------------------------")  # 60個
 # ch12_12.py
 
 src = cv2.imread("snowman.jpg")
-kernel = np.ones((11, 11), np.uint8)  # 建立11x11內核
-dst = cv2.morphologyEx(src, cv2.MORPH_CLOSE, kernel)  # 閉運算
-
 cv2.imshow("src", src)
+
+kernel = np.ones((11, 11), np.uint8)  # 建立11x11內核
+
+dst = cv2.morphologyEx(src, cv2.MORPH_CLOSE, kernel)  # 閉運算
 cv2.imshow("after Closing 11 x 11", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -201,13 +244,14 @@ print("------------------------------------------------------------")  # 60個
 # ch12_13.py
 
 src = cv2.imread("snowman1.jpg")
-kernel = np.ones((11, 11), np.uint8)  # 建立11x11內核
-dst = cv2.morphologyEx(src, cv2.MORPH_CLOSE, kernel)  # 閉運算
-
 cv2.imshow("src", src)
+
+kernel = np.ones((11, 11), np.uint8)  # 建立11x11內核
+
+dst = cv2.morphologyEx(src, cv2.MORPH_CLOSE, kernel)  # 閉運算
 cv2.imshow("after Closing 11 x 11", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -215,14 +259,17 @@ print("------------------------------------------------------------")  # 60個
 # ch12_14.py
 
 src = cv2.imread("night.jpg")
-kernel = np.ones((9, 9), np.uint8)  # 建立9x9內核
-mid = cv2.dilate(src, kernel)  # dilation
-dst = cv2.erode(mid, kernel)  # erosion
 cv2.imshow("src", src)
+
+kernel = np.ones((9, 9), np.uint8)  # 建立9x9內核
+
+mid = cv2.dilate(src, kernel)  # 膨脹.dilate
 cv2.imshow("after dilation 9 x 9", mid)
+
+dst = cv2.erode(mid, kernel)  # 腐蝕.erode
 cv2.imshow("after erosion 9 x 9", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -230,14 +277,17 @@ print("------------------------------------------------------------")  # 60個
 # ch12_15.py
 
 src = cv2.imread("k.jpg")
-kernel = np.ones((5, 5), np.uint8)  # 建立5x5內核
-dst1 = cv2.dilate(src, kernel)  # dilation
-dst2 = cv2.erode(src, kernel)  # erosion
 cv2.imshow("src", src)
+
+kernel = np.ones((5, 5), np.uint8)  # 建立5x5內核
+
+dst1 = cv2.dilate(src, kernel)  # 膨脹.dilate
 cv2.imshow("after dilation 5 x 5", dst1)
+
+dst2 = cv2.erode(src, kernel)  # 腐蝕.erode
 cv2.imshow("after erosion 5 x 5", dst2)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -245,13 +295,14 @@ print("------------------------------------------------------------")  # 60個
 # ch12_16.py
 
 src = cv2.imread("k.jpg")
-kernel = np.ones((5, 5), np.uint8)  # 建立5x5內核
-dst = cv2.morphologyEx(src, cv2.MORPH_GRADIENT, kernel)  # gradient
-
 cv2.imshow("src", src)
+
+kernel = np.ones((5, 5), np.uint8)  # 建立5x5內核
+
+dst = cv2.morphologyEx(src, cv2.MORPH_GRADIENT, kernel)  # gradient
 cv2.imshow("after morpological gradient", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -259,13 +310,14 @@ print("------------------------------------------------------------")  # 60個
 # ch12_17.py
 
 src = cv2.imread("hole.jpg")
-kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
-dst = cv2.morphologyEx(src, cv2.MORPH_GRADIENT, kernel)  # gradient
-
 cv2.imshow("src", src)
+
+kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
+
+dst = cv2.morphologyEx(src, cv2.MORPH_GRADIENT, kernel)  # gradient
 cv2.imshow("after morpological gradient", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -273,13 +325,14 @@ print("------------------------------------------------------------")  # 60個
 # ch12_18.py
 
 src = cv2.imread("btree.jpg")
-kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
-dst = cv2.morphologyEx(src, cv2.MORPH_TOPHAT, kernel)  # tophat
-
 cv2.imshow("src", src)
+
+kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
+
+dst = cv2.morphologyEx(src, cv2.MORPH_TOPHAT, kernel)  # 禮帽運算(tophat)
 cv2.imshow("after tophat", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -287,13 +340,14 @@ print("------------------------------------------------------------")  # 60個
 # ch12_19.py
 
 src = cv2.imread("snowman.jpg")
-kernel = np.ones((11, 11), np.uint8)  # 建立11x11內核
-dst = cv2.morphologyEx(src, cv2.MORPH_BLACKHAT, kernel)  # blackhat
-
 cv2.imshow("src", src)
+
+kernel = np.ones((11, 11), np.uint8)  # 建立11x11內核
+
+dst = cv2.morphologyEx(src, cv2.MORPH_BLACKHAT, kernel)  # 黑帽運算(blackhat)
 cv2.imshow("after blackhat", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -301,15 +355,19 @@ print("------------------------------------------------------------")  # 60個
 # ch12_2.py
 
 src = cv2.imread("bw.jpg")
-kernel = np.ones((5, 5), np.uint8)  # 建立5x5內核
-dst1 = cv2.erode(src, kernel)  # 腐蝕操作
-kerne2 = np.ones((11, 11), np.uint8)  # 建立11x11內核
-dst2 = cv2.erode(src, kerne2)  # 腐蝕操作
-
 cv2.imshow("src", src)
+
+kernel = np.ones((5, 5), np.uint8)  # 建立5x5內核
+
+dst1 = cv2.erode(src, kernel)  # 腐蝕.erode
 cv2.imshow("after erosion 5 x 5", dst1)
+
+kerne2 = np.ones((11, 11), np.uint8)  # 建立11x11內核
+
+dst2 = cv2.erode(src, kerne2)  # 腐蝕.erode
 cv2.imshow("after erosion 11 x 11", dst2)
-cv2.waitKey(0)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -317,13 +375,14 @@ print("------------------------------------------------------------")  # 60個
 # ch12_20.py
 
 src = cv2.imread("excel.jpg")
-kernel = np.ones((11, 11), np.uint8)  # 建立11x11內核
-dst = cv2.morphologyEx(src, cv2.MORPH_BLACKHAT, kernel)  # blackhat
-
 cv2.imshow("src", src)
+
+kernel = np.ones((11, 11), np.uint8)  # 建立11x11內核
+
+dst = cv2.morphologyEx(src, cv2.MORPH_BLACKHAT, kernel)  # 黑帽運算(blackhat)
 cv2.imshow("after blackhat", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -342,19 +401,24 @@ print("------------------------------------------------------------")  # 60個
 # ch12_22.py
 
 src = cv2.imread("bw_circle.jpg")
-kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (39, 39))
-dst1 = cv2.dilate(src, kernel)
-kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (39, 39))
-dst2 = cv2.dilate(src, kernel)
-kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (39, 39))
-dst3 = cv2.dilate(src, kernel)
-
 cv2.imshow("src", src)
+
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (39, 39))
+
+dst1 = cv2.dilate(src, kernel)  # 膨脹.dilate
 cv2.imshow("MORPH_RECT", dst1)
+
+kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (39, 39))
+
+dst2 = cv2.dilate(src, kernel)  # 膨脹.dilate
 cv2.imshow("MORPH_ELLIPSE", dst2)
+
+kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (39, 39))
+
+dst3 = cv2.dilate(src, kernel)  # 膨脹.dilate
 cv2.imshow("MORPH_CROSS", dst3)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -362,15 +426,19 @@ print("------------------------------------------------------------")  # 60個
 # ch12_3.py
 
 src = cv2.imread("bw_noise.jpg")
-kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
-dst1 = cv2.erode(src, kernel)  # 腐蝕操作
-kerne2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
-dst2 = cv2.erode(src, kerne2)  # 腐蝕操作
-
 cv2.imshow("src", src)
+
+kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
+
+dst1 = cv2.erode(src, kernel)  # 腐蝕.erode
 cv2.imshow("after erosion 3 x 3", dst1)
+
+kerne2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
+
+dst2 = cv2.erode(src, kerne2)  # 腐蝕.erode
 cv2.imshow("after erosion 5 x 5", dst2)
-cv2.waitKey(0)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -378,15 +446,19 @@ print("------------------------------------------------------------")  # 60個
 # ch12_4.py
 
 src = cv2.imread("whilster.jpg")
-kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
-dst1 = cv2.erode(src, kernel)  # 腐蝕操作
-kerne2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
-dst2 = cv2.erode(src, kerne2)  # 腐蝕操作
-
 cv2.imshow("src", src)
+
+kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
+
+dst1 = cv2.erode(src, kernel)  # 腐蝕.erode
 cv2.imshow("after erosion 3 x 3", dst1)
+
+kerne2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
+
+dst2 = cv2.erode(src, kerne2)  # 腐蝕.erode
 cv2.imshow("after erosion 5 x 5", dst2)
-cv2.waitKey(0)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -396,7 +468,7 @@ print("------------------------------------------------------------")  # 60個
 src = np.zeros((7, 7), np.uint8)
 src[2:5, 2:5] = 1  # 建立前景影像
 kernel = np.ones((3, 3), np.uint8)  # 建立內核
-dst = cv2.dilate(src, kernel)  # 膨脹操作
+dst = cv2.dilate(src, kernel)  # 膨脹.dilate
 print(f"src = \n {src}")
 print(f"kernel = \n {kernel}")
 print(f"Dilation = \n {dst}")
@@ -406,15 +478,19 @@ print("------------------------------------------------------------")  # 60個
 # ch12_6.py
 
 src = cv2.imread("bw_dilate.jpg")
-kernel = np.ones((5, 5), np.uint8)  # 建立5x5內核
-dst1 = cv2.dilate(src, kernel)  # 膨脹操作
-kerne2 = np.ones((11, 11), np.uint8)  # 建立11x11內核
-dst2 = cv2.dilate(src, kerne2)  # 膨脹操作
-
 cv2.imshow("src", src)
+
+kernel = np.ones((5, 5), np.uint8)  # 建立5x5內核
+
+dst1 = cv2.dilate(src, kernel)  # 膨脹.dilate
 cv2.imshow("after dilation 5 x 5", dst1)
+
+kerne2 = np.ones((11, 11), np.uint8)  # 建立11x11內核
+
+dst2 = cv2.dilate(src, kerne2)  # 膨脹.dilate
 cv2.imshow("after dilation 11 x 11", dst2)
-cv2.waitKey(0)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -422,15 +498,19 @@ print("------------------------------------------------------------")  # 60個
 # ch12_7.py
 
 src = cv2.imread("a.jpg")
-kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
-dst1 = cv2.dilate(src, kernel)  # 膨脹操作
-kerne2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
-dst2 = cv2.dilate(src, kerne2)  # 膨脹操作
-
 cv2.imshow("src", src)
+
+kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
+
+dst1 = cv2.dilate(src, kernel)  # 膨脹.dilate
 cv2.imshow("after dilation 3 x 3", dst1)
+
+kerne2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
+
+dst2 = cv2.dilate(src, kerne2)  # 膨脹.dilate
 cv2.imshow("after dilation 5 x 5", dst2)
-cv2.waitKey(0)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -438,15 +518,19 @@ print("------------------------------------------------------------")  # 60個
 # ch12_8.py
 
 src = cv2.imread("whilster.jpg")
-kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
-dst1 = cv2.dilate(src, kernel)  # 膨脹操作
-kerne2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
-dst2 = cv2.dilate(src, kerne2)  # 膨脹操作
-
 cv2.imshow("src", src)
+
+kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
+
+dst1 = cv2.dilate(src, kernel)  # 膨脹.dilate
 cv2.imshow("after dilation 3 x 3", dst1)
+
+kerne2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
+
+dst2 = cv2.dilate(src, kerne2)  # 膨脹.dilate
 cv2.imshow("after dilation 5 x 5", dst2)
-cv2.waitKey(0)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -454,15 +538,18 @@ print("------------------------------------------------------------")  # 60個
 # ch12_9.py
 
 src = cv2.imread("btree.jpg")
-kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
-dst = cv2.morphologyEx(src, cv2.MORPH_OPEN, kernel)  # 開運算
-
 cv2.imshow("src", src)
+
+kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
+
+dst = cv2.morphologyEx(src, cv2.MORPH_OPEN, kernel)  # 開運算
 cv2.imshow("after Opening 3 x 3", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
+# OpenCV_13_影像梯度與邊緣偵測
 print("------------------------------------------------------------")  # 60個
 
 # ch13_1.py
@@ -474,99 +561,108 @@ print(f"dst = \n {dst}")
 
 print("------------------------------------------------------------")  # 60個
 
-# ch13_2.py
+print('使用 Sobel()')
 
 src = cv2.imread("map.jpg")
-dst = cv2.Sobel(src, -1, 1, 0)  # 計算 x 軸影像梯度
 cv2.imshow("Src", src)
+
+dst = cv2.Sobel(src, -1, 1, 0)  # 計算 x 軸影像梯度
 cv2.imshow("Dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch13_3.py
+print('使用 Sobel()')
 
 src = cv2.imread("map.jpg")
+cv2.imshow("Src", src)
+
 dst = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dst = cv2.convertScaleAbs(dst)  # 將負值轉正值
-cv2.imshow("Src", src)
 cv2.imshow("Dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch13_4.py
+print('使用 Sobel()')
 
 src = cv2.imread("map.jpg")
+cv2.imshow("Src", src)
+
 dst = cv2.Sobel(src, -1, 0, 1)  # 計算 y 軸影像梯度
-cv2.imshow("Src", src)
 cv2.imshow("Dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch13_5.py
+print('使用 Sobel()')
 
 src = cv2.imread("map.jpg")
+cv2.imshow("Src", src)
+
 dst = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
 dst = cv2.convertScaleAbs(dst)  # 將負值轉正值
-cv2.imshow("Src", src)
 cv2.imshow("Dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch13_6.py
+print('使用 Sobel()')
 
 src = cv2.imread("map.jpg")
+cv2.imshow("Src", src)
+
 dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
 dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
 dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
-cv2.imshow("Src", src)
 cv2.imshow("Dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch13_7.py
+print('使用 Sobel()')
 
 src = cv2.imread("lena.jpg")
+cv2.imshow("Src", src)
+
 dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
 dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
 dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
-cv2.imshow("Src", src)
 cv2.imshow("Dstx", dstx)
 cv2.imshow("Dsty", dsty)
 cv2.imshow("Dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch13_8.py
+print('使用 Sobel() / Scharr()')
 
 # Sobel()函數
 src = cv2.imread("lena.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
+cv2.imshow("Src", src)
+
 dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
 dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
 dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst_sobel = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+
 # Scharr()函數
 dstx = cv2.Scharr(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dsty = cv2.Scharr(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
@@ -575,24 +671,26 @@ dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst_scharr = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
 
 # 輸出影像梯度
-cv2.imshow("Src", src)
 cv2.imshow("Sobel", dst_sobel)
 cv2.imshow("Scharr", dst_scharr)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch13_8_1.py
+print('使用 Sobel() / Scharr()')
 
 # Sobel()函數
 src = cv2.imread("lena.jpg")  # 彩色讀取
+cv2.imshow("Src", src)
+
 dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
 dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
 dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst_sobel = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+
 # Scharr()函數
 dstx = cv2.Scharr(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dsty = cv2.Scharr(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
@@ -601,19 +699,20 @@ dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst_scharr = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
 
 # 輸出影像梯度
-cv2.imshow("Src", src)
 cv2.imshow("Sobel", dst_sobel)
 cv2.imshow("Scharr", dst_scharr)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch13_9.py
+print('使用 Sobel() / Scharr()')
 
 # Sobel()函數
 src = cv2.imread("snow.jpg")  # 彩色讀取
+cv2.imshow("Src", src)
+
 dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
 dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
@@ -627,34 +726,38 @@ dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst_scharr = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
 
 # 輸出影像梯度
-cv2.imshow("Src", src)
 cv2.imshow("Scharr X", dstx)
 cv2.imshow("Scharr Y", dsty)
 cv2.imshow("Sobel", dst_sobel)
 cv2.imshow("Scharr", dst_scharr)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch13_10.py
+print('使用 Laplacian()')
 
 src = cv2.imread("laplacian.jpg")
+cv2.imshow("Src", src)
+
 dst_tmp = cv2.Laplacian(src, cv2.CV_32F)  # Laplacian邊緣影像
 dst = cv2.convertScaleAbs(dst_tmp)  # 轉換為正值
-cv2.imshow("Src", src)
 cv2.imshow("Dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch13_11.py
+print('使用 Sobel() / Scharr() / Laplacian()')
 
 src = cv2.imread("geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
+cv2.imshow("Src", src)
+
 src = cv2.GaussianBlur(src, (3, 3), 0)  # 降低噪音
+cv2.imshow("Src", src)
+
 # Sobel()函數
 dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
@@ -670,66 +773,77 @@ dst_scharr = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
 # Laplacian()函數
 dst_tmp = cv2.Laplacian(src, cv2.CV_32F, ksize=3)  # Laplacian邊緣影像
 dst_lap = cv2.convertScaleAbs(dst_tmp)  # 將負值轉正值
+
 # 輸出影像梯度
-cv2.imshow("Src", src)
 cv2.imshow("Sobel", dst_sobel)
 cv2.imshow("Scharr", dst_scharr)
 cv2.imshow("Laplacian", dst_lap)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch13_12.py
+print('使用 Canny()')
 
 src = cv2.imread("lena.jpg", cv2.IMREAD_GRAYSCALE)
+cv2.imshow("Src", src)
+
 dst1 = cv2.Canny(src, 50, 100)  # minVal=50, maxVal=100
 dst2 = cv2.Canny(src, 50, 200)  # minVal=50, maxVal=200
-cv2.imshow("Src", src)
 cv2.imshow("Dst1", dst1)
 cv2.imshow("Dst2", dst2)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch13_13.py
+print('使用 Sobel() / Scharr() / Laplacian() / Canny()')
 
 src = cv2.imread("geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
+
 src = cv2.GaussianBlur(src, (3, 3), 0)  # 降低噪音
+
 # Sobel()函數
 dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
 dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
 dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst_sobel = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+
 # Scharr()函數
 dstx = cv2.Scharr(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dsty = cv2.Scharr(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
 dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
 dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst_scharr = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+
 # Laplacian()函數
 dst_tmp = cv2.Laplacian(src, cv2.CV_32F, ksize=3)  # Laplacian邊緣影像
 dst_lap = cv2.convertScaleAbs(dst_tmp)  # 將負值轉正值
+
 # Canny()函數
 dst_canny = cv2.Canny(src, 50, 100)  # minVal=50, maxVal=100
+
 # 輸出影像梯度
 cv2.imshow("Canny", dst_canny)
 cv2.imshow("Sobel", dst_sobel)
 cv2.imshow("Scharr", dst_scharr)
 cv2.imshow("Laplacian", dst_lap)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+# OpenCV_14_影像金字塔
+print("------------------------------------------------------------")  # 60個
 
-# ch14_1.py
+print('影像金字塔')
 
 src = cv2.imread("macau.jpg")  # 讀取影像
+cv2.imshow("src", src)
+
 dst1 = cv2.pyrDown(src)  # 第 1 次向下採樣
 dst2 = cv2.pyrDown(dst1)  # 第 2 次向下採樣
 dst3 = cv2.pyrDown(dst2)  # 第 3 次向下採樣
@@ -738,19 +852,19 @@ print(f"dst1.shape = {dst1.shape}")
 print(f"dst2.shape = {dst2.shape}")
 print(f"dst3.shape = {dst3.shape}")
 
-cv2.imshow("src", src)
 cv2.imshow("dst1", dst1)
 cv2.imshow("dst2", dst2)
 cv2.imshow("dst3", dst3)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch14_2.py
+print('影像金字塔')
 
 src = cv2.imread("macau_small.jpg")  # 讀取影像
+
 dst1 = cv2.pyrUp(src)  # 第 1 次向下採樣
 dst2 = cv2.pyrUp(dst1)  # 第 2 次向下採樣
 dst3 = cv2.pyrUp(dst2)  # 第 3 次向下採樣
@@ -764,7 +878,7 @@ cv2.imshow("dst1", dst1)
 cv2.imshow("dst2", dst2)
 cv2.imshow("dst3", dst3)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -783,20 +897,24 @@ print("------------------------------------------------------------")  # 60個
 # ch14_4.py
 
 src = cv2.imread("pengiun.jpg")  # 讀取影像
+cv2.imshow("src", src)
+
 dst1 = src + src  # 影像相加
 dst2 = src - src  # 影像相減
-cv2.imshow("src", src)
+
 cv2.imshow("dst1 - add", dst1)
 cv2.imshow("dst2 - subtraction", dst2)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch14_5.py
+print('影像金字塔')
 
 src = cv2.imread("pengiun.jpg")  # 讀取影像
+cv2.imshow("src", src)
+
 print(f"原始影像大小 = \n{src.shape}")
 dst_down = cv2.pyrDown(src)  # 向下採樣
 print(f"向下採樣大小 = \n{dst_down.shape}")
@@ -805,18 +923,19 @@ print(f"向上採樣大小 = \n{dst_up.shape}")
 dst = dst_up - src
 print(f"結果影像大小 = \n{dst.shape}")
 
-cv2.imshow("src", src)
 cv2.imshow("dst1 - recovery", dst_up)
 cv2.imshow("dst2 - dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch14_6.py
+print('影像金字塔')
 
 src = cv2.imread("pengiun.jpg")  # 讀取影像
+cv2.imshow("src", src)
+
 print(f"原始影像大小 = \n{src.shape}")
 dst_up = cv2.pyrUp(src)  # 向上採樣
 print(f"向上採樣大小 = \n{dst_up.shape}")
@@ -825,18 +944,18 @@ print(f"向下採樣大小 = \n{dst_down.shape}")
 dst = dst_down - src
 print(f"結果影像大小 = \n{dst.shape}")
 
-cv2.imshow("src", src)
 cv2.imshow("dst1 - recovery", dst_down)
 cv2.imshow("dst2 - dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch14_7.py
+print('影像金字塔')
 
 src = cv2.imread("pengiun.jpg")  # 讀取影像
+
 G0 = src
 G1 = cv2.pyrDown(G0)  # 第 1 次向下採樣
 G2 = cv2.pyrDown(G1)  # 第 2 次向下採樣
@@ -848,14 +967,16 @@ print(f"L1.shape = \n{L1.shape}")  # 列印第 1 層拉普拉斯金字塔大小
 cv2.imshow("Laplacian L0", L0)  # 顯示第 0 層拉普拉斯金字塔
 cv2.imshow("Laplacian L1", L1)  # 顯示第 1 層拉普拉斯金字塔
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch14_8.py
+print('影像金字塔')
 
 src = cv2.imread("pengiun.jpg")  # 讀取影像
+cv2.imshow("Src", src)
+
 G0 = src
 G1 = cv2.pyrDown(G0)  # 第 1 次向下採樣
 L0 = src - cv2.pyrUp(G1)  # 拉普拉斯影像
@@ -863,18 +984,19 @@ dst = L0 + cv2.pyrUp(G1)  # 恢復結果影像
 
 print(f"src.shape = \n{src.shape}")  # 列印原始影像大小
 print(f"dst.shape = \n{dst.shape}")  # 列印恢復影像大小
-cv2.imshow("Src", src)  # 顯示原始影像
 cv2.imshow("Dst", dst)  # 顯示恢復影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
+# OpenCV_15_輪廓的檢測與匹配
 print("------------------------------------------------------------")  # 60個
 
 # ch15_1.py
 
 src = cv2.imread("easy.jpg")
-cv2.imshow("src", src)  # 顯示原始影像
+cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
@@ -886,7 +1008,7 @@ contours, hierarchy = cv2.findContours(
 dst = cv2.drawContours(src, contours, -1, (0, 255, 0), 5)  # 繪製圖形輪廓
 cv2.imshow("result", dst)  # 顯示結果影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -894,7 +1016,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_1_1.py
 
 src = cv2.imread("easy.jpg")
-cv2.imshow("src", src)  # 顯示原始影像
+cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
@@ -907,7 +1029,7 @@ dst = cv2.drawContours(src, contours, -1, (0, 255, 0), 5)  # 繪製圖形輪廓
 cv2.imshow("result", dst)  # 顯示結果影像
 cv2.imshow("src1", src)  # 再輸出一次原始影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -915,6 +1037,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_2.py
 
 src = cv2.imread("easy.jpg")
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -930,7 +1053,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_3.py
 
 src = cv2.imread("easy.jpg")
-cv2.imshow("src", src)  # 顯示原始影像
+cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
@@ -948,7 +1071,7 @@ for i in range(n):  # 依次繪製輪廓
     imgList[i] = cv2.drawContours(imgList[i], contours, i, (255, 255, 255), 5)
     cv2.imshow("contours" + str(i), imgList[i])  # 顯示輪廓影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -956,6 +1079,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_4.py
 
 src = cv2.imread("easy.jpg")
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -974,6 +1098,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_5.py
 
 src = cv2.imread("easy.jpg")
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -989,7 +1114,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_6.py
 
 src = cv2.imread("easy1.jpg")
-cv2.imshow("src", src)  # 顯示原始影像
+cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
@@ -1001,7 +1126,7 @@ contours, hierarchy = cv2.findContours(
 dst = cv2.drawContours(src, contours, -1, (0, 255, 0), 5)  # 繪製圖形輪廓
 cv2.imshow("result", dst)  # 顯示結果影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1009,7 +1134,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_7.py
 
 src = cv2.imread("easy1.jpg")
-cv2.imshow("src", src)  # 顯示原始影像
+cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
@@ -1021,7 +1146,7 @@ contours, hierarchy = cv2.findContours(
 dst = cv2.drawContours(src, contours, -1, (0, 255, 0), 5)  # 繪製圖形輪廓
 cv2.imshow("result", dst)  # 顯示結果影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1029,7 +1154,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_8.py
 
 src = cv2.imread("lake.jpg")
-cv2.imshow("src", src)  # 顯示原始影像
+cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
@@ -1042,7 +1167,7 @@ contours, hierarchy = cv2.findContours(
 dst = cv2.drawContours(src, contours, -1, (0, 255, 0), 2)  # 繪製圖形輪廓
 cv2.imshow("result", dst)  # 顯示結果影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1050,7 +1175,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_9.py
 
 src = cv2.imread("lake.jpg")
-cv2.imshow("src", src)  # 顯示原始影像
+cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
@@ -1063,7 +1188,7 @@ contours, hierarchy = cv2.findContours(
 dst = cv2.drawContours(src, contours, -1, (255, 255, 255), -1)  # 繪製圖形輪廓
 cv2.imshow("result", dst)  # 顯示結果影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1071,7 +1196,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_10.py
 
 src = cv2.imread("lake.jpg")
-cv2.imshow("src", src)  # 顯示原始影像
+cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
@@ -1086,7 +1211,7 @@ dst = cv2.drawContours(mask, contours, -1, (255, 255, 255), -1)  # 繪製圖形�
 dst_result = cv2.bitwise_and(src, mask)
 cv2.imshow("dst result", dst_result)  # 顯示結果影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1094,7 +1219,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_11.py
 
 src = cv2.imread("easy2.jpg")
-cv2.imshow("src", src)  # 顯示原始影像
+cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
@@ -1108,7 +1233,7 @@ cv2.imshow("result", dst)  # 顯示結果影像
 print(f"hierarchy 資料類型 : {type(hierarchy)}")
 print(f"列印層級 \n {hierarchy}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1116,7 +1241,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_12.py
 
 src = cv2.imread("easy2.jpg")
-cv2.imshow("src", src)  # 顯示原始影像
+cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
@@ -1130,7 +1255,7 @@ cv2.imshow("result", dst)  # 顯示結果影像
 print(f"hierarchy 資料類型 : {type(hierarchy)}")
 print(f"列印層級 \n {hierarchy}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1138,7 +1263,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_13.py
 
 src = cv2.imread("easy3.jpg")
-cv2.imshow("src", src)  # 顯示原始影像
+cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
@@ -1152,7 +1277,7 @@ cv2.imshow("result", dst)  # 顯示結果影像
 print(f"hierarchy 資料類型 : {type(hierarchy)}")
 print(f"列印層級 \n {hierarchy}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1160,7 +1285,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_14.py
 
 src = cv2.imread("easy3.jpg")
-cv2.imshow("src", src)  # 顯示原始影像
+cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
@@ -1173,7 +1298,7 @@ dst = cv2.drawContours(src, contours, -1, (0, 255, 0), 3)  # 繪製圖形輪廓
 cv2.imshow("result", dst)  # 顯示結果影像
 print(f"列印層級 \n {hierarchy}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1181,7 +1306,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_15.py
 
 src = cv2.imread("easy.jpg")
-cv2.imshow("src", src)  # 顯示原始影像
+cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
@@ -1207,7 +1332,7 @@ for i in range(n):  # 列印影像矩
     M = cv2.moments(contours[i])
     print(f"列印影像矩 {str(i)} \n {M}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1215,7 +1340,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_16.py
 
 src = cv2.imread("easy.jpg")
-cv2.imshow("src", src)  # 顯示原始影像
+cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
@@ -1233,7 +1358,7 @@ for c in contours:  # 繪製中心點迴圈
     cv2.circle(dst, (Cx, Cy), 5, (255, 0, 0), -1)  # 繪製中心點
 cv2.imshow("result", dst)  # 顯示結果影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1241,7 +1366,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_17.py
 
 src = cv2.imread("easy.jpg")
-cv2.imshow("src", src)  # 顯示原始影像
+cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
@@ -1256,7 +1381,7 @@ for i in range(n):  # 繪製中心點迴圈
     area = cv2.contourArea(contours[i])  # 計算輪廓面積
     print(f"輪廓 {i} 面積 = {area}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1264,7 +1389,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_18.py
 
 src = cv2.imread("easy.jpg")
-cv2.imshow("src", src)  # 顯示原始影像
+cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
@@ -1279,7 +1404,7 @@ for i in range(n):  # 繪製中心點迴圈
     area = cv2.arcLength(contours[i], True)  # 計算輪廓周長
     print(f"輪廓 {i} 周長 = {area}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1287,7 +1412,7 @@ print("------------------------------------------------------------")  # 60個
 # ch15_19.py
 
 src = cv2.imread("heart.jpg")
-cv2.imshow("src", src)  # 顯示原始影像
+cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 M = cv2.moments(src_gray)  # 影像矩
@@ -1308,6 +1433,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("3heart.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
@@ -1332,7 +1458,7 @@ print(f"h4 = {Hu0[4]}\t\t {Hu1[4]}\t {Hu2[4]}")
 print(f"h5 = {Hu0[5]}\t\t {Hu1[5]}\t {Hu2[5]}")
 print(f"h6 = {Hu0[6]}\t\t {Hu1[6]}\t {Hu2[6]}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1341,6 +1467,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("3shapes.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
@@ -1365,7 +1492,7 @@ print(f"h4 = {Hu0[4]}\t\t {Hu1[4]}\t {Hu2[4]}")
 print(f"h5 = {Hu0[5]}\t\t {Hu1[5]}\t {Hu2[5]}")
 print(f"h6 = {Hu0[6]}\t\t {Hu1[6]}\t {Hu2[6]}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1374,6 +1501,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("myheart.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1389,7 +1517,7 @@ print(f"輪廓0和1比較 = {match1}")
 match2 = cv2.matchShapes(contours[0], contours[2], 1, 0)  # 輪廓0和2比較
 print(f"輪廓0和2比較 = {match2}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1399,6 +1527,7 @@ print("------------------------------------------------------------")  # 60個
 # 讀取與建立影像 1
 src1 = cv2.imread("mycloud1.jpg")
 cv2.imshow("mycloud1", src1)
+
 src1_gray = cv2.cvtColor(src1, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src1_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1432,7 +1561,8 @@ match1 = sd.computeDistance(cnt1, cnt2)  # 影像1和2比較
 print(f"影像1和2比較 = {match1}")
 match2 = sd.computeDistance(cnt1, cnt3)  # 影像1和3比較
 print(f"影像1和3比較 = {match2}")
-cv2.waitKey(0)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1442,6 +1572,7 @@ print("------------------------------------------------------------")  # 60個
 # 讀取與建立影像 1
 src1 = cv2.imread("mycloud1.jpg")
 cv2.imshow("mycloud1", src1)
+
 src1_gray = cv2.cvtColor(src1, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src1_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1475,15 +1606,19 @@ match1 = hd.computeDistance(cnt1, cnt2)  # 影像1和2比較
 print(f"影像1和2比較 = {match1}")
 match2 = hd.computeDistance(cnt1, cnt3)  # 影像1和3比較
 print(f"影像1和3比較 = {match2}")
-cv2.waitKey(0)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
+# OpenCV_16_輪廓擬合與凸包的相關應用
 print("------------------------------------------------------------")  # 60個
 
 # ch16_1.py
 
 src = cv2.imread("explode1.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1501,7 +1636,7 @@ print(f"左上角 x = {x}, 左上角 y = {y}")
 print(f"矩形寬度     = {w}")
 print(f"矩形高度     = {h}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1510,6 +1645,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("explode1.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1522,7 +1658,7 @@ x, y, w, h = cv2.boundingRect(contours[0])  # 建構矩形
 dst = cv2.rectangle(src, (x, y), (x + w, y + h), (0, 255, 255), 2)
 cv2.imshow("dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1531,6 +1667,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("explode2.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1543,7 +1680,7 @@ x, y, w, h = cv2.boundingRect(contours[0])  # 建構矩形
 dst = cv2.rectangle(src, (x, y), (x + w, y + h), (0, 255, 255), 2)
 cv2.imshow("dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1552,6 +1689,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("explode2.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1568,7 +1706,7 @@ print(f"轉換後的矩形頂角 = \n {points}")
 dst = cv2.drawContours(src, [points], 0, (0, 255, 0), 2)  # 繪製輪廓
 cv2.imshow("dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1577,6 +1715,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("explode3.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1591,7 +1730,7 @@ radius = int(radius)  # 圓半徑取整數
 dst = cv2.circle(src, center, radius, (0, 255, 255), 2)  # 繪圓
 cv2.imshow("dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1600,6 +1739,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("explode1.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1614,7 +1754,7 @@ radius = int(radius)  # 圓半徑取整數
 dst = cv2.circle(src, center, radius, (0, 255, 255), 2)  # 繪圓
 cv2.imshow("dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1623,6 +1763,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("cloud.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1639,7 +1780,7 @@ print(f"旋轉角度   = {ellipse[2]}")
 dst = cv2.ellipse(src, ellipse, (0, 255, 0), 2)  # 繪橢圓
 cv2.imshow("dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1648,6 +1789,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("heart.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1666,7 +1808,7 @@ dst = cv2.line(src, tuple(triangle[1][0]), tuple(triangle[2][0]), (0, 255, 0), 2
 dst = cv2.line(src, tuple(triangle[0][0]), tuple(triangle[2][0]), (0, 255, 0), 2)
 cv2.imshow("dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1675,6 +1817,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("multiple.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1694,7 +1837,7 @@ for i in range(n):
 cv2.imshow("dst1 - epsilon = 3", dst1)
 cv2.imshow("dst2 - epsilon = 15", dst2)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1703,6 +1846,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("unregular.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1720,7 +1864,7 @@ righty = int(((cols - x) * vy / vx) + y)  # 右邊點的 y 座標
 dst = cv2.line(src, (0, lefty), (cols - 1, righty), (0, 255, 0), 2)  # 左到右繪線
 cv2.imshow("dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1729,6 +1873,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("heart1.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1741,7 +1886,7 @@ hull = cv2.convexHull(contours[0])  # 獲得凸包頂點座標
 dst = cv2.polylines(src, [hull], True, (0, 255, 0), 2)  # 將凸包連線
 cv2.imshow("dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1750,6 +1895,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("hand1.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1762,7 +1908,7 @@ hull = cv2.convexHull(contours[0])  # 獲得凸包頂點座標
 dst = cv2.polylines(src, [hull], True, (0, 255, 0), 2)  # 將凸包連線
 cv2.imshow("dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1771,6 +1917,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("hand1.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1785,7 +1932,7 @@ cv2.imshow("dst", dst)
 convex_area = cv2.contourArea(hull)  # 凸包面積
 print(f"凸包面積 = {convex_area}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1794,6 +1941,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("hand2.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1808,9 +1956,8 @@ for i in range(n):
     dst = cv2.polylines(src, [hull], True, (0, 255, 0), 2)  # 將凸包連線
 cv2.imshow("dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1818,6 +1965,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("star.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1841,7 +1989,7 @@ for i in range(n):
     dst = cv2.circle(src, far, 3, [0, 0, 255], -1)  # 繪製farPoint
 cv2.imshow("dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1850,6 +1998,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("heart1.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1872,7 +2021,7 @@ cv2.imshow("dst2 - epsilon = 10", dst2)
 isConvex = cv2.isContourConvex(approx)  # 是否凸形
 print(f"近似多邊形是凸形 = {isConvex}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1881,6 +2030,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("heart1.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1917,7 +2067,8 @@ dst = cv2.circle(src, pointc, 3, [0, 0, 255], -1)  # 用圓標記點 C
 cv2.putText(dst, "C", pos_c, font, 1, (0, 255, 255), 2)  # 輸出文字 C
 print(f"dist_c = {dist_c}")
 cv2.imshow("dst", dst)
-cv2.waitKey(0)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1926,6 +2077,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("heart1.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1962,15 +2114,19 @@ dst = cv2.circle(src, pointc, 3, [0, 0, 255], -1)  # 用圓標記點 C
 cv2.putText(dst, "C", pos_c, font, 1, (0, 255, 255), 2)  # 輸出文字 C
 print(f"dist_c = {dist_c}")
 cv2.imshow("dst", dst)
-cv2.waitKey(0)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
+# OpenCV_17_輪廓的特徵
 print("------------------------------------------------------------")  # 60個
 
 # ch17_1.py
 
 src = cv2.imread("explode1.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -1985,7 +2141,7 @@ cv2.imshow("dst", dst)
 aspectratio = w / h  # 計算寬高比
 print(f"寬高比 = {aspectratio}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1994,6 +2150,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("explode1.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -2008,7 +2165,7 @@ print(f"資料長度 = {len(cnt)}")
 for i in range(3):  # 列印 3 個座標點
     print(cnt[i])
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2076,6 +2233,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("explode1.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -2098,7 +2256,7 @@ dst = cv2.circle(src, top, 5, [0, 255, 255], -1)
 dst = cv2.circle(src, bottom, 5, [0, 255, 255], -1)
 cv2.imshow("dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2107,6 +2265,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("explode1.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -2123,7 +2282,7 @@ square_area = w * h  # 計算矩形面積
 extent = con_area / square_area  # 計算Extent
 print(f"Extent = {extent}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2132,6 +2291,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("explode1.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -2149,7 +2309,7 @@ convex_area = cv2.contourArea(hull)  # 凸包面積
 solidity = con_area / convex_area  # 計算solidity
 print(f"Solidity = {solidity}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2158,6 +2318,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("star1.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -2172,7 +2333,7 @@ print(f"等效面積 = {ed}")
 dst = cv2.circle(src, (260, 110), int(ed / 2), (0, 255, 0), 3)  # 繪製圓
 cv2.imshow("dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2204,6 +2365,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("simple.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -2226,7 +2388,7 @@ print(points2)
 cv2.imshow("dst1", dst1)
 cv2.imshow("dst2", dst2)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2246,6 +2408,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("simple.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
@@ -2268,7 +2431,7 @@ print(points2)
 cv2.imshow("dst1", dst1)
 cv2.imshow("dst2", dst2)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2289,6 +2452,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("hand.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(src_gray, 50, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(
@@ -2322,10 +2486,11 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("forest.png")
 cv2.imshow("src", src)
+
 channels = cv2.mean(src)  # 計算均值
 print(channels)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2334,10 +2499,11 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("hand.jpg")
 cv2.imshow("src", src)
+
 channels = cv2.mean(src)  # 計算均值
 print(channels)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2346,6 +2512,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("hand.jpg")
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(src_gray, 50, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(
@@ -2358,7 +2525,7 @@ mask = cv2.drawContours(mask, [cnt], -1, (255, 255, 255), -1)
 channels = cv2.mean(src, mask=mask)  # 計算遮罩的均值
 print(channels)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2367,19 +2534,23 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("forest.png")
 cv2.imshow("src", src)
+
 mean, std = cv2.meanStdDev(src)  # 計算標準差
 print(f"均值   = \n{mean}")
 print(f"標準差 = \n{std}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
+# OpenCV_18_從直線檢測到無人駕駛車道檢測
 print("------------------------------------------------------------")  # 60個
 
 # ch18_1.py
 
 src = cv2.imread("calendar.jpg", cv2.IMREAD_COLOR)
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
 edges = cv2.Canny(src_gray, 100, 200)  # 使用Canny邊緣檢測
 cv2.imshow("Canny", edges)  # 顯示Canny邊緣線條
@@ -2398,7 +2569,7 @@ for line in lines:
     cv2.line(src, (x1, y1), (x2, y2), (0, 255, 0), 2)  # 繪製綠色線條
 cv2.imshow("dst", src)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2407,6 +2578,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("lane.jpg", cv2.IMREAD_COLOR)
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
 edges = cv2.Canny(src_gray, 100, 200)  # 使用Canny邊緣檢測
 # cv2.imshow("Canny", edges)                         # 顯示Canny邊緣線條
@@ -2425,7 +2597,7 @@ for line in lines:
     cv2.line(src, (x1, y1), (x2, y2), (0, 0, 255), 2)  # 繪製紅色線條
 cv2.imshow("dst", src)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2434,6 +2606,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("roadtest.jpg", cv2.IMREAD_COLOR)
 cv2.imshow("src", src)
+
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
 edges = cv2.Canny(src_gray, 50, 200)  # 使用Canny邊緣檢測
 cv2.imshow("Canny", edges)  # 顯示Canny邊緣線條
@@ -2444,7 +2617,7 @@ for line in lines:
     cv2.line(src, (x1, y1), (x2, y2), (255, 0, 0), 3)  # 繪製藍色線條
 cv2.imshow("dst", src)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2453,7 +2626,9 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("shapes.jpg")
 cv2.imshow("src", src)
+
 image = cv2.medianBlur(src, 5)  # 過濾雜訊
+
 src_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉成灰階
 circles = cv2.HoughCircles(
     src_gray,
@@ -2473,10 +2648,11 @@ for c in circles[0]:
     cv2.circle(src, (x, y), 2, (0, 0, 255), 2)  # 紅色繪圓中心
 cv2.imshow("dst", src)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
-
+print("------------------------------------------------------------")  # 60個
+# OpenCV_19_直方圖均衡化—增強影像對比度
 print("------------------------------------------------------------")  # 60個
 
 # ch19_1.py
@@ -2537,10 +2713,11 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("snow.jpg", cv2.IMREAD_GRAYSCALE)
 cv2.imshow("Src", src)
+
 plt.hist(src.ravel(), 256)  # 降維再繪製直方圖
 plt.show()
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2549,10 +2726,11 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("snow.jpg", cv2.IMREAD_GRAYSCALE)
 cv2.imshow("Src", src)
+
 plt.hist(src.ravel(), 20)  # 降維再繪製直方圖
 plt.show()
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2561,6 +2739,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("snow.jpg", cv2.IMREAD_GRAYSCALE)
 cv2.imshow("Src", src)
+
 hist = cv2.calcHist([src], [0], None, [256], [0, 256])  # 直方圖統計資料
 print(f"資料類型 = {type(hist)}")
 print(f"資料外觀 = {hist.shape}")
@@ -2573,6 +2752,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("snow.jpg", cv2.IMREAD_GRAYSCALE)
 cv2.imshow("Src", src)
+
 hist = cv2.calcHist([src], [0], None, [256], [0, 258])  # 直方圖統計資料
 plt.plot(hist)  # 用plot()繪直方圖
 plt.show()
@@ -2583,6 +2763,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("macau.jpg", cv2.IMREAD_COLOR)
 cv2.imshow("Src", src)
+
 b = cv2.calcHist([src], [0], None, [256], [0, 256])  # B 通道統計資料
 g = cv2.calcHist([src], [1], None, [256], [0, 256])  # G 通道統計資料
 r = cv2.calcHist([src], [2], None, [256], [0, 256])  # R 通道統計資料
@@ -2600,7 +2781,7 @@ src = np.zeros([200, 400], np.uint8)  # 建立影像
 src[50:150, 100:300] = 255  # 在影像內建立遮罩
 cv2.imshow("Src", src)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2609,12 +2790,13 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("macau.jpg", cv2.IMREAD_GRAYSCALE)
 cv2.imshow("Src", src)
+
 mask = np.zeros(src.shape[:2], np.uint8)  # 建立影像遮罩影像
 mask[20:200, 50:400] = 255  # 在遮罩影像內建立遮罩
 masked = cv2.bitwise_and(src, src, mask=mask)  # And運算
 cv2.imshow("After Mask", masked)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2623,6 +2805,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("macau.jpg", cv2.IMREAD_GRAYSCALE)
 cv2.imshow("Src", src)
+
 mask = np.zeros(src.shape[:2], np.uint8)  # 建立影像遮罩影像
 mask[20:200, 50:400] = 255  # 在遮罩影像內建立遮罩
 hist = cv2.calcHist([src], [0], None, [256], [0, 256])  # 灰階統計資料
@@ -2632,7 +2815,7 @@ plt.plot(hist_mask, color="red", label="Mask")  # 用plot()繪遮罩直方圖
 plt.legend(loc="best")
 plt.show()
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2715,13 +2898,15 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("springfield.jpg", cv2.IMREAD_COLOR)
 cv2.imshow("Src", src)
+
 (b, g, r) = cv2.split(src)  # 拆開彩色影像通道
 blue = cv2.equalizeHist(b)  # 均衡化 B 通道
 green = cv2.equalizeHist(g)  # 均衡化 G 通道
 red = cv2.equalizeHist(r)  # 均衡化 R 通道
 dst = cv2.merge((blue, green, red))  # 合併通道
 cv2.imshow("Dst", dst)
-cv2.waitKey(0)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2730,10 +2915,11 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("office.jpg", cv2.IMREAD_GRAYSCALE)
 cv2.imshow("Src", src)
+
 equ = cv2.equalizeHist(src)  # 直方圖均衡化
 cv2.imshow("euualizeHist", equ)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2742,20 +2928,24 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("office.jpg", cv2.IMREAD_GRAYSCALE)
 cv2.imshow("Src", src)
+
 # 自適應直方圖均衡化
 clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
 dst = clahe.apply(src)  # 灰度影像與clahe物件關聯
 cv2.imshow("CLAHE", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
+# OpenCV_20_模板匹配 Template Matching
 print("------------------------------------------------------------")  # 60個
 
 # ch20_1.py
 
 src = cv2.imread("macau_hotel.jpg", cv2.IMREAD_COLOR)
-cv2.imshow("Src", src)  # 顯示原始影像
+cv2.imshow("Src", src)
+
 H, W = src.shape[:2]
 print(f"原始影像高 H = {H}, 寬 W = {W}")
 temp1 = cv2.imread("head.jpg")
@@ -2766,7 +2956,7 @@ result = cv2.matchTemplate(src, temp1, cv2.TM_SQDIFF)
 print(f"result大小 = {result.shape}")
 print(f"陣列內容 \n{result}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2774,7 +2964,8 @@ print("------------------------------------------------------------")  # 60個
 # ch20_2.py
 
 src = cv2.imread("shapes.jpg", cv2.IMREAD_COLOR)
-cv2.imshow("Src", src)  # 顯示原始影像
+cv2.imshow("Src", src)
+
 temp1 = cv2.imread("heart.jpg", cv2.IMREAD_COLOR)
 cv2.imshow("Temp1", temp1)  # 顯示模板影像
 height, width = temp1.shape[:2]  # 獲得模板影像的高與寬
@@ -2788,7 +2979,7 @@ cv2.imshow("Dst", dst)
 print(f"result大小 = {result.shape}")
 print(f"陣列內容 \n{result}")
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2806,7 +2997,7 @@ lowerright = (minLoc[0] + width, minLoc[1] + height)  # 右下角座標
 dst = cv2.rectangle(src, upperleft, lowerright, (0, 255, 0), 3)  # 繪置最相似外框
 cv2.imshow("Dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2833,7 +3024,7 @@ seq = "knight" + str(index) + ".jpg"
 print(f"{seq} 比較類似")
 cv2.imshow("Dst", src[index])
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2841,7 +3032,8 @@ print("------------------------------------------------------------")  # 60個
 # ch20_5.py
 
 src = cv2.imread("mutishapes.jpg", cv2.IMREAD_COLOR)
-cv2.imshow("Src", src)  # 顯示原始影像
+cv2.imshow("Src", src)
+
 temp1 = cv2.imread("heart.jpg", cv2.IMREAD_COLOR)
 cv2.imshow("Temp1", temp1)  # 顯示模板影像
 height, width = temp1.shape[:2]  # 獲得模板影像的高與寬
@@ -2855,7 +3047,7 @@ for row in range(len(result)):  # 找尋row
             )
 cv2.imshow("Dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2873,9 +3065,8 @@ for row in range(len(result)):  # 找尋row
             dst = cv2.rectangle(src, (col, row), (col + w, row + h), (0, 0, 255), 3)
 cv2.imshow("Dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2914,7 +3105,7 @@ else:
     cv2.line(src, (start_x, start_y), (ul_x[1], ul_y[1]), (255, 0, 0), 2)
 cv2.imshow("Dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -2946,7 +3137,7 @@ for img in match:
     dst = cv2.rectangle(src, (img[0]), (img[1]), (0, 255, 0), 1)  # 繪外框
 cv2.imshow("Dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個

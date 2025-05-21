@@ -441,22 +441,12 @@ filename2 = 'C:/_git/vcs/_4.python/_data/picture_mix2.bmp'
 picture_add1.bmp
 picture_add2.bmp
 
-
 newimg.paste(img, mask=img)             # 將PNG檔壓在白底圖片上
-
-
 
     image.paste(icon, (0, 0), icon)  # 加入浮水印
 
-
-paste 的兩個icon
-
-image2 = image2.resize((w, h), resample=Image.NEAREST)
-
-
 窗口显示方式，cv2.WINDOW_NORMAL为正常显示，可以调整大小
 # cv2.WINDOW_AUTOSIZE显示原图片的大小，用户不能调整大小
-
 
 移動檔案指標
 

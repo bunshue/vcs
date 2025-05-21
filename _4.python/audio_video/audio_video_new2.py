@@ -3,6 +3,54 @@ import sys
 import time
 import random
 
+"""
+zh-tw : 正中
+zh-cn : 簡中
+en : 英文
+ja : 日文
+
+
+"""
+print("------------------------------------------------------------")  # 60個
+
+from pygame import mixer		# 匯入 mixer 物件
+
+from gtts import gTTS
+
+tts = gTTS(text='LANDrop 輕鬆實現跨系統無線傳輸資料、照片的免費工具', lang='zh-tw')
+tts.save('tmp_aaaa.mp3')
+
+# 播放mp3
+mixer.init()					# 初始化
+mixer.music.load('tmp_aaaa.mp3')  # 讀取聲音檔
+mixer.music.play()		# 播放 聲音檔
+
+
+
+import os
+from pygame import mixer    
+from gtts import gTTS
+
+mixer.init()    # 初始化
+if not os.path.isfile('tmp.mp3'):    # 不重要的聲音檔產生器
+    tts = gTTS(text = '不重要的語音檔', lang = 'zh-tw')
+    tts.save('tmp.mp3')
+    print('已產生不重要的語音檔 tmp.mp3')
+#-----------------#
+def bot_speak(text, lang):    # 建立自訂函式
+    try: 
+        mixer.music.load('tmp.mp3')    # 讀取不重要的聲音檔
+        tts = gTTS(text=text, lang=lang)    
+        tts.save('speak.mp3')    
+        mixer.music.load('speak.mp3')	    
+        mixer.music.play()    # 播放重要的聲音檔
+        while(mixer.music.get_busy()):    
+            continue
+    except:
+        print('播放音效失敗')
+#-----------------#
+bot_speak('我是萱萱', 'zh-tw')  # 說出我是萱萱
+
 '''
 print("------------------------------------------------------------")  # 60個
 
@@ -577,4 +625,10 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個

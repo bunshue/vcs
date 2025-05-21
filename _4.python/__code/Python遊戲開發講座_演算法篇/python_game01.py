@@ -52,9 +52,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter3\janken_game_1.py
 
-
-import time
-
 print("========== 計時開始 ==========")
 ts = time.time()
 print("epoch秒數", ts)
@@ -69,18 +66,11 @@ print("遊戲秒數", int(te - ts))
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-import random
-
 KUJI = ["大大吉", "大吉", "中吉", "小吉", "凶"]
 input("請抽籤([Enter]鍵)")
 print(random.choice(KUJI))
 
 print("------------------------------------------------------------")  # 60個
-
-import time
 
 t = time.localtime()
 print(t)
@@ -91,13 +81,40 @@ print(h)
 
 print("------------------------------------------------------------")  # 60個
 
+# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter8\monte_carlo_pi.py
+
+pi = 0
+rp = 0
+cp = 0
+
+
+def main():
+    global pi, rp, cp
+    x = random.randint(0, 400)
+    y = random.randint(0, 400)
+    rp += 1
+    col = "red"
+    if (x - 200) * (x - 200) + (y - 200) * (y - 200) <= 200 * 200:
+        cp += 1
+        col = "blue"
+    ca.create_rectangle(x, y, x + 1, y + 1, fill=col, width=0)
+    ca.update()
+    pi = 4 * cp / rp
+    root.title("圓周率 " + str(pi))
+    if rp < 10000:
+        root.after(1, main)
+
+
+root = tk.Tk()
+ca = tk.Canvas(width=400, height=400, bg="black")
+ca.pack()
+main()
+root.mainloop()
+
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 # 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\list5_1.py
+print("井字遊戲1")
 
 
 def masume():
@@ -108,7 +125,7 @@ def masume():
 
 
 root = tk.Tk()
-root.title("井字遊戲")
+root.title("井字遊戲1")
 root.resizable(False, False)
 cvs = tk.Canvas(width=600, height=600, bg="white")
 cvs.pack()
@@ -118,7 +135,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\list5_2.py
-
+print("井字遊戲2")
 
 masu = [[1, 0, 0], [0, 0, 2], [0, 0, 0]]
 
@@ -141,7 +158,7 @@ def masume():
 
 
 root = tk.Tk()
-root.title("井字遊戲")
+root.title("井字遊戲2")
 root.resizable(False, False)
 cvs = tk.Canvas(width=600, height=600, bg="white")
 cvs.pack()
@@ -151,7 +168,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\list5_3.py
-
+print("井字遊戲3")
 
 masu = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
@@ -189,7 +206,7 @@ def click(e):
 
 
 root = tk.Tk()
-root.title("井字遊戲")
+root.title("井字遊戲3")
 root.resizable(False, False)
 root.bind("<Button>", click)
 cvs = tk.Canvas(width=600, height=600, bg="white")
@@ -200,9 +217,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\list5_4.py
-
-import random
-import time
+print("井字遊戲4")
 
 masu = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 shirushi = 0
@@ -258,7 +273,7 @@ def computer():
 
 
 root = tk.Tk()
-root.title("井字遊戲")
+root.title("井字遊戲4")
 root.resizable(False, False)
 root.bind("<Button>", click)
 cvs = tk.Canvas(width=600, height=600, bg="white")
@@ -269,6 +284,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\list5_5.py
+print("井字遊戲5")
 
 masu = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 shirushi = 0
@@ -358,7 +374,7 @@ def hantei():
 
 
 root = tk.Tk()
-root.title("井字遊戲")
+root.title("井字遊戲5")
 root.resizable(False, False)
 root.bind("<Button>", click)
 cvs = tk.Canvas(width=600, height=600, bg="white")
@@ -369,7 +385,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\list5_6.py
-
+print("井字遊戲6")
 
 masu = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 shirushi = 0
@@ -484,7 +500,7 @@ def replay():
 
 
 root = tk.Tk()
-root.title("井字遊戲")
+root.title("井字遊戲6")
 root.resizable(False, False)
 root.bind("<Button>", click)
 cvs = tk.Canvas(width=600, height=600, bg="white")
@@ -495,6 +511,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\sanmoku_narabe.py
+print("井字遊戲7")
 
 masu = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 shirushi = 0
@@ -630,7 +647,7 @@ def replay():
 
 
 root = tk.Tk()
-root.title("井字遊戲")
+root.title("井字遊戲7")
 root.resizable(False, False)
 root.bind("<Button>", click)
 cvs = tk.Canvas(width=600, height=600, bg="white")
@@ -641,6 +658,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\sanmoku_narabe_kai.py
+print("井字遊戲8")
 
 masu = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 shirushi = 0
@@ -801,7 +819,7 @@ def replay():
 
 
 root = tk.Tk()
-root.title("井字遊戲")
+root.title("井字遊戲8")
 root.resizable(False, False)
 root.bind("<Button>", click)
 cvs = tk.Canvas(width=600, height=600, bg="ivory")
@@ -812,38 +830,8 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\gui_sample_2.py
-
-
-def btn1_on():
-    en.insert(tk.END, "按下按鈕了")
-
-
-def btn2_on():
-    en.delete(0, tk.END)
-
-
-def btn3_on():
-    b3["text"] = en.get()
-
-
-root = tk.Tk()
-root.geometry("400x200")
-root.title("GUI的主要元件 -2-")
-en = tk.Entry(width=40)
-en.place(x=20, y=10)
-b1 = tk.Button(text="插入字串", command=btn1_on)
-b1.place(x=20, y=60, width=160, height=40)
-b2 = tk.Button(text="刪除字串", command=btn2_on)
-b2.place(x=220, y=60, width=160, height=40)
-b3 = tk.Button(text="取得字串", command=btn3_on)
-b3.place(x=20, y=120, width=360, height=40)
-root.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
 # 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\list7_1.py
+print("黑白棋1")
 
 
 def banmen():
@@ -855,7 +843,7 @@ def banmen():
 
 
 root = tk.Tk()
-root.title("黑白棋")
+root.title("黑白棋1")
 root.resizable(False, False)
 cvs = tk.Canvas(width=640, height=700, bg="green")
 cvs.pack()
@@ -865,7 +853,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\list7_2.py
-
+print("黑白棋2")
 
 BLACK = 1
 WHITE = 2
@@ -911,7 +899,7 @@ def banmen():
 
 
 root = tk.Tk()
-root.title("黑白棋")
+root.title("黑白棋2")
 root.resizable(False, False)
 root.bind("<Button>", click)
 cvs = tk.Canvas(width=640, height=700, bg="green")
@@ -922,6 +910,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\list7_3.py
+print("黑白棋3")
 
 BLACK = 1
 WHITE = 2
@@ -989,7 +978,7 @@ def ishi_utsu(x, y, iro):
 
 
 root = tk.Tk()
-root.title("黑白棋")
+root.title("黑白棋3")
 root.resizable(False, False)
 root.bind("<Button>", click)
 cvs = tk.Canvas(width=640, height=700, bg="green")
@@ -1000,6 +989,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\list7_4.py
+print("黑白棋4")
 
 BLACK = 1
 WHITE = 2
@@ -1094,7 +1084,7 @@ def kaeseru(x, y, iro):
 
 
 root = tk.Tk()
-root.title("黑白棋")
+root.title("黑白棋4")
 root.resizable(False, False)
 root.bind("<Button>", click)
 cvs = tk.Canvas(width=640, height=700, bg="green")
@@ -1105,6 +1095,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\list7_5.py
+print("黑白棋5")
 
 BLACK = 1
 WHITE = 2
@@ -1263,7 +1254,7 @@ def main():
 
 
 root = tk.Tk()
-root.title("黑白棋")
+root.title("黑白棋5")
 root.resizable(False, False)
 root.bind("<Button>", click)
 cvs = tk.Canvas(width=640, height=700, bg="green")
@@ -1274,6 +1265,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\list7_6.py
+print("黑白棋6")
 
 import tkinter.messagebox
 
@@ -1483,7 +1475,7 @@ def main():
 
 
 root = tk.Tk()
-root.title("黑白棋")
+root.title("黑白棋6")
 root.resizable(False, False)
 root.bind("<Button>", click)
 cvs = tk.Canvas(width=640, height=700, bg="green")
@@ -1493,21 +1485,7 @@ root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\time_algo.py
-
-import time
-
-st = time.time()
-n = 0
-for i in range(1000000):
-    n = n + 1
-et = time.time()
-print("開始測量proc秒", st)
-print("結束測量proc秒", et)
-print("處理時間", et - st)
-
-print("------------------------------------------------------------")  # 60個
-
+print("黑白棋7")
 
 # 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter8\list8_2.py
 
@@ -1735,7 +1713,7 @@ def main():
 
 
 root = tk.Tk()
-root.title("黑白棋")
+root.title("黑白棋7")
 root.resizable(False, False)
 root.bind("<Button>", click)
 cvs = tk.Canvas(width=640, height=700, bg="green")
@@ -1744,40 +1722,10 @@ root.after(100, main)
 root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter8\monte_carlo_pi.py
-
-pi = 0
-rp = 0
-cp = 0
-
-
-def main():
-    global pi, rp, cp
-    x = random.randint(0, 400)
-    y = random.randint(0, 400)
-    rp += 1
-    col = "red"
-    if (x - 200) * (x - 200) + (y - 200) * (y - 200) <= 200 * 200:
-        cp += 1
-        col = "blue"
-    ca.create_rectangle(x, y, x + 1, y + 1, fill=col, width=0)
-    ca.update()
-    pi = 4 * cp / rp
-    root.title("圓周率 " + str(pi))
-    if rp < 10000:
-        root.after(1, main)
-
-
-root = tk.Tk()
-ca = tk.Canvas(width=400, height=400, bg="black")
-ca.pack()
-main()
-root.mainloop()
-
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter8\reversi.py
+print("黑白棋8")
 
 import tkinter.messagebox
 
@@ -2038,7 +1986,7 @@ def main():
 
 
 root = tk.Tk()
-root.title("黑白棋")
+root.title("黑白棋8")
 root.resizable(False, False)
 root.bind("<Button>", click)
 cvs = tk.Canvas(width=640, height=700, bg="green")
@@ -2049,6 +1997,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter8\reversi_auto.py
+print("黑白棋9")
 
 import tkinter.messagebox
 
@@ -2324,7 +2273,7 @@ def main():
 
 
 root = tk.Tk()
-root.title("黑白棋")
+root.title("黑白棋9")
 root.resizable(False, False)
 cvs = tk.Canvas(width=640, height=700, bg="green")
 cvs.pack()

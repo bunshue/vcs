@@ -21,6 +21,12 @@ CCRR
 2. rotate() 旋轉
 3. transpose()
 
+縮放.resize的品質旗標(4)
+Image.NEAREST : 最低品質，預設值
+Image.BILINEAR : 雙線性取樣算法
+Image.BICUBIC : 三次樣條取樣算法
+Image.ANTIALIAS : 最高品質
+
 
 """
 
@@ -116,7 +122,6 @@ image = image.resize((w*2,h), Image.LANCZOS)# 使用 LANCZOS 調整影像大小
 image = image.resize((image.size[0]*2, image.size[1]*2), Image.LANCZOS)# 使用 LANCZOS 調整影像大小
 image = image.resize((int(w / level), int(h / level)))  # 縮小圖片
 image = image.resize((w, h), resample=Image.NEAREST)  # 放大圖片為原始大小
-
 
 """
 

@@ -1,7 +1,49 @@
-# ch21_1.py
-import matplotlib.pyplot as plt
+"""
+OpenCV影像創意邁向AI視覺王者歸來
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]  # 正黑體
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+import cv2
+
+filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
+filename3 = "C:/_git/vcs/_4.python/opencv/data/lena.jpg"
+filename4 = "C:/_git/vcs/_1.data/______test_files1/ims01.bmp"
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import time
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+
+def show():
+    plt.show()
+    pass
+
+
+print("------------------------------------------------------------")  # 60個
+# OpenCV_21_傅立葉變換
+print("------------------------------------------------------------")  # 60個
+
+# ch21_1.py
 
 seq = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]  # 時間值
 water = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]  # 水
@@ -18,15 +60,9 @@ plt.xlabel("時間軸")  # 時間軸
 plt.ylabel("份數")  # 份數
 plt.show()
 
-
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch21\ch21_10.py
+print("------------------------------------------------------------")  # 60個
 
 # ch21_10.py
-import cv2
-import numpy as np
-from matplotlib import pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("shape2.jpg", cv2.IMREAD_GRAYSCALE)
 # 轉成頻率域
@@ -53,17 +89,9 @@ plt.title("逆傅立葉影像")
 plt.axis("off")  # 不顯示座標軸
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch21\ch21_11.py
-
 # ch21_11.py
-import cv2
-import numpy as np
-from matplotlib import pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)
 # 傅立葉變換
@@ -94,16 +122,9 @@ plt.title("低通濾波影像")
 plt.axis("off")  # 不顯示座標軸
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch21\ch21_2.py
-
 # ch21_2.py
-import matplotlib.pyplot as plt
-import numpy as np
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]  # 正黑體
 
 copies = [1, 2, 4, 3]  # 份數
 N = len(copies)
@@ -116,17 +137,9 @@ plt.xticks(x, ("1", "2", "3", "4"))
 plt.grid(axis="y")
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch21\ch21_3.py
-
 # ch21_3.py
-import matplotlib.pyplot as plt
-import numpy as np
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]  # 正黑體
-plt.rcParams["axes.unicode_minus"] = False  # 可以顯示負數
 
 start = 0
 end = 1
@@ -138,16 +151,9 @@ plt.ylabel("振幅")  # 振幅
 plt.title("正弦曲線", fontsize=16)  # 標題
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch21\ch21_4.py
-
 # ch21_4.py
-import matplotlib.pyplot as plt
-import numpy as np
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]  # 正黑體
 
 amplitude = [0, 0, 0, 1, 0, 0, 0]
 N = len(amplitude)
@@ -160,17 +166,9 @@ plt.xticks(x, ("1", "2", "3", "4", "5", "6", "7"))
 plt.grid(axis="y")
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch21\ch21_5.py
-
 # ch21_5.py
-import matplotlib.pyplot as plt
-import numpy as np
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]  # 正黑體
-plt.rcParams["axes.unicode_minus"] = False  # 可以顯示負數
 
 start = 0
 # 起始時間
@@ -207,17 +205,9 @@ axis[2].set_xlabel("時間")
 axis[2].set_ylabel("振幅")
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch21\ch21_6.py
-
 # ch21_6.py
-import cv2
-import numpy as np
-from matplotlib import pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)
 f = np.fft.fft2(src)  # 轉成頻率域
@@ -233,17 +223,9 @@ plt.title("頻譜圖")
 plt.axis("off")  # 不顯示座標軸
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch21\ch21_6_1.py
-
 # ch21_6_1.py
-import cv2
-import numpy as np
-from matplotlib import pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("shape1.jpg", cv2.IMREAD_GRAYSCALE)
 f = np.fft.fft2(src)  # 轉成頻率域
@@ -259,17 +241,9 @@ plt.title("頻譜圖")
 plt.axis("off")  # 不顯示座標軸
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch21\ch21_6_2.py
-
 # ch21_6_2.py
-import cv2
-import numpy as np
-from matplotlib import pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("shape2.jpg", cv2.IMREAD_GRAYSCALE)
 f = np.fft.fft2(src)  # 轉成頻率域
@@ -285,17 +259,9 @@ plt.title("頻譜圖")
 plt.axis("off")  # 不顯示座標軸
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch21\ch21_6_3.py
-
 # ch21_6_3.py
-import cv2
-import numpy as np
-from matplotlib import pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)
 f = np.fft.fft2(src)  # 轉成頻率域
@@ -311,17 +277,9 @@ plt.title("頻譜圖")
 plt.axis("off")  # 不顯示座標軸
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch21\ch21_7.py
-
 # ch21_7.py
-import cv2
-import numpy as np
-from matplotlib import pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)
 # 傅立葉變換
@@ -342,17 +300,9 @@ plt.title("逆變換影像")
 plt.axis("off")  # 不顯示座標軸
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch21\ch21_8.py
-
 # ch21_8.py
-import cv2
-import numpy as np
-from matplotlib import pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("snow.jpg", cv2.IMREAD_GRAYSCALE)
 # 傅立葉變換
@@ -381,17 +331,9 @@ plt.imshow(src_back)  # 顯示影像
 plt.axis("off")  # 不顯示座標軸
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch21\ch21_9.py
-
 # ch21_9.py
-import cv2
-import numpy as np
-from matplotlib import pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)
 # 轉成頻率域
@@ -409,47 +351,35 @@ plt.title("頻譜圖")
 plt.axis("off")  # 不顯示座標軸
 plt.show()
 
-
+print("------------------------------------------------------------")  # 60個
+# OpenCV_22_影像分割使用分水嶺演算法
 print("------------------------------------------------------------")  # 60個
 
 # ch22_1.py
-import cv2
-import numpy as np
 
 src = cv2.imread("coin1.jpg", cv2.IMREAD_GRAYSCALE)
 cv2.imshow("Src", src)
 ret, dst = cv2.threshold(src, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 cv2.imshow("Dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
-
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch22\ch22_1_1.py
+print("------------------------------------------------------------")  # 60個
 
 # ch22_1.py
-import cv2
-import numpy as np
 
 src = cv2.imread("coin2.jpg", cv2.IMREAD_GRAYSCALE)
 cv2.imshow("Src", src)
 ret, dst = cv2.threshold(src, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 cv2.imshow("Dst", dst)
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch22\ch22_2.py
-
 # ch22_2.py
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("opencv_coin.jpg", cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
@@ -478,17 +408,9 @@ plt.imshow(sure_fg)
 plt.axis("off")
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch22\ch22_2_1.py
-
 # ch22_2_1.py
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("opencv_coin.jpg", cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
@@ -517,17 +439,9 @@ plt.imshow(sure_fg)
 plt.axis("off")
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch22\ch22_2_2.py
-
 # ch22_2_2.py
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("coin1.jpg", cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
@@ -556,17 +470,9 @@ plt.imshow(sure_fg)
 plt.axis("off")
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch22\ch22_3.py
-
 # ch22_3.py
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("opencv_coin.jpg", cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
@@ -604,17 +510,9 @@ plt.imshow(unknown)
 plt.axis("off")
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch22\ch22_4.py
-
 # ch22_4.py
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("opencv_coin.jpg", cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
@@ -650,17 +548,9 @@ plt.imshow(markers)
 plt.axis("off")
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch22\ch22_5.py
-
 # ch22_5.py
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("opencv_coin.jpg", cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
@@ -701,17 +591,9 @@ plt.imshow(markers_new, cmap="jet")
 plt.axis("off")
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch22\ch22_6.py
-
 # ch22_6.py
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("opencv_coin.jpg", cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
@@ -749,15 +631,11 @@ plt.imshow(dst)
 plt.axis("off")
 plt.show()
 
-
+print("------------------------------------------------------------")  # 60個
+# OpenCV_23_影像擷取
 print("------------------------------------------------------------")  # 60個
 
 # ch23_1.py
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("hung.jpg")  # 讀取影像
 mask = np.zeros(src.shape[:2], np.uint8)  # 建立遮罩, 大小和src相同
@@ -784,15 +662,9 @@ plt.imshow(dst_rgb)
 plt.axis("off")
 plt.show()
 
-
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch23\ch23_2.py
+print("------------------------------------------------------------")  # 60個
 
 # ch23_2.py
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("hung.jpg")  # 讀取影像
 mask = np.zeros(src.shape[:2], np.uint8)  # 建立遮罩, 大小和src相同
@@ -825,17 +697,9 @@ plt.imshow(dst_rgb)
 plt.axis("off")
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch23\ch23_3.py
-
 # ch23_3.py
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("lena.jpg")  # 讀取影像
 mask = np.zeros(src.shape[:2], np.uint8)  # 建立遮罩, 大小和src相同
@@ -862,17 +726,9 @@ plt.imshow(dst_rgb)
 plt.axis("off")
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch23\ch23_4.py
-
 # ch23_4.py
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 src = cv2.imread("lena.jpg")  # 讀取影像
 bgdModel = np.zeros((1, 65), np.float64)  # 建立內部用暫時計算陣列
@@ -901,14 +757,11 @@ plt.imshow(dst_rgb)
 plt.axis("off")
 plt.show()
 
-
+print("------------------------------------------------------------")  # 60個
+# OpenCV_24_影像修復
 print("------------------------------------------------------------")  # 60個
 
 # ch24_1.py
-import cv2
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 lisa = cv2.imread("lisaE1.jpg")
 ret, mask = cv2.threshold(lisa, 250, 255, cv2.THRESH_BINARY)
@@ -934,12 +787,9 @@ plt.imshow(dst_rgb)
 plt.axis("off")
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
 
 # ch24_2.py
-import cv2
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 lisa = cv2.imread("lisaE2.jpg")
 ret, mask = cv2.threshold(lisa, 250, 255, cv2.THRESH_BINARY)
@@ -965,9 +815,11 @@ plt.imshow(dst_rgb)
 plt.axis("off")
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
+# OpenCV_25_辨識手寫數字
+print("------------------------------------------------------------")  # 60個
 
 # ch25_1.py
-import numpy as np
 
 data1 = np.random.randint(0, 10, size=5)
 print(f"陣列外形 = {data1.shape}")
@@ -979,48 +831,34 @@ print(f"輸出矩陣 = \n{data2}")
 print(f"data2[0] = {data2[0]}")
 print(f"data2[0,0] = {data2[0,0]}")
 
-
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch25\ch25_10.py
+print("------------------------------------------------------------")  # 60個
 
 # ch25_10.py
-import numpy as np
 
 data = np.arange(16).reshape(2, 2, 2, 2)
 print(f"data = \n {data}")
 print(f"data = \n {np.vsplit(data,2)}")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch25\ch25_11.py
-
 # ch25_11.py
-import numpy as np
 
 data = np.arange(16).reshape(4, 4)
 print(f"data = \n {data}")
 print(f"split = \n{np.hsplit(data,2)}")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch25\ch25_11_1.py
-
 # ch25_11_1.py
-import numpy as np
 
 data = np.arange(3)
 print(f"data = \n {data}")
 x = np.repeat(data, 3)
 print(f"After repeat = \n{x}")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch25\ch25_11_2.py
-
 # ch25_11_2.py
-import numpy as np
 
 data = np.array([[1, 2], [3, 4]])
 print(f"data = \n {data}")
@@ -1029,27 +867,18 @@ print(f"After axis=1 repeat  = \n{x1}")
 x2 = np.repeat(data, 3, axis=0)
 print(f"After axis=0 repeat = \n{x2}")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch25\ch25_11_3.py
-
 # ch25_11_3.py
-import numpy as np
 
 data = np.arange(3)
 print(f"data = \n {data}")
 x = np.repeat(data, 3)[:, np.newaxis]
 print(f"After repeat = \n{x}")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch25\ch25_12.py
-
 # ch25_12.py
-import cv2
-import numpy as np
 
 img = cv2.imread("digits.png")
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -1075,14 +904,9 @@ correct = np.count_nonzero(matches)  # 正確次數
 accuracy = correct * 100.0 / result.size  # 精確度
 print(f"測試數據辨識成功率 = {accuracy}")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch25\ch25_13.py
-
 # ch25_13.py
-import cv2
-import numpy as np
 
 img = cv2.imread("digits.png")
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -1109,14 +933,9 @@ accuracy = correct * 100.0 / result.size  # 精確度
 print(f"測試數據辨識成功率 = {accuracy}")
 np.savez("knn_digit.npz", train=train, train_labels=train_labels)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch25\ch25_14.py
-
 # ch25_14.py
-import cv2
-import numpy as np
 
 # 下載數據
 with np.load("knn_digit.npz") as data:
@@ -1133,13 +952,9 @@ knn.train(train, cv2.ml.ROW_SAMPLE, train_labels)
 ret, result, neighbours, dist = knn.findNearest(test_data, k=5)
 print(f"識別的數字是 = {int(result[0,0])}")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch25\ch25_2.py
-
 # ch25_2.py
-import numpy as np
 
 np.random.seed(5)
 data1 = np.random.randint(0, 10, size=5)
@@ -1152,25 +967,17 @@ print(f"輸出矩陣 = \n{data2}")
 print(f"data2[0] = {data2[0]}")
 print(f"data2[0,0] = {data2[0,0]}")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch25\ch25_3.py
-
 # ch25_3.py
-import numpy as np
 
 data = np.random.randint(0, 10, size=(5, 1))
 print(f"輸出二維陣列 = \n{data}")
 print(f"轉成一維陣列 = \n{data.ravel()}")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch25\ch25_4.py
-
 # ch25_4.py
-import numpy as np
 
 np.random.seed(1)
 trains = np.random.randint(0, 10, size=(5, 2))
@@ -1188,14 +995,9 @@ blue = trains[labels.ravel() == 1]
 print(f"輸出藍色的二維陣列 \n{blue}")
 print(f"配對取出 \n{blue[:,0], blue[:,1]}")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch25\ch25_5.py
-
 # ch25_5.py
-import numpy as np
-import matplotlib.pyplot as plt
 
 num = 30  # 數據數量
 np.random.seed(5)
@@ -1209,18 +1011,11 @@ plt.scatter(red[:, 0], red[:, 1], 50, "r", "s")  # 50是繪圖點大小
 # 列出藍色三角形訓練數據
 blue = trains[labels.ravel() == 1]
 plt.scatter(blue[:, 0], blue[:, 1], 50, "b", "^")  # 50是繪圖點大小
-
 plt.show()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch25\ch25_6.py
-
 # ch25_6.py
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
 
 num = 30  # 數據數量
 np.random.seed(5)
@@ -1247,18 +1042,11 @@ ret, results, neighbours, dist = knn.findNearest(test, k=3)
 print(f"最後分類              result = {results}")
 print(f"最近鄰3個點的分類 neighbours = {neighbours}")
 print(f"與最近鄰的距離      distance = {dist}")
-
 plt.show()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch25\ch25_7.py
-
 # ch25_7.py
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
 
 num = 30  # 數據數量
 np.random.seed(5)
@@ -1292,36 +1080,27 @@ print(f"與最近鄰的距離      distance = {dist}")
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch25\ch25_8.py
-
 # ch25_8.py
-import numpy as np
 
 data = np.arange(16).reshape(4, 4)
 print(f"data = \n {data}")
 print(f"split = \n{np.vsplit(data,2)}")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch25\ch25_9.py
-
 # ch25_9.py
-import numpy as np
 
 data = np.arange(8).reshape(2, 2, 2)
 print(f"data = \n {data}")
 print(f"split = \n{np.vsplit(data,2)}")
 
-
+print("------------------------------------------------------------")  # 60個
+# OpenCV_26_OpenCV的攝影功能
 print("------------------------------------------------------------")  # 60個
 
-
 # ch26_1.py
-import cv2
 
 capture = cv2.VideoCapture(0)  # 初始化攝影功能
 while capture.isOpened():
@@ -1333,11 +1112,9 @@ while capture.isOpened():
 capture.release()  # 關閉攝影功能
 cv2.destroyAllWindows()
 
-
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch26\ch26_10.py
+print("------------------------------------------------------------")  # 60個
 
 # ch26_10.py
-import cv2
 
 video = cv2.VideoCapture("iceocean.mov")  # 開啟影片檔案
 
@@ -1356,13 +1133,9 @@ while video.isOpened():
 video.release()  # 關閉輸出物件
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch26\ch26_11.py
-
 # ch26_11.py
-import cv2
 
 capture = cv2.VideoCapture(0)  # 初始化攝影功能
 while capture.isOpened():
@@ -1378,13 +1151,9 @@ print(f"Frame 的高度 = {height}")  # 輸出Frame 的高度
 capture.release()  # 關閉攝影功能
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch26\ch26_12.py
-
 # ch26_12.py
-import cv2
 
 video = cv2.VideoCapture("iceocean.mov")  # 開啟影片檔案
 while video.isOpened():
@@ -1404,13 +1173,9 @@ print(f"Video 的幀數    = {video_frames}")  # 輸出 Video 的幀數
 video.release()  # 關閉攝影功能
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch26\ch26_13.py
-
 # ch26_13.py
-import cv2
 
 capture = cv2.VideoCapture(0)  # 初始化攝影功能
 capture.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)  # 設定寬度
@@ -1424,13 +1189,9 @@ while capture.isOpened():
 capture.release()  # 關閉攝影功能
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch26\ch26_14.py
-
 # ch26_14.py
-import cv2
 
 video = cv2.VideoCapture("iceocean.mov")  # 開啟影片檔案
 video_fps = video.get(cv2.CAP_PROP_FPS)  # 計算速度
@@ -1460,13 +1221,9 @@ while video.isOpened():
 video.release()  # 關閉輸出物件
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch26\ch26_15.py
-
 # ch26_15.py
-import cv2
 
 video = cv2.VideoCapture("iceocean.mov")  # 開啟影片檔案
 video_fps = video.get(cv2.CAP_PROP_FPS)  # 計算速度
@@ -1485,13 +1242,9 @@ while video.isOpened() and counter >= 0:
 video.release()  # 關閉輸出物件
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch26\ch26_2.py
-
 # ch26_2.py
-import cv2
 
 capture = cv2.VideoCapture(0)  # 初始化攝影功能
 while capture.isOpened():
@@ -1506,13 +1259,9 @@ while capture.isOpened():
 capture.release()  # 關閉攝影功能
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch26\ch26_3.py
-
 # ch26_3.py
-import cv2
 
 capture = cv2.VideoCapture(0)  # 初始化攝影功能
 while capture.isOpened():
@@ -1527,13 +1276,9 @@ while capture.isOpened():
 capture.release()  # 關閉攝影功能
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch26\ch26_4.py
-
 # ch26_4.py
-import cv2
 
 capture = cv2.VideoCapture(0)  # 初始化攝影功能
 while capture.isOpened():
@@ -1548,13 +1293,9 @@ while capture.isOpened():
 capture.release()  # 關閉攝影功能
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch26\ch26_5.py
-
 # ch26_5.py
-import cv2
 
 capture = cv2.VideoCapture(0)  # 初始化攝影功能
 fourcc = cv2.VideoWriter_fourcc(*"XVID")  # MPEG-4
@@ -1572,13 +1313,9 @@ capture.release()  # 關閉攝影功能
 video_out.release()  # 關閉輸出物件
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch26\ch26_6.py
-
 # ch26_6.py
-import cv2
 
 video = cv2.VideoCapture("out26_5.avi")  # 開啟影片檔案
 
@@ -1595,13 +1332,9 @@ while video.isOpened():
 video.release()  # 關閉輸出物件
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch26\ch26_7.py
-
 # ch26_7.py
-import cv2
 
 video = cv2.VideoCapture("iceocean.mov")  # 開啟影片檔案
 
@@ -1618,13 +1351,9 @@ while video.isOpened():
 video.release()  # 關閉輸出物件
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch26\ch26_8.py
-
 # ch26_8.py
-import cv2
 
 video = cv2.VideoCapture("iceocean2.mov")  # 開啟影片檔案
 
@@ -1643,13 +1372,9 @@ while video.isOpened():
 video.release()  # 關閉輸出物件
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch26\ch26_9.py
-
 # ch26_9.py
-import cv2
 
 video = cv2.VideoCapture("iceocean.mov")  # 開啟影片檔案
 
@@ -1661,7 +1386,7 @@ while video.isOpened():
     else:
         break
     if c == 32:  # 是否按 空白鍵
-        cv2.waitKey(0)  # 等待按鍵發生
+        cv2.waitKey()  # 等待按鍵發生
         continue
     if c == 27:  # 按 Esc 键, 結束
         break
@@ -1669,11 +1394,11 @@ while video.isOpened():
 video.release()  # 關閉輸出物件
 cv2.destroyAllWindows()
 
-
+print("------------------------------------------------------------")  # 60個
+# OpenCV_27_物件偵測
 print("------------------------------------------------------------")  # 60個
 
 # ch27_1.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_frontalface_default.xml"
 face_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -1704,14 +1429,12 @@ for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
 cv2.imshow("Face", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
-
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_10.py
+print("------------------------------------------------------------")  # 60個
 
 # ch27_10.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_upperbody.xml"
 body_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -1724,16 +1447,12 @@ for x, y, w, h in bodies:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住身體
 cv2.imshow("Face", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_11.py
-
 # ch27_11.py
-import cv2
 
 pictPath1 = r"C:\opencv\data\haarcascade_frontalface_default.xml"
 pictPath2 = r"C:\opencv\data\haarcascade_eye.xml"
@@ -1758,16 +1477,12 @@ for x, y, w, h in eyes:
     cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 綠色框住眼睛
 cv2.imshow("Face", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_12.py
-
 # ch27_12.py
-import cv2
 
 pictPath1 = r"C:\opencv\data\haarcascade_frontalface_default.xml"
 pictPath2 = r"C:\opencv\data\haarcascade_eye.xml"
@@ -1792,16 +1507,12 @@ for x, y, w, h in eyes:
     cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 綠色框住眼睛
 cv2.imshow("Face", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_13.py
-
 # ch27_13.py
-import cv2
 
 pictPath1 = r"C:\opencv\data\haarcascade_frontalface_default.xml"
 pictPath2 = r"C:\opencv\data\haarcascade_lefteye_2splits.xml"
@@ -1826,16 +1537,12 @@ for x, y, w, h in eyes:
     cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 綠色框住眼睛
 cv2.imshow("Face", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_14.py
-
 # ch27_14.py
-import cv2
 
 pictPath1 = r"C:\opencv\data\haarcascade_frontalface_default.xml"
 pictPath2 = r"C:\opencv\data\haarcascade_righteye_2splits.xml"
@@ -1860,16 +1567,12 @@ for x, y, w, h in eyes:
     cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 綠色框住眼睛
 cv2.imshow("Face", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_15.py
-
 # ch27_15.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_frontalcatface.xml"
 cat_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -1882,16 +1585,12 @@ for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住貓臉
 cv2.imshow("Face", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_16.py
-
 # ch27_16.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_frontalcatface.xml"
 cat_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -1904,16 +1603,12 @@ for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
 cv2.imshow("Face", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_17.py
-
 # ch27_17.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_russian_plate_number.xml"
 car_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -1926,16 +1621,12 @@ for x, y, w, h in plates:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住車牌
 cv2.imshow("Car Plate", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_18.py
-
 # ch27_18.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_russian_plate_number.xml"
 car_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -1948,16 +1639,12 @@ for x, y, w, h in plates:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住車牌
 cv2.imshow("Car Plate", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_19.py
-
 # ch27_19.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_russian_plate_number.xml"
 car_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -1970,16 +1657,12 @@ for x, y, w, h in plates:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住車牌
 cv2.imshow("Car Plate", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_2.py
-
 # ch27_2.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_frontalface_default.xml"
 face_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -2010,16 +1693,12 @@ for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
 cv2.imshow("Face", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_3.py
-
 # ch27_3.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_frontalface_default.xml"
 face_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -2050,16 +1729,12 @@ for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
 cv2.imshow("Face", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_3_1.py
-
 # ch27_3_1.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_frontalface_default.xml"
 face_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -2090,16 +1765,13 @@ for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
 cv2.imshow("Face", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_4.py
-
 # ch27_4.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_frontalface_alt.xml"
 face_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -2130,16 +1802,12 @@ for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
 cv2.imshow("Face", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_4_1.py
-
 # ch27_4_1.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_frontalface_alt.xml"
 face_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -2170,16 +1838,12 @@ for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
 cv2.imshow("Face", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_5.py
-
 # ch27_5.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_frontalface_alt2.xml"
 face_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -2210,16 +1874,12 @@ for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
 cv2.imshow("Face", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_6.py
-
 # ch27_6.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_frontalface_alt_tree.xml"
 face_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -2250,16 +1910,12 @@ for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
 cv2.imshow("Face", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_6_1.py
-
 # ch27_6_1.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_frontalface_alt.xml"
 face_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -2290,16 +1946,12 @@ for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
 cv2.imshow("Face", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_6_2.py
-
 # ch27_6_2.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_profileface.xml"
 face_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -2330,16 +1982,12 @@ for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
 cv2.imshow("Face", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_7.py
-
 # ch27_7.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_fullbody.xml"
 body_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -2352,16 +2000,12 @@ for x, y, w, h in bodies:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住身體
 cv2.imshow("Body", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_8.py
-
 # ch27_8.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_fullbody.xml"
 body_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -2374,16 +2018,12 @@ for x, y, w, h in bodies:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住身體
 cv2.imshow("Body", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch27\ch27_9.py
-
 # ch27_9.py
-import cv2
 
 pictPath = r"C:\opencv\data\haarcascade_lowerbody.xml"
 body_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識物件
@@ -2396,8 +2036,8 @@ for x, y, w, h in bodies:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住身體
 cv2.imshow("Body", img)  # 顯示影像
 
-cv2.waitKey(0)
+cv2.waitKey()
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
+

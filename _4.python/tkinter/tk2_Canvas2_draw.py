@@ -375,6 +375,103 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+# tk畫圖寫字
+# canvas_figure.py
+
+root = tk.Tk()
+root.title("在畫布繪製圖形")
+cvs = tk.Canvas(width=720, height=400, bg="black")
+cvs.create_line(20, 40, 120, 360, fill="red", width=8)
+cvs.create_rectangle(160, 60, 260, 340, fill="orange", width=0)
+cvs.create_oval(300, 100, 500, 300, outline="yellow", width=12)
+cvs.create_polygon(600, 100, 500, 300, 700, 300, fill="green", outline="lime", width=16)
+cvs.pack()
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+# canvas_image.py
+
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "C:/_git/vcs/_1.data/______test_files1/step1.png"
+
+root = tk.Tk()
+root.title("在畫布顯示圖片, 只能用png")
+cvs = tk.Canvas(width=540, height=720)
+dog = tk.PhotoImage(file=filename)
+cvs.create_image(270, 360, image=dog)
+cvs.pack()
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+# canvas_text.py
+
+root = tk.Tk()
+root.title("在畫布顯示字串")
+cvs = tk.Canvas(width=600, height=400, bg="white")
+cvs.create_text(300, 200, text="Python", font=("Times New Roman", 40))
+cvs.pack()
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+# color_sample.py
+
+root = tk.Tk()
+root.title("指定顏色的英文單字")
+cvs = tk.Canvas(width=360, height=480, bg="black")
+
+COL = [
+    "maroon",
+    "brown",
+    "red",
+    "orange",
+    "gold",
+    "yellow",
+    "lime",
+    "limegreen",
+    "green",
+    "skyblue",
+    "cyan",
+    "blue",
+    "navy",
+    "indigo",
+    "purple",
+    "magenta",
+    "white",
+    "lightgray",
+    "silver",
+    "gray",
+    "olive",
+    "pink",
+]
+FNT = ("Times, New Roman", 24)
+x = 120
+y = 40
+for c in COL:
+    cvs.create_text(x, y, text=c, fill=c, font=FNT)
+    y += 40
+    if y >= 480:
+        y = 40
+        x += 120
+
+cvs.pack()
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -382,6 +479,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
+
 
 """
 
