@@ -3,6 +3,9 @@ import sys
 import time
 import random
 
+print("------------------------------------------------------------")  # 60個
+
+'''
 """
 zh-tw : 正中
 zh-cn : 簡中
@@ -25,9 +28,6 @@ mixer.init()					# 初始化
 mixer.music.load('tmp_aaaa.mp3')  # 讀取聲音檔
 mixer.music.play()		# 播放 聲音檔
 
-
-
-import os
 from pygame import mixer    
 from gtts import gTTS
 
@@ -51,7 +51,6 @@ def bot_speak(text, lang):    # 建立自訂函式
 #-----------------#
 bot_speak('我是萱萱', 'zh-tw')  # 說出我是萱萱
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -254,7 +253,6 @@ from newspaper import Article
 from google_trans_new import google_translator
 import gtts
 import IPython.display as display
-import random
 
 paper = newspaper.build('http://cnn.com', language='en')
 # paper = newspaper.build('http://www.cnbc.com', language='en')
@@ -527,11 +525,10 @@ clip1_mir_size = clip1.fx(vfx.mirror_x).resize(0.50)  #水平翻轉並改變尺�
 clip1_resize.write_videofile('tmp_clip1_resize.mp4')
 """
 print("------------------------------------------------------------")  # 60個
-
 '''
+
 """
 圖片內容偵測
-
 
 #ImageAI：物體偵測
 
@@ -566,6 +563,9 @@ for eachObject in detections:
             eachObject["box_points"],
         )
     )
+
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 

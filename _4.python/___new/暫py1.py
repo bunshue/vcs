@@ -97,13 +97,6 @@ https://sites.google.com/view/zsgititit/home/ji-qi-xue-xi/%E5%AE%89%E8%A3%9Dmedi
 使用 MediaPipe ( 舊版 )
 https://steam.oxxostudio.tw/category/python/ai/ai-mediapipe.html#google_vignette
 
-安裝 imageai.
-
-pip install cython pillow>=7.0.0 numpy>=1.18.1 opencv-python>=4.1.2 torch>=1.9.0 --extra-index-url https://download.pytorch.org/whl/cpu torchvision>=0.10.0 --extra-index-url https://download.pytorch.org/whl/cpu pytest==7.1.3 tqdm==4.64.1 scipy>=1.7.3 matplotlib>=3.4.3 mock==4.0.3
-
-pip install imageai --upgrade
-
-
 Python的串口使用，自
 https://fantasyhh.github.io/2019/08/01/Arduino-Serial/
 
@@ -1009,18 +1002,7 @@ animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
 
 這樣才可做到用 ''' 包圍 """, 可以簡易地跳過不要執行的程式
 
-
-需先行下載
-yolo.h5
-https://github.com/OlafenwaMoses/ImageAI/releases/download/1.0/yolo.h5
-
-resnet50_imagenet_tf.2.0.h5
-https://github.com/OlafenwaMoses/ImageAI/releases/download/1.0/resnet50_imagenet_tf.2.0.h5
-
-
 cur_path = os.path.dirname(__file__) # 取得目前路徑
-
-
 
 print("------------------------------------------------------------")	#60個
 
@@ -5299,7 +5281,10 @@ pip install -U -r requirements.txt
 python.exe -m pip install --upgrade pip
 
 更新套件
+pip install package_name --upgrade
 
+指定安裝版本
+pip install package_name==2.0.2
 
 指定版本安裝套件
 
@@ -5507,10 +5492,6 @@ pip show pytube
 檢查所有套件有無更新版本
 pip list --outdated
 
-
-指定安裝版本
-pip install imageai==2.0.2
-
 安裝opencv
 pip install opencv-python
 
@@ -5588,4 +5569,21 @@ pip install h5py==2.10.0
 更新套件
 pip install yfinance -U
 
+
+
+# 一次安裝多個，並指定版本
+
+pip install cython pillow>=7.0.0 numpy>=1.18.1 opencv-python>=4.1.2 torch>=1.9.0 --extra-index-url https://download.pytorch.org/whl/cpu torchvision>=0.10.0 --extra-index-url https://download.pytorch.org/whl/cpu pytest==7.1.3 tqdm==4.64.1 scipy>=1.7.3 matplotlib>=3.4.3 mock==4.0.3
+
+pip install 
+cython pillow>=7.0.0
+numpy>=1.18.1
+opencv-python>=4.1.2
+torch>=1.9.0 --extra-index-url https://download.pytorch.org/whl/cpu
+torchvision>=0.10.0 --extra-index-url https://download.pytorch.org/whl/cpu
+pytest==7.1.3
+tqdm==4.64.1
+scipy>=1.7.3
+matplotlib>=3.4.3
+mock==4.0.3
 
