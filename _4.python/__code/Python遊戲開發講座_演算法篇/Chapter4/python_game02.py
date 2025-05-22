@@ -33,7 +33,7 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # air_hockey.py
 
 FNT = ("Times New Roman", 60)
@@ -230,95 +230,6 @@ main()
 root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
-# list6_1.py
-
-img = [None] * 14
-
-
-def draw_card():
-    for i in range(14):
-        x = (i % 7) * 120 + 60
-        y = int(i / 7) * 168 + 84
-        cvs.create_image(x, y, image=img[i])
-
-
-root = tk.Tk()
-root.title("翻牌配對遊戲")
-root.resizable(False, False)
-cvs = tk.Canvas(width=960, height=672)
-cvs.pack()
-for i in range(14):
-    img[i] = tk.PhotoImage(file="card/" + str(i) + ".png")
-draw_card()
-root.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-# list6_2.py
-
-img = [None] * 14
-card = [0] * 26
-
-
-def draw_card():
-    for i in range(26):
-        x = (i % 7) * 120 + 60
-        y = int(i / 7) * 168 + 84
-        cvs.create_image(x, y, image=img[card[i]])
-
-
-def shuffle_card():
-    for i in range(26):
-        card[i] = 1 + i % 13
-
-
-root = tk.Tk()
-root.title("翻牌配對遊戲")
-root.resizable(False, False)
-cvs = tk.Canvas(width=960, height=672)
-cvs.pack()
-for i in range(14):
-    img[i] = tk.PhotoImage(file="card/" + str(i) + ".png")
-shuffle_card()
-draw_card()
-root.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-# list6_3.py
-
-img = [None] * 14
-card = [0] * 26
-
-
-def draw_card():
-    for i in range(26):
-        x = (i % 7) * 120 + 60
-        y = int(i / 7) * 168 + 84
-        cvs.create_image(x, y, image=img[card[i]])
-
-
-def shuffle_card():
-    for i in range(26):
-        card[i] = 1 + i % 13
-    for i in range(100):
-        r1 = random.randint(0, 12)
-        r2 = random.randint(13, 25)
-        card[r1], card[r2] = card[r2], card[r1]
-
-
-root = tk.Tk()
-root.title("翻牌配對遊戲")
-root.resizable(False, False)
-cvs = tk.Canvas(width=960, height=672)
-cvs.pack()
-for i in range(14):
-    img[i] = tk.PhotoImage(file="card/" + str(i) + ".png")
-shuffle_card()
-draw_card()
-root.mainloop()
-
 print("------------------------------------------------------------")  # 60個
 
 # list6_4.py
@@ -363,7 +274,7 @@ def click(e):
 
 
 root = tk.Tk()
-root.title("翻牌配對遊戲")
+root.title("翻牌配對遊戲2")
 root.resizable(False, False)
 root.bind("<Button>", click)
 cvs = tk.Canvas(width=960, height=672)
@@ -450,7 +361,7 @@ def main():
 
 
 root = tk.Tk()
-root.title("翻牌配對遊戲")
+root.title("翻牌配對遊戲3")
 root.resizable(False, False)
 root.bind("<Button>", click)
 cvs = tk.Canvas(width=960, height=672)
@@ -572,7 +483,7 @@ def main():
 
 
 root = tk.Tk()
-root.title("翻牌配對遊戲")
+root.title("翻牌配對遊戲4")
 root.resizable(False, False)
 root.bind("<Button>", click)
 cvs = tk.Canvas(width=960, height=672)
@@ -710,7 +621,7 @@ def main():
 
 
 root = tk.Tk()
-root.title("翻牌配對遊戲")
+root.title("翻牌配對遊戲5")
 root.resizable(False, False)
 root.bind("<Button>", click)
 cvs = tk.Canvas(width=960, height=672, bg="black")
@@ -720,6 +631,7 @@ for i in range(14):
 main()
 root.mainloop()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 x = 300
@@ -744,7 +656,7 @@ def animation():
 
 
 root = tk.Tk()
-root.title("即時處理２")
+root.title("即時處理")
 cvs = tk.Canvas(width=800, height=400)
 cvs.pack()
 ap1 = tk.PhotoImage(file="airplane1.png")
@@ -805,30 +717,45 @@ main()
 root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
-F = ("Times New Roman", 100)
+print("------------------------------------------------------------")  # 60個
+'''
+f = ("Times New Roman", 100)
 n = 0
-
+running = False
 
 def counter():
     global n
     n = n + 1
     cvs.delete("all")
-    cvs.create_text(300, 200, text=n, font=F, fill="blue")
+    cvs.create_text(300, 200, text=n, font=f, fill="blue")
     root.after(1000, counter)
 
 
 root = tk.Tk()
-root.title("即時處理１")
-cvs = tk.Canvas(width=600, height=400, bg="white")
+root.title("即時處理")
+cvs = tk.Canvas(width=640, height=480, bg="white")
 cvs.pack()
+
+def timer_start():
+    global running
+    if running == False:
+        button2a.config(bg="blue")
+
+
+button2a = tk.Button(
+    root, text="啟動", width=28, height=3, command=timer_start
+)
+button2a.pack()
+
 counter()
 root.mainloop()
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 

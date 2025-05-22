@@ -371,9 +371,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Import necessary modules
-from sklearn import datasets
-
 # Load the digits dataset: digits
 digits = datasets.load_digits()
 
@@ -391,15 +388,14 @@ plt.imshow(digits.images[1010], cmap=plt.cm.gray_r, interpolation="nearest")
 show()
 
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.model_selection import train_test_split
 
 # Create feature and target arrays
 X = digits.data
 y = digits.target
 
-# Split into training and test set
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
+    X, y, test_size=0.2, random_state=9487, stratify=y
 )
 
 # Create a k-NN classifier with 7 neighbors: knn
@@ -471,7 +467,6 @@ y = df["life"].values.reshape(-1, 1)
 sns.scatterplot(x="fertility", y="life", data=df)
 show()
 
-
 from sklearn.linear_model import LinearRegression
 
 # Create the regressor: reg
@@ -494,14 +489,12 @@ sns.scatterplot(x="fertility", y="life", data=df)
 plt.plot(prediction_space, y_pred, color="black", linewidth=3)
 show()
 
-
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
-from sklearn.model_selection import train_test_split
 
-# Create training and test sets
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, random_state=42
+    X, y, test_size=0.2, random_state=9487
 )
 
 # Create the regressor: reg_all
@@ -518,9 +511,7 @@ print("R^2: {}".format(reg_all.score(X_test, y_test)))
 rmse = np.sqrt(mean_squared_error(y_test, y_pred))
 print("Root Mean Squared Error: {}".format(rmse))
 
-
 # 5-fold cross-validation
-
 
 from sklearn.model_selection import cross_val_score
 
@@ -551,13 +542,11 @@ print(np.mean(cvscores_3))
 cvscores_10 = cross_val_score(reg, X, y, cv=10)
 print(np.mean(cvscores_10))
 
-
 # Regularized regression
 # Regularization I: Lasso
 X = df.drop("life", axis="columns").values
 y = df["life"].values
 
-# Import Lasso
 from sklearn.linear_model import Lasso
 
 # Instantiate a lasso regressor: lasso
@@ -641,13 +630,13 @@ df.head()
 X = df.iloc[:, :-1]
 y = df.iloc[:, -1]
 
-from sklearn.metrics import classification_report, confusion_matrix
-from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
 from sklearn.neighbors import KNeighborsClassifier
 
-# Create training and test set
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.4, random_state=42
+    X, y, test_size=0.2, random_state=9487
 )
 
 # Instantiate a k-NN classifier: knn
@@ -665,12 +654,11 @@ print(classification_report(y_test, y_pred))
 
 # Logistic regression and the ROC curve
 
-
 from sklearn.linear_model import LogisticRegression
 
-# Create training and test sets
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.4, random_state=42
+    X, y, test_size=0.2, random_state=9487
 )
 
 # Create the classifier: logreg
@@ -704,7 +692,6 @@ show()
 
 # Precision-recall Curve
 
-
 from sklearn.metrics import precision_recall_curve
 
 precision, recall, thresholds = precision_recall_curve(y_test, y_pred_prob)
@@ -734,7 +721,6 @@ print("AUC scores computed using 5-fold cross-validation: {}".format(cv_auc))
 
 # Hyperparameter tuning
 # Hyperparameter tuning with GridSearchCV
-
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV
@@ -783,8 +769,7 @@ tree_cv.fit(X, y)
 print("Tuned Decision Tree Parameters: {}".format(tree_cv.best_params_))
 print("Best score is {}".format(tree_cv.best_score_))
 
-
-from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import LogisticRegression
 
 # Create the hyperparameter grid
@@ -794,9 +779,9 @@ param_grid = {"C": c_space, "penalty": ["l1", "l2"]}
 # Instantiate the logistic regression classifier: logreg
 logreg = LogisticRegression(max_iter=1000, solver="liblinear")
 
-# Create train and test sets
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.4, random_state=42
+    X, y, test_size=0.2, random_state=9487
 )
 
 # Instantiate the GridSearchCV object: logreg_cv
@@ -822,11 +807,11 @@ y = df["life"].values
 
 from sklearn.linear_model import ElasticNet
 from sklearn.metrics import mean_squared_error
-from sklearn.model_selection import GridSearchCV, train_test_split
+from sklearn.model_selection import GridSearchCV
 
-# Create train and test sets
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.4, random_state=42
+    X, y, test_size=0.2, random_state=9487
 )
 
 # Create the hyperparameter grid
@@ -964,7 +949,6 @@ steps = [("imputation", imp), ("SVM", clf)]
 X = df.drop("party", axis="columns")
 y = df["party"]
 
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sklearn.pipeline import Pipeline
 
@@ -977,9 +961,9 @@ steps = [
 # Create the pipeline: pipeline
 pipeline = Pipeline(steps)
 
-# Create training and test sets
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, random_state=42
+    X, y, test_size=0.2, random_state=9487
 )
 
 # Fit the pipeline to the train set
@@ -996,7 +980,6 @@ print(classification_report(y_test, y_pred))
 # Centering and scaling your data
 
 # You will now explore scaling for yourself on a new dataset - White Wine Quality! Hugo used the Red Wine Quality dataset in the video. We have used the 'quality' feature of the wine to create a binary target variable: If 'quality' is less than 5, the target variable is 1, and otherwise, it is 0.
-
 
 df = pd.read_csv("./data/winequality-white.csv", sep=";")
 cc = df.head()
@@ -1025,7 +1008,6 @@ print("Standard Deviation of Scaled Features: {}".format(np.std(X_scaled)))
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
-from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 
 # Setup the pipeline steps: steps
@@ -1034,9 +1016,9 @@ steps = [("scaler", StandardScaler()), ("knn", KNeighborsClassifier())]
 # Create the pipeline: pipeline
 pipeline = Pipeline(steps)
 
-# Create train and test sets
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, random_state=42
+    X, y, test_size=0.2, random_state=9487
 )
 
 # Fit the pipeline to the training set: knn_scaled
@@ -1051,8 +1033,9 @@ print("Accuracy without Scaling: {}".format(knn_unscaled.score(X_test, y_test)))
 
 # Bringing it all together I: Pipeline for classification
 
-from sklearn.metrics import classification_report, accuracy_score
-from sklearn.model_selection import GridSearchCV, train_test_split
+from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import GridSearchCV
 from sklearn.svm import SVC
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
@@ -1065,9 +1048,9 @@ pipeline = Pipeline(steps)
 # Specify the hyperparameter space
 parameters = {"SVM__C": [1, 10, 100], "SVM__gamma": [0.1, 0.01]}
 
-# Create train and test sets
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=21
+    X, y, test_size=0.2, random_state=9487
 )
 
 # Instantiate the GridSearchCV object: cv
@@ -1112,9 +1095,9 @@ pipeline = Pipeline(steps)
 # Specify the hyperparameter space
 parameters = {"elasticnet__l1_ratio": np.linspace(0, 1, 30)}
 
-# Create train and test sets
+# 資料分割
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.4, random_state=42
+    X, y, test_size=0.2, random_state=9487
 )
 
 # Create the GridSearchCV object: gm_cv
@@ -1916,7 +1899,8 @@ df.head()
 samples = df.iloc[:, :-1].values
 varieties = df.iloc[:, -1].values
 
-from scipy.cluster.hierarchy import linkage, dendrogram
+from scipy.cluster.hierarchy import linkage
+from scipy.cluster.hierarchy import dendrogram
 
 # Calculate the linkage: mergings
 mergings = linkage(samples, method="complete")

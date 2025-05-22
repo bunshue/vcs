@@ -1,6 +1,17 @@
-# ch29_1.py
 import cv2
+import os
+import glob
 import numpy as np
+import matplotlib.pyplot as plt
+
+# OpenCV 人臉識別分類器
+# xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
+xml_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_alt2.xml'
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
+
+print("------------------------------------------------------------")  # 60個
+
+# ch29_1.py
 
 face_db = []                                        # 建立空串列
 face_db.append(cv2.imread("ch29_1\\hung1.jpg",cv2.IMREAD_GRAYSCALE))
@@ -19,15 +30,10 @@ label,confidence = recognizer.predict(face)         # 執行人臉辨識
 print(f"Name       = {faceNames[str(label)]}")
 print(f"Confidence = {confidence:6.2f}")
 
-
-
-
-#檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch29\ch29_1_1.py
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # ch29_1_1.py
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
 
 image = cv2.imread("ch29_1\\hung1.jpg",cv2.IMREAD_COLOR)    # 彩色讀取
 img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)                # 轉RGB
@@ -42,19 +48,10 @@ plt.subplot(122)
 plt.bar(axis_values, histogram)
 plt.show()
 
-
-
-
-
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch29\ch29_1_2.py
-
 # ch29_1_2.py
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
 
 image = cv2.imread("ch29_1\\star1.jpg",cv2.IMREAD_COLOR)    # 彩色讀取
 img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)                # 轉RGB
@@ -69,19 +66,10 @@ plt.subplot(122)
 plt.bar(axis_values, histogram)
 plt.show()
 
-
-
-
-
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch29\ch29_1_3.py
-
 # ch29_1_3.py
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
 
 image = cv2.imread("ch29_1\\face.jpg",cv2.IMREAD_COLOR)     # 彩色讀取
 img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)                # 轉RGB
@@ -96,18 +84,10 @@ plt.subplot(122)
 plt.bar(axis_values, histogram)
 plt.show()
 
-
-
-
-
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch29\ch29_2.py
-
 # ch29_2.py
-import cv2
-import numpy as np
 
 face_db = [                                     # 人臉資料庫
             "ch29_2\\hung1.jpg",
@@ -128,21 +108,10 @@ model.train(faces, np.array(labels))            # 訓練人臉辨識
 model.save("ch29_2\\model.yml")                 # 儲存訓練的人臉數據
 print("儲存訓練數據完成")
 
-
-
-
-
-
-
-
-
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch29\ch29_3.py
-
 # ch29_3.py
-import cv2
 
 # 建立對應名字的字典
 faceNames = {"0":"Hung", "1":"Hung", "2":"Unistar", "3":"Unistar"}
@@ -154,15 +123,10 @@ label,confidence = model.predict(face)          # 執行人臉辨識
 print(f"Name       = {faceNames[str(label)]}")
 print(f"Confidence = {confidence:6.2f}")
 
-
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch29\ch29_4.py
-
 # ch29_4.py
-import cv2
-import numpy as np
 
 face_db = []                                        # 建立空串列
 face_db.append(cv2.imread("ch29_1\\hung1.jpg",cv2.IMREAD_GRAYSCALE))
@@ -182,16 +146,10 @@ print("使用Eigenfaces方法執行人臉辨識")
 print(f"Name       = {faceNames[str(label)]}")
 print(f"Confidence = {confidence:6.2f}")
 
-
-
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch29\ch29_5.py
-
 # ch29_5.py
-import cv2
-import numpy as np
 
 face_db = []                                        # 建立空串列
 face_db.append(cv2.imread("ch29_1\\hung1.jpg",cv2.IMREAD_GRAYSCALE))
@@ -211,22 +169,14 @@ print("使用Fisherfaces方法執行人臉辨識")
 print(f"Name       = {faceNames[str(label)]}")
 print(f"Confidence = {confidence:6.2f}")
 
-
-
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch29\ch29_6.py
-
 # ch29_6.py
-import cv2
-import os
-import glob
-import numpy as np
 
 total = 5                                           # 人臉取樣數
-pictPath = r'C:\opencv\data\haarcascade_frontalface_alt2.xml'
-face_cascade = cv2.CascadeClassifier(pictPath)      # 建立辨識檔案物件
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
+
 if not os.path.exists("ch29_6"):                    # 如果不存在ch29_6資料夾
     os.mkdir("ch29_6")                              # 就建立ch29_6
 name = input("請輸入英文名字 : ")
@@ -238,7 +188,7 @@ else:
     num = 1                                         # 影像編號
     while(cap.isOpened()):                          # 攝影機有開啟就執行迴圈   
         ret, img = cap.read()                       # 讀取影像
-        faces = face_cascade.detectMultiScale(img, scaleFactor=1.1,
+        faces = face_cascade_classifier.detectMultiScale(img, scaleFactor=1.1,
                 minNeighbors = 3, minSize=(20,20))
         for (x, y, w, h) in faces:
             cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)  # 藍色框住人臉
@@ -285,17 +235,12 @@ model.train(faces_db, np.array(labels))             # 訓練LBPH人臉辨識
 model.save('ch29_6\\deepmind.yml')                  # 儲存LBPH訓練數據
 print('人臉辨識資料庫完成')
 
-
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch29\ch29_7.py
-
 # ch29_7.py
-import cv2
 
-pictPath = r'C:\opencv\data\haarcascade_frontalface_alt2.xml'
-face_cascade = cv2.CascadeClassifier(pictPath)      # 建立辨識物件
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
 
 model = cv2.face.LBPHFaceRecognizer_create()
 model.read('ch29_6\\deepmind.yml')                  # 讀取已訓練模型
@@ -305,7 +250,7 @@ names = f.readline().split(',')                     # 將姓名存於串列
 cap = cv2.VideoCapture(0)
 while(cap.isOpened()):                              # 如果開啟攝影機成功
     ret, img = cap.read()                           # 讀取影像
-    faces = face_cascade.detectMultiScale(img, scaleFactor=1.1,
+    faces = face_cascade_classifier.detectMultiScale(img, scaleFactor=1.1,
                 minNeighbors = 3, minSize=(20,20))
     for (x, y, w, h) in faces:
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)  # 藍色框住人臉
@@ -328,9 +273,6 @@ if val[1] < 50:                                     #人臉辨識成功
 else:
     print("對不起你不是員工, 請洽人事部門")
 
-  
-
-
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

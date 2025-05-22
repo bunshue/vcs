@@ -1,14 +1,22 @@
-# ch28_1.py
 import cv2
 import os
+
+# OpenCV 人臉識別分類器
+# xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
+xml_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_alt2.xml'
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
+
+print("------------------------------------------------------------")  # 60個
+
+# ch28_1.py
 
 if not os.path.exists("facedata"):                  # 如果不存在資料夾
     os.mkdir("facedata")                            # 就建立facedata
 
-pictPath = r'C:\opencv\data\haarcascade_frontalface_alt2.xml'
-face_cascade = cv2.CascadeClassifier(pictPath)      # 建立辨識檔案物件
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
+
 img = cv2.imread("g5.jpg")                          # 讀取影像
-faces = face_cascade.detectMultiScale(img, scaleFactor=1.1,
+faces = face_cascade_classifier.detectMultiScale(img, scaleFactor=1.1,
         minNeighbors = 3, minSize=(20,20))          # 偵測影像
 # 標註右下角底色是黃色
 cv2.rectangle(img, (img.shape[1]-140, img.shape[0]-20),         
@@ -32,24 +40,18 @@ cv2.imshow("Face", img)                             # 顯示影像
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-
-
-
-
-
-#檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch28\ch28_2.py
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # ch28_2.py
-import cv2
-import os
 
 if not os.path.exists("ch28_2"):                # 如果不存在ch28_2資料夾
     os.mkdir("ch28_2")                          # 就建立ch28_2
 name = input("請輸入英文名字 : ")
 faceName = "ch28_2\\" + name + ".jpg"           # 人臉影像
 facePhoto = "ch28_2\\" + name + "photo.jpg"     # 拍攝影像
-pictPath = r'C:\opencv\data\haarcascade_frontalface_alt2.xml'
-face_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識檔案物件
+
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
 cap = cv2.VideoCapture(0)                       # 開啟攝影機
 while(cap.isOpened()):                          # 攝影機有開啟就執行迴圈
     ret, img = cap.read()                       # 讀取影像
@@ -62,7 +64,7 @@ while(cap.isOpened()):                          # 攝影機有開啟就執行迴
 cap.release()                                   # 關閉攝影機
 
 img = cv2.imread(facePhoto)                     # 讀取影像facePhoto
-faces = face_cascade.detectMultiScale(img, scaleFactor=1.1,
+faces = face_cascade_classifier.detectMultiScale(img, scaleFactor=1.1,
         minNeighbors = 3, minSize=(20,20))
 
 # 將人臉框起來
@@ -78,23 +80,20 @@ cv2.destroyAllWindows()
 
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch28\ch28_3.py
+print("------------------------------------------------------------")  # 60個
 
 # ch28_3.py
-import cv2
-import os
 
 if not os.path.exists("ch28_3"):                # 如果不存在ch28_3資料夾
     os.mkdir("ch28_3")                          # 就建立ch28_3
 name = input("請輸入英文名字 : ")
 faceName = "ch28_3\\" + name + ".jpg"           # 人臉影像
-pictPath = r'C:\opencv\data\haarcascade_frontalface_alt2.xml'
-face_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識檔案物件
+
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
 cap = cv2.VideoCapture(0)                       # 開啟攝影機
 while(cap.isOpened()):                          # 攝影機有開啟就執行迴圈   
     ret, img = cap.read()                       # 讀取影像
-    faces = face_cascade.detectMultiScale(img, scaleFactor=1.1,
+    faces = face_cascade_classifier.detectMultiScale(img, scaleFactor=1.1,
             minNeighbors = 3, minSize=(20,20))
     for (x, y, w, h) in faces:
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)  # 藍色框住人臉
@@ -111,26 +110,21 @@ cap.release()                                   # 關閉攝影機
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch28\ch28_4.py
-
 # ch28_4.py
-import cv2
-import os
 
 if not os.path.exists("ch28_4"):                # 如果不存在ch28_4資料夾
     os.mkdir("ch28_4")                          # 就建立ch28_4
 name = input("請輸入英文名字 : ")
-pictPath = r'C:\opencv\data\haarcascade_frontalface_alt2.xml'
-face_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識檔案物件
+
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
 cap = cv2.VideoCapture(0)                       # 開啟攝影機
 num = 1                                         # 影像編號
 while(cap.isOpened()):                          # 攝影機有開啟就執行迴圈   
     ret, img = cap.read()                       # 讀取影像
-    faces = face_cascade.detectMultiScale(img, scaleFactor=1.1,
+    faces = face_cascade_classifier.detectMultiScale(img, scaleFactor=1.1,
             minNeighbors = 3, minSize=(20,20))
     for (x, y, w, h) in faces:
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)  # 藍色框住人臉
@@ -151,27 +145,23 @@ while(cap.isOpened()):                          # 攝影機有開啟就執行迴
 cap.release()                                   # 關閉攝影機
 cv2.destroyAllWindows()
 
-
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\opencv\__new\OpenCV影像創意邁向AI視覺\ch28\ch28_5.py
-
 # ch28_5.py
-import cv2
-import os
 
 if not os.path.exists("ch28_5"):                # 如果不存在ch28_5資料夾
     os.mkdir("ch28_5")                          # 就建立ch28_5
 name = input("請輸入英文名字     : ")
 total = eval(input("請輸入人臉需求數量 : "))
-pictPath = r'C:\opencv\data\haarcascade_frontalface_alt2.xml'
-face_cascade = cv2.CascadeClassifier(pictPath)  # 建立辨識檔案物件
+
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
+
 cap = cv2.VideoCapture(0)                       # 開啟攝影機
 num = 1                                         # 影像編號
 while(cap.isOpened()):                          # 攝影機有開啟就執行迴圈   
     ret, img = cap.read()                       # 讀取影像
-    faces = face_cascade.detectMultiScale(img, scaleFactor=1.1,
+    faces = face_cascade_classifier.detectMultiScale(img, scaleFactor=1.1,
             minNeighbors = 3, minSize=(20,20))
     for (x, y, w, h) in faces:
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)  # 藍色框住人臉

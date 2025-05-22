@@ -49,7 +49,7 @@ def toHexChar(hexValue):
 
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 
 def run_digital_clock(label1):                     # 數字變數內容的更動
     def counting():                         # 更動數字方法
@@ -306,8 +306,9 @@ while running == True:
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("移動一個球範例")
+print("移動一個球範例1")
 
 window = tk.Tk()
 window.protocol("WM_DELETE_WINDOW", stop_running_and_exit)  # 更改協定綁定
@@ -333,8 +334,9 @@ while running == True:
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("移動一個球範例")
+print("移動一個球範例2")
 
 window = tk.Tk()
 window.protocol("WM_DELETE_WINDOW", stop_running_and_exit)  # 更改協定綁定
@@ -542,7 +544,7 @@ while ball.notTouchBottom:                      # 如果球未接觸畫布底端
     time.sleep(speed)                           # 可以控制移動速度
 
 window.mainloop()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 

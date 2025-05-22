@@ -27,13 +27,6 @@ Jupyter。名稱的由來是
 ------------------------------------------------------------
 
 
- 人臉偵測分類器
-haarcascade_frontalface_default.xml	人臉正面與側面 
-haarcascade_frontalface_alt2.xml	人臉正面效果比較好
-haarcascade_profileface.xml		人臉側面效果比較好
-haarcascade_eye.xml			偵測眼睛
-
-
 ------------------------------------------------------------
 
 匿名函式 lambda
