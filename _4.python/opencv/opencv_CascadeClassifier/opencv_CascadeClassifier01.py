@@ -522,7 +522,7 @@ print('ddd')
 if not os.path.exists("facedata"):  # 如果不存在資料夾
     os.mkdir("facedata")  # 就建立facedata
 
-#xml_filename = r"C:\opencv\data\haarcascade_frontalface_alt2.xml"
+#xml_filename = r"haarcascade_frontalface_alt2.xml"
 
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
 img = cv2.imread(filename)  # 讀取影像
