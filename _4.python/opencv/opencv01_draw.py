@@ -21,6 +21,16 @@ cv之繪圖之順序
 
 未指明line_width就是1點
 
+cv2.FONT_HERSHEY_SIMPLEX	sans-serif字型正常大小
+cv2.FONT_HERSHEY_PLAIN		sans-serif字型較小字型
+cv2.FONT_HERSHEY_DUPLEX		sans-serif字型正常大小，但是比較複雜
+cv2.FONT_HERSHEY_COMPLEX	serif字型正常大小
+cv2.FONT_HERSHEY_TRIPLEX	serif字型正常大小，但是比較複雜
+cv2.FONT_HERSHEY_COMPLEX_SMALL	serif字型較小字型
+cv2.FONT_HERSHEY_SCRIPT_SIMPLEX	手寫風格的字型
+cv2.FONT_HERSHEY_SCRIPT_COMPLEX	手寫風格的字型，但是比較複雜
+cv2.FONT_ITALIC			italic字型(斜體字)
+
 """
 
 import cv2
@@ -49,6 +59,12 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
+
+
+def show():
+    plt.show()
+    pass
+
 
 print("------------------------------------------------------------")  # 60個
 

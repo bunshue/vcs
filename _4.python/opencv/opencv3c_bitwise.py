@@ -1,23 +1,28 @@
 """
-cv2.bitwise_and(a,b)  #ab都成立的 擷取出來
-cv2.bitwise_xor(a,b)
-cv2.bitwise_or(a,b)
-cv2.bitwise_not(a)
+影像的位元運算(4)
+cv2.bitwise_and()
+cv2.bitwise_or()
+cv2.bitwise_not()
+cv2.bitwise_xor()
 
 """
-
 import cv2
+
+filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
 
 print("------------------------------------------------------------")  # 60個
 
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -26,6 +31,12 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
+
+
+def show():
+    plt.show()
+    pass
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -627,7 +638,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
 print("閾值分割 bitwise_and")
 
 src1 = np.array([[255, 0, 255]])
@@ -643,6 +653,127 @@ print(dst_or)
 
 print("------------------------------------------------------------")  # 60個
 
+src1 = np.random.randint(0, 255, (3, 5), dtype=np.uint8)
+
+src2 = np.zeros((3, 5), dtype=np.uint8)
+src2[0:2, 0:2] = 255  # 設定mask, 先高後寬
+
+dst = cv2.bitwise_and(src1, src2)
+
+print(f"src1 = \n {src1}")
+print(f"src2 = \n {src2}")
+print(f"dst = \n {dst}")
+
+print("------------------------------------------------------------")  # 60個
+
+# 灰階 mask 運算
+
+src1 = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
+
+src2 = np.zeros(src1.shape, dtype=np.uint8)  # 建立mask
+src2[50:520, 150:360] = 255  # 設定mask, 先高後寬
+
+dst = cv2.bitwise_and(src1, src2)  # 執行and運算
+
+cv2.imshow("Before", src1)
+cv2.imshow("Mask", src2)
+cv2.imshow("After", dst)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+# 彩色 mask 運算
+
+src1 = cv2.imread(filename2)
+
+src2 = np.zeros(src1.shape, dtype=np.uint8)  # 建立mask
+src2[50:520, 150:360, :] = 255  # 設定mask, 先高後寬  # 這是3維陣列
+
+dst = cv2.bitwise_and(src1, src2)  # 執行and運算
+
+cv2.imshow("Before", src1)
+cv2.imshow("Mask", src2)
+cv2.imshow("After", dst)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+src1 = np.random.randint(0, 255, (3, 5), dtype=np.uint8)
+
+src2 = np.zeros((3, 5), dtype=np.uint8)
+src2[0:2, 0:2] = 255  # 設定mask, 先高後寬
+
+dst = cv2.bitwise_or(src1, src2)
+
+print(f"src1 = \n {src1}")
+print(f"src2 = \n {src2}")
+print(f"dst = \n {dst}")
+
+print("------------------------------------------------------------")  # 60個
+
+src1 = cv2.imread(filename2)
+
+src2 = np.zeros(src1.shape, dtype=np.uint8)  # 建立mask
+src2[50:520, 150:360, :] = 255  # 設定mask, 先高後寬  # 這是3維陣列
+
+dst = cv2.bitwise_or(src1, src2)  # 執行or運算
+
+cv2.imshow("Before", src1)
+cv2.imshow("Mask", src2)
+cv2.imshow("After", dst)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+src = cv2.imread(filename1)
+
+dst = cv2.bitwise_not(src)  # 執行or運算
+
+cv2.imshow("Before", src)
+cv2.imshow("After", dst)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+src1 = cv2.imread(filename1)
+
+src2 = np.zeros(src1.shape, np.uint8)
+src2[:, 140:280, :] = 255  # 設定mask, 先高後寬  # 建立mask白色區塊
+
+dst = cv2.bitwise_xor(src1, src2)  # 執行xor運算
+
+cv2.imshow("Before", src1)
+cv2.imshow("Mask", src2)
+cv2.imshow("After", dst)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+src = cv2.imread(filename1)
+key = np.random.randint(0, 256, src.shape, np.uint8)  # 密鑰影像
+print(src.shape)
+
+cv2.imshow("Before", src)  # 原始影像
+cv2.imshow("key", key)  # 密鑰影像
+
+img_encryp = cv2.bitwise_xor(src, key)  # 加密結果的影像
+cv2.imshow("encryption", img_encryp)  # 加密結果影像
+
+img_decryp = cv2.bitwise_xor(key, img_encryp)  # 解密結果的影像
+cv2.imshow("decryption", img_decryp)  # 解密結果影像
+
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 

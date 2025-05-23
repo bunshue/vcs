@@ -4,6 +4,13 @@ C : copy
 R : resize
 R : rotate
 
+resize() 的 interpolation
+INTER_NEAREST	0	最近插值法
+INTER_LINEAR	1	雙線性插值法，在插入點選擇4個點進行插值處理，這是預設的方法
+INTER_CUBIC	2	雙三次插值法，可以創造更平滑的邊緣影像
+INTER_AREA	3	對影像縮小重新採樣的首選方法，但是影像放大時類似最近插值法
+INTER_LENCZOS4	4	Lencz的插值方法，這個方法會在x和y的方向分別對8個點進行插值
+
 """
 
 import cv2
@@ -31,6 +38,12 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
+
+
+def show():
+    plt.show()
+    pass
+
 
 print("------------------------------------------------------------")  # 60個
 

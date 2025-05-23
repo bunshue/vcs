@@ -13,6 +13,13 @@ MPEG-4		*"XVID"		.avi
 MP4		*"MP4V"		.mp4
 Ogg Vorbis	*"THEO"		.ogv
 
+編碼格式
+VideoWriter_fourcc('I', '4', '2', '0')	.avi	YUV編碼，相容性好，但是需較多記憶體空間 = VideoWriter_fourcc(*"I420")
+VideoWriter_fourcc('P', 'I', 'M', 'I')	.avi	MPEG-1編碼
+VideoWriter_fourcc('X', 'V', 'I', 'D')	.avi	MPEG-4編碼 = VideoWriter_fourcc(*'XVID')
+VideoWriter_fourcc('T', 'H', 'E', 'O')	.ogb	Ogg Vobis編碼
+VideoWriter_fourcc('F', 'L', 'V', '1')	.flv	Flash視訊
+
 """
 
 import cv2
