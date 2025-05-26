@@ -5,6 +5,8 @@ from datetime import datetime
 import time
 import requests
 
+xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
+
 base = ''    # api
 key = ''     # 你的金鑰
 headers_stream = {}   # stream 請求標頭
@@ -145,8 +147,7 @@ def db_check(db):
 #-----------------------------------#
 def face_shot(function):
     isCnt = False       # 用來判斷是否正在進行倒數計時中
-    face_detector = cv2.CascadeClassifier(
-        'haarcascade_frontalface_default.xml')  # 建立臉部辨識物件
+    face_detector = cv2.CascadeClassifier(xml_filename)  # 建立臉部辨識物件
     capture = cv2.VideoCapture(0)                   # 開啟編號 0 的攝影機
     while capture.isOpened():                      # 判斷攝影機是否開啟成功
         sucess, img = capture.read()            # 讀取攝影機影像

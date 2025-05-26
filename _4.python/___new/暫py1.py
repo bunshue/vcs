@@ -802,12 +802,10 @@ np.random.randint(st, sp, N) 不含尾, 一次可產出N個
 
 
 
-opencv放xml的地方
+opencv放xml的地方 兩個
 C:\Users\070601\AppData\Local\Programs\Python\Python311\Lib\site-packages\cv2\data
-
-# 設定 Haar 分類器檔案路徑
-xml_filename = r'C:\_git\vcs\_4.python\_data\haarcascade_frontalface_default.xml'
-
+C:\Users\070601\AppData\Roaming\Python\Python311\site-packages\cv2\data
+使用 print(cv2.data.haarcascades) 可打印出路徑
 
 串列運算子
 +	連接兩個串列元素

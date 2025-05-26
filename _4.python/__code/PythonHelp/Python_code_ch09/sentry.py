@@ -3,10 +3,11 @@ import time
 from playsound import playsound
 import cv2 as cv
 
-# 設定 Haar 階層式分類器檔案路徑
-path = "C:/Users/Admin/AppData/Local/Programs/Python/Python310/Lib/site-packages/cv2/data/"
-face_cascade = cv.CascadeClassifier(path + 'haarcascade_frontalface_default.xml')
-eye_cascade = cv.CascadeClassifier(path + 'haarcascade_eye.xml')
+xml_filename1 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
+face_cascade = cv.CascadeClassifier(xml_filename1)
+
+xml_filename2 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_eye.xml"
+eye_cascade = cv.CascadeClassifier(xml_filename2)
 
 # 切換到放置影像的資料夾
 os.chdir('corridor_5')

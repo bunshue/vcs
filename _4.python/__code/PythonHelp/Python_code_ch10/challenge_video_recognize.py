@@ -2,9 +2,7 @@ import cv2 as cv
 
 names = {1: "Demming"}  # 將使用者 ID 聯結到使用者名稱
 
-# 設定 Haar 分類器檔案路徑
-xml_filename = r'C:\_git\vcs\_4.python\_data\haarcascade_frontalface_default.xml'
-
+xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
 detector = cv.CascadeClassifier(xml_filename)
 
 # 初始化辨識器物件，並載入訓練資料

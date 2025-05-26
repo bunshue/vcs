@@ -1,9 +1,8 @@
 import os
+import sys
 import cv2 as cv
 
-xml_filename = r'C:\_git\vcs\_4.python\_data\haarcascade_frontalface_default.xml'
-
-# 設定 Haar 分類器檔案路徑
+xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
 face_detector = cv.CascadeClassifier(xml_filename)
 
 # 打開視訊鏡頭

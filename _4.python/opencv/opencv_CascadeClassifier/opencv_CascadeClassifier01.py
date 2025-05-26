@@ -28,8 +28,8 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print("------------------------------------------------------------")  # 60個
 
 # OpenCV 人臉識別分類器 Haar Cascase
-xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
-# xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_alt2.xml"
+xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
+# xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_alt2.xml"
 
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
@@ -104,7 +104,8 @@ cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
 
 print("------------------------------------------------------------")  # 60個
 
-# 應改用 "E:\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_alt_tree.xml"
+xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_alt_tree.xml"
+
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 
 #filename = "C:/_git/vcs/_4.python/opencv/data/_face/YaltaSummit1945.jpg"
@@ -160,15 +161,15 @@ print("------------------------------------------------------------")  # 60個
 print("框出照片中的人臉")
 
 # OpenCV 人臉識別分類器
-xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default333.xml"
-# face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
+xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default333.xml"
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 
 # 讀取待檢測的圖像
 image = cv2.imread(filename)
-# 獲取xml文件,加載人臉檢測器
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
+
 # 色彩轉換，轉換為灰度圖像
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
 # 調用函數detectMultiScale
 faces = face_cascade_classifier.detectMultiScale(
     gray, scaleFactor=1.15, minNeighbors=5, minSize=(5, 5)
@@ -197,6 +198,7 @@ img = cv2.imread(filename)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 將圖片轉成灰階
 
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 載入人臉模型
+
 faces = face_cascade_classifier.detectMultiScale(gray)  # 偵測人臉
 
 # 繪製人臉部份的方框
@@ -238,13 +240,7 @@ cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-
-
-
-
 # 以上為單純圖片的人臉辨識
-#sys.exit()
 
 print("OpenCV_ai_44 人臉識別 把人臉馬賽克掉")
 
@@ -275,13 +271,10 @@ print("人臉辨識 圖片 臉 眼")
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
 
-# face_cascade_classifier = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
-# eye_cascade_classifier = cv2.CascadeClassifier("haarcascade_eye.xml")
-
-xml_filename1 = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
+xml_filename1 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename1)
 
-xml_filename2 = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_eye.xml"
+xml_filename2 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_eye.xml"
 eye_cascade_classifier = cv2.CascadeClassifier(xml_filename2)
 
 # save the image(i) in the same directory
@@ -313,13 +306,13 @@ print("------------------------------------------------------------")  # 60個
 print("人臉辨識 圖片 眼 嘴 鼻")
 
 # 眼睛模型
-eye_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_eye.xml"
+eye_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_eye.xml"
 
 # 嘴巴模型
-mouth_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_mcs_mouth.xml"
+mouth_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_mcs_mouth.xml"
 
 # 鼻子模型
-nose_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_mcs_nose.xml"
+nose_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_mcs_nose.xml"
 
 filename = "C:/_git/vcs/_4.python/opencv/data/_face/face07.jpg"
 img = cv2.imread(filename)
@@ -425,6 +418,7 @@ filename = "C:/_git/vcs/_4.python/opencv/data/_face/face01.jpg"
 
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識物件
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
+
 img = cv2.imread(filename)  # 讀取影像
 faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
@@ -461,8 +455,8 @@ cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
 
 print("------------------------------------------------------------")  # 60個
 
-print('bbb')
-#xml_filename = r"C:\_git\vcs\_4.python\_data\lbpcascade_frontalface.xml"
+xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/lbpcascades/lbpcascade_frontalface.xml"
+xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
 
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 
@@ -1046,10 +1040,10 @@ def counter(func):
     return tmp
 
 
-xml_filename1 = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
+xml_filename1 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename1)
 
-xml_filename2 = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_eye.xml"
+xml_filename2 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_eye.xml"
 eye_cascade_classifier = cv2.CascadeClassifier(xml_filename2)
 
 cap = cv2.VideoCapture(0)
@@ -1147,9 +1141,7 @@ if not cap.isOpened():
 else:
     print("Video device opened")
 
-xml_filename = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml"
-)
+xml_filename = ("C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml")
 
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 # faces = face_cascade_classifier.detectMultiScale(gray)
@@ -1183,9 +1175,7 @@ if not cap.isOpened():
 else:
     print("Video device opened")
 
-xml_filename = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml"
-)
+xml_filename = ("C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml")
 
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 
@@ -1271,9 +1261,7 @@ recognizer = cv2.face.LBPHFaceRecognizer_create()  # 啟用訓練人臉模型方
 # NG 無檔案
 # recognizer.read('face.yml')                               # 讀取人臉模型檔
 
-xml_filename = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml"
-)
+xml_filename = ("C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml")
 
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 啟用人臉追蹤
 
@@ -1331,7 +1319,9 @@ print("------------------------------------------------------------")  # 60個
 print("偵測右轉指示牌")
 
 img = cv2.imread("pic_turnR.jpg")
-detector = cv2.CascadeClassifier("haar_turnR.xml")
+
+xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haar_turnR.xml"
+detector = cv2.CascadeClassifier(xml_filename)
 signs = detector.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=2, minSize=(30, 30)
 )

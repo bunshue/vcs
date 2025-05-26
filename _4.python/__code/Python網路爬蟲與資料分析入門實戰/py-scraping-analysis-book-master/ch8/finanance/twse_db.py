@@ -3,7 +3,7 @@ import datetime
 import sqlite3
 import time
 
-db_name = 'data.sqlite3'
+db_filename = 'D:/_git/vcs/_big_files/data.sqlite3'
 
 
 def str_to_num(s, c_type):
@@ -81,7 +81,7 @@ def update_db(date_from, date_to):
     while current <= date_to:
         prices = crawl_price(current)
         if prices:
-            bulk_insert(db_name, prices)
+            bulk_insert(db_filename, prices)
             print(current.strftime('%Y-%m-%d'), '... 成功')
         else:
             print(current.strftime('%Y-%m-%d'), '... 失敗 (可能為假日)')
@@ -90,7 +90,7 @@ def update_db(date_from, date_to):
 
 
 if __name__ == '__main__':
-    db_from, db_to = get_date_range_from_db(db_name)
+    db_from, db_to = get_date_range_from_db(db_filename)
     print('資料庫日期: {} 到 {}'.format(db_from.strftime('%Y-%m-%d'), db_to.strftime('%Y-%m-%d')))
     #date_from = db_to + datetime.timedelta(days=1)
     #date_to = datetime.datetime.today()
