@@ -434,6 +434,7 @@ def get_elapsed_time():
     print("所花時間 : {} 秒".format(timeElapsed))
     time_st = time.time()
 
+
 """
 print("------------------------------------------------------------")  # 60個
 print("準備工作 ST")
@@ -2649,18 +2650,20 @@ print("------------------------------------------------------------")  # 60個
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 
-mnist = input_data.read_data_sets("C:/_git/vcs/_4.python/ml/data/MNIST_data/", one_hot=True)
+mnist = input_data.read_data_sets(
+    "C:/_git/vcs/_4.python/ml/data/MNIST_data/", one_hot=True
+)
 print(mnist.train.images.shape)
 
 print(type(mnist))
- 
+
 batch = mnist.train.next_batch(100)
-print(type(batch))#<class "tuple">
- 
-x=mnist.train.images
-y=mnist.train.labels
-print(type(x),x.shape)#<class "numpy.ndarray"> (55000, 784)
-print(type(y),y.shape)#<class "numpy.ndarray"> (55000, 10)
+print(type(batch))  # <class "tuple">
+
+x = mnist.train.images
+y = mnist.train.labels
+print(type(x), x.shape)  # <class "numpy.ndarray"> (55000, 784)
+print(type(y), y.shape)  # <class "numpy.ndarray"> (55000, 10)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

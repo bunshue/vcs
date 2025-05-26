@@ -1,5 +1,6 @@
 
 
+
 ------------------------------------------------------------
 
 
@@ -797,15 +798,6 @@ randint 的差別
 
    random.randint(st, sp)    含頭尾, 一次只能產出一個
 np.random.randint(st, sp, N) 不含尾, 一次可產出N個
-
-
-
-
-
-opencv放xml的地方 兩個
-C:\Users\070601\AppData\Local\Programs\Python\Python311\Lib\site-packages\cv2\data
-C:\Users\070601\AppData\Roaming\Python\Python311\site-packages\cv2\data
-使用 print(cv2.data.haarcascades) 可打印出路徑
 
 串列運算子
 +	連接兩個串列元素

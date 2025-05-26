@@ -38,7 +38,7 @@ def show():
     plt.show()
     pass
 
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -5916,6 +5916,7 @@ print(f"data2[0,0] = {data2[0,0]}")
 print("------------------------------------------------------------")  # 60個
 
 # ch25_10.py
+# np.vsplit() 垂直方向分割數據
 
 data = np.arange(16).reshape(2, 2, 2, 2)
 print(f"data = \n {data}")
@@ -5924,6 +5925,7 @@ print(f"data = \n {np.vsplit(data,2)}")
 print("------------------------------------------------------------")  # 60個
 
 # ch25_11.py
+# np.hsplit() 水平方向分割數據
 
 data = np.arange(16).reshape(4, 4)
 print(f"data = \n {data}")
@@ -5932,6 +5934,7 @@ print(f"split = \n{np.hsplit(data,2)}")
 print("------------------------------------------------------------")  # 60個
 
 # ch25_11_1.py
+# np.repeat() 元素重複
 
 data = np.arange(3)
 print(f"data = \n {data}")
@@ -6186,20 +6189,30 @@ print("------------------------------------------------------------")  # 60個
 data = np.arange(8).reshape(2, 2, 2)
 print(f"data = \n {data}")
 print(f"split = \n{np.vsplit(data,2)}")
-'''
+
 print("------------------------------------------------------------")  # 60個
 # OpenCV_27_物件偵測
 print("------------------------------------------------------------")  # 60個
 
+"""
+Haar-like features 哈爾特徵
+
+匈牙利 Afred Haar
+"""
+
 # ch27_1.py
+# 偵測正面人臉 haarcascade_frontalface_default.xml
+
+pic_filename = "C:/_git/vcs/_4.python/opencv/data/_face/face06.jpg"
 
 xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
 
-img = cv2.imread("jk.jpg")  # 讀取影像
+img = cv2.imread(pic_filename)  # 讀取影像
 faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
 )
+
 # 標註右下角底色是黃色
 cv2.rectangle(
     img,
@@ -6211,13 +6224,14 @@ cv2.rectangle(
 # 標註找到多少的人臉
 cv2.putText(
     img,
-    "Finding " + str(len(faces)) + " face",
+    "Found " + str(len(faces)) + " faces",
     (img.shape[1] - 135, img.shape[0] - 5),
     cv2.FONT_HERSHEY_COMPLEX,
     0.5,
     (255, 0, 0),
     1,
 )
+
 # 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
 for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
@@ -6228,10 +6242,12 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch27_10.py
+# 偵測上半身 haarcascade_upperbody.xml
 
 xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_upperbody.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
+
+# pic_filename = "C:/_git/vcs/_4.python/opencv/data/_face/face06.jpg"
 
 img = cv2.imread("people1.jpg")  # 讀取影像
 bodies = face_cascade_classifier.detectMultiScale(
@@ -6250,24 +6266,23 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # ch27_11.py
+# 偵測正面人臉 haarcascade_frontalface_default.xml
 
 # 建立人臉物件
 xml_filename1 = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
 face_cascade_classifier1 = cv2.CascadeClassifier(xml_filename1)  # 建立辨識檔案物件
 
 # 建立雙眼物件
-xml_filename1 = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_eye.xml"
+xml_filename2 = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_eye.xml"
 face_cascade_classifier2 = cv2.CascadeClassifier(xml_filename2)  # 建立辨識檔案物件
 
-face_cascade_classifier = cv2.CascadeClassifier(pictPath1)  # 建立人臉物件
-img = cv2.imread("jk.jpg")  # 讀取影像
+img = cv2.imread(filename3)  # 讀取影像
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 # 偵測人臉
 faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
 )
 # 偵測雙眼
-face_cascade_classifier2 = cv2.CascadeClassifier(pictPath2)
 eyes = face_cascade_classifier2.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
 )
@@ -6285,6 +6300,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # ch27_12.py
+# 偵測正面人臉 haarcascade_frontalface_default.xml
 
 # 建立人臉物件
 xml_filename1 = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
@@ -6294,7 +6310,7 @@ face_cascade_classifier1 = cv2.CascadeClassifier(xml_filename1)  # 建立辨識�
 xml_filename2 = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_eye.xml"
 face_cascade_classifier2 = cv2.CascadeClassifier(xml_filename2)  # 建立辨識檔案物件
 
-img = cv2.imread("jk.jpg")  # 讀取影像
+img = cv2.imread(filename3)  # 讀取影像
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 # 偵測人臉
@@ -6323,6 +6339,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # ch27_13.py
+# 偵測正面人臉 haarcascade_frontalface_default.xml
 
 # 建立人臉物件
 xml_filename1 = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
@@ -6332,7 +6349,7 @@ face_cascade_classifier1 = cv2.CascadeClassifier(xml_filename1)  # 建立辨識�
 xml_filename2 = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_lefteye_2splits.xml"
 face_cascade_classifier2 = cv2.CascadeClassifier(xml_filename2)  # 建立辨識檔案物件
 
-img = cv2.imread("jk.jpg")  # 讀取影像
+img = cv2.imread(filename3)  # 讀取影像
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 # 偵測人臉
@@ -6361,6 +6378,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # ch27_14.py
+# 偵測正面人臉 haarcascade_frontalface_default.xml
 
 # 建立人臉物件
 xml_filename1 = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
@@ -6370,7 +6388,7 @@ face_cascade_classifier1 = cv2.CascadeClassifier(xml_filename1)  # 建立辨識�
 xml_filename2 = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_righteye_2splits.xml"
 face_cascade_classifier2 = cv2.CascadeClassifier(xml_filename2)  # 建立辨識檔案物件
 
-img = cv2.imread("jk.jpg")  # 讀取影像
+img = cv2.imread(filename3)  # 讀取影像
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 # 偵測人臉
@@ -6400,6 +6418,8 @@ print("------------------------------------------------------------")  # 60個
 
 # ch27_15.py
 
+# 正面的貓臉 haarcascade_frontalcatface.xml
+
 xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalcatface.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
 
@@ -6420,6 +6440,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # ch27_16.py
+# 正面的貓臉 haarcascade_frontalcatface.xml
 
 xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalcatface.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
@@ -6441,6 +6462,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # ch27_17.py
+# 偵測車牌, 適用於俄羅斯車牌 haarcascade_russian_plate_number.xml
 
 xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_russian_plate_number.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
@@ -6462,6 +6484,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # ch27_18.py
+# 偵測車牌, 適用於俄羅斯車牌 haarcascade_russian_plate_number.xml
 
 xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_russian_plate_number.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
@@ -6483,6 +6506,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # ch27_19.py
+# 偵測車牌, 適用於俄羅斯車牌 haarcascade_russian_plate_number.xml
 
 xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_russian_plate_number.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
@@ -6504,6 +6528,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # ch27_2.py
+# 偵測正面人臉 haarcascade_frontalface_default.xml
 
 xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
@@ -6541,6 +6566,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # ch27_3.py
+# 偵測正面人臉 haarcascade_frontalface_default.xml
 
 xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
@@ -6578,6 +6604,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # ch27_3_1.py
+# 偵測正面人臉 haarcascade_frontalface_default.xml
 
 xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
@@ -6813,6 +6840,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # ch27_6_2.py
+# 偵測側面的人臉 haarcascade_profileface.xml
 
 xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_profileface.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
@@ -6854,6 +6882,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # ch27_7.py
+# 偵測身形 路人偵測 haarcascade_fullbody.xml
 
 xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_fullbody.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
@@ -6875,6 +6904,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # ch27_8.py
+# 偵測身形 路人偵測 haarcascade_fullbody.xml
 
 xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_fullbody.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件

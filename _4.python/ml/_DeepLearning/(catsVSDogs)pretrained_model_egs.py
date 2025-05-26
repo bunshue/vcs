@@ -74,7 +74,7 @@ for image, label in raw_train.take(5):
     plt.figure()
     plt.imshow(image)
     plt.title(get_label_name(label))
-    print('取得動物 :', get_label_name(label))
+    print("取得動物 :", get_label_name(label))
 
 
 IMG_SIZE = 160
@@ -95,7 +95,7 @@ for image, label in train.take(5):
     plt.figure()
     plt.imshow(image)
     plt.title(get_label_name(label))
-    print('取得動物 :', get_label_name(label))
+    print("取得動物 :", get_label_name(label))
 
 
 BATCH_SIZE = 32
