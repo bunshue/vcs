@@ -38,7 +38,7 @@ def show():
     plt.show()
     pass
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -2162,144 +2162,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-# OpenCV_11_刪除影像雜訊_濾波
-print("------------------------------------------------------------")  # 60個
-
-# ch11_1.py
-print("使用 均值濾波器.blur()")
-
-src = cv2.imread(filename2)
-cv2.imshow("src", src)
-
-dst1 = cv2.blur(src, (3, 3))  # 使用 3x3 濾波核
-dst2 = cv2.blur(src, (5, 5))  # 使用 5x5 濾波核
-dst3 = cv2.blur(src, (7, 7))  # 使用 7x7 濾波核
-dst4 = cv2.blur(src, (29, 29))  # 使用 29x29 濾波核
-
-cv2.imshow("dst 3 x 3", dst1)
-cv2.imshow("dst 5 x 5", dst2)
-cv2.imshow("dst 7 x 7", dst3)
-cv2.imshow("dst 29 x 29", dst4)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("使用 方框濾波器.boxFilter()")
-
-src = cv2.imread(filename2)
-cv2.imshow("src", src)
-
-dst1 = cv2.boxFilter(src, -1, (2, 2), normalize=0)  # ksize是 2x2 的濾波核
-dst2 = cv2.boxFilter(src, -1, (3, 3), normalize=0)  # ksize是 3x3 的濾波核
-dst3 = cv2.boxFilter(src, -1, (5, 5), normalize=0)  # ksize是 5x5 的濾波核
-
-cv2.imshow("dst 2 x 2", dst1)
-cv2.imshow("dst 3 x 3", dst2)
-cv2.imshow("dst 5 x 5", dst3)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("使用 中值濾波器.medianBlur()")
-
-src = np.ones((3, 3), np.float32) * 150
-src[1, 1] = 20
-print(f"原陣列 src = \n {src}")
-
-dst = cv2.medianBlur(src, 3)
-print(f"中值濾波後 dst = \n {dst}")
-
-print("------------------------------------------------------------")  # 60個
-
-print("使用 中值濾波器.medianBlur()")
-
-src = cv2.imread(filename2)
-cv2.imshow("src", src)
-
-dst1 = cv2.medianBlur(src, 3)  # 使用邊長是 3 的濾波核
-dst2 = cv2.medianBlur(src, 5)  # 使用邊長是 5 的濾波核
-dst3 = cv2.medianBlur(src, 7)  # 使用邊長是 7 的濾波核
-cv2.imshow("dst 3 x 3", dst1)
-cv2.imshow("dst 5 x 5", dst2)
-cv2.imshow("dst 7 x 7", dst3)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("使用 高斯濾波器.GaussianBlur()")
-
-src = cv2.imread(filename2)
-cv2.imshow("src", src)
-
-dst1 = cv2.GaussianBlur(src, (3, 3), 0, 0)  # 使用 3 x 3 的濾波核
-dst2 = cv2.GaussianBlur(src, (5, 5), 0, 0)  # 使用 5 x 5 的濾波核
-dst3 = cv2.GaussianBlur(src, (29, 29), 0, 0)  # 使用 29 x 29 的濾波核
-cv2.imshow("dst 3 x 3", dst1)
-cv2.imshow("dst 5 x 5", dst2)
-cv2.imshow("dst 15 x 15", dst3)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("使用 均值濾波器.blur() / 高斯濾波器.GaussianBlur()")
-
-src = cv2.imread("border.jpg")
-
-dst1 = cv2.blur(src, (3, 3))  # 均值濾波器 - 3x3 濾波核
-dst2 = cv2.blur(src, (7, 7))  # 均值濾波器 - 7x7 濾波核
-
-dst3 = cv2.GaussianBlur(src, (3, 3), 0, 0)  # 高斯濾波器 - 3x3 的濾波核
-dst4 = cv2.GaussianBlur(src, (7, 7), 0, 0)  # 高斯濾波器 - 7x7 的濾波核
-
-cv2.imshow("dst 3 x 3", dst1)
-cv2.imshow("dst 7 x 7", dst2)
-cv2.imshow("Gauss dst 3 x 3", dst3)
-cv2.imshow("Gauss dst 7 x 7", dst4)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("使用 均值濾波器.blur() / 高斯濾波器.GaussianBlur() / 雙邊濾波器.bilateralFilter()")
-
-src = cv2.imread(filename2)
-cv2.imshow("src", src)
-
-dst1 = cv2.blur(src, (15, 15))  # 均值濾波器
-dst2 = cv2.GaussianBlur(src, (15, 15), 0, 0)  # 高斯濾波器
-dst2 = cv2.bilateralFilter(src, 15, 100, 100)  # 雙邊濾波器
-
-cv2.imshow("blur", dst1)
-cv2.imshow("GaussianBlur", dst1)
-cv2.imshow("bilateralFilter", dst2)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("使用 2D濾波核.filter2D()")
-
-src = cv2.imread(filename2)
-cv2.imshow("src", src)
-
-kernel = np.ones((11, 11), np.float32) / 121  # 自訂卷積核
-dst = cv2.filter2D(src, -1, kernel)  # 自定義濾波器
-cv2.imshow("dst", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 # OpenCV_12_數學形態學
@@ -6324,7 +6186,7 @@ print("------------------------------------------------------------")  # 60個
 data = np.arange(8).reshape(2, 2, 2)
 print(f"data = \n {data}")
 print(f"split = \n{np.vsplit(data,2)}")
-
+'''
 print("------------------------------------------------------------")  # 60個
 # OpenCV_27_物件偵測
 print("------------------------------------------------------------")  # 60個
