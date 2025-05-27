@@ -146,7 +146,7 @@ print("------------------------------------------------------------")  # 60個
 
 import cv2
 
-xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_alt_tree.xml"
+xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_alt_tree.xml"
 picture_filename = "C:/_git/vcs/_4.python/opencv/data/_face/face06.jpg"
 
 face_cascade = cv2.CascadeClassifier(xml_filename)
@@ -181,7 +181,8 @@ print("------------------------------------------------------------")  # 60個
 
 import cv2
 
-xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/lbpcascades/lbpcascade_frontalface.xml"
+xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/lbpcascades/lbpcascade_frontalface.xml"
+
 picture_filename = "C:/_git/vcs/_4.python/opencv/data/_face/face06.jpg"
 
 face_cascade = cv2.CascadeClassifier(xml_filename)

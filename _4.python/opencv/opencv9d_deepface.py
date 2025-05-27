@@ -151,7 +151,7 @@ filename = "data/FourPeople.jpg"
 image = cv2.imread(filename)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 將圖片轉成灰階
 
-xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
+xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
 face_cascade = cv2.CascadeClassifier(xml_filename)  # 載入人臉模型
 
 faces = face_cascade.detectMultiScale(image)  # 偵測人臉

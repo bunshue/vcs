@@ -161,7 +161,7 @@ print("------------------------------------------------------------")  # 60個
 print("框出照片中的人臉")
 
 # OpenCV 人臉識別分類器
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default333.xml"
+xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 
 # 讀取待檢測的圖像
@@ -595,7 +595,7 @@ face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 
 """
 # OpenCV 人臉識別分類器 LBP Cascase
-xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/lbpcascades/lbpcascade_frontalface.xml"
+xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/lbpcascades/lbpcascade_frontalface.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 """
 
@@ -1074,7 +1074,7 @@ while 1:
 
         eyes = eye_cascade_classifier.detectMultiScale(roi_gray)
 
-        if eyes is not ():
+        if eyes != ():
             for ex, ey, ew, eh in eyes:
                 cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2)
                 openeye()
@@ -1373,8 +1373,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from datetime import datetime
-
-xml_filename = r"C:\_git\vcs\_4.python\_data\haarcascade_frontalface_default.xml"
 
 
 def face_add(img):
