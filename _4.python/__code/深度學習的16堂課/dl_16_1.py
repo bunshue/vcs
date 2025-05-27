@@ -1,6 +1,5 @@
 """
 深度學習的16堂課
-
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -51,12 +50,10 @@ def show():
     plt.show()
     pass
 
+EPOCHS = 50
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# Ch05 先動手實作！５ 行程式體驗神經網路模型
-# 5.2.3 在 Colab 讀入 MNIST 資料集
 
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.models import Sequential
@@ -64,6 +61,12 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras import optimizers
 from tensorflow.keras.utils import plot_model
 from tensorflow.keras.utils import to_categorical
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+'''
+# Ch05 先動手實作！５ 行程式體驗神經網路模型
+# 5.2.3 在 Colab 讀入 MNIST 資料集
 
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 print(X_train.shape)
@@ -114,17 +117,16 @@ model.compile(
     metrics=["accuracy"],
 )
 
-"""
 # 5.2.6 訓練神經網路模型
 
-model.fit(X_train,y_train, 
-          batch_size=128, 
-          epochs=200, 
-          verbose=1, 
-          validation_data=(X_test, y_test))
-#註：由於神經網路的初始權重參數是隨機設定的, 參雜了隨機性, 因此底下 (或您重跑一次) 的結果會與書中有小差異
-     
-"""
+model.fit(
+    X_train,
+    y_train,
+    batch_size=128,
+    epochs=EPOCHS,
+    verbose=1,
+    validation_data=(X_test, y_test),
+)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -201,7 +203,7 @@ def build_model(hidden=2):
     return model
 
 
-def build_and_train(hidden=1, epochs=200):
+def build_and_train(hidden=1, epochs=epochs):
     model = build_model(hidden)
     history = GradHistory()
     model.compile(
@@ -219,32 +221,33 @@ def build_and_train(hidden=1, epochs=200):
     return history
 
 
-"""
-norms_5 = build_and_train(5, 200)
+""" NG
+norms_5 = build_and_train(5, EPOCHS)
 
-def plot(history, hidden, log=False):   
-    fig = plt.figure(figsize=(8,6),dpi=300)
-    
+
+def plot(history, hidden, log=False):
+    fig = plt.figure(figsize=(8, 6), dpi=300)
+
     layers = [layer for layer in history.norms.keys()]
     values = [history.norms[layer] for layer in layers]
-    
-    for layer,values in zip(layers[::-1],values[::-1]):
+
+    for layer, values in zip(layers[::-1], values[::-1]):
         ys = np.array(values[:])
         xs = np.array(range(ys.shape[0]))
         ys_smooth = gaussian_filter1d(ys, sigma=3)
         plt.plot(xs, ys_smooth, label=layer)
-        
-    plt.title('Learning speed with {} hidden layers'.format(hidden))
-    plt.ylabel('Learning speed')
+
+    plt.title("Learning speed with {} hidden layers".format(hidden))
+    plt.ylabel("Learning speed")
     if log:
-        plt.yscale('log')
-    plt.xlabel('Epoch')
-    plt.legend(loc='upper right')
+        plt.yscale("log")
+    plt.xlabel("Epoch")
+    plt.legend(loc="upper right")
     plt.show()
+
 
 plot(norms_5, 5, True)
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -289,10 +292,16 @@ model.compile(
 )
 
 # 訓練神經網路!
-"""
-model.fit(X_train, y_train, batch_size=128, epochs=20, verbose=1, validation_data=(X_test, y_test))
-#註：由於神經網路的初始權重參數是隨機設定的, 參雜了隨機性, 因此底下 (或您重跑一次) 的結果會與書中有小差異
-"""
+
+model.fit(
+    X_train,
+    y_train,
+    batch_size=128,
+    epochs=EPOCHS,
+    verbose=1,
+    validation_data=(X_test, y_test),
+)
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -394,11 +403,16 @@ model.summary()
 
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
-"""
 # 訓練模型!
-model.fit(X_train, y_train, batch_size=128, epochs=20, verbose=1, validation_data=(X_test, y_test))
-#註：由於神經網路的初始權重參數是隨機設定的, 參雜了隨機性, 因此底下 (或您重跑一次) 的結果會與書中有小差異
-"""
+model.fit(
+    X_train,
+    y_train,
+    batch_size=128,
+    epochs=EPOCHS,
+    verbose=1,
+    validation_data=(X_test, y_test),
+)
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -444,12 +458,14 @@ model.summary()
 
 model.compile(loss="mean_squared_error", optimizer="adam")
 
-"""
-#註：由於神經網路的初始權重參數是隨機設定的, 參雜了隨機性, 因此底下 (或您重跑一次) 的結果不會與書中完全一樣, 但模型的能力是相近的
-model.fit(X_train, y_train, 
-          batch_size=8, epochs=32, verbose=1, 
-          validation_data=(X_test, y_test))
-"""
+model.fit(
+    X_train,
+    y_train,
+    batch_size=8,
+    epochs=EPOCHS,
+    verbose=1,
+    validation_data=(X_test, y_test),
+)
 
 # 9.6.4 實際進行預測
 
@@ -513,19 +529,21 @@ tensorboard = TensorBoard(
 )  # 註：請記得依你存放的位置彈性修改路徑
 
 # 9.7.1 在訓練中添加 TensorBoard callback
-"""
-#註：由於神經網路的初始權重參數是隨機設定的, 參雜了隨機性, 因此底下 (或您重跑一次) 的結果不會與書中完全一樣, 但模型的能力是相近的
-model.fit(X_train, y_train, 
-          batch_size=128, 
-          epochs=20, verbose=1, 
-          validation_data=(X_test, y_test),
-          callbacks=[tensorboard])
-"""
+
+model.fit(
+    X_train,
+    y_train,
+    batch_size=128,
+    epochs=EPOCHS,
+    verbose=1,
+    validation_data=(X_test, y_test),
+    callbacks=[tensorboard],
+)
 
 # 9.7.2 在 Colab 啟動 TensorBoard
 """
 %load_ext tensorboard
-%tensorboard --logdir '/content/drive/MyDrive/Colab Notebooks\F1383_Sample\Ch09\9_7\logs'  #註：請記得依你存放的位置彈性修改路徑
+%tensorboard --logdir '/content/drive/MyDrive/Colab Notebooks\F1383_Sample\Ch09\9_7\logs'
 Output hidden; open in https://colab.research.google.com to view.
 """
 
@@ -571,25 +589,31 @@ model.add(Dense(n_classes, activation="softmax"))
 
 model.summary()
 
-
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
-"""
-#註：由於神經網路的初始權重參數是隨機設定的, 參雜了隨機性, 因此底下 (或您重跑一次) 的結果不會與書中完全一樣, 但模型的能力是相近的
-model.fit(X_train, y_train, batch_size=128, epochs=10, verbose=1, validation_data=(X_test, y_test))
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
+model.fit(
+    X_train,
+    y_train,
+    batch_size=128,
+    epochs=EPOCHS,
+    verbose=1,
+    validation_data=(X_test, y_test),
+)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+'''
 # 10.4 進階的 CNN 技術 (用 tf.Keras 重現 AlexNet 與 VGGNet 架構)
 
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPooling2D
 from tensorflow.keras.layers import BatchNormalization
 
+""" NG module
 # !pip install tflearn
-# import tflearn.datasets.oxflower17 as oxflower17
-# X, Y = oxflower17.load_data(one_hot=True)
-# Y[0]
+import tflearn.datasets.oxflower17 as oxflower17
+X, Y = oxflower17.load_data(one_hot=True)
+Y[0]
 
 # 10.4.2 CNN 範例 (一)：仿 AlexNet 經典模型
 
@@ -629,16 +653,14 @@ model.summary()
 
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
-"""
-#註：由於神經網路的初始權重參數是隨機設定的, 參雜了隨機性, 因此底下 (或您重跑一次) 的結果不會與書中完全一樣, 但模型的能力是相近的
-model.fit(X, Y, batch_size=64, epochs=100, verbose=1, validation_split=0.1, shuffle=True)
+model.fit(
+    X, Y, batch_size=64, epochs=EPOCHS, verbose=1, validation_split=0.1, shuffle=True
+)
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 10.4.3 CNN 範例 (二)：仿 VGGNet 經典模型
-
-import numpy as np
 
 np.random.seed(42)
 
@@ -648,59 +670,57 @@ from tensorflow.keras.layers import BatchNormalization
 
 # from keras.callbacks import TensorBoard
 
-"""
-# !pip install tflearn 
+""" NG module
+# !pip install tflearn
 import tflearn.datasets.oxflower17 as oxflower17
 X, Y = oxflower17.load_data(one_hot=True)
 
-
 model = Sequential()
 
-model.add(Conv2D(64, 3, activation='relu', input_shape=(224, 224, 3)))
-model.add(Conv2D(64, 3, activation='relu'))
+model.add(Conv2D(64, 3, activation="relu", input_shape=(224, 224, 3)))
+model.add(Conv2D(64, 3, activation="relu"))
 model.add(MaxPooling2D(2, 2))
 model.add(BatchNormalization())
 
-model.add(Conv2D(128, 3, activation='relu'))
-model.add(Conv2D(128, 3, activation='relu'))
+model.add(Conv2D(128, 3, activation="relu"))
+model.add(Conv2D(128, 3, activation="relu"))
 model.add(MaxPooling2D(2, 2))
 model.add(BatchNormalization())
 
-model.add(Conv2D(256, 3, activation='relu'))
-model.add(Conv2D(256, 3, activation='relu'))
-model.add(Conv2D(256, 3, activation='relu'))
+model.add(Conv2D(256, 3, activation="relu"))
+model.add(Conv2D(256, 3, activation="relu"))
+model.add(Conv2D(256, 3, activation="relu"))
 model.add(MaxPooling2D(2, 2))
 model.add(BatchNormalization())
 
-model.add(Conv2D(512, 3, activation='relu'))
-model.add(Conv2D(512, 3, activation='relu'))
-model.add(Conv2D(512, 3, activation='relu'))
+model.add(Conv2D(512, 3, activation="relu"))
+model.add(Conv2D(512, 3, activation="relu"))
+model.add(Conv2D(512, 3, activation="relu"))
 model.add(MaxPooling2D(2, 2))
 model.add(BatchNormalization())
 
-model.add(Conv2D(512, 3, activation='relu'))
-model.add(Conv2D(512, 3, activation='relu'))
-model.add(Conv2D(512, 3, activation='relu'))
+model.add(Conv2D(512, 3, activation="relu"))
+model.add(Conv2D(512, 3, activation="relu"))
+model.add(Conv2D(512, 3, activation="relu"))
 model.add(MaxPooling2D(2, 2))
 model.add(BatchNormalization())
 
 model.add(Flatten())
-model.add(Dense(4096, activation='relu'))
+model.add(Dense(4096, activation="relu"))
 model.add(Dropout(0.5))
-model.add(Dense(4096, activation='relu'))
+model.add(Dense(4096, activation="relu"))
 model.add(Dropout(0.5))
 
-model.add(Dense(17, activation='softmax'))
+model.add(Dense(17, activation="softmax"))
 
 model.summary()
 
-model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
-#註：由於神經網路的初始權重參數是隨機設定的, 參雜了隨機性, 因此底下 (或您重跑一次) 的結果不會與書中完全一樣, 但模型的能力是相近的
-#註：此模型執行時間較長，每一週期約需 20～30 分鐘不等。
-model.fit(X, Y, batch_size=64, epochs=240, verbose=1, validation_split=0.1, shuffle=True) # callbacks=[tensorbrd])
+model.fit(
+    X, Y, batch_size=64, epochs=EPOCHS, verbose=1, validation_split=0.1, shuffle=True
+)  # callbacks=[tensorbrd])
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -788,17 +808,17 @@ valid_generator = valid_datagen.flow_from_directory(
     seed=42,
 )
 
-
+""" NG 還沒設定檔案位置
 # 註：由於神經網路的初始權重參數是隨機設定的, 參雜了隨機性, 因此底下 (或您重跑一次) 的結果不會與書中完全一樣, 但模型的能力是相近的
 # 註：此模型執行時間較長，每週期約需 10 分鐘不等
 model.fit(
     train_generator,
     steps_per_epoch=15,
-    epochs=16,
+    epochs=EPOCHS,
     validation_data=valid_generator,
     validation_steps=15,
 )
-
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

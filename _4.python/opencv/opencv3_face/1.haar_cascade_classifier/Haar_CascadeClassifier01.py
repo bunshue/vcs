@@ -303,10 +303,10 @@ print("人臉辨識 圖片 眼 嘴 鼻")
 eye_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_eye.xml"
 
 # 嘴巴模型
-mouth_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_mcs_mouth.xml"
+mouth_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades_mcs/haarcascade_mcs_mouth.xml"
 
 # 鼻子模型
-nose_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_mcs_nose.xml"
+nose_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades_mcs/haarcascade_mcs_nose.xml"
 
 filename = "C:/_git/vcs/_4.python/opencv/data/_face/face07.jpg"
 img = cv2.imread(filename)
@@ -1199,8 +1199,8 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 eye_xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_eye.xml"
-nose_xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_mcs_nose.xml"
-mouth_xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_mcs_mouth.xml"
+nose_xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades_mcs/haarcascade_mcs_nose.xml"
+mouth_xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades_mcs/haarcascade_mcs_mouth.xml"
 
 print("OpenCV_ai_67 偵測眼睛R鼻子G嘴巴B")
 

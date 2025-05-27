@@ -41,6 +41,17 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 
+src = cv2.imread(filename2)
+
+channels = cv2.mean(src)  # 計算影像各通道的均值
+print(f"均值   = \n{channels}")
+
+mean, std = cv2.meanStdDev(src)  # 計算影像各通道的標準差
+print(f"均值   = \n{mean}")
+print(f"標準差 = \n{std}")
+
+print("------------------------------------------------------------")  # 60個
+
 """
 img = cv2.imread(filename1)
 cv2.imshow("Peony", img)
@@ -1383,8 +1394,8 @@ print("------------------------------------------------------------")  # 60個
 # ch9_3.py
 
 maxval = 255  # 定義像素最大值
-
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+
 src = cv2.imread(filename2)
 cv2.imshow("Src", src)
 
@@ -1436,10 +1447,11 @@ print("------------------------------------------------------------")  # 60個
 
 thresh = 127  # 定義閾值
 maxval = 255  # 定義像素最大值
+
 src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
 cv2.imshow("Src", src)
 
+ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
 cv2.imshow("threshold 127", dst)
 
 thresh = 80  # 修訂所定義的閾值
@@ -1455,10 +1467,11 @@ print("------------------------------------------------------------")  # 60個
 
 thresh = 127  # 定義閾值
 maxval = 255  # 定義像素最大值
+
 src = cv2.imread(filename2)
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
 cv2.imshow("Src", src)
 
+ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
 cv2.imshow("threshold 127", dst)
 
 thresh = 80  # 修訂所定義的閾值
@@ -1472,12 +1485,13 @@ print("------------------------------------------------------------")  # 60個
 
 # ch9_8.py
 
-src = cv2.imread("numbers.jpg")
 thresh = 127  # 閾值 = 10
 maxval = 255  # 二值化的極大值
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
+
+src = cv2.imread("numbers.jpg")
 cv2.imshow("Src", src)
 
+ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
 cv2.imshow("threshold 127", dst)
 
 thresh = 10  # 更改閾值 = 10
@@ -1505,10 +1519,11 @@ print("------------------------------------------------------------")  # 60個
 
 thresh = 127  # 定義閾值
 maxval = 255  # 定義像素最大值
+
 src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
 cv2.imshow("Src", src)
 
+ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
 cv2.imshow("threshold 127", dst)
 
 thresh = 80  # 修訂所定義的閾值
@@ -1524,9 +1539,11 @@ print("------------------------------------------------------------")  # 60個
 
 thresh = 127  # 定義閾值
 maxval = 255  # 定義像素最大值
+
 src = cv2.imread(filename2)
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
 cv2.imshow("Src", src)
+
+ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
 cv2.imshow("threshold 127", dst)
 
 thresh = 80  # 修訂所定義的閾值
@@ -1554,10 +1571,11 @@ print("------------------------------------------------------------")  # 60個
 
 thresh = 127  # 定義閾值
 maxval = 255  # 定義像素最大值
+
 src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
 cv2.imshow("Src", src)
 
+ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
 cv2.imshow("threshold 127", dst)
 
 thresh = 80  # 修訂所定義的閾值
@@ -1573,10 +1591,11 @@ print("------------------------------------------------------------")  # 60個
 
 thresh = 127  # 定義閾值
 maxval = 255  # 定義像素最大值
+
 src = cv2.imread(filename2)
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
 cv2.imshow("Src", src)
 
+ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
 cv2.imshow("threshold 127", dst)
 
 thresh = 80  # 修訂所定義的閾值
@@ -1604,10 +1623,11 @@ print("------------------------------------------------------------")  # 60個
 
 thresh = 127  # 定義閾值
 maxval = 255  # 定義像素最大值
+
 src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
 cv2.imshow("Src", src)
 
+ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
 cv2.imshow("threshold 127", dst)
 
 thresh = 80  # 修訂所定義的閾值
@@ -1623,10 +1643,11 @@ print("------------------------------------------------------------")  # 60個
 
 thresh = 127  # 定義閾值
 maxval = 255  # 定義像素最大值
+
 src = cv2.imread(filename2)
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
 cv2.imshow("Src", src)
 
+ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
 cv2.imshow("threshold 127", dst)
 
 thresh = 80  # 修訂所定義的閾值
@@ -1666,15 +1687,19 @@ print("------------------------------------------------------------")  # 60個
 
 # ch9_20.py
 
-src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("Src", src)
 thresh = 127  # 定義閾值 = 127
 maxval = 255  # 定義像素最大值
+
+src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
+cv2.imshow("Src", src)
+
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
 cv2.imshow("Src - 127", dst)  # threshold = 127
+
 thresh = 0  # 定義閾值 = 0
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 cv2.imshow("Dst - Otsu", dst)  # Otsu
+
 print(f"threshold = {ret}")
 
 cv2.waitKey()
@@ -1684,21 +1709,25 @@ print("------------------------------------------------------------")  # 60個
 
 # ch9_21.py
 
-src = cv2.imread("school.jpg", cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 thresh = 127  # 閾值
 maxval = 255  # 定義像素最大值
+
+src = cv2.imread("school.jpg", cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+cv2.imshow("src", src)
+
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
+cv2.imshow("THRESH_BINARY", dst)  # 顯示二值化處理影像
+
 # 自適應閾值計算方法為ADAPTIVE_THRESH_MEAN_C
 dst_mean = cv2.adaptiveThreshold(
     src, maxval, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 3, 5
 )
+cv2.imshow("ADAPTIVE_THRESH_MEAN_C", dst_mean)  # 顯示自適應閾值結果
+
 # 自適應閾值計算方法為ADAPTIVE_THRESH_GAUSSIAN_C
 dst_gauss = cv2.adaptiveThreshold(
     src, maxval, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 3, 5
 )
-cv2.imshow("src", src)
-cv2.imshow("THRESH_BINARY", dst)  # 顯示二值化處理影像
-cv2.imshow("ADAPTIVE_THRESH_MEAN_C", dst_mean)  # 顯示自適應閾值結果
 cv2.imshow("ADAPTIVE_THRESH_GAUSSIAN_C", dst_gauss)  # 顯示自適應閾值結果
 
 cv2.waitKey()
@@ -2025,6 +2054,8 @@ print("------------------------------------------------------------")  # 60個
 # ch10_12.py
 
 src = cv2.imread("huang.jpg")
+cv2.imshow("src", src)
+
 rows, cols = src.shape[:2]
 mapx = np.zeros(src.shape[:2], np.float32)
 mapy = np.zeros(src.shape[:2], np.float32)
@@ -2033,8 +2064,6 @@ for r in range(rows):  # 建立mapx和mapy
         mapx.itemset((r, c), c)  # 設定mapx
         mapy.itemset((r, c), r)  # 設定mapy
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
-
-cv2.imshow("src", src)
 cv2.imshow("dst", dst)
 
 cv2.waitKey()
@@ -2063,6 +2092,8 @@ print("------------------------------------------------------------")  # 60個
 # ch10_14.py
 
 src = cv2.imread("huang.jpg")
+cv2.imshow("src", src)
+
 rows, cols = src.shape[:2]
 mapx = np.zeros(src.shape[:2], np.float32)
 mapy = np.zeros(src.shape[:2], np.float32)
@@ -2072,7 +2103,6 @@ for r in range(rows):  # 建立mapx和mapy
         mapy.itemset((r, c), rows - 1 - r)  # 設定mapy
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
 
-cv2.imshow("src", src)
 cv2.imshow("dst", dst)
 
 cv2.waitKey()
@@ -2101,6 +2131,8 @@ print("------------------------------------------------------------")  # 60個
 # ch10_16.py
 
 src = cv2.imread("huang.jpg")
+cv2.imshow("src", src)
+
 rows, cols = src.shape[:2]
 mapx = np.zeros(src.shape[:2], np.float32)
 mapy = np.zeros(src.shape[:2], np.float32)
@@ -2109,8 +2141,6 @@ for r in range(rows):  # 建立mapx和mapy
         mapx.itemset((r, c), cols - 1 - c)  # 設定mapx
         mapy.itemset((r, c), r)  # 設定mapy
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
-
-cv2.imshow("src", src)
 cv2.imshow("dst", dst)
 
 cv2.waitKey()
@@ -2121,6 +2151,8 @@ print("------------------------------------------------------------")  # 60個
 # ch10_17.py
 
 src = cv2.imread("tunnel.jpg")
+cv2.imshow("src", src)
+
 rows, cols = src.shape[:2]
 mapx = np.zeros(src.shape[:2], np.float32)
 mapy = np.zeros(src.shape[:2], np.float32)
@@ -2133,8 +2165,6 @@ for r in range(rows):  # 建立mapx和mapy
             mapx.itemset((r, c), 0)  # 取x座標為 0
             mapy.itemset((r, c), 0)  # 取y座標為 0
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
-
-cv2.imshow("src", src)
 cv2.imshow("dst", dst)
 
 cv2.waitKey()
@@ -2145,6 +2175,8 @@ print("------------------------------------------------------------")  # 60個
 # ch10_18.py
 
 src = cv2.imread("tunnel.jpg")
+cv2.imshow("src", src)
+
 rows, cols = src.shape[:2]
 mapx = np.zeros(src.shape[:2], np.float32)
 mapy = np.zeros(src.shape[:2], np.float32)
@@ -2153,8 +2185,6 @@ for r in range(rows):  # 建立mapx和mapy
         mapx.itemset((r, c), c)
         mapy.itemset((r, c), 2 * r)
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
-
-cv2.imshow("src", src)
 cv2.imshow("dst", dst)
 
 cv2.waitKey()
@@ -2170,8 +2200,10 @@ src = cv2.imread("easy.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
@@ -2190,8 +2222,10 @@ src = cv2.imread("easy.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
@@ -2227,8 +2261,10 @@ src = cv2.imread("easy.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
@@ -2252,8 +2288,10 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("easy.jpg")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
@@ -2271,8 +2309,10 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("easy.jpg")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
@@ -2288,8 +2328,10 @@ src = cv2.imread("easy1.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
@@ -2308,8 +2350,10 @@ src = cv2.imread("easy1.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -2328,13 +2372,16 @@ src = cv2.imread("lake.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 150, 255, cv2.THRESH_BINARY)
 cv2.imshow("binary", dst_binary)  # 顯示二值化影像
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
+
 dst = cv2.drawContours(src, contours, -1, (0, 255, 0), 2)  # 繪製圖形輪廓
 cv2.imshow("result", dst)  # 顯示結果影像
 
@@ -2349,9 +2396,11 @@ src = cv2.imread("lake.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
 cv2.imshow("binary", dst_binary)  # 顯示二值化影像
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -2370,9 +2419,11 @@ src = cv2.imread("lake.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 150, 255, cv2.THRESH_BINARY)
 cv2.imshow("binary", dst_binary)  # 顯示二值化影像
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -2393,8 +2444,10 @@ src = cv2.imread("easy2.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
@@ -2415,8 +2468,10 @@ src = cv2.imread("easy2.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -2437,8 +2492,10 @@ src = cv2.imread("easy3.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE
@@ -2459,8 +2516,10 @@ src = cv2.imread("easy3.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE
@@ -2480,8 +2539,10 @@ src = cv2.imread("easy.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
@@ -2514,8 +2575,10 @@ src = cv2.imread("easy.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
@@ -2540,8 +2603,10 @@ src = cv2.imread("easy.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
@@ -2563,8 +2628,10 @@ src = cv2.imread("easy.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
@@ -2609,6 +2676,7 @@ src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -2643,6 +2711,7 @@ src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -2674,8 +2743,10 @@ src = cv2.imread("myheart.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -2700,13 +2771,16 @@ src1 = cv2.imread("mycloud1.jpg")
 cv2.imshow("mycloud1", src1)
 
 src1_gray = cv2.cvtColor(src1, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src1_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
 cnt1 = contours[0]
+
 # 讀取與建立影像 2
 src2 = cv2.imread("mycloud2.jpg")
 cv2.imshow("mycloud2", src2)
@@ -2747,11 +2821,13 @@ cv2.imshow("mycloud1", src1)
 src1_gray = cv2.cvtColor(src1, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src1_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
 cnt1 = contours[0]
+
 # 讀取與建立影像 2
 src2 = cv2.imread("mycloud2.jpg")
 cv2.imshow("mycloud2", src2)
@@ -2761,6 +2837,7 @@ contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
 cnt2 = contours[0]
+
 # 讀取與建立影像 3
 src3 = cv2.imread("explode1.jpg")
 cv2.imshow("explode", src3)
@@ -2794,8 +2871,10 @@ src = cv2.imread("explode1.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -2804,6 +2883,7 @@ contours, hierarchy = cv2.findContours(
 # 輸出矩形格式使用元組(tuple)
 rect = cv2.boundingRect(contours[0])
 print(f"元組 rect = {rect}")
+
 # 輸出矩形格式, 列出所有細項
 x, y, w, h = cv2.boundingRect(contours[0])
 print(f"左上角 x = {x}, 左上角 y = {y}")
@@ -2823,6 +2903,7 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -2843,8 +2924,10 @@ src = cv2.imread("explode2.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -2865,8 +2948,10 @@ src = cv2.imread("explode2.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -2891,12 +2976,15 @@ src = cv2.imread("explode3.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
+
 # 取得圓中心座標和圓半徑
 (x, y), radius = cv2.minEnclosingCircle(contours[0])
 center = (int(x), int(y))  # 圓中心座標取整數
@@ -2915,12 +3003,15 @@ src = cv2.imread("explode1.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
+
 # 取得圓中心座標和圓半徑
 (x, y), radius = cv2.minEnclosingCircle(contours[0])
 center = (int(x), int(y))  # 圓中心座標取整數
@@ -2939,12 +3030,15 @@ src = cv2.imread("cloud.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
+
 # 取得圓中心座標和圓半徑
 ellipse = cv2.fitEllipse(contours[0])  # 取得最優擬合橢圓數據
 print(f"資料類型   = {type(ellipse)}")
@@ -2965,12 +3059,15 @@ src = cv2.imread("heart.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
+
 # 取得三角形面積與頂點座標
 area, triangle = cv2.minEnclosingTriangle(contours[0])
 print(f"三角形面積   = {area}")
@@ -2993,12 +3090,15 @@ src = cv2.imread("multiple.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
+
 # 近似多邊形包圍
 n = len(contours)  # 輪廓數量
 src1 = src.copy()  # 複製src影像
@@ -3022,12 +3122,15 @@ src = cv2.imread("unregular.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
+
 # 擬合一條線
 rows, cols = src.shape[:2]  # 輪廓大小
 vx, vy, x, y = cv2.fitLine(contours[0], cv2.DIST_L2, 0, 0.01, 0.01)
@@ -3049,12 +3152,15 @@ src = cv2.imread("heart1.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
+
 # 凸包
 hull = cv2.convexHull(contours[0])  # 獲得凸包頂點座標
 dst = cv2.polylines(src, [hull], True, (0, 255, 0), 2)  # 將凸包連線
@@ -3071,12 +3177,15 @@ src = cv2.imread("hand1.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
+
 # 凸包
 hull = cv2.convexHull(contours[0])  # 獲得凸包頂點座標
 dst = cv2.polylines(src, [hull], True, (0, 255, 0), 2)  # 將凸包連線
@@ -3093,12 +3202,15 @@ src = cv2.imread("hand1.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
+
 # 凸包
 hull = cv2.convexHull(contours[0])  # 獲得凸包頂點座標
 dst = cv2.polylines(src, [hull], True, (0, 255, 0), 2)  # 將凸包連線
@@ -3117,12 +3229,15 @@ src = cv2.imread("hand2.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
+
 # 凸包
 n = len(contours)  # 輪廓數量
 for i in range(n):
@@ -3141,12 +3256,15 @@ src = cv2.imread("star.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
+
 # 凸包 -> 凸包缺陷
 contour = contours[0]  # 輪廓
 hull = cv2.convexHull(contour, returnPoints=False)  # 獲得凸包
@@ -3174,12 +3292,15 @@ src = cv2.imread("heart1.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
+
 # 凸包
 src1 = src.copy()  # 複製src影像
 hull = cv2.convexHull(contours[0])  # 獲得凸包頂點座標
@@ -3187,6 +3308,7 @@ dst1 = cv2.polylines(src1, [hull], True, (0, 255, 0), 2)  # 將凸包連線
 cv2.imshow("dst1", dst1)
 isConvex = cv2.isContourConvex(hull)  # 是否凸形
 print(f"凸包是凸形       = {isConvex}")
+
 # 近似多邊形包圍
 src2 = src.copy()  # 複製src影像
 approx = cv2.approxPolyDP(contours[0], 10, True)  # epsilon=10
@@ -3206,16 +3328,20 @@ src = cv2.imread("heart1.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
+
 # 凸包
 hull = cv2.convexHull(contours[0])  # 獲得凸包頂點座標
 dst = cv2.polylines(src, [hull], True, (0, 255, 0), 2)  # 將凸包連線
 # print(hull)   可以用這個指令了解凸包座標點
+
 # 點在凸包線上
 pointa = (231, 85)  # 點在凸包線上
 dist_a = cv2.pointPolygonTest(hull, pointa, True)  # 檢測距離
@@ -3224,6 +3350,7 @@ pos_a = (236, 95)  # 文字輸出位置
 dst = cv2.circle(src, pointa, 3, [0, 0, 255], -1)  # 用圓標記點 A
 cv2.putText(dst, "A", pos_a, font, 1, (0, 255, 255), 2)  # 輸出文字 A
 print(f"dist_a = {dist_a}")
+
 # 點在凸包內
 pointb = (150, 100)  # 點在凸包線上
 dist_b = cv2.pointPolygonTest(hull, pointb, True)  # 檢測距離
@@ -3232,6 +3359,7 @@ pos_b = (160, 110)  # 文字輸出位置
 dst = cv2.circle(src, pointb, 3, [0, 0, 255], -1)  # 用圓標記點 B
 cv2.putText(dst, "B", pos_b, font, 1, (255, 0, 0), 2)  # 輸出文字 B
 print(f"dist_b = {dist_b}")
+
 # 點在凸包外
 pointc = (80, 85)  # 點在凸包線上
 dist_c = cv2.pointPolygonTest(hull, pointc, True)  # 檢測距離
@@ -3253,8 +3381,10 @@ src = cv2.imread("heart1.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -3263,6 +3393,7 @@ contours, hierarchy = cv2.findContours(
 hull = cv2.convexHull(contours[0])  # 獲得凸包頂點座標
 dst = cv2.polylines(src, [hull], True, (0, 255, 0), 2)  # 將凸包連線
 # print(hull)   可以用這個指令了解凸包座標點
+
 # 點在凸包線上
 pointa = (231, 85)  # 點在凸包線上
 dist_a = cv2.pointPolygonTest(hull, pointa, False)  # 檢測距離
@@ -3271,6 +3402,7 @@ pos_a = (236, 95)  # 文字輸出位置
 dst = cv2.circle(src, pointa, 3, [0, 0, 255], -1)  # 用圓標記點 A
 cv2.putText(dst, "A", pos_a, font, 1, (0, 255, 255), 2)  # 輸出文字 A
 print(f"dist_a = {dist_a}")
+
 # 點在凸包內
 pointb = (150, 100)  # 點在凸包線上
 dist_b = cv2.pointPolygonTest(hull, pointb, False)  # 檢測距離
@@ -3279,6 +3411,7 @@ pos_b = (160, 110)  # 文字輸出位置
 dst = cv2.circle(src, pointb, 3, [0, 0, 255], -1)  # 用圓標記點 B
 cv2.putText(dst, "B", pos_b, font, 1, (255, 0, 0), 2)  # 輸出文字 B
 print(f"dist_b = {dist_b}")
+
 # 點在凸包外
 pointc = (80, 85)  # 點在凸包線上
 dist_c = cv2.pointPolygonTest(hull, pointc, False)  # 檢測距離
@@ -3302,8 +3435,10 @@ src = cv2.imread("explode1.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -3326,8 +3461,10 @@ src = cv2.imread("explode1.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -3336,6 +3473,7 @@ cnt = contours[0]  # 建立輪廓變數
 print(f"資料格式 = {type(cnt)}")
 print(f"資料維度 = {cnt.ndim}")
 print(f"資料長度 = {len(cnt)}")
+
 for i in range(3):  # 列印 3 個座標點
     print(cnt[i])
 
@@ -3409,8 +3547,10 @@ src = cv2.imread("explode1.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -3441,8 +3581,10 @@ src = cv2.imread("explode1.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -3467,8 +3609,10 @@ src = cv2.imread("explode1.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -3494,8 +3638,10 @@ src = cv2.imread("star1.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -3541,8 +3687,10 @@ src = cv2.imread("simple.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -3559,6 +3707,7 @@ print("空心像素點")
 print(points1)
 print("實心像素點")
 print(points2)
+
 cv2.imshow("dst1", dst1)
 cv2.imshow("dst2", dst2)
 
@@ -3584,8 +3733,10 @@ src = cv2.imread("simple.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
 ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
@@ -3656,34 +3807,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch17_18.py
-
-src = cv2.imread("forest.png")
-cv2.imshow("src", src)
-
-channels = cv2.mean(src)  # 計算均值
-print(channels)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch17_19.py
-
-src = cv2.imread("hand.jpg")  # 手上有一黑點與一白點
-cv2.imshow("src", src)
-
-channels = cv2.mean(src)  # 計算均值
-print(channels)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch17_20.py
-
 src = cv2.imread("hand.jpg")  # 手上有一黑點與一白點
 cv2.imshow("src", src)
 
@@ -3696,6 +3819,7 @@ cnt = contours[0]
 # 在src_gray影像的mask遮罩區域計算均值
 mask = np.zeros(src_gray.shape, np.uint8)  # 建立遮罩
 mask = cv2.drawContours(mask, [cnt], -1, (255, 255, 255), -1)
+
 channels = cv2.mean(src, mask=mask)  # 計算遮罩的均值
 print(channels)
 
@@ -3703,18 +3827,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch17_21.py
-
-src = cv2.imread("forest.png")
-cv2.imshow("src", src)
-
-mean, std = cv2.meanStdDev(src)  # 計算標準差
-print(f"均值   = \n{mean}")
-print(f"標準差 = \n{std}")
-
-cv2.waitKey()
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 # OpenCV_18_從直線檢測到無人駕駛車道檢測
@@ -3729,6 +3841,7 @@ src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
 edges = cv2.Canny(src_gray, 100, 200)  # 使用Canny邊緣檢測
 cv2.imshow("Canny", edges)  # 顯示Canny邊緣線條
 lines = cv2.HoughLines(edges, 1, np.pi / 180, 200)  # 檢測直線
+
 # 繪製直線
 for line in lines:
     rho, theta = line[0]  # lines回傳
@@ -3757,6 +3870,7 @@ src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
 edges = cv2.Canny(src_gray, 100, 200)  # 使用Canny邊緣檢測
 # cv2.imshow("Canny", edges)                         # 顯示Canny邊緣線條
 lines = cv2.HoughLines(edges, 1, np.pi / 180, 150)  # 檢測直線
+
 # 繪製直線
 for line in lines:
     rho, theta = line[0]  # lines回傳
@@ -3785,6 +3899,7 @@ src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
 edges = cv2.Canny(src_gray, 50, 200)  # 使用Canny邊緣檢測
 cv2.imshow("Canny", edges)  # 顯示Canny邊緣線條
 lines = cv2.HoughLinesP(edges, 1, np.pi / 180, 50, minLineLength=10, maxLineGap=100)
+
 # 繪製檢測到的直線
 for line in lines:
     x1, y1, x2, y2 = line[0]
@@ -3815,6 +3930,7 @@ circles = cv2.HoughCircles(
     maxRadius=200,
 )
 circles = np.uint(np.around(circles))  # 轉成整數
+
 # 繪製檢測到的直線
 for c in circles[0]:
     x, y, r = c
@@ -3824,63 +3940,6 @@ cv2.imshow("dst", src)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# ch19_1.py
-
-seq = [1, 2, 3, 4, 5]  # 像素值
-times = [2, 1, 2, 1, 3]  # 出現次數
-plt.plot(seq, times, "-o")  # 繪含標記的圖
-plt.axis([0, 6, 0, 4])  # 建立軸大小
-plt.xlabel("Pixel Value")  # 像素值
-plt.ylabel("Times")  # 出現次數
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch19_2.py
-
-times = [2, 1, 2, 1, 3]  # 出現次數
-N = len(times)  # 計算長度
-x = np.arange(N)  # 長條圖x軸座標
-width = 0.35  # 長條圖寬度
-plt.bar(x, times, width)  # 繪製長條圖
-
-plt.xlabel("Pixel Value")  # 像素值
-plt.ylabel("Times")  # 出現次數
-plt.xticks(x, ("1", "2", "3", "4", "5"))
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch19_3.py
-
-seq = [1, 2, 3, 4, 5]  # 像素值
-freq = [2 / 9, 1 / 9, 2 / 9, 1 / 9, 3 / 9]  # 出現頻率
-plt.plot(seq, freq, "-o")  # 繪含標記的圖
-plt.axis([0, 6, 0, 0.5])  # 建立軸大小
-plt.xlabel("Pixel Value")  # 像素值
-plt.ylabel("Frequency")  # 出現頻率
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch19_4.py
-
-freq = [2 / 9, 1 / 9, 2 / 9, 1 / 9, 3 / 9]  # 出現頻率
-N = len(freq)  # 計算長度
-x = np.arange(N)  # 長條圖x軸座標
-width = 0.35  # 長條圖寬度
-plt.bar(x, freq, width)  # 繪製長條圖
-
-plt.xlabel("Pixel Value")  # 像素值
-plt.ylabel("Freqency")  # 出現頻率
-plt.xticks(x, ("1", "2", "3", "4", "5"))
-show()
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 # OpenCV_20_模板匹配 Template Matching
@@ -3914,6 +3973,7 @@ cv2.imshow("Src", src)
 temp1 = cv2.imread("heart.jpg", cv2.IMREAD_COLOR)
 cv2.imshow("Temp1", temp1)  # 顯示模板影像
 height, width = temp1.shape[:2]  # 獲得模板影像的高與寬
+
 # 使用cv2.TM_SQDIFF_NORMED執行模板匹配
 result = cv2.matchTemplate(src, temp1, cv2.TM_SQDIFF_NORMED)
 minVal, maxVal, minLoc, maxLoc = cv2.minMaxLoc(result)
@@ -3982,6 +4042,7 @@ cv2.imshow("Src", src)
 temp1 = cv2.imread("heart.jpg", cv2.IMREAD_COLOR)
 cv2.imshow("Temp1", temp1)  # 顯示模板影像
 height, width = temp1.shape[:2]  # 獲得模板影像的高與寬
+
 # 使用cv2.TM_CCOEFF_NORMED執行模板匹配
 result = cv2.matchTemplate(src, temp1, cv2.TM_CCOEFF_NORMED)
 for row in range(len(result)):  # 找尋row
@@ -4093,18 +4154,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("coin1.jpg", cv2.IMREAD_GRAYSCALE)
 cv2.imshow("Src", src)
-ret, dst = cv2.threshold(src, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-cv2.imshow("Dst", dst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch22_1.py
-
-src = cv2.imread("coin2.jpg", cv2.IMREAD_GRAYSCALE)
-cv2.imshow("Src", src)
 ret, dst = cv2.threshold(src, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 cv2.imshow("Dst", dst)
 
@@ -4172,45 +4222,6 @@ dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
 
 # 讀者也可以更改下列 0.7 為其他值, 會影響前景大小
 ret, sure_fg = cv2.threshold(dst, 0.5 * dst.max(), 255, 0)  # 前景圖案
-
-plt.subplot(131)
-plt.title("原始影像")
-plt.imshow(rgb_src)
-plt.axis("off")
-
-plt.subplot(132)
-plt.title("距離變換影像")
-plt.imshow(dst)
-plt.axis("off")
-
-plt.subplot(133)
-plt.title("閾值化影像")
-plt.imshow(sure_fg)
-plt.axis("off")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch22_2_2.py
-
-src = cv2.imread("coin1.jpg", cv2.IMREAD_COLOR)
-gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
-
-# 因為在matplotlib模組顯示, 所以必須轉成 RGB 色彩
-rgb_src = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)
-
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-kernel = np.ones((3, 3), np.uint8)
-
-# 執行開運算 Opening
-opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
-
-# 獲得距離轉換函數結果
-dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
-
-# 讀者也可以更改下列 0.7 為其他值, 會影響前景大小
-ret, sure_fg = cv2.threshold(dst, 0.7 * dst.max(), 255, 0)  # 前景圖案
 
 plt.subplot(131)
 plt.title("原始影像")
@@ -5720,8 +5731,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch19_10.py
 
 src = np.zeros([200, 400], np.uint8)  # 建立影像
 src[50:150, 100:300] = 255  # 在影像內建立遮罩

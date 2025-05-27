@@ -977,9 +977,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-video = cv2.VideoCapture(
-    "D:/_git/vcs/_big_files/OpenCV影像創意邁向AI視覺/ch26/iceocean.mov"
-)  # 開啟影片檔案
+video = cv2.VideoCapture("data/iceocean.mov")  # 開啟影片檔案
 
 while video.isOpened():
     ret, frame = video.read()  # 讀取影片檔案
@@ -1014,9 +1012,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-video = cv2.VideoCapture(
-    "D:/_git/vcs/_big_files/OpenCV影像創意邁向AI視覺/ch26/iceocean.mov"
-)  # 開啟影片檔案
+video = cv2.VideoCapture("data/iceocean.mov")  # 開啟影片檔案
+
 while video.isOpened():
     ret, frame = video.read()  # 讀取影片檔案
     cv2.imshow("Frame", frame)  # 顯示影像
@@ -1050,9 +1047,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-video = cv2.VideoCapture(
-    "D:/_git/vcs/_big_files/OpenCV影像創意邁向AI視覺/ch26/iceocean.mov"
-)  # 開啟影片檔案
+video = cv2.VideoCapture("data/iceocean.mov")  # 開啟影片檔案
+
 video_fps = video.get(cv2.CAP_PROP_FPS)  # 計算速度
 height = video.get(cv2.CAP_PROP_FRAME_HEIGHT)  # 影片高度
 counter = 1  # 幀數計數器
@@ -1082,16 +1078,16 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-video = cv2.VideoCapture(
-    "D:/_git/vcs/_big_files/OpenCV影像創意邁向AI視覺/ch26/iceocean.mov"
-)  # 開啟影片檔案
+video = cv2.VideoCapture("data/iceocean.mov")  # 開啟影片檔案
+
 video_fps = video.get(cv2.CAP_PROP_FPS)  # 計算速度
 width = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))  # 寬度
 height = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 高度
 
 # 建立裁剪影片物件
 fourcc = cv2.VideoWriter_fourcc(*"I420")  # 編碼
-new_video = cv2.VideoWriter("out26_15.avi", fourcc, video_fps, (width, height))
+
+new_video = cv2.VideoWriter("tmp_movie_b.avi", fourcc, video_fps, (width, height))
 counter = video_fps * 5  # 影片長度
 while video.isOpened() and counter >= 0:
     ret, frame = video.read()  # 讀取影片檔案
@@ -1154,7 +1150,7 @@ capture = cv2.VideoCapture(0)  # 初始化攝影功能
 fourcc = cv2.VideoWriter_fourcc(*"XVID")  # MPEG-4
 
 # 建立輸出物件
-video_out = cv2.VideoWriter("tmp_out26_5.avi", fourcc, 20.0, (640, 480))
+video_out = cv2.VideoWriter("tmp_movie_a.avi", fourcc, 20.0, (640, 480))
 while capture.isOpened():
     ret, frame = capture.read()
     if ret:
@@ -1169,7 +1165,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-video = cv2.VideoCapture("tmp_out26_5.avi")  # 開啟影片檔案
+video = cv2.VideoCapture("tmp_movie_a.avi")  # 開啟影片檔案
 
 while video.isOpened():
     ret, frame = video.read()  # 讀取影片檔案
@@ -1186,9 +1182,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-video = cv2.VideoCapture(
-    "D:/_git/vcs/_big_files/OpenCV影像創意邁向AI視覺/ch26/iceocean.mov"
-)  # 開啟影片檔案
+video = cv2.VideoCapture("data/iceocean.mov")  # 開啟影片檔案
 
 while video.isOpened():
     ret, frame = video.read()  # 讀取影片檔案
@@ -1205,9 +1199,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-video = cv2.VideoCapture(
-    "D:/_git/vcs/_big_files/OpenCV影像創意邁向AI視覺/ch26/iceocean2.mov"
-)  # 開啟影片檔案
+video = cv2.VideoCapture("data/iceocean2.mov")  # 開啟影片檔案
 
 while video.isOpened():
     ret, frame = video.read()  # 讀取影片檔案
@@ -1226,9 +1218,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-video = cv2.VideoCapture(
-    "D:/_git/vcs/_big_files/OpenCV影像創意邁向AI視覺/ch26/iceocean.mov"
-)  # 開啟影片檔案
+video = cv2.VideoCapture("data/iceocean.mov")  # 開啟影片檔案
 
 while video.isOpened():
     ret, frame = video.read()  # 讀取影片檔案

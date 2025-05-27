@@ -1,6 +1,18 @@
 """
 FaceRecognizer1
 
+
+人臉辨識
+1.LBPH人臉辨識
+2.Eigenfaces(特徵臉)人臉辨識
+3.Fisherfaces人臉辨識
+
+Local Binary Pattern Histogram	區域二值模式直方圖
+
+face.LBPHFaceRecognizer_create()	建立LBPH人臉便是物件
+.train					訓練LBPH人臉辨識
+.predict				執行LBPH人臉辨識
+
 """
 
 import cv2
