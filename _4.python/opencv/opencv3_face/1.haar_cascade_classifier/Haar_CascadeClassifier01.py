@@ -1,4 +1,5 @@
 # OpenCV 人臉辨識
+# OpenCV 人臉識別分類器 Haar Cascade Classifier
 
 import cv2
 from PIL import Image
@@ -27,10 +28,8 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-# OpenCV 人臉識別分類器 Haar Cascase
+# 偵測正面人臉 haarcascade_frontalface_default.xml
 xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
-# xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_alt2.xml"
-
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
 filename = "C:/_git/vcs/_4.python/opencv/data/_face/face01.jpg"
@@ -77,8 +76,8 @@ for nn in range(len(faces)):
 """
 # 參數
 # image 	        待檢測圖片，一般為灰階影像，以便加快偵測速度
-# scaleFactor 	在前後兩次相繼的掃描中，搜索範圍的比例係數，默認值為 1.1
-# minNeighbors 	構成偵測目標的相鄰矩形的最小個數，默認值為 3
+# scaleFactor 	        在前後兩次相繼的掃描中，搜索範圍的比例係數，默認值為 1.1
+# minNeighbors 	        構成偵測目標的相鄰矩形的最小個數，默認值為 3
 # minSize & maxSize 	用來限制得到的目標區域範圍
 
 # 1.2 表示每次影像尺寸減小的比例
@@ -96,14 +95,13 @@ for x, y, w, h in faces:
 for (x, y, w, h) in faces:
     image = cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 3)
 """
-
-# cv2.imshow(image)
 cv2.imshow("Image", image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
 
 print("------------------------------------------------------------")  # 60個
 
+# 偵測正面人臉 haarcascade_frontalface_alt_tree.xml
 xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_alt_tree.xml"
 
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
@@ -160,7 +158,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("框出照片中的人臉")
 
-# OpenCV 人臉識別分類器
+# 偵測正面人臉 haarcascade_frontalface_default.xml
 xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 
@@ -174,8 +172,6 @@ gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 faces = face_cascade_classifier.detectMultiScale(
     gray, scaleFactor=1.15, minNeighbors=5, minSize=(5, 5)
 )
-print(faces)
-
 print("共找到 " + str(len(faces)) + " 張人臉")
 
 # 繪製人臉部份的方框
@@ -276,8 +272,6 @@ face_cascade_classifier = cv2.CascadeClassifier(xml_filename1)
 
 xml_filename2 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_eye.xml"
 eye_cascade_classifier = cv2.CascadeClassifier(xml_filename2)
-
-# save the image(i) in the same directory
 
 img = cv2.imread(filename)  # 讀取本機圖片
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -407,7 +401,7 @@ cars = car.detectMultiScale(gray, 1.1, 3)       # 偵測行人
 for (x, y, w, h) in cars:
     cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)   # 繪製外框
 
-cv2.imshow('ImageShow', img)
+cv2.imshow('Image', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
 """
@@ -1318,7 +1312,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("偵測右轉指示牌")
 
-img = cv2.imread("pic_turnR.jpg")
+img = cv2.imread("data/pic_turnR.jpg")
 
 xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haar_turnR.xml"
 detector = cv2.CascadeClassifier(xml_filename)
@@ -1352,10 +1346,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
-
+print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()

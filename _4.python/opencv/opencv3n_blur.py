@@ -35,7 +35,7 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png"
 image = cv2.imread(filename)
 
@@ -90,7 +90,7 @@ cv2.imshow("image2", output2)
 
 cv2.waitKey(0)  # 按下任意鍵停止
 cv2.destroyAllWindows()
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 
 

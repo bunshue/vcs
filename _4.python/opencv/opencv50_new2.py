@@ -181,7 +181,9 @@ print("------------------------------------------------------------")  # 60個
 
 import cv2
 
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/lbpcascades/lbpcascade_frontalface.xml"
+xml_filename = (
+    "C:/_git/vcs/_4.python/opencv/data/_xml/lbpcascades/lbpcascade_frontalface.xml"
+)
 
 picture_filename = "C:/_git/vcs/_4.python/opencv/data/_face/face06.jpg"
 

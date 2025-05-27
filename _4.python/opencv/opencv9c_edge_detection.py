@@ -2,28 +2,340 @@
 
 圖像邊緣檢測
 
+影像梯度與邊緣偵測
 
 """
 
 import cv2
-import numpy as np
 
 ESC = 27
 SPACE = 32
-
 red = (0, 0, 255)
 green = (0, 255, 0)
 blue = (255, 0, 0)
 white = (255, 255, 255)
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
+filename3 = "C:/_git/vcs/_4.python/opencv/data/lena.jpg"
+filename4 = "C:/_git/vcs/_1.data/______test_files1/ims01.bmp"
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import time
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+
+def show():
+    plt.show()
+    pass
+
+
+print("------------------------------------------------------------")  # 60個
+
+src = np.random.randint(-256, 256, size=[3, 5], dtype=np.int16)
+print(f"src = \n {src}")
+dst = cv2.convertScaleAbs(src)
+print(f"dst = \n {dst}")
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用 Sobel()")
+
+src = cv2.imread("data/edge_detection/map.jpg")
+cv2.imshow("Src", src)
+
+dst = cv2.Sobel(src, -1, 1, 0)  # 計算 x 軸影像梯度
+cv2.imshow("Dst", dst)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用 Sobel()")
+
+src = cv2.imread("data/edge_detection/map.jpg")
+cv2.imshow("Src", src)
+
+dst = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
+dst = cv2.convertScaleAbs(dst)  # 將負值轉正值
+cv2.imshow("Dst", dst)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用 Sobel()")
+
+src = cv2.imread("data/edge_detection/map.jpg")
+cv2.imshow("Src", src)
+
+dst = cv2.Sobel(src, -1, 0, 1)  # 計算 y 軸影像梯度
+cv2.imshow("Dst", dst)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用 Sobel()")
+
+src = cv2.imread("data/edge_detection/map.jpg")
+cv2.imshow("Src", src)
+
+dst = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
+dst = cv2.convertScaleAbs(dst)  # 將負值轉正值
+cv2.imshow("Dst", dst)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用 Sobel()")
+
+src = cv2.imread("data/edge_detection/map.jpg")
+cv2.imshow("Src", src)
+
+dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
+dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
+dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
+dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
+dst = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+cv2.imshow("Dst", dst)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用 Sobel()")
+
+src = cv2.imread("data/edge_detection/lena.jpg")
+cv2.imshow("Src", src)
+
+dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
+dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
+dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
+dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
+dst = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+cv2.imshow("Dstx", dstx)
+cv2.imshow("Dsty", dsty)
+cv2.imshow("Dst", dst)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用 Sobel() / Scharr()")
+
+# Sobel()函數
+src = cv2.imread("data/edge_detection/lena.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
+cv2.imshow("Src", src)
+
+dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
+dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
+dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
+dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
+dst_sobel = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+
+# Scharr()函數
+dstx = cv2.Scharr(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
+dsty = cv2.Scharr(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
+dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
+dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
+dst_scharr = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+
+# 輸出影像梯度
+cv2.imshow("Sobel", dst_sobel)
+cv2.imshow("Scharr", dst_scharr)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用 Sobel() / Scharr()")
+
+# Sobel()函數
+src = cv2.imread("data/edge_detection/lena.jpg")  # 彩色讀取
+cv2.imshow("Src", src)
+
+dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
+dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
+dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
+dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
+dst_sobel = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+
+# Scharr()函數
+dstx = cv2.Scharr(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
+dsty = cv2.Scharr(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
+dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
+dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
+dst_scharr = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+
+# 輸出影像梯度
+cv2.imshow("Sobel", dst_sobel)
+cv2.imshow("Scharr", dst_scharr)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用 Sobel() / Scharr()")
+
+# Sobel()函數
+src = cv2.imread("data/edge_detection/snow.jpg")  # 彩色讀取
+cv2.imshow("Src", src)
+
+dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
+dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
+dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
+dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
+dst_sobel = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+# Scharr()函數
+dstx = cv2.Scharr(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
+dsty = cv2.Scharr(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
+dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
+dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
+dst_scharr = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+
+# 輸出影像梯度
+cv2.imshow("Scharr X", dstx)
+cv2.imshow("Scharr Y", dsty)
+cv2.imshow("Sobel", dst_sobel)
+cv2.imshow("Scharr", dst_scharr)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用 Laplacian()")
+
+src = cv2.imread("data/edge_detection/laplacian.jpg")
+cv2.imshow("Src", src)
+
+dst_tmp = cv2.Laplacian(src, cv2.CV_32F)  # Laplacian邊緣影像
+dst = cv2.convertScaleAbs(dst_tmp)  # 轉換為正值
+cv2.imshow("Dst", dst)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用 Sobel() / Scharr() / Laplacian()")
+
+src = cv2.imread("data/edge_detection/geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
+cv2.imshow("Src", src)
+
+src = cv2.GaussianBlur(src, (3, 3), 0)  # 降低噪音
+cv2.imshow("Src", src)
+
+# Sobel()函數
+dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
+dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
+dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
+dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
+dst_sobel = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+# Scharr()函數
+dstx = cv2.Scharr(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
+dsty = cv2.Scharr(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
+dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
+dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
+dst_scharr = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+# Laplacian()函數
+dst_tmp = cv2.Laplacian(src, cv2.CV_32F, ksize=3)  # Laplacian邊緣影像
+dst_lap = cv2.convertScaleAbs(dst_tmp)  # 將負值轉正值
+
+# 輸出影像梯度
+cv2.imshow("Sobel", dst_sobel)
+cv2.imshow("Scharr", dst_scharr)
+cv2.imshow("Laplacian", dst_lap)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用 Canny()")
+
+src = cv2.imread("data/edge_detection/lena.jpg", cv2.IMREAD_GRAYSCALE)
+cv2.imshow("Src", src)
+
+dst1 = cv2.Canny(src, 50, 100)  # minVal=50, maxVal=100
+dst2 = cv2.Canny(src, 50, 200)  # minVal=50, maxVal=200
+cv2.imshow("Dst1", dst1)
+cv2.imshow("Dst2", dst2)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用 Sobel() / Scharr() / Laplacian() / Canny()")
+
+src = cv2.imread("data/edge_detection/geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
+
+src = cv2.GaussianBlur(src, (3, 3), 0)  # 降低噪音
+
+# Sobel()函數
+dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
+dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
+dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
+dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
+dst_sobel = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+
+# Scharr()函數
+dstx = cv2.Scharr(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
+dsty = cv2.Scharr(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
+dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
+dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
+dst_scharr = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+
+# Laplacian()函數
+dst_tmp = cv2.Laplacian(src, cv2.CV_32F, ksize=3)  # Laplacian邊緣影像
+dst_lap = cv2.convertScaleAbs(dst_tmp)  # 將負值轉正值
+
+# Canny()函數
+dst_canny = cv2.Canny(src, 50, 100)  # minVal=50, maxVal=100
+
+# 輸出影像梯度
+cv2.imshow("Canny", dst_canny)
+cv2.imshow("Sobel", dst_sobel)
+cv2.imshow("Scharr", dst_scharr)
+cv2.imshow("Laplacian", dst_lap)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 1、Robers算法
 
-import numpy as np
-import cv2
 from scipy import signal
 
 
@@ -66,8 +378,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 2、Prewitt算法
 
-import numpy as np
-import cv2
 from scipy import signal
 
 
@@ -112,10 +422,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # 3、Sobel算法
-import cv2
-import numpy as np
 from scipy import signal
-import math
 
 
 def pascalSmooth(n):
@@ -173,10 +480,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 # 4、Scharr算法
 
-import cv2
-import numpy as np
 from scipy import signal
-import math
 
 
 def scharr(I, _boundary="symm"):
@@ -215,10 +519,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 5、Kirsch算法
 
-import cv2
-import numpy as np
 from scipy import signal
-import math
 
 
 def kirsch(image, _boundary="fill", _fillvalue=0):
@@ -279,13 +580,11 @@ cv2.imshow("pencilSketch", pencilSketch)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
+
 # 6、Canny算法
-import cv2
-import numpy as np
+
 from scipy import signal
-import math
 
 
 def non_maximum_suppression_default(dx, dy):
@@ -430,11 +729,9 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+
 # 7、Laplacian算法
-import cv2
-import numpy as np
 from scipy import signal
-import math
 
 
 def laplacian(image, _boundary="fill", _fillvalue=0):
@@ -465,10 +762,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # 8、LoG算法
-import cv2
-import numpy as np
 from scipy import signal
-import math
 
 
 def createLoGKernel(sigma, size):
@@ -503,10 +797,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # 9、DoG算法 一
-import cv2
-import numpy as np
 from scipy import signal
-import math
 
 
 def gaussConv(I, size, sigma):
@@ -555,10 +846,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 9、DoG算法 二
 
-import cv2
-import numpy as np
 from scipy import signal
-import math
 
 
 def gaussConv(I, size, sigma):
@@ -603,12 +891,10 @@ cv2.destroyAllWindows()
 
 
 print("------------------------------------------------------------")  # 60個
+
 # 10、Marr-Hildreth算法
 
-import cv2
-import numpy as np
 from scipy import signal
-import math
 
 
 def gaussConv(I, size, sigma):
@@ -701,4 +987,11 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個

@@ -1,13 +1,24 @@
 """
-圖像金字塔 (pyrDown,pyrUp)
+圖像金字塔
+影像金字塔
 
+pyrDown 这里的down是指图像变小，所以原始图像在金字塔的底部。
+pyrUp   这里的up是指将图像的尺寸变大，所以原始图像位于图像金字塔的顶层。
 """
 import cv2
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
+import time
 import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -15,6 +26,13 @@ font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+
+def show():
+    plt.show()
+    pass
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -26,13 +44,6 @@ print("顯示原圖")
 cv2.imshow("original", o)
 
 print("------------------------------------------------------------")  # 60個
-
-"""
-pyrDown
-
-这里的down是指图像变小，所以原始图像在金字塔的底部。
-
-"""
 
 # 连续3次进行pyrDown
 
@@ -58,9 +69,6 @@ cv2.imshow("img_down3", img_down3)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-# pyrUp
-# 这里的up是指将图像的尺寸变大，所以原始图像位于图像金字塔的顶层。
-
 print("cv2.__version__:", cv2.__version__)
 
 img = cv2.imread(filename)
@@ -79,31 +87,6 @@ cv2.imshow("img_up3", img_up3)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-
-
-"""
-圖像金字塔
-
-pyrDown
-
-pyrUp
-
-
-"""
-
-import cv2
-
-import sys
-import matplotlib.pyplot as plt
-import numpy as np
-import math
-
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 print("------------------------------------------------------------")  # 60個
 
@@ -128,8 +111,6 @@ cv2.imshow("r3", r3)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-
-sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -272,5 +253,170 @@ print("G2.shape=", G2.shape)
 print("RG2.shape=", RG2.shape)
 result = RG2 - G2  # 將o和ro做減法
 print("原始圖像G2與恢復圖像RG2差值的絕對值和：", np.sum(abs(result)))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("影像金字塔")
+
+src = cv2.imread("data/pyramid/macau.jpg")
+cv2.imshow("src", src)
+
+dst1 = cv2.pyrDown(src)  # 第 1 次向下採樣
+dst2 = cv2.pyrDown(dst1)  # 第 2 次向下採樣
+dst3 = cv2.pyrDown(dst2)  # 第 3 次向下採樣
+print(f"src.shape = {src.shape}")
+print(f"dst1.shape = {dst1.shape}")
+print(f"dst2.shape = {dst2.shape}")
+print(f"dst3.shape = {dst3.shape}")
+
+cv2.imshow("dst1", dst1)
+cv2.imshow("dst2", dst2)
+cv2.imshow("dst3", dst3)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("影像金字塔")
+
+src = cv2.imread("data/pyramid/macau_small.jpg")
+
+dst1 = cv2.pyrUp(src)  # 第 1 次向下採樣
+dst2 = cv2.pyrUp(dst1)  # 第 2 次向下採樣
+dst3 = cv2.pyrUp(dst2)  # 第 3 次向下採樣
+
+print(f"src.shape = {src.shape}")
+print(f"dst1.shape = {dst1.shape}")
+print(f"dst2.shape = {dst2.shape}")
+print(f"dst3.shape = {dst3.shape}")
+cv2.imshow("drc", src)
+cv2.imshow("dst1", dst1)
+cv2.imshow("dst2", dst2)
+cv2.imshow("dst3", dst3)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+src1 = np.random.randint(256, size=(2, 3), dtype=np.uint8)
+src2 = np.random.randint(256, size=(2, 3), dtype=np.uint8)
+dst = src1 + src2
+print(f"src1 = \n{src1}")
+print(f"src2 = \n{src2}")
+print(f"dst = \n{dst}")
+
+print("------------------------------------------------------------")  # 60個
+
+src = cv2.imread("data/pyramid/pengiun.jpg")
+cv2.imshow("src", src)
+
+dst1 = src + src  # 影像相加
+dst2 = src - src  # 影像相減
+
+cv2.imshow("dst1 - add", dst1)
+cv2.imshow("dst2 - subtraction", dst2)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("影像金字塔")
+
+src = cv2.imread("data/pyramid/pengiun.jpg")
+cv2.imshow("src", src)
+
+print(f"原始影像大小 = \n{src.shape}")
+dst_down = cv2.pyrDown(src)  # 向下採樣
+print(f"向下採樣大小 = \n{dst_down.shape}")
+dst_up = cv2.pyrUp(dst_down)  # 向上採樣, 復原大小
+print(f"向上採樣大小 = \n{dst_up.shape}")
+dst = dst_up - src
+print(f"結果影像大小 = \n{dst.shape}")
+
+cv2.imshow("dst1 - recovery", dst_up)
+cv2.imshow("dst2 - dst", dst)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("影像金字塔")
+
+src = cv2.imread("data/pyramid/pengiun.jpg")
+cv2.imshow("src", src)
+
+print(f"原始影像大小 = \n{src.shape}")
+dst_up = cv2.pyrUp(src)  # 向上採樣
+print(f"向上採樣大小 = \n{dst_up.shape}")
+dst_down = cv2.pyrDown(dst_up)  # 向下採樣, 復原大小
+print(f"向下採樣大小 = \n{dst_down.shape}")
+dst = dst_down - src
+print(f"結果影像大小 = \n{dst.shape}")
+
+cv2.imshow("dst1 - recovery", dst_down)
+cv2.imshow("dst2 - dst", dst)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("影像金字塔")
+
+src = cv2.imread("data/pyramid/pengiun.jpg")
+
+G0 = src
+G1 = cv2.pyrDown(G0)  # 第 1 次向下採樣
+G2 = cv2.pyrDown(G1)  # 第 2 次向下採樣
+
+L0 = G0 - cv2.pyrUp(G1)  # 建立第 0 層拉普拉斯金字塔
+L1 = G1 - cv2.pyrUp(G2)  # 建立第 1 層拉普拉斯金字塔
+print(f"L0.shape = \n{L0.shape}")  # 列印第 0 層拉普拉斯金字塔大小
+print(f"L1.shape = \n{L1.shape}")  # 列印第 1 層拉普拉斯金字塔大小
+cv2.imshow("Laplacian L0", L0)  # 顯示第 0 層拉普拉斯金字塔
+cv2.imshow("Laplacian L1", L1)  # 顯示第 1 層拉普拉斯金字塔
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("影像金字塔")
+
+src = cv2.imread("data/pyramid/pengiun.jpg")
+cv2.imshow("Src", src)
+
+G0 = src
+G1 = cv2.pyrDown(G0)  # 第 1 次向下採樣
+L0 = src - cv2.pyrUp(G1)  # 拉普拉斯影像
+dst = L0 + cv2.pyrUp(G1)  # 恢復結果影像
+
+print(f"src.shape = \n{src.shape}")  # 列印原始影像大小
+print(f"dst.shape = \n{dst.shape}")  # 列印恢復影像大小
+cv2.imshow("Dst", dst)  # 顯示恢復影像
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
