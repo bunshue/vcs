@@ -38,9 +38,11 @@ def show():
     plt.show()
     pass
 
-
+'''
 print("------------------------------------------------------------")  # 60個
-
+print("-------------------- ----------------------------------------")  # 60個
+# OpenCV 運算
+print("------------------------------------------------------------")  # 60個
 src = cv2.imread(filename2)
 
 channels = cv2.mean(src)  # 計算影像各通道的均值
@@ -50,116 +52,6 @@ mean, std = cv2.meanStdDev(src)  # 計算影像各通道的標準差
 print(f"均值   = \n{mean}")
 print(f"標準差 = \n{std}")
 
-print("------------------------------------------------------------")  # 60個
-
-"""
-img = cv2.imread(filename1)
-cv2.imshow("Peony", img)
-cv2.destroyWindow("Peony")  # 關閉視窗
-
-ret_value = cv2.waitKey(0)  # 無限等待
-cv2.destroyWindow("Peony")  # 關閉視窗
-
-ret_value = cv2.waitKey(5000)  # 等待 5 秒
-cv2.destroyWindow("Peony")  # 關閉視窗
-
-ret_value = cv2.waitKey(0)  # 無限等待
-if ret_value == ord("Q") or ret_value == ord("q"):
-    cv2.destroyWindow("Peony")  # 關閉視窗
-
-print("------------------------------------------------------------")  # 60個
-"""
-img = cv2.imread(filename1)
-cv2.imshow("Peony", img)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_6.py
-
-cv2.namedWindow("Peony1")  # 使用預設
-cv2.namedWindow("Peony2", cv2.WINDOW_NORMAL)  # 可以調整大小
-img1 = cv2.imread(filename1)  # 彩色讀取
-img2 = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰色讀取
-cv2.imshow("Peony1", img1)
-cv2.imshow("Peony2", img2)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_6_1.py
-
-cv2.namedWindow("Peony1")  # 使用預設
-cv2.namedWindow("Peony2", cv2.WINDOW_NORMAL)  # 可以調整大小
-img1 = cv2.imread(filename1)  # 彩色讀取
-img2 = cv2.imread(filename1, 0)  # 灰色讀取
-cv2.imshow("Peony1", img1)
-cv2.imshow("Peony2", img2)
-
-cv2.waitKey()
-cv2.destroyWindow("Peony1")  # 刪除Peony1
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# 讀取某點的灰階/RGB值
-
-pt_y = 169
-pt_x = 118
-
-img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
-px = img[pt_y, pt_x]  # 讀px點
-
-print(type(px))
-print(f"BGR = {px}")
-
-img = cv2.imread(filename1)  # 彩色讀取
-px = img[pt_y, pt_x]  # 讀px點
-print(type(px))
-print(f"BGR = {px}")
-
-pt_y = 169
-pt_x = 118
-img = cv2.imread(filename1)  # 彩色讀取
-blue = img[pt_y, pt_x, 0]  # 讀 B 通道值
-green = img[pt_y, pt_x, 1]  # 讀 G 通道值
-red = img[pt_y, pt_x, 2]  # 讀 R 通道值
-print(f"BGR = {blue}, {green}, {red}")
-
-print("------------------------------------------------------------")  # 60個
-
-# 修改影像的RGB值
-
-pt_y = 169
-pt_x = 118
-img = cv2.imread(filename1)  # 彩色讀取
-px = img[pt_y, pt_x]  # 讀取 px 點
-print(f"更改前BGR = {px}")
-px = [255, 255, 255]  # 修改 px 點
-print(f"更改後BGR = {px}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_7.py
-
-print("把影像的一塊改成藍色")
-
-img = cv2.imread(filename1)  # 彩色讀取
-cv2.imshow("Before", img)
-for y in range(img.shape[0] - 100, img.shape[0]):
-    for x in range(img.shape[1] - 100, img.shape[1]):
-        img[y, x] = [255, 0, 0]
-cv2.imshow("After", img)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("-------------------- ----------------------------------------")  # 60個
-# OpenCV_03_Numpy影像
 print("------------------------------------------------------------")  # 60個
 
 # ch3_1.py
@@ -205,17 +97,17 @@ print(x[1, 2])
 print("------------------------------------------------------------")  # 60個
 
 # 建立 640 X 480 之黑圖
-fig = np.zeros((480, 640), dtype=np.uint8)
-print(fig)
-cv2.imshow("fig", fig)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+width, height = 640, 480  # 影像寬, 影像高
+
+fig = np.zeros((height, width), dtype=np.uint8)
+print(fig)
+cv2.imshow("Black 640X480", fig)
 
 # 建立 640 X 480 之白圖
-fig = np.ones((480, 640), dtype=np.uint8) * 255
+fig = np.ones((height, width), dtype=np.uint8) * 255
 print(fig)
-cv2.imshow("fig", fig)
+cv2.imshow("White 640X480", fig)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -467,6 +359,114 @@ x = np.hstack((x1, x2))
 print(f"合併結果 \n{x}")
 
 print("------------------------------------------------------------")  # 60個
+
+"""
+img = cv2.imread(filename1)
+cv2.imshow("Peony", img)
+cv2.destroyWindow("Peony")  # 關閉視窗
+
+ret_value = cv2.waitKey(0)  # 無限等待
+cv2.destroyWindow("Peony")  # 關閉視窗
+
+ret_value = cv2.waitKey(5000)  # 等待 5 秒
+cv2.destroyWindow("Peony")  # 關閉視窗
+
+ret_value = cv2.waitKey(0)  # 無限等待
+if ret_value == ord("Q") or ret_value == ord("q"):
+    cv2.destroyWindow("Peony")  # 關閉視窗
+
+print("------------------------------------------------------------")  # 60個
+"""
+img = cv2.imread(filename1)
+cv2.imshow("Peony", img)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+# ch1_6.py
+# 設定 cv 視窗
+cv2.namedWindow("Peony1")  # 使用預設
+cv2.namedWindow("Peony2", cv2.WINDOW_NORMAL)  # 可以調整大小
+img1 = cv2.imread(filename1)  # 彩色讀取
+img2 = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰色讀取
+cv2.imshow("Peony1", img1)
+cv2.imshow("Peony2", img2)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+# ch1_6_1.py
+
+cv2.namedWindow("Peony1")  # 使用預設
+cv2.namedWindow("Peony2", cv2.WINDOW_NORMAL)  # 可以調整大小
+img1 = cv2.imread(filename1)  # 彩色讀取
+img2 = cv2.imread(filename1, 0)  # 灰色讀取
+cv2.imshow("Peony1", img1)
+cv2.imshow("Peony2", img2)
+
+cv2.waitKey()
+cv2.destroyWindow("Peony1")  # 刪除Peony1
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+# 讀取某點的灰階/RGB值
+
+pt_y = 169
+pt_x = 118
+
+img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+px = img[pt_y, pt_x]  # 讀px點
+
+print(type(px))
+print(f"BGR = {px}")
+
+img = cv2.imread(filename1)  # 彩色讀取
+px = img[pt_y, pt_x]  # 讀px點
+print(type(px))
+print(f"BGR = {px}")
+
+pt_y = 169
+pt_x = 118
+img = cv2.imread(filename1)  # 彩色讀取
+blue = img[pt_y, pt_x, 0]  # 讀 B 通道值
+green = img[pt_y, pt_x, 1]  # 讀 G 通道值
+red = img[pt_y, pt_x, 2]  # 讀 R 通道值
+print(f"BGR = {blue}, {green}, {red}")
+
+print("------------------------------------------------------------")  # 60個
+
+# 修改影像的RGB值
+
+pt_y = 169
+pt_x = 118
+img = cv2.imread(filename1)  # 彩色讀取
+px = img[pt_y, pt_x]  # 讀取 px 點
+print(f"更改前BGR = {px}")
+px = [255, 255, 255]  # 修改 px 點
+print(f"更改後BGR = {px}")
+
+print("------------------------------------------------------------")  # 60個
+
+# ch2_7.py
+
+print("把影像的一塊改成藍色")
+
+img = cv2.imread(filename1)  # 彩色讀取
+cv2.imshow("Before", img)
+for y in range(img.shape[0] - 100, img.shape[0]):
+    for x in range(img.shape[1] - 100, img.shape[1]):
+        img[y, x] = [255, 0, 0]
+cv2.imshow("After", img)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
 # OpenCV_04_色彩空間
 print("------------------------------------------------------------")  # 60個
 
@@ -529,7 +529,10 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch4_7.py
+
+print("------------------------------------------------------------")  # 60個
+# cv2.split cv2.merge ST
+print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
@@ -722,6 +725,11 @@ cv2.imshow("The a128 Image", a128_image)  # 顯示alpha=128影像
 
 cv2.waitKey()
 cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+# cv2.split cv2.merge SP
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 # OpenCV_05_建立空影像
@@ -1253,8 +1261,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch8_7.py
-
 width, height = 640, 480  # 影像寬, 影像高
 
 b = np.zeros((height, width, 3), np.uint8)  # b影像
@@ -1263,36 +1269,71 @@ r = np.zeros((height, width, 3), np.uint8)  # r影像
 b[:, :, 0] = 255  # 設定藍色
 g[:, :, 1] = 255  # 設定綠色
 r[:, :, 2] = 255  # 設定紅色
-cv2.imshow("B channel", b)
-cv2.imshow("G channel", g)
-cv2.imshow("R channel", r)
 
 img1 = cv2.add(b, g)  # b + g影像
-cv2.imshow("B + G", img1)
 img2 = cv2.add(g, r)  # g + r影像
-cv2.imshow("G + R", img2)
 img3 = cv2.add(img1, r)  # b + g + r影像
-cv2.imshow("B + G + R", img3)
+
+plt.subplot(231)
+plt.title("B")
+plt.imshow(cv2.cvtColor(b, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(232)
+plt.title("G")
+plt.imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(233)
+plt.title("R")
+plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(234)
+plt.title("B+G")
+plt.imshow(cv2.cvtColor(img1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(235)
+plt.title("G+R")
+plt.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(236)
+plt.title("B+G+R")
+plt.imshow(cv2.cvtColor(img3, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+""" size error
+# 製作mask
+# mask = np.zeros((4, 5), dtype=np.uint8)
+mask = np.zeros((height, width, 3), np.uint8)
+mask[100:300, 100:400, -1] = 255  # 設定mask, 先高後寬
+
+img4 = cv2.add(b, g, mask=mask)  # b + g影像 + mask
+
+cv2.imshow("img4", img4)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
-# ch8_8.py
+# 影像相加 影像取mask
 
 img1 = np.ones((4, 5), dtype=np.uint8) * 8
 img2 = np.ones((4, 5), dtype=np.uint8) * 9
 
+# 製作mask
 mask = np.zeros((4, 5), dtype=np.uint8)
 mask[1:3, 1:4] = 255  # 設定mask, 先高後寬
-
-dst = np.random.randint(0, 256, (4, 5), np.uint8)
 
 print("img1 = \n", img1)
 print("img2 = \n", img2)
 print("mask = \n", mask)
-print("最初值 dst =\n", dst)
+
 dst = cv2.add(img1, img2, mask=mask)
 print("結果值 dst =\n", dst)
 
@@ -1325,73 +1366,102 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch8_9.py
+# 加權和 alpha beta gamma
 
+# 全 10 影像
 src1 = np.ones((2, 3), dtype=np.uint8) * 10  # 影像 src1
+print(f"src1 = \n {src1}")
+
+# 全 50 影像
 src2 = np.ones((2, 3), dtype=np.uint8) * 50  # 影像 src2
+print(f"src2 = \n {src2}")
+
 alpha = 1
 beta = 0.5
 gamma = 5
-print(f"src1 = \n {src1}")
-print(f"src2 = \n {src2}")
 dst = cv2.addWeighted(src1, alpha, src2, beta, gamma)  # 加權和
 print(f"dst = \n {dst}")
 
+print('aaa')
+
 print("------------------------------------------------------------")  # 60個
 
-""" NG
-# ch8_10.py
+# 要一樣大的影像才可以做 加權和 addWeighted
 
-src1 = cv2.imread("lake.jpg")  # 影像 src1
-cv2.imshow("lake", src1)
-src2 = cv2.imread("geneva.jpg")  # 影像 src2
-cv2.imshow("geneva.jpg", src2)
+filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
+
+src1 = cv2.imread(filename1)  # 影像 src1
+cv2.imshow("R", src1)
+
+src2 = cv2.imread(filename2)  # 影像 src2
+cv2.imshow("G", src2)
+
 alpha = 1
 beta = 0.2
 gamma = 1
 dst = cv2.addWeighted(src1, alpha, src2, beta, gamma)  # 加權和
-cv2.imshow("lake+geneva", dst)  # 顯示結果
+cv2.imshow("R + G", dst)  # 顯示結果
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-"""
+'''
 print("------------------------------------------------------------")  # 60個
 # OpenCV_09_閾值處理
 print("------------------------------------------------------------")  # 60個
 
-# ch9_1.py
+width, height = 64, 48  # 影像寬, 影像高
 
-thresh = 127  # 定義閾值
+thresh = 160  # 定義閾值
 maxval = 255  # 定義像素最大值
-src = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
+src = np.random.randint(0, 256, size=[height, width], dtype=np.uint8)
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
 print(f"src =\n {src}")
 print(f"threshold = {ret}")
 print(f"dst =\n {dst}")
 
-print("------------------------------------------------------------")  # 60個
+plt.subplot(121)
+plt.title("src")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
 
-# ch9_2.py
+plt.subplot(122)
+plt.title("dst")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
 
 maxval = 255  # 定義像素最大值
 
 src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("Before", src)
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
-cv2.imshow("threshold 127", dst)
+ret, dst1 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
 
 thresh = 80  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
-cv2.imshow("threshold 80", dst)
+ret, dst2 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(131)
+plt.title("src")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(132)
+plt.title("dst1")
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(133)
+plt.title("dst2")
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch9_3.py
 
 maxval = 255  # 定義像素最大值
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
@@ -1399,32 +1469,55 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 src = cv2.imread(filename2)
 cv2.imshow("Src", src)
 
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
-cv2.imshow("threshold 127", dst)
+ret, dst1 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
+cv2.imshow("threshold 127", dst1)
 
 thresh = 80  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
-cv2.imshow("threshold 80", dst)
+ret, dst2 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
+cv2.imshow("threshold 80", dst2)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-print("------------------------------------------------------------")  # 60個
+plt.subplot(131)
+plt.title("src")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
 
-# ch9_4.py
+plt.subplot(132)
+plt.title("dst1")
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(133)
+plt.title("dst2")
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
 
 maxval = 255  # 二值化的極大值
 
-src = cv2.imread("numbers.jpg")
+src = cv2.imread("threshold1.png")
 cv2.imshow("Src", src)
 
-thresh = 127  # 閾值 = 10
+thresh = 127  # 閾值 = 127
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
 cv2.imshow("threshold 127", dst)
 
 thresh = 10  # 更改閾值 = 10
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
 cv2.imshow("threshold 10", dst)
+
+thresh = 127  # 閾值 = 127
+ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
+cv2.imshow("threshold 127 inv", dst)
+
+thresh = 10  # 更改閾值 = 10
+ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
+cv2.imshow("threshold 10 inv", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1485,21 +1578,6 @@ print("------------------------------------------------------------")  # 60個
 
 # ch9_8.py
 
-thresh = 127  # 閾值 = 10
-maxval = 255  # 二值化的極大值
-
-src = cv2.imread("numbers.jpg")
-cv2.imshow("Src", src)
-
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
-cv2.imshow("threshold 127", dst)
-
-thresh = 10  # 更改閾值 = 10
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
-cv2.imshow("threshold 10", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -5792,3 +5870,7 @@ cv2.imshow("JK Hung", img)
 
 
 # 準備搬出
+
+# 製作隨機影像
+dst = np.random.randint(0, 256, (4, 5), np.uint8)
+

@@ -53,7 +53,7 @@ print("------------------------------------------------------------")  # 60個
 print("dilate 擴大 膨脹 效果")
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/kernel.bmp"
-filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
 
 image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 
@@ -94,20 +94,17 @@ print("------------------------------------------------------------")  # 60個
 print("dilate 擴大 膨脹 效果")
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/dilation.bmp"
-filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
 
 image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 
 print("定義矩形結構元素 kernel")
-kernel1 = np.ones((20, 20), np.uint8)
-kernel2 = np.ones((40, 40), np.uint8)
-kernel3 = np.ones((10, 10), np.uint8)
-# print("kernel1 =\n", kernel1)
-# print("kernel2 =\n", kernel2)
-# print("kernel3 =\n", kernel3)
+kernel1 = np.ones((3, 3), np.uint8)
+kernel2 = np.ones((5, 5), np.uint8)
+kernel3 = np.ones((7, 7), np.uint8)
 image_dilate1 = cv2.dilate(image, kernel1)
 image_dilate2 = cv2.dilate(image, kernel2)
-image_dilate3 = cv2.dilate(image, kernel3, iterations=9)
+image_dilate3 = cv2.dilate(image, kernel3, iterations=3)
 draw_line(image_dilate1)
 draw_line(image_dilate2)
 draw_line(image_dilate3)
@@ -137,7 +134,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/erode.bmp"
-filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
 
 image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 
@@ -148,7 +145,7 @@ plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 print("erode 侵蝕 效果 1")
-kernel1 = np.ones((25, 25), np.uint8)
+kernel1 = np.ones((3, 3), np.uint8)
 image_erosion1 = cv2.erode(image, kernel1)
 
 plt.subplot(222)
@@ -157,7 +154,7 @@ draw_line(image_erosion1)
 plt.imshow(cv2.cvtColor(image_erosion1, cv2.COLOR_BGR2RGB))
 
 print("erode 侵蝕 效果 2")
-kernel2 = np.ones((25, 25), np.uint8)
+kernel2 = np.ones((5, 5), np.uint8)
 image_erosion2 = cv2.erode(image, kernel2)
 
 plt.subplot(223)
@@ -166,8 +163,8 @@ draw_line(image_erosion2)
 plt.imshow(cv2.cvtColor(image_erosion2, cv2.COLOR_BGR2RGB))
 
 print("erode 侵蝕 效果 3 加 iterations")
-kernel3 = np.ones((9, 9), np.uint8)
-image_erosion3 = cv2.erode(image, kernel3, iterations=5)
+kernel3 = np.ones((7, 7), np.uint8)
+image_erosion3 = cv2.erode(image, kernel3, iterations=3)
 
 plt.subplot(224)
 plt.title("erode 侵蝕 效果 3")
@@ -183,7 +180,7 @@ print("------------------------------------------------------------")  # 60個
 print("erode-dilate")
 
 filename = "data/flower.png"
-filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 # filename = "C:/_git/vcs/_4.python/_data/bear.jpg"
 # filename = "C:/_git/vcs/_4.python/_data/panda.jpg"
@@ -801,7 +798,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology//dilate_erode1.png"
 
 print("形態學處理 erode")
 
@@ -951,55 +948,51 @@ print(f"Erosion = \n {dst}")
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
-src = cv2.imread("data/morphology/bw.jpg")
+print("侵蝕(Erosion) 白色變小")
+
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
+filename = "dilate_erode2.png"
+# filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+
+src = cv2.imread(filename)
 cv2.imshow("src", src)
 
-kernel = np.ones((5, 5), np.uint8)  # 建立5x5內核
-
+kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
 dst1 = cv2.erode(src, kernel)  # 腐蝕.erode
-cv2.imshow("after erosion 5 x 5", dst1)
+cv2.imshow("after erosion 3 x 3", dst1)
 
-kerne2 = np.ones((11, 11), np.uint8)  # 建立11x11內核
-
+kerne2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
 dst2 = cv2.erode(src, kerne2)  # 腐蝕.erode
-cv2.imshow("after erosion 11 x 11", dst2)
+cv2.imshow("after erosion 5 x 5", dst2)
+
+kerne3 = np.ones((7, 7), np.uint8)  # 建立7x7內核
+dst3 = cv2.erode(src, kerne3)  # 腐蝕.erode
+cv2.imshow("after erosion 7 x 7", dst3)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/morphology/bw_noise.jpg")
+print("膨脹(Dilate) 白色變大")
+
+filename = "dilate_erode2.png"
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+
+src = cv2.imread(filename)
 cv2.imshow("src", src)
 
 kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
-
-dst1 = cv2.erode(src, kernel)  # 腐蝕.erode
-cv2.imshow("after erosion 3 x 3", dst1)
-
-kerne2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
-
-dst2 = cv2.erode(src, kerne2)  # 腐蝕.erode
-cv2.imshow("after erosion 5 x 5", dst2)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread("data/morphology/whilster.jpg")
-cv2.imshow("src", src)
-
-kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
-
-dst1 = cv2.erode(src, kernel)  # 腐蝕.erode
-cv2.imshow("after erosion 3 x 3", dst1)
+dst1 = cv2.dilate(src, kernel)  # 膨脹.dilate
+cv2.imshow("after dilation 3 x 3", dst1)
 
 kerne2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
+dst2 = cv2.dilate(src, kerne2)  # 膨脹.dilate
+cv2.imshow("after dilation 5 x 5", dst2)
 
-dst2 = cv2.erode(src, kerne2)  # 腐蝕.erode
-cv2.imshow("after erosion 5 x 5", dst2)
+kerne3 = np.ones((7, 7), np.uint8)  # 建立7x7內核
+dst3 = cv2.dilate(src, kerne3)  # 膨脹.dilate
+cv2.imshow("after dilation 7 x 7", dst3)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1016,93 +1009,31 @@ print(f"Dilation = \n {dst}")
 
 print("------------------------------------------------------------")  # 60個
 
-print("膨脹(Dilate) 白色變大")
+filename = "dilate_erode2.png"
 
-src = cv2.imread("data/morphology/bw_dilate.jpg")
+src = cv2.imread(filename)
 cv2.imshow("src", src)
 
-kernel = np.ones((5, 5), np.uint8)  # 建立5x5內核
+kernel1 = np.ones((3, 3), np.uint8)  # 建立3x3內核
+dst1 = cv2.morphologyEx(src, cv2.MORPH_OPEN, kernel1)  # 開運算
+cv2.imshow("after Opening 3 x 3", dst1)
 
-dst1 = cv2.dilate(src, kernel)  # 膨脹.dilate
-cv2.imshow("after dilation 5 x 5", dst1)
+kernel2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
+dst2 = cv2.morphologyEx(src, cv2.MORPH_OPEN, kernel2)  # 開運算
+cv2.imshow("after Opening 5 x 5", dst2)
 
-kerne2 = np.ones((11, 11), np.uint8)  # 建立11x11內核
-
-dst2 = cv2.dilate(src, kerne2)  # 膨脹.dilate
-cv2.imshow("after dilation 11 x 11", dst2)
+kernel3 = np.ones((7, 7), np.uint8)  # 建立7x7內核
+dst3 = cv2.morphologyEx(src, cv2.MORPH_OPEN, kernel3)  # 開運算
+cv2.imshow("after Opening 7 x 7", dst3)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("膨脹(Dilate) 白色變大")
+filename = "dilate_erode2.png"
 
-src = cv2.imread("data/morphology/a.jpg")
-cv2.imshow("src", src)
-
-kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
-
-dst1 = cv2.dilate(src, kernel)  # 膨脹.dilate
-cv2.imshow("after dilation 3 x 3", dst1)
-
-kerne2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
-
-dst2 = cv2.dilate(src, kerne2)  # 膨脹.dilate
-cv2.imshow("after dilation 5 x 5", dst2)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("膨脹(Dilate) 白色變大")
-
-src = cv2.imread("data/morphology/whilster.jpg")
-cv2.imshow("src", src)
-
-kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
-
-dst1 = cv2.dilate(src, kernel)  # 膨脹.dilate
-cv2.imshow("after dilation 3 x 3", dst1)
-
-kerne2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
-
-dst2 = cv2.dilate(src, kerne2)  # 膨脹.dilate
-cv2.imshow("after dilation 5 x 5", dst2)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread("data/morphology/btree.jpg")
-cv2.imshow("src", src)
-
-kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
-
-dst = cv2.morphologyEx(src, cv2.MORPH_OPEN, kernel)  # 開運算
-cv2.imshow("after Opening 3 x 3", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread("data/morphology/night.jpg")
-cv2.imshow("src", src)
-
-kernel = np.ones((9, 9), np.uint8)  # 建立9x9內核
-
-dst = cv2.morphologyEx(src, cv2.MORPH_OPEN, kernel)  # 開運算
-cv2.imshow("after Opening 9 x 9", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread("data/morphology/night.jpg")
+src = cv2.imread(filename)
 cv2.imshow("src", src)
 
 kernel = np.ones((9, 9), np.uint8)  # 建立9x9內核
@@ -1112,32 +1043,6 @@ cv2.imshow("after erosion 9 x 9", mid)
 
 dst = cv2.dilate(mid, kernel)  # 膨脹.dilate
 cv2.imshow("after dilation 9 x 9", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread("data/morphology/snowman.jpg")
-cv2.imshow("src", src)
-
-kernel = np.ones((11, 11), np.uint8)  # 建立11x11內核
-
-dst = cv2.morphologyEx(src, cv2.MORPH_CLOSE, kernel)  # 閉運算
-cv2.imshow("after Closing 11 x 11", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread("data/morphology/snowman1.jpg")
-cv2.imshow("src", src)
-
-kernel = np.ones((11, 11), np.uint8)  # 建立11x11內核
-
-dst = cv2.morphologyEx(src, cv2.MORPH_CLOSE, kernel)  # 閉運算
-cv2.imshow("after Closing 11 x 11", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1176,6 +1081,19 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+src = cv2.imread("data/morphology/snowman.jpg")
+cv2.imshow("src", src)
+
+kernel = np.ones((11, 11), np.uint8)  # 建立11x11內核
+
+dst = cv2.morphologyEx(src, cv2.MORPH_CLOSE, kernel)  # 閉運算
+cv2.imshow("after Closing 11 x 11", dst)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
 src = cv2.imread("data/morphology/k.jpg")
 cv2.imshow("src", src)
 
@@ -1189,7 +1107,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/morphology/hole.jpg")
+src = cv2.imread("data/morphology/hole.jpg") 
 cv2.imshow("src", src)
 
 kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核

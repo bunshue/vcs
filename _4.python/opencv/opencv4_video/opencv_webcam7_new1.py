@@ -977,7 +977,9 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-video = cv2.VideoCapture("data/iceocean.mov")  # 開啟影片檔案
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+
+video = cv2.VideoCapture(video_filename)  # 開啟影片檔案
 
 while video.isOpened():
     ret, frame = video.read()  # 讀取影片檔案
@@ -996,6 +998,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+"""
 capture = cv2.VideoCapture(0)  # 初始化攝影功能
 while capture.isOpened():
     ret, frame = capture.read()  # 讀取設請鏡頭的影像
@@ -1009,10 +1012,12 @@ print(f"Frame 的寬度 = {width}")  # 輸出Frame 的寬度
 print(f"Frame 的高度 = {height}")  # 輸出Frame 的高度
 capture.release()  # 關閉攝影功能
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
-video = cv2.VideoCapture("data/iceocean.mov")  # 開啟影片檔案
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+
+video = cv2.VideoCapture(video_filename)  # 開啟影片檔案
 
 while video.isOpened():
     ret, frame = video.read()  # 讀取影片檔案
@@ -1033,6 +1038,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+"""
 capture = cv2.VideoCapture(0)  # 初始化攝影功能
 capture.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)  # 設定寬度
 capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 960)  # 設定高度
@@ -1044,10 +1050,12 @@ while capture.isOpened():
         break
 capture.release()  # 關閉攝影功能
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
-video = cv2.VideoCapture("data/iceocean.mov")  # 開啟影片檔案
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+
+video = cv2.VideoCapture(video_filename)  # 開啟影片檔案
 
 video_fps = video.get(cv2.CAP_PROP_FPS)  # 計算速度
 height = video.get(cv2.CAP_PROP_FRAME_HEIGHT)  # 影片高度
@@ -1078,7 +1086,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-video = cv2.VideoCapture("data/iceocean.mov")  # 開啟影片檔案
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+video = cv2.VideoCapture(video_filename)  # 開啟影片檔案
 
 video_fps = video.get(cv2.CAP_PROP_FPS)  # 計算速度
 width = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))  # 寬度
@@ -1182,7 +1191,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-video = cv2.VideoCapture("data/iceocean.mov")  # 開啟影片檔案
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+video = cv2.VideoCapture(video_filename)  # 開啟影片檔案
 
 while video.isOpened():
     ret, frame = video.read()  # 讀取影片檔案
@@ -1199,7 +1209,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-video = cv2.VideoCapture("data/iceocean2.mov")  # 開啟影片檔案
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+video = cv2.VideoCapture(video_filename)  # 開啟影片檔案
 
 while video.isOpened():
     ret, frame = video.read()  # 讀取影片檔案
@@ -1218,7 +1229,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-video = cv2.VideoCapture("data/iceocean.mov")  # 開啟影片檔案
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+video = cv2.VideoCapture(video_filename)  # 開啟影片檔案
 
 while video.isOpened():
     ret, frame = video.read()  # 讀取影片檔案

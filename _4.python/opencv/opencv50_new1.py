@@ -370,7 +370,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 10")
-filename = "data/PerspectiveTransform.jpg"
+filename = r"data/PerspectiveTransform/PerspectiveTransform.jpg"
 # 檔案 => cv2影像
 image = cv2.imread(filename)
 

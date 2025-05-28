@@ -2304,9 +2304,10 @@ namespace _vcs_MakePicture
             int height;
             int xx;
             int yy;
+            int ratio = 2;
 
-            width = 700;
-            height = 700;
+            width = 700 / ratio;
+            height = 700 / ratio;
             bitmap1 = new Bitmap(width, height);
 
             //background
@@ -2322,15 +2323,53 @@ namespace _vcs_MakePicture
             g = Graphics.FromImage(bitmap1);
 
             sb = new SolidBrush(Color.Black);
-            g.FillRectangle(sb, new Rectangle(100, 100, 500, 500));
+            g.FillRectangle(sb, new Rectangle(100 / ratio, 100 / ratio, 500 / ratio, 500 / ratio));
 
             sb = new SolidBrush(Color.White);
-            g.FillRectangle(sb, new Rectangle(200, 200, 300, 300));
+            g.FillRectangle(sb, new Rectangle(200 / ratio, 200 / ratio, 300 / ratio, 300 / ratio));
 
             sb = new SolidBrush(Color.Black);
-            g.FillRectangle(sb, new Rectangle(100, 300, 500, 100));
-            g.FillRectangle(sb, new Rectangle(300, 100, 100, 500));
+            g.FillRectangle(sb, new Rectangle(100 / ratio, 300 / ratio, 500 / ratio, 100 / ratio));
+            g.FillRectangle(sb, new Rectangle(300 / ratio, 100 / ratio, 100 / ratio, 500 / ratio));
 
+
+            sb = new SolidBrush(Color.Black);
+            for (xx = 0; xx < width; xx += 20 / ratio)
+            {
+                g.FillRectangle(sb, new Rectangle(xx, 0, 10 / ratio, 100 / ratio));
+                g.FillRectangle(sb, new Rectangle(xx, 600 / ratio, 10 / ratio, 700 / ratio));
+            }
+            for (yy = 100 / ratio; yy < (height - 100 / ratio); yy += 20 / ratio)
+            {
+                g.FillRectangle(sb, new Rectangle(0, yy, 100 / ratio, 10 / ratio));
+                g.FillRectangle(sb, new Rectangle(600 / ratio, yy, 700 / ratio, 10 / ratio));
+
+            }
+
+            int dd = 2;
+            p = new Pen(Color.Black, dd);
+            g.DrawRectangle(p, new Rectangle(0, 0, width, height));
+
+
+            Font f;
+            f = new Font("標楷體", 12);
+            sb = new SolidBrush(Color.White);
+            g.DrawString("5", f, sb, new PointF(100 / ratio, 100 / ratio));
+            g.DrawString("50", f, sb, new PointF(220 / ratio, 310 / ratio));
+
+            int r = 43;
+            sb = new SolidBrush(Color.White);
+            f = new Font("標楷體", 8);
+            int dx = 20 / ratio + 1;
+
+            for (xx = 110 / ratio; xx < (width - 100 / ratio - 20); xx += dx)
+            {
+                //DrawCircle(g, p, xx, 150, r);
+                //FillCircle(g, sb, xx, 150, (r % 10));
+                g.FillRectangle(sb, new Rectangle(xx, 150 / ratio - 5, (r % 11), (r % 11)));
+                g.DrawString((r % 11).ToString(), f, sb, new PointF(xx - 4, 150 / ratio + 8));
+                r--;
+            }
             pictureBox1.Image = bitmap1;
         }
 
@@ -2491,8 +2530,6 @@ namespace _vcs_MakePicture
             sb = new SolidBrush(Color.FromArgb(255, 0x00, 0x00, 0x00));
             g.FillRectangle(sb, new Rectangle(x_st + dx * 5, y_st + dy * 3, w, h));
 
-
-
             filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
             bitmap1.Save(@filename, ImageFormat.Bmp);
             richTextBox1.Text += "已存檔 : " + filename + "\n";
@@ -2617,8 +2654,6 @@ namespace _vcs_MakePicture
             g.FillRectangle(sb, 0, 0, 400, 400);
 
             pictureBox1.Image = bitmap1;
-
-
         }
 
         private void button67_Click(object sender, EventArgs e)
@@ -2822,6 +2857,65 @@ namespace _vcs_MakePicture
 
         private void button69_Click(object sender, EventArgs e)
         {
+            //opencv 做 dilate erode 用
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 512;
+            height = 512;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    if (yy < height / 2)
+                    {
+                        bitmap1.SetPixel(xx, yy, Color.White);
+                    }
+                    else
+                    {
+                        bitmap1.SetPixel(xx, yy, Color.Black);
+                    }
+                }
+            }
+            /*
+            for (yy = 312; yy < 412; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    bitmap1.SetPixel(xx, yy, Color.FromArgb(255, ((xx / 2) % 256), ((xx / 2) % 256), ((xx / 2) % 256)));
+                }
+            }
+            for (yy = 412; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 255 - ((xx / 2) % 256), 255 - ((xx / 2) % 256), 255 - ((xx / 2) % 256)));
+                }
+            }
+            */
+            g = Graphics.FromImage(bitmap1);
+
+            Font f;
+            f = new Font("標楷體", 12);
+            sb = new SolidBrush(Color.Red);
+            int w = 26;
+            int h = 26;
+
+            for (int i = 0; i < 256; i++)
+            {
+                //g.DrawString(i.ToString(), f, sb, new PointF((i % 16) * 32, 19 * (i / 16)));
+
+                sb = new SolidBrush(Color.FromArgb(255, i, i, i));
+                g.FillRectangle(sb, new Rectangle((i % 16) * 32, 32 * (i / 16), w, h));
+            }
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button70_Click(object sender, EventArgs e)
@@ -3663,6 +3757,11 @@ namespace _vcs_MakePicture
         void DrawCircle(Graphics g, Pen p, int cx, int cy, int r)
         {
             g.DrawEllipse(p, cx - r, cy - r, r * 2, r * 2);
+        }
+
+        void FillCircle(Graphics g, SolidBrush sb, int cx, int cy, int r)
+        {
+            g.FillEllipse(sb, new Rectangle(cx - r, cy - r, r * 2, r * 2));
         }
 
         void DrawCross(Graphics g, Pen p, int cx, int cy, int r)

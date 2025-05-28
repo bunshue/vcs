@@ -1037,6 +1037,7 @@
             this.button69.Name = "button69";
             this.button69.Size = new System.Drawing.Size(60, 60);
             this.button69.TabIndex = 73;
+            this.button69.Text = "亮度文字";
             this.button69.UseVisualStyleBackColor = true;
             this.button69.Click += new System.EventHandler(this.button69_Click);
             // 
