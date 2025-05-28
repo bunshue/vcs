@@ -38,7 +38,33 @@ def show():
     plt.show()
     pass
 
-'''
+
+maxval = 255  # 定義像素最大值
+width, height = 640, 480  # 影像寬, 影像高
+
+print("------------------------------------------------------------")  # 60個
+
+print("製作隨機影像")
+
+# 使用random.randint()建立GRAY影像陣列
+src = np.random.randint(0, 256, size=[height, width], dtype=np.uint8)  # gray
+# src = np.random.randint(256, size=[height, width, 3], dtype=np.uint8)  # 3維
+
+cv2.imshow("Src", src)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+src = np.random.randint(256, size=(height, width))  # 建立矩陣
+# print(f"矩陣內容 = \n{src}")
+
+minVal, maxVal, minLoc, maxLoc = cv2.minMaxLoc(src)
+print(f"最小值 = {minVal},  位置 = {minLoc}")  # 最小值與其位置
+print(f"最大值 = {maxVal},  位置 = {maxLoc}")  # 最大值與其位置
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 print("-------------------- ----------------------------------------")  # 60個
 # OpenCV 運算
@@ -796,19 +822,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch5_6.py
-
-width, height = 640, 480  # 影像寬, 影像高
-
-# 使用random.randint()建立GRAY影像陣列
-image = np.random.randint(256, size=[height, width], dtype=np.uint8)
-cv2.imshow("image", image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
 # ch5_7.py
 
 height = 160  # 影像高
@@ -849,23 +862,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch5_9.py
-
-height = 160  # 影像高
-width = 280  # 影像寬
-width, height = 640, 480  # 影像寬, 影像高
-
-# 使用random.randint()建立GRAY影像陣列
-image = np.random.randint(256, size=[height, width, 3], dtype=np.uint8)
-cv2.imshow("image", image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch5_10.py
 
 width, height = 640, 480  # 影像寬, 影像高
 
@@ -1382,7 +1378,7 @@ gamma = 5
 dst = cv2.addWeighted(src1, alpha, src2, beta, gamma)  # 加權和
 print(f"dst = \n {dst}")
 
-print('aaa')
+print("aaa")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1405,20 +1401,17 @@ cv2.imshow("R + G", dst)  # 顯示結果
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-'''
+
 print("------------------------------------------------------------")  # 60個
 # OpenCV_09_閾值處理
 print("------------------------------------------------------------")  # 60個
 
 width, height = 64, 48  # 影像寬, 影像高
 
-thresh = 160  # 定義閾值
-maxval = 255  # 定義像素最大值
 src = np.random.randint(0, 256, size=[height, width], dtype=np.uint8)
+
+thresh = 160  # 定義閾值
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
-print(f"src =\n {src}")
-print(f"threshold = {ret}")
-print(f"dst =\n {dst}")
 
 plt.subplot(121)
 plt.title("src")
@@ -1434,9 +1427,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-maxval = 255  # 定義像素最大值
-
-src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
+src = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
+# src = cv2.imread(filename2)
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst1 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
@@ -1463,21 +1455,57 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-maxval = 255  # 定義像素最大值
-thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+filename = "C:/_git/vcs/_4.python/opencv/data/threshold/threshold1.png"
+src = cv2.imread(filename)
 
-src = cv2.imread(filename2)
-cv2.imshow("Src", src)
-
+thresh = 127  # 閾值 = 127
 ret, dst1 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
-cv2.imshow("threshold 127", dst1)
 
-thresh = 80  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+thresh = 10  # 更改閾值 = 10
 ret, dst2 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
-cv2.imshow("threshold 80", dst2)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+thresh = 127  # 閾值 = 127
+ret, dst3 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
+
+thresh = 10  # 更改閾值 = 10
+ret, dst4 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
+
+plt.subplot(231)
+plt.title("src")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(232)
+plt.title("threshold 127")
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(233)
+plt.title("threshold 10")
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(235)
+plt.title("threshold 127 inv")
+plt.imshow(cv2.cvtColor(dst3, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(236)
+plt.title("threshold 10 inv")
+plt.imshow(cv2.cvtColor(dst4, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
+
+thresh = 127  # 定義閾值
+ret, dst1 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
+
+thresh = 80  # 修訂所定義的閾值
+ret, dst2 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
 
 plt.subplot(131)
 plt.title("src")
@@ -1485,12 +1513,12 @@ plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.axis("off")
 
 plt.subplot(132)
-plt.title("dst1")
+plt.title("threshold 127")
 plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.axis("off")
 
 plt.subplot(133)
-plt.title("dst2")
+plt.title("threshold 80")
 plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.axis("off")
 
@@ -1498,325 +1526,309 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-maxval = 255  # 二值化的極大值
+src = cv2.imread(filename2)
 
-src = cv2.imread("threshold1.png")
-cv2.imshow("Src", src)
+thresh = 127  # 定義閾值
+ret, dst1 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
 
-thresh = 127  # 閾值 = 127
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
-cv2.imshow("threshold 127", dst)
+thresh = 80  # 修訂所定義的閾值
+ret, dst2 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
 
-thresh = 10  # 更改閾值 = 10
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
-cv2.imshow("threshold 10", dst)
+plt.subplot(131)
+plt.title("src")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
 
-thresh = 127  # 閾值 = 127
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
-cv2.imshow("threshold 127 inv", dst)
+plt.subplot(132)
+plt.title("threshold 127")
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
 
-thresh = 10  # 更改閾值 = 10
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
-cv2.imshow("threshold 10 inv", dst)
+plt.subplot(133)
+plt.title("threshold 80")
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch9_5.py
-
-thresh = 127  # 定義閾值
-maxval = 255  # 定義像素最大值
 src = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
-print(f"src =\n {src}")
-print(f"threshold = {ret}")
-print(f"dst =\n {dst}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch9_6.py
 
 thresh = 127  # 定義閾值
-maxval = 255  # 定義像素最大值
+ret, dst1 = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
+
+src = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
+
+thresh = 127  # 定義閾值
+ret, dst2 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
+
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("Src", src)
-
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
-cv2.imshow("threshold 127", dst)
-
-thresh = 80  # 修訂所定義的閾值
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
-cv2.imshow("threshold 80", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch9_7.py
 
 thresh = 127  # 定義閾值
-maxval = 255  # 定義像素最大值
+ret, dst1 = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
+
+thresh = 80  # 修訂所定義的閾值
+ret, dst2 = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
+
+plt.subplot(131)
+plt.title("src")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(132)
+plt.title("threshold 127")
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(133)
+plt.title("threshold 80")
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread(filename2)
-cv2.imshow("Src", src)
 
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
-cv2.imshow("threshold 127", dst)
+thresh = 127  # 定義閾值
+ret, dst1 = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
 
 thresh = 80  # 修訂所定義的閾值
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
-cv2.imshow("threshold 80", dst)
+ret, dst2 = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(131)
+plt.title("src")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(132)
+plt.title("threshold 127")
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(133)
+plt.title("threshold 80")
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch9_8.py
-
-
-print("------------------------------------------------------------")  # 60個
-
-# ch9_9.py
-
-thresh = 127  # 定義閾值
-maxval = 255  # 定義像素最大值
 src = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
-print(f"src =\n {src}")
-print(f"threshold = {ret}")
-print(f"dst =\n {dst}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch9_10.py
 
 thresh = 127  # 定義閾值
-maxval = 255  # 定義像素最大值
+ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
+
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("Src", src)
-
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
-cv2.imshow("threshold 127", dst)
-
-thresh = 80  # 修訂所定義的閾值
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
-cv2.imshow("threshold 80", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch9_11.py
 
 thresh = 127  # 定義閾值
-maxval = 255  # 定義像素最大值
+ret, dst1 = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
+
+thresh = 80  # 修訂所定義的閾值
+ret, dst2 = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
+
+plt.subplot(131)
+plt.title("src")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(132)
+plt.title("threshold 127")
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(133)
+plt.title("threshold 80")
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread(filename2)
-cv2.imshow("Src", src)
 
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
-cv2.imshow("threshold 127", dst)
+thresh = 127  # 定義閾值
+ret, dst1 = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
 
 thresh = 80  # 修訂所定義的閾值
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
-cv2.imshow("threshold 127", dst)
+ret, dst2 = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(131)
+plt.title("src")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(132)
+plt.title("threshold 127")
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(133)
+plt.title("threshold 80")
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch9_12.py
-
-thresh = 127  # 定義閾值
-maxval = 255  # 定義像素最大值
 src = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
-print(f"src =\n {src}")
-print(f"threshold = {ret}")
-print(f"dst =\n {dst}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch9_13.py
 
 thresh = 127  # 定義閾值
-maxval = 255  # 定義像素最大值
+ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
+
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("Src", src)
-
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
-cv2.imshow("threshold 127", dst)
-
-thresh = 80  # 修訂所定義的閾值
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
-cv2.imshow("threshold 80", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch9_14.py
 
 thresh = 127  # 定義閾值
-maxval = 255  # 定義像素最大值
+ret, dst1 = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
+
+thresh = 80  # 修訂所定義的閾值
+ret, dst2 = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
+
+plt.subplot(131)
+plt.title("src")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(132)
+plt.title("threshold 127")
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(133)
+plt.title("threshold 80")
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread(filename2)
-cv2.imshow("Src", src)
 
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
-cv2.imshow("threshold 127", dst)
+thresh = 127  # 定義閾值
+ret, dst1 = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
 
 thresh = 80  # 修訂所定義的閾值
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
-cv2.imshow("threshold 80", dst)
+ret, dst2 = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(131)
+plt.title("src")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
 
-print("------------------------------------------------------------")  # 60個
+plt.subplot(132)
+plt.title("threshold 127")
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
 
-# ch9_15.py
+plt.subplot(133)
+plt.title("threshold 80")
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
 
-thresh = 127  # 定義閾值
-maxval = 255  # 定義像素最大值
-src = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
-print(f"src =\n {src}")
-print(f"threshold = {ret}")
-print(f"dst =\n {dst}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch9_16.py
-
-thresh = 127  # 定義閾值
-maxval = 255  # 定義像素最大值
-
-src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("Src", src)
-
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
-cv2.imshow("threshold 127", dst)
-
-thresh = 80  # 修訂所定義的閾值
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
-cv2.imshow("threshold 80", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch9_17.py
-
-thresh = 127  # 定義閾值
-maxval = 255  # 定義像素最大值
-
-src = cv2.imread(filename2)
-cv2.imshow("Src", src)
-
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
-cv2.imshow("threshold 127", dst)
-
-thresh = 80  # 修訂所定義的閾值
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
-cv2.imshow("threshold 80", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch9_18.py
-
-thresh = 127  # 定義閾值
-maxval = 255  # 定義像素最大值
 src = np.ones((3, 4), dtype=np.uint8) * 120  # 設定陣列是 120
 src[0:2, 0:2] = 108  # 設定陣列區間為 0
+
+thresh = 127  # 定義閾值
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
-print(f"src =\n {src}")
-print(f"threshold = {ret}")
-print(f"dst =\n {dst}")
 
 print("------------------------------------------------------------")  # 60個
 
-# ch9_19.py
+src = np.ones((3, 4), dtype=np.uint8) * 120  # 設定陣列是 120
+src[0:2, 0:2] = 108  # 設定陣列區間為 0
 
 thresh = 0  # 定義閾值
-maxval = 255  # 定義像素最大值
-src = np.ones((3, 4), dtype=np.uint8) * 120  # 設定陣列是 120
-src[0:2, 0:2] = 108  # 設定陣列區間為 0
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-print(f"src =\n {src}")
-print(f"threshold = {ret}")
-print(f"dst =\n {dst}")
 
 print("------------------------------------------------------------")  # 60個
-
-# ch9_20.py
-
-thresh = 127  # 定義閾值 = 127
-maxval = 255  # 定義像素最大值
 
 src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("Src", src)
 
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
-cv2.imshow("Src - 127", dst)  # threshold = 127
+thresh = 127  # 定義閾值 = 127
+ret, dst1 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
 
 thresh = 0  # 定義閾值 = 0
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-cv2.imshow("Dst - Otsu", dst)  # Otsu
+ret, dst2 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
-print(f"threshold = {ret}")
+plt.subplot(131)
+plt.title("src")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(132)
+plt.title("threshold 127")
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(133)
+plt.title("threshold + Ostu")
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch9_21.py
+src = cv2.imread("school.jpg", cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 thresh = 127  # 閾值
-maxval = 255  # 定義像素最大值
-
-src = cv2.imread("school.jpg", cv2.IMREAD_GRAYSCALE)  # 灰階讀取
-cv2.imshow("src", src)
-
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
-cv2.imshow("THRESH_BINARY", dst)  # 顯示二值化處理影像
 
 # 自適應閾值計算方法為ADAPTIVE_THRESH_MEAN_C
 dst_mean = cv2.adaptiveThreshold(
     src, maxval, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 3, 5
 )
-cv2.imshow("ADAPTIVE_THRESH_MEAN_C", dst_mean)  # 顯示自適應閾值結果
 
 # 自適應閾值計算方法為ADAPTIVE_THRESH_GAUSSIAN_C
 dst_gauss = cv2.adaptiveThreshold(
     src, maxval, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 3, 5
 )
-cv2.imshow("ADAPTIVE_THRESH_GAUSSIAN_C", dst_gauss)  # 顯示自適應閾值結果
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(221)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(222)
+plt.title("THRESH_BINARY 二值化處理")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(223)
+plt.title("ADAPTIVE_THRESH_MEAN_C 自適應閾值")
+plt.imshow(cv2.cvtColor(dst_mean, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(224)
+plt.title("ADAPTIVE_THRESH_GAUSSIAN_C 自適應閾值")
+plt.imshow(cv2.cvtColor(dst_gauss, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch9_22.py
-
 img = cv2.imread(filename3, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("Lena", img)
+
+plt.subplot(331)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
 
 row, column = img.shape
 x = np.zeros((row, column, 8), dtype=np.uint8)
@@ -1830,72 +1842,96 @@ for i in range(8):
     result[:, :, i] = cv2.bitwise_and(img, x[:, :, i])
     mask = result[:, :, i] > 0  # 影像邏輯值
     result[mask] = 255  # True的位置填255
-    cv2.imshow(str(i), result[:, :, i])
+    plt.subplot(3, 3, i + 2)
+    plt.title(str(i))
+    plt.imshow(cv2.cvtColor(result[:, :, i], cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+    plt.axis("off")
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 # ch9_23.py
 
-jk = cv2.imread(filename3, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("Lena", jk)
+src = cv2.imread(filename3, cv2.IMREAD_GRAYSCALE)
+cv2.imshow("Lena", src)
 
-row, column = jk.shape  # 取得列高和欄寬
+row, column = src.shape  # 取得列高和欄寬
 
 h7 = np.ones((row, column), dtype=np.uint8) * 254  # 建立像素值是254的影像
 cv2.imshow("254", h7)  # 顯示像素值是254的影像
 
-new_jk = cv2.bitwise_and(jk, h7)  # 原始影像最低有效位元是 0
-cv2.imshow("New Lena", new_jk)
+new_src = cv2.bitwise_and(src, h7)  # 原始影像最低有效位元是 0
+cv2.imshow("New Lena", new_src)
+
+
+plt.subplot(131)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(132)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(h7, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(133)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(new_src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch9_24.py
+src = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
+cv2.imshow("Peony", src)
 
-jk = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)
-cv2.imshow("JK Hung", jk)
+print(src.shape)
 
-row, column = jk.shape  # 取得列高和欄寬
+row, column = src.shape  # 取得列高和欄寬
 
 h7 = np.ones((row, column), dtype=np.uint8) * 254  # 建立像素值是254的影像
-tmp_jk = cv2.bitwise_and(jk, h7)  # 原始影像最低有效位元是 0
+tmp_src = cv2.bitwise_and(src, h7)  # 原始影像最低有效位元是 0
+
 watermark = cv2.imread("copyright.jpg", cv2.IMREAD_GRAYSCALE)
+watermark = cv2.resize(watermark, (column, row))  # 重設影像大小
+
 cv2.imshow("Copy Right", watermark)  # 顯示浮水印影像
 
 ret, wm = cv2.threshold(watermark, 0, 1, cv2.THRESH_BINARY)
+
 # 浮水印影像嵌入最低有效位元是 0的原始影像
-new_jk = cv2.bitwise_or(tmp_jk, wm)
-cv2.imshow("New JK", new_jk)
+new_src = cv2.bitwise_or(tmp_src, wm)
+cv2.imshow("New Peony", new_src)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch9_25.py
+src = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
+cv2.imshow("Peony", src)
 
-jk = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)
-cv2.imshow("JK Hung", jk)
-
-row, column = jk.shape  # 取得列高和欄寬
+row, column = src.shape  # 取得列高和欄寬
 h7 = np.ones((row, column), dtype=np.uint8) * 254  # 建立像素值是254的影像
-tmp_jk = cv2.bitwise_and(jk, h7)  # 原始影像最低有效位元是 0
+tmp_src = cv2.bitwise_and(src, h7)  # 原始影像最低有效位元是 0
 watermark = cv2.imread("copyright.jpg", cv2.IMREAD_GRAYSCALE)
+watermark = cv2.resize(watermark, (column, row))  # 重設影像大小
+
 cv2.imshow("original watermark", watermark)  # 顯示浮水印影像
 
 ret, wm = cv2.threshold(watermark, 0, 1, cv2.THRESH_BINARY)
 
-new_jk = cv2.bitwise_or(tmp_jk, wm)  # 浮水印影像嵌入原始影像
-cv2.imshow("New JK", new_jk)
+new_src = cv2.bitwise_or(tmp_src, wm)  # 浮水印影像嵌入原始影像
+cv2.imshow("New Peony", new_src)
 
 # 擷取浮水印
 h0 = np.ones((row, column), dtype=np.uint8)
-wm = cv2.bitwise_and(new_jk, h0)
+wm = cv2.bitwise_and(new_src, h0)
 ret, dst = cv2.threshold(wm, 0, 255, cv2.THRESH_BINARY)
 cv2.imshow("result Watermark", dst)  # 顯示浮水印
 
@@ -1931,24 +1967,39 @@ print("------------------------------------------------------------")  # 60個
 
 print("cv2.flip()")
 
-print("原圖")
 src = cv2.imread(filename1)
-cv2.imshow("Src", src)
 
 print("上下顛倒")
 dst1 = cv2.flip(src, 0)  # 垂直翻轉
-cv2.imshow("dst1 - Flip Vertically", dst1)  # 顯示垂直影像
 
 print("左右顛倒")
 dst2 = cv2.flip(src, 1)  # 水平翻轉
-cv2.imshow("dst2 - Flip Horizontally", dst2)  # 顯示水平影像
+
 
 print("上下顛倒 + 左右顛倒")
 dst3 = cv2.flip(src, -1)  # 水平與垂直翻轉
-cv2.imshow("dst3 - Horizontally and Vertically", dst3)  # 顯示水平與垂直影像
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(221)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(222)
+plt.title("上下顛倒")
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(223)
+plt.title("左右顛倒")
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(224)
+plt.title("上下顛倒 + 左右顛倒")
+plt.imshow(cv2.cvtColor(dst3, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1985,8 +2036,8 @@ cv2.imshow("CCW 30", dst1)
 
 print("順時鐘 旋轉 30 度")
 M = cv2.getRotationMatrix2D((width / 2, height / 2), -30, 1)  # 建立 M 矩陣
-dst = cv2.warpAffine(src, M, dsize)  # 執行仿射
-cv2.imshow("CW 30", dst)
+dst2 = cv2.warpAffine(src, M, dsize)  # 執行仿射
+cv2.imshow("CW 30", dst2)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -2081,11 +2132,13 @@ a1 = [0, 0]  # 原始影像的 A
 b1 = [width, 0]  # 原始影像的 B
 c1 = [0, height]  # 原始影像的 C
 d1 = [width - 1, height - 1]  # 原始影像的 D
+
 srcp = np.float32([a1, b1, c1, d1])
 a2 = [150, 0]  # dst的 A
 b2 = [width - 150, 0]  # dst的 B
 c2 = [0, height - 1]  # dst的 C
 d2 = [width - 1, height - 1]  # dst的 D
+
 dstp = np.float32([a2, b2, c2, d2])
 M = cv2.getPerspectiveTransform(srcp, dstp)  # 建立 M 矩陣
 dsize = (width, height)
@@ -2097,17 +2150,13 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch10_10_1.py
-
 src = np.random.randint(0, 256, size=[3, 4], dtype=np.uint8)
 rows, cols = src.shape
 mapx = np.ones(src.shape, np.float32) * 3  # 設定 mapx
 mapy = np.ones(src.shape, np.float32) * 2  # 設定 mapy
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
-print(f"src =\n {src}")
 print(f"mapx =\n {mapx}")
 print(f"mapy =\n {mapy}")
-print(f"dst =\n {dst}")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2122,10 +2171,8 @@ for r in range(rows):  # 建立mapx和mapy
         mapx.itemset((r, c), c)  # 設定mapx
         mapy.itemset((r, c), r)  # 設定mapy
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
-print(f"src =\n {src}")
 print(f"mapx =\n {mapx}")
 print(f"mapy =\n {mapy}")
-print(f"dst =\n {dst}")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2160,10 +2207,9 @@ for r in range(rows):  # 建立mapx和mapy
         mapx.itemset((r, c), c)  # 設定mapx
         mapy.itemset((r, c), rows - 1 - r)  # 設定mapy
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
-print(f"src =\n {src}")
+
 print(f"mapx =\n {mapx}")
 print(f"mapy =\n {mapy}")
-print(f"dst =\n {dst}")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2199,10 +2245,9 @@ for r in range(rows):  # 建立mapx和mapy
         mapx.itemset((r, c), cols - 1 - c)  # 設定mapx
         mapy.itemset((r, c), r)  # 設定mapy
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
-print(f"src =\n {src}")
+
 print(f"mapx =\n {mapx}")
 print(f"mapy =\n {mapy}")
-print(f"dst =\n {dst}")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3740,8 +3785,10 @@ print("------------------------------------------------------------")  # 60個
 
 height = 3  # 矩陣高度
 width = 5  # 矩陣寬度
+
 img = np.random.randint(2, size=(height, width))  # 建立0, 1矩陣
 print(f"矩陣內容 = \n{img}")
+
 nonzero_img = np.nonzero(img)  # 獲得非0元素座標
 print(f"非0元素的座標 \n{nonzero_img}")
 
@@ -3798,8 +3845,10 @@ print("------------------------------------------------------------")  # 60個
 
 height = 3  # 矩陣高度
 width = 5  # 矩陣寬度
+
 img = np.random.randint(2, size=(height, width))  # 建立0, 1矩陣
 print(f"矩陣內容 = \n{img}")
+
 loc_img = cv2.findNonZero(img)  # 獲得非0元素座標
 print(f"非0元素的座標 \n{loc_img}")
 
@@ -3836,18 +3885,6 @@ cv2.imshow("dst2", dst2)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch17_16.py
-
-height = 3  # 矩陣高度
-width = 5  # 矩陣寬度
-img = np.random.randint(256, size=(height, width))  # 建立矩陣
-print(f"矩陣內容 = \n{img}")
-minVal, maxVal, minLoc, maxLoc = cv2.minMaxLoc(img)
-print(f"最小值 = {minVal},  位置 = {minLoc}")  # 最小值與其位置
-print(f"最大值 = {maxVal},  位置 = {maxLoc}")  # 最大值與其位置
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4246,9 +4283,6 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("opencv_coin.jpg", cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 
-# 因為在matplotlib模組顯示, 所以必須轉成 RGB 色彩
-rgb_src = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)
-
 # 二值化
 ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
@@ -4264,7 +4298,7 @@ ret, sure_fg = cv2.threshold(dst, 0.7 * dst.max(), 255, 0)  # 前景圖案
 
 plt.subplot(131)
 plt.title("原始影像")
-plt.imshow(rgb_src)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 plt.subplot(132)
@@ -4286,9 +4320,6 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("opencv_coin.jpg", cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 
-# 因為在matplotlib模組顯示, 所以必須轉成 RGB 色彩
-rgb_src = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)
-
 ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 kernel = np.ones((3, 3), np.uint8)
 
@@ -4303,7 +4334,7 @@ ret, sure_fg = cv2.threshold(dst, 0.5 * dst.max(), 255, 0)  # 前景圖案
 
 plt.subplot(131)
 plt.title("原始影像")
-plt.imshow(rgb_src)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 plt.subplot(132)
@@ -4324,9 +4355,6 @@ print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("opencv_coin.jpg", cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
-
-# 因為在matplotlib模組顯示, 所以必須轉成 RGB 色彩
-rgb_src = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)
 
 # 二值化
 ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
@@ -4350,7 +4378,7 @@ unknown = cv2.subtract(sure_bg, sure_fg)
 
 plt.subplot(141)
 plt.title("原始影像")
-plt.imshow(rgb_src)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 plt.subplot(142)
@@ -4377,9 +4405,6 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("opencv_coin.jpg", cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 
-# 因為在matplotlib模組顯示, 所以必須轉成 RGB 色彩
-rgb_src = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)
-
 # 二值化
 ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
@@ -4405,7 +4430,7 @@ ret, markers = cv2.connectedComponents(sure_fg)
 
 plt.subplot(131)
 plt.title("原始影像")
-plt.imshow(rgb_src)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 plt.subplot(132)
@@ -4427,7 +4452,6 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("opencv_coin.jpg", cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 
-# 因為在matplotlib模組顯示, 所以必須轉成 RGB 色彩
 rgb_src = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)
 
 # 二值化
@@ -4483,7 +4507,6 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("opencv_coin.jpg", cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 
-# 因為在matplotlib模組顯示, 所以必須轉成 RGB 色彩
 rgb_src = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)
 
 # 二值化
@@ -4540,24 +4563,24 @@ bgdModel = np.zeros((1, 65), np.float64)  # 建立內部用暫時計算陣列
 fgdModel = np.zeros((1, 65), np.float64)  # 建立內部用暫時計算陣列
 rect = (10, 30, 380, 360)  # 建立ROI區域
 # 呼叫grabCut()進行分割, 迭代 3 次, 回傳mask1
+
 # 其實mask1 = mask, 因為mask也會同步更新
 mask1, bgd, fgd = cv2.grabCut(
     src, mask, rect, bgdModel, fgdModel, 3, cv2.GC_INIT_WITH_RECT
 )
+
 # 將 0, 2設為0 --- 1, 3設為1
 mask2 = np.where((mask1 == 0) | (mask1 == 2), 0, 1).astype("uint8")
 dst = src * mask2[:, :, np.newaxis]  # 計算輸出影像
-src_rgb = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)  # 將BGR轉RGB
-dst_rgb = cv2.cvtColor(dst, cv2.COLOR_BGR2RGB)  # 將BGR轉RGB
 
 plt.subplot(121)
 plt.title("原始影像")
-plt.imshow(src_rgb)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 plt.subplot(122)
 plt.title("擷取影像")
-plt.imshow(dst_rgb)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 show()
@@ -4580,23 +4603,20 @@ mask[newmask == 255] = 1  # 黑色內容則確定是背景
 cv2.grabCut(src, mask, None, bgdModel, fgdModel, 3, cv2.GC_INIT_WITH_MASK)
 mask = np.where((mask == 0) | (mask == 2), 0, 1).astype("uint8")
 dst = src * mask[:, :, np.newaxis]  # 計算輸出影像
-src_rgb = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)  # 將BGR轉RGB
-maskpict_rgb = cv2.cvtColor(maskpict, cv2.COLOR_BGR2RGB)
-dst_rgb = cv2.cvtColor(dst, cv2.COLOR_BGR2RGB)  # 將BGR轉RGB
 
 plt.subplot(131)
 plt.title("原始影像")
-plt.imshow(src_rgb)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 plt.subplot(132)
 plt.title("遮罩影像")
-plt.imshow(maskpict_rgb)
+plt.imshow(cv2.cvtColor(maskpict, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 plt.subplot(133)
 plt.title("擷取影像")
-plt.imshow(dst_rgb)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 show()
@@ -4618,17 +4638,15 @@ mask1, bgd, fgd = cv2.grabCut(
 # 將 0, 2設為0 --- 1, 3設為1
 mask2 = np.where((mask1 == 0) | (mask1 == 2), 0, 1).astype("uint8")
 dst = src * mask2[:, :, np.newaxis]  # 計算輸出影像
-src_rgb = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)  # 將BGR轉RGB
-dst_rgb = cv2.cvtColor(dst, cv2.COLOR_BGR2RGB)  # 將BGR轉RGB
 
 plt.subplot(121)
 plt.title("原始影像")
-plt.imshow(src_rgb)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 plt.subplot(122)
 plt.title("擷取影像")
-plt.imshow(dst_rgb)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 show()
@@ -4652,17 +4670,15 @@ mask1, bgd, fgd = cv2.grabCut(
 # 將 0, 2設為0 --- 1, 3設為1
 mask2 = np.where((mask1 == 0) | (mask1 == 2), 0, 1).astype("uint8")
 dst = src * mask2[:, :, np.newaxis]  # 計算輸出影像
-src_rgb = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)  # 將BGR轉RGB
-dst_rgb = cv2.cvtColor(dst, cv2.COLOR_BGR2RGB)  # 將BGR轉RGB
 
 plt.subplot(121)
 plt.title("原始影像")
-plt.imshow(src_rgb)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 plt.subplot(122)
 plt.title("擷取影像")
-plt.imshow(dst_rgb)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 show()
@@ -4683,24 +4699,19 @@ kernal = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
 mask = cv2.dilate(mask, kernal)
 dst = cv2.inpaint(lisa, mask[:, :, -1], 5, cv2.INPAINT_NS)
 
-# 輸出執行結果
-lisa_rgb = cv2.cvtColor(lisa, cv2.COLOR_BGR2RGB)  # 將BGR轉RGB
-mask_rgb = cv2.cvtColor(mask, cv2.COLOR_BGR2RGB)  # 將BGR轉RGB
-dst_rgb = cv2.cvtColor(dst, cv2.COLOR_BGR2RGB)  # 將BGR轉RGB
-
 plt.subplot(131)
 plt.title("原始影像")
-plt.imshow(lisa_rgb)
+plt.imshow(cv2.cvtColor(lisa, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 plt.subplot(132)
 plt.title("遮罩影像")
-plt.imshow(mask_rgb)
+plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 plt.subplot(133)
 plt.title("影像修復結果")
-plt.imshow(dst_rgb)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 show()
@@ -4717,24 +4728,19 @@ kernal = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
 mask = cv2.dilate(mask, kernal)
 dst = cv2.inpaint(lisa, mask[:, :, -1], 5, cv2.INPAINT_TELEA)
 
-# 輸出執行結果
-lisa_rgb = cv2.cvtColor(lisa, cv2.COLOR_BGR2RGB)  # 將BGR轉RGB
-mask_rgb = cv2.cvtColor(mask, cv2.COLOR_BGR2RGB)  # 將BGR轉RGB
-dst_rgb = cv2.cvtColor(dst, cv2.COLOR_BGR2RGB)  # 將BGR轉RGB
-
 plt.subplot(131)
 plt.title("原始影像")
-plt.imshow(lisa_rgb)
+plt.imshow(cv2.cvtColor(lisa, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 plt.subplot(132)
 plt.title("遮罩影像")
-plt.imshow(mask_rgb)
+plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 plt.subplot(133)
 plt.title("影像修復結果")
-plt.imshow(dst_rgb)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 show()
@@ -4749,6 +4755,7 @@ data1 = np.random.randint(0, 10, size=5)
 print(f"陣列外形 = {data1.shape}")
 print(f"輸出陣列 = {data1}")
 print(f"data1[0] = {data1[0]}")
+
 data2 = np.random.randint(0, 10, size=(5, 1))
 print(f"矩陣外形 = {data2.shape}")
 print(f"輸出矩陣 = \n{data2}")
@@ -4760,10 +4767,12 @@ print("------------------------------------------------------------")  # 60個
 # ch25_2.py
 
 np.random.seed(5)
+
 data1 = np.random.randint(0, 10, size=5)
 print(f"陣列外形 = {data1.shape}")
 print(f"輸出陣列 = {data1}")
 print(f"data1[0] = {data1[0]}")
+
 data2 = np.random.randint(0, 10, size=(5, 1))
 print(f"矩陣外形 = {data2.shape}")
 print(f"輸出矩陣 = \n{data2}")
@@ -4785,14 +4794,18 @@ print("------------------------------------------------------------")  # 60個
 np.random.seed(1)
 trains = np.random.randint(0, 10, size=(5, 2))
 print(f"列出二維陣列 \n{trains}")
+
 np.random.seed(5)
+
 # 建立分類, 未來 0 代表 red,  1 代表 blue
 labels = np.random.randint(0, 2, (5, 1))
 print(f"列出顏色分類陣列 \n{labels}")
+
 # 列出 0 代表的紅色
 red = trains[labels.ravel() == 0]
 print(f"輸出紅色的二維陣列 \n{red}")
 print(f"配對取出 \n{red[:,0], red[:,1]}")
+
 # 列出 1 代表的藍色
 blue = trains[labels.ravel() == 1]
 print(f"輸出藍色的二維陣列 \n{blue}")
@@ -4805,12 +4818,16 @@ print("------------------------------------------------------------")  # 60個
 num = 30  # 數據數量
 np.random.seed(5)
 trains = np.random.randint(0, 100, size=(num, 2))
+
 np.random.seed(1)
+
 # 建立分類, 未來 0 代表 red,  1 代表 blue
 labels = np.random.randint(0, 2, (num, 1))
+
 # 列出紅色方塊訓練數據
 red = trains[labels.ravel() == 0]
 plt.scatter(red[:, 0], red[:, 1], 50, "r", "s")  # 50是繪圖點大小
+
 # 列出藍色三角形訓練數據
 blue = trains[labels.ravel() == 1]
 plt.scatter(blue[:, 0], blue[:, 1], 50, "b", "^")  # 50是繪圖點大小
@@ -4822,24 +4839,31 @@ print("------------------------------------------------------------")  # 60個
 
 num = 30  # 數據數量
 np.random.seed(5)
+
 # 建立訓練數據 train, 需轉為 32位元浮點數
 trains = np.random.randint(0, 100, size=(num, 2)).astype(np.float32)
 np.random.seed(1)
+
 # 建立分類, 未來 0 代表 red,  1 代表 blue
 labels = np.random.randint(0, 2, (num, 1)).astype(np.float32)
+
 # 列出紅色方塊訓練數據
 red = trains[labels.ravel() == 0]
 plt.scatter(red[:, 0], red[:, 1], 50, "r", "s")  # 50是繪圖點大小
+
 # 列出藍色三角形訓練數據
 blue = trains[labels.ravel() == 1]
 plt.scatter(blue[:, 0], blue[:, 1], 50, "b", "^")  # 50是繪圖點大小
+
 # test 為測試數據, 需轉為 32位元浮點數
 np.random.seed(10)
 test = np.random.randint(0, 100, (1, 2)).astype(np.float32)
 plt.scatter(test[:, 0], test[:, 1], 50, "g", "o")  # 50大小的綠色圓
+
 # 建立 KNN 物件
 knn = cv2.ml.KNearest_create()
 knn.train(trains, cv2.ml.ROW_SAMPLE, labels)  # 訓練數據
+
 # 執行 KNN 分類
 ret, results, neighbours, dist = knn.findNearest(test, k=3)
 print(f"最後分類              result = {results}")
@@ -4852,26 +4876,34 @@ print("------------------------------------------------------------")  # 60個
 # ch25_7.py
 
 num = 30  # 數據數量
+
 np.random.seed(5)
+
 # 建立 0 - 50 間的訓練數據 train0, 需轉為 32位元浮點數
 train0 = np.random.randint(0, 50, (num // 2, 2)).astype(np.float32)
+
 # 建立 50 - 100 間的訓練數據 train1, 需轉為 32位元浮點數
 train1 = np.random.randint(50, 100, (num // 2, 2)).astype(np.float32)
 trains = np.vstack((train0, train1))  # 合併訓練數據
+
 # 建立分類, 未來 0 代表 red,  1 代表 blue
 label0 = np.zeros((num // 2, 1)).astype(np.float32)
 label1 = np.ones((num // 2, 1)).astype(np.float32)
 labels = np.vstack((label0, label1))
+
 # 列出紅色方塊訓練數據
 red = trains[labels.ravel() == 0]
 plt.scatter(red[:, 0], red[:, 1], 50, "r", "s")  # 50是繪圖點大小
+
 # 列出藍色三角形訓練數據
 blue = trains[labels.ravel() == 1]
 plt.scatter(blue[:, 0], blue[:, 1], 50, "b", "^")  # 50是繪圖點大小
+
 # test 為測試數據, 需轉為 32位元浮點數
 np.random.seed(8)
 test = np.random.randint(0, 100, (1, 2)).astype(np.float32)
 plt.scatter(test[:, 0], test[:, 1], 50, "g", "o")  # 50大小的綠色圓
+
 # 建立 KNN 物件
 knn = cv2.ml.KNearest_create()
 knn.train(trains, cv2.ml.ROW_SAMPLE, labels)  # 訓練數據
@@ -5045,8 +5077,6 @@ print("------------------------------------------------------------")  # 60個
 Haar-like features 哈爾特徵
 匈牙利 Afred Haar
 """
-
-# ch27_1.py
 # 偵測正面人臉 haarcascade_frontalface_default.xml
 
 pic_filename = "C:/_git/vcs/_4.python/opencv/data/_face/face06.jpg"
@@ -5059,24 +5089,7 @@ faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
 )
 
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 140, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    (0, 255, 255),
-    -1,
-)
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Found " + str(len(faces)) + " faces",
-    (img.shape[1] - 135, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    (255, 0, 0),
-    1,
-)
+print("Found " + str(len(faces)) + " faces")
 
 # 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
 for x, y, w, h in faces:
@@ -5096,6 +5109,7 @@ xml_filename = (
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
 
 # pic_filename = "C:/_git/vcs/_4.python/opencv/data/_face/face06.jpg"
+# pic_filename = "C:/_git/vcs/_4.python/opencv/data/_face/face02.jpg"
 
 img = cv2.imread("people1.jpg")  # 讀取影像
 bodies = face_cascade_classifier.detectMultiScale(
@@ -5113,8 +5127,10 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch27_11.py
 # 偵測正面人臉 haarcascade_frontalface_default.xml
+
+img = cv2.imread(filename3)  # 讀取影像
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 # 建立人臉物件
 xml_filename1 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
@@ -5126,44 +5142,13 @@ xml_filename2 = (
 )
 face_cascade_classifier2 = cv2.CascadeClassifier(xml_filename2)  # 建立辨識檔案物件
 
-img = cv2.imread(filename3)  # 讀取影像
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-# 偵測人臉
-faces = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
-)
-# 偵測雙眼
-eyes = face_cascade_classifier2.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
-)
-# 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in faces:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
-# 將雙眼框起來, 由於有可能找到好幾個眼睛所以用迴圈繪出來
-for x, y, w, h in eyes:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 綠色框住眼睛
-cv2.imshow("Face", img)  # 顯示影像
+# 建立左眼物件
+xml_filename3 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_lefteye_2splits.xml"
+face_cascade_classifier3 = cv2.CascadeClassifier(xml_filename3)  # 建立辨識檔案物件
 
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch27_12.py
-# 偵測正面人臉 haarcascade_frontalface_default.xml
-
-# 建立人臉物件
-xml_filename1 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
-face_cascade_classifier1 = cv2.CascadeClassifier(xml_filename1)  # 建立辨識檔案物件
-
-# 建立雙眼物件
-xml_filename2 = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_eye.xml"
-)
-face_cascade_classifier2 = cv2.CascadeClassifier(xml_filename2)  # 建立辨識檔案物件
-
-img = cv2.imread(filename3)  # 讀取影像
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# 建立右眼物件
+xml_filename4 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_righteye_2splits.xml"
+face_cascade_classifier4 = cv2.CascadeClassifier(xml_filename4)  # 建立辨識檔案物件
 
 # 偵測人臉
 faces = face_cascade_classifier1.detectMultiScale(
@@ -5173,83 +5158,15 @@ faces = face_cascade_classifier1.detectMultiScale(
 # 偵測雙眼
 eyes = face_cascade_classifier2.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=7, minSize=(20, 20)
-)
-
-# 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in faces:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
-
-# 將雙眼框起來, 由於有可能找到好幾個眼睛所以用迴圈繪出來
-for x, y, w, h in eyes:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 綠色框住眼睛
-
-cv2.imshow("Face", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch27_13.py
-# 偵測正面人臉 haarcascade_frontalface_default.xml
-
-# 建立人臉物件
-xml_filename1 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
-face_cascade_classifier1 = cv2.CascadeClassifier(xml_filename1)  # 建立辨識檔案物件
-
-# 建立左眼物件
-xml_filename2 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_lefteye_2splits.xml"
-face_cascade_classifier2 = cv2.CascadeClassifier(xml_filename2)  # 建立辨識檔案物件
-
-img = cv2.imread(filename3)  # 讀取影像
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-# 偵測人臉
-faces = face_cascade_classifier1.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
 )
 
 # 偵測左眼
-eyes = face_cascade_classifier2.detectMultiScale(
+left_eyes = face_cascade_classifier3.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=7, minSize=(20, 20)
 )
 
-# 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in faces:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
-
-# 將左眼框起來, 由於有可能找到好幾個眼睛所以用迴圈繪出來
-for x, y, w, h in eyes:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 綠色框住眼睛
-
-cv2.imshow("Face", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch27_14.py
-# 偵測正面人臉 haarcascade_frontalface_default.xml
-
-# 建立人臉物件
-xml_filename1 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
-face_cascade_classifier1 = cv2.CascadeClassifier(xml_filename1)  # 建立辨識檔案物件
-
-# 建立右眼物件
-xml_filename2 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_righteye_2splits.xml"
-face_cascade_classifier2 = cv2.CascadeClassifier(xml_filename2)  # 建立辨識檔案物件
-
-img = cv2.imread(filename3)  # 讀取影像
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-# 偵測人臉
-faces = face_cascade_classifier1.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
-)
-
 # 偵測右眼
-eyes = face_cascade_classifier2.detectMultiScale(
+right_eyes = face_cascade_classifier4.detectMultiScale(
     img, scaleFactor=1.3, minNeighbors=7, minSize=(20, 20)
 )
 
@@ -5257,8 +5174,16 @@ eyes = face_cascade_classifier2.detectMultiScale(
 for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
 
-# 將右眼框起來, 由於有可能找到好幾個眼睛所以用迴圈繪出來
+# 將雙眼框起來, 由於有可能找到好幾個眼睛所以用迴圈繪出來
 for x, y, w, h in eyes:
+    cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 綠色框住眼睛
+
+# 將左眼框起來, 由於有可能找到好幾個眼睛所以用迴圈繪出來
+for x, y, w, h in left_eyes:
+    cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 綠色框住眼睛
+
+# 將右眼框起來, 由於有可能找到好幾個眼睛所以用迴圈繪出來
+for x, y, w, h in right_eyes:
     cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 綠色框住眼睛
 
 cv2.imshow("Face", img)  # 顯示影像
@@ -5267,8 +5192,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch27_15.py
 
 # 正面的貓臉 haarcascade_frontalcatface.xml
 
@@ -5277,9 +5200,9 @@ xml_filename = (
 )
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
 
-img = cv2.imread("cat1.jpg")  # 讀取影像
+img = cv2.imread("cat2.jpg")  # 讀取影像
 faces = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
+    img, scaleFactor=1.1, minNeighbors=9, minSize=(20, 20)
 )
 
 # 將貓臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
@@ -5293,53 +5216,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch27_16.py
-# 正面的貓臉 haarcascade_frontalcatface.xml
-
-xml_filename = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalcatface.xml"
-)
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-img = cv2.imread("cat2.jpg")  # 讀取影像
-faces = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=9, minSize=(20, 20)
-)
-
-# 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in faces:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
-
-cv2.imshow("Face", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch27_17.py
-# 偵測車牌, 適用於俄羅斯車牌 haarcascade_russian_plate_number.xml
-
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_russian_plate_number.xml"
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-img = cv2.imread("car.jpg")  # 讀取影像
-plates = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
-)
-
-# 將車牌框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in plates:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住車牌
-
-cv2.imshow("Car Plate", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch27_18.py
 # 偵測車牌, 適用於俄羅斯車牌 haarcascade_russian_plate_number.xml
 
 xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_russian_plate_number.xml"
@@ -5393,24 +5269,9 @@ img = cv2.imread("g5.jpg")  # 讀取影像
 faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
 )
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 140, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    (0, 255, 255),
-    -1,
-)
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Finding " + str(len(faces)) + " face",
-    (img.shape[1] - 135, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    (255, 0, 0),
-    1,
-)
+
+print("Finding " + str(len(faces)) + " face")
+
 # 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
 for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
@@ -5845,7 +5706,8 @@ ret = cv2.imwrite("tmp_out1_7_1.tiff", img)  # 將檔案寫入out1_7_1.tiff
 ret = cv2.imwrite("tmp_out1_7_2.png", img)  # 將檔案寫入out1_7_2.png
 cv2.imwrite("a32.png", a32_image)  # 儲存alpha=32影像
 
-img = cv2.imread("jk.jpg")  # 彩色讀取
+img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+img = cv2.imread(filename1)  # 彩色讀取
 
 # 影像的屬性
 
@@ -5855,22 +5717,52 @@ print(f"dtype = {img.dtype}")
 
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)  # 灰階讀取
-
-print("------------------------------------------------------------")  # 60個
-
 """
 陣列垂直合併 vstack()
 陣列水平合併 hstack()
 """
 
 
-img = cv2.imread("jk.jpg", cv2.IMREAD_GRAYSCALE)
-cv2.imshow("JK Hung", img)
-
+img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
+cv2.imshow("Peony", img)
 
 # 準備搬出
 
-# 製作隨機影像
-dst = np.random.randint(0, 256, (4, 5), np.uint8)
 
+# 標註右下角底色是黃色
+cv2.rectangle(
+    img,
+    (img.shape[1] - 140, img.shape[0] - 20),
+    (img.shape[1], img.shape[0]),
+    (0, 255, 255),
+    -1,
+)
+# 標註找到多少的人臉
+cv2.putText(
+    img,
+    "Found " + str(len(faces)) + " faces",
+    (img.shape[1] - 135, img.shape[0] - 5),
+    cv2.FONT_HERSHEY_COMPLEX,
+    0.5,
+    (255, 0, 0),
+    1,
+)
+
+# 標註右下角底色是黃色
+cv2.rectangle(
+    img,
+    (img.shape[1] - 140, img.shape[0] - 20),
+    (img.shape[1], img.shape[0]),
+    (0, 255, 255),
+    -1,
+)
+# 標註找到多少的人臉
+cv2.putText(
+    img,
+    "Finding " + str(len(faces)) + " face",
+    (img.shape[1] - 135, img.shape[0] - 5),
+    cv2.FONT_HERSHEY_COMPLEX,
+    0.5,
+    (255, 0, 0),
+    1,
+)
