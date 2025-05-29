@@ -13,12 +13,19 @@ import math
 import random
 import numpy as np
 import pandas as pd
+from PIL import Image
+from PIL import ImageSequence
+from PIL import ImageFont, ImageDraw, Image
 
 print("------------------------------------------------------------")  # 60個
 
 ESC = 27
 SPACE = 32
+ENTER = 13
 
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+
+'''
 print("------------------------------------------------------------")  # 60個
 """
 print("OpenCV VideoCapture 04 兩個camera")
@@ -59,7 +66,7 @@ while True:
     cv2.imshow("OpenCV 01", img2)
 
     k = cv2.waitKey(1)
-    if k == ESC:  # ESC
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
 cap1.release()
@@ -107,7 +114,7 @@ while True:
     cv2.imshow("OpenCV 02", output)
 
     k = cv2.waitKey(1)
-    if k == ESC:  # ESC
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
 cap.release()
@@ -153,7 +160,7 @@ while True:
     cv2.imshow("OpenCV 03", frame)
 
     k = cv2.waitKey(1)
-    if k == ESC:  # ESC
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
 cap.release()
@@ -175,7 +182,7 @@ white = 255 - np.zeros((h, w, 4), dtype="uint8")
 a = 0  # 開始時 a 等於 0
 while True:
     k = cv2.waitKey(1)
-    if k == ESC:  # ESC
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
     elif k == SPACE:
         a = 1  # 如果按下空白鍵，讓 a 等於 1
@@ -191,7 +198,7 @@ while True:
 
     cv2.imshow("OpenCV 04", output)  # 顯示圖片
 
-cv2.destroyAllWindows()  # 結束所有視窗
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -218,7 +225,7 @@ while True:
     white = 255 - np.zeros((h, w, 4), dtype="uint8")  # 產生全白圖片
 
     k = cv2.waitKey(1)
-    if k == ESC:  # ESC
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
     elif k == SPACE:  # 按下空白將 a 等於 1
         a = 1
@@ -242,8 +249,8 @@ while True:
 
     cv2.imshow("OpenCV 05", output)  # 顯示圖片
 
-cap.release()  # 所有作業都完成後，釋放資源
-cv2.destroyAllWindows()  # 結束所有視窗
+cap.release()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -281,7 +288,7 @@ while True:
     white = 255 - np.zeros((h, w, 4), dtype="uint8")
 
     k = cv2.waitKey(1)
-    if k == ESC:  # ESC
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
     elif k == SPACE:
         a = 1
@@ -357,7 +364,7 @@ while True:
     cv2.imshow("OpenCV 07", output)
 
     k = cv2.waitKey(1)
-    if k == ESC:  # ESC
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
 cap.release()
@@ -368,8 +375,6 @@ print("------------------------------------------------------------")  # 60個
 """ many
 print("OpenCV VideoCapture 16 Webcam影像轉成gif")
 print("按 ESC 離開")
-
-from PIL import Image, ImageSequence
 
 output = []  # 建立輸出的空串列
 
@@ -394,7 +399,7 @@ while True:
     cv2.imshow("OpenCV 08", frame)
 
     k = cv2.waitKey(1)
-    if k == ESC:  # ESC
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
 cap.release()
@@ -415,10 +420,6 @@ print("------------------------------------------------------------")  # 60個
 print("OpenCV VideoCapture 17 處理影片")
 print("按 ESC 離開")
 
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-
-from PIL import Image, ImageSequence
-
 cap = cv2.VideoCapture(video_filename)  # 開啟影片
 
 source = []  # 建立 source 空串列，記錄影格內容
@@ -438,7 +439,7 @@ while cap.isOpened():
         break
 
     k = cv2.waitKey(1)
-    if k == ESC:  # ESC
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
 cap.release()
@@ -488,8 +489,6 @@ print("------------------------------------------------------------")  # 60個
 print("OpenCV VideoCapture 18 QRCode 偵測器")
 print("按 ESC 離開")
 
-from PIL import ImageFont, ImageDraw, Image
-
 cap = cv2.VideoCapture(0)
 
 
@@ -535,7 +534,7 @@ while True:
     cv2.imshow("OpenCV 09", img)
 
     k = cv2.waitKey(1)
-    if k == ESC:  # ESC
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
 cap.release()
@@ -545,8 +544,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 19 QRCode 偵測器")
 print("按 ESC 離開")
-
-from PIL import ImageFont, ImageDraw, Image
 
 cap = cv2.VideoCapture(0)
 
@@ -604,7 +601,7 @@ while True:
     cv2.imshow("OpenCV 10", img)  # 預覽影像
 
     k = cv2.waitKey(1)
-    if k == ESC:  # ESC
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
 cap.release()
@@ -614,8 +611,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 20 讀取 QR code 圖檔")
 print("按 ESC 離開")
-
-from PIL import ImageFont, ImageDraw, Image
 
 filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_qrcode/QR1.png"
 
@@ -686,7 +681,7 @@ while True:
     cv2.imshow("OpenCV 12", image)
 
     k = cv2.waitKey(1)
-    if k == ESC:  # ESC
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
 cap.release()
@@ -713,7 +708,7 @@ while True:
     cv2.imshow("OpenCV 13b_mask", mask)
 
     k = cv2.waitKey(1)
-    if k == ESC:  # ESC
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
 cap.release()
@@ -737,7 +732,7 @@ while True:
     # frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸，加快速度
 
     k = cv2.waitKey(1)
-    if k == ESC:
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
     # 按下 a 開始選取
@@ -763,8 +758,6 @@ print("------------------------------------------------------------")  # 60個
 """
 print("OpenCV_ai_74 影片")
 
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-
 tracker_list = []
 for i in range(3):
     tracker = cv2.TrackerCSRT_create()  # 創建三組追蹤器
@@ -785,7 +778,7 @@ while True:
     #frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸，加快速度
 
     k = cv2.waitKey(1)
-    if k == ESC:
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
     # 為了避免影片影格太多，所以採用 10 格取一格，加快處理速度
@@ -811,9 +804,7 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
-
 """
-
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV_ai_75")
@@ -832,7 +823,7 @@ while True:
     # frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸加快速度
 
     k = cv2.waitKey(1)
-    if k == ESC:
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
     # 按下 a 的時候開始標記物件外框
@@ -936,12 +927,11 @@ while True:
     cv2.imshow("OpenCV 17", frame)
 
     k = cv2.waitKey(1)
-    if k == ESC:  # ESC
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
-# 釋放所有資源
-cap.release()  # 釋放攝影機
-cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
+cap.release()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -969,7 +959,58 @@ while True:
     cv2.imshow("OpenCV 19", output)
 
     k = cv2.waitKey(1)
-    if k == ESC:  # ESC
+    if k == ESC:  # 按 ESC 鍵, 結束
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+'''
+
+"""
+cap = cv2.VideoCapture(0)  # 初始化攝影功能
+
+while cap.isOpened():
+    ret, frame = cap.read()  # 讀取設請鏡頭的影像
+    cv2.imshow("Frame", frame)  # 顯示攝影鏡頭的影像
+    k = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
+    if k == ESC:  # 按 ESC 鍵, 結束
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+"""
+print("------------------------------------------------------------")  # 60個
+
+"""
+cap = cv2.VideoCapture(0)  # 初始化攝影功能
+
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)  # 設定寬度
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 960)  # 設定高度
+
+while cap.isOpened():
+    ret, frame = cap.read()  # 讀取設請鏡頭的影像
+    cv2.imshow("Frame", frame)  # 顯示攝影鏡頭的影像
+    k = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
+    if k == ESC:  # 按 ESC 鍵, 結束
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+"""
+print("------------------------------------------------------------")  # 60個
+
+cap = cv2.VideoCapture(0)  # 初始化攝影功能
+
+while cap.isOpened():
+    ret, frame = cap.read()  # 讀取設請鏡頭的影像
+    cv2.imshow("Frame", frame)  # 顯示彩色影像
+    # 轉灰階顯示
+    gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    cv2.imshow("Gray Frame", gray_frame)  # 顯示灰階影像
+    k = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
 cap.release()
@@ -977,276 +1018,63 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+cap = cv2.VideoCapture(0)  # 初始化攝影功能
 
-video = cv2.VideoCapture(video_filename)  # 開啟影片檔案
-
-while video.isOpened():
-    ret, frame = video.read()  # 讀取影片檔案
-    if ret:
-        cv2.namedWindow("myVideo", 0)
-        cv2.resizeWindow("myVideo", 300, 200)
-        cv2.imshow("myVideo", frame)  # 顯示影片
-    else:
-        break
-    c = cv2.waitKey(50)  # 可以控制撥放速度
-    if c == 27:  # 按 Esc 键, 結束
-        break
-
-video.release()  # 關閉輸出物件
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-capture = cv2.VideoCapture(0)  # 初始化攝影功能
-while capture.isOpened():
-    ret, frame = capture.read()  # 讀取設請鏡頭的影像
-    cv2.imshow("Frame", frame)  # 顯示攝影鏡頭的影像
-    width = capture.get(cv2.CAP_PROP_FRAME_WIDTH)  # 寬度
-    height = capture.get(cv2.CAP_PROP_FRAME_HEIGHT)  # 高度
-    c = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
-    if c == 27:  # 按 Esc 键
-        break
-print(f"Frame 的寬度 = {width}")  # 輸出Frame 的寬度
-print(f"Frame 的高度 = {height}")  # 輸出Frame 的高度
-capture.release()  # 關閉攝影功能
-cv2.destroyAllWindows()
-"""
-print("------------------------------------------------------------")  # 60個
-
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-
-video = cv2.VideoCapture(video_filename)  # 開啟影片檔案
-
-while video.isOpened():
-    ret, frame = video.read()  # 讀取影片檔案
-    cv2.imshow("Frame", frame)  # 顯示影像
-    width = video.get(cv2.CAP_PROP_FRAME_WIDTH)  # 寬度
-    height = video.get(cv2.CAP_PROP_FRAME_HEIGHT)  # 高度
-    video_fps = video.get(cv2.CAP_PROP_FPS)  # 速度
-    video_frames = video.get(cv2.CAP_PROP_FRAME_COUNT)  # 幀數
-    c = cv2.waitKey(50)  # 等待時間
-    if c == 27:  # 按 Esc 键
-        break
-print(f"Video 的寬度    = {width}")  # 輸出 Video 的寬度
-print(f"Video 的高度    = {height}")  # 輸出 Video 的高度
-print(f"Video 的速度    = {video_fps}")  # 輸出 Video 的速度
-print(f"Video 的幀數    = {video_frames}")  # 輸出 Video 的幀數
-video.release()  # 關閉攝影功能
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-capture = cv2.VideoCapture(0)  # 初始化攝影功能
-capture.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)  # 設定寬度
-capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 960)  # 設定高度
-while capture.isOpened():
-    ret, frame = capture.read()  # 讀取設請鏡頭的影像
-    cv2.imshow("Frame", frame)  # 顯示攝影鏡頭的影像
-    c = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
-    if c == 27:  # 按 Esc 键
-        break
-capture.release()  # 關閉攝影功能
-cv2.destroyAllWindows()
-"""
-print("------------------------------------------------------------")  # 60個
-
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-
-video = cv2.VideoCapture(video_filename)  # 開啟影片檔案
-
-video_fps = video.get(cv2.CAP_PROP_FPS)  # 計算速度
-height = video.get(cv2.CAP_PROP_FRAME_HEIGHT)  # 影片高度
-counter = 1  # 幀數計數器
-font = cv2.FONT_HERSHEY_SIMPLEX  # 字型
-while video.isOpened():
-    ret, frame = video.read()  # 讀取影片檔案
-    if ret:
-        y = int(height - 50)  # Frames計數器位置
-        cv2.putText(
-            frame, "Frames  : " + str(counter), (0, y), font, 1, (255, 0, 0), 2
-        )  # 顯示幀數
-        seconds = round(counter / video_fps, 2)  # 計算秒數
-        y = int(height - 10)  # Seconds計數器位置
-        cv2.putText(
-            frame, "Seconds : " + str(seconds), (0, y), font, 1, (255, 0, 0), 2
-        )  # 顯示秒數
-        cv2.imshow("myVideo", frame)  # 顯示影片
-    else:
-        break
-    c = cv2.waitKey(50)  # 可以控制撥放速度
-    counter += 1  # 幀數加 1
-    if c == 27:  # 按 Esc 键, 結束
-        break
-
-video.release()  # 關閉輸出物件
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-video = cv2.VideoCapture(video_filename)  # 開啟影片檔案
-
-video_fps = video.get(cv2.CAP_PROP_FPS)  # 計算速度
-width = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))  # 寬度
-height = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 高度
-
-# 建立裁剪影片物件
-fourcc = cv2.VideoWriter_fourcc(*"I420")  # 編碼
-
-new_video = cv2.VideoWriter("tmp_movie_b.avi", fourcc, video_fps, (width, height))
-counter = video_fps * 5  # 影片長度
-while video.isOpened() and counter >= 0:
-    ret, frame = video.read()  # 讀取影片檔案
-    if ret:
-        new_video.write(frame)  # 寫入新影片
-        counter -= 1  # 幀數減 1
-
-video.release()  # 關閉輸出物件
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-capture = cv2.VideoCapture(0)  # 初始化攝影功能
-while capture.isOpened():
-    ret, frame = capture.read()  # 讀取設請鏡頭的影像
-    cv2.imshow("Frame", frame)  # 顯示彩色影像
-    # 轉灰階顯示
-    gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    cv2.imshow("Gray Frame", gray_frame)  # 顯示灰階影像
-    c = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
-    if c == 27:  # 按 Esc 键, 結束
-        break
-capture.release()  # 關閉攝影功能
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-capture = cv2.VideoCapture(0)  # 初始化攝影功能
-while capture.isOpened():
-    ret, frame = capture.read()  # 讀取設請鏡頭的影像
+while cap.isOpened():
+    ret, frame = cap.read()  # 讀取設請鏡頭的影像
     cv2.imshow("Frame", frame)  # 顯示彩色影像
 
     h_frame = cv2.flip(frame, 1)  # 水平翻轉
     cv2.imshow("Flip Frame", h_frame)  # 顯示水平翻轉
-    c = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
-    if c == 27:  # 按 Esc 键, 結束
+    k = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
-capture.release()  # 關閉攝影功能
+
+cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-capture = cv2.VideoCapture(0)  # 初始化攝影功能
-while capture.isOpened():
-    ret, frame = capture.read()  # 讀取設請鏡頭的影像
+cap = cv2.VideoCapture(0)  # 初始化攝影功能
+
+while cap.isOpened():
+    ret, frame = cap.read()  # 讀取設請鏡頭的影像
     cv2.imshow("Frame", frame)  # 顯示攝影鏡頭的影像
-    c = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
-    if c == 13:  # 按 Enter 鍵
+    k = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
+    if k == ENTER:  # 按 Enter 鍵
         cv2.imwrite("mypict.png", frame)  # 拍照
         cv2.imshow("My Picture", frame)  # 開視窗顯示
-    if c == 27:  # 按 Esc 键
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
-capture.release()  # 關閉攝影功能
+
+cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-capture = cv2.VideoCapture(0)  # 初始化攝影功能
+cap = cv2.VideoCapture(0)  # 初始化攝影功能
 
 fourcc = cv2.VideoWriter_fourcc(*"XVID")  # MPEG-4
 
 # 建立輸出物件
 video_out = cv2.VideoWriter("tmp_movie_a.avi", fourcc, 20.0, (640, 480))
-while capture.isOpened():
-    ret, frame = capture.read()
+
+while cap.isOpened():
+    ret, frame = cap.read()
     if ret:
         video_out.write(frame)  # 寫入影片物件
         cv2.imshow("frame", frame)  # 顯示攝影鏡頭的影像
-    c = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
-    if c == 27:  # 按 Esc 键, 結束
+    k = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
-capture.release()  # 關閉攝影功能
-video_out.release()  # 關閉輸出物件
+
+cap.release()
+video_out.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-video = cv2.VideoCapture("tmp_movie_a.avi")  # 開啟影片檔案
 
-while video.isOpened():
-    ret, frame = video.read()  # 讀取影片檔案
-    if ret:
-        cv2.imshow("frame", frame)  # 顯示影片
-    else:
-        break
-    c = cv2.waitKey(50)  # 可以控制撥放速度
-    if c == 27:  # 按 Esc 键, 結束
-        break
-
-video.release()  # 關閉輸出物件
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-video = cv2.VideoCapture(video_filename)  # 開啟影片檔案
-
-while video.isOpened():
-    ret, frame = video.read()  # 讀取影片檔案
-    if ret:
-        cv2.imshow("frame", frame)  # 顯示影片
-    else:
-        break
-    c = cv2.waitKey(50)  # 可以控制撥放速度
-    if c == 27:  # 按 Esc 键, 結束
-        break
-
-video.release()  # 關閉輸出物件
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-video = cv2.VideoCapture(video_filename)  # 開啟影片檔案
-
-while video.isOpened():
-    ret, frame = video.read()  # 讀取影片檔案
-    if ret == True:
-        cv2.imshow("frame", frame)  # 顯示彩色影片
-        gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        cv2.imshow("gray_frame", gray_frame)  # 顯示灰階影片
-    else:
-        break
-    c = cv2.waitKey(50)  # 可以控制撥放速度
-    if c == 27:  # 按 Esc 键, 結束
-        break
-
-video.release()  # 關閉輸出物件
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-video = cv2.VideoCapture(video_filename)  # 開啟影片檔案
-
-while video.isOpened():
-    ret, frame = video.read()  # 讀取影片檔案
-    if ret:
-        cv2.imshow("frame", frame)  # 顯示影片
-        c = cv2.waitKey(50)  # 可以控制撥放速度
-    else:
-        break
-    if c == 32:  # 是否按 空白鍵
-        cv2.waitKey()  # 等待按鍵發生
-        continue
-    if c == 27:  # 按 Esc 键, 結束
-        break
-
-video.release()  # 關閉輸出物件
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1266,3 +1094,9 @@ sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+# cv2.namedWindow("Video Player", 0) # 設定視窗名稱
+# cv2.resizeWindow("Video Player", 300, 200) # 重設定視窗大小
+
+

@@ -49,27 +49,26 @@ print("------------------------------------------------------------")  # 60個
 # 二維離散傅立葉變換
 
 x = np.random.rand(8, 8)
-print(x)
+# print(x)
 
 plt.imshow(x, cmap="gray")
+plt.title('Random Image 8X8')
 show()
 
 X = np.fft.fft2(x)
+
+print("------------------------------")  # 30個
+# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
 print(np.allclose(X[1:, 1:], X[7:0:-1, 7:0:-1].conj()))  # 共軛復數
+print("------------------------------")  # 30個
 print(X[::4, ::4])  # 虛數為零
-
-"""
-True
-[[ 31.48765415+0.j  -2.80563949+0.j]
- [  0.75758598+0.j  -0.53147589+0.j]]
-"""
-
+print("------------------------------")  # 30個
 x2 = np.fft.ifft2(X)  # 將頻域訊號轉換回空域訊號
 print(x2)
+print("------------------------------")  # 30個
+# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
 cc = np.allclose(x, x2)  # 和原始訊號進行比較
 print(cc)
-# True
-
 print("------------------------------------------------------------")  # 60個
 
 print("製作 sinc2d 資料")
@@ -89,7 +88,6 @@ for x, x1 in enumerate(np.linspace(-2 * np.pi, 2 * np.pi, N)):
 # plt.imshow(sinc2d)
 # show()
 
-
 print("製作 簡易 X矩陣 資料")
 N = 5
 X = np.zeros((N, N))
@@ -101,7 +99,7 @@ print(cx, cy)
 X[cx, cy] = 1
 print(X)
 
-# X = cv2.imread(filename, 0) # 使用圖片資料
+# X = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
 # X = sinc2d # 使用 sinc2d
 
 print("------------------------------")  # 30個
@@ -130,8 +128,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 => cv2影像
 image = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
+
 f = np.fft.fft2(image)
 fshift = np.fft.fftshift(f)
 s1 = np.log(np.abs(fshift))
@@ -154,9 +152,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-# cv2 傅立葉變換
-
-X = cv2.imread(filename, 0)
+X = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
 
 X_DFT = cv2.dft(np.float32(X), flags=cv2.DFT_COMPLEX_OUTPUT)
 # print(X_DFT)
@@ -182,7 +178,7 @@ print("------------------------------------------------------------")  # 60個
 
 # np 逆傅立葉
 
-X = cv2.imread(filename, 0)
+X = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
 
 X_FFT = np.fft.fft2(X)
 FFT_SHIFT = np.fft.fftshift(X_FFT)
@@ -209,7 +205,7 @@ print("------------------------------------------------------------")  # 60個
 
 # cv2 逆傅立葉變換
 
-X = cv2.imread(filename, 0)
+X = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
 
 X_DFT = cv2.dft(np.float32(X), flags=cv2.DFT_COMPLEX_OUTPUT)
 FFT_SHIFT = np.fft.fftshift(X_DFT)
@@ -236,7 +232,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 高通濾波
 
-X = cv2.imread(filename, 0)
+X = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
 
 X_FFT = np.fft.fft2(X)
 
@@ -266,7 +262,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 低通濾波
 
-X = cv2.imread(filename, 0)
+X = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
 
 X_DFT = cv2.dft(np.float32(X), flags=cv2.DFT_COMPLEX_OUTPUT)
 FFT_SHIFT = np.fft.fftshift(X_DFT)
@@ -299,7 +295,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("MAGNITUDE_SPECTRUM")
 
-X = cv2.imread(filename, 0)
+X = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
 
 X_DFT = cv2.dft(np.float32(X), flags=cv2.DFT_COMPLEX_OUTPUT)
 
@@ -337,8 +333,7 @@ def fft2Image(src):
     return fft2
 
 
-# 檔案 => cv2影像
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 # 計算圖像矩陣的快速傅里葉變換
 fft2 = fft2Image(image)
 # 傅里葉逆變換
@@ -400,11 +395,9 @@ def phaseSpectrum(fft2):
     return spectrum
 
 
-# 第一步：讀入圖像
-# 檔案 => cv2影像
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-# 顯示原圖
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 cv2.imshow("image", image)
+
 # 快速傅里葉變換
 fft2 = fft2Image(image)
 # 求幅度譜
@@ -501,8 +494,7 @@ def phaseSpectrum(fft2):
     return phase
 
 
-# 檔案 => cv2影像
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 
 # 第一步：計算圖像的快速傅里葉變換
 fft2 = fft2Image(image)
@@ -758,11 +750,9 @@ def createLPFilter(shape, center, radius, lpType=0, n=2):
     return lpFilter
 
 
-# 第一步：讀入圖像
-# 檔案 => cv2影像
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-# 顯示原圖
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 cv2.imshow("image", image)
+
 # 第二步：每一元素乘以 (-1)^(r+c)
 fimage = np.zeros(image.shape, np.float32)
 for r in range(image.shape[0]):
@@ -866,10 +856,9 @@ def amplitudeSpectrum(fft2):
     return amplitude
 
 
-# 第一步：讀入圖像
-# 檔案 => cv2影像
-I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 cv2.imshow("I", I)
+
 # 第二步：取對數
 lI = np.log(I + 1.0)
 lI = lI.astype(np.float32)
@@ -980,7 +969,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("image_ftt2")
 
-# 檔案 => cv2影像
 image = plt.imread("data/castle3.jpg")
 
 # 根據公式轉成灰度圖
@@ -1039,7 +1027,6 @@ print("image_dft2")
 
 PI = 3.141591265
 
-# 檔案 => cv2影像
 image = plt.imread('data/castle3.jpg')
 
 #根據公式轉成灰度圖
@@ -1080,7 +1067,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 N = 256
-X = cv2.imread("data/lena.jpg", cv2.IMREAD_GRAYSCALE)
+X = cv2.imread("data/lena.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
 X = cv2.resize(X, (N, N))
 X_freq = np.fft.fft2(X)
 X_mag = np.log10(np.abs(X_freq))
@@ -1240,7 +1227,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/fft/jk.jpg", cv2.IMREAD_GRAYSCALE)
+src = cv2.imread("data/fft/jk.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+
 f = np.fft.fft2(src)  # 轉成頻率域
 fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
 spectrum = 20 * np.log(np.abs(fshift))  # 轉成頻譜
@@ -1259,7 +1247,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/fft/shape1.jpg", cv2.IMREAD_GRAYSCALE)
+src = cv2.imread("data/fft/shape1.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+
 f = np.fft.fft2(src)  # 轉成頻率域
 fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
 spectrum = 20 * np.log(np.abs(fshift))  # 轉成頻譜
@@ -1278,7 +1267,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/fft/shape2.jpg", cv2.IMREAD_GRAYSCALE)
+src = cv2.imread("data/fft/shape2.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+
 f = np.fft.fft2(src)  # 轉成頻率域
 fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
 spectrum = 20 * np.log(np.abs(fshift))  # 轉成頻譜
@@ -1297,7 +1287,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/fft/jk.jpg", cv2.IMREAD_GRAYSCALE)
+src = cv2.imread("data/fft/jk.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+
 f = np.fft.fft2(src)  # 轉成頻率域
 # fshift = np.fft.fftshift(f)            # 0 頻率分量移至中心
 spectrum = 20 * np.log(np.abs(f))  # 轉成頻譜
@@ -1316,7 +1307,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/fft/jk.jpg", cv2.IMREAD_GRAYSCALE)
+src = cv2.imread("data/fft/jk.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+
 # 傅立葉變換
 f = np.fft.fft2(src)  # 轉成頻率域
 fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
@@ -1339,7 +1331,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/fft/snow.jpg", cv2.IMREAD_GRAYSCALE)
+src = cv2.imread("data/fft/snow.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+
 # 傅立葉變換
 f = np.fft.fft2(src)  # 轉成頻率域
 fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
@@ -1371,7 +1364,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/fft/jk.jpg", cv2.IMREAD_GRAYSCALE)
+src = cv2.imread("data/fft/jk.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+
 # 轉成頻率域
 dft = cv2.dft(np.float32(src), flags=cv2.DFT_COMPLEX_OUTPUT)
 dftshift = np.fft.fftshift(dft)  # 0 頻率分量移至中心
@@ -1392,7 +1386,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/fft/shape2.jpg", cv2.IMREAD_GRAYSCALE)
+src = cv2.imread("data/fft/shape2.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+
 # 轉成頻率域
 dft = cv2.dft(np.float32(src), flags=cv2.DFT_COMPLEX_OUTPUT)
 dftshift = np.fft.fftshift(dft)  # 0 頻率分量移至中心
@@ -1422,7 +1417,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/fft/jk.jpg", cv2.IMREAD_GRAYSCALE)
+src = cv2.imread("data/fft/jk.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+
 # 傅立葉變換
 dft = cv2.dft(np.float32(src), flags=cv2.DFT_COMPLEX_OUTPUT)
 dftshift = np.fft.fftshift(dft)  # 0 頻率分量移至中心

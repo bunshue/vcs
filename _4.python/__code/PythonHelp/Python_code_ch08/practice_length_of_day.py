@@ -1,4 +1,5 @@
 import os
+import sys
 from statistics import mean
 import cv2 as cv
 import numpy as np
@@ -12,6 +13,7 @@ intensity_samples = []
 
 # 將影像轉換為灰階，將平均亮度值放入 list
 for image in images:
+    # print(image)
     img = cv.imread(image, cv.IMREAD_GRAYSCALE)    
     intensity = img.mean()
     intensity_samples.append(intensity)
@@ -30,7 +32,6 @@ plt.title('Exoplanet BR549 Relative Intensity vs. Time')
 plt.ylim(0.8, 1.1)
 plt.xticks(np.arange(0, 50, 5))
 plt.grid()
-print("\nManually close plot window after examining to continue program.")
 plt.show()
 
 # 估計亮度最大峰值以及它在影像上出現的位置
@@ -38,3 +39,4 @@ plt.show()
 peaks = signal.find_peaks(rel_intensity, height=0.95, distance=5)
 print(f"peaks = {peaks}")
 print("Period = {}".format(mean(np.diff(peaks[0]))))
+

@@ -41,6 +41,128 @@ def show():
 
 maxval = 255  # 定義像素最大值
 width, height = 640, 480  # 影像寬, 影像高
+'''
+print("------------------------------------------------------------")  # 60個
+
+print("製作影像")
+
+
+print("------------------------------------------------------------")  # 60個
+# OpenCV_05_建立空影像
+print("------------------------------------------------------------")  # 60個
+
+width, height = 640, 480  # 影像寬, 影像高
+
+# 建立GRAY影像陣列, 黑色
+image = np.zeros((height, width), np.uint8)
+cv2.imshow("image", image)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+# 建立GRAY影像陣列, 白色
+image = np.zeros((height, width), np.uint8)
+image.fill(255)  # 元素內容改為白色 255
+cv2.imshow("image", image)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+# 建立GRAY影像陣列, 白色
+image = np.ones((height, width), np.uint8) * 255
+cv2.imshow("image", image)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+# ch5_4.py
+
+width, height = 640, 480  # 影像寬, 影像高
+
+# 建立GRAY影像陣列, 黑色
+image = np.zeros((height, width), np.uint8)
+
+# 某塊塗為白色
+image[40:120, 70:210] = 255  # 高在40至120之間,寬在70至210之間,設為255
+
+cv2.imshow("image", image)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+# ch5_5.py
+
+width, height = 640, 480  # 影像寬, 影像高
+
+# 建立GRAY影像陣列, 黑色
+image = np.zeros((height, width), np.uint8)
+
+print("某些塗為白色")
+
+for y in range(0, height, 20):
+    image[y : y + 10, :] = 255  # 白色厚度是10
+cv2.imshow("image", image)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+# ch5_7.py
+
+height = 160  # 影像高
+width = 280  # 影像寬
+width, height = 640, 480  # 影像寬, 影像高
+
+# 建立BGR影像陣列
+image = np.zeros((height, width, 3), np.uint8)
+image[:, :, 0] = 255  # 建立 B 通道像素值
+cv2.imshow("image", image)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+# ch5_8.py
+
+height = 160  # 影像高
+width = 280  # 影像寬
+width, height = 640, 480  # 影像寬, 影像高
+
+# 建立BGR影像陣列
+image = np.zeros((height, width, 3), np.uint8)
+blue_image = image.copy()
+blue_image[:, :, 0] = 255  # 建立 B 通道像素值
+cv2.imshow("blue image", blue_image)  # 顯示blue image影像
+
+green_image = image.copy()
+green_image[:, :, 1] = 255  # 建立 G 通道像素值
+cv2.imshow("green image", green_image)  # 顯示green image影像
+
+red_image = image.copy()
+red_image[:, :, 2] = 255  # 建立 R 通道像素值
+cv2.imshow("red image", red_image)  # 顯示red image影像
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+width, height = 640, 480  # 影像寬, 影像高
+
+image = np.zeros((height, width, 3), np.uint8)
+image[0:50, :, 0] = 255  # blue
+image[50:100, :, 1] = 255  # green
+image[100:150, :, 2] = 255  # red
+cv2.imshow("image", image)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -411,26 +533,14 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch1_6.py
 # 設定 cv 視窗
 cv2.namedWindow("Peony1")  # 使用預設
 cv2.namedWindow("Peony2", cv2.WINDOW_NORMAL)  # 可以調整大小
+
 img1 = cv2.imread(filename1)  # 彩色讀取
 img2 = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰色讀取
-cv2.imshow("Peony1", img1)
-cv2.imshow("Peony2", img2)
+# img2 = cv2.imread(filename1, 0)  # 灰色讀取 same
 
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_6_1.py
-
-cv2.namedWindow("Peony1")  # 使用預設
-cv2.namedWindow("Peony2", cv2.WINDOW_NORMAL)  # 可以調整大小
-img1 = cv2.imread(filename1)  # 彩色讀取
-img2 = cv2.imread(filename1, 0)  # 灰色讀取
 cv2.imshow("Peony1", img1)
 cv2.imshow("Peony2", img2)
 
@@ -438,6 +548,7 @@ cv2.waitKey()
 cv2.destroyWindow("Peony1")  # 刪除Peony1
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 讀取某點的灰階/RGB值
@@ -478,12 +589,15 @@ print(f"更改後BGR = {px}")
 
 print("------------------------------------------------------------")  # 60個
 
-# ch2_7.py
+'''
 
 print("把影像的一塊改成藍色")
 
 img = cv2.imread(filename1)  # 彩色讀取
 cv2.imshow("Before", img)
+
+print(img.shape)
+
 for y in range(img.shape[0] - 100, img.shape[0]):
     for x in range(img.shape[1] - 100, img.shape[1]):
         img[y, x] = [255, 0, 0]
@@ -493,386 +607,8 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-# OpenCV_04_色彩空間
 print("------------------------------------------------------------")  # 60個
 
-# ch4_1.py
-
-img = cv2.imread("view.jpg")  # BGR讀取
-cv2.imshow("BGR Color Space", img)
-
-print("BGR 轉 RGB")
-img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RGB
-cv2.imshow("RGB Color Space", img_rgb)
-
-print("RGB 轉 BGR")
-img_bgr = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2BGR)  # RGB 轉 BGR
-cv2.imshow("BGR Color Space", img_bgr)
-
-print("BGR 轉 GRAY")
-img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # BGR轉GRAY
-cv2.imshow("GRAY Color Space", img_gray)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch4_5.py
-
-pt_x = 169
-pt_y = 118
-img = cv2.imread(filename1)  # BGR讀取
-
-print("BGR 轉 GRAY")
-img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-cv2.imshow("GRAY Color Space", img_gray)
-px = img_gray[pt_x, pt_y]
-print(f"Gray Color 通道值 = {px}")
-
-print("GRAY 轉 BGR")
-img_color = cv2.cvtColor(img_gray, cv2.COLOR_GRAY2BGR)
-cv2.imshow("BGR Color Space", img_gray)
-px = img_color[pt_x, pt_y]
-print(f"BGR Color  通道值 = {px}")
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch4_6.py
-
-img = cv2.imread(filename1)  # BGR讀取
-cv2.imshow("BGR Color Space", img)
-
-print("BGR 轉 HSV")
-img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)  # BGR轉HSV
-cv2.imshow("HSV Color Space", img_hsv)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-# cv2.split cv2.merge ST
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
-
-image = cv2.imread(filename)
-cv2.imshow("bgr", image)
-
-blue, green, red = cv2.split(image)
-cv2.imshow("blue", blue)
-cv2.imshow("green", green)
-cv2.imshow("red", red)
-
-print(f"B通道影像屬性 shape = {blue.shape}")
-print("列印B通道內容")
-print(blue)
-
-print(f"BGR  影像 : {image.shape}")
-print(f"B通道影像 : {blue.shape}")
-print(f"G通道影像 : {green.shape}")
-print(f"R通道影像 : {red.shape}")
-
-print("B通道內容 : ")
-print(blue)
-print("G通道內容 : ")
-print(green)
-print("R通道內容 : ")
-print(red)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch4_9.py
-
-image = cv2.imread(filename1)
-cv2.imshow("bgr", image)
-
-print("BGR 轉 HSV")
-hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-hue, saturation, value = cv2.split(hsv_image)
-cv2.imshow("hsv", hue)
-cv2.imshow("saturation", saturation)
-cv2.imshow("value", value)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch4_10.py
-
-image = cv2.imread(filename1)
-blue, green, red = cv2.split(image)
-bgr_image = cv2.merge([blue, green, red])  # 依據 B G R 順序合併
-cv2.imshow("B -> G -> R ", bgr_image)
-
-rgb_image = cv2.merge([red, green, blue])  # 依據 R G B 順序合併
-cv2.imshow("R -> G -> B ", rgb_image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch4_11.py
-
-image = cv2.imread(filename1)
-
-print("BGR 轉 HSV")
-hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-
-hue, saturation, value = cv2.split(hsv_image)
-hsv_image = cv2.merge([hue, saturation, value])  # 依據 H S V 順序合併
-
-cv2.imshow("The Image", image)
-cv2.imshow("The Merge Image", hsv_image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch4_12.py
-
-image = cv2.imread(filename1)
-
-print("BGR 轉 HSV")
-hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-
-hsv, saturation, value = cv2.split(hsv_image)
-hsv[:, :] = 200  # 修訂 hsv 內容
-hsv_image = cv2.merge([hsv, saturation, value])  # 依據H S V順序合併
-
-print("HSV 轉 BGR")
-new_image = cv2.cvtColor(hsv_image, cv2.COLOR_HSV2BGR)  # HSV 轉 BGR
-
-cv2.imshow("The Image", image)
-cv2.imshow("The New Image", new_image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch4_12_1.py
-
-image = cv2.imread(filename1)
-
-print("BGR 轉 HSV")
-hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-
-hsv, saturation, value = cv2.split(hsv_image)
-hsv.fill(200)  # 修訂 hsv 內容
-hsv_image = cv2.merge([hsv, saturation, value])  # 依據H S V順序合併
-
-print("HSV 轉 BGR")
-new_image = cv2.cvtColor(hsv_image, cv2.COLOR_HSV2BGR)  # HSV 轉 BGR
-
-cv2.imshow("The Image", image)
-cv2.imshow("The New Image", new_image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch4_13.py
-
-image = cv2.imread(filename1)
-
-print("BGR 轉 HSV")
-hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-
-hsv, saturation, value = cv2.split(hsv_image)
-saturation.fill(255)  # 修訂 hsv 內容
-hsv_image = cv2.merge([hsv, saturation, value])  # 依據H S V順序合併
-
-print("HSV 轉 BGR")
-new_image = cv2.cvtColor(hsv_image, cv2.COLOR_HSV2BGR)  # HSV 轉 BGR
-
-cv2.imshow("The Image", image)
-cv2.imshow("The New Image", new_image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch4_14.py
-
-image = cv2.imread(filename1)
-
-print("BGR 轉 HSV")
-hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-
-hsv, saturation, value = cv2.split(hsv_image)
-value.fill(255)  # 修訂 value 內容
-hsv_image = cv2.merge([hsv, saturation, value])  # 依據H S V順序合併
-
-print("HSV 轉 BGR")
-new_image = cv2.cvtColor(hsv_image, cv2.COLOR_HSV2BGR)  # HSV 轉 BGR
-
-cv2.imshow("The Image", image)
-cv2.imshow("The New Image", new_image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch4_15.py
-
-image = cv2.imread(filename1)
-cv2.imshow("The Image", image)  # 顯示BGR影像
-
-print("BGR 轉 BGRA")
-bgra_image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
-
-b, g, r, a = cv2.split(bgra_image)
-print("列出轉成含A通道影像物件後的alpha值")
-print(a)
-
-a[:, :] = 32  # 修訂alpha內容
-a32_image = cv2.merge([b, g, r, a])  # alpha=32影像物件
-cv2.imshow("The a32 Image", a32_image)  # 顯示alpha=32影像
-
-a.fill(128)  # 修訂alpha內容
-a128_image = cv2.merge([b, g, r, a])  # alpha=128影像物件
-cv2.imshow("The a128 Image", a128_image)  # 顯示alpha=128影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-# cv2.split cv2.merge SP
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-# OpenCV_05_建立空影像
-print("------------------------------------------------------------")  # 60個
-
-width, height = 640, 480  # 影像寬, 影像高
-
-# 建立GRAY影像陣列, 黑色
-image = np.zeros((height, width), np.uint8)
-cv2.imshow("image", image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-# 建立GRAY影像陣列, 白色
-image = np.zeros((height, width), np.uint8)
-image.fill(255)  # 元素內容改為白色 255
-cv2.imshow("image", image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-# 建立GRAY影像陣列, 白色
-image = np.ones((height, width), np.uint8) * 255
-cv2.imshow("image", image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch5_4.py
-
-width, height = 640, 480  # 影像寬, 影像高
-
-# 建立GRAY影像陣列, 黑色
-image = np.zeros((height, width), np.uint8)
-
-# 某塊塗為白色
-image[40:120, 70:210] = 255  # 高在40至120之間,寬在70至210之間,設為255
-
-cv2.imshow("image", image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch5_5.py
-
-width, height = 640, 480  # 影像寬, 影像高
-
-# 建立GRAY影像陣列, 黑色
-image = np.zeros((height, width), np.uint8)
-
-print("某些塗為白色")
-
-for y in range(0, height, 20):
-    image[y : y + 10, :] = 255  # 白色厚度是10
-cv2.imshow("image", image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch5_7.py
-
-height = 160  # 影像高
-width = 280  # 影像寬
-width, height = 640, 480  # 影像寬, 影像高
-
-# 建立BGR影像陣列
-image = np.zeros((height, width, 3), np.uint8)
-image[:, :, 0] = 255  # 建立 B 通道像素值
-cv2.imshow("image", image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch5_8.py
-
-height = 160  # 影像高
-width = 280  # 影像寬
-width, height = 640, 480  # 影像寬, 影像高
-
-# 建立BGR影像陣列
-image = np.zeros((height, width, 3), np.uint8)
-blue_image = image.copy()
-blue_image[:, :, 0] = 255  # 建立 B 通道像素值
-cv2.imshow("blue image", blue_image)  # 顯示blue image影像
-
-green_image = image.copy()
-green_image[:, :, 1] = 255  # 建立 G 通道像素值
-cv2.imshow("green image", green_image)  # 顯示green image影像
-
-red_image = image.copy()
-red_image[:, :, 2] = 255  # 建立 R 通道像素值
-cv2.imshow("red image", red_image)  # 顯示red image影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-width, height = 640, 480  # 影像寬, 影像高
-
-image = np.zeros((height, width, 3), np.uint8)
-image[0:50, :, 0] = 255  # blue
-image[50:100, :, 1] = 255  # green
-image[100:150, :, 2] = 255  # red
-cv2.imshow("image", image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 # OpenCV_06_影像處理
@@ -5292,24 +5028,9 @@ img = cv2.imread("solvay1927.jpg")  # 讀取影像
 faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
 )
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 140, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    (0, 255, 255),
-    -1,
-)
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Finding " + str(len(faces)) + " face",
-    (img.shape[1] - 135, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    (255, 0, 0),
-    1,
-)
+
+print("Finding " + str(len(faces)) + " face")
+
 # 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
 for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
@@ -5330,24 +5051,9 @@ img = cv2.imread("solvay1927.jpg")  # 讀取影像
 faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=5, minSize=(20, 20)
 )
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 140, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    (0, 255, 255),
-    -1,
-)
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Finding " + str(len(faces)) + " face",
-    (img.shape[1] - 135, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    (255, 0, 0),
-    1,
-)
+
+print("Finding " + str(len(faces)) + " face")
+
 # 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
 for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
@@ -5355,7 +5061,6 @@ cv2.imshow("Face", img)  # 顯示影像
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -5369,25 +5074,7 @@ faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
 )
 
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 140, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    (0, 255, 255),
-    -1,
-)
-
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Finding " + str(len(faces)) + " face",
-    (img.shape[1] - 135, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    (255, 0, 0),
-    1,
-)
+print("Finding " + str(len(faces)) + " face")
 
 # 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
 for x, y, w, h in faces:
@@ -5410,25 +5097,7 @@ faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20), maxSize=(50, 50)
 )
 
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 140, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    (0, 255, 255),
-    -1,
-)
-
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Finding " + str(len(faces)) + " face",
-    (img.shape[1] - 135, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    (255, 0, 0),
-    1,
-)
+print("Finding " + str(len(faces)) + " face")
 
 # 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
 for x, y, w, h in faces:
@@ -5450,24 +5119,9 @@ img = cv2.imread("solvay1927.jpg")  # 讀取影像
 faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20), maxSize=(50, 50)
 )
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 140, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    (0, 255, 255),
-    -1,
-)
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Finding " + str(len(faces)) + " face",
-    (img.shape[1] - 135, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    (255, 0, 0),
-    1,
-)
+
+print("Finding " + str(len(faces)) + " face")
+
 # 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
 for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
@@ -5488,25 +5142,7 @@ faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
 )
 
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 140, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    (0, 255, 255),
-    -1,
-)
-
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Finding " + str(len(faces)) + " face",
-    (img.shape[1] - 135, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    (255, 0, 0),
-    1,
-)
+print("Finding " + str(len(faces)) + " face")
 
 # 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
 for x, y, w, h in faces:
@@ -5528,24 +5164,9 @@ img = cv2.imread("s_1927.jpg")  # 讀取影像
 faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.02, minNeighbors=3, minSize=(20, 20)
 )
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 140, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    (0, 255, 255),
-    -1,
-)
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Finding " + str(len(faces)) + " face",
-    (img.shape[1] - 135, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    (255, 0, 0),
-    1,
-)
+
+print("Finding " + str(len(faces)) + " face")
+
 # 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
 for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
@@ -5569,25 +5190,7 @@ faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.3, minNeighbors=4, minSize=(20, 20)
 )
 
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 140, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    (0, 255, 255),
-    -1,
-)
-
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Finding " + str(len(faces)) + " face",
-    (img.shape[1] - 135, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    (255, 0, 0),
-    1,
-)
+print("Finding " + str(len(faces)) + " face")
 
 # 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
 for x, y, w, h in faces:
@@ -5696,7 +5299,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
 cv2.waitKey(3000)  # 等待3秒
 cv2.destroyWindow("Peony1")  # 刪除Peony1
 cv2.waitKey(8000)  # 等待8秒
@@ -5728,41 +5330,3 @@ cv2.imshow("Peony", img)
 
 # 準備搬出
 
-
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 140, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    (0, 255, 255),
-    -1,
-)
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Found " + str(len(faces)) + " faces",
-    (img.shape[1] - 135, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    (255, 0, 0),
-    1,
-)
-
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 140, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    (0, 255, 255),
-    -1,
-)
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Finding " + str(len(faces)) + " face",
-    (img.shape[1] - 135, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    (255, 0, 0),
-    1,
-)

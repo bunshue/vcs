@@ -513,47 +513,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
-# 檔案 => cv2影像
-image = cv2.imread(filename)
-
-bgra = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
-b, g, r, a = cv2.split(bgra)
-a[:, :] = 125
-bgra125 = cv2.merge([b, g, r, a])
-a[:, :] = 0
-bgra0 = cv2.merge([b, g, r, a])
-
-plt.figure(
-    num="new36 影像處理",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-plt.subplot(221)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(222)
-plt.title("bgra")
-plt.imshow(cv2.cvtColor(bgra, cv2.COLOR_BGR2RGB))
-
-plt.subplot(223)
-plt.title("bgra125")
-plt.imshow(cv2.cvtColor(bgra125, cv2.COLOR_BGR2RGB))
-
-plt.subplot(224)
-plt.title("bgra0")
-plt.imshow(cv2.cvtColor(bgra0, cv2.COLOR_BGR2RGB))
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 # 檔案 => cv2影像
 image = cv2.imread(filename, 0)

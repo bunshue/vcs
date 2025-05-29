@@ -2,6 +2,7 @@ import cv2
 
 ESC = 27
 SPACE = 32
+ENTER = 13
 
 video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
 
@@ -39,6 +40,15 @@ fps = cap.get(cv2.CAP_PROP_FPS)  # 影格速率
 sec = int(frame / fps)  # 播放時間（秒）
 timestr = str(datetime.timedelta(seconds=sec))  # 轉換成時分秒格式
 print("播放時間=", timestr)
+
+width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)  # 寬度
+height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)  # 高度
+video_fps = cap.get(cv2.CAP_PROP_FPS)  # 速度
+video_frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)  # 幀數
+print(f"寬度 : {width}")
+print(f"高度 : {height}")
+print(f"速度 : {video_fps}")
+print(f"幀數 : {video_frames}")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -213,6 +223,115 @@ cap.release()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+cap = cv2.VideoCapture(video_filename)  # 開啟影片
+
+while cap.isOpened():
+    ret, frame = cap.read()  # 讀取影片檔案
+    if ret:
+        cv2.imshow("Video Player", frame)  # 顯示影像
+    else:
+        break
+    k = cv2.waitKey(50)  # 等待時間, 可以控制撥放速度
+    if k == ESC:  # 按 ESC 鍵, 結束
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+cap = cv2.VideoCapture(video_filename)  # 開啟影片
+
+while cap.isOpened():
+    ret, frame = cap.read()  # 讀取影片檔案
+    if ret == True:
+        cv2.imshow("Video Player", frame)  # 顯示彩色影片
+        gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        cv2.imshow("Gray Video Player", gray_frame)  # 顯示灰階影片
+    else:
+        break
+    k = cv2.waitKey(50)  # 等待時間, 可以控制撥放速度
+    if k == ESC:  # 按 ESC 鍵, 結束
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+cap = cv2.VideoCapture(video_filename)  # 開啟影片
+
+while cap.isOpened():
+    ret, frame = cap.read()  # 讀取影片檔案
+    if ret:
+        cv2.imshow("Video Player", frame)  # 顯示影像
+        k = cv2.waitKey(50)  # 等待時間, 可以控制撥放速度
+    else:
+        break
+    if k == SPACE:  # 是否按 空白鍵
+        cv2.waitKey()  # 等待按鍵發生
+        continue
+    if k == ESC:  # 按 ESC 鍵, 結束
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+cap = cv2.VideoCapture(video_filename)  # 開啟影片
+
+video_fps = cap.get(cv2.CAP_PROP_FPS)  # 速度
+height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)  # 影片高度
+
+counter = 1  # 幀數計數器
+font = cv2.FONT_HERSHEY_SIMPLEX  # 字型
+while cap.isOpened():
+    ret, frame = cap.read()  # 讀取影片檔案
+    if ret:
+        y = int(height - 50)  # Frames計數器位置
+        cv2.putText(
+            frame, "Frames  : " + str(counter), (0, y), font, 1, (255, 0, 0), 2
+        )  # 顯示幀數
+        seconds = round(counter / video_fps, 2)  # 計算秒數
+        y = int(height - 10)  # Seconds計數器位置
+        cv2.putText(
+            frame, "Seconds : " + str(seconds), (0, y), font, 1, (255, 0, 0), 2
+        )  # 顯示秒數
+        cv2.imshow("Video Player", frame)  # 顯示影像
+    else:
+        break
+    k = cv2.waitKey(50)  # 等待時間, 可以控制撥放速度
+    counter += 1  # 幀數加 1
+    if k == ESC:  # 按 ESC 鍵, 結束
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+cap = cv2.VideoCapture(video_filename)  # 開啟影片
+
+width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))  # 寬度
+height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 高度
+video_fps = cap.get(cv2.CAP_PROP_FPS)  # 速度
+
+# 建立裁剪影片物件
+fourcc = cv2.VideoWriter_fourcc(*"I420")  # 編碼
+
+new_video = cv2.VideoWriter("tmp_movie_b.avi", fourcc, video_fps, (width, height))
+counter = video_fps * 5  # 影片長度
+while cap.isOpened() and counter >= 0:
+    ret, frame = cap.read()  # 讀取影片檔案
+    if ret:
+        new_video.write(frame)  # 寫入新影片
+        counter -= 1  # 幀數減 1
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
