@@ -1320,6 +1320,8 @@ xycov = np.cov(x, y)
 print(xycov)
 
 ybar = np.sum(y) / n
+
+# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
 assert np.allclose(xycov[0, 1], np.sum((x - xbar) * (y - ybar)) / (n - 1))
 assert np.allclose(xycov[0, 0], xvar)
 assert np.allclose(xycov[1, 1], np.var(y, ddof=1))
@@ -1903,7 +1905,8 @@ tval = (xbar - xmu) / (s / np.sqrt(n))
 pval = stats.t.sf(tval, n - 1)
 
 pval2sided = pval * 2
-# do it with sicpy
+
+# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
 assert np.allclose((tval, pval2sided), stats.ttest_1samp(x, xmu))
 
 print(tval, pval)
@@ -1974,6 +1977,7 @@ ss_reg = np.sum((yhat - y_mu) ** 2)
 ss_res = np.sum((y - yhat) ** 2)
 
 ## Check partition of variance formula based on SS using `assert np.allclose(val1, val2, atol=1e-05)`
+# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
 assert np.allclose(ss_tot - (ss_reg + ss_res), 0, atol=1e-05)
 
 ## What np.allclose does ?
@@ -2124,6 +2128,7 @@ pval2sided = pval * 2
 # With scipy
 import scipy.stats as stats
 
+# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
 assert np.allclose((tval, pval2sided), stats.ttest_ind(x, y, equal_var=True))
 
 print("------------------------------------------------------------")  # 60個
@@ -2155,6 +2160,7 @@ pval2sided = pval * 2
 # Compare the two-sided p-value with the one obtained by `stats.ttest_ind` using `assert np.allclose(arr1, arr2)`
 
 # do it with scipy
+# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
 assert np.allclose((tval, pval2sided), stats.ttest_ind(x, y, equal_var=False))
 
 
@@ -2284,7 +2290,7 @@ pval = stats.f.sf(fval, (len(grp) - 1), n - len(grp))
 # Compute with scipy
 fval, pval = stats.f_oneway(y[label == 0], y[label == 1], y[label == 2])
 
-
+# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
 assert np.allclose(
     (fval, pval), stats.f_oneway(y[label == 0], y[label == 1], y[label == 2])
 )

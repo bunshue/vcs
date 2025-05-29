@@ -60,10 +60,9 @@ print("------------------------------------------------------------")  # 60個
 # OpenCV的照相机三维重建
 
 import pylab as pl
-import numpy as np
-import cv2
 from mpl_toolkits import mplot3d
-from itertools import product, combinations
+from itertools import product
+from itertools import combinations
 from plotlyhelp import init_plotly_online_mode
 
 init_plotly_online_mode()

@@ -735,6 +735,7 @@ norm = multivariate_normal_pdf(X, mean, sigma).reshape(x.shape)
 
 # Do it with scipy
 norm_scpy = multivariate_normal(mu, sigma).pdf(np.stack((x, y), axis=2))
+# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
 assert np.allclose(norm, norm_scpy)
 """
 # Plot

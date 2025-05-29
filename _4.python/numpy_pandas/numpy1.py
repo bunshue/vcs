@@ -818,6 +818,7 @@ cc = np.vstack((list1da, list1db))
 print(cc)
 
 # 數組比較
+# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
 
 print("allclose 如果兩個數組的形狀相同，則Allclose函數根據公差值查找兩個數組是否相等或近似相等。")
 
@@ -837,6 +838,17 @@ cc = np.equal(list1da, list1da)
 print("兩陣列相同 :", cc)
 cc = np.equal(list1da, list1db)
 print("兩陣列相同 :", cc)
+
+# numpy的allclose方法，比较两个array是不是每一元素都相等，默认在1e-05的误差范围内
+
+a = np.random.randn(9, 6)
+b = np.random.randn(9, 6)
+
+cc = np.allclose(a, b, a, b, a)  # 可以多個陣列
+print(cc)
+
+cc = np.allclose(a, a)
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2929,17 +2941,6 @@ print("------------------------------------------------------------")  # 60個
 sys.exit()
 
 print("------------------------------------------------------------")  # 60個
-
-# numpy的allclose方法，比较两个array是不是每一元素都相等，默认在1e-05的误差范围内
-
-a = np.random.randn(9, 6)
-b = np.random.randn(9, 6)
-
-cc = np.allclose(a, b, a, b, a)  # 可以多個陣列
-print(cc)
-
-cc = np.allclose(a, a)
-print(cc)
 
 print("column_stack 的使用, 並排合併np陣列")
 N = 10

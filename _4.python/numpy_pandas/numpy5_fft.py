@@ -477,12 +477,14 @@ def fft_convolve(a, b):
 a = np.random.rand(128)
 b = np.random.rand(128)
 c = np.convolve(a, b)
+# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
 np.allclose(c, fft_convolve(a, b))
 
 # True
 
 a = np.random.rand(10000)
 b = np.random.rand(10000)
+# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
 print(np.allclose(np.convolve(a, b), fft_convolve(a, b)))
 
 # np.convolve(a, b)
