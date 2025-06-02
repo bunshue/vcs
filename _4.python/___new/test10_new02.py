@@ -28,7 +28,7 @@ def show():
     plt.show()
     pass
 
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 N = 100
@@ -194,7 +194,6 @@ def plot_transition_model(T_track, episode = 0):
 T_track_dq=[1,2,3,4,5]
 plot_transition_model(T_track_dq, episode=0)
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 fff = 123.456
@@ -217,8 +216,6 @@ fff, fff, fff, fff,
 fff, fff)
                 
 print(debug_message, end='\r', flush=True)
-
-
 
 print(u'--> reached_max_minutes \u2715')
 print(u'--> reached_max_episodes \u2715')

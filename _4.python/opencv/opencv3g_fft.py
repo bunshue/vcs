@@ -1,8 +1,11 @@
 """
 傅立葉變換 fft
 
-np 傅立葉變換
-np.fft.fft2()
+np 傅立葉
+np.fft.fft  # 一維 fft
+np.fft.fft2 + np.fft.fftshift np.fft.ifft2  # 二維 fft
+
+cv 傅立葉 cv2.dft cv2.idft
 
 """
 
@@ -12,6 +15,8 @@ import cv2
 import pylab as pl
 
 ESC = 27
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -41,35 +46,118 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
+# 使用 np 傅立葉
+print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 
+""" 自己造資料
+N = 11
+image = np.zeros((N, N))
+#print(image)
+cx, cy = N // 2, N // 2
+#print(cx, cy)
+image[cx-1:cx+2, cy-1:cy+2] = 1
+# image[cx, cy] = 1
+#print(image)
+"""
+
+plt.subplot(221)
+plt.imshow(image, cmap="gray")  # 灰階顯示原圖
+plt.title("原圖")
+
+f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
+fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
+s1 = np.log(np.abs(fshift))
+# fimage = np.log(np.abs(f))
+fimage = np.abs(s1)
+plt.subplot(222)
+plt.imshow(fimage, cmap="gray")
+plt.title("fftshift")
+
+f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
+fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
+spectrum = 20 * np.log(np.abs(fshift))  # 轉成頻譜
+plt.subplot(223)
+plt.imshow(spectrum, cmap="gray")  # 灰階顯示
+plt.title("頻譜圖")
+
+f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
+fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
+ifshift = np.fft.ifftshift(fshift)  # 逆傅立葉變換,  # 0 頻率頻率移回左上角
+src_tmp = np.fft.ifft2(ifshift)# 逆傅立葉變換, 將頻域訊號轉換回時域訊號
+src_back = np.abs(src_tmp)  # 取絕對值
+plt.subplot(224)
+plt.imshow(src_back, cmap="gray")  # 灰階顯示
+plt.title("ifft")
+
+plt.suptitle("使用 np 傅立葉")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 高通濾波
+
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+
+f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
+fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
+
+# 高通濾波器
+rows, cols = image.shape  # 取得影像外形
+row, col = rows // 2, cols // 2  # rows, cols的中心
+fshift[row - 30 : row + 30, col - 30 : col + 30] = 0  # 設定區塊為低頻率分量是0
+
+ifshift = np.fft.ifftshift(fshift)  # 逆傅立葉變換  # 0 頻率分量移回左上角
+src_tmp = np.fft.ifft2(ifshift)# 逆傅立葉變換, 將頻域訊號轉換回時域訊號
+src_back = np.abs(src_tmp)  # 取絕對值
+
+plt.subplot(121)
+plt.imshow(image, cmap="gray")  # 灰階顯示原圖
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(src_back, cmap="gray")  # 灰階顯示
+plt.title("高通濾波灰階影像")
+
+plt.suptitle("高通濾波")
+show()
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 二維離散傅立葉變換
 
-x = np.random.rand(8, 8)
-# print(x)
+print("np顯示小數點以下3位, IDLE顯示寬度80字, 無壓縮顯示")
+np.set_printoptions(precision=3, linewidth=80, suppress=False)
 
-plt.imshow(x, cmap="gray")
-plt.title('Random Image 8X8')
+print("NXN的隨機影像")
+N = 5
+image = np.random.rand(N, N)
+
+plt.imshow(image, cmap="gray")
 show()
 
-X = np.fft.fft2(x)
+print(image)
+
+print("------------------------------")  # 30個
+print("傅立葉變換")
+
+X = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
+print(X)
+print("------------------------------")  # 30個
+print("逆傅立葉變換")
+x2 = np.fft.ifft2(X)# 逆傅立葉變換, 將頻域訊號轉換回時域訊號
+print(x2)
 
 print("------------------------------")  # 30個
 # np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
-print(np.allclose(X[1:, 1:], X[7:0:-1, 7:0:-1].conj()))  # 共軛復數
-print("------------------------------")  # 30個
-print(X[::4, ::4])  # 虛數為零
-print("------------------------------")  # 30個
-x2 = np.fft.ifft2(X)  # 將頻域訊號轉換回空域訊號
-print(x2)
-print("------------------------------")  # 30個
-# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
-cc = np.allclose(x, x2)  # 和原始訊號進行比較
+cc = np.allclose(image, x2)  # 和原始訊號進行比較
 print(cc)
 print("------------------------------------------------------------")  # 60個
+
+sys.exit()
 
 print("製作 sinc2d 資料")
 
@@ -90,463 +178,263 @@ for x, x1 in enumerate(np.linspace(-2 * np.pi, 2 * np.pi, N)):
 
 print("製作 簡易 X矩陣 資料")
 N = 5
-X = np.zeros((N, N))
+image = np.zeros((N, N))
 
 cx, cy = N // 2, N // 2
 print(cx, cy)
 
-# X[cx-1:cx+2, cy-1:cy+2] = 1
-X[cx, cy] = 1
-print(X)
+# image[cx-1:cx+2, cy-1:cy+2] = 1
+image[cx, cy] = 1
+print(image)
 
-# X = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
-# X = sinc2d # 使用 sinc2d
+# image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+# image = sinc2d # 使用 sinc2d
 
 print("------------------------------")  # 30個
 
-# np 傅立葉變換
-X_FFT = np.fft.fft2(X)
-FFT_SHIFT = np.fft.fftshift(X_FFT)
-print(FFT_SHIFT)
+f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
+fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
 
-MAGNITUDE_SPECTRUM = 20 * np.log(np.abs(FFT_SHIFT))
+spectrum = 20 * np.log(np.abs(fshift))
+print(spectrum)
 
-print(MAGNITUDE_SPECTRUM)
-
-plt.figure(figsize=(8, 6))
 plt.subplot(121)
+plt.imshow(image, cmap="gray")  # 灰階顯示原圖
 plt.title("原圖")
-plt.imshow(X, cmap="gray")
 
 plt.subplot(122)
+plt.imshow(spectrum, cmap="gray")
 plt.title("fftshift")
-plt.imshow(MAGNITUDE_SPECTRUM, cmap="gray")
 
-plt.suptitle("numpy 傅立葉")
+plt.suptitle("使用 np 傅立葉")
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 
-f = np.fft.fft2(image)
-fshift = np.fft.fftshift(f)
-s1 = np.log(np.abs(fshift))
-# print(f)
-# fimage = np.log(np.abs(f))
-fimage = np.abs(s1)
-print(fimage)
+f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
+# fshift = np.fft.fftshift(f)            # 0 頻率分量移至中心
+spectrum = 20 * np.log(np.abs(f))  # 轉成頻譜
 
-plt.figure(figsize=(8, 6))
 plt.subplot(121)
+plt.imshow(image, cmap="gray")  # 灰階顯示原圖
 plt.title("原圖")
-plt.imshow(image, cmap="gray")
 
 plt.subplot(122)
-plt.title("fftshift")
-plt.imshow(fimage, cmap="gray")
+plt.imshow(spectrum, cmap="gray")  # 灰階顯示
+plt.title("頻譜圖")
 
-plt.suptitle("numpy 傅立葉")
+plt.suptitle("使用 np 傅立葉")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-X = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
 
-X_DFT = cv2.dft(np.float32(X), flags=cv2.DFT_COMPLEX_OUTPUT)
-# print(X_DFT)
 
-FFT_SHIFT = np.fft.fftshift(X_DFT)
-result = 20 * np.log(cv2.magnitude(FFT_SHIFT[:, :, 0], FFT_SHIFT[:, :, 1]))
+print("------------------------------------------------------------")  # 60個
+print("使用 cv 傅立葉 ST")
+# cv2.dft
+# cv2.idft
+print("------------------------------------------------------------")  # 60個
 
-plt.figure(figsize=(8, 6))
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+
+# 傅立葉變換
+X_DFT = cv2.dft(np.float32(image), flags=cv2.DFT_COMPLEX_OUTPUT)
+
+fshift = np.fft.fftshift(X_DFT)
+result = 20 * np.log(cv2.magnitude(fshift[:, :, 0], fshift[:, :, 1]))
 
 plt.subplot(121)
-plt.imshow(X, cmap="gray")
+plt.imshow(image, cmap="gray")  # 灰階顯示原圖
 plt.title("原圖")
 
 plt.subplot(122)
 plt.imshow(result, cmap="gray")
 plt.title("fftshift")
 
-plt.suptitle("傅立葉變換")
+plt.suptitle("使用 cv 傅立葉")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-# np 逆傅立葉
-
-X = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
-
-X_FFT = np.fft.fft2(X)
-FFT_SHIFT = np.fft.fftshift(X_FFT)
-FFT_SHIFT_IFFTSHIFT = np.fft.ifftshift(FFT_SHIFT)
-
-FFT_SHIFT_IFFTSHIFT_IFFT2 = np.fft.ifft2(FFT_SHIFT_IFFTSHIFT)
-
-FFT_SHIFT_IFFTSHIFT_IFFT2 = np.abs(FFT_SHIFT_IFFTSHIFT_IFFT2)
-
-plt.figure(figsize=(8, 6))
-
-plt.subplot(121)
-plt.imshow(X, cmap="gray")
-plt.title("原圖")
-
-plt.subplot(122)
-plt.imshow(FFT_SHIFT_IFFTSHIFT_IFFT2, cmap="gray")
-plt.title("FFT_SHIFT_IFFTSHIFT_IFFT2")
-
-plt.suptitle("逆傅立葉")
-show()
-
 print("------------------------------------------------------------")  # 60個
 
 # cv2 逆傅立葉變換
 
-X = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 
-X_DFT = cv2.dft(np.float32(X), flags=cv2.DFT_COMPLEX_OUTPUT)
-FFT_SHIFT = np.fft.fftshift(X_DFT)
-FFT_SHIFT_IFFTSHIFT = np.fft.ifftshift(FFT_SHIFT)
-FFT_SHIFT_IFFTSHIFT_IDFT = cv2.idft(FFT_SHIFT_IFFTSHIFT)
-FFT_SHIFT_IFFTSHIFT_IDFT = cv2.magnitude(
-    FFT_SHIFT_IFFTSHIFT_IDFT[:, :, 0], FFT_SHIFT_IFFTSHIFT_IDFT[:, :, 1]
-)
+# 傅立葉變換
+X_DFT = cv2.dft(np.float32(image), flags=cv2.DFT_COMPLEX_OUTPUT)
 
-plt.figure(figsize=(8, 6))
+fshift = np.fft.fftshift(X_DFT)
+ifshift = np.fft.ifftshift(fshift)  # 逆傅立葉變換
+src_tmp = cv2.idft(ifshift)  # 逆傅立葉
+src_back = cv2.magnitude(src_tmp[:, :, 0], src_tmp[:, :, 1])
 
 plt.subplot(121)
-plt.imshow(X, cmap="gray")
+plt.imshow(image, cmap="gray")  # 灰階顯示原圖
 plt.title("原圖")
 
 plt.subplot(122)
-plt.imshow(FFT_SHIFT_IFFTSHIFT_IDFT, cmap="gray")
-plt.title("FFT_SHIFT_IFFTSHIFT_IDFT")
+plt.imshow(src_back, cmap="gray")
+plt.title("ifft")
 
-plt.suptitle("逆傅立葉變換")
+plt.suptitle("使用 cv 傅立葉")
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-# 高通濾波
-
-X = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
-
-X_FFT = np.fft.fft2(X)
-
-FFT_SHIFT = np.fft.fftshift(X_FFT)
-rows, cols = X.shape
-crow, ccol = int(rows / 2), int(cols / 2)
-FFT_SHIFT[crow - 30 : crow + 30, ccol - 30 : ccol + 30] = 0
-FFT_SHIFT_IFFTSHIFT = np.fft.ifftshift(FFT_SHIFT)
-
-FFT_SHIFT_IFFTSHIFT_IFFT2 = np.fft.ifft2(FFT_SHIFT_IFFTSHIFT)
-FFT_SHIFT_IFFTSHIFT_IFFT2 = np.abs(FFT_SHIFT_IFFTSHIFT_IFFT2)
-
-plt.figure(figsize=(8, 6))
-
-plt.subplot(121)
-plt.imshow(X, cmap="gray")
-plt.title("原圖")
-
-plt.subplot(122)
-plt.imshow(FFT_SHIFT_IFFTSHIFT_IFFT2, cmap="gray")
-plt.title("FFT_SHIFT_IFFTSHIFT_IFFT2")
-
-plt.suptitle("高通濾波")
-show()
-
 print("------------------------------------------------------------")  # 60個
 
 # 低通濾波
 
-X = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 
-X_DFT = cv2.dft(np.float32(X), flags=cv2.DFT_COMPLEX_OUTPUT)
-FFT_SHIFT = np.fft.fftshift(X_DFT)
-rows, cols = X.shape
-crow, ccol = int(rows / 2), int(cols / 2)
-MASK = np.zeros((rows, cols, 2), np.uint8)
+# 傅立葉變換
+X_DFT = cv2.dft(np.float32(image), flags=cv2.DFT_COMPLEX_OUTPUT)
+
+fshift = np.fft.fftshift(X_DFT)  # 0 頻率分量移至中心
+
+# 低通濾波器
+rows, cols = image.shape  # 取得影像外形
+crow, ccol = rows // 2, cols // 2
+mask = np.zeros((rows, cols, 2), np.uint8)
 # 两个通道，与频谱图像匹配
-MASK[crow - 30 : crow + 30, ccol - 30 : ccol + 30] = 1
-FFT_SHIFT_MASK = FFT_SHIFT * MASK
-FFT_SHIFT_MASK_IFFTSHIFT = np.fft.ifftshift(FFT_SHIFT_MASK)
-FFT_SHIFT_MASK_IFFTSHIFT_IDFT = cv2.idft(FFT_SHIFT_MASK_IFFTSHIFT)
-FFT_SHIFT_MASK_IFFTSHIFT_IDFT = cv2.magnitude(
-    FFT_SHIFT_MASK_IFFTSHIFT_IDFT[:, :, 0], FFT_SHIFT_MASK_IFFTSHIFT_IDFT[:, :, 1]
-)
-
-plt.figure(figsize=(8, 6))
+mask[crow - 30 : crow + 30, ccol - 30 : ccol + 30] = 1
+FFT_SHIFT_MASK = fshift * mask
+ifshift = np.fft.ifftshift(FFT_SHIFT_MASK)  # 逆傅立葉變換
+src_tmp = cv2.idft(ifshift)  # 逆傅立葉
+src_back = cv2.magnitude(src_tmp[:, :, 0], src_tmp[:, :, 1])
 
 plt.subplot(121)
-plt.imshow(X, cmap="gray")
+plt.imshow(image, cmap="gray")  # 灰階顯示原圖
 plt.title("原圖")
 
 plt.subplot(122)
-plt.imshow(FFT_SHIFT_MASK_IFFTSHIFT_IDFT, cmap="gray")
-plt.title("FFT_SHIFT_MASK_IFFTSHIFT_IDFT")
+plt.imshow(src_back, cmap="gray")
+plt.title("低通濾波影像")
 
 plt.suptitle("低通濾波")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("MAGNITUDE_SPECTRUM")
+# 低通濾波
 
-X = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 
-X_DFT = cv2.dft(np.float32(X), flags=cv2.DFT_COMPLEX_OUTPUT)
+# 傅立葉變換
+X_DFT = cv2.dft(np.float32(image), flags=cv2.DFT_COMPLEX_OUTPUT)
 
-FFT_SHIFT = np.fft.fftshift(X_DFT)
-MAGNITUDE_SPECTRUM = 20 * np.log(cv2.magnitude(FFT_SHIFT[:, :, 0], FFT_SHIFT[:, :, 1]))
+dftshift = np.fft.fftshift(X_DFT)  # 0 頻率分量移至中心
 
-plt.figure(figsize=(8, 6))
+# 低通濾波器
+rows, cols = image.shape  # 取得影像外形
+row, col = rows // 2, cols // 2  # rows, cols的中心
+mask = np.zeros((rows, cols, 2), np.uint8)
+mask[row - 30 : row + 30, col - 30 : col + 30] = 1  # 設定區塊為低頻率分量是1
 
-plt.subplot(121), plt.imshow(X, cmap="gray")
+fshift = dftshift * mask
+ifshift = np.fft.ifftshift(fshift)  # 逆傅立葉變換  # 0 頻率分量移回左上角
+src_tmp = cv2.idft(ifshift)  # 逆傅立葉
+src_back = cv2.magnitude(src_tmp[:, :, 0], src_tmp[:, :, 1])
+
+plt.subplot(131)
+plt.imshow(image, cmap="gray")  # 灰階顯示原圖
+plt.title("原圖")
+
+plt.subplot(132)
+plt.imshow(src_back, cmap="gray")  # 灰階顯示
+plt.title("低通濾波灰階影像")
+
+plt.subplot(133)
+plt.imshow(src_back)
+plt.title("低通濾波影像")
+
+plt.suptitle("低通濾波")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("頻譜")
+
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+
+# 傅立葉變換
+X_DFT = cv2.dft(np.float32(image), flags=cv2.DFT_COMPLEX_OUTPUT)
+
+fshift = np.fft.fftshift(X_DFT)
+spectrum = 20 * np.log(cv2.magnitude(fshift[:, :, 0], fshift[:, :, 1]))
+
+plt.subplot(121)
+plt.imshow(image, cmap="gray")  # 灰階顯示原圖
 plt.title("原圖")
 
 plt.subplot(122)
-plt.imshow(MAGNITUDE_SPECTRUM, cmap="gray")
-plt.title("級頻譜 MAGNITUDE_SPECTRUM")
+plt.imshow(spectrum, cmap="gray")
+plt.title("頻譜")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-print("傅里葉變換 fft2")
-
-
-# 快速傅里葉變換
-def fft2Image(src):
-    # 得到行、列
-    r, c = src.shape[:2]
-    # 得到快速傅里葉變換最優擴充
-    rPadded = cv2.getOptimalDFTSize(r)
-    cPadded = cv2.getOptimalDFTSize(c)
-    # 邊緣擴充，下邊緣和右邊緣擴充值為零
-    fft2 = np.zeros((rPadded, cPadded, 2), np.float32)
-    fft2[:r, :c, 0] = src
-    # 快速傅里葉變換
-    cv2.dft(fft2, fft2, cv2.DFT_COMPLEX_OUTPUT)
-    return fft2
-
+print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
-# 計算圖像矩陣的快速傅里葉變換
-fft2 = fft2Image(image)
-# 傅里葉逆變換
-ifft2 = np.zeros(fft2.shape[:2], np.float32)
-cv2.dft(fft2, ifft2, cv2.DFT_REAL_OUTPUT + cv2.DFT_INVERSE + cv2.DFT_SCALE)
-# 裁剪
-image2 = np.copy(ifft2[: image.shape[0], : image.shape[1]])
-# 裁剪後的結果 image2 等於 image，兩個相減的最大值為零
-print(np.max(image - image2))
+
+# 傅立葉變換, 轉成頻率域
+X_DFT = cv2.dft(np.float32(image), flags=cv2.DFT_COMPLEX_OUTPUT)
+dftshift = np.fft.fftshift(X_DFT)  # 0 頻率分量移至中心
+# 計算映射到[0,255]的振幅
+spectrum = 20 * np.log(cv2.magnitude(dftshift[:, :, 0], dftshift[:, :, 1]))
+
+plt.subplot(121)
+plt.imshow(image, cmap="gray")  # 灰階顯示原圖
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(spectrum, cmap="gray")  # 灰階顯示
+plt.title("頻譜圖")
+
+plt.suptitle("使用 cv 傅立葉")
+show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("傅里葉變換 spectrum")
-
-
-# 快速傅里葉變換
-def fft2Image(src):
-    # 得到行、列
-    r, c = src.shape[:2]
-    # 得到快速傅里葉變換最優擴充
-    rPadded = cv2.getOptimalDFTSize(r)
-    cPadded = cv2.getOptimalDFTSize(c)
-    # 邊緣擴充，下邊緣和右邊緣擴充值為零
-    fft2 = np.zeros((rPadded, cPadded, 2), np.float32)
-    fft2[:r, :c, 0] = src
-    # 快速傅里葉變換
-    cv2.dft(fft2, fft2, cv2.DFT_COMPLEX_OUTPUT)
-    return fft2
-
-
-# 傅里葉幅度譜
-def amplitudeSpectrum(fft2):
-    # 求幅度
-    real2 = np.power(fft2[:, :, 0], 2.0)
-    Imag2 = np.power(fft2[:, :, 1], 2.0)
-    amplitude = np.sqrt(real2 + Imag2)
-    return amplitude
-
-
-# 幅度譜的灰度級顯示
-def graySpectrum(amplitude):
-    # 對比度拉伸
-    # cv2.log(amplitude+1.0,amplitude)
-    amplitude = np.log(amplitude + 1.0)
-    # 歸一化,傅里葉譜的灰度級顯示
-    spectrum = np.zeros(amplitude.shape, np.float32)
-    cv2.normalize(amplitude, spectrum, 0, 1, cv2.NORM_MINMAX)
-    return spectrum
-
-
-# 相位譜
-def phaseSpectrum(fft2):
-    # 得到行數、列數
-    rows, cols = fft2.shape[:2]
-    # 計算相位角
-    phase = np.arctan2(fft2[:, :, 1], fft2[:, :, 0])
-    # 顯示該相位譜時，首先需要將相位角轉換為 [ -180 , 180]
-    spectrum = phase / math.pi * 180
-    return spectrum
-
-
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
-cv2.imshow("image", image)
 
-# 快速傅里葉變換
-fft2 = fft2Image(image)
-# 求幅度譜
-amplitude = amplitudeSpectrum(fft2)
-amc = np.copy(amplitude)
-amc[amc > 255] = 255
-amc = amc.astype(np.uint8)
-# cv2.imshow("originam",amc)
-# 幅度譜的灰度級顯示
-ampSpectrum = graySpectrum(amplitude)
-ampSpectrum *= 255
-ampSpectrum = ampSpectrum.astype(np.uint8)
-cv2.imshow("amplitudeSpectrum", ampSpectrum)
-# 相位譜的灰度級顯示
-phaseSpe = phaseSpectrum(fft2)
-cv2.imshow("phaseSpectrum", phaseSpe)
+# 傅立葉變換, 轉成頻率域
+X_DFT = cv2.dft(np.float32(image), flags=cv2.DFT_COMPLEX_OUTPUT)
+dftshift = np.fft.fftshift(X_DFT)  # 0 頻率分量移至中心
 
-# 傅里葉幅度譜的中心化
+# 計算映射到[0,255]的振幅
+spectrum = 20 * np.log(cv2.magnitude(dftshift[:, :, 0], dftshift[:, :, 1]))
 
-# 第一步：圖像乘以(-1)^(r+c)
-rows, cols = image.shape
-fimage = np.copy(image)
-fimage = fimage.astype(np.float32)
-for r in range(rows):
-    for c in range(cols):
-        if (r + c) % 2:
-            fimage[r][c] = -1 * image[r][c]
-        else:
-            fimage[r][c] = image[r][c]
-# 第二步：快速傅里葉變換
-imagefft2 = fft2Image(fimage)
-# 第三步：傅里葉的幅度譜
-amSpe = amplitudeSpectrum(imagefft2)
-# 幅度譜的灰度級顯示
-graySpe = graySpectrum(amSpe)
-cv2.imshow("amSpe", graySpe)
-graySpe *= 255
-graySpe = graySpe.astype(np.uint8)
-# 第四步：相位譜的灰度級顯示
-phSpe = phaseSpectrum(imagefft2)
-cv2.imshow("phSpe", phSpe)
+# 執行逆傅立葉
+idftshift = np.fft.ifftshift(dftshift)  # 逆傅立葉變換
+tmp = cv2.idft(idftshift)
+dst = cv2.magnitude(tmp[:, :, 0], tmp[:, :, 1])
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+plt.subplot(131)
+plt.imshow(image, cmap="gray")  # 灰階顯示原圖
+plt.title("原圖")
+
+plt.subplot(132)
+plt.imshow(spectrum, cmap="gray")  # 灰階顯示
+plt.title("頻譜圖")
+
+plt.subplot(133)
+plt.imshow(dst, cmap="gray")  # 灰階顯示
+plt.title("逆傅立葉影像")
+
+plt.suptitle("使用 cv 傅立葉")
+show()
 
 print("------------------------------------------------------------")  # 60個
-
-print("傅里葉變換 saliencyMap")
-
-
-# 快速傅里葉變換
-def fft2Image(src):
-    # 得到行、列
-    r, c = src.shape[:2]
-    # 得到快速傅里葉變換最優擴充
-    rPadded = cv2.getOptimalDFTSize(r)
-    cPadded = cv2.getOptimalDFTSize(c)
-    # 邊緣擴充，下邊緣和右邊緣擴充值為零
-    fft2 = np.zeros((rPadded, cPadded, 2), np.float32)
-    fft2[:r, :c, 0] = src
-    # 快速傅里葉變換
-    cv2.dft(fft2, fft2, cv2.DFT_COMPLEX_OUTPUT)
-    return fft2
-
-
-# 傅里葉幅度譜
-def amplitudeSpectrum(fft2):
-    # 求幅度
-    real, Imag = cv2.split(fft2)
-    amplitude = cv2.magnitude(real, Imag)
-    # amplitude = cv2.magnitude(fft2[:,:,0],fft2[:,:,1])
-    return amplitude
-
-
-# 幅度譜的灰度級顯示
-def graySpectrum(amplitude):
-    # 對比度拉伸
-    # cv2.log(amplitude+1.0,amplitude)
-    amplitude = np.log(amplitude + 1.0)
-    # 歸一化,傅里葉譜的灰度級顯示
-    spectrum = np.zeros(amplitude.shape, np.float32)
-    cv2.normalize(amplitude, spectrum, 0, 1, cv2.NORM_MINMAX)
-    return spectrum
-
-
-# 相位譜
-def phaseSpectrum(fft2):
-    # 得到行數、列數
-    rows, cols = fft2.shape[:2]
-    # 計算相位角
-    phase = np.arctan2(fft2[:, :, 1], fft2[:, :, 0])
-    # 顯示該相位譜時，首先需要將相位角轉換為 [ -180 , 180]
-    # spectrum = phase/math.pi*180
-    return phase
-
-
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
-
-# 第一步：計算圖像的快速傅里葉變換
-fft2 = fft2Image(image)
-
-# 第二步：計算傅里葉幅度譜的灰度級
-# 求幅度譜
-amplitude = amplitudeSpectrum(fft2)
-# 幅度譜的灰度級
-logAmplitude = graySpectrum(amplitude)
-
-# 第三步：計算相位
-phase = phaseSpectrum(fft2)
-# 余弦譜（用於計算實部）
-cosSpectrum = np.cos(phase)
-# 正弦譜（用於計算虛部）
-sinSectrum = np.sin(phase)
-
-# 第四步：計算殘差（Spectral Residual）
-# 對幅度譜的灰度級進行均值平滑
-meanLogAmplitude = cv2.boxFilter(logAmplitude, cv2.CV_32FC1, (3, 3))
-# 殘差
-spectralResidual = logAmplitude - meanLogAmplitude
-
-# 第五步：計算傅里葉逆變換,顯著性
-# 殘差的指數
-expSR = np.exp(spectralResidual)
-# 分別計算實部和虛部
-real = expSR * cosSpectrum
-imaginary = expSR * sinSectrum
-# 合并實部和虛部
-com = np.zeros((real.shape[0], real.shape[1], 2), np.float32)
-com[:, :, 0] = real
-com[:, :, 1] = imaginary
-# 逆變換
-ifft2 = np.zeros(com.shape, np.float32)
-cv2.dft(com, ifft2, cv2.DFT_COMPLEX_OUTPUT + cv2.DFT_INVERSE)
-# 顯著性
-saliencymap = np.power(ifft2[:, :, 0], 2) + np.power(ifft2[:, :, 1], 2)
-# 對顯著性進行高斯平滑
-saliencymap = cv2.GaussianBlur(saliencymap, (11, 11), 2.5)  # 執行高斯模糊化
-# 顯示檢測到的顯著性
-# cv2.normalize(saliencymap,saliencymap,0,1,cv2.NORM_MINMAX)
-saliencymap = saliencymap / np.max(saliencymap)
-# 提高對比度，進行伽馬變換
-saliencymap = np.power(saliencymap, 0.5)
-saliencymap = np.round(saliencymap * 255)
-saliencymap = saliencymap.astype(np.uint8)
-cv2.imshow("saliencymap", saliencymap)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
 print("------------------------------------------------------------")  # 60個
 
 print("傅里葉變換 fft2Conv")
@@ -573,9 +461,13 @@ kernel = np.array([[1, 0, -1], [1, 0, 1], [1, 0, -1]], np.float64)
 confull = signal.convolve2d(I, kernel, mode="full", boundary="fill", fillvalue=0)
 # I 的傅里葉變換
 FT_I = np.zeros((I.shape[0], I.shape[1], 2), np.float64)
+
+# 傅立葉變換
 cv2.dft(I, FT_I, cv2.DFT_COMPLEX_OUTPUT)
 # kernel 的傅里葉變換
 FT_kernel = np.zeros((kernel.shape[0], kernel.shape[1], 2), np.float64)
+
+# 傅立葉變換
 cv2.dft(kernel, FT_kernel, cv2.DFT_COMPLEX_OUTPUT)
 # 傅里葉變換
 fft2 = np.zeros((confull.shape[0], confull.shape[1]), np.float64)
@@ -585,6 +477,8 @@ I_Padded = np.zeros(
 )
 I_Padded[: I.shape[0], : I.shape[1]] = I
 FT_I_Padded = np.zeros((I_Padded.shape[0], I_Padded.shape[1], 2), np.float64)
+
+# 傅立葉變換
 cv2.dft(I_Padded, FT_I_Padded, cv2.DFT_COMPLEX_OUTPUT)
 # 對 kernel 進行右側和下側補 0
 kernel_Padded = np.zeros(
@@ -594,20 +488,26 @@ kernel_Padded[: kernel.shape[0], : kernel.shape[1]] = kernel
 FT_kernel_Padded = np.zeros(
     (kernel_Padded.shape[0], kernel_Padded.shape[1], 2), np.float64
 )
+
+# 傅立葉變換
 cv2.dft(kernel_Padded, FT_kernel_Padded, cv2.DFT_COMPLEX_OUTPUT)
 # 兩個傅里葉變換相乘
 FT_Ikernel = cv2.mulSpectrums(FT_I_Padded, FT_kernel_Padded, cv2.DFT_ROWS)
 # 利用傅里葉變換求全 ( full ) 卷積
 ifft2 = np.zeros(FT_Ikernel.shape[:2], np.float64)
+
+# 傅立葉變換
 cv2.dft(FT_Ikernel, ifft2, cv2.DFT_REAL_OUTPUT + cv2.DFT_INVERSE + cv2.DFT_SCALE)
 print(np.max(ifft2 - confull))
 
 # 全卷積進行傅里葉變換等於兩個傅里葉變換的點乘
 FT_confull = np.zeros((confull.shape[0], confull.shape[1], 2), np.float64)
+# 傅立葉變換
 cv2.dft(confull, FT_confull, cv2.DFT_COMPLEX_OUTPUT)
 print(FT_confull - FT_Ikernel)
 print(np.max(FT_confull - FT_Ikernel))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("傅里葉變換 fft2toConv")
@@ -681,233 +581,18 @@ print(sameConv)
 """
 
 print("------------------------------------------------------------")  # 60個
-
-print("頻率域濾波 LPFilter")
-
-# 截止頻率
-radius = 50
-MAX_RADIUS = 100
-# 低通濾波類型
-lpType = 0
-MAX_LPTYPE = 2
+print("------------------------------------------------------------")  # 60個
 
 
-# 快速傅里葉變換
-def fft2Image(src):
-    # 得到行、列
-    r, c = src.shape[:2]
-    # 得到快速傅里葉變換最優擴充
-    rPadded = cv2.getOptimalDFTSize(r)
-    cPadded = cv2.getOptimalDFTSize(c)
-    # 邊緣擴充，下邊緣和右邊緣擴充值為零
-    fft2 = np.zeros((rPadded, cPadded, 2), np.float32)
-    fft2[:r, :c, 0] = src
-    # 快速傅里葉變換
-    cv2.dft(fft2, fft2, cv2.DFT_COMPLEX_OUTPUT)
-    return fft2
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-
-# 傅里葉幅度譜
-def amplitudeSpectrum(fft2):
-    # 求幅度
-    real2 = np.power(fft2[:, :, 0], 2.0)
-    Imag2 = np.power(fft2[:, :, 1], 2.0)
-    amplitude = np.sqrt(real2 + Imag2)
-    return amplitude
-
-
-# 幅度譜的灰度級顯示
-def graySpectrum(amplitude):
-    # 對比度拉伸
-    # cv2.log(amplitude+1.0,amplitude)
-    amplitude = np.log(amplitude + 1.0)
-    # 歸一化,傅里葉譜的灰度級顯示
-    spectrum = np.zeros(amplitude.shape, np.float32)
-    cv2.normalize(amplitude, spectrum, 0, 1, cv2.NORM_MINMAX)
-    return spectrum
-
-
-# 構建低通濾波器
-def createLPFilter(shape, center, radius, lpType=0, n=2):
-    # 濾波器的高和寬
-    rows, cols = shape[:2]
-    r, c = np.mgrid[0:rows:1, 0:cols:1]
-    c -= center[0]
-    r -= center[1]
-    d = np.power(c, 2.0) + np.power(r, 2.0)
-    # 構造低通濾波器
-    lpFilter = np.zeros(shape, np.float32)
-    if radius <= 0:
-        return lpFilter
-    if lpType == 0:  # 理想低通濾波
-        lpFilter = np.copy(d)
-        lpFilter[lpFilter < pow(radius, 2.0)] = 1
-        lpFilter[lpFilter >= pow(radius, 2.0)] = 0
-    elif lpType == 1:  # 巴特沃斯低通濾波
-        lpFilter = 1.0 / (1.0 + np.power(np.sqrt(d) / radius, 2 * n))
-    elif lpType == 2:  # 高斯低通濾波
-        lpFilter = np.exp(-d / (2.0 * pow(radius, 2.0)))
-    return lpFilter
-
-
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
-cv2.imshow("image", image)
-
-# 第二步：每一元素乘以 (-1)^(r+c)
-fimage = np.zeros(image.shape, np.float32)
-for r in range(image.shape[0]):
-    for c in range(image.shape[1]):
-        if (r + c) % 2:
-            fimage[r][c] = -1 * image[r][c]
-        else:
-            fimage[r][c] = image[r][c]
-# 第三和四步：補零和快速傅里葉變換
-fImagefft2 = fft2Image(fimage)
-# 傅里葉譜
-amplitude = amplitudeSpectrum(fImagefft2)
-# 傅里葉譜的灰度級顯示
-spectrum = graySpectrum(amplitude)
-cv2.imshow("originalSpectrum", spectrum)
-# 找到傅里葉譜最大值的位置
-minValue, maxValue, minLoc, maxLoc = cv2.minMaxLoc(amplitude)
-# 低通傅里葉譜灰度級的顯示窗口
-cv2.namedWindow("lpFilterSpectrum", 1)
-
-
-def nothing(*arg):
-    pass
-
-
-# 調節低通濾波類型
-cv2.createTrackbar("lpType", "lpFilterSpectrum", lpType, MAX_LPTYPE, nothing)
-# 調節截斷頻率
-cv2.createTrackbar("radius", "lpFilterSpectrum", radius, MAX_RADIUS, nothing)
-# 低通濾波結果
-result = np.zeros(spectrum.shape, np.float32)
-while True:
-    # 得到當前的截斷頻率、低通濾波類型
-    radius = cv2.getTrackbarPos("radius", "lpFilterSpectrum")
-    lpType = cv2.getTrackbarPos("lpType", "lpFilterSpectrum")
-    # 第五步：構建低通濾波器
-    lpFilter = createLPFilter(spectrum.shape, maxLoc, radius, lpType)
-    # 第六步：低通濾波器和快速傅里葉變換對應位置相乘（點乘）
-    rows, cols = spectrum.shape[:2]
-    fImagefft2_lpFilter = np.zeros(fImagefft2.shape, fImagefft2.dtype)
-    for i in range(2):
-        fImagefft2_lpFilter[:rows, :cols, i] = fImagefft2[:rows, :cols, i] * lpFilter
-    # 低通傅里葉變換的傅里葉譜
-    lp_amplitude = amplitudeSpectrum(fImagefft2_lpFilter)
-    # 顯示低通濾波後的傅里葉譜的灰度級
-    lp_spectrum = graySpectrum(lp_amplitude)
-    cv2.imshow("lpFilterSpectrum", lp_spectrum)
-    # 第七和八步：對低通傅里葉變換執行傅里葉逆變換,并只取實部
-    cv2.dft(
-        fImagefft2_lpFilter,
-        result,
-        cv2.DFT_REAL_OUTPUT + cv2.DFT_INVERSE + cv2.DFT_SCALE,
-    )
-    # 第九步：乘以(-1)^(r+c)
-    for r in range(rows):
-        for c in range(cols):
-            if (r + c) % 2:
-                result[r][c] *= -1
-    # 第十步：數據類型轉換,并進行灰度級顯示，截取左上角，大小和輸入圖像相等
-    for r in range(rows):
-        for c in range(cols):
-            if result[r][c] < 0:
-                result[r][c] = 0
-            elif result[r][c] > 255:
-                result[r][c] = 255
-    lpResult = result.astype(np.uint8)
-    lpResult = lpResult[: image.shape[0], : image.shape[1]]
-    cv2.imshow("LPFilter", lpResult)
-
-    k = cv2.waitKey(5)
-    if k == ESC:
-        break
-cv2.destroyAllWindows()
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-print("頻率域濾波 HomomorphicFilter")
-
-
-# 快速傅里葉變換
-def fft2Image(src):
-    # 得到行、列
-    r, c = src.shape[:2]
-    # 得到快速傅里葉變換最優擴充
-    rPadded = cv2.getOptimalDFTSize(r)
-    cPadded = cv2.getOptimalDFTSize(c)
-    # 邊緣擴充，下邊緣和右邊緣擴充值為零
-    fft2 = np.zeros((rPadded, cPadded, 2), np.float32)
-    fft2[:r, :c, 0] = src
-    # 快速傅里葉變換
-    cv2.dft(fft2, fft2, cv2.DFT_COMPLEX_OUTPUT)
-    return fft2
-
-
-# 傅里葉幅度譜
-def amplitudeSpectrum(fft2):
-    # 求幅度
-    real2 = np.power(fft2[:, :, 0], 2.0)
-    Imag2 = np.power(fft2[:, :, 1], 2.0)
-    amplitude = np.sqrt(real2 + Imag2)
-    return amplitude
-
-
-I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
-cv2.imshow("I", I)
-
-# 第二步：取對數
-lI = np.log(I + 1.0)
-lI = lI.astype(np.float32)
-# 第三步：每一元素乘以 (-1)^(r+c)
-fI = np.copy(lI)
-for r in range(I.shape[0]):
-    for c in range(I.shape[1]):
-        if (r + c) % 2:
-            fI[r][c] = -1 * fI[r][c]
-# 第四、五步：補零和快速傅里葉變換
-fft2 = fft2Image(fI)
-# 第六步：構造高頻增強濾波器（ high-emphasis Filter）
-# 找到傅里葉譜中的最大值的位置
-amplitude = amplitudeSpectrum(fft2)
-minValue, maxValue, minLoc, maxLoc = cv2.minMaxLoc(amplitude)
-# 濾波器的高和寬
-rows, cols = fft2.shape[:2]
-r, c = np.mgrid[0:rows:1, 0:cols:1]
-c -= maxLoc[0]
-r -= maxLoc[1]
-d = np.power(c, 2.0) + np.power(r, 2.0)
-high, low, k, radius = 2.5, 0.5, 1, 300
-heFilter = (high - low) * (1 - np.exp(-k * d / (2.0 * pow(radius, 2.0)))) + low
-# 第七步：快速傅里葉變換與高頻增強濾波器的點乘
-fft2Filter = np.zeros(fft2.shape, fft2.dtype)
-for i in range(2):
-    fft2Filter[:rows, :cols, i] = fft2[:rows, :cols, i] * heFilter
-# 第八、九步：高頻增強傅里葉變換執行傅里葉逆變換,并只取實部
-ifft2 = cv2.dft(fft2Filter, flags=cv2.DFT_REAL_OUTPUT + cv2.DFT_INVERSE + cv2.DFT_SCALE)
-# 第十步：裁剪，和輸入圖像的尺寸一樣
-ifI = np.copy(ifft2[: I.shape[0], : I.shape[1]])
-# 第十一步：每一元素乘以 (-1)^(r+c)
-for i in range(ifI.shape[0]):
-    for j in range(ifI.shape[1]):
-        if (i + j) % 2:
-            ifI[i][j] = -1 * ifI[i][j]
-# 第十二步：取指數
-eifI = np.exp(ifI) - 1
-# 第十三步：歸一化，并進行數據類型轉換
-eifI = (eifI - np.min(eifI)) / (np.max(eifI) - np.min(eifI))
-eifI = 255 * eifI
-eifI = eifI.astype(np.uint8)
-cv2.imshow("homomorphicFilter", eifI)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("image_fft")
+print("一維 fft")
 
 Fs = 1200  # 采樣頻率
 Ts = 1 / Fs  # 采樣區間
@@ -916,22 +601,13 @@ y = 5 * np.sin(2 * np.pi * 600 * x)
 N = 1200
 frq = np.arange(N)  # 頻率數1200個數
 half_x = frq[range(int(N / 2))]  # 取一半區間
-fft_y = np.fft.fft(y)
+fft_y = np.fft.fft(y)  # 一維 fft
 abs_y = np.abs(fft_y)  # 取復數的絕對值，即復數的模(雙邊頻譜)
 angle_y = 180 * np.angle(fft_y) / np.pi  # 取復數的弧度,并換算成角度
 gui_y = abs_y / N  # 歸一化處理（雙邊頻譜）
 gui_half_y = gui_y[range(int(N / 2))]  # 由于對稱性，只取一半區間（單邊頻譜）
 
-# 繪製結果
-fig = plt.figure(
-    num="",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(figsize=(12, 8))
 
 # 畫出原始波形的前50個點
 plt.subplot(231)
@@ -966,6 +642,7 @@ plt.title("單邊振幅譜(歸一化)")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("image_ftt2")
 
@@ -974,45 +651,34 @@ image = plt.imread("data/castle3.jpg")
 # 根據公式轉成灰度圖
 image = 0.2126 * image[:, :, 0] + 0.7152 * image[:, :, 1] + 0.0722 * image[:, :, 2]
 
-# 繪製結果
-fig = plt.figure(
-    num="",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(figsize=(12, 8))
 
-# 顯示原圖
 plt.subplot(231)
 plt.imshow(image, "gray")
 plt.title("原圖")
 
-# 進行傅立葉變換，并顯示結果
-fft2 = np.fft.fft2(image)
+f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
 
 plt.subplot(232)
-plt.imshow(np.abs(fft2), "gray")
+plt.imshow(np.abs(f), "gray")
 plt.title("二維傅里葉變換")
 
 # 將圖像變換的原點移動到頻域矩形的中心，并顯示效果
-FFT_SHIFT = np.fft.fftshift(fft2)
+fshift = np.fft.fftshift(f)
 
 plt.subplot(233)
-plt.imshow(np.abs(FFT_SHIFT), "gray")
+plt.imshow(np.abs(fshift), "gray")
 plt.title("頻域矩形的中心")
 
 # 對傅立葉變換的結果進行對數變換，并顯示效果
-log_fft2 = np.log(1 + np.abs(fft2))
+log_fft2 = np.log(1 + np.abs(f))
 
 plt.subplot(235)
 plt.imshow(log_fft2, "gray")
 plt.title("傅立葉變換對數變換")
 
 # 對中心化后的結果進行對數變換，并顯示結果
-log_FFT_SHIFT = np.log(1 + np.abs(FFT_SHIFT))
+log_FFT_SHIFT = np.log(1 + np.abs(fshift))
 
 plt.subplot(236)
 plt.imshow(log_FFT_SHIFT, "gray")
@@ -1020,6 +686,7 @@ plt.title("中心化的對數變化")
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ 跑不出來 skip
@@ -1032,14 +699,12 @@ image = plt.imread('data/castle3.jpg')
 #根據公式轉成灰度圖
 image = 0.2126 * image[:,:,0] + 0.7152 * image[:,:,1] + 0.0722 * image[:,:,2]
 
-#顯示原圖
 plt.subplot(131)
 plt.imshow(image,'gray')
 plt.title('原圖')
 
-#進行傅立葉變換，并顯示結果
-fft2 = np.fft.fft2(image)
-log_fft2 = np.log(1 + np.abs(fft2))
+f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
+log_fft2 = np.log(1 + np.abs(f))
 
 plt.subplot(132)
 plt.imshow(log_fft2,'gray')
@@ -1066,12 +731,16 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+
 N = 256
-X = cv2.imread("data/lena.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
-X = cv2.resize(X, (N, N))
-X_freq = np.fft.fft2(X)
-X_mag = np.log10(np.abs(X_freq))
-FFT_SHIFT = np.fft.fftshift(X_mag)
+image = cv2.resize(image, (N, N))
+
+f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
+
+X_mag = np.log10(np.abs(f))
+
+fshift = np.fft.fftshift(X_mag)
 
 rects = [
     (80, 125, 85, 130),
@@ -1083,24 +752,24 @@ rects = [
 """
     scpy2.opencv.fft2d_demo：示範二維離散傅立葉變換，
     使用者在左側的頻域模值圖形上用滑鼠繪制隱藏區域，
-    右側的圖形為頻域訊號經由隱藏處理之後所轉換成的空域訊號。
+    右側的圖形為頻域訊號經由隱藏處理之後所轉換成的時域訊號。
 """
 
-# %fig=(左上)用fft2()計算的頻域訊號，(中上)使用fftshift()移位之後的頻域訊號，(其它)各個領域所對應的空域訊號
+# %fig=(左上)用fft2()計算的頻域訊號，(中上)使用fftshift()移位之後的頻域訊號，(其它)各個領域所對應的時域訊號
 filtered_results = []
 for i, (x0, y0, x1, y1) in enumerate(rects):
-    MASK = np.zeros((N, N), dtype=np.bool)
-    MASK[x0 : x1 + 1, y0 : y1 + 1] = True
-    MASK[N - x1 : N - x0 + 1, N - y1 : N - y0 + 1] = True
-    MASK = np.fft.fftshift(MASK)
-    X_freq2 = X_freq * MASK
-    X_filtered = np.fft.ifft2(X_freq).real
+    mask = np.zeros((N, N), dtype=np.bool)
+    mask[x0 : x1 + 1, y0 : y1 + 1] = True
+    mask[N - x1 : N - x0 + 1, N - y1 : N - y0 + 1] = True
+    mask = np.fft.fftshift(mask)
+    X_freq2 = f * mask
+    X_filtered = np.fft.ifft2(f).real
     filtered_results.append(X_filtered)
 
 fig, axes = pl.subplots(2, 3, figsize=(9, 6))
 axes = axes.ravel()
 axes[0].imshow(X_mag, cmap=pl.cm.gray)
-axes[1].imshow(FFT_SHIFT, cmap=pl.cm.gray)
+axes[1].imshow(fshift, cmap=pl.cm.gray)
 
 ax = axes[1]
 for i, (x0, y0, x1, y1) in enumerate(rects):
@@ -1195,7 +864,7 @@ freq1 = 5
 # 頻率是 5 Hz
 freq2 = 8
 # 頻率是 8 Hz
-# 建立時間軸的Numpy陣列, 用500個點
+# 建立時間軸的np陣列, 用500個點
 time = np.linspace(start, end, 500)
 # 建立2個正弦波
 amplitude1 = np.sin(2 * np.pi * freq1 * time)
@@ -1227,235 +896,1055 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/fft/jk.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
 
-f = np.fft.fft2(src)  # 轉成頻率域
-fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
-spectrum = 20 * np.log(np.abs(fshift))  # 轉成頻譜
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-plt.subplot(121)  # 繪製左邊原圖
-plt.imshow(src, cmap="gray")  # 灰階顯示
-plt.title("原始影像")
-plt.axis("off")  # 不顯示座標軸
 
-plt.subplot(122)  # 繪製右邊頻譜圖
-plt.imshow(spectrum, cmap="gray")  # 灰階顯示
-plt.title("頻譜圖")
-plt.axis("off")  # 不顯示座標軸
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-show()
+print("傅里葉變換 fft2")
+
+
+# 快速傅里葉變換
+def fft2Image1(image):
+    # 得到行、列
+    r, c = image.shape[:2]
+    # 得到快速傅里葉變換最優擴充
+    rPadded = cv2.getOptimalDFTSize(r)
+    cPadded = cv2.getOptimalDFTSize(c)
+    # 邊緣擴充，下邊緣和右邊緣擴充值為零
+    fft2 = np.zeros((rPadded, cPadded, 2), np.float32)
+    fft2[:r, :c, 0] = image
+    # 快速傅里葉變換
+    cv2.dft(fft2, fft2, cv2.DFT_COMPLEX_OUTPUT)
+    return fft2
+
+
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+
+# 計算圖像矩陣的快速傅里葉變換
+fft2 = fft2Image1(image)
+
+# 傅里葉逆變換
+ifft2 = np.zeros(fft2.shape[:2], np.float32)
+cv2.dft(fft2, ifft2, cv2.DFT_REAL_OUTPUT + cv2.DFT_INVERSE + cv2.DFT_SCALE)
+
+# 裁剪
+image2 = np.copy(ifft2[: image.shape[0], : image.shape[1]])
+# 裁剪後的結果 image2 等於 image，兩個相減的最大值為零
+print(np.max(image - image2))
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/fft/shape1.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+print("傅里葉變換 spectrum")
 
-f = np.fft.fft2(src)  # 轉成頻率域
-fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
-spectrum = 20 * np.log(np.abs(fshift))  # 轉成頻譜
 
-plt.subplot(121)  # 繪製左邊原圖
-plt.imshow(src, cmap="gray")  # 灰階顯示
-plt.title("原始影像shape1.jpg")
-plt.axis("off")  # 不顯示座標軸
+# 快速傅里葉變換
+def fft2Image2(image):
+    # 得到行、列
+    r, c = image.shape[:2]
+    # 得到快速傅里葉變換最優擴充
+    rPadded = cv2.getOptimalDFTSize(r)
+    cPadded = cv2.getOptimalDFTSize(c)
+    # 邊緣擴充，下邊緣和右邊緣擴充值為零
+    fft2 = np.zeros((rPadded, cPadded, 2), np.float32)
+    fft2[:r, :c, 0] = image
+    # 快速傅里葉變換
+    cv2.dft(fft2, fft2, cv2.DFT_COMPLEX_OUTPUT)
+    return fft2
 
-plt.subplot(122)  # 繪製右邊頻譜圖
-plt.imshow(spectrum, cmap="gray")  # 灰階顯示
-plt.title("頻譜圖")
-plt.axis("off")  # 不顯示座標軸
 
-show()
+# 傅里葉幅度譜
+def amplitudeSpectrum(fft2):
+    # 求幅度
+    real2 = np.power(fft2[:, :, 0], 2.0)
+    Imag2 = np.power(fft2[:, :, 1], 2.0)
+    amplitude = np.sqrt(real2 + Imag2)
+    return amplitude
+
+
+# 幅度譜的灰度級顯示
+def graySpectrum(amplitude):
+    # 對比度拉伸
+    # cv2.log(amplitude+1.0,amplitude)
+    amplitude = np.log(amplitude + 1.0)
+    # 歸一化,傅里葉譜的灰度級顯示
+    spectrum = np.zeros(amplitude.shape, np.float32)
+    cv2.normalize(amplitude, spectrum, 0, 1, cv2.NORM_MINMAX)
+    return spectrum
+
+
+# 相位譜
+def phaseSpectrum(fft2):
+    # 得到行數、列數
+    rows, cols = fft2.shape[:2]
+    # 計算相位角
+    phase = np.arctan2(fft2[:, :, 1], fft2[:, :, 0])
+    # 顯示該相位譜時，首先需要將相位角轉換為 [ -180 , 180]
+    spectrum = phase / math.pi * 180
+    return spectrum
+
+
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+cv2.imshow("image", image)
+
+# 快速傅里葉變換
+fft2 = fft2Image2(image)
+
+# 求幅度譜
+amplitude = amplitudeSpectrum(fft2)
+amc = np.copy(amplitude)
+amc[amc > 255] = 255
+amc = amc.astype(np.uint8)
+# cv2.imshow("originam",amc)
+
+# 幅度譜的灰度級顯示
+ampSpectrum = graySpectrum(amplitude)
+ampSpectrum *= 255
+ampSpectrum = ampSpectrum.astype(np.uint8)
+cv2.imshow("amplitudeSpectrum", ampSpectrum)
+
+# 相位譜的灰度級顯示
+phaseSpe = phaseSpectrum(fft2)
+cv2.imshow("phaseSpectrum", phaseSpe)
+
+# 傅里葉幅度譜的中心化
+
+# 第一步：圖像乘以(-1)^(r+c)
+rows, cols = image.shape
+fimage = np.copy(image)
+fimage = fimage.astype(np.float32)
+for r in range(rows):
+    for c in range(cols):
+        if (r + c) % 2:
+            fimage[r][c] = -1 * image[r][c]
+        else:
+            fimage[r][c] = image[r][c]
+
+# 第二步：快速傅里葉變換
+imagefft2 = fft2Image2(fimage)
+
+# 第三步：傅里葉的幅度譜
+amSpe = amplitudeSpectrum(imagefft2)
+
+# 幅度譜的灰度級顯示
+graySpe = graySpectrum(amSpe)
+cv2.imshow("amSpe", graySpe)
+graySpe *= 255
+graySpe = graySpe.astype(np.uint8)
+
+# 第四步：相位譜的灰度級顯示
+phSpe = phaseSpectrum(imagefft2)
+
+cv2.imshow("phSpe", phSpe)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/fft/shape2.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+print("傅里葉變換 saliencyMap")
 
-f = np.fft.fft2(src)  # 轉成頻率域
-fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
-spectrum = 20 * np.log(np.abs(fshift))  # 轉成頻譜
 
-plt.subplot(121)  # 繪製左邊原圖
-plt.imshow(src, cmap="gray")  # 灰階顯示
-plt.title("原始影像shape2.jpg")
-plt.axis("off")  # 不顯示座標軸
+# 快速傅里葉變換
+def fft2Image3(image):
+    # 得到行、列
+    r, c = image.shape[:2]
+    # 得到快速傅里葉變換最優擴充
+    rPadded = cv2.getOptimalDFTSize(r)
+    cPadded = cv2.getOptimalDFTSize(c)
+    # 邊緣擴充，下邊緣和右邊緣擴充值為零
+    fft2 = np.zeros((rPadded, cPadded, 2), np.float32)
+    fft2[:r, :c, 0] = image
+    # 快速傅里葉變換
+    cv2.dft(fft2, fft2, cv2.DFT_COMPLEX_OUTPUT)
+    return fft2
 
-plt.subplot(122)  # 繪製右邊頻譜圖
-plt.imshow(spectrum, cmap="gray")  # 灰階顯示
-plt.title("頻譜圖")
-plt.axis("off")  # 不顯示座標軸
 
-show()
+# 傅里葉幅度譜
+def amplitudeSpectrum(fft2):
+    # 求幅度
+    real, Imag = cv2.split(fft2)
+    amplitude = cv2.magnitude(real, Imag)
+    # amplitude = cv2.magnitude(fft2[:,:,0],fft2[:,:,1])
+    return amplitude
 
-print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/fft/jk.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+# 幅度譜的灰度級顯示
+def graySpectrum(amplitude):
+    # 對比度拉伸
+    # cv2.log(amplitude+1.0,amplitude)
+    amplitude = np.log(amplitude + 1.0)
+    # 歸一化,傅里葉譜的灰度級顯示
+    spectrum = np.zeros(amplitude.shape, np.float32)
+    cv2.normalize(amplitude, spectrum, 0, 1, cv2.NORM_MINMAX)
+    return spectrum
 
-f = np.fft.fft2(src)  # 轉成頻率域
-# fshift = np.fft.fftshift(f)            # 0 頻率分量移至中心
-spectrum = 20 * np.log(np.abs(f))  # 轉成頻譜
 
-plt.subplot(121)  # 繪製左邊原圖
-plt.imshow(src, cmap="gray")  # 灰階顯示
-plt.title("原始影像")
-plt.axis("off")  # 不顯示座標軸
+# 相位譜
+def phaseSpectrum(fft2):
+    # 得到行數、列數
+    rows, cols = fft2.shape[:2]
+    # 計算相位角
+    phase = np.arctan2(fft2[:, :, 1], fft2[:, :, 0])
+    # 顯示該相位譜時，首先需要將相位角轉換為 [ -180 , 180]
+    # spectrum = phase/math.pi*180
+    return phase
 
-plt.subplot(122)  # 繪製右邊頻譜圖
-plt.imshow(spectrum, cmap="gray")  # 灰階顯示
-plt.title("頻譜圖")
-plt.axis("off")  # 不顯示座標軸
 
-show()
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 
-print("------------------------------------------------------------")  # 60個
+# 第一步：計算圖像的快速傅里葉變換
+fft2 = fft2Image3(image)
 
-src = cv2.imread("data/fft/jk.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+# 第二步：計算傅里葉幅度譜的灰度級
+# 求幅度譜
+amplitude = amplitudeSpectrum(fft2)
+# 幅度譜的灰度級
+logAmplitude = graySpectrum(amplitude)
+
+# 第三步：計算相位
+phase = phaseSpectrum(fft2)
+# 餘弦譜（用於計算實部）
+cosSpectrum = np.cos(phase)
+# 正弦譜（用於計算虛部）
+sinSectrum = np.sin(phase)
+
+# 第四步：計算殘差（Spectral Residual）
+# 對幅度譜的灰度級進行均值平滑
+meanLogAmplitude = cv2.boxFilter(logAmplitude, cv2.CV_32FC1, (3, 3))
+# 殘差
+spectralResidual = logAmplitude - meanLogAmplitude
+
+# 第五步：計算傅里葉逆變換,顯著性
+# 殘差的指數
+expSR = np.exp(spectralResidual)
+
+# 分別計算實部和虛部
+real = expSR * cosSpectrum
+imaginary = expSR * sinSectrum
+
+# 合併實部和虛部
+com = np.zeros((real.shape[0], real.shape[1], 2), np.float32)
+com[:, :, 0] = real
+com[:, :, 1] = imaginary
+
+# 逆變換
+ifft2 = np.zeros(com.shape, np.float32)
 
 # 傅立葉變換
-f = np.fft.fft2(src)  # 轉成頻率域
-fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
-# 逆傅立葉變換
-ifshift = np.fft.ifftshift(fshift)  # 0 頻率頻率移回左上角
-src_tmp = np.fft.ifft2(ifshift)  # 逆傅立葉
-src_back = np.abs(src_tmp)  # 取絕對值
+cv2.dft(com, ifft2, cv2.DFT_COMPLEX_OUTPUT + cv2.DFT_INVERSE)
 
-plt.subplot(121)  # 繪製左邊原圖
-plt.imshow(src, cmap="gray")  # 灰階顯示
-plt.title("原始影像")
-plt.axis("off")  # 不顯示座標軸
+# 顯著性
+saliencymap = np.power(ifft2[:, :, 0], 2) + np.power(ifft2[:, :, 1], 2)
 
-plt.subplot(122)  # 繪製右邊逆運算圖
-plt.imshow(src_back, cmap="gray")  # 灰階顯示
-plt.title("逆變換影像")
-plt.axis("off")  # 不顯示座標軸
+# 對顯著性進行高斯平滑
+saliencymap = cv2.GaussianBlur(saliencymap, (11, 11), 2.5)  # 執行高斯模糊化
+
+# 顯示檢測到的顯著性
+# cv2.normalize(saliencymap,saliencymap,0,1,cv2.NORM_MINMAX)
+saliencymap = saliencymap / np.max(saliencymap)
+
+# 提高對比度，進行伽馬變換
+saliencymap = np.power(saliencymap, 0.5)
+saliencymap = np.round(saliencymap * 255)
+saliencymap = saliencymap.astype(np.uint8)
+cv2.imshow("saliencymap", saliencymap)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("頻率域濾波 LPFilter")
+
+# 截止頻率
+radius = 50
+MAX_RADIUS = 100
+# 低通濾波類型
+lpType = 0
+MAX_LPTYPE = 2
+
+
+# 快速傅里葉變換
+def fft2Image4(image):
+    # 得到行、列
+    r, c = image.shape[:2]
+    # 得到快速傅里葉變換最優擴充
+    rPadded = cv2.getOptimalDFTSize(r)
+    cPadded = cv2.getOptimalDFTSize(c)
+    # 邊緣擴充，下邊緣和右邊緣擴充值為零
+    fft2 = np.zeros((rPadded, cPadded, 2), np.float32)
+    fft2[:r, :c, 0] = image
+    # 快速傅里葉變換
+    cv2.dft(fft2, fft2, cv2.DFT_COMPLEX_OUTPUT)
+    return fft2
+
+
+# 傅里葉幅度譜
+def amplitudeSpectrum(fft2):
+    # 求幅度
+    real2 = np.power(fft2[:, :, 0], 2.0)
+    Imag2 = np.power(fft2[:, :, 1], 2.0)
+    amplitude = np.sqrt(real2 + Imag2)
+    return amplitude
+
+
+# 幅度譜的灰度級顯示
+def graySpectrum(amplitude):
+    # 對比度拉伸
+    # cv2.log(amplitude+1.0,amplitude)
+    amplitude = np.log(amplitude + 1.0)
+    # 歸一化,傅里葉譜的灰度級顯示
+    spectrum = np.zeros(amplitude.shape, np.float32)
+    cv2.normalize(amplitude, spectrum, 0, 1, cv2.NORM_MINMAX)
+    return spectrum
+
+
+# 構建低通濾波器
+def createLPFilter(shape, center, radius, lpType=0, n=2):
+    # 濾波器的高和寬
+    rows, cols = shape[:2]
+    r, c = np.mgrid[0:rows:1, 0:cols:1]
+    c -= center[0]
+    r -= center[1]
+    d = np.power(c, 2.0) + np.power(r, 2.0)
+    # 構造低通濾波器
+    lpFilter = np.zeros(shape, np.float32)
+    if radius <= 0:
+        return lpFilter
+    if lpType == 0:  # 理想低通濾波
+        lpFilter = np.copy(d)
+        lpFilter[lpFilter < pow(radius, 2.0)] = 1
+        lpFilter[lpFilter >= pow(radius, 2.0)] = 0
+    elif lpType == 1:  # 巴特沃斯低通濾波
+        lpFilter = 1.0 / (1.0 + np.power(np.sqrt(d) / radius, 2 * n))
+    elif lpType == 2:  # 高斯低通濾波
+        lpFilter = np.exp(-d / (2.0 * pow(radius, 2.0)))
+    return lpFilter
+
+
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+cv2.imshow("image", image)
+
+# 第二步：每一元素乘以 (-1)^(r+c)
+fimage = np.zeros(image.shape, np.float32)
+for r in range(image.shape[0]):
+    for c in range(image.shape[1]):
+        if (r + c) % 2:
+            fimage[r][c] = -1 * image[r][c]
+        else:
+            fimage[r][c] = image[r][c]
+
+# 第三和四步：補零和快速傅里葉變換
+fImagefft2 = fft2Image4(fimage)
+
+# 傅里葉譜
+amplitude = amplitudeSpectrum(fImagefft2)
+
+# 傅里葉譜的灰度級顯示
+spectrum = graySpectrum(amplitude)
+cv2.imshow("originalSpectrum", spectrum)
+
+# 找到傅里葉譜最大值的位置
+minValue, maxValue, minLoc, maxLoc = cv2.minMaxLoc(amplitude)
+
+# 低通傅里葉譜灰度級的顯示窗口
+cv2.namedWindow("lpFilterSpectrum", 1)
+
+
+def nothing(*arg):
+    pass
+
+
+# 調節低通濾波類型
+cv2.createTrackbar("lpType", "lpFilterSpectrum", lpType, MAX_LPTYPE, nothing)
+# 調節截斷頻率
+cv2.createTrackbar("radius", "lpFilterSpectrum", radius, MAX_RADIUS, nothing)
+# 低通濾波結果
+result = np.zeros(spectrum.shape, np.float32)
+while True:
+    # 得到當前的截斷頻率、低通濾波類型
+    radius = cv2.getTrackbarPos("radius", "lpFilterSpectrum")
+    lpType = cv2.getTrackbarPos("lpType", "lpFilterSpectrum")
+    # 第五步：構建低通濾波器
+    lpFilter = createLPFilter(spectrum.shape, maxLoc, radius, lpType)
+    # 第六步：低通濾波器和快速傅里葉變換對應位置相乘（點乘）
+    rows, cols = spectrum.shape[:2]
+    fImagefft2_lpFilter = np.zeros(fImagefft2.shape, fImagefft2.dtype)
+    for i in range(2):
+        fImagefft2_lpFilter[:rows, :cols, i] = fImagefft2[:rows, :cols, i] * lpFilter
+    # 低通傅里葉變換的傅里葉譜
+    lp_amplitude = amplitudeSpectrum(fImagefft2_lpFilter)
+    # 顯示低通濾波後的傅里葉譜的灰度級
+    lp_spectrum = graySpectrum(lp_amplitude)
+    cv2.imshow("lpFilterSpectrum", lp_spectrum)
+    # 第七和八步：對低通傅里葉變換執行傅里葉逆變換,并只取實部
+    cv2.dft(
+        fImagefft2_lpFilter,
+        result,
+        cv2.DFT_REAL_OUTPUT + cv2.DFT_INVERSE + cv2.DFT_SCALE,
+    )
+    # 第九步：乘以(-1)^(r+c)
+    for r in range(rows):
+        for c in range(cols):
+            if (r + c) % 2:
+                result[r][c] *= -1
+    # 第十步：數據類型轉換,并進行灰度級顯示，截取左上角，大小和輸入圖像相等
+    for r in range(rows):
+        for c in range(cols):
+            if result[r][c] < 0:
+                result[r][c] = 0
+            elif result[r][c] > 255:
+                result[r][c] = 255
+    lpResult = result.astype(np.uint8)
+    lpResult = lpResult[: image.shape[0], : image.shape[1]]
+    cv2.imshow("LPFilter", lpResult)
+
+    k = cv2.waitKey(5)
+    if k == ESC:
+        break
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("頻率域濾波 HomomorphicFilter")
+
+
+# 快速傅里葉變換
+def fft2Image5(image):
+    # 得到行、列
+    r, c = image.shape[:2]
+    # 得到快速傅里葉變換最優擴充
+    rPadded = cv2.getOptimalDFTSize(r)
+    cPadded = cv2.getOptimalDFTSize(c)
+    # 邊緣擴充，下邊緣和右邊緣擴充值為零
+    fft2 = np.zeros((rPadded, cPadded, 2), np.float32)
+    fft2[:r, :c, 0] = image
+    # 快速傅里葉變換
+    cv2.dft(fft2, fft2, cv2.DFT_COMPLEX_OUTPUT)
+    return fft2
+
+
+# 傅里葉幅度譜
+def amplitudeSpectrum(fft2):
+    # 求幅度
+    real2 = np.power(fft2[:, :, 0], 2.0)
+    Imag2 = np.power(fft2[:, :, 1], 2.0)
+    amplitude = np.sqrt(real2 + Imag2)
+    return amplitude
+
+
+I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+cv2.imshow("I", I)
+
+# 第二步：取對數
+lI = np.log(I + 1.0)
+lI = lI.astype(np.float32)
+
+# 第三步：每一元素乘以 (-1)^(r+c)
+fI = np.copy(lI)
+for r in range(I.shape[0]):
+    for c in range(I.shape[1]):
+        if (r + c) % 2:
+            fI[r][c] = -1 * fI[r][c]
+
+# 第四、五步：補零和快速傅里葉變換
+fft2 = fft2Image5(fI)
+
+# 第六步：構造高頻增強濾波器（ high-emphasis Filter）
+# 找到傅里葉譜中的最大值的位置
+amplitude = amplitudeSpectrum(fft2)
+minValue, maxValue, minLoc, maxLoc = cv2.minMaxLoc(amplitude)
+
+# 濾波器的高和寬
+rows, cols = fft2.shape[:2]
+r, c = np.mgrid[0:rows:1, 0:cols:1]
+c -= maxLoc[0]
+r -= maxLoc[1]
+d = np.power(c, 2.0) + np.power(r, 2.0)
+high, low, k, radius = 2.5, 0.5, 1, 300
+heFilter = (high - low) * (1 - np.exp(-k * d / (2.0 * pow(radius, 2.0)))) + low
+
+# 第七步：快速傅里葉變換與高頻增強濾波器的點乘
+fft2Filter = np.zeros(fft2.shape, fft2.dtype)
+for i in range(2):
+    fft2Filter[:rows, :cols, i] = fft2[:rows, :cols, i] * heFilter
+
+# 第八、九步：高頻增強傅里葉變換執行傅里葉逆變換,并只取實部
+X_DFT = cv2.dft(fft2Filter, flags=cv2.DFT_REAL_OUTPUT + cv2.DFT_INVERSE + cv2.DFT_SCALE)
+
+# 第十步：裁剪，和輸入圖像的尺寸一樣
+ifI = np.copy(X_DFT[: I.shape[0], : I.shape[1]])
+
+# 第十一步：每一元素乘以 (-1)^(r+c)
+for i in range(ifI.shape[0]):
+    for j in range(ifI.shape[1]):
+        if (i + j) % 2:
+            ifI[i][j] = -1 * ifI[i][j]
+# 第十二步：取指數
+eifI = np.exp(ifI) - 1
+
+# 第十三步：歸一化，并進行數據類型轉換
+eifI = (eifI - np.min(eifI)) / (np.max(eifI) - np.min(eifI))
+eifI = 255 * eifI
+eifI = eifI.astype(np.uint8)
+
+cv2.imshow("homomorphicFilter", eifI)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+import scipy
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("一維 fft")
+
+print("np顯示小數點以下3位, IDLE顯示寬度80字, 無壓縮顯示")
+np.set_printoptions(precision=3, linewidth=80, suppress=False)
+
+# FFT 頻域訊號處理
+
+# 原始資料
+X = np.random.rand(8)
+# X = np.arange(10)
+# X = np.ones(8)
+
+X_FFT = np.fft.fft(X)  # 一維 fft
+
+X_FFT_IFFT = np.fft.ifft(X_FFT)  # 一維 ifft
+
+print("X :\n", X, sep="")
+print("X_FFT = fft(X) :\n", X_FFT, sep="")
+print("直流部分 DC =", X_FFT[0].real)  # 直流部分
+print("X_FFT_IFFT = ifft(X_FFT) :\n", X_FFT_IFFT, sep="")
+
+plt.scatter(X, X, c="g", s=200, label="原資料")
+plt.scatter(X_FFT.real, X_FFT.imag, c="r", s=200, label="FFT")
+plt.legend()
+plt.grid()
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("一維 fft")
+
+X = np.ones(8)
+
+X_FFT = np.fft.fft(X)  # 一維 fft
+print(X_FFT)
+
+# 做FFT, 除以FFT的長度
+X_FFT = np.fft.fft(X) / len(X)  # 為了計算各個成分的能量，需要將FFT的結果除以FFT的長度
+print(X_FFT)
+
+print("np顯示小數點以下3位, IDLE顯示寬度80字, 有壓縮顯示")
+np.set_printoptions(precision=3, linewidth=80, suppress=True)
+
+X = np.arange(0, 2 * np.pi, 2 * np.pi / 8)
+Y = np.sin(X)
+
+# 做FFT, 除以FFT的長度
+X_FFT = np.fft.fft(Y) / len(Y)
+print(np.array_str(X_FFT, suppress_small=True))
+
+# [ 0.+0.j  -0.-0.5j  0.-0.j   0.-0.j   0.+0.j   0.-0.j   0.+0.j   0.+0.5j]
+
+X_FFT = np.fft.fft(np.cos(X)) / len(X)
+print(np.array_str(X_FFT, suppress_small=True))
+
+# [-0.0+0.j  0.5-0.j  0.0+0.j  0.0+0.j  0.0+0.j -0.0+0.j  0.0+0.j  0.5-0.j]
+
+X_FFT = np.fft.fft(2 * np.sin(2 * X)) / len(X)
+print(np.array_str(X_FFT, suppress_small=True))
+X_FFT = np.fft.fft(0.8 * np.cos(2 * X)) / len(X)
+print(np.array_str(X_FFT, suppress_small=True))
+
+"""
+[ 0.+0.j  0.+0.j -0.-1.j  0.-0.j  0.+0.j  0.+0.j -0.+1.j  0.-0.j]
+[-0.0+0.j -0.0+0.j  0.4-0.j  0.0-0.j  0.0+0.j  0.0-0.j  0.4+0.j -0.0+0.j]
+"""
+X = np.arange(0, 2 * np.pi, 2 * np.pi / 128)
+Y = 0.3 * np.cos(X) + 0.5 * np.cos(2 * X + np.pi / 4) + 0.8 * np.cos(3 * X - np.pi / 3)
+Y_FFT = np.fft.fft(Y) / len(Y)
+print(np.array_str(Y_FFT[:4], suppress_small=True))
+print(np.abs(Y_FFT[1]), np.rad2deg(np.angle(Y_FFT[1])))  # 周期為128取樣點的余弦波的振幅和相位
+print(np.abs(Y_FFT[2]), np.rad2deg(np.angle(Y_FFT[2])))  # 周期為64取樣點的余弦波的振幅和相位
+print(np.abs(Y_FFT[3]), np.rad2deg(np.angle(Y_FFT[3])))  # 周期為42.667取樣點的余弦波的振幅和相位
+
+"""
+[ 0.000+0.j     0.150+0.j     0.177+0.177j  0.200-0.346j]
+0.15 2.48480834489e-15
+0.25 45.0
+0.4 -60.0
+"""
+X1 = np.random.random(4096)
+X2 = np.random.random(4093)
+
+X_FFT1 = np.fft.fft(X1)  # 一維 fft
+X_FFT2 = np.fft.fft(X2)  # 一維 fft
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("np.fft 02 合成時域訊號")
+
+
+# 三角波的頻譜（上）、使用頻譜中的部分頻率重建的三角波（下）
+def triangle_wave(size):
+    x = np.arange(0, 1, 1.0 / size)
+    y = np.where(x < 0.5, x, 0)
+    y = np.where(x >= 0.5, 1 - x, y)
+    return x, y
+
+
+# 取FFT計算的結果bins中的前n項進行合成，傳回合成結果，計算loops個周期的波形
+def fft_combine(bins, n, loops=1):
+    length = len(bins) * loops
+    data = np.zeros(length)
+    index = loops * np.arange(0, length, 1.0) / length * (2 * np.pi)
+    for k, p in enumerate(bins[:n]):
+        if k != 0:
+            p *= 2  # 除去直流成分之外，其余的系數都*2
+        data += np.real(p) * np.cos(k * index)  # 余弦成分的系數為實數部
+        data -= np.imag(p) * np.sin(k * index)  # 正弦成分的系數為負的虛數部
+    return index, data
+
+
+fft_size = 256
+
+# 計算三角波和其FFT
+x, y = triangle_wave(fft_size)
+fy = np.fft.fft(y) / fft_size
+
+# 繪制三角波的FFT的前20項的振幅，由於不含索引為偶數的值均為0， 因此取
+# log之後無窮小，無法繪圖，用np.clip函數設定陣列值的上下限，確保繪圖正確
+fig, axes = plt.subplots(2, 1, figsize=(8, 6))
+axes[0].plot(np.clip(20 * np.log10(np.abs(fy[:20])), -120, 120), "o")
+axes[0].set_xlabel("頻率視窗(frequency bin)")
+axes[0].set_ylabel("幅值(dB)")
+
+# 繪制原始的三角波和用正弦波逐級合成的結果，使用取樣點為x軸座標
+axes[1].plot(y, label="原始三角波", linewidth=2)
+for i in [0, 1, 3, 5, 7, 9]:
+    index, data = fft_combine(fy, i + 1, 2)  # 計算兩個周期的合成波形
+    axes[1].plot(data, label="N=%s" % i, alpha=0.6)
+axes[1].legend(loc="best")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/fft/snow.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+print("np.fft 03")
+print("一維 fft")
 
-# 傅立葉變換
-f = np.fft.fft2(src)  # 轉成頻率域
-fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
-# 高通濾波器
-rows, cols = src.shape  # 取得影像外形
-row, col = rows // 2, cols // 2  # rows, cols的中心
-fshift[row - 30 : row + 30, col - 30 : col + 30] = 0  # 設定區塊為低頻率分量是0
-# 逆傅立葉變換
-ifshift = np.fft.ifftshift(fshift)  # 0 頻率分量移回左上角
-src_tmp = np.fft.ifft2(ifshift)  # 逆傅立葉
-src_back = np.abs(src_tmp)  # 取絕對值
+# 方波的頻譜、合成方波在跳變處出現抖動
+def square_wave(size):
+    x = np.arange(0, 1, 1.0 / size)
+    y = np.where(x < 0.5, 1.0, 0)
+    return x, y
 
-plt.subplot(131)  # 繪製左邊原圖
-plt.imshow(src, cmap="gray")  # 灰階顯示
-plt.title("原始影像")
-plt.axis("off")  # 不顯示座標軸
 
-plt.subplot(132)  # 繪製中間圖
-plt.imshow(src_back, cmap="gray")  # 灰階顯示
-plt.title("高通濾波灰階影像")
-plt.axis("off")  # 不顯示座標軸
+x, y = square_wave(fft_size)
+fy = np.fft.fft(y) / fft_size
 
-plt.subplot(133)  # 繪製右邊圖
-plt.title("高通濾波影像")
-plt.imshow(src_back)  # 顯示影像
-plt.axis("off")  # 不顯示座標軸
+fig, axes = plt.subplots(2, 1, figsize=(8, 6))
+axes[0].plot(np.clip(20 * np.log10(np.abs(fy[:20])), -120, 120), "o")
+axes[0].set_xlabel("頻率視窗(frequency bin)")
+axes[0].set_ylabel("幅值(dB)")
+axes[1].plot(y, label="原始方波", linewidth=2)
+for i in [0, 1, 3, 5, 7, 9]:
+    index, data = fft_combine(fy, i + 1, 2)  # 計算兩個周期的合成波形
+    axes[1].plot(data, label="N=%s" % i)
+axes[1].legend(loc="best")
+
+show()
+
+"""
+scpy2.examples.fft_demo：使用該程式可以交談式地觀察各種三角波和方波的頻譜以及其正弦合成的近似波形
+"""
+print("------------------------------------------------------------")  # 60個
+
+print("np.fft 04 觀察訊號的頻譜")
+
+
+def show_fft(x):
+    XS = x[:fft_size]
+    xf = np.fft.rfft(XS) / fft_size
+    freqs = np.linspace(0, sampling_rate / 2, fft_size // 2 + 1)
+    xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))
+
+    plt.figure(figsize=(8, 4))
+    plt.subplot(211)
+    plt.plot(T[:fft_size], XS)
+    plt.xlabel("時間(秒)")
+    plt.subplot(212)
+    plt.plot(freqs, xfp)
+    plt.xlabel("頻率(Hz)")
+    plt.subplots_adjust(hspace=0.4)
+    print(xfp[[10, 15]])
+
+
+# 156.25Hz和234.375Hz的波形（上）和頻譜（下）
+sampling_rate, fft_size = 8000, 512
+T = np.arange(0, 1.0, 1.0 / sampling_rate)
+X = np.sin(2 * np.pi * 156.25 * T) + 2 * np.sin(2 * np.pi * 234.375 * T)
+
+show_fft(X)
+show()
+
+# [ -6.021e+00  -9.643e-16]
+
+freqs = np.fft.fftfreq(fft_size, 1.0 / sampling_rate)
+for i in [
+    0,
+    1,
+    fft_size // 2 - 1,
+    fft_size // 2,
+    fft_size // 2 + 1,
+    fft_size - 2,
+    fft_size - 1,
+]:
+    print(i, "\t", freqs[i])
+
+
+# 非完整周期（200Hz和300Hz）的正弦波經由FFT變換之後出現頻譜洩漏
+X = np.sin(2 * np.pi * 200 * T) + 2 * np.sin(2 * np.pi * 300 * T)
+
+show_fft(X)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("np.fft 05")
+
+# 50Hz正弦波的512點FFT所計算的頻譜的實際波形
+plt.figure(figsize=(6, 2))
+T = np.arange(0, 1.0, 1.0 / 8000)
+X = np.sin(2 * np.pi * 50 * T)[:512]
+plt.plot(np.hstack([X, X, X]))
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/fft/jk.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+print("np.fft 06")
 
-# 轉成頻率域
-dft = cv2.dft(np.float32(src), flags=cv2.DFT_COMPLEX_OUTPUT)
-dftshift = np.fft.fftshift(dft)  # 0 頻率分量移至中心
-# 計算映射到[0,255]的振幅
-spectrum = 20 * np.log(cv2.magnitude(dftshift[:, :, 0], dftshift[:, :, 1]))
+"""
+解決 : AttributeError: module 'scipy.signal' has no attribute 'hann'
 
-plt.subplot(121)  # 繪製左邊原圖
-plt.imshow(src, cmap="gray")  # 灰階顯示
-plt.title("原始影像")
-plt.axis("off")  # 不顯示座標軸
+pip install numpy==1.23.4
+pip install scipy==1.12.0
+pip install librosa(==0.10.1)
+"""
 
-plt.subplot(122)  # 繪製右邊頻譜圖
-plt.imshow(spectrum, cmap="gray")  # 灰階顯示
-plt.title("頻譜圖")
-plt.axis("off")  # 不顯示座標軸
+# Hann窗函數
+
+plt.figure(figsize=(6, 2))
+plt.plot(scipy.signal.windows.hann(512))
+show()
+
+print(scipy.signal.windows.hann(8))
+print(scipy.signal.windows.hann(8, sym=0))
+
+# 加Hann窗的50Hz正弦波的512點FFT所計算的實際波形
+plt.figure(figsize=(6, 2))
+T = np.arange(0, 1.0, 1.0 / 8000)
+X = np.sin(2 * np.pi * 50 * T)[:512] * scipy.signal.windows.hann(512, sym=0)
+plt.plot(np.hstack([X, X, X]))
+
+show()
+
+print("------------------------------")  # 30個
+
+# 加Hann窗前後的頻譜，Hann窗能降低頻譜洩漏
+
+sampling_rate, fft_size = 8000, 512
+T = np.arange(0, 1.0, 1.0 / sampling_rate)
+X = np.sin(2 * np.pi * 200 * T) + 2 * np.sin(2 * np.pi * 300 * T)
+
+XS = X[:fft_size]
+YS = XS * scipy.signal.windows.hann(fft_size, sym=0)
+
+xf = np.fft.rfft(XS) / fft_size
+yf = np.fft.rfft(YS) / fft_size
+
+freqs = np.linspace(0, sampling_rate // 2, fft_size // 2 + 1)
+
+xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))
+yfp = 20 * np.log10(np.clip(np.abs(yf), 1e-20, 1e100))
+plt.figure(figsize=(8, 4))
+plt.plot(freqs, xfp, label="矩形窗")
+plt.plot(freqs, yfp, label="hann窗")
+plt.legend()
+plt.xlabel("頻率(Hz)")
+
+a = plt.axes([0.4, 0.2, 0.4, 0.4])
+a.plot(freqs, xfp, label="矩形窗")
+a.plot(freqs, yfp, label="hann窗")
+a.set_xlim(100, 400)
+a.set_ylim(-40, 0)
+
+show()
+
+cc = np.mean(scipy.signal.windows.hann(512, sym=0))
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+print("np.fft 07 頻譜平均")
+
+
+def average_fft(x, fft_size):
+    n = len(x) // fft_size * fft_size
+    tmp = x[:n].reshape(-1, fft_size)
+    tmp *= scipy.signal.windows.hann(fft_size, sym=0)
+    xf = np.abs(np.fft.rfft(tmp) / fft_size)
+    avgf = np.mean(xf, axis=0)
+    return 20 * np.log10(avgf)
+
+
+# 白色噪聲的頻譜接近水平直線（注意Y軸的範圍）
+x = np.random.randn(100000)
+xf = average_fft(x, 512)
+
+plt.figure(figsize=(7, 3.5))
+plt.plot(xf)
+plt.xlabel("頻率視窗(Frequency Bin)")
+plt.ylabel("幅值(dB)")
+plt.xlim([0, 257])
+plt.subplots_adjust(bottom=0.15)
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/fft/shape2.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+print("np.fft 08 經由低通濾波器的白噪聲的頻譜")
 
-# 轉成頻率域
-dft = cv2.dft(np.float32(src), flags=cv2.DFT_COMPLEX_OUTPUT)
-dftshift = np.fft.fftshift(dft)  # 0 頻率分量移至中心
-# 計算映射到[0,255]的振幅
-spectrum = 20 * np.log(cv2.magnitude(dftshift[:, :, 0], dftshift[:, :, 1]))
-# 執行逆傅立葉
-idftshift = np.fft.ifftshift(dftshift)
-tmp = cv2.idft(idftshift)
-dst = cv2.magnitude(tmp[:, :, 0], tmp[:, :, 1])
+B, A = scipy.signal.iirdesign(1000 / 4000.0, 1100 / 4000.0, 1, 40, 0, "cheby1")
+X = np.random.randn(100000)
+Y = scipy.signal.filtfilt(B, A, X)
+Y_FFT = average_fft(Y, 512)
 
-plt.subplot(131)  # 繪製左邊原圖
-plt.imshow(src, cmap="gray")  # 灰階顯示
-plt.title("原始影像shape2.jpg")
-plt.axis("off")  # 不顯示座標軸
-
-plt.subplot(132)  # 繪製中間頻譜圖
-plt.imshow(spectrum, cmap="gray")  # 灰階顯示
-plt.title("頻譜圖")
-plt.axis("off")  # 不顯示座標軸
-
-plt.subplot(133)  # 繪製右邊逆傅立葉圖
-plt.imshow(dst, cmap="gray")  # 灰階顯示
-plt.title("逆傅立葉影像")
-plt.axis("off")  # 不顯示座標軸
+plt.figure(figsize=(7, 3.5))
+plt.plot(Y_FFT)
+plt.xlabel("頻率視窗(Frequency Bin)")
+plt.ylabel("幅值(dB)")
+plt.xlim(0, 257)
+plt.subplots_adjust(bottom=0.15)
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/fft/jk.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+print("np.fft 09 譜圖, 頻率掃描波的譜圖")
 
-# 傅立葉變換
-dft = cv2.dft(np.float32(src), flags=cv2.DFT_COMPLEX_OUTPUT)
-dftshift = np.fft.fftshift(dft)  # 0 頻率分量移至中心
-# 低通濾波器
-rows, cols = src.shape  # 取得影像外形
-row, col = rows // 2, cols // 2  # rows, cols的中心
-mask = np.zeros((rows, cols, 2), np.uint8)
-mask[row - 30 : row + 30, col - 30 : col + 30] = 1  # 設定區塊為低頻率分量是1
+sampling_rate = 8000.0
+fft_size = 1024
+step = fft_size / 16
+time = 2
 
-fshift = dftshift * mask
-ifshift = np.fft.ifftshift(fshift)  # 0 頻率分量移回左上角
-src_tmp = cv2.idft(ifshift)  # 逆傅立葉
-src_back = cv2.magnitude(src_tmp[:, :, 0], src_tmp[:, :, 1])
+t = np.arange(0, time, 1 / sampling_rate)
+sweep = scipy.signal.chirp(
+    t, f0=100, t1=time, f1=0.8 * sampling_rate / 2, method="logarithmic"
+)
 
-plt.subplot(131)  # 繪製左邊原圖
-plt.imshow(src, cmap="gray")  # 灰階顯示
-plt.title("原始影像")
-plt.axis("off")  # 不顯示座標軸
+# NG plt.specgram(sweep, fft_size, sampling_rate, noverlap = 1024-step)
+plt.xlabel("時間(秒)")
+plt.ylabel("頻率(Hz)")
 
-plt.subplot(132)  # 繪製中間圖
-plt.imshow(src_back, cmap="gray")  # 灰階顯示
-plt.title("低通濾波灰階影像")
-plt.axis("off")  # 不顯示座標軸
+show()
 
-plt.subplot(133)  # 繪製右邊圖
-plt.imshow(src_back)  # 顯示
-plt.title("低通濾波影像")
-plt.axis("off")  # 不顯示座標軸
+"""
+scpy2.examples.spectrogram_realtime：實時觀察音效訊號譜圖的示範程式，
+使用TraitsUI、PyAudio等庫實現
+"""
+print("------------------------------------------------------------")  # 60個
+
+# %hide
+# %exec_python -m scpy2.examples.spectrogram_realtime
+
+print("np.fft 10 精確測量訊號頻率")
+
+
+def make_wave(amp, freq, phase, tend, rate):
+    period = 1.0 / rate
+    t = np.arange(0, tend, period)
+    x = np.zeros_like(t)
+    for a, f, p in zip(amp, freq, phase):
+        x += a * np.sin(2 * np.pi * f * t + p)
+    return t, x
+
+
+RATE = 8000
+t, x = make_wave([1, 2, 0.5], [44, 150, 330], [1, 1.4, 1.8], 0.3, RATE)
+x += np.random.randn(len(x))
+
+FFT_SIZE = 1024
+spect1 = np.fft.rfft(x[:FFT_SIZE] * np.hanning(FFT_SIZE))
+freqs = np.fft.fftfreq(FFT_SIZE, 1.0 / RATE)
+
+bin_width = freqs[1] - freqs[0]
+
+amp_spect1 = np.abs(spect1)
+(loc,) = scipy.signal.argrelmax(amp_spect1, order=3)
+mask = amp_spect1[loc] > amp_spect1.mean() * 3
+loc = loc[mask]
+peak_freqs = freqs[loc]
+print("bin width:", bin_width)
+print("Peak Frequencies:", peak_freqs)
+
+# bin width: 7.8125
+# Peak Frequencies: [  46.875  148.438  328.125]
+
+COUNT = FFT_SIZE // 4
+dt = COUNT / 8000.0
+
+spect2 = np.fft.rfft(x[COUNT : COUNT + FFT_SIZE] * np.hanning(FFT_SIZE))
+
+phase1 = np.angle(spect1[loc])
+phase2 = np.angle(spect2[loc])
+
+phase_delta = phase2 - phase1
+print(phase_delta)
+
+# [ 2.595 -1.29  -2.899]
+
+max_n = (peak_freqs.max() + 3 * bin_width) * dt
+n = np.arange(max_n)
+
+possible_freqs = (phase_delta + 2 * np.pi * n[:, None]) / (2 * np.pi * dt)
+
+idx = np.argmin(np.abs(peak_freqs - possible_freqs), axis=0)
+peak_freqs2 = possible_freqs[idx, np.arange(len(peak_freqs))]
+print("Peak Frequencies:", peak_freqs2)
+
+# Peak Frequencies: [  44.155  149.833  329.33 ]
+
+print("------------------------------------------------------------")  # 60個
+
+print("np.fft 11")
+print("一維 fft")
+
+# 卷冊積運算
+# 快速卷冊積
+
+
+def fft_convolve(a, b):
+    n = len(a) + len(b) - 1
+    N = 2 ** (int(np.log2(n)) + 1)
+    A = np.fft.fft(a, N)
+    B = np.fft.fft(b, N)
+    return np.fft.ifft(A * B)[:n]  # 一維 ifft
+
+
+a = np.random.rand(128)
+b = np.random.rand(128)
+c = np.convolve(a, b)
+# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
+np.allclose(c, fft_convolve(a, b))
+
+# True
+
+a = np.random.rand(10000)
+b = np.random.rand(10000)
+# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
+print(np.allclose(np.convolve(a, b), fft_convolve(a, b)))
+
+# np.convolve(a, b)
+# fft_convolve(a, b)
+
+# True
+# 10 loops, best of 3: 36.5 ms per loop
+# 100 loops, best of 3: 6.43 ms per loop
+
+# 比較直接卷冊積和FFT卷冊積的運算速度  skip 速度
+for n in range(4, 14):
+    N = 2**n
+    a = np.random.rand(N)
+    b = np.random.rand(N)
+    np.convolve(a, b)
+    fft_convolve(a, b)
+
+print("fft SP")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("傅里葉變換")
+print("一維 fft")
+
+df = pd.read_csv("data/AirPassengers222.csv")
+ts = df["#Passengers"]  # Series
+
+plt.subplot(211)
+plt.plot(ts, "r")
+# print("ts :", ts)
+
+# 平穩化
+ts_log = np.log(ts)
+# print("ts_log :", ts_log)
+
+ts_diff = ts_log.diff(1)  # 差分 A[n] = A[n]-A[n-1], 故第0項為NaN, 總數少1項
+# print("ts_diff :", ts_diff)
+
+ts_diff = ts_diff.dropna()  # 去除空數據NaN
+# print("ts_diff :", ts_diff)
+
+fy = np.fft.fft(ts_diff)  # np.array 做 fft  # 一維 fft
+print("fy :", fy)
+print(fy[:10])  # 顯示前10個頻域數據
+
+conv1 = np.real(np.fft.ifft(fy))  # 一維 ifft
+
+plt.subplot(212)
+
+plt.plot(ts_diff, "r")
+plt.plot(conv1 - 0.5, "g")  # 爲看清楚，將顯示區域下拉0.5
 
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("小波變換")
+
+import pywt
+
+data = pd.read_csv("data/AirPassengers222.csv")
+ts = data["#Passengers"]
+ts_log = np.log(ts)
+ts_diff = ts_log.diff(1)
+ts_diff = ts_diff.dropna()
+
+cA, cD = pywt.dwt(ts_diff, "db2")
+cD = np.zeros(len(cD))
+new_data = pywt.idwt(cA, cD, "db2")
+
+plt.plot(ts_diff)
+plt.plot(new_data - 0.5)
+show()
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1465,6 +1954,7 @@ print("------------------------------------------------------------")  # 60個
 sys.exit()
 
 
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1472,7 +1962,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 # 取四捨五入到小數點以下2位
-MAGNITUDE_SPECTRUM = np.around(MAGNITUDE_SPECTRUM, decimals=2)
+spectrum = np.around(spectrum, decimals=2)
 
 
 print("------------------------------")  # 30個
@@ -1480,4 +1970,58 @@ print("------------------------------")  # 30個
 
 # %fig=（左上）用fft2()計算的頻域訊號，
 # （中上）使用fftshift()移位之後的頻域訊號，
-# （其它）各個領域所對應的空域訊號
+# （其它）各個領域所對應的時域訊號
+
+
+# 沒有用的檔案
+
+image = cv2.imread("data/fft/shape1.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+image = cv2.imread("data/fft/shape2.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+"data/fft/jk.jpg"
+"data/fft/snow.jpg"
+
+
+np.fft.fft2(image)
+
+
+
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+image = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
+
+
+#plt.figure(figsize=(8, 6))
+
+plt.axis("off")
+
+
+
+ifshift = np.fft.ifftshift(fshift)  # 逆傅立葉變換  # 0 頻率頻率移回左上角
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+tmp = np.linspace(1, 2, 4)
+print(tmp)
+print(np.array_str(tmp, suppress_small=True))  # 有壓縮顯示
+
+print("------------------------------------------------------------")  # 60個
+
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+
+plt.subplot(121)
+plt.imshow(image, cmap="gray")  # 灰階顯示原圖
+plt.title("原圖")
+
+image = image[::3, ::2]  #j每隔3, i每隔2
+
+plt.subplot(122)
+plt.imshow(image, cmap="gray")  # 灰階顯示原圖
+plt.title("原圖")
+
+show()
+
+print(X[::3, ::3])
+print("-----")
+print(X[::4, ::4])  # 虛數為零
