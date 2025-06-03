@@ -47,6 +47,7 @@ print("------------------------------------------------------------")  # 60個
 print("製作影像")
 
 
+
 print("------------------------------------------------------------")  # 60個
 # OpenCV_05_建立空影像
 print("------------------------------------------------------------")  # 60個
@@ -877,7 +878,7 @@ print("------------------------------------------------------------")  # 60個
 # OpenCV_08_影像計算
 print("------------------------------------------------------------")  # 60個
 
-# ch8_1.py
+# 影像計算 影像相加 cv2.add
 
 src1 = np.random.randint(0, 256, size=[3, 3], dtype=np.uint8)
 src2 = np.random.randint(0, 256, size=[3, 3], dtype=np.uint8)
@@ -888,48 +889,41 @@ print(f"dst = \n {src1+src2}")
 
 print("------------------------------------------------------------")  # 60個
 
-# ch8_2.py
+# 影像計算 影像相加 cv2.add
+# 灰階/彩色影像相加, 變得更白/更亮
+# 用相加的，像素值會破表
 
 img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰色讀取
-cv2.imshow("Peony1", img)
+# img = cv2.imread(filename1)  # 彩色讀取
+cv2.imshow("Peony0", img)
 
 res = cv2.add(img, img)
-cv2.imshow("Peony2", res)
+cv2.imshow("Peony_by_cv2.add", res)
+
+res2 = img + img
+cv2.imshow("Peony_by_+", res2)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch8_3.py
+# 影像計算 影像相加 cv2.add
 
-img = cv2.imread(filename1)  # 彩色讀取
-cv2.imshow("Peony1", img)
-
-res = cv2.add(img, img)  # 調整亮度結果
-cv2.imshow("Peony2", res)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch8_3_1.py
-
-value = 20  # 亮度調整值
-img = cv2.imread(filename1)  # 彩色讀取
-cv2.imshow("Peony1", img)
+value = 60  # 亮度調整值
+img = cv2.imread(filename2)  # 彩色讀取
+cv2.imshow("Elephant1", img)
 
 coff = np.ones(img.shape, dtype=np.uint8) * value
 res = cv2.add(img, coff)  # 調整亮度結果
-cv2.imshow("Peony2", res)
+cv2.imshow("Elephant2", res)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch8_4.py
+# 像素質直接相加會破表
 
 src1 = np.random.randint(0, 256, size=[3, 3], dtype=np.uint8)
 src2 = np.random.randint(0, 256, size=[3, 3], dtype=np.uint8)
@@ -939,38 +933,9 @@ print(f"src2 = \n {src2}")
 print(f"dst = \n {src1+src2}")
 
 print("------------------------------------------------------------")  # 60個
-
-# ch8_5.py
-
-img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰色讀取
-cv2.imshow("Peony1", img)
-
-res1 = cv2.add(img, img)
-cv2.imshow("Peony2", res1)
-
-res2 = img + img
-cv2.imshow("Peony3", res2)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
 print("------------------------------------------------------------")  # 60個
 
-# ch8_6.py
-
-img = cv2.imread(filename1)  # 彩色讀取
-cv2.imshow("Peony1", img)
-
-res1 = cv2.add(img, img)
-cv2.imshow("Peony2", res1)
-
-res2 = img + img
-cv2.imshow("Peony3", res2)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
+# 影像計算 影像相加 cv2.add
 
 width, height = 640, 480  # 影像寬, 影像高
 
@@ -1032,6 +997,7 @@ cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
 
+# 影像計算 影像相加 cv2.add
 # 影像相加 影像取mask
 
 img1 = np.ones((4, 5), dtype=np.uint8) * 8
@@ -1050,41 +1016,59 @@ print("結果值 dst =\n", dst)
 
 print("------------------------------------------------------------")  # 60個
 
-# ch8_8_1.py
+# 影像計算 影像相加 cv2.add
 
 width, height = 640, 480  # 影像寬, 影像高
 
 img1 = np.zeros((height, width, 3), np.uint8)  # 建立img1影像
-img1[:, :, 1] = 255
-cv2.imshow("img1", img1)
+img1[:, :, 2] = 255#紅色
 
 img2 = np.zeros((height, width, 3), np.uint8)  # 建立img2影像
-img2[:, :, 2] = 255
-cv2.imshow("img2", img2)
+img2[:, :, 1] = 255# 綠色
 
+# 製作mask
 m = np.zeros((height, width, 1), np.uint8)  # 建立mask(m)影像
-m[50:150, 100:200, :] = 255  # 建立 ROI
-cv2.imshow("mask", m)
+m[50:350, 100:300, :] = 255  # 建立 ROI, 白色
 
+#使用cv2.add相加
 img3 = cv2.add(img1, img2)  # 不含mask的影像相加
-cv2.imshow("img1 + img2", img3)
 
+#使用cv2.add相加, 使用mask
 img4 = cv2.add(img1, img2, mask=m)  # 含mask的影像相加
-cv2.imshow("img1 + img2 + mask", img4)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(231)
+plt.title("R")
+plt.imshow(cv2.cvtColor(img1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+plt.subplot(232)
+plt.title("G")
+plt.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+plt.subplot(233)
+plt.title("mask")
+plt.imshow(cv2.cvtColor(m, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+plt.subplot(234)
+plt.title("R+G by cv2.add")
+plt.imshow(cv2.cvtColor(img3, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+plt.subplot(235)
+plt.title("R+G+mask by cv2.add")
+plt.imshow(cv2.cvtColor(img4, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 # 加權和 alpha beta gamma
 
 # 全 10 影像
-src1 = np.ones((2, 3), dtype=np.uint8) * 10  # 影像 src1
+src1 = np.ones((2, 3), dtype=np.uint8) * 10
 print(f"src1 = \n {src1}")
 
 # 全 50 影像
-src2 = np.ones((2, 3), dtype=np.uint8) * 50  # 影像 src2
+src2 = np.ones((2, 3), dtype=np.uint8) * 50
 print(f"src2 = \n {src2}")
 
 alpha = 1
@@ -1093,29 +1077,38 @@ gamma = 5
 dst = cv2.addWeighted(src1, alpha, src2, beta, gamma)  # 加權和
 print(f"dst = \n {dst}")
 
-print("aaa")
-
 print("------------------------------------------------------------")  # 60個
 
 # 要一樣大的影像才可以做 加權和 addWeighted
 
-filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
-filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
+filename_rgb_r = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+filename_rgb_g = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 
-src1 = cv2.imread(filename1)  # 影像 src1
-cv2.imshow("R", src1)
-
-src2 = cv2.imread(filename2)  # 影像 src2
-cv2.imshow("G", src2)
+src1 = cv2.imread(filename_rgb_r)
+src2 = cv2.imread(filename_rgb_g)
 
 alpha = 1
 beta = 0.2
 gamma = 1
 dst = cv2.addWeighted(src1, alpha, src2, beta, gamma)  # 加權和
-cv2.imshow("R + G", dst)  # 顯示結果
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(131)
+plt.title("R")
+plt.imshow(cv2.cvtColor(src1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(132)
+plt.title("G")
+plt.imshow(cv2.cvtColor(src2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(133)
+plt.title("R+G")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.suptitle('addWeighted')
+show()
 
 print("------------------------------------------------------------")  # 60個
 # OpenCV_09_閾值處理
@@ -1566,19 +1559,14 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch9_23.py
+# cv2.bitwise_and
 
 src = cv2.imread(filename3, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("Lena", src)
-
 row, column = src.shape  # 取得列高和欄寬
 
-h7 = np.ones((row, column), dtype=np.uint8) * 254  # 建立像素值是254的影像
-cv2.imshow("254", h7)  # 顯示像素值是254的影像
+h100 = np.ones((row, column), dtype=np.uint8) * 100  # 建立像素值是100的影像
 
-new_src = cv2.bitwise_and(src, h7)  # 原始影像最低有效位元是 0
-cv2.imshow("New Lena", new_src)
-
+new_src = cv2.bitwise_and(src, h100)
 
 plt.subplot(131)
 plt.title("原圖")
@@ -1586,21 +1574,24 @@ plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.axis("off")
 
 plt.subplot(132)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(h7, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("灰階100")
+plt.imshow(cv2.cvtColor(h100, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.axis("off")
 
 plt.subplot(133)
-plt.title("原圖")
+plt.title("原圖取出灰階100")
 plt.imshow(cv2.cvtColor(new_src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.axis("off")
 
+plt.suptitle('cv2.bitwise_and')
 show()
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+
+# 在影像中藏入訊息
 
 src = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
 cv2.imshow("Peony", src)
@@ -1634,6 +1625,7 @@ cv2.imshow("Peony", src)
 row, column = src.shape  # 取得列高和欄寬
 h7 = np.ones((row, column), dtype=np.uint8) * 254  # 建立像素值是254的影像
 tmp_src = cv2.bitwise_and(src, h7)  # 原始影像最低有效位元是 0
+
 watermark = cv2.imread("copyright.jpg", cv2.IMREAD_GRAYSCALE)
 watermark = cv2.resize(watermark, (column, row))  # 重設影像大小
 
@@ -1660,23 +1652,29 @@ print("------------------------------------------------------------")  # 60個
 print("cv2.resize()")
 
 src = cv2.imread(filename1)
-cv2.imshow("Src", src)
-print(f"src.shape = {src.shape}")
 
 print("圖片拉成 640 X 480")
 width, height = 640, 480  # 影像寬, 影像高
 dsize = (width, height)
-dst = cv2.resize(src, dsize)  # 重設影像大小
-cv2.imshow("Dst1", dst)  # 顯示新的影像
-print(f"dst1.shape = {dst.shape}")
+
+dst1 = cv2.resize(src, dsize)  # 重設影像大小
 
 print("圖片拉成 寬度2倍，高度一半")
-dst = cv2.resize(src, None, fx=2.0, fy=0.5)  # 重設影像大小
-cv2.imshow("Dst2", dst)  # 顯示新的影像
-print(f"dst2.shape = {dst.shape}")
+dst2 = cv2.resize(src, None, fx=2.0, fy=0.5)  # 重設影像大小
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(311)
+plt.title("原始影像")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+
+plt.subplot(312)
+plt.title("圖片拉成 640 X 480")
+plt.imshow(dst1)
+
+plt.subplot(313)
+plt.title("圖片拉成 寬度2倍，高度一半")
+plt.imshow(dst2)
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1717,11 +1715,11 @@ plt.axis("off")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("cv2.warpAffine() 平移")
 
 src = cv2.imread(filename1)
-cv2.imshow("Src", src)
 
 height, width = src.shape[0:2]  # 獲得影像大小
 dsize = (width, height)  # 建立未來影像大小
@@ -1729,17 +1727,24 @@ x = 30  # 平移 x = 30
 y = 80  # 平移 y = 80
 M = np.float32([[1, 0, x], [0, 1, y]])  # 建立 M 矩陣
 dst = cv2.warpAffine(src, M, dsize)  # 執行仿射
-cv2.imshow("Dst", dst)  # 顯示平移結果影像
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(122)
+plt.title("平移 (30, 80)")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("旋轉")
 
 src = cv2.imread(filename1)
-cv2.imshow("Src", src)
 
 height, width = src.shape[0:2]  # 獲得影像大小
 
@@ -1747,58 +1752,72 @@ print("逆時鐘 旋轉 30 度")
 M = cv2.getRotationMatrix2D((width / 2, height / 2), 30, 1)  # 建立 M 矩陣
 dsize = (width, height)  # 建立未來影像大小
 dst1 = cv2.warpAffine(src, M, dsize)  # 執行仿射
-cv2.imshow("CCW 30", dst1)
 
 print("順時鐘 旋轉 30 度")
 M = cv2.getRotationMatrix2D((width / 2, height / 2), -30, 1)  # 建立 M 矩陣
 dst2 = cv2.warpAffine(src, M, dsize)  # 執行仿射
-cv2.imshow("CW 30", dst2)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(131)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(132)
+plt.title("逆時鐘 30")
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(133)
+plt.title("順時鐘 30")
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
-
-print("仿射 歪折 折向右")
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread(filename1)
-cv2.imshow("Src", src)
 
+print("仿射 歪折 折向右")
 height, width = src.shape[0:2]  # 獲得影像大小
 srcp = np.float32([[0, 0], [width - 1, 0], [0, height - 1]])  # src的A,B,C三個點
 dstp = np.float32([[30, 0], [width - 1, 0], [0, height - 1]])  # dst的A,B,C三個點
 M = cv2.getAffineTransform(srcp, dstp)  # 建立 M 矩陣
 dsize = (width, height)
-dst = cv2.warpAffine(src, M, dsize)  # 執行仿射
-cv2.imshow("Dst", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
+dst1 = cv2.warpAffine(src, M, dsize)  # 執行仿射
 
 print("仿射 歪折 折向左")
-
-src = cv2.imread(filename1)
-cv2.imshow("Src", src)
-
 height, width = src.shape[0:2]  # 獲得影像大小
 srcp = np.float32([[0, 0], [width - 1, 0], [0, height - 1]])  # src的A,B,C三個點
 dstp = np.float32([[0, 0], [width - 1 - 30, 0], [30, height - 1]])  # dst的A,B,C三個點
 M = cv2.getAffineTransform(srcp, dstp)  # 建立 M 矩陣
 dsize = (width, height)
-dst = cv2.warpAffine(src, M, dsize)  # 執行仿射
-cv2.imshow("Dst", dst)
+dst2 = cv2.warpAffine(src, M, dsize)  # 執行仿射
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(131)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
 
+plt.subplot(132)
+plt.title("仿射 歪折 折向右")
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(133)
+plt.title("仿射 歪折 折向左")
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("仿射 歪折 轉置")
 
 src = cv2.imread(filename1)
-cv2.imshow("Src", src)
 
 height, width = src.shape[0:2]  # 獲得影像大小
 srcp = np.float32([[0, 0], [width - 1, 0], [0, height - 1]])
@@ -1809,17 +1828,25 @@ dstp = np.float32([a, b, c])  # dst的 A, B, C
 M = cv2.getAffineTransform(srcp, dstp)  # 建立 M 矩陣
 dsize = (width, height)
 dst = cv2.warpAffine(src, M, dsize)  # 執行仿射
-cv2.imshow("Dst", dst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
 
+plt.subplot(122)
+plt.title("仿射 歪折 轉置")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("仿射 歪折 轉置")
 
 src = cv2.imread(filename1)
-cv2.imshow("Src", src)
 
 height, width = src.shape[0:2]  # 獲得影像大小
 srcp = np.float32([[0, 0], [width - 1, 0], [0, height - 1]])
@@ -1830,17 +1857,23 @@ dstp = np.float32([a, b, c])  # dst的 A, B, C
 M = cv2.getAffineTransform(srcp, dstp)  # 建立 M 矩陣
 dsize = (width, height)
 dst = cv2.warpAffine(src, M, dsize)  # 執行仿射
-cv2.imshow("Dst", dst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(122)
+plt.title("仿射 歪折 轉置")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch10_10.py
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("tunnel.jpg")
-cv2.imshow("Src", src)
 
 height, width = src.shape[0:2]  # 獲得影像大小
 a1 = [0, 0]  # 原始影像的 A
@@ -1858,11 +1891,20 @@ dstp = np.float32([a2, b2, c2, d2])
 M = cv2.getPerspectiveTransform(srcp, dstp)  # 建立 M 矩陣
 dsize = (width, height)
 dst = cv2.warpPerspective(src, M, dsize)  # 執行透視
-cv2.imshow("Dst", dst)  # 顯示透視影像
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
 
+plt.subplot(122)
+plt.title("顯示透視影像")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 src = np.random.randint(0, 256, size=[3, 4], dtype=np.uint8)
@@ -1890,11 +1932,9 @@ print(f"mapx =\n {mapx}")
 print(f"mapy =\n {mapy}")
 
 print("------------------------------------------------------------")  # 60個
-
-# ch10_12.py
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("huang.jpg")
-cv2.imshow("src", src)
 
 rows, cols = src.shape[:2]
 mapx = np.zeros(src.shape[:2], np.float32)
@@ -1904,14 +1944,21 @@ for r in range(rows):  # 建立mapx和mapy
         mapx.itemset((r, c), c)  # 設定mapx
         mapy.itemset((r, c), r)  # 設定mapy
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
-cv2.imshow("dst", dst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(122)
+plt.title("執行映射")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch10_13.py
+print("------------------------------------------------------------")  # 60個
 
 src = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
 rows, cols = src.shape
@@ -1927,11 +1974,9 @@ print(f"mapx =\n {mapx}")
 print(f"mapy =\n {mapy}")
 
 print("------------------------------------------------------------")  # 60個
-
-# ch10_14.py
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("huang.jpg")
-cv2.imshow("src", src)
 
 rows, cols = src.shape[:2]
 mapx = np.zeros(src.shape[:2], np.float32)
@@ -1942,14 +1987,20 @@ for r in range(rows):  # 建立mapx和mapy
         mapy.itemset((r, c), rows - 1 - r)  # 設定mapy
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
 
-cv2.imshow("dst", dst)
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(122)
+plt.title("執行映射")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch10_15.py
+print("------------------------------------------------------------")  # 60個
 
 src = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
 rows, cols = src.shape
@@ -1965,11 +2016,9 @@ print(f"mapx =\n {mapx}")
 print(f"mapy =\n {mapy}")
 
 print("------------------------------------------------------------")  # 60個
-
-# ch10_16.py
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("huang.jpg")
-cv2.imshow("src", src)
 
 rows, cols = src.shape[:2]
 mapx = np.zeros(src.shape[:2], np.float32)
@@ -1979,17 +2028,23 @@ for r in range(rows):  # 建立mapx和mapy
         mapx.itemset((r, c), cols - 1 - c)  # 設定mapx
         mapy.itemset((r, c), r)  # 設定mapy
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
-cv2.imshow("dst", dst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(122)
+plt.title("執行映射")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch10_17.py
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("tunnel.jpg")
-cv2.imshow("src", src)
 
 rows, cols = src.shape[:2]
 mapx = np.zeros(src.shape[:2], np.float32)
@@ -2003,17 +2058,23 @@ for r in range(rows):  # 建立mapx和mapy
             mapx.itemset((r, c), 0)  # 取x座標為 0
             mapy.itemset((r, c), 0)  # 取y座標為 0
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
-cv2.imshow("dst", dst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(122)
+plt.title("執行映射")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch10_18.py
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("tunnel.jpg")
-cv2.imshow("src", src)
 
 rows, cols = src.shape[:2]
 mapx = np.zeros(src.shape[:2], np.float32)
@@ -2023,16 +2084,22 @@ for r in range(rows):  # 建立mapx和mapy
         mapx.itemset((r, c), c)
         mapy.itemset((r, c), 2 * r)
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
-cv2.imshow("dst", dst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(122)
+plt.title("執行映射")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 # OpenCV_15_輪廓的檢測與匹配
 print("------------------------------------------------------------")  # 60個
-
-# ch15_1.py
 
 src = cv2.imread("easy.jpg")
 cv2.imshow("src", src)
@@ -2049,12 +2116,24 @@ contours, hierarchy = cv2.findContours(
 dst = cv2.drawContours(src, contours, -1, (0, 255, 0), 5)  # 繪製圖形輪廓
 cv2.imshow("result", dst)  # 顯示結果影像
 
+""" 無法另外畫圖
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(122)
+plt.title("找尋影像內的輪廓")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+"""
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch15_1_1.py
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("easy.jpg")
 cv2.imshow("src", src)
@@ -2092,8 +2171,7 @@ print(f"資料類型      : {type(contours)}")
 print(f"輪廓數量      : {len(contours)}")
 
 print("------------------------------------------------------------")  # 60個
-
-# ch15_3.py
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("easy.jpg")
 cv2.imshow("src", src)
@@ -3614,6 +3692,8 @@ contours, hierarchy = cv2.findContours(
     binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
 )
 cnt = contours[0]
+
+# 製作mask
 mask = np.zeros(src_gray.shape, np.uint8)  # 建立遮罩
 mask = cv2.drawContours(mask, [cnt], -1, (255, 255, 255), -1)
 cv2.imshow("mask", mask)
@@ -3646,7 +3726,9 @@ contours, hierarchy = cv2.findContours(
     binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
 )
 cnt = contours[0]
+
 # 在src_gray影像的mask遮罩區域計算均值
+# 製作mask
 mask = np.zeros(src_gray.shape, np.uint8)  # 建立遮罩
 mask = cv2.drawContours(mask, [cnt], -1, (255, 255, 255), -1)
 
@@ -4088,6 +4170,7 @@ dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
 ret, sure_fg = cv2.threshold(dst, 0.7 * dst.max(), 255, 0)  # 前景圖案
 
 # 計算未知區域
+# 影像計算 影像相減 cv2.subtract
 sure_fg = np.uint8(sure_fg)
 unknown = cv2.subtract(sure_bg, sure_fg)
 
@@ -4137,6 +4220,7 @@ dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
 ret, sure_fg = cv2.threshold(dst, 0.7 * dst.max(), 255, 0)  # 前景圖案
 
 # 計算未知區域
+# 影像計算 影像相減 cv2.subtract
 sure_fg = np.uint8(sure_fg)
 unknown = cv2.subtract(sure_bg, sure_fg)
 
@@ -4186,6 +4270,7 @@ dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
 ret, sure_fg = cv2.threshold(dst, 0.7 * dst.max(), 255, 0)  # 前景圖案
 
 # 計算未知區域
+# 影像計算 影像相減 cv2.subtract
 sure_fg = np.uint8(sure_fg)
 unknown = cv2.subtract(sure_bg, sure_fg)
 
@@ -4241,6 +4326,7 @@ dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
 ret, sure_fg = cv2.threshold(dst, 0.7 * dst.max(), 255, 0)  # 前景圖案
 
 # 計算未知區域
+# 影像計算 影像相減 cv2.subtract
 sure_fg = np.uint8(sure_fg)
 unknown = cv2.subtract(sure_bg, sure_fg)
 

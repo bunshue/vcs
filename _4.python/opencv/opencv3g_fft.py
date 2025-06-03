@@ -2,8 +2,11 @@
 傅立葉變換 fft
 
 np 傅立葉
-np.fft.fft  # 一維 fft
-np.fft.fft2 + np.fft.fftshift np.fft.ifft2  # 二維 fft
+np.fft.fft()  # 一維 fft
+np.fft.ifft()  # 一維 ifft
+
+np.fft.fft2() + np.fft.fftshift  # 二維 fft
+np.fft.ifft2  # 二維 ifft
 
 cv 傅立葉 cv2.dft cv2.idft
 
@@ -44,6 +47,14 @@ def show():
     plt.show()
     pass
 
+
+print("np顯示小數點以下3位, IDLE顯示寬度80字, 無壓縮顯示")
+np.set_printoptions(precision=3, linewidth=80, suppress=False)
+
+# print("np顯示小數點以下3位, IDLE顯示寬度80字, 有壓縮顯示")
+# np.set_printoptions(precision=3, linewidth=80, suppress=True)
+
+import scipy
 
 print("------------------------------------------------------------")  # 60個
 # 使用 np 傅立葉
@@ -128,9 +139,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 二維離散傅立葉變換
-
-print("np顯示小數點以下3位, IDLE顯示寬度80字, 無壓縮顯示")
-np.set_printoptions(precision=3, linewidth=80, suppress=False)
 
 print("NXN的隨機影像")
 N = 5
@@ -601,9 +609,9 @@ y = 5 * np.sin(2 * np.pi * 600 * x)
 N = 1200
 frq = np.arange(N)  # 頻率數1200個數
 half_x = frq[range(int(N / 2))]  # 取一半區間
-fft_y = np.fft.fft(y)  # 一維 fft
-abs_y = np.abs(fft_y)  # 取復數的絕對值，即復數的模(雙邊頻譜)
-angle_y = 180 * np.angle(fft_y) / np.pi  # 取復數的弧度,并換算成角度
+X_FFT = np.fft.fft(y)  # 一維 fft
+abs_y = np.abs(X_FFT)  # 取復數的絕對值，即復數的模(雙邊頻譜)
+angle_y = 180 * np.angle(X_FFT) / np.pi  # 取復數的弧度,并換算成角度
 gui_y = abs_y / N  # 歸一化處理（雙邊頻譜）
 gui_half_y = gui_y[range(int(N / 2))]  # 由于對稱性，只取一半區間（單邊頻譜）
 
@@ -616,7 +624,7 @@ plt.title("原始波形")
 
 # 畫出雙邊未求絕對值的振幅譜
 plt.subplot(232)
-plt.plot(frq, fft_y, "black")
+plt.plot(frq, X_FFT, "black")
 plt.title("雙邊振幅譜(未求振幅絕對值)")
 
 # 畫出雙邊求絕對值的振幅譜
@@ -1401,46 +1409,62 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-import scipy
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("一維 fft")
 
-print("np顯示小數點以下3位, IDLE顯示寬度80字, 無壓縮顯示")
-np.set_printoptions(precision=3, linewidth=80, suppress=False)
-
 # FFT 頻域訊號處理
 
 # 原始資料
-X = np.random.rand(8)
-# X = np.arange(10)
+# X = np.random.rand(8)
+# X = np.arange(100)
 # X = np.ones(8)
+
+N = 100 # 取樣點數, 精細程度
+A = 10
+f = 60
+t = np.linspace(0, 1/f*3, N)# 時間, 3個週期
+X = A * np.sin(2 * np.pi * f * t)
 
 X_FFT = np.fft.fft(X)  # 一維 fft
 
 X_FFT_IFFT = np.fft.ifft(X_FFT)  # 一維 ifft
 
+# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
+cc = np.allclose(X, X_FFT_IFFT)  # 和原始訊號進行比較
+print(cc)
+
+"""
 print("X :\n", X, sep="")
 print("X_FFT = fft(X) :\n", X_FFT, sep="")
 print("直流部分 DC =", X_FFT[0].real)  # 直流部分
 print("X_FFT_IFFT = ifft(X_FFT) :\n", X_FFT_IFFT, sep="")
+"""
 
-plt.scatter(X, X, c="g", s=200, label="原資料")
-plt.scatter(X_FFT.real, X_FFT.imag, c="r", s=200, label="FFT")
+plt.subplot(311)
+#plt.scatter(X, X, c="r", s=100, label="原資料")
+plt.plot(t,X, label="原資料")
 plt.legend()
 plt.grid()
+
+plt.subplot(312)
+plt.scatter(X_FFT.real, X_FFT.imag, c="g", s=100, label="FFT")
+#plt.legend()
+plt.grid()
+
+plt.subplot(313)
+# plt.scatter(X_FFT_IFFT.real, X_FFT_IFFT.real, c="b", s=100, label="IFFT")
+plt.plot(X_FFT_IFFT.real, label="IFFT")
+plt.legend()
+plt.grid()
+
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1455,9 +1479,6 @@ print(X_FFT)
 # 做FFT, 除以FFT的長度
 X_FFT = np.fft.fft(X) / len(X)  # 為了計算各個成分的能量，需要將FFT的結果除以FFT的長度
 print(X_FFT)
-
-print("np顯示小數點以下3位, IDLE顯示寬度80字, 有壓縮顯示")
-np.set_printoptions(precision=3, linewidth=80, suppress=True)
 
 X = np.arange(0, 2 * np.pi, 2 * np.pi / 8)
 Y = np.sin(X)
@@ -1496,12 +1517,6 @@ print(np.abs(Y_FFT[3]), np.rad2deg(np.angle(Y_FFT[3])))  # 周期為42.667取樣
 0.25 45.0
 0.4 -60.0
 """
-X1 = np.random.random(4096)
-X2 = np.random.random(4093)
-
-X_FFT1 = np.fft.fft(X1)  # 一維 fft
-X_FFT2 = np.fft.fft(X2)  # 一維 fft
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1650,7 +1665,6 @@ print("np.fft 06")
 
 """
 解決 : AttributeError: module 'scipy.signal' has no attribute 'hann'
-
 pip install numpy==1.23.4
 pip install scipy==1.12.0
 pip install librosa(==0.10.1)
@@ -1726,13 +1740,18 @@ def average_fft(x, fft_size):
 x = np.random.randn(100000)
 xf = average_fft(x, 512)
 
-plt.figure(figsize=(7, 3.5))
+plt.figure(figsize=(7, 6))
+
+plt.subplot(211)
+plt.plot(x)
+
+plt.subplot(212)
 plt.plot(xf)
 plt.xlabel("頻率視窗(Frequency Bin)")
 plt.ylabel("幅值(dB)")
 plt.xlim([0, 257])
-plt.subplots_adjust(bottom=0.15)
 
+plt.subplots_adjust(bottom=0.15)
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1744,7 +1763,12 @@ X = np.random.randn(100000)
 Y = scipy.signal.filtfilt(B, A, X)
 Y_FFT = average_fft(Y, 512)
 
-plt.figure(figsize=(7, 3.5))
+plt.figure(figsize=(7, 6))
+
+plt.subplot(211)
+plt.plot(X)
+
+plt.subplot(212)
 plt.plot(Y_FFT)
 plt.xlabel("頻率視窗(Frequency Bin)")
 plt.ylabel("幅值(dB)")
@@ -1754,33 +1778,6 @@ plt.subplots_adjust(bottom=0.15)
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-print("np.fft 09 譜圖, 頻率掃描波的譜圖")
-
-sampling_rate = 8000.0
-fft_size = 1024
-step = fft_size / 16
-time = 2
-
-t = np.arange(0, time, 1 / sampling_rate)
-sweep = scipy.signal.chirp(
-    t, f0=100, t1=time, f1=0.8 * sampling_rate / 2, method="logarithmic"
-)
-
-# NG plt.specgram(sweep, fft_size, sampling_rate, noverlap = 1024-step)
-plt.xlabel("時間(秒)")
-plt.ylabel("頻率(Hz)")
-
-show()
-
-"""
-scpy2.examples.spectrogram_realtime：實時觀察音效訊號譜圖的示範程式，
-使用TraitsUI、PyAudio等庫實現
-"""
-print("------------------------------------------------------------")  # 60個
-
-# %hide
-# %exec_python -m scpy2.examples.spectrogram_realtime
 
 print("np.fft 10 精確測量訊號頻率")
 
@@ -1845,44 +1842,22 @@ print("np.fft 11")
 print("一維 fft")
 
 # 卷冊積運算
-# 快速卷冊積
-
-
-def fft_convolve(a, b):
-    n = len(a) + len(b) - 1
-    N = 2 ** (int(np.log2(n)) + 1)
-    A = np.fft.fft(a, N)
-    B = np.fft.fft(b, N)
-    return np.fft.ifft(A * B)[:n]  # 一維 ifft
-
 
 a = np.random.rand(128)
 b = np.random.rand(128)
 c = np.convolve(a, b)
-# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
-np.allclose(c, fft_convolve(a, b))
 
-# True
 
 a = np.random.rand(10000)
 b = np.random.rand(10000)
-# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
-print(np.allclose(np.convolve(a, b), fft_convolve(a, b)))
+np.convolve(a, b)
 
-# np.convolve(a, b)
-# fft_convolve(a, b)
-
-# True
-# 10 loops, best of 3: 36.5 ms per loop
-# 100 loops, best of 3: 6.43 ms per loop
-
-# 比較直接卷冊積和FFT卷冊積的運算速度  skip 速度
+# 卷冊積運算
 for n in range(4, 14):
     N = 2**n
     a = np.random.rand(N)
     b = np.random.rand(N)
     np.convolve(a, b)
-    fft_convolve(a, b)
 
 print("fft SP")
 
@@ -1913,7 +1888,9 @@ fy = np.fft.fft(ts_diff)  # np.array 做 fft  # 一維 fft
 print("fy :", fy)
 print(fy[:10])  # 顯示前10個頻域數據
 
-conv1 = np.real(np.fft.ifft(fy))  # 一維 ifft
+X_FFT_IFFT = np.fft.ifft(fy)  # 一維 ifft
+
+conv1 = np.real(X_FFT_IFFT)  # 取實部
 
 plt.subplot(212)
 
