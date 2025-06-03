@@ -95,7 +95,7 @@ print("------------------------------------------------------------")  # 60個
 print("snownlp：完整自然語言處理功能 ST")
 print("------------------------------------------------------------")  # 60個
 
-import snownlp
+import snownlp  # 完整自然語言處理功能
 
 text = "自然語言認知和理解是讓電腦把輸入的語言變成有意思的符號和關係，然後根據目的再處理。自然語言生成系統則是把計算機數據轉化為自然語言。"
 
@@ -104,9 +104,11 @@ s = snownlp.SnowNLP(text)
 print("詞性標註 :", s.tags)
 print("關鍵詞 :", s.keywords(3))  # 填入個數
 print("摘要 :", s.summary(3))  # 填入個數
+print("情緒 :", s.sentiments)  # 消極or積極，結果在0-1之間
+""" many
 print("tf :", s.tf)
 print("idf :", s.idf)
-
+"""
 print("轉簡中")
 print(s.han)
 
@@ -119,15 +121,15 @@ print("檢測一段文字的 正面/負面 情緒")
 
 text = "昨天我的錢不見了"
 s = snownlp.SnowNLP(text)
-# print(s.sentiments)  # 消極or積極，結果在0-1之間
-
 print("文字 :", text)
-print("情緒 :", s.sentiments)
+print("情緒 :", s.sentiments)  # 消極or積極，結果在0-1之間
 
 text = "今天天氣很好"
 s = snownlp.SnowNLP(text)
 print("文字 :", text)
-print("情緒 :", s.sentiments)
+print("情緒 :", s.sentiments)  # 消極or積極，結果在0-1之間
+
+sys.exit()
 
 print("------------------------------")  # 30個
 
@@ -193,7 +195,8 @@ with open("tmp_test_all.csv", "r", encoding="utf-8") as f:
     for data in datas:
         label = data.split(",")[0]
         text = data.split(",")[1]
-        if snownlp.SnowNLP(text).sentiments < 0.5:
+        s = snownlp.SnowNLP(text)
+        if s.sentiments < 0.5:
             ss = 0
         else:
             ss = 1
@@ -220,7 +223,8 @@ with open("tmp_test_all.csv", "r", encoding="utf-8") as f:
     for data in datas:
         label = data.split(",")[0]
         text = data.split(",")[1]
-        if snownlp.SnowNLP(text).sentiments < 0.5:
+        s = snownlp.SnowNLP(text)
+        if s.sentiments < 0.5:
             ss = 0
         else:
             ss = 1

@@ -22,6 +22,9 @@ print('------------------------------------------------------------')	#60個
 
 """
 
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
 #手寫數字
 import tensorflow as tf
 from urllib.request import urlretrieve
@@ -110,7 +113,6 @@ import gradio as gr
 grobj = gr.Interface.load("huggingface/uer/gpt2-chinese-lyric", inputs="text", outputs="text")
 grobj.launch()
 
-
 #pip install opencc
 
 import gradio as gr
@@ -130,12 +132,7 @@ output_text = gr.outputs.Textbox()
 grobj = gr.Interface(generate_text,inputs="textbox", outputs=output_text, title="自動產生歌詞")
 grobj.launch()
 
-
-
-
-sys.exit()
-
-
+print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 #鐵達尼號生存預測

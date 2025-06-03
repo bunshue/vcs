@@ -140,7 +140,6 @@ import cv2
 import numpy as np
 import sounddevice as sd
 import wave
-import time
 
 # 設定螢幕解析度（根據需要調整）
 W, H = pyautogui.size()
@@ -357,18 +356,12 @@ video.write_videofile("test2.mp4",codec='mpeg4')
 
 print("------------------------------------------------------------")  # 60個
 
-
 """
 製作影片字幕
 
 聲音轉字幕
 
 """
-
-import sys
-
-print("------------------------------------------------------------")  # 60個
-
 
 #影片轉wav, 但是要跑很久
 
@@ -378,12 +371,8 @@ from moviepy.editor import *
 audio1 = AudioFileClip('老北京.mp4')
 audio1.write_audiofile('老北京22222.wav')
 
-print('ok')
-
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 """
 !pip install pydub
@@ -396,7 +385,7 @@ from pydub.silence import detect_silence
 import speech_recognition as sr
 from opencc import OpenCC
 import glob
-import shutil, os
+import shutil
 from time import sleep
 
 def emptydir(dirname):  #清空資料夾
