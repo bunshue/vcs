@@ -1,4 +1,6 @@
 """
+影像的幾何變換
+
 C : cut
 C : copy
 R : resize
@@ -15,9 +17,11 @@ INTER_LENCZOS4	4	Lencz的插值方法，這個方法會在x和y的方向分別�
 
 import cv2
 
-print("------------------------------------------------------------")  # 60個
-
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
+filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
+filename3 = "C:/_git/vcs/_4.python/opencv/data/lena.jpg"
+filename4 = "C:/_git/vcs/_1.data/______test_files1/ims01.bmp"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -30,6 +34,7 @@ import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -663,6 +668,461 @@ cv2.imshow("O", O)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+# 新進
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("cv2.resize()")
+
+src = cv2.imread(filename1)
+
+print("圖片拉成 640 X 480")
+width, height = 640, 480  # 影像寬, 影像高
+dsize = (width, height)
+
+dst1 = cv2.resize(src, dsize)  # 重設影像大小
+
+print("圖片拉成 寬度2倍，高度一半")
+dst2 = cv2.resize(src, None, fx=2.0, fy=0.5)  # 重設影像大小
+
+plt.subplot(311)
+plt.title("原始影像")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+
+plt.subplot(312)
+plt.title("圖片拉成 640 X 480")
+plt.imshow(dst1)
+
+plt.subplot(313)
+plt.title("圖片拉成 寬度2倍，高度一半")
+plt.imshow(dst2)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("cv2.flip()")
+
+src = cv2.imread(filename1)
+
+print("上下顛倒")
+dst1 = cv2.flip(src, 0)  # 垂直翻轉
+
+print("左右顛倒")
+dst2 = cv2.flip(src, 1)  # 水平翻轉
+
+
+print("上下顛倒 + 左右顛倒")
+dst3 = cv2.flip(src, -1)  # 水平與垂直翻轉
+
+plt.subplot(221)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(222)
+plt.title("上下顛倒")
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(223)
+plt.title("左右顛倒")
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(224)
+plt.title("上下顛倒 + 左右顛倒")
+plt.imshow(cv2.cvtColor(dst3, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("cv2.warpAffine() 平移")
+
+src = cv2.imread(filename1)
+
+height, width = src.shape[0:2]  # 獲得影像大小
+dsize = (width, height)  # 建立未來影像大小
+x = 30  # 平移 x = 30
+y = 80  # 平移 y = 80
+M = np.float32([[1, 0, x], [0, 1, y]])  # 建立 M 矩陣
+dst = cv2.warpAffine(src, M, dsize)  # 執行仿射
+
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(122)
+plt.title("平移 (30, 80)")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("旋轉")
+
+src = cv2.imread(filename1)
+
+height, width = src.shape[0:2]  # 獲得影像大小
+
+print("逆時鐘 旋轉 30 度")
+M = cv2.getRotationMatrix2D((width / 2, height / 2), 30, 1)  # 建立 M 矩陣
+dsize = (width, height)  # 建立未來影像大小
+dst1 = cv2.warpAffine(src, M, dsize)  # 執行仿射
+
+print("順時鐘 旋轉 30 度")
+M = cv2.getRotationMatrix2D((width / 2, height / 2), -30, 1)  # 建立 M 矩陣
+dst2 = cv2.warpAffine(src, M, dsize)  # 執行仿射
+
+plt.subplot(131)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(132)
+plt.title("逆時鐘 30")
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(133)
+plt.title("順時鐘 30")
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+src = cv2.imread(filename1)
+
+print("仿射 歪折 折向右")
+height, width = src.shape[0:2]  # 獲得影像大小
+srcp = np.float32([[0, 0], [width - 1, 0], [0, height - 1]])  # src的A,B,C三個點
+dstp = np.float32([[30, 0], [width - 1, 0], [0, height - 1]])  # dst的A,B,C三個點
+M = cv2.getAffineTransform(srcp, dstp)  # 建立 M 矩陣
+dsize = (width, height)
+dst1 = cv2.warpAffine(src, M, dsize)  # 執行仿射
+
+print("仿射 歪折 折向左")
+height, width = src.shape[0:2]  # 獲得影像大小
+srcp = np.float32([[0, 0], [width - 1, 0], [0, height - 1]])  # src的A,B,C三個點
+dstp = np.float32([[0, 0], [width - 1 - 30, 0], [30, height - 1]])  # dst的A,B,C三個點
+M = cv2.getAffineTransform(srcp, dstp)  # 建立 M 矩陣
+dsize = (width, height)
+dst2 = cv2.warpAffine(src, M, dsize)  # 執行仿射
+
+plt.subplot(131)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(132)
+plt.title("仿射 歪折 折向右")
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(133)
+plt.title("仿射 歪折 折向左")
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("仿射 歪折 轉置")
+
+src = cv2.imread(filename1)
+
+height, width = src.shape[0:2]  # 獲得影像大小
+srcp = np.float32([[0, 0], [width - 1, 0], [0, height - 1]])
+a = [0, height * 0.2]  # A
+b = [width * 0.8, height * 0.2]  # B
+c = [width * 0.1, height * 0.9]  # C
+dstp = np.float32([a, b, c])  # dst的 A, B, C
+M = cv2.getAffineTransform(srcp, dstp)  # 建立 M 矩陣
+dsize = (width, height)
+dst = cv2.warpAffine(src, M, dsize)  # 執行仿射
+
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(122)
+plt.title("仿射 歪折 轉置")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("仿射 歪折 轉置")
+
+src = cv2.imread(filename1)
+
+height, width = src.shape[0:2]  # 獲得影像大小
+srcp = np.float32([[0, 0], [width - 1, 0], [0, height - 1]])
+a = [0, height * 0.4]  # A
+b = [width * 0.8, height * 0.2]  # B
+c = [width * 0.1, height * 0.9]  # C
+dstp = np.float32([a, b, c])  # dst的 A, B, C
+M = cv2.getAffineTransform(srcp, dstp)  # 建立 M 矩陣
+dsize = (width, height)
+dst = cv2.warpAffine(src, M, dsize)  # 執行仿射
+
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(122)
+plt.title("仿射 歪折 轉置")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+src = cv2.imread(filename3)
+
+height, width = src.shape[0:2]  # 獲得影像大小
+a1 = [0, 0]  # 原始影像的 A
+b1 = [width, 0]  # 原始影像的 B
+c1 = [0, height]  # 原始影像的 C
+d1 = [width - 1, height - 1]  # 原始影像的 D
+
+srcp = np.float32([a1, b1, c1, d1])
+a2 = [150, 0]  # dst的 A
+b2 = [width - 150, 0]  # dst的 B
+c2 = [0, height - 1]  # dst的 C
+d2 = [width - 1, height - 1]  # dst的 D
+
+dstp = np.float32([a2, b2, c2, d2])
+M = cv2.getPerspectiveTransform(srcp, dstp)  # 建立 M 矩陣
+dsize = (width, height)
+dst = cv2.warpPerspective(src, M, dsize)  # 執行透視
+
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(122)
+plt.title("顯示透視影像")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+src = np.random.randint(0, 256, size=[3, 4], dtype=np.uint8)
+rows, cols = src.shape
+mapx = np.ones(src.shape, np.float32) * 3  # 設定 mapx
+mapy = np.ones(src.shape, np.float32) * 2  # 設定 mapy
+dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
+print(f"mapx =\n {mapx}")
+print(f"mapy =\n {mapy}")
+
+print("------------------------------------------------------------")  # 60個
+
+src = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
+
+rows, cols = src.shape
+mapx = np.zeros(src.shape, np.float32)
+mapy = np.zeros(src.shape, np.float32)
+for r in range(rows):  # 建立mapx和mapy
+    for c in range(cols):
+        mapx.itemset((r, c), c)  # 設定mapx
+        mapy.itemset((r, c), r)  # 設定mapy
+dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
+print(f"mapx =\n {mapx}")
+print(f"mapy =\n {mapy}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+src = cv2.imread(filename1)
+
+rows, cols = src.shape[:2]
+mapx = np.zeros(src.shape[:2], np.float32)
+mapy = np.zeros(src.shape[:2], np.float32)
+for r in range(rows):  # 建立mapx和mapy
+    for c in range(cols):
+        mapx.itemset((r, c), c)  # 設定mapx
+        mapy.itemset((r, c), r)  # 設定mapy
+dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
+
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(122)
+plt.title("執行映射")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+src = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
+rows, cols = src.shape
+mapx = np.zeros(src.shape, np.float32)
+mapy = np.zeros(src.shape, np.float32)
+for r in range(rows):  # 建立mapx和mapy
+    for c in range(cols):
+        mapx.itemset((r, c), c)  # 設定mapx
+        mapy.itemset((r, c), rows - 1 - r)  # 設定mapy
+dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
+
+print(f"mapx =\n {mapx}")
+print(f"mapy =\n {mapy}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+src = cv2.imread(filename1)
+
+rows, cols = src.shape[:2]
+mapx = np.zeros(src.shape[:2], np.float32)
+mapy = np.zeros(src.shape[:2], np.float32)
+for r in range(rows):  # 建立mapx和mapy
+    for c in range(cols):
+        mapx.itemset((r, c), c)  # 設定mapx
+        mapy.itemset((r, c), rows - 1 - r)  # 設定mapy
+dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
+
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(122)
+plt.title("執行映射")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+src = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
+rows, cols = src.shape
+mapx = np.zeros(src.shape, np.float32)
+mapy = np.zeros(src.shape, np.float32)
+for r in range(rows):  # 建立mapx和mapy
+    for c in range(cols):
+        mapx.itemset((r, c), cols - 1 - c)  # 設定mapx
+        mapy.itemset((r, c), r)  # 設定mapy
+dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
+
+print(f"mapx =\n {mapx}")
+print(f"mapy =\n {mapy}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+src = cv2.imread(filename1)
+
+rows, cols = src.shape[:2]
+mapx = np.zeros(src.shape[:2], np.float32)
+mapy = np.zeros(src.shape[:2], np.float32)
+for r in range(rows):  # 建立mapx和mapy
+    for c in range(cols):
+        mapx.itemset((r, c), cols - 1 - c)  # 設定mapx
+        mapy.itemset((r, c), r)  # 設定mapy
+dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
+
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(122)
+plt.title("執行映射")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+src = cv2.imread(filename2)
+
+rows, cols = src.shape[:2]
+mapx = np.zeros(src.shape[:2], np.float32)
+mapy = np.zeros(src.shape[:2], np.float32)
+for r in range(rows):  # 建立mapx和mapy
+    for c in range(cols):
+        if 0.25 * rows < r < 0.75 * rows and 0.25 * cols < c < 0.75 * cols:
+            mapx.itemset((r, c), 2 * (c - cols * 0.25))  # 計算對應的 x
+            mapy.itemset((r, c), 2 * (r - rows * 0.25))  # 計算對應的 y
+        else:
+            mapx.itemset((r, c), 0)  # 取x座標為 0
+            mapy.itemset((r, c), 0)  # 取y座標為 0
+dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
+
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(122)
+plt.title("執行映射")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+src = cv2.imread(filename2)
+
+rows, cols = src.shape[:2]
+mapx = np.zeros(src.shape[:2], np.float32)
+mapy = np.zeros(src.shape[:2], np.float32)
+for r in range(rows):  # 建立mapx和mapy
+    for c in range(cols):
+        mapx.itemset((r, c), c)
+        mapy.itemset((r, c), 2 * r)
+dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
+
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(122)
+plt.title("執行映射")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -671,8 +1131,15 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
 print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
