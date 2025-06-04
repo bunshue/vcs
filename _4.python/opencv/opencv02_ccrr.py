@@ -931,7 +931,6 @@ plt.axis("off")
 show()
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 src = np.random.randint(0, 256, size=[3, 4], dtype=np.uint8)

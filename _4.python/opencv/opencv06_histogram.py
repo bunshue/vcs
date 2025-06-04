@@ -1028,6 +1028,46 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
+
+# 直方圖
+
+# 影像的三個通道的直方圖統計、通道0和通道2的二維直方圖統計
+img = cv2.imread(filename2)
+fig, ax = plt.subplots(1, 2, figsize=(12, 5))
+colors = ["blue", "green", "red"]
+
+for i in range(3):
+    hist, x = np.histogram(img[:, :, i].ravel(), bins=256, range=(0, 256))
+    ax[0].plot(0.5 * (x[:-1] + x[1:]), hist, label=colors[i], color=colors[i])
+
+ax[0].legend(loc="upper left")
+ax[0].set_xlim(0, 256)
+hist2, x2, y2 = np.histogram2d(
+    img[:, :, 0].ravel(),
+    img[:, :, 2].ravel(),
+    bins=(100, 100),
+    range=[(0, 256), (0, 256)],
+)
+ax[1].imshow(hist2, extent=(0, 256, 0, 256), origin="lower", cmap="gray")
+ax[1].set_ylabel("blue")
+ax[1].set_xlabel("red")
+
+show()
+
+print("------------------------------")  # 30個
+
+result = cv2.calcHist(
+    [img],
+    channels=(0, 1, 2),
+    mask=None,
+    histSize=(30, 20, 10),
+    ranges=(0, 256, 0, 256, 0, 256),
+)
+cc = result.shape
+print(cc)
+
+# (30, 20, 10)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

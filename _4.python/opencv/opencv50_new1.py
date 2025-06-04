@@ -4697,49 +4697,6 @@ ax.axis("off")
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-print("opencv 102")
-
-# 直方圖
-
-# `data/lena.jpg`的三個通道的直方圖統計、通道0和通道2的二維直方圖統計
-img = cv2.imread("data/lena.jpg")
-fig, ax = plt.subplots(1, 2, figsize=(12, 5))
-colors = ["blue", "green", "red"]
-
-for i in range(3):
-    hist, x = np.histogram(img[:, :, i].ravel(), bins=256, range=(0, 256))
-    ax[0].plot(0.5 * (x[:-1] + x[1:]), hist, label=colors[i], color=colors[i])
-
-ax[0].legend(loc="upper left")
-ax[0].set_xlim(0, 256)
-hist2, x2, y2 = np.histogram2d(
-    img[:, :, 0].ravel(),
-    img[:, :, 2].ravel(),
-    bins=(100, 100),
-    range=[(0, 256), (0, 256)],
-)
-ax[1].imshow(hist2, extent=(0, 256, 0, 256), origin="lower", cmap="gray")
-ax[1].set_ylabel("blue")
-ax[1].set_xlabel("red")
-
-show()
-
-print("------------------------------")  # 30個
-
-result = cv2.calcHist(
-    [img],
-    channels=(0, 1, 2),
-    mask=None,
-    histSize=(30, 20, 10),
-    ranges=(0, 256, 0, 256, 0, 256),
-)
-cc = result.shape
-print(cc)
-
-# (30, 20, 10)
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 103")
@@ -4760,23 +4717,37 @@ img_hsv2 = cv2.cvtColor(img2, cv2.COLOR_BGR2HSV)
 img_bp = cv2.calcBackProject(
     [img_hsv2], channels=[0, 1], hist=result, ranges=[0, 256, 0, 256], scale=1
 )
+
+# 二值化
 _, img_th = cv2.threshold(img_bp, 180, 255, cv2.THRESH_BINARY)
+
 struct = np.ones((3, 3), np.uint8)
 img_mp = cv2.morphologyEx(img_th, cv2.MORPH_CLOSE, struct, iterations=5)
 
-fig, axes = plt.subplots(2, 3, figsize=(9, 6))
-fig.subplots_adjust(0, 0, 1, 1, 0.01, 0.01)
-axes[0, 0].imshow(img[:, :, ::-1])
-axes[0, 1].imshow(img2[:, :, ::-1])
-axes[0, 2].imshow(result[:], cmap="gray")
-axes[1, 0].imshow(img_bp[:], cmap="gray")
-axes[1, 1].imshow(img_th[:], cmap="gray")
-axes[1, 2].imshow(img_mp[:], cmap="gray")
+plt.figure(figsize=(12, 8))
 
-for axe in axes.flat:
-    axe.axis("off")
+# 調整子圖布局     左起  下起  寬佔比 高佔比 水平距 垂直距
+plt.subplots_adjust(0.05, 0.05, 0.95, 0.95, 0.01, 0.05)
+# plt.subplots_adjust(left=None, bottom=None, right=None, top=None,
+# wspace=None, hspace=None)
+
+plt.subplot(231)
+plt.imshow(img[:, :, ::-1])
+plt.subplot(232)
+plt.imshow(img2[:, :, ::-1])
+plt.subplot(233)
+plt.imshow(result[:], cmap="gray")
+plt.subplot(234)
+plt.imshow(img_bp[:], cmap="gray")
+plt.subplot(235)
+plt.imshow(img_th[:], cmap="gray")
+plt.subplot(236)
+plt.imshow(img_mp[:], cmap="gray")
 
 show()
+
+sys.exit()
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
