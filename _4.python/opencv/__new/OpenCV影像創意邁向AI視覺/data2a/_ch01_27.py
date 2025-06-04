@@ -39,46 +39,21 @@ def show():
     pass
 
 
-maxval = 255  # 定義像素最大值
+maxval = 255  # 定義像素最大值, 閾值
 width, height = 640, 480  # 影像寬, 影像高
 
 print("------------------------------------------------------------")  # 60個
 
 print("製作影像")
 
-
-
-print("------------------------------------------------------------")  # 60個
-# OpenCV_05_建立空影像
-print("------------------------------------------------------------")  # 60個
-
 width, height = 640, 480  # 影像寬, 影像高
 
-# 建立GRAY影像陣列, 黑色
-image = np.zeros((height, width), np.uint8)
-cv2.imshow("image", image)
+# 建立 640 X 480 之黑圖
+fig = np.zeros((height, width), dtype=np.uint8)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+# 建立 640 X 480 之白圖
+fig = np.ones((height, width), dtype=np.uint8) * 255
 
-# 建立GRAY影像陣列, 白色
-image = np.zeros((height, width), np.uint8)
-image.fill(255)  # 元素內容改為白色 255
-cv2.imshow("image", image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-# 建立GRAY影像陣列, 白色
-image = np.ones((height, width), np.uint8) * 255
-cv2.imshow("image", image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch5_4.py
 
 width, height = 640, 480  # 影像寬, 影像高
 
@@ -95,8 +70,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch5_5.py
-
 width, height = 640, 480  # 影像寬, 影像高
 
 # 建立GRAY影像陣列, 黑色
@@ -112,8 +85,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch5_7.py
 
 height = 160  # 影像高
 width = 280  # 影像寬
@@ -193,8 +164,8 @@ print("------------------------------------------------------------")  # 60個
 print("製作隨機影像")
 
 # 使用random.randint()建立GRAY影像陣列
-src = np.random.randint(0, 256, size=[height, width], dtype=np.uint8)  # gray
-# src = np.random.randint(256, size=[height, width, 3], dtype=np.uint8)  # 3維
+src = np.random.randint(0, 256, size=[height, width], dtype=np.uint8)  # 灰階, 1維
+# src = np.random.randint(256, size=[height, width, 3], dtype=np.uint8)  # 彩色, 3維
 
 cv2.imshow("Src", src)
 
@@ -211,10 +182,47 @@ print(f"最大值 = {maxVal},  位置 = {maxLoc}")  # 最大值與其位置
 print("------------------------------------------------------------")  # 60個
 
 
+# 製作隨機影像
+width, height = 64, 48  # 影像寬, 影像高
+src = np.random.randint(0, 256, size=[height, width], dtype=np.uint8)
+
+
+print("------------------------------------------------------------")  # 60個
+# OpenCV_05_建立空影像
+print("------------------------------------------------------------")  # 60個
+
+width, height = 640, 480  # 影像寬, 影像高
+
+# 建立GRAY影像陣列, 黑色
+image = np.zeros((height, width), np.uint8)
+cv2.imshow("image", image)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+# 建立GRAY影像陣列, 白色
+image = np.zeros((height, width), np.uint8)
+image.fill(255)  # 元素內容改為白色 255
+cv2.imshow("image", image)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+# 建立GRAY影像陣列, 白色
+image = np.ones((height, width), np.uint8) * 255
+cv2.imshow("image", image)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 print("-------------------- ----------------------------------------")  # 60個
 # OpenCV 運算
 print("------------------------------------------------------------")  # 60個
+
 src = cv2.imread(filename2)
 
 channels = cv2.mean(src)  # 計算影像各通道的均值
@@ -225,313 +233,7 @@ print(f"均值   = \n{mean}")
 print(f"標準差 = \n{std}")
 
 print("------------------------------------------------------------")  # 60個
-
-# ch3_1.py
-
-row1 = [1, 2, 3]
-arr1 = np.array(row1, ndmin=2)
-print(f"陣列維度 = {arr1.ndim}")
-print(f"陣列外型 = {arr1.shape}")
-print(f"陣列大小 = {arr1.size}")
-print("陣列內容")
-print(arr1)
-
-row2 = [4, 5, 6]
-arr2 = np.array([row1, row2], ndmin=2)
-print(f"陣列維度 = {arr2.ndim}")
-print(f"陣列外型 = {arr2.shape}")
-print(f"陣列大小 = {arr2.size}")
-print("陣列內容")
-print(arr2)
-
 print("------------------------------------------------------------")  # 60個
-
-# ch3_2.py
-
-x = np.array([[1, 2, 3], [4, 5, 6]])
-print(f"陣列維度 = {x.ndim}")
-print(f"陣列外型 = {x.shape}")
-print(f"陣列大小 = {x.size}")
-print("陣列內容")
-print("x :", x)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_3.py
-
-x = np.array([[1, 2, 3], [4, 5, 6]])
-print(x[0][2])
-print(x[1][2])
-# 或是
-print(x[0, 2])
-print(x[1, 2])
-
-print("------------------------------------------------------------")  # 60個
-
-# 建立 640 X 480 之黑圖
-
-width, height = 640, 480  # 影像寬, 影像高
-
-fig = np.zeros((height, width), dtype=np.uint8)
-print(fig)
-cv2.imshow("Black 640X480", fig)
-
-# 建立 640 X 480 之白圖
-fig = np.ones((height, width), dtype=np.uint8) * 255
-print(fig)
-cv2.imshow("White 640X480", fig)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_5.py
-
-x1 = np.ones(3)
-print("x1 :", x1)
-
-x2 = np.ones((2, 3), dtype=np.uint8)
-print("x2 :", x2)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_6.py
-
-x1 = np.empty(3)
-print("x1 :", x1)
-
-x2 = np.empty((2, 3), dtype=np.uint8)
-print("x2 :", x2)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_7.py
-
-x1 = np.random.randint(10, 20)
-print("回傳值是10(含)至20(不含)的單一隨機數")
-print("x1 :", x1)
-
-print("回傳一維陣列10個元素, 值是1(含)至5(不含)的隨機數")
-x2 = np.random.randint(1, 5, 10)
-print("x2 :", x2)
-
-print("回傳單3*5陣列, 值是0(含)至10(不含)的隨機數")
-x3 = np.random.randint(10, size=(3, 5))
-print("x3 :", x3)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_7_3.py
-
-x = np.arange(16)
-print("x :", x)
-print(np.reshape(x, (4, -1)))
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_7_4.py
-
-x = np.arange(16)
-print("x :", x)
-print(np.reshape(x, (-1, 8)))
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_8.py
-
-x = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-print(f"陣列元素如下 : {x} ")
-print(f"x[2:]       = {x[2:]}")
-print(f"x[:2]       = {x[:3]}")
-print(f"x[0:3]      = {x[0:3]}")
-print(f"x[1:4]      = {x[1:4]}")
-print(f"x[0:9:2]    = {x[0:9:2]}")
-print(f"x[-1]       = {x[-1]}")
-print(f"x[::2]      = {x[::2]}")
-print(f"x[2::3]     = {x[2::3]}")
-print(f"x[:]        = {x[:]}")
-print(f"x[::]       = {x[::]}")
-print(f"x[-3:-7:-1] = {x[-3:-7:-1]}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_9.py
-
-print("測試 copy=True/False")
-
-print("測試 copy=True, 完全複製, 不連動")
-x1 = np.array([0, 1, 2, 3, 4, 5])
-x2 = np.array(x1, copy=True)
-
-print("x1 :", x1)
-print("x2 :", x2)
-x2[0] = 9
-print("x1 :", x1)
-print("x2 :", x2)
-
-print("測試 copy=False, 會連動")
-x1 = np.array([0, 1, 2, 3, 4, 5])
-x2 = np.array(x1, copy=False)
-
-print("x1 :", x1)
-print("x2 :", x2)
-x2[0] = 9
-print("x1 :", x1)
-print("x2 :", x2)
-
-print("預設, 無copy=True/False, 就是True, 完全複製, 不連動")
-x1 = np.array([0, 1, 2, 3, 4, 5])
-x2 = np.array(x1)
-
-print("x1 :", x1)
-print("x2 :", x2)
-x2[0] = 9
-print("x1 :", x1)
-print("x2 :", x2)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_10.py
-
-x1 = np.array([0, 1, 2, 3, 4, 5])
-x2 = x1.copy()
-
-print("x1 :", x1)
-print("x2 :", x2)
-x2[0] = 9
-print("x1 :", x1)
-print("x2 :", x2)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_11.py
-
-x1 = [0, 1, 2, 3, 4]
-x2 = [5, 6, 7, 8, 9]
-x3 = [10, 11, 12, 13, 14]
-x4 = np.array([x1, x2, x3])
-print("x4 :", x4)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_12.py
-
-x1 = [0, 1, 2, 3, 4]
-x2 = [5, 6, 7, 8, 9]
-x3 = [10, 11, 12, 13, 14]
-x4 = np.array([x1, x2, x3])
-x5 = np.array([x4, x4])
-print("x5 :", x5)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_13.py
-
-x1 = [0, 1, 2, 3, 4]
-x2 = [5, 6, 7, 8, 9]
-x3 = [10, 11, 12, 13, 14]
-x4 = np.array([x1, x2, x3])
-print(f"x4[2][1] = {x4[2][1]}")
-print(f"x4[1][3] = {x4[1][3]}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_13_1.py
-
-x1 = [0, 1, 2, 3, 4]
-x2 = [5, 6, 7, 8, 9]
-x3 = [10, 11, 12, 13, 14]
-x4 = np.array([x1, x2, x3])
-print(f"x4[2,1] = {x4[2,1]}")
-print(f"x4[1,3] = {x4[1,3]}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_14.py
-
-x1 = [0, 1, 2, 3, 4]
-x2 = [5, 6, 7, 8, 9]
-x3 = [10, 11, 12, 13, 14]
-x4 = np.array([x1, x2, x3])
-x5 = np.array([x4, x4])
-print(f"x5[0][2][1] = {x5[0][2][1]}")
-print(f"x5[0][1][3] = {x5[0][1][3]}")
-print(f"x5[1][0][1] = {x5[1][0][1]}")
-print(f"x5[1][1][4] = {x5[1][1][4]}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_14_1.py
-
-x1 = [0, 1, 2, 3, 4]
-x2 = [5, 6, 7, 8, 9]
-x3 = [10, 11, 12, 13, 14]
-x4 = np.array([x1, x2, x3])
-x5 = np.array([x4, x4])
-print(f"x5[0,2,1] = {x5[0,2,1]}")
-print(f"x5[0,1,3] = {x5[0,1,3]}")
-print(f"x5[1,0,1] = {x5[1,0,1]}")
-print(f"x5[1,1,4] = {x5[1,1,4]}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_15.py
-
-x1 = [0, 1, 2, 3, 4]
-x2 = [5, 6, 7, 8, 9]
-x3 = [10, 11, 12, 13, 14]
-x = np.array([x1, x2, x3])
-print("x[:,:]   = 結果是二維陣列")  # 結果是二維陣列
-print(x[:, :])
-
-print("x[2,:4]  = 結果是一維陣列")  # 結果是一維陣列
-print(x[2, :4])
-
-print("x[:2,:1] = 結果是二維陣列")  # 結果是二維陣列
-print(x[:2, :1])
-
-print("x[:,4:]  =  結果是二維陣列")  # 結果是二維陣列
-print(x[:, 4:])
-
-print("x[:,4]   =  結果是一維陣列")  # 結果是一維陣列
-print(x[:, 4])
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_16.py
-
-x1 = [0, 1, 2, 3, 4]
-x2 = [5, 6, 7, 8, 9]
-x3 = [10, 11, 12, 13, 14]
-x = np.array([x1, x2, x3])
-print("x[:2,4]  = 結果是一維陣列")  # 結果是一維陣列
-print(x[:2, 4])
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_17.py
-
-x1 = np.arange(4).reshape(2, 2)
-print(f"陣列 1 \n{x1}")
-x2 = np.arange(4, 8).reshape(2, 2)
-print(f"陣列 2 \n{x2}")
-x = np.vstack((x1, x2))
-print(f"合併結果 \n{x}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_18.py
-
-x1 = np.arange(4).reshape(2, 2)
-print(f"陣列 1 \n{x1}")
-x2 = np.arange(4, 8).reshape(2, 2)
-print(f"陣列 2 \n{x2}")
-x = np.hstack((x1, x2))
-print(f"合併結果 \n{x}")
-
-print("------------------------------------------------------------")  # 60個
-
 """
 img = cv2.imread(filename1)
 cv2.imshow("Peony", img)
@@ -722,6 +424,8 @@ print(f"blue[0,1,2] = {blue[0,1,2]}")
 
 print("------------------------------------------------------------")  # 60個
 
+# 取出像素值, 修改之
+
 img = cv2.imread(filename1)  # 彩色讀取
 
 print(f"修改前img[115,110] = {img[115,110]}")
@@ -743,6 +447,7 @@ for y in range(135, 145):  # 修改影像
         img[y, x] = [0, 255, 255]  # 黃色取代
 
 cv2.imshow("After", img)  # 顯示修改後影像img
+
 print(f"修改後img[115,110] = {img[115,110]}")
 print(f"修改後img[125,110] = {img[125,110]}")
 print(f"修改後img[135,110] = {img[135,110]}")
@@ -752,19 +457,25 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# 看不出差異
+print("修改alpha通道值 255=>127")
 
-img = cv2.imread("street.png", cv2.IMREAD_UNCHANGED)  # PNG讀取
+# 4通道的PNG圖
+filename5 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+
+img = cv2.imread(filename5, cv2.IMREAD_UNCHANGED)  # PNG讀取
 cv2.imshow("Before", img)  # 顯示修改前影像img
-print(f"修改前img[10,50] = {img[10,50]}")
-print(f"修改前img[50,99] = {img[50,99]}")
+print(img.shape)
+print(f"修改前img[210,150] = {img[210,150]}")
+print(f"修改前img[250,199] = {img[250,199]}")
 
-for z in range(0, 200):  # 一次一個修改alpha通道值
-    for y in range(0, 200):
-        img[z, y, 3] = 128  # 修改alpha通道值
+for z in range(0, img.shape[1]):  # 一次一個修改alpha通道值
+    for y in range(0, img.shape[0]):
+        img[z, y, 3] = 127  # 修改alpha通道值
 
-print(f"修改後img[10,50] = {img[10,50]}")
-print(f"修改後img[50,99] = {img[50,99]}")
+img[0:200, 0:200, 3] = 127  # 修改alpha通道值
+
+print(f"修改後img[210,150] = {img[210,150]}")
+print(f"修改後img[250,199] = {img[250,199]}")
 
 cv2.imshow("After", img)  # 顯示修改前影像img
 
@@ -772,24 +483,12 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread("street.png", cv2.IMREAD_UNCHANGED)  # PNG讀取
-cv2.imshow("Before", img)  # 顯示修改前影像img
-print(f"修改前img[10,50] = {img[10,50]}")
-print(f"修改前img[50,99] = {img[50,99]}")
-
-img[0:200, 0:200, 3] = 128
-print(f"修改後img[10,50] = {img[10,50]}")
-print(f"修改後img[50,99] = {img[50,99]}")
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
 print("------------------------------------------------------------")  # 60個
 
 image = np.random.randint(0, 200, size=[3, 5], dtype=np.uint8)
 print(f"image = \n{image}")
 print(f"修改前image.item(1,3) = {image.item(1,3)}")
+
 image.itemset((1, 3), 255)  # 修訂內容為 255
 
 print(f"修改後image =\n{image}")
@@ -797,13 +496,14 @@ print(f"修改後image.item(1,3) = {image.item(1,3)}")
 
 print("------------------------------------------------------------")  # 60個
 
-print("灰階讀取, 部分塗成白色")
+print("灰階讀取, 部分塗成灰色")
 
 img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰色讀取
 cv2.imshow("Before", img)  # 顯示修改前影像img
-for y in range(120, 140):  # 修改影像
-    for x in range(110, 210):
-        img.itemset((y, x), 255)
+
+for y in range(30, 100):  # 修改影像
+    for x in range(180, 280):
+        img.itemset((y, x), 127)
 cv2.imshow("After", img)  # 顯示修改後影像img
 
 cv2.waitKey()
@@ -831,12 +531,14 @@ cv2.imshow("Before", img)  # 顯示修改前影像img
 print(f"修改前img[115,110,1] = {img.item(115,110,1)}")
 print(f"修改前img[125,110,1] = {img.item(125,110,1)}")
 print(f"修改前img[135,110,1] = {img.item(135,110,1)}")
+
 # 白色長條
-for z in range(115, 145):  # 修改影像:一次一個通道值
-    for y in range(110, 210):
+for z in range(30, 100):  # 修改影像:一次一個通道值
+    for y in range(180, 280):
         for x in range(0, 3):  # 一次一個通道值
-            img.itemset((z, y, x), 255)  # 白色取代
+            img.itemset((z, y, x), 127)  # 白色取代
 cv2.imshow("After", img)  # 顯示修改後影像img
+
 print(f"修改後img[115,110,1] = {img.item(115,110,1)}")
 print(f"修改後img[125,110,1] = {img.item(125,110,1)}")
 print(f"修改後img[135,110,1] = {img.item(135,110,1)}")
@@ -851,8 +553,9 @@ img = cv2.imread(filename1)  # 彩色讀取
 cv2.imshow("Peony", img)
 
 # ROI大小區塊建立馬賽克
-face = np.random.randint(0, 256, size=(190, 170, 3))  # 馬賽克效果
-img[30:220, 80:250] = face  # ROI, 先高後寬
+w, h = 100, 70
+face = np.random.randint(0, 256, size=(h, w, 3))  # 馬賽克效果
+img[30 : 30 + h, 180 : 180 + w] = face  # ROI, 先高後寬
 cv2.imshow("Face", img)
 
 cv2.waitKey()
@@ -1021,19 +724,19 @@ print("------------------------------------------------------------")  # 60個
 width, height = 640, 480  # 影像寬, 影像高
 
 img1 = np.zeros((height, width, 3), np.uint8)  # 建立img1影像
-img1[:, :, 2] = 255#紅色
+img1[:, :, 2] = 255  # 紅色
 
 img2 = np.zeros((height, width, 3), np.uint8)  # 建立img2影像
-img2[:, :, 1] = 255# 綠色
+img2[:, :, 1] = 255  # 綠色
 
 # 製作mask
 m = np.zeros((height, width, 1), np.uint8)  # 建立mask(m)影像
 m[50:350, 100:300, :] = 255  # 建立 ROI, 白色
 
-#使用cv2.add相加
+# 使用cv2.add相加
 img3 = cv2.add(img1, img2)  # 不含mask的影像相加
 
-#使用cv2.add相加, 使用mask
+# 使用cv2.add相加, 使用mask
 img4 = cv2.add(img1, img2, mask=m)  # 含mask的影像相加
 
 plt.subplot(231)
@@ -1107,30 +810,58 @@ plt.title("R+G")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.axis("off")
 
-plt.suptitle('addWeighted')
+plt.suptitle("addWeighted")
 show()
 
 print("------------------------------------------------------------")  # 60個
 # OpenCV_09_閾值處理
 print("------------------------------------------------------------")  # 60個
 
-width, height = 64, 48  # 影像寬, 影像高
+thresh = 63  # 定義閾值
 
-src = np.random.randint(0, 256, size=[height, width], dtype=np.uint8)
+print("二值化範例, 只能處理灰階圖")
+print("二值化圖, 閥值 = " + str(thresh) + ", 小於變全黑, 大於變全白")
 
-thresh = 160  # 定義閾值
-ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
+image = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
 
-plt.subplot(121)
-plt.title("src")
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+#         cv2.threshold(image, 閥值, 最大灰度值, 使用的二值化方法)
+t, rst1 = cv2.threshold(image, thresh, maxval, cv2.THRESH_BINARY)
+t, rst2 = cv2.threshold(image, thresh, maxval, cv2.THRESH_BINARY_INV)
+t, rst3 = cv2.threshold(image, thresh, maxval, cv2.THRESH_TRUNC)
+t, rst4 = cv2.threshold(image, thresh, maxval, cv2.THRESH_TOZERO_INV)
+t, rst5 = cv2.threshold(image, thresh, maxval, cv2.THRESH_TOZERO)
+
+plt.subplot(231)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.axis("off")
 
-plt.subplot(122)
-plt.title("dst")
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.subplot(232)
+plt.title("BINARY")
+plt.imshow(cv2.cvtColor(rst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.axis("off")
 
+plt.subplot(233)
+plt.title("BINARY_INV")
+plt.imshow(cv2.cvtColor(rst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(234)
+plt.title("TRUNC")
+plt.imshow(cv2.cvtColor(rst3, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(235)
+plt.title("TOZERO_INV")
+plt.imshow(cv2.cvtColor(rst4, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.subplot(236)
+plt.title("TOZERO")
+plt.imshow(cv2.cvtColor(rst5, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.suptitle("二值化圖, 閥值 = " + str(thresh))
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1492,7 +1223,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("school.jpg", cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+src = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 thresh = 127  # 閾值
 ret, dst = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -1583,7 +1314,7 @@ plt.title("原圖取出灰階100")
 plt.imshow(cv2.cvtColor(new_src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.axis("off")
 
-plt.suptitle('cv2.bitwise_and')
+plt.suptitle("cv2.bitwise_and")
 show()
 
 cv2.waitKey()
@@ -1873,7 +1604,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("tunnel.jpg")
+src = cv2.imread(filename3)
 
 height, width = src.shape[0:2]  # 獲得影像大小
 a1 = [0, 0]  # 原始影像的 A
@@ -1917,9 +1648,8 @@ print(f"mapy =\n {mapy}")
 
 print("------------------------------------------------------------")  # 60個
 
-# ch10_11.py
-
 src = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
+
 rows, cols = src.shape
 mapx = np.zeros(src.shape, np.float32)
 mapy = np.zeros(src.shape, np.float32)
@@ -1934,7 +1664,7 @@ print(f"mapy =\n {mapy}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("huang.jpg")
+src = cv2.imread(filename1)
 
 rows, cols = src.shape[:2]
 mapx = np.zeros(src.shape[:2], np.float32)
@@ -1976,7 +1706,7 @@ print(f"mapy =\n {mapy}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("huang.jpg")
+src = cv2.imread(filename1)
 
 rows, cols = src.shape[:2]
 mapx = np.zeros(src.shape[:2], np.float32)
@@ -2018,7 +1748,7 @@ print(f"mapy =\n {mapy}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("huang.jpg")
+src = cv2.imread(filename1)
 
 rows, cols = src.shape[:2]
 mapx = np.zeros(src.shape[:2], np.float32)
@@ -2044,7 +1774,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("tunnel.jpg")
+src = cv2.imread(filename2)
 
 rows, cols = src.shape[:2]
 mapx = np.zeros(src.shape[:2], np.float32)
@@ -2074,7 +1804,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("tunnel.jpg")
+src = cv2.imread(filename2)
 
 rows, cols = src.shape[:2]
 mapx = np.zeros(src.shape[:2], np.float32)
@@ -2107,7 +1837,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2141,7 +1872,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2161,8 +1893,11 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("easy.jpg")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
+
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
@@ -2179,7 +1914,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2206,7 +1942,8 @@ src = cv2.imread("easy.jpg")
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2227,7 +1964,8 @@ src = cv2.imread("easy.jpg")
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2246,7 +1984,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2268,7 +2007,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2290,7 +2030,9 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 150, 255, cv2.THRESH_BINARY)
+thresh = 150  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
+
 cv2.imshow("binary", dst_binary)  # 顯示二值化影像
 
 # 找尋影像內的輪廓
@@ -2314,7 +2056,9 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
+
 cv2.imshow("binary", dst_binary)  # 顯示二值化影像
 
 # 找尋影像內的輪廓
@@ -2337,7 +2081,9 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 150, 255, cv2.THRESH_BINARY)
+thresh = 150  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
+
 cv2.imshow("binary", dst_binary)  # 顯示二值化影像
 
 # 找尋影像內的輪廓
@@ -2362,7 +2108,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2386,7 +2133,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2410,7 +2158,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2434,7 +2183,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2457,7 +2207,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2493,7 +2244,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2521,7 +2273,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2546,7 +2299,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2591,7 +2345,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2626,7 +2381,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2661,7 +2417,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2789,7 +2546,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2817,8 +2575,10 @@ src = cv2.imread("explode1.jpg")
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
+
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2842,7 +2602,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2866,7 +2627,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2894,7 +2656,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2921,7 +2684,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2948,7 +2712,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -2977,7 +2742,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -3008,7 +2774,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -3040,7 +2807,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -3070,7 +2838,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -3095,7 +2864,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -3120,7 +2890,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -3147,7 +2918,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -3174,7 +2946,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -3210,7 +2983,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -3246,7 +3020,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -3299,7 +3074,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -3353,7 +3129,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -3379,7 +3156,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -3465,7 +3243,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -3499,7 +3278,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -3527,7 +3307,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -3556,7 +3337,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -3607,7 +3389,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -3655,7 +3438,8 @@ cv2.imshow("src", src)
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-ret, dst_binary = cv2.threshold(src_gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -5389,12 +5173,10 @@ print("------------------------------------------------------------")  # 60個
 陣列水平合併 hstack()
 """
 
-
 img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
 cv2.imshow("Peony", img)
 
 # 準備搬出
-
 
 
 # 建立GRAY影像陣列
@@ -5408,7 +5190,23 @@ print(f"image[1,4] = {image[1, 4]}")  # 列出特定像素點的內容
 
 print("------------------------------------------------------------")  # 60個
 
-
 # 取出圖片的一塊
 face = img[70:220, 90:240]  # ROI, 先高後寬
 cv2.imshow("Face", face)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+
+待清除本地檔案
+copyright.jpg
+
+
+"""

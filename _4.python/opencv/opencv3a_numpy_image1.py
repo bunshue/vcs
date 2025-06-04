@@ -12,6 +12,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -690,89 +691,19 @@ print("otsu = \n", otsu)
 
 print("------------------------------------------------------------")  # 60個
 
-""" fail
-def changeColor(x):
-    r = cv2.getTrackbarPos('R','image')
-    g = cv2.getTrackbarPos('G','image')
-    b = cv2.getTrackbarPos('B','image')
-    image[ : ] = [b, g, r]
-
-W, H, D = 640, 480, 3
-image = np.zeros((100,700,3), np.uint8)
-cv2.namedWindow('image')
-cv2.createTrackbar('R','image', 100, 255, changeColor)
-cv2.createTrackbar('G','image', 0, 255, changeColor)
-cv2.createTrackbar('B','image', 0, 255, changeColor)
-
-while(1):
-    cv2.imshow('image', image)
-    k = cv2.waitKey(1)&0xFF
-    if k == 27:
-        break   
-
-cv2.destroyAllWindows()
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-""" fail
-Type = 0  #閾值處理類型值
-Value = 0 #使用的閾值
-def onType(a):
-    Type = cv2.getTrackbarPos(tType, windowName)
-    Value = cv2.getTrackbarPos(tValue, windowName)
-    ret, dst = cv2.threshold(o, Value, 255, Type) 
-    cv2.imshow(windowName,dst)
- 
-def onValue(a):
-    Type = cv2.getTrackbarPos(tType, windowName)
-    Value = cv2.getTrackbarPos(tValue, windowName)
-    ret, dst = cv2.threshold(o, Value, 255, Type) 
-    cv2.imshow(windowName,dst)
-
-o = cv2.imread("images/lena512.bmp", 0)
-windowName = "Demo19.13"  #窗體名
-cv2.namedWindow(windowName)
-cv2.imshow(windowName,o)
-#創建兩個滑動條
-tType = "Type"  #用來選取閾值處理類型的滾動條
-tValue = "Value"    #用來選取閾值的滾動條
-cv2.createTrackbar(tType, windowName, 0, 4, onType)
-cv2.createTrackbar(tValue, windowName, 0, 255, onValue) 
-
-if cv2.waitKey(0) == 27:  
-    cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-def changeColor(x):
-    g = cv2.getTrackbarPos('R','image')
-    if g == 0:
-        image[:] = 0
-    else:
-        image[:] = 255
-
-W, H, D = 1000, 100, 3
-image = np.zeros((H, W, D), np.uint8)
-cv2.namedWindow('image')
-cv2.createTrackbar('R', 'image', 0, 1, changeColor)
-while(1):
-    cv2.imshow('image', image)
-    k = cv2.waitKey(1) & 0xFF
-    if k == 27:
-        break   
-
-cv2.destroyAllWindows()
-"""
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個
+
 print("------------------------------------------------------------")  # 60個

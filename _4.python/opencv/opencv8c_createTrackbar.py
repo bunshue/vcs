@@ -1,14 +1,24 @@
 """
+OpenCV之控件 Trackbar
+滑桿 ( Trackbar ) 又稱作滑動條、Slider bar，是一種可以用滑鼠調整數值的 UI 介面
 
-cv2之工具
+cv2.createTrackbar()
+cv2.setTrackbarPos()
+cv2.getTrackbarPos()
 
-cv2.setMouseCallback
 
+# Trackbar 範例
+def do_trackbar_event3(val):
+    print(val, end=" ")
+
+cv2.createTrackbar("Trackbar", "opencv", 0, 255, do_trackbar_event3)
+cv2.setTrackbarPos("Trackbar", "opencv", THRESHOLD)  # 預設
 
 """
 import sys
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
 
 W = 640
 H = 480
@@ -17,18 +27,18 @@ ESC = 27
 SPACE = 32
 
 print("------------------------------------------------------------")  # 60個
-"""
+
 print("Trackbar之使用")
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
-# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 cv2.imshow("ImageShow", image)
 
-def apply_function(val):
-    print('數值 :', val, end = " ")
+
+def do_trackbar_event1(val):
+    print("數值 :", val, end=" ")
 
 
 # cv2.createTrackbar('滑桿名稱', '視窗名稱', min, max, fn)
@@ -36,94 +46,58 @@ def apply_function(val):
 # max 最大值
 # fn 滑桿數值改變時要執行的函式
 # 加入滑桿 0 ~ 200, 預設 100
-cv2.createTrackbar("TrackbarName", "ImageShow", 0, 200, apply_function)
+cv2.createTrackbar("TrackbarName", "ImageShow", 0, 200, do_trackbar_event1)
 cv2.setTrackbarPos("TrackbarName", "ImageShow", 100)
 
-#取得Trackbar數值
+# 取得Trackbar數值
 value = cv2.getTrackbarPos("TrackbarName", "ImageShow")
 
-apply_function(value) #套用一次設定值
+do_trackbar_event1(value)  # 套用一次設定值
 
 keycode = cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-def setup_bg_color(x):
-  r = cv2.getTrackbarPos('R','image')
-  g = cv2.getTrackbarPos('G','image')
-  b = cv2.getTrackbarPos('B','image')
-  s = cv2.getTrackbarPos(switch,'image')
+print("調色盤")
 
-  if s == 0:
-   img[:] = 0
-  else:
-   img[:] = [b,g,r]
-  cv2.imshow('image',img)
+
+def do_trackbar_event2(x):
+    r = cv2.getTrackbarPos("R", "image")
+    g = cv2.getTrackbarPos("G", "image")
+    b = cv2.getTrackbarPos("B", "image")
+    s = cv2.getTrackbarPos(switch, "image")
+    if s == 0:
+        img[:] = 0
+    else:
+        img[:] = [b, g, r]
+    cv2.imshow("image", img)
+
 
 # Create a black image, a window
-img = np.zeros((240,180,3), np.uint8)
-cv2.namedWindow('image', cv2.WINDOW_NORMAL)
+img = np.zeros((240, 180, 3), np.uint8)
+cv2.namedWindow("image", cv2.WINDOW_NORMAL)
 
 # create trackbars for color change
-cv2.createTrackbar('R','image',0,255,setup_bg_color)
-cv2.createTrackbar('G','image',0,255,setup_bg_color)
-cv2.createTrackbar('B','image',0,255,setup_bg_color)
+cv2.createTrackbar("R", "image", 0, 255, do_trackbar_event2)
+cv2.createTrackbar("G", "image", 0, 255, do_trackbar_event2)
+cv2.createTrackbar("B", "image", 0, 255, do_trackbar_event2)
 
 # create switch for ON/OFF functionality
-switch = '0 : OFF \n1 : ON'
-cv2.createTrackbar(switch, 'image',0,1,setup_bg_color)
+switch = "0 : OFF \n1 : ON"
+cv2.createTrackbar(switch, "image", 0, 1, do_trackbar_event2)
 cv2.setTrackbarPos(switch, "image", 1)
 
-while(1):
+while 1:
     k = cv2.waitKey(1) & 0xFF
     if k == ESC:
         break
 
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-"""
-print("------------------------------------------------------------")  # 60個
-
-THRESHOLD = 127
-print("二值化範例, 只能處理灰階圖")
-print("二值化圖, 閥值 = " + str(THRESHOLD) + ", 小於變全黑, 大於變全白")
-
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
-# 檔案 => cv2影像
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("opencv", image)
-
-
-def get_trackbar_value(val):
-    print(val, end=" ")
-    #        cv2.threshold(image, 閥值, 最大灰度值, 使用的二值化方法)
-    t, rst = cv2.threshold(image, val, 255, cv2.THRESH_BINARY)
-    # t, rst = cv2.threshold(image, val, 255, cv2.THRESH_BINARY_INV)
-    # t, rst = cv2.threshold(image, val, 255, cv2.THRESH_TRUNC)
-    # t, rst = cv2.threshold(image, val, 255, cv2.THRESH_TOZERO_INV)
-    # t, rst = cv2.threshold(image, val, 255, cv2.THRESH_TOZERO)
-    cv2.imshow("opencv", rst)
-
-
-cv2.createTrackbar("Trackbar", "opencv", 0, 255, get_trackbar_value)
-cv2.setTrackbarPos("Trackbar", "opencv", THRESHOLD)  # 預設
-
 keycode = cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-print("OpenCV之控件 Trackbar")
-print("滑桿 ( Trackbar ) 又稱作滑動條、Slider bar，是一種可以用滑鼠調整數值的 UI 介面")
+print("------------------------------------------------------------")  # 60個
 
 print("測試cv2視窗的Trackbar")
 
@@ -131,7 +105,6 @@ filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 # image = cv2.imread(filename)
 
-# 調整對比度後，圖像的效果顯示窗口
 cv2.namedWindow("TrackbarTest", cv2.WND_PROP_AUTOSIZE)
 
 cv2.imshow("TrackbarTest", image)
@@ -141,15 +114,13 @@ MIN_VALUE = 30  # 無效，看起來最小值一定要0
 initial_value = 40
 
 
-def callback_trackbar_test(_value):
-    print(_value, end=" ")
+def do_trackbar_event4(_value):
+    print("數值 :", _value, end=" ")
 
 
-callback_trackbar_test(initial_value)  # 做一次
+do_trackbar_event4(initial_value)  # 做一次
 
-cv2.createTrackbar(
-    "value", "TrackbarTest", MIN_VALUE, MAX_VALUE, callback_trackbar_test
-)  # callback function
+cv2.createTrackbar("value", "TrackbarTest", MIN_VALUE, MAX_VALUE, do_trackbar_event4)
 cv2.setTrackbarPos("value", "TrackbarTest", initial_value)  # 預設
 
 cv2.waitKey(0)
@@ -163,10 +134,7 @@ print("Trackbar之使用")
 
 filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
-# 檔案 => cv2影像
 image = cv2.imread(filename, cv2.IMREAD_COLOR)
-
-# 顯示原圖
 cv2.imshow("image", image)
 
 # 圖像歸一化，且轉換為浮點型
@@ -182,12 +150,12 @@ MAX_VALUE = 100
 cv2.namedWindow("RGB_HLS", cv2.WINDOW_AUTOSIZE)
 
 
-def nothing(*arg):
+def do_trackbar_event5(*arg):
     pass
 
 
-cv2.createTrackbar("Lightness", "RGB_HLS", lightness, MAX_VALUE, nothing)
-cv2.createTrackbar("Saturation", "RGB_HLS", saturation, MAX_VALUE, nothing)
+cv2.createTrackbar("Lightness", "RGB_HLS", lightness, MAX_VALUE, do_trackbar_event5)
+cv2.createTrackbar("Saturation", "RGB_HLS", saturation, MAX_VALUE, do_trackbar_event5)
 
 # 調整飽和度和亮度後的效果
 lsImg = np.zeros(image.shape, np.float32)
@@ -224,10 +192,10 @@ while True:
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
-# 檔案 => cv2影像
 image = cv2.imread(filename)
 cv2.imshow("ImageProcessing", image)
 
@@ -261,7 +229,9 @@ def contrast_fn(val):
 
 
 # 加入亮度調整滑桿 0 ~ 200, 預設 100
+#                   控件名稱        視窗名稱        min max  動作名稱
 cv2.createTrackbar("brightness", "ImageProcessing", 0, 200, brightness_fn)
+#                   控件名稱        視窗名稱        設定值
 cv2.setTrackbarPos("brightness", "ImageProcessing", 100)
 
 # 加入對比度調整滑桿 0 ~ 200, 預設 100
@@ -273,10 +243,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-
 print("對比度增強1")
 
-# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 MAX_VALUE = 120
@@ -308,7 +276,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("對比度增強4 gamma")
 
-# 檔案 => cv2影像
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 image = cv2.imread(filename)
 
@@ -339,6 +306,7 @@ cv2.createTrackbar("value", "gamma_contrast", value, MAX_VALUE, callback_contras
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("圖像平滑 meanBlur")
@@ -379,7 +347,7 @@ def meanBlur(image, H, W, _boundary="fill", _fillvalue=0):
     return result
 
 
-# 檔案 => cv2影像
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
 # 均值濾波卷積核的寬高均設為 2*halfWinSize+1
@@ -428,7 +396,6 @@ def scharr(I, _boundary="symm"):
 
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-# 檔案 => cv2影像
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
 # 求卷積
@@ -559,8 +526,8 @@ def krisch(image, _boundary="fill", _fillvalue=0):
     return edge
 
 
-# 檔案 => cv2影像
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
 edge = krisch(image, _boundary="symm")
 # 邊緣強度的灰度級顯示
 rows, cols = edge.shape
@@ -597,6 +564,17 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
@@ -607,6 +585,86 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+""" fail
+def changeColor(x):
+    r = cv2.getTrackbarPos('R','image')
+    g = cv2.getTrackbarPos('G','image')
+    b = cv2.getTrackbarPos('B','image')
+    image[ : ] = [b, g, r]
+
+W, H, D = 640, 480, 3
+image = np.zeros((100,700,3), np.uint8)
+cv2.namedWindow('image')
+cv2.createTrackbar('R','image', 100, 255, changeColor)
+cv2.createTrackbar('G','image', 0, 255, changeColor)
+cv2.createTrackbar('B','image', 0, 255, changeColor)
+
+while(1):
+    cv2.imshow('image', image)
+    k = cv2.waitKey(1)&0xFF
+    if k == 27:
+        break   
+
+cv2.destroyAllWindows()
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+""" fail
+Type = 0  #閾值處理類型值
+Value = 0 #使用的閾值
+def onType(a):
+    Type = cv2.getTrackbarPos(tType, windowName)
+    Value = cv2.getTrackbarPos(tValue, windowName)
+    ret, dst = cv2.threshold(o, Value, 255, Type) 
+    cv2.imshow(windowName,dst)
+ 
+def onValue(a):
+    Type = cv2.getTrackbarPos(tType, windowName)
+    Value = cv2.getTrackbarPos(tValue, windowName)
+    ret, dst = cv2.threshold(o, Value, 255, Type) 
+    cv2.imshow(windowName,dst)
+
+o = cv2.imread("images/lena512.bmp", 0)
+windowName = "Demo19.13"  #窗體名
+cv2.namedWindow(windowName)
+cv2.imshow(windowName,o)
+#創建兩個滑動條
+tType = "Type"  #用來選取閾值處理類型的滾動條
+tValue = "Value"    #用來選取閾值的滾動條
+cv2.createTrackbar(tType, windowName, 0, 4, onType)
+cv2.createTrackbar(tValue, windowName, 0, 255, onValue) 
+
+if cv2.waitKey(0) == 27:  
+    cv2.destroyAllWindows()
+
+print('------------------------------------------------------------')	#60個
+
+def changeColor(x):
+    g = cv2.getTrackbarPos('R','image')
+    if g == 0:
+        image[:] = 0
+    else:
+        image[:] = 255
+
+W, H, D = 1000, 100, 3
+image = np.zeros((H, W, D), np.uint8)
+cv2.namedWindow('image')
+cv2.createTrackbar('R', 'image', 0, 1, changeColor)
+while(1):
+    cv2.imshow('image', image)
+    k = cv2.waitKey(1) & 0xFF
+    if k == 27:
+        break   
+
+cv2.destroyAllWindows()
+"""
 print("------------------------------------------------------------")  # 60個
 
 

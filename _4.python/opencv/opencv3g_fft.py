@@ -96,7 +96,7 @@ plt.title("頻譜圖")
 f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
 fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
 ifshift = np.fft.ifftshift(fshift)  # 逆傅立葉變換,  # 0 頻率頻率移回左上角
-src_tmp = np.fft.ifft2(ifshift)# 逆傅立葉變換, 將頻域訊號轉換回時域訊號
+src_tmp = np.fft.ifft2(ifshift)  # 逆傅立葉變換, 將頻域訊號轉換回時域訊號
 src_back = np.abs(src_tmp)  # 取絕對值
 plt.subplot(224)
 plt.imshow(src_back, cmap="gray")  # 灰階顯示
@@ -121,7 +121,7 @@ row, col = rows // 2, cols // 2  # rows, cols的中心
 fshift[row - 30 : row + 30, col - 30 : col + 30] = 0  # 設定區塊為低頻率分量是0
 
 ifshift = np.fft.ifftshift(fshift)  # 逆傅立葉變換  # 0 頻率分量移回左上角
-src_tmp = np.fft.ifft2(ifshift)# 逆傅立葉變換, 將頻域訊號轉換回時域訊號
+src_tmp = np.fft.ifft2(ifshift)  # 逆傅立葉變換, 將頻域訊號轉換回時域訊號
 src_back = np.abs(src_tmp)  # 取絕對值
 
 plt.subplot(121)
@@ -156,7 +156,7 @@ X = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
 print(X)
 print("------------------------------")  # 30個
 print("逆傅立葉變換")
-x2 = np.fft.ifft2(X)# 逆傅立葉變換, 將頻域訊號轉換回時域訊號
+x2 = np.fft.ifft2(X)  # 逆傅立葉變換, 將頻域訊號轉換回時域訊號
 print(x2)
 
 print("------------------------------")  # 30個
@@ -239,7 +239,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1427,10 +1426,10 @@ print("一維 fft")
 # X = np.arange(100)
 # X = np.ones(8)
 
-N = 100 # 取樣點數, 精細程度
+N = 100  # 取樣點數, 精細程度
 A = 10
 f = 60
-t = np.linspace(0, 1/f*3, N)# 時間, 3個週期
+t = np.linspace(0, 1 / f * 3, N)  # 時間, 3個週期
 X = A * np.sin(2 * np.pi * f * t)
 
 X_FFT = np.fft.fft(X)  # 一維 fft
@@ -1449,14 +1448,14 @@ print("X_FFT_IFFT = ifft(X_FFT) :\n", X_FFT_IFFT, sep="")
 """
 
 plt.subplot(311)
-#plt.scatter(X, X, c="r", s=100, label="原資料")
-plt.plot(t,X, label="原資料")
+# plt.scatter(X, X, c="r", s=100, label="原資料")
+plt.plot(t, X, label="原資料")
 plt.legend()
 plt.grid()
 
 plt.subplot(312)
 plt.scatter(X_FFT.real, X_FFT.imag, c="g", s=100, label="FFT")
-#plt.legend()
+# plt.legend()
 plt.grid()
 
 plt.subplot(313)
@@ -1570,6 +1569,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("np.fft 03")
 print("一維 fft")
+
 
 # 方波的頻譜、合成方波在跳變處出現抖動
 def square_wave(size):
@@ -1931,7 +1931,6 @@ print("------------------------------------------------------------")  # 60個
 sys.exit()
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1961,19 +1960,16 @@ image = cv2.imread("data/fft/shape2.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
 np.fft.fft2(image)
 
 
-
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 image = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
 
 
-#plt.figure(figsize=(8, 6))
+# plt.figure(figsize=(8, 6))
 
 plt.axis("off")
 
 
-
 ifshift = np.fft.ifftshift(fshift)  # 逆傅立葉變換  # 0 頻率頻率移回左上角
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1991,7 +1987,7 @@ plt.subplot(121)
 plt.imshow(image, cmap="gray")  # 灰階顯示原圖
 plt.title("原圖")
 
-image = image[::3, ::2]  #j每隔3, i每隔2
+image = image[::3, ::2]  # j每隔3, i每隔2
 
 plt.subplot(122)
 plt.imshow(image, cmap="gray")  # 灰階顯示原圖

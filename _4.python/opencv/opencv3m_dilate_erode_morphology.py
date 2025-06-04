@@ -1107,7 +1107,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/morphology/hole.jpg") 
+src = cv2.imread("data/morphology/hole.jpg")
 cv2.imshow("src", src)
 
 kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核

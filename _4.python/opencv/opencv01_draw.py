@@ -35,6 +35,13 @@ cv2.FONT_ITALIC			italic字型(斜體字)
 
 import cv2
 
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (0, 0, 255)  # B G R
+GREEN = (0, 255, 0)  # B G R
+BLUE = (255, 0, 0)  # B G R
+YELLOW = (0, 255, 255)  # B G R
+
 filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 filename2 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
 filename3 = "C:/_git/vcs/_1.data/______test_files1/ims01.bmp"
@@ -73,21 +80,19 @@ W, H = 640, 480
 image = np.zeros((H, W, 3), dtype="uint8")
 
 print("畫直線")
-color = (0, 0, 255)  # B G R
 line_width = 10  # 線寬
 x1, y1 = 50, 50
 x2, y2 = 250, 50
 # 畫直線 起 終 色 寬
-cv2.line(image, (x1, y1), (x2, y2), color, line_width)
+cv2.line(image, (x1, y1), (x2, y2), RED, line_width)
 cv2.line(image, (x1, y1), (x2, y2), 30)  # 無color, 即 黑色線 1 點
-cv2.line(image, (x1, y1 + 30), (x2, y2 + 30), (0, 255, 0), 15, lineType=cv2.LINE_AA)
+cv2.line(image, (x1, y1 + 30), (x2, y2 + 30), GREEN, 15, lineType=cv2.LINE_AA)
 
 print("畫箭頭")
 # 畫箭頭 起 終 色 寬
-cv2.arrowedLine(image, (x1, y1 + 60), (x2, y2 + 60), (255, 0, 0), 5)
+cv2.arrowedLine(image, (x1, y1 + 60), (x2, y2 + 60), BLUE, 5)
 
 print("畫矩形 空心")
-color = (0, 0, 255)  # B G R
 line_width = 5
 # 畫矩形 左上 右下 色 寬
 w, h = 150, 100
@@ -95,10 +100,9 @@ w, h = 150, 100
 x1, y1 = 50, 150
 # 矩形之右下點
 x2, y2 = x1 + w, y1 + h
-cv2.rectangle(image, (x1, y1), (x2, y2), color, line_width)
+cv2.rectangle(image, (x1, y1), (x2, y2), RED, line_width)
 
 print("畫矩形 實心")
-color = (0, 255, 0)  # B G R
 line_width = -1  # -1, 填滿
 # 畫矩形 左上 右下 色 寬(-1, 填滿)
 w, h = 150 - 50, 100 - 50
@@ -106,29 +110,27 @@ w, h = 150 - 50, 100 - 50
 x1, y1 = 50 + 25, 150 + 25
 # 矩形之右下點
 x2, y2 = x1 + w, y1 + h
-cv2.rectangle(image, (x1, y1), (x2, y2), color, line_width)  # 線條寬度為負數 代表實心
+cv2.rectangle(image, (x1, y1), (x2, y2), RED, line_width)  # 線條寬度為負數 代表實心
 
 print("畫圓形 空心")
 cx, cy = 60, 320  # 圓心
 radius = 50  # 半徑
-color = (0, 255, 255)  # 顏色
 line_width = 2  # 線寬
-cv2.circle(image, (cx, cy), radius, color, line_width)  # 繪製圓形
+cv2.circle(image, (cx, cy), radius, YELLOW, line_width)  # 繪製圓形
 
 print("畫圓形 實心")
 line_width = -1  # 線寬 負值代表實心
-cv2.circle(image, (cx, cy), radius // 2, color, line_width)  # 設定 -1
+cv2.circle(image, (cx, cy), radius // 2, YELLOW, line_width)  # 設定 -1
 
 print("畫橢圓形")
 cx, cy = 220, 320  # 橢心
 AA, BB = 100, 50  # 長軸 短軸
 angle = 0  # 順時鐘旋轉角度
-color = (0, 0, 255)
 line_width = 5  # 線條寬度, 負數代表實心
 
 # 畫橢圓              中心  長軸 短軸 旋轉  開始 結束角度 顏色 線寬
-cv2.ellipse(image, (cx, cy), (AA, BB), angle, 0, 360, color, line_width)  # 空心
-cv2.ellipse(image, (cx, cy), (AA // 2, BB // 2), angle, 0, 360, color, -1)  # 實心
+cv2.ellipse(image, (cx, cy), (AA, BB), angle, 0, 360, RED, line_width)  # 空心
+cv2.ellipse(image, (cx, cy), (AA // 2, BB // 2), angle, 0, 360, RED, -1)  # 實心
 
 cv2.ellipse(image, (cx, cy + 70), (100, 50), 0, 0, 180, 255, -1)  # 藍色半橢圓
 
@@ -152,7 +154,7 @@ line_width = 3  # 線寬
 pts = np.array([[px1, py1], [px2, py2], [px3, py3], [px4, py4], [px5, py5], [px6, py6]])
 # pts = np.array([[px1, py1], [px2, py2], [px3, py3], [px4, py4], [px5, py5], [px6, py6]], np.int32)
 
-cv2.polylines(image, [pts], True, (0, 0, 255), line_width)  # True表示封口
+cv2.polylines(image, [pts], True, RED, line_width)  # True表示封口
 # True: 頭尾相連, False: 頭尾不相連
 
 x_st, y_st = 320, 20 + 20
@@ -172,12 +174,12 @@ pts = np.array(
 # cv2.polylines(image,[pts],True,(0,255,0), line_width)   # 繪製多邊形
 
 # 畫多邊形 實心
-cv2.fillPoly(image, [pts], (0, 255, 0))
+cv2.fillPoly(image, [pts], GREEN)
 
 print("畫多邊形 保留測試reshape")
 pts = np.array([[10, 5], [20, 30], [70, 20], [50, 10]], np.int32)
 pts = pts.reshape((-1, 1, 2))
-cv2.polylines(image, [pts], True, (255, 0, 0))
+cv2.polylines(image, [pts], True, BLUE)
 
 cv2.imshow("OpenCV Draw 1", image)
 cv2.waitKey(0)
@@ -213,7 +215,7 @@ font = cv2.FONT_HERSHEY_COMPLEX_SMALL
 font = cv2.FONT_HERSHEY_COMPLEX
 font = cv2.FONT_HERSHEY_SIMPLEX
 font_size = 2  # 字體大小
-font_color = (0, 255, 255)  # B G R
+font_color = YELLOW
 line_width = 2  # 字體粗細, 線寬
 line_type = cv2.LINE_AA  # 文字線條樣式
 
@@ -272,7 +274,7 @@ cv2.putText(
 )  # 預設, False
 # cv2.putText(image, "Welcome 4444", (x_st, y_st), font, font_size, font_color, line_width, line_type, False)    #False: 從左上畫起
 # cv2.putText(image, "Welcome 4444", (x_st, y_st), font, font_size, font_color, line_width, line_type, True)     #True:  從左下畫起
-cv2.rectangle(image, (x_st, y_st), (x_st + w, y_st - h), (0, 0, 255), 2)
+cv2.rectangle(image, (x_st, y_st), (x_st + w, y_st - h), RED, 2)
 
 from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
 
@@ -325,7 +327,7 @@ def drawBoundingBox(image, bboxs):
     for box in bboxs:
         x1, y1, x2, y2 = (box["x1"], box["y1"], box["x2"], box["y2"])
         label = box["label"]
-        cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 6)
+        cv2.rectangle(image, (x1, y1), (x2, y2), GREEN, 6)
         fontFace = cv2.FONT_HERSHEY_COMPLEX
         fontScale = 0.5
         thickness = 1
@@ -335,9 +337,9 @@ def drawBoundingBox(image, bboxs):
         _x2 = x1 + labelSize[0][0]  # topright x of text
         _y2 = y1 - labelSize[0][1]  # topright y of text
         cv2.rectangle(
-            image, (_x1, _y1), (_x2, _y2), (0, 255, 0), cv2.FILLED
+            image, (_x1, _y1), (_x2, _y2), GREEN, cv2.FILLED
         )  # text background
-        cv2.putText(image, label, (x1, y1), fontFace, fontScale, (0, 0, 0), thickness)
+        cv2.putText(image, label, (x1, y1), fontFace, fontScale, BLACK, thickness)
     return image
 
 
@@ -376,105 +378,40 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch7_1.py
-img = np.ones((350, 500, 3), np.uint8) * 255  # 建立白色底的畫布
-cv2.line(img, (1, 1), (300, 1), (255, 0, 0))  # 上方水平直線
-cv2.line(img, (300, 1), (300, 300), (255, 0, 0))  # 右邊垂直直線
-cv2.line(img, (300, 300), (1, 300), (255, 0, 0))  # 下邊水平直線
-cv2.line(img, (1, 300), (1, 1), (255, 0, 0))  # 左邊垂直直線
-cv2.imshow("My Draw", img)  # 畫布顯示直線
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch7_2.py
-
-img = np.ones((350, 500, 3), np.uint8) * 255  # 建立白色底的畫布
-cv2.line(img, (1, 1), (300, 1), (255, 0, 0))  # 上方水平直線
-cv2.line(img, (300, 1), (300, 300), (255, 0, 0))  # 右邊垂直直線
-cv2.line(img, (300, 300), (1, 300), (255, 0, 0))  # 下邊水平直線
-cv2.line(img, (1, 300), (1, 1), (255, 0, 0))  # 左邊垂直直線
-for x in range(150, 300, 10):
-    cv2.line(img, (x, 1), (300, x - 150), (255, 0, 0))
-for y in range(150, 300, 10):
-    cv2.line(img, (1, y), (y - 150, 300), (255, 0, 0))
-
-cv2.imshow("My Draw", img)  # 畫布顯示結果
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch7_3.py
-
-img = np.ones((350, 500, 3), np.uint8) * 255  # 建立白色底的畫布
-img[1:300, 1:300] = (0, 255, 255)  # 設定黃色底
-
-cv2.line(img, (1, 1), (300, 1), (255, 0, 0))  # 上方水平直線
-cv2.line(img, (300, 1), (300, 300), (255, 0, 0))  # 右邊垂直直線
-cv2.line(img, (300, 300), (1, 300), (255, 0, 0))  # 下邊水平直線
-cv2.line(img, (1, 300), (1, 1), (255, 0, 0))  # 左邊垂直直線
-for x in range(150, 300, 10):
-    cv2.line(img, (x, 1), (300, x - 150), (255, 0, 0))
-for y in range(150, 300, 10):
-    cv2.line(img, (1, y), (y - 150, 300), (255, 0, 0))
-
-cv2.imshow("My Draw", img)  # 畫布顯示結果
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch7_4.py
-
 img = cv2.imread(filename1)  # 使用影像當畫布
+img = np.ones((350, 500, 3), np.uint8) * 255  # 建立白色底的畫布
 img[1:300, 1:300] = (0, 255, 255)  # 設定黃色底
 
-cv2.line(img, (1, 1), (300, 1), (255, 0, 0))  # 上方水平直線
-cv2.line(img, (300, 1), (300, 300), (255, 0, 0))  # 右邊垂直直線
-cv2.line(img, (300, 300), (1, 300), (255, 0, 0))  # 下邊水平直線
-cv2.line(img, (1, 300), (1, 1), (255, 0, 0))  # 左邊垂直直線
+cv2.line(img, (1, 1), (300, 1), BLUE)  # 上方水平直線
+cv2.line(img, (300, 1), (300, 300), BLUE)  # 右邊垂直直線
+cv2.line(img, (300, 300), (1, 300), BLUE)  # 下邊水平直線
+cv2.line(img, (1, 300), (1, 1), BLUE)  # 左邊垂直直線
 for x in range(150, 300, 10):
-    cv2.line(img, (x, 1), (300, x - 150), (255, 0, 0))
+    cv2.line(img, (x, 1), (300, x - 150), BLUE)
 for y in range(150, 300, 10):
-    cv2.line(img, (1, y), (y - 150, 300), (255, 0, 0))
+    cv2.line(img, (1, y), (y - 150, 300), BLUE)
 
 cv2.imshow("My Draw", img)  # 畫布顯示結果
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-print("------------------------------------------------------------")  # 60個
-
-# ch7_5.py
-
-img = np.ones((350, 500, 3), np.uint8) * 255  # 建立白色底的畫布
-cv2.rectangle(img, (1, 1), (300, 300), (255, 0, 0))  # 繪製矩形
-for x in range(150, 300, 10):
-    cv2.line(img, (x, 1), (300, x - 150), (255, 0, 0))
-for y in range(150, 300, 10):
-    cv2.line(img, (1, y), (y - 150, 300), (255, 0, 0))
-
-cv2.imshow("My Draw", img)  # 畫布顯示結果
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch7_6.py
-
+"""
 img = np.ones((350, 500, 3), np.uint8) * 255  # 建立白色底的畫布
 cv2.rectangle(img, (1, 1), (300, 300), (0, 255, 255), -1)  # 設定黃色底
-cv2.rectangle(img, (1, 1), (300, 300), (255, 0, 0))  # 繪製矩形
-for x in range(150, 300, 10):
-    cv2.line(img, (x, 1), (300, x - 150), (255, 0, 0))
-for y in range(150, 300, 10):
-    cv2.line(img, (1, y), (y - 150, 300), (255, 0, 0))
+cv2.rectangle(img, (1, 1), (300, 300), BLUE)  # 繪製矩形
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+img = cv2.imread(filename1)  # 使用影像當畫布
+
+cy = int(img.shape[0] / 2)  # 中心點 y 座標
+cx = int(img.shape[1] / 2)  # 中心點 x 座標
+
+cv2.circle(img, (cx, cy), 30, RED, -1)  # 繪製實心圓形
+for r in range(40, 200, 20):  # 繪製系列空心圓形
+    cv2.circle(img, (cx, cy), r, YELLOW, 2)
 
 cv2.imshow("My Draw", img)  # 畫布顯示結果
 
@@ -482,17 +419,17 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch7_7.py
 
 img = cv2.imread(filename1)  # 使用影像當畫布
 cy = int(img.shape[0] / 2)  # 中心點 y 座標
 cx = int(img.shape[1] / 2)  # 中心點 x 座標
-red = (0, 0, 255)  # 設定紅色
-yellow = (0, 255, 255)  # 設定黃色
-cv2.circle(img, (cx, cy), 30, red, -1)  # 繪製實心圓形
-for r in range(40, 200, 20):  # 繪製系列空心圓形
-    cv2.circle(img, (cx, cy), r, yellow, 2)
+
+size = (200, 100)
+angle = 0
+cv2.ellipse(img, (cx, cy), size, angle, 0, 360, RED, 1)  # 繪製橢圓形
+angle = 45
+cv2.ellipse(img, (cx, cy), size, angle, 0, 360, YELLOW, 5)  # 繪製橢圓形
+cv2.ellipse(img, (cx, cy), size, angle, 45, 135, BLUE, 3)  # 繪製橢圓弧
 
 cv2.imshow("My Draw", img)  # 畫布顯示結果
 
@@ -500,8 +437,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch7_10.py
 
 height = 400  # 畫布高度
 width = 600  # 畫布寬度
@@ -521,30 +456,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch7_11.py
-
-img = cv2.imread(filename1)  # 使用影像當畫布
-cy = int(img.shape[0] / 2)  # 中心點 y 座標
-cx = int(img.shape[1] / 2)  # 中心點 x 座標
-red = (0, 0, 255)  # 設定紅色
-yellow = (0, 255, 255)  # 設定黃色
-blue = (255, 0, 0)  # 設定藍色
-size = (200, 100)
-angle = 0
-cv2.ellipse(img, (cx, cy), size, angle, 0, 360, red, 1)  # 繪製橢圓形
-angle = 45
-cv2.ellipse(img, (cx, cy), size, angle, 0, 360, yellow, 5)  # 繪製橢圓形
-cv2.ellipse(img, (cx, cy), size, angle, 45, 135, blue, 3)  # 繪製橢圓弧
-
-cv2.imshow("My Draw", img)  # 畫布顯示結果
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch7_12.py
-
 img = cv2.imread(filename1)  # 使用影像當畫布
 cy = int(img.shape[0] / 2)  # 中心點 y 座標
 cx = int(img.shape[1] / 2)  # 中心點 x 座標
@@ -561,14 +472,13 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch7_13.py
-
 img1 = np.ones((200, 300, 3), np.uint8) * 255  # 畫布1
+
 pts = np.array([[150, 50], [250, 100], [150, 150], [50, 100]])  # 頂點陣列
-cv2.polylines(img1, [pts], True, (255, 0, 0), 5)  # 繪製封閉式多邊形
+cv2.polylines(img1, [pts], True, BLUE, 5)  # 繪製封閉式多邊形
 
 img2 = np.ones((200, 300, 3), np.uint8) * 255  # 畫布2
-cv2.polylines(img2, [pts], False, (0, 0, 255), 3)  # 繪製開放式多邊形
+cv2.polylines(img2, [pts], False, RED, 3)  # 繪製開放式多邊形
 
 cv2.imshow("isClosed_True", img1)  # 畫布顯示封閉式多邊形
 cv2.imshow("isClosed_False", img2)  # 畫布顯示開放式多邊形
@@ -578,11 +488,10 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch7_14.py
-
 img = np.ones((300, 600, 3), np.uint8) * 255  # 畫布
+
 font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(img, "Python", (150, 180), font, 3, (255, 0, 0), 12)
+cv2.putText(img, "Python", (150, 180), font, 3, BLUE, 12)
 
 cv2.imshow("Python", img)  # 畫布顯示文字
 
@@ -591,11 +500,10 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch7_15.py
-
 img = np.ones((300, 600, 3), np.uint8) * 255  # 畫布
+
 font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(img, "Python", (150, 180), font, 3, (255, 0, 0), 12)
+cv2.putText(img, "Python", (150, 180), font, 3, BLUE, 12)
 cv2.putText(img, "Python", (150, 180), font, 3, (0, 255, 255), 5)
 
 cv2.imshow("Python", img)  # 畫布顯示文字
@@ -605,12 +513,11 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch7_16.py
-
 img = np.ones((300, 600, 3), np.uint8) * 255  # 畫布
+
 font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(img, "Python", (120, 120), font, 3, (255, 0, 0), 12)
-cv2.putText(img, "Python", (120, 180), font, 3, (0, 255, 0), 12, cv2.LINE_8, True)
+cv2.putText(img, "Python", (120, 120), font, 3, BLUE, 12)
+cv2.putText(img, "Python", (120, 180), font, 3, GREEN, 12, cv2.LINE_8, True)
 
 cv2.imshow("Python", img)  # 畫布顯示文字
 
@@ -619,11 +526,10 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch7_17.py
-
 img = cv2.imread(filename1)
+
 font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(img, "Peony", (120, 120), font, 3, (255, 0, 0), 12)
+cv2.putText(img, "Peony", (120, 120), font, 3, BLUE, 12)
 
 cv2.imshow("Peony", img)
 
@@ -631,8 +537,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch7_17_1.py
 
 from PIL import Image, ImageDraw, ImageFont
 
@@ -652,7 +556,7 @@ def cv2_Chinese_Text(img, text, left, top, textColor, fontSize):
 
 
 img = cv2.imread(filename1)
-img = cv2_Chinese_Text(img, "牡丹亭", 100, 50, (0, 0, 255), 50)
+img = cv2_Chinese_Text(img, "牡丹亭", 100, 50, RED, 50)
 
 cv2.imshow("Peony", img)
 
@@ -661,7 +565,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch7_18.py
 from random import *
 
 width = 640  # 反彈球畫布寬度
@@ -679,7 +582,7 @@ while cv2.waitKey(1) == -1:
         y_step = -y_step
     y += y_step  # 新的反彈球 y 位置
     img = np.ones((height, width, 3), np.uint8) * 255
-    cv2.circle(img, (x, y), r, (255, 0, 0), -1)  # 繪製反彈球
+    cv2.circle(img, (x, y), r, BLUE, -1)  # 繪製反彈球
     cv2.imshow("Bouncing Ball", img)
     time.sleep(speed)  # 依speed設定休息
 
@@ -687,7 +590,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch7_19.py
 from random import *
 
 width = 640  # 反彈球畫布寬度
@@ -709,7 +611,7 @@ while cv2.waitKey(1) == -1:
     x += x_step  # 新的反彈球 x 位置
     y += y_step  # 新的反彈球 y 位置
     img = np.ones((height, width, 3), np.uint8) * 255
-    cv2.circle(img, (x, y), r, (255, 0, 0), -1)  # 繪製反彈球
+    cv2.circle(img, (x, y), r, BLUE, -1)  # 繪製反彈球
     cv2.imshow("Bouncing Ball", img)
     time.sleep(speed)  # 依speed設定休息
 
@@ -717,7 +619,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch7_20.py
 from random import *
 
 width = 640  # 反彈球畫布寬度
@@ -741,7 +642,7 @@ while cv2.waitKey(1) == -1:
     x += x_step  # 新的反彈球 x 位置
     y += y_step  # 新的反彈球 y 位置
     img = np.ones((height, width, 3), np.uint8) * 255
-    cv2.circle(img, (x, y), r, (255, 0, 0), -1)  # 繪製反彈球
+    cv2.circle(img, (x, y), r, BLUE, -1)  # 繪製反彈球
     cv2.imshow("Bouncing Ball", img)
     time.sleep(speed)  # 依speed設定休息
 
@@ -749,15 +650,11 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch7_21.py
-
 events = [i for i in dir(cv2) if "EVENT" in i]
 for e in events:
     print(e)
 
 print("------------------------------------------------------------")  # 60個
-
-# ch7_22.py
 
 
 def OnMouseAction(event, x, y, flags, param):
@@ -782,8 +679,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch7_23.py
 
 
 def OnMouseAction(event, x, y, flags, param):
@@ -813,8 +708,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# ch7_24.py
-
 
 def OnMouseAction(event, x, y, flags, param):
     # color可以產生隨機色彩
@@ -834,8 +727,6 @@ def OnMouseAction(event, x, y, flags, param):
             cv2.rectangle(image, (x, y), (px, py), color, 3)  # 空心矩形
 
 
-height = 400  # 視窗高度
-width = 600  # 視窗寬度
 width, height = 640, 480  # 影像寬, 影像高
 
 image = np.ones((height, width, 3), np.uint8) * 255
@@ -850,8 +741,6 @@ while 1:
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch7_25.py
 
 
 def onChange(x):
@@ -875,8 +764,6 @@ while 1:
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch7_26.py
 
 
 def onChange(x):
@@ -975,9 +862,9 @@ W, H, D = 400, 400, 3
 image = np.ones((H, W, 3), dtype="uint8") * 255
 (centerX, centerY) = (round(image.shape[1] / 2), round(image.shape[0] / 2))
 # 將圖像的中心作為圓心,實際值為 d / 2
-red = (0, 0, 255)  # 設置白色變量
+
 for r in range(5, round(400 / 2), 12):
-    cv2.circle(image, (centerX, centerY), r, red, 3)
+    cv2.circle(image, (centerX, centerY), r, RED, 3)
     # circle(載體圖像，圓心，半徑，顏色)
 
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -1048,9 +935,9 @@ pts = np.array([[200, 50], [300, 200], [200, 350], [100, 200]], np.int32)
 # 生成各個頂點,注意數據類型為int32
 pts = pts.reshape((-1, 1, 2))
 # 第1個參數為-1, 表明這一維的長度是根據后面的維度的計算出來的。
-cv2.polylines(image, [pts], True, (0, 255, 0), 8)
+cv2.polylines(image, [pts], True, GREEN, 8)
 # 調用函數polylines完成多邊形繪圖，注意第3個參數控制多邊形封閉
-# cv2.polylines(image, [pts], False, (0, 255, 0), 8)  #不閉合的的多邊形
+# cv2.polylines(image, [pts], False, GREEN, 8)  #不閉合的的多邊形
 
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("畫圖 4")
@@ -1080,7 +967,7 @@ for i in range(N):
 print(points)
 
 for ptx in points:
-    cv2.circle(image, (ptx), 10, (0, 0, 255), -1)
+    cv2.circle(image, (ptx), 10, RED, -1)
 
 print("畫連線")
 
@@ -1111,7 +998,7 @@ points = np.random.randint(MIN, MAX, (N, 2), np.int32)
 # print(points)
 
 # points = np.int0(points)  # 取整數
-cv2.drawContours(image, [points], 0, (0, 0, 255), 3)
+cv2.drawContours(image, [points], 0, RED, 3)
 
 cv2.imshow("image", image)
 cv2.waitKey(0)
@@ -1124,5 +1011,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-

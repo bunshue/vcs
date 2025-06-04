@@ -13,7 +13,7 @@ H = 480
 
 ESC = 27
 SPACE = 32
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("cv2.setMouseCallback 01")
 
@@ -400,17 +400,12 @@ while(1):
 
 cv2.destroyAllWindows()
 """
-
-'''
 print("------------------------------------------------------------")  # 60個
 print("cv2.setMouseCallback 11")
-
 
 """
 0 : 畫點
 1 : 拖曳
-
-
 """
 mode = 0
 
@@ -447,7 +442,6 @@ while True:
         break
 
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 print("cv2.setMouseCallback 12")
