@@ -51,15 +51,16 @@ print("------------------------------------------------------------")  # 60個
 
 # 一次設定所有參數
 import matplotlib.pylab as pylab
-plt.style.use('fivethirtyeight')
+
+plt.style.use("fivethirtyeight")
 params = {
-    'figure.figsize': (8, 8),
-    'font.size': 24,
-    'legend.fontsize': 20,
-    'axes.titlesize': 28,
-    'axes.labelsize': 24,
-    'xtick.labelsize': 20,
-    'ytick.labelsize': 20
+    "figure.figsize": (8, 8),
+    "font.size": 24,
+    "legend.fontsize": 20,
+    "axes.titlesize": 28,
+    "axes.labelsize": 24,
+    "xtick.labelsize": 20,
+    "ytick.labelsize": 20,
 }
 pylab.rcParams.update(params)
 # np.set_printoptions(suppress=True)

@@ -72,78 +72,18 @@ plt.axis("off")
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
 )
-dst = cv2.drawContours(src, contours, -1, (0, 255, 0), 5)  # 繪製圖形輪廓
-
-plt.subplot(313)
-plt.title("找尋影像內的輪廓")
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.axis("off")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread("easy.jpg")
-
-plt.subplot(311)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.axis("off")
-
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
-
-# 二值化處理影像
-thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
-ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
-
-plt.subplot(312)
-plt.title("二值化")
-plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.axis("off")
-
-# 找尋影像內的輪廓
-contours, hierarchy = cv2.findContours(
-    dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
-)
-dst = cv2.drawContours(src, contours, -1, (0, 255, 0), 5)  # 繪製圖形輪廓
-
-plt.subplot(313)
-plt.title("找尋影像內的輪廓")
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.axis("off")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch15_2.py
-
-src = cv2.imread("easy.jpg")
-
-plt.subplot(311)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.axis("off")
-
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
-
-# 二值化處理影像
-thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
-ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
-
-plt.subplot(312)
-plt.title("二值化")
-plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.axis("off")
-
-# 找尋影像內的輪廓
-contours, hierarchy = cv2.findContours(
-    dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
-)
 
 print("資料類型 :", type(contours))
 print("輪廓數量 :", len(contours))
+
+dst = cv2.drawContours(src, contours, -1, (0, 255, 0), 5)  # 繪製圖形輪廓
+
+plt.subplot(313)
+plt.title("找尋影像內的輪廓")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -173,7 +113,17 @@ contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
 )
 
+print("資料類型 :", type(contours))
 print("輪廓數量 :", len(contours))
+
+n = len(contours)  # 回傳輪廓數
+for i in range(n):  # 輸出輪廓的屬性
+    print(f"編號 = {i}")
+    print(f"輪廓點的數量 = {len(contours[i])}")
+    print(f"輪廓點的外形 = {contours[i].shape}")
+
+print(contours[1])  # 列印編號1的輪廓點
+
 n = len(contours)  # 回傳輪廓數
 imgList = []  # 建立輪廓串列
 for i in range(n):  # 依次繪製輪廓
@@ -187,29 +137,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread("easy.jpg")
-
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
-
-# 二值化處理影像
-thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
-ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
-
-# 找尋影像內的輪廓
-contours, hierarchy = cv2.findContours(
-    dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
-)
-
-print("輪廓數量 :", len(contours))
-n = len(contours)  # 回傳輪廓數
-for i in range(n):  # 輸出輪廓的屬性
-    print(f"編號 = {i}")
-    print(f"輪廓點的數量 = {len(contours[i])}")
-    print(f"輪廓點的外形 = {contours[i].shape}")
-
-print(contours[1])  # 列印編號1的輪廓點
-
 print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("easy1.jpg")
@@ -251,6 +178,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("lake.jpg")
 cv2.imshow("src", src)
@@ -278,47 +206,18 @@ contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
 
+#外輪廓
 dst = cv2.drawContours(src, contours, -1, (0, 255, 0), 2)  # 繪製圖形輪廓
+
+#填滿輪廓
+# dst = cv2.drawContours(src, contours, -1, (0, 255, 0), -1)  # 繪製圖形輪廓
+
 cv2.imshow("result", dst)  # 顯示結果影像
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch15_9.py
-
-src = cv2.imread("lake.jpg")
-cv2.imshow("src", src)
-
-plt.subplot(311)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.axis("off")
-
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
-
-# 二值化處理影像
-thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
-ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
-
-plt.subplot(312)
-plt.title("二值化")
-plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.axis("off")
-
-cv2.imshow("binary", dst_binary)  # 顯示二值化影像
-
-# 找尋影像內的輪廓
-contours, hierarchy = cv2.findContours(
-    dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
-)
-dst = cv2.drawContours(src, contours, -1, (255, 255, 255), -1)  # 繪製圖形輪廓
-cv2.imshow("result", dst)  # 顯示結果影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
 print("------------------------------------------------------------")  # 60個
 
 # ch15_10.py
@@ -334,7 +233,7 @@ plt.axis("off")
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 
 # 二值化處理影像
-thresh = 150  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
@@ -383,41 +282,12 @@ plt.axis("off")
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
 )
-dst = cv2.drawContours(src, contours, -1, (0, 255, 0), 5)  # 繪製圖形輪廓
-cv2.imshow("result", dst)  # 顯示結果影像
-print(f"hierarchy 資料類型 : {type(hierarchy)}")
-print(f"列印層級 \n {hierarchy}")
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch15_12.py
-
-src = cv2.imread("easy2.jpg")
-cv2.imshow("src", src)
-
-plt.subplot(311)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.axis("off")
-
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
-
-# 二值化處理影像
-thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
-ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
-
-plt.subplot(312)
-plt.title("二值化")
-plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.axis("off")
-
+"""
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
+"""
 dst = cv2.drawContours(src, contours, -1, (0, 255, 0), 5)  # 繪製圖形輪廓
 cv2.imshow("result", dst)  # 顯示結果影像
 print(f"hierarchy 資料類型 : {type(hierarchy)}")
@@ -427,8 +297,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch15_13.py
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("easy3.jpg")
 cv2.imshow("src", src)
@@ -453,6 +322,12 @@ plt.axis("off")
 contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE
 )
+"""
+# 找尋影像內的輪廓
+contours, hierarchy = cv2.findContours(
+    dst_binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE
+)
+"""
 dst = cv2.drawContours(src, contours, -1, (0, 255, 0), 3)  # 繪製圖形輪廓
 cv2.imshow("result", dst)  # 顯示結果影像
 print(f"hierarchy 資料類型 : {type(hierarchy)}")
@@ -462,42 +337,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch15_14.py
-
-src = cv2.imread("easy3.jpg")
-cv2.imshow("src", src)
-
-plt.subplot(311)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.axis("off")
-
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
-
-# 二值化處理影像
-thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
-ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
-
-plt.subplot(312)
-plt.title("二值化")
-plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.axis("off")
-
-# 找尋影像內的輪廓
-contours, hierarchy = cv2.findContours(
-    dst_binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE
-)
-dst = cv2.drawContours(src, contours, -1, (0, 255, 0), 3)  # 繪製圖形輪廓
-cv2.imshow("result", dst)  # 顯示結果影像
-print(f"列印層級 \n {hierarchy}")
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
 print("------------------------------------------------------------")  # 60個
-
-# ch15_15.py
 
 src = cv2.imread("easy.jpg")
 
@@ -802,8 +642,10 @@ contours, hierarchy = cv2.findContours(
 
 match0 = cv2.matchShapes(contours[0], contours[0], 1, 0)  # 輪廓0和0比較
 print(f"輪廓0和0比較 = {match0}")
+
 match1 = cv2.matchShapes(contours[0], contours[1], 1, 0)  # 輪廓0和1比較
 print(f"輪廓0和1比較 = {match1}")
+
 match2 = cv2.matchShapes(contours[0], contours[2], 1, 0)  # 輪廓0和2比較
 print(f"輪廓0和2比較 = {match2}")
 
@@ -850,8 +692,10 @@ cnt3 = contours[0]
 sd = cv2.createShapeContextDistanceExtractor()  # 建立形狀場景運算子
 match0 = sd.computeDistance(cnt1, cnt1)  # 影像1和1比較
 print(f"影像1和1比較 = {match0}")
+
 match1 = sd.computeDistance(cnt1, cnt2)  # 影像1和2比較
 print(f"影像1和2比較 = {match1}")
+
 match2 = sd.computeDistance(cnt1, cnt3)  # 影像1和3比較
 print(f"影像1和3比較 = {match2}")
 
@@ -898,8 +742,10 @@ cnt3 = contours[0]
 hd = cv2.createHausdorffDistanceExtractor()  # 建立Hausdorff
 match0 = hd.computeDistance(cnt1, cnt1)  # 影像1和1比較
 print(f"影像1和1比較 = {match0}")
+
 match1 = hd.computeDistance(cnt1, cnt2)  # 影像1和2比較
 print(f"影像1和2比較 = {match1}")
+
 match2 = hd.computeDistance(cnt1, cnt3)  # 影像1和3比較
 print(f"影像1和3比較 = {match2}")
 

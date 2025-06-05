@@ -65,7 +65,7 @@ plt.subplot(133)
 plt.title("顯示原圖與mask作用後的圖")
 plt.imshow(cv2.cvtColor(c, cv2.COLOR_BGR2RGB))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -101,7 +101,7 @@ plt.subplot(133)
 plt.title("顯示原圖與mask作用後的圖")
 plt.imshow(cv2.cvtColor(c, cv2.COLOR_BGR2RGB))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -143,7 +143,7 @@ plt.title("decryption")
 plt.imshow(cv2.cvtColor(decryption, cv2.COLOR_BGR2RGB))
 
 plt.suptitle("XOR 加密解密")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -199,7 +199,7 @@ plt.subplot(224)
 plt.title("wm")
 plt.imshow(cv2.cvtColor(wm, cv2.COLOR_BGR2RGB))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -257,7 +257,7 @@ plt.subplot(236)
 plt.title("encryptFace")
 plt.imshow(cv2.cvtColor(encryptFace, cv2.COLOR_BGR2RGB))
 
-plt.show()
+show()
 
 plt.figure("new04", figsize=(16, 12))
 
@@ -285,7 +285,7 @@ plt.subplot(236)
 plt.title("extractLena")
 plt.imshow(cv2.cvtColor(extractLena, cv2.COLOR_BGR2RGB))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -317,7 +317,7 @@ for i in range(8):
     plt.imshow(cv2.cvtColor(r[:, :, i], cv2.COLOR_BGR2RGB))
     plt.title(str(i))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -377,7 +377,7 @@ plt.subplot(236)
 plt.title("B")
 plt.imshow(cv2.cvtColor(blue, cv2.COLOR_BGR2RGB))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -405,7 +405,7 @@ plt.subplot(122)
 plt.title("ROI")
 plt.imshow(cv2.cvtColor(roi, cv2.COLOR_BGR2RGB))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -426,7 +426,7 @@ plt.subplot(122)
 plt.imshow(cv2.cvtColor(img_invert, cv2.COLOR_BGR2RGB))
 plt.title("負片效果")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -454,7 +454,7 @@ plt.subplot(122)
 plt.imshow(cv2.cvtColor(img_masked, cv2.COLOR_BGR2RGB))
 plt.title("遮罩效果")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -600,22 +600,14 @@ opencv 預設的排列方式為BGR，而不是RGB
 
 範例. 物件偵測 - 找出綠色的物體
 
-彩色轉HSV常見的應用可能有物件偵測，去背處理(排除綠色的背景)，
-以下就來示範如何找出圖片中綠色的水果，類似的應用可能有找出草地的背景，
-
+彩色轉HSV常見的應用可能有物件偵測，去背處理(排除綠色的背景)
+以下就來示範如何找出圖片中綠色部分，類似的應用可能有找出草地的背景
 """
-image = cv2.imread("data/fruit.jpg")
+
+image = cv2.imread("data/tennis.jpg")
 hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
-fig = plt.figure(
-    num="彩色影像轉HSV",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+fig = plt.figure(figsize=(10, 5))
 
 plt.subplot(131)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -634,21 +626,24 @@ plt.subplot(133)
 plt.imshow(cv2.cvtColor(res, cv2.COLOR_BGR2RGB))
 plt.title("抓出綠色的部分")
 
-plt.show()
+show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("閾值分割 bitwise_and")
 
 src1 = np.array([[255, 0, 255]])
 src2 = np.array([[255, 0, 0]])
-# 與運算
+
+# AND運算
 dst_and = cv2.bitwise_and(src1, src2)
-# 或運算
-dst_or = cv2.bitwise_or(src1, src2)
-print("與運算的結果：")
+print("AND運算 的 結果：")
 print(dst_and)
-print("或運算的結果：")
+
+# OR運算
+dst_or = cv2.bitwise_or(src1, src2)
+print("OR運算 的 結果：")
 print(dst_or)
 
 print("------------------------------------------------------------")  # 60個
@@ -666,39 +661,53 @@ print(f"dst = \n {dst}")
 
 print("------------------------------------------------------------")  # 60個
 
-# 灰階 mask 運算
+# 灰階/彩色 mask 運算
 
-src1 = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
+plt.figure("mask", figsize=(12, 8))
+
+src1 = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階
+plt.subplot(331)
+plt.imshow(cv2.cvtColor(src1, cv2.COLOR_BGR2RGB))
 
 src2 = np.zeros(src1.shape, dtype=np.uint8)  # 建立mask
 src2[50:520, 150:360] = 255  # 設定mask, 先高後寬
+plt.subplot(332)
+plt.imshow(cv2.cvtColor(src2, cv2.COLOR_BGR2RGB))
 
 dst = cv2.bitwise_and(src1, src2)  # 執行and運算
+plt.subplot(333)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("AND")
 
-cv2.imshow("Before", src1)
-cv2.imshow("Mask", src2)
-cv2.imshow("After", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# 彩色 mask 運算
-
-src1 = cv2.imread(filename2)
+src1 = cv2.imread(filename2)  # 彩色
+plt.subplot(334)
+plt.imshow(cv2.cvtColor(src1, cv2.COLOR_BGR2RGB))
 
 src2 = np.zeros(src1.shape, dtype=np.uint8)  # 建立mask
 src2[50:520, 150:360, :] = 255  # 設定mask, 先高後寬  # 這是3維陣列
+plt.subplot(335)
+plt.imshow(cv2.cvtColor(src2, cv2.COLOR_BGR2RGB))
 
 dst = cv2.bitwise_and(src1, src2)  # 執行and運算
+plt.subplot(336)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("AND")
 
-cv2.imshow("Before", src1)
-cv2.imshow("Mask", src2)
-cv2.imshow("After", dst)
+src1 = cv2.imread(filename2)  # 彩色
+plt.subplot(337)
+plt.imshow(cv2.cvtColor(src1, cv2.COLOR_BGR2RGB))
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+src2 = np.zeros(src1.shape, dtype=np.uint8)  # 建立mask
+src2[50:520, 150:360, :] = 255  # 設定mask, 先高後寬  # 這是3維陣列
+plt.subplot(338)
+plt.imshow(cv2.cvtColor(src2, cv2.COLOR_BGR2RGB))
+
+dst = cv2.bitwise_or(src1, src2)  # 執行or運算
+plt.subplot(339)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("OR")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -714,48 +723,40 @@ print(f"src2 = \n {src2}")
 print(f"dst = \n {dst}")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+src = cv2.imread(filename2)
+
+dst = cv2.bitwise_not(src)  # 執行 NOT運算
+
+plt.subplot(231)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+
+plt.subplot(232)
+plt.title("NOT")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 
 src1 = cv2.imread(filename2)
 
-src2 = np.zeros(src1.shape, dtype=np.uint8)  # 建立mask
-src2[50:520, 150:360, :] = 255  # 設定mask, 先高後寬  # 這是3維陣列
-
-dst = cv2.bitwise_or(src1, src2)  # 執行or運算
-
-cv2.imshow("Before", src1)
-cv2.imshow("Mask", src2)
-cv2.imshow("After", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread(filename1)
-
-dst = cv2.bitwise_not(src)  # 執行or運算
-
-cv2.imshow("Before", src)
-cv2.imshow("After", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-src1 = cv2.imread(filename1)
-
 src2 = np.zeros(src1.shape, np.uint8)
-src2[:, 140:280, :] = 255  # 設定mask, 先高後寬  # 建立mask白色區塊
+src2[:, 140:360, :] = 255  # 設定mask, 先高後寬  # 建立mask白色區塊
 
 dst = cv2.bitwise_xor(src1, src2)  # 執行xor運算
 
-cv2.imshow("Before", src1)
-cv2.imshow("Mask", src2)
-cv2.imshow("After", dst)
+plt.subplot(234)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src1, cv2.COLOR_BGR2RGB))
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(235)
+plt.title("Mask")
+plt.imshow(cv2.cvtColor(src2, cv2.COLOR_BGR2RGB))
+
+plt.subplot(236)
+plt.title("NOT")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -763,21 +764,37 @@ src = cv2.imread(filename1)
 key = np.random.randint(0, 256, src.shape, np.uint8)  # 密鑰影像
 print(src.shape)
 
-cv2.imshow("Before", src)  # 原始影像
-cv2.imshow("key", key)  # 密鑰影像
-
 img_encryp = cv2.bitwise_xor(src, key)  # 加密結果的影像
-cv2.imshow("encryption", img_encryp)  # 加密結果影像
 
 img_decryp = cv2.bitwise_xor(key, img_encryp)  # 解密結果的影像
-cv2.imshow("decryption", img_decryp)  # 解密結果影像
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(221)
+plt.title("原始影像")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 
+plt.subplot(222)
+plt.title("密鑰影像")
+plt.imshow(cv2.cvtColor(key, cv2.COLOR_BGR2RGB))
+
+plt.subplot(223)
+plt.title("加密")
+plt.imshow(cv2.cvtColor(img_encryp, cv2.COLOR_BGR2RGB))
+
+plt.subplot(224)
+plt.title("解密")
+plt.imshow(cv2.cvtColor(img_decryp, cv2.COLOR_BGR2RGB))
+
+show()
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 

@@ -35,7 +35,7 @@ y1 = np.cos(x)
 y2 = np.tan(x)
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 plt.figure(
     num="標準 subplot",
     figsize=(12, 8),
@@ -46,29 +46,37 @@ plt.figure(
     frameon=True,
 )
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 plt.subplot(231)
 
 plt.plot(x, y)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 plt.subplot(232)
 
 plt.plot(x, y)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 plt.subplot(233)
 
 plt.plot(x, y)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 plt.subplot(212)
 
 plt.plot(x, y)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 plt.suptitle("標準 subplot")
-plt.tight_layout()
+# plt.tight_layout()
+
+# 調整子圖布局     左起  下起  寬佔比 高佔比 水平距 垂直距
+plt.subplots_adjust(
+    left=0.05, bottom=0.05, right=0.95, top=0.95, wspace=0.15, hspace=0.15
+)
+# plt.subplots_adjust(left=None, bottom=None, right=None, top=None,
+# wspace=None, hspace=None)
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -80,7 +88,7 @@ plt.figure(figsize=(12, 8))
 N = 36
 for i in range(N):
     plt.subplot(6, N // 6, i + 1)
-    plt.plot(x,y)
+    plt.plot(x, y)
     plt.xticks(())
     plt.yticks(())
 
@@ -221,6 +229,7 @@ foldername = "C:/_git/vcs/_1.data/______test_files1/__pic/imagedata/"
 
 import cv2
 import glob
+
 
 def show_images_labels_predictions(images, labels, start_id, num=10):
     plt.gcf().set_size_inches(12, 8)
@@ -401,7 +410,7 @@ ax1.tick_params("x", labelbottom=False)  # 取消顯示刻度標籤
 ax2 = plt.subplot(212, sharex=ax1)  # 共享 x 軸
 ax2.plot(x2, y2)
 
-plt.suptitle('各子圖使用同樣的x軸')
+plt.suptitle("各子圖使用同樣的x軸")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -418,7 +427,7 @@ ax2 = plt.subplot(122, sharey=ax1)  # 共享 y 軸
 ax2.plot(x, y2, "g--")
 ax2.tick_params("y", labelleft=False)  # 取消顯示刻度標籤
 
-plt.suptitle('各子圖使用同樣的y軸')
+plt.suptitle("各子圖使用同樣的y軸")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -442,7 +451,7 @@ ax3.plot(x3, np.sin(x3**2), "b")
 ax4 = plt.subplot(224, sharex=ax1, sharey=ax1)  # 共享x和y軸
 ax4.plot(x3, 1 + np.sin(x3**2), "g--")
 
-plt.suptitle('各子圖使用同樣的 x軸 和 y軸')
+plt.suptitle("各子圖使用同樣的 x軸 和 y軸")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -470,11 +479,10 @@ ax4 = plt.subplot(224, sharex=ax1, sharey=ax1)  # 共享x和y軸
 ax4.plot(x3, 1 + np.sin(x3**2), "g--")
 ax4.tick_params("y", labelleft=False)  # 取消顯示y軸刻度標籤
 
-plt.suptitle('各子圖使用同樣的 x軸 和 y軸')
+plt.suptitle("各子圖使用同樣的 x軸 和 y軸")
 plt.show()
-'''
-print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
 
 N = 50  # 樣本數
 x = np.linspace(0, 2 * np.pi, N)
@@ -594,6 +602,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
+
+print("------------------------------")  # 30個

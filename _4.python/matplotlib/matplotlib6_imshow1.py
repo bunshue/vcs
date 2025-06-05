@@ -969,7 +969,43 @@ plt.colorbar()
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+# 調整子圖布局
+
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+image = img.imread(filename)  # 讀取原始圖像
+
+plt.figure(figsize=(12, 8))
+
+plt.subplot(231)
+plt.imshow(image)
+
+plt.subplot(232)
+plt.imshow(image)
+
+plt.subplot(233)
+plt.imshow(image)
+
+plt.subplot(234)
+plt.imshow(image)
+
+plt.subplot(235)
+plt.imshow(image)
+
+plt.subplot(236)
+plt.imshow(image)
+
+# 調整子圖布局     左起  下起  寬佔比 高佔比 水平距 垂直距
+plt.subplots_adjust(
+    left=0.05, bottom=0.05, right=0.95, top=0.95, wspace=0.01, hspace=0.05
+)
+# plt.subplots_adjust(left=None, bottom=None, right=None, top=None,
+# wspace=None, hspace=None)
+
+plt.suptitle("")
+# plt.tight_layout()
+show()
 
 print("------------------------------------------------------------")  # 60個
 

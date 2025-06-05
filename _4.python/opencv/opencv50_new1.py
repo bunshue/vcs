@@ -4700,59 +4700,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 103")
-
-# 直方圖反向映射
-
-# 使用calcBackProject()尋找圖形中橙子部分
-img = cv2.imread("data/fruits_section.jpg")
-img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-
-result = cv2.calcHist([img_hsv], [0, 1], None, [40, 40], [0, 256, 0, 256])
-
-result /= np.max(result) / 255
-
-img2 = cv2.imread("data/fruits.jpg")
-img_hsv2 = cv2.cvtColor(img2, cv2.COLOR_BGR2HSV)
-
-img_bp = cv2.calcBackProject(
-    [img_hsv2], channels=[0, 1], hist=result, ranges=[0, 256, 0, 256], scale=1
-)
-
-# 二值化
-_, img_th = cv2.threshold(img_bp, 180, 255, cv2.THRESH_BINARY)
-
-struct = np.ones((3, 3), np.uint8)
-img_mp = cv2.morphologyEx(img_th, cv2.MORPH_CLOSE, struct, iterations=5)
-
-plt.figure(figsize=(12, 8))
-
-# 調整子圖布局     左起  下起  寬佔比 高佔比 水平距 垂直距
-plt.subplots_adjust(0.05, 0.05, 0.95, 0.95, 0.01, 0.05)
-# plt.subplots_adjust(left=None, bottom=None, right=None, top=None,
-# wspace=None, hspace=None)
-
-plt.subplot(231)
-plt.imshow(img[:, :, ::-1])
-plt.subplot(232)
-plt.imshow(img2[:, :, ::-1])
-plt.subplot(233)
-plt.imshow(result[:], cmap="gray")
-plt.subplot(234)
-plt.imshow(img_bp[:], cmap="gray")
-plt.subplot(235)
-plt.imshow(img_th[:], cmap="gray")
-plt.subplot(236)
-plt.imshow(img_mp[:], cmap="gray")
-
-show()
-
-sys.exit()
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 104")
 # 直方圖比對
 
 
@@ -4761,7 +4708,7 @@ def histogram_match(src, dst):
     cdf_src = np.zeros((3, 256))
     cdf_dst = np.zeros((3, 256))
     cdf_res = np.zeros((3, 256))
-    kw = dict(bins=256, range=(0, 256), normed=True)  # normed 改成 density
+    kw = dict(bins=256, range=(0, 256), density=True)  # normed 改成 density
 
     for ch in (0, 1, 2):
         hist_src, _ = np.histogram(src[:, :, ch], **kw)
