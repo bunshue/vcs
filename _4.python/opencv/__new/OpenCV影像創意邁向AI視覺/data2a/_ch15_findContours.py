@@ -120,10 +120,10 @@ contours, hierarchy = cv2.findContours(
     dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
 )
 
-#外輪廓
+# 外輪廓
 dst = cv2.drawContours(src, contours, -1, GREEN, 2)  # 繪製圖形輪廓
 
-#填滿輪廓
+# 填滿輪廓
 # dst = cv2.drawContours(src, contours, -1, GREEN, -1)  # 繪製圖形輪廓
 
 plt.subplot(313)
@@ -309,7 +309,7 @@ for i in range(n):  # 依次繪製輪廓
     img = np.zeros(src.shape, np.uint8)  # 建立輪廓影像
     img = np.ones(src.shape, dtype=np.uint8) * 127
     # 依序畫每個輪廓 (參數 i)
-    print('第', i+1, '個輪廓')
+    print("第", i + 1, "個輪廓")
     dst = cv2.drawContours(dst, contours, i, colors[i], 5)
 
 plt.subplot(313)
@@ -1056,12 +1056,12 @@ for i in range(n):
     dst2 = cv2.polylines(src2, [approx], True, GREEN, 2)  # dst2
 
 plt.subplot(223)
-plt.title("多邊形框選 3") # epsilon = 3
+plt.title("多邊形框選 3")  # epsilon = 3
 plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.axis("off")
 
 plt.subplot(224)
-plt.title("多邊形框選 15") # epsilon = 15
+plt.title("多邊形框選 15")  # epsilon = 15
 plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.axis("off")
 
@@ -1359,7 +1359,7 @@ isConvex = cv2.isContourConvex(approx)  # 是否凸形
 print(f"近似多邊形是凸形 = {isConvex}")
 
 plt.subplot(224)
-plt.title("近似多邊形包圍") # epsilon = 10
+plt.title("近似多邊形包圍")  # epsilon = 10
 plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.axis("off")
 
@@ -2031,5 +2031,3 @@ sys.exit()
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
-

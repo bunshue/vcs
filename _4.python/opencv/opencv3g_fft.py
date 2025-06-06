@@ -51,6 +51,37 @@ def show():
     pass
 
 
+# 三角波
+def triangle_wave(size):
+    x = np.arange(0, 1, 1.0 / size)
+    y = np.where(x < 0.5, x, 0)
+    y = np.where(x >= 0.5, 1 - x, y)
+    return x, y
+
+
+# 正弦波
+def sine_wave1(size):
+    x = np.arange(0, 2 * np.pi, 2 * np.pi / size)
+    y = np.sin(x)
+    return x, y
+
+
+# 正弦波
+def sine_wave2(size):
+    A = 10
+    f = 60
+    x = np.linspace(0, 1 / f * 3, size)  # 時間, 3個週期
+    y = A * np.sin(2 * np.pi * f * x)
+    return x, y
+
+
+# 方波的頻譜、合成方波在跳變處出現抖動
+def square_wave(size):
+    x = np.arange(0, 1, 1.0 / size)
+    y = np.where(x < 0.5, 1.0, 0)
+    return x, y
+
+
 # print("np顯示小數點以下3位, IDLE顯示寬度80字, 無壓縮顯示")
 np.set_printoptions(precision=3, linewidth=80, suppress=False)
 
@@ -1368,22 +1399,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("np.fft 02 合成時域訊號")
 
-
-# 三角波
-def triangle_wave(size):
-    x = np.arange(0, 1, 1.0 / size)
-    y = np.where(x < 0.5, x, 0)
-    y = np.where(x >= 0.5, 1 - x, y)
-    return x, y
-
-
-# 正弦波
-def sine_wave1(size):
-    x = np.arange(0, 2 * np.pi, 2 * np.pi / size)
-    y = np.sin(x)
-    return x, y
-
-
 # 計算三角波和其FFT
 x, y = triangle_wave(NNNN)
 fy = np.fft.fft(y) / NNNN  # 為了計算各個成分的能量，需要將FFT的結果除以FFT的長度
@@ -1417,13 +1432,6 @@ plt.xlabel("頻率視窗(frequency bin)")
 plt.ylabel("幅值(dB)")
 
 
-# 方波的頻譜、合成方波在跳變處出現抖動
-def square_wave(size):
-    x = np.arange(0, 1, 1.0 / size)
-    y = np.where(x < 0.5, 1.0, 0)
-    return x, y
-
-
 x, y = square_wave(NNNN)
 fy = np.fft.fft(y) / NNNN  # 為了計算各個成分的能量，需要將FFT的結果除以FFT的長度
 
@@ -1442,15 +1450,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("一維 fft b")
-
-
-# 正弦波
-def sine_wave2(size):
-    A = 10
-    f = 60
-    x = np.linspace(0, 1 / f * 3, size)  # 時間, 3個週期
-    y = A * np.sin(2 * np.pi * f * x)
-    return x, y
 
 
 # FFT 頻域訊號處理
@@ -1479,18 +1478,18 @@ print("直流部分 DC =", fy[0].real)  # 直流部分
 print("ify = ifft(fy) :\n", ify, sep="")
 """
 
-plt.subplot(311)
+plt.subplot(131)
 # plt.scatter(y, y, c="r", s=100, label="原資料")
 plt.plot(x, y, label="原資料")
 plt.legend()
 plt.grid()
 
-plt.subplot(312)
+plt.subplot(132)
 plt.scatter(fy.real, fy.imag, c="g", s=100, label="FFT")
 # plt.legend()
 plt.grid()
 
-plt.subplot(313)
+plt.subplot(133)
 # plt.scatter(ify.real, ify.real, c="b", s=100, label="IFFT")
 plt.plot(ify.real, label="IFFT")
 plt.legend()
@@ -1503,35 +1502,23 @@ print("------------------------------------------------------------")  # 60個
 
 print("一維 fft a")
 
-
-# 正弦波
-def sine_wave2(size):
-    A = 10
-    f = 60
-    x = np.linspace(0, 1 / f * 3, size)  # 時間, 3個週期
-    y = A * np.sin(2 * np.pi * f * x)
-    return x, y
-
-
 N = 100  # 取樣點數, 精細程度
 x, y = sine_wave2(N)
 
 fy = np.fft.fft(y)  # 一維 fft
 abs_y = np.abs(fy)  # 取復數的絕對值，即復數的模(雙邊頻譜)
 
-plt.subplot(311)
+plt.subplot(131)
 plt.plot(y)
 plt.title("原始波形")
 
-# 畫出雙邊未求絕對值的振幅譜
-plt.subplot(312)
+plt.subplot(132)
 plt.plot(fy, "black")
-plt.title("雙邊振幅譜(未求振幅絕對值)")
+plt.title("fy")
 
-# 畫出雙邊求絕對值的振幅譜
-plt.subplot(313)
+plt.subplot(133)
 plt.plot(abs_y, "r")
-plt.title("雙邊振幅譜(未歸一化)")
+plt.title("abs_y")
 
 show()
 
@@ -1561,25 +1548,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("np.fft 04 觀察訊號的頻譜")
 
-
-def show_fft(x):
-    XS = x[:NNNN]
-    xf = np.fft.rfft(XS) / NNNN
-    freqs = np.linspace(0, sampling_rate / 2, NNNN // 2 + 1)
-    xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))
-
-    plt.figure(figsize=(8, 4))
-    plt.subplot(211)
-    plt.plot(T[:NNNN], XS)
-    plt.xlabel("時間(秒)")
-    plt.subplot(212)
-    plt.plot(freqs, xfp)
-    plt.xlabel("頻率(Hz)")
-    plt.xlim(0, 1000)  # 設定 x 軸邊界
-    plt.subplots_adjust(hspace=0.4)
-    print(xfp[[10, 15]])
-
-
 # 156.25Hz和234.375Hz的波形（上）和頻譜（下）
 f1 = 156.25  # Hz
 f2 = 234.375  # Hz
@@ -1587,7 +1555,20 @@ sampling_rate, NNNN = 8000, 512
 T = np.arange(0, 1.0, 1.0 / sampling_rate)
 y = np.sin(2 * np.pi * f1 * T) + 2 * np.sin(2 * np.pi * f2 * T)
 
-show_fft(y)
+XS = y[:NNNN]
+xf = np.fft.rfft(XS) / NNNN
+freqs = np.linspace(0, sampling_rate / 2, NNNN // 2 + 1)
+xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))
+plt.figure(figsize=(8, 4))
+plt.subplot(211)
+plt.plot(T[:NNNN], XS)
+plt.xlabel("時間(秒)")
+plt.subplot(212)
+plt.plot(freqs, xfp)
+plt.xlabel("頻率(Hz)")
+plt.xlim(0, 1000)  # 設定 x 軸邊界
+plt.subplots_adjust(hspace=0.4)
+
 show()
 
 print("------------------------------")  # 30個
@@ -1595,10 +1576,21 @@ print("------------------------------")  # 30個
 # 非完整周期（200Hz和300Hz）的正弦波經由FFT變換之後出現頻譜洩漏
 y = np.sin(2 * np.pi * 200 * T) + 2 * np.sin(2 * np.pi * 300 * T)
 
-show_fft(y)
-show()
+XS = y[:NNNN]
+xf = np.fft.rfft(XS) / NNNN
+freqs = np.linspace(0, sampling_rate / 2, NNNN // 2 + 1)
+xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))
+plt.figure(figsize=(8, 4))
+plt.subplot(211)
+plt.plot(T[:NNNN], XS)
+plt.xlabel("時間(秒)")
+plt.subplot(212)
+plt.plot(freqs, xfp)
+plt.xlabel("頻率(Hz)")
+plt.xlim(0, 1000)  # 設定 x 軸邊界
+plt.subplots_adjust(hspace=0.4)
 
-sys.exit()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1853,12 +1845,41 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
+【numpy】几种fft函数的使用
+fft
+输入实数samples，如果输入的sample是带虚数部分的话，虚数部分会被默认删除。
+"""
+
+t = np.arange(12)
+b = np.sin(t)
+print(b)
+print("sum(b)=", np.sum(b))
+
+s = np.fft.fft(b)
+print(s)
+
+"""
 rfft
 rfft其实就是对fft的结果输出做了省略。
 针对刚刚提到的共轭特性，其实输出结果是要保留(N+1)//2个结果就可以了。
+"""
 
+t = np.arange(12)
+b = np.sin(t)
+print(b)
+print("sum(b)=", np.sum(b))
+
+s = np.fft.fft(b)
+print("fft result:", s)
+
+s = np.fft.rfft(b)
+print("rfft result:", s)
+
+"""
 fftfreq
+
 返回fft的频率节点
+
 上面的fft和rfft将时域数据转为频域，得到的数据的bin是哪些范围？
 可以通过fftfreq来获取
 
@@ -1880,9 +1901,42 @@ s = np.fft.fftfreq(12, d=1 / 8000)
 print(s.shape)
 print(s)
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+# ifft是逆向fft操作
 
+t = np.arange(12)
+b = np.sin(t)
+print(b)
+
+s = np.fft.fft(b)
+# print(s)
+
+y = np.fft.ifft(s)
+print("restore:", y)
+
+"""
+它的结果虽然也是复数，但是在实数部分，可以看到，就是结果；
+
+所以也可以直接输出实数部分np.fft.ifft(s).real
+"""
+
+"""
+irfft
+
+irfft是配合rfft使用的； 上面的例子可以看到，如果信号长度是n, 那么fft的输出结果的长度也是n；
+但是rfft的结果是n//2+1;
+
+irfft匹配的是rfft，所以它的参数长度与ifft是不同的；两者也不可混用。
+"""
+
+t = np.arange(12)
+b = np.sin(t)
+print(b)
+
+s = np.fft.rfft(b)
+# print(s)
+
+y = np.fft.irfft(s)
+print("restore:", y)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
