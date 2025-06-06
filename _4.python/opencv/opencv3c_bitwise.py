@@ -8,8 +8,12 @@ cv2.bitwise_xor()
 """
 import cv2
 
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+
 filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
+
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -40,66 +44,73 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-a = cv2.imread(filename, 0)  # 通道不同
-print(a.shape)
+# 灰階/彩色 mask 運算
 
-b = np.zeros(a.shape, dtype=np.uint8)  # 與a一樣大的黑圖
-b[100:400, 200:400] = 255  # 某塊做mask
-b[100:500, 100:200] = 255  # 某塊做mask
+plt.figure(figsize=(12, 8))
 
-print("顯示原圖與mask作用後的圖")
-c = cv2.bitwise_and(a, b)  # ab都成立的 擷取出來
-print("a.shape=", a.shape)
-print("b.shape=", b.shape)
-
-plt.subplot(131)
+src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階
+plt.subplot(4, 3, 1)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.axis("off")
 plt.title("原圖")
-plt.imshow(cv2.cvtColor(a, cv2.COLOR_BGR2RGB))
 
-plt.subplot(132)
-plt.title("mask")
-plt.imshow(cv2.cvtColor(b, cv2.COLOR_BGR2RGB))
-
-plt.subplot(133)
-plt.title("顯示原圖與mask作用後的圖")
-plt.imshow(cv2.cvtColor(c, cv2.COLOR_BGR2RGB))
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-plt.figure("mask", figsize=(16, 12))
-
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-
-# 三維 1
-a = cv2.imread(filename, 1)  # 通道不同
-# w, h, c = a.shape
-print(a.shape)
-
-plt.subplot(131)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(a, cv2.COLOR_BGR2RGB))
-
-mask = np.zeros(a.shape, dtype=np.uint8)  # 與a一樣大的黑圖 三維mask
-print(mask.shape)
-#     y       x
-mask[30:170, 30:270] = 255  # 某塊做mask
-mask[30:370, 80:220] = 255  # 某塊做mask
-
-plt.subplot(132)
-plt.title("mask")
+mask = np.zeros(src.shape, dtype=np.uint8)  # 建立mask
+mask[50:520, 150:360] = 255  # 設定mask, 先高後寬
+plt.subplot(4, 3, 2)
 plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+plt.title("mask")
 
-print("顯示原圖與mask作用後的圖")
-c = cv2.bitwise_and(a, mask)  # a mask都成立的 擷取出來 #三維XOR
-print("a.shape=", a.shape)
-print("mask.shape=", mask.shape)
+dst = cv2.bitwise_and(src, mask)  # 執行AND運算
+plt.subplot(4, 3, 3)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+plt.title("AND")
 
-plt.subplot(133)
-plt.title("顯示原圖與mask作用後的圖")
-plt.imshow(cv2.cvtColor(c, cv2.COLOR_BGR2RGB))
+src = cv2.imread(filename2)  # 彩色
+plt.subplot(4, 3, 4)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+plt.title("原圖")
+
+mask = np.zeros(src.shape, dtype=np.uint8)  # 建立mask
+mask[50:520, 150:360, :] = 255  # 設定mask, 先高後寬  # 這是3維陣列
+plt.subplot(4, 3, 5)
+plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+plt.title("mask")
+
+dst = cv2.bitwise_and(src, mask)  # 執行AND運算
+plt.subplot(4, 3, 6)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+plt.title("AND")
+
+src = cv2.imread(filename2)  # 彩色
+plt.subplot(4, 3, 7)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+plt.title("原圖")
+
+mask = np.zeros(src.shape, dtype=np.uint8)  # 建立mask
+mask[50:520, 150:360, :] = 255  # 設定mask, 先高後寬  # 這是3維陣列
+plt.subplot(4, 3, 8)
+plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+plt.title("mask")
+
+dst = cv2.bitwise_or(src, mask)  # 執行OR運算
+plt.subplot(4, 3, 9)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+plt.title("OR")
+
+# ------------------------------------------------------------
+
+
+# ------------------------------------------------------------
+
+plt.tight_layout()
 
 show()
 
@@ -122,10 +133,10 @@ cc = lena.shape
 print(cc)
 
 key = np.random.randint(0, 256, size=[cc[0], cc[1]], dtype=np.uint8)
-encryption = cv2.bitwise_xor(lena, key)
-decryption = cv2.bitwise_xor(encryption, key)
+encryption = cv2.bitwise_xor(lena, key)  # 執行XOR運算
+decryption = cv2.bitwise_xor(encryption, key)  # 執行XOR運算
 
-plt.figure("new01", figsize=(16, 12))
+plt.figure(figsize=(16, 12))
 plt.subplot(141)
 plt.title("原圖")
 plt.imshow(cv2.cvtColor(lena, cv2.COLOR_BGR2RGB))
@@ -167,21 +178,21 @@ r, c = lena.shape
 # 生成內部值都是254的數組
 t254 = np.ones((r, c), dtype=np.uint8) * 254
 # 獲取lena圖像的高7位
-lenaH7 = cv2.bitwise_and(lena, t254)
+lenaH7 = cv2.bitwise_and(lena, t254)  # 執行AND運算
 # 將watermark嵌入到lenaH7內
-e = cv2.bitwise_or(lenaH7, watermark)
+e = cv2.bitwise_or(lenaH7, watermark)  # 執行OR運算
 # ============提取過程============
 # 生成內部值都是1的數組
 t1 = np.ones((r, c), dtype=np.uint8)
 # 從載體圖像內，提取水印圖像
-wm = cv2.bitwise_and(e, t1)
+wm = cv2.bitwise_and(e, t1)  # 執行AND運算
 print(wm)
 # 將水印內的1處理為255以方便顯示
 # 后續章節會介紹threshold實現。
 w = wm[:, :] > 0
 wm[w] = 255
 
-plt.figure("new02", figsize=(16, 12))
+plt.figure(figsize=(16, 12))
 plt.subplot(221)
 plt.title("原圖")
 plt.imshow(cv2.cvtColor(lena, cv2.COLOR_BGR2RGB))
@@ -215,24 +226,24 @@ mask[220:400, 250:350] = 1
 key = np.random.randint(0, 256, size=[r, c], dtype=np.uint8)
 # ============獲取打碼臉============
 # 使用密鑰key加密原始圖像lena
-lenaXorKey = cv2.bitwise_xor(lena, key)
+lenaXorKey = cv2.bitwise_xor(lena, key)  # 執行XOR運算
 # 獲取加密圖像的臉部信息encryptFace
-encryptFace = cv2.bitwise_and(lenaXorKey, mask * 255)
+encryptFace = cv2.bitwise_and(lenaXorKey, mask * 255)  # 執行AND運算
 # 將圖像lena內的臉部值設置為0，得到noFace1
-noFace1 = cv2.bitwise_and(lena, (1 - mask) * 255)
+noFace1 = cv2.bitwise_and(lena, (1 - mask) * 255)  # 執行AND運算
 # 得到打碼的lena圖像
 maskFace = encryptFace + noFace1
 # ============將打碼臉解碼============
 # 將臉部打碼的lena與密鑰key異或，得到臉部的原始信息
-extractOriginal = cv2.bitwise_xor(maskFace, key)
+extractOriginal = cv2.bitwise_xor(maskFace, key)  # 執行XOR運算
 # 將解碼的臉部信息extractOriginal提取出來得到extractFace
-extractFace = cv2.bitwise_and(extractOriginal, mask * 255)
+extractFace = cv2.bitwise_and(extractOriginal, mask * 255)  # 執行AND運算
 # 從臉部打碼的lena內提取沒有臉部信息的lena圖像，得到noFace2
-noFace2 = cv2.bitwise_and(maskFace, (1 - mask) * 255)
+noFace2 = cv2.bitwise_and(maskFace, (1 - mask) * 255)  # 執行AND運算
 # 得到解碼的lena圖像
 extractLena = noFace2 + extractFace
 
-plt.figure("new03", figsize=(16, 12))
+plt.figure(figsize=(16, 12))
 plt.subplot(231)
 plt.title("原圖")
 plt.imshow(cv2.cvtColor(lena, cv2.COLOR_BGR2RGB))
@@ -259,7 +270,7 @@ plt.imshow(cv2.cvtColor(encryptFace, cv2.COLOR_BGR2RGB))
 
 show()
 
-plt.figure("new04", figsize=(16, 12))
+plt.figure(figsize=(16, 12))
 
 plt.subplot(231)
 plt.title("noFace1")
@@ -295,7 +306,7 @@ lena = cv2.imread(filename, 0)
 
 print("顯示原圖")
 
-plt.figure("new05", figsize=(16, 12))
+plt.figure(figsize=(16, 12))
 plt.subplot(331)
 plt.imshow(cv2.cvtColor(lena, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
@@ -310,7 +321,7 @@ r = np.zeros((r, c, 8), dtype=np.uint8)
 
 for i in range(8):
     print(i)
-    r[:, :, i] = cv2.bitwise_and(lena, x[:, :, i])
+    r[:, :, i] = cv2.bitwise_and(lena, x[:, :, i])  # 執行AND運算
     mask = r[:, :, i] > 0
     r[mask] = 255
     plt.subplot(3, 3, i + 2)
@@ -335,7 +346,7 @@ maxBlue = np.array([130, 255, 255])
 # 確定藍色區域
 mask = cv2.inRange(hsv, minBlue, maxBlue)
 # 通過掩碼控制的按位與，鎖定藍色區域
-blue = cv2.bitwise_and(image, image, mask=mask)
+blue = cv2.bitwise_and(image, image, mask=mask)  # 執行AND運算, 使用mask
 
 # =============指定綠色值的范圍=============
 minGreen = np.array([50, 50, 50])
@@ -343,7 +354,7 @@ maxGreen = np.array([70, 255, 255])
 # 確定綠色區域
 mask = cv2.inRange(hsv, minGreen, maxGreen)
 # 通過掩碼控制的按位與，鎖定綠色區域
-green = cv2.bitwise_and(image, image, mask=mask)
+green = cv2.bitwise_and(image, image, mask=mask)  # 執行AND運算, 使用mask
 
 # =============指定紅色值的范圍=============
 minRed = np.array([0, 50, 50])
@@ -351,9 +362,9 @@ maxRed = np.array([30, 255, 255])
 # 確定紅色區域
 mask = cv2.inRange(hsv, minRed, maxRed)
 # 通過掩碼控制的按位與，鎖定紅色區域
-red = cv2.bitwise_and(image, image, mask=mask)
+red = cv2.bitwise_and(image, image, mask=mask)  # 執行AND運算, 使用mask
 
-plt.figure("new34 影像處理", figsize=(16, 12))
+plt.figure("影像處理", figsize=(16, 12))
 plt.subplot(231)
 plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -393,9 +404,9 @@ minSat = 25
 maxSat = 166
 satMask = cv2.inRange(s, minSat, maxSat)
 mask = hueMask & satMask
-roi = cv2.bitwise_and(img, img, mask=mask)
+roi = cv2.bitwise_and(img, img, mask=mask)  # 執行AND運算, 使用mask
 
-plt.figure("new35 影像處理", figsize=(16, 12))
+plt.figure("影像處理", figsize=(16, 12))
 
 plt.subplot(121)
 plt.title("原圖")
@@ -407,6 +418,8 @@ plt.imshow(cv2.cvtColor(roi, cv2.COLOR_BGR2RGB))
 
 show()
 
+print("------------------------------------------------------------")  # 60個
+# cv2.bitwise_not() ST
 print("------------------------------------------------------------")  # 60個
 
 print("將圖片顏色反轉 (負片效果) 原圖")
@@ -420,7 +433,7 @@ plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 print("將圖片顏色反轉 (負片效果) 效果")
-img_invert = cv2.bitwise_not(img)
+img_invert = cv2.bitwise_not(img)  # 執行NOT運算
 
 plt.subplot(122)
 plt.imshow(cv2.cvtColor(img_invert, cv2.COLOR_BGR2RGB))
@@ -429,6 +442,59 @@ plt.title("負片效果")
 show()
 
 print("------------------------------------------------------------")  # 60個
+
+filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+img1 = cv2.imread(filename1)
+
+output = cv2.bitwise_not(img1)  # 執行NOT運算
+
+cv2.imshow("image", output)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+src = cv2.imread(filename2)
+
+dst = cv2.bitwise_not(src)  # 執行 NOT運算
+
+plt.subplot(231)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+
+plt.subplot(232)
+plt.title("NOT")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+
+src = cv2.imread(filename2)
+
+mask = np.zeros(src.shape, np.uint8)
+mask[:, 140:360, :] = 255  # 設定mask, 先高後寬  # 建立mask白色區塊
+
+dst = cv2.bitwise_xor(src, mask)  # 執行XOR運算
+
+plt.subplot(234)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+
+plt.subplot(235)
+plt.title("Mask")
+plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
+
+plt.subplot(236)
+plt.title("NOT")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("遮罩")
 
@@ -439,7 +505,7 @@ W = img.shape[1]
 mask = cv2.imread(r"images/mask.jpg", cv2.IMREAD_GRAYSCALE)
 # 調整mask大小
 mask = cv2.resize(mask, (W, H))
-img_masked = cv2.bitwise_and(img, img, mask=mask)
+img_masked = cv2.bitwise_and(img, img, mask=mask)  # 執行AND運算, 使用mask
 
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(img_masked, cv2.COLOR_BGR2RGB))
@@ -447,8 +513,8 @@ plt.title("遮罩效果")
 
 print("遮罩")
 
-mask = cv2.bitwise_not(mask)
-img_masked = cv2.bitwise_and(img, img, mask=mask)
+mask = cv2.bitwise_not(mask)  # 執行NOT運算
+img_masked = cv2.bitwise_and(img, img, mask=mask)  # 執行AND運算, 使用mask
 
 plt.subplot(122)
 plt.imshow(cv2.cvtColor(img_masked, cv2.COLOR_BGR2RGB))
@@ -463,7 +529,7 @@ filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 img1 = cv2.imread(filename1)
 img2 = cv2.imread(filename2)
 
-output = cv2.bitwise_and(img1, img2)  # 使用 bitwise_and
+output = cv2.bitwise_and(img1, img2)  # 執行AND運算
 
 cv2.imshow("image", output)
 cv2.waitKey(0)  # 按下任意鍵停止
@@ -476,7 +542,7 @@ filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 img1 = cv2.imread(filename1)
 img2 = cv2.imread(filename2)
 
-output = cv2.bitwise_or(img1, img2)  # 使用 bitwise_or
+output = cv2.bitwise_or(img1, img2)  # 執行OR運算
 
 cv2.imshow("image", output)
 cv2.waitKey(0)
@@ -489,18 +555,7 @@ filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 img1 = cv2.imread(filename1)
 img2 = cv2.imread(filename2)
 
-output = cv2.bitwise_xor(img1, img2)  # 使用 bitwise_xor
-
-cv2.imshow("image", output)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
-img1 = cv2.imread(filename1)
-
-output = cv2.bitwise_not(img1)  # 使用 bitwise_not
+output = cv2.bitwise_xor(img1, img2)  # 執行XOR運算
 
 cv2.imshow("image", output)
 cv2.waitKey(0)
@@ -520,7 +575,7 @@ W = img1.shape[1]
 mask = cv2.imread('mask.png')                    # 遮罩圖片
 
 mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)    # 轉換成灰階模式
-output = cv2.bitwise_xor(img1, img2, mask=mask)  # 加入 mask 參數
+output = cv2.bitwise_xor(img1, img2, mask=mask)  # 執行XOR運算, 使用mask
 
 cv2.imshow('image', output)
 cv2.waitKey(0)
@@ -542,11 +597,11 @@ img[0:360, 0:480] = '255'                        # 將圖片變成白色 ( 配�
 img[0:size[0], 0:size[1]] = logo                 # 將圖片的指定區域，換成 logo 的圖案
 img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # 產生一張灰階的圖片作為遮罩使用
 ret, mask1  = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY_INV)  # 使用二值化的方法，產生黑白遮罩圖片
-logo = cv2.bitwise_and(img, img, mask = mask1 )  # logo 套用遮罩
+logo = cv2.bitwise_and(img, img, mask = mask1 )  # 執行AND運算  # logo 套用遮罩
 
 bg = cv2.imread(filename)                      # 讀取底圖
 ret, mask2  = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY)      # 使用二值化的方法，產生黑白遮罩圖片
-bg = cv2.bitwise_and(bg, bg, mask = mask2 )      # 底圖套用遮罩
+bg = cv2.bitwise_and(bg, bg, mask = mask2 )  # 執行AND運算      # 底圖套用遮罩
 
 output = cv2.add(bg, logo)                       # 使用 add 方法將底圖和 logo 合併
 
@@ -568,7 +623,7 @@ filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 img = cv2.imread(filename)
 
 mask = cv2.inRange(img, lower, upper)  # 使用 inRange
-output = cv2.bitwise_and(img, img, mask=mask)  # 套用影像遮罩
+output = cv2.bitwise_and(img, img, mask=mask)  # 執行AND運算, 使用mask
 cv2.imwrite("tmp_output.jpg", output)
 
 cv2.imshow("Image", output)
@@ -620,7 +675,7 @@ plt.title("轉HSV")
 lower_green = np.array([35, 43, 46])  # 綠色下限
 upper_green = np.array([77, 255, 255])  # 綠色上限
 mask = cv2.inRange(hsv, lower_green, upper_green)
-res = cv2.bitwise_and(image, image, mask=mask)
+res = cv2.bitwise_and(image, image, mask=mask)  # 執行AND運算, 使用mask
 
 plt.subplot(133)
 plt.imshow(cv2.cvtColor(res, cv2.COLOR_BGR2RGB))
@@ -630,143 +685,66 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("閾值分割 bitwise_and")
+print("bitwise_and")
 
 src1 = np.array([[255, 0, 255]])
 src2 = np.array([[255, 0, 0]])
 
 # AND運算
-dst_and = cv2.bitwise_and(src1, src2)
+dst_and = cv2.bitwise_and(src1, src2)  # 執行AND運算
 print("AND運算 的 結果：")
 print(dst_and)
 
+print("------------------------------------------------------------")  # 60個
+
+src1 = np.random.randint(0, 255, (3, 5), dtype=np.uint8)
+
+src2 = np.zeros((3, 5), dtype=np.uint8)
+src2[0:2, 0:2] = 255  # 設定mask, 先高後寬
+
+dst = cv2.bitwise_and(src1, src2)  # 執行AND運算
+
+print(f"src1 = \n {src1}")
+print(f"src2 = \n {src2}")
+print(f"dst = \n {dst}")
+
+print("------------------------------------------------------------")  # 60個
+
+print("bitwise_or")
+
+src1 = np.array([[255, 0, 255]])
+src2 = np.array([[255, 0, 0]])
+
 # OR運算
-dst_or = cv2.bitwise_or(src1, src2)
+dst_or = cv2.bitwise_or(src1, src2)  # 執行OR運算
 print("OR運算 的 結果：")
 print(dst_or)
 
-print("------------------------------------------------------------")  # 60個
 
 src1 = np.random.randint(0, 255, (3, 5), dtype=np.uint8)
 
 src2 = np.zeros((3, 5), dtype=np.uint8)
 src2[0:2, 0:2] = 255  # 設定mask, 先高後寬
 
-dst = cv2.bitwise_and(src1, src2)
+dst = cv2.bitwise_or(src1, src2)  # 執行OR運算
 
 print(f"src1 = \n {src1}")
 print(f"src2 = \n {src2}")
 print(f"dst = \n {dst}")
 
 print("------------------------------------------------------------")  # 60個
-
-# 灰階/彩色 mask 運算
-
-plt.figure("mask", figsize=(12, 8))
-
-src1 = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階
-plt.subplot(331)
-plt.imshow(cv2.cvtColor(src1, cv2.COLOR_BGR2RGB))
-
-src2 = np.zeros(src1.shape, dtype=np.uint8)  # 建立mask
-src2[50:520, 150:360] = 255  # 設定mask, 先高後寬
-plt.subplot(332)
-plt.imshow(cv2.cvtColor(src2, cv2.COLOR_BGR2RGB))
-
-dst = cv2.bitwise_and(src1, src2)  # 執行and運算
-plt.subplot(333)
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.title("AND")
-
-src1 = cv2.imread(filename2)  # 彩色
-plt.subplot(334)
-plt.imshow(cv2.cvtColor(src1, cv2.COLOR_BGR2RGB))
-
-src2 = np.zeros(src1.shape, dtype=np.uint8)  # 建立mask
-src2[50:520, 150:360, :] = 255  # 設定mask, 先高後寬  # 這是3維陣列
-plt.subplot(335)
-plt.imshow(cv2.cvtColor(src2, cv2.COLOR_BGR2RGB))
-
-dst = cv2.bitwise_and(src1, src2)  # 執行and運算
-plt.subplot(336)
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.title("AND")
-
-src1 = cv2.imread(filename2)  # 彩色
-plt.subplot(337)
-plt.imshow(cv2.cvtColor(src1, cv2.COLOR_BGR2RGB))
-
-src2 = np.zeros(src1.shape, dtype=np.uint8)  # 建立mask
-src2[50:520, 150:360, :] = 255  # 設定mask, 先高後寬  # 這是3維陣列
-plt.subplot(338)
-plt.imshow(cv2.cvtColor(src2, cv2.COLOR_BGR2RGB))
-
-dst = cv2.bitwise_or(src1, src2)  # 執行or運算
-plt.subplot(339)
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.title("OR")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-src1 = np.random.randint(0, 255, (3, 5), dtype=np.uint8)
-
-src2 = np.zeros((3, 5), dtype=np.uint8)
-src2[0:2, 0:2] = 255  # 設定mask, 先高後寬
-
-dst = cv2.bitwise_or(src1, src2)
-
-print(f"src1 = \n {src1}")
-print(f"src2 = \n {src2}")
-print(f"dst = \n {dst}")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread(filename2)
-
-dst = cv2.bitwise_not(src)  # 執行 NOT運算
-
-plt.subplot(231)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-
-plt.subplot(232)
-plt.title("NOT")
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-
-src1 = cv2.imread(filename2)
-
-src2 = np.zeros(src1.shape, np.uint8)
-src2[:, 140:360, :] = 255  # 設定mask, 先高後寬  # 建立mask白色區塊
-
-dst = cv2.bitwise_xor(src1, src2)  # 執行xor運算
-
-plt.subplot(234)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(src1, cv2.COLOR_BGR2RGB))
-
-plt.subplot(235)
-plt.title("Mask")
-plt.imshow(cv2.cvtColor(src2, cv2.COLOR_BGR2RGB))
-
-plt.subplot(236)
-plt.title("NOT")
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-
-show()
-
 print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread(filename1)
 key = np.random.randint(0, 256, src.shape, np.uint8)  # 密鑰影像
 print(src.shape)
 
-img_encryp = cv2.bitwise_xor(src, key)  # 加密結果的影像
+img_encryp = cv2.bitwise_xor(src, key)  # 執行XOR運算  # 加密結果的影像
 
-img_decryp = cv2.bitwise_xor(key, img_encryp)  # 解密結果的影像
+img_decryp = cv2.bitwise_xor(key, img_encryp)  # 執行XOR運算  # 解密結果的影像
 
 plt.subplot(221)
 plt.title("原始影像")

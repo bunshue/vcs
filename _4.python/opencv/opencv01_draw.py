@@ -35,12 +35,15 @@ cv2.FONT_ITALIC			italic字型(斜體字)
 
 import cv2
 
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
 RED = (0, 0, 255)  # B G R
 GREEN = (0, 255, 0)  # B G R
 BLUE = (255, 0, 0)  # B G R
+CYAN = (255, 255, 0)  # B G R
+MAGENTA = (255, 0, 255)  # B G R
 YELLOW = (0, 255, 255)  # B G R
+BLACK = (0, 0, 0)  # B G R
+WHITE = (255, 255, 255)  # B G R
+colors = [RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK, WHITE]
 
 filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 filename2 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
@@ -289,7 +292,7 @@ y_st += 40
 font = ImageFont.truetype(font_filename, 50)  # 設定字型與文字大小
 imagePil = Image.fromarray(image)  # 將 image 轉換成 PIL 影像
 draw = ImageDraw.Draw(imagePil)  # 準備開始畫畫
-draw.text((x_st, y_st), "歡迎來到美國", fill=(255, 255, 0), font=font)  # 畫入文字
+draw.text((x_st, y_st), "歡迎來到美國", fill=CYAN, font=font)  # 畫入文字
 image = np.array(imagePil)  # 將 PIL 影像轉換成 numpy 陣列
 
 print("畫全部內建字型")
@@ -326,7 +329,7 @@ cv2.putText(img, "Python", (50, 100), font, 3, BLUE, 12)  # 大小3, 線寬12
 
 
 cv2.putText(img, "Python", (50, 200), font, 3, BLUE, 12)
-cv2.putText(img, "Python", (50, 200), font, 3, (0, 255, 255), 5)
+cv2.putText(img, "Python", (50, 200), font, 3, YELLOW, 5)
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 cv2.putText(img, "Python", (50, 120 + 200), font, 3, BLUE, 12)
@@ -431,7 +434,7 @@ print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread(filename1)  # 使用影像當畫布
 img = np.ones((350, 500, 3), np.uint8) * 255  # 白底畫布
-img[1:300, 1:300] = (0, 255, 255)  # 設定黃色底
+img[1:300, 1:300] = YELLOW  # 設定黃色底
 
 cv2.line(img, (1, 1), (300, 1), BLUE)  # 上方水平直線
 cv2.line(img, (300, 1), (300, 300), BLUE)  # 右邊垂直直線
@@ -794,7 +797,7 @@ print(testSize)
 bottomLeftX = 64-int(testSize[0][0]/2)
 bottomLeftY = 64+int(testSize[0][1]/2)
 cv2.putText(image, text, (bottomLeftX, bottomLeftY), fontFace,
-  fontScale, (0, 255, 255), thickness, cv2.LINE_AA)
+  fontScale, YELLOW, thickness, cv2.LINE_AA)
 
 cv2.imshow('OpenCV Draw 4', image)
 
@@ -956,5 +959,5 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-cv2.rectangle(img, (1, 1), (300, 300), (0, 255, 255), -1)  # 設定黃色底
+cv2.rectangle(img, (1, 1), (300, 300), YELLOW, -1)  # 設定黃色底
 cv2.rectangle(img, (1, 1), (300, 300), BLUE)  # 繪製矩形
