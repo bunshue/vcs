@@ -26,6 +26,30 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+
+def show():
+    plt.show()
+    pass
+
+
+def cvshow(title, image):
+    # return
+    cv2.imshow(title, image)
+    cv2.waitKey()
+    cv2.destroyAllWindows()
+    pass
+
+
+RED = (0, 0, 255)  # B G R
+GREEN = (0, 255, 0)  # B G R
+BLUE = (255, 0, 0)  # B G R
+CYAN = (255, 255, 0)  # B G R
+MAGENTA = (255, 0, 255)  # B G R
+YELLOW = (0, 255, 255)  # B G R
+BLACK = (0, 0, 0)  # B G R
+WHITE = (255, 255, 255)  # B G R
+colors = [RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK, WHITE]
+
 print("------------------------------------------------------------")  # 60個
 
 # 偵測正面人臉 haarcascade_frontalface_default.xml
@@ -1312,7 +1336,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("偵測右轉指示牌")
 
-img = cv2.imread("data/pic_turnR.jpg")
+img = cv2.imread("data/traffic_sign1.jpg")
 
 xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haar_turnR.xml"
 detector = cv2.CascadeClassifier(xml_filename)
@@ -1325,10 +1349,10 @@ if len(signs) > 0:
 else:
     print("nothing")
 
-cv2.imshow("Frame", img)
+plt.title("偵測右轉指示牌")
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1448,7 +1472,7 @@ print("------------------------------------------------------------")  # 60個
 cv2.namedWindow("Image", cv2.WINDOW_NORMAL)
 
 
-'''
+"""
 
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 
@@ -1459,4 +1483,6 @@ face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
     for x, y, w, h in face_rects:
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
-'''
+"""
+
+

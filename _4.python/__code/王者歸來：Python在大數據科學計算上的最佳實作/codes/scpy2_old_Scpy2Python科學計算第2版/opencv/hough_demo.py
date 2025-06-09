@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import cv2
 import numpy as np
 from traits.api import Range, Bool
@@ -108,7 +107,7 @@ class HoughDemo(ImageProcessDemo):
         self.img_gray = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
 
     def draw(self):
-        img_smooth = cv2.GaussianBlur(self.img_gray, (0, 0), self.blur_sigma, self.blur_sigma)
+        img_smooth = cv2.GaussianBlur(self.img_gray, (0, 0), self.blur_sigma, self.blur_sigma)  #執行高斯模糊化
         img_edge = cv2.Canny(img_smooth, self.th2 * 0.5, self.th2)
 
         if self.show_blur and self.show_canny:

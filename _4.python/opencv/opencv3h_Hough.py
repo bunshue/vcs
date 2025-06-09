@@ -43,14 +43,32 @@ def cvshow(title, image):
     pass
 
 
+RED = (0, 0, 255)  # B G R
+GREEN = (0, 255, 0)  # B G R
+BLUE = (255, 0, 0)  # B G R
+CYAN = (255, 255, 0)  # B G R
+MAGENTA = (255, 0, 255)  # B G R
+YELLOW = (0, 255, 255)  # B G R
+BLACK = (0, 0, 0)  # B G R
+WHITE = (255, 255, 255)  # B G R
+colors = [RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK, WHITE]
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread("data/Hough/computer.jpg")
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# Canny邊緣檢測，减少图像空间中需要检测的点数量
 edges = cv2.Canny(gray, 50, 150, apertureSize=3)
+
 orgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 oShow = orgb.copy()
+
+# 尋找霍夫直線
 lines = cv2.HoughLines(edges, 1, np.pi / 180, 140)
+print("共找到 :", len(lines), "條直線")
+
 for line in lines:
     rho, theta = line[0]
     a = np.cos(theta)
@@ -77,10 +95,16 @@ print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread("data/Hough/computer.jpg", -1)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# Canny邊緣檢測，减少图像空间中需要检测的点数量
 edges = cv2.Canny(gray, 50, 150, apertureSize=3)
+
 orgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 oShow = orgb.copy()
+
 lines = cv2.HoughLinesP(edges, 1, np.pi / 180, 160, minLineLength=100, maxLineGap=10)
+print("共找到 :", len(lines), "條直線")
+
 for line in lines:
     x1, y1, x2, y2 = line[0]
     cv2.line(orgb, (x1, y1), (x2, y2), (255, 255, 255), 2)
@@ -159,6 +183,8 @@ HoughCircles
 """
 img = cv2.imread("data/Hough/jianzhu.png")
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 灰度图像
+
+# Canny邊緣檢測，减少图像空间中需要检测的点数量
 edges = cv2.Canny(gray, 50, 200)
 
 plt.figure("霍夫變換 HoughLines", figsize=(16, 12))
@@ -171,11 +197,13 @@ plt.title("灰階")
 plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB))
 
 plt.subplot(223)
-plt.title("Canny")
+plt.title("Canny邊緣檢測")
 plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
 
-# hough变换
+# 尋找霍夫直線
 lines = cv2.HoughLines(edges, 1, np.pi / 180, 180)
+print("共找到 :", len(lines), "條直線")
+
 lines1 = lines[:, 0, :]  # 提取为为二维
 for rho, theta in lines1[:]:
     a = np.cos(theta)
@@ -197,10 +225,13 @@ show()
 print("------------------------------------------------------------")  # 60個
 
 lane1 = cv2.imread("data/Hough/lane.jpg")
+
 # 高斯模糊，Canny边缘检测需要的
 lane2 = cv2.GaussianBlur(lane1, (5, 5), 0)  # 執行高斯模糊化
-# 进行边缘检测，减少图像空间中需要检测的点数量
+
+# Canny邊緣檢測，减少图像空间中需要检测的点数量
 lane3 = cv2.Canny(lane2, 50, 150)
+
 cv2.imshow("lane3", lane3)
 cv2.waitKey()
 
@@ -214,7 +245,7 @@ plt.title("高斯模糊")
 plt.imshow(cv2.cvtColor(lane2, cv2.COLOR_BGR2RGB))
 
 plt.subplot(223)
-plt.title("Canny")
+plt.title("Canny邊緣檢測")
 plt.imshow(cv2.cvtColor(lane3, cv2.COLOR_BGR2RGB))
 
 rho = 1  # 距离分辨率
@@ -222,7 +253,10 @@ theta = np.pi / 180  # 角度分辨率
 threshold = 10  # 霍夫空间中多少个曲线相交才算作正式交点
 min_line_len = 10  # 最少多少个像素点才构成一条直线
 max_line_gap = 50  # 线段之间的最大间隔像素
+
 lines = cv2.HoughLinesP(lane3, rho, theta, threshold, maxLineGap=max_line_gap)
+print("共找到 :", len(lines), "條直線")
+
 lane4 = np.zeros_like(lane3)
 for line in lines:
     for x1, y1, x2, y2 in line:
@@ -351,6 +385,7 @@ print("opencv 108")
 # 使用HoughLinesP()檢驗圖形中的直線
 img = cv2.imread("data/Hough/building.jpg", cv2.IMREAD_GRAYSCALE)
 
+# Canny邊緣檢測，减少图像空间中需要检测的点数量
 img_binary = cv2.Canny(img, 100, 255)
 
 lines = cv2.HoughLinesP(
@@ -361,6 +396,7 @@ lines = cv2.HoughLinesP(
     minLineLength=33,
     maxLineGap=4,
 )
+print("共找到 :", len(lines), "條直線")
 
 fig, ax = plt.subplots(figsize=(8, 6))
 plt.imshow(img, cmap="gray")
@@ -432,14 +468,16 @@ plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
-
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
-edges = cv2.Canny(src_gray, 100, 200)  # 使用Canny邊緣檢測
-cv2.imshow("Canny", edges)  # 顯示Canny邊緣線條
 
-lines = cv2.HoughLines(edges, 1, np.pi / 180, 220)  # 檢測直線
+# Canny邊緣檢測，减少图像空间中需要检测的点数量
+edges = cv2.Canny(src_gray, 100, 200)
+
+cv2.imshow("Canny", edges)
+
+# 尋找霍夫直線
+lines = cv2.HoughLines(edges, 1, np.pi / 180, 220)
 # lines = cv2.HoughLines(edges, 1, np.pi / 180, 180)
-
 print("共找到 :", len(lines), "條直線")
 
 # 繪製直線
@@ -482,9 +520,15 @@ src = cv2.imread("data/Hough/lane2.jpg", cv2.IMREAD_COLOR)
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
-edges = cv2.Canny(src_gray, 100, 200)  # 使用Canny邊緣檢測
-# cv2.imshow("Canny", edges)                         # 顯示Canny邊緣線條
+
+# Canny邊緣檢測，减少图像空间中需要检测的点数量
+edges = cv2.Canny(src_gray, 100, 200)
+
+# cv2.imshow("Canny", edges)
+
+# 尋找霍夫直線
 lines = cv2.HoughLines(edges, 1, np.pi / 180, 150)  # 檢測直線
+print("共找到 :", len(lines), "條直線")
 
 # 繪製直線
 for line in lines:
@@ -510,9 +554,14 @@ src = cv2.imread("data/Hough/roadtest.jpg", cv2.IMREAD_COLOR)
 cv2.imshow("src", src)
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
-edges = cv2.Canny(src_gray, 50, 200)  # 使用Canny邊緣檢測
-cv2.imshow("Canny", edges)  # 顯示Canny邊緣線條
+
+# Canny邊緣檢測，减少图像空间中需要检测的点数量
+edges = cv2.Canny(src_gray, 50, 200)
+
+cv2.imshow("Canny", edges)
+
 lines = cv2.HoughLinesP(edges, 1, np.pi / 180, 50, minLineLength=10, maxLineGap=100)
+print("共找到 :", len(lines), "條直線")
 
 # 繪製檢測到的直線
 for line in lines:
@@ -557,9 +606,107 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+""" 參數使用
+# 尋找霍夫直線
+lines = cv2.HoughLines(canny_image, 1, np.pi/180, 180)
+canny_image：经过图像边缘处理后的图像
+1：像素之间的距离为1
+np.pi/180：直线角度范围，2pi/(pi/180) = 360°
+180：一条预选直线上的最少像素点个数
+注意：
+如果距离是1，180个像素即可生成直线，
+如果距离是2，至少360个像素才可以生成直线。
+"""
+"""
+霍夫直线的返回参数
+cv2.HoughLines 的返回参数 line == [\rho ,\Theta ]，
+其中，第一个参数表示图像原点距离直线的长度，第二个参数表示沿着x轴的角度大小。
+如下图所示，首先通过 cv.HoughLines 得到 line，
+此时已经确定了直线的位置，然后需要确定直线上的两个坐标点来充当 cv.line 的输入参数，
+最后，在源图像上通过 cv.line 来绘制直线。
+"""
+
+"""
+图解cv2.HoughLines的返回参数
+        # 延长直线的长度，保证在整幅图像上绘制直线
+        x1 = int(x0 + 2000 * (-b))
+        y1 = int(y0 + 2000 * (a))
+        x2 = int(x0 - 2000 * (-b))
+        y2 = int(y0 - 2000 * (a))
+前面讲到， 霍夫直线值仅仅返回两个参数，并不会直接返回直线上的坐标点，
+我们在选取直线坐标点的时候，需要尽量选取图像外部的点（即负数），
+这样才会过整幅图像绘制直线。
+"""
+# 彩色讀取
+img = cv2.imread("data/Hough/FerrisWheel4.png")
+
+plt.subplot(311)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+
+# 轉灰階
+img_gray = cv2.cvtColor(img, cv2.COLOR_RGBA2GRAY)
+
+# Canny邊緣檢測，减少图像空间中需要检测的点数量
+canny_image = cv2.Canny(img, 200, 200)
+ 
+# 尋找霍夫直線
+lines = cv2.HoughLines(canny_image, 1, np.pi/180, 180)
+print("共找到 :", len(lines), "條直線")
+ 
+# 绘画霍夫直线
+if lines is not None:
+    for n, line in enumerate(lines):
+        # 沿着左上角的原点，作目标直线的垂线得到长度和角度
+        rho = line[0][0]
+        theta = line[0][1]
+        # if np.pi / 3 < theta < np.pi * (3 / 4):
+        a = np.cos(theta)
+        b = np.sin(theta)
+        # 得到目标直线上的点
+        x0 = a * rho
+        y0 = b * rho
+ 
+        # 延长直线的长度，保证在整幅图像上绘制直线
+        x1 = int(x0 + 2000 * (-b))
+        y1 = int(y0 + 2000 * (a))
+        x2 = int(x0 - 2000 * (-b))
+        y2 = int(y0 - 2000 * (a))
+ 
+        # 连接两点画直线
+        cv2.line(img, (x1, y1), (x2, y2), WHITE, 1)
+ 
+plt.subplot(312)
+plt.title("Canny")
+plt.imshow(cv2.cvtColor(canny_image, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+
+plt.subplot(313)
+plt.title("result")
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+
+show()
+
+cv2.imshow('result', img)
+cv2.imshow('canny', canny_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個
@@ -575,3 +722,5 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
