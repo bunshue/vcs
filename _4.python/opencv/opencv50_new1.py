@@ -35,12 +35,6 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print("------------------------------------------------------------")  # 60個
-
-from PIL import Image
-from PIL import ImageFont
-from PIL import ImageDraw
-
 
 def show():
     plt.show()
@@ -54,6 +48,10 @@ def cvshow(title, image):
     cv2.destroyAllWindows()
     pass
 
+
+from PIL import Image
+from PIL import ImageFont
+from PIL import ImageDraw
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4867,77 +4865,6 @@ for x0, y0 in zip(xs, ys):
 r = xn * np.cos(theta) + yn * np.sin(theta)
 ax2.plot(theta, r, "--")
 ax2.set_xlim(0, np.max(theta))
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 108")
-# add_collection 只能用 ax
-
-# 使用HoughLinesP()檢驗圖形中的直線
-img = cv2.imread("data/building.jpg", cv2.IMREAD_GRAYSCALE)
-img_binary = cv2.Canny(img, 100, 255)
-lines = cv2.HoughLinesP(
-    img_binary,
-    rho=1,
-    theta=np.deg2rad(0.1),
-    threshold=96,
-    minLineLength=33,
-    maxLineGap=4,
-)
-
-fig, ax = plt.subplots(figsize=(8, 6))
-plt.imshow(img, cmap="gray")
-
-from matplotlib.collections import LineCollection
-
-lc = LineCollection(lines.reshape(-1, 2, 2))
-ax.add_collection(lc)
-ax.axis("off")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 109")
-# 檢驗圓形
-
-# 使用HoughCircles()檢驗圖形中的圓形
-img = cv2.imread("data/coins.png", cv2.IMREAD_GRAYSCALE)
-img_blur = cv2.GaussianBlur(img, (0, 0), 1.8)
-circles = cv2.HoughCircles(
-    img_blur,
-    cv2.HOUGH_GRADIENT,
-    dp=2.0,
-    minDist=20.0,
-    param1=170,
-    param2=44,
-    minRadius=16,
-    maxRadius=40,
-)
-
-x, y, r = circles[0].T
-
-fig, ax = plt.subplots(figsize=(8, 6))
-plt.imshow(img, cmap="gray")
-
-from matplotlib.collections import EllipseCollection
-
-ec = EllipseCollection(
-    widths=2 * r,
-    heights=2 * r,
-    angles=0,
-    units="xy",
-    facecolors="none",
-    edgecolors="red",
-    transOffset=ax.transData,
-    offsets=np.c_[x, y],
-)
-ax.add_collection(ec)
-ax.axis("off")
 
 show()
 

@@ -29,9 +29,23 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+
+def show():
+    plt.show()
+    pass
+
+
+def cvshow(title, image):
+    # return
+    cv2.imshow(title, image)
+    cv2.waitKey()
+    cv2.destroyAllWindows()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread("images/computer.jpg")
+img = cv2.imread("data/Hough/computer.jpg")
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 edges = cv2.Canny(gray, 50, 150, apertureSize=3)
 orgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -57,11 +71,11 @@ plt.subplot(122)
 plt.imshow(orgb)
 plt.axis("off")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread("images/computer.jpg", -1)
+img = cv2.imread("data/Hough/computer.jpg", -1)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 edges = cv2.Canny(gray, 50, 150, apertureSize=3)
 orgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -79,12 +93,12 @@ plt.subplot(122)
 plt.imshow(orgb)
 plt.axis("off")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread("images/chess.jpg", 0)
-imgo = cv2.imread("images/chess.jpg", -1)
+img = cv2.imread("data/Hough/chess.jpg", 0)
+imgo = cv2.imread("data/Hough/chess.jpg", -1)
 o = cv2.cvtColor(imgo, cv2.COLOR_BGR2RGB)
 oshow = o.copy()
 img = cv2.medianBlur(img, 5)
@@ -104,14 +118,14 @@ plt.subplot(122)
 plt.imshow(o)
 plt.axis("off")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("這個做很久~~~~~~~")
 
-img = cv2.imread("images/chess.jpg", 0)
-imgo = cv2.imread("images/chess.jpg", -1)
+img = cv2.imread("data/Hough/chess.jpg", 0)
+imgo = cv2.imread("data/Hough/chess.jpg", -1)
 o = cv2.cvtColor(imgo, cv2.COLOR_BGR2RGB)
 oshow = o.copy()
 img = cv2.medianBlur(img, 5)
@@ -131,7 +145,7 @@ plt.subplot(122)
 plt.imshow(o)
 plt.axis("off")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -143,7 +157,7 @@ HoughLinesP
 HoughCircles
 
 """
-img = cv2.imread("images/jianzhu.png")
+img = cv2.imread("data/Hough/jianzhu.png")
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 灰度图像
 edges = cv2.Canny(gray, 50, 200)
 
@@ -178,11 +192,11 @@ plt.subplot(224)
 plt.title("霍夫變換 HoughLines")
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
-lane1 = cv2.imread("images/lane.jpg")
+lane1 = cv2.imread("data/Hough/lane.jpg")
 # 高斯模糊，Canny边缘检测需要的
 lane2 = cv2.GaussianBlur(lane1, (5, 5), 0)  # 執行高斯模糊化
 # 进行边缘检测，减少图像空间中需要检测的点数量
@@ -219,13 +233,13 @@ cv2.imshow("lane4", lane4)
 plt.subplot(224)
 plt.title("霍夫變換 HoughLinesP")
 plt.imshow(cv2.cvtColor(lane4, cv2.COLOR_BGR2RGB))
-plt.show()
+show()
 
 cv2.waitKey()
 
 print("------------------------------------------------------------")  # 60個
 
-img1 = cv2.imread("images/4.png", 0)
+img1 = cv2.imread("data/Hough/4.png", 0)
 img2 = cv2.medianBlur(img1, 5)
 img3 = cv2.cvtColor(img2, cv2.COLOR_GRAY2BGR)
 
@@ -264,7 +278,7 @@ cv2.imshow("detected circles", img3)
 plt.subplot(224)
 plt.title("霍夫變換 HoughCircles")
 plt.imshow(cv2.cvtColor(img3, cv2.COLOR_BGR2RGB))
-plt.show()
+show()
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -275,7 +289,7 @@ print("------------------------------------------------------------")  # 60個
 霍夫圓形檢測
 
 """
-filename = "images/cup.jpg"
+filename = "data/Hough/cup.jpg"
 
 print("顯示圖片")
 image = cv2.imread(filename, -1)
@@ -329,5 +343,235 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+print("opencv 108")
+# add_collection 只能用 ax
+
+# 使用HoughLinesP()檢驗圖形中的直線
+img = cv2.imread("data/Hough/building.jpg", cv2.IMREAD_GRAYSCALE)
+
+img_binary = cv2.Canny(img, 100, 255)
+
+lines = cv2.HoughLinesP(
+    img_binary,
+    rho=1,
+    theta=np.deg2rad(0.1),
+    threshold=96,
+    minLineLength=33,
+    maxLineGap=4,
+)
+
+fig, ax = plt.subplots(figsize=(8, 6))
+plt.imshow(img, cmap="gray")
+
+from matplotlib.collections import LineCollection
+
+lc = LineCollection(lines.reshape(-1, 2, 2))
+ax.add_collection(lc)
+ax.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("opencv 109")
+# 檢驗圓形
+
+# 使用HoughCircles()檢驗圖形中的圓形
+img = cv2.imread("data/Hough/coins.png", cv2.IMREAD_GRAYSCALE)
+img_blur = cv2.GaussianBlur(img, (0, 0), 1.8)
+circles = cv2.HoughCircles(
+    img_blur,
+    cv2.HOUGH_GRADIENT,
+    dp=2.0,
+    minDist=20.0,
+    param1=170,
+    param2=44,
+    minRadius=16,
+    maxRadius=40,
+)
+
+x, y, r = circles[0].T
+
+fig, ax = plt.subplots(figsize=(8, 6))
+plt.imshow(img, cmap="gray")
+
+from matplotlib.collections import EllipseCollection
+
+ec = EllipseCollection(
+    widths=2 * r,
+    heights=2 * r,
+    angles=0,
+    units="xy",
+    facecolors="none",
+    edgecolors="red",
+    transOffset=ax.transData,
+    offsets=np.c_[x, y],
+)
+ax.add_collection(ec)
+ax.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+# OpenCV_18_從直線檢測到無人駕駛車道檢測
+print("------------------------------------------------------------")  # 60個
+
+fff = "data/Hough/japanese_schedule.jpg"
+
+src = cv2.imread(fff, cv2.IMREAD_COLOR)
+cv2.imshow("src", src)
+
+plt.subplot(311)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+
+
+src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
+edges = cv2.Canny(src_gray, 100, 200)  # 使用Canny邊緣檢測
+cv2.imshow("Canny", edges)  # 顯示Canny邊緣線條
+
+lines = cv2.HoughLines(edges, 1, np.pi / 180, 220)  # 檢測直線
+# lines = cv2.HoughLines(edges, 1, np.pi / 180, 180)
+
+print("共找到 :", len(lines), "條直線")
+
+# 繪製直線
+index = 0
+for line in lines:
+    rho, theta = line[0]  # lines回傳
+    a = np.cos(theta)  # cos(theta)
+    b = np.sin(theta)  # sin(theta)
+    x0 = rho * a
+    y0 = rho * b
+    x1 = int(x0 + 1000 * (-b))  # 建立 x1
+    y1 = int(y0 + 1000 * (a))  # 建立 y1
+    x2 = int(x0 - 1000 * (-b))  # 建立 x2
+    y2 = int(y0 - 1000 * (a))  # 建立 y2
+    cv2.line(src, (x1, y1), (x2, y2), (0, 255, 0), 2)  # 繪製綠色線條
+    # cv2.line(src, (x1, y1), (x2, y2), colors[index%6], 2)  # 繪製綠色線條
+    index += 1
+
+cv2.imshow("dst", src)
+
+plt.subplot(312)
+plt.title("edges")
+plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+
+plt.subplot(313)
+plt.title("result")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+
+show()
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+src = cv2.imread("data/Hough/lane2.jpg", cv2.IMREAD_COLOR)
+cv2.imshow("src", src)
+
+src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
+edges = cv2.Canny(src_gray, 100, 200)  # 使用Canny邊緣檢測
+# cv2.imshow("Canny", edges)                         # 顯示Canny邊緣線條
+lines = cv2.HoughLines(edges, 1, np.pi / 180, 150)  # 檢測直線
+
+# 繪製直線
+for line in lines:
+    rho, theta = line[0]  # lines回傳
+    a = np.cos(theta)  # cos(theta)
+    b = np.sin(theta)  # sin(theta)
+    x0 = rho * a
+    y0 = rho * b
+    x1 = int(x0 + 1000 * (-b))  # 建立 x1
+    y1 = int(y0 + 1000 * (a))  # 建立 y1
+    x2 = int(x0 - 1000 * (-b))  # 建立 x2
+    y2 = int(y0 - 1000 * (a))  # 建立 y2
+    cv2.line(src, (x1, y1), (x2, y2), (0, 0, 255), 2)  # 繪製紅色線條
+cv2.imshow("dst", src)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+src = cv2.imread("data/Hough/roadtest.jpg", cv2.IMREAD_COLOR)
+cv2.imshow("src", src)
+
+src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
+edges = cv2.Canny(src_gray, 50, 200)  # 使用Canny邊緣檢測
+cv2.imshow("Canny", edges)  # 顯示Canny邊緣線條
+lines = cv2.HoughLinesP(edges, 1, np.pi / 180, 50, minLineLength=10, maxLineGap=100)
+
+# 繪製檢測到的直線
+for line in lines:
+    x1, y1, x2, y2 = line[0]
+    cv2.line(src, (x1, y1), (x2, y2), (255, 0, 0), 3)  # 繪製藍色線條
+cv2.imshow("dst", src)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+src = cv2.imread("data/Hough/shapes.jpg")
+cv2.imshow("src", src)
+
+src = cv2.medianBlur(src, 5)  # 過濾雜訊
+
+src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
+circles = cv2.HoughCircles(
+    src_gray,
+    cv2.HOUGH_GRADIENT,
+    1,
+    100,
+    param1=50,
+    param2=30,
+    minRadius=70,
+    maxRadius=200,
+)
+circles = np.uint(np.around(circles))  # 轉成整數
+
+# 繪製檢測到的直線
+for c in circles[0]:
+    x, y, r = c
+    cv2.circle(src, (x, y), r, (0, 255, 0), 3)  # 綠色繪圓外圈
+    cv2.circle(src, (x, y), 2, (0, 0, 255), 2)  # 紅色繪圓中心
+cv2.imshow("dst", src)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個

@@ -1477,51 +1477,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-import pywt
-
-# 获取数据
-ecg = pywt.data.ecg()  # 生成心电信号
-index = []
-data = []
-coeffs = []
-
-for i in range(len(ecg) - 1):
-    X = float(i)
-    Y = float(ecg[i])
-    index.append(X)
-    data.append(Y)
-# 创建小波对象并定义参数
-w = pywt.Wavelet("db8")  # 选用Daubechies8小波
-maxlev = pywt.dwt_max_level(len(data), w.dec_len)
-print("maximum level is" + str(maxlev))
-threshold = 0  # 阈值过滤
-
-# 分解成小波分量，到选定的层次:
-coeffs = pywt.wavedec(data, "db8", level=maxlev)  # 将信号进行小波分解
-for i in range(1, len(coeffs)):
-    coeffs[i] = pywt.threshold(coeffs[i], threshold * max(coeffs[i]))
-datarec = pywt.waverec(coeffs, "db8")  # 将信号进行小波重构
-mintime = 0
-maxtime = mintime + len(data)
-print(mintime, maxtime)
-
-plt.subplot(311)
-plt.plot(index[mintime:maxtime], data[mintime:maxtime])
-plt.xlabel("时间(s)")
-plt.ylabel("微伏(uV)")
-plt.title("原始信号")
-plt.subplot(312)
-plt.plot(index[mintime:maxtime], datarec[mintime:maxtime])
-plt.xlabel("时间(s)")
-plt.ylabel("微伏(uV)")
-plt.title("利用小波技术去噪信号")
-plt.subplot(313)
-plt.plot(index[mintime:maxtime], data[mintime:maxtime] - datarec[mintime:maxtime])
-plt.xlabel("时间(s)")
-plt.ylabel("误差(uV)")
-
-plt.tight_layout()
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1530,13 +1485,17 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 plt.xticks(())  # ignore xticks
 plt.yticks(())  # ignore yticks

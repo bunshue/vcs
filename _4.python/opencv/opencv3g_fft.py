@@ -61,8 +61,13 @@ def triangle_wave(size):
 
 # 正弦波
 def sine_wave1(size):
-    x = np.arange(0, 2 * np.pi, 2 * np.pi / size)
-    y = np.sin(x)
+    A = 10
+    f = 60
+    # x = np.arange(0, 2 * np.pi, 2 * np.pi / size)
+    x = np.linspace(0, 1 / f * 3, size)  # 時間, 3個週期
+    # y = np.sin(x)
+    y = A * np.sin(2 * np.pi * f * x)
+    print("aaaa :", x.shape, y.shape)
     return x, y
 
 
@@ -72,6 +77,7 @@ def sine_wave2(size):
     f = 60
     x = np.linspace(0, 1 / f * 3, size)  # 時間, 3個週期
     y = A * np.sin(2 * np.pi * f * x)
+    print("bbbb :", x.shape, y.shape)
     return x, y
 
 
@@ -90,6 +96,7 @@ np.set_printoptions(precision=3, linewidth=80, suppress=False)
 
 import scipy
 
+'''
 print("------------------------------------------------------------")  # 60個
 # 使用 np 傅立葉
 print("------------------------------------------------------------")  # 60個
@@ -1398,102 +1405,93 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("np.fft 02 合成時域訊號")
+print("一維 fft b")
+# FFT 頻域訊號處理
 
-# 計算三角波和其FFT
+NNNN = 100
+
+# 三角波
 x, y = triangle_wave(NNNN)
 fy = np.fft.fft(y) / NNNN  # 為了計算各個成分的能量，需要將FFT的結果除以FFT的長度
+ify = np.fft.ifft(fy)  # 一維 ifft
+
+plt.figure(figsize=(12, 8))
 
 # 繪制三角波的FFT的前20項的振幅，由於不含索引為偶數的值均為0， 因此取
 # log之後無窮小，無法繪圖，用np.clip函數設定陣列值的上下限，確保繪圖正確
-plt.subplot(331)
-plt.plot(x, y, "o")
-plt.xlabel("")
-plt.ylabel("")
+plt.subplot(4,4,1)
+plt.plot(x, y, label="原資料")
 
-plt.subplot(332)
+plt.subplot(4,4,2)
+plt.scatter(fy.real, fy.imag, s=100, label="FFT")
+
+plt.subplot(4,4,3)
 plt.plot(np.clip(20 * np.log10(np.abs(fy[:20])), -120, 120), "o")
 plt.xlabel("頻率視窗(frequency bin)")
 plt.ylabel("幅值(dB)")
 
-# 計算正弦波和其FFT
+plt.subplot(4,4,4)
+plt.plot(ify.real, label="IFFT")
+
+# 正弦波
 x, y = sine_wave1(NNNN)
 fy = np.fft.fft(y) / NNNN  # 為了計算各個成分的能量，需要將FFT的結果除以FFT的長度
+ify = np.fft.ifft(fy)  # 一維 ifft
 
 # 繪制三角波的FFT的前20項的振幅，由於不含索引為偶數的值均為0， 因此取
 # log之後無窮小，無法繪圖，用np.clip函數設定陣列值的上下限，確保繪圖正確
-plt.subplot(334)
-plt.plot(x, y, "o")
-plt.xlabel("")
-plt.ylabel("")
+plt.subplot(4,4,5)
+plt.plot(x, y, label="原資料")
 
-plt.subplot(335)
+plt.subplot(4,4,6)
+plt.scatter(fy.real, fy.imag, s=100, label="FFT")
+
+plt.subplot(4,4,7)
 plt.plot(np.clip(20 * np.log10(np.abs(fy)), -120, 120), "o")
 plt.xlabel("頻率視窗(frequency bin)")
 plt.ylabel("幅值(dB)")
 
+plt.subplot(4,4,8)
+plt.plot(ify.real, label="IFFT")
 
+# 方波
 x, y = square_wave(NNNN)
 fy = np.fft.fft(y) / NNNN  # 為了計算各個成分的能量，需要將FFT的結果除以FFT的長度
+ify = np.fft.ifft(fy)  # 一維 ifft
 
-plt.subplot(337)
+plt.subplot(4,4,9)
 plt.plot(y, label="原始方波", linewidth=2)
-plt.legend(loc="best")
 
-plt.subplot(338)
+plt.subplot(4,4,10)
+
+plt.scatter(fy.real, fy.imag, s=100, label="FFT")
+
+plt.subplot(4,4,11)
 plt.plot(np.clip(20 * np.log10(np.abs(fy[:20])), -120, 120), "o")
 plt.xlabel("頻率視窗(frequency bin)")
 plt.ylabel("幅值(dB)")
 
-show()
+plt.subplot(4,4,12)
+plt.plot(ify.real, label="IFFT")
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("一維 fft b")
-
-
-# FFT 頻域訊號處理
-
-# 原始資料
-# y = np.random.rand(8)
-# y = np.arange(100)
-# y = np.ones(8)
-
-NNNN = 100  # 取樣點數, 精細程度
+# 正弦波
 x, y = sine_wave2(NNNN)
-
-# fy = np.fft.fft(y)  # 一維 fft
 fy = np.fft.fft(y) / NNNN  # 為了計算各個成分的能量，需要將FFT的結果除以FFT的長度
-
 ify = np.fft.ifft(fy)  # 一維 ifft
 
-# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
-cc = np.allclose(y, ify)  # 和原始訊號進行比較
-print(cc)
-
-"""
-print("y :\n", y, sep="")
-print("fy = fft(y) :\n", fy, sep="")
-print("直流部分 DC =", fy[0].real)  # 直流部分
-print("ify = ifft(fy) :\n", ify, sep="")
-"""
-
-plt.subplot(131)
-# plt.scatter(y, y, c="r", s=100, label="原資料")
+plt.subplot(4,4,13)
 plt.plot(x, y, label="原資料")
-plt.legend()
-plt.grid()
 
-plt.subplot(132)
-plt.scatter(fy.real, fy.imag, c="g", s=100, label="FFT")
-# plt.legend()
-plt.grid()
+plt.subplot(4,4,14)
+plt.scatter(fy.real, fy.imag, s=100, label="FFT")
 
-plt.subplot(133)
-# plt.scatter(ify.real, ify.real, c="b", s=100, label="IFFT")
+plt.subplot(4,4,15)
+plt.plot(np.clip(20 * np.log10(np.abs(fy)), -120, 120), "o")
+plt.xlabel("頻率視窗(frequency bin)")
+plt.ylabel("幅值(dB)")
+
+plt.subplot(4,4,16)
 plt.plot(ify.real, label="IFFT")
-plt.legend()
-plt.grid()
 
 show()
 
@@ -1545,31 +1543,32 @@ print(np.abs(fy[3]), np.rad2deg(np.angle(fy[3])))  # 周期為42.667取樣點的
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("np.fft 04 觀察訊號的頻譜")
 
-# 156.25Hz和234.375Hz的波形（上）和頻譜（下）
+# 156.25Hz和234.375Hz的波形和頻譜
 f1 = 156.25  # Hz
 f2 = 234.375  # Hz
 sampling_rate, NNNN = 8000, 512
 T = np.arange(0, 1.0, 1.0 / sampling_rate)
 y = np.sin(2 * np.pi * f1 * T) + 2 * np.sin(2 * np.pi * f2 * T)
 
+plt.figure(figsize=(8, 8))
+
 XS = y[:NNNN]
 xf = np.fft.rfft(XS) / NNNN
 freqs = np.linspace(0, sampling_rate / 2, NNNN // 2 + 1)
 xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))
-plt.figure(figsize=(8, 4))
-plt.subplot(211)
+
+plt.subplot(411)
 plt.plot(T[:NNNN], XS)
 plt.xlabel("時間(秒)")
-plt.subplot(212)
+
+plt.subplot(412)
 plt.plot(freqs, xfp)
 plt.xlabel("頻率(Hz)")
 plt.xlim(0, 1000)  # 設定 x 軸邊界
 plt.subplots_adjust(hspace=0.4)
-
-show()
 
 print("------------------------------")  # 30個
 
@@ -1580,11 +1579,12 @@ XS = y[:NNNN]
 xf = np.fft.rfft(XS) / NNNN
 freqs = np.linspace(0, sampling_rate / 2, NNNN // 2 + 1)
 xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))
-plt.figure(figsize=(8, 4))
-plt.subplot(211)
+
+plt.subplot(413)
 plt.plot(T[:NNNN], XS)
 plt.xlabel("時間(秒)")
-plt.subplot(212)
+
+plt.subplot(414)
 plt.plot(freqs, xfp)
 plt.xlabel("頻率(Hz)")
 plt.xlim(0, 1000)  # 設定 x 軸邊界
@@ -1597,132 +1597,52 @@ print("------------------------------------------------------------")  # 60個
 
 print("np.fft 05")
 
+plt.figure(figsize=(6, 6))
+
 # 50Hz正弦波的512點FFT所計算的頻譜的實際波形
-plt.figure(figsize=(6, 2))
+plt.subplot(311)
+T = np.arange(0, 1.0, 1.0 / 8000)
+y = np.sin(2 * np.pi * 50 * T)[:512]
+plt.plot(np.hstack([y, y, y]))
+
+plt.subplot(312)
+
+
+plt.subplot(313)
 T = np.arange(0, 1.0, 1.0 / 8000)
 y = np.sin(2 * np.pi * 50 * T)[:512]
 plt.plot(np.hstack([y, y, y]))
 
 show()
 
-print("------------------------------------------------------------")  # 60個
-
-print("np.fft 06")
-
-"""
-解決 : AttributeError: module 'scipy.signal' has no attribute 'hann'
-pip install numpy==1.23.4
-pip install scipy==1.12.0
-pip install librosa(==0.10.1)
-"""
-
-# Hann窗函數
-
-plt.figure(figsize=(6, 2))
-plt.plot(scipy.signal.windows.hann(512))
-show()
-
-print(scipy.signal.windows.hann(8))
-print(scipy.signal.windows.hann(8, sym=0))
-
-# 加Hann窗的50Hz正弦波的512點FFT所計算的實際波形
-plt.figure(figsize=(6, 2))
-T = np.arange(0, 1.0, 1.0 / 8000)
-y = np.sin(2 * np.pi * 50 * T)[:512] * scipy.signal.windows.hann(512, sym=0)
-plt.plot(np.hstack([y, y, y]))
-
-show()
-
 print("------------------------------")  # 30個
-
-# 加Hann窗前後的頻譜，Hann窗能降低頻譜洩漏
 
 sampling_rate, NNNN = 8000, 512
 T = np.arange(0, 1.0, 1.0 / sampling_rate)
 y = np.sin(2 * np.pi * 200 * T) + 2 * np.sin(2 * np.pi * 300 * T)
 
 XS = y[:NNNN]
-YS = XS * scipy.signal.windows.hann(NNNN, sym=0)
 
 xf = np.fft.rfft(XS) / NNNN
-yf = np.fft.rfft(YS) / NNNN
 
 freqs = np.linspace(0, sampling_rate // 2, NNNN // 2 + 1)
 
 xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))
-yfp = 20 * np.log10(np.clip(np.abs(yf), 1e-20, 1e100))
+
 plt.figure(figsize=(8, 4))
 plt.plot(freqs, xfp, label="矩形窗")
-plt.plot(freqs, yfp, label="hann窗")
-plt.legend()
+
 plt.xlabel("頻率(Hz)")
 
 a = plt.axes([0.4, 0.2, 0.4, 0.4])
 a.plot(freqs, xfp, label="矩形窗")
-a.plot(freqs, yfp, label="hann窗")
+
 a.set_xlim(100, 400)
 a.set_ylim(-40, 0)
 
 show()
 
-cc = np.mean(scipy.signal.windows.hann(512, sym=0))
-print(cc)
-
 print("------------------------------------------------------------")  # 60個
-
-print("np.fft 07 頻譜平均")
-
-
-def average_fft(x, NNNN):
-    n = len(x) // NNNN * NNNN
-    tmp = x[:n].reshape(-1, NNNN)
-    tmp *= scipy.signal.windows.hann(NNNN, sym=0)
-    xf = np.abs(np.fft.rfft(tmp) / NNNN)
-    avgf = np.mean(xf, axis=0)
-    return 20 * np.log10(avgf)
-
-
-# 白色噪聲的頻譜接近水平直線（注意Y軸的範圍）
-x = np.random.randn(100000)
-xf = average_fft(x, 512)
-
-plt.figure(figsize=(7, 6))
-
-plt.subplot(211)
-plt.plot(x)
-
-plt.subplot(212)
-plt.plot(xf)
-plt.xlabel("頻率視窗(Frequency Bin)")
-plt.ylabel("幅值(dB)")
-plt.xlim([0, 257])
-
-plt.subplots_adjust(bottom=0.15)
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("np.fft 08 經由低通濾波器的白噪聲的頻譜")
-
-B, A = scipy.signal.iirdesign(1000 / 4000.0, 1100 / 4000.0, 1, 40, 0, "cheby1")
-y = np.random.randn(100000)
-Y = scipy.signal.filtfilt(B, A, y)
-Y_FFT = average_fft(Y, 512)
-
-plt.figure(figsize=(7, 6))
-
-plt.subplot(211)
-plt.plot(y)
-
-plt.subplot(212)
-plt.plot(Y_FFT)
-plt.xlabel("頻率視窗(Frequency Bin)")
-plt.ylabel("幅值(dB)")
-plt.xlim(0, 257)
-plt.subplots_adjust(bottom=0.15)
-
-show()
-
 print("------------------------------------------------------------")  # 60個
 
 print("np.fft 10 精確測量訊號頻率")
@@ -1785,64 +1705,78 @@ print("Peak Frequencies:", peak_freqs2)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("傅里葉變換")
-print("一維 fft f")
-
-df = pd.read_csv("data/AirPassengers222.csv")
-ts = df["#Passengers"]  # Series
-
-plt.subplot(211)
-plt.plot(ts, "r")
-# print("ts :", ts)
-
-# 平穩化
-ts_log = np.log(ts)
-# print("ts_log :", ts_log)
-
-ts_diff = ts_log.diff(1)  # 差分 A[n] = A[n]-A[n-1], 故第0項為NaN, 總數少1項
-# print("ts_diff :", ts_diff)
-
-ts_diff = ts_diff.dropna()  # 去除空數據NaN
-# print("ts_diff :", ts_diff)
-
-fy = np.fft.fft(ts_diff)  # np.array 做 fft  # 一維 fft
-print("fy :", fy)
-print(fy[:10])  # 顯示前10個頻域數據
-
-ify = np.fft.ifft(fy)  # 一維 ifft
-
-conv1 = np.real(ify)  # 取實部
-
-plt.subplot(212)
-
-plt.plot(ts_diff, "r")
-plt.plot(conv1 - 0.5, "g")  # 爲看清楚，將顯示區域下拉0.5
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("小波變換")
 
 import pywt
 
-data = pd.read_csv("data/AirPassengers222.csv")
-ts = data["#Passengers"]
-ts_log = np.log(ts)
-ts_diff = ts_log.diff(1)
-ts_diff = ts_diff.dropna()
+x, y = sine_wave1(NNNN)
 
-cA, cD = pywt.dwt(ts_diff, "db2")
+cA, cD = pywt.dwt(y, "db2")
+
 cD = np.zeros(len(cD))
-new_data = pywt.idwt(cA, cD, "db2")
+y_new = pywt.idwt(cA, cD, "db2")
 
-plt.plot(ts_diff)
-plt.plot(new_data - 0.5)
+plt.plot(y, "r", lw=10)
+plt.plot(y_new, "g", lw=3)
+
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+import pywt
+
+# 获取数据
+ecg = pywt.data.ecg()  # 生成心电信号
+index = []
+data = []
+coeffs = []
+
+for i in range(len(ecg) - 1):
+    X = float(i)
+    Y = float(ecg[i])
+    index.append(X)
+    data.append(Y)
+# 创建小波对象并定义参数
+w = pywt.Wavelet("db8")  # 选用Daubechies8小波
+maxlev = pywt.dwt_max_level(len(data), w.dec_len)
+print("maximum level is" + str(maxlev))
+threshold = 0  # 阈值过滤
+
+# 分解成小波分量，到选定的层次:
+coeffs = pywt.wavedec(data, "db8", level=maxlev)  # 将信号进行小波分解
+for i in range(1, len(coeffs)):
+    coeffs[i] = pywt.threshold(coeffs[i], threshold * max(coeffs[i]))
+datarec = pywt.waverec(coeffs, "db8")  # 将信号进行小波重构
+mintime = 0
+maxtime = mintime + len(data)
+print(mintime, maxtime)
+
+plt.subplot(311)
+plt.plot(index[mintime:maxtime], data[mintime:maxtime])
+plt.xlabel("时间(s)")
+plt.ylabel("微伏(uV)")
+plt.title("原始信号")
+plt.subplot(312)
+plt.plot(index[mintime:maxtime], datarec[mintime:maxtime])
+plt.xlabel("时间(s)")
+plt.ylabel("微伏(uV)")
+plt.title("利用小波技术去噪信号")
+plt.subplot(313)
+plt.plot(index[mintime:maxtime], data[mintime:maxtime] - datarec[mintime:maxtime])
+plt.xlabel("时间(s)")
+plt.ylabel("误差(uV)")
+
+plt.tight_layout()
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 """
 【numpy】几种fft函数的使用
@@ -2022,3 +1956,43 @@ print(y[::4, ::4])  # 虛數為零
 
 
 print("------------------------------")  # 30個
+
+plt.axis("off")
+
+
+"""
+對 y 做 一維fft
+fy = fft(y)
+直流部分 DC = fy[0].real  # 直流部分
+對 fy做 一維ifft
+ify = ifft(fy)
+
+# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
+cc = np.allclose(y, ify)  # 和原始訊號進行比較
+print(cc)
+
+"""
+
+plt.subplots_adjust(bottom=0.15)
+plt.subplots_adjust(bottom=0.15)
+
+
+# 白色噪聲的頻譜接近水平直線（注意Y軸的範圍）
+x = np.random.randn(10000)
+plt.plot(x)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+fy = np.fft.fft(y)  # np.array 做 fft  # 一維 fft
+ify = np.fft.ifft(fy)  # 一維 ifft
+conv1 = np.real(ify)  # 取實部
+
+plt.subplot(212)
+plt.plot(y, "r")
+plt.plot(conv1 - 0.5, "g")  # 爲看清楚，將顯示區域下拉0.5
+
+
+# 可刪除檔案
+df = pd.read_csv("data/AirPassengers222.csv")

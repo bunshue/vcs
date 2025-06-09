@@ -42,6 +42,16 @@ def show():
 maxval = 255  # 定義像素最大值, 閾值
 width, height = 640, 480  # 影像寬, 影像高
 
+RED = (0, 0, 255)  # B G R
+GREEN = (0, 255, 0)  # B G R
+BLUE = (255, 0, 0)  # B G R
+CYAN = (255, 255, 0)  # B G R
+MAGENTA = (255, 0, 255)  # B G R
+YELLOW = (0, 255, 255)  # B G R
+BLACK = (0, 0, 0)  # B G R
+WHITE = (255, 255, 255)  # B G R
+colors = [RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK, WHITE]
+
 print("------------------------------------------------------------")  # 60個
 
 print("製作影像")
@@ -563,16 +573,15 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-filenamea = "C:/_git/vcs/_4.python/opencv/data/lena.jpg"
-filenameb = "C:/_git/vcs/_4.python/opencv/data/contours.bmp"
+big = cv2.imread(filename2)  # 彩色讀取, 大圖
 
-lena = cv2.imread(filenamea)  # 彩色讀取, 大圖
-img = cv2.imread(filenameb)  # 彩色讀取, 小圖
+small = cv2.imread(filename1)  # 彩色讀取, 小圖
 
-face = img[130:420, 280:550]  # ROI, 先高後寬
-lena[130:420, 120:390] = face  # 複製到lena影像
+roi = small[110:200, 130:220]  # ROI, 先高後寬
 
-cv2.imshow("Image", lena)
+big[110:200, 70:160] = roi  # 小圖貼到大圖上
+
+cv2.imshow("Image", big)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -875,148 +884,52 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 在影像中藏入訊息
 
 src = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("Peony", src)
 
-row, column = src.shape  # 取得列高和欄寬
-h7 = np.ones((row, column), dtype=np.uint8) * 254  # 建立像素值是254的影像
+h7 = np.ones(src.shape, dtype=np.uint8) * 254  # 建立像素值是254的影像
 tmp_src = cv2.bitwise_and(src, h7)  # 原始影像最低有效位元是 0
 
 watermark = cv2.imread("peony.jpg", cv2.IMREAD_GRAYSCALE)
-cv2.imshow("Text", watermark)  # 顯示浮水印影像
 
 ret, wm = cv2.threshold(watermark, 0, 1, cv2.THRESH_BINARY)
 
 # 浮水印影像嵌入 最低有效位元是0 的 原始影像
 new_src = cv2.bitwise_or(tmp_src, wm)
-cv2.imshow("New Peony", new_src)
 
 # 擷取浮水印
-h0 = np.ones((row, column), dtype=np.uint8)
+h0 = np.ones(src.shape, dtype=np.uint8)
 wm = cv2.bitwise_and(new_src, h0)
 ret, dst = cv2.threshold(wm, 0, 255, cv2.THRESH_BINARY)
-cv2.imshow("result Watermark", dst)  # 顯示浮水印
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(221)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.axis("off")
 
-print("------------------------------------------------------------")  # 60個
+plt.subplot(222)
+plt.title("浮水印")
+plt.imshow(cv2.cvtColor(watermark, cv2.COLOR_BGR2RGB))
+plt.axis("off")
 
-print("------------------------------------------------------------")  # 60個
-# OpenCV_18_從直線檢測到無人駕駛車道檢測
-print("------------------------------------------------------------")  # 60個
+plt.subplot(223)
+plt.title("浮水印影像嵌入")
+plt.imshow(cv2.cvtColor(new_src, cv2.COLOR_BGR2RGB))
+plt.axis("off")
 
-# ch18_1.py
+plt.subplot(224)
+plt.title("顯示浮水印")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.axis("off")
 
-src = cv2.imread("calendar.jpg", cv2.IMREAD_COLOR)
-cv2.imshow("src", src)
-
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
-edges = cv2.Canny(src_gray, 100, 200)  # 使用Canny邊緣檢測
-cv2.imshow("Canny", edges)  # 顯示Canny邊緣線條
-lines = cv2.HoughLines(edges, 1, np.pi / 180, 200)  # 檢測直線
-
-# 繪製直線
-for line in lines:
-    rho, theta = line[0]  # lines回傳
-    a = np.cos(theta)  # cos(theta)
-    b = np.sin(theta)  # sin(theta)
-    x0 = rho * a
-    y0 = rho * b
-    x1 = int(x0 + 1000 * (-b))  # 建立 x1
-    y1 = int(y0 + 1000 * (a))  # 建立 y1
-    x2 = int(x0 - 1000 * (-b))  # 建立 x2
-    y2 = int(y0 - 1000 * (a))  # 建立 y2
-    cv2.line(src, (x1, y1), (x2, y2), (0, 255, 0), 2)  # 繪製綠色線條
-cv2.imshow("dst", src)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
+show()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch18_2.py
-
-src = cv2.imread("lane.jpg", cv2.IMREAD_COLOR)
-cv2.imshow("src", src)
-
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
-edges = cv2.Canny(src_gray, 100, 200)  # 使用Canny邊緣檢測
-# cv2.imshow("Canny", edges)                         # 顯示Canny邊緣線條
-lines = cv2.HoughLines(edges, 1, np.pi / 180, 150)  # 檢測直線
-
-# 繪製直線
-for line in lines:
-    rho, theta = line[0]  # lines回傳
-    a = np.cos(theta)  # cos(theta)
-    b = np.sin(theta)  # sin(theta)
-    x0 = rho * a
-    y0 = rho * b
-    x1 = int(x0 + 1000 * (-b))  # 建立 x1
-    y1 = int(y0 + 1000 * (a))  # 建立 y1
-    x2 = int(x0 - 1000 * (-b))  # 建立 x2
-    y2 = int(y0 - 1000 * (a))  # 建立 y2
-    cv2.line(src, (x1, y1), (x2, y2), (0, 0, 255), 2)  # 繪製紅色線條
-cv2.imshow("dst", src)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
 print("------------------------------------------------------------")  # 60個
 
-# ch18_3.py
-
-src = cv2.imread("roadtest.jpg", cv2.IMREAD_COLOR)
-cv2.imshow("src", src)
-
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
-edges = cv2.Canny(src_gray, 50, 200)  # 使用Canny邊緣檢測
-cv2.imshow("Canny", edges)  # 顯示Canny邊緣線條
-lines = cv2.HoughLinesP(edges, 1, np.pi / 180, 50, minLineLength=10, maxLineGap=100)
-
-# 繪製檢測到的直線
-for line in lines:
-    x1, y1, x2, y2 = line[0]
-    cv2.line(src, (x1, y1), (x2, y2), (255, 0, 0), 3)  # 繪製藍色線條
-cv2.imshow("dst", src)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch18_4.py
-
-src = cv2.imread("shapes.jpg")
-cv2.imshow("src", src)
-
-src = cv2.medianBlur(src, 5)  # 過濾雜訊
-
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
-circles = cv2.HoughCircles(
-    src_gray,
-    cv2.HOUGH_GRADIENT,
-    1,
-    100,
-    param1=50,
-    param2=30,
-    minRadius=70,
-    maxRadius=200,
-)
-circles = np.uint(np.around(circles))  # 轉成整數
-
-# 繪製檢測到的直線
-for c in circles[0]:
-    x, y, r = c
-    cv2.circle(src, (x, y), r, (0, 255, 0), 3)  # 綠色繪圓外圈
-    cv2.circle(src, (x, y), 2, (0, 0, 255), 2)  # 紅色繪圓中心
-cv2.imshow("dst", src)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 # OpenCV_20_模板匹配 Template Matching
@@ -1028,7 +941,7 @@ src = cv2.imread("macau_hotel.jpg", cv2.IMREAD_COLOR)
 cv2.imshow("Src", src)
 
 H, W = src.shape[:2]
-print(f"原始影像高 H = {H}, 寬 W = {W}")
+print(f"原圖 高 H = {H}, 寬 W = {W}")
 temp1 = cv2.imread("head.jpg")
 cv2.imshow("Temp1", temp1)  # 顯示模板影像
 h, w = temp1.shape[:2]
@@ -1087,10 +1000,13 @@ print("------------------------------------------------------------")  # 60個
 # ch20_4.py
 
 src = []  # 建立原始影像陣列
+
 src1 = cv2.imread("knight0.jpg", cv2.IMREAD_COLOR)
 src.append(src1)  # 加入原始影像串列
+
 src2 = cv2.imread("knight1.jpg", cv2.IMREAD_COLOR)
 src.append(src2)  # 加入原始影像串列
+
 temp1 = cv2.imread("knight.jpg", cv2.IMREAD_COLOR)
 # 使用cv2.TM_SQDIFF_NORMED執行模板匹配
 minValue = 1  # 設定預設的最小值
@@ -1208,11 +1124,14 @@ def myMatch(image, tmp):
 
 
 src = cv2.imread("mutishapes1.jpg", cv2.IMREAD_COLOR)  # 讀取原始影像
+
 temps = []
 temp1 = cv2.imread("heart1.jpg", cv2.IMREAD_COLOR)  # 讀取匹配影像
 temps.append(temp1)  # 加入匹配串列temps
+
 temp2 = cv2.imread("star.jpg", cv2.IMREAD_COLOR)  # 讀取匹配影像
 temps.append(temp2)  # 加入匹配串列temps
+
 match = []  # 符合匹配的圖案
 for t in temps:
     myMatch(src, t)  # 調用 myMatch
@@ -1259,7 +1178,7 @@ dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
 ret, sure_fg = cv2.threshold(dst, 0.7 * dst.max(), 255, 0)  # 前景圖案
 
 plt.subplot(131)
-plt.title("原始影像")
+plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
@@ -1295,7 +1214,7 @@ dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
 ret, sure_fg = cv2.threshold(dst, 0.5 * dst.max(), 255, 0)  # 前景圖案
 
 plt.subplot(131)
-plt.title("原始影像")
+plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
@@ -1340,7 +1259,7 @@ sure_fg = np.uint8(sure_fg)
 unknown = cv2.subtract(sure_bg, sure_fg)
 
 plt.subplot(141)
-plt.title("原始影像")
+plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
@@ -1393,7 +1312,7 @@ unknown = cv2.subtract(sure_bg, sure_fg)
 ret, markers = cv2.connectedComponents(sure_fg)
 
 plt.subplot(131)
-plt.title("原始影像")
+plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
@@ -1506,7 +1425,7 @@ markers = cv2.watershed(dst, markers)
 dst[markers == -1] = [255, 0, 0]  # 使用紅色
 
 plt.subplot(121)
-plt.title("原始影像")
+plt.title("原圖")
 plt.imshow(rgb_src)
 plt.axis("off")
 
@@ -1540,7 +1459,7 @@ mask2 = np.where((mask1 == 0) | (mask1 == 2), 0, 1).astype("uint8")
 dst = src * mask2[:, :, np.newaxis]  # 計算輸出影像
 
 plt.subplot(121)
-plt.title("原始影像")
+plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
@@ -1571,7 +1490,7 @@ mask = np.where((mask == 0) | (mask == 2), 0, 1).astype("uint8")
 dst = src * mask[:, :, np.newaxis]  # 計算輸出影像
 
 plt.subplot(131)
-plt.title("原始影像")
+plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
@@ -1606,7 +1525,7 @@ mask2 = np.where((mask1 == 0) | (mask1 == 2), 0, 1).astype("uint8")
 dst = src * mask2[:, :, np.newaxis]  # 計算輸出影像
 
 plt.subplot(121)
-plt.title("原始影像")
+plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
@@ -1638,7 +1557,7 @@ mask2 = np.where((mask1 == 0) | (mask1 == 2), 0, 1).astype("uint8")
 dst = src * mask2[:, :, np.newaxis]  # 計算輸出影像
 
 plt.subplot(121)
-plt.title("原始影像")
+plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
@@ -1666,7 +1585,7 @@ mask = cv2.dilate(mask, kernal)
 dst = cv2.inpaint(lisa, mask[:, :, -1], 5, cv2.INPAINT_NS)
 
 plt.subplot(131)
-plt.title("原始影像")
+plt.title("原圖")
 plt.imshow(cv2.cvtColor(lisa, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
@@ -1695,7 +1614,7 @@ mask = cv2.dilate(mask, kernal)
 dst = cv2.inpaint(lisa, mask[:, :, -1], 5, cv2.INPAINT_TELEA)
 
 plt.subplot(131)
-plt.title("原始影像")
+plt.title("原圖")
 plt.imshow(cv2.cvtColor(lisa, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
