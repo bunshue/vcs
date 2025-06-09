@@ -53,7 +53,7 @@ WHITE = (255, 255, 255)  # B G R
 colors = [RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK, WHITE]
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("製作影像")
 
 width, height = 640, 480  # 影像寬, 影像高
@@ -135,23 +135,23 @@ yellow_image[:, :, 2] = 255  # 建立 R 通道像素值
 yellow_image[:, :, 1] = 255  # 建立 G 通道像素值
 
 plt.subplot(221)
-plt.title("R")
 plt.imshow(cv2.cvtColor(red_image, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("R")
 plt.axis("off")
 
 plt.subplot(222)
-plt.title("G")
 plt.imshow(cv2.cvtColor(green_image, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("G")
 plt.axis("off")
 
 plt.subplot(223)
-plt.title("B")
 plt.imshow(cv2.cvtColor(blue_image, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("B")
 plt.axis("off")
 
 plt.subplot(224)
-plt.title("Y")
 plt.imshow(cv2.cvtColor(yellow_image, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("Y")
 plt.axis("off")
 
 show()
@@ -339,8 +339,8 @@ for y in range(0, img.shape[0], 5):
         img[y, x] = 127
 
 plt.subplot(121)
-plt.title("灰階")
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("灰階")
 plt.axis("off")
 
 print("修改圖片的像素值 彩色")
@@ -353,8 +353,8 @@ for y in range(0, img.shape[0], 5):
         img[y, x] = [255, 0, 0]
 
 plt.subplot(122)
-plt.title("彩色")
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("彩色")
 plt.axis("off")
 
 show()
@@ -382,23 +382,23 @@ yellow_image[:, :, 2] = 255  # 填滿紅色
 yellow_image[:, :, 1] = 255  # 填滿綠色
 
 plt.subplot(221)
-plt.title("R")
 plt.imshow(cv2.cvtColor(red_image, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("R")
 plt.axis("off")
 
 plt.subplot(222)
-plt.title("G")
 plt.imshow(cv2.cvtColor(green_image, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("G")
 plt.axis("off")
 
 plt.subplot(223)
-plt.title("B")
 plt.imshow(cv2.cvtColor(blue_image, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("B")
 plt.axis("off")
 
 plt.subplot(224)
-plt.title("Y")
 plt.imshow(cv2.cvtColor(yellow_image, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("Y")
 plt.axis("off")
 
 show()
@@ -663,33 +663,33 @@ img2 = cv2.add(g, r)  # g + r影像
 img3 = cv2.add(img1, r)  # b + g + r影像
 
 plt.subplot(231)
-plt.title("B")
 plt.imshow(cv2.cvtColor(b, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("B")
 plt.axis("off")
 
 plt.subplot(232)
-plt.title("G")
 plt.imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("G")
 plt.axis("off")
 
 plt.subplot(233)
-plt.title("R")
 plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("R")
 plt.axis("off")
 
 plt.subplot(234)
-plt.title("B+G")
 plt.imshow(cv2.cvtColor(img1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("B+G")
 plt.axis("off")
 
 plt.subplot(235)
-plt.title("G+R")
 plt.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("G+R")
 plt.axis("off")
 
 plt.subplot(236)
-plt.title("B+G+R")
 plt.imshow(cv2.cvtColor(img3, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("B+G+R")
 plt.axis("off")
 
 show()
@@ -749,24 +749,28 @@ img3 = cv2.add(img1, img2)  # 不含mask的影像相加
 img4 = cv2.add(img1, img2, mask=m)  # 含mask的影像相加
 
 plt.subplot(231)
-plt.title("R")
 plt.imshow(cv2.cvtColor(img1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("R")
 plt.axis("off")
+
 plt.subplot(232)
-plt.title("G")
 plt.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("G")
 plt.axis("off")
+
 plt.subplot(233)
-plt.title("mask")
 plt.imshow(cv2.cvtColor(m, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("mask")
 plt.axis("off")
+
 plt.subplot(234)
-plt.title("R+G by cv2.add")
 plt.imshow(cv2.cvtColor(img3, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("R+G by cv2.add")
 plt.axis("off")
+
 plt.subplot(235)
-plt.title("R+G+mask by cv2.add")
 plt.imshow(cv2.cvtColor(img4, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("R+G+mask by cv2.add")
 plt.axis("off")
 
 show()
@@ -805,18 +809,18 @@ gamma = 1
 dst = cv2.addWeighted(src1, alpha, src2, beta, gamma)  # 加權和
 
 plt.subplot(131)
-plt.title("R")
 plt.imshow(cv2.cvtColor(src1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("R")
 plt.axis("off")
 
 plt.subplot(132)
-plt.title("G")
 plt.imshow(cv2.cvtColor(src2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("G")
 plt.axis("off")
 
 plt.subplot(133)
-plt.title("R+G")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("R+G")
 plt.axis("off")
 
 plt.suptitle("addWeighted")
@@ -828,8 +832,8 @@ print("------------------------------------------------------------")  # 60個
 img = cv2.imread(filename3, cv2.IMREAD_GRAYSCALE)
 
 plt.subplot(331)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 row, column = img.shape
@@ -845,8 +849,8 @@ for i in range(8):
     mask = result[:, :, i] > 0  # 影像邏輯值
     result[mask] = 255  # True的位置填255
     plt.subplot(3, 3, i + 2)
-    plt.title(str(i))
     plt.imshow(cv2.cvtColor(result[:, :, i], cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+    plt.title(str(i))
     plt.axis("off")
 
 show()
@@ -863,18 +867,18 @@ h100 = np.ones((row, column), dtype=np.uint8) * 100  # 建立像素值是100的�
 new_src = cv2.bitwise_and(src, h100)
 
 plt.subplot(131)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(132)
-plt.title("灰階100")
 plt.imshow(cv2.cvtColor(h100, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("灰階100")
 plt.axis("off")
 
 plt.subplot(133)
-plt.title("原圖取出灰階100")
 plt.imshow(cv2.cvtColor(new_src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖取出灰階100")
 plt.axis("off")
 
 plt.suptitle("cv2.bitwise_and")
@@ -886,119 +890,47 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 在影像中藏入訊息
+print("------------------------------------------------------------")  # 60個
+# OpenCV_20_模板匹配 Template Matching
+print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
+filename1 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates46.jpg"
+filename2 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates46_head.jpg"
 
-h7 = np.ones(src.shape, dtype=np.uint8) * 254  # 建立像素值是254的影像
-tmp_src = cv2.bitwise_and(src, h7)  # 原始影像最低有效位元是 0
+src = cv2.imread(filename1, cv2.IMREAD_COLOR)
 
-watermark = cv2.imread("peony.jpg", cv2.IMREAD_GRAYSCALE)
-
-ret, wm = cv2.threshold(watermark, 0, 1, cv2.THRESH_BINARY)
-
-# 浮水印影像嵌入 最低有效位元是0 的 原始影像
-new_src = cv2.bitwise_or(tmp_src, wm)
-
-# 擷取浮水印
-h0 = np.ones(src.shape, dtype=np.uint8)
-wm = cv2.bitwise_and(new_src, h0)
-ret, dst = cv2.threshold(wm, 0, 255, cv2.THRESH_BINARY)
-
-plt.subplot(221)
-plt.title("原圖")
+plt.subplot(311)
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.axis("off")
+plt.title("原圖")
+#plt.axis("off")
 
-plt.subplot(222)
-plt.title("浮水印")
-plt.imshow(cv2.cvtColor(watermark, cv2.COLOR_BGR2RGB))
-plt.axis("off")
+template = cv2.imread(filename2, cv2.IMREAD_COLOR)
+height, width = template.shape[:2]  # 獲得模板影像的高與寬
 
-plt.subplot(223)
-plt.title("浮水印影像嵌入")
-plt.imshow(cv2.cvtColor(new_src, cv2.COLOR_BGR2RGB))
-plt.axis("off")
+# 使用 cv2.TM_SQDIFF_NORMED 執行模板匹配
+result = cv2.matchTemplate(src, template, cv2.TM_SQDIFF_NORMED)
+minVal, maxVal, minLoc, maxLoc = cv2.minMaxLoc(result)
+upperleft = minLoc  # 左上角座標
+lowerright = (minLoc[0] + width, minLoc[1] + height)  # 右下角座標
+dst = cv2.rectangle(src, upperleft, lowerright, (0, 255, 0), 3)  # 繪置最相似外框
+print(f"result大小 = {result.shape}")
+print(f"陣列內容 \n{result}")
 
-plt.subplot(224)
-plt.title("顯示浮水印")
+plt.subplot(312)
+plt.imshow(cv2.cvtColor(template, cv2.COLOR_BGR2RGB))
+plt.title("template")
+#plt.axis("off")
+
+plt.subplot(313)
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.axis("off")
+plt.title("dst")
+#plt.axis("off")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-# OpenCV_20_模板匹配 Template Matching
-print("------------------------------------------------------------")  # 60個
-
-# ch20_1.py
-
-src = cv2.imread("macau_hotel.jpg", cv2.IMREAD_COLOR)
-cv2.imshow("Src", src)
-
-H, W = src.shape[:2]
-print(f"原圖 高 H = {H}, 寬 W = {W}")
-temp1 = cv2.imread("head.jpg")
-cv2.imshow("Temp1", temp1)  # 顯示模板影像
-h, w = temp1.shape[:2]
-print(f"模板影像高 h = {h}, 寬 w = {w}")
-result = cv2.matchTemplate(src, temp1, cv2.TM_SQDIFF)
-print(f"result大小 = {result.shape}")
-print(f"陣列內容 \n{result}")
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch20_2.py
-
-src = cv2.imread("shapes.jpg", cv2.IMREAD_COLOR)
-cv2.imshow("Src", src)
-
-temp1 = cv2.imread("heart.jpg", cv2.IMREAD_COLOR)
-cv2.imshow("Temp1", temp1)  # 顯示模板影像
-height, width = temp1.shape[:2]  # 獲得模板影像的高與寬
-
-# 使用cv2.TM_SQDIFF_NORMED執行模板匹配
-result = cv2.matchTemplate(src, temp1, cv2.TM_SQDIFF_NORMED)
-minVal, maxVal, minLoc, maxLoc = cv2.minMaxLoc(result)
-upperleft = minLoc  # 左上角座標
-lowerright = (minLoc[0] + width, minLoc[1] + height)  # 右下角座標
-dst = cv2.rectangle(src, upperleft, lowerright, (0, 255, 0), 3)  # 繪置最相似外框
-cv2.imshow("Dst", dst)
-print(f"result大小 = {result.shape}")
-print(f"陣列內容 \n{result}")
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch20_3.py
-
-src = cv2.imread("g5.jpg", cv2.IMREAD_COLOR)
-temp1 = cv2.imread("face1.jpg", cv2.IMREAD_COLOR)
-height, width = temp1.shape[:2]  # 獲得模板影像的高與寬
-# 使用cv2.TM_SQDIFF_NORMED執行模板匹配
-result = cv2.matchTemplate(src, temp1, cv2.TM_SQDIFF_NORMED)
-minVal, maxVal, minLoc, maxLoc = cv2.minMaxLoc(result)
-upperleft = minLoc  # 左上角座標
-lowerright = (minLoc[0] + width, minLoc[1] + height)  # 右下角座標
-dst = cv2.rectangle(src, upperleft, lowerright, (0, 255, 0), 3)  # 繪置最相似外框
-cv2.imshow("Dst", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch20_4.py
-
+'''
 src = []  # 建立原始影像陣列
 
 src1 = cv2.imread("knight0.jpg", cv2.IMREAD_COLOR)
@@ -1007,17 +939,20 @@ src.append(src1)  # 加入原始影像串列
 src2 = cv2.imread("knight1.jpg", cv2.IMREAD_COLOR)
 src.append(src2)  # 加入原始影像串列
 
-temp1 = cv2.imread("knight.jpg", cv2.IMREAD_COLOR)
+template = cv2.imread("knight.jpg", cv2.IMREAD_COLOR)
+
 # 使用cv2.TM_SQDIFF_NORMED執行模板匹配
 minValue = 1  # 設定預設的最小值
 index = -1  # 設定最小值的索引
 # 採用歸一化平方匹配法
 for i in range(len(src)):
-    result = cv2.matchTemplate(src[i], temp1, cv2.TM_SQDIFF_NORMED)
+    result = cv2.matchTemplate(src[i], template, cv2.TM_SQDIFF_NORMED)
     minVal, maxVal, minLoc, maxLoc = cv2.minMaxLoc(result)
+    print(i, minVal, maxVal, minLoc, maxLoc, "\t比較小", minVal)
     if minValue > minVal:
         minValue = minVal  # 紀錄目前的最小值
         index = i  # 紀錄目前的索引
+
 seq = "knight" + str(index) + ".jpg"
 print(f"{seq} 比較類似")
 cv2.imshow("Dst", src[index])
@@ -1026,18 +961,18 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch20_5.py
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("mutishapes.jpg", cv2.IMREAD_COLOR)
 cv2.imshow("Src", src)
 
-temp1 = cv2.imread("heart.jpg", cv2.IMREAD_COLOR)
-cv2.imshow("Temp1", temp1)  # 顯示模板影像
-height, width = temp1.shape[:2]  # 獲得模板影像的高與寬
+template = cv2.imread("../data2b/heart.jpg", cv2.IMREAD_COLOR)
+cv2.imshow("template", template)  # 顯示模板影像
 
-# 使用cv2.TM_CCOEFF_NORMED執行模板匹配
-result = cv2.matchTemplate(src, temp1, cv2.TM_CCOEFF_NORMED)
+height, width = template.shape[:2]  # 獲得模板影像的高與寬
+
+# 使用 cv2.TM_CCOEFF_NORMED 執行模板匹配
+result = cv2.matchTemplate(src, template, cv2.TM_CCOEFF_NORMED)
 for row in range(len(result)):  # 找尋row
     for col in range(len(result[row])):  # 找尋column
         if result[row][col] > 0.95:  # 值大於0.95就算找到了
@@ -1050,14 +985,14 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch20_6.py
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("baidu.jpg", cv2.IMREAD_COLOR)
-temp1 = cv2.imread("mountain_mark.jpg", cv2.IMREAD_COLOR)
-h, w = temp1.shape[:2]  # 獲得模板影像的高與寬
-# 使用cv2.TM_CCOEFF_NORMED執行模板匹配
-result = cv2.matchTemplate(src, temp1, cv2.TM_CCOEFF_NORMED)
+template = cv2.imread("mountain_mark.jpg", cv2.IMREAD_COLOR)
+h, w = template.shape[:2]  # 獲得模板影像的高與寬
+
+# 使用 cv2.TM_CCOEFF_NORMED 執行模板匹配
+result = cv2.matchTemplate(src, template, cv2.TM_CCOEFF_NORMED)
 for row in range(len(result)):  # 找尋row
     for col in range(len(result[row])):  # 找尋column
         if result[row][col] > 0.95:  # 值大於0.95就算找到了
@@ -1068,19 +1003,18 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch20_7.py
+print("------------------------------------------------------------")  # 60個
 
 start_x = 450  # 目前位置 x
 start_y = 180  # 目前位置 y
 src = cv2.imread("airport.jpg", cv2.IMREAD_COLOR)
-temp1 = cv2.imread("airport_mark.jpg", cv2.IMREAD_COLOR)
+template = cv2.imread("airport_mark.jpg", cv2.IMREAD_COLOR)
 dst = cv2.circle(src, (start_x, start_y), 10, (255, 0, 0), -1)
-h, w = temp1.shape[:2]  # 獲得模板影像的高與寬
+h, w = template.shape[:2]  # 獲得模板影像的高與寬
 # 使用cv2.TM_CCOEFF_NORMED執行模板匹配
 ul_x = []  # 最佳匹配左上角串列 x
 ul_y = []  # 最佳匹配左上較串列 y
-result = cv2.matchTemplate(src, temp1, cv2.TM_CCOEFF_NORMED)
+result = cv2.matchTemplate(src, template, cv2.TM_CCOEFF_NORMED)
 for row in range(len(result)):  # 找尋row
     for col in range(len(result[row])):  # 找尋column
         if result[row][col] > 0.9:  # 值大於0.9就算找到了
@@ -1108,12 +1042,11 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch20_8.py
+print("------------------------------------------------------------")  # 60個
 
 
 def myMatch(image, tmp):
-    """執行匹配"""
+    # 執行匹配
     h, w = tmp.shape[0:2]  # 回傳height, width
     result = cv2.matchTemplate(src, tmp, cv2.TM_CCOEFF_NORMED)
     for row in range(len(result)):  # 找尋row
@@ -1126,8 +1059,8 @@ def myMatch(image, tmp):
 src = cv2.imread("mutishapes1.jpg", cv2.IMREAD_COLOR)  # 讀取原始影像
 
 temps = []
-temp1 = cv2.imread("heart1.jpg", cv2.IMREAD_COLOR)  # 讀取匹配影像
-temps.append(temp1)  # 加入匹配串列temps
+template = cv2.imread("heart1.jpg", cv2.IMREAD_COLOR)  # 讀取匹配影像
+temps.append(template)  # 加入匹配串列temps
 
 temp2 = cv2.imread("star.jpg", cv2.IMREAD_COLOR)  # 讀取匹配影像
 temps.append(temp2)  # 加入匹配串列temps
@@ -1178,18 +1111,18 @@ dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
 ret, sure_fg = cv2.threshold(dst, 0.7 * dst.max(), 255, 0)  # 前景圖案
 
 plt.subplot(131)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(132)
-plt.title("距離變換影像")
 plt.imshow(dst)
+plt.title("距離變換影像")
 plt.axis("off")
 
 plt.subplot(133)
-plt.title("閾值化影像")
 plt.imshow(sure_fg)
+plt.title("閾值化影像")
 plt.axis("off")
 
 show()
@@ -1214,18 +1147,18 @@ dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
 ret, sure_fg = cv2.threshold(dst, 0.5 * dst.max(), 255, 0)  # 前景圖案
 
 plt.subplot(131)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(132)
-plt.title("距離變換影像")
 plt.imshow(dst)
+plt.title("距離變換影像")
 plt.axis("off")
 
 plt.subplot(133)
-plt.title("閾值化影像")
 plt.imshow(sure_fg)
+plt.title("閾值化影像")
 plt.axis("off")
 
 show()
@@ -1259,23 +1192,23 @@ sure_fg = np.uint8(sure_fg)
 unknown = cv2.subtract(sure_bg, sure_fg)
 
 plt.subplot(141)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(142)
-plt.title("距離變換影像")
 plt.imshow(dst)
+plt.title("距離變換影像")
 plt.axis("off")
 
 plt.subplot(143)
-plt.title("閾值化影像")
 plt.imshow(sure_fg)
+plt.title("閾值化影像")
 plt.axis("off")
 
 plt.subplot(144)
-plt.title("未知區域")
 plt.imshow(unknown)
+plt.title("未知區域")
 plt.axis("off")
 
 show()
@@ -1312,18 +1245,18 @@ unknown = cv2.subtract(sure_bg, sure_fg)
 ret, markers = cv2.connectedComponents(sure_fg)
 
 plt.subplot(131)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(132)
-plt.title("未知區域")
 plt.imshow(unknown)
+plt.title("未知區域")
 plt.axis("off")
 
 plt.subplot(133)
-plt.title("標記區")
 plt.imshow(markers)
+plt.title("標記區")
 plt.axis("off")
 
 show()
@@ -1459,13 +1392,13 @@ mask2 = np.where((mask1 == 0) | (mask1 == 2), 0, 1).astype("uint8")
 dst = src * mask2[:, :, np.newaxis]  # 計算輸出影像
 
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(122)
-plt.title("擷取影像")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("擷取影像")
 plt.axis("off")
 
 show()
@@ -1490,18 +1423,18 @@ mask = np.where((mask == 0) | (mask == 2), 0, 1).astype("uint8")
 dst = src * mask[:, :, np.newaxis]  # 計算輸出影像
 
 plt.subplot(131)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(132)
-plt.title("遮罩影像")
 plt.imshow(cv2.cvtColor(maskpict, cv2.COLOR_BGR2RGB))
+plt.title("遮罩影像")
 plt.axis("off")
 
 plt.subplot(133)
-plt.title("擷取影像")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("擷取影像")
 plt.axis("off")
 
 show()
@@ -1525,13 +1458,13 @@ mask2 = np.where((mask1 == 0) | (mask1 == 2), 0, 1).astype("uint8")
 dst = src * mask2[:, :, np.newaxis]  # 計算輸出影像
 
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(122)
-plt.title("擷取影像")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("擷取影像")
 plt.axis("off")
 
 show()
@@ -1557,13 +1490,13 @@ mask2 = np.where((mask1 == 0) | (mask1 == 2), 0, 1).astype("uint8")
 dst = src * mask2[:, :, np.newaxis]  # 計算輸出影像
 
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(122)
-plt.title("擷取影像")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("擷取影像")
 plt.axis("off")
 
 show()
@@ -1585,18 +1518,18 @@ mask = cv2.dilate(mask, kernal)
 dst = cv2.inpaint(lisa, mask[:, :, -1], 5, cv2.INPAINT_NS)
 
 plt.subplot(131)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(lisa, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(132)
-plt.title("遮罩影像")
 plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
+plt.title("遮罩影像")
 plt.axis("off")
 
 plt.subplot(133)
-plt.title("影像修復結果")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("影像修復結果")
 plt.axis("off")
 
 show()
@@ -1614,18 +1547,18 @@ mask = cv2.dilate(mask, kernal)
 dst = cv2.inpaint(lisa, mask[:, :, -1], 5, cv2.INPAINT_TELEA)
 
 plt.subplot(131)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(lisa, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(132)
-plt.title("遮罩影像")
 plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
+plt.title("遮罩影像")
 plt.axis("off")
 
 plt.subplot(133)
-plt.title("影像修復結果")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("影像修復結果")
 plt.axis("off")
 
 show()
@@ -2516,3 +2449,11 @@ src = cv2.imread(filename2)
 src = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+# 使用 cv2.TM_SQDIFF 執行模板匹配
+result = cv2.matchTemplate(src, template, cv2.TM_SQDIFF)
+print(f"result大小 = {result.shape}")
+print(f"陣列內容 \n{result}")
+

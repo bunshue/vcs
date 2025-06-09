@@ -636,6 +636,46 @@ print(f"dst = \n {dst}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 在影像中藏入訊息
+
+src = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
+
+h7 = np.ones(src.shape, dtype=np.uint8) * 254  # 建立像素值是254的影像
+tmp_src = cv2.bitwise_and(src, h7)  # 原始影像最低有效位元是 0
+
+watermark = cv2.imread("data/peony.jpg", cv2.IMREAD_GRAYSCALE)
+
+ret, wm = cv2.threshold(watermark, 0, 1, cv2.THRESH_BINARY)
+
+# 浮水印影像嵌入 最低有效位元是0 的 原始影像
+new_src = cv2.bitwise_or(tmp_src, wm)
+
+# 擷取浮水印
+h0 = np.ones(src.shape, dtype=np.uint8)
+wm = cv2.bitwise_and(new_src, h0)
+ret, dst = cv2.threshold(wm, 0, 255, cv2.THRESH_BINARY)
+
+plt.subplot(221)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+
+plt.subplot(222)
+plt.title("浮水印")
+plt.imshow(cv2.cvtColor(watermark, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+
+plt.subplot(223)
+plt.title("浮水印影像嵌入")
+plt.imshow(cv2.cvtColor(new_src, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+
+plt.subplot(224)
+plt.title("顯示浮水印")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
