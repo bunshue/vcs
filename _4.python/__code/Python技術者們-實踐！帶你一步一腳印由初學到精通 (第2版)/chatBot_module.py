@@ -2,6 +2,7 @@
 from bs4 import BeautifulSoup
 from gtts import gTTS
 from hanziconv import HanziConv
+import os
 import re
 import requests
 import tempfile
@@ -10,11 +11,9 @@ import speech_recognition as sr
 
 
 def bot_listen():
-    # 建立辨識物件
-    recong = sr.Recognizer()
+    recong = sr.Recognizer()  # 建立辨識物件
     with sr.Microphone() as source:  # 打開麥克風取得聲音
-        # 讓辨識物件聽到的聲音
-        audioData = recong.listen(source)
+        audioData = recong.listen(source)  # 讓辨識物件聽到的聲音
     try:
         text = recong.recognize_google(audioData, language="zh-tw")  # 將聲音資料翻成文字
         return text
@@ -28,7 +27,7 @@ def bot_listen():
 mixer.init()  # 初始化 mixer 物件
 
 
-def bot_speak(text, lang):
+def bot_speak(text, lang):  # 建立自訂函式
     try:
         with tempfile.NamedTemporaryFile() as ntf:
             tts = gTTS(text=text, lang=lang)

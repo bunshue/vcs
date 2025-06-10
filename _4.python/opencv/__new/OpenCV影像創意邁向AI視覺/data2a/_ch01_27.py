@@ -53,7 +53,7 @@ WHITE = (255, 255, 255)  # B G R
 colors = [RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK, WHITE]
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("製作影像")
 
 width, height = 640, 480  # 影像寬, 影像高
@@ -227,6 +227,12 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+src = np.zeros([200, 400], np.uint8)  # 建立影像
+src[50:150, 100:300] = 255  # 在影像內建立遮罩
+cv2.imshow("Src", src)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("-------------------- ----------------------------------------")  # 60個
@@ -912,7 +918,7 @@ result = cv2.matchTemplate(src, template, cv2.TM_SQDIFF_NORMED)
 minVal, maxVal, minLoc, maxLoc = cv2.minMaxLoc(result)
 upperleft = minLoc  # 左上角座標
 lowerright = (minLoc[0] + width, minLoc[1] + height)  # 右下角座標
-dst = cv2.rectangle(src, upperleft, lowerright, (0, 255, 0), 3)  # 繪置最相似外框
+dst = cv2.rectangle(src, upperleft, lowerright, GREEN, 3)  # 繪置最相似外框
 print(f"result大小 = {result.shape}")
 print(f"陣列內容 \n{result}")
 
@@ -930,7 +936,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 src = []  # 建立原始影像陣列
 
 src1 = cv2.imread("knight0.jpg", cv2.IMREAD_COLOR)
@@ -955,19 +961,40 @@ for i in range(len(src)):
 
 seq = "knight" + str(index) + ".jpg"
 print(f"{seq} 比較類似")
-cv2.imshow("Dst", src[index])
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(src1, cv2.COLOR_BGR2RGB))
+plt.title("src1")
+#plt.axis("off")
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(src2, cv2.COLOR_BGR2RGB))
+plt.title("src2")
+#plt.axis("off")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(template, cv2.COLOR_BGR2RGB))
+plt.title("template")
+#plt.axis("off")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(src[index], cv2.COLOR_BGR2RGB))
+plt.title("dst")
+#plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("mutishapes.jpg", cv2.IMREAD_COLOR)
-cv2.imshow("Src", src)
+
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("src")
+#plt.axis("off")
 
 template = cv2.imread("../data2b/heart.jpg", cv2.IMREAD_COLOR)
-cv2.imshow("template", template)  # 顯示模板影像
 
 height, width = template.shape[:2]  # 獲得模板影像的高與寬
 
@@ -977,18 +1004,38 @@ for row in range(len(result)):  # 找尋row
     for col in range(len(result[row])):  # 找尋column
         if result[row][col] > 0.95:  # 值大於0.95就算找到了
             dst = cv2.rectangle(
-                src, (col, row), (col + width, row + height), (0, 255, 0), 3
+                src, (col, row), (col + width, row + height), GREEN, 3
             )
-cv2.imshow("Dst", dst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(template, cv2.COLOR_BGR2RGB))
+plt.title("template")
+#plt.axis("off")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("dst")
+#plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("baidu.jpg", cv2.IMREAD_COLOR)
+
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("src")
+#plt.axis("off")
+
 template = cv2.imread("mountain_mark.jpg", cv2.IMREAD_COLOR)
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(template, cv2.COLOR_BGR2RGB))
+plt.title("template")
+#plt.axis("off")
+
 h, w = template.shape[:2]  # 獲得模板影像的高與寬
 
 # 使用 cv2.TM_CCOEFF_NORMED 執行模板匹配
@@ -996,11 +1043,14 @@ result = cv2.matchTemplate(src, template, cv2.TM_CCOEFF_NORMED)
 for row in range(len(result)):  # 找尋row
     for col in range(len(result[row])):  # 找尋column
         if result[row][col] > 0.95:  # 值大於0.95就算找到了
-            dst = cv2.rectangle(src, (col, row), (col + w, row + h), (0, 0, 255), 3)
-cv2.imshow("Dst", dst)
+            dst = cv2.rectangle(src, (col, row), (col + w, row + h), RED, 3)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("dst")
+#plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1008,8 +1058,11 @@ print("------------------------------------------------------------")  # 60個
 start_x = 450  # 目前位置 x
 start_y = 180  # 目前位置 y
 src = cv2.imread("airport.jpg", cv2.IMREAD_COLOR)
+
 template = cv2.imread("airport_mark.jpg", cv2.IMREAD_COLOR)
-dst = cv2.circle(src, (start_x, start_y), 10, (255, 0, 0), -1)
+
+dst = cv2.circle(src, (start_x, start_y), 10, BLUE, -1) # 實心圓
+
 h, w = template.shape[:2]  # 獲得模板影像的高與寬
 # 使用cv2.TM_CCOEFF_NORMED執行模板匹配
 ul_x = []  # 最佳匹配左上角串列 x
@@ -1018,24 +1071,27 @@ result = cv2.matchTemplate(src, template, cv2.TM_CCOEFF_NORMED)
 for row in range(len(result)):  # 找尋row
     for col in range(len(result[row])):  # 找尋column
         if result[row][col] > 0.9:  # 值大於0.9就算找到了
-            dst = cv2.rectangle(src, (col, row), (col + w, row + h), (255, 0, 0), 2)
+            dst = cv2.rectangle(src, (col, row), (col + w, row + h), RED, 2)#空心長方形
             ul_x.append(col)  # 加入最佳匹配串列 x
             ul_y.append(row)  # 加入最佳匹配串列 y
+
 # 計算目前位置到台北機場的距離
 sub_x = start_x - ul_x[0]  # 計算 x 座標差距
 sub_y = start_y - ul_y[0]  # 計算 y 座標差距
 start_taipei = math.hypot(sub_x, sub_y)  # 計算距離
 print(f"目前位置到台北機場的距離 = {start_taipei:8.2f}")
+
 # 計算目前位置到桃園機場的距離
 sub_x = start_x - ul_x[1]  # 計算 x 座標差距
 sub_y = start_y - ul_y[1]  # 計算 y 座標差距
 start_taoyuan = math.hypot(sub_x, sub_y)  # 計算距離
 print(f"目前位置到桃園機場的距離 = {start_taoyuan:8.2f}")
+
 # 計算最短距離
 if start_taipei > start_taoyuan:  # 距離比較
-    cv2.line(src, (start_x, start_y), (ul_x[0], ul_y[0]), (255, 0, 0), 2)
+    cv2.line(src, (start_x, start_y), (ul_x[0], ul_y[0]), BLUE, 2)
 else:
-    cv2.line(src, (start_x, start_y), (ul_x[1], ul_y[1]), (255, 0, 0), 2)
+    cv2.line(src, (start_x, start_y), (ul_x[1], ul_y[1]), BLUE, 2)
 cv2.imshow("Dst", dst)
 
 cv2.waitKey()
@@ -1069,317 +1125,22 @@ match = []  # 符合匹配的圖案
 for t in temps:
     myMatch(src, t)  # 調用 myMatch
 for img in match:
-    dst = cv2.rectangle(src, (img[0]), (img[1]), (0, 255, 0), 1)  # 繪外框
+    dst = cv2.rectangle(src, (img[0]), (img[1]), GREEN, 1)  # 繪外框
 cv2.imshow("Dst", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-# OpenCV_22_影像分割使用分水嶺演算法
-print("------------------------------------------------------------")  # 60個
-
-# ch22_1.py
-
-src = cv2.imread("coin1.jpg", cv2.IMREAD_GRAYSCALE)
-cv2.imshow("Src", src)
-
-ret, dst = cv2.threshold(src, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-cv2.imshow("Dst", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch22_2.py
-
-src = cv2.imread("opencv_coin.jpg", cv2.IMREAD_COLOR)
-gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
-
-# 二值化
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-
-# 執行開運算 Opening
-kernel = np.ones((3, 3), np.uint8)
-opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
-
-# 獲得距離轉換函數結果
-dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
-
-# 讀者也可以更改下列 0.7 為其他值, 會影響前景大小
-ret, sure_fg = cv2.threshold(dst, 0.7 * dst.max(), 255, 0)  # 前景圖案
-
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-plt.axis("off")
-
-plt.subplot(132)
-plt.imshow(dst)
-plt.title("距離變換影像")
-plt.axis("off")
-
-plt.subplot(133)
-plt.imshow(sure_fg)
-plt.title("閾值化影像")
-plt.axis("off")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch22_2_1.py
-
-src = cv2.imread("opencv_coin.jpg", cv2.IMREAD_COLOR)
-gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
-
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-kernel = np.ones((3, 3), np.uint8)
-
-# 執行開運算 Opening
-opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
-
-# 獲得距離轉換函數結果
-dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
-
-# 讀者也可以更改下列 0.7 為其他值, 會影響前景大小
-ret, sure_fg = cv2.threshold(dst, 0.5 * dst.max(), 255, 0)  # 前景圖案
-
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-plt.axis("off")
-
-plt.subplot(132)
-plt.imshow(dst)
-plt.title("距離變換影像")
-plt.axis("off")
-
-plt.subplot(133)
-plt.imshow(sure_fg)
-plt.title("閾值化影像")
-plt.axis("off")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch22_3.py
-
-src = cv2.imread("opencv_coin.jpg", cv2.IMREAD_COLOR)
-gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
-
-# 二值化
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-
-# 執行開運算 Opening
-kernel = np.ones((3, 3), np.uint8)
-opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
-
-# 執行膨脹操作
-sure_bg = cv2.dilate(opening, kernel, iterations=3)
-
-# 獲得距離轉換函數結果
-dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
-
-# 讀者也可以更改下列 0.7 為其他值, 會影響前景大小
-ret, sure_fg = cv2.threshold(dst, 0.7 * dst.max(), 255, 0)  # 前景圖案
-
-# 計算未知區域
-# 影像計算 影像相減 cv2.subtract
-sure_fg = np.uint8(sure_fg)
-unknown = cv2.subtract(sure_bg, sure_fg)
-
-plt.subplot(141)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-plt.axis("off")
-
-plt.subplot(142)
-plt.imshow(dst)
-plt.title("距離變換影像")
-plt.axis("off")
-
-plt.subplot(143)
-plt.imshow(sure_fg)
-plt.title("閾值化影像")
-plt.axis("off")
-
-plt.subplot(144)
-plt.imshow(unknown)
-plt.title("未知區域")
-plt.axis("off")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch22_4.py
-
-src = cv2.imread("opencv_coin.jpg", cv2.IMREAD_COLOR)
-gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
-
-# 二值化
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-
-# 執行開運算 Opening
-kernel = np.ones((3, 3), np.uint8)
-opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
-
-# 執行膨脹操作
-sure_bg = cv2.dilate(opening, kernel, iterations=3)
-
-# 獲得距離轉換函數結果
-dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
-
-# 讀者也可以更改下列 0.7 為其他值, 會影響前景大小
-ret, sure_fg = cv2.threshold(dst, 0.7 * dst.max(), 255, 0)  # 前景圖案
-
-# 計算未知區域
-# 影像計算 影像相減 cv2.subtract
-sure_fg = np.uint8(sure_fg)
-unknown = cv2.subtract(sure_bg, sure_fg)
-
-# 標記
-ret, markers = cv2.connectedComponents(sure_fg)
-
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-plt.axis("off")
-
-plt.subplot(132)
-plt.imshow(unknown)
-plt.title("未知區域")
-plt.axis("off")
-
-plt.subplot(133)
-plt.imshow(markers)
-plt.title("標記區")
-plt.axis("off")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch22_5.py
-
-src = cv2.imread("opencv_coin.jpg", cv2.IMREAD_COLOR)
-gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
-
-rgb_src = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)
-
-# 二值化
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-
-# 執行開運算 Opening
-kernel = np.ones((3, 3), np.uint8)
-opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
-
-# 執行膨脹操作
-sure_bg = cv2.dilate(opening, kernel, iterations=3)
-
-# 獲得距離轉換函數結果
-dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
-
-# 讀者也可以更改下列 0.7 為其他值, 會影響前景大小
-ret, sure_fg = cv2.threshold(dst, 0.7 * dst.max(), 255, 0)  # 前景圖案
-
-# 計算未知區域
-# 影像計算 影像相減 cv2.subtract
-sure_fg = np.uint8(sure_fg)
-unknown = cv2.subtract(sure_bg, sure_fg)
-
-# 標記
-ret, markers = cv2.connectedComponents(sure_fg)
-
-# 先複製再標記修訂
-sure_fg_copy = sure_fg.copy()
-ret, markers_new = cv2.connectedComponents(sure_fg_copy)
-markers_new += 1  # 標記修訂
-markers_new[unknown == 255] = 0
-
-plt.subplot(131)
-plt.title("未知區域")
-plt.imshow(unknown)
-plt.axis("off")
-
-plt.subplot(132)
-plt.title("標記區")
-plt.imshow(markers, cmap="jet")
-plt.axis("off")
-
-plt.subplot(133)
-plt.title("標記修訂區")
-plt.imshow(markers_new, cmap="jet")
-plt.axis("off")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch22_6.py
-
-src = cv2.imread("opencv_coin.jpg", cv2.IMREAD_COLOR)
-gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
-
-rgb_src = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)
-
-# 二值化
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-
-# 執行開運算 Opening
-kernel = np.ones((3, 3), np.uint8)
-opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
-
-# 執行膨脹操作
-sure_bg = cv2.dilate(opening, kernel, iterations=3)
-
-# 獲得距離轉換函數結果
-dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
-
-# 讀者也可以更改下列 0.7 為其他值, 會影響前景大小
-ret, sure_fg = cv2.threshold(dst, 0.7 * dst.max(), 255, 0)  # 前景圖案
-
-# 計算未知區域
-# 影像計算 影像相減 cv2.subtract
-sure_fg = np.uint8(sure_fg)
-unknown = cv2.subtract(sure_bg, sure_fg)
-
-# 標記
-ret, markers = cv2.connectedComponents(sure_fg)
-markers = markers + 1
-markers[unknown == 255] = 0
-
-# 正式執行分水嶺函數
-dst = rgb_src.copy()
-markers = cv2.watershed(dst, markers)
-dst[markers == -1] = [255, 0, 0]  # 使用紅色
-
-plt.subplot(121)
-plt.title("原圖")
-plt.imshow(rgb_src)
-plt.axis("off")
-
-plt.subplot(122)
-plt.title("分割結果")
-plt.imshow(dst)
-plt.axis("off")
-
-show()
 
 print("------------------------------------------------------------")  # 60個
 # OpenCV_23_影像擷取
 print("------------------------------------------------------------")  # 60個
 
-# ch23_1.py
+src = cv2.imread(filename2)  # 讀取影像
 
-src = cv2.imread("hung.jpg")  # 讀取影像
 mask = np.zeros(src.shape[:2], np.uint8)  # 建立遮罩, 大小和src相同
 bgdModel = np.zeros((1, 65), np.float64)  # 建立內部用暫時計算陣列
 fgdModel = np.zeros((1, 65), np.float64)  # 建立內部用暫時計算陣列
-rect = (10, 30, 380, 360)  # 建立ROI區域
+rect = (150, 50, 200, 480)  # 建立ROI區域
 # 呼叫grabCut()進行分割, 迭代 3 次, 回傳mask1
 
 # 其實mask1 = mask, 因為mask也會同步更新
@@ -1395,6 +1156,8 @@ plt.subplot(121)
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 plt.axis("off")
+
+dst = cv2.rectangle(dst, rect, RED, 2)
 
 plt.subplot(122)
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
@@ -1414,6 +1177,7 @@ fgdModel = np.zeros((1, 65), np.float64)  # 建立內部用暫時計算陣列
 rect = (10, 30, 380, 360)  # 建立ROI區域
 # 呼叫grabCut()進行分割
 cv2.grabCut(src, mask, rect, bgdModel, fgdModel, 3, cv2.GC_INIT_WITH_RECT)
+
 maskpict = cv2.imread("hung_mask.jpg")  # 讀取影像
 newmask = cv2.imread("hung_mask.jpg", cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 mask[newmask == 0] = 0  # 白色內容則確定是前景
@@ -1440,38 +1204,7 @@ plt.axis("off")
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch23_3.py
-
-src = cv2.imread("lena.jpg")  # 讀取影像
-mask = np.zeros(src.shape[:2], np.uint8)  # 建立遮罩, 大小和src相同
-bgdModel = np.zeros((1, 65), np.float64)  # 建立內部用暫時計算陣列
-fgdModel = np.zeros((1, 65), np.float64)  # 建立內部用暫時計算陣列
-rect = (30, 30, 280, 280)  # 建立ROI區域
-# 呼叫grabCut()進行分割, 迭代 3 次, 回傳mask1
-# 其實mask1 = mask, 因為mask也會同步更新
-mask1, bgd, fgd = cv2.grabCut(
-    src, mask, rect, bgdModel, fgdModel, 3, cv2.GC_INIT_WITH_RECT
-)
-# 將 0, 2設為0 --- 1, 3設為1
-mask2 = np.where((mask1 == 0) | (mask1 == 2), 0, 1).astype("uint8")
-dst = src * mask2[:, :, np.newaxis]  # 計算輸出影像
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-plt.axis("off")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.title("擷取影像")
-plt.axis("off")
-
-show()
-
 print("------------------------------------------------------------")  # 60個
-
-# ch23_4.py
 
 src = cv2.imread("lena.jpg")  # 讀取影像
 bgdModel = np.zeros((1, 65), np.float64)  # 建立內部用暫時計算陣列
@@ -1564,80 +1297,17 @@ plt.axis("off")
 show()
 
 print("------------------------------------------------------------")  # 60個
-# OpenCV_25_辨識手寫數字
 print("------------------------------------------------------------")  # 60個
 
-# ch25_1.py
-
-data1 = np.random.randint(0, 10, size=5)
-print(f"陣列外形 = {data1.shape}")
-print(f"輸出陣列 = {data1}")
-print(f"data1[0] = {data1[0]}")
-
-data2 = np.random.randint(0, 10, size=(5, 1))
-print(f"矩陣外形 = {data2.shape}")
-print(f"輸出矩陣 = \n{data2}")
-print(f"data2[0] = {data2[0]}")
-print(f"data2[0,0] = {data2[0,0]}")
+#print(f"輸出二維陣列 = \n{data}")
+#print(f"轉成一維陣列 = \n{data.ravel()}")
 
 print("------------------------------------------------------------")  # 60個
-
-# ch25_2.py
-
-np.random.seed(5)
-
-data1 = np.random.randint(0, 10, size=5)
-print(f"陣列外形 = {data1.shape}")
-print(f"輸出陣列 = {data1}")
-print(f"data1[0] = {data1[0]}")
-
-data2 = np.random.randint(0, 10, size=(5, 1))
-print(f"矩陣外形 = {data2.shape}")
-print(f"輸出矩陣 = \n{data2}")
-print(f"data2[0] = {data2[0]}")
-print(f"data2[0,0] = {data2[0,0]}")
-
 print("------------------------------------------------------------")  # 60個
-
-# ch25_3.py
-
-data = np.random.randint(0, 10, size=(5, 1))
-print(f"輸出二維陣列 = \n{data}")
-print(f"轉成一維陣列 = \n{data.ravel()}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch25_4.py
-
-np.random.seed(1)
-trains = np.random.randint(0, 10, size=(5, 2))
-print(f"列出二維陣列 \n{trains}")
-
-np.random.seed(5)
-
-# 建立分類, 未來 0 代表 red,  1 代表 blue
-labels = np.random.randint(0, 2, (5, 1))
-print(f"列出顏色分類陣列 \n{labels}")
-
-# 列出 0 代表的紅色
-red = trains[labels.ravel() == 0]
-print(f"輸出紅色的二維陣列 \n{red}")
-print(f"配對取出 \n{red[:,0], red[:,1]}")
-
-# 列出 1 代表的藍色
-blue = trains[labels.ravel() == 1]
-print(f"輸出藍色的二維陣列 \n{blue}")
-print(f"配對取出 \n{blue[:,0], blue[:,1]}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch25_5.py
 
 num = 30  # 數據數量
-np.random.seed(5)
-trains = np.random.randint(0, 100, size=(num, 2))
 
-np.random.seed(1)
+trains = np.random.randint(0, 100, size=(num, 2))
 
 # 建立分類, 未來 0 代表 red,  1 代表 blue
 labels = np.random.randint(0, 2, (num, 1))
@@ -1652,716 +1322,8 @@ plt.scatter(blue[:, 0], blue[:, 1], 50, "b", "^")  # 50是繪圖點大小
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-# ch25_6.py
-
-num = 30  # 數據數量
-np.random.seed(5)
-
-# 建立訓練數據 train, 需轉為 32位元浮點數
-trains = np.random.randint(0, 100, size=(num, 2)).astype(np.float32)
-np.random.seed(1)
-
-# 建立分類, 未來 0 代表 red,  1 代表 blue
-labels = np.random.randint(0, 2, (num, 1)).astype(np.float32)
-
-# 列出紅色方塊訓練數據
-red = trains[labels.ravel() == 0]
-plt.scatter(red[:, 0], red[:, 1], 50, "r", "s")  # 50是繪圖點大小
-
-# 列出藍色三角形訓練數據
-blue = trains[labels.ravel() == 1]
-plt.scatter(blue[:, 0], blue[:, 1], 50, "b", "^")  # 50是繪圖點大小
-
-# test 為測試數據, 需轉為 32位元浮點數
-np.random.seed(10)
-test = np.random.randint(0, 100, (1, 2)).astype(np.float32)
-plt.scatter(test[:, 0], test[:, 1], 50, "g", "o")  # 50大小的綠色圓
-
-# 建立 KNN 物件
-knn = cv2.ml.KNearest_create()
-knn.train(trains, cv2.ml.ROW_SAMPLE, labels)  # 訓練數據
-
-# 執行 KNN 分類
-ret, results, neighbours, dist = knn.findNearest(test, k=3)
-print(f"最後分類              result = {results}")
-print(f"最近鄰3個點的分類 neighbours = {neighbours}")
-print(f"與最近鄰的距離      distance = {dist}")
-show()
-
 print("------------------------------------------------------------")  # 60個
 
-# ch25_7.py
-
-num = 30  # 數據數量
-
-np.random.seed(5)
-
-# 建立 0 - 50 間的訓練數據 train0, 需轉為 32位元浮點數
-train0 = np.random.randint(0, 50, (num // 2, 2)).astype(np.float32)
-
-# 建立 50 - 100 間的訓練數據 train1, 需轉為 32位元浮點數
-train1 = np.random.randint(50, 100, (num // 2, 2)).astype(np.float32)
-trains = np.vstack((train0, train1))  # 合併訓練數據
-
-# 建立分類, 未來 0 代表 red,  1 代表 blue
-label0 = np.zeros((num // 2, 1)).astype(np.float32)
-label1 = np.ones((num // 2, 1)).astype(np.float32)
-labels = np.vstack((label0, label1))
-
-# 列出紅色方塊訓練數據
-red = trains[labels.ravel() == 0]
-plt.scatter(red[:, 0], red[:, 1], 50, "r", "s")  # 50是繪圖點大小
-
-# 列出藍色三角形訓練數據
-blue = trains[labels.ravel() == 1]
-plt.scatter(blue[:, 0], blue[:, 1], 50, "b", "^")  # 50是繪圖點大小
-
-# test 為測試數據, 需轉為 32位元浮點數
-np.random.seed(8)
-test = np.random.randint(0, 100, (1, 2)).astype(np.float32)
-plt.scatter(test[:, 0], test[:, 1], 50, "g", "o")  # 50大小的綠色圓
-
-# 建立 KNN 物件
-knn = cv2.ml.KNearest_create()
-knn.train(trains, cv2.ml.ROW_SAMPLE, labels)  # 訓練數據
-# 執行 KNN 分類
-ret, results, neighbours, dist = knn.findNearest(test, k=3)
-print(f"最後分類              result = {results}")
-print(f"最近鄰3個點的分類 neighbours = {neighbours}")
-print(f"與最近鄰的距離      distance = {dist}")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch25_8.py
-
-data = np.arange(16).reshape(4, 4)
-print(f"data = \n {data}")
-print(f"split = \n{np.vsplit(data,2)}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch25_9.py
-
-data = np.arange(8).reshape(2, 2, 2)
-print(f"data = \n {data}")
-print(f"split = \n{np.vsplit(data,2)}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch25_10.py
-# np.vsplit() 垂直方向分割數據
-
-data = np.arange(16).reshape(2, 2, 2, 2)
-print(f"data = \n {data}")
-print(f"data = \n {np.vsplit(data,2)}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch25_11.py
-# np.hsplit() 水平方向分割數據
-
-data = np.arange(16).reshape(4, 4)
-print(f"data = \n {data}")
-print(f"split = \n{np.hsplit(data,2)}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch25_11_1.py
-# np.repeat() 元素重複
-
-data = np.arange(3)
-print(f"data = \n {data}")
-x = np.repeat(data, 3)
-print(f"After repeat = \n{x}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch25_11_2.py
-
-data = np.array([[1, 2], [3, 4]])
-print(f"data = \n {data}")
-x1 = np.repeat(data, 3, axis=1)
-print(f"After axis=1 repeat  = \n{x1}")
-x2 = np.repeat(data, 3, axis=0)
-print(f"After axis=0 repeat = \n{x2}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch25_11_3.py
-
-data = np.arange(3)
-print(f"data = \n {data}")
-x = np.repeat(data, 3)[:, np.newaxis]
-print(f"After repeat = \n{x}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch25_12.py
-
-"""
-digits.png
-手寫數字0~9, 每個數字重複寫500次, 共5000個手寫數字
-"""
-img = cv2.imread("digits.png")
-cv2.imshow("digits", img)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-# 將digits拆成 5000 張, 20 x 20 的數字影像
-cells = [np.hsplit(row, 100) for row in np.vsplit(gray, 50)]
-# 將 cells 轉成 50 x 100 x 20 x 20 的陣列
-x = np.array(cells)
-# 將數據轉為訓練數據 size=(2500,400)和測試數據 size=(2500,400)
-train = x[:, :50].reshape(-1, 400).astype(np.float32)
-test = x[:, 50:100].reshape(-1, 400).astype(np.float32)
-# 建立訓練數據和測試數據的分類 labels
-k = np.arange(10)
-train_labels = np.repeat(k, 250)[:, np.newaxis]
-test_labels = train_labels.copy()
-# 最初化KNN或稱建立KNN物件，訓練數據、使用 k=5 測試KNN演算法
-knn = cv2.ml.KNearest_create()
-knn.train(train, cv2.ml.ROW_SAMPLE, train_labels)
-ret, result, neighbours, dist = knn.findNearest(test, k=5)
-# 統計辨識結果
-matches = result == test_labels  # 執行匹配
-correct = np.count_nonzero(matches)  # 正確次數
-accuracy = correct * 100.0 / result.size  # 精確度
-print(f"測試數據辨識成功率 = {accuracy}")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch25_13.py
-
-img = cv2.imread("digits.png")
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-# 將digits拆成 5000 張, 20 x 20 的數字影像
-cells = [np.hsplit(row, 100) for row in np.vsplit(gray, 50)]
-# 將 cells 轉成 50 x 100 x 20 x 20 的陣列
-x = np.array(cells)
-# 將數據轉為訓練數據 size=(2500,400)和測試數據 size=(2500,400)
-train = x[:, :50].reshape(-1, 400).astype(np.float32)
-test = x[:, 50:100].reshape(-1, 400).astype(np.float32)
-# 建立訓練數據和測試數據的分類 labels
-k = np.arange(10)
-train_labels = np.repeat(k, 250)[:, np.newaxis]
-test_labels = train_labels.copy()
-# 最初化KNN或稱建立KNN物件，訓練數據、使用 k=5 測試KNN演算法
-knn = cv2.ml.KNearest_create()
-knn.train(train, cv2.ml.ROW_SAMPLE, train_labels)
-ret, result, neighbours, dist = knn.findNearest(test, k=5)
-# 統計辨識結果
-matches = result == test_labels  # 執行匹配
-correct = np.count_nonzero(matches)  # 正確次數
-accuracy = correct * 100.0 / result.size  # 精確度
-print(f"測試數據辨識成功率 = {accuracy}")
-
-# 儲存模型
-np.savez("tmp_knn_digit.npz", train=train, train_labels=train_labels)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch25_14.py
-
-# 讀取模型
-# 下載數據
-with np.load("tmp_knn_digit.npz") as data:
-    train = data["train"]
-    train_labels = data["train_labels"]
-
-# 讀取數字影像
-test_img = cv2.imread("8.png", cv2.IMREAD_GRAYSCALE)
-cv2.imshow("img", test_img)
-img = cv2.resize(test_img, (20, 20)).reshape((1, 400))
-test_data = img.astype(np.float32)  # 將資料轉成foat32
-
-# 最初化KNN或稱建立KNN物件，訓練數據、使用 k=5 測試KNN演算法
-knn = cv2.ml.KNearest_create()
-knn.train(train, cv2.ml.ROW_SAMPLE, train_labels)
-ret, result, neighbours, dist = knn.findNearest(test_data, k=5)
-print(f"識別的數字是 = {int(result[0,0])}")
-
-print("------------------------------------------------------------")  # 60個
-# OpenCV_27_物件偵測
-print("------------------------------------------------------------")  # 60個
-
-"""
-Haar-like features 哈爾特徵
-匈牙利 Afred Haar
-"""
-# 偵測正面人臉 haarcascade_frontalface_default.xml
-
-pic_filename = "C:/_git/vcs/_4.python/opencv/data/_face/face06.jpg"
-
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-img = cv2.imread(pic_filename)  # 讀取影像
-faces = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
-)
-
-print("Found " + str(len(faces)) + " faces")
-
-# 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in faces:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
-cv2.imshow("Face", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# 偵測上半身 haarcascade_upperbody.xml
-
-xml_filename = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_upperbody.xml"
-)
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-# pic_filename = "C:/_git/vcs/_4.python/opencv/data/_face/face06.jpg"
-# pic_filename = "C:/_git/vcs/_4.python/opencv/data/_face/face02.jpg"
-
-img = cv2.imread("people1.jpg")  # 讀取影像
-bodies = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=9, minSize=(20, 20)
-)
-
-# 標註身體
-for x, y, w, h in bodies:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住身體
-
-cv2.imshow("Face", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# 偵測正面人臉 haarcascade_frontalface_default.xml
-
-img = cv2.imread(filename3)  # 讀取影像
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-# 建立人臉物件
-xml_filename1 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
-face_cascade_classifier1 = cv2.CascadeClassifier(xml_filename1)  # 建立辨識檔案物件
-
-# 建立雙眼物件
-xml_filename2 = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_eye.xml"
-)
-face_cascade_classifier2 = cv2.CascadeClassifier(xml_filename2)  # 建立辨識檔案物件
-
-# 建立左眼物件
-xml_filename3 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_lefteye_2splits.xml"
-face_cascade_classifier3 = cv2.CascadeClassifier(xml_filename3)  # 建立辨識檔案物件
-
-# 建立右眼物件
-xml_filename4 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_righteye_2splits.xml"
-face_cascade_classifier4 = cv2.CascadeClassifier(xml_filename4)  # 建立辨識檔案物件
-
-# 偵測人臉
-faces = face_cascade_classifier1.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
-)
-
-# 偵測雙眼
-eyes = face_cascade_classifier2.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=7, minSize=(20, 20)
-)
-
-# 偵測左眼
-left_eyes = face_cascade_classifier3.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=7, minSize=(20, 20)
-)
-
-# 偵測右眼
-right_eyes = face_cascade_classifier4.detectMultiScale(
-    img, scaleFactor=1.3, minNeighbors=7, minSize=(20, 20)
-)
-
-# 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in faces:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
-
-# 將雙眼框起來, 由於有可能找到好幾個眼睛所以用迴圈繪出來
-for x, y, w, h in eyes:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 綠色框住眼睛
-
-# 將左眼框起來, 由於有可能找到好幾個眼睛所以用迴圈繪出來
-for x, y, w, h in left_eyes:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 綠色框住眼睛
-
-# 將右眼框起來, 由於有可能找到好幾個眼睛所以用迴圈繪出來
-for x, y, w, h in right_eyes:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 綠色框住眼睛
-
-cv2.imshow("Face", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# 正面的貓臉 haarcascade_frontalcatface.xml
-
-xml_filename = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalcatface.xml"
-)
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-img = cv2.imread("cat2.jpg")  # 讀取影像
-faces = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=9, minSize=(20, 20)
-)
-
-# 將貓臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in faces:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住貓臉
-
-cv2.imshow("Face", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# 偵測車牌, 適用於俄羅斯車牌 haarcascade_russian_plate_number.xml
-
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_russian_plate_number.xml"
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-img = cv2.imread("car1.jpg")  # 讀取影像
-plates = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
-)
-
-# 將車牌框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in plates:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住車牌
-
-cv2.imshow("Car Plate", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch27_19.py
-# 偵測車牌, 適用於俄羅斯車牌 haarcascade_russian_plate_number.xml
-
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_russian_plate_number.xml"
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-img = cv2.imread("car2.jpg")  # 讀取影像
-plates = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
-)
-
-# 將車牌框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in plates:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住車牌
-
-cv2.imshow("Car Plate", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch27_2.py
-# 偵測正面人臉 haarcascade_frontalface_default.xml
-
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-img = cv2.imread("g5.jpg")  # 讀取影像
-faces = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
-)
-
-print("Finding " + str(len(faces)) + " face")
-
-# 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in faces:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
-cv2.imshow("Face", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch27_3.py
-# 偵測正面人臉 haarcascade_frontalface_default.xml
-
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-img = cv2.imread("solvay1927.jpg")  # 讀取影像
-faces = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
-)
-
-print("Finding " + str(len(faces)) + " face")
-
-# 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in faces:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
-cv2.imshow("Face", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch27_3_1.py
-# 偵測正面人臉 haarcascade_frontalface_default.xml
-
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-img = cv2.imread("solvay1927.jpg")  # 讀取影像
-faces = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=5, minSize=(20, 20)
-)
-
-print("Finding " + str(len(faces)) + " face")
-
-# 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in faces:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
-cv2.imshow("Face", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch27_4.py
-
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_alt.xml"
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-img = cv2.imread("solvay1927.jpg")  # 讀取影像
-faces = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
-)
-
-print("Finding " + str(len(faces)) + " face")
-
-# 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in faces:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
-
-cv2.imshow("Face", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch27_4_1.py
-
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_alt.xml"
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-img = cv2.imread("solvay1927.jpg")  # 讀取影像
-faces = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20), maxSize=(50, 50)
-)
-
-print("Finding " + str(len(faces)) + " face")
-
-# 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in faces:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
-
-cv2.imshow("Face", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch27_5.py
-
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_alt2.xml"
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-img = cv2.imread("solvay1927.jpg")  # 讀取影像
-faces = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20), maxSize=(50, 50)
-)
-
-print("Finding " + str(len(faces)) + " face")
-
-# 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in faces:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
-cv2.imshow("Face", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch27_6.py
-
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_alt_tree.xml"
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-img = cv2.imread("solvay1927.jpg")  # 讀取影像
-faces = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
-)
-
-print("Finding " + str(len(faces)) + " face")
-
-# 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in faces:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
-
-cv2.imshow("Face", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch27_6_1.py
-
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_alt.xml"
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-img = cv2.imread("s_1927.jpg")  # 讀取影像
-faces = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.02, minNeighbors=3, minSize=(20, 20)
-)
-
-print("Finding " + str(len(faces)) + " face")
-
-# 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in faces:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
-cv2.imshow("Face", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch27_6_2.py
-# 偵測側面的人臉 haarcascade_profileface.xml
-
-xml_filename = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_profileface.xml"
-)
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-img = cv2.imread("s_1927.jpg")  # 讀取影像
-faces = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.3, minNeighbors=4, minSize=(20, 20)
-)
-
-print("Finding " + str(len(faces)) + " face")
-
-# 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
-for x, y, w, h in faces:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
-
-cv2.imshow("Face", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch27_7.py
-# 偵測身形 路人偵測 haarcascade_fullbody.xml
-
-xml_filename = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_fullbody.xml"
-)
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-img = cv2.imread("people1.jpg")  # 讀取影像
-bodies = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
-)
-
-# 標註身體
-for x, y, w, h in bodies:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住身體
-
-cv2.imshow("Body", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch27_8.py
-# 偵測身形 路人偵測 haarcascade_fullbody.xml
-
-xml_filename = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_fullbody.xml"
-)
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-img = cv2.imread("people2.jpg")  # 讀取影像
-bodies = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
-)
-
-# 標註身體
-for x, y, w, h in bodies:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住身體
-
-cv2.imshow("Body", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch27_9.py
-
-xml_filename = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_lowerbody.xml"
-)
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-img = cv2.imread("people1.jpg")  # 讀取影像
-bodies = face_cascade_classifier.detectMultiScale(
-    img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
-)
-
-# 標註身體
-for x, y, w, h in bodies:
-    cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住身體
-
-cv2.imshow("Body", img)  # 顯示影像
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-src = np.zeros([200, 400], np.uint8)  # 建立影像
-src[50:150, 100:300] = 255  # 在影像內建立遮罩
-cv2.imshow("Src", src)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2400,6 +1362,16 @@ print(f"size  = {img.size}")
 print(f"dtype = {img.dtype}")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# np.vsplit(data, 2) 垂直方向分割數據
+# np.hsplit(data, 2) 水平方向分割數據
+# np.repeat(data, N) 元素重複, 每個元素重複N次
+# np.repeat(data, 3, axis=1)
+# np.repeat(data, 3, axis=0)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """
 陣列垂直合併 vstack()
@@ -2410,7 +1382,6 @@ img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
 cv2.imshow("Peony", img)
 
 # 準備搬出
-
 
 # 建立GRAY影像陣列
 image = np.zeros((5, 12), np.uint8)
@@ -2435,25 +1406,17 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
 """
-
 待清除本地檔案
 copyright.jpg
-
-
 """
-
 src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
 src = cv2.imread(filename2)
 src = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
 
 print("------------------------------------------------------------")  # 60個
 
-
-
 # 使用 cv2.TM_SQDIFF 執行模板匹配
 result = cv2.matchTemplate(src, template, cv2.TM_SQDIFF)
 print(f"result大小 = {result.shape}")
 print(f"陣列內容 \n{result}")
-

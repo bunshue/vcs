@@ -29,7 +29,7 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
 
 # == Parameters =======================================================================
@@ -638,7 +638,6 @@ print("------------------------------------------------------------")  # 60個
 
 # --------------讀取及顯示原始圖像--------------------
 image = cv2.imread("data/contours0.bmp")
-print("顯示原圖")
 cv2.imshow("original", image)
 
 # --------------獲取輪廓--------------------
@@ -672,9 +671,8 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 image = cv2.imread("data/cs1.bmp")
-print("顯示原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 HuM1 = cv2.HuMoments(cv2.moments(gray)).flatten()
@@ -699,20 +697,17 @@ print("------------------------------------------------------------")  # 60個
 
 # ----------------計算圖像1的Hu矩-------------------
 image1 = cv2.imread("data/cs1.bmp")
-print("顯示原圖")
 
 gray1 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)
 HuM1 = cv2.HuMoments(cv2.moments(gray1)).flatten()
 # ----------------計算圖像2的Hu矩-------------------
 image2 = cv2.imread("data/cs3.bmp")
-print("顯示原圖")
 
 gray2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
 HuM2 = cv2.HuMoments(cv2.moments(gray2)).flatten()
 # ----------------計算圖像3的Hu矩-------------------
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 image3 = cv2.imread(filename)
-print("顯示原圖")
 
 gray3 = cv2.cvtColor(image3, cv2.COLOR_BGR2GRAY)
 HuM3 = cv2.HuMoments(cv2.moments(gray3)).flatten()
@@ -892,7 +887,6 @@ print("------------------------------------------------------------")  # 60個
 
 # ---------------讀取并顯示原始圖像------------------
 image = cv2.imread("data/cc.bmp")
-print("顯示原圖")
 
 # ---------------提取圖像輪廓------------------
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -915,7 +909,6 @@ print("------------------------------------------------------------")  # 60個
 # ---------------讀取并顯示原始圖像------------------
 image = cv2.imread("data/cc.bmp")
 
-print("顯示原圖")
 cv2.imshow("original", image)
 
 plt.figure("影像處理8", figsize=(16, 12))
@@ -950,7 +943,6 @@ print("------------------------------------------------------------")  # 60個
 # ---------------讀取并顯示原始圖像------------------
 image = cv2.imread("data/cc.bmp")
 
-print("顯示原圖")
 cv2.imshow("original", image)
 
 plt.figure("影像處理9", figsize=(16, 12))
@@ -983,7 +975,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cc.bmp")
-print("顯示原圖")
+
 cv2.imshow("original", image)
 
 plt.figure("影像處理11", figsize=(16, 12))
@@ -1012,13 +1004,11 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cc.bmp")
-print("顯示原圖")
 
 plt.figure("影像處理12", figsize=(16, 12))
 plt.subplot(121)
 plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
@@ -1041,7 +1031,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cc.bmp")
-print("顯示原圖")
 
 cv2.imshow("original", image)
 
@@ -1072,7 +1061,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cc.bmp")
-print("顯示原圖")
 cv2.imshow("original", image)
 
 plt.figure("影像處理14", figsize=(16, 12))
@@ -1105,7 +1093,6 @@ print("------------------------------------------------------------")  # 60個
 
 # ----------------讀取并顯示原始圖像-------------------------------
 image = cv2.imread("data/cc.bmp")
-print("顯示原圖")
 cv2.imshow("original", image)
 
 # ----------------獲取輪廓-------------------------------
@@ -1154,7 +1141,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/contours.bmp")
-print("顯示原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
@@ -1169,7 +1155,6 @@ print("------------------------------------------------------------")  # 60個
 
 # --------------讀取并繪製原始圖像------------------
 o = cv2.imread("data/hand.bmp")
-print("顯示原圖")
 cv2.imshow("original", o)
 # --------------提取輪廓------------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
@@ -1190,7 +1175,6 @@ print("------------------------------------------------------------")  # 60個
 
 # ----------------原圖--------------------------
 img = cv2.imread("data/hand.bmp")
-print("顯示原圖")
 cv2.imshow("original", img)
 # ----------------構造輪廓--------------------------
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -1218,8 +1202,8 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 o = cv2.imread("data/hand.bmp")
-print("顯示原圖")
 cv2.imshow("original", o)
+
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
@@ -1243,8 +1227,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # ----------------原始圖像-------------------------
-o = cv2.imread("data/cs.bmp")
-print("顯示原圖")
+o = cv2.imread("data/cs1.bmp")
 cv2.imshow("original", o)
 # ----------------獲取凸包------------------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
@@ -1281,8 +1264,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # ----------------原始圖像-------------------------
-o = cv2.imread("data/cs.bmp")
-print("顯示原圖")
+o = cv2.imread("data/cs1.bmp")
 cv2.imshow("original", o)
 # ----------------獲取凸包------------------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
@@ -1317,8 +1299,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # -----------原始圖像o1邊緣--------------------
-o1 = cv2.imread("data/cs.bmp")
-print("顯示原圖")
+o1 = cv2.imread("data/cs1.bmp")
 cv2.imshow("original1", o1)
 
 gray1 = cv2.cvtColor(o1, cv2.COLOR_BGR2GRAY)
@@ -1327,7 +1308,6 @@ contours1, hierarchy = cv2.findContours(binary1, cv2.RETR_LIST, cv2.CHAIN_APPROX
 cnt1 = contours1[0]
 # -----------原始圖像o2邊緣--------------------
 o2 = cv2.imread("data/cs3.bmp")
-print("顯示原圖")
 cv2.imshow("original2", o2)
 
 gray2 = cv2.cvtColor(o2, cv2.COLOR_BGR2GRAY)
@@ -1336,7 +1316,6 @@ contours2, hierarchy = cv2.findContours(binary2, cv2.RETR_LIST, cv2.CHAIN_APPROX
 cnt2 = contours2[0]
 # -----------原始圖像o3邊緣--------------------
 o3 = cv2.imread("data/hand.bmp")
-print("顯示原圖")
 cv2.imshow("original3", o3)
 
 gray3 = cv2.cvtColor(o3, cv2.COLOR_BGR2GRAY)
@@ -1360,14 +1339,11 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 # -----------讀取原始圖像--------------------
-o1 = cv2.imread("data/cs.bmp")
-print("顯示原圖")
+o1 = cv2.imread("data/cs1.bmp")
 
 o2 = cv2.imread("data/cs3.bmp")
-print("顯示原圖")
 
 o3 = cv2.imread("data/hand.bmp")
-print("顯示原圖")
 
 cv2.imshow("original1", o1)
 cv2.imshow("original2", o2)
@@ -1404,7 +1380,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 o = cv2.imread("data/cc.bmp")
-print("顯示原圖")
 cv2.imshow("original", o)
 
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
@@ -1423,7 +1398,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 o = cv2.imread("data/cc.bmp")
-print("顯示原圖")
 cv2.imshow("original", o)
 
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
@@ -1445,7 +1419,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 o = cv2.imread("data/hand.bmp")
-print("顯示原圖")
 cv2.imshow("original", o)
 
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
@@ -1466,7 +1439,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 o = cv2.imread("data/cc.bmp")
-print("顯示原圖")
 cv2.imshow("original", o)
 
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
@@ -1485,7 +1457,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 o = cv2.imread("data/cc.bmp")
-print("顯示原圖")
 cv2.imshow("original", o)
 
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
@@ -1529,7 +1500,6 @@ print("------------------------------------------------------------")  # 60個
 
 # -----------------讀取原始圖像----------------------
 o = cv2.imread("data/cc.bmp")
-print("顯示原圖")
 cv2.imshow("original", o)
 # -----------------獲取輪廓------------------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
@@ -1577,7 +1547,6 @@ print("------------------------------------------------------------")  # 60個
 
 # -----------------讀取原始圖像----------------------
 o = cv2.imread("data/cc.bmp")
-print("顯示原圖")
 cv2.imshow("original", o)
 # -----------------獲取輪廓------------------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
@@ -1605,7 +1574,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 o = cv2.imread("data/ct.png")
-print("顯示原圖")
 cv2.imshow("original", o)
 
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
@@ -1638,7 +1606,6 @@ print("------------------------------------------------------------")  # 60個
 
 # --------讀取并顯示原始圖像-----------------
 o = cv2.imread("data/ct.png")
-print("顯示原圖")
 cv2.imshow("original", o)
 # --------獲取輪廓-----------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
@@ -1661,8 +1628,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-o = cv2.imread("data/cs.bmp")
-print("顯示原圖")
+o = cv2.imread("data/cs1.bmp")
 
 # --------獲取并繪製輪廓-----------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)

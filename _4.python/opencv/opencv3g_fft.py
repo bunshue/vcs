@@ -1994,5 +1994,3 @@ plt.plot(y, "r")
 plt.plot(conv1 - 0.5, "g")  # 爲看清楚，將顯示區域下拉0.5
 
 
-# 可刪除檔案
-df = pd.read_csv("data/AirPassengers222.csv")

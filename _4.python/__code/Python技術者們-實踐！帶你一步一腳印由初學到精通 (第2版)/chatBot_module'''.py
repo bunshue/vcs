@@ -1,4 +1,12 @@
-#  1-2-2  機器人的耳朵函式
+#  機器人的耳朵函式
+from bs4 import BeautifulSoup
+from gtts import gTTS
+from hanziconv import HanziConv
+import os
+import re
+import requests
+import tempfile
+from pygame import mixer
 import speech_recognition as sr
 
 
@@ -13,11 +21,8 @@ def bot_listen():
         return "聽不懂"
 
 
-# 1-4-3 機器人的說話函式
+# 機器人的說話函式
 
-from gtts import gTTS
-from pygame import mixer
-import os
 
 mixer.init()  # 初始化 mixer 物件
 mixer.init()  # 初始化
@@ -27,7 +32,6 @@ if not os.path.isfile("tmp.mp3"):  # 不重要的聲音檔產生器
     print("已產生不重要的語音檔 tmp.mp3")
 
 
-# -----------------#
 def bot_speak(text, lang):  # 建立自訂函式
     try:
         mixer.music.load("tmp.mp3")  # 讀取不重要的聲音檔
@@ -41,10 +45,7 @@ def bot_speak(text, lang):  # 建立自訂函式
         print("播放音效失敗")
 
 
-# 	1-6-3  抓取維基百科愛因斯坦網頁內的文章第一段
-
-from bs4 import BeautifulSoup
-import requests
+# 	抓取維基百科愛因斯坦網頁內的文章第一段
 
 
 def bot_get_wiki(keyword):
@@ -56,8 +57,7 @@ def bot_get_wiki(keyword):
             return p.text
 
 
-# 1-7-3 唸出常規表達式處理後的字串
-import re
+# 唸出常規表達式處理後的字串
 
 
 def bot_speak_re(sentence):
@@ -75,8 +75,7 @@ def bot_speak_re(sentence):
             index += 1
 
 
-# 1-8-3 對 Google 搜尋結果進行網路爬蟲
-from hanziconv import HanziConv
+# 對 Google 搜尋結果進行網路爬蟲
 
 
 def bot_get_google(question):

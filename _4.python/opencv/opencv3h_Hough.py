@@ -650,11 +650,11 @@ img_gray = cv2.cvtColor(img, cv2.COLOR_RGBA2GRAY)
 
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 canny_image = cv2.Canny(img, 200, 200)
- 
+
 # 尋找霍夫直線
-lines = cv2.HoughLines(canny_image, 1, np.pi/180, 180)
+lines = cv2.HoughLines(canny_image, 1, np.pi / 180, 180)
 print("共找到 :", len(lines), "條直線")
- 
+
 # 绘画霍夫直线
 if lines is not None:
     for n, line in enumerate(lines):
@@ -667,16 +667,16 @@ if lines is not None:
         # 得到目标直线上的点
         x0 = a * rho
         y0 = b * rho
- 
+
         # 延长直线的长度，保证在整幅图像上绘制直线
         x1 = int(x0 + 2000 * (-b))
         y1 = int(y0 + 2000 * (a))
         x2 = int(x0 - 2000 * (-b))
         y2 = int(y0 - 2000 * (a))
- 
+
         # 连接两点画直线
         cv2.line(img, (x1, y1), (x2, y2), WHITE, 1)
- 
+
 plt.subplot(312)
 plt.title("Canny")
 plt.imshow(cv2.cvtColor(canny_image, cv2.COLOR_BGR2RGB))
@@ -689,8 +689,8 @@ plt.axis("off")
 
 show()
 
-cv2.imshow('result', img)
-cv2.imshow('canny', canny_image)
+cv2.imshow("result", img)
+cv2.imshow("canny", canny_image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -702,11 +702,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -722,5 +719,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
