@@ -1,3 +1,9 @@
+import re
+import csv
+import json
+import requests
+from bs4 import BeautifulSoup
+
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -31,7 +37,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # get.py
-import requests
 
 url = "http://www.ehappy.tw/demo.htm"
 html = requests.get(url)
@@ -42,7 +47,6 @@ if html.status_code == requests.codes.ok:
 print("------------------------------------------------------------")  # 60個
 
 # get_headers.py
-import requests
 
 url = "https://irs.thsrc.com.tw/IMINT/"
 # 自訂表頭
@@ -56,7 +60,6 @@ print(html)
 print("------------------------------------------------------------")  # 60個
 
 # get_cookie.py
-import requests
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 # 設定cookies的值
@@ -67,8 +70,6 @@ print(r.text)
 print("------------------------------------------------------------")  # 60個
 
 # bs1.py
-import requests
-from bs4 import BeautifulSoup
 
 url = "http://ehappy.tw/bsdemo1.htm"
 html = requests.get(url)
@@ -83,7 +84,6 @@ print(sp.p)
 print("------------------------------------------------------------")  # 60個
 
 # bs2.py
-from bs4 import BeautifulSoup
 
 html = """
 <html>
@@ -100,12 +100,10 @@ print(sp.find_all("p"))
 print(sp.find("p", {"id": "p2", "class": "red"}))
 print(sp.find("p", id="p2", class_="red"))
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 # bs3.py
-from bs4 import BeautifulSoup
 
 html = """
 <html>
@@ -122,12 +120,10 @@ print(sp.select("p"))
 print(sp.select("#p1"))
 print(sp.select(".red"))
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 # bs4.py
-from bs4 import BeautifulSoup
 
 html = """
 <html>
@@ -144,13 +140,10 @@ print(sp.select("a")[0].get("href"))
 print(sp.select("img")[0]["src"])
 print(sp.select("a")[0]["href"])
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 # taiwanlottery.py
-import requests
-from bs4 import BeautifulSoup
 
 url = "https://www.taiwanlottery.com.tw/"
 r = requests.get(url)
@@ -177,7 +170,6 @@ print("\n第二區：", num)
 print("------------------------------------------------------------")  # 60個
 
 # re_match.py
-import re
 
 m = re.match(r"[a-z]+", "abc123xyz")
 print(m)
@@ -190,7 +182,6 @@ if m != None:
 print("------------------------------------------------------------")  # 60個
 
 # re_search.py
-import re
 
 m = re.search(r"[a-z]+", "abc123xyz")
 print(m)  # <re.Match object; span=(0, 3), match='abc'>
@@ -203,7 +194,6 @@ if m != None:
 print("------------------------------------------------------------")  # 60個
 
 # re_findall.py
-import re
 
 m = re.findall(r"[a-z]+", "abc123xyz")
 print(m)  # ['abc', 'xyz']
@@ -211,7 +201,6 @@ print(m)  # ['abc', 'xyz']
 print("------------------------------------------------------------")  # 60個
 
 # re_sub.py
-import re
 
 result = re.sub(r"\d+", "*", "Password:1234,ID:5678")
 print(result)  # Password:*,ID:*
@@ -230,8 +219,6 @@ html = """
     電話：(04)-76543210、0937-123456
 </div>
 """
-
-import re
 
 emails = re.findall(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+", html)
 for email in emails:  # 顯示 email
@@ -275,7 +262,7 @@ driver.find_element_by_id("DepartueSearchTime").click()
 driver.find_element_by_id("DepartueSearchTime").send_keys(dt)
 driver.find_element_by_id("SearchButton").click()  # 按查詢鈕
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # twhrtimetable.py
@@ -308,10 +295,9 @@ driver.find_element_by_xpath(
 driver.find_element_by_id("start-search").click()  # 按查詢鈕
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # iplookup.py
-
-import requests
 
 # 設定查詢目前IP的api網址
 url = "https://api.ipify.org"
@@ -319,6 +305,7 @@ r = requests.get(url)
 
 print("我目前的IP是：", r.text)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # loginFacebook.py
@@ -362,6 +349,7 @@ print("0937-123456 是台灣手機號碼：", isTaiwanPhone("0937-123456"))
 print("02-12345678 是台灣手機號碼：", isTaiwanPhone("02-12345678"))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # timetable.py
 
@@ -401,9 +389,6 @@ driver.find_element_by_id("SearchButton").click()  # 按登入鈕
 # driver.find_element_by_id("DepartueSearchTime").click()
 # driver.find_element_by_id("SearchButton").click()
 
-# import requests
-# import json
-#
 # url = 'http://www.thsrc.com.tw/tw/TimeTable/Search'
 #
 # headers = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)                         Chrome/73.0.3683.86 Safari/537.36'
@@ -431,11 +416,9 @@ driver.find_element_by_id("SearchButton").click()  # 按登入鈕
 # jsdata
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # lineimage.py
-import requests
-import json
-from bs4 import BeautifulSoup
 
 url = "https://store.line.me/stickershop/product/8991459/zh-Hant"
 url = "https://store.line.me/stickershop/product/10571593/zh-Hant"
@@ -462,10 +445,10 @@ for data in datas:
     print(full_path + ".png")  # 顯示儲存的路徑和檔名
 #    break  # 測試用
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # lineimage_adv.py
-import requests
-import re
-from bs4 import BeautifulSoup
 
 url = "https://store.line.me/stickershop/product/8991459/zh-Hant"
 url = "https://store.line.me/stickershop/product/10571593/zh-Hant"
@@ -490,15 +473,12 @@ for data in datas:
         f.write(imgfile.content)
     print(full_path + ".png")  # 顯示儲存的路徑和檔名
 
-
-import requests
-import json
-from bs4 import BeautifulSoup
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 url = "https://store.line.me/stickershop/product/8991459/zh-Hant"
 
 html = requests.get(url)
-
 
 sp = BeautifulSoup(html.text, "html.parser")
 datas = sp.find_all("li", {"class": "mdCMN09Li FnStickerPreviewItem"})
@@ -519,10 +499,9 @@ for data in datas:
         print(full_path)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # load_url_images.py
-import requests
-from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
 # 第3屆埔里跑 Puli Power 山城派對馬拉松  向善橋(約34K)
@@ -573,9 +552,10 @@ for photo in photos:
 
 print("共下載", n, "張圖片")
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # load_url_images_adv.py
-import requests
-from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
 # 第3屆埔里跑 Puli Power 山城派對馬拉松  向善橋(約34K)
@@ -662,8 +642,8 @@ def convertDate(date):  # 轉捔民國日期為西元:108/01/01->20190101
     return realdate
 
 
-import requests
-import json, csv
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 plt.rcParams["font.sans-serif"] = "mingliu"  # 設定中文字型
 plt.rcParams["axes.unicode_minus"] = False
@@ -707,9 +687,6 @@ def convertDate(date):  # 轉捔民國日期為西元:108/01/01->20190101
     realdate = realyear + str1[4:6] + str1[7:9]  # 組合日期
     return realdate
 
-
-import requests
-import json, csv
 
 plt.rcParams["font.sans-serif"] = "mingliu"  # 設定中文字型
 plt.rcParams["axes.unicode_minus"] = False
@@ -761,8 +738,6 @@ def convertDate(date):  # 轉捔民國日期為西元:106/03/02->20170302
     return realdate
 
 
-import requests
-import json, csv
 from plotly.graph_objs import Scatter, Layout
 from plotly.offline import plot
 
@@ -856,9 +831,8 @@ def twobyte(kindno):
         kindnostr = str(kindno)
     return kindnostr
 
-
-import requests
-from bs4 import BeautifulSoup
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 kindno = 1  # 要下載的分類，預設為第1分類：文學小說
 homeurl = "http://www.books.com.tw/web/books_nbtopm_01/?o=5&v=1"
@@ -938,8 +912,6 @@ def auth_gss_client(path, scopes):  # 建立憑證
     return gspread.authorize(credentials)
 
 
-import requests
-from bs4 import BeautifulSoup
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from time import sleep
@@ -984,12 +956,11 @@ else:
 print("資料儲存完畢!")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # compare1.py
 
 # 1111data.py
-import requests
-from bs4 import BeautifulSoup
 
 df = []
 baseurl = (
@@ -1048,12 +1019,11 @@ df = pd.concat(df, ignore_index=True)
 df.to_excel("tmp_1111data1.xlsx", index=0)  # 存為excel檔
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # compare2.py
 
 # 1111data.py
-import requests
-from bs4 import BeautifulSoup
 
 df = []
 baseurl = (
@@ -1159,11 +1129,10 @@ with open("tmp_file1.txt", "r", encoding="utf-8") as f:
 with open("tmp_file2.txt", "r", encoding="UTF-8") as f:
     print(f.readlines())
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # csv_read.py
-import csv
 
 # 開啟 csv 檔案
 with open("data/school.csv", newline="") as csvfile:
@@ -1174,8 +1143,7 @@ with open("data/school.csv", newline="") as csvfile:
         print(row)
 
 print("------------------------------------------------------------")  # 60個
-
-import csv
+print("------------------------------------------------------------")  # 60個
 
 # 開啟 csv 檔案
 with open("data/school.csv", newline="") as csvfile:
@@ -1185,10 +1153,10 @@ with open("data/school.csv", newline="") as csvfile:
     for row in rows:
         print(row)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # csv_read_dict.py
-import csv
 
 # 開啟 csv 檔案
 with open("data/school.csv", newline="") as csvfile:
@@ -1198,8 +1166,10 @@ with open("data/school.csv", newline="") as csvfile:
     for row in rows:
         print(row["座號"], row["姓名"], row["國文"], row["英文"], row["數學"])
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # csv_write_list1.py
-import csv
 
 with open("tmp_test1.csv", "w", newline="") as f:
     # 建立 csv 檔寫入物件
@@ -1210,8 +1180,10 @@ with open("tmp_test1.csv", "w", newline="") as f:
     writer.writerow([2, "陳靜香", 85, 90, 87])
     writer.writerow([3, "王聰明", 92, 90, 95])
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # csv_write_list2.py
-import csv
 
 # 建立csv二維串列資料
 csvtable = [
@@ -1226,9 +1198,9 @@ with open("tmp_test2.csv", "w", newline="") as csvfile:
     writer.writerows(csvtable)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # csv_write_dict.py
-import csv
 
 with open("tmp_test3.csv", "w", newline="") as csvfile:
     # 定義欄位
@@ -1242,8 +1214,10 @@ with open("tmp_test3.csv", "w", newline="") as csvfile:
     writer.writerow({"座號": 2, "姓名": "陳靜香", "國文": 85, "英文": 90, "數學": 87})
     writer.writerow({"座號": 3, "姓名": "王聰明", "國文": 92, "英文": 90, "數學": 95})
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # jsonload1.py
-import json
 
 class_str = """
 {
@@ -1277,8 +1251,10 @@ print(type(datas))
 for data in datas["一年甲班"]:
     print(data, data["姓名"])
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # jsonload2.py
-import json
 
 with open("data/class_str.json", "r", encoding="utf-8") as f:
     datas = json.load(f)
@@ -1286,11 +1262,10 @@ with open("data/class_str.json", "r", encoding="utf-8") as f:
     for data in datas["一年甲班"]:
         print(data, data["姓名"])
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # jsondump1.py
-import json
 
 with open("data/class_str.json", "r", encoding="utf-8") as f:
     datas = json.load(f)
@@ -1299,9 +1274,9 @@ dumpdata = json.dumps(datas, ensure_ascii=False)
 print(dumpdata, type(dumpdata))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # jsondump2.py
-import json
 
 with open("data/class_str.json", "r", encoding="utf-8") as f:
     datas = json.load(f)
@@ -1309,220 +1284,10 @@ with open("tmp_class_str.json", "w", encoding="utf-8") as f:
     dumpdata = json.dump(datas, f, ensure_ascii=False)
 
 print("------------------------------------------------------------")  # 60個
-'''
-# sqlite_cursor.py
-import sqlite3
-
-conn = sqlite3.connect("school.db")  # 建立資料庫連線
-cursor = conn.cursor()  # 建立 cursor 物件
-# 建立一個資料表
-sqlstr = """CREATE TABLE IF NOT EXISTS scores \
-("id"  INTEGER PRIMARY KEY NOT NULL,
- "name"  TEXT NOT NULL,
- "chinese"  INTEGER NOT NULL,
- "english"  INTEGER NOT NULL,
- "math"  INTEGER NOT NULL
- )
-"""
-cursor.execute(sqlstr)
-
-# 新增記錄
-cursor.execute('insert into scores values(1, "葉大雄", 65, 62, 40)')
-cursor.execute('insert into scores values(2, "陳靜香", 85, 90, 87)')
-cursor.execute('insert into scores values(3, "王聰明", 92, 90, 95)')
-conn.commit()  # 更新
-conn.close()  # 關閉資料庫連線
-
-print("------------------------------------------------------------")  # 60個
-
-
-# sqlite_crud1.py
-import sqlite3
-
-conn = sqlite3.connect("school.db")  # 建立資料庫連線
-# 建立一個資料表
-sqlstr = """CREATE TABLE IF NOT EXISTS scores \
-("id"  INTEGER PRIMARY KEY NOT NULL,
- "name"  TEXT NOT NULL,
- "chinese"  INTEGER NOT NULL,
- "english"  INTEGER NOT NULL,
- "math"  INTEGER NOT NULL
- )
-"""
-conn.execute(sqlstr)
-conn.commit()  # 更新
-conn.close()  # 關閉資料庫連線
-
-# sqlite_crud2.py
-import sqlite3
-
-conn = sqlite3.connect("data/school.db")  # 建立資料庫連線
-# 定義資料串列
-datas = [[1, "葉大雄", 65, 62, 40], [2, "陳靜香", 85, 90, 87], [3, "王聰明", 92, 90, 95]]
-
-# 新增資料
-for data in datas:
-    conn.execute(
-        "INSERT INTO scores (id, name, chinese, english, math) VALUES \
-                 ({}, '{}', {}, {}, {})".format(
-            data[0], data[1], data[2], data[3], data[4]
-        )
-    )
-conn.commit()  # 更新
-conn.close()  # 關閉資料庫連線
-
-print("------------------------------------------------------------")  # 60個
-
-# sqlite_crud3.py
-import sqlite3
-
-conn = sqlite3.connect("school.db")  # 建立資料庫連線
-# 更新資料
-conn.execute("UPDATE scores SET name='{}' WHERE id={}".format("林胖虎", 1))
-conn.commit()  # 更新
-conn.close()  # 關閉資料庫連線
-
-print("------------------------------------------------------------")  # 60個
-
-# sqlite_crud4.py
-import sqlite3
-
-conn = sqlite3.connect("school.db")  # 建立資料庫連線
-# 刪除資料
-conn.execute("DELETE FROM scores WHERE id={}".format(1))
-conn.commit()  # 更新
-conn.close()  # 關閉資料庫連線
-
-# fetchall.py
-import sqlite3
-
-conn = sqlite3.connect("school.db")  # 建立資料庫連線
-cursor = conn.execute("select * from scores")
-rows = cursor.fetchall()
-# 顯示原始資料
-print(rows)
-# 逐筆顯示資料
-for row in rows:
-    print(row[0], row[1])
-conn.close()  # 關閉資料庫連線
-
-print("------------------------------------------------------------")  # 60個
-
-# fetchone.py
-import sqlite3
-
-conn = sqlite3.connect("school.db")  # 建立資料庫連線
-cursor = conn.execute("select * from scores")
-row = cursor.fetchone()
-print(row[0], row[1])
-conn.close()  # 關閉資料庫連線
-'''
-print("------------------------------------------------------------")  # 60個
-''' pymysql
-# mysqltable.py
-import pymysql
-
-conn = pymysql.connect(
-    "localhost", port=3306, user="root", passwd="1234", charset="utf8", db="pythondb"
-)  # 連結資料庫
-
-with conn.cursor() as cursor:
-    sql = """
-    CREATE TABLE IF NOT EXISTS Scores (
-      ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-      Name varchar(20),
-      Chinese int(3),
-      English int(3),
-      Math int(3)
-    );
-    """
-    cursor.execute(sql)  # 執行SQL指令
-    conn.commit()  # 提交資料庫
-conn.close()
-
-print("------------------------------------------------------------")  # 60個
-
-# mysqlinsert.py
-import pymysql
-
-conn = pymysql.connect(
-    "localhost", port=3306, user="root", passwd="1234", charset="utf8", db="pythondb"
-)  # 連結資料庫
-
-with conn.cursor() as cursor:
-    sql = """
-    insert into scores (Name, Chinese, English, Math) values 
-    ('葉大雄',65,62,40),
-    ('陳靜香',85,90,87),
-    ('王聰明',92,90,95)
-    """
-    cursor.execute(sql)
-    conn.commit()  # 提交資料庫
-conn.close()
-
-print("------------------------------------------------------------")  # 60個
-
-# mysqlquery.py
-import pymysql
-
-conn = pymysql.connect(
-    "localhost", port=3306, user="root", passwd="1234", charset="utf8", db="pythondb"
-)  # 連結資料庫
-
-with conn.cursor() as cursor:
-    sql = "select * from scores"
-    cursor.execute(sql)
-    datas = cursor.fetchall()  # 取出所有資料
-    print(datas)
-    print("-" * 30)  # 畫分隔線
-    sql = "select * from scores"
-    cursor.execute(sql)
-    data = cursor.fetchone()  # 取出第一筆資料
-    print(data)
-
-conn.close()
-
-print("------------------------------------------------------------")  # 60個
-
-# mysqlupdate.py
-import pymysql
-
-conn = pymysql.connect(
-    "localhost", port=3306, user="root", passwd="1234", charset="utf8", db="pythondb"
-)  # 連結資料庫
-
-with conn.cursor() as cursor:
-    sql = "update scores set Chinese = 98 where ID = 3"
-    cursor.execute(sql)
-    conn.commit()
-    sql = "select * from scores where ID = 3"
-    cursor.execute(sql)
-    data = cursor.fetchone()
-    print(data)
-
-conn.close()
-
-# mysqldelete.py
-import pymysql
-
-conn = pymysql.connect(
-    "localhost", port=3306, user="root", passwd="1234", charset="utf8", db="pythondb"
-)  # 連結資料庫
-
-with conn.cursor() as cursor:
-    sql = "delete from scores where ID = 3"
-    cursor.execute(sql)
-    conn.commit()
-    sql = "select * from scores"
-    cursor.execute(sql)
-    data = cursor.fetchall()
-    print(data)
-
-conn.close()
-'''
 print("------------------------------------------------------------")  # 60個
 """ NG
 # LinkGoogleSheet.py
+
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials as sac
 
@@ -1548,10 +1313,9 @@ for listdata in listdatas:
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # csv_read_dict.py
-
-import csv
 
 # 開啟 csv 檔案
 with open("data/school.csv", newline="") as csvfile:
@@ -1562,10 +1326,9 @@ with open("data/school.csv", newline="") as csvfile:
         print(row["座號"], row["姓名"], row["國文"], row["英文"], row["數學"])
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # csv_write_dict.py
-
-import csv
 
 with open("tmp_test3aa.csv", "w", newline="") as csvfile:
     # 定義欄位
@@ -1580,10 +1343,9 @@ with open("tmp_test3aa.csv", "w", newline="") as csvfile:
     writer.writerow({"座號": 3, "姓名": "王聰明", "國文": 92, "英文": 90, "數學": 95})
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # csv_write_list1.py
-
-import csv
 
 with open("tmp_test1aaaa.csv", "w", newline="") as f:
     # 建立 csv 檔寫入物件
@@ -1595,10 +1357,9 @@ with open("tmp_test1aaaa.csv", "w", newline="") as f:
     writer.writerow([3, "王聰明", 92, 90, 95])
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # csv_write_list2.py
-
-import csv
 
 # 建立csv二維串列資料
 csvtable = [
@@ -1612,6 +1373,7 @@ with open("tmp_test2aaaa.csv", "w", newline="") as csvfile:
     writer = csv.writer(csvfile)
     writer.writerows(csvtable)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # fileread1.py
@@ -1673,10 +1435,9 @@ with open("tmp_file1ccccd.txt", "w", encoding="utf-8", newline="") as f:
     f.write(content)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # jsondump1.py
-
-import json
 
 with open("data/class_str.json", "r", encoding="utf-8") as f:
     datas = json.load(f)
@@ -1685,10 +1446,9 @@ dumpdata = json.dumps(datas, ensure_ascii=False)
 print(dumpdata, type(dumpdata))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # jsondump2.py
-
-import json
 
 with open("data/class_str.json", "r", encoding="utf-8") as f:
     datas = json.load(f)
@@ -1696,10 +1456,9 @@ with open("tmp_class_str2.json", "w", encoding="utf-8") as f:
     dumpdata = json.dump(datas, f, ensure_ascii=False)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # jsonload1.py
-
-import json
 
 class_str = """
 {
@@ -1734,10 +1493,9 @@ for data in datas["一年甲班"]:
     print(data, data["姓名"])
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # jsonload2.py
-
-import json
 
 with open("data/class_str.json", "r", encoding="utf-8") as f:
     datas = json.load(f)
@@ -1745,6 +1503,7 @@ with open("data/class_str.json", "r", encoding="utf-8") as f:
     for data in datas["一年甲班"]:
         print(data, data["姓名"])
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """ NG
 #LinkGoogleSheet.py

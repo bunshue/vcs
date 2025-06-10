@@ -20,6 +20,9 @@ Filename :
 import sys
 import sqlite3
 
+print("------------------------------------------------------------")  # 60個
+
+
 # 取得一個資料庫內所有表單的名稱, list格式
 def get_table_names(conn):
     table_names = []
@@ -55,19 +58,19 @@ table_names = get_table_names(conn)
 print("裡面有 :", len(table_names), "個表單 :", table_names)
 
 print("讀取每個表單的所有欄位")
-#table_dicts = [] # 將資料存在字典裡
+# table_dicts = [] # 將資料存在字典裡
 for table_name in table_names:
     print("表單 :", table_name, end="\t")
     column_names = get_column_names(conn, table_name)
-    #table_dicts.append({"table_name": table_name, "column_names": column_names})
+    # table_dicts.append({"table_name": table_name, "column_names": column_names})
     print("裡面有 :", len(column_names), "個欄位 :", column_names)
-#print(type(table_dicts))
-#print(table_dicts)
+# print(type(table_dicts))
+# print(table_dicts)
 
 
 print("讀取每個表單的所有內容")
 for table_name in table_names:
-    print("表單 :", table_name, end = "\t")
+    print("表單 :", table_name, end="\t")
     cursor = conn.execute("SELECT * FROM %s" % table_name)
     rows = cursor.fetchall()
     print("內容 :", rows)
@@ -79,7 +82,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 """
@@ -273,10 +275,28 @@ print(rows)
 conn.close()  # 關閉資料庫連線
 
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個

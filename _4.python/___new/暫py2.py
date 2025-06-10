@@ -496,27 +496,6 @@ for path in os.sys.path:  # 使用os模組
     i = i + 1
 
 
-
-import datetime
-now = datetime.datetime.now()
-time = now.strftime("%Y-%m-%d %H:%M:%S")
-cur.execute("INSERT INTO message VALUES(?,?,?,?,?)", (name, mail, site, content, time))
-
-
-import sqlite3  # 匯入sqlite3模組
-
-con = sqlite3.connect("message")  # 連線到資料庫
-cur = con.cursor()  # 獲得資料庫游標, 'GBK')
-cur.execute("select * from message")  # 執行SQL敘述
-results = cur.fetchall()  # 獲得資料
-
-for result in results:
-    print(result)
-
-cur.close()  # 關閉游標
-con.close()  # 關閉資料庫連線
-
-
 製作不一樣權重的 random
 
         weight = 40
