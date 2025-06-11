@@ -32,7 +32,6 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 
-
 # ch01\loop.py
 
 sum = 0
@@ -428,21 +427,6 @@ print("------------------------------------------------------------")  # 60個
 
 # ch07\Assert.py
 
-
-class Car:
-    def __init__(self, speed):
-        self.speed = speed
-
-    def Turbo(self, n):  # 增加速度 n
-        assert speed >= 0, "速度不可能為負!"
-        self.speed += n
-
-
-for speed in (60, -20):
-    bus = Car(speed)
-    print("初速=", bus.speed, end=" ")
-    bus.Turbo(50)
-    print("加速後，速度=", bus.speed)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2194,6 +2178,28 @@ plt.title("Sales Report", fontsize=18)
 plt.xlabel("Year", fontsize=12)
 plt.ylabel("Million", fontsize=12)
 plt.grid(color="k", ls=":", lw=1, alpha=0.5)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# ch13\plot9.py
+
+import matplotlib.pyplot as plt
+
+year = [2015, 2016, 2017, 2018, 2019]
+city1 = [128, 150, 199, 180, 150]
+plt.plot(year, city1, "r-.s", lw=2, ms=10, label="台北")
+city2 = [120, 145, 180, 170, 120]
+plt.plot(year, city2, "g--*", lw=2, ms=10, label="台中")
+plt.legend()
+plt.ylim(50, 250)
+plt.xticks(year)
+plt.title("銷售報表", fontsize=18)
+plt.xlabel("年度", fontsize=12)
+plt.ylabel("百萬", fontsize=12)
+# 設定中文字型及負號正確顯示
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 也可設mingliu或DFKai-SB
+plt.rcParams["axes.unicode_minus"] = False
 plt.show()
 
 print("------------------------------------------------------------")  # 60個

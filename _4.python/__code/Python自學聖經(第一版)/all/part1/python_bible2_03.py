@@ -250,7 +250,7 @@ print("------------------------------------------------------------")  # 60個
 
 import requests
 
-subscription_key = "你的翻譯資源key"
+subscription_key = "你的翻譯文字資源key"
 trans_base_url = "https://api.cognitive.microsofttranslator.com/"
 trans_url = trans_base_url + "detect?api-version=3.0"
 headers = {"Ocp-Apim-Subscription-Key": subscription_key}
@@ -368,7 +368,7 @@ print("------------------------------------------------------------")  # 60個
 
 import requests
 
-subscription_key = "你的翻譯資源key"
+subscription_key = "你的翻譯文字資源key"
 trans_base_url = "https://api.cognitive.microsofttranslator.com/"
 trans_url = trans_base_url + "translate?api-version=3.0"
 headers = {"Ocp-Apim-Subscription-Key": subscription_key}

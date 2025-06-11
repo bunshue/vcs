@@ -121,7 +121,7 @@ se2 = pd.Series({"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉":
 se3 = pd.Series({"王小明": 78, "李小美": 76, "陳大同": 91, "林小玉": 47})
 se4 = pd.Series({"王小明": 83, "李小美": 93, "陳大同": 89, "林小玉": 94})
 se5 = pd.Series({"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80})
-df = pd.concat([se1, se2, se3, se4, se5], axis=0)
+df = pd.concat([se1, se2, se3, se4, se5], axis=1)
 df.columns = ["國文", "英文", "數學", "自然", "社會"]
 print(df)
 
@@ -155,15 +155,15 @@ print(df.loc[:"李小美", "數學":"社會"])
 print(df.loc["李小美":, "數學":"社會"])
 print(df.iloc[3, 4])
 # iloc
-df.iloc[0, [0, 4]]
-df.iloc[[0, 1], [2, 3]]
-df.iloc[0:3, 2:5]
-df.iloc[2, :]
-df.iloc[:2, 2:5]
-df.iloc[1:, 2:5]
+print(df.iloc[0, [0, 4]])
+print(df.iloc[[0, 1], [2, 3]])
+print(df.iloc[0:3, 2:5])
+print(df.iloc[2, :])
+print(df.iloc[:2, 2:5])
+print(df.iloc[1:, 2:5])
 # head() tail()
-df.head(2)
-df.tail(2)
+print(df.head(2))
+print(df.tail(2))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -183,16 +183,21 @@ df = pd.DataFrame(scores)
 print(df.sort_values(by="數學", ascending=False))
 print(df.sort_index(axis=0))
 # 修改
-df1 = df.loc["王小明"]["數學"] = 90
+df.loc["王小明"]["數學"] = 90
 print(df)
-df2 = df.loc["王小明", :] = 80
+df.loc["王小明", :] = 80
 print(df)
 # 刪除
-df.drop("王小明")
-df.drop("數學", axis=1)
-df.drop(["數學", "自然"], axis=1)
-df.drop(df.index[1:4])
-df.drop(df.columns[1:4], axis=1)
+df1 = df.drop("王小明")
+print(df1)
+df1 = df.drop("數學", axis=1)
+print(df1)
+df1 = df.drop(["數學", "自然"], axis=1)
+print(df1)
+df1 = df.drop(df.index[1:4])
+print(df1)
+df1 = df.drop(df.columns[1:4], axis=1)
+print(df1)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -416,8 +421,15 @@ print("------------------------------------------------------------")  # 60個
 
 import numpy as np
 
-c = np.empty((5,))
-print(c)
+np1 = np.array(
+    [
+        [[1, 2, 3, 4], [5, 6, 7, 8]],
+        [[9, 10, 11, 12], [13, 14, 15, 16]],
+        [[17, 18, 19, 20], [21, 22, 23, 24]],
+    ]
+)
+
+print(np1.shape)
 
 print("------------------------------------------------------------")  # 60個
 

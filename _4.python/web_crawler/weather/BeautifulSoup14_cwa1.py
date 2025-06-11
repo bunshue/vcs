@@ -80,52 +80,11 @@ def createDF():
     df['降雨機率'] = pops
     '''
 
-def writeMySql():
-    global df
-    try:
-        conn=pymysql.connect('localhost',port=3306,user='root',passwd='1234',charset='utf8', db='weather')  #連結資料庫
-        cursor=conn.cursor()
-    except:
-        print('資料庫連結錯誤！')
-        return
-    #如果threeday資料表不存在就先建立該資料表
-    try:
-        sql = "SELECT * FROM threeday LIMIT 1;"
-        cursor.execute(sql)
-    except :  #產生錯誤表示資烞表不存在
-        sql = """
-        CREATE TABLE IF NOT EXISTS threeday (
-        rid int not null auto_increment primary key,
-        日期時間 timestamp,
-        星期 char(3),
-        天氣狀況 char(32),
-        溫度 int,
-        體感溫度 int,
-        蒲福風級 char(15),
-        風向 char(3),
-        相對溼度 char(4),
-        降雨機率 char(4),
-        舒適度 char(8)
-        ) 
-        """
-        cursor.execute(sql)
-    
-    for i in df.index:  #逐行處理
-        exist = cursor.execute("select * from threeday where 日期時間='" + df.loc[i][0] + "'")  #以日期搜尋資料
-        if exist == 0:  #若資料不存在
-            cursor.execute('insert into threeday(日期時間,星期,天氣狀況,溫度,體感溫度,蒲福風級,風向,相對溼度,降雨機率,舒適度) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)' ,tuple(df.loc[i]))  #將資料加入資料庫
-    
-    conn.commit()
-    cursor.close()
-    conn.close()
-    print('資料處理完成！')
-
 import requests
 from bs4 import BeautifulSoup
 import pandas
 import re
 import datetime
-import pymysql
 
 print('抓取中央氣象局網頁資料 用 BeautifulSoup 解讀')
 
@@ -133,5 +92,4 @@ global df
 columns = ['日期時間','星期','天氣狀況','溫度','體感溫度','蒲福風級','風向','相對溼度','降雨機率','舒適度']  #欄位名稱
 df = pandas.DataFrame(columns = columns)  #建立DataFrame
 createDF()  #擷取天氣資料
-#writeMySql()  #寫入MySql資料庫
-    
+
