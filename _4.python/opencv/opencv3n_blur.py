@@ -37,7 +37,7 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
-"""
+
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png"
 image = cv2.imread(filename)
 
@@ -53,7 +53,7 @@ plt.subplot(122)
 plt.title("blur 效果 1")
 plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -77,7 +77,7 @@ plt.subplot(133)
 plt.title("blur 效果 2")
 plt.imshow(cv2.cvtColor(image_blur_30, cv2.COLOR_BGR2RGB))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -92,7 +92,7 @@ cv2.imshow("image2", output2)
 
 cv2.waitKey(0)  # 按下任意鍵停止
 cv2.destroyAllWindows()
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -121,6 +121,79 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+# cv2.boxFilter() ST
+print("------------------------------------------------------------")  # 60個
+
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png"
+image = cv2.imread(filename)
+
+print("boxFilter 效果 1")
+image_boxFilter = cv2.boxFilter(image, -1, (5, 5))
+
+plt.figure("new20 boxFilter 效果 1", figsize=(16, 12))
+
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title("boxFilter 效果 1")
+plt.imshow(cv2.cvtColor(image_boxFilter, cv2.COLOR_BGR2RGB))
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png"
+image = cv2.imread(filename)
+
+print("boxFilter 效果 2")
+image_boxFilter = cv2.boxFilter(image, -1, (5, 5), normalize=0)
+
+plt.figure("new21 boxFilter 效果 2", figsize=(16, 12))
+
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title("boxFilter 效果 2")
+plt.imshow(cv2.cvtColor(image_boxFilter, cv2.COLOR_BGR2RGB))
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png"
+image = cv2.imread(filename)
+
+print("boxFilter 效果 3")
+image_boxFilter = cv2.boxFilter(image, -1, (2, 2), normalize=0)
+
+plt.figure("new22 boxFilter 效果 3", figsize=(16, 12))
+
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title("boxFilter 效果 3")
+plt.imshow(cv2.cvtColor(image_boxFilter, cv2.COLOR_BGR2RGB))
+
+show()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("使用 方框濾波器.boxFilter()")
 
@@ -138,6 +211,93 @@ cv2.imshow("dst 5 x 5", dst3)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
+# cv2.medianBlur() ST
+print("------------------------------------------------------------")  # 60個
+
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png"
+image = cv2.imread(filename)
+
+print("medianBlur 效果 1")
+image_medianBlur = cv2.medianBlur(image, 3)
+
+plt.figure("new23 medianBlur 效果 1", figsize=(16, 12))
+
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title("medianBlur 效果 1")
+plt.imshow(cv2.cvtColor(image_medianBlur, cv2.COLOR_BGR2RGB))
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("median 跑一陣子")
+
+
+def get_median(data):
+    data.sort()
+    half = len(data) // 2
+    return data[half]
+
+
+# 計算灰度圖像的中值濾波
+def my_median_blur_gray(image, size):
+    data = []
+    sizepart = int(size / 2)
+    for i in range(image.shape[0]):
+        for j in range(image.shape[1]):
+            for ii in range(size):
+                for jj in range(size):
+                    # 首先判斷所以是否超出范圍，也可以事先對圖像進行零填充
+                    if (i + ii - sizepart) < 0 or (i + ii - sizepart) >= image.shape[0]:
+                        pass
+                    elif (j + jj - sizepart) < 0 or (j + jj - sizepart) >= image.shape[
+                        1
+                    ]:
+                        pass
+                    else:
+                        data.append(image[i + ii - sizepart][j + jj - sizepart])
+            # 取每個區域內的中位數
+            image[i][j] = int(get_median(data))
+            data = []
+    return image
+
+
+# 計算彩色圖像的中值濾波
+def my_median_blur_RGB(image, size):
+    (b, r, g) = cv2.split(image)
+    blur_b = my_median_blur_gray(b, size)
+    blur_r = my_median_blur_gray(r, size)
+    blur_g = my_median_blur_gray(g, size)
+    result = cv2.merge((blur_b, blur_r, blur_g))
+    return result
+
+
+image_test1 = cv2.imread("data/worm.jpg")
+# 調用自定義函數
+my_image_blur_median = my_median_blur_RGB(image_test1, 5)
+# 調用庫函數
+computer_image_blur_median = cv2.medianBlur(image_test1, 5)
+fig = plt.figure("new41")
+fig.add_subplot(131)
+plt.title("原圖")
+plt.imshow(image_test1)
+fig.add_subplot(132)
+plt.title("自定義函數濾波")
+plt.imshow(my_image_blur_median)
+fig.add_subplot(133)
+plt.title("庫函數濾波")
+plt.imshow(computer_image_blur_median)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("使用 中值濾波器.medianBlur()")
@@ -187,7 +347,7 @@ plt.imshow(cv2.cvtColor(image_blur, cv2.COLOR_BGR2RGB))
 plt.title("高斯模糊 GaussianBlur")
 
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -210,7 +370,7 @@ plt.imshow(cv2.cvtColor(image_blur, cv2.COLOR_BGR2RGB))
 plt.title("高斯模糊 GaussianBlur")
 
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -229,7 +389,7 @@ plt.imshow(cv2.cvtColor(image_blur, cv2.COLOR_BGR2RGB))
 plt.title("高斯模糊 GaussianBlur")
 
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -248,7 +408,7 @@ plt.imshow(cv2.cvtColor(image_blur, cv2.COLOR_BGR2RGB))
 plt.title("GaussianBlur")
 
 plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -275,7 +435,7 @@ plt.subplot(122)
 plt.imshow(cv2.cvtColor(image_blur, cv2.COLOR_BGR2RGB))
 plt.title("GaussianBlur")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -355,7 +515,7 @@ plt.subplot(122)
 plt.title("bilateralFilter 效果 1")
 plt.imshow(cv2.cvtColor(image_bilateralFilter, cv2.COLOR_BGR2RGB))
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -375,7 +535,7 @@ plt.subplot(122)
 plt.title("bilateralFilter 效果 2")
 plt.imshow(cv2.cvtColor(image_bilateralFilter, cv2.COLOR_BGR2RGB))
 
-plt.show()
+show()
 
 
 print("------------------------------------------------------------")  # 60個
@@ -409,29 +569,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-sys.exit()
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 """
 print("gaussion blur")
 
@@ -507,7 +644,7 @@ fig.add_subplot(133)
 plt.title('庫高斯濾波器')
 plt.imshow(computer_image_blur_gaussion)
 
-plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -614,7 +751,7 @@ W, H, sigmaX, sigmaY = 101, 101, 200, 200  # W, H 必須為單數
 image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
 plt.plot(image1[200, :].ravel(), "b")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -626,3 +763,26 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+

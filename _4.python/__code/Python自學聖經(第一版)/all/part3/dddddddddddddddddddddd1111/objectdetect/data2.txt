@@ -1,7 +1,0 @@
-{'boxes': [
-  {'confidence': 0.8357869386672974, 'coordinates': {'x0': 474, 'x1': 581, 'y0': 204, 'y1': 277}, 'label': 'horse'}, 
-  {'confidence': 0.7401942014694214, 'coordinates': {'x0': 269, 'x1': 383, 'y0': 219, 'y1': 273}, 'label': 'horse'}, 
-  {'confidence': 0.7143983244895935, 'coordinates': {'x0': 397, 'x1': 503, 'y0': 208, 'y1': 278}, 'label': 'horse'}, 
-  {'confidence': 0.5446586608886719, 'coordinates': {'x0': 184, 'x1': 265, 'y0': 204, 'y1': 268}, 'label': 'horse'}], 
-  'image': 'data://.algo/deeplearning/ObjectDetectionCOCO/temp/output.png'
-}

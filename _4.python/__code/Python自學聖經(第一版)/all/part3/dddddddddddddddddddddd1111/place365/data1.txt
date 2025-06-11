@@ -1,8 +1,0 @@
-{'predictions': [
-  {'class': 'natural_history_museum', 'prob': 0.3575340807437897}, 
-  {'class': 'science_museum', 'prob': 0.1744280755519867}, 
-  {'class': 'stage/indoor', 'prob': 0.13040095567703247}, 
-  {'class': 'museum/indoor', 'prob': 0.08310319483280182}, 
-  {'class': 'music_studio', 'prob': 0.07925877720117569}
-  ]
-}
