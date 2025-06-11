@@ -1992,5 +1992,3 @@ conv1 = np.real(ify)  # 取實部
 plt.subplot(212)
 plt.plot(y, "r")
 plt.plot(conv1 - 0.5, "g")  # 爲看清楚，將顯示區域下拉0.5
-
-

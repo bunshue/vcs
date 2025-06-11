@@ -55,9 +55,9 @@ colors = [RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK, WHITE]
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread("data/Hough/computer.jpg")
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+'''
+img = cv2.imread("data/Hough/computer.jpg")  # 彩色讀取
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 edges = cv2.Canny(gray, 50, 150, apertureSize=3)
@@ -93,8 +93,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread("data/Hough/computer.jpg", -1)
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+img = cv2.imread("data/Hough/computer.jpg", -1)  # 彩色讀取
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 edges = cv2.Canny(gray, 50, 150, apertureSize=3)
@@ -123,6 +123,7 @@ print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread("data/Hough/chess.jpg", 0)
 imgo = cv2.imread("data/Hough/chess.jpg", -1)
+
 o = cv2.cvtColor(imgo, cv2.COLOR_BGR2RGB)
 oshow = o.copy()
 img = cv2.medianBlur(img, 5)
@@ -150,6 +151,7 @@ print("這個做很久~~~~~~~")
 
 img = cv2.imread("data/Hough/chess.jpg", 0)
 imgo = cv2.imread("data/Hough/chess.jpg", -1)
+
 o = cv2.cvtColor(imgo, cv2.COLOR_BGR2RGB)
 oshow = o.copy()
 img = cv2.medianBlur(img, 5)
@@ -172,22 +174,16 @@ plt.axis("off")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-"""
-霍夫變換
+img = cv2.imread("data/Hough/jianzhu.png")  # 彩色讀取
 
-HoughLines
-HoughLinesP
-HoughCircles
-
-"""
-img = cv2.imread("data/Hough/jianzhu.png")
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 灰度图像
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 edges = cv2.Canny(gray, 50, 200)
 
-plt.figure("霍夫變換 HoughLines", figsize=(16, 12))
+plt.figure("霍夫變換 HoughLines", figsize=(12, 10))
 plt.subplot(221)
 plt.title("原圖")
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
@@ -223,8 +219,9 @@ plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-lane1 = cv2.imread("data/Hough/lane.jpg")
+lane1 = cv2.imread("data/Hough/lane.jpg")  # 彩色讀取
 
 # 高斯模糊，Canny边缘检测需要的
 lane2 = cv2.GaussianBlur(lane1, (5, 5), 0)  # 執行高斯模糊化
@@ -232,21 +229,19 @@ lane2 = cv2.GaussianBlur(lane1, (5, 5), 0)  # 執行高斯模糊化
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 lane3 = cv2.Canny(lane2, 50, 150)
 
-cv2.imshow("lane3", lane3)
-cv2.waitKey()
+plt.figure("霍夫變換 HoughLinesP", figsize=(12, 10))
 
-plt.figure("霍夫變換 HoughLinesP", figsize=(16, 12))
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(lane1, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(222)
-plt.title("高斯模糊")
 plt.imshow(cv2.cvtColor(lane2, cv2.COLOR_BGR2RGB))
+plt.title("高斯模糊")
 
 plt.subplot(223)
-plt.title("Canny邊緣檢測")
 plt.imshow(cv2.cvtColor(lane3, cv2.COLOR_BGR2RGB))
+plt.title("Canny邊緣檢測")
 
 rho = 1  # 距离分辨率
 theta = np.pi / 180  # 角度分辨率
@@ -262,33 +257,31 @@ for line in lines:
     for x1, y1, x2, y2 in line:
         cv2.line(lane4, (x1, y1), (x2, y2), 255, 1)
 
-cv2.imshow("lane4", lane4)
-
 plt.subplot(224)
-plt.title("霍夫變換 HoughLinesP")
 plt.imshow(cv2.cvtColor(lane4, cv2.COLOR_BGR2RGB))
+plt.title("霍夫變換 HoughLinesP")
+
 show()
 
-cv2.waitKey()
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img1 = cv2.imread("data/Hough/4.png", 0)
+img1 = cv2.imread("data/Hough/4.png", 0)  # 灰階讀取
 img2 = cv2.medianBlur(img1, 5)
 img3 = cv2.cvtColor(img2, cv2.COLOR_GRAY2BGR)
 
-plt.figure("霍夫變換 HoughCircles", figsize=(16, 12))
+plt.figure("霍夫變換 HoughCircles", figsize=(12, 10))
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(img1, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(222)
-plt.title("medianBlur")
 plt.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))
+plt.title("medianBlur")
 
 plt.subplot(223)
-plt.title("COLOR_GRAY2BGR")
 plt.imshow(cv2.cvtColor(img3, cv2.COLOR_BGR2RGB))
+plt.title("COLOR_GRAY2BGR")
 
 circles = cv2.HoughCircles(
     img2,
@@ -307,26 +300,23 @@ for i in circles[0, :]:
     # 画出圆心
     cv2.circle(img3, (i[0], i[1]), 2, (0, 0, 255), 3)
 
-cv2.imshow("detected circles", img3)
-
 plt.subplot(224)
-plt.title("霍夫變換 HoughCircles")
 plt.imshow(cv2.cvtColor(img3, cv2.COLOR_BGR2RGB))
+plt.title("霍夫變換 HoughCircles")
 show()
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-霍夫圓形檢測
+# 霍夫圓形檢測
 
-"""
 filename = "data/Hough/cup.jpg"
 
-print("顯示圖片")
-image = cv2.imread(filename, -1)
+image = cv2.imread(filename, -1)  # 彩色讀取
+
+plt.subplot(211)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 shape = image.shape
 h = shape[0]  # 高
@@ -335,7 +325,7 @@ h, w, d = image.shape  # d為dimension d=3 全彩 d=1 灰階
 print("寬 = ", w, ", 高 = ", h, ", D = ", d)
 
 image = cv2.resize(image, (int(w / 10), int(h / 10)))
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 gray = cv2.GaussianBlur(gray, (5, 5), 0)  # 執行高斯模糊化
 circles = cv2.HoughCircles(
     gray,
@@ -369,17 +359,16 @@ if len(circles) > 0:
         cv2.circle(out, (x, y), 2, (0, 255, 0), 3)
     image = cv2.hconcat([image, out])
 
-cv2.namedWindow("image", cv2.WINDOW_NORMAL)
-cv2.imshow("image", image)  # 顯示圖片
 
-print("在此等待任意鍵繼續, 繼續後刪除本視窗")
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(212)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("霍夫圓形檢測")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("opencv 108")
 # add_collection 只能用 ax
 
 # 使用HoughLinesP()檢驗圖形中的直線
@@ -398,7 +387,7 @@ lines = cv2.HoughLinesP(
 )
 print("共找到 :", len(lines), "條直線")
 
-fig, ax = plt.subplots(figsize=(8, 6))
+fig, ax = plt.subplots(figsize=(12, 10))
 plt.imshow(img, cmap="gray")
 
 from matplotlib.collections import LineCollection
@@ -412,7 +401,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("opencv 109")
 # 檢驗圓形
 
 # 使用HoughCircles()檢驗圖形中的圓形
@@ -431,7 +419,7 @@ circles = cv2.HoughCircles(
 
 x, y, r = circles[0].T
 
-fig, ax = plt.subplots(figsize=(8, 6))
+fig, ax = plt.subplots(figsize=(12, 10))
 plt.imshow(img, cmap="gray")
 
 from matplotlib.collections import EllipseCollection
@@ -458,29 +446,26 @@ print("------------------------------------------------------------")  # 60個
 # OpenCV_18_從直線檢測到無人駕駛車道檢測
 print("------------------------------------------------------------")  # 60個
 
-fff = "data/Hough/japanese_schedule.jpg"
+filename = "data/Hough/japanese_schedule.jpg"
 
-src = cv2.imread(fff, cv2.IMREAD_COLOR)
-cv2.imshow("src", src)
+src = cv2.imread(filename, cv2.IMREAD_COLOR)
 
-plt.subplot(311)
-plt.title("原圖")
+plt.subplot(131)
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 plt.axis("off")
 
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
+src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 edges = cv2.Canny(src_gray, 100, 200)
-
-cv2.imshow("Canny", edges)
 
 # 尋找霍夫直線
 lines = cv2.HoughLines(edges, 1, np.pi / 180, 220)
 # lines = cv2.HoughLines(edges, 1, np.pi / 180, 180)
 print("共找到 :", len(lines), "條直線")
 
-# 繪製直線
+# 繪製直線 在 src 上
 index = 0
 for line in lines:
     rho, theta = line[0]  # lines回傳
@@ -496,41 +481,45 @@ for line in lines:
     # cv2.line(src, (x1, y1), (x2, y2), colors[index%6], 2)  # 繪製綠色線條
     index += 1
 
-cv2.imshow("dst", src)
-
-plt.subplot(312)
-plt.title("edges")
+plt.subplot(132)
 plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
+plt.title("邊緣檢測")
 plt.axis("off")
 
-plt.subplot(313)
-plt.title("result")
+plt.subplot(133)
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("HoughLines")
 plt.axis("off")
 
 show()
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("data/Hough/lane2.jpg", cv2.IMREAD_COLOR)
 cv2.imshow("src", src)
 
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+plt.axis("off")
+
+src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 edges = cv2.Canny(src_gray, 100, 200)
+cv2.imshow("edges", edges)
 
-# cv2.imshow("Canny", edges)
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
+plt.title("邊緣檢測")
+plt.axis("off")
 
 # 尋找霍夫直線
 lines = cv2.HoughLines(edges, 1, np.pi / 180, 150)  # 檢測直線
 print("共找到 :", len(lines), "條直線")
 
-# 繪製直線
+# 繪製直線, 畫在src上
 for line in lines:
     rho, theta = line[0]  # lines回傳
     a = np.cos(theta)  # cos(theta)
@@ -542,7 +531,15 @@ for line in lines:
     x2 = int(x0 - 1000 * (-b))  # 建立 x2
     y2 = int(y0 - 1000 * (a))  # 建立 y2
     cv2.line(src, (x1, y1), (x2, y2), (0, 0, 255), 2)  # 繪製紅色線條
+
 cv2.imshow("dst", src)
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("HoughLines")
+plt.axis("off")
+
+show()
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -551,23 +548,43 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("data/Hough/roadtest.jpg", cv2.IMREAD_COLOR)
+
 cv2.imshow("src", src)
 
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+plt.axis("off")
+
+src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 edges = cv2.Canny(src_gray, 50, 200)
 
 cv2.imshow("Canny", edges)
 
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
+plt.title("Canny")
+plt.axis("off")
+
 lines = cv2.HoughLinesP(edges, 1, np.pi / 180, 50, minLineLength=10, maxLineGap=100)
 print("共找到 :", len(lines), "條直線")
 
-# 繪製檢測到的直線
+# 繪製檢測到的直線, 畫在src上
 for line in lines:
     x1, y1, x2, y2 = line[0]
     cv2.line(src, (x1, y1), (x2, y2), (255, 0, 0), 3)  # 繪製藍色線條
 cv2.imshow("dst", src)
+
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("HoughLines")
+plt.axis("off")
+
+show()
+
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -578,9 +595,14 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/Hough/shapes.jpg")
 cv2.imshow("src", src)
 
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+plt.axis("off")
+
 src = cv2.medianBlur(src, 5)  # 過濾雜訊
 
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉成灰階
+src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉灰階
 circles = cv2.HoughCircles(
     src_gray,
     cv2.HOUGH_GRADIENT,
@@ -593,12 +615,20 @@ circles = cv2.HoughCircles(
 )
 circles = np.uint(np.around(circles))  # 轉成整數
 
-# 繪製檢測到的直線
+# 繪製檢測到的直線, 畫在src上
 for c in circles[0]:
     x, y, r = c
     cv2.circle(src, (x, y), r, (0, 255, 0), 3)  # 綠色繪圓外圈
     cv2.circle(src, (x, y), 2, (0, 0, 255), 2)  # 紅色繪圓中心
 cv2.imshow("dst", src)
+
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("HoughCircles")
+plt.axis("off")
+
+show()
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -637,19 +667,22 @@ cv2.HoughLines 的返回参数 line == [\rho ,\Theta ]，
 我们在选取直线坐标点的时候，需要尽量选取图像外部的点（即负数），
 这样才会过整幅图像绘制直线。
 """
-# 彩色讀取
-img = cv2.imread("data/Hough/FerrisWheel4.png")
+
+img = cv2.imread("data/Hough/FerrisWheel4.png")  # 彩色讀取
+
+cv2.imshow("src", img)
 
 plt.subplot(311)
 plt.title("原圖")
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
-# 轉灰階
-img_gray = cv2.cvtColor(img, cv2.COLOR_RGBA2GRAY)
+img_gray = cv2.cvtColor(img, cv2.COLOR_RGBA2GRAY)  # 轉灰階
 
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 canny_image = cv2.Canny(img, 200, 200)
+
+cv2.imshow("canny_image", canny_image)
 
 # 尋找霍夫直線
 lines = cv2.HoughLines(canny_image, 1, np.pi / 180, 180)
@@ -688,6 +721,7 @@ plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 plt.axis("off")
 
 show()
+
 
 cv2.imshow("result", img)
 cv2.imshow("canny", canny_image)

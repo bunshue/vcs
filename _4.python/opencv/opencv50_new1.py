@@ -3083,6 +3083,7 @@ threshImage = threshAdaptive(image, (41, 41), 0.15)
 cvshow("threshImage", threshImage)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("opencv 72 閾值分割 adaptiveThresh")
 
@@ -3106,6 +3107,7 @@ image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 out = adaptiveThresh(image, (31, 31), 0.15)
 cvshow("out", out)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 73 邊緣檢測 roberts")
@@ -5315,13 +5317,6 @@ print("error=", np.max(np.abs(img2[:] - img3[:])))
 
 """
 OpenCV提供了一些高级函数数来直接完成与某种特定卷积核的 卷积计算。
-    平均模糊blur(), boxFilter()
-    高斯模糊GaussianBlur()
-    medianBlur(),
-    bilateralFilter()
-    Edge Detection的 Sobel()
-    Edge Detection的Laplacian()
-    Edge Detection的Canny()
 
 形态学运算
 dilate

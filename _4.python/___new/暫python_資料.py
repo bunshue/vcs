@@ -316,12 +316,12 @@ http://www.runoob.com/python/python-chinese-encoding.html
 
 from PIL import Image, ImageFilter
 
-kitten = Image.open("ABP238.jpg")       #開啟檔案
-kitten.show()                           #顯示檔案
+img = Image.open("ABP238.jpg")       #開啟檔案
+img.show()                           #顯示檔案
 
-blurryKitten = kitten.filter(ImageFilter.GaussianBlur)  #過濾波器
-blurryKitten.save("ABP238222.jpg")      #存檔
-blurryKitten.show()                     #顯示檔案
+blur_img = img.filter(ImageFilter.GaussianBlur)  #過濾波器
+blur_img.save("ABP238222.jpg")      #存檔
+blur_img.show()                     #顯示檔案
 
 ------------------------------------------------------------
 

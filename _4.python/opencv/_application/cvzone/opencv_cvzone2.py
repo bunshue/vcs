@@ -6,10 +6,12 @@ from cvzone.HandTrackingModule import HandDetector
 from cvzone.PoseModule import PoseDetector
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -25,6 +27,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 dH, dW = 480, 480
 def resizeimg(image):
@@ -36,6 +39,7 @@ def resizeimg(image):
     img = cv2.resize(image, (math.floor(w/(h/dH)), dH))
   return img
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 #MediaPipe模組：Google多媒體機器學習
@@ -85,6 +89,7 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 print("手部偵測")
 
@@ -105,6 +110,7 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 print("姿勢偵測")
 
@@ -144,6 +150,7 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 !wget -O object1.jpg --content-disposition https://unsplash.com/photos/kvmdsTrGOBM/download?force=true
@@ -171,6 +178,7 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.show()
 """
 print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 #cvzone模組：簡單易用多媒體機器學習
 
@@ -192,6 +200,7 @@ plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 print("臉部特徵網")
 
@@ -205,6 +214,7 @@ plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ fail
 
@@ -223,6 +233,7 @@ plt.show()
 """
 
 print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 !wget -O hand3.jpg --content-disposition https://unsplash.com/photos/fYTfOzaRVWw/download?force=true
@@ -262,6 +273,7 @@ plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 plt.show()
 """
 print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 print("姿勢偵測")
 
@@ -275,11 +287,10 @@ plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
 print("------------------------------------------------------------")  # 60個
 
 from cvzone.PoseModule import PoseDetector
-import cv2
+
 """
 cap = cv2.VideoCapture(0)
 detector = PoseDetector(mode=True)
@@ -297,8 +308,8 @@ cv2.destroyAllWindows()
 """
 
 print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-import cv2
 import mediapipe as mp
 
 cap = cv2.VideoCapture(0)
@@ -322,9 +333,9 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from cvzone.HandTrackingModule import HandDetector
-import cv2
 
 print('偵測手指數')
 
@@ -364,14 +375,12 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 
-sys.exit()
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python實戰聖經\ch12\handProperty_cam.py
+# handProperty_cam.py
 
 from cvzone.HandTrackingModule import HandDetector
-import cv2
 """
 cap = cv2.VideoCapture(0)
 detector = HandDetector(minTrackCon=0.5, maxHands=2)
@@ -405,10 +414,10 @@ cv2.destroyAllWindows()
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python實戰聖經\ch12\hands_cam.py
+# hands_cam.py
 
-import cv2
 import mediapipe as mp
 
 cap = cv2.VideoCapture(0)
@@ -434,11 +443,11 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 """
-#檔案 : C:\_git\vcs\_4.python\__code\Python實戰聖經\ch12\handTrack_cam.py
+# handTrack_cam.py
 
 from cvzone.HandTrackingModule import HandDetector
-import cv2
 
 cap = cv2.VideoCapture(0)
 detector = HandDetector(minTrackCon=0.5, maxHands=2)
@@ -455,15 +464,15 @@ cv2.destroyAllWindows()
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python實戰聖經\ch12\holistic_cam.py
+# holistic_cam.py
 """
 mpFaceMesh.FACE_CONNECTIONS
 換成：
 mpFaceMesh.FACEMESH_CONTOURS
 """
 
-import cv2
 import mediapipe as mp
 
 cap = cv2.VideoCapture(0)
@@ -490,10 +499,10 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python實戰聖經\ch12\objectron_cam.py
+# objectron_cam.py
 
-import cv2
 import mediapipe as mp
 """
 cap = cv2.VideoCapture(0)
@@ -521,38 +530,29 @@ cv2.destroyAllWindows()
 """
 
 print("------------------------------------------------------------")  # 60個
-
-
-
 print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
-
-
 print("------------------------------------------------------------")  # 60個
 
+
+
+print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
-
-
-import cv2
 import mediapipe as mp
-import numpy as np
 
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_pose = mp.solutions.pose
 
 def draw_pose(image):
-  """
-  
-  """
   BG_COLOR = (0, 0, 255)#背景色 B-G-R
   with mp_pose.Pose(
     static_image_mode=True,
@@ -596,13 +596,11 @@ plt.imshow(cv2.cvtColor(res, cv2.COLOR_BGR2RGB))
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-
-
+print("------------------------------------------------------------")  # 60個
 
 """ fail
-import cv2
 import mediapipe as mp
+
 mp_drawing = mp.solutions.drawing_utils  # mediapipe 繪圖方法
 mp_objectron = mp.solutions.objectron    # mediapipe 物體偵測
 
@@ -640,3 +638,7 @@ with mp_objectron.Objectron(static_image_mode=False,
 cap.release()
 cv2.destroyAllWindows()
 """
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
