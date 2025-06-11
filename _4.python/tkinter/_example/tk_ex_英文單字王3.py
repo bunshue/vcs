@@ -68,33 +68,19 @@ def disp_data():
             n += 1
 
 
-# 導入套件
+### 主程式從這裡開始 ###
+
 import tkinter as tk
 import math
 
-# 建立主視窗
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-# size = str(w)+'x'+str(h)
-# size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-# window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-# print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "英文單字王"
-window.title(title)
+win = tk.Tk()
+win.geometry("500x300")
+win.title("英文單字王")
 
 page, pagesize = 0, 10
 datas = dict()
 
-filename = "C:/_git/vcs/_1.data/______test_files1/eword.txt"
-with open(filename, "r", encoding="UTF-8-sig") as f:
+with open("data/eword.txt", "r", encoding="UTF-8-sig") as f:
     for line in f:
         eword, cword = line.rstrip("\n").split(",")
         datas[eword] = cword
@@ -104,12 +90,12 @@ datasize = len(datas)  # 資料筆數
 totpage = math.ceil(datasize / pagesize)  # 總頁數
 
 # 單字顯示區
-frameShow = tk.Frame(window)
+frameShow = tk.Frame(win)
 frameShow.pack()
-labelwords = tk.Label(window, text="")
+labelwords = tk.Label(win, text="")
 labelwords.pack()
 
-frameCommand = tk.Frame(window)  # 翻頁按鈕容器
+frameCommand = tk.Frame(win)  # 翻頁按鈕容器
 frameCommand.pack()
 btnFirst = tk.Button(frameCommand, text="第一頁", width=8, command=First)
 btnPrev = tk.Button(frameCommand, text="上一頁", width=8, command=Prev)
@@ -121,5 +107,4 @@ btnNext.grid(row=0, column=2, padx=5, pady=5)
 btnBottom.grid(row=0, column=3, padx=5, pady=5)
 
 First()
-
-window.mainloop()
+win.mainloop()

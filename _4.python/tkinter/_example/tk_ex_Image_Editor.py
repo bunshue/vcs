@@ -13,10 +13,10 @@ pen_color = "black"
 pen_size = 5
 file_path = ""
 
+
 def add_image():
     global file_path
-    file_path = filedialog.askopenfilename(
-        initialdir = 'C:/dddddddddd/____download')
+    file_path = filedialog.askopenfilename(initialdir="C:/dddddddddd/____download")
     image = Image.open(file_path)
     width, height = int(image.width / 2), int(image.height / 2)
     image = image.resize((width, height), Image.ANTIALIAS)
@@ -39,8 +39,8 @@ def change_size(size):
 def draw(event):
     x1, y1 = (event.x - pen_size), (event.y - pen_size)
     x2, y2 = (event.x + pen_size), (event.y + pen_size)
-    canvas.create_oval(x1, y1, x2, y2, fill=pen_color, outline='')
-    
+    canvas.create_oval(x1, y1, x2, y2, fill=pen_color, outline="")
+
 
 def clear_canvas():
     canvas.delete("all")
@@ -72,43 +72,47 @@ left_frame.pack(side="left", fill="y")
 canvas = tk.Canvas(root, width=750, height=600)
 canvas.pack()
 
-image_button = tk.Button(left_frame, text="Add Image",
-                         command=add_image, bg="white")
+image_button = tk.Button(left_frame, text="Add Image", command=add_image, bg="white")
 image_button.pack(pady=15)
 
 color_button = tk.Button(
-    left_frame, text="Change Pen Color", command=change_color, bg="white")
+    left_frame, text="Change Pen Color", command=change_color, bg="white"
+)
 color_button.pack(pady=5)
 
 pen_size_frame = tk.Frame(left_frame, bg="white")
 pen_size_frame.pack(pady=5)
 
 pen_size_1 = tk.Radiobutton(
-    pen_size_frame, text="Small", value=3, command=lambda: change_size(3), bg="white")
+    pen_size_frame, text="Small", value=3, command=lambda: change_size(3), bg="white"
+)
 pen_size_1.pack(side="left")
 
 pen_size_2 = tk.Radiobutton(
-    pen_size_frame, text="Medium", value=5, command=lambda: change_size(5), bg="white")
+    pen_size_frame, text="Medium", value=5, command=lambda: change_size(5), bg="white"
+)
 pen_size_2.pack(side="left")
 pen_size_2.select()
 
 pen_size_3 = tk.Radiobutton(
-    pen_size_frame, text="Large", value=7, command=lambda: change_size(7), bg="white")
+    pen_size_frame, text="Large", value=7, command=lambda: change_size(7), bg="white"
+)
 pen_size_3.pack(side="left")
 
-clear_button = tk.Button(left_frame, text="Clear",
-                         command=clear_canvas, bg="#FF9797")
+clear_button = tk.Button(left_frame, text="Clear", command=clear_canvas, bg="#FF9797")
 clear_button.pack(pady=10)
 
 filter_label = tk.Label(left_frame, text="Select Filter", bg="white")
 filter_label.pack()
-filter_combobox = ttk.Combobox(left_frame, values=["Black and White", "Blur",
-                                             "Emboss", "Sharpen", "Smooth"])
+filter_combobox = ttk.Combobox(
+    left_frame, values=["Black and White", "Blur", "Emboss", "Sharpen", "Smooth"]
+)
 filter_combobox.pack()
 
 
-filter_combobox.bind("<<ComboboxSelected>>",
-                     lambda event: apply_filter(filter_combobox.get()))
+filter_combobox.bind(
+    "<<ComboboxSelected>>", lambda event: apply_filter(filter_combobox.get())
+)
 
 
 canvas.bind("<B1-Motion>", draw)

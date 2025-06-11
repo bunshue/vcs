@@ -1,4 +1,4 @@
-#import tkinter as tk
+# import tkinter as tk
 
 try:
     from tkinter import Tk, Toplevel, Frame, Label, Scale, HORIZONTAL
@@ -7,6 +7,7 @@ except ImportError:
 
 from PIL import Image, ImageTk, ImageEnhance
 import sys
+
 
 class Enhance(Frame):
     def __init__(self, master, image, name, enhancer, lo, hi):
@@ -21,9 +22,15 @@ class Enhance(Frame):
         Label(self, image=self.tkim).pack()
 
         # scale
-        s = Scale(self, label=name, orient=HORIZONTAL,
-                  from_=lo, to=hi, resolution=0.01,
-                  command=self.update)
+        s = Scale(
+            self,
+            label=name,
+            orient=HORIZONTAL,
+            from_=lo,
+            to=hi,
+            resolution=0.01,
+            command=self.update,
+        )
         s.set(self.value)
         s.pack()
 
@@ -32,9 +39,9 @@ class Enhance(Frame):
         self.tkim.paste(self.enhancer.enhance(self.value))
 
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 window = Tk()
-#window = tk.Tk()
+# window = tk.Tk()
 
 im = Image.open(filename)
 

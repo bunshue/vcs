@@ -1,5 +1,6 @@
 def checkp():
-    p3.set(p2.get()/(p1.get()*p1.get()/10000))
+    p3.set(p2.get() / (p1.get() * p1.get() / 10000))
+
 
 import tkinter as tk
 
@@ -26,4 +27,3 @@ pLmsg = tk.Label(frame1, textvariable=p3)
 pLmsg.pack()
 
 window.mainloop()
-

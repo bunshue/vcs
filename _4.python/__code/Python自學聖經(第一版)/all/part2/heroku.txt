@@ -2,7 +2,7 @@ cd herokuenv1
 Scripts\activate
 
 
-pip install django==3.1.7
+pip install django==2.2.2
 pip install dj-database-url dj-static gunicorn psycopg2
 
 
@@ -13,7 +13,7 @@ pip freeze > requirements.txt
 web: gunicorn --pythonpath news news.wsgi
 
 
-python-3.7.9
+python-3.7.4
 
 
 from .settings import *

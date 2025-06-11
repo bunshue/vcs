@@ -613,7 +613,75 @@ df.to_csv("scores3.csv", encoding="utf-8-sig")
 
 print("------------------------------------------------------------")  # 60個
 
-# ch15\get1.py
+# ch15\create_data.py
+
+import pandas as pd
+import numpy as np
+
+
+def c_item(x):
+    if x < 2:
+        return "筆電"
+    elif x < 7:
+        return "冰箱"
+    else:
+        return "電視"
+
+
+def s_item(x):
+    if x < 5:
+        return "張三安"
+    elif x < 7:
+        return "李四友"
+    else:
+        return "王五信"
+
+
+df = pd.DataFrame(
+    {
+        "業務員": np.random.randint(0, 10, size=100),
+        "商品": np.random.randint(0, 10, size=100),
+        "數量": np.random.randint(30, 300, size=100),
+        "價格": np.random.randint(100, 200, size=100),
+    }
+)
+df["商品"] = df["商品"].map(c_item)
+df["業務員"] = df["業務員"].map(s_item)
+df["價格"] = df["價格"].map(lambda x: x * 100)
+
+df.to_csv("sale.csv", index=False)
+
+print("------------------------------------------------------------")  # 60個
+
+# ch15\create_score.py
+
+import pandas as pd
+import numpy as np
+
+tem = []
+for i in range(3):
+    tem.append(i + 1)
+df = pd.DataFrame(np.random.randint(40, 101, size=(3, 3)), columns=["英文", "社會", "公民"])
+# df = pd.DataFrame(np.random.randint(40,101,size=(3,4)), columns=['國文','數學','自然','社會'])
+df.insert(0, "座號", tem)
+df.to_csv("score2_6.csv", index=False)
+
+print("------------------------------------------------------------")  # 60個
+
+# ch15\split_data.py
+
+import pandas as pd
+import numpy as np
+
+df1 = pd.read_csv("titanic.csv")
+df2 = df1[["row.names", "pclass", "survived", "name", "age", "embarked"]]
+df2.to_csv("titanic1.csv", index=False)
+df3 = df1[["row.names", "home.dest", "room", "ticket", "boat", "sex"]]
+df3.to_csv("titanic2.csv", index=False)
+
+print("------------------------------------------------------------")  # 60個
+
+# ch16\get1.py
 
 from flask import Flask
 from flask import request

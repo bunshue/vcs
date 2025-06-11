@@ -8,7 +8,6 @@ import sys
 
 
 class UI(Label):
-
     def __init__(self, master, im):
         if isinstance(im, list):
             # list of images
@@ -34,9 +33,7 @@ class UI(Label):
         self.after(duration, self.next)
 
     def next(self):
-
         if isinstance(self.im, list):
-
             try:
                 im = self.im[0]
                 del self.im[0]
@@ -45,7 +42,6 @@ class UI(Label):
                 return  # end of list
 
         else:
-
             try:
                 im = self.im
                 im.seek(im.tell() + 1)
@@ -62,8 +58,8 @@ class UI(Label):
         self.update_idletasks()
 
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture2.jpg'
+filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/picture2.jpg"
 
 filename = filename1
 
@@ -75,11 +71,9 @@ print("loading...")
 im = []
 im.append(Image.open(filename1))
 im.append(Image.open(filename2))
-    
-#im = Image.open(filename)
+
+# im = Image.open(filename)
 
 UI(window, im).pack()
 
 window.mainloop()
-
-
