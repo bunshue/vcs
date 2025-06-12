@@ -1,5 +1,5 @@
 """
-Python自學聖經(第一版) 14~22
+Python自學聖經(第二版) 14~22
 
 """
 
@@ -915,12 +915,17 @@ from flask import Flask
 app = Flask(__name__)
 
 from flask import Flask, request, abort
+from flask import request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 line_bot_api = LineBotApi("使用者Channel access token")
 handler = WebhookHandler("使月者Channel secret")
+line_bot_api = LineBotApi(
+    "5P6YQbws0M1vMwSq5r0cpGZe1VBJCZX2cT65ywd+6hvsrjXI6gi3Je64Hau6kmTd+AEQL2AGNk3G7nm8Fjw1L/wL9qIDepSTuMV+2OysJRK0hZQRwykaOIeCAgKsdaytNDLWaDVyfVzjsKeQ8HBiMAdB04t89/1O/w1cDnyilFU="
+)
+handler = WebhookHandler("e03713c489707ceac29953031dde79a0")
 
 
 @app.route("/callback", methods=["POST"])

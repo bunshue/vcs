@@ -1,5 +1,5 @@
 """
-Python自學聖經(第一版)
+Python自學聖經(第二版)
 
 """
 
@@ -1082,13 +1082,9 @@ print(m2)  # ['Do yo']
 
 print("------------------------------------------------------------")  # 60個
 
-
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-# ch09\tk.py
+# ch10\tk.py
 
 import tkinter as tk
 
@@ -1563,6 +1559,10 @@ url = "https://irs.thsrc.com.tw/IMINT/"
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36"
 }
+# 自訂表頭
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36"
+}
 # 將自訂表頭加入 GET 請求中
 r = requests.get(url, headers=headers)
 print(r)
@@ -1598,6 +1598,34 @@ driver.get(url)
 driver.find_element_by_id("email").send_keys(email)  # 輸入郵件
 driver.find_element_by_id("pass").send_keys(password)  # 輸入密碼
 driver.find_element_by_id("loginbutton").click()  # 按登入鈕
+driver.find_element_by_name("login").click()  # 按登入鈕
+
+print("------------------------------------------------------------")  # 60個
+
+# ch11\loginFacebook2.py
+
+from selenium import webdriver
+
+# 設定facebook登入資訊
+url = "https://www.facebook.com/"
+email = "你的faceook電子郵件"
+password = "你的faceook密碼"
+
+# 取消 Alert
+chrome_options = webdriver.ChromeOptions()
+prefs = {"profile.default_content_setting_values.notifications": 2}
+chrome_options.add_experimental_option("prefs", prefs)
+
+# 建立瀏覽器物件
+driver = webdriver.Chrome(chrome_options=chrome_options)
+# 最大化視窗後開啟facebook網站
+driver.maximize_window()
+driver.get(url)
+
+# 執行自動登入動作
+driver.find_element_by_id("email").send_keys(email)  # 輸入郵件
+driver.find_element_by_id("pass").send_keys(password)  # 輸入密碼
+driver.find_element_by_name("login").click()  # 按登入鈕
 
 print("------------------------------------------------------------")  # 60個
 

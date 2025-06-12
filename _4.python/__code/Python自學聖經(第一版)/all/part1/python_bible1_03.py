@@ -134,7 +134,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from io import BytesIO
 
-subscription_key = "你的電腦視覺資源key"
+subscription_key = "你的電腦視覺資源金鑰"  # 金鑰
 vision_base_url = "https://southeastasia.api.cognitive.microsoft.com/vision/v2.0/"
 analyze_url = vision_base_url + "analyze"
 image_url = "https://i.imgur.com/BO7tlY7.jpg"
@@ -161,7 +161,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from io import BytesIO
 
-subscription_key = "你的電腦視覺資源key"
+subscription_key = "你的電腦視覺資源金鑰"  # 金鑰
 vision_base_url = "https://southeastasia.api.cognitive.microsoft.com/vision/v2.0/"
 analyze_url = vision_base_url + "analyze"
 image_path = "street.jpg"  # 本機圖片檔路徑
@@ -191,7 +191,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from io import BytesIO
 
-subscription_key = "你的電腦視覺資源key"
+subscription_key = "你的電腦視覺資源金鑰"  # 金鑰
 vision_base_url = "https://southeastasia.api.cognitive.microsoft.com/vision/v2.0/"
 landmark_analyze_url = vision_base_url + "models/landmarks/analyze"
 image_url = "https://i.imgur.com/WNlkY79.jpg"  # 台北101
@@ -213,7 +213,6 @@ if len(analysis["result"]["landmarks"]) > 0:  # 如果有地標
 else:  # 未傳回地標
     print("無法辨識地標")
 
-
 print("------------------------------------------------------------")  # 60個
 
 # ch26\landmark2.py
@@ -223,7 +222,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from io import BytesIO
 
-subscription_key = "你的電腦視覺資源key"
+subscription_key = "你的電腦視覺資源金鑰"  # 金鑰
 vision_base_url = "https://southeastasia.api.cognitive.microsoft.com/vision/v2.0/"
 landmark_analyze_url = vision_base_url + "models/landmarks/analyze"
 image_url = "https://i.imgur.com/sx3xwOq.jpg"  # 歐巴馬
@@ -244,7 +243,6 @@ if len(analysis["result"]["celebrities"]) > 0:  # 如果有名人
     _ = plt.title(landmark_name, size="x-large", y=-0.1)
 else:  # 未傳回地標
     print("無法辨識地標")
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -277,7 +275,7 @@ from matplotlib.patches import Rectangle
 from PIL import Image
 from io import BytesIO
 
-subscription_key = "你的電腦視覺資源key"  # 資源key
+subscription_key = "你的電腦視覺資源金鑰"  # 金鑰
 vision_base_url = (
     "https://southeastasia.api.cognitive.microsoft.com/vision/v2.0/"  # 資源端點
 )
@@ -322,7 +320,7 @@ from matplotlib.patches import Polygon
 from PIL import Image
 from io import BytesIO
 
-subscription_key = "你的電腦視覺資源key"
+subscription_key = "你的電腦視覺資源金鑰"  # 金鑰
 vision_base_url = "https://southeastasia.api.cognitive.microsoft.com/vision/v2.0/"
 text_recognition_url = vision_base_url + "read/core/asyncBatchAnalyze"
 image_url = "https://i.imgur.com/VYLTAUV.jpg"

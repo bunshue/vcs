@@ -5,9 +5,9 @@
 
 邊緣檢測
 
-Sobel()
-Laplacian()
-Canny()
+cv2.Canny()
+cv2.Sobel()
+cv2.Laplacian()
 
 """
 
@@ -54,16 +54,111 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
+# cv2.Canny() ST
+print("------------------------------------------------------------")  # 60個
 
-src = np.random.randint(-256, 256, size=[3, 5], dtype=np.int16)
-print(f"src = \n {src}")
-dst = cv2.convertScaleAbs(src)
-print(f"dst = \n {dst}")
+src = cv2.imread("data/edge_detection/lena.jpg", cv2.IMREAD_GRAYSCALE)
+cv2.imshow("Src", src)
+
+dst1 = cv2.Canny(src, 50, 100)  # minVal=50, maxVal=100
+dst2 = cv2.Canny(src, 50, 200)  # minVal=50, maxVal=200
+cv2.imshow("Dst1", dst1)
+cv2.imshow("Dst2", dst2)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 影像邊緣檢測Canny()函數
+
+gray_image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 讀取本機圖片, 直接轉成灰階
+
+blur_gray = cv2.GaussianBlur(gray_image, (3, 3), 0)  # 執行高斯模糊化
+threshold_1 = 30  # 強邊緣strong edge
+threshold_2 = 60  # 弱邊緣weak edge
+
+edges = cv2.Canny(blur_gray, threshold_1, threshold_2)
+
+plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
+plt.title("Canny")
+
+show()
+
+plt.figure("影像處理", figsize=(16, 12))
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(gray_image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title("Canny")
+plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
+
+show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("Canny")
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
+
+image = cv2.imread(filename, 0)
+
+plt.figure("影像處理", figsize=(8, 6))
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+# 高斯模糊，Canny边缘检测需要的
+image_blur = cv2.GaussianBlur(image, (5, 5), 0)  # 執行高斯模糊化
+
+# 进行边缘检测，减少图像空间中需要检测的点数量
+image_canny = cv2.Canny(image_blur, 50, 150)
+
+plt.subplot(122)
+plt.title("Canny")
+plt.imshow(cv2.cvtColor(image_canny, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("使用 Sobel()")
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
+image_canny1 = cv2.Canny(image, 128, 200)
+image_canny2 = cv2.Canny(image, 32, 128)
+
+plt.figure("影像處理", figsize=(8, 6))
+plt.subplot(131)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(132)
+plt.title("Canny 1")
+plt.imshow(cv2.cvtColor(image_canny1, cv2.COLOR_BGR2RGB))
+
+plt.subplot(133)
+plt.title("Canny 2")
+plt.imshow(cv2.cvtColor(image_canny2, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+# cv2.Sobel() ST
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("data/edge_detection/map.jpg")
 cv2.imshow("Src", src)
@@ -75,9 +170,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("使用 Sobel()")
 
 src = cv2.imread("data/edge_detection/map.jpg")
 cv2.imshow("Src", src)
@@ -91,8 +183,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("使用 Sobel()")
-
 src = cv2.imread("data/edge_detection/map.jpg")
 cv2.imshow("Src", src)
 
@@ -103,23 +193,19 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("使用 Sobel()")
 
 src = cv2.imread("data/edge_detection/map.jpg")
 cv2.imshow("Src", src)
 
 dst = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
 dst = cv2.convertScaleAbs(dst)  # 將負值轉正值
+
 cv2.imshow("Dst", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-print("使用 Sobel()")
 
 src = cv2.imread("data/edge_detection/map.jpg")
 cv2.imshow("Src", src)
@@ -129,6 +215,7 @@ dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
 dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
 dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+
 cv2.imshow("Dst", dst)
 
 cv2.waitKey()
@@ -136,8 +223,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("使用 Sobel()")
 
 src = cv2.imread("data/edge_detection/lena.jpg")
 cv2.imshow("Src", src)
@@ -147,6 +232,7 @@ dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
 dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
 dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+
 cv2.imshow("Dstx", dstx)
 cv2.imshow("Dsty", dsty)
 cv2.imshow("Dst", dst)
@@ -242,21 +328,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("使用 Laplacian()")
-
-src = cv2.imread("data/edge_detection/laplacian.jpg")
-cv2.imshow("Src", src)
-
-dst_tmp = cv2.Laplacian(src, cv2.CV_32F)  # Laplacian邊緣影像
-dst = cv2.convertScaleAbs(dst_tmp)  # 轉換為正值
-cv2.imshow("Dst", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
 
 print("使用 Sobel() / Scharr() / Laplacian()")
 
@@ -272,12 +343,14 @@ dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
 dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
 dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst_sobel = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+
 # Scharr()函數
 dstx = cv2.Scharr(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dsty = cv2.Scharr(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
 dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
 dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst_scharr = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+
 # Laplacian()函數
 dst_tmp = cv2.Laplacian(src, cv2.CV_32F, ksize=3)  # Laplacian邊緣影像
 dst_lap = cv2.convertScaleAbs(dst_tmp)  # 將負值轉正值
@@ -286,21 +359,6 @@ dst_lap = cv2.convertScaleAbs(dst_tmp)  # 將負值轉正值
 cv2.imshow("Sobel", dst_sobel)
 cv2.imshow("Scharr", dst_scharr)
 cv2.imshow("Laplacian", dst_lap)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("使用 Canny()")
-
-src = cv2.imread("data/edge_detection/lena.jpg", cv2.IMREAD_GRAYSCALE)
-cv2.imshow("Src", src)
-
-dst1 = cv2.Canny(src, 50, 100)  # minVal=50, maxVal=100
-dst2 = cv2.Canny(src, 50, 200)  # minVal=50, maxVal=200
-cv2.imshow("Dst1", dst1)
-cv2.imshow("Dst2", dst2)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -491,6 +549,7 @@ cv2.destroyAllWindows()
 
 
 print("------------------------------------------------------------")  # 60個
+
 # 4、Scharr算法
 
 from scipy import signal
@@ -1107,34 +1166,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 影像邊緣檢測Canny()函數
-
-gray_image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 讀取本機圖片, 直接轉成灰階
-
-blur_gray = cv2.GaussianBlur(gray_image, (3, 3), 0)  # 執行高斯模糊化
-threshold_1 = 30  # 強邊緣strong edge
-threshold_2 = 60  # 弱邊緣weak edge
-
-edges = cv2.Canny(blur_gray, threshold_1, threshold_2)
-
-plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
-plt.title("Canny")
-
-show()
-
-plt.figure("影像處理", figsize=(16, 12))
-plt.subplot(121)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(gray_image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title("Canny")
-plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
-
-show()
-
-
-print("------------------------------------------------------------")  # 60個
 
 # 影像邊緣檢測Sobel()函數
 
@@ -1174,7 +1205,6 @@ plt.imshow(cv2.cvtColor(sobel_image, cv2.COLOR_BGR2RGB))
 show()
 
 print("------------------------------------------------------------")  # 60個
-
 
 # 各種邊緣檢測的方法
 
@@ -1393,6 +1423,20 @@ plt.imshow(cv2.cvtColor(scharrxy, cv2.COLOR_BGR2RGB))
 show()
 
 print("------------------------------------------------------------")  # 60個
+# cv2.Laplacian() ST
+print("------------------------------------------------------------")  # 60個
+
+src = cv2.imread("data/edge_detection/laplacian.jpg")
+cv2.imshow("Src", src)
+
+dst_tmp = cv2.Laplacian(src, cv2.CV_32F)  # Laplacian邊緣影像
+dst = cv2.convertScaleAbs(dst_tmp)  # 轉換為正值
+cv2.imshow("Dst", dst)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/laplacian.bmp"
 
@@ -1413,6 +1457,11 @@ plt.imshow(cv2.cvtColor(Laplacian, cv2.COLOR_BGR2RGB))
 
 show()
 
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+# cv2.Laplacian() SP
 print("------------------------------------------------------------")  # 60個
 
 # 輸出邊緣和結構信息
@@ -2626,20 +2675,6 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
-print("------------------------------------------------------------")  # 60個
-
-print("使用 cv2 顯示圖片")
-
-image = cv2.imread(filename)  # 讀取本機圖片
-
-cv2.imshow("Peony", image)  # 顯示圖片
-
-print("在此等待任意鍵繼續, 繼續後刪除本視窗")
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
 print("取兩圖的影像差異 diff")
 
 filename1 = "C:/_git/vcs/_1.data/______test_files1/compare/compare1.jpg"
@@ -2650,7 +2685,6 @@ img2 = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
 
 print("image1.shape內容 :", img1.shape)
 print("image2.shape內容 :", img2.shape)
-
 
 # 比較並顯示差異影像
 diff = cv2.absdiff(img1, img2)
@@ -2877,62 +2911,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-# 高斯模糊，Canny边缘检测需要的
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("Canny")
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
-
-image = cv2.imread(filename, 0)
-
-plt.figure("影像處理", figsize=(8, 6))
-plt.subplot(121)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-# 高斯模糊，Canny边缘检测需要的
-image_blur = cv2.GaussianBlur(image, (5, 5), 0)  # 執行高斯模糊化
-
-# 进行边缘检测，减少图像空间中需要检测的点数量
-image_canny = cv2.Canny(image_blur, 50, 150)
-
-plt.subplot(122)
-plt.title("Canny")
-plt.imshow(cv2.cvtColor(image_canny, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
-image_canny1 = cv2.Canny(image, 128, 200)
-image_canny2 = cv2.Canny(image, 32, 128)
-
-plt.figure("影像處理", figsize=(8, 6))
-plt.subplot(131)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(132)
-plt.title("Canny 1")
-plt.imshow(cv2.cvtColor(image_canny1, cv2.COLOR_BGR2RGB))
-
-plt.subplot(133)
-plt.title("Canny 2")
-plt.imshow(cv2.cvtColor(image_canny2, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2956,3 +2934,15 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+src = np.random.randint(-256, 256, size=[3, 5], dtype=np.int16)
+print(f"src = \n {src}")
+dst = cv2.convertScaleAbs(src)
+print(f"dst = \n {dst}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# 高斯模糊，Canny边缘检测需要的
