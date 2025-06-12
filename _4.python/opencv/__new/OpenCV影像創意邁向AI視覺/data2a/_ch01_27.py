@@ -51,7 +51,7 @@ YELLOW = (0, 255, 255)  # B G R
 BLACK = (0, 0, 0)  # B G R
 WHITE = (255, 255, 255)  # B G R
 colors = [RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK, WHITE]
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 print("製作影像")
@@ -63,7 +63,6 @@ fig = np.zeros((height, width), dtype=np.uint8)
 
 # 建立 640 X 480 之白圖
 fig = np.ones((height, width), dtype=np.uint8) * 255
-
 
 width, height = 640, 480  # 影像寬, 影像高
 
@@ -191,11 +190,9 @@ print(f"最大值 = {maxVal},  位置 = {maxLoc}")  # 最大值與其位置
 
 print("------------------------------------------------------------")  # 60個
 
-
 # 製作隨機影像
 width, height = 64, 48  # 影像寬, 影像高
 src = np.random.randint(0, 256, size=[height, width], dtype=np.uint8)
-
 
 print("------------------------------------------------------------")  # 60個
 # OpenCV_05_建立空影像
@@ -936,16 +933,19 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 src = []  # 建立原始影像陣列
 
-src1 = cv2.imread("knight0.jpg", cv2.IMREAD_COLOR)
+src1 = cv2.imread("tennis1.jpg", cv2.IMREAD_COLOR)
 src.append(src1)  # 加入原始影像串列
 
-src2 = cv2.imread("knight1.jpg", cv2.IMREAD_COLOR)
+src2 = cv2.imread("tennis2.jpg", cv2.IMREAD_COLOR)
 src.append(src2)  # 加入原始影像串列
 
-template = cv2.imread("knight.jpg", cv2.IMREAD_COLOR)
+src3 = cv2.imread("tennis3.jpg", cv2.IMREAD_COLOR)
+src.append(src3)  # 加入原始影像串列
+
+template = cv2.imread("tennis0.jpg", cv2.IMREAD_COLOR)
 
 # 使用cv2.TM_SQDIFF_NORMED執行模板匹配
 minValue = 1  # 設定預設的最小值
@@ -954,12 +954,13 @@ index = -1  # 設定最小值的索引
 for i in range(len(src)):
     result = cv2.matchTemplate(src[i], template, cv2.TM_SQDIFF_NORMED)
     minVal, maxVal, minLoc, maxLoc = cv2.minMaxLoc(result)
-    print(i, minVal, maxVal, minLoc, maxLoc, "\t比較小", minVal)
+    # print(i, minVal, maxVal, minLoc, maxLoc, "\t比較小", minVal)
+    print("圖 :", i, "值 :", minVal)
     if minValue > minVal:
         minValue = minVal  # 紀錄目前的最小值
         index = i  # 紀錄目前的索引
 
-seq = "knight" + str(index) + ".jpg"
+seq = "tennis" + str(index) + ".jpg"
 print(f"{seq} 比較類似")
 
 plt.subplot(221)
@@ -973,13 +974,13 @@ plt.title("src2")
 #plt.axis("off")
 
 plt.subplot(223)
-plt.imshow(cv2.cvtColor(template, cv2.COLOR_BGR2RGB))
-plt.title("template")
+plt.imshow(cv2.cvtColor(src3, cv2.COLOR_BGR2RGB))
+plt.title("src3")
 #plt.axis("off")
 
 plt.subplot(224)
-plt.imshow(cv2.cvtColor(src[index], cv2.COLOR_BGR2RGB))
-plt.title("dst")
+plt.imshow(cv2.cvtColor(template, cv2.COLOR_BGR2RGB))
+plt.title("template")
 #plt.axis("off")
 
 show()
@@ -987,14 +988,17 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("mutishapes.jpg", cv2.IMREAD_COLOR)
+filename_big = "C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/Angry-Birds01.jpg"
+filename_small = "C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/AB_red.jpg"
+
+src = cv2.imread(filename_big, cv2.IMREAD_COLOR)
 
 plt.subplot(131)
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.title("src")
 #plt.axis("off")
 
-template = cv2.imread("../data2b/heart.jpg", cv2.IMREAD_COLOR)
+template = cv2.imread(filename_small, cv2.IMREAD_COLOR)
 
 height, width = template.shape[:2]  # 獲得模板影像的高與寬
 
@@ -1002,48 +1006,15 @@ height, width = template.shape[:2]  # 獲得模板影像的高與寬
 result = cv2.matchTemplate(src, template, cv2.TM_CCOEFF_NORMED)
 for row in range(len(result)):  # 找尋row
     for col in range(len(result[row])):  # 找尋column
-        if result[row][col] > 0.95:  # 值大於0.95就算找到了
+        if result[row][col] > 0.85:  # 值大於0.95就算找到了
             dst = cv2.rectangle(
-                src, (col, row), (col + width, row + height), GREEN, 3
+                src, (col, row), (col + width, row + height), RED, 3
             )
 
 plt.subplot(132)
 plt.imshow(cv2.cvtColor(template, cv2.COLOR_BGR2RGB))
 plt.title("template")
 #plt.axis("off")
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.title("dst")
-#plt.axis("off")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread("baidu.jpg", cv2.IMREAD_COLOR)
-
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.title("src")
-#plt.axis("off")
-
-template = cv2.imread("mountain_mark.jpg", cv2.IMREAD_COLOR)
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(template, cv2.COLOR_BGR2RGB))
-plt.title("template")
-#plt.axis("off")
-
-h, w = template.shape[:2]  # 獲得模板影像的高與寬
-
-# 使用 cv2.TM_CCOEFF_NORMED 執行模板匹配
-result = cv2.matchTemplate(src, template, cv2.TM_CCOEFF_NORMED)
-for row in range(len(result)):  # 找尋row
-    for col in range(len(result[row])):  # 找尋column
-        if result[row][col] > 0.95:  # 值大於0.95就算找到了
-            dst = cv2.rectangle(src, (col, row), (col + w, row + h), RED, 3)
 
 plt.subplot(133)
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
@@ -1089,9 +1060,12 @@ print(f"目前位置到桃園機場的距離 = {start_taoyuan:8.2f}")
 
 # 計算最短距離
 if start_taipei > start_taoyuan:  # 距離比較
-    cv2.line(src, (start_x, start_y), (ul_x[0], ul_y[0]), BLUE, 2)
+    print('桃園機場 較近')
 else:
-    cv2.line(src, (start_x, start_y), (ul_x[1], ul_y[1]), BLUE, 2)
+    print('台北機場 較近')
+
+cv2.line(src, (start_x, start_y), (ul_x[0], ul_y[0]), RED, 2)
+cv2.line(src, (start_x, start_y), (ul_x[1], ul_y[1]), GREEN, 2)
 cv2.imshow("Dst", dst)
 
 cv2.waitKey()
@@ -1406,10 +1380,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-待清除本地檔案
-copyright.jpg
-"""
 src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
 src = cv2.imread(filename2)
 src = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
@@ -1420,3 +1390,15 @@ print("------------------------------------------------------------")  # 60個
 result = cv2.matchTemplate(src, template, cv2.TM_SQDIFF)
 print(f"result大小 = {result.shape}")
 print(f"陣列內容 \n{result}")
+
+
+
+"""
+待清除本地檔案
+.jpg
+.bmp
+.png
+
+
+"""
+
