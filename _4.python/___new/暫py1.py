@@ -149,40 +149,6 @@ selenium模組 : 瀏覽器自動化操作
 PyAutoGUI模組 : 鍵盤滑鼠自動化
 
 
-print("欲搜尋字串")
-findstr = "aaaa"
-index = str_Obj.find(findstr)     # 搜尋findstr字串是否存在
-if  index >= 0:             # 搜尋檔案是否有欲尋找字串
-    print("搜尋 %s 字串存在 %s 檔案中" % (findstr, filename))
-    print("在索引 %s 位置出現" % index)
-else:
-    print("搜尋 %s 字串不存在 %s 檔案中" % (findstr, filename))
-
-print("------------------------------------------------------------")  # 60個
-
-from os import path
-import shutil
-
-png_path = path.join(default_dest, "fonts/HTML-CSS/TeX/png")
-shutil.rmtree(png_path)
-
-print("------------------------------------------------------------")  # 60個
-
-#留下錄影部分 比較之
-
-record_filename = 'tmp_screen_recording1_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.avi'
-
-#建立影像寫入器 out
-out = cv2.VideoWriter(record_filename, cv2.VideoWriter_fourcc(*'XVID'), 1, ImageGrab.grab().size)  # 幀率為32，可以調節
-
-        for _ in range(10)
-            im = ImageGrab.grab()
-            imm = cv2.cvtColor(np.array(im), cv2.COLOR_RGB2BGR)
-            out.write(imm)
-
-        out.release()
-        cv2.destroyAllWindows()
-
 莫煩 python
 https://mofanpy.com/
 
@@ -194,90 +160,6 @@ turtle.Screen().reset()
 做一個完整版 TextEditor 大整理
 
 
-def msgShow():
-    label["text"] = "I love Python"
-    label["bg"] = "lightyellow"
-    label["fg"] = "blue"
-    
-
-expression = input("請輸入數學表達式 :")
-print("結果是 : ", eval(expression))
-
-
-import datetime
-    today = datetime.date.today()
-    print('Day is', today)
-
-bmi = round(weight / pow(height, 2), 2)
-
-print("------------------------------------------------------------")  # 60個
-
-import os
-import sys
-
-def lll(dirname):
-    for name in os.listdir(dirname):
-        #print('a')
-        if name not in (os.curdir, os.pardir):
-            print('b')
-            full = os.path.join(dirname, name)
-            print(full)
-
-
-foldername = 'C:/_git/vcs/_1.data/______test_files5'
-
-lll(foldername)
-
-bufsize = 8096
-usage = """
-usage: md5sum.py [-b] [-t] [-l] [-s bufsize] [file ...]
--b        : read files in binary mode (default)
--t        : read files in text mode (you almost certainly don't want this!)
--l        : print last pathname component only
--s bufsize: read buffer size (default %d)
-file ...  : files to sum; '-' or no files means stdin
-""" % bufsize
-
-sys.stderr.write('%s: %s\n%s' % ('aaaa', 'bbbbb', usage))
-
----
-
-# cv2 之讀檔 存檔 (轉換檔案格式) 直接改副檔名即可
-img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-cv2.imwrite("aaaa.png", img)
-
-
-
-撈出一層時 若遇到資料夾 是如何處理的?!
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-# Count each letter in the string 
-def countLetters(line, counts): 
-    for ch in line:
-        if ch.isalpha():
-            counts[ord(ch) - ord('a')] += 1
-
-filename = 'data/engnews.txt'
-
-infile = open(filename, "r") # Open the file, 格式要unicode轉ascii
-
-counts = 26 * [0] # Create and initialize counts
-for line in infile:
-    # Invoke the countLetters function to count each letter
-    countLetters(line.lower(), counts)
-    
-# Display results
-for i in range(len(counts)):
-    if counts[i] != 0:
-        print(chr(ord('a') + i) + " appears " + str(counts[i])
-          + (" time" if counts[i] == 1 else " times"))
-
-infile.close() # Close file
-  
-print("------------------------------------------------------------")  # 60個
 
 CVzone
 
@@ -300,7 +182,6 @@ Image.Resampling.LANCZOS
 
 
 python data
-
 
 
 pypy
@@ -418,7 +299,7 @@ D:/.../.../.../.../.../folder/ABCD.nice.EFG
 
 資料夾 副檔名皆不變
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 標準化 info
 
@@ -427,7 +308,7 @@ opencv開啟圖檔
 opencv開啟影片
 opencv開啟WebCam
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 filename1 = 'C:/_git/vcs/_4.python/_data/picture_mix1.bmp'
 filename2 = 'C:/_git/vcs/_4.python/_data/picture_mix2.bmp'
@@ -585,7 +466,7 @@ orientation : 直方圖方向 'vertical'(垂直, 預設), 'horizontal'(水平)
 函數的前後為兩個\n
 
 
-print("------------------------------------------------------------")	#60個
+------------------------------------------------------------
 
 串列操作
         x[0] = x[num - 1]  # 上次結束x座標成新的起點x座標
@@ -593,7 +474,7 @@ print("------------------------------------------------------------")	#60個
         del x[1:]  # 刪除舊串列x座標元素
         del y[1:]  # 刪除舊串列y座標元素
 
-print("------------------------------------------------------------")	#60個
+------------------------------------------------------------
 
 
 C:\_git\vcs\_1.data\______test_files3\DrAP_test6
@@ -635,7 +516,7 @@ print 之
 找適合alpha疊加的範例圖片
 
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 
 opencv目前像是不能做到動畫功能
@@ -935,7 +816,7 @@ str
 
 # - pandas学习参考： [十分钟搞定pandas](http://www.cnblogs.com/chaosimple/p/4153083.html)
 
-print("------------------------------------------------------------")	#60個
+------------------------------------------------------------
 
 標準list  由list組成的list
 
@@ -994,13 +875,13 @@ animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
 
 cur_path = os.path.dirname(__file__) # 取得目前路徑
 
-print("------------------------------------------------------------")	#60個
+------------------------------------------------------------
 
 
-print("------------------------------------------------------------")	#60個
+------------------------------------------------------------
 
 
-print("------------------------------------------------------------")	#60個
+------------------------------------------------------------
 
 
 '''
@@ -1112,8 +993,9 @@ for p in photos:
 print("有無錢號的差異")
 print("無錢號 : " + "cos(x^2)")
 print("有錢號 : " + "$cos(x^2)$")
+  
+------------------------------------------------------------
 
-print("------------------------------------------------------------")  # 60個
 response = requests.post(xxxx)
 result = response.json()
 print(result[0]['translations'][0]['text'])
@@ -1163,12 +1045,12 @@ plt.gcf().set_size_inches(12, 14)
 apiURL='%s/channels/%s/feeds.json?api_key=%s&results=%d' %(host,ChannelID, api_key,records) 
 print(apiURL)
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 sys.stdout = sys.stderr
 print('usage: findlinksto pattern directory ...')
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 #另存新檔
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/human_face.jpg'
@@ -1178,7 +1060,7 @@ cv2.imwrite("face_detection.jpg", image)
 
 cv2.imwrite('7.jpg', image)
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 sys.exit(main(sys.argv[1:], sys.stdout))
 
@@ -1198,7 +1080,7 @@ split replace
             encoding = encoding.replace('_', '')
     if test_func_name.startswith("test_"):
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 自定義版本 資料
 
@@ -1216,13 +1098,13 @@ print('    %-40s%a,' % ('%a:' % k, v))
 print('#    removed %a' % k)
 print('#    updated %a -> %a to %a' % (k, olddata[k], data[k]))
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 print(__doc__ % globals())
 
 print("-"*70)
 
-print("------------------------------------------------------------")  # 60個def chop(line):
+------------------------------------------------------------def chop(line):
 
     if line.endswith("\n"):
         return line[:-1]
@@ -1268,7 +1150,7 @@ def parse_glibc_supported(filename):
         if len(words) != 2:
             continue
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 bind的用法：控件.bind(event, handler),其中event是tkinter已經定義好的的事件，handler是處理器，可以是一個處理函數，如果相關事件發生, handler 函數會被觸發, 事件對象 event 會傳遞給 handler 函數
 基本所有控件都能bind
 
@@ -1322,11 +1204,7 @@ bind的用法：控件.bind(event, handler),其中event是tkinter已經定義好
         width, height：小部件的新大小（以像素為單位）（僅限配置事件）。
         type：事件類型。
 
-
-
-
-print("------------------------------------------------------------")  # 60個
-
+------------------------------------------------------------
  
 #width 選項的單位是文字單位，而不是畫素
 
@@ -1343,7 +1221,8 @@ else:
 
 #熊貓是python的excel
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
+
 啟用一個測試用的本地端伺服器
 python -m http.server -d www
 
@@ -1434,7 +1313,7 @@ def usage():
 
 sys.stderr.write(msg)
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 IFTTT	IF This Then That
 網路自動連結工具
@@ -1457,7 +1336,7 @@ layout = [[sg.Text('PyInstaller EXE Creator', font='Any 15')],
 
 window = sg.Window('PySimpleGUI EXE Maker', layout, auto_size_text=False, auto_size_buttons=False, default_element_size=(20,1), text_justification='right')
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 @app.route('/user/<username>')
 def show_user(username):
@@ -1470,12 +1349,13 @@ encoding = 'utf-8-sig'	編碼設定為將BOM去除的的utf-8編碼
 
 https://pythex.org/
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
+
     simpleaudio：播放WAV文件和NumPy數組。
     winsound：播放WAV文件或鳴響您的系統揚聲器
     https://docs.python.org/3/library/winsound.html
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 OCR 破解驗證碼
 
@@ -1486,12 +1366,13 @@ OCR 破解驗證碼
 
 https://stackoverflow.max-everyday.com/2019/06/python-opencv-denoising/
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 Python 以模組名稱 __name__ 分辨程式執行模式
 
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
+
 MapKeyboard 重設鍵盤按鍵功能、讓指定按鍵失效！（remap鍵盤、停用按鍵）
 https://123.briian.com/forum.php?mod=viewthread&tid=3668
 MapKeyboard v1.5 停用鍵盤按鍵、將按鍵指定其他功能 REMAP
@@ -1513,7 +1394,7 @@ https://tw.piliapp.com/time-now/tw/taipei/+
 檢查本機電腦是否有安裝此套件
 若無 則安裝之
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe
 
@@ -1568,7 +1449,7 @@ except:  # CTRL + C 中斷
     buzzer.deinit()       
 
 
-//print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 
 ----------------import os 大集合----------------
@@ -1579,14 +1460,14 @@ except:  # CTRL + C 中斷
 ----------------import time 大集合----------------
 
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
         print("%s:" % func.__name__.replace("pi_", ""))
         print("result: %s" % str(x))
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 
                 "client001": {
@@ -1601,7 +1482,7 @@ print("------------------------------------------------------------")  # 60個
             "client001", expiration_date=datetime(2020, 1, 4)
             {"fee": 1000.0, "expiration_date": datetime(2020, 1, 4)},
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 #攔截ctrl-C
 import math, time, sys, os
 
@@ -1622,9 +1503,9 @@ except KeyboardInterrupt:
     print('Rotating Cube, by Al Sweigart al@inventwithpython.com')
     sys.exit()  # When Ctrl-C is pressed, end the program.
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 ----------------print 大集合 pppp----------------
 
@@ -1647,11 +1528,11 @@ return fullpath.endswith(".py") or fullpath.endswith(".pyw")
 
 
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
             f = open(path)
         while True:
@@ -1679,7 +1560,7 @@ for i in range(30):
 f.write("    '%s':\t%s,  \t# %s\n" % (name,charcode,comment))
 f.write('\n}\n')
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 				發送e-mail
 				
@@ -1714,32 +1595,19 @@ https://ccet.nkust.edu.tw/p/403-1135-1046-1.php
 
 
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 
-print("------------------------------------------------------------")  # 60個
-
-print("姓名   座號  國文  數學  英文")
-print("%3s  %2d   %3d   %3d  %3d" % ("林大明", 1, 100, 87, 79))
-print("%3s  %2d   %3d   %3d  %3d" % ("陳阿中", 2, 74, 88, 100))
-print("%3s  %2d   %3d   %3d  %3d" % ("張小英", 11, 82, 65, 8))
-
-score = [85, 79, 93]
-print("國文成績：%d 分" % score[0])
-print("數學成績：%d 分" % score[1])
-print("英文成績：%d 分" % score[2])
-
-print("------------------------------------------------------------")  # 60個
 
 print("The pysource module is not le search will be done.", file=sys.stderr)
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 https://www.dreamstime.com/free-images_pg1
 
 https://www.dreamstime.com/free-images_pg1
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 content='''Hello Python
 中文字測試
@@ -1750,7 +1618,7 @@ f=open('file1aaa.txt','w')
 f.write(content)
 f.close()
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 from urllib.parse import urlparse
 
@@ -1766,7 +1634,7 @@ print("port={}".format(up.port))     # 80
 print("path={}".format(up.path))     # /pm25/tw/PM25A.aspx
 print("query={}".format(up.query))   # area=1
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 import requests,json
 
@@ -1795,7 +1663,7 @@ MAXIMUM_CAPACITY = 2 ** 30
 text = open('result.txt').read().strip()
 print("驗證碼為 " + text)
 '''
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 
         def print_three_column(lst):
@@ -1846,7 +1714,7 @@ print("------------------------------------------------------------")  # 60個
                     print("Failed to configure _ctypes module")
                     return False
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 HTML之註解
 <!--
@@ -1961,1877 +1829,13 @@ soup = BeautifulSoup(html_data.text, 'html.parser')
 print("使用 BeautifulSoup 分析網頁")
 print("取得網頁標題", soup.title)
 print("取得網頁標題", soup.title.text)
-
-                       
+                     
                         
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-io與print + 1 * / ** int string length type 
-
-if-else-for-while
-
-function
-
-tk做一個公版的離開按鈕
-tk之button如何做到Enable = false?
-
-for語法
-    for rcs_dir in ('.svn', '.git', '.hg', 'build'):
-        print('取得特定資料夾:', rcs_dir)
-
-def pathdirs():
-    # Convert sys.path into a list of absolute, existing, unique paths.
-    dirs = []
-    normdirs = []
-    for dir in sys.path:
-        dir = os.path.abspath(dir or '.')
-        normdir = os.path.normcase(dir)
-        if normdir not in normdirs and os.path.isdir(dir):
-            dirs.append(dir)
-            normdirs.append(normdir)
-    return dirs
-    
-print("------------------------------------------------------------")  # 60個    
-
-系統參數
-sys.path:
-        scriptdir = os.path.dirname(sys.argv[0])
-        if scriptdir in sys.path:
-            sys.path.remove(scriptdir)
-        sys.path.insert(0, '.')
-
-def cli():
-    # Command-line interface (looks at sys.argv to decide what to do).
-    import getopt
-    class BadUsage(Exception): pass
-
-    # Scripts don't get the current directory in their path by default
-    # unless they are run with the '-m' switch
-    if '' not in sys.path:
-        scriptdir = os.path.dirname(sys.argv[0])
-        if scriptdir in sys.path:
-            sys.path.remove(scriptdir)
-        sys.path.insert(0, '.')
-
-
-print("------------------------------------------------------------")  # 60個
-
-    n = read_uint4(f)
-    assert n >= 0
-    if n > sys.maxsize:
-        raise ValueError("unicodestring4 byte count > sys.maxsize: %d" % n)
-
-
-    def _dbg(self, level, msg):
-        # Write debugging output to sys.stderr.
-        
-        if level <= self.debug:
-            print(msg, file=sys.stderr)
-
-        # default setting for prog
-        if prog is None:
-            prog = _os.path.basename(_sys.argv[0])
-
-print("------------------------------------------------------------")  # 60個
-
-if 'strxfrm' not in globals():
-
-    import os
-    lookup = os.environ.get
-    for variable in envvars:
-        localename = lookup(variable,None)
-        if localename:
-            if variable == 'LANGUAGE':
-                localename = localename.split(':')[0]
-            break
-
-
-
-    outdir = os.path.join(WORKDIR, 'diskimage')
-    if os.path.exists(outdir):
-        shutil.rmtree(outdir)
-
-
-要能夠讓自定義的函數放在固定資料夾  讓.py去引用
-
-
-修改檔案的內容
-
-    if not os.path.isfile(m32):
-        return
-    with open(m32) as fin:
-        with open(makefile, 'w') as fout:
-            for line in fin:
-                line = line.replace("=tmp32", "=tmp64")
-                line = line.replace("=out32", "=out64")
-                line = line.replace("=inc32", "=inc64")
-                # force 64 bit machine
-                line = line.replace("MKLIB=lib", "MKLIB=lib /MACHINE:X64")
-                line = line.replace("LFLAGS=", "LFLAGS=/MACHINE:X64 ")
-                # don't link against the lib on 64bit systems
-                line = line.replace("bufferoverflowu.lib", "")
-                fout.write(line)
-    os.unlink(m32)
-
-print("------------------------------------------------------------")  # 60個
-
-SQLite 和 Python 資料型別
-
-None     <->     NULL
-int      <->     INTEGER/INT
-float    <->     REAL/FLOAT
-str      <->     TEXT/VARCHAR(n)
-bytes    <->     BLOB
-                
-                
-print("------------------------------------------------------------")  # 60個
-
-ord函數		給一個Unicode字符，返回該字符的Unicode數字代碼
-
-例如，給定ord('a') 返回整數 97，ord('\u2020') 返回 8224。同chr相反。
-
-print("------------------------------------------------------------")  # 60個
-
-if __name__ == '__main__':
-    if len(sys.argv) == 1:
-        _print_tokens(shlex())
-    else:
-        fn = sys.argv[1]
-        with open(fn) as f:
-            _print_tokens(shlex(f, fn))
-
-    print("%d: %s[%d]%s %s" % (lineno(), filename(), filelineno(),
-                                   isfirstline() and "*" or "", line))
-print("%d: %s[%d]" % (lineno(), filename(), filelineno()))
-
-    d = {}
-
-        self.con = sqlite.connect(":memory:")
-        self.con.execute("create table test (value text)")
-        self.con.execute("insert into test (value) values (?)", ("a\x00b",))
-
-       row = self.con.execute("select value from test").fetchone()
-        cur.execute("select 4+5 as foo")
-        row = cur.fetchone()
-
-        austria = "Österreich"
-        germany = "Deutchland"
-        a_row = self.con.execute("select ?", (austria,)).fetchone()
-        d_row = self.con.execute("select ?", (germany,)).fetchone()
-        
-print("------------------------------------------------------------")  # 60個
-            print("The latest version of {} on PyPI is {}, but ensurepip "
-                  "has {}".format(project, upstream_version, version))
-
-        sys.stderr.write("can't stat %r: %r\n" % (filename, msg))
-
-print("------------------------------------------------------------")  # 60個
-def usage(msg):
-    sys.stderr.write("%s: %s\n" % (sys.argv[0], msg))
-    sys.stderr.write("Usage: %s [-l] file ...\n" % sys.argv[0])
-    sys.stderr.write("Try `%s -h' for more information.\n" % sys.argv[0])
-
-                print("%s:%d:%s" % (filename, row, line), end=' ')
-
-    list = []
-        list.append((tsub, key))
-    list.sort()
-    list.reverse()
-    width = len(repr(list[0][0]))
-
-
-print("------------------------------------------------------------")  # 60個
-import sys
-
-print('format語法 字串填空')
-
-print('直接打印字串Unknown benchmark: {}'.format('zzzzzzzz', file=sys.stderr))
-print('保留單引號Unknown benchmark: {!r}'.format('zzzzzzzz', file=sys.stderr))
-
-seconds = 1
-seconds_plural = 's' if seconds > 1 else ''
-repeat = 3
-pattern = ('這個字串要填入資料 第一筆 {}, 第二筆 {}, 第三筆 {}\n'
-          '第四筆 {}\n'
-          '第五筆 {!r}\n')
-
-print(pattern.format(3, 8, 3, 4, 'dddd'))
-
-sys.stdout.flush()
-
-print "%s.%s unknown bits %x" % (self.name, name, unk)
-                print "%s.%sunknown integer type %d" % (self.name, name, size)
-        return "CREATE TABLE %s (%s PRIMARY KEY %s)" % (self.name, fields, keys)
-
-    v = db.OpenView("INSERT INTO _Streams (Name, Data) VALUES ('%s', ?)" % name)
-
-
-
-_directories = sets.Set()
-        while logical in _directories:
-            logical = "%s%d" % (_logical, index)
-            index += 1
-        _directories.add(logical)
-
-print("------------------------------------------------------------")  # 60個
-
-import sys
-
-prog = sys.argv[0]
-
-sys.stderr.write("Unable to open %s.  " % 'aaaaa')
-sys.stderr.write("Check for format or version mismatch.\n")
-
-    def touch_pymods(self):
-        # force a rebuild of all modules that use OpenSSL APIs
-        for fname in self.module_files:
-            os.utime(fname)
-
-
-print("------------------------------------------------------------")  # 60個
-
-def usage(code, msg=''):
-    print(__doc__ % globals(), file=sys.stderr)
-    if msg:
-        print(msg, file=sys.stderr)
-    sys.exit(code)
-
-
-            print(_(
-                '*** %(file)s:%(lineno)s: Seen unexpected token "%(token)s"'
-                ) % {
-                'token': tstring,
-                'file': self.__curfile,
-                'lineno': self.__lineno
-                }, file=sys.stderr)
-
-
-
-                        print(_(
-                            '# File: %(filename)s, line: %(lineno)d') % d, file=fp)
-
-print("------------------------------------------------------------")  # 60個
-            print(_(
-                "Can't read --exclude-file: %s") % options.excludefilename, file=sys.stderr)
-
-            fp = sys.stdin.buffer
-
-                print('%s: %s, line %d, column %d' % (
-                    e.args[0], filename, e.args[1][0], e.args[1][1]),
-                    file=sys.stderr)
-
-        print(msg, file=sys.stderr)
-
-print("------------------------------------------------------------")  # 60個
-
-print('No input file given', file=sys.stderr)
-print("Try `msgfmt --help' for more information.", file=sys.stderr)
-
-
-def pprint(data):
-    items = sorted(data.items())
-    for k, v in items:
-        print('    %-40s%a,' % ('%a:' % k, v))
-
-def print_differences(data, olddata):
-    items = sorted(olddata.items())
-    for k, v in items:
-        if k not in data:
-            print('#    removed %a' % k)
-        elif olddata[k] != data[k]:
-            print('#    updated %a -> %a to %a' % \
-                  (k, olddata[k], data[k]))
-        # Additions are not mentioned
-
-print("------------------------------------------------------------")  # 60個
-
-    def print_label(filename, func):
-        name = re.split(r'[-.]', filename)[0]
-        sys.stdout.write(
-            ("[%s] %s... "
-                % (name.center(7), func.__doc__.strip())
-            ).ljust(52))
-        sys.stdout.flush()
-
-
-
-    def print_results(size, n, real, cpu):
-        bw = n * float(size) / 1024 ** 2 / real
-        bw = ("%4d MB/s" if bw > 100 else "%.3g MB/s") % bw
-        sys.stdout.write(bw.rjust(12) + "\n")
-        if cpu < 0.90 * real:
-            sys.stdout.write("   warning: test above used only %d%% CPU, "
-                "result may be flawed!\n" % (100.0 * cpu / real))
-
-print("------------------------------------------------------------")  # 60個
-data = ('abc', '123', '   ', '\u1234\u2345\u3456', '\uFFFF'*10)
-data = ('abc', '123', '   ', '\xe4\xf6\xfc', '\xdf'*10)
-len_data = len(data)
-
-for i in range(self.rounds):
-	s = data[i % len_data]
-
-print("------------------------------------------------------------")  # 60個
-return "%s:%s" % (self.filename, self.lineno)
-
-def __repr__(self):
-	return "<Frame filename=%r lineno=%r>" % (self.filename, self.lineno)
-
-def _normalize_filename(filename):
-    filename = os.path.normcase(filename)
-    if filename.endswith(('.pyc', '.pyo')):
-        filename = filename[:-1]
-    return filename
-
-print("------------------------------------------------------------")  # 60個
-
-sys.stderr.write("WARNING: %s can not be found - standard extensions may not be found\n" % defaultMapName)
-sys.stderr.write("No definition of module %s in any specified map file.\n" % (mod))
-sys.stderr.write("%s: %s\n" % (dsp, msg))
-sys.stderr.write('MARKER 1 never found\n')
-
-sys.stderr.write(
-    "Usage:  %s HOSTNAME:PORTNUMBER [, HOSTNAME:PORTNUMBER...]\n" %
-    sys.argv[0])
-
-unknown = 'ddddd'
-sys.stderr.write('Warning: unknown modules remain: %s\n' %' '.join(unknown))
-
-# Ring bell
-sys.stderr.write('\007')
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-磁碟處理 os類, shutil類
-
-1. 建立資料夾
-2. 檔案複製
-3. 資料夾複製
-4. 刪除檔案
-5. 刪除資料夾
-
-print("------------------------------------------------------------")  # 60個
-
-__version__ = 1, 7, 0
-__version__ = '2.1'
-
-print('PYTHON %s' % __version__)
-
-print("------------------------------------------------------------")  # 60個
-
-def prdict(d):
-    keys = sorted(d.keys())
-    for key in keys:
-        value = d[key]
-        print("%-15s" % key, str(value))
-
-
-    keys = sorted(makevars.keys())
-    for key in keys:
-        outfp.write("%s=%s\n" % (key, makevars[key]))
-    outfp.write("\nall: %s\n\n" % target)
-
-
-print("------------------------------------------------------------")  # 60個
-
-print('溫度:{:.1f}, 濕度:{:.0f}%'.format(humi, temp))
-
-print("------------------------------------------------------------")  # 60個
-
-import sys
-
-error = 'mkreal error'
-
-BUFSIZE = 32*1024
-
-sys.stdout = sys.stderr
-
-
-print("------------------------------------------------------------")  # 60個
-
-import timeit
-import itertools
-import re
-import sys
-import datetime
-import optparse
-
-VERSION = '2.0'
-
-def p(*args):
-    sys.stdout.write(' '.join(str(s) for s in args) + '\n')
-
-if sys.version_info >= (3,):
-    BYTES = bytes_from_str = lambda x: x.encode('ascii')
-    UNICODE = unicode_from_str = lambda x: x
-else:
-    BYTES = bytes_from_str = lambda x: x
-    UNICODE = unicode_from_str = lambda x: x.decode('ascii')
-
-class UnsupportedType(TypeError):
-    pass
-
-p('stringbench v%s' % VERSION)
-p(sys.version)
-
-# Flush buffer before each group
-sys.stdout.flush()
-
-
-p("bytes\tunicode")
-p("(in ms)\t(in ms)\t%\tcomment")
-
-bytes_total = uni_total = 0.0
-
-
-big_s = "A" + ("Z"*128*12)
-print(big_s)
-
-_RANGE_1000 = list(range(1000))
-_RANGE_100 = list(range(100))
-_RANGE_10 = list(range(10))
-
-
-'''
-try:
-    average = bytes_time/uni_time
-except (TypeError, ZeroDivisionError):
-    average = 0.0
-print("%s\t%s\t%.1f\t%s (*%d)" % (
-    bytes_time_s, uni_time_s, 100.*average,
-    v.comment, v.repeat_count))
-
-p("%.2f\t%.2f\t%.1f\t%s" % (
-1000*bytes_total, 1000*uni_total, 100.*ratio, "TOTAL"))
-
-
-'''
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-self.chars = list(range(256))
-
-print("------------------------------------------------------------")  # 60個
-print(self.name+":", size*len(self.data), "bytes", file=sys.stderr)
-
-print("%d+%d bins at shift %d; %d bytes" % (len(t1), len(t2), shift, bytes), file=sys.stderr)
-print("Size of original table:", len(t)*getsize(t), "bytes", file=sys.stderr)
-
-print("------------------------------------------------------------")  # 60個
-    table = {}
-    maxkey = 255
-        for key in range(256):
-            table[key] = (key, '')
-
-    # Create table code
-    maxchar = 0
-    for key in range(256):
-        if key not in table:
-            mapvalue = MISSING_CODE
-            mapcomment = 'UNDEFINED'
-        else:
-            mapvalue, mapcomment = table[key]
-        if mapvalue == MISSING_CODE:
-            mapchar = UNI_UNDEFINED
-        else:
-            if isinstance(mapvalue, tuple):
-                # 1-n mappings not supported
-                return None
-            else:
-                mapchar = chr(mapvalue)
-
-print("------------------------------------------------------------")  # 60個mix
-
-#Get a list of module files for a filename, a module or package name, or a directory.
-def getFilesForName(name):
-    if not os.path.exists(name):
-        # check for glob chars
-        if containsAny(name, "*?[]"):
-            files = glob.glob(name)
-            list = []
-            for file in files:
-                list.extend(getFilesForName(file))
-            return list
-
-        # try to find module or package
-        name = _get_modpkg_path(name)
-        if not name:
-            return []
-
-print("------------------------------------------------------------")  # 60個
-
-def wrong_user_display(user_metadata: dict = {"name": "John", "age": 30}):
-
-print("------------------------------------------------------------")  # 60個
-        words = (
-            "Acquaintance", "Rendezvous",
-            "Acquaintance", "House", "Trip", "House", "House")
-        expected_count = {
-            'Acquaintance': 2,
-            'Rendezvous': 1,
-            'House': 3,
-            'Trip': 1,
-        }
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-self.assertEqual(func(), X + Y)
-self.assertEqual((cn.id_, cn.user, cn.location), (42, "root", "127.0.0.1"))
-self.assertEqual(customer.resolve_customer_id, 1)
-self.assertFalse(hasattr(cn, "extra"))
-self.assertTrue(result["latency"] >= 0.1)
-self.assertTrue(result["latency"] >= 0.1)
-
-self.assertIsNone(process_account_1.__doc__)
-self.assertDictEqual(process_account_1.__annotations__, {})
-self.assertTrue(process_account_2.__doc__.startswith("Process"))
-self.assertDictEqual(process_account_2.__annotations__, {"account_id": str})
-self.assertDictEqual(obtained, {"x": DEFAULT_X, "y": DEFAULT_Y})
-self.assertDictEqual(obtained, {"x": DEFAULT_X, "y": DEFAULT_Y})
-self.assertNotEqual(end_line, "[clinic]*/[clinic]*/")
-
-print("------------------------------------------------------------")  # 60個
-
-        for name, group in (
-            ('y', -1), ('x', -1),
-            ('ch', 0),
-            ('attr', 1),
-            ):
-            p = function.parameters[name]
-
-
-        for name, group in (
-            ('y1', -2), ('y2', -2),
-            ('x1', -1), ('x2', -1),
-            ('ch', 0),
-            ('attr1', 1), ('attr2', 1), ('attr3', 1),
-            ('attr4', 2), ('attr5', 2), ('attr6', 2),
-            ):
-            p = function.parameters[name]
-            self.assertEqual(p.group, group)
-            self.assertEqual(p.kind, inspect.Parameter.POSITIONAL_ONLY)
-
-        self.assertEqual(function.docstring.strip(),
-imaginary([[y1, y2,] x1, x2,] ch, [attr1, attr2, attr3, [attr4, attr5,
-          attr6]])
-
-print("------------------------------------------------------------")  # 60個
-                         
-import unittest
-
-#從另一個.py檔取得參數
-from default_arguments import DEFAULT_X, DEFAULT_Y
-
-'''
-DEFAULT_X = 5
-DEFAULT_Y = 2
-
-'''
-
-print(DEFAULT_X)
-print(DEFAULT_Y)
-
-
-class TestUnitTest(unittest.TestCase):
-    print('UnitTest')
-    print('UnitTest')
-    print('UnitTest')
-
-
-if __name__ == "__main__":
-    unittest.main()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-class BaseTokenizer:
-    """
-    >>> tk = BaseTokenizer("28a2320b-fd3f-4627-9792-a2b38e3c46b0")
-    >>> list(tk)
-    ['28a2320b', 'fd3f', '4627', '9792', 'a2b38e3c46b0']
-    """
-
-    def __init__(self, str_token):
-        self.str_token = str_token
-
-    def __iter__(self):
-        yield from self.str_token.split("-")
-
-
-class UpperIterableMixin:
-    def __iter__(self):
-        return map(str.upper, super().__iter__())
-
-
-class Tokenizer(UpperIterableMixin, BaseTokenizer):
-
-
-tk = Tokenizer("28a2320b-fd3f-4627-9792-a2b38e3c46b0")
-dddd = list(tk)
-print(dddd)
-#    ['28A2320B', 'FD3F', '4627', '9792', 'A2B38E3C46B0']
-
-print("------------------------------------------------------------")  # 60個
-
-import logging
-
-logger = logging.getLogger("RefactoringTool")
-
-logger=self.logger)
-
-logger.info(msg)
-
-            msg = msg % args
-logger.debug(msg)
-
-
-log_debug("Source: %s", line.rstrip("\n"))
-log_error("Can't parse docstring in %s line %s: %s: %s",
-                           filename, lineno, err.__class__.__name__, err)
-
-
-
-    # Set up logging handler
-    level = logging.DEBUG if options.verbose else logging.INFO
-    logging.basicConfig(format='%(name)s: %(message)s', level=level)
-    logger = logging.getLogger('lib2to3.main')
-
-        logger.info('Output in %r will mirror the input directory %r layout.',
-                    options.output_dir, input_base_dir)
-
-print("------------------------------------------------------------")  # 60個
-
-    _default_options = {"print_function" : False,
-                        "write_unchanged_files" : False}
-
-print("------------------------------------------------------------")  # 60個
-
-# Map named tokens to the type value for a LeafPattern
-TOKEN_MAP = {"NAME": token.NAME,
-             "STRING": token.STRING,
-             "NUMBER": token.NUMBER,
-             "TOKEN": None}
-
-print("------------------------------------------------------------")  # 60個
-
-import sys
-import os
-import difflib
-import shutil
-import optparse
-
-def diff_texts(a, b, filename):
-    # Return a unified diff of two strings.
-    a = a.splitlines()
-    b = b.splitlines()
-    return difflib.unified_diff(a, b, filename, filename,
-                                "(original)", "(refactored)",
-                                lineterm="")
-def warn(msg):
-    print("WARNING: %s" % (msg,), file=sys.stderr)
-
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/poetrya.txt'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/poetryb.txt'
-filename = 'ttttt.txt'
-
-diff_lines = diff_texts(filename1, filename2, filename)
-for line in diff_lines:
-    print(line)
-for line in diff_lines:
-    print(line)
-
-warn("couldn't encode %s's diff for your terminal" % (filename,))
-warn("--write-unchanged-files/-W implies -w.")
-
-print("At least one file or directory argument required.", file=sys.stderr)
-print("Use --help to show usage.", file=sys.stderr)
-
-print("Sorry, -j isn't supported on this platform.", file=sys.stderr)
-
-print("------------------------------------------------------------")  # 60個
-
-import sys
-import ensurepip
-
-version=ensurepip._PIP_VERSION
-print(version)
-
-EXPECTED_VERSION_OUTPUT = "pip " + ensurepip._PIP_VERSION
-
-print(EXPECTED_VERSION_OUTPUT)
-
-sentinel = object()
-orig_pip = sys.modules.get("pip", sentinel)
-
-print(orig_pip)
-
-if orig_pip is sentinel:
-    print('aaaaa')
-else:
-    print('bbbbb')
-
-#print(ensurepip._main(["--version"]))
-
-print("------------------------------------------------------------")  # 60個
-
-def output(string = '', end = '\n'):
-    sys.stdout.write(string + end)
-
-
-def output(*strings):
-    for s in strings:
-        sys.stdout.write(str(s) + "\n")
-
-print("------------------------------------------------------------")  # 60個
-
-'''
-json轉dict
-'''
-import os
-import sys
-import json
-from urllib.request import urlopen
-from html.entities import html5
-
-entities_url = 'http://dev.w3.org/html5/spec/entities.json'
-
-def get_json(url):
-    # Download the json file from the url and returns a decoded object.
-    with urlopen(url) as f:
-        data = f.read().decode('utf-8')
-    return json.loads(data)
-
-def create_dict(entities):
-    # Create the html5 dict from the decoded json object.
-    new_html5 = {}
-    for name, value in entities.items():
-        new_html5[name.lstrip('&')] = value['characters']
-    return new_html5
-
-new_html5 = create_dict(get_json(entities_url))
-
-print("------------------------------------------------------------")  # 60個
-
-    print('# Generated by {}.  Do not edit manually.'.format(__file__))
-
-print("------------------------------------------------------------")  # 60個
-        try:
-            # RFC 1952 requires the FNAME field to be Latin-1. Do not
-            # include filenames that cannot be represented that way.
-            fname = os.path.basename(self.name)
-                fname = fname[:-3]
-
-print("------------------------------------------------------------")  # 60個
-
-import locale, copy, io, os, re, struct, sys
-
-print("------------------------------------------------------------")  # 60個
-
-    def __repr__(self):
-        args = ", ".join(map(repr, self.args))
-        keywords = ", ".join("{}={!r}".format(k, v)
-                                 for k, v in self.keywords.items())
-        format_string = "{module}.{cls}({func}, {args}, {keywords})"
-        return format_string.format(module=self.__class__.__module__,
-                                    cls=self.__class__.__name__,
-                                    func=self.func,
-                                    args=args,
-                                    keywords=keywords)
-
-print("------------------------------------------------------------")  # 60個    exe_dir, _ = os.path.split(os.path.abspath(executable))
-
-    site_prefix = os.path.dirname(exe_dir)
-            os.path.join(exe_dir, conf_basename),
-            os.path.join(site_prefix, conf_basename)
-        if os.path.isfile(conffile)
-        here = os.path.dirname(os.__file__)
-        dirs.extend([os.path.join(here, os.pardir), here, os.curdir])
-
-print("------------------------------------------------------------")  # 60個
-
-    ckeys = sorted(caps)
-    for type in ckeys:
-        print(type)
-        entries = caps[type]
-        for e in entries:
-            keys = sorted(e)
-            for k in keys:
-                print("  %-15s" % k, e[k])
-            print()
-
-print("------------------------------------------------------------")  # 60個
-
-def _recursion222(object):
-    print(type(object))
-    print(type(object).__name__)
-    print(id(object))
-    return ("<Recursion on %s with id=%s>"
-            % (type(object).__name__, id(object)))
-
-object = [("string", (1, 2), [3, 4], {5: 6, 7: 8})] * 100000
-nnnn = _recursion222(object)
-print(nnnn)
-
-print("------------------------------------------------------------")  # 60個
-
-warnings.warn('the formatter module is deprecated and will be removed in '
-	'Python 3.6', PendingDeprecationWarning)
-
-warnings.warn("This class is deprecated, use the netrc module instead",
-	DeprecationWarning, 2)
-
-print("------------------------------------------------------------")  # 60個
-
-import os
-import sys
-
-def errprint(*args):
-    sep = ""
-    for arg in args:
-        sys.stderr.write(sep + str(arg))
-        sep = " "
-    sys.stderr.write("\n")
-
-
-file = 'ffff'
-msg = 'mmm'
-errprint("%r: I/O Error: %s" % (file, msg))
-
-msg = 'aaaaaa'
-
-errprint('aaaa', 'bbbb', 'kkkk')
-errprint("Usage:", sys.argv[0], "[-v] file_or_directory ...")
-
-print("------------------------------------------------------------")  # 60個
-
-def errprint(*args):
-    strings = map(str, args)
-    msg = ' '.join(strings)
-    if msg[-1:] != '\n':
-        msg += '\n'
-    sys.stderr.write(msg)
-
-msg = 'aaaaaaaaaaaaaa'
-errprint(msg)
-errprint("Usage:", __doc__)
-errprint("Skipping file %r; can't parse line %d:\n%s" % (self.fname, srow, line))
-
-print("------------------------------------------------------------")  # 60個
-
-    with open(filename, encoding=encoding) as f:
-        return f.read(), filename
-
-print("------------------------------------------------------------")  # 60個import os, sys
-
-# Definition file template
-DEF_TEMPLATE = """\
-EXPORTS
-%s
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-    def get_prog_name(self):
-        if self.prog is None:
-            return os.path.basename(sys.argv[0])
-        else:
-            return self.prog
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-Synopsis: %(prog)s [-h|-b|-g|-r|-a|-d] [ picklefile ] dbfile
-Read the given picklefile as a series of key/value pairs and write to a new
-hash or btree database using db2pickle.py and reconstitute it to a recno
-database with %(prog)s unless your keys are integers.
-"""
-import sys
-
-prog = sys.argv[0]
-
-print(globals())    #印出記憶體內目前所有的變數名稱
-
-print()
-print(__doc__ % globals())  #__doc__的內容有%的, 用變數名稱替換
-print()
-print(__doc__)  #有%不替換
-
-print("------------------------------------------------------------")  # 60個
-import sys, re, os
-
-        sys.stderr.write('Cannot open %s\n' % filename)
-
-    base = os.path.basename(filename)
-    if base[-3:] == '.py':
-        base = base[:-3]
-    s = base + '\t' + filename + '\t' + '1\n'
-    tags.append(s)
-    while 1:
-        line = fp.readline()
-        if not line:
-            break
-
-
-print("------------------------------------------------------------")  # 60個
-USAGE = """\
-Usage: mimetypes.py [options] type
-Options:
-More than one type argument may be given.
-"""
-
-def usage(code, msg=''):
-    print(USAGE)
-    if msg:
-        print(msg)
-
-msg = 'kkkk'
-usage(1, msg)
-
-usage(0)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-def _modname(path):
-    """Return a plausible module name for the patch."""
-
-    base = os.path.basename(path)
-    filename, ext = os.path.splitext(base)
-    return filename
-
-    comparepath = os.path.normcase(path)
-    longest = ""
-    for dir in sys.path:
-        dir = os.path.normcase(dir)
-        if comparepath.startswith(dir) and comparepath[len(dir)] == os.sep:
-            if len(dir) > len(longest):
-                longest = dir
-
-    if longest:
-        base = path[len(longest) + 1:]
-    else:
-        base = path
-    # the drive letter is never part of the module name
-    drive, base = os.path.splitdrive(base)
-    base = base.replace(os.sep, ".")
-    if os.altsep:
-        base = base.replace(os.altsep, ".")
-    filename, ext = os.path.splitext(base)
-    return filename.lstrip(".")
-
-print("------------------------------------------------------------")  # 60個
-
-            if filename.endswith((".pyc", ".pyo")):
-                filename = filename[:-1]
-
-            if coverdir is None:
-                dir = os.path.dirname(os.path.abspath(filename))
-                modulename = _modname(filename)
-            else:
-                dir = coverdir
-                if not os.path.exists(dir):
-                    os.makedirs(dir)
-                modulename = _fullmodname(filename)
-
-                s = os.path.expandvars(s)
-                s = os.path.normpath(s)
-
-print("------------------------------------------------------------")  # 60個
-
-drive = os.environ['HOMEDRIVE']
-
-
-    if path is None:
-        path = os.environ['PATH']
-
-    paths = path.split(os.pathsep)
-    base, ext = os.path.splitext(executable)
-
-print("------------------------------------------------------------")  # 60個
-
-        for n in range(7):
-            values = [5*x-12 for x in range(n)]
-            for r in range(n+2):
-
-        for n in range(6):
-            s = 'ABCDEFG'[:n]
-            for r in range(8):
-                print(r)
-
-        ans = list('abc')
-        long_ans = list(range(10000))
-
-print("------------------------------------------------------------")  # 60個
-
-    if not isinstance(dt, datetime.datetime):
-        time_str = "000000"
-    else:
-        time_str = "{0.hour:02d}{0.minute:02d}{0.second:02d}".format(dt)
-    y = dt.year
-    if legacy:
-        y = y % 100
-        date_str = "{0:02d}{1.month:02d}{1.day:02d}".format(y, dt)
-    else:
-        date_str = "{0:04d}{1.month:02d}{1.day:02d}".format(y, dt)
-    return date_str, time_str
-
-
-
-        cmd = 'NEWNEWS {0} {1} {2}'.format(group, date_str, time_str)
-        return self._longcmdstring(cmd, file)
-
-
-            self.sock = socket.create_connection((host, port), timeout)
-            self.sock = _encrypt_on(self.sock, ssl_context, host)
-            file = self.sock.makefile("rwb")
-            _NNTPBase.__init__(self, file, host,
-                               readermode=readermode, timeout=timeout)
-            if user or usenetrc:
-                self.login(user, password, usenetrc)
-
-        def _close(self):
-            try:
-                _NNTPBase._close(self)
-            finally:
-
-                self.sock.close()
-
-
-        self.host = host
-        self.port = port
-        self.sock = socket.create_connection((host, port), timeout)
-        file = self.sock.makefile("rwb")
-        _NNTPBase.__init__(self, file, host,
-                           readermode, timeout)
-        if user or usenetrc:
-            self.login(user, password, usenetrc)
-
-    def _close(self):
-        try:
-            _NNTPBase._close(self)
-        finally:
-            self.sock.close()
-
-
-    def load_file(self, pathname):
-        dir, name = os.path.split(pathname)
-        name, ext = os.path.splitext(name)
-
-        print()
-        print("  %-25s %s" % ("Name", "File"))
-        print("  %-25s %s" % ("----", "----"))
-
-
-            if m.__path__:
-                print("P", end=' ')
-            else:
-                print("m", end=' ')
-            print("%-25s" % key, m.__file__ or "")
-
-
-        new_filename = original_filename = os.path.normpath(co.co_filename)
-
-
-
-    path[0] = os.path.dirname(script)
-
-
-    if os.path.isabs(pathname):
-        return '/' + '/'.join(components)
-    else:
-        return '/'.join(components)
-
-
-print("------------------------------------------------------------")  # 60個            print(file=self.stream)
-            print(file=self.stream)
-
-print("------------------------------------------------------------")  # 60個
-
-import os
-import sys
-import stat
-
-def _get_sep(path):
-    if isinstance(path, bytes):
-        return b'/'
-    else:
-        return '/'
-
-def splitdrive(p):
-    """Split a pathname into drive and path. On Posix, drive is always
-    empty."""
-    return p[:0], p
-
-def basename(p):
-    """Returns the final component of a pathname"""
-    sep = _get_sep(p)
-    i = p.rfind(sep) + 1
-    return p[i:]
-
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-st = os.lstat(filename)
-print(st)
-isLink = stat.S_ISLNK(st.st_mode)
-print(isLink)
-
-aaa = splitdrive(filename)
-print(aaa)
-
-bbb = basename(filename)
-print(bbb)
-
-print("------------------------------------------------------------")  # 60個
-
-    def touch(self, mode=0o666, exist_ok=True):
-        """
-        Create this file with the given access mode, if it doesn't exist.
-        """
-        if self._closed:
-            self._raise_closed()
-        if exist_ok:
-            # First try to bump modification time
-            # Implementation note: GNU touch uses the UTIME_NOW option of
-            # the utimensat() / futimens() functions.
-            try:
-                self._accessor.utime(self, None)
-            except OSError:
-                # Avoid exception chaining
-                pass
-            else:
-                return
-        flags = os.O_CREAT | os.O_WRONLY
-        if not exist_ok:
-            flags |= os.O_EXCL
-        fd = self._raw_open(flags, mode)
-        os.close(fd)
-
-print("------------------------------------------------------------")  # 60個
-
-import os
-import sys
-from stat import S_ISDIR, S_ISLNK, S_ISREG, S_ISSOCK, S_ISBLK, S_ISCHR, S_ISFIFO
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-print(os.lstat(filename))
-print(os.lstat(filename).st_mode)
-print(os.lstat(filename).st_gid)
-
-reserved_names = (
-    {'CON', 'PRN', 'AUX', 'NUL'} |
-    {'COM%d' % i for i in range(1, 10)} |
-    {'LPT%d' % i for i in range(1, 10)}
-    )
-
-for aaa in reserved_names:
-    print(aaa, end = ' ')
-print()
-
-'''
-S_ISSOCK(self.stat().st_mode)
-S_ISFIFO(self.stat().st_mode)
-S_ISCHR(self.stat().st_mode)
-S_ISBLK(self.stat().st_mode)
-S_ISLNK(self.lstat().st_mode)
-S_ISDIR(self.stat().st_mode)
-S_ISREG(self.stat().st_mode)
-
-
-    def _iterate_directories(self, parent_path, is_dir, listdir):
-        yield parent_path
-        for name in listdir(parent_path):
-            path = parent_path._make_child_relpath(name)
-            if is_dir(path):
-                for p in self._iterate_directories(path, is_dir, listdir):
-                    yield p
-
-
-
-
-    def _select_from(self, parent_path, is_dir, exists, listdir):
-        if not is_dir(parent_path):
-            return
-        path = parent_path._make_child_relpath(self.name)
-        if exists(path):
-            for p in self.successor._select_from(path, is_dir, exists, listdir):
-                yield p
-
-    def _select_from(self, parent_path, is_dir, exists, listdir):
-        if not is_dir(parent_path):
-            return
-        cf = parent_path._flavour.casefold
-        for name in listdir(parent_path):
-            casefolded = cf(name)
-            if self.pat.match(casefolded):
-                path = parent_path._make_child_relpath(name)
-                for p in self.successor._select_from(path, is_dir, exists, listdir):
-                    yield p
-
-        path.is_absolute()
-
-'''
-
-
-print("------------------------------------------------------------")  # 60個
-from collections.abc import MutableMapping
-from collections import OrderedDict as _default_dict, ChainMap as _ChainMap
-import functools
-import io
-import itertools
-import re
-import sys
-import warnings
-
-warnings.warn(
-    "The 'filename' attribute will be removed in future versions.  "
-    "Use 'source' instead.",
-    DeprecationWarning, stacklevel=1
-    )
-
-'''
-    def read(self, filenames, encoding=None):
-        if isinstance(filenames, str):
-            filenames = [filenames]
-        read_ok = []
-        for filename in filenames:
-            try:
-                with open(filename, encoding=encoding) as fp:
-                    self._read(fp, filename)
-            except OSError:
-                continue
-            read_ok.append(filename)
-        return read_ok
-
-    def read_file(self, f, source=None):
-        """Like read() but the argument must be a file-like object.
-
-        The `f' argument must be iterable, returning one line at a time.
-        Optional second argument is the `source' specifying the name of the
-        file being read. If not given, it is taken from f.name. If `f' has no
-        `name' attribute, `<???>' is used.
-        """
-        if source is None:
-            try:
-                source = f.name
-            except AttributeError:
-                source = '<???>'
-        self._read(f, source)
-
-        elements_added = set()
-        for section, keys in dictionary.items():
-            section = str(section)
-
-'''
-print("------------------------------------------------------------")  # 60個
-
-name = ['mouse', 'ox', 'tiger']
-weight = [3, 48, 33]
-print('名稱     編號  體重')
-for i in range(0, 3):
-    print(name[i].ljust(10),
-          str(i+1).rjust(10),
-          str(weight[i]).rjust(10))
-
-print("------------------------------------------------------------")  # 60個
-
-print('glob: {}'.format(foldername))
-for fname in glob.glob(foldername, recursive=False):
-    print("loading: {}".format(fname))
-
-print("------------------------------------------------------------")  # 60個
-
-print('Python之內建函數')
-r = abs(-10)
-print("abs(-10) = " + str(r))
-r = abs(5)
-print("abs(5) = " + str(r))
-r = pow(8, 2)
-print("pow(8, 2) = " + str(r))
-r = pow(2, 3)
-print("pow(2, 3) = " + str(r))
-r = max(9, 3, 12, 32, 81, 92)
-print("max(9, 3, 12, 32, 81, 92) = " + str(r))
-r = min(9, 3, 12, 32, 81, 92)
-print("min(9, 3, 12, 32, 81, 92) = " + str(r))
-r = round(5.32)
-print("round(5.32) = " + str(r))
-r = round(5.52)
-print("round(5.52) = " + str(r))
-r = round(3.14568757, 3)
-print("round(3.14568757, 3) = " + str(r))
-r = round(3.14568757, 1)
-print("round(3.14568757, 1) = " + str(r))
-
-print("------------------------------------------------------------")  # 60個
-
-print("D:\\Python\\ch08")
-print("HEX: \x48\x45\x58")
-
-print("------------------------------------------------------------")  # 60個
-
-x, y = 10, 20
-s = "Y= {1} X= {0}".format(x, y)
-print(s)
-s = "y = {a} x = {b}".format(b=x, a = y)
-print(s)
-print("整數: {0:5d}".format(456))
-print("整數: {0:05d}".format(123))
-print("浮點數: {0:6.3f}".format(123.45678))
-print("二進位: {0:b}".format(200))
-print("八進位: {0:o}".format(200))
-print("十六進位: {0:x}".format(200))
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = 'welcome to python'
-s = str1.capitalize()
-print("str1.capitalize() = " + s)
-s = str1.title()
-print("str1.title() = " + s)
-s = str1.swapcase()
-print("str1.swapcase() = " + s)
-
-s = str1.replace('python', 'vcs')
-print("str1.replace() = " + s)
-
-print("------------------------------------------------------------")  # 60個
-
-d1 = {x: x*x for x in range(10)}
-print(d1)
-d2 = {x: x*x for x in range(10) if x % 2 == 0}
-print(d2)
-
-lst1 = [x for x in range(10)]
-print(lst1)
-lst2 = [x+1 for x in range(10)]
-print(lst2)
-lst3 = [x for x in range(10) if x % 2 == 1]
-print(lst3)
-lst4 = [x*2 for x in range(10) if x %2 == 1]
-print(lst4)
-
-print("------------------------------------------------------------")  # 60個
-
-# 字元函數
-ch1 = "A"
-print("ch1 = " + ch1)
-a = ord(ch1)
-print("ord(ch1) = " + str(a))
-a = chr(97)
-print("chr(97) = " + a)
-a = ord('B')
-print("ord('B') = " + str(a))
-
-split的用法(3)
-str1 = "This is a pen."
-lst1 = str1.split()
-print(lst1)
-str2 = "Tom,Bob,Mary,Joe,John"
-lst2 = str2.split(",")
-print(lst2)
-str3 = "23\n52\n44\n78"
-lst3 = str3.splitlines()
-print(lst3)
-
-print("------------------------------------------------------------")  # 60個
-
-#eval() 和 exec()，能夠將字串轉換成可以運作的程式碼
-
-m = 10
-eval("print('Python')")
-eval("print(50 + 10)")
-eval("print(55 / 13)")
-eval("print( m  * 5)")
-eval("print('m' * 5)")
-
-a, b, c = 1, 2, 3
-eval('print(a, b, c)')                            # 1, 2, 3
-eval('print(a, b, c)', {'a':4, 'b':5, 'c':6})     # 4, 5, 6
-eval('print(a, b, c)', {'a':4, 'b':5, 'c':6}, {'a':7, 'b':8, 'c':9})   # 7, 8, 9
-eval('print(a, b, c)')   # 1, 2, 3
-
-a = eval('x+y',{'x':1,'y':2})
-print(a)       # 3
-
-print("------------------------------------------------------------")  # 60個
-
-字串處理函數
-msg = '''CIA Mark told CIA Linda that the secret USB had given to CIA Peter'''
-print("字串開頭是CIA: ", msg.startswith("CIA"))
-print("字串結尾是CIA: ", msg.endswith("CIA"))
-print("CIA出現的次數: ",msg.count("CIA"))
-msg = msg.replace('Linda','Lxx')
-print("新的msg內容 : ", msg)
-
-print("------------------------------------------------------------")  # 60個
-
-檢查touch
-
-    mtime = None
-    atime = None
-    try:
-        statbuf = os.stat(filename)
-        mtime = statbuf.st_mtime
-        atime = statbuf.st_atime
-        os.chmod(tempname, statbuf[ST_MODE] & 0o7777)
-
-    if preserve_timestamps:
-        if atime and mtime:
-            try:
-                os.utime(filename, (atime, mtime))
-            except OSError as msg:
-                err('%s: reset of timestamp failed (%r)\n' % (filename, msg))
-                return 1
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/poetry2.txt'
-
-with open(filename, "rb") as f:
-    data = f.read()
-if b'\0' in data:
-    print(filename, "\tBinary")
-else:
-    print(filename, "\tASCII")
-
-print("------------------------------------------------------------")  # 60個
-
-"""Reverse grep.
-Usage: rgrep [-i] pattern file
-"""
-
-import sys
-
-def usage(msg, code=2):
-    sys.stdout = sys.stderr
-    print(msg)
-    print(__doc__)
-    sys.exit(code)
-
-
-usage("not enough arguments")
-
-print("------------------------------------------------------------")  # 60個
-
-print(__file__)
-print(__file__.lower())
-print(__file__.upper())
-
-import os
-print(os.path.dirname(__file__))
-
-    pathlist = os.environ['PATH'].split(os.pathsep)
-    print(pathlist)
-
-print("------------------------------------------------------------")  # 60個
-
-set
-
-consuming_calls = {"sorted", "list", "set", "any", "all", "tuple", "sum",
-                   "min", "max", "enumerate"}
-
-print(type(consuming_calls))
-
-print("------------------------------------------------------------")  # 60個
-
-
-串的格式化	使用 format
-
-Python 字串可以做一些格式化, 比如說...
-
-message = "你好, 來自{}的{}!".format(bp, name)
-
-
-"1 美金是 {:.2f} 台幣。".format(30.1077859)
-print("平均 = {:.2f}".format(s/5))
-
-list(range(10))
-list(range(1,10))
-list(range(3, 15))
-
-print("------------------------------------------------------------")	#60個    
-
-    factors = []
-:
-:
-    factors = list(set(factors))
-
-
-list 轉 set 轉 list
-
-這樣可以把重複地排除掉
-
-print("------------------------------------------------------------")	#60個
-
-        textvars = dict(
-            VER='aaaaa',
-            FULLVER='bbbbb',
-        )
-
-print("------------------------------------------------------------")	#60個
-
-s = "   this is a sample sentance. this is a cat\n "
-print(s.capitalize())
-print(s.upper())
-print(s.upper().casefold())
-print(s.count("a"))
-print(s.endswith("ce."))
-print(s.find("this"))
-print(s.split())
-print("#".join(s.split()))
-print(s.strip())
-print(s.lstrip())
-print(s.rstrip())
-print(s.rfind("is"))
-print(s.zfill(50))
-
-print("------------------------------------------------------------")	#60個
-
-for name in sorted(players.keys( )):
-    print(name)
-    print(f"Hi! {name} 我喜歡看你在 {players[name]} 的表現")
-    
-    
-for team in players.values( ):
-    print(team)
-    
-print("------------------------------------------------------------")	#60個
-
-height = eval(input("請輸入身高(公分)："))
-weight = eval(input("請輸入體重(公斤)："))
-BMI = weight / (height / 100) ** 2 
-if BMI >= 18.5 and BMI < 24:
-    print(f"{BMI = :5.2f}體重正常")
-else:
-    print(f"{BMI = :5.2f}體重不正常")
-    
-    print(f"{r1 = :6.4f},    {r2 = :6.4f}")
-
-print("------------------------------------------------------------")	#60個    
-
-cars = ['honda','bmw','toyota','ford']     
-print(f"目前串列car內容 = {cars}")
-print("使用sorted()由小排到大")
-cars_sorted = sorted(cars)            
-print(f"從小排到大的排序串列結果 = {cars_sorted}")
-print("-"*60)
-print(f"原先串列car內容 = {cars}")
-cars_sorted = sorted(cars,reverse=True)            
-print(f"從大排到小的排序串列結果 = {cars_sorted}")
-print(f"原先串列car內容不變 = {cars}")
-print("="*60)
-nums = [5, 3, 9, 2]     
-print(f"目前串列num內容 = {nums}")
-print("使用sorted()由小排到大")
-nums_sorted = sorted(nums)            
-print(f"從小排到大的排序串列結果 = {nums_sorted}")
-print("-"*60)
-print(f"原先串列num內容 = {nums}")
-nums_sorted = sorted(nums,reverse=True)            
-print(f"從大排到小的排序串列結果 = {nums_sorted}")
-print(f"原先串列num內容不變 = {nums}")
-
-print("------------------------------------------------------------")	#60個
-
-# If this program was run (instead of imported), run the game:
-if __name__ == '__main__':
-    try:
-        main()
-    except KeyboardInterrupt:
-        sys.exit()  # When Ctrl-C is pressed, end the program.
-
-print("------------------------------------------------------------")	#60個
-
-ans = 0                         # 讀者心中的數字
-print("猜生日日期遊戲,請回答下列5個問題,這個程式即可列出你的生日")
-
-truefalse = "輸入y或Y代表有, 其它代表無 : "
-# 檢測2進位的第1位是否含1
-q1 = "有沒有看到自己的生日日期 : \n" + \
-     "1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31 \n"
-num = input(q1 + truefalse)
-print(num)
-if num == "y" or num == "Y":
-    ans += 1
-# 檢測2進位的第2位是否含1
-truefalse = "輸入y或Y代表有, 其它代表無 : "
-q2 = "有沒有看到自己的生日日期 : \n" + \
-     "2, 3, 6, 7, 10, 11, 14, 15, 18, 19, 22, 23, 26, 27, 30, 31 \n"
-num = input(q2 + truefalse)
-if num == "y" or num == "Y":
-    ans += 2
-# 檢測2進位的第3位是否含1
-truefalse = "輸入y或Y代表有, 其它代表無 : "
-q3 = "有沒有看到自己的生日日期 : \n" + \
-     "4, 5, 6, 7, 12, 13, 14, 15, 20, 21, 22, 23, 28, 29, 30, 31 \n"
-num = input(q3 + truefalse)
-if num == "y" or num == "Y":
-    ans += 4
-# 檢測2進位的第4位是否含1
-truefalse = "輸入y或Y代表有, 其它代表無 : "
-q4 = "有沒有看到自己的生日日期 : \n" + \
-     "8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27, 28, 29, 30, 31 \n"
-num = input(q4 + truefalse)
-if num == "y" or num == "Y":
-    ans += 8
-# 檢測2進位的第5位是否含1
-truefalse = "輸入y或Y代表有, 其它代表無 : "
-q5 = "有沒有看到自己的生日日期 : \n" + \
-     "16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 \n"
-num = input(q5 + truefalse)
-if num == "y" or num == "Y":
-    ans += 16
-
-print(f"讀者的生日日期是 : {ans}")
-
-print("------------------------------------------------------------")	#60個
-
-song = """
-The Zen of Python, by Tim Peters
-
-Beautiful is better than ugly.
-Explicit is better than implicit.
-Simple is better than complex.
-Complex is better than complicated.
-Flat is better than nested.
-Sparse is better than dense.
-Readability counts.
-Special cases aren't special enough to break the rules.
-Although practicality beats purity.
-Errors should never pass silently.
-Unless explicitly silenced.
-In the face of ambiguity, refuse the temptation to guess.
-There should be one-- and preferably only one --obvious way to do it.
-Although that way may not be obvious at first unless you're Dutch.
-Now is better than never.
-Although never is often better than *right* now.
-If the implementation is hard to explain, it's a bad idea.
-If the implementation is easy to explain, it may be a good idea.
-Namespaces are one honking great idea -- let's do more of those!"""
-
-# 以下是將單字大寫字母全部改成小寫
-songLower = song.lower()            # 單字改為小寫
-
-# 將段落的標點符號用空字元取代
-for ch in songLower:                
-    if ch in ".,?!-*":
-        songLower = songLower.replace(ch,'')
-
-# 將文字段落字串轉成串列
-songList = songLower.split()        
-
-# 將單字串列處理成字典 
-mydict = {wd:songList.count(wd) for wd in songList}
-for wd, count in sorted(mydict.items()):
-    print(wd, ":", count)                 
-    
-print("------------------------------------------------------------")	#60個
-
-song = """
-The Zen of Python, by Tim Peters
-
-Beautiful is better than ugly.
-Explicit is better than implicit.
-Simple is better than complex.
-Complex is better than complicated.
-Flat is better than nested.
-Sparse is better than dense.
-Readability counts.
-Special cases aren't special enough to break the rules.
-Although practicality beats purity.
-Errors should never pass silently.
-Unless explicitly silenced.
-In the face of ambiguity, refuse the temptation to guess.
-There should be one-- and preferably only one --obvious way to do it.
-Although that way may not be obvious at first unless you're Dutch.
-Now is better than never.
-Although never is often better than *right* now.
-If the implementation is hard to explain, it's a bad idea.
-If the implementation is easy to explain, it may be a good idea.
-Namespaces are one honking great idea -- let's do more of those!"""
-
-# 以下是將單字大寫字母全部改成小寫
-songLower = song.lower()            # 單字改為小寫
-
-# 將段落的標點符號用空字元取代
-for ch in songLower:                
-    if ch in ".,?!-*":
-        songLower = songLower.replace(ch,'')
-
-# 將文字段落字串轉成串列
-songList = songLower.split()        
-
-# 將單字串列處理成字典 
-mydict = {wd:songList.count(wd) for wd in songList}
-for wd, count in sorted(mydict.items()):
-    print(wd, ":", count)                 
-    
-print("------------------------------------------------------------")	#60個    
-    
-def pi(n):
-    p = 0
-    for i in range(1,n+1, 1):
-        p += 4 *((-1)**(i+1)/(2*i-1))
-    return p
-
-print("  i      PI ")
-print("================")
-for i in range(1, 10000, 1000):
-    print("%5d   %7.5f" % (i, pi(i)))
-    
-print("------------------------------------------------------------")	#60個
-
-sc = {'John':80, 'Tom':90, 'Kevin':77}
-newsc1 = sorted(sc.items(), key = lambda x:x[0])  # 依照key排序
-print("依照人名排序")
-for i in range(len(newsc1)):
-    print(f"{newsc1[i][0]:5s}:{newsc1[i][1]}")
-
-print("依照分數排序")
-newsc2 = sorted(sc.items(), key = lambda x:x[1])  # 依照value排序
-for i in range(len(newsc2)):
-    print(f"{newsc2[i][0]:5s}:{newsc2[i][1]}")
-    
-print("------------------------------------------------------------")	#60個
-
-DATA = b'Jack is my hero'
-
-f = open(self.fname1, 'wb')
-f.write(self.DATA)
-f.close()
-
-
-f = open(self.fname1, 'rb')
-finish = f.readline()
-f.close()
-
-self.assertEqual(self.DATA, finish)
-
-print("------------------------------------------------------------")	#60個
-
-        for k, v in dict.items():
-            if k.endswith('_pre') or k.endswith('_post'):
-                assert isinstance(v, function)
-            elif isinstance(v, function):
-                methods.append(k)
-        for m in methods:
-            pre = dict.get("%s_pre" % m)
-            post = dict.get("%s_post" % m)
-            if pre or post:
-                dict[m] = cls.make_eiffel_method(dict[m], pre, post)
-
-print("------------------------------------------------------------")	#60個
-
-print('zip 測試')
-def iterate_simul():
-    xpts = [1, 5, 4, 2, 10, 7]
-    ypts = [101, 78, 37, 15, 62, 99]
-    for x, y in zip(xpts, ypts):
-        print(x, y)
-
-    a = [1, 2, 3]
-    b = ['w', 'x', 'y', 'z']
-    for i in zip(a,b):
-        print(i)  # 默认是按最短长度
-
-    headers = ['name', 'shares', 'price']
-    values = ['ACME', 100, 490.1]
-    s = dict(zip(headers,values))
-
-    for name, val in zip(headers, values):
-        print(name, '=', val)
-
-
-if __name__ == '__main__':
-    iterate_simul()
-
-
-
-print("------------------------------------------------------------")	#60個
-
-
-"""
-字典转换成XML格式
-"""
-from xml.etree.ElementTree import Element
-from xml.etree.ElementTree import tostring
-
-def dict_to_xml(tag, d):
-    """
-    Turn a simple dict of key/value pairs into XML
-    """
-    elem = Element(tag)
-    for key, val in d.items():
-        child = Element(key)
-        child.text = str(val)
-        elem.append(child)
-    return elem
-
-if __name__ == '__main__':
-    r = dict_to_xml('root', {'鼠':'mouse', '牛':'ox'})
-    print(r)
-    print(tostring(r))
-    r.set('虎', 'tiger')
-    print(tostring(r))
-
-print("------------------------------------------------------------")	#60個
-
-重新命名檔案
-
-import os
-os.rename('filename.txt', 'new_filename.txt')
-
-import os
-os.rename('/path/to/dir/filename.txt', '/path/to/dir/new_filename.txt')
-
-import os
- 
-dir = '/path/to/dir'
-old_file = os.path.join(dir, 'filename.txt')
-new_file = os.path.join(dir, 'new_filename.txt')
- 
-os.rename(old_file, new_file)
-
-print("------------------------------------------------------------")	#60個
-
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 '''
 list [] append
@@ -3889,7 +1893,7 @@ def sendLUIS(event, mtext):  #LUIS
        line_bot_api.reply_message(event.reply_token, TextSendMessage(text='執行時產生錯誤！'))
 
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 np.arange(10)
 
@@ -3899,7 +1903,7 @@ np.arange(3, 10, 0.5)
 
 A = np.arange(10)
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 print 格式化
 
@@ -3915,7 +1919,7 @@ print(f"在{name}, 我的輸出是 {output:.2f}。")
 行家超愛的 list comprehension
 [i**2 for i in range(10)]
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
         return "%s %s %2d %02d:%02d:%02d %04d" % (
             _DAYNAMES[weekday],
@@ -3924,7 +1928,7 @@ print("------------------------------------------------------------")  # 60個
             self._hour, self._minute, self._second,
             self._year)
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 innum = 0
 list1 = []
@@ -3938,7 +1942,7 @@ print("最小數為：%d" % min(list1))
 print("輸入數的總和為：%d" % sum(list1))
 print("輸入數由大到小排序為：{}".format(sorted(list1, reverse=True)))
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 list的排列要指名欄位
 sc.sort(key=lambda x:x[5],reverse=True)     # 依據總分高往低排序
@@ -3947,7 +1951,7 @@ sc.sort(key=lambda x:x[5],reverse=True)     # 依據總分高往低排序
 # 以下依座號排序
 sc.sort(key=lambda x:x[0])                  # 依據座號排序
 
-print("------------------------------------------------------------")	#60個
+------------------------------------------------------------
 
 字典
 dict = {'Name': 'Zara', 'Age': 7, 'Class': 'First'}
@@ -3958,7 +1962,7 @@ dict['School'] = "DPS School" # 新增資料
 print("dict['Age']: ", dict['Age'])
 print("dict['School']: ", dict['School'])
 
-print("------------------------------------------------------------")	#60個
+------------------------------------------------------------
 
  Python列表：	//操作方式很像字串
  
@@ -3969,7 +1973,7 @@ list3 = ["a", "b", "c", "d"]
 print "list1[0]: ", list1[0]
 print "list2[1:5]: ", list2[1:5]
  
-print("------------------------------------------------------------")	#60個
+------------------------------------------------------------
 
 刪除列表中的元素：
 
@@ -3989,7 +1993,7 @@ len([1, 2, 3]) 	3 				長度
 3 in [1, 2, 3] 	True 				成員
 for x in [1, 2, 3]: print x, 	1 2 3 		迭代
 
-print("------------------------------------------------------------")	#60個
+------------------------------------------------------------
 
 # *args 與 **kwargs 選用性與關鍵字參數
 
@@ -4011,7 +2015,7 @@ print('')
 
 foo('hello', 1, 2, 3, key='value', key2=999)
 
-print("------------------------------------------------------------")	#60個
+------------------------------------------------------------
 
 # lambda: 只有單一運算式的匿名函式
 
@@ -4021,7 +2025,7 @@ print(add(5, 3))
 
 print((lambda x, y: x + y)(5, 3))
 
-print("------------------------------------------------------------")	#60個
+------------------------------------------------------------
 
 # 在 sorted() 使用 lambda 匿名函式
 
@@ -4034,7 +2038,7 @@ print(sorted(tuples_list, key=lambda x: x[1]))
 
 print(sorted(range(-5, 6), key=lambda x: x ** 2))
 
-print("------------------------------------------------------------")	#60個
+------------------------------------------------------------
 
 import zipfile
 
@@ -4055,7 +2059,7 @@ for x in range(1, 10):
         print("{0}*{1}={2: ^2}".format(y, x, x * y), end=" ")
     print()
 
-print("------------------------------------------------------------")	#60個
+------------------------------------------------------------
 
 資料產生大範例
 
@@ -4067,7 +2071,7 @@ random
 
 meshgrid
 
-print("------------------------------------------------------------")	#60個
+------------------------------------------------------------
 
 #將一個google drive檔案存成本地檔案
 
@@ -4078,7 +2082,7 @@ fontfile = requests.get("https://drive.google.com/uc?id=1QdaqR8Setf4HEulrIW79UEV
 with open('taipei_sans_tc_beta.ttf', 'wb') as f:
   f.write(fontfile.content)
 
-print("------------------------------------------------------------")	#60個
+------------------------------------------------------------
 
 text = "這個是測試資料。"
 word1 = "這個是"
@@ -4137,7 +2141,7 @@ https://www.kaggle.com/datasets/uciml/iris
 
 C:\_git\vcs\_4.python>python -m pdb test10_new11.py
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 """
 Python的内置函数
@@ -4421,7 +2425,7 @@ print("顯示倒退一個字元: " + '\b' + "xyz")
 print("顯示空字元: " + "xy\0z")
 print("雙引號的應用->\n\"跳脫字元的綜合運用\"")
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 基本用range
 
 for i in range(1, 11): #定義for迴圈
@@ -4431,7 +2435,7 @@ for i in range(11, 21):
 for n in range(0, k, 1):
 for i in range(1, 201, 2):
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
     # Keys are (x, y) tuples of ints, values the character at that
     # position on the canvas:
@@ -4465,7 +2469,7 @@ if __name__ == '__main__':
         sys.exit()  # When Ctrl-C is pressed, end the program.
 
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 x = [1, 2, 2, 3, 5, 2, 5]
 x.count(2)
@@ -4495,7 +2499,7 @@ for each file
 
 你可以改書中的範例程式碼，再加上目前月份與檔案月份的核對即可。
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 #! /usr/bin/env python3 
 
@@ -4533,7 +2537,7 @@ def main():
 
 main() 
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 import sys
 
@@ -4570,7 +2574,7 @@ def main():
 if __name__ == '__main__':
     main() 
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 
 >>> math.ceil(3.4)
@@ -4601,7 +2605,7 @@ for i, n in enumerate(x):                               #1
 >>> x.count(4)
 0
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 13.9 Shelving objects
 
@@ -4623,7 +2627,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 
 https://github.com/yenlung
@@ -4647,7 +2651,7 @@ True
 
 list(range(10))
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 
 
@@ -4674,7 +2678,7 @@ colors = ['red', 'pink', 'yellow', 'green', 'orange']
 for name, color in zip(fruits, colors):
   print(name, 'is', color)
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 字串格式化：format()
 fruits = [
@@ -4757,7 +2761,7 @@ plt.title(r"$\sin(x)$ and $\cos(x)$")
 plt.xlim(xmin, xmax)
 plt.ylim(-1.3, 1.3)
 
-print("------------------------------------------------------------")	#60個
+------------------------------------------------------------
 
 ## 取得發票號碼
 ### 安裝
@@ -4873,7 +2877,7 @@ haar_flags = 0
             )
         return template % (first, second, tol, rel, abs_err, rel_err)
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 字串的方法
 .replace()
@@ -4996,15 +3000,15 @@ with open(fn) as file_Obj:  # 用預設mode=r開啟檔案,傳回檔案物件file
 
 
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 # 將字串反轉
 def reverse_str(s):
     return s[::-1]
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 # 計算一個字串中指定字符的出現次數
 def count_char(s, c):
@@ -5014,7 +3018,7 @@ def count_char(s, c):
             count += 1
     return count
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 sigma=0
 k = 30
@@ -5028,7 +3032,7 @@ print("PI = %f" %(sigma*4))
 
 print("總銷售業績{},應付獎金：{}".format(e1, e2))
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 
 ticks寫法
@@ -5042,9 +3046,9 @@ plt.legend(['sin','cos'],loc=3,fontsize='xx-large',edgecolor='y',facecolor='r')
 x = np.linspace(-2*np.pi, 2*np.pi, 100)
 s, c=np.sin(x), np.cos(x)
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 OpenCV / PIL 整理 pillow
 
@@ -5114,7 +3118,7 @@ print(response)
 print('----------------')
 """
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 vcs待尋找
 目前用webbrowser顯示pdf檔案, 無法用程式的方法得知此時看到第幾頁 也無法得知目前頁面顯示比例
@@ -5164,7 +3168,7 @@ t1.grid(row = 0, column = 0)
 t2.grid(row = 0, column = 1)
 t3.grid(columnspan = 2)
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
              /* info
             richTextBox1.Text += "aaa: " + pfc.Families.Length.ToString() + "\n";
@@ -5212,7 +3216,7 @@ import this
 #網頁連線https://xkcd.com/353/
 import antigravity
 
-print("------------------------------------------------------------")  # 60個
+------------------------------------------------------------
 
 
 

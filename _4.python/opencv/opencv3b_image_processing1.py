@@ -5,6 +5,7 @@ print("------------------------------------------------------------")  # 60個
 # 共同
 import os
 import sys
+import time
 import math
 import random
 import numpy as np
@@ -25,7 +26,7 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.j
 # filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 
 print("測試 01------------------------------------------------------------")  # 60個
-'''
+
 # 影像對比與亮度調整
 import matplotlib.image as img
 
@@ -73,8 +74,8 @@ plt.figure(
     frameon=True,
 )
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/rgb256X300.bmp'
-filename = 'C:/_git/vcs/_4.python/opencv/data/rgb512.bmp'
+filename = "C:/_git/vcs/_4.python/opencv/data/rgb256X300.bmp"
+filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
 image = cv2.imread(filename)
 
@@ -150,8 +151,8 @@ plt.figure(
 )
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
-filename = 'C:/_git/vcs/_4.python/opencv/data/rgb256X300.bmp'
-filename = 'C:/_git/vcs/_4.python/opencv/data/rgb512.bmp'
+filename = "C:/_git/vcs/_4.python/opencv/data/rgb256X300.bmp"
+filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
 image = cv2.imread(filename)
 
@@ -272,10 +273,10 @@ print("測試 09------------------------------------------------------------")  
 
 img = cv2.imread(filename)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉成灰階
-img = cv2.medianBlur(img, 7)                 # 模糊化，去除雜訊
-output = cv2.Laplacian(img, -1, 1, 5)        # 偵測邊緣
+img = cv2.medianBlur(img, 7)  # 模糊化，去除雜訊
+output = cv2.Laplacian(img, -1, 1, 5)  # 偵測邊緣
 
-cv2.imshow('image', output)
+cv2.imshow("image", output)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -284,10 +285,10 @@ print("測試 09------------------------------------------------------------")  
 
 img = cv2.imread(filename)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉成灰階
-img = cv2.medianBlur(img, 7)                 # 模糊化，去除雜訊
-output = cv2.Sobel(img, -1, 1, 1, 1, 7)      # 偵測邊緣
+img = cv2.medianBlur(img, 7)  # 模糊化，去除雜訊
+output = cv2.Sobel(img, -1, 1, 1, 1, 7)  # 偵測邊緣
 
-cv2.imshow('image', output)
+cv2.imshow("image", output)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -296,24 +297,23 @@ print("測試 09------------------------------------------------------------")  
 
 img = cv2.imread(filename)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉成灰階
-img = cv2.medianBlur(img, 7)                 # 模糊化，去除雜訊
-output = cv2.Canny(img, 36, 36)              # 偵測邊緣
+img = cv2.medianBlur(img, 7)  # 模糊化，去除雜訊
+output = cv2.Canny(img, 36, 36)  # 偵測邊緣
 print(output)
 
-cv2.imshow('image', output)
+cv2.imshow("image", output)
 cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 
 print("測試 09------------------------------------------------------------")  # 60個
 
 
-mask = np.zeros((300,300,3), dtype='uint8')      # 建立 300x300 的黑色畫布
-cv2.circle(mask,(150,150),100,(255,255,255),-1)  # 在畫布上中心點加入一個半徑 100 的白色圓形
-mask = cv2.GaussianBlur(mask, (35, 35), 0)       # 進行高斯模糊
+mask = np.zeros((300, 300, 3), dtype="uint8")  # 建立 300x300 的黑色畫布
+cv2.circle(mask, (150, 150), 100, (255, 255, 255), -1)  # 在畫布上中心點加入一個半徑 100 的白色圓形
+mask = cv2.GaussianBlur(mask, (35, 35), 0)  # 進行高斯模糊
 
-cv2.imshow('image', mask)
+cv2.imshow("image", mask)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -338,10 +338,8 @@ cv2.imshow('image',out)
 cv2.waitKey()
 cv2.destroyAllWindows()
 """
-'''
 
 print("測試 09------------------------------------------------------------")  # 60個
-
 
 # Prewitt horizontal edge-emphasizing filter 邊緣加強的影像處理技術
 
@@ -574,4 +572,11 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
