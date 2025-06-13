@@ -1,6 +1,6 @@
 """
+cv2.findContours
 
-findContours
 
 """
 
@@ -54,13 +54,9 @@ WHITE = (255, 255, 255)  # B G R
 colors = [RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK, WHITE]
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-# cv2.findContours ST
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("easy1.jpg")
+src = cv2.imread("data/findContours/easy1.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -96,7 +92,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("lake.jpg")
+src = cv2.imread("data/findContours/lake.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -135,7 +131,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("lake.jpg")
+src = cv2.imread("data/findContours/lake.jpg")
 
 plt.subplot(221)
 plt.title("原圖")
@@ -177,7 +173,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("easy2.jpg")
+src = cv2.imread("data/findContours/easy2.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -219,7 +215,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("easy3.jpg")
+src = cv2.imread("data/findContours/easy3.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -262,7 +258,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("easy.jpg")
+src = cv2.imread("data/findContours/easy.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -329,7 +325,7 @@ for i in range(n):  # 列印影像矩
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("easy.jpg")
+src = cv2.imread("data/findContours/easy.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -369,7 +365,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("easy.jpg")
+src = cv2.imread("data/findContours/easy.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -404,7 +400,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("easy.jpg")
+src = cv2.imread("data/findContours/easy.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -438,7 +434,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("heart.jpg")
+src = cv2.imread("data/findContours/heart.jpg")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 M = cv2.moments(src_gray)  # 影像矩
@@ -456,7 +452,7 @@ print(f"驗證結果 h0 - nu20 - nu02 = {result}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("3heart.jpg")
+src = cv2.imread("data/findContours/3heart.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -499,7 +495,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("3shapes.jpg")
+src = cv2.imread("data/findContours/3shapes.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -541,7 +537,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("myheart.jpg")
+src = cv2.imread("data/findContours/myheart.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -579,7 +575,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 讀取與建立影像 1
-src1 = cv2.imread("mycloud1.jpg")
+src1 = cv2.imread("data/findContours/mycloud1.jpg")
 
 plt.subplot(311)
 plt.title("原圖1")
@@ -598,7 +594,7 @@ contours, hierarchy = cv2.findContours(
 cnt1 = contours[0]
 
 # 讀取與建立影像 2
-src2 = cv2.imread("mycloud2.jpg")
+src2 = cv2.imread("data/findContours/mycloud2.jpg")
 
 plt.subplot(312)
 plt.title("原圖2")
@@ -613,7 +609,7 @@ contours, hierarchy = cv2.findContours(
 cnt2 = contours[0]
 
 # 讀取與建立影像 3
-src3 = cv2.imread("explode1.jpg")
+src3 = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(313)
 plt.title("原圖3")
@@ -642,7 +638,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 讀取與建立影像 1
-src1 = cv2.imread("mycloud1.jpg")
+src1 = cv2.imread("data/findContours/mycloud1.jpg")
 
 plt.subplot(311)
 plt.title("原圖1")
@@ -660,7 +656,7 @@ contours, hierarchy = cv2.findContours(
 cnt1 = contours[0]
 
 # 讀取與建立影像 2
-src2 = cv2.imread("mycloud2.jpg")
+src2 = cv2.imread("data/findContours/mycloud2.jpg")
 
 plt.subplot(312)
 plt.title("原圖2")
@@ -675,7 +671,7 @@ contours, hierarchy = cv2.findContours(
 cnt2 = contours[0]
 
 # 讀取與建立影像 3
-src3 = cv2.imread("explode1.jpg")
+src3 = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(313)
 plt.title("原圖3")
@@ -707,7 +703,7 @@ print("------------------------------------------------------------")  # 60個
 # OpenCV_16_輪廓擬合與凸包的相關應用
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("explode1.jpg")
+src = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -745,7 +741,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("explode1.jpg")
+src = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -781,7 +777,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("explode2.jpg")
+src = cv2.imread("data/findContours/explode2.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -817,7 +813,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("explode2.jpg")
+src = cv2.imread("data/findContours/explode2.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -858,7 +854,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("explode3.jpg")
+src = cv2.imread("data/findContours/explode3.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -897,7 +893,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("explode1.jpg")
+src = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -936,7 +932,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("cloud.jpg")
+src = cv2.imread("data/findContours/cloud.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -977,7 +973,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("heart.jpg")
+src = cv2.imread("data/findContours/heart.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -1020,7 +1016,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("multiple.jpg")
+src = cv2.imread("data/findContours/multiple.jpg")
 
 plt.subplot(221)
 plt.title("原圖")
@@ -1069,7 +1065,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("unregular.jpg")
+src = cv2.imread("data/findContours/unregular.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -1111,7 +1107,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("heart1.jpg")
+src = cv2.imread("data/findContours/heart1.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -1148,7 +1144,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("hand1.jpg")
+src = cv2.imread("data/findContours/hand1.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -1185,7 +1181,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("hand1.jpg")
+src = cv2.imread("data/findContours/hand1.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -1225,7 +1221,7 @@ print(f"凸包面積 = {convex_area}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("hand2.jpg")
+src = cv2.imread("data/findContours/hand2.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -1265,7 +1261,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("star.jpg")
+src = cv2.imread("data/findContours/star.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -1314,7 +1310,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("heart1.jpg")
+src = cv2.imread("data/findContours/heart1.jpg")
 
 plt.subplot(221)
 plt.title("原圖")
@@ -1367,7 +1363,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("heart1.jpg")
+src = cv2.imread("data/findContours/heart1.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -1433,7 +1429,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("heart1.jpg")
+src = cv2.imread("data/findContours/heart1.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -1499,7 +1495,7 @@ print("------------------------------------------------------------")  # 60個
 # OpenCV_17_輪廓的特徵
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("explode1.jpg")
+src = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -1538,7 +1534,7 @@ print(f"寬高比 = {aspectratio}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("explode1.jpg")
+src = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -1629,7 +1625,7 @@ print(f"最小值元組 = {left}")  # 列印最小值元組
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("explode1.jpg")
+src = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -1675,7 +1671,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("explode1.jpg")
+src = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -1716,7 +1712,7 @@ print(f"Extent = {extent}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("explode1.jpg")
+src = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -1758,7 +1754,7 @@ print(f"Solidity = {solidity}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("star1.jpg")
+src = cv2.imread("data/findContours/star1.jpg")
 
 plt.subplot(311)
 plt.title("原圖")
@@ -1819,7 +1815,7 @@ print(f"非0元素的座標 \n{loc_img}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("simple.jpg")
+src = cv2.imread("data/findContours/simple.jpg")
 
 plt.subplot(221)
 plt.title("原圖")
@@ -1881,7 +1877,7 @@ print(f"非0元素的座標 \n{loc_img}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("simple.jpg")
+src = cv2.imread("data/findContours/simple.jpg")
 
 plt.subplot(221)
 plt.title("原圖")
@@ -1931,7 +1927,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("hand.jpg")  # 手上有一黑點與一白點
+src = cv2.imread("data/findContours/hand.jpg")  # 手上有一黑點與一白點
 
 plt.subplot(221)
 plt.title("原圖")
@@ -1983,7 +1979,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("hand.jpg")  # 手上有一黑點與一白點
+src = cv2.imread("data/findContours/hand.jpg")  # 手上有一黑點與一白點
 
 plt.subplot(311)
 plt.title("原圖")
@@ -2009,13 +2005,10 @@ print(channels)
 show()
 
 print("------------------------------------------------------------")  # 60個
-# cv2.findContours SP
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 

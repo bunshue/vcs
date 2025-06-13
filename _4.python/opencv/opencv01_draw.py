@@ -191,17 +191,17 @@ cv2.polylines(image, [pts1], True, BLUE, 5)  # 繪製封閉式多邊形
 cv2.polylines(image, [pts2], False, RED, 3)  # 繪製開放式多邊形
 
 cv2.imshow("OpenCV Draw 1", image)
-cv2.waitKey(0)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
 print("建立畫布")
 W, H = 1000, 800
-
 image = np.zeros((H, W, 3), np.uint8)
-# 灰色背景
-image[:] = (128, 128, 128)
+
+image[:] = (128, 128, 128)  # 灰色背景
 
 """
 cv2.putText參數
@@ -228,7 +228,7 @@ font_color = YELLOW
 line_width = 2  # 字體粗細, 線寬
 line_type = cv2.LINE_AA  # 文字線條樣式
 
-x_st, y_st = 10, 100
+x_st, y_st = 10, 50
 
 cv2.putText(
     image,
@@ -241,7 +241,7 @@ cv2.putText(
     line_type,
 )
 
-y_st += 80
+y_st += 60
 cv2.putText(
     image,
     "Welcome 2222",
@@ -253,7 +253,7 @@ cv2.putText(
     line_type,
 )  # 加文字線條樣式
 
-y_st += 80
+y_st += 40
 cv2.putText(
     image,
     "Welcome 3333",
@@ -270,7 +270,7 @@ text_size = cv2.getTextSize("Welcome 4444", font, font_size, line_width)
 print("字體大小 : ", text_size)
 w = text_size[0][0]
 h = text_size[0][1]
-y_st += 140
+y_st += 110
 cv2.putText(
     image,
     "Welcome 4444",
@@ -287,7 +287,7 @@ cv2.rectangle(image, (x_st, y_st), (x_st + w, y_st - h), RED, 2)
 
 from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
 
-y_st += 40
+y_st += 30
 # font_filename = 'NotoSansTC-Regular.otf'          # 設定字型路徑
 font = ImageFont.truetype(font_filename, 50)  # 設定字型與文字大小
 imagePil = Image.fromarray(image)  # 將 image 轉換成 PIL 影像
@@ -308,57 +308,55 @@ fonts = [
 ]
 
 text = "Welcome"
-x_st, y_st = 500, 100
+x_st, y_st = 500, 50
 for font in fonts:
     cv2.putText(
         image, text, (x_st, y_st), font, font_size, font_color, line_width, line_type
     )
     y_st += 60
 
-cv2.imshow("OpenCV Draw 2", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-img = np.ones((480, 640, 3), np.uint8) * 255  # 白底畫布
+x_st, y_st = 10, 430
 
 font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(img, "Python", (50, 100), font, 3, BLUE, 12)  # 大小3, 線寬12
+cv2.putText(image, "Python", (x_st, y_st), font, 3, BLUE, 12)  # 大小3, 線寬12
 
-
-cv2.putText(img, "Python", (50, 200), font, 3, BLUE, 12)
-cv2.putText(img, "Python", (50, 200), font, 3, YELLOW, 5)
-
-font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(img, "Python", (50, 120 + 200), font, 3, BLUE, 12)
-cv2.putText(img, "Python", (50, 180 + 200), font, 3, GREEN, 12, cv2.LINE_8, True)
+y_st += 100
+cv2.putText(image, "Python", (x_st, y_st), font, 3, BLUE, 12)
+cv2.putText(image, "Python", (x_st, y_st), font, 3, YELLOW, 5)
 
 font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(img, "Peony", (400, 100), font, 2, BLUE, 6)
+y_st += 120
+cv2.putText(image, "Python", (x_st, y_st), font, 3, BLUE, 12)
+
+y_st += 60
+cv2.putText(image, "Python", (x_st, y_st), font, 3, GREEN, 12, cv2.LINE_8, True)
+
+font = cv2.FONT_HERSHEY_SIMPLEX
+x_st, y_st = 400, 520
+cv2.putText(image, "Peony", (x_st, y_st), font, 2, BLUE, 6)
 
 from PIL import Image, ImageDraw, ImageFont
 
 
-def cv2_Chinese_Text(img, text, left, top, textColor, fontSize):
+def cv2_Chinese_Text(image, text, left, top, textColor, fontSize):
     # 建立中文字輸出
     # 影像轉成 PIL影像格式
-    if isinstance(img, np.ndarray):
-        img = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-    draw = ImageDraw.Draw(img)  # 建立PIL繪圖物件
+    if isinstance(image, np.ndarray):
+        image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+    draw = ImageDraw.Draw(image)  # 建立PIL繪圖物件
     fontText = ImageFont.truetype(  # 建立字型 - 新細明體
         "C:\Windows\Fonts\mingliu.ttc", fontSize, encoding="utf-8"  # 新細明體  # 字型大小
     )  # 編碼方式
     draw.text((left, top), text, textColor, font=fontText)  # 繪製中文字
     # 將PIL影像格式轉成OpenCV影像格式
-    return cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)
+    return cv2.cvtColor(np.asarray(image), cv2.COLOR_RGB2BGR)
 
 
-img = cv2_Chinese_Text(img, "牡丹亭", 400, 150, RED, 50)
+x_st, y_st = 400, 550
+image = cv2_Chinese_Text(image, "牡丹亭", x_st, y_st, RED, 50)
 
 
-cv2.imshow("Python", img)  # 畫布顯示文字
+cv2.imshow("OpenCV Draw 2", image)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -426,8 +424,9 @@ drawBoundingBox(image, bboxs)
 
 draw_line(image)
 
-cv2.imshow("OpenCV Draw 3", image)
-cv2.waitKey(0)
+cv2.imshow("OpenCV Draw 4", image)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -464,8 +463,24 @@ angle = 45
 cv2.ellipse(img, (cx, cy), size, angle, 0, 360, YELLOW, 5)  # 繪製橢圓形
 cv2.ellipse(img, (cx, cy), size, angle, 45, 135, BLUE, 3)  # 繪製橢圓弧
 
+cv2.imshow("OpenCV Draw 5", img)
 
-cv2.imshow("My Draw", img)  # 畫布顯示結果
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+img = cv2.imread(filename1)  # 使用影像當畫布
+cy = int(img.shape[0] / 2)  # 中心點 y 座標
+cx = int(img.shape[1] / 2)  # 中心點 x 座標
+size = (200, 100)  # 橢圓的x,y軸長度
+for i in range(0, 15):
+    angle = np.random.randint(0, 361)  # 橢圓偏移的角度
+    color = np.random.randint(0, 256, size=3).tolist()  # 橢圓的隨機色彩
+    cv2.ellipse(img, (cx, cy), size, angle, 0, 360, color, 1)  # 繪製橢圓形
+
+cv2.imshow("My Draw", img)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -484,24 +499,8 @@ for i in range(0, 50):
     color = np.random.randint(0, 256, size=3).tolist()  # 建立隨機色彩
     r = np.random.randint(5, 100)  # 在5 - 100間的隨機半徑
     cv2.circle(img, (cx, cy), r, color, -1)  # 建立隨機實心圓
+
 cv2.imshow("Random Circle", img)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename1)  # 使用影像當畫布
-cy = int(img.shape[0] / 2)  # 中心點 y 座標
-cx = int(img.shape[1] / 2)  # 中心點 x 座標
-size = (200, 100)  # 橢圓的x,y軸長度
-for i in range(0, 15):
-    angle = np.random.randint(0, 361)  # 橢圓偏移的角度
-    color = np.random.randint(0, 256, size=3).tolist()  # 橢圓的隨機色彩
-    cv2.ellipse(img, (cx, cy), size, angle, 0, 360, color, 1)  # 繪製橢圓形
-
-cv2.imshow("My Draw", img)  # 畫布顯示結果
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -617,6 +616,7 @@ def OnMouseAction(event, x, y, flags, param):
 image = np.ones((200, 300, 3), np.uint8) * 255  # 白底畫布
 cv2.namedWindow("OpenCV Mouse Event")
 cv2.setMouseCallback("OpenCV Mouse Event", OnMouseAction)
+
 cv2.imshow("OpenCV Mouse Event", image)
 
 cv2.waitKey()
@@ -640,6 +640,9 @@ width = 600  # 視窗寬度
 width, height = 640, 480  # 影像寬, 影像高
 
 image = np.ones((height, width, 3), np.uint8) * 255  # 白底畫布
+
+print("按 Q 離開")
+
 cv2.namedWindow("Draw Circle")
 cv2.setMouseCallback("Draw Circle", OnMouseAction)
 while 1:
@@ -676,6 +679,9 @@ width, height = 640, 480  # 影像寬, 影像高
 image = np.ones((height, width, 3), np.uint8) * 255  # 白底畫布
 cv2.namedWindow("MyDraw")
 cv2.setMouseCallback("MyDraw", OnMouseAction)
+
+print("按 Q 離開")
+
 while 1:
     cv2.imshow("MyDraw", image)
     key = cv2.waitKey(100)  # 0.1秒檢查一次
@@ -699,10 +705,13 @@ cv2.namedWindow("canvas")
 cv2.createTrackbar("B", "canvas", 0, 255, onChange)  # 藍色通道控制
 cv2.createTrackbar("G", "canvas", 0, 255, onChange)  # 綠色通道控制
 cv2.createTrackbar("R", "canvas", 0, 255, onChange)  # 紅色通道控制
+
+print("按 Q 離開")
+
 while 1:
     cv2.imshow("canvas", canvas)
     key = cv2.waitKey(100)  # 0.1秒檢查一次
-    if key == 27:  # Esc 則結束
+    if key == ord("Q") or key == ord("q"):  # Q或q則結束
         break
 
 cv2.destroyAllWindows()
@@ -731,6 +740,9 @@ image = np.ones((height, width, 3), np.uint8) * 255  # 白底畫布
 cv2.namedWindow("Draw Circle")
 cv2.setMouseCallback("Draw Circle", OnMouseAction)
 cv2.createTrackbar("Thickness", "Draw Circle", 0, 1, onChange)
+
+print("按 Q 離開")
+
 while 1:
     cv2.imshow("Draw Circle", image)
     key = cv2.waitKey(100)  # 0.1秒檢查一次
@@ -741,6 +753,7 @@ while 1:
         thickness = 3  # 寬度是 3
     if key == ord("Q") or key == ord("q"):  # Q或q則結束
         break
+
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -785,7 +798,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
 """
 fontFace = cv2.FONT_HERSHEY_COMPLEX
 fontScale = 3
@@ -800,9 +812,7 @@ cv2.putText(image, text, (bottomLeftX, bottomLeftY), fontFace,
   fontScale, YELLOW, thickness, cv2.LINE_AA)
 
 cv2.imshow('OpenCV Draw 4', image)
-
 """
-
 print("------------------------------------------------------------")  # 60個
 
 W, H, D = 400, 400, 3
@@ -818,8 +828,9 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("畫圖 1")
 plt.show()
 
-cv2.imshow("OpenCV Draw 5", image)
-cv2.waitKey(0)
+cv2.imshow("OpenCV Draw 5b", image)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -845,7 +856,8 @@ plt.title("畫圖 2")
 plt.show()
 
 cv2.imshow("OpenCV Draw 6", image)
-cv2.waitKey(0)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -870,7 +882,8 @@ plt.title("畫圖 3")
 plt.show()
 
 cv2.imshow("OpenCV Draw 7", image)
-cv2.waitKey(0)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -891,7 +904,8 @@ plt.title("畫圖 4")
 plt.show()
 
 cv2.imshow("OpenCV Draw 8", image)
-cv2.waitKey(0)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -927,7 +941,8 @@ for i in range(len(points)):
 
 
 cv2.imshow("OpenCV Draw 1", image)
-cv2.waitKey(0)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -948,7 +963,8 @@ points = np.random.randint(MIN, MAX, (N, 2), np.int32)
 cv2.drawContours(image, [points], 0, RED, 3)
 
 cv2.imshow("image", image)
-cv2.waitKey(0)
+
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -961,3 +977,8 @@ print("------------------------------------------------------------")  # 60個
 
 cv2.rectangle(img, (1, 1), (300, 300), YELLOW, -1)  # 設定黃色底
 cv2.rectangle(img, (1, 1), (300, 300), BLUE)  # 繪製矩形
+
+
+img = np.ones((480, 640, 3), np.uint8) * 255  # 白底畫布
+
+# if key == 27:  # ESC 則結束

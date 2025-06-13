@@ -8,17 +8,23 @@
 cv2.Canny()
 cv2.Sobel()
 cv2.Laplacian()
-
+比較
 """
 
 import cv2
 
 ESC = 27
 SPACE = 32
-red = (0, 0, 255)
-green = (0, 255, 0)
-blue = (255, 0, 0)
-white = (255, 255, 255)
+
+RED = (0, 0, 255)  # B G R
+GREEN = (0, 255, 0)  # B G R
+BLUE = (255, 0, 0)  # B G R
+CYAN = (255, 255, 0)  # B G R
+MAGENTA = (255, 0, 255)  # B G R
+YELLOW = (0, 255, 255)  # B G R
+BLACK = (0, 0, 0)  # B G R
+WHITE = (255, 255, 255)  # B G R
+colors = [RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK, WHITE]
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
@@ -49,27 +55,37 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 
 def show():
+    plt.tight_layout()
     plt.show()
     pass
 
 
+'''
 print("------------------------------------------------------------")  # 60個
 # cv2.Canny() ST
 print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("data/edge_detection/lena.jpg", cv2.IMREAD_GRAYSCALE)
-cv2.imshow("Src", src)
 
 dst1 = cv2.Canny(src, 50, 100)  # minVal=50, maxVal=100
 dst2 = cv2.Canny(src, 50, 200)  # minVal=50, maxVal=200
-cv2.imshow("Dst1", dst1)
-cv2.imshow("Dst2", dst2)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure(figsize=(12, 8))
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))
+plt.title("Canny 1")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))
+plt.title("Canny 2")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
-
 
 # 影像邊緣檢測Canny()函數
 
@@ -86,33 +102,27 @@ plt.title("Canny")
 
 show()
 
-plt.figure("影像處理", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(gray_image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(122)
-plt.title("Canny")
 plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
+plt.title("Canny")
 
 show()
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("Canny")
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
 
 image = cv2.imread(filename, 0)
 
-plt.figure("影像處理", figsize=(8, 6))
+plt.figure(figsize=(12, 8))
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 # 高斯模糊，Canny边缘检测需要的
 image_blur = cv2.GaussianBlur(image, (5, 5), 0)  # 執行高斯模糊化
@@ -121,13 +131,11 @@ image_blur = cv2.GaussianBlur(image, (5, 5), 0)  # 執行高斯模糊化
 image_canny = cv2.Canny(image_blur, 50, 150)
 
 plt.subplot(122)
-plt.title("Canny")
 plt.imshow(cv2.cvtColor(image_canny, cv2.COLOR_BGR2RGB))
+plt.title("Canny")
 
-plt.tight_layout()
-plt.show()
+show()
 
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
@@ -136,24 +144,25 @@ image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 image_canny1 = cv2.Canny(image, 128, 200)
 image_canny2 = cv2.Canny(image, 32, 128)
 
-plt.figure("影像處理", figsize=(8, 6))
+plt.figure(figsize=(12, 8))
 plt.subplot(131)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(132)
-plt.title("Canny 1")
 plt.imshow(cv2.cvtColor(image_canny1, cv2.COLOR_BGR2RGB))
+plt.title("Canny 1")
 
 plt.subplot(133)
-plt.title("Canny 2")
 plt.imshow(cv2.cvtColor(image_canny2, cv2.COLOR_BGR2RGB))
+plt.title("Canny 2")
 
-plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
+# cv2.Canny() SP
 print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個
@@ -161,54 +170,76 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("data/edge_detection/map.jpg")
-cv2.imshow("Src", src)
 
 dst = cv2.Sobel(src, -1, 1, 0)  # 計算 x 軸影像梯度
-cv2.imshow("Dst", dst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure(figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("dst")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("data/edge_detection/map.jpg")
-cv2.imshow("Src", src)
 
 dst = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dst = cv2.convertScaleAbs(dst)  # 將負值轉正值
-cv2.imshow("Dst", dst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure(figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("dst")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("data/edge_detection/map.jpg")
-cv2.imshow("Src", src)
 
 dst = cv2.Sobel(src, -1, 0, 1)  # 計算 y 軸影像梯度
-cv2.imshow("Dst", dst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure(figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("dst")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("data/edge_detection/map.jpg")
-cv2.imshow("Src", src)
 
 dst = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
 dst = cv2.convertScaleAbs(dst)  # 將負值轉正值
 
-cv2.imshow("Dst", dst)
+plt.figure(figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("dst")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("data/edge_detection/map.jpg")
-cv2.imshow("Src", src)
 
 dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
@@ -216,16 +247,20 @@ dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
 dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
 
-cv2.imshow("Dst", dst)
+plt.figure(figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("dst")
 
-print("------------------------------------------------------------")  # 60個
+show()
+
 print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("data/edge_detection/lena.jpg")
-cv2.imshow("Src", src)
 
 dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
@@ -233,20 +268,32 @@ dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
 dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
 
-cv2.imshow("Dstx", dstx)
-cv2.imshow("Dsty", dsty)
-cv2.imshow("Dst", dst)
+plt.figure(figsize=(12, 8))
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(dstx, cv2.COLOR_BGR2RGB))
+plt.title("dstx")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(dsty, cv2.COLOR_BGR2RGB))
+plt.title("dsty")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("dst")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
+# 比較
 print("使用 Sobel() / Scharr()")
 
 # Sobel()函數
 src = cv2.imread("data/edge_detection/lena.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
-cv2.imshow("Src", src)
 
 dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
@@ -261,22 +308,28 @@ dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
 dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst_scharr = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
 
-# 輸出影像梯度
-cv2.imshow("Sobel", dst_sobel)
-cv2.imshow("Scharr", dst_scharr)
+plt.figure(figsize=(12, 8))
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(dst_sobel, cv2.COLOR_BGR2RGB))
+plt.title("Sobel")
 
-print("------------------------------------------------------------")  # 60個
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(dst_scharr, cv2.COLOR_BGR2RGB))
+plt.title("Scharr")
+
+show()
+
 print("------------------------------------------------------------")  # 60個
 
 print("使用 Sobel() / Scharr()")
 
-# Sobel()函數
 src = cv2.imread("data/edge_detection/lena.jpg")  # 彩色讀取
-cv2.imshow("Src", src)
 
+# Sobel()函數
 dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
 dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
@@ -290,27 +343,34 @@ dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
 dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst_scharr = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
 
-# 輸出影像梯度
-cv2.imshow("Sobel", dst_sobel)
-cv2.imshow("Scharr", dst_scharr)
+plt.figure(figsize=(12, 8))
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(dst_sobel, cv2.COLOR_BGR2RGB))
+plt.title("Sobel")
 
-print("------------------------------------------------------------")  # 60個
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(dst_scharr, cv2.COLOR_BGR2RGB))
+plt.title("Scharr")
+
+show()
+
 print("------------------------------------------------------------")  # 60個
 
 print("使用 Sobel() / Scharr()")
 
-# Sobel()函數
 src = cv2.imread("data/edge_detection/snow.jpg")  # 彩色讀取
-cv2.imshow("Src", src)
 
+# Sobel()函數
 dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dsty = cv2.Sobel(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
 dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
 dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst_sobel = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+
 # Scharr()函數
 dstx = cv2.Scharr(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
 dsty = cv2.Scharr(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
@@ -318,24 +378,37 @@ dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
 dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
 dst_scharr = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
 
-# 輸出影像梯度
-cv2.imshow("Scharr X", dstx)
-cv2.imshow("Scharr Y", dsty)
-cv2.imshow("Sobel", dst_sobel)
-cv2.imshow("Scharr", dst_scharr)
+plt.figure(figsize=(12, 8))
+plt.subplot(231)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(232)
+plt.imshow(cv2.cvtColor(dstx, cv2.COLOR_BGR2RGB))
+plt.title("Scharr X")
+
+plt.subplot(233)
+plt.imshow(cv2.cvtColor(dsty, cv2.COLOR_BGR2RGB))
+plt.title("Scharr Y")
+
+plt.subplot(234)
+plt.imshow(cv2.cvtColor(dst_sobel, cv2.COLOR_BGR2RGB))
+plt.title("Sobel")
+
+plt.subplot(235)
+plt.imshow(cv2.cvtColor(dst_scharr, cv2.COLOR_BGR2RGB))
+plt.title("Scharr")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
+# 比較
 print("使用 Sobel() / Scharr() / Laplacian()")
 
 src = cv2.imread("data/edge_detection/geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
-cv2.imshow("Src", src)
 
 src = cv2.GaussianBlur(src, (3, 3), 0)  # 降低噪音
-cv2.imshow("Src", src)
 
 # Sobel()函數
 dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
@@ -355,16 +428,28 @@ dst_scharr = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
 dst_tmp = cv2.Laplacian(src, cv2.CV_32F, ksize=3)  # Laplacian邊緣影像
 dst_lap = cv2.convertScaleAbs(dst_tmp)  # 將負值轉正值
 
-# 輸出影像梯度
-cv2.imshow("Sobel", dst_sobel)
-cv2.imshow("Scharr", dst_scharr)
-cv2.imshow("Laplacian", dst_lap)
+plt.figure(figsize=(12, 8))
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(dst_sobel, cv2.COLOR_BGR2RGB))
+plt.title("Sobel")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(dst_scharr, cv2.COLOR_BGR2RGB))
+plt.title("Scharr")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(dst_lap, cv2.COLOR_BGR2RGB))
+plt.title("Laplacian")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+
+# 比較
 
 print("使用 Sobel() / Scharr() / Laplacian() / Canny()")
 
@@ -393,16 +478,25 @@ dst_lap = cv2.convertScaleAbs(dst_tmp)  # 將負值轉正值
 # Canny()函數
 dst_canny = cv2.Canny(src, 50, 100)  # minVal=50, maxVal=100
 
-# 輸出影像梯度
-cv2.imshow("Canny", dst_canny)
-cv2.imshow("Sobel", dst_sobel)
-cv2.imshow("Scharr", dst_scharr)
-cv2.imshow("Laplacian", dst_lap)
+plt.figure(figsize=(12, 8))
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(dst_canny, cv2.COLOR_BGR2RGB))
+plt.title("Canny")
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(dst_sobel, cv2.COLOR_BGR2RGB))
+plt.title("Sobel")
 
-print("------------------------------------------------------------")  # 60個
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(dst_scharr, cv2.COLOR_BGR2RGB))
+plt.title("Scharr")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(dst_lap, cv2.COLOR_BGR2RGB))
+plt.title("Laplacian")
+
+show()
+
 print("------------------------------------------------------------")  # 60個
 
 # 1、Robers算法
@@ -429,21 +523,37 @@ def roberts(I, _boundary="fill", _fillvalue=0):
 
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("image", image)
+
 IconR1, IconR2 = roberts(image, "symm")
 IconR1 = np.abs(IconR1)
 edge_45 = IconR1.astype(np.uint8)
-cv2.imshow("edge_45", edge_45)
+
 IconR2 = np.abs(IconR2)
 edge_135 = IconR2.astype(np.uint8)
-cv2.imshow("edge_135", edge_135)
+
 edge = np.sqrt(np.power(IconR1, 2.0) + np.power(IconR2, 2.0))
 edge = np.round(edge)
 edge[edge > 255] = 255
 edge = edge.astype(np.uint8)
-cv2.imshow("edge", edge)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+
+plt.figure(figsize=(12, 8))
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(edge_45, cv2.COLOR_BGR2RGB))
+plt.title("edge_45")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(edge_135, cv2.COLOR_BGR2RGB))
+plt.title("edge_135")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(edge, cv2.COLOR_BGR2RGB))
+plt.title("edge")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -472,6 +582,7 @@ def prewitt(
 
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
 i_conv_pre_x, i_conv_pre_y = prewitt(image)
 abs_i_conv_pre_x = np.abs(i_conv_pre_x)
 abs_i_conv_pre_y = np.abs(i_conv_pre_y)
@@ -481,14 +592,29 @@ edge_x[edge_x > 255] = 255
 edge_y[edge_y > 255] = 255
 edge_x = edge_x.astype(np.uint8)
 edge_y = edge_y.astype(np.uint8)
-cv2.imshow("edge_x", edge_x)
-cv2.imshow("edge_y", edge_y)
+
 edge = 0.5 * abs_i_conv_pre_x + 0.5 * abs_i_conv_pre_y
 edge[edge > 255] = 255
 edge = edge.astype(np.uint8)
-cv2.imshow("edge", edge)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+
+plt.figure(figsize=(12, 8))
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(edge_x, cv2.COLOR_BGR2RGB))
+plt.title("edge_x")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(edge_y, cv2.COLOR_BGR2RGB))
+plt.title("edge_y")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(edge, cv2.COLOR_BGR2RGB))
+plt.title("edge")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -542,11 +668,17 @@ edge = edge / np.max(edge)
 edge = np.power(edge, 1)
 edge *= 255
 edge = edge.astype(np.uint8)
-cv2.imshow("image", image)
-cv2.imshow("edge", edge)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
+plt.figure(figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(edge, cv2.COLOR_BGR2RGB))
+plt.title("edge")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -577,15 +709,29 @@ edge_x[edge_x > 255] = 255
 edge_y[edge_y > 255] = 255
 edge_x = edge_x.astype(np.uint8)
 edge_y = edge_y.astype(np.uint8)
-cv2.imshow("edge_x", edge_x)
-cv2.imshow("edge_y", edge_y)
+
 edge = 0.5 * abs_i_conv_pre_x + 0.5 * abs_i_conv_pre_y
 edge[edge > 255] = 255
 edge = edge.astype(np.uint8)
-cv2.imshow("edge", edge)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
+plt.figure(figsize=(12, 8))
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(edge_x, cv2.COLOR_BGR2RGB))
+plt.title("edge_x")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(edge_y, cv2.COLOR_BGR2RGB))
+plt.title("edge_y")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(edge, cv2.COLOR_BGR2RGB))
+plt.title("edge")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -646,11 +792,23 @@ image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 edge = kirsch(image, _boundary="symm")
 edge[edge > 255] = 255
 edge = edge.astype(np.uint8)
-cv2.imshow("edge", edge)
+
 pencilSketch = 255 - edge
-cv2.imshow("pencilSketch", pencilSketch)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+
+plt.figure(figsize=(12, 8))
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(edge, cv2.COLOR_BGR2RGB))
+plt.title("edge")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(pencilSketch, cv2.COLOR_BGR2RGB))
+plt.title("pencilSketch")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -785,6 +943,7 @@ def hysteresisThreshold(edge_nonMaxSup, lowerThresh, upperThresh):
 
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
 image_sobel_x, image_sobel_y = sobel(image, 3)
 edge = np.sqrt(np.power(image_sobel_x, 2.0) + np.power(image_sobel_y, 2.0))
 edge[edge > 255] = 255
@@ -792,13 +951,25 @@ edge = edge.astype(np.uint8)
 edgeMag_nonMaxSup = non_maximum_suppression_default(image_sobel_x, image_sobel_y)
 edgeMag_nonMaxSup[edgeMag_nonMaxSup > 255] = 255
 edgeMag_nonMaxSup = edgeMag_nonMaxSup.astype(np.uint8)
-cv2.imshow("edgeMag_nonMaxSup", edgeMag_nonMaxSup)
+
 edge = hysteresisThreshold(edgeMag_nonMaxSup, 60, 180)
 lowerThresh = 40
 upperThresh = 150
-cv2.imshow("canny", edge)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+
+plt.figure(figsize=(12, 8))
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(edgeMag_nonMaxSup, cv2.COLOR_BGR2RGB))
+plt.title("edgeMag_nonMaxSup")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(edge, cv2.COLOR_BGR2RGB))
+plt.title("canny")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -815,21 +986,32 @@ def laplacian(image, _boundary="fill", _fillvalue=0):
 
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("image", image)
+
 i_conv_lap = laplacian(image, "symm")
 threshEdge = np.copy(i_conv_lap)
 threshEdge[threshEdge > 0] = 255
 threshEdge[threshEdge <= 0] = 0
 threshEdge = threshEdge.astype(np.uint8)
-cv2.imshow("threshEdge", threshEdge)
+
 abstraction = np.copy(i_conv_lap)
 abstraction = abstraction.astype(np.float32)
 abstraction[abstraction >= 0] = 1.0
 abstraction[abstraction < 0] = 1.0 + np.tanh(abstraction[abstraction < 0])
-cv2.imshow("abstraction", abstraction)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
+plt.figure(figsize=(12, 8))
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(threshEdge, cv2.COLOR_BGR2RGB))
+plt.title("threshEdge")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(abstraction, cv2.COLOR_BGR2RGB))
+plt.title("abstraction")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -855,16 +1037,23 @@ def LoG(image, sigma, size, _boundary="symm"):
 
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("image", image)
+
 img_conv_log = LoG(image, 6, (37, 37), "symm")
 edge_binary = np.copy(img_conv_log)
 edge_binary[edge_binary > 0] = 255
 edge_binary[edge_binary <= 0] = 0
 edge_binary = edge_binary.astype(np.uint8)
-cv2.imshow("edge_binary", edge_binary)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
+plt.figure(figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(edge_binary, cv2.COLOR_BGR2RGB))
+plt.title("edge_binary")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -895,7 +1084,7 @@ def DoG(I, size, sigma, k=1.1):
 
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("image", image)
+
 sigma = 2
 k = 1.1
 size = (13, 13)
@@ -904,15 +1093,26 @@ edge = np.copy(imageDoG)
 edge[edge > 0] = 255
 edge[edge <= 0] = 0
 edge = edge.astype(np.uint8)
-cv2.imshow("edge", edge)
+
 abstraction = -np.copy(imageDoG)
 abstraction = abstraction.astype(np.float32)
 abstraction[abstraction >= 0] = 1.0
 abstraction[abstraction < 0] = 1.0 + np.tanh(abstraction[abstraction < 0])
-cv2.imshow("abstraction", abstraction)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
+plt.figure(figsize=(12, 8))
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(edge, cv2.COLOR_BGR2RGB))
+plt.title("edge")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(abstraction, cv2.COLOR_BGR2RGB))
+plt.title("abstraction")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -942,7 +1142,7 @@ def DoG(I, size, sigma, k=1.1):
 
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("image", image)
+
 sigma = 4
 k = 1.1
 size = (25, 25)
@@ -952,15 +1152,26 @@ edge[edge > 0] = 255
 edge[edge <= 0] = 0
 edge = np.round(edge)
 edge = edge.astype(np.uint8)
-cv2.imshow("edge", edge)
+
 abstraction = -np.copy(imageDoG)
 abstraction = abstraction.astype(np.float32)
 abstraction[abstraction >= 0] = 1.0
 abstraction[abstraction < 0] = 1.0 + np.tanh(abstraction[abstraction < 0])
-cv2.imshow("abstraction", abstraction)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
+plt.figure(figsize=(12, 8))
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(edge, cv2.COLOR_BGR2RGB))
+plt.title("edge")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(abstraction, cv2.COLOR_BGR2RGB))
+plt.title("abstraction")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1042,16 +1253,19 @@ def Marr_Hildreth(image, size, sigma, k=1.1, crossType="ZERO_CROSS_DEFAULT"):
 
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("image", image)
+
 result = Marr_Hildreth(image, (37, 37), 6, 1.1, "ZERO_CROSS_MEAN")
-cv2.imshow("Marr_Hildreth", result)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
+plt.figure(figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(result, cv2.COLOR_BGR2RGB))
+plt.title("Marr_Hildreth")
 
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1073,36 +1287,36 @@ MASK_COLOR = (0.0, 0.0, 1.0)  # In BGR format
 # -- Read image -----------------------------------------------------------------------
 image = cv2.imread(filename)  # 讀取本機圖片
 
-plt.figure("影像處理", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(231)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 圖片轉為灰階
 
 plt.subplot(232)
-plt.title("灰階")
 plt.imshow(cv2.cvtColor(image_gray, cv2.COLOR_BGR2RGB))
+plt.title("灰階")
 
 # -- Edge detection -------------------------------------------------------------------
 
 edges = cv2.Canny(image_gray, CANNY_THRESH_1, CANNY_THRESH_2)
 
 plt.subplot(234)
-plt.title("Canny")
 plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
+plt.title("Canny")
 
 edges = cv2.dilate(edges, None)
 
 plt.subplot(235)
-plt.title("Dilate")
 plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
+plt.title("Dilate")
 
 edges = cv2.erode(edges, None)
 
 plt.subplot(236)
-plt.title("Erode")
 plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
+plt.title("Erode")
 
 show()
 
@@ -1153,14 +1367,14 @@ plt.imshow(cv2.cvtColor(th1, cv2.COLOR_BGR2RGB))
 
 show()
 
-plt.figure("影像處理", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(122)
-plt.title("th1")
 plt.imshow(cv2.cvtColor(th1, cv2.COLOR_BGR2RGB))
+plt.title("th1")
 
 show()
 
@@ -1193,14 +1407,14 @@ plt.title("Sobel")
 
 show()
 
-plt.figure("影像處理", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(gray_image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(122)
-plt.title("Sobel")
 plt.imshow(cv2.cvtColor(sobel_image, cv2.COLOR_BGR2RGB))
+plt.title("Sobel")
 
 show()
 
@@ -1212,10 +1426,10 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/sobel.bmp"
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
-plt.figure("影像處理", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(231)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1223,8 +1437,8 @@ print("顯示 Sobel 效果 1")
 sobelx = cv2.Sobel(image, -1, 1, 0)
 
 plt.subplot(232)
-plt.title("Sobel 效果 1")
 plt.imshow(cv2.cvtColor(sobelx, cv2.COLOR_BGR2RGB))
+plt.title("Sobel 效果 1")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1233,8 +1447,8 @@ sobelx = cv2.Sobel(image, cv2.CV_64F, 1, 0)
 sobelx = cv2.convertScaleAbs(sobelx)  # 转回uint8
 
 plt.subplot(233)
-plt.title("Sobel 效果 2 x 方向")
 plt.imshow(cv2.cvtColor(sobelx, cv2.COLOR_BGR2RGB))
+plt.title("Sobel 效果 2 x 方向")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1243,8 +1457,8 @@ sobely = cv2.Sobel(image, cv2.CV_64F, 0, 1)
 sobely = cv2.convertScaleAbs(sobely)
 
 plt.subplot(234)
-plt.title("Sobel 效果 3 y 方向")
 plt.imshow(cv2.cvtColor(sobely, cv2.COLOR_BGR2RGB))
+plt.title("Sobel 效果 3 y 方向")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1253,8 +1467,8 @@ sobelxy = cv2.Sobel(image, cv2.CV_64F, 1, 1)
 sobelxy = cv2.convertScaleAbs(sobelxy)
 
 plt.subplot(235)
-plt.title("Sobel 效果 4 x-y 方向")
 plt.imshow(cv2.cvtColor(sobelxy, cv2.COLOR_BGR2RGB))
+plt.title("Sobel 效果 4 x-y 方向")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1266,8 +1480,8 @@ sobely = cv2.convertScaleAbs(sobely)
 sobelxy = cv2.addWeighted(sobelx, 0.5, sobely, 0.5, 0)
 
 plt.subplot(236)
-plt.title("Sobel 效果 5 先x 再y 方向")
 plt.imshow(cv2.cvtColor(sobelxy, cv2.COLOR_BGR2RGB))
+plt.title("Sobel 效果 5 先x 再y 方向")
 
 show()
 
@@ -1285,22 +1499,24 @@ sobelxy = cv2.addWeighted(sobelx, 0.5, sobely, 0.5, 0)
 sobelxy11 = cv2.Sobel(image, cv2.CV_64F, 1, 1)
 sobelxy11 = cv2.convertScaleAbs(sobelxy11)
 
-plt.figure("", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(131)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(132)
-plt.title("Sobel xy")
 plt.imshow(cv2.cvtColor(sobelxy, cv2.COLOR_BGR2RGB))
+plt.title("Sobel xy")
 
 plt.subplot(133)
-plt.title("Sobel xy11")
 plt.imshow(cv2.cvtColor(sobelxy11, cv2.COLOR_BGR2RGB))
+plt.title("Sobel xy11")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
+
+print("Scharr")
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/scharr.bmp"
 
@@ -1321,22 +1537,22 @@ scharrx = cv2.convertScaleAbs(scharrx)  # 转回uint8
 scharry = cv2.convertScaleAbs(scharry)
 scharrxy = cv2.addWeighted(scharrx, 0.5, scharry, 0.5, 0)
 
-plt.figure("Scharr", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(222)
-plt.title("Scharr 效果 1")
 plt.imshow(cv2.cvtColor(scharrx, cv2.COLOR_BGR2RGB))
+plt.title("Scharr 效果 1")
 
 plt.subplot(223)
-plt.title("Scharr 效果 2")
 plt.imshow(cv2.cvtColor(scharry, cv2.COLOR_BGR2RGB))
+plt.title("Scharr 效果 2")
 
 plt.subplot(224)
-plt.title("Scharr 效果 3")
 plt.imshow(cv2.cvtColor(scharrxy, cv2.COLOR_BGR2RGB))
+plt.title("Scharr 效果 3")
 
 show()
 
@@ -1351,14 +1567,14 @@ print("Scharr 效果")
 scharrxy11 = cv2.Scharr(image, cv2.CV_64F, 1, 0)  # ok
 scharrxy11 = cv2.convertScaleAbs(scharrxy11)  # 转回uint8
 
-plt.figure("", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(122)
-plt.title("Scharr 效果")
 plt.imshow(cv2.cvtColor(scharrxy11, cv2.COLOR_BGR2RGB))
+plt.title("Scharr 效果")
 
 show()
 
@@ -1374,18 +1590,18 @@ scharry = cv2.Sobel(image, cv2.CV_64F, 0, 1, -1)
 scharrx = cv2.convertScaleAbs(scharrx)  # 转回uint8
 scharry = cv2.convertScaleAbs(scharry)
 
-plt.figure("", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(131)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(132)
-plt.title("Sobel x")
 plt.imshow(cv2.cvtColor(scharrx, cv2.COLOR_BGR2RGB))
+plt.title("Sobel x")
 
 plt.subplot(133)
-plt.title("Sobel y")
 plt.imshow(cv2.cvtColor(scharry, cv2.COLOR_BGR2RGB))
+plt.title("Sobel y")
 
 show()
 
@@ -1407,18 +1623,18 @@ scharrx = cv2.convertScaleAbs(scharrx)  # 转回uint8
 scharry = cv2.convertScaleAbs(scharry)
 scharrxy = cv2.addWeighted(scharrx, 0.5, scharry, 0.5, 0)
 
-plt.figure("", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(131)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(132)
-plt.title("Sobel xy")
 plt.imshow(cv2.cvtColor(sobelxy, cv2.COLOR_BGR2RGB))
+plt.title("Sobel xy")
 
 plt.subplot(133)
-plt.title("Scharr xy")
 plt.imshow(cv2.cvtColor(scharrxy, cv2.COLOR_BGR2RGB))
+plt.title("Scharr xy")
 
 show()
 
@@ -1427,14 +1643,20 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("data/edge_detection/laplacian.jpg")
-cv2.imshow("Src", src)
 
 dst_tmp = cv2.Laplacian(src, cv2.CV_32F)  # Laplacian邊緣影像
 dst = cv2.convertScaleAbs(dst_tmp)  # 轉換為正值
-cv2.imshow("Dst", dst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure(figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("dst")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1446,14 +1668,14 @@ print("顯示 Laplacian 效果")
 Laplacian = cv2.Laplacian(image, cv2.CV_64F)
 Laplacian = cv2.convertScaleAbs(Laplacian)
 
-plt.figure("Laplacian", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(122)
-plt.title("Laplacian")
 plt.imshow(cv2.cvtColor(Laplacian, cv2.COLOR_BGR2RGB))
+plt.title("Laplacian")
 
 show()
 
@@ -1464,14 +1686,27 @@ print("------------------------------------------------------------")  # 60個
 # cv2.Laplacian() SP
 print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+# 比較 ST
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+# 比較 SP
+print("------------------------------------------------------------")  # 60個
+
+
 # 輸出邊緣和結構信息
 
 image = cv2.imread("data/contours.bmp")
 
-plt.figure("輸出邊緣和結構信息", figsize=(10, 6))
+plt.figure("輸出邊緣和結構信息", figsize=(12, 8))
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -1479,11 +1714,11 @@ ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(
     binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
 )
-o = cv2.drawContours(image, contours, -1, (0, 0, 255), 5)
+o = cv2.drawContours(image, contours, -1, RED, 5)
 
 plt.subplot(122)
-plt.title("輸出邊緣和結構信息")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("輸出邊緣和結構信息")
 
 show()
 
@@ -1491,10 +1726,10 @@ print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/contours.bmp")
 
-plt.figure("影像處理1", figsize=(10, 6))
+plt.figure(figsize=(12, 8))
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
@@ -1509,11 +1744,11 @@ contoursImg = []
 for i in range(n):
     temp = np.zeros(image.shape, np.uint8)
     contoursImg.append(temp)
-    contoursImg[i] = cv2.drawContours(contoursImg[i], contours, i, (255, 255, 255), 5)
+    contoursImg[i] = cv2.drawContours(contoursImg[i], contours, i, WHITE, 5)
     index = "22" + str(i + 2)
     plt.subplot(int(index))
-    plt.title("輪廓 " + str(i + 1))
     plt.imshow(cv2.cvtColor(contoursImg[i], cv2.COLOR_BGR2RGB))
+    plt.title("輪廓 " + str(i + 1))
 
 show()
 
@@ -1526,23 +1761,23 @@ ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 mask = np.zeros(image.shape, np.uint8)
 
-mask = cv2.drawContours(mask, contours, -1, (255, 255, 255), -1)
+mask = cv2.drawContours(mask, contours, -1, WHITE, -1)
 
 loc = cv2.bitwise_and(image, mask)
 
-plt.figure("影像處理2", figsize=(10, 6))
+plt.figure(figsize=(12, 8))
 
 plt.subplot(131)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(132)
-plt.title("mask")
 plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
+plt.title("mask")
 
 plt.subplot(133)
-plt.title("location")
 plt.imshow(cv2.cvtColor(loc, cv2.COLOR_BGR2RGB))
+plt.title("location")
 
 show()
 
@@ -1550,10 +1785,10 @@ print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/moments.bmp")
 
-plt.figure("影像處理3", figsize=(10, 6))
+plt.figure(figsize=(12, 8))
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
@@ -1569,8 +1804,8 @@ for i in range(n):
     contoursImg[i] = cv2.drawContours(contoursImg[i], contours, i, 255, 3)
     index = "22" + str(i + 2)
     plt.subplot(int(index))
-    plt.title("輪廓 " + str(i + 1))
     plt.imshow(cv2.cvtColor(contoursImg[i], cv2.COLOR_BGR2RGB))
+    plt.title("輪廓 " + str(i + 1))
 
 print("觀察各個輪廓的矩（moments）:")
 for i in range(n):
@@ -1585,10 +1820,10 @@ print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/contours.bmp")
 
-plt.figure("影像處理4", figsize=(10, 6))
+plt.figure(figsize=(12, 8))
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
@@ -1602,12 +1837,12 @@ for i in range(n):
     print("contours[" + str(i) + "]面積=", cv2.contourArea(contours[i]))
     temp = np.zeros(image.shape, np.uint8)
     contoursImg.append(temp)
-    contoursImg[i] = cv2.drawContours(contoursImg[i], contours, i, (255, 255, 255), 3)
+    contoursImg[i] = cv2.drawContours(contoursImg[i], contours, i, WHITE, 3)
     # cv2.imshow("contours[" + str(i) + "]", contoursImg[i])
     index = "22" + str(i + 2)
     plt.subplot(int(index))
-    plt.title("輪廓 " + str(i + 1))
     plt.imshow(cv2.cvtColor(contoursImg[i], cv2.COLOR_BGR2RGB))
+    plt.title("輪廓 " + str(i + 1))
 
 show()
 
@@ -1618,10 +1853,10 @@ print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/contours.bmp")
 
-plt.figure("影像處理5", figsize=(10, 6))
+plt.figure(figsize=(12, 8))
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
@@ -1634,60 +1869,22 @@ contoursImg = []
 for i in range(n):
     temp = np.zeros(image.shape, np.uint8)
     contoursImg.append(temp)
-    contoursImg[i] = cv2.drawContours(contoursImg[i], contours, i, (255, 255, 255), 3)
+    contoursImg[i] = cv2.drawContours(contoursImg[i], contours, i, WHITE, 3)
     if cv2.contourArea(contours[i]) > 15000:
         # cv2.imshow("contours[" + str(i) + "]", contoursImg[i])
         index = "22" + str(i + 2)
         plt.subplot(int(index))
-        plt.title("輪廓 " + str(i + 1))
         plt.imshow(cv2.cvtColor(contoursImg[i], cv2.COLOR_BGR2RGB))
+        plt.title("輪廓 " + str(i + 1))
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 篩選出大于特定大小的輪廓
-
-# --------------讀取及顯示原始圖像--------------------
-image = cv2.imread("data/contours0.bmp")
-cv2.imshow("original", image)
-
-# --------------獲取輪廓--------------------
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
-contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-
-# --------------計算各個輪廓的長度和、平均長度--------------------
-n = len(contours)  # 獲取輪廓個數
-print("總共找到", n, "個輪廓")
-
-cntLen = []  # 存儲各個輪廓的長度
-for i in range(n):
-    cntLen.append(cv2.arcLength(contours[i], True))
-    print("第" + str(i) + "個輪廓的長度:%d" % cntLen[i])
-cntLenSum = np.sum(cntLen)  # 各個輪廓長度和
-cntLenAvr = cntLenSum / n  # 各個輪廓長度平均值
-print("各個輪廓的總長度為：%d" % cntLenSum)
-print("各個輪廓的平均長度為：%d" % cntLenAvr)
-
-# --------------顯示超過平均值的輪廓--------------------
-contoursImg = []
-for i in range(n):
-    temp = np.zeros(image.shape, np.uint8)
-    contoursImg.append(temp)
-    contoursImg[i] = cv2.drawContours(contoursImg[i], contours, i, (255, 255, 255), 3)
-    if cv2.arcLength(contours[i], True) > cntLenAvr:
-        cv2.imshow("contours[" + str(i) + "]", contoursImg[i])
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 image = cv2.imread("data/cs1.bmp")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
 HuM1 = cv2.HuMoments(cv2.moments(gray)).flatten()
 
 print("cv2.moments(gray)=\n", cv2.moments(gray))
@@ -1710,18 +1907,17 @@ print("------------------------------------------------------------")  # 60個
 
 # ----------------計算圖像1的Hu矩-------------------
 image1 = cv2.imread("data/cs1.bmp")
-
 gray1 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)
 HuM1 = cv2.HuMoments(cv2.moments(gray1)).flatten()
+
 # ----------------計算圖像2的Hu矩-------------------
 image2 = cv2.imread("data/cs3.bmp")
-
 gray2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
 HuM2 = cv2.HuMoments(cv2.moments(gray2)).flatten()
+
 # ----------------計算圖像3的Hu矩-------------------
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 image3 = cv2.imread(filename)
-
 gray3 = cv2.cvtColor(image3, cv2.COLOR_BGR2GRAY)
 HuM3 = cv2.HuMoments(cv2.moments(gray3)).flatten()
 
@@ -1740,19 +1936,19 @@ print("\nHuM3=\n", HuM3)
 print("\nHuM1-HuM2=", HuM1 - HuM2)
 print("\nHuM1-HuM3=", HuM1 - HuM3)
 
-plt.figure("影像處理6", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 
 plt.subplot(131)
-plt.title("original1")
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("original1")
 
 plt.subplot(132)
-plt.title("original2")
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.title("original2")
 
 plt.subplot(133)
-plt.title("original3")
 plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
+plt.title("original3")
 
 show()
 
@@ -1793,19 +1989,19 @@ print("相似圖像的matchShape=", ret1)
 print("不相似圖像的matchShape=", ret2)
 
 # --------------顯示3幅原始圖像--------------------
-plt.figure("影像處理7", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 
 plt.subplot(131)
-plt.title("original1")
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("original1")
 
 plt.subplot(132)
-plt.title("original2")
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.title("original2")
 
 plt.subplot(133)
-plt.title("original3")
 plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
+plt.title("original3")
 
 show()
 
@@ -1839,7 +2035,7 @@ for method in [1, 2, 3]:
 # CV_CONTOURS_MATCH_I3   0.9164,   0.4778,   0.0225,   0.4552,   0.0016
 
 # %figonly=使用`matchShapes()`比較由`approxPolyDP()`近似之後的輪廓
-fig, ax = plt.subplots(figsize=(8, 8))
+fig, ax = plt.subplots(figsize=(12, 8))
 ax.set_aspect("equal")
 
 width = 180
@@ -1861,7 +2057,7 @@ for tidx, (target, target_simple) in enumerate(zip(targets, targets_simple)):
             ax.add_patch(pattern_poly)
             text = ax.text(x0 + width * 0.3, -50, str(pidx), fontsize=14, ha="center")
         if pidx == 0:
-            target_poly = plt.Polygon(target2 + [0, y0], color="green", alpha=0.6)
+            target_poly = plt.Polygon(target2 + [0, y0], color="g", alpha=0.6)
             ax.add_patch(target_poly)
             text = ax.text(-50, y0 + width * 0.3, str(tidx), fontsize=14, ha="center")
 
@@ -1897,7 +2093,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# ---------------讀取并顯示原始圖像------------------
 image = cv2.imread("data/cc.bmp")
 
 # ---------------提取圖像輪廓------------------
@@ -1918,15 +2113,12 @@ print("rect=", rect)
 
 print("------------------------------------------------------------")  # 60個
 
-# ---------------讀取并顯示原始圖像------------------
 image = cv2.imread("data/cc.bmp")
 
-cv2.imshow("original", image)
-
-plt.figure("影像處理8", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 # ---------------提取圖像輪廓------------------
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -1936,32 +2128,23 @@ contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_S
 # ---------------構造矩形邊界------------------
 x, y, w, h = cv2.boundingRect(contours[0])
 brcnt = np.array([[[x, y]], [[x + w, y]], [[x + w, y + h]], [[x, y + h]]])
-cv2.drawContours(image, [brcnt], -1, (0, 0, 255), 2)
-
-# ---------------顯示矩形邊界------------------
-cv2.imshow("result", image)
+cv2.drawContours(image, [brcnt], -1, RED, 2)
 
 plt.subplot(122)
-plt.title("result")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("顯示矩形邊界")
 
 show()
 
-cv2.waitKey()
-cv2.destroyAllWindows()
-
 print("------------------------------------------------------------")  # 60個
 
-# ---------------讀取并顯示原始圖像------------------
 image = cv2.imread("data/cc.bmp")
 
-cv2.imshow("original", image)
-
-plt.figure("影像處理9", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 # ---------------提取圖像輪廓------------------
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -1970,30 +2153,22 @@ contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_S
 
 # ---------------構造矩形邊界------------------
 x, y, w, h = cv2.boundingRect(contours[0])
-cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
-
-# ---------------顯示矩形邊界------------------
-cv2.imshow("result", image)
+cv2.rectangle(image, (x, y), (x + w, y + h), RED, 2)
 
 plt.subplot(122)
-plt.title("result")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("顯示矩形邊界")
 
 show()
-
-cv2.waitKey()
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cc.bmp")
 
-cv2.imshow("original", image)
-
-plt.figure("影像處理11", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
@@ -2001,55 +2176,45 @@ contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_S
 (x, y), radius = cv2.minEnclosingCircle(contours[0])
 center = (int(x), int(y))
 radius = int(radius)
-cv2.circle(image, center, radius, (0, 0, 255), 2)
-cv2.imshow("result", image)
+cv2.circle(image, center, radius, RED, 2)
 
 plt.subplot(122)
-plt.title("result")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("圓圈圈出來")
 
 show()
-
-cv2.waitKey()
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cc.bmp")
 
-plt.figure("影像處理12", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-cv2.imshow("original", image)
+
 ellipse = cv2.fitEllipse(contours[0])
 print("ellipse=", ellipse)
-cv2.ellipse(image, ellipse, (0, 255, 0), 3)
-cv2.imshow("result", image)
+cv2.ellipse(image, ellipse, GREEN, 3)
 
 plt.subplot(122)
-plt.title("result")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("橢圓形圈出來")
 
 show()
-
-cv2.waitKey()
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cc.bmp")
 
-cv2.imshow("original", image)
-
-plt.figure("影像處理13", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
@@ -2058,28 +2223,23 @@ rows, cols = image.shape[:2]
 [vx, vy, x, y] = cv2.fitLine(contours[0], cv2.DIST_L2, 0, 0.01, 0.01)
 lefty = int((-x * vy / vx) + y)
 righty = int(((cols - x) * vy / vx) + y)
-cv2.line(image, (cols - 1, righty), (0, lefty), (0, 255, 0), 2)
-cv2.imshow("result", image)
+cv2.line(image, (cols - 1, righty), (0, lefty), GREEN, 2)
 
 plt.subplot(122)
-plt.title("result")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("直線貫通")
 
 show()
 
-cv2.waitKey()
-cv2.destroyAllWindows()
-
 print("------------------------------------------------------------")  # 60個
 
+# some NG
 image = cv2.imread("data/cc.bmp")
-cv2.imshow("original", image)
 
-plt.figure("影像處理14", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
+plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
@@ -2090,22 +2250,21 @@ print("trgl:", trgl)
 for i in range(0, 3):
     print("x")
     # cv2.line(image, tuple(trgl[i][0]), tuple(trgl[(i + 1) % 3][0]), (255,255,255), 2)
-cv2.imshow("result", image)
 
 plt.subplot(122)
-plt.title("result")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("result")
 
 show()
 
-cv2.waitKey()
-cv2.destroyAllWindows()
-
 print("------------------------------------------------------------")  # 60個
 
-# ----------------讀取并顯示原始圖像-------------------------------
 image = cv2.imread("data/cc.bmp")
-cv2.imshow("original", image)
+
+plt.figure(figsize=(12, 8))
+plt.subplot(231)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 # ----------------獲取輪廓-------------------------------
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -2116,39 +2275,53 @@ contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_S
 adp = image.copy()
 epsilon = 0.1 * cv2.arcLength(contours[0], True)
 approx = cv2.approxPolyDP(contours[0], epsilon, True)
-adp = cv2.drawContours(adp, [approx], 0, (0, 0, 255), 2)
-cv2.imshow("result0.1", adp)
+adp = cv2.drawContours(adp, [approx], 0, RED, 2)
+
+plt.subplot(232)
+plt.imshow(cv2.cvtColor(adp, cv2.COLOR_BGR2RGB))
+plt.title("result0.1")
 
 # ----------------epsilon=0.09*周長-------------------------------
 adp = image.copy()
 epsilon = 0.09 * cv2.arcLength(contours[0], True)
 approx = cv2.approxPolyDP(contours[0], epsilon, True)
-adp = cv2.drawContours(adp, [approx], 0, (0, 0, 255), 2)
-cv2.imshow("result0.09", adp)
+adp = cv2.drawContours(adp, [approx], 0, RED, 2)
+
+plt.subplot(233)
+plt.imshow(cv2.cvtColor(adp, cv2.COLOR_BGR2RGB))
+plt.title("result0.09")
 
 # ----------------epsilon=0.055*周長-------------------------------
 adp = image.copy()
 epsilon = 0.055 * cv2.arcLength(contours[0], True)
 approx = cv2.approxPolyDP(contours[0], epsilon, True)
-adp = cv2.drawContours(adp, [approx], 0, (0, 0, 255), 2)
-cv2.imshow("result0.055", adp)
+adp = cv2.drawContours(adp, [approx], 0, RED, 2)
+
+plt.subplot(234)
+plt.imshow(cv2.cvtColor(adp, cv2.COLOR_BGR2RGB))
+plt.title("result0.055")
 
 # ----------------epsilon=0.05*周長-------------------------------
 adp = image.copy()
 epsilon = 0.05 * cv2.arcLength(contours[0], True)
 approx = cv2.approxPolyDP(contours[0], epsilon, True)
-adp = cv2.drawContours(adp, [approx], 0, (0, 0, 255), 2)
-cv2.imshow("result0.05", adp)
+adp = cv2.drawContours(adp, [approx], 0, RED, 2)
+
+plt.subplot(235)
+plt.imshow(cv2.cvtColor(adp, cv2.COLOR_BGR2RGB))
+plt.title("result0.05")
 
 # ----------------epsilon=0.02*周長-------------------------------
 adp = image.copy()
 epsilon = 0.02 * cv2.arcLength(contours[0], True)
 approx = cv2.approxPolyDP(contours[0], epsilon, True)
-adp = cv2.drawContours(adp, [approx], 0, (0, 0, 255), 2)
-cv2.imshow("result0.02", adp)
+adp = cv2.drawContours(adp, [approx], 0, RED, 2)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(236)
+plt.imshow(cv2.cvtColor(adp, cv2.COLOR_BGR2RGB))
+plt.title("result0.02")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2165,9 +2338,13 @@ print("returnPoints為False時返回值hull的值：\n", hull2)
 
 print("------------------------------------------------------------")  # 60個
 
-# --------------讀取并繪製原始圖像------------------
 o = cv2.imread("data/hand.bmp")
-cv2.imshow("original", o)
+
+plt.figure(figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
 # --------------提取輪廓------------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
@@ -2176,45 +2353,57 @@ contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_S
 # --------------尋找凸包，得到凸包的角點------------------
 hull = cv2.convexHull(contours[0])
 # --------------繪製凸包------------------
-cv2.polylines(o, [hull], True, (0, 255, 0), 2)
-# --------------顯示凸包------------------
-cv2.imshow("result", o)
+cv2.polylines(o, [hull], True, GREEN, 2)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.title("顯示凸包")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 # ----------------原圖--------------------------
 img = cv2.imread("data/hand.bmp")
-cv2.imshow("original", img)
+
+plt.figure(figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
 # ----------------構造輪廓--------------------------
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, 0)
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
 # ----------------凸包--------------------------
 cnt = contours[0]
 hull = cv2.convexHull(cnt, returnPoints=False)
 defects = cv2.convexityDefects(cnt, hull)
 print("defects=\n", defects)
+
 # ----------------構造凸缺陷--------------------------
 for i in range(defects.shape[0]):
     s, e, f, d = defects[i, 0]
     start = tuple(cnt[s][0])
     end = tuple(cnt[e][0])
     far = tuple(cnt[f][0])
-    cv2.line(img, start, end, [0, 0, 255], 2)
-    cv2.circle(img, far, 5, [255, 0, 0], -1)
-# ----------------顯示結果--------------------------
-cv2.imshow("result", img)
+    cv2.line(img, start, end, RED, 2)
+    cv2.circle(img, far, 5, BLUE, -1)
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title("顯示結果")
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 o = cv2.imread("data/hand.bmp")
-cv2.imshow("original", o)
+
+plt.figure(figsize=(12, 8))
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
@@ -2222,92 +2411,103 @@ contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_S
 # --------------凸包----------------------
 image1 = o.copy()
 hull = cv2.convexHull(contours[0])
-cv2.polylines(image1, [hull], True, (0, 255, 0), 2)
+cv2.polylines(image1, [hull], True, GREEN, 2)
 print("使用函數cv2.convexHull()構造的多邊形是否是凸包：", cv2.isContourConvex(hull))
-cv2.imshow("result1", image1)
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("result1")
+
 # ------------逼近多邊形--------------------
 image2 = o.copy()
 epsilon = 0.01 * cv2.arcLength(contours[0], True)
 approx = cv2.approxPolyDP(contours[0], epsilon, True)
-image2 = cv2.drawContours(image2, [approx], 0, (0, 0, 255), 2)
+image2 = cv2.drawContours(image2, [approx], 0, RED, 2)
 print("使用函數cv2.approxPolyDP()構造的多邊形是否是凸包：", cv2.isContourConvex(approx))
-cv2.imshow("result2", image2)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.title("result2")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # ----------------原始圖像-------------------------
 o = cv2.imread("data/cs1.bmp")
 cv2.imshow("original", o)
+
 # ----------------獲取凸包------------------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 hull = cv2.convexHull(contours[0])
 
-""" fail
-image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
-cv2.polylines(image, [hull], True, (0, 255, 0), 2)
+image = cv2.imread("data/cs1.bmp", 0)
 
-#----------------內部點A的距離-------------------------
-distA = cv2.pointPolygonTest(hull, (300, 150), True)  
-font=cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(image,'A',(300,150), font, 1,(0,255,0),3)
-print("distA=",distA) 
-#----------------外部點B的距離-------------------------
-distB = cv2.pointPolygonTest(hull, (300, 250), True)  
-font=cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(image,'B',(300,250), font, 1,(0,255,0),3)
-print("distB=",distB) 
-#------------正好處于邊緣上的點C的距離-----------------
-distC = cv2.pointPolygonTest(hull, (423, 112), True)  
-font=cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(image,'C',(423,112), font, 1,(0,255,0),3)
-print("distC=",distC) 
-#print(hull)   #測試邊緣到底在哪里，然后再使用確定位置的
-#----------------顯示-------------------------
-cv2.imshow("result",image)
+image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
+cv2.polylines(image, [hull], True, GREEN, 2)
+
+# ----------------內部點A的距離-------------------------
+distA = cv2.pointPolygonTest(hull, (300, 150), True)
+font = cv2.FONT_HERSHEY_SIMPLEX
+cv2.putText(image, "A", (300, 150), font, 1, (0, 255, 0), 3)
+print("distA=", distA)
+# ----------------外部點B的距離-------------------------
+distB = cv2.pointPolygonTest(hull, (300, 250), True)
+font = cv2.FONT_HERSHEY_SIMPLEX
+cv2.putText(image, "B", (300, 250), font, 1, (0, 255, 0), 3)
+print("distB=", distB)
+# ------------正好處于邊緣上的點C的距離-----------------
+distC = cv2.pointPolygonTest(hull, (423, 112), True)
+font = cv2.FONT_HERSHEY_SIMPLEX
+cv2.putText(image, "C", (423, 112), font, 1, (0, 255, 0), 3)
+print("distC=", distC)
+# print(hull)   #測試邊緣到底在哪里，然后再使用確定位置的
+# ----------------顯示-------------------------
+cv2.imshow("result", image)
+
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-"""
+
 print("------------------------------------------------------------")  # 60個
 
-# ----------------原始圖像-------------------------
 o = cv2.imread("data/cs1.bmp")
 cv2.imshow("original", o)
+
 # ----------------獲取凸包------------------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 hull = cv2.convexHull(contours[0])
-""" fail
+
+image = cv2.imread("data/cs1.bmp", 0)
+
 image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
-cv2.polylines(image, [hull], True, (0, 255, 0), 2)
-#----------------內部點A與多邊形的關系-------------------------
-distA = cv2.pointPolygonTest(hull, (300, 150),False)  
-font=cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(image,'A',(300,150), font, 1,(0,255,0),3)
-print("distA=",distA) 
-#----------------外部點B與多邊形的關系-------------------------
-distB = cv2.pointPolygonTest(hull, (300, 250), False)  
-font=cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(image,'B',(300,250), font, 1,(0,255,0),3)
-print("distB=",distB) 
-#----------------邊緣線上點C與多邊形的關系----------------------
-distC = cv2.pointPolygonTest(hull, (423, 112),False)  
-font=cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(image,'C',(423,112), font, 1,(0,255,0),3)
-print("distC=",distC) 
-#print(hull)   #測試邊緣到底在哪里，然后再使用確定位置的
-#----------------顯示-------------------------
-cv2.imshow("result",image)
+cv2.polylines(image, [hull], True, GREEN, 2)
+# ----------------內部點A與多邊形的關系-------------------------
+distA = cv2.pointPolygonTest(hull, (300, 150), False)
+font = cv2.FONT_HERSHEY_SIMPLEX
+cv2.putText(image, "A", (300, 150), font, 1, (0, 255, 0), 3)
+print("distA=", distA)
+# ----------------外部點B與多邊形的關系-------------------------
+distB = cv2.pointPolygonTest(hull, (300, 250), False)
+font = cv2.FONT_HERSHEY_SIMPLEX
+cv2.putText(image, "B", (300, 250), font, 1, (0, 255, 0), 3)
+print("distB=", distB)
+# ----------------邊緣線上點C與多邊形的關系----------------------
+distC = cv2.pointPolygonTest(hull, (423, 112), False)
+font = cv2.FONT_HERSHEY_SIMPLEX
+cv2.putText(image, "C", (423, 112), font, 1, (0, 255, 0), 3)
+print("distC=", distC)
+# print(hull)   #測試邊緣到底在哪里，然后再使用確定位置的
+# ----------------顯示-------------------------
+cv2.imshow("result", image)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 # -----------原始圖像o1邊緣--------------------
@@ -2318,6 +2518,7 @@ gray1 = cv2.cvtColor(o1, cv2.COLOR_BGR2GRAY)
 ret, binary1 = cv2.threshold(gray1, 127, 255, cv2.THRESH_BINARY)
 contours1, hierarchy = cv2.findContours(binary1, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 cnt1 = contours1[0]
+
 # -----------原始圖像o2邊緣--------------------
 o2 = cv2.imread("data/cs3.bmp")
 cv2.imshow("original2", o2)
@@ -2326,6 +2527,7 @@ gray2 = cv2.cvtColor(o2, cv2.COLOR_BGR2GRAY)
 ret, binary2 = cv2.threshold(gray2, 127, 255, cv2.THRESH_BINARY)
 contours2, hierarchy = cv2.findContours(binary2, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 cnt2 = contours2[0]
+
 # -----------原始圖像o3邊緣--------------------
 o3 = cv2.imread("data/hand.bmp")
 cv2.imshow("original3", o3)
@@ -2350,24 +2552,24 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# -----------讀取原始圖像--------------------
 o1 = cv2.imread("data/cs1.bmp")
-
 o2 = cv2.imread("data/cs3.bmp")
-
 o3 = cv2.imread("data/hand.bmp")
 
 cv2.imshow("original1", o1)
 cv2.imshow("original2", o2)
 cv2.imshow("original3", o3)
+
 # -----------色彩轉換--------------------
 gray1 = cv2.cvtColor(o1, cv2.COLOR_BGR2GRAY)
 gray2 = cv2.cvtColor(o2, cv2.COLOR_BGR2GRAY)
 gray3 = cv2.cvtColor(o3, cv2.COLOR_BGR2GRAY)
+
 # -----------閾值處理--------------------
 ret, binary1 = cv2.threshold(gray1, 127, 255, cv2.THRESH_BINARY)
 ret, binary2 = cv2.threshold(gray2, 127, 255, cv2.THRESH_BINARY)
 ret, binary3 = cv2.threshold(gray3, 127, 255, cv2.THRESH_BINARY)
+
 # -----------提取輪廓--------------------
 contours1, hierarchy = cv2.findContours(binary1, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 contours2, hierarchy = cv2.findContours(binary2, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
@@ -2375,8 +2577,10 @@ contours3, hierarchy = cv2.findContours(binary3, cv2.RETR_LIST, cv2.CHAIN_APPROX
 cnt1 = contours1[0]
 cnt2 = contours2[0]
 cnt3 = contours3[0]
+
 # -----------構造距離提取算子--------------------
 hd = cv2.createHausdorffDistanceExtractor()
+
 # -----------計算距離--------------------
 d1 = hd.computeDistance(cnt1, cnt1)
 print("自身Hausdorff距離d1=", d1)
@@ -2384,6 +2588,7 @@ d2 = hd.computeDistance(cnt1, cnt2)
 print("旋轉縮放后Hausdorff距離d2=", d2)
 d3 = hd.computeDistance(cnt1, cnt3)
 print("不相似對象Hausdorff距離d3=", d3)
+
 # -----------顯示距離--------------------
 
 cv2.waitKey()
@@ -2398,7 +2603,7 @@ gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 x, y, w, h = cv2.boundingRect(contours[0])
-cv2.rectangle(o, (x, y), (x + w, y + h), (255, 255, 255), 3)
+cv2.rectangle(o, (x, y), (x + w, y + h), WHITE, 3)
 
 aspectRatio = float(w) / h
 print(aspectRatio)
@@ -2416,8 +2621,8 @@ gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 x, y, w, h = cv2.boundingRect(contours[0])
-cv2.drawContours(o, contours[0], -1, (0, 0, 255), 3)
-cv2.rectangle(o, (x, y), (x + w, y + h), (255, 0, 0), 3)
+cv2.drawContours(o, contours[0], -1, RED, 3)
+cv2.rectangle(o, (x, y), (x + w, y + h), BLUE, 3)
 
 rectArea = w * h
 cntArea = cv2.contourArea(contours[0])
@@ -2436,11 +2641,11 @@ cv2.imshow("original", o)
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-cv2.drawContours(o, contours[0], -1, (0, 0, 255), 3)
+cv2.drawContours(o, contours[0], -1, RED, 3)
 cntArea = cv2.contourArea(contours[0])
 hull = cv2.convexHull(contours[0])
 hullArea = cv2.contourArea(hull)
-cv2.polylines(o, [hull], True, (0, 255, 0), 2)
+cv2.polylines(o, [hull], True, GREEN, 2)
 solidity = float(cntArea) / hullArea
 print(solidity)
 cv2.imshow("result", o)
@@ -2456,11 +2661,11 @@ cv2.imshow("original", o)
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-cv2.drawContours(o, contours[0], -1, (0, 0, 255), 3)
+cv2.drawContours(o, contours[0], -1, RED, 3)
 cntArea = cv2.contourArea(contours[0])
 equiDiameter = np.sqrt(4 * cntArea / np.pi)
 print(equiDiameter)
-cv2.circle(o, (100, 100), int(equiDiameter / 2), (0, 0, 255), 3)  # 展示等直徑大小的圓
+cv2.circle(o, (100, 100), int(equiDiameter / 2), RED, 3)  # 展示等直徑大小的圓
 cv2.imshow("result", o)
 
 cv2.waitKey()
@@ -2483,7 +2688,7 @@ print("三個返回值形式：")
 print("(x,y)=(", x, y, ")")
 print("(MA,ma)=(", MA, ma, ")")
 print("angle=", angle)
-cv2.ellipse(o, ellipse, (0, 0, 255), 2)
+cv2.ellipse(o, ellipse, RED, 2)
 cv2.imshow("result", o)
 
 cv2.waitKey()
@@ -2513,11 +2718,13 @@ print("------------------------------------------------------------")  # 60個
 # -----------------讀取原始圖像----------------------
 o = cv2.imread("data/cc.bmp")
 cv2.imshow("original", o)
+
 # -----------------獲取輪廓------------------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 cnt = contours[0]
+
 # -----------------繪製空心輪廓------------------------
 mask1 = np.zeros(gray.shape, np.uint8)
 cv2.drawContours(mask1, [cnt], 0, 255, 2)
@@ -2525,6 +2732,7 @@ pixelpoints1 = np.transpose(np.nonzero(mask1))
 print("pixelpoints1.shape=", pixelpoints1.shape)
 print("pixelpoints1=\n", pixelpoints1)
 cv2.imshow("mask1", mask1)
+
 # -----------------繪製實心輪廓---------------------
 mask2 = np.zeros(gray.shape, np.uint8)
 cv2.drawContours(mask2, [cnt], 0, 255, -1)
@@ -2557,14 +2765,15 @@ print("a內非零值位置:\n", loc)
 
 print("------------------------------------------------------------")  # 60個
 
-# -----------------讀取原始圖像----------------------
 o = cv2.imread("data/cc.bmp")
 cv2.imshow("original", o)
+
 # -----------------獲取輪廓------------------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 cnt = contours[0]
+
 # -----------------繪製空心輪廓------------------------
 mask1 = np.zeros(gray.shape, np.uint8)
 cv2.drawContours(mask1, [cnt], 0, 255, 2)
@@ -2572,6 +2781,7 @@ pixelpoints1 = cv2.findNonZero(mask1)
 print("pixelpoints1.shape=", pixelpoints1.shape)
 print("pixelpoints1=\n", pixelpoints1)
 cv2.imshow("mask1", mask1)
+
 # -----------------繪製實心輪廓---------------------
 mask2 = np.zeros(gray.shape, np.uint8)
 cv2.drawContours(mask2, [cnt], 0, 255, -1)
@@ -2604,7 +2814,7 @@ print("minLoc=", minLoc)
 print("maxLoc=", maxLoc)
 # --------使用掩膜獲取感興趣區域并顯示-----------------
 masko = np.zeros(o.shape, np.uint8)
-masko = cv2.drawContours(masko, [cnt], -1, (255, 255, 255), -1)
+masko = cv2.drawContours(masko, [cnt], -1, WHITE, -1)
 loc = cv2.bitwise_and(o, masko)
 cv2.imshow("mask", loc)
 # 顯示灰度結果
@@ -2616,7 +2826,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# --------讀取并顯示原始圖像-----------------
 o = cv2.imread("data/ct.png")
 cv2.imshow("original", o)
 # --------獲取輪廓-----------------
@@ -2626,12 +2835,12 @@ contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_S
 cnt = contours[2]
 # --------使用掩膜獲取感興趣區域的均值-----------------
 mask = np.zeros(gray.shape, np.uint8)  # 構造mean所使用的掩膜，必須是單通道的
-cv2.drawContours(mask, [cnt], 0, (255, 255, 255), -1)
+cv2.drawContours(mask, [cnt], 0, WHITE, -1)
 meanVal = cv2.mean(o, mask=mask)  # mask是區域，所以必須是單通道的
 print("meanVal=\n", meanVal)
 # --------使用掩膜獲取感興趣區域并顯示-----------------
 masko = np.zeros(o.shape, np.uint8)
-cv2.drawContours(masko, [cnt], -1, (255, 255, 255), -1)
+cv2.drawContours(masko, [cnt], -1, WHITE, -1)
 loc = cv2.bitwise_and(o, masko)
 cv2.imshow("mask", loc)
 
@@ -2661,10 +2870,10 @@ print("topmost=", topmost)
 print("bottommost=", bottommost)
 # --------繪製說明文字-----------------
 font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(o, "A", leftmost, font, 1, (0, 0, 255), 2)
-cv2.putText(o, "B", rightmost, font, 1, (0, 0, 255), 2)
-cv2.putText(o, "C", topmost, font, 1, (0, 0, 255), 2)
-cv2.putText(o, "D", bottommost, font, 1, (0, 0, 255), 2)
+cv2.putText(o, "A", leftmost, font, 1, RED, 2)
+cv2.putText(o, "B", rightmost, font, 1, RED, 2)
+cv2.putText(o, "C", topmost, font, 1, RED, 2)
+cv2.putText(o, "D", bottommost, font, 1, RED, 2)
 # --------繪製圖像-----------------
 cv2.imshow("result", o)
 
@@ -2799,9 +3008,9 @@ print("------------------------------------------------------------")  # 60個
 
 cv2.namedWindow("Peony")  # 使用預設
 img = cv2.imread(filename)  # 彩色讀取
-cv2.line(img, (10, 300), (250, 300), (255, 0, 0), 5)  # 輸出線條
-cv2.rectangle(img, (20, 20), (240, 250), (0, 0, 255), 2)  # 輸出矩陣
-cv2.putText(img, "Peony", (10, 250), cv2.FONT_ITALIC, 3, (255, 0, 0), 8)  # 輸出文字
+cv2.line(img, (10, 300), (250, 300), BLUE, 5)  # 輸出線條
+cv2.rectangle(img, (20, 20), (240, 250), RED, 2)  # 輸出矩陣
+cv2.putText(img, "Peony", (10, 250), cv2.FONT_ITALIC, 3, BLUE, 8)  # 輸出文字
 cv2.imshow("Peony", img)  # 顯示影像img
 cv2.waitKey(3000)  # 等待3秒
 cv2.destroyAllWindows()  # 刪除所有視窗
@@ -2897,15 +3106,18 @@ sharpen_image_lena = my_not_sharpen(original_image_lena, 3)
 
 # 顯示結果
 plt.subplot(131)
-plt.title("原始圖像")
 plt.imshow(original_image_lena)
+plt.title("原始圖像")
+
 plt.subplot(132)
-plt.title("邊緣檢測")
 plt.imshow(edge_image_lena)
+plt.title("邊緣檢測")
+
 plt.subplot(133)
-plt.title("非銳化")
 plt.imshow(sharpen_image_lena)
-plt.show()
+plt.title("非銳化")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2944,5 +3156,46 @@ print(f"dst = \n {dst}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 # 高斯模糊，Canny边缘检测需要的
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 篩選出大于特定大小的輪廓
+
+image = cv2.imread("data/contours0.bmp")
+cv2.imshow("original", image)
+
+# --------------獲取輪廓--------------------
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+
+# --------------計算各個輪廓的長度和、平均長度--------------------
+n = len(contours)  # 獲取輪廓個數
+print("總共找到", n, "個輪廓")
+
+cntLen = []  # 存儲各個輪廓的長度
+for i in range(n):
+    cntLen.append(cv2.arcLength(contours[i], True))
+    print("第" + str(i) + "個輪廓的長度:%d" % cntLen[i])
+cntLenSum = np.sum(cntLen)  # 各個輪廓長度和
+cntLenAvr = cntLenSum / n  # 各個輪廓長度平均值
+print("各個輪廓的總長度為：%d" % cntLenSum)
+print("各個輪廓的平均長度為：%d" % cntLenAvr)
+
+# --------------顯示超過平均值的輪廓--------------------
+contoursImg = []
+for i in range(n):
+    temp = np.zeros(image.shape, np.uint8)
+    contoursImg.append(temp)
+    contoursImg[i] = cv2.drawContours(contoursImg[i], contours, i, WHITE, 3)
+    if cv2.arcLength(contours[i], True) > cntLenAvr:
+        print(i)
+        cv2.imshow("contours[" + str(i) + "]", contoursImg[i])
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
