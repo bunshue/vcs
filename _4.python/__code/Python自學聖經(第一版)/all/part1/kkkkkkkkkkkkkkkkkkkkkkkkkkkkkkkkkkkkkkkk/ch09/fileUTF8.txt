@@ -1,3 +1,0 @@
-﻿Hello Python
-12345
-Welcome222
