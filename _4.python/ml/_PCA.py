@@ -862,7 +862,6 @@ show()
 
 
 def correlation_matrix(df):
-    from matplotlib import pyplot as plt
     from matplotlib import cm as cm
 
     fig = plt.figure(figsize=(16, 12))
@@ -2044,3 +2043,4 @@ plt.plot(x, y, "bo")
 plt.text(x, y, s, va="bottom", ha="left", color="b")
 plt.plot(x, y, "r^")
 plt.text(x, y, s, va="bottom", ha="left", color="r")
+

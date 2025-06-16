@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 def draw_grid(grid, size=6, margin=0.02, fontsize=16):
-    from matplotlib import pyplot as plt
     cols = len(grid[0])
     rows = len(grid)
     aspect = rows / float(cols)

@@ -59,10 +59,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 把照片转换成圆形马赛克效果
 
-import cv2
-import numpy as np
 from PIL import Image
-from matplotlib import pyplot as plt
 
 # 首先使用cvtColor()将图像转换为灰度图像，然后使用Canny()找出图像的边缘。
 

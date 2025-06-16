@@ -1,5 +1,5 @@
 import cv2
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 
 files = ['earth_west.png', 'earth_east.png']
 

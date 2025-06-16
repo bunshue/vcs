@@ -1,7 +1,6 @@
 import csv
 from datetime import datetime
-
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 
 filename = 'data/sitka_weather_2018_simple.csv'
 with open(filename) as f:

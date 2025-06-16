@@ -394,7 +394,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-from matplotlib import pyplot as plt
 from matplotlib.patches import Arrow
 
 fig = plt.figure()

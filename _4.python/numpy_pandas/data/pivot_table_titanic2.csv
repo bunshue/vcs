@@ -1,0 +1,1314 @@
+row.names,home.dest,room,ticket,boat,sex
+1,"St Louis, MO",B-5,24160 L221,2,female
+2,"Montreal, PQ / Chesterville, ON",C26,,,female
+3,"Montreal, PQ / Chesterville, ON",C26,,(135),male
+4,"Montreal, PQ / Chesterville, ON",C26,,,female
+5,"Montreal, PQ / Chesterville, ON",C22,,11,male
+6,"New York, NY",E-12,,3,male
+7,"Hudson, NY",D-7,13502 L77,10,female
+8,"Belfast, NI",A-36,,,male
+9,"Bayside, Queens, NY",C-101,,2,female
+10,"Montevideo, Uruguay",,,(22),male
+11,"New York, NY",,17754 L224 10s 6d,(124),male
+12,"New York, NY",,17754 L224 10s 6d,4,female
+13,"Paris, France",B-35,17477 L69 6s,9,female
+14,"Hessle, Yorks",A-23,,B,male
+15,"New York, NY",,,,male
+16,"Montreal, PQ",B-58/60,,6,female
+17,"Montreal, PQ",B-58/60,,,male
+18,"Winnipeg, MN",C-6,,,male
+19,"New York, NY",D-35,,5,male
+20,"New York, NY",D-35,,5,female
+21,"New York, NY",C-148,,5,male
+22,"San Francisco, CA",,,(148),male
+23,"Dowagiac, MI",B-49,,7,male
+24,"Dowagiac, MI",B-49,,7,female
+25,"Stockholm, Sweden / Washington, DC",, ,D,male
+26,"Trenton, NJ",,,(241),male
+27,"Glen Ridge, NJ",A-31,,7,male
+28,"Youngstown, OH",C-7,,8,female
+29,"Birkdale, England Cleveland, Ohio",C-103,,8,female
+30,"London / Winnipeg, MB",D-21/2,,,male
+31,"Cooperstown, NY",,,4,female
+32,"St Leonards-on-Sea, England Ohio",,,6,female
+33,"Los Angeles, CA",,,15,male
+34,"Pomeroy, WA",,,,male
+35,"Omaha, NE",,17591 L50 9s 11d,(208),male
+36,"Philadelphia, PA",,,,male
+37,"Denver, CO",,17610 L27 15s 5d,6,female
+38,"Belmont, MA",C-101,,D,female
+39,"Philadelphia, PA",,,8,female
+40,"Washington, DC",,,,male
+41,"New York, NY",,,5/7,male
+42,"Washington, DC",,,6,female
+43,"Germantown, Philadelphia, PA",B-51/3/5,17755 L512 6s,3,female
+44,"Austria-Hungary / Germantown, Philadelphia, PA",B-51/3/5,17755 L512 6s,3,male
+45,"New York, NY",,,,male
+46,"Montevideo, Uruguay",,,,male
+47,"Montevideo, Uruguay",,,,male
+48,"Bryn Mawr, PA",,,C,male
+49,"Bryn Mawr, PA",,,4,female
+50,"Bryn Mawr, PA",,,4,female
+51,"Bryn Mawr, PA",,,4,male
+52,"Ascot, Berkshire / Rochester, NY",,,,male
+53,"New York, NY",,,5,female
+54,"Little Onn Hall, Staffs",,,(172),male
+55,"Little Onn Hall, Staffs",,,6,female
+56,"Amenia, ND",,,,male
+57,"Amenia, ND",,,,female
+58,"New York, NY / Ithaca, NY",,,5,male
+59,"New York, NY / Ithaca, NY",,,5,female
+60,"London, England",,,8,female
+61,"Paris, France",,,7,male
+62,"St Leonards-on-Sea, England Ohio",,,6,female
+63,"Liverpool, England / Belfast",,,,male
+64,"Los Angeles, CA",C-87,,,male
+65,"Los Angeles, CA",C-87,,4,female
+66,"Stoughton, MA",,,,male
+67,"Victoria, BC",,,,male
+68,"Lakewood, NJ",,,14,female
+69,"Lakewood, NJ",,,,male
+70,"Lakewood, NJ",,,14,female
+71,"New York, NY",C-101,,2,female
+72,"Roachdale, IN",,,,male
+73,"Milwaukee, WI",,,(269),male
+74,"Milwaukee, WI",,,5,female
+75,"Milwaukee, WI",,,5,female
+76,"New York, NY",C-85,,,male
+77,"New York, NY",C-85,,4,female
+78,"Lima, Peru",,,A,male
+79,"Philadelphia, PA",,,7,male
+80,"Montreal, PQ",,,,male
+81,"Montreal, PQ",,,3,female
+82,"Belgium  Montreal, PQ",,,6,female
+83,"Calgary, AB",,,3,male
+84,"Calgary, AB",,,3,female
+85,"San Francisco, CA",,,13,male
+86,"San Francisco, CA",,,5/7,female
+87,"San Francisco, CA",,,5/7,male
+88,"Montreal, PQ",,,6,female
+89,"Deephaven, MN / Cedar Rapids, IA",,,(62),male
+90,"Deephaven, MN / Cedar Rapids, IA",,,2,female
+91,London / Paris,,11755 L39 12s,1,male
+92,London / Paris,,17485 L56 18s 7d,1,female
+93,"Philadelphia, PA",,,(133),male
+94,"Mt Airy, Philadelphia, PA",,,7,female
+95,"Brookline, MA",,,4,female
+96,"New York, NY",,,,female
+97,"New York, NY",,,7,female
+98,"Brooklyn, NY",,,5/7,male
+99,"New York, NY",,,,male
+100,"Winnipeg, MB",,,10,female
+101,"Winnipeg, MB",,,,male
+102,"Winnipeg, MB",,,10,female
+103,"Winnipeg, MB",,,10,female
+104,"Winnipeg, MB",,,,male
+105,"Winnipeg, MB",,,10,female
+106,"Westcliff-on-Sea, Essex",,,,male
+107,"New York, NY",,,5,male
+108,"New York, NY",,,5,female
+109,"New York, NY",,,5,male
+110,"Zurich, Switzerland",,,5,female
+111,"Zurich, Switzerland",,,5,male
+112,"Zurich, Switzerland",,,5,female
+113,"Scituate, MA",,,,male
+114,"Scituate, MA",,,9,female
+115,"St Anne's-on-Sea, Lancashire",,,(275),male
+116,"New York, NY",,,7,female
+117,"New York, NY",,,7,female
+118,"Paris, France / New York, NY",,,5,male
+119,"Paris, France / New York, NY",,,5,female
+120,"New York, NY",,,,male
+121,"Washington, DC",C-51,113780 L28 10s,B,male
+122,"Winnipeg, MB",,,(147),male
+123,"Greenwich, CT",C-125,17582 L153 9s 3d,3,female
+124,"Greenwich, CT",C-91,17582 L153 9s 3d,3,female
+125,"New York, NY",,,7,female
+126,"New York, NY",,,7,male
+127,"New York, NY",B-82/4,17593 L56 18s 7d,,male
+128,"Brooklyn, NY",,,5,male
+129,"Brooklyn, NY",,,5,female
+130,"New York, NY",,,3,male
+131,"New York, NY",,,3,female
+132,"New York, NY",C-83,36973 L83 9s 6d,,male
+133,"New York, NY",C-83,36973 L83 9s 6d,D,female
+134,"Kingston, Surrey",,,3,male
+135,"Montreal, PQ",,,(307),male
+136,"Montreal, PQ",,,3,female
+137,"New York, NY",,,7,female
+138,London / Middlesex,,,,male
+139,"Brighton, MA",,,,male
+140,London / Birmingham,,,,male
+141,"Chicago, IL",B-18,111361 L57 19s 7d,4,female
+142,"Chicago, IL",B-18,111361 L57 19s 7d,4,female
+143,"Hudson, NY",D-?,13502 L77,10,female
+144,"New York, NY",,,(38),male
+145,"New York, NY",,,,female
+146,"Indianapolis, IN",,,15,male
+147,"New York, NY /  Stamford CT",C-93,,D,male
+148,"New York, NY /  Stamford CT",C-93,,D,female
+149,"New York, NY",,,14,male
+150,"Paris, France New York, NY",C-49,,,female
+151,Liverpool,B-52/4/6,112058 Complimentary,C,male
+152,"Bennington, VT",,,(80),male
+153,London,,,,male
+154,"Buffalo, NY",,,(258),male
+155,"Southington / Noank, CT",,,,male
+156,"Southington / Noank, CT",,,8,female
+157,"Boston, MA",,,5,male
+158,"Boston, MA",,,5,female
+159,"Portland, OR",,,,male
+160,"New York, NY",,,8,female
+161,"Chicago, IL",,,,male
+162,"Stockholm, Sweden",,,,male
+163,"Stockholm, Sweden",,,6,female
+164,"Paris, France",,,9,female
+165,"Paris, France",,,9,female
+166,,,,,male
+167,"Springfield, MA",,,(126),male
+168,"Hudson, NY",D-?,13502 L77,10,female
+169,"London / New York, NY",,,,male
+170,"St Louis, MO",B-5,24160 L221,2,female
+171,"Brockton, MA",,,,male
+172,"Paris, France",,,7,male
+173,"New York, NY",,,,male
+174,"New York, NY",,,,female
+175,"Vancouver, BC",,,(292),male
+176,"Dorchester, MA",,,(175),male
+177,"Philadelphia, PA",,,7,male
+178,"New York, NY",,,,male
+179,"New York, NY",,,6,female
+180,"East Bridgewater, MA",,,(249),male
+181,"Green Bay, WI",,,14,female
+182,"Fond du Lac, WI",,,(230),male
+183,"Fond du Lac, WI",,,14,female
+184,"New York, NY",,,11,male
+185,"Montreal, PQ",,,,male
+186,"Washington, DC",,,,male
+187,"Brooklyn, NY",,,,male
+188,"Lexington, MA",,,(122),male
+189,"Lexington, MA",,,6,female
+190,"Lexington, MA",,,6,female
+191,"New York, NY",,,5,female
+192,"Isle of Wight, England",,,(263),male
+193,"Paris, France",,,7,male
+194,"Providence, RI",,,(234),male
+195,"Providence, RI",,,5,female
+196,"?Havana, Cuba",,,(189),male
+197,Belfast,,,,male
+198,"Surbiton Hill, Surrey",,,(166),male
+199,"Montreal, PQ",,,,male
+200,"Isleworth, England",,,,male
+201,"Isleworth, England",,,8,female
+202,"Madrid, Spain",,,,male
+203,"Madrid, Spain",,,8,female
+204,"Toronto, ON",C-104,,6,male
+205,"Worcester, MA",,,(207),male
+206,"Mt Airy, Philadelphia, PA",,,7,female
+207,"Rotterdam, Netherlands",,,,male
+208,"Paris /  New York, NY",,17604 L39 12s,A,male
+209,"St Louis, MO",B-3,24160 L221,2,female
+210,"Trenton, NJ",,,,male
+211,"New York, NY",,,15,male
+212,"Seattle, WA",,,,male
+213,"Paris, France",A-11,17613 L27 14s 5d,11,female
+214,"Winnipeg, MB",,,,male
+215,"London  Vancouver, BC",,,8,female
+216,"New York, NY",,,,male
+217,"New York, NY",,,6,female
+218,London,,,(109),male
+219,"Haverford, PA / Cooperstown, NY",,17608 L262 7s 6d,,male
+220,"Haverford, PA / Cooperstown, NY",,17608 L262 7s 6d,4,female
+221,"Haverford, PA / Cooperstown, NY",,17608 L262 7s 6d,4,female
+222,"Haverford, PA / Cooperstown, NY",,17608 L262 7s 6d,4,male
+223,"Haverford, PA / Cooperstown, NY",,17608 L262 7s 6d,4,female
+224,"Manchester, England",,,3,male
+225,"New York, NY",,,1,male
+226,"New York, NY",,,11,female
+227,"New York, NY",,,7,male
+228,"New York, NY / Greenwich CT",C-125,17582 L153 9s 3d,3,female
+229,"St Louis, MO",,,5,male
+230,"Duluth, MN",,,,male
+231,"Duluth, MN",,,,female
+232,"Basel, Switzerland",,,3,male
+233,"New Britain, CT",,,7,male
+234,"New York, NY",,,,male
+235,"St James, Long Island, NY",,,,male
+236,"Huntington, WV",,,,male
+237,"Huntington, WV",,,6,female
+238,"Streatham, Surrey",,,,male
+239,"Minneapolis, MN",,,7,male
+240,"Minneapolis, MN",,,7,female
+241,"Tuxedo Park, NY",,,3,male
+242,"Tuxedo Park, NY",,,3,female
+243,"Tuxedo Park, NY",,,3,male
+244,"Paris, France",,,,male
+245,"Paris, France",,,6,female
+246,"Basel, Switzerland",,,3,male
+247,"Wimbledon Park, London / Hayling Island, Hants",C-89,,,male
+248,"Newark, NJ",,,1,male
+249,"Newark, NJ",,,5,female
+250,"Haverford, PA",,,4,female
+251,"Gallipolis, Ohio / ? Paris / New York",,,,male
+252,"Cincinatti, OH",,,6,female
+253,"New York, NY",,17483 L221 15s 7d,(96),male
+254,"New York, NY",,17483 L221 15s 7d,,female
+255,"Haddenfield, NJ",,,(46),male
+256,"Brooklyn, NY",,,8,female
+257,"New York, NY",,,,male
+258,"New York, NY",,,8,female
+259,"New York, NY",,,8,female
+260,"London /  East Orange, NJ",C-126,,5,male
+261,"London /  East Orange, NJ",C-126,,5,female
+262,"Haverford, PA",,,,male
+263,"Haverford, PA",,,4,female
+264,"Haverford, PA",,,B,male
+265,"New York, NY",,,,male
+266,"New York, NY",,,D,female
+267,"Albany, NY",,,7,male
+268,"Mexico City, Mexico",,,,male
+269,"Brooklyn, NY",,,(245),male
+270,"East Orange, NJ",,,,male
+271,"Portland, OR",,,,male
+272,"Portland, OR",,,5,female
+273,"England Salt Lake City, Utah",,,,male
+274,"New York, NY / Briarcliff Manor NY",,,8,female
+275,"Brunswick, ME",,,,male
+276,"Brunswick, ME",,,(169),male
+277,"Youngstown, OH",,,,male
+278,"Youngstown, OH",,,8,female
+279,"Youngstown, OH",C-7,,8,female
+280,"Elkins Park, PA",,,,male
+281,"Elkins Park, PA",,,4,female
+282,"Elkins Park, PA",,,,male
+283,"Duluth, MN",,,,female
+284,"Geneva, Switzerland / Radnor, PA",,,,male
+285,"London, England",,,,male
+286,"Geneva, Switzerland / Radnor, PA",,,A,male
+287,"London, England",,,D,male
+288,"Halifax, NS",,,,male
+289,"New York, NY / Washington, DC",,,8,female
+290,,,,,female
+291,,,,,female
+292,,,17754,,female
+293,,C-97,17483,,female
+294,,C-99,,,female
+295,,,,,female
+296,,,17608,,female
+297,,C22,,11,female
+298,,C-22,,8,female
+299,"New York, NY",C-45,17754 L224 10s 6d,4,female
+300,,C-55 (?C-95),17483,,male
+301,,,,4,female
+302,,,17485,,female
+303,,B-102,112058,,male
+304,,,,,female
+305,,B-86,17593,,male
+306,,,,,male
+307,,,112059,(110),male
+308,,,,,male
+309,,,,,female
+310,,,,(45),male
+311,,,,2,female
+312,,,,2,female
+313,,B-?,,,male
+314,,,,8,female
+315,,,,,female
+316,,,,,female
+317,,,,(232),male
+318,,C-62,17754,,male
+319,,,,,female
+320,,,,,female
+321,,,,,female
+322,,,,,female
+323,"Russia New York, NY",,,,male
+324,"Russia New York, NY",,,12,female
+325,"Buenos Aires, Argentina / New Jersey, NJ",,,,male
+326,"Cornwall, England Houghton, MI",,,,male
+327,"Warwick, England",,,,male
+328,"Warwick, England",,,,female
+329,"West Hoboken, NJ",,,,male
+330,"Penzance, Cornwall / Akron, OH",,,,male
+331,Guernsey,,,,male
+332,"Bristol, Avon / Jacksonville, FL",,,,female
+333,"Plymouth, Dorset / Houghton, MI",,,,male
+334,"Jacksonville, FL",,,(174),male
+335,"Norwich / New York, NY",,,,male
+336,"Norwich / New York, NY",,,,female
+337,England,,,,male
+338,"Guntur, India / Benton Harbour, MI",,230136 L39,11,female
+339,"Guntur, India / Benton Harbour, MI",,230136 L39,11,female
+340,"Guntur, India / Benton Harbour, MI",,230136 L39,11,male
+341,"Guntur, India / Benton Harbour, MI",,230136 L39,13,female
+342,London,D-56,248698 L13,13,male
+343,"Rochester, NY",,,12,female
+344,"St Ives, Cornwall / Calumet, MI",,,,male
+345,"Elmira, NY / Orange, NJ",,,,male
+346,London,,,,male
+347,"Lake Arthur, Chavez County, NM",,,,male
+348,"Cape Town, South Africa / Seattle, WA",,,14,female
+349,"Cape Town, South Africa / Seattle, WA",,,,male
+350,"Cape Town, South Africa / Seattle, WA",,,14,female
+351,"Skara, Sweden / Rockford, IL",,,12,female
+352,"Skara, Sweden / Rockford, IL",,,,male
+353,"Sittingbourne, England / San Diego, CA",E-?,27849,9,female
+354,"Southsea, Hants",,,(97),male
+355,London,,,,male
+356,"New York, NY",,,,female
+357,"Bangkok, Thailand / Roseville, IL",,,13,male
+358,"Bangkok, Thailand / Roseville, IL",,,13,female
+359,"Bangkok, Thailand / Roseville, IL",,,13,male
+360,"Mamaroneck, NY",,,,female
+361,Belfast,,,,male
+362,"St Ives, Cornwall / Calumet, MI",,,(18),male
+363,London,,,,male
+364,London,,,,female
+365,"Bronx, NY",,,(130),male
+366,"Cornwall / Spokane, WA",,,(17),male
+367,"Cornwall / Spokane, WA",,,,female
+368,London,,,,female
+369,London,,,,female
+370,"England / San Francisco, CA",,,,male
+371,"England / San Francisco, CA",,,14,female
+372,"Hartford, Huntingdonshire",,,,male
+373,"Helsinki, Finland Ashtabula, Ohio",,,,male
+374,"London / Fort Byron, NY",,,9,male
+375,"Bishopstoke, Hants / Fayette Valley, ID",,,,male
+376,"Bishopstoke, Hants / Fayette Valley, ID",,,14,female
+377,"Bishopstoke, Hants / Fayette Valley, ID",,,14,female
+378,Pennsylvania,F-33,,14,female
+379,"Provo, UT",,,,female
+380,"Upper Burma, India Pittsburgh, PA",,,,female
+381,"Penzance, Cornwall / Akron, OH",,,,male
+382,Belfast,,,,male
+383,"Lyndhurst, England",,,,male
+384,"St Ives, Cornwall / Hancock, MI",,,,female
+385,"St Ives, Cornwall / Hancock, MI",,,,male
+386,"London / Staten Island, NY",,,13,female
+387,,,,,male
+388,"Portugal / Sau Paulo, Brazil",,,,male
+389,"Lucca, Italy / California",,,(295),male
+390,"Lucca, Italy / California",,,,female
+391,"Guernsey / Elizabeth, NJ",,,,male
+392,"New Forest, England",,,,male
+393,Southampton,,,,female
+394,Southampton,,,,female
+395,"Holley, NY",,,,male
+396,"Greenport, NY",,28220 L32 10s,,male
+397,"Greenport, NY",,28220 L32 10s,,female
+398,"Greenport, NY",,28220 L32 10s,,male
+399,"Barcelona, Spain / Havana, Cuba",,,12,female
+400,"Barcelona, Spain / Havana, Cuba",,,12,female
+401,"England / Detroit, MI",,,,male
+402,"Goteborg, Sweden / Rockford, IL",,,,male
+403,"Oslo, Norway Bayonne, NJ",,,,male
+404,"England / Philadelphia, PA",,,(286),male
+405,,,,,female
+406,"Cornwall / Houghton, MI",,,,male
+407,"Rochester, NY",,229236 L13,(236),male
+408,Belfast,,,,male
+409,"Janjgir, India / Pennsylvania",,,,female
+410,"Liverpool / Montreal, PQ",,,(322),male
+411,"Cornwall / Clear Creek, CO",,,,male
+412,"Cornwall / Clear Creek, CO",,,,male
+413,"Brooklyn, NY",,,,female
+414,"Liverpool / Montreal, PQ",,,,male
+415,"Guernsey / Elizabeth, NJ",,,,male
+416,Cornwall,,,,male
+417,"Cornwall / Camden, NJ",,,,male
+418,"Cornwall / Camden, NJ",,,,male
+419,"West Kensington, London",,,(297),male
+420,"Clevedon, England",,,,male
+421,"Vancouver, BC",,,,male
+422,,,,(305),male
+423,"Bronx, NY",,,(19),male
+424,"Auburn, NY",,,(75),male
+425,"Detroit, MI",,,,female
+426,"Detroit, MI",,,,male
+427,"Seattle, WA / Toledo, OH",,248749 L13,(35),male
+428,"Denmark Hill, Surrey / Chicago",,,,male
+429,"Denmark Hill, Surrey / Chicago",,,11,female
+430,London,,,,male
+431,"Walthamstow, England",,,,male
+432,"Ilford, Essex / Winnipeg, MB",,13529 L26 5s,,male
+433,"Ilford, Essex / Winnipeg, MB",,13529 L26 5s,14,female
+434,"Ilford, Essex / Winnipeg, MB",,13529 L26 5s,14,female
+435,"Somerset / Bernardsville, NJ",,,9,female
+436,"Somerset / Bernardsville, NJ",,,9,female
+437,"Somerset / Bernardsville, NJ",,,,male
+438,"Somerset / Bernardsville, NJ",,,9,female
+439,"India / Rapid City, SD",,,13,female
+440,"West Hampstead, London / Neepawa, MB",,,(256),male
+441,"West Hampstead, London / Neepawa, MB",,,,male
+442,"West Hampstead, London / Neepawa, MB",,,,male
+443,"Kontiolahti, Finland / Detroit, MI",,,,female
+444,"Cornwall / Akron, OH",,,4,female
+445,"Cornwall / Akron, OH",,,,male
+446,"Cornwall / Akron, OH",,,4,female
+447,"Devonport, England",,,,male
+448,Southampton,,,(149),male
+449,"England / Sacramento, CA",,,,male
+450,"England / Sacramento, CA",,,,female
+451,"New Forest, England",,,,male
+452,"Tokyo, Japan",,,13,male
+453,"Swindon, England",,,,male
+454,"Swindon, England",,,,female
+455,"Philadelphia, PA",,,,male
+456,Guernsey,,,,female
+457,London,,,,male
+458,London,,,,female
+459,"North Evington, England",,,,male
+460,"Guernsey / Elizabeth, NJ",,,,male
+461,"Guernsey / Elizabeth, NJ",,,,male
+462,"St Ives, Cornwall / Houghton, MI",,,,male
+463,"New York, NY",,,,female
+464,"Moscow / Bronx, NY",,,(283),male
+465,"Moscow / Bronx, NY",,,,female
+466,"India / Pittsburgh, PA",,,,female
+467,,,,,male
+468,"Harrisburg, PA",E-101,,10,female
+469,"London / New York, NY",,,,female
+470,"Glasgow / Bangor, ME",,,,male
+471,Belfast,,,,male
+472,"Sweden / Arlington, NJ",,,(165),male
+473,"Minneapolis, MN",,,,male
+474,"Minneapolis, MN",,,,female
+475,,,,,male
+476,"Chicago, IL",F-33,,14/D,female
+477,Paris / Haiti,,,,male
+478,Paris / Haiti,,,,female
+479,Paris / Haiti,,,,female
+480,Paris / Haiti,,,,female
+481,"Berne, Switzerland / Central City, IA",,,,female
+482,"London / Chicago, IL",,,11,female
+483,"Montreal, PQ",,,,male
+484,,,,(108),male
+485,,,,,male
+486,"Weston-Super-Mare, Somerset",,,(121),male
+487,"Weston-Super-Mare, Somerset",,,14,female
+488,"Southampton / New York, NY",E77,,(52),female
+489,Paris,,,,male
+490,"Paris / Montreal, PQ",,,,male
+491,"Paris / Montreal, PQ",,,,female
+492,"Paris / Montreal, PQ",,,,male
+493,"New York, NY",,,,male
+494,"Worcester, MA",,,,male
+495,"Worcester, England",,,,female
+496,"St Austall, Cornwall",,,,male
+497,"Weston-Super-Mare / Moose Jaw, SK",,,,male
+498,"Sydney, Australia",,,(209),male
+499,"Sarnia, ON",,,,male
+500,"Rochester, NY",,,,male
+501,"England / Bennington, VT",,,14/12,female
+502,"England / Bennington, VT",,,14/12,female
+503,"Chelsea, London",,,B,male
+504,"Harrow-on-the-Hill, Middlesex",,,,male
+505,"Copenhagen, Denmark",,,(271),male
+506,"Guernsey / Montclair, NJ and/or Toledo, Ohio",,,,male
+507,"Frankfort, KY",,,,male
+508,"Petworth, Sussex",,,,male
+509,"Halesworth, England",,,,male
+510,"Cambridge, MA",,,,male
+511,"New York, NY",,,(43),male
+512,"New York, NY",,,,female
+513,"Nice, France",,230080 L26,D,male
+514,"Nice, France",,230080 L26,(15),male
+515,"Nice, France",,230080 L26,D,male
+516,"Boston, MA",,,,male
+517,"Cornwall / Hancock, MI",,,(101),male
+518,Glasgow,,,(287),male
+519,"Cologne, Germany",D-38,,7,male
+520,"Folkstone, Kent / New York, NY",F-33,,11,female
+521,"Middleburg Heights, OH",,,,male
+522,"Pondersend, England / New Durham, NJ",,,,male
+523,"Spain / Havana, Cuba",,,,male
+524,"Hamilton, ON",,,,male
+525,"Spain / Havana, Cuba",,,,male
+526,"St Andrews, Guernsey",,,,male
+527,Belfast,,,,male
+528,"Woodford County, KY",,,12,female
+529,"Gunnislake, England / Butte, MT",,,,male
+530,,,,,male
+531,"Ilfracombe, Devon",,,12,female
+532,"Ilfracombe, Devon",,,,male
+533,Russia,,,,female
+534,"Denmark / New York, NY",,250647,,male
+535,"Milford, NH",,,,male
+536,Paris,,,,male
+537,"Plymouth, Devon / Detroit, MI",,,11,female
+538,"Plymouth, Devon / Detroit, MI",,,11,female
+539,"Plymouth, Devon / Detroit, MI",,,11,female
+540,"Brighton, Sussex",,,,male
+541,"Elizabeth, NJ",,,,male
+542,"Elizabeth, NJ",,,,female
+543,Spain,,,,female
+544,"Paris / Montreal, PQ",,,,male
+545,"Cornwall / Akron, OH",,,4,male
+546,"Cornwall / Akron, OH",,,4,female
+547,"Cornwall / Akron, OH",,,4,male
+548,"London, England / Marietta, Ohio and Milwaukee, WI",,,,female
+549,,,,,male
+550,"Guernsey / Wilmington, DE",,,12,female
+551,Liverpool,,,,male
+552,"Hornsey, England",,,,male
+553,"Deer Lodge, MT",,,12,female
+554,"Finland / Minneapolis, MN",,,,female
+555,"Cornwall / Hancock, MI",,,11,female
+556,"Finland / Washington, DC",,,,female
+557,"Sault St Marie, ON",,,,male
+558,"Halifax, NS",,,13,female
+559,Cornwall,,,,male
+560,"Newark, NJ",,,,male
+561,,,,,female
+562,"Cornwall / Houghton, MI",,,,male
+563,"New York, NY",,,,male
+564,"Catford, Kent / Detroit, MI",,,(81),male
+565,"Somerset / Bernardsville, NJ",,,,male
+566,"Indianapolis, IN",,,9,female
+567,,,,,male
+568,"Columbus, OH",,,9,female
+569,"Bath, England / Massachusetts",E-101,34218 L10 10s,16,female
+570,"Plymouth, England",,,,male
+571,"Plymouth, England",,,,female
+572,"Barre, Co Washington, VT",,,,male
+573,"Antwerp, Belgium / Stanton, OH",,,(140),male
+574,"Mamaroneck, NY",,,,female
+575,"Bristol, England / New Britain, CT",,,,male
+576,"Bristol, England / New Britain, CT",,,12,female
+577,,,,,male
+578,Belfast,,,,male
+579,"Aberdeen / Portland, OR",,,9,female
+580,"Aberdeen / Portland, OR",,,9,female
+581,"England / Hartford, CT",E-101,,,female
+582,"Bromsgrove, England / Montreal, PQ",,,(293),male
+583,"Bromsgrove, England / Montreal, PQ",,,,female
+584,"Cornwall / Akron, OH",,,,female
+585,"Cornwall / Akron, OH",,,,female
+586,"Cornwall / Akron, OH",,,,male
+587,"Bournmouth, England",,,,female
+588,"Bournmouth, England",,,,female
+589,"Bournmouth, England",,,,male
+590,"Bournmouth, England",,,,female
+591,"Guernsey, England / Edgewood, RI",,,,male
+592,,,,,male
+593,,,,,male
+594,"London, England",,,9,male
+595,"Manchester, England",,,,female
+596,"Harrow, England",,,14,male
+597,"Yoevil, England / Cottage Grove, OR",,,9,female
+598,Paris,,,,female
+599,"Bryn Mawr, PA, USA",,248744 L13,,male
+600,"London / Montreal, PQ",F-33,,11,female
+601,,2131,L15 1s,,male
+602,,F-?,,(294),male
+603,,,,,male
+604,"East Providence, RI",,,,male
+605,"East Providence, RI",,,(190),male
+606,"East Providence, RI",,,A,female
+607,"Norway Los Angeles, CA",,,16,female
+608,"Perkins County, SD",,,A,male
+609,"Greensburg, PA",,,,female
+610,"Taalintehdas, Finland Hoboken, NJ",,,15,male
+611,"Asarum, Sweden Brooklyn, NY",,7076,(72),male
+612,"Bournemouth, England",,,(103),male
+613,"Sweden Akeley, MN",,,,female
+614,,,,,male
+615,"Finland Sudbury, ON",,,,male
+616,"London, England Norfolk, VA",,392091,13,female
+617,"London, England Norfolk, VA",,392091,11,male
+618,"England Albion, NY",,,,male
+619,"Salo, Finland Astoria, OR",,,,male
+620,Argentina,,,(79),male
+621,"Lower Clapton, Middlesex or Erdington, Birmingham",,,,male
+622,"Windsor, England New York, NY",,,(259),male
+623,"Bergen, Norway",,,(260),male
+624,"Oslo, Norway Cameron, WI",,,(89),male
+625,"Sweden Winnipeg, MN",,,,male
+626,"Sweden Winnipeg, MN",,,,female
+627,"Sweden Winnipeg, MN",,,,female
+628,"Sweden Winnipeg, MN",,,,female
+629,"Ruotsinphyhtaa, Finland New York, NY",,,,female
+630,"Vadsbro, Sweden Ministee, MI",,,,female
+631,"Sweden Winnipeg, MN",,,,female
+632,"Hartford, CT",,,,male
+633,"Sweden Winnipeg, MN",,,,female
+634,"Sweden Winnipeg, MN",,,,male
+635,"Sweden Chicago, IL",,,,male
+636,"Bulgaria Chicago, IL",,,,male
+637,"Altdorf, Switzerland",,,,male
+638,"Altdorf, Switzerland",,,,female
+639,"Sweden Joliet, IL",,,,male
+640,,,,,male
+641,"Sweden  Worcester, MA",,,(142),male
+642,"Sweden  Worcester, MA",,,4,female
+643,"Sweden  Worcester, MA",,,,male
+644,"Sweden Worcester, MA",,,,male
+645,"Sweden Worcester, MA",,,4,male
+646,"Sweden Worcester, MA",,,,male
+647,"Oskarshamn, Sweden Minneapolis, MN",,,,male
+648,"Sweden Worcester, MA",,,4,female
+649,"Ottawa, ON",,,,male
+650,"Ottawa, ON",,,C,female
+651,,,,,male
+652,,,,,female
+653,"Ottawa, ON",,,,male
+654,"Krakoryd, Sweden Bloomington, IL",,,,male
+655,,,,,male
+656,"Ruotsinphytaa, Finland New York, NY",,,,male
+657,"Ruotsinphytaa, Finland New York, NY",,,,female
+658,"Syria New York, NY",,,,female
+659,"Syria New York, NY",,,,female
+660,"Syria New York, NY",,,,female
+661,"Syria New York, NY",,,,female
+662,"London Skanteales, NY",,,,female
+663,,,,,male
+664,,,,,male
+665,"Syria Youngstown, OH",,,,female
+666,"Syria Ottawa, ON",,,,female
+667,"Syria Ottawa, ON",,,,female
+668,"New York, NY",,,,female
+669,"England New York, NY",,,,male
+670,England,,,,male
+671,"Krakudden, Sweden Moune, IL",,,,male
+672,"Tranvik, Finland New York",,,,male
+673,Syria,,,,male
+674,"Hong Kong New York, NY",,,,male
+675,"Brennes, Norway New York",,,,male
+676,"Stockholm, Sweden New York",,,,male
+677,"Bulgaria Chicago, IL",,,,male
+678,"Syria Kent, ON",,,,male
+679,Syria,,,,male
+680,"Syria Kent, ON",,,,female
+681,"Syria Kent, ON",,,,female
+682,"Ireland Chicago, IL",,,,male
+683,"Ireland Chicago, IL",,,,female
+684,"Ireland Chicago, IL",,,,female
+685,"Treherbert, Cardiff, Wales",,,,male
+686,"Kingwilliamstown, Co Cork, Ireland Glens Falls, NY",,,13,female
+687,"Medeltorp, Sweden Chicago, IL",,,,female
+688,,,,,male
+689,"Bridgerule, Devon",,,,male
+690,"Bridgerule, Devon",,,,male
+691,"Sweden Worcester, MA",,,,male
+692,"Broomfield, Chelmsford, England",,,,male
+693,"Kingwilliamstown, Co Cork, Ireland New York, NY",,,,male
+694,"Co Cork, Ireland Roxbury, MA",,,(299),female
+695,"Co Cork, Ireland Charlestown, MA",,,,male
+696,"Co Sligo, Ireland New York, NY",,,,female
+697,Croatia,,,,male
+698,Croatia,,,,male
+699,Croatia,,,,male
+700,Croatia,,,,male
+701,,,,,male
+702,,,,,female
+703,"Ireland Philadelphia, PA",,,,male
+704,,,,,male
+705,"Ottawa, ON",,,,male
+706,"Ottawa, ON",,,,female
+707,"Goteborg, Sweden Huntley, IL",,,,male
+708,"New York, NY",,,,male
+709,,,,,male
+710,"Dagsas, Sweden Fower, MN",,,,male
+711,"Co Longford, Ireland New York, NY",,,,female
+712,"Co Sligo, Ireland Hartford, CT",,,,female
+713,"St Denys, Southampton, Hants",,,,male
+714,"Syria Fredericksburg, VA",,,,male
+715,London,,,,male
+716,"Ireland New York, NY",,,,male
+717,,,,,male
+718,"Hong Kong New York, NY",,,,male
+719,,,,,male
+720,Greece,,,,male
+721,Greece,,,,male
+722,Portugal,,,,male
+723,"London Brooklyn, NY",,,,male
+724,"Co Limerick, Ireland Sherbrooke, PQ",,,,male
+725,,,,,male
+726,"Bulgaria Chicago, IL",,,,male
+727,"Philadelphia, PA",,,,male
+728,"Ireland Brooklyn, NY",,,,male
+729,Ireland,,,,female
+730,Ireland,,,,female
+731,,,,(171),male
+732,,,,,male
+733,Austria,,,,male
+734,Austria,,,,male
+735,Austria,,,,male
+736,London,,,,male
+737,"England Brooklyn, NY",,,2,female
+738,"England Brooklyn, NY",,,2,male
+739,"England Brooklyn, NY",,,2,male
+740,"Merrill, WI",,,,male
+741,"Bristol, England Cleveland, OH",,,,male
+742,"Bournemouth, England Newark, NJ",,,,male
+743,"Bournemouth, England Newark, NJ",,,,female
+744,,,,,male
+745,"Australia Fingal, ND",,,15,male
+746,"Norrlot, Sweden Chicago, IL",,,,female
+747,Austria,,,,male
+748,"Co Athlone, Ireland New York, NY",,,B,male
+749,"Co Athlone, Ireland New York, NY",,,,female
+750,"Stanton, IA",,,,male
+751,"Stanton, IA",,,,female
+752,"Stanton, IA",,,,male
+753,"Bulgaria Chicago, IL",,,,male
+754,"Bulgaria Chicago, IL",,,,male
+755,"West Bromwich, England Pontiac, MI",,,,male
+756,,,,,male
+757,"West Bromwich, England Pontiac, MI",,,,male
+758,"West Bromwich, England Pontiac, MI",,,,male
+759,"Liverpool, England Bedford, OH",,,,male
+760,"Liverpool, England Bedford, OH",,,,female
+761,"Devon, England Wichita, KS",,,,male
+762,"Devon, England Wichita, KS",,,12,female
+763,"Devon, England Wichita, KS",,,12,male
+764,"Devon, England Wichita, KS",,,12,female
+765,,,,,male
+766,"Tampico, MT",,,15,male
+767,"Tampico, MT",,,13,female
+768,"Belgium Detroit, MI",,,,male
+769,"Bulgaria Coon Rapids, IA",,,,male
+770,,,,,male
+771,,,,,male
+772,"Kilmacowen, Co Sligo, Ireland New York, NY",,,C,female
+773,,,,,male
+774,,,,,male
+775,,,,,male
+776,,,,,male
+777,"Ireland New York, NY",,,,male
+778,"England Oglesby, IL",,,B,male
+779,"Union Hill, NJ",,,13,female
+780,"Ireland New York, NY",,,,female
+781,"London New York, NY",,,,female
+782,"Austria Niagara Falls, NY",,,,male
+783,"Ballydehob, Co Cork, Ireland New York, NY",,,,female
+784,"England Albion, NY",,,D,male
+785,"West Haven, CT",,,,male
+786,"West Haven, CT",,,,female
+787,Austria-Hungary,,,,male
+788,"Tofta, Sweden Joliet, IL",,,,male
+789,"Karberg, Sweden Jerome Junction, AZ",,,,male
+790,"Effington Rut, SD",,,,male
+791,Syria,,,,male
+792,Syria,,,,male
+793,"Syria Ottawa, ON",,,,male
+794,"Illinois, USA",,,,male
+795,"New York, NY",,,13,female
+796,,,,,male
+797,,,,,male
+798,"Aughnacliff, Co Longford, Ireland New York, NY",,,,male
+799,"Italy Philadelphia, PA",,,,male
+800,,,,,male
+801,,,,,male
+802,,,,,male
+803,"Ireland Chicago, IL",,,,male
+804,Ireland,,,,male
+805,"Hong Kong New York, NY",,,,male
+806,"Bridgwater, Somerset, England",,,,male
+807,"Rotherfield, Sussex, England Essex Co, MA",,,,female
+808,"Rotherfield, Sussex, England Essex Co, MA",,,,male
+809,"Rotherfield, Sussex, England Essex Co, MA",,,,female
+810,"Rotherfield, Sussex, England Essex Co, MA",,,,female
+811,"Rotherfield, Sussex, England Essex Co, MA",,,,male
+812,"Ireland New York, NY",,,,male
+813,,,,,male
+814,"New York, NY",,,,male
+815,,,,,male
+816,"Youngstown, OH",,,,female
+817,,,,,male
+818,"Co Longford, Ireland New York, NY",,,,female
+819,"Co Clare, Ireland Washington, DC",,,13,female
+820,"Strood, Kent, England Detroit, MI",,,,male
+821,"Strood, Kent, England Detroit, MI",,,C,female
+822,"Strood, Kent, England Detroit, MI",,,C,male
+823,"Philadelphia, PA",,,,male
+824,Portugal,,,,male
+825,"Wiltshire, England Niagara Falls, NY",,,,male
+826,"Wiltshire, England Niagara Falls, NY",,,,female
+827,"Wiltshire, England Niagara Falls, NY",,,,male
+828,"Wiltshire, England Niagara Falls, NY",,,,female
+829,"Wiltshire, England Niagara Falls, NY",,,,male
+830,"Wiltshire, England Niagara Falls, NY",,,,female
+831,"Wiltshire, England Niagara Falls, NY",,,,male
+832,"Wiltshire, England Niagara Falls, NY",,,,male
+833,"Dorking, Surrey, England",,,,male
+834,"Foresvik, Norway Portland, ND",,,,male
+835,,,,,male
+836,"Waukegan, Chicago, IL",,,,male
+837,"Ruotsinphytaa, Finland New York, NY",,,,male
+838,"Ruotsinphytaa, Finland New York, NY",,,,male
+839,"Myren, Sweden New York, NY",,,,male
+840,,,,,female
+841,,,,,female
+842,,,,,male
+843,,,,,male
+844,,,,,male
+845,,,,,female
+846,,,,,male
+847,,,,,male
+848,,,,,female
+849,,,,,male
+850,,,,,male
+851,,,,,female
+852,,,,,male
+853,,,,,male
+854,,,,,male
+855,,,,,female
+856,,,,,male
+857,,,,,male
+858,,,,,female
+859,,,,,female
+860,,,,,female
+861,,,,,female
+862,,,,,female
+863,,,,,male
+864,,,,,female
+865,,,,,female
+866,,,,,female
+867,,,,,female
+868,,,,,male
+869,,,,,male
+870,,,,,female
+871,,,,,male
+872,,,,,female
+873,,,,,male
+874,,,,,male
+875,,,,,male
+876,,,,,female
+877,,,,,female
+878,,,,,male
+879,,,,,male
+880,,,,,male
+881,,,,,female
+882,,,,,male
+883,,,,,male
+884,,,,,male
+885,,,,,female
+886,,,,,male
+887,,,,,male
+888,,,,,male
+889,,,,,male
+890,,,,,male
+891,,,,,male
+892,,,,,male
+893,,,,,male
+894,,,,,female
+895,,,,,male
+896,,,,,male
+897,,,,,female
+898,,,,,male
+899,,,,,male
+900,,,,,female
+901,,,,,female
+902,,,,,male
+903,,,,,male
+904,,,,,male
+905,,,,,male
+906,,,,,female
+907,,,,,male
+908,,,,,female
+909,,,,,male
+910,,,,,male
+911,,,,,male
+912,,,,,male
+913,,,,,male
+914,,,,,male
+915,,,,,female
+916,,,,,male
+917,,,,,male
+918,,,,,male
+919,,,,,male
+920,,,,,male
+921,,,,,female
+922,,,,,male
+923,,,,,male
+924,,,,,female
+925,,,,,male
+926,,,,,male
+927,,,,,female
+928,,,,,male
+929,,,,,male
+930,,,,,male
+931,,,,,male
+932,,,,,male
+933,,,,,female
+934,,,,,female
+935,,,,,female
+936,,,,,male
+937,,,,,female
+938,,,,,female
+939,,,,,male
+940,,,,,male
+941,,,,,male
+942,,,,,male
+943,,,,,female
+944,,,,,male
+945,,,,,male
+946,,,,,male
+947,,,,,female
+948,,,,,male
+949,,,,,male
+950,,,,,male
+951,,,,,male
+952,,,,,male
+953,,,,,male
+954,,,,,female
+955,,,,,male
+956,,,,,female
+957,,,,,female
+958,,,,,female
+959,,,,,male
+960,,,,,male
+961,,,,,male
+962,,,,,female
+963,,,,,male
+964,,,,,male
+965,,,,,female
+966,,,,,female
+967,,,,,male
+968,,,,,female
+969,,,,,male
+970,,,,,male
+971,,,,,male
+972,,,,,male
+973,,,,,male
+974,,,,,female
+975,,,,,male
+976,,,,,male
+977,,,,,male
+978,,,,,male
+979,,,,,female
+980,,,,,male
+981,,,,,male
+982,,,,,male
+983,,,,,female
+984,,,,,male
+985,,,,,male
+986,,,,,female
+987,,,,,male
+988,,,,,male
+989,,,,,male
+990,,,,,female
+991,,,,,female
+992,,,,,male
+993,,,,,male
+994,,,,,male
+995,,,,,male
+996,,,,,male
+997,,,,,female
+998,,,,,male
+999,,,,,female
+1000,,,,,male
+1001,,,,,female
+1002,,,,,female
+1003,,,,,male
+1004,,,,,female
+1005,,,,,male
+1006,,,,,female
+1007,,,,,female
+1008,,,,,female
+1009,,,,,male
+1010,,,,,male
+1011,,,,,female
+1012,,,,,female
+1013,,,,,male
+1014,,,,,female
+1015,,,,,female
+1016,,,,,male
+1017,,,,,male
+1018,,,,,male
+1019,,,,,male
+1020,,,,,male
+1021,,,,,male
+1022,,,,,male
+1023,,,,,male
+1024,,,,,female
+1025,,,,,male
+1026,,,,,female
+1027,,,,,male
+1028,,,,,male
+1029,,,,,female
+1030,,,,,male
+1031,,,,,male
+1032,,,,,male
+1033,,,,,male
+1034,,,,,male
+1035,,,,,female
+1036,,,,,male
+1037,,,,,male
+1038,,,,,male
+1039,,,,,female
+1040,,,,,male
+1041,,,,,female
+1042,,,,,female
+1043,,,,,male
+1044,,,,,female
+1045,,,,,female
+1046,,,,,female
+1047,,,,,male
+1048,,,,,female
+1049,,,,,male
+1050,,,,,female
+1051,,,,,male
+1052,,,,,male
+1053,,,,,male
+1054,,,,,male
+1055,,,,,male
+1056,,,,,female
+1057,,,,,male
+1058,,,,,male
+1059,,,,,male
+1060,,,,,male
+1061,,,,,female
+1062,,,,,male
+1063,,,,,male
+1064,,,,,female
+1065,,,,,male
+1066,,,,,female
+1067,,,,,male
+1068,,,,,male
+1069,,,,,female
+1070,,,,,female
+1071,,,,,male
+1072,,,,,male
+1073,,,,,male
+1074,,,,,female
+1075,,,,,male
+1076,,,,,male
+1077,,,,,male
+1078,,,,,female
+1079,,,,,male
+1080,,,,,male
+1081,,,,,male
+1082,,,,,male
+1083,,,,,female
+1084,,,,,female
+1085,,,,,male
+1086,,,,,female
+1087,,,,,male
+1088,,,,,male
+1089,,,,,male
+1090,,,,,male
+1091,,,,,female
+1092,,,,,male
+1093,,,,,male
+1094,,,,,female
+1095,,,,,male
+1096,,,,,male
+1097,,,,,male
+1098,,,,,male
+1099,,,,,female
+1100,,,,,female
+1101,,,,,male
+1102,,,,,male
+1103,,,,,male
+1104,,,,,female
+1105,,,,,male
+1106,,,,,male
+1107,,,,,male
+1108,,,,,male
+1109,,,,,male
+1110,,,,,female
+1111,,,,,male
+1112,,,,,female
+1113,,,,,female
+1114,,,,,male
+1115,,,,,male
+1116,,,,,female
+1117,,,,,female
+1118,,,,,male
+1119,,,,,male
+1120,,,,,male
+1121,,,,,male
+1122,,,,,male
+1123,,,,,male
+1124,,,,,male
+1125,,,,,male
+1126,,,,,male
+1127,,,,,female
+1128,,,,,female
+1129,,,,,male
+1130,,,,,female
+1131,,,,,male
+1132,,,,,female
+1133,,,,,male
+1134,,,,,male
+1135,,,,,female
+1136,,,,,male
+1137,,,,,male
+1138,,,,,male
+1139,,,,,male
+1140,,,,,male
+1141,,,,,male
+1142,,,,,male
+1143,,,,,male
+1144,,,,,male
+1145,,,,,male
+1146,,,,,male
+1147,,,,,male
+1148,,,,,male
+1149,,,,,female
+1150,,,,,female
+1151,,,,,male
+1152,,,,,female
+1153,,,,,male
+1154,,,,,female
+1155,,,,,male
+1156,,,,,female
+1157,,,,,male
+1158,,,,,male
+1159,,,,,female
+1160,,,,,female
+1161,,,,,male
+1162,,,,,female
+1163,,,,,male
+1164,,,,,male
+1165,,,,,male
+1166,,,,,male
+1167,,,,,male
+1168,,,,,male
+1169,,,,,male
+1170,,,,,male
+1171,,,,,female
+1172,,,,,female
+1173,,,,,female
+1174,,,,,male
+1175,,,,,male
+1176,,,,,male
+1177,,,,,male
+1178,,,,,female
+1179,,,,,female
+1180,,,,,male
+1181,,,,,male
+1182,,,,,male
+1183,,,,,female
+1184,,,,,male
+1185,,,,,male
+1186,,,,,male
+1187,,,,,male
+1188,,,,,female
+1189,,,,,female
+1190,,,,,female
+1191,,,,,male
+1192,,,,,male
+1193,,,,,male
+1194,,,,,male
+1195,,,,,male
+1196,,,,,male
+1197,,,,,male
+1198,,,,,male
+1199,,,,,male
+1200,,,,,male
+1201,,,,,male
+1202,,,,,female
+1203,,,,,male
+1204,,,,,male
+1205,,,,,male
+1206,,,,,male
+1207,,,,,male
+1208,,,,,female
+1209,,,,,male
+1210,,,,,male
+1211,,,,,male
+1212,,,,,male
+1213,,,,,female
+1214,,,,,female
+1215,,,,,male
+1216,,,,,female
+1217,,,,,male
+1218,,,,,male
+1219,,,,,male
+1220,,,,,female
+1221,,,,,female
+1222,,,,,male
+1223,,,,,male
+1224,,,,,male
+1225,,,,,male
+1226,,,,,male
+1227,,,,,female
+1228,,,,,male
+1229,,,,,male
+1230,,,,,male
+1231,,,,,female
+1232,,,,,male
+1233,,,,,male
+1234,,,,,female
+1235,,,,,female
+1236,,,,,male
+1237,,,,,male
+1238,,,,,male
+1239,,,,,male
+1240,,,,,male
+1241,,,,,male
+1242,,,,,male
+1243,,,,,male
+1244,,,,,male
+1245,,,,,female
+1246,,,,,male
+1247,,,,,male
+1248,,,,,male
+1249,,,,,male
+1250,,,,,male
+1251,,,,,male
+1252,,,,,female
+1253,,,,,male
+1254,,,,,male
+1255,,,,,male
+1256,,,,,male
+1257,,,,,male
+1258,,,,,male
+1259,,,,,male
+1260,,,,,female
+1261,,,,,male
+1262,,,,,female
+1263,,,,,male
+1264,,,,,female
+1265,,,,,female
+1266,,,,,male
+1267,,,,,male
+1268,,,,,male
+1269,,,,,male
+1270,,,,,female
+1271,,,,,male
+1272,,,,,female
+1273,,,,,male
+1274,,,,,male
+1275,,,,,male
+1276,,,,,male
+1277,,,,,female
+1278,,,,,male
+1279,,,,,female
+1280,,,,,male
+1281,,,,,male
+1282,,,,,male
+1283,,,,,male
+1284,,,,,female
+1285,,,,,male
+1286,,,,,male
+1287,,,,,male
+1288,,,,,male
+1289,,,,,male
+1290,,,,,male
+1291,,,,,male
+1292,,,,,male
+1293,,,,,male
+1294,,,,,female
+1295,,,,,male
+1296,,,,,male
+1297,,,,,male
+1298,,,,,male
+1299,,,,,male
+1300,,,,,male
+1301,,,,,male
+1302,,,,,male
+1303,,,,,male
+1304,,,,,male
+1305,,,,,female
+1306,,,,,male
+1307,,,,,female
+1308,,,,,female
+1309,,,,,male
+1310,,,,,male
+1311,,,,,male
+1312,,,,,female
+1313,,,,,male

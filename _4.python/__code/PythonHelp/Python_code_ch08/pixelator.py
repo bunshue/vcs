@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 
 def analyze_picture(filename):
     # 載入、縮放、顯示影像

@@ -1,4 +1,3 @@
-# -*- encoding:utf-8 -*-
 """
     通用装饰器, 上下文管理器工具模块
 """
@@ -17,7 +16,7 @@ from contextlib import contextmanager
 
 import numpy as np
 import pandas as pd
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 
 from ..CoreBu import ABuEnv
 from ..CoreBu.ABuFixes import six

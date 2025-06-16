@@ -1,4 +1,3 @@
-# -*- encoding:utf-8 -*-
 """
     技术线内部执行模块
 """
@@ -10,7 +9,7 @@ import math
 import logging
 import numpy as np
 import pandas as pd
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 from scipy import optimize as sco, stats
 from sklearn import metrics
 from sklearn.cluster import KMeans

@@ -1,4 +1,3 @@
-# -*- encoding:utf-8 -*-
 """
     技术线对象，对外执行，输出模块
 """
@@ -14,7 +13,7 @@ from enum import Enum
 
 import numpy as np
 import pandas as pd
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 
 from ..TLineBu.ABuTLExecute import shift_distance, bfgs_min_pos, support_resistance_pos, \

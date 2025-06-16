@@ -8246,15 +8246,99 @@ Bad_aqi_PM = df[aqi_filter_2]  # 將過濾後的數值存入至Bad_aqi_PM
 Bad_aqi_PM.head()  # 只顯示aqi>60且PM2.5>40的資料
 """
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+pivot_table 樞紐分析表
+
+"""
+# 樞紐分析表 pivot_table
+# 鐵達尼號資料分析
+
+df1 = pd.read_csv("data/pivot_table_titanic1.csv")
+df1.head()
+
+df2 = pd.read_csv("data/pivot_table_titanic2.csv")
+df2.head()
+
+dft = pd.merge(df1, df2, on="row.names")
+dft.info()
+
+dft["age"].fillna(value=dft["age"].mean(), inplace=True)
+dft["embarked"].fillna(method="ffill", inplace=True)
+dft.info()
+
+df3 = pd.pivot_table(dft, index=["sex"], values=["survived"], margins=True)
+df3
+
+df3 = pd.pivot_table(
+    dft, index=["sex"], columns=["pclass"], values=["survived"], margins=True
+)
+df3
+
+df3 = pd.pivot_table(dft, index=["survived"], values=["age"], margins=True)
+df3
+
+df3 = pd.pivot_table(
+    dft, index=["survived"], columns=["pclass"], values=["age"], margins=True
+)
+df3
+
+df3 = pd.pivot_table(dft, index=["embarked"], values=["survived"], margins=True)
+df3
+
+df3 = pd.pivot_table(
+    dft,
+    index=["embarked"],
+    columns=["survived"],
+    values=["age"],
+    aggfunc=["mean", "max", "count"],
+    margins=True,
+)
+df3
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
 
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 """
 cc = pd.merge(df1, df2, how="left", indicator=True).query("_merge == 'left_only'")

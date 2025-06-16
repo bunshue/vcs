@@ -27,6 +27,12 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+
+def show():
+    plt.show()
+    pass
+
+
 print("------------------------------------------------------------")  # 60個
 
 print("初始化 H X W X D 陣列")
@@ -77,7 +83,7 @@ plt.subplot(122)
 plt.imshow(bgr)
 plt.title("B-G-R 排列")
 
-plt.show()
+show()
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -127,7 +133,7 @@ plt.subplot(122)
 plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
 plt.title("轉灰階")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -152,7 +158,7 @@ plt.subplot(122)
 plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
 plt.title("轉灰階")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -184,7 +190,7 @@ plt.subplot(133)
 plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
 plt.title("兩影像用cv2相加")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -215,7 +221,7 @@ plt.subplot(133)
 plt.imshow(cv2.cvtColor(c, cv2.COLOR_BGR2RGB))
 plt.title("影像3")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -253,7 +259,7 @@ plt.subplot(133)
 plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
 plt.title("影像3")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -297,7 +303,7 @@ plt.subplot(235)
 plt.imshow(cv2.cvtColor(image5, cv2.COLOR_BGR2RGB))
 plt.title("影像5")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -323,7 +329,7 @@ plt.subplot(133)
 plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
 plt.title("兩影像用cv2權重gamma相加")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -338,7 +344,7 @@ plt.figure("Random建立二維陣列 深度為3", figsize=(12, 6))
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("Random建立二維陣列 深度為3")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -396,7 +402,7 @@ plt.subplot(236)
 plt.imshow(cv2.cvtColor(BlueHSV, cv2.COLOR_BGR2RGB))
 plt.title("BlueHSV")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -418,7 +424,7 @@ plt.subplot(122)
 plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
 plt.title("mask")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -448,7 +454,7 @@ plt.subplot(133)
 plt.imshow(cv2.cvtColor(roi, cv2.COLOR_BGR2RGB))
 plt.title("roi")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -493,7 +499,7 @@ plt.subplot(236)
 plt.imshow(cv2.cvtColor(b, cv2.COLOR_BGR2RGB))
 plt.title("B")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -516,7 +522,7 @@ plt.subplot(122)
 plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
 plt.title('xxxx')
 
-plt.show()
+show()
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -542,7 +548,7 @@ plt.subplot(122)
 plt.imshow(cv2.cvtColor(erosion, cv2.COLOR_BGR2RGB))
 plt.title("erosion")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -568,128 +574,18 @@ plt.subplot(122)
 plt.imshow(cv2.cvtColor(dilation, cv2.COLOR_BGR2RGB))
 plt.title("dilation")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
-W, H, D = 5, 4, 3
-image = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)  # np.random之randint不含尾
-t, rst = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
-print("image = \n", image)
-print("t = ", t)
-print("rst = \n", rst)
 
-plt.figure("Random建立二維陣列 深度為1", figsize=(12, 6))
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("Random 二維陣列")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
-plt.title("xxxx")
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-W, H, D = 5, 4, 3
-image = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)  # np.random之randint不含尾
-t, rst = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY_INV)
-print("image = \n", image)
-print("t = ", t)
-print("rst = \n", rst)
 
-plt.figure("Random建立二維陣列 深度為1", figsize=(12, 6))
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("Random 二維陣列")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
-plt.title("xxxx")
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-W, H, D = 5, 4, 3
-image = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)  # np.random之randint不含尾
-t, rst = cv2.threshold(image, 127, 255, cv2.THRESH_TRUNC)
-print("image = \n", image)
-print("t = ", t)
-print("rst = \n", rst)
-
-plt.figure("Random建立二維陣列 深度為1", figsize=(12, 6))
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("Random 二維陣列")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
-plt.title("xxxx")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-W, H, D = 5, 4, 3
-image = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)  # np.random之randint不含尾
-t, rst = cv2.threshold(image, 127, 255, cv2.THRESH_TOZERO_INV)
-print("image = \n", image)
-print("t = ", t)
-print("rst = \n", rst)
-
-plt.figure("Random建立二維陣列 深度為1", figsize=(12, 6))
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("Random 二維陣列")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
-plt.title("xxxx")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-W, H, D = 5, 4, 3
-image = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)  # np.random之randint不含尾
-t, rst = cv2.threshold(image, 127, 255, cv2.THRESH_TOZERO)
-print("image = \n", image)
-print("t = ", t)
-print("rst = \n", rst)
-
-plt.figure("Random建立二維陣列 深度為1", figsize=(12, 6))
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("Random 二維陣列")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
-plt.title("xxxx")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-W, H, D = 5, 5, 3
-image = np.zeros((H, W), dtype=np.uint8)
-image[0:6, 0:6] = 123
-image[2:6, 2:6] = 126
-print("image = \n", image)
-
-t1, thd = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
-print("thd = \n", thd)
-
-t2, otsu = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-print("otsu = \n", otsu)
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -705,5 +601,6 @@ sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個

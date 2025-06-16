@@ -1,5 +1,5 @@
 import numpy as np
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 from numpy.random import rand, randint
 from matplotlib.patches import RegularPolygon
 

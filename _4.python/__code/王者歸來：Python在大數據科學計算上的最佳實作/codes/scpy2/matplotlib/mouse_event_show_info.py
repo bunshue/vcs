@@ -1,6 +1,5 @@
 import sys
-from matplotlib import pyplot as plt
-
+import matplotlib.pyplot as plt
 
 fig, ax = plt.subplots()
 text = ax.text(0.5, 0.5, "event", ha="center", va="center", fontdict={"size": 20})

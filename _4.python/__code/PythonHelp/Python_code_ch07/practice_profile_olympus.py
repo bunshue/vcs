@@ -1,6 +1,5 @@
 from PIL import Image, ImageDraw
 
-#from matplotlib import pyplot as plt
 import matplotlib.pyplot as plt
 
 # 載入影像並從平行於 y 軸的水平剖面獲取 x 和 z 值

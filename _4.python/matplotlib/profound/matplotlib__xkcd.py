@@ -40,8 +40,6 @@ bo = np.arange(5)
 prices = [ 234, 123, 348, 287, 186]
 persons = [ 568, 720, 520, 484, 386]
 
-from matplotlib import pyplot as plt 
-
 plt.rcParams.update({'font.family': "Microsoft YaHei"})
 
 plt.xkcd()

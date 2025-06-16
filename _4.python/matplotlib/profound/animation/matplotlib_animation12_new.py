@@ -159,11 +159,8 @@ ani = FuncAnimation(fig,func=animate,frames=np.arange(0,360,3),
                     interval=60)
 plt.show()
 
-   
-
 print("------------------------------------------------------------")  # 60個
 
-from matplotlib import pyplot as plt
 from matplotlib import animation
 
 fig, ax = plt.subplots()
@@ -202,6 +199,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 
 

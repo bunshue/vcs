@@ -2608,7 +2608,6 @@ if __name__ == "__main__":
 
 # 下面例子，构建一个二维空间的kd树，然后对其作k近邻搜索以及指定半径的搜索。
 
-from matplotlib import pyplot as plt
 from matplotlib.patches import Circle
 from sklearn.neighbors import KDTree
 

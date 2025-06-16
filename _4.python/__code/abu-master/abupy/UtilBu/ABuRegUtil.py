@@ -1,4 +1,3 @@
-# -*- encoding:utf-8 -*-
 """
     拟合工具模块
 """
@@ -12,7 +11,7 @@ import logging
 
 import numpy as np
 import seaborn as sns
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 from statsmodels import api as sm, regression
 from sklearn import metrics
 

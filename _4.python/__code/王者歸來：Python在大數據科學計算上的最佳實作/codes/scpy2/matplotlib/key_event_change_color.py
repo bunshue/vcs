@@ -1,5 +1,5 @@
 import numpy as np
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 
 fig, ax = plt.subplots()
 x = np.linspace(0, 10, 1000)

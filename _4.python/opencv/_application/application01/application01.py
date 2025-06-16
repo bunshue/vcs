@@ -214,7 +214,6 @@ from retinaface.pre_trained_models import get_model as get_detector
 from facemask_detection.pre_trained_models import get_model as get_classifier
 import albumentations as A
 import torch
-from matplotlib import pyplot as plt
 
 face_detector = get_detector("resnet50_2020-07-20", max_size=800)
 face_detector.eval()
@@ -263,4 +262,5 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 

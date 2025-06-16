@@ -458,8 +458,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from matplotlib import pyplot as plt
-
 ax = np.linspace(0, 20, 100)
 ay = ax * 0.15
 by = np.sin(ax)
@@ -481,8 +479,6 @@ xx.spines["bottom"].set_position(("data", 0))  # 設置邊框位置
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-from matplotlib import pyplot as plt
 
 ax = np.linspace(-20, 20, 100)
 ay = ax * 0.5
@@ -647,8 +643,6 @@ for label in ax.get_xticklabels() + ax.get_yticklabels():
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-from matplotlib import pyplot as plt
 
 x = np.linspace(-np.pi, np.pi, 200, endpoint=True)
 s, c = np.sin(x), np.cos(x)

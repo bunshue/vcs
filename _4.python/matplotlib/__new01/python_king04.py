@@ -133,8 +133,6 @@ print("------------------------------------------------------------")  # 60個
 
 #Artist物件
 
-from matplotlib import pyplot as plt
-
 fig = plt.figure()
 
 #新增軸, 水平 : 0.15~0.7, 垂直 : 0.1~0.3
@@ -507,7 +505,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from matplotlib import pyplot as plt
 from matplotlib import collections as mc
 
 #塊、路徑和集合
@@ -767,8 +764,6 @@ axe.axis("off")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-from matplotlib import pyplot as plt
 
 #繪圖函數簡介
 #對數座標圖
@@ -1063,13 +1058,13 @@ class PatchMover(object):
                 self.start_patch_pos = patch.xy
                 break
 
-    def on_motion(self, event):  # ❸
+    def on_motion(self, event):
         if self.selected_patch is not None:
             pos = np.array([event.xdata, event.ydata])
             self.selected_patch.xy = self.start_patch_pos + pos - self.start_mouse_pos
-            self.ax.figure.canvas.draw_idle()  # ❹
+            self.ax.figure.canvas.draw_idle()
 
-    def on_release(self, event):  # ❺
+    def on_release(self, event):
         self.selected_patch = None
 
 
@@ -1157,7 +1152,7 @@ class CurveHighLighter(object):
     def on_move(self, evt):
         ax = self.ax
         for line in ax.lines:
-            if line.contains(evt)[0]:  # ❸
+            if line.contains(evt)[0]:
                 self.highlight(line)
                 break
         else:
@@ -1187,7 +1182,7 @@ x = np.linspace(0, 10, 1000)
 def update_data(line):
     x[:] += 0.1
     line.set_ydata(np.sin(x))
-    fig.canvas.draw()  # ❸
+    fig.canvas.draw()
 
 
 timer = fig.canvas.new_timer(interval=50)
@@ -1203,15 +1198,15 @@ x = np.linspace(0, 10, 1000)
 (line,) = ax.plot(x, np.sin(x), lw=2, animated=True)
 
 fig.canvas.draw()
-background = fig.canvas.copy_from_bbox(ax.bbox)  # ❸
+background = fig.canvas.copy_from_bbox(ax.bbox)
 
 
 def update_data(line):
     x[:] += 0.1
     line.set_ydata(np.sin(x))
-    fig.canvas.restore_region(background)  # ❹
-    ax.draw_artist(line)  # ❺
-    fig.canvas.blit(ax.bbox)  # ❻
+    fig.canvas.restore_region(background)
+    ax.draw_artist(line)
+    fig.canvas.blit(ax.bbox)
 
 
 timer = fig.canvas.new_timer(interval=50)
@@ -1220,7 +1215,6 @@ timer.start()
 
 # animation模組
 
-from matplotlib import pyplot as plt
 from matplotlib.animation import FuncAnimation
 
 fig, ax = plt.subplots()
@@ -1236,7 +1230,7 @@ def update_line(i):
     return [line]
 
 
-ani = FuncAnimation(fig, update_line, blit=True, interval=25, frames=100)  # ❸
+ani = FuncAnimation(fig, update_line, blit=True, interval=25, frames=100)
 
 # matplotlib會使用系統中安裝的視訊壓縮軟體（如ffmpeg.exe）產生視訊檔案。請讀者確認視訊壓縮軟體的可執行檔案的路徑是否在PATH環境變數中。
 
@@ -1266,25 +1260,25 @@ y = exp_sin(x, **pars)
 (line,) = pl.plot(x, y)
 
 
-def update(**kw):  # ❸
+def update(**kw):
     y = exp_sin(x, **kw)
-    line.set_data(x, y)  # ❹
+    line.set_data(x, y)
     ax.relim()
     ax.autoscale_view()
-    fig.canvas.draw_idle()  # ❺
+    fig.canvas.draw_idle()
 
 
 from scpy2.matplotlib.gui_panel import TkSliderPanel
 
 panel = TkSliderPanel(
-    fig,  # ❻
+    fig,
     [("A", 0, 10), ("f", 0, 10), ("z", -3, 0), ("p", 0, 2 * np.pi)],
     update,
     cols=2,
     min_value_width=80,
 )
-panel.set_parameters(**pars)  # ❼
-fig.show()  # ❽
+panel.set_parameters(**pars)
+fig.show()
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1335,3 +1329,11 @@ plt.close("all")
 
 
 plt.close("all")
+
+
+
+
+
+
+
+

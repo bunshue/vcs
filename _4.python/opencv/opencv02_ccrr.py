@@ -46,6 +46,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 
 def show():
+    # plt.tight_layout()
     plt.show()
     pass
 
@@ -107,7 +108,7 @@ print("旋轉圖片")
 image = cv2.imread(filename)  # 讀取本機圖片
 rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 plt.imshow(rgb)
-plt.show()
+show()
 
 h, w, d = image.shape  # d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
 
@@ -121,7 +122,7 @@ rotate_image = cv2.warpAffine(image, P, (w, h))
 rotate_image = cv2.cvtColor(rotate_image, cv2.COLOR_BGR2RGB)
 plt.imshow(rotate_image)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -136,22 +137,22 @@ xy = cv2.flip(img, -1)
 
 plt.figure("鏡射", figsize=(16, 12))
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(222)
-plt.title("x鏡射")
 plt.imshow(cv2.cvtColor(x, cv2.COLOR_BGR2RGB))
+plt.title("x鏡射")
 
 plt.subplot(223)
-plt.title("y鏡射")
 plt.imshow(cv2.cvtColor(y, cv2.COLOR_BGR2RGB))
+plt.title("y鏡射")
 
 plt.subplot(224)
-plt.title("xy鏡射")
 plt.imshow(cv2.cvtColor(xy, cv2.COLOR_BGR2RGB))
+plt.title("xy鏡射")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -177,10 +178,10 @@ W = img.shape[1]
 img_resize = cv2.resize(img, (W * 2, H // 2))  # .resize 改變圖片大小W,H
 print("縮放後大小 :", img_resize.shape)
 
-plt.title("縮放 W兩倍 H一半")
 plt.imshow(cv2.cvtColor(img_resize, cv2.COLOR_BGR2RGB))
+plt.title("縮放 W兩倍 H一半")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -219,7 +220,7 @@ plt.xlim(0, 500)  # x軸顯示邊界
 plt.ylim(500, 0)  # y軸顯示邊界
 plt.title("等比例縮放 至 480")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -257,7 +258,7 @@ plt.xlim(0, 500)  # x軸顯示邊界
 plt.ylim(500, 0)  # y軸顯示邊界
 plt.title("倍率縮放")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -299,7 +300,7 @@ plt.xlim(0, 700)  # x軸顯示邊界
 plt.ylim(700, 0)  # y軸顯示邊界
 plt.title("resize 480X640")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -341,7 +342,7 @@ plt.xlim(0, 500)  # x軸顯示邊界
 plt.ylim(500, 0)  # y軸顯示邊界
 plt.title("resize x變1.5倍, y變一半")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -443,15 +444,14 @@ rotate = cv2.warpAffine(image, M, (W, H))
 
 plt.figure("rotate", figsize=(16, 12))
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(122)
-plt.title("rotate")
 plt.imshow(cv2.cvtColor(rotate, cv2.COLOR_BGR2RGB))
+plt.title("rotate")
 
-plt.tight_layout()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -689,16 +689,16 @@ print("圖片拉成 寬度2倍，高度一半")
 dst2 = cv2.resize(src, None, fx=2.0, fy=0.5)  # 重設影像大小
 
 plt.subplot(311)
-plt.title("原始影像")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原始影像")
 
 plt.subplot(312)
-plt.title("圖片拉成 640 X 480")
 plt.imshow(dst1)
+plt.title("圖片拉成 640 X 480")
 
 plt.subplot(313)
-plt.title("圖片拉成 寬度2倍，高度一半")
 plt.imshow(dst2)
+plt.title("圖片拉成 寬度2倍，高度一半")
 
 show()
 
@@ -719,23 +719,23 @@ print("上下顛倒 + 左右顛倒")
 dst3 = cv2.flip(src, -1)  # 水平與垂直翻轉
 
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(222)
-plt.title("上下顛倒")
 plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("上下顛倒")
 plt.axis("off")
 
 plt.subplot(223)
-plt.title("左右顛倒")
 plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("左右顛倒")
 plt.axis("off")
 
 plt.subplot(224)
-plt.title("上下顛倒 + 左右顛倒")
 plt.imshow(cv2.cvtColor(dst3, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("上下顛倒 + 左右顛倒")
 plt.axis("off")
 
 show()
@@ -755,13 +755,13 @@ M = np.float32([[1, 0, x], [0, 1, y]])  # 建立 M 矩陣
 dst = cv2.warpAffine(src, M, dsize)  # 執行仿射
 
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(122)
-plt.title("平移 (30, 80)")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("平移 (30, 80)")
 plt.axis("off")
 
 show()
@@ -784,18 +784,18 @@ M = cv2.getRotationMatrix2D((width / 2, height / 2), -30, 1)  # 建立 M 矩陣
 dst2 = cv2.warpAffine(src, M, dsize)  # 執行仿射
 
 plt.subplot(131)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(132)
-plt.title("逆時鐘 30")
 plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("逆時鐘 30")
 plt.axis("off")
 
 plt.subplot(133)
-plt.title("順時鐘 30")
 plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("順時鐘 30")
 plt.axis("off")
 
 show()
@@ -822,18 +822,18 @@ dsize = (width, height)
 dst2 = cv2.warpAffine(src, M, dsize)  # 執行仿射
 
 plt.subplot(131)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(132)
-plt.title("仿射 歪折 折向右")
 plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("仿射 歪折 折向右")
 plt.axis("off")
 
 plt.subplot(133)
-plt.title("仿射 歪折 折向左")
 plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("仿射 歪折 折向左")
 plt.axis("off")
 
 show()
@@ -856,13 +856,13 @@ dsize = (width, height)
 dst = cv2.warpAffine(src, M, dsize)  # 執行仿射
 
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(122)
-plt.title("仿射 歪折 轉置")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("仿射 歪折 轉置")
 plt.axis("off")
 
 show()
@@ -885,13 +885,13 @@ dsize = (width, height)
 dst = cv2.warpAffine(src, M, dsize)  # 執行仿射
 
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(122)
-plt.title("仿射 歪折 轉置")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("仿射 歪折 轉置")
 plt.axis("off")
 
 show()
@@ -919,17 +919,16 @@ dsize = (width, height)
 dst = cv2.warpPerspective(src, M, dsize)  # 執行透視
 
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(122)
-plt.title("顯示透視影像")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("顯示透視影像")
 plt.axis("off")
 
 show()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -971,13 +970,13 @@ for r in range(rows):  # 建立mapx和mapy
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
 
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(122)
-plt.title("執行映射")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("執行映射")
 plt.axis("off")
 
 show()
@@ -1013,13 +1012,13 @@ for r in range(rows):  # 建立mapx和mapy
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
 
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(122)
-plt.title("執行映射")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("執行映射")
 plt.axis("off")
 
 show()
@@ -1055,13 +1054,13 @@ for r in range(rows):  # 建立mapx和mapy
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
 
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(122)
-plt.title("執行映射")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("執行映射")
 plt.axis("off")
 
 show()
@@ -1085,13 +1084,13 @@ for r in range(rows):  # 建立mapx和mapy
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
 
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(122)
-plt.title("執行映射")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("執行映射")
 plt.axis("off")
 
 show()
@@ -1111,13 +1110,13 @@ for r in range(rows):  # 建立mapx和mapy
 dst = cv2.remap(src, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
 
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(122)
-plt.title("執行映射")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("執行映射")
 plt.axis("off")
 
 show()
@@ -1165,3 +1164,6 @@ rImg = cv2.rotate(image,cv2.ROTATE_90_COUNTERCLOCKWISE)
 cv2.imwrite("lsImg.jpg",lsImg)
 
 """
+
+
+
