@@ -16,6 +16,7 @@ import cv2
 ESC = 27
 SPACE = 32
 
+# OpenCV_顏色共同
 RED = (0, 0, 255)  # B G R
 GREEN = (0, 255, 0)  # B G R
 BLUE = (255, 0, 0)  # B G R
@@ -3076,7 +3077,6 @@ plt.title("Image")
 show()
 
 
-
 print("複製貼上圖片的一部分")
 
 # Copy part of image
@@ -3334,10 +3334,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 cv2.waitKey(3000)  # 等待3秒
 cv2.destroyWindow("Peony1")  # 刪除Peony1
 
 cv2.waitKey(3000)  # 等待3秒
 cv2.destroyAllWindows()  # 刪除所有視窗
-

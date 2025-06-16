@@ -2,10 +2,10 @@
 
 新進  未歸類
 
-
 """
 
 import cv2
+
 import os
 import sys
 import time
@@ -24,7 +24,6 @@ SPACE = 32
 ENTER = 13
 
 video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-
 '''
 print("------------------------------------------------------------")  # 60個
 """
@@ -966,93 +965,9 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-'''
 
-"""
-cap = cv2.VideoCapture(0)  # 初始化攝影功能
-
-while cap.isOpened():
-    ret, frame = cap.read()  # 讀取設請鏡頭的影像
-    cv2.imshow("Frame", frame)  # 顯示攝影鏡頭的影像
-    k = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
-    if k == ESC:  # 按 ESC 鍵, 結束
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-"""
-print("------------------------------------------------------------")  # 60個
-
-"""
-cap = cv2.VideoCapture(0)  # 初始化攝影功能
-
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)  # 設定寬度
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 960)  # 設定高度
-
-while cap.isOpened():
-    ret, frame = cap.read()  # 讀取設請鏡頭的影像
-    cv2.imshow("Frame", frame)  # 顯示攝影鏡頭的影像
-    k = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
-    if k == ESC:  # 按 ESC 鍵, 結束
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-"""
-print("------------------------------------------------------------")  # 60個
-
-cap = cv2.VideoCapture(0)  # 初始化攝影功能
-
-while cap.isOpened():
-    ret, frame = cap.read()  # 讀取設請鏡頭的影像
-    cv2.imshow("Frame", frame)  # 顯示彩色影像
-    # 轉灰階顯示
-    gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    cv2.imshow("Gray Frame", gray_frame)  # 顯示灰階影像
-    k = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
-    if k == ESC:  # 按 ESC 鍵, 結束
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-cap = cv2.VideoCapture(0)  # 初始化攝影功能
-
-while cap.isOpened():
-    ret, frame = cap.read()  # 讀取設請鏡頭的影像
-    cv2.imshow("Frame", frame)  # 顯示彩色影像
-
-    h_frame = cv2.flip(frame, 1)  # 水平翻轉
-    cv2.imshow("Flip Frame", h_frame)  # 顯示水平翻轉
-    k = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
-    if k == ESC:  # 按 ESC 鍵, 結束
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-cap = cv2.VideoCapture(0)  # 初始化攝影功能
-
-while cap.isOpened():
-    ret, frame = cap.read()  # 讀取設請鏡頭的影像
-    cv2.imshow("Frame", frame)  # 顯示攝影鏡頭的影像
-    k = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
-    if k == ENTER:  # 按 Enter 鍵
-        cv2.imwrite("mypict.png", frame)  # 拍照
-        cv2.imshow("My Picture", frame)  # 開視窗顯示
-    if k == ESC:  # 按 ESC 鍵, 結束
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-cap = cv2.VideoCapture(0)  # 初始化攝影功能
+# 錄影
+cap = cv2.VideoCapture(1)
 
 fourcc = cv2.VideoWriter_fourcc(*"XVID")  # MPEG-4
 
@@ -1071,9 +986,47 @@ while cap.isOpened():
 cap.release()
 video_out.release()
 cv2.destroyAllWindows()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
+# 背景移除
+
+bs = cv2.bgsegm.createBackgroundSubtractorGMG()
+
+cap = cv2.VideoCapture(1)
+
+while True:
+    ret, frame = cap.read()
+    frame = cv2.flip(frame, 1)
+
+#### 在while內
+    gray = bs.apply(frame)
+    mask = cv2.threshold(gray, 30, 255, cv2.THRESH_BINARY)[1]
+    mask = cv2.erode(mask, None, iterations = 2)
+    mask = cv2.dilate(mask, None, iterations = 10)
+
+#### 在while內
+    cnts, hierarchy = cv2.findContours(
+        mask, 
+        cv2.RETR_EXTERNAL, 
+        cv2.CHAIN_APPROX_SIMPLE)
+
+    for c in cnts:
+        if cv2.contourArea(c) < 200:
+            continue
+        # 畫出輪廓
+        cv2.drawContours(frame, cnts, -1, (0, 255, 255), 2)
+        # 畫出矩型
+        (x, y, w, h) = cv2.boundingRect(c)
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
+#### 在while內
+    mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR) 
+    frame = cv2.hconcat([frame, mask])
+    cv2.imshow('frame', frame)
+    if cv2.waitKey(1) == 27:
+        cv2.destroyAllWindows()
+        break
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1100,3 +1053,10 @@ print("------------------------------------------------------------")  # 60個
 # cv2.resizeWindow("Video Player", 300, 200) # 重設定視窗大小
 
 
+# 設定參數 無效~~~~
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)  # 設定寬度
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 960)  # 設定高度
+
+
+# gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+# h_frame = cv2.flip(frame, 1)  # 水平翻轉

@@ -439,6 +439,13 @@ print(pathlib.Path.cwd())
 
 print("------------------------------------------------------------")  # 60個
 
+import easygui
+
+# easygui.msgbox(msg="AAAAAAAAAAAAAA", title="標題",ok_button="按這裡，繼續")
+
+# easygui.buttonbox(msg="選出一個你喜歡的人物", title="標題",choices=("AAA","BBB","CCC","DDD","EEE"))
+
+easygui.enterbox(msg="請輸入你想說的話", title="標題",default="預設內容")
 
 print("------------------------------------------------------------")  # 60個
 

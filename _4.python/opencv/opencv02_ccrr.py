@@ -1164,6 +1164,3 @@ rImg = cv2.rotate(image,cv2.ROTATE_90_COUNTERCLOCKWISE)
 cv2.imwrite("lsImg.jpg",lsImg)
 
 """
-
-
-

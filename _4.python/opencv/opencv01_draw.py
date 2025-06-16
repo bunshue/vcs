@@ -35,6 +35,7 @@ cv2.FONT_ITALIC			italic字型(斜體字)
 
 import cv2
 
+# OpenCV_顏色共同
 RED = (0, 0, 255)  # B G R
 GREEN = (0, 255, 0)  # B G R
 BLUE = (255, 0, 0)  # B G R

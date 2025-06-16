@@ -43,6 +43,7 @@ def cvshow(title, image):
     pass
 
 
+# OpenCV_顏色共同
 RED = (0, 0, 255)  # B G R
 GREEN = (0, 255, 0)  # B G R
 BLUE = (255, 0, 0)  # B G R
@@ -55,7 +56,7 @@ colors = [RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK, WHITE]
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 img = cv2.imread("data/Hough/computer.jpg")  # 彩色讀取
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
@@ -492,7 +493,7 @@ plt.title("HoughLines")
 plt.axis("off")
 
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

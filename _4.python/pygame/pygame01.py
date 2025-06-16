@@ -37,8 +37,8 @@ import random
 import pygame
 
 W, H = 800, 600
-screen_size = (W, H)    # 設定屏幕尺寸
-surface_size = (W-50, H-50)    # 設定surface尺寸
+screen_size = (W, H)  # 設定屏幕尺寸
+surface_size = (W - 50, H - 50)  # 設定surface尺寸
 
 # 設定顏色
 red = (255, 0, 0)
@@ -48,47 +48,50 @@ black = (0, 0, 0)
 white = (255, 255, 255)
 yellow = (255, 255, 0)
 
-RosyBrown = 255, 193, 193 # 玫紅色
-fuchsia = (255, 0, 255) #紫色
-aqua = (0, 255, 255) #淺藍色
-gray = (128, 128, 128) #灰色
-grey = 79, 79, 79        # 灰色
+RosyBrown = 255, 193, 193  # 玫紅色
+fuchsia = (255, 0, 255)  # 紫色
+aqua = (0, 255, 255)  # 淺藍色
+gray = (128, 128, 128)  # 灰色
+grey = 79, 79, 79  # 灰色
 
 # 設定顏色, same
-red = pygame.color.Color('#FF0000')
-green = pygame.color.Color('#00FF00')
-blue = pygame.color.Color('#0000FF')
-black = pygame.color.Color('#000000')
-white = pygame.color.Color('#FFFFFF')
+red = pygame.color.Color("#FF0000")
+green = pygame.color.Color("#00FF00")
+blue = pygame.color.Color("#0000FF")
+black = pygame.color.Color("#000000")
+white = pygame.color.Color("#FFFFFF")
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 font_filename = "C:/Windows/Fonts/mingliu.ttc"  # 新細明體
 
+
 def init_pygame(name, color):
-   print(name)
-   pygame.init()  # 初始化Pygame
-   
-   screen = pygame.display.set_mode(screen_size)  # 產生視窗screen
-   #screen = pygame.display.set_mode(screen_size, 0, 32)  # 產生視窗screen
-   #screen = pygame.display.set_mode(screen_size, 0)  # 產生視窗screen
-   
-   pygame.display.set_caption(name)
-   
-   #print("取得screen參數 :", screen.get_size())
-   
-   #利用screen物件來作為畫布，以fill()方法填上顏色
-   screen.fill(color)
-   return screen
+    print(name)
+    pygame.init()  # 初始化Pygame
+
+    screen = pygame.display.set_mode(screen_size)  # 產生視窗screen
+    # screen = pygame.display.set_mode(screen_size, 0, 32)  # 產生視窗screen
+    # screen = pygame.display.set_mode(screen_size, 0)  # 產生視窗screen
+
+    pygame.display.set_caption(name)
+
+    # print("取得screen參數 :", screen.get_size())
+
+    # 利用screen物件來作為畫布，以fill()方法填上顏色
+    screen.fill(color)
+    return screen
+
 
 def run_pygame():
-   # 更新屏幕, 保持屏幕打開, 直到用戶退出, 偵測視窗是否被關閉(8)
-   pygame.display.update()#繪製視窗顯示於螢幕上
-   running = True
-   while running:
-      for event in pygame.event.get():
-         if event.type == pygame.QUIT:  # 判斷事件的常數是否為QUIT常數
-            running = False
-   pygame.quit()
+    # 更新屏幕, 保持屏幕打開, 直到用戶退出, 偵測視窗是否被關閉(8)
+    pygame.display.update()  # 繪製視窗顯示於螢幕上
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:  # 判斷事件的常數是否為QUIT常數
+                running = False
+    pygame.quit()
+
 
 print("------------------------------------------------------------")  # 60個
 '''
@@ -971,31 +974,28 @@ print("------------------------------------------------------------")  # 60個
 '''
 
 
-
-        
-
 print("------------------------------------------------------------")  # 60個
 
-#基本架構
+# 基本架構
 import pygame
 
-pygame.init()  #啟動Pygame
+pygame.init()  # 啟動Pygame
 
-screen = pygame.display.set_mode((640, 320))  #建立繪圖視窗
-pygame.display.set_caption("基本架構")  #繪圖視窗標題
+screen = pygame.display.set_mode((640, 320))  # 建立繪圖視窗
+pygame.display.set_caption("基本架構")  # 繪圖視窗標題
 
-background = pygame.Surface(screen.get_size())  #建立畫布
+background = pygame.Surface(screen.get_size())  # 建立畫布
 background = background.convert()
-background.fill((255,255,255))  #畫布為白色
-screen.blit(background, (0,0))  #在繪圖視窗繪製畫布
+background.fill((255, 255, 255))  # 畫布為白色
+screen.blit(background, (0, 0))  # 在繪圖視窗繪製畫布
 
-pygame.display.update()  #更新繪圖視窗
+pygame.display.update()  # 更新繪圖視窗
 running = True
-while running:  #無窮迴圈
+while running:  # 無窮迴圈
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:  #使用者按關閉鈕
+        if event.type == pygame.QUIT:  # 使用者按關閉鈕
             running = False
-pygame.quit()  #關閉繪圖視窗
+pygame.quit()  # 關閉繪圖視窗
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1009,14 +1009,14 @@ pygame.display.set_caption("基本繪圖")
 
 background = pygame.Surface(screen.get_size())
 background = background.convert()
-background.fill((255,255,255))
+background.fill((255, 255, 255))
 
-pygame.draw.circle(background, (0,0,0), (150,150), 130, 4)
-pygame.draw.circle(background, (0,0,255), (100,120), 25, 0)
-pygame.draw.circle(background, (0,0,255), (200,120), 25, 0)
-pygame.draw.ellipse(background, (255,0,255),[135, 130, 30, 80], 0)
-pygame.draw.arc(background, (255,0,0), [80, 130, 150, 120], 3.4, 6.1, 9)
-screen.blit(background, (0,0))
+pygame.draw.circle(background, (0, 0, 0), (150, 150), 130, 4)
+pygame.draw.circle(background, (0, 0, 255), (100, 120), 25, 0)
+pygame.draw.circle(background, (0, 0, 255), (200, 120), 25, 0)
+pygame.draw.ellipse(background, (255, 0, 255), [135, 130, 30, 80], 0)
+pygame.draw.arc(background, (255, 0, 0), [80, 130, 150, 120], 3.4, 6.1, 9)
+screen.blit(background, (0, 0))
 
 pygame.display.update()
 
@@ -1029,7 +1029,6 @@ while running:
 pygame.quit()
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 import pygame
@@ -1040,25 +1039,23 @@ pygame.display.set_caption("動畫基本架構")
 
 background = pygame.Surface(screen.get_size())
 background = background.convert()
-background.fill((255,255,255))
+background.fill((255, 255, 255))
 
-clock = pygame.time.Clock()  #建立時間元件
+clock = pygame.time.Clock()  # 建立時間元件
 
 running = True
 while running:
-    clock.tick(30)  #每秒執行30次
+    clock.tick(30)  # 每秒執行30次
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    screen.blit(background, (0,0))  #清除繪圖視窗
+    screen.blit(background, (0, 0))  # 清除繪圖視窗
 
-    pygame.display.update()  #更新繪圖視窗
-pygame.quit()  #關閉繪圖視窗
+    pygame.display.update()  # 更新繪圖視窗
+pygame.quit()  # 關閉繪圖視窗
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 """
@@ -1082,7 +1079,7 @@ print("程式執行完畢！")
 """
 
 
-print('pygame 讀取 鍵盤輸入')
+print("pygame 讀取 鍵盤輸入")
 
 pygame.init()
 
@@ -1094,13 +1091,13 @@ while not done:
     keys = pygame.key.get_pressed()
 
     if keys[pygame.K_1]:
-        print('你按了鍵盤 1')
+        print("你按了鍵盤 1")
 
     if keys[pygame.K_2]:
-        print('你按了鍵盤 2')
+        print("你按了鍵盤 2")
 
     if keys[pygame.K_3]:
-        print('你按了鍵盤 3')
+        print("你按了鍵盤 3")
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -1108,15 +1105,8 @@ while not done:
 pygame.quit()
 
 
-        
-
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-        
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1124,3 +1114,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個

@@ -45,6 +45,7 @@ def cvshow(title, image):
     pass
 
 
+# OpenCV_顏色共同
 RED = (0, 0, 255)  # B G R
 GREEN = (0, 255, 0)  # B G R
 BLUE = (255, 0, 0)  # B G R

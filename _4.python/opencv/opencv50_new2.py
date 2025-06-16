@@ -70,12 +70,15 @@ print("------------------------------------------------------------")  # 60個
 win_name = "mypicture"  # 窗口名称
 # cv2.WINDOW_NORMAL:可以手动调整窗口大小
 cv2.namedWindow(win_name, cv2.WINDOW_NORMAL)
+
 img = cv2.imread(filename, 0)  # 0 黑白图片；1 原色图片
+
 cv2.imshow(win_name, img)  # 显示图片
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()  # 销毁创建的对象
 
-cv2.imwrite("tmp_picture1.mono.pgm", img)
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -84,7 +87,9 @@ print("------------------------------------------------------------")  # 60個
 
 # 读取图片
 img = cv2.imread("tmp_picture1.mono.pgm", 0)  # 黑白图片
+
 plt.imshow(img, cmap="gray", interpolation="bicubic")
+
 plt.xticks([]), plt.yticks([])  # 隐藏 X Y 坐标
 show()
 
@@ -98,7 +103,9 @@ img = np.zeros((512, 512, 3))
 # Draw a diagonal blue line with thickness of 5 px
 # 起点:(0,0),终点:(511,511)，颜色:( 255,0,0)，宽度:2
 cv2.line(img, (0, 0), (511, 511), (255, 0, 0), 2)
+
 cv2.imshow("image", img)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -117,7 +124,9 @@ cv2.polylines(img, [pts], True, (0, 255, 255), 1)
 # 写入文字
 font = cv2.FONT_HERSHEY_SIMPLEX
 cv2.putText(img, "OpenCV", (10, 500), font, 4, (255, 255, 255), 2)
+
 cv2.imshow("image", img)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -133,7 +142,9 @@ cv2.circle(img, (255, 150), 60, (0, 255, 255), 2)  # 圆
 # 中心点的位置(255, 255), 短半径50,长半径100
 # 360表示整个椭圆；颜色 0, 255, 255；像素2；
 cv2.ellipse(img, (255, 350), (100, 50), 0, 0, 360, (255, 255, 0), 2)  # 椭圆
+
 cv2.imshow("image", img)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -165,10 +176,9 @@ for x, y, w, h in faces:
     roi_color = img[y : y + h, x : x + w]
 
 cv2.imshow("img", img)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
-# cv2.imwrite("_tmp_face1.jpg", img)  # 存圖
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -193,10 +203,9 @@ for x, y, w, h in faces:
     roi_color = img[y : y + h, x : x + w]
 
 cv2.imshow("img", img)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
-# cv2.imwrite("_tmp_face2.jpg", img)  # 存圖
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -235,6 +244,7 @@ print("某些塗為白色")
 
 for y in range(0, height, 20):
     image[y : y + 10, :] = 255  # 白色厚度是10
+
 cv2.imshow("image", image)
 
 cv2.waitKey()
@@ -249,6 +259,7 @@ width, height = 640, 480  # 影像寬, 影像高
 # 建立BGR影像陣列
 image = np.zeros((height, width, 3), np.uint8)
 image[:, :, 0] = 255  # 建立 B 通道像素值
+
 cv2.imshow("image", image)
 
 cv2.waitKey()
@@ -310,6 +321,7 @@ image = np.zeros((height, width, 3), np.uint8)
 image[0:50, :, 0] = 255  # blue
 image[50:100, :, 1] = 255  # green
 image[100:150, :, 2] = 255  # red
+
 cv2.imshow("image", image)
 
 cv2.waitKey()
@@ -349,6 +361,7 @@ width, height = 640, 480  # 影像寬, 影像高
 
 # 建立GRAY影像陣列, 黑色
 image = np.zeros((height, width), np.uint8)
+
 cv2.imshow("image", image)
 
 cv2.waitKey()
@@ -357,6 +370,7 @@ cv2.destroyAllWindows()
 # 建立GRAY影像陣列, 白色
 image = np.zeros((height, width), np.uint8)
 image.fill(255)  # 元素內容改為白色 255
+
 cv2.imshow("image", image)
 
 cv2.waitKey()
@@ -364,6 +378,7 @@ cv2.destroyAllWindows()
 
 # 建立GRAY影像陣列, 白色
 image = np.ones((height, width), np.uint8) * 255
+
 cv2.imshow("image", image)
 
 cv2.waitKey()
@@ -373,6 +388,7 @@ print("------------------------------------------------------------")  # 60個
 
 src = np.zeros([200, 400], np.uint8)  # 建立影像
 src[50:150, 100:300] = 255  # 在影像內建立遮罩
+
 cv2.imshow("Src", src)
 
 cv2.waitKey()
@@ -411,14 +427,6 @@ if ret_value == ord("Q") or ret_value == ord("q"):
 
 print("------------------------------------------------------------")  # 60個
 """
-img = cv2.imread(filename1)
-cv2.imshow("Peony", img)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
 # 設定 cv 視窗
 cv2.namedWindow("Peony1")  # 使用預設
 cv2.namedWindow("Peony2", cv2.WINDOW_NORMAL)  # 可以調整大小
@@ -813,3 +821,11 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
+
+# cv2.imwrite("_tmp_face1.jpg", img)  # 存圖
+
+
+# 存成pgm檔
+cv2.imwrite("tmp_picture1.mono.pgm", img)
+
+# cv2.imwrite("_tmp_face2.jpg", img)  # 存圖

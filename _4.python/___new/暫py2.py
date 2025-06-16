@@ -172,14 +172,6 @@ r = requests.get(url)
 r.encoding = 'utf-8'
 html = BeautifulSoup(r.text, 'html.parser')
 
-
-
-
-
-------------------------------------------------------------
-
-
-
 ------------------------------------------------------------
 
 用 hist 與 boxplot畫 常態分佈
@@ -252,20 +244,13 @@ hist_kws,kde_kws,rug_kws,fit_kws参数接收字典类型，可以自行定义更
 
 norm_hist：若为True，则直方图高度显示密度而非计数（含有KDE图形中默认为True）
 
-
-
-
 ------------------------------------------------------------
 
-
 取子字符串有两种方法，使用[]索引或者切片运算法[:]，这两个方法使用面非常广
-
-
 
 bunshue <noreply@github.com>
 
 RE: [bunshue/vcs] fb02f3: david modify vcs code
-
 
 生策會 <ibmi@ibmi.org.tw>
 
@@ -310,7 +295,7 @@ Qtime
 
 安裝驗證(IQ)、操作驗證(OQ)、性能驗證(PQ)
 
-距今多久程式
+距今多久程式 或許 存成csv檔 用python處理 後用vcs表示出來
 
 晴空匯火災	2024/5/27
 
@@ -527,89 +512,6 @@ img_url = "https://upload.wikimedia.org/wikipedia/commons/8/8b/%E8%A5%BF%E8%9E%B
 
 -----
 
-import shutil
-    
-image_foldername = 'tmp_images'
-filename = 'tmp_countryfood2222.html'
-print('存檔檔案 :', filename)
-if os.path.exists(filename):  
-    os.remove(filename)     # 若有 tmp_countryfood.html 網頁即刪除
-if os.path.exists(image_foldername): 
-    shutil.rmtree(image_foldername)    # 若有images目錄即刪除
-else:
-    os.mkdir(image_foldername)        # 若無images目錄即刪除
-
-
-    #從網址取得檔名
-    imgUrl=col['PicURL']
-    print(cnt)
-    #網址用'/'分隔取最後一筆資料 => *.jpg
-    filename = imgUrl.split('/')[-1] #擷取圖片名稱
-    print('圖片網址：', imgUrl)
-    print('圖片檔名：', filename)
-
-    #網址用'/'分隔取最後一筆資料 => *.jpg
-    picName=row['PicURL'].split('/')[-1]
-    print('圖片網址：', row['PicURL'])
-    print('圖片檔名：', picName)
-    
-
-        #建立取得圖片的 response 物件
-        response=requests.get(imgUrl) 
-        f=open((image_foldername+'/'+filename),'wb')    #開啟圖片檔案                    
-        f.write(response.content)  # 將response.content二進位內容寫入檔案
-        print(filename,'下載完畢')
-
-
-
-filename = 'aaaaa.html'
-
-print("%s 網頁建置完成" % (filename))
-
-------------------------------------------------------------
-
-
-def checkpassword(password):
-    #檢查密碼長度必須是5到10個字元
-    length = len(password)  # 密碼長度
-    if length < 5:  # 密碼長度不足
-        raise Exception("密碼長度不足")
-    if length > 10:  # 密碼長度太長
-        raise Exception("密碼長度太長")
-    print("密碼長度正確")
-
-print('測試 raise Exception')
-
-password = "lion-mouse"
-
-try:
-    checkpassword(password)
-except Exception as err:
-    print("密碼檢查異常發生: ", str(err))
-
-
-------------------------------------------------------------
-
-
-def passWord(pwd):
-    # 檢查密碼長度必須是5到8個字元
-    pwdlen = len(pwd)  # 密碼長度
-    if pwdlen < 5:  # 密碼長度不足
-        raise Exception("密碼長度不足")
-    if pwdlen > 8:  # 密碼長度太長
-        raise Exception("密碼長度太長")
-    print("密碼長度正確")
-
-
-for pwd in ("aaabbbccc", "aaa", "aaabbb"):  # 測試系列密碼值
-    try:
-        passWord(pwd)
-    except Exception as err:
-        print("密碼長度檢查異常發生: ", str(err))
-
-
-
-
 
 
 python套件分類
@@ -762,61 +664,9 @@ python+webcam+win7 fail
 
 
 
-
 ------------------------------------------------------------
 
 
-
-
-------------------------------------------------------------
-
-
-
-------------------------------------------------------------
-
-
-
-------------------------------------------------------------
-
-
-pygame.mixer.music.rewind() #重新啟動音樂
-#將當前音樂的播放重新設置為一開始
- 
-pygame.mixer.music.stop() #停止音樂播放
-
-
-pygame.mixer.music.pause() #暫時停止音樂播放
-pygame.mixer.music.unpause()   #恢復暫停音樂
-
-
-print('音量0.5')
-pygame.mixer.music.set_volume(0.5)  #調節音樂音量
-#設置音樂播放的音量。值參數在0.0和1.0之間。當加載新音樂時，音量就會重置
-time.sleep(30)
-print('音量1')
-pygame.mixer.music.set_volume(1)
-time.sleep(30)
-print('音量0.3')
-pygame.mixer.music.set_volume(0.3)
- 
-
-b=pygame.mixer.music.get_volume() #返回當前音量
-#值將在0.0和1.0之間
- 
-
-b=pygame.mixer.music.get_busy()   #檢查音樂流是否在播放
-#當音樂流在積極播放時，就會返回True。當音樂空閑時，返回False
-#暫停相當于在播放，返回True
- 
-
-
-
-
-b=pygame.mixer.get_init()  #測試混音器是否初始化
-#如果混音器已初始化，則返回正在使用的播放參數。如果混音器尚未初始化，則返回None
-#get_init() -> (frequency, format, channels)
-#(22050, -16, 2)
- 
 
 ------------------------------------------------------------
 

@@ -18,6 +18,9 @@
 
 ----------------一句話說明python模組----------------
 
+pickle --- Python 物件序列化
+
+
 SQLAlchemy是為Python程式語言提供的開源SQL工具包及對象關係對映器（ORM），是在MIT許可證下發行的軟體。
 
 
@@ -688,22 +691,12 @@ in	判斷資料是否在串列內
 not in	判斷資料是否不在串列內
 
 
-
 Surface.blit()		重新繪製一個圖像
 Surface.convert()	將Surface物件作複製, 副本可以重設像素
 Surface.convert_alpha()	將Surface物件作複製, 適用於去背的圖片
 Surface.fill()		以單色填滿Surface物件
 Surface.get_size()	取得Surface物件的大小
 Surface.get_rect()	取得Surface物件的矩形區域
-
-pygame之畫圖
-draw.line()
-draw.rect()
-draw.polygon()
-draw.circle()
-draw.ellipse()
-draw.arc()
-
 
 
 tkinter除了本身的模組外 還有兩個擴充的模組
@@ -3377,7 +3370,6 @@ windows command line下:
 
 >pip list	//查看目前有安裝的Python套件
 >pip3 install matplotlib	//安裝matplotlib
->pip3 install pygame		//安裝pygame
 
 升級pip
 python -m pip install -U pip
@@ -3411,11 +3403,7 @@ C:\Users\david>pip3 --version
 安裝 matplotlib
 C:\Users\david>pip install matplotlib
 
-安裝 pygame
-
-C:\Users\david>pip install pygame
-
-安裝 pygame requests
+安裝 requests
 C:\Users\david>pip install requests
 C:\Users\david>pip install BeautifulSoup	有問題 kilo/sugar不可用
 C:\Users\david>pip install beautifulsoup4	 kilo/sugar 可用

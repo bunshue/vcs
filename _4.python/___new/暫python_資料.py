@@ -687,7 +687,7 @@ L : 为灰度图像，每个像素用8个bit表示，0表示黑，255表示白�
 
 
 ----------------Python Reserved 暫存 候用 ST----------------
-pygame
+
 pySimpleGUI
 turtle
 

@@ -77,8 +77,7 @@ markeredgecolor：設定標記邊緣顏色。
 刻度和網格
 plt.xticks() 和 plt.yticks()：設定刻度標籤。
 plt.grid()：顯示或隱藏網格線。
-圖形大小和分辨率
-plt.figure(figsize=(width, height), dpi=dpi)：設定圖形大小和分辨率。
+
 """
 
 """
@@ -189,8 +188,6 @@ fig.autofmt_xdate()  # 預設最佳化角度旋轉
 fig.autofmt_xdate(rotation=60)  # 日期旋轉60度
 
 """
-
-#plt.figure(figsize=(7,2),facecolor='yellow')
 
 ------------------------------------------------------------
 
@@ -452,7 +449,6 @@ print('---- plt.figure ST-------------------------------------------------------
 # 建立第一張圖，若直接 plt.plot 隱含自動建立 figure 並建立 subplot(111)
 plt.figure(1)
 
-
 # plt.figure()參數
 
 plt.figure()  #開新圖片
@@ -461,6 +457,10 @@ plt.figure(figsize=[10,5])
 plt.figure(figsize=(10,10))    # 改變圖表尺寸 單位是英吋
 plt.figure(frameon=False)
 plt.figure(num = '股票分析', figsize=(10,10)) # 設定圖表區寬高
+圖形大小和分辨率
+plt.figure(figsize=(width, height), dpi=dpi)：設定圖形大小和分辨率。
+#plt.figure(figsize=(7,2),facecolor='yellow')
+
 
 print('---- plt.figure SP--------------------------------------------------------')	#60個
 

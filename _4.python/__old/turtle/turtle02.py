@@ -4,6 +4,7 @@ import sys
 import time
 import math
 import random
+
 import turtle
 
 print("------------------------------------------------------------")  # 60個
@@ -374,70 +375,6 @@ turtle.Screen().clear()
 """
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-import pygame as pg
-
-pg.init()
-screen = pg.display.set_mode((640, 480))
-pg.display.set_caption("Richard's pygame!")
-bk = pg.Surface(screen.get_size())
-bk.fill((255, 255, 255))
-screen.blit(bk, (0, 0))
-pg.display.update()
-quit = False
-while not quit:
-    for event in pg.event.get():
-        if event.type == pg.QUIT:
-            quit = True
-pg.quit()
-
-print("------------------------------------------------------------")  # 60個
-
-import pygame as pg
-
-pg.init()
-screen = pg.display.set_mode((640, 480))
-pg.display.set_caption("Richard's pygame!")
-bk = pg.Surface(screen.get_size())
-bk.fill((255, 255, 255))
-pg.draw.rect(bk, (255, 0, 0), (100, 100, 300, 300), 2)
-screen.blit(bk, (0, 0))
-pg.display.update()
-quit = False
-while not quit:
-    for event in pg.event.get():
-        if event.type == pg.QUIT:
-            quit = True
-pg.quit()
-
-print("------------------------------------------------------------")  # 60個
-
-import pygame as pg
-
-pg.init()
-screen = pg.display.set_mode((640, 480))
-pg.display.set_caption("Richard's pygame!")
-bk = pg.Surface(screen.get_size())
-bk.fill((255, 255, 255))
-lines = list()
-for th in range(0, 361):
-    y = 250 - 200 * math.sin(th * math.pi / 180)
-    lines.append((th + 140, y))
-pg.draw.lines(bk, (0, 0, 255), False, lines, 2)
-
-screen.blit(bk, (0, 0))
-pg.display.update()
-quit = False
-while not quit:
-    for event in pg.event.get():
-        if event.type == pg.QUIT:
-            quit = True
-pg.quit()
-
 print("------------------------------------------------------------")  # 60個
 
 print("滑鼠點擊離開視窗")
@@ -447,3 +384,4 @@ print("------------------------------------------------------------")  # 60個
 
 t = turtle.Pen()
 t.screen.bgcolor("blue")  # 設定畫面的背景色
+

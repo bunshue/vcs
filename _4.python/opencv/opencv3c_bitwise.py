@@ -114,6 +114,31 @@ plt.tight_layout()
 
 show()
 
+
+print("------------------------------------------------------------")  # 60個
+
+image = cv2.imread(filename2)
+
+# 创建掩码 - 假设我们只关心图像的中心区域
+height, width = image.shape[:2]
+mask = np.zeros(image.shape[:2], np.uint8)
+mask[height // 4 : 3 * height // 4, width // 4 : 3 * width // 4] = 255
+
+# 应用掩码
+masked_image = cv2.bitwise_and(image, image, mask=mask)
+
+# 显示结果
+cv2.imshow("Original", image)
+cv2.imshow("Mask", mask)
+cv2.imshow("Masked Image", masked_image)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 # cv2.bitwise_xor() ST
 print("------------------------------------------------------------")  # 60個
