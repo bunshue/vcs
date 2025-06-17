@@ -143,7 +143,11 @@ from matplotlib.collections import LineCollection
 
 from scipy.spatial.distance import squareform, pdist
 
-vw = None
+# 建立視訊編碼 fourcc
+fourcc = cv2.VideoWriter_fourcc(*"MPEG")
+out = None # 建立影像寫入器 out
+video_fps = 25
+
 N = 100
 x, y = np.random.uniform(-2, 2, (2, N))
 vx, vy = np.random.randn(2, N) * 0.01
@@ -158,6 +162,8 @@ fig.canvas.draw()
 ax.axis("off")
 canvas_map = np.asarray(fig.canvas.renderer._renderer)[:, :, 2::-1]
 arrs = []
+
+# 300張圖 
 for i in range(300):
     x += vx
     y += vy
@@ -176,11 +182,12 @@ for i in range(300):
     length = ((lines[:, 1, :] - lines[:, 0, :])**2).sum(axis=-1)**0.5
     lc.set_array(length)
     fig.canvas.draw()
-    if vw is None:
-        vw = cv2.VideoWriter("tmp_matplotlib_movie.avi", cv2.VideoWriter_fourcc(*"MPEG"), 25, fig.canvas.get_width_height())
-    vw.write(canvas_map)
+    if out is None:
+        # 建立影像寫入器 out
+        out = cv2.VideoWriter("tmp_matplotlib_movie.avi", fourcc, video_fps, fig.canvas.get_width_height())
+    out.write(canvas_map)
     
-vw.release()
+out.release()
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

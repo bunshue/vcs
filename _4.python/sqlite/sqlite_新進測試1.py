@@ -1788,5 +1788,69 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------")  # 30個
 
 
+"""
+
+CREATE TABLE "Orders" 
+(
+  "Id" INTEGER PRIMARY KEY, 
+  "CustomerId" VARCHAR(8000) NULL, 
+  "EmployeesId" INTEGER NOT NULL, 
+  "orderdate" VARCHAR(8000) NULL, 
+  "RequiredDate" VARCHAR(8000) NULL, 
+  "ShippedDate" VARCHAR(8000) NULL, 
+  "ShipVia" INTEGER NULL, 
+  "Freight" DECIMAL NOT NULL, 
+  "ShipName" VARCHAR(8000) NULL, 
+  "ShipAddress" VARCHAR(8000) NULL, 
+  "ShipCity" VARCHAR(8000) NULL, 
+  "ShipRegion" VARCHAR(8000) NULL, 
+  "ShipPostalCode" VARCHAR(8000) NULL, 
+  "ShipCountry" VARCHAR(8000) NULL 
+);
+
+CREATE TABLE "Orders" 
+(
+  "Id" INTEGER PRIMARY KEY, 
+  "CustomerId" VARCHAR(8000) NULL, 
+  "EmployeesId" INTEGER NOT NULL, 
+  "orderdate" VARCHAR(8000) NULL, 
+  "RequiredDate" VARCHAR(8000) NULL, 
+  "ShippedDate" VARCHAR(8000) NULL, 
+  "ShipVia" INTEGER NULL, 
+  "Freight" DECIMAL NOT NULL, 
+  "ShipName" VARCHAR(8000) NULL, 
+  "ShipAddress" VARCHAR(8000) NULL, 
+  "ShipCity" VARCHAR(8000) NULL, 
+  "ShipRegion" VARCHAR(8000) NULL, 
+  "ShipPostalCode" VARCHAR(8000) NULL, 
+  "ShipCountry" VARCHAR(8000) NULL 
+);
+CREATE TABLE "OrderDetails" 
+(
+  "Id" VARCHAR(8000) PRIMARY KEY, 
+  "OrderId" INTEGER NOT NULL, 
+  "ProductId" INTEGER NOT NULL, 
+  "UnitPrice" DECIMAL NOT NULL, 
+  "Quantity" INTEGER NOT NULL, 
+  "Discount" DOUBLE NOT NULL 
+);
+CREATE TABLE "Customers" 
+(
+  "Id" VARCHAR(8000) PRIMARY KEY, 
+  "CompanyName" VARCHAR(8000) NULL, 
+  "ContactName" VARCHAR(8000) NULL, 
+  "ContactTitle" VARCHAR(8000) NULL, 
+  "Address" VARCHAR(8000) NULL, 
+  "City" VARCHAR(8000) NULL, 
+  "Region" VARCHAR(8000) NULL, 
+  "PostalCode" VARCHAR(8000) NULL, 
+  "Country" VARCHAR(8000) NULL, 
+  "Phone" VARCHAR(8000) NULL, 
+  "Fax" VARCHAR(8000) NULL 
+);
+
+
+
+"""
 
 

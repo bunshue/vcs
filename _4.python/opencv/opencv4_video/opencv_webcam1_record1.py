@@ -68,7 +68,7 @@ ENCODING_TYPE = 'MJPG'  # 編碼器
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("最簡錄影, 一直錄, 按 ESC 離開")
 
 if MODE == MODE_3:  # 縮時錄影
@@ -196,6 +196,7 @@ while True:
         )
         # 建立視訊編碼 fourcc
         fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)
+        # 建立影像寫入器 out
         out = cv2.VideoWriter(record_filename, fourcc, fps, (width, height))
 
     k = cv2.waitKey(1)  # 等待按鍵輸入
@@ -211,10 +212,30 @@ print("\n停止錄影時間 :", now)
 record_time_elapsed = time.time() - record_time_st
 print("錄影時間 :", int(record_time_elapsed), "秒")
 print("存檔檔名 :", record_filename)
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+cap = cv2.VideoCapture(1)
+
+# 建立視訊編碼 fourcc
+fourcc = cv2.VideoWriter_fourcc(*"XVID")  # MPEG-4
+
+# 建立影像寫入器 out
+out = cv2.VideoWriter("tmp_movie_a.avi", fourcc, 20.0, (640, 480))
+
+while cap.isOpened():
+    ret, frame = cap.read()
+    if ret:
+        out.write(frame)  # 寫入影片物件
+        cv2.imshow("frame", frame)  # 顯示攝影鏡頭的影像
+    k = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
+    if k == ESC:  # 按 ESC 鍵, 結束
+        break
+
+cap.release()
+out.release()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -278,7 +299,28 @@ img_2 = cv2.flip(img_1, 0)             # 上下翻轉
 
 
 # 若要錄成黑白影片 要 加上 isColor=False 參數設定
+# 建立影像寫入器 out
 out = cv2.VideoWriter(record_filename, fourcc, fps, (width, height), isColor=False)
 # 且
 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉換成灰階
 out.write(gray)  # 將圖像寫入影片
+
+
+
+"""
+
+#留下錄影部分 比較之
+
+record_filename = 'tmp_screen_recording1_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.avi'
+
+#建立影像寫入器 out
+out = cv2.VideoWriter(record_filename, cv2.VideoWriter_fourcc(*'XVID'), 1, ImageGrab.grab().size)  # 幀率為32，可以調節
+
+        for _ in range(10)
+            im = ImageGrab.grab()
+            imm = cv2.cvtColor(np.array(im), cv2.COLOR_RGB2BGR)
+            out.write(imm)
+
+        out.release()
+        cv2.destroyAllWindows()
+"""

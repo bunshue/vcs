@@ -60,7 +60,7 @@ infolder = "C:/_git/vcs/_1.data/______test_files1/_video"
 extlist = ["*.mp4", "*.mov"]
 
 
-# 【函數: 取得影片檔的播放時間】
+# 取得影片檔的播放時間
 def getplaytime(readfile):
     try:
         cap = cv2.VideoCapture(readfile)  # 載入檔案
@@ -73,7 +73,7 @@ def getplaytime(readfile):
         return 0, readfile + "：程式執行失敗。"
 
 
-# 【函數: 搜尋資料夾與子資料夾的影片檔】
+# 搜尋資料夾與子資料夾的影片檔
 def findfiles(infolder):
     totalsec = 0
     msg = ""
@@ -90,7 +90,6 @@ def findfiles(infolder):
     return msg
 
 
-# 【執行函數】
 msg = findfiles(infolder)
 print(msg)
 
@@ -195,9 +194,7 @@ video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
 # video_filename = "D:\______大整理/Carreno Busta vs Kei Nishikori Final Set Tie Break HD.mp4"
 
 cap = cv2.VideoCapture(video_filename)
-
 fgbg = cv2.createBackgroundSubtractorMOG2()
-
 element = cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3))
 
 while True:
@@ -207,13 +204,9 @@ while True:
         break
 
     fgmask = fgbg.apply(frame)
-
     fgmask = cv2.morphologyEx(fgmask, cv2.MORPH_OPEN, element)
-
     foreground = cv2.bitwise_and(frame, frame, mask=fgmask)
-
     cv2.imshow("Foreground Detection", foreground)
-
     if cv2.waitKey(1) & 0xFF == ord("q"):
         break
 
@@ -311,6 +304,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+
 cap = cv2.VideoCapture(video_filename)  # 開啟影片
 
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))  # 寬度
@@ -320,14 +315,16 @@ video_fps = cap.get(cv2.CAP_PROP_FPS)  # 速度
 # 建立裁剪影片物件
 fourcc = cv2.VideoWriter_fourcc(*"I420")  # 編碼
 
-new_video = cv2.VideoWriter("tmp_movie_b.avi", fourcc, video_fps, (width, height))
+# 建立影像寫入器 out
+out = cv2.VideoWriter("tmp_movie_b.avi", fourcc, video_fps, (width, height))
 counter = video_fps * 5  # 影片長度
 while cap.isOpened() and counter >= 0:
     ret, frame = cap.read()  # 讀取影片檔案
     if ret:
-        new_video.write(frame)  # 寫入新影片
+        out.write(frame)  # 寫入新影片
         counter -= 1  # 幀數減 1
 
+out.release()
 cap.release()
 cv2.destroyAllWindows()
 

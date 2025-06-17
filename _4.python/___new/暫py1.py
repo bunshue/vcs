@@ -1,3 +1,17 @@
+"""
+一句話
+colab
+
+
+"""
+
+
+------------------------------------------------------------
+
+
+
+------------------------------------------------------------
+
 
 
 
@@ -7,21 +21,181 @@
 
 ------------------------------------------------------------
 
-
-
-
-------------------------------------------------------------
-
-
-
-------------------------------------------------------------
-
-----------------一句話說明python模組----------------
+----------------一句話說明python模組 ST----------------
 
 pickle --- Python 物件序列化
 
+Selenium	瀏覽器自動化操操作
+PyAutoGUI	鍵盤滑鼠自動化
+gradio		神奇網頁互動介面
+schedule	定時執行任務
+tqdm		進度條
+cnlunardate	農曆日期
+
+
+selenium模組 : 瀏覽器自動化操作
+PyAutoGUI模組 : 鍵盤滑鼠自動化
+
+
+開放原碼專案名稱	簡述
+TensorFlow		機器學習框架
+OpenCV			電腦視覺工具
+PyTorch			機器學習函式庫
+Keras			機器學習函式庫
+Stable Diffusion	文字轉圖像的擴散模型
+DeepFaceLab		比DeepFaake更強大的AI偽造技術
+Theano			函式庫與最佳化編譯器
+YOLOv7			即時物件偵測模型
+
+
+
 
 SQLAlchemy是為Python程式語言提供的開源SQL工具包及對象關係對映器（ORM），是在MIT許可證下發行的軟體。
+
+
+----------------一句話說明python模組 SP----------------
+
+
+----------------Colab ST----------------
+
+colab執行Shell命令 !
+!pip install pytube
+!pip list
+!pwd
+!ls
+
+魔術指令 %
+%lsmagic	顯示所有可用的魔術指令
+#cd
+## writefile filename 寫檔
+#run filename
+ 
+jupyter 命令
+!cat /proc/cpuinfo
+!bash
+
+
+
+
+
+import os
+from google.colab import drive
+drive.mount("/content/drive")
+
+# 此時在目錄/content/drive下
+filenames = os.listdir()  # 轉出一層, 指定目錄, 若無參數, 就是當前目錄
+print("1轉出一層(資料夾+檔案)\n", filenames)
+print("當前目錄下共有 :", len(filenames), "個項目(資料夾+檔案)")
+
+# 至我的雲端硬碟根目錄MyDrive
+os.chdir("/content/drive/MyDrive")  # 使用 Colab 要換路徑使用，本機環境可以刪除
+filenames = os.listdir()  # 轉出一層, 指定目錄, 若無參數, 就是當前目錄
+print("2轉出一層(資料夾+檔案)\n", filenames)
+print("當前目錄下共有 :", len(filenames), "個項目(資料夾+檔案)")
+
+os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
+filenames = os.listdir()  # 轉出一層, 指定目錄, 若無參數, 就是當前目錄
+print("3轉出一層(資料夾+檔案)\n", filenames)
+print("當前目錄下共有 :", len(filenames), "個項目(資料夾+檔案)")
+
+os.chdir("/content/drive/MyDrive/CSV")  # 使用 Colab 要換路徑使用，本機環境可以刪除
+filenames = os.listdir()  # 轉出一層, 指定目錄, 若無參數, 就是當前目錄
+print("4轉出一層(資料夾+檔案)\n", filenames)
+print("當前目錄下共有 :", len(filenames), "個項目(資料夾+檔案)")
+
+
+
+colab通用之
+
+一開始的ls
+
+寫檔案是寫在哪裡? 會永久留存嗎?
+
+
+
+檔案/在GitHub中儲存副本 / 或使用colab編輯GitHub上的檔案，按儲存
+
+存放區
+bunshue/vcs
+
+檔案路徑
+_4.python/ipynb/ddd0529.ipynb
+
+記得打勾加入Colab連結
+
+------------------------------
+
+編輯/筆記本設定/選GPU
+
+------------------------------
+
+"""
+GPU
+1.安裝: pip install nvidia-ml-py3
+2.#常用的指令：
+import pynvml
+pynvml.nvmlInit()
+# 這裏的0是GPU id
+handle = pynvml.nvmlDeviceGetHandleByIndex(0)
+meminfo = pynvml.nvmlDeviceGetMemoryInfo(handle)
+print(meminfo.used)
+3. 指令參考網址:https://docs.nvidia.com/deploy/nvml-api/group__nvmlDeviceQueries.html#group__nvmlDeviceQueries
+"""
+
+------------------------------------------------------------
+
+#!cp  /content/db.sqlite3          "/content/drive/MyDrive/Colab Notebooks/package/tchinese_db.sqlite3"
+#!cp "/content/drive/MyDrive/Colab Notebooks/package/tchinese_db.sqlite3" /content/db.sqlite3
+
+------------------------------------------------------------
+
+#Colab資料夾設定方法
+!pip install google.colab 
+!pip install google.colab
+!pip install google.colab
+
+"""
+!mkdir -p /drive
+#umount /drive
+!mount --bind /content/drive/My\ Drive /drive
+!mkdir -p /drive/ngrok-ssh
+!mkdir -p ~/.ssh
+
+----
+
+!mkdir -p /drive/ngrok-ssh
+%cd /drive/ngrok-ssh
+!wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -O ngrok-stable-linux-amd64.zip
+!unzip -u ngrok-stable-linux-amd64.zip
+!cp /drive/ngrok-ssh/ngrok /ngrok
+!chmod +x /ngrok
+"""
+
+------------------------------------------------------------
+
+"""
+!mkdir -p /drive
+!mount --bind /content/drive/My\ Drive /drive
+!mkdir -p /drive/ngrok-ssh
+!mkdir -p ~/.ssh
+
+------------------------------------------------------------
+
+!mkdir -p /drive/ngrok-ssh
+%cd /drive/ngrok-ssh
+!wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -O ngrok-stable-linux-amd64.zip
+!unzip -u ngrok-stable-linux-amd64.zip
+!cp /drive/ngrok-ssh/ngrok /ngrok
+!chmod +x /ngrok
+"""
+
+------------------------------------------------------------
+
+
+----------------Colab SP----------------
+
+
+
 
 
 python 之 ''' 與  ''' 內, 不可以存在 \
@@ -146,11 +320,6 @@ CRUD (新增:Create , 讀取:Read, 更新: Update, 刪除:Delete)
 改正（Update，意為「更新」）
 在電腦程式語言中是一連串常見的動作行為
 而其行為通常是為了針對某個特定資源所作出的舉動（例如：建立資料、讀取資料等）
-
-
-selenium模組 : 瀏覽器自動化操作
-PyAutoGUI模組 : 鍵盤滑鼠自動化
-
 
 莫煩 python
 https://mofanpy.com/

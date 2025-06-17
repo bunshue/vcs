@@ -25,7 +25,7 @@ x2 = x1 + captchaid.size['width']
 y2 = y1 + captchaid.size['height']
 image1 = Image.open('tem.png')  #讀取螢幕圖形
 image2 = image1.crop((x1, y1, x2, y2))  #擷取驗證碼圖形
-image2.save('captcha.png')  #圖形存檔
+image2.save('tmp_captcha.png')  #圖形存檔
 simshow(image2)  #顯示圖形
 captchatext = input('輸入驗證碼：')  
 

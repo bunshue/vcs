@@ -1103,6 +1103,7 @@
             this.button75.Name = "button75";
             this.button75.Size = new System.Drawing.Size(60, 60);
             this.button75.TabIndex = 79;
+            this.button75.Text = "做mask";
             this.button75.UseVisualStyleBackColor = true;
             this.button75.Click += new System.EventHandler(this.button75_Click);
             // 

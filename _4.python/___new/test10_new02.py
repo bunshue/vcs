@@ -417,6 +417,9 @@ print(__doc__ % globals())  #__doc__的內容有%的, 用變數名稱替換
 print()
 print(__doc__)  #有%不替換
 
+
+
+
 print("------------------------------------------------------------")  # 60個
 
 def lll(dirname):
@@ -628,9 +631,11 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-BMI = 12.345
+BMI = 12.3456
 print(f"{BMI = :5.2f} 體重正常")
-    
+
+print("BMI =", format(BMI, ".2f"), "體重正常")
+
 r1 = 123.456789
 r2 = 222.334455 
 print(f"{r1 = :6.4f},    {r2 = :6.4f}")
@@ -1635,20 +1640,6 @@ else:
 
 ------------------------------------------------------------
 
-#留下錄影部分 比較之
-
-record_filename = 'tmp_screen_recording1_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.avi'
-
-#建立影像寫入器 out
-out = cv2.VideoWriter(record_filename, cv2.VideoWriter_fourcc(*'XVID'), 1, ImageGrab.grab().size)  # 幀率為32，可以調節
-
-        for _ in range(10)
-            im = ImageGrab.grab()
-            imm = cv2.cvtColor(np.array(im), cv2.COLOR_RGB2BGR)
-            out.write(imm)
-
-        out.release()
-        cv2.destroyAllWindows()
 
 
 def msgShow():

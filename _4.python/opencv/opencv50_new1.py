@@ -5122,7 +5122,7 @@ def read_posion(img):
     return merged_components
 
 
-filename = "data/captcha.png"
+filename = "data/captcha/captcha04.png"
 
 img = cv2.imread(filename)
 gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
