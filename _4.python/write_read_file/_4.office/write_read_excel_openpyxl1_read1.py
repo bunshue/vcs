@@ -421,6 +421,23 @@ print()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+#  讀取檔案
+workbook = openpyxl.load_workbook('data/108Q2.xlsx')
+
+# 取得第 1 個工作表
+sheet = workbook.worksheets[0]
+
+# 取得總行、列數
+print(sheet.max_row, sheet.max_column)
+
+""" many
+# 顯示 cell資料
+for i in range(1, sheet.max_row+1):
+    for j in range(1, sheet.max_column+1):
+        print(sheet.cell(row=i, column=j).value,end="   ")
+    print()   
+"""
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

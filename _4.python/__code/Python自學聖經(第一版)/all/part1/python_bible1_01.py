@@ -32,7 +32,7 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("姓名   座號  國文  數學  英文")
 print("%3s  %2d   %3d   %3d  %3d" % ("林大明", 1, 100, 87, 79))
 print("%3s  %2d   %3d   %3d  %3d" % ("陳阿中", 2, 74, 88, 100))
@@ -513,28 +513,13 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-'''
+
 
 print("------------------------------------------------------------")  # 60個
 
-# ch11\bs1.py
 
-import requests
-from bs4 import BeautifulSoup
 
-url = "http://www.ehappy.tw/bsdemo1.htm"
-html = requests.get(url)
-html.encoding = "UTF-8"
-sp = BeautifulSoup(html.text, "html.parser")
-
-print(sp.title)
-print(sp.title.text)
-print(sp.h1)
-print(sp.p)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch11\bs2.py
+# 保留 bs4 本地讀取 html
 
 from bs4 import BeautifulSoup
 
@@ -636,34 +621,14 @@ print(sp.find_all(["title", "h1"]))  # [<title>網頁標題</title>, <h1>文件�
 
 print(sp.select("div img")[0]["src"])  # http://example.com/three.jpg
 
+print("------------------------------------------------------------")  # 60個
+
+
+
 
 print("------------------------------------------------------------")  # 60個
 
-# ch11\get.py
-
-import requests
-
-url = "http://www.ehappy.tw/demo.htm"
-r = requests.get(url)
-# 檢查HTTP回應碼是否為200(requests.code.ok)
-if r.status_code == requests.codes.ok:
-    print(r.text)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch11\get_cookie.py
-
-import requests
-
-url = "https://www.ptt.cc/bbs/Gossiping/index.html"
-# 設定cookies的值
-cookies = {"over18": "1"}
-r = requests.get(url, cookies=cookies)
-print(r.text)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch11\get_headers.py
+# 自訂表頭
 
 import requests
 
@@ -682,16 +647,13 @@ print(r)
 
 print("------------------------------------------------------------")  # 60個
 
-# ch11\iplookup.py
 
-import requests
 
-# 設定查詢目前IP的api網址
-url = "https://api.ipify.org"
-r = requests.get(url)
 
-print("我目前的IP是：", r.text)
 
+
+print("------------------------------------------------------------")  # 60個
+# webdriver
 print("------------------------------------------------------------")  # 60個
 
 # ch11\loginFacebook.py
@@ -742,141 +704,15 @@ driver.find_element_by_name("login").click()  # 按登入鈕
 
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib.pyplot as plt
-
-listx = [1, 2, 3, 4, 5]
-
-listy1 = [15, 50, 80, 40, 70]
-plt.axes([0.1, 0, 0.8, 0.8])
-plt.ylim(0, 100)
-plt.plot(listx, listy1, "r-s")
-
-listy2 = [80, 20, 60, 50, 20]
-plt.axes([1, 0, 0.8, 0.8])
-plt.ylim(0, 100)
-plt.plot(listx, listy2, "g--o")
-
-plt.axes([0.1, 1, 0.8, 0.8])
-plt.ylim(0, 100)
-plt.plot(listx, listy1, "r-s")
-
-plt.axes([1, 1, 0.8, 0.8])
-plt.ylim(0, 100)
-plt.plot(listx, listy2, "g--o")
-
-plt.show()
-
-# plt.rcParams['figure.figsize'] = [10, 10]
-# plt.rcParams['figure.dpi'] = 72
-# plt.rcParams.keys
-
-print("------------------------------------------------------------")  # 60個
-
-# ch13\subplot1.py
-
-import matplotlib.pyplot as plt
-
-plt.figure(figsize=[8, 8])
-plt.subplot(211)
-plt.title(label="Chart 1")
-plt.plot([1, 2, 3], "r:o")
-
-plt.subplot(212)
-plt.title(label="Chart 2")
-plt.plot([1, 2, 3], "g--o")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch13\subplot2.py
-
-import matplotlib.pyplot as plt
-
-plt.figure(figsize=[8, 8])
-plt.subplot(121)
-plt.title(label="Chart 1")
-plt.plot([1, 2, 3], "r:o")
-
-plt.subplot(122)
-plt.title(label="Chart 2")
-plt.plot([1, 2, 3], "g--o")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch13\subplot3.py
-
-import matplotlib.pyplot as plt
-
-plt.figure(figsize=[8, 8])
-plt.subplot(221)
-plt.title(label="Chart 1")
-plt.plot([1, 2, 3], "r:o")
-
-plt.subplot(222)
-plt.title(label="Chart 2")
-plt.plot([1, 2, 3], "g--o")
-
-plt.subplot(223)
-plt.title(label="Chart 3")
-plt.plot([1, 2, 3], "b:o")
-
-plt.subplot(224)
-plt.title(label="Chart 4")
-plt.plot([1, 2, 3], "y--o")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch13\subplot4.py
-
-import matplotlib.pyplot as plt
-
-plt.figure(figsize=[8, 4])
-plt.axes([0, 0, 0.4, 1])
-plt.title(label="Chart 1")
-plt.plot([1, 2, 3], "r:o")
-
-plt.axes([0.5, 0, 0.4, 1])
-plt.title(label="Chart 2")
-plt.plot([1, 2, 3], "g--o")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch13\subplot5.py
-
-import matplotlib.pyplot as plt
-
-plt.figure(figsize=[8, 4])
-plt.axes([0, 0, 0.8, 1])
-plt.title(label="Chart 1")
-plt.plot([1, 2, 3], "r:o")
-
-plt.axes([0.55, 0.1, 0.2, 0.2])
-plt.title(label="Chart 2")
-plt.plot([1, 2, 3], "g--o")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-import numpy as np
+print("------------------------------------------------------------")  # 60個
 
 a = np.genfromtxt("scores.csv", delimiter=",", skip_header=1)
 print(a.shape)
 
 print("------------------------------------------------------------")  # 60個
-
-import numpy as np
 
 a = np.arange(1, 10).reshape(3, 3)
 print("陣列的內容：\n", a)
@@ -888,8 +724,6 @@ print("5.每一直行加總、乘積與平均值：\n", np.sum(a, axis=0), np.pr
 print("6.每一橫列加總、乘積與平均值：\n", np.sum(a, axis=1), np.prod(a, axis=1), np.mean(a, axis=1))
 
 print("------------------------------------------------------------")  # 60個
-
-import numpy as np
 
 na = np.genfromtxt("scores.csv", delimiter=",", skip_header=1)
 print("國文最高分數：", na[:, 1].max())
@@ -905,8 +739,6 @@ print("全班最高總分：", total2.max())
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
-
 a = np.random.randint(100, size=50)
 print("陣列的內容：", a)
 print("1.標準差：", np.std(a))
@@ -916,8 +748,6 @@ print("4.百分比值：", np.percentile(a, 80))
 print("5.最大最小差值：", np.ptp(a))
 
 print("------------------------------------------------------------")  # 60個
-
-import numpy as np
 
 a = np.random.choice(50, size=10, replace=False)
 print("排序前的陣列：", a)
@@ -929,8 +759,6 @@ for i in np.argsort(a):
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
-
 a = np.random.randint(0, 10, (3, 5))
 print("原陣列內容：")
 print(a)
@@ -941,8 +769,6 @@ print(np.sort(a, axis=1))
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
-
 listdata = [[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15]]
 na = np.array(listdata)
 print(na)
@@ -952,14 +778,7 @@ print("數量", na.size)
 
 print("------------------------------------------------------------")  # 60個
 
-import pandas as pd
-import matplotlib.pyplot as plt
-
-# 設定中文字型及負號正確顯示
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 也可設mingliu或DFKai-SB
-
-plt.rcParams["axes.unicode_minus"] = False
-
+# 同一df畫出3圖
 df = pd.DataFrame(
     [[250, 320, 300, 312, 280], [280, 300, 280, 290, 310], [220, 280, 250, 305, 250]],
     index=["北部", "中部", "南部"],
@@ -969,16 +788,11 @@ g1 = df.plot(kind="bar", title="長條圖", figsize=[10, 5])
 g2 = df.plot(kind="barh", title="橫條圖", figsize=[10, 5])
 g3 = df.plot(kind="bar", stacked=True, title="堆疊圖", figsize=[10, 5])
 
+show()
+
 print("------------------------------------------------------------")  # 60個
 
-# ch14\plot2.py
-
-import pandas as pd
-import matplotlib.pyplot as plt
-
-# 設定中文字型及負號正確顯示
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 也可設mingliu或DFKai-SB
-plt.rcParams["axes.unicode_minus"] = False
+# 同一df將三筆資料畫在一圖
 
 df = pd.DataFrame(
     [[250, 320, 300, 312, 280], [280, 300, 280, 290, 310], [220, 280, 250, 305, 250]],
@@ -995,27 +809,20 @@ g1 = df.iloc[0].plot(
 g1 = df.iloc[1].plot(kind="line", legend=True, xticks=range(2015, 2020))
 g1 = df.iloc[2].plot(kind="line", legend=True, xticks=range(2015, 2020))
 
+show()
+
 print("------------------------------------------------------------")  # 60個
-
-# ch14\plot3.py
-
-import pandas as pd
-import matplotlib.pyplot as plt
-
-# 設定中文字型及負號正確顯示
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 也可設mingliu或DFKai-SB
-plt.rcParams["axes.unicode_minus"] = False
 
 df = pd.DataFrame(
     [[250, 320, 300, 312, 280], [280, 300, 280, 290, 310], [220, 280, 250, 305, 250]],
     index=["北部", "中部", "南部"],
     columns=[2015, 2016, 2017, 2018, 2019],
 )
-df.plot(kind="pie", subplots=True, figsize=[20, 20])
+df.plot(kind="pie", subplots=True, figsize=[16, 6])
+
+show()
 
 print("------------------------------------------------------------")  # 60個
-
-import pandas as pd
 
 url = "https://www.tiobe.com/tiobe-index/"
 tables = pd.read_html(url, header=0, keep_default_na=False)
@@ -1029,8 +836,6 @@ print("------------------------------------------------------------")  # 60個
 
 # ch14\to_cvs.py
 
-import pandas as pd
-
 scores = {
     "國文": {"王小明": 65, "李小美": 90, "陳大同": 81, "林小玉": 79},
     "英文": {"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉": 53},
@@ -1039,15 +844,11 @@ scores = {
     "社會": {"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80},
 }
 df = pd.DataFrame(scores)
-df.to_csv("scores3.csv", encoding="utf-8-sig")
+df.to_csv("tmp_scores3.csv", encoding="utf-8-sig")
 
 print("------------------------------------------------------------")  # 60個
 
 # ch15\create_data.py
-
-import pandas as pd
-import numpy as np
-
 
 def c_item(x):
     if x < 2:
@@ -1079,14 +880,11 @@ df["商品"] = df["商品"].map(c_item)
 df["業務員"] = df["業務員"].map(s_item)
 df["價格"] = df["價格"].map(lambda x: x * 100)
 
-df.to_csv("sale.csv", index=False)
+df.to_csv("tmp_sale.csv", index=False)
 
 print("------------------------------------------------------------")  # 60個
 
 # ch15\create_score.py
-
-import pandas as pd
-import numpy as np
 
 tem = []
 for i in range(3):
@@ -1094,26 +892,29 @@ for i in range(3):
 df = pd.DataFrame(np.random.randint(40, 101, size=(3, 3)), columns=["英文", "社會", "公民"])
 # df = pd.DataFrame(np.random.randint(40,101,size=(3,4)), columns=['國文','數學','自然','社會'])
 df.insert(0, "座號", tem)
-df.to_csv("score2_6.csv", index=False)
+df.to_csv("tmp_score2_6.csv", index=False)
 
 print("------------------------------------------------------------")  # 60個
 
 # ch15\split_data.py
 
-import pandas as pd
-import numpy as np
+df1 = pd.read_csv("data/titanic.csv")
 
-df1 = pd.read_csv("titanic.csv")
 df2 = df1[["row.names", "pclass", "survived", "name", "age", "embarked"]]
-df2.to_csv("titanic1.csv", index=False)
+df2.to_csv("tmp_titanic1.csv", index=False)
+
 df3 = df1[["row.names", "home.dest", "room", "ticket", "boat", "sex"]]
-df3.to_csv("titanic2.csv", index=False)
+df3.to_csv("tmp_titanic2.csv", index=False)
 
 print("------------------------------------------------------------")  # 60個
 
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+""" 統一發票
+
 
 # ch22\tree1.py
 
@@ -1158,7 +959,6 @@ print("iter 方法：" + items[0][0].text)
 
 print("------------------------------------------------------------")  # 60個
 
-""" 統一發票
 import requests
 
 try:
@@ -1208,35 +1008,6 @@ def monoNum(n):
 """
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個

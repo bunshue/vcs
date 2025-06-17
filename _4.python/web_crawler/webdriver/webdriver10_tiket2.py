@@ -10,7 +10,7 @@ driver=webdriver.Chrome()
 driver.get(url)
 driver.maximize_window()    #全螢幕顯示
 
-driver.save_screenshot("img_screenshot.png") 	#存圖
+driver.save_screenshot("tmp_img_screenshot.png") 	#存圖
 
 element = driver.find_element_by_id('BookingS1Form_homeCaptcha_passCode')
 
@@ -19,8 +19,8 @@ top = element.location['y']
 right = element.location['x'] + element.size['width']
 bottom = element.location['y'] + element.size['height']
 
-img = Image.open("img_screenshot.png")
-img2 = img.crop((left,top,right,bottom))
-img2.save('img_source.png')
+img = Image.open("tmp_img_screenshot.png")
 
+img2 = img.crop((left,top,right,bottom))
+img2.save('tmp_img_source.png')
 

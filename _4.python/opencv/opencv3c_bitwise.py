@@ -15,6 +15,8 @@ filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
+mask_filename = "C:/_git/vcs/_4.python/opencv/data/_mask/mask1.png"
+
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -38,6 +40,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 
 def show():
+    plt.tight_layout()
     plt.show()
     pass
 
@@ -110,31 +113,31 @@ plt.title("OR")
 
 # ------------------------------------------------------------
 
-plt.tight_layout()
-
 show()
-
 
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread(filename2)
 
-# 创建掩码 - 假设我们只关心图像的中心区域
+# 建立mask
 height, width = image.shape[:2]
 mask = np.zeros(image.shape[:2], np.uint8)
-mask[height // 4 : 3 * height // 4, width // 4 : 3 * width // 4] = 255
+mask[height // 8 : 7 * height // 8, width // 8 : 7 * width // 8] = 255
 
-# 应用掩码
+# 讀取圖檔做mask
+mask_filename = "C:/_git/vcs/_4.python/opencv/data/_mask/mask1.png"
+mask = cv2.imread(mask_filename, 0)
+mask = cv2.resize(mask, (width, height))  # 調整mask大小
+
+# 套用mask
 masked_image = cv2.bitwise_and(image, image, mask=mask)
 
-# 显示结果
 cv2.imshow("Original", image)
 cv2.imshow("Mask", mask)
 cv2.imshow("Masked Image", masked_image)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -284,13 +287,13 @@ print("------------------------------------------------------------")  # 60個
 # cv2.bitwise_xor() SP
 print("------------------------------------------------------------")  # 60個
 
+# 讀取原圖
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 src = cv2.imread(filename, 0)
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/watermark.bmp"
 # 讀取水印圖像
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/watermark.bmp"
 watermark = cv2.imread(filename, 0)
-print("顯示原圖")
 
 # 將水印內的255處理為1，以方便嵌入
 # 后續章節會介紹使用threshold處理。

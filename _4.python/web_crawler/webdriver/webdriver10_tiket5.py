@@ -25,7 +25,7 @@ def get_photo():
     driver.maximize_window()    #全螢幕顯示
     
     # 從 screenshot 中取得驗證碼的圖片
-    driver.save_screenshot("img_screenshot.png") 
+    driver.save_screenshot("tmp_img_screenshot.png") 
     element = driver.find_element_by_id('BookingS1Form_homeCaptcha_passCode')
     
     left = element.location['x']
@@ -33,7 +33,7 @@ def get_photo():
     right = element.location['x'] + element.size['width']
     bottom = element.location['y'] + element.size['height']
     
-    img = Image.open("img_screenshot.png")
+    img = Image.open("tmp_img_screenshot.png")
     img2 = img.crop((left,top,right,bottom))
     #img2.show()
     img2.save('img_source.png')
