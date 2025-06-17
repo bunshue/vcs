@@ -4,7 +4,6 @@ import time
 import random
 
 print("------------------------------------------------------------")  # 60個
-
 """
 zh-tw : 正中
 zh-cn : 簡中
@@ -103,6 +102,35 @@ text = "黃河遠上白雲間，一片孤城萬仞山。羌笛何須怨楊柳？
 tts = gtts.gTTS(text=text, lang="zh-tw")
 tts.save(mp3_filename)
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# http://yhhuang1966.blogspot.com/2017/08/google-gtts-api.html
+# 利用 Google gTTS 文字轉語音 API 讓電腦說話 
+
+from gtts import gTTS
+from pygame import mixer
+import tempfile
+
+def speak(sentence, lang, loops=1):
+    with tempfile.NamedTemporaryFile(delete=True) as fp:
+        tts=gTTS(text=sentence, lang=lang)
+        tts.save('{}.mp3'.format(fp.name))
+        mixer.init()
+        mixer.music.load('{}.mp3'.format(fp.name))
+        mixer.music.play()
+
+speak('ありがとう', 'ja')
+time.sleep(3)
+speak('全國的軍民同胞們, 川普是笨蛋', 'zh-tw')
+time.sleep(3)
+speak('Hello World!', 'en')
+time.sleep(3)
+
+
+
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 

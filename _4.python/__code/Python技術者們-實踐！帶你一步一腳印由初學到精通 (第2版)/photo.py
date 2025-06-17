@@ -152,5 +152,3 @@ get_photobythread(folder_name, photo_name, photo_list)
 print("\n下載完畢")
 
 print("------------------------------------------------------------")  # 60個
-
-

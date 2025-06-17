@@ -42,7 +42,6 @@ def get_license(img):
         return "找不到車牌"
 
 
-
 capture = cv2.VideoCapture(1)  # 建立攝影機物件
 
 if capture.isOpened():

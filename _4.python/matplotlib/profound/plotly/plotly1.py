@@ -38,6 +38,9 @@ fig = go.Figure(data=[go.Pie(labels=sales_dep["label"],
 
 fig.show()  # 繪製圖表
 
+sys.exit()
+
+
 print('------------------------------------------------------------')	#60個
 
 #甜甜圈圖

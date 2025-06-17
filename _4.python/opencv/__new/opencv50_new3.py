@@ -50,7 +50,7 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 #Character_recognition.py
 
 img = cv2.imread("data_new/37.jpg")
@@ -618,6 +618,8 @@ print("------------------------------------------------------------")  # 60個
 
 # 修復影像 inpaint
 
+fail_filename = "C:/_git/vcs/_4.python/opencv/data/elephant_fail.jpg"
+
 lisa = cv2.imread("data_new/lisaE1.jpg")
 ret, mask = cv2.threshold(lisa, 250, 255, cv2.THRESH_BINARY)
 
@@ -674,7 +676,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 # cv2.inpaint 影像修復 SP
 print("------------------------------------------------------------")  # 60個
-'''
+
 
 
 print("------------------------------------------------------------")  # 60個

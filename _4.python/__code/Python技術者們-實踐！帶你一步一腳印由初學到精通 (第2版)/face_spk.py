@@ -199,7 +199,6 @@ def face_shot(function):
         print("開啟攝影機失敗")
 
 
-
 base = "https://japanwest.api.cognitive.microsoft.com/face/v1.0"  # api
 key = "你的金鑰"  # 你的金鑰
 gid = "gp01"  # 群組 Id

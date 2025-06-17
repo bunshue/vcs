@@ -90,4 +90,3 @@ bitcoin[["twd", "ma"]].plot(
 )
 
 plt.show()
-
