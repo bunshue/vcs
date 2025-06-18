@@ -59,7 +59,7 @@ linewidth = 10  # 線寬
 
 # 一起畫
 # index = -1 # 指名要繪製的輪廓, -1代表全部
-# image2=cv2.drawContours(image2,contours,index,(0,0,255),linewidth)  # image2為三通道才能顯示輪廓, 用紅框標示出來
+# image2=cv2.drawContours(image2,contours,index, RED, linewidth)  # image2為三通道才能顯示輪廓, 用紅框標示出來
 
 # 分開畫
 length = len(contours)
@@ -115,10 +115,10 @@ approx_hex = cv2.approxPolyDP(contours[HEXAGON], 30, True)
 
 print("=== 處理後")
 print("矩形點數量：{}".format(len(approx_rect)))
-cv2.drawContours(image, [approx_rect], -1, (0, 0, 255), 5)
+cv2.drawContours(image, [approx_rect], -1, RED, 5)
 
 print("六邊形點數量：{}".format(len(approx_hex)))
-cv2.drawContours(image, [approx_hex], -1, (0, 0, 255), 5)
+cv2.drawContours(image, [approx_hex], -1, RED, 5)
 print(approx_hex)
 for i in range(len(approx_hex)):
     print(approx_hex[i])
@@ -164,8 +164,8 @@ for i in range(defects.shape[0]):
     start = tuple(cnt[s][0])
     end = tuple(cnt[e][0])
     far = tuple(cnt[f][0])
-    cv2.line(image, start, end, (0, 255, 0), 2)
-    cv2.circle(image, far, 5, (0, 0, 255), -1)
+    cv2.line(image, start, end, GREEN, 2)
+    cv2.circle(image, far, 5, RED, -1)
 
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
@@ -202,7 +202,7 @@ plt.imshow(cv2.cvtColor(edged, cv2.COLOR_BGR2RGB))
 
 print("Number of Contours found = " + str(len(contours)))
 
-cv2.drawContours(image, contours, -1, (255, 0, 0), 2)
+cv2.drawContours(image, contours, -1, BLUE, 2)
 
 plt.subplot(235)
 plt.title("Contours")

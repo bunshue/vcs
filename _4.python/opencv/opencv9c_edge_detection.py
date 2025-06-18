@@ -13,10 +13,6 @@ cv2.Laplacian()
 
 from opencv_common import *
 
-
-ESC = 27
-SPACE = 32
-
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 print("------------------------------------------------------------")  # 60個
@@ -2203,7 +2199,7 @@ print("area=", area)
 print("trgl:", trgl)
 for i in range(0, 3):
     print("x")
-    # cv2.line(image, tuple(trgl[i][0]), tuple(trgl[(i + 1) % 3][0]), (255,255,255), 2)
+    # cv2.line(image, tuple(trgl[i][0]), tuple(trgl[(i + 1) % 3][0]), WHITE, 2)
 
 plt.subplot(122)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -2404,17 +2400,17 @@ cv2.polylines(image, [hull], True, GREEN, 2)
 # ----------------內部點A的距離-------------------------
 distA = cv2.pointPolygonTest(hull, (300, 150), True)
 font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(image, "A", (300, 150), font, 1, (0, 255, 0), 3)
+cv2.putText(image, "A", (300, 150), font, 1, GREEN, 3)
 print("distA=", distA)
 # ----------------外部點B的距離-------------------------
 distB = cv2.pointPolygonTest(hull, (300, 250), True)
 font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(image, "B", (300, 250), font, 1, (0, 255, 0), 3)
+cv2.putText(image, "B", (300, 250), font, 1, GREEN, 3)
 print("distB=", distB)
 # ------------正好處于邊緣上的點C的距離-----------------
 distC = cv2.pointPolygonTest(hull, (423, 112), True)
 font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(image, "C", (423, 112), font, 1, (0, 255, 0), 3)
+cv2.putText(image, "C", (423, 112), font, 1, GREEN, 3)
 print("distC=", distC)
 # print(hull)   #測試邊緣到底在哪里，然后再使用確定位置的
 
@@ -2448,17 +2444,17 @@ cv2.polylines(image, [hull], True, GREEN, 2)
 # ----------------內部點A與多邊形的關系-------------------------
 distA = cv2.pointPolygonTest(hull, (300, 150), False)
 font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(image, "A", (300, 150), font, 1, (0, 255, 0), 3)
+cv2.putText(image, "A", (300, 150), font, 1, GREEN, 3)
 print("distA=", distA)
 # ----------------外部點B與多邊形的關系-------------------------
 distB = cv2.pointPolygonTest(hull, (300, 250), False)
 font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(image, "B", (300, 250), font, 1, (0, 255, 0), 3)
+cv2.putText(image, "B", (300, 250), font, 1, GREEN, 3)
 print("distB=", distB)
 # ----------------邊緣線上點C與多邊形的關系----------------------
 distC = cv2.pointPolygonTest(hull, (423, 112), False)
 font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(image, "C", (423, 112), font, 1, (0, 255, 0), 3)
+cv2.putText(image, "C", (423, 112), font, 1, GREEN, 3)
 print("distC=", distC)
 # print(hull)   #測試邊緣到底在哪里，然后再使用確定位置的
 

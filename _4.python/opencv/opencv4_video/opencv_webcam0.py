@@ -6,11 +6,7 @@ WebCam 使用
 目前 webcam 僅 win10/x64 電腦可用
 """
 
-ESC = 27
-
-import cv2
-import sys
-import time
+from opencv_common import *
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

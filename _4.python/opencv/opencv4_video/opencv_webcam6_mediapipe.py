@@ -4,25 +4,11 @@
 
 
 """
+from opencv_common import *
 
-import os
-import sys
-import time
-import math
-import random
-
-print("------------------------------------------------------------")  # 60個
-
-ESC = 27
-
-red = (0, 0, 255)
-green = (0, 255, 0)
-blue = (255, 0, 0)
-linewidth = 5
-
-import cv2
-import numpy as np
 import mediapipe as mp
+
+linewidth = 5
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_83 人臉偵測")
@@ -336,7 +322,7 @@ with mp_hands.Hands(
                     mp_drawing_styles.get_default_hand_connections_style(),
                 )
 
-        cv2.rectangle(img, (rx, ry), (rx + 80, ry + 80), red, linewidth)  # 畫出觸碰區
+        cv2.rectangle(img, (rx, ry), (rx + 80, ry + 80), RED, linewidth)  # 畫出觸碰區
         cv2.imshow("WebCam", img)
         k = cv2.waitKey(1)
         if k == ESC:

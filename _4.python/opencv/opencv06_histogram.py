@@ -421,21 +421,21 @@ for i in range(1, histSize):
         histImage,
         (bin_w * (i - 1), hist_h - int(b_hist[i - 1])),
         (bin_w * (i), hist_h - int(b_hist[i])),
-        (255, 0, 0),
+        BLUE,
         thickness=2,
     )
     cv2.line(
         histImage,
         (bin_w * (i - 1), hist_h - int(g_hist[i - 1])),
         (bin_w * (i), hist_h - int(g_hist[i])),
-        (0, 255, 0),
+        GREEN,
         thickness=2,
     )
     cv2.line(
         histImage,
         (bin_w * (i - 1), hist_h - int(r_hist[i - 1])),
         (bin_w * (i), hist_h - int(r_hist[i])),
-        (0, 0, 255),
+        RED,
         thickness=2,
     )
 ## [Draw for each channel]

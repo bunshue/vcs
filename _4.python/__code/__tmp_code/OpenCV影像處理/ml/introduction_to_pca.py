@@ -1,3 +1,14 @@
+# OpenCV_顏色共同
+RED = (0, 0, 255)  # B G R
+GREEN = (0, 255, 0)  # B G R
+BLUE = (255, 0, 0)  # B G R
+CYAN = (255, 255, 0)  # B G R
+MAGENTA = (255, 0, 255)  # B G R
+YELLOW = (0, 255, 255)  # B G R
+BLACK = (0, 0, 0)  # B G R
+WHITE = (255, 255, 255)  # B G R
+colors = [RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK, WHITE]
+
 import cv2 as cv
 import numpy as np
 import argparse
@@ -44,11 +55,11 @@ def getOrientation(pts, img):
 
     ## [visualization]
     # Draw the principal components
-    cv.circle(img, cntr, 3, (255, 0, 255), 2)
+    cv.circle(img, cntr, 3, MAGENTA, 2)
     p1 = (cntr[0] + 0.02 * eigenvectors[0,0] * eigenvalues[0,0], cntr[1] + 0.02 * eigenvectors[0,1] * eigenvalues[0,0])
     p2 = (cntr[0] - 0.02 * eigenvectors[1,0] * eigenvalues[1,0], cntr[1] - 0.02 * eigenvectors[1,1] * eigenvalues[1,0])
-    drawAxis(img, cntr, p1, (0, 255, 0), 1)
-    drawAxis(img, cntr, p2, (255, 255, 0), 5)
+    drawAxis(img, cntr, p1, GREEN, 1)
+    drawAxis(img, cntr, p2, CYAN, 5)
 
     angle = atan2(eigenvectors[0,1], eigenvectors[0,0]) # orientation in radians
     ## [visualization]
@@ -89,7 +100,7 @@ for i, c in enumerate(contours):
         continue
 
     # Draw each contour only for visualisation purposes
-    cv.drawContours(src, contours, i, (0, 0, 255), 2);
+    cv.drawContours(src, contours, i, RED, 2);
     # Find the orientation of each shape
     getOrientation(c, src)
 ## [contours]

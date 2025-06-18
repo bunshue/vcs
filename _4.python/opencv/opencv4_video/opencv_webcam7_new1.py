@@ -4,28 +4,12 @@
 
 """
 
-import cv2
+from opencv_common import *
 
-import os
-import sys
-import time
-import math
-import random
-import numpy as np
-import pandas as pd
-from PIL import Image
 from PIL import ImageSequence
-from PIL import ImageFont, ImageDraw, Image
 
 print("------------------------------------------------------------")  # 60個
 
-ESC = 27
-SPACE = 32
-ENTER = 13
-
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-
-print("------------------------------------------------------------")  # 60個
 """
 print("OpenCV VideoCapture 04 兩個camera")
 print("按 ESC 離開")
@@ -51,15 +35,15 @@ if not cap2.isOpened():
     exit()
 
 while True:
-    ret1, img1 = cap1.read()  # 從攝影機擷取一張影像
-    ret2, img2 = cap2.read()  # 從攝影機擷取一張影像
+    ret1, img1 = cap1.read()
+    ret2, img2 = cap2.read()
     img1 = cv2.resize(img1, (w, h))  # 縮小尺寸 小圖
     # img2 = cv2.resize(img2,(W, H))  # 縮小尺寸 大圖
 
     img2[y_st : y_st + h, x_st : x_st + w] = img1  # 將 img2 的特定區域換成 img1
 
     cv2.rectangle(
-        img2, (x_st, y_st), (x_st + w, y_st + h), (255, 255, 255), 5
+        img2, (x_st, y_st), (x_st + w, y_st + h), WHITE, 5
     )  # 繪製子影片的外框
 
     cv2.imshow("OpenCV 01", img2)
@@ -91,7 +75,7 @@ w = W // N  # 計算分格之後的影像寬度
 h = H // N  # 計算分格之後的影像高度
 img_list = []  # 設定空串列，記錄每一格的影像
 while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()
     frame = cv2.resize(frame, (w, h))  # 縮小尺寸
     """ 2X2的寫法
     output[0:h, 0:w] = frame             # 將 output 的特定區域置換為 frame, 左上
@@ -148,7 +132,7 @@ if not cap.isOpened():
     exit()
 
 while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()
     if not ret:
         print("Cannot receive frame")  # 如果讀取錯誤，印出訊息
         break
@@ -213,7 +197,7 @@ if not cap.isOpened():
     exit()
 
 while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()
     if not ret:
         print("Cannot receive frame")  # 如果讀取錯誤，印出訊息
         break
@@ -259,8 +243,7 @@ print("按 ESC 離開")
 cap = cv2.VideoCapture(0)
 
 
-# 定義加入文字的函式
-def putText(source, x, y, text, scale=2.5, color=(255, 255, 255)):
+def putText(source, x, y, text, scale=2.5, color=WHITE):
     org = (x, y)
     fontFace = cv2.FONT_HERSHEY_SIMPLEX
     fontScale = scale
@@ -276,7 +259,7 @@ if not cap.isOpened():
     exit()
 
 while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()
     if not ret:
         print("Cannot receive frame")
         break
@@ -349,7 +332,7 @@ if not cap.isOpened():
     exit()
 
 while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()
     if not ret:
         print("Cannot receive frame")
         break
@@ -384,7 +367,7 @@ if not cap.isOpened():
     exit()
 
 while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()
     if not ret:
         print("Cannot receive frame")
         break
@@ -426,7 +409,7 @@ cnt = 0
 
 # 以迴圈從影片檔案讀取影格，並顯示出來
 while cap.isOpened():
-    ret, frame = cap.read()  # 從影片擷取一張影像
+    ret, frame = cap.read()
     if ret == True:
         cv2.imshow("Video Player", frame)
         if cnt % 30 == 0:  # 每 30 格取一格
@@ -488,10 +471,10 @@ print("------------------------------------------------------------")  # 60個
 print("OpenCV VideoCapture 18 QRCode 偵測器")
 print("按 ESC 離開")
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 
-def putText(x, y, text, color=(0, 0, 0)):
+def putText(x, y, text, color=BLACK):
     global img
     font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"  # 有中文
     font_size = 20
@@ -515,7 +498,7 @@ def boxSize(arr):
 qrcode = cv2.QRCodeDetector()  # QRCode 偵測器
 
 while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()
     if not ret:
         print("Cannot receive frame")
         break
@@ -526,9 +509,9 @@ while True:
             text = data[i]  # QRCode 內容
             box = boxSize(bbox[i])  # QRCode 座標
             cv2.rectangle(
-                img, (box[0], box[1]), (box[2], box[3]), (0, 0, 255), 5
+                img, (box[0], box[1]), (box[2], box[3]), RED, 5
             )  # 繪製外框
-            putText(box[0], box[3], text, color=(0, 0, 255))  # 顯示文字
+            putText(box[0], box[3], text, color=RED)  # 顯示文字
 
     cv2.imshow("OpenCV 09", img)
 
@@ -544,11 +527,10 @@ print("------------------------------------------------------------")  # 60個
 print("OpenCV VideoCapture 19 QRCode 偵測器")
 print("按 ESC 離開")
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 
-# 定義加入文字函式
-def putText(x, y, text, size=20, color=(0, 0, 0)):
+def putText(x, y, text, size=20, color=BLACK):
     global img
     font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"  # 有中文
     font_size = 20
@@ -574,12 +556,12 @@ def mosaic(image, level):
 qrcode = cv2.QRCodeDetector()  # QRCode 偵測器
 
 while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()
     if not ret:
         print("Cannot receive frame")
         break
     img = cv2.resize(frame, (640, 480))
-    ok, data, bbox, rectified = qrcode.detectAndDecodeMulti(img)  # 偵測並辨識 QRCode
+    ok, data, bbox, rectified = qrcode.detectAndDecodeMulti(img)  # 辨識 QRCode
     # 如果偵測到 QRCode
     if ok:
         for i in range(len(data)):
@@ -587,17 +569,17 @@ while True:
             # 如果內容是 a1，套用模糊效果
             if text == "a1":
                 img = cv2.blur(img, (20, 20))
-                putText(0, 0, "模糊效果", 100, (255, 255, 255))
+                putText(0, 0, "模糊效果", 100, WHITE)
             # 如果內容是 a2，套用馬賽克效果
             elif text == "a2":
                 img = mosaic(img, 15)
-                putText(0, 0, "馬賽克效果", 100, (255, 255, 255))
+                putText(0, 0, "馬賽克效果", 100, WHITE)
             # 如果內容是 a2，套用片效果
             elif text == "a3":
                 img = 255 - img
-                putText(0, 0, "負片效果", 100, (0, 0, 0))
+                putText(0, 0, "負片效果", 100, BLACK)
 
-    cv2.imshow("OpenCV 10", img)  # 預覽影像
+    cv2.imshow("OpenCV 10", img)
 
     k = cv2.waitKey(1)
     if k == ESC:  # 按 ESC 鍵, 結束
@@ -606,6 +588,7 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 20 讀取 QR code 圖檔")
@@ -616,8 +599,7 @@ filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_qrcode/QR1.png"
 image = cv2.imread(filename)
 
 
-# 定義加入文字函式
-def putText(x, y, text, color=(0, 0, 0)):
+def putText(x, y, text, color=BLACK):
     global image
     font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"  # 有中文
     font_size = 20
@@ -652,21 +634,22 @@ if status == True:
         text = data[i]  # QRCode 內容
 
         box = boxSize(bbox[i])  # QRCode 座標
-        cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), (0, 0, 255), 2)  # 繪製外框
+        cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), RED, 2)  # 繪製外框
         print(box)
         print(text)
         # putText(10,10,"aaa",color=(0,0,255))                     # 顯示文字
-        putText(box[0], box[3], text, color=(0, 0, 255))  # 顯示文字
+        putText(box[0], box[3], text, color=RED)  # 顯示文字
 
 cv2.imshow("OpenCV 11", image)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 cap = cv2.VideoCapture(0)
 
 while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()
     width = int(cap.get(3))
     height = int(cap.get(4))
 
@@ -691,7 +674,7 @@ print("------------------------------------------------------------")  # 60個
 cap = cv2.VideoCapture(0)
 
 while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()
     width = int(cap.get(3))
     height = int(cap.get(4))
 
@@ -727,7 +710,7 @@ if not cap.isOpened():
     sys.exit()
 
 while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()
     # frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸，加快速度
 
     k = cv2.waitKey(1)
@@ -746,7 +729,7 @@ while True:
         if success:
             p1 = [int(point[0]), int(point[1])]
             p2 = [int(point[0] + point[2]), int(point[1] + point[3])]
-            cv2.rectangle(frame, p1, p2, (0, 0, 255), 3)  # 根據座標，繪製四邊形，框住要追蹤的物件
+            cv2.rectangle(frame, p1, p2, RED, 3)  # 根據座標，繪製四邊形，框住要追蹤的物件
 
     cv2.imshow("OpenCV 14", frame)
 
@@ -761,7 +744,7 @@ tracker_list = []
 for i in range(3):
     tracker = cv2.TrackerCSRT_create()  # 創建三組追蹤器
     tracker_list.append(tracker)
-colors = [(0, 0, 255), (0, 255, 255), (255, 255, 0)]  # 設定三個外框顏色
+colors = [RED, YELLOW, CYAN]  # 設定三個外框顏色
 tracking = False  # 設定 False 表示尚未開始追蹤
 
 cap = cv2.VideoCapture(video_filename)  # 開啟影片
@@ -773,7 +756,7 @@ if not cap.isOpened():
 a = 0  # 刪減影片影格使用
 
 while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()
     #frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸，加快速度
 
     k = cv2.waitKey(1)
@@ -805,12 +788,13 @@ cap.release()
 cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("OpenCV_ai_75")
 
 multiTracker = cv2.legacy.MultiTracker_create()  # 建立多物件追蹤器
 tracking = False  # 設定追蹤尚未開始
-colors = [(0, 0, 255), (0, 255, 255)]  # 建立外框色彩清單
+colors = [RED, YELLOW]  # 建立外框色彩清單
 
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
@@ -818,7 +802,7 @@ if not cap.isOpened():
     sys.exit()
 
 while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()
     # frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸加快速度
 
     k = cv2.waitKey(1)
@@ -854,14 +838,6 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 # simple color
@@ -888,7 +864,7 @@ WIDTH = 320
 HEIGHT = int(WIDTH / ratio)
 
 while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()
     frame = cv2.resize(frame, (WIDTH, HEIGHT))
     frame = cv2.flip(frame, 1)
 
@@ -916,9 +892,9 @@ while True:
 
         out = cv2.bitwise_and(hsv, hsv, mask=mask)
 
-        cv2.rectangle(frame, p1, p2, (0, 0, 255), 2)  # B G R
-        cv2.rectangle(hsv, p1, p2, (0, 255, 0), 2)
-        cv2.rectangle(out, p1, p2, (255, 0, 0), 2)
+        cv2.rectangle(frame, p1, p2, RED, 2)
+        cv2.rectangle(hsv, p1, p2, GREEN, 2)
+        cv2.rectangle(out, p1, p2, BLUE, 2)
 
         frame = cv2.hconcat([frame, hsv, out])
 
@@ -948,7 +924,7 @@ if not cap.isOpened():
     exit()
 
 while True:
-    ret, img = cap.read()  # 從攝影機擷取一張影像
+    ret, img = cap.read()
     if not ret:
         print("Cannot receive frame")  # 如果讀取錯誤，印出訊息
         break
@@ -978,31 +954,28 @@ while True:
     ret, frame = cap.read()
     frame = cv2.flip(frame, 1)
 
-#### 在while內
+    #### 在while內
     gray = bs.apply(frame)
     mask = cv2.threshold(gray, 30, 255, cv2.THRESH_BINARY)[1]
-    mask = cv2.erode(mask, None, iterations = 2)
-    mask = cv2.dilate(mask, None, iterations = 10)
+    mask = cv2.erode(mask, None, iterations=2)
+    mask = cv2.dilate(mask, None, iterations=10)
 
-#### 在while內
-    cnts, hierarchy = cv2.findContours(
-        mask, 
-        cv2.RETR_EXTERNAL, 
-        cv2.CHAIN_APPROX_SIMPLE)
+    #### 在while內
+    cnts, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     for c in cnts:
         if cv2.contourArea(c) < 200:
             continue
         # 畫出輪廓
-        cv2.drawContours(frame, cnts, -1, (0, 255, 255), 2)
+        cv2.drawContours(frame, cnts, -1, YELLOW, 2)
         # 畫出矩型
         (x, y, w, h) = cv2.boundingRect(c)
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+        cv2.rectangle(frame, (x, y), (x + w, y + h), GREEN, 2)
 
-#### 在while內
-    mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR) 
+    #### 在while內
+    mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
     frame = cv2.hconcat([frame, mask])
-    cv2.imshow('frame', frame)
+    cv2.imshow("frame", frame)
     if cv2.waitKey(1) == 27:
         cv2.destroyAllWindows()
         break
@@ -1026,15 +999,6 @@ sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
-
-# cv2.namedWindow("Video Player", 0) # 設定視窗名稱
-# cv2.resizeWindow("Video Player", 300, 200) # 重設定視窗大小
-
-
 # 設定參數 無效~~~~
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)  # 設定寬度
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 960)  # 設定高度
-
-
-# gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-# h_frame = cv2.flip(frame, 1)  # 水平翻轉

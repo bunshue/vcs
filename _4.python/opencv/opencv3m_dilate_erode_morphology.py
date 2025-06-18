@@ -306,7 +306,7 @@ for j in range(result.size):
     y = int(j / result.shape[0])
     x = int(j % result.shape[0])
     if result[x, y] == 255:  # result[] 只能傳入整型
-        cv2.circle(image, (y, x), 5, (255, 0, 0))
+        cv2.circle(image, (y, x), 5, BLUE)
 
 cv2.imshow("original_image", original_image)
 cv2.imshow("Result", image)
@@ -706,6 +706,7 @@ canny = cv2.Canny(img1, 50, 150)
 _, Thr_img = cv2.threshold(
     original_img, 210, 255, cv2.THRESH_BINARY
 )  # 設定紅色通道閾值210（閾值影響梯度運算效果）
+
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))  # 定義矩形結構元素
 gradient = cv2.morphologyEx(Thr_img, cv2.MORPH_GRADIENT, kernel)  # 梯度
 

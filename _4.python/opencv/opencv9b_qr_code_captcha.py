@@ -1,8 +1,9 @@
 """
-
 cv2之各種影像處理功能
 
 QR code
+
+captcha
 
 """
 
@@ -148,7 +149,7 @@ if ok:
         print(bbox[i])
         text = data[i]          # QRCode 內容
         box = boxSize(bbox[i])  # QRCode 左上與右下座標
-        cv2.rectangle(image,(box[0],box[1]),(box[2],box[3]),(0,0,255),5)  # 標記外框
+        cv2.rectangle(image,(box[0],box[1]),(box[2],box[3]), RED, 5)  # 標記外框
         putText(box[0],box[3],text)   # 寫出文字
 
 cv2.imshow('image', image)
@@ -157,10 +158,71 @@ cv2.destroyAllWindows()
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+filename = "C:/_git/vcs/_4.python/opencv/data/captcha/captcha03.png"
+
+image = cv2.imread(filename)  # 讀取本機圖片
+
+plt.figure("影像處理", figsize=(16, 8))
+
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉為灰階
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(image_gray, cv2.COLOR_BGR2RGB))
+plt.title("轉為灰階")
+
+_, image_gray_inv = cv2.threshold(image_gray, 150, 255, cv2.THRESH_BINARY_INV)  # 轉為反相黑白
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(image_gray_inv, cv2.COLOR_BGR2RGB))
+plt.title("轉為反相黑白")
+
+print(image_gray_inv.shape)
+print(len(image_gray_inv))
+print(len(image_gray_inv[3]))
+
+for i in range(len(image_gray_inv)):  # i為每一列
+    for j in range(len(image_gray_inv[i])):  # j為每一行
+        if image_gray_inv[i][j] == 255:  # 顏色為白色
+            count = 0
+            for k in range(-2, 3):
+                for l in range(-2, 3):
+                    try:
+                        if image_gray_inv[i + k][j + l] == 255:  # 若是白點就將count加1
+                            count += 1
+                    except IndexError:
+                        pass
+            if count <= 6:  # 週圍少於等於6個白點
+                image_gray_inv[i][j] = 0  # 將白點去除
+
+image_dilation = cv2.dilate(image_gray_inv, (8, 8), iterations=1)  # 圖形加粗 擴大使膨脹
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(image_dilation, cv2.COLOR_BGR2RGB))
+plt.title("擴大使膨脹")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
 print("------------------------------------------------------------")  # 60個

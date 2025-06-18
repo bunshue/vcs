@@ -6,16 +6,11 @@
 是否任意停止皆可成檔案?
 
 """
+from opencv_common import *
 
 RECORD_TIME_MINUTE = 120
 
-import os
-import sys
-import time
-import random
 import datetime
-import cv2
-import numpy as np
 from PIL import ImageGrab
 
 print("------------------------------------------------------------")  # 60個

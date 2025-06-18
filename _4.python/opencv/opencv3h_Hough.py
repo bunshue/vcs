@@ -34,7 +34,7 @@ for line in lines:
     y1 = int(y0 + 1000 * (a))
     x2 = int(x0 - 1000 * (-b))
     y2 = int(y0 - 1000 * (a))
-    cv2.line(orgb, (x1, y1), (x2, y2), (0, 0, 255), 2)
+    cv2.line(orgb, (x1, y1), (x2, y2), RED, 2)
 
 plt.subplot(121)
 plt.imshow(oShow)
@@ -62,7 +62,7 @@ print("共找到 :", len(lines), "條直線")
 
 for line in lines:
     x1, y1, x2, y2 = line[0]
-    cv2.line(orgb, (x1, y1), (x2, y2), (255, 255, 255), 2)
+    cv2.line(orgb, (x1, y1), (x2, y2), WHITE, 2)
 
 plt.subplot(121)
 plt.imshow(oShow)
@@ -87,8 +87,8 @@ circles = cv2.HoughCircles(
 )
 circles = np.uint16(np.around(circles))
 for i in circles[0, :]:
-    cv2.circle(o, (i[0], i[1]), i[2], (255, 0, 0), 12)
-    cv2.circle(o, (i[0], i[1]), 2, (255, 0, 0), 12)
+    cv2.circle(o, (i[0], i[1]), i[2], BLUE, 12)
+    cv2.circle(o, (i[0], i[1]), 2, BLUE, 12)
 
 plt.subplot(121)
 plt.imshow(oshow)
@@ -115,8 +115,8 @@ circles = cv2.HoughCircles(
 )
 circles = np.uint16(np.around(circles))
 for i in circles[0, :]:
-    cv2.circle(o, (i[0], i[1]), i[2], (255, 0, 0), 12)  # 注意如果是白色，会显示满屏白色，不仔细分析还会以为程序错了呢
-    cv2.circle(o, (i[0], i[1]), 2, (255, 0, 0), 12)
+    cv2.circle(o, (i[0], i[1]), i[2], BLUE, 12)  # 注意如果是白色，会显示满屏白色，不仔细分析还会以为程序错了呢
+    cv2.circle(o, (i[0], i[1]), 2, BLUE, 12)
 
 plt.subplot(121)
 plt.imshow(oshow)
@@ -165,7 +165,7 @@ for rho, theta in lines1[:]:
     y1 = int(y0 + 1000 * (a))
     x2 = int(x0 - 1000 * (-b))
     y2 = int(y0 - 1000 * (a))
-    cv2.line(img, (x1, y1), (x2, y2), (0, 0, 255), 1)
+    cv2.line(img, (x1, y1), (x2, y2), RED, 1)
 
 plt.subplot(224)
 plt.title("霍夫變換 HoughLines")
@@ -251,9 +251,9 @@ circles = cv2.HoughCircles(
 circles = np.uint16(np.around(circles))
 for i in circles[0, :]:
     # 画外圆
-    cv2.circle(img3, (i[0], i[1]), i[2], (0, 255, 0), 2)
+    cv2.circle(img3, (i[0], i[1]), i[2], GREEN, 2)
     # 画出圆心
-    cv2.circle(img3, (i[0], i[1]), 2, (0, 0, 255), 3)
+    cv2.circle(img3, (i[0], i[1]), 2, RED, 3)
 
 plt.subplot(224)
 plt.imshow(cv2.cvtColor(img3, cv2.COLOR_BGR2RGB))
@@ -309,9 +309,9 @@ if len(circles) > 0:
     out = image.copy()
     for x, y, r in circles[0]:
         # 畫圓
-        cv2.circle(out, (x, y), r, (0, 0, 255), 3)
+        cv2.circle(out, (x, y), r, RED, 3)
         # 畫圓心
-        cv2.circle(out, (x, y), 2, (0, 255, 0), 3)
+        cv2.circle(out, (x, y), 2, GREEN, 3)
     image = cv2.hconcat([image, out])
 
 
@@ -432,7 +432,7 @@ for line in lines:
     y1 = int(y0 + 1000 * (a))  # 建立 y1
     x2 = int(x0 - 1000 * (-b))  # 建立 x2
     y2 = int(y0 - 1000 * (a))  # 建立 y2
-    cv2.line(src, (x1, y1), (x2, y2), (0, 255, 0), 2)  # 繪製綠色線條
+    cv2.line(src, (x1, y1), (x2, y2), GREEN, 2)  # 繪製綠色線條
     # cv2.line(src, (x1, y1), (x2, y2), colors[index%6], 2)  # 繪製綠色線條
     index += 1
 
@@ -485,7 +485,7 @@ for line in lines:
     y1 = int(y0 + 1000 * (a))  # 建立 y1
     x2 = int(x0 - 1000 * (-b))  # 建立 x2
     y2 = int(y0 - 1000 * (a))  # 建立 y2
-    cv2.line(src, (x1, y1), (x2, y2), (0, 0, 255), 2)  # 繪製紅色線條
+    cv2.line(src, (x1, y1), (x2, y2), RED, 2)  # 繪製紅色線條
 
 cv2.imshow("dst", src)
 
@@ -529,7 +529,7 @@ print("共找到 :", len(lines), "條直線")
 # 繪製檢測到的直線, 畫在src上
 for line in lines:
     x1, y1, x2, y2 = line[0]
-    cv2.line(src, (x1, y1), (x2, y2), (255, 0, 0), 3)  # 繪製藍色線條
+    cv2.line(src, (x1, y1), (x2, y2), BLUE, 3)  # 繪製藍色線條
 cv2.imshow("dst", src)
 
 
@@ -573,8 +573,8 @@ circles = np.uint(np.around(circles))  # 轉成整數
 # 繪製檢測到的直線, 畫在src上
 for c in circles[0]:
     x, y, r = c
-    cv2.circle(src, (x, y), r, (0, 255, 0), 3)  # 綠色繪圓外圈
-    cv2.circle(src, (x, y), 2, (0, 0, 255), 2)  # 紅色繪圓中心
+    cv2.circle(src, (x, y), r, GREEN, 3)  # 綠色繪圓外圈
+    cv2.circle(src, (x, y), 2, RED, 2)  # 紅色繪圓中心
 cv2.imshow("dst", src)
 
 

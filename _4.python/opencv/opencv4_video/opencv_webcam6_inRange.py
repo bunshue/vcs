@@ -5,22 +5,7 @@
 
 """
 
-import os
-import sys
-import time
-import math
-import random
-
-print("------------------------------------------------------------")  # 60個
-
-ESC = 27
-
-red = (0, 0, 255)
-green = (0, 255, 0)
-blue = (255, 0, 0)
-
-import cv2
-import numpy as np
+from opencv_common import *
 
 print("------------------------------------------------------------")  # 60個
 
@@ -183,7 +168,7 @@ while True:
                         img,
                         (contour[i - 1][0][0], contour[i - 1][0][1]),
                         (contour[i][0][0], contour[i][0][1]),
-                        red,
+                        RED,
                         3,
                     )
                 elif i == len(contour) - 1:
@@ -192,7 +177,7 @@ while True:
                         img,
                         (contour[i][0][0], contour[i][0][1]),
                         (contour[0][0][0], contour[0][0][1]),
-                        red,
+                        RED,
                         3,
                     )
 
@@ -233,7 +218,7 @@ while True:
         area = cv2.contourArea(contour)
         if area > 300:
             x, y, w, h = cv2.boundingRect(contour)  # 取得座標與長寬尺寸
-            img = cv2.rectangle(img, (x, y), (x + w, y + h), red, 3)  # 繪製四邊形
+            img = cv2.rectangle(img, (x, y), (x + w, y + h), RED, 3)  # 繪製四邊形
 
     cv2.imshow("WebCam", img)
     k = cv2.waitKey(1)
@@ -279,7 +264,7 @@ while True:
         area = cv2.contourArea(contour)
         if area > 300:
             x, y, w, h = cv2.boundingRect(contour)
-            img = cv2.rectangle(img, (x, y), (x + w, y + h), red, 3)
+            img = cv2.rectangle(img, (x, y), (x + w, y + h), RED, 3)
 
     # 設定選取藍色的程式
     blue_output = cv2.inRange(img, blue_lower, blue_upper)  # 使用 inRange 設定影像顏色範圍
@@ -298,7 +283,7 @@ while True:
         area = cv2.contourArea(contour)
         if area > 300:
             x, y, w, h = cv2.boundingRect(contour)
-            img = cv2.rectangle(img, (x, y), (x + w, y + h), green, 3)
+            img = cv2.rectangle(img, (x, y), (x + w, y + h), GREEN, 3)
 
     cv2.imshow("WebCam", img)
     k = cv2.waitKey(1)

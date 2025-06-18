@@ -136,7 +136,7 @@ pts = np.array(
 )  # 產生座標陣列
 
 # 畫多邊形 空心
-# cv2.polylines(image,[pts],True,(0,255,0), line_width)   # 繪製多邊形
+# cv2.polylines(image,[pts],True, GREEN, line_width)   # 繪製多邊形
 
 # 畫多邊形 實心
 cv2.fillPoly(image, [pts], GREEN)
@@ -944,3 +944,35 @@ cv2.rectangle(img, (1, 1), (300, 300), BLUE)  # 繪製矩形
 img = np.ones((480, 640, 3), np.uint8) * 255  # 白底畫布
 
 # if key == 27:  # ESC 則結束
+
+# 黃底藍字
+# 標註右下角底色是黃色
+cv2.rectangle(
+    img,
+    (img.shape[1] - 140, img.shape[0] - 20),
+    (img.shape[1], img.shape[0]),
+    YELLOW,
+    -1,
+)
+# 標註找到多少的人臉
+cv2.putText(
+    img,
+    "Finding " + str(len(faces)) + " face",
+    (img.shape[1] - 135, img.shape[0] - 5),
+    cv2.FONT_HERSHEY_COMPLEX,
+    0.5,
+    BLUE,
+    1,
+)
+
+
+font = cv2.FONT_HERSHEY_SIMPLEX
+loc = (10, 40)
+cv2.putText(image, "origin", loc, font, 1, RED, 2, cv2.LINE_AA)
+cv2.putText(sift_out, "sift", loc, font, 1, RED, 2, cv2.LINE_AA)
+# cv2.putText(surf_out, 'surt', loc, font, 1, RED, 2, cv2.LINE_AA)
+cv2.putText(orb_out, "orb", loc, font, 1, RED, 2, cv2.LINE_AA)
+# ------------------------------------------------------------
+cv2.putText(
+    image, "O", (current_x, 100), cv2.FONT_HERSHEY_PLAIN, 0.4, BLUE, cv2.LINE_AA
+)

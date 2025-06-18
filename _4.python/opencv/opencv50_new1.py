@@ -5,19 +5,7 @@ opencv 集合 新進1
 
 from opencv_common import *
 
-ESC = 27
-SPACE = 32
-
-red = (0, 0, 255)
-green = (0, 255, 0)
-blue = (255, 0, 0)
-white = (255, 255, 255)
-
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-
-from PIL import Image
-from PIL import ImageFont
-from PIL import ImageDraw
 
 print("------------------------------------------------------------")  # 60個
 
@@ -571,16 +559,13 @@ image_b = np.zeros([h, w, 3])  # 黑色
 radius = 100
 
 cx, cy = 200, 150
-color = (0, 0, 255)  # 紅
-cv2.circle(image_r, (cx, cy), radius, color, -1)  # 繪製實心圓形
+cv2.circle(image_r, (cx, cy), radius, RED, -1)  # 繪製實心圓形
 
 cx, cy = 150, 250
-color = (0, 255, 0)  # 綠
-cv2.circle(image_g, (cx, cy), radius, color, -1)  # 繪製實心圓形
+cv2.circle(image_g, (cx, cy), radius, GREEN, -1)  # 繪製實心圓形
 
 cx, cy = 250, 250
-color = (255, 0, 0)  # 藍
-cv2.circle(image_b, (cx, cy), radius, color, -1)  # 繪製實心圓形
+cv2.circle(image_b, (cx, cy), radius, BLUE, -1)  # 繪製實心圓形
 
 image = cv2.add(image_r, image_g)  # 疊加紅色和綠色
 image = cv2.add(image, image_b)  # 疊加藍色
@@ -742,7 +727,7 @@ image = cv2.imread(filename)
 h, w = image.shape[:2]  # 取得原始影像的長寬
 
 mask = np.zeros((h + 2, w + 2, 1), np.uint8)  # 製作 mask，長寬都要加上 2
-image1 = floodFill(image, mask, (100, 10), red, (100, 100, 60), (100, 100, 100))
+image1 = floodFill(image, mask, (100, 10), RED, (100, 100, 60), (100, 100, 100))
 
 image = cv2.imread(filename)
 h, w = image.shape[:2]  # 取得原始影像的長寬
@@ -752,7 +737,7 @@ mask = 255 - mask  # 變成全白遮罩
 mask[0:100, 0:200] = 0  # 將左上角長方形變成黑色
 
 # 只處理mask區域
-image2 = floodFill(image, mask, (100, 10), red, (100, 100, 60), (200, 200, 200))
+image2 = floodFill(image, mask, (100, 10), RED, (100, 100, 60), (200, 200, 200))
 
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
@@ -2846,7 +2831,7 @@ key_points1 = surf.detect(img_gray1)
 key_points1.sort(key=lambda kp:kp.size, reverse=True)
 
 img_color1 = cv2.cvtColor(img_gray1, cv2.COLOR_GRAY2RGB)
-cv2.drawKeypoints(img_color1, key_points1[:25], img_color1, color=(255, 0, 0),
+cv2.drawKeypoints(img_color1, key_points1[:25], img_color1, color=BLUE,
                   flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 
 from scpy2.utils.image import concat_keypoints
@@ -2957,7 +2942,7 @@ def circularity(contour):
 coin_contours = [
     contour for contour in coin_contours if 0.8 < circularity(contour) < 1.2
 ]
-cv2.drawContours(img_coin, coin_contours, -1, (255, 0, 0))
+cv2.drawContours(img_coin, coin_contours, -1, BLUE)
 
 cvshow("demo1", img_coin)
 
@@ -3337,8 +3322,8 @@ seed2 = 152, 126
 diff = (13, 13, 13)
 h, w = img.shape[:2]
 mask = np.zeros((h + 2, w + 2), np.uint8)
-cv2.floodFill(img, mask, seed1, (0, 0, 0), diff, diff, cv2.FLOODFILL_MASK_ONLY)
-cv2.floodFill(img, None, seed2, (0, 0, 255), diff, diff)
+cv2.floodFill(img, mask, seed1, BLACK, diff, diff, cv2.FLOODFILL_MASK_ONLY)
+cv2.floodFill(img, None, seed2, RED, diff, diff)
 fig, axes = plt.subplots(1, 2, figsize=(9, 4))
 axes[0].imshow(~mask, cmap="gray")
 axes[1].imshow(img)

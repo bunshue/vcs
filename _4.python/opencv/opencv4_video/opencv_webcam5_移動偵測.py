@@ -1,10 +1,4 @@
-ESC = 27
-
-import cv2
-
-import sys
-import math
-import numpy as np
+from opencv_common import *
 
 print("------------------------------------------------------------")  # 60個
 

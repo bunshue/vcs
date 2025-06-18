@@ -510,21 +510,6 @@ f.seek(3, 1) 從現在位置往後移動3個字
 f.seek(-5, 2) 從最後面往前移動5個字
 
 
-OpenCV 的 cv2.imread 在讀取圖片時，可以在第二個參數指定圖片的格式，可用的選項有三種：
-
-
-數值 1
-cv2.IMREAD_COLOR
-    此為預設值，這種格式會讀取 RGB 三個 channels 的彩色圖片，而忽略透明度的 channel。
-
-數值 0
-cv2.IMREAD_GRAYSCALE
-    以灰階的格式來讀取圖片。
-數值 -1
-cv2.IMREAD_UNCHANGED
-    讀取圖片中所有的 channels，包含透明度的 channel。 
-    
-
 
 
 py之字串處理
@@ -2375,8 +2360,6 @@ df.iloc[nnn, nnn]	iloc使用index來取資料
 ok 但是可以看看medium的英文網站
 https://medium.com/py-tips-conceptes/%E6%9C%AC%E6%96%87%E7%B4%80%E9%8C%84python%E7%B9%AA%E5%9C%96%E7%9A%84%E6%96%B9%E6%B3%95-%E4%BD%BF%E7%94%A8-seaborn-255b0006eb3e
 
-#cv2.imwrite('test.jpg',img) 偽寫入
-
 excel相關之python套件
 
 openpyxl	讀寫.xlsx
@@ -2388,23 +2371,10 @@ openpyxl	讀寫.xlsx
 openpyxl	讀寫.xlsx
 openpyxl	讀寫.xlsx
 
-
-
-read
-    img = cv2.imread('car.jpg')             # 讀取圖片
-
-resize
-    img_small = cv2.resize(img, (300, 100))  # 改變尺寸
-
-save
-        cv2.imwrite('small.jpg', img_small)  # 儲存影像
-
 plt.xticks([])  #隱藏x座標
 plt.yticks([])  #隱藏y座標
 
-
 df的方法
-
 
 基本常用口訣 做成 python.doc 待印之口訣
 python_密技.doc

@@ -4,15 +4,9 @@ cv2之工具
 cv2.setMouseCallback
 
 """
-import sys
-import cv2
-import numpy as np
+from opencv_common import *
 
-W = 640
-H = 480
-
-ESC = 27
-SPACE = 32
+W, H = 640, 480
 
 print("------------------------------------------------------------")  # 60個
 print("cv2.setMouseCallback 01")
@@ -155,14 +149,14 @@ dots = []  # 記錄座標的空串列
 def show_xy(event, x, y, flags, param):
     if event == cv2.EVENT_LBUTTONDOWN:  #  滑鼠左鍵
         dots.append([x, y])  # 記錄座標
-        cv2.circle(image, (x, y), 10, (0, 0, 255), -1)  # 在點擊的位置，繪製圓形
+        cv2.circle(image, (x, y), 10, RED, -1)  # 在點擊的位置，繪製圓形
         num = len(dots)  # 目前有幾個座標
         if num > 1:  # 如果有兩個點以上
             x1 = dots[num - 2][0]
             y1 = dots[num - 2][1]
             x2 = dots[num - 1][0]
             y2 = dots[num - 1][1]
-            cv2.line(image, (x1, y1), (x2, y2), (0, 0, 255), 2)  # 取得最後的兩個座標，繪製直線
+            cv2.line(image, (x1, y1), (x2, y2), RED, 2)  # 取得最後的兩個座標，繪製直線
         cv2.imshow("OpenCV", image)
 
 
@@ -193,9 +187,7 @@ def show_xy(event, x, y, flags, param):
             image2 = image.copy()  # 拖曳時不斷複製 image
             dot2 = [x, y]  # 拖曳時不斷更新第二個座標
             # 根據兩個座標繪製四邊形
-            cv2.rectangle(
-                image2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0, 0, 255), 2
-            )
+            cv2.rectangle(image2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), RED, 2)
             # 不斷顯示新圖片 ( 如果不這麼做，會出現一堆四邊形殘影 )
             cv2.imshow("OpenCV", image2)
 
@@ -224,9 +216,7 @@ def show_xy(event, x, y, flags, param):
         if event == cv2.EVENT_MOUSEMOVE:  # 滑鼠移動
             image2 = image.copy()
             dot2 = [x, y]
-            cv2.rectangle(
-                image2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0, 0, 255), 2
-            )
+            cv2.rectangle(image2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), RED, 2)
             cv2.imshow("OpenCV", image2)
         if event == cv2.EVENT_LBUTTONUP:  # 左鍵放開
             image = image2  # 滑鼠放開時 ( event == cv2.EVENT_LBUTTONUP )，將 image 更新為 image2
@@ -256,9 +246,7 @@ def show_xy(event, x, y, flags, param):
         if event == cv2.EVENT_MOUSEMOVE:  # 滑鼠移動
             image2 = image.copy()
             dot2 = [x, y]
-            cv2.rectangle(
-                image2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0, 0, 255), 2
-            )
+            cv2.rectangle(image2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), RED, 2)
             cv2.imshow("OpenCV", image2)
         if event == cv2.EVENT_LBUTTONUP:  # 左鍵放開
             level = 8  # 縮小比例 ( 可當作馬賽克的等級 )
@@ -420,7 +408,7 @@ def OnMouseAction(event, x, y, flags, param):
 
     if mode == 0 and event == cv2.EVENT_LBUTTONDOWN:
         print("左鍵畫點")
-        # cv2.line(image, (0, 0), (x, y), (255, 255, 0), 2)#畫直線連線
+        # cv2.line(image, (0, 0), (x, y), CYAN, 2)#畫直線連線
         cv2.circle(image, (x, y), 10, (255), -1)  # 畫點
 
     if mode == 1 and event == cv2.EVENT_LBUTTONDOWN:
@@ -428,7 +416,7 @@ def OnMouseAction(event, x, y, flags, param):
         x1, y1 = x, y
     elif mode == 1 and event == cv2.EVENT_MOUSEMOVE and flags == cv2.EVENT_FLAG_LBUTTON:
         # print("左鍵拖曳")
-        cv2.rectangle(image, (x1, y1), (x, y), (0, 255, 0), -1)
+        cv2.rectangle(image, (x1, y1), (x, y), GREEN, -1)
 
 
 image = np.zeros((500, 500, 3), np.uint8)
@@ -563,8 +551,8 @@ def show_xy(event, x, y, flags, param):
             y1 = dots[len(dots) - 2][1]
             x2 = dots[len(dots) - 1][0]
             y2 = dots[len(dots) - 1][1]
-            cv2.line(mask_w, (x1, y1), (x2, y2), (0, 0, 0), 50)  # 在白色遮罩上畫出黑色線條
-            cv2.line(mask_b, (x1, y1), (x2, y2), (255, 255, 255), 50)  # 在黑色遮罩上畫出白色線條
+            cv2.line(mask_w, (x1, y1), (x2, y2), BLACK, 50)  # 在白色遮罩上畫出黑色線條
+            cv2.line(mask_b, (x1, y1), (x2, y2), WHITE, 50)  # 在黑色遮罩上畫出白色線條
 
 
 cv2.imshow("OpenCV", mask_b)  # 啟用視窗

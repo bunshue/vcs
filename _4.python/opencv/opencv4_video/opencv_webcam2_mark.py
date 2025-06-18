@@ -6,13 +6,8 @@ WebCam 使用
 目前 webcam 僅 x64 電腦可用
 """
 
-import cv2
-import sys
-import time
-import math
-import numpy as np
+from opencv_common import *
 
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("按 ESC 離開")

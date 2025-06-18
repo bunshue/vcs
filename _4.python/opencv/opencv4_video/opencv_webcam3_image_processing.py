@@ -1,8 +1,4 @@
-import cv2
-
-import sys
-import numpy as np
-import math
+from opencv_common import *
 
 print("------------------------------------------------------------")  # 60個
 

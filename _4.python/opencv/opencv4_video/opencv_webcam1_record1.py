@@ -22,13 +22,10 @@ VideoWriter_fourcc('F', 'L', 'V', '1')	.flv	Flash視訊
 
 """
 
-import cv2
-import sys
-import time
+from opencv_common import *
+
 import datetime
 
-ESC = 27
-SPACE = 32
 RECORD_TIME_MINUTE = 10  # 分
 RECORD_DATA_SIZE = 100  # MB
 
@@ -68,7 +65,7 @@ ENCODING_TYPE = 'MJPG'  # 編碼器
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 print("最簡錄影, 一直錄, 按 ESC 離開")
 
 if MODE == MODE_3:  # 縮時錄影
@@ -212,7 +209,7 @@ print("\n停止錄影時間 :", now)
 record_time_elapsed = time.time() - record_time_st
 print("錄影時間 :", int(record_time_elapsed), "秒")
 print("存檔檔名 :", record_filename)
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -304,7 +301,6 @@ out = cv2.VideoWriter(record_filename, fourcc, fps, (width, height), isColor=Fal
 # 且
 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉換成灰階
 out.write(gray)  # 將圖像寫入影片
-
 
 
 """

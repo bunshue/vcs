@@ -8,7 +8,7 @@ from opencv_common import *
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
+
 filename1 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates46.jpg"
 filename2 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates46_head.jpg"
 
@@ -346,7 +346,6 @@ for method in methods:
     cv2.rectangle(img2, location, bottom_right, 255, 5)
     cvshow("Match", img2)
 
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -354,7 +353,6 @@ print("------------------------------------------------------------")  # 60個
 
 # opencv模板匹配----多目标匹配
 
-red = (0, 0, 255)
 linewidth = 3
 
 # 读取目标图片
@@ -425,7 +423,6 @@ print("------------------------------------------------------------")  # 60個
 
 # opencv模板匹配----单目标匹配
 
-red = (0, 0, 255)
 linewidth = 3
 
 # 读取目标图片
@@ -452,7 +449,7 @@ strmin_val = str(min_val)
 # (min_loc[0]+twidth,min_loc[1]+theight)：矩形的宽高
 
 cv2.rectangle(
-    target, min_loc, (min_loc[0] + twidth, min_loc[1] + theight), red, linewidth
+    target, min_loc, (min_loc[0] + twidth, min_loc[1] + theight), RED, linewidth
 )
 
 # 显示结果,并将匹配值显示在标题栏上
@@ -463,7 +460,6 @@ print("匹配值 :", strmin_val)
 cv2.imshow(strText, target)
 cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

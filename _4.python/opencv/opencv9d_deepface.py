@@ -7,13 +7,12 @@
 from opencv_common import *
 
 from deepface import DeepFace
-from PIL import ImageFont, ImageDraw, Image
 
 filename = "data/FourPeople.jpg"
 
 
 # 定義加入文字函式
-def putText(x, y, text, size=30, color=(255, 255, 255)):
+def putText(x, y, text, size=30, color=WHITE):
     global image
     fontpath = "C:/_git/vcs/_1.data/______test_files1/_font/NotoSansTC-Bold.otf"  # 字型
     font = ImageFont.truetype(fontpath, size)  # 定義字型與文字大小
@@ -57,7 +56,7 @@ try:
         y = cc["region"]["y"]
         w = cc["region"]["w"]
         h = cc["region"]["h"]
-        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 5)  # 把臉框出來
+        cv2.rectangle(image, (x, y), (x + w, y + h), GREEN, 5)  # 把臉框出來
 except:
     print("找不到資料")
     pass
@@ -74,7 +73,7 @@ try:
         y = cc["region"]["y"]
         w = cc["region"]["w"]
         h = cc["region"]["h"]
-        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 5)  # 把臉框出來
+        cv2.rectangle(image, (x, y), (x + w, y + h), GREEN, 5)  # 把臉框出來
 except:
     print("找不到資料")
     pass
@@ -138,7 +137,7 @@ print("共找到 :", len(faces), "張臉")
 #先把臉框出來
 for x, y, w, h in faces:
     print(x, y, w, h)
-    cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 5)  # 把臉框出來
+    cv2.rectangle(image, (x, y), (x + w, y + h), GREEN, 5)  # 把臉框出來
 """
 """
 cv2.imshow('ImageShow', image)
@@ -175,7 +174,7 @@ for x, y, w, h in faces:
     except:
         print("XXXXXXX")
         pass
-    cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 把臉框出來
+    cv2.rectangle(image, (x, y), (x + w, y + h), GREEN, 2)  # 把臉框出來
 
 cv2.imshow("ImageShow", image)
 cv2.waitKey(0)

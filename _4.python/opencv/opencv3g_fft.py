@@ -16,13 +16,11 @@ cv 傅立葉 cv2.dft cv2.idft
 頻率域影像處理 DCT IDCT
 """
 
-print("------------------------------------------------------------")  # 60個
-
 from opencv_common import *
 
-import pylab as pl
+print("------------------------------------------------------------")  # 60個
 
-ESC = 27
+import pylab as pl
 
 NNNN = 100
 
@@ -74,7 +72,6 @@ np.set_printoptions(precision=3, linewidth=80, suppress=False)
 
 import scipy
 
-'''
 print("------------------------------------------------------------")  # 60個
 # 使用 np 傅立葉
 print("------------------------------------------------------------")  # 60個
@@ -413,6 +410,7 @@ image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 # 傅立葉變換, 轉成頻率域
 X_DFT = cv2.dft(np.float32(image), flags=cv2.DFT_COMPLEX_OUTPUT)
 dftshift = np.fft.fftshift(X_DFT)  # 0 頻率分量移至中心
+
 # 計算映射到[0,255]的振幅
 spectrum = 20 * np.log(cv2.magnitude(dftshift[:, :, 0], dftshift[:, :, 1]))
 
@@ -1397,18 +1395,18 @@ plt.figure(figsize=(12, 8))
 
 # 繪制三角波的FFT的前20項的振幅，由於不含索引為偶數的值均為0， 因此取
 # log之後無窮小，無法繪圖，用np.clip函數設定陣列值的上下限，確保繪圖正確
-plt.subplot(4,4,1)
+plt.subplot(4, 4, 1)
 plt.plot(x, y, label="原資料")
 
-plt.subplot(4,4,2)
+plt.subplot(4, 4, 2)
 plt.scatter(fy.real, fy.imag, s=100, label="FFT")
 
-plt.subplot(4,4,3)
+plt.subplot(4, 4, 3)
 plt.plot(np.clip(20 * np.log10(np.abs(fy[:20])), -120, 120), "o")
 plt.xlabel("頻率視窗(frequency bin)")
 plt.ylabel("幅值(dB)")
 
-plt.subplot(4,4,4)
+plt.subplot(4, 4, 4)
 plt.plot(ify.real, label="IFFT")
 
 # 正弦波
@@ -1418,18 +1416,18 @@ ify = np.fft.ifft(fy)  # 一維 ifft
 
 # 繪制三角波的FFT的前20項的振幅，由於不含索引為偶數的值均為0， 因此取
 # log之後無窮小，無法繪圖，用np.clip函數設定陣列值的上下限，確保繪圖正確
-plt.subplot(4,4,5)
+plt.subplot(4, 4, 5)
 plt.plot(x, y, label="原資料")
 
-plt.subplot(4,4,6)
+plt.subplot(4, 4, 6)
 plt.scatter(fy.real, fy.imag, s=100, label="FFT")
 
-plt.subplot(4,4,7)
+plt.subplot(4, 4, 7)
 plt.plot(np.clip(20 * np.log10(np.abs(fy)), -120, 120), "o")
 plt.xlabel("頻率視窗(frequency bin)")
 plt.ylabel("幅值(dB)")
 
-plt.subplot(4,4,8)
+plt.subplot(4, 4, 8)
 plt.plot(ify.real, label="IFFT")
 
 # 方波
@@ -1437,19 +1435,19 @@ x, y = square_wave(NNNN)
 fy = np.fft.fft(y) / NNNN  # 為了計算各個成分的能量，需要將FFT的結果除以FFT的長度
 ify = np.fft.ifft(fy)  # 一維 ifft
 
-plt.subplot(4,4,9)
+plt.subplot(4, 4, 9)
 plt.plot(y, label="原始方波", linewidth=2)
 
-plt.subplot(4,4,10)
+plt.subplot(4, 4, 10)
 
 plt.scatter(fy.real, fy.imag, s=100, label="FFT")
 
-plt.subplot(4,4,11)
+plt.subplot(4, 4, 11)
 plt.plot(np.clip(20 * np.log10(np.abs(fy[:20])), -120, 120), "o")
 plt.xlabel("頻率視窗(frequency bin)")
 plt.ylabel("幅值(dB)")
 
-plt.subplot(4,4,12)
+plt.subplot(4, 4, 12)
 plt.plot(ify.real, label="IFFT")
 
 # 正弦波
@@ -1457,18 +1455,18 @@ x, y = sine_wave2(NNNN)
 fy = np.fft.fft(y) / NNNN  # 為了計算各個成分的能量，需要將FFT的結果除以FFT的長度
 ify = np.fft.ifft(fy)  # 一維 ifft
 
-plt.subplot(4,4,13)
+plt.subplot(4, 4, 13)
 plt.plot(x, y, label="原資料")
 
-plt.subplot(4,4,14)
+plt.subplot(4, 4, 14)
 plt.scatter(fy.real, fy.imag, s=100, label="FFT")
 
-plt.subplot(4,4,15)
+plt.subplot(4, 4, 15)
 plt.plot(np.clip(20 * np.log10(np.abs(fy)), -120, 120), "o")
 plt.xlabel("頻率視窗(frequency bin)")
 plt.ylabel("幅值(dB)")
 
-plt.subplot(4,4,16)
+plt.subplot(4, 4, 16)
 plt.plot(ify.real, label="IFFT")
 
 show()
@@ -1521,7 +1519,7 @@ print(np.abs(fy[3]), np.rad2deg(np.angle(fy[3])))  # 周期為42.667取樣點的
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("np.fft 04 觀察訊號的頻譜")
 
 # 156.25Hz和234.375Hz的波形和頻譜
