@@ -44,7 +44,8 @@ image0 原圖 彩圖
 image1 灰階
 image2 遮罩過後
 """
-import cv2
+
+from opencv_common import *
 
 # 測試圖片
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
@@ -57,41 +58,9 @@ filename = "data/pic_brightness3.bmp"
 filename = "data/pic_calcHist.jpg"
 filename = "C:/_git/vcs/_4.python/opencv\data/pic_gray_400X400_100-200.png"
 
-filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
-filename3 = "C:/_git/vcs/_4.python/opencv/data/lena.jpg"
-filename4 = "C:/_git/vcs/_1.data/______test_files1/ims01.bmp"
-
 num_bins = 256  # 直方圖顯示時的束數
 
 ESC = 27
-
-print("------------------------------------------------------------")  # 60個
-
-# 共同
-import os
-import sys
-import time
-import math
-import random
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
-
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-plt.rcParams["font.size"] = 12  # 設定字型大小
-
-
-def show():
-    plt.show()
-    pass
-
 
 print("------------------------------------------------------------")  # 60個
 

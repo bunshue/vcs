@@ -3,43 +3,11 @@
 
 """
 
-import cv2
-
-filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
-filename3 = "C:/_git/vcs/_4.python/opencv/data/lena.jpg"
-filename4 = "C:/_git/vcs/_1.data/______test_files1/ims01.bmp"
+from opencv_common import *
 
 # filename = "C:/_git/vcs/_4.python/opencv/data/threshold/threshold1.png"
 
 maxval = 255  # 定義像素最大值, 閾值
-
-print("------------------------------------------------------------")  # 60個
-
-# 共同
-import os
-import sys
-import time
-import math
-import random
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
-
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-plt.rcParams["font.size"] = 12  # 設定字型大小
-
-
-def show():
-    plt.show()
-    pass
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -302,6 +270,191 @@ plt.subplot(224)
 plt.title("ADAPTIVE_THRESH_GAUSSIAN_C 自適應閾值")
 plt.imshow(cv2.cvtColor(dst_gauss, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("opencv 41 三種二值化方法")
+
+THRESHOLD = 127
+
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+
+image = cv2.imread(filename, 0)
+
+#        cv2.threshold(image, 閥值, 最大灰度值, 使用的二值化方法)
+t1, thd = cv2.threshold(image, THRESHOLD, 255, cv2.THRESH_BINARY)
+
+athdMEAN = cv2.adaptiveThreshold(
+    image, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 3, 5
+)
+
+athdGAUS = cv2.adaptiveThreshold(
+    image, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 3, 5
+)
+
+plt.figure(figsize=(12, 8))
+
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(thd, cv2.COLOR_BGR2RGB))
+plt.title("thd")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(athdMEAN, cv2.COLOR_BGR2RGB))
+plt.title("athdMEAN")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(athdGAUS, cv2.COLOR_BGR2RGB))
+plt.title("athdGAUS")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("opencv 42")
+
+THRESHOLD = 127
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/tiffany.bmp"
+
+image = cv2.imread(filename, 0)
+
+#        cv2.threshold(image, 閥值, 最大灰度值, 使用的二值化方法)
+t1, thd = cv2.threshold(image, THRESHOLD, 255, cv2.THRESH_BINARY)
+t2, otsu = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+plt.figure(figsize=(12, 8))
+
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(thd, cv2.COLOR_BGR2RGB))
+plt.title("thd")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(otsu, cv2.COLOR_BGR2RGB))
+plt.title("otsu")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("opencv 43 圖片的二值化處理, 要先轉成灰階, 再二值化")
+
+THRESHOLD = 30
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
+#        cv2.threshold(image, 閥值, 最大灰度值, 使用的二值化方法)
+thr, image_binary = cv2.threshold(image, THRESHOLD, 255, cv2.THRESH_TOZERO)
+print(thr)
+
+plt.imshow(cv2.cvtColor(image_binary, cv2.COLOR_BGR2RGB))
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("opencv 44 各種二值化")
+
+THRESHOLD = 127
+
+image = cv2.imread(filename)
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
+
+# 轉換前，都先將圖片轉換成灰階色彩
+#        cv2.threshold(image, 閥值, 最大灰度值, 使用的二值化方法)
+ret, output1 = cv2.threshold(
+    image_gray, THRESHOLD, 255, cv2.THRESH_BINARY
+)  # 如果大於 THRESHOLD 就等於 255，反之等於 0。
+
+ret, output2 = cv2.threshold(
+    image_gray, THRESHOLD, 255, cv2.THRESH_BINARY_INV
+)  # 如果大於 THRESHOLD 就等於 0，反之等於 255。
+
+ret, output3 = cv2.threshold(
+    image_gray, THRESHOLD, 255, cv2.THRESH_TRUNC
+)  # 如果大於 THRESHOLD 就等於 THRESHOLD，反之數值不變。
+
+ret, output4 = cv2.threshold(
+    image_gray, THRESHOLD, 255, cv2.THRESH_TOZERO
+)  # 如果大於 THRESHOLD 數值不變，反之數值等於 0。
+
+ret, output5 = cv2.threshold(
+    image_gray, THRESHOLD, 255, cv2.THRESH_TOZERO_INV
+)  # 如果大於 THRESHOLD 等於 0，反之數值不變。
+
+plt.subplot(231)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(232)
+plt.imshow(cv2.cvtColor(output1, cv2.COLOR_BGR2RGB))
+plt.title("output1")
+
+plt.subplot(233)
+plt.imshow(cv2.cvtColor(output2, cv2.COLOR_BGR2RGB))
+plt.title("output2")
+
+plt.subplot(234)
+plt.imshow(cv2.cvtColor(output3, cv2.COLOR_BGR2RGB))
+plt.title("output3")
+
+plt.subplot(235)
+plt.imshow(cv2.cvtColor(output4, cv2.COLOR_BGR2RGB))
+plt.title("output4")
+
+plt.subplot(236)
+plt.imshow(cv2.cvtColor(output5, cv2.COLOR_BGR2RGB))
+plt.title("output5")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("opencv 45")
+
+THRESHOLD = 127
+
+image = cv2.imread(filename)
+
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
+
+# 轉換前，都先將圖片轉換成灰階色彩
+ret, output1 = cv2.threshold(image_gray, THRESHOLD, 255, cv2.THRESH_BINARY)
+
+output2 = cv2.adaptiveThreshold(
+    image_gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2
+)
+
+output3 = cv2.adaptiveThreshold(
+    image_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
+)
+
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(output1, cv2.COLOR_BGR2RGB))
+plt.title("output1")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(output2, cv2.COLOR_BGR2RGB))
+plt.title("output2")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(output3, cv2.COLOR_BGR2RGB))
+plt.title("output3")
 
 show()
 

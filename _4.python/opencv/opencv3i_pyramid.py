@@ -5,34 +5,8 @@
 pyrDown 这里的down是指图像变小，所以原始图像在金字塔的底部。
 pyrUp   这里的up是指将图像的尺寸变大，所以原始图像位于图像金字塔的顶层。
 """
-import cv2
 
-print("------------------------------------------------------------")  # 60個
-
-# 共同
-import os
-import sys
-import time
-import math
-import random
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
-
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-plt.rcParams["font.size"] = 12  # 設定字型大小
-
-
-def show():
-    plt.show()
-    pass
-
+from opencv_common import *
 
 print("------------------------------------------------------------")  # 60個
 

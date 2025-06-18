@@ -6,16 +6,7 @@ QR code
 
 """
 
-import cv2
-import numpy as np
-
-ESC = 27
-SPACE = 32
-
-red = (0, 0, 255)
-green = (0, 255, 0)
-blue = (255, 0, 0)
-white = (255, 255, 255)
+from opencv_common import *
 
 print("------------------------------------------------------------")  # 60個
 
@@ -67,7 +58,7 @@ if bbox is not None:
     print(bbox)
     print(rectified)
     box = boxSize(bbox[0])
-    cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), red, 5)  # 畫矩形
+    cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), RED, 5)  # 畫矩形
 
 cv2.imshow("image", image)
 cv2.waitKey()
@@ -113,7 +104,7 @@ if bbox is not None:
     print(bbox)
     print(rectified)
     box = boxSize(bbox[0])
-    cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), red, 5)
+    cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), RED, 5)
 
 cv2.imshow("image", image)
 cv2.waitKey()

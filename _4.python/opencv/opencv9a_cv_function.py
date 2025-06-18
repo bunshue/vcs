@@ -3,27 +3,15 @@ cv2之各種影像處理功能
 
 """
 
-import sys
-import cv2
-import numpy as np
+from opencv_common import *
 
-W = 640
-H = 480
-
-ESC = 27
-SPACE = 32
-
-red = (0, 0, 255)
-green = (0, 255, 0)
-blue = (255, 0, 0)
-
-white = (255, 255, 255)
+W, H = 640, 480
 
 print("------------------------------------------------------------")  # 60個
 
 print("cv2.goodFeaturesToTrack 角點偵測")
 
-filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
 
 image = cv2.imread(filename)
 image = cv2.resize(image, (0, 0), fx=0.75, fy=0.75)
@@ -116,14 +104,14 @@ def draw_boxpoints(points):
             image,
             (int(p1[0]), int(p1[1])),
             (int(p2[0]), int(p2[1])),
-            red,
+            RED,
             7,
             lineType=cv2.LINE_AA,
         )
 
         # 畫出來, 另法, 用drawContours
         points = np.int0(points)  # 取整數
-        cv2.drawContours(image, [points], 0, green, 3)
+        cv2.drawContours(image, [points], 0, GREEN, 3)
 
 
 # boxPoints返回四個點順序：右下→左下→左上→右上
@@ -224,7 +212,7 @@ points = np.random.randint(MIN, MAX, (N, 2), np.int32)
 print(points)
 # 把上述點集處的灰度值設置為 255,單個白色像素點不容易觀察，用一個小圓標注一下
 for i in range(N):
-    cv2.circle(I, (points[i, 0], points[i, 1]), 6, red, -1)
+    cv2.circle(I, (points[i, 0], points[i, 1]), 6, RED, -1)
 
 # 求點集 points 的凸包
 convexhull = cv2.convexHull(points, clockwise=False)
@@ -239,7 +227,7 @@ for i in range(k - 1):
         I,
         (convexhull[i, 0, 0], convexhull[i, 0, 1]),
         (convexhull[i + 1, 0, 0], convexhull[i + 1, 0, 1]),
-        green,
+        GREEN,
         2,
     )
 
@@ -248,7 +236,7 @@ cv2.line(
     I,
     (convexhull[k - 1, 0, 0], convexhull[k - 1, 0, 1]),
     (convexhull[0, 0, 0], convexhull[0, 0, 1]),
-    blue,
+    BLUE,
     2,
 )
 
@@ -295,7 +283,7 @@ N = 30  # 隨機生成 N 個坐標點，每一行存儲一個坐標
 # 隨機生成 橫縱坐標均在 MIN 至 MAX 的坐標點
 points = np.random.randint(MIN, MAX, (N, 2), np.int32)
 # print(points)
-draw_points(points, red)
+draw_points(points, RED)
 
 print("包覆三角形")
 # 最小外包直立矩形
@@ -304,7 +292,7 @@ print("面積 :", area)
 print("包覆所有點的三角形之頂點座標 :", triangle)
 print(type(triangle))
 print(triangle.dtype)
-draw_lines(triangle, green)
+draw_lines(triangle, GREEN)
 
 print("包覆矩形")
 rectangle = cv2.boundingRect(points)
@@ -314,7 +302,7 @@ y_st = rectangle[1]
 w = rectangle[2]
 h = rectangle[3]
 x_sp, y_sp = x_st + w, y_st + h
-cv2.rectangle(image, (x_st, y_st), (x_sp, y_sp), blue, 3)
+cv2.rectangle(image, (x_st, y_st), (x_sp, y_sp), BLUE, 3)
 
 cv2.imshow("image", image)
 cv2.waitKey(0)
@@ -340,7 +328,7 @@ image = np.zeros((H, W, 3), np.uint8)  # 黑色畫板
 points = np.array([[0, 0], [100, 0], [100, 100], [0, 100]], np.float32)
 print(points.shape)
 
-draw_points(points, red)
+draw_points(points, RED)
 
 # 計算點集的所圍區域的周長
 length1 = cv2.arcLength(points, False)  # 首尾不相連
@@ -370,7 +358,7 @@ contour = np.array(
     [[20, 20], [50, 70], [20, 120], [120, 120], [100, 70], [120, 20]], np.int32
 )
 
-draw_points(contour, red)
+draw_points(contour, RED)
 
 # 輪廓的凸包
 hull = cv2.convexHull(contour, returnPoints=False)
@@ -396,7 +384,7 @@ image = np.zeros((H, W, 3), np.uint8)  # 黑色畫板
 # 點集
 contour = np.array([[0, 0], [50, 30], [100, 100], [100, 0]], np.float32)
 
-draw_points(contour, red)
+draw_points(contour, RED)
 
 # 判斷三個點和點集構成的輪廓的關系
 dist1 = cv2.pointPolygonTest(contour, (80, 40), False)

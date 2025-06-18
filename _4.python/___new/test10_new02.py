@@ -766,12 +766,6 @@ src = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
 
 print("------------------------------------------------------------")  # 60個
 
-# 使用 cv2.TM_SQDIFF 執行模板匹配
-result = cv2.matchTemplate(src, template, cv2.TM_SQDIFF)
-print(f"result大小 = {result.shape}")
-print(f"陣列內容 \n{result}")
-
-
 # print(f"輸出二維陣列 = \n{data}")
 # print(f"轉成一維陣列 = \n{data.ravel()}")
 
@@ -2538,14 +2532,6 @@ msg = 'aaaaaaaaaaaaaa'
 errprint(msg)
 errprint("Usage:", __doc__)
 errprint("Skipping file %r; can't parse line %d:\n%s" % (self.fname, srow, line))
-
-------------------------------------------------------------
-
-# Definition file template
-DEF_TEMPLATE = """\
-EXPORTS
-%s
-"""
 
 ------------------------------------------------------------
 
