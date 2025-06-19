@@ -215,7 +215,10 @@ def find_end(start, arg, black, white, width, black_max, white_max):
 if __name__ == "__main__":
     filename = "C:/_git/vcs/_4.python/PIL/data/ocr/carPlate02.jpg"
     filename = "car.png"
+    
     img = cv2.imread(filename, cv2.IMREAD_COLOR)
+    cv2.imshow("src", img)
+    
     # 预处理图像
     rect, afterimg = find_license(img)
 

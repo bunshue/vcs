@@ -57,14 +57,16 @@ cap2.release()
 cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 05 N X N")
 print("按 ESC 離開")
 
-N = 2  # 設定要分成幾格, N X N
-W = 640 * 2
-H = 480 * 2
-cap = cv2.VideoCapture(0)
+N = 3  # 設定要分成幾格, N X N
+W = 640 * 1
+H = 480 * 1
+
+cap = cv2.VideoCapture(1)
 output = np.zeros((H, W, 3), dtype="uint8")  # 產生 WxH 的黑色背景
 
 if not cap.isOpened():
@@ -83,8 +85,7 @@ while True:
     output[h:h*2, 0:w] = frame             # 將 output 的特定區域置換為 frame, 左下
     output[h:h*2, w:w*2] = frame             # 將 output 的特定區域置換為 frame, 右下
 
-    #左右相反
-    frame = cv2.flip(frame, 1)
+    frame = cv2.flip(frame, 1)  # 左右相反
     """
     img_list.append(frame)  # 每次擷取影像時，將影像存入串列
     if len(img_list) > N * N:
@@ -104,43 +105,23 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 10 Covex效果")
-print("按 ESC 離開")
-
-
-def convex(src_img, raw, effect):
-    col, row, channel = raw[:]
-    cx, cy, r = effect[:]
-    output = np.zeros([row, col, channel], dtype=np.uint8)
-    for y in range(row):
-        for x in range(col):
-            d = ((x - cx) * (x - cx) + (y - cy) * (y - cy)) ** 0.5
-            if d <= r:
-                nx = int((x - cx) * d / r + cx)
-                ny = int((y - cy) * d / r + cy)
-                output[y, x, :] = src_img[ny, nx, :]
-            else:
-                output[y, x, :] = src_img[y, x, :]
-    return output
-
-
-cap = cv2.VideoCapture(0)
-
-if not cap.isOpened():
-    print("開啟攝影機失敗")
-    exit()
+cap = cv2.VideoCapture(1)
 
 while True:
     ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")  # 如果讀取錯誤，印出訊息
-        break
-    w, h = 640, 480
-    cw, ch = int(w / 2), int(h / 2)  # 取得中心點
-    frame = convex(frame, (w, h, 3), (cw, ch, 100))
+    width = int(cap.get(3))
+    height = int(cap.get(4))
 
-    cv2.imshow("OpenCV 03", frame)
+    image = np.zeros(frame.shape, np.uint8)
+    smaller_frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)
+    image[: height // 2, : width // 2] = cv2.rotate(smaller_frame, cv2.ROTATE_180)
+    image[height // 2 :, : width // 2] = smaller_frame
+    image[: height // 2, width // 2 :] = cv2.rotate(smaller_frame, cv2.ROTATE_180)
+    image[height // 2 :, width // 2 :] = smaller_frame
+
+    cv2.imshow("OpenCV 12", image)
 
     k = cv2.waitKey(1)
     if k == ESC:  # 按 ESC 鍵, 結束
@@ -150,8 +131,9 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 11 按鍵 慢慢顯示出一圖的效果")
+print("OpenCV VideoCapture 11 按 SPACE 製作一個閃光燈拍照的效果")
 print("按 ESC 離開")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
@@ -184,11 +166,12 @@ while True:
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 12 存圖 按 SPACE 製作一個閃光燈拍照的效果")
 print("按 ESC 離開")
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 a = 0  # 白色圖片透明度
 
@@ -236,11 +219,12 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 13 存圖 按 SPACE 製作一個閃光燈拍照的效果 + 倒數三秒")
 print("按 ESC 離開")
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 
 def putText(source, x, y, text, scale=2.5, color=WHITE):
@@ -303,29 +287,36 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 14 加 logo")
 print("按 ESC 離開")
 
+W, H = 640, 480
+
 logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 
-logo_filename = "C:/_git/vcs/_4.python/_data/logo1.png"
+logo_filename = "C:/_git/vcs/_4.python/_data/logo1.png"  # 400X400
 
 logo = cv2.imread(logo_filename)
-logo = cv2.resize(logo, (100, 100))
+logo = cv2.resize(logo, (logo.shape[0]//4, logo.shape[1]//4))
 
 size = logo.shape
-img = np.zeros((480, 640, 3), dtype="uint8")
-img[0:480, 0:640] = "255"
+print(size)
+img = np.zeros((H, W, 3), dtype="uint8")
+img[0:H, 0:W] = "255"
 
+print('製作mask')
 x_st, y_st = 10, 50  # logo貼上位置
 img[y_st : y_st + size[0], x_st : x_st + size[1]] = logo
-
 img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 ret, mask1 = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY_INV)
 logo = cv2.bitwise_and(img, img, mask=mask1)
 ret, mask2 = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY)
-cap = cv2.VideoCapture(0)
+
+print(mask2.shape)
+
+cap = cv2.VideoCapture(1)
 
 if not cap.isOpened():
     print("開啟攝影機失敗")
@@ -353,6 +344,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """ many
 print("OpenCV VideoCapture 16 Webcam影像轉成gif")
@@ -360,7 +352,7 @@ print("按 ESC 離開")
 
 output = []  # 建立輸出的空串列
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 if not cap.isOpened():
     print("開啟攝影機失敗")
@@ -397,6 +389,7 @@ output[0].save(
 )
 cv2.destroyAllWindows()
 """
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 17 處理影片")
@@ -443,7 +436,7 @@ print("frame 轉 gif")
 n = 0
 for i in source:
     frame = Image.fromarray(i)
-    frame.save(f"tmp_gif{n}.gif")
+    # frame.save(f"tmp_gif{n}.gif")
     n = n + 1
 
 print("讀取 gif")
@@ -467,244 +460,17 @@ output[0].save(
 print("OK")
 
 print("------------------------------------------------------------")  # 60個
-
-print("OpenCV VideoCapture 18 QRCode 偵測器")
-print("按 ESC 離開")
-
-cap = cv2.VideoCapture(1)
-
-
-def putText(x, y, text, color=BLACK):
-    global img
-    font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"  # 有中文
-    font_size = 20
-    font = ImageFont.truetype(font_filename, font_size)
-    imgPil = Image.fromarray(img)
-    draw = ImageDraw.Draw(imgPil)
-    draw.text((x, y), text, fill=color, font=font)
-    img = np.array(imgPil)
-
-
-def boxSize(arr):
-    global data
-    box_roll = np.rollaxis(arr, 1, 0)
-    xmax = int(np.amax(box_roll[0]))
-    xmin = int(np.amin(box_roll[0]))
-    ymax = int(np.amax(box_roll[1]))
-    ymin = int(np.amin(box_roll[1]))
-    return (xmin, ymin, xmax, ymax)
-
-
-qrcode = cv2.QRCodeDetector()  # QRCode 偵測器
-
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img = cv2.resize(frame, (640, 480))
-    ok, data, bbox, rectified = qrcode.detectAndDecodeMulti(img)  # 辨識 QRCode
-    if ok:
-        for i in range(len(data)):
-            text = data[i]  # QRCode 內容
-            box = boxSize(bbox[i])  # QRCode 座標
-            cv2.rectangle(
-                img, (box[0], box[1]), (box[2], box[3]), RED, 5
-            )  # 繪製外框
-            putText(box[0], box[3], text, color=RED)  # 顯示文字
-
-    cv2.imshow("OpenCV 09", img)
-
-    k = cv2.waitKey(1)
-    if k == ESC:  # 按 ESC 鍵, 結束
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("OpenCV VideoCapture 19 QRCode 偵測器")
-print("按 ESC 離開")
-
-cap = cv2.VideoCapture(1)
-
-
-def putText(x, y, text, size=20, color=BLACK):
-    global img
-    font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"  # 有中文
-    font_size = 20
-    font = ImageFont.truetype(font_filename, font_size)
-    imgPil = Image.fromarray(img)  # 轉換成 PIL 影像物件
-    draw = ImageDraw.Draw(imgPil)  # 定義繪圖物件
-    draw.text((x, y), text, fill=color, font=font)  # 加入文字
-    img = np.array(imgPil)  # 轉換成 np.array
-
-
-# 定義馬賽克函式
-def mosaic(image, level):
-    size = image.shape  # 取得原始圖片的資訊
-    h = int(size[0] / level)  # 按照比例縮小後的高度 ( 使用 int 去除小數點 )
-    w = int(size[1] / level)  # 按照比例縮小後的寬度 ( 使用 int 去除小數點 )
-    output = cv2.resize(image, (w, h), interpolation=cv2.INTER_LINEAR)  # 根據縮小尺寸縮小
-    output = cv2.resize(
-        output, (size[1], size[0]), interpolation=cv2.INTER_NEAREST
-    )  # 放大到原本的大小
-    return output
-
-
-qrcode = cv2.QRCodeDetector()  # QRCode 偵測器
-
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img = cv2.resize(frame, (640, 480))
-    ok, data, bbox, rectified = qrcode.detectAndDecodeMulti(img)  # 辨識 QRCode
-    # 如果偵測到 QRCode
-    if ok:
-        for i in range(len(data)):
-            text = data[i]  # 取出內容
-            # 如果內容是 a1，套用模糊效果
-            if text == "a1":
-                img = cv2.blur(img, (20, 20))
-                putText(0, 0, "模糊效果", 100, WHITE)
-            # 如果內容是 a2，套用馬賽克效果
-            elif text == "a2":
-                img = mosaic(img, 15)
-                putText(0, 0, "馬賽克效果", 100, WHITE)
-            # 如果內容是 a2，套用片效果
-            elif text == "a3":
-                img = 255 - img
-                putText(0, 0, "負片效果", 100, BLACK)
-
-    cv2.imshow("OpenCV 10", img)
-
-    k = cv2.waitKey(1)
-    if k == ESC:  # 按 ESC 鍵, 結束
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("OpenCV VideoCapture 20 讀取 QR code 圖檔")
-print("按 ESC 離開")
-
-filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_qrcode/QR1.png"
-
-image = cv2.imread(filename)
-
-
-def putText(x, y, text, color=BLACK):
-    global image
-    font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"  # 有中文
-    font_size = 20
-    font = ImageFont.truetype(font_filename, font_size)
-    imagePil = Image.fromarray(image)
-    draw = ImageDraw.Draw(imagePil)
-    draw.text((x, y), text, fill=color, font=font)
-    image = np.array(imagePil)
-
-
-def boxSize(arr):
-    global data
-    box_roll = np.rollaxis(arr, 1, 0)
-    xmax = int(np.amax(box_roll[0]))
-    xmin = int(np.amin(box_roll[0]))
-    ymax = int(np.amax(box_roll[1]))
-    ymin = int(np.amin(box_roll[1]))
-    return (xmin, ymin, xmax, ymax)
-
-
-qrcode = cv2.QRCodeDetector()  # QRCode 偵測器
-
-status, data, bbox, rectified = qrcode.detectAndDecodeMulti(image)  # 辨識 QRCode
-print("OK", status)
-print("len", len(data))
-print("data", data)
-print("bbox", bbox)
-print("rectified", rectified)
-
-if status == True:
-    for i in range(len(data)):
-        text = data[i]  # QRCode 內容
-
-        box = boxSize(bbox[i])  # QRCode 座標
-        cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), RED, 2)  # 繪製外框
-        print(box)
-        print(text)
-        # putText(10,10,"aaa",color=(0,0,255))                     # 顯示文字
-        putText(box[0], box[3], text, color=RED)  # 顯示文字
-
-cv2.imshow("OpenCV 11", image)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-cap = cv2.VideoCapture(0)
-
-while True:
-    ret, frame = cap.read()
-    width = int(cap.get(3))
-    height = int(cap.get(4))
-
-    image = np.zeros(frame.shape, np.uint8)
-    smaller_frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)
-    image[: height // 2, : width // 2] = cv2.rotate(smaller_frame, cv2.ROTATE_180)
-    image[height // 2 :, : width // 2] = smaller_frame
-    image[: height // 2, width // 2 :] = cv2.rotate(smaller_frame, cv2.ROTATE_180)
-    image[height // 2 :, width // 2 :] = smaller_frame
-
-    cv2.imshow("OpenCV 12", image)
-
-    k = cv2.waitKey(1)
-    if k == ESC:  # 按 ESC 鍵, 結束
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-cap = cv2.VideoCapture(0)
-
-while True:
-    ret, frame = cap.read()
-    width = int(cap.get(3))
-    height = int(cap.get(4))
-
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    lower_blue = np.array([90, 50, 50])
-    upper_blue = np.array([130, 255, 255])
-
-    mask = cv2.inRange(hsv, lower_blue, upper_blue)
-
-    result = cv2.bitwise_and(frame, frame, mask=mask)
-
-    cv2.imshow("OpenCV 13a", result)
-    cv2.imshow("OpenCV 13b_mask", mask)
-
-    k = cv2.waitKey(1)
-    if k == ESC:  # 按 ESC 鍵, 結束
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV_ai_72 追蹤功能 按a開始 選取ROI, 按Enter確定")
 
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+video_filename = "D:/tennis.mp4"
+
 tracker = cv2.TrackerCSRT_create()  # 創建追蹤器
 tracking = False  # 設定 False 表示尚未開始追蹤
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 if not cap.isOpened():
     print("開啟攝影機失敗")
     sys.exit()
@@ -796,7 +562,7 @@ multiTracker = cv2.legacy.MultiTracker_create()  # 建立多物件追蹤器
 tracking = False  # 設定追蹤尚未開始
 colors = [RED, YELLOW]  # 建立外框色彩清單
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 if not cap.isOpened():
     print("開啟攝影機失敗")
     sys.exit()
@@ -848,7 +614,7 @@ color = ((16, 59, 0), (47, 255, 255))
 lower = np.array(color[0], dtype="uint8")
 upper = np.array(color[1], dtype="uint8")
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 # 取得影像的尺寸大小
 w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
@@ -913,7 +679,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("按 ESC 離開")
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 logo_filename = "C:/_git/vcs/_4.python/_data/panda.jpg"
 logo = cv2.imread(logo_filename)
@@ -1002,3 +768,16 @@ print("------------------------------------------------------------")  # 60個
 # 設定參數 無效~~~~
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)  # 設定寬度
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 960)  # 設定高度
+
+
+ret, frame = cap.read()
+# width = int(cap.get(3))
+# height = int(cap.get(4))
+
+print(width)
+print(height)
+print(cap.get(0))
+print(cap.get(1))
+print(cap.get(2))
+print(cap.get(3))
+print(cap.get(4))

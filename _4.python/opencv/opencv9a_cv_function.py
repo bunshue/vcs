@@ -1,7 +1,10 @@
 """
 cv2之各種影像處理功能
 
-色彩空間轉換
+cv2.split / cv2.merge
+
+color space 色彩空間轉換
+
 圖像金字塔
 
 """
@@ -70,8 +73,7 @@ print("------------------------------------------------------------")  # 60個
 
 """
 color space 色彩空間轉換
-cv2.split
-cv2.merge
+cv2.split / cv2.merge
 """
 
 filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
@@ -95,6 +97,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 pt_x = 169
 pt_y = 118
@@ -116,6 +119,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread(filename1)  # BGR讀取
 cv2.imshow("BGR Color Space", img)
@@ -127,6 +131,7 @@ cv2.imshow("HSV Color Space", img_hsv)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
@@ -159,13 +164,16 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread(filename1)
 cv2.imshow("bgr", image)
 
 print("BGR 轉 HSV")
+
 hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 hue, saturation, value = cv2.split(hsv_image)
+
 cv2.imshow("hsv", hue)
 cv2.imshow("saturation", saturation)
 cv2.imshow("value", value)
@@ -173,6 +181,7 @@ cv2.imshow("value", value)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread(filename1)
@@ -186,6 +195,7 @@ cv2.imshow("R -> G -> B ", rgb_image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread(filename1)
@@ -202,6 +212,7 @@ cv2.imshow("The Merge Image", hsv_image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread(filename1)
@@ -223,6 +234,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread(filename1)
 
@@ -243,6 +255,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread(filename1)
 
@@ -262,6 +275,7 @@ cv2.imshow("The New Image", new_image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread(filename1)
@@ -339,6 +353,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
 # 檔案 => cv2影像
@@ -404,9 +419,11 @@ for corner in corners:
     cv2.circle(image, (x, y), 10, RED, 2)
 
 cv2.imshow("Frame", image)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("cv2.goodFeaturesToTrack 角點偵測")
@@ -461,6 +478,7 @@ while cap.isOpened():
 cap.release()
 cv2.destroyAllWindows()
 """
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # boxPoints 帶有旋轉的矩形框座標
@@ -529,9 +547,9 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cc.bmp")
-print("顯示原圖")
 
 cv2.imshow("original", image)
 
@@ -551,6 +569,7 @@ cv2.imshow("result", image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 W, H = 400, 400
@@ -573,6 +592,7 @@ cv2.imshow("image", image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("幾何形狀的檢測和擬合 convexHull")
@@ -622,6 +642,7 @@ cv2.imshow("I", I)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
@@ -685,6 +706,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("幾何形狀的檢測和擬合 arcLength")
 
@@ -719,9 +741,11 @@ print("首尾相連 線長 :", length2)
 print("面積 :", area)
 
 cv2.imshow("image", image)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("幾何形狀的檢測和擬合 convexityDefects")
@@ -750,6 +774,7 @@ cv2.imshow("image", image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("幾何形狀的檢測和擬合 pointPolygonTest")
@@ -816,9 +841,13 @@ filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 # filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
 
 o = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-print("顯示原圖")
+
 cv2.imshow("original", o)
 
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 连续3次进行pyrDown
@@ -868,12 +897,11 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 o = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-print("顯示原圖")
+
 cv2.imshow("original", o)
 
 print("------------------------------------------------------------")  # 60個
 
-print("顯示xxxx")
 r1 = cv2.pyrDown(o)
 r2 = cv2.pyrDown(r1)
 r3 = cv2.pyrDown(r2)
@@ -881,6 +909,7 @@ print("o.shape=", o.shape)
 print("r1.shape=", r1.shape)
 print("r2.shape=", r2.shape)
 print("r3.shape=", r3.shape)
+
 cv2.imshow("r1", r1)
 cv2.imshow("r2", r2)
 cv2.imshow("r3", r3)
@@ -893,10 +922,9 @@ print("------------------------------------------------------------")  # 60個
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_small.bmp"
 
 o = cv2.imread(filename)
-print("顯示原圖")
+
 cv2.imshow("original", o)
 
-print("顯示xxxx")
 r1 = cv2.pyrUp(o)
 r2 = cv2.pyrUp(r1)
 r3 = cv2.pyrUp(r2)
@@ -904,6 +932,7 @@ print("o.shape=", o.shape)
 print("r1.shape=", r1.shape)
 print("r2.shape=", r2.shape)
 print("r3.shape=", r3.shape)
+
 cv2.imshow("r1", r1)
 cv2.imshow("r2", r2)
 cv2.imshow("r3", r3)
@@ -915,10 +944,9 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 o = cv2.imread(filename)
-print("顯示原圖")
+
 cv2.imshow("original", o)
 
-print("顯示xxxx")
 down = cv2.pyrDown(o)
 up = cv2.pyrUp(down)
 diff = up - o  # 構造diff圖像，查看up與o的區別
@@ -934,10 +962,9 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 o = cv2.imread(filename)
-print("顯示原圖")
+
 cv2.imshow("original", o)
 
-print("顯示xxxx")
 up = cv2.pyrUp(o)
 down = cv2.pyrDown(up)
 diff = down - o  # 構造diff圖像，查看down與o的區別
@@ -953,9 +980,7 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 O = cv2.imread(filename)
-print("顯示原圖")
 
-print("顯示xxxx")
 G0 = O
 G1 = cv2.pyrDown(G0)
 G2 = cv2.pyrDown(G1)
@@ -977,9 +1002,7 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 O = cv2.imread(filename)
-print("顯示原圖")
 
-print("顯示xxxx")
 G0 = O
 G1 = cv2.pyrDown(G0)
 L0 = O - cv2.pyrUp(G1)
@@ -996,9 +1019,7 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 O = cv2.imread(filename)
-print("顯示原圖")
 
-print("顯示xxxx")
 # =================生成高斯金字塔======================
 G0 = O
 G1 = cv2.pyrDown(G0)

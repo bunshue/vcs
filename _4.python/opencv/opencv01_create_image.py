@@ -518,27 +518,6 @@ plt.title("BlueHSV")
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-W, H, D = 5, 5, 3
-image = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)  # np.random之randint不含尾
-min = 100
-max = 200
-mask = cv2.inRange(image, min, max)
-print("image = \n", image)
-print("mask = \n", mask)
-
-plt.figure("mask", figsize=(12, 6))
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("image")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
-plt.title("mask")
-
-show()
-
 print("------------------------------------------------------------")  # 60個
 
 W, H, D = 5, 5, 3

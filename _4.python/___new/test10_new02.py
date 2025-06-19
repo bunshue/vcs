@@ -417,9 +417,6 @@ print(__doc__ % globals())  #__doc__的內容有%的, 用變數名稱替換
 print()
 print(__doc__)  #有%不替換
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 def lll(dirname):
@@ -504,11 +501,9 @@ if __name__ == "__main__":
     else:
         print('不是資料夾')
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-'''
 cwd = os.getcwd()
 print(cwd)
 
@@ -652,14 +647,7 @@ humi = 67.89
 temp = 23.45
 print("溫    度: %3.1f °C" % temp)
 print("相對溼度: %3.1f %% RH" % humi)
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -667,12 +655,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-"""
-仿射轉換（Affine transformation），又稱仿射映射，是指在幾何中，對一個向量空間進行一次線性轉換並接上一個平移，轉換為另一個向量空間。
-
-"""
-
 
 
 
@@ -703,24 +685,6 @@ Code Snippet
 print("------------------------------------------------------------")  # 60個
 
 
-cv2.waitKey(3000)  # 等待3秒
-cv2.destroyWindow("Peony1")  # 刪除Peony1
-cv2.waitKey(8000)  # 等待8秒
-cv2.destroyAllWindows()
-
-ret = cv2.imwrite("tmp_out1_7_1.tiff", img)  # 將檔案寫入out1_7_1.tiff
-ret = cv2.imwrite("tmp_out1_7_2.png", img)  # 將檔案寫入out1_7_2.png
-cv2.imwrite("a32.png", a32_image)  # 儲存alpha=32影像
-
-img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
-img = cv2.imread(filename1)  # 彩色讀取
-
-# 影像的屬性
-
-print(f"shape = {img.shape}")
-print(f"size  = {img.size}")
-print(f"dtype = {img.dtype}")
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -733,35 +697,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-陣列垂直合併 vstack()
-陣列水平合併 hstack()
-"""
-
-img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("Peony", img)
-
-# 準備搬出
-
-# 建立GRAY影像陣列
-image = np.zeros((5, 12), np.uint8)
-print(f"修改前 image=\n{image}")  # 顯示修改前GRAY影像
-print(f"image[1,4] = {image[1, 4]}")  # 列出特定像素點的內容
-
-image[1, 4] = 255  # 修改像素點的內容
-print(f"修改後 image=\n{image}")  # 顯示修改後的GRAY影像
-print(f"image[1,4] = {image[1, 4]}")  # 列出特定像素點的內容
 
 print("------------------------------------------------------------")  # 60個
 
-# 取出圖片的一塊
-face = img[70:220, 90:240]  # ROI, 先高後寬
-cv2.imshow("Face", face)
-
-print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
-src = cv2.imread(filename2)
 src = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
 
 print("------------------------------------------------------------")  # 60個
@@ -786,13 +724,6 @@ axes[1].plot(np.clip(20 * np.log10(np.abs(fy[:20])), -120, 120), "o")
 plt.subplot(231)
 plt.imshow(img[:, :, ::-1])
 plt.title('部分')
-
-
-result = cv2.calcHist([img_hsv], [0, 1], None, [40, 40], [0, 256, 0, 256])
-print(result)
-result /= np.max(result) / 255
-print(result)
-print(result.shape)
 
 ------------------------------------------------------------
 
@@ -1672,10 +1603,6 @@ file ...  : files to sum; '-' or no files means stdin
 sys.stderr.write('%s: %s\n%s' % ('aaaa', 'bbbbb', usage))
 
 ---
-
-# cv2 之讀檔 存檔 (轉換檔案格式) 直接改副檔名即可
-img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-cv2.imwrite("aaaa.png", img)
 
 撈出一層時 若遇到資料夾 是如何處理的?!
 
