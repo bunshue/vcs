@@ -1,7 +1,7 @@
 """
 cv2之各種影像處理功能
 
-QR code
+barcode / QR code
 
 captcha
 
@@ -10,32 +10,36 @@ captcha
 from opencv_common import *
 
 print("------------------------------------------------------------")  # 60個
+# barcode / QR code ST
+print("------------------------------------------------------------")  # 60個
 
-print("OpenCV_34")
+print("二維條碼")
 
-filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/_qrcode/QR1.png"
 
-# 檔案 => cv2影像
-image = cv2.imread(filename)  # 開啟圖片
+image = cv2.imread(filename)
 
 qrcode = cv2.QRCodeDetector()  # 建立 QRCode 偵測器
 data, bbox, rectified = qrcode.detectAndDecode(image)  # 偵測圖片中的 QRCode
 # 如果 bbox 是 None 表示圖片中沒有 QRCode
 if bbox is not None:
+    print("data")
     print(data)  # QRCode 的內容
+    print("bbox")
     print(bbox)  # QRCode 的邊界
+    print("rectified")
     print(rectified)  # 換成垂直 90 度的陣列
+else:
+    print("無 QR Code")
 
-cv2.imshow("image", image)
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_35")
 
-filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/_qrcode/QR1.png"
 
-# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 qrcode = cv2.QRCodeDetector()
@@ -61,18 +65,16 @@ if bbox is not None:
     box = boxSize(bbox[0])
     cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), RED, 5)  # 畫矩形
 
-cv2.imshow("image", image)
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_36")
 
 from PIL import ImageFont, ImageDraw, Image  # 載入 PIL ( 為了放中文字 )
 
-filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/_qrcode/QR1.png"
 
-# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 qrcode = cv2.QRCodeDetector()
@@ -107,10 +109,8 @@ if bbox is not None:
     box = boxSize(bbox[0])
     cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), RED, 5)
 
-cv2.imshow("image", image)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_37")
@@ -118,7 +118,6 @@ print("OpenCV_37")
 """ many-qr-code
 from PIL import ImageFont, ImageDraw, Image
 
-# 檔案 => cv2影像
 image = cv2.imread("many-qrcode.jpg")
 
 def putText(x,y,text,color=(0,0,0)):
@@ -152,16 +151,43 @@ if ok:
         cv2.rectangle(image,(box[0],box[1]),(box[2],box[3]), RED, 5)  # 標記外框
         putText(box[0],box[3],text)   # 寫出文字
 
-cv2.imshow('image', image)
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+show()
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 一維條碼
+filename = "C:/_git/vcs/_4.python/opencv/data/_qrcode/barcode1.png"
 
-filename = "C:/_git/vcs/_4.python/opencv/data/captcha/captcha03.png"
+image = cv2.imread(filename)
+
+barcode = cv2.barcode_BarcodeDetector()  # 建立 BarCode 偵測器
+data, data_type, bbox = barcode.detectAndDecode(image)  # 偵測 BarCode
+print("data")
+print(data)
+print("data_type")
+print(data_type)
+print("bbox")
+print(bbox)
+
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+# barcode / QR code ST
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+# captcha ST
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_4.python/opencv/data/_captcha/captcha03.png"
 
 image = cv2.imread(filename)  # 讀取本機圖片
 
@@ -209,6 +235,115 @@ plt.title("擴大使膨脹")
 
 show()
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# [OpenCV][Python]印出圖像中文字的位置及高寬
+# 本文將說明如何去辨識出圖片文字​位置及高寬。
+
+
+def read_posion(img):
+    # 輸入背景黑色，物件白色的圖
+    num_labels, labels, stats, _ = cv2.connectedComponentsWithStats(img, connectivity=8)
+    components = []
+    # boxes_data = []
+    for i in range(1, num_labels):  # 跳過背景
+        x, y, w, h, _ = stats[i]
+        components.append((x, y, w, h))
+
+    components.sort(key=lambda c: c[0])  # 按 x 座標排序
+
+    # 合併 x 軸在正負5範圍內的OCR
+    merged_components = []
+    current_component = list(components[0])
+
+    for i in range(1, len(components)):
+        if abs(components[i][0] - current_component[0]) <= 5:
+            current_component[0] = min(current_component[0], components[i][0])  # X 取最小值
+            current_component[1] = min(current_component[1], components[i][1])  # Y 取最小值
+            current_component[2] = max(current_component[2], components[i][2])  # w 取最大值
+            current_component[3] = (
+                abs(components[i][1] - current_component[1]) + components[i][3]
+            )  # h 取 Y2 - Y1 + H2
+        else:
+            merged_components.append(tuple(current_component[:4]))
+            current_component = list(components[i][:4])
+
+    # 合併最後一個OCR結果
+    merged_components.append(tuple(current_component[:4]))
+
+    return merged_components
+
+
+filename = "data/_captcha/captcha04.png"
+
+img = cv2.imread(filename)
+gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+box = read_posion(gray_img)
+
+for i, data in enumerate(box):
+    x, y, h, w = data
+    # 印出OCR 位置，高寬
+    print(f"第{i}個OCR，x:{x},y:{y},h:{h},w:{w}")
+
+
+"""
+函式詳細說明
+函式定義和參數:
+read_posion(img) 函式接受一個參數
+img：輸入的二值化圖像，背景是黑色，物件是白色。
+計算連通域:
+num_labels, labels, stats, _ = cv2.connectedComponentsWithStats(img, connectivity=8)
+使用 OpenCV 的 connectedComponentsWithStats 函數計算連通域
+num_labels：連通域的數量。
+labels：標籤圖，每個連通域有一個唯一的標籤。
+stats：每個連通域的統計資料（x, y, w, h, area）。
+_:忽略的中心點資料。
+提取連通域並存入列表:
+components = []
+for i in range(1, num_labels):  # 跳過背景
+    x, y, w, h, _ = stats[i]
+    components.append((x, y, w, h))
+遍歷 stats，跳過背景，提取每個連通域的位置信息和尺寸，存入 components 列表。
+按 x 座標排序:
+components.sort(key=lambda c: c[0])
+將 components 按 x 座標進行排序。
+合併相鄰的連通域:
+merged_components = []
+current_component = list(components[0])
+
+for i in range(1, len(components)):
+    if abs(components[i][0] - current_component[0]) <= 5:
+        current_component[0] = min(current_component[0], components[i][0])  # X 取最小值
+        current_component[1] = min(current_component[1], components[i][1])  # Y 取最小值
+        current_component[2] = max(current_component[2], components[i][2])  # w 取最大值
+        current_component[3] = abs(components[i][1] - current_component[1]) + components[i][3]  # h 取 Y2 - Y1 + H2
+    else:
+        merged_components.append(tuple(current_component[:4]))
+        current_component = list(components[i][:4])
+
+merged_components.append(tuple(current_component[:4]))
+初始化 merged_components 列表和 current_component。
+遍歷 components 列表，如果當前組件與前一組件的 x 座標差值在正負5範圍內，則合併它們。
+合併後的結果存入 merged_components。
+返回合併後的元件資訊:
+return merged_components
+返回合併後的元件資訊，這些資訊包括每個連通域的 x, y, w, h（左上角座標和寬高）。
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+# captcha SP
 print("------------------------------------------------------------")  # 60個
 
 

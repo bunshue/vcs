@@ -283,6 +283,39 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+
+image = cv2.imread(filename)
+
+plt.figure(figsize=(12, 8))
+
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+# 原圖(BGR) 轉HSV 再轉 BGR, 再轉RGB顯示
+hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+hsv_bgr = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(hsv_bgr, cv2.COLOR_BGR2RGB))
+plt.title("原圖轉HSV")
+
+h, s, v = cv2.split(hsv)
+v[:, :] = 255
+newHSV = cv2.merge([h, s, v])
+art = cv2.cvtColor(newHSV, cv2.COLOR_HSV2BGR)
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(art, cv2.COLOR_BGR2RGB))
+plt.title("修改V值")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread(filename1)
 cv2.imshow("The Image", image)  # 顯示BGR影像
@@ -764,8 +797,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1149,6 +1180,59 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 用二元視覺圖形計算深度訊息
+
+img_left = cv2.pyrDown(cv2.imread("data/aloeL.jpg"))
+img_right = cv2.pyrDown(cv2.imread("data/aloeR.jpg"))
+
+img_left = cv2.cvtColor(img_left, cv2.COLOR_BGR2RGB)
+img_right = cv2.cvtColor(img_right, cv2.COLOR_BGR2RGB)
+
+stereo_parameters = dict(
+    SADWindowSize=5,
+    numDisparities=192,
+    preFilterCap=4,
+    minDisparity=-24,
+    uniquenessRatio=1,
+    speckleWindowSize=150,
+    speckleRange=2,
+    disp12MaxDiff=10,
+    fullDP=False,
+    P1=600,
+    P2=2400,
+)
+
+stereo = cv2.StereoSGBM(**stereo_parameters)
+# NG disparity = stereo.compute(img_left, img_right).astype(np.float32) / 16
+
+# 用remap重疊左右兩幅圖形
+h, w = img_left.shape[:2]
+ygrid, xgrid = np.mgrid[:h, :w]
+ygrid = ygrid.astype(np.float32)
+xgrid = xgrid.astype(np.float32)
+# NG res = cv2.remap(img_right, xgrid - disparity, ygrid, cv2.INTER_LINEAR)
+
+fig, axes = plt.subplots(1, 3, figsize=(9, 3))
+axes[0].imshow(img_left)
+axes[0].imshow(img_right, alpha=0.5)
+# axes[1].imshow(disparity, cmap="gray")
+axes[2].imshow(img_left)
+# axes[2].imshow(res, alpha=0.5)
+for ax in axes:
+    ax.axis("off")
+fig.subplots_adjust(0, 0, 1, 1, 0, 0)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 # 圖像金字塔 SP
@@ -1175,8 +1259,5 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-

@@ -449,10 +449,86 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("opencv 29 三原色疊加")
+
+filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
+filename3 = "C:/_git/vcs/_4.python/opencv/data/RGB_B.png"
+
+image_r = cv2.imread(filename1)
+image_g = cv2.imread(filename2)
+image_b = cv2.imread(filename3)
+
+image = cv2.add(image_r, image_g)  # 疊加紅色和綠色
+image = cv2.add(image, image_b)  # 疊加藍色
+
+plt.figure(figsize=(12, 8))
+
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(image_r, cv2.COLOR_BGR2RGB))
+plt.title("R")
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(image_g, cv2.COLOR_BGR2RGB))
+plt.title("G")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(image_b, cv2.COLOR_BGR2RGB))
+plt.title("B")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("result")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+w, h = 400, 400
+image_r = np.zeros([h, w, 3])  # 黑色
+image_g = np.zeros([h, w, 3])  # 黑色
+image_b = np.zeros([h, w, 3])  # 黑色
+
+radius = 100
+
+cx, cy = 200, 150
+cv2.circle(image_r, (cx, cy), radius, RED, -1)  # 繪製實心圓形
+
+cx, cy = 150, 250
+cv2.circle(image_g, (cx, cy), radius, GREEN, -1)  # 繪製實心圓形
+
+cx, cy = 250, 250
+cv2.circle(image_b, (cx, cy), radius, BLUE, -1)  # 繪製實心圓形
+
+image = cv2.add(image_r, image_g)  # 疊加紅色和綠色
+image = cv2.add(image, image_b)  # 疊加藍色
+
+cvshow("RGB Model", image)
+
+plt.figure(figsize=(12, 8))
+
+plt.subplot(221)
+# NG plt.imshow(cv2.cvtColor(image_r, cv2.COLOR_BGR2RGB))
+plt.imshow(image_r)
+plt.title("R")
+
+plt.subplot(222)
+# NG plt.imshow(cv2.cvtColor(image_g, cv2.COLOR_BGR2RGB))
+plt.imshow(image_g)
+plt.title("G")
+
+plt.subplot(223)
+# NG plt.imshow(cv2.cvtColor(image_b, cv2.COLOR_BGR2RGB))
+plt.imshow(image_b)
+plt.title("B")
+
+plt.subplot(224)
+# NG plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(image)
+plt.title("RGB Model")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

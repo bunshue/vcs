@@ -8,7 +8,7 @@ from opencv_common import *
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("opencv 01")
 print("練習組合成一張大圖 picasa效果")
 
@@ -203,39 +203,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("opencv 12")
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
-image = cv2.imread(filename)
-
-plt.figure(figsize=(12, 8))
-
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-# 原圖(BGR) 轉HSV 再轉 BGR, 再轉RGB顯示
-hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-hsv_bgr = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(hsv_bgr, cv2.COLOR_BGR2RGB))
-plt.title("原圖轉HSV")
-
-h, s, v = cv2.split(hsv)
-v[:, :] = 255
-newHSV = cv2.merge([h, s, v])
-art = cv2.cvtColor(newHSV, cv2.COLOR_HSV2BGR)
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(art, cv2.COLOR_BGR2RGB))
-plt.title("修改V值")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("opencv 13")
 print("去除圖片的雜訊 fastNlMeansDenoisingColored")
 
@@ -290,64 +257,6 @@ plt.subplot(122)
 plt.imshow(cv2.cvtColor(cl1, cv2.COLOR_BGR2RGB))
 plt.title("生成自適應均衡化圖像\ncreateCLAHE")
 
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 20 Y對稱一張圖片")
-
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-
-image1 = cv2.imread(filename)
-
-w = image1.shape[1]
-h = image1.shape[0]
-
-D = 20
-output = np.zeros((h + D * 2, w * 2 + D * 2, 3), dtype="uint8")  # 產生 2W x H 的黑色背景
-
-image1 = image1[:h, :w]  # 取出 WxH 的影像 全部 也可只取部分
-
-print("左右翻轉影像")
-image12 = cv2.flip(image1, 1)
-
-# 左半
-output[D : h + D, D : w + D] = image1  # 將 output 左邊內容換成 image1
-# 右半
-output[D : h + D, w + D : w * 2 + D] = image12  # 將 output 右邊內容換成 image2
-
-plt.imshow(cv2.cvtColor(output, cv2.COLOR_BGR2RGB))
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 21 XY對稱一張圖片")
-
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-
-image1 = cv2.imread(filename)
-
-w = image1.shape[1]
-h = image1.shape[0]
-
-output = np.zeros((h * 2, w * 2, 3), dtype="uint8")  # 產生 2W x 2H 的黑色背景
-
-img = image1[:h, :w]  # 取出 WxH 的影像 全部 也可只取部分
-img2 = cv2.flip(img, 1)  # 左右翻轉
-img3 = cv2.flip(img, 0)  # 上下翻轉
-img4 = cv2.flip(img, -1)  # 上下左右翻轉
-
-# 左上
-output[:h, :w] = img
-# 右上
-output[:h, w : w * 2] = img2
-# 左下
-output[h : h * 2, :w] = img3
-# 右下
-output[h : h * 2, w : w * 2] = img4
-
-plt.imshow(cv2.cvtColor(output, cv2.COLOR_BGR2RGB))
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -509,93 +418,6 @@ plt.title("xxxx")
 show()
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 29 三原色疊加")
-
-filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
-filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
-filename3 = "C:/_git/vcs/_4.python/opencv/data/RGB_B.png"
-
-image_r = cv2.imread(filename1)
-image_g = cv2.imread(filename2)
-image_b = cv2.imread(filename3)
-
-image = cv2.add(image_r, image_g)  # 疊加紅色和綠色
-image = cv2.add(image, image_b)  # 疊加藍色
-
-plt.figure(figsize=(12, 8))
-
-plt.subplot(221)
-plt.imshow(cv2.cvtColor(image_r, cv2.COLOR_BGR2RGB))
-plt.title("R")
-
-plt.subplot(222)
-plt.imshow(cv2.cvtColor(image_g, cv2.COLOR_BGR2RGB))
-plt.title("G")
-
-plt.subplot(223)
-plt.imshow(cv2.cvtColor(image_b, cv2.COLOR_BGR2RGB))
-plt.title("B")
-
-plt.subplot(224)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("result")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 30")
-
-# 改用 製造數據 自己畫出來
-
-w, h = 400, 400
-image_r = np.zeros([h, w, 3])  # 黑色
-image_g = np.zeros([h, w, 3])  # 黑色
-image_b = np.zeros([h, w, 3])  # 黑色
-
-radius = 100
-
-cx, cy = 200, 150
-cv2.circle(image_r, (cx, cy), radius, RED, -1)  # 繪製實心圓形
-
-cx, cy = 150, 250
-cv2.circle(image_g, (cx, cy), radius, GREEN, -1)  # 繪製實心圓形
-
-cx, cy = 250, 250
-cv2.circle(image_b, (cx, cy), radius, BLUE, -1)  # 繪製實心圓形
-
-image = cv2.add(image_r, image_g)  # 疊加紅色和綠色
-image = cv2.add(image, image_b)  # 疊加藍色
-
-cvshow("RGB Model", image)
-
-plt.figure(figsize=(12, 8))
-
-plt.subplot(221)
-# NG plt.imshow(cv2.cvtColor(image_r, cv2.COLOR_BGR2RGB))
-plt.imshow(image_r)
-plt.title("R")
-
-plt.subplot(222)
-# NG plt.imshow(cv2.cvtColor(image_g, cv2.COLOR_BGR2RGB))
-plt.imshow(image_g)
-plt.title("G")
-
-plt.subplot(223)
-# NG plt.imshow(cv2.cvtColor(image_b, cv2.COLOR_BGR2RGB))
-plt.imshow(image_b)
-plt.title("B")
-
-plt.subplot(224)
-# NG plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.imshow(image)
-plt.title("RGB Model")
-
-show()
-
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 31 漸層色")
@@ -852,51 +674,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-print("opencv 39")
-
-""" barcode
-
-image = cv2.imread("barcode.jpg")
-
-def putText(x,y,text,color=(0,0,0)):
-    global image
-    #font_filename = 'NotoSansTC-Regular.otf'
-    font = ImageFont.truetype(font_filename, 20)
-    imagePil = Image.fromarray(image)
-    draw = ImageDraw.Draw(imagePil)
-    draw.text((x, y), text, fill=color, font=font)
-    image = np.array(imagePil)
-
-def boxSize(arr):
-    global data
-    box_roll = np.rollaxis(arr,1,0)
-    xmax = int(np.amax(box_roll[0]))
-    xmin = int(np.amin(box_roll[0]))
-    ymax = int(np.amax(box_roll[1]))
-    ymin = int(np.amin(box_roll[1]))
-    return (xmin,ymin,xmax,ymax)
-
-barcode = cv2.barcode_BarcodeDetector()                   # 建立 BarCode 偵測器
-ok, data, data_type, bbox = barcode.detectAndDecode(image)  # 偵測 BarCode
-# 如果有 BarCode
-if ok:
-    # 依序取出所有 BarCode 內容
-    for i in range(len(data)):
-        box = boxSize(bbox[i])   # 取出座標
-        text = data[i]           # 取出內容
-        cv2.rectangle(image,(box[0],box[1]),(box[2],box[3]),(0,0,255),5)  # 繪製外框
-        putText(box[0],box[3],text,color=(0,0,255))                     # 放入文字
-
-cvshow("image", image)
-
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("xxxx")
-
-show()
-
-"""
-print("------------------------------------------------------------")  # 60個
-
+'''
 print("opencv 40 cv讀取鍵盤 按上下調整亮度 按左右調整對比度 按ESC離開")
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
@@ -939,11 +717,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-print("共用函數------------------------------------------------------------")  # 60個
-
-from scipy import signal
 
 print("opencv 46 測試 cv2.linearPolar 空間變換 極座標變換")
 
@@ -1502,6 +1275,7 @@ triThe, dst_tri = cv2.threshold(src, triThe, maxval, cv2.THRESH_TRIANGLE)
 print(triThe, dst_tri)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("opencv 68 閾值分割 threshTwoPeaks")
 
@@ -1555,18 +1329,13 @@ thresh, threshImage_out = threshTwoPeaks(image)
 # 輸出直方圖技術得到的閾值
 print(thresh)
 
-# 顯示原圖和閾值化得到的二值圖
-cvshow("image", image)
-
-cvshow("threshTwoPeaks", threshImage_out)
-
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 plt.subplot(122)
 plt.imshow(cv2.cvtColor(threshImage_out, cv2.COLOR_BGR2RGB))
-plt.title("threshTwoPeaks")
+plt.title("threshTwoPeaks 閾值化得到的二值圖")
 
 show()
 
@@ -1667,10 +1436,7 @@ image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
 # 閾值處理
 threshold, thresh = threshEntroy(image)
-# 顯示閾值後的二值化圖像
-cvshow("threshEntroy", threshold)
 print(thresh)
-
 
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -1678,7 +1444,7 @@ plt.title("原圖")
 
 plt.subplot(122)
 plt.imshow(cv2.cvtColor(threshold, cv2.COLOR_BGR2RGB))
-plt.title("threshEntroy")
+plt.title("threshEntroy 閾值後的二值化圖像")
 
 show()
 
@@ -1736,14 +1502,9 @@ def ostu(image):
 
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-cvshow("image", image)
 
 # 閾值算法
 ostu_threshold = ostu(image)
-
-# 顯示閾值處理的結果
-cvshow("ostu_threshold", ostu_threshold)
-
 
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -1751,7 +1512,7 @@ plt.title("原圖")
 
 plt.subplot(122)
 plt.imshow(cv2.cvtColor(ostu_threshold, cv2.COLOR_BGR2RGB))
-plt.title("ostu_threshold")
+plt.title("ostu_threshold 閾值處理的結果")
 
 show()
 
@@ -1777,8 +1538,6 @@ def adaptiveThresh(I, winSize, ratio=0.15):
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
 out = adaptiveThresh(image, (31, 31), 0.15)
-cvshow("out", out)
-
 
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -1789,7 +1548,6 @@ plt.imshow(cv2.cvtColor(out, cv2.COLOR_BGR2RGB))
 plt.title("out")
 
 show()
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1845,16 +1603,12 @@ edge_y[edge_y > 255] = 255
 edge_x = edge_x.astype(np.uint8)
 edge_y = edge_y.astype(np.uint8)
 
-cvshow("edge_x", edge_x)
-cvshow("edge_y", edge_y)
-
 # 利用 abs_i_conv_pre_x 和 abs_i_conv_pre_y 求最終的邊緣強度
 # 求邊緣強度，有多重方式，這里使用的是插值法
 edge = 0.5 * abs_i_conv_pre_x + 0.5 * abs_i_conv_pre_y
 # 邊緣強度的灰度級顯示
 edge[edge > 255] = 255
 edge = edge.astype(np.uint8)
-cvshow("edge", edge)
 
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -1912,6 +1666,7 @@ if __name__ == "__main__":
     i_conv_lap_copy[i_conv_lap_copy > 255] = 255
     i_conv_lap_copy = i_conv_lap_copy.astype(np.uint8)
     cvshow("i_conv_lap", i_conv_lap_copy)
+
     # 第五種情形
 
     # ---- 第二種情形 ------
@@ -1921,6 +1676,7 @@ if __name__ == "__main__":
     i_conv_lap_abs[i_conv_lap_abs > 255] = 255
     i_conv_lap_abs = i_conv_lap_abs.astype(np.uint8)
     cvshow("i_conv_lap_abs", i_conv_lap_abs)
+
     # ---- 第三種情形 -----
     # 先對圖像進行高斯平滑，再進行拉普拉斯卷積，然後閾值處理
     imageBlur = gaussBlur(image, 3, 19, 19, "symm")
@@ -1932,6 +1688,7 @@ if __name__ == "__main__":
     # threshEdge[threshEdge<=0] = 0
     threshEdge = threshEdge.astype(np.uint8)
     cvshow("threshEdge", threshEdge)
+
     # ---- 第四種情形 ----
     # 圖像抽象化
     rows, cols = imageBlur_conv_lap.shape
@@ -1943,6 +1700,7 @@ if __name__ == "__main__":
             else:
                 imageAbstraction[r][c] = 1 + math.tanh(imageAbstraction[r][c])
     cvshow("imageAbstraction", imageAbstraction)
+
     # 轉換為 8 位圖，保存結果
     imageAbstraction = 255 * imageAbstraction
     imageAbstraction = np.round(imageAbstraction)
@@ -1954,151 +1712,35 @@ if __name__ == "__main__":
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("opencv 84 幾何形狀的檢測和擬合 HTLine")
+I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+# 顯示原圖
+cvshow("I", I)
 
-from mpl_toolkits.mplot3d import Axes3D
+# canny 邊緣檢測
+edge = cv2.Canny(I, 50, 200)
 
-
-# 霍夫極坐標變換：直線檢測
-def HTLine(image, stepTheta=1, stepRho=1):
-    # 寬、高
-    rows, cols = image.shape
-    # 圖像中可能出現的最大垂線的長度
-    L = round(math.sqrt(pow(rows - 1, 2.0) + pow(cols - 1, 2.0))) + 1
-    # 初始化投票器
-    numtheta = int(180.0 / stepTheta)
-    numRho = int(2 * L / stepRho + 1)
-    accumulator = np.zeros((numRho, numtheta), np.int32)
-    # 建立字典
-    accuDict = {}
-    for k1 in range(numRho):
-        for k2 in range(numtheta):
-            accuDict[(k1, k2)] = []
-    # 投票計數
-    for y in range(rows):
-        for x in range(cols):
-            if image[y][x] == 255:  # 只對邊緣點做霍夫變換
-                for m in range(numtheta):
-                    # 對每一個角度，計算對應的 rho 值
-                    rho = x * math.cos(stepTheta * m / 180.0 * math.pi) + y * math.sin(
-                        stepTheta * m / 180.0 * math.pi
-                    )
-                    # 計算投票哪一個區域
-                    n = int(round(rho + L) / stepRho)
-                    # 投票加 1
-                    accumulator[n, m] += 1
-                    # 記錄該點
-                    accuDict[(n, m)].append((x, y))
-    return accumulator, accuDict
-
-
-if __name__ == "__main__":
-    # 輸入圖像
-    I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-    # canny 邊緣檢測
-    edge = cv2.Canny(I, 50, 200)
-    # 顯示二值化邊緣
-    cvshow("edge", edge)
-    # 霍夫直線檢測
-    accumulator, accuDict = HTLine(edge, 1, 1)
-    # 計數器的二維直方圖方式顯示
-    rows, cols = accumulator.shape
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection="3d")
-    X, Y = np.mgrid[0:rows:1, 0:cols:1]
-    surf = ax.plot_wireframe(X, Y, accumulator, cstride=1, rstride=1, color="gray")
-    ax.set_xlabel("$\\rho$")
-    ax.set_ylabel("$\\theta$")
-    ax.set_zlabel("accumulator")
-    ax.set_zlim3d(0, np.max(accumulator))
-    # 計數器的灰度級顯示
-    grayAccu = accumulator / float(np.max(accumulator))
-    grayAccu = 255 * grayAccu
-    grayAccu = grayAccu.astype(np.uint8)
-    # 只畫出投票數大於 60 直線
-    voteThresh = 60
-    for r in range(rows):
-        for c in range(cols):
-            if accumulator[r][c] > voteThresh:
-                points = accuDict[(r, c)]
-                cv2.line(I, points[0], points[len(points) - 1], (255), 2)
-    cvshow("accumulator", grayAccu)
-
-    # 顯示原圖
-    cvshow("I", I)
-    show()
+# 顯示二值化邊緣
+cvshow("edge", edge)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("opencv 85 幾何形狀的檢測和擬合 HTCircle")
-
-""" 跑不完
-cv2.imshow("image", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-#標準霍夫圓檢測
-def HTCircle (I,minR,maxR,voteThresh = 100):
-    #寬、高
-    H,W = I.shape
-    #歸為整數
-    minr = round(minR)+1
-    maxr = round(maxR)+1
-    #初始化三維的計數器
-    r_num = int(maxr-minr+1)
-    a_num = int(W-1+maxr+maxr+1)
-    b_num = int(H-1+maxr+maxr+1)
-    accumulator = np.zeros((r_num,b_num,a_num),np.int32)
-    #投票計數
-    for y in range(H):
-        for x  in range(W):
-           cv2.imshow("image", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
- if(I[y][x] == 255):#只對邊緣點做霍夫變換
-                for k in range(r_num):# r 變化的步長為 1 
-                    for theta in np.linspace(0,360,360):
-                        #計算對應的 a 和 b
-                        a = x - (minr+k)*math.cos(theta/180.0*math.pi)
-                        b = y - (minr+k)*math.sin(theta/180.0*math.pi)
-                        #取整
-                        a = int(round(a))
-                        b = int(round(b))
-                        #投票
-                        accumulator[k,b,a]+=1
-    #篩選投票數 大於 voteThresh的圓
-    circles = []
-    for k in range(r_num):
-        for b in range(b_num):
-            for a in range(a_num): 
-                if(accumulator[k,b,a]>voteThresh):
-                    circles.append((k+minr,b,a))
-    return circles
-
-I = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
+I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
 plt.subplot(131)
 plt.imshow(cv2.cvtColor(I, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 
-#canny 邊緣檢測
-edge = cv2.Canny(I,50,200)
+# canny 邊緣檢測
+edge = cv2.Canny(I, 50, 200)
 cvshow("edge", edge)
-
 
 plt.subplot(132)
 plt.imshow(cv2.cvtColor(edge, cv2.COLOR_BGR2RGB))
 plt.title("edge")
 
-
-#霍夫圓檢測
-circles = HTCircle(edge,60,80,80)
-
-#畫圓
-for i in range(len(circles)):
-    cv2.circle(I,(int(circles[i][2]),int(circles[i][1])),int(circles[i][0]),(255),2)
-cvshow("I",I)
+cvshow("I", I)
 
 plt.subplot(133)
 plt.imshow(cv2.cvtColor(I, cv2.COLOR_BGR2RGB))
@@ -2106,7 +1748,8 @@ plt.title("霍夫圓檢測")
 
 show()
 
-"""
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 86 幾何形狀的檢測和擬合 contours")
@@ -2407,19 +2050,6 @@ plt.title("反白")
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-print("opencv 94")
-filename = "data/lena.jpg"
-img = cv2.imread(filename)
-print(type(img), img.shape, img.dtype)
-
-cvshow("demo1", img)
-
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-plt.title("demo1")
-
-show()
-
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 97")
@@ -2697,55 +2327,6 @@ for ax, cdf in zip((axb, axg, axr), zip(*cdfs)):
     ax.plot(cdf[2], alpha=0.6, label="res")
     ax.set_xlim(0, 256)
     ax.set_ylim(0, 1.1)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 105")
-
-# 用二元視覺圖形計算深度訊息
-
-img_left = cv2.pyrDown(cv2.imread("data/aloeL.jpg"))
-img_right = cv2.pyrDown(cv2.imread("data/aloeR.jpg"))
-
-img_left = cv2.cvtColor(img_left, cv2.COLOR_BGR2RGB)
-img_right = cv2.cvtColor(img_right, cv2.COLOR_BGR2RGB)
-
-stereo_parameters = dict(
-    SADWindowSize=5,
-    numDisparities=192,
-    preFilterCap=4,
-    minDisparity=-24,
-    uniquenessRatio=1,
-    speckleWindowSize=150,
-    speckleRange=2,
-    disp12MaxDiff=10,
-    fullDP=False,
-    P1=600,
-    P2=2400,
-)
-
-stereo = cv2.StereoSGBM(**stereo_parameters)
-# NG disparity = stereo.compute(img_left, img_right).astype(np.float32) / 16
-
-# 用remap重疊左右兩幅圖形
-h, w = img_left.shape[:2]
-ygrid, xgrid = np.mgrid[:h, :w]
-ygrid = ygrid.astype(np.float32)
-xgrid = xgrid.astype(np.float32)
-# NG res = cv2.remap(img_right, xgrid - disparity, ygrid, cv2.INTER_LINEAR)
-
-fig, axes = plt.subplots(1, 3, figsize=(9, 3))
-axes[0].imshow(img_left)
-axes[0].imshow(img_right, alpha=0.5)
-# axes[1].imshow(disparity, cmap="gray")
-axes[2].imshow(img_left)
-# axes[2].imshow(res, alpha=0.5)
-for ax in axes:
-    ax.axis("off")
-fig.subplots_adjust(0, 0, 1, 1, 0, 0)
 
 show()
 
@@ -3033,102 +2614,6 @@ points = np.random.rand(20, 2).astype(np.float32)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("opencv 115")
-
-# [OpenCV][Python]印出圖像中文字的位置及高寬
-# 本文將說明如何去辨識出圖片文字​位置及高寬。
-
-
-def read_posion(img):
-    # 輸入背景黑色，物件白色的圖
-    num_labels, labels, stats, _ = cv2.connectedComponentsWithStats(img, connectivity=8)
-    components = []
-    # boxes_data = []
-    for i in range(1, num_labels):  # 跳過背景
-        x, y, w, h, _ = stats[i]
-        components.append((x, y, w, h))
-
-    components.sort(key=lambda c: c[0])  # 按 x 座標排序
-
-    # 合併 x 軸在正負5範圍內的OCR
-    merged_components = []
-    current_component = list(components[0])
-
-    for i in range(1, len(components)):
-        if abs(components[i][0] - current_component[0]) <= 5:
-            current_component[0] = min(current_component[0], components[i][0])  # X 取最小值
-            current_component[1] = min(current_component[1], components[i][1])  # Y 取最小值
-            current_component[2] = max(current_component[2], components[i][2])  # w 取最大值
-            current_component[3] = (
-                abs(components[i][1] - current_component[1]) + components[i][3]
-            )  # h 取 Y2 - Y1 + H2
-        else:
-            merged_components.append(tuple(current_component[:4]))
-            current_component = list(components[i][:4])
-
-    # 合併最後一個OCR結果
-    merged_components.append(tuple(current_component[:4]))
-
-    return merged_components
-
-
-filename = "data/captcha/captcha04.png"
-
-img = cv2.imread(filename)
-gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-box = read_posion(gray_img)
-
-for i, data in enumerate(box):
-    x, y, h, w = data
-    # 印出OCR 位置，高寬
-    print(f"第{i}個OCR，x:{x},y:{y},h:{h},w:{w}")
-
-
-"""
-函式詳細說明
-函式定義和參數:
-read_posion(img) 函式接受一個參數
-img：輸入的二值化圖像，背景是黑色，物件是白色。
-計算連通域:
-num_labels, labels, stats, _ = cv2.connectedComponentsWithStats(img, connectivity=8)
-使用 OpenCV 的 connectedComponentsWithStats 函數計算連通域
-num_labels：連通域的數量。
-labels：標籤圖，每個連通域有一個唯一的標籤。
-stats：每個連通域的統計資料（x, y, w, h, area）。
-_:忽略的中心點資料。
-提取連通域並存入列表:
-components = []
-for i in range(1, num_labels):  # 跳過背景
-    x, y, w, h, _ = stats[i]
-    components.append((x, y, w, h))
-遍歷 stats，跳過背景，提取每個連通域的位置信息和尺寸，存入 components 列表。
-按 x 座標排序:
-components.sort(key=lambda c: c[0])
-將 components 按 x 座標進行排序。
-合併相鄰的連通域:
-merged_components = []
-current_component = list(components[0])
-
-for i in range(1, len(components)):
-    if abs(components[i][0] - current_component[0]) <= 5:
-        current_component[0] = min(current_component[0], components[i][0])  # X 取最小值
-        current_component[1] = min(current_component[1], components[i][1])  # Y 取最小值
-        current_component[2] = max(current_component[2], components[i][2])  # w 取最大值
-        current_component[3] = abs(components[i][1] - current_component[1]) + components[i][3]  # h 取 Y2 - Y1 + H2
-    else:
-        merged_components.append(tuple(current_component[:4]))
-        current_component = list(components[i][:4])
-
-merged_components.append(tuple(current_component[:4]))
-初始化 merged_components 列表和 current_component。
-遍歷 components 列表，如果當前組件與前一組件的 x 座標差值在正負5範圍內，則合併它們。
-合併後的結果存入 merged_components。
-返回合併後的元件資訊:
-return merged_components
-返回合併後的元件資訊，這些資訊包括每個連通域的 x, y, w, h（左上角座標和寬高）。
-"""
-print("------------------------------------------------------------")  # 60個
-
 print("opencv 116")
 
 # [Python]使用NumPy 進行影像黑白反轉
@@ -3239,6 +2724,7 @@ plt.title(kernel3_name)
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("opencv 119")
 
@@ -3333,100 +2819,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("opencv 120")
-
-# 使用到 scpy2
-
-"""
-去瑕疵-inpaint
-
-inpaint
-
-()可以从图像上去除指定区域中的物体，可以用于去除图像上的水印、划痕、 污渍等瑕疵。
-它的调用参数如下：
-inpaint(src, inpaintMask, inpaintRadius, flags[, dst])
-inpainlMask参数是大小和src相同的单通道8位图像，其中不 为0的像素表示需要去除的区域。。inpaintRange参数是处理半径， 半径越大处理时间越长，结果越平滑。flags参数选择inpaint的算法，目前有两个候选算法： INPAINT_NS 和 INPIANT_TELEA。
-用鼠标绘制需要去瑕疵的区域:
-"""
-
-"""
-from traits.api import (HasTraits, Float, Instance,
-                        Enum, List, Range, Bool, Button, Event, on_trait_change)
-from traitsui.api import View, VGroup, Item, HGroup
-from scpy2.matplotlib.freedraw_widget import ImageMaskDrawer
-from .demobase import ImageProcessDemo
-
-
-class InPaintDemo(ImageProcessDemo):
-    YAXIS_DIRECTION = "up"
-    TITLE = u"Inpaint Demo"
-    DEFAULT_IMAGE = "stuff.jpg"
-
-    mask_artist = Instance(ImageMaskDrawer)
-    r = Range(2.0, 20.0, 10.0)  # inpaint的半径参数
-    method = Enum("INPAINT_NS", "INPAINT_TELEA")  # inpaint的算法
-    show_mask = Bool(False)  # 是否显示选区
-    clear_mask = Button(u"清除选区")
-    apply = Button(u"保存结果")
-
-    def control_panel(self):
-        return VGroup(
-            Item("r", label=u"inpaint半径"),
-            Item("method", label=u"inpaint算法"),
-            Item("show_mask", label=u"显示选区"),
-            Item("clear_mask", show_label=False),
-            Item("apply", show_label=False),
-        )
-
-    def __init__(self, **kw):
-        super(InPaintDemo, self).__init__(**kw)
-        self.connect_dirty("r, method")
-
-    def init_draw(self):
-        self.mask_artist = ImageMaskDrawer(self.axe, self.img,
-                                           canmove=False, size=15)
-        self.mask_artist.on_trait_change(self.draw, "drawed")
-
-    def draw(self):
-        if self.mask_artist is None:
-            self.draw_image(self.img)
-            return
-        mask = self.mask_artist.get_mask_array()
-        if self.img.shape[:2] == mask.shape:
-            img2 = cv2.inpaint(self.img, mask, self.r, getattr(cv2, self.method))
-            self.img2 = img2
-            self.show_mask = False
-            self.mask_artist.hide_mask()
-            self.draw_image(img2)
-        else:
-            self.draw_image(self.img)
-
-    def _img_changed(self):
-        if self.mask_artist is not None:
-            self.mask_artist.create_mask(img=self.img)
-
-    def _show_mask_changed(self):
-        if self.show_mask:
-            self.mask_artist.show_mask()
-        else:
-            self.mask_artist.hide_mask()
-        self.figure.canvas.draw()
-
-    def _clear_mask_fired(self):
-        self.mask_artist.clear_mask()
-        self.draw()
-
-    def _apply_fired(self):
-        if hasattr(self, "img2"):
-            self.img[:] = self.img2[:]
-        self.clear_mask = True
-
-
-if __name__ == '__main__':
-    demo = InPaintDemo()
-    demo.configure_traits()
-
-"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3458,7 +2850,6 @@ print("------------------------------------------------------------")  # 60個
 # 新進 與 測試
 
 """
-    image = cv2.flip(image, 1)                        # 翻轉影像，使其如同鏡子
     image = image[:, int((w-h)/2):int((h+(w-h)/2))]   # 將影像變成正方形
 """
 
@@ -3489,3 +2880,36 @@ cvshow("image", image)
 # sobel 邊緣檢測
 def sobel(image, winSize):
     rows, cols = image.shape
+
+
+"""
+去瑕疵-inpaint
+
+inpaint
+
+()可以从图像上去除指定区域中的物体，可以用于去除图像上的水印、划痕、 污渍等瑕疵。
+它的调用参数如下：
+inpaint(src, inpaintMask, inpaintRadius, flags[, dst])
+inpainlMask参数是大小和src相同的单通道8位图像，其中不 为0的像素表示需要去除的区域。
+inpaintRange参数是处理半径， 半径越大处理时间越长，结果越平滑。
+flags参数选择inpaint的算法，目前有两个候选算法： INPAINT_NS 和 INPIANT_TELEA。
+用鼠标绘制需要去瑕疵的区域:
+"""
+
+
+def putText(x, y, text, color=(0, 0, 0)):
+    global image
+    # font_filename = 'NotoSansTC-Regular.otf'
+    font = ImageFont.truetype(font_filename, 20)
+    imagePil = Image.fromarray(image)
+    draw = ImageDraw.Draw(imagePil)
+    draw.text((x, y), text, fill=color, font=font)
+    image = np.array(imagePil)
+
+
+cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), (0, 0, 255), 5)  # 繪製外框
+putText(box[0], box[3], text, color=(0, 0, 255))  # 放入文字
+
+
+# 畫圓
+cv2.circle(I, (int(circles[i][2]), int(circles[i][1])), int(circles[i][0]), (255), 2)
