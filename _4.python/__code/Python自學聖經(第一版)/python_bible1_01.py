@@ -33,19 +33,6 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("姓名   座號  國文  數學  英文")
-print("%3s  %2d   %3d   %3d  %3d" % ("林大明", 1, 100, 87, 79))
-print("%3s  %2d   %3d   %3d  %3d" % ("陳阿中", 2, 74, 88, 100))
-print("%3s  %2d   %3d   %3d  %3d" % ("張小英", 11, 82, 65, 8))
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-# print("本班總成績：%d 分，平均成績：%5.2f 分" % (total, average))
-
-print("------------------------------------------------------------")  # 60個
-
 for i in range(1, 10):
     for j in range(1, 10):
         product = i * j
@@ -53,11 +40,6 @@ for i in range(1, 10):
     print()
 
 print("------------------------------------------------------------")  # 60個
-
-# print("本班總成績：%d 分，平均成績：%5.2f 分" % (total, average))
-
-print("------------------------------------------------------------")  # 60個
-
 
 listname = ["林大明", "陳阿中", "張小英"]
 listchinese = [100, 74, 82]
@@ -89,23 +71,7 @@ print(show)
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 # ch05\spenttime.py
-
-import time
 
 start = time.time()  # 開始執行時間
 print("開始時間：{}".format(start))
@@ -140,20 +106,8 @@ def pwd_input():
             msvcrt.putch("*".encode(encoding="utf-8"))  # 顯示 * 號
     return "".join(chars)
 
+
 # pwd_input()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -505,18 +459,13 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 
 # 保留 bs4 本地讀取 html
@@ -624,8 +573,6 @@ print(sp.select("div img")[0]["src"])  # http://example.com/three.jpg
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 # 自訂表頭
@@ -646,10 +593,6 @@ r = requests.get(url, headers=headers)
 print(r)
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -704,16 +647,6 @@ driver.find_element_by_name("login").click()  # 按登入鈕
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-a = np.genfromtxt("scores.csv", delimiter=",", skip_header=1)
-print(a.shape)
-
-print("------------------------------------------------------------")  # 60個
-
 a = np.arange(1, 10).reshape(3, 3)
 print("陣列的內容：\n", a)
 print("1.最小值與最大值：\n", np.min(a), np.max(a))
@@ -722,20 +655,6 @@ print("3.每一橫列最小值與最大值：\n", np.min(a, axis=1), np.max(a, a
 print("4.加總、乘積及平均值：\n", np.sum(a), np.prod(a), np.mean(a))
 print("5.每一直行加總、乘積與平均值：\n", np.sum(a, axis=0), np.prod(a, axis=0), np.mean(a, axis=0))
 print("6.每一橫列加總、乘積與平均值：\n", np.sum(a, axis=1), np.prod(a, axis=1), np.mean(a, axis=1))
-
-print("------------------------------------------------------------")  # 60個
-
-na = np.genfromtxt("scores.csv", delimiter=",", skip_header=1)
-print("國文最高分數：", na[:, 1].max())
-print("英文最低分數：", na[:, 2].min())
-print("數學平均分數：", na[:, 3].mean())
-total1 = na[:, 1] + na[:, 2] + na[:, 3]
-print(total1)
-print("全班最高總分：", total1.max())
-
-total2 = na[:, 1:4].sum(axis=1)
-print(total2)
-print("全班最高總分：", total2.max())
 
 print("------------------------------------------------------------")  # 60個
 
@@ -831,7 +750,6 @@ print(tables[0])
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 # ch14\to_cvs.py
@@ -844,11 +762,11 @@ scores = {
     "社會": {"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80},
 }
 df = pd.DataFrame(scores)
-df.to_csv("tmp_scores3.csv", encoding="utf-8-sig")
 
 print("------------------------------------------------------------")  # 60個
 
 # ch15\create_data.py
+
 
 def c_item(x):
     if x < 2:
@@ -880,8 +798,6 @@ df["商品"] = df["商品"].map(c_item)
 df["業務員"] = df["業務員"].map(s_item)
 df["價格"] = df["價格"].map(lambda x: x * 100)
 
-df.to_csv("tmp_sale.csv", index=False)
-
 print("------------------------------------------------------------")  # 60個
 
 # ch15\create_score.py
@@ -892,81 +808,64 @@ for i in range(3):
 df = pd.DataFrame(np.random.randint(40, 101, size=(3, 3)), columns=["英文", "社會", "公民"])
 # df = pd.DataFrame(np.random.randint(40,101,size=(3,4)), columns=['國文','數學','自然','社會'])
 df.insert(0, "座號", tem)
-df.to_csv("tmp_score2_6.csv", index=False)
 
 print("------------------------------------------------------------")  # 60個
-
-# ch15\split_data.py
-
-df1 = pd.read_csv("data/titanic.csv")
-
-df2 = df1[["row.names", "pclass", "survived", "name", "age", "embarked"]]
-df2.to_csv("tmp_titanic1.csv", index=False)
-
-df3 = df1[["row.names", "home.dest", "room", "ticket", "boat", "sex"]]
-df3.to_csv("tmp_titanic2.csv", index=False)
-
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
-
-def twodigit(n):  #將數值轉為二位數字串
-    if(n < 10):
-        retstr = '0' + str(n)
+def twodigit(n):  # 將數值轉為二位數字串
+    if n < 10:
+        retstr = "0" + str(n)
     else:
         retstr = str(n)
     return retstr
 
-def convertDate(date):  #轉捔民國日期為西元:106/03/02->20170302
+
+def convertDate(date):  # 轉捔民國日期為西元:106/03/02->20170302
     str1 = str(date)
-    yearstr = str1[:3]  #取出民國年
-    realyear = str(int(yearstr) + 1911)  #轉為西元年
-    realdate = realyear + str1[4:6] + str1[7:9]  #組合日期
+    yearstr = str1[:3]  # 取出民國年
+    realyear = str(int(yearstr) + 1911)  # 轉為西元年
+    realdate = realyear + str1[4:6] + str1[7:9]  # 組合日期
     return realdate
 
+
 import requests
-import json, csv
-import pandas as pd
-import os
-import time
+import json
+import csv
 
-pd.options.mode.chained_assignment = None  #取消顯示pandas資料重設警告
+pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
 
-urlbase = 'http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=2017'  #網址前半
-urltail = '01&stockNo=2317&_=1521363562193'  #網址後半
-filepath = 'stockyear2017.csv'
+urlbase = (
+    "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=2017"  # 網址前半
+)
+urltail = "01&stockNo=2317&_=1521363562193"  # 網址後半
+filepath = "tmp_stockyear2017.csv"
 
-if not os.path.isfile(filepath):  #如果檔案不存在就建立檔案
-    for i in range(1, 13):  #取1到12數字
-        url_twse = urlbase + twodigit(i) + urltail  #組合網址
-        res = requests.get(url_twse)  #回傳為json資料
-        jdata = json.loads(res.text)  #json解析
-        
-        outputfile = open(filepath, 'a', newline='', encoding='utf-8')  #開啟儲存檔案
-        outputwriter = csv.writer(outputfile)  #以csv格式寫入檔案
-        if i==1:  #若是1月就寫入欄位名稱
-            outputwriter.writerow(jdata['fields'])
-        for dataline in (jdata['data']):  #逐月寫入資料
+if not os.path.isfile(filepath):  # 如果檔案不存在就建立檔案
+    for i in range(1, 13):  # 取1到12數字
+        url_twse = urlbase + twodigit(i) + urltail  # 組合網址
+        res = requests.get(url_twse)  # 回傳為json資料
+        jdata = json.loads(res.text)  # json解析
+
+        outputfile = open(filepath, "a", newline="", encoding="utf-8")  # 開啟儲存檔案
+        outputwriter = csv.writer(outputfile)  # 以csv格式寫入檔案
+        if i == 1:  # 若是1月就寫入欄位名稱
+            outputwriter.writerow(jdata["fields"])
+        for dataline in jdata["data"]:  # 逐月寫入資料
             outputwriter.writerow(dataline)
-        time.sleep(0.5)  #延遲0.5秒,否則有時會有錯誤
-    outputfile.close()  #關閉檔案
+        time.sleep(0.5)  # 延遲0.5秒,否則有時會有錯誤
+    outputfile.close()  # 關閉檔案
 
-pdstock = pd.read_csv(filepath, encoding='utf-8')  #以pandas讀取檔案
-for i in range(len(pdstock['日期'])):  #轉換日期式為西元年格式
-    pdstock['日期'][i] = convertDate(pdstock['日期'][i])
-pdstock['日期'] = pd.to_datetime(pdstock['日期'])  #轉換日期欄位為日期格式
+pdstock = pd.read_csv(filepath, encoding="utf-8")  # 以pandas讀取檔案
+for i in range(len(pdstock["日期"])):  # 轉換日期式為西元年格式
+    pdstock["日期"][i] = convertDate(pdstock["日期"][i])
+pdstock["日期"] = pd.to_datetime(pdstock["日期"])  # 轉換日期欄位為日期格式
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 """ 統一發票
 
@@ -1088,3 +987,22 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+# ch15\split_data.py
+# titanic
+
+df1 = pd.read_csv("data/titanic.csv")
+
+df2 = df1[["row.names", "pclass", "survived", "name", "age", "embarked"]]
+df2.to_csv("tmp_titanic1.csv", index=False)
+
+df3 = df1[["row.names", "home.dest", "room", "ticket", "boat", "sex"]]
+df3.to_csv("tmp_titanic2.csv", index=False)
+
+print("------------------------------------------------------------")  # 60個
+
+
+df.to_csv("tmp_scores3.csv", encoding="utf-8-sig")
+df.to_csv("tmp_score2_6.csv", index=False)
+
+
+df.to_csv("tmp_sale.csv", index=False)
