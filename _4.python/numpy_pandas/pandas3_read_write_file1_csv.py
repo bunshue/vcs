@@ -508,7 +508,36 @@ print(df.shape)
 print(df.head(5))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+# df 操作
+df = pd.read_csv("data/titanic123.csv")
+
+df.to_csv("tmp_titanic_all1.csv", index=True)
+df.to_csv("tmp_titanic_all2.csv", index=False)
+
+df1 = df[["row.names", "pclass", "survived", "name", "age", "embarked"]]
+df1.to_csv("tmp_titanic_part1.csv", index=False)
+
+df2 = df[["row.names", "home.dest", "room", "ticket", "boat", "sex"]]
+df2.to_csv("tmp_titanic_part2.csv", index=False)
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+df.to_csv("tmp_scores3.csv", encoding="utf-8-sig")
+df.to_csv("tmp_score2_6.csv", index=False)
+df.to_csv("tmp_sale.csv", index=False)
+"""
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

@@ -1,6 +1,9 @@
 import sys
-
 import requests
+
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
 from bs4 import BeautifulSoup
 import urllib.parse
 import html5lib
@@ -17,10 +20,10 @@ def get_html_data1(url):
         return resp
 
 print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
 
 print("統一發票號碼 方法一")
 
-import requests
 import xml.etree.cElementTree as ET
 #import xml.etree.ElementTree as ET  看起來一樣
 
@@ -51,7 +54,6 @@ print('iter 方法：' + items[0][0].text)
 
 print('--------')
 
-
 ret = {}
 url = 'http://invoice.etax.nat.gov.tw/invoice.xml'   #統一發票中獎號碼
 html_data = get_html_data1(url)
@@ -75,15 +77,10 @@ for i in range(len(plist)-1):
     ret[tlist[0]] = tlist[1]
 print(ret)
 
-
-
-
-
+print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 print("統一發票號碼 方法二")
-
-import requests
 
 url = 'https://invoice.etax.nat.gov.tw/index.html'
 # 取得網頁html
@@ -112,11 +109,128 @@ for j in n1:
   print("　　"+j)
 print("\n")
 
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
 
+""" 統一發票
+
+# tree1
+
+try:
+    import xml.etree.cElementTree as ET
+except ImportError:
+    import xml.etree.ElementTree as ET
+
+content = requests.get("http://invoice.etax.nat.gov.tw/invoice.xml")
+tree = ET.fromstring(content.text)
+
+print("根目錄標籤：" + tree.tag)
+print("根目錄屬性：" + str(tree.attrib))
+print("根目錄值：" + str(tree.text))
+
+print("------------------------------------------------------------")  # 60個
+
+# tree2
+
+try:
+    import xml.etree.cElementTree as ET
+except ImportError:
+    import xml.etree.ElementTree as ET
+
+content = requests.get("http://invoice.etax.nat.gov.tw/invoice.xml")
+tree = ET.fromstring(content.text)
+
+item = tree[0].find("item")
+print("find 方法：" + item[0].text)
+
+items = tree[0].findall("item")
+print("findall 方法：" + items[0][0].text)
+
+items = list(tree.iter(tag="item"))
+print("iter 方法：" + items[0][0].text)
+
+print("------------------------------------------------------------")  # 60個
+
+try:
+    import xml.etree.cElementTree as ET
+except ImportError:
+    import xml.etree.ElementTree as ET
+
+
+
+        try:
+            content = requests.get("http://invoice.etax.nat.gov.tw/invoice.xml")
+            tree = ET.fromstring(content.text)
+            items = list(tree.iter(tag="item"))  # 取得item標籤內容
+            ptext = items[0][2].text  # 中獎號碼
+            ptext = ptext.replace("<p>", "").replace("</p>", "")
+            temlist = ptext.split("：")
+            prizelist = []  # 特別獎或特獎後三碼
+            prizelist.append(temlist[1][5:8])
+            prizelist.append(temlist[2][5:8])
+            for i in range(3):  # 頭獎後三碼
+                prizelist.append(temlist[3][9 * i + 5 : 9 * i + 8])
+            sixlist = temlist[4].split("、")  # 增開六獎
+            for i in range(len(sixlist)):
+                prizelist.append(sixlist[i])
+            if mtext in prizelist:
+                message = "符合某獎項後三碼，請自行核對發票前五碼！\n\n"
+                message += monoNum(0)
+            else:
+                message = "很可惜，未中獎。請輸入下一張發票最後三碼。"
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=message))
+        except:
+            line_bot_api.reply_message(
+                event.reply_token, TextSendMessage(text="讀取發票號碼發生錯誤！")
+            )
+
+
+
+def monoNum(n):
+    content = requests.get("http://invoice.etax.nat.gov.tw/invoice.xml")
+    tree = ET.fromstring(content.text)  # 解析XML
+    items = list(tree.iter(tag="item"))  # 取得item標籤內容
+    title = items[n][0].text  # 期別
+    ptext = items[n][2].text  # 中獎號碼
+    ptext = ptext.replace("<p>", "").replace("</p>", "\n")
+    return title + "月\n" + ptext[:-1]  # ptext[:-1]為移除最後一個\n
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 
 
 print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
+
+
+
 
 

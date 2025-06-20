@@ -151,56 +151,6 @@ plt.imshow(cv2.cvtColor(ogc, cv2.COLOR_BGR2RGB))
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-print("opencv 11")
-
-
-def saltpepper(image, n):
-    m = int((image.shape[0] * image.shape[1]) * n)
-    for a in range(m):
-        i = int(np.random.random() * image.shape[1])
-        j = int(np.random.random() * image.shape[0])
-        if image.ndim == 2:
-            image[j, i] = 255
-        elif image.ndim == 3:
-            image[j, i, 0] = 255
-            image[j, i, 1] = 255
-            image[j, i, 2] = 255
-    for b in range(m):
-        i = int(np.random.random() * image.shape[1])
-        j = int(np.random.random() * image.shape[0])
-        if image.ndim == 2:
-            image[j, i] = 0
-        elif image.ndim == 3:
-            image[j, i, 0] = 0
-            image[j, i, 1] = 0
-            image[j, i, 2] = 0
-    return image
-
-
-# 上面就是椒鹽噪聲函數，下面是使用方法，大家可以愉快的玩耍了
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-
-image0 = cv2.imread(filename)
-
-image = cv2.imread(filename)
-
-print("saltpepper(胡椒鹽)效果")
-saltImage = saltpepper(image, 0.02)
-
-plt.figure(figsize=(12, 8))
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(saltImage, cv2.COLOR_BGR2RGB))
-plt.title("saltpepper(胡椒鹽)效果")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 13")
@@ -256,114 +206,6 @@ plt.title("原始圖像")
 plt.subplot(122)
 plt.imshow(cv2.cvtColor(cl1, cv2.COLOR_BGR2RGB))
 plt.title("生成自適應均衡化圖像\ncreateCLAHE")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 22")
-
-image = cv2.imread(filename)  # 預設為彩色 1號
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階 2號
-image = cv2.imread(filename, 2)  # 也可使用數字代表模式
-
-print(image.shape)  # 得到 shape
-print(image.dtype)  # uint8
-
-"""
-image1 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
-image2 = cv2.imread('test.png', cv2.IMREAD_UNCHANGED)
-
-print(image1.shape)    # (400, 300, 3)  JPG 只有三個色版 BGR
-print(image2.shape)    # (400, 300, 4)  PNG 四個色版 GRA
-
-image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
-image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)  # 轉換成 BGRA 色彩模式
-
-print(image.shape)                             # (400, 300, 4)  第三個數值變成 4
-"""
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 23")
-
-image = cv2.imread(filename)
-image_b = cv2.imread(filename)
-image_g = cv2.imread(filename)
-image_r = cv2.imread(filename)
-
-image_b[:, :, 1] = 0  # 將綠色設為 0
-image_b[:, :, 2] = 0  # 將紅色設為 0
-image_g[:, :, 0] = 0  # 將藍色設為 0
-image_g[:, :, 2] = 0  # 將紅色設為 0
-image_r[:, :, 0] = 0  # 將藍色設為 0
-image_r[:, :, 1] = 0  # 將綠色設為 0
-
-plt.subplot(221)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(222)
-plt.imshow(cv2.cvtColor(image_r, cv2.COLOR_BGR2RGB))
-plt.title("R")
-
-plt.subplot(223)
-plt.imshow(cv2.cvtColor(image_g, cv2.COLOR_BGR2RGB))
-plt.title("G")
-
-plt.subplot(224)
-plt.imshow(cv2.cvtColor(image_b, cv2.COLOR_BGR2RGB))
-plt.title("B")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 25")
-
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-
-print("像素操作 底片效果 半張負片")
-
-image = cv2.imread(filename)
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-rows = image.shape[0]  # 取得高度的總像素
-cols = image.shape[1]  # 取得寬度的總像素
-
-for row in range(int(rows / 2)):  # 只取 rows 的一半 ( 使用 int 取整數 )
-    for col in range(cols):
-        image[row, col, 0] = 255 - image[row, col, 0]  # 255 - 藍色
-        image[row, col, 1] = 255 - image[row, col, 1]  # 255 - 綠色
-        image[row, col, 2] = 255 - image[row, col, 2]  # 255 - 紅色
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("半張負片")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 26 像素操作 全張負片")
-
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-
-image = cv2.imread(filename)
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-image = 255 - image  # 使用 255 減去陣列中所有數值
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("全張負片")
 
 show()
 
@@ -709,9 +551,9 @@ while True:
         contrast, brightness = 0, 0  # 按下鍵盤的「q」，恢復預設值
     if keycode == 27:
         break
-    show = image.copy()  # 複製原始圖片
-    show = adjust(show, contrast, brightness)  # 根據亮度和對比度的調整值，輸出新的圖片
-    cv2.imshow("ImageShow", show)
+    show_image = image.copy()  # 複製原始圖片
+    show_image = adjust(show_image, contrast, brightness)  # 根據亮度和對比度的調整值，輸出新的圖片
+    cv2.imshow("ImageShow", show_image)
 
 cv2.destroyAllWindows()
 
@@ -1148,109 +990,6 @@ print(sameConv)
 print(validConv)
 
 print("------------------------------------------------------------")  # 60個
-
-from scipy import signal
-
-print("opencv 56")
-
-# 得到高斯平滑算子：
-# getGaussKernel(sigma,H,W),使用過程中一般H和W一般為奇數，sigma大於零
-
-
-def getGaussKernel(sigma, H, W):
-    # 第一步：構建高斯矩陣gaussMatrix
-    gaussMatrix = np.zeros([H, W], np.float32)
-    # 得到中心點的位置
-    cH = (H - 1) / 2
-    cW = (W - 1) / 2
-    # 計算1/(2*pi*sigma^2)
-    coefficient = 1.0 / (2 * np.pi * math.pow(sigma, 2))
-    #
-    for r in range(H):
-        for c in range(W):
-            norm2 = math.pow(r - cH, 2) + math.pow(c - cW, 2)
-            gaussMatrix[r][c] = coefficient * math.exp(
-                -norm2 / (2 * math.pow(sigma, 2))
-            )
-    # 第二步：計算高斯矩陣的和
-    sumGM = np.sum(gaussMatrix)
-    # 第三步：歸一化，gaussMatrix/sumGM
-    gaussKernel = gaussMatrix / sumGM
-    return gaussKernel
-
-
-gaussKernel = getGaussKernel(2, 3, 3)
-print(gaussKernel)
-# 高斯核gaussKernel是可分解的，可以分解為水平方向和垂直方向的卷積核
-gaussKernel_x = getGaussKernel(2, 1, 3)
-print(gaussKernel_x)
-gaussKernel_y = getGaussKernel(2, 3, 1)
-print(gaussKernel_y)
-
-"""
-水平方向和垂直方向的卷積核進行卷積運算,注意：mode='full',boundary = 'fill',fillvalue=0
-這樣的參數設置，得到的結果才和gaussKernel完全相等，否則，邊界不相等
-"""
-gaussKernel_xy = signal.convolve2d(
-    gaussKernel_x, gaussKernel_y, mode="full", boundary="fill", fillvalue=0
-)
-print(gaussKernel_xy)
-
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 57 圖像平滑 gaussBlur")
-
-from scipy import signal
-
-
-# 高斯平滑，返回的數據類型為浮點型
-def gaussBlur(image, sigma, H, W, _boundary="fill", _fillvalue=0):
-    # 構建HxW的高斯平滑算子
-    # gaussKernelxy = getGaussKernel(sigma,H,W)
-    # 圖像矩陣和高斯卷積核卷積
-    # gaussBlur_xy = signal.convolve2d(image,gaussKernelxy,mode='same',boundary = _boundary,fillvalue=_fillvalue)
-    # return gaussBlur_xy
-    # 因為高斯核是可分解的，根據卷積的結合律
-    # 先進行水平方向的卷積，然後再進行垂直方向的卷積
-    gaussKenrnel_x = getGaussKernel(sigma, 1, W)
-    gaussBlur_x = signal.convolve2d(
-        image, gaussKenrnel_x, mode="same", boundary=_boundary, fillvalue=_fillvalue
-    )
-    gaussKenrnel_y = getGaussKernel(sigma, H, 1)
-    gaussBlur_xy = signal.convolve2d(
-        gaussBlur_x,
-        gaussKenrnel_y,
-        mode="same",
-        boundary=_boundary,
-        fillvalue=_fillvalue,
-    )
-    return gaussBlur_xy
-
-
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
-# 3 11 11 9 25 25
-blurImage = gaussBlur(image, 5, 51, 51, "symm")
-# 如果輸入的圖像是8位圖,輸出的
-blurImage = np.round(blurImage)
-blurImage = blurImage.astype(np.uint8)
-
-# 如果輸入的圖像數據類型是浮點型，且像素值歸一到[0,1]
-image_0_1 = image / 255.0
-blurImage_0_1 = gaussBlur(image_0_1, 4, 5, 5, "symm")
-# cvshow("gaussBlur-0-1",blurImage_0_1)
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(blurImage, cv2.COLOR_BGR2RGB))
-plt.title("gaussBlur")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 67 閾值分割 threshold")
@@ -1631,88 +1370,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("opencv 80 邊緣檢測 laplacian")
-from scipy import signal
-
-# laplacian 邊緣檢測算法:
-# laplacian(image,_boundary='fill',_fillvalue=0)
-# 其中：邊緣處理的方式_boundary包括：'symm','wrap','fill',
-# 且當__boundary='fill'時，填充值默認為零_fillvalue=0
-
-
-def laplacian(image, _boundary="fill", _fillvalue=0):
-    # 拉普拉斯卷積核
-    # laplacianKernel = np.array([[0,-1,0],[-1,4,-1],[0,-1,0]],np.float32)
-    laplacianKernel = np.array([[-1, -1, -1], [-1, 8, -1], [-1, -1, -1]], np.float32)
-    # 圖像矩陣和拉普拉斯算子卷積
-    i_conv_lap = signal.convolve2d(
-        image, laplacianKernel, mode="same", boundary=_boundary, fillvalue=_fillvalue
-    )
-    return i_conv_lap
-
-
-if __name__ == "__main__":
-    image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-    cvshow("image.jpg", image)
-
-    # ----- 第一種情形 ------
-    # 圖像矩陣和拉普拉斯核進行卷積，然後進行閾值處理
-    i_conv_lap = laplacian(image, "symm")
-    i_conv_lap_copy = np.copy(i_conv_lap)
-    # i_conv_lap_copy[i_conv_lap_copy>0] = 255
-    # i_conv_lap_copy[i_conv_lap_copy<=0] = 150
-    i_conv_lap_copy = np.abs(i_conv_lap_copy)
-    i_conv_lap_copy += 125
-    i_conv_lap_copy[i_conv_lap_copy > 255] = 255
-    i_conv_lap_copy = i_conv_lap_copy.astype(np.uint8)
-    cvshow("i_conv_lap", i_conv_lap_copy)
-
-    # 第五種情形
-
-    # ---- 第二種情形 ------
-    # 對卷積結果取絕對值
-    i_conv_lap_abs = np.abs(i_conv_lap)
-    i_conv_lap_abs = np.round(i_conv_lap_abs)
-    i_conv_lap_abs[i_conv_lap_abs > 255] = 255
-    i_conv_lap_abs = i_conv_lap_abs.astype(np.uint8)
-    cvshow("i_conv_lap_abs", i_conv_lap_abs)
-
-    # ---- 第三種情形 -----
-    # 先對圖像進行高斯平滑，再進行拉普拉斯卷積，然後閾值處理
-    imageBlur = gaussBlur(image, 3, 19, 19, "symm")
-    imageBlur_conv_lap = laplacian(imageBlur, "symm")
-    threshEdge = np.copy(imageBlur_conv_lap)
-    threshEdge = np.abs(threshEdge)
-    threshEdge[threshEdge > 255] = 255
-    # threshEdge[threshEdge>0] = 255
-    # threshEdge[threshEdge<=0] = 0
-    threshEdge = threshEdge.astype(np.uint8)
-    cvshow("threshEdge", threshEdge)
-
-    # ---- 第四種情形 ----
-    # 圖像抽象化
-    rows, cols = imageBlur_conv_lap.shape
-    imageAbstraction = np.copy(imageBlur_conv_lap)
-    for r in range(rows):
-        for c in range(cols):
-            if imageAbstraction[r][c] > 0:
-                imageAbstraction[r][c] = 1
-            else:
-                imageAbstraction[r][c] = 1 + math.tanh(imageAbstraction[r][c])
-    cvshow("imageAbstraction", imageAbstraction)
-
-    # 轉換為 8 位圖，保存結果
-    imageAbstraction = 255 * imageAbstraction
-    imageAbstraction = np.round(imageAbstraction)
-    imageAbstraction = imageAbstraction.astype(np.uint8)
-
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
 # 顯示原圖
 cvshow("I", I)
 
@@ -1727,24 +1386,16 @@ print("------------------------------------------------------------")  # 60個
 
 I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
-plt.subplot(131)
+plt.subplot(121)
 plt.imshow(cv2.cvtColor(I, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-
 # canny 邊緣檢測
 edge = cv2.Canny(I, 50, 200)
-cvshow("edge", edge)
 
-plt.subplot(132)
+plt.subplot(122)
 plt.imshow(cv2.cvtColor(edge, cv2.COLOR_BGR2RGB))
 plt.title("edge")
-
-cvshow("I", I)
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(I, cv2.COLOR_BGR2RGB))
-plt.title("霍夫圓檢測")
 
 show()
 
@@ -4287,5 +3938,29 @@ image = cv2.resize(image,(640//2,480//2))
 ------------------------------------------------------------
 
 
+image = cv2.imread(filename)  # 預設為彩色 1號
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階 2號
+image = cv2.imread(filename, 2)  # 也可使用數字代表模式
+
+print(image.shape)  # 得到 shape
+print(image.dtype)  # uint8
+
+image1 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+image2 = cv2.imread('test.png', cv2.IMREAD_UNCHANGED)
+
+print(image1.shape)    # (400, 300, 3)  JPG 只有三個色版 BGR
+print(image2.shape)    # (400, 300, 4)  PNG 四個色版 GRA
+
+image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)  # 轉換成 BGRA 色彩模式
+
+print(image.shape)                             # (400, 300, 4)  第三個數值變成 4
+
+
+
+    # 轉換為 8 位圖，保存結果
+    imageAbstraction = 255 * imageAbstraction
+    imageAbstraction = np.round(imageAbstraction)
+    imageAbstraction = imageAbstraction.astype(np.uint8)
 
 """

@@ -1,17 +1,19 @@
-# Python 測試 BeautifulSoup
-# 解讀 本地 / 遠端 網頁資料, 都是使用 html.parser 解析器
+"""
+Python 測試 BeautifulSoup
+解讀 本地 / 遠端 網頁資料, 都是使用 html.parser 解析器
 
-# 以BeautifulSoup套件進行網頁解析
+以BeautifulSoup套件進行網頁解析
+1. 展開的html text成string
+2. 本地html檔案
+3. 網頁資料
 
-# 1. 展開的html text成string
-# 2. 本地html檔案
-# 3. 網頁資料
+共同抽出
+print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
+print(soup.prettify()) # 把排版後的 html 印出來
+print("列印BeautifulSoup物件資料型態 ", type(soup))
+print("取得網頁內容 : ", soup.text)
 
-# 共同抽出
-# print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
-# print(soup.prettify()) # 把排版後的 html 印出來
-# print("列印BeautifulSoup物件資料型態 ", type(soup))
-# print("取得網頁內容 : ", soup.text)
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -74,7 +76,7 @@ def get_soup_from_url(url):
     # print("取得網頁標題", soup.title)
     return soup
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 string_html_data = """
@@ -3348,7 +3350,6 @@ with open("tmp_Example.txt", "r", encoding="utf8") as fp:
 
 print("------------------------------------------------------------")  # 60個
 
-
 """ webdriver skip
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -3429,11 +3430,10 @@ print(html)
 driver.quit()
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-#
 # Extracted from: https://github.com/micropython/micropython-lib/blob/master/collections.defaultdict/collections/defaultdict.py
 # Extracted from: https://github.com/micropython/micropython-lib/blob/master/urllib.parse/urllib/parse.py
-#
 
 _safe_quoters = {}
 _ALWAYS_SAFE = frozenset(
@@ -4177,8 +4177,7 @@ for tag in tag_list:
     print(tag["href"], tag.text)
 
 print("------------------------------------------------------------")  # 60個
-
-
+print("------------------------------------------------------------")  # 60個
 """webdriver skip
 
 from selenium import webdriver
@@ -4359,7 +4358,7 @@ else:
     print("HTTP請求錯誤..." + url)
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 """ webdriver
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -4429,6 +4428,7 @@ if r.status_code == requests.codes.ok:
 else:
     print("HTTP請求錯誤..." + url)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from urllib.parse import urljoin
@@ -4507,6 +4507,7 @@ with open("tmp_movies.csv", "w+",newline="",encoding="utf-8") as fp:
     for item in movies:
         writer.writerow(item)
 """
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ webdriver
@@ -4709,6 +4710,7 @@ with open("tmp_all_movies2.csv", "w+",newline="",encoding="utf-8") as fp:
         writer.writerow(item)
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """ webdriver
 from selenium import webdriver
@@ -4854,10 +4856,247 @@ articles = web_scraping_bot(url)
 for item in articles:
     print(item)
 save_to_json(articles, "tmp_articles.json")
+'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 保留 bs4 本地讀取 html
+
+from bs4 import BeautifulSoup
+
+html = """
+<html>
+  <head><meta charset="UTF-8"><title>我是網頁標題</title></head>
+  <body>
+      <p id="p1">我是段落一</p>
+      <p id="p2" class='red'>我是段落二</p>
+  </body>
+</html>
+"""
+sp = BeautifulSoup(html, "html.parser")
+print(sp.find("p"))
+print(sp.find_all("p"))
+print(sp.find("p", {"id": "p2", "class": "red"}))
+print(sp.find("p", id="p2", class_="red"))
+
+print("------------------------------------------------------------")  # 60個
+
+# ch11\bs3.py
+
+from bs4 import BeautifulSoup
+
+html = """
+<html>
+  <head><meta charset="UTF-8"><title>我是網頁標題</title></head>
+  <body>
+      <p id="p1">我是段落一</p>
+      <p id="p2" class='red'>我是段落二</p>
+  </body>
+</html>
+"""
+sp = BeautifulSoup(html, "html.parser")
+print(sp.select("title"))
+print(sp.select("p"))
+print(sp.select("#p1"))
+print(sp.select(".red"))
+
+print("------------------------------------------------------------")  # 60個
+
+# ch11\bs4.py
+
+from bs4 import BeautifulSoup
+
+html = """
+<html>
+  <head><meta charset="UTF-8"><title>我是網頁標題</title></head>
+  <body>
+      <img src="http://www.ehappy.tw/python.png">
+      <a href="http://www.e-happy.com.tw">超連結</a>
+  </body>
+</html>
+"""
+sp = BeautifulSoup(html, "html.parser")
+print(sp.select("img")[0].get("src"))
+print(sp.select("a")[0].get("href"))
+print(sp.select("img")[0]["src"])
+print(sp.select("a")[0]["href"])
+
+print("------------------------------------------------------------")  # 60個
+
+# ch11\bs5.py
+
+html = """
+<html><head><title>網頁標題</title></head>
+<h1>文件標題</h1>
+<div class="content">
+    <div class="item1">
+        <a href="http://example.com/one" class="red" id="link1">First</a>
+        <a href="http://example.com/two" class="red" id="link2">Second</a>
+    </div>
+    <a href="http://example.com/three" class="blue" id="link3">
+        <img src="http://example.com/three.jpg">Third
+    </a>
+</div>
+"""
+
+from bs4 import BeautifulSoup
+
+sp = BeautifulSoup(html, "html.parser")
+
+print(sp.title)  # <title>網頁標題</title>
+
+print(sp.find("h1"))  # <h1>文件標題</h1>
+
+print(sp.find_all("a"))
+print(sp.find_all("a", {"class": "red"}))
+
+data1 = sp.find("a", {"href": "http://example.com/one"})
+print(data1.text)  # First
+
+data2 = sp.select("#link1")
+print(data2[0].text)  # First
+print(data2[0].get("href"))  # http://example.com/one
+print(data2[0]["href"])  # http://example.com/one
+
+print(sp.find_all(["title", "h1"]))  # [<title>網頁標題</title>, <h1>文件標題</h1>]
+
+print(sp.select("div img")[0]["src"])  # http://example.com/three.jpg
 
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+
+# 自訂表頭
+
+import requests
+
+url = "https://irs.thsrc.com.tw/IMINT/"
+# 自訂表頭
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36"
+}
+# 自訂表頭
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36"
+}
+# 將自訂表頭加入 GET 請求中
+r = requests.get(url, headers=headers)
+print(r)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+# webdriver
+print("------------------------------------------------------------")  # 60個
+
+# ch11\loginFacebook.py
+
+from selenium import webdriver
+
+# 設定facebook登入資訊
+url = "https://www.facebook.com/"
+email = "你的faceook電子郵件"
+password = "你的faceook密碼"
+# 建立瀏覽器物件
+driver = webdriver.Chrome()
+# 最大化視窗後開啟facebook網站
+driver.maximize_window()
+driver.get(url)
+# 執行自動登入動作
+driver.find_element_by_id("email").send_keys(email)  # 輸入郵件
+driver.find_element_by_id("pass").send_keys(password)  # 輸入密碼
+driver.find_element_by_id("loginbutton").click()  # 按登入鈕
+driver.find_element_by_name("login").click()  # 按登入鈕
+
+print("------------------------------------------------------------")  # 60個
+
+# ch11\loginFacebook2.py
+
+from selenium import webdriver
+
+# 設定facebook登入資訊
+url = "https://www.facebook.com/"
+email = "你的faceook電子郵件"
+password = "你的faceook密碼"
+
+# 取消 Alert
+chrome_options = webdriver.ChromeOptions()
+prefs = {"profile.default_content_setting_values.notifications": 2}
+chrome_options.add_experimental_option("prefs", prefs)
+
+# 建立瀏覽器物件
+driver = webdriver.Chrome(chrome_options=chrome_options)
+# 最大化視窗後開啟facebook網站
+driver.maximize_window()
+driver.get(url)
+
+# 執行自動登入動作
+driver.find_element_by_id("email").send_keys(email)  # 輸入郵件
+driver.find_element_by_id("pass").send_keys(password)  # 輸入密碼
+driver.find_element_by_name("login").click()  # 按登入鈕
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 同一df畫出3圖
+df = pd.DataFrame(
+    [[250, 320, 300, 312, 280], [280, 300, 280, 290, 310], [220, 280, 250, 305, 250]],
+    index=["北部", "中部", "南部"],
+    columns=[2015, 2016, 2017, 2018, 2019],
+)
+g1 = df.plot(kind="bar", title="長條圖", figsize=[10, 5])
+g2 = df.plot(kind="barh", title="橫條圖", figsize=[10, 5])
+g3 = df.plot(kind="bar", stacked=True, title="堆疊圖", figsize=[10, 5])
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 同一df將三筆資料畫在一圖
+
+df = pd.DataFrame(
+    [[250, 320, 300, 312, 280], [280, 300, 280, 290, 310], [220, 280, 250, 305, 250]],
+    index=["北部", "中部", "南部"],
+    columns=[2015, 2016, 2017, 2018, 2019],
+)
+g1 = df.iloc[0].plot(
+    kind="line",
+    legend=True,
+    xticks=range(2015, 2020),
+    title="公司分區年度銷售表",
+    figsize=[10, 5],
+)
+g1 = df.iloc[1].plot(kind="line", legend=True, xticks=range(2015, 2020))
+g1 = df.iloc[2].plot(kind="line", legend=True, xticks=range(2015, 2020))
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+df = pd.DataFrame(
+    [[250, 320, 300, 312, 280], [280, 300, 280, 290, 310], [220, 280, 250, 305, 250]],
+    index=["北部", "中部", "南部"],
+    columns=[2015, 2016, 2017, 2018, 2019],
+)
+df.plot(kind="pie", subplots=True, figsize=[16, 6])
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+url = "https://www.tiobe.com/tiobe-index/"
+tables = pd.read_html(url, header=0, keep_default_na=False)
+print(tables[0])
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
@@ -4883,12 +5122,15 @@ sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

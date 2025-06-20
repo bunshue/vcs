@@ -76,6 +76,8 @@ color space 色彩空間轉換
 cv2.split / cv2.merge
 """
 
+print("------------------------------------------------------------")  # 60個
+
 filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 img = cv2.imread(filename1)  # BGR讀取

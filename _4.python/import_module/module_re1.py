@@ -4,9 +4,6 @@ compile 函数用于编译正则表达式，生成一个正则表达式（ Patte
 语法格式为：
 re.compile(pattern[, flags])
 
-
-
-
 特殊字元表
 \d  0~9之間的整數字元
 \D  除了 0~9之間的整數字元 以外的其他字元
@@ -1914,7 +1911,306 @@ print(m.start())  # 輸出 1
 print(m.end())  # 輸出 5 注意！pple 的位置是 1~4
 print(m.span())  # 輸出 (1, 5)
 
+print("------------------------------------------------------------")  # 60個
 
+# bracket
+
+pat = r"[0-9+]+"
+s = "Amy was 18 year old,she likes Python and C++."
+m = re.findall(pat, s)
+print(m)  # ['18', '++']
+
+print("------------------------------------------------------------")  # 60個
+
+# compile
+
+reobj = re.compile(r"[a-z]+")
+m = reobj.findall("3tem12po")
+print(m)  # ['tem', 'po']
+
+print("------------------------------------------------------------")  # 60個
+
+# dotall
+
+pat = r".*"
+s = "Do your best,\nGo Go Go!"
+m = re.search(pat, s)
+print(m.group())  # Do your best,
+m2 = re.search(r".*", s, re.DOTALL)
+print(m2.group())  # Do your best,\nGo Go Go!
+
+print("------------------------------------------------------------")  # 60個
+
+# findall
+
+pat = re.compile("[a-z]+")
+m = pat.findall("tem12po")
+print(m)  # ['tem', 'po']
+
+print("------------------------------------------------------------")  # 60個
+
+# ignore
+
+pat = r"PYTHON|ANDROID"
+s = "I like Python and Android!"
+m = re.findall(pat, s, re.I)
+print(m)  # ['Python', 'Android']
+
+print("------------------------------------------------------------")  # 60個
+
+# match
+
+pat = re.compile(r"[a-z]+")
+
+m = pat.match("tem12po")
+print(m)  # <re.Match object; span=(0, 3), match='tem'>
+if not m == None:
+    print(m.group())  # tem
+    print(m.start())  # 0
+    print(m.end())  # 3
+    print(m.span())  # (0,3)
+
+print("------------------------------------------------------------")  # 60個
+
+# not1
+
+pat = r"[^a-z. ]+"
+s = "John was 18 year old."
+m = re.findall(pat, s)
+print(m)  # ['J', '18']
+
+print("------------------------------------------------------------")  # 60個
+
+# not2
+
+pat = r"^\d+"
+s = "2020 is coming soon"
+m = re.findall(pat, s)
+print(m)  # ['2020']
+m2 = re.findall(r"\w+$", s)
+print(m2)  # ['soon']
+
+print("------------------------------------------------------------")  # 60個
+
+# phone_check
+
+
+def isTaiwanPhone(str):
+    if len(str) != 11:  # 如果長度不是11
+        return False  # 傳回非手機號碼格式
+    # 檢查11個字元是否符合手機號碼格式
+    for i in range(0, 11):
+        if i == 4:
+            if str[4] != "-":  # 如果第5個字元不是'-'字元
+                return False  # 傳回非手機號碼格式
+        else:  # 如果前4個字或最後6個字出現非數字字元
+            if str[i].isdecimal() == False:
+                return False  # 傳回非手機號碼格式
+    return True  # 傳回是正確手機號碼格式
+
+
+print("0937-123456 是台灣手機號碼：", isTaiwanPhone("0937-123456"))
+print("02-12345678 是台灣手機號碼：", isTaiwanPhone("02-12345678"))
+
+print("------------------------------------------------------------")  # 60個
+
+# phone1
+
+numStr = "tel:04-12345678"
+pat = r"(\d{2})-(\d{8})"
+
+phone = re.search(pat, numStr)
+if not phone == None:
+    print(phone.group())  # 04-12345678
+    print(phone.group(0))  # 04-12345678
+    print(phone.group(1))  # 04
+    print(phone.group(2))  # 12345678
+
+print("------------------------------------------------------------")  # 60個
+
+# phone2
+
+numStr = "tel:(04)12345678"
+pat = r"(\(\d{2}\))(\d{8})"
+
+phone = re.search(pat, numStr)
+if not phone == None:
+    print(phone.group())  # (04)12345678
+    print(phone.group(1))  # (04)
+    print(phone.group(2))  # 12345678
+
+print("------------------------------------------------------------")  # 60個
+
+# phone3
+
+phoneList = ["(04)12345678", "(04)-12345678"]
+pat = r"(\(\d{2}\))-?(\d{8})"
+
+for phone in phoneList:
+    phoneNum = re.search(pat, phone)
+    if not phoneNum == None:
+        print(phoneNum.group())
+
+print("------------------------------------------------------------")  # 60個
+
+# phone4
+
+phoneList = [
+    "0412345678",
+    "(04)12345678",
+    "(04)-12345678",
+    "(049)2987654",
+    "0937-998877",
+]
+pat = r"\(\d{2,4}\)-?\d{6,8}|\d{9,10}|\d{4}-\d{6,8}"
+for phone in phoneList:
+    phoneNum = re.search(pat, phone)
+    if not phoneNum == None:
+        print(phoneNum.group())
+
+print("------------------------------------------------------------")  # 60個
+
+# plus
+
+pat = re.compile(r"[aeiou]+")
+s = "John is my best friend."
+m = re.findall(pat, s)
+print(m)  # ['o', 'i', 'e', 'ie']
+
+print("------------------------------------------------------------")  # 60個
+
+# re_findall
+
+m = re.findall(r"[a-z]+", "tem12po")
+print(m)  # ['tem', 'po']
+
+print("------------------------------------------------------------")  # 60個
+
+# re_match
+
+pat = r"[a-z]+"
+m = re.match(pat, "tem12po")
+print(m)  # <re.Match object; span=(0, 3), match='tem'>
+
+print("------------------------------------------------------------")  # 60個
+
+# re_search
+
+pat = "[a-z]+"
+m = re.search(pat, "3tem12po")
+print(m)  # <re.Match object; span=(1, 4), match='tem'>
+
+print("------------------------------------------------------------")  # 60個
+
+# re_verbose
+
+phoneList = [
+    "0412345678",
+    "(04)12345678",
+    "(04)-12345678",
+    "(049)2987654",
+    "0937-998877",
+]
+pat = r"""
+ \(\d{2,4}\)-?\d{6,8} #(04)12345678、(04)-12345678、(049)2987654 等電話格式
+|\d{9,10}             #0412345678 等含 9~10 位數字
+|\d{4}-\d{6,8}        #0937-998877 等手機格式
+"""
+
+for phone in phoneList:
+    phoneNum = re.search(pat, phone, re.VERBOSE)
+    if not phoneNum == None:
+        print(phoneNum.group())
+
+print("------------------------------------------------------------")  # 60個
+
+# regex
+
+html = """
+<div class="content">
+    E-Mail：<a href="mailto:mail@test.com.tw">mail</a><br>
+    E-Mail2：<a href="mailto:mail2@test.com.tw">mail2</a><br>
+    <ul class="price">定價：360元 </ul>
+    <img src="http://test.com.tw/p1.jpg">
+    <img src="http://test.com.tw/p2.jpg">
+    <img src="http://test.com.tw/p3.png">
+    電話：(04)-76543210、0937-123456
+</div>
+"""
+
+emails = re.findall(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+", html)
+for email in emails:  # 顯示 email
+    print(email)
+
+price = re.findall(r"[\d]+元", html)[0].split("元")[0]  # 價格
+print(price)  # 顯示定價金額
+
+imglist = re.findall(r"[http://]+[a-zA-Z0-9-/.]+\.[jpgpng]+", html)
+for img in imglist:  #
+    print(img)  # 顯示圖片網址
+
+phonelist = re.findall(r"\(?\d{2,4}\)?\-\d{6,8}", html)
+for phone in phonelist:
+    print(phone)  # 顯示電話號碼
+
+print("------------------------------------------------------------")  # 60個
+
+# search
+
+pat = re.compile("[a-z]+")
+
+m = pat.search("3tem12po")
+print(m)  # <re.Match object; span=(1, 4), match='tem'>
+if not m == None:
+    print(m.group())  # tem
+    print(m.start())  # 1
+    print(m.end())  # 4
+    print(m.span())  # (1,4)
+
+print("------------------------------------------------------------")  # 60個
+
+# star
+
+pat = re.compile(r"[aeiou]*")
+s = "John is my best friend."
+m = re.findall(pat, s)
+print(m)
+
+print("------------------------------------------------------------")  # 60個
+
+# sub1
+
+pat = r"\d+"
+substr = "*"
+s = "Password:1234,ID:5678"
+result = re.sub(pat, substr, s)
+print(result)  # Password:*,ID:*
+
+print("------------------------------------------------------------")  # 60個
+
+# sub2
+
+
+def multiply(m):
+    v = int(m.group())
+    return str(v * 2)
+
+
+result = re.sub("\d+", multiply, "10 20 30 40 50", 3)
+print(result)  # 20 40 60 40 50
+
+print("------------------------------------------------------------")  # 60個
+
+# wild
+
+pat = r".o"
+s = "Do your best!"
+m = re.findall(pat, s)
+print(m)  # ['Do', 'yo']
+m2 = re.findall(r".*o", s)
+print(m2)  # ['Do yo']
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1936,5 +2232,12 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個

@@ -1,5 +1,5 @@
 """
-python_data_science01
+numpy 新進
 
 """
 
@@ -33,7 +33,7 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-np.random.seed(0)  # seed for reproducibility
+np.random.seed(0)
 
 x1 = np.random.randint(10, size=6)  # One-dimensional array
 x2 = np.random.randint(10, size=(3, 4))  # Two-dimensional array
@@ -192,8 +192,6 @@ np.add.at(x, i, 1)
 print(x)
 
 # Example: Binning Data
-
-np.random.seed(42)
 x = np.random.randn(100)
 
 # compute a histogram by hand
@@ -598,6 +596,61 @@ x2 = np.arange(4, 8).reshape(2, 2)
 print(f"陣列 2 \n{x2}")
 x = np.hstack((x1, x2))
 print(f"合併結果 \n{x}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+a = np.arange(1, 10).reshape(3, 3)
+print("陣列的內容：\n", a)
+print("1.最小值與最大值：\n", np.min(a), np.max(a))
+print("2.每一直行最小值與最大值：\n", np.min(a, axis=0), np.max(a, axis=0))
+print("3.每一橫列最小值與最大值：\n", np.min(a, axis=1), np.max(a, axis=1))
+print("4.加總、乘積及平均值：\n", np.sum(a), np.prod(a), np.mean(a))
+print("5.每一直行加總、乘積與平均值：\n", np.sum(a, axis=0), np.prod(a, axis=0), np.mean(a, axis=0))
+print("6.每一橫列加總、乘積與平均值：\n", np.sum(a, axis=1), np.prod(a, axis=1), np.mean(a, axis=1))
+
+print("------------------------------------------------------------")  # 60個
+
+a = np.random.randint(100, size=50)
+print("陣列的內容：", a)
+print("1.標準差：", np.std(a))
+print("2.變異數：", np.var(a))
+print("3.中位數：", np.median(a))
+print("4.百分比值：", np.percentile(a, 80))
+print("5.最大最小差值：", np.ptp(a))
+
+print("------------------------------------------------------------")  # 60個
+
+a = np.random.choice(50, size=10, replace=False)
+print("排序前的陣列：", a)
+print("排序後的陣列：", np.sort(a))
+print("排序後的索引：", np.argsort(a))
+# 用索引到陣列取值
+for i in np.argsort(a):
+    print(a[i], end=",")
+
+print("------------------------------------------------------------")  # 60個
+
+a = np.random.randint(0, 10, (3, 5))
+print("原陣列內容：")
+print(a)
+print("將每一直行進行排序：")
+print(np.sort(a, axis=0))
+print("將每一橫列進行排序：")
+print(np.sort(a, axis=1))
+
+print("------------------------------------------------------------")  # 60個
+
+listdata = [[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15]]
+na = np.array(listdata)
+print(na)
+print("維度", na.ndim)
+print("形狀", na.shape)
+print("數量", na.size)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

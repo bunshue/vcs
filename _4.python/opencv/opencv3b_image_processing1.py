@@ -379,7 +379,56 @@ show()
 # 黑點就好比胡椒，白點就像是鹽，這種加上雜訊的方式，就稱為椒鹽雜訊（Salt & Pepper Noise）
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+
+def saltpepper(image, n):
+    m = int((image.shape[0] * image.shape[1]) * n)
+    for a in range(m):
+        i = int(np.random.random() * image.shape[1])
+        j = int(np.random.random() * image.shape[0])
+        if image.ndim == 2:
+            image[j, i] = 255
+        elif image.ndim == 3:
+            image[j, i, 0] = 255
+            image[j, i, 1] = 255
+            image[j, i, 2] = 255
+    for b in range(m):
+        i = int(np.random.random() * image.shape[1])
+        j = int(np.random.random() * image.shape[0])
+        if image.ndim == 2:
+            image[j, i] = 0
+        elif image.ndim == 3:
+            image[j, i, 0] = 0
+            image[j, i, 1] = 0
+            image[j, i, 2] = 0
+    return image
+
+
+# 上面就是椒鹽噪聲函數，下面是使用方法，大家可以愉快的玩耍了
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+
+image0 = cv2.imread(filename)
+
+image = cv2.imread(filename)
+
+print("saltpepper(胡椒鹽)效果")
+saltImage = saltpepper(image, 0.02)
+
+plt.figure(figsize=(12, 8))
+
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(saltImage, cv2.COLOR_BGR2RGB))
+plt.title("saltpepper(胡椒鹽)效果")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("圖像平滑 salt")
 

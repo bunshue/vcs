@@ -652,16 +652,158 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+for i in range(1, 10):
+    for j in range(1, 10):
+        product = i * j
+        print("%d*%d=%-2d   " % (i, j, product), end="")
+    print()
+
+print("------------------------------------------------------------")  # 60個
+
+listname = ["林大明", "陳阿中", "張小英"]
+listchinese = [100, 74, 82]
+listmath = [87, 88, 65]
+listenglish = [79, 100, 8]
+print("姓名     座號  國文  數學  英文")
+for i in range(0, 3):
+    print(
+        listname[i].ljust(5),
+        str(i + 1).rjust(3),
+        str(listchinese[i]).rjust(5),
+        str(listmath[i]).rjust(5),
+        str(listenglish[i]).rjust(5),
+    )
+
+print("------------------------------------------------------------")  # 60個
+
+week = [" 一", " 二", " 三", " 四", " 五", " 六", " 日"]
+dst = [" 無日光節約時間", " 有日光節約時間"]
+time1 = time.localtime()
+mesg = "現在時刻：中華民國 " + str(int(time1.tm_year) - 1911) + " 年 "
+mesg += str(time1.tm_mon) + " 月 " + str(time1.tm_mday) + " 日 "
+mesg += str(time1.tm_hour) + " 點 " + str(time1.tm_min) + " 分 "
+mesg += str(time1.tm_sec) + " 秒 星期" + week[time1.tm_wday] + "\n"
+mesg += "今天是今年的第 " + str(time1.tm_yday) + " 天，此地" + dst[time1.tm_isdst]
+print(mesg)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# ch05\spenttime.py
+
+start = time.time()  # 開始執行時間
+print("開始時間：{}".format(start))
+for i in range(100):
+    time.sleep(0.001)
+end = time.time()  # 結束執行時間
+print("結束時間：{}".format(end))
+print("使用時間：%7.3f 秒" % (end - start))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+import msvcrt
+
+
+def pwd_input():
+    chars = []
+    while True:
+        try:
+            newChar = msvcrt.getch().decode(encoding="utf-8")
+        except:
+            return input("請在cmd命令行下執行，否則密碼輸入將無法隱藏:")
+        if newChar in "\r\n":  # 如果是換行，结束輸入
+            break
+        elif newChar == "\b":  # 如果是退格，删除密碼末尾一位並且删除一個星號
+            if chars:
+                del chars[-1]
+                msvcrt.putch("\b".encode(encoding="utf-8"))  # 游標退回一格
+                msvcrt.putch(" ".encode(encoding="utf-8"))  # 输出一個空格覆蓋原來的星號
+                msvcrt.putch("\b".encode(encoding="utf-8"))  # 游標退回一格準備接受新的输入
+        else:
+            chars.append(newChar)
+            msvcrt.putch("*".encode(encoding="utf-8"))  # 顯示 * 號
+    return "".join(chars)
+
+
+# pwd_input()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+scores = {
+    "國文": {"王小明": 65, "李小美": 90, "陳大同": 81, "林小玉": 79},
+    "英文": {"王小明": 92, "李小美": 72, "陳大同": 85, "林小玉": 53},
+    "數學": {"王小明": 78, "李小美": 76, "陳大同": 91, "林小玉": 47},
+    "自然": {"王小明": 83, "李小美": 93, "陳大同": 89, "林小玉": 94},
+    "社會": {"王小明": 70, "李小美": 56, "陳大同": 94, "林小玉": 80},
+}
+df = pd.DataFrame(scores)
+
+print("------------------------------------------------------------")  # 60個
+
+# ch15\create_data.py
+
+
+def c_item(x):
+    if x < 2:
+        return "筆電"
+    elif x < 7:
+        return "冰箱"
+    else:
+        return "電視"
+
+
+def s_item(x):
+    if x < 5:
+        return "張三安"
+    elif x < 7:
+        return "李四友"
+    else:
+        return "王五信"
+
+
+df = pd.DataFrame(
+    {
+        "業務員": np.random.randint(0, 10, size=100),
+        "商品": np.random.randint(0, 10, size=100),
+        "數量": np.random.randint(30, 300, size=100),
+        "價格": np.random.randint(100, 200, size=100),
+    }
+)
+df["商品"] = df["商品"].map(c_item)
+df["業務員"] = df["業務員"].map(s_item)
+df["價格"] = df["價格"].map(lambda x: x * 100)
+
+print("------------------------------------------------------------")  # 60個
+
+# ch15\create_score.py
+
+tem = []
+for i in range(3):
+    tem.append(i + 1)
+df = pd.DataFrame(np.random.randint(40, 101, size=(3, 3)), columns=["英文", "社會", "公民"])
+# df = pd.DataFrame(np.random.randint(40,101,size=(3,4)), columns=['國文','數學','自然','社會'])
+df.insert(0, "座號", tem)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

@@ -445,7 +445,7 @@ import easygui
 
 # easygui.buttonbox(msg="選出一個你喜歡的人物", title="標題",choices=("AAA","BBB","CCC","DDD","EEE"))
 
-easygui.enterbox(msg="請輸入你想說的話", title="標題",default="預設內容")
+easygui.enterbox(msg="請輸入你想說的話", title="標題", default="預設內容")
 
 print("------------------------------------------------------------")  # 60個
 
