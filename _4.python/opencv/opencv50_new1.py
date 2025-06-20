@@ -454,8 +454,8 @@ filename2 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.b
 image1 = cv2.imread(filename1)
 image2 = cv2.imread(filename2)
 
-w = image1.shape[1]  # 讀取圖片寬度
-h = image1.shape[0]  # 讀取圖片高度
+w = image1.shape[1]  # W
+h = image1.shape[0]  # H
 
 for i in range(w):
     image1[:, i, 0] = image1[:, i, 0] * ((300 - i) / 300) + image2[:, i, 0] * (
@@ -2198,7 +2198,7 @@ def convex(src_img, raw, effect):
     return output
 
 
-image = cv2.imread(filename1)  # 彩色讀取
+image = cv2.imread(filename1)
 
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
@@ -2582,6 +2582,8 @@ if ret_value == ord("Q") or ret_value == ord("q"):
 
 print("------------------------------------------------------------")  # 60個
 """
+
+
 # 設定 cv 視窗
 cv2.namedWindow("Peony1")  # 使用預設
 cv2.namedWindow("Peony2", cv2.WINDOW_NORMAL)  # 可以調整大小
@@ -2611,14 +2613,15 @@ px = img[pt_y, pt_x]  # 讀px點
 print(type(px))
 print(f"BGR = {px}")
 
-img = cv2.imread(filename1)  # 彩色讀取
+img = cv2.imread(filename1)
 px = img[pt_y, pt_x]  # 讀px點
 print(type(px))
 print(f"BGR = {px}")
 
 pt_y = 169
 pt_x = 118
-img = cv2.imread(filename1)  # 彩色讀取
+img = cv2.imread(filename1)
+
 blue = img[pt_y, pt_x, 0]  # 讀 B 通道值
 green = img[pt_y, pt_x, 1]  # 讀 G 通道值
 red = img[pt_y, pt_x, 2]  # 讀 R 通道值
@@ -2630,7 +2633,7 @@ print("------------------------------------------------------------")  # 60個
 
 pt_y = 169
 pt_x = 118
-img = cv2.imread(filename1)  # 彩色讀取
+img = cv2.imread(filename1)
 px = img[pt_y, pt_x]  # 讀取 px 點
 print(f"更改前BGR = {px}")
 px = [255, 255, 255]  # 修改 px 點
@@ -2658,7 +2661,7 @@ plt.axis("off")
 
 print("修改圖片的像素值 彩色")
 
-img = cv2.imread(filename1)  # 彩色讀取
+img = cv2.imread(filename1)
 print(img.shape)
 
 for y in range(0, img.shape[0], 5):
@@ -2749,7 +2752,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 取出像素值, 修改之
 
-img = cv2.imread(filename1)  # 彩色讀取
+img = cv2.imread(filename1)
 
 print(f"修改前img[115,110] = {img[115,110]}")
 print(f"修改前img[125,110] = {img[125,110]}")
@@ -2849,7 +2852,7 @@ print(f"blue[0,1,2] = {blue.item(0,1,2)}")
 
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread(filename1)  # 彩色讀取
+img = cv2.imread(filename1)
 cv2.imshow("Before", img)  # 顯示修改前影像img
 print(f"修改前img[115,110,1] = {img.item(115,110,1)}")
 print(f"修改前img[125,110,1] = {img.item(125,110,1)}")
@@ -2872,7 +2875,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread(filename1)  # 彩色讀取
+img = cv2.imread(filename1)
 cv2.imshow("Peony", img)
 
 # ROI大小區塊建立馬賽克
@@ -2886,9 +2889,9 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-big = cv2.imread(filename2)  # 彩色讀取, 大圖
+big = cv2.imread(filename2)  # 大圖
 
-small = cv2.imread(filename1)  # 彩色讀取, 小圖
+small = cv2.imread(filename1)  # 小圖
 
 roi = small[110:200, 130:220]  # ROI, 先高後寬
 
@@ -3250,20 +3253,14 @@ print("------------------------------------------------------------")  # 60個
 # cv2.selectROI SP
 print("------------------------------------------------------------")  # 60個
 
-"""
+
 print("------------------------------------------------------------")  # 60個
 # Two Frames ST
 print("------------------------------------------------------------")  # 60個
 
-ESC = 27
-SPACE = 32
+video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/billiards_video.avi"
 
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-
-print("------------------------------------------------------------")  # 60個
-
-# cap = cv2.VideoCapture(video_filename)  # 開啟影片
-cap = cv2.VideoCapture("video.avi")  # 開啟影片
+cap = cv2.VideoCapture(video_filename)  # 開啟影片
 
 W = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 H = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -3320,13 +3317,11 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 # Two Frames SP
 print("------------------------------------------------------------")  # 60個
-"""
 
 """
 #GaussianBlur
 #Canny
 """
-
 
 def get_edge(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 灰階處理
@@ -3397,12 +3392,11 @@ def get_sublines(img, avglines):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "data/tmp1/road.jpg"
+filename_road = "C:/_git/vcs/_4.python/opencv/data/_Hough/road.jpg"
 
 print("------------------------------------------------------------")  # 60個
 
-# 彩色讀取
-img = cv2.imread(filename)  # 讀取圖片
+img = cv2.imread(filename_road)
 
 # 轉灰階
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -3427,7 +3421,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread(filename)
+img = cv2.imread(filename_road)
 
 edge = get_edge(img)  # Canny邊緣檢測
 
@@ -3442,7 +3436,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread(filename)
+img = cv2.imread(filename_road)
 
 edge = get_edge(img)  # Canny邊緣檢測
 
@@ -3460,7 +3454,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread(filename)  # 讀取圖片
+img = cv2.imread(filename_road)
 
 edge = get_edge(img)  # Canny邊緣檢測
 
@@ -3477,7 +3471,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread(filename)  # 讀取圖片
+img = cv2.imread(filename_road)
 
 edge = get_edge(img)  # Canny邊緣檢測
 
@@ -3508,7 +3502,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread(filename)  # 讀取圖片
+img = cv2.imread(filename_road)
 
 edge = get_edge(img)  # Canny邊緣檢測
 
@@ -3537,14 +3531,13 @@ if avglines is not None:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-video_filename = (
-    "C:/_git/__大檔與暫存區/GRENZEL 雲創 E3W WiFi 行車記錄器 1080 30fps 日間測試 高速公路 - Mobile01.mp4"
-)
+video_filename = "C:/_git/__大檔與暫存區/GRENZEL 雲創 E3W WiFi 行車記錄器 1080 30fps 日間測試 高速公路 - Mobile01.mp4"
 video_filename = "C:/_git/__大檔與暫存區/DOD行車記錄器-LS300W 日間高速公路實拍.mp4"
 video_filename = "C:/_git/__大檔與暫存區/響尾蛇行車記錄器高解析度1080P - 高速公路白天行駛記錄 -.mp4"
-video_filename = "road.mp4"
+video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/road.mp4"
 
 capture = cv2.VideoCapture(video_filename)  # 建立 VideoCapture 物件
+
 if capture.isOpened():
     while True:
         sucess, img = capture.read()  # 讀取影像
@@ -3768,22 +3761,22 @@ ret = cv2.imwrite("tmp_out1_7_1.tiff", img)  # 將檔案寫入out1_7_1.tiff
 ret = cv2.imwrite("tmp_out1_7_2.png", img)  # 將檔案寫入out1_7_2.png
 cv2.imwrite("a32.png", a32_image)  # 儲存alpha=32影像
 
+# ------------------------------------------------------------
+
 img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 img = cv2.imread(filename1)  # 彩色讀取
 
 # 影像的屬性
-
 print(f"shape = {img.shape}")
 print(f"size  = {img.size}")
 print(f"dtype = {img.dtype}")
+
+# ------------------------------------------------------------
 
 """
 陣列垂直合併 vstack()
 陣列水平合併 hstack()
 """
-
-img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("Peony", img)
 
 # ------------------------------------------------------------
 
@@ -3829,15 +3822,12 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
-
 meanBlurImage = np.round(meanBlurImage)
 
 image_0_1 = image/255.0
 
-
 # 將灰度值歸一化
 image = image / 255.0
-
 
 # 將圖像歸一化
 image_0_1 = image / 255.0
@@ -3863,14 +3853,11 @@ edge[edge > 0] = 255
 edge[edge <= 0] = 0
 edge = edge.astype(np.uint8)
 
-
 # 保存導向濾波的結果
 result = result * 255
 result[result > 255] = 255
 result = np.round(result)
 result = result.astype(np.uint8)
-
-
 
     # 縮小圖像
     small_I = cv2.resize(
@@ -3884,7 +3871,6 @@ result = result.astype(np.uint8)
         interpolation=cv2.INTER_CUBIC,
     )
 
-
     # 放大 small_a 和 small_b
     mean_a = cv2.resize(
         mean_small_a, dsize=(cols, rows), interpolation=cv2.INTER_LINEAR
@@ -3893,13 +3879,12 @@ result = result.astype(np.uint8)
         mean_small_b, dsize=(cols, rows), interpolation=cv2.INTER_LINEAR
     )
 
-
 result = 255 - result
 
 #cv2.imwrite('test.jpg',img) 偽寫入
 
 read
-    img = cv2.imread('car.jpg')             # 讀取圖片
+    img = cv2.imread('car.jpg')
 
 resize
     img_small = cv2.resize(img, (300, 100))  # 改變尺寸
@@ -3907,9 +3892,7 @@ resize
 save
         cv2.imwrite('small.jpg', img_small)  # 儲存影像
 
-
 OpenCV 的 cv2.imread 在讀取圖片時，可以在第二個參數指定圖片的格式，可用的選項有三種：
-
 
 數值 1
 cv2.IMREAD_COLOR
@@ -3937,7 +3920,6 @@ image = cv2.resize(image,(640//2,480//2))
 
 ------------------------------------------------------------
 
-
 image = cv2.imread(filename)  # 預設為彩色 1號
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階 2號
 image = cv2.imread(filename, 2)  # 也可使用數字代表模式
@@ -3956,11 +3938,12 @@ image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)  # 轉換成 BGRA 色彩模式
 
 print(image.shape)                             # (400, 300, 4)  第三個數值變成 4
 
-
-
     # 轉換為 8 位圖，保存結果
     imageAbstraction = 255 * imageAbstraction
     imageAbstraction = np.round(imageAbstraction)
     imageAbstraction = imageAbstraction.astype(np.uint8)
 
 """
+
+
+video.avi

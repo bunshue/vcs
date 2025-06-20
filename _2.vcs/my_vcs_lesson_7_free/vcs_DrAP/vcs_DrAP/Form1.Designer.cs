@@ -81,22 +81,19 @@
             this.cb_option2 = new System.Windows.Forms.CheckBox();
             this.cb_option3 = new System.Windows.Forms.CheckBox();
             this.groupbox_python = new System.Windows.Forms.GroupBox();
-            this.rb_python_search3 = new System.Windows.Forms.RadioButton();
-            this.rb_python_search2 = new System.Windows.Forms.RadioButton();
             this.rb_python_search1 = new System.Windows.Forms.RadioButton();
+            this.bt_edit_python_files = new System.Windows.Forms.Button();
             this.rb_python_search0 = new System.Windows.Forms.RadioButton();
+            this.bt_search_pattern_python = new System.Windows.Forms.Button();
             this.groupbox_result = new System.Windows.Forms.GroupBox();
             this.lb_search_result2 = new System.Windows.Forms.Label();
             this.lb_search_result1 = new System.Windows.Forms.Label();
             this.bt_compare = new System.Windows.Forms.Button();
-            this.bt_edit_python_files = new System.Windows.Forms.Button();
-            this.bt_search_pattern_python = new System.Windows.Forms.Button();
             this.bt_search_pattern_opengl = new System.Windows.Forms.Button();
             this.bt_open_dir2 = new System.Windows.Forms.Button();
             this.bt_search_pattern_cuda = new System.Windows.Forms.Button();
             this.bt_copy_rtb_data = new System.Windows.Forms.Button();
             this.bt_setup = new System.Windows.Forms.Button();
-            this.bt_search_pattern_matlab = new System.Windows.Forms.Button();
             this.bt_save_rtb_data = new System.Windows.Forms.Button();
             this.bt_search_pattern_vcs = new System.Windows.Forms.Button();
             this.bt_delete_file = new System.Windows.Forms.Button();
@@ -682,60 +679,62 @@
             // 
             // groupbox_python
             // 
-            this.groupbox_python.Controls.Add(this.rb_python_search3);
-            this.groupbox_python.Controls.Add(this.rb_python_search2);
-            this.groupbox_python.Controls.Add(this.bt_edit_python_files);
             this.groupbox_python.Controls.Add(this.rb_python_search1);
+            this.groupbox_python.Controls.Add(this.bt_edit_python_files);
             this.groupbox_python.Controls.Add(this.rb_python_search0);
             this.groupbox_python.Controls.Add(this.bt_search_pattern_python);
             this.groupbox_python.Location = new System.Drawing.Point(239, 113);
             this.groupbox_python.Name = "groupbox_python";
-            this.groupbox_python.Size = new System.Drawing.Size(173, 132);
+            this.groupbox_python.Size = new System.Drawing.Size(131, 132);
             this.groupbox_python.TabIndex = 64;
             this.groupbox_python.TabStop = false;
             this.groupbox_python.Text = "Python";
             // 
-            // rb_python_search3
-            // 
-            this.rb_python_search3.AutoSize = true;
-            this.rb_python_search3.Location = new System.Drawing.Point(19, 97);
-            this.rb_python_search3.Name = "rb_python_search3";
-            this.rb_python_search3.Size = new System.Drawing.Size(70, 16);
-            this.rb_python_search3.TabIndex = 3;
-            this.rb_python_search3.Text = "python all";
-            this.rb_python_search3.UseVisualStyleBackColor = true;
-            // 
-            // rb_python_search2
-            // 
-            this.rb_python_search2.AutoSize = true;
-            this.rb_python_search2.Location = new System.Drawing.Point(19, 75);
-            this.rb_python_search2.Name = "rb_python_search2";
-            this.rb_python_search2.Size = new System.Drawing.Size(94, 16);
-            this.rb_python_search2.TabIndex = 2;
-            this.rb_python_search2.Text = "python bookcd";
-            this.rb_python_search2.UseVisualStyleBackColor = true;
-            // 
             // rb_python_search1
             // 
             this.rb_python_search1.AutoSize = true;
-            this.rb_python_search1.Checked = true;
-            this.rb_python_search1.Location = new System.Drawing.Point(19, 53);
+            this.rb_python_search1.Location = new System.Drawing.Point(13, 48);
             this.rb_python_search1.Name = "rb_python_search1";
-            this.rb_python_search1.Size = new System.Drawing.Size(80, 16);
-            this.rb_python_search1.TabIndex = 1;
-            this.rb_python_search1.TabStop = true;
-            this.rb_python_search1.Text = "python only";
+            this.rb_python_search1.Size = new System.Drawing.Size(70, 16);
+            this.rb_python_search1.TabIndex = 3;
+            this.rb_python_search1.Text = "python all";
             this.rb_python_search1.UseVisualStyleBackColor = true;
+            // 
+            // bt_edit_python_files
+            // 
+            this.bt_edit_python_files.BackgroundImage = global::vcs_DrAP.Properties.Resources.python2;
+            this.bt_edit_python_files.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_edit_python_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_edit_python_files.Location = new System.Drawing.Point(71, 70);
+            this.bt_edit_python_files.Name = "bt_edit_python_files";
+            this.bt_edit_python_files.Size = new System.Drawing.Size(50, 50);
+            this.bt_edit_python_files.TabIndex = 62;
+            this.bt_edit_python_files.UseVisualStyleBackColor = true;
+            this.bt_edit_python_files.Click += new System.EventHandler(this.bt_edit_python_files_Click);
             // 
             // rb_python_search0
             // 
             this.rb_python_search0.AutoSize = true;
-            this.rb_python_search0.Location = new System.Drawing.Point(19, 31);
+            this.rb_python_search0.Checked = true;
+            this.rb_python_search0.Location = new System.Drawing.Point(13, 21);
             this.rb_python_search0.Name = "rb_python_search0";
-            this.rb_python_search0.Size = new System.Drawing.Size(60, 16);
-            this.rb_python_search0.TabIndex = 0;
-            this.rb_python_search0.Text = "___new";
+            this.rb_python_search0.Size = new System.Drawing.Size(80, 16);
+            this.rb_python_search0.TabIndex = 1;
+            this.rb_python_search0.TabStop = true;
+            this.rb_python_search0.Text = "python only";
             this.rb_python_search0.UseVisualStyleBackColor = true;
+            // 
+            // bt_search_pattern_python
+            // 
+            this.bt_search_pattern_python.BackgroundImage = global::vcs_DrAP.Properties.Resources.python;
+            this.bt_search_pattern_python.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_search_pattern_python.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_search_pattern_python.Location = new System.Drawing.Point(13, 70);
+            this.bt_search_pattern_python.Name = "bt_search_pattern_python";
+            this.bt_search_pattern_python.Size = new System.Drawing.Size(50, 50);
+            this.bt_search_pattern_python.TabIndex = 39;
+            this.bt_search_pattern_python.UseVisualStyleBackColor = true;
+            this.bt_search_pattern_python.Click += new System.EventHandler(this.bt_search_pattern_python_Click);
             // 
             // groupbox_result
             // 
@@ -782,30 +781,6 @@
             this.bt_compare.TabIndex = 66;
             this.bt_compare.UseVisualStyleBackColor = false;
             this.bt_compare.Click += new System.EventHandler(this.bt_compare_Click);
-            // 
-            // bt_edit_python_files
-            // 
-            this.bt_edit_python_files.BackgroundImage = global::vcs_DrAP.Properties.Resources.python2;
-            this.bt_edit_python_files.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_edit_python_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_edit_python_files.Location = new System.Drawing.Point(105, 70);
-            this.bt_edit_python_files.Name = "bt_edit_python_files";
-            this.bt_edit_python_files.Size = new System.Drawing.Size(50, 50);
-            this.bt_edit_python_files.TabIndex = 62;
-            this.bt_edit_python_files.UseVisualStyleBackColor = true;
-            this.bt_edit_python_files.Click += new System.EventHandler(this.bt_edit_python_files_Click);
-            // 
-            // bt_search_pattern_python
-            // 
-            this.bt_search_pattern_python.BackgroundImage = global::vcs_DrAP.Properties.Resources.python;
-            this.bt_search_pattern_python.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_search_pattern_python.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_search_pattern_python.Location = new System.Drawing.Point(105, 14);
-            this.bt_search_pattern_python.Name = "bt_search_pattern_python";
-            this.bt_search_pattern_python.Size = new System.Drawing.Size(50, 50);
-            this.bt_search_pattern_python.TabIndex = 39;
-            this.bt_search_pattern_python.UseVisualStyleBackColor = true;
-            this.bt_search_pattern_python.Click += new System.EventHandler(this.bt_search_pattern_python_Click);
             // 
             // bt_search_pattern_opengl
             // 
@@ -867,19 +842,6 @@
             this.bt_setup.TabIndex = 52;
             this.bt_setup.UseVisualStyleBackColor = true;
             this.bt_setup.Click += new System.EventHandler(this.bt_setup_Click);
-            // 
-            // bt_search_pattern_matlab
-            // 
-            this.bt_search_pattern_matlab.BackColor = System.Drawing.Color.White;
-            this.bt_search_pattern_matlab.BackgroundImage = global::vcs_DrAP.Properties.Resources.matlab;
-            this.bt_search_pattern_matlab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_search_pattern_matlab.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_search_pattern_matlab.Location = new System.Drawing.Point(1405, 3);
-            this.bt_search_pattern_matlab.Name = "bt_search_pattern_matlab";
-            this.bt_search_pattern_matlab.Size = new System.Drawing.Size(50, 50);
-            this.bt_search_pattern_matlab.TabIndex = 50;
-            this.bt_search_pattern_matlab.UseVisualStyleBackColor = false;
-            this.bt_search_pattern_matlab.Click += new System.EventHandler(this.bt_search_pattern_matlab_Click);
             // 
             // bt_save_rtb_data
             // 
@@ -973,7 +935,6 @@
             this.Controls.Add(this.bt_copy_rtb_data);
             this.Controls.Add(this.bt_setup);
             this.Controls.Add(this.cb_option1);
-            this.Controls.Add(this.bt_search_pattern_matlab);
             this.Controls.Add(this.cb_file_size);
             this.Controls.Add(this.groupBox_file);
             this.Controls.Add(this.groupBox_video);
@@ -1084,7 +1045,6 @@
         private System.Windows.Forms.CheckBox cb_file_s;
         private System.Windows.Forms.TextBox tb_file_s;
         private System.Windows.Forms.CheckBox cb_file_size;
-        private System.Windows.Forms.Button bt_search_pattern_matlab;
         private System.Windows.Forms.CheckBox cb_option1;
         private System.Windows.Forms.Button bt_setup;
         private System.Windows.Forms.Button bt_copy_rtb_data;
@@ -1099,8 +1059,6 @@
         private System.Windows.Forms.Button bt_edit_python_files;
         private System.Windows.Forms.CheckBox cb_option3;
         private System.Windows.Forms.GroupBox groupbox_python;
-        private System.Windows.Forms.RadioButton rb_python_search3;
-        private System.Windows.Forms.RadioButton rb_python_search2;
         private System.Windows.Forms.RadioButton rb_python_search1;
         private System.Windows.Forms.RadioButton rb_python_search0;
         private System.Windows.Forms.GroupBox groupbox_result;

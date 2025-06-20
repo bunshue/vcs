@@ -25,7 +25,7 @@ namespace vcs_DrAP
         private const int FUNCTION_FIND_SMALL_FOLDERS = 0x05;        //找小資料夾
         private const int FUNCTION_FIND_EMPTY_FOLDERS = 0x06;       //找空資料夾
         private const int FUNCTION_FIND_BIG_FILES = 0x07;           //找大檔案
-        private const int FUNCTION_SEARCH_TEXT = 0x08;  //搜尋關鍵字, vcs, python, matlab, cuda...
+        private const int FUNCTION_SEARCH_TEXT = 0x08;  //搜尋關鍵字, vcs, python, cuda...
         private const int FUNCTION_TEST = 0xFF;         //測試
 
         private const int FILETYPE_VIDEO = 0x00;        //影片
@@ -60,13 +60,11 @@ namespace vcs_DrAP
         string specified_search_path = @"C:\_git\vcs\_4.python\__code";
         string default_vcs_path = @"C:\_git\vcs\_2.vcs";
         string default_python_path = @"C:\_git\vcs\_4.python";
-        string default_matlab_path = @"C:\_git\vcs\_7.cmpp\_matlab1_test";
         string default_cuda_path = @"C:\_git\vcs\_3.cuda";
         string default_opengl_path = @"C:\_git\vcs\_6.opengl";
 
         private const int SEARCH_MODE_VCS = 0x00;	    //search vcs code, 搜尋vcs內的關鍵字
         private const int SEARCH_MODE_PYTHON = 0x01;	//search python code, 搜尋python內的關鍵字
-        private const int SEARCH_MODE_MATLAB = 0x02;	//search matlab code, 搜尋matlab內的關鍵字
         private const int SEARCH_MODE_CUDA = 0x03;	//search cuda code, 搜尋cuda內的關鍵字
         private const int SEARCH_MODE_OPENGL = 0x04;	//search opengl code, 搜尋opengl內的關鍵字
 
@@ -267,7 +265,6 @@ namespace vcs_DrAP
             dy = 55;
 
             bt_search_pattern_vcs.Location = new Point(x_st, y_st);
-            bt_search_pattern_matlab.Location = new Point(x_st + dx, y_st);
             bt_search_pattern_cuda.Location = new Point(x_st, y_st + dy);
             bt_search_pattern_opengl.Location = new Point(x_st + dx * 1, y_st + dy);
 
@@ -285,7 +282,7 @@ namespace vcs_DrAP
             x_st = 1540;
             y_st = 4;
             groupbox_python.Location = new Point(x_st, y_st);
-            groupbox_python.Size = new Size(160, 106);
+            groupbox_python.Size = new Size(112, 106);
             groupbox_result.Location = new Point(x_st + 165, y_st);
             groupbox_result.Size = new Size(110, 106);
             lb_search_result1.Location = new Point(10, 25);
@@ -299,14 +296,11 @@ namespace vcs_DrAP
             dy = 22;
             rb_python_search0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             rb_python_search1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            rb_python_search2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            rb_python_search3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
             bt_search_pattern_python.Size = new Size(45, 45);
-            bt_search_pattern_python.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 5);
+            bt_search_pattern_python.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_edit_python_files.Size = new Size(45, 45);
-            bt_edit_python_files.Location = new Point(x_st + dx * 1, y_st + dy * 2 - 2);
-
+            bt_edit_python_files.Location = new Point(x_st + dx * 0+50, y_st + dy * 2);
 
             /*
             richTextBox2.Text += "Form1 W1 " + this.Width.ToString() + "\n";
@@ -1758,36 +1752,14 @@ namespace vcs_DrAP
                         DirectoryInfo di = new DirectoryInfo(subdirectory);
                         //richTextBox2.Text += subdirectory + "\n";
 
-                        //rb_python_search0
                         if (search_mode == SEARCH_MODE_PYTHON)
                         {
-                            bool flag_do_search = false;
-                            string search_folder1 = @"C:\_git\vcs\_4.python\___new";    //新進檔案
-                            string search_folder2 = @"C:\_git\vcs\_4.python\__code";    //書附光碟
+                            string search_folder1 = @"C:\_git\vcs\_4.python\__code";    //書附光碟
 
                             if (rb_python_search0.Checked == true)
                             {
-                                //僅搜尋 新進檔案
+                                //python only 不包含 書附光碟
                                 if (subdirectory.Contains(search_folder1))
-                                {
-                                    ProcessDirectoryS(subdirectory);
-                                }
-                                else
-                                {
-                                    //richTextBox2.Text += "跳過 " + subdirectory + "\n";
-                                    continue;
-                                }
-                            }
-                            else if (rb_python_search1.Checked == true)
-                            {
-                                //python only 不包含新進檔案 與 書附光碟
-                                if (subdirectory.Contains(search_folder1))
-                                {
-                                    //跳過 新進檔案
-                                    richTextBox2.Text += "跳過 " + subdirectory + "\n";
-                                    continue;
-                                }
-                                else if (subdirectory.Contains(search_folder2))
                                 {
                                     //跳過 書附光碟
                                     richTextBox2.Text += "跳過 " + subdirectory + "\n";
@@ -1798,20 +1770,7 @@ namespace vcs_DrAP
                                     ProcessDirectoryS(subdirectory);
                                 }
                             }
-                            else if (rb_python_search2.Checked == true)
-                            {
-                                //僅搜尋 書附光碟
-                                if (subdirectory.Contains(search_folder2))
-                                {
-                                    ProcessDirectoryS(subdirectory);
-                                }
-                                else
-                                {
-                                    //richTextBox2.Text += "跳過 " + subdirectory + "\n";
-                                    continue;
-                                }
-                            }
-                            else if (rb_python_search3.Checked == true)
+                            else if (rb_python_search1.Checked == true)
                             {
                                 //全部
                                 ProcessDirectoryS(subdirectory);
@@ -1892,8 +1851,6 @@ namespace vcs_DrAP
                 pattern = ".cs";
             else if (search_mode == SEARCH_MODE_PYTHON)
                 pattern = "py";
-            else if (search_mode == SEARCH_MODE_MATLAB)
-                pattern = ".m";
             else if (search_mode == SEARCH_MODE_CUDA)
                 pattern = ".cu";
             else if (search_mode == SEARCH_MODE_OPENGL)
@@ -3079,12 +3036,6 @@ namespace vcs_DrAP
         {
         }
 
-        private void bt_search_pattern_matlab_Click(object sender, EventArgs e)
-        {
-            do_search_mode(SEARCH_MODE_MATLAB);
-            return;
-        }
-
         private void bt_search_pattern_cuda_Click(object sender, EventArgs e)
         {
             do_search_mode(SEARCH_MODE_CUDA);
@@ -3130,16 +3081,6 @@ namespace vcs_DrAP
                 bt_search_pattern_python.BackgroundImage = null;
                 bt_search_pattern_python.BackColor = Color.Red;
                 path = default_python_path;
-            }
-            else if (mode == SEARCH_MODE_MATLAB)
-            {
-                search_mode = SEARCH_MODE_MATLAB;
-                richTextBox1.Text += "matlab\t";
-                richTextBox2.Text += "matlab\t";
-
-                bt_search_pattern_matlab.BackgroundImage = null;
-                bt_search_pattern_matlab.BackColor = Color.Red;
-                path = default_matlab_path;
             }
             else if (mode == SEARCH_MODE_CUDA)
             {
@@ -3210,11 +3151,6 @@ namespace vcs_DrAP
             {
                 bt_search_pattern_python.BackColor = System.Drawing.SystemColors.ControlLight;
                 bt_search_pattern_python.BackgroundImage = vcs_DrAP.Properties.Resources.python;
-            }
-            else if (mode == SEARCH_MODE_MATLAB)
-            {
-                bt_search_pattern_matlab.BackColor = System.Drawing.SystemColors.ControlLight;
-                bt_search_pattern_matlab.BackgroundImage = vcs_DrAP.Properties.Resources.matlab;
             }
             else if (mode == SEARCH_MODE_CUDA)
             {

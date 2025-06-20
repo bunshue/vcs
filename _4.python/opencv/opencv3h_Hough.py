@@ -11,7 +11,7 @@ from opencv_common import *
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread("data/Hough/computer.jpg")  # 彩色讀取
+img = cv2.imread("data/_Hough/computer.jpg")  # 彩色讀取
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
@@ -48,7 +48,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread("data/Hough/computer.jpg", -1)  # 彩色讀取
+img = cv2.imread("data/_Hough/computer.jpg", -1)  # 彩色讀取
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
@@ -76,8 +76,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread("data/Hough/chess.jpg", 0)
-imgo = cv2.imread("data/Hough/chess.jpg", -1)
+img = cv2.imread("data/_Hough/chess.jpg", 0)
+imgo = cv2.imread("data/_Hough/chess.jpg", -1)
 
 o = cv2.cvtColor(imgo, cv2.COLOR_BGR2RGB)
 oshow = o.copy()
@@ -104,8 +104,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("這個做很久~~~~~~~")
 
-img = cv2.imread("data/Hough/chess.jpg", 0)
-imgo = cv2.imread("data/Hough/chess.jpg", -1)
+img = cv2.imread("data/_Hough/chess.jpg", 0)
+imgo = cv2.imread("data/_Hough/chess.jpg", -1)
 
 o = cv2.cvtColor(imgo, cv2.COLOR_BGR2RGB)
 oshow = o.copy()
@@ -131,7 +131,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread("data/Hough/jianzhu.png")  # 彩色讀取
+img = cv2.imread("data/_Hough/jianzhu.png")  # 彩色讀取
 
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
@@ -176,7 +176,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-lane1 = cv2.imread("data/Hough/lane.jpg")  # 彩色讀取
+lane1 = cv2.imread("data/_Hough/lane.jpg")  # 彩色讀取
 
 # 高斯模糊，Canny边缘检测需要的
 lane2 = cv2.GaussianBlur(lane1, (5, 5), 0)  # 執行高斯模糊化
@@ -221,7 +221,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img1 = cv2.imread("data/Hough/4.png", 0)  # 灰階讀取
+img1 = cv2.imread("data/_Hough/4.png", 0)  # 灰階讀取
 img2 = cv2.medianBlur(img1, 5)
 img3 = cv2.cvtColor(img2, cv2.COLOR_GRAY2BGR)
 
@@ -265,7 +265,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 霍夫圓形檢測
 
-filename = "data/Hough/cup.jpg"
+filename = "data/_Hough/cup.jpg"
 
 image = cv2.imread(filename, -1)  # 彩色讀取
 
@@ -327,7 +327,7 @@ print("------------------------------------------------------------")  # 60個
 # add_collection 只能用 ax
 
 # 使用HoughLinesP()檢驗圖形中的直線
-img = cv2.imread("data/Hough/building.jpg", cv2.IMREAD_GRAYSCALE)
+img = cv2.imread("data/_Hough/building.jpg", cv2.IMREAD_GRAYSCALE)
 
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 img_binary = cv2.Canny(img, 100, 255)
@@ -359,7 +359,8 @@ print("------------------------------------------------------------")  # 60個
 # 檢驗圓形
 
 # 使用HoughCircles()檢驗圖形中的圓形
-img = cv2.imread("data/Hough/coins.png", cv2.IMREAD_GRAYSCALE)
+img = cv2.imread("data/_Hough/coins.png", cv2.IMREAD_GRAYSCALE)
+
 img_blur = cv2.GaussianBlur(img, (0, 0), 1.8)
 circles = cv2.HoughCircles(
     img_blur,
@@ -401,7 +402,7 @@ print("------------------------------------------------------------")  # 60個
 # OpenCV_18_從直線檢測到無人駕駛車道檢測
 print("------------------------------------------------------------")  # 60個
 
-filename = "data/Hough/japanese_schedule.jpg"
+filename = "data/_Hough/japanese_schedule.jpg"
 
 src = cv2.imread(filename, cv2.IMREAD_COLOR)
 
@@ -451,7 +452,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/Hough/lane2.jpg", cv2.IMREAD_COLOR)
+src = cv2.imread("data/_Hough/lane2.jpg", cv2.IMREAD_COLOR)
 cv2.imshow("src", src)
 
 plt.subplot(131)
@@ -502,7 +503,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/Hough/roadtest.jpg", cv2.IMREAD_COLOR)
+src = cv2.imread("data/_Hough/roadtest.jpg", cv2.IMREAD_COLOR)
 
 cv2.imshow("src", src)
 
@@ -547,7 +548,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/Hough/shapes.jpg")
+src = cv2.imread("data/_Hough/shapes.jpg")
 cv2.imshow("src", src)
 
 plt.subplot(121)
@@ -623,7 +624,7 @@ cv2.HoughLines 的返回参数 line == [\rho ,\Theta ]，
 这样才会过整幅图像绘制直线。
 """
 
-img = cv2.imread("data/Hough/FerrisWheel4.png")  # 彩色讀取
+img = cv2.imread("data/_Hough/FerrisWheel4.png")  # 彩色讀取
 
 cv2.imshow("src", img)
 
