@@ -21,7 +21,7 @@ src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
 
 #         cv2.threshold(src, 閥值, 最大灰度值, 使用的二值化方法)
 ret, dst1 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY)
-ret, dst2 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)
+ret, dst2 = cv2.threshold(src, thresh, maxval, cv2.THRESH_BINARY_INV)  # 轉為反相黑白
 ret, dst3 = cv2.threshold(src, thresh, maxval, cv2.THRESH_TRUNC)
 ret, dst4 = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO_INV)
 ret, dst5 = cv2.threshold(src, thresh, maxval, cv2.THRESH_TOZERO)
@@ -135,7 +135,7 @@ print("------------------------------------------------------------")  # 60個
 
 W, H, D = 5, 4, 3
 image = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)  # np.random之randint不含尾
-t, rst = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY_INV)
+t, rst = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY_INV)  # 轉為反相黑白
 print("image = \n", image)
 print("t = ", t)
 print("rst = \n", rst)
@@ -378,7 +378,7 @@ ret, output1 = cv2.threshold(
 
 ret, output2 = cv2.threshold(
     image_gray, THRESHOLD, 255, cv2.THRESH_BINARY_INV
-)  # 如果大於 THRESHOLD 就等於 0，反之等於 255。
+)  # 如果大於 THRESHOLD 就等於 0，反之等於 255。  # 轉為反相黑白
 
 ret, output3 = cv2.threshold(
     image_gray, THRESHOLD, 255, cv2.THRESH_TRUNC
@@ -457,6 +457,30 @@ plt.imshow(cv2.cvtColor(output3, cv2.COLOR_BGR2RGB))
 plt.title("output3")
 
 show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("閾值分割 threshold")
+
+src = np.array(
+    [[123, 234, 68], [33, 51, 17], [48, 98, 234], [129, 89, 27], [45, 167, 134]],
+    np.uint8,
+)
+# 手動設置閾值
+the = 150
+maxval = 255
+dst = cv2.threshold(src, the, maxval, cv2.THRESH_BINARY)
+
+# Otsu 閾值處理
+otsuThe = 0
+otsuThe, dst_Otsu = cv2.threshold(src, otsuThe, maxval, cv2.THRESH_OTSU)
+print(otsuThe, dst_Otsu)
+
+# TRIANGLE 閾值處理
+triThe = 0
+triThe, dst_tri = cv2.threshold(src, triThe, maxval, cv2.THRESH_TRIANGLE)
+print(triThe, dst_tri)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
