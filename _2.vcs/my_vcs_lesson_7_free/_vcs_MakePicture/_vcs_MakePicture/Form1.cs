@@ -3142,7 +3142,63 @@ namespace _vcs_MakePicture
 
         private void button76_Click(object sender, EventArgs e)
         {
+            //灰度圓
 
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 512;
+            height = 512;
+            bitmap1 = new Bitmap(width, height);
+
+            background_color = Color.White;
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+            background_color = Color.Black;
+            for (yy = height/3; yy < height*2/3; yy++)
+            {
+                for (xx = width/3; xx < width*2/3; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            int cx = 256;
+            int cy = 256;
+            for (int i = 0; i < 256; i++)
+            {
+                p = new Pen(Color.FromArgb(255, i, i, i), 2);
+                //g.DrawEllipse(p, cx, cy, width - linewidth - 1, height - linewidth - 1);
+                DrawCircle(g, p, cx, cy, i+60);
+            }
+            for (int i = 256; i < 256+100; i++)
+            {
+                p = new Pen(Color.FromArgb(255, 255, 255, 255), 1);
+                //DrawCircle(g, p, cx, cy, i + 60);
+            }
+
+
+            /*
+        void DrawCircle(Graphics g, Pen p, int cx, int cy, int r)
+        {
+            g.DrawEllipse(p, cx - r, cy - r, r * 2, r * 2);
+        }
+
+             */
+            pictureBox1.Image = bitmap1;
         }
 
         private void button77_Click(object sender, EventArgs e)

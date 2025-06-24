@@ -1114,6 +1114,7 @@
             this.button76.Name = "button76";
             this.button76.Size = new System.Drawing.Size(60, 60);
             this.button76.TabIndex = 80;
+            this.button76.Text = "灰度圓";
             this.button76.UseVisualStyleBackColor = true;
             this.button76.Click += new System.EventHandler(this.button76_Click);
             // 

@@ -66,13 +66,13 @@ plt.subplot(233)
 plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))
 plt.title("Canny 2")
 
-
 src = cv2.imread(lena_filename, cv2.IMREAD_GRAYSCALE)
 
-blur_gray = cv2.GaussianBlur(src, (3, 3), 0)  # 執行高斯模糊化
+# 高斯模糊化，Canny边缘检测需要的
+blur_gray = cv2.GaussianBlur(src, (3, 3), 0)
+
 threshold_1 = 30  # 強邊緣strong edge
 threshold_2 = 60  # 弱邊緣weak edge
-
 edges = cv2.Canny(blur_gray, threshold_1, threshold_2)
 
 plt.subplot(234)
@@ -99,8 +99,8 @@ plt.subplot(231)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-# 高斯模糊，Canny边缘检测需要的
-image_blur = cv2.GaussianBlur(image, (5, 5), 0)  # 執行高斯模糊化
+# 高斯模糊化，Canny边缘检测需要的
+image_blur = cv2.GaussianBlur(image, (5, 5), 0)
 
 # 进行边缘检测，减少图像空间中需要检测的点数量
 image_canny = cv2.Canny(image_blur, 50, 150)
@@ -133,12 +133,10 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 執行高斯模糊化
-
 original_img = cv2.imread("data/lena.png", 0)
 
-# canny(): 边缘检测
-img1 = cv2.GaussianBlur(original_img, (3, 3), 0)  # 執行高斯模糊化
+# 高斯模糊化，Canny边缘检测需要的
+img1 = cv2.GaussianBlur(original_img, (3, 3), 0)
 canny = cv2.Canny(img1, 50, 150)
 
 print("------------------------------------------------------------")  # 60個
@@ -148,7 +146,8 @@ print("CannyThreshold")
 
 
 def CannyThreshold(lowThreshold):
-    detected_edges = cv2.GaussianBlur(gray, (3, 3), 0)  # 執行高斯模糊化
+    # 高斯模糊化，Canny边缘检测需要的
+    detected_edges = cv2.GaussianBlur(gray, (3, 3), 0)
     detected_edges = cv2.Canny(
         detected_edges, lowThreshold, lowThreshold * ratio, apertureSize=kernel_size
     )
@@ -178,8 +177,8 @@ print("Canny1")
 
 original_img = cv2.imread("data/lena.png", 0)
 
-# canny(): 邊緣檢測
-img1 = cv2.GaussianBlur(original_img, (3, 3), 0)  # 執行高斯模糊化
+# 高斯模糊化，Canny边缘检测需要的
+img1 = cv2.GaussianBlur(original_img, (3, 3), 0)
 canny = cv2.Canny(img1, 50, 150)
 
 # 形態學：邊緣檢測
@@ -292,7 +291,9 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread(filename)
 
 kernel_size = (3, 3)
-blur_image = cv2.GaussianBlur(src, kernel_size, 0)  # 執行高斯模糊化
+
+# 高斯模糊化，Canny边缘检测需要的
+blur_image = cv2.GaussianBlur(src, kernel_size, 0)
 
 # 水平方向梯度
 x = cv2.Sobel(blur_image, cv2.CV_16S, 1, 0, kernel_size)
@@ -349,6 +350,8 @@ print("------------------------------------------------------------")  # 60個
 print("使用 Sobel()")
 
 src = cv2.imread("data/edge_detection/geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
+
+# 高斯模糊，Canny边缘检测需要的
 src = cv2.GaussianBlur(src, (3, 3), 0)  # 降低噪音
 
 plt.figure(figsize=(12, 8))
@@ -555,10 +558,11 @@ print("------------------------------------------------------------")  # 60個
 # cv2.Scharr() ST
 print("------------------------------------------------------------")  # 60個
 
-
 print("使用 Scharr() 灰階")
 
 src = cv2.imread(lena_filename, cv2.IMREAD_GRAYSCALE)  # 黑白讀取
+
+# 高斯模糊，Canny边缘检测需要的
 src = cv2.GaussianBlur(src, (3, 3), 0)  # 降低噪音
 
 # Scharr()函數
@@ -673,6 +677,8 @@ print("------------------------------------------------------------")  # 60個
 print("使用 Laplacian()")
 
 src = cv2.imread("data/edge_detection/geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
+
+# 高斯模糊，Canny边缘检测需要的
 src = cv2.GaussianBlur(src, (3, 3), 0)  # 降低噪音
 
 plt.figure(figsize=(12, 8))
@@ -2246,7 +2252,6 @@ print(f"dst = \n {dst}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 高斯模糊，Canny边缘检测需要的
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2308,9 +2313,6 @@ edge_y[edge_y > 255] = 255
 edge[edge > 255] = 255
 edge = edge.astype(np.uint8)
 
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-image_sobel_x, image_sobel_y = sobel(image, 7)
-
 edge = np.sqrt(np.power(image_sobel_x, 2.0) + np.power(image_sobel_y, 2.0))
 
 edge = edge / np.max(edge)
@@ -2357,6 +2359,8 @@ src = cv2.imread("data/edge_detection/geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑�
 
 print("------------------------------------------------------------")  # 60個
 
+# gray_scale.jpg
+
 # Canny
 CANNY_THRESH_1 = 10
 CANNY_THRESH_2 = 200
@@ -2391,3 +2395,4 @@ show()
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+

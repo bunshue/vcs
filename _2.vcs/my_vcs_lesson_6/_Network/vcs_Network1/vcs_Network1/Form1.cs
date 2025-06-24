@@ -560,7 +560,68 @@ namespace vcs_Network1
 
         private void button18_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "測試IPPower\n";
 
+            //# 2.1 To get firmware version : getversion
+            richTextBox1.Text += "getversion\n";
+            string url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=getversion";
+            WebClient wc = new WebClient();
+            wc.Encoding = Encoding.UTF8;
+            string html = wc.DownloadString(url);
+            richTextBox1.Text += html + "\n";
+
+            //# 2.2 To get MACaddress：getmac
+            richTextBox1.Text += "getmac\n";
+            url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=getmac";
+            wc = new WebClient();
+            wc.Encoding = Encoding.UTF8;
+            html = wc.DownloadString(url);
+            richTextBox1.Text += html + "\n";
+
+
+            //# 2.3 To get the status of power on/ off： getpower
+            richTextBox1.Text += "getpower\n";
+            url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=getpower";
+            wc = new WebClient();
+            wc.Encoding = Encoding.UTF8;
+            html = wc.DownloadString(url);
+            richTextBox1.Text += html + "\n";
+
+            /*
+            //# Example : Turn on POWER1 and turn off POWER1：
+            //# 上電
+            url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=setpower&p61=1";
+            wc = new WebClient();
+            wc.Encoding = Encoding.UTF8;
+            html = wc.DownloadString(url);
+            richTextBox1.Text += html + "\n";
+
+            //# 下電
+            url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=setpower&p61=0";
+            wc = new WebClient();
+            wc.Encoding = Encoding.UTF8;
+            html = wc.DownloadString(url);
+            richTextBox1.Text += html + "\n";
+            */
+
+            //# reset
+
+            url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=setpowercycle&p61=1";
+            richTextBox1.Text += "reset\n";
+            wc = new WebClient();
+            wc.Encoding = Encoding.UTF8;
+            html = wc.DownloadString(url);
+            richTextBox1.Text += html + "\n";
+
+
+            //# 2.6 Get current Amp value : getcurrent
+
+            url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=getcurrent";
+            richTextBox1.Text += "getcurrent\n";
+            wc = new WebClient();
+            wc.Encoding = Encoding.UTF8;
+            html = wc.DownloadString(url);
+            richTextBox1.Text += html + "\n";
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -569,3 +630,5 @@ namespace vcs_Network1
         }
     }
 }
+
+
