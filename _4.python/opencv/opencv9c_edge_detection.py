@@ -7,6 +7,7 @@
 
 cv2.Canny()
 cv2.Sobel()
+cv2.Scharr()
 cv2.Laplacian()
 比較
 """
@@ -16,8 +17,12 @@ from opencv_common import *
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 lena_filename = "data/edge_detection/lena.jpg"
-lena_gray_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-lena_color_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+lena_gray_filename = (
+    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+)
+lena_color_filename = (
+    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+)
 
 barbara_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
 
@@ -141,6 +146,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("CannyThreshold")
 
+
 def CannyThreshold(lowThreshold):
     detected_edges = cv2.GaussianBlur(gray, (3, 3), 0)  # 執行高斯模糊化
     detected_edges = cv2.Canny(
@@ -168,7 +174,33 @@ if cv2.waitKey(0) == 27:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("Canny1")
 
+original_img = cv2.imread("data/lena.png", 0)
+
+# canny(): 邊緣檢測
+img1 = cv2.GaussianBlur(original_img, (3, 3), 0)  # 執行高斯模糊化
+canny = cv2.Canny(img1, 50, 150)
+
+# 形態學：邊緣檢測
+_, Thr_img = cv2.threshold(
+    original_img, 210, 255, cv2.THRESH_BINARY
+)  # 設定紅色通道閾值210（閾值影響梯度運算效果）
+
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))  # 定義矩形結構元素
+gradient = cv2.morphologyEx(Thr_img, cv2.MORPH_GRADIENT, kernel)  # 梯度
+
+plt.subplot(131)
+cv2.imshow("原始圖像", original_img)
+
+plt.subplot(132)
+cv2.imshow("梯度", gradient)
+
+plt.subplot(133)
+cv2.imshow("Canny函數", canny)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -314,7 +346,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 print("使用 Sobel()")
 
 src = cv2.imread("data/edge_detection/geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
@@ -343,130 +374,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("使用 Scharr() 灰階")
-
-src = cv2.imread(lena_filename, cv2.IMREAD_GRAYSCALE)  # 黑白讀取
-src = cv2.GaussianBlur(src, (3, 3), 0)  # 降低噪音
-
-# Scharr()函數
-dstx = cv2.Scharr(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
-dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
-
-dsty = cv2.Scharr(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
-dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
-
-dst_scharr = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
-
-plt.figure(figsize=(12, 8))
-plt.subplot(221)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(222)
-plt.imshow(cv2.cvtColor(dstx, cv2.COLOR_BGR2RGB))
-plt.title("Scharr X")
-
-plt.subplot(223)
-plt.imshow(cv2.cvtColor(dsty, cv2.COLOR_BGR2RGB))
-plt.title("Scharr Y")
-
-plt.subplot(224)
-plt.imshow(cv2.cvtColor(dst_scharr, cv2.COLOR_BGR2RGB))
-plt.title("Scharr")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-filename = lena_color_filename
-
-BLUR = 21
-CANNY_THRESH_1 = 10
-CANNY_THRESH_2 = 200
-
-image = cv2.imread(filename)
-
-plt.figure(figsize=(12, 8))
-plt.subplot(231)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 圖片轉為灰階
-
-plt.subplot(232)
-plt.imshow(cv2.cvtColor(image_gray, cv2.COLOR_BGR2RGB))
-plt.title("灰階")
-
-# -- Edge detection -------------------------------------------------------------------
-
-edges = cv2.Canny(image_gray, CANNY_THRESH_1, CANNY_THRESH_2)
-
-plt.subplot(234)
-plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
-plt.title("Canny")
-
-edges = cv2.dilate(edges, None)
-
-plt.subplot(235)
-plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
-plt.title("Dilate")
-
-edges = cv2.erode(edges, None)
-
-plt.subplot(236)
-plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
-plt.title("Erode")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# split image into channels
-r, g, b = cv2.split(image)
-
-plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
-show()
-
-plt.imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB))
-show()
-
-plt.imshow(cv2.cvtColor(b, cv2.COLOR_BGR2RGB))
-show()
-
-# img_a = cv2.merge((r, g, b, mask.astype('float32') / 255.0))
-# plt.imshow(img_a)
-# show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 直方圖二值化
-# 不同模式的Threshold方法
-# cv2.THRESH_BINARY
-# cv2.THRESH_BINARY_INV
-# cv2.THRESH_TRUNC
-# cv2.THRESH_TOZERO
-# cv2.THRESH_TOZERO_INV
-
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
-ret, th1 = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
-
-plt.imshow(cv2.cvtColor(th1, cv2.COLOR_BGR2RGB))
-
-show()
-
-plt.figure(figsize=(12, 8))
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(th1, cv2.COLOR_BGR2RGB))
-plt.title("th1")
-
-show()
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -482,7 +389,7 @@ plt.subplot(231)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("顯示 Sobel 效果 1")
 sobelx = cv2.Sobel(image, -1, 1, 0)
@@ -491,7 +398,7 @@ plt.subplot(232)
 plt.imshow(cv2.cvtColor(sobelx, cv2.COLOR_BGR2RGB))
 plt.title("Sobel 效果 1")
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("顯示 Sobel 效果 2 x 方向")
 sobelx = cv2.Sobel(image, cv2.CV_64F, 1, 0)
@@ -501,7 +408,7 @@ plt.subplot(233)
 plt.imshow(cv2.cvtColor(sobelx, cv2.COLOR_BGR2RGB))
 plt.title("Sobel 效果 2 x 方向")
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("顯示 Sobel 效果 3 y 方向")
 sobely = cv2.Sobel(image, cv2.CV_64F, 0, 1)
@@ -511,7 +418,7 @@ plt.subplot(234)
 plt.imshow(cv2.cvtColor(sobely, cv2.COLOR_BGR2RGB))
 plt.title("Sobel 效果 3 y 方向")
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("顯示 Sobel 效果 4 x-y 方向")
 sobelxy = cv2.Sobel(image, cv2.CV_64F, 1, 1)
@@ -521,7 +428,7 @@ plt.subplot(235)
 plt.imshow(cv2.cvtColor(sobelxy, cv2.COLOR_BGR2RGB))
 plt.title("Sobel 效果 4 x-y 方向")
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("顯示 Sobel 效果 5 先x 再y 方向")
 sobelx = cv2.Sobel(image, cv2.CV_64F, 1, 0)
@@ -539,6 +446,7 @@ plt.title("Sobel 效果 5 先x 再y 方向")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 filename = lena_gray_filename
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
@@ -553,7 +461,6 @@ sobely = cv2.convertScaleAbs(sobely)
 sobelxy = cv2.addWeighted(sobelx, 0.5, sobely, 0.5, 0)
 
 sobelxy11 = cv2.Sobel(image, cv2.CV_64F, 1, 1)
-
 sobelxy11 = cv2.convertScaleAbs(sobelxy11)
 
 plt.figure(figsize=(12, 8))
@@ -572,71 +479,6 @@ plt.title("Sobel xy11")
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-print("Scharr")
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/scharr.bmp"
-
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
-print("Scharr 效果 1")
-scharrx = cv2.Scharr(image, cv2.CV_64F, 1, 0)
-scharrx = cv2.convertScaleAbs(scharrx)  # 转回uint8
-
-print("Scharr 效果 2")
-scharry = cv2.Scharr(image, cv2.CV_64F, 0, 1)
-scharry = cv2.convertScaleAbs(scharry)
-
-print("Scharr 效果 3")
-scharrx = cv2.Scharr(image, cv2.CV_64F, 1, 0)
-scharrx = cv2.convertScaleAbs(scharrx)  # 转回uint8
-
-scharry = cv2.Scharr(image, cv2.CV_64F, 0, 1)
-scharry = cv2.convertScaleAbs(scharry)
-
-scharrxy = cv2.addWeighted(scharrx, 0.5, scharry, 0.5, 0)
-
-plt.figure(figsize=(12, 8))
-plt.subplot(221)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(222)
-plt.imshow(cv2.cvtColor(scharrx, cv2.COLOR_BGR2RGB))
-plt.title("Scharr 效果 1")
-
-plt.subplot(223)
-plt.imshow(cv2.cvtColor(scharry, cv2.COLOR_BGR2RGB))
-plt.title("Scharr 效果 2")
-
-plt.subplot(224)
-plt.imshow(cv2.cvtColor(scharrxy, cv2.COLOR_BGR2RGB))
-plt.title("Scharr 效果 3")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/scharr.bmp"
-
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
-print("Scharr 效果")
-# scharrxy11 = cv2.Scharr(image, cv2.CV_64F, 1, 1)   #fail
-scharrxy11 = cv2.Scharr(image, cv2.CV_64F, 1, 0)  # ok
-scharrxy11 = cv2.convertScaleAbs(scharrxy11)  # 转回uint8
-
-plt.figure(figsize=(12, 8))
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(scharrxy11, cv2.COLOR_BGR2RGB))
-plt.title("Scharr 效果")
-
-show()
-
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/sobel.bmp"
@@ -703,6 +545,126 @@ plt.imshow(cv2.cvtColor(scharrxy, cv2.COLOR_BGR2RGB))
 plt.title("Scharr xy")
 
 show()
+
+print("------------------------------------------------------------")  # 60個
+# cv2.Sobel() SP
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+# cv2.Scharr() ST
+print("------------------------------------------------------------")  # 60個
+
+
+print("使用 Scharr() 灰階")
+
+src = cv2.imread(lena_filename, cv2.IMREAD_GRAYSCALE)  # 黑白讀取
+src = cv2.GaussianBlur(src, (3, 3), 0)  # 降低噪音
+
+# Scharr()函數
+dstx = cv2.Scharr(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
+dstx = cv2.convertScaleAbs(dstx)  # 將負值轉正值
+
+dsty = cv2.Scharr(src, cv2.CV_32F, 0, 1)  # 計算 y 軸影像梯度
+dsty = cv2.convertScaleAbs(dsty)  # 將負值轉正值
+
+dst_scharr = cv2.addWeighted(dstx, 0.5, dsty, 0.5, 0)  # 影像融合
+
+plt.figure(figsize=(12, 8))
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(dstx, cv2.COLOR_BGR2RGB))
+plt.title("Scharr X")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(dsty, cv2.COLOR_BGR2RGB))
+plt.title("Scharr Y")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(dst_scharr, cv2.COLOR_BGR2RGB))
+plt.title("Scharr")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("Scharr")
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/scharr.bmp"
+
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
+print("Scharr 效果 1")
+scharrx = cv2.Scharr(image, cv2.CV_64F, 1, 0)
+scharrx = cv2.convertScaleAbs(scharrx)  # 转回uint8
+
+print("Scharr 效果 2")
+scharry = cv2.Scharr(image, cv2.CV_64F, 0, 1)
+scharry = cv2.convertScaleAbs(scharry)
+
+print("Scharr 效果 3")
+scharrx = cv2.Scharr(image, cv2.CV_64F, 1, 0)
+scharrx = cv2.convertScaleAbs(scharrx)  # 转回uint8
+
+scharry = cv2.Scharr(image, cv2.CV_64F, 0, 1)
+scharry = cv2.convertScaleAbs(scharry)
+
+scharrxy = cv2.addWeighted(scharrx, 0.5, scharry, 0.5, 0)
+
+plt.figure(figsize=(12, 8))
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(scharrx, cv2.COLOR_BGR2RGB))
+plt.title("Scharr 效果 1")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(scharry, cv2.COLOR_BGR2RGB))
+plt.title("Scharr 效果 2")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(scharrxy, cv2.COLOR_BGR2RGB))
+plt.title("Scharr 效果 3")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/scharr.bmp"
+
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
+print("Scharr 效果")
+# scharrxy11 = cv2.Scharr(image, cv2.CV_64F, 1, 1)   #fail
+scharrxy11 = cv2.Scharr(image, cv2.CV_64F, 1, 0)  # ok
+scharrxy11 = cv2.convertScaleAbs(scharrxy11)  # 转回uint8
+
+plt.figure(figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(scharrxy11, cv2.COLOR_BGR2RGB))
+plt.title("Scharr 效果")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+# cv2.Scharr() SP
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 # cv2.Laplacian() ST
@@ -2248,7 +2210,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2394,3 +2355,39 @@ src = cv2.imread("data/edge_detection/snow.jpg")  # 彩色讀取
 
 src = cv2.imread("data/edge_detection/geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
 
+print("------------------------------------------------------------")  # 60個
+
+# Canny
+CANNY_THRESH_1 = 10
+CANNY_THRESH_2 = 200
+edges = cv2.Canny(image_gray, CANNY_THRESH_1, CANNY_THRESH_2)
+
+# dilate
+edges = cv2.dilate(edges, None)
+
+# erode
+edges = cv2.erode(edges, None)
+
+print("------------------------------------------------------------")  # 60個
+
+# split & merge
+
+# split image into channels
+r, g, b = cv2.split(image)
+
+plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
+show()
+
+plt.imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB))
+show()
+
+plt.imshow(cv2.cvtColor(b, cv2.COLOR_BGR2RGB))
+show()
+
+# img_a = cv2.merge((r, g, b, mask.astype('float32') / 255.0))
+# plt.imshow(img_a)
+# show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個

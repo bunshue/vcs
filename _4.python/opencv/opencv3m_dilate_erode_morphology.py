@@ -43,27 +43,27 @@ image_dilate1 = cv2.dilate(image, kernel1)
 image_dilate2 = cv2.dilate(image, kernel2)
 image_dilate3 = cv2.dilate(image, kernel3)
 
-plt.figure("", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(222)
-plt.title("dilate 白色膨脹 方 MORPH_RECT")
 plt.imshow(cv2.cvtColor(image_dilate1, cv2.COLOR_BGR2RGB))
+plt.title("dilate 白色膨脹 方 MORPH_RECT")
 
 plt.subplot(223)
-plt.title("dilate 白色膨脹 叉 MORPH_CROSS")
 plt.imshow(cv2.cvtColor(image_dilate2, cv2.COLOR_BGR2RGB))
+plt.title("dilate 白色膨脹 叉 MORPH_CROSS")
 
 plt.subplot(224)
-plt.title("dilate 白色膨脹 橢 MORPH_ELLIPSE")
 plt.imshow(cv2.cvtColor(image_dilate3, cv2.COLOR_BGR2RGB))
+plt.title("dilate 白色膨脹 橢 MORPH_ELLIPSE")
 
 plt.suptitle("白色區域擴大、膨脹了")
-plt.tight_layout()
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("dilate 擴大 膨脹 效果")
@@ -84,28 +84,28 @@ draw_line(image_dilate1)
 draw_line(image_dilate2)
 draw_line(image_dilate3)
 
-plt.figure("", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(222)
-plt.title("dilate 擴大 膨脹 效果 1")
 plt.imshow(cv2.cvtColor(image_dilate1, cv2.COLOR_BGR2RGB))
+plt.title("dilate 擴大 膨脹 效果 1")
 
 plt.subplot(223)
-plt.title("dilate 擴大 膨脹 效果 2")
 plt.imshow(cv2.cvtColor(image_dilate2, cv2.COLOR_BGR2RGB))
+plt.title("dilate 擴大 膨脹 效果 2")
 
 plt.subplot(224)
-plt.title("dilate 擴大 膨脹 效果 3 加 iterations")
 plt.imshow(cv2.cvtColor(image_dilate3, cv2.COLOR_BGR2RGB))
+plt.title("dilate 擴大 膨脹 效果 3 加 iterations")
 
 plt.suptitle("白色區域擴大、膨脹了")
-plt.tight_layout()
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/erode.bmp"
@@ -113,43 +113,43 @@ filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
 
 image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 
-plt.figure("erode 侵蝕 效果", figsize=(16, 12))
+plt.figure("erode 侵蝕 效果", figsize=(12, 8))
 
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 print("erode 侵蝕 效果 1")
 kernel1 = np.ones((3, 3), np.uint8)
 image_erosion1 = cv2.erode(image, kernel1)
 
 plt.subplot(222)
-plt.title("erode 侵蝕 效果 1")
 draw_line(image_erosion1)
 plt.imshow(cv2.cvtColor(image_erosion1, cv2.COLOR_BGR2RGB))
+plt.title("erode 侵蝕 效果 1")
 
 print("erode 侵蝕 效果 2")
 kernel2 = np.ones((5, 5), np.uint8)
 image_erosion2 = cv2.erode(image, kernel2)
 
 plt.subplot(223)
-plt.title("erode 侵蝕 效果 2")
 draw_line(image_erosion2)
 plt.imshow(cv2.cvtColor(image_erosion2, cv2.COLOR_BGR2RGB))
+plt.title("erode 侵蝕 效果 2")
 
 print("erode 侵蝕 效果 3 加 iterations")
 kernel3 = np.ones((7, 7), np.uint8)
 image_erosion3 = cv2.erode(image, kernel3, iterations=3)
 
 plt.subplot(224)
-plt.title("erode 侵蝕 效果 3")
 draw_line(image_erosion3)
 plt.imshow(cv2.cvtColor(image_erosion3, cv2.COLOR_BGR2RGB))
+plt.title("erode 侵蝕 效果 3")
 
 plt.suptitle("白色區域被侵蝕、縮小了")
-plt.tight_layout()
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("erode-dilate")
@@ -198,8 +198,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-print("Canny")
+print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/jianzhu.png", cv2.IMREAD_GRAYSCALE)
 
@@ -326,7 +325,7 @@ opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
 dist_transform = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
 ret, fore = cv2.threshold(dist_transform, 0.7 * dist_transform.max(), 255, 0)
 
-plt.figure("", figsize=(16, 8))
+plt.figure(figsize=(12, 8))
 plt.subplot(131)
 plt.imshow(ishow)
 
@@ -336,9 +335,9 @@ plt.imshow(dist_transform)
 plt.subplot(133)
 plt.imshow(fore)
 
-plt.tight_layout()
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread("images/water_coins.jpg")
@@ -354,7 +353,7 @@ ret, fore = cv2.threshold(dist, 0.7 * dist.max(), 255, 0)
 fore = np.uint8(fore)
 un = cv2.subtract(bg, fore)
 
-plt.figure("", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(221)
 plt.imshow(ishow)
 
@@ -367,9 +366,9 @@ plt.imshow(fore)
 plt.subplot(224)
 plt.imshow(un)
 
-plt.tight_layout()
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread("images/water_coins.jpg")
@@ -386,7 +385,7 @@ fore = np.uint8(fore)
 ret, markers = cv2.connectedComponents(fore)
 print(ret)
 
-plt.figure("", figsize=(16, 8))
+plt.figure(figsize=(12, 8))
 plt.subplot(131)
 plt.imshow(ishow)
 
@@ -396,9 +395,9 @@ plt.imshow(fore)
 plt.subplot(133)
 plt.imshow(markers)
 
-plt.tight_layout()
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread("images/water_coins.jpg")
@@ -419,16 +418,16 @@ ret, markers2 = cv2.connectedComponents(foreAdv)
 markers2 = markers2 + 1
 markers2[unknown == 255] = 0
 
-plt.figure("", figsize=(16, 8))
+plt.figure(figsize=(12, 8))
 plt.subplot(121)
 plt.imshow(markers1)
 
 plt.subplot(122)
 plt.imshow(markers2)
 
-plt.tight_layout()
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread("images/water_coins.jpg")
@@ -449,16 +448,16 @@ markers[unknown == 255] = 0
 markers = cv2.watershed(img, markers)
 img[markers == -1] = [0, 255, 0]
 
-plt.figure("", figsize=(16, 8))
+plt.figure(figsize=(12, 8))
 plt.subplot(121)
 plt.imshow(ishow)
 
 plt.subplot(122)
 plt.imshow(img)
 
-plt.tight_layout()
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 o = cv2.imread("images/rice.png", cv2.IMREAD_UNCHANGED)
@@ -466,7 +465,7 @@ k = np.ones((5, 5), np.uint8)
 e = cv2.erode(o, k)
 b = cv2.subtract(o, e)
 
-plt.figure("", figsize=(16, 8))
+plt.figure(figsize=(12, 8))
 plt.subplot(131)
 plt.imshow(o)
 
@@ -476,9 +475,9 @@ plt.imshow(e)
 plt.subplot(133)
 plt.imshow(b)
 
-plt.tight_layout()
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/opening.bmp"
@@ -492,26 +491,26 @@ k = np.ones((10, 10), np.uint8)
 r1 = cv2.morphologyEx(img1, cv2.MORPH_OPEN, k)
 r2 = cv2.morphologyEx(img2, cv2.MORPH_OPEN, k)
 
-plt.figure("", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(221)
-plt.title("原圖1")
 plt.imshow(cv2.cvtColor(img1, cv2.COLOR_BGR2RGB))
+plt.title("原圖1")
 
 plt.subplot(222)
-plt.title("原圖2")
 plt.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))
+plt.title("原圖2")
 
 plt.subplot(223)
-plt.title("morphologyEx 效果 1")
 plt.imshow(cv2.cvtColor(r1, cv2.COLOR_BGR2RGB))
+plt.title("morphologyEx 效果 1")
 
 plt.subplot(224)
-plt.title("morphologyEx 效果 1")
 plt.imshow(cv2.cvtColor(r2, cv2.COLOR_BGR2RGB))
+plt.title("morphologyEx 效果 1")
 
-plt.tight_layout()
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/closing.bmp"
@@ -525,26 +524,26 @@ k = np.ones((10, 10), np.uint8)
 r1 = cv2.morphologyEx(img1, cv2.MORPH_CLOSE, k, iterations=3)
 r2 = cv2.morphologyEx(img2, cv2.MORPH_CLOSE, k, iterations=3)
 
-plt.figure("", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(221)
-plt.title("原圖1")
 plt.imshow(cv2.cvtColor(img1, cv2.COLOR_BGR2RGB))
+plt.title("原圖1")
 
 plt.subplot(222)
-plt.title("原圖2")
 plt.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))
+plt.title("原圖2")
 
 plt.subplot(223)
-plt.title("morphologyEx 效果 2")
 plt.imshow(cv2.cvtColor(r1, cv2.COLOR_BGR2RGB))
+plt.title("morphologyEx 效果 2")
 
 plt.subplot(224)
-plt.title("morphologyEx 效果 2")
 plt.imshow(cv2.cvtColor(r2, cv2.COLOR_BGR2RGB))
+plt.title("morphologyEx 效果 2")
 
-plt.tight_layout()
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/gradient.bmp"
@@ -554,18 +553,18 @@ print("morphologyEx 效果 3")
 k = np.ones((5, 5), np.uint8)
 r = cv2.morphologyEx(image, cv2.MORPH_GRADIENT, k)
 
-plt.figure("", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(122)
-plt.title("morphologyEx 效果 3")
 plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
+plt.title("morphologyEx 效果 3")
 
-plt.tight_layout()
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/tophat.bmp"
@@ -579,26 +578,26 @@ k = np.ones((5, 5), np.uint8)
 r1 = cv2.morphologyEx(image1, cv2.MORPH_TOPHAT, k)
 r2 = cv2.morphologyEx(image2, cv2.MORPH_TOPHAT, k)
 
-plt.figure("", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(221)
-plt.title("原圖1")
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("原圖1")
 
 plt.subplot(222)
-plt.title("原圖2")
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.title("原圖2")
 
 plt.subplot(223)
-plt.title("morphologyEx 效果 4")
 plt.imshow(cv2.cvtColor(r1, cv2.COLOR_BGR2RGB))
+plt.title("morphologyEx 效果 4")
 
 plt.subplot(224)
-plt.title("morphologyEx 效果 4")
 plt.imshow(cv2.cvtColor(r2, cv2.COLOR_BGR2RGB))
+plt.title("morphologyEx 效果 4")
 
-plt.tight_layout()
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/blackhat.bmp"
@@ -612,26 +611,26 @@ k = np.ones((5, 5), np.uint8)
 r1 = cv2.morphologyEx(image1, cv2.MORPH_BLACKHAT, k)
 r2 = cv2.morphologyEx(image2, cv2.MORPH_BLACKHAT, k)
 
-plt.figure("", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(221)
-plt.title("原圖1")
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("原圖1")
 
 plt.subplot(222)
-plt.title("原圖2")
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.title("原圖2")
 
 plt.subplot(223)
-plt.title("morphologyEx 效果 5")
 plt.imshow(cv2.cvtColor(r1, cv2.COLOR_BGR2RGB))
+plt.title("morphologyEx 效果 5")
 
 plt.subplot(224)
-plt.title("morphologyEx 效果 5")
 plt.imshow(cv2.cvtColor(r2, cv2.COLOR_BGR2RGB))
+plt.title("morphologyEx 效果 5")
 
-plt.tight_layout()
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("defogging")
@@ -694,35 +693,6 @@ m = deHaze(cv2.imread("data/wu.jpg") / 255.0) * 255
 cv2.imwrite("tmp_wu_2.png", m)
 
 print("------------------------------------------------------------")  # 60個
-
-print("Canny1")
-
-original_img = cv2.imread("data/lena.png", 0)
-# canny(): 邊緣檢測
-img1 = cv2.GaussianBlur(original_img, (3, 3), 0)  # 執行高斯模糊化
-canny = cv2.Canny(img1, 50, 150)
-
-# 形態學：邊緣檢測
-_, Thr_img = cv2.threshold(
-    original_img, 210, 255, cv2.THRESH_BINARY
-)  # 設定紅色通道閾值210（閾值影響梯度運算效果）
-
-kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))  # 定義矩形結構元素
-gradient = cv2.morphologyEx(Thr_img, cv2.MORPH_GRADIENT, kernel)  # 梯度
-
-plt.subplot(131)
-cv2.imshow("原始圖像", original_img)
-
-plt.subplot(132)
-cv2.imshow("梯度", gradient)
-
-plt.subplot(133)
-cv2.imshow("Canny函數", canny)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-
 print("------------------------------------------------------------")  # 60個
 
 print("open-close")
@@ -756,6 +726,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread(filename)
 cv2.imshow("image1", img)  # 原始影像
@@ -772,6 +743,7 @@ cv2.imshow("image3", img)  # 膨脹後的影像
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology//dilate_erode1.png"
@@ -794,6 +766,7 @@ cv2.imshow("erode", r)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("形態學處理 dilate")
@@ -835,6 +808,7 @@ if __name__ =="__main__":
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("形態學處理 open")
 
@@ -855,6 +829,7 @@ cv2.imshow("open", d)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # fail
@@ -923,6 +898,7 @@ print(f"kernel = \n {kernel}")
 print(f"Erosion = \n {dst}")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("侵蝕(Erosion) 白色變小")
 
@@ -948,6 +924,7 @@ cv2.imshow("after erosion 7 x 7", dst3)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("膨脹(Dilate) 白色變大")
@@ -983,6 +960,7 @@ print(f"src = \n {src}")
 print(f"kernel = \n {kernel}")
 print(f"Dilation = \n {dst}")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "dilate_erode2.png"
@@ -1024,6 +1002,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("data/morphology/night.jpg")
 cv2.imshow("src", src)
@@ -1056,6 +1035,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("data/morphology/snowman.jpg")
 cv2.imshow("src", src)
@@ -1081,6 +1061,7 @@ cv2.imshow("after morpological gradient", dst)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("data/morphology/hole.jpg")
@@ -1121,6 +1102,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("data/morphology/excel.jpg")
 cv2.imshow("src", src)
@@ -1142,6 +1124,7 @@ print(f"MORPH_ELLIPSE \n {kernel}")
 kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (5, 5))
 print(f"MORPH_CROSS \n {kernel}")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("data/morphology/bw_circle.jpg")
@@ -1204,6 +1187,7 @@ plt.axis("off")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
@@ -1239,6 +1223,7 @@ plt.axis("off")
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
@@ -1379,18 +1364,18 @@ markers_new += 1  # 標記修訂
 markers_new[unknown == 255] = 0
 
 plt.subplot(131)
-plt.title("未知區域")
 plt.imshow(unknown)
+plt.title("未知區域")
 plt.axis("off")
 
 plt.subplot(132)
-plt.title("標記區")
 plt.imshow(markers, cmap="jet")
+plt.title("標記區")
 plt.axis("off")
 
 plt.subplot(133)
-plt.title("標記修訂區")
 plt.imshow(markers_new, cmap="jet")
+plt.title("標記修訂區")
 plt.axis("off")
 
 show()
@@ -1437,13 +1422,13 @@ markers = cv2.watershed(dst, markers)
 dst[markers == -1] = [255, 0, 0]  # 使用紅色
 
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(rgb_src)
+plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(122)
-plt.title("分割結果")
 plt.imshow(dst)
+plt.title("分割結果")
 plt.axis("off")
 
 show()

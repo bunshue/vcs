@@ -66,14 +66,14 @@ for index in range(length):
         image2, contours, index, color[index % 9], linewidth
     )  # image2為三通道才能顯示輪廓
 
-plt.figure("drawContours", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(121)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(122)
-plt.title("尋找 Contours")
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.title("尋找 Contours")
 
 show()
 
@@ -85,10 +85,10 @@ filename = "images/poly.png"
 print("顯示圖片")
 image = cv2.imread(filename)  # 讀取本機圖片
 
-plt.figure("影像處理", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(211)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 shape = image.shape
 h = shape[0]  # 高
@@ -123,8 +123,8 @@ for i in range(len(approx_hex)):
     print(approx_hex[i])
 
 plt.subplot(212)
-plt.title("image")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("image")
 
 show()
 
@@ -178,36 +178,36 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.j
 
 image = cv2.imread(filename)
 
-plt.figure("影像處理", figsize=(16, 12))
+plt.figure(figsize=(12, 8))
 plt.subplot(231)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 plt.subplot(232)
-plt.title("gray")
 plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB))
+plt.title("gray")
 
 edged = cv2.Canny(gray, 30, 200)
 
 plt.subplot(233)
-plt.title("Canny Edges")
 plt.imshow(cv2.cvtColor(edged, cv2.COLOR_BGR2RGB))
+plt.title("Canny Edges")
 
 contours, hierarchy = cv2.findContours(edged, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
 plt.subplot(234)
-plt.title("Canny Edges After Contouring")
 plt.imshow(cv2.cvtColor(edged, cv2.COLOR_BGR2RGB))
+plt.title("Canny Edges After Contouring")
 
 print("Number of Contours found = " + str(len(contours)))
 
 cv2.drawContours(image, contours, -1, BLUE, 2)
 
 plt.subplot(235)
-plt.title("Contours")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("Contours")
 
 show()
 
@@ -217,8 +217,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/easy1.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -228,8 +228,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -241,8 +241,8 @@ contours, hierarchy = cv2.findContours(
 dst = cv2.drawContours(src, contours, -1, GREEN, 5)  # 繪製圖形輪廓
 
 plt.subplot(313)
-plt.title("找尋影像內的輪廓")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("找尋影像內的輪廓")
 plt.axis("off")
 
 show()
@@ -253,8 +253,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/lake.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -264,8 +264,8 @@ thresh = 150  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -280,8 +280,8 @@ dst = cv2.drawContours(src, contours, -1, GREEN, 2)  # 繪製圖形輪廓
 # dst = cv2.drawContours(src, contours, -1, GREEN, -1)  # 繪製圖形輪廓
 
 plt.subplot(313)
-plt.title("找尋影像內的輪廓")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("找尋影像內的輪廓")
 plt.axis("off")
 
 show()
@@ -292,8 +292,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/lake.jpg")
 
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -303,8 +303,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(222)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -315,15 +315,15 @@ mask = np.zeros(src.shape, np.uint8)
 dst = cv2.drawContours(mask, contours, -1, WHITE, -1)  # 繪製圖形輪廓
 
 plt.subplot(223)
-plt.title("繪製圖形輪廓")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("繪製圖形輪廓")
 plt.axis("off")
 
 dst_result = cv2.bitwise_and(src, mask)
 
 plt.subplot(224)
-plt.title("找尋影像內的輪廓")
 plt.imshow(cv2.cvtColor(dst_result, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("找尋影像內的輪廓")
 plt.axis("off")
 
 show()
@@ -334,8 +334,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/easy2.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -345,8 +345,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -364,8 +364,8 @@ print(f"hierarchy 資料類型 : {type(hierarchy)}")
 print(f"列印層級 \n {hierarchy}")
 
 plt.subplot(313)
-plt.title("繪製圖形輪廓")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("繪製圖形輪廓")
 plt.axis("off")
 
 show()
@@ -376,8 +376,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/easy3.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -387,8 +387,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -407,8 +407,8 @@ print(f"hierarchy 資料類型 : {type(hierarchy)}")
 print(f"列印層級 \n {hierarchy}")
 
 plt.subplot(313)
-plt.title("繪製圖形輪廓")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("繪製圖形輪廓")
 plt.axis("off")
 
 show()
@@ -419,8 +419,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/easy.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -430,8 +430,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -466,8 +466,8 @@ for i in range(n):  # 依次繪製輪廓
     dst = cv2.drawContours(dst, contours, i, colors[i], 5)
 
 plt.subplot(313)
-plt.title("找尋影像內的輪廓")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("找尋影像內的輪廓")
 plt.axis("off")
 
 show()
@@ -486,8 +486,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/easy.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -497,8 +497,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -514,8 +514,8 @@ for c in contours:  # 繪製中心點迴圈
     cv2.circle(dst, (Cx, Cy), 5, BLUE, -1)  # 繪製中心點
 
 plt.subplot(313)
-plt.title("繪製圖形輪廓")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("繪製圖形輪廓")
 plt.axis("off")
 
 show()
@@ -526,8 +526,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/easy.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -537,8 +537,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -561,8 +561,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/easy.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -572,8 +572,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -613,8 +613,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/3heart.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -624,8 +624,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -656,8 +656,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/3shapes.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -667,8 +667,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -698,8 +698,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/myheart.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -709,8 +709,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -736,8 +736,8 @@ print("------------------------------------------------------------")  # 60個
 src1 = cv2.imread("data/findContours/mycloud1.jpg")
 
 plt.subplot(311)
-plt.title("原圖1")
 plt.imshow(cv2.cvtColor(src1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖1")
 plt.axis("off")
 
 src1_gray = cv2.cvtColor(src1, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -755,8 +755,8 @@ cnt1 = contours[0]
 src2 = cv2.imread("data/findContours/mycloud2.jpg")
 
 plt.subplot(312)
-plt.title("原圖2")
 plt.imshow(cv2.cvtColor(src2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖2")
 plt.axis("off")
 
 src2_gray = cv2.cvtColor(src2, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -770,8 +770,8 @@ cnt2 = contours[0]
 src3 = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(313)
-plt.title("原圖3")
 plt.imshow(cv2.cvtColor(src3, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖3")
 plt.axis("off")
 
 src3_gray = cv2.cvtColor(src3, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -799,8 +799,8 @@ print("------------------------------------------------------------")  # 60個
 src1 = cv2.imread("data/findContours/mycloud1.jpg")
 
 plt.subplot(311)
-plt.title("原圖1")
 plt.imshow(cv2.cvtColor(src1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖1")
 plt.axis("off")
 
 src1_gray = cv2.cvtColor(src1, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -817,8 +817,8 @@ cnt1 = contours[0]
 src2 = cv2.imread("data/findContours/mycloud2.jpg")
 
 plt.subplot(312)
-plt.title("原圖2")
 plt.imshow(cv2.cvtColor(src2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖2")
 plt.axis("off")
 
 src2_gray = cv2.cvtColor(src2, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -832,8 +832,8 @@ cnt2 = contours[0]
 src3 = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(313)
-plt.title("原圖3")
 plt.imshow(cv2.cvtColor(src3, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖3")
 plt.axis("off")
 
 src3_gray = cv2.cvtColor(src3, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -864,8 +864,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -875,8 +875,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -902,8 +902,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -913,8 +913,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -926,8 +926,8 @@ x, y, w, h = cv2.boundingRect(contours[0])  # 建構矩形
 dst = cv2.rectangle(src, (x, y), (x + w, y + h), YELLOW, 2)
 
 plt.subplot(313)
-plt.title("建構矩形")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("建構矩形")
 plt.axis("off")
 
 show()
@@ -938,8 +938,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/explode2.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -949,8 +949,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -962,8 +962,8 @@ x, y, w, h = cv2.boundingRect(contours[0])  # 建構矩形
 dst = cv2.rectangle(src, (x, y), (x + w, y + h), YELLOW, 2)
 
 plt.subplot(313)
-plt.title("建構矩形")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("建構矩形")
 plt.axis("off")
 
 show()
@@ -974,8 +974,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/explode2.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -985,8 +985,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -1001,10 +1001,9 @@ points = np.int0(points)  # 轉為整數
 print(f"轉換後的矩形頂角 = \n {points}")
 dst = cv2.drawContours(src, [points], 0, GREEN, 2)  # 繪製輪廓
 
-
 plt.subplot(313)
-plt.title("繪製輪廓")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("繪製輪廓")
 plt.axis("off")
 
 show()
@@ -1015,8 +1014,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/explode3.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1026,8 +1025,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -1042,8 +1041,8 @@ radius = int(radius)  # 圓半徑取整數
 dst = cv2.circle(src, center, radius, YELLOW, 2)  # 繪圓
 
 plt.subplot(313)
-plt.title("圓圈框選")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("圓圈框選")
 plt.axis("off")
 
 show()
@@ -1054,8 +1053,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1065,8 +1064,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -1081,8 +1080,8 @@ radius = int(radius)  # 圓半徑取整數
 dst = cv2.circle(src, center, radius, YELLOW, 2)  # 繪圓
 
 plt.subplot(313)
-plt.title("圓圈框選")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("圓圈框選")
 plt.axis("off")
 
 show()
@@ -1093,8 +1092,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/cloud.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1104,8 +1103,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -1122,8 +1121,8 @@ print(f"旋轉角度   = {ellipse[2]}")
 dst = cv2.ellipse(src, ellipse, GREEN, 2)  # 繪橢圓
 
 plt.subplot(313)
-plt.title("最優擬合橢圓框選")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("最優擬合橢圓框選")
 plt.axis("off")
 
 show()
@@ -1134,8 +1133,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/heart.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1145,8 +1144,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -1165,8 +1164,8 @@ dst = cv2.line(src, tuple(triangle[1][0]), tuple(triangle[2][0]), GREEN, 2)
 dst = cv2.line(src, tuple(triangle[0][0]), tuple(triangle[2][0]), GREEN, 2)
 
 plt.subplot(313)
-plt.title("三角形框選")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("三角形框選")
 plt.axis("off")
 
 show()
@@ -1177,8 +1176,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/multiple.jpg")
 
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1188,8 +1187,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(222)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -1209,13 +1208,13 @@ for i in range(n):
     dst2 = cv2.polylines(src2, [approx], True, GREEN, 2)  # dst2
 
 plt.subplot(223)
-plt.title("多邊形框選 3")  # epsilon = 3
 plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("多邊形框選 3")  # epsilon = 3
 plt.axis("off")
 
 plt.subplot(224)
-plt.title("多邊形框選 15")  # epsilon = 15
 plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("多邊形框選 15")  # epsilon = 15
 plt.axis("off")
 
 show()
@@ -1226,8 +1225,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/unregular.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1237,8 +1236,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -1256,8 +1255,8 @@ righty = int(((cols - x) * vy / vx) + y)  # 右邊點的 y 座標
 dst = cv2.line(src, (0, lefty), (cols - 1, righty), GREEN, 2)  # 左到右繪線
 
 plt.subplot(313)
-plt.title("擬合一條線")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("擬合一條線")
 plt.axis("off")
 
 show()
@@ -1268,8 +1267,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/heart1.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1279,8 +1278,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -1293,8 +1292,8 @@ hull = cv2.convexHull(contours[0])  # 獲得凸包頂點座標
 dst = cv2.polylines(src, [hull], True, GREEN, 2)  # 將凸包連線
 
 plt.subplot(313)
-plt.title("凸包")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("凸包")
 plt.axis("off")
 
 show()
@@ -1305,8 +1304,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/hand1.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1316,8 +1315,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -1330,8 +1329,8 @@ hull = cv2.convexHull(contours[0])  # 獲得凸包頂點座標
 dst = cv2.polylines(src, [hull], True, GREEN, 2)  # 將凸包連線
 
 plt.subplot(313)
-plt.title("凸包")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("凸包")
 plt.axis("off")
 
 show()
@@ -1342,8 +1341,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/hand1.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1353,8 +1352,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -1367,8 +1366,8 @@ hull = cv2.convexHull(contours[0])  # 獲得凸包頂點座標
 dst = cv2.polylines(src, [hull], True, GREEN, 2)  # 將凸包連線
 
 plt.subplot(313)
-plt.title("凸包")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("凸包")
 plt.axis("off")
 
 show()
@@ -1382,8 +1381,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/hand2.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1393,8 +1392,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -1410,8 +1409,8 @@ for i in range(n):
     dst = cv2.polylines(src, [hull], True, GREEN, 2)  # 將凸包連線
 
 plt.subplot(313)
-plt.title("凸包")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("凸包")
 plt.axis("off")
 
 show()
@@ -1422,8 +1421,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/star.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1433,8 +1432,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 
@@ -1459,8 +1458,8 @@ for i in range(n):
     dst = cv2.circle(src, far, 3, [0, 0, 255], -1)  # 繪製farPoint
 
 plt.subplot(313)
-plt.title("凸包")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("凸包")
 plt.axis("off")
 
 show()
@@ -1471,8 +1470,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/heart1.jpg")
 
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1482,8 +1481,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(222)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 
@@ -1500,8 +1499,8 @@ isConvex = cv2.isContourConvex(hull)  # 是否凸形
 print(f"凸包是凸形       = {isConvex}")
 
 plt.subplot(223)
-plt.title("凸包")
 plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("凸包")
 plt.axis("off")
 
 # 近似多邊形包圍
@@ -1512,8 +1511,8 @@ isConvex = cv2.isContourConvex(approx)  # 是否凸形
 print(f"近似多邊形是凸形 = {isConvex}")
 
 plt.subplot(224)
-plt.title("近似多邊形包圍")  # epsilon = 10
 plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("近似多邊形包圍")  # epsilon = 10
 plt.axis("off")
 
 show()
@@ -1524,8 +1523,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/heart1.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1535,8 +1534,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 
@@ -1578,8 +1577,8 @@ cv2.putText(dst, "C", pos_c, font, 1, YELLOW, 2)  # 輸出文字 C
 print(f"dist_c = {dist_c}")
 
 plt.subplot(313)
-plt.title("點在凸包外")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("點在凸包外")
 plt.axis("off")
 
 show()
@@ -1590,8 +1589,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/heart1.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1601,10 +1600,9 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
-
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -1643,8 +1641,8 @@ cv2.putText(dst, "C", pos_c, font, 1, YELLOW, 2)  # 輸出文字 C
 print(f"dist_c = {dist_c}")
 
 plt.subplot(313)
-plt.title("點在凸包外")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("點在凸包外")
 plt.axis("off")
 
 show()
@@ -1656,8 +1654,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1667,8 +1665,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -1680,8 +1678,8 @@ x, y, w, h = cv2.boundingRect(contours[0])  # 建構矩形
 dst = cv2.rectangle(src, (x, y), (x + w, y + h), YELLOW, 2)
 
 plt.subplot(313)
-plt.title("找尋影像內的輪廓")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("找尋影像內的輪廓")
 plt.axis("off")
 
 show()
@@ -1695,8 +1693,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1706,10 +1704,9 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
-
 
 # 找尋影像內的輪廓
 contours, hierarchy = cv2.findContours(
@@ -1786,8 +1783,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1797,8 +1794,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -1820,8 +1817,8 @@ dst = cv2.circle(src, top, 5, [0, 255, 255], -1)
 dst = cv2.circle(src, bottom, 5, [0, 255, 255], -1)
 
 plt.subplot(313)
-plt.title("找尋影像內的輪廓")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("找尋影像內的輪廓")
 plt.axis("off")
 
 show()
@@ -1832,8 +1829,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1843,8 +1840,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -1857,8 +1854,8 @@ x, y, w, h = cv2.boundingRect(contours[0])  # 建構矩形
 dst = cv2.rectangle(src, (x, y), (x + w, y + h), YELLOW, 2)
 
 plt.subplot(313)
-plt.title("找尋影像內的輪廓")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("找尋影像內的輪廓")
 plt.axis("off")
 
 show()
@@ -1873,8 +1870,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/explode1.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1884,8 +1881,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -1899,8 +1896,8 @@ hull = cv2.convexHull(contours[0])  # 獲得凸包頂點座標
 dst = cv2.polylines(src, [hull], True, YELLOW, 2)  # 將凸包連線
 
 plt.subplot(313)
-plt.title("找尋影像內的輪廓")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("找尋影像內的輪廓")
 plt.axis("off")
 
 show()
@@ -1915,8 +1912,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/star1.jpg")
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1926,8 +1923,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(312)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -1941,8 +1938,8 @@ print(f"等效面積 = {ed}")
 dst = cv2.circle(src, (260, 110), int(ed / 2), GREEN, 3)  # 繪製圓
 
 plt.subplot(313)
-plt.title("等效面積")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("等效面積")
 plt.axis("off")
 
 show()
@@ -1976,8 +1973,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/simple.jpg")
 
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -1987,8 +1984,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(222)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -2009,13 +2006,13 @@ print("實心像素點")
 print(points2)
 
 plt.subplot(223)
-plt.title("空心像素點")
 plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("空心像素點")
 plt.axis("off")
 
 plt.subplot(224)
-plt.title("實心像素點")
 plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("實心像素點")
 plt.axis("off")
 
 show()
@@ -2038,8 +2035,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/simple.jpg")
 
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
@@ -2049,8 +2046,8 @@ thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
 plt.subplot(222)
-plt.title("二值化")
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("二值化")
 plt.axis("off")
 
 # 找尋影像內的輪廓
@@ -2071,13 +2068,13 @@ print("實心像素點")
 print(points2)
 
 plt.subplot(223)
-plt.title("空心像素點")
 plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("空心像素點")
 plt.axis("off")
 
 plt.subplot(224)
-plt.title("實心像素點")
 plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("實心像素點")
 plt.axis("off")
 
 show()
@@ -2088,8 +2085,8 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/hand.jpg")  # 手上有一黑點與一白點
 
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
@@ -2104,8 +2101,8 @@ mask = np.zeros(src_gray.shape, np.uint8)  # 建立遮罩
 mask = cv2.drawContours(mask, [cnt], -1, WHITE, -1)
 
 plt.subplot(222)
-plt.title("mask")
 plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("mask")
 plt.axis("off")
 
 # 在src_gray影像的mask遮罩區域找尋最大像素與最小像素值
@@ -2121,15 +2118,15 @@ mask1 = np.zeros(src.shape, np.uint8)  # 建立遮罩
 mask1 = cv2.drawContours(mask1, [cnt], -1, WHITE, -1)
 
 plt.subplot(223)
-plt.title("mask1")
 plt.imshow(cv2.cvtColor(mask1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("mask1")
 plt.axis("off")
 
 dst = cv2.bitwise_and(src, mask1)  # 顯示感興趣區域
 
 plt.subplot(224)
-plt.title("顯示感興趣區域")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("顯示感興趣區域")
 plt.axis("off")
 
 show()
@@ -2140,10 +2137,9 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread("data/findContours/hand.jpg")  # 手上有一黑點與一白點
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
 plt.axis("off")
-
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(src_gray, 50, 255, cv2.THRESH_BINARY)
@@ -2264,7 +2260,6 @@ image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 plt.subplot(131)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
-
 
 # 第一步：閾值化，生成二值圖
 # 圖像平滑

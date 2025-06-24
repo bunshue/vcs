@@ -485,6 +485,32 @@ print(triThe, dst_tri)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 直方圖二值化
+# 不同模式的Threshold方法
+# cv2.THRESH_BINARY
+# cv2.THRESH_BINARY_INV
+# cv2.THRESH_TRUNC
+# cv2.THRESH_TOZERO
+# cv2.THRESH_TOZERO_INV
+
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
+ret, th1 = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
+
+plt.imshow(cv2.cvtColor(th1, cv2.COLOR_BGR2RGB))
+
+show()
+
+plt.figure(figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(th1, cv2.COLOR_BGR2RGB))
+plt.title("th1")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

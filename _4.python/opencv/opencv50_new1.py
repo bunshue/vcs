@@ -9,13 +9,16 @@ filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 W, H = 640, 480
+
+
 def make_image(r, dtype="uint8"):
     image = np.zeros((H, W, 3), np.uint8)
-    cx, cy = W//2, H//2
+    cx, cy = W // 2, H // 2
     cv2.circle(image, (cx, cy), r, RED, 1)  # 圆
     return image
+
 
 def test_avi_output(filename, fourcc):
     # fourcc = cv2.FOURCC(*fourcc)
@@ -27,6 +30,7 @@ def test_avi_output(filename, fourcc):
         img = make_image(r)
         vw.write(img)
     vw.release()
+
 
 test_avi_output("tmp_fmp4cccccc.avi", "fmp4")
 test_avi_output("tmp_aaaaa.avi", "x264")
@@ -817,7 +821,7 @@ for ax, (expr, r, height) in zip(axes, settings):
     mapx, mapy = make_surf_map(make_func(expr), r, w, h, height)
     img2 = cv2.remap(
         img, mapx.astype("f32"), mapy.astype("f32"), cv2.INTER_LINEAR)
-    ax.imshow(img2[:, :, ::-1])
+    ax.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
     ax.axis("off")
     ax.set_title("${}$".format(get_latex(expr)))
 
@@ -863,7 +867,6 @@ plt.title("原圖")
 plt.subplot(122)
 cv2.circle(img2, (tx, ty), int(r), RED, 2)
 cv2.circle(img2, (sx, sy), int(r), BLACK, 2)
-# plt.imshow(img2[:, :, ::-1])
 plt.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 
 # 绘制圆：圆心(255, 255), 半径60, 颜色 YELLOW, 像素1
@@ -885,7 +888,7 @@ show()
 fig, ax = plt.subplots(1, 1, figsize=(8, 8))
 fig.subplots_adjust(0, 0, 1, 1, 0, 0)
 
-ax.imshow(img2[:, :, ::-1])
+ax.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 circle = plt.Circle((tx, ty), r, fill=None, alpha=0.5, lw=2, ls="dashed")
 ax.add_artist(circle)
 circle = plt.Circle((sx, sy), r, fill=None, alpha=0.5, lw=2, color="black")
@@ -933,8 +936,8 @@ fig = plt.figure(figsize=(10, 6))
 fig.subplots_adjust(0, 0, 1, 1, 0, 0)
 ax1 = plt.subplot2grid((5, 6), (0, 0), 3, 3)
 ax2 = plt.subplot2grid((5, 6), (0, 3), 3, 3)
-ax1.imshow(dst[:, :, ::-1])
-ax2.imshow(res[:, :, ::-1])
+ax1.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+ax2.imshow(cv2.cvtColor(res, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 ax1.axis("off")
 ax2.axis("off")
 axb = plt.subplot2grid((5, 6), (3, 0), 2, 2)
@@ -1112,122 +1115,86 @@ show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+"""
+filename = "C:/_git/vcs/_4.python/opencv/data/cs1.bmp"
 
-N = 5
-pts = np.random.randint(0, 100, size=[N, 2], dtype=np.uint8)
-print(pts)
-print(type(pts))
+# 讀取圖像，並轉為灰階與二值化處理
+image = cv2.imread(filename)
 
-x1,y1=100,100
-x2,y2=300,200
-x3,y3=200,300
-x4,y4=50,250
-cnt = np.array([[x1,y1],[x2,y2],[x3,y3],[x4,y4]]) # 必须是array数组的形式
-print(cnt)
-print(type(cnt))
-rect = cv2.minAreaRect(cnt) # 得到最小外接矩形的（中心(x,y), (宽,高), 旋转角度）
-box = cv2.boxPoints(rect) # 获取最小外接矩形的4个顶点坐标
-print(box)
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉為灰階圖像
+_, thresh = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY)
 
+# 找出圖像中的輪廓
+cnts, hir = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
+# 找出最大的輪廓
+filtered_contours = max(cnts, key=cv2.contourArea)
 
+# 取得該輪廓的最小包圍矩形及角度
+rect = cv2.minAreaRect(filtered_contours)  # ((center_x, center_y), (w, h), angle)
+box = cv2.boxPoints(rect)  # 轉換為4個頂點
 
+# box = np.int0(box)  # 將頂點轉換為整數座標 #np 1.24 以下使用 
+box = np.intp(box)
 
+# 繪製最小包圍矩形
+cv2.drawContours(image, [box], 0, RED, 3)  # 綠色框，線寬為2
 
+# 取得旋轉矩形的中心點和旋轉角度
+(center_x, center_y), (w, h), angle = rect
 
+# 顯示中心點和旋轉角度在圖片上
+center_text = f"Center: ({int(center_x)}, {int(center_y)})"
+angle_text = f"Angle: {int(angle)} degrees"
 
+cv2.circle(image, (int(center_x), int(center_y)), 10, BLUE, -1)  # 圆
 
-sys.exit()
+# 在圖像上寫入文字
+cv2.putText(image, center_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)  # 藍色字體
+cv2.putText(image, angle_text, (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)  # 藍色字體
 
-img = cv2.imread(filename1)
+# 顯示結果
+cv2.imshow("Image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-x1,y1=100,100
-x2,y2=300,200
-x3,y3=200,300
-x4,y4=50,250
+# 建立 500 X 500 之白圖
+width, height = 305, 400  # 影像寬, 影像高
+img = np.ones((height, width, 3), dtype=np.uint8) * 255
+# img = cv2.imread(filename1)
 
-r = 10
-cv2.circle(img, (x1, y1), r, BLUE, -1)  # 圆
-cv2.circle(img, (x2, y2), r, BLUE, -1)  # 圆
-cv2.circle(img, (x3, y3), r, BLUE, -1)  # 圆
-cv2.circle(img, (x4, y4), r, BLUE, -1)  # 圆
+N = 10
+pts = np.random.randint(50, 300, size=[N, 2])
+pts = np.intp(pts)
 
+# minAreaRect 生成最小外接矩形
+rect = cv2.minAreaRect(pts)  # 得到最小外接矩形的（中心(x,y), (宽,高), 旋转角度）
+print(rect)
 
-cnt = np.array([[x1,y1],[x2,y2],[x3,y3],[x4,y4]]) # 必须是array数组的形式
-rect = cv2.minAreaRect(cnt) # 得到最小外接矩形的（中心(x,y), (宽,高), 旋转角度）
-box = cv2.boxPoints(rect) # 获取最小外接矩形的4个顶点坐标
-print(box)
+# 取得旋轉矩形的中心點和旋轉角度
+(center_x, center_y), (w, h), angle = rect
+
+box = cv2.boxPoints(rect)  # 获取最小外接矩形的4个顶点坐标
+# print(box)
+
 # box = round(box)
 box = np.round(box)
-print(box)
-print(type(box))
-# box = np.int0(box)
+# print(box)
+# print(type(box))
+box = np.intp(box)
+
+for p in pts:
+    # print(p)
+    cv2.circle(img, (p[0], p[1]), 7, BLUE, -1)  # 圆
 
 
 # 画出来
-# cv2.drawContours(img, [box], 0, (255, 0, 0), 1)
-
-pts = np.array([box[0], box[1], box[2], box[3]])
-print(pts)
-
-# cv2.line(img, box[0], box[1], BLUE, 2)
-# cv2.line(img, (x1, y1), (x2, y2), (0, 0, 255), 3)  # 繪製直線
-cv2.line(img, (int(box[0][0]), int(box[0][1])), (int(box[1][0]), int(box[1][1])), RED, 3)  # 繪製直線
-cv2.line(img, (int(box[1][0]), int(box[1][1])), (int(box[2][0]), int(box[2][1])), RED, 3)  # 繪製直線
-cv2.line(img, (int(box[2][0]), int(box[2][1])), (int(box[3][0]), int(box[3][1])), RED, 3)  # 繪製直線
-cv2.line(img, (int(box[3][0]), int(box[3][1])), (int(box[0][0]), int(box[0][1])), RED, 3)  # 繪製直線
-
-
-'''
-cv2.polylines(img, [pts], True, RED, 3)  # True表示封口
-
-cv2.imwrite('contours.png', img)
-'''
+cv2.drawContours(img, [box], 0, RED, 3)
 
 cv2.imshow("Image", img)
-
-sys.exit()
-
-print("opencv 114")
-
-# 型態轉換
-
-points = np.random.rand(20, 2).astype(np.float32)
-
-# minAreaRect 生成最小外接矩形
-(x, y), (w, h), angle = cv2.minAreaRect(points)
-
-plt.scatter(points[:,0], points[:,1])
-plt.scatter(x,y,c='r')
-plt.scatter(x+w,y+h,c='g')
-print((x, y), (w, h), angle)
-
-show()
-
-
-
-sys.exit()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 116")
-
-# [Python]使用NumPy 進行影像黑白反轉
-
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-
-# 讀取影像（灰階模式）
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
-# 黑白反轉
-inverted_image = 255 - image
-
-# 顯示原影像和反轉後的影像
-cv2.imshow("Original Image", image)
-cv2.imshow("Inverted Image", inverted_image)
-
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -1259,14 +1226,8 @@ occlusion = np.logical_not(mask[:, :, -1]).astype(np.uint8)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("opencv 118")
-
 """
-# 圖形處理
-# 二維卷冊積
-# 使用filter2D()製作的各種圖形處理效果
-
-二维卷积
+# 圖形處理 二維卷積 使用filter2D()製作的各種圖形處理效果
 
 用不同的卷积核可以得到 各种不同的图像处理效果。
 OpenCV提供了 filter2D()来完成图像的卷积运算，调用方式如下：
@@ -1276,23 +1237,6 @@ filter2D(src, ddepth, kernel[, dst[, anchor[, delta[, borderType]]]])
 """
 filename = "C:/_git/vcs/_4.python/opencv/data/lena.jpg"
 src = cv2.imread(filename)
-
-kernels = [
-    ("低通濾波器", np.array([[1, 1, 1], [1, 2, 1], [1, 1, 1]]) * 0.1),
-    ("高通濾波器", np.array([[0.0, -1, 0], [-1, 5, -1], [0, -1, 0]])),
-    ("邊緣檢驗", np.array([[-1.0, -1, -1], [-1, 8, -1], [-1, -1, -1]])),
-]
-
-fig, axes = plt.subplots(1, 3, figsize=(12, 5))
-for ax, (name, kernel) in zip(axes, kernels):
-    dst = cv2.filter2D(src, -1, kernel)
-    # 由於matplotlib的彩色順序和OpenCV的順序相反
-    ax.imshow(dst[:, :, ::-1])
-    ax.set_title(name)
-    ax.axis("off")
-fig.subplots_adjust(0.02, 0, 0.98, 1, 0.02, 0)
-
-show()
 
 kernel1_name = "低通濾波器"
 kernel1 = np.array([[1, 1, 1], [1, 2, 1], [1, 1, 1]]) * 0.1
@@ -1308,15 +1252,15 @@ dst3 = cv2.filter2D(src, -1, kernel3)
 plt.figure(figsize=(12, 5))
 
 plt.subplot(131)
-plt.imshow(dst1[:, :, ::-1])
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.title(kernel1_name)
 
 plt.subplot(132)
-plt.imshow(dst2[:, :, ::-1])
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.title(kernel2_name)
 
 plt.subplot(133)
-plt.imshow(dst3[:, :, ::-1])
+plt.imshow(cv2.cvtColor(dst3, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.title(kernel3_name)
 
 show()
@@ -1398,9 +1342,10 @@ C0 — loDiff < C(x，y) < C0 + hiDiff
 # 去瑕疵-inpaint
 #    scpy2.opencv.inpaint_demo：示範inpaint()的用法，使用者用滑鼠繪制需要去瑕疵的區域，程式實時顯示運算結果。
 
-filename = "C:/_git/vcs/_4.python/opencv/data/coins.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/_Hough/coins.png"
 
 img = cv2.imread(filename)
+print("img.shape :", img.shape)
 seed1 = 344, 188
 seed2 = 152, 126
 diff = (13, 13, 13)
@@ -1413,192 +1358,6 @@ axes[0].imshow(~mask, cmap="gray")
 axes[1].imshow(img)
 
 show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("Covex效果")
-
-
-def convex(src_img, raw, effect):
-    col, row, channel = raw[:]
-    cx, cy, r = effect[:]
-    output = np.zeros([row, col, channel], dtype=np.uint8)
-    for y in range(row):
-        for x in range(col):
-            d = ((x - cx) * (x - cx) + (y - cy) * (y - cy)) ** 0.5
-            if d <= r:
-                nx = int((x - cx) * d / r + cx)
-                ny = int((y - cy) * d / r + cy)
-                output[y, x, :] = src_img[ny, nx, :]
-            else:
-                output[y, x, :] = src_img[y, x, :]
-    return output
-
-
-image = cv2.imread(filename1)
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.title("原圖")
-
-w, h = 305, 400
-cw, ch = int(w / 2), int(h / 2)  # 取得中心點
-image2 = convex(image, (w, h, 3), (cw, ch, 100))
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.title("Covex效果")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 01loadimg.py
-
-win_name = "mypicture"  # 窗口名称
-# cv2.WINDOW_NORMAL:可以手动调整窗口大小
-cv2.namedWindow(win_name, cv2.WINDOW_NORMAL)
-
-img = cv2.imread(filename, 0)  # 0 黑白图片；1 原色图片
-
-cv2.imshow(win_name, img)  # 显示图片
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()  # 销毁创建的对象
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-""" no file
-# 02opencvmatplotlib.py
-
-# 读取图片
-img = cv2.imread("tmp_picture1.mono.pgm", 0)  # 黑白图片
-
-plt.imshow(img, cmap="gray", interpolation="bicubic")
-
-plt.xticks([]), plt.yticks([])  # 隐藏 X Y 坐标
-show()
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 03drawrectangle.py
-
-# Create a black image
-img = np.zeros((512, 512, 3))
-
-# Draw a diagonal blue line with thickness of 5 px
-# 起点:(0,0),终点:(511,511)，颜色: BLUE，宽度:2
-cv2.line(img, (0, 0), (511, 511), BLUE, 2)
-
-cv2.imshow("image", img)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 04drawGeometry.py
-
-img = np.zeros((512, 512, 3))
-cv2.rectangle(img, (384, 0), (510, 128), GREEN, 3)  # 矩形
-cv2.circle(img, (447, 63), 63, RED, -1)  # 圆
-cv2.ellipse(img, (256, 256), (100, 50), 0, 0, 360, 255, -1)  # 椭圆
-
-# 画多边形
-pts = np.array([[10, 5], [20, 30], [70, 20], [50, 10]])
-cv2.polylines(img, [pts], True, YELLOW, 1)
-
-# 写入文字
-font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(img, "OpenCV", (10, 500), font, 4, WHITE, 2)
-
-cv2.imshow("image", img)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 05drawcirlcle.py
-
-img = np.zeros((512, 512, 3))
-
-# 绘制圆：圆心(255, 255), 半径60, 颜色 YELLOW, 像素1
-cv2.circle(img, (255, 150), 60, YELLOW, 2)  # 圆
-
-# 绘制椭圆
-# 中心点的位置(255, 255), 短半径50,长半径100
-# 360表示整个椭圆；颜色 CYAN；像素2；
-cv2.ellipse(img, (255, 350), (100, 50), 0, 0, 360, CYAN, 2)  # 椭圆
-
-cv2.imshow("image", img)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# haar_face_detect.py
-
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_alt_tree.xml"
-picture_filename = "C:/_git/vcs/_4.python/opencv/data/_face/face06.jpg"
-
-face_cascade = cv2.CascadeClassifier(xml_filename)
-
-img = cv2.imread(picture_filename)
-
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-# 识别输入图片中的人脸对象.返回对象的矩形尺寸
-# 函数原型detectMultiScale(gray, 1.2,3,CV_HAAR_SCALE_IMAGE,Size(30, 30))
-# gray需要识别的图片
-# 1.2：表示每次图像尺寸减小的比例
-# 3：表示每一个目标至少要被检测到4次才算是真的目标(因为周围的像素和不同的窗口大小都可以检测到人脸)
-# CV_HAAR_SCALE_IMAGE表示不是缩放分类器来检测，而是缩放图像，Size(30, 30)为目标的最小最大尺寸
-# faces：表示检测到的人脸目标序列
-faces = face_cascade.detectMultiScale(gray, 1.2, 3)
-for x, y, w, h in faces:
-    img2 = cv2.rectangle(img, (x, y), (x + w, y + h), WHITE, 4)
-    roi_gray = gray[y : y + h, x : x + w]
-    roi_color = img[y : y + h, x : x + w]
-
-cv2.imshow("img", img)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# lbp_face_detect.py
-
-xml_filename = (
-    "C:/_git/vcs/_4.python/opencv/data/_xml/lbpcascades/lbpcascade_frontalface.xml"
-)
-
-picture_filename = "C:/_git/vcs/_4.python/opencv/data/_face/face06.jpg"
-
-face_cascade = cv2.CascadeClassifier(xml_filename)
-
-img = cv2.imread(picture_filename)
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-faces = face_cascade.detectMultiScale(gray, 1.2, 3)
-for x, y, w, h in faces:
-    img2 = cv2.rectangle(img, (x, y), (x + w, y + h), WHITE, 4)
-    roi_gray = gray[y : y + h, x : x + w]
-    roi_color = img[y : y + h, x : x + w]
-
-cv2.imshow("img", img)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2205,59 +1964,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-opencv 集合 新進3
-
-"""
-
-import cv2
-
-filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
-filename3 = "C:/_git/vcs/_4.python/opencv/data/lena.jpg"
-filename4 = "C:/_git/vcs/_1.data/______test_files1/ims01.bmp"
-
-ESC = 27
-SPACE = 32
-
-red = (0, 0, 255)
-green = (0, 255, 0)
-blue = (255, 0, 0)
-white = (255, 255, 255)
-
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-
-maxval = 255  # 定義像素最大值, 閾值
-width, height = 640, 480  # 影像寬, 影像高
-
-print("------------------------------------------------------------")  # 60個
-
-# 共同
-import os
-import sys
-import time
-import math
-import random
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-plt.rcParams["font.size"] = 12  # 設定字型大小
-
-
-def show():
-    plt.show()
-    pass
-
-
-print("------------------------------------------------------------")  # 60個
-
 # Character_recognition.py
 
 img = cv2.imread("data/brain.jpg")
@@ -2561,6 +2267,7 @@ print("------------------------------------------------------------")  # 60個
 #Canny
 """
 
+
 def get_edge(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 灰階處理
     blur = cv2.GaussianBlur(gray, (13, 13), 0)  # 高斯模糊
@@ -2769,7 +2476,9 @@ if avglines is not None:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-video_filename = "C:/_git/__大檔與暫存區/GRENZEL 雲創 E3W WiFi 行車記錄器 1080 30fps 日間測試 高速公路 - Mobile01.mp4"
+video_filename = (
+    "C:/_git/__大檔與暫存區/GRENZEL 雲創 E3W WiFi 行車記錄器 1080 30fps 日間測試 高速公路 - Mobile01.mp4"
+)
 video_filename = "C:/_git/__大檔與暫存區/DOD行車記錄器-LS300W 日間高速公路實拍.mp4"
 video_filename = "C:/_git/__大檔與暫存區/響尾蛇行車記錄器高解析度1080P - 高速公路白天行駛記錄 -.mp4"
 video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/road.mp4"
@@ -3174,13 +2883,11 @@ print(image.shape)                             # (400, 300, 4)  第三個數值�
 """
 
 
-
 # 組數
 numberBins = 256
 histogram, bins, patch_image = plt.hist(
     histSeq, numberBins, facecolor="black", histtype="bar"
 )
-
 
 
 # 組數
@@ -3199,15 +2906,10 @@ histogram, bins, patch_image = plt.hist(
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-
-
 from os import path
+
 fsize = path.getsize(filename)
 print("size = {:07d} bytes".format(fsize))
-
-
-
 
 # 將同一張圖片存成不同品質圖片
 
@@ -3218,3 +2920,46 @@ for quality in [90, 60, 30]:
         "tmp_lena_q{:02d}.jpg".format(quality), img, [cv2.IMWRITE_JPEG_QUALITY, quality]
     )
 
+
+x1, y1 = 100, 100
+x2, y2 = 300, 200
+x3, y3 = 200, 300
+x4, y4 = 50, 250
+cnt = np.array([[x1, y1], [x2, y2], [x3, y3], [x4, y4]])  # 必须是array数组的形式
+print(cnt)
+print(type(cnt))
+
+r = 10
+cv2.circle(img, (x1, y1), r, BLUE, -1)  # 圆
+cv2.circle(img, (x2, y2), r, BLUE, -1)  # 圆
+cv2.circle(img, (x3, y3), r, BLUE, -1)  # 圆
+cv2.circle(img, (x4, y4), r, BLUE, -1)  # 圆
+
+plt.subplots_adjust(0.02, 0, 0.98, 1, 0.02, 0)
+
+win_name = "mypicture"  # 窗口名称
+# cv2.WINDOW_NORMAL:可以手动调整窗口大小
+cv2.namedWindow(win_name, cv2.WINDOW_NORMAL)
+
+img = cv2.imread(filename, 0)  # 0 黑白图片；1 原色图片
+
+cv2.imshow(win_name, img)  # 显示图片
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()  # 销毁创建的对象
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+""" no file
+# 02opencvmatplotlib.py
+
+# 读取图片
+img = cv2.imread("tmp_picture1.mono.pgm", 0)  # 黑白图片
+
+plt.imshow(img, cmap="gray", interpolation="bicubic")
+
+plt.xticks([]), plt.yticks([])  # 隐藏 X Y 坐标
+show()
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
