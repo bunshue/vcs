@@ -39,10 +39,11 @@ filename2 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.
 filename3 = "C:/_git/vcs/_1.data/______test_files1/ims01.bmp"
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+'''
 print("建立畫布(黑色)")
 W, H = 640, 480
-image = np.zeros((H, W, 3), dtype="uint8")
+image = np.zeros((H, W, 3), dtype="uint8")# 三維(彩色) 空白影像
 
 print("畫直線")
 line_width = 10  # 線寬
@@ -93,14 +94,14 @@ AA, BB = 100, 50  # 長軸 短軸
 angle = 0  # 順時鐘旋轉角度
 line_width = 5  # 線條寬度, 負數代表實心
 
-# 畫橢圓              中心  長軸 短軸 旋轉  開始 結束角度 顏色 線寬
+# 畫橢圓             中心   長軸 短軸  旋轉 開始 結束角度 顏色 線寬
 cv2.ellipse(image, (cx, cy), (AA, BB), angle, 0, 360, RED, line_width)  # 空心
 cv2.ellipse(image, (cx, cy), (AA // 2, BB // 2), angle, 0, 360, RED, -1)  # 實心
-
+# 畫藍色半橢圓
 cv2.ellipse(image, (cx, cy + 70), (100, 50), 0, 0, 180, 255, -1)  # 藍色半橢圓
 
 print("改一塊顏色")
-image[170:250, 220:300] = [255, 0, 0]
+image[170:250, 220:300] = [BLUE]
 
 print("畫多邊形")
 
@@ -157,6 +158,7 @@ cv2.imshow("OpenCV Draw 1", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("建立畫布")
@@ -243,7 +245,7 @@ cv2.putText(
     line_width,
     line_type,
 )  # 預設, False
-# cv2.putText(image, "Welcome 4444", (x_st, y_st), font, font_size, font_color, line_width, line_type, False)    #False: 從左上畫起
+# cv2.putText(image, "Welcome 4444", (x_st, y_st), font, font_size, font_color, line_width, line_type, False)    #False: 從左上畫起(v)
 # cv2.putText(image, "Welcome 4444", (x_st, y_st), font, font_size, font_color, line_width, line_type, True)     #True:  從左下畫起
 cv2.rectangle(image, (x_st, y_st), (x_st + w, y_st - h), RED, 2)
 
@@ -316,6 +318,10 @@ def cv2_Chinese_Text(image, text, left, top, textColor, fontSize):
 
 x_st, y_st = 400, 550
 image = cv2_Chinese_Text(image, "牡丹亭", x_st, y_st, RED, 50)
+
+y_st += 150
+font = cv2.FONT_HERSHEY_SIMPLEX
+cv2.putText(image, "OpenCV", (x_st, y_st), font, 4, WHITE, 2)
 
 
 cv2.imshow("OpenCV Draw 2", image)
@@ -391,6 +397,7 @@ cv2.imshow("OpenCV Draw 4", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread(filename1)  # 使用影像當畫布
@@ -494,6 +501,7 @@ while cv2.waitKey(1) == -1:
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from random import *
 
@@ -522,6 +530,7 @@ while cv2.waitKey(1) == -1:
 
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from random import *
@@ -554,11 +563,13 @@ while cv2.waitKey(1) == -1:
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 events = [i for i in dir(cv2) if "EVENT" in i]
 for e in events:
     print(e)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
@@ -576,6 +587,7 @@ def OnMouseAction(event, x, y, flags, param):
 
 
 image = np.ones((200, 300, 3), np.uint8) * 255  # 白底畫布
+
 cv2.namedWindow("OpenCV Mouse Event")
 cv2.setMouseCallback("OpenCV Mouse Event", OnMouseAction)
 
@@ -585,7 +597,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 def OnMouseAction(event, x, y, flags, param):
     # color可以產生隨機色彩
@@ -616,6 +628,7 @@ while 1:
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 def OnMouseAction(event, x, y, flags, param):
@@ -639,6 +652,7 @@ def OnMouseAction(event, x, y, flags, param):
 width, height = 640, 480  # 影像寬, 影像高
 
 image = np.ones((height, width, 3), np.uint8) * 255  # 白底畫布
+
 cv2.namedWindow("MyDraw")
 cv2.setMouseCallback("MyDraw", OnMouseAction)
 
@@ -653,6 +667,7 @@ while 1:
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 def onChange(x):
@@ -663,6 +678,7 @@ def onChange(x):
 
 
 canvas = np.ones((200, 640, 3), np.uint8) * 255  # 寬640,高200  # 白底畫布
+
 cv2.namedWindow("canvas")
 cv2.createTrackbar("B", "canvas", 0, 255, onChange)  # 藍色通道控制
 cv2.createTrackbar("G", "canvas", 0, 255, onChange)  # 綠色通道控制
@@ -678,6 +694,7 @@ while 1:
 
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
@@ -699,6 +716,7 @@ width = 600  # 視窗寬度
 width, height = 640, 480  # 影像寬, 影像高
 
 image = np.ones((height, width, 3), np.uint8) * 255  # 白底畫布
+
 cv2.namedWindow("Draw Circle")
 cv2.setMouseCallback("Draw Circle", OnMouseAction)
 cv2.createTrackbar("Thickness", "Draw Circle", 0, 1, onChange)
@@ -721,33 +739,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 三維(彩色) 空白影像
-img = np.zeros((512, 512, 3))
-cv2.rectangle(img, (384, 0), (510, 128), GREEN, 3)  # 矩形
-cv2.circle(img, (447, 63), 63, RED, -1)  # 圆
-cv2.ellipse(img, (256, 256), (100, 50), 0, 0, 360, 255, -1)  # 椭圆
 
-# 画多边形
-pts = np.array([[10, 5], [20, 30], [70, 20], [50, 10]])
-cv2.polylines(img, [pts], True, YELLOW, 1)
-
-# 写入文字
-font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(img, "OpenCV", (10, 500), font, 4, WHITE, 2)
-
-
-# 绘制圆：圆心(255, 255), 半径60, 颜色 YELLOW, 像素1
-cv2.circle(img, (255 + 100, 150), 60, YELLOW, 2)  # 圆
-
-# 绘制椭圆
-# 中心点的位置(255, 255), 短半径50,长半径100
-# 360表示整个椭圆；颜色 CYAN；像素2；
-cv2.ellipse(img, (255 + 100, 350), (100, 50), 0, 0, 360, CYAN, 2)  # 椭圆
-
-cv2.imshow("image", img)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -766,81 +758,78 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
 
-"""
-#有底圖作畫
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
-image = cv2.imread(filename)	#讀取本機圖片
-"""
-
-# cv2.namedWindow("plot")
-
-
-# 直接改寫image的內容
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-
-image = cv2.imread(filename)
+image = cv2.imread(filename1)
 
 for i in range(20, 80):
-    image[i, 180] = [0, 0, 255]  # 紅色一點
+    image[i, 180] = RED  # 紅色一點
 
-#     H          x
-image[10:100, 200:290] = [0, 0, 255]  # 紅色 一塊 90X90
+#       H        W
+image[10:100, 200:290] = GREEN  # 綠色 一塊 90X90
 
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-"""
+print("------------------------------------------------------------")  # 60個
+'''
 fontFace = cv2.FONT_HERSHEY_COMPLEX
-fontScale = 3
+fontScale = 2
 thickness = 2
-text = '7'
+text = "Peony"
 testSize = cv2.getTextSize(text, fontFace, fontScale, thickness)
-print(testSize)
+print("字體大小 : ", testSize)
 
-bottomLeftX = 64-int(testSize[0][0]/2)
-bottomLeftY = 64+int(testSize[0][1]/2)
-cv2.putText(image, text, (bottomLeftX, bottomLeftY), fontFace,
-  fontScale, YELLOW, thickness, cv2.LINE_AA)
+w = testSize[0][0]
+h = testSize[0][1]
+print(w)
+print(h)
 
-cv2.imshow('OpenCV Draw 4', image)
-"""
-print("------------------------------------------------------------")  # 60個
+cx, cy = 305 // 2, 400 // 2
 
-W, H, D = 400, 400, 3
-image = np.ones((H, W, 3), dtype="uint8") * 255
-(centerX, centerY) = (round(image.shape[1] / 2), round(image.shape[0] / 2))
-# 將圖像的中心作為圓心,實際值為 d / 2
+x_st = cx - int(testSize[0][0] / 2)
+y_st = cy + int(testSize[0][1] / 2)
 
-for r in range(5, round(400 / 2), 12):
-    cv2.circle(image, (centerX, centerY), r, RED, 3)
-    # circle(載體圖像，圓心，半徑，顏色)
+x_st = 0
+y_st = 0
+print(x_st)
+print(y_st)
 
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("畫圖 1")
-plt.show()
+image = cv2.imread(filename1)
 
-cv2.imshow("OpenCV Draw 5b", image)
+# cv2.putText(image, text, (x_st, y_st), font, font_size, font_color, line_width, line_type, False)    #False: 從左上畫起(v)
+# cv2.putText(image, text, (x_st, y_st), font, font_size, font_color, line_width, line_type, True)     #True:  從左下畫起
+cv2.putText(
+    image, text, (x_st, y_st + h), fontFace, fontScale, RED, thickness, cv2.LINE_AA
+)
+cv2.rectangle(image, (x_st, y_st), (x_st + w, y_st + h), BLUE)  # 繪製矩形
+
+cv2.imshow("OpenCV", image)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 白圖 # 生成白色背景
+W, H, D = 400, 400, 3
+image = np.ones((H, W, 3), dtype="uint8") * 255
+
+print("------------------------------------------------------------")  # 60個
 
 W, H, D = 400, 400, 3
 image = np.ones((H, W, 3), dtype="uint8") * 255
-# 生成白色背景
+
 for i in range(0, 100):
-    centerX = np.random.randint(0, high=400)  # np.random之randint不含尾
+    cx = np.random.randint(0, high=400)  # np.random之randint不含尾
     # 生成隨機圓心X,確保在畫布image內
-    centerY = np.random.randint(0, high=400)  # np.random之randint不含尾
+    cy = np.random.randint(0, high=400)  # np.random之randint不含尾
     # 生成隨機圓心Y,確保在畫布image內
     radius = np.random.randint(5, high=400 / 5)  # np.random之randint不含尾
     # 生成隨機半徑，值范圍：[5, d/5)，最大半徑是 d / 5
     color = np.random.randint(0, high=256, size=(3,)).tolist()  # np.random之randint不含尾
     # 生成隨機顏色，3個[0, 256)的隨機數
-    cv2.circle(image, (centerX, centerY), radius, color, -1)
+    cv2.circle(image, (cx, cy), radius, color, -1)
     # 使用上述隨機數，在畫布image內畫圓
 
 
@@ -848,11 +837,7 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("畫圖 2")
 plt.show()
 
-cv2.imshow("OpenCV Draw 6", image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 W, H, D = 400, 400, 3
@@ -874,11 +859,7 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("畫圖 3")
 plt.show()
 
-cv2.imshow("OpenCV Draw 7", image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 W, H, D = 400, 400, 3
@@ -896,11 +877,7 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("畫圖 4")
 plt.show()
 
-cv2.imshow("OpenCV Draw 8", image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("建立畫布(黑色)")
@@ -939,6 +916,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("drawContours")
 
@@ -961,16 +939,10 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 cv2.rectangle(img, (1, 1), (300, 300), YELLOW, -1)  # 設定黃色底
 cv2.rectangle(img, (1, 1), (300, 300), BLUE)  # 繪製矩形
-
 
 img = np.ones((480, 640, 3), np.uint8) * 255  # 白底畫布
 
@@ -1007,3 +979,8 @@ cv2.putText(orb_out, "orb", loc, font, 1, RED, 2, cv2.LINE_AA)
 cv2.putText(
     image, "O", (current_x, 100), cv2.FONT_HERSHEY_PLAIN, 0.4, BLUE, cv2.LINE_AA
 )
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個

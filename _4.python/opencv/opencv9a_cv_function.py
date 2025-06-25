@@ -1284,3 +1284,24 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+# split & merge
+
+# split image into channels
+r, g, b = cv2.split(image)
+
+plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
+show()
+
+plt.imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB))
+show()
+
+plt.imshow(cv2.cvtColor(b, cv2.COLOR_BGR2RGB))
+show()
+
+# img_a = cv2.merge((r, g, b, mask.astype('float32') / 255.0))
+# plt.imshow(img_a)
+# show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個

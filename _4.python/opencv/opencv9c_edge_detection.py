@@ -25,7 +25,7 @@ lena_color_filename = (
 )
 
 barbara_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
-
+'''
 print("------------------------------------------------------------")  # 60個
 # cv2.Canny() ST
 print("------------------------------------------------------------")  # 60個
@@ -109,6 +109,7 @@ plt.subplot(232)
 plt.imshow(cv2.cvtColor(image_canny, cv2.COLOR_BGR2RGB))
 plt.title("Canny")
 
+print("------------------------------")  # 30個
 
 filename = lena_gray_filename
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
@@ -129,15 +130,6 @@ plt.imshow(cv2.cvtColor(image_canny2, cv2.COLOR_BGR2RGB))
 plt.title("Canny 2")
 
 show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-original_img = cv2.imread("data/lena.png", 0)
-
-# 高斯模糊化，Canny边缘检测需要的
-img1 = cv2.GaussianBlur(original_img, (3, 3), 0)
-canny = cv2.Canny(img1, 50, 150)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2356,15 +2348,34 @@ dddddddddddddddddddddddd
 src = cv2.imread("data/edge_detection/snow.jpg")  # 彩色讀取
 
 src = cv2.imread("data/edge_detection/geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
-
+'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# gray_scale.jpg
+original_img = cv2.imread("data/lena.png", 0)
+
+# 高斯模糊化，Canny边缘检测需要的
+img1 = cv2.GaussianBlur(original_img, (3, 3), 0)
+canny = cv2.Canny(img1, 50, 150)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_4.python/opencv/data/gray_scale.jpg"
+
+image_gray = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 黑白讀取
+
+dst1 = cv2.Canny(image_gray, 50, 100)  # minVal=50, maxVal=100
+dst2 = cv2.Canny(image_gray, 50, 200)  # minVal=50, maxVal=200
 
 # Canny
-CANNY_THRESH_1 = 10
+CANNY_THRESH_1 = 100
 CANNY_THRESH_2 = 200
-edges = cv2.Canny(image_gray, CANNY_THRESH_1, CANNY_THRESH_2)
+edges = cv2.Canny(image_gray, 10, 255)
+edges = cv2.Canny(image_gray, 100, 200)
+
+plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
+show()
 
 # dilate
 edges = cv2.dilate(edges, None)
@@ -2373,26 +2384,7 @@ edges = cv2.dilate(edges, None)
 edges = cv2.erode(edges, None)
 
 print("------------------------------------------------------------")  # 60個
-
-# split & merge
-
-# split image into channels
-r, g, b = cv2.split(image)
-
-plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
-show()
-
-plt.imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB))
-show()
-
-plt.imshow(cv2.cvtColor(b, cv2.COLOR_BGR2RGB))
-show()
-
-# img_a = cv2.merge((r, g, b, mask.astype('float32') / 255.0))
-# plt.imshow(img_a)
-# show()
-
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
 
+print("------------------------------")  # 30個
