@@ -5,8 +5,6 @@ opencv 集合 新進1
 
 from opencv_common import *
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -20,10 +18,10 @@ def make_image(r, dtype="uint8"):
     return image
 
 
-def test_avi_output(filename, fourcc):
+def test_avi_output(video_filename, fourcc):
     # fourcc = cv2.FOURCC(*fourcc)
     fourcc = cv2.VideoWriter_fourcc(*"XVID")
-    vw = cv2.VideoWriter(filename, fourcc, 15, (W, H), True)
+    vw = cv2.VideoWriter(video_filename, fourcc, 15, (W, H), True)
     if not vw.isOpened():
         return
     for r in range(1, 200, 1):
@@ -41,13 +39,13 @@ print("------------------------------------------------------------")  # 60個
 print("opencv 01")
 print("練習組合成一張大圖 picasa效果")
 
-filename1 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-filename2 = "C:/_git/vcs/_4.python/_data/bear.jpg"
-filename3 = "C:/_git/vcs/_4.python/_data/panda.jpg"
+add_filename1 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+add_filename2 = "C:/_git/vcs/_4.python/_data/bear.jpg"
+add_filename3 = "C:/_git/vcs/_4.python/_data/panda.jpg"
 
-image1 = cv2.imread(filename1)
-image2 = cv2.imread(filename2)
-image3 = cv2.imread(filename3)
+image1 = cv2.imread(add_filename1)
+image2 = cv2.imread(add_filename2)
+image3 = cv2.imread(add_filename3)
 
 image1 = cv2.resize(image1, (image1.shape[1] // 2, image1.shape[0] // 2))
 image2 = cv2.resize(image2, (image2.shape[1] // 2, image2.shape[0] // 2))
@@ -82,9 +80,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 02")
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
-
-image1 = cv2.imread(filename)
+lena_color_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
+image1 = cv2.imread(lena_color_filename)
 
 # 建立mask
 mask = np.zeros(image1.shape[:2], np.uint8)
@@ -121,9 +118,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 03")
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
-
-o = cv2.imread(filename)
+lena_color_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
+o = cv2.imread(lena_color_filename)
 
 image2 = cv2.cvtColor(o, cv2.COLOR_BGR2RGB)
 mask = np.zeros(o.shape[:2], np.uint8)
@@ -156,8 +152,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 04")
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
-o = cv2.imread(filename)
+lena_color_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
+o = cv2.imread(lena_color_filename)
 
 bgd = np.zeros((1, 65), np.float64)
 fgd = np.zeros((1, 65), np.float64)
@@ -185,9 +181,7 @@ print("------------------------------------------------------------")  # 60個
 print("opencv 13")
 print("去除圖片的雜訊 fastNlMeansDenoisingColored")
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
-image = cv2.imread(filename)
+image = cv2.imread(filename2)
 
 plt.figure(figsize=(12, 8))
 
@@ -215,7 +209,7 @@ print("生成自適應均衡化圖像 createCLAHE")
 # 限制對比度 自適應直方圖均衡化(Contrast Limited Adaptive Histogram Equalization, CLAHE)
 
 image = cv2.imread("data/building.png", 0)
-# image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+# image = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
 
 # 創建 CLAHE  對象
 clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
@@ -243,7 +237,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 27")
 
-image = cv2.imread(filename)
+image = cv2.imread(filename1)
 
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -269,7 +263,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 28")
 
-image = cv2.imread(filename)
+image = cv2.imread(filename1)
 
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -361,15 +355,13 @@ show()
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 34")
-filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
-filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
+filename1t = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+filename2t = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 
-bg = cv2.imread(filename1, cv2.IMREAD_UNCHANGED)  # 開啟背景圖
-
+bg = cv2.imread(filename1t, cv2.IMREAD_UNCHANGED)  # 開啟背景圖
 bg = cv2.cvtColor(bg, cv2.COLOR_BGR2BGRA)  # 轉換成 BGRA
 
-image = cv2.imread(filename2, cv2.IMREAD_UNCHANGED)  # 開啟悟空公仔圖
-
+image = cv2.imread(filename2t, cv2.IMREAD_UNCHANGED)  # 開啟圖片
 image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)  # 轉換成 BGRA
 
 h = image.shape[0]  # 取得圖片高度
@@ -416,13 +408,13 @@ def floodFill(
     return result
 
 
-image = cv2.imread(filename)
+image = cv2.imread(filename1)
 h, w = image.shape[:2]  # 取得原始影像的長寬
 
 mask = np.zeros((h + 2, w + 2, 1), np.uint8)  # 製作 mask，長寬都要加上 2
 image1 = floodFill(image, mask, (100, 10), RED, (100, 100, 60), (100, 100, 100))
 
-image = cv2.imread(filename)
+image = cv2.imread(filename1)
 h, w = image.shape[:2]  # 取得原始影像的長寬
 
 mask = np.zeros((h + 2, w + 2, 1), np.uint8)  # 全黑遮罩
@@ -464,7 +456,7 @@ def convex(src_image, raw, effect):
     return output
 
 
-image = cv2.imread(filename)
+image = cv2.imread(filename1)
 image = convex(image, (300, 400, 3), (150, 130, 100))  # 提交參數數值，進行凸透鏡效果
 
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -477,11 +469,11 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 37")
 
-filename1 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+filename1t = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+filename2t = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 
-image1 = cv2.imread(filename1)
-image2 = cv2.imread(filename2)
+image1 = cv2.imread(filename1t)
+image2 = cv2.imread(filename2t)
 
 w = image1.shape[1]  # W
 h = image1.shape[0]  # H
@@ -511,7 +503,7 @@ print("opencv 38 加上logo")
 
 logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 
-mona = cv2.imread(filename)
+mona = cv2.imread(filename1)
 
 logo = cv2.imread(
     logo_filename, cv2.IMREAD_UNCHANGED
@@ -548,9 +540,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 40 cv讀取鍵盤 按上下調整亮度 按左右調整對比度 按ESC離開")
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
-image = cv2.imread(filename)
+image = cv2.imread(filename2)
 
 
 # 定義調整亮度對比的函式
@@ -591,9 +581,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 46 測試 cv2.linearPolar 空間變換 極座標變換")
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-
-src = cv2.imread(filename, cv2.IMREAD_ANYCOLOR)
+src = cv2.imread(filename1, cv2.IMREAD_ANYCOLOR)
 
 # 圖像的極坐標變換
 dst = cv2.linearPolar(src, (508, 503), 550, cv2.INTER_LINEAR)
@@ -613,7 +601,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 47 測試 cv2.logPolar 空間變換 極座標變換")
 
-src = cv2.imread(filename, cv2.IMREAD_ANYCOLOR)
+src = cv2.imread(filename1, cv2.IMREAD_ANYCOLOR)
 
 # 圖像的極坐標變換
 M = 150
@@ -640,9 +628,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 51 邊緣擴充/擴充邊界 copyMakeBorder")
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-
-image0 = cv2.imread(filename)
+image0 = cv2.imread(filename1)
 
 # 擴充邊界
 top = 50
@@ -690,9 +676,9 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 89 將一彩圖做RGB分離")
 
-filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
+rgb512_filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
-image = cv2.imread(filename, cv2.IMREAD_COLOR)
+image = cv2.imread(rgb512_filename, cv2.IMREAD_COLOR)
 
 # 得到三個顏色通道
 b = image[:, :, 0]
@@ -734,9 +720,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 91")
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
-temp = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+temp = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
 print(temp.shape)
 
 tempHt, tempWd = temp.shape
@@ -1116,10 +1100,10 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
-filename = "C:/_git/vcs/_4.python/opencv/data/cs1.bmp"
+filename_cs1 = "C:/_git/vcs/_4.python/opencv/data/cs1.bmp"
 
 # 讀取圖像，並轉為灰階與二值化處理
-image = cv2.imread(filename)
+image = cv2.imread(filename_cs1)
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉為灰階圖像
 _, thresh = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY)
@@ -1203,16 +1187,13 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 117")
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-cv_img = cv2.imread(filename)
+cv_img = cv2.imread(filename1)
 width = cv_img.shape[1]
 height = cv_img.shape[0]
 print(width)
 print(height)
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-
-img = Image.open(filename)
+img = Image.open(filename1)
 
 mask = np.zeros([10, 5, 3], dtype=np.uint8)
 # print(mask)
@@ -1235,8 +1216,8 @@ filter2D(src, ddepth, kernel[, dst[, anchor[, delta[, borderType]]]])
     anchor参数指定卷积核的锚点位置，当它为默认值(-1，-1)时， 以卷积核的中心为锚点
 使用filter2D()制作的各种图像处理效果
 """
-filename = "C:/_git/vcs/_4.python/opencv/data/lena.jpg"
-src = cv2.imread(filename)
+lena_filename = "C:/_git/vcs/_4.python/opencv/data/lena.jpg"
+src = cv2.imread(lena_filename)
 
 kernel1_name = "低通濾波器"
 kernel1 = np.array([[1, 1, 1], [1, 2, 1], [1, 1, 1]]) * 0.1
@@ -1342,10 +1323,10 @@ C0 — loDiff < C(x，y) < C0 + hiDiff
 # 去瑕疵-inpaint
 #    scpy2.opencv.inpaint_demo：示範inpaint()的用法，使用者用滑鼠繪制需要去瑕疵的區域，程式實時顯示運算結果。
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_Hough/coins.png"
-
-img = cv2.imread(filename)
+coin_filename = "C:/_git/vcs/_4.python/opencv/data/_Hough/coins.png"
+img = cv2.imread(coin_filename)
 print("img.shape :", img.shape)
+
 seed1 = 344, 188
 seed2 = 152, 126
 diff = (13, 13, 13)
@@ -1578,9 +1559,8 @@ if ret_value == ord("Q") or ret_value == ord("q"):
     cv2.destroyWindow("Peony")  # 關閉視窗
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 """
-
-
 # 設定 cv 視窗
 cv2.namedWindow("Peony1")  # 使用預設
 cv2.namedWindow("Peony2", cv2.WINDOW_NORMAL)  # 可以調整大小
@@ -1624,6 +1604,7 @@ green = img[pt_y, pt_x, 1]  # 讀 G 通道值
 red = img[pt_y, pt_x, 2]  # 讀 R 通道值
 print(f"BGR = {blue}, {green}, {red}")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 修改影像的RGB值
@@ -1717,6 +1698,7 @@ plt.axis("off")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 建立藍色blue底的彩色影像陣列
 blue = np.zeros((2, 3, 3), np.uint8)
@@ -1730,6 +1712,7 @@ print("修訂後")
 # 列印修訂後的像素點
 print(f"blue =\n{blue}")  # 列印影像陣列
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 建立藍色blue底的彩色影像陣列
@@ -1745,6 +1728,7 @@ print("修訂後")
 print(f"blue =\n{blue}")  # 列印影像陣列
 print(f"blue[0,1,2] = {blue[0,1,2]}")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 取出像素值, 修改之
@@ -1779,13 +1763,14 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("修改alpha通道值 255=>127")
 
 # 4通道的PNG圖
-filename5 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+filename_RGB_R = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
 
-img = cv2.imread(filename5, cv2.IMREAD_UNCHANGED)  # PNG讀取
+img = cv2.imread(filename_RGB_R, cv2.IMREAD_UNCHANGED)  # PNG讀取
 cv2.imshow("Before", img)  # 顯示修改前影像img
 print(img.shape)
 print(f"修改前img[210,150] = {img[210,150]}")
@@ -1817,6 +1802,7 @@ image.itemset((1, 3), 255)  # 修訂內容為 255
 print(f"修改後image =\n{image}")
 print(f"修改後image.item(1,3) = {image.item(1,3)}")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("灰階讀取, 部分塗成灰色")
@@ -2128,30 +2114,30 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
-filename1 = 'C:/_git/vcs/_4.python/_data/penguin3.jpg'
-filename2 = 'C:/_git/vcs/_4.python/_data/penguin4.jpg'
+filename1p = 'C:/_git/vcs/_4.python/_data/penguin3.jpg'
+filename2p = 'C:/_git/vcs/_4.python/_data/penguin4.jpg'
 output_filename = 'tmp_penguin_all.jpg'
-filenames = [filename1, filename2]
+filenames = [filename1p, filename2p]
 """
 
-filename1 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF1.jpg"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF2.jpg"
-filename3 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF3.jpg"
-filename4 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF4.jpg"
-filename5 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF5.jpg"
-filename6 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF6.jpg"
-filename7 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF7.jpg"
-filename8 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF8.jpg"
+filename1p = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF1.jpg"
+filename2p = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF2.jpg"
+filename3p = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF3.jpg"
+filename4p = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF4.jpg"
+filename5p = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF5.jpg"
+filename6p = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF6.jpg"
+filename7p = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF7.jpg"
+filename8p = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF8.jpg"
 output_filename = "tmp_SF_all.jpg"
 filenames = [
-    filename1,
-    filename2,
-    filename3,
-    filename4,
-    filename5,
-    filename6,
-    filename7,
-    filename8,
+    filename1p,
+    filename2p,
+    filename3p,
+    filename4p,
+    filename5p,
+    filename6p,
+    filename7p,
+    filename8p,
 ]
 
 img_arr = []
@@ -2182,10 +2168,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("OpenCV selectROI 之使用")
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
 # 檔案 => cv2影像
-image = cv2.imread(filename)
+image = cv2.imread(filename2)
 
 roi = cv2.selectROI("image", image)
 print("選取區域 :", roi)
@@ -2587,14 +2571,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
-# filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
-
-print("------------------------------------------------------------")  # 60個
-
 # 影像對比與亮度調整
 import matplotlib.image as img
 
@@ -2611,7 +2587,7 @@ def modify_contrast_and_brightness(image, alpha=1.0, beta=0.0):
 
 plt.figure(figsize=(12, 8))
 
-image = cv2.imread(filename)  # 讀取本機圖片
+image = cv2.imread(filename1)
 
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -2630,10 +2606,10 @@ print("------------------------------------------------------------")  # 60個
 
 plt.figure(figsize=(12, 8))
 
-filename = "C:/_git/vcs/_4.python/opencv/data/rgb256X300.bmp"
-filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
+rgb_filename = "C:/_git/vcs/_4.python/opencv/data/rgb256X300.bmp"
+rgb_filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
-image = cv2.imread(filename)
+image = cv2.imread(rgb_filename)
 
 plt.subplot(331)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -2699,11 +2675,10 @@ print("------------------------------------------------------------")  # 60個
 
 plt.figure(figsize=(12, 8))
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
-filename = "C:/_git/vcs/_4.python/opencv/data/rgb256X300.bmp"
-filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
+rgb_filename = "C:/_git/vcs/_4.python/opencv/data/rgb256X300.bmp"
+rgb_filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
-image = cv2.imread(filename)
+image = cv2.imread(rgb_filename)
 
 b, g, r = cv2.split(image)
 
@@ -2739,9 +2714,9 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "images/girl.bmp"
+girl_filename = "images/girl.bmp"
 
-image = cv2.imread(filename)
+image = cv2.imread(girl_filename)
 imageRGB = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 plt.figure(figsize=(12, 8))
@@ -2781,8 +2756,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "images/girl.bmp"
-image = cv2.imread(filename)
+girl_filename = "images/girl.bmp"
+image = cv2.imread(girl_filename)
 g = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 plt.figure(figsize=(12, 8))
@@ -2803,7 +2778,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread(filename)
+img = cv2.imread(filename2)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉成灰階
 img = cv2.medianBlur(img, 7)  # 模糊化，去除雜訊
 # Laplacian
@@ -2835,7 +2810,7 @@ cv2.circle(mask,(150,150),100,(255,255,255),-1)
 mask = cv2.GaussianBlur(mask, (35, 35), 0)
 mask = mask / 255                          # 除以 255，計算每個像素的黑白色彩在 255 中所佔的比例
 
-img = cv2.imread(filename)               # 開啟圖片
+img = cv2.imread(filename1)               # 開啟圖片
 bg = np.zeros((300,300,3), dtype='uint8')  # 產生一張黑色背景
 bg = 255 - bg                              # 轉換成白色背景
 img = img / 255                            # 除以 255，計算每個像素的色彩在 255 中所佔的比例
@@ -2852,8 +2827,8 @@ print("------------------------------------------------------------")  # 60個
 
 # Prewitt horizontal edge-emphasizing filter 邊緣加強的影像處理技術
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-image = cv2.imread(filename)
+lena_gray_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+image = cv2.imread(lena_gray_filename)
 
 print("filter2D 效果")
 kernel = np.ones((9, 9), np.float32) / 81
@@ -2874,8 +2849,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
-image = cv2.imread(filename, cv2.COLOR_BGR2GRAY)
+barbara_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
+image = cv2.imread(barbara_filename, cv2.COLOR_BGR2GRAY)
 
 kernel_x = np.array([[1, 1, 1], [0, 0, 0], [-1, -1, -1]], dtype=int)  # 水平值一樣, 偵測水平的邊緣
 kernel_y = np.array([[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]], dtype=int)  # 垂直值一樣, 偵測垂直的邊緣
@@ -2910,9 +2885,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("製作毛玻璃效果")
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
-img = cv2.imread(filename)
+img = cv2.imread(filename2)
 result = img.copy()
 H, W = result.shape[:2]
 print(H, W)
@@ -2954,9 +2927,9 @@ def salt_pepper_noise(image, fraction, salt_vs_pepper):
 fraction = 0.1  # 雜訊佔圖的比例
 salt_vs_pepper = 0.5  # 鹽與胡椒的比例
 
-filename = "C:/_git/vcs/_4.python/_data/tiger.jpg"
+tiger_filename = "C:/_git/vcs/_4.python/_data/tiger.jpg"
 
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+image = cv2.imread(tiger_filename, cv2.IMREAD_GRAYSCALE)
 noisy = salt_pepper_noise(image, fraction, salt_vs_pepper)
 
 plt.imshow(cv2.cvtColor(noisy, cv2.COLOR_BGR2RGB))
@@ -2994,11 +2967,10 @@ def saltpepper(image, n):
 
 
 # 上面就是椒鹽噪聲函數，下面是使用方法，大家可以愉快的玩耍了
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+lena_gray_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 
-image0 = cv2.imread(filename)
-
-image = cv2.imread(filename)
+image0 = cv2.imread(lena_gray_filename)
+image = cv2.imread(lena_gray_filename)
 
 print("saltpepper(胡椒鹽)效果")
 saltImage = saltpepper(image, 0.02)
@@ -3034,9 +3006,9 @@ def salt(image, number):
     return saltImage
 
 
-filename = "C:/_git/vcs/_4.python/_data/tiger.jpg"
+tiger_filename = "C:/_git/vcs/_4.python/_data/tiger.jpg"
 
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+image = cv2.imread(tiger_filename, cv2.IMREAD_GRAYSCALE)
 
 cv2.imshow("image", image)
 
@@ -3049,9 +3021,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
-image1 = cv2.imread(filename)
+image1 = cv2.imread(filename2)
 
 image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
 
@@ -3150,7 +3120,7 @@ cv2.destroyAllWindows()
 
 # dddddddddddddddddddddddddddddddddddddddddddd
 
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+image = cv2.imread(filenamexxx, cv2.IMREAD_GRAYSCALE)
 cvshow("image", image)
 
 """
@@ -3256,7 +3226,7 @@ print(result.shape)
 # ------------------------------------------------------------
 
 # cv2 之讀檔 存檔 (轉換檔案格式) 直接改副檔名即可
-img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+img = cv2.imread(filenamexxx, cv2.IMREAD_GRAYSCALE)
 cv2.imwrite("aaaa.png", img)
 
 # ------------------------------------------------------------
@@ -3370,20 +3340,20 @@ image = cv2.resize(image,(640//2,480//2))
 
 ------------------------------------------------------------
 
-image = cv2.imread(filename)  # 預設為彩色 1號
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階 2號
-image = cv2.imread(filename, 2)  # 也可使用數字代表模式
+image = cv2.imread(filename2)  # 預設為彩色 1號
+image = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階 2號
+image = cv2.imread(filename2, 2)  # 也可使用數字代表模式
 
 print(image.shape)  # 得到 shape
 print(image.dtype)  # uint8
 
-image1 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+image1 = cv2.imread(filenamexx, cv2.IMREAD_UNCHANGED)
 image2 = cv2.imread('test.png', cv2.IMREAD_UNCHANGED)
 
 print(image1.shape)    # (400, 300, 3)  JPG 只有三個色版 BGR
 print(image2.shape)    # (400, 300, 4)  PNG 四個色版 GRA
 
-image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+image = cv2.imread(filenamexx, cv2.IMREAD_UNCHANGED)
 image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)  # 轉換成 BGRA 色彩模式
 
 print(image.shape)                             # (400, 300, 4)  第三個數值變成 4
@@ -3454,7 +3424,7 @@ win_name = "mypicture"  # 窗口名称
 # cv2.WINDOW_NORMAL:可以手动调整窗口大小
 cv2.namedWindow(win_name, cv2.WINDOW_NORMAL)
 
-img = cv2.imread(filename, 0)  # 0 黑白图片；1 原色图片
+img = cv2.imread(filenamexx, 0)  # 0 黑白图片；1 原色图片
 
 cv2.imshow(win_name, img)  # 显示图片
 
@@ -3476,3 +3446,6 @@ show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+

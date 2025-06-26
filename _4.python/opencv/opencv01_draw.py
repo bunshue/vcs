@@ -40,7 +40,7 @@ filename3 = "C:/_git/vcs/_1.data/______test_files1/ims01.bmp"
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("建立畫布(黑色)")
 W, H = 640, 480
 image = np.zeros((H, W, 3), dtype="uint8")# 三維(彩色) 空白影像
@@ -154,7 +154,6 @@ cv2.polylines(image, [pts1], True, BLUE, 5)  # 繪製封閉式多邊形
 cv2.polylines(image, [pts2], False, RED, 3)  # 繪製開放式多邊形
 
 cv2.imshow("OpenCV Draw 1", image)
-
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -162,7 +161,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("建立畫布")
-W, H = 1000, 800
+W, H = 1200, 800
 image = np.zeros((H, W, 3), np.uint8)
 
 image[:] = (128, 128, 128)  # 灰色背景
@@ -323,9 +322,34 @@ y_st += 150
 font = cv2.FONT_HERSHEY_SIMPLEX
 cv2.putText(image, "OpenCV", (x_st, y_st), font, 4, WHITE, 2)
 
+# 黃底藍字 # 標註右下角底色是黃色
+cv2.rectangle(
+    image,
+    (image.shape[1] - 105, image.shape[0] - 20),
+    (image.shape[1], image.shape[0]),
+    YELLOW,
+    -1,
+)
+# 標註文字
+cv2.putText(
+    image,
+    "Open CV",
+    (image.shape[1] - 100, image.shape[0] - 5),
+    cv2.FONT_HERSHEY_COMPLEX,
+    0.5,
+    BLUE,
+    1,
+)
 
-cv2.imshow("OpenCV Draw 2", image)
 
+x_st, y_st = 700, 500
+
+font = cv2.FONT_HERSHEY_SIMPLEX
+loc = (10, 40)
+cv2.putText(image, "Python", (x_st, y_st), font, 1, RED, 2, cv2.LINE_AA)
+cv2.putText(image, "Python", (x_st, y_st+80), cv2.FONT_HERSHEY_PLAIN, 5.0, BLUE, cv2.LINE_AA)
+
+cv2.imshow("OpenCV Text", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -393,7 +417,6 @@ drawBoundingBox(image, bboxs)
 draw_line(image)
 
 cv2.imshow("OpenCV Draw 4", image)
-
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -433,7 +456,6 @@ cv2.ellipse(img, (cx, cy), size, angle, 0, 360, YELLOW, 5)  # 繪製橢圓形
 cv2.ellipse(img, (cx, cy), size, angle, 45, 135, BLUE, 3)  # 繪製橢圓弧
 
 cv2.imshow("OpenCV Draw 5", img)
-
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -450,7 +472,6 @@ for i in range(0, 15):
     cv2.ellipse(img, (cx, cy), size, angle, 0, 360, color, 1)  # 繪製橢圓形
 
 cv2.imshow("My Draw", img)
-
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -470,7 +491,6 @@ for i in range(0, 50):
     cv2.circle(img, (cx, cy), r, color, -1)  # 建立隨機實心圓
 
 cv2.imshow("Random Circle", img)
-
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -592,7 +612,6 @@ cv2.namedWindow("OpenCV Mouse Event")
 cv2.setMouseCallback("OpenCV Mouse Event", OnMouseAction)
 
 cv2.imshow("OpenCV Mouse Event", image)
-
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -771,7 +790,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 fontFace = cv2.FONT_HERSHEY_COMPLEX
 fontScale = 2
 thickness = 2
@@ -804,78 +823,17 @@ cv2.putText(
 cv2.rectangle(image, (x_st, y_st), (x_st + w, y_st + h), BLUE)  # 繪製矩形
 
 cv2.imshow("OpenCV", image)
-
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 白圖 # 生成白色背景
+print("建立畫布(白色)")
 W, H, D = 400, 400, 3
 image = np.ones((H, W, 3), dtype="uint8") * 255
 
-print("------------------------------------------------------------")  # 60個
-
-W, H, D = 400, 400, 3
-image = np.ones((H, W, 3), dtype="uint8") * 255
-
-for i in range(0, 100):
-    cx = np.random.randint(0, high=400)  # np.random之randint不含尾
-    # 生成隨機圓心X,確保在畫布image內
-    cy = np.random.randint(0, high=400)  # np.random之randint不含尾
-    # 生成隨機圓心Y,確保在畫布image內
-    radius = np.random.randint(5, high=400 / 5)  # np.random之randint不含尾
-    # 生成隨機半徑，值范圍：[5, d/5)，最大半徑是 d / 5
-    color = np.random.randint(0, high=256, size=(3,)).tolist()  # np.random之randint不含尾
-    # 生成隨機顏色，3個[0, 256)的隨機數
-    cv2.circle(image, (cx, cy), radius, color, -1)
-    # 使用上述隨機數，在畫布image內畫圓
-
-
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("畫圖 2")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-W, H, D = 400, 400, 3
-image = np.ones((H, W, 3), dtype="uint8") * 255
-# 生成白色背景
-center = (round(400 / 2), round(400 / 2))
-# 注意數值類型，center = (d / 2, d / 2)不可以
-size = (100, 200)
-# 軸的長度
-for i in range(0, 10):
-    angle = np.random.randint(0, 361)  # np.random之randint不含尾
-    # 偏移角度
-    color = np.random.randint(0, high=256, size=(3,)).tolist()  # np.random之randint不含尾
-    # 生成隨機顏色，3個[0, 256)的隨機數
-    thickness = np.random.randint(1, 9)  # np.random之randint不含尾
-    cv2.ellipse(image, center, size, angle, 0, 360, color, thickness)
-
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("畫圖 3")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-W, H, D = 400, 400, 3
-image = np.ones((H, W, 3), dtype="uint8") * 255
-# 生成白色背景
-pts = np.array([[200, 50], [300, 200], [200, 350], [100, 200]], np.int32)
-# 生成各個頂點,注意數據類型為int32
-pts = pts.reshape((-1, 1, 2))
-# 第1個參數為-1, 表明這一維的長度是根據后面的維度的計算出來的。
-cv2.polylines(image, [pts], True, GREEN, 8)
-# 調用函數polylines完成多邊形繪圖，注意第3個參數控制多邊形封閉
-# cv2.polylines(image, [pts], False, GREEN, 8)  #不閉合的的多邊形
-
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("畫圖 4")
-plt.show()
+image = np.ones((H, W, 3), np.uint8) * 255  # 白底畫布
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -911,7 +869,6 @@ for i in range(len(points)):
 
 
 cv2.imshow("OpenCV Draw 1", image)
-
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -923,64 +880,44 @@ print("drawContours")
 W, H = 400, 400
 image = np.zeros((H, W, 3), np.uint8)  # 黑色畫板
 
-MIN = 100
-MAX = W - 100
-N = 4  # 隨機生成 N 個坐標點，每一行存儲一個坐標
+MIN = 50
+MAX = W - 50
+N = 10  # 隨機生成 N 個坐標點，每一行存儲一個坐標
 # 隨機生成 橫縱坐標均在 MIN 至 MAX 的坐標點
 points = np.random.randint(MIN, MAX, (N, 2), np.int32)
-# print(points)
+#print(points)
 
-# points = np.int0(points)  # 取整數
-cv2.drawContours(image, [points], 0, RED, 3)
+for p in points:
+    print(p)
+    cv2.circle(image, (p[0], p[1]), 5, GREEN, -1)  # 繪製圓形
+
+points = np.int0(points)  # 取整數
+cv2.drawContours(image, [points], 0, RED, 2)
 
 cv2.imshow("image", image)
-
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-cv2.rectangle(img, (1, 1), (300, 300), YELLOW, -1)  # 設定黃色底
-cv2.rectangle(img, (1, 1), (300, 300), BLUE)  # 繪製矩形
-
-img = np.ones((480, 640, 3), np.uint8) * 255  # 白底畫布
-
-# if key == 27:  # ESC 則結束
-
-# 黃底藍字
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 140, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    YELLOW,
-    -1,
-)
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Finding " + str(len(faces)) + " face",
-    (img.shape[1] - 135, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    BLUE,
-    1,
-)
+sys.exit()
 
 
-font = cv2.FONT_HERSHEY_SIMPLEX
-loc = (10, 40)
-cv2.putText(image, "origin", loc, font, 1, RED, 2, cv2.LINE_AA)
-cv2.putText(sift_out, "sift", loc, font, 1, RED, 2, cv2.LINE_AA)
-# cv2.putText(surf_out, 'surt', loc, font, 1, RED, 2, cv2.LINE_AA)
-cv2.putText(orb_out, "orb", loc, font, 1, RED, 2, cv2.LINE_AA)
-# ------------------------------------------------------------
-cv2.putText(
-    image, "O", (current_x, 100), cv2.FONT_HERSHEY_PLAIN, 0.4, BLUE, cv2.LINE_AA
-)
 
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+# 生成隨機顏色，3個[0, 256)的隨機數
+color = np.random.randint(0, high=256, size=(3,)).tolist()  # np.random之randint不含尾
+print(color)
+
+
+# 畫多邊形
+pts = np.array([[200, 50], [300, 200], [200, 350], [100, 200]], np.int32)
+pts = pts.reshape((-1, 1, 2))
+# 第1個參數為-1, 表明這一維的長度是根據后面的維度的計算出來的。
+cv2.polylines(image, [pts], True, GREEN, 8)
+# 調用函數polylines完成多邊形繪圖，注意第3個參數控制多邊形封閉
+# cv2.polylines(image, [pts], False, GREEN, 8)  #不閉合的的多邊形
