@@ -36,13 +36,7 @@ print("------------------------------------------------------------")  # 60個
 from mpl_toolkits import mplot3d
 from matplotlib import cm
 import matplotlib	
-from numpy import *
 
-#from numpy import real, imag, exp, log, e
-# funcinp=str(input("Input complex function  :  "))
-
-funcinp = "3.0"
-  
 feature_x = np.linspace(-5.0, 5.0, 1000)
 feature_y = np.linspace(-5.0, 5.0, 1000)
   
@@ -130,7 +124,6 @@ for i, Y in enumerate([Y_and, Y_or, Y_xor]):
     else:
         plt.text(0.5, 0.5, s="?", ha="center", va="center")
 
-plt.tight_layout()
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -156,8 +149,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
 
 def normal_pdf(x, mu, sigma):
     pi = 3.1415926

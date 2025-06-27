@@ -515,6 +515,138 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("閾值分割 threshold")
+
+src = np.array(
+    [[123, 234, 68], [33, 51, 17], [48, 98, 234], [129, 89, 27], [45, 167, 134]],
+    np.uint8,
+)
+# 手動設置閾值
+the = 150
+maxval = 255
+dst = cv2.threshold(src, the, maxval, cv2.THRESH_BINARY)
+
+# Otsu 閾值處理
+otsuThe = 0
+otsuThe, dst_Otsu = cv2.threshold(src, otsuThe, maxval, cv2.THRESH_OTSU)
+print(otsuThe, dst_Otsu)
+
+# TRIANGLE 閾值處理
+triThe = 0
+triThe, dst_tri = cv2.threshold(src, triThe, maxval, cv2.THRESH_TRIANGLE)
+print(triThe, dst_tri)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+filename_cs1 = "C:/_git/vcs/_4.python/opencv/data/cs1.bmp"
+
+# 讀取圖像，並轉為灰階與二值化處理
+image = cv2.imread(filename_cs1)
+
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉為灰階圖像
+_, thresh = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY)
+
+# 找出圖像中的輪廓
+cnts, hir = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+# 找出最大的輪廓
+filtered_contours = max(cnts, key=cv2.contourArea)
+
+# 取得該輪廓的最小包圍矩形及角度
+rect = cv2.minAreaRect(filtered_contours)  # ((center_x, center_y), (w, h), angle)
+box = cv2.boxPoints(rect)  # 轉換為4個頂點
+
+# box = np.int0(box)  # 將頂點轉換為整數座標 #np 1.24 以下使用 
+box = np.intp(box)
+
+# 繪製最小包圍矩形
+cv2.drawContours(image, [box], 0, RED, 3)  # 綠色框，線寬為2
+
+# 取得旋轉矩形的中心點和旋轉角度
+(center_x, center_y), (w, h), angle = rect
+
+# 顯示中心點和旋轉角度在圖片上
+center_text = f"Center: ({int(center_x)}, {int(center_y)})"
+angle_text = f"Angle: {int(angle)} degrees"
+
+cv2.circle(image, (int(center_x), int(center_y)), 10, BLUE, -1)  # 圆
+
+# 在圖像上寫入文字
+cv2.putText(image, center_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)  # 藍色字體
+cv2.putText(image, angle_text, (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)  # 藍色字體
+
+# 顯示結果
+cv2.imshow("Image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Character_recognition.py
+
+img = cv2.imread("data/brain.jpg")
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+kernel = np.ones((3, 3), np.uint8)
+opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
+
+# sure background area
+sure_bg = cv2.dilate(opening, kernel, iterations=3)  # 膨胀
+
+# Finding sure foreground area
+dist_transform = cv2.distanceTransform(opening, 1, 5)
+ret, sure_fg = cv2.threshold(
+    dist_transform, 0.2 * dist_transform.max(), 255, 0
+)  # 参数改小了，出现不确定区域
+
+# Finding unknown region
+sure_fg = np.uint8(sure_fg)
+unknown = cv2.subtract(sure_bg, sure_fg)  # 减去前景
+
+cv2.imshow("p", sure_fg)
+
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB))
+plt.title("")
+
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(thresh, cv2.COLOR_BGR2RGB))
+plt.title("")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(opening, cv2.COLOR_BGR2RGB))
+plt.title("")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(sure_fg, cv2.COLOR_BGR2RGB))
+plt.title("")
+
+plt.show()
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

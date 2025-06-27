@@ -13,7 +13,6 @@ import tkinter as tk
 
 import tkinter.filedialog
 
-'''
 """
 from tkinter.filedialog import askopenfile #tk之openFileDialog
 from tkinter.filedialog import asksaveasfile #tk之saveFileDialog
@@ -376,7 +375,7 @@ window.protocol("WM_DELETE_WINDOW",callback)  # 更改協定綁定
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 from tkinter import *
 from tkinter.filedialog import asksaveasfilename
 

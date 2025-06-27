@@ -14,6 +14,12 @@ cv 傅立葉 cv2.dft cv2.idft
 
 
 頻率域影像處理 DCT IDCT
+
+
+# 對二維 陣列/影像 做 fft
+np.fft.fft2()
+
+
 """
 
 from opencv_common import *
@@ -98,6 +104,7 @@ fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
 s1 = np.log(np.abs(fshift))
 # fimage = np.log(np.abs(f))
 fimage = np.abs(s1)
+
 plt.subplot(222)
 plt.imshow(fimage, cmap="gray")
 plt.title("fftshift")
@@ -105,6 +112,7 @@ plt.title("fftshift")
 f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
 fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
 spectrum = 20 * np.log(np.abs(fshift))  # 轉成頻譜
+
 plt.subplot(223)
 plt.imshow(spectrum, cmap="gray")  # 灰階顯示
 plt.title("頻譜圖")
@@ -114,6 +122,7 @@ fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
 ifshift = np.fft.ifftshift(fshift)  # 逆傅立葉變換,  # 0 頻率頻率移回左上角
 src_tmp = np.fft.ifft2(ifshift)  # 逆傅立葉變換, 將頻域訊號轉換回時域訊號
 src_back = np.abs(src_tmp)  # 取絕對值
+
 plt.subplot(224)
 plt.imshow(src_back, cmap="gray")  # 灰階顯示
 plt.title("ifft")
@@ -168,17 +177,19 @@ print(image)
 print("------------------------------")  # 30個
 print("傅立葉變換")
 
-X = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
-print(X)
+f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
+print(f)
 print("------------------------------")  # 30個
 print("逆傅立葉變換")
-x2 = np.fft.ifft2(X)  # 逆傅立葉變換, 將頻域訊號轉換回時域訊號
-print(x2)
-
+src_tmp = np.fft.ifft2(f)  # 逆傅立葉變換, 將頻域訊號轉換回時域訊號
+src_back = np.abs(src_tmp)  # 取絕對值
+print(src_tmp)
 print("------------------------------")  # 30個
 # np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
-cc = np.allclose(image, x2)  # 和原始訊號進行比較
+cc = np.allclose(image, src_tmp)  # 和原始訊號進行比較
 print(cc)
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("製作 sinc2d 資料")
@@ -238,6 +249,7 @@ image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 
 f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
 # fshift = np.fft.fftshift(f)            # 0 頻率分量移至中心
+
 spectrum = 20 * np.log(np.abs(f))  # 轉成頻譜
 
 plt.subplot(121)
@@ -266,7 +278,7 @@ image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 # 傅立葉變換
 X_DFT = cv2.dft(np.float32(image), flags=cv2.DFT_COMPLEX_OUTPUT)
 
-fshift = np.fft.fftshift(X_DFT)
+fshift = np.fft.fftshift(X_DFT)  # 0 頻率分量移至中心
 result = 20 * np.log(cv2.magnitude(fshift[:, :, 0], fshift[:, :, 1]))
 
 plt.subplot(121)
@@ -291,7 +303,7 @@ image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 # 傅立葉變換
 X_DFT = cv2.dft(np.float32(image), flags=cv2.DFT_COMPLEX_OUTPUT)
 
-fshift = np.fft.fftshift(X_DFT)
+fshift = np.fft.fftshift(X_DFT)  # 0 頻率分量移至中心
 ifshift = np.fft.ifftshift(fshift)  # 逆傅立葉變換
 src_tmp = cv2.idft(ifshift)  # 逆傅立葉
 src_back = cv2.magnitude(src_tmp[:, :, 0], src_tmp[:, :, 1])
@@ -389,7 +401,7 @@ image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 # 傅立葉變換
 X_DFT = cv2.dft(np.float32(image), flags=cv2.DFT_COMPLEX_OUTPUT)
 
-fshift = np.fft.fftshift(X_DFT)
+fshift = np.fft.fftshift(X_DFT)  # 0 頻率分量移至中心
 spectrum = 20 * np.log(cv2.magnitude(fshift[:, :, 0], fshift[:, :, 1]))
 
 plt.subplot(121)
@@ -622,7 +634,6 @@ image = plt.imread("data/castle3.jpg")
 image = 0.2126 * image[:, :, 0] + 0.7152 * image[:, :, 1] + 0.0722 * image[:, :, 2]
 
 plt.figure(figsize=(12, 8))
-
 plt.subplot(231)
 plt.imshow(image, "gray")
 plt.title("原圖")
@@ -634,7 +645,7 @@ plt.imshow(np.abs(f), "gray")
 plt.title("二維傅里葉變換")
 
 # 將圖像變換的原點移動到頻域矩形的中心，并顯示效果
-fshift = np.fft.fftshift(f)
+fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
 
 plt.subplot(233)
 plt.imshow(np.abs(fshift), "gray")
@@ -692,6 +703,7 @@ for u in range(h):
         F[u,v] = res
 
 log_F = np.log(1 + np.abs(F))
+
 plt.subplot(133)
 plt.imshow(log_F,'gray')
 plt.title('log_F')
@@ -710,7 +722,7 @@ f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
 
 X_mag = np.log10(np.abs(f))
 
-fshift = np.fft.fftshift(X_mag)
+fshift = np.fft.fftshift(X_mag)  # 0 頻率分量移至中心
 
 rects = [
     (80, 125, 85, 130),
@@ -731,9 +743,9 @@ for i, (x0, y0, x1, y1) in enumerate(rects):
     mask = np.zeros((N, N), dtype=np.bool)
     mask[x0 : x1 + 1, y0 : y1 + 1] = True
     mask[N - x1 : N - x0 + 1, N - y1 : N - y0 + 1] = True
-    mask = np.fft.fftshift(mask)
+    mask = np.fft.fftshift(mask)  # 0 頻率分量移至中心
     X_freq2 = f * mask
-    X_filtered = np.fft.ifft2(f).real
+    X_filtered = np.fft.ifft2(f).real  # 逆傅立葉變換, 將頻域訊號轉換回時域訊號
     filtered_results.append(X_filtered)
 
 fig, axes = pl.subplots(2, 3, figsize=(9, 6))
@@ -804,6 +816,7 @@ start = 0
 end = 1
 x = np.linspace(start, end, 500)  # x 軸區間
 y = np.sin(2 * np.pi * 4 * x)  # 建立正弦曲線
+
 plt.plot(x, y)
 plt.xlabel("時間(秒)")  # 時間
 plt.ylabel("振幅")  # 振幅
@@ -1733,11 +1746,13 @@ plt.plot(index[mintime:maxtime], data[mintime:maxtime])
 plt.xlabel("时间(s)")
 plt.ylabel("微伏(uV)")
 plt.title("原始信号")
+
 plt.subplot(312)
 plt.plot(index[mintime:maxtime], datarec[mintime:maxtime])
 plt.xlabel("时间(s)")
 plt.ylabel("微伏(uV)")
 plt.title("利用小波技术去噪信号")
+
 plt.subplot(313)
 plt.plot(index[mintime:maxtime], data[mintime:maxtime] - datarec[mintime:maxtime])
 plt.xlabel("时间(s)")
@@ -1900,7 +1915,6 @@ cv2.imshow("IDCT Result", result2)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-# 用matplotlib顯示
 plt.figure("DCT-IDCT", figsize=(16, 12))
 plt.subplot(131)
 plt.title("原圖")
@@ -1960,13 +1974,8 @@ image = cv2.imread("data/fft/shape2.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
 "data/fft/jk.jpg"
 "data/fft/snow.jpg"
 
-
-np.fft.fft2(image)
-
-
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 image = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
-
 
 # plt.figure(figsize=(8, 6))
 

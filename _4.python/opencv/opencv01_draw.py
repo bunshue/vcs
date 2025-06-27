@@ -43,7 +43,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("建立畫布(黑色)")
 W, H = 640, 480
-image = np.zeros((H, W, 3), dtype="uint8")# 三維(彩色) 空白影像
+image = np.zeros((H, W, 3), dtype="uint8")  # 三維(彩色) 空白影像
 
 print("畫直線")
 line_width = 10  # 線寬
@@ -347,7 +347,9 @@ x_st, y_st = 700, 500
 font = cv2.FONT_HERSHEY_SIMPLEX
 loc = (10, 40)
 cv2.putText(image, "Python", (x_st, y_st), font, 1, RED, 2, cv2.LINE_AA)
-cv2.putText(image, "Python", (x_st, y_st+80), cv2.FONT_HERSHEY_PLAIN, 5.0, BLUE, cv2.LINE_AA)
+cv2.putText(
+    image, "Python", (x_st, y_st + 80), cv2.FONT_HERSHEY_PLAIN, 5.0, BLUE, cv2.LINE_AA
+)
 
 cv2.imshow("OpenCV Text", image)
 cv2.waitKey()
@@ -618,6 +620,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
 def OnMouseAction(event, x, y, flags, param):
     # color可以產生隨機色彩
     color = np.random.randint(0, high=256, size=3).tolist()
@@ -759,7 +762,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -885,7 +887,7 @@ MAX = W - 50
 N = 10  # 隨機生成 N 個坐標點，每一行存儲一個坐標
 # 隨機生成 橫縱坐標均在 MIN 至 MAX 的坐標點
 points = np.random.randint(MIN, MAX, (N, 2), np.int32)
-#print(points)
+# print(points)
 
 for p in points:
     print(p)
@@ -901,7 +903,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 sys.exit()
-
 
 
 print("------------------------------------------------------------")  # 60個

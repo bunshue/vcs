@@ -57,6 +57,7 @@ WHITE = (255, 255, 255)  # B G R
 colors = [RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK, WHITE]
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 偵測正面人臉 haarcascade_frontalface_default.xml
 xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
@@ -73,6 +74,7 @@ filename = "C:/_git/vcs/_4.python/opencv/data/_face/face01.jpg"
 # filename = "C:/_git/vcs/_4.python/opencv/data/_face/SolvayConference1927.jpg"
 # filename = "C:/_git/vcs/_4.python/opencv/data/_face/ming_emperor3.jpg"
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("人臉辨識 圖片")
@@ -130,13 +132,14 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 偵測正面人臉 haarcascade_frontalface_alt_tree.xml
 xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_alt_tree.xml"
 
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 
-#filename = "C:/_git/vcs/_4.python/opencv/data/_face/YaltaSummit1945.jpg"
+# filename = "C:/_git/vcs/_4.python/opencv/data/_face/YaltaSummit1945.jpg"
 
 img = cv2.imread(filename)
 
@@ -292,6 +295,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("人臉辨識 圖片 臉 眼")
 
@@ -300,7 +304,9 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.j
 xml_filename1 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename1)
 
-xml_filename2 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_eye.xml"
+xml_filename2 = (
+    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_eye.xml"
+)
 eye_cascade_classifier = cv2.CascadeClassifier(xml_filename2)
 
 img = cv2.imread(filename)  # 讀取本機圖片
@@ -326,6 +332,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("人臉辨識 圖片 眼 嘴 鼻")
 
@@ -333,10 +340,14 @@ print("人臉辨識 圖片 眼 嘴 鼻")
 eye_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_eye.xml"
 
 # 嘴巴模型
-mouth_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades_mcs/haarcascade_mcs_mouth.xml"
+mouth_filename = (
+    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades_mcs/haarcascade_mcs_mouth.xml"
+)
 
 # 鼻子模型
-nose_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades_mcs/haarcascade_mcs_nose.xml"
+nose_filename = (
+    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades_mcs/haarcascade_mcs_nose.xml"
+)
 
 filename = "C:/_git/vcs/_4.python/opencv/data/_face/face07.jpg"
 img = cv2.imread(filename)
@@ -365,6 +376,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("OpenCV_ai_48")
 """ lack file
@@ -378,8 +390,8 @@ for i in range(1,31):
     img = cv2.imread(f'face01/{i}.jpg')           # 依序開啟每一張蔡英文的照片
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 色彩轉換成黑白
     img_np = np.array(gray,'uint8')               # 轉換成指定編碼的 numpy 陣列
-    face = detector.detectMultiScale(gray)        # 擷取人臉區域
-    for(x,y,w,h) in face:
+    faces = detector.detectMultiScale(gray)        # 擷取人臉區域
+    for(x,y,w,h) in faces:
         faces.append(img_np[y:y+h,x:x+w])         # 記錄蔡英文人臉的位置和大小內像素的數值
         ids.append(1)                             # 記錄蔡英文人臉對應的 id，只能是整數，都是 1 表示蔡英文的 id 為 1
 
@@ -387,19 +399,17 @@ for i in range(1,16):
     img = cv2.imread(f'face02/{i}.jpg')           # 依序開啟每一張川普的照片
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 色彩轉換成黑白
     img_np = np.array(gray,'uint8')               # 轉換成指定編碼的 numpy 陣列
-    face = detector.detectMultiScale(gray)        # 擷取人臉區域
-    for(x,y,w,h) in face:
+    faces = detector.detectMultiScale(gray)        # 擷取人臉區域
+    for(x,y,w,h) in faces:
         faces.append(img_np[y:y+h,x:x+w])         # 記錄川普人臉的位置和大小內像素的數值
         ids.append(2)                             # 記錄川普人臉對應的 id，只能是整數，都是 2 表示川普的 id 為 2
 
 print('training...')                              # 提示開始訓練
 recog.train(faces,np.array(ids))                  # 開始訓練
-recog.save('face.yml')                            # 訓練完成儲存為 face.yml
+recog.save('tmp_face.yml')                            # 訓練完成儲存為 tmp_face.yml
 print('ok!')
 """
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV_ai_46")
@@ -419,6 +429,8 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("OpenCV_ai_47")
 
 """ lack file
@@ -447,28 +459,8 @@ img = cv2.imread(filename)  # 讀取影像
 faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
 )
-#print(faces)
 print("共找到 " + str(len(faces)) + " 張人臉")
 
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 140, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    (0, 255, 255),
-    -1,
-)
-
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Finding " + str(len(faces)) + " face",
-    (img.shape[1] - 135, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    (255, 0, 0),
-    1,
-)
 # 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
 for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
@@ -478,8 +470,11 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/lbpcascades/lbpcascade_frontalface.xml"
+xml_filename = (
+    "C:/_git/vcs/_4.python/opencv/data/_xml/lbpcascades/lbpcascade_frontalface.xml"
+)
 xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
 
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
@@ -498,33 +493,16 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print('ccc')
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識物件
 
 img = cv2.imread(filename)  # 讀取影像
 faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
 )
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 140, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    (0, 255, 255),
-    -1,
-)
 
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Finding " + str(len(faces)) + " face",
-    (img.shape[1] - 135, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    (255, 0, 0),
-    1,
-)
+print("共找到 " + str(len(faces)) + " 張人臉")
 
 # 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
 for x, y, w, h in faces:
@@ -535,36 +513,21 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print('ddd')
 if not os.path.exists("facedata"):  # 如果不存在資料夾
     os.mkdir("facedata")  # 就建立facedata
 
-#xml_filename = r"haarcascade_frontalface_alt2.xml"
+# xml_filename = r"haarcascade_frontalface_alt2.xml"
 
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
 img = cv2.imread(filename)  # 讀取影像
 faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
 )  # 偵測影像
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 140, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    (0, 255, 255),
-    -1,
-)
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Finding " + str(len(faces)) + " face",
-    (img.shape[1] - 135, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    (255, 0, 0),
-    1,
-)
+
+print("共找到 " + str(len(faces)) + " 張人臉")
+
 # 將人臉框起來, 由於有可能找到好幾個臉所以用迴圈繪出來
 # 同時將影像儲存在facedata資料夾, 但是必須先建立此資料夾
 num = 1  # 檔名編號
@@ -581,14 +544,19 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("檢查兩圖之差異度")
 
 from functools import reduce
 import operator
 
-filename_face1 = "C:/_git/vcs/_4.python/opencv/opencv_CascadeClassifier/facedata/face1.jpg"
-filename_face2 = "C:/_git/vcs/_4.python/opencv/opencv_CascadeClassifier/facedata/face1.jpg"
+filename_face1 = (
+    "C:/_git/vcs/_4.python/opencv/opencv_CascadeClassifier/facedata/face1.jpg"
+)
+filename_face2 = (
+    "C:/_git/vcs/_4.python/opencv/opencv_CascadeClassifier/facedata/face1.jpg"
+)
 
 h1 = Image.open(filename_face1).histogram()
 h2 = Image.open(filename_face2).histogram()
@@ -597,8 +565,12 @@ RMS = math.sqrt(
 )
 print("RMS = ", RMS)
 
-filename_face1 = "C:/_git/vcs/_4.python/opencv/opencv_CascadeClassifier/facedata/face1.jpg"
-filename_face2 = "C:/_git/vcs/_4.python/opencv/opencv_CascadeClassifier/facedata/face2.jpg"
+filename_face1 = (
+    "C:/_git/vcs/_4.python/opencv/opencv_CascadeClassifier/facedata/face1.jpg"
+)
+filename_face2 = (
+    "C:/_git/vcs/_4.python/opencv/opencv_CascadeClassifier/facedata/face2.jpg"
+)
 
 h1 = Image.open(filename_face1).histogram()
 h2 = Image.open(filename_face2).histogram()
@@ -660,7 +632,7 @@ cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('用到 Webcam')
+print("用到 Webcam")
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
 cv2.namedWindow("Image")
 cap = cv2.VideoCapture(0)  # 開啟攝影機
@@ -677,24 +649,9 @@ cap.release()  # 關閉攝影機
 faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
 )
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 120, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    (0, 255, 255),
-    -1,
-)
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Find " + str(len(faces)) + " face",
-    (img.shape[1] - 110, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    (255, 0, 0),
-    1,
-)
+
+print("共找到 " + str(len(faces)) + " 張人臉")
+
 # 將人臉框起來
 for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
@@ -733,24 +690,9 @@ cap.release()  # 關閉攝影機
 faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
 )
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 120, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    (0, 255, 255),
-    -1,
-)
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Find " + str(len(faces)) + " face",
-    (img.shape[1] - 110, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    (255, 0, 0),
-    1,
-)
+
+print("共找到 " + str(len(faces)) + " 張人臉")
+
 # 將人臉框起來
 for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
@@ -775,6 +717,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()  # 關閉所有 OpenCV 視窗
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 ID = input("請輸入身份證字號 = ")  # 讀取所輸入的身分證字號
 print("臉形檔案將儲存在 ", ID + ".jpg")
@@ -796,24 +739,9 @@ cap.release()  # 關閉攝影機
 faces = face_cascade_classifier.detectMultiScale(
     img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
 )
-# 標註右下角底色是黃色
-cv2.rectangle(
-    img,
-    (img.shape[1] - 120, img.shape[0] - 20),
-    (img.shape[1], img.shape[0]),
-    (0, 255, 255),
-    -1,
-)
-# 標註找到多少的人臉
-cv2.putText(
-    img,
-    "Find " + str(len(faces)) + " face",
-    (img.shape[1] - 110, img.shape[0] - 5),
-    cv2.FONT_HERSHEY_COMPLEX,
-    0.5,
-    (255, 0, 0),
-    1,
-)
+
+print("共找到 " + str(len(faces)) + " 張人臉")
+
 # 將人臉框起來
 for x, y, w, h in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 藍色框住人臉
@@ -989,12 +917,12 @@ print("------------------------------------------------------------")  # 60個
 # webcam臉部偵測
 
 # 建立臉部辨識物件
-face_detector = cv2.CascadeClassifier(xml_filename)
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 capture = cv2.VideoCapture(0)  # 開啟標號 0 的攝影機
 while capture.isOpened():
     sucess, img = capture.read()  # 讀取攝影機影像
     if sucess:
-        faces = face_detector.detectMultiScale(
+        faces = face_cascade_classifier.detectMultiScale(
             img, scaleFactor=1.1, minNeighbors=5, minSize=(200, 200)
         )  # 從攝影機影像中偵測人臉
         for x, y, w, h in faces:  # 畫出人臉位置
@@ -1023,11 +951,11 @@ cap = cv2.VideoCapture(0)
 while True:
     _, frame = cap.read()
     # 偵測人臉
-    face_rects = face_cascade_classifier.detectMultiScale(
+    faces = face_cascade_classifier.detectMultiScale(
         frame, scaleFactor=1.2, minNeighbors=3
     )
 
-    for x, y, w, h in face_rects:
+    for x, y, w, h in faces:
         face = cv2.blur(frame[y : y + h, x : x + w], (25, 25))
         frame[y : y + h, x : x + w] = face
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
@@ -1067,7 +995,9 @@ def counter(func):
 xml_filename1 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename1)
 
-xml_filename2 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_eye.xml"
+xml_filename2 = (
+    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_eye.xml"
+)
 eye_cascade_classifier = cv2.CascadeClassifier(xml_filename2)
 
 cap = cv2.VideoCapture(0)
@@ -1165,7 +1095,9 @@ if not cap.isOpened():
 else:
     print("Video device opened")
 
-xml_filename = ("C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml")
+xml_filename = (
+    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml"
+)
 
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 # faces = face_cascade_classifier.detectMultiScale(gray)
@@ -1189,6 +1121,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("OpenCV_ai_65 偵測人臉 將其馬賽克")
 
@@ -1199,7 +1132,9 @@ if not cap.isOpened():
 else:
     print("Video device opened")
 
-xml_filename = ("C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml")
+xml_filename = (
+    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml"
+)
 
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 
@@ -1227,10 +1162,15 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 eye_xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_eye.xml"
-nose_xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades_mcs/haarcascade_mcs_nose.xml"
-mouth_xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades_mcs/haarcascade_mcs_mouth.xml"
+nose_xml_filename = (
+    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades_mcs/haarcascade_mcs_nose.xml"
+)
+mouth_xml_filename = (
+    "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades_mcs/haarcascade_mcs_mouth.xml"
+)
 
 print("OpenCV_ai_67 偵測眼睛R鼻子G嘴巴B")
 
@@ -1275,6 +1215,7 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ NG 無檔案 face.yml 人臉模型檔
@@ -1386,6 +1327,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 偵測上半身 haarcascade_upperbody.xml
 
@@ -1411,6 +1353,7 @@ cv2.imshow("Face", img)  # 顯示影像
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 偵測正面人臉 haarcascade_frontalface_default.xml
@@ -1480,6 +1423,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 正面的貓臉 haarcascade_frontalcatface.xml
 
@@ -1502,6 +1446,7 @@ cv2.imshow("Face", img)  # 顯示影像
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 偵測車牌, 適用於俄羅斯車牌 haarcascade_russian_plate_number.xml
@@ -1885,7 +1830,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
@@ -1922,7 +1866,7 @@ def face_who(img):
 
 def face_shot(function):
     isCnt = False  # 用來判斷是否正在進行倒數計時中
-    face_detector = cv2.CascadeClassifier(xml_filename)  # 建立臉部辨識物件
+    face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立臉部辨識物件
     capture = cv2.VideoCapture(0)  # 開啟編號 0 的攝影機
     while capture.isOpened():  # 判斷攝影機是否開啟成功
         sucess, img = capture.read()  # 讀取攝影機影像
@@ -1930,7 +1874,7 @@ def face_shot(function):
             print("讀取影像失敗")
             continue
         img_copy = img.copy()  # 複製影像
-        faces = face_detector.detectMultiScale(  # 從攝影機影像中偵測人臉
+        faces = face_cascade_classifier.detectMultiScale(  # 從攝影機影像中偵測人臉
             img, scaleFactor=1.1, minNeighbors=5, minSize=(200, 200)
         )
         if len(faces) == 1:  # 如果偵測到一張人臉
@@ -1982,7 +1926,7 @@ face_shot("who")  # 呼叫自訂函式
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#若有多個視窗 要指名視窗名稱
+# 若有多個視窗 要指名視窗名稱
 
 cv2.namedWindow("Image", cv2.WINDOW_NORMAL)
 
@@ -1991,13 +1935,11 @@ cv2.namedWindow("Image", cv2.WINDOW_NORMAL)
 
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 
-    face_rects = face_cascade_classifier.detectMultiScale(
+    faces = face_cascade_classifier.detectMultiScale(
         frame, scaleFactor=1.2, minNeighbors=4
     )
 
-    for x, y, w, h in face_rects:
+    for x, y, w, h in faces:
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
 """
-
-

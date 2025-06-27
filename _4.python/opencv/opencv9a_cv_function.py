@@ -1263,8 +1263,85 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("opencv 46 測試 cv2.linearPolar 空間變換 極座標變換")
+
+src = cv2.imread(filename1, cv2.IMREAD_ANYCOLOR)
+
+# 圖像的極坐標變換
+dst = cv2.linearPolar(src, (508, 503), 550, cv2.INTER_LINEAR)
+
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("極座標變換")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("opencv 47 測試 cv2.logPolar 空間變換 極座標變換")
+
+src = cv2.imread(filename1, cv2.IMREAD_ANYCOLOR)
+
+# 圖像的極坐標變換
+M = 150
+dst = cv2.logPolar(src, (400 // 2, 300 // 2), M, cv2.WARP_FILL_OUTLIERS)
+
+# 顯示極坐標變化的結果
+print(src.shape)
+print(dst.shape)
+
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("極座標變換")
+
+show()
+
+# 看不出什麼東西
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("opencv 51 邊緣擴充/擴充邊界 copyMakeBorder")
+
+image0 = cv2.imread(filename1)
+
+# 擴充邊界
+top = 50
+bottom = 100
+left = 150
+right = 200
+image1 = cv2.copyMakeBorder(image0, top, bottom, left, right, cv2.BORDER_DEFAULT)
+
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("邊緣擴充")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 

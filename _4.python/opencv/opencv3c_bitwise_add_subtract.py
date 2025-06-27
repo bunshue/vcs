@@ -33,30 +33,30 @@ print("兩圖做比例疊加 左1.0 右1.0")
 result3a = cv2.addWeighted(image1, 1.0, image2, 1.0, 0)  # 0 為墊高值
 result3b = cv2.addWeighted(image1, 1.0, image2, 1.0, 100)  # 整體墊高100
 
-plt.figure(num="相加",figsize=(12, 8))
+plt.figure(num="相加", figsize=(12, 8))
 plt.subplot(231)
-plt.title("原圖1")
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("原圖1")
 
 plt.subplot(232)
-plt.title("原圖2")
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.title("原圖2")
 
 plt.subplot(233)
-plt.title("兩圖直接相加")
 plt.imshow(cv2.cvtColor(result1, cv2.COLOR_BGR2RGB))
+plt.title("兩圖直接相加")
 
 plt.subplot(234)
-plt.title("兩圖用cv相加")
 plt.imshow(cv2.cvtColor(result2, cv2.COLOR_BGR2RGB))
+plt.title("兩圖用cv相加")
 
 plt.subplot(235)
-plt.title("兩圖做比例疊加 左1.0 右1.0")
 plt.imshow(cv2.cvtColor(result3a, cv2.COLOR_BGR2RGB))
+plt.title("兩圖做比例疊加 左1.0 右1.0")
 
 plt.subplot(236)
-plt.title("兩圖做比例疊加 左1.0 右1.0 整體墊高100")
 plt.imshow(cv2.cvtColor(result3b, cv2.COLOR_BGR2RGB))
+plt.title("兩圖做比例疊加 左1.0 右1.0 整體墊高100")
 
 show()
 
@@ -101,7 +101,7 @@ image3 = image1 - image2
 
 image4 = cv2.subtract(image1, image2)  # 相減
 
-plt.figure(num="兩圖相減1",figsize=(12, 8))
+plt.figure(num="兩圖相減1", figsize=(12, 8))
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("原圖1")
@@ -443,7 +443,6 @@ plt.title("RGB Model")
 
 show()
 
-
 print("------------------------------------------------------------")  # 60個
 # cv2.add cv2.addWeighted cv2.subtract SP
 print("------------------------------------------------------------")  # 60個
@@ -463,59 +462,60 @@ plt.figure(figsize=(12, 8))
 src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階
 plt.subplot(4, 3, 1)
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.axis("off")
 plt.title("原圖")
+plt.axis("off")
 
 mask = np.zeros(src.shape, dtype=np.uint8)  # 建立mask
 mask[50:520, 150:360] = 255  # 設定mask, 先高後寬
 plt.subplot(4, 3, 2)
 plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
-plt.axis("off")
 plt.title("mask")
+plt.axis("off")
 
 dst = cv2.bitwise_and(src, mask)  # 執行AND運算
 plt.subplot(4, 3, 3)
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.axis("off")
 plt.title("AND")
+plt.axis("off")
 
 src = cv2.imread(filename2)  # 彩色
 plt.subplot(4, 3, 4)
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.axis("off")
 plt.title("原圖")
+plt.axis("off")
 
 mask = np.zeros(src.shape, dtype=np.uint8)  # 建立mask
 mask[50:520, 150:360, :] = 255  # 設定mask, 先高後寬  # 這是3維陣列
 plt.subplot(4, 3, 5)
 plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
-plt.axis("off")
 plt.title("mask")
+plt.axis("off")
 
 dst = cv2.bitwise_and(src, mask)  # 執行AND運算
 plt.subplot(4, 3, 6)
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.axis("off")
 plt.title("AND")
+plt.axis("off")
 
 src = cv2.imread(filename2)  # 彩色
 plt.subplot(4, 3, 7)
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.axis("off")
 plt.title("原圖")
+plt.axis("off")
 
 mask = np.zeros(src.shape, dtype=np.uint8)  # 建立mask
 mask[50:520, 150:360, :] = 255  # 設定mask, 先高後寬  # 這是3維陣列
 plt.subplot(4, 3, 8)
 plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
-plt.axis("off")
 plt.title("mask")
+plt.axis("off")
 
 dst = cv2.bitwise_or(src, mask)  # 執行OR運算
+
 plt.subplot(4, 3, 9)
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.axis("off")
 plt.title("OR")
+plt.axis("off")
 
 # ------------------------------------------------------------
 
@@ -525,8 +525,14 @@ plt.title("OR")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename2)
+image = cv2.imread(filename1)
+
+plt.figure(figsize=(12, 8))
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 # 建立mask
 height, width = image.shape[:2]
@@ -538,16 +544,58 @@ mask_filename = "C:/_git/vcs/_4.python/opencv/data/_mask/mask1.png"
 mask = cv2.imread(mask_filename, 0)
 mask = cv2.resize(mask, (width, height))  # 調整mask大小
 
+plt.subplot(132)
+# 當前watermark內最大值為1
+plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
+plt.title("mask")
+
 # 套用mask
 masked_image = cv2.bitwise_and(image, image, mask=mask)
 
-cv2.imshow("Original", image)
-cv2.imshow("Mask", mask)
-cv2.imshow("Masked Image", masked_image)
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(masked_image, cv2.COLOR_BGR2RGB))
+plt.title("masked_image")
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+show()
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("遮罩")
+
+img = cv2.imread(filename2)
+
+plt.figure(figsize=(12, 8))
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+H = img.shape[0]
+W = img.shape[1]
+mask = cv2.imread(r"images/mask.jpg", cv2.IMREAD_GRAYSCALE)
+mask = cv2.resize(mask, (W, H))  # 調整mask大小
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
+plt.title("mask")
+
+img_masked = cv2.bitwise_and(img, img, mask=mask)  # 執行AND運算, 使用mask
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(img_masked, cv2.COLOR_BGR2RGB))
+plt.title("遮罩效果")
+
+mask = cv2.bitwise_not(mask)  # 執行NOT運算
+img_masked = cv2.bitwise_and(img, img, mask=mask)  # 執行AND運算, 使用mask
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(img_masked, cv2.COLOR_BGR2RGB))
+plt.title("遮罩效果")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
@@ -566,20 +614,20 @@ decryption = cv2.bitwise_xor(encryption, key)  # 執行XOR運算
 
 plt.figure(figsize=(12, 8))
 plt.subplot(141)
-plt.title("原圖, 灰階/彩色")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖, 灰階/彩色")
 
 plt.subplot(142)
-plt.title("密鑰影像")
 plt.imshow(cv2.cvtColor(key, cv2.COLOR_BGR2RGB))
+plt.title("密鑰影像")
 
 plt.subplot(143)
-plt.title("加密")
 plt.imshow(cv2.cvtColor(encryption, cv2.COLOR_BGR2RGB))
+plt.title("加密")
 
 plt.subplot(144)
-plt.title("解密")
 plt.imshow(cv2.cvtColor(decryption, cv2.COLOR_BGR2RGB))
+plt.title("解密")
 
 plt.suptitle("XOR 加密解密")
 show()
@@ -587,7 +635,9 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-lena_gray_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+lena_gray_filename = (
+    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+)
 src = cv2.imread(lena_gray_filename, 0)
 
 mask1 = np.zeros(src.shape, dtype=np.uint8)  # 建立mask
@@ -625,52 +675,52 @@ extractLena = noFace2 + extractFace
 
 plt.figure(figsize=(12, 8))
 plt.subplot(341)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(342)
-plt.title("建立mask1")
 plt.imshow(cv2.cvtColor(mask1 * 255, cv2.COLOR_BGR2RGB))
+plt.title("建立mask1")
 
 plt.subplot(343)
-plt.title("建立mask2=mask1反相")
 plt.imshow(cv2.cvtColor(mask2 * 255, cv2.COLOR_BGR2RGB))
+plt.title("建立mask2=mask1反相")
 
 plt.subplot(344)
-plt.title("建立密鑰影像")
 plt.imshow(cv2.cvtColor(key, cv2.COLOR_BGR2RGB))
+plt.title("建立密鑰影像")
 
 plt.subplot(345)
-plt.title("全圖加密")
 plt.imshow(cv2.cvtColor(lenaXorKey, cv2.COLOR_BGR2RGB))
+plt.title("全圖加密")
 
 plt.subplot(346)
-plt.title("全圖加密+mask1取一部份出來")
 plt.imshow(cv2.cvtColor(encryptFace, cv2.COLOR_BGR2RGB))
+plt.title("全圖加密+mask1取一部份出來")
 
 plt.subplot(347)
-plt.title("原圖+mask2")
 plt.imshow(cv2.cvtColor(noFace1, cv2.COLOR_BGR2RGB))
+plt.title("原圖+mask2")
 
 plt.subplot(348)
-plt.title("前兩圖相加")
 plt.imshow(cv2.cvtColor(maskFace, cv2.COLOR_BGR2RGB))
+plt.title("前兩圖相加")
 
 plt.subplot(349)
-plt.title("上圖XOR密鑰影像")
 plt.imshow(cv2.cvtColor(extractOriginal, cv2.COLOR_BGR2RGB))
+plt.title("上圖XOR密鑰影像")
 
 plt.subplot(3, 4, 10)
-plt.title("上圖+mask1")
 plt.imshow(cv2.cvtColor(extractFace, cv2.COLOR_BGR2RGB))
+plt.title("上圖+mask1")
 
 plt.subplot(3, 4, 11)
-plt.title("圖8+mask2")
 plt.imshow(cv2.cvtColor(noFace2, cv2.COLOR_BGR2RGB))
+plt.title("圖8+mask2")
 
 plt.subplot(3, 4, 12)
-plt.title("前兩圖相加 得到 原圖")
 plt.imshow(cv2.cvtColor(extractLena, cv2.COLOR_BGR2RGB))
+plt.title("前兩圖相加 得到 原圖")
 
 show()
 
@@ -697,11 +747,15 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 讀取原圖
-lena_gray_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+lena_gray_filename = (
+    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+)
 src = cv2.imread(lena_gray_filename, 0)
 
 # 讀取水印圖像
-watermark_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/watermark.bmp"
+watermark_filename = (
+    "C:/_git/vcs/_1.data/______test_files1/_image_processing/watermark.bmp"
+)
 watermark = cv2.imread(watermark_filename, 0)
 
 # 將水印內的255處理為1，以方便嵌入
@@ -729,21 +783,62 @@ wm[w] = 255
 
 plt.figure(figsize=(12, 8))
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(222)
-plt.title("watermark")
 # 當前watermark內最大值為1
 plt.imshow(cv2.cvtColor(watermark * 255, cv2.COLOR_BGR2RGB))
+plt.title("watermark")
 
 plt.subplot(223)
-plt.title("e")
 plt.imshow(cv2.cvtColor(e, cv2.COLOR_BGR2RGB))
+plt.title("e")
 
 plt.subplot(224)
-plt.title("wm")
 plt.imshow(cv2.cvtColor(wm, cv2.COLOR_BGR2RGB))
+plt.title("wm")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 在影像中藏入訊息
+
+src = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
+
+h7 = np.ones(src.shape, dtype=np.uint8) * 254  # 建立像素值是254的影像
+tmp_src = cv2.bitwise_and(src, h7)  # 原始影像最低有效位元是 0
+
+watermark = cv2.imread("data/peony.jpg", cv2.IMREAD_GRAYSCALE)
+
+ret, wm = cv2.threshold(watermark, 0, 1, cv2.THRESH_BINARY)
+
+# 浮水印影像嵌入 最低有效位元是0 的 原始影像
+new_src = cv2.bitwise_or(tmp_src, wm)
+
+# 擷取浮水印
+h0 = np.ones(src.shape, dtype=np.uint8)
+wm = cv2.bitwise_and(new_src, h0)
+ret, dst = cv2.threshold(wm, 0, 255, cv2.THRESH_BINARY)
+
+plt.figure(figsize=(12, 8))
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(watermark, cv2.COLOR_BGR2RGB))
+plt.title("浮水印")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(new_src, cv2.COLOR_BGR2RGB))
+plt.title("浮水印影像嵌入")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("顯示浮水印")
 
 show()
 
@@ -751,10 +846,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 圖層提取
-lena_gray_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+lena_gray_filename = (
+    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+)
 src = cv2.imread(lena_gray_filename, 0)
-
-print("顯示原圖")
 
 plt.figure(figsize=(12, 8))
 plt.subplot(331)
@@ -795,14 +890,13 @@ src = cv2.imread(filename2)
 
 dst = cv2.bitwise_not(src)  # 執行NOT運算
 
+plt.figure(figsize=(12, 8))
 plt.subplot(231)
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.axis("off")
 plt.title("原圖")
 
 plt.subplot(232)
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.axis("off")
 plt.title("NOT 負片效果")
 
 src = cv2.imread(filename2)
@@ -814,55 +908,19 @@ dst = cv2.bitwise_xor(src, mask)  # 執行XOR運算
 
 plt.subplot(234)
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.axis("off")
 plt.title("原圖")
 
 plt.subplot(235)
 plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
-plt.axis("off")
 plt.title("mask")
 
 plt.subplot(236)
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.axis("off")
 plt.title("NOT")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("遮罩")
-
-img = cv2.imread(filename2)
-plt.subplot(221)
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-H = img.shape[0]
-W = img.shape[1]
-mask = cv2.imread(r"images/mask.jpg", cv2.IMREAD_GRAYSCALE)
-mask = cv2.resize(mask, (W, H))  # 調整mask大小
-
-plt.subplot(222)
-plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
-plt.title("mask")
-
-img_masked = cv2.bitwise_and(img, img, mask=mask)  # 執行AND運算, 使用mask
-
-plt.subplot(223)
-plt.imshow(cv2.cvtColor(img_masked, cv2.COLOR_BGR2RGB))
-plt.title("遮罩效果")
-
-mask = cv2.bitwise_not(mask)  # 執行NOT運算
-img_masked = cv2.bitwise_and(img, img, mask=mask)  # 執行AND運算, 使用mask
-
-plt.subplot(224)
-plt.imshow(cv2.cvtColor(img_masked, cv2.COLOR_BGR2RGB))
-plt.title("遮罩效果")
-
-show()
-
 print("------------------------------------------------------------")  # 60個
 
 bitwise_filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
@@ -978,46 +1036,6 @@ print(f"dst = \n {dst}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 在影像中藏入訊息
-
-src = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
-
-h7 = np.ones(src.shape, dtype=np.uint8) * 254  # 建立像素值是254的影像
-tmp_src = cv2.bitwise_and(src, h7)  # 原始影像最低有效位元是 0
-
-watermark = cv2.imread("data/peony.jpg", cv2.IMREAD_GRAYSCALE)
-
-ret, wm = cv2.threshold(watermark, 0, 1, cv2.THRESH_BINARY)
-
-# 浮水印影像嵌入 最低有效位元是0 的 原始影像
-new_src = cv2.bitwise_or(tmp_src, wm)
-
-# 擷取浮水印
-h0 = np.ones(src.shape, dtype=np.uint8)
-wm = cv2.bitwise_and(new_src, h0)
-ret, dst = cv2.threshold(wm, 0, 255, cv2.THRESH_BINARY)
-
-plt.subplot(221)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.axis("off")
-
-plt.subplot(222)
-plt.title("浮水印")
-plt.imshow(cv2.cvtColor(watermark, cv2.COLOR_BGR2RGB))
-plt.axis("off")
-
-plt.subplot(223)
-plt.title("浮水印影像嵌入")
-plt.imshow(cv2.cvtColor(new_src, cv2.COLOR_BGR2RGB))
-plt.axis("off")
-
-plt.subplot(224)
-plt.title("顯示浮水印")
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.axis("off")
-
-show()
 
 print("------------------------------------------------------------")  # 60個
 # 影像的位元運算(4) AND OR NOT XOR SP
@@ -1056,8 +1074,6 @@ dollar = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-
 print("OpenCV_ai_29")
 
 """ TBD
@@ -1084,4 +1100,3 @@ cv2.imshow('image', output)
 cv2.waitKey()
 cv2.destroyAllWindows()
 """
-

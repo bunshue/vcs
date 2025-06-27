@@ -26,7 +26,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
@@ -166,12 +166,10 @@ plt.contourf(X, Y, Z, 20, cmap="RdGy")
 plt.colorbar()
 show()
 
-
 plt.imshow(Z, extent=[0, 5, 0, 5], origin="lower", cmap="RdGy")
 plt.colorbar()
 # plt.axis(aspect='image')
 show()
-
 
 contours = plt.contour(X, Y, Z, 3, colors="black")
 plt.clabel(contours, inline=True, fontsize=8)
@@ -346,8 +344,6 @@ print("------------------------------------------------------------")  # 60個
 speckles = np.random.random(I.shape) < 0.01
 I[speckles] = np.random.normal(0, 3, np.count_nonzero(speckles))
 
-plt.figure(figsize=(10, 3.5))
-
 plt.subplot(1, 2, 1)
 plt.imshow(I, cmap="RdBu")
 plt.colorbar()
@@ -441,12 +437,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Set the global default size of matplotlib figures
-plt.rc("figure", figsize=(10, 5))
+plt.rc("figure", figsize=(10, 8))
 
 # Set seaborn aesthetic parameters to defaults
 sns.set()
-
-# Basic Plots
 
 x = np.linspace(0, 2, 10)
 
@@ -494,9 +488,8 @@ print("------------------------------------------------------------")  # 60個
 #Applying Matplotlib Visualizations to Kaggle: Titanic
 
 # Set the global default size of matplotlib figures
-plt.rc('figure', figsize=(10, 5))
+plt.rc('figure', figsize=(10, 8))
 
-# Set seaborn aesthetic parameters to defaults
 sns.set()
 
 df_train = pd.read_csv('../data/titanic/train.csv')
@@ -726,14 +719,14 @@ births_by_date.index = [
     pd.datetime(2012, month, day) for (month, day) in births_by_date.index
 ]
 
-fig, ax = plt.subplots(figsize=(12, 4))
+fig, ax = plt.subplots(figsize=(12, 8))
 births_by_date.plot(ax=ax)
 show()
 
 
 # 畫上一些註解
 
-fig, ax = plt.subplots(figsize=(12, 4))
+fig, ax = plt.subplots(figsize=(12, 8))
 births_by_date.plot(ax=ax)
 
 # Add labels to the plot
@@ -801,7 +794,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-fig, ax = plt.subplots(figsize=(12, 4))
+fig, ax = plt.subplots(figsize=(12, 8))
 births_by_date.plot(ax=ax)
 
 # Add labels to the plot
@@ -927,7 +920,7 @@ show()
 
 # Notice that we've removed the labels (but kept the ticks/gridlines) from the x axis, and removed the ticks (and thus the labels as well) from the y axis. Having no ticks at all can be useful in many situations—for example, when you want to show a grid of images. For instance, consider the following figure, which includes images of different faces, an example often used in supervised machine learning problems (see, for example, In-Depth: Support Vector Machines):
 
-fig, ax = plt.subplots(5, 5, figsize=(5, 5))
+fig, ax = plt.subplots(5, 5, figsize=(12, 8))
 fig.subplots_adjust(hspace=0, wspace=0)
 
 # Get some face data from scikit-learn
@@ -1085,12 +1078,12 @@ with plt.style.context('stylename'):
 
 def hist_and_lines():
     np.random.seed(0)
-    fig, ax = plt.subplots(1, 2, figsize=(11, 4))
+    fig, ax = plt.subplots(1, 2, figsize=(12, 8))
     ax[0].hist(np.random.randn(1000))
     for i in range(3):
         ax[1].plot(np.random.rand(10))
     ax[1].legend(["a", "b", "c"], loc="lower left")
-    plt.show()
+    show()
 
 
 # Default style
@@ -1128,10 +1121,6 @@ with plt.style.context("dark_background"):
 
 with plt.style.context("grayscale"):
     hist_and_lines()
-
-# Seaborn style
-
-import seaborn
 
 hist_and_lines()
 
@@ -1283,14 +1272,14 @@ print("------------------------------------------------------------")  # 60個
 from mpl_toolkits.basemap import Basemap
 
 """
-plt.figure(figsize=(8, 8))
+plt.figure(figsize=(12, 8))
 m = Basemap(projection='ortho', resolution=None, lat_0=50, lon_0=-100)
 m.bluemarble(scale=0.5)
 show()
 
 
 
-fig = plt.figure(figsize=(8, 8))
+fig = plt.figure(figsize=(12, 8))
 m = Basemap(projection='lcc', resolution=None,
             width=8E6, height=8E6, 
             lat_0=45, lon_0=-100,)
@@ -1325,7 +1314,7 @@ def draw_map(m, scale=0.2):
 
 #Cylindrical projections
 
-fig = plt.figure(figsize=(8, 6), edgecolor='w')
+fig = plt.figure(figsize=(12, 8), edgecolor='w')
 m = Basemap(projection='cyl', resolution=None,
             llcrnrlat=-90, urcrnrlat=90,
             llcrnrlon=-180, urcrnrlon=180, )
@@ -1334,7 +1323,7 @@ show()
 
 #Pseudo-cylindrical projections
 
-fig = plt.figure(figsize=(8, 6), edgecolor='w')
+fig = plt.figure(figsize=(12, 8), edgecolor='w')
 m = Basemap(projection='moll', resolution=None,
             lat_0=0, lon_0=0)
 draw_map(m)
@@ -1342,7 +1331,7 @@ show()
 
 # Perspective projections
 
-fig = plt.figure(figsize=(8, 8))
+fig = plt.figure(figsize=(12, 8))
 m = Basemap(projection='ortho', resolution=None,
             lat_0=50, lon_0=0)
 draw_map(m)
@@ -1350,7 +1339,7 @@ show()
 
 # Conic projections
 
-fig = plt.figure(figsize=(8, 8))
+fig = plt.figure(figsize=(12, 8))
 m = Basemap(projection='lcc', resolution=None,
             lon_0=0, lat_0=50, lat_1=45, lat_2=55,
             width=1.6E7, height=1.2E7)
@@ -1362,6 +1351,7 @@ print("------------------------------------------------------------")  # 60個
 #Drawing a Map Background
 
 from mpl_toolkits.basemap import Basemap
+
 fig, ax = plt.subplots(1, 2, figsize=(12, 8))
 
 for i, res in enumerate(['l', 'h']):
@@ -1389,7 +1379,7 @@ population = cities['population_total'].values
 area = cities['area_total_km2'].values
 
 # 1. Draw the map background
-fig = plt.figure(figsize=(8, 8))
+fig = plt.figure(figsize=(12, 8))
 m = Basemap(projection='lcc', resolution='h', 
             lat_0=37.5, lon_0=-119,
             width=1E6, height=1.2E6)
@@ -1438,7 +1428,7 @@ lon = data.variables["lon"][:]
 lon, lat = np.meshgrid(lon, lat)
 temp_anomaly = data.variables["tempanomaly"][timeindex]
 
-fig = plt.figure(figsize=(10, 8))
+fig = plt.figure(figsize=(12, 8))
 m = Basemap(
     projection="lcc",
     resolution="c",

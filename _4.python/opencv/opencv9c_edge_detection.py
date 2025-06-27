@@ -14,44 +14,35 @@ cv2.Laplacian()
 
 from opencv_common import *
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
 lena_filename = "data/edge_detection/lena.jpg"
 lena_gray_filename = (
     "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 )
-lena_color_filename = (
-    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
-)
 
-barbara_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
-'''
 print("------------------------------------------------------------")  # 60個
 # cv2.Canny() ST
-print("------------------------------------------------------------")  # 60個
-
-I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(I, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
 # Canny 邊緣檢測
-edge = cv2.Canny(I, 50, 200)
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(edge, cv2.COLOR_BGR2RGB))
-plt.title("Canny 邊緣檢測")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread(lena_filename, cv2.IMREAD_GRAYSCALE)
+src = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 黑白讀取
+
+# 高斯模糊，边缘检测需要的
+# blur_gray = cv2.GaussianBlur(src, (3, 3), 0)
+# image_blur = cv2.GaussianBlur(image, (5, 5), 0)
+# src = cv2.GaussianBlur(src, (3, 3), 0)
 
 dst1 = cv2.Canny(src, 50, 100)  # minVal=50, maxVal=100
 dst2 = cv2.Canny(src, 50, 200)  # minVal=50, maxVal=200
+dst3 = cv2.Canny(src, 100, 200)
+dst4 = cv2.Canny(src, 50, 150)
+dst5 = cv2.Canny(src, 128, 200)
+dst6 = cv2.Canny(src, 32, 128)
+
+# 白線膨脹
+dilate = cv2.dilate(dst3, None)
+
+# 白線侵蝕
+erode = cv2.erode(dst3, None)
 
 plt.figure(figsize=(12, 8))
 plt.subplot(231)
@@ -66,68 +57,17 @@ plt.subplot(233)
 plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))
 plt.title("Canny 2")
 
-src = cv2.imread(lena_filename, cv2.IMREAD_GRAYSCALE)
-
-# 高斯模糊化，Canny边缘检测需要的
-blur_gray = cv2.GaussianBlur(src, (3, 3), 0)
-
-threshold_1 = 30  # 強邊緣strong edge
-threshold_2 = 60  # 弱邊緣weak edge
-edges = cv2.Canny(blur_gray, threshold_1, threshold_2)
-
 plt.subplot(234)
-plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
-plt.title("Canny")
+plt.imshow(cv2.cvtColor(dst3, cv2.COLOR_BGR2RGB))
+plt.title("Canny 3")
 
 plt.subplot(235)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
+plt.imshow(cv2.cvtColor(dilate, cv2.COLOR_BGR2RGB))
+plt.title("dilate")
 
 plt.subplot(236)
-plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
-plt.title("Canny")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-image = cv2.imread(barbara_filename, 0)
-
-plt.figure(figsize=(12, 8))
-plt.subplot(231)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-# 高斯模糊化，Canny边缘检测需要的
-image_blur = cv2.GaussianBlur(image, (5, 5), 0)
-
-# 进行边缘检测，减少图像空间中需要检测的点数量
-image_canny = cv2.Canny(image_blur, 50, 150)
-
-plt.subplot(232)
-plt.imshow(cv2.cvtColor(image_canny, cv2.COLOR_BGR2RGB))
-plt.title("Canny")
-
-print("------------------------------")  # 30個
-
-filename = lena_gray_filename
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
-image_canny1 = cv2.Canny(image, 128, 200)
-image_canny2 = cv2.Canny(image, 32, 128)
-
-plt.subplot(234)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(235)
-plt.imshow(cv2.cvtColor(image_canny1, cv2.COLOR_BGR2RGB))
-plt.title("Canny 1")
-
-plt.subplot(236)
-plt.imshow(cv2.cvtColor(image_canny2, cv2.COLOR_BGR2RGB))
-plt.title("Canny 2")
+plt.imshow(cv2.cvtColor(erode, cv2.COLOR_BGR2RGB))
+plt.title("erode")
 
 show()
 
@@ -138,7 +78,7 @@ print("CannyThreshold")
 
 
 def CannyThreshold(lowThreshold):
-    # 高斯模糊化，Canny边缘检测需要的
+    # 高斯模糊，边缘检测需要的
     detected_edges = cv2.GaussianBlur(gray, (3, 3), 0)
     detected_edges = cv2.Canny(
         detected_edges, lowThreshold, lowThreshold * ratio, apertureSize=kernel_size
@@ -161,37 +101,6 @@ cv2.createTrackbar(
 CannyThreshold(0)  # 初始化
 if cv2.waitKey(0) == 27:
     cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("Canny1")
-
-original_img = cv2.imread("data/lena.png", 0)
-
-# 高斯模糊化，Canny边缘检测需要的
-img1 = cv2.GaussianBlur(original_img, (3, 3), 0)
-canny = cv2.Canny(img1, 50, 150)
-
-# 形態學：邊緣檢測
-_, Thr_img = cv2.threshold(
-    original_img, 210, 255, cv2.THRESH_BINARY
-)  # 設定紅色通道閾值210（閾值影響梯度運算效果）
-
-kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))  # 定義矩形結構元素
-gradient = cv2.morphologyEx(Thr_img, cv2.MORPH_GRADIENT, kernel)  # 梯度
-
-plt.subplot(131)
-cv2.imshow("原始圖像", original_img)
-
-plt.subplot(132)
-cv2.imshow("梯度", gradient)
-
-plt.subplot(133)
-cv2.imshow("Canny函數", canny)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -274,17 +183,16 @@ plt.title("dst=dstx+dsty")
 
 show()
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 影像邊緣檢測Sobel()函數
 
-src = cv2.imread(filename)
+src = cv2.imread(filename2)
 
 kernel_size = (3, 3)
 
-# 高斯模糊化，Canny边缘检测需要的
+# 高斯模糊，边缘检测需要的
 blur_image = cv2.GaussianBlur(src, kernel_size, 0)
 
 # 水平方向梯度
@@ -343,7 +251,7 @@ print("使用 Sobel()")
 
 src = cv2.imread("data/edge_detection/geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
 
-# 高斯模糊，Canny边缘检测需要的
+# 高斯模糊，边缘检测需要的
 src = cv2.GaussianBlur(src, (3, 3), 0)  # 降低噪音
 
 plt.figure(figsize=(12, 8))
@@ -444,6 +352,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = lena_gray_filename
+
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
 print("顯示 Sobel 效果 6")
@@ -554,7 +463,7 @@ print("使用 Scharr() 灰階")
 
 src = cv2.imread(lena_filename, cv2.IMREAD_GRAYSCALE)  # 黑白讀取
 
-# 高斯模糊，Canny边缘检测需要的
+# 高斯模糊，边缘检测需要的
 src = cv2.GaussianBlur(src, (3, 3), 0)  # 降低噪音
 
 # Scharr()函數
@@ -670,7 +579,7 @@ print("使用 Laplacian()")
 
 src = cv2.imread("data/edge_detection/geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
 
-# 高斯模糊，Canny边缘检测需要的
+# 高斯模糊，边缘检测需要的
 src = cv2.GaussianBlur(src, (3, 3), 0)  # 降低噪音
 
 plt.figure(figsize=(12, 8))
@@ -967,6 +876,7 @@ HuM2 = cv2.HuMoments(cv2.moments(gray2)).flatten()
 
 # ----------------計算圖像3的Hu矩-------------------
 filename = lena_gray_filename
+
 image3 = cv2.imread(filename)
 gray3 = cv2.cvtColor(image3, cv2.COLOR_BGR2GRAY)
 HuM3 = cv2.HuMoments(cv2.moments(gray3)).flatten()
@@ -2217,24 +2127,39 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
+print("梯度 Gradient")
+
+src = cv2.imread("data/lena.png", 0)
+
+# 高斯模糊，边缘检测需要的
+img1 = cv2.GaussianBlur(src, (3, 3), 0)
+
+
+# 形態學：邊緣檢測
+_, Thr_img = cv2.threshold(src, 210, 255, cv2.THRESH_BINARY)  # 設定紅色通道閾值210（閾值影響梯度運算效果）
+
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))  # 定義矩形結構元素
+gradient = cv2.morphologyEx(Thr_img, cv2.MORPH_GRADIENT, kernel)  # 梯度
+
+plt.subplot(131)
+cv2.imshow("Original", src)
+
+plt.subplot(132)
+cv2.imshow("Gradient", gradient)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 src = np.random.randint(-256, 256, size=[3, 5], dtype=np.int16)
 print(f"src = \n {src}")
@@ -2338,50 +2263,11 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------")  # 30個
 
 # cv2存圖
-# cv2.imwrite('person-masked.jpg', masked)
-# cv2.imwrite('girl_1.png', img_a*255)
+# cv2.imwrite('tmp_image.jpg', image)
+# plt.imsave('tmp_image.png', image)
 
-# plt.imsave('girl_2.png', img_a)
-
-
-dddddddddddddddddddddddd
 src = cv2.imread("data/edge_detection/snow.jpg")  # 彩色讀取
-
 src = cv2.imread("data/edge_detection/geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
-'''
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-original_img = cv2.imread("data/lena.png", 0)
-
-# 高斯模糊化，Canny边缘检测需要的
-img1 = cv2.GaussianBlur(original_img, (3, 3), 0)
-canny = cv2.Canny(img1, 50, 150)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_4.python/opencv/data/gray_scale.jpg"
-
-image_gray = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 黑白讀取
-
-dst1 = cv2.Canny(image_gray, 50, 100)  # minVal=50, maxVal=100
-dst2 = cv2.Canny(image_gray, 50, 200)  # minVal=50, maxVal=200
-
-# Canny
-CANNY_THRESH_1 = 100
-CANNY_THRESH_2 = 200
-edges = cv2.Canny(image_gray, 10, 255)
-edges = cv2.Canny(image_gray, 100, 200)
-
-plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
-show()
-
-# dilate
-edges = cv2.dilate(edges, None)
-
-# erode
-edges = cv2.erode(edges, None)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

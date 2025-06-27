@@ -80,7 +80,9 @@ show()
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 02")
-lena_color_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
+lena_color_filename = (
+    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
+)
 image1 = cv2.imread(lena_color_filename)
 
 # 建立mask
@@ -118,7 +120,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 03")
-lena_color_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
+lena_color_filename = (
+    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
+)
 o = cv2.imread(lena_color_filename)
 
 image2 = cv2.cvtColor(o, cv2.COLOR_BGR2RGB)
@@ -152,7 +156,9 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 04")
 
-lena_color_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
+lena_color_filename = (
+    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
+)
 o = cv2.imread(lena_color_filename)
 
 bgd = np.zeros((1, 65), np.float64)
@@ -437,36 +443,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("opencv 36 測試 凸透鏡 效果")
-
-
-def convex(src_image, raw, effect):
-    col, row, channel = raw[:]  # 取得圖片資訊
-    cx, cy, r = effect[:]  # 取得凸透鏡的範圍
-    output = np.zeros([row, col, channel], dtype=np.uint8)  # 產生空白畫布
-    for y in range(row):
-        for x in range(col):
-            d = ((x - cx) * (x - cx) + (y - cy) * (y - cy)) ** 0.5  # 計算每個點與中心點的距離
-            if d <= r:
-                nx = int((x - cx) * d / r + cx)  # 根據不同的位置，產生新的 nx，越靠近中心形變越大
-                ny = int((y - cy) * d / r + cy)  # 根據不同的位置，產生新的 ny，越靠近中心形變越大
-                output[y, x, :] = src_image[ny, nx, :]  # 產生新的圖
-            else:
-                output[y, x, :] = src_image[y, x, :]  # 如果在半徑範圍之外，原封不動複製過去
-    return output
-
-
-image = cv2.imread(filename1)
-image = convex(image, (300, 400, 3), (150, 130, 100))  # 提交參數數值，進行凸透鏡效果
-
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("凸透鏡 效果")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("opencv 37")
 
 filename1t = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
@@ -575,101 +551,6 @@ while True:
     cv2.imshow("ImageShow", show_image)
 
 cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 46 測試 cv2.linearPolar 空間變換 極座標變換")
-
-src = cv2.imread(filename1, cv2.IMREAD_ANYCOLOR)
-
-# 圖像的極坐標變換
-dst = cv2.linearPolar(src, (508, 503), 550, cv2.INTER_LINEAR)
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.title("極座標變換")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 47 測試 cv2.logPolar 空間變換 極座標變換")
-
-src = cv2.imread(filename1, cv2.IMREAD_ANYCOLOR)
-
-# 圖像的極坐標變換
-M = 150
-dst = cv2.logPolar(src, (400 // 2, 300 // 2), M, cv2.WARP_FILL_OUTLIERS)
-
-# 顯示極坐標變化的結果
-print(src.shape)
-print(dst.shape)
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.title("極座標變換")
-
-show()
-
-# 看不出什麼東西
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 51 邊緣擴充/擴充邊界 copyMakeBorder")
-
-image0 = cv2.imread(filename1)
-
-# 擴充邊界
-top = 50
-bottom = 100
-left = 150
-right = 200
-image1 = cv2.copyMakeBorder(image0, top, bottom, left, right, cv2.BORDER_DEFAULT)
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-plt.title("邊緣擴充")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("閾值分割 threshold")
-
-src = np.array(
-    [[123, 234, 68], [33, 51, 17], [48, 98, 234], [129, 89, 27], [45, 167, 134]],
-    np.uint8,
-)
-# 手動設置閾值
-the = 150
-maxval = 255
-dst = cv2.threshold(src, the, maxval, cv2.THRESH_BINARY)
-
-# Otsu 閾值處理
-otsuThe = 0
-otsuThe, dst_Otsu = cv2.threshold(src, otsuThe, maxval, cv2.THRESH_OTSU)
-print(otsuThe, dst_Otsu)
-
-# TRIANGLE 閾值處理
-triThe = 0
-triThe, dst_tri = cv2.threshold(src, triThe, maxval, cv2.THRESH_TRIANGLE)
-print(triThe, dst_tri)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1099,51 +980,6 @@ show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
-filename_cs1 = "C:/_git/vcs/_4.python/opencv/data/cs1.bmp"
-
-# 讀取圖像，並轉為灰階與二值化處理
-image = cv2.imread(filename_cs1)
-
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉為灰階圖像
-_, thresh = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY)
-
-# 找出圖像中的輪廓
-cnts, hir = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-# 找出最大的輪廓
-filtered_contours = max(cnts, key=cv2.contourArea)
-
-# 取得該輪廓的最小包圍矩形及角度
-rect = cv2.minAreaRect(filtered_contours)  # ((center_x, center_y), (w, h), angle)
-box = cv2.boxPoints(rect)  # 轉換為4個頂點
-
-# box = np.int0(box)  # 將頂點轉換為整數座標 #np 1.24 以下使用 
-box = np.intp(box)
-
-# 繪製最小包圍矩形
-cv2.drawContours(image, [box], 0, RED, 3)  # 綠色框，線寬為2
-
-# 取得旋轉矩形的中心點和旋轉角度
-(center_x, center_y), (w, h), angle = rect
-
-# 顯示中心點和旋轉角度在圖片上
-center_text = f"Center: ({int(center_x)}, {int(center_y)})"
-angle_text = f"Angle: {int(angle)} degrees"
-
-cv2.circle(image, (int(center_x), int(center_y)), 10, BLUE, -1)  # 圆
-
-# 在圖像上寫入文字
-cv2.putText(image, center_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)  # 藍色字體
-cv2.putText(image, angle_text, (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)  # 藍色字體
-
-# 顯示結果
-cv2.imshow("Image", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 # 建立 500 X 500 之白圖
 width, height = 305, 400  # 影像寬, 影像高
@@ -1216,6 +1052,7 @@ filter2D(src, ddepth, kernel[, dst[, anchor[, delta[, borderType]]]])
     anchor参数指定卷积核的锚点位置，当它为默认值(-1，-1)时， 以卷积核的中心为锚点
 使用filter2D()制作的各种图像处理效果
 """
+
 lena_filename = "C:/_git/vcs/_4.python/opencv/data/lena.jpg"
 src = cv2.imread(lena_filename)
 
@@ -1950,58 +1787,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Character_recognition.py
 
-img = cv2.imread("data/brain.jpg")
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-
-kernel = np.ones((3, 3), np.uint8)
-opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
-
-# sure background area
-sure_bg = cv2.dilate(opening, kernel, iterations=3)  # 膨胀
-
-# Finding sure foreground area
-dist_transform = cv2.distanceTransform(opening, 1, 5)
-ret, sure_fg = cv2.threshold(
-    dist_transform, 0.2 * dist_transform.max(), 255, 0
-)  # 参数改小了，出现不确定区域
-
-# Finding unknown region
-sure_fg = np.uint8(sure_fg)
-unknown = cv2.subtract(sure_bg, sure_fg)  # 减去前景
-
-cv2.imshow("p", sure_fg)
-
-plt.subplot(221)
-plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB))
-plt.title("")
-
-plt.subplot(221)
-plt.imshow(cv2.cvtColor(thresh, cv2.COLOR_BGR2RGB))
-plt.title("")
-
-plt.subplot(223)
-plt.imshow(cv2.cvtColor(opening, cv2.COLOR_BGR2RGB))
-plt.title("")
-
-plt.subplot(224)
-plt.imshow(cv2.cvtColor(sure_fg, cv2.COLOR_BGR2RGB))
-plt.title("")
-
-plt.show()
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-
-"""
 print("------------------------------------------------------------")  # 60個
 # cv2.grabCut 影像擷取 ST
 print("------------------------------------------------------------")  # 60個
@@ -2827,7 +2613,9 @@ print("------------------------------------------------------------")  # 60個
 
 # Prewitt horizontal edge-emphasizing filter 邊緣加強的影像處理技術
 
-lena_gray_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+lena_gray_filename = (
+    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+)
 image = cv2.imread(lena_gray_filename)
 
 print("filter2D 效果")
@@ -2967,7 +2755,9 @@ def saltpepper(image, n):
 
 
 # 上面就是椒鹽噪聲函數，下面是使用方法，大家可以愉快的玩耍了
-lena_gray_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+lena_gray_filename = (
+    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+)
 
 image0 = cv2.imread(lena_gray_filename)
 image = cv2.imread(lena_gray_filename)
@@ -3094,15 +2884,11 @@ sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 # 新進 與 測試
 
-"""
-    image = image[:, int((w-h)/2):int((h+(w-h)/2))]   # 將影像變成正方形
-"""
+# image = image[:, int((w-h)/2):int((h+(w-h)/2))]   # 將影像變成正方形
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3213,7 +2999,6 @@ print(f"image[1,4] = {image[1, 4]}")  # 列出特定像素點的內容
 
 """
 仿射轉換（Affine transformation），又稱仿射映射，是指在幾何中，對一個向量空間進行一次線性轉換並接上一個平移，轉換為另一個向量空間。
-
 """
 # ------------------------------------------------------------
 
@@ -3448,4 +3233,15 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+src = cv2.imread("data/edge_detection/geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
+src = cv2.GaussianBlur(src, (3, 3), 0)  # 降低噪音
 
+
+# Canny()函數
+dst_canny = cv2.Canny(src, 50, 100)  # minVal=50, maxVal=100
+
+plt.imshow(cv2.cvtColor(dst_canny, cv2.COLOR_BGR2RGB))
+plt.title("Canny")
+
+
+output = np.zeros([row, col, channel], dtype=np.uint8)  # 產生空白畫布
