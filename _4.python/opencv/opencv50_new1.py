@@ -698,7 +698,9 @@ print("opencv 101")
 # 使用remap()實現圖形拖曳效果
 # 從 (tx,ty) 拖曳到 (sx,sy)
 
-img = cv2.imread("data/lena.jpg")
+filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+img = cv2.imread(filename3)
+
 h, w = img.shape[:2]
 gridy, gridx = np.mgrid[:h, :w]
 tx, ty = 313, 316
@@ -894,7 +896,10 @@ print("opencv 110")
 #SURF特征比對
 
 #SURF()找到的關鍵點和每個關鍵點的局部圖形
-img_gray1 = cv2.imread("data/lena.jpg", cv2.IMREAD_GRAYSCALE)
+
+filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+img_gray1 = cv2.imread(filename3, cv2.IMREAD_GRAYSCALE)
+
 surf = cv2.SURF(2000, 2)
 key_points1 = surf.detect(img_gray1)
 key_points1.sort(key=lambda kp:kp.size, reverse=True)
@@ -1050,8 +1055,8 @@ filter2D(src, ddepth, kernel[, dst[, anchor[, delta[, borderType]]]])
 使用filter2D()制作的各种图像处理效果
 """
 
-lena_filename = "C:/_git/vcs/_4.python/opencv/data/lena.jpg"
-src = cv2.imread(lena_filename)
+filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+src = cv2.imread(filename3)
 
 kernel1_name = "低通濾波器"
 kernel1 = np.array([[1, 1, 1], [1, 2, 1], [1, 1, 1]]) * 0.1
@@ -1789,7 +1794,7 @@ print("------------------------------------------------------------")  # 60個
 # cv2.grabCut 影像擷取 ST
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread(filename2)  # 讀取影像
+src = cv2.imread(filename2)
 
 mask = np.zeros(src.shape[:2], np.uint8)  # 建立遮罩, 大小和src相同
 bgdModel = np.zeros((1, 65), np.float64)  # 建立內部用暫時計算陣列
@@ -1822,7 +1827,8 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/tmp1/hung.jpg")  # 讀取影像
+src = cv2.imread("data/tmp1/hung.jpg")
+
 mask = np.zeros(src.shape[:2], np.uint8)  # 建立遮罩, 大小和src相同
 bgdModel = np.zeros((1, 65), np.float64)  # 建立內部用暫時計算陣列
 fgdModel = np.zeros((1, 65), np.float64)  # 建立內部用暫時計算陣列
@@ -1831,7 +1837,7 @@ rect = (10, 30, 380, 360)  # 建立ROI區域
 cv2.grabCut(src, mask, rect, bgdModel, fgdModel, 3, cv2.GC_INIT_WITH_RECT)
 
 """ NG
-maskpict = cv2.imread("data/tmp1/hung_mask.jpg")  # 讀取影像
+maskpict = cv2.imread("data/tmp1/hung_mask.jpg")
 newmask = cv2.imread("data/tmp1/hung_mask.jpg", cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 mask[newmask == 0] = 0  # 白色內容則確定是前景
 mask[newmask == 255] = 1  # 黑色內容則確定是背景
@@ -1859,7 +1865,9 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/tmp1/lena.jpg")  # 讀取影像
+filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+src = cv2.imread(filename3)
+
 bgdModel = np.zeros((1, 65), np.float64)  # 建立內部用暫時計算陣列
 fgdModel = np.zeros((1, 65), np.float64)  # 建立內部用暫時計算陣列
 rect = (30, 30, 280, 280)  # 建立ROI區域
@@ -2254,7 +2262,7 @@ capture = cv2.VideoCapture(video_filename)  # 建立 VideoCapture 物件
 
 if capture.isOpened():
     while True:
-        sucess, img = capture.read()  # 讀取影像
+        sucess, img = capture.read()
         if sucess:
             edge = get_edge(img)  # 邊緣偵測
             roi = get_roi(edge)  # 取得 ROI
@@ -3172,7 +3180,8 @@ print("size = {:07d} bytes".format(fsize))
 
 # 將同一張圖片存成不同品質圖片
 
-img = cv2.imread("data/lena.jpg")
+filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+img = cv2.imread(filename3)
 
 for quality in [90, 60, 30]:
     cv2.imwrite(

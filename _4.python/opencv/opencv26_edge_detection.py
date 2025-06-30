@@ -14,8 +14,6 @@ cv2.Laplacian()
 
 from opencv_common import *
 
-lena_filename = "data/edge_detection/lena.jpg"
-
 print("------------------------------------------------------------")  # 60個
 # cv2.Canny() ST
 # Canny 邊緣檢測
@@ -219,7 +217,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("使用 Sobel() 灰階")
 
-src = cv2.imread(lena_filename, cv2.IMREAD_GRAYSCALE)  # 黑白讀取
+src = cv2.imread(filename3, cv2.IMREAD_GRAYSCALE)  # 黑白讀取
 
 # Sobel()函數
 dstx = cv2.Sobel(src, cv2.CV_32F, 1, 0)  # 計算 x 軸影像梯度
@@ -458,7 +456,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("使用 Scharr() 灰階")
 
-src = cv2.imread(lena_filename, cv2.IMREAD_GRAYSCALE)  # 黑白讀取
+src = cv2.imread(filename3, cv2.IMREAD_GRAYSCALE)  # 黑白讀取
 
 # 高斯模糊，边缘检测需要的
 src = cv2.GaussianBlur(src, (3, 3), 0)  # 降低噪音

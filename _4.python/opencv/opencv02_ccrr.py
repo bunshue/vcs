@@ -960,7 +960,8 @@ print("opencv 98")
 # 幾何變換
 
 # 對圖形進行仿射變換
-image = cv2.imread("data/lena.jpg")
+image = cv2.imread(filename3)
+
 H, W, D = image.shape  # d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
 h, w = image.shape[:2]
 src = np.array([[0, 0], [w - 1, 0], [0, h - 1]], dtype=np.float32)

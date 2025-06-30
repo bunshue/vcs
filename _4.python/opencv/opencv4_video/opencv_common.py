@@ -57,7 +57,7 @@ print("------------------------------------------------------------")  # 60個
 
 filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
-filename3 = "C:/_git/vcs/_4.python/opencv/data/lena.jpg"
+filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 filename4 = "C:/_git/vcs/_1.data/______test_files1/ims01.bmp"
 video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
 
