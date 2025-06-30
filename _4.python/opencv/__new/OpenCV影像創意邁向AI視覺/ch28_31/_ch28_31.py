@@ -1,16 +1,6 @@
 """
 
 """
-# OpenCV_顏色共同
-RED = (0, 0, 255)  # B G R
-GREEN = (0, 255, 0)  # B G R
-BLUE = (255, 0, 0)  # B G R
-CYAN = (255, 255, 0)  # B G R
-MAGENTA = (255, 0, 255)  # B G R
-YELLOW = (0, 255, 255)  # B G R
-BLACK = (0, 0, 0)  # B G R
-WHITE = (255, 255, 255)  # B G R
-colors = [RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK, WHITE]
 
 import os
 import cv2
@@ -20,121 +10,10 @@ from PIL import Image
 
 print("------------------------------------------------------------")  # 60個
 
-# OpenCV 人臉識別分類器
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
-
 filename = "C:/_git/vcs/_4.python/opencv/data/_face/face01.jpg"
 
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-name = "david2"
-faceName = "tmptmp_" + name + ".jpg"  # 人臉影像
-
-print("按 A 存圖")
-
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-cap = cv2.VideoCapture(1)
-while cap.isOpened():  # 攝影機有開啟就執行迴圈
-    ret, img = cap.read()  # 讀取影像
-    faces = face_cascade_classifier.detectMultiScale(
-        img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
-    )
-    for x, y, w, h in faces:
-        cv2.rectangle(img, (x, y), (x + w, y + h), BLUE, 2)  # 藍色框住人臉
-    cv2.imshow("Photo", img)  # 顯示影像在OpenCV視窗
-    if ret == True:  # 讀取影像如果成功
-        key = cv2.waitKey(200)  # 0.2秒檢查一次
-        if key == ord("a") or key == ord("A"):  # 如果按A或a
-            imageCrop = img[y : y + h, x : x + w]  # 裁切
-            imageResize = cv2.resize(imageCrop, (160, 160))  # 重製大小
-            cv2.imwrite(faceName, imageResize)  # 儲存人臉影像
-            print("已存圖, 檔案 :", faceName)
-            break
-
-cap.release()
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-name = "david3"
-
-print("按 A 存圖")
-
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-cap = cv2.VideoCapture(1)
-num = 1  # 影像編號
-while cap.isOpened():  # 攝影機有開啟就執行迴圈
-    ret, img = cap.read()  # 讀取影像
-    faces = face_cascade_classifier.detectMultiScale(
-        img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
-    )
-    for x, y, w, h in faces:
-        cv2.rectangle(img, (x, y), (x + w, y + h), BLUE, 2)  # 藍色框住人臉
-    cv2.imshow("Photo", img)  # 顯示影像在OpenCV視窗
-    if ret == True:  # 讀取影像如果成功
-        key = cv2.waitKey(200)  # 0.2秒檢查一次
-        if key == ord("a") or key == ord("A"):  # 如果按A或a
-            imageCrop = img[y : y + h, x : x + w]  # 裁切
-            imageResize = cv2.resize(imageCrop, (160, 160))  # 重製大小
-            faceName = "tmptmptmp_" + name + str(num) + ".jpg"  # 儲存影像
-            cv2.imwrite(faceName, imageResize)  # 儲存人臉影像
-            print("已存圖, 檔案 :", faceName)
-            if num >= 5:  # 拍 5 張人臉後才終止
-                if num == 5:
-                    print(f"拍攝第 {num} 次人臉成功")
-                break
-            print(f"拍攝第 {num} 次人臉成功")
-            num += 1
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-name = "david4"
-total = 10  # eval(input("請輸入人臉需求數量 : "))
-
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
-
-cap = cv2.VideoCapture(1)
-num = 1  # 影像編號
-while cap.isOpened():  # 攝影機有開啟就執行迴圈
-    ret, img = cap.read()  # 讀取影像
-    faces = face_cascade_classifier.detectMultiScale(
-        img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
-    )
-    for x, y, w, h in faces:
-        cv2.rectangle(img, (x, y), (x + w, y + h), BLUE, 2)  # 藍色框住人臉
-    cv2.imshow("Photo", img)  # 顯示影像在OpenCV視窗
-    key = cv2.waitKey(200)
-    if ret == True:  # 讀取影像如果成功
-        imageCrop = img[y : y + h, x : x + w]  # 裁切
-        imageResize = cv2.resize(imageCrop, (160, 160))  # 重製大小
-        faceName = "tmptmptmptmp_" + name + str(num) + ".jpg"  # 儲存影像
-        cv2.imwrite(faceName, imageResize)  # 儲存人臉影像
-        print("已存圖, 檔案 :", faceName)
-        if num >= total:  # 拍指定人臉數後才終止
-            if num == total:
-                print(f"拍攝第 {num} 次人臉成功")
-            break
-        print(f"拍攝第 {num} 次人臉成功")
-        num += 1
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-# ch31_1.py
 
 pictPath = "haar_carplate.xml"  # 哈爾特徵檔路徑
 
@@ -161,13 +40,15 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+"""
 # ch31_2.py
 
 config = '--tessdata-dir "C:\\Program Files (x86)\\Tesseract-OCR\\tessdata"'
 text = pytesseract.image_to_string(Image.open("atq9305.jpg"), config=config)
 print(f"車號是 : {text}")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # ch31_3.py
@@ -197,6 +78,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # ch31_4.py
 
@@ -225,6 +107,7 @@ print(f"車號是 : {text}")
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # ch31_5.py
@@ -258,6 +141,7 @@ print(f"車號是 : {text}")
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # ch31_6.py
@@ -295,5 +179,6 @@ print("已存圖, 檔案 :", carFile)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
+"""
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
