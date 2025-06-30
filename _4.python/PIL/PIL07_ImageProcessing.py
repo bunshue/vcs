@@ -9,7 +9,9 @@ print("------------------------------------------------------------")  # 60個
 from PIL import Image
 from PIL import ImageFilter
 
-filename = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
+filename_lena_color = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+filename_lena_gray = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -41,7 +43,7 @@ image[i,j,k]
 """
 
 # 檔案 => PIL影像 => numpy陣列
-image = np.array(Image.open(filename))
+image = np.array(Image.open(filename2))
 
 # 隨機生成5000個椒鹽
 rows, cols, dims = image.shape
@@ -59,7 +61,7 @@ print("------------------------------------------------------------")  # 60個
 print("將圖像二值化，像素值大于 threshold 的變為1，否則變為0")
 
 # 檔案 => PIL影像 => 灰階 => numpy陣列
-image = np.array(Image.open(filename).convert("L"))
+image = np.array(Image.open(filename2).convert("L"))
 
 print("圖像二值化, 要灰階圖像")
 
@@ -94,10 +96,10 @@ print("偽色彩圖像處理")
 
 # filename = 'C:/_git/vcs/_1.data/______test_files1/pic_256X100.png'
 # filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+filename_lena_gray = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 
 # 檔案 => PIL影像
-image = Image.open(filename)
+image = Image.open(filename_lena_gray)
 
 # 彩色轉黑白
 # 轉換為灰度圖像
@@ -126,10 +128,8 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
 # 檔案 => PIL影像
-image0 = Image.open(filename)
+image0 = Image.open(filename2)
 
 # PIL影像 => 灰階
 image0 = image0.convert("L")
@@ -314,10 +314,8 @@ def defog(image, t_map, air, h, w):
     return dehaze_image
 
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-
 # 檔案 => PIL影像
-image = Image.open(filename)
+image = Image.open(filename1)
 
 [h, w] = image.size
 OMIGA = 0.8
@@ -375,10 +373,8 @@ print(transimage(image_path))
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
 print("二值化")
-image1 = Image.open(open(filename, "rb"))
+image1 = Image.open(open(filename2, "rb"))
 image2 = image1.point(lambda x: 0 if x < 128 else 255)
 
 print("------------------------------------------------------------")  # 60個

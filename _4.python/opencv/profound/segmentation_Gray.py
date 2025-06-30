@@ -25,12 +25,12 @@ print("------------------------------------------------------------")  # 60個
 
 import cv2
 
-filename = "C:/_git/vcs/_4.python/_data/lena_gray.bmp"
+filename_lena_color = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+filename_lena_gray = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 
 print("------------------------------------------------------------")  # 60個
 
-# 读取原始图像
-img = cv2.imread(filename)
+img = cv2.imread(filename_lena_gray)
 print(img.shape)
 
 # 图像二维像素转换为一维

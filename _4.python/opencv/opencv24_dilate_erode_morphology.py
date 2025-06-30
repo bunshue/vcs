@@ -570,7 +570,7 @@ print("------------------------------------------------------------")  # 60個
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/tophat.bmp"
 image1 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+filename = filename_lena_gray
 image2 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 
 print("morphologyEx 效果 4")
@@ -603,7 +603,7 @@ print("------------------------------------------------------------")  # 60個
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/blackhat.bmp"
 image1 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+filename = filename_lena_gray
 image2 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 
 print("morphologyEx 效果 5")

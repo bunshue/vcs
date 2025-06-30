@@ -1,11 +1,12 @@
 """
 影像的幾何變換
 
-C : cut
 C : copy
+C : cut, crop
 R : resize
 R : rotate
 
+# 影像縮放 resize
 resize() 的 interpolation
 INTER_NEAREST	0	最近插值法
 INTER_LINEAR	1	雙線性插值法，在插入點選擇4個點進行插值處理，這是預設的方法
@@ -13,48 +14,100 @@ INTER_CUBIC	2	雙三次插值法，可以創造更平滑的邊緣影像
 INTER_AREA	3	對影像縮小重新採樣的首選方法，但是影像放大時類似最近插值法
 INTER_LENCZOS4	4	Lencz的插值方法，這個方法會在x和y的方向分別對8個點進行插值
 
+# OpenCV中的五種縮放模式
+# 由快到慢
+# 1  N  INTER_NEAREST
+# 2  C  INTER_CUBIC
+# 3  L  INTER_LINEAR
+# 4  A  INTER_AREA
+# 5  L  INTER_LANCZOS4
+
+各種轉換
 AffineTransform
 PerspectiveTransform
-
 """
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from opencv_common import *
 
 print("------------------------------------------------------------")  # 60個
+# C : copy ST
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+# C : copy SP
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+# C : cut, crop ST
 print("------------------------------------------------------------")  # 60個
 
 # 裁剪圖片
 
-lena_color_filename = (
-    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
-)
-image = cv2.imread(lena_color_filename)
+image = cv2.imread(filename1)
 
-# 裁切區域的 x 與 y 座標（左上角）
-x_st, y_st = 100, 100
+# 裁切區域 x, y, w, h
+x_st, y_st, w, h = 120, 120, 100, 100
 
-# 裁切區域的長度與寬度
-w, h = 250, 250
-
-# 裁切圖片
+# 裁剪圖片
 crop_image = image[y_st : y_st + h, x_st : x_st + w]
 
-cv2.imshow("cropped", crop_image)  # 顯示圖片
-
 image_empty = np.zeros(image.shape, dtype=np.uint8)  # 依照原圖大小建立一個圖像的二維陣列
-
-# cv2.imshow("empty", image_empty)    #顯示圖片   #空圖, 全黑
-
 # 將擷取的圖貼到新建的黑圖
 image_empty[y_st : y_st + h, x_st : x_st + w] = crop_image
-cv2.imshow("cropped+new", image_empty)  # 顯示圖片
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure("裁剪圖片", figsize=(12, 8))
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(crop_image, cv2.COLOR_BGR2RGB))
+plt.title("裁剪圖片")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(image_empty, cv2.COLOR_BGR2RGB))
+plt.title("原圖大小貼上小圖")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+""" crop
+image = cv2.imread(filename1)
+x = 100
+y = 100
+w = 200
+h = 200
+crop_image = image[y : y + h, x : x + w]
+
+output = np.zeros((360, 480, 3), dtype="uint8")  # 產生黑色畫布
+output[x : x + w, y : y + h] = crop_image
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# crop
+
+image = cv2.imread(filename1)
+
+x, y, w, h = 100, 100, 200, 200
+crop_image = image[y : y + h, x : x + w]  # 取出陣列的範圍
+
+plt.imshow(cv2.cvtColor(crop_image, cv2.COLOR_BGR2RGB))
+plt.title("crop")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+# R : rotate
 print("------------------------------------------------------------")  # 60個
 
 # 影像旋轉
@@ -121,108 +174,53 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-# 影像縮放 resize
-# OpenCV中的五種縮放模式
-# 由快到慢
-# 1  N  INTER_NEAREST
-# 2  C  INTER_CUBIC
-# 3  L  INTER_LINEAR
-# 4  A  INTER_AREA
-# 5  L  INTER_LANCZOS4
-"""
-print("------------------------------------------------------------")  # 60個
+# R : resize
 print("------------------------------------------------------------")  # 60個
 
 print("縮放圖片 / 倍率縮放")
 
 image = cv2.imread(filename1)
-print("原圖大小 :", image.shape)
 
-plt.figure(figsize=(12, 8))
+plt.figure("縮放", figsize=(12, 8))
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.xlim(0, 500)  # x軸顯示邊界
 plt.ylim(500, 0)  # y軸顯示邊界
 plt.title("原圖")
 
+print("------------------------------")  # 30個
+
 H, W, D = image.shape  # d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
 
-image_resize1 = cv2.resize(image, (W * 2, H // 2))  # .resize 改變圖片大小W,H
+print("圖片拉成特定大小")
+width, height = 640, 480  # 影像寬, 影像高
+width, height = W * 2, H // 2  # 影像寬, 影像高
+width, height = int(W * 0.9), int(H * 1.1)  # 變瘦變高
+dsize = (width, height)
 
-print("縮放後大小 :", image_resize1.shape)
+image_resize1 = cv2.resize(image, dsize)  # .resize 改變圖片大小 至 dsize
+# image_resize1 = cv2.resize(image, (640, 480))  # resize 成 640x480 的圖
 
 plt.subplot(222)
 plt.imshow(cv2.cvtColor(image_resize1, cv2.COLOR_BGR2RGB))
 plt.xlim(0, 500)  # x軸顯示邊界
 plt.ylim(500, 0)  # y軸顯示邊界
-plt.title("縮放 W兩倍 H一半")
+plt.title("縮放")
 
-
-print("圖片拉成 640 X 480")
-width, height = 640, 480  # 影像寬, 影像高
-dsize = (width, height)
-
-image_resize1b = cv2.resize(image, dsize)  # 重設影像大小
-
-plt.subplot(223)
-plt.imshow(cv2.cvtColor(image_resize1b, cv2.COLOR_BGR2RGB))
-plt.xlim(0, 500)  # x軸顯示邊界
-plt.ylim(500, 0)  # y軸顯示邊界
-plt.title("圖片拉成 640 X 480")
-
+print("------------------------------")  # 30個
 
 print("倍率縮放")
 
 # 縮放的倍率 fx fy
 image_resize2 = cv2.resize(
     image, None, fx=2.00, fy=0.50, interpolation=cv2.INTER_LINEAR
-)  # .resize 改變圖片大小W,H
+)
 
-plt.subplot(224)
+plt.subplot(223)
 plt.imshow(cv2.cvtColor(image_resize2, cv2.COLOR_BGR2RGB))
 plt.xlim(0, 500)  # x軸顯示邊界
 plt.ylim(500, 0)  # y軸顯示邊界
 plt.title("倍率縮放 W兩倍 H一半")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-image = cv2.imread(filename1)
-
-H, W, D = image.shape  # d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
-
-print("原圖大小 :", image.shape)
-
-size = (int(W * 0.9), int(H * 1.1))  # 變瘦變高
-image2 = cv2.resize(image, size)  # .resize 改變圖片大小W,H
-print("縮放後大小 :", image2.shape)
-
-plt.figure("縮放", figsize=(12, 8))
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.xlim(0, 500)  # x軸顯示邊界
-plt.ylim(500, 0)  # y軸顯示邊界
-plt.title("原圖")
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
-plt.xlim(0, 500)  # x軸顯示邊界
-plt.ylim(500, 0)  # y軸顯示邊界
-plt.title("resize 變瘦1成變高1成")
-
-image3 = cv2.resize(image, None, fx=1.5, fy=0.5)  # .resize 改變圖片大小W,H
-print("縮放後大小 :", image3.shape)
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
-plt.xlim(0, 500)  # x軸顯示邊界
-plt.ylim(500, 0)  # y軸顯示邊界
-plt.title("resize x變1.5倍, y變一半")
 
 show()
 
@@ -245,7 +243,6 @@ def resize_image(image0):
 
 
 image1 = cv2.imread(filename1)
-print("原圖大小 : ", image1.shape)
 
 image2 = resize_image(cv2.imread(filename1))
 print("將影像改變到寬高最大為480等比例縮放")
@@ -269,98 +266,49 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("用np建立一個影像陣列")
+print("馬賽克 全圖")
+image = cv2.imread(filename2)
 
-W = 640
-H = 480
-D = 3
+H, W, D = image.shape  # d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
 
-# 建立陣列
-image = np.ones([H, W, D], dtype=np.uint8) * 128  # 填滿 128
+level = 15  # 馬賽克程度, 縮小比例 ( 可當作馬賽克的等級 )
+h = H // level
+w = W // level
 
-# 改變陣列內容
-image[:, :, 0] = 0
-# 第0通道 B
-image[:, :, 1] = 255
-# 第1通道 G
-image[:, :, 2] = 255
-# 第2通道 R
+# 先縮小N倍
+mosaic1 = cv2.resize(image, (w, h), interpolation=cv2.INTER_LINEAR)
 
-# 做resize
-size = H, W
-print(size)
-rst = cv2.resize(image, size)  # .resize 改變圖片大小W,H
+# 再放大N倍
+mosaic2 = cv2.resize(mosaic1, (W, H), interpolation=cv2.INTER_NEAREST)
 
-print("原圖大小 :", image.shape)
-print("縮放後大小 :", rst.shape)
-
-plt.figure(figsize=(12, 8))
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.xlim(0, 700)  # x軸顯示邊界
-plt.ylim(700, 0)  # y軸顯示邊界
-plt.title("原圖 640X480")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
-plt.xlim(0, 700)  # x軸顯示邊界
-plt.ylim(700, 0)  # y軸顯示邊界
-plt.title("resize 480X640")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-image = cv2.imread(filename1)
-x = 100
-y = 100
-w = 200
-h = 200
-crop_image = image[y : y + h, x : x + w]
-
-output = np.zeros((360, 480, 3), dtype="uint8")  # 產生黑色畫布
-output[x : x + w, y : y + h] = crop_image
-
-image = cv2.imread(filename1)
-output_1 = cv2.resize(image, (200, 200))  # 產生 200x200 的圖
-output_2 = cv2.resize(image, (100, 300))  # 產生 100x300 的圖
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-image = cv2.imread(filename1)
-size = image.shape  # 取得原始圖片的資訊
-
-level = 15  # 縮小比例 ( 可當作馬賽克的等級 )
-h = int(size[0] / level)  # 按照比例縮小後的高度 ( 使用 int 去除小數點 )
-w = int(size[1] / level)  # 按照比例縮小後的寬度 ( 使用 int 去除小數點 )
-mosaic = cv2.resize(image, (w, h), interpolation=cv2.INTER_LINEAR)  # 根據縮小尺寸縮小
-mosaic = cv2.resize(
-    mosaic, (size[1], size[0]), interpolation=cv2.INTER_NEAREST
-)  # 放大到原本的大小
-
-cv2.imshow("image", mosaic)
+cv2.imshow("image", mosaic2)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("馬賽克")
-image = cv2.imread(filename1)
+print("馬賽克 部分")
+image = cv2.imread(filename2)
 
-x = 135  # 剪裁區域左上 x 座標
-y = 90  # 剪裁區域左上 y 座標
-cw = 100  # 剪裁區域寬度
-ch = 120  # 剪裁區域高度
-mosaic = image[y : y + ch, x : x + cw]  # 取得剪裁區域
-level = 15  # 馬賽克程度
-h = int(ch / level)  # 縮小的高度 ( 使用 int 去除小數點 )
-w = int(cw / level)  # 縮小的寬度 ( 使用 int 去除小數點 )
-mosaic = cv2.resize(mosaic, (w, h), interpolation=cv2.INTER_LINEAR)
-mosaic = cv2.resize(mosaic, (cw, ch), interpolation=cv2.INTER_NEAREST)
-image[y : y + ch, x : x + cw] = mosaic  # 將圖片的剪裁區域，換成馬賽克的圖
+H, W, D = image.shape  # d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
+
+x = 160  # 剪裁區域左上 x 座標
+y = 80  # 剪裁區域左上 y 座標
+cw = 180  # 剪裁區域寬度
+ch = 300  # 剪裁區域高度
+mosaic1 = image[y : y + ch, x : x + cw]  # 取得剪裁區域
+
+level = 15  # 馬賽克程度, 縮小比例 ( 可當作馬賽克的等級 )
+w = cw // level
+h = ch // level
+
+mosaic2 = cv2.resize(mosaic1, (w, h), interpolation=cv2.INTER_LINEAR)
+mosaic3 = cv2.resize(mosaic2, (cw, ch), interpolation=cv2.INTER_NEAREST)
+
+image[y : y + ch, x : x + cw] = mosaic3  # 將圖片的剪裁區域，換成馬賽克的圖
+
+cv2.rectangle(image, (x, y), (x + cw, y + ch), RED, 3)
 
 cv2.imshow("image", image)
 cv2.waitKey()
@@ -429,23 +377,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-# crop
-
-image = cv2.imread(filename1)
-x = 100
-y = 100
-w = 200
-h = 200
-crop_image = image[y : y + h, x : x + w]  # 取出陣列的範圍
-
-plt.imshow(cv2.cvtColor(crop_image, cv2.COLOR_BGR2RGB))
-plt.title("crop")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("cv2.warpAffine() 平移")
 
 image = cv2.imread(filename1)
@@ -962,9 +893,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 09")
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 
-image = cv2.imread(filename)
+image = cv2.imread(filename_lena_gray)
 
 H, W, D = image.shape  # d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
 
@@ -1116,29 +1046,37 @@ sys.exit()
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
+
 
 """
-
 #image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 image = cv2.imread(filename, cv2.IMREAD_ANYCOLOR)
-
-
 
 cv2.imwrite("tmp_image.jpg", image)
 
 """
 
+print("用np建立一個影像陣列")
 
-filename2 = "C:/_git/vcs/_1.data/______test_files2/picture1_partial.jpg"
+W = 640
+H = 480
+D = 3
+
+# 建立陣列
+image = np.ones([H, W, D], dtype=np.uint8) * 128  # 填滿 128
+
+# 改變陣列內容
+image[:, :, 0] = 0
+# 第0通道 B
+image[:, :, 1] = 255
+# 第1通道 G
+image[:, :, 2] = 255
+# 第2通道 R

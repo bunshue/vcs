@@ -221,9 +221,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 05")
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 
-image = cv2.imread(filename, 0)
+image = cv2.imread(filename_lena_gray, 0)
 
 image2 = image.copy()
 
@@ -254,11 +253,11 @@ plt.suptitle("Matching Result 1")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("opencv 06")
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 
-image = cv2.imread(filename, 0)
+image = cv2.imread(filename_lena_gray, 0)
 
 image2 = image.copy()
 

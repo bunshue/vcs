@@ -635,10 +635,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-lena_gray_filename = (
-    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-)
-src = cv2.imread(lena_gray_filename, 0)
+src = cv2.imread(filename_lena_gray, 0)
 
 mask1 = np.zeros(src.shape, dtype=np.uint8)  # 建立mask
 mask1[220:400, 220:380] = 1  # 設定mask, 先高後寬  # 建立mask白色區塊
@@ -746,11 +743,7 @@ print("------------------------------------------------------------")  # 60個
 # cv2.bitwise_xor() SP
 print("------------------------------------------------------------")  # 60個
 
-# 讀取原圖
-lena_gray_filename = (
-    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-)
-src = cv2.imread(lena_gray_filename, 0)
+src = cv2.imread(filename_lena_gray, 0)
 
 # 讀取水印圖像
 watermark_filename = (
@@ -845,11 +838,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 圖層提取
-lena_gray_filename = (
-    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-)
-src = cv2.imread(lena_gray_filename, 0)
+src = cv2.imread(filename_lena_gray, 0)
 
 plt.figure(figsize=(12, 8))
 plt.subplot(331)

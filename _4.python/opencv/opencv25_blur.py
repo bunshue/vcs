@@ -67,8 +67,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 刪除影像雜訊_濾波
 
-filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
-
 print("使用 均值濾波器.blur()")
 
 image = cv2.imread(filename2)
@@ -311,7 +309,7 @@ print("------------------------------------------------------------")  # 60個
 # cv2.GaussianBlur()     # 高斯濾波器, 高斯模糊
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
+filename = filename_barbara
 
 image = cv2.imread(filename, 0)
 
@@ -394,8 +392,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
+filename = filename2
+filename = filename_barbara
 
 # 原圖
 image = cv2.imread(filename, 0)  # 讀成黑白, 一維

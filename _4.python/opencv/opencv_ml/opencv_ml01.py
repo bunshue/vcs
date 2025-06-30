@@ -6,6 +6,8 @@ OpenCV + ML
 print("------------------------------------------------------------")  # 60個
 
 import cv2
+filename_lena_color = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+filename_lena_gray = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -318,9 +320,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 # 讀取待處理圖像
-img = cv2.imread(filename)
+img = cv2.imread(filename_lena_gray)
 # 使用reshape將一個RGB像素點值的三個值作為一個單元
 data = img.reshape((-1, 3))
 # 轉換為kmeans可以處理的類型

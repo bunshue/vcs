@@ -59,6 +59,15 @@ filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
 filename3 = "C:/_git/vcs/_4.python/opencv/data/lena.jpg"
 filename4 = "C:/_git/vcs/_1.data/______test_files1/ims01.bmp"
+
+filename_lena_color = (
+    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+)
+filename_lena_gray = (
+    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+)
+filename_barbara = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
+
 video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
 
 print("------------------------------------------------------------")  # 60個

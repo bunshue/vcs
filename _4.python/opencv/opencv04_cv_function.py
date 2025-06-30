@@ -33,11 +33,9 @@ HSV轉BGR
 BGR轉Lab
 """
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
-
 print("圖片色彩空間的轉換")
 
-image1 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+image1 = cv2.imread(filename_barbara, cv2.IMREAD_UNCHANGED)
 
 plt.figure(figsize=(12, 8))
 
@@ -77,8 +75,6 @@ cv2.split / cv2.merge
 """
 
 print("------------------------------------------------------------")  # 60個
-
-filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 img = cv2.imread(filename1)  # BGR讀取
 cv2.imshow("BGR Color Space", img)
@@ -136,9 +132,9 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
+filename_rgb512 = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
-image = cv2.imread(filename)
+image = cv2.imread(filename_rgb512)
 cv2.imshow("bgr", image)
 
 blue, green, red = cv2.split(image)
@@ -301,9 +297,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
-image = cv2.imread(filename)
+image = cv2.imread(filename2)
 
 plt.figure(figsize=(12, 8))
 
@@ -357,9 +351,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
-# 檔案 => cv2影像
-image = cv2.imread(filename)
+image = cv2.imread(filename_lena_color)
 
 bgra = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
 b, g, r, a = cv2.split(bgra)
@@ -368,15 +360,7 @@ bgra125 = cv2.merge([b, g, r, a])
 a[:, :] = 0
 bgra0 = cv2.merge([b, g, r, a])
 
-plt.figure(
-    num="new36 影像處理",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(figsize=(12, 8))
 
 plt.subplot(221)
 plt.title("原圖")
@@ -839,10 +823,7 @@ pyrDown 这里的down是指图像变小，所以原始图像在金字塔的底�
 pyrUp   这里的up是指将图像的尺寸变大，所以原始图像位于图像金字塔的顶层。
 """
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-# filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-
-o = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+o = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
 
 cv2.imshow("original", o)
 
@@ -856,7 +837,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("cv2.__version__:", cv2.__version__)
 
-img = cv2.imread(filename)
+img = cv2.imread(filename1)
 img_down = cv2.pyrDown(img, dstsize=(img.shape[1] // 2, img.shape[0] // 2))
 img_down2 = cv2.pyrDown(
     img_down, dstsize=(img_down.shape[1] // 2, img_down.shape[0] // 2)
@@ -878,7 +859,7 @@ cv2.destroyAllWindows()
 
 print("cv2.__version__:", cv2.__version__)
 
-img = cv2.imread(filename)
+img = cv2.imread(filename1)
 img = cv2.resize(img, None, fx=0.15, fy=0.15)  # 为了观察方便缩小原图
 img_up = cv2.pyrUp(img, dstsize=(2 * img.shape[1], 2 * img.shape[0]))
 img_up2 = cv2.pyrUp(img_up, dstsize=(2 * img_up.shape[1], 2 * img_up.shape[0]))
@@ -897,12 +878,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-o = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
+o = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)
 cv2.imshow("original", o)
-
-print("------------------------------------------------------------")  # 60個
 
 r1 = cv2.pyrDown(o)
 r2 = cv2.pyrDown(r1)
@@ -921,9 +898,11 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_small.bmp"
+filename_lena_small = (
+    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_small.bmp"
+)
 
-o = cv2.imread(filename)
+o = cv2.imread(filename_lena_small)
 
 cv2.imshow("original", o)
 
@@ -944,9 +923,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-o = cv2.imread(filename)
-
+o = cv2.imread(filename_lena_gray)
 cv2.imshow("original", o)
 
 down = cv2.pyrDown(o)
@@ -962,9 +939,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-o = cv2.imread(filename)
-
+o = cv2.imread(filename_lena_gray)
 cv2.imshow("original", o)
 
 up = cv2.pyrUp(o)
@@ -980,8 +955,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-O = cv2.imread(filename)
+O = cv2.imread(filename_lena_gray)
 
 G0 = O
 G1 = cv2.pyrDown(G0)
@@ -1002,8 +976,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-O = cv2.imread(filename)
+O = cv2.imread(filename_lena_gray)
 
 G0 = O
 G1 = cv2.pyrDown(G0)
@@ -1019,8 +992,7 @@ print("原始圖像O與恢復圖像RO差值的絕對值和：", np.sum(result))
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-O = cv2.imread(filename)
+O = cv2.imread(filename_lena_gray)
 
 # =================生成高斯金字塔======================
 G0 = O

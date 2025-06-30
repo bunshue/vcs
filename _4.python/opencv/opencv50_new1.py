@@ -445,11 +445,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 37")
 
-filename1t = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
-filename2t = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-
-image1 = cv2.imread(filename1t)
-image2 = cv2.imread(filename2t)
+image1 = cv2.imread(filename_lena_color)
+image2 = cv2.imread(filename_lena_gray)
 
 w = image1.shape[1]  # W
 h = image1.shape[0]  # H
@@ -2613,10 +2610,7 @@ print("------------------------------------------------------------")  # 60個
 
 # Prewitt horizontal edge-emphasizing filter 邊緣加強的影像處理技術
 
-lena_gray_filename = (
-    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-)
-image = cv2.imread(lena_gray_filename)
+image = cv2.imread(filename_lena_gray)
 
 print("filter2D 效果")
 kernel = np.ones((9, 9), np.float32) / 81
@@ -2636,9 +2630,9 @@ plt.suptitle("filter2D 效果")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-barbara_filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
-image = cv2.imread(barbara_filename, cv2.COLOR_BGR2GRAY)
+image = cv2.imread(filename_barbara, cv2.COLOR_BGR2GRAY)
 
 kernel_x = np.array([[1, 1, 1], [0, 0, 0], [-1, -1, -1]], dtype=int)  # 水平值一樣, 偵測水平的邊緣
 kernel_y = np.array([[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]], dtype=int)  # 垂直值一樣, 偵測垂直的邊緣
@@ -2755,12 +2749,9 @@ def saltpepper(image, n):
 
 
 # 上面就是椒鹽噪聲函數，下面是使用方法，大家可以愉快的玩耍了
-lena_gray_filename = (
-    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-)
 
-image0 = cv2.imread(lena_gray_filename)
-image = cv2.imread(lena_gray_filename)
+image0 = cv2.imread(filename_lena_gray)
+image = cv2.imread(filename_lena_gray)
 
 print("saltpepper(胡椒鹽)效果")
 saltImage = saltpepper(image, 0.02)
@@ -3232,10 +3223,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 src = cv2.imread("data/edge_detection/geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
 src = cv2.GaussianBlur(src, (3, 3), 0)  # 降低噪音
-
 
 # Canny()函數
 dst_canny = cv2.Canny(src, 50, 100)  # minVal=50, maxVal=100
