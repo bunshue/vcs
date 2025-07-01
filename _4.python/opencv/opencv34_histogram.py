@@ -48,23 +48,22 @@ image2 遮罩過後
 from opencv_common import *
 
 # 測試圖片
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 filename = "C:/_git/vcs/_4.python/_data/eq1.bmp"
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-filename = "C:/_git/vcs/_4.python/_data/ims01.bmp"
 filename = "data/pic_brightness1.bmp"
 filename = "data/pic_brightness2.bmp"
 filename = "data/pic_brightness3.bmp"
 filename = "data/pic_calcHist.jpg"
 filename = "C:/_git/vcs/_4.python/opencv\data/pic_gray_400X400_100-200.png"
 
+filename4a = "C:/_git/vcs/_4.python/opencv/data/ims_640X480.bmp"
+filename4b = "C:/_git/vcs/_4.python/opencv/data/ims_320X240.jpg"
+
 num_bins = 256  # 直方圖顯示時的束數
 
-ESC = 27
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/ims01.bmp"
+filename = filename4a
 filename = "C:/_git/vcs/_4.python/_data/eq1.bmp"  # 560X400
 
 print("測試 01 ravel() 的用法")
@@ -294,8 +293,10 @@ plt.figure(figsize=(12, 8))
 
 # 生成圖像之直方圖, 256束, 彩圖之第0通道
 hist_b = cv2.calcHist([image0], [0], None, [256], [0, 256])
+
 # 生成圖像之直方圖, 256束, 彩圖之第1通道
 hist_g = cv2.calcHist([image0], [1], None, [256], [0, 256])
+
 # 生成圖像之直方圖, 256束, 彩圖之第2通道
 hist_r = cv2.calcHist([image0], [2], None, [256], [0, 256])
 
@@ -333,15 +334,19 @@ image_mask = cv2.bitwise_and(image0, mask)
 
 # 生成圖像之直方圖, 256束, 彩圖之第0通道
 hist_b = cv2.calcHist([image0], [0], None, [256], [0, 256])
+
 # 生成圖像之直方圖, 256束, 彩圖之第1通道
 hist_g = cv2.calcHist([image0], [1], None, [256], [0, 256])
+
 # 生成圖像之直方圖, 256束, 彩圖之第2通道
 hist_r = cv2.calcHist([image0], [2], None, [256], [0, 256])
 
 # 原圖+mask後之統計數據
 hist_image_mask0 = cv2.calcHist([image0], [0], mask[:, :, 0], [256], [0, 256])
+
 # 原圖+mask後之統計數據
 hist_image_mask1 = cv2.calcHist([image0], [1], mask[:, :, 0], [256], [0, 256])
+
 # 原圖+mask後之統計數據
 hist_image_mask2 = cv2.calcHist([image0], [2], mask[:, :, 0], [256], [0, 256])
 
@@ -375,9 +380,7 @@ show()
 
 print("測試 09 calcHist----------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
-image0 = cv2.imread(filename)  # 讀取檔案 彩色
+image0 = cv2.imread(filename2)  # 讀取檔案 彩色
 
 bgr_planes = cv2.split(image0)  # 拆分彩色影像3通道
 
@@ -457,7 +460,7 @@ print("equalizeHist  # 直方圖均衡化處理, 只能處理灰階圖")
 
 plt.figure(figsize=(12, 8))
 
-image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 讀取檔案轉灰階
+image1 = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 讀取檔案轉灰階
 
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
@@ -470,7 +473,7 @@ plt.title("原圖的影像直方圖")
 
 # 直方圖均衡化處理
 
-image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 讀取檔案轉灰階
+image1 = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 讀取檔案轉灰階
 
 equ = cv2.equalizeHist(image1)  # 直方圖均衡化處理, 只能處理灰階圖
 
@@ -491,9 +494,10 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 print("equalizeHist  # 直方圖均衡化處理, 只能處理灰階圖")
 
-image0 = cv2.imread(filename)  # 讀取檔案 彩色
+image0 = cv2.imread(filename2)  # 讀取檔案 彩色
 
 image1 = cv2.cvtColor(image0, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
@@ -551,7 +555,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("equalizeHist  # 直方圖均衡化處理, 只能處理灰階圖")
 
-image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 讀取檔案轉灰階
+image1 = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 讀取檔案轉灰階
 
 equ = cv2.equalizeHist(image1)  # 直方圖均衡化處理, 只能處理灰階圖
 
@@ -568,6 +572,8 @@ plt.title("直方圖均衡化處理")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("測試 15 calcHist equalizeHist")
 
 """
@@ -581,7 +587,7 @@ range為像素值範圍，為[0,255]
 返回值為hist，直方圖
 """
 
-image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 讀取檔案轉灰階
+image1 = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 讀取檔案轉灰階
 
 plt.figure(figsize=(12, 8))
 
@@ -630,6 +636,7 @@ plt.title("直方圖均衡化處理")
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 W, H = 640, 480
@@ -784,6 +791,7 @@ plt.legend()
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 讀取檔案轉灰階
 
@@ -877,8 +885,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
 
 # 直方圖
 

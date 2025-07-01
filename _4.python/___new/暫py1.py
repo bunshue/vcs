@@ -639,20 +639,6 @@ orientation : 直方圖方向 'vertical'(垂直, 預設), 'horizontal'(水平)
 
 ------------------------------------------------------------
 
-
-C:\_git\vcs\_1.data\______test_files3\DrAP_test6
-
-filename1.jpg
-filename2.jpg
-filename3.jpg
- 
-ffff
-  filename4.jpg
-  filename5.jpg
-  filename6.jpg
- 
-
-
 後面還有一個參數
 plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB), "gray")
 

@@ -12,7 +12,7 @@ INTER_NEAREST	0	最近插值法
 INTER_LINEAR	1	雙線性插值法，在插入點選擇4個點進行插值處理，這是預設的方法
 INTER_CUBIC	2	雙三次插值法，可以創造更平滑的邊緣影像
 INTER_AREA	3	對影像縮小重新採樣的首選方法，但是影像放大時類似最近插值法
-INTER_LENCZOS4	4	Lencz的插值方法，這個方法會在x和y的方向分別對8個點進行插值
+INTER_LANCZOS4	4	Lancz的插值方法，這個方法會在x和y的方向分別對8個點進行插值
 
 # OpenCV中的五種縮放模式
 # 由快到慢
@@ -49,58 +49,21 @@ print("------------------------------------------------------------")  # 60個
 image = cv2.imread(filename1)
 
 # 裁切區域 x, y, w, h
-x_st, y_st, w, h = 120, 120, 100, 100
+x, y, w, h = 120, 120, 100, 100
 
 # 裁剪圖片
-crop_image = image[y_st : y_st + h, x_st : x_st + w]
-
-image_empty = np.zeros(image.shape, dtype=np.uint8)  # 依照原圖大小建立一個圖像的二維陣列
-# 將擷取的圖貼到新建的黑圖
-image_empty[y_st : y_st + h, x_st : x_st + w] = crop_image
-
-plt.figure("裁剪圖片", figsize=(12, 8))
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(crop_image, cv2.COLOR_BGR2RGB))
-plt.title("裁剪圖片")
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(image_empty, cv2.COLOR_BGR2RGB))
-plt.title("原圖大小貼上小圖")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-""" crop
-image = cv2.imread(filename1)
-x = 100
-y = 100
-w = 200
-h = 200
-crop_image = image[y : y + h, x : x + w]
-
-output = np.zeros((360, 480, 3), dtype="uint8")  # 產生黑色畫布
-output[x : x + w, y : y + h] = crop_image
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# crop
-
-image = cv2.imread(filename1)
-
-x, y, w, h = 100, 100, 200, 200
 crop_image = image[y : y + h, x : x + w]  # 取出陣列的範圍
 
-plt.imshow(cv2.cvtColor(crop_image, cv2.COLOR_BGR2RGB))
-plt.title("crop")
+# 建立新圖，貼上裁剪圖片
+new_image = np.zeros(image.shape, dtype=np.uint8)
+new_image[y : y + h, x : x + w] = crop_image
 
-show()
+new_image = np.zeros((360, 480, 3), dtype="uint8")  # 產生黑色畫布
+new_image[x : x + w, y : y + h] = crop_image
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -142,13 +105,13 @@ print("鏡射 cv2.flip()")
 image = cv2.imread(filename1)
 
 print("左右顛倒")
-image1 = cv2.flip(image, 1)  # 水平翻轉
+image1 = cv2.flip(image, 1)  # 左右翻轉/水平翻轉
 
 print("上下顛倒")
-image0 = cv2.flip(image, 0)  # 垂直翻轉
+image0 = cv2.flip(image, 0)  # 上下翻轉/垂直翻轉
 
 print("上下顛倒 + 左右顛倒")
-image2 = cv2.flip(image, -1)  # 水平與垂直翻轉
+image2 = cv2.flip(image, -1)  # 上下左右翻轉/水平垂直翻轉
 
 plt.figure("鏡射", figsize=(12, 8))
 plt.subplot(221)
@@ -172,36 +135,30 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("圖片翻轉 原圖")
-
-image = cv2.imread(filename1)
-
-image0 = cv2.flip(image, 0)  # 上下翻轉
-image1 = cv2.flip(image, 1)  # 左右翻轉
-image2 = cv2.flip(image, -1)  # 上下左右翻轉
-
-plt.subplot(221)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(222)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-plt.title("左右翻轉")
-
-plt.subplot(223)
-plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
-plt.title("上下翻轉")
-
-plt.subplot(224)
-plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
-plt.title("上下左右翻轉")
-
-show()
 
 print("------------------------------------------------------------")  # 60個
 # R : resize
 print("------------------------------------------------------------")  # 60個
+"""
+print("縮放圖片 / 倍率縮放 / 各種插植方法")
 
+image = cv2.imread(filename4b)
+
+image_resize0 = cv2.resize(image, None, fx=4.00, fy=4.00, interpolation=cv2.INTER_NEAREST)
+image_resize1 = cv2.resize(image, None, fx=4.00, fy=4.00, interpolation=cv2.INTER_LINEAR)
+image_resize2 = cv2.resize(image, None, fx=4.00, fy=4.00, interpolation=cv2.INTER_CUBIC)
+image_resize3 = cv2.resize(image, None, fx=4.00, fy=4.00, interpolation=cv2.INTER_AREA)
+image_resize4 = cv2.resize(image, None, fx=4.00, fy=4.00, interpolation=cv2.INTER_LANCZOS4)
+
+cv2.imshow("image", image)
+cv2.imshow("image0", image_resize0)
+cv2.imshow("image1", image_resize1)
+cv2.imshow("image2", image_resize2)
+cv2.imshow("image3", image_resize3)
+cv2.imshow("image4", image_resize4)
+cv2.waitKey()
+cv2.destroyAllWindows()
+"""
 print("縮放圖片 / 倍率縮放")
 
 image = cv2.imread(filename1)
@@ -1112,17 +1069,6 @@ print("A圖抓一塊貼到B圖上")
 face = lena[220:400, 250:350]
 peony[160:340, 200:300] = face
 
-
-# crop
-image = cv2.imread(filename2)
-
-x_st, y_st, w, h = 200, 50, 150, 200
-image_cut = image[y_st : y_st + h, x_st : x_st + w]
-print(image_cut.shape)
-
-plt.imshow(cv2.cvtColor(image_cut, cv2.COLOR_BGR2RGB))
-
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

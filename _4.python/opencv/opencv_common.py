@@ -58,11 +58,13 @@ print("------------------------------------------------------------")  # 60個
 filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
 filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
-filename4 = "C:/_git/vcs/_1.data/______test_files1/ims01.bmp"
+filename4a = "C:/_git/vcs/_4.python/opencv/data/ims_640X480.bmp"
+filename4b = "C:/_git/vcs/_4.python/opencv/data/ims_320X240.jpg"
 
 filename_lena_color = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 filename_lena_gray = "C:/_git/vcs/_4.python/opencv/data/lena_gray.bmp"
 filename_barbara = "C:/_git/vcs/_4.python/opencv/data/barbara.bmp"
+
 video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
 
 print("------------------------------------------------------------")  # 60個
