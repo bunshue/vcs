@@ -172,6 +172,31 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("圖片翻轉 原圖")
+
+image = cv2.imread(filename1)
+
+image0 = cv2.flip(image, 0)  # 上下翻轉
+image1 = cv2.flip(image, 1)  # 左右翻轉
+image2 = cv2.flip(image, -1)  # 上下左右翻轉
+
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("左右翻轉")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
+plt.title("上下翻轉")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.title("上下左右翻轉")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 # R : resize
@@ -1081,3 +1106,23 @@ image[:, :, 1] = 255
 # 第1通道 G
 image[:, :, 2] = 255
 # 第2通道 R
+
+
+print("A圖抓一塊貼到B圖上")
+face = lena[220:400, 250:350]
+peony[160:340, 200:300] = face
+
+
+# crop
+image = cv2.imread(filename2)
+
+x_st, y_st, w, h = 200, 50, 150, 200
+image_cut = image[y_st : y_st + h, x_st : x_st + w]
+print(image_cut.shape)
+
+plt.imshow(cv2.cvtColor(image_cut, cv2.COLOR_BGR2RGB))
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
