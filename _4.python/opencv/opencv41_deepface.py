@@ -8,8 +8,7 @@ from opencv_common import *
 
 from deepface import DeepFace
 
-filename = "data/FourPeople.jpg"
-
+filename = "data/_face/FourPeople.jpg"
 
 # 定義加入文字函式
 def putText(x, y, text, size=30, color=WHITE):
@@ -123,7 +122,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("DeepFace.analyze 4")
 
-filename = "data/FourPeople.jpg"
+filename = "data/_face/FourPeople.jpg"
+
 image = cv2.imread(filename)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 將圖片轉成灰階
 

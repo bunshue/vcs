@@ -77,23 +77,40 @@ print("------------------------------------------------------------")  # 60個
 # 以影像中心為準，順時針旋轉30度 縮小為 0.7 倍
 
 image = cv2.imread(filename1)
+H, W, D = image.shape  # d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
+center = (W // 2, H // 2)  # 旋轉中心
 
-plt.figure("旋轉圖片", figsize=(10, 6))
-plt.subplot(121)
+print("逆時鐘 旋轉 30 度, 縮放0.7倍")
+#                                旋轉中心 旋轉角度 縮放比例
+M = cv2.getRotationMatrix2D(center, 30, 0.7)  # 建立 M 矩陣
+dsize = (W, H)  # 建立未來影像大小
+dst1 = cv2.warpAffine(image, M, dsize)  # 執行仿射
+
+print("順時鐘 旋轉 30 度, 縮放0.7倍")
+#                                旋轉中心 旋轉角度 縮放比例
+M = cv2.getRotationMatrix2D(center, -30, 0.7)  # 建立 M 矩陣
+dst2 = cv2.warpAffine(image, M, dsize)  # 執行仿射
+
+plt.figure("旋轉圖片", figsize=(12, 8))
+plt.subplot(221)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-H, W, D = image.shape  # d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))
+plt.title("逆時鐘 30")
 
-center = (W // 2, H // 2)
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))
+plt.title("順時鐘 30")
 
-#                                旋轉中心 旋轉角度 縮放比例
-aff_matrix = cv2.getRotationMatrix2D(center, -30, 0.7)
-rotate_image = cv2.warpAffine(image, aff_matrix, (W, H))
 
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(rotate_image, cv2.COLOR_BGR2RGB))
-plt.title("旋轉圖片")
+M = cv2.getRotationMatrix2D(center, 30, 0.7)
+dst3 = cv2.warpAffine(image, M, dsize, borderValue=125)
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(dst3, cv2.COLOR_BGR2RGB))
+plt.title("多了borderValue")
 
 show()
 
@@ -341,13 +358,13 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread(filename1)
-output = cv2.transpose(image)  # 逆時針旋轉 90 度。
+
+output = cv2.transpose(image)  # 逆時針旋轉 90 度
 
 plt.imshow(cv2.cvtColor(output, cv2.COLOR_BGR2RGB))
-plt.title("transpose")
+plt.title("transpose 逆時針旋轉 90 度")
 
 show()
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -394,7 +411,6 @@ p1 = np.float32([[100, 100], [480, 0], [0, 360]])
 p2 = np.float32([[0, 0], [480, 0], [0, 360]])
 
 M = cv2.getAffineTransform(p1, p2)
-
 output = cv2.warpAffine(image, M, (480, 360))
 
 cv2.imshow("image", output)
@@ -412,7 +428,6 @@ p1 = np.float32([[100, 100], [480, 0], [0, 360], [480, 360]])
 p2 = np.float32([[0, 0], [480, 0], [0, 360], [480, 360]])
 
 M = cv2.getPerspectiveTransform(p1, p2)
-
 output = cv2.warpPerspective(image, M, (480, 360))
 
 cv2.imshow("image", output)
@@ -434,32 +449,24 @@ d1 = cv2.warpAffine(image, A1, (W, H), borderValue=125)
 A2 = np.array([[0.5, 0, W / 4], [0, 0.5, H / 4]], np.float32)
 d2 = cv2.warpAffine(image, A2, (W, H), borderValue=125)
 
-# 在 d2 的基础上，绕图像的中心点旋转
-A3 = cv2.getRotationMatrix2D((W / 2, H / 2), 30, 1)
-d3 = cv2.warpAffine(d2, A3, (W, H), borderValue=125)
-
 # 在
 A4 = np.array([[math.cos(math.pi / 4), 0, 0], [math.sin(math.pi / 3), 1, 0]])
 d4 = cv2.warpAffine(image, A4, (2 * W, 2 * H), borderValue=125)
 
 plt.figure("仿射", figsize=(12, 8))
-plt.subplot(231)
+plt.subplot(221)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-plt.subplot(232)
+plt.subplot(222)
 plt.imshow(cv2.cvtColor(d1, cv2.COLOR_BGR2RGB))
 plt.title("d1")
 
-plt.subplot(233)
+plt.subplot(223)
 plt.imshow(cv2.cvtColor(d2, cv2.COLOR_BGR2RGB))
 plt.title("d2")
 
-plt.subplot(234)
-plt.imshow(cv2.cvtColor(d3, cv2.COLOR_BGR2RGB))
-plt.title("d3")
-
-plt.subplot(235)
+plt.subplot(224)
 plt.imshow(cv2.cvtColor(d4, cv2.COLOR_BGR2RGB))
 plt.title("d4")
 
@@ -479,7 +486,6 @@ dst = np.array([[20, 50], [W / 2, 150], [50, H / 2], [W - 40, H - 40]], np.float
 
 # 计算投影矩阵
 p = cv2.getPerspectiveTransform(src, dst)
-
 # 利用计算出的投影矩阵进行头像的投影变换
 r = cv2.warpPerspective(image, p, (W, H), borderValue=0)
 
@@ -498,38 +504,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 # 新進
 
-print("------------------------------------------------------------")  # 60個
-
-print("旋轉")
-
-image = cv2.imread(filename1)
-H, W, D = image.shape  # d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
-
-print("逆時鐘 旋轉 30 度")
-M = cv2.getRotationMatrix2D((W / 2, H / 2), 30, 1)  # 建立 M 矩陣
-dsize = (W, H)  # 建立未來影像大小
-dst1 = cv2.warpAffine(image, M, dsize)  # 執行仿射
-
-print("順時鐘 旋轉 30 度")
-M = cv2.getRotationMatrix2D((W / 2, H / 2), -30, 1)  # 建立 M 矩陣
-dst2 = cv2.warpAffine(image, M, dsize)  # 執行仿射
-
-plt.figure("旋轉", figsize=(12, 8))
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))
-plt.title("逆時鐘 30")
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))
-plt.title("順時鐘 30")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread(filename1)

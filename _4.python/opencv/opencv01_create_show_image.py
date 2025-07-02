@@ -57,7 +57,7 @@ from opencv_common import *
 
 W, H = 640, 480
 width, height = 640, 480  # 影像寬, 影像高
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -82,8 +82,8 @@ print("二維黑圖")
 image = np.zeros((H, W), dtype=np.uint8)
 
 print("三維黑圖")
-image = np.zeros((H, W, 3), dtype="uint8")
 image = np.zeros((H, W, 3), np.uint8)
+image = np.zeros((H, W, 3), dtype="uint8")
 image = np.zeros((H, W, 3), dtype=np.uint8)
 
 print("三維白圖")
@@ -99,16 +99,42 @@ image.fill(255)  # 將這個矩陣全部填入255 => 白色, 128 => 灰色
 # 將這個矩陣全部填入指定顏色
 image[:] = [48, 213, 254]
 
+image1 = np.ones((H, W), dtype=np.uint8) * 3
+image2 = np.ones((H, W), dtype=np.uint8) * 5
+mask = np.zeros((H, W), dtype=np.uint8)
+mask[2:4, 2:4] = 1
+image3 = np.ones((H, W), dtype=np.uint8) * 66
+image3 = cv2.add(image1, image2, mask=mask)
+
+image1 = np.ones((H, W), dtype=np.uint8) * 3
+image2 = np.ones((H, W), dtype=np.uint8) * 5
+image3 = cv2.add(image1, image2)
+
+image4 = cv2.add(image1, 6)
+image5 = cv2.add(6, image2)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+image1 = np.ones((H, W), dtype=np.uint8) * 100
+image2 = np.ones((H, W), dtype=np.uint8) * 10
+
+# 兩影像用cv2權重gamma相加
+gamma = 3
+image3 = cv2.addWeighted(image1, 0.6, image2, 5, gamma)
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("用np建立一個隨機影像陣列")
-image = np.random.randint(0, 256, size=[4, 5], dtype=np.uint8)
+
+W, H = 5, 4
+image = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)
 
 H, W = image.shape
 
@@ -136,7 +162,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("用np建立一個隨機影像陣列")
-image = np.random.randint(0, 256, size=[4, 6], dtype=np.uint8)
+W, H = 6, 4
+image = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)
 
 H, W = image.shape
 
@@ -152,7 +179,6 @@ print("mapx = \n", mapx)
 print("mapy = \n", mapy)
 print("rst = \n", rst)
 
-plt.figure(figsize=(12, 8))
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("用np建立一個隨機影像陣列")
 
@@ -161,43 +187,15 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-w = int(640 / 20)
-h = int(480 / 20)
-W, H, D = 640, 480, 3
-
-image = np.random.randint(0, 256, size=[h, w], dtype=np.uint8)  # np.random之randint不含尾
-
-rst = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
-print(rst.shape)
-# print("image = \n", image)
-print("rst = \n", rst)
-
-plt.figure("Random建立二維陣列 深度為1 轉灰階", figsize=(12, 6))
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("Random 二維陣列")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
-plt.title("轉灰階")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("Random建立二維陣列為影像 a")
-W, H, D = 5, 5, 3
-a = np.random.randint(0, 255, (H, W), dtype=np.uint8)  # np.random之randint不含尾
+W, H, D = 10, 10, 3
+a = np.random.randint(0, 255, (H, W), dtype=np.uint8)
 b = np.zeros((H, W), dtype=np.uint8)
 
-b[0:3, 0:3] = 255
-b[4, 4] = 255
-c = cv2.bitwise_and(a, b)
+# mask
+b[2:8, 2:8] = 255
 
-# print("a = \n", a)
-# print("b = \n", b)
-# print("c = \n", c)
+c = cv2.bitwise_and(a, b)
 
 plt.figure(figsize=(12, 6))
 plt.subplot(131)
@@ -217,246 +215,76 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-W, H, D = 4, 4, 3
-image1 = np.ones((H, W), dtype=np.uint8) * 3
-print("image1 = \n", image1)
-
-W, H, D = 4, 4, 3
-image2 = np.ones((H, W), dtype=np.uint8) * 5
-print("image2 = \n", image2)
-
-W, H, D = 4, 4, 3
-mask = np.zeros((H, W), dtype=np.uint8)
-mask[2:4, 2:4] = 1
-print("mask = \n", mask)
-
-W, H, D = 4, 4, 3
-image3 = np.ones((H, W), dtype=np.uint8) * 66
-print("初始值image3 = \n", image3)
-
-image3 = cv2.add(image1, image2, mask=mask)
-print("求和后image3 = \n", image3)
-
-plt.figure(figsize=(12, 6))
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-plt.title("影像1")
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
-plt.title("影像2")
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
-plt.title("影像3")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-W, H, D = 4, 4, 3
-image1 = np.ones((H, W), dtype=np.uint8) * 3
-print("image1 = \n", image1)
-
-W, H, D = 4, 4, 3
-image2 = np.ones((H, W), dtype=np.uint8) * 5
-print("image2 = \n", image2)
-
-image3 = cv2.add(image1, image2)
-print("cv2.add(image1, image2) = \n", image3)
-
-image4 = cv2.add(image1, 6)
-print("cv2.add(image1,6)\n", image4)
-
-image5 = cv2.add(6, image2)
-print("cv2.add(6, image2)=\n", image5)
-
-plt.figure(figsize=(12, 6))
-plt.subplot(231)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-plt.title("影像1")
-
-plt.subplot(232)
-plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
-plt.title("影像2")
-
-plt.subplot(233)
-plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
-plt.title("影像3")
-
-plt.subplot(234)
-plt.imshow(cv2.cvtColor(image4, cv2.COLOR_BGR2RGB))
-plt.title("影像4")
-
-plt.subplot(235)
-plt.imshow(cv2.cvtColor(image5, cv2.COLOR_BGR2RGB))
-plt.title("影像5")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-W, H, D = 4, 3, 3
-image1 = np.ones((H, W), dtype=np.uint8) * 100
-image2 = np.ones((H, W), dtype=np.uint8) * 10
-
-gamma = 3
-image3 = cv2.addWeighted(image1, 0.6, image2, 5, gamma)
-print(image3)
-
-plt.figure("兩影像用cv2權重gamma相加", figsize=(12, 6))
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-plt.title("影像1")
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
-plt.title("影像2")
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
-plt.title("兩影像用cv2權重gamma相加")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 W, H, D = 640, 480, 3
 
-image = np.random.randint(
-    0, 256, size=[H, W, D], dtype=np.uint8
-)  # np.random之randint不含尾
-print(image.shape)
+image = np.random.randint(0, 256, size=[H, W, D], dtype=np.uint8)
 
 plt.figure("Random建立二維陣列 深度為3", figsize=(12, 6))
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("Random建立二維陣列 深度為3")
 
 show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 W, H, D = 5, 4, 3
-image = np.random.randint(
-    -256, 256, size=[H, W], dtype=np.int16
-)  # np.random之randint不含尾
-rst = cv2.convertScaleAbs(image)
-print("image = \n", image)
-print("rst = \n", rst)
+image = np.random.randint(0, 256, size=[H, W, D], dtype=np.uint8)
 
-""" 有負的數值 不能顯示
-plt.figure('Random建立二維陣列 深度為1', figsize = (12, 6))
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title('Random 二維陣列')
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
-plt.title('xxxx')
-
-show()
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-W, H, D = 5, 5, 3
+W, H, D = 10, 10, 3
 image = np.zeros((H, W), np.uint8)
-image[1:4, 1:4] = 1
+image[3:8, 3:8] = 255
+
+plt.figure("侵蝕/擴張", figsize=(10, 6))
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 W, H, D = 1, 3, 3
 kernel = np.ones((H, W), np.uint8)
-erosion = cv2.erode(image, kernel)
+erosion = cv2.erode(image, kernel)  # 侵蝕
 print("image = \n", image)
 print("kernel = \n", kernel)
 print("erosion = \n", erosion)
 
-plt.figure("erosion", figsize=(12, 6))
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(122)
+plt.subplot(132)
 plt.imshow(cv2.cvtColor(erosion, cv2.COLOR_BGR2RGB))
-plt.title("erosion")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-W, H, D = 5, 5, 3
-image = np.zeros((H, W), np.uint8)
-image[2:3, 1:4] = 1
+plt.title("侵蝕")
 
 W, H, D = 1, 3, 3
 kernel = np.ones((H, W), np.uint8)
 dilation = cv2.dilate(image, kernel)
-
 print("image = \n", image)
 print("kernel = \n", kernel)
 print("dilation\n", dilation)
 
-plt.figure("dilation", figsize=(12, 6))
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(122)
+plt.subplot(133)
 plt.imshow(cv2.cvtColor(dilation, cv2.COLOR_BGR2RGB))
-plt.title("dilation")
+plt.title("擴張")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("Random建立二維陣列為影像1")
-W, H, D = 3, 3, 3
-image1 = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)  # np.random之randint不含尾
-# print("image1 = \n", image1)
-
-print("Random建立二維陣列為影像2")
-W, H, D = 3, 3, 3
-image2 = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)  # np.random之randint不含尾
-# print("image2 = \n", image2)
+image1 = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)
+image2 = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)
 
 print("兩影像用cv2相加")
 image3 = cv2.add(image1, image2)
-# print("cv2.add(image1, image2) = \n", image3)
-
-plt.figure("兩影像用cv2相加", figsize=(12, 6))
-
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-plt.title("影像1")
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
-plt.title("影像2")
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
-plt.title("兩影像用cv2相加")
-
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+# 以上為建立影像陣列 2D 3D
 
-print("讀取圖片 並顯示")
-image = cv2.imread(filename1, 1)  # 讀取本機圖片, 0: 黑白圖片 1: 原色圖片
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB), cmap="gray", interpolation="bicubic")
-show()
 
 print("------------------------------------------------------------")  # 60個
+# 讀取圖片
 print("------------------------------------------------------------")  # 60個
 
 """ OK
@@ -516,6 +344,14 @@ plt.subplot(122)
 plt.imshow(cv2.cvtColor(image_gray, cv2.COLOR_BGR2RGB))  # 顯示圖片   #原圖轉黑白
 plt.title("先轉灰階 再轉RGB")
 
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("讀取圖片 並顯示")
+image = cv2.imread(filename1, 1)  # 讀取本機圖片, 0: 黑白圖片 1: 原色圖片
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -675,24 +511,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename1)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-show()
-
-# 三個影像橫向拼接 np.hstack
-image_hstack = np.hstack((image, image, image))
-
-# 二個影像縱向拼接 np.vstack
-image_vstack = np.vstack((image_hstack, image_hstack))
-
-plt.imshow(cv2.cvtColor(image_vstack, cv2.COLOR_BGR2RGB))
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp"
 
 image = cv2.imread(filename)  # cv2讀取圖片, 自動轉成array
@@ -769,15 +587,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename1)
-b, g, r = cv2.split(image)
-# print(b)
-# print(g)
-# print(r)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("OpenCV_03")
 
 image_r = cv2.imread(filename1)
@@ -846,7 +655,7 @@ print("原圖 彩色 轉 灰階1通道")
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # cv2影像 轉 灰階
 
 print("灰階 轉 BGR3通道")
-rgb = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
+rgb = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)  # 轉灰階
 print("rgb.shape=", rgb.shape)
 
 plt.figure(figsize=(12, 8))
@@ -989,10 +798,7 @@ plt.imshow(cv2.cvtColor(face, cv2.COLOR_BGR2RGB))
 plt.title("擷取一塊出來")
 
 print("將其中一塊亂碼化, 並顯示之")
-x_st = 50
-y_st = 50
-w = 100
-h = 180
+x_st, y_st, w, h = 50, 50, 100, 180
 face = np.random.randint(0, 256, (h, w, 3))
 a[y_st : y_st + h, x_st : x_st + w] = face
 
@@ -1007,8 +813,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("漸層色")
 
-w = 400
-h = 400
+w, h = 400, 400
 image = np.zeros([h, w, 3])
 for i in range(h):
     for j in range(w):
@@ -1040,8 +845,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-w = 400
-h = 400
+w, h = 400, 400
+
 image = np.zeros([h, w, 4])  # 第三個值為 4
 for i in range(h):
     image[i, :, 3] = int(256 * i / 400)  # 設定第四個值 ( 透明度 )
@@ -1114,9 +919,7 @@ w = int(640 / 20)
 h = int(480 / 20)
 W, H, D = 640, 480, 3
 
-image = np.random.randint(
-    0, 256, size=[h, w, D], dtype=np.uint8
-)  # np.random之randint不含尾
+image = np.random.randint(0, 256, size=[h, w, D], dtype=np.uint8)
 print(image.shape)
 rst = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 print(rst.shape)
@@ -1216,10 +1019,11 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
 W, H, D = 5, 5, 3
 image = np.ones([H, W], dtype=np.uint8) * 9
-mask = np.zeros([H, W], dtype=np.uint8)
 
+mask = np.zeros([H, W], dtype=np.uint8)
 mask[0:3, 0] = 1
 mask[2:5, 2:4] = 1
 
@@ -1227,66 +1031,6 @@ roi = cv2.bitwise_and(image, image, mask=mask)
 print("image = \n", image)
 print("mask = \n", mask)
 print("roi = \n", roi)
-
-plt.figure("mask roi", figsize=(12, 6))
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("image")
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
-plt.title("mask")
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(roi, cv2.COLOR_BGR2RGB))
-plt.title("roi")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-W, H, D = 3, 2, 3
-image = np.random.randint(
-    0, 256, size=[H, W, D], dtype=np.uint8
-)  # np.random之randint不含尾
-bgra1 = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
-# print("image = \n", image)
-# print("bgra1 = \n", bgra1)
-
-b, g, r, a = cv2.split(bgra1)
-# print("a = \n",a)
-a[:, :] = 125
-
-bgra2 = cv2.merge([b, g, r, a])
-# print("bgra2 = \n", bgra2)
-
-plt.figure("cv2.split & cv2.merge", figsize=(12, 6))
-plt.subplot(231)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(232)
-plt.imshow(cv2.cvtColor(bgra1, cv2.COLOR_BGR2RGB))
-plt.title("bgra1")
-
-plt.subplot(233)
-plt.imshow(cv2.cvtColor(bgra2, cv2.COLOR_BGR2RGB))
-plt.title("bgra2")
-
-plt.subplot(234)
-plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
-plt.title("R")
-
-plt.subplot(235)
-plt.imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB))
-plt.title("G")
-
-plt.subplot(236)
-plt.imshow(cv2.cvtColor(b, cv2.COLOR_BGR2RGB))
-plt.title("B")
-
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1314,10 +1058,10 @@ print("製作影像")
 width, height = 640, 480  # 影像寬, 影像高
 
 # 建立 640 X 480 之黑圖
-fig = np.zeros((height, width), dtype=np.uint8)
+image = np.zeros((height, width), dtype=np.uint8)
 
 # 建立 640 X 480 之白圖
-fig = np.ones((height, width), dtype=np.uint8) * 255
+image = np.ones((height, width), dtype=np.uint8) * 255
 
 width, height = 640, 480  # 影像寬, 影像高
 
@@ -1716,3 +1460,14 @@ image = cv2.imread(filename1, 0)
 
 
 output = np.zeros([row, col, channel], dtype=np.uint8)  # 產生空白畫布
+
+
+print("讀取圖片 並顯示")
+image = cv2.imread(filename1, 1)  # 讀取本機圖片, 0: 黑白圖片 1: 原色圖片
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+show()
+
+
+rst = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)  # 轉灰階
+
+rst = cv2.convertScaleAbs(image)

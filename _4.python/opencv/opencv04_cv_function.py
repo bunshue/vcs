@@ -132,6 +132,63 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+image = cv2.imread(filename1)
+b, g, r = cv2.split(image)
+# print(b)
+# print(g)
+# print(r)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+W, H, D = 3, 2, 3
+image = np.random.randint(0, 256, size=[H, W, D], dtype=np.uint8)
+bgra1 = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
+# print("image = \n", image)
+# print("bgra1 = \n", bgra1)
+
+b, g, r, a = cv2.split(bgra1)
+# print("a = \n",a)
+a[:, :] = 125
+
+bgra2 = cv2.merge([b, g, r, a])
+# print("bgra2 = \n", bgra2)
+
+plt.figure("cv2.split & cv2.merge", figsize=(12, 6))
+plt.subplot(231)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(232)
+plt.imshow(cv2.cvtColor(bgra1, cv2.COLOR_BGR2RGB))
+plt.title("bgra1")
+
+plt.subplot(233)
+plt.imshow(cv2.cvtColor(bgra2, cv2.COLOR_BGR2RGB))
+plt.title("bgra2")
+
+plt.subplot(234)
+plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
+plt.title("R")
+
+plt.subplot(235)
+plt.imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB))
+plt.title("G")
+
+plt.subplot(236)
+plt.imshow(cv2.cvtColor(b, cv2.COLOR_BGR2RGB))
+plt.title("B")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 filename_rgb512 = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
 image = cv2.imread(filename_rgb512)
@@ -1302,6 +1359,24 @@ plt.title("原圖")
 plt.subplot(122)
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("邊緣擴充")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+image = cv2.imread(filename1)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+show()
+
+# 三個影像橫向拼接 np.hstack
+image_hstack = np.hstack((image, image, image))
+
+# 二個影像縱向拼接 np.vstack
+image_vstack = np.vstack((image_hstack, image_hstack))
+
+plt.imshow(cv2.cvtColor(image_vstack, cv2.COLOR_BGR2RGB))
 
 show()
 
