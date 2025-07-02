@@ -10,6 +10,7 @@ from deepface import DeepFace
 
 filename = "data/_face/FourPeople.jpg"
 
+
 # 定義加入文字函式
 def putText(x, y, text, size=30, color=WHITE):
     global image

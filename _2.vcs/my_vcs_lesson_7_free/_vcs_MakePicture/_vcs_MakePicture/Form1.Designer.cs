@@ -1125,6 +1125,7 @@
             this.button77.Name = "button77";
             this.button77.Size = new System.Drawing.Size(60, 60);
             this.button77.TabIndex = 81;
+            this.button77.Text = "輪廓";
             this.button77.UseVisualStyleBackColor = true;
             this.button77.Click += new System.EventHandler(this.button77_Click);
             // 
@@ -1135,6 +1136,7 @@
             this.button78.Name = "button78";
             this.button78.Size = new System.Drawing.Size(60, 60);
             this.button78.TabIndex = 82;
+            this.button78.Text = "星";
             this.button78.UseVisualStyleBackColor = true;
             this.button78.Click += new System.EventHandler(this.button78_Click);
             // 

@@ -3165,9 +3165,9 @@ namespace _vcs_MakePicture
             }
 
             background_color = Color.Black;
-            for (yy = height/3; yy < height*2/3; yy++)
+            for (yy = height / 3; yy < height * 2 / 3; yy++)
             {
-                for (xx = width/3; xx < width*2/3; xx++)
+                for (xx = width / 3; xx < width * 2 / 3; xx++)
                 {
                     //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
                     bitmap1.SetPixel(xx, yy, background_color);
@@ -3182,9 +3182,9 @@ namespace _vcs_MakePicture
             {
                 p = new Pen(Color.FromArgb(255, i, i, i), 2);
                 //g.DrawEllipse(p, cx, cy, width - linewidth - 1, height - linewidth - 1);
-                DrawCircle(g, p, cx, cy, i+60);
+                DrawCircle(g, p, cx, cy, i + 60);
             }
-            for (int i = 256; i < 256+100; i++)
+            for (int i = 256; i < 256 + 100; i++)
             {
                 p = new Pen(Color.FromArgb(255, 255, 255, 255), 1);
                 //DrawCircle(g, p, cx, cy, i + 60);
@@ -3203,12 +3203,108 @@ namespace _vcs_MakePicture
 
         private void button77_Click(object sender, EventArgs e)
         {
+            //opencv 做 dilate erode 用
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
 
+            int W = 440;
+            int H = 200;
+            bitmap1 = new Bitmap(W, H);
+
+            //background
+            for (yy = 0; yy < H; yy++)
+            {
+                for (xx = 0; xx < W; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, Color.White);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            sb = new SolidBrush(Color.White);
+            g.FillRectangle(sb, new Rectangle(0, 0, W, H));
+
+            /*
+            //畫grid
+            Point pointa;
+            Point pointb;
+
+            for (int j = 0; j <= H; j += 100)
+            {
+                for (int i = 0; i <= W; i += 100)
+                {
+                    pointa = new Point(i, 0);
+                    pointb = new Point(i, H);
+                    g.DrawLine(p, pointa, pointb);
+                }
+            }
+            for (int j = 0; j <= W; j += 100)
+            {
+                for (int i = 0; i <= H; i += 100)
+                {
+                    pointa = new Point(0, i);
+                    pointb = new Point(W, i);
+                    g.DrawLine(p, pointa, pointb);
+
+                }
+            }
+            */
+            sb = new SolidBrush(Color.Yellow);
+
+            int x_st = 50;
+            int y_st = 50;
+
+            g.FillRectangle(sb, new Rectangle(x_st + 0, y_st + 0, 130, 100));
+
+            sb = new SolidBrush(Color.Olive);
+            x_st += 200;
+            Point[] points = new Point[6];
+            points[0] = new Point(x_st + 0, y_st + 0);
+            points[1] = new Point(x_st + 100, y_st + 0);
+            points[2] = new Point(x_st + 150, y_st + 50);
+            points[3] = new Point(x_st + 100, y_st + 100);
+            points[4] = new Point(x_st + 0, y_st + 100);
+            points[5] = new Point(x_st + -50, y_st + 50);
+            g.FillPolygon(sb, points);
+            
+            pictureBox1.Image = bitmap1;
         }
 
         private void button78_Click(object sender, EventArgs e)
         {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
 
+            width = 300;
+            height = 300;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, Color.White);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            int radius = width * 4 / 8;
+            Point center = new Point(width / 2, height / 2+10);
+            FillStar(g, center, radius, Color.Blue);
+
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button79_Click(object sender, EventArgs e)

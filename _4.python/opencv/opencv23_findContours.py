@@ -14,7 +14,7 @@ OpenCV具有findContour()幫助從圖像中提取輪廓的功能。
 from opencv_common import *
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # coin.jpg用圖片先處理方法一
 filename = "images/coin.jpg"
 
@@ -22,7 +22,7 @@ filename = "images/coin.jpg"
 # filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
 
 # 讀圖片的方法一
-cap = cv2.VideoCapture(filename)  # 用VideoCapture讀取本機圖片
+cap = cv2.VideoCapture(filename)
 ret, image1 = cap.read()
 
 # 讀圖片的方法二
@@ -80,10 +80,9 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "images/poly.png"
-
-print("顯示圖片")
-image = cv2.imread(filename)  # 讀取本機圖片
+filename = "C:/_git/vcs/_4.python/opencv/data/_findContours/findContours2.bmp"
+filename = "C:/_git/vcs/_4.python/opencv/data/_findContours/findContours2b.png"
+image = cv2.imread(filename)
 
 plt.figure(figsize=(12, 8))
 plt.subplot(211)
@@ -91,11 +90,7 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 shape = image.shape
-h = shape[0]  # 高
-w = shape[1]  # 寬
 h, w, d = image.shape  # d為dimension d=3 全彩 d=1 灰階
-print("寬 = ", w, ", 高 = ", h, ", D = ", d)
-
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 edged = cv2.Canny(gray, 50, 150)
 edged = cv2.dilate(edged, None, iterations=1)
@@ -130,19 +125,14 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 多邊形凹凸點計算
 
-filename = "data/star.png"
-
-print("顯示圖片")
-image = cv2.imread(filename)  # 讀取本機圖片
+filename = "C:/_git/vcs/_4.python/opencv/data/_findContours/star.bmp"
+image = cv2.imread(filename)
 
 shape = image.shape
-h = shape[0]  # 高
-w = shape[1]  # 寬
 h, w, d = image.shape  # d為dimension d = 3 全彩 d = 1 灰階
-print("寬 = ", w, ", 高 = ", h, ", D = ", d)
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -417,9 +407,10 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/findContours/easy.jpg")
+filename = "C:/_git/vcs/_4.python/opencv/data/_findContours/findContours1.bmp"
+src = cv2.imread(filename)
 
-plt.subplot(311)
+plt.subplot(221)
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.title("原圖")
 plt.axis("off")
@@ -430,7 +421,7 @@ src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
 
-plt.subplot(312)
+plt.subplot(222)
 plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.title("二值化")
 plt.axis("off")
@@ -466,12 +457,10 @@ for i in range(n):  # 依次繪製輪廓
     print("第", i + 1, "個輪廓")
     dst = cv2.drawContours(dst, contours, i, colors[i], 5)
 
-plt.subplot(313)
+plt.subplot(223)
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.title("找尋影像內的輪廓")
 plt.axis("off")
-
-show()
 
 for i in range(n):  # 列印輪廓面積
     area = cv2.moments(contours[i])
@@ -481,31 +470,7 @@ for i in range(n):  # 列印影像矩
     M = cv2.moments(contours[i])
     print(f"列印影像矩 {str(i)} \n {M}")
 """
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/findContours/easy.jpg")
-
-plt.subplot(311)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.title("原圖")
-plt.axis("off")
-
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
-
-# 二值化處理影像
-thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
-ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
-
-plt.subplot(312)
-plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.title("二值化")
-plt.axis("off")
-
-# 找尋影像內的輪廓
-contours, hierarchy = cv2.findContours(
-    dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
-)
 dst = cv2.drawContours(src, contours, -1, GREEN, 5)  # 繪製圖形輪廓
 
 for c in contours:  # 繪製中心點迴圈
@@ -514,41 +479,12 @@ for c in contours:  # 繪製中心點迴圈
     Cy = int(M["m01"] / M["m00"])  # 質心 y 座標
     cv2.circle(dst, (Cx, Cy), 5, BLUE, -1)  # 繪製中心點
 
-plt.subplot(313)
+plt.subplot(224)
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.title("繪製圖形輪廓")
 plt.axis("off")
 
 show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread("data/findContours/easy.jpg")
-
-plt.subplot(311)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.title("原圖")
-plt.axis("off")
-
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
-
-# 二值化處理影像
-thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
-ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
-
-plt.subplot(312)
-plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.title("二值化")
-plt.axis("off")
-
-# 找尋影像內的輪廓
-contours, hierarchy = cv2.findContours(
-    dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
-)
-
-print("資料類型 :", type(contours))
-print("輪廓數量 :", len(contours))
 
 n = len(contours)
 for i in range(n):  # 繪製中心點迴圈
@@ -556,45 +492,13 @@ for i in range(n):  # 繪製中心點迴圈
     area = cv2.contourArea(contours[i])  # 計算輪廓面積
     print(f"輪廓 {i} 面積 = {area}")
 
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread("data/findContours/easy.jpg")
-
-plt.subplot(311)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.title("原圖")
-plt.axis("off")
-
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 影像轉成灰階
-
-# 二值化處理影像
-thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
-ret, dst_binary = cv2.threshold(src_gray, thresh, maxval, cv2.THRESH_BINARY)
-
-plt.subplot(312)
-plt.imshow(cv2.cvtColor(dst_binary, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.title("二值化")
-plt.axis("off")
-
-# 找尋影像內的輪廓
-contours, hierarchy = cv2.findContours(
-    dst_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
-)
-
-print("資料類型 :", type(contours))
-print("輪廓數量 :", len(contours))
-
 n = len(contours)
 for i in range(n):  # 繪製中心點迴圈
     M = cv2.moments(contours[i])  # 影像矩
     area = cv2.arcLength(contours[i], True)  # 計算輪廓周長
     print(f"輪廓 {i} 周長 = {area}")
 
-show()
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 src = cv2.imread("data/findContours/heart.jpg")
@@ -2475,7 +2379,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
@@ -2483,9 +2386,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
-
-
-
     # cv2.findContours 抓取顏色範圍的輪廓座標
     # cv2.RETR_EXTERNAL 表示取得範圍的外輪廓座標串列
     # cv2.CHAIN_APPROX_SIMPLE 為取值的演算法
@@ -2516,7 +2416,6 @@ print("------------------------------------------------------------")  # 60個
                         RED,
                         3,
                     )
-
 
 ------------------------------------------------------------
 
@@ -2564,8 +2463,5 @@ print("------------------------------------------------------------")  # 60個
         if area > 300:
             x, y, w, h = cv2.boundingRect(contour)
             img = cv2.rectangle(img, (x, y), (x + w, y + h), GREEN, 3)
-
-
-
 
 """

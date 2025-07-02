@@ -8,34 +8,6 @@ from opencv_common import *
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-W, H = 640, 480
-
-
-def make_image(r, dtype="uint8"):
-    image = np.zeros((H, W, 3), np.uint8)
-    cx, cy = W // 2, H // 2
-    cv2.circle(image, (cx, cy), r, RED, 1)  # 圆
-    return image
-
-
-def test_avi_output(video_filename, fourcc):
-    # fourcc = cv2.FOURCC(*fourcc)
-    fourcc = cv2.VideoWriter_fourcc(*"XVID")
-    vw = cv2.VideoWriter(video_filename, fourcc, 15, (W, H), True)
-    if not vw.isOpened():
-        return
-    for r in range(1, 200, 1):
-        img = make_image(r)
-        vw.write(img)
-    vw.release()
-
-
-test_avi_output("tmp_fmp4cccccc.avi", "fmp4")
-test_avi_output("tmp_aaaaa.avi", "x264")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("opencv 01")
 print("練習組合成一張大圖 picasa效果")
 
@@ -383,7 +355,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("opencv 35 cv2.floodFill()")
+print("cv2.floodFill() 填充 1")
 
 
 def floodFill(
@@ -403,13 +375,13 @@ def floodFill(
 
 
 image = cv2.imread(filename1)
-h, w = image.shape[:2]  # 取得原始影像的長寬
+h, w = image.shape[:2]
 
 mask = np.zeros((h + 2, w + 2, 1), np.uint8)  # 製作 mask，長寬都要加上 2
 image1 = floodFill(image, mask, (100, 10), RED, (100, 100, 60), (100, 100, 100))
 
 image = cv2.imread(filename1)
-h, w = image.shape[:2]  # 取得原始影像的長寬
+h, w = image.shape[:2]
 
 mask = np.zeros((h + 2, w + 2, 1), np.uint8)  # 全黑遮罩
 mask = 255 - mask  # 變成全白遮罩
@@ -436,8 +408,7 @@ print("opencv 37")
 image1 = cv2.imread(filename_lena_color)
 image2 = cv2.imread(filename_lena_gray)
 
-w = image1.shape[1]  # W
-h = image1.shape[0]  # H
+h, w = image1.shape[:2]
 
 for i in range(w):
     image1[:, i, 0] = image1[:, i, 0] * ((300 - i) / 300) + image2[:, i, 0] * (
@@ -515,7 +486,7 @@ def adjust(i, c, b):
 contrast = 0  # 初始化要調整對比度的數值
 brightness = 0  # 初始化要調整亮度的數值
 
-cv2.imshow("ImageShow", image)
+cv2.imshow("Image", image)
 
 while True:
     keycode = cv2.waitKey(0)
@@ -533,7 +504,7 @@ while True:
         break
     show_image = image.copy()  # 複製原始圖片
     show_image = adjust(show_image, contrast, brightness)  # 根據亮度和對比度的調整值，輸出新的圖片
-    cv2.imshow("ImageShow", show_image)
+    cv2.imshow("Image", show_image)
 
 cv2.destroyAllWindows()
 
@@ -614,7 +585,7 @@ print("------------------------------------------------------------")  # 60個
 print("opencv 92")
 """
 #例外的寫法
-img = cv2.imread('digits.png',0)
+img = cv2.imread("digits.png", 0)
 if img is None:
     raise Exception("we need the digits.png image from samples/data here !")
 """
@@ -713,18 +684,15 @@ img2 = cv2.remap(
 )
 
 plt.subplot(121)
-cv2.circle(img, (tx, ty), 3, RED, 2)
-cv2.circle(img, (sx, sy), 3, GREEN, 2)
+cv2.circle(img, (tx, ty), 3, RED, 2)  # 畫圓
+cv2.circle(img, (sx, sy), 3, GREEN, 2)  # 畫圓
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 plt.title("原圖")
 
 plt.subplot(122)
-cv2.circle(img2, (tx, ty), int(r), RED, 2)
-cv2.circle(img2, (sx, sy), int(r), BLACK, 2)
+cv2.circle(img2, (tx, ty), int(r), RED, 2)  # 畫圓
+cv2.circle(img2, (sx, sy), int(r), BLACK, 2)  # 畫圓
 plt.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-
-# 绘制圆：圆心(255, 255), 半径60, 颜色 YELLOW, 像素1
-# cv2.circle(img, (255, 150), 60, YELLOW, 2)  # 圆
 
 """
 plt.Circle((tx, ty), r, fill=None, alpha=0.5, lw=2, ls="dashed")
@@ -999,8 +967,7 @@ box = np.round(box)
 box = np.intp(box)
 
 for p in pts:
-    # print(p)
-    cv2.circle(img, (p[0], p[1]), 7, BLUE, -1)  # 圆
+    cv2.circle(img, (p[0], p[1]), 7, BLUE, -1)  # 畫圓
 
 
 # 画出来
@@ -1078,7 +1045,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("opencv 119")
+print("cv2.floodFill() 填充 2")
 
 """
 有些特殊的卷积核可以表示成一个列矢量和一个行矢量的乘积，
@@ -1506,9 +1473,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
-filename1p = 'C:/_git/vcs/_4.python/_data/penguin3.jpg'
-filename2p = 'C:/_git/vcs/_4.python/_data/penguin4.jpg'
-output_filename = 'tmp_penguin_all.jpg'
+filename1p = "C:/_git/vcs/_4.python/_data/penguin3.jpg"
+filename2p = "C:/_git/vcs/_4.python/_data/penguin4.jpg"
+output_filename = "tmp_penguin_all.jpg"
 filenames = [filename1p, filename2p]
 """
 
@@ -1665,7 +1632,7 @@ def draw_lines(img, lines):  # 建立自訂函式
             4,
         )  # 降成一維 shape = (4,)
         x1, y1, x2, y2 = points  # 取出直線座標
-        cv2.line(img, (x1, y1), (x2, y2), (0, 0, 255), 3)  # 繪製直線
+        cv2.line(img, (x1, y1), (x2, y2), RED, 3)  # 繪製直線
     return img  # 回傳繪製直線後的影像
 
 
@@ -2191,7 +2158,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 mask = np.zeros((300, 300, 3), dtype="uint8")  # 建立 300x300 的黑色畫布
-cv2.circle(mask, (150, 150), 100, (255, 255, 255), -1)  # 在畫布上中心點加入一個半徑 100 的白色圓形
+cv2.circle(mask, (150, 150), 100, WHITE, -1)  # 在畫布上中心點加入一個半徑 100 的白色圓形
 mask = cv2.GaussianBlur(mask, (35, 35), 0)  # 進行高斯模糊
 
 cv2.imshow("image", mask)
@@ -2202,21 +2169,21 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ TBD
-mask = np.zeros((300,300,3), dtype='uint8')
-cv2.circle(mask,(150,150),100,(255,255,255),-1)
+mask = np.zeros((300,300,3), dtype="uint8")
+cv2.circle(mask,(150,150),100, WHITE,-1)  # 畫圓
 mask = cv2.GaussianBlur(mask, (35, 35), 0)
 mask = mask / 255                          # 除以 255，計算每個像素的黑白色彩在 255 中所佔的比例
 
 img = cv2.imread(filename1)               # 開啟圖片
-bg = np.zeros((300,300,3), dtype='uint8')  # 產生一張黑色背景
+bg = np.zeros((300,300,3), dtype="uint8")  # 產生一張黑色背景
 bg = 255 - bg                              # 轉換成白色背景
 img = img / 255                            # 除以 255，計算每個像素的色彩在 255 中所佔的比例
 bg = bg / 255                              # 除以 255，計算每個像素的色彩在 255 中所佔的比例
 
 out  = bg * (1 - mask) + img * mask        # 根據比例混合
-out = (out * 255).astype('uint8')          # 乘以 255 之後轉換成整數
+out = (out * 255).astype("uint8")          # 乘以 255 之後轉換成整數
 
-cv2.imshow('image',out)
+cv2.imshow("image", out)
 cv2.waitKey()
 cv2.destroyAllWindows()
 """
@@ -2463,6 +2430,48 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+""" ok
+# cv2 製作圖像影片檔案
+
+W, H = 180, 180
+
+def make_image(offset, dtype="uint8"):
+    W, H = 180, 180
+    cx, cy = W//2, H//2
+    image = np.zeros((H, W, 3), np.uint8)
+    for i in range(90+30):
+        # print(i, end=" ")
+        # c = np.sin(((i+offset)%180)*np.pi/180)*256
+        c = int(np.sin(((i+offset)%180)*np.pi/180)*256)
+        cv2.circle(image, (cx, cy), i, (c, c, c), 1)  # 畫圓
+    return image
+
+
+def make_image(r, dtype="uint8"):
+    image = np.zeros((H, W, 3), np.uint8)
+    cx, cy = W // 2, H // 2
+    cv2.circle(image, (cx, cy), r, RED, 1)  # 畫圓
+    return image
+
+
+def test_avi_output(video_filename, fourcc):
+    # fourcc = cv2.FOURCC(*fourcc)
+    fourcc = cv2.VideoWriter_fourcc(*"XVID")
+    vw = cv2.VideoWriter(video_filename, fourcc, 15, (W, H), True)
+    if not vw.isOpened():
+        return
+    for r in range(0, 2000, 1):
+        img = make_image(r)
+        vw.write(img)
+    vw.release()
+
+
+test_avi_output("tmp_fmp4.avi", "fmp4")
+# test_avi_output("tmp_x264.avi", "x264")
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2488,7 +2497,6 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
 
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
@@ -2505,13 +2513,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 # 存圖以比較之
-# cv2.imwrite('building.png', image)
-# cv2.imwrite('building_clahe.png', cl1)
-# cv2.imwrite('tmp_image.png', image1)
-# cv2.imwrite('tmp_image.png', mona)
-
-
-# dddddddddddddddddddddddddddddddddddddddddddd
+# cv2.imwrite("tmp_filename.png", image)
 
 image = cv2.imread(filenamexxx, cv2.IMREAD_GRAYSCALE)
 cvshow("image", image)
@@ -2533,7 +2535,7 @@ flags参数选择inpaint的算法，目前有两个候选算法： INPAINT_NS �
 
 def putText(x, y, text, color=(0, 0, 0)):
     global image
-    # font_filename = 'NotoSansTC-Regular.otf'
+    # font_filename = "NotoSansTC-Regular.otf"
     font = ImageFont.truetype(font_filename, 20)
     imagePil = Image.fromarray(image)
     draw = ImageDraw.Draw(imagePil)
@@ -2541,16 +2543,14 @@ def putText(x, y, text, color=(0, 0, 0)):
     image = np.array(imagePil)
 
 
-cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), (0, 0, 255), 5)  # 繪製外框
-putText(box[0], box[3], text, color=(0, 0, 255))  # 放入文字
+cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), RED, 5)  # 繪製外框
+putText(box[0], box[3], text, color=RED)  # 放入文字
 
-
-# 畫圓
-cv2.circle(I, (int(circles[i][2]), int(circles[i][1])), int(circles[i][0]), (255), 2)
-
+cv2.circle(
+    I, (int(circles[i][2]), int(circles[i][1])), int(circles[i][0]), (255), 2
+)  # 畫圓
 
 # cv2.imwrite("_tmp_face1.jpg", img)  # 存圖
-
 
 # 存成pgm檔
 cv2.imwrite("tmp_picture1.mono.pgm", img)
@@ -2570,9 +2570,8 @@ cv2.destroyWindow("Peony1")  # 刪除Peony1
 cv2.waitKey(8000)  # 等待8秒
 cv2.destroyAllWindows()
 
-ret = cv2.imwrite("tmp_out1_7_1.tiff", img)  # 將檔案寫入out1_7_1.tiff
-ret = cv2.imwrite("tmp_out1_7_2.png", img)  # 將檔案寫入out1_7_2.png
-cv2.imwrite("a32.png", a32_image)  # 儲存alpha=32影像
+cv2.imwrite("tmp_out1_7_1.tiff", img)  # 將檔案寫入out1_7_1.tiff
+cv2.imwrite("tmp_out1_7_2.png", img)  # 將檔案寫入out1_7_2.png
 
 # ------------------------------------------------------------
 
@@ -2693,16 +2692,16 @@ result = result.astype(np.uint8)
 
 result = 255 - result
 
-#cv2.imwrite('test.jpg',img) 偽寫入
+#cv2.imwrite("test.jpg", img) 偽寫入
 
 read
-    img = cv2.imread('car.jpg')
+    img = cv2.imread("car.jpg")
 
 resize
     img_small = cv2.resize(img, (300, 100))  # 改變尺寸
 
 save
-        cv2.imwrite('small.jpg', img_small)  # 儲存影像
+        cv2.imwrite("small.jpg", img_small)  # 儲存影像
 
 OpenCV 的 cv2.imread 在讀取圖片時，可以在第二個參數指定圖片的格式，可用的選項有三種：
 
@@ -2734,7 +2733,7 @@ print(image.shape)  # 得到 shape
 print(image.dtype)  # uint8
 
 image1 = cv2.imread(filenamexx, cv2.IMREAD_UNCHANGED)
-image2 = cv2.imread('test.png', cv2.IMREAD_UNCHANGED)
+image2 = cv2.imread("test.png", cv2.IMREAD_UNCHANGED)
 
 print(image1.shape)    # (400, 300, 3)  JPG 只有三個色版 BGR
 print(image2.shape)    # (400, 300, 4)  PNG 四個色版 GRA
@@ -2751,20 +2750,17 @@ print(image.shape)                             # (400, 300, 4)  第三個數值�
 
 """
 
-
 # 組數
 numberBins = 256
 histogram, bins, patch_image = plt.hist(
     histSeq, numberBins, facecolor="black", histtype="bar"
 )
 
-
 # 組數
 numberBins = 256
 histogram, bins, patch_image = plt.hist(
     histNormResultSeq, numberBins, facecolor="black", histtype="bar"
 )
-
 
 # 組數
 numberBins = 256
@@ -2800,10 +2796,10 @@ print(cnt)
 print(type(cnt))
 
 r = 10
-cv2.circle(img, (x1, y1), r, BLUE, -1)  # 圆
-cv2.circle(img, (x2, y2), r, BLUE, -1)  # 圆
-cv2.circle(img, (x3, y3), r, BLUE, -1)  # 圆
-cv2.circle(img, (x4, y4), r, BLUE, -1)  # 圆
+cv2.circle(img, (x1, y1), r, BLUE, -1)  # 畫圓
+cv2.circle(img, (x2, y2), r, BLUE, -1)  # 畫圓
+cv2.circle(img, (x3, y3), r, BLUE, -1)  # 畫圓
+cv2.circle(img, (x4, y4), r, BLUE, -1)  # 畫圓
 
 plt.subplots_adjust(0.02, 0, 0.98, 1, 0.02, 0)
 
