@@ -315,7 +315,9 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread("images/water_coins.jpg")
+coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
+img = cv2.imread(coin_filename)
+
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 ishow = img.copy()
@@ -340,7 +342,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread("images/water_coins.jpg")
+coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
+img = cv2.imread(coin_filename)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 ishow = img.copy()
@@ -371,7 +374,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread("images/water_coins.jpg")
+coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
+img = cv2.imread(coin_filename)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 ishow = img.copy()
@@ -400,7 +404,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread("images/water_coins.jpg")
+coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
+img = cv2.imread(coin_filename)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 ishow = img.copy()
@@ -430,7 +435,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread("images/water_coins.jpg")
+coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
+img = cv2.imread(coin_filename)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 ishow = img.copy()
@@ -690,7 +696,6 @@ def deHaze(m, r=81, eps=0.001, w=0.95, maxV1=0.80, bGamma=False):
 
 
 m = deHaze(cv2.imread("data/wu.jpg") / 255.0) * 255
-cv2.imwrite("tmp_wu_2.png", m)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -904,7 +909,6 @@ print("侵蝕(Erosion) 白色變小")
 
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
 filename = "dilate_erode2.png"
-# filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 src = cv2.imread(filename)
 cv2.imshow("src", src)
@@ -1151,9 +1155,9 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
+coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
-src = cv2.imread(filename, cv2.IMREAD_COLOR)
+src = cv2.imread(coin_filename, cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 
 # 二值化
@@ -1189,9 +1193,9 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
+coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
-src = cv2.imread(filename, cv2.IMREAD_COLOR)
+src = cv2.imread(coin_filename, cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 
 ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
@@ -1226,9 +1230,9 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
+coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
-src = cv2.imread(filename, cv2.IMREAD_COLOR)
+src = cv2.imread(coin_filename, cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 
 # 二值化
@@ -1277,9 +1281,9 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
+coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
-src = cv2.imread(filename, cv2.IMREAD_COLOR)
+src = cv2.imread(coin_filename, cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 
 # 二值化
@@ -1326,9 +1330,9 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
+coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
-src = cv2.imread(filename, cv2.IMREAD_COLOR)
+src = cv2.imread(coin_filename, cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 
 rgb_src = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)
@@ -1383,9 +1387,9 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
+coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
-src = cv2.imread(filename, cv2.IMREAD_COLOR)
+src = cv2.imread(coin_filename, cv2.IMREAD_COLOR)
 gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 
 rgb_src = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)

@@ -1458,7 +1458,7 @@ image[:, :, 1] = 255
 image[:, :, 2] = 255
 # 第2通道 R
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread(filename1)
@@ -1469,6 +1469,7 @@ cv2.imshow("image", img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 灰階讀取
@@ -1490,3 +1491,45 @@ rst = cv2.convertScaleAbs(image)
 image = cv2.imread(filename, cv2.IMREAD_ANYCOLOR)
 cv2.imwrite("tmp_image.jpg", image)
 """
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+img = cv2.imread(filename1)
+cv2.imshow("Peony", img)
+cv2.destroyWindow("Peony")  # 關閉視窗
+
+ret_value = cv2.waitKey(0)  # 無限等待
+cv2.destroyWindow("Peony")  # 關閉視窗
+
+ret_value = cv2.waitKey(5000)  # 等待 5 秒
+cv2.destroyWindow("Peony")  # 關閉視窗
+
+ret_value = cv2.waitKey(0)  # 無限等待
+if ret_value == ord("Q") or ret_value == ord("q"):
+    cv2.destroyWindow("Peony")  # 關閉視窗
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 設定 cv 視窗
+cv2.namedWindow("Peony1")  # 使用預設
+cv2.namedWindow("Peony2", cv2.WINDOW_NORMAL)  # 可以調整大小
+
+img1 = cv2.imread(filename1)  # 彩色讀取
+img2 = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰色讀取
+# img2 = cv2.imread(filename1, 0)  # 灰色讀取 same
+
+cv2.imshow("Peony1", img1)
+cv2.imshow("Peony2", img2)
+
+cv2.waitKey()
+cv2.destroyWindow("Peony1")  # 刪除Peony1
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+

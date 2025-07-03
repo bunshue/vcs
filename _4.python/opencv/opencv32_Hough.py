@@ -360,7 +360,8 @@ print("------------------------------------------------------------")  # 60個
 # 檢驗圓形
 
 # 使用HoughCircles()檢驗圖形中的圓形
-img = cv2.imread("data/_Hough/coins.png", cv2.IMREAD_GRAYSCALE)
+coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
+img = cv2.imread(coin_filename, cv2.IMREAD_GRAYSCALE)
 
 img_blur = cv2.GaussianBlur(img, (0, 0), 1.8)
 circles = cv2.HoughCircles(

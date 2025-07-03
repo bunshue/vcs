@@ -58,10 +58,6 @@ if transient1 or transient2:
     blended = cv2.addWeighted(img1, 1, diff_imgs1_2, 1, 0)
     cv2.imshow('Surveyed', blended)
     cv2.waitKey(2500)
-
-    out_filename = 'tmp_DECTECTED1.png'
-    cv2.imwrite(out_filename, blended)  # 會覆寫既有檔案！
-
 else:
     print('\nNo transient detected between {} and {}\n'.format(filename1, filename2))
 

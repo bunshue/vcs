@@ -778,8 +778,9 @@ cv2.namedWindow("Image", cv2.WINDOW_NORMAL)
 # ----------------------------
 
 key = cv2.waitKey(200)  # 0.2秒檢查一次
+
 if key == ord("a") or key == ord("A"):  # 如果按A或a
-    cv2.imwrite("tmp_photo.jpg", img)  # 存圖
+    pass
 
 # 把人臉框起來
 for x, y, w, h in faces:
@@ -819,9 +820,6 @@ for x, y, w, h in faces:
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-cv2.imwrite("tmp_atq9305.jpg", carplate)
-print("已存圖, 檔案 : tmp_atq9305.jpg")
 
 target_dir = "images"
 
@@ -872,8 +870,6 @@ while True:
                     YELLOW,
                     2,
                 )
-                filename = datetime.now().strftime("%Y-%m-%d %H.%M.%S")  # 時間格式化
-                cv2.imwrite(filename + ".jpg", img)  # 存圖
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

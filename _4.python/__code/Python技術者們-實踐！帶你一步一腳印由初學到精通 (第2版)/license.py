@@ -51,7 +51,6 @@ if capture.isOpened():
             cv2.imshow("Frame", img)  # 顯示影像
         k = cv2.waitKey(100)  # 等待按鍵輸入
         if k == ord("s") or k == ord("S"):  # 按下 S(s)
-            cv2.imwrite("shot.jpg", img)  # 儲存影像
             text = get_license(img)  # 進行車牌辨識
             print("車牌:", text)
 

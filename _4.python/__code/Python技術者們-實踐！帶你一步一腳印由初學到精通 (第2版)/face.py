@@ -174,8 +174,6 @@ def face_shot(function):
                 )
             if cnter == 0:  # 倒數結束
                 isCnt = False  # 告訴程式離開倒數狀態
-                filename = datetime.now().strftime("%Y-%m-%d %H.%M.%S")  # 時間格式化
-                cv2.imwrite(filename + ".jpg", img)  # 儲存影像檔案
                 # -----------------------------------------#
                 if function == "add":  # 打卡系統新增人員
                     face_add(img)

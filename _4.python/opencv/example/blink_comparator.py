@@ -76,8 +76,6 @@ QC_best_matches(img_match) # 確認過執行結果滿意，即可標示為註解
 img1_registered = register_image(img1, img2, kp1, kp2, best_matches) 
 
 blink(img1, img1_registered, 'Check Registration', num_loops=5) 
-out_filename = 'tmp_file1_registered.png'
-cv2.imwrite(out_filename, img1_registered) # 會覆寫既有檔案！
 
 cv2.destroyAllWindows()
 

@@ -92,7 +92,6 @@ def opencv():
         if photo == True:
             photo = False                   # 按下拍照鈕時，會先設定 True，觸發後再設回 False
             name = rename()                 # 重新命名檔案
-            cv2.imwrite(f'{name}.jpg', frame) # 儲存圖片
         if recorderType == True:
             output.write(frame)             # 按下錄影時，將檔案儲存到 output
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # 改為 RGB

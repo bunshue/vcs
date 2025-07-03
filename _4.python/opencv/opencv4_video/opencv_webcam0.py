@@ -1515,16 +1515,6 @@ WINDOW_FULLSCREEN – Changes the window size to fullscreen
 cv2.namedWindow("WebCam", cv2.WINDOW_AUTOSIZE)
 cv2.namedWindow("WebCam", cv2.WINDOW_NORMAL)
 
-"""
-    elif k == ord("s"):  # 若按下 s 鍵則存圖
-        image_filename = (
-            "Image_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".jpg"
-        )
-        cv2.imwrite(image_filename, frame)
-        print("已存圖")
-"""
-
-
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
@@ -1568,17 +1558,6 @@ frame = cv2.flip(frame, 1)
 # 彩色轉灰階
 # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-"""
-elif k == ord('s'): # 若按下 s 鍵則存圖
-    image_filename = 'Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg';
-    cv2.imwrite(image_filename, frame)
-    print('已存圖, 檔案 :', image_filename)
-
-img_1 = frame
-img_2 = cv2.flip(img_1, 0)             # 上下翻轉
-"""
-
-
 # 若要錄成黑白影片 要 加上 isColor=False 參數設定
 # 建立影像寫入器 out
 out = cv2.VideoWriter(record_filename, fourcc, fps, (width, height), isColor=False)
@@ -1588,7 +1567,6 @@ out.write(gray)  # 將圖像寫入影片
 
 
 """
-
 #留下錄影部分 比較之
 
 record_filename = 'tmp_screen_recording1_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.avi'

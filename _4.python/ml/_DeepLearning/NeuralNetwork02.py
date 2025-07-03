@@ -759,8 +759,6 @@ while True:
     cv2.imshow("image", img)
     k = cv2.waitKey(1) & 0xFF
     if k == ord("s"):
-        print("Save")
-        cv2.imwrite("tmp_1.jpg", img)
         CNN()
     elif k == ord("c"):
         print("Clear")

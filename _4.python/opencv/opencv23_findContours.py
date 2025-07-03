@@ -16,7 +16,7 @@ from opencv_common import *
 print("------------------------------------------------------------")  # 60個
 '''
 # coin.jpg用圖片先處理方法一
-filename = "images/coin.jpg"
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coin.jpg"
 
 # dilate_erode1.png用圖片先處理方法二
 # filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
@@ -31,14 +31,12 @@ image1 = cv2.imread(filename)
 # 轉灰階
 image1_gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)
 
-
 # 圖片先處理方法一
 image1_gray = cv2.GaussianBlur(image1_gray, (13, 13), 0)  # 執行高斯模糊化
 edged = cv2.Canny(image1_gray, 50, 150)
 contours, hierarchy = cv2.findContours(
     edged.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
 )
-
 
 """
 #圖片先處理方法二
@@ -2252,7 +2250,9 @@ print("------------------------------------------------------------")  # 60個
 # 形狀與結構分析
 # 輪廓檢驗
 
-img_coin = cv2.imread("data/coins.png", cv2.IMREAD_COLOR)
+coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
+
+img_coin = cv2.imread(coin_filename, cv2.IMREAD_COLOR)
 img_coin_gray = cv2.cvtColor(img_coin, cv2.COLOR_BGR2GRAY)
 img_coin_blur = cv2.GaussianBlur(img_coin_gray, (0, 0), 1.5, 1.5)
 img_coin_binary = cv2.Canny(img_coin_blur.copy(), 60, 60)

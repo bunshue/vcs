@@ -1,4 +1,50 @@
 
+# cv2 儲存檔案 存圖 cv2.imwrite
+# cv2.imwrite 可透過圖片的副檔名來指定輸出的圖檔格式
+
+cv2.imwrite('filename.jpg', image)  # 存成 jpg
+cv2.imwrite('filename.png', image)  # 存成 png
+cv2.imwrite('filename.tiff', image)  # 存成 tiff
+
+# 部分圖片寫入圖檔
+# cv2.imwrite(filename, image[y:y + h, x:x + w])
+
+print('存圖')
+filename = 'C:/_git/vcs/_1.data/______test_files2/image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.bmp'
+cv2.imwrite(filename, image)
+
+#輸出圖片檔案時，也可以調整圖片的品質或壓縮率：
+
+# 設定 JPEG 圖片品質為 90（可用值為 0 ~ 100）
+cv2.imwrite('filename.jpg', image, [cv2.IMWRITE_JPEG_QUALITY, 90])
+
+print('存圖, 質量為5')
+cv2.imwrite("./1.jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 5])
+print('存圖, 質量為100')
+cv2.imwrite("./2.jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
+
+cv2.imwrite(filename2b, image2, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
+
+cv2.imwrite('tmp_image_2.jpg', img, [cv2.IMWRITE_JPEG_QUALITY, 80])
+
+# 設定 PNG 壓縮層級為 5（可用值為 0 ~ 9）
+cv2.imwrite('filename.png', image, [cv2.IMWRITE_PNG_COMPRESSION, 5])
+print('存圖, 壓縮為0')
+cv2.imwrite("./3.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
+print('存圖, 壓縮為9')
+cv2.imwrite("./4.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 9])
+
+cv 搬出
+#另存新檔
+filename2 = 'C:/_git/vcs/_1.data/______test_files2/human_face.jpg'
+cv2.imwrite(filename2, image)	#寫入本機圖片
+
+cv2.imwrite("face_detection.jpg", image)
+
+cv2.imwrite('7.jpg', image)
+
+
+
 
 ------------------------------------------------------------
 
@@ -214,40 +260,6 @@ plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))  # 原圖
 
 ------------------------------------------------------------
 
-# cv2 儲存檔案 存圖 cv2.imwrite
-# cv2.imwrite 可透過圖片的副檔名來指定輸出的圖檔格式
-
-cv2.imwrite('filename.jpg', image)  # 存成 jpg
-cv2.imwrite('filename.png', image)  # 存成 png
-cv2.imwrite('filename.tiff', image)  # 存成 tiff
-
-# 部分圖片寫入圖檔
-# cv2.imwrite(filename, image[y:y + h, x:x + w])
-
-print('存圖')
-filename = 'C:/_git/vcs/_1.data/______test_files2/image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.bmp'
-cv2.imwrite(filename, image)
-
-#輸出圖片檔案時，也可以調整圖片的品質或壓縮率：
-
-# 設定 JPEG 圖片品質為 90（可用值為 0 ~ 100）
-cv2.imwrite('filename.jpg', image, [cv2.IMWRITE_JPEG_QUALITY, 90])
-
-print('存圖, 質量為5')
-cv2.imwrite("./1.jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 5])
-print('存圖, 質量為100')
-cv2.imwrite("./2.jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
-
-cv2.imwrite(filename2b, image2, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
-
-cv2.imwrite('tmp_image_2.jpg', img, [cv2.IMWRITE_JPEG_QUALITY, 80])
-
-# 設定 PNG 壓縮層級為 5（可用值為 0 ~ 9）
-cv2.imwrite('filename.png', image, [cv2.IMWRITE_PNG_COMPRESSION, 5])
-print('存圖, 壓縮為0')
-cv2.imwrite("./3.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
-print('存圖, 壓縮為9')
-cv2.imwrite("./4.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 9])
 
 ---------------- 共同抽出 matplotlib plt----------------
 

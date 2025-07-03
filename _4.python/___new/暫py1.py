@@ -1,3 +1,19 @@
+
+後面還有一個參數
+plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB), "gray")
+
+窗口显示方式，cv2.WINDOW_NORMAL为正常显示，可以调整大小
+# cv2.WINDOW_AUTOSIZE显示原图片的大小，用户不能调整大小
+
+
+opencv目前像是不能做到動畫功能
+例如
+
+gamma 由 0:0.01:1 變化
+
+圖片連續顯示之
+
+
 """
 一句話
 colab
@@ -479,12 +495,6 @@ D:/.../.../.../.../.../folder/ABCD.nice.EFG
 
 ------------------------------------------------------------
 
-標準化 info
-
-PIL開啟圖檔
-opencv開啟圖檔
-opencv開啟影片
-opencv開啟WebCam
 
 ------------------------------------------------------------
 
@@ -496,10 +506,7 @@ picture_add2.bmp
 
 newimg.paste(img, mask=img)             # 將PNG檔壓在白底圖片上
 
-    image.paste(icon, (0, 0), icon)  # 加入浮水印
-
-窗口显示方式，cv2.WINDOW_NORMAL为正常显示，可以调整大小
-# cv2.WINDOW_AUTOSIZE显示原图片的大小，用户不能调整大小
+image.paste(icon, (0, 0), icon)  # 加入浮水印
 
 移動檔案指標
 
@@ -639,10 +646,6 @@ orientation : 直方圖方向 'vertical'(垂直, 預設), 'horizontal'(水平)
 
 ------------------------------------------------------------
 
-後面還有一個參數
-plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB), "gray")
-
-
 和C一樣，python也有 位元運算子 和 位移運算子
 
 
@@ -666,14 +669,6 @@ print 之
 
 
 ------------------------------------------------------------
-
-
-opencv目前像是不能做到動畫功能
-例如
-
-gamma 由 0:0.01:1 變化
-
-圖片連續顯示之
 
 
 
@@ -1190,14 +1185,6 @@ sys.stdout = sys.stderr
 print('usage: findlinksto pattern directory ...')
 
 ------------------------------------------------------------
-
-#另存新檔
-filename2 = 'C:/_git/vcs/_1.data/______test_files2/human_face.jpg'
-cv2.imwrite(filename2, image)	#寫入本機圖片
-
-cv2.imwrite("face_detection.jpg", image)
-
-cv2.imwrite('7.jpg', image)
 
 ------------------------------------------------------------
 
