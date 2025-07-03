@@ -66,10 +66,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 # R : rotate
 print("------------------------------------------------------------")  # 60個
 
@@ -265,7 +261,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("馬賽克 全圖")
+print("馬賽克 縮小放大法 全圖")
 image = cv2.imread(filename2)
 
 H, W, D = image.shape  # d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
@@ -287,7 +283,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("馬賽克 部分")
+print("馬賽克 縮小放大法 部分")
 image = cv2.imread(filename2)
 
 H, W, D = image.shape  # d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
@@ -313,21 +309,24 @@ cv2.imshow("image", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+"""
+    level = 15  # 馬賽克程度
+    mh = int(h / level)  # 根據馬賽克程度縮小的高度
+    mw = int(w / level)  # 根據馬賽克程度縮小的寬度
+    mosaic = cv2.resize(mosaic, (mw, mh), interpolation=cv2.INTER_LINEAR)  # 先縮小
+    mosaic = cv2.resize(mosaic, (w, h), interpolation=cv2.INTER_NEAREST)  # 然後放大
 
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 """
 rotate
 #图像旋转 ： cv2.ROTATE_180  cv2.ROTATE_90_COUNTERCLOCKWISE
-
 cv2.ROTATE_90_CLOCKWISE：顺时针旋转 90 度
 cv2.ROTATE_180： 旋转 180 度
 cv2.ROTATE_90_COUNTERCLOCKWISE：逆时针旋转 90 度
-
 """
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 image = cv2.imread(filename1, 1)
 
 print("旋轉, 直角旋轉(3)")
@@ -365,10 +364,6 @@ plt.imshow(cv2.cvtColor(output, cv2.COLOR_BGR2RGB))
 plt.title("transpose 逆時針旋轉 90 度")
 
 show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -601,21 +596,23 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename3)
+image = cv2.imread(filename1)
 height, width = image.shape[0:2]  # 獲得影像大小
 
-a1 = [0, 0]  # 原始影像的 A
-b1 = [width, 0]  # 原始影像的 B
-c1 = [0, height]  # 原始影像的 C
-d1 = [width - 1, height - 1]  # 原始影像的 D
-
+a1 = [0, 0]  # 原始影像的 A 左上
+b1 = [width, 0]  # 原始影像的 B 右上
+c1 = [0, height]  # 原始影像的 C 左下
+d1 = [width - 1, height - 1]  # 原始影像的 D 右下
 imagep = np.float32([a1, b1, c1, d1])
-a2 = [150, 0]  # dst的 A
-b2 = [width - 150, 0]  # dst的 B
-c2 = [0, height - 1]  # dst的 C
-d2 = [width - 1, height - 1]  # dst的 D
 
+dd1 = 60
+dd2 = 20
+a2 = [dd1, 0]  # dst的 A 左上
+b2 = [width - dd1, 0]  # dst的 B 右上
+c2 = [0 + dd2, height - dd2]  # dst的 C 左下
+d2 = [width - dd2, height - dd2]  # dst的 D 右下
 dstp = np.float32([a2, b2, c2, d2])
+
 M = cv2.getPerspectiveTransform(imagep, dstp)  # 建立 M 矩陣
 dsize = (width, height)
 dst = cv2.warpPerspective(image, M, dsize)  # 執行透視
@@ -666,6 +663,7 @@ image = cv2.imread(filename1)
 rows, cols = image.shape[:2]
 mapx = np.zeros(image.shape[:2], np.float32)
 mapy = np.zeros(image.shape[:2], np.float32)
+
 for r in range(rows):  # 建立mapx和mapy
     for c in range(cols):
         mapx.itemset((r, c), c)  # 設定mapx
@@ -1011,33 +1009,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------")  # 30個
-
-
-"""
-#image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-image = cv2.imread(filename, cv2.IMREAD_ANYCOLOR)
-
-cv2.imwrite("tmp_image.jpg", image)
-
-"""
-
-print("用np建立一個影像陣列")
-
-W = 640
-H = 480
-D = 3
-
-# 建立陣列
-image = np.ones([H, W, D], dtype=np.uint8) * 128  # 填滿 128
-
-# 改變陣列內容
-image[:, :, 0] = 0
-# 第0通道 B
-image[:, :, 1] = 255
-# 第1通道 G
-image[:, :, 2] = 255
-# 第2通道 R
-
 
 print("A圖抓一塊貼到B圖上")
 face = lena[220:400, 250:350]

@@ -140,16 +140,16 @@ edges = cv2.Canny(gray, 50, 200)
 
 plt.figure("霍夫變換 HoughLines", figsize=(12, 10))
 plt.subplot(221)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(222)
-plt.title("灰階")
 plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB))
+plt.title("灰階")
 
 plt.subplot(223)
-plt.title("Canny邊緣檢測")
 plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
+plt.title("Canny邊緣檢測")
 
 # 尋找霍夫直線
 lines = cv2.HoughLines(edges, 1, np.pi / 180, 180)
@@ -168,8 +168,8 @@ for rho, theta in lines1[:]:
     cv2.line(img, (x1, y1), (x2, y2), RED, 1)
 
 plt.subplot(224)
-plt.title("霍夫變換 HoughLines")
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title("霍夫變換 HoughLines")
 
 show()
 
@@ -258,6 +258,7 @@ for i in circles[0, :]:
 plt.subplot(224)
 plt.imshow(cv2.cvtColor(img3, cv2.COLOR_BGR2RGB))
 plt.title("霍夫變換 HoughCircles")
+
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -533,14 +534,12 @@ for line in lines:
     cv2.line(src, (x1, y1), (x2, y2), BLUE, 3)  # 繪製藍色線條
 cv2.imshow("dst", src)
 
-
 plt.subplot(133)
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.title("HoughLines")
 plt.axis("off")
 
 show()
-
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -577,7 +576,6 @@ for c in circles[0]:
     cv2.circle(src, (x, y), r, GREEN, 3)  # 綠色繪圓外圈
     cv2.circle(src, (x, y), 2, RED, 2)  # 紅色繪圓中心
 cv2.imshow("dst", src)
-
 
 plt.subplot(122)
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
@@ -629,8 +627,8 @@ img = cv2.imread("data/_Hough/FerrisWheel4.png")  # 彩色讀取
 cv2.imshow("src", img)
 
 plt.subplot(311)
-plt.title("原圖")
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 plt.axis("off")
 
 img_gray = cv2.cvtColor(img, cv2.COLOR_RGBA2GRAY)  # 轉灰階
@@ -667,17 +665,16 @@ if lines is not None:
         cv2.line(img, (x1, y1), (x2, y2), WHITE, 1)
 
 plt.subplot(312)
-plt.title("Canny")
 plt.imshow(cv2.cvtColor(canny_image, cv2.COLOR_BGR2RGB))
+plt.title("Canny")
 plt.axis("off")
 
 plt.subplot(313)
-plt.title("result")
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title("result")
 plt.axis("off")
 
 show()
-
 
 cv2.imshow("result", img)
 cv2.imshow("canny", canny_image)
