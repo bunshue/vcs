@@ -183,30 +183,19 @@ def detect_face(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
     # 人臉偵測
-    # faces = face_cascade_classifier.detectMultiScale(gray, 1.3, 5)
-    # faces = face_cascade_classifier.detectMultiScale(gray, 1.2, 3)
-    # faces = face_cascade_classifier.detectMultiScale(gray, 1.1, 4)
     # faces = face_cascade_classifier.detectMultiScale(gray)
+    # faces = face_cascade_classifier.detectMultiScale(gray, 1.1, 4)
+    # faces = face_cascade_classifier.detectMultiScale(gray, 1.2, 3)
+    # faces = face_cascade_classifier.detectMultiScale(gray, 1.3, 5)
+    # faces = face_cascade_classifier.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=3)
     # faces = face_cascade_classifier.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
     # faces = face_cascade_classifier.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20))
-    # faces = face_cascade_classifier.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=3)
     # faces = face_cascade_classifier.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(200, 200))
-    # faces = face_cascade_classifier.detectMultiScale(gray, scaleFactor = 1.2, minNeighbors = 3, minSize = (200, 200))
+    # faces = face_cascade_classifier.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=3, minSize=(200, 200))
     # faces = face_cascade_classifier.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20))
     # faces = face_cascade_classifier.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30), flags=cv2.CASCADE_SCALE_IMAGE)
-    # faces = face_cascade_classifier.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(200, 200))
-
-    """
-    faces = face_cascade_classifier.detectMultiScale(
-        # gray, scaleFactor=1.15, minNeighbors=5, minSize=(5, 5)
-        # gray, scaleFactor=1.15, minNeighbors=3, minSize=(20, 20), maxSize=(50, 50)
-        # gray, scaleFactor=1.15, minNeighbors=5, minSize=(20, 20)
-        gray,
-        scaleFactor=1.02,
-        minNeighbors=3,
-        minSize=(20, 20),
-    )
-    """
+    # faces = face_cascade_classifier.detectMultiScale(gray, scaleFactor=1.15, minNeighbors=5, minSize=(5, 5))
+    # faces = face_cascade_classifier.detectMultiScale(gray, scaleFactor=1.15, minNeighbors=3, minSize=(20, 20), maxSize=(50, 50))
 
     faces = face_cascade_classifier.detectMultiScale(
         gray,  # 也可直接用 img 來偵測
@@ -220,14 +209,14 @@ def detect_face(img):
 
     """
     for nn in range(len(faces)):
-        print(nn)
-        print(faces[nn])
+        print("第", nn, "張人臉")
+        print(faces[nn])# x, y, w, h
         print(faces[nn][0], faces[nn][1], faces[nn][2], faces[nn][3])
     """
 
     # 把人臉框起來
     for x, y, w, h in faces:
-        cv2.rectangle(img, (x, y), (x + w, y + h), GREEN, 2)  # 綠色框住人臉
+        cv2.rectangle(img, (x, y), (x + w, y + h), GREEN, 2)
 
     cv2.imshow("Image1", img)
     cv2.waitKey(0)
@@ -242,6 +231,9 @@ print("人臉辨識 圖片")
 img = cv2.imread(filename)  # 彩色讀取
 
 detect_face(img)
+
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -567,7 +559,7 @@ cars = car_cascade_classifier.detectMultiScale(gray, 1.1, 3)       # 偵測汽�
 
 # 把汽車框起來
 for x, y, w, h in cars:
-    cv2.rectangle(img, (x, y), (x + w, y + h), GREEN, 2)   # 繪製外框
+    cv2.rectangle(img, (x, y), (x + w, y + h), GREEN, 2)
 
 cv2.imshow("ImageShow", img)
 cv2.waitKey(0)
@@ -767,21 +759,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 若有多個視窗 要指名視窗名稱
-
-cv2.namedWindow("Image", cv2.WINDOW_NORMAL)
-
-# ----------------------------
-
-key = cv2.waitKey(200)  # 0.2秒檢查一次
-
-if key == ord("a") or key == ord("A"):  # 如果按A或a
-    pass
-
 # 把人臉框起來
 for x, y, w, h in faces:
     myimg = Image.open("tmp_photo.jpg")  # PIL模組開啟
@@ -835,11 +812,6 @@ cap = cv2.VideoCapture(0)
 cv2.namedWindow("Image", cv2.WINDOW_NORMAL)
 
 """
-while True:
-
-    # k = cv2.waitKey(100)  #每0.1秒讀一次鍵盤
-    k = cv2.waitKey(1)
-
         (x, y, w, h) = (faces[0][0], faces[0][1], faces[0][2], faces[0][3])  # 只取第一張人臉
         
         image1 = Image.open(user_filename).crop((x, y, x + w, y + h))  # 擷取人臉
@@ -858,11 +830,8 @@ while True:
 
 # -----------------------------
 
-            # 把人臉框起來
-            for x, y, w, h in faces:
-                cv2.rectangle(img_copy, (x, y), (x + w, y + h), GREEN, 2)  # 繪製矩形
                 cv2.putText(  # 繪製倒數數字
-                    img_copy,
+                    img,
                     str(cnter),
                     (x + int(w / 2), y - 10),
                     cv2.FONT_HERSHEY_SIMPLEX,

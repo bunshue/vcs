@@ -14,7 +14,7 @@ OpenCV具有findContour()幫助從圖像中提取輪廓的功能。
 from opencv_common import *
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 # coin.jpg用圖片先處理方法一
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coin.jpg"
 
@@ -78,8 +78,9 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_findContours/findContours2.bmp"
-filename = "C:/_git/vcs/_4.python/opencv/data/_findContours/findContours2b.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape02.bmp"
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape02b.png"
+
 image = cv2.imread(filename)
 
 plt.figure(figsize=(12, 8))
@@ -123,10 +124,10 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 多邊形凹凸點計算
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_findContours/star.bmp"
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/star_silver.png"  # 五角銀星
 image = cv2.imread(filename)
 
 shape = image.shape
@@ -405,7 +406,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_findContours/findContours1.bmp"
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.bmp"
 src = cv2.imread(filename)
 
 plt.subplot(221)

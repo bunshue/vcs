@@ -1,9 +1,9 @@
 """
 霍夫變換
 
-HoughLines
-HoughLinesP
-HoughCircles
+cv2.HoughLines
+cv2.HoughLinesP
+cv2.HoughCircles
 
 """
 from opencv_common import *
@@ -11,13 +11,18 @@ from opencv_common import *
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread("data/_Hough/computer.jpg")  # 彩色讀取
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/star_silver.png"  # 五角銀星
+filename = "data/_Hough/computer.jpg"
+
+img = cv2.imread(filename)  # 彩色讀取
+
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 edges = cv2.Canny(gray, 50, 150, apertureSize=3)
 
-orgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+# orgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+orgb = img
 oShow = orgb.copy()
 
 # 尋找霍夫直線
@@ -25,6 +30,7 @@ lines = cv2.HoughLines(edges, 1, np.pi / 180, 140)
 print("共找到 :", len(lines), "條直線")
 
 for line in lines:
+    # print(line)
     rho, theta = line[0]
     a = np.cos(theta)
     b = np.sin(theta)
@@ -37,97 +43,249 @@ for line in lines:
     cv2.line(orgb, (x1, y1), (x2, y2), RED, 2)
 
 plt.subplot(121)
-plt.imshow(oShow)
-plt.axis("off")
+plt.imshow(cv2.cvtColor(oShow, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 plt.subplot(122)
-plt.imshow(orgb)
-plt.axis("off")
+plt.imshow(cv2.cvtColor(orgb, cv2.COLOR_BGR2RGB))
+plt.title("尋找霍夫直線")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread("data/_Hough/computer.jpg", -1)  # 彩色讀取
+# 直線檢測
+filename = "data/_Hough/japanese_schedule.jpg"
+
+src = cv2.imread(filename, cv2.IMREAD_COLOR)
+
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉灰階
+
+# Canny邊緣檢測，减少图像空间中需要检测的点数量
+edges = cv2.Canny(src_gray, 100, 200)
+
+# 尋找霍夫直線
+lines = cv2.HoughLines(edges, 1, np.pi / 180, 220)
+# lines = cv2.HoughLines(edges, 1, np.pi / 180, 180)
+print("共找到 :", len(lines), "條直線")
+
+# 繪製直線 在 src 上
+index = 0
+for line in lines:
+    rho, theta = line[0]  # lines回傳
+    a = np.cos(theta)  # cos(theta)
+    b = np.sin(theta)  # sin(theta)
+    x0 = rho * a
+    y0 = rho * b
+    x1 = int(x0 + 1000 * (-b))  # 建立 x1
+    y1 = int(y0 + 1000 * (a))  # 建立 y1
+    x2 = int(x0 - 1000 * (-b))  # 建立 x2
+    y2 = int(y0 - 1000 * (a))  # 建立 y2
+    cv2.line(src, (x1, y1), (x2, y2), GREEN, 2)  # 繪製綠色線條
+    # cv2.line(src, (x1, y1), (x2, y2), colors[index%6], 2)  # 繪製綠色線條
+    index += 1
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
+plt.title("邊緣檢測")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("HoughLines")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+src = cv2.imread("data/_Hough/lane2.jpg", cv2.IMREAD_COLOR)
+cv2.imshow("src", src)
+
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉灰階
+
+# Canny邊緣檢測，减少图像空间中需要检测的点数量
+edges = cv2.Canny(src_gray, 100, 200)
+cv2.imshow("edges", edges)
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
+plt.title("邊緣檢測")
+
+# 尋找霍夫直線
+lines = cv2.HoughLines(edges, 1, np.pi / 180, 150)  # 檢測直線
+print("共找到 :", len(lines), "條直線")
+
+# 繪製直線, 畫在src上
+for line in lines:
+    rho, theta = line[0]  # lines回傳
+    a = np.cos(theta)  # cos(theta)
+    b = np.sin(theta)  # sin(theta)
+    x0 = rho * a
+    y0 = rho * b
+    x1 = int(x0 + 1000 * (-b))  # 建立 x1
+    y1 = int(y0 + 1000 * (a))  # 建立 y1
+    x2 = int(x0 - 1000 * (-b))  # 建立 x2
+    y2 = int(y0 - 1000 * (a))  # 建立 y2
+    cv2.line(src, (x1, y1), (x2, y2), RED, 2)  # 繪製紅色線條
+
+cv2.imshow("dst", src)
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("HoughLines")
+
+show()
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/star_silver.png"  # 五角銀星
+filename = "data/_Hough/computer.jpg"
+
+img = cv2.imread(filename, -1)  # 彩色讀取
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 edges = cv2.Canny(gray, 50, 150, apertureSize=3)
 
-orgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+# orgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+orgb = img
 oShow = orgb.copy()
 
 lines = cv2.HoughLinesP(edges, 1, np.pi / 180, 160, minLineLength=100, maxLineGap=10)
 print("共找到 :", len(lines), "條直線")
 
 for line in lines:
+    # print(line)
     x1, y1, x2, y2 = line[0]
-    cv2.line(orgb, (x1, y1), (x2, y2), WHITE, 2)
+    cv2.line(orgb, (x1, y1), (x2, y2), RED, 2)
 
 plt.subplot(121)
-plt.imshow(oShow)
-plt.axis("off")
+plt.imshow(cv2.cvtColor(oShow, cv2.COLOR_BGR2RGB))
 
 plt.subplot(122)
-plt.imshow(orgb)
-plt.axis("off")
+plt.imshow(cv2.cvtColor(orgb, cv2.COLOR_BGR2RGB))
 
 show()
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# 無人駕駛車道檢測
+
+src = cv2.imread("data/_Hough/roadtest.jpg", cv2.IMREAD_COLOR)
+
+cv2.imshow("src", src)
+
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉灰階
+
+# Canny邊緣檢測，减少图像空间中需要检测的点数量
+edges = cv2.Canny(src_gray, 50, 200)
+
+cv2.imshow("Canny", edges)
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
+plt.title("Canny")
+
+lines = cv2.HoughLinesP(edges, 1, np.pi / 180, 50, minLineLength=10, maxLineGap=100)
+print("共找到 :", len(lines), "條直線")
+
+# 繪製檢測到的直線, 畫在src上
+for line in lines:
+    x1, y1, x2, y2 = line[0]
+    cv2.line(src, (x1, y1), (x2, y2), BLUE, 3)  # 繪製藍色線條
+cv2.imshow("dst", src)
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.title("HoughLines")
+
+show()
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread("data/_Hough/chess.jpg", 0)
 imgo = cv2.imread("data/_Hough/chess.jpg", -1)
 
-o = cv2.cvtColor(imgo, cv2.COLOR_BGR2RGB)
+# o = cv2.cvtColor(imgo, cv2.COLOR_BGR2RGB)
+o = imgo
+                 
 oshow = o.copy()
 img = cv2.medianBlur(img, 5)
 circles = cv2.HoughCircles(
     img, cv2.HOUGH_GRADIENT, 1, 300, param1=50, param2=30, minRadius=100, maxRadius=200
 )
+
+print('轉成整數')
 circles = np.uint16(np.around(circles))
+print(circles)
+
 for i in circles[0, :]:
-    cv2.circle(o, (i[0], i[1]), i[2], BLUE, 12)
-    cv2.circle(o, (i[0], i[1]), 2, BLUE, 12)
+    cv2.circle(o, (i[0], i[1]), i[2], RED, 12) # 畫外圓
+    cv2.circle(o, (i[0], i[1]), 2, GREEN, 12) # 畫圓心
 
 plt.subplot(121)
-plt.imshow(oshow)
-plt.axis("off")
+plt.imshow(cv2.cvtColor(oshow, cv2.COLOR_BGR2RGB))
 
 plt.subplot(122)
-plt.imshow(o)
-plt.axis("off")
+plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
 
 show()
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
+"""
 print("這個做很久~~~~~~~")
 
 img = cv2.imread("data/_Hough/chess.jpg", 0)
 imgo = cv2.imread("data/_Hough/chess.jpg", -1)
 
-o = cv2.cvtColor(imgo, cv2.COLOR_BGR2RGB)
+# o = cv2.cvtColor(imgo, cv2.COLOR_BGR2RGB)
+o = imgo
+
 oshow = o.copy()
 img = cv2.medianBlur(img, 5)
 circles = cv2.HoughCircles(
     img, cv2.HOUGH_GRADIENT, 1, 20, param1=50, param2=30, minRadius=0, maxRadius=0
 )
+print('轉成整數')
 circles = np.uint16(np.around(circles))
+print(circles)
+
 for i in circles[0, :]:
-    cv2.circle(o, (i[0], i[1]), i[2], BLUE, 12)  # 注意如果是白色，会显示满屏白色，不仔细分析还会以为程序错了呢
-    cv2.circle(o, (i[0], i[1]), 2, BLUE, 12)
+    cv2.circle(o, (i[0], i[1]), i[2], BLUE, 12)# 畫外圓  # 注意如果是白色，会显示满屏白色，不仔细分析还会以为程序错了呢
+    cv2.circle(o, (i[0], i[1]), 2, BLUE, 12)# 畫圓心
 
 plt.subplot(121)
-plt.imshow(oshow)
-plt.axis("off")
+plt.imshow(cv2.cvtColor(oshow, cv2.COLOR_BGR2RGB))
 
 plt.subplot(122)
-plt.imshow(o)
-plt.axis("off")
+plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
 
 show()
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -138,7 +296,7 @@ gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉灰階
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 edges = cv2.Canny(gray, 50, 200)
 
-plt.figure("霍夫變換 HoughLines", figsize=(12, 10))
+plt.figure("霍夫變換 HoughLines", figsize=(10, 8))
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
@@ -184,7 +342,7 @@ lane2 = cv2.GaussianBlur(lane1, (5, 5), 0)  # 執行高斯模糊化
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 lane3 = cv2.Canny(lane2, 50, 150)
 
-plt.figure("霍夫變換 HoughLinesP", figsize=(12, 10))
+plt.figure("霍夫變換 HoughLinesP", figsize=(10, 8))
 
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(lane1, cv2.COLOR_BGR2RGB))
@@ -248,12 +406,16 @@ circles = cv2.HoughCircles(
     minRadius=100,
     maxRadius=200,
 )
+print("共找到 :", len(circles), "個圓")
+print(circles)
+
+print('轉成整數')
 circles = np.uint16(np.around(circles))
+print(circles)
+
 for i in circles[0, :]:
-    # 画外圆
-    cv2.circle(img3, (i[0], i[1]), i[2], GREEN, 2)
-    # 画出圆心
-    cv2.circle(img3, (i[0], i[1]), 2, RED, 3)
+    cv2.circle(img3, (i[0], i[1]), i[2], GREEN, 2)  # 畫外圓
+    cv2.circle(img3, (i[0], i[1]), 2, RED, 3)  # 畫圓心
 
 plt.subplot(224)
 plt.imshow(cv2.cvtColor(img3, cv2.COLOR_BGR2RGB))
@@ -294,7 +456,7 @@ circles = cv2.HoughCircles(
     3,  # 最小圓半徑
     75,  # 最大圓半徑
 )
-
+print("共找到 :", len(circles), "個圓")
 print(circles)
 
 """
@@ -309,12 +471,10 @@ print(circles)
 if len(circles) > 0:
     out = image.copy()
     for x, y, r in circles[0]:
-        # 畫圓
-        cv2.circle(out, (x, y), r, RED, 3)
-        # 畫圓心
-        cv2.circle(out, (x, y), 2, GREEN, 3)
+        print("圓 :", x, y, r)
+        cv2.circle(out, (x, y), r, RED, 3)# 畫外圓
+        cv2.circle(out, (x, y), 2, GREEN, 3)# 畫圓心
     image = cv2.hconcat([image, out])
-
 
 plt.subplot(212)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -330,6 +490,10 @@ print("------------------------------------------------------------")  # 60個
 # 使用HoughLinesP()檢驗圖形中的直線
 img = cv2.imread("data/_Hough/building.jpg", cv2.IMREAD_GRAYSCALE)
 
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title('原圖')
+show()
+
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 img_binary = cv2.Canny(img, 100, 255)
 
@@ -343,11 +507,11 @@ lines = cv2.HoughLinesP(
 )
 print("共找到 :", len(lines), "條直線")
 
-fig, ax = plt.subplots(figsize=(12, 10))
+fig, ax = plt.subplots(figsize=(6, 6))
 plt.imshow(img, cmap="gray")
+# plt.imshow(cv2.cvtColor(xxxx, cv2.COLOR_BGR2RGB))
 
 from matplotlib.collections import LineCollection
-
 lc = LineCollection(lines.reshape(-1, 2, 2))
 ax.add_collection(lc)
 ax.axis("off")
@@ -358,6 +522,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 檢驗圓形
+# add_collection 只能用 ax
 
 # 使用HoughCircles()檢驗圖形中的圓形
 coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
@@ -379,6 +544,7 @@ x, y, r = circles[0].T
 
 fig, ax = plt.subplots(figsize=(12, 10))
 plt.imshow(img, cmap="gray")
+# plt.imshow(cv2.cvtColor(xxxx, cv2.COLOR_BGR2RGB))
 
 from matplotlib.collections import EllipseCollection
 
@@ -400,165 +566,16 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-# OpenCV_18_從直線檢測到無人駕駛車道檢測
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/_Hough/japanese_schedule.jpg"
-
-src = cv2.imread(filename, cv2.IMREAD_COLOR)
-
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-plt.axis("off")
-
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉灰階
-
-# Canny邊緣檢測，减少图像空间中需要检测的点数量
-edges = cv2.Canny(src_gray, 100, 200)
-
-# 尋找霍夫直線
-lines = cv2.HoughLines(edges, 1, np.pi / 180, 220)
-# lines = cv2.HoughLines(edges, 1, np.pi / 180, 180)
-print("共找到 :", len(lines), "條直線")
-
-# 繪製直線 在 src 上
-index = 0
-for line in lines:
-    rho, theta = line[0]  # lines回傳
-    a = np.cos(theta)  # cos(theta)
-    b = np.sin(theta)  # sin(theta)
-    x0 = rho * a
-    y0 = rho * b
-    x1 = int(x0 + 1000 * (-b))  # 建立 x1
-    y1 = int(y0 + 1000 * (a))  # 建立 y1
-    x2 = int(x0 - 1000 * (-b))  # 建立 x2
-    y2 = int(y0 - 1000 * (a))  # 建立 y2
-    cv2.line(src, (x1, y1), (x2, y2), GREEN, 2)  # 繪製綠色線條
-    # cv2.line(src, (x1, y1), (x2, y2), colors[index%6], 2)  # 繪製綠色線條
-    index += 1
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
-plt.title("邊緣檢測")
-plt.axis("off")
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.title("HoughLines")
-plt.axis("off")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread("data/_Hough/lane2.jpg", cv2.IMREAD_COLOR)
-cv2.imshow("src", src)
-
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-plt.axis("off")
-
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉灰階
-
-# Canny邊緣檢測，减少图像空间中需要检测的点数量
-edges = cv2.Canny(src_gray, 100, 200)
-cv2.imshow("edges", edges)
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
-plt.title("邊緣檢測")
-plt.axis("off")
-
-# 尋找霍夫直線
-lines = cv2.HoughLines(edges, 1, np.pi / 180, 150)  # 檢測直線
-print("共找到 :", len(lines), "條直線")
-
-# 繪製直線, 畫在src上
-for line in lines:
-    rho, theta = line[0]  # lines回傳
-    a = np.cos(theta)  # cos(theta)
-    b = np.sin(theta)  # sin(theta)
-    x0 = rho * a
-    y0 = rho * b
-    x1 = int(x0 + 1000 * (-b))  # 建立 x1
-    y1 = int(y0 + 1000 * (a))  # 建立 y1
-    x2 = int(x0 - 1000 * (-b))  # 建立 x2
-    y2 = int(y0 - 1000 * (a))  # 建立 y2
-    cv2.line(src, (x1, y1), (x2, y2), RED, 2)  # 繪製紅色線條
-
-cv2.imshow("dst", src)
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.title("HoughLines")
-plt.axis("off")
-
-show()
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread("data/_Hough/roadtest.jpg", cv2.IMREAD_COLOR)
-
-cv2.imshow("src", src)
-
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-plt.axis("off")
-
-src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉灰階
-
-# Canny邊緣檢測，减少图像空间中需要检测的点数量
-edges = cv2.Canny(src_gray, 50, 200)
-
-cv2.imshow("Canny", edges)
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
-plt.title("Canny")
-plt.axis("off")
-
-lines = cv2.HoughLinesP(edges, 1, np.pi / 180, 50, minLineLength=10, maxLineGap=100)
-print("共找到 :", len(lines), "條直線")
-
-# 繪製檢測到的直線, 畫在src上
-for line in lines:
-    x1, y1, x2, y2 = line[0]
-    cv2.line(src, (x1, y1), (x2, y2), BLUE, 3)  # 繪製藍色線條
-cv2.imshow("dst", src)
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
-plt.title("HoughLines")
-plt.axis("off")
-
-show()
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 src = cv2.imread("data/_Hough/shapes.jpg")
-cv2.imshow("src", src)
 
-plt.subplot(121)
+plt.subplot(211)
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
-plt.axis("off")
 
 src = cv2.medianBlur(src, 5)  # 過濾雜訊
 
 src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉灰階
+
 circles = cv2.HoughCircles(
     src_gray,
     cv2.HOUGH_GRADIENT,
@@ -569,19 +586,26 @@ circles = cv2.HoughCircles(
     minRadius=70,
     maxRadius=200,
 )
-circles = np.uint(np.around(circles))  # 轉成整數
+
+print("共找到 :", len(circles), "個圓")
+print(circles)
+
+print('轉成整數')
+circles = np.uint(np.around(circles))
+print(circles)
+print()
+print(circles[0])
 
 # 繪製檢測到的直線, 畫在src上
 for c in circles[0]:
+    print("圓 :", c)
     x, y, r = c
-    cv2.circle(src, (x, y), r, GREEN, 3)  # 綠色繪圓外圈
-    cv2.circle(src, (x, y), 2, RED, 2)  # 紅色繪圓中心
-cv2.imshow("dst", src)
+    cv2.circle(src, (x, y), r, GREEN, 3)# 畫外圓
+    cv2.circle(src, (x, y), 2, RED, 2)# 畫圓心
 
-plt.subplot(122)
+plt.subplot(212)
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.title("HoughCircles")
-plt.axis("off")
 
 show()
 
@@ -625,19 +649,18 @@ cv2.HoughLines 的返回参数 line == [\rho ,\Theta ]，
 
 img = cv2.imread("data/_Hough/FerrisWheel4.png")  # 彩色讀取
 
-cv2.imshow("src", img)
-
-plt.subplot(311)
+plt.subplot(131)
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
-plt.axis("off")
 
 img_gray = cv2.cvtColor(img, cv2.COLOR_RGBA2GRAY)  # 轉灰階
 
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
-canny_image = cv2.Canny(img, 200, 200)
+canny_image = cv2.Canny(img_gray, 200, 200)
 
-cv2.imshow("canny_image", canny_image)
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(canny_image, cv2.COLOR_BGR2RGB))
+plt.title("灰階+Canny")
 
 # 尋找霍夫直線
 lines = cv2.HoughLines(canny_image, 1, np.pi / 180, 180)
@@ -663,28 +686,207 @@ if lines is not None:
         y2 = int(y0 - 2000 * (a))
 
         # 连接两点画直线
-        cv2.line(img, (x1, y1), (x2, y2), WHITE, 1)
+        cv2.line(img, (x1, y1), (x2, y2), GREEN, 1)
 
-plt.subplot(312)
-plt.imshow(cv2.cvtColor(canny_image, cv2.COLOR_BGR2RGB))
-plt.title("Canny")
-plt.axis("off")
 
-plt.subplot(313)
+plt.subplot(133)
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 plt.title("result")
-plt.axis("off")
 
 show()
 
-cv2.imshow("result", img)
-cv2.imshow("canny", canny_image)
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+def get_edge(img):
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
+    blur = cv2.GaussianBlur(gray, (13, 13), 0)  # 高斯模糊
+    canny = cv2.Canny(blur, 50, 150)  # 邊緣偵測
+    return canny
+
+
+def get_roi(img):
+    mask = np.zeros_like(img)  # 全黑遮罩
+    points = np.array([[[146, 539], [781, 539], [515, 417], [296, 397]]])  # 建立多邊形座標
+    cv2.fillPoly(mask, points, 255)  # 多邊三角形
+    roi = cv2.bitwise_and(img, mask)
+    return roi
+
+def draw_lines(img, lines):  # 建立自訂函式
+    for line in lines:
+        points = line.reshape(
+            4,
+        )  # 降成一維 shape = (4,)
+        x1, y1, x2, y2 = points  # 取出直線座標
+        cv2.line(img, (x1, y1), (x2, y2), RED, 3)  # 繪製直線
+    return img  # 回傳繪製直線後的影像
+
+
+def get_avglines(lines):
+    if lines is None:  # 如果有找到線段
+        print("偵測不到直線線段")
+        return None
+    # -----↓先依斜率分到左組或右組↓
+    lefts = []
+    rights = []
+    for line in lines:
+        points = line.reshape(
+            4,
+        )
+        x1, y1, x2, y2 = points
+        slope, b = np.polyfit((x1, x2), (y1, y2), 1)  # y = slope*x + b
+        # print(f'y = {slope} x + {b}')  #若有需要可將斜率與截距印出
+        if slope > 0:  # 斜率 > 0, 右邊的直線函數
+            rights.append([slope, b])  # 以 list 存入
+        else:  # 斜率 < 0, 左邊的直線函數
+            lefts.append([slope, b])  # 以 list 存入
+
+    # -----↓再計算左組與右組的平圴線↓
+    if rights and lefts:  # 必須同時有左右兩邊的直線函數
+        right_avg = np.average(rights, axis=0)  # 取得右邊的平均直線
+        left_avg = np.average(lefts, axis=0)  # 取得左邊的平均直線
+        return np.array([right_avg, left_avg])
+    else:
+        print("無法同時偵測到左右邊緣")
+        return None
+
+
+def get_sublines(img, avglines):
+    sublines = []  # 用於儲存線段座標
+    for line in avglines:  # 一一取出所有直線函數
+        slope, b = line  # y = slope*x + b
+        y1 = img.shape[0]  # 影像高度 (即影像的最底部位
+        y2 = int(y1 * (3 / 5))  # 取影像高度的 3/5 位置為線段
+        x1 = int((y1 - b) / slope)  # x = (y-b/m), 取得線段 x 座標
+        x2 = int((y2 - b) / slope)
+        sublines.append([x1, y1, x2, y2])  # 座標存入串列中
+    return np.array(sublines)  # 將串列轉為陣列回傳
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename_road = "C:/_git/vcs/_4.python/opencv/data/_Hough/road.jpg"
+
+img = cv2.imread(filename_road)
+
+edge = get_edge(img)  # Canny邊緣檢測
+
+roi = get_roi(edge)  # 取得 ROI
+
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(edge, cv2.COLOR_BGR2RGB))
+plt.title("顯示邊緣圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(roi, cv2.COLOR_BGR2RGB))
+plt.title("顯示ROI圖")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename_road = "C:/_git/vcs/_4.python/opencv/data/_Hough/road.jpg"
+
+img = cv2.imread(filename_road)
+
+edge = get_edge(img)  # Canny邊緣檢測
+
+roi = get_roi(edge)  # 取得 ROI
+
+lines = cv2.HoughLinesP(
+    image=roi,  # Hough 轉換取得線段座標陣列
+    rho=3,
+    theta=np.pi / 180,
+    threshold=60,
+    minLineLength=40,
+    maxLineGap=50,
+)
+print(lines)
+if lines is not None:  # 如果有找到線段
+    img = draw_lines(img, lines)  # 在原圖繪製線段
+else:
+    print("偵測不到直線線段")
+cv2.imshow("Line", img)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title("顯示直線線段圖")
+show()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+filename_road = "C:/_git/vcs/_4.python/opencv/data/_Hough/road.jpg"
+
+img = cv2.imread(filename_road)
+
+edge = get_edge(img)  # Canny邊緣檢測
+
+roi = get_roi(edge)  # 取得 ROI
+
+lines = cv2.HoughLinesP(
+    image=roi,  # Hough 轉換取得線段座標陣列
+    rho=3,
+    theta=np.pi / 180,
+    threshold=60,
+    minLineLength=40,
+    maxLineGap=50,
+)
+avglines = get_avglines(lines)  # 取得左右 2 條平均線方程式
+if avglines is not None:
+    lines = get_sublines(img, avglines)  # 取得要畫出的左右 2 條線段
+    img = draw_lines(img, lines)  # 畫出線段
+    cv2.imshow("Line", img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+    plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+    plt.title("顯示直線圖")
+    show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+video_filename = (
+    "C:/_git/__大檔與暫存區/GRENZEL 雲創 E3W WiFi 行車記錄器 1080 30fps 日間測試 高速公路 - Mobile01.mp4"
+)
+video_filename = "C:/_git/__大檔與暫存區/DOD行車記錄器-LS300W 日間高速公路實拍.mp4"
+video_filename = "C:/_git/__大檔與暫存區/響尾蛇行車記錄器高解析度1080P - 高速公路白天行駛記錄 -.mp4"
+video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/road.mp4"
+
+capture = cv2.VideoCapture(video_filename)  # 建立 VideoCapture 物件
+
+if capture.isOpened():
+    while True:
+        sucess, img = capture.read()
+        if sucess:
+            edge = get_edge(img)  # 邊緣偵測
+            roi = get_roi(edge)  # 取得 ROI
+            lines = cv2.HoughLinesP(
+                image=roi,  # Hough 轉換
+                rho=3,
+                theta=np.pi / 180,
+                threshold=30,
+                minLineLength=50,
+                maxLineGap=40,
+            )
+            avglines = get_avglines(lines)  # 取得左右 2 條平均線方程式
+            if avglines is not None:
+                lines = get_sublines(img, avglines)  # 取得要畫出的左右 2 條線段
+                img = draw_lines(img, lines)  # 畫出線段
+            cv2.imshow("Frame", img)  # 顯示影像
+
+        k = cv2.waitKey(1)  # 等待按鍵輸入
+        if k == ESC:
+            cv2.destroyAllWindows()  # 關閉視窗
+            capture.release()  # 關閉攝影機
+            break
+else:
+    print("開啟攝影機失敗")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -701,9 +903,8 @@ sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

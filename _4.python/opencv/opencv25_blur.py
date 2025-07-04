@@ -683,7 +683,8 @@ print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread(filename)
 
-image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
+
 output1 = cv2.adaptiveThreshold(
     image_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
 )
@@ -833,4 +834,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-# cv2.imshow("blur", dst1)
+blur = cv2.GaussianBlur(gray, (3, 3), 0)
+
+

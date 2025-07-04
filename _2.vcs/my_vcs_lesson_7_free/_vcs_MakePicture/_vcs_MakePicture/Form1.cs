@@ -3283,8 +3283,8 @@ namespace _vcs_MakePicture
             int xx;
             int yy;
 
-            width = 300;
-            height = 300;
+            width = 500;
+            height = 500;
             bitmap1 = new Bitmap(width, height);
 
             //background
@@ -3299,7 +3299,7 @@ namespace _vcs_MakePicture
 
             g = Graphics.FromImage(bitmap1);
 
-            int radius = width * 4 / 8;
+            int radius = width * 4 / 10;
             Point center = new Point(width / 2, height / 2+10);
             FillStar(g, center, radius, Color.Blue);
 

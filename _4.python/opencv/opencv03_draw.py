@@ -5,7 +5,7 @@ cv2.line()
 cv2.circle()
 cv2.rectangle()
 cv2.ellipse()
-cv2.polylines()
+cv2.polylines()  # 空心多邊形
 cv2.drawContours() #多點頭尾連線
 
 cv2.putText()
@@ -120,6 +120,7 @@ line_width = 3  # 線寬
 pts = np.array([[px1, py1], [px2, py2], [px3, py3], [px4, py4], [px5, py5], [px6, py6]])
 # pts = np.array([[px1, py1], [px2, py2], [px3, py3], [px4, py4], [px5, py5], [px6, py6]], np.int32)
 
+# 空心多邊形
 cv2.polylines(image, [pts], True, RED, line_width)  # True表示封口
 # True: 頭尾相連, False: 頭尾不相連
 
@@ -136,22 +137,22 @@ pts = np.array(
     [[px1, py1], [px2, py2], [px3, py3], [px4, py4], [px5, py5], [px6, py6]]
 )  # 產生座標陣列
 
-# 畫多邊形 空心
+# 空心多邊形
 # cv2.polylines(image,[pts],True, GREEN, line_width)   # 繪製多邊形
 
-# 畫多邊形 實心
+# 實心多邊形
 cv2.fillPoly(image, [pts], GREEN)
 
 print("畫多邊形 保留測試reshape")
 pts = np.array([[10, 5], [20, 30], [70, 20], [50, 10]], np.int32)
 pts = pts.reshape((-1, 1, 2))
-cv2.polylines(image, [pts], True, BLUE)
+cv2.polylines(image, [pts], True, BLUE) # 空心多邊形
 
 pts1 = np.array([[500, 50], [600, 100], [500, 150], [400, 100]])  # 頂點陣列
 pts2 = np.array([[500, 150], [600, 200], [500, 250], [400, 200]])  # 頂點陣列
 
-cv2.polylines(image, [pts1], True, BLUE, 5)  # 繪製封閉式多邊形
-cv2.polylines(image, [pts2], False, RED, 3)  # 繪製開放式多邊形
+cv2.polylines(image, [pts1], True, BLUE, 5)  # 封閉式 空心多邊形
+cv2.polylines(image, [pts2], False, RED, 3)  # 開放式 空心多邊形
 
 cv2.imshow("OpenCV Draw 1", image)
 cv2.waitKey()
@@ -745,11 +746,20 @@ print(color)
 pts = np.array([[200, 50], [300, 200], [200, 350], [100, 200]], np.int32)
 pts = pts.reshape((-1, 1, 2))
 # 第1個參數為-1, 表明這一維的長度是根據后面的維度的計算出來的。
-cv2.polylines(image, [pts], True, GREEN, 8)
+cv2.polylines(image, [pts], True, GREEN, 8)  # 空心多邊形
 # 調用函數polylines完成多邊形繪圖，注意第3個參數控制多邊形封閉
 # cv2.polylines(image, [pts], False, GREEN, 8)  #不閉合的的多邊形
 
 
 # 255 就是藍色
 cv2.rectangle(image, (100, 100), (200, 200), 255, 2) #255 藍色
+
+
+""" cv2.fillPoly
+mask = np.zeros_like(edge)  # 全黑遮罩
+points = np.array([[[146, 539], [781, 539], [515, 417], [296, 397]]])  # 建立多邊座標
+# 畫實心多邊形
+cv2.fillPoly(mask, points, 255)  # 畫實心多邊形
+"""
+
 
