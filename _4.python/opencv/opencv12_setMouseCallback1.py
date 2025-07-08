@@ -36,7 +36,7 @@ W, H = 640, 480
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('打印系統有支持的EVENT')
+print("打印系統有支持的EVENT")
 events = [i for i in dir(cv2) if "EVENT" in i]
 for e in events:
     print(e)
@@ -727,6 +727,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
 def OnMouseAction(event, x, y, flags, param):
     if event == cv2.EVENT_LBUTTONDOWN:  # 按一下滑鼠左鍵
         print(f"在x={x}, y={y}, 按一下滑鼠左鍵")
@@ -906,6 +907,7 @@ else:
 def OnMouseAction(event, x, y, flags, param):
     if event == cv2.EVENT_LBUTTONDOWN:
         print("左鍵畫點, 取得座標 :", x, y)
+
 
 cv2.namedWindow("Original")
 cv2.setMouseCallback("Original", OnMouseAction)

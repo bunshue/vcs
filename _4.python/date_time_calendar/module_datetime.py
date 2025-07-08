@@ -5,6 +5,7 @@ import datetime
 
 print("------------------------------------------------------------")  # 60個
 
+# 時間格式化 strftime
 current_time = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
 print("現在時間 :", current_time)
 

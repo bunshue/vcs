@@ -146,7 +146,7 @@ cv2.fillPoly(image, [pts], GREEN)
 print("畫多邊形 保留測試reshape")
 pts = np.array([[10, 5], [20, 30], [70, 20], [50, 10]], np.int32)
 pts = pts.reshape((-1, 1, 2))
-cv2.polylines(image, [pts], True, BLUE) # 空心多邊形
+cv2.polylines(image, [pts], True, BLUE)  # 空心多邊形
 
 pts1 = np.array([[500, 50], [600, 100], [500, 150], [400, 100]])  # 頂點陣列
 pts2 = np.array([[500, 150], [600, 200], [500, 250], [400, 200]])  # 頂點陣列
@@ -752,7 +752,7 @@ cv2.polylines(image, [pts], True, GREEN, 8)  # 空心多邊形
 
 
 # 255 就是藍色
-cv2.rectangle(image, (100, 100), (200, 200), 255, 2) #255 藍色
+cv2.rectangle(image, (100, 100), (200, 200), 255, 2)  # 255 藍色
 
 
 """ cv2.fillPoly
@@ -761,5 +761,3 @@ points = np.array([[[146, 539], [781, 539], [515, 417], [296, 397]]])  # 建立�
 # 畫實心多邊形
 cv2.fillPoly(mask, points, 255)  # 畫實心多邊形
 """
-
-

@@ -37,8 +37,6 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print("------------------------------------------------------------")  # 60個
-
 
 def show():
     plt.show()
@@ -46,18 +44,9 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
-
-plt.figure(
-    num="派圖 集合 1",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
 print("------------------------------------------------------------")  # 60個
+
+plt.figure(figsize=(12, 8))
 
 plt.subplot(231)
 
@@ -198,18 +187,9 @@ plt.pie(
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-plt.figure(
-    num="派圖 集合 2",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
 print("------------------------------------------------------------")  # 60個
+
+plt.figure(figsize=(12, 8))
 
 plt.subplot(231)
 
@@ -273,6 +253,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 
 fig, ax = plt.subplots(figsize=(6, 3), subplot_kw=dict(aspect="equal"))
+
 recipe = ["100 毫升純水", "90 公克黑糖", "120 毫升仙草", "100 毫升牛奶", "50 黑珍珠"]  # 原料成分
 data = [100, 90, 120, 100, 50]  # 原料份量
 wedges, texts = ax.pie(data, wedgeprops=dict(width=0.5), startangle=15)
@@ -302,7 +283,6 @@ ax.set_title("製作燒仙草環圈圖")
 show()
 
 print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 # 繪製餅圖
@@ -331,6 +311,7 @@ explode = (0, 0.1, 0, 0)  # 將第二塊分離出來
 
 # 繪製圓餅圖並自定義參數
 plt.figure(figsize=(8, 8))
+
 plt.pie(
     sizes,
     labels=labels,

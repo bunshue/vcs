@@ -6,6 +6,7 @@ WebCam 使用
 目前 webcam 僅 win10/x64 電腦可用
 """
 
+import datetime
 from opencv_common import *
 
 print("------------------------------------------------------------")  # 60個
@@ -18,111 +19,51 @@ if not cap.isOpened():
     print("開啟攝影機失敗")
     sys.exit()
 
+# 取得影像的尺寸大小
+w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+print("Image Size: %d x %d" % (w, h))
+
+# 更改視訊的解析度
+# Webcam有支援的模式 以下的設定才會有用
+# 設定影像的尺寸大小
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+cap.set(cv2.CAP_PROP_FPS, 30)
+
 while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()
 
     if ret == False:
         print("無影像, 離開")
         break
 
+    # 影像處理 ST 對稱 旋轉 裁切 灰階 邊緣 模糊 ...
+    # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉灰階
+    # frame = cv2.Canny(frame, 50, 100)  # minVal=50, maxVal=100
+    # frame = cv2.GaussianBlur(frame, (13, 13), 15)  # 高斯模糊
+    # 影像處理 SP
+
     # 加上文字 ST
-    cv2.rectangle(frame, (10, 10), (200, 42), BLACK, -1)  # 黑底
-    text = "English Only"
+    current_time = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
+    cv2.rectangle(frame, (10, 10), (370, 42), BLACK, -1)  # 黑底
+    text = current_time  # "English Only"
     org = (15, 35)
     fontFace = cv2.FONT_HERSHEY_SIMPLEX
-    fontScale = 1
+    fontScale = 0.8
     thickness = 2
     lineType = cv2.LINE_AA
     cv2.putText(frame, text, org, fontFace, fontScale, WHITE, thickness, lineType)
     # 加上文字 SP
 
     # 裁出一塊, 另外顯示之 ST
-    x_st = 0
-    y_st = 0
-    W = 320
-    H = 240
-    x1 = x_st
-    x2 = x_st + W
-    y1 = y_st
-    y2 = y_st + H
-    # print(x1, x2, y1, y2)
-    frame2 = frame[y1:y2, x1:x2]  # 取出一塊
+    x_st, y_st, W, H = 0, 0, 320, 240
+    frame2 = frame[y_st : y_st + H, x_st : x_st + W]  # 取出一塊
     cv2.imshow("WebCam_Cut", frame2)
     # 裁出一塊, 另外顯示之 SP
 
+    # 將影像顯示出來
     cv2.imshow("WebCam", frame)
-
-    k = cv2.waitKey(1)
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("按 ESC 離開")
-print("按 S 存圖")
-
-cap = cv2.VideoCapture(1)  # 建立攝影機物件
-if not cap.isOpened():
-    print("開啟攝影機失敗")
-    sys.exit()
-else:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
-
-    if ret == False:
-        print("無影像, 離開")
-    else:
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        frame_blur_pre = cv2.GaussianBlur(gray, (13, 13), 15)  # 高斯模糊
-
-"""
-#調整影像大小
-ratio = cap.get(cv2.CAP_PROP_FRAME_WIDTH) / cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-WIDTH = 320
-HEIGHT = int(WIDTH / ratio)
-"""
-
-time_old = time.time()
-while True:
-    # begin_time = time.time()  # 計算fps
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
-
-    if ret == False:
-        print("無影像, 離開")
-        break
-
-    """
-    #調整影像大小
-    frame = cv2.resize(frame, (WIDTH, HEIGHT))
-    frame = cv2.flip(frame, 1)
-    """
-
-    # 原圖
-    cv2.imshow("WebCam1", frame)
-
-    # 灰階處理
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    cv2.imshow("WebCam2", gray)
-
-    # 高斯模糊
-    frame_blur = cv2.GaussianBlur(gray, (13, 13), 15)
-    cv2.imshow("WebCam3", frame_blur)
-
-    # 比較影像
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 灰階處理
-    frame_blur_now = cv2.GaussianBlur(gray, (13, 13), 15)  # 高斯模糊
-    diff = cv2.absdiff(frame_blur_now, frame_blur_pre)  # 現在影像與前影像相減
-    cv2.imshow("WebCam4", diff)  # 顯示相減後的影像
-    frame_blur_pre = frame_blur_now.copy()  # 將現在影像設為前影像
-
-    time_new = time.time()
-
-    fps = 1 / (time_new - time_old)
-    # print('{:.1f}'.format(fps))
-    time_old = time_new
 
     k = cv2.waitKey(1)
     if k == ESC:
@@ -140,6 +81,78 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("按 ESC 離開")
+print("按 S 存圖")
+
+cap = cv2.VideoCapture(1)
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+else:
+    ret, frame = cap.read()
+
+    if ret == False:
+        print("無影像, 離開")
+    else:
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉灰階
+        frame_blur_pre = cv2.GaussianBlur(gray, (13, 13), 15)  # 高斯模糊
+
+"""
+#調整影像大小
+ratio = cap.get(cv2.CAP_PROP_FRAME_WIDTH) / cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+WIDTH = 320
+HEIGHT = int(WIDTH / ratio)
+"""
+
+time_old = time.time()
+while True:
+    # begin_time = time.time()  # 計算fps
+    ret, frame = cap.read()
+
+    if ret == False:
+        print("無影像, 離開")
+        break
+
+    """
+    #調整影像大小
+    frame = cv2.resize(frame, (WIDTH, HEIGHT))
+    frame = cv2.flip(frame, 1)
+    """
+
+    # 原圖
+    cv2.imshow("WebCam1", frame)
+
+    # 灰階處理
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉灰階
+    cv2.imshow("WebCam2", gray)
+
+    # 高斯模糊
+    frame_blur = cv2.GaussianBlur(gray, (13, 13), 15)
+    cv2.imshow("WebCam3", frame_blur)
+
+    # 比較影像
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉灰階
+    frame_blur_now = cv2.GaussianBlur(gray, (13, 13), 15)  # 高斯模糊
+    diff = cv2.absdiff(frame_blur_now, frame_blur_pre)  # 現在影像與前影像相減
+    cv2.imshow("WebCam4", diff)  # 顯示相減後的影像
+    frame_blur_pre = frame_blur_now.copy()  # 將現在影像設為前影像
+
+    time_new = time.time()
+
+    fps = 1 / (time_new - time_old)
+    # print('{:.1f}'.format(fps))
+    time_old = time_new
+
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("移動偵測1")
 
 cap = cv2.VideoCapture(1)
@@ -150,9 +163,9 @@ if not cap.isOpened():
 frame_pre = None  # 前影像, 預設是空的
 
 while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()
     if ret:
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 灰階處理
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉灰階
         frame_now = cv2.GaussianBlur(gray, (13, 13), 5)  # 高斯模糊
         if frame_pre is not None:  # ←如果前影像不是空的, 就和前影像比對
             diff = cv2.absdiff(frame_now, frame_pre)  # 此影格與前影格的差異值
@@ -171,6 +184,7 @@ while True:
 
         cv2.imshow("WebCam", frame)
         frame_pre = frame_now.copy()
+
     k = cv2.waitKey(1)
     if k == ESC:
         break
@@ -189,7 +203,7 @@ skip = 1  # 設定不比對的次數, 由於前影像是空的, 略過一次比�
 while cap.isOpened():
     success, img = cap.read()
     if success:
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 灰階處理
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉灰階
         img_now = cv2.GaussianBlur(gray, (13, 13), 5)  # 高斯模糊
         if skip > 0:  # ←如果 skip 大於 0 就略過不和前影像比對
             skip -= 1  # 將 skip 次數減 1
@@ -215,39 +229,10 @@ while cap.isOpened():
 
     k = cv2.waitKey(50)  # ←暫停 50 毫秒 (0.05 秒), 並檢查是否有按鍵輸入
     if k == ESC:
-        # if k == ord("q"):  # Q 的寫法
-        cv2.destroyAllWindows()
-        cap.release()
         break
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("更改視訊的解析度")
-
-cap = cv2.VideoCapture(1)
-if not cap.isOpened():
-    print("開啟攝影機失敗")
-    sys.exit()
-
-# Webcam有支援的模式 以下的設定才會有用
-# 設定影像的尺寸大小
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
-cap.set(cv2.CAP_PROP_FPS, 30)
-
-while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
-    if ret == False:
-        print("無影像, 離開")
-        break
-    cv2.imshow("WebCam", frame)
-    k = cv2.waitKey(1)
-    if k == ESC:
-        break
-
-cap.release()
 cv2.destroyAllWindows()
+cap.release()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -310,23 +295,20 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 """
 # 螢幕錄影程式
-
 螢幕錄影 無聲音
-
 # 每一秒截一張圖 用 1 fps 錄製
-
 是否任意停止皆可成檔案?
-
 """
 
 RECORD_TIME_MINUTE = 2
 
-import datetime
 from PIL import ImageGrab
 
 image = ImageGrab.grab()  # 取得目前的螢幕畫面
+
 width = image.size[0]
 height = image.size[1]
 print("width:", width, "height:", height)
@@ -369,7 +351,6 @@ print("------------------------------------------------------------")  # 60個
 WebCam 使用
 一般使用
 偵測特定顏色 紅色
-
 目前 webcam 僅 x64 電腦可用
 """
 
@@ -412,7 +393,7 @@ for i in range(60):
 background = np.flip(background, axis=1)
 
 while True:
-    ret, frame = cap.read()  # 從攝影機擷取一張影像
+    ret, frame = cap.read()
 
     if ret == False:
         print("無影像, 離開")
@@ -487,8 +468,6 @@ VideoWriter_fourcc('F', 'L', 'V', '1')	.flv	Flash視訊
 
 """
 
-import datetime
-
 RECORD_TIME_MINUTE = 10  # 分
 RECORD_DATA_SIZE = 100  # MB
 
@@ -538,7 +517,8 @@ record_filename = (
     "tmp1_webcam_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".avi"
 )
 
-cap = cv2.VideoCapture(0)  # 打開攝影機
+cap = cv2.VideoCapture(1)
+
 if not cap.isOpened():
     print("Could not open video device")
     sys.exit()
@@ -601,7 +581,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("錄影, 按 SPACE 存圖, 按 ESC 離開")
 
-cap = cv2.VideoCapture(0)  # 打開攝影機
+cap = cv2.VideoCapture(1)
+
 if not cap.isOpened():
     print("Could not open video device")
     sys.exit()
@@ -728,7 +709,7 @@ from PIL import ImageSequence
 
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 04 兩個camera")
+print("兩個camera")
 print("按 ESC 離開")
 
 ratio = 3
@@ -774,7 +755,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 05 N X N")
+print("VideoCapture N X N")
 print("按 ESC 離開")
 
 N = 3  # 設定要分成幾格, N X N
@@ -848,7 +829,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 11 按 SPACE 製作一個閃光燈拍照的效果")
+print("按 SPACE 製作一個閃光燈拍照的效果")
 print("按 ESC 離開")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
@@ -883,7 +864,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 12 存圖 按 SPACE 製作一個閃光燈拍照的效果")
+print("存圖 按 SPACE 製作一個閃光燈拍照的效果")
 print("按 ESC 離開")
 
 cap = cv2.VideoCapture(1)
@@ -936,7 +917,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 13 存圖 按 SPACE 製作一個閃光燈拍照的效果 + 倒數三秒")
+print("存圖 按 SPACE 製作一個閃光燈拍照的效果 + 倒數三秒")
 print("按 ESC 離開")
 
 cap = cv2.VideoCapture(1)
@@ -1004,7 +985,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 14 加 logo")
+print("加 logo")
 print("按 ESC 離開")
 
 W, H = 640, 480
@@ -1024,7 +1005,7 @@ img[0:H, 0:W] = "255"
 print("製作mask")
 x_st, y_st = 10, 50  # logo貼上位置
 img[y_st : y_st + size[0], x_st : x_st + size[1]] = logo
-img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉灰階
 ret, mask1 = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY_INV)
 logo = cv2.bitwise_and(img, img, mask=mask1)
 ret, mask2 = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY)
@@ -1062,7 +1043,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ many
-print("OpenCV VideoCapture 16 Webcam影像轉成gif")
+print("VideoCapture Webcam影像轉成gif")
 print("按 ESC 離開")
 
 output = []  # 建立輸出的空串列
@@ -1107,7 +1088,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 17 處理影片")
+print("處理影片")
 print("按 ESC 離開")
 
 cap = cv2.VideoCapture(video_filename)  # 開啟影片
@@ -1556,13 +1537,13 @@ frame = cv2.flip(frame, 1)
 # frame = cv2.resize(frame, None, fx = 1.5, fy = 1.5, interpolation = cv2.INTER_AREA)
 
 # 彩色轉灰階
-# frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+# frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 # 若要錄成黑白影片 要 加上 isColor=False 參數設定
 # 建立影像寫入器 out
 out = cv2.VideoWriter(record_filename, fourcc, fps, (width, height), isColor=False)
 # 且
-gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉換成灰階
+gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉灰階
 out.write(gray)  # 將圖像寫入影片
 
 
@@ -1582,4 +1563,3 @@ out = cv2.VideoWriter(record_filename, cv2.VideoWriter_fourcc(*'XVID'), 1, Image
         out.release()
         cv2.destroyAllWindows()
 """
-

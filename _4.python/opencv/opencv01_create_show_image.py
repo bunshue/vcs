@@ -1529,7 +1529,7 @@ print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread(filename1)
 
-cv2.imshow('Image', image)
+cv2.imshow("Image", image)
 
 while True:
     # k = cv2.waitKey(100)  #每0.1秒讀一次鍵盤
