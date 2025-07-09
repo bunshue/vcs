@@ -24,27 +24,18 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 
 def show():
+    plt.tight_layout()
     plt.show()
-    pass
-
 
 import ssl
 
 ssl._create_default_https_context = ssl._create_stdlib_context
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-plt.figure(
-    num="新進測試 01",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(figsize=(12, 8))
 
-print("------------------------------")  # 30個
 plt.subplot(231)
 
 # image data
@@ -156,23 +147,12 @@ print("------------------------------")  # 30個
 plt.subplot(236)
 
 
-plt.tight_layout()
-
 show()
 
 print("------------------------------------------------------------")  # 60個
 
-plt.figure(
-    num="新進測試 02",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(figsize=(12, 8))
 
-print("------------------------------")  # 30個
 plt.subplot(231)
 
 x = [x for x in range(0, 11)]
@@ -210,8 +190,6 @@ plt.subplot(235)
 print("------------------------------")  # 30個
 plt.subplot(236)
 
-
-plt.tight_layout()
 
 show()
 
@@ -378,6 +356,7 @@ plt.imshow(canvas)
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 圖片並列個數
 N = 15
@@ -411,6 +390,7 @@ plt.imshow(canvas)
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from PIL import Image, ImageOps
 
@@ -437,6 +417,7 @@ plt.imshow(image)
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 圖片並列個數
@@ -479,6 +460,7 @@ plt.imshow(canvas)
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from PIL import Image, ImageDraw, ImageFont
@@ -602,6 +584,7 @@ class IconGraph:
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 繪製以圖片代替長條的長條圖
 
@@ -635,6 +618,7 @@ ig.get_image()
 """
 
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("資料視覺化的調色盤 many")
@@ -693,7 +677,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 x = np.linspace(0, 2 * np.pi, 100)
@@ -991,6 +974,7 @@ fig.savefig("tmp_bbb.png", dpi=300)
 fig.savefig("tmp_ccc.pdf")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """
 Matplotlib 多邊形繪製
@@ -1026,6 +1010,7 @@ ax.set_xlim([0, 50])
 ax.set_ylim([0, 50])
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -1066,6 +1051,7 @@ ax.set_xlim([0, n])
 ax.set_ylim([0, n])
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -1129,6 +1115,7 @@ def box(width, depth, height):
 box(width, depth, height)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 """
 Matplotlib 多邊形繪製
 既然如此，要用 Poly3DCollection 來繪製正四面體也是可以的：
@@ -1168,6 +1155,7 @@ def tetrahedron(width):
 width = 30
 tetrahedron(width)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 plt.fill("time", "signal", "g", data={"time": [0, 1, 2, 3], "signal": [0, 1, 1, 0]})
@@ -1497,46 +1485,5 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-plt.xticks(())  # ignore xticks
-plt.yticks(())  # ignore yticks
-
-# plt.axis("off")
-# plt.axis("off")  # 隱藏坐標軸
-
-# plt.title("標題在特定位置", size="x-large", y=-0.1)
-
-plt.title("標題在特定位置", size=30, x=0.0, y=0.0)
-
-
-#!wget -O taipei_sans_tc_beta.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
-#!mv taipei_sans_tc_beta.ttf /usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/fonts/ttf
-
-# import matplotlib
-from matplotlib.font_manager import fontManager
-
-# 新增字體
-# fontManager.addfont('/usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/fonts/ttf/taipei_sans_tc_beta.ttf')
-# 將 font-family 設為 Taipei Sans TC Beta
-# 設定完後，之後的圖表都可以顯示中文了
-SMALL_SIZE = 8
-MEDIUM_SIZE = 14
-BIGGER_SIZE = 18
-# 設定字型
-# matplotlib.rc('font', family='Taipei Sans TC Beta')
-# matplotlib.rc('font', size=SMALL_SIZE)
-# 預設字體大小
-plt.rc("font", size=SMALL_SIZE)
-# 軸標題字體大小
-plt.rc("axes", titlesize=BIGGER_SIZE)
-# 軸標籤字體大小
-plt.rc("axes", labelsize=MEDIUM_SIZE)
-# X軸刻度字體大小
-plt.rc("xtick", labelsize=SMALL_SIZE)
-# Y軸刻度字體大小
-plt.rc("ytick", labelsize=SMALL_SIZE)
-# 圖例字體大小
-plt.rc("legend", fontsize=SMALL_SIZE)
-# 圖形標題字體大小
-plt.rc("figure", titlesize=BIGGER_SIZE)
 
 print("------------------------------------------------------------")  # 60個

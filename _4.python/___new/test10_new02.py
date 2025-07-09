@@ -31,7 +31,7 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 N = 100
 index = np.arange(N)
 bar_width = 0.8
@@ -647,10 +647,6 @@ humi = 67.89
 temp = 23.45
 print("溫    度: %3.1f °C" % temp)
 print("相對溼度: %3.1f %% RH" % humi)
-'''
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -904,33 +900,6 @@ best_score, best_params = grid_model_result.best_score_, grid_model_result.best_
 print("Best: %f using %s" % (best_score, best_params))
 
 # Best: 0.850725 using {'max_iter': 100, 'tol': 0.01}
-
-------------------------------------------------------------
-# colab
-------------------------------------------------------------
-
-"""
-os.chdir("/content/")
-"""
-
-from google.colab import drive
-drive.mount("/content/drive")
-# drive.mount("/content/drive", force_remount=True)
-
-os.chdir("/content/drive/MyDrive/data/ch08")  # 使用 Colab 要換路徑使用，本機環境可以刪除
-filenames = os.listdir()  # 轉出一層, 指定目錄, 若無參數, 就是當前目錄
-print("4轉出一層(資料夾+檔案)\n", filenames)
-print("當前目錄下共有 :", len(filenames), "個項目(資料夾+檔案)")
-
-if os.path.isfile("img3.jpg"):
-  print('有')
-else:
-  print('無')
-
-if os.path.isfile("/content/yolo.h5"):
-  print('有')
-else:
-  print('無')
 
 ------------------------------------------------------------
 
@@ -1264,36 +1233,6 @@ plt.plot(X[3:, 0], X[3:, 1], "g.")
 n = 100000
 cc = np.sum(4.0 / np.r_[1:n:4, -3:-n:-4])
 print(cc)
-
-"""
-# 選取檔案的寫法
-from google.colab import files
-uploaded = files.upload()
-print(uploaded)
-"""
-
-print('aaa')
-cc = os.listdir("/content/drive/My Drive/Colab Notebooks")
-print(cc)
-
-print('bbb')
-
-df = pd.read_csv("/content/drive/MyDrive/CSV/iris_sample.csv")
-cc = df.head()
-print(cc)
-
-print('ccc')
-
-import matplotlib
-import matplotlib.font_manager as fm
-!wget -O MicrosoftJhengHei.ttf https://github.com/a7532ariel/ms-web/raw/master/Microsoft-JhengHei.ttf
-!wget -O ArialUnicodeMS.ttf https://github.com/texttechnologylab/DHd2019BoA/raw/master/fonts/Arial%20Unicode%20MS.TTF
- 
-fm.fontManager.addfont('MicrosoftJhengHei.ttf')
-matplotlib.rc('font', family='Microsoft Jheng Hei')
- 
-fm.fontManager.addfont('ArialUnicodeMS.ttf')
-matplotlib.rc('font', family='Arial Unicode MS')
 
         noise_sample = noise * np.random.normal(loc=0, scale=1.0, size=n_samples)
         noise_sample = noise * np.random.uniform(low=0, high=1.0, size=n_samples)
@@ -3519,6 +3458,107 @@ for pwd in ("aaabbbccc", "aaa", "aaabbb"):  # 測試系列密碼值
     except Exception as err:
         print("密碼長度檢查異常發生: ", str(err))
 
+
+
+# PIL
+
+from PIL import Image, ImageOps
+import numpy as np
+
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+
+# Disable scientific notation for clarity
+np.set_printoptions(suppress=True)
+
+image = Image.open(filename)
+
+size = (224, 224)
+image = ImageOps.fit(image, size, Image.ANTIALIAS)
+
+# display the resized image
+image.show()
+------------------------------------------------------------
+
+# 設定中文字型及負號正確顯示
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+
+也可以
+
+# 設定中文字型及負號正確顯示
+plt.rcParams["font.sans-serif"] = "mingliu"
+
+
+------------------------------------------------------------
+
+pip freeze > requirements.txt
+
+
+from pathlib import Path
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+
+
+
+
+
+# plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 也可設mingliu或DFKai-SB
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 也可設 mingliu 或 DFKai-SB
+
+一個df可以將多筆資料畫在多圖
+一個df可以將多筆資料畫在一圖
+
+目前不能畫多個df至一圖
+
+
+
+plt.rcParams['figure.figsize'] = [10, 10]
+plt.rcParams['figure.dpi'] = 72
+
+print('打印 plt 參數')
+cc = plt.rcParams.keys
+print(cc)
+
+
+
+一大圖上畫上各小圖
+plt.figure(figsize=[8, 4])
+plt.axes([0, 0, 0.8, 1])
+plt.title(label="Chart 1")
+plt.plot([1, 2, 3], "r:o")
+
+plt.axes([0.55, 0.1, 0.2, 0.2])
+plt.title(label="Chart 2")
+plt.plot([1, 2, 3], "g--o")
+
+plt.show()
+
+
+
+------------------------------------------------------------
+
+
+print("姓名   座號  國文  數學  英文")
+print("%3s  %2d   %3d   %3d  %3d" % ("林大明", 1, 100, 87, 79))
+print("%3s  %2d   %3d   %3d  %3d" % ("陳阿中", 2, 74, 88, 100))
+print("%3s  %2d   %3d   %3d  %3d" % ("張小英", 11, 82, 65, 8))
+
+# print("本班總成績：%d 分，平均成績：%5.2f 分" % (total, average))
+# print("本班總成績：%d 分，平均成績：%5.2f 分" % (total, average))
+
+
+
+------------------------------------------------------------
+------------------------------------------------------------
+
+edge_x[edge_x > 255] = 255
+edge_y[edge_y > 255] = 255
+edge_x = edge_x.astype(np.uint8)
+edge_y = edge_y.astype(np.uint8)
+
+edge[edge > 255] = 255
 
 
 

@@ -22,7 +22,7 @@ print("------------------------------------------------------------")  # 60個
 src = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 黑白讀取
 
 # 高斯模糊，边缘检测需要的
-# blur_gray = cv2.GaussianBlur(src, (3, 3), 0)
+# blur_gray = cv2.GaussianBlur(src, (3, 3), 0)  # 降低噪音
 # image_blur = cv2.GaussianBlur(image, (5, 5), 0)
 # src = cv2.GaussianBlur(src, (3, 3), 0)
 
@@ -32,6 +32,7 @@ dst3 = cv2.Canny(src, 100, 200)
 dst4 = cv2.Canny(src, 50, 150)
 dst5 = cv2.Canny(src, 128, 200)
 dst6 = cv2.Canny(src, 32, 128)
+# dst_canny = cv2.Canny(src, 50, 100)  # minVal=50, maxVal=100
 
 # 白線膨脹
 dilate = cv2.dilate(dst3, None)
@@ -2108,9 +2109,64 @@ cv2.destroyAllWindows()  # 刪除所有視窗
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+img = cv2.imread(filename2)
+img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
+
+img = cv2.medianBlur(img, 7)  # 模糊化，去除雜訊
+# Laplacian
+output = cv2.Laplacian(img, -1, 1, 5)  # 偵測邊緣
+# Sobel
+output = cv2.Sobel(img, -1, 1, 1, 1, 7)  # 偵測邊緣
+# Canny
+output = cv2.Canny(img, 36, 36)  # 偵測邊緣
+
+cv2.imshow("image", output)
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+image1 = cv2.imread(filename2)
+image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
+
+# image2 = cv2.cvtColor(image1, 6)  # 也可以用數字對照 6 表示轉換成灰階
+# 套用 medianBlur() 中值模糊
+image3 = cv2.medianBlur(image2, 7)  # 模糊化，去除雜訊 7, 25 彩色黑白皆可
+image4 = cv2.Canny(image3, 36, 36)  # 偵測邊緣
+
+# 套用自適應二值化黑白影像
+image5 = cv2.adaptiveThreshold(
+    image3, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
+)
+
+plt.figure(figsize=(12, 8))
+
+plt.subplot(231)
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(232)
+plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.title("轉成灰階")
+
+plt.subplot(233)
+plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
+plt.title("模糊化，去除雜訊")
+
+plt.subplot(234)
+plt.imshow(cv2.cvtColor(image4, cv2.COLOR_BGR2RGB))
+plt.title("偵測邊緣")
+
+plt.subplot(235)
+plt.imshow(cv2.cvtColor(image5, cv2.COLOR_BGR2RGB))
+plt.title("自適應二值化黑白影像")
+
+plt.subplot(236)
+plt.title("")
+
+plt.suptitle("相加")
+show()
 
 
 print("------------------------------------------------------------")  # 60個
@@ -2129,7 +2185,6 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

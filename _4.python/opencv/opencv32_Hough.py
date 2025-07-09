@@ -1,9 +1,9 @@
 """
 霍夫變換
 
-cv2.HoughLines
-cv2.HoughLinesP
-cv2.HoughCircles
+cv2.HoughLines()
+cv2.HoughLinesP()
+cv2.HoughCircles()
 
 # 參數使用
 # 尋找霍夫直線
@@ -109,27 +109,30 @@ print("------------------------------------------------------------")  # 60個
 # cv2.HoughLines 直線檢測
 
 filename = "C:/_git/vcs/_4.python/opencv/data/_shape/star_silver.png"  # 五角銀星
-# filename = "data/_Hough/computer.jpg"
 
-img_color = cv2.imread(filename)  # 彩色讀取
-img_gray = cv2.cvtColor(img_color, cv2.COLOR_BGR2GRAY)  # 轉灰階
-img_original = img_color.copy()
+# 影像前處理
+img_original = cv2.imread(filename)  # 彩色讀取
+img_color1 = cv2.imread(filename)  # 彩色讀取
+img_color2 = cv2.imread(filename)  # 彩色讀取
+
+img_gray = cv2.cvtColor(img_color1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 edges = cv2.Canny(img_gray, 50, 150, apertureSize=3)
-# edges = cv2.Canny(img_gray, 100, 200)
 # edges = cv2.Canny(img_gray, 50, 200)
+# edges = cv2.Canny(img_gray, 100, 200)
 # edges = cv2.Canny(img_gray, 200, 200)
 
 print("------------------------------")  # 30個
+# cv2.HoughLines()
 
 # 尋找霍夫直線, 檢測直線
 lines = cv2.HoughLines(edges, 1, np.pi / 180, 140)
-# lines = cv2.HoughLines(edges, 1, np.pi / 180, 220)
-# lines = cv2.HoughLines(edges, 1, np.pi / 180, 180)
 # lines = cv2.HoughLines(edges, 1, np.pi / 180, 150)
+# lines = cv2.HoughLines(edges, 1, np.pi / 180, 180)
+# lines = cv2.HoughLines(edges, 1, np.pi / 180, 220)
 print("共找到 :", len(lines), "條直線")
 
-# 繪製霍夫直線 在 img_color 上
+# 繪製霍夫直線 在 img_color1 上
 # 沿着左上角的原点，作目标直线的垂线得到长度和角度
 index = 0
 for line in lines:
@@ -146,38 +149,42 @@ for line in lines:
     y1 = int(y0 + R * (np.cos(theta)))
     x2 = int(x0 - R * (-np.sin(theta)))
     y2 = int(y0 - R * (np.cos(theta)))
-    cv2.line(img_color, (x1, y1), (x2, y2), GREEN, 5)
-    # cv2.line(img_color, (x1, y1), (x2, y2), colors[index%6], 5)
+    cv2.line(img_color1, (x1, y1), (x2, y2), GREEN, 5)
+    # cv2.line(img_color1, (x1, y1), (x2, y2), colors[index%6], 5)
     index += 1
 
 
-"""
 print("------------------------------")  # 30個
+# cv2.HoughLinesP()
 
 # 尋找霍夫直線
-
 rho = 1  # 距离分辨率
 theta = np.pi / 180  # 角度分辨率
-threshold = 160  # 霍夫空间中多少个曲线相交才算作正式交点
-min_line_len = 100  # 最少多少个像素点才构成一条直线
-max_line_gap = 10  # 线段之间的最大间隔像素
-lines = cv2.HoughLinesP(edges, rho, theta, threshold, maxLineGap=max_line_gap)
+threshold = 50  # 霍夫空间中多少个曲线相交才算作正式交点
+min_line_len = 10  # 最少多少个像素点才构成一条直线
+max_line_gap = 100  # 线段之间的最大间隔像素
+lines = cv2.HoughLinesP(edges, rho, theta, threshold, minLineLength=min_line_len, maxLineGap=max_line_gap)
 print("共找到 :", len(lines), "條直線")
 
+# 繪製霍夫直線 在 img_color2 上
 for line in lines:
     # print(line)
     x1, y1, x2, y2 = line[0]
-    cv2.line(img_color, (x1, y1), (x2, y2), RED, 10)
+    cv2.line(img_color2, (x1, y1), (x2, y2), GREEN, 5)
 
 print("------------------------------")  # 30個
-"""
-plt.subplot(121)
+
+plt.subplot(311)
 plt.imshow(cv2.cvtColor(img_original, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(img_color, cv2.COLOR_BGR2RGB))
-plt.title("尋找霍夫直線")
+plt.subplot(312)
+plt.imshow(cv2.cvtColor(img_color1, cv2.COLOR_BGR2RGB))
+plt.title("尋找霍夫直線 HoughLines")
+
+plt.subplot(313)
+plt.imshow(cv2.cvtColor(img_color2, cv2.COLOR_BGR2RGB))
+plt.title("尋找霍夫直線 HoughLinesP")
 
 show()
 
@@ -190,57 +197,26 @@ print("------------------------------------------------------------")  # 60個
 # cv2.HoughLinesP ST
 print("------------------------------------------------------------")  # 60個
 
-# 無人駕駛車道檢測
 
-filename = "data/_Hough/roadtest.jpg"
-
-img_color = cv2.imread(filename)  # 彩色讀取
-img_gray = cv2.cvtColor(img_color, cv2.COLOR_BGR2GRAY)  # 轉灰階
-# Canny邊緣檢測，减少图像空间中需要检测的点数量
-edges = cv2.Canny(img_gray, 50, 200)
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(img_color, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-rho = 1  # 距离分辨率
-theta = np.pi / 180  # 角度分辨率
-threshold = 50  # 霍夫空间中多少个曲线相交才算作正式交点
-min_line_len = 10  # 最少多少个像素点才构成一条直线
-max_line_gap = 100  # 线段之间的最大间隔像素
-lines = cv2.HoughLinesP(
-    edges, rho, theta, threshold, minLineLength=min_line_len, maxLineGap=max_line_gap
-)
-print("共找到 :", len(lines), "條直線")
-
-# 繪製霍夫直線 在 img_color 上
-for line in lines:
-    x1, y1, x2, y2 = line[0]
-    cv2.line(img_color, (x1, y1), (x2, y2), GREEN, 5)
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(img_color, cv2.COLOR_BGR2RGB))
-plt.title("尋找霍夫直線 HoughLinesP")
-
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/_Hough/lane.jpg"
 
-lane1 = cv2.imread(filename)  # 彩色讀取
+img_color2 = cv2.imread(filename)  # 彩色讀取
 # 高斯模糊，Canny边缘检测需要的
-img_gray = cv2.GaussianBlur(lane1, (5, 5), 0)  # 執行高斯模糊化
+img_gray = cv2.GaussianBlur(img_color2, (5, 5), 0)  # 執行高斯模糊化
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 edges = cv2.Canny(img_gray, 50, 150)
 
 plt.figure("霍夫變換 HoughLinesP", figsize=(10, 8))
 
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(lane1, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(img_color2, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
+# 尋找霍夫直線
 rho = 1  # 距离分辨率
 theta = np.pi / 180  # 角度分辨率
 threshold = 10  # 霍夫空间中多少个曲线相交才算作正式交点
@@ -249,13 +225,14 @@ max_line_gap = 50  # 线段之间的最大间隔像素
 lines = cv2.HoughLinesP(edges, rho, theta, threshold, maxLineGap=max_line_gap)
 print("共找到 :", len(lines), "條直線")
 
-lane4 = np.zeros_like(edges)
+result = np.zeros_like(edges)
 for line in lines:
+    # print(line)
     for x1, y1, x2, y2 in line:
-        cv2.line(lane4, (x1, y1), (x2, y2), 255, 1)
+        cv2.line(result, (x1, y1), (x2, y2), 255, 1)
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(lane4, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(result, cv2.COLOR_BGR2RGB))
 plt.title("霍夫變換 HoughLinesP")
 
 show()
@@ -265,12 +242,13 @@ print("------------------------------------------------------------")  # 60個
 
 filename_road = "C:/_git/vcs/_4.python/opencv/data/_Hough/road.jpg"
 
-img_color = cv2.imread(filename_road)
+img_color2 = cv2.imread(filename_road)
 
-edges = get_edge(img_color)  # Canny邊緣檢測
+edges = get_edge(img_color2)  # Canny邊緣檢測
 
 roi = get_roi(edges)  # 取得 ROI
 
+# 尋找霍夫直線
 rho = 3  # 距离分辨率
 theta = np.pi / 180  # 角度分辨率
 threshold = 60  # 霍夫空间中多少个曲线相交才算作正式交点
@@ -284,17 +262,18 @@ lines = cv2.HoughLinesP(
     minLineLength=min_line_len,
     maxLineGap=max_line_gap,
 )
-print(lines)
+print("共找到 :", len(lines), "條直線")
+
 if lines is not None:  # 如果有找到線段
-    img_color = draw_lines(img_color, lines)  # 在原圖繪製線段
+    img_color2 = draw_lines(img_color2, lines)  # 在原圖繪製線段
 else:
     print("偵測不到直線線段")
-cv2.imshow("Line", img_color)
 
+cv2.imshow("Line", img_color2)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-plt.imshow(cv2.cvtColor(img_color, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(img_color2, cv2.COLOR_BGR2RGB))
 plt.title("顯示直線線段圖")
 show()
 
@@ -313,6 +292,7 @@ show()
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 edges = cv2.Canny(img_gray, 100, 255)
 
+# 尋找霍夫直線
 rho = 1  # 距离分辨率
 theta = np.pi / 180  # 角度分辨率
 threshold = 96  # 霍夫空间中多少个曲线相交才算作正式交点
@@ -349,7 +329,7 @@ print("------------------------------------------------------------")  # 60個
 # cv2.HoughCircles ST
 print("------------------------------------------------------------")  # 60個
 
-img_gray = cv2.imread("data/_Hough/chess.jpg", 0)  # 灰階
+img_gray = cv2.imread("data/_Hough/chess.jpg", cv2.IMREAD_GRAYSCALE)  # 灰階
 
 img_color = cv2.imread("data/_Hough/chess.jpg", -1)  # 彩色
 
@@ -392,7 +372,7 @@ print("------------------------------------------------------------")  # 60個
 """
 print("這個做很久~~~~~~~")
 
-img_gray = cv2.imread("data/_Hough/chess.jpg", 0)
+img_gray = cv2.imread("data/_Hough/chess.jpg", cv2.IMREAD_GRAYSCALE)
 img_color = cv2.imread("data/_Hough/chess.jpg", -1)
 
 img_original = img_color.copy()
@@ -420,11 +400,11 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img1 = cv2.imread("data/_Hough/4.png", 0)  # 灰階讀取
+img1 = cv2.imread("data/_Hough/4.png", cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 img2 = cv2.medianBlur(img1, 5)
 img3 = cv2.cvtColor(img2, cv2.COLOR_GRAY2BGR)
 
-plt.figure("霍夫變換 HoughCircles", figsize=(12, 10))
+plt.figure("霍夫變換 HoughCircles", figsize=(10, 8))
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(img1, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
@@ -549,7 +529,7 @@ circles = cv2.HoughCircles(
 
 x, y, r = circles[0].T
 
-fig, ax = plt.subplots(figsize=(12, 10))
+fig, ax = plt.subplots(figsize=(10, 8))
 plt.imshow(img_gray, cmap="gray")
 # plt.imshow(cv2.cvtColor(xxxx, cv2.COLOR_BGR2RGB))
 
@@ -668,6 +648,8 @@ lines = cv2.HoughLinesP(
     minLineLength=min_line_len,
     maxLineGap=max_line_gap,
 )
+print("共找到 :", len(lines), "條直線")
+
 avglines = get_avglines(lines)  # 取得左右 2 條平均線方程式
 if avglines is not None:
     lines = get_sublines(img_color, avglines)  # 取得要畫出的左右 2 條線段
@@ -747,11 +729,11 @@ print("------------------------------")  # 30個
 # img_color = cv2.imread(filename, cv2.IMREAD_COLOR)
 
 
-# 要刪除
-# schedule.jpg
-filename = "data/_Hough/lane2.jpg"
-filename = "data/_Hough/jianzhu.png"
-filename = "data/_Hough/FerrisWheel4.png"
+# 要刪除的檔案
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+

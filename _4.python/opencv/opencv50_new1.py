@@ -453,19 +453,6 @@ _sum = np.double(np.sum(product_array[0]))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("opencv 92")
-"""
-#例外的寫法
-img = cv2.imread("digits.png", 0)
-if img is None:
-    raise Exception("we need the digits.png image from samples/data here !")
-"""
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 100")
-
 """
     scpy2.opencv.warp_demo：仿射變換和透視變換的示範程式，
     可以透過滑鼠拖曳圖中藍色三角形和四邊形的頂點，
@@ -1038,67 +1025,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread(filename3, cv2.IMREAD_GRAYSCALE)
-
-plt.subplot(331)
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.title("原圖")
-plt.axis("off")
-
-row, column = img.shape
-x = np.zeros((row, column, 8), dtype=np.uint8)
-
-for i in range(8):
-    x[:, :, i] = 2**i  # 填上權重
-
-result = np.zeros((row, column, 8), dtype=np.uint8)
-
-for i in range(8):
-    result[:, :, i] = cv2.bitwise_and(img, x[:, :, i])
-    mask = result[:, :, i] > 0  # 影像邏輯值
-    result[mask] = 255  # True的位置填255
-    plt.subplot(3, 3, i + 2)
-    plt.imshow(cv2.cvtColor(result[:, :, i], cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-    plt.title(str(i))
-    plt.axis("off")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# cv2.bitwise_and
-
-src = cv2.imread(filename3, cv2.IMREAD_GRAYSCALE)
-row, column = src.shape  # 取得列高和欄寬
-
-h100 = np.ones((row, column), dtype=np.uint8) * 100  # 建立像素值是100的影像
-
-new_src = cv2.bitwise_and(src, h100)
-
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.title("原圖")
-plt.axis("off")
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(h100, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.title("灰階100")
-plt.axis("off")
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(new_src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.title("原圖取出灰階100")
-plt.axis("off")
-
-plt.suptitle("cv2.bitwise_and")
-show()
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 # cv2.grabCut 影像擷取 ST
@@ -1632,24 +1558,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread(filename2)
-img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
-
-img = cv2.medianBlur(img, 7)  # 模糊化，去除雜訊
-# Laplacian
-output = cv2.Laplacian(img, -1, 1, 5)  # 偵測邊緣
-# Sobel
-output = cv2.Sobel(img, -1, 1, 1, 1, 7)  # 偵測邊緣
-# Canny
-output = cv2.Canny(img, 36, 36)  # 偵測邊緣
-
-cv2.imshow("image", output)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 mask = np.zeros((300, 300, 3), dtype="uint8")  # 建立 300x300 的黑色畫布
 cv2.circle(mask, (150, 150), 100, WHITE, -1)  # 在畫布上中心點加入一個半徑 100 的白色圓形
 mask = cv2.GaussianBlur(mask, (35, 35), 0)  # 進行高斯模糊
@@ -1875,50 +1783,6 @@ cv2.imshow("saltImage", saltImage)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-image1 = cv2.imread(filename2)
-image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
-
-# image2 = cv2.cvtColor(image1, 6)  # 也可以用數字對照 6 表示轉換成灰階
-# 套用 medianBlur() 中值模糊
-image3 = cv2.medianBlur(image2, 7)  # 模糊化，去除雜訊 7, 25 彩色黑白皆可
-image4 = cv2.Canny(image3, 36, 36)  # 偵測邊緣
-
-# 套用自適應二值化黑白影像
-image5 = cv2.adaptiveThreshold(
-    image3, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
-)
-
-plt.figure(figsize=(12, 8))
-
-plt.subplot(231)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(232)
-plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
-plt.title("轉成灰階")
-
-plt.subplot(233)
-plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
-plt.title("模糊化，去除雜訊")
-
-plt.subplot(234)
-plt.imshow(cv2.cvtColor(image4, cv2.COLOR_BGR2RGB))
-plt.title("偵測邊緣")
-
-plt.subplot(235)
-plt.imshow(cv2.cvtColor(image5, cv2.COLOR_BGR2RGB))
-plt.title("自適應二值化黑白影像")
-
-plt.subplot(236)
-plt.title("")
-
-plt.suptitle("相加")
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2323,18 +2187,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/edge_detection/geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
-src = cv2.GaussianBlur(src, (3, 3), 0)  # 降低噪音
-
-# Canny()函數
-dst_canny = cv2.Canny(src, 50, 100)  # minVal=50, maxVal=100
-
-plt.imshow(cv2.cvtColor(dst_canny, cv2.COLOR_BGR2RGB))
-plt.title("Canny")
-
-
 """ 零碎的code
-
 
 窗口显示方式，cv2.WINDOW_NORMAL为正常显示，可以调整大小
 # cv2.WINDOW_AUTOSIZE显示原图片的大小，用户不能调整大小
@@ -2345,15 +2198,8 @@ x_st, y_st, w, h
 小圖先縮放至所需大小w,h
 大圖之(y_st:y_st+h, x_st:x_st+w) = 小圖之全部
 
-
-
-
 後面還有一個參數
 plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB), "gray")
-
-
-
-
 
 
 # cv2 儲存檔案 存圖 cv2.imwrite
@@ -2413,9 +2259,6 @@ cv
 
 
 
-cv2.circle(img, (int((x + x + w) / 2), int((y + y + h) / 2)), int(w / 2), RED, 2)
-
-
 # cv2存圖
 # cv2.imwrite('tmp_image.jpg', image)
 
@@ -2463,8 +2306,6 @@ height = 400                                        # 負樣本高
 img = cv2.imread(car,cv2.IMREAD_GRAYSCALE)      # 灰階讀車子影像
 img_resize = cv2.resize(img, (width, height))   # 調整負樣本影像
 imgname =  "notcar" + str(index)
-
-
 
 
 """

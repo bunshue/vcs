@@ -519,6 +519,7 @@ print("------------------------------------------------------------")  # 60個
 print("cv2.setMouseCallback 13 在影像上畫圖")
 
 cap = cv2.VideoCapture(0)  # 讀取攝影鏡頭
+
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))  # 取得影像寬度
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
 

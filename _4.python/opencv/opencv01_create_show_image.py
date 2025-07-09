@@ -327,7 +327,6 @@ cv2.imshow("Src", src)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
 width, height = 640, 480  # 影像寬, 影像高
@@ -553,6 +552,13 @@ print('在此等待任意鍵繼續, 繼續後刪除本視窗')
 cv2.waitKey()
 cv2.destroyAllWindows()
 """
+
+"""
+#例外的寫法
+img = cv2.imread("digits.png", 0)
+if img is None:
+    raise Exception("we need the digits.png image from samples/data here !")
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -640,7 +646,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 # 按下任意鍵則關閉所有視窗
-cv2.waitKey(0)  # 0 : 持續等待至使用者按下按鍵為止
+cv2.waitKey(0)  # 0, 無限等待使用者按鍵
 cv2.destroyAllWindows() # 關閉所有 OpenCV 的視窗
 
 # 關閉 'My Image' 視窗
@@ -1274,7 +1280,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 W, H, D = 5, 5, 3
 image = np.ones([H, W], dtype=np.uint8) * 9
 
@@ -1464,7 +1469,7 @@ img[0, 0] = [0, 0, 255]
 img[10:100, 10:100] = [0, 255, 0]
 
 cv2.imshow("image", img)
-cv2.waitKey(0)
+cv2.waitKey(0)  # 0, 無限等待使用者按鍵
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1496,14 +1501,14 @@ img = cv2.imread(filename1)
 cv2.imshow("Peony", img)
 cv2.destroyWindow("Peony")  # 關閉視窗
 
-ret_value = cv2.waitKey(0)  # 無限等待
+k = cv2.waitKey(0)  # 0, 無限等待使用者按鍵
 cv2.destroyWindow("Peony")  # 關閉視窗
 
-ret_value = cv2.waitKey(5000)  # 等待 5 秒
+k = cv2.waitKey(5000)  # 等待 5 秒
 cv2.destroyWindow("Peony")  # 關閉視窗
 
-ret_value = cv2.waitKey(0)  # 無限等待
-if ret_value == ord("Q") or ret_value == ord("q"):
+k = cv2.waitKey(0)  # 0, 無限等待使用者按鍵
+if k == ord("Q") or k == ord("q"):
     cv2.destroyWindow("Peony")  # 關閉視窗
 
 print("------------------------------------------------------------")  # 60個
@@ -1541,25 +1546,28 @@ while True:
 
 cv2.destroyAllWindows()
 
-"""
 
-print(cv2.__version__)
+""" 視窗功能
 
 # 若有多個視窗 要指名視窗名稱
 
 cv2.namedWindow("Image", cv2.WINDOW_NORMAL)
 
-# ----------------------------
 
 key = cv2.waitKey(200)  # 0.2秒檢查一次
 
 if key == ord("a") or key == ord("A"):  # 如果按A或a
-    pass
+    do_something()
 
+elif k == ord("s"):  # 若按下 s 鍵則存圖
 
-# elif k == ord("s"):  # 若按下 s 鍵則存圖
+ 
+WINDOW_NORMAL – Allows to manually change window size
+WINDOW_AUTOSIZE(Default) – Automatically sets the window size
+WINDOW_FULLSCREEN – Changes the window size to fullscreen
 
-
+cv2.namedWindow("WebCam", cv2.WINDOW_AUTOSIZE)
+cv2.namedWindow("WebCam", cv2.WINDOW_NORMAL)
 
 
 """

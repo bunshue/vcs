@@ -4,7 +4,8 @@ import cv2
 
 # 開啟影片檔案
 filename = 'vtest.avi'
-#filename = 'D:/Carreno Busta vs Kei Nishikori Final Set Tie Break HD.mp4'
+# filename = 'D:/Carreno Busta vs Kei Nishikori Final Set Tie Break HD.mp4'
+# filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
 
 cap = cv2.VideoCapture(filename)
 

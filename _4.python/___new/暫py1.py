@@ -1,3 +1,8 @@
+
+程式內不能用 \　Backslash (反斜線)
+在 檔案路徑, 要改用 \\ 或 /
+在註解內 black會報錯
+
 vcs抓打鼓節奏
 
 opencv目前像是不能做到動畫功能
@@ -8,12 +13,6 @@ gamma 由 0:0.01:1 變化
 圖片連續顯示之
 
 
-"""
-一句話
-colab
-
-"""
-
 ------------------------------------------------------------
 
 """
@@ -23,10 +22,7 @@ HSV簡單介紹分別為：
 明度(V)：亮度，數值為0-100%。
 """
 
-
 ------------------------------------------------------------
-
-
 
 
 ------------------------------------------------------------
@@ -63,14 +59,69 @@ YOLOv7			即時物件偵測模型
 
 
 
-
-SQLAlchemy是為Python程式語言提供的開源SQL工具包及對象關係對映器（ORM），是在MIT許可證下發行的軟體。
-
-
 ----------------一句話說明python模組 SP----------------
 
 
 ----------------Colab ST----------------
+
+"""
+# 選取檔案的寫法
+from google.colab import files
+uploaded = files.upload()
+print(uploaded)
+"""
+
+print('aaa')
+cc = os.listdir("/content/drive/My Drive/Colab Notebooks")
+print(cc)
+
+print('bbb')
+
+df = pd.read_csv("/content/drive/MyDrive/CSV/iris_sample.csv")
+cc = df.head()
+print(cc)
+
+print('ccc')
+
+import matplotlib
+import matplotlib.font_manager as fm
+!wget -O MicrosoftJhengHei.ttf https://github.com/a7532ariel/ms-web/raw/master/Microsoft-JhengHei.ttf
+!wget -O ArialUnicodeMS.ttf https://github.com/texttechnologylab/DHd2019BoA/raw/master/fonts/Arial%20Unicode%20MS.TTF
+ 
+fm.fontManager.addfont('MicrosoftJhengHei.ttf')
+matplotlib.rc('font', family='Microsoft Jheng Hei')
+ 
+fm.fontManager.addfont('ArialUnicodeMS.ttf')
+matplotlib.rc('font', family='Arial Unicode MS')
+
+------------------------------------------------------------
+# colab
+------------------------------------------------------------
+
+"""
+os.chdir("/content/")
+"""
+
+from google.colab import drive
+drive.mount("/content/drive")
+# drive.mount("/content/drive", force_remount=True)
+
+os.chdir("/content/drive/MyDrive/data/ch08")  # 使用 Colab 要換路徑使用，本機環境可以刪除
+filenames = os.listdir()  # 轉出一層, 指定目錄, 若無參數, 就是當前目錄
+print("4轉出一層(資料夾+檔案)\n", filenames)
+print("當前目錄下共有 :", len(filenames), "個項目(資料夾+檔案)")
+
+if os.path.isfile("img3.jpg"):
+  print('有')
+else:
+  print('無')
+
+if os.path.isfile("/content/yolo.h5"):
+  print('有')
+else:
+  print('無')
+
+
 
 colab執行Shell命令 !
 !pip install pytube
@@ -87,8 +138,6 @@ colab執行Shell命令 !
 jupyter 命令
 !cat /proc/cpuinfo
 !bash
-
-
 
 
 

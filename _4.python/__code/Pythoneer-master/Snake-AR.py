@@ -8,7 +8,7 @@ import numpy as np
 print("------------------------------------------------------------")  # 60個
 
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 
 class Snake:
@@ -173,11 +173,11 @@ while True:
 		break
 	"""
 
-    # Display the resulting frame
     cv2.imshow("Diff", diff)
     cv2.imshow("Game", draw)
-    # cv2.imshow('frame',draw)
-    if cv2.waitKey(1) & 0xFF == ord("q"):
+
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
+    if k == ord("q"):
         break
 
 cap.release()
@@ -186,7 +186,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 last = 0
 new = 0
@@ -202,6 +202,7 @@ def FrameDeltaTime():
     return delta
 
 
+timer = 0
 while True:
     # Capture frame-by-frame
     ret, frame = cap.read()
@@ -246,12 +247,12 @@ while True:
     cv2.imshow("Diff", diff)
     cv2.imshow("Game", draw)
 
-    if cv2.waitKey(1) & 0xFF == ord("q"):
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
+    if k == ord("q"):
         break
 
 cap.release()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -273,8 +274,3 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-"""
-兩圖 alpha 疊合
-cv2.addWeighted(overlay, 0.1, draw, 1 - 0.1, 0, draw)
-"""

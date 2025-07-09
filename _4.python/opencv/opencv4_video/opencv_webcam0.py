@@ -15,6 +15,7 @@ print("------------------------------------------------------------")  # 60個
 print("最簡易, 按 ESC 離開")
 
 cap = cv2.VideoCapture(1)
+
 if not cap.isOpened():
     print("開啟攝影機失敗")
     sys.exit()
@@ -22,7 +23,8 @@ if not cap.isOpened():
 # 取得影像的尺寸大小
 w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
 h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-print("Image Size: %d x %d" % (w, h))
+fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
+print("Image Size: %d x %d, %d fps" % (w, h, fps))
 
 # 更改視訊的解析度
 # Webcam有支援的模式 以下的設定才會有用
@@ -39,7 +41,10 @@ while True:
         break
 
     # 影像處理 ST 對稱 旋轉 裁切 灰階 邊緣 模糊 ...
-    # frame = cv2.flip(frame, 0)             # 上下翻轉
+    # frame = cv2.resize(frame, (WIDTH, HEIGHT))  # 調整影像大小
+    # frame = cv2.resize(frame, None, fx = 1.5, fy = 1.5, interpolation = cv2.INTER_AREA)
+    # frame = cv2.flip(frame, 0)  # 上下顛倒
+    # frame = cv2.flip(frame, 1)  # 左右相反
     # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉灰階
     # frame = cv2.Canny(frame, 50, 100)  # minVal=50, maxVal=100
     # frame = cv2.GaussianBlur(frame, (13, 13), 15)  # 高斯模糊
@@ -57,24 +62,30 @@ while True:
     cv2.putText(frame, text, org, fontFace, fontScale, WHITE, thickness, lineType)
     # 加上文字 SP
 
+    """
     # 裁出一塊, 另外顯示之 ST
     x_st, y_st, W, H = 0, 0, 320, 240
     frame2 = frame[y_st : y_st + H, x_st : x_st + W]  # 取出一塊
     cv2.imshow("WebCam_Cut", frame2)
     # 裁出一塊, 另外顯示之 SP
+    """
+
+    # 加 mask ST
+    mask = np.zeros(frame.shape, dtype=np.uint8)  # 建立mask
+    mask[50 : int(h - 50), 50 : int(w - 50)] = 255  # 設定mask, 先高後寬
+    frame = cv2.bitwise_and(frame, mask)  # 執行AND運算
+    # 加 mask SP
 
     # 將影像顯示出來
     cv2.imshow("WebCam", frame)
 
-    k = cv2.waitKey(1)
-    if k == ESC:
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
-    elif k == ord("S") or k == ord("s"):  # 按下 S(s), 存圖
-        image_filename = (
-            "Image_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".jpg"
-        )
-        cv2.imwrite(image_filename, frame)
-        print("已存圖, 檔案 :", image_filename)
+    elif k == ord("S") or k == ord("s"):  # 按下 S, 存圖
+        filename = "Image_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".jpg"
+        cv2.imwrite(filename, frame)
+        print("已存圖, 檔案 :", filename)
 
 cap.release()
 cv2.destroyAllWindows()
@@ -82,10 +93,10 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("按 ESC 離開")
-print("按 S 存圖")
+print("按 ESC 離開, 按 S 存圖")
 
 cap = cv2.VideoCapture(1)
+
 if not cap.isOpened():
     print("開啟攝影機失敗")
     sys.exit()
@@ -98,13 +109,6 @@ else:
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉灰階
         frame_blur_pre = cv2.GaussianBlur(gray, (13, 13), 15)  # 高斯模糊
 
-"""
-#調整影像大小
-ratio = cap.get(cv2.CAP_PROP_FRAME_WIDTH) / cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-WIDTH = 320
-HEIGHT = int(WIDTH / ratio)
-"""
-
 time_old = time.time()
 while True:
     # begin_time = time.time()  # 計算fps
@@ -113,12 +117,6 @@ while True:
     if ret == False:
         print("無影像, 離開")
         break
-
-    """
-    #調整影像大小
-    frame = cv2.resize(frame, (WIDTH, HEIGHT))
-    frame = cv2.flip(frame, 1)
-    """
 
     # 原圖
     cv2.imshow("WebCam1", frame)
@@ -144,8 +142,8 @@ while True:
     # print('{:.1f}'.format(fps))
     time_old = time_new
 
-    k = cv2.waitKey(1)
-    if k == ESC:
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
 cap.release()
@@ -157,6 +155,7 @@ print("------------------------------------------------------------")  # 60個
 print("移動偵測1")
 
 cap = cv2.VideoCapture(1)
+
 if not cap.isOpened():
     print("開啟攝影機失敗")
     sys.exit()
@@ -186,8 +185,8 @@ while True:
         cv2.imshow("WebCam", frame)
         frame_pre = frame_now.copy()
 
-    k = cv2.waitKey(1)
-    if k == ESC:
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
 cap.release()
@@ -199,6 +198,7 @@ print("------------------------------------------------------------")  # 60個
 print("移動偵測2")
 
 cap = cv2.VideoCapture(1)
+
 skip = 1  # 設定不比對的次數, 由於前影像是空的, 略過一次比對
 
 while cap.isOpened():
@@ -228,8 +228,8 @@ while cap.isOpened():
         cv2.imshow("frame", img)
         img_pre = img_now.copy()
 
-    k = cv2.waitKey(50)  # ←暫停 50 毫秒 (0.05 秒), 並檢查是否有按鍵輸入
-    if k == ESC:
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
 cv2.destroyAllWindows()
@@ -269,13 +269,13 @@ RECT = ((x_st, y_st), (x_st + w, y_st + h))
 (left, top), (right, bottom) = RECT
 
 cap = cv2.VideoCapture(1)
+
 if not cap.isOpened():
     print("開啟攝影機失敗")
     sys.exit()
 
 while True:
     ret, frame = cap.read()
-    frame = cv2.flip(frame, 1)
 
     # 取出子畫面
     roi1 = frame[top:bottom, left:right]
@@ -290,9 +290,12 @@ while True:
     cv2.rectangle(frame, RECT[0], RECT[1], GREEN, 2)
 
     cv2.imshow("frame", frame)
-    if cv2.waitKey(1) == 27:
-        cv2.destroyAllWindows()
+
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
+
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -360,7 +363,8 @@ cap = cv2.VideoCapture(1)
 # 取得影像的尺寸大小
 w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
 h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-print("Image Size: %d x %d" % (w, h))
+fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
+print("Image Size: %d x %d, %d fps" % (w, h, fps))
 
 if not cap.isOpened():
     print("Could not open video device")
@@ -435,8 +439,8 @@ while True:
     finalOutput = cv2.addWeighted(res1, 1, res2, 1, 0)
     cv2.imshow("WebCam", finalOutput)
 
-    k = cv2.waitKey(1)
-    if k == 27:  # ESC
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
 cap.release()
@@ -561,8 +565,8 @@ while True:
     else:
         out.write(frame)  # 影像寫入影片檔
 
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:  # ESC
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
 cap.release()  # 關閉攝影機
@@ -641,8 +645,8 @@ while True:
         # 建立影像寫入器 out
         out = cv2.VideoWriter(record_filename, fourcc, fps, (width, height))
 
-    k = cv2.waitKey(1)  # 等待按鍵輸入
-    if k == ESC:  # ESC
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
 
 cap.release()  # 關閉攝影機
@@ -671,7 +675,7 @@ while cap.isOpened():
     if ret:
         out.write(frame)  # 寫入影片物件
         cv2.imshow("frame", frame)  # 顯示攝影鏡頭的影像
-    k = cv2.waitKey(1)  # 等待時間 1 毫秒 ms
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
         break
 
@@ -745,7 +749,7 @@ while True:
 
     cv2.imshow("OpenCV 01", img2)
 
-    k = cv2.waitKey(1)
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
         break
 
@@ -764,6 +768,7 @@ W = 640 * 1
 H = 480 * 1
 
 cap = cv2.VideoCapture(1)
+
 output = np.zeros((H, W, 3), dtype="uint8")  # 產生 WxH 的黑色背景
 
 if not cap.isOpened():
@@ -775,14 +780,12 @@ h = H // N  # 計算分格之後的影像高度
 img_list = []  # 設定空串列，記錄每一格的影像
 while True:
     ret, frame = cap.read()
-    frame = cv2.resize(frame, (w, h))  # 縮小尺寸
+    frame = cv2.resize(frame, (w, h))  # 調整影像大小
     """ 2X2的寫法
     output[0:h, 0:w] = frame             # 將 output 的特定區域置換為 frame, 左上
     output[0:h, w:w*2] = frame             # 將 output 的特定區域置換為 frame, 右上
     output[h:h*2, 0:w] = frame             # 將 output 的特定區域置換為 frame, 左下
     output[h:h*2, w:w*2] = frame             # 將 output 的特定區域置換為 frame, 右下
-
-    frame = cv2.flip(frame, 1)  # 左右相反
     """
     img_list.append(frame)  # 每次擷取影像時，將影像存入串列
     if len(img_list) > N * N:
@@ -794,7 +797,7 @@ while True:
 
     cv2.imshow("OpenCV 02", output)
 
-    k = cv2.waitKey(1)
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
         break
 
@@ -812,7 +815,7 @@ while True:
     height = int(cap.get(4))
 
     image = np.zeros(frame.shape, np.uint8)
-    smaller_frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)
+    smaller_frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)  # 調整影像大小
     image[: height // 2, : width // 2] = cv2.rotate(smaller_frame, cv2.ROTATE_180)
     image[height // 2 :, : width // 2] = smaller_frame
     image[: height // 2, width // 2 :] = cv2.rotate(smaller_frame, cv2.ROTATE_180)
@@ -820,7 +823,7 @@ while True:
 
     cv2.imshow("OpenCV 12", image)
 
-    k = cv2.waitKey(1)
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
         break
 
@@ -843,7 +846,7 @@ white = 255 - np.zeros((h, w, 4), dtype="uint8")
 
 a = 0  # 開始時 a 等於 0
 while True:
-    k = cv2.waitKey(1)
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
         break
     elif k == SPACE:
@@ -884,10 +887,10 @@ while True:
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2BGRA)  # 轉換顏色為 BGRA
     w = frame.shape[1]
     h = frame.shape[0]
-    frame = cv2.resize(frame, (w, h))  # 縮放尺寸
+    frame = cv2.resize(frame, (w, h))  # 調整影像大小
     white = 255 - np.zeros((h, w, 4), dtype="uint8")  # 產生全白圖片
 
-    k = cv2.waitKey(1)
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
         break
     elif k == SPACE:  # 按下空白將 a 等於 1
@@ -902,13 +905,13 @@ while True:
         a = a - 0.1
         if a < 0:
             a = 0
-            image_filename = (
+            filename = (
                 "tmp3_Image_"
                 + time.strftime("%Y%m%d_%H%M%S", time.localtime())
                 + ".jpg"
             )
-            cv2.imwrite(image_filename, photo)
-            print("已存圖, 檔案 :", image_filename)
+            cv2.imwrite(filename, photo)
+            print("已存圖, 檔案 :", filename)
 
     cv2.imshow("OpenCV 05", output)  # 顯示圖片
 
@@ -947,10 +950,10 @@ while True:
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2BGRA)
     w = frame.shape[1]
     h = frame.shape[0]
-    frame = cv2.resize(frame, (w, h))
+    frame = cv2.resize(frame, (w, h))  # 調整影像大小
     white = 255 - np.zeros((h, w, 4), dtype="uint8")
 
-    k = cv2.waitKey(1)
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
         break
     elif k == SPACE:
@@ -970,13 +973,13 @@ while True:
             a = a - 0.1
             if a < 0:
                 a = 0
-                image_filename = (
+                filename = (
                     "tmp4_Image_"
                     + time.strftime("%Y%m%d_%H%M%S", time.localtime())
                     + ".jpg"
                 )
-                cv2.imwrite(image_filename, photo)
-                print("已存圖, 檔案 :", image_filename)
+                cv2.imwrite(filename, photo)
+                print("已存圖, 檔案 :", filename)
 
     cv2.imshow("OpenCV 06", output)
 
@@ -996,7 +999,7 @@ logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 logo_filename = "C:/_git/vcs/_4.python/_data/logo1.png"  # 400X400
 
 logo = cv2.imread(logo_filename)
-logo = cv2.resize(logo, (logo.shape[0] // 4, logo.shape[1] // 4))
+logo = cv2.resize(logo, (logo.shape[0] // 4, logo.shape[1] // 4))  # 調整影像大小
 
 size = logo.shape
 print(size)
@@ -1024,7 +1027,7 @@ while True:
     if not ret:
         print("Cannot receive frame")
         break
-    frame = cv2.resize(frame, (640, 480))  # 調整圖片尺寸
+    frame = cv2.resize(frame, (640, 480))  # 調整影像大小
     bg = cv2.bitwise_and(frame, frame, mask=mask2)
     output = cv2.add(bg, logo)
 
@@ -1033,7 +1036,7 @@ while True:
 
     cv2.imshow("OpenCV 07", output)
 
-    k = cv2.waitKey(1)
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
         break
 
@@ -1060,7 +1063,7 @@ while True:
     if not ret:
         print("Cannot receive frame")
         break
-    frame = cv2.resize(frame, (640, 480))  # 調整影片大小
+    frame = cv2.resize(frame, (640, 480))  # 調整影像大小
 
     gif = cv2.cvtColor(frame, cv2.COLOR_BGRA2RGBA)  # 轉換顏色
     gif = Image.fromarray(gif)  # 轉換成 PIL 格式
@@ -1069,7 +1072,7 @@ while True:
 
     cv2.imshow("OpenCV 08", frame)
 
-    k = cv2.waitKey(1)
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
         break
 
@@ -1089,8 +1092,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("處理影片")
-print("按 ESC 離開")
+print("處理影片, 按 ESC 離開")
 
 cap = cv2.VideoCapture(video_filename)  # 開啟影片
 
@@ -1103,14 +1105,14 @@ while cap.isOpened():
     if ret == True:
         cv2.imshow("Video Player", frame)
         if cnt % 30 == 0:  # 每 30 格取一格
-            frame = cv2.resize(frame, (400, 300))  # 改變尺寸，加快處理效率
+            frame = cv2.resize(frame, (400, 300))  # 改變尺寸，加快處理效率  # 調整影像大小
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)  # 修改顏色為 RGBA
             source.append(frame)  # 記錄該圖片
         cnt = cnt + 1
     else:
         break
 
-    k = cv2.waitKey(1)
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
         break
 
@@ -1168,15 +1170,16 @@ tracker = cv2.TrackerCSRT_create()  # 創建追蹤器
 tracking = False  # 設定 False 表示尚未開始追蹤
 
 cap = cv2.VideoCapture(1)
+
 if not cap.isOpened():
     print("開啟攝影機失敗")
     sys.exit()
 
 while True:
     ret, frame = cap.read()
-    # frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸，加快速度
+    # frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸，加快速度  # 調整影像大小
 
-    k = cv2.waitKey(1)
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
         break
 
@@ -1210,7 +1213,7 @@ for i in range(3):
 colors = [RED, YELLOW, CYAN]  # 設定三個外框顏色
 tracking = False  # 設定 False 表示尚未開始追蹤
 
-cap = cv2.VideoCapture(video_filename)  # 開啟影片
+cap = cv2.VideoCapture(video_filename)
 
 if not cap.isOpened():
     print("開啟影片失敗")
@@ -1220,9 +1223,9 @@ a = 0  # 刪減影片影格使用
 
 while True:
     ret, frame = cap.read()
-    #frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸，加快速度
+    #frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸，加快速度  # 調整影像大小
 
-    k = cv2.waitKey(1)
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
         break
 
@@ -1260,15 +1263,16 @@ tracking = False  # 設定追蹤尚未開始
 colors = [RED, YELLOW]  # 建立外框色彩清單
 
 cap = cv2.VideoCapture(1)
+
 if not cap.isOpened():
     print("開啟攝影機失敗")
     sys.exit()
 
 while True:
     ret, frame = cap.read()
-    # frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸加快速度
+    # frame = cv2.resize(frame, (640//2, 480//2))  # 縮小尺寸加快速度  # 調整影像大小
 
-    k = cv2.waitKey(1)
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
         break
 
@@ -1315,7 +1319,8 @@ cap = cv2.VideoCapture(1)
 # 取得影像的尺寸大小
 w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
 h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-print("Image Size: %d x %d" % (w, h))
+fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
+print("Image Size: %d x %d, %d fps" % (w, h, fps))
 
 if not cap.isOpened():
     print("開啟攝影機失敗")
@@ -1327,8 +1332,8 @@ HEIGHT = int(WIDTH / ratio)
 
 while True:
     ret, frame = cap.read()
-    frame = cv2.resize(frame, (WIDTH, HEIGHT))
-    frame = cv2.flip(frame, 1)
+    frame = cv2.resize(frame, (WIDTH, HEIGHT))  # 調整影像大小
+    frame = cv2.flip(frame, 1)  # 左右相反
 
     #### 在while中
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -1363,7 +1368,7 @@ while True:
     #### 在while中
     cv2.imshow("OpenCV 17", frame)
 
-    k = cv2.waitKey(1)
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
         break
 
@@ -1379,7 +1384,7 @@ cap = cv2.VideoCapture(1)
 
 logo_filename = "C:/_git/vcs/_4.python/_data/panda.jpg"
 logo = cv2.imread(logo_filename)
-logo = cv2.resize(logo, (640, 480))  # 改變影像尺寸，符合疊加的圖片
+logo = cv2.resize(logo, (640, 480))  # 改變影像尺寸，符合疊加的圖片  # 調整影像大小
 
 if not cap.isOpened():
     print("開啟攝影機失敗")
@@ -1396,7 +1401,7 @@ while True:
     output = cv2.addWeighted(img, 0.6, logo, 0.4, 50)  # 疊加圖片
     cv2.imshow("OpenCV 19", output)
 
-    k = cv2.waitKey(1)
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
         break
 
@@ -1414,7 +1419,7 @@ cap = cv2.VideoCapture(1)
 
 while True:
     ret, frame = cap.read()
-    frame = cv2.flip(frame, 1)
+    frame = cv2.flip(frame, 1)  # 左右相反
 
     #### 在while內
     gray = bs.apply(frame)
@@ -1438,9 +1443,12 @@ while True:
     mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
     frame = cv2.hconcat([frame, mask])
     cv2.imshow("frame", frame)
-    if cv2.waitKey(1) == 27:
-        cv2.destroyAllWindows()
+
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
+    if k == ESC:  # 按 ESC 鍵, 結束
         break
+
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1478,30 +1486,12 @@ print(cap.get(2))
 print(cap.get(3))
 print(cap.get(4))
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-# 取得影像的尺寸大小
-w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
-h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-print("Image Size: %d x %d" % (w, h))
-
-
-"""
-WINDOW_NORMAL – Allows to manually change window size
-WINDOW_AUTOSIZE(Default) – Automatically sets the window size
-WINDOW_FULLSCREEN – Changes the window size to fullscreen
-"""
-cv2.namedWindow("WebCam", cv2.WINDOW_AUTOSIZE)
-cv2.namedWindow("WebCam", cv2.WINDOW_NORMAL)
-
-
 print("------------------------------------------------------------")  # 60個
-print("作業完成")
 print("------------------------------------------------------------")  # 60個
-sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1522,23 +1512,6 @@ print("Codec: " + codec)
 # 設定影像的尺寸大小
 # cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 # cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 360)
-
-# 取得影像的尺寸大小
-w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
-h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-print("Image Size: %d x %d" % (w, h))
-
-
-""" 調整影片大小
-frame = cv2.resize(frame, (WIDTH, HEIGHT))
-frame = cv2.flip(frame, 1)
-"""
-
-# 改變圖片大小
-# frame = cv2.resize(frame, None, fx = 1.5, fy = 1.5, interpolation = cv2.INTER_AREA)
-
-# 彩色轉灰階
-# frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 # 若要錄成黑白影片 要 加上 isColor=False 參數設定
 # 建立影像寫入器 out
@@ -1563,4 +1536,12 @@ out = cv2.VideoWriter(record_filename, cv2.VideoWriter_fourcc(*'XVID'), 1, Image
 
         out.release()
         cv2.destroyAllWindows()
+"""
+
+
+"""
+#調整影像大小
+ratio = cap.get(cv2.CAP_PROP_FRAME_WIDTH) / cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+WIDTH = 320
+HEIGHT = int(WIDTH / ratio)
 """

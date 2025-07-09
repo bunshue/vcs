@@ -1034,6 +1034,69 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# cv2.bitwise_and
+
+src = cv2.imread(filename3, cv2.IMREAD_GRAYSCALE)
+row, column = src.shape  # 取得列高和欄寬
+
+h100 = np.ones((row, column), dtype=np.uint8) * 100  # 建立像素值是100的影像
+
+new_src = cv2.bitwise_and(src, h100)
+
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
+plt.axis("off")
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(h100, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("灰階100")
+plt.axis("off")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(new_src, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖取出灰階100")
+plt.axis("off")
+
+plt.suptitle("cv2.bitwise_and")
+show()
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+img = cv2.imread(filename3, cv2.IMREAD_GRAYSCALE)
+
+plt.subplot(331)
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
+plt.axis("off")
+
+row, column = img.shape
+x = np.zeros((row, column, 8), dtype=np.uint8)
+
+for i in range(8):
+    x[:, :, i] = 2**i  # 填上權重
+
+result = np.zeros((row, column, 8), dtype=np.uint8)
+
+for i in range(8):
+    result[:, :, i] = cv2.bitwise_and(img, x[:, :, i])
+    mask = result[:, :, i] > 0  # 影像邏輯值
+    result[mask] = 255  # True的位置填255
+    plt.subplot(3, 3, i + 2)
+    plt.imshow(cv2.cvtColor(result[:, :, i], cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+    plt.title(str(i))
+    plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

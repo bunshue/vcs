@@ -498,24 +498,6 @@ def process(image):
     return image
 
 
-"""
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-#video_filename = "D:/內視鏡影片/_ims影片2/180824-1025.mp4"
-
-cap = cv2.VideoCapture(video_filename)
-# cap = cv2.VideoCapture(0)
-
-while cap.isOpened():
-    ret, frame = cap.read()
-    frame = process(frame)
-    cv2.imshow("frame", frame)
-    k = cv2.waitKey(1)
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
