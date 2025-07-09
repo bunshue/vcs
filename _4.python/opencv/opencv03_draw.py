@@ -427,47 +427,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread(filename1)  # 使用影像當畫布
-img = np.ones((350, 500, 3), np.uint8) * 255  # 白底畫布
-img[1:300, 1:300] = YELLOW  # 設定黃色底
-
-cv2.line(img, (1, 1), (300, 1), BLUE)  # 上方水平直線
-cv2.line(img, (300, 1), (300, 300), BLUE)  # 右邊垂直直線
-cv2.line(img, (300, 300), (1, 300), BLUE)  # 下邊水平直線
-cv2.line(img, (1, 300), (1, 1), BLUE)  # 左邊垂直直線
-
-for x in range(150, 300, 10):
-    cv2.line(img, (x, 1), (300, x - 150), BLUE)
-for y in range(150, 300, 10):
-    cv2.line(img, (1, y), (y - 150, 300), BLUE)
-
-cy = int(img.shape[0] / 2)  # 中心點 y 座標
-cx = int(img.shape[1] / 2)  # 中心點 x 座標
-
-cv2.circle(img, (cx, cy), 30, RED, -1)  # 繪製實心圓形
-
-for r in range(40, 200, 20):  # 繪製系列空心圓形
-    cv2.circle(img, (cx, cy), r, GREEN, 2)
-
-cy = int(img.shape[0] / 2)  # 中心點 y 座標
-cx = int(img.shape[1] / 2)  # 中心點 x 座標
-
-size = (200, 100)
-angle = 0
-cv2.ellipse(img, (cx, cy), size, angle, 0, 360, RED, 1)  # 繪製橢圓形
-angle = 45
-cv2.ellipse(img, (cx, cy), size, angle, 0, 360, YELLOW, 5)  # 繪製橢圓形
-cv2.ellipse(img, (cx, cy), size, angle, 45, 135, BLUE, 3)  # 繪製橢圓弧
-
-cv2.imshow("OpenCV Draw 5", img)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename1)  # 使用影像當畫布
-cy = int(img.shape[0] / 2)  # 中心點 y 座標
-cx = int(img.shape[1] / 2)  # 中心點 x 座標
+cx, cy = 150, 150  # 中心點座標
 size = (200, 100)  # 橢圓的x,y軸長度
 for i in range(0, 15):
     angle = np.random.randint(0, 361)  # 橢圓偏移的角度
@@ -494,6 +454,43 @@ for i in range(0, 50):
     cv2.circle(img, (cx, cy), r, color, -1)  # 建立隨機實心圓
 
 cv2.imshow("Random Circle", img)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("建立畫布(黑色)")
+W, H = 600, 600
+image = np.zeros((H, W, 3), dtype="uint8")
+
+R = 250
+
+points = list()
+
+N = 10
+for i in range(N):
+    px, py = R * math.cos(math.pi * i * 360 / N / 180), R * math.sin(
+        math.pi * i * 360 / N / 180
+    )
+    points.append((W // 2 + int(px), H // 2 + int(py)))
+
+print(points)
+
+for ptx in points:
+    cv2.circle(image, (ptx), 10, RED, -1)
+
+print("畫連線")
+
+for i in range(len(points)):
+    for j in range(i + 1, len(points)):
+        corner1 = tuple(points[i])
+        corner2 = tuple(points[j])
+        color = tuple(map(lambda x: int(x), np.random.randint(0, 255, size=3)))
+        cv2.line(image, corner1, corner2, color, 1)
+
+
+cv2.imshow("OpenCV Draw 1", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -606,7 +603,9 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
 
+
 image = cv2.imread(filename1)
+
 
 for i in range(20, 80):
     image[i, 180] = RED  # 紅色一點
@@ -632,7 +631,7 @@ h = testSize[0][1]
 print(w)
 print(h)
 
-cx, cy = 305 // 2, 400 // 2
+cx, cy = 305 // 2, 400 // 2  # 中心點座標
 
 x_st = cx - int(testSize[0][0] / 2)
 y_st = cy + int(testSize[0][1] / 2)
@@ -658,67 +657,26 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("建立畫布(白色)")
-W, H, D = 400, 400, 3
-image = np.ones((H, W, 3), dtype="uint8") * 255
-
-image = np.ones((H, W, 3), np.uint8) * 255  # 白底畫布
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("建立畫布(黑色)")
-W, H = 600, 600
-image = np.zeros((H, W, 3), dtype="uint8")
-
-R = 250
-
-points = list()
-
-N = 10
-for i in range(N):
-    px, py = R * math.cos(math.pi * i * 360 / N / 180), R * math.sin(
-        math.pi * i * 360 / N / 180
-    )
-    points.append((W // 2 + int(px), H // 2 + int(py)))
-
-print(points)
-
-for ptx in points:
-    cv2.circle(image, (ptx), 10, RED, -1)
-
-print("畫連線")
-
-for i in range(len(points)):
-    for j in range(i + 1, len(points)):
-        corner1 = tuple(points[i])
-        corner2 = tuple(points[j])
-        color = tuple(map(lambda x: int(x), np.random.randint(0, 255, size=3)))
-        cv2.line(image, corner1, corner2, color, 1)
-
-
-cv2.imshow("OpenCV Draw 1", image)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("drawContours")
 
 W, H = 400, 400
 image = np.zeros((H, W, 3), np.uint8)  # 黑色畫板
 
-MIN = 50
-MAX = W - 50
-N = 10  # 隨機生成 N 個坐標點，每一行存儲一個坐標
-# 隨機生成 橫縱坐標均在 MIN 至 MAX 的坐標點
-points = np.random.randint(MIN, MAX, (N, 2), np.int32)
-# print(points)
+R = 150
+
+points = list()
+
+N = 5
+for i in range(N):
+    px = R * math.cos(math.pi * i * 360 / N / 180)
+    py = R * math.sin(math.pi * i * 360 / N / 180)
+    points.append((W // 2 + int(px), H // 2 + int(py)))
+
+print(points)
 
 for p in points:
     print(p)
-    cv2.circle(image, (p[0], p[1]), 5, GREEN, -1)  # 繪製圓形
+    cv2.circle(image, (p[0], p[1]), 10, GREEN, -1)  # 繪製圓形
 
 points = np.int0(points)  # 取整數
 cv2.drawContours(image, [points], 0, RED, 2)
@@ -760,4 +718,66 @@ mask = np.zeros_like(edge)  # 全黑遮罩
 points = np.array([[[146, 539], [781, 539], [515, 417], [296, 397]]])  # 建立多邊座標
 # 畫實心多邊形
 cv2.fillPoly(mask, points, 255)  # 畫實心多邊形
+"""
+
+
+# cv2.line 畫 直線
+cv2.line(img, (1, 1), (300, 1), BLUE)  # 上方水平直線
+cv2.line(img, (300, 1), (300, 300), BLUE)  # 右邊垂直直線
+cv2.line(img, (300, 300), (1, 300), BLUE)  # 下邊水平直線
+cv2.line(img, (1, 300), (1, 1), BLUE)  # 左邊垂直直線
+
+for x in range(150, 300, 10):
+    cv2.line(img, (x, 1), (300, x - 150), BLUE)
+for y in range(150, 300, 10):
+    cv2.line(img, (1, y), (y - 150, 300), BLUE)
+
+
+# cv2.line 畫 圓
+cx, cy = 100, 100  # 中心點座標
+cv2.circle(img, (cx, cy), 30, RED, -1)  # 繪製實心圓形
+
+for r in range(40, 200, 20):  # 繪製系列空心圓形
+    cv2.circle(img, (cx, cy), r, GREEN, 2)
+
+
+# cv2.line 畫 橢圓
+cx, cy = 150, 100  # 中心點座標
+size = (200, 100)
+angle = 0
+cv2.ellipse(img, (cx, cy), size, angle, 0, 360, RED, 1)  # 繪製橢圓形
+angle = 45
+cv2.ellipse(img, (cx, cy), size, angle, 0, 360, GREEN, 5)  # 繪製橢圓形
+cv2.ellipse(img, (cx, cy), size, angle, 45, 135, BLUE, 3)  # 繪製橢圓弧
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 建立影像
+img = cv2.imread(filename1)  # 使用影像當畫布
+img = np.ones((350, 500, 3), np.uint8) * 255  # 白底畫布
+img[1:300, 1:300] = YELLOW  # 設定黃色底
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("建立畫布(白色)")
+W, H, D = 400, 400, 3
+image = np.ones((H, W, 3), dtype="uint8") * 255
+
+image = np.ones((H, W, 3), np.uint8) * 255  # 白底畫布
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+MIN = 50
+MAX = W - 50
+N = 10  # 隨機生成 N 個坐標點，每一行存儲一個坐標
+# 隨機生成 橫縱坐標均在 MIN 至 MAX 的坐標點
+points = np.random.randint(MIN, MAX, (N, 2), np.int32)
+# print(points)
 """

@@ -1543,6 +1543,8 @@ cv2.destroyAllWindows()
 
 """
 
+print(cv2.__version__)
+
 # 若有多個視窗 要指名視窗名稱
 
 cv2.namedWindow("Image", cv2.WINDOW_NORMAL)
@@ -1553,6 +1555,11 @@ key = cv2.waitKey(200)  # 0.2秒檢查一次
 
 if key == ord("a") or key == ord("A"):  # 如果按A或a
     pass
+
+
+# elif k == ord("s"):  # 若按下 s 鍵則存圖
+
+
 
 
 """

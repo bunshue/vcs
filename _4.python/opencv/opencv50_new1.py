@@ -1,5 +1,5 @@
 """
-opencv 集合 新進1
+opencv 集合 新進1 及 零碎的code
 
 """
 
@@ -2331,3 +2331,140 @@ dst_canny = cv2.Canny(src, 50, 100)  # minVal=50, maxVal=100
 
 plt.imshow(cv2.cvtColor(dst_canny, cv2.COLOR_BGR2RGB))
 plt.title("Canny")
+
+
+""" 零碎的code
+
+
+窗口显示方式，cv2.WINDOW_NORMAL为正常显示，可以调整大小
+# cv2.WINDOW_AUTOSIZE显示原图片的大小，用户不能调整大小
+
+opencv之paste
+x_st, y_st, w, h
+
+小圖先縮放至所需大小w,h
+大圖之(y_st:y_st+h, x_st:x_st+w) = 小圖之全部
+
+
+
+
+後面還有一個參數
+plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB), "gray")
+
+
+
+
+
+
+# cv2 儲存檔案 存圖 cv2.imwrite
+# cv2.imwrite 可透過圖片的副檔名來指定輸出的圖檔格式
+
+cv2.imwrite('filename.jpg', image)  # 存成 jpg
+cv2.imwrite('filename.png', image)  # 存成 png
+cv2.imwrite('filename.tiff', image)  # 存成 tiff
+
+# 部分圖片寫入圖檔
+# cv2.imwrite(filename, image[y:y + h, x:x + w])
+
+print('存圖')
+filename = 'C:/_git/vcs/_1.data/______test_files2/image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.bmp'
+cv2.imwrite(filename, image)
+
+#輸出圖片檔案時，也可以調整圖片的品質或壓縮率：
+
+# 設定 JPEG 圖片品質為 90（可用值為 0 ~ 100）
+cv2.imwrite('filename.jpg', image, [cv2.IMWRITE_JPEG_QUALITY, 90])
+
+print('存圖, 質量為5')
+cv2.imwrite("./1.jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 5])
+print('存圖, 質量為100')
+cv2.imwrite("./2.jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
+
+cv2.imwrite(filename2b, image2, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
+
+cv2.imwrite('tmp_image_2.jpg', img, [cv2.IMWRITE_JPEG_QUALITY, 80])
+
+# 設定 PNG 壓縮層級為 5（可用值為 0 ~ 9）
+cv2.imwrite('filename.png', image, [cv2.IMWRITE_PNG_COMPRESSION, 5])
+print('存圖, 壓縮為0')
+cv2.imwrite("./3.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
+print('存圖, 壓縮為9')
+cv2.imwrite("./4.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 9])
+
+cv 搬出
+#另存新檔
+filename2 = 'C:/_git/vcs/_1.data/______test_files2/human_face.jpg'
+cv2.imwrite(filename2, image)	#寫入本機圖片
+
+cv2.imwrite("face_detection.jpg", image)
+
+cv2.imwrite('7.jpg', image)
+
+
+
+一樣的意思
+plt.imshow(image0[:, :, ::-1])  # 原圖 # same
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))  # 原圖
+
+
+cv
+#cv2.waitKey(2000)       # 等待兩秒 ( 2000 毫秒 ) 後關閉圖片視窗
+
+
+
+
+cv2.circle(img, (int((x + x + w) / 2), int((y + y + h) / 2)), int(w / 2), RED, 2)
+
+
+# cv2存圖
+# cv2.imwrite('tmp_image.jpg', image)
+
+cv2.imwrite("tmp_char%s.jpg" % flag, thresh1[y : y + h, x : x + w])
+cv2.imwrite("tmp_char%s.jpg" % flag, thresh1[y : y + h, x : x + w])
+
+image_filename = "Image_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".jpg"
+cv2.imwrite(image_filename, frame)  # 存圖
+
+
+src = cv2.imread("data/edge_detection/snow.jpg")  # 彩色讀取
+src = cv2.imread("data/edge_detection/geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
+
+
+
+cv2.waitKey(3000)  # 等待3秒
+cv2.destroyWindow("Peony1")  # 刪除Peony1
+
+cv2.waitKey(3000)  # 等待3秒
+cv2.destroyAllWindows()  # 刪除所有視窗
+
+
+
+lena = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+dollar = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+
+
+
+
+print('圖片調整成相同大小(單層)', srcDir, '=>', dstDir)
+    img_car = cv2.imread(car,cv2.IMREAD_COLOR)      # 讀車子影像
+    img_car_resize = cv2.resize(img_car, (width, height))
+
+print("------------------------------------------------------------")  # 60個
+
+car_img = cv2.imread(car,cv2.IMREAD_COLOR)  # 讀車子影像
+outname = carname[1].replace(".jpg", ".bmp")    # 將jpg改為bmp
+cv2.imwrite(fullpath, car_img)                  # 寫入資料夾
+print("在 bmpCar 資料夾重新命名車輛副檔名成功")
+
+print("------------------------------------------------------------")  # 60個
+
+width = 500                                         # 負樣本寬     
+height = 400                                        # 負樣本高
+img = cv2.imread(car,cv2.IMREAD_GRAYSCALE)      # 灰階讀車子影像
+img_resize = cv2.resize(img, (width, height))   # 調整負樣本影像
+imgname =  "notcar" + str(index)
+
+
+
+
+"""

@@ -1193,9 +1193,6 @@ Firebase 即時資料庫
 
 溝通網頁的利器 requests 模組
 
-要用 matplotlib 顯示圖片，要先透過 matplotlib.image 模組中的
-imread() 方法讀取圖片，讀取後使用 imshow() 在圖表中繪製圖片，最後透過 plt.show() 顯示圖表。
-
 
 Sympy 這是 Python 用來繪製數學公式與進行符號運算的套件
 requests：用於請求伺服器回傳資料，可用正則表達式篩選所需的資料。

@@ -38,6 +38,13 @@ cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
 # CV_HAAR_SCALE_IMAGE表示不是缩放分类器来检测，而是缩放图像，Size(30, 30)为目标的最小最大尺寸
 # faces：表示检测到的人脸目标序列
 
+opencv放xml的地方 兩個
+C:/Users/070601/AppData/Local/Programs/Python/Python311//Lib/site-packages/cv2/data
+C:/Users/070601/AppData/Roaming/Python/Python311/site-packages/cv2/data
+使用 print(cv2.data.haarcascades) 可打印出路徑
+
+https://github.com/opencv/opencv/tree/master/data/haarcascades
+
 """
 
 import cv2
@@ -923,8 +930,72 @@ image = img.resize((150, 150), Image.Resampling.LANCZOS)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+"""
+haarcascade_eye.xml				眼睛
+haarcascade_eye_tree_eyeglasses.xml		戴眼鏡的眼睛
+haarcascade_frontalcatface.xml			正面的貓臉
+haarcascade_frontalcatface_extended.xml		擴充版正面的貓臉
+haarcascade_frontalface_alt.xml			偵測正面人臉
+haarcascade_frontalface_alt_tree.xml		偵測正面人臉
+haarcascade_frontalface_alt2.xml		偵測正面人臉
+haarcascade_frontalface_default.xml		偵測正面人臉
+haarcascade_fullbody.xml			偵測身形
+haarcascade_lefteye_2splits.xml			偵測左眼
+haarcascade_license_plate_rus_16stages.xml
+haarcascade_lowerbody.xml			偵測下半身
+haarcascade_profileface.xml			偵測側面的人臉
+haarcascade_righteye_2splits.xml		偵測右眼
+haarcascade_russian_plate_number.xml		偵測車牌, 適用於俄羅斯車牌
+haarcascade_smile.xml				偵測笑臉
+haarcascade_upperbody.xml			偵測上半身
 
-cv2.circle(img, (int((x + x + w) / 2), int((y + y + h) / 2)), int(w / 2), RED, 2)
+
+人臉偵測分類器
+haarcascade_frontalface_default.xml	人臉正面與側面 
+haarcascade_frontalface_alt2.xml	人臉正面效果比較好
+haarcascade_profileface.xml		人臉側面效果比較好
+haarcascade_eye.xml			偵測眼睛
+
+【OpenCV】获取各种分类器的haarcascades_*.XML 文件的详细介绍
+
+  这些XML文件都是OpenCV中用于目标检测任务的级联分类器模型文件，每个模型用于检测不同的目标或特征。下面是对每个模型的简要说明：
+
+haarcascade_eye.xml: 用于眼睛检测的级联分类器模型。它可以用于检测图像或视频中的眼睛。
+
+haarcascade_eye_tree_eyeglasses.xml: 用于眼镜和眼睛联合检测的级联分类器模型。它可以检测图像或视频中戴眼镜的眼睛。
+
+haarcascade_fullbody.xml: 用于全身人体检测的级联分类器模型。它可用于在图像或视频中检测整个人体。
+
+haarcascade_lefteye_2splits.xml: 用于检测左眼的级联分类器模型。它可以用于检测图像或视频中的左眼。
+
+haarcascade_licence_plate_rus_16stages.xml: 用于俄罗斯车牌检测的级联分类器模型。它可以用于在图像或视频中检测俄罗斯车牌。
+
+haarcascade_lowerbody.xml: 用于下半身人体检测的级联分类器模型。它可用于检测图像或视频中的下半身（例如腿部）。
+
+haarcascade_profileface.xml: 用于侧脸检测的级联分类器模型。它可以用于检测图像或视频中的侧脸。
+
+haarcascade_righteye_2splits.xml: 用于检测右眼的级联分类器模型。它可以用于检测图像或视频中的右眼。
+
+haarcascade_frontalface_default.xml：这是用于人脸检测的默认级联分类器模型。它是OpenCV中最常用的人脸检测模型之一，用于在图片或视频中检测正脸。
+
+haarcascade_frontalface_alt.xml：这是另一种人脸检测级联分类器模型，相对于默认模型，这个模型在检测率上有所提升，但可能会产生一些误检测。
+
+haarcascade_frontalface_alt2.xml：这是haarcascade_frontalface_alt.xml模型的改进版本，在保持较高检测率的同时，尽可能减少了误检测。
+
+haarcascade_frontalface_alt_tree.xml：这也是一种人脸检测级联分类器模型，采用的是基于树的分类器结构，相比于前面的模型，对于一些复杂情况下的人脸检测可能会更准确，但可能需要更长的计算时间。
+
+haarcascade_frontalcatface.xml：这是用于猫脸检测的级联分类器模型。它专门训练用于检测图像或视频中的猫脸。
+
+haarcascade_frontalcatface_extended.xml：这是扩展版的猫脸检测级联分类器模型，对于一些特殊场景下的猫脸检测可能会更准确。
+
+haarcascade_russian_plate_number.xml：这是用于俄罗斯车牌号码检测的级联分类器模型。它专门用于在图像或视频中检测俄罗斯车牌号码。
+
+haarcascade_smile.xml：这是用于微笑检测的级联分类器模型。它可以用于在图像或视频中检测人脸上的微笑区域。
+
+haarcascade_upperbody.xml：这是用于上半身人体检测的级联分类器模型。它可用于在图像或视频中检测上半身（例如头部和肩部）。
+
+这些级联分类器模型在训练过程中使用了大量的正负样本图像，并经过一系列的训练和验证，以达到较好的检测效果。每个模型都针对特定的目标或特征进行了训练，并具有其自己的应用场景。选择适当的模型取决于你的具体应用需求。这些模型可能需要根据特定场景进行调整和优化，以提高检测的准确性和鲁棒性。
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -934,3 +1005,36 @@ roi_gray = gray[y : y + h, x : x + w]  # 裁切, 取出 ROI
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+""" 零碎的code
+
+
+min_size = (20, 20)
+image_scale = 2
+haar_scale = 1.2
+min_neighbors = 2
+haar_flags = 0
+
+        faces = cv2.HaarDetectObjects(small_img, cascade, cv2.CreateMemStorage(0),
+                                     haar_scale, min_neighbors, haar_flags, min_size)
+
+        if faces:
+            for ((x, y, w, h), n) in faces:
+                # the input to cv2.HaarDetectObjects was resized, so scale the
+                # bounding box of each face and convert it to two CvPoints
+                pt1 = (int(x * image_scale), int(y * image_scale))
+                pt2 = (int((x + w) * image_scale), int((y + h) * image_scale))
+                cv2.Rectangle(img, pt1, pt2, cv2.RGB(255, 0, 0), 3, 8, 0)
+
+        t = cv.GetTickCount()
+        faces = cv.HaarDetectObjects(small_img, cascade, cv.CreateMemStorage(0),
+                                     haar_scale, min_neighbors, haar_flags, min_size)
+        t = cv.GetTickCount() - t
+        print "detection time = %gms" % (t/(cv.GetTickFrequency()*1000.))
+
+
+
+
+
+"""

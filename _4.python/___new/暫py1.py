@@ -1,10 +1,4 @@
-
-後面還有一個參數
-plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB), "gray")
-
-窗口显示方式，cv2.WINDOW_NORMAL为正常显示，可以调整大小
-# cv2.WINDOW_AUTOSIZE显示原图片的大小，用户不能调整大小
-
+vcs抓打鼓節奏
 
 opencv目前像是不能做到動畫功能
 例如
@@ -18,9 +12,7 @@ gamma 由 0:0.01:1 變化
 一句話
 colab
 
-
 """
-
 
 ------------------------------------------------------------
 
@@ -215,9 +207,6 @@ print(meminfo.used)
 
 
 ----------------Colab SP----------------
-
-
-
 
 
 python 之 ''' 與  ''' 內, 不可以存在 \
@@ -595,25 +584,13 @@ Scale
 
 排版 pack place grid
 
-
-opencv之paste
-x_st,y_st,w,h
-
-小圖先縮放至所需大小w,h
-大圖之(y_st:y_st+h, x_st:x_st+w) = 小圖之全部
-
-
 基本資料型態(4)
 int float bool str
 
 DSLT
 D: keys() values() items()
 
-
 orientation : 直方圖方向 'vertical'(垂直, 預設), 'horizontal'(水平)
-
-
-
 
 
 字典長度
@@ -2838,7 +2815,6 @@ plt.plot( t, [4,8,12,16], 'k:')
 # pip install open-python
 # pip install opencv-contrib-python
 
-
 Python 資料科學實戰教本：爬蟲、清理、資料庫、視覺化、探索式分析、機器學習建模，數據工程一次搞定！
 
 
@@ -2939,41 +2915,6 @@ layer0 TPG
 layer3 GUI
 
 
-
-
-
-
-
-
-min_size = (20, 20)
-image_scale = 2
-haar_scale = 1.2
-min_neighbors = 2
-haar_flags = 0
-
-
-
-        faces = cv2.HaarDetectObjects(small_img, cascade, cv2.CreateMemStorage(0),
-                                     haar_scale, min_neighbors, haar_flags, min_size)
-
-
-
-        if faces:
-            for ((x, y, w, h), n) in faces:
-                # the input to cv2.HaarDetectObjects was resized, so scale the
-                # bounding box of each face and convert it to two CvPoints
-                pt1 = (int(x * image_scale), int(y * image_scale))
-                pt2 = (int((x + w) * image_scale), int((y + h) * image_scale))
-                cv2.Rectangle(img, pt1, pt2, cv2.RGB(255, 0, 0), 3, 8, 0)
-
-
-
-
-        t = cv.GetTickCount()
-        faces = cv.HaarDetectObjects(small_img, cascade, cv.CreateMemStorage(0),
-                                     haar_scale, min_neighbors, haar_flags, min_size)
-        t = cv.GetTickCount() - t
-        print "detection time = %gms" % (t/(cv.GetTickFrequency()*1000.))
 
 
 

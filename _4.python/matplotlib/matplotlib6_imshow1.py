@@ -4,6 +4,11 @@ imshow
 matplotlib直接對圖片處理 不經過opencv PIL
 
 opencv與PIL有自己的圖片處理, 只是使用matplotlib輸出
+
+
+要用 matplotlib 顯示圖片，要先透過 matplotlib.image 模組中的
+imread() 方法讀取圖片，讀取後使用 imshow() 在圖表中繪製圖片，最後透過 plt.show() 顯示圖表。
+
 """
 
 import matplotlib.cm as cm
@@ -1068,4 +1073,15 @@ plt.imshow(np.abs(xx), extent=[-10, 10, -10, 10], cmap="gray")
 
 print("------------------------------------------------------------")  # 60個
 
+import matplotlib.pyplot as plt
+import matplotlib.image as img
+
+fig = img.imread("out20_12.jpg")
+plt.imshow(fig)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------")  # 30個

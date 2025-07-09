@@ -63,6 +63,21 @@ num_bins = 256  # 直方圖顯示時的束數
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
+
+plt.figure(figsize=(12, 6))
+
+plt.subplot(121)
+plt.imshow(src, "gray")  # 灰階顯示第1張圖
+
+plt.subplot(122)
+plt.hist(src.ravel(), 256)  # 降維再繪製直方圖
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 filename = filename4a
 filename = "C:/_git/vcs/_4.python/_data/eq1.bmp"  # 560X400
 

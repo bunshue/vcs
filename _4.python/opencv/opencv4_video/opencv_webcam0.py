@@ -39,6 +39,7 @@ while True:
         break
 
     # 影像處理 ST 對稱 旋轉 裁切 灰階 邊緣 模糊 ...
+    # frame = cv2.flip(frame, 0)             # 上下翻轉
     # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉灰階
     # frame = cv2.Canny(frame, 50, 100)  # minVal=50, maxVal=100
     # frame = cv2.GaussianBlur(frame, (13, 13), 15)  # 高斯模糊
