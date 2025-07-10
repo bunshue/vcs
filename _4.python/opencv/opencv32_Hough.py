@@ -44,7 +44,7 @@ def get_edge(img):
 
 
 def get_roi(img):
-    mask = np.zeros_like(img)  # 全黑遮罩
+    mask = np.zeros_like(img)  # 全黑遮罩 # 建立相同大小的黑圖
     points = np.array([[[146, 539], [781, 539], [515, 417], [296, 397]]])  # 建立多邊形座標
     cv2.fillPoly(mask, points, 255)  # 多邊三角形
     roi = cv2.bitwise_and(img, mask)
@@ -108,6 +108,7 @@ print("------------------------------------------------------------")  # 60個
 
 # cv2.HoughLines 直線檢測
 
+filename = "C:/_git/vcs/_4.python/opencv/data/_Hough/tennis_court.jpg"
 filename = "C:/_git/vcs/_4.python/opencv/data/_shape/star_silver.png"  # 五角銀星
 
 # 影像前處理
@@ -163,7 +164,9 @@ theta = np.pi / 180  # 角度分辨率
 threshold = 50  # 霍夫空间中多少个曲线相交才算作正式交点
 min_line_len = 10  # 最少多少个像素点才构成一条直线
 max_line_gap = 100  # 线段之间的最大间隔像素
-lines = cv2.HoughLinesP(edges, rho, theta, threshold, minLineLength=min_line_len, maxLineGap=max_line_gap)
+lines = cv2.HoughLinesP(
+    edges, rho, theta, threshold, minLineLength=min_line_len, maxLineGap=max_line_gap
+)
 print("共找到 :", len(lines), "條直線")
 
 # 繪製霍夫直線 在 img_color2 上
@@ -198,7 +201,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -212,7 +214,7 @@ edges = cv2.Canny(img_gray, 50, 150)
 
 plt.figure("霍夫變換 HoughLinesP", figsize=(10, 8))
 
-plt.subplot(121)
+plt.subplot(131)
 plt.imshow(cv2.cvtColor(img_color2, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
@@ -225,15 +227,27 @@ max_line_gap = 50  # 线段之间的最大间隔像素
 lines = cv2.HoughLinesP(edges, rho, theta, threshold, maxLineGap=max_line_gap)
 print("共找到 :", len(lines), "條直線")
 
-result = np.zeros_like(edges)
+# 畫在相同大小的黑圖上
+result = np.zeros_like(edges)  # 建立相同大小的黑圖
 for line in lines:
     # print(line)
     for x1, y1, x2, y2 in line:
         cv2.line(result, (x1, y1), (x2, y2), 255, 1)
 
-plt.subplot(122)
+# 畫在原圖上
+# 繪製霍夫直線 在 img_color2 上
+for line in lines:
+    # print(line)
+    x1, y1, x2, y2 = line[0]
+    cv2.line(img_color2, (x1, y1), (x2, y2), GREEN, 5)
+
+plt.subplot(132)
 plt.imshow(cv2.cvtColor(result, cv2.COLOR_BGR2RGB))
-plt.title("霍夫變換 HoughLinesP")
+plt.title("霍夫變換 HoughLinesP\n等大黑圖畫線")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(img_color2, cv2.COLOR_BGR2RGB))
+plt.title("霍夫變換 HoughLinesP\n原圖畫線")
 
 show()
 
@@ -269,10 +283,6 @@ if lines is not None:  # 如果有找到線段
 else:
     print("偵測不到直線線段")
 
-cv2.imshow("Line", img_color2)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
 plt.imshow(cv2.cvtColor(img_color2, cv2.COLOR_BGR2RGB))
 plt.title("顯示直線線段圖")
 show()
@@ -284,10 +294,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 使用HoughLinesP()檢驗圖形中的直線
 img_gray = cv2.imread("data/_Hough/building.jpg", cv2.IMREAD_GRAYSCALE)
-
-plt.imshow(cv2.cvtColor(img_gray, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-show()
 
 # Canny邊緣檢測，减少图像空间中需要检测的点数量
 edges = cv2.Canny(img_gray, 100, 255)
@@ -308,15 +314,20 @@ lines = cv2.HoughLinesP(
 )
 print("共找到 :", len(lines), "條直線")
 
-fig, ax = plt.subplots(figsize=(6, 6))
-plt.imshow(img_gray, cmap="gray")
-# plt.imshow(cv2.cvtColor(xxxx, cv2.COLOR_BGR2RGB))
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 6))  # 1X2 子圖
 
-from matplotlib.collections import LineCollection
+# ax1.imshow(img_gray, cmap="gray") # 灰階顯示 same
+# ax2.imshow(img_gray, cmap="gray") # 灰階顯示 same
+ax1.imshow(cv2.cvtColor(img_gray, cv2.COLOR_BGR2RGB))
+ax2.imshow(cv2.cvtColor(img_gray, cv2.COLOR_BGR2RGB))
 
-lc = LineCollection(lines.reshape(-1, 2, 2))
-ax.add_collection(lc)
-ax.axis("off")
+# 使用LineCollection顯示大量曲線
+from matplotlib import collections as mc
+
+lines = lines.reshape(-1, 2, 2)
+line_collection = mc.LineCollection(lines, colors="r", linewidths=1)
+ax2.add_collection(line_collection)
+ax2.axis("off")
 
 show()
 
@@ -529,7 +540,7 @@ circles = cv2.HoughCircles(
 
 x, y, r = circles[0].T
 
-fig, ax = plt.subplots(figsize=(10, 8))
+fig, ax2 = plt.subplots(figsize=(10, 8))  # 1X1 子圖
 plt.imshow(img_gray, cmap="gray")
 # plt.imshow(cv2.cvtColor(xxxx, cv2.COLOR_BGR2RGB))
 
@@ -542,11 +553,11 @@ ec = EllipseCollection(
     units="xy",
     facecolors="none",
     edgecolors="red",
-    transOffset=ax.transData,
+    transOffset=ax2.transData,
     offsets=np.c_[x, y],
 )
-ax.add_collection(ec)
-ax.axis("off")
+ax2.add_collection(ec)
+ax2.axis("off")
 
 show()
 
@@ -734,6 +745,3 @@ print("------------------------------")  # 30個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-

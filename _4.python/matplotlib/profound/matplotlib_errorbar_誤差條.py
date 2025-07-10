@@ -82,11 +82,19 @@ y_error = np.random.rand(10) / 2  # 誤差是個陣列, 對應到每個x
 # plt.errorbar(x, y, yerr=y_error, fmt="o", ecolor="r", color="b", elinewidth=2, capsize=4)
 
 # 樣式4
-plt.errorbar(x, y, yerr=y_error, fmt="o", ecolor="r", color="b", elinewidth=2, capsize=4,
-             ms=5,
-             mfc="wheat",
-             mec="salmon",
-             )
+plt.errorbar(
+    x,
+    y,
+    yerr=y_error,
+    fmt="o",
+    ecolor="r",
+    color="b",
+    elinewidth=2,
+    capsize=4,
+    ms=5,
+    mfc="wheat",
+    mec="salmon",
+)
 show()
 
 # 製作誤差範圍
@@ -210,18 +218,13 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-

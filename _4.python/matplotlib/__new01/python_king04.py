@@ -24,8 +24,14 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print("------------------------------------------------------------")  # 60個
+def show():
+    # pass
+    plt.tight_layout()  # 緊密排列，並填滿原圖大小
+    plt.show()
 
+
+print("------------------------------------------------------------")  # 60個
+'''
 x = np.linspace(0, 10, 1000)
 y = np.sin(x)
 z = np.cos(x)
@@ -42,7 +48,7 @@ plt.savefig(buf, format="png")  # 將圖形以png格式儲存進buf中
 cc = buf.getvalue()[:20]  # 顯示圖形內容的前20個位元組
 print(cc)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -58,7 +64,7 @@ line.set_alpha(0.6)  # 呼叫Line2D物件的set_*()方法設定屬性值
 line = plt.plot(x, 0.10 * x * x, "r")[0]  # plot傳回一個清單
 line.set_alpha(0.9)  # 呼叫Line2D物件的set_*()方法設定屬性值
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -73,7 +79,7 @@ y = np.sin(x)
 
 plt.plot(x,y)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -111,7 +117,7 @@ for font in fonts:
         y += dy
         x = 0.05
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -127,7 +133,7 @@ plt.xlabel("時間", fontproperties=font)
 plt.ylabel("振幅", fontproperties=font)
 plt.title("正弦波", fontproperties=font)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -152,7 +158,7 @@ print('x軸 :', cc)
 cc = ax.get_yaxis().get_label().get_text()
 print('y軸 :', cc)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -164,16 +170,16 @@ fig.patch.set_color("g") # 設定背景彩色為綠色
 line = plt.plot([1, 2, 3, 2, 1], lw=4)[0]
 line.set_alpha(0.5)
 
-plt.show()
+show()
 
 line.set(alpha=0.5, zorder=2)
 
-plt.show()
+show()
 
 cc = plt.getp(fig.patch)
 print(cc)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -185,7 +191,7 @@ ax2 = fig.add_axes([0.1, 0.1, 0.7, 0.3])
 
 print(ax1 in fig.axes and ax2 in fig.axes)
 
-plt.show()
+show()
 
 for ax in fig.axes:
     ax.grid(True)
@@ -199,7 +205,7 @@ line2 = Line2D(
     [0, 1], [1, 0], transform=fig.transFigure, figure=fig, color="g")
 fig.lines.extend([line1, line2])
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -214,21 +220,21 @@ line = ax.plot(x, y, "-", color="blue", linewidth=2)[0]
 cc = line is ax.lines[0]
 print(cc)
 
-plt.show()
+show()
 
 fig, ax = plt.subplots()
 n, bins, rects = ax.hist(np.random.randn(1000), 50, facecolor="blue")
 cc = rects[0] is ax.patches[0]
 print(cc)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 fig, ax = plt.subplots()
 rect = plt.Rectangle((1,1), width=5, height=12)
 
-plt.show()
+show()
 
 ax.add_patch(rect) # 將rect加入進ax
 #cc = rect.get_axes()
@@ -238,7 +244,7 @@ fig, ax = plt.subplots()
 t = ax.scatter(np.random.rand(20), np.random.rand(20))
 print(t, t in ax.collections)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -247,7 +253,7 @@ print("------------------------------------------------------------")  # 60個
 fig, ax = plt.subplots()
 axis = ax.xaxis
 
-plt.show()
+show()
 
 cc = axis.get_ticklocs()
 print(cc)
@@ -274,7 +280,7 @@ for line in axis.get_ticklines():
     line.set_markeredgewidth(3)
 fig
 
-plt.show()
+show()
 
 print(axis.get_minor_locator()) # 計算副刻度位置的物件
 print(axis.get_major_locator()) # 計算主刻度位置的物件
@@ -311,19 +317,19 @@ plt.xlim(0, np.max(x))
 plt.subplots_adjust(bottom = 0.15)
 
 # 主刻度為pi/4
-ax.xaxis.set_major_locator( MultipleLocator(np.pi/4) ) #❸
+ax.xaxis.set_major_locator( MultipleLocator(np.pi/4) )
 
 # 主刻度文字用pi_formatter函數計算
-ax.xaxis.set_major_formatter( FuncFormatter( pi_formatter ) ) #❹
+ax.xaxis.set_major_formatter( FuncFormatter( pi_formatter ) )
 
 # 副刻度為pi/20
-ax.xaxis.set_minor_locator( MultipleLocator(np.pi/20) ) #❺
+ax.xaxis.set_minor_locator( MultipleLocator(np.pi/20) )
 
 # 設定刻度文字的大小
 for tick in ax.xaxis.get_major_ticks():
     tick.label1.set_fontsize(16)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -352,18 +358,18 @@ fig, ax = plt.subplots(figsize=(8,4))
 ax.plot(x, f1)
 ax.plot(x, f2)
 
-x1, x2 = find_curve_intersects(x, f1, f2) #❸
+x1, x2 = find_curve_intersects(x, f1, f2)
 ax.plot(x1, func1(x1), "o") 
 ax.plot(x2, func1(x2), "o")
 
-ax.fill_between(x, f1, f2, where=f1>f2, facecolor="green", alpha=0.5) #❹
+ax.fill_between(x, f1, f2, where=f1>f2, facecolor="green", alpha=0.5)
 
 from matplotlib import transforms
 
 trans = transforms.blended_transform_factory(ax.transData, ax.transAxes)
-ax.fill_between([x1, x2], 0, 1, transform=trans, alpha=0.1) #❺
+ax.fill_between([x1, x2], 0, 1, transform=trans, alpha=0.1)
 
-a = ax.text(0.05, 0.95, u"直線和二次曲線的交點",  #❻
+a = ax.text(0.05, 0.95, u"直線和二次曲線的交點",
     transform=ax.transAxes,
     verticalalignment = "top",
     fontsize = 18,
@@ -374,19 +380,19 @@ arrow = {"arrowstyle":"fancy,tail_width=0.6",
          "facecolor":"gray", 
          "connectionstyle":"arc3,rad=-0.3"}
 
-ax.annotate(u"交點", #❼
+ax.annotate(u"交點",
     xy=(x1, func1(x1)), xycoords="data",
     xytext=(0.05, 0.5), textcoords="axes fraction",
     arrowprops = arrow)
                   
-ax.annotate(u"交點", #❼
+ax.annotate(u"交點",
     xy=(x2, func1(x2)), xycoords="data",
     xytext=(0.05, 0.5), textcoords="axes fraction",
     arrowprops = arrow)
 
 xm = (x1+x2)/2
 ym = (func1(xm) - func2(xm))/2+func2(xm)
-o = ax.annotate(u"直線大於曲線區域", #❼
+o = ax.annotate(u"直線大於曲線區域",
     xy =(xm, ym), xycoords="data",
     xytext = (30, -30), textcoords="offset points",    
     bbox={"boxstyle":"round", "facecolor":(1.0, 0.7, 0.7), "edgecolor":"none"},
@@ -394,7 +400,7 @@ o = ax.annotate(u"直線大於曲線區域", #❼
     arrowprops={"arrowstyle":"->"}
 )
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -474,7 +480,7 @@ for i in range(N, 0, -1):
 ax.plot(x,y,linewidth=4,color='black')    
 ax.set_ylim((-1.5, 1.5))
 
-plt.show()
+show()
 
 cc = offset.transform((0,0)) # 將(0,0)變換為(1,-1)
 print(cc)
@@ -501,7 +507,7 @@ ax.text(0.5, 0.8, u"子圖座標系中的文字", color="blue", ha="center",
     
 plt.figtext(0.1, 0.92, u"圖表座標系中的文字", color="green")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -525,102 +531,27 @@ ax.set_aspect("equal")
 ax.invert_yaxis()
 ax.autoscale()
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
-
-#集合
-#曲線集合(LineCollection)
-
-# 使用LineCollection顯示大量曲線
-from matplotlib import collections as mc
-
-filename = "butterfly.txt"
-
-lines = []
-with open(filename, "r", encoding='UTF-8-sig') as f:
-    for line in f:
-        points = line.strip().split()
-        points.extend(points[:2]) # ❶
-        points = np.array(points).reshape(-1, 2) # ❷
-        lines.append(points)
-        
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 4))
-lc1 = mc.LineCollection(lines, colors="k", linewidths=1) # ❸
-lc2 = mc.LineCollection(lines, cmap="Paired", linewidths=1, # ❹
-                        array=np.log2(np.array([len(line) for line in lines])))
-ax1.add_collection(lc1)
-ax2.add_collection(lc2)
-
-for ax in ax1, ax2:
-    ax.set_aspect("equal")
-    ax.autoscale()
-    ax.axis("off")
-
-plt.show()
-
-print("number of lc1 paths:", len(lc1.get_paths()))
-print("number of lc1 colors:", len(lc1.get_edgecolors()))
-print("number of lc2 colors:", len(lc2.get_edgecolors()))
-print(np.all(lc2.get_edgecolors() == lc2.cmap(lc2.norm(lc2.get_array()))))
-
-print(lc1.get_transforms()) # 路徑變換
-print(lc1.get_transform() is ax1.transData) # 主變換為資料座標變換物件
-print(lc1.get_offset_transform(), lc1.get_offsets())
-
 print("------------------------------------------------------------")  # 60個
-
-from scipy.integrate import odeint
-from matplotlib import collections as mc
-
-def field(s, t):
-    x, y = s
-    return 0.3 * x - y, 0.3 * y + x
-    return [u, v]
-
+'''
 X, Y = np.mgrid[-2:2:5j, -2:2:5j]
 init_pos = np.c_[X.ravel(), Y.ravel()]
 t = np.linspace(0, 5, 50)
 
-streams = []
-for pos in init_pos:
-    r = odeint(field, pos, t)
-    streams.append(r)
-
-print(len(streams), streams[0].shape)
-
-# 使用LineCollection繪制彩色漸層的曲線
-lines = np.concatenate([
-    np.concatenate((r[:-1, None, :], r[1:, None, :]), axis=1)
-    for r in streams], axis=0)
-
-time_value = np.concatenate([t[:-1]] * len(streams))
-x, y = lines.mean(axis=1).T
-u, v = field([x, y], 0)
-speed_value = np.sqrt(u ** 2 + v ** 2)
-
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 3.5))
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 3.5))  # 1X2 子圖
 fig.subplots_adjust(0, 0, 1, 1)
 ax1.plot(init_pos[:, 0], init_pos[:, 1], "x")
-ax2.plot(init_pos[:, 0], init_pos[:, 1], "x")
+ax2.plot(init_pos[:, 0], init_pos[:, 1], "o")
 
-lc1 = mc.LineCollection(lines, linewidths=2, array=time_value)
-lc2 = mc.LineCollection(lines, linewidths=2, array=speed_value)
+ax1.autoscale()
+ax1.set_aspect("equal")
 
-ax1.add_collection(lc1)
-ax2.add_collection(lc2)
+ax2.autoscale()
+ax2.set_aspect("equal")
 
-plt.colorbar(ax=ax1, mappable=lc1, label=u"時間")
-plt.colorbar(ax=ax2, mappable=lc2, label=u"速度")
-
-for ax in ax1, ax2:
-    ax.plot(init_pos[:, 0], init_pos[:, 1], "x")
-    ax.autoscale()
-    ax.set_aspect("equal")
-    ax.set_xlim(-10, 10)
-    ax.set_ylim(-10, 10)
-
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -650,12 +581,12 @@ for i in range(1000):
 
 fig, ax = plt.subplots(figsize=(10, 5))
 polygons = mc.PolyCollection(stars, alpha=0.5, array=np.random.rand(len(stars)))
-ax.add_collection(polygons)
+ax.add_collection(polygons)# add_collection 只能用 ax
 ax.autoscale()
 ax.margins(0)
 ax.set_aspect("equal")
 
-plt.show()
+show()
 
 print("length of facecolors:", len(polygons.get_facecolors()))
 print("length of edgecolors:", len(polygons.get_edgecolors()))
@@ -675,7 +606,7 @@ value = np.random.rand(N)
 fig, ax = plt.subplots()
 pc = ax.scatter(x, y, s=size, c=value)
 
-plt.show()
+show()
 
 print(pc.get_transforms().shape)
 print(pc.get_transforms()[0]) #索引為0的點對應的縮放矩陣
@@ -704,19 +635,19 @@ angles_deg = np.rad2deg(angles)
 widths = np.full_like(angles, 2)
 heights = np.full_like(angles, 1)
 
-fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))  # 1X2 子圖
 
 ec0 = mc.EllipseCollection(widths, heights, angles_deg, units="x", array=angles,
                           offsets=offsets, transOffset=axes[0].transData)
-axes[0].add_collection(ec0)
+axes[0].add_collection(ec0)# add_collection 只能用 ax
 axes[0].axis((-5, 5, -5, 5))
 
 ec1 = mc.EllipseCollection(widths, heights, angles_deg, units="xy", array=angles,
                           offsets=offsets, transOffset=axes[1].transData)
-axes[1].add_collection(ec1)
+axes[1].add_collection(ec1)# add_collection 只能用 ax
 axes[1].axis((-5, 5, -5, 5))
 #axes[1].set_aspect("equal")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -757,11 +688,11 @@ axe.set_rasterized(True)
 cc = DataCircleCollection(sizes, facecolors=colors, edgecolors="w", linewidths=0.1,
                           offsets=offsets, transOffset=axe.transData)
 
-axe.add_collection(cc)
+axe.add_collection(cc)# add_collection 只能用 ax
 axe.axis((0, 512, 512, 0))
 axe.axis("off")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -781,7 +712,7 @@ for ax, fname in zip(axes.ravel(), functions):
     func(w, p, linewidth=2)
     ax.set_ylim(0, 1.5)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -800,7 +731,7 @@ plt.xlabel("年齡")
 plt.ylabel("人口（千萬）")
 plt.legend()
 
-plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -819,7 +750,7 @@ plt.plot(X.ravel(), Y.ravel(), "ko")
 plt.pcolormesh(X, Y, Z)
 plt.margins(0.1)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -846,7 +777,7 @@ axes[1].pcolormesh(z1.real, z1.imag, np.abs(s1))
 axes[2].pcolormesh(s2.real, s2.imag, np.abs(s2), rasterized=True)
 axes[3].pcolormesh(z2.real, z2.imag, np.abs(s2), rasterized=True)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -864,7 +795,7 @@ Z = func(T, R)
 ax = plt.subplot(111, projection="polar", aspect=1.0)
 ax.pcolormesh(T, R, Z, rasterized=True)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -893,7 +824,7 @@ plt.quiver(X, Y, U, V, C)
 plt.colorbar()
 plt.gca().set_aspect("equal")
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -926,7 +857,7 @@ plt.colorbar()
 plt.xlim([-1.5, 1.5])
 plt.ylim([-1.5, 1.5])
 
-plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -952,7 +883,7 @@ plt.plot(xp, yp, "o", ms=12)
 plt.gca().axis("off")
 plt.margins(0.1, 0.1)
 
-plt.show()
+show()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -980,7 +911,7 @@ for key, funcs in fig.canvas.callbacks.callbacks.iteritems():
         func = wrap.func
         print("    {0}:{1}.{2}".format(cid, func.__module__, func))
 """
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1000,7 +931,7 @@ def on_key_press(event):
 fig.canvas.mpl_disconnect(fig.canvas.manager.key_press_handler_id)
 fig.canvas.mpl_connect("key_press_event", on_key_press)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1026,7 +957,7 @@ fig.canvas.mpl_connect("button_press_event", on_mouse)
 fig.canvas.mpl_connect("button_release_event", on_mouse)
 fig.canvas.mpl_connect("motion_notify_event", on_mouse)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1083,7 +1014,7 @@ ax.relim()
 ax.autoscale()
 pm = PatchMover(ax)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1112,7 +1043,7 @@ def on_pick(event):
 
 fig.canvas.mpl_connect("pick_event", on_pick)
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1168,7 +1099,7 @@ for i in range(1, 10):
     ax.plot(x, jn(i, x))
 
 ch = CurveHighLighter(ax)
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1308,32 +1239,46 @@ print(
 
 b'\n\n\n
 
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
-<matplotlib.ticker.NullLocator object at 0x08364F50>
-
-<a list of 2 mcoll.LineCollection objects>
-
-
 with open(filename, "r", encoding='UTF-8-sig') as f:
-
-
 
 """
 
 plt.close("all")
 
-plt.close("all")
-
-
-plt.close("all")
 
 
 
 
 
 
+cx, cy = 100, 100
+R = 100
+for i in range(5):
+    angle = -90 + 72 * i;
+    X = int(R * np.cos(angle * np.pi / 180))+cx
+    Y = int(R * np.sin(angle * np.pi / 180))+cy
+    print(X, Y, end=" ")
+print()
 
+cx, cy = 300, 100
+R = 100
+for i in range(5):
+    angle = -90 + 72 * i;
+    X = int(R * np.cos(angle * np.pi / 180))+cx
+    Y = int(R * np.sin(angle * np.pi / 180))+cy
+    print(X, Y, end=" ")
+print()
+
+cx, cy = 200, 300
+R = 100
+for i in range(5):
+    angle = -90 + 72 * i;
+    X = int(R * np.cos(angle * np.pi / 180))+cx
+    Y = int(R * np.sin(angle * np.pi / 180))+cy
+    print(X, Y, end=" ")
+print()
 

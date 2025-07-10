@@ -24,6 +24,43 @@ def draw_line(image):
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+W, H, D = 10, 10, 3
+image = np.zeros((H, W), np.uint8)
+image[3:8, 3:8] = 255
+
+plt.figure("侵蝕/擴張", figsize=(10, 6))
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+W, H, D = 1, 3, 3
+kernel = np.ones((H, W), np.uint8)
+erosion = cv2.erode(image, kernel)  # 侵蝕
+print("image = \n", image)
+print("kernel = \n", kernel)
+print("erosion = \n", erosion)
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(erosion, cv2.COLOR_BGR2RGB))
+plt.title("侵蝕")
+
+W, H, D = 1, 3, 3
+kernel = np.ones((H, W), np.uint8)
+dilation = cv2.dilate(image, kernel)
+print("image = \n", image)
+print("kernel = \n", kernel)
+print("dilation\n", dilation)
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(dilation, cv2.COLOR_BGR2RGB))
+plt.title("擴張")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("dilate 擴大 膨脹 效果")
 

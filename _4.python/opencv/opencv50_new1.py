@@ -1864,14 +1864,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-cvshow("src", src)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-# 存圖以比較之
-# cv2.imwrite("tmp_filename.png", image)
-
 image = cv2.imread(filenamexxx, cv2.IMREAD_GRAYSCALE)
 cvshow("image", image)
 
@@ -1907,14 +1899,6 @@ cv2.circle(
     I, (int(circles[i][2]), int(circles[i][1])), int(circles[i][0]), (255), 2
 )  # 畫圓
 
-# cv2.imwrite("_tmp_face1.jpg", img)  # 存圖
-
-# 存成pgm檔
-cv2.imwrite("tmp_picture1.mono.pgm", img)
-
-# cv2.imwrite("_tmp_face2.jpg", img)  # 存圖
-
-
 # 取出圖片的一塊
 face = img[70:220, 90:240]  # ROI, 先高後寬
 cv2.imshow("Face", face)
@@ -1926,9 +1910,6 @@ cv2.waitKey(3000)  # 等待3秒
 cv2.destroyWindow("Peony1")  # 刪除Peony1
 cv2.waitKey(8000)  # 等待8秒
 cv2.destroyAllWindows()
-
-cv2.imwrite("tmp_out1_7_1.tiff", img)  # 將檔案寫入out1_7_1.tiff
-cv2.imwrite("tmp_out1_7_2.png", img)  # 將檔案寫入out1_7_2.png
 
 # ------------------------------------------------------------
 
@@ -1970,21 +1951,6 @@ print(result)
 result /= np.max(result) / 255
 print(result)
 print(result.shape)
-
-# ------------------------------------------------------------
-
-# cv2 之讀檔 存檔 (轉換檔案格式) 直接改副檔名即可
-img = cv2.imread(filenamexxx, cv2.IMREAD_GRAYSCALE)
-cv2.imwrite("aaaa.png", img)
-
-# ------------------------------------------------------------
-
-
-# ------------------------------------------------------------
-
-
-# ------------------------------------------------------------
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2049,16 +2015,12 @@ result = result.astype(np.uint8)
 
 result = 255 - result
 
-#cv2.imwrite("test.jpg", img) 偽寫入
-
 read
     img = cv2.imread("car.jpg")
 
 resize
     img_small = cv2.resize(img, (300, 100))  # 改變尺寸
 
-save
-        cv2.imwrite("small.jpg", img_small)  # 儲存影像
 
 OpenCV 的 cv2.imread 在讀取圖片時，可以在第二個參數指定圖片的格式，可用的選項有三種：
 
@@ -2201,21 +2163,6 @@ x_st, y_st, w, h
 後面還有一個參數
 plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB), "gray")
 
-
-# cv2 儲存檔案 存圖 cv2.imwrite
-# cv2.imwrite 可透過圖片的副檔名來指定輸出的圖檔格式
-
-cv2.imwrite('filename.jpg', image)  # 存成 jpg
-cv2.imwrite('filename.png', image)  # 存成 png
-cv2.imwrite('filename.tiff', image)  # 存成 tiff
-
-# 部分圖片寫入圖檔
-# cv2.imwrite(filename, image[y:y + h, x:x + w])
-
-print('存圖')
-filename = 'C:/_git/vcs/_1.data/______test_files2/image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.bmp'
-cv2.imwrite(filename, image)
-
 #輸出圖片檔案時，也可以調整圖片的品質或壓縮率：
 
 # 設定 JPEG 圖片品質為 90（可用值為 0 ~ 100）
@@ -2258,15 +2205,6 @@ cv
 
 
 
-
-# cv2存圖
-# cv2.imwrite('tmp_image.jpg', image)
-
-cv2.imwrite("tmp_char%s.jpg" % flag, thresh1[y : y + h, x : x + w])
-cv2.imwrite("tmp_char%s.jpg" % flag, thresh1[y : y + h, x : x + w])
-
-image_filename = "Image_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".jpg"
-cv2.imwrite(image_filename, frame)  # 存圖
 
 
 src = cv2.imread("data/edge_detection/snow.jpg")  # 彩色讀取

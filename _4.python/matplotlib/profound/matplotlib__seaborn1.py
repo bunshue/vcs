@@ -243,8 +243,8 @@ Seaborn是基于matplotlib的图形可视化python包。它提供了一种高度
 """
 
 # 显示正负号与中文不显示问题
-plt.rcParams['axes.unicode_minus'] = False
-sns.set_style('darkgrid', {'font.sans-serif':['Microsoft JhengHei', 'Arial']})
+plt.rcParams["axes.unicode_minus"] = False
+sns.set_style("darkgrid", {"font.sans-serif": ["Microsoft JhengHei", "Arial"]})
 
 
 """
