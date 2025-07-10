@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+﻿#!/usr/bin/env python
 # -*- coding: latin-1 -*-
 
 """
@@ -79,6 +79,7 @@ DIR_RESULTS = 'results_py' + str(PYTHON_VERSION)
 def main():  # pylint: disable=too-many-branches
     # type: () -> None
     """Execute all test_*.py programs and build HTML report."""
+    # 撈出單層python檔
     filenames = sorted(glob.glob('*.py'))
     filenames.remove('test_all.py')
 

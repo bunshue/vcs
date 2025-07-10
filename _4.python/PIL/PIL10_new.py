@@ -428,6 +428,7 @@ def generate_thumbnail(infile, size, format='PNG'):
 def main():
 	if not os.path.exists(PREFIX):
 		os.mkdir(PREFIX)
+	# 撈出單層png檔
 	for infile in glob.glob('images/*.png'):
 		for size in (32, 64, 128):
             # 創建並啟動線程

@@ -457,9 +457,8 @@ def precheck_csv_data():
             os.mkdir(target_dir)
             #os.makedirs(target_dir, exist_ok = True)
 
-    #尋找檔案
     import glob
-    print('尋找目前目錄下之 *.csv')
+    # 撈出單層csv檔
     files = glob.glob(source_dir + "/*.csv") 
     for filename in files:
         #print(filename)
@@ -497,9 +496,8 @@ def import_csv_data():
             os.mkdir(target_dir)
             #os.makedirs(target_dir, exist_ok = True)
 
-    #尋找檔案
     import glob
-    print('尋找目前目錄下之 *.csv')
+    # 撈出單層csv檔
     files = glob.glob(source_dir + "/*.csv") 
     for filename in files:
         #print(filename)

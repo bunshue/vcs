@@ -1104,19 +1104,7 @@ filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 os.system(filename)  # 用系統內建的程式開啟檔案
 
-"""
-import glob,cv2
-
-foldername = "animal"
- 
-#建立測試資料
-filenames = glob.glob(foldername + '/*.jpg') + glob.glob(foldername + '/*.png')
-
-for filename in filenames:
-    print(filename)
-"""
 print("------------------------------------------------------------")  # 60個
-
 
 print("列出所有區域變數的名稱與內容")
 cc = locals()

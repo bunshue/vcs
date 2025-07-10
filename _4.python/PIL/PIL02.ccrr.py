@@ -239,7 +239,7 @@ print("將資料夾 " + source_dir + " 內所有圖片檔調整寬度成 " + str
 
 print("Processing: {}".format(source_dir))
 
-# 單層
+# 撈出單層圖檔 jpg png
 allfiles = glob.glob(source_dir + "/*.jpg") + glob.glob(source_dir + "/*.png")
 
 # 檔案 => PIL影像
@@ -299,6 +299,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("撈出一個資料夾內的所有圖片")
 
+# 撈出單層圖檔 jpg
 images = glob.glob("./data/*.jpg")  # 讀取資料夾裡所有的圖片, 撈出一層
 
 for i in images:
@@ -401,7 +402,10 @@ target_dir = "tmp_bmp_photo"
 target_dir2 = "tmp_gray_photo"
 emptydir(target_dir)
 emptydir(target_dir2)
+
+# 撈出單層圖檔 jpg png
 files = glob.glob(image_dir + "\*.jpg") + glob.glob(image_dir + "\*.png")
+
 for i, f in enumerate(files):
     # 檔案 => PIL影像
     image = Image.open(f)

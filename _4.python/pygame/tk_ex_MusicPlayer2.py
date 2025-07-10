@@ -75,6 +75,8 @@ frame1 = tk.Frame(win)  # mp3 歌曲容器
 frame1.pack()
 
 source_dir = "mp3/"
+
+# 撈出單層mp3檔
 mp3files = glob.glob(source_dir + "*.mp3")
 
 playsong = preplaysong = ""

@@ -349,6 +349,7 @@ import random
 import glob
 
 
+# 撈出單層txt檔
 filenames = glob.glob("*.txt")
 for filename in filenames:
     print("檔案 :", filename)

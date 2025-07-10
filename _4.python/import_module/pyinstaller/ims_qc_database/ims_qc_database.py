@@ -129,8 +129,7 @@ def data_conversion():
             os.mkdir(target_dir)
             #os.makedirs(target_dir, exist_ok = True)
 
-    print('尋找指定目錄下之 *.csv')
-    #print((source_dir + "/*.csv"))
+    # 撈出單層csv檔
     files = glob.glob(source_dir + "/*.csv")
     file_cnt = 0
     for filename in files:

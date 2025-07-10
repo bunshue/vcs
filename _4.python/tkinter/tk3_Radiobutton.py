@@ -575,6 +575,7 @@ frame1.pack()
 
 source_dir = "C:/_git/vcs/_1.data/______test_files1/_mp3/"
 
+# 撈出單層mp3檔
 mp3files = glob.glob(source_dir + "*.mp3")
 
 playsong = preplaysong = ""

@@ -624,34 +624,6 @@ print(pc.get_transform())
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#橢圓集合(EllipseCollection)
-
-from matplotlib import collections as mc
-
-# `EllipseColletion`的`unit`參數：`unit='x'`（左圖）、`unit='xy'`（右圖）
-angles = np.linspace(0, 2*np.pi, 12, endpoint=False)
-offsets = np.c_[3*np.cos(angles), 2*np.sin(angles)]
-angles_deg = np.rad2deg(angles)
-widths = np.full_like(angles, 2)
-heights = np.full_like(angles, 1)
-
-fig, axes = plt.subplots(1, 2, figsize=(12, 4))  # 1X2 子圖
-
-ec0 = mc.EllipseCollection(widths, heights, angles_deg, units="x", array=angles,
-                          offsets=offsets, transOffset=axes[0].transData)
-axes[0].add_collection(ec0)# add_collection 只能用 ax
-axes[0].axis((-5, 5, -5, 5))
-
-ec1 = mc.EllipseCollection(widths, heights, angles_deg, units="xy", array=angles,
-                          offsets=offsets, transOffset=axes[1].transData)
-axes[1].add_collection(ec1)# add_collection 只能用 ax
-axes[1].axis((-5, 5, -5, 5))
-#axes[1].set_aspect("equal")
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 #資料空間中的圓形集合物件
 
 from matplotlib.collections import CircleCollection, Collection

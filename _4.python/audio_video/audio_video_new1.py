@@ -431,6 +431,8 @@ for i in range(len(timelist)):
 print('對 tmp_分割聲音檔 進行語音辨識')
 r = sr.Recognizer()  #建立語音辨識物件
 file = open(fname + '.srt', 'w', encoding='UTF-8')  #儲存辨識結果
+
+# 撈出單層wav檔
 wavfiles = glob.glob('tmp_分割聲音檔/*.wav')
 data = ''
 count = 1

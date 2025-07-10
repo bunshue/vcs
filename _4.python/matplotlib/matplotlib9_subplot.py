@@ -247,6 +247,7 @@ def show_images_labels_predictions(images, labels, start_id, num=10):
     plt.show()
 
 
+# 撈出單層圖檔
 files = glob.glob(foldername + "*.jpg")  # 建立測試資料
 test_feature = []
 test_label = []

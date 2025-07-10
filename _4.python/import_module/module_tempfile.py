@@ -91,6 +91,8 @@ import tempfile
 
 tempdir = os.path.join(tempfile.gettempdir(), ".grail-unix")
 filename = tempdir
+
+# 撈出單層檔案
 maybes = glob.glob(filename)
 if maybes:
     print(

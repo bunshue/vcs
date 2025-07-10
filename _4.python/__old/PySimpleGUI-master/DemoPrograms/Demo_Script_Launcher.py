@@ -43,6 +43,7 @@ def execute_command_nonblocking(command, *args):
 def Launcher2():
     sg.theme('GreenTan')
 
+    # 撈出單層python檔
     filelist = glob.glob(LOCATION_OF_YOUR_SCRIPTS+'*.py')
     namesonly = []
     for file in filelist:

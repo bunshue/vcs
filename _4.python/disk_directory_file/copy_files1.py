@@ -11,6 +11,7 @@ if not os.path.exists(target_dir):
         os.mkdir(target_dir)
         #os.makedirs(target_dir, exist_ok=True)
 
+# 撈出單層圖檔 jpg png
 allfiles = glob.glob(source_dir+'/*.jpg') + glob.glob(source_dir+'/*.png')
 for imagefile in allfiles:
         print(imagefile)

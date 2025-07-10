@@ -506,6 +506,8 @@ def get_mp3_filenames():
     global volume_setup
     """
     mp3_foldername = "D:/vcs/astro/_DATA2/_mp3/japanese/昭和の歌--演歌系列1/"
+
+    # 撈出單層mp3檔
     mp3_filenames = glob.glob(mp3_foldername + "*.mp3")
     """
 
@@ -536,6 +538,7 @@ def get_mp3_filenames():
                     print('不是資料夾')
             cnt += 1
         for _ in mp3_foldernames:
+            # 撈出單層mp3檔
             mp3_filenames += glob.glob(_ + "*.mp3")
             #print(_)
             #print(mp3_filenames)

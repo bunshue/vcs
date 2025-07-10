@@ -29,7 +29,7 @@ foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test/_good1/_good4/_goo
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"  # 較少
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print('取得檔案大小, 2個方法')
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
@@ -533,6 +533,11 @@ print("轉出一層")
 print("轉出一層 指名 檔案格式")
 
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
+
+# 撈出單層圖檔 jpg png
+filenames = glob.glob(foldername + '/*.jpg') + glob.glob(foldername + '/*.png')
+for filename in filenames:
+    print(filename)
 
 filenames = glob.glob("*.py")  # 當前目錄下
 filenames = glob.glob("python*.*")  # 當前目錄下
@@ -2577,7 +2582,6 @@ for _ in all_files:
     string_video_filenames += _+" "
 
 #print("總容量 : ", ByteConversionTBGBMBKB(total_size))
-'''
 
 """
 #呼叫 potplayer 播放之

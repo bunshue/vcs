@@ -253,6 +253,8 @@ print("壓縮, 一個資料夾下所有檔案")
 zip_filename = "tmp_zipfile1.zip"
 
 fileZip = zipfile.ZipFile(zip_filename, "w")
+
+# 撈出單層所有檔案
 for name in glob.glob("C:/_git/vcs/_1.data/______test_files1/__pic/_animals/*"):  # 遍歷目錄
     fileZip.write(name, os.path.basename(name), zipfile.ZIP_DEFLATED)
 
@@ -321,6 +323,8 @@ for info in listZipInfo.infolist():
 print("------------------------------------------------------------")  # 60個
 
 fileZip = zipfile.ZipFile("_tmp_zzzz.zip", "w")
+
+# 撈出單層所有檔案
 for name in glob.glob("zip_folder/*"):  # 遍歷 zip_folder 目錄
     fileZip.write(name, os.path.basename(name), zipfile.ZIP_DEFLATED)
 
@@ -335,6 +339,8 @@ zipdir = zipdir + '/*'
 zipfilename = input("請輸入保存壓縮檔案的名稱 : ")
 
 fileZip = zipfile.ZipFile(zipfilename, 'w')
+
+# 撈出單層所有檔案
 for name in glob.glob(zipdir):        # 遍歷zipdir目錄
     fileZip.write(name, os.path.basename(name), zipfile.ZIP_DEFLATED)
     

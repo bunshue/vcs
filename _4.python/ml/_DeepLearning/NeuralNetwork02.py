@@ -650,6 +650,7 @@ def show_images_predictions(images, y_pred, num=10):
     show()
 
 
+# 撈出單層圖檔
 files = glob.glob("data\imagedata\*.jpg")  # 建立測試資料
 print("找到 :", len(files), "個檔案")
 

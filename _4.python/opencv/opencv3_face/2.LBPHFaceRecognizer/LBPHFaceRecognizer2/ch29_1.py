@@ -196,6 +196,7 @@ index = 0                                           # 員工編號索引
 dirs = os.listdir('ch29_6')                         # 取得所有資料夾及檔案
 for d in dirs:                                      # d是所有員工人臉的資料夾
     if os.path.isdir('ch29_6\\' + d):               # 獲得資料夾
+        # 撈出單層圖檔
         faces = glob.glob('ch29_6\\' + d + '\\*.jpg')  # 資料夾中所有人臉
         for face in faces:                          # 讀取人臉
             img = cv2.imread(face, cv2.IMREAD_GRAYSCALE)

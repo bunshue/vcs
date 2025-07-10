@@ -32,10 +32,9 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 分段线性拟合
 
-import numpy as np
 import pylab as pl
 
 def make_test_data(seg_count, point_count):
@@ -92,7 +91,6 @@ print("------------------------------------------------------------")  # 60個
 # B样条曲线与Bezier曲线
 
 import pylab as pl
-import numpy as np
 
 # B样条曲线是B样条基曲线的线性组合
 
@@ -249,8 +247,6 @@ print("------------------------------------------------------------")  # 60個
 # quad()计算积分
 
 import scipy
-import math
-import numpy as np
 from scipy import integrate
 
 def normal_pdf(x, μ, σ):
@@ -273,6 +269,7 @@ def normal_pdf_fast(n, data):
     return math.exp(-(x - μ)**2 / (2 * σ**2)) / d    
 
 from scipy import LowLevelCallable
+
 llc = LowLevelCallable(normal_pdf_fast.ctypes)
 cc = integrate.quad(llc, -100, 100, args=(0, 1))
 print(cc)
@@ -347,7 +344,6 @@ print("------------------------------------------------------------")  # 60個
 # 冲激响应与频率响应
 
 import pylab as pl
-import numpy as np
 import matplotlib
 from scipy import signal
 
@@ -517,13 +513,12 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 最小覆盖圆与最大空圆
 
 # 对于平面上一群给定的点，覆盖所点的最小圆称为最小覆盖圆，以及圆心在点的凸包区域之内，并且圆内没有任何点的最大圆。
 
 import pylab as pl
-import numpy as np
 import matplotlib
 
 """
@@ -577,6 +572,7 @@ def diameter(Points):
 # 下面创建随机100个点，并绘制它们的凸包以及候选的最远点对。
 
 from matplotlib.collections import LineCollection
+
 np.random.seed(42)
 points = np.random.randn(100, 2)
 u, l = hulls(points.tolist())
@@ -589,8 +585,8 @@ ax.plot(ua[:, 0], ua[:, 1])
 ax.plot(la[:, 0], la[:, 1])
 
 lines = [[p1, p2] for p1, p2 in rotatingCalipers(u, l)]
-lc = LineCollection(lines, colors="black", alpha=0.3)
-ax.add_collection(lc)
+line_collection = LineCollection(lines, colors="black", alpha=0.3)
+ax.add_collection(line_collection)
 ax.axis("off")
 show()
 
@@ -618,10 +614,10 @@ u, l = convex_hull_ul(points)
 pl.plot(*u.T)
 pl.plot(*l.T)
 lines = [[p1, p2] for p1, p2 in rotatingCalipers(u.tolist(), l.tolist())]
-lc = LineCollection(lines, colors="black", alpha=0.3)
+line_collection = LineCollection(lines, colors="black", alpha=0.3)
 center, r = min_2points_circle(points)
 circle = pl.Circle(center, r, fill=False, color="red")
-ax.add_collection(lc)
+ax.add_collection(line_collection)
 ax.add_artist(circle)
 ax.margins(0.1)
 ax.axis("off")
@@ -734,11 +730,10 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+sys.exit()
 # 用Kmeans算法计算图像的调色板
 
 import pylab as pl
-import numpy as np
 import matplotlib
 
 # k-平均算法把n个点划分到k个聚类中，使得每个点都属于离他最近的均值对应的聚类，以之作为聚类的标准。下面使用sklearn.datasets.make_blob()创建3个聚类，它们的中心分别为(0, 0), (5, 0), (0, 5)。

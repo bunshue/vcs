@@ -3024,6 +3024,7 @@ print("讀取模型, 並使用之 MLP")
 
 import glob, cv2
 
+# 撈出單層圖檔
 files = glob.glob("data\imagedata\*.jpg")  # 建立測試資料
 x_test = []
 y_test = []

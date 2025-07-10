@@ -546,7 +546,7 @@ plt.imshow(img_gray, cmap="gray")
 
 from matplotlib.collections import EllipseCollection
 
-ec = EllipseCollection(
+ellipse_collection = EllipseCollection(
     widths=2 * r,
     heights=2 * r,
     angles=0,
@@ -556,7 +556,7 @@ ec = EllipseCollection(
     transOffset=ax2.transData,
     offsets=np.c_[x, y],
 )
-ax2.add_collection(ec)
+ax2.add_collection(ellipse_collection)
 ax2.axis("off")
 
 show()

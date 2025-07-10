@@ -32,7 +32,7 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 #绘制带箭头的曲线
 
 import pylab as pl
@@ -128,7 +128,7 @@ ax.yaxis.set_minor_locator(LogMinorLocator())
 ax.grid()
 
 show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -140,7 +140,6 @@ import pylab as pl
 import numpy as np
 import cv2
 from matplotlib.collections import LineCollection
-
 from scipy.spatial.distance import squareform, pdist
 
 # 建立視訊編碼 fourcc
@@ -155,9 +154,9 @@ fig, ax = pl.subplots(figsize=(8, 8))
 ax.set_xlim(-2, 2)
 ax.set_ylim(-2, 2)
 scatter = ax.scatter(x, y, 10, zorder=100)
-lc = LineCollection([[(0, 0), (1, 1)]])
-lc.set_cmap("gray")
-ax.add_collection(lc)
+line_collection = LineCollection([[(0, 0), (1, 1)]])
+line_collection.set_cmap("gray")
+ax.add_collection(line_collection)
 fig.canvas.draw()
 ax.axis("off")
 canvas_map = np.asarray(fig.canvas.renderer._renderer)[:, :, 2::-1]
@@ -178,9 +177,9 @@ for i in range(300):
     i0 = i0[mask]
     i1 = i1[mask]
     lines = np.concatenate((points[i0], points[i1]), axis=-1).reshape(-1, 2, 2)
-    lc.set_segments(lines)
+    line_collection.set_segments(lines)
     length = ((lines[:, 1, :] - lines[:, 0, :])**2).sum(axis=-1)**0.5
-    lc.set_array(length)
+    line_collection.set_array(length)
     fig.canvas.draw()
     if out is None:
         # 建立影像寫入器 out

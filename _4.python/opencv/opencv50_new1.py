@@ -773,29 +773,6 @@ matrix, mask = cv2.findHomography(matched_positions1, matched_positions2, cv2.RA
 #用滑鼠修改右側圖形的四個角的位置計算出透視變換之後的圖形，
 #然後在原始圖形和變換之後的圖形之間搜尋比對點，並計算透視變換的矩陣。
 """
-
-""" no module
-#%figonly=顯示特征比對的關鍵點
-
-from matplotlib.collections import LineCollection
-from scpy2.utils.image import concat_images
-
-COLORS = np.array([[0, 0.0, 0.5], [1, 0, 0]])
-
-img_color1 = cv2.cvtColor(img_gray1, cv2.COLOR_GRAY2RGB)
-merged_img = concat_images([img_color1, img_color2], margin=0)
-
-fig, ax = plt.subplots(figsize=(12, 6))
-ax.axis("off")
-plt.imshow(merged_img)
-lines = np.concatenate([matched_positions1, matched_positions2], axis=1)
-lines[:, 2] += img_color2.shape[1]
-line_collection = LineCollection(lines.reshape(-1, 2, 2), 
-                                 colors=COLORS[mask.ravel()], lw=1, alpha=0.5)
-ax.add_collection(line_collection);
-
-show()
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

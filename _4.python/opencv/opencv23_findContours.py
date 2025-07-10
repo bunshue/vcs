@@ -14,7 +14,7 @@ OpenCV具有findContour()幫助從圖像中提取輪廓的功能。
 from opencv_common import *
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # coin.jpg用圖片先處理方法一
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coin.jpg"
 
@@ -2292,7 +2292,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("opencv 112")
 
 img_pattern = cv2.imread("data/nested_patterns.png")
@@ -2347,12 +2347,12 @@ for index in root_index:
 
 lines = [line[:, 0, :] for line in lines]
 
-from matplotlib.collections import LineCollection
-from matplotlib.collections import PolyCollection
+# 使用matplotlib.collections顯示大量曲線
+from matplotlib import collections as mc
 
 fig, ax = plt.subplots(figsize=(8, 8))
 ax.set_aspect("equal")
-polys = PolyCollection(lines, array=np.array(levels), facecolors="none")
+polys = mc.PolyCollection(lines, array=np.array(levels), facecolors="none")
 ax.add_collection(polys)
 ax.set_xlim(0, img_pattern.shape[1])
 ax.set_ylim(img_pattern.shape[0], 0)
