@@ -1998,20 +1998,7 @@ read
 resize
     img_small = cv2.resize(img, (300, 100))  # 改變尺寸
 
-
-OpenCV 的 cv2.imread 在讀取圖片時，可以在第二個參數指定圖片的格式，可用的選項有三種：
-
-數值 1
-cv2.IMREAD_COLOR
-    此為預設值，這種格式會讀取 RGB 三個 channels 的彩色圖片，而忽略透明度的 channel。
-
-數值 0
-cv2.IMREAD_GRAYSCALE
-    以灰階的格式來讀取圖片。
-數值 -1
-cv2.IMREAD_UNCHANGED
-    讀取圖片中所有的 channels，包含透明度的 channel。 
-    
+   
 ------------------------------------------------------------
 
 # cv2.namedWindow("Video Player", 0) # 設定視窗名稱
@@ -2127,81 +2114,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ 零碎的code
-
-窗口显示方式，cv2.WINDOW_NORMAL为正常显示，可以调整大小
-# cv2.WINDOW_AUTOSIZE显示原图片的大小，用户不能调整大小
-
-opencv之paste
-x_st, y_st, w, h
-
-小圖先縮放至所需大小w,h
-大圖之(y_st:y_st+h, x_st:x_st+w) = 小圖之全部
-
-後面還有一個參數
-plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB), "gray")
-
-#輸出圖片檔案時，也可以調整圖片的品質或壓縮率：
-
-# 設定 JPEG 圖片品質為 90（可用值為 0 ~ 100）
-cv2.imwrite('filename.jpg', image, [cv2.IMWRITE_JPEG_QUALITY, 90])
-
-print('存圖, 質量為5')
-cv2.imwrite("./1.jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 5])
-print('存圖, 質量為100')
-cv2.imwrite("./2.jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
-
-cv2.imwrite(filename2b, image2, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
-
-cv2.imwrite('tmp_image_2.jpg', img, [cv2.IMWRITE_JPEG_QUALITY, 80])
-
-# 設定 PNG 壓縮層級為 5（可用值為 0 ~ 9）
-cv2.imwrite('filename.png', image, [cv2.IMWRITE_PNG_COMPRESSION, 5])
-print('存圖, 壓縮為0')
-cv2.imwrite("./3.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
-print('存圖, 壓縮為9')
-cv2.imwrite("./4.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 9])
-
-cv 搬出
-#另存新檔
-filename2 = 'C:/_git/vcs/_1.data/______test_files2/human_face.jpg'
-cv2.imwrite(filename2, image)	#寫入本機圖片
-
-cv2.imwrite("face_detection.jpg", image)
-
-cv2.imwrite('7.jpg', image)
-
-
-
-一樣的意思
-plt.imshow(image0[:, :, ::-1])  # 原圖 # same
-plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))  # 原圖
-
-
-cv
-#cv2.waitKey(2000)       # 等待兩秒 ( 2000 毫秒 ) 後關閉圖片視窗
-
-
-
-
-
-src = cv2.imread("data/edge_detection/snow.jpg")  # 彩色讀取
-src = cv2.imread("data/edge_detection/geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
-
-
-
-cv2.waitKey(3000)  # 等待3秒
-cv2.destroyWindow("Peony1")  # 刪除Peony1
-
-cv2.waitKey(3000)  # 等待3秒
-cv2.destroyAllWindows()  # 刪除所有視窗
-
-
-
-lena = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
-dollar = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
-
-
-
 
 print('圖片調整成相同大小(單層)', srcDir, '=>', dstDir)
     img_car = cv2.imread(car,cv2.IMREAD_COLOR)      # 讀車子影像

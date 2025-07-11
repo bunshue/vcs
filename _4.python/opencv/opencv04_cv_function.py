@@ -132,11 +132,100 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename1)
-b, g, r = cv2.split(image)
-# print(b)
-# print(g)
-# print(r)
+img = cv2.imread(filename)  # BGR讀取
+cv2.imshow("BGR Color Space", img)
+img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)  # BGR轉HSV
+cv2.imshow("HSV Color Space", img_hsv)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp"
+
+image = cv2.imread(filename)  # 彩色讀取
+
+rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # 轉換為RGB
+hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)  # 轉換為HSV
+
+print("coordinate")
+coordinate = rgb[131, 81]  # 輸入要取得顏色的指定座標
+print(coordinate)
+
+# print("取得cv影像陣列中的資料")
+# print(array([255, 219,  79], dtype=uint8))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# =========測試下OpenCV中藍色的HSV模式值=============
+
+W, H, D = 1, 1, 3
+imageBlue = np.zeros([H, W, D], dtype=np.uint8)
+imageBlue[0, 0, 0] = 255
+Blue = imageBlue
+BlueHSV = cv2.cvtColor(Blue, cv2.COLOR_BGR2HSV)
+print("Blue = \n", Blue)
+print("BlueHSV = \n", BlueHSV)
+
+# =========測試下OpenCV中綠色的HSV模式值=============
+W, H, D = 1, 1, 3
+imageGreen = np.zeros([H, W, D], dtype=np.uint8)
+imageGreen[0, 0, 1] = 255
+Green = imageGreen
+GreenHSV = cv2.cvtColor(Green, cv2.COLOR_BGR2HSV)
+print("Green = \n", Green)
+print("GreenHSV = \n", GreenHSV)
+
+# =========測試下OpenCV中紅色的HSV模式值=============
+W, H, D = 1, 1, 3
+imageRed = np.zeros([H, W, D], dtype=np.uint8)
+imageRed[0, 0, 2] = 255
+Red = imageRed
+RedHSV = cv2.cvtColor(Red, cv2.COLOR_BGR2HSV)
+print("Red = \n", Red)
+print("RedHSV = \n", RedHSV)
+
+plt.figure("BGR轉HSV", figsize=(12, 6))
+plt.subplot(231)
+plt.imshow(cv2.cvtColor(Red, cv2.COLOR_BGR2RGB))
+plt.title("Red")
+
+plt.subplot(232)
+plt.imshow(cv2.cvtColor(Green, cv2.COLOR_BGR2RGB))
+plt.title("Green")
+
+plt.subplot(233)
+plt.imshow(cv2.cvtColor(Blue, cv2.COLOR_BGR2RGB))
+plt.title("Blue")
+
+plt.subplot(234)
+plt.imshow(cv2.cvtColor(RedHSV, cv2.COLOR_BGR2RGB))
+plt.title("RedHSV")
+
+plt.subplot(235)
+plt.imshow(cv2.cvtColor(GreenHSV, cv2.COLOR_BGR2RGB))
+plt.title("GreenHSV")
+
+plt.subplot(236)
+plt.imshow(cv2.cvtColor(BlueHSV, cv2.COLOR_BGR2RGB))
+plt.title("BlueHSV")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+image_bgr = cv2.imread(filename1)  # 彩色讀取
+
+b, g, r = cv2.split(image_bgr)
+image_rgb = cv2.merge([r, g, b])
+
+plt.imshow(image_rgb)
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

@@ -2033,7 +2033,6 @@ plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 plt.title("Image")
 show()
 
-
 print("複製貼上圖片的一部分")
 
 # Copy part of image
@@ -2045,67 +2044,6 @@ plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 plt.title("Image")
 show()
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-""" CV 視窗使用
-filename = filename1
-
-img1 = cv2.imread(filename)  # 彩色讀取
-img2 = cv2.imread(filename, 0)  # 灰色讀取
-
-plt.figure(figsize=(12, 8))
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(img1, cv2.COLOR_BGR2RGB))
-plt.title("Peony1")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))
-plt.title("Peony2")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-filename = filename1
-
-cv2.namedWindow("Peony")  # 使用預設
-img = cv2.imread(filename)  # 彩色讀取
-
-cv2.imshow("Peony", img)  # 顯示影像img
-
-cv2.waitKey(3000)  # 等待3秒
-cv2.destroyAllWindows()  # 刪除所有視窗
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename)  # BGR 讀取
-cv2.imshow("Peony", img)
-img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RBG
-cv2.imshow("RGB Color Space", img_rgb)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename)  # BGR讀取
-cv2.imshow("BGR Color Space", img)
-img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)  # BGR轉HSV
-cv2.imshow("HSV Color Space", img_hsv)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-cv2.namedWindow("Peony")  # 使用預設
-img = cv2.imread(filename)  # 彩色讀取
-cv2.line(img, (10, 300), (250, 300), BLUE, 5)  # 輸出線條
-cv2.rectangle(img, (20, 20), (240, 250), RED, 2)  # 輸出矩陣
-cv2.putText(img, "Peony", (10, 250), cv2.FONT_ITALIC, 3, BLUE, 8)  # 輸出文字
-cv2.imshow("Peony", img)  # 顯示影像img
-cv2.waitKey(3000)  # 等待3秒
-cv2.destroyAllWindows()  # 刪除所有視窗
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2167,7 +2105,6 @@ plt.title("")
 
 plt.suptitle("相加")
 show()
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2265,12 +2202,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-# ---------------------  ddddddddddddddddddddddddddddd
-
-
-# ---------------------  ddddddddddddddddddddddddddddd
-
 edge_x[edge_x > 255] = 255
 edge_y[edge_y > 255] = 255
 
@@ -2306,12 +2237,5 @@ edge = edge.astype(np.uint8)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("------------------------------")  # 30個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------")  # 30個
