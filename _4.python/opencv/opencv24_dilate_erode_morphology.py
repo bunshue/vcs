@@ -1,7 +1,7 @@
 """
 數學形態學
-cv2.dilate()  # dilate 擴大 膨脹 白色變大
-cv2.erode()  # erode 侵蝕 白色變小
+cv2.dilate()  # dilate 膨脹 擴大 白色變大
+cv2.erode()   # erode  侵蝕      白色變小
 cv2.morphologyEx()  # morphology 形態學 構詞學
 """
 
@@ -24,81 +24,57 @@ def draw_line(image):
 
 
 print("------------------------------------------------------------")  # 60個
+# 膨脹/侵蝕 cv2.dilate/cv2.erode ST
 print("------------------------------------------------------------")  # 60個
 
-W, H, D = 10, 10, 3
+print("膨脹/侵蝕")
+
+W, H = 10, 10
 image = np.zeros((H, W), np.uint8)
 image[3:8, 3:8] = 255
 
-plt.figure("侵蝕/擴張", figsize=(10, 6))
 plt.subplot(131)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
+plt.title("原圖 10X10")
 
-W, H, D = 1, 3, 3
-kernel = np.ones((H, W), np.uint8)
+W, H = 1, 3
+kernel = np.ones((H, W), np.uint8)  # 建立WXH內核
+dilation = cv2.dilate(image, kernel)  # 膨脹
 erosion = cv2.erode(image, kernel)  # 侵蝕
-print("image = \n", image)
-print("kernel = \n", kernel)
-print("erosion = \n", erosion)
 
 plt.subplot(132)
+plt.imshow(cv2.cvtColor(dilation, cv2.COLOR_BGR2RGB))
+plt.title("膨脹")
+
+plt.subplot(133)
 plt.imshow(cv2.cvtColor(erosion, cv2.COLOR_BGR2RGB))
 plt.title("侵蝕")
 
-W, H, D = 1, 3, 3
-kernel = np.ones((H, W), np.uint8)
-dilation = cv2.dilate(image, kernel)
-print("image = \n", image)
-print("kernel = \n", kernel)
-print("dilation\n", dilation)
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(dilation, cv2.COLOR_BGR2RGB))
-plt.title("擴張")
+plt.suptitle("核心1X3")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("dilate 擴大 膨脹 效果")
+image = np.zeros((7, 7), np.uint8)
+image[2:5, 2:5] = 1  # 建立前景影像
+kernel = np.ones((3, 3), np.uint8)  # 建立3X3內核
+dst = cv2.dilate(image, kernel)  # 膨脹.dilate
+print(f"image = \n {image}")
+print(f"Dilation = \n {dst}")
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/kernel.bmp"
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+print("侵蝕(Erosion) 白色變小")
 
-print("定義矩形結構元素 kernel")
-kernel1 = cv2.getStructuringElement(cv2.MORPH_RECT, (59, 59))
-kernel2 = cv2.getStructuringElement(cv2.MORPH_CROSS, (59, 59))
-kernel3 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (59, 59))
-# print("kernel1 =\n", kernel1)
-# print("kernel2 =\n", kernel2)
-# print("kernel3 =\n", kernel3)
-image_dilate1 = cv2.dilate(image, kernel1)
-image_dilate2 = cv2.dilate(image, kernel2)
-image_dilate3 = cv2.dilate(image, kernel3)
-
-plt.figure(figsize=(12, 8))
-plt.subplot(221)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(222)
-plt.imshow(cv2.cvtColor(image_dilate1, cv2.COLOR_BGR2RGB))
-plt.title("dilate 白色膨脹 方 MORPH_RECT")
-
-plt.subplot(223)
-plt.imshow(cv2.cvtColor(image_dilate2, cv2.COLOR_BGR2RGB))
-plt.title("dilate 白色膨脹 叉 MORPH_CROSS")
-
-plt.subplot(224)
-plt.imshow(cv2.cvtColor(image_dilate3, cv2.COLOR_BGR2RGB))
-plt.title("dilate 白色膨脹 橢 MORPH_ELLIPSE")
-
-plt.suptitle("白色區域擴大、膨脹了")
-show()
+image = np.zeros((7, 7), np.uint8)
+image[1:6, 1:6] = 1  # 建立前景影像
+kernel = np.ones((3, 3), np.uint8)  # 建立3X3內核
+dst = cv2.erode(image, kernel)  # 侵蝕.erode
+print(f"image = \n {image}")
+print(f"Erosion = \n {dst}")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -108,15 +84,18 @@ print("dilate 擴大 膨脹 效果")
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/dilation.bmp"
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
 
-image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取 + 有透明度
 
 print("定義矩形結構元素 kernel")
+
 kernel1 = np.ones((3, 3), np.uint8)
 kernel2 = np.ones((5, 5), np.uint8)
 kernel3 = np.ones((7, 7), np.uint8)
+
 image_dilate1 = cv2.dilate(image, kernel1)
 image_dilate2 = cv2.dilate(image, kernel2)
 image_dilate3 = cv2.dilate(image, kernel3, iterations=3)
+
 draw_line(image_dilate1)
 draw_line(image_dilate2)
 draw_line(image_dilate3)
@@ -148,7 +127,7 @@ print("------------------------------------------------------------")  # 60個
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/erode.bmp"
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
 
-image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取 + 有透明度
 
 plt.figure("erode 侵蝕 效果", figsize=(12, 8))
 
@@ -157,7 +136,8 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 print("erode 侵蝕 效果 1")
-kernel1 = np.ones((3, 3), np.uint8)
+kernel1 = np.ones((3, 3), np.uint8)  # 建立3x3內核
+
 image_erosion1 = cv2.erode(image, kernel1)
 
 plt.subplot(222)
@@ -166,7 +146,8 @@ plt.imshow(cv2.cvtColor(image_erosion1, cv2.COLOR_BGR2RGB))
 plt.title("erode 侵蝕 效果 1")
 
 print("erode 侵蝕 效果 2")
-kernel2 = np.ones((5, 5), np.uint8)
+kernel2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
+
 image_erosion2 = cv2.erode(image, kernel2)
 
 plt.subplot(223)
@@ -175,7 +156,8 @@ plt.imshow(cv2.cvtColor(image_erosion2, cv2.COLOR_BGR2RGB))
 plt.title("erode 侵蝕 效果 2")
 
 print("erode 侵蝕 效果 3 加 iterations")
-kernel3 = np.ones((7, 7), np.uint8)
+kernel3 = np.ones((7, 7), np.uint8)  # 建立7x7內核
+
 image_erosion3 = cv2.erode(image, kernel3, iterations=3)
 
 plt.subplot(224)
@@ -189,7 +171,191 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("erode-dilate")
+
+print("膨脹/侵蝕")
+print("膨脹(Dilate) 白色變大")
+print("侵蝕(Erosion) 白色變小")
+
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
+
+image = cv2.imread(filename)  # 彩色讀取
+
+kernel1 = np.ones((3, 3), np.uint8)  # 建立3x3內核
+dilation1 = cv2.dilate(image, kernel1)  # 膨脹.dilate
+
+kernel2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
+dilation2 = cv2.dilate(image, kernel2)  # 膨脹.dilate
+
+kernel3 = np.ones((7, 7), np.uint8)  # 建立7x7內核
+dilation3 = cv2.dilate(image, kernel3)  # 膨脹.dilate
+
+kernel1 = np.ones((3, 3), np.uint8)  # 建立3x3內核
+erosion1 = cv2.erode(image, kernel1)  # 侵蝕.erode
+
+kernel2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
+erosion2 = cv2.erode(image, kernel2)  # 侵蝕.erode
+
+kernel3 = np.ones((7, 7), np.uint8)  # 建立7x7內核
+erosion3 = cv2.erode(image, kernel3)  # 侵蝕.erode
+
+plt.figure(figsize=(12, 8))
+plt.subplot(241)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(242)
+plt.imshow(cv2.cvtColor(dilation1, cv2.COLOR_BGR2RGB))
+plt.title("膨脹3X3")
+
+plt.subplot(243)
+plt.imshow(cv2.cvtColor(dilation2, cv2.COLOR_BGR2RGB))
+plt.title("膨脹5X5")
+
+plt.subplot(244)
+plt.imshow(cv2.cvtColor(dilation3, cv2.COLOR_BGR2RGB))
+plt.title("膨脹7X7")
+
+plt.subplot(246)
+plt.imshow(cv2.cvtColor(erosion1, cv2.COLOR_BGR2RGB))
+plt.title("侵蝕3X3")
+
+plt.subplot(247)
+plt.imshow(cv2.cvtColor(erosion2, cv2.COLOR_BGR2RGB))
+plt.title("侵蝕5X5")
+
+plt.subplot(248)
+plt.imshow(cv2.cvtColor(erosion3, cv2.COLOR_BGR2RGB))
+plt.title("侵蝕7X7")
+
+plt.suptitle("侵蝕/膨脹")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
+
+image = cv2.imread(filename)  # 彩色讀取
+# image = cv2.imread("data/morphology/night.jpg")  # 彩色讀取
+
+kernel = np.ones((9, 9), np.uint8)  # 建立9x9內核
+
+dilation = cv2.dilate(image, kernel)  # 膨脹.dilate
+
+erosion = cv2.erode(image, kernel)  # 侵蝕.erode
+
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(dilation, cv2.COLOR_BGR2RGB))
+plt.title("膨脹")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(erosion, cv2.COLOR_BGR2RGB))
+plt.title("侵蝕")
+
+plt.suptitle("核心9X9")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+image = cv2.imread("data/morphology/k.jpg")  # 彩色讀取
+
+kernel = np.ones((5, 5), np.uint8)  # 建立5x5內核
+
+dst1 = cv2.dilate(image, kernel)  # 膨脹.dilate
+dst2 = cv2.erode(image, kernel)  # 侵蝕.erode
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+o = cv2.imread("images/rice.png", cv2.IMREAD_UNCHANGED)  # 彩色讀取 + 有透明度
+
+k = np.ones((5, 5), np.uint8)
+e = cv2.erode(o, k)
+b = cv2.subtract(o, e)
+
+plt.figure(figsize=(12, 8))
+plt.subplot(131)
+plt.imshow(o)
+
+plt.subplot(132)
+plt.imshow(e)
+
+plt.subplot(133)
+plt.imshow(b)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+# 膨脹/侵蝕 cv2.dilate/cv2.erode SP
+print("------------------------------------------------------------")  # 60個
+
+
+print("dilate 擴大 膨脹 效果")
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/kernel.bmp"
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
+
+image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取 + 有透明度
+
+print("定義矩形結構元素 kernel")
+
+kernel1 = cv2.getStructuringElement(cv2.MORPH_RECT, (59, 59))
+kernel2 = cv2.getStructuringElement(cv2.MORPH_CROSS, (59, 59))
+kernel3 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (59, 59))
+# print("kernel1 =\n", kernel1)
+# print("kernel2 =\n", kernel2)
+# print("kernel3 =\n", kernel3)
+
+image_dilate1 = cv2.dilate(image, kernel1)
+image_dilate2 = cv2.dilate(image, kernel2)
+image_dilate3 = cv2.dilate(image, kernel3)
+
+plt.figure(figsize=(12, 8))
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(image_dilate1, cv2.COLOR_BGR2RGB))
+plt.title("dilate 白色膨脹 方 MORPH_RECT")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(image_dilate2, cv2.COLOR_BGR2RGB))
+plt.title("dilate 白色膨脹 叉 MORPH_CROSS")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(image_dilate3, cv2.COLOR_BGR2RGB))
+plt.title("dilate 白色膨脹 橢 MORPH_ELLIPSE")
+
+plt.suptitle("白色區域擴大、膨脹了")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("膨脹/侵蝕")
 
 filename = "data/flower.png"
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
@@ -197,64 +363,50 @@ filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 # filename = "C:/_git/vcs/_4.python/_data/bear.jpg"
 # filename = "C:/_git/vcs/_4.python/_data/panda.jpg"
 
+image = cv2.imread(filename)  # 彩色讀取
 
-original_img = cv2.imread(filename)
-
-res = cv2.resize(
-    original_img, None, fx=0.6, fy=0.6, interpolation=cv2.INTER_CUBIC
-)  # 圖形太大了縮小一點
-cv2.imshow("original_img", res)  # 原圖像
-
-B, G, R = cv2.split(res)  # 獲取紅色通道
-
-img = R
-
-cv2.imshow("R_channel_img", img)  # 紅色通道圖
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 #        cv2.threshold(image, 閥值, 最大灰度值, 使用的二值化方法)
-_, RedThresh = cv2.threshold(img, 160, 255, cv2.THRESH_BINARY)
-cv2.imshow("RedThresh", RedThresh)  # 紅色閾值圖像
+_, RedThresh = cv2.threshold(image_gray, 160, 255, cv2.THRESH_BINARY)
+
 
 # OpenCV定義的結構矩形元素
-kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))  # 建立內核
 
-eroded = cv2.erode(RedThresh, kernel)  # 腐蝕圖像
-dilated = cv2.dilate(RedThresh, kernel)  # 膨脹圖像
+dilation = cv2.dilate(RedThresh, kernel)  # 膨脹圖像
 
-cv2.imshow("Eroded Image", eroded)  # 顯示腐蝕后的圖像
-cv2.imshow("Dilated Image", dilated)  # 顯示膨脹后的圖像
+erosion = cv2.erode(RedThresh, kernel)  # 腐蝕圖像
 
 
 # NumPy定義的結構元素
-NpKernel = np.uint8(np.ones((3, 3)))
+NpKernel = np.uint8(np.ones((3, 3)))  # 建立3X3內核
 Nperoded = cv2.erode(RedThresh, NpKernel)  # 腐蝕圖像
+# cv2.imshow("Eroded by NumPy kernel", Nperoded)  # 顯示腐蝕后的圖像
 
-cv2.imshow("Eroded by NumPy kernel", Nperoded)  # 顯示腐蝕后的圖像
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread("data/jianzhu.png", cv2.IMREAD_GRAYSCALE)
+image = cv2.imread("data/jianzhu.png", cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
-kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))  # 建立內核
 
-dilate_img = cv2.dilate(image, kernel)
-erode_img = cv2.erode(image, kernel)
+dilation = cv2.dilate(image, kernel)
+
+erosion = cv2.erode(image, kernel)
 
 # 將兩幅圖像相減獲得邊；cv2.absdiff參數：(膨脹后的圖像，腐蝕后的圖像)
 # 上面得到的結果是灰度圖，將其二值化以便觀察結果
 # 反色，對二值圖每個像素取反
 
-absdiff_img = cv2.absdiff(dilate_img, erode_img)
+absdiff_img = cv2.absdiff(dilation, erosion)
 retval, threshold_img = cv2.threshold(absdiff_img, 40, 255, cv2.THRESH_BINARY)
 result = cv2.bitwise_not(threshold_img)
 
 cv2.imshow("jianzhu", image)
-cv2.imshow("dilate_img", dilate_img)
-cv2.imshow("erode_img", erode_img)
+cv2.imshow("dilation", dilation)
+cv2.imshow("erosion", erosion)
 cv2.imshow("absdiff_img", absdiff_img)
 cv2.imshow("threshold_img", threshold_img)
 cv2.imshow("result", result)
@@ -266,14 +418,15 @@ print("------------------------------------------------------------")  # 60個
 
 print("morphology 形態學")
 
-# original_img = cv2.imread("data/lena.png")
-original_img = cv2.imread("data/lena.png", 0)
+# image = cv2.imread("data/lena.png")  # 彩色讀取
 
-kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))  # 定義矩形結構元素
-TOPHAT_img = cv2.morphologyEx(original_img, cv2.MORPH_TOPHAT, kernel)  # 頂帽運算
-BLACKHAT_img = cv2.morphologyEx(original_img, cv2.MORPH_BLACKHAT, kernel)  # 黒帽運算
+image = cv2.imread("data/lena.png", 0)  # 灰階讀取
 
-cv2.imshow("original_img", original_img)
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))  # 定義矩形結構元素  # 建立內核
+TOPHAT_img = cv2.morphologyEx(image, cv2.MORPH_TOPHAT, kernel)  # 頂帽運算
+BLACKHAT_img = cv2.morphologyEx(image, cv2.MORPH_BLACKHAT, kernel)  # 黒帽運算
+
+cv2.imshow("original_image", image)
 cv2.imshow("TOPHAT_img", TOPHAT_img)
 cv2.imshow("BLACKHAT_img", BLACKHAT_img)
 
@@ -284,12 +437,13 @@ print("------------------------------------------------------------")  # 60個
 
 print("bitwise")
 
-original_img = cv2.imread("data/lena.png", 0)
+image = cv2.imread("data/lena.png", 0)  # 灰階讀取
+
 gray_img = cv2.resize(
-    original_img, None, fx=0.8, fy=0.8, interpolation=cv2.INTER_CUBIC
+    image, None, fx=0.8, fy=0.8, interpolation=cv2.INTER_CUBIC
 )  # 圖形太大了縮小一點
 
-kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))  # 定義矩形結構元素(核大小為3效果好)
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))  # 定義矩形結構元素(核大小為3效果好)  # 建立內核
 TOPHAT_img = cv2.morphologyEx(gray_img, cv2.MORPH_TOPHAT, kernel)  # 頂帽運算
 BLACKHAT_img = cv2.morphologyEx(gray_img, cv2.MORPH_BLACKHAT, kernel)  # 黒帽運算
 
@@ -308,7 +462,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("absdiff")
 
-image = cv2.imread("data/jianzhu.png", 0)
+image = cv2.imread("data/jianzhu.png", 0)  # 灰階讀取
+
 original_image = image.copy()
 # 構造5×5的結構元素，分別為十字形、菱形、方形和X型
 cross = cv2.getStructuringElement(cv2.MORPH_CROSS, (5, 5))
@@ -353,13 +508,18 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
-img = cv2.imread(coin_filename)
 
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-ishow = img.copy()
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-kernel = np.ones((3, 3), np.uint8)
+image = cv2.imread(coin_filename)  # 彩色讀取
+
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+ishow = image.copy()
+
+ret, thresh = cv2.threshold(image_gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+kernel = np.ones((3, 3), np.uint8)  # 建立3X3內核
+
 opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
 dist_transform = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
 ret, fore = cv2.threshold(dist_transform, 0.7 * dist_transform.max(), 255, 0)
@@ -380,12 +540,18 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
-img = cv2.imread(coin_filename)
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-ishow = img.copy()
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-kernel = np.ones((3, 3), np.uint8)
+
+image = cv2.imread(coin_filename)  # 彩色讀取
+
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+ishow = image.copy()
+
+ret, thresh = cv2.threshold(image_gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+kernel = np.ones((3, 3), np.uint8)  # 建立3X3內核
+
 opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
 bg = cv2.dilate(opening, kernel, iterations=3)
 dist = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
@@ -412,12 +578,18 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
-img = cv2.imread(coin_filename)
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-ishow = img.copy()
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-kernel = np.ones((3, 3), np.uint8)
+
+image = cv2.imread(coin_filename)  # 彩色讀取
+
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+ishow = image.copy()
+
+ret, thresh = cv2.threshold(image_gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+kernel = np.ones((3, 3), np.uint8)  # 建立3X3內核
+
 opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
 sure_bg = cv2.dilate(opening, kernel, iterations=3)
 dist_transform = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
@@ -442,12 +614,18 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
-img = cv2.imread(coin_filename)
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-ishow = img.copy()
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-kernel = np.ones((3, 3), np.uint8)
+
+image = cv2.imread(coin_filename)  # 彩色讀取
+
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+ishow = image.copy()
+
+ret, thresh = cv2.threshold(image_gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+kernel = np.ones((3, 3), np.uint8)  # 建立3X3內核
+
 opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
 sure_bg = cv2.dilate(opening, kernel, iterations=3)
 dist_transform = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
@@ -473,12 +651,18 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
-img = cv2.imread(coin_filename)
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-ishow = img.copy()
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-kernel = np.ones((3, 3), np.uint8)
+
+image = cv2.imread(coin_filename)  # 彩色讀取
+
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+ishow = image.copy()
+
+ret, thresh = cv2.threshold(image_gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+kernel = np.ones((3, 3), np.uint8)  # 建立3X3內核
+
 opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
 sure_bg = cv2.dilate(opening, kernel, iterations=3)
 dist_transform = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
@@ -488,35 +672,15 @@ unknown = cv2.subtract(sure_bg, sure_fg)
 ret, markers = cv2.connectedComponents(sure_fg)
 markers = markers + 1
 markers[unknown == 255] = 0
-markers = cv2.watershed(img, markers)
-img[markers == -1] = [0, 255, 0]
+markers = cv2.watershed(image, markers)
+image[markers == -1] = [0, 255, 0]
 
 plt.figure(figsize=(12, 8))
 plt.subplot(121)
 plt.imshow(ishow)
 
 plt.subplot(122)
-plt.imshow(img)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-o = cv2.imread("images/rice.png", cv2.IMREAD_UNCHANGED)
-k = np.ones((5, 5), np.uint8)
-e = cv2.erode(o, k)
-b = cv2.subtract(o, e)
-
-plt.figure(figsize=(12, 8))
-plt.subplot(131)
-plt.imshow(o)
-
-plt.subplot(132)
-plt.imshow(e)
-
-plt.subplot(133)
-plt.imshow(b)
+plt.imshow(image)
 
 show()
 
@@ -524,10 +688,12 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/opening.bmp"
-img1 = cv2.imread(filename)
+
+img1 = cv2.imread(filename)  # 彩色讀取
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/opening2.bmp"
-img2 = cv2.imread(filename)
+
+img2 = cv2.imread(filename)  # 彩色讀取
 
 print("morphologyEx 效果 1")
 k = np.ones((10, 10), np.uint8)
@@ -557,10 +723,12 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/closing.bmp"
-img1 = cv2.imread(filename)
+
+img1 = cv2.imread(filename)  # 彩色讀取
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/closing2.bmp"
-img2 = cv2.imread(filename)
+
+img2 = cv2.imread(filename)  # 彩色讀取
 
 print("morphologyEx 效果 2")
 k = np.ones((10, 10), np.uint8)
@@ -590,10 +758,12 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/gradient.bmp"
-image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+
+image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取 + 有透明度
 
 print("morphologyEx 效果 3")
 k = np.ones((5, 5), np.uint8)
+
 r = cv2.morphologyEx(image, cv2.MORPH_GRADIENT, k)
 
 plt.figure(figsize=(12, 8))
@@ -611,10 +781,12 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/tophat.bmp"
-image1 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+
+image1 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取 + 有透明度
 
 filename = filename_lena_gray
-image2 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+
+image2 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取 + 有透明度
 
 print("morphologyEx 效果 4")
 k = np.ones((5, 5), np.uint8)
@@ -644,10 +816,12 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/blackhat.bmp"
-image1 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+
+image1 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取 + 有透明度
 
 filename = filename_lena_gray
-image2 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+
+image2 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取 + 有透明度
 
 print("morphologyEx 效果 5")
 k = np.ones((5, 5), np.uint8)
@@ -679,9 +853,9 @@ print("------------------------------------------------------------")  # 60個
 print("defogging")
 
 
-def zmMinFilterGray(src, r=7):
+def zmMinFilterGray(image, r=7):
     # 最小值濾波，r是濾波器半徑
-    return cv2.erode(src, np.ones((2 * r + 1, 2 * r + 1)))
+    return cv2.erode(image, np.ones((2 * r + 1, 2 * r + 1)))
 
 
 def guidedfilter(I, p, r, eps):
@@ -739,12 +913,15 @@ print("------------------------------------------------------------")  # 60個
 
 print("open-close")
 
-original_img = cv2.imread("data/flower.png", 0)
+image = cv2.imread("data/flower.png", 0)  # 灰階讀取
+
 gray_res = cv2.resize(
-    original_img, None, fx=0.8, fy=0.8, interpolation=cv2.INTER_CUBIC
+    image, None, fx=0.8, fy=0.8, interpolation=cv2.INTER_CUBIC
 )  # 圖形太大了縮小一點
-# B, G, img = cv2.split(res)
-# _,RedThresh = cv2.threshold(img,160,255,cv2.THRESH_BINARY) #設定紅色通道閾值160（閾值影響開閉運算效果）
+
+# B, G, image = cv2.split(res)
+# _,RedThresh = cv2.threshold(image, 160, 255, cv2.THRESH_BINARY)  # 設定紅色通道閾值160（閾值影響開閉運算效果）
+
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))  # 定義矩形結構元素
 # 閉運算1
 closed1 = cv2.morphologyEx(gray_res, cv2.MORPH_CLOSE, kernel, iterations=1)
@@ -770,17 +947,19 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread(filename)
-cv2.imshow("image1", img)  # 原始影像
+image = cv2.imread(filename)  # 彩色讀取
 
-img2 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
+cv2.imshow("image1", image)
 
-img = cv2.erode(img, kernel)  # 先侵蝕，將白色小圓點移除
-cv2.imshow("image2", img)  # 侵蝕後的影像
+img2 = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-img = cv2.dilate(img, kernel)  # 再膨脹，白色小點消失
-cv2.imshow("image3", img)  # 膨脹後的影像
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))  # 建立11x11內核
+
+image = cv2.erode(image, kernel)  # 先侵蝕，將白色小圓點移除
+cv2.imshow("image2", image)  # 侵蝕後的影像
+
+image = cv2.dilate(image, kernel)  # 再膨脹，白色小點消失
+cv2.imshow("image3", image)  # 膨脹後的影像
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -792,18 +971,17 @@ filename = "C:/_git/vcs/_4.python/opencv/data/morphology//dilate_erode1.png"
 
 print("形態學處理 erode")
 
-# 檔案 => cv2影像
-I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 # 創建結構元
 s = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
 
 # 腐蝕圖像
-r = cv2.erode(I, s)
+erosion = cv2.erode(image_gray, s)
 
 # 顯示原圖和腐蝕後的結果
-cv2.imshow("I", I)
-cv2.imshow("erode", r)
+cv2.imshow("Image Gray", image_gray)
+cv2.imshow("erosion", erosion)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -815,11 +993,8 @@ print("形態學處理 dilate")
 
 """ fail
 if __name__ =="__main__":
-    #第一步：讀入圖像
-    # 檔案 => cv2影像
-    I = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
-    #顯示原圖
-    cv2.imshow("I",I)
+    image_gray = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+    cv2.imshow("Image Gray", image_gray)
     #結構元半徑,迭代次數
     r,i = 1,1
     MAX_R,MAX_I = 20,20
@@ -839,7 +1014,7 @@ if __name__ =="__main__":
         #創建結構元
         s = cv2.getStructuringElement(cv2.MORPH_GRADIENT,(2*r+1,2*r+1))
         #膨脹圖像
-        d = cv2.erode(I,s,iterations=i)
+        d = cv2.erode(image_gray, s, iterations=i)
         #顯示膨脹效果
         cv2.imshow("dilate",d)
 
@@ -854,37 +1029,40 @@ print("------------------------------------------------------------")  # 60個
 
 print("形態學處理 open")
 
-# 第一步：讀入圖像
-# 檔案 => cv2影像
-I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology//dilate_erode1.png"
+
+image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 # 創建結構元
 s = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
 
-# 腐蝕圖像
-d = cv2.morphologyEx(I, cv2.MORPH_OPEN, s, iterations=1)
+# 侵蝕圖像
+d = cv2.morphologyEx(image_gray, cv2.MORPH_OPEN, s, iterations=1)
 
-# 顯示原圖和腐蝕後的結果
-cv2.imshow("I", I)
-cv2.imshow("open", d)
+# 顯示原圖和侵蝕後的結果
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image_gray, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(d, cv2.COLOR_BGR2RGB))
+plt.title("侵蝕")
+
+plt.suptitle("形態學處理 open")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# fail
-
+"""
 print("形態學處理 mor")
 print("按 ESC 離開")
 
-# 第一步：讀入圖像
-# 檔案 => cv2影像
-I = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 # 顯示原圖
-cv2.imshow("I", I)
+cv2.imshow("Image Gray", image_gray)
 
 # 結構元半徑，迭代次數
 r, i = 1, 1
@@ -914,7 +1092,7 @@ while True:
     s = cv2.getStructuringElement(cv2.MORPH_RECT, (2 * r + 1, 2 * r + 1))
 
     # 形態學處理
-    d = cv2.morphologyEx(I, cv2.MORPH_GRADIENT, s, iterations=i)
+    d = cv2.morphologyEx(image_gray, cv2.MORPH_GRADIENT, s, iterations=i)
 
     # 顯示效果
     cv2.imshow("morphology", d)
@@ -925,178 +1103,70 @@ while True:
 
 
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("侵蝕(Erosion) 白色變小")
-
-src = np.zeros((7, 7), np.uint8)
-src[1:6, 1:6] = 1  # 建立前景影像
-kernel = np.ones((3, 3), np.uint8)  # 建立內核
-dst = cv2.erode(src, kernel)  # 腐蝕.erode
-print(f"src = \n {src}")
-print(f"kernel = \n {kernel}")
-print(f"Erosion = \n {dst}")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("侵蝕(Erosion) 白色變小")
-
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
-filename = "dilate_erode2.png"
 
-src = cv2.imread(filename)
-cv2.imshow("src", src)
-
-kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
-dst1 = cv2.erode(src, kernel)  # 腐蝕.erode
-cv2.imshow("after erosion 3 x 3", dst1)
-
-kerne2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
-dst2 = cv2.erode(src, kerne2)  # 腐蝕.erode
-cv2.imshow("after erosion 5 x 5", dst2)
-
-kerne3 = np.ones((7, 7), np.uint8)  # 建立7x7內核
-dst3 = cv2.erode(src, kerne3)  # 腐蝕.erode
-cv2.imshow("after erosion 7 x 7", dst3)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("膨脹(Dilate) 白色變大")
-
-filename = "dilate_erode2.png"
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
-src = cv2.imread(filename)
-cv2.imshow("src", src)
-
-kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
-dst1 = cv2.dilate(src, kernel)  # 膨脹.dilate
-cv2.imshow("after dilation 3 x 3", dst1)
-
-kerne2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
-dst2 = cv2.dilate(src, kerne2)  # 膨脹.dilate
-cv2.imshow("after dilation 5 x 5", dst2)
-
-kerne3 = np.ones((7, 7), np.uint8)  # 建立7x7內核
-dst3 = cv2.dilate(src, kerne3)  # 膨脹.dilate
-cv2.imshow("after dilation 7 x 7", dst3)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-src = np.zeros((7, 7), np.uint8)
-src[2:5, 2:5] = 1  # 建立前景影像
-kernel = np.ones((3, 3), np.uint8)  # 建立內核
-dst = cv2.dilate(src, kernel)  # 膨脹.dilate
-print(f"src = \n {src}")
-print(f"kernel = \n {kernel}")
-print(f"Dilation = \n {dst}")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-filename = "dilate_erode2.png"
-
-src = cv2.imread(filename)
-cv2.imshow("src", src)
+image = cv2.imread(filename)  # 彩色讀取
 
 kernel1 = np.ones((3, 3), np.uint8)  # 建立3x3內核
-dst1 = cv2.morphologyEx(src, cv2.MORPH_OPEN, kernel1)  # 開運算
-cv2.imshow("after Opening 3 x 3", dst1)
+dst1 = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel1)  # 開運算
 
 kernel2 = np.ones((5, 5), np.uint8)  # 建立5x5內核
-dst2 = cv2.morphologyEx(src, cv2.MORPH_OPEN, kernel2)  # 開運算
-cv2.imshow("after Opening 5 x 5", dst2)
+dst2 = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel2)  # 開運算
 
 kernel3 = np.ones((7, 7), np.uint8)  # 建立7x7內核
-dst3 = cv2.morphologyEx(src, cv2.MORPH_OPEN, kernel3)  # 開運算
-cv2.imshow("after Opening 7 x 7", dst3)
+dst3 = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel3)  # 開運算
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖 10X10")
 
-print("------------------------------------------------------------")  # 60個
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))
+plt.title("開運算3X3")
 
-filename = "dilate_erode2.png"
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))
+plt.title("開運算5X5")
 
-src = cv2.imread(filename)
-cv2.imshow("src", src)
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(dst3, cv2.COLOR_BGR2RGB))
+plt.title("開運算7X7")
 
-kernel = np.ones((9, 9), np.uint8)  # 建立9x9內核
+plt.suptitle("開運算")
 
-mid = cv2.erode(src, kernel)  # 腐蝕.erode
-cv2.imshow("after erosion 9 x 9", mid)
-
-dst = cv2.dilate(mid, kernel)  # 膨脹.dilate
-cv2.imshow("after dilation 9 x 9", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/morphology/night.jpg")
-cv2.imshow("src", src)
+image = cv2.imread("data/morphology/snowman.jpg")  # 彩色讀取
 
-kernel = np.ones((9, 9), np.uint8)  # 建立9x9內核
-
-mid = cv2.dilate(src, kernel)  # 膨脹.dilate
-cv2.imshow("after dilation 9 x 9", mid)
-
-dst = cv2.erode(mid, kernel)  # 腐蝕.erode
-cv2.imshow("after erosion 9 x 9", dst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread("data/morphology/k.jpg")
-cv2.imshow("src", src)
-
-kernel = np.ones((5, 5), np.uint8)  # 建立5x5內核
-
-dst1 = cv2.dilate(src, kernel)  # 膨脹.dilate
-cv2.imshow("after dilation 5 x 5", dst1)
-
-dst2 = cv2.erode(src, kernel)  # 腐蝕.erode
-cv2.imshow("after erosion 5 x 5", dst2)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread("data/morphology/snowman.jpg")
-cv2.imshow("src", src)
+cv2.imshow("image", image)
 
 kernel = np.ones((11, 11), np.uint8)  # 建立11x11內核
 
-dst = cv2.morphologyEx(src, cv2.MORPH_CLOSE, kernel)  # 閉運算
+dst = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel)  # 閉運算
+
 cv2.imshow("after Closing 11 x 11", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/morphology/k.jpg")
-cv2.imshow("src", src)
+image = cv2.imread("data/morphology/k.jpg")  # 彩色讀取
+
+cv2.imshow("image", image)
 
 kernel = np.ones((5, 5), np.uint8)  # 建立5x5內核
 
-dst = cv2.morphologyEx(src, cv2.MORPH_GRADIENT, kernel)  # gradient
+dst = cv2.morphologyEx(image, cv2.MORPH_GRADIENT, kernel)  # gradient
 cv2.imshow("after morpological gradient", dst)
 
 cv2.waitKey()
@@ -1105,38 +1175,40 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/morphology/hole.jpg")
-cv2.imshow("src", src)
+image = cv2.imread("data/morphology/hole.jpg")  # 彩色讀取
+cv2.imshow("image", image)
 
 kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
 
-dst = cv2.morphologyEx(src, cv2.MORPH_GRADIENT, kernel)  # gradient
+dst = cv2.morphologyEx(image, cv2.MORPH_GRADIENT, kernel)  # gradient
 cv2.imshow("after morpological gradient", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/morphology/btree.jpg")
-cv2.imshow("src", src)
+image = cv2.imread("data/morphology/btree.jpg")  # 彩色讀取
+cv2.imshow("image", image)
 
 kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
 
-dst = cv2.morphologyEx(src, cv2.MORPH_TOPHAT, kernel)  # 禮帽運算(tophat)
+dst = cv2.morphologyEx(image, cv2.MORPH_TOPHAT, kernel)  # 禮帽運算(tophat)
 cv2.imshow("after tophat", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/morphology/snowman.jpg")
-cv2.imshow("src", src)
+image = cv2.imread("data/morphology/snowman.jpg")  # 彩色讀取
+cv2.imshow("image", image)
 
 kernel = np.ones((11, 11), np.uint8)  # 建立11x11內核
 
-dst = cv2.morphologyEx(src, cv2.MORPH_BLACKHAT, kernel)  # 黑帽運算(blackhat)
+dst = cv2.morphologyEx(image, cv2.MORPH_BLACKHAT, kernel)  # 黑帽運算(blackhat)
 cv2.imshow("after blackhat", dst)
 
 cv2.waitKey()
@@ -1145,17 +1217,18 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/morphology/excel.jpg")
-cv2.imshow("src", src)
+image = cv2.imread("data/morphology/excel.jpg")  # 彩色讀取
+cv2.imshow("image", image)
 
 kernel = np.ones((11, 11), np.uint8)  # 建立11x11內核
 
-dst = cv2.morphologyEx(src, cv2.MORPH_BLACKHAT, kernel)  # 黑帽運算(blackhat)
+dst = cv2.morphologyEx(image, cv2.MORPH_BLACKHAT, kernel)  # 黑帽運算(blackhat)
 cv2.imshow("after blackhat", dst)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
@@ -1168,22 +1241,22 @@ print(f"MORPH_CROSS \n {kernel}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/morphology/bw_circle.jpg")
-cv2.imshow("src", src)
+image = cv2.imread("data/morphology/bw_circle.jpg")  # 彩色讀取
+cv2.imshow("image", image)
 
-kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (39, 39))
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (39, 39))  # 建立39x39內核
 
-dst1 = cv2.dilate(src, kernel)  # 膨脹.dilate
+dst1 = cv2.dilate(image, kernel)  # 膨脹.dilate
 cv2.imshow("MORPH_RECT", dst1)
 
-kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (39, 39))
+kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (39, 39))  # 建立39x39內核
 
-dst2 = cv2.dilate(src, kernel)  # 膨脹.dilate
+dst2 = cv2.dilate(image, kernel)  # 膨脹.dilate
 cv2.imshow("MORPH_ELLIPSE", dst2)
 
-kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (39, 39))
+kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (39, 39))  # 建立39x39內核
 
-dst3 = cv2.dilate(src, kernel)  # 膨脹.dilate
+dst3 = cv2.dilate(image, kernel)  # 膨脹.dilate
 cv2.imshow("MORPH_CROSS", dst3)
 
 cv2.waitKey()
@@ -1194,14 +1267,15 @@ print("------------------------------------------------------------")  # 60個
 
 coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
-src = cv2.imread(coin_filename, cv2.IMREAD_COLOR)
-gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
+image = cv2.imread(coin_filename, cv2.IMREAD_COLOR)  # 彩色讀取
+
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 # 二值化
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+ret, thresh = cv2.threshold(image_gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
 # 執行開運算 Opening
-kernel = np.ones((3, 3), np.uint8)
+kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
 opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
 
 # 獲得距離轉換函數結果
@@ -1211,7 +1285,7 @@ dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
 ret, sure_fg = cv2.threshold(dst, 0.7 * dst.max(), 255, 0)  # 前景圖案
 
 plt.subplot(131)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 plt.axis("off")
 
@@ -1232,11 +1306,13 @@ print("------------------------------------------------------------")  # 60個
 
 coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
-src = cv2.imread(coin_filename, cv2.IMREAD_COLOR)
-gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
+image = cv2.imread(coin_filename, cv2.IMREAD_COLOR)  # 彩色讀取
 
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-kernel = np.ones((3, 3), np.uint8)
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+
+ret, thresh = cv2.threshold(image_gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
 
 # 執行開運算 Opening
 opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
@@ -1248,7 +1324,7 @@ dst = cv2.distanceTransform(opening, cv2.DIST_L2, 5)
 ret, sure_fg = cv2.threshold(dst, 0.5 * dst.max(), 255, 0)  # 前景圖案
 
 plt.subplot(131)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 plt.axis("off")
 
@@ -1269,14 +1345,16 @@ print("------------------------------------------------------------")  # 60個
 
 coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
-src = cv2.imread(coin_filename, cv2.IMREAD_COLOR)
-gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
+image = cv2.imread(coin_filename, cv2.IMREAD_COLOR)  # 彩色讀取
+
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 # 二值化
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+ret, thresh = cv2.threshold(image_gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
 # 執行開運算 Opening
-kernel = np.ones((3, 3), np.uint8)
+kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
+
 opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
 
 # 執行膨脹操作
@@ -1294,7 +1372,7 @@ sure_fg = np.uint8(sure_fg)
 unknown = cv2.subtract(sure_bg, sure_fg)
 
 plt.subplot(141)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 plt.axis("off")
 
@@ -1320,14 +1398,16 @@ print("------------------------------------------------------------")  # 60個
 
 coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
-src = cv2.imread(coin_filename, cv2.IMREAD_COLOR)
-gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
+image = cv2.imread(coin_filename, cv2.IMREAD_COLOR)  # 彩色讀取
+
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 # 二值化
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+ret, thresh = cv2.threshold(image_gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
 # 執行開運算 Opening
-kernel = np.ones((3, 3), np.uint8)
+kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
+
 opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
 
 # 執行膨脹操作
@@ -1348,7 +1428,7 @@ unknown = cv2.subtract(sure_bg, sure_fg)
 ret, markers = cv2.connectedComponents(sure_fg)
 
 plt.subplot(131)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 plt.axis("off")
 
@@ -1369,16 +1449,18 @@ print("------------------------------------------------------------")  # 60個
 
 coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
-src = cv2.imread(coin_filename, cv2.IMREAD_COLOR)
-gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
+image = cv2.imread(coin_filename, cv2.IMREAD_COLOR)  # 彩色讀取
 
-rgb_src = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+
+rgb_src = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 # 二值化
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+ret, thresh = cv2.threshold(image_gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
 # 執行開運算 Opening
-kernel = np.ones((3, 3), np.uint8)
+kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
+
 opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
 
 # 執行膨脹操作
@@ -1426,16 +1508,18 @@ print("------------------------------------------------------------")  # 60個
 
 coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
-src = cv2.imread(coin_filename, cv2.IMREAD_COLOR)
-gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
+image = cv2.imread(coin_filename, cv2.IMREAD_COLOR)  # 彩色讀取
 
-rgb_src = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+
+rgb_src = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 # 二值化
-ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+ret, thresh = cv2.threshold(image_gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
 # 執行開運算 Opening
-kernel = np.ones((3, 3), np.uint8)
+kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
+
 opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
 
 # 執行膨脹操作
@@ -1491,3 +1575,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+res = cv2.resize(
+    image, None, fx=0.6, fy=0.6, interpolation=cv2.INTER_CUBIC
+)  # 圖形太大了縮小一點

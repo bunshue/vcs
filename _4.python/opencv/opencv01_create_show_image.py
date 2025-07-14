@@ -541,7 +541,7 @@ print("------------------------------------------------------------")  # 60個
 
 lena_color_filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.png"
 
-a = cv2.imread(lena_color_filename, cv2.IMREAD_UNCHANGED)
+a = cv2.imread(lena_color_filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取 + 有透明度
 
 plt.figure(figsize=(12, 8))
 plt.subplot(131)
@@ -729,7 +729,7 @@ print("------------------------------------------------------------")  # 60個
 filename = filename1
 
 img1 = cv2.imread(filename)  # 彩色讀取
-img2 = cv2.imread(filename, 0)  # 灰色讀取
+img2 = cv2.imread(filename, 0)  # 灰階讀取
 
 plt.figure(figsize=(12, 8))
 plt.subplot(121)
@@ -821,7 +821,7 @@ print("修改alpha通道值 255=>127")
 # 4通道的PNG圖
 filename_RGB_R = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
 
-image = cv2.imread(filename_RGB_R, cv2.IMREAD_UNCHANGED)  # PNG讀取
+image = cv2.imread(filename_RGB_R, cv2.IMREAD_UNCHANGED)  # PNG讀取  # 彩色讀取 + 有透明度
 cv2.imshow("Before", image)  # 顯示修改前影像img
 print(image.shape)
 print(f"修改前img[210,150] = {image[210,150]}")
@@ -857,7 +857,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("灰階讀取, 部分塗成灰色")
 
-image = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰色讀取
+image = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 cv2.imshow("Before", image)  # 顯示修改前影像img
 
 for y in range(30, 100):  # 修改影像
@@ -1102,10 +1102,10 @@ cv2.IMREAD_COLOR
 數值 0
 cv2.IMREAD_GRAYSCALE
     以灰階的格式來讀取圖片。
+
 數值 -1
 cv2.IMREAD_UNCHANGED
     讀取圖片中所有的 channels，包含透明度的 channel。
-
 
 窗口显示方式，cv2.WINDOW_NORMAL为正常显示，可以调整大小
 # cv2.WINDOW_AUTOSIZE显示原图片的大小，用户不能调整大小
