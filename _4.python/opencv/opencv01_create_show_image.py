@@ -1336,3 +1336,18 @@ img[1:300, 1:300] = YELLOW  # 設定黃色底
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 image = cv2.imread(filename, cv2.IMREAD_ANYCOLOR)
 """
+
+
+cv2.namedWindow("OpenCV")  # 建立一個名為 OpenCV 的視窗
+
+while True:
+    k = cv2.waitKey(0)  # 持續等待，直到按下鍵盤按鍵才會繼續
+    c = chr(k)  # 將 ASCII 代碼轉換成真實字元
+    print(c, k)  # 印出結果
+    if k == 27:
+        break  # 如果代碼等於 27，結束迴圈 ( 27 表示按鍵 ESC )
+
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個

@@ -362,6 +362,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(130, 60);
             this.button24.TabIndex = 27;
+            this.button24.Text = "Marshal.Copy";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -372,6 +373,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(130, 60);
             this.button25.TabIndex = 28;
+            this.button25.Text = "比較Marshal.Copy";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
