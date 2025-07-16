@@ -1453,6 +1453,139 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("cv2.setMouseCallback 06 在影像上畫圖 按ESC離開")
+
+cap = cv2.VideoCapture(0)
+
+W = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))  # 取得影像寬度
+H = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
+
+image = np.zeros((H, W, 4), dtype="uint8")
+
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+
+
+def OnMouseAction(event, x, y, flags, param):
+    global dots, image  # 定義全域變數
+    if flags == 1:  # 左鍵點擊
+        if event == 1:
+            dots.append([x, y])
+        if event == 4:
+            dots = []
+        if event == 0 or event == 4:
+            dots.append([x, y])
+            x1 = dots[len(dots) - 2][0]
+            y1 = dots[len(dots) - 2][1]
+            x2 = dots[len(dots) - 1][0]
+            y2 = dots[len(dots) - 1][1]
+            cv2.line(image, (x1, y1), (x2, y2), (0, 0, 255, 255), 2)
+
+
+cv2.imshow("OpenCV", image)
+cv2.setMouseCallback("OpenCV", OnMouseAction)  # 建立視窗與函數的連接
+
+dots = []
+
+while True:
+    ret, frame = cap.read()  # 讀取影片的每一個影格
+    if not ret:
+        print("Cannot receive frame")
+        break
+
+    # 透過 for 迴圈合成影像
+    for i in range(W):
+        frame[:, i, 0] = frame[:, i, 0] * (1 - image[:, i, 3] / 255) + image[
+            :, i, 0
+        ] * (image[:, i, 3] / 255)
+        frame[:, i, 1] = frame[:, i, 1] * (1 - image[:, i, 3] / 255) + image[
+            :, i, 1
+        ] * (image[:, i, 3] / 255)
+        frame[:, i, 2] = frame[:, i, 2] * (1 - image[:, i, 3] / 255) + image[
+            :, i, 2
+        ] * (image[:, i, 3] / 255)
+
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+    elif k == ord("r"):
+        image = np.zeros((H, W, 4), dtype="uint8")  # Reset
+
+    cv2.imshow("OpenCV", frame)
+
+cap.release()  # 釋放資源
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("cv2.setMouseCallback 07 擦亮影片 按ESC離開")
+
+W = 640  # 定義影片寬度
+H = 480  # 定義影像高度
+
+dots = []  # 記錄座標
+mask_b = np.zeros((H, W, 3), dtype="uint8")  # 產生黑色遮罩 -> 套用清楚影像
+mask_w = np.zeros((H, W, 3), dtype="uint8")  # 產生白色遮罩 -> 套用模糊影像
+mask_w[0:H, 0:W] = 255  # 白色遮罩背景為白色
+
+
+# 滑鼠繪圖函式
+def OnMouseAction(event, x, y, flags, param):
+    global dots, mask  # 定義全域變數
+    if flags == 1:  # 左鍵點擊
+        if event == 1:
+            dots.append([x, y])
+        if event == 4:
+            dots = []
+        if event == 0 or event == 4:
+            dots.append([x, y])
+            x1 = dots[len(dots) - 2][0]
+            y1 = dots[len(dots) - 2][1]
+            x2 = dots[len(dots) - 1][0]
+            y2 = dots[len(dots) - 1][1]
+            cv2.line(mask_w, (x1, y1), (x2, y2), BLACK, 50)  # 在白色遮罩上畫出黑色線條
+            cv2.line(mask_b, (x1, y1), (x2, y2), WHITE, 50)  # 在黑色遮罩上畫出白色線條
+
+
+cv2.imshow("OpenCV", mask_b)
+cv2.setMouseCallback("OpenCV", OnMouseAction)  # 建立視窗與函數的連接
+
+cap = cv2.VideoCapture(0)
+
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+
+    frame = cv2.resize(frame, (W, H))  # 縮小尺寸，加快速度
+    frame = cv2.flip(frame, 1)  # 翻轉影像
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2BGRA)  # 轉換顏色為 BGRA ( 計算時需要用到 Alpha 色版 )
+    frame2 = frame.copy()  # 複製影像
+    frame2 = cv2.blur(frame, (55, 55))  # 套用模糊
+
+    mask1 = cv2.cvtColor(mask_b, cv2.COLOR_BGR2GRAY)  # 轉換遮罩為灰階
+    frame = cv2.bitwise_and(frame, frame, mask=mask1)  # 清楚影像套用黑遮罩
+    mask2 = cv2.cvtColor(mask_w, cv2.COLOR_BGR2GRAY)  # 轉換遮罩為灰階
+    frame2 = cv2.bitwise_and(frame2, frame2, mask=mask2)  # 模糊影像套用白遮罩
+
+    output = cv2.add(frame, frame2)  # 合併影像
+
+    cv2.imshow("OpenCV", output)
+
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

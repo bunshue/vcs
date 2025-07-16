@@ -1019,6 +1019,31 @@ print("OK")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("圖片做區域馬賽克")
+
+image = cv2.imread(filename2)
+
+x, y, w, h = 200, 100, 100, 300
+
+level = 8  # 縮小比例 ( 可當作馬賽克的等級 )
+H = int(h / level)  # 按照比例縮小後的高度 ( 使用 int 去除小數點 )
+W = int(w / level)  # 按照比例縮小後的寬度 ( 使用 int 去除小數點 )
+
+# 取出一塊
+mosaic = image[y : y + h, x : x + w]  # 取得馬賽克區域
+
+# 縮小
+mosaic = cv2.resize(mosaic, (W, H), interpolation=cv2.INTER_LINEAR)  # 根據縮小尺寸縮小
+
+# 放大到原本的大小
+mosaic = cv2.resize(mosaic, (w, h), interpolation=cv2.INTER_NEAREST)
+image[y : y + h, x : x + w] = mosaic  # 置換成馬賽克的影像
+
+cv2.rectangle(image, (x, y), (x + w, y + h), RED, 3)
+
+cv2.imshow("OpenCV", image)
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

@@ -6,15 +6,14 @@ cv2.createTrackbar()
 cv2.setTrackbarPos()
 cv2.getTrackbarPos()
 
-
 # Trackbar 範例
-def do_trackbar_event3(val):
+def do_trackbar_event(val):
     print(val, end=" ")
 
-cv2.createTrackbar("Trackbar", "OpenCV", 0, 255, do_trackbar_event3)
+cv2.createTrackbar("Trackbar", "OpenCV", 0, 255, do_trackbar_event)
 cv2.setTrackbarPos("Trackbar", "OpenCV", THRESHOLD)  # 預設
-
 """
+
 from opencv_common import *
 
 W, H = 640, 480  # 影像寬, 影像高
@@ -24,9 +23,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("Trackbar之使用 設定/取值")
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
-image = cv2.imread(filename)
+image = cv2.imread(filename2)
 
 cv2.imshow("OpenCV", image)
 
@@ -99,9 +96,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("測試cv2視窗的Trackbar")
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-# image = cv2.imread(filename)
+image = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
+# image = cv2.imread(filename2)
 
 cv2.namedWindow("OpenCV", cv2.WND_PROP_AUTOSIZE)
 
@@ -131,9 +127,9 @@ print("Trackbar之使用")
 
 # HSL即色相、飽和度、亮度（英語：Hue, Saturation, Lightness）
 
-filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
+filename_rgb512 = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
-image = cv2.imread(filename, cv2.IMREAD_COLOR)
+image = cv2.imread(filename_rgb512, cv2.IMREAD_COLOR)
 cv2.imshow("OpenCV", image)
 
 # 圖像歸一化，且轉換為浮點型
@@ -193,9 +189,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-
-image = cv2.imread(filename)
+image = cv2.imread(filename2)
 cv2.imshow("OpenCV", image)
 
 contrast = 0  # 初始化要調整對比度的數值
@@ -245,7 +239,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("對比度增強1")
 
-image = cv2.imread(filename)
+image = cv2.imread(filename2)
 
 MAX_VALUE = 120
 value = 120
@@ -255,7 +249,7 @@ cv2.namedWindow("OpenCV", cv2.WND_PROP_AUTOSIZE)
 
 
 # 調整系數，觀察圖像的變化
-def callback_contrast(_value):
+def do_trackbar_event6(_value):
     # 通過線性運算，調整圖像對比度
     a = float(_value) / 40.0
     contrastImage = a * image
@@ -265,9 +259,9 @@ def callback_contrast(_value):
     cv2.imshow("OpenCV", contrastImage)
 
 
-callback_contrast(value)  # 套用一次設定值
+do_trackbar_event6(value)  # 套用一次設定值
 
-cv2.createTrackbar("value", "OpenCV", value, MAX_VALUE, callback_contrast)
+cv2.createTrackbar("value", "OpenCV", value, MAX_VALUE, do_trackbar_event6)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -277,8 +271,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("對比度增強4 gamma")
 
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-image = cv2.imread(filename)
+image = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
+image = cv2.imread(filename2)
 
 MAX_VALUE = 200
 value = 40
@@ -290,7 +284,7 @@ cv2.namedWindow("OpenCV", cv2.WND_PROP_AUTOSIZE)
 
 
 # 調整 gamma 值，觀察圖像的變換
-def callback_contrast(_value):
+def do_trackbar_event7(_value):
     gamma = float(_value) / segValue
     contrastImage = np.power(image_0_1, gamma)
     cv2.imshow("OpenCV", contrastImage)
@@ -300,9 +294,9 @@ def callback_contrast(_value):
     contrastImage = contrastImage.astype(np.uint8)
 
 
-callback_contrast(value)  # 套用一次設定值
+do_trackbar_event7(value)  # 套用一次設定值
 
-cv2.createTrackbar("value", "OpenCV", value, MAX_VALUE, callback_contrast)
+cv2.createTrackbar("value", "OpenCV", value, MAX_VALUE, do_trackbar_event7)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -348,8 +342,7 @@ def meanBlur(image, H, W, _boundary="fill", _fillvalue=0):
     return result
 
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+image = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
 
 # 均值濾波卷積核的寬高均設為 2*halfWinSize+1
 halfWinSize = 1
@@ -358,7 +351,7 @@ cv2.namedWindow("OpenCV", 1)
 
 
 # 回調函數，均值濾波
-def callback_meanBlur(_halfWinSize):
+def do_trackbar_event_meanBlur(_halfWinSize):
     result = meanBlur(
         image,
         2 * _halfWinSize + 1,
@@ -369,9 +362,9 @@ def callback_meanBlur(_halfWinSize):
     cv2.imshow("OpenCV", result)
 
 
-callback_meanBlur(halfWinSize)
+do_trackbar_event_meanBlur(halfWinSize)
 cv2.createTrackbar(
-    "winSize/2", "OpenCV", halfWinSize, MAX_HALFWINSIZE, callback_meanBlur
+    "winSize/2", "OpenCV", halfWinSize, MAX_HALFWINSIZE, do_trackbar_event_meanBlur
 )
 
 latexImage = meanBlur(image, 29, 29, "symm")
@@ -387,7 +380,7 @@ print("邊緣檢測 scharr")
 from scipy import signal
 
 
-def scharr(I, _boundary="symm"):
+def do_trackbar_event_scharr(I, _boundary="symm"):
     # I 與 scharr_x 的 same 卷積
     scharr_x = np.array([[3, 0, -3], [10, 0, -10], [3, 0, -3]], np.float32)
     I_x = signal.convolve2d(I, scharr_x, mode="same", boundary="symm")
@@ -397,13 +390,12 @@ def scharr(I, _boundary="symm"):
     return (I_x, I_y)
 
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+image = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
 
 # 求卷積
-# i_conv_sch_x = scharr(image,1,0,_boundary='symm') 改掉
-# i_conv_sch_y = scharr(image,0,1,_boundary='symm') 改掉
-i_conv_sch_x, i_conv_sch_y = scharr(image)
+# i_conv_sch_x = do_trackbar_event_scharr(image,1,0,_boundary='symm') 改掉
+# i_conv_sch_y = do_trackbar_event_scharr(image,0,1,_boundary='symm') 改掉
+i_conv_sch_x, i_conv_sch_y = do_trackbar_event_scharr(image)
 
 # 取絕對值,分別得到水平方向和垂直方向的邊緣強度
 abs_i_conv_sch_x = np.abs(i_conv_sch_x)
@@ -434,15 +426,15 @@ thresh = 255
 
 
 # 回調函數，閾值處理
-def callback_thresh(_thresh):
+def do_trackbar_event_threshold(_thresh):
     threshEdge = edge.copy()
     threshEdge[threshEdge < _thresh] = 0
     threshEdge[threshEdge >= _thresh] = 255
     cv2.imshow("OpenCV", threshEdge)
 
 
-callback_thresh(thresh)
-cv2.createTrackbar("thresh", "OpenCV", thresh, MAX_THRESH, callback_thresh)
+do_trackbar_event_threshold(thresh)
+cv2.createTrackbar("thresh", "OpenCV", thresh, MAX_THRESH, do_trackbar_event_threshold)
 
 # 模擬鉛筆素描
 pencilSketch = edge.copy()
@@ -464,8 +456,6 @@ krisch(image,_boundary='fill',_fillvalue=0)
 其中:邊緣處理的方式_boundary包括：'symm','wrap','fill',
 且當__boundary='fill'時,填充值默認為零_fillvalue=0
 """
-
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 from scipy import signal
 
@@ -529,9 +519,10 @@ def krisch(image, _boundary="fill", _fillvalue=0):
     return edge
 
 
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+image = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
 
 edge = krisch(image, _boundary="symm")
+
 # 邊緣強度的灰度級顯示
 rows, cols = edge.shape
 for r in range(rows):
@@ -540,6 +531,7 @@ for r in range(rows):
             edge[r][c] = 255
 edge = edge.astype(np.uint8)
 cv2.imshow("edge", edge)
+
 # 經過閾值處理的邊緣顯示
 cv2.namedWindow("OpenCV", 1)
 MAX_THRESH = 255
@@ -547,15 +539,15 @@ thresh = 255
 
 
 # 回調函數，閾值處理
-def callback_thresh(_thresh):
+def do_trackbar_event_threshold(_thresh):
     threshEdge = edge.copy()
     threshEdge[threshEdge < _thresh] = 0
     threshEdge[threshEdge >= _thresh] = 255
     cv2.imshow("OpenCV", threshEdge)
 
 
-callback_thresh(thresh)
-cv2.createTrackbar("thresh", "OpenCV", thresh, MAX_THRESH, callback_thresh)
+do_trackbar_event_threshold(thresh)
+cv2.createTrackbar("thresh", "OpenCV", thresh, MAX_THRESH, do_trackbar_event_threshold)
 
 # 模擬素描
 pencilSketch = edge.copy()
@@ -572,7 +564,7 @@ print("------------------------------------------------------------")  # 60個
 print("cv2.setMouseCallback 20 按ESC離開")
 
 
-def onChange(x):
+def do_trackbar_event8(x):
     b = cv2.getTrackbarPos("B", "OpenCV")  # 建立B通道顏色
     g = cv2.getTrackbarPos("G", "OpenCV")  # 建立G通道顏色
     r = cv2.getTrackbarPos("R", "OpenCV")  # 建立R通道顏色
@@ -583,9 +575,9 @@ W, H = 640, 480  # 影像寬, 影像高
 image = np.ones((H, W, 3), np.uint8) * 255  # 白圖
 
 cv2.namedWindow("OpenCV")
-cv2.createTrackbar("B", "OpenCV", 0, 255, onChange)  # 藍色通道控制
-cv2.createTrackbar("G", "OpenCV", 0, 255, onChange)  # 綠色通道控制
-cv2.createTrackbar("R", "OpenCV", 0, 255, onChange)  # 紅色通道控制
+cv2.createTrackbar("B", "OpenCV", 0, 255, do_trackbar_event8)  # 藍色通道控制
+cv2.createTrackbar("G", "OpenCV", 0, 255, do_trackbar_event8)  # 綠色通道控制
+cv2.createTrackbar("R", "OpenCV", 0, 255, do_trackbar_event8)  # 紅色通道控制
 
 while True:
     cv2.imshow("OpenCV", image)
@@ -600,7 +592,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 # NG
-def changeColor(x):
+def do_trackbar_event_changeColor(x):
     r = cv2.getTrackbarPos("R", "OpenCV")
     g = cv2.getTrackbarPos("G", "OpenCV")
     b = cv2.getTrackbarPos("B", "OpenCV")
@@ -611,9 +603,9 @@ W, H, D = 640, 480, 3
 image = np.zeros((H, W, D), dtype="uint8")  # 建立黑圖 WxH RGBA
 
 cv2.namedWindow("OpenCV")
-cv2.createTrackbar("R", "OpenCV", 100, 255, changeColor)
-cv2.createTrackbar("G", "OpenCV", 0, 255, changeColor)
-cv2.createTrackbar("B", "OpenCV", 0, 255, changeColor)
+cv2.createTrackbar("R", "OpenCV", 100, 255, do_trackbar_event_changeColor)
+cv2.createTrackbar("G", "OpenCV", 0, 255, do_trackbar_event_changeColor)
+cv2.createTrackbar("B", "OpenCV", 0, 255, do_trackbar_event_changeColor)
 
 while True:
     cv2.imshow("OpenCV", image)
@@ -667,7 +659,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-def changeColor(x):
+def do_trackbar_event_changeColor(x):
     g = cv2.getTrackbarPos("R", "OpenCV")
     if g == 0:
         image[:] = 0
@@ -679,7 +671,7 @@ W, H, D = 1000, 100, 3
 image = np.zeros((H, W, D), dtype="uint8")  # 建立黑圖 WxH RGBA
 
 cv2.namedWindow("OpenCV")
-cv2.createTrackbar("R", "OpenCV", 0, 1, changeColor)
+cv2.createTrackbar("R", "OpenCV", 0, 1, do_trackbar_event_changeColor)
 
 while True:
     cv2.imshow("OpenCV", image)
@@ -721,14 +713,4 @@ print("------------------------------------------------------------")  # 60個
 cv2.namedWindow("OpenCV")
 cv2.setMouseCallback("OpenCV", OnMouseAction)  # 建立視窗與函數的連接
 
-
-def onChange(x):
-    pass
-
-
-def fill(x):
-    pass
-
-
-cv2.createTrackbar("Thickness", "OpenCV", 0, 1, onChange)
-cv2.createTrackbar("Thickness", "OpenCV", 0, 1, fill)
+cv2.createTrackbar("Thickness", "OpenCV", 0, 1, do_trackbar_event_function)

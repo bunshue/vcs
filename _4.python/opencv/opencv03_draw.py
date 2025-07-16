@@ -733,3 +733,37 @@ cv2.ellipse(image, (cx, cy), size, angle, 45, 135, BLUE, 3)  # 繪製橢圓弧
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+"""
+
+# 任意顏色
+color = np.random.randint(0, high = 256, size = (3,)).tolist()  #np.random之randint不含尾
+cv2.rectangle(image,(p1x, p1y),(p2x, p2y), color, 2)
+color = np.random.randint(0, high = 256, size = (3,)).tolist()  #np.random之randint不含尾
+cv2.rectangle(image,(p1x,p1y),(p2x,p2y),color,thickness)
+
+
+        a=np.random.randint(1,d-50)
+        r=np.random.randint(1,d/5)
+        angle = np.random.randint(0,361)
+        color = np.random.randint(0,high = 256,size = (3,)).tolist()
+        if mode==1:
+            cv2.rectangle(image,(x,y),(a,a),color,thickness)
+        elif mode==2:
+            cv2.circle(image,(x,y),r,color,thickness)
+        elif mode==3:
+            cv2.line(image,(a,a),(x,y),color,3)  
+        elif mode==4:
+            cv2.ellipse(image, (x,y), (100,150), angle, 0, 360,color,thickness)                  
+        elif mode==5:
+            cv2.putText(image,"OpenCV",(0,round(d/2)), 
+                        cv2.FONT_HERSHEY_SIMPLEX, 2,color,5)    
+
+
+
+        # cv2.line(image, (0, 0), (x, y), CYAN, 2)#畫直線連線
+        cv2.circle(image, (x, y), 10, (255), -1)  # 畫點
+        cv2.rectangle(image, (x1, y1), (x, y), GREEN, 5)
+
+"""
