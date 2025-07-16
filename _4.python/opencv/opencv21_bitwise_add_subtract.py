@@ -138,6 +138,7 @@ print(f"src2 = \n {src2}")
 print(f"dst = \n {src1+src2}")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 影像計算 影像相加 cv2.add
 # 灰階/彩色影像相加, 變得更白/更亮
@@ -160,6 +161,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 影像計算 影像相加 cv2.add
 
@@ -176,6 +178,7 @@ cv2.imshow("Elephant2", res)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 像素質直接相加會破表
@@ -253,6 +256,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 影像計算 影像相加 cv2.add
 # 影像相加 影像取mask
@@ -272,6 +276,7 @@ print("cv2.add():兩圖用cv相加+mask")
 dst = cv2.add(img1, img2, mask=mask)
 print("結果值 dst =\n", dst)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 影像計算 影像相加 cv2.add
@@ -323,6 +328,7 @@ plt.axis("off")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 加權和 alpha beta gamma
 
@@ -341,6 +347,7 @@ print("cv2.addWeighted():兩圖用cv比例疊加")
 dst = cv2.addWeighted(src1, alpha, src2, beta, gamma)  # 加權和
 print(f"dst = \n {dst}")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 要一樣大的影像才可以做 加權和 addWeighted
@@ -694,27 +701,29 @@ print("------------------------------------------------------------")  # 60個
 
 print("OpenCV_ai_29")
 
-""" TBD
-logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
+"""TBD
+logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 
-logo = cv2.imread(logo_filename)                    # 讀取 OpenCV 的 logo
-size = logo.shape                                # 讀取 logo 的長寬尺寸
+logo = cv2.imread(logo_filename)  # 讀取 OpenCV 的 logo
+size = logo.shape  # 讀取 logo 的長寬尺寸
 
-img = np.zeros((360,480,3), dtype='uint8')       # 產生一張 480x360 背景全黑的圖
-img[0:360, 0:480] = '255'                        # 將圖片變成白色 ( 配合 logo 是白色底 )
-img[0:size[0], 0:size[1]] = logo                 # 將圖片的指定區域，換成 logo 的圖案
-img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # 產生一張灰階的圖片作為遮罩使用
-ret, mask1  = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY_INV)  # 使用二值化的方法，產生黑白遮罩圖片
-logo = cv2.bitwise_and(img, img, mask = mask1 )  # 執行AND運算, 使用mask  # logo 套用遮罩
+img = np.zeros((360, 480, 3), dtype="uint8")  # 產生一張 480x360 背景全黑的圖
+img[0:360, 0:480] = "255"  # 將圖片變成白色 ( 配合 logo 是白色底 )
+img[0 : size[0], 0 : size[1]] = logo  # 將圖片的指定區域，換成 logo 的圖案
+img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 產生一張灰階的圖片作為遮罩使用
+ret, mask1 = cv2.threshold(
+    img_gray, 200, 255, cv2.THRESH_BINARY_INV
+)  # 使用二值化的方法，產生黑白遮罩圖片
+logo = cv2.bitwise_and(img, img, mask=mask1)  # 執行AND運算, 使用mask  # logo 套用遮罩
 
-bg = cv2.imread(filename)                      # 讀取底圖
-ret, mask2  = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY)      # 使用二值化的方法，產生黑白遮罩圖片
-bg = cv2.bitwise_and(bg, bg, mask = mask2 )  # 執行AND運算, 使用mask # 底圖套用遮罩
+bg = cv2.imread(filename)  # 讀取底圖
+ret, mask2 = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY)  # 使用二值化的方法，產生黑白遮罩圖片
+bg = cv2.bitwise_and(bg, bg, mask=mask2)  # 執行AND運算, 使用mask # 底圖套用遮罩
 
 print("cv2.add():兩圖用cv相加")
-output = cv2.add(bg, logo)                       # 使用 add 方法將底圖和 logo 合併
+output = cv2.add(bg, logo)  # 使用 add 方法將底圖和 logo 合併
 
-cv2.imshow('image', output)
+cv2.imshow("image", output)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1074,25 +1083,24 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-""" TBD
-bitwise_filename1 = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.png'
-bitwise_filename2 = 'C:/_git/vcs/_4.python/opencv/data/RGB_G.png'
+"""TBD
+bitwise_filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+bitwise_filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 img1 = cv2.imread(bitwise_filename1)
 img2 = cv2.imread(bitwise_filename2)
 
 H = img1.shape[0]
 W = img1.shape[1]
 
-mask = cv2.imread('mask.png')                    # 遮罩圖片
+mask = cv2.imread("mask.png")  # 遮罩圖片
 
-mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)    # 轉換成灰階模式
+mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)  # 轉換成灰階模式
 output = cv2.bitwise_xor(img1, img2, mask=mask)  # 執行XOR運算, 使用mask
 
-cv2.imshow('image', output)
+cv2.imshow("image", output)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1115,6 +1123,7 @@ print("AND運算 的 結果：")
 print(dst_and)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 src1 = np.random.randint(0, 255, (3, 5), dtype=np.uint8)
 
@@ -1127,6 +1136,7 @@ print(f"src1 = \n {src1}")
 print(f"src2 = \n {src2}")
 print(f"dst = \n {dst}")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("bitwise_or")

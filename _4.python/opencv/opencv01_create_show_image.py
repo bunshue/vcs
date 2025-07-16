@@ -63,17 +63,13 @@ print("------------------------------------------------------------")  # 60個
 print("二維黑圖")
 image = np.zeros((H, W), dtype=np.uint8)
 
-print("建立畫布(白色)")
-image = np.ones((H, W, 3), dtype="uint8") * 255
-image = np.ones((H, W, 3), np.uint8) * 255  # 白底畫布
-
 print("三維黑圖")
 image = np.zeros((H, W, 3), np.uint8)
 image = np.zeros((H, W, 3), dtype="uint8")
-image = np.zeros((H, W, 3), dtype=np.uint8)
+image = np.zeros((H, W, 3), dtype=np.uint8)  # 空白畫布
 
 print("三維白圖")
-image = np.ones((H, W, 3), np.uint8) * 255
+image = np.ones((H, W, 3), np.uint8) * 255  # 白底畫布
 image = np.ones((H, W, 3), dtype="uint8") * 255
 
 # 灰色背景
@@ -728,37 +724,23 @@ print("------------------------------------------------------------")  # 60個
 
 filename = filename1
 
-img1 = cv2.imread(filename)  # 彩色讀取
-img2 = cv2.imread(filename, 0)  # 灰階讀取
+cv2.namedWindow("OpenCV")
+image = cv2.imread(filename)  # 彩色讀取
 
-plt.figure(figsize=(12, 8))
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(img1, cv2.COLOR_BGR2RGB))
-plt.title("Peony1")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))
-plt.title("Peony2")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-filename = filename1
-
-cv2.namedWindow("Peony")  # 使用預設
-img = cv2.imread(filename)  # 彩色讀取
-
-cv2.imshow("Peony", img)  # 顯示影像img
+cv2.imshow("OpenCV", image)  # 顯示影像img
 
 cv2.waitKey(3000)  # 等待3秒
+cv2.destroyWindow("OpenCV222")  # 刪除OpenCV222
 cv2.destroyAllWindows()  # 刪除所有視窗
 
+# cv2.waitKey(2000)       # 等待兩秒 ( 2000 毫秒 ) 後關閉圖片視窗
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread(filename)  # BGR 讀取
-cv2.imshow("Peony", img)
-img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # BGR 轉 RBG
+image = cv2.imread(filename)  # BGR 讀取
+cv2.imshow("OpenCV", image)
+img_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # BGR 轉 RBG
 cv2.imshow("RGB Color Space", img_rgb)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -766,18 +748,12 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-cv2.namedWindow("Peony")  # 使用預設
-img = cv2.imread(filename)  # 彩色讀取
-cv2.line(img, (10, 300), (250, 300), BLUE, 5)  # 輸出線條
-cv2.rectangle(img, (20, 20), (240, 250), RED, 2)  # 輸出矩陣
-cv2.putText(img, "Peony", (10, 250), cv2.FONT_ITALIC, 3, BLUE, 8)  # 輸出文字
-cv2.imshow("Peony", img)  # 顯示影像img
-cv2.waitKey(3000)  # 等待3秒
-cv2.destroyAllWindows()  # 刪除所有視窗
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+cv2.namedWindow("OpenCV")
+image = cv2.imread(filename)  # 彩色讀取
+cv2.line(image, (10, 300), (250, 300), BLUE, 5)  # 輸出線條
+cv2.rectangle(image, (20, 20), (240, 250), RED, 2)  # 輸出矩陣
+cv2.putText(image, "OpenCV", (10, 250), cv2.FONT_ITALIC, 3, BLUE, 8)  # 輸出文字
+cv2.imshow("OpenCV", image)  # 顯示影像img
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -869,6 +845,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 建立藍色blue底的彩色影像陣列
 blue = np.zeros((2, 3, 3), np.uint8)
@@ -943,8 +920,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
-
-output = np.zeros([row, col, channel], dtype=np.uint8)  # 產生空白畫布
 
 print("讀取圖片 並顯示")
 image = cv2.imread(filename1, 1)  # 讀取本機圖片, 0: 黑白圖片 1: 原色圖片
@@ -1074,11 +1049,9 @@ points = np.random.randint(MIN, MAX, (N, 2), np.int32)
 # print(points)
 """
 
-
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread(filename1)
-
 
 for i in range(20, 80):
     image[i, 180] = RED  # 紅色一點
@@ -1091,8 +1064,6 @@ plt.show()
 
 
 """
-
-
 OpenCV 的 cv2.imread 在讀取圖片時，可以在第二個參數指定圖片的格式，可用的選項有三種：
 
 數值 1
@@ -1131,7 +1102,7 @@ cv2.imwrite("./2.jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
 
 cv2.imwrite(filename2b, image2, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
 
-cv2.imwrite('tmp_image_2.jpg', img, [cv2.IMWRITE_JPEG_QUALITY, 80])
+cv2.imwrite('tmp_image_2.jpg', image, [cv2.IMWRITE_JPEG_QUALITY, 80])
 
 # 設定 PNG 壓縮層級為 5（可用值為 0 ~ 9）
 cv2.imwrite('filename.png', image, [cv2.IMWRITE_PNG_COMPRESSION, 5])
@@ -1144,11 +1115,8 @@ cv 搬出
 #另存新檔
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/human_face.jpg'
 cv2.imwrite(filename2, image)	#寫入本機圖片
-
 cv2.imwrite("face_detection.jpg", image)
-
 cv2.imwrite('7.jpg', image)
-
 
 一樣的意思
 plt.imshow(image0[:, :, ::-1])  # 原圖 # same
@@ -1162,7 +1130,6 @@ print("------------------------------------------------------------")  # 60個
 # CV視窗之使用 ST
 print("------------------------------------------------------------")  # 60個
 
-
 """
 這裡 cv2.waitKey 函數是用來等待與讀取使用者按下的按鍵，而其參數是等待時間（單位為毫秒），
 若設定為 0 就表示持續等待至使用者按下按鍵為止，
@@ -1170,14 +1137,14 @@ print("------------------------------------------------------------")  # 60個
 
 如果在程式中有許多的 OpenCV 視窗，而我們只要關閉特定的視窗時，可以改用 cv2.destroyWindow 加上視窗名稱，關閉指定的視窗：
 
-# 關閉 "My Image" 視窗
-cv2.destroyWindow("My Image")
+# 關閉 "OpenCV333" 視窗
+cv2.destroyWindow("OpenCV333")
 
 在預設的狀況下，以 cv2.imshow 所開啟的視窗會依據圖片來自動調整大小，
 但若是圖片太大、佔滿整個螢幕時，我們會希望可以自由縮放視窗的大小，
 這時候就可以使用 cv2.namedWindow 將視窗設定為 cv2.WINDOW_NORMAL：
 
-cv2.imshow("My Image", image)
+cv2.imshow("OpenCV", image)
 
 print("在此等待任意鍵繼續, 繼續後刪除本視窗")
 cv2.waitKey()
@@ -1187,8 +1154,8 @@ cv2.destroyAllWindows()
 cv2.waitKey(0)  # 0, 無限等待使用者按鍵
 cv2.destroyAllWindows() # 關閉所有 OpenCV 的視窗
 
-# 關閉 "My Image" 視窗
-# cv2.destroyWindow("My Image") 指名關閉某視窗
+# 關閉 "OpenCV333" 視窗
+# cv2.destroyWindow("OpenCV333") 指名關閉某視窗
 
 使用 OpenCV 開啟的圖形視窗會類似這樣：
 
@@ -1202,14 +1169,14 @@ print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread(filename1)  # 彩色讀取
 
-cv2.imshow("Peony", image)
-cv2.destroyWindow("Peony")  # 關閉視窗
+cv2.imshow("OpenCV", image)
+cv2.destroyWindow("OpenCV")  # 關閉視窗
 
 k = cv2.waitKey(0)  # 0, 無限等待使用者按鍵
-cv2.destroyWindow("Peony")  # 關閉視窗
+cv2.destroyWindow("OpenCV")  # 關閉視窗
 
 k = cv2.waitKey(5000)  # 等待 5000 msec
-cv2.destroyWindow("Peony")  # 關閉視窗
+cv2.destroyWindow("OpenCV")  # 關閉視窗
 
 k = cv2.waitKey(0)  # 0, 無限等待使用者按鍵
 
@@ -1223,52 +1190,44 @@ if k == ord("a") or k == ord("A"):  # 如果按A或a
 elif k == ord("s"):  # 若按下 s 鍵則存圖
 
 if k == ord("Q") or k == ord("q"):
-    cv2.destroyWindow("Peony")  # 關閉視窗
-
-
+    cv2.destroyWindow("OpenCV")  # 關閉視窗
  
 WINDOW_NORMAL – Allows to manually change window size
 WINDOW_AUTOSIZE(Default) – Automatically sets the window size
 WINDOW_FULLSCREEN – Changes the window size to fullscreen
 
-cv2.namedWindow("WindowName", cv2.WINDOW_AUTOSIZE)
-cv2.namedWindow("WindowName", cv2.WINDOW_NORMAL)
-cv2.namedWindow("WindowName", cv2.WINDOW_NORMAL)# 讓視窗可以自由縮放大小
+cv2.namedWindow("OpenCV", cv2.WINDOW_AUTOSIZE)
+cv2.namedWindow("OpenCV", cv2.WINDOW_NORMAL)
+cv2.namedWindow("OpenCV", cv2.WINDOW_NORMAL)# 讓視窗可以自由縮放大小
+cv2.namedWindow("OpenCV", cv2.WINDOW_NORMAL)# 可調整大小
 
 # 設定視窗參數, 若不設定, 即是 圖片滿框、不可調整大小
 # 預設 flags == WINDOW_AUTOSIZE | WINDOW_KEEPRATIO |WINDOW_GUI_EXPANDED
-
-# 可調整大小
-# cv2.namedWindow("WindowName", cv2.WINDOW_NORMAL)
 
 # WINDOW_FREERATIO 不 保持比例
 # WINDOW_KEEPRATIO    保持比例
 
 # 可調整大小 並 保持比例
-# cv2.namedWindow("WindowName", cv2.WINDOW_NORMAL | cv2.WINDOW_KEEPRATIO)
+# cv2.namedWindow("OpenCV", cv2.WINDOW_NORMAL | cv2.WINDOW_KEEPRATIO)
 
 # 若有多個視窗 要指名視窗名稱
-cv2.namedWindow("WindowName", cv2.WINDOW_NORMAL)
-
+cv2.namedWindow("OpenCV", cv2.WINDOW_NORMAL)
 
 # 設定 cv 視窗
-cv2.namedWindow("WindowName")  # 使用預設
-cv2.namedWindow("WindowName", cv2.WINDOW_NORMAL)  # 可以調整大小
+cv2.namedWindow("OpenCV")
+cv2.namedWindow("OpenCV", cv2.WINDOW_NORMAL)  # 可以調整大小
 
-cv2.destroyWindow("WindowName")  # 指明刪除特定的視窗
+cv2.destroyWindow("OpenCV")  # 指明刪除特定的視窗
 
 """
-
-
 print("測試CV視窗 : 全螢幕顯示一圖")
 
 image = cv2.imread(filename1)  # 彩色讀取
 
-window_name = "Full-screen"
-cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
-cv2.setWindowProperty(window_name, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+cv2.namedWindow("OpenCV", cv2.WINDOW_NORMAL)
+cv2.setWindowProperty("OpenCV", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
-cv2.imshow(window_name, image)
+cv2.imshow("OpenCV", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -1279,30 +1238,19 @@ print("測試CV視窗 : 設定視窗大小並依視窗縮放影像")
 
 image = cv2.imread(filename1)  # 彩色讀取
 
-window_name = "640X480"
-cv2.namedWindow(window_name, 0)
-cv2.resizeWindow(window_name, 640, 480)
+cv2.namedWindow("OpenCV640X480", 0)
+cv2.resizeWindow("OpenCV640X480", 640, 480)
 
 # 設定視窗位置
 x_st, y_st = 300, 100
-cv2.moveWindow(window_name, x_st, y_st)
+cv2.moveWindow("OpenCV640X480", x_st, y_st)
 
-cv2.imshow(window_name, image)
+cv2.imshow("OpenCV640X480", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-cv2.waitKey(3000)  # 等待3秒
-cv2.destroyWindow("Peony1")  # 刪除Peony1
-
-cv2.waitKey(3000)  # 等待3秒
-cv2.destroyAllWindows()  # 刪除所有視窗
-
-# cv2.waitKey(2000)       # 等待兩秒 ( 2000 毫秒 ) 後關閉圖片視窗
-
 
 """ OK
 print("使用 cv2 顯示圖片")
@@ -1325,18 +1273,19 @@ if image is None:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 # 建立影像
-img = cv2.imread(filename1)  # 使用影像當畫布
-img = np.ones((350, 500, 3), np.uint8) * 255  # 白底畫布
-img[1:300, 1:300] = YELLOW  # 設定黃色底
-
+image = cv2.imread(filename1)  # 使用影像當畫布
+image = np.ones((350, 500, 3), np.uint8) * 255  # 白底畫布
+image[1:300, 1:300] = YELLOW  # 設定黃色底
 
 """
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 image = cv2.imread(filename, cv2.IMREAD_ANYCOLOR)
-"""
 
+img1 = cv2.imread(filename)  # 彩色讀取
+img2 = cv2.imread(filename, 0)  # 灰階讀取
+
+"""
 
 cv2.namedWindow("OpenCV")  # 建立一個名為 OpenCV 的視窗
 
@@ -1344,8 +1293,8 @@ while True:
     k = cv2.waitKey(0)  # 持續等待，直到按下鍵盤按鍵才會繼續
     c = chr(k)  # 將 ASCII 代碼轉換成真實字元
     print(c, k)  # 印出結果
-    if k == 27:
-        break  # 如果代碼等於 27，結束迴圈 ( 27 表示按鍵 ESC )
+    if k == ESC:
+        break  # 如果代碼等於 ESC(27)，結束迴圈
 
 cv2.destroyAllWindows()
 

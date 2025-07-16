@@ -95,8 +95,13 @@ cv2.createTrackbar(
 )
 
 CannyThreshold(0)  # 初始化
-if cv2.waitKey(0) == 27:
-    cv2.destroyAllWindows()
+
+while True:
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -663,9 +668,11 @@ plt.title("原圖")
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(
     binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
 )
+
 o = cv2.drawContours(image, contours, -1, RED, 5)
 
 plt.subplot(122)

@@ -110,7 +110,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(130, 60);
             this.button3.TabIndex = 4;
-            this.button3.Text = "負片 使用 BitmapData";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -131,7 +130,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(130, 60);
             this.button5.TabIndex = 6;
-            this.button5.Text = "使用SetPixel轉灰階";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -241,7 +239,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(130, 60);
             this.button13.TabIndex = 16;
-            this.button13.Text = "量測時間 黑白";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -252,7 +249,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(130, 60);
             this.button14.TabIndex = 17;
-            this.button14.Text = "量測時間 測光";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -274,7 +270,6 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(130, 60);
             this.button16.TabIndex = 19;
-            this.button16.Text = "將圖片放入拜列";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -285,7 +280,6 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(130, 60);
             this.button17.TabIndex = 20;
-            this.button17.Text = "BitmapData 使用";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -318,7 +312,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(130, 60);
             this.button20.TabIndex = 23;
-            this.button20.Text = "使用unsafe加快處理圖像速度";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -329,7 +322,6 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(130, 60);
             this.button21.TabIndex = 24;
-            this.button21.Text = "對圖片做Marshal處理1";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -384,6 +376,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(130, 60);
             this.button26.TabIndex = 29;
+            this.button26.Text = "將圖片放入拜列";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -394,6 +387,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(130, 60);
             this.button27.TabIndex = 30;
+            this.button27.Text = "使用unsafe加快處理圖像速度";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 

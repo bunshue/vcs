@@ -360,18 +360,18 @@ brightness = 0  # 初始化要調整亮度的數值
 cv2.imshow("Image", image)
 
 while True:
-    keycode = cv2.waitKey(0)
-    if keycode == 0:
+    k = cv2.waitKey(0)
+    if k == 0:
         brightness = brightness + 5  # 按下鍵盤的「上」，增加亮度
-    if keycode == 1:
+    if k == 1:
         brightness = brightness - 5  # 按下鍵盤的「下」，減少亮度
-    if keycode == 2:
+    if k == 2:
         contrast = contrast - 5  # 按下鍵盤的「右」，增加對比度
-    if keycode == 3:
+    if k == 3:
         contrast = contrast + 5  # 按下鍵盤的「左」，減少對比度
-    if keycode == 113:
+    if k == 113:
         contrast, brightness = 0, 0  # 按下鍵盤的「q」，恢復預設值
-    if keycode == 27:
+    if k == ESC:
         break
     show_image = image.copy()  # 複製原始圖片
     show_image = adjust(show_image, contrast, brightness)  # 根據亮度和對比度的調整值，輸出新的圖片
@@ -837,46 +837,6 @@ occlusion = np.logical_not(mask[:, :, -1]).astype(np.uint8)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-# 圖形處理 二維卷積 使用filter2D()製作的各種圖形處理效果
-
-用不同的卷积核可以得到 各种不同的图像处理效果。
-OpenCV提供了 filter2D()来完成图像的卷积运算，调用方式如下：
-filter2D(src, ddepth, kernel[, dst[, anchor[, delta[, borderType]]]])
-    anchor参数指定卷积核的锚点位置，当它为默认值(-1，-1)时， 以卷积核的中心为锚点
-使用filter2D()制作的各种图像处理效果
-"""
-
-filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
-src = cv2.imread(filename3)
-
-kernel1_name = "低通濾波器"
-kernel1 = np.array([[1, 1, 1], [1, 2, 1], [1, 1, 1]]) * 0.1
-kernel2_name = "高通濾波器"
-kernel2 = np.array([[0.0, -1, 0], [-1, 5, -1], [0, -1, 0]])
-kernel3_name = "邊緣檢驗"
-kernel3 = np.array([[-1.0, -1, -1], [-1, 8, -1], [-1, -1, -1]])
-
-dst1 = cv2.filter2D(src, -1, kernel1)
-dst2 = cv2.filter2D(src, -1, kernel2)
-dst3 = cv2.filter2D(src, -1, kernel3)
-
-plt.figure(figsize=(12, 5))
-
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.title(kernel1_name)
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.title(kernel2_name)
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(dst3, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.title(kernel3_name)
-
-show()
-
 print("------------------------------------------------------------")  # 60個
 print("-------------------- ----------------------------------------")  # 60個
 # OpenCV 運算
@@ -1178,7 +1138,7 @@ image = cv2.imread(filename2)
 roi = cv2.selectROI("image", image)
 print("選取區域 :", roi)
 
-keycode = cv2.waitKey(0)
+cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -1565,63 +1525,6 @@ cv2.imshow("image", out)
 cv2.waitKey()
 cv2.destroyAllWindows()
 """
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# Prewitt horizontal edge-emphasizing filter 邊緣加強的影像處理技術
-
-image = cv2.imread(filename_lena_gray)
-
-print("filter2D 效果")
-kernel = np.ones((9, 9), np.float32) / 81
-image_filter2D = cv2.filter2D(image, -1, kernel)
-
-plt.figure(figsize=(12, 8))
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(image_filter2D, cv2.COLOR_BGR2RGB))
-plt.title("filter2D 效果")
-
-plt.suptitle("filter2D 效果")
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-image = cv2.imread(filename_barbara, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
-
-kernel_x = np.array([[1, 1, 1], [0, 0, 0], [-1, -1, -1]], dtype=int)  # 水平值一樣, 偵測水平的邊緣
-kernel_y = np.array([[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]], dtype=int)  # 垂直值一樣, 偵測垂直的邊緣
-
-print("filter2D 效果")
-
-x = cv2.filter2D(image, cv2.CV_16S, kernel_x)
-y = cv2.filter2D(image, cv2.CV_16S, kernel_y)
-
-absX = cv2.convertScaleAbs(x)
-absY = cv2.convertScaleAbs(y)
-
-plt.figure(figsize=(12, 8))
-
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(absX, cv2.COLOR_BGR2RGB))
-plt.title("Prewitt_horizon")
-# 躺平的書本的邊緣有被強調出來
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(absY, cv2.COLOR_BGR2RGB))
-plt.title("Prewitt_vertical")
-# 直放的書本的邊緣有被強調出來
-
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

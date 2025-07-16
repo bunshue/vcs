@@ -13,17 +13,6 @@ using System.Runtime.InteropServices;   //for Marshal
 using System.Diagnostics;   //for Stopwatch
 using System.Threading.Tasks;   //for Parallel
 
-/*
-//使用C#的BitmapData編程實例
-
-日期：2017/1/4 14:59:43      編輯：關於C#
-
-最近要轉開發平台，正研究C#。C#好是好，不過處理圖片時一個像素一個像素的操作像素不是一般的慢。其實Delphi也一樣，但好在Delphi的Bitmap類提供了ScanLines，可以一行一行的讀圖，效率比較高。C#應該也有類似的東東。經過一番搜索，終於發現了BitmapData類。
-
-先看個例子，這是對一張位圖的每個像素按FF取補，然後輸出到一個新圖（代碼有點啰嗦，不過應該可以說明問題了）。
-*/
-
-
 namespace vcs_ImageProcessing0
 {
     public partial class Form1 : Form
@@ -34,93 +23,6 @@ namespace vcs_ImageProcessing0
         //string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
         Stopwatch sw = new Stopwatch();
-
-        private Bitmap bitmap1;
-        byte[] srcData;
-        //int[] histoData;
-
-        public struct RGB
-        {
-            private byte _r;
-            private byte _g;
-            private byte _b;
-
-            public RGB(byte r, byte g, byte b)
-            {
-                this._r = r;
-                this._g = g;
-                this._b = b;
-            }
-
-            public byte R
-            {
-                get { return this._r; }
-                set { this._r = value; }
-            }
-
-            public byte G
-            {
-                get { return this._g; }
-                set { this._g = value; }
-            }
-
-            public byte B
-            {
-                get { return this._b; }
-                set { this._b = value; }
-            }
-
-            public bool Equals(RGB rgb)
-            {
-                return (this.R == rgb.R) && (this.G == rgb.G) && (this.B == rgb.B);
-            }
-        }
-
-        public struct YUV
-        {
-            private double _y;
-            private double _u;
-            private double _v;
-
-            public YUV(double y, double u, double v)
-            {
-                this._y = y;
-                this._u = u;
-                this._v = v;
-            }
-
-            public double Y
-            {
-                get { return this._y; }
-                set { this._y = value; }
-            }
-
-            public double U
-            {
-                get { return this._u; }
-                set { this._u = value; }
-            }
-
-            public double V
-            {
-                get { return this._v; }
-                set { this._v = value; }
-            }
-
-            public bool Equals(YUV yuv)
-            {
-                return (this.Y == yuv.Y) && (this.U == yuv.U) && (this.V == yuv.V);
-            }
-        }
-
-        public static YUV RGBToYUV(RGB rgb)
-        {
-            double y = rgb.R * .299000 + rgb.G * .587000 + rgb.B * .114000;
-            double u = rgb.R * -.168736 + rgb.G * -.331264 + rgb.B * .500000 + 128;
-            double v = rgb.R * .500000 + rgb.G * -.418688 + rgb.B * -.081312 + 128;
-
-            return new YUV(y, u, v);
-        }
 
         //delay 10000 約 10秒
         //C# 不lag的延遲時間
@@ -262,32 +164,6 @@ namespace vcs_ImageProcessing0
             richTextBox1.Text += "各種影像處理速度比較 ST\n";
             Application.DoEvents();
 
-            richTextBox1.Text += "方法1: 使用GetPixel、SetPixel\n";
-            sw.Start();
-            NegativeImage1(bmp);
-            sw.Stop();
-            pictureBox1.Refresh();
-            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
-            Application.DoEvents();
-
-            richTextBox1.Text += "方法2: Method in consideration of the arrangement\n";
-            sw.Reset();
-            sw.Start();
-            NegativeImage2(bmp);
-            sw.Stop();
-            pictureBox1.Refresh();
-            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
-            Application.DoEvents();
-
-            richTextBox1.Text += "方法3: Mershal ReadByte、WriteByte\n";
-            sw.Reset();
-            sw.Start();
-            NegativeImage3(bmp);
-            sw.Stop();
-            pictureBox1.Refresh();
-            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
-            Application.DoEvents();
-
             richTextBox1.Text += "方法4: usafe pointer\n";
             sw.Reset();
             sw.Start();
@@ -321,124 +197,18 @@ namespace vcs_ImageProcessing0
         }
 
         /// <summary>
-        /// Set up the brightness value with GetPixel、SetPixel
-        /// </summary>
-        /// <param name="bmp"></param>
-        private void NegativeImage1(Bitmap bmp)
-        {
-            var W = bmp.Width;
-            var H = bmp.Height;
-            Color col;
-            int r, g, b;
-            for (int y = 0; y < H; y++)
-            {
-                for (int x = 0; x < W; x++)
-                {
-                    // Obtaining brightness value
-                    col = bmp.GetPixel(x, y);
-                    r = col.R;
-                    g = col.G;
-                    b = col.B;
-                    // color reversal
-                    col = Color.FromArgb(255 - r, 255 - g, 255 - b);
-                    // set up brightness value
-                    bmp.SetPixel(x, y, col);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Obtain the image data at Lock Bits, Unlock Bits with pointer and process the data in sequence 
-        /// </summary>
-        /// <param name="bmp"></param>
-        private void NegativeImage2(Bitmap bmp)
-        {
-            var W = bmp.Width;
-            var H = bmp.Height;
-
-            //綁定bmp和bmpData
-            var bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
-
-            // Obtain Bytes of memory width
-            var stride = Math.Abs(bmpData.Stride);
-
-            // Arrange image data for saving
-            int byte_data_len = stride * bmpData.Height;
-            var data = new byte[byte_data_len];
-
-            Marshal.Copy(bmpData.Scan0, data, 0, byte_data_len);//複製記憶體區塊
-
-            byte r, g, b;
-            for (int y = 0; y < H; y++)
-            {
-                for (int x = 0; x < W * 3; x += 3)
-                {
-                    // Obtain the brightness value
-                    r = data[stride * y + x + 2];
-                    g = data[stride * y + x + 1];
-                    b = data[stride * y + x]; ;
-                    // Set up the brightness value
-                    data[stride * y + x + 2] = (byte)(255 - r);
-                    data[stride * y + x + 1] = (byte)(255 - g);
-                    data[stride * y + x] = (byte)(255 - b);
-                }
-            }
-            // Copy the arrangement as Bitmap data
-            Marshal.Copy(data, 0, bmpData.Scan0, byte_data_len);//複製記憶體區塊
-
-            //解除綁定bmp和bmpData
-            bmp.UnlockBits(bmpData);
-        }
-
-        /// <summary>
-        /// How to obtain brightness value with ReadByte, WriteByte in Marshal class
-        /// </summary>
-        /// <param name="bmp"></param>
-        private void NegativeImage3(Bitmap bmp)
-        {
-            var W = bmp.Width;
-            var H = bmp.Height;
-
-            //綁定bmp和bmpData
-            var bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
-
-            // Obtain Bytes of memory width
-            var stride = Math.Abs(bmpData.Stride);
-            byte r, g, b;
-            var ptr = bmpData.Scan0;
-            for (int y = 0; y < H; y++)
-            {
-                for (int x = 0; x < W * 3; x += 3)
-                {
-                    // Obtain brightness value
-                    r = Marshal.ReadByte(ptr, stride * y + x + 2);
-                    g = Marshal.ReadByte(ptr, stride * y + x + 1);
-                    b = Marshal.ReadByte(ptr, stride * y + x);
-                    // Set up brightness value
-                    Marshal.WriteByte(ptr, stride * y + x + 2, (byte)(255 - r));
-                    Marshal.WriteByte(ptr, stride * y + x + 1, (byte)(255 - g));
-                    Marshal.WriteByte(ptr, stride * y + x, (byte)(255 - b));
-                }
-            }
-
-            //解除綁定bmp和bmpData
-            bmp.UnlockBits(bmpData);
-        }
-
-        /// <summary>
         /// How to obtain brightness value by using unsafe pointer
         /// </summary>
         /// <param name="bmp"></param>
         private void NegativeImage4(Bitmap bmp)
         {
-            var W = bmp.Width;
-            var H = bmp.Height;
+            int W = bmp.Width;
+            int H = bmp.Height;
 
             //綁定bmp和bmpData
-            var bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
+            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
 
-            // Obtain Bytes of memory width
-            var stride = Math.Abs(bmpData.Stride);
+            var stride = Math.Abs(bmpData.Stride);//取得記憶體寬度
             unsafe
             {
                 // Arrange image data for saving
@@ -477,14 +247,13 @@ namespace vcs_ImageProcessing0
         /// <param name="bmp"></param>
         private void NegativeImage5(Bitmap bmp)
         {
-            var W = bmp.Width;
-            var H = bmp.Height;
+            int W = bmp.Width;
+            int H = bmp.Height;
 
             //綁定bmp和bmpData
-            var bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
+            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
 
-            // Obtain Bytes of memory width
-            var stride = Math.Abs(bmpData.Stride);
+            var stride = Math.Abs(bmpData.Stride);//取得記憶體寬度
             unsafe
             {
                 // Arrange image data for saving
@@ -520,8 +289,8 @@ namespace vcs_ImageProcessing0
         /// <param name="bmp"></param>
         private void NegativeImage6(Bitmap bmp)
         {
-            var W = bmp.Width;
-            var H = bmp.Height;
+            int W = bmp.Width;
+            int H = bmp.Height;
 
             //綁定bmp和bmpData
             BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
@@ -565,9 +334,6 @@ namespace vcs_ImageProcessing0
 
         private void button1_Click(object sender, EventArgs e)
         {
-            sw.Reset();
-            sw.Start();
-
             int i;
             Bitmap bitmap1 = new Bitmap(filename);
 
@@ -581,9 +347,6 @@ namespace vcs_ImageProcessing0
             BitmapData bmpData = bitmap1.LockBits(rect, ImageLockMode.ReadWrite, bitmap1.PixelFormat);   // Lock the bits.
             //BitmapData bmpData = bitmap1.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb); //指明PixelFormat
 
-            // Get the address of the first line.
-            IntPtr ptr = bmpData.Scan0;
-
             // Declare an array to hold the bytes of the bitmap.
             int byte_data_len = bmpData.Stride * H;
             //richTextBox1.Text += "bmpData.Stride = " + bmpData.Stride.ToString() + "\n";
@@ -591,39 +354,11 @@ namespace vcs_ImageProcessing0
             byte[] rgbValues = new byte[byte_data_len];
 
             // Copy the RGB values into the array.
-            Marshal.Copy(ptr, rgbValues, 0, byte_data_len);//複製記憶體區塊
-
-            /*
-            for (i = 0; i < bmpData.Stride; i++)
-            {
-                richTextBox1.Text += rgbValues[i].ToString() + " ";
-            }
-            richTextBox1.Text += "\n\n\n";
-            */
+            Marshal.Copy(bmpData.Scan0, rgbValues, 0, byte_data_len);//複製記憶體區塊
 
             // jpg檔要加 3, bmp檔要加4
             for (i = 0; i < byte_data_len; i += 3)
             {
-                /*
-                //只存紅
-                rgbValues[i] = 0;   //每個點的B改成255
-                rgbValues[i + 1] = 0;   //每個點的G改成255
-                //rgbValues[i + 2] = 0;   //每個點的R改成255
-                //rgbValues[i + 3] = 0;   //每個點的A改成255
-
-                //只存綠
-                rgbValues[i] = 0;   //每個點的B改成255
-                //rgbValues[i + 1] = 0;   //每個點的G改成255
-                rgbValues[i + 2] = 0;   //每個點的R改成255
-                //rgbValues[i + 3] = 0;   //每個點的A改成255
-
-                //只存藍
-                //rgbValues[i] = 0;   //每個點的B改成255
-                rgbValues[i + 1] = 0;   //每個點的G改成255
-                rgbValues[i + 2] = 0;   //每個點的R改成255
-                //rgbValues[i + 3] = 0;   //每個點的A改成255
-                */
-
                 //三色平均 => 灰階
                 byte avg = (byte)((rgbValues[i] + rgbValues[i + 1] + rgbValues[i + 2]) / 3);
                 rgbValues[i] = avg;         //每個點的B改成三色平均
@@ -632,31 +367,17 @@ namespace vcs_ImageProcessing0
                 //rgbValues[i + 3] = 0;     //每個點的A改成三色平均
             }
 
-            /*
-            for (i = 0; i < bmpData.Stride; i++)
-            {
-                richTextBox1.Text += rgbValues[i].ToString() + " ";
-            }
-            richTextBox1.Text += "\n\n\n";
-            */
-
             // Copy the RGB values back to the bitmap
-            Marshal.Copy(rgbValues, 0, ptr, byte_data_len);//複製記憶體區塊
+            Marshal.Copy(rgbValues, 0, bmpData.Scan0, byte_data_len);//複製記憶體區塊
 
             //解除綁定bitmap1和bmpData
             bitmap1.UnlockBits(bmpData);
 
             pictureBox1.Image = bitmap1;
-            sw.Stop();
-            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
-            //richTextBox1.Text += "耗時 : " + sw.Elapsed.TotalSeconds.ToString("0.000") + " 秒\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            sw.Reset();
-            sw.Start();
-
             int i;
             int j;
             Bitmap bitmap1 = new Bitmap(filename);
@@ -676,146 +397,30 @@ namespace vcs_ImageProcessing0
             {
                 byte* ptr = (byte*)(bmpData.Scan0);
 
-                //richTextBox1.Text += "W = " + W.ToString() + "\n";
                 for (j = 0; j < H; j++)
                 {
                     for (i = 0; i < W; i++)
                     {
-                        /*
-                        if (j == 0)
-                        {
-                            //richTextBox1.Text += "[" + i.ToString() + "]" + (*ptr).ToString() + " ";
-                            richTextBox1.Text += (*ptr).ToString() + " ";
-                            richTextBox1.Text += (*(ptr + 1)).ToString() + " ";
-                            richTextBox1.Text += (*(ptr + 2)).ToString() + " ";
-                            richTextBox1.Text += (*(ptr + 3)).ToString() + " ";
-                        }
-                        */
-
-                        /*
-                        //只存紅
-                        *(ptr + 0) = 0;   //每個點的B改成255
-                        *(ptr + 1) = 0;   //每個點的G改成255
-                        //*(ptr + 2) = 0;   //每個點的R改成255
-                        //*(ptr + 3) = 0;   //每個點的A改成255
-                        */
-
-                        /*
-                        //只存綠
-                        *(ptr + 0) = 0;   //每個點的B改成255
-                        //*(ptr + 1) = 0;   //每個點的G改成255
-                        *(ptr + 2) = 0;   //每個點的R改成255
-                        //*(ptr + 3) = 0;   //每個點的A改成255
-                        */
-
-                        /*
-                        //只存藍
-                        //*(ptr + 0) = 0;   //每個點的B改成255
-                        *(ptr + 1) = 0;   //每個點的G改成255
-                        *(ptr + 2) = 0;   //每個點的R改成255
-                        //*(ptr + 3) = 0;   //每個點的A改成255
-                        */
-
                         //三色平均 => 灰階
                         byte avg = (byte)((*(ptr + 0) + *(ptr + 1) + *(ptr + 2)) / 3);
                         *(ptr + 0) = avg;         //每個點的B改成三色平均
                         *(ptr + 1) = avg;     //每個點的G改成三色平均
                         *(ptr + 2) = avg;     //每個點的R改成三色平均
                         //*(ptr + 3) = 0;     //每個點的A改成三色平均
-
                         ptr += 3;   //jpg檔要加 3, bmp檔要加4
                     }
                 }
-                //richTextBox1.Text += "\n\n\n";
 
                 //解除綁定bitmap1和bmpData
                 bitmap1.UnlockBits(bmpData);
 
                 pictureBox1.Image = bitmap1;
-                sw.Stop();
-                richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
             }
             //毫無疑問，採用這種方式是最快的，所以在實際工程中都是採用指針的方式來訪問圖像像素的。
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            //pictureBox1.Image = bitmap1;
-
-            int h = bitmap1.Height;
-            int w = bitmap1.Width;
-            Bitmap bitmap2 = new Bitmap(w, h, PixelFormat.Format24bppRgb);
-
-            //綁定bitmap1和dataIn
-            BitmapData dataIn = bitmap1.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-            //綁定bitmap2和dataOut
-            BitmapData dataOut = bitmap2.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-
-            unsafe
-            {
-                byte* pIn = (byte*)(dataIn.Scan0.ToPointer());
-                byte* pOut = (byte*)(dataOut.Scan0.ToPointer());
-                for (int y = 0; y < dataIn.Height; y++)
-                {
-                    for (int x = 0; x < dataIn.Width; x++)
-                    {
-                        pOut[0] = (byte)(255 - pIn[0]);
-                        pOut[1] = (byte)(255 - pIn[1]);
-                        pOut[2] = (byte)(255 - pIn[2]);
-                        pIn += 3;
-                        pOut += 3;
-                    }
-                    pIn += dataIn.Stride - dataIn.Width * 3;
-                    pOut += dataOut.Stride - dataOut.Width * 3;
-                }
-            }
-
-            //解除綁定bitmap2和dataOut
-            bitmap2.UnlockBits(dataOut);
-            //解除綁定bitmap1和dataIn
-            bitmap1.UnlockBits(dataIn);
-
-            //就是掃描每一行，然後對當前像素點的三個分量做處理
-
-            pictureBox1.Image = bitmap2;
-
-            /*
-            C#代碼中的Stride是個什麼東東？
-
-            查找了不少資料，現在我是這麼理解的：
-
-            假設有一張圖片寬度為6，因為是Format24bppRgb格式(每像素3字節。在以下的討論中，除非特別說明，否則Bitmap都被認為是24位RGB)的，顯然，每一行需要6*3=18個字節存儲。對於Bitmap就是如此。但對於BitmapData，雖然BitmapData.Width還是等於Bitmap.Width，但大概是出於顯示性能的考慮，每行的實際的字節數將變成大於等於它的那個離它最近的4的整倍數，此時的實際字節數就是Stride。就此例而言，18不是4的整倍數，而比18大的離18最近的4的倍數是20，所以這個BitmapData.Stride = 20。顯然，當寬度本身就是4的倍數時，BitmapData.Stride = Bitmap.Width * 3。
-            */
-
-            /*
-            畫個圖可能更好理解。R、G、B 分別代表3個原色分量字節，BGR就表示一個像素。為了看起來方便我在每個像素之間插了個空格，實際上是沒有的。X表示補足4的倍數而自動插入的字節。為了符合人類的閱讀習慣我分行了，其實在計算機內存中應該看成連續的一大段。
-
-            Scan0
-
-            ---------Stride-----------------
-
-            ---------Width-------------　 　 注：Width是圖片（BGR作為一個單位）寬度
-
-            BGR BGR BGR BGR BGR BGR XX
-
-            BGR BGR BGR BGR BGR BGR XX
-            .
-            .
-            .
-
-            現在應該很好理解了。首先用 BitmapData.Scan0找到第0個像素的第0個分量的地址。這個地址指向的是個byte類型，所以當時定義為byte* pIn。
-
-            行掃描時，在當前指針位置（不妨看成當前像素的第0個顏色分量）連續取出三個值（3個原色分量。注意，0 1 2代表的次序是B G R。在取指針指向的值時，貌似p[n]和p += n再取p[0]是等價的），然後下移3個位置（pIn += 3，看成指到下一個像素的第0個顏色分量）。做過Bitmap.Width次操作後，就到達了Bitmap.Width * 3的位置，應該要跳過圖中標記為X的字節了（共有Stride - Width * 3個字節），代碼中就是 pIn += dataIn.Stride - dataIn.Width * 3;
-
-            跳過以後指針就到達下行的第0個像素了。按照此算法,一共需要做Bitmap.Height次行掃描（代碼就是 for (int y = 0; y < dataIn.Height; y++)）。
-
-            另外，因為使用了unsafe，所以編譯的時候需要設置“允許不安全的代碼”。
-            */
-
-
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -835,11 +440,9 @@ namespace vcs_ImageProcessing0
 
             Bitmap bitmap1 = ToGrayBitmap(byte_data_len, 100, 100);
             pictureBox1.Image = bitmap1;
-            //bitmap1.Save(@"aaaaa.png", ImageFormat.Png);
         }
 
         //C#中將byte數組轉換為8bit灰度圖像
-
         /*
         byte數組存放的是圖像每個像素的灰度值，byte類型正好是從0~255，存放8bit灰度圖像的時候，一個 數組元素就是一個像素的灰度值。僅有這個數組還不足以恢復出原來的圖像，還必須事先知道圖像的長、 寬值；
 
@@ -914,20 +517,6 @@ namespace vcs_ImageProcessing0
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //使用SetPixel轉灰階
-            button5.BackColor = Color.Red;
-            Application.DoEvents();
-
-            Restore_Picture();
-
-            sw.Reset();
-            sw.Start();
-
-            Use_SetPixel_Code();
-
-            sw.Stop();
-            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
-            button5.BackColor = SystemColors.ControlLight;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -944,46 +533,6 @@ namespace vcs_ImageProcessing0
             sw.Stop();
             richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
 
-        }
-
-        void Use_SetPixel_Code()
-        {
-            if (pictureBox1.Image != null)
-            {
-                int W = pictureBox1.Image.Width;
-                int H = pictureBox1.Image.Height;
-                Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
-                Bitmap bitmap2 = new Bitmap(W, H);
-                Color pixel;
-                for (int x = 0; x < W; x++)
-                {
-                    for (int y = 0; y < H; y++)
-                    {
-                        pixel = bitmap1.GetPixel(x, y);
-                        int r, g, b, Result = 0;
-                        r = pixel.R;
-                        g = pixel.G;
-                        b = pixel.B;
-                        //实例程序以加权平均值法产生黑白图像
-                        int iType = 2;
-                        switch (iType)
-                        {
-                            case 0://平均值法
-                                Result = ((r + g + b) / 3);
-                                break;
-                            case 1://最大值法
-                                Result = r > g ? r : g;
-                                Result = Result > b ? Result : b;
-                                break;
-                            case 2://加权平均值法
-                                Result = ((int)(0.7 * r) + (int)(0.2 * g) + (int)(0.1 * b));
-                                break;
-                        }
-                        bitmap2.SetPixel(x, y, Color.FromArgb(Result, Result, Result));
-                    }
-                }
-                pictureBox1.Image = bitmap2;
-            }
         }
 
         void Use_Unsafe_Code()
@@ -1091,12 +640,11 @@ namespace vcs_ImageProcessing0
 
                 //綁定bmp和bmpData
                 BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);
-                IntPtr ptr = bmpData.Scan0;
 
                 int byte_data_len = bmp.Width * bmp.Height * 3;
                 byte[] rgbvalues = new byte[byte_data_len];
 
-                Marshal.Copy(ptr, rgbvalues, 0, byte_data_len);//複製記憶體區塊
+                Marshal.Copy(bmpData.Scan0, rgbvalues, 0, byte_data_len);//複製記憶體區塊
 
                 double colortemp = 0;
                 for (int i = 0; i < rgbvalues.Length; i += 3)
@@ -1105,7 +653,7 @@ namespace vcs_ImageProcessing0
                     rgbvalues[i] = rgbvalues[i + 1] = rgbvalues[i + 2] = (byte)colortemp;
                 }
 
-                Marshal.Copy(rgbvalues, 0, ptr, byte_data_len);//複製記憶體區塊
+                Marshal.Copy(rgbvalues, 0, bmpData.Scan0, byte_data_len);//複製記憶體區塊
 
                 //解除綁定bmp和bmpData
                 bmp.UnlockBits(bmpData);
@@ -1284,7 +832,6 @@ namespace vcs_ImageProcessing0
             //使用：先锁定Bitmap，然后通过Pixels操作颜色对象，最后释放锁，把数据更新到Bitmap中
 
             Bitmap bmp = (Bitmap)Image.FromFile(filename);
-            Benchmark.Start();
             LockBitmap lockBitmap = new LockBitmap(bmp);
             lockBitmap.LockBits();  //锁定Bitmap，通过Pixel访问颜色
 
@@ -1301,16 +848,8 @@ namespace vcs_ImageProcessing0
             }
 
             lockBitmap.UnlockBits();    //从内存解锁Bitmap
-            Benchmark.End();
-            double seconds = Benchmark.GetSeconds();
-            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", seconds.ToString()) + "\tsec\n";
 
-            string filename_png = Application.StartupPath + "\\png_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
-            bmp.Save(filename_png);
             pictureBox1.Image = bmp;
-
-
-
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -1323,7 +862,6 @@ namespace vcs_ImageProcessing0
 
             //指針法
             Bitmap bmp = (Bitmap)Image.FromFile(filename);
-            Benchmark.Start();
 
             PointBitmap lockBitmap = new PointBitmap(bmp);
             lockBitmap.LockBits();  //锁定Bitmap，通过Pixel访问颜色
@@ -1341,114 +879,16 @@ namespace vcs_ImageProcessing0
             }
 
             lockBitmap.UnlockBits();    //从内存解锁Bitmap
-            Benchmark.End();
-            double seconds = Benchmark.GetSeconds();
-            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", seconds.ToString()) + "\tsec\n";
 
-            string filename_png = Application.StartupPath + "\\png_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
-            bmp.Save(filename_png);
             pictureBox1.Image = bmp;
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            button13.BackColor = Color.Red;
-            Application.DoEvents();
-            //量測時間 黑白
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_book\2016122615573727.jpg";
-            Bitmap bitmap1 = new Bitmap(filename);
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-
-            richTextBox1.Text += "量測時間ST\t黑白\t約耗時 21 秒, 目前無法中斷\n";
-
-            Application.DoEvents();
-
-            Stopwatch stopwatch = new Stopwatch();
-
-            int xx;
-            int yy;
-            Color c;
-
-            stopwatch.Start();
-
-            for (yy = 0; yy < H; yy++)
-            {
-                for (xx = 0; xx < W; xx++)
-                {
-                    c = bitmap1.GetPixel(xx, yy);
-
-                    //黑白
-                    bitmap1.SetPixel(xx, yy, Color.FromArgb((c.R + c.G + c.B) / 3, (c.R + c.G + c.B) / 3, (c.R + c.G + c.B) / 3));
-                }
-            }
-
-            // Stop timing
-            stopwatch.Stop();
-
-            pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
-
-            richTextBox1.Text += "完成, 總時間 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
-
-            button13.BackColor = SystemColors.ControlLight;
-            Application.DoEvents();
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            button14.BackColor = Color.Red;
-            Application.DoEvents();
-
-            //量測時間 測光
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_book\2016122615573727.jpg";
-            Bitmap bitmap1 = new Bitmap(filename);
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-
-            richTextBox1.Text += "量測時間ST\t測光\t約耗時 12 秒, 目前無法中斷\n";
-
-            Application.DoEvents();
-
-            Stopwatch stopwatch = new Stopwatch();
-
-            int xx;
-            int yy;
-            Color c;
-            double y_total = 0;
-
-            stopwatch.Start();
-
-            for (yy = 0; yy < H; yy++)
-            {
-                for (xx = 0; xx < W; xx++)
-                {
-                    c = bitmap1.GetPixel(xx, yy);
-
-                    //測光
-                    RGB pp = new RGB(c.R, c.G, c.B);
-                    YUV yyy = new YUV();
-                    yyy = RGBToYUV(pp);
-                    y_total += yyy.Y;
-                }
-            }
-
-            // Stop timing
-            stopwatch.Stop();
-
-            pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
-
-            richTextBox1.Text += "亮度 : " + (y_total / (W * H)).ToString() + "\n";
-
-            richTextBox1.Text += "完成, 總時間 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
-
-            button14.BackColor = SystemColors.ControlLight;
-            Application.DoEvents();
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -1488,97 +928,10 @@ namespace vcs_ImageProcessing0
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //將圖片放入拜列
-
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\pic_256X100.bmp";
-
-            Image image = Image.FromFile(filename);
-
-            MemoryStream ms = new MemoryStream();
-            image.Save(ms, image.RawFormat);
-            Byte[] byte_array = ms.ToArray();
-
-            int len = byte_array.Length;
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
-            int i;
-            for (i = 54; i < (54 + 256 * 2); i++)
-            {
-                richTextBox1.Text += byte_array[i].ToString("D03") + " ";
-            }
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
-            //BitmapData使用
-            //用Marshal做影像處理, TBD
-
-            filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            LoadBitmap(filename);
-
-            int byte_data_len = srcData.Length;
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-
-            richTextBox1.Text += "byte_data_len = " + byte_data_len.ToString() + "\n";
-            richTextBox1.Text += "W = " + W.ToString() + "\n";
-            richTextBox1.Text += "H = " + H.ToString() + "\n";
-            int i;
-            int j;
-            for (j = 0; j < H; j++)
-            {
-                for (i = 0; i < W; i++)
-                {
-                    //richTextBox1.Text += srcData[j * H + i].ToString("X2") + " ";
-                    //richTextBox1.Text += srcData[j * H + i].ToString() + " ";
-
-                    //srcData[j * H + i] = (byte)(255 - srcData[j * H + i]);
-
-                }
-                //richTextBox1.Text += "\n";
-            }
-
-            //準備修改srcData值  並把 srcData恢復成圖片
-
-
-            for (i = 0; i < 305 * 10; i++)
-            {
-                srcData[i] = 0;
-
-            }
-
-            richTextBox1.Text += "\n";
-            richTextBox1.Text += "\n";
-            richTextBox1.Text += "\n";
-
-
-            for (i = 0; i < 150; i++)
-            {
-                //richTextBox1.Text += srcData[i].ToString() + " ";
-
-            }
-            richTextBox1.Text += "\n";
-        }
-
-        // load and initialize from file
-        private void LoadBitmap(string filename)
-        {
-            // read from file
-            bitmap1 = (Bitmap)Image.FromFile(filename);
-            pictureBox1.Image = bitmap1;
-
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-
-            //綁定bitmap1和bmpData
-            BitmapData bmpData = bitmap1.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
-
-            int byte_data_len = W * H;
-            srcData = new byte[byte_data_len];
-            IntPtr srcPtr = bmpData.Scan0;
-            Marshal.Copy(srcPtr, srcData, 0, byte_data_len);//複製記憶體區塊
-
-            //解除綁定bitmap1和bmpData
-            bitmap1.UnlockBits(bmpData);
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -1616,64 +969,10 @@ namespace vcs_ImageProcessing0
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //使用unsafe加快處理圖像速度
-
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\red.bmp";
-
-            Bitmap bitmap1 = new Bitmap(filename);
-
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-
-            Rectangle rect = new Rectangle(100, 100, 20, 20);
-
-            //綁定bitmap1和bmpData
-            BitmapData bmpData = bitmap1.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-
-            int w = bmpData.Width;
-            int h = bmpData.Height;
-
-            richTextBox1.Text += "w = " + w.ToString() + ", h = " + h.ToString() + "\n";
-
-            unsafe
-            {
-                long r = 0;
-                long g = 0;
-                long b = 0;
-                long pixelCount = h * w;
-
-                byte* ptr = (byte*)(bmpData.Scan0);
-
-                for (int i = 0; i < h; i++)
-                {
-                    for (int j = 0; j < w; j++)
-                    {
-                        //排列是BGR
-                        b += *ptr;
-                        g += *(ptr + 1);
-                        r += *(ptr + 2);
-                        ptr += 3;
-                    }
-                    ptr += bmpData.Stride - w * 3;
-                }
-
-                double totalRGB = (r / pixelCount + g / pixelCount + b / pixelCount) / 3;
-
-                richTextBox1.Text += "平均 R : " + (r / pixelCount).ToString() + "\n";
-                richTextBox1.Text += "平均 G : " + (g / pixelCount).ToString() + "\n";
-                richTextBox1.Text += "平均 B : " + (b / pixelCount).ToString() + "\n";
-                richTextBox1.Text += "平均亮度 : " + totalRGB.ToString() + "\n";
-            }
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
-            //對圖片做Marshal處理1
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            LockUnlockBitsExample1();
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -1681,110 +980,13 @@ namespace vcs_ImageProcessing0
             //對圖片做Marshal處理2
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            LockUnlockBitsExample2();
-        }
 
-        private void LockUnlockBitsExample1()
-        {
             string filename = @"C:\_git\vcs\_1.data\______test_files1\_case1\\pic3.jpg";
 
-            // Create a new bitmap.
+            int data_offset = 0;
+
             Bitmap bmp0 = new Bitmap(filename);
             Bitmap bmp = new Bitmap(filename);
-            pictureBox1.Image = bmp0;
-
-            richTextBox1.Text += "W = " + bmp.Width.ToString() + ", H = " + bmp.Height.ToString() + "\n";
-            richTextBox1.Text += "PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
-
-            if (bmp.PixelFormat == PixelFormat.Format32bppRgb)
-                richTextBox1.Text += "位元深度\t32\n";
-            else if (bmp.PixelFormat == PixelFormat.Format24bppRgb)
-                richTextBox1.Text += "位元深度\t24\n";
-            else if (bmp.PixelFormat == PixelFormat.Format8bppIndexed)
-                richTextBox1.Text += "位元深度\t8\n";
-            else
-                richTextBox1.Text += "位元深度\tunknown, PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
-
-            // Lock the bitmap's bits.  
-            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-
-            //綁定bitmap1和bmpData
-            //BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);
-            BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);
-
-            richTextBox1.Text += "W = " + bmpData.Width.ToString() + "\n";
-            richTextBox1.Text += "H = " + bmpData.Height.ToString() + "\n";
-            richTextBox1.Text += "Stride = " + bmpData.Stride.ToString() + "\n";    //圖片一橫條的拜數 即WX4(拜)
-            richTextBox1.Text += "Scan0 = " + bmpData.Scan0.ToString() + "\n";
-
-            // Get the address of the first line.
-            IntPtr ptr = bmpData.Scan0;
-
-            // Declare an array to hold the bytes of the bitmap.
-            int byte_data_len = Math.Abs(bmpData.Stride) * bmp.Height;    //(W * 4) * H
-
-            richTextBox1.Text += "byte_data_len = " + byte_data_len.ToString() + "\n";
-
-            byte[] rgbValues = new byte[byte_data_len];
-
-            // Copy the RGB values into the array.
-            Marshal.Copy(ptr, rgbValues, 0, byte_data_len);//複製記憶體區塊
-
-            /*
-            int i;
-            for (i = 0; i < 1024; i++)
-            {
-                richTextBox1.Text += rgbValues[i].ToString();
-                if ((i % 64) == 63)
-                    richTextBox1.Text += "\n";
-                else
-                    richTextBox1.Text += " ";
-            }
-            richTextBox1.Text += "\n";
-            richTextBox1.Text += "\n";
-            richTextBox1.Text += "\n";
-            richTextBox1.Text += "\n";
-            */
-
-            //對特定點的資料作操作
-            int tmp = 0;
-            for (int counter = 0; counter < (rgbValues.Length - 20); counter += 3)
-            {
-                tmp = rgbValues[counter] + rgbValues[counter + 1] + rgbValues[counter + 2];
-                tmp /= 3;
-                rgbValues[counter] = (byte)tmp;
-                rgbValues[counter + 1] = (byte)tmp;
-                rgbValues[counter + 2] = (byte)tmp;
-            }
-
-            /*
-            for (i = 0; i < 1024; i++)
-            {
-                richTextBox1.Text += rgbValues[i].ToString();
-                if ((i % 64) == 63)
-                    richTextBox1.Text += "\n";
-                else
-                    richTextBox1.Text += " ";
-            }
-            richTextBox1.Text += "\n";
-            */
-
-            // Copy the RGB values back to the bitmap
-            Marshal.Copy(rgbValues, 0, ptr, byte_data_len);//複製記憶體區塊
-
-            //解除綁定bmp和bmpData
-            bmp.UnlockBits(bmpData);
-
-            pictureBox2.Image = bmp;
-        }
-
-        private void LockUnlockBitsExample2()
-        {
-            int data_offset = 0;
-            // Create a new bitmap.
-            //Bitmap bmp = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\IMG_256X32.bmp");
-            Bitmap bmp0 = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\picture1.jpg");
-            Bitmap bmp = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\picture1.jpg");
             pictureBox1.Image = bmp0;
 
             richTextBox1.Text += "W = " + bmp.Width.ToString() + ", H = " + bmp.Height.ToString() + "\n";
@@ -1806,11 +1008,14 @@ namespace vcs_ImageProcessing0
                 data_offset = 1;
             }
             else
+            {
                 richTextBox1.Text += "位元深度\tunknown, PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
+            }
 
             // Lock the bitmap's bits.  
-            Rectangle rect = new Rectangle(bmp.Width / 4, bmp.Width / 4, bmp.Width / 2, bmp.Height / 2);
+            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
 
+            //綁定bitmap1和bmpData
             BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);
 
             richTextBox1.Text += "W = " + bmpData.Width.ToString() + "\n";
@@ -1818,18 +1023,15 @@ namespace vcs_ImageProcessing0
             richTextBox1.Text += "Stride = " + bmpData.Stride.ToString() + "\n";    //圖片一橫條的拜數 即WX4(拜)
             richTextBox1.Text += "Scan0 = " + bmpData.Scan0.ToString() + "\n";
 
-            // Get the address of the first line.
-            IntPtr ptr = bmpData.Scan0;
-
             // Declare an array to hold the bytes of the bitmap.
-            int byte_data_len = Math.Abs(bmpData.Stride) * bmp.Height / 4;    //(W * 4) * H
+            int byte_data_len = Math.Abs(bmpData.Stride) * bmp.Height;    //(W * 4) * H//取得記憶體寬度
 
             richTextBox1.Text += "byte_data_len = " + byte_data_len.ToString() + "\n";
 
             byte[] rgbValues = new byte[byte_data_len];
 
             // Copy the RGB values into the array.
-            Marshal.Copy(ptr, rgbValues, 0, byte_data_len);//複製記憶體區塊
+            Marshal.Copy(bmpData.Scan0, rgbValues, 0, byte_data_len);//複製記憶體區塊
 
             /*
             int i;
@@ -1871,7 +1073,7 @@ namespace vcs_ImageProcessing0
             */
 
             // Copy the RGB values back to the bitmap
-            Marshal.Copy(rgbValues, 0, ptr, byte_data_len);//複製記憶體區塊
+            Marshal.Copy(rgbValues, 0, bmpData.Scan0, byte_data_len);//複製記憶體區塊
 
             //解除綁定bmp和bmpData
             bmp.UnlockBits(bmpData);
@@ -1955,7 +1157,7 @@ namespace vcs_ImageProcessing0
             //BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
             //指定像素格式轉為24比特
             BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            var stride = Math.Abs(bmpData.Stride);
+            var stride = Math.Abs(bmpData.Stride);//取得記憶體寬度
 
             //建立 byte[] Array 一維陣列
             int byte_data_len = stride * H;
@@ -2078,12 +1280,77 @@ namespace vcs_ImageProcessing0
 
         private void button26_Click(object sender, EventArgs e)
         {
+            //將圖片放入拜列
 
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\pic_256X100.bmp";
+
+            Image image = Image.FromFile(filename);
+
+            MemoryStream ms = new MemoryStream();
+            image.Save(ms, image.RawFormat);
+            Byte[] byte_array = ms.ToArray();
+
+            int len = byte_array.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            int i;
+            for (i = 54; i < (54 + 256 * 2); i++)
+            {
+                richTextBox1.Text += byte_array[i].ToString("D03") + " ";
+            }
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
+            //使用unsafe加快處理圖像速度
 
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\red.bmp";
+
+            Bitmap bitmap1 = new Bitmap(filename);
+
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+
+            Rectangle rect = new Rectangle(100, 100, 20, 20);
+
+            //綁定bitmap1和bmpData
+            BitmapData bmpData = bitmap1.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            int w = bmpData.Width;
+            int h = bmpData.Height;
+
+            richTextBox1.Text += "w = " + w.ToString() + ", h = " + h.ToString() + "\n";
+
+            unsafe
+            {
+                long r = 0;
+                long g = 0;
+                long b = 0;
+                long pixelCount = h * w;
+
+                byte* ptr = (byte*)(bmpData.Scan0);
+
+                for (int i = 0; i < h; i++)
+                {
+                    for (int j = 0; j < w; j++)
+                    {
+                        //排列是BGR
+                        b += *ptr;
+                        g += *(ptr + 1);
+                        r += *(ptr + 2);
+                        ptr += 3;
+                    }
+                    ptr += bmpData.Stride - w * 3;
+                }
+
+                double totalRGB = (r / pixelCount + g / pixelCount + b / pixelCount) / 3;
+
+                richTextBox1.Text += "平均 R : " + (r / pixelCount).ToString() + "\n";
+                richTextBox1.Text += "平均 G : " + (g / pixelCount).ToString() + "\n";
+                richTextBox1.Text += "平均 B : " + (b / pixelCount).ToString() + "\n";
+                richTextBox1.Text += "平均亮度 : " + totalRGB.ToString() + "\n";
+            }
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -2146,10 +1413,9 @@ namespace vcs_ImageProcessing0
                 // create byte array to copy pixel values
                 int step = Depth / 8;
                 Pixels = new byte[PixelCount * step];
-                Iptr = bitmapData.Scan0;
 
                 // Copy data from pointer to array
-                Marshal.Copy(Iptr, Pixels, 0, Pixels.Length);//複製記憶體區塊
+                Marshal.Copy(bitmapData.Scan0, Pixels, 0, Pixels.Length);//複製記憶體區塊
             }
             catch (Exception ex)
             {
@@ -2165,7 +1431,7 @@ namespace vcs_ImageProcessing0
             try
             {
                 // Copy data from byte array to pointer
-                Marshal.Copy(Pixels, 0, Iptr, Pixels.Length);//複製記憶體區塊
+                Marshal.Copy(Pixels, 0, bitmapData.Scan0, Pixels.Length);//複製記憶體區塊
 
                 //解除綁定bmp和bitmapData
                 bmp.UnlockBits(bitmapData);
@@ -2382,24 +1648,6 @@ namespace vcs_ImageProcessing0
                     ptr[0] = c.B;
                 }
             }
-        }
-    }
-
-    public class Benchmark
-    {
-        private static DateTime startDate = DateTime.MinValue;
-        private static DateTime endDate = DateTime.MinValue;
-
-        public static TimeSpan Span { get { return endDate.Subtract(startDate); } }
-
-        public static void Start() { startDate = DateTime.Now; }
-
-        public static void End() { endDate = DateTime.Now; }
-
-        public static double GetSeconds()
-        {
-            if (endDate == DateTime.MinValue) return 0.0;
-            else return Span.TotalSeconds;
         }
     }
 
@@ -2644,3 +1892,39 @@ namespace vcs_ImageProcessing0
         }
     }
 }
+
+
+
+/*
+IntPtr iptr = bmpData.Scan0;　 // 獲取bmpData的內存起始位置
+
+//richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+//richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+
+
+//Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+
+首先用 BitmapData.Scan0找到第0個像素的第0個分量的地址。這個地址指向的是個byte類型，所以當時定義為byte* pIn。
+
+為使用了unsafe，所以編譯的時候需要設置“允許不安全的代碼”。
+
+直接用 Marshal 操作
+                    r = Marshal.ReadByte(bmpData.Scan0, stride * y + x + 2);
+                    g = Marshal.ReadByte(bmpData.Scan0, stride * y + x + 1);
+                    b = Marshal.ReadByte(bmpData.Scan0, stride * y + x);
+
+                    Marshal.WriteByte(bmpData.Scan0, stride * y + x + 2, (byte)(255 - r));
+                    Marshal.WriteByte(bmpData.Scan0, stride * y + x + 1, (byte)(255 - g));
+                    Marshal.WriteByte(bmpData.Scan0, stride * y + x, (byte)(255 - b));
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+*/
+
+
+
