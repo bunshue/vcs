@@ -23,7 +23,6 @@ plt.hist(image,ravel(), hitsizes, ranges, color)
 img.ravel() 將原圖像的array數組轉成一維的數組
 hitsizes 為直方圖的灰度級數
 ranges 為灰度範圍[0,255]
-color 是參數，需要使用color=''來指定顏色
 
 plt.hist(image.ravel(), num_bins, [0, 256], log = True)
 這邊使用到 matplotlib.pyplot 的 hist，它接受一組資料，計算清單中各值出現的次數，上面的範例
@@ -54,7 +53,6 @@ filename = "data/pic_brightness2.bmp"
 filename = "data/pic_brightness3.bmp"
 filename = "data/pic_calcHist.jpg"
 filename = "C:/_git/vcs/_4.python/opencv/data/pic_gray_400X400_100-200.png"
-
 filename4a = "C:/_git/vcs/_4.python/opencv/data/ims_640X480.bmp"
 filename4b = "C:/_git/vcs/_4.python/opencv/data/ims_320X240.jpg"
 
@@ -1023,7 +1021,7 @@ cv2.calcHist
         import numpy as np
         import matplotlib.pyplot as plt
          
-        img = cv2.imread(r'C:/Users/25584/Desktop/equ.bmp',0) # 灰階讀取?
+        img = cv2.imread(r"C:/Users/25584/Desktop/equ.bmp", cv2.IMREAD_GRAYSCALE) # 灰階讀取
          
         equ = cv2.equalizeHist(img)    #普通的均衡化处理     
          
@@ -1031,7 +1029,7 @@ cv2.calcHist
         cl = clahe.apply(img)
          
         img_ = np.hstack((img, equ, cl))   #三张图片合到一起
-        plt.imshow(img_, cmap='gray') 
+        plt.imshow(img_, cmap="gray") 
         plt.show()
 
 """

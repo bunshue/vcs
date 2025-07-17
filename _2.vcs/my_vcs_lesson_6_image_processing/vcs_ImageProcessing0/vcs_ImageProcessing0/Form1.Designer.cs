@@ -73,7 +73,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(130, 60);
             this.button1.TabIndex = 0;
-            this.button1.Text = "灰階 使用 BitmapData 用Marshal做";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -184,7 +183,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(130, 60);
             this.button8.TabIndex = 11;
-            this.button8.Text = "灰階圖片處理2_BitmapData類";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -332,7 +330,6 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(130, 60);
             this.button22.TabIndex = 25;
-            this.button22.Text = "對圖片做Marshal處理2";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 

@@ -76,7 +76,7 @@ cv2.split / cv2.merge
 
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread(filename1)  # BGR讀取
+img = cv2.imread(filename1)  # 彩色讀取 BGR
 cv2.imshow("BGR Color Space", img)
 
 print("BGR 轉 RGB")
@@ -99,7 +99,7 @@ print("------------------------------------------------------------")  # 60個
 
 pt_x = 169
 pt_y = 118
-img = cv2.imread(filename1)  # BGR讀取
+img = cv2.imread(filename1)  # 彩色讀取 BGR
 
 print("BGR 轉 GRAY")
 img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -119,7 +119,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread(filename1)  # BGR讀取
+img = cv2.imread(filename1)  # 彩色讀取 BGR
 cv2.imshow("BGR Color Space", img)
 
 print("BGR 轉 HSV")
@@ -132,7 +132,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread(filename)  # BGR讀取
+img = cv2.imread(filename)  # 彩色讀取 BGR
 cv2.imshow("BGR Color Space", img)
 img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)  # BGR轉HSV
 cv2.imshow("HSV Color Space", img_hsv)
@@ -275,7 +275,7 @@ print("------------------------------------------------------------")  # 60個
 
 filename_rgb512 = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
-image = cv2.imread(filename_rgb512)
+image = cv2.imread(filename_rgb512)  # 彩色讀取 BGR
 cv2.imshow("bgr", image)
 
 blue, green, red = cv2.split(image)
@@ -305,7 +305,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename1)
+image = cv2.imread(filename1)  # 彩色讀取 BGR
 cv2.imshow("bgr", image)
 
 print("BGR 轉 HSV")
@@ -323,7 +323,8 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename1)
+image = cv2.imread(filename1)  # 彩色讀取 BGR
+
 blue, green, red = cv2.split(image)
 bgr_image = cv2.merge([blue, green, red])  # 依據 B G R 順序合併
 cv2.imshow("B -> G -> R ", bgr_image)
@@ -337,7 +338,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename1)
+image = cv2.imread(filename1)  # 彩色讀取 BGR
 
 print("BGR 轉 HSV")
 hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -354,7 +355,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename1)
+image = cv2.imread(filename1)  # 彩色讀取 BGR
 
 print("BGR 轉 HSV")
 hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -375,7 +376,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename1)
+image = cv2.imread(filename1)  # 彩色讀取 BGR
 
 print("BGR 轉 HSV")
 hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -396,7 +397,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename1)
+image = cv2.imread(filename1)  # 彩色讀取 BGR
 
 print("BGR 轉 HSV")
 hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -417,7 +418,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename1)
+image = cv2.imread(filename1)  # 彩色讀取 BGR
 
 print("BGR 轉 HSV")
 hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -438,7 +439,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename2)
+image = cv2.imread(filename2)  # 彩色讀取 BGR
 
 plt.figure(figsize=(12, 8))
 
@@ -468,7 +469,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename1)
+image = cv2.imread(filename1)  # 彩色讀取 BGR
 cv2.imshow("The Image", image)  # 顯示BGR影像
 
 print("BGR 轉 BGRA")
@@ -492,9 +493,10 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename_lena_color)
+image = cv2.imread(filename_lena_color)  # 彩色讀取 BGR
 
 bgra = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
+
 b, g, r, a = cv2.split(bgra)
 a[:, :] = 125
 bgra125 = cv2.merge([b, g, r, a])
@@ -531,7 +533,8 @@ print("cv2.goodFeaturesToTrack 角點偵測")
 
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
 
-image = cv2.imread(filename)
+image = cv2.imread(filename)  # 彩色讀取
+
 image = cv2.resize(image, (0, 0), fx=0.75, fy=0.75)
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
@@ -619,7 +622,7 @@ def draw_boxpoints(points):
 
 # boxPoints返回四個點順序：右下→左下→左上→右上
 
-image = cv2.imread("data/cc.bmp")
+image = cv2.imread("data/cc.bmp")  # 彩色讀取
 
 imagegray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
 
@@ -658,7 +661,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread("data/cc.bmp")
+image = cv2.imread("data/cc.bmp")  # 彩色讀取
 
 cv2.imshow("original", image)
 
@@ -915,7 +918,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("vconcat / hconcat")
 
-image = cv2.imread(filename1, cv2.IMREAD_UNCHANGED)
+image = cv2.imread(filename1, cv2.IMREAD_UNCHANGED)  # 彩色讀取
+
 cv2.imshow("image1", image)
 
 image_h = cv2.hconcat([image, image, image])
@@ -946,9 +950,9 @@ pyrDown 这里的down是指图像变小，所以原始图像在金字塔的底�
 pyrUp   这里的up是指将图像的尺寸变大，所以原始图像位于图像金字塔的顶层。
 """
 
-o = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
+image = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
-cv2.imshow("original", o)
+cv2.imshow("original", image)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -960,7 +964,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("cv2.__version__:", cv2.__version__)
 
-img = cv2.imread(filename1)
+img = cv2.imread(filename1)  # 彩色讀取
+
 img_down = cv2.pyrDown(img, dstsize=(img.shape[1] // 2, img.shape[0] // 2))
 img_down2 = cv2.pyrDown(
     img_down, dstsize=(img_down.shape[1] // 2, img_down.shape[0] // 2)
@@ -982,7 +987,8 @@ cv2.destroyAllWindows()
 
 print("cv2.__version__:", cv2.__version__)
 
-img = cv2.imread(filename1)
+img = cv2.imread(filename1)  # 彩色讀取
+
 img = cv2.resize(img, None, fx=0.15, fy=0.15)  # 为了观察方便缩小原图
 img_up = cv2.pyrUp(img, dstsize=(2 * img.shape[1], 2 * img.shape[0]))
 img_up2 = cv2.pyrUp(img_up, dstsize=(2 * img_up.shape[1], 2 * img_up.shape[0]))
@@ -1001,13 +1007,14 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-o = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)
-cv2.imshow("original", o)
+image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
-r1 = cv2.pyrDown(o)
+cv2.imshow("original", image)
+
+r1 = cv2.pyrDown(image)
 r2 = cv2.pyrDown(r1)
 r3 = cv2.pyrDown(r2)
-print("o.shape=", o.shape)
+print("image.shape=", image.shape)
 print("r1.shape=", r1.shape)
 print("r2.shape=", r2.shape)
 print("r3.shape=", r3.shape)
@@ -1025,14 +1032,14 @@ filename_lena_small = (
     "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_small.bmp"
 )
 
-o = cv2.imread(filename_lena_small)
+image = cv2.imread(filename_lena_small)  # 彩色讀取
 
-cv2.imshow("original", o)
+cv2.imshow("original", image)
 
-r1 = cv2.pyrUp(o)
+r1 = cv2.pyrUp(image)
 r2 = cv2.pyrUp(r1)
 r3 = cv2.pyrUp(r2)
-print("o.shape=", o.shape)
+print("image.shape=", image.shape)
 print("r1.shape=", r1.shape)
 print("r2.shape=", r2.shape)
 print("r3.shape=", r3.shape)
@@ -1046,13 +1053,14 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-o = cv2.imread(filename_lena_gray)
-cv2.imshow("original", o)
+image = cv2.imread(filename_lena_gray)  # 彩色讀取
 
-down = cv2.pyrDown(o)
+cv2.imshow("original", image)
+
+down = cv2.pyrDown(image)
 up = cv2.pyrUp(down)
-diff = up - o  # 構造diff圖像，查看up與o的區別
-print("o.shape=", o.shape)
+diff = up - image  # 構造diff圖像，查看up與o的區別
+print("image.shape=", image.shape)
 print("up.shape=", up.shape)
 cv2.imshow("up", up)
 cv2.imshow("difference", diff)
@@ -1062,13 +1070,14 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-o = cv2.imread(filename_lena_gray)
-cv2.imshow("original", o)
+image = cv2.imread(filename_lena_gray)  # 彩色讀取
 
-up = cv2.pyrUp(o)
+cv2.imshow("original", image)
+
+up = cv2.pyrUp(image)
 down = cv2.pyrDown(up)
-diff = down - o  # 構造diff圖像，查看down與o的區別
-print("o.shape=", o.shape)
+diff = down - image  # 構造diff圖像，查看down與o的區別
+print("image.shape=", image.shape)
 print("down.shape=", down.shape)
 cv2.imshow("down", down)
 cv2.imshow("difference", diff)
@@ -1078,9 +1087,9 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-O = cv2.imread(filename_lena_gray)
+image = cv2.imread(filename_lena_gray)  # 彩色讀取
 
-G0 = O
+G0 = image
 G1 = cv2.pyrDown(G0)
 G2 = cv2.pyrDown(G1)
 G3 = cv2.pyrDown(G2)
@@ -1099,15 +1108,15 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-O = cv2.imread(filename_lena_gray)
+image = cv2.imread(filename_lena_gray)  # 彩色讀取
 
-G0 = O
+G0 = image
 G1 = cv2.pyrDown(G0)
-L0 = O - cv2.pyrUp(G1)
+L0 = image - cv2.pyrUp(G1)
 RO = L0 + cv2.pyrUp(G1)  # 通過拉普拉斯圖像復原的原始圖像
-print("O.shape=", O.shape)
+print("image.shape=", image.shape)
 print("RO.shape=", RO.shape)
-result = RO - O  # 將o和ro做減法
+result = RO - image  # 將 image 和 R0 做減法
 # 計算result的絕對值，避免求和時負負為正3+(-3)=0
 result = abs(result)
 # 計算result所有元素的和
@@ -1115,10 +1124,10 @@ print("原始圖像O與恢復圖像RO差值的絕對值和：", np.sum(result))
 
 print("------------------------------------------------------------")  # 60個
 
-O = cv2.imread(filename_lena_gray)
+image = cv2.imread(filename_lena_gray)  # 彩色讀取
 
 # =================生成高斯金字塔======================
-G0 = O
+G0 = image
 G1 = cv2.pyrDown(G0)
 G2 = cv2.pyrDown(G1)
 G3 = cv2.pyrDown(G2)
@@ -1139,13 +1148,13 @@ print("原始圖像G0與恢復圖像RG0差值的絕對值和：", np.sum(result)
 RG1 = L1 + cv2.pyrUp(G2)  # 通過拉普拉斯圖像復原G1
 print("G1.shape=", G1.shape)
 print("RG1.shape=", RG1.shape)
-result = RG1 - G1  # 將o和ro做減法
+result = RG1 - G1  # 將 image 和 ro 做減法
 print("原始圖像G1與恢復圖像RG1差值的絕對值和：", np.sum(abs(result)))
 # =================復原G2======================
 RG2 = L2 + cv2.pyrUp(G3)  # 通過拉普拉斯圖像復原G2
 print("G2.shape=", G2.shape)
 print("RG2.shape=", RG2.shape)
-result = RG2 - G2  # 將o和ro做減法
+result = RG2 - G2  # 將 image 和 ro 做減法
 print("原始圖像G2與恢復圖像RG2差值的絕對值和：", np.sum(abs(result)))
 
 print("------------------------------------------------------------")  # 60個
@@ -1153,7 +1162,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("影像金字塔")
 
-src = cv2.imread("data/pyramid/macau.jpg")
+src = cv2.imread("data/pyramid/macau.jpg")  # 彩色讀取
+
 cv2.imshow("src", src)
 
 dst1 = cv2.pyrDown(src)  # 第 1 次向下採樣
@@ -1175,7 +1185,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("影像金字塔")
 
-src = cv2.imread("data/pyramid/macau_small.jpg")
+src = cv2.imread("data/pyramid/macau_small.jpg")  # 彩色讀取
 
 dst1 = cv2.pyrUp(src)  # 第 1 次向下採樣
 dst2 = cv2.pyrUp(dst1)  # 第 2 次向下採樣
@@ -1204,7 +1214,8 @@ print(f"dst = \n{dst}")
 
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread("data/pyramid/pengiun.jpg")
+src = cv2.imread("data/pyramid/pengiun.jpg")  # 彩色讀取
+
 cv2.imshow("src", src)
 
 dst1 = src + src  # 影像相加
@@ -1220,7 +1231,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("影像金字塔")
 
-src = cv2.imread("data/pyramid/pengiun.jpg")
+src = cv2.imread("data/pyramid/pengiun.jpg")  # 彩色讀取
+
 cv2.imshow("src", src)
 
 print(f"原始影像大小 = \n{src.shape}")
@@ -1241,7 +1253,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("影像金字塔")
 
-src = cv2.imread("data/pyramid/pengiun.jpg")
+src = cv2.imread("data/pyramid/pengiun.jpg")  # 彩色讀取
+
 cv2.imshow("src", src)
 
 print(f"原始影像大小 = \n{src.shape}")
@@ -1262,7 +1275,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("影像金字塔")
 
-src = cv2.imread("data/pyramid/pengiun.jpg")
+src = cv2.imread("data/pyramid/pengiun.jpg")  # 彩色讀取
 
 G0 = src
 G1 = cv2.pyrDown(G0)  # 第 1 次向下採樣
@@ -1282,7 +1295,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("影像金字塔")
 
-src = cv2.imread("data/pyramid/pengiun.jpg")
+src = cv2.imread("data/pyramid/pengiun.jpg")  # 彩色讀取
+
 cv2.imshow("Src", src)
 
 G0 = src
@@ -1302,8 +1316,8 @@ print("------------------------------------------------------------")  # 60個
 
 # 用二元視覺圖形計算深度訊息
 
-img_left = cv2.pyrDown(cv2.imread("data/aloeL.jpg"))
-img_right = cv2.pyrDown(cv2.imread("data/aloeR.jpg"))
+img_left = cv2.pyrDown(cv2.imread("data/aloeL.jpg"))  # 彩色讀取
+img_right = cv2.pyrDown(cv2.imread("data/aloeR.jpg"))  # 彩色讀取
 
 img_left = cv2.cvtColor(img_left, cv2.COLOR_BGR2RGB)
 img_right = cv2.cvtColor(img_right, cv2.COLOR_BGR2RGB)
@@ -1362,7 +1376,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 46 測試 cv2.linearPolar 空間變換 極座標變換")
 
-src = cv2.imread(filename1, cv2.IMREAD_ANYCOLOR)
+src = cv2.imread(filename1, cv2.IMREAD_ANYCOLOR)  # 彩色讀取
 
 # 圖像的極坐標變換
 dst = cv2.linearPolar(src, (508, 503), 550, cv2.INTER_LINEAR)
@@ -1382,7 +1396,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 47 測試 cv2.logPolar 空間變換 極座標變換")
 
-src = cv2.imread(filename1, cv2.IMREAD_ANYCOLOR)
+src = cv2.imread(filename1, cv2.IMREAD_ANYCOLOR)  # 彩色讀取
 
 # 圖像的極坐標變換
 M = 150
@@ -1409,7 +1423,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 51 邊緣擴充/擴充邊界 copyMakeBorder")
 
-image0 = cv2.imread(filename1)
+image0 = cv2.imread(filename1)  # 彩色讀取
 
 # 擴充邊界
 top = 50
@@ -1431,7 +1445,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename1)
+image = cv2.imread(filename1)  # 彩色讀取
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 show()
@@ -1451,7 +1465,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 去除圖片的雜訊 fastNlMeansDenoisingColored
 
-image = cv2.imread(filename2)
+image = cv2.imread(filename2)  # 彩色讀取
 
 plt.figure(figsize=(12, 8))
 
@@ -1477,8 +1491,8 @@ print("生成自適應均衡化圖像 createCLAHE")
 # 自適應直方圖均衡化（Adaptive Histogram Equalization, AHE）
 # 限制對比度 自適應直方圖均衡化(Contrast Limited Adaptive Histogram Equalization, CLAHE)
 
-image = cv2.imread("data/building.png", 0)
-# image = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
+image = cv2.imread("data/building.png", 0)  # 灰階讀取
+# image = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 # 創建 CLAHE  對象
 clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
@@ -1504,7 +1518,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename1)
+image = cv2.imread(filename1)  # 彩色讀取
 
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -1545,13 +1559,15 @@ def floodFill(
     return result
 
 
-image = cv2.imread(filename1)
+image = cv2.imread(filename1)  # 彩色讀取
+
 h, w = image.shape[:2]
 
 mask = np.zeros((h + 2, w + 2, 1), np.uint8)  # 製作 mask，長寬都要加上 2
 image1 = floodFill(image, mask, (100, 10), RED, (100, 100, 60), (100, 100, 100))
 
-image = cv2.imread(filename1)
+image = cv2.imread(filename1)  # 彩色讀取
+
 h, w = image.shape[:2]
 
 mask = np.zeros((h + 2, w + 2, 1), np.uint8)  # 全黑遮罩
@@ -1649,7 +1665,7 @@ C0 — loDiff < C(x，y) < C0 + hiDiff
 #    scpy2.opencv.inpaint_demo：示範inpaint()的用法，使用者用滑鼠繪制需要去瑕疵的區域，程式實時顯示運算結果。
 
 coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
-img = cv2.imread(coin_filename)
+img = cv2.imread(coin_filename)  # 彩色讀取
 print("img.shape :", img.shape)
 
 seed1 = 344, 188
@@ -1668,6 +1684,10 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+image = np.random.randint(-256, 256, size=[3, 5], dtype=np.int16)
+print(f"image = \n {image}")
+dst = cv2.convertScaleAbs(image)
+print(f"dst = \n {dst}")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

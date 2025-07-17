@@ -249,7 +249,7 @@ cv2.rectangle(image, (x_st, y_st), (x_st + w, y_st - h), RED, 2)
 from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
 
 y_st += 30
-# font_filename = 'NotoSansTC-Regular.otf'          # 設定字型路徑
+# font_filename = "NotoSansTC-Regular.otf"          # 設定字型路徑
 font = ImageFont.truetype(font_filename, 50)  # 設定字型與文字大小
 imagePil = Image.fromarray(image)  # 將 image 轉換成 PIL 影像
 draw = ImageDraw.Draw(imagePil)  # 準備開始畫畫
@@ -694,12 +694,11 @@ cv2.polylines(image, [pts], True, GREEN, 8)  # 空心多邊形
 cv2.rectangle(image, (100, 100), (200, 200), 255, 2)  # 255 藍色
 
 
-""" cv2.fillPoly
+# cv2.fillPoly
 mask = np.zeros_like(edge)  # 全黑遮罩
 points = np.array([[[146, 539], [781, 539], [515, 417], [296, 397]]])  # 建立多邊座標
 # 畫實心多邊形
 cv2.fillPoly(mask, points, 255)  # 畫實心多邊形
-"""
 
 
 # cv2.line 畫 直線
@@ -735,35 +734,36 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-"""
-
 # 任意顏色
-color = np.random.randint(0, high = 256, size = (3,)).tolist()  #np.random之randint不含尾
-cv2.rectangle(image,(p1x, p1y),(p2x, p2y), color, 2)
-color = np.random.randint(0, high = 256, size = (3,)).tolist()  #np.random之randint不含尾
-cv2.rectangle(image,(p1x,p1y),(p2x,p2y),color,thickness)
+color = np.random.randint(0, high=256, size=(3,)).tolist()  # np.random之randint不含尾
+cv2.rectangle(image, (p1x, p1y), (p2x, p2y), color, 2)
+color = np.random.randint(0, high=256, size=(3,)).tolist()  # np.random之randint不含尾
+cv2.rectangle(image, (p1x, p1y), (p2x, p2y), color, thickness)
 
 
-        a=np.random.randint(1,d-50)
-        r=np.random.randint(1,d/5)
-        angle = np.random.randint(0,361)
-        color = np.random.randint(0,high = 256,size = (3,)).tolist()
-        if mode==1:
-            cv2.rectangle(image,(x,y),(a,a),color,thickness)
-        elif mode==2:
-            cv2.circle(image,(x,y),r,color,thickness)
-        elif mode==3:
-            cv2.line(image,(a,a),(x,y),color,3)  
-        elif mode==4:
-            cv2.ellipse(image, (x,y), (100,150), angle, 0, 360,color,thickness)                  
-        elif mode==5:
-            cv2.putText(image,"OpenCV",(0,round(d/2)), 
-                        cv2.FONT_HERSHEY_SIMPLEX, 2,color,5)    
+a = np.random.randint(1, d - 50)
+r = np.random.randint(1, d / 5)
+angle = np.random.randint(0, 361)
+color = np.random.randint(0, high=256, size=(3,)).tolist()
+if mode == 1:
+    cv2.rectangle(image, (x, y), (a, a), color, thickness)
+elif mode == 2:
+    cv2.circle(image, (x, y), r, color, thickness)
+elif mode == 3:
+    cv2.line(image, (a, a), (x, y), color, 3)
+elif mode == 4:
+    cv2.ellipse(image, (x, y), (100, 150), angle, 0, 360, color, thickness)
+elif mode == 5:
+    cv2.putText(
+        image, "OpenCV", (0, round(d / 2)), cv2.FONT_HERSHEY_SIMPLEX, 2, color, 5
+    )
 
 
+# cv2.line(image, (0, 0), (x, y), CYAN, 2)#畫直線連線
+cv2.circle(image, (x, y), 10, (255), -1)  # 畫點
+cv2.rectangle(image, (x1, y1), (x, y), GREEN, 5)
 
-        # cv2.line(image, (0, 0), (x, y), CYAN, 2)#畫直線連線
-        cv2.circle(image, (x, y), 10, (255), -1)  # 畫點
-        cv2.rectangle(image, (x1, y1), (x, y), GREEN, 5)
 
-"""
+cv2.line(image, (10, 300), (250, 300), BLUE, 5)  # 輸出線條
+cv2.rectangle(image, (20, 20), (240, 250), RED, 2)  # 輸出矩陣
+cv2.putText(image, "OpenCV", (10, 250), cv2.FONT_ITALIC, 3, BLUE, 8)  # 輸出文字

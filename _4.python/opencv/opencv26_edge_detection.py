@@ -22,9 +22,8 @@ print("------------------------------------------------------------")  # 60個
 image = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 # 高斯模糊，边缘检测需要的
-# blur_gray = cv2.GaussianBlur(image, (3, 3), 0)  # 降低噪音
-# image_blur = cv2.GaussianBlur(image, (5, 5), 0)
-# image = cv2.GaussianBlur(image, (3, 3), 0)
+# image = cv2.GaussianBlur(image, (3, 3), 0)  # 降低噪音
+# image = cv2.GaussianBlur(image, (5, 5), 0)
 
 dst1 = cv2.Canny(image, 50, 100)  # minVal=50, maxVal=100
 dst2 = cv2.Canny(image, 50, 200)  # minVal=50, maxVal=200
@@ -34,36 +33,22 @@ dst5 = cv2.Canny(image, 128, 200)
 dst6 = cv2.Canny(image, 32, 128)
 # dst_canny = cv2.Canny(image, 50, 100)  # minVal=50, maxVal=100
 
-# 白線膨脹
-dilate = cv2.dilate(dst3, None)
-
-# 白線侵蝕
-erode = cv2.erode(dst3, None)
-
-plt.figure(figsize=(12, 8))
-plt.subplot(231)
+plt.figure(figsize=(10, 8))
+plt.subplot(221)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-plt.subplot(232)
+plt.subplot(222)
 plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))
 plt.title("Canny 1")
 
-plt.subplot(233)
+plt.subplot(223)
 plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))
 plt.title("Canny 2")
 
-plt.subplot(234)
+plt.subplot(224)
 plt.imshow(cv2.cvtColor(dst3, cv2.COLOR_BGR2RGB))
 plt.title("Canny 3")
-
-plt.subplot(235)
-plt.imshow(cv2.cvtColor(dilate, cv2.COLOR_BGR2RGB))
-plt.title("dilate")
-
-plt.subplot(236)
-plt.imshow(cv2.cvtColor(erode, cv2.COLOR_BGR2RGB))
-plt.title("erode")
 
 show()
 
@@ -73,28 +58,28 @@ print("------------------------------------------------------------")  # 60個
 print("CannyThreshold")
 
 
-def CannyThreshold(lowThreshold):
+def do_CannyThreshold(lowThreshold):
     # 高斯模糊，边缘检测需要的
     detected_edges = cv2.GaussianBlur(gray, (3, 3), 0)
     detected_edges = cv2.Canny(
         detected_edges, lowThreshold, lowThreshold * ratio, apertureSize=kernel_size
     )
     dst = cv2.bitwise_and(img, img, mask=detected_edges)  # 只需在原始圖像的邊緣添加一些顏色
-    cv2.imshow("canny demo", dst)
+    cv2.imshow("OpenCV", dst)
 
 
 lowThreshold = 0
 max_lowThreshold = 100
 ratio = 3
 kernel_size = 3
-img = cv2.imread("data/lena.png")  # 彩色讀取
+img = cv2.imread(filename2)  # 彩色讀取
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉灰階
-cv2.namedWindow("canny demo")
+cv2.namedWindow("OpenCV")
 cv2.createTrackbar(
-    "Min threshold", "canny demo", lowThreshold, max_lowThreshold, CannyThreshold
+    "Min threshold", "OpenCV", lowThreshold, max_lowThreshold, do_CannyThreshold
 )
 
-CannyThreshold(0)  # 初始化
+do_CannyThreshold(0)  # 初始化
 
 while True:
     k = cv2.waitKey(1)
@@ -667,7 +652,8 @@ plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
 
 contours, hierarchy = cv2.findContours(
     binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
@@ -691,7 +677,10 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(
     binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
 )
@@ -718,7 +707,9 @@ image = cv2.imread("data/loc3.jpg")  # 彩色讀取
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 mask = np.zeros(image.shape, np.uint8)
 
@@ -754,7 +745,9 @@ plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 n = len(contours)  # 獲取輪廓個數
@@ -790,7 +783,9 @@ plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 n = len(contours)  # 獲取輪廓個數
@@ -824,7 +819,9 @@ plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 n = len(contours)  # 獲取輪廓個數
@@ -1068,7 +1065,10 @@ image = cv2.imread("data/cc.bmp")  # 彩色讀取
 
 # ---------------提取圖像輪廓------------------
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 # ---------------返回頂點及邊長------------------
 x, y, w, h = cv2.boundingRect(contours[0])
@@ -1093,7 +1093,10 @@ plt.title("原圖")
 
 # ---------------提取圖像輪廓------------------
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 # ---------------構造矩形邊界------------------
@@ -1119,7 +1122,10 @@ plt.title("原圖")
 
 # ---------------提取圖像輪廓------------------
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 # ---------------構造矩形邊界------------------
@@ -1142,7 +1148,10 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 (x, y), radius = cv2.minEnclosingCircle(contours[0])
 center = (int(x), int(y))
@@ -1165,7 +1174,10 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 ellipse = cv2.fitEllipse(contours[0])
@@ -1188,7 +1200,10 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 rows, cols = image.shape[:2]
 [vx, vy, x, y] = cv2.fitLine(contours[0], cv2.DIST_L2, 0, 0.01, 0.01)
@@ -1213,7 +1228,10 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 area, trgl = cv2.minEnclosingTriangle(contours[0])
 print("area=", area)
@@ -1239,7 +1257,10 @@ plt.title("原圖")
 
 # ----------------獲取輪廓-------------------------------
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 # ----------------epsilon=0.1*周長-------------------------------
@@ -1299,7 +1320,10 @@ print("------------------------------------------------------------")  # 60個
 image = cv2.imread("data/contours.bmp")  # 彩色讀取
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
 hull = cv2.convexHull(contours[0])  # 返回坐標值
@@ -1318,7 +1342,10 @@ plt.title("原圖")
 
 # --------------提取輪廓------------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 # --------------尋找凸包，得到凸包的角點------------------
@@ -1344,7 +1371,10 @@ plt.title("原圖")
 
 # ----------------構造輪廓--------------------------
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, 0)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
 # ----------------凸包--------------------------
@@ -1377,7 +1407,10 @@ plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 # --------------凸包----------------------
 image1 = o.copy()
@@ -1409,7 +1442,10 @@ o = cv2.imread("data/cs1.bmp")  # 彩色讀取
 
 # ----------------獲取凸包------------------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 hull = cv2.convexHull(contours[0])
 
@@ -1454,7 +1490,10 @@ o = cv2.imread("data/cs1.bmp")  # 彩色讀取
 
 # ----------------獲取凸包------------------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 hull = cv2.convexHull(contours[0])
 
@@ -1497,7 +1536,10 @@ print("------------------------------------------------------------")  # 60個
 o1 = cv2.imread("data/cs1.bmp")  # 彩色讀取
 
 gray1 = cv2.cvtColor(o1, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary1 = cv2.threshold(gray1, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary1 = cv2.threshold(gray1, thresh, maxval, cv2.THRESH_BINARY)
+
 contours1, hierarchy = cv2.findContours(binary1, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 cnt1 = contours1[0]
 
@@ -1505,7 +1547,10 @@ cnt1 = contours1[0]
 o2 = cv2.imread("data/cs3.bmp")  # 彩色讀取
 
 gray2 = cv2.cvtColor(o2, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary2 = cv2.threshold(gray2, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary2 = cv2.threshold(gray2, thresh, maxval, cv2.THRESH_BINARY)
+
 contours2, hierarchy = cv2.findContours(binary2, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 cnt2 = contours2[0]
 
@@ -1513,7 +1558,10 @@ cnt2 = contours2[0]
 o3 = cv2.imread("data/hand.bmp")  # 彩色讀取
 
 gray3 = cv2.cvtColor(o3, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary3 = cv2.threshold(gray3, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary3 = cv2.threshold(gray3, thresh, maxval, cv2.THRESH_BINARY)
+
 contours3, hierarchy = cv2.findContours(binary3, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 cnt3 = contours3[0]
 # -----------構造距離提取算子--------------------
@@ -1555,9 +1603,11 @@ gray2 = cv2.cvtColor(o2, cv2.COLOR_BGR2GRAY)  # 轉灰階
 gray3 = cv2.cvtColor(o3, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 # -----------閾值處理--------------------
-ret, binary1 = cv2.threshold(gray1, 127, 255, cv2.THRESH_BINARY)
-ret, binary2 = cv2.threshold(gray2, 127, 255, cv2.THRESH_BINARY)
-ret, binary3 = cv2.threshold(gray3, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary1 = cv2.threshold(gray1, thresh, maxval, cv2.THRESH_BINARY)
+ret, binary2 = cv2.threshold(gray2, thresh, maxval, cv2.THRESH_BINARY)
+ret, binary3 = cv2.threshold(gray3, thresh, maxval, cv2.THRESH_BINARY)
 
 # -----------提取輪廓--------------------
 contours1, hierarchy = cv2.findContours(binary1, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
@@ -1607,7 +1657,9 @@ plt.title("原圖")
 
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 x, y, w, h = cv2.boundingRect(contours[0])
 cv2.rectangle(o, (x, y), (x + w, y + h), WHITE, 3)
@@ -1633,7 +1685,9 @@ plt.title("原圖")
 
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 x, y, w, h = cv2.boundingRect(contours[0])
 cv2.drawContours(o, contours[0], -1, RED, 3)
@@ -1662,7 +1716,9 @@ plt.title("原圖")
 
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 cv2.drawContours(o, contours[0], -1, RED, 3)
 cntArea = cv2.contourArea(contours[0])
@@ -1690,8 +1746,11 @@ plt.title("原圖")
 
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+
 cv2.drawContours(o, contours[0], -1, RED, 3)
 cntArea = cv2.contourArea(contours[0])
 equiDiameter = np.sqrt(4 * cntArea / np.pi)
@@ -1716,7 +1775,9 @@ plt.title("原圖")
 
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 ellipse = cv2.fitEllipse(contours[0])
 retval = cv2.fitEllipse(contours[0])
@@ -1762,7 +1823,10 @@ o = cv2.imread("data/cc.bmp")  # 彩色讀取
 
 # -----------------獲取輪廓------------------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 cnt = contours[0]
 
@@ -1821,7 +1885,10 @@ o = cv2.imread("data/cc.bmp")  # 彩色讀取
 
 # -----------------獲取輪廓------------------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 cnt = contours[0]
 
@@ -1861,7 +1928,9 @@ o = cv2.imread("data/ct.png")  # 彩色讀取
 
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 cnt = contours[2]  # coutours[0]、coutours[1]是左側字母R
 # --------使用掩膜獲取感興趣區域的最值-----------------
@@ -1902,7 +1971,9 @@ o = cv2.imread("data/ct.png")  # 彩色讀取
 # --------獲取輪廓-----------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 cnt = contours[2]
 # --------使用掩膜獲取感興趣區域的均值-----------------
@@ -1939,7 +2010,9 @@ plt.title("原圖")
 # --------獲取并繪製輪廓-----------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 mask = np.zeros(gray.shape, np.uint8)
 cnt = contours[0]
@@ -2011,7 +2084,6 @@ filename_add2 = "C:/_git/vcs/_1.data/______test_files1/ims03.bmp"
 
 img1 = cv2.imread(filename_add1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 img2 = cv2.imread(filename_add2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
-
 
 blended = cv2.addWeighted(img1, 1, img2, 1, 0)
 
@@ -2140,6 +2212,29 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("準備使用Trackbar")
+
+
+def do_trackbar_event1(val):
+    print("數值 :", val, end=" ")
+
+
+image = cv2.imread(filename2)
+cv2.imshow("OpenCV", image)
+
+cv2.createTrackbar("Threshold ", "OpenCV", 0, 100, do_trackbar_event1)
+cv2.setTrackbarPos("Threshold ", "OpenCV", 50)  # 設定預設值
+
+# 取得Trackbar數值
+value = cv2.getTrackbarPos("Threshold ", "OpenCV")
+do_trackbar_event1(value)  # 套用一次設定值
+
+while True:
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
@@ -2151,39 +2246,23 @@ print("------------------------------------------------------------")  # 60個
 
 print("梯度 Gradient")
 
-image = cv2.imread("data/lena.png", 0)  # 灰階讀取
+image = cv2.imread(filename_lena_color, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 # 高斯模糊，边缘检测需要的
 img1 = cv2.GaussianBlur(image, (3, 3), 0)
 
 # 形態學：邊緣檢測
-_, Thr_img = cv2.threshold(
-    image, 210, 255, cv2.THRESH_BINARY
-)  # 設定紅色通道閾值210（閾值影響梯度運算效果）
+# 設定紅色通道閾值210（閾值影響梯度運算效果）
+thresh = 210  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(image, thresh, maxval, cv2.THRESH_BINARY)
 
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))  # 定義矩形結構元素
-gradient = cv2.morphologyEx(Thr_img, cv2.MORPH_GRADIENT, kernel)  # 梯度
+gradient = cv2.morphologyEx(binary, cv2.MORPH_GRADIENT, kernel)  # 梯度
 
-plt.subplot(131)
 cv2.imshow("Original", image)
-
-plt.subplot(132)
 cv2.imshow("Gradient", gradient)
-
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-image = np.random.randint(-256, 256, size=[3, 5], dtype=np.int16)
-print(f"image = \n {image}")
-dst = cv2.convertScaleAbs(image)
-print(f"dst = \n {dst}")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2196,7 +2275,9 @@ cv2.imshow("original", image)
 # --------------獲取輪廓--------------------
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 # --------------計算各個輪廓的長度和、平均長度--------------------

@@ -334,47 +334,6 @@ namespace vcs_ImageProcessing0
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
-
-            Bitmap bmp = new Bitmap(filename);
-            richTextBox1.Text += bmp.PixelFormat + "\n";
-
-            int W = bmp.Width;
-            int H = bmp.Height;
-
-            //綁定bmp和bmpData
-            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);   // Lock the bits.
-            //BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb); //指明PixelFormat
-            var stride = Math.Abs(bmpData.Stride);//取得記憶體寬度
-
-            //建立 byte[] Array 一維陣列
-            int byte_data_len = stride * H;
-            byte[] byte_data = new byte[byte_data_len];
-
-            //拷貝出來 bmpData => byte_data 圖片轉陣列
-            Marshal.Copy(bmpData.Scan0, byte_data, 0, byte_data_len);//複製記憶體區塊
-
-            //做處理, 例如 灰階
-            int i;
-            byte r, g, b;
-            // jpg檔要加 3, bmp檔要加4
-            for (i = 0; i < byte_data_len; i += 3)
-            {
-                //三色平均 => 灰階
-                byte avg = (byte)((byte_data[i] + byte_data[i + 1] + byte_data[i + 2]) / 3);
-                byte_data[i] = avg;         //每個點的B改成三色平均
-                byte_data[i + 1] = avg;     //每個點的G改成三色平均
-                byte_data[i + 2] = avg;     //每個點的R改成三色平均
-                //byte_data[i + 3] = 0;     //每個點的A改成三色平均
-            }
-
-            // 拷貝回去 byte_data => bmpData 陣列轉圖片
-            Marshal.Copy(byte_data, 0, bmpData.Scan0, byte_data_len);//複製記憶體區塊
-
-            //解除綁定bmp和bmpData
-            bmp.UnlockBits(bmpData);
-
-            pictureBox1.Image = bmp;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -625,42 +584,6 @@ namespace vcs_ImageProcessing0
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //灰階圖片處理2_BitmapData類
-
-            //從pictureBox取得Bitmap
-            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
-
-            //內存法
-            //內存法是把圖像數據直接複製到內存中，這樣程序的運行速度就能大大提高了。
-
-            if (bitmap1 != null)
-            {
-                Bitmap bmp = bitmap1.Clone() as Bitmap;
-
-                //綁定bmp和bmpData
-                BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, bmp.PixelFormat);
-
-                //建立 byte[] Array 一維陣列
-                int byte_data_len = bmp.Width * bmp.Height * 3;
-                byte[] byte_data = new byte[byte_data_len];
-
-                //拷貝出來 bmpData => byte_data 圖片轉陣列
-                Marshal.Copy(bmpData.Scan0, byte_data, 0, byte_data_len);//複製記憶體區塊
-
-                double colortemp = 0;
-                for (int i = 0; i < byte_data.Length; i += 3)
-                {
-                    colortemp = byte_data[i + 2] * 0.299 + byte_data[i + 1] * 0.587 + byte_data[i] * 0.114;
-                    byte_data[i] = byte_data[i + 1] = byte_data[i + 2] = (byte)colortemp;
-                }
-
-                Marshal.Copy(byte_data, 0, bmpData.Scan0, byte_data_len);//複製記憶體區塊
-
-                //解除綁定bmp和bmpData
-                bmp.UnlockBits(bmpData);
-
-                pictureBox1.Image = bmp.Clone() as Image;
-            }
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -978,98 +901,6 @@ namespace vcs_ImageProcessing0
 
         private void button22_Click(object sender, EventArgs e)
         {
-            //對圖片做Marshal處理2
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_case1\\pic3.jpg";
-
-            int data_offset = 0;
-
-            Bitmap bmp0 = new Bitmap(filename);
-            Bitmap bmp = new Bitmap(filename);
-            pictureBox1.Image = bmp0;
-
-            richTextBox1.Text += "W = " + bmp.Width.ToString() + ", H = " + bmp.Height.ToString() + "\n";
-            richTextBox1.Text += "PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
-
-            if (bmp.PixelFormat == PixelFormat.Format32bppRgb)
-            {
-                richTextBox1.Text += "位元深度\t32\n";
-                data_offset = 4;
-            }
-            else if (bmp.PixelFormat == PixelFormat.Format24bppRgb)
-            {
-                richTextBox1.Text += "位元深度\t24\n";
-                data_offset = 3;
-            }
-            else if (bmp.PixelFormat == PixelFormat.Format8bppIndexed)
-            {
-                richTextBox1.Text += "位元深度\t8\n";
-                data_offset = 1;
-            }
-            else
-            {
-                richTextBox1.Text += "位元深度\tunknown, PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
-            }
-
-            //綁定bitmap1和bmpData
-            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, bmp.PixelFormat);
-            var stride = Math.Abs(bmpData.Stride);//取得記憶體寬度
-
-            //建立 byte[] Array 一維陣列
-            int byte_data_len = Math.Abs(stride) * bmp.Height;    //(W * 4) * H//取得記憶體寬度
-            byte[] byte_data = new byte[byte_data_len];//建立 byte[] Array 一維陣列
-
-            //拷貝出來 bmpData => byte_data 圖片轉陣列
-            Marshal.Copy(bmpData.Scan0, byte_data, 0, byte_data_len);//複製記憶體區塊
-
-            /*
-            int i;
-            for (i = 0; i < 1024; i++)
-            {
-                richTextBox1.Text += byte_data[i].ToString();
-                if ((i % 64) == 63)
-                    richTextBox1.Text += "\n";
-                else
-                    richTextBox1.Text += " ";
-            }
-            richTextBox1.Text += "\n";
-            richTextBox1.Text += "\n";
-            richTextBox1.Text += "\n";
-            richTextBox1.Text += "\n";
-            */
-
-            //對特定點的資料作操作
-            int tmp = 0;
-            for (int counter = 0; counter < (byte_data.Length - data_offset); counter += data_offset)
-            {
-                tmp = byte_data[counter] + byte_data[counter + 1] + byte_data[counter + 2];
-                tmp /= 3;
-                byte_data[counter] = (byte)tmp;
-                byte_data[counter + 1] = (byte)tmp;
-                byte_data[counter + 2] = (byte)tmp;
-            }
-
-            /*
-            for (i = 0; i < 1024; i++)
-            {
-                richTextBox1.Text += byte_data[i].ToString();
-                if ((i % 64) == 63)
-                    richTextBox1.Text += "\n";
-                else
-                    richTextBox1.Text += " ";
-            }
-            richTextBox1.Text += "\n";
-            */
-
-            // 拷貝回去 byte_data => bmpData 陣列轉圖片
-            Marshal.Copy(byte_data, 0, bmpData.Scan0, byte_data_len);//複製記憶體區塊
-
-            //解除綁定bmp和bmpData
-            bmp.UnlockBits(bmpData);
-
-            pictureBox2.Image = bmp;
         }
 
         //圖片與二進制互轉
@@ -1138,7 +969,6 @@ namespace vcs_ImageProcessing0
             //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_map_city/global.c.gif";   //超大圖, 要很久
 
             Bitmap bmp = new Bitmap(filename);
-            richTextBox1.Text += bmp.PixelFormat + "\n";
 
             int W = bmp.Width;
             int H = bmp.Height;
@@ -1875,7 +1705,6 @@ namespace vcs_ImageProcessing0
     }
 }
 
-
 /*
 IntPtr iptr = bmpData.Scan0;　 // 獲取bmpData的內存起始位置
 
@@ -1900,11 +1729,27 @@ IntPtr iptr = bmpData.Scan0;　 // 獲取bmpData的內存起始位置
  
  
  
- 
- 
- 
- 
- 
+            int data_offset = 0;
+
+            if (bmp.PixelFormat == PixelFormat.Format32bppRgb)
+            {
+                richTextBox1.Text += "位元深度\t32\n";
+                data_offset = 4;
+            }
+            else if (bmp.PixelFormat == PixelFormat.Format24bppRgb)
+            {
+                richTextBox1.Text += "位元深度\t24\n";
+                data_offset = 3;
+            }
+            else if (bmp.PixelFormat == PixelFormat.Format8bppIndexed)
+            {
+                richTextBox1.Text += "位元深度\t8\n";
+                data_offset = 1;
+            }
+            else
+            {
+                richTextBox1.Text += "位元深度\tunknown, PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
+            }
 */
 
 

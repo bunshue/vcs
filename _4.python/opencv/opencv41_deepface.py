@@ -1,10 +1,10 @@
 """
-
-# 使用 deepface 模組
-
+使用 deepface 模組
 """
 
 from opencv_common import *
+
+print("------------------------------------------------------------")  # 60個
 
 from deepface import DeepFace
 
@@ -33,6 +33,7 @@ text_obj = {
     "neutral": "正常",
 }
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("DeepFace.analyze 1")
@@ -83,6 +84,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("DeepFace.analyze 3")
 
@@ -106,10 +108,10 @@ try:
 
     print("其他資訊")
     """ fail
-    print(emotion['dominant_emotion'])
-    print(age['age'])
-    print(race['dominant_race'])
-    print(gender['gender'])
+    print(emotion["dominant_emotion"])
+    print(age["age"])
+    print(race["dominant_race"])
+    print(gender["gender"])
     """
 except:
     print("錯誤")
@@ -119,6 +121,7 @@ cv2.imshow("ImageShow", image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("DeepFace.analyze 4")
@@ -141,7 +144,7 @@ for x, y, w, h in faces:
     cv2.rectangle(image, (x, y), (x + w, y + h), GREEN, 5)  # 把臉框出來
 """
 """
-cv2.imshow('ImageShow', image)
+cv2.imshow("ImageShow", image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 """
@@ -168,7 +171,7 @@ for x, y, w, h in faces:
         print(analyze[0]["dominant_emotion"])
         for cc in analyze:
             #print(cc)
-            print('判斷結果 :', cc["dominant_gender"], cc["age"], cc["dominant_race"], cc["dominant_emotion"], '位置', cc["region"])
+            print("判斷結果 :", cc["dominant_gender"], cc["age"], cc["dominant_race"], cc["dominant_emotion"], "位置", cc["region"])
         """
 
         putText(x, y, text_obj[cc])  # 放入文字
@@ -181,6 +184,7 @@ cv2.imshow("ImageShow", image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("DeepFace.analyze 5")
@@ -206,6 +210,7 @@ cv2.imshow("ImageShow", image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("使用webcam TBD")
@@ -244,6 +249,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """ 使用webcam
 print("DeepFace.analyze 6")
@@ -276,14 +282,14 @@ while True:
     w = int(image.shape[1]*0.5)           # 取得圖片寬度的 1/2
     h = int(image.shape[0]*0.5)           # 取得圖片高度的 1/2
     image = cv2.resize(image,(w,h))         # 縮小圖片尺寸 ( 加快處理速度 )
-    white = 255 - np.zeros((h,w,4), dtype='uint8')   # 產生全白圖片
+    white = 255 - np.zeros((h,w,4), dtype="uint8")   # 產生全白圖片
 
     key = cv2.waitKey(1)                # 每隔一毫秒取得鍵盤輸入資訊
 
     try:
-        emotion = DeepFace.analyze(image, actions=['emotion'])               # 情緒偵測
-        print(emotion['emotion']['happy'], emotion['emotion']['neutral'])  # 印出數值
-        if emotion['emotion']['happy'] >0.5:
+        emotion = DeepFace.analyze(image, actions=["emotion"])               # 情緒偵測
+        print(emotion["emotion"]["happy"], emotion["emotion"]["neutral"])  # 印出數值
+        if emotion["emotion"]["happy"] >0.5:
             happy = happy + 1       # 如果具有一點點 happy 的數值，就認定正在微笑，將 happy 增加 1
         else:
             happy = 0               # 如果沒有 happy，將 happy 歸零
@@ -297,7 +303,7 @@ while True:
     if key == 32:            # 按下空白將 a 等於 1 ( 按下空白也可以拍照 )
         a = 1
         sec = 4
-    elif key == ord('q'):    # 按下 q 結束
+    elif key == ord("q"):    # 按下 q 結束
         break
 
     if a == 0:
@@ -311,20 +317,21 @@ while True:
             if sec < 1:
                 output = cv2.addWeighted(white, a, photo, 1-a, 0)  # 計算權重，產生白色慢慢消失效果
                 a = a - 0.5
-                print('a', a)
+                print("a", a)
                 if a<=0:
                     a = 0
                     n = n + 1
-                    cv2.imwrite(f'photo-{n}.jpg', photo)   # 存檔
-                    print('save ok')
+                    cv2.imwrite(f"photo-{n}.jpg", photo)   # 存檔
+                    print("save ok")
         else:
             a = 0
             pass
-    cv2.imshow('ImageShow', output)               # 顯示圖片
+    cv2.imshow("ImageShow", output)               # 顯示圖片
 
 cap.release()                           # 所有作業都完成後，釋放資源
 cv2.destroyAllWindows()                 # 結束所有視窗
 """
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("Deepface：人臉特徵分析工具")
@@ -352,12 +359,13 @@ cv2.imwrite("tmp_detectFace.jpg", image[:, :, ::-1])
 image = DeepFace.detectFace(
     img_path=imgpath, detector_backend="retinaface", enforce_detection=False
 )
-# image = DeepFace.detectFace(img_path=imgpath, detector_backend='mtcnn'', enforce_detection=False)
-# image = DeepFace.detectFace(img_path=imgpath, detector_backend='dlib'', enforce_detection=False)
-# image = DeepFace.detectFace(img_path=imgpath, detector_backend='ssd'', enforce_detection=False)  #有錯誤
+# image = DeepFace.detectFace(img_path=imgpath, detector_backend="mtcnn", enforce_detection=False)
+# image = DeepFace.detectFace(img_path=imgpath, detector_backend="dlib", enforce_detection=False)
+# image = DeepFace.detectFace(img_path=imgpath, detector_backend="ssd", enforce_detection=False)  #有錯誤
 # plt.imshow(image)
 # plt.show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("人臉驗證")
@@ -365,7 +373,7 @@ print("人臉驗證")
 filename1 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk02.jpg"
 filename2 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk03.jpg"
 
-# result = DeepFace.verify(filename1, filename2, model_name='DeepFace', model=DeepFace.build_model('DeepFace'), enforce_detection=False)
+# result = DeepFace.verify(filename1, filename2, model_name="DeepFace", model=DeepFace.build_model("DeepFace"), enforce_detection=False)
 result = DeepFace.verify(
     filename1, filename2, model_name="DeepFace", enforce_detection=False
 )
@@ -376,6 +384,7 @@ if result["verified"]:
 else:
     print("兩張圖片不是同一人！")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -448,34 +457,35 @@ for _ in cc:
 
 
 """ TBD
-print(df['VGG-Face_cosine'])
-print(type(df['VGG-Face_cosine']))
+print(df["VGG-Face_cosine"])
+print(type(df["VGG-Face_cosine"]))
 
-count = np.sum((df['VGG-Face_cosine']<=0.25)!=0) #計算符合的人臉數量
+count = np.sum((df["VGG-Face_cosine"]<=0.25)!=0) #計算符合的人臉數量
 
 if count > 0:
-  split1 = df['identity'][0].split('/')
+  split1 = df["identity"][0].split("/")
   print(split1[-1])
 else:
-  print('沒有符合的人臉！')
+  print("沒有符合的人臉！")
 
 #尋找所有相同人臉
-filename1 = 'data/deepface/find_person.jpg'
-df = DeepFace.find(img_path = filename1, db_path = 'member', enforce_detection=False)
+filename1 = "data/deepface/find_person.jpg"
+df = DeepFace.find(img_path = filename1, db_path = "member", enforce_detection=False)
 #print(df)
-count = np.sum((df['VGG-Face_cosine']<=0.25)!=0) #計算符合的人臉數量
+count = np.sum((df["VGG-Face_cosine"]<=0.25)!=0) #計算符合的人臉數量
 if count > 0:
   for i in range(count):
-    split1 = df['identity'][i].split('/')
+    split1 = df["identity"][i].split("/")
     print(split1[-1])
 else:
-  print('沒有符合的人臉！')
+  print("沒有符合的人臉！")
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 ''' TBD
-print('範例：攝影機拍攝登入系統')
+print("範例：攝影機拍攝登入系統")
 
 from IPython.display import display  # 用IPython
 from IPython.display import Javascript  # 用IPython
@@ -483,15 +493,15 @@ from IPython.display import Javascript  # 用IPython
 #from google.colab.output import eval_js
 from base64 import b64decode
 
-def take_photo(filename='person.jpg', quality=0.8):
+def take_photo(filename="person.jpg", quality=0.8):
   js = Javascript("""
     async function takePhoto(quality) {
-      const div = document.createElement('div');
-      const capture = document.createElement('button');
-      capture.textContent = '拍攝';
+      const div = document.createElement("div");
+      const capture = document.createElement("button");
+      capture.textContent = "拍攝";
       div.appendChild(capture);
-      const video = document.createElement('video');
-      video.style.display = 'block';
+      const video = document.createElement("video");
+      video.style.display = "block";
       const stream = await navigator.mediaDevices.getUserMedia({video: true});
       document.body.appendChild(div);
       div.appendChild(video);
@@ -499,19 +509,19 @@ def take_photo(filename='person.jpg', quality=0.8):
       await video.play();
       google.colab.output.setIframeHeight(document.documentElement.scrollHeight, true);
       await new Promise((resolve) => capture.onclick = resolve);
-      const canvas = document.createElement('canvas');
+      const canvas = document.createElement("canvas");
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
-      canvas.getContext('2d').drawImage(video, 0, 0);
+      canvas.getContext("2d").drawImage(video, 0, 0);
       stream.getVideoTracks()[0].stop();
       div.remove();
-      return canvas.toDataURL('image/jpeg', quality);
+      return canvas.toDataURL("image/jpeg", quality);
     }
     """)
   display(js)
-  data = eval_js('takePhoto({})'.format(quality))
-  binary = b64decode(data.split(',')[1])
-  with open(filename, 'wb') as f:
+  data = eval_js("takePhoto({})".format(quality))
+  binary = b64decode(data.split(",")[1])
+  with open(filename, "wb") as f:
     f.write(binary)
   return filename
 
@@ -519,19 +529,19 @@ try:
   filename = take_photo()
   display(Image(filename))  # 用IPython顯示圖片
 except Exception as err:
-  print('攝影錯誤：{}'.format(str(err)))
+  print("攝影錯誤：{}".format(str(err)))
 
-df = DeepFace.find(img_path = 'person.jpg', db_path = 'member', enforce_detection=False)
+df = DeepFace.find(img_path = "person.jpg", db_path = "member", enforce_detection=False)
 #print(df)
-count = np.sum((df['VGG-Face_cosine']<=0.25)!=0) #計算符合的人臉數量
+count = np.sum((df["VGG-Face_cosine"]<=0.25)!=0) #計算符合的人臉數量
 if count > 0:
-  print('歡迎登入系統！')
+  print("歡迎登入系統！")
 else:
-  print('抱歉！你不是會員！')
+  print("抱歉！你不是會員！")
   
-print('人臉屬性分析')
+print("人臉屬性分析")
 '''
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
 514MB
@@ -555,16 +565,17 @@ print(type(obj))
 print(len(obj))
 
 """ 這一種特殊串列還不會分析出來
-print('年齡：{}'.format(obj['age']))
-print('性別：{}'.format(obj['gender']))
-print('種族：{}'.format(obj['dominant_race']))
-print('情緒：{}'.format(obj['dominant_emotion']))
+print("年齡：{}".format(obj["age"]))
+print("性別：{}".format(obj["gender"]))
+print("種族：{}".format(obj["dominant_race"]))
+print("情緒：{}".format(obj["dominant_emotion"]))
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 '''TBD
-print('範例：攝影機拍攝人臉屬性分析')
+print("範例：攝影機拍攝人臉屬性分析")
 
 from IPython.display import display  # 用IPython
 from IPython.display import Javascript  # 用IPython
@@ -572,15 +583,15 @@ from IPython.display import Image  # 用IPython顯示圖片
 #from google.colab.output import eval_js
 from base64 import b64decode
 
-def take_photo(filename='person.jpg', quality=0.8):
+def take_photo(filename="person.jpg", quality=0.8):
   js = Javascript("""
     async function takePhoto(quality) {
-      const div = document.createElement('div');
-      const capture = document.createElement('button');
-      capture.textContent = '拍攝';
+      const div = document.createElement("div");
+      const capture = document.createElement("button");
+      capture.textContent = "拍攝";
       div.appendChild(capture);
-      const video = document.createElement('video');
-      video.style.display = 'block';
+      const video = document.createElement("video");
+      video.style.display = "block";
       const stream = await navigator.mediaDevices.getUserMedia({video: true});
       document.body.appendChild(div);
       div.appendChild(video);
@@ -588,19 +599,19 @@ def take_photo(filename='person.jpg', quality=0.8):
       await video.play();
       google.colab.output.setIframeHeight(document.documentElement.scrollHeight, true);
       await new Promise((resolve) => capture.onclick = resolve);
-      const canvas = document.createElement('canvas');
+      const canvas = document.createElement("canvas");
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
-      canvas.getContext('2d').drawImage(video, 0, 0);
+      canvas.getContext("2d").drawImage(video, 0, 0);
       stream.getVideoTracks()[0].stop();
       div.remove();
-      return canvas.toDataURL('image/jpeg', quality);
+      return canvas.toDataURL("image/jpeg", quality);
     }
     """)
   display(js)
-  data = eval_js('takePhoto({})'.format(quality))
-  binary = b64decode(data.split(',')[1])
-  with open(filename, 'wb') as f:
+  data = eval_js("takePhoto({})".format(quality))
+  binary = b64decode(data.split(",")[1])
+  with open(filename, "wb") as f:
     f.write(binary)
   return filename
 
@@ -608,18 +619,32 @@ try:
   filename = take_photo()
   display(Image(filename))  # 用IPython顯示圖片
 except Exception as err:
-  print('攝影錯誤：{}'.format(str(err)))
+  print("攝影錯誤：{}".format(str(err)))
 
-obj = DeepFace.analyze(img_path = 'person.jpg', actions = ['age', 'gender', 'race', 'emotion'], enforce_detection=False)
-label = {'angry':'生氣', 'disgust':'厭惡', 'fear':'恐懼', 'happy':'開心', 'neutral':'中性', 'sad':'悲傷', 'surprise':'吃驚',
-          'Man':'男', 'Woman':'女',
-          'asian':'亞洲', 'black':'黑', 'indian':'印第安', 'latino hispanic':'拉丁美洲', 'middle eastern':'中東', 'white':'白'}
-print('\n你是{}歲的{}性{}人，目前情緒似乎是{}'.format(obj['age'], label[obj['gender']], label[obj['dominant_race']], label[obj['dominant_emotion']]))
+obj = DeepFace.analyze(img_path = "person.jpg", actions = ["age", "gender", "race", "emotion"], enforce_detection=False)
+label = {"angry":"生氣", "disgust":"厭惡", "fear":"恐懼", "happy":"開心", "neutral":"中性", "sad":"悲傷", "surprise":"吃驚",
+          "Man":"男", "Woman":"女",
+          "asian":"亞洲", "black":"黑", "indian":"印第安", "latino hispanic":"拉丁美洲", "middle eastern":"中東", "white":"白"}
+print("\n你是{}歲的{}性{}人，目前情緒似乎是{}".format(obj["age"], label[obj["gender"]], label[obj["dominant_race"]], label[obj["dominant_emotion"]]))
 '''
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

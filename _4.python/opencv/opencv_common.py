@@ -64,6 +64,7 @@ filename4b = "C:/_git/vcs/_4.python/opencv/data/ims_320X240.jpg"
 filename_lena_color = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 filename_lena_gray = "C:/_git/vcs/_4.python/opencv/data/lena_gray.bmp"
 filename_barbara = "C:/_git/vcs/_4.python/opencv/data/barbara.bmp"
+filename_gray = "C:/_git/vcs/_4.python/opencv/data/threshold/gray_scale.jpg"
 
 video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
 

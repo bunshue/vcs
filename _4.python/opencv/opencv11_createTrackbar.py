@@ -23,26 +23,22 @@ print("------------------------------------------------------------")  # 60個
 
 print("Trackbar之使用 設定/取值")
 
-image = cv2.imread(filename2)
-
-cv2.imshow("OpenCV", image)
-
 
 def do_trackbar_event1(val):
     print("數值 :", val, end=" ")
 
 
-# cv2.createTrackbar('滑桿名稱', '視窗名稱', min, max, fn)
-# min 最小值 ( 最小為 0，不可為負值 )
-# max 最大值
-# fn 滑桿數值改變時要執行的函式
-# 加入滑桿 0 ~ 200, 預設 100
-cv2.createTrackbar("TrackbarName", "OpenCV", 0, 200, do_trackbar_event1)
-cv2.setTrackbarPos("TrackbarName", "OpenCV", 100)
+image = cv2.imread(filename2)
+cv2.imshow("OpenCV", image)
+
+# cv2.createTrackbar("滑桿名稱", "視窗名稱", min, max, function)
+# min 最小值 ( 最小為 0，不可為負值 ), max 最大值
+# function 滑桿數值改變時要執行的函式
+cv2.createTrackbar("Threshold ", "OpenCV", 0, 100, do_trackbar_event1)
+cv2.setTrackbarPos("Threshold ", "OpenCV", 50)  # 設定預設值
 
 # 取得Trackbar數值
-value = cv2.getTrackbarPos("TrackbarName", "OpenCV")
-
+value = cv2.getTrackbarPos("Threshold ", "OpenCV")
 do_trackbar_event1(value)  # 套用一次設定值
 
 while True:
@@ -207,7 +203,7 @@ def adjust(i, c, b):
 
 # 定義調整亮度函式
 def brightness_fn(val):
-    # print('取得 亮度 :', val)
+    # print("取得 亮度 :", val)
     global image, contrast, brightness
     brightness = val - 100
     adjust(image, contrast, brightness)
@@ -215,7 +211,7 @@ def brightness_fn(val):
 
 # 定義調整對比度函式
 def contrast_fn(val):
-    # print('取得 對比度 :', val)
+    # print("取得 對比度 :", val)
     global image, contrast, brightness
     contrast = val - 100
     adjust(image, contrast, brightness)
@@ -318,7 +314,7 @@ def meanBlur(image, H, W, _boundary="fill", _fillvalue=0):
 
     # -------沒有對均值平滑算子進行分離
     # meanKernel = 1.0/(H*W)*np.ones([H,W],np.float32)
-    # result = signal.convolve2d(image,meanKernel,mode='same',boundary = _boundary,fillvalue=_fillvalue)
+    # result = signal.convolve2d(image,meanKernel,mode="same",boundary = _boundary,fillvalue=_fillvalue)
     # -----卷積後進行數據類型轉換,得到均值平滑的結果
     # result = result.astype(np.uint8)
     # return result
@@ -393,8 +389,8 @@ def do_trackbar_event_scharr(I, _boundary="symm"):
 image = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
 
 # 求卷積
-# i_conv_sch_x = do_trackbar_event_scharr(image,1,0,_boundary='symm') 改掉
-# i_conv_sch_y = do_trackbar_event_scharr(image,0,1,_boundary='symm') 改掉
+# i_conv_sch_x = do_trackbar_event_scharr(image,1,0,_boundary="symm") 改掉
+# i_conv_sch_y = do_trackbar_event_scharr(image,0,1,_boundary="symm") 改掉
 i_conv_sch_x, i_conv_sch_y = do_trackbar_event_scharr(image)
 
 # 取絕對值,分別得到水平方向和垂直方向的邊緣強度
@@ -452,9 +448,9 @@ print("邊緣檢測 Kirsch")
 
 """
 Krisch邊緣檢測算法:
-krisch(image,_boundary='fill',_fillvalue=0)
-其中:邊緣處理的方式_boundary包括：'symm','wrap','fill',
-且當__boundary='fill'時,填充值默認為零_fillvalue=0
+krisch(image,_boundary="fill",_fillvalue=0)
+其中:邊緣處理的方式_boundary包括："symm","wrap","fill",
+且當__boundary="fill"時,填充值默認為零_fillvalue=0
 """
 
 from scipy import signal

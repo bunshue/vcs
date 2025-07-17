@@ -1565,6 +1565,33 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("準備使用Trackbar")
+
+
+def do_trackbar_event1(val):
+    print("數值 :", val, end=" ")
+
+
+image = cv2.imread(filename2)
+cv2.imshow("OpenCV", image)
+
+cv2.createTrackbar("Threshold ", "OpenCV", 0, 100, do_trackbar_event1)
+cv2.setTrackbarPos("Threshold ", "OpenCV", 50)  # 設定預設值
+
+# 取得Trackbar數值
+value = cv2.getTrackbarPos("Threshold ", "OpenCV")
+do_trackbar_event1(value)  # 套用一次設定值
+
+while True:
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
@@ -1572,6 +1599,13 @@ sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+# 白線膨脹
+dilate = cv2.dilate(dst3, None)
+
+# 白線侵蝕
+erode = cv2.erode(dst3, None)
 
 
 print("------------------------------------------------------------")  # 60個

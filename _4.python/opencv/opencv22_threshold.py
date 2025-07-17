@@ -1,5 +1,13 @@
 """
 閾值處理 cv2.threshold
+
+# 直方圖二值化
+# 不同模式的Threshold方法
+# 0 cv2.THRESH_BINARY
+# 1 cv2.THRESH_BINARY_INV
+# 2 cv2.THRESH_TRUNC
+# 3 cv2.THRESH_TOZERO
+# 4 cv2.THRESH_TOZERO_INV
 """
 
 from opencv_common import *
@@ -332,14 +340,6 @@ print(triThe, dst_tri)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 直方圖二值化
-# 不同模式的Threshold方法
-# cv2.THRESH_BINARY
-# cv2.THRESH_BINARY_INV
-# cv2.THRESH_TRUNC
-# cv2.THRESH_TOZERO
-# cv2.THRESH_TOZERO_INV
-
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
 ret, th1 = cv2.threshold(image, 127, maxval, cv2.THRESH_BINARY)
@@ -496,6 +496,29 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("準備使用Trackbar")
+
+
+def do_trackbar_event1(val):
+    print("數值 :", val, end=" ")
+
+
+image = cv2.imread(filename2)
+cv2.imshow("OpenCV", image)
+
+cv2.createTrackbar("Threshold ", "OpenCV", 0, 100, do_trackbar_event1)
+cv2.setTrackbarPos("Threshold ", "OpenCV", 50)  # 設定預設值
+
+# 取得Trackbar數值
+value = cv2.getTrackbarPos("Threshold ", "OpenCV")
+do_trackbar_event1(value)  # 套用一次設定值
+
+while True:
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

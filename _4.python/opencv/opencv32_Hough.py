@@ -74,7 +74,7 @@ def get_avglines(lines):
         )
         x1, y1, x2, y2 = points
         slope, b = np.polyfit((x1, x2), (y1, y2), 1)  # y = slope*x + b
-        # print(f'y = {slope} x + {b}')  #若有需要可將斜率與截距印出
+        # print(f"y = {slope} x + {b}")  #若有需要可將斜率與截距印出
         if slope > 0:  # 斜率 > 0, 右邊的直線函數
             rights.append([slope, b])  # 以 list 存入
         else:  # 斜率 < 0, 左邊的直線函數
@@ -392,7 +392,7 @@ img_gray = cv2.medianBlur(img_gray, 5)
 circles = cv2.HoughCircles(
     img_gray, cv2.HOUGH_GRADIENT, 1, 20, param1=50, param2=30, minRadius=0, maxRadius=0
 )
-print('轉成整數')
+print("轉成整數")
 circles = np.uint16(np.around(circles))
 print(circles)
 
@@ -494,7 +494,7 @@ print(circles)
 
 """
 if circles == None:
-    print('找不到圓形, 離開')
+    print("找不到圓形, 離開")
     sys.exit()
 """
 

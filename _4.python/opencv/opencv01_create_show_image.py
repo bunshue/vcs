@@ -19,28 +19,24 @@ CV視窗之使用
 查看資料型態
 print(type(image))
 print(type(image_gray))
-<class 'numpy.ndarray'>
+<class "numpy.ndarray">
 
 #此 NumPy 陣列的前兩個維度分別是圖片的高度與寬度
 #第三個維度則是圖片的 channel（RGB 彩色圖片的 channel 是 3，灰階圖片則為 1）
 
-h ,w, d = image.shape
-print("Image Size: %d x %d, channel = %d" % (w, h, d))
+H ,W, D = image.shape
+print("Image Size: %d x %d, channel = %d" % (W, H, D))
 
-h ,w = image_gray.shape
-#print("Image Size: %d x %d, channel = %d" % (w, h, d))
+H ,W = image_gray.shape
+#print("Image Size: %d x %d, channel = %d" % (W, H, D))
 
-此 NumPy 陣列的前兩個維度分別是圖片的高度與寬度，第三個維度則是圖片的 channel（RGB 彩色圖片的 channel 是 3，灰階圖片則為 1）。
-
-圖檔格式
-
+此 NumPy 陣列的前兩個維度分別是圖片的高度與寬度，第三個維度則是圖片的 channel
+（RGB 彩色圖片的 channel 是 3，灰階圖片則為 1）。
 """
 
 from opencv_common import *
 
-W, H = 640, 480
-W, H, D = 640, 480, 3
-width, height = 640, 480  # 影像寬, 影像高
+W, H, D = 640, 480, 3  # 影像寬, 影像高, 深度
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -64,23 +60,27 @@ print("二維黑圖")
 image = np.zeros((H, W), dtype=np.uint8)
 
 print("三維黑圖")
-image = np.zeros((H, W, 3), np.uint8)
-image = np.zeros((H, W, 3), dtype="uint8")
-image = np.zeros((H, W, 3), dtype=np.uint8)  # 空白畫布
+image = np.zeros((H, W, D), np.uint8)  # 三維黑圖
+image = np.zeros((H, W, D), dtype="uint8")
+image = np.zeros((H, W, D), dtype=np.uint8)  # 空白畫布
 
 print("三維白圖")
-image = np.ones((H, W, 3), np.uint8) * 255  # 白底畫布
-image = np.ones((H, W, 3), dtype="uint8") * 255
+image = np.ones((H, W, D), np.uint8) * 255  # 白底畫布
+image = np.ones((H, W, D), dtype="uint8") * 255
 
 # 灰色背景
 image[:] = (128, 128, 128)
+
+# 將這個矩陣全部填入指定顏色
+image[:] = [48, 213, 254]
+
+# 將所有點著色 著紅色
+image[:] = RED
 
 # 用(B, G, R) = (255, 255, 255): 白色填滿畫布
 
 image.fill(255)  # 將這個矩陣全部填入255 => 白色, 128 => 灰色
 
-# 將這個矩陣全部填入指定顏色
-image[:] = [48, 213, 254]
 
 image1 = np.ones((H, W), dtype=np.uint8) * 3
 image2 = np.ones((H, W), dtype=np.uint8) * 5
@@ -99,17 +99,41 @@ image5 = cv2.add(6, image2)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+W, H, D = 640, 480, 3  # 影像寬, 影像高, 深度
+
+# 建立白圖 二維灰階/二維深度1
+image = np.ones((H, W), dtype=np.uint8) * 255
+
+# 建立黑圖 二維灰階/二維深度1
+image = np.zeros((H, W), dtype=np.uint8)
+
+# 建立黑圖 二維灰階/二維深度1
+image = np.zeros((H, W), np.uint8)
+
+# 某塊塗為白色
+image[40:120, 70:210] = 255  # 高在40至120之間,寬在70至210之間,設為255
+
+print("某些塗為白色")
+
+for y in range(0, H, 20):
+    image[y : y + 10, :] = 255  # 白色厚度是10
+
+cv2.imshow("OpenCV", image)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+W, H, D = 640, 480, 3  # 影像寬, 影像高, 深度
+
 print("建立 隨機影像 二維灰階/二維深度1")
-image = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)
-image = np.random.randint(0, 256, size=[height, width], dtype=np.uint8)
+image = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)  # 灰階, 1維隨機影像
 
 print("建立 隨機影像 三維彩色/二維深度3")
 W, H, D = 640, 480, 3
-image = np.random.randint(0, 256, size=[H, W, D], dtype=np.uint8)
-image = np.random.randint(0, 256, size=[height, width], dtype=np.uint8)  # 灰階, 1維
-image = np.random.randint(0, 256, size=[height, width, 3], dtype=np.uint8)  # 彩色, 3維
-
-image = np.random.randint(256, size=(height, width))  # 建立矩陣
+image = np.random.randint(0, 256, size=[H, W, D], dtype=np.uint8)  # 彩色, 3維隨機影像
+image = np.random.randint(0, 256, size=(H, W))  # 灰階, 1維隨機影像
 
 minVal, maxVal, minLoc, maxLoc = cv2.minMaxLoc(image)
 print(f"最小值 = {minVal},  位置 = {minLoc}")  # 最小值與其位置
@@ -118,122 +142,121 @@ print(f"最大值 = {maxVal},  位置 = {maxLoc}")  # 最大值與其位置
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-W, H = 5, 4
-print("建立 隨機影像 二維灰階/二維深度1")
-image = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)
+W, H, D = 640, 480, 3
 
-H, W = image.shape
+print("建立 隨機影像 三維彩色/二維深度3")
+image = np.random.randint(0, 256, size=[H, W, D], dtype=np.uint8)  # 彩色, 3維隨機影像
 
-mapx = np.zeros(image.shape, np.float32)
-mapy = np.zeros(image.shape, np.float32)
-for i in range(H):
-    for j in range(W):
-        mapx.itemset((i, j), j)
-        # mapx.itemset((i, j), W - 1 - j)
-        mapy.itemset((i, j), i)
-        # mapy.itemset((i, j), H - 1 - i)
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
-print("image = \n", image)
-print("mapx = \n", mapx)
-print("mapy = \n", mapy)
-print("rst = \n", rst)
+print(
+    "像素點 (1, 0) 直接計算得到的值 = ",
+    image[1, 0, 0] * 0.114 + image[1, 0, 1] * 0.587 + image[1, 0, 2] * 0.299,
+)
+print("像素點 (1, 0) 使用公式cv2.cvtColor()轉換值 = ", image_gray[1, 0])
+"""
+print(image[1, 0, 0])
+print(image[1, 0, 1])
+print(image[1, 0, 2])
+"""
 
+plt.subplot(121)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("用np建立一個隨機影像陣列")
+plt.title("隨機影像 三維彩色/二維深度3")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(image_gray, cv2.COLOR_BGR2RGB))
+plt.title("轉灰階")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("建立影像")
+# itemset()
 
-# 建立白圖 二維灰階/二維深度1
-image = np.ones((height, width), dtype=np.uint8) * 255
+W, H, D = 5, 3, 3  # 影像寬, 影像高, 深度
 
-# 建立黑圖 二維灰階/二維深度1
-image = np.zeros((height, width), dtype=np.uint8)
+image = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)  # 灰階, 1維隨機影像
 
-# 建立黑圖 二維灰階/二維深度1
-image = np.zeros((height, width), np.uint8)
+print("取得影像內容")
+print(f"修改前image.item(1,3) = {image.item(1,3)}")
 
-# 某塊塗為白色
-image[40:120, 70:210] = 255  # 高在40至120之間,寬在70至210之間,設為255
-
-print("某些塗為白色")
-
-for y in range(0, height, 20):
-    image[y : y + 10, :] = 255  # 白色厚度是10
-
-
-cv2.imshow("image", image)
-cv2.waitKey()
-cv2.destroyAllWindows()
+print("修改影像內容")
+image.itemset((1, 3), 255)  # 修訂內容為 255
+print(f"修改後image.item(1,3) = {image.item(1,3)}")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+W, H, D = 640, 480, 3  # 影像寬, 影像高, 深度
+
 # 建立黑圖 二維灰階/二維深度1
-image = np.zeros((height, width), np.uint8)
+image = np.zeros((H, W), np.uint8)
 
 image.fill(255)  # 將這個矩陣全部填入255 => 白色, 128 => 灰色
 
 # 建立白圖 二維灰階/二維深度1
-image = np.ones((height, width), np.uint8) * 255
+image = np.ones((H, W), np.uint8) * 255
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 建立黑圖 三維彩色/二維深度3
-image = np.zeros((height, width, 3), np.uint8)
-
-image[0:100, :, 0] = 255  # 0, B通道
-image[100:200, :, 1] = 255  # 1, G通道
-image[200:300, :, 2] = 255  # 2, R通道
-
-cv2.imshow("image", image)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+W, H, D = 640, 480, 3  # 影像寬, 影像高, 深度
 
 # R, 建立黑圖 三維彩色/二維深度3 改 R 通道
-red_image = np.zeros((height, width, 3), np.uint8)
+red_image = np.zeros((H, W, D), np.uint8)  # 三維黑圖
 red_image[:, :, 2] = 255  # 建立 R 通道像素值, 填滿紅色
 
 # G, 建立黑圖 三維彩色/二維深度3 改 G 通道
-green_image = np.zeros((height, width, 3), np.uint8)
+green_image = np.zeros((H, W, D), np.uint8)  # 三維黑圖
 green_image[:, :, 1] = 255  # 建立 G 通道像素值, 填滿綠色
 
 # B, 建立黑圖 三維彩色/二維深度3 改 B 通道
-blue_image = np.zeros((height, width, 3), np.uint8)
+blue_image = np.zeros((H, W, D), np.uint8)  # 三維黑圖
 blue_image[:, :, 0] = 255  # 建立 B 通道像素值, 填滿藍色
 
 # Y, 建立黑圖 三維彩色/二維深度3 改 RG 通道
-yellow_image = np.zeros((height, width, 3), np.uint8)
+yellow_image = np.zeros((H, W, D), np.uint8)  # 三維黑圖
 yellow_image[:, :, 2] = 255  # 建立 R 通道像素值, 填滿紅色
 yellow_image[:, :, 1] = 255  # 建立 G 通道像素值, 填滿綠色
 
-plt.subplot(221)
+plt.subplot(231)
 plt.imshow(cv2.cvtColor(red_image, cv2.COLOR_BGR2RGB))
 plt.title("R")
 plt.axis("off")
 
-plt.subplot(222)
+plt.subplot(232)
 plt.imshow(cv2.cvtColor(green_image, cv2.COLOR_BGR2RGB))
 plt.title("G")
 plt.axis("off")
 
-plt.subplot(223)
+plt.subplot(233)
 plt.imshow(cv2.cvtColor(blue_image, cv2.COLOR_BGR2RGB))
 plt.title("B")
 plt.axis("off")
 
-plt.subplot(224)
+plt.subplot(234)
 plt.imshow(cv2.cvtColor(yellow_image, cv2.COLOR_BGR2RGB))
 plt.title("Y")
+plt.axis("off")
+
+W, H, D = 640, 480, 3  # 影像寬, 影像高, 深度
+
+# 建立黑圖 三維彩色/二維深度3
+image = np.zeros((H, W, D), np.uint8)  # 三維黑圖
+
+image[0:96, :, 2] = 255  # 2, R通道
+image[96 : 96 * 2, :, 1] = 255  # 1, G通道
+image[96 : 96 * 2, :, 2] = 255  # 2, R通道
+image[96 * 2 : 96 * 3, :, 0] = 255  # 0, B通道
+image[96 * 3 : 96 * 4, :, 0] = 255  # 0, B通道
+image[96 * 3 : 96 * 4, :, 1] = 255  # 1, G通道
+image[96 * 3 : 96 * 4, :, 2] = 255  # 2, R通道
+
+plt.subplot(235)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("五色旗")
 plt.axis("off")
 
 show()
@@ -305,7 +328,6 @@ cv2.IMREAD_UNCHANGED 彩色 + 有透明度
 # cv2.IMREAD_UNCHANGED = -1
 # cv2.IMREAD_GRAYSCALE =  0
 # cv2.IMREAD_COLOR     =  1 (預設)
-
 """
 
 image = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
@@ -318,11 +340,11 @@ print("image.dtype=", image.dtype)
 print("image.shape格式 :", type(image.shape))
 print("image.shape內容 :", image.shape)
 
-h = image.shape[0]  # 高
-w = image.shape[1]  # 寬
-d = image.shape[2]  # 深
-h, w, d = image.shape  # d為dimension d=3 全彩, d=1 灰階
-print("寬 = ", w, ", 高 = ", h, ", D = ", d)
+H = image.shape[0]  # 高
+W = image.shape[1]  # 寬
+D = image.shape[2]  # 深
+H, W, D = image.shape  # D為dimension D=3 全彩, D=1 灰階
+print("寬 = ", W, ", 高 = ", H, ", D = ", D)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -330,12 +352,20 @@ print("------------------------------------------------------------")  # 60個
 image_bgr = cv2.imread(filename1)  # 彩色讀取
 
 # BGR 轉 RGB
-image_rgb = image_bgr[:, :, ::-1]  # 將 BGR 圖片轉為 RGB 圖片
+image_rgb1 = image_bgr[:, :, ::-1]  # 將 BGR 圖片轉為 RGB 圖片
 
 # BGR 轉 RGB
-# image_rgb = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB)
+image_rgb2 = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB)
 
-plt.imshow(image_rgb)
+plt.subplot(131)
+plt.imshow(image_bgr)
+plt.title("直接顯示BGR(錯誤)")
+plt.subplot(132)
+plt.imshow(image_rgb1)
+plt.title("陣列換行")
+plt.subplot(133)
+plt.imshow(image_rgb2)
+plt.title("cvtColor(用此)")
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -345,7 +375,7 @@ print("像素操作 底片效果 半張負片")
 
 image = cv2.imread(filename1)  # 彩色讀取
 
-plt.subplot(121)
+plt.subplot(131)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
@@ -358,26 +388,17 @@ for row in range(int(rows / 2)):  # 只取 rows 的一半 ( 使用 int 取整數
         image[row, col, 1] = 255 - image[row, col, 1]  # 255 - 綠色
         image[row, col, 2] = 255 - image[row, col, 2]  # 255 - 紅色
 
-plt.subplot(122)
+plt.subplot(132)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("半張負片")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 print("像素操作 全張負片")
 
 image = cv2.imread(filename1)  # 彩色讀取
 
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
 image = 255 - image  # 使用 255 減去陣列中所有數值
 
-plt.subplot(122)
+plt.subplot(133)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("全張負片")
 
@@ -386,14 +407,14 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("並列一圖")
+print("並列一圖 hconcat")
 
 image1 = cv2.imread(filename1)  # 彩色讀取
 
 image2 = cv2.hconcat([image1, image1, image1, image1, image1, image1])
 
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
-plt.title("並列一圖")
+plt.title("並列一圖 hconcat")
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -413,7 +434,7 @@ image_g[:, :, 2] = 0  # 將紅色設為 0
 image_b[:, :, 1] = 0  # 將綠色設為 0
 image_b[:, :, 2] = 0  # 將紅色設為 0
 
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(10, 8))
 plt.subplot(231)
 plt.imshow(cv2.cvtColor(image_r, cv2.COLOR_BGR2RGB))
 plt.title("R通道")
@@ -430,7 +451,7 @@ print("原圖 彩色 轉 灰階1通道")
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 print("灰階 轉 BGR3通道")
-rgb = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)  # 轉灰階
+rgb = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
 print("rgb.shape=", rgb.shape)
 
 plt.subplot(234)
@@ -450,7 +471,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+image = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 plt.figure(figsize=(8, 8))
 plt.subplot(221)
@@ -484,12 +505,12 @@ plt.subplot(223)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-print("讀取image[0,0]=", image[0, 0])
-print("讀取image[0,0,0]=", image[0, 0, 0])
-print("讀取image[0,0,1]=", image[0, 0, 1])
-print("讀取image[0,0,2]=", image[0, 0, 2])
-print("讀取image[50,0]=", image[50, 0])
-print("讀取image[100,0]=", image[100, 0])
+print("讀取 image[0, 0] =", image[0, 0])
+print("讀取 image[0, 0, 0] =", image[0, 0, 0])
+print("讀取 image[0, 0, 1] =", image[0, 0, 1])
+print("讀取 image[0, 0, 2] =", image[0, 0, 2])
+print("讀取 image[50, 0] =", image[50, 0])
+print("讀取 image[100, 0] =", image[100, 0])
 
 # 區域1
 for i in range(0, 50):
@@ -507,24 +528,24 @@ for i in range(100, 150):
         image[i, j] = 0  # 黑色
 
 # 區域4
-print("讀取image.item(0, 0, 0) = ", image.item(0, 0, 0))
-print("讀取image.item(0, 0, 1) = ", image.item(0, 0, 1))
-print("讀取image.item(0, 0, 2) = ", image.item(0, 0, 2))
+print("讀取 image.item(0, 0, 0) =", image.item(0, 0, 0))
+print("讀取 image.item(0, 0, 1) =", image.item(0, 0, 1))
+print("讀取 image.item(0, 0, 2) =", image.item(0, 0, 2))
 
 for i in range(200, 250):
     for j in range(0, 100):
         for k in range(0, 3):
             image.itemset((i, j, k), 255)  # 白色
 
-print("修改後image.item(0, 0, 0) = ", image.item(0, 0, 0))
-print("修改後image.item(0, 0, 1) = ", image.item(0, 0, 1))
-print("修改後image.item(0, 0, 2) = ", image.item(0, 0, 2))
-print("修改後image[0, 0] = ", image[0, 0])
-print("修改後image[0, 0, 0] = ", image[0, 0, 0])
-print("修改後image[0, 0, 1] = ", image[0, 0, 1])
-print("修改後image[0, 0, 2] = ", image[0, 0, 2])
-print("修改後image[50, 0] = ", image[50, 0])
-print("修改後image[100, 0] = ", image[100, 0])
+print("修改後 image.item(0, 0, 0) =", image.item(0, 0, 0))
+print("修改後 image.item(0, 0, 1) =", image.item(0, 0, 1))
+print("修改後 image.item(0, 0, 2) =", image.item(0, 0, 2))
+print("修改後 image[0, 0] =", image[0, 0])
+print("修改後 image[0, 0, 0] =", image[0, 0, 0])
+print("修改後 image[0, 0, 1] =", image[0, 0, 1])
+print("修改後 image[0, 0, 2] =", image[0, 0, 2])
+print("修改後 image[50, 0] =", image[50, 0])
+print("修改後 image[100, 0] =", image[100, 0])
 
 plt.subplot(224)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -537,27 +558,28 @@ print("------------------------------------------------------------")  # 60個
 
 lena_color_filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.png"
 
-a = cv2.imread(lena_color_filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取 + 有透明度
+lena_color = cv2.imread(lena_color_filename)  # 彩色讀取
+print(lena_color.shape)
 
 plt.figure(figsize=(12, 8))
 plt.subplot(131)
-plt.imshow(cv2.cvtColor(a, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(lena_color, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 print("擷取一塊出來, 並顯示之")
-face = a[200:400, 200:380]  # h, w
+face = lena_color[200:400, 200:380]  # H, W
 
 plt.subplot(132)
 plt.imshow(cv2.cvtColor(face, cv2.COLOR_BGR2RGB))
 plt.title("擷取一塊出來")
 
 print("將其中一塊亂碼化, 並顯示之")
-x_st, y_st, w, h = 50, 50, 100, 180
-face = np.random.randint(0, 256, (h, w, 3))
-a[y_st : y_st + h, x_st : x_st + w] = face
+x_st, y_st, W, H = 50, 50, 100, 180
+face = np.random.randint(0, 256, (H, W, 3))  # 彩色, 3維隨機影像
+lena_color[y_st : y_st + H, x_st : x_st + W] = face
 
 plt.subplot(133)
-plt.imshow(cv2.cvtColor(a, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(lena_color, cv2.COLOR_BGR2RGB))
 plt.title("將其中一塊亂碼化")
 
 show()
@@ -567,47 +589,43 @@ print("------------------------------------------------------------")  # 60個
 
 print("漸層色")
 
-w, h = 400, 400
-image = np.zeros([h, w, 3])
-for i in range(h):
-    for j in range(w):
-        image[i, j, 0] = int(256 * (j + i) / (w + h))
-        image[i, j, 2] = int(256 * (j + i) / (w + h))
+W, H = 400, 400
+image = np.zeros([H, W, 3])
+for i in range(H):
+    for j in range(W):
+        image[i, j, 0] = int(256 * (j + i) / (W + H))
+        image[i, j, 2] = int(256 * (j + i) / (W + H))
 
 image = image.astype("float32") / 255
 
+plt.subplot(131)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("漸層色")
-show()
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-print("漸層色")
-
-w, h = 400, 400
-image = np.zeros([h, w, 3])
-for i in range(h):
+W, H = 400, 400
+image = np.zeros([H, W, 3])
+for i in range(H):
     image[i, :, 1] = int(256 * i / 400)  # 從上往下填入綠色漸層
 
 image = image.astype("float32") / 255  # 轉換內容類型
 
+plt.subplot(132)
 # NG plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.imshow(image)
 plt.title("漸層色")
-show()
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-w, h = 400, 400
-
-image = np.zeros([h, w, 4])  # 第三個值為 4
-for i in range(h):
+W, H = 400, 400
+image = np.zeros([H, W, 4])  # 第三個值為 4
+for i in range(H):
     image[i, :, 3] = int(256 * i / 400)  # 設定第四個值 ( 透明度 )
 
 image = image.astype("float32") / 255
 
+plt.subplot(133)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("黑圖")
 show()
@@ -617,11 +635,7 @@ print("------------------------------------------------------------")  # 60個
 
 W, H, D = 640, 480, 3
 
-print("初始化 H X W X D 陣列")
-W, H, D = 640, 480, 3
 image = np.zeros((H, W, D), dtype="uint8") * 255
-
-# print(image)
 print(image.shape)
 
 print("---------------")
@@ -629,10 +643,6 @@ print("---------------")
 # image[0 : 3] = 10   #x方向
 # image[0 : 3, 0 : 3] = 10   #x方向
 # image[0 : 3, 0 : 3, 0 : 3] = 10   #x方向
-
-print("將所有點著色 著紅色")
-image[:] = RED
-# print(image)
 
 # image[0 : 50, 0 : 50] = 123 #前x, 後y
 # image[2 : 6, 2 : 6] = 126
@@ -672,38 +682,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-w = int(640 / 20)
-h = int(480 / 20)
-W, H, D = 640, 480, 3
-
-print("建立 隨機影像 三維彩色/二維深度3")
-image = np.random.randint(0, 256, size=[h, w, D], dtype=np.uint8)
-image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
-
-print(
-    "像素點 (1, 0) 直接計算得到的值 = ",
-    image[1, 0, 0] * 0.114 + image[1, 0, 1] * 0.587 + image[1, 0, 2] * 0.299,
-)
-print("像素點 (1, 0) 使用公式cv2.cvtColor()轉換值 = ", image_gray[1, 0])
-"""
-print(image[1, 0, 0])
-print(image[1, 0, 1])
-print(image[1, 0, 2])
-"""
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("隨機影像 三維彩色/二維深度3")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(image_gray, cv2.COLOR_BGR2RGB))
-plt.title("轉灰階")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -734,26 +712,6 @@ cv2.destroyWindow("OpenCV222")  # 刪除OpenCV222
 cv2.destroyAllWindows()  # 刪除所有視窗
 
 # cv2.waitKey(2000)       # 等待兩秒 ( 2000 毫秒 ) 後關閉圖片視窗
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-image = cv2.imread(filename)  # BGR 讀取
-cv2.imshow("OpenCV", image)
-img_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # BGR 轉 RBG
-cv2.imshow("RGB Color Space", img_rgb)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-cv2.namedWindow("OpenCV")
-image = cv2.imread(filename)  # 彩色讀取
-cv2.line(image, (10, 300), (250, 300), BLUE, 5)  # 輸出線條
-cv2.rectangle(image, (20, 20), (240, 250), RED, 2)  # 輸出矩陣
-cv2.putText(image, "OpenCV", (10, 250), cv2.FONT_ITALIC, 3, BLUE, 8)  # 輸出文字
-cv2.imshow("OpenCV", image)  # 顯示影像img
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -815,18 +773,6 @@ print(f"修改後img[250,199] = {image[250,199]}")
 cv2.imshow("After", image)  # 顯示修改前影像img
 cv2.waitKey()
 cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-image = np.random.randint(0, 200, size=[3, 5], dtype=np.uint8)
-print(f"image = \n{image}")
-print(f"修改前image.item(1,3) = {image.item(1,3)}")
-
-image.itemset((1, 3), 255)  # 修訂內容為 255
-
-print(f"修改後image =\n{image}")
-print(f"修改後image.item(1,3) = {image.item(1,3)}")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -912,19 +858,18 @@ image = cv2.imread(filename1)  # 彩色讀取
 image[0, 0] = [0, 0, 255]
 image[10:100, 10:100] = [0, 255, 0]
 
-cv2.imshow("image", image)
+cv2.imshow("OpenCV", image)
 cv2.waitKey(0)  # 0, 無限等待使用者按鍵
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# ????
+
 image = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
-print("讀取圖片 並顯示")
 image = cv2.imread(filename1, 1)  # 讀取本機圖片, 0: 黑白圖片 1: 原色圖片
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-show()
 
 image_gray = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)  # 轉灰階
 
@@ -955,18 +900,20 @@ cv2.destroyAllWindows()
 W, H, D = 10, 10, 3
 
 print("建立 隨機影像 二維灰階/二維深度1")
-a = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)
+image = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)  # 灰階, 1維隨機影像
 
 # 建立mask
-b = np.zeros((H, W), dtype=np.uint8)
-b[2:8, 2:8] = 255
-c = cv2.bitwise_and(a, b)
+mask = np.zeros((H, W), dtype=np.uint8)
+mask[2:8, 2:8] = 255
+image_mask = cv2.bitwise_and(image, mask)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = np.zeros([height, width], np.uint8)  # 建立影像
-image[50 : height - 50, 50 : width - 50] = 255  # 在影像內建立遮罩
+W, H, D = 640, 480, 3  # 影像寬, 影像高, 深度
+
+image = np.zeros([H, W], np.uint8)  # 建立影像
+image[50 : H - 50, 50 : W - 50] = 255  # 在影像內建立遮罩
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -993,9 +940,9 @@ cv2.imwrite(filename=filename, img=image)
 print("已存圖, 檔案 :", filename)
 
 # 部分圖片寫入圖檔
-# cv2.imwrite(filename, image[y:y + h, x:x + w])
+# cv2.imwrite(filename, image[y:y + H, x:x + W])
 
-cv2.imwrite("tmp_char%s.jpg" % flag, thresh1[y : y + h, x : x + w])
+cv2.imwrite("tmp_char%s.jpg" % flag, thresh1[y : y + H, x : x + W])
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1040,17 +987,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-"""
-MIN = 50
-MAX = W - 50
-N = 10  # 隨機生成 N 個坐標點，每一行存儲一個坐標
-# 隨機生成 橫縱坐標均在 MIN 至 MAX 的坐標點
-points = np.random.randint(MIN, MAX, (N, 2), np.int32)
-# print(points)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
 image = cv2.imread(filename1)
 
 for i in range(20, 80):
@@ -1059,33 +995,26 @@ for i in range(20, 80):
 #       H        W
 image[10:100, 200:290] = GREEN  # 綠色 一塊 90X90
 
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.show()
-
-
 """
 OpenCV 的 cv2.imread 在讀取圖片時，可以在第二個參數指定圖片的格式，可用的選項有三種：
 
-數值 1
-cv2.IMREAD_COLOR
-    此為預設值，這種格式會讀取 RGB 三個 channels 的彩色圖片，而忽略透明度的 channel。
+數值  1 cv2.IMREAD_COLOR
+此為預設值，這種格式會讀取 RGB 三個 channels 的彩色圖片，而忽略透明度的 channel。
 
-數值 0
-cv2.IMREAD_GRAYSCALE
-    以灰階的格式來讀取圖片。
+數值  0 cv2.IMREAD_GRAYSCALE
+以灰階的格式來讀取圖片。
 
-數值 -1
-cv2.IMREAD_UNCHANGED
-    讀取圖片中所有的 channels，包含透明度的 channel。
+數值 -1 cv2.IMREAD_UNCHANGED
+讀取圖片中所有的 channels，包含透明度的 channel。
 
 窗口显示方式，cv2.WINDOW_NORMAL为正常显示，可以调整大小
 # cv2.WINDOW_AUTOSIZE显示原图片的大小，用户不能调整大小
 
 opencv之paste
-x_st, y_st, w, h
+x_st, y_st, W, H
 
-小圖先縮放至所需大小w,h
-大圖之(y_st:y_st+h, x_st:x_st+w) = 小圖之全部
+小圖先縮放至所需大小 W, H
+大圖之(y_st:y_st+H, x_st:x_st+W) = 小圖之全部
 
 後面還有一個參數
 plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB), "gray")
@@ -1093,38 +1022,32 @@ plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB), "gray")
 #輸出圖片檔案時，也可以調整圖片的品質或壓縮率：
 
 # 設定 JPEG 圖片品質為 90（可用值為 0 ~ 100）
-cv2.imwrite('filename.jpg', image, [cv2.IMWRITE_JPEG_QUALITY, 90])
+cv2.imwrite(filename, image, [cv2.IMWRITE_JPEG_QUALITY, 90])
 
-print('存圖, 質量為5')
-cv2.imwrite("./1.jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 5])
-print('存圖, 質量為100')
-cv2.imwrite("./2.jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
-
-cv2.imwrite(filename2b, image2, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
-
-cv2.imwrite('tmp_image_2.jpg', image, [cv2.IMWRITE_JPEG_QUALITY, 80])
+print("存圖, 質量為5")
+cv2.imwrite(filename, image, [int(cv2.IMWRITE_JPEG_QUALITY), 5])
+print("存圖, 質量為100")
+cv2.imwrite(filename, image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
+cv2.imwrite(filename, image, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
+cv2.imwrite(filename, image, [cv2.IMWRITE_JPEG_QUALITY, 80])
 
 # 設定 PNG 壓縮層級為 5（可用值為 0 ~ 9）
-cv2.imwrite('filename.png', image, [cv2.IMWRITE_PNG_COMPRESSION, 5])
-print('存圖, 壓縮為0')
-cv2.imwrite("./3.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
-print('存圖, 壓縮為9')
-cv2.imwrite("./4.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 9])
+cv2.imwrite("filename.png", image, [cv2.IMWRITE_PNG_COMPRESSION, 5])
+print("存圖, 壓縮為0")
+cv2.imwrite("filename.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
+print("存圖, 壓縮為9")
+cv2.imwrite("filename.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 9])
 
 cv 搬出
 #另存新檔
-filename2 = 'C:/_git/vcs/_1.data/______test_files2/human_face.jpg'
-cv2.imwrite(filename2, image)	#寫入本機圖片
-cv2.imwrite("face_detection.jpg", image)
-cv2.imwrite('7.jpg', image)
+cv2.imwrite(filename, image)	#寫入本機圖片
 
 一樣的意思
 plt.imshow(image0[:, :, ::-1])  # 原圖 # same
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))  # 原圖
 
-src = cv2.imread("data/edge_detection/snow.jpg")  # 彩色讀取
-src = cv2.imread("data/edge_detection/geneva.jpg", cv2.IMREAD_GRAYSCALE)  # 黑白讀取
-
+src = cv2.imread(filename)  # 彩色讀取
+src = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 黑白讀取
 """
 print("------------------------------------------------------------")  # 60個
 # CV視窗之使用 ST
@@ -1135,7 +1058,8 @@ print("------------------------------------------------------------")  # 60個
 若設定為 0 就表示持續等待至使用者按下按鍵為止，
 這樣當我們按下任意按鍵之後，就會呼叫 cv2.destroyAllWindows 關閉所有 OpenCV 的視窗。
 
-如果在程式中有許多的 OpenCV 視窗，而我們只要關閉特定的視窗時，可以改用 cv2.destroyWindow 加上視窗名稱，關閉指定的視窗：
+如果在程式中有許多的 OpenCV 視窗，而我們只要關閉特定的視窗時，
+可以改用 cv2.destroyWindow 加上視窗名稱，關閉指定的視窗
 
 # 關閉 "OpenCV333" 視窗
 cv2.destroyWindow("OpenCV333")
@@ -1163,7 +1087,6 @@ OpenCV 顯示圖片視窗
 
 灰階的圖片也可以顯示，用法都相同：
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1181,7 +1104,6 @@ cv2.destroyWindow("OpenCV")  # 關閉視窗
 k = cv2.waitKey(0)  # 0, 無限等待使用者按鍵
 
 """ 視窗功能
-
 k = cv2.waitKey(200)  # 0.2秒檢查一次
 
 if k == ord("a") or k == ord("A"):  # 如果按A或a
@@ -1196,10 +1118,17 @@ WINDOW_NORMAL – Allows to manually change window size
 WINDOW_AUTOSIZE(Default) – Automatically sets the window size
 WINDOW_FULLSCREEN – Changes the window size to fullscreen
 
+# 設定 cv 視窗
+cv2.namedWindow("OpenCV")
+
+# 若有多個視窗 要指名視窗名稱
 cv2.namedWindow("OpenCV", cv2.WINDOW_AUTOSIZE)
-cv2.namedWindow("OpenCV", cv2.WINDOW_NORMAL)
-cv2.namedWindow("OpenCV", cv2.WINDOW_NORMAL)# 讓視窗可以自由縮放大小
-cv2.namedWindow("OpenCV", cv2.WINDOW_NORMAL)# 可調整大小
+cv2.namedWindow("OpenCV", cv2.WINDOW_NORMAL)  # 讓視窗可以自由縮放大小
+cv2.namedWindow("OpenCV", cv2.WINDOW_NORMAL)  # 可調整大小
+
+# 可調整大小 並 保持比例
+cv2.namedWindow("OpenCV", cv2.WINDOW_NORMAL | cv2.WINDOW_KEEPRATIO)
+
 
 # 設定視窗參數, 若不設定, 即是 圖片滿框、不可調整大小
 # 預設 flags == WINDOW_AUTOSIZE | WINDOW_KEEPRATIO |WINDOW_GUI_EXPANDED
@@ -1207,24 +1136,12 @@ cv2.namedWindow("OpenCV", cv2.WINDOW_NORMAL)# 可調整大小
 # WINDOW_FREERATIO 不 保持比例
 # WINDOW_KEEPRATIO    保持比例
 
-# 可調整大小 並 保持比例
-# cv2.namedWindow("OpenCV", cv2.WINDOW_NORMAL | cv2.WINDOW_KEEPRATIO)
-
-# 若有多個視窗 要指名視窗名稱
-cv2.namedWindow("OpenCV", cv2.WINDOW_NORMAL)
-
-# 設定 cv 視窗
-cv2.namedWindow("OpenCV")
-cv2.namedWindow("OpenCV", cv2.WINDOW_NORMAL)  # 可以調整大小
-
 cv2.destroyWindow("OpenCV")  # 指明刪除特定的視窗
-
 """
 print("測試CV視窗 : 全螢幕顯示一圖")
 
 image = cv2.imread(filename1)  # 彩色讀取
 
-cv2.namedWindow("OpenCV", cv2.WINDOW_NORMAL)
 cv2.setWindowProperty("OpenCV", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
 cv2.imshow("OpenCV", image)
@@ -1281,9 +1198,8 @@ image[1:300, 1:300] = YELLOW  # 設定黃色底
 """
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 image = cv2.imread(filename, cv2.IMREAD_ANYCOLOR)
-
-img1 = cv2.imread(filename)  # 彩色讀取
-img2 = cv2.imread(filename, 0)  # 灰階讀取
+image = cv2.imread(filename)  # 彩色讀取
+image = cv2.imread(filename, 0)  # 灰階讀取
 
 """
 
@@ -1300,3 +1216,11 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 隨機生成
+points = np.random.randint(100, 200, (10, 2), np.int32)
+# print(points)

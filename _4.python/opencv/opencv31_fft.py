@@ -29,7 +29,7 @@ print("------------------------------------------------------------")  # 60個
 import pylab as pl
 
 NNNN = 100
-'''
+
 
 # 三角波
 def triangle_wave(size):
@@ -206,7 +206,7 @@ src_back = np.abs(src_tmp)  # 取絕對值
 
 # np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
 cc = np.allclose(image, src_tmp)  # 和原始訊號進行比較
-print('和原始訊號進行比較')
+print("和原始訊號進行比較")
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
@@ -218,7 +218,7 @@ print("使用 cv 傅立葉 ST")
 # cv2.dft
 # cv2.idft
 print("------------------------------------------------------------")  # 60個
-'''
+
 image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 
 plt.subplot(131)
@@ -608,25 +608,25 @@ print("image_dft2")
 
 PI = 3.141591265
 
-image = plt.imread('data/castle3.jpg')
+image = plt.imread("data/castle3.jpg")
 
 #根據公式轉成灰度圖
 image = 0.2126 * image[:,:,0] + 0.7152 * image[:,:,1] + 0.0722 * image[:,:,2]
 
 plt.subplot(131)
-plt.imshow(image,'gray')
-plt.title('原圖')
+plt.imshow(image,"gray")
+plt.title("原圖")
 
 f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
 log_fft2 = np.log(1 + np.abs(f))
 
 plt.subplot(132)
-plt.imshow(log_fft2,'gray')
-plt.title('log_fft2')
+plt.imshow(log_fft2, "gray")
+plt.title("log_fft2")
 
 h , w = image.shape
 #生成一個同樣大小的復數矩陣
-F = np.zeros([h,w],'complex128')
+F = np.zeros([h,w], "complex128")
 for u in range(h):
     for v in range(w):
         res = 0
@@ -638,8 +638,8 @@ for u in range(h):
 log_F = np.log(1 + np.abs(F))
 
 plt.subplot(133)
-plt.imshow(log_F,'gray')
-plt.title('log_F')
+plt.imshow(log_F, "gray")
+plt.title("log_F")
 
 show()
 """
@@ -771,17 +771,16 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-start = 0
-# 起始時間
-end = 5
-# 結束時間
+start = 0  # 起始時間
+end = 5  # 結束時間
+
 # 兩個正弦波的訊號頻率
-freq1 = 5
-# 頻率是 5 Hz
-freq2 = 8
-# 頻率是 8 Hz
+freq1 = 5  # 頻率是 5 Hz
+freq2 = 8  # 頻率是 8 Hz
+
 # 建立時間軸的np陣列, 用500個點
 time = np.linspace(start, end, 500)
+
 # 建立2個正弦波
 amplitude1 = np.sin(2 * np.pi * freq1 * time)
 amplitude2 = np.sin(2 * np.pi * freq2 * time)
@@ -817,8 +816,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1024,8 +1021,10 @@ logAmplitude = graySpectrum(amplitude)
 
 # 第三步：計算相位
 phase = phaseSpectrum(fft2)
+
 # 餘弦譜（用於計算實部）
 cosSpectrum = np.cos(phase)
+
 # 正弦譜（用於計算虛部）
 sinSectrum = np.sin(phase)
 

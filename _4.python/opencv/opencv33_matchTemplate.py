@@ -367,13 +367,17 @@ result = cv2.matchTemplate(target, template, cv2.TM_SQDIFF_NORMED)
 # 归一化处理
 # 寻找矩阵（一维数组当做向量，用Mat定义）中的最大值和最小值的匹配结果及其位置
 min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-"""绘制矩形边框，将匹配区域标注出来
+
+"""
+绘制矩形边框，将匹配区域标注出来
 min_loc：矩形定点
 min_loc[0]+twidth,min_loc[1]+theight)：矩形的宽高
-(0,0,225)：矩形的边框颜色；2：矩形边框宽度"""
+(0,0,225)：矩形的边框颜色；2：矩形边框宽度
+"""
 cv2.rectangle(
     target, min_loc, (min_loc[0] + twidth, min_loc[1] + theight), (0, 0, 225), 2
 )
+
 # 匹配值转换为字符串
 # 对于cv2.TM_SQDIFF及cv2.TM_SQDIFF_NORMED方法min_val越趋近与0匹配度越好，匹配位置取min_loc
 # 对于其他方法max_val越趋近于1匹配度越好，匹配位置取max_loc
@@ -492,9 +496,5 @@ print("------------------------------------------------------------")  # 60個
 result = cv2.matchTemplate(src, template, cv2.TM_SQDIFF)
 print(f"result大小 = {result.shape}")
 print(f"陣列內容 \n{result}")
-
-
-
-
 
 """

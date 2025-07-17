@@ -36,6 +36,8 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("OpenCV_35")
 
 filename = "C:/_git/vcs/_4.python/opencv/data/_qrcode/QR1.png"
@@ -69,6 +71,7 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 print("OpenCV_36")
 
 from PIL import ImageFont, ImageDraw, Image  # 載入 PIL ( 為了放中文字 )
@@ -84,7 +87,7 @@ data, bbox, rectified = qrcode.detectAndDecode(image)
 # 建立放入文字的函式
 def putText(x, y, text, color=(0, 0, 0)):
     global image
-    # font_filename = 'NotoSansTC-Regular.otf'      # 字體 ( 從 Google Font 下載 )
+    # font_filename = "NotoSansTC-Regular.otf"      # 字體 ( 從 Google Font 下載 )
     font = ImageFont.truetype(font_filename, 20)  # 設定字型與大小
     imagePil = Image.fromarray(image)  # 將 image 轉換成 PIL 圖片物件
     draw = ImageDraw.Draw(imagePil)  # 建立繪圖物件
@@ -113,47 +116,53 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 print("OpenCV_37")
 
-""" many-qr-code
+# many-qr-code
 from PIL import ImageFont, ImageDraw, Image
 
 image = cv2.imread("many-qrcode.jpg")
 
-def putText(x,y,text,color=(0,0,0)):
+
+def putText(x, y, text, color=(0, 0, 0)):
     global image
-    #font_filename = 'NotoSansTC-Regular.otf'
+    # font_filename = "NotoSansTC-Regular.otf"
     font = ImageFont.truetype(font_filename, 20)
     imagePil = Image.fromarray(image)
     draw = ImageDraw.Draw(imagePil)
     draw.text((x, y), text, fill=color, font=font)
     image = np.array(imagePil)
 
+
 def boxSize(arr):
     global data
-    box_roll = np.rollaxis(arr,1,0)
+    box_roll = np.rollaxis(arr, 1, 0)
     xmax = int(np.amax(box_roll[0]))
     xmin = int(np.amin(box_roll[0]))
     ymax = int(np.amax(box_roll[1]))
     ymin = int(np.amin(box_roll[1]))
-    return (xmin,ymin,xmax,ymax)
+    return (xmin, ymin, xmax, ymax)
+
 
 qrcode = cv2.QRCodeDetector()
-ok, data, bbox, rectified = qrcode.detectAndDecodeMulti(image)   # 改用 detectAndDecodeMulti
+ok, data, bbox, rectified = qrcode.detectAndDecodeMulti(
+    image
+)  # 改用 detectAndDecodeMulti
 # 如果有偵測到
 if ok:
     # 使用 for 迴圈取出每個 QRCode 的資訊
     for i in range(len(data)):
         print(data[i])
         print(bbox[i])
-        text = data[i]          # QRCode 內容
+        text = data[i]  # QRCode 內容
         box = boxSize(bbox[i])  # QRCode 左上與右下座標
-        cv2.rectangle(image,(box[0],box[1]),(box[2],box[3]), RED, 5)  # 標記外框
-        putText(box[0],box[3],text)   # 寫出文字
+        cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), RED, 5)  # 標記外框
+        putText(box[0], box[3], text)  # 寫出文字
 
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -533,10 +542,10 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
@@ -544,5 +553,8 @@ print("------------------------------------------------------------")  # 60個
 sys.exit()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

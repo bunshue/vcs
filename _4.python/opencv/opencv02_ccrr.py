@@ -100,6 +100,7 @@ plt.subplot(223)
 plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))
 plt.title("順時鐘 30")
 
+print("------------------------------")  # 30個
 
 M = cv2.getRotationMatrix2D(center, 30, 0.7)
 dst3 = cv2.warpAffine(image, M, dsize, borderValue=125)
@@ -263,66 +264,53 @@ print("------------------------------------------------------------")  # 60個
 
 print("馬賽克 縮小放大法 全圖")
 image = cv2.imread(filename2)
-
 H, W, D = image.shape  # d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
 
 level = 15  # 馬賽克程度, 縮小比例 ( 可當作馬賽克的等級 )
 h = H // level
 w = W // level
 
-# 先縮小N倍
+# 全圖先縮小N倍
 mosaic1 = cv2.resize(image, (w, h), interpolation=cv2.INTER_LINEAR)
 
-# 再放大N倍
+# 全圖再放大N倍
 mosaic2 = cv2.resize(mosaic1, (W, H), interpolation=cv2.INTER_NEAREST)
 
-cv2.imshow("image", mosaic2)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("馬賽克 縮小放大法 部分")
 image = cv2.imread(filename2)
-
 H, W, D = image.shape  # d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
 
-x = 160  # 剪裁區域左上 x 座標
-y = 80  # 剪裁區域左上 y 座標
-cw = 180  # 剪裁區域寬度
-ch = 300  # 剪裁區域高度
-mosaic1 = image[y : y + ch, x : x + cw]  # 取得剪裁區域
+x, y, cw, ch = 160, 80, 180, 300
+mosaic3 = image[y : y + ch, x : x + cw]  # 取得剪裁區域
 
 level = 15  # 馬賽克程度, 縮小比例 ( 可當作馬賽克的等級 )
-w = cw // level
-h = ch // level
+w = cw // level  # 根據馬賽克程度縮小的寬度
+h = ch // level  # 根據馬賽克程度縮小的高度
 
-mosaic2 = cv2.resize(mosaic1, (w, h), interpolation=cv2.INTER_LINEAR)
-mosaic3 = cv2.resize(mosaic2, (cw, ch), interpolation=cv2.INTER_NEAREST)
+mosaic4 = cv2.resize(mosaic3, (w, h), interpolation=cv2.INTER_LINEAR)
+mosaic5 = cv2.resize(mosaic4, (cw, ch), interpolation=cv2.INTER_NEAREST)
 
-image[y : y + ch, x : x + cw] = mosaic3  # 將圖片的剪裁區域，換成馬賽克的圖
+image[y : y + ch, x : x + cw] = mosaic5  # 將圖片的剪裁區域，換成馬賽克的圖
 
 cv2.rectangle(image, (x, y), (x + cw, y + ch), RED, 3)
 
-cv2.imshow("image", image)
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure("馬賽克", figsize=(8, 6))
+plt.subplot(211)
+plt.imshow(cv2.cvtColor(mosaic2, cv2.COLOR_BGR2RGB))
+plt.title("全圖")
 
-"""
-    level = 15  # 馬賽克程度
-    mh = int(h / level)  # 根據馬賽克程度縮小的高度
-    mw = int(w / level)  # 根據馬賽克程度縮小的寬度
-    mosaic = cv2.resize(mosaic, (mw, mh), interpolation=cv2.INTER_LINEAR)  # 先縮小
-    mosaic = cv2.resize(mosaic, (w, h), interpolation=cv2.INTER_NEAREST)  # 然後放大
+plt.subplot(212)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("部分")
 
-"""
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
-rotate
-#图像旋转 ： cv2.ROTATE_180  cv2.ROTATE_90_COUNTERCLOCKWISE
+rotate 圖像旋轉
 cv2.ROTATE_90_CLOCKWISE：顺时针旋转 90 度
 cv2.ROTATE_180： 旋转 180 度
 cv2.ROTATE_90_COUNTERCLOCKWISE：逆时针旋转 90 度
@@ -496,9 +484,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 # 新進
-
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread(filename1)
@@ -627,6 +613,30 @@ plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 plt.title("顯示透視影像")
 
 show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("測試 cv2.remap()")
+W, H = 5, 4
+print("建立 隨機影像 二維灰階/二維深度1")
+image = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)  # 灰階, 1維隨機影像
+
+H, W = image.shape
+
+map_x = np.zeros(image.shape, np.float32)  # 必須是float
+map_y = np.zeros(image.shape, np.float32)  # 必須是float
+for i in range(H):
+    for j in range(W):
+        map_x.itemset((i, j), j)
+        map_y.itemset((i, j), i)
+
+map_image = cv2.remap(image, map_x, map_y, cv2.INTER_LINEAR)
+print("image = \n", image)
+print("map_x = \n", map_x)
+print("map_y = \n", map_y)
+print("map_image = \n", map_image)
+print("map_image.shape = \n", map_image.shape)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
