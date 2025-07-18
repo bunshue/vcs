@@ -15,9 +15,9 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/opencv/data/lena_noise.png"
 
-image = cv2.imread(filename)
+image = cv2.imread(filename)  # 彩色讀取
 
-r = cv2.blur(image, (5, 5))
+dst = cv2.blur(image, (5, 5))
 
 plt.figure(figsize=(12, 8))
 
@@ -26,7 +26,7 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 plt.title("blur 效果 1")
 
 show()
@@ -36,7 +36,7 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/opencv/data/lena_noise.png"
 
-image = cv2.imread(filename)
+image = cv2.imread(filename)  # 彩色讀取
 
 image_blur_05 = cv2.blur(image, (5, 5))  # 指定區域單位為 (5, 5)
 image_blur_30 = cv2.blur(image, (30, 30))  # 指定區域單位為 (30, 30)
@@ -68,7 +68,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("使用 均值濾波器.blur()")
 
-image = cv2.imread(filename2)
+image = cv2.imread(filename2)  # 彩色讀取
 cv2.imshow("image", image)
 
 dst1 = cv2.blur(image, (3, 3))  # 使用 3x3 濾波核
@@ -114,7 +114,7 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/opencv/data/lena_noise.png"
 
-image = cv2.imread(filename)
+image = cv2.imread(filename)  # 彩色讀取
 
 image_boxFilter = cv2.boxFilter(image, -1, (5, 5))
 # image_boxFilter = cv2.boxFilter(image, -1, (5, 5), normalize=0)
@@ -137,7 +137,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("使用 方框濾波器.boxFilter()")
 
-image = cv2.imread(filename2)
+image = cv2.imread(filename2)  # 彩色讀取
 cv2.imshow("image", image)
 
 dst1 = cv2.boxFilter(image, -1, (2, 2), normalize=0)  # ksize是 2x2 的濾波核
@@ -173,12 +173,12 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-# cv2.medianBlur()       # 中值濾波器
+# cv2.medianBlur() ST       # 中值濾波器
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/opencv/data/lena_noise.png"
 
-image = cv2.imread(filename)
+image = cv2.imread(filename)  # 彩色讀取
 
 image_medianBlur = cv2.medianBlur(image, 3)
 
@@ -196,6 +196,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 
 print("median 跑一陣子")
 
@@ -239,11 +240,14 @@ def my_median_blur_RGB(image, size):
     return result
 
 
-image_test1 = cv2.imread("data/worm.jpg")
+image_test1 = cv2.imread("data/worm.jpg")  # 彩色讀取
+
 # 調用自定義函數
 my_image_blur_median = my_median_blur_RGB(image_test1, 5)
+
 # 調用庫函數
 computer_image_blur_median = cv2.medianBlur(image_test1, 5)
+
 fig = plt.figure("new41")
 fig.add_subplot(131)
 plt.title("原圖")
@@ -274,7 +278,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("使用 中值濾波器.medianBlur()")
 
-image = cv2.imread(filename2)
+image = cv2.imread(filename2)  # 彩色讀取
 cv2.imshow("image", image)
 
 dst1 = cv2.medianBlur(image, 3)  # 使用邊長是 3 的濾波核
@@ -308,12 +312,64 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-# cv2.GaussianBlur()     # 高斯濾波器, 高斯模糊
+print("------------------------------------------------------------")  # 60個
+
+
+image = cv2.imread(filename)  # 彩色讀取
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
+
+output1 = cv2.adaptiveThreshold(
+    image_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
+)
+
+image_gray2 = cv2.medianBlur(image_gray, 5)  # 模糊化
+output2 = cv2.adaptiveThreshold(
+    image_gray2, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
+)
+
+cv2.imshow("image1", output1)
+cv2.imshow("image2", output2)
+
+# 3圖
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+image = cv2.imread(filename)  # 彩色讀取
+
+image_medianBlur1 = cv2.medianBlur(image, 5)  # 模糊程度為 5
+image_medianBlur2 = cv2.medianBlur(image, 25)  # 模糊程度為 25
+
+cv2.imshow("image1", image_medianBlur1)
+cv2.imshow("image2", image_medianBlur2)
+
+# 3圖
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+# cv2.medianBlur() SP       # 中值濾波器
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+# cv2.GaussianBlur() ST     # 高斯濾波器, 高斯模糊
 print("------------------------------------------------------------")  # 60個
 
 filename = filename_barbara
 
-image = cv2.imread(filename, 0)
+image = cv2.imread(filename, 0)  # 灰階讀取
 
 # 高斯模糊
 image_blur = cv2.GaussianBlur(image, (5, 5), 0)  # 執行高斯模糊化
@@ -337,7 +393,7 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/opencv/data/lena_noise.png"
 
-image = cv2.imread(filename)
+image = cv2.imread(filename)  # 彩色讀取
 
 kernel_size = (5, 5)  # 卷積的矩陣大小 ksize 指定區域單位 ( 必須是大於 1 的奇數 )
 sigma = 0  # sigma值     sigmaX X 方向標準差，預設 0，sigmaY Y 方向標準差，預設 0
@@ -360,7 +416,7 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/opencv/data/lena_noise.png"
 
-image = cv2.imread(filename)
+image = cv2.imread(filename)  # 彩色讀取
 
 image_blur = cv2.GaussianBlur(image, (5, 5), 0)  # 執行高斯模糊化
 
@@ -380,7 +436,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/bilTest.bmp"
-image = cv2.imread(filename)
+
+image = cv2.imread(filename)  # 彩色讀取
 
 image_blur = cv2.GaussianBlur(image, (55, 55), 0)  # 執行高斯模糊化
 
@@ -402,11 +459,10 @@ print("------------------------------------------------------------")  # 60個
 filename = filename2
 filename = filename_barbara
 
-# 原圖
-image = cv2.imread(filename, 0)  # 讀成黑白, 一維
+image = cv2.imread(filename, 0)  # 灰階讀取  # 讀成黑白, 一維
 print(image.shape)
 
-image = cv2.imread(filename)  # 讀成彩色, 三維
+image = cv2.imread(filename)  # 彩色讀取  # 讀成彩色, 三維
 print(image.shape)
 
 image_blur = cv2.GaussianBlur(image, (5, 5), 0)  # 執行高斯模糊化
@@ -428,7 +484,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("使用 高斯濾波器.GaussianBlur()")
 
-image = cv2.imread(filename2)
+image = cv2.imread(filename2)  # 彩色讀取
 cv2.imshow("image", image)
 
 dst1 = cv2.GaussianBlur(image, (3, 3), 0, 0)  # 使用 3 x 3 的濾波核
@@ -466,7 +522,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("使用 均值濾波器.blur() / 高斯濾波器.GaussianBlur()")
 
-image = cv2.imread("data/border.jpg")
+image = cv2.imread("data/border.jpg")  # 彩色讀取
 
 dst1 = cv2.blur(image, (3, 3))  # 均值濾波器 - 3x3 濾波核
 dst2 = cv2.blur(image, (7, 7))  # 均值濾波器 - 7x7 濾波核
@@ -507,12 +563,108 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+image = cv2.imread(filename)  # 彩色讀取
+
+image_GaussianBlur1 = cv2.GaussianBlur(image, (5, 5), 0)  # 指定區域單位為 (5, 5)
+image_GaussianBlur2 = cv2.GaussianBlur(image, (25, 25), 0)  # 指定區域單位為 (25, 25)
+
+cv2.imshow("image1", image_GaussianBlur1)
+cv2.imshow("image2", image_GaussianBlur2)
+
+# 3圖
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("高斯模糊, 邊緣模糊化")
+"""
+GaussianBlur() 高斯模糊 
+使用 OpenCV 的 GaussianBlur() 方法，可以使用高斯分佈進行模糊化的計算，
+指定模糊區域單位 ( 必須是大於 1 的奇數 ) 後就能產生不同程度的模糊效果
+
+cv2.GaussianBlur(image, ksize, sigmaX, sigmaY)
+# image 來源影像
+# ksize 指定區域單位 ( 必須是大於 1 的奇數 )
+# sigmaX X 方向標準差，預設 0，sigmaY Y 方向標準差，預設 0
+"""
+num_bins = 256  # 直方圖顯示時的束數
+
+L = 256
+image0 = np.zeros((L * 3, L * 3, 1), dtype="uint8")  # 建立 黑色畫布
+
+cv2.rectangle(image0, (L, 0), (L * 2, L * 3), (255, 255, 255), -1)
+
+W, H, sigmaX, sigmaY = 101, 101, 0, 0  # W, H 必須為單數
+image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
+
+num_bins = 256  # 直方圖顯示時的束數
+
+plt.figure(figsize=(12, 8))
+
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("原圖Gaussian模糊")
+
+plt.subplot(223)
+plt.title("調整 W, H")
+plt.plot(image0[200, :].ravel(), "k")
+
+W, H, sigmaX, sigmaY = 101, 101, 0, 0  # W, H 必須為單數
+image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
+plt.plot(image1[200, :].ravel(), "r")
+
+W, H, sigmaX, sigmaY = 201, 201, 0, 0  # W, H 必須為單數
+image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
+plt.plot(image1[200, :].ravel(), "g")
+
+W, H, sigmaX, sigmaY = 301, 301, 0, 0  # W, H 必須為單數
+image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
+plt.plot(image1[200, :].ravel(), "b")
+
+plt.subplot(224)
+plt.title("調整 sigmaX, sigmaY")
+plt.plot(image0[200, :].ravel(), "k")
+
+W, H, sigmaX, sigmaY = 101, 101, 0, 0  # W, H 必須為單數
+image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
+plt.plot(image1[200, :].ravel(), "r")
+
+W, H, sigmaX, sigmaY = 101, 101, 100, 100  # W, H 必須為單數
+image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
+plt.plot(image1[200, :].ravel(), "g")
+
+W, H, sigmaX, sigmaY = 101, 101, 200, 200  # W, H 必須為單數
+image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
+plt.plot(image1[200, :].ravel(), "b")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+# cv2.GaussianBlur() SP     # 高斯濾波器, 高斯模糊
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 # cv2.bilateralFilter()  # 雙邊濾波器
 print("------------------------------------------------------------")  # 60個
 
 print("使用 均值濾波器.blur() / 高斯濾波器.GaussianBlur() / 雙邊濾波器.bilateralFilter()")
 
-image = cv2.imread(filename2)
+image = cv2.imread(filename2)  # 彩色讀取
+
 cv2.imshow("image", image)
 
 dst1 = cv2.blur(image, (15, 15))  # 均值濾波器
@@ -533,7 +685,7 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/opencv/data/lena_noise.png"
 
-image = cv2.imread(filename)
+image = cv2.imread(filename)  # 彩色讀取
 
 image_bilateralFilter = cv2.bilateralFilter(image, 25, 100, 100)
 
@@ -554,7 +706,7 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/bilTest.bmp"
 
-image = cv2.imread(filename)
+image = cv2.imread(filename)  # 彩色讀取
 
 image_bilateralFilter = cv2.bilateralFilter(image, 55, 100, 100)
 
@@ -573,7 +725,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename)
+image = cv2.imread(filename)  # 彩色讀取
+
 image_bilateralFilter1 = cv2.bilateralFilter(image, 50, 0, 0)
 image_bilateralFilter2 = cv2.bilateralFilter(image, 50, 50, 100)
 image_bilateralFilter3 = cv2.bilateralFilter(image, 50, 100, 1000)
@@ -596,7 +749,8 @@ print("------------------------------------------------------------")  # 60個
 # cv2.filter2D() ST         # 2D濾波核
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename2)
+image = cv2.imread(filename2)  # 彩色讀取
+
 cv2.imshow("image", image)
 
 kernel = np.ones((11, 11), np.float32) / 121  # 自訂卷積核
@@ -619,7 +773,7 @@ filter2D(src, ddepth, kernel[, dst[, anchor[, delta[, borderType]]]])
 使用filter2D()制作的各种图像处理效果
 """
 filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
-src = cv2.imread(filename3)
+src = cv2.imread(filename3)  # 彩色讀取
 
 kernel1_name = "低通濾波器"
 kernel1 = np.array([[1, 1, 1], [1, 2, 1], [1, 1, 1]]) * 0.1
@@ -648,14 +802,12 @@ plt.title(kernel3_name)
 
 show()
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 # Prewitt horizontal edge-emphasizing filter 邊緣加強的影像處理技術
 
-image = cv2.imread(filename_lena_gray)
+image = cv2.imread(filename_lena_gray)  # 彩色讀取
 
 print("filter2D 效果")
 kernel = np.ones((9, 9), np.float32) / 81
@@ -677,7 +829,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename_barbara, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
+image = cv2.imread(filename_barbara, cv2.COLOR_BGR2GRAY)  # 灰階讀取
 
 kernel_x = np.array([[1, 1, 1], [0, 0, 0], [-1, -1, -1]], dtype=int)  # 水平值一樣, 偵測水平的邊緣
 kernel_y = np.array([[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]], dtype=int)  # 垂直值一樣, 偵測垂直的邊緣
@@ -788,7 +940,8 @@ def my_gaussion_blur_RGB(image, size, sigma):
     return result
 
 
-image_test1 = cv2.imread("data/lena.png")
+image_test1 = cv2.imread("data/lena.png")  # 彩色讀取
+
 # 進行高斯濾波器比較
 my_image_blur_gaussion = my_gaussion_blur_RGB(image_test1, 5, 0.75)
 computer_image_blur_gaussion = cv2.GaussianBlur(image_test1, (5, 5), 0.75)  # 執行高斯模糊化
@@ -812,128 +965,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename)
-
-image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
-
-output1 = cv2.adaptiveThreshold(
-    image_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
-)
-
-image_gray2 = cv2.medianBlur(image_gray, 5)  # 模糊化
-output2 = cv2.adaptiveThreshold(
-    image_gray2, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
-)
-
-cv2.imshow("image1", output1)
-cv2.imshow("image2", output2)
-
-# 3圖
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-image = cv2.imread(filename)
-
-image_GaussianBlur1 = cv2.GaussianBlur(image, (5, 5), 0)  # 指定區域單位為 (5, 5)
-image_GaussianBlur2 = cv2.GaussianBlur(image, (25, 25), 0)  # 指定區域單位為 (25, 25)
-
-cv2.imshow("image1", image_GaussianBlur1)
-cv2.imshow("image2", image_GaussianBlur2)
-
-# 3圖
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-image = cv2.imread(filename)
-
-image_medianBlur1 = cv2.medianBlur(image, 5)  # 模糊程度為 5
-image_medianBlur2 = cv2.medianBlur(image, 25)  # 模糊程度為 25
-
-cv2.imshow("image1", image_medianBlur1)
-cv2.imshow("image2", image_medianBlur2)
-
-# 3圖
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("高斯模糊, 邊緣模糊化")
-"""
-GaussianBlur() 高斯模糊 
-使用 OpenCV 的 GaussianBlur() 方法，可以使用高斯分佈進行模糊化的計算，
-指定模糊區域單位 ( 必須是大於 1 的奇數 ) 後就能產生不同程度的模糊效果
-
-cv2.GaussianBlur(image, ksize, sigmaX, sigmaY)
-# image 來源影像
-# ksize 指定區域單位 ( 必須是大於 1 的奇數 )
-# sigmaX X 方向標準差，預設 0，sigmaY Y 方向標準差，預設 0
-"""
-num_bins = 256  # 直方圖顯示時的束數
-
-L = 256
-image0 = np.zeros((L * 3, L * 3, 1), dtype="uint8")  # 建立 黑色畫布
-
-cv2.rectangle(image0, (L, 0), (L * 2, L * 3), (255, 255, 255), -1)
-
-W, H, sigmaX, sigmaY = 101, 101, 0, 0  # W, H 必須為單數
-image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
-
-num_bins = 256  # 直方圖顯示時的束數
-
-plt.figure(figsize=(12, 8))
-
-plt.subplot(221)
-plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(222)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-plt.title("原圖Gaussian模糊")
-
-plt.subplot(223)
-plt.title("調整 W, H")
-plt.plot(image0[200, :].ravel(), "k")
-
-W, H, sigmaX, sigmaY = 101, 101, 0, 0  # W, H 必須為單數
-image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
-plt.plot(image1[200, :].ravel(), "r")
-
-W, H, sigmaX, sigmaY = 201, 201, 0, 0  # W, H 必須為單數
-image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
-plt.plot(image1[200, :].ravel(), "g")
-
-W, H, sigmaX, sigmaY = 301, 301, 0, 0  # W, H 必須為單數
-image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
-plt.plot(image1[200, :].ravel(), "b")
-
-plt.subplot(224)
-plt.title("調整 sigmaX, sigmaY")
-plt.plot(image0[200, :].ravel(), "k")
-
-W, H, sigmaX, sigmaY = 101, 101, 0, 0  # W, H 必須為單數
-image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
-plt.plot(image1[200, :].ravel(), "r")
-
-W, H, sigmaX, sigmaY = 101, 101, 100, 100  # W, H 必須為單數
-image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
-plt.plot(image1[200, :].ravel(), "g")
-
-W, H, sigmaX, sigmaY = 101, 101, 200, 200  # W, H 必須為單數
-image1 = cv2.GaussianBlur(image0, (W, H), sigmaX, sigmaY)  # 進行高斯模糊
-plt.plot(image1[200, :].ravel(), "b")
-
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -942,26 +973,23 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("準備使用Trackbar")
+print("使用Trackbar")
 
 
 def do_trackbar_event1(val):
-    print("數值 :", val, end=" ")
+    # print("數值 :", val, end=" ")
+    if val > 0:
+        dst = cv2.blur(image, (val, val))
+        cv2.imshow("OpenCV", dst)
+    else:
+        cv2.imshow("OpenCV", image)
 
 
-image = cv2.imread(filename2)
+image = cv2.imread(filename2)  # 彩色讀取
 cv2.imshow("OpenCV", image)
 
-cv2.createTrackbar("Threshold ", "OpenCV", 0, 100, do_trackbar_event1)
-cv2.setTrackbarPos("Threshold ", "OpenCV", 50)  # 設定預設值
+cv2.createTrackbar("Threshold ", "OpenCV", 0, 30, do_trackbar_event1)
+cv2.setTrackbarPos("Threshold ", "OpenCV", 5)  # 設定預設值
 
 # 取得Trackbar數值
 value = cv2.getTrackbarPos("Threshold ", "OpenCV")

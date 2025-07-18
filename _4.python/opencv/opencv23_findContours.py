@@ -523,6 +523,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("影像比較 形狀場景運算")
+
 src10 = cv2.imread("data/findContours/mycloud1.jpg")  # 彩色讀取
 src1 = src10.copy()
 
@@ -1465,7 +1466,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("幾何形狀的檢測和擬合 findContours")
 
-# filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
+# filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 image0 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
@@ -1680,6 +1681,54 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+filename_cs1 = "C:/_git/vcs/_4.python/opencv/data/cs1.bmp"
+
+image = cv2.imread(filename_cs1)  # 彩色讀取
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+
+thresh = 100  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, dst = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
+
+# 找出圖像中的輪廓
+cnts, hir = cv2.findContours(dst, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+# 找出最大的輪廓
+filtered_contours = max(cnts, key=cv2.contourArea)
+
+# 取得該輪廓的最小包圍矩形及角度
+rect = cv2.minAreaRect(filtered_contours)  # ((center_x, center_y), (w, h), angle)
+box = cv2.boxPoints(rect)  # 轉換為4個頂點
+
+# box = np.int0(box)  # 將頂點轉換為整數座標 #np 1.24 以下使用
+box = np.intp(box)
+
+# 繪製最小包圍矩形
+cv2.drawContours(image, [box], 0, RED, 3)  # 綠色框，線寬為2
+
+# 取得旋轉矩形的中心點和旋轉角度
+(center_x, center_y), (w, h), angle = rect
+
+# 顯示中心點和旋轉角度在圖片上
+center_text = f"Center: ({int(center_x)}, {int(center_y)})"
+angle_text = f"Angle: {int(angle)} degrees"
+
+cv2.circle(image, (int(center_x), int(center_y)), 10, BLUE, -1)  # 圆
+
+# 在圖像上寫入文字
+cv2.putText(
+    image, center_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2
+)  # 藍色字體
+cv2.putText(
+    image, angle_text, (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2
+)  # 藍色字體
+
+cv2.imshow("Image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1708,14 +1757,14 @@ print("------------------------------")  # 30個
 """
     for contour in contours:
         con_area = cv2.contourArea(contour)  # 計算輪廓面積
-        # print('輪廓面積 :', con_area)
+        # print("輪廓面積 :", con_area)
         if con_area > 300:
             x, y, w, h = cv2.boundingRect(contour)  # 輸出矩形格式
             img = cv2.rectangle(img, (x, y), (x + w, y + h), RED, 3)  # 繪製四邊形
 
     for contour in contours:
         con_area = cv2.contourArea(contour)  # 計算輪廓面積
-        # print('輪廓面積 :', con_area)
+        # print("輪廓面積 :", con_area)
         # 如果面積大於 300 再標記，避免標記到背景中太小的東西
         if con_area > 300:
             for i in range(len(contour)):
