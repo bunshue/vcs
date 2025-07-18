@@ -74,6 +74,12 @@
             this.bt_edge_detection2 = new System.Windows.Forms.Button();
             this.bt_edge_detection4 = new System.Windows.Forms.Button();
             this.bt_edge_detection3 = new System.Windows.Forms.Button();
+            this.button32 = new System.Windows.Forms.Button();
+            this.button33 = new System.Windows.Forms.Button();
+            this.button34 = new System.Windows.Forms.Button();
+            this.button35 = new System.Windows.Forms.Button();
+            this.button36 = new System.Windows.Forms.Button();
+            this.button37 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -523,11 +529,77 @@
             this.bt_edge_detection3.UseVisualStyleBackColor = true;
             this.bt_edge_detection3.Click += new System.EventHandler(this.bt_edge_detection3_Click);
             // 
+            // button32
+            // 
+            this.button32.Location = new System.Drawing.Point(376, 448);
+            this.button32.Name = "button32";
+            this.button32.Size = new System.Drawing.Size(160, 49);
+            this.button32.TabIndex = 36;
+            this.button32.Text = "底片效果（反色）";
+            this.button32.UseVisualStyleBackColor = true;
+            this.button32.Click += new System.EventHandler(this.button32_Click);
+            // 
+            // button33
+            // 
+            this.button33.Location = new System.Drawing.Point(376, 503);
+            this.button33.Name = "button33";
+            this.button33.Size = new System.Drawing.Size(160, 49);
+            this.button33.TabIndex = 37;
+            this.button33.Text = "黑白效果";
+            this.button33.UseVisualStyleBackColor = true;
+            this.button33.Click += new System.EventHandler(this.button33_Click);
+            // 
+            // button34
+            // 
+            this.button34.Location = new System.Drawing.Point(376, 558);
+            this.button34.Name = "button34";
+            this.button34.Size = new System.Drawing.Size(160, 49);
+            this.button34.TabIndex = 38;
+            this.button34.Text = "浮雕";
+            this.button34.UseVisualStyleBackColor = true;
+            this.button34.Click += new System.EventHandler(this.button34_Click);
+            // 
+            // button35
+            // 
+            this.button35.Location = new System.Drawing.Point(376, 613);
+            this.button35.Name = "button35";
+            this.button35.Size = new System.Drawing.Size(160, 49);
+            this.button35.TabIndex = 39;
+            this.button35.Text = "柔化";
+            this.button35.UseVisualStyleBackColor = true;
+            this.button35.Click += new System.EventHandler(this.button35_Click);
+            // 
+            // button36
+            // 
+            this.button36.Location = new System.Drawing.Point(376, 668);
+            this.button36.Name = "button36";
+            this.button36.Size = new System.Drawing.Size(160, 49);
+            this.button36.TabIndex = 40;
+            this.button36.Text = "銳化";
+            this.button36.UseVisualStyleBackColor = true;
+            this.button36.Click += new System.EventHandler(this.button36_Click);
+            // 
+            // button37
+            // 
+            this.button37.Location = new System.Drawing.Point(376, 723);
+            this.button37.Name = "button37";
+            this.button37.Size = new System.Drawing.Size(160, 49);
+            this.button37.TabIndex = 41;
+            this.button37.Text = "霧化";
+            this.button37.UseVisualStyleBackColor = true;
+            this.button37.Click += new System.EventHandler(this.button37_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1328, 904);
+            this.Controls.Add(this.button37);
+            this.Controls.Add(this.button36);
+            this.Controls.Add(this.button35);
+            this.Controls.Add(this.button34);
+            this.Controls.Add(this.button33);
+            this.Controls.Add(this.button32);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button31);
             this.Controls.Add(this.button30);
@@ -621,6 +693,12 @@
         private System.Windows.Forms.Button bt_edge_detection2;
         private System.Windows.Forms.Button bt_edge_detection4;
         private System.Windows.Forms.Button bt_edge_detection3;
+        private System.Windows.Forms.Button button32;
+        private System.Windows.Forms.Button button33;
+        private System.Windows.Forms.Button button34;
+        private System.Windows.Forms.Button button35;
+        private System.Windows.Forms.Button button36;
+        private System.Windows.Forms.Button button37;
     }
 }
 

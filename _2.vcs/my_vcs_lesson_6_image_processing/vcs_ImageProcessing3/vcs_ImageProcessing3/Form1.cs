@@ -1944,6 +1944,7 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
 
             return newbmp;
         }
+
         private Bitmap Laplace8(Bitmap bmp)
         {
             Bitmap newbmp = new Bitmap(bmp.Width, bmp.Height);
@@ -2239,7 +2240,313 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
 
             return newbmp;
         }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            //底片效果（反色）（255-r, 255-g, 255-b）
+            Bitmap bitmap1 = new Bitmap(filename);
+            Bitmap bitmap2 = NegativeImage(bitmap1);
+            pictureBox1.Image = bitmap2;
+
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+            //黑白效果
+            Bitmap bitmap1 = new Bitmap(filename);
+            Bitmap bitmap2 = GrayImage(bitmap1, 1);
+            pictureBox1.Image = bitmap2;
+
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            //浮雕：找出附近的像素點r1，abs（r-r2+128）
+            Bitmap bitmap1 = new Bitmap(filename);
+            Bitmap bitmap2 = EmbossmentImage(bitmap1);
+            pictureBox1.Image = bitmap2;
+
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+            //柔化
+            Bitmap bitmap1 = new Bitmap(filename);
+            Bitmap bitmap2 = SoftenImage(bitmap1);
+            pictureBox1.Image = bitmap2;
+
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+            //銳化
+            Bitmap bitmap1 = new Bitmap(filename);
+            Bitmap bitmap2 = SharpenImage(bitmap1);
+            pictureBox1.Image = bitmap2;
+
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+            //霧化
+            Bitmap bitmap1 = new Bitmap(filename);
+            Bitmap bitmap2 = AtomizationImage(bitmap1);
+            pictureBox1.Image = bitmap2;
+        }
+
+        //底片
+        public Bitmap NegativeImage(Bitmap bmp)
+        {
+            int H = bmp.Height;
+            int W = bmp.Width;
+            Bitmap newbmp = new Bitmap(W, H);
+
+            LockBitmap lbmp = new LockBitmap(bmp);
+            LockBitmap newlbmp = new LockBitmap(newbmp);
+            lbmp.LockBits();
+            newlbmp.LockBits();
+
+            Color pixel;
+            for (int x = 1; x < W; x++)
+            {
+                for (int y = 1; y < H; y++)
+                {
+                    int r, g, b;
+                    pixel = lbmp.GetPixel(x, y);
+                    r = 255 - pixel.R;
+                    g = 255 - pixel.G;
+                    b = 255 - pixel.B;
+                    newlbmp.SetPixel(x, y, Color.FromArgb(r, g, b));
+                }
+            }
+            lbmp.UnlockBits();
+            newlbmp.UnlockBits();
+            return newbmp;
+        }
+
+        //黑白
+        public Bitmap GrayImage(Bitmap bmp, int type)
+        {
+            int H = bmp.Height;
+            int W = bmp.Width;
+            Bitmap newbmp = new Bitmap(W, H);
+
+            LockBitmap lbmp = new LockBitmap(bmp);
+            LockBitmap newlbmp = new LockBitmap(newbmp);
+            lbmp.LockBits();
+            newlbmp.LockBits();
+
+            Color pixel;
+            for (int x = 0; x < W; x++)
+            {
+                for (int y = 0; y < H; y++)
+                {
+                    pixel = lbmp.GetPixel(x, y);
+                    int r, g, b, Result = 0;
+                    r = pixel.R;
+                    g = pixel.G;
+                    b = pixel.B;
+                    switch (type)
+                    {
+                        case 0://平均值法
+                            Result = ((r + g + b) / 3);
+                            break;
+                        case 1://最大值法
+                            Result = r > g ? r : g;
+                            Result = Result > b ? Result : b;
+                            break;
+                        case 2://加權平均值法
+                            Result = ((int)(0.3 * r) + (int)(0.59 * g) + (int)(0.11 * b));
+                            break;
+                    }
+                    newlbmp.SetPixel(x, y, Color.FromArgb(Result, Result, Result));
+                }
+            }
+            lbmp.UnlockBits();
+            newlbmp.UnlockBits();
+            return newbmp;
+        }
+
+        //浮雕
+        public Bitmap EmbossmentImage(Bitmap bmp)
+        {
+            int H = bmp.Height;
+            int W = bmp.Width;
+            Bitmap newbmp = new Bitmap(W, H);
+
+            LockBitmap lbmp = new LockBitmap(bmp);
+            LockBitmap newlbmp = new LockBitmap(newbmp);
+            lbmp.LockBits();
+            newlbmp.LockBits();
+
+            Color pixel1, pixel2;
+            for (int x = 0; x < W - 1; x++)
+            {
+                for (int y = 0; y < H - 1; y++)
+                {
+                    int r = 0, g = 0, b = 0;
+                    pixel1 = lbmp.GetPixel(x, y);
+                    pixel2 = lbmp.GetPixel(x + 1, y + 1);
+                    r = Math.Abs(pixel1.R - pixel2.R + 128);
+                    g = Math.Abs(pixel1.G - pixel2.G + 128);
+                    b = Math.Abs(pixel1.B - pixel2.B + 128);
+                    if (r > 255)
+                        r = 255;
+                    if (r < 0)
+                        r = 0;
+                    if (g > 255)
+                        g = 255;
+                    if (g < 0)
+                        g = 0;
+                    if (b > 255)
+                        b = 255;
+                    if (b < 0)
+                        b = 0;
+                    newlbmp.SetPixel(x, y, Color.FromArgb(r, g, b));
+                }
+            }
+            lbmp.UnlockBits();
+            newlbmp.UnlockBits();
+            return newbmp;
+        }
+
+        //柔化
+        public Bitmap SoftenImage(Bitmap bmp)
+        {
+            int H = bmp.Height;
+            int W = bmp.Width;
+            Bitmap newbmp = new Bitmap(W, H);
+
+            LockBitmap lbmp = new LockBitmap(bmp);
+            LockBitmap newlbmp = new LockBitmap(newbmp);
+            lbmp.LockBits();
+            newlbmp.LockBits();
+
+            Color pixel;
+            //高斯模板
+            int[] Gauss = { 1, 2, 1, 2, 4, 2, 1, 2, 1 };
+            for (int x = 1; x < W - 1; x++)
+            {
+                for (int y = 1; y < H - 1; y++)
+                {
+                    int r = 0, g = 0, b = 0;
+                    int Index = 0;
+                    for (int col = -1; col <= 1; col++)
+                    {
+                        for (int row = -1; row <= 1; row++)
+                        {
+                            pixel = lbmp.GetPixel(x + row, y + col);
+                            r += pixel.R * Gauss[Index];
+                            g += pixel.G * Gauss[Index];
+                            b += pixel.B * Gauss[Index];
+                            Index++;
+                        }
+                    }
+                    r /= 16;
+                    g /= 16;
+                    b /= 16;
+                    //處理顏色值溢出
+                    r = r > 255 ? 255 : r;
+                    r = r < 0 ? 0 : r;
+                    g = g > 255 ? 255 : g;
+                    g = g < 0 ? 0 : g;
+                    b = b > 255 ? 255 : b;
+                    b = b < 0 ? 0 : b;
+                    newlbmp.SetPixel(x - 1, y - 1, Color.FromArgb(r, g, b));
+                }
+            }
+            lbmp.UnlockBits();
+            newlbmp.UnlockBits();
+            return newbmp;
+        }
+
+        //銳化
+        public Bitmap SharpenImage(Bitmap bmp)
+        {
+            int H = bmp.Height;
+            int W = bmp.Width;
+            Bitmap newbmp = new Bitmap(W, H);
+
+            LockBitmap lbmp = new LockBitmap(bmp);
+            LockBitmap newlbmp = new LockBitmap(newbmp);
+            lbmp.LockBits();
+            newlbmp.LockBits();
+
+            //拉普拉斯模板
+            int[] Laplacian = { -1, -1, -1, -1, 9, -1, -1, -1, -1 };
+            for (int i = 1; i < W - 1; i++)
+            {
+                for (int j = 1; j < H - 1; j++)
+                {
+                    int r = 0, g = 0, b = 0;
+                    int index = 0;
+                    for (int col = -1; col <= 1; col++)
+                    {
+                        for (int row = -1; row <= 1; row++)
+                        {
+                            Color color = lbmp.GetPixel(i + row, j + col);
+                            r += color.R * Laplacian[index];
+                            g += color.G * Laplacian[index];
+                            b += color.B * Laplacian[index];
+                            index++;
+                        }
+                    }
+                    //處理顏色值溢出
+                    r = r > 255 ? 255 : r;
+                    r = r < 0 ? 0 : r;
+                    g = g > 255 ? 255 : g;
+                    g = g < 0 ? 0 : g;
+                    b = b > 255 ? 255 : b;
+                    b = b < 0 ? 0 : b;
+                    newlbmp.SetPixel(i - 1, j - 1, Color.FromArgb(r, g, b));
+                }
+            }
+            lbmp.UnlockBits();
+            newlbmp.UnlockBits();
+            return newbmp;
+        }
+
+        //霧化
+        public Bitmap AtomizationImage(Bitmap bmp)
+        {
+            int H = bmp.Height;
+            int W = bmp.Width;
+            Bitmap newbmp = new Bitmap(W, H);
+
+            LockBitmap lbmp = new LockBitmap(bmp);
+            LockBitmap newlbmp = new LockBitmap(newbmp);
+            lbmp.LockBits();
+            newlbmp.LockBits();
+
+            System.Random MyRandom = new Random();
+            Color pixel;
+            for (int x = 1; x < W - 1; x++)
+            {
+                for (int y = 1; y < H - 1; y++)
+                {
+                    int k = MyRandom.Next(123456);
+                    //像素塊大小
+                    int dx = x + k % 19;
+                    int dy = y + k % 19;
+                    if (dx >= W)
+                        dx = W - 1;
+                    if (dy >= H)
+                        dy = H - 1;
+                    pixel = lbmp.GetPixel(dx, dy);
+                    newlbmp.SetPixel(x, y, pixel);
+                }
+            }
+            lbmp.UnlockBits();
+            newlbmp.UnlockBits();
+            return newbmp;
+        }
     }
+
+
+
+
+
+
 
     //指針法
     public class PointBitmap
@@ -2272,7 +2579,7 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
                 Rectangle rect = new Rectangle(0, 0, Width, Height);
 
                 // get source bitmap pixel format size
-                Depth = System.Drawing.Bitmap.GetPixelFormatSize(source.PixelFormat);
+                Depth = Bitmap.GetPixelFormatSize(source.PixelFormat);
 
                 // Check if bpp (Bits Per Pixel) is 8, 24, or 32
                 if (Depth != 8 && Depth != 24 && Depth != 32)
@@ -2288,8 +2595,7 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
                 unsafe
                 {
                     Iptr = bitmapData.Scan0;
-                    //二维图像循环
-
+                    //二維圖像循環
                 }
             }
             catch (Exception ex)
@@ -2408,7 +2714,7 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
                 Rectangle rect = new Rectangle(0, 0, Width, Height);
 
                 // get source bitmap pixel format size
-                Depth = System.Drawing.Bitmap.GetPixelFormatSize(source.PixelFormat);
+                Depth = Bitmap.GetPixelFormatSize(source.PixelFormat);
 
                 // Check if bpp (Bits Per Pixel) is 8, 24, or 32
                 if (Depth != 8 && Depth != 24 && Depth != 32)
@@ -2530,23 +2836,4 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
             }
         }
     }
-
-    public class Benchmark
-    {
-        private static DateTime startDate = DateTime.MinValue;
-        private static DateTime endDate = DateTime.MinValue;
-
-        public static TimeSpan Span { get { return endDate.Subtract(startDate); } }
-
-        public static void Start() { startDate = DateTime.Now; }
-
-        public static void End() { endDate = DateTime.Now; }
-
-        public static double GetSeconds()
-        {
-            if (endDate == DateTime.MinValue) return 0.0;
-            else return Span.TotalSeconds;
-        }
-    }
 }
-

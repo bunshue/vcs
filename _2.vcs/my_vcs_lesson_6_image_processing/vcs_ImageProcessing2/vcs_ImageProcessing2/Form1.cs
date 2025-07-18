@@ -17,7 +17,6 @@ namespace vcs_ImageProcessing2
     {
         string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
         string filename2 = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
-        string filename3 = @"C:\_git\vcs\_1.data\______test_files1\fakecolor.jpg";    //偽色彩處理
 
         public Form1()
         {
@@ -32,8 +31,6 @@ namespace vcs_ImageProcessing2
             PictureToSepia1();  //To Sepia 方法一
             //PictureToSepia2();  //To Sepia 方法二
             PictureToGray1();
-            PictureToGray2();
-            PictureToGray3();
             PictureToGray4();
             PictureToGray5();
             PictureToMonochrome();
@@ -43,7 +40,6 @@ namespace vcs_ImageProcessing2
             PictureToRainbow();
             PictureToBinary();
             PictureTo8BitGrayScale();
-            PictureToFakeColor();
 
             // Convert the image into red, green, and blue monochrome.
             pictureBox7.Image = ScaleColorComponents(pictureBox1.Image, 1, 0, 0, 1);
@@ -172,8 +168,8 @@ namespace vcs_ImageProcessing2
             label1.Text = "原圖";
             label2.Text = "Sepia";
             label3.Text = "灰階SetPixel";
-            label4.Text = "灰階Marshal";
-            label5.Text = "灰度處理";
+            label4.Text = "";
+            label5.Text = "";
             label6.Text = "單色處理";
             label7.Text = "單色 R";
             label8.Text = "單色 G";
@@ -188,7 +184,7 @@ namespace vcs_ImageProcessing2
             label17.Text = "彩虹化圖片";
             label18.Text = "二值化圖片";
             label19.Text = "8位灰度影像";
-            label20.Text = "偽色彩處理";
+            label20.Text = "";
         }
 
         void bt_exit_setup()
@@ -352,12 +348,6 @@ namespace vcs_ImageProcessing2
             color_to_gray_1(filename1);
         }
 
-        private void PictureToGray2()
-        {
-            //Marshal 彩色轉灰階
-            color_to_gray_2(filename1);
-        }
-
         void color_to_gray_1(string filename)
         {
             richTextBox1.Text += "SetPixel 彩色轉灰階\n";
@@ -386,186 +376,7 @@ namespace vcs_ImageProcessing2
             pictureBox3.Image = bmp;
         }
 
-        void color_to_gray_2(string filename)
-        {
-            richTextBox1.Text += "Marshal 彩色轉灰階\n";
 
-            //int data_offset = 0;
-            // Create a new bitmap.
-            Bitmap bmp0 = new Bitmap(filename);
-            Bitmap bmp = new Bitmap(filename);
-            pictureBox1.Image = bmp0;
-
-            richTextBox1.Text += "W = " + bmp.Width.ToString() + ", H = " + bmp.Height.ToString() + "\n";
-            richTextBox1.Text += "PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
-
-            if (bmp.PixelFormat == PixelFormat.Format32bppRgb)
-                richTextBox1.Text += "位元深度\t32\n";
-            else if (bmp.PixelFormat == PixelFormat.Format24bppRgb)
-                richTextBox1.Text += "位元深度\t24\n";
-            else if (bmp.PixelFormat == PixelFormat.Format8bppIndexed)
-                richTextBox1.Text += "位元深度\t8\n";
-            else
-                richTextBox1.Text += "位元深度\tunknown, PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
-
-            // Lock the bitmap's bits.  
-            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-            //System.Drawing.Imaging.BitmapData bmpData = bmp.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, bmp.PixelFormat);
-            System.Drawing.Imaging.BitmapData bmpData = bmp.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, bmp.PixelFormat);
-
-            richTextBox1.Text += "W = " + bmpData.Width.ToString() + "\n";
-            richTextBox1.Text += "H = " + bmpData.Height.ToString() + "\n";
-            richTextBox1.Text += "Stride = " + bmpData.Stride.ToString() + "\n";    //圖片一橫條的拜數 即WX4(拜)
-            richTextBox1.Text += "Scan0 = " + bmpData.Scan0.ToString() + "\n";
-
-            // Get the address of the first line.
-            IntPtr ptr = bmpData.Scan0;
-
-            // Declare an array to hold the bytes of the bitmap.
-            int len = Math.Abs(bmpData.Stride) * bmp.Height;    //(W * 4) * H
-
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
-
-            byte[] rgbValues = new byte[len];
-
-            // Copy the RGB values into the array.
-            System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, len);
-
-            /*
-            int i;
-            for (i = 0; i < 1024; i++)
-            {
-                richTextBox1.Text += rgbValues[i].ToString();
-                if ((i % 64) == 63)
-                    richTextBox1.Text += "\n";
-                else
-                    richTextBox1.Text += " ";
-            }
-            richTextBox1.Text += "\n";
-            richTextBox1.Text += "\n";
-            richTextBox1.Text += "\n";
-            richTextBox1.Text += "\n";
-            */
-
-            //對特定點的資料作操作
-            for (int counter = 0; counter < (rgbValues.Length - 20); counter += 3)
-            {
-                byte bbb = rgbValues[counter];      //Blue
-                byte ggg = rgbValues[counter + 1];  //Green
-                byte rrr = rgbValues[counter + 2];  //Red
-
-                int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
-
-                rgbValues[counter] = (byte)Gray;
-                rgbValues[counter + 1] = (byte)Gray;
-                rgbValues[counter + 2] = (byte)Gray;
-            }
-
-            /*
-            for (i = 0; i < 1024; i++)
-            {
-                richTextBox1.Text += rgbValues[i].ToString();
-                if ((i % 64) == 63)
-                    richTextBox1.Text += "\n";
-                else
-                    richTextBox1.Text += " ";
-            }
-            richTextBox1.Text += "\n";
-            */
-
-            // Copy the RGB values back to the bitmap
-            System.Runtime.InteropServices.Marshal.Copy(rgbValues, 0, ptr, len);
-
-            // Unlock the bits.
-            bmp.UnlockBits(bmpData);
-
-            // Draw the modified image.
-            pictureBox4.Image = bmp;
-        }
-
-        #region 灰度處理
-
-        private void PictureToGray3()
-        {
-            //灰度處理
-            Bitmap bitmap1 = new Bitmap(filename1);
-            pictureBox1.Image = bitmap1;
-            Bitmap bitmap2 = 灰度處理(bitmap1);
-            pictureBox5.Image = bitmap2;
-        }
-
-        /// <summary>  
-        /// 灰度處理(BitmapData類)  
-        /// </summary>  
-        /// <returns>輸出8位灰度圖片</returns>  
-        public static Bitmap 灰度處理(Bitmap 圖像)
-        {
-            Bitmap bmp = new Bitmap(圖像.Width, 圖像.Height, PixelFormat.Format8bppIndexed);
-
-            //設定實例BitmapData相關信息  
-            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-
-            BitmapData data = 圖像.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-            //鎖定bmp到系統內存中  
-            BitmapData data2 = bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
-
-            //獲取位圖中第一個像素數據的地址  
-            IntPtr ptr = data.Scan0;
-            IntPtr ptr2 = data2.Scan0;
-
-            int numBytes = data.Stride * data.Height;
-            int numBytes2 = data2.Stride * data2.Height;
-
-            int n2 = data2.Stride - bmp.Width; //// 顯示寬度與掃描線寬度的間隙  
-
-            byte[] rgbValues = new byte[numBytes];
-            byte[] rgbValues2 = new byte[numBytes2];
-            //將bmp數據Copy到申明的數組中  
-            Marshal.Copy(ptr, rgbValues, 0, numBytes);
-            Marshal.Copy(ptr2, rgbValues2, 0, numBytes2);
-
-            int n = 0;
-
-            for (int y = 0; y < bmp.Height; y++)
-            {
-                for (int x = 0; x < bmp.Width * 3; x += 3)
-                {
-                    int i = data.Stride * y + x;
-
-                    double value = rgbValues[i + 2] * 0.299 + rgbValues[i + 1] * 0.587 + rgbValues[i] * 0.114; //計算灰度  
-
-                    rgbValues2[n] = (byte)value;
-
-                    n++;
-                }
-                n += n2; //跳過差值  
-            }
-
-            //將數據Copy到內存指針  
-            Marshal.Copy(rgbValues, 0, ptr, numBytes);
-            Marshal.Copy(rgbValues2, 0, ptr2, numBytes2);
-
-            //// 下面的代碼是為了修改生成位圖的索引表，從偽彩修改為灰度  
-            ColorPalette tempPalette;
-            using (Bitmap tempBmp = new Bitmap(1, 1, PixelFormat.Format8bppIndexed))
-            {
-                tempPalette = tempBmp.Palette;
-            }
-            for (int i = 0; i < 256; i++)
-            {
-                tempPalette.Entries[i] = Color.FromArgb(i, i, i);
-            }
-
-            bmp.Palette = tempPalette;
-
-
-            //從系統內存解鎖bmp  
-            圖像.UnlockBits(data);
-            bmp.UnlockBits(data2);
-
-            return bmp;
-        }
-        #endregion
 
         #region 將圖片改為灰階 Grayscale Average
 
@@ -1305,118 +1116,5 @@ namespace vcs_ImageProcessing2
             return dstBitmap;
         }
         //建立8位灰度影像 SP
-
-        private void PictureToFakeColor()
-        {
-            //偽彩色處理
-            /*
-            //從pictureBox取得Bitmap
-            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
-            bitmap1 = gcTrans(bitmap1, true, 5);
-            pictureBox2.Image = bitmap1;
-            */
-
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename3);	//Bitmap.FromFile出來的是Image格式
-            Bitmap bitmap2 = gcTrans(bitmap1, true, 255 / 10);
-            pictureBox20.Image = bitmap2;
-
-            //考慮把 bitmap1 和 bitmap2 同時畫在 pictureBox 裏
-        }
-
-        //偽彩色圖像處理 ST
-
-        /// <summary>
-        /// 偽彩色圖像處理
-        /// 博客園-初行 http://www.cnblogs.com/zxlovenet
-        /// 日期：2014.2.14
-        /// </summary>
-        /// <param name="bmp">傳入的灰度圖像</param>
-        /// <param name="method">使用何種方法，false強度分層法,true灰度級-彩色變換法</param>
-        /// <param name="seg">強度分層中的分層數</param>
-        /// <returns>返回偽彩色圖像</returns>
-        private Bitmap gcTrans(Bitmap bmp, bool method, byte seg)
-        {
-            if (bmp != null)
-            {
-                if (System.Drawing.Imaging.PixelFormat.Format24bppRgb == bmp.PixelFormat)
-                {
-                    Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-                    System.Drawing.Imaging.BitmapData bmpData = bmp.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, bmp.PixelFormat);
-                    IntPtr ptr = bmpData.Scan0;
-                    int bytes = bmp.Width * bmp.Height * 3;
-                    byte[] grayValues = new byte[bytes];
-                    System.Runtime.InteropServices.Marshal.Copy(ptr, grayValues, 0, bytes);
-                    bmp.UnlockBits(bmpData);
-
-                    byte[] rgbValues = new byte[bytes];
-                    //清零
-                    Array.Clear(rgbValues, 0, bytes);
-                    byte tempB;
-
-                    if (method == false)
-                    {
-                        //強度分層法
-                        for (int i = 0; i < bytes; i += 3)
-                        {
-                            byte ser = (byte)(256 / seg);
-                            tempB = (byte)(grayValues[i] / ser);
-                            //分配任意一種顏色
-                            rgbValues[i + 1] = (byte)(tempB * ser);
-                            rgbValues[i] = (byte)((seg - 1 - tempB) * ser);
-                            rgbValues[i + 2] = 0;
-                        }
-                    }
-                    else
-                    {
-                        //灰度級-彩色變換法
-                        for (int i = 0; i < bytes; i += 3)
-                        {
-                            if (grayValues[i] < 64)
-                            {
-                                rgbValues[i + 2] = 0;
-                                rgbValues[i + 1] = (byte)(4 * grayValues[i]);
-                                rgbValues[i] = 255;
-                            }
-                            else if (grayValues[i] < 128)
-                            {
-                                rgbValues[i + 2] = 0;
-                                rgbValues[i + 1] = 255;
-                                rgbValues[i] = (byte)(-4 * grayValues[i] + 2 * 255);
-                            }
-                            else if (grayValues[i] < 192)
-                            {
-                                rgbValues[i + 2] = (byte)(4 * grayValues[i] - 2 * 255);
-                                rgbValues[i + 1] = 255;
-                                rgbValues[i] = 0;
-                            }
-                            else
-                            {
-                                rgbValues[i + 2] = 255;
-                                rgbValues[i + 1] = (byte)(-4 * grayValues[i] + 4 * 255);
-                                rgbValues[i] = 0;
-                            }
-                        }
-
-                    }
-                    bmp = new Bitmap(bmp.Width, bmp.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-                    bmpData = bmp.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, bmp.PixelFormat);
-                    ptr = bmpData.Scan0;
-
-                    System.Runtime.InteropServices.Marshal.Copy(rgbValues, 0, ptr, bytes);
-                    bmp.UnlockBits(bmpData);
-
-                    return bmp;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            else
-            {
-                return null;
-            }
-        }
-        //偽彩色圖像處理 SP
     }
 }
