@@ -61,16 +61,25 @@ num_bins = 256  # 直方圖顯示時的束數
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+# 均衡化處理
 
-plt.figure(figsize=(12, 8))
-plt.subplot(121)
-plt.imshow(src, "gray")  # 灰階顯示第1張圖
+image = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+
+plt.figure(figsize=(10, 8))
+plt.subplot(221)
+plt.imshow(image, "gray")  # 灰階顯示第1張圖
 plt.title("原圖灰階")
 
-plt.subplot(122)
-plt.hist(src.ravel(), 256)  # 降維再繪製直方圖
+plt.subplot(222)
+plt.hist(image.ravel(), num_bins)  # 降維再繪製直方圖
 plt.title("原圖灰階直方圖")
+
+plt.subplot(223)
+dst = cv2.equalizeHist(image)  # 直方圖均衡化處理, 只能處理灰階圖
+plt.imshow(dst, "gray")
+
+plt.subplot(224)
+plt.hist(dst.ravel(), 256)  # 降維再繪製直方圖
 
 show()
 
@@ -87,7 +96,7 @@ print("原圖的直方圖 RGB值 3通道分開畫")
 image0 = cv2.imread(filename_eq1)  # 彩色讀取
 image1 = cv2.imread(filename_eq1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(10, 8))
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
@@ -126,7 +135,8 @@ plt.title("用 plot 和 bar 顯示 calcHist 的結果")
 
 show()
 
-print("測試 03 calcHist----------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("一張彩圖的RGB與灰度的統計資料2")
 
@@ -134,7 +144,8 @@ print("一張彩圖的RGB與灰度的統計資料2")
 # 可以用 OpenCV 的 calcHist 函數分別計算統計值，
 # 並畫出 RGB 三種顏色的分佈圖
 
-image0 = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename2)  # 彩色讀取
+image1 = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 # ---------使用cv2.calcHist()函數繪圖----
 # 這個函數可以傳入彩圖，因為它還有一個channel參數，就把通道分開了
@@ -142,29 +153,32 @@ image0 = cv2.imread(filename)  # 彩色讀取
 
 # 生成圖像之直方圖, 256束, 彩圖之第0通道
 hist_b = cv2.calcHist([image0], [0], None, [256], [0, 256])
+
 # 生成圖像之直方圖, 256束, 彩圖之第1通道
 hist_g = cv2.calcHist([image0], [1], None, [256], [0, 256])
+
 # 生成圖像之直方圖, 256束, 彩圖之第2通道
 hist_r = cv2.calcHist([image0], [2], None, [256], [0, 256])
 
 # RGB畫在一起
 # 使用 ravel 將所有的像素資料轉為一維的陣列
 plt.hist(image0.ravel(), num_bins, [0, 256], color="gray", alpha=0.3, density=False)
+plt.hist(image1.ravel(), num_bins, [0, 256], color="pink", alpha=0.3, density=False)
 # plt.hist(image0.ravel(), bins = num_bins, color="gray", alpha = 0.3, density=False)
 
 # RGB分開畫
 # 畫出 RGB 三種顏色的分佈圖
-plt.plot(hist_r, color="r", label="R", lw=3)
+plt.plot(hist_r, color="r", label="R", lw=2)
 plt.plot(hist_g, color="g", label="G", lw=2)
-plt.plot(hist_b, color="b", label="B", lw=1)
+plt.plot(hist_b, color="b", label="B", lw=2)
 
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
-plt.ylim(0, 8000)  # 設定 y 軸座標範圍
-plt.legend(loc="best")
+plt.ylim(0, 12000)  # 設定 y 軸座標範圍
 
 show()
 
-print("測試 04 calcHist----------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("一張彩圖的RGB與灰度的統計資料3 使用mask")
 print("使用mask, 因為目前mask只能用1維的 所以圖片要先轉成灰階")
@@ -182,6 +196,7 @@ BORDER = 50
 mask[BORDER : H - BORDER, BORDER : W - BORDER] = 255  # 白色 先h 後 w
 
 """顯示原圖與mask
+plt.figure(figsize=(10, 8))
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB), "gray")
 plt.subplot(122)
@@ -204,7 +219,8 @@ plt.legend(loc="best")
 
 show()
 
-print("測試 05 calcHist----------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("配合圖形遮罩計算直方圖")
 
@@ -233,7 +249,7 @@ hist_full = cv2.calcHist([image1], [0], None, [256], [0, 256])
 # 以套用遮罩後的圖計算直方圖
 hist_mask = cv2.calcHist([image1], [0], mask, [256], [0, 256])
 
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(10, 8))
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB), "gray")
 
@@ -290,7 +306,8 @@ bbb = bb.reshape(bb.shape[0] * bb.shape[1], 1)
 plt.hist(bbb, num_bins, color="b", label="B", alpha=0.5)  # alpha調整透明度 給多個直方圖畫在一起用
 show()
 
-print("測試 07 calcHist----------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 image0 = cv2.imread(filename)  # 彩色讀取
 image1 = cv2.cvtColor(image0, cv2.COLOR_BGR2GRAY)  # 轉灰階
@@ -307,7 +324,7 @@ hist_r = cv2.calcHist([image0], [2], None, [256], [0, 256])
 # 生成圖像之直方圖, 256束, 灰階圖只有第0通道
 hist_gray = cv2.calcHist([image1], [0], None, [256], [0, 256])
 
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(10, 8))
 plt.plot(hist_gray, color="gray", label="灰", lw=3)
 plt.plot(hist_r, color="r", label="R", lw=3)
 plt.plot(hist_g, color="g", label="G", lw=2)
@@ -319,7 +336,8 @@ plt.title("原圖各分量與灰階的直方圖")
 
 show()
 
-print("測試 08 calcHist----------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 使用 mask 繪製直方圖
 
@@ -355,7 +373,7 @@ hist_image_mask1 = cv2.calcHist([image0], [1], mask[:, :, 0], [256], [0, 256])
 # 原圖+mask後之統計數據
 hist_image_mask2 = cv2.calcHist([image0], [2], mask[:, :, 0], [256], [0, 256])
 
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(10, 8))
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))  # 原圖
 plt.title("原圖")
@@ -382,7 +400,8 @@ plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
 
 show()
 
-print("測試 09 calcHist----------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 image0 = cv2.imread(filename2)  # 彩色讀取
 
@@ -447,6 +466,7 @@ for i in range(1, histSize):
     )
 ## [Draw for each channel]
 
+plt.figure(figsize=(10, 8))
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
@@ -464,7 +484,7 @@ print("equalizeHist  # 直方圖均衡化處理, 只能處理灰階圖")
 
 image1 = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(10, 8))
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("原圖轉灰階")
@@ -505,7 +525,7 @@ image1 = cv2.cvtColor(image0, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 equ = cv2.equalizeHist(image1)  # 直方圖均衡化處理, 只能處理灰階圖
 
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(10, 8))
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))  # 原圖
 plt.title("原圖")
@@ -531,7 +551,7 @@ hist_image1 = cv2.calcHist([image1], [0], None, [256], [0, 256])
 
 hist_equ = cv2.calcHist([equ], [0], None, [256], [0, 256])  # 生成均衡化後的圖像的直方圖
 
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(10, 8))
 plt.subplot(221)
 plt.plot(hist_image1)
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
@@ -559,7 +579,7 @@ image1 = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 equ = cv2.equalizeHist(image1)  # 直方圖均衡化處理, 只能處理灰階圖
 
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(10, 8))
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
@@ -592,7 +612,7 @@ image1 = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 hist = cv2.calcHist([image1], [0], None, [256], [0, 256])
 
 # 法一: 用plt.plot畫圖
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(10, 8))
 plt.subplot(231)
 plt.plot(hist, "r")
 plt.title("用plot")
@@ -714,23 +734,24 @@ print("------------------------------------------------------------")  # 60個
 
 # 直方圖均衡化—增強影像對比度
 
-src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+image = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
+plt.figure(figsize=(10, 8))
 plt.subplot(311)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖灰階")
 
 plt.subplot(312)
-plt.hist(src.ravel(), 256)  # 降維再繪製直方圖
+plt.hist(image.ravel(), 256)  # 降維再繪製直方圖
 plt.title("原圖灰階直方圖")
 
-hist = cv2.calcHist([src], [0], None, [256], [0, 256])  # 直方圖統計資料
+hist = cv2.calcHist([image], [0], None, [256], [0, 256])  # 直方圖統計資料
 print(f"資料類型 = {type(hist)}")
 print(f"資料外觀 = {hist.shape}")
 print(f"資料大小 = {hist.size}")
 # print(f"資料內容 \n{hist}")
 
-hist = cv2.calcHist([src], [0], None, [256], [0, 258])  # 直方圖統計資料
+hist = cv2.calcHist([image], [0], None, [256], [0, 258])  # 直方圖統計資料
 
 plt.subplot(313)
 plt.plot(hist)  # 用plot()繪直方圖
@@ -740,18 +761,18 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread(filename2, cv2.IMREAD_COLOR)  # 彩色讀取
+image = cv2.imread(filename2, cv2.IMREAD_COLOR)  # 彩色讀取
 
+plt.figure(figsize=(10, 8))
 plt.subplot(211)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖彩色")
 
-b = cv2.calcHist([src], [0], None, [256], [0, 256])  # B 通道統計資料
-g = cv2.calcHist([src], [1], None, [256], [0, 256])  # G 通道統計資料
-r = cv2.calcHist([src], [2], None, [256], [0, 256])  # R 通道統計資料
+b = cv2.calcHist([image], [0], None, [256], [0, 256])  # B 通道統計資料
+g = cv2.calcHist([image], [1], None, [256], [0, 256])  # G 通道統計資料
+r = cv2.calcHist([image], [2], None, [256], [0, 256])  # R 通道統計資料
 
 plt.subplot(212)
-
 plt.plot(b, color="b")  # 用plot()繪 B 通道
 plt.plot(g, color="g")  # 用plot()繪 G 通道
 plt.plot(r, color="r")  # 用plot()繪 R 通道
@@ -762,22 +783,23 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+image = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
+plt.figure(figsize=(10, 8))
 plt.subplot(311)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖灰階")
 
-mask = np.zeros(src.shape[:2], np.uint8)  # 建立影像遮罩影像
+mask = np.zeros(image.shape[:2], np.uint8)  # 建立影像遮罩影像
 mask[20:500, 50:400] = 255  # 在遮罩影像內建立遮罩
-masked = cv2.bitwise_and(src, src, mask=mask)  # And運算
+masked = cv2.bitwise_and(image, image, mask=mask)  # And運算
 
 plt.subplot(312)
 plt.imshow(cv2.cvtColor(masked, cv2.COLOR_BGR2RGB))
 plt.title("加mask")
 
-hist = cv2.calcHist([src], [0], None, [256], [0, 256])  # 灰階統計資料
-hist_mask = cv2.calcHist([src], [0], mask, [256], [0, 256])  # 遮罩統計資料
+hist = cv2.calcHist([image], [0], None, [256], [0, 256])  # 灰階統計資料
+hist_mask = cv2.calcHist([image], [0], mask, [256], [0, 256])  # 遮罩統計資料
 
 plt.subplot(313)
 plt.plot(hist, color="blue", label="全部")  # 用plot()繪影像直方圖
@@ -789,18 +811,19 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+image = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 # 建立遮罩
-mask = np.zeros(src.shape[:2], np.uint8)  # 建立影像遮罩影像
+mask = np.zeros(image.shape[:2], np.uint8)  # 建立影像遮罩影像
 mask[20:500, 50:400] = 255  # 在遮罩影像內建立遮罩
-aftermask = cv2.bitwise_and(src, src, mask=mask)
+aftermask = cv2.bitwise_and(image, image, mask=mask)
 
-hist = cv2.calcHist([src], [0], None, [256], [0, 256])  # 灰階統計資料
-hist_mask = cv2.calcHist([src], [0], mask, [256], [0, 256])  # 遮罩統計資料
+hist = cv2.calcHist([image], [0], None, [256], [0, 256])  # 灰階統計資料
+hist_mask = cv2.calcHist([image], [0], mask, [256], [0, 256])  # 遮罩統計資料
 
+plt.figure(figsize=(10, 8))
 plt.subplot(221)
-plt.imshow(src, "gray")  # 灰階顯示第1張圖
+plt.imshow(image, "gray")  # 灰階顯示第1張圖
 
 plt.subplot(222)
 plt.imshow(mask, "gray")  # 灰階顯示第2張圖
@@ -818,35 +841,14 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 均衡化處理
+image = cv2.imread(filename2, cv2.IMREAD_COLOR)  # 彩色讀取
 
-src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
-
-plt.subplot(221)
-plt.imshow(src, "gray")  # 灰階顯示第1張圖
-
-plt.subplot(222)
-plt.hist(src.ravel(), 256)  # 降維再繪製直方圖
-
-plt.subplot(223)
-dst = cv2.equalizeHist(src)  # 直方圖均衡化處理, 只能處理灰階圖
-plt.imshow(dst, "gray")
-
-plt.subplot(224)
-plt.hist(dst.ravel(), 256)  # 降維再繪製直方圖
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-src = cv2.imread(filename2, cv2.IMREAD_COLOR)  # 彩色讀取
-
+plt.figure(figsize=(10, 8))
 plt.subplot(211)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖彩色")
 
-(b, g, r) = cv2.split(src)  # 拆分彩色影像3通道
+(b, g, r) = cv2.split(image)  # 拆分彩色影像3通道
 
 blue = cv2.equalizeHist(b)  # 直方圖均衡化處理, 只能處理灰階圖 B通道
 green = cv2.equalizeHist(g)  # 直方圖均衡化處理, 只能處理灰階圖 G通道
@@ -863,15 +865,16 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-src = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+image = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
+plt.figure(figsize=(10, 8))
 plt.subplot(211)
-plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖灰階")
 
 # 自適應直方圖均衡化
 clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
-dst = clahe.apply(src)  # 灰度影像與clahe物件關聯
+dst = clahe.apply(image)  # 灰度影像與clahe物件關聯
 
 plt.subplot(212)
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
@@ -887,7 +890,7 @@ print("------------------------------------------------------------")  # 60個
 # 影像的三個通道的直方圖統計、通道0和通道2的二維直方圖統計
 img = cv2.imread(filename2)  # 彩色讀取
 
-fig, ax = plt.subplots(1, 2, figsize=(12, 8))
+fig, ax = plt.subplots(1, 2, figsize=(10, 8))
 colors = ["blue", "green", "red"]
 
 for i in range(3):

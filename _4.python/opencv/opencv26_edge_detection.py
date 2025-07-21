@@ -2236,18 +2236,19 @@ print("準備使用Trackbar")
 
 def do_trackbar_event1(val):
     global min_value, max_value
-    min_value = val;
+    min_value = val
     # print("數值 :", val, end=" ")
     dst = cv2.Canny(image, min_value, max_value)  # minVal=50, maxVal=100, typical
     cv2.imshow("OpenCV", dst)
-    
+
 
 def do_trackbar_event2(val):
     global min_value, max_value
-    max_value = val;
+    max_value = val
     # print("數值 :", val, end=" ")
     dst = cv2.Canny(image, min_value, max_value)  # minVal=50, maxVal=100, typical
     cv2.imshow("OpenCV", dst)
+
 
 image = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 

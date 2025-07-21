@@ -12,7 +12,7 @@ color space 色彩空間轉換
 from opencv_common import *
 
 W, H = 640, 480
-'''
+
 print("------------------------------------------------------------")  # 60個
 # Color Space Conversions ST
 print("------------------------------------------------------------")  # 60個
@@ -592,7 +592,7 @@ def process(image):
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("幾何形狀的檢測和擬合 convexHull")
 
 W, H = 400, 400
@@ -1576,6 +1576,158 @@ dst = cv2.convertScaleAbs(image)
 print(f"dst = \n {dst}")
 
 print("------------------------------------------------------------")  # 60個
+# cv2.remap() ST
+print("------------------------------------------------------------")  # 60個
+
+
+a = np.random.randint(0, 256, (3, 5), dtype="uint8")
+
+# a[3, 2]的值 對應到整個陣列
+mapx = np.ones(a.shape, dtype=np.float32) * 3
+
+mapy = np.ones(a.shape, dtype=np.float32) * 2
+
+b = cv2.remap(a, mapx, mapy, interpolation=cv2.INTER_LINEAR)
+
+print(a)
+print(mapx)
+print(mapy)
+print(b)
+
+w, h = 10, 5
+mapy, mapx = np.mgrid[0 : h * 3 : 3, 0 : w * 2 : 2]
+print(mapx.shape)
+print(mapy.shape)
+print(mapx)
+print(mapy)
+
+
+"""
+scpy2.opencv.warp_demo：仿射變換和透視變換的示範程式，
+可以透過滑鼠拖曳圖中藍色三角形和四邊形的頂點，
+進一步決定原始圖形各個頂角經由變換之後的座標。
+"""
+
+# 重映射-remap
+
+w, h = 640, 480
+
+filename4a = "C:/_git/vcs/_4.python/opencv/data/ims_640X480.bmp"
+
+img = cv2.imread(filename4a)  # 彩色讀取
+
+mapy, mapx = np.mgrid[0 : h * 3 : 3, 0 : w * 2 : 2]
+img2 = cv2.remap(img, mapx.astype("float32"), mapy.astype("float32"), cv2.INTER_LINEAR)
+x, y = 12, 40  # 用於驗證映射公式的座標點
+assert np.all(img[mapy[y, x], mapx[y, x]] == img2[y, x])
+
+
+# 使用3D曲面和remap()對圖片進行變形
+def make_surf_map(func, r, w, h, d0):
+    # 計算曲面函數func在[-r:r]範圍之上的值，並進行透視投影。
+    # 視點高度為曲面高度的d0倍+1
+    y, x = np.ogrid[-r : r : h * 1j, -r : r : w * 1j]
+    z = func(x, y) + 0 * (x + y)
+    d = d0 * np.ptp(z) + 1.0
+    map1 = x * (d - z) / d
+    map2 = y * (d - z) / d
+    return (map1 / (2 * r) + 0.5) * w, (map2 / (2 * r) + 0.5) * h
+
+
+def make_func(expr_str):
+    def f(x, y):
+        return eval(expr_str, np.__dict__, locals())
+
+    return f
+
+
+def get_latex(expr_str):
+    import sympy
+
+    x, y = sympy.symbols("x, y")
+    env = {"x": x, "y": y}
+    expr = eval(expr_str, sympy.__dict__, env)
+    return sympy.latex(expr)
+
+
+settings = [
+    ("sqrt(8 - x**2 - y**2)", 2, 1),
+    ("sin(6*sqrt(x**2+y**2))", 10, 10),
+    ("sin(sqrt(x**2+y**2))/sqrt(x**2+y**2)", 20, 0.5),
+]
+fig, axes = plt.subplots(1, len(settings), figsize=(12, 12.0 / len(settings)))
+
+for ax, (expr, r, height) in zip(axes, settings):
+    mapx, mapy = make_surf_map(make_func(expr), r, w, h, height)
+    img2 = cv2.remap(
+        img, mapx.astype("float32"), mapy.astype("float32"), cv2.INTER_LINEAR
+    )
+    ax.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+    ax.axis("off")
+    ax.set_title("${}$".format(get_latex(expr)))
+
+fig.subplots_adjust(0, 0, 1, 1, 0.02, 0)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("opencv 101")
+
+# 使用remap()實現圖形拖曳效果
+# 從 (tx,ty) 拖曳到 (sx,sy)
+
+filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+img = cv2.imread(filename3)  # 彩色讀取
+
+h, w = img.shape[:2]
+gridy, gridx = np.mgrid[:h, :w]
+tx, ty = 313, 316
+sx, sy = 340, 332
+r = 40.0
+sigma = 20
+
+mask = ((gridx - sx) ** 2 + (gridy - sy) ** 2) < r**2
+offsetx = np.zeros((h, w))
+offsety = np.zeros((h, w))
+offsetx[mask] = tx - sx
+offsety[mask] = ty - sy
+offsetx_blur = cv2.GaussianBlur(offsetx, (0, 0), sigma)
+offsety_blur = cv2.GaussianBlur(offsety, (0, 0), sigma)
+
+img2 = cv2.remap(
+    img,
+    (offsetx_blur + gridx).astype("f4"),
+    (offsety_blur + gridy).astype("f4"),
+    cv2.INTER_LINEAR,
+)
+
+plt.subplot(121)
+cv2.circle(img, (tx, ty), 3, RED, 2)  # 畫圓
+cv2.circle(img, (sx, sy), 3, GREEN, 2)  # 畫圓
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.title("原圖")
+
+plt.subplot(122)
+cv2.circle(img2, (tx, ty), int(r), RED, 2)  # 畫圓
+cv2.circle(img2, (sx, sy), int(r), BLACK, 2)  # 畫圓
+plt.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
+
+plt.title("xxxx效果")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+# cv2.remap() SP
 print("------------------------------------------------------------")  # 60個
 
 

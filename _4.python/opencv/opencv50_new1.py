@@ -158,27 +158,29 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("opencv 27")
+print("對比度 / 亮度")
 
 image = cv2.imread(filename1)  # 彩色讀取
 
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
+contrast = 30
+brightness = 50
 
-contrast = 200
-brightness = 0
-output = image * (contrast / 127 + 1) - contrast + brightness  # 轉換公式
-# 轉換公式參考 https://stackoverflow.com/questions/50474302/how-do-i-adjust-brightness-contrast-and-vibrance-with-opencv-python
+# 對比度亮度 轉換公式
+# new_image = old_image * (contrast / 127 + 1) - contrast + brightness
+output = image * (contrast / 127 + 1) - contrast + brightness
 
 # 調整後的數值大多為浮點數，且可能會小於 0 或大於 255
 # 為了保持像素色彩區間為 0～255 的整數，所以再使用 np.clip() 和 np.uint8() 進行轉換
 output = np.clip(output, 0, 255)
 output = np.uint8(output)
 
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
 plt.subplot(122)
 plt.imshow(cv2.cvtColor(output, cv2.COLOR_BGR2RGB))
-plt.title("xxxx")
+plt.title("對比度 : " + str(contrast) + "\n亮度 : " + str(brightness))
 
 show()
 
@@ -190,46 +192,42 @@ print("opencv 32 logo處理")
 logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 
 image = cv2.imread(logo_filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取
-
 image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)  # 因為是 jpg，要轉換顏色為 BGRA
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-h = image.shape[0]  # 取得圖片高度
-w = image.shape[1]  # 取得圖片寬度
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+H = image.shape[0]  # 取得圖片高度
+W = image.shape[1]  # 取得圖片寬度
 
 # 依序取出圖片中每個像素
-for x in range(w):
-    for y in range(h):
+for x in range(W):
+    for y in range(H):
         if gray[y, x] > 200:
             image[y, x, 3] = 255 - gray[y, x]
             # 如果該像素的灰階度大於 200，調整該像素的透明度
             # 使用 255 - gray[y, x] 可以將一些邊緣的像素變成半透明，避免太過鋸齒的邊緣
 
+plt.subplot(132)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("logo處理1")
 
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 33 logo處理")
-
-logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
-
 image = cv2.imread(logo_filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取
-
 image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-h = image.shape[0]
-w = image.shape[1]
+H = image.shape[0]  # 取得圖片高度
+W = image.shape[1]  # 取得圖片寬度
 
-for x in range(w):
-    for y in range(h):
+# 依序取出圖片中每個像素
+for x in range(W):
+    for y in range(H):
         if gray[y, x] > 200:
             image[y, x] = [0, 255, 255, 255]  # 亮色改成黃色
 
+plt.subplot(133)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("logo處理2")
 
@@ -248,11 +246,11 @@ bg = cv2.cvtColor(bg, cv2.COLOR_BGR2BGRA)  # 轉 BGRA
 image = cv2.imread(filename2t, cv2.IMREAD_UNCHANGED)  # 彩色讀取
 image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)  # 轉 BGRA
 
-h = image.shape[0]  # 取得圖片高度
-w = image.shape[1]  # 取得圖片寬度
+H = image.shape[0]  # 取得圖片高度
+W = image.shape[1]  # 取得圖片寬度
 
-for x in range(w):
-    for y in range(h):
+for x in range(W):
+    for y in range(H):
         r = image[y, x, 2]  # 取得該像素的紅色值
         g = image[y, x, 1]  # 取得該像素的綠色值
         b = image[y, x, 0]  # 取得該像素的藍色值
@@ -278,9 +276,9 @@ print("opencv 37")
 image1 = cv2.imread(filename_lena_color)  # 彩色讀取
 image2 = cv2.imread(filename_lena_gray)  # 彩色讀取
 
-h, w = image1.shape[:2]
+H, W = image1.shape[:2]
 
-for i in range(w):
+for i in range(W):
     image1[:, i, 0] = image1[:, i, 0] * ((300 - i) / 300) + image2[:, i, 0] * (
         i / 300
     )  # 藍色按照比例混合
@@ -447,116 +445,6 @@ print(EM2_sum)
 
 product_array = temp.reshape(1, -1)
 _sum = np.double(np.sum(product_array[0]))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-"""
-scpy2.opencv.warp_demo：仿射變換和透視變換的示範程式，
-可以透過滑鼠拖曳圖中藍色三角形和四邊形的頂點，
-進一步決定原始圖形各個頂角經由變換之後的座標。
-"""
-
-# 重映射-remap
-
-mapy, mapx = np.mgrid[0 : h * 3 : 3, 0 : w * 2 : 2]
-img2 = cv2.remap(img, mapx.astype("f32"), mapy.astype("f32"), cv2.INTER_LINEAR)
-x, y = 12, 40  # 用於驗證映射公式的座標點
-assert np.all(img[mapy[y, x], mapx[y, x]] == img2[y, x])
-
-
-# 使用3D曲面和remap()對圖片進行變形
-def make_surf_map(func, r, w, h, d0):
-    # 計算曲面函數func在[-r:r]範圍之上的值，並進行透視投影。
-    # 視點高度為曲面高度的d0倍+1
-    y, x = np.ogrid[-r : r : h * 1j, -r : r : w * 1j]
-    z = func(x, y) + 0 * (x + y)
-    d = d0 * np.ptp(z) + 1.0
-    map1 = x * (d - z) / d
-    map2 = y * (d - z) / d
-    return (map1 / (2 * r) + 0.5) * w, (map2 / (2 * r) + 0.5) * h
-
-
-def make_func(expr_str):
-    def f(x, y):
-        return eval(expr_str, np.__dict__, locals())
-
-    return f
-
-
-def get_latex(expr_str):
-    import sympy
-
-    x, y = sympy.symbols("x, y")
-    env = {"x": x, "y": y}
-    expr = eval(expr_str, sympy.__dict__, env)
-    return sympy.latex(expr)
-
-
-settings = [
-    ("sqrt(8 - x**2 - y**2)", 2, 1),
-    ("sin(6*sqrt(x**2+y**2))", 10, 10),
-    ("sin(sqrt(x**2+y**2))/sqrt(x**2+y**2)", 20, 0.5),
-]
-fig, axes = plt.subplots(1, len(settings), figsize=(12, 12.0 / len(settings)))
-
-for ax, (expr, r, height) in zip(axes, settings):
-    mapx, mapy = make_surf_map(make_func(expr), r, w, h, height)
-    img2 = cv2.remap(img, mapx.astype("f32"), mapy.astype("f32"), cv2.INTER_LINEAR)
-    ax.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-    ax.axis("off")
-    ax.set_title("${}$".format(get_latex(expr)))
-
-fig.subplots_adjust(0, 0, 1, 1, 0.02, 0)
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 101")
-
-# 使用remap()實現圖形拖曳效果
-# 從 (tx,ty) 拖曳到 (sx,sy)
-
-filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
-img = cv2.imread(filename3)  # 彩色讀取
-
-h, w = img.shape[:2]
-gridy, gridx = np.mgrid[:h, :w]
-tx, ty = 313, 316
-sx, sy = 340, 332
-r = 40.0
-sigma = 20
-
-mask = ((gridx - sx) ** 2 + (gridy - sy) ** 2) < r**2
-offsetx = np.zeros((h, w))
-offsety = np.zeros((h, w))
-offsetx[mask] = tx - sx
-offsety[mask] = ty - sy
-offsetx_blur = cv2.GaussianBlur(offsetx, (0, 0), sigma)
-offsety_blur = cv2.GaussianBlur(offsety, (0, 0), sigma)
-img2 = cv2.remap(
-    img,
-    (offsetx_blur + gridx).astype("f4"),
-    (offsety_blur + gridy).astype("f4"),
-    cv2.INTER_LINEAR,
-)
-
-plt.subplot(121)
-cv2.circle(img, (tx, ty), 3, RED, 2)  # 畫圓
-cv2.circle(img, (sx, sy), 3, GREEN, 2)  # 畫圓
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.title("原圖")
-
-plt.subplot(122)
-cv2.circle(img2, (tx, ty), int(r), RED, 2)  # 畫圓
-cv2.circle(img2, (sx, sy), int(r), BLACK, 2)  # 畫圓
-plt.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.axis("off")
-
-plt.title("xxxx效果")
-
-show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
