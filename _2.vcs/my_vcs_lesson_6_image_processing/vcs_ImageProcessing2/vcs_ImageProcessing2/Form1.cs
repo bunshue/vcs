@@ -113,8 +113,7 @@ namespace vcs_ImageProcessing2
             pictureBox17.Size = new Size(W, H);
             pictureBox18.Size = new Size(W, H);
             pictureBox19.Size = new Size(W, H);
-            pictureBox20.Size = new Size(W + 110, H + 100);
-            pictureBox20.BackColor = Color.Pink;
+            pictureBox20.Size = new Size(W, H);
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -349,30 +348,29 @@ namespace vcs_ImageProcessing2
         {
             richTextBox1.Text += "SetPixel 彩色轉灰階\n";
 
-            Bitmap bmp0 = new Bitmap(filename);
-            Bitmap bmp = new Bitmap(filename);
-            pictureBox1.Image = bmp0;
+            Bitmap bitmap1 = new Bitmap(filename);
+            Bitmap bitmap2 = new Bitmap(filename);
+            pictureBox1.Image = bitmap1;
 
             int xx;
             int yy;
 
-            for (yy = 0; yy < bmp.Height; yy++)
+            for (yy = 0; yy < bitmap2.Height; yy++)
             {
-                for (xx = 0; xx < bmp.Width; xx++)
+                for (xx = 0; xx < bitmap2.Width; xx++)
                 {
-                    byte rrr = bmp.GetPixel(xx, yy).R;
-                    byte ggg = bmp.GetPixel(xx, yy).G;
-                    byte bbb = bmp.GetPixel(xx, yy).B;
+                    byte rrr = bitmap2.GetPixel(xx, yy).R;
+                    byte ggg = bitmap2.GetPixel(xx, yy).G;
+                    byte bbb = bitmap2.GetPixel(xx, yy).B;
 
                     int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
                     Color zz = Color.FromArgb(255, Gray, Gray, Gray);
 
-                    bmp.SetPixel(xx, yy, zz);
+                    bitmap2.SetPixel(xx, yy, zz);
                 }
             }
-            pictureBox3.Image = bmp;
+            pictureBox3.Image = bitmap2;
         }
-
 
 
         #region 將圖片改為灰階 Grayscale Average

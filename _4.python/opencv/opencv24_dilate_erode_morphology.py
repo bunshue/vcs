@@ -506,6 +506,55 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/threshold/brain.jpg"
+gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+
+print("做 OTSU 二值化, Otsu : 找出最佳的閾值")
+otsu_thresh = 0  # OTSU, 定義閾值 = 0, 必須
+ret, dst = cv2.threshold(
+    gray, otsu_thresh, maxval, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU
+)
+# ret 是 Ostu方法計算的閾值, dst是回傳的影像
+print("Otsu : 找出最佳的閾值 :", ret)
+
+kernel = np.ones((3, 3), np.uint8)
+opening = cv2.morphologyEx(dst, cv2.MORPH_OPEN, kernel, iterations=2)
+
+# sure background area
+sure_bg = cv2.dilate(opening, kernel, iterations=3)  # 膨胀
+
+# Finding sure foreground area
+dist_transform = cv2.distanceTransform(opening, 1, 5)
+ret, sure_fg = cv2.threshold(
+    dist_transform, 0.2 * dist_transform.max(), 255, 0
+)  # 参数改小了，出现不确定区域
+
+# Finding unknown region
+sure_fg = np.uint8(sure_fg)
+unknown = cv2.subtract(sure_bg, sure_fg)  # 减去前景
+
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB))
+plt.title("原圖灰階")
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("OTSU二值化")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(opening, cv2.COLOR_BGR2RGB))
+plt.title("opening")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(sure_fg, cv2.COLOR_BGR2RGB))
+plt.title("sure_fg")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
 

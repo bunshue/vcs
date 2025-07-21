@@ -18,7 +18,6 @@ namespace vcs_ImageProcessing6b
             InitializeComponent();
         }
 
-        // Display the initial image.
         private void Form1_Load(object sender, EventArgs e)
         {
             string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
@@ -26,7 +25,6 @@ namespace vcs_ImageProcessing6b
             pictureBox1.Image = pictureBox0.Image.Clone() as Image;
         }
 
-        // Display the original image.
         private void btnReset_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = pictureBox0.Image.Clone() as Image;
@@ -46,7 +44,7 @@ namespace vcs_ImageProcessing6b
             for (int trial = 0; trial < NUM_TRIALS; trial++)
             {
                 // Invert the pixels.
-                byte red, green, blue, alpha;
+                byte red, green, blue;
                 for (int y = 0; y < bm.Height; y++)
                 {
                     for (int x = 0; x < bm.Width; x++)

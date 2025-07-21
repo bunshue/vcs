@@ -31,16 +31,16 @@
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(43, 144);
+            this.trackBar1.Location = new System.Drawing.Point(31, 53);
+            this.trackBar1.Maximum = 100;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.trackBar1.Size = new System.Drawing.Size(186, 45);
+            this.trackBar1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.trackBar1.Size = new System.Drawing.Size(367, 45);
             this.trackBar1.TabIndex = 1;
             this.trackBar1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseDown);
             this.trackBar1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseMove);
@@ -58,28 +58,17 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(51, 271);
+            this.label1.Location = new System.Drawing.Point(27, 158);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 24);
             this.label1.TabIndex = 3;
             this.label1.Text = "label1";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(39, 38);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(364, 24);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "把trackBar像是彈弓 向左拉 向右放";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 591);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.trackBar1);
@@ -97,7 +86,6 @@
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
     }
 }
 

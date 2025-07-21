@@ -18,35 +18,28 @@ namespace vcs_TrackBar
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            trackBar1.Value = 50;
         }
 
         bool flag_mouse_down = false;
         private void trackBar1_MouseDown(object sender, MouseEventArgs e)
         {
             flag_mouse_down = true;
-            richTextBox1.Text += trackBar1.Value.ToString() + " ";
+            richTextBox1.Text += "MouseDown :"+trackBar1.Value.ToString() + "\n";
         }
 
         private void trackBar1_MouseMove(object sender, MouseEventArgs e)
         {
             if (flag_mouse_down == true)
             {
-                //richTextBox1.Text += trackBar1.Value.ToString() + " ";
-
-                int x = trackBar1.Value;
-
-                int k = 100;
-                label1.Text = "ES = k * x * x / 2 = " + (k * x * x / 2).ToString();
+                label1.Text = "取得 : " + trackBar1.Value.ToString();
             }
         }
 
         private void trackBar1_MouseUp(object sender, MouseEventArgs e)
         {
             flag_mouse_down = false;
-            richTextBox1.Text += trackBar1.Value.ToString() + " ";
-
-            trackBar1.Value = 0;
+            richTextBox1.Text += "MouseUp :" + trackBar1.Value.ToString() + "\n";
         }
     }
 }

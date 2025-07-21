@@ -60,7 +60,19 @@
             this.button27 = new System.Windows.Forms.Button();
             this.button28 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.bt_apply = new System.Windows.Forms.Button();
+            this.tb_B = new System.Windows.Forms.TextBox();
+            this.tb_G = new System.Windows.Forms.TextBox();
+            this.tb_R = new System.Windows.Forms.TextBox();
+            this.trackBar_B = new System.Windows.Forms.TrackBar();
+            this.trackBar_G = new System.Windows.Forms.TrackBar();
+            this.trackBar_R = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_B)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_G)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_R)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -75,9 +87,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1031, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(658, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(299, 591);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -97,6 +109,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(160, 49);
             this.button3.TabIndex = 3;
+            this.button3.Text = "水平Mirror";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -106,6 +119,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(160, 49);
             this.button4.TabIndex = 4;
+            this.button4.Text = "垂直Mirror";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -115,6 +129,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(160, 49);
             this.button5.TabIndex = 5;
+            this.button5.Text = "找過亮";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -124,6 +139,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(160, 49);
             this.button6.TabIndex = 6;
+            this.button6.Text = "降亮度";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -148,9 +164,9 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(609, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(541, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(500, 800);
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             // 
@@ -278,6 +294,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(160, 49);
             this.button20.TabIndex = 22;
+            this.button20.Text = "+ 10%";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -287,6 +304,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(160, 49);
             this.button21.TabIndex = 23;
+            this.button21.Text = "- 10%";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -296,6 +314,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(160, 49);
             this.button22.TabIndex = 24;
+            this.button22.Text = "擷取其中一塊";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -305,6 +324,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(160, 49);
             this.button23.TabIndex = 25;
+            this.button23.Text = "縮圖成一半";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -314,6 +334,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(160, 49);
             this.button24.TabIndex = 26;
+            this.button24.Text = "轉成藍色系";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -323,6 +344,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(160, 49);
             this.button25.TabIndex = 27;
+            this.button25.Text = "R";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -332,6 +354,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(160, 49);
             this.button26.TabIndex = 28;
+            this.button26.Text = "G";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -341,6 +364,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(160, 49);
             this.button27.TabIndex = 29;
+            this.button27.Text = "B";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -362,11 +386,98 @@
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox2.Location = new System.Drawing.Point(541, 118);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox2.TabIndex = 32;
+            this.pictureBox2.TabStop = false;
+            // 
+            // bt_apply
+            // 
+            this.bt_apply.Location = new System.Drawing.Point(817, 688);
+            this.bt_apply.Name = "bt_apply";
+            this.bt_apply.Size = new System.Drawing.Size(70, 35);
+            this.bt_apply.TabIndex = 49;
+            this.bt_apply.Text = "Apply";
+            this.bt_apply.UseVisualStyleBackColor = true;
+            this.bt_apply.Click += new System.EventHandler(this.bt_apply_Click);
+            // 
+            // tb_B
+            // 
+            this.tb_B.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_B.Location = new System.Drawing.Point(816, 646);
+            this.tb_B.Name = "tb_B";
+            this.tb_B.Size = new System.Drawing.Size(70, 36);
+            this.tb_B.TabIndex = 48;
+            this.tb_B.Text = "100";
+            this.tb_B.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tb_G
+            // 
+            this.tb_G.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_G.Location = new System.Drawing.Point(816, 604);
+            this.tb_G.Name = "tb_G";
+            this.tb_G.Size = new System.Drawing.Size(70, 36);
+            this.tb_G.TabIndex = 47;
+            this.tb_G.Text = "100";
+            this.tb_G.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tb_R
+            // 
+            this.tb_R.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_R.Location = new System.Drawing.Point(816, 562);
+            this.tb_R.Name = "tb_R";
+            this.tb_R.Size = new System.Drawing.Size(70, 36);
+            this.tb_R.TabIndex = 46;
+            this.tb_R.Text = "100";
+            this.tb_R.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // trackBar_B
+            // 
+            this.trackBar_B.Location = new System.Drawing.Point(541, 689);
+            this.trackBar_B.Maximum = 200;
+            this.trackBar_B.Name = "trackBar_B";
+            this.trackBar_B.Size = new System.Drawing.Size(250, 45);
+            this.trackBar_B.TabIndex = 45;
+            this.trackBar_B.Value = 100;
+            this.trackBar_B.Scroll += new System.EventHandler(this.trackBar_B_Scroll);
+            // 
+            // trackBar_G
+            // 
+            this.trackBar_G.Location = new System.Drawing.Point(541, 629);
+            this.trackBar_G.Maximum = 200;
+            this.trackBar_G.Name = "trackBar_G";
+            this.trackBar_G.Size = new System.Drawing.Size(250, 45);
+            this.trackBar_G.TabIndex = 44;
+            this.trackBar_G.Value = 100;
+            this.trackBar_G.Scroll += new System.EventHandler(this.trackBar_G_Scroll);
+            // 
+            // trackBar_R
+            // 
+            this.trackBar_R.Location = new System.Drawing.Point(541, 562);
+            this.trackBar_R.Maximum = 200;
+            this.trackBar_R.Name = "trackBar_R";
+            this.trackBar_R.Size = new System.Drawing.Size(250, 45);
+            this.trackBar_R.TabIndex = 43;
+            this.trackBar_R.Value = 100;
+            this.trackBar_R.Scroll += new System.EventHandler(this.trackBar_R_Scroll);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1342, 775);
+            this.Controls.Add(this.bt_apply);
+            this.Controls.Add(this.tb_B);
+            this.Controls.Add(this.tb_G);
+            this.Controls.Add(this.tb_R);
+            this.Controls.Add(this.trackBar_B);
+            this.Controls.Add(this.trackBar_G);
+            this.Controls.Add(this.trackBar_R);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
             this.Controls.Add(this.button27);
@@ -403,7 +514,12 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_B)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_G)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_R)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -441,6 +557,14 @@
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.Button button29;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button bt_apply;
+        private System.Windows.Forms.TextBox tb_B;
+        private System.Windows.Forms.TextBox tb_G;
+        private System.Windows.Forms.TextBox tb_R;
+        private System.Windows.Forms.TrackBar trackBar_B;
+        private System.Windows.Forms.TrackBar trackBar_G;
+        private System.Windows.Forms.TrackBar trackBar_R;
     }
 }
 

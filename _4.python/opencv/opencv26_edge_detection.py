@@ -2216,22 +2216,57 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+"""
+typical
+
+# 高斯模糊，边缘检测需要的
+# image = cv2.GaussianBlur(image, (3, 3), 0)  # 降低噪音
+# image = cv2.GaussianBlur(image, (5, 5), 0)
+
+dst1 = cv2.Canny(image, 50, 100)  # minVal=50, maxVal=100
+dst2 = cv2.Canny(image, 50, 200)  # minVal=50, maxVal=200
+dst3 = cv2.Canny(image, 100, 200)
+dst4 = cv2.Canny(image, 50, 150)
+dst5 = cv2.Canny(image, 128, 200)
+dst6 = cv2.Canny(image, 32, 128)
+dst7 = cv2.Canny(image, 50, 100)  # minVal=50, maxVal=100
+"""
 print("準備使用Trackbar")
 
 
 def do_trackbar_event1(val):
-    print("數值 :", val, end=" ")
+    global min_value, max_value
+    min_value = val;
+    # print("數值 :", val, end=" ")
+    dst = cv2.Canny(image, min_value, max_value)  # minVal=50, maxVal=100, typical
+    cv2.imshow("OpenCV", dst)
+    
 
+def do_trackbar_event2(val):
+    global min_value, max_value
+    max_value = val;
+    # print("數值 :", val, end=" ")
+    dst = cv2.Canny(image, min_value, max_value)  # minVal=50, maxVal=100, typical
+    cv2.imshow("OpenCV", dst)
 
-image = cv2.imread(filename2)
+image = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+
+# 高斯模糊，边缘检测需要的
+# image = cv2.GaussianBlur(image, (3, 3), 0)  # 降低噪音
+# image = cv2.GaussianBlur(image, (5, 5), 0)
+
 cv2.imshow("OpenCV", image)
 
-cv2.createTrackbar("Threshold ", "OpenCV", 0, 100, do_trackbar_event1)
-cv2.setTrackbarPos("Threshold ", "OpenCV", 50)  # 設定預設值
+min_value, max_value = 40, 50
+cv2.createTrackbar("min ", "OpenCV", 0, 100, do_trackbar_event1)
+cv2.setTrackbarPos("min ", "OpenCV", 40)  # 設定預設值
+
+cv2.createTrackbar("max ", "OpenCV", 0, 100, do_trackbar_event2)
+cv2.setTrackbarPos("max ", "OpenCV", 50)  # 設定預設值
 
 # 取得Trackbar數值
-value = cv2.getTrackbarPos("Threshold ", "OpenCV")
-do_trackbar_event1(value)  # 套用一次設定值
+value1 = cv2.getTrackbarPos("min ", "OpenCV")
+do_trackbar_event1(value1)  # 套用一次設定值
 
 while True:
     k = cv2.waitKey(1)

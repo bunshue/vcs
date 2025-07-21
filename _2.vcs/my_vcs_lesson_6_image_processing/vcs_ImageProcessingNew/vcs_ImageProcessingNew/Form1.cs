@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,15 +17,15 @@ namespace vcs_ImageProcessingNew
         //string filename = @"C:\_git\vcs\_1.data\______test_files1\ims_image_20230921_155302.bmp";
         string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
 
-        private Bitmap bitmap1 = null;  //­ì¹Ï
-        private Bitmap bitmap2 = null;  //±q­ì¹Ï­×§ï¹Lªº
+        private Bitmap bitmap1 = null;  //åŸåœ–
+        private Bitmap bitmap2 = null;  //å¾åŸåœ–ä¿®æ”¹éçš„
 
-        private int W = 0;  //­ì¹Ïªº¼e
-        private int H = 0;  //­ì¹Ïªº°ª
-        private int w = 0;  //Â^¨ú¹Ïªº¼e
-        private int h = 0;  //Â^¨ú¹Ïªº°ª
-        int x_st = 0;   //Â^¨ú¶}©lx
-        int y_st = 0;   //Â^¨ú¶}©ly
+        private int W = 0;  //åŸåœ–çš„å¯¬
+        private int H = 0;  //åŸåœ–çš„é«˜
+        private int w = 0;  //æ“·å–åœ–çš„å¯¬
+        private int h = 0;  //æ“·å–åœ–çš„é«˜
+        int x_st = 0;   //æ“·å–é–‹å§‹x
+        int y_st = 0;   //æ“·å–é–‹å§‹y
 
         private int brightness_max = 0;
         private int brightness_min = 0;
@@ -168,7 +168,7 @@ namespace vcs_ImageProcessingNew
 
                     total_brightness += yyy.Y;
 
-                    int y = (int)Math.Round(yyy.Y); //¥|±Ë¤­¤J
+                    int y = (int)Math.Round(yyy.Y); //å››æ¨äº”å…¥
 
                     if (y > 255)
                         y = 255;
@@ -192,9 +192,9 @@ namespace vcs_ImageProcessingNew
                 //richTextBox1.Text += "\n";
             }
             //richTextBox1.Text += "\n";
-            richTextBox1.Text += "¦@¦³ " + total_points.ToString() + " ­ÓÂI\n";
-            richTextBox1.Text += "Á`«G«× " + total_brightness.ToString() + "\n";
-            richTextBox1.Text += "¥­§¡«G«× " + (total_brightness / total_points).ToString() + "\n";
+            richTextBox1.Text += "å…±æœ‰ " + total_points.ToString() + " å€‹é»\n";
+            richTextBox1.Text += "ç¸½äº®åº¦ " + total_brightness.ToString() + "\n";
+            richTextBox1.Text += "å¹³å‡äº®åº¦ " + (total_brightness / total_points).ToString() + "\n";
         }
 
         int draw_x_st = 200;
@@ -209,7 +209,7 @@ namespace vcs_ImageProcessingNew
             w = draw_w;
             h = draw_h;
 
-            //¶q´ú­ì¹Ï bitmap1
+            //é‡æ¸¬åŸåœ– bitmap1
 
             get_brigheness_data(bitmap1, x_st, y_st, w, h);
 
@@ -239,16 +239,16 @@ namespace vcs_ImageProcessingNew
                     brightness_sp = i;
                 }
             }
-            richTextBox1.Text += "\n³Ì¦h " + most.ToString() + "\n";
-            richTextBox1.Text += "«G«×½d³ò : " + brightness_st.ToString() + " ¨ì " + brightness_sp.ToString() + "\n";
-            richTextBox1.Text += "«G®t : " + (brightness_sp - brightness_st).ToString() + "\n";
+            richTextBox1.Text += "\næœ€å¤š " + most.ToString() + "\n";
+            richTextBox1.Text += "äº®åº¦ç¯„åœ : " + brightness_st.ToString() + " åˆ° " + brightness_sp.ToString() + "\n";
+            richTextBox1.Text += "äº®å·® : " + (brightness_sp - brightness_st).ToString() + "\n";
 
-            richTextBox1.Text += "¦@¦³ " + total_points.ToString() + " ­ÓÂI\n";
-            richTextBox1.Text += "Á`«G«× " + total_brightness.ToString() + "\n";
-            richTextBox1.Text += "¥­§¡«G«× " + (total_brightness / total_points).ToString() + "\n";
+            richTextBox1.Text += "å…±æœ‰ " + total_points.ToString() + " å€‹é»\n";
+            richTextBox1.Text += "ç¸½äº®åº¦ " + total_brightness.ToString() + "\n";
+            richTextBox1.Text += "å¹³å‡äº®åº¦ " + (total_brightness / total_points).ToString() + "\n";
 
 
-            //¤@ºû°}¦C¥Îªk¡G
+            //ä¸€ç¶­é™£åˆ—ç”¨æ³•ï¼š
             double[] sd_num = new double[total_points];
 
             int index = 0;
@@ -273,11 +273,11 @@ namespace vcs_ImageProcessingNew
             //return;
 
             double sd = SD(sd_num);
-            //richTextBox1.Text += "¼Ğ·Ç®t " + sd.ToString("F2") + "\n";
+            //richTextBox1.Text += "æ¨™æº–å·® " + sd.ToString("F2") + "\n";
             brightness_sd = sd;
 
-            int average_brightness = (int)Math.Round(total_brightness / total_points); //¥|±Ë¤­¤J
-            //richTextBox1.Text += "¥­§¡«G«× " + average_brightness.ToString() + "\n";
+            int average_brightness = (int)Math.Round(total_brightness / total_points); //å››æ¨äº”å…¥
+            //richTextBox1.Text += "å¹³å‡äº®åº¦ " + average_brightness.ToString() + "\n";
             brightness_avg = average_brightness;
 
             int ww = 480 * 2 - 10;
@@ -311,7 +311,7 @@ namespace vcs_ImageProcessingNew
 
             g4.FillRectangle(b, min * 2, 0, (max - min) * 2, hh1);
 
-            Font f = new Font("¼Ğ·¢Åé", 20);
+            Font f = new Font("æ¨™æ¥·é«”", 20);
 
             if ((min >= 0) && (min <= 103))
             {
@@ -351,20 +351,20 @@ namespace vcs_ImageProcessingNew
             //richTextBox1.Text += "M = " + y_max.ToString() + "\t" + "m = " + y_min.ToString() + "\n";
 
             int dy = 22;
-            g4.DrawString("Max = " + y_max.ToString(), new Font("¼Ğ·¢Åé", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 0);
-            g4.DrawString("min = " + y_min.ToString(), new Font("¼Ğ·¢Åé", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 1);
-            g4.DrawString("most = " + most.ToString(), new Font("¼Ğ·¢Åé", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 2);
-            g4.DrawString("³Ì«G : " + brightness_sp.ToString(), new Font("¼Ğ·¢Åé", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 3);
-            g4.DrawString("³Ì·t : " + brightness_st.ToString(), new Font("¼Ğ·¢Åé", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 4);
-            g4.DrawString("«G®t : " + (brightness_sp - brightness_st).ToString(), new Font("¼Ğ·¢Åé", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 5);
-            g4.DrawString("¥­§¡ : " + average_brightness.ToString(), new Font("¼Ğ·¢Åé", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 6);
-            g4.DrawString("SD : " + sd.ToString("F2"), new Font("¼Ğ·¢Åé", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 7);
+            g4.DrawString("Max = " + y_max.ToString(), new Font("æ¨™æ¥·é«”", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 0);
+            g4.DrawString("min = " + y_min.ToString(), new Font("æ¨™æ¥·é«”", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 1);
+            g4.DrawString("most = " + most.ToString(), new Font("æ¨™æ¥·é«”", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 2);
+            g4.DrawString("æœ€äº® : " + brightness_sp.ToString(), new Font("æ¨™æ¥·é«”", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 3);
+            g4.DrawString("æœ€æš— : " + brightness_st.ToString(), new Font("æ¨™æ¥·é«”", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 4);
+            g4.DrawString("äº®å·® : " + (brightness_sp - brightness_st).ToString(), new Font("æ¨™æ¥·é«”", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 5);
+            g4.DrawString("å¹³å‡ : " + average_brightness.ToString(), new Font("æ¨™æ¥·é«”", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 6);
+            g4.DrawString("SD : " + sd.ToString("F2"), new Font("æ¨™æ¥·é«”", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 7);
 
             float rr_sp = 2.0f;
             bool flag_modify_boundary_sp = true;
             if ((brightness_sp - average_brightness) < sd * rr_sp)
             {
-                g4.DrawString("YMax¤Óªñ", new Font("¼Ğ·¢Åé", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 8);
+                g4.DrawString("YMaxå¤ªè¿‘", new Font("æ¨™æ¥·é«”", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 8);
                 flag_modify_boundary_sp = false;
             }
 
@@ -372,23 +372,23 @@ namespace vcs_ImageProcessingNew
             bool flag_modify_boundary_st = true;
             if ((average_brightness - brightness_st) < sd * rr_st)
             {
-                g4.DrawString("YMin¤Óªñ", new Font("¼Ğ·¢Åé", 18), new SolidBrush(Color.Navy), 512 + 100, 10 + dy * 8);
+                g4.DrawString("YMinå¤ªè¿‘", new Font("æ¨™æ¥·é«”", 18), new SolidBrush(Color.Navy), 512 + 100, 10 + dy * 8);
                 flag_modify_boundary_st = false;
             }
 
             g4.DrawString(((int)Math.Round((average_brightness - sd * rr_st))).ToString() + " " +
                 average_brightness.ToString() + " " +
-                ((int)Math.Round((average_brightness + sd * rr_sp))).ToString(), new Font("¼Ğ·¢Åé", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 9);
+                ((int)Math.Round((average_brightness + sd * rr_sp))).ToString(), new Font("æ¨™æ¥·é«”", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 9);
 
             /*
             if ((flag_modify_boundary_sp == false) || (cb_modify.Checked == false))
             {
-                g4.DrawString("«G³õ¥¼½Õ¾ã", new Font("¼Ğ·¢Åé", 13), new SolidBrush(Color.Red), 512 + 105, 10 + dy * 10);
+                g4.DrawString("äº®å ´æœªèª¿æ•´", new Font("æ¨™æ¥·é«”", 13), new SolidBrush(Color.Red), 512 + 105, 10 + dy * 10);
             }
 
             if ((flag_modify_boundary_st == false) || (cb_modify.Checked == false))
             {
-                g4.DrawString("·t³õ¥¼½Õ¾ã", new Font("¼Ğ·¢Åé", 13), new SolidBrush(Color.Red), 512, 10 + dy * 10);
+                g4.DrawString("æš—å ´æœªèª¿æ•´", new Font("æ¨™æ¥·é«”", 13), new SolidBrush(Color.Red), 512, 10 + dy * 10);
             }
             */
 
@@ -427,18 +427,18 @@ namespace vcs_ImageProcessingNew
             richTextBox1.Text += "eeeee\n";
             //return;
 
-            Point[] curvePoints = new Point[256];    //¤@ºû°}¦C¤º¦³ 256 ­ÓPoint
+            Point[] curvePoints = new Point[256];    //ä¸€ç¶­é™£åˆ—å…§æœ‰ 256 å€‹Point
             for (i = 0; i < 256; i++)
             {
                 curvePoints[i].X = 750 + (int)(brightness_data[i] / rr);
                 curvePoints[i].Y = hh2 - i;
             }
             // Draw lines between original points to screen.
-            g4.DrawLines(Pens.Yellow, curvePoints);   //µeª½½u
+            g4.DrawLines(Pens.Yellow, curvePoints);   //ç•«ç›´ç·š
             // Draw curve to screen.
-            //g4.DrawCurve(Pens.Yellow, curvePoints); //µe¦±½u
+            //g4.DrawCurve(Pens.Yellow, curvePoints); //ç•«æ›²ç·š
 
-            //¦A§â¼Ğ·Ç®t½d³òµe¥X¨Ó
+            //å†æŠŠæ¨™æº–å·®ç¯„åœç•«å‡ºä¾†
 
             richTextBox1.Text += "brightness_st = " + brightness_st.ToString() + "\n";
             richTextBox1.Text += "brightness_sp = " + brightness_sp.ToString() + "\n";
@@ -483,7 +483,7 @@ namespace vcs_ImageProcessingNew
         }
 
         /// <summary> 
-        /// ¼Ğ·Ç®t(StandardDifference) 
+        /// æ¨™æº–å·®(StandardDifference) 
         /// </summary> 
         /// <param name="val"></param> 
         /// <returns></returns> 
@@ -525,7 +525,7 @@ namespace vcs_ImageProcessingNew
         {
             show_item_location();
 
-            bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile¥X¨Óªº¬OImage®æ¦¡
+            bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFileå‡ºä¾†çš„æ˜¯Imageæ ¼å¼
 
             pictureBox1.Image = bitmap1;
         }
@@ -573,15 +573,15 @@ namespace vcs_ImageProcessingNew
         private void button1_Click(object sender, EventArgs e)
         {
 
-            //Åª¨ú¹ÏÀÉ, ¥ı©ñ¦bBitmapùØ
+            //è®€å–åœ–æª”, å…ˆæ”¾åœ¨Bitmapè£
             //string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
             //string filename = "pic_original2.bmp";
-            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile¥X¨Óªº¬OImage®æ¦¡
-            //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile¥X¨Óªº¬OImage®æ¦¡
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFileå‡ºä¾†çš„æ˜¯Imageæ ¼å¼
+            //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFileå‡ºä¾†çš„æ˜¯Imageæ ¼å¼
             pictureBox1.Image = bitmap1;
 
-            /* µe¦â¶ô
+            /* ç•«è‰²å¡Š
             Graphics g = Graphics.FromImage(bitmap1);
 
             g.FillRectangle(new SolidBrush(Color.Red), 50, 100, 50, 50);
@@ -620,8 +620,8 @@ namespace vcs_ImageProcessingNew
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //¥Õ¦âÂà¬°³z©ú
-            //C#±N¹Ï¤ù¥Õ¦â­I´º³]¸m¬°³z©ú
+            //ç™½è‰²è½‰ç‚ºé€æ˜
+            //C#å°‡åœ–ç‰‡ç™½è‰²èƒŒæ™¯è¨­ç½®ç‚ºé€æ˜
             string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename);
             Bitmap bitmap1 = new Bitmap(image);
@@ -631,15 +631,65 @@ namespace vcs_ImageProcessingNew
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //åœ–åƒæˆªå–
+            //åœ–åƒæˆªå–
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            Bitmap bitmap1 = new Bitmap(filename);
+            //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//å¡«å……çª—é«”èƒŒæ™¯çˆ²ç™½è‰², æ¸…ç©ºpictureBox
+            Rectangle sr = new Rectangle(80, 60, 400, 400);//è¦æˆªå–çš„çŸ©å½¢å€åŸŸ
+            Rectangle dr = new Rectangle(0, 0, 200, 200);//è¦é¡¯ç¤ºåˆ°Formçš„çŸ©å½¢å€åŸŸ
+            g.DrawImage(bitmap1, dr, sr, GraphicsUnit.Pixel);
+
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //æ”¹è®Šåœ–åƒå¤§å°
+            //æ”¹è®Šåœ–åƒå¤§å°
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            Bitmap bitmap1 = new Bitmap(filename);
+            //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//å¡«å……çª—é«”èƒŒæ™¯çˆ²ç™½è‰², æ¸…ç©ºpictureBox
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            // æ”¹è®Šåœ–åƒå¤§å°ä½¿ç”¨ä½è³ªé‡çš„æ¨¡å¼
+            g.InterpolationMode = InterpolationMode.NearestNeighbor;
+
+            g.DrawImage(bitmap1, new Rectangle(10, 10, 120, 120), // source rectangle
+            new Rectangle(0, 0, W, H), // destination rectangle
+            GraphicsUnit.Pixel);
+
+            // ä½¿ç”¨é«˜è³ªé‡æ¨¡å¼
+            //g.CompositingQuality = CompositingQuality.HighSpeed;
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            g.DrawImage(bitmap1, new Rectangle(130, 10, 120, 120), new Rectangle(0, 0, W, H), GraphicsUnit.Pixel);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //é‡è¨­å¤§å°
+            //é‡è¨­å¤§å°
+            Bitmap bitmap1 = new Bitmap(filename);
+            Bitmap bitmap2 = ResizeImage(bitmap1, new Size(bitmap1.Width / 2, bitmap1.Height / 2));
+            pictureBox1.Image = bitmap2;
+
         }
+
+        //é‡è¨­å¤§å°
+        public Bitmap ResizeImage(Bitmap bmp, Size size)
+        {
+            Bitmap newbmp = new Bitmap(size.Width, size.Height);
+            using (Graphics g = Graphics.FromImage(newbmp))
+            {
+                g.DrawImage(bmp, new Rectangle(Point.Empty, size));
+            }
+            return newbmp;
+        }
+
+
 
         private void button6_Click(object sender, EventArgs e)
         {

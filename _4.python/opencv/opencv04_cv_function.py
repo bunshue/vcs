@@ -12,7 +12,7 @@ color space 色彩空間轉換
 from opencv_common import *
 
 W, H = 640, 480
-
+'''
 print("------------------------------------------------------------")  # 60個
 # Color Space Conversions ST
 print("------------------------------------------------------------")  # 60個
@@ -592,121 +592,7 @@ def process(image):
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# boxPoints 帶有旋轉的矩形框座標
-
-
-def draw_boxpoints(points):
-    # print(points)  # 打印四個頂點
-    for i in range(4):
-        # 相鄰的點
-        p1 = points[i, :]
-        j = (i + 1) % 4
-        p2 = points[j, :]
-        # print(i, points[i], points[j])
-
-        # 畫出直線
-        cv2.line(
-            image,
-            (int(p1[0]), int(p1[1])),
-            (int(p2[0]), int(p2[1])),
-            RED,
-            7,
-            lineType=cv2.LINE_AA,
-        )
-
-        # 畫出來, 另法, 用drawContours
-        points = np.int0(points)  # 取整數
-        cv2.drawContours(image, [points], 0, GREEN, 3)
-
-
-# boxPoints返回四個點順序：右下→左下→左上→右上
-
-image = cv2.imread("data/cc.bmp")  # 彩色讀取
-
-imagegray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
-
-contours, hierarchy = cv2.findContours(
-    imagegray, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE
-)
-
-rect = cv2.minAreaRect(contours[0])  # 得到最小外接矩形的（中心(x,y), (寬,高), 旋轉角度）
-
-print("最小外接矩形 :", rect)
-print("中心 :", rect[0])
-print("寬高 :", rect[1])
-print("旋轉角度 :", rect[2])
-
-cx = rect[0][0]
-cy = rect[0][1]
-
-print("中心 :", cx, cy)
-W = rect[1][0] * 2
-H = rect[1][1] * 2
-print("W = ", W, "H = ", H)
-
-points = cv2.boxPoints(rect)  # 獲取最小外接矩形的4個頂點坐標
-print("最小外接矩形 :", points)
-
-# 把矩形的四個頂點標出來
-for point in points:
-    cv2.circle(image, (int(point[0]), int(point[1])), 10, 255, 5)
-
-draw_boxpoints(points)  # 畫出四個頂點連線
-
-cv2.imshow("image", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-image = cv2.imread("data/cc.bmp")  # 彩色讀取
-
-cv2.imshow("original", image)
-
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
-ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
-
-contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-rect = cv2.minAreaRect(contours[0])
-print("返回值rect:\n", rect)
-
-points = cv2.boxPoints(rect)
-print("\n轉換后的points：\n", points)
-
-draw_boxpoints(points)  # 畫出四個頂點連線
-
-cv2.imshow("result", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-W, H = 400, 400
-
-# 根據四個頂點在黑色畫板上畫出該矩形
-image = np.zeros((H, W, 3), np.uint8)
-
-cx, cy = 200, 200
-w, h = W // 2, H // 4
-
-rotating_angle = 0  # 順時針   # 旋轉矩形
-points = cv2.boxPoints(((cx, cy), (w, h), rotating_angle))
-draw_boxpoints(points)  # 畫出四個頂點連線
-
-rotating_angle = 20  # 順時針   # 旋轉矩形
-points = cv2.boxPoints(((cx, cy), (w, h), rotating_angle))
-draw_boxpoints(points)  # 畫出四個頂點連線
-
-cv2.imshow("image", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+'''
 print("幾何形狀的檢測和擬合 convexHull")
 
 W, H = 400, 400
