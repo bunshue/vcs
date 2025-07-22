@@ -92,10 +92,22 @@
             this.bt_image_process_m4 = new System.Windows.Forms.Button();
             this.bt_image_process_m3 = new System.Windows.Forms.Button();
             this.bt_restore = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.bt_image_process_a7 = new System.Windows.Forms.Button();
+            this.bt_image_process_a0 = new System.Windows.Forms.Button();
+            this.bt_image_process_a6 = new System.Windows.Forms.Button();
+            this.bt_image_process_a1 = new System.Windows.Forms.Button();
+            this.bt_image_process_a5 = new System.Windows.Forms.Button();
+            this.bt_image_process_a2 = new System.Windows.Forms.Button();
+            this.bt_image_process_a4 = new System.Windows.Forms.Button();
+            this.bt_image_process_a3 = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox0.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -172,7 +184,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(851, 37);
+            this.richTextBox1.Location = new System.Drawing.Point(945, 37);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 7;
@@ -727,11 +739,117 @@
             this.bt_restore.UseVisualStyleBackColor = true;
             this.bt_restore.Click += new System.EventHandler(this.bt_restore_Click);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.bt_image_process_a7);
+            this.groupBox3.Controls.Add(this.bt_image_process_a0);
+            this.groupBox3.Controls.Add(this.bt_image_process_a6);
+            this.groupBox3.Controls.Add(this.bt_image_process_a1);
+            this.groupBox3.Controls.Add(this.bt_image_process_a5);
+            this.groupBox3.Controls.Add(this.bt_image_process_a2);
+            this.groupBox3.Controls.Add(this.bt_image_process_a4);
+            this.groupBox3.Controls.Add(this.bt_image_process_a3);
+            this.groupBox3.Location = new System.Drawing.Point(966, 159);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(170, 430);
+            this.groupBox3.TabIndex = 46;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "影像處理 內存法";
+            // 
+            // bt_image_process_a7
+            // 
+            this.bt_image_process_a7.Location = new System.Drawing.Point(20, 343);
+            this.bt_image_process_a7.Name = "bt_image_process_a7";
+            this.bt_image_process_a7.Size = new System.Drawing.Size(130, 40);
+            this.bt_image_process_a7.TabIndex = 43;
+            this.bt_image_process_a7.UseVisualStyleBackColor = true;
+            this.bt_image_process_a7.Click += new System.EventHandler(this.bt_image_process_a7_Click);
+            // 
+            // bt_image_process_a0
+            // 
+            this.bt_image_process_a0.Location = new System.Drawing.Point(20, 21);
+            this.bt_image_process_a0.Name = "bt_image_process_a0";
+            this.bt_image_process_a0.Size = new System.Drawing.Size(130, 40);
+            this.bt_image_process_a0.TabIndex = 36;
+            this.bt_image_process_a0.Text = "Fish Eye";
+            this.bt_image_process_a0.UseVisualStyleBackColor = true;
+            this.bt_image_process_a0.Click += new System.EventHandler(this.bt_image_process_a0_Click);
+            // 
+            // bt_image_process_a6
+            // 
+            this.bt_image_process_a6.Location = new System.Drawing.Point(20, 297);
+            this.bt_image_process_a6.Name = "bt_image_process_a6";
+            this.bt_image_process_a6.Size = new System.Drawing.Size(130, 40);
+            this.bt_image_process_a6.TabIndex = 42;
+            this.bt_image_process_a6.UseVisualStyleBackColor = true;
+            this.bt_image_process_a6.Click += new System.EventHandler(this.bt_image_process_a6_Click);
+            // 
+            // bt_image_process_a1
+            // 
+            this.bt_image_process_a1.Location = new System.Drawing.Point(20, 67);
+            this.bt_image_process_a1.Name = "bt_image_process_a1";
+            this.bt_image_process_a1.Size = new System.Drawing.Size(130, 40);
+            this.bt_image_process_a1.TabIndex = 37;
+            this.bt_image_process_a1.Text = "Twist";
+            this.bt_image_process_a1.UseVisualStyleBackColor = true;
+            this.bt_image_process_a1.Click += new System.EventHandler(this.bt_image_process_a1_Click);
+            // 
+            // bt_image_process_a5
+            // 
+            this.bt_image_process_a5.Location = new System.Drawing.Point(20, 251);
+            this.bt_image_process_a5.Name = "bt_image_process_a5";
+            this.bt_image_process_a5.Size = new System.Drawing.Size(130, 40);
+            this.bt_image_process_a5.TabIndex = 41;
+            this.bt_image_process_a5.Text = "Double Wave";
+            this.bt_image_process_a5.UseVisualStyleBackColor = true;
+            this.bt_image_process_a5.Click += new System.EventHandler(this.bt_image_process_a5_Click);
+            // 
+            // bt_image_process_a2
+            // 
+            this.bt_image_process_a2.Location = new System.Drawing.Point(20, 113);
+            this.bt_image_process_a2.Name = "bt_image_process_a2";
+            this.bt_image_process_a2.Size = new System.Drawing.Size(130, 40);
+            this.bt_image_process_a2.TabIndex = 38;
+            this.bt_image_process_a2.Text = "Wave";
+            this.bt_image_process_a2.UseVisualStyleBackColor = true;
+            this.bt_image_process_a2.Click += new System.EventHandler(this.bt_image_process_a2_Click);
+            // 
+            // bt_image_process_a4
+            // 
+            this.bt_image_process_a4.Location = new System.Drawing.Point(20, 205);
+            this.bt_image_process_a4.Name = "bt_image_process_a4";
+            this.bt_image_process_a4.Size = new System.Drawing.Size(130, 40);
+            this.bt_image_process_a4.TabIndex = 40;
+            this.bt_image_process_a4.Text = "Wiggles";
+            this.bt_image_process_a4.UseVisualStyleBackColor = true;
+            this.bt_image_process_a4.Click += new System.EventHandler(this.bt_image_process_a4_Click);
+            // 
+            // bt_image_process_a3
+            // 
+            this.bt_image_process_a3.Location = new System.Drawing.Point(20, 159);
+            this.bt_image_process_a3.Name = "bt_image_process_a3";
+            this.bt_image_process_a3.Size = new System.Drawing.Size(130, 40);
+            this.bt_image_process_a3.TabIndex = 39;
+            this.bt_image_process_a3.Text = "Small Top";
+            this.bt_image_process_a3.UseVisualStyleBackColor = true;
+            this.bt_image_process_a3.Click += new System.EventHandler(this.bt_image_process_a3_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox2.Location = new System.Drawing.Point(831, 37);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox2.TabIndex = 47;
+            this.pictureBox2.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1328, 904);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.bt_restore);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox0);
@@ -777,6 +895,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox0.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -846,6 +966,16 @@
         private System.Windows.Forms.Button bt_image_process_m4;
         private System.Windows.Forms.Button bt_image_process_m3;
         private System.Windows.Forms.Button bt_restore;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button bt_image_process_a7;
+        private System.Windows.Forms.Button bt_image_process_a0;
+        private System.Windows.Forms.Button bt_image_process_a6;
+        private System.Windows.Forms.Button bt_image_process_a1;
+        private System.Windows.Forms.Button bt_image_process_a5;
+        private System.Windows.Forms.Button bt_image_process_a2;
+        private System.Windows.Forms.Button bt_image_process_a4;
+        private System.Windows.Forms.Button bt_image_process_a3;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Diagnostics;
+using System.Diagnostics;   //for Stopwatch
 
 namespace vcs_ImageProcessing6b
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        Stopwatch sw = new Stopwatch();
+
         public Form1()
         {
             InitializeComponent();
@@ -20,63 +23,74 @@ namespace vcs_ImageProcessing6b
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox0.Image = Image.FromFile(filename);
-            pictureBox1.Image = pictureBox0.Image.Clone() as Image;
+            pictureBox1.Image = Image.FromFile(filename);
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image = pictureBox0.Image.Clone() as Image;
+            pictureBox0.Image = Image.FromFile(filename);
+            pictureBox1.Image = Image.FromFile(filename);
         }
 
-        private int NUM_TRIALS = 5;
+        private const int NUM_TRIALS = 5;
 
         // Invert the image without Lockbits.
         private void btnNoLockBits_Click(object sender, EventArgs e)
         {
             const byte BYTE_255 = 255;
-            Bitmap bm = new Bitmap(pictureBox0.Image);
             Cursor = Cursors.WaitCursor;
-            Stopwatch watch = new Stopwatch();
-            watch.Start();
+
+            sw.Reset();
+            sw.Start();
+
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 
             for (int trial = 0; trial < NUM_TRIALS; trial++)
             {
                 // Invert the pixels.
                 byte red, green, blue;
-                for (int y = 0; y < bm.Height; y++)
+                for (int y = 0; y < bitmap1.Height; y++)
                 {
-                    for (int x = 0; x < bm.Width; x++)
+                    for (int x = 0; x < bitmap1.Width; x++)
                     {
-                        Color clr = bm.GetPixel(x, y);
+                        Color clr = bitmap1.GetPixel(x, y);
                         red = (byte)(BYTE_255 - clr.R);
                         green = (byte)(BYTE_255 - clr.G);
                         blue = (byte)(BYTE_255 - clr.B);
-                        bm.SetPixel(x, y, Color.FromArgb(red, green, blue));
+                        clr = Color.FromArgb(
+                            255 - clr.R,
+                            255 - clr.G,
+                            255 - clr.B);
+
+                        bitmap1.SetPixel(x, y, Color.FromArgb(red, green, blue));
                     }
                 }
             }
-            pictureBox1.Image = bm;
-            watch.Stop();
+            pictureBox1.Image = bitmap1;
             Cursor = Cursors.Default;
+            sw.Stop();
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
 
-            richTextBox1.Text += "經過時間 : " + watch.Elapsed.TotalSeconds.ToString("0.000000") + " 秒\n";
+            richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.000000") + " 秒\n";
         }
 
         // Invert the image using Lockbits.
         private void btnLockBits_Click(object sender, EventArgs e)
         {
             const byte BYTE_255 = 255;
-            Bitmap bm = new Bitmap(pictureBox0.Image);
+
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
             Cursor = Cursors.WaitCursor;
-            Stopwatch watch = new Stopwatch();
-            watch.Start();
+
+            sw.Reset();
+            sw.Start();
 
             for (int trial = 0; trial < NUM_TRIALS; trial++)
             {
-                // Make a Bitmap24 object.
-                Bitmap32 bm32 = new Bitmap32(bm);
+                // Make a Bitmap32 object.
+                Bitmap32 bm32 = new Bitmap32(bitmap1);
 
                 // Lock the bitmap.
                 bm32.LockBitmap();
@@ -95,26 +109,39 @@ namespace vcs_ImageProcessing6b
                     }
                 }
 
+                /*
+                //same but slower
+                // Invert the pixels.
+                for (int i = 0; i < bm.Height * bm32.RowSizeBytes; i++)
+                {
+                    // bm32.ImageBytes[i] = Convert.ToByte(BYTE_255 - bm32.ImageBytes[i]);
+                    bm32.ImageBytes[i] = (byte)(BYTE_255 - bm32.ImageBytes[i]);
+                }
+                */
+
                 // Unlock the bitmap.
                 bm32.UnlockBitmap();
             }
-            pictureBox1.Image = bm;
+            pictureBox1.Image = bitmap1;
 
-            watch.Stop();
             Cursor = Cursors.Default;
+            sw.Stop();
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
 
-            richTextBox1.Text += "經過時間 : " + watch.Elapsed.TotalSeconds.ToString("0.000000") + " 秒\n";
+            richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.000000") + " 秒\n";
         }
 
         private void btnQuarter_Click(object sender, EventArgs e)
         {
-            Bitmap bm = new Bitmap(pictureBox0.Image);
-            Cursor = Cursors.WaitCursor;
-            Stopwatch watch = new Stopwatch();
-            watch.Start();
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 
-            // Make a Bitmap24 object.
-            Bitmap32 bm32 = new Bitmap32(bm);
+            Cursor = Cursors.WaitCursor;
+
+            sw.Reset();
+            sw.Start();
+
+            // Make a Bitmap32 object.
+            Bitmap32 bm32 = new Bitmap32(bitmap1);
 
             // Lock the bitmap.
             bm32.LockBitmap();
@@ -164,7 +191,10 @@ namespace vcs_ImageProcessing6b
 
             // Unlock the bitmap.
             bm32.UnlockBitmap();
+pictureBox1.Image = bitmap1;
+Cursor = Cursors.Default;
 
+            /*
             // Make a new bitmap.
             Bitmap final_bm = new Bitmap(pictureBox0.Image);
             using (Graphics gr = Graphics.FromImage(final_bm))
@@ -181,11 +211,13 @@ namespace vcs_ImageProcessing6b
 
             // Display the result.
             pictureBox1.Image = final_bm;
-
-            watch.Stop();
+            */
+            sw.Stop();
             Cursor = Cursors.Default;
 
-            richTextBox1.Text += "經過時間 : " + watch.Elapsed.TotalSeconds.ToString("0.000000") + " 秒\n";
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+      
+            richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.000000") + " 秒\n";
         }
     }
 }

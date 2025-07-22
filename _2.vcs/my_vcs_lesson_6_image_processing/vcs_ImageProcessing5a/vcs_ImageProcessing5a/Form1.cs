@@ -41,7 +41,7 @@ namespace vcs_ImageProcessing5a
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
-            // Make a Bitmap24 object.
+            // Make a Bitmap32 object.
             Bitmap32 bm32 = new Bitmap32(bm);
 
             // Apply the filter.
@@ -124,7 +124,7 @@ namespace vcs_ImageProcessing5a
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
-            // Make a Bitmap24 object.
+            // Make a Bitmap32 object.
             Bitmap32 bm32 = new Bitmap32(bm);
 
             // Average the colors.
@@ -147,7 +147,7 @@ namespace vcs_ImageProcessing5a
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
-            // Make a Bitmap24 object.
+            // Make a Bitmap32 object.
             Bitmap32 bm32 = new Bitmap32(bm);
 
             // Convert to grayscale.
@@ -170,7 +170,7 @@ namespace vcs_ImageProcessing5a
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
-            // Make a Bitmap24 object.
+            // Make a Bitmap32 object.
             Bitmap32 bm32 = new Bitmap32(bm);
 
             // Convert to red.
@@ -194,7 +194,7 @@ namespace vcs_ImageProcessing5a
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
-            // Make a Bitmap24 object.
+            // Make a Bitmap32 object.
             Bitmap32 bm32 = new Bitmap32(bm);
 
             // Convert to green.
@@ -218,7 +218,7 @@ namespace vcs_ImageProcessing5a
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
-            // Make a Bitmap24 object.
+            // Make a Bitmap32 object.
             Bitmap32 bm32 = new Bitmap32(bm);
 
             // Convert to blue.
@@ -242,7 +242,7 @@ namespace vcs_ImageProcessing5a
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
-            // Make a Bitmap24 object.
+            // Make a Bitmap32 object.
             Bitmap32 bm32 = new Bitmap32(bm);
 
             // Convert to blue.
@@ -265,7 +265,7 @@ namespace vcs_ImageProcessing5a
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
-            // Make a Bitmap24 object.
+            // Make a Bitmap32 object.
             Bitmap32 bm32 = new Bitmap32(bm);
 
             // Pick the maximum brightness colors.
@@ -288,7 +288,7 @@ namespace vcs_ImageProcessing5a
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
-            // Make a Bitmap24 object.
+            // Make a Bitmap32 object.
             Bitmap32 bm32 = new Bitmap32(bm);
 
             // Pick the minimum brightness colors.
@@ -311,7 +311,7 @@ namespace vcs_ImageProcessing5a
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
-            // Make a Bitmap24 object.
+            // Make a Bitmap32 object.
             Bitmap32 bm32 = new Bitmap32(bm);
 
             // Pixellate.
@@ -334,7 +334,7 @@ namespace vcs_ImageProcessing5a
             this.Cursor = Cursors.WaitCursor;
             DateTime start_time = DateTime.Now;
 
-            // Make a Bitmap24 object.
+            // Make a Bitmap32 object.
             Bitmap32 bm32 = new Bitmap32(bm);
 
             // Pixellate.
@@ -359,7 +359,6 @@ namespace vcs_ImageProcessing5a
                 pictureBox2.Image = pictureBox1.Image.Clone() as Image;
                 lb_elapsed.Text = "";
             }
-
         }
     }
 }

@@ -970,10 +970,8 @@ new Point(100, 400)};// destination for lower-left point of original
             ratio_b = trackBar_B.Value;
 
             draw_picture(ratio_r, ratio_g, ratio_b);
-
-
         }
-
-
     }
 }
+
+

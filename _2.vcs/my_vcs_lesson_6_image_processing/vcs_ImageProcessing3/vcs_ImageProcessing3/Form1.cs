@@ -64,7 +64,7 @@ namespace vcs_ImageProcessing3
             dx = 170 + 10;
             dy = 50 + 10;
 
-            bt_restore.Location = new Point(x_st + dx * 8-80, y_st + dy * 0);
+            bt_restore.Location = new Point(x_st + dx * 8 - 80, y_st + dy * 0);
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -100,6 +100,8 @@ namespace vcs_ImageProcessing3
 
             pictureBox1.Size = new Size(680, 680);
             pictureBox1.Location = new Point(x_st + dx * 3 + 20, y_st + dy * 0 + 15);
+            pictureBox2.Size = new Size(680, 680);
+            pictureBox2.Location = new Point(x_st + dx * 3 + 20 + 360, y_st + dy * 0 + 15 + 680);
 
             richTextBox1.Size = new Size(400, 900);
             richTextBox1.Location = new Point(x_st + dx * 8, y_st + dy * 0);
@@ -107,6 +109,7 @@ namespace vcs_ImageProcessing3
             groupBox0.Location = new Point(x_st + dx * 2, y_st + dy * 10);
             groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 10);
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBox3.Location = new Point(x_st + dx * 4, y_st + dy * 10);
 
             x_st = 20;
             y_st = 30;
@@ -2564,6 +2567,79 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
             lockBitmap1.UnlockBits();
             lockBitmap2.UnlockBits();
             return bitmap2;
+        }
+
+        private void DisplayWarpedImage(Bitmap32.WarpOperations warp_op)
+        {
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            //Bitmap bitmap1 = new Bitmap(filename);
+
+            Bitmap bm = new Bitmap(filename);
+            pictureBox1.Image = bm;
+
+            this.Cursor = Cursors.WaitCursor;
+            DateTime start_time = DateTime.Now;
+
+            // Make a Bitmap32 object.
+            Bitmap32 bm32 = new Bitmap32(bm);
+
+            // Apply the warping operation.
+            Bitmap32 new_bm32 = bm32.Warp(warp_op, false);
+
+            // Display the result.
+            pictureBox2.Image = new_bm32.Bitmap;
+
+            DateTime stop_time = DateTime.Now;
+            this.Cursor = Cursors.Default;
+
+            //TimeSpan elapsed_time = stop_time - start_time;
+            //lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+        }
+
+        private void bt_image_process_a0_Click(object sender, EventArgs e)
+        {
+            //Fish Eye
+            DisplayWarpedImage(Bitmap32.WarpOperations.FishEye);
+        }
+
+        private void bt_image_process_a1_Click(object sender, EventArgs e)
+        {
+            //Twist
+            DisplayWarpedImage(Bitmap32.WarpOperations.Twist);
+        }
+
+        private void bt_image_process_a2_Click(object sender, EventArgs e)
+        {
+            //Wave
+            DisplayWarpedImage(Bitmap32.WarpOperations.Wave);
+        }
+
+        private void bt_image_process_a3_Click(object sender, EventArgs e)
+        {
+            //Small Top
+            DisplayWarpedImage(Bitmap32.WarpOperations.SmallTop);
+        }
+
+        private void bt_image_process_a4_Click(object sender, EventArgs e)
+        {
+            //Wiggles
+            DisplayWarpedImage(Bitmap32.WarpOperations.Wiggles);
+        }
+
+        private void bt_image_process_a5_Click(object sender, EventArgs e)
+        {
+            //Double Wave
+            DisplayWarpedImage(Bitmap32.WarpOperations.DoubleWave);
+        }
+
+        private void bt_image_process_a6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_image_process_a7_Click(object sender, EventArgs e)
+        {
+
         }
 
 

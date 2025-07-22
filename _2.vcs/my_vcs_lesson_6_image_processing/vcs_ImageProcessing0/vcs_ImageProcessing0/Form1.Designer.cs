@@ -108,6 +108,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(130, 60);
             this.button3.TabIndex = 4;
+            this.button3.Text = "內存法建立灰階圖";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -117,6 +118,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(130, 60);
             this.button4.TabIndex = 5;
+            this.button4.Text = "內存法建立彩色圖";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -235,7 +237,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(130, 60);
             this.button13.TabIndex = 16;
-            this.button13.Text = "均值濾波";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -257,7 +258,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(130, 60);
             this.button15.TabIndex = 18;
-            this.button15.Text = "將圖片放入拜列";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -366,7 +366,6 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(130, 60);
             this.button23.TabIndex = 38;
-            this.button23.Text = "Marshal.Copy 6 建立8位灰度影像";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -377,7 +376,6 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(130, 60);
             this.button24.TabIndex = 39;
-            this.button24.Text = "Marshal.Copy 7";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -388,7 +386,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(130, 60);
             this.button25.TabIndex = 40;
-            this.button25.Text = "Marshal.Copy 8";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -399,7 +396,6 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(130, 60);
             this.button26.TabIndex = 41;
-            this.button26.Text = "Marshal.Copy 9";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -410,7 +406,6 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(130, 60);
             this.button27.TabIndex = 42;
-            this.button27.Text = "Marshal.Copy 10";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 

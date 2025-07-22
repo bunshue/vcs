@@ -1579,7 +1579,6 @@ print("------------------------------------------------------------")  # 60個
 # cv2.remap() ST
 print("------------------------------------------------------------")  # 60個
 
-
 a = np.random.randint(0, 256, (3, 5), dtype="uint8")
 
 # a[3, 2]的值 對應到整個陣列
@@ -1601,13 +1600,6 @@ print(mapy.shape)
 print(mapx)
 print(mapy)
 
-
-"""
-scpy2.opencv.warp_demo：仿射變換和透視變換的示範程式，
-可以透過滑鼠拖曳圖中藍色三角形和四邊形的頂點，
-進一步決定原始圖形各個頂角經由變換之後的座標。
-"""
-
 # 重映射-remap
 
 w, h = 640, 480
@@ -1615,112 +1607,240 @@ w, h = 640, 480
 filename4a = "C:/_git/vcs/_4.python/opencv/data/ims_640X480.bmp"
 
 img = cv2.imread(filename4a)  # 彩色讀取
+img = cv2.imread(filename4a, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+print(img.shape)
 
-mapy, mapx = np.mgrid[0 : h * 3 : 3, 0 : w * 2 : 2]
+mapy, mapx = np.mgrid[0 : h * 1 : 20, 0 : w * 1 : 20]
+print(mapx.shape)
+print(mapy.shape)
+
 img2 = cv2.remap(img, mapx.astype("float32"), mapy.astype("float32"), cv2.INTER_LINEAR)
-x, y = 12, 40  # 用於驗證映射公式的座標點
-assert np.all(img[mapy[y, x], mapx[y, x]] == img2[y, x])
 
-
-# 使用3D曲面和remap()對圖片進行變形
-def make_surf_map(func, r, w, h, d0):
-    # 計算曲面函數func在[-r:r]範圍之上的值，並進行透視投影。
-    # 視點高度為曲面高度的d0倍+1
-    y, x = np.ogrid[-r : r : h * 1j, -r : r : w * 1j]
-    z = func(x, y) + 0 * (x + y)
-    d = d0 * np.ptp(z) + 1.0
-    map1 = x * (d - z) / d
-    map2 = y * (d - z) / d
-    return (map1 / (2 * r) + 0.5) * w, (map2 / (2 * r) + 0.5) * h
-
-
-def make_func(expr_str):
-    def f(x, y):
-        return eval(expr_str, np.__dict__, locals())
-
-    return f
-
-
-def get_latex(expr_str):
-    import sympy
-
-    x, y = sympy.symbols("x, y")
-    env = {"x": x, "y": y}
-    expr = eval(expr_str, sympy.__dict__, env)
-    return sympy.latex(expr)
-
-
-settings = [
-    ("sqrt(8 - x**2 - y**2)", 2, 1),
-    ("sin(6*sqrt(x**2+y**2))", 10, 10),
-    ("sin(sqrt(x**2+y**2))/sqrt(x**2+y**2)", 20, 0.5),
-]
-fig, axes = plt.subplots(1, len(settings), figsize=(12, 12.0 / len(settings)))
-
-for ax, (expr, r, height) in zip(axes, settings):
-    mapx, mapy = make_surf_map(make_func(expr), r, w, h, height)
-    img2 = cv2.remap(
-        img, mapx.astype("float32"), mapy.astype("float32"), cv2.INTER_LINEAR
-    )
-    ax.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-    ax.axis("off")
-    ax.set_title("${}$".format(get_latex(expr)))
-
-fig.subplots_adjust(0, 0, 1, 1, 0.02, 0)
+plt.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.axis("off")
 
 show()
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("opencv 101")
-
-# 使用remap()實現圖形拖曳效果
-# 從 (tx,ty) 拖曳到 (sx,sy)
-
-filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
-img = cv2.imread(filename3)  # 彩色讀取
-
-h, w = img.shape[:2]
-gridy, gridx = np.mgrid[:h, :w]
-tx, ty = 313, 316
-sx, sy = 340, 332
-r = 40.0
-sigma = 20
-
-mask = ((gridx - sx) ** 2 + (gridy - sy) ** 2) < r**2
-offsetx = np.zeros((h, w))
-offsety = np.zeros((h, w))
-offsetx[mask] = tx - sx
-offsety[mask] = ty - sy
-offsetx_blur = cv2.GaussianBlur(offsetx, (0, 0), sigma)
-offsety_blur = cv2.GaussianBlur(offsety, (0, 0), sigma)
-
+"""
 img2 = cv2.remap(
     img,
     (offsetx_blur + gridx).astype("f4"),
     (offsety_blur + gridy).astype("f4"),
     cv2.INTER_LINEAR,
 )
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+print("測試 cv2.remap()")
+W, H = 5, 4
+print("建立 隨機影像 二維灰階/二維深度1")
+image = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)  # 灰階, 1維隨機影像
+
+H, W = image.shape
+
+map_x = np.zeros(image.shape, np.float32)  # 必須是float
+map_y = np.zeros(image.shape, np.float32)  # 必須是float
+for i in range(H):
+    for j in range(W):
+        map_x.itemset((i, j), j)
+        map_y.itemset((i, j), i)
+
+map_image = cv2.remap(image, map_x, map_y, cv2.INTER_LINEAR)
+print("image = \n", image)
+print("map_x = \n", map_x)
+print("map_y = \n", map_y)
+print("map_image = \n", map_image)
+print("map_image.shape = \n", map_image.shape)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+image = np.random.randint(0, 256, size=[3, 4], dtype=np.uint8)
+rows, cols = image.shape
+mapx = np.ones(image.shape, np.float32) * 3  # 設定 mapx
+mapy = np.ones(image.shape, np.float32) * 2  # 設定 mapy
+dst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
+print(f"mapx =\n {mapx}")
+print(f"mapy =\n {mapy}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+image = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
+
+rows, cols = image.shape
+mapx = np.zeros(image.shape, np.float32)
+mapy = np.zeros(image.shape, np.float32)
+for r in range(rows):  # 建立mapx和mapy
+    for c in range(cols):
+        mapx.itemset((r, c), c)  # 設定mapx
+        mapy.itemset((r, c), r)  # 設定mapy
+dst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
+print(f"mapx =\n {mapx}")
+print(f"mapy =\n {mapy}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+image = cv2.imread(filename1)
+
+rows, cols = image.shape[:2]
+mapx = np.zeros(image.shape[:2], np.float32)
+mapy = np.zeros(image.shape[:2], np.float32)
+
+for r in range(rows):  # 建立mapx和mapy
+    for c in range(cols):
+        mapx.itemset((r, c), c)  # 設定mapx
+        mapy.itemset((r, c), r)  # 設定mapy
+dst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
+
+plt.figure("映射", figsize=(12, 8))
 plt.subplot(121)
-cv2.circle(img, (tx, ty), 3, RED, 2)  # 畫圓
-cv2.circle(img, (sx, sy), 3, GREEN, 2)  # 畫圓
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 plt.subplot(122)
-cv2.circle(img2, (tx, ty), int(r), RED, 2)  # 畫圓
-cv2.circle(img2, (sx, sy), int(r), BLACK, 2)  # 畫圓
-plt.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-plt.axis("off")
-
-plt.title("xxxx效果")
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("執行映射")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+image = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
+rows, cols = image.shape
+mapx = np.zeros(image.shape, np.float32)
+mapy = np.zeros(image.shape, np.float32)
+for r in range(rows):  # 建立mapx和mapy
+    for c in range(cols):
+        mapx.itemset((r, c), c)  # 設定mapx
+        mapy.itemset((r, c), rows - 1 - r)  # 設定mapy
+dst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
+
+print(f"mapx =\n {mapx}")
+print(f"mapy =\n {mapy}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+image = cv2.imread(filename1)
+
+rows, cols = image.shape[:2]
+mapx = np.zeros(image.shape[:2], np.float32)
+mapy = np.zeros(image.shape[:2], np.float32)
+for r in range(rows):  # 建立mapx和mapy
+    for c in range(cols):
+        mapx.itemset((r, c), c)  # 設定mapx
+        mapy.itemset((r, c), rows - 1 - r)  # 設定mapy
+dst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
+
+plt.figure("映射", figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("執行映射")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+image = np.random.randint(0, 256, size=[3, 5], dtype=np.uint8)
+rows, cols = image.shape
+mapx = np.zeros(image.shape, np.float32)
+mapy = np.zeros(image.shape, np.float32)
+for r in range(rows):  # 建立mapx和mapy
+    for c in range(cols):
+        mapx.itemset((r, c), cols - 1 - c)  # 設定mapx
+        mapy.itemset((r, c), r)  # 設定mapy
+dst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
+
+print(f"mapx =\n {mapx}")
+print(f"mapy =\n {mapy}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+image = cv2.imread(filename1)
+
+rows, cols = image.shape[:2]
+mapx = np.zeros(image.shape[:2], np.float32)
+mapy = np.zeros(image.shape[:2], np.float32)
+for r in range(rows):  # 建立mapx和mapy
+    for c in range(cols):
+        mapx.itemset((r, c), cols - 1 - c)  # 設定mapx
+        mapy.itemset((r, c), r)  # 設定mapy
+dst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
+
+plt.figure("映射", figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("執行映射")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+image = cv2.imread(filename2)
+
+rows, cols = image.shape[:2]
+mapx = np.zeros(image.shape[:2], np.float32)
+mapy = np.zeros(image.shape[:2], np.float32)
+for r in range(rows):  # 建立mapx和mapy
+    for c in range(cols):
+        if 0.25 * rows < r < 0.75 * rows and 0.25 * cols < c < 0.75 * cols:
+            mapx.itemset((r, c), 2 * (c - cols * 0.25))  # 計算對應的 x
+            mapy.itemset((r, c), 2 * (r - rows * 0.25))  # 計算對應的 y
+        else:
+            mapx.itemset((r, c), 0)  # 取x座標為 0
+            mapy.itemset((r, c), 0)  # 取y座標為 0
+dst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
+
+plt.figure("映射", figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("執行映射")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+image = cv2.imread(filename2)
+
+rows, cols = image.shape[:2]
+mapx = np.zeros(image.shape[:2], np.float32)
+mapy = np.zeros(image.shape[:2], np.float32)
+for r in range(rows):  # 建立mapx和mapy
+    for c in range(cols):
+        mapx.itemset((r, c), c)
+        mapy.itemset((r, c), 2 * r)
+dst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)  # 執行映射
+
+plt.figure("映射", figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("執行映射")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

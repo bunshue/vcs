@@ -73,13 +73,13 @@ PIL 之 resize()
 
 image.resize(size, filter=None)
 
->>>im_resize = im.resize((256,256))
+image_resize = im.resize((256,256))
 
 對參數filter不賦值的話，方法resize()默認使用NEAREST濾波器。
 
->>>im_resize0 = im.resize((256,256), Image.BILINEAR)
->>>im_resize1 = im.resize((256,256), Image.BICUBIC)
->>>im_resize2 = im.resize((256,256), Image.ANTIALIAS)
+image_resize0 = im.resize((256,256), Image.BILINEAR)
+image_resize1 = im.resize((256,256), Image.BICUBIC)
+image_resize2 = im.resize((256,256), Image.ANTIALIAS)
 
 PIL 之 thumbnail()
 
@@ -90,9 +90,9 @@ image.thumbnail(size, filter=None)
 這里需要說明的是，方法thumbnail()需要保持寬高比，對于size=(200,200)的輸入參數，其最終的縮略圖尺寸為(200, 112)。
 對參數filter不賦值的話，方法thumbnail()默認使用NEAREST濾波器。如果要使用其他濾波器可以通過下面的方法來實現：
 
->>> im.thumbnail((200,200),Image.BILINEAR)
->>> im.thumbnail((200,200), Image.BICUBIC)
->>> im.thumbnail((200,200), Image.ANTIALIAS)
+im.thumbnail((200,200),Image.BILINEAR)
+im.thumbnail((200,200), Image.BICUBIC)
+im.thumbnail((200,200), Image.ANTIALIAS)
 
 
 
@@ -300,10 +300,166 @@ blue_to_red2(filename)
 """
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+
+from PIL import Image, ImageEnhance
+
+"""
+二、ImageEnhance模块的Color类
+颜色增强类用于调整图像的颜色均衡，在某种程度上类似控制彩色电视机。该类实现的增强接口如下：
+ImageEnhance.Color(image) ⇒ Color enhancer instance
+创建一个增强对象，以调整图像的颜色。增强因子为0.0将产生黑白图像；为1.0将给出原始图像。
+从前面的介绍，我们可以得知函数enhance()的参数factor决定着图像的颜色饱和度情况。从0.1到0.5，再到0.8，2.0，图像的颜色饱和度依次增大。
+"""
+
+image = Image.open(filename)
+plt.imshow(image)
+plt.title("原圖")
+plt.show()
+
+image_1 = ImageEnhance.Color(image).enhance(0.1)
+plt.imshow(image_1)
+plt.title("Color 0.1")
+plt.show()
+
+image_5 = ImageEnhance.Color(image).enhance(0.5)
+plt.imshow(image_5)
+plt.title("Color 0.5")
+plt.show()
+
+image_8 = ImageEnhance.Color(image).enhance(0.8)
+plt.imshow(image_8)
+plt.title("Color 0.8")
+plt.show()
+
+image_20 = ImageEnhance.Color(image).enhance(2.0)
+plt.imshow(image_20)
+plt.title("Color 2.0")
+plt.show()
+
+
+"""
+三、ImageEnhance模块的Brightness类
+亮度增强类用于调整图像的亮度。
+ImageEnhance.Brightness(image)⇒ Brightnessenhancer instance
+创建一个调整图像亮度的增强对象。增强因子为0.0将产生黑色图像；为1.0将保持原始图像。
+"""
+# ImageEnhance.Brightness类的实例：
+
+from PIL import Image, ImageEnhance
+
+image = Image.open(filename)
+plt.imshow(image)
+plt.title("原圖")
+plt.show()
+
+image_2 = ImageEnhance.Brightness(image).enhance(0.2)
+plt.imshow(image_2)
+plt.title("Brightness 0.2")
+plt.show()
+
+image_5 = ImageEnhance.Brightness(image).enhance(0.5)
+plt.imshow(image_5)
+plt.title("Brightness 0.5")
+plt.show()
+
+image_8 = ImageEnhance.Brightness(image).enhance(0.8)
+plt.imshow(image_8)
+plt.title("Brightness 0.8")
+plt.show()
+
+image_20 = ImageEnhance.Brightness(image).enhance(2.0)
+plt.imshow(image_20)
+plt.title("Brightness 2.0")
+plt.show()
+
+# 该函数enhance()的参数factor决定着图像的亮度情况。从0.1到0.5，再到0.8，2.0，图像的亮度依次增大。
+
+
+"""
+四、ImageEnhance模块的Contrast类
+对比度增强类用于调整图像的对比度。类似于调整彩色电视机的对比度。
+ImageEnhance.Contrast(image) ⇒ Contrast enhancer instance
+创建一个调整图像对比度的增强对象。增强因子为0.0将产生纯灰色图像；为1.0将保持原始图像。
+"""
+
+# ImageEnhance.Contrast类的实例：
+
+from PIL import Image, ImageEnhance
+
+image = Image.open(filename)
+plt.imshow(image)
+plt.title("原圖")
+plt.show()
+
+image_1 = ImageEnhance.Contrast(image).enhance(0.1)
+plt.imshow(image_1)
+plt.title("Contrast 0.1")
+plt.show()
+
+image_5 = ImageEnhance.Contrast(image).enhance(0.5)
+plt.imshow(image_5)
+plt.title("Contrast 0.5")
+plt.show()
+
+image_8 = ImageEnhance.Contrast(image).enhance(0.8)
+plt.imshow(image_8)
+plt.title("Contrast 0.8")
+plt.show()
+
+image_20 = ImageEnhance.Contrast(image).enhance(2.0)
+plt.imshow(image_20)
+plt.title("Contrast 2.0")
+plt.show()
+
+# 该函数enhance()的参数factor决定着图像的对比度情况。从0.1到0.5，再到0.8，2.0，图像的对比度依次增大。
+
+
+"""
+五、ImageEnhance模块的Sharpness类
+锐度增强类用于调整图像的锐度。
+ImageEnhance.Sharpness(image) ⇒ Sharpness enhancer instance
+创建一个调整图像锐度的增强对象。增强因子为0.0将产生模糊图像；为1.0将保持原始图像，为2.0将产生锐化过的图像。
+"""
+# ImageEnhance.Sharpness类的实例：
+
+from PIL import Image, ImageEnhance
+
+image = Image.open(filename)
+plt.imshow(image)
+plt.title("原圖")
+plt.show()
+
+image_0 = ImageEnhance.Sharpness(image).enhance(0.0)
+plt.imshow(image_0)
+plt.title("Sharpness 0.0")
+plt.show()
+
+image_20 = ImageEnhance.Sharpness(image).enhance(2.0)
+plt.imshow(image_20)
+plt.title("Sharpness 2.0")
+plt.show()
+
+image_30 = ImageEnhance.Sharpness(image).enhance(3.0)
+plt.imshow(image_30)
+plt.title("Sharpness 3.0")
+plt.show()
+
+# 该函数enhance()的参数factor决定着图像的锐度情况。从0.0到2.0，再到3.0，图像的锐度依次增大。
+
+
+image = PIL.Image.open(filename)
+
+# increasing the brightness 20%
+new_image = PIL.ImageEnhance.Brightness(image).enhance(1.2)
+
+# increasing the contrast 20%
+new_image = PIL.ImageEnhance.Contrast(image).enhance(1.2)
+
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
