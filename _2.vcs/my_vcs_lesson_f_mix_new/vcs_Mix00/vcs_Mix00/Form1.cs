@@ -867,7 +867,23 @@ namespace vcs_Mix00
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //檔名處理
 
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            richTextBox1.Text += "全檔名 : " + filename + "\n";
+
+            string d_name = Path.GetDirectoryName(filename);
+            string f_name = Path.GetFileNameWithoutExtension(filename);
+            string ext_name = Path.GetExtension(filename);
+
+            string filename2 = "tmp_" + f_name + "_new" + ext_name;
+
+            richTextBox1.Text += "新全檔名 : " + filename2 + "\n";
+
+            //自動檔名 與 存檔語法
+            string filename3 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            richTextBox1.Text += "新全檔名 : " + filename3 + "\n";
         }
 
         private void button18_Click(object sender, EventArgs e)

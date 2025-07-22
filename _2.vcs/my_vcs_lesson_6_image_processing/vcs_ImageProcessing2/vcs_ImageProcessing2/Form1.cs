@@ -29,20 +29,14 @@ namespace vcs_ImageProcessing2
             pictureBox1.Image = Bitmap.FromFile(filename1);
             PictureToSepia1();  //To Sepia 方法一
             //PictureToSepia2();  //To Sepia 方法二
-            PictureToGray1();
             PictureToGray4();
-            PictureToGray5();
             PictureToMonochrome();
-            PictureToNegative();
             PictureToBlur();
-            PictureToMirror();
-            PictureToRainbow();
 
             // Convert the image into red, green, and blue monochrome.
             pictureBox7.Image = ScaleColorComponents(pictureBox1.Image, 1, 0, 0, 1);
             pictureBox8.Image = ScaleColorComponents(pictureBox1.Image, 0, 1, 0, 1);
             pictureBox9.Image = ScaleColorComponents(pictureBox1.Image, 0, 0, 1, 1);
-
             //另外的方法製作單色圖片
             //show_mono_color_picture();
 
@@ -68,12 +62,6 @@ namespace vcs_ImageProcessing2
             pictureBox12.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox13.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox14.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox15.SizeMode = PictureBoxSizeMode.Zoom;
-            //pictureBox16.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox17.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox18.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox19.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox20.SizeMode = PictureBoxSizeMode.Zoom;
 
             int x_st;
             int y_st;
@@ -109,11 +97,6 @@ namespace vcs_ImageProcessing2
             pictureBox12.Size = new Size(W, H);
             pictureBox13.Size = new Size(W, H);
             pictureBox14.Size = new Size(W, H);
-            pictureBox15.Size = new Size(W * 2, H);
-            pictureBox17.Size = new Size(W, H);
-            pictureBox18.Size = new Size(W, H);
-            pictureBox19.Size = new Size(W, H);
-            pictureBox20.Size = new Size(W, H);
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -130,13 +113,6 @@ namespace vcs_ImageProcessing2
             pictureBox12.Location = new Point(x_st + dx * 4, y_st + dy * 1);
             pictureBox13.Location = new Point(x_st + dx * 5, y_st + dy * 1);
             pictureBox14.Location = new Point(x_st + dx * 6, y_st + dy * 1);
-
-            pictureBox15.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            //pictureBox16.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            pictureBox17.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            pictureBox18.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            pictureBox19.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            pictureBox20.Location = new Point(x_st + dx * 5 - 30, y_st + dy * 2);
 
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 25);
             label2.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 25);
@@ -163,21 +139,21 @@ namespace vcs_ImageProcessing2
 
             label1.Text = "原圖";
             label2.Text = "Sepia";
-            label3.Text = "灰階SetPixel";
+            label3.Text = "";
             label4.Text = "";
             label5.Text = "";
             label6.Text = "單色處理";
             label7.Text = "單色 R";
             label8.Text = "單色 G";
             label9.Text = "單色 B";
-            label10.Text = "負片";
+            label10.Text = "";
             label11.Text = "原圖";
-            label12.Text = "灰階 Grayscale";
-            label13.Text = "灰階 Average";
+            label12.Text = "";
+            label13.Text = "";
             label14.Text = "模糊處理";
-            label15.Text = "鏡像圖片";
+            label15.Text = "";
             label16.Text = "";
-            label17.Text = "彩虹化圖片";
+            label17.Text = "";
             label18.Text = "";
             label19.Text = "";
             label20.Text = "";
@@ -274,14 +250,11 @@ namespace vcs_ImageProcessing2
         private Bitmap ToSepiaTone2(Image image)
         {
             //將圖片轉為 Sepia 效果
-            //read image
             Bitmap bmp = new Bitmap(image);
 
-            //get image dimension
             int width = bmp.Width;
             int height = bmp.Height;
 
-            //color of pixel
             Color p;
 
             //sepia
@@ -338,149 +311,46 @@ namespace vcs_ImageProcessing2
             return bmp;
         }
 
-        private void PictureToGray1()
-        {
-            //SetPixel 彩色轉灰階
-            color_to_gray_1(filename1);
-        }
-
-        void color_to_gray_1(string filename)
-        {
-            richTextBox1.Text += "SetPixel 彩色轉灰階\n";
-
-            Bitmap bitmap1 = new Bitmap(filename);
-            Bitmap bitmap2 = new Bitmap(filename);
-            pictureBox1.Image = bitmap1;
-
-            int xx;
-            int yy;
-
-            for (yy = 0; yy < bitmap2.Height; yy++)
-            {
-                for (xx = 0; xx < bitmap2.Width; xx++)
-                {
-                    byte rrr = bitmap2.GetPixel(xx, yy).R;
-                    byte ggg = bitmap2.GetPixel(xx, yy).G;
-                    byte bbb = bitmap2.GetPixel(xx, yy).B;
-
-                    int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
-                    Color zz = Color.FromArgb(255, Gray, Gray, Gray);
-
-                    bitmap2.SetPixel(xx, yy, zz);
-                }
-            }
-            pictureBox3.Image = bitmap2;
-        }
-
-
         #region 將圖片改為灰階 Grayscale Average
 
         private void PictureToGray4()
         {
             //將圖片改為灰階 Grayscale
-            ConvertFile(filename2, false);
-        }
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
-        private void PictureToGray5()
-        {
-            //將圖片改為灰階 Average
-            ConvertFile(filename2, true);
-        }
+            //pictureBox11.Image = Bitmap.FromFile(filename);
 
-        // Convert a file.
-        private void ConvertFile(string filename, bool use_average)
-        {
-            richTextBox1.Text += "filename old = " + filename + "\n";
-
-            string d_name = Path.GetDirectoryName(filename);
-            string f_name = Path.GetFileNameWithoutExtension(filename);
-            string ext_name = Path.GetExtension(filename);
-
-            string filename2;
-
-            if (use_average == true)
+            Bitmap bmp;
+            Bitmap bm = new Bitmap(filename);
+            bmp = new Bitmap(bm.Width, bm.Height);
+            using (Graphics gr = Graphics.FromImage(bmp))
             {
-                filename2 = "tmp_" + f_name + "_average" + ext_name;
-            }
-            else
-            {
-                filename2 = "tmp_" + f_name + "_grayscale" + ext_name;
+                gr.DrawImage(bm, 0, 0);
             }
 
-            richTextBox1.Text += "filename new = " + filename2 + "\n";
-
-            pictureBox11.Image = Bitmap.FromFile(filename);
-
-            // Convert to grayscale.
-            //Bitmap bmp = new Bitmap(pictureBox1.Image);       same
-            Bitmap bmp = LoadBitmapWithoutLocking(filename);
-
-            // Convert the image.
-            ConvertBitmapToGrayscale(bmp, use_average);
-
-            // Show the converted bitmap
-            if (use_average == true)
-                pictureBox13.Image = bmp;
-            else
-                pictureBox12.Image = bmp;
-
-            //自動檔名 與 存檔語法
-            //string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            try
-            {
-                bmp.Save(filename2, ImageFormat.Bmp);
-
-                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
-        }
-
-        // Convert the Bitmap to grayscale.
-        private void ConvertBitmapToGrayscale(Bitmap bm, bool use_average)
-        {
-            // Make a Bitmap24 object.
-            Bitmap32 bm32 = new Bitmap32(bm);
+            // Make a Bitmap32 object.
+            Bitmap32 bm32 = new Bitmap32(bmp);
 
             // Lock the bitmap.
             bm32.LockBitmap();
 
             // Process the pixels.
-            for (int x = 0; x < bm.Width; x++)
+            for (int x = 0; x < bmp.Width; x++)
             {
-                for (int y = 0; y < bm.Height; y++)
+                for (int y = 0; y < bmp.Height; y++)
                 {
                     byte r = bm32.GetRed(x, y);
                     byte g = bm32.GetGreen(x, y);
                     byte b = bm32.GetBlue(x, y);
-                    byte gray = (use_average ? (byte)((r + g + b) / 3) : (byte)(0.3 * r + 0.5 * g + 0.2 * b));
+                    byte gray = (byte)(0.3 * r + 0.5 * g + 0.2 * b);
                     bm32.SetPixel(x, y, gray, gray, gray, 255);
                 }
             }
-
-            // Unlock the bitmap.
             bm32.UnlockBitmap();
+
+            //pictureBox11.Image = Bitmap.FromFile(filename);
+            pictureBox11.Image = bmp;
         }
-
-        // Load a Bitmap without locking its file.
-        // The caller must dispose of the Bitmap if desired.
-        private Bitmap LoadBitmapWithoutLocking(string filename)
-        {
-            Bitmap result;
-            using (Bitmap bm = new Bitmap(filename))
-            {
-                result = new Bitmap(bm.Width, bm.Height);
-                using (Graphics gr = Graphics.FromImage(result))
-                {
-                    gr.DrawImage(bm, 0, 0);
-                }
-            }
-
-            return result;
-        }
-
         #endregion
 
         private void PictureToMonochrome()
@@ -564,48 +434,6 @@ namespace vcs_ImageProcessing2
             pictureBox1.Image = null;
             pictureBox2.Image = null;
             richTextBox1.Clear();
-        }
-
-        private void PictureToNegative()
-        {
-            richTextBox1.Text += "PictureToNegative\n";
-            pictureBox10.Image = ToNegative(pictureBox1.Image);
-        }
-
-        private Bitmap ToNegative(Image image)
-        {
-            // Make the result bitmap.
-            Bitmap bmp = new Bitmap(image);
-
-            //get image dimension
-            int width = image.Width;
-            int height = image.Height;
-
-            //negative
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    //get pixel value
-                    Color p = bmp.GetPixel(x, y);
-
-                    //extract ARGB value from p
-                    int a = p.A;
-                    int r = p.R;
-                    int g = p.G;
-                    int b = p.B;
-
-                    //find negative value
-                    r = 255 - r;
-                    g = 255 - g;
-                    b = 255 - b;
-
-                    //set new ARGB value in pixel
-                    bmp.SetPixel(x, y, Color.FromArgb(a, r, g, b));
-                }
-            }
-            // Return the result.
-            return bmp;
         }
 
         private void PictureToBlur()
@@ -704,39 +532,6 @@ namespace vcs_ImageProcessing2
             return bitmap2;
         }
 
-        private void PictureToMirror()
-        {
-            richTextBox1.Text += "PictureToMirror\n";
-            pictureBox15.Image = ToMirror(pictureBox1.Image);
-        }
-
-        private Bitmap ToMirror(Image image)
-        {
-            // Make the result bitmap.
-            Bitmap bmp = new Bitmap(image);
-
-            //get image dimension
-            int width = image.Width;
-            int height = image.Height;
-
-            //mirror image
-            Bitmap mimg = new Bitmap(width * 2, height);
-
-            for (int y = 0; y < height; y++)
-            {
-                for (int lx = 0, rx = width * 2 - 1; lx < width; lx++, rx--)
-                {
-                    //get source pixel value
-                    Color p = bmp.GetPixel(lx, y);
-
-                    //set mirror pixel value
-                    mimg.SetPixel(lx, y, p);
-                    mimg.SetPixel(rx, y, p);
-                }
-            }
-            return mimg;
-        }
-
         private void show_mono_color_picture()
         {
             Bitmap bmp = new Bitmap(filename1);
@@ -786,64 +581,6 @@ namespace vcs_ImageProcessing2
 
             //load blue image in picturebox9
             pictureBox9.Image = bbmp;
-        }
-
-        private void PictureToRainbow()
-        {
-            richTextBox1.Text += "PictureToRainbow\n";
-            pictureBox17.Image = ToRainbow(pictureBox11.Image);
-        }
-
-        private Bitmap ToRainbow(Image image)
-        {
-            //get image dimension
-            int width = image.Width;
-            int height = image.Height;
-
-            Bitmap bmp = new Bitmap(width, height);
-            using (Graphics gr = Graphics.FromImage(bmp))
-            {
-                // Define target colors.
-                Color[] color =
-                {
-                    //Color.Red, Color.Orange, Color.Yellow,
-                    //Color.Green, Color.Blue, Color.Indigo,
-                    //Color.Violet,
-
-                    Color.Red, Color.OrangeRed, Color.Yellow,
-                    Color.Green, Color.Blue, Color.Indigo,
-                    Color.Fuchsia,
-                };
-                const float scale = 2.0f;
-
-                // Draw.
-                for (int i = 0; i < color.Length; i++)
-                {
-                    // Create the ColorMatrix.
-                    ColorMatrix cm = new ColorMatrix(new float[][]
-                    {
-                        new float[] {color[i].R / 255f * scale, 0, 0, 0, 0},
-                        new float[] {0, color[i].G / 255f * scale, 0, 0, 0},
-                        new float[] {0, 0, color[i].B / 255f * scale, 0, 0},
-                        new float[] {0, 0, 0, 1, 0},
-                        new float[] {0, 0, 0, 0, 1},
-                    });
-                    ImageAttributes attr = new ImageAttributes();
-                    attr.SetColorMatrix(cm);
-
-                    // Draw the next part of the image.
-                    int x = (int)(i * image.Width / color.Length);
-                    Point[] points =
-                    {
-                        new Point(x, 0),
-                        new Point(width, 0),
-                        new Point(x, height),
-                    };
-                    Rectangle rect = new Rectangle(x, 0, width - x, height);
-                    gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attr);
-                }
-            }
-            return bmp;
         }
     }
 }

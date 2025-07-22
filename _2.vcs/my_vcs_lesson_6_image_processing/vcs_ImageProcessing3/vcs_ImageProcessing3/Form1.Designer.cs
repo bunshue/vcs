@@ -102,12 +102,22 @@
             this.bt_image_process_a4 = new System.Windows.Forms.Button();
             this.bt_image_process_a3 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.bt_image_process_b7 = new System.Windows.Forms.Button();
+            this.bt_image_process_b0 = new System.Windows.Forms.Button();
+            this.bt_image_process_b6 = new System.Windows.Forms.Button();
+            this.bt_image_process_b1 = new System.Windows.Forms.Button();
+            this.bt_image_process_b5 = new System.Windows.Forms.Button();
+            this.bt_image_process_b2 = new System.Windows.Forms.Button();
+            this.bt_image_process_b4 = new System.Windows.Forms.Button();
+            this.bt_image_process_b3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox0.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -116,6 +126,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(170, 50);
             this.button1.TabIndex = 0;
+            this.button1.Text = "鏡像圖片";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -236,6 +247,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(170, 50);
             this.button0.TabIndex = 16;
+            this.button0.Text = "彩虹化圖片";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -754,7 +766,6 @@
             this.groupBox3.Size = new System.Drawing.Size(170, 430);
             this.groupBox3.TabIndex = 46;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "影像處理 內存法";
             // 
             // bt_image_process_a7
             // 
@@ -843,11 +854,103 @@
             this.pictureBox2.TabIndex = 47;
             this.pictureBox2.TabStop = false;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.bt_image_process_b7);
+            this.groupBox4.Controls.Add(this.bt_image_process_b0);
+            this.groupBox4.Controls.Add(this.bt_image_process_b6);
+            this.groupBox4.Controls.Add(this.bt_image_process_b1);
+            this.groupBox4.Controls.Add(this.bt_image_process_b5);
+            this.groupBox4.Controls.Add(this.bt_image_process_b2);
+            this.groupBox4.Controls.Add(this.bt_image_process_b4);
+            this.groupBox4.Controls.Add(this.bt_image_process_b3);
+            this.groupBox4.Location = new System.Drawing.Point(1146, 159);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(170, 430);
+            this.groupBox4.TabIndex = 47;
+            this.groupBox4.TabStop = false;
+            // 
+            // bt_image_process_b7
+            // 
+            this.bt_image_process_b7.Location = new System.Drawing.Point(20, 343);
+            this.bt_image_process_b7.Name = "bt_image_process_b7";
+            this.bt_image_process_b7.Size = new System.Drawing.Size(130, 40);
+            this.bt_image_process_b7.TabIndex = 43;
+            this.bt_image_process_b7.UseVisualStyleBackColor = true;
+            this.bt_image_process_b7.Click += new System.EventHandler(this.bt_image_process_b7_Click);
+            // 
+            // bt_image_process_b0
+            // 
+            this.bt_image_process_b0.Location = new System.Drawing.Point(20, 21);
+            this.bt_image_process_b0.Name = "bt_image_process_b0";
+            this.bt_image_process_b0.Size = new System.Drawing.Size(130, 40);
+            this.bt_image_process_b0.TabIndex = 36;
+            this.bt_image_process_b0.Text = "No Lock Bits";
+            this.bt_image_process_b0.UseVisualStyleBackColor = true;
+            this.bt_image_process_b0.Click += new System.EventHandler(this.bt_image_process_b0_Click);
+            // 
+            // bt_image_process_b6
+            // 
+            this.bt_image_process_b6.Location = new System.Drawing.Point(20, 297);
+            this.bt_image_process_b6.Name = "bt_image_process_b6";
+            this.bt_image_process_b6.Size = new System.Drawing.Size(130, 40);
+            this.bt_image_process_b6.TabIndex = 42;
+            this.bt_image_process_b6.UseVisualStyleBackColor = true;
+            this.bt_image_process_b6.Click += new System.EventHandler(this.bt_image_process_b6_Click);
+            // 
+            // bt_image_process_b1
+            // 
+            this.bt_image_process_b1.Location = new System.Drawing.Point(20, 67);
+            this.bt_image_process_b1.Name = "bt_image_process_b1";
+            this.bt_image_process_b1.Size = new System.Drawing.Size(130, 40);
+            this.bt_image_process_b1.TabIndex = 37;
+            this.bt_image_process_b1.Text = "Lock Bits";
+            this.bt_image_process_b1.UseVisualStyleBackColor = true;
+            this.bt_image_process_b1.Click += new System.EventHandler(this.bt_image_process_b1_Click);
+            // 
+            // bt_image_process_b5
+            // 
+            this.bt_image_process_b5.Location = new System.Drawing.Point(20, 251);
+            this.bt_image_process_b5.Name = "bt_image_process_b5";
+            this.bt_image_process_b5.Size = new System.Drawing.Size(130, 40);
+            this.bt_image_process_b5.TabIndex = 41;
+            this.bt_image_process_b5.UseVisualStyleBackColor = true;
+            this.bt_image_process_b5.Click += new System.EventHandler(this.bt_image_process_b5_Click);
+            // 
+            // bt_image_process_b2
+            // 
+            this.bt_image_process_b2.Location = new System.Drawing.Point(20, 113);
+            this.bt_image_process_b2.Name = "bt_image_process_b2";
+            this.bt_image_process_b2.Size = new System.Drawing.Size(130, 40);
+            this.bt_image_process_b2.TabIndex = 38;
+            this.bt_image_process_b2.Text = "Quarter";
+            this.bt_image_process_b2.UseVisualStyleBackColor = true;
+            this.bt_image_process_b2.Click += new System.EventHandler(this.bt_image_process_b2_Click);
+            // 
+            // bt_image_process_b4
+            // 
+            this.bt_image_process_b4.Location = new System.Drawing.Point(20, 205);
+            this.bt_image_process_b4.Name = "bt_image_process_b4";
+            this.bt_image_process_b4.Size = new System.Drawing.Size(130, 40);
+            this.bt_image_process_b4.TabIndex = 40;
+            this.bt_image_process_b4.UseVisualStyleBackColor = true;
+            this.bt_image_process_b4.Click += new System.EventHandler(this.bt_image_process_b4_Click);
+            // 
+            // bt_image_process_b3
+            // 
+            this.bt_image_process_b3.Location = new System.Drawing.Point(20, 159);
+            this.bt_image_process_b3.Name = "bt_image_process_b3";
+            this.bt_image_process_b3.Size = new System.Drawing.Size(130, 40);
+            this.bt_image_process_b3.TabIndex = 39;
+            this.bt_image_process_b3.UseVisualStyleBackColor = true;
+            this.bt_image_process_b3.Click += new System.EventHandler(this.bt_image_process_b3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1328, 904);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.bt_restore);
@@ -897,6 +1000,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -976,6 +1080,15 @@
         private System.Windows.Forms.Button bt_image_process_a4;
         private System.Windows.Forms.Button bt_image_process_a3;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button bt_image_process_b7;
+        private System.Windows.Forms.Button bt_image_process_b0;
+        private System.Windows.Forms.Button bt_image_process_b6;
+        private System.Windows.Forms.Button bt_image_process_b1;
+        private System.Windows.Forms.Button bt_image_process_b5;
+        private System.Windows.Forms.Button bt_image_process_b2;
+        private System.Windows.Forms.Button bt_image_process_b4;
+        private System.Windows.Forms.Button bt_image_process_b3;
     }
 }
 

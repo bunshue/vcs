@@ -53,14 +53,6 @@
             this.button19 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
-            this.button22 = new System.Windows.Forms.Button();
-            this.button23 = new System.Windows.Forms.Button();
-            this.button24 = new System.Windows.Forms.Button();
-            this.button25 = new System.Windows.Forms.Button();
-            this.button26 = new System.Windows.Forms.Button();
-            this.button27 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -86,7 +78,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(560, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(341, 14);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 2;
@@ -124,12 +116,14 @@
             // 
             // button5
             // 
+            this.button5.BackColor = System.Drawing.Color.Pink;
             this.button5.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button5.Location = new System.Drawing.Point(8, 375);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(130, 60);
             this.button5.TabIndex = 6;
-            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Text = "內存法";
+            this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
@@ -157,7 +151,7 @@
             // bt_restore
             // 
             this.bt_restore.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_restore.Location = new System.Drawing.Point(1072, 12);
+            this.bt_restore.Location = new System.Drawing.Point(477, 14);
             this.bt_restore.Name = "bt_restore";
             this.bt_restore.Size = new System.Drawing.Size(70, 60);
             this.bt_restore.TabIndex = 10;
@@ -194,6 +188,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(130, 60);
             this.button9.TabIndex = 12;
+            this.button9.Text = "指針法 二值化圖片";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -263,13 +258,12 @@
             // 
             // button16
             // 
-            this.button16.BackColor = System.Drawing.Color.Pink;
             this.button16.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button16.Location = new System.Drawing.Point(144, 442);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(130, 60);
             this.button16.TabIndex = 19;
-            this.button16.Text = "內存法";
+            this.button16.Text = "負片";
             this.button16.UseVisualStyleBackColor = false;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -302,7 +296,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(130, 60);
             this.button19.TabIndex = 22;
-            this.button19.Text = "Marshal.Copy 2";
+            this.button19.Text = "Marshal.Copy 2 偽色彩";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -320,108 +314,17 @@
             // pictureBox2
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.Location = new System.Drawing.Point(560, 118);
+            this.pictureBox2.Location = new System.Drawing.Point(341, 120);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(100, 100);
             this.pictureBox2.TabIndex = 34;
             this.pictureBox2.TabStop = false;
-            // 
-            // button20
-            // 
-            this.button20.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button20.Location = new System.Drawing.Point(280, 14);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(130, 60);
-            this.button20.TabIndex = 35;
-            this.button20.Text = "Marshal.Copy 3";
-            this.button20.UseVisualStyleBackColor = true;
-            this.button20.Click += new System.EventHandler(this.button20_Click);
-            // 
-            // button21
-            // 
-            this.button21.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button21.Location = new System.Drawing.Point(280, 80);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(130, 60);
-            this.button21.TabIndex = 36;
-            this.button21.Text = "Marshal.Copy 4 偽色彩";
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.button21_Click);
-            // 
-            // button22
-            // 
-            this.button22.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button22.Location = new System.Drawing.Point(280, 158);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(130, 60);
-            this.button22.TabIndex = 37;
-            this.button22.Text = "Marshal.Copy 5 指針法 二值化圖片";
-            this.button22.UseVisualStyleBackColor = true;
-            this.button22.Click += new System.EventHandler(this.button22_Click);
-            // 
-            // button23
-            // 
-            this.button23.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button23.Location = new System.Drawing.Point(280, 232);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(130, 60);
-            this.button23.TabIndex = 38;
-            this.button23.UseVisualStyleBackColor = true;
-            this.button23.Click += new System.EventHandler(this.button23_Click);
-            // 
-            // button24
-            // 
-            this.button24.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button24.Location = new System.Drawing.Point(280, 309);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(130, 60);
-            this.button24.TabIndex = 39;
-            this.button24.UseVisualStyleBackColor = true;
-            this.button24.Click += new System.EventHandler(this.button24_Click);
-            // 
-            // button25
-            // 
-            this.button25.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button25.Location = new System.Drawing.Point(280, 376);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(130, 60);
-            this.button25.TabIndex = 40;
-            this.button25.UseVisualStyleBackColor = true;
-            this.button25.Click += new System.EventHandler(this.button25_Click);
-            // 
-            // button26
-            // 
-            this.button26.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button26.Location = new System.Drawing.Point(280, 441);
-            this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(130, 60);
-            this.button26.TabIndex = 41;
-            this.button26.UseVisualStyleBackColor = true;
-            this.button26.Click += new System.EventHandler(this.button26_Click);
-            // 
-            // button27
-            // 
-            this.button27.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button27.Location = new System.Drawing.Point(280, 508);
-            this.button27.Name = "button27";
-            this.button27.Size = new System.Drawing.Size(130, 60);
-            this.button27.TabIndex = 42;
-            this.button27.UseVisualStyleBackColor = true;
-            this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1451, 731);
-            this.Controls.Add(this.button27);
-            this.Controls.Add(this.button26);
-            this.Controls.Add(this.button25);
-            this.Controls.Add(this.button24);
-            this.Controls.Add(this.button23);
-            this.Controls.Add(this.button22);
-            this.Controls.Add(this.button21);
-            this.Controls.Add(this.button20);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button19);
@@ -483,14 +386,6 @@
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Button button20;
-        private System.Windows.Forms.Button button21;
-        private System.Windows.Forms.Button button22;
-        private System.Windows.Forms.Button button23;
-        private System.Windows.Forms.Button button24;
-        private System.Windows.Forms.Button button25;
-        private System.Windows.Forms.Button button26;
-        private System.Windows.Forms.Button button27;
     }
 }
 

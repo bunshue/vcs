@@ -55,6 +55,39 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+image1 = cv2.imread(filename2)  # 彩色讀取
+
+image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
+
+# image2 = cv2.cvtColor(image1, 6)  # 也可以用數字對照 6 表示轉換成灰階
+# 套用 medianBlur() 中值模糊
+image3 = cv2.medianBlur(image2, 7)  # 模糊化，去除雜訊 7, 25 彩色黑白皆可
+
+image4 = cv2.Canny(image3, 36, 36)  # 偵測邊緣
+
+plt.figure(figsize=(12, 8))
+
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.title("轉成灰階")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
+plt.title("模糊化，去除雜訊")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(image4, cv2.COLOR_BGR2RGB))
+plt.title("Canny 偵測邊緣")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("CannyThreshold")
 
 
@@ -137,6 +170,7 @@ plt.title("dst")
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/edge_detection/map.jpg")  # 彩色讀取
@@ -773,6 +807,7 @@ for i in range(n):
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/contours.bmp")  # 彩色讀取
 
@@ -845,6 +880,7 @@ for i in range(n):
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cs1.bmp")  # 彩色讀取
@@ -1087,6 +1123,7 @@ print("\n頂點及長寬的元組（tuple）形式：")
 print("rect=", rect)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cc.bmp")  # 彩色讀取
 
@@ -1114,6 +1151,7 @@ plt.title("顯示矩形邊界")
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cc.bmp")  # 彩色讀取
@@ -1143,6 +1181,7 @@ plt.title("顯示矩形邊界")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cc.bmp")  # 彩色讀取
 
@@ -1168,6 +1207,7 @@ plt.title("圓圈圈出來")
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cc.bmp")  # 彩色讀取
@@ -1195,6 +1235,7 @@ plt.title("橢圓形圈出來")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cc.bmp")  # 彩色讀取
 
@@ -1221,6 +1262,7 @@ plt.title("直線貫通")
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # some NG
@@ -1250,6 +1292,7 @@ plt.title("result")
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/cc.bmp")  # 彩色讀取
@@ -1320,6 +1363,7 @@ plt.title("result0.02")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("data/contours.bmp")  # 彩色讀取
 
@@ -1335,6 +1379,7 @@ print("returnPoints為默認值True時返回值hull的值：\n", hull)
 hull2 = cv2.convexHull(contours[0], returnPoints=False)  # 返回索引值
 print("returnPoints為False時返回值hull的值：\n", hull2)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 o = cv2.imread("data/hand.bmp")  # 彩色讀取
@@ -1363,6 +1408,7 @@ plt.title("顯示凸包")
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # ----------------原圖--------------------------
@@ -1402,6 +1448,7 @@ plt.title("顯示結果")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 o = cv2.imread("data/hand.bmp")  # 彩色讀取
 
@@ -1439,6 +1486,7 @@ plt.title("result2")
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # ----------------原始圖像-------------------------
@@ -1821,6 +1869,7 @@ loc = np.transpose(np.nonzero(a))
 print("a內非零值位置:\n", loc)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # -----------------讀取原始圖像----------------------
 o = cv2.imread("data/cc.bmp")  # 彩色讀取
@@ -1883,6 +1932,7 @@ loc = cv2.findNonZero(a)
 # -----將a內非零值的位置信息輸出------------
 print("a內非零值位置:\n", loc)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 o = cv2.imread("data/cc.bmp")  # 彩色讀取
@@ -2144,73 +2194,43 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread(filename2)  # 彩色讀取
+image = cv2.imread(filename2)  # 彩色讀取
 
-img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉灰階
+image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-img = cv2.medianBlur(img, 7)  # 模糊化，去除雜訊
+image = cv2.medianBlur(image, 7)  # 模糊化，去除雜訊
+
 # Laplacian
-output = cv2.Laplacian(img, -1, 1, 5)  # 偵測邊緣
+dst1 = cv2.Laplacian(image, -1, 1, 5)  # 偵測邊緣
+
 # Sobel
-output = cv2.Sobel(img, -1, 1, 1, 1, 7)  # 偵測邊緣
+dst2 = cv2.Sobel(image, -1, 1, 1, 1, 7)  # 偵測邊緣
+
 # Canny
-output = cv2.Canny(img, 36, 36)  # 偵測邊緣
+dst3 = cv2.Canny(image, 36, 36)  # 偵測邊緣
 
-cv2.imshow("image", output)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-image1 = cv2.imread(filename2)  # 彩色讀取
-
-image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
-
-# image2 = cv2.cvtColor(image1, 6)  # 也可以用數字對照 6 表示轉換成灰階
-# 套用 medianBlur() 中值模糊
-image3 = cv2.medianBlur(image2, 7)  # 模糊化，去除雜訊 7, 25 彩色黑白皆可
-image4 = cv2.Canny(image3, 36, 36)  # 偵測邊緣
-
-# 套用自適應二值化黑白影像
-image5 = cv2.adaptiveThreshold(
-    image3, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
-)
-
-plt.figure(figsize=(12, 8))
-
-plt.subplot(231)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.figure(figsize=(10, 8))
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-plt.subplot(232)
-plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
-plt.title("轉成灰階")
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))
+plt.title("Laplacian")
 
-plt.subplot(233)
-plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
-plt.title("模糊化，去除雜訊")
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))
+plt.title("Sobel")
 
-plt.subplot(234)
-plt.imshow(cv2.cvtColor(image4, cv2.COLOR_BGR2RGB))
-plt.title("偵測邊緣")
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(dst3, cv2.COLOR_BGR2RGB))
+plt.title("Canny")
 
-plt.subplot(235)
-plt.imshow(cv2.cvtColor(image5, cv2.COLOR_BGR2RGB))
-plt.title("自適應二值化黑白影像")
-
-plt.subplot(236)
-plt.title("")
-
-plt.suptitle("相加")
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

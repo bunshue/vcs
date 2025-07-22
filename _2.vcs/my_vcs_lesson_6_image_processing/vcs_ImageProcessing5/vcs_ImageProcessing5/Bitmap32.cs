@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
-namespace vcs_ImageProcessing5a
+namespace vcs_ImageProcessing5
 {
     public class Bitmap32
     {

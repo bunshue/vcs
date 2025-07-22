@@ -293,6 +293,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(170, 70);
             this.button17.TabIndex = 117;
+            this.button17.Text = "檔名處理";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 

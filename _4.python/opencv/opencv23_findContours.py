@@ -1,6 +1,6 @@
 """
 cv2.findContours
-cv2.drawContours
+cv2.drawContours  # 繪製圖形外輪廓
 
 圖片邊緣檢測
 
@@ -108,11 +108,12 @@ linewidth = 2  # 線寬
 
 # 一起畫
 # index = -1 # 指名要繪製的輪廓, -1代表全部
-# image2=cv2.drawContours(image2,contours,index, RED, linewidth)  # image2為三通道才能顯示輪廓, 用紅框標示出來
+# image2 = cv2.drawContours(image2,contours,index, RED, linewidth)  # image2為三通道才能顯示輪廓, 用紅框標示出來
 
 # 分開畫
 length = len(contours)
 for index in range(length):
+    # 繪製圖形外輪廓
     image2 = cv2.drawContours(
         image2, contours, index, color[index % 9], linewidth
     )  # image2為三通道才能顯示輪廓
@@ -163,9 +164,11 @@ approx_hex = cv2.approxPolyDP(contours[HEXAGON], 30, True)
 
 print("=== 處理後")
 print("矩形點數量：{}".format(len(approx_rect)))
+# 繪製圖形外輪廓
 cv2.drawContours(image, [approx_rect], -1, RED, 5)
 
 print("六邊形點數量：{}".format(len(approx_hex)))
+# 繪製圖形外輪廓
 cv2.drawContours(image, [approx_hex], -1, RED, 5)
 print(approx_hex)
 for i in range(len(approx_hex)):
@@ -250,6 +253,7 @@ print("資料類型 :", type(contours))
 print("輪廓數量 :", len(contours))
 # print(contours)
 
+# 繪製圖形外輪廓
 cv2.drawContours(image, contours, -1, BLUE, 2)
 
 plt.figure(figsize=(10, 8))
@@ -267,6 +271,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.bmp"
+# filename = "C:/_git/vcs/_4.python/opencv/data/_Hough/FerrisWheel3.jpg"
+# filename = "data/findContours/lake.jpg"
 
 src0 = cv2.imread(filename)  # 彩色讀取
 src = src0.copy()
@@ -274,10 +280,10 @@ src = src0.copy()
 contours, hierarchy = get_image_contours(src)
 
 # 繪製圖形外輪廓
-dst = cv2.drawContours(src, contours, -1, GREEN, 2)  # 繪製圖形外輪廓
+dst = cv2.drawContours(src, contours, -1, GREEN, 2)
 
-# 填滿圖形外輪廓
-# dst = cv2.drawContours(src, contours, -1, GREEN, -1)  # 繪製圖形外輪廓
+# 繪製圖形外輪廓(填滿)
+# dst = cv2.drawContours(src, contours, -1, GREEN, -1)
 
 plt.subplot(211)
 plt.imshow(cv2.cvtColor(src0, cv2.COLOR_BGR2RGB))
@@ -295,36 +301,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/opencv/data/_Hough/FerrisWheel3.jpg"
-# filename = "data/findContours/lake.jpg"
-
-src0 = cv2.imread(filename)  # 彩色讀取
-src = src0.copy()
-
-contours, hierarchy = get_image_contours(src)
-
-# 繪製圖形外輪廓
-dst = cv2.drawContours(src, contours, -1, GREEN, 2)  # 繪製圖形外輪廓
-
-# 填滿圖形外輪廓
-# dst = cv2.drawContours(src, contours, -1, GREEN, -1)  # 繪製圖形外輪廓
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(src0, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-plt.axis("off")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.title("找尋影像內的輪廓")
-plt.axis("off")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_4.python/opencv/data/_Hough/FerrisWheel3.jpg"
 filename = "data/findContours/lake.jpg"
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.bmp"
 
 src0 = cv2.imread(filename)  # 彩色讀取
 src = src0.copy()
@@ -332,7 +310,9 @@ src = src0.copy()
 contours, hierarchy = get_image_contours(src)
 
 mask = np.zeros(src.shape, np.uint8)
-dst = cv2.drawContours(mask, contours, -1, GREEN, -1)  # 繪製圖形外輪廓
+
+# 繪製圖形外輪廓(填滿)
+dst = cv2.drawContours(mask, contours, -1, GREEN, -1)
 
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(src0, cv2.COLOR_BGR2RGB))
@@ -363,7 +343,9 @@ src = src0.copy()
 
 contours, hierarchy = get_image_contours(src)
 
-dst = cv2.drawContours(src, contours, -1, GREEN, 5)  # 繪製圖形外輪廓
+# 繪製圖形外輪廓
+dst = cv2.drawContours(src, contours, -1, GREEN, 5)
+
 print(f"hierarchy 資料類型 : {type(hierarchy)}")
 print(f"列印層級 \n {hierarchy}")
 
@@ -389,7 +371,8 @@ src = src0.copy()
 
 contours, hierarchy = get_image_contours(src)
 
-dst = cv2.drawContours(src, contours, -1, GREEN, 3)  # 繪製圖形外輪廓
+# 繪製圖形外輪廓
+dst = cv2.drawContours(src, contours, -1, GREEN, 3)
 
 print(f"hierarchy 資料類型 : {type(hierarchy)}")
 print(f"列印層級 \n {hierarchy}")
@@ -417,6 +400,7 @@ src = src0.copy()
 contours, hierarchy = get_image_contours(src)
 
 # 一次把全部輪廓都畫完 (參數 -1)
+# 繪製圖形外輪廓
 # dst = cv2.drawContours(src, contours, -1, GREEN, 5)# 繪製圖形外輪廓
 
 # 依序畫每個輪廓
@@ -437,6 +421,7 @@ for i in range(n):  # 依次繪製輪廓
     img = np.ones(src.shape, dtype=np.uint8) * 127
     # 依序畫每個輪廓 (參數 i)
     print("第", i + 1, "個輪廓")
+    # 繪製圖形外輪廓
     dst = cv2.drawContours(dst, contours, i, colors[i], 5)
 
 plt.subplot(221)
@@ -459,7 +444,8 @@ for i in range(n):  # 列印影像矩
     print(f"列印影像矩 {str(i)} \n {M}")
 """
 
-dst = cv2.drawContours(src, contours, -1, GREEN, 5)  # 繪製圖形外輪廓
+# 繪製圖形外輪廓
+dst = cv2.drawContours(src, contours, -1, GREEN, 5)
 
 for c in contours:  # 繪製中心點迴圈
     M = cv2.moments(c)  # 影像矩
@@ -496,7 +482,7 @@ src = src0.copy()
 contours, hierarchy = get_image_contours(src)
 
 # 繪製圖形外輪廓
-dst = cv2.drawContours(src, contours, -1, GREEN, 2)  # 繪製圖形外輪廓
+dst = cv2.drawContours(src, contours, -1, GREEN, 2)
 
 plt.subplot(211)
 plt.imshow(cv2.cvtColor(src0, cv2.COLOR_BGR2RGB))
@@ -665,7 +651,9 @@ print(f"轉換前的矩形頂角 = \n {box}")
 points = cv2.boxPoints(box)  # 獲取頂點座標
 points = np.int0(points)  # 轉為整數
 print(f"轉換後的矩形頂角 = \n {points}")
-dst = cv2.drawContours(src, [points], 0, GREEN, 2)  # 繪製圖形外輪廓
+
+# 繪製圖形外輪廓
+dst = cv2.drawContours(src, [points], 0, GREEN, 2)
 
 plt.subplot(211)
 plt.imshow(cv2.cvtColor(src0, cv2.COLOR_BGR2RGB))
@@ -1088,7 +1076,8 @@ src = src0.copy()
 
 contours, hierarchy = get_image_contours(src)
 
-dst = cv2.drawContours(src, contours, -1, GREEN, 3)  # 繪製圖形外輪廓
+# 繪製圖形外輪廓
+dst = cv2.drawContours(src, contours, -1, GREEN, 3)
 
 cnt = contours[0]  # 取得輪廓數據
 
@@ -1123,7 +1112,8 @@ src = src0.copy()
 
 contours, hierarchy = get_image_contours(src)
 
-dst = cv2.drawContours(src, contours, -1, GREEN, 3)  # 繪製圖形外輪廓
+# 繪製圖形外輪廓
+dst = cv2.drawContours(src, contours, -1, GREEN, 3)
 
 cnt = contours[0]  # 取得輪廓數據
 
@@ -1158,7 +1148,8 @@ src = src0.copy()
 
 contours, hierarchy = get_image_contours(src)
 
-dst = cv2.drawContours(src, contours, -1, GREEN, 3)  # 繪製圖形外輪廓
+# 繪製圖形外輪廓
+dst = cv2.drawContours(src, contours, -1, GREEN, 3)
 
 cnt = contours[0]  # 取得輪廓數據
 
@@ -1217,11 +1208,17 @@ cnt = contours[0]  # 取得輪廓數據
 image_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 mask1 = np.zeros(image_gray.shape, np.uint8)  # 建立畫布
+
+# 繪製圖形外輪廓(填滿)
 dst1 = cv2.drawContours(mask1, [cnt], 0, 255, 1)  # 繪製空心輪廓
+
 points1 = np.transpose(np.nonzero(dst1))
 
 mask2 = np.zeros(image_gray.shape, np.uint8)  # 建立畫布
+
+# 繪製圖形外輪廓(填滿)
 dst2 = cv2.drawContours(mask2, [cnt], 0, 255, -1)  # 繪製實心輪廓
+
 points2 = np.transpose(np.nonzero(dst2))
 
 print(f"空心像素點長度 = {len(points1)},   實心像素點長度 = {len(points2)}")
@@ -1270,10 +1267,16 @@ contours, hierarchy = get_image_contours(src)
 cnt = contours[0]  # 取得輪廓數據
 
 mask1 = np.zeros(image_gray.shape, np.uint8)  # 建立畫布
+
+# 繪製圖形外輪廓(填滿)
 dst1 = cv2.drawContours(mask1, [cnt], 0, 255, 1)  # 繪製空心輪廓
+
 points1 = cv2.findNonZero(dst1)
 mask2 = np.zeros(image_gray.shape, np.uint8)  # 建立畫布
+
+# 繪製圖形外輪廓(填滿)
 dst2 = cv2.drawContours(mask2, [cnt], 0, 255, -1)  # 繪製實心輪廓
+
 points2 = cv2.findNonZero(dst2)
 print(f"空心像素點長度 = {len(points1)},   實心像素點長度 = {len(points2)}")
 print("空心像素點")
@@ -1310,6 +1313,8 @@ cnt = contours[0]  # 取得輪廓數據
 
 # 製作mask
 mask = np.zeros(image_gray.shape, np.uint8)  # 建立遮罩
+
+# 繪製圖形外輪廓(填滿)
 mask = cv2.drawContours(mask, [cnt], -1, WHITE, -1)
 
 plt.subplot(221)
@@ -1330,8 +1335,11 @@ print(f"最大像素值 = {maxVal}")
 print(f"最大像素值座標 = {maxLoc}")
 cv2.circle(src, minLoc, 20, [0, 255, 0], 3)  # 最小像素值用綠色圓
 cv2.circle(src, maxLoc, 20, [0, 0, 255], 3)  # 最大像素值用紅色圓
+
 # 建立遮罩未來可以顯示此感興趣的遮罩區域
 mask1 = np.zeros(src.shape, np.uint8)  # 建立遮罩
+
+# 繪製圖形外輪廓(填滿)
 mask1 = cv2.drawContours(mask1, [cnt], -1, WHITE, -1)
 
 plt.subplot(223)
@@ -1361,8 +1369,11 @@ contours, hierarchy = get_image_contours(src)
 cnt = contours[0]  # 取得輪廓數據
 
 # 在src_gray影像的mask遮罩區域計算均值
+
 # 製作mask
 mask = np.zeros(image_gray.shape, np.uint8)  # 建立遮罩
+
+# 繪製圖形外輪廓(填滿)
 mask = cv2.drawContours(mask, [cnt], -1, WHITE, -1)
 
 channels = cv2.mean(src, mask=mask)  # 計算遮罩的均值
@@ -1385,7 +1396,7 @@ image = image0.copy()
 binaryImg = cv2.Canny(image, 50, 200)
 
 # 尋找輪廓
-contours, h = cv2.findContours(binaryImg, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+contours, hierarchy = cv2.findContours(binaryImg, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 print("資料類型 :", type(contours))
 print("輪廓數量 :", len(contours))
 # print(contours)
@@ -1393,22 +1404,26 @@ print("輪廓數量 :", len(contours))
 # 對這些點集，求每一個點集最小
 # 最小外包凸包
 contoursImg = np.zeros(image.shape, np.uint8)
+
+# 繪製圖形外輪廓
 cv2.drawContours(contoursImg, contours, 7, 255, 3)  # 多點頭尾連線
 
 circle = cv2.minEnclosingCircle(contours[7])
 cv2.circle(contoursImg, (int(circle[0][0]), int(circle[0][1])), int(circle[1]), 255, 2)
 
 convexhull = cv2.convexHull(contours[7])
+
+# 繪製圖形外輪廓
 cv2.drawContours(contoursImg, contours, 7, 255, 3)  # 多點頭尾連線
 
 for i in range(len(contours)):
     # ----- 最小外包圓 -------
     circle = cv2.minEnclosingCircle(contours[i])
     # 畫圓
-    # cv2.circle(image,(int(circle[0][0]),int(circle[0][1])),int(circle[1]),255,2)
+    # cv2.circle(image, (int(circle[0][0]), int(circle[0][1])), int(circle[1]), 255, 2)
     # ---- 最小直立矩形 ----
     x, y, w, h = cv2.boundingRect(contours[i])  # 輸出矩形格式
-    # cv2.rectangle(image,(x,y),(w,h),255,2)
+    # cv2.rectangle(image, (x, y), (w, h), 255, 2)
     # ---- 最小外包的旋轉矩形 -----
     convexhull = cv2.convexHull(contours[i])
 
@@ -1441,7 +1456,7 @@ image = cv2.GaussianBlur(image, (3, 3), 0.5)  # 高斯平滑處理    #執行高
 binaryImg = cv2.Canny(image, 50, 200)
 cvshow("binaryImg", binaryImg)
 
-contours, h = cv2.findContours(binaryImg, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+contours, hierarchy = cv2.findContours(binaryImg, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 print("資料類型 :", type(contours))
 print("輪廓數量 :", len(contours))
 # print(contours)
@@ -1455,6 +1470,7 @@ for i in range(n):
     temp = np.zeros(binaryImg.shape, np.uint8)
     contoursImg.append(temp)
     # 在第 i 個黑色畫布上，畫第 i 個輪廓
+    # 繪製圖形外輪廓
     cv2.drawContours(contoursImg[i], contours, i, 255, 2)  # 多點頭尾連線
     cvshow("contour-" + str(i), contoursImg[i])
 
@@ -1486,6 +1502,7 @@ dst = cv2.morphologyEx(dst, cv2.MORPH_OPEN, s, iterations=2)
 # 第二步：尋找二值圖的輪廓，返回值是一個元組，hc[1] 代表輪廓
 hc = cv2.findContours(dst, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 contours = hc[1]
+print(contours)
 
 print("資料類型 :", type(contours))
 print("輪廓數量 :", len(contours))
@@ -1501,8 +1518,9 @@ print(image.shape)
 contoursImg = np.zeros(image.shape, np.uint8)
 
 # NG
+"""
 for i in range(n):
-    # 畫出輪廓
+    # 繪製圖形外輪廓
     cv2.drawContours(contoursImg, contours, i, 255, 2)  #  多點頭尾連線
     # 畫出輪廓的最小外包圓
     circle = cv2.minEnclosingCircle(contours[i])
@@ -1548,7 +1566,7 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("顯示擬合的多邊形")
 
 show()
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1570,10 +1588,10 @@ img_coin_binary = cv2.morphologyEx(
 
 for approx in ["NONE", "SIMPLE", "TC89_KCOS", "TC89_L1"]:
     approx_flag = getattr(cv2, "CHAIN_APPROX_{}".format(approx))
-    coin_contours, hierarchy = cv2.findContours(
+    contours, hierarchy = cv2.findContours(
         img_coin_binary.copy(), cv2.RETR_EXTERNAL, approx_flag
     )
-    print("{}: {}  ".format(approx, sum(contour.shape[0] for contour in coin_contours)))
+    print("{}: {}  ".format(approx, sum(contour.shape[0] for contour in contours)))
 
 # NONE: 3179   SIMPLE: 1579   TC89_KCOS: 849   TC89_L1: 802
 
@@ -1585,10 +1603,12 @@ def circularity(contour):
     return perimeter * perimeter / (4 * np.pi * con_area)
 
 
-coin_contours = [
-    contour for contour in coin_contours if 0.8 < circularity(contour) < 1.2
+contours = [
+    contour for contour in contours if 0.8 < circularity(contour) < 1.2
 ]
-cv2.drawContours(image, coin_contours, -1, RED)
+
+# 繪製圖形外輪廓(填滿)
+cv2.drawContours(image, contours, -1, RED)
 
 plt.figure(figsize=(10, 8))
 plt.subplot(121)
@@ -1690,10 +1710,10 @@ thresh = 100  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
 
 # 找出圖像中的輪廓
-cnts, hir = cv2.findContours(dst, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+contours, hierarchy = cv2.findContours(dst, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
 # 找出最大的輪廓
-filtered_contours = max(cnts, key=cv2.contourArea)
+filtered_contours = max(contours, key=cv2.contourArea)
 
 # 取得該輪廓的最小包圍矩形及角度
 rect = cv2.minAreaRect(filtered_contours)  # ((center_x, center_y), (w, h), angle)
@@ -1703,6 +1723,7 @@ box = cv2.boxPoints(rect)  # 轉換為4個頂點
 box = np.intp(box)
 
 # 繪製最小包圍矩形
+# 繪製圖形外輪廓
 cv2.drawContours(image, [box], 0, RED, 3)  # 綠色框，線寬為2
 
 # 取得旋轉矩形的中心點和旋轉角度
@@ -1753,6 +1774,7 @@ def draw_boxpoints(points):
 
         # 畫出來, 另法, 用drawContours
         points = np.int0(points)  # 取整數
+        # 繪製圖形外輪廓
         cv2.drawContours(image, [points], 0, GREEN, 3)
 
 

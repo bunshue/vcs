@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace vcs_ImageProcessing5a
+namespace vcs_ImageProcessing5
 {
     public partial class Form1 : Form
     {

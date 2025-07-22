@@ -13,7 +13,7 @@ namespace vcs_ImageProcessing3
         public const int PixelDataSize = 32;
 
         // A reference to the Bitmap.
-        public Bitmap Bitmap;
+        public Bitmap m_Bitmap;
 
         // True when locked.
         private bool m_IsLocked = false;
@@ -28,7 +28,7 @@ namespace vcs_ImageProcessing3
         // Save a reference to the bitmap.
         public Bitmap32(Bitmap bm)
         {
-            Bitmap = bm;
+            m_Bitmap = bm;
         }
 
         // Bitmap data.
@@ -39,14 +39,14 @@ namespace vcs_ImageProcessing3
         {
             get
             {
-                return Bitmap.Width;
+                return m_Bitmap.Width;
             }
         }
         public int Height
         {
             get
             {
-                return Bitmap.Height;
+                return m_Bitmap.Height;
             }
         }
 
@@ -116,8 +116,8 @@ namespace vcs_ImageProcessing3
 
             // Lock the bitmap data.
             Rectangle bounds = new Rectangle(
-                0, 0, Bitmap.Width, Bitmap.Height);
-            m_BitmapData = Bitmap.LockBits(bounds,
+                0, 0, m_Bitmap.Width, m_Bitmap.Height);
+            m_BitmapData = m_Bitmap.LockBits(bounds,
                 ImageLockMode.ReadWrite,
                 PixelFormat.Format32bppArgb);
             RowSizeBytes = m_BitmapData.Stride;
@@ -145,7 +145,7 @@ namespace vcs_ImageProcessing3
             Marshal.Copy(ImageBytes, 0, m_BitmapData.Scan0, total_size);
 
             // Unlock the bitmap.
-            Bitmap.UnlockBits(m_BitmapData);
+            m_Bitmap.UnlockBits(m_BitmapData);
 
             // Release resources.
             ImageBytes = null;
@@ -337,7 +337,7 @@ namespace vcs_ImageProcessing3
             Bitmap32 result = (Bitmap32)this.MemberwiseClone();
 
             // Copy the Bitmap.
-            result.Bitmap = new Bitmap(this.Bitmap.Width, this.Bitmap.Height);
+            result.m_Bitmap = new Bitmap(this.m_Bitmap.Width, this.m_Bitmap.Height);
             result.m_IsLocked = false;
 
             // Unlock if appropriate.
@@ -547,9 +547,9 @@ namespace vcs_ImageProcessing3
             int xoffset = -(int)(filter.Kernel.GetUpperBound(1) / 2);
             int yoffset = -(int)(filter.Kernel.GetUpperBound(0) / 2);
             int xmin = -xoffset;
-            int xmax = Bitmap.Width - filter.Kernel.GetUpperBound(1);
+            int xmax = m_Bitmap.Width - filter.Kernel.GetUpperBound(1);
             int ymin = -yoffset;
-            int ymax = Bitmap.Height - filter.Kernel.GetUpperBound(0);
+            int ymax = m_Bitmap.Height - filter.Kernel.GetUpperBound(0);
             int row_max = filter.Kernel.GetUpperBound(0);
             int col_max = filter.Kernel.GetUpperBound(1);
 

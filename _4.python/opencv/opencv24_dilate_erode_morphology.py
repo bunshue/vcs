@@ -40,7 +40,7 @@ plt.title("原圖 10X10")
 W, H = 1, 3
 kernel = np.ones((H, W), np.uint8)  # 建立WXH內核
 dilation = cv2.dilate(image, kernel)  # 膨脹
-erosion = cv2.erode(image, kernel)  # 侵蝕
+erosion = cv2.erode(image, kernel)  # 侵蝕.erode
 
 plt.subplot(132)
 plt.imshow(cv2.cvtColor(dilation, cv2.COLOR_BGR2RGB))
@@ -236,37 +236,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
-
-image = cv2.imread(filename)  # 彩色讀取
-# image = cv2.imread("data/morphology/night.jpg")  # 彩色讀取
-
-kernel = np.ones((9, 9), np.uint8)  # 建立9x9內核
-
-dilation = cv2.dilate(image, kernel)  # 膨脹.dilate
-
-erosion = cv2.erode(image, kernel)  # 侵蝕.erode
-
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(dilation, cv2.COLOR_BGR2RGB))
-plt.title("膨脹")
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(erosion, cv2.COLOR_BGR2RGB))
-plt.title("侵蝕")
-
-plt.suptitle("核心9X9")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 image = cv2.imread("data/morphology/k.jpg")  # 彩色讀取
 
 kernel = np.ones((5, 5), np.uint8)  # 建立5x5內核
@@ -394,7 +363,7 @@ kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))  # 建立內核
 
 dilation = cv2.dilate(image, kernel)
 
-erosion = cv2.erode(image, kernel)
+erosion = cv2.erode(image, kernel)  # 侵蝕.erode
 
 # 將兩幅圖像相減獲得邊；cv2.absdiff參數：(膨脹后的圖像，腐蝕后的圖像)
 # 上面得到的結果是灰度圖，將其二值化以便觀察結果
@@ -418,8 +387,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("morphology 形態學")
 
-# image = cv2.imread("data/lena.png")  # 彩色讀取
-
+image = cv2.imread("data/lena.png")  # 彩色讀取
 image = cv2.imread("data/lena.png", 0)  # 灰階讀取
 
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))  # 定義矩形結構元素  # 建立內核
@@ -509,6 +477,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/threshold/brain.jpg"
+
 gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 print("做 OTSU 二值化, Otsu : 找出最佳的閾值")
@@ -519,7 +488,8 @@ ret, dst = cv2.threshold(
 # ret 是 Ostu方法計算的閾值, dst是回傳的影像
 print("Otsu : 找出最佳的閾值 :", ret)
 
-kernel = np.ones((3, 3), np.uint8)
+kernel = np.ones((3, 3), np.uint8)  # 建立3X3內核
+
 opening = cv2.morphologyEx(dst, cv2.MORPH_OPEN, kernel, iterations=2)
 
 # sure background area
@@ -736,13 +706,11 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/opening.bmp"
+filename1 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/opening.bmp"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/opening2.bmp"
 
-img1 = cv2.imread(filename)  # 彩色讀取
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/opening2.bmp"
-
-img2 = cv2.imread(filename)  # 彩色讀取
+img1 = cv2.imread(filename1)  # 彩色讀取
+img2 = cv2.imread(filename2)  # 彩色讀取
 
 print("morphologyEx 效果 1")
 k = np.ones((10, 10), np.uint8)
@@ -771,13 +739,11 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/closing.bmp"
+filename1 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/closing.bmp"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/closing2.bmp"
 
-img1 = cv2.imread(filename)  # 彩色讀取
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/closing2.bmp"
-
-img2 = cv2.imread(filename)  # 彩色讀取
+img1 = cv2.imread(filename1)  # 彩色讀取
+img2 = cv2.imread(filename2)  # 彩色讀取
 
 print("morphologyEx 效果 2")
 k = np.ones((10, 10), np.uint8)
@@ -1016,10 +982,9 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology//dilate_erode1.png"
-
 print("形態學處理 erode")
 
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
 image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 # 創建結構元
@@ -1079,7 +1044,6 @@ print("------------------------------------------------------------")  # 60個
 print("形態學處理 open")
 
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology//dilate_erode1.png"
-
 image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 # 創建結構元
@@ -1109,8 +1073,6 @@ print("形態學處理 mor")
 print("按 ESC 離開")
 
 image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
-
-# 顯示原圖
 cv2.imshow("Image Gray", image_gray)
 
 # 結構元半徑，迭代次數
@@ -1325,6 +1287,7 @@ ret, thresh = cv2.threshold(image_gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRE
 
 # 執行開運算 Opening
 kernel = np.ones((3, 3), np.uint8)  # 建立3x3內核
+
 opening = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
 
 # 獲得距離轉換函數結果
@@ -1618,14 +1581,19 @@ print("準備使用Trackbar")
 
 
 def do_trackbar_event1(val):
-    print("數值 :", val, end=" ")
+    # print("數值 :", val, end=" ")
+    kernel = np.ones((val, val), np.uint8)  # 建立WXH內核
+    dilation = cv2.dilate(image, kernel)  # 膨脹.dilate
+    erosion = cv2.erode(image, kernel)  # 侵蝕.erode
+    cv2.imshow("OpenCV", dilation)
 
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
 
-image = cv2.imread(filename2)
+image = cv2.imread(filename)  # 彩色讀取
 cv2.imshow("OpenCV", image)
 
 cv2.createTrackbar("Threshold ", "OpenCV", 0, 100, do_trackbar_event1)
-cv2.setTrackbarPos("Threshold ", "OpenCV", 50)  # 設定預設值
+cv2.setTrackbarPos("Threshold ", "OpenCV", 0)  # 設定預設值
 
 # 取得Trackbar數值
 value = cv2.getTrackbarPos("Threshold ", "OpenCV")
@@ -1662,3 +1630,4 @@ print("------------------------------------------------------------")  # 60個
 res = cv2.resize(
     image, None, fx=0.6, fy=0.6, interpolation=cv2.INTER_CUBIC
 )  # 圖形太大了縮小一點
+

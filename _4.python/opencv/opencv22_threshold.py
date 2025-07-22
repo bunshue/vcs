@@ -140,6 +140,32 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+image1 = cv2.imread(filename2)  # 彩色讀取
+
+image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
+
+# image2 = cv2.cvtColor(image1, 6)  # 也可以用數字對照 6 表示轉換成灰階
+# 套用 medianBlur() 中值模糊
+image3 = cv2.medianBlur(image2, 7)  # 模糊化，去除雜訊 7, 25 彩色黑白皆可
+
+# 套用自適應二值化黑白影像
+image5 = cv2.adaptiveThreshold(
+    image3, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
+)
+
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(image5, cv2.COLOR_BGR2RGB))
+plt.title("自適應二值化黑白影像")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 src = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0

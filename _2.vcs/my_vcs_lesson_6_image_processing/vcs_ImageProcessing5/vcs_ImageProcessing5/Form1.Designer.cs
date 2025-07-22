@@ -1,4 +1,4 @@
-﻿namespace vcs_ImageProcessing5a
+﻿namespace vcs_ImageProcessing5
 {
     partial class Form1
     {
@@ -364,7 +364,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox2);
             this.Name = "Form1";
-            this.Text = "vcs_ImageProcessing5a";
+            this.Text = "vcs_ImageProcessing5";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
