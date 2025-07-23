@@ -121,7 +121,7 @@
             this.button5.Size = new System.Drawing.Size(130, 60);
             this.button5.TabIndex = 6;
             this.button5.Text = "MemoryStream";
-            this.button5.UseVisualStyleBackColor = false;
+            this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
@@ -253,7 +253,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(130, 60);
             this.button16.TabIndex = 19;
-            this.button16.UseVisualStyleBackColor = false;
+            this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // button17

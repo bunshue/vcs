@@ -27,36 +27,6 @@ print("------------------------------------------------------------")  # 60個
 # 膨脹/侵蝕 cv2.dilate/cv2.erode ST
 print("------------------------------------------------------------")  # 60個
 
-print("膨脹/侵蝕")
-
-W, H = 10, 10
-image = np.zeros((H, W), np.uint8)
-image[3:8, 3:8] = 255
-
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖 10X10")
-
-W, H = 1, 3
-kernel = np.ones((H, W), np.uint8)  # 建立WXH內核
-dilation = cv2.dilate(image, kernel)  # 膨脹
-erosion = cv2.erode(image, kernel)  # 侵蝕.erode
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(dilation, cv2.COLOR_BGR2RGB))
-plt.title("膨脹")
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(erosion, cv2.COLOR_BGR2RGB))
-plt.title("侵蝕")
-
-plt.suptitle("核心1X3")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 image = np.zeros((7, 7), np.uint8)
 image[2:5, 2:5] = 1  # 建立前景影像
 kernel = np.ones((3, 3), np.uint8)  # 建立3X3內核
@@ -343,14 +313,13 @@ _, RedThresh = cv2.threshold(image_gray, 160, 255, cv2.THRESH_BINARY)
 # OpenCV定義的結構矩形元素
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))  # 建立內核
 
-dilation = cv2.dilate(RedThresh, kernel)  # 膨脹圖像
+dilation = cv2.dilate(RedThresh, kernel)  # 膨脹.dilate
 
-erosion = cv2.erode(RedThresh, kernel)  # 腐蝕圖像
-
+erosion = cv2.erode(RedThresh, kernel)  # 侵蝕.erode
 
 # NumPy定義的結構元素
 NpKernel = np.uint8(np.ones((3, 3)))  # 建立3X3內核
-Nperoded = cv2.erode(RedThresh, NpKernel)  # 腐蝕圖像
+Nperoded = cv2.erode(RedThresh, NpKernel)  # 侵蝕.erode
 # cv2.imshow("Eroded by NumPy kernel", Nperoded)  # 顯示腐蝕后的圖像
 
 
@@ -361,8 +330,7 @@ image = cv2.imread("data/jianzhu.png", cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))  # 建立內核
 
-dilation = cv2.dilate(image, kernel)
-
+dilation = cv2.dilate(image, kernel)  # 膨脹.dilate
 erosion = cv2.erode(image, kernel)  # 侵蝕.erode
 
 # 將兩幅圖像相減獲得邊；cv2.absdiff參數：(膨脹后的圖像，腐蝕后的圖像)
@@ -990,8 +958,7 @@ image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 # 創建結構元
 s = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
 
-# 腐蝕圖像
-erosion = cv2.erode(image_gray, s)
+erosion = cv2.erode(image_gray, s)  # 侵蝕.erode
 
 # 顯示原圖和腐蝕後的結果
 cv2.imshow("Image Gray", image_gray)
@@ -1574,6 +1541,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1582,9 +1550,11 @@ print("準備使用Trackbar")
 
 def do_trackbar_event1(val):
     # print("數值 :", val, end=" ")
-    kernel = np.ones((val, val), np.uint8)  # 建立WXH內核
+    H, W = val, val
+    kernel = np.ones((H, W), np.uint8)  # 建立WXH內核
     dilation = cv2.dilate(image, kernel)  # 膨脹.dilate
     erosion = cv2.erode(image, kernel)  # 侵蝕.erode
+    draw_line(dilation)  # 畫輔助線
     cv2.imshow("OpenCV", dilation)
 
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"

@@ -1,3 +1,11 @@
+/*
+
+//圖片檔案 => Image => MemoryStream(ms) => 拜列
+//拜列 => MemoryStream(ms) => Image => 圖片檔案
+// bmp/png 資料長度 4*W*H + 檔頭54拜
+// jpg     資料長度 3*W*H + 檔頭54拜
+
+*/
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -346,8 +354,12 @@ namespace vcs_MemoryStream
 
             MemoryStream ms = new MemoryStream(bytes3);
             ms.Position = 0;
+
+            //MemoryStream轉Image
             Image img = Image.FromStream(ms);
+
             ms.Close();
+
             pictureBox1.Image = img;
         }
 
@@ -366,10 +378,8 @@ namespace vcs_MemoryStream
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //圖片檔案 => Image => MemoryStream(ms) => 拜列
-            //拜列 => MemoryStream(ms) => Image => 圖片檔案
-
             string filename = @"C:\_git\vcs\_1.data\______test_files1\pic_256X10.bmp";
+
             Image image = Image.FromFile(filename);
             MemoryStream ms = new MemoryStream();
             image.Save(ms, ImageFormat.Bmp);
@@ -377,26 +387,50 @@ namespace vcs_MemoryStream
             var cc = ms.ToArray();
             richTextBox1.Text += "len = " + cc.Length.ToString() + "\n";
 
+            /*
+            //全部資料以HEX表示出來
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in ms.ToArray())
+            {
+                sb.AppendFormat("{0:X2}", b);
+            }
+            string all_data = sb.ToString();
+            richTextBox1.Text += all_data + "\n";
+            */
+
+            // bmp/png 資料長度 4*256*10 + 檔頭54 = 10294 拜
+            // jpg     資料長度 3*256*10 + 檔頭54 =  7734 拜
 
             //建立 byte[] Array 一維陣列
             byte[] byte_data = ms.GetBuffer();
             richTextBox1.Text += "len = " + byte_data.Length.ToString() + "\n";
 
-            //對 byte_data 做處理
-
+            //對 byte_data 做處理, 反相
+            int i;
+            for (i = 54; i < byte_data.Length; i++)
+            {
+                if ((i % 4) == 2)//B
+                    byte_data[i] = (byte)(255 - byte_data[i]);
+                else if ((i % 4) == 3)//G
+                    byte_data[i] = (byte)(255 - byte_data[i]);
+                else if ((i % 4) == 0)//R
+                    byte_data[i] = (byte)(255 - byte_data[i]);
+            }
 
             MemoryStream ms2 = new MemoryStream();
             ms2.Write(byte_data, 0, byte_data.Length);
 
+            //MemoryStream轉Image
             Image image2 = Image.FromStream(ms2);
+
             pictureBox1.Image = image2;
 
             image2.Save("tmp_test.bmp");
-
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -452,3 +486,86 @@ namespace vcs_MemoryStream
         }
     }
 }
+
+
+
+/*
+    
+
+                            Bitmap bm = BytesToImage((byte[])reader.GetValue(6));
+
+
+        // Convert a byte array into an image.
+        private Bitmap BytesToImage(byte[] bytes)
+        {
+            using (MemoryStream image_stream = new MemoryStream(bytes))
+            {
+                Bitmap bm = new Bitmap(image_stream);
+                return bm;
+            }
+        }
+
+
+                MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
+                return Image.FromStream(image_stream);
+
+
+            string imgURL = @"https://www.google.com.tw/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png";
+            MemoryStream ms = GetResponse(imgURL, cookie);
+            File.WriteAllBytes("aaaaaaa.jpg", ms.ToArray());
+
+
+            string imgURL = domain + imgBaseURL + fileName[0] + "?.&uf=ssr&zoom=2";
+            MemoryStream ms = GetResponse(imgURL, cookie);
+            File.WriteAllBytes(string.Format(@"Download\{0}.jpg", fileName[1]), ms.ToArray());
+
+
+            Image image = barcode.Encode(TYPE.CODE128B, Code);
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, ImageFormat.Jpeg);
+
+                image.Save("lion.jpg", ImageFormat.Jpeg);
+
+                pictureBox4.Image = image;
+
+                //Response.ClearContent();
+                //Response.ContentType = "image/png";
+                //Response.BinaryWrite(ms.ToArray());
+            }
+
+
+            Image img = barcode.Encode(TYPE.CODE128B, Code);
+            using (MemoryStream ms = new MemoryStream())
+            {
+                img.Save(ms, ImageFormat.Jpeg);
+                img.Save("lion.jpg", ImageFormat.Jpeg);
+                //Response.ClearContent();
+                //Response.ContentType = "image/png";
+                //Response.BinaryWrite(ms.ToArray());
+            }
+
+
+            Bitmap bitmap = null;
+            //宣告 QRCode Reader 物件
+            ZXing.IBarcodeReader reader = new ZXing.BarcodeReader();
+
+            //讀取要解碼的圖片
+            FileStream fs = new FileStream(filename, FileMode.Open);
+            Byte[] data = new Byte[fs.Length];
+            // 把檔案讀取到位元組陣列
+            fs.Read(data, 0, data.Length);
+            fs.Close();
+
+            // 實例化一個記憶體資料流 MemoryStream，將位元組陣列放入
+            MemoryStream ms = new MemoryStream(data);
+            // 將記憶體資料流的資料放到 BitMap的物件中
+            bitmap = (Bitmap)Image.FromStream(ms);
+
+            //pictureBox2.Image = bitmap;       //將圖片顯示於 PictureBox 中
+
+
+
+
+
+*/

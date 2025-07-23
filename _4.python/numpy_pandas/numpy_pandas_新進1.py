@@ -33,10 +33,10 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-
 def show():
+    # pass
+    plt.tight_layout()  # 緊密排列，並填滿原圖大小
     plt.show()
-    pass
 
 
 print("------------------------------------------------------------")  # 60個

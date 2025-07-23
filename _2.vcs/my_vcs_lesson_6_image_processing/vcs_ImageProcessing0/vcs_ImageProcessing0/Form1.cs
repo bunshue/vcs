@@ -213,17 +213,17 @@ namespace vcs_ImageProcessing0
             byte r = 0;
             byte g = 0;
             byte b = 0;
-            int gray = 0;
+            byte gray = 0;
             for (int x = 0; x < W; x++)
             {
                 for (int y = 0; y < H; y++)
                 {
-                    pixel = bmp.GetPixel(x, y);
+                    pixel = bmp.GetPixel(x, y);//提取像素值
                     r = pixel.R;
                     g = pixel.G;
                     b = pixel.B;
-                    gray = (int)(r * 0.299 + g * 0.587 + b * 0.114);
-                    bmp.SetPixel(x, y, Color.FromArgb(gray, gray, gray));
+                    gray = (byte)(r * 0.299 + g * 0.587 + b * 0.114);
+                    bmp.SetPixel(x, y, Color.FromArgb(gray, gray, gray));//設定像素值
                 }
             }
             return bmp;

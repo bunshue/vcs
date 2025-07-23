@@ -930,30 +930,49 @@ namespace vcs_test_all_02_String
         {
             //StringBuilder語法1
 
-            richTextBox1.Text += "StringBuilder test\n";
             StringBuilder sb1 = new StringBuilder();
-            sb1.Append("\r\n\r\n\r\n");
-            sb1.Append("*******興隆超市*******\n");
-            sb1.Append("品名-----數量-----價格\n");
-            sb1.Append("精品白沙   1       8元\n");
-            sb1.Append("張新發檳榔 1      10元\n");
-            sb1.Append("合計：     2      18元\n");
-            sb1.Append("---收銀員：張三---\n");
-            sb1.Append("---技術支持：李四---\n\n\n");
+            sb1.Append("字串111\n");
+            sb1.Append("字串222\n");
+            sb1.Append("字串333\n");
+            sb1.Append("字串444\n");
 
-            richTextBox1.Text += sb1.ToString() + "\n";
+            richTextBox1.Text += "取得字串 : " + sb1.ToString() + "\n";
 
             //StringBuilder 就是 字符串相加
-            //StringBuilder("")
-            //字元串相加，（+號是不是也一樣？）
-            StringBuilder sb2 = new StringBuilder("這裏是 : ");
-            sb2.Append("群曜");
-            sb2.Append("醫電");
-            sb2.Append("股份");
-            sb2.Append("有限");
-            sb2.Append("公司");
+            StringBuilder sb2 = new StringBuilder("字串111");
+            sb2.Append("字串222");
+            sb2.Append("字串333");
+            sb2.Append("字串444");
 
             richTextBox1.Text += "取得字串 : " + sb2 + "\n";
+
+            //StringBuilder語法3
+            richTextBox1.Text += "aaa\n";
+
+            StringBuilder sb3 = new StringBuilder();
+            for (int i = 128; i < 128 + 20; i++)
+            {
+                sb3.Append(i.ToString("X2"));
+            }
+
+            string result = sb3.ToString();
+            richTextBox1.Text += result + "\n";
+
+            richTextBox1.Text += "bbb\n";
+
+            StringBuilder sb4 = new StringBuilder();
+            for (int i = 128; i < 128 + 20; i++)
+            {
+                sb4.AppendFormat("{0:X2}", i);
+            }
+            //foreach (byte b in ms.ToArray())
+            {
+                //sb.AppendFormat("{0:X2}", b);
+            }
+            string all_data = sb4.ToString();
+            richTextBox1.Text += all_data + "\n";
+
+            richTextBox1.Text += "ccc\n";
         }
 
         private void button33_Click(object sender, EventArgs e)
@@ -996,7 +1015,6 @@ namespace vcs_test_all_02_String
 
             richTextBox1.Text += "變更後字串：" + text + "\n";
 
-
             //Remove()方法, 只移除一次
             string dddd = "EFG";    //欲移除字串
             //取得欲刪除字串的索引編號
@@ -1008,16 +1026,6 @@ namespace vcs_test_all_02_String
 
         private void button34_Click(object sender, EventArgs e)
         {
-            //StringBuilder語法3
-
-            StringBuilder hashCode = new StringBuilder();
-            for (int i = 128; i < 128+20; i++)
-            {
-                hashCode.Append(i.ToString("X2"));
-            }
-
-            string result = hashCode.ToString();
-            richTextBox1.Text += result + "\n";
         }
 
         private void button35_Click(object sender, EventArgs e)
@@ -1124,14 +1132,10 @@ namespace vcs_test_all_02_String
             Console.WriteLine(@"C:\Windows\system32");//第一種輸出格式就是在前面加@
             Console.WriteLine("C:\\Windows\\system32");//第二種輸出格式就是將"\"改成"\\"
             Console.ReadLine();
-
-
         }
-
 
         private void button37_Click(object sender, EventArgs e)
         {
-
             //格式化字符串，向長度小於30的字符串末尾添加特定字符，補足n個字符，使用String類的PadRight(int,char)方法：
             String str = "1234";
             str = str.PadRight(30, ' '); //向長度小於30的字符串末尾添加空格，補足30個字符
