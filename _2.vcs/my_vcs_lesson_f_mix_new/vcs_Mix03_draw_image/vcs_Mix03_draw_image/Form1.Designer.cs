@@ -93,7 +93,6 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(170, 70);
             this.button27.TabIndex = 114;
-            this.button27.Text = "格式轉換";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -137,7 +136,6 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(170, 70);
             this.button23.TabIndex = 110;
-            this.button23.Text = "圖片 拜列 MemoryStream Bitmap轉換";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 

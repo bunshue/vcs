@@ -2150,10 +2150,6 @@ namespace vcs_Mix03_draw_image
             }
         }
 
-
-
-
-
         //圖片壓縮、縮略圖生成代碼
 
         #region imageCompress
@@ -2199,36 +2195,6 @@ namespace vcs_Mix03_draw_image
         private void button23_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //圖片 拜列 MemoryStream Bitmap轉換
-
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            richTextBox1.Text += "圖檔 轉 Bitmap\n";
-            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-
-            richTextBox1.Text += "Bitmap 轉 MemoryStream\n";
-            MemoryStream ms = new MemoryStream();
-            bitmap1.Save(ms, ImageFormat.Jpeg);
-
-            richTextBox1.Text += "MemoryStream 轉 拜列\n";
-            byte[] pic_array1 = ms.ToArray();
-
-
-            richTextBox1.Text += "建立空白 Bitmap\n";
-            bitmap1 = new Bitmap(100, 100);
-
-            richTextBox1.Text += "對此Bitmap畫圖\n";
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-
-            ms = new MemoryStream();
-            bitmap1.Save(ms, ImageFormat.Bmp);
-            byte[] pic_array2 = ms.ToArray();
-
-            richTextBox1.Text += "len = " + pic_array2.Length.ToString() + "\n";
-
-
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -2307,85 +2273,20 @@ namespace vcs_Mix03_draw_image
             string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
             string[] filenames = Directory.GetFiles(foldername, "*.jpg");
 
-
             foreach (string filename in filenames)
             {
                 richTextBox1.Text += "取得檔案 : " + filename + "\n";
-
-
             }
-
-
-
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //格式轉換
-            //Stream 和 byte[] 之間的轉換
-
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-
-            // 打開文件
-            FileStream fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
-
-            // 讀取文件的 byte[]
-            byte[] bytes1 = new byte[fileStream.Length];
-            fileStream.Read(bytes1, 0, bytes1.Length);
-            fileStream.Close();
-
-            // 把 byte[] 轉換成 Stream
-            Stream stream = new MemoryStream(bytes1);
-
-
-
-            // 將 Stream 轉成 byte[]
-            byte[] bytes2 = new byte[stream.Length];
-            stream.Read(bytes2, 0, bytes2.Length);
-            // 設置當前流的位置為流的開始
-            stream.Seek(0, SeekOrigin.Begin);
-
-            // 將 byte[] 轉成 Stream
-            Stream stream2 = new MemoryStream(bytes2);
-
-
-            //將 Stream 寫入文件
-            // 把 Stream 轉換成 byte[]
-            byte[] bytes3 = new byte[stream.Length];
-            stream.Read(bytes3, 0, bytes3.Length);
-            // 設置當前流的位置為流的開始
-            stream.Seek(0, SeekOrigin.Begin);
-
-            // 把 byte[] 寫入文件
-            FileStream fs = new FileStream("aaaaaa.jpg", FileMode.Create);
-            BinaryWriter bw = new BinaryWriter(fs);
-            bw.Write(bytes3);
-            bw.Close();
-            fs.Close();
-
-
-            //二進制轉換成圖片
-
-            MemoryStream ms = new MemoryStream(bytes3);
-            ms.Position = 0;
-            Image img = Image.FromStream(ms);
-            ms.Close();
-            pictureBox1.Image = img;
-
-
-
-
-
         }
-
 
         private void button28_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
         }
 
         private void button29_Click(object sender, EventArgs e)

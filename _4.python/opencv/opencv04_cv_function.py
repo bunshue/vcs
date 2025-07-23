@@ -1572,29 +1572,36 @@ print("------------------------------------------------------------")  # 60個
 
 image = np.random.randint(-256, 256, size=[3, 5], dtype=np.int16)
 print(f"image = \n {image}")
-dst = cv2.convertScaleAbs(image)
-print(f"dst = \n {dst}")
+
+print('取絕對值')
+dst1 = cv2.convertScaleAbs(image)
+print(f"dst1 = \n {dst1}")
+
+print('取限制100~200')
+dst2 = np.clip(image, 100, 200)
+print(f"dst2 = \n {dst2}")
 
 print("------------------------------------------------------------")  # 60個
-# cv2.remap() ST
+# cv2.remap() 重映射 ST
+# 重映射，即把一幅图像内的像素点放置到另外一幅图像内的指定位置
 print("------------------------------------------------------------")  # 60個
 
-a = np.random.randint(0, 256, (3, 5), dtype="uint8")
+image1 = np.random.randint(0, 256, (3, 5), dtype="uint8")
 
-# a[3, 2]的值 對應到整個陣列
-mapx = np.ones(a.shape, dtype=np.float32) * 3
+# image1[3, 2]的值 對應到整個陣列
+mapx = np.ones(image1.shape, dtype=np.float32) * 3
+mapy = np.ones(image1.shape, dtype=np.float32) * 2
 
-mapy = np.ones(a.shape, dtype=np.float32) * 2
+image2 = cv2.remap(image1, mapx, mapy, interpolation=cv2.INTER_LINEAR)
 
-b = cv2.remap(a, mapx, mapy, interpolation=cv2.INTER_LINEAR)
-
-print(a)
+print(image1)
 print(mapx)
 print(mapy)
-print(b)
+print(image2)
 
 w, h = 10, 5
 mapy, mapx = np.mgrid[0 : h * 3 : 3, 0 : w * 2 : 2]
+
 print(mapx.shape)
 print(mapy.shape)
 print(mapx)
@@ -1847,7 +1854,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-# cv2.remap() SP
+# cv2.remap() 重映射 SP
 print("------------------------------------------------------------")  # 60個
 
 
