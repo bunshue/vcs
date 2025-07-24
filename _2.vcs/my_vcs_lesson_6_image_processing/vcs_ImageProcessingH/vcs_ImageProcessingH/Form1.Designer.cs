@@ -55,6 +55,11 @@
             this.picOriginal = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.trackBar_gamma1 = new System.Windows.Forms.TrackBar();
+            this.trackBar_gamma2 = new System.Windows.Forms.TrackBar();
+            this.trackBar_brightness = new System.Windows.Forms.TrackBar();
+            this.trackBar_threshold = new System.Windows.Forms.TrackBar();
+            this.trackBar_binary = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -65,6 +70,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.picToned)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picOriginal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_gamma1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_gamma2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_brightness)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_threshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_binary)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -305,11 +315,61 @@
             this.label9.TabIndex = 23;
             this.label9.Text = "label9";
             // 
+            // trackBar_gamma1
+            // 
+            this.trackBar_gamma1.Location = new System.Drawing.Point(673, 300);
+            this.trackBar_gamma1.Maximum = 255;
+            this.trackBar_gamma1.Name = "trackBar_gamma1";
+            this.trackBar_gamma1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.trackBar_gamma1.Size = new System.Drawing.Size(300, 45);
+            this.trackBar_gamma1.TabIndex = 24;
+            // 
+            // trackBar_gamma2
+            // 
+            this.trackBar_gamma2.Location = new System.Drawing.Point(673, 341);
+            this.trackBar_gamma2.Maximum = 255;
+            this.trackBar_gamma2.Name = "trackBar_gamma2";
+            this.trackBar_gamma2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.trackBar_gamma2.Size = new System.Drawing.Size(300, 45);
+            this.trackBar_gamma2.TabIndex = 25;
+            // 
+            // trackBar_brightness
+            // 
+            this.trackBar_brightness.Location = new System.Drawing.Point(673, 381);
+            this.trackBar_brightness.Maximum = 255;
+            this.trackBar_brightness.Name = "trackBar_brightness";
+            this.trackBar_brightness.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.trackBar_brightness.Size = new System.Drawing.Size(300, 45);
+            this.trackBar_brightness.TabIndex = 26;
+            // 
+            // trackBar_threshold
+            // 
+            this.trackBar_threshold.Location = new System.Drawing.Point(673, 421);
+            this.trackBar_threshold.Maximum = 255;
+            this.trackBar_threshold.Name = "trackBar_threshold";
+            this.trackBar_threshold.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.trackBar_threshold.Size = new System.Drawing.Size(300, 45);
+            this.trackBar_threshold.TabIndex = 27;
+            // 
+            // trackBar_binary
+            // 
+            this.trackBar_binary.Location = new System.Drawing.Point(673, 462);
+            this.trackBar_binary.Maximum = 255;
+            this.trackBar_binary.Name = "trackBar_binary";
+            this.trackBar_binary.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.trackBar_binary.Size = new System.Drawing.Size(300, 45);
+            this.trackBar_binary.TabIndex = 28;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1190, 847);
+            this.Controls.Add(this.trackBar_binary);
+            this.Controls.Add(this.trackBar_threshold);
+            this.Controls.Add(this.trackBar_brightness);
+            this.Controls.Add(this.trackBar_gamma2);
+            this.Controls.Add(this.trackBar_gamma1);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.groupBox1);
@@ -337,6 +397,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.picToned)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picOriginal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_gamma1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_gamma2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_brightness)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_threshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_binary)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -369,6 +434,11 @@
         private System.Windows.Forms.PictureBox picOriginal;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TrackBar trackBar_gamma1;
+        private System.Windows.Forms.TrackBar trackBar_gamma2;
+        private System.Windows.Forms.TrackBar trackBar_brightness;
+        private System.Windows.Forms.TrackBar trackBar_threshold;
+        private System.Windows.Forms.TrackBar trackBar_binary;
     }
 }
 

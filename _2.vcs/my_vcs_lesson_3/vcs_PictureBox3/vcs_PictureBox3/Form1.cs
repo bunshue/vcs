@@ -58,10 +58,9 @@ namespace vcs_PictureBox3
         {
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 
-
             //1. 載入圖檔，由資源檔
             pictureBox1.Image = Resource1.bear;
-            
+
             //2. picturebox載入一圖
             //pictureBox1.Image = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\picture1.jpg"); //載入圖檔，由檔案
 
@@ -89,24 +88,5 @@ namespace vcs_PictureBox3
             pictureBox1.Height -= 10;
             pictureBox1.Width -= 10;
         }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Location = new Point(pictureBox1.Location.X + 5, pictureBox1.Location.Y + 5);
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Location = new Point(pictureBox1.Location.X - 5, pictureBox1.Location.Y - 5);
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            //把pictureBox移到(60, 100)位置
-            int xx = 60;
-            int yy = 100;
-            pictureBox1.Location = new Point(xx, yy);
-        }
-
     }
 }

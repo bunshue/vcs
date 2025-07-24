@@ -41,53 +41,43 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 
-import tempfile
 import os.path
 
-tmpdir = tempfile.gettempdir()
-print(tmpdir)
+salary = pd.read_csv("data/salary_table.csv")
+print(salary.head())
 
-csv_filename = os.path.join(tmpdir, "users.csv")
+xls_filename = "tmp_salary_table.xlsx"
+salary.to_excel(xls_filename, sheet_name="users", index=False)
 
-print(csv_filename)
-
-# 讀取網頁上的csv檔
-url = "https://github.com/duchesnay/pystatsml/raw/master/datasets/salary_table.csv"
-salary = pd.read_csv(url)
-
-""" no df users
-xls_filename = os.path.join(tmpdir, "users.xlsx")
-users.to_excel(xls_filename, sheet_name='users', index=False)
-
-pd.read_excel(xls_filename, sheet_name='users')
+# 讀取
+df = pd.read_excel(xls_filename, sheet_name="users")  # 讀取頁面 users
+print(df)
 
 # Multiple sheets
 with pd.ExcelWriter(xls_filename) as writer:
-    users.to_excel(writer, sheet_name='users', index=False)
-    df.to_excel(writer, sheet_name='salary', index=False)
+    salary.to_excel(writer, sheet_name="users", index=False)  # 寫入頁面 users
+    salary.to_excel(writer, sheet_name="salary", index=False)  # 寫入頁面 salary
 
-pd.read_excel(xls_filename, sheet_name='users')
-pd.read_excel(xls_filename, sheet_name='salary')
-"""
+df1 = pd.read_excel(xls_filename, sheet_name="users")  # 讀取頁面 users
+print(df1)
 
-##############################################################################
+df2 = pd.read_excel(xls_filename, sheet_name="salary")  # 讀取頁面 salary
+print(df2)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # SQL (SQLite)
-# ~~~~~~~~~~~~
 
 import sqlite3
 
-db_filename = os.path.join(tmpdir, "users.db")
-
-##############################################################################
-# Connect
+db_filename = "tmp_salary_table.db"
 
 conn = sqlite3.connect(db_filename)
 
 ##############################################################################
-# Creating tables with pandas
-
-url = "https://github.com/duchesnay/pystatsml/raw/master/datasets/salary_table.csv"
-salary = pd.read_csv(url)
+salary = pd.read_csv("data/salary_table.csv")
+print(salary.head())
 
 salary.to_sql("salary", conn, if_exists="replace")
 
@@ -98,7 +88,6 @@ cur = conn.cursor()
 values = (100, 14000, 5, "Bachelor", "N")
 cur.execute("insert into salary values (?, ?, ?, ?, ?)", values)
 conn.commit()
-
 
 ##############################################################################
 # Reading results into a pandas DataFrame
@@ -111,19 +100,18 @@ pd.read_sql_query("select * from salary where salary>25000;", conn)
 pd.read_sql_query("select * from salary where experience=16;", conn)
 pd.read_sql_query('select * from salary where education="Master";', conn)
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 ##############################################################################
 # Exercises
 # ---------
 # Data Frame
 # ~~~~~~~~~~
-#
-# 1. Read the iris dataset at 'https://github.com/neurospin/pystatsml/tree/master/datasets/iris.csv'
+# 1. Read the iris dataset at "https://github.com/neurospin/pystatsml/tree/master/datasets/iris.csv"
 # 2. Print column names
 # 3. Get numerical columns
 # 4. For each species compute the mean of numerical columns and store it in  a ``stats`` table like:
-# ::
-#
 #           species  sepal_length  sepal_width  petal_length  petal_width
 #     0      setosa         5.006        3.428         1.462        0.246
 #     1  versicolor         5.936        2.770         4.260        1.326
@@ -133,14 +121,14 @@ pd.read_sql_query('select * from salary where education="Master";', conn)
 # Add some missing data to the previous table ``users``:
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """
 Exercises: Pandas: data manipulation
 ------------------------------------
-
 Data Frame
 ~~~~~~~~~~
-1. Read the iris dataset at 'https://github.com/neurospin/pystatsml/tree/master/datasets/iris.csv'
+1. Read the iris dataset at "https://github.com/neurospin/pystatsml/tree/master/datasets/iris.csv"
 2. Print column names
 3. Get numerical columns
 4. For each species compute the mean of numerical columns and store it in  a ``stats`` table like:
@@ -181,13 +169,25 @@ l = [(1, "a", 1), (2, "b", 2)]
 for x, y, z in l:
     print(x, y, z)
 
+
+
+
+
+
+sys.exit()
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
 Numpy: arrays and matrices
 ==========================
-NumPy is an extension to the Python programming language, adding support for large, multi-dimensional (numerical) arrays and matrices, along with a large library of high-level mathematical functions to operate on these arrays.
+NumPy is an extension to the Python programming language,
+adding support for large,
+multi-dimensional (numerical) arrays and matrices,
+along with a large library of high-level mathematical functions to operate on these arrays.
+
 **Sources**:
 - Kevin Markham: https://github.com/justmarkham
 Computation time:
@@ -200,7 +200,6 @@ Computation time:
 
 ##############################################################################
 # Create arrays
-# -------------
 # Create ndarrays from lists.
 # note: every element must be the same type (will be converted if possible)
 
@@ -270,7 +269,6 @@ arr_flt = arr.ravel()
 arr_flt[0] = 33
 print(arr_flt)
 print(arr)
-
 
 ##############################################################################
 # Summary on axis, reshaping/flattening and selection
@@ -501,9 +499,7 @@ a - a.mean(axis=0)
 
 ##############################################################################
 # Examples
-#
 # Shapes of operands A, B and result:
-# ::
 #   A      (2d array):  5 x 4
 #   B      (1d array):      1
 #   Result (2d array):  5 x 4
@@ -542,16 +538,13 @@ print("------------------------------------------------------------")  # 60個
 A = np.random.randn(4, 2)
 print(A)
 
-"""
-For each column find the row indices of the minimiun value.
-"""
+# For each column find the row indices of the minimiun value.
+
 [np.argmin(A[:, j]) for j in range(A.shape[1])]
 
 np.argmin(A, axis=0)
 
-"""
-Write a function ``scale(A)`` that return an array whose columns are centered and scaled (by std-dev).
-"""
+# Write a function ``scale(A)`` that return an array whose columns are centered and scaled (by std-dev).
 
 
 def scale(A):
@@ -599,13 +592,8 @@ plt.show()
 
 # Scatter (2D) plots
 
-# 讀取本地檔案 若無 讀取遠端檔案
-
-try:
-    salary = pd.read_csv("salary_table.csv")
-except:
-    url = "https://github.com/duchesnay/pystatsml/raw/master/datasets/salary_table.csv"
-    salary = pd.read_csv(url)
+salary = pd.read_csv("data/salary_table.csv")
+print(salary.head())
 
 df = salary
 print(df.head())
@@ -655,7 +643,6 @@ plt.close()
 
 ax = sns.boxplot(x="management", y="salary", data=salary)
 ax = sns.stripplot(x="management", y="salary", data=salary, jitter=True, color="black")
-
 ax = sns.violinplot(x="management", y="salary", data=salary)
 ax = sns.stripplot(x="management", y="salary", data=salary, jitter=True, color="white")
 
@@ -715,87 +702,9 @@ fmri = sns.load_dataset("fmri")
 ax = sns.pointplot(x="timepoint", y="signal",
              hue="region", style="event",
              data=fmri)
-
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# 获取当前日期
-# datetime模块date类的today()方法获取当前日期
-import datetime
-
-print(datetime.date.min)
-print(datetime.date.max)
-print(datetime.date.today())
-print(datetime.date.today().year)
-print(datetime.date.today().month)
-print(datetime.date.today().day)
-
-# datetime模块datetime类的today()方法获取当前日期和时间
-import datetime
-
-print(datetime.datetime.now())
-print(datetime.datetime.min)
-print(datetime.datetime.max)
-print(datetime.datetime.today())
-print(datetime.datetime.today().year)
-print(datetime.datetime.today().month)
-print(datetime.datetime.today().day)
-print(datetime.datetime.today().hour)
-print(datetime.datetime.today().hour)
-
-# UTC时间
-import datetime
-
-# 创建一个时间戳（以秒为单位）
-timestamp = 22
-# 带UTC时区时间
-dt_with_timezone = datetime.datetime.fromtimestamp(timestamp, tz=datetime.timezone.utc)
-print("带UTC时区时间:", dt_with_timezone)
-# 不带UTC时区时间
-dt_without_timezone = datetime.datetime.fromtimestamp(timestamp)
-print("不带UTC时区时间", dt_without_timezone)
-
-# 时间戳
-import time
-
-print(time.time())
-print(time.localtime())  # 获取到当前时间的元组
-print(time.mktime(time.localtime()))
-# 一周的第几天(周一是0,0-6)、一年的第几天(从1开始，1-366)、夏时令(是夏时令1，不是0，未知-1)。
-
-# 字符串和时间转换
-# 利用time模块的strftime()函数可以将时间戳转换成系统时间。
-import time
-
-time_str = time.strftime(("%Y-%m-%d %H:%M:%S"), time.localtime())
-print(time_str)
-
-# 可以用strptime函数将日期字符串转换为datetime数据类型，
-import datetime
-
-print(datetime.datetime.strptime("2022-01-15", "%Y-%m-%d"))
-
-# 可以用Pandas的to_datetime()函数将日期字符串转换为datetime数据类型。
-# to_datetime()函数转化后的时间是精准到时分秒精度的
-import pandas as pd
-
-print(pd.to_datetime("2022/01/15"))
-
-# 时间差
-# 3. 时间运算--时间差
-# 利用datetime将时间类型数据进行转换，然后利用减法运算计算时间的不同之处
-# 默认输出结果转换为用（“天”，“秒”）表达
-import datetime
-
-delta = datetime.datetime(2022, 1, 16) - datetime.datetime(2021, 1, 1, 9, 15)
-print(delta)
-print(delta.days)
-print(delta.seconds)
-
-print("------------------------------------------------------------")  # 60個
-
 """
 # Correlation and covariance
 from numpy.random import randint as ri
@@ -917,6 +826,7 @@ array_direct = np.fromfile("tmp_fdata.txt", dtype=float, count=-1, sep=",").resh
     1000, 1000
 )
 t2 = time.time()
+
 print(array_direct)
 print("\nShape: ", array_direct.shape)
 print(f"Time took to read: {t2-t1} seconds.")
@@ -928,6 +838,7 @@ lst = datastr.split(",")
 lst.pop()
 array_lst = np.array(lst, dtype=float).reshape(1000, 1000)
 t2 = time.time()
+
 print(array_lst)
 print("\nShape: ", array_lst.shape)
 print(f"Time took to read: {t2-t1} seconds.")
@@ -937,6 +848,7 @@ np.save("fnumpy.npy", array_lst)
 t1 = time.time()
 array_reloaded = np.load("fnumpy.npy")
 t2 = time.time()
+
 print(array_reloaded)
 print("\nShape: ", array_reloaded.shape)
 print(f"Time took to load: {t2-t1} seconds.")
@@ -944,6 +856,7 @@ print(f"Time took to load: {t2-t1} seconds.")
 t1 = time.time()
 array_reloaded = np.load("fnumpy.npy").reshape(10000, 100)
 t2 = time.time()
+
 print(array_reloaded)
 print("\nShape: ", array_reloaded.shape)
 print(f"Time took to load: {t2-t1} seconds.")
@@ -980,8 +893,8 @@ for sample_size in n_samples:
     print(f"Processing done for {sample_size} samples\n")
 
 plt.figure(figsize=(8, 5))
-# plt.xscale('log')
-# plt.yscale('log')
+# plt.xscale("log")
+# plt.yscale("log")
 plt.scatter(n_samples, time_lst_read)
 plt.scatter(n_samples, time_npy_read)
 plt.legend(["Normal read from CSV", "Read from .npy file"])

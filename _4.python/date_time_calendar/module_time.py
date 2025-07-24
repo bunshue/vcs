@@ -17,10 +17,9 @@ import time
    time.asctime()
 
 """
-print("---- 單獨使用 --------------------------------------------------------")  # 60個
-print(
-    "---- time.time() --------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
+print("time.time() ST")
+print("------------------------------------------------------------")  # 60個
 
 print("time.time()\t", time.time())
 
@@ -65,9 +64,10 @@ print(
     + " GMT"
 )
 
-print(
-    "---- time.localtime() --------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
+print("time.localtime()")
+print("------------------------------------------------------------")  # 60個
+
 
 # 而如果要輸出此時準確的時間的話則
 print(time.localtime())
@@ -152,8 +152,8 @@ show += "今天是今年的第" + str(localtime.tm_yday) + "天，此地" + dst[
 print(show)
 
 print("------------------------------------------------------------")  # 60個
-
-print("---- 其他 --------------------------------------------------------")  # 60個
+print("其他")
+print("------------------------------------------------------------")  # 60個
 
 print("time.ctime()\t", time.ctime())
 print("time.gmtime()\t", time.gmtime())
@@ -169,7 +169,9 @@ print("GMT時間 :", gmtime)
 formattime = time.asctime(time.localtime(total_seconds))
 print(formattime)
 
-print("---- 轉換使用 --------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("轉換使用")
+print("------------------------------------------------------------")  # 60個
 
 print("獲取格式化的時間")
 localtime = time.asctime(time.localtime(time.time()))
@@ -381,9 +383,9 @@ if __name__ == '__main__':
 
 """
 
-print(
-    "---- time.sleep(秒) --------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
+print("time.sleep(秒)")
+print("------------------------------------------------------------")  # 60個
 
 print("每0.3456秒打印一字")
 a = 0
@@ -494,8 +496,8 @@ name = "%04i-%02i-%02i %02i:%02i:%02i" % (time.localtime(time.time())[:6])
 print(name)
 
 print("------------------------------------------------------------")  # 60個
-
-print("轉換使用------------------------------------------------------------")  # 60個
+print("轉換使用")
+print("------------------------------------------------------------")  # 60個
 
 localtime = time.asctime(time.localtime())
 print(localtime)
@@ -570,8 +572,6 @@ def TimestampFromTicks(ticks):
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -687,3 +687,84 @@ print("------------------------------------------------------------")  # 60個
 
 
 """
+
+
+# 获取当前日期
+# datetime模块date类的today()方法获取当前日期
+import datetime
+
+print(datetime.date.min)
+print(datetime.date.max)
+print(datetime.date.today())
+print(datetime.date.today().year)
+print(datetime.date.today().month)
+print(datetime.date.today().day)
+
+# datetime模块datetime类的today()方法获取当前日期和时间
+import datetime
+
+print(datetime.datetime.now())
+print(datetime.datetime.min)
+print(datetime.datetime.max)
+print(datetime.datetime.today())
+print(datetime.datetime.today().year)
+print(datetime.datetime.today().month)
+print(datetime.datetime.today().day)
+print(datetime.datetime.today().hour)
+print(datetime.datetime.today().hour)
+
+# UTC时间
+import datetime
+
+# 创建一个时间戳（以秒为单位）
+timestamp = 22
+# 带UTC时区时间
+dt_with_timezone = datetime.datetime.fromtimestamp(timestamp, tz=datetime.timezone.utc)
+print("带UTC时区时间:", dt_with_timezone)
+# 不带UTC时区时间
+dt_without_timezone = datetime.datetime.fromtimestamp(timestamp)
+print("不带UTC时区时间", dt_without_timezone)
+
+# 时间戳
+import time
+
+print(time.time())
+print(time.localtime())  # 获取到当前时间的元组
+print(time.mktime(time.localtime()))
+# 一周的第几天(周一是0,0-6)、一年的第几天(从1开始，1-366)、夏时令(是夏时令1，不是0，未知-1)。
+
+# 字符串和时间转换
+# 利用time模块的strftime()函数可以将时间戳转换成系统时间。
+import time
+
+time_str = time.strftime(("%Y-%m-%d %H:%M:%S"), time.localtime())
+print(time_str)
+
+# 可以用strptime函数将日期字符串转换为datetime数据类型，
+import datetime
+
+print(datetime.datetime.strptime("2022-01-15", "%Y-%m-%d"))
+
+# 可以用Pandas的to_datetime()函数将日期字符串转换为datetime数据类型。
+# to_datetime()函数转化后的时间是精准到时分秒精度的
+import pandas as pd
+
+print(pd.to_datetime("2022/01/15"))
+
+# 时间差
+# 3. 时间运算--时间差
+# 利用datetime将时间类型数据进行转换，然后利用减法运算计算时间的不同之处
+# 默认输出结果转换为用（“天”，“秒”）表达
+import datetime
+
+delta = datetime.datetime(2022, 1, 16) - datetime.datetime(2021, 1, 1, 9, 15)
+print(delta)
+print(delta.days)
+print(delta.seconds)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個

@@ -1038,7 +1038,7 @@ print("W :", W)
 print("H :", H)
 print("frames :", frames)
 print("fps :", fps)
-print("length :", length)
+print("length :", length, '秒')
 
 if not cap.isOpened():
     print("開啟影片失敗")
@@ -1069,6 +1069,8 @@ while True:
             cv2.imshow("Original", frame)
             cv2.imshow("Frame", currentframe)
             cv2.imshow("medianBlur", median)
+            cv2.imshow("threshold_frame", threshold_frame)
+            cv2.imshow("GaussianBlur", gauss_image)
 
             # 按键盘上的Q键退出
             if cv2.waitKey(33) & 0xFF == ord("q"):
@@ -1084,6 +1086,8 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 # Two Frames SP
 print("------------------------------------------------------------")  # 60個
+
+sys.exit()
 
 
 print("------------------------------------------------------------")  # 60個

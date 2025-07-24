@@ -26,7 +26,7 @@ namespace vcs_PictureBox2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_04.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_04.jpg";
 
             OpenImageFile(filename);
             /*
@@ -285,4 +285,3 @@ namespace vcs_PictureBox2
         }
     }
 }
-

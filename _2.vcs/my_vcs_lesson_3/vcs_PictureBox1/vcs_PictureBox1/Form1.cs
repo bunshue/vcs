@@ -80,11 +80,8 @@ namespace vcs_PictureBox1
                 g2.DrawImage(image1, dstRect, srcRect, units);
                 g2.DrawRectangle(new Pen(Color.Red, 5), new Rectangle(10, 10, 32, 40));
 
-
                 //int x_st = zoom_step * zoom_cnt / 2 + zoom_step * btn_right_left_cnt / 2;
                 //int y_st = (zoom_step * zoom_cnt / 2 + zoom_step * btn_down_up_cnt / 2) * 3 / 4;
-
-
 
                 /*
                 //三、在某圖片中，在指定的位置切裁指定的大小並另存圖片
@@ -97,7 +94,6 @@ namespace vcs_PictureBox1
                 g.DrawImage(bmp2, 0, 0);
                 */
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -211,10 +207,9 @@ namespace vcs_PictureBox1
             //pictureBox1.Image = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\bear.bmp");
 
             //正確的寫法
-            FileStream fs = File.OpenRead(@"C:\_git\vcs\_1.data\______test_files1\bear.bmp");
+            FileStream fs = File.OpenRead(@"C:\_git\vcs\_1.data\______test_files1\bear.jpg");
             pictureBox1.Image = Image.FromStream(fs);
             fs.Close();
-
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -222,7 +217,6 @@ namespace vcs_PictureBox1
             if (radioButton1.Checked == true)
             {
                 //調整PictureBox大小
-
             }
             else if (radioButton2.Checked == true)
             {
@@ -250,8 +244,6 @@ namespace vcs_PictureBox1
             else if (flag_zoom_operation_mode == MODE_RELEASE_STAGE3)
             {
                 //TBD
-
-
             }
             else
             {
@@ -284,7 +276,6 @@ namespace vcs_PictureBox1
                                              (zoom_step * zoom_cnt / 2 + zoom_step * btn_down_up_cnt / 2) * 3 / 4,
                                              w - zoom_step * zoom_cnt, h - zoom_step * zoom_cnt * 3 / 4);
             */
-
 
             RectangleF rect = new RectangleF(x_st, y_st, W, H);
             richTextBox1.Text += "x_st = " + x_st.ToString() + "\ty_st = " + y_st.ToString() + "\tW = " + W.ToString() + "\tH = " + H.ToString() + "\n";
@@ -378,16 +369,11 @@ namespace vcs_PictureBox1
             else if (flag_zoom_operation_mode == MODE_RELEASE_STAGE3)
             {
                 //TBD
-
-
             }
             else
             {
                 //不支援此縮放模式
-
-
             }
-
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -488,23 +474,15 @@ namespace vcs_PictureBox1
                     richTextBox1.Text += "zoom_cnt = " + zoom_cnt.ToString() + "\n";
 
                     reload_picturebox();
-
                 }
-
-
-
             }
             else if (flag_zoom_operation_mode == MODE_RELEASE_STAGE3)
             {
                 //TBD
-
-
             }
             else
             {
                 //不支援此縮放模式
-
-
             }
         }
 

@@ -2612,29 +2612,6 @@ os.system(cmd)
 
 print("------------------------------------------------------------")  # 60個
 
-
-def get_video_info(video):
-    video_info = {}
-
-    video_info["width"] = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
-    video_info["height"] = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    video_info["frames"] = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
-    video_info["fps"] = video.get(cv2.CAP_PROP_FPS)
-    video_info["length"] = video.get(cv2.CAP_PROP_FRAME_COUNT) / video.get(
-        cv2.CAP_PROP_FPS
-    )
-    print(type(video_info))
-    return video_info
-
-
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
-vid = cv2.VideoCapture(video_filename)
-
-video_info = get_video_info(vid)
-print(video_info)
-
-print("------------------------------------------------------------")  # 60個
-
 filesize = 123456
 print("filesize = ", filesize, "\t檔案大小 : ", ByteConversionTBGBMBKB(filesize))
 

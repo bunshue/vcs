@@ -100,10 +100,111 @@ namespace vcs_ImageProcessingH
 
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
+            x_st = 700;
+            y_st = 800;
+            dx = 100;
+            dy = 30;
+
+            trackBar_gamma1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            trackBar_gamma2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            trackBar_brightness.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            trackBar_threshold.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            trackBar_binary.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            trackBar_gamma1.MouseDown += new MouseEventHandler(trackBar_gamma1_MouseDown);
+            trackBar_gamma1.MouseMove += new MouseEventHandler(trackBar_gamma1_MouseMove);
+            trackBar_gamma1.MouseUp += new MouseEventHandler(trackBar_gamma1_MouseUp);
+            trackBar_gamma2.MouseDown += new MouseEventHandler(trackBar_gamma2_MouseDown);
+            trackBar_gamma2.MouseMove += new MouseEventHandler(trackBar_gamma2_MouseMove);
+            trackBar_gamma2.MouseUp += new MouseEventHandler(trackBar_gamma2_MouseUp);
+            trackBar_brightness.MouseDown += new MouseEventHandler(trackBar_brightness_MouseDown);
+            trackBar_brightness.MouseMove += new MouseEventHandler(trackBar_brightness_MouseMove);
+            trackBar_brightness.MouseUp += new MouseEventHandler(trackBar_brightness_MouseUp);
+            trackBar_threshold.MouseDown += new MouseEventHandler(trackBar_threshold_MouseDown);
+            trackBar_threshold.MouseMove += new MouseEventHandler(trackBar_threshold_MouseMove);
+            trackBar_threshold.MouseUp += new MouseEventHandler(trackBar_threshold_MouseUp);
+            trackBar_binary.MouseDown += new MouseEventHandler(trackBar_binary_MouseDown);
+            trackBar_binary.MouseMove += new MouseEventHandler(trackBar_binary_MouseMove);
+            trackBar_binary.MouseUp += new MouseEventHandler(trackBar_binary_MouseUp);
+
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             bt_exit_setup();
+        }
+
+        void trackBar_gamma1_MouseDown(object sender, MouseEventArgs e)
+        {
+            // TBD
+        }
+
+        void trackBar_gamma1_MouseMove(object sender, MouseEventArgs e)
+        {
+            // TBD
+        }
+
+        void trackBar_gamma1_MouseUp(object sender, MouseEventArgs e)
+        {
+            // TBD
+        }
+
+        void trackBar_gamma2_MouseDown(object sender, MouseEventArgs e)
+        {
+            // TBD
+        }
+
+        void trackBar_gamma2_MouseMove(object sender, MouseEventArgs e)
+        {
+            // TBD
+        }
+
+        void trackBar_gamma2_MouseUp(object sender, MouseEventArgs e)
+        {
+            // TBD
+        }
+
+        void trackBar_brightness_MouseDown(object sender, MouseEventArgs e)
+        {
+            // TBD
+        }
+
+        void trackBar_brightness_MouseMove(object sender, MouseEventArgs e)
+        {
+            // TBD
+        }
+
+        void trackBar_brightness_MouseUp(object sender, MouseEventArgs e)
+        {
+            // TBD
+        }
+
+        void trackBar_threshold_MouseDown(object sender, MouseEventArgs e)
+        {
+            // TBD
+        }
+
+        void trackBar_threshold_MouseMove(object sender, MouseEventArgs e)
+        {
+            // TBD
+        }
+
+        void trackBar_threshold_MouseUp(object sender, MouseEventArgs e)
+        {
+            // TBD
+        }
+
+        void trackBar_binary_MouseDown(object sender, MouseEventArgs e)
+        {
+            // TBD
+        }
+
+        void trackBar_binary_MouseMove(object sender, MouseEventArgs e)
+        {
+            // TBD
+        }
+
+        void trackBar_binary_MouseUp(object sender, MouseEventArgs e)
+        {
+            // TBD
         }
 
         void bt_exit_setup()
