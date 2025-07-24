@@ -15,7 +15,6 @@ namespace vcs_ImageProcessing2
     public partial class Form1 : Form
     {
         string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-        string filename2 = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
 
         public Form1()
         {
@@ -31,19 +30,13 @@ namespace vcs_ImageProcessing2
             //PictureToSepia2();  //To Sepia 方法二
             PictureToGray4();
             PictureToMonochrome();
-            PictureToBlur();
 
             // Convert the image into red, green, and blue monochrome.
-            pictureBox7.Image = ScaleColorComponents(pictureBox1.Image, 1, 0, 0, 1);
-            pictureBox8.Image = ScaleColorComponents(pictureBox1.Image, 0, 1, 0, 1);
-            pictureBox9.Image = ScaleColorComponents(pictureBox1.Image, 0, 0, 1, 1);
+            pictureBox5.Image = ScaleColorComponents(pictureBox1.Image, 1, 0, 0, 1);
+            pictureBox6.Image = ScaleColorComponents(pictureBox1.Image, 0, 1, 0, 1);
+            pictureBox7.Image = ScaleColorComponents(pictureBox1.Image, 0, 0, 1, 1);
             //另外的方法製作單色圖片
             //show_mono_color_picture();
-
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            bt_exit_setup();
         }
 
         void show_item_location()
@@ -55,13 +48,6 @@ namespace vcs_ImageProcessing2
             pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox8.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox9.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox10.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox11.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox12.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox13.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox14.SizeMode = PictureBoxSizeMode.Zoom;
 
             int x_st;
             int y_st;
@@ -90,98 +76,37 @@ namespace vcs_ImageProcessing2
             pictureBox5.Size = new Size(W, H);
             pictureBox6.Size = new Size(W, H);
             pictureBox7.Size = new Size(W, H);
-            pictureBox8.Size = new Size(W, H);
-            pictureBox9.Size = new Size(W, H);
-            pictureBox10.Size = new Size(W, H);
-            pictureBox11.Size = new Size(W, H);
-            pictureBox12.Size = new Size(W, H);
-            pictureBox13.Size = new Size(W, H);
-            pictureBox14.Size = new Size(W, H);
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox3.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox4.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            pictureBox5.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            pictureBox6.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            pictureBox7.Location = new Point(x_st + dx * 6, y_st + dy * 0);
 
-            pictureBox8.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            pictureBox9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            pictureBox10.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            pictureBox11.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            pictureBox12.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            pictureBox13.Location = new Point(x_st + dx * 5, y_st + dy * 1);
-            pictureBox14.Location = new Point(x_st + dx * 6, y_st + dy * 1);
+            pictureBox5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            pictureBox6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            pictureBox7.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 25);
             label2.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 25);
             label3.Location = new Point(x_st + dx * 2, y_st + dy * 0 - 25);
             label4.Location = new Point(x_st + dx * 3, y_st + dy * 0 - 25);
-            label5.Location = new Point(x_st + dx * 4, y_st + dy * 0 - 25);
-            label6.Location = new Point(x_st + dx * 5, y_st + dy * 0 - 25);
-            label7.Location = new Point(x_st + dx * 6, y_st + dy * 0 - 25);
 
-            label8.Location = new Point(x_st + dx * 0, y_st + dy * 1 - 25);
-            label9.Location = new Point(x_st + dx * 1, y_st + dy * 1 - 25);
-            label10.Location = new Point(x_st + dx * 2, y_st + dy * 1 - 25);
-            label11.Location = new Point(x_st + dx * 3, y_st + dy * 1 - 25);
-            label12.Location = new Point(x_st + dx * 4, y_st + dy * 1 - 25);
-            label13.Location = new Point(x_st + dx * 5, y_st + dy * 1 - 25);
-            label14.Location = new Point(x_st + dx * 6, y_st + dy * 1 - 25);
-
-            label15.Location = new Point(x_st + dx * 0, y_st + dy * 2 - 25);
-            label16.Location = new Point(x_st + dx * 1, y_st + dy * 2 - 25);
-            label17.Location = new Point(x_st + dx * 2, y_st + dy * 2 - 25);
-            label18.Location = new Point(x_st + dx * 3, y_st + dy * 2 - 25);
-            label19.Location = new Point(x_st + dx * 4, y_st + dy * 2 - 25);
-            label20.Location = new Point(x_st + dx * 5, y_st + dy * 2 - 25);
+            label5.Location = new Point(x_st + dx * 0, y_st + dy * 1 - 25);
+            label6.Location = new Point(x_st + dx * 1, y_st + dy * 1 - 25);
+            label7.Location = new Point(x_st + dx * 2, y_st + dy * 1 - 25);
 
             label1.Text = "原圖";
             label2.Text = "Sepia";
             label3.Text = "";
-            label4.Text = "";
-            label5.Text = "";
-            label6.Text = "單色處理";
-            label7.Text = "單色 R";
-            label8.Text = "單色 G";
-            label9.Text = "單色 B";
-            label10.Text = "";
-            label11.Text = "原圖";
-            label12.Text = "";
-            label13.Text = "";
-            label14.Text = "模糊處理";
-            label15.Text = "";
-            label16.Text = "";
-            label17.Text = "";
-            label18.Text = "";
-            label19.Text = "";
-            label20.Text = "";
-        }
+            label4.Text = "單色處理";
+            label5.Text = "單色 R";
+            label6.Text = "單色 G";
+            label7.Text = "單色 B";
 
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            richTextBox1.Size = new Size(300, 600);
 
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
+            this.Size = new Size(1500, 800);
         }
 
         private void bt_exit_Click(object sender, EventArgs e)
@@ -348,15 +273,15 @@ namespace vcs_ImageProcessing2
             }
             bm32.UnlockBitmap();
 
-            //pictureBox11.Image = Bitmap.FromFile(filename);
-            pictureBox11.Image = bmp;
+            //pictureBox3.Image = Bitmap.FromFile(filename);
+            pictureBox3.Image = bmp;
         }
         #endregion
 
         private void PictureToMonochrome()
         {
             richTextBox1.Text += "PictureToMonochrome\n";
-            pictureBox6.Image = ToMonochrome(pictureBox1.Image);
+            pictureBox4.Image = ToMonochrome(pictureBox1.Image);
         }
 
         // Convert an image to monochrome.
@@ -436,102 +361,6 @@ namespace vcs_ImageProcessing2
             richTextBox1.Clear();
         }
 
-        private void PictureToBlur()
-        {
-            richTextBox1.Text += "PictureToBlur\n";
-            pictureBox14.Image = ToBlur(pictureBox1.Image);
-        }
-
-        private Bitmap ToBlur(Image image)
-        {
-            Bitmap bitmap1 = (Bitmap)image;
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            Bitmap bitmap2 = new Bitmap(W, H);
-
-            for (int j = 0; j < H; j++)
-            {
-                for (int i = 0; i < W; i++)
-                {
-                    int ok_cnt = 0;
-                    int R = 0;
-                    int G = 0;
-                    int B = 0;
-
-                    // 檢查相鄰像素, 每個點的鄰居不一樣多, 所以要做不同的平均
-
-                    //自己
-                    R += bitmap1.GetPixel(i, j).R;
-                    G += bitmap1.GetPixel(i, j).G;
-                    B += bitmap1.GetPixel(i, j).B;
-
-                    ok_cnt++;
-
-                    if (j - 1 > 0)       //上
-                    {
-                        R += bitmap1.GetPixel(i, j - 1).R;
-                        G += bitmap1.GetPixel(i, j - 1).G;
-                        B += bitmap1.GetPixel(i, j - 1).B;
-
-                        ok_cnt++;
-                    }
-                    if (j + 1 < H)      //下
-                    {
-                        R += bitmap1.GetPixel(i, j + 1).R;
-                        G += bitmap1.GetPixel(i, j + 1).G;
-                        B += bitmap1.GetPixel(i, j + 1).B;
-                        ok_cnt++;
-                    }
-                    if (i - 1 > 0)       //左
-                    {
-                        R += bitmap1.GetPixel(i - 1, j).R;
-                        G += bitmap1.GetPixel(i - 1, j).G;
-                        B += bitmap1.GetPixel(i - 1, j).B;
-                        ok_cnt++;
-                    }
-                    if (i + 1 < W)       //右
-                    {
-                        R += bitmap1.GetPixel(i + 1, j).R;
-                        G += bitmap1.GetPixel(i + 1, j).G;
-                        B += bitmap1.GetPixel(i + 1, j).B;
-                        ok_cnt++;
-                    }
-                    if ((i - 1 > 0) && (j - 1 > 0))     //左上
-                    {
-                        R += bitmap1.GetPixel(i - 1, j - 1).R;
-                        G += bitmap1.GetPixel(i - 1, j - 1).G;
-                        B += bitmap1.GetPixel(i - 1, j - 1).B;
-                        ok_cnt++;
-                    }
-                    if ((i - 1 > 0) && (j + 1 < H)) //左下
-                    {
-                        R += bitmap1.GetPixel(i - 1, j + 1).R;
-                        G += bitmap1.GetPixel(i - 1, j + 1).G;
-                        B += bitmap1.GetPixel(i - 1, j + 1).B;
-                        ok_cnt++;
-                    }
-                    if ((i + 1 < W) && (j - 1 > 0))      //右上
-                    {
-                        R += bitmap1.GetPixel(i + 1, j - 1).R;
-                        G += bitmap1.GetPixel(i + 1, j - 1).G;
-                        B += bitmap1.GetPixel(i + 1, j - 1).B;
-                        ok_cnt++;
-                    }
-                    if ((i + 1 < W) && (j + 1 < H)) //右下
-                    {
-                        R += bitmap1.GetPixel(i + 1, j + 1).R;
-                        G += bitmap1.GetPixel(i + 1, j + 1).G;
-                        B += bitmap1.GetPixel(i + 1, j + 1).B;
-                        ok_cnt++;
-                    }
-
-                    //平均, 設定個點的像素值
-                    bitmap2.SetPixel(i, j, Color.FromArgb((R / ok_cnt), (G / ok_cnt), (B / ok_cnt)));
-                }
-            }
-            return bitmap2;
-        }
-
         private void show_mono_color_picture()
         {
             Bitmap bmp = new Bitmap(filename1);
@@ -574,13 +403,13 @@ namespace vcs_ImageProcessing2
             }
 
             //load red image in picturebox7
-            pictureBox7.Image = rbmp;
+            pictureBox5.Image = rbmp;
 
             //load green image in picturebox8
-            pictureBox8.Image = gbmp;
+            pictureBox6.Image = gbmp;
 
             //load blue image in picturebox9
-            pictureBox9.Image = bbmp;
+            pictureBox7.Image = bbmp;
         }
     }
 }

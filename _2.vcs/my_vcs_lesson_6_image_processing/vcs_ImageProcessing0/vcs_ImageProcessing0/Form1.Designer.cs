@@ -262,6 +262,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(130, 60);
             this.button16.TabIndex = 19;
+            this.button16.Text = "MemoryStream 1";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -272,6 +273,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(130, 60);
             this.button17.TabIndex = 20;
+            this.button17.Text = "MemoryStream 2 圖片 轉 拜列";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -282,6 +284,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(130, 60);
             this.button18.TabIndex = 21;
+            this.button18.Text = "圖片 Bitmap MemoryStream 拜列 轉換";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 

@@ -23,8 +23,25 @@ namespace vcs_ImageProcessing5
         private void Form1_Load(object sender, EventArgs e)
         {
             pictureBox2.Image = pictureBox1.Image.Clone() as Image;
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             //lblElapsed.Location = new Point(12, 520);
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st = 12;
+            int y_st = 12;
+            int dx = 100;
+            int dy = 100;
+
+            pictureBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            pictureBox2.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(300, 600);
+            richTextBox1.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1200, 670);
         }
 
         // Display the original image.

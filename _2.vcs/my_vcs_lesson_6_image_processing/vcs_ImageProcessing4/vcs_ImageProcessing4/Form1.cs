@@ -58,37 +58,43 @@ namespace vcs_ImageProcessing4
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
 
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button20.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button22.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button23.Location = new Point(x_st + dx * 1, y_st + dy * 11);
 
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button30.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button31.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button32.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button33.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button34.Location = new Point(x_st + dx * 2, y_st + dy * 10);
+            button35.Location = new Point(x_st + dx * 2, y_st + dy * 11);
 
-            trackBar_R.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            trackBar_G.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            trackBar_B.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            trackBar_R.Location = new Point(x_st + dx * 0, y_st + dy * 13);
+            trackBar_G.Location = new Point(x_st + dx * 0, y_st + dy * 14);
+            trackBar_B.Location = new Point(x_st + dx * 0, y_st + dy * 15);
 
-            tb_R.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 10);
-            tb_G.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 10 + 40);
-            tb_B.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 10 + 80);
-            bt_apply.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 10 + 120);
+            tb_R.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 13);
+            tb_G.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 13 + 40);
+            tb_B.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 13 + 80);
+            bt_apply.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 13 + 120);
 
             pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             pictureBox1.Size = new Size(600, 600);
@@ -864,6 +870,37 @@ new Point(100, 400)};// destination for lower-left point of original
 
         }
 
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+
+        }
+
         public Bitmap ConvertToGrayscale(Image image) // Image 是抽象基底類別
         {
             Bitmap source = (Bitmap)image;  // Image 是 Bitmap 的父類別
@@ -973,5 +1010,3 @@ new Point(100, 400)};// destination for lower-left point of original
         }
     }
 }
-
-

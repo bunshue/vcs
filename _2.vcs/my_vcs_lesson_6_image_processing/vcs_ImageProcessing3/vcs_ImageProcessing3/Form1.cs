@@ -324,6 +324,103 @@ namespace vcs_ImageProcessing3
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //模糊處理
+            richTextBox1.Text += "模糊處理\n";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            richTextBox1.Text += "PictureToBlur\n";
+            pictureBox1.Image = ToBlur(filename);
+        }
+
+        private Bitmap ToBlur(string filename)
+        {
+            Image image = Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            Bitmap bitmap1 = new Bitmap(image);
+
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H);
+
+            for (int j = 0; j < H; j++)
+            {
+                for (int i = 0; i < W; i++)
+                {
+                    int ok_cnt = 0;
+                    int R = 0;
+                    int G = 0;
+                    int B = 0;
+
+                    // 檢查相鄰像素, 每個點的鄰居不一樣多, 所以要做不同的平均
+
+                    //自己
+                    R += bitmap1.GetPixel(i, j).R;
+                    G += bitmap1.GetPixel(i, j).G;
+                    B += bitmap1.GetPixel(i, j).B;
+
+                    ok_cnt++;
+
+                    if (j - 1 > 0)       //上
+                    {
+                        R += bitmap1.GetPixel(i, j - 1).R;
+                        G += bitmap1.GetPixel(i, j - 1).G;
+                        B += bitmap1.GetPixel(i, j - 1).B;
+
+                        ok_cnt++;
+                    }
+                    if (j + 1 < H)      //下
+                    {
+                        R += bitmap1.GetPixel(i, j + 1).R;
+                        G += bitmap1.GetPixel(i, j + 1).G;
+                        B += bitmap1.GetPixel(i, j + 1).B;
+                        ok_cnt++;
+                    }
+                    if (i - 1 > 0)       //左
+                    {
+                        R += bitmap1.GetPixel(i - 1, j).R;
+                        G += bitmap1.GetPixel(i - 1, j).G;
+                        B += bitmap1.GetPixel(i - 1, j).B;
+                        ok_cnt++;
+                    }
+                    if (i + 1 < W)       //右
+                    {
+                        R += bitmap1.GetPixel(i + 1, j).R;
+                        G += bitmap1.GetPixel(i + 1, j).G;
+                        B += bitmap1.GetPixel(i + 1, j).B;
+                        ok_cnt++;
+                    }
+                    if ((i - 1 > 0) && (j - 1 > 0))     //左上
+                    {
+                        R += bitmap1.GetPixel(i - 1, j - 1).R;
+                        G += bitmap1.GetPixel(i - 1, j - 1).G;
+                        B += bitmap1.GetPixel(i - 1, j - 1).B;
+                        ok_cnt++;
+                    }
+                    if ((i - 1 > 0) && (j + 1 < H)) //左下
+                    {
+                        R += bitmap1.GetPixel(i - 1, j + 1).R;
+                        G += bitmap1.GetPixel(i - 1, j + 1).G;
+                        B += bitmap1.GetPixel(i - 1, j + 1).B;
+                        ok_cnt++;
+                    }
+                    if ((i + 1 < W) && (j - 1 > 0))      //右上
+                    {
+                        R += bitmap1.GetPixel(i + 1, j - 1).R;
+                        G += bitmap1.GetPixel(i + 1, j - 1).G;
+                        B += bitmap1.GetPixel(i + 1, j - 1).B;
+                        ok_cnt++;
+                    }
+                    if ((i + 1 < W) && (j + 1 < H)) //右下
+                    {
+                        R += bitmap1.GetPixel(i + 1, j + 1).R;
+                        G += bitmap1.GetPixel(i + 1, j + 1).G;
+                        B += bitmap1.GetPixel(i + 1, j + 1).B;
+                        ok_cnt++;
+                    }
+
+                    //平均, 設定個點的像素值
+                    bitmap2.SetPixel(i, j, Color.FromArgb((R / ok_cnt), (G / ok_cnt), (B / ok_cnt)));
+                }
+            }
+            return bitmap2;
         }
 
         private void button3_Click(object sender, EventArgs e)

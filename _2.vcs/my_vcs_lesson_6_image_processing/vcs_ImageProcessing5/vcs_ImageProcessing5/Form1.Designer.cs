@@ -183,7 +183,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(373, 61);
+            this.pictureBox1.Location = new System.Drawing.Point(240, 88);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(305, 400);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -193,7 +193,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(304, 25);
+            this.pictureBox2.Location = new System.Drawing.Point(229, 75);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(300, 400);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -238,7 +238,7 @@
             // 
             // btnMaximum
             // 
-            this.btnMaximum.Location = new System.Drawing.Point(141, 348);
+            this.btnMaximum.Location = new System.Drawing.Point(118, 345);
             this.btnMaximum.Name = "btnMaximum";
             this.btnMaximum.Size = new System.Drawing.Size(100, 40);
             this.btnMaximum.TabIndex = 12;
@@ -247,7 +247,7 @@
             // 
             // btnMinimum
             // 
-            this.btnMinimum.Location = new System.Drawing.Point(141, 392);
+            this.btnMinimum.Location = new System.Drawing.Point(118, 391);
             this.btnMinimum.Name = "btnMinimum";
             this.btnMinimum.Size = new System.Drawing.Size(100, 40);
             this.btnMinimum.TabIndex = 13;
@@ -256,7 +256,7 @@
             // 
             // btnPixellate
             // 
-            this.btnPixellate.Location = new System.Drawing.Point(141, 432);
+            this.btnPixellate.Location = new System.Drawing.Point(118, 435);
             this.btnPixellate.Name = "btnPixellate";
             this.btnPixellate.Size = new System.Drawing.Size(100, 40);
             this.btnPixellate.TabIndex = 14;
@@ -288,7 +288,7 @@
             // 
             // btnPointellate
             // 
-            this.btnPointellate.Location = new System.Drawing.Point(141, 478);
+            this.btnPointellate.Location = new System.Drawing.Point(118, 480);
             this.btnPointellate.Name = "btnPointellate";
             this.btnPointellate.Size = new System.Drawing.Size(100, 40);
             this.btnPointellate.TabIndex = 15;
@@ -306,15 +306,15 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(726, 27);
+            this.richTextBox1.Location = new System.Drawing.Point(563, 14);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(319, 550);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 22;
             this.richTextBox1.Text = "";
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(985, 547);
+            this.bt_clear.Location = new System.Drawing.Point(586, 48);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(60, 30);
             this.bt_clear.TabIndex = 23;
@@ -333,7 +333,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1057, 655);
+            this.ClientSize = new System.Drawing.Size(709, 624);
             this.Controls.Add(this.bt_open);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
