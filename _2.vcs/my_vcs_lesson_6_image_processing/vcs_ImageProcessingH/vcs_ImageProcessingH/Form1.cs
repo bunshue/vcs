@@ -44,6 +44,36 @@ namespace vcs_ImageProcessingH
 
         void show_item_location()
         {
+            int W = 305;
+            int H = 400;
+            int x_st = 20;
+            int y_st = 20;
+            int dx = W + 50;
+            int dy = H + 100;
+            int dd1 = 40;
+            int dd2 = 85;
+
+            bt_auto.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            label0.Location = new Point(x_st + dx * 0 + 100, y_st + dy * 0);
+            label1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            label2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            label3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            label4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            label5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+
+            label0.Text = "原圖";
+            label1.Text = "";
+            label2.Text = "";
+            label3.Text = "";
+            label4.Text = "";
+            label5.Text = "";
+
+            trackBar_gamma1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + dd1);
+            trackBar_gamma2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd1);
+            trackBar_brightness.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd1);
+            trackBar_threshold.Location = new Point(x_st + dx * 1, y_st + dy * 1 + dd1);
+            trackBar_binary.Location = new Point(x_st + dx * 2, y_st + dy * 1 + dd1);
+
             pictureBox0.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
@@ -51,26 +81,6 @@ namespace vcs_ImageProcessingH
             pictureBox4.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox5.SizeMode = PictureBoxSizeMode.Normal;
 
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
-            //button
-            x_st = 1700;
-            y_st = 12;
-            dx = 190;
-            dy = 50;
-
-            //richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 13);
-            //bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            int W = 305;
-            int H = 400;
-            x_st = 12;
-            y_st = 50;
-            dx = W + 20;
-            dy = H + 50;
             pictureBox0.Size = new Size(W, H);
             pictureBox1.Size = new Size(W, H);
             pictureBox2.Size = new Size(W, H);
@@ -78,51 +88,27 @@ namespace vcs_ImageProcessingH
             pictureBox4.Size = new Size(W, H);
             pictureBox5.Size = new Size(W, H);
 
-            pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            pictureBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            pictureBox4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            pictureBox5.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0 + dd2);
+            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + dd2);
+            pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd2);
+            pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd2);
+            pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1 + dd2);
+            pictureBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1 + dd2);
 
-            label0.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 25);
-            label1.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 25);
-            label2.Location = new Point(x_st + dx * 2, y_st + dy * 0 - 25);
-            label3.Location = new Point(x_st + dx * 3, y_st + dy * 0 - 25);
-            label4.Location = new Point(x_st + dx * 4, y_st + dy * 0 - 25);
-            label9.Location = new Point(x_st + dx * 5, y_st + dy * 0 - 25);
+            richTextBox1.Size = new Size(W, H);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 1 + dd2);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            label0.Text = "原圖";
-            label2.Text = "";
-            label3.Text = "";
-            label4.Text = "";
-            label9.Text = "";
+            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-
-            x_st = 700;
-            y_st = 800;
-            dx = 100;
-            dy = 30;
-
-            trackBar_gamma1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            trackBar_gamma2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            trackBar_brightness.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            trackBar_threshold.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            trackBar_binary.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            trackBar_gamma1.MouseDown += new MouseEventHandler(trackBar_gamma1_MouseDown);
             trackBar_gamma1.MouseMove += new MouseEventHandler(trackBar_gamma1_MouseMove);
             trackBar_gamma1.MouseUp += new MouseEventHandler(trackBar_gamma1_MouseUp);
-            trackBar_gamma2.MouseDown += new MouseEventHandler(trackBar_gamma2_MouseDown);
             trackBar_gamma2.MouseMove += new MouseEventHandler(trackBar_gamma2_MouseMove);
             trackBar_gamma2.MouseUp += new MouseEventHandler(trackBar_gamma2_MouseUp);
-            trackBar_brightness.MouseDown += new MouseEventHandler(trackBar_brightness_MouseDown);
             trackBar_brightness.MouseMove += new MouseEventHandler(trackBar_brightness_MouseMove);
             trackBar_brightness.MouseUp += new MouseEventHandler(trackBar_brightness_MouseUp);
-            trackBar_threshold.MouseDown += new MouseEventHandler(trackBar_threshold_MouseDown);
             trackBar_threshold.MouseMove += new MouseEventHandler(trackBar_threshold_MouseMove);
             trackBar_threshold.MouseUp += new MouseEventHandler(trackBar_threshold_MouseUp);
-            trackBar_binary.MouseDown += new MouseEventHandler(trackBar_binary_MouseDown);
             trackBar_binary.MouseMove += new MouseEventHandler(trackBar_binary_MouseMove);
             trackBar_binary.MouseUp += new MouseEventHandler(trackBar_binary_MouseUp);
 
@@ -132,79 +118,64 @@ namespace vcs_ImageProcessingH
             bt_exit_setup();
         }
 
-        void trackBar_gamma1_MouseDown(object sender, MouseEventArgs e)
-        {
-            // TBD
-        }
-
         void trackBar_gamma1_MouseMove(object sender, MouseEventArgs e)
         {
-            // TBD
+            float gamma = (float)(trackBar_gamma1.Value) / 10;
+            label1.Text = "Gamma = " + gamma.ToString();
         }
 
         void trackBar_gamma1_MouseUp(object sender, MouseEventArgs e)
         {
-            // TBD
-        }
-
-        void trackBar_gamma2_MouseDown(object sender, MouseEventArgs e)
-        {
-            // TBD
+            float gamma = (float)(trackBar_gamma1.Value) / 10;
+            pictureBox1.Image = apply_gamma1(filename, gamma);
         }
 
         void trackBar_gamma2_MouseMove(object sender, MouseEventArgs e)
         {
-            // TBD
+            float gamma = (float)(trackBar_gamma2.Value) / 10;
+            label2.Text = "Gamma = " + gamma.ToString();
         }
 
         void trackBar_gamma2_MouseUp(object sender, MouseEventArgs e)
         {
-            // TBD
-        }
-
-        void trackBar_brightness_MouseDown(object sender, MouseEventArgs e)
-        {
-            // TBD
+            float gamma = (float)(trackBar_gamma2.Value) / 10;
+            pictureBox2.Image = apply_gamma2(filename, gamma);
         }
 
         void trackBar_brightness_MouseMove(object sender, MouseEventArgs e)
         {
-            // TBD
+            float brightness = (float)(trackBar_brightness.Value) / 10;
+            label3.Text = "Brightness = " + brightness.ToString();
         }
 
         void trackBar_brightness_MouseUp(object sender, MouseEventArgs e)
         {
-            // TBD
-        }
-
-        void trackBar_threshold_MouseDown(object sender, MouseEventArgs e)
-        {
-            // TBD
+            float brightness = (float)(trackBar_brightness.Value) / 10;
+            pictureBox3.Image = apply_brightness(filename, brightness);
         }
 
         void trackBar_threshold_MouseMove(object sender, MouseEventArgs e)
         {
-            // TBD
+            float threshold = (float)(trackBar_threshold.Value) / 100;
+            label4.Text = "Threshold = " + threshold.ToString();
         }
 
         void trackBar_threshold_MouseUp(object sender, MouseEventArgs e)
         {
-            // TBD
-        }
-
-        void trackBar_binary_MouseDown(object sender, MouseEventArgs e)
-        {
-            // TBD
+            float threshold = (float)(trackBar_threshold.Value) / 100;
+            pictureBox4.Image = apply_threshold(filename, threshold);
         }
 
         void trackBar_binary_MouseMove(object sender, MouseEventArgs e)
         {
-            // TBD
+            int binary = trackBar_binary.Value;
+            label5.Text = "二值化對比 = " + binary.ToString();
         }
 
         void trackBar_binary_MouseUp(object sender, MouseEventArgs e)
         {
-            // TBD
+            int binary = trackBar_binary.Value;
+            pictureBox5.Image = apply_contrast_enhancement(filename, binary);
         }
 
         void bt_exit_setup()
@@ -246,7 +217,7 @@ namespace vcs_ImageProcessingH
             gamma += 0.3f;
             if (gamma > 2.5f)
                 gamma = 0.1f;
-            pictureBox1.Image = apply_gamma(filename, gamma);
+            pictureBox1.Image = apply_gamma1(filename, gamma);
 
             brightness += 0.3f;
             if (brightness > 2.5f)
@@ -263,11 +234,10 @@ namespace vcs_ImageProcessingH
                 binary -= 255;
             pictureBox4.Image = apply_contrast_enhancement(filename, binary);
 
-
             pictureBox5.Image = apply_gamma2(filename, gamma);
         }
 
-        private Bitmap apply_gamma(string filename, float gamma)
+        private Bitmap apply_gamma1(string filename, float gamma)
         {
             label1.Text = "Gamma = " + gamma.ToString();
 
@@ -299,7 +269,7 @@ namespace vcs_ImageProcessingH
 
         private Bitmap apply_brightness(string filename, float brightness)
         {
-            label2.Text = "Brightness = " + brightness.ToString();
+            label3.Text = "Brightness = " + brightness.ToString();
 
             Image image = Image.FromFile(filename);
 
@@ -338,7 +308,7 @@ namespace vcs_ImageProcessingH
 
         private Bitmap apply_threshold(string filename, float threshold)
         {
-            label3.Text = "Threshold = " + threshold.ToString();
+            label4.Text = "Threshold = " + threshold.ToString();
 
             Image image = Image.FromFile(filename);
 
@@ -366,12 +336,11 @@ namespace vcs_ImageProcessingH
             return bm;
         }
 
-
         //二值化對比 ST
         //private Bitmap apply_threshold(string filename, float threshold)
         private Bitmap apply_contrast_enhancement(string filename, int binary)
         {
-            label4.Text = "二值化對比 " + binary.ToString();
+            label5.Text = "二值化對比 " + binary.ToString();
 
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 
@@ -397,13 +366,12 @@ namespace vcs_ImageProcessingH
         }
         //二值化對比 SP
 
-
         private Bitmap apply_gamma2(string filename, float gamma)
         {
-            label9.Text = "Gamma = " + gamma.ToString();
+            label2.Text = "Gamma = " + gamma.ToString();
 
             //從pictureBox取得Bitmap
-            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+            Bitmap bitmap1 = (Bitmap)pictureBox0.Image;
             Bitmap bitmap2 = KiGamma(bitmap1, gamma);
 
             return bitmap2;
@@ -496,6 +464,35 @@ namespace vcs_ImageProcessingH
         {
             picColor.BackColor = Color.FromArgb(scrRed.Value, scrGreen.Value, scrBlue.Value);
             ColorPicture();
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void bt_auto_Click(object sender, EventArgs e)
+        {
+            if (bt_auto.Text == "自動")
+            {
+                bt_auto.Text = "手動";
+                timer1.Enabled = true;
+                trackBar_gamma1.Visible = false;
+                trackBar_gamma2.Visible = false;
+                trackBar_brightness.Visible = false;
+                trackBar_threshold.Visible = false;
+                trackBar_binary.Visible = false;
+            }
+            else
+            {
+                bt_auto.Text = "自動";
+                timer1.Enabled = false;
+                trackBar_gamma1.Visible = true;
+                trackBar_gamma2.Visible = true;
+                trackBar_brightness.Visible = true;
+                trackBar_threshold.Visible = true;
+                trackBar_binary.Visible = true;
+            }
         }
     }
 }

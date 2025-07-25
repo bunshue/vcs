@@ -390,11 +390,11 @@ print('------------------------------------------------------------')	#60個
 
 import moviepy.editor
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 print('播放影片檔')
 
-vsr = moviepy.editor.VideoFileClip(filename)
+vsr = moviepy.editor.VideoFileClip(video_filename)
 vsr.preview()
 """
 

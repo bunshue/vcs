@@ -139,7 +139,7 @@ while True:
     time_new = time.time()
 
     fps = 1 / (time_new - time_old)
-    # print('{:.1f}'.format(fps))
+    # print("{:.1f}".format(fps))
     time_old = time_new
 
     k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
@@ -225,7 +225,7 @@ while cap.isOpened():
                 skip = 10  # ←略過 N 次不比對
             else:
                 print(".", end="")
-        cv2.imshow("frame", img)
+        cv2.imshow("WebCam", img)
         img_pre = img_now.copy()
 
     k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
@@ -240,12 +240,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 def image_process(roi):
-    """
-    print(type(roi))
-    print("shape = ", roi.shape)
-    print("W = ", roi.shape[1])
-    print("H = ", roi.shape[0])
-    """
     W = roi.shape[1]
     H = roi.shape[0]
     for j in range(H):
@@ -253,17 +247,16 @@ def image_process(roi):
             b = roi[j][i][0]
             g = roi[j][i][1]
             r = roi[j][i][2]
-            a = ((np.int16)(b) + (np.int16)(g) + (np.int16)(r)) // 3
-            # roi[j][i][0] = roi[j][i][1] = roi[j][i][2] = (np.uint8)(a)
-            # roi[j][i][0] = 255    #B
-            # roi[j][i][1] = 255    #G
-            roi[j][i][2] = 255  # R
+            gray = ((np.int16)(b) + (np.int16)(g) + (np.int16)(r)) // 3
+            roi[j][i][2] = gray  # R
+            roi[j][i][1] = gray  # G
+            roi[j][i][0] = gray  # B
     return roi
 
 
 print("擷取畫面的某一塊 做灰階處理 再貼回主畫面")
 
-x_st, y_st = 0, 0
+x_st, y_st = 640-100-10, 480-100-10
 w, h = 100, 100
 RECT = ((x_st, y_st), (x_st + w, y_st + h))
 (left, top), (right, bottom) = RECT
@@ -279,17 +272,14 @@ while True:
 
     # 取出子畫面
     roi1 = frame[top:bottom, left:right]
-
-    # roi2 = cv2.cvtColor(roi1, cv2.COLOR_BGR2HSV) #做影像處理1
-    roi2 = image_process(roi1)  # 做影像處理2
-
+    roi2 = image_process(roi1)  # 對子畫面做影像處理
     # 貼回原畫面
     frame[top:bottom, left:right] = roi2
 
     # 標示出來
     cv2.rectangle(frame, RECT[0], RECT[1], GREEN, 2)
 
-    cv2.imshow("frame", frame)
+    cv2.imshow("WebCam", frame)
 
     k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
@@ -300,120 +290,19 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-WebCam 使用
-一般使用
-偵測特定顏色 紅色
-目前 webcam 僅 x64 電腦可用
-"""
-
-cap = cv2.VideoCapture(0)
-
-# 取得影像的尺寸大小
-w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)  # 取得影像寬度
-h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)  # 取得影像高度
-fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
-print("Image Size: %d x %d, %d fps" % (w, h, fps))
-
-if not cap.isOpened():
-    print("Could not open video device")
-    sys.exit()
-else:
-    print("Video device opened")
-
-# 無效
-# 設定影像的尺寸大小
-# cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-# cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 360)
-
-count = 0
-background = 0
-
-## Capture the background in range of 60
-for i in range(60):
-    ret, background = cap.read()
-background = np.flip(background, axis=1)
-
-while True:
-    ret, frame = cap.read()
-
-    if ret == False:
-        print("無影像, 離開")
-        break
-
-    count += 1
-    # frame = np.flip(frame, axis=1)  #左右顛倒
-
-    ## Convert the color space from BGR to HSV
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
-    # 偵測特定顏色 紅色
-    ## Generate masks to detect red color
-    lower_red = np.array([0, 100, 0])
-    upper_red = np.array([9, 255, 255])
-    mask1 = cv2.inRange(hsv, lower_red, upper_red)
-
-    lower_red = np.array([170, 100, 00])
-    upper_red = np.array([180, 255, 255])
-    mask2 = cv2.inRange(hsv, lower_red, upper_red)
-
-    mask1 = mask1 + mask2
-
-    ## Open and Dilate the mask image
-    mask1 = cv2.morphologyEx(mask1, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
-    mask1 = cv2.morphologyEx(mask1, cv2.MORPH_DILATE, np.ones((3, 3), np.uint8))
-
-    ## Create an inverted mask to segment out the red color from the frame
-    mask2 = cv2.bitwise_not(mask1)
-
-    ## Segment the red color part out of the frame using bitwise and with the inverted mask
-    res1 = cv2.bitwise_and(frame, frame, mask=mask2)
-
-    ## Create image showing static background frame pixels only for the masked region
-    res2 = cv2.bitwise_and(background, background, mask=mask1)
-
-    ## Generating the final output and writing
-    finalOutput = cv2.addWeighted(res1, 1, res2, 1, 0)
-    cv2.imshow("WebCam", finalOutput)
-
-    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
-    if k == ESC:  # 按 ESC 鍵, 結束
-        break
-
-cap.release()
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+# 新進
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-sys.exit()
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-
-新進
-
-"""
 
 from PIL import ImageSequence
 
 print("------------------------------------------------------------")  # 60個
-
+"""
 print("兩個camera")
 print("按 ESC 離開")
 
@@ -456,7 +345,7 @@ while True:
 cap1.release()
 cap2.release()
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -482,10 +371,10 @@ while True:
     ret, frame = cap.read()
     frame = cv2.resize(frame, (w, h))  # 調整影像大小
     """ 2X2的寫法
-    output[0:h, 0:w] = frame             # 將 output 的特定區域置換為 frame, 左上
-    output[0:h, w:w*2] = frame             # 將 output 的特定區域置換為 frame, 右上
-    output[h:h*2, 0:w] = frame             # 將 output 的特定區域置換為 frame, 左下
-    output[h:h*2, w:w*2] = frame             # 將 output 的特定區域置換為 frame, 右下
+    output[0:h, 0:w] = frame  # 將 output 的特定區域置換為 frame, 左上
+    output[0:h, w:w*2] = frame  # 將 output 的特定區域置換為 frame, 右上
+    output[h:h*2, 0:w] = frame  # 將 output 的特定區域置換為 frame, 左下
+    output[h:h*2, w:w*2] = frame  # 將 output 的特定區域置換為 frame, 右下
     """
     img_list.append(frame)  # 每次擷取影像時，將影像存入串列
     if len(img_list) > N * N:
@@ -507,12 +396,13 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("VideoCapture 2 X 2")
+print("按 ESC 離開")
+
 cap = cv2.VideoCapture(0)
 
 while True:
     ret, frame = cap.read()
-    width = int(cap.get(3))
-    height = int(cap.get(4))
 
     image = np.zeros(frame.shape, np.uint8)
     smaller_frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)  # 調整影像大小
@@ -692,23 +582,19 @@ print("------------------------------------------------------------")  # 60個
 print("加 logo")
 print("按 ESC 離開")
 
-W, H = 640, 480
-
-logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
-
-logo_filename = "C:/_git/vcs/_4.python/_data/logo1.png"  # 400X400
+W, H = 640, 480  # 大圖
+w, h = 100, 120  # 小圖
+logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv.png"
 
 logo = cv2.imread(logo_filename)
-logo = cv2.resize(logo, (logo.shape[0] // 4, logo.shape[1] // 4))  # 調整影像大小
+logo = cv2.resize(logo, (w, h))  # 調整影像大小
 
-size = logo.shape
-print(size)
 img = np.zeros((H, W, 3), dtype="uint8")
 img[0:H, 0:W] = "255"
 
 print("製作mask")
-x_st, y_st = 10, 50  # logo貼上位置
-img[y_st : y_st + size[0], x_st : x_st + size[1]] = logo
+x_st, y_st = W-w-20, H-h-20  # logo貼上位置
+img[y_st : y_st + h, x_st : x_st + w] = logo
 img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉灰階
 ret, mask1 = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY_INV)
 logo = cv2.bitwise_and(img, img, mask=mask1)
@@ -730,9 +616,6 @@ while True:
     frame = cv2.resize(frame, (640, 480))  # 調整影像大小
     bg = cv2.bitwise_and(frame, frame, mask=mask2)
     output = cv2.add(bg, logo)
-
-    # output = cv2.bitwise_not(frame, mask=mask1)  # 套用 not 和遮罩
-    # output = cv2.bitwise_not(output, mask=mask1)  # 再次套用 not 和遮罩，將色彩轉成原來的顏色
 
     cv2.imshow("OpenCV 07", output)
 
@@ -861,9 +744,59 @@ print("OK")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# cv2 物體移動追蹤
+
+# 開啟影片檔案
+# video_filename = "D:/Carreno Busta vs Kei Nishikori Final Set Tie Break HD.mp4"
+video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+
+cap = cv2.VideoCapture(video_filename)
+
+tracker = cv2.TrackerCSRT_create()
+
+xx, yy, ww, hh = 350, 50, 200, 250  # 設定追蹤物體
+
+roi = None
+while True:
+    ret, frame = cap.read()
+
+    # 指定追蹤物體
+    if roi is None:
+        roi = (xx, yy, ww, hh)
+        tracker.init(frame, roi)
+
+    """
+    # 人為設定追蹤物體
+    if roi is None:
+        roi = cv2.selectROI("frame", frame)
+        if roi != (0, 0, 0, 0):
+            tracker.init(frame, roi)
+            print(roi)
+    """
+
+    success, rect = tracker.update(frame)
+    if success:
+        (x, y, w, h) = [int(i) for i in rect]
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)  # 紅框
+
+    xx, yy, ww, hh
+    cv2.rectangle(frame, (xx, yy), (xx + ww, yy + hh), (0, 255, 0), 1)  # 綠框
+
+    cv2.imshow("OpenCV", frame)
+
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
+    if k == ESC:  # 按 ESC 鍵, 結束
+        break
+    
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("OpenCV_ai_72 追蹤功能 按a開始 選取ROI, 按Enter確定")
 
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 video_filename = "D:/tennis.mp4"
 
 tracker = cv2.TrackerCSRT_create()  # 創建追蹤器
@@ -902,6 +835,55 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 背景移除
+
+# 開啟影片檔案
+video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/vtest.avi"
+# video_filename = 'D:/Carreno Busta vs Kei Nishikori Final Set Tie Break HD.mp4'
+# video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+
+cap = cv2.VideoCapture(video_filename)
+
+bg = None
+
+while True:
+    ret, frame = cap.read()
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    gray = cv2.GaussianBlur(gray, (17, 17), 0)  # 執行高斯模糊化
+
+    if bg is None:
+        bg = gray
+        continue
+
+    diff = cv2.absdiff(gray, bg)
+    diff = cv2.threshold(diff, 30, 255, cv2.THRESH_BINARY)[1]
+    diff = cv2.erode(diff, None, iterations=2)
+    diff = cv2.dilate(diff, None, iterations=2)
+
+    cv2.imshow("OpenCV 2", diff)
+
+    cnts, hierarchy = cv2.findContours(diff, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    for c in cnts:
+        if cv2.contourArea(c) < 500:
+            continue
+
+        (x, y, w, h) = cv2.boundingRect(c)
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 255), 2)
+
+    cv2.imshow("OpenCV 1", frame)
+
+    k = cv2.waitKey(100)  # 等待按鍵輸入 100 msec
+    if k == ESC:  # 按 ESC 鍵, 結束
+        break
+    
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
 print("OpenCV_ai_74 影片")
@@ -1142,7 +1124,7 @@ while True:
     #### 在while內
     mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
     frame = cv2.hconcat([frame, mask])
-    cv2.imshow("frame", frame)
+    cv2.imshow("WebCam", frame)
 
     k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
@@ -1324,3 +1306,47 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+# 取得影像的尺寸大小
+w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)  # 取得影像寬度
+h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)  # 取得影像高度
+fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
+print("Image Size: %d x %d, %d fps" % (w, h, fps))
+
+
+# 無效
+# 設定影像的尺寸大小
+# cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+# cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 360)
+
+
+## Capture the background in range of 60
+for i in range(60):
+    ret, background = cap.read()
+background = np.flip(background, axis=1)
+
+
+
+
+## Open and Dilate the mask image
+mask1 = cv2.morphologyEx(mask1, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
+mask1 = cv2.morphologyEx(mask1, cv2.MORPH_DILATE, np.ones((3, 3), np.uint8))
+
+## Create an inverted mask to segment out the red color from the frame
+mask2 = cv2.bitwise_not(mask1)
+
+## Segment the red color part out of the frame using bitwise and with the inverted mask
+res1 = cv2.bitwise_and(image, image, mask=mask2)
+
+# frame = np.flip(frame, axis=1)  #左右顛倒
+
+res2 = cv2.bitwise_and(background, background, mask=mask1)
+finalOutput = cv2.addWeighted(res1, 1, res2, 1, 0)
+
+# W = int(cap.get(3))
+# H = int(cap.get(4))
+
+output = cv2.bitwise_not(frame, mask=mask1)  # 套用 not 和遮罩
+output = cv2.bitwise_not(output, mask=mask1)  # 再次套用 not 和遮罩，將色彩轉成原來的顏色
+

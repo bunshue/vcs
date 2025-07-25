@@ -1059,7 +1059,7 @@ foldername = 'C:/_git/vcs/_1.data/______test_files5'
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif'
 
-video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_word/python_docx1.docx'
 filename = 'C:/_git/vcs/_1.data/______test_files2/output.avi'

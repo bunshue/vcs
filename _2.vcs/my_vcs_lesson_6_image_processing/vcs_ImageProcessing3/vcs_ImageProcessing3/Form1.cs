@@ -54,18 +54,13 @@ namespace vcs_ImageProcessing3
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 140 + 10;
+            int dy = 40 + 10;
+            int W = 150;
+            int H = 400;
 
-            //button
-            x_st = 10;
-            y_st = 10;
-            dx = 170 + 10;
-            dy = 50 + 10;
-
-            bt_restore.Location = new Point(x_st + dx * 8 - 80, y_st + dy * 0);
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -99,23 +94,47 @@ namespace vcs_ImageProcessing3
             button30.Location = new Point(x_st + dx * 1, y_st + dy * 14);
             button31.Location = new Point(x_st + dx * 1, y_st + dy * 15);
 
+            groupBox0.Size = new Size(W, H);
+            groupBox1.Size = new Size(W, H);
+            groupBox2.Size = new Size(W, H);
+            groupBox3.Size = new Size(W, H);
+            groupBox4.Size = new Size(W, H / 2 + 20);
+            groupBox0.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            groupBox3.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            groupBox4.Location = new Point(x_st + dx * 2, y_st + dy * 16);
+
             pictureBox1.Size = new Size(680, 680);
-            pictureBox1.Location = new Point(x_st + dx * 3 + 20, y_st + dy * 0 + 15);
+            pictureBox1.Location = new Point(x_st + dx * 4 + 10, y_st + dy * 0);
             pictureBox2.Size = new Size(680, 680);
-            pictureBox2.Location = new Point(x_st + dx * 3 + 20 + 360, y_st + dy * 0 + 15 + 680);
+            pictureBox2.Location = new Point(x_st + dx * 4 + 10, y_st + dy * 0 + 680);
 
-            richTextBox1.Size = new Size(400, 900);
-            richTextBox1.Location = new Point(x_st + dx * 8, y_st + dy * 0);
-
-            groupBox0.Location = new Point(x_st + dx * 2, y_st + dy * 10);
-            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 10);
-            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            groupBox3.Location = new Point(x_st + dx * 4, y_st + dy * 10);
-            groupBox4.Location = new Point(x_st + dx * 5, y_st + dy * 10);
+            bt_restore.Location = new Point(x_st + dx * 10, y_st + dy * 0);
+            richTextBox1.Size = new Size(300, 900);
+            richTextBox1.Location = new Point(x_st + dx * 10 + 100, y_st + dy * 0);
 
             x_st = 20;
             y_st = 30;
-            dy = 40 + 10;
+            dy = 35 + 10;
+            bt_image_process_p0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_image_process_p1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_image_process_p2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_image_process_p3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_image_process_p4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_image_process_p5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_image_process_p6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            bt_image_process_p7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+
+            bt_image_process_m0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_image_process_m1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_image_process_m2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_image_process_m3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_image_process_m7.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_image_process_m5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_image_process_m6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            bt_image_process_m7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+
             bt_edge_detection0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_edge_detection1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_edge_detection2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -124,6 +143,20 @@ namespace vcs_ImageProcessing3
             bt_edge_detection5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             bt_edge_detection6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             bt_edge_detection7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+
+            bt_image_process_a0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_image_process_a1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_image_process_a2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_image_process_a3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_image_process_a4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_image_process_a5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_image_process_a6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            bt_image_process_a7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+
+            bt_image_process_b0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_image_process_b1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_image_process_b2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_image_process_b3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -425,23 +458,276 @@ namespace vcs_ImageProcessing3
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //Sepia 1
+            //將圖片轉為 Sepia 效果
+            // Display the image converted to sepia tone.
+            pictureBox2.Image = ToSepiaTone1(pictureBox1.Image);
         }
+
+        // Convert an image to sepia tone.
+        private Bitmap ToSepiaTone1(Image image)
+        {
+            // Make the ColorMatrix.
+            ColorMatrix cm = new ColorMatrix(new float[][]
+            {
+                new float[] {0.393f, 0.349f, 0.272f, 0, 0},
+                new float[] {0.769f, 0.686f, 0.534f, 0, 0},
+                new float[] {0.189f, 0.168f, 0.131f, 0, 0},
+                new float[] { 0, 0, 0, 1, 0},
+                new float[] { 0, 0, 0, 0, 1}
+            });
+            //ColorMatrix cm = new ColorMatrix(new float[][]
+            //{
+            //    new float[] {0.300f, 0.066f, 0.300f, 0, 0},
+            //    new float[] {0.500f, 0.350f, 0.600f, 0, 0},
+            //    new float[] {0.100f, 0.000f, 0.200f, 0, 0},
+            //    new float[] { 0, 0, 0, 1, 0},
+            //    new float[] { 0, 0, 0, 0, 1}
+            //});
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetColorMatrix(cm);
+
+            // Draw the image onto the new bitmap while applying the new ColorMatrix.
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(image.Width - 1, 0),
+                new Point(0, image.Height - 1),
+            };
+            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
+
+            // Make the result bitmap.
+            Bitmap bmp = new Bitmap(image.Width, image.Height);
+            using (Graphics gr = Graphics.FromImage(bmp))
+            {
+                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
+            }
+
+            // Return the result.
+            return bmp;
+        }
+
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //Sepia 2
+            //將圖片轉為 Sepia 效果
+            // Display the image converted to sepia tone.
+            pictureBox2.Image = ToSepiaTone2(pictureBox1.Image);
+        }
+
+        // Convert an image to sepia tone.
+        private Bitmap ToSepiaTone2(Image image)
+        {
+            //將圖片轉為 Sepia 效果
+            Bitmap bmp = new Bitmap(image);
+
+            int width = bmp.Width;
+            int height = bmp.Height;
+
+            Color p;
+
+            //sepia
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    //get pixel value
+                    p = bmp.GetPixel(x, y);
+
+                    //extract pixel component ARGB
+                    int a = p.A;
+                    int r = p.R;
+                    int g = p.G;
+                    int b = p.B;
+
+                    //calculate temp value
+                    int tr = (int)(0.393 * r + 0.769 * g + 0.189 * b);
+                    int tg = (int)(0.349 * r + 0.686 * g + 0.168 * b);
+                    int tb = (int)(0.272 * r + 0.534 * g + 0.131 * b);
+
+                    //set new RGB value
+                    if (tr > 255)
+                    {
+                        r = 255;
+                    }
+                    else
+                    {
+                        r = tr;
+                    }
+
+                    if (tg > 255)
+                    {
+                        g = 255;
+                    }
+                    else
+                    {
+                        g = tg;
+                    }
+
+                    if (tb > 255)
+                    {
+                        b = 255;
+                    }
+                    else
+                    {
+                        b = tb;
+                    }
+
+                    //set the new RGB value in image pixel
+                    bmp.SetPixel(x, y, Color.FromArgb(a, r, g, b));
+                }
+            }
+            return bmp;
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //單色處理
+            richTextBox1.Text += "單色處理\n";
+            pictureBox2.Image = ToMonochrome(pictureBox1.Image);
+        }
+
+
+        // Convert an image to monochrome.
+        private Bitmap ToMonochrome(Image image)
+        {
+            // Make the ColorMatrix.
+            ColorMatrix cm = new ColorMatrix(new float[][]
+            {
+                new float[] {0.299f, 0.299f, 0.299f, 0, 0},
+                new float[] {0.587f, 0.587f, 0.587f, 0, 0},
+                new float[] {0.114f, 0.114f, 0.114f, 0, 0},
+                new float[] { 0, 0, 0, 1, 0},
+                new float[] { 0, 0, 0, 0, 1}
+            });
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetColorMatrix(cm);
+
+            // Draw the image onto the new bitmap while applying the new ColorMatrix.
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(image.Width - 1, 0),
+                new Point(0, image.Height - 1),
+            };
+            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
+
+            // Make the result bitmap.
+            Bitmap bm = new Bitmap(image.Width, image.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
+            }
+            // Return the result.
+            return bm;
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //單色圖片 1
+            // Convert the image into red, green, and blue monochrome.
+            Image image = Image.FromFile(filename);
+            pictureBox1.Image = ScaleColorComponents(image, 1, 0, 0, 1);//R
+            pictureBox2.Image = ScaleColorComponents(image, 0, 1, 0, 1);//G
+            ///pictureBox1.Image = ScaleColorComponents(image, 0, 0, 1, 1);//G
+        }
+
+        // Scale an image's color components.
+        private Bitmap ScaleColorComponents(Image image, float r, float g, float b, float a)
+        {
+            // Make the ColorMatrix.
+            ColorMatrix cm = new ColorMatrix(new float[][]
+                {
+                    new float[] {r, 0, 0, 0, 0},
+                    new float[] {0, g, 0, 0, 0},
+                    new float[] {0, 0, b, 0, 0},
+                    new float[] {0, 0, 0, a, 0},
+                    new float[] {0, 0, 0, 0, 1},
+                });
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetColorMatrix(cm);
+
+            // Draw the image onto the new bitmap while applying the new ColorMatrix.
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(image.Width - 1, 0),
+                new Point(0, image.Height - 1),
+            };
+            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
+
+            // Make the result bitmap.
+            Bitmap bm = new Bitmap(image.Width, image.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
+            }
+
+            // Return the result.
+            return bm;
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //單色圖片 2
+            //製作單色圖片
+            show_mono_color_picture();
         }
+
+        private void show_mono_color_picture()
+        {
+            Bitmap bmp = new Bitmap(filename);
+
+            //load original image in picturebox1
+            //pictureBox1.Image = Image.FromFile(filename);
+
+            //get image dimension
+            int width = bmp.Width;
+            int height = bmp.Height;
+
+            //3 bitmap for red green blue image
+            Bitmap rbmp = new Bitmap(bmp);
+            Bitmap gbmp = new Bitmap(bmp);
+            Bitmap bbmp = new Bitmap(bmp);
+
+            //red green blue image
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    //get pixel value
+                    Color p = bmp.GetPixel(x, y);
+
+                    //extract ARGB value from p
+                    int a = p.A;
+                    int r = p.R;
+                    int g = p.G;
+                    int b = p.B;
+
+                    //set red image pixel
+                    rbmp.SetPixel(x, y, Color.FromArgb(a, r, 0, 0));
+
+                    //set green image pixel
+                    gbmp.SetPixel(x, y, Color.FromArgb(a, 0, g, 0));
+
+                    //set blue image pixel
+                    bbmp.SetPixel(x, y, Color.FromArgb(a, 0, 0, b));
+                }
+            }
+
+            //load red image in picturebox7
+            pictureBox1.Image = rbmp;
+
+            //load green image in picturebox8
+            pictureBox2.Image = gbmp;
+
+            //load blue image in picturebox9
+            //pictureBox1.Image = bbmp;
+        }
+
+
+
 
         int cnt = 0;
         private void button8_Click(object sender, EventArgs e)
@@ -3024,28 +3310,6 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         {
 
         }
-
-        private void bt_image_process_b4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_b5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_b6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_b7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
     }
 
     //指針法

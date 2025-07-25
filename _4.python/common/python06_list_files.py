@@ -2598,7 +2598,7 @@ for _ in all_files:
 video_player_path_kilo = "xxxx"
 video_player_path_sugar = "D:/___backup/PotPlayer/PotPlayerMini64.exe"
 
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 cmd = "D:/___backup/PotPlayer/PotPlayerMini64.exe cccc.dpl"
 os.system(cmd)

@@ -31,14 +31,42 @@ namespace vcs_ImageProcessing5
         {
             int x_st = 12;
             int y_st = 12;
-            int dx = 100;
-            int dy = 100;
+            int dx = 120;
+            int dy = 50;
 
-            pictureBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            pictureBox2.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            btnReset.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            btnEmboss1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            btnEmboss2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            btnEmboss3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            btnBlur1.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            btnBlur2.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            btnHighPass1.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            btnHighPass2.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            btnEdge1.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            btnEdge2.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            btnEdge3.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            lb_elapsed.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+
+            btnAverage.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            btnGrayscale.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            btnRed.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            btnGreen.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            btnBlue.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            btnInvert.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            label1.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            txtRank.Location = new Point(x_st + dx * 1 + 60, y_st + dy * 6);
+            btnMaximum.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            btnMinimum.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            btnPixellate.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            btnPointellate.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+
+            bt_open.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
+            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            pictureBox2.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
             richTextBox1.Size = new Size(300, 600);
-            richTextBox1.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1200, 670);

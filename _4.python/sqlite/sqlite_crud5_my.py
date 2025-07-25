@@ -197,8 +197,7 @@ foldername1 = "C:/_git/vcs/_1.data/______test_files3"
 paths = [foldername1]
 walk_python_files(paths)
 
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 print("全檔名/長檔名 : ", filename)
 

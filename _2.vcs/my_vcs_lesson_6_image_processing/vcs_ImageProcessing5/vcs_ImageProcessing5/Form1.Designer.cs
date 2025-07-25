@@ -69,7 +69,7 @@
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(100, 40);
             this.btnReset.TabIndex = 0;
-            this.btnReset.Text = "Reset";
+            this.btnReset.Text = "恢復原圖";
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // lb_elapsed
@@ -87,7 +87,7 @@
             this.btnEmboss1.Name = "btnEmboss1";
             this.btnEmboss1.Size = new System.Drawing.Size(100, 40);
             this.btnEmboss1.TabIndex = 1;
-            this.btnEmboss1.Text = "Emboss 1";
+            this.btnEmboss1.Text = "浮雕 1";
             this.btnEmboss1.Click += new System.EventHandler(this.btnEmboss1_Click);
             // 
             // btnBlur1
@@ -96,7 +96,7 @@
             this.btnBlur1.Name = "btnBlur1";
             this.btnBlur1.Size = new System.Drawing.Size(100, 40);
             this.btnBlur1.TabIndex = 4;
-            this.btnBlur1.Text = "Blur 1";
+            this.btnBlur1.Text = "模糊 1";
             this.btnBlur1.Click += new System.EventHandler(this.btnBlur1_Click);
             // 
             // btnBlur2
@@ -105,7 +105,7 @@
             this.btnBlur2.Name = "btnBlur2";
             this.btnBlur2.Size = new System.Drawing.Size(100, 40);
             this.btnBlur2.TabIndex = 5;
-            this.btnBlur2.Text = "Blur 2";
+            this.btnBlur2.Text = "模糊 2";
             this.btnBlur2.Click += new System.EventHandler(this.btnBlur2_Click);
             // 
             // btnHighPass1
@@ -114,7 +114,7 @@
             this.btnHighPass1.Name = "btnHighPass1";
             this.btnHighPass1.Size = new System.Drawing.Size(100, 40);
             this.btnHighPass1.TabIndex = 6;
-            this.btnHighPass1.Text = "High Pass 1";
+            this.btnHighPass1.Text = "高通 1";
             this.btnHighPass1.Click += new System.EventHandler(this.btnHighPass1_Click);
             // 
             // btnHighPass2
@@ -123,7 +123,7 @@
             this.btnHighPass2.Name = "btnHighPass2";
             this.btnHighPass2.Size = new System.Drawing.Size(100, 40);
             this.btnHighPass2.TabIndex = 7;
-            this.btnHighPass2.Text = "High Pass 2";
+            this.btnHighPass2.Text = "高通 2";
             this.btnHighPass2.Click += new System.EventHandler(this.btnHighPass2_Click);
             // 
             // btnEdge1
@@ -132,7 +132,7 @@
             this.btnEdge1.Name = "btnEdge1";
             this.btnEdge1.Size = new System.Drawing.Size(100, 40);
             this.btnEdge1.TabIndex = 8;
-            this.btnEdge1.Text = "Edge 1";
+            this.btnEdge1.Text = "邊緣檢測 1";
             this.btnEdge1.Click += new System.EventHandler(this.btnEdge1_Click);
             // 
             // btnEdge2
@@ -141,7 +141,7 @@
             this.btnEdge2.Name = "btnEdge2";
             this.btnEdge2.Size = new System.Drawing.Size(100, 40);
             this.btnEdge2.TabIndex = 9;
-            this.btnEdge2.Text = "Edge 2";
+            this.btnEdge2.Text = "邊緣檢測 2";
             this.btnEdge2.Click += new System.EventHandler(this.btnEdge2_Click);
             // 
             // btnEmboss2
@@ -150,7 +150,7 @@
             this.btnEmboss2.Name = "btnEmboss2";
             this.btnEmboss2.Size = new System.Drawing.Size(100, 40);
             this.btnEmboss2.TabIndex = 2;
-            this.btnEmboss2.Text = "Emboss 2";
+            this.btnEmboss2.Text = "浮雕 2";
             this.btnEmboss2.Click += new System.EventHandler(this.btnEmboss2_Click);
             // 
             // btnEdge3
@@ -159,7 +159,7 @@
             this.btnEdge3.Name = "btnEdge3";
             this.btnEdge3.Size = new System.Drawing.Size(100, 40);
             this.btnEdge3.TabIndex = 10;
-            this.btnEdge3.Text = "Edge 3";
+            this.btnEdge3.Text = "邊緣檢測 3";
             this.btnEdge3.Click += new System.EventHandler(this.btnEdge3_Click);
             // 
             // btnAverage
@@ -168,7 +168,7 @@
             this.btnAverage.Name = "btnAverage";
             this.btnAverage.Size = new System.Drawing.Size(100, 40);
             this.btnAverage.TabIndex = 16;
-            this.btnAverage.Text = "Average";
+            this.btnAverage.Text = "平均";
             this.btnAverage.Click += new System.EventHandler(this.btnAverage_Click);
             // 
             // btnGrayscale
@@ -177,7 +177,7 @@
             this.btnGrayscale.Name = "btnGrayscale";
             this.btnGrayscale.Size = new System.Drawing.Size(100, 40);
             this.btnGrayscale.TabIndex = 17;
-            this.btnGrayscale.Text = "Grayscale";
+            this.btnGrayscale.Text = "灰階";
             this.btnGrayscale.Click += new System.EventHandler(this.btnGrayscale_Click);
             // 
             // pictureBox1
@@ -206,7 +206,7 @@
             this.btnGreen.Name = "btnGreen";
             this.btnGreen.Size = new System.Drawing.Size(100, 40);
             this.btnGreen.TabIndex = 19;
-            this.btnGreen.Text = "Green";
+            this.btnGreen.Text = "G";
             this.btnGreen.Click += new System.EventHandler(this.btnGreen_Click);
             // 
             // btnRed
@@ -215,7 +215,7 @@
             this.btnRed.Name = "btnRed";
             this.btnRed.Size = new System.Drawing.Size(100, 40);
             this.btnRed.TabIndex = 18;
-            this.btnRed.Text = "Red";
+            this.btnRed.Text = "R";
             this.btnRed.Click += new System.EventHandler(this.btnRed_Click);
             // 
             // btnBlue
@@ -224,7 +224,7 @@
             this.btnBlue.Name = "btnBlue";
             this.btnBlue.Size = new System.Drawing.Size(100, 40);
             this.btnBlue.TabIndex = 20;
-            this.btnBlue.Text = "Blue";
+            this.btnBlue.Text = "B";
             this.btnBlue.Click += new System.EventHandler(this.btnBlue_Click);
             // 
             // btnInvert
@@ -233,7 +233,7 @@
             this.btnInvert.Name = "btnInvert";
             this.btnInvert.Size = new System.Drawing.Size(100, 40);
             this.btnInvert.TabIndex = 21;
-            this.btnInvert.Text = "Invert";
+            this.btnInvert.Text = "反相(負片)";
             this.btnInvert.Click += new System.EventHandler(this.btnInvert_Click);
             // 
             // btnMaximum
@@ -301,7 +301,7 @@
             this.btnEmboss3.Name = "btnEmboss3";
             this.btnEmboss3.Size = new System.Drawing.Size(100, 40);
             this.btnEmboss3.TabIndex = 3;
-            this.btnEmboss3.Text = "Emboss 3";
+            this.btnEmboss3.Text = "浮雕 3";
             this.btnEmboss3.Click += new System.EventHandler(this.btnEmboss3_Click);
             // 
             // richTextBox1
