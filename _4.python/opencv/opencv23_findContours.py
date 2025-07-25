@@ -1456,7 +1456,9 @@ image = cv2.GaussianBlur(image, (3, 3), 0.5)  # 高斯平滑處理    #執行高
 binaryImg = cv2.Canny(image, 50, 200)
 cvshow("binaryImg", binaryImg)
 
-contours, hierarchy = cv2.findContours(binaryImg, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+contours, hierarchy = cv2.findContours(
+    binaryImg, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+)
 print("資料類型 :", type(contours))
 print("輪廓數量 :", len(contours))
 # print(contours)
@@ -1603,9 +1605,7 @@ def circularity(contour):
     return perimeter * perimeter / (4 * np.pi * con_area)
 
 
-contours = [
-    contour for contour in contours if 0.8 < circularity(contour) < 1.2
-]
+contours = [contour for contour in contours if 0.8 < circularity(contour) < 1.2]
 
 # 繪製圖形外輪廓(填滿)
 cv2.drawContours(image, contours, -1, RED)

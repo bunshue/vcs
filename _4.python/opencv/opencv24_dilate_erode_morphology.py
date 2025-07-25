@@ -1541,7 +1541,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1556,6 +1555,7 @@ def do_trackbar_event1(val):
     erosion = cv2.erode(image, kernel)  # 侵蝕.erode
     draw_line(dilation)  # 畫輔助線
     cv2.imshow("OpenCV", dilation)
+
 
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
 
@@ -1600,4 +1600,3 @@ print("------------------------------------------------------------")  # 60個
 res = cv2.resize(
     image, None, fx=0.6, fy=0.6, interpolation=cv2.INTER_CUBIC
 )  # 圖形太大了縮小一點
-

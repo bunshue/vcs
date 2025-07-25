@@ -1573,11 +1573,11 @@ print("------------------------------------------------------------")  # 60個
 image = np.random.randint(-256, 256, size=[3, 5], dtype=np.int16)
 print(f"image = \n {image}")
 
-print('取絕對值')
+print("取絕對值")
 dst1 = cv2.convertScaleAbs(image)
 print(f"dst1 = \n {dst1}")
 
-print('取限制100~200')
+print("取限制100~200")
 dst2 = np.clip(image, 100, 200)
 print(f"dst2 = \n {dst2}")
 

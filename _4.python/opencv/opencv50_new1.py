@@ -1038,7 +1038,7 @@ print("W :", W)
 print("H :", H)
 print("frames :", frames)
 print("fps :", fps)
-print("length :", length, '秒')
+print("length :", length, "秒")
 
 if not cap.isOpened():
     print("開啟影片失敗")
