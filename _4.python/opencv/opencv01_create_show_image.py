@@ -968,10 +968,10 @@ print("------------------------------------------------------------")  # 60個
 # plt.imshow(image)#直接顯示 影像錯誤 因為opencv的imread讀出來是BGR排列
 # 將 OpenCV 讀入的 BGR 格式轉為 Matplotlib 用的 RGB 格式，再交給 Matplotlib 顯示
 
-# plt.imshow(image_gray, cmap="gray") # 灰階顯示
+# plt.imshow(image_gray, cmap="gray")  # 灰階顯示
 # plt.imshow(cv2.cvtColor(image_gray, cv2.COLOR_BGR2RGB))
 
-# 等同於 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB)) #BGR轉RGB再交由matplotlib顯示之
+# 等同於 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))  # BGR轉RGB再交由matplotlib顯示之
 
 # BGR排列轉RGB排列
 rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)

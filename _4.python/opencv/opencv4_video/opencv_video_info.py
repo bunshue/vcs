@@ -329,6 +329,7 @@ def get_video_info(video):
     print(type(video_info))
     return video_info
 
+
 video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 vid = cv2.VideoCapture(video_filename)
 

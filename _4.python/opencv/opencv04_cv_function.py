@@ -1235,7 +1235,7 @@ xgrid = xgrid.astype(np.float32)
 fig, axes = plt.subplots(1, 3, figsize=(9, 3))
 axes[0].imshow(img_left)
 axes[0].imshow(img_right, alpha=0.5)
-# axes[1].imshow(disparity, cmap="gray")
+# axes[1].imshow(disparity, cmap="gray")  # 灰階顯示
 axes[2].imshow(img_left)
 # axes[2].imshow(res, alpha=0.5)
 for ax in axes:
@@ -1562,7 +1562,7 @@ mask = np.zeros((h + 2, w + 2), np.uint8)
 cv2.floodFill(img, mask, seed1, BLACK, diff, diff, cv2.FLOODFILL_MASK_ONLY)
 cv2.floodFill(img, None, seed2, RED, diff, diff)
 fig, axes = plt.subplots(1, 2, figsize=(9, 4))
-axes[0].imshow(~mask, cmap="gray")
+axes[0].imshow(~mask, cmap="gray")  # 灰階顯示
 axes[1].imshow(img)
 
 show()

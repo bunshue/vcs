@@ -256,7 +256,7 @@ def image_process(roi):
 
 print("擷取畫面的某一塊 做灰階處理 再貼回主畫面")
 
-x_st, y_st = 640-100-10, 480-100-10
+x_st, y_st = 640 - 100 - 10, 480 - 100 - 10
 w, h = 100, 100
 RECT = ((x_st, y_st), (x_st + w, y_st + h))
 (left, top), (right, bottom) = RECT
@@ -593,7 +593,7 @@ img = np.zeros((H, W, 3), dtype="uint8")
 img[0:H, 0:W] = "255"
 
 print("製作mask")
-x_st, y_st = W-w-20, H-h-20  # logo貼上位置
+x_st, y_st = W - w - 20, H - h - 20  # logo貼上位置
 img[y_st : y_st + h, x_st : x_st + w] = logo
 img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉灰階
 ret, mask1 = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY_INV)
@@ -787,7 +787,7 @@ while True:
     k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
         break
-    
+
 cap.release()
 cv2.destroyAllWindows()
 
@@ -879,7 +879,7 @@ while True:
     k = cv2.waitKey(100)  # 等待按鍵輸入 100 msec
     if k == ESC:  # 按 ESC 鍵, 結束
         break
-    
+
 cap.release()
 cv2.destroyAllWindows()
 
@@ -1327,8 +1327,6 @@ for i in range(60):
 background = np.flip(background, axis=1)
 
 
-
-
 ## Open and Dilate the mask image
 mask1 = cv2.morphologyEx(mask1, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
 mask1 = cv2.morphologyEx(mask1, cv2.MORPH_DILATE, np.ones((3, 3), np.uint8))
@@ -1349,4 +1347,3 @@ finalOutput = cv2.addWeighted(res1, 1, res2, 1, 0)
 
 output = cv2.bitwise_not(frame, mask=mask1)  # 套用 not 和遮罩
 output = cv2.bitwise_not(output, mask=mask1)  # 再次套用 not 和遮罩，將色彩轉成原來的顏色
-
