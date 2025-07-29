@@ -2043,4 +2043,3 @@ plt.plot(x, y, "bo")
 plt.text(x, y, s, va="bottom", ha="left", color="b")
 plt.plot(x, y, "r^")
 plt.text(x, y, s, va="bottom", ha="left", color="r")
-

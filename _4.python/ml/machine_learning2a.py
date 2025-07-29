@@ -2199,29 +2199,6 @@ plt.figure(1)
 # 繪圓點, 圓點用黑色外框
 plt.scatter(data[:, 0], data[:, 1], marker="o", edgecolor="black")
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-# 可搬出
-
-"""
-data/test3.csv
-性別,尺寸,價格
-male,XL,800
-female,M,400
-not specified,XXL,300
-male,L,500
-female,S,700
-female,XS,850
-"""
-
-df = pd.read_csv("data/test3.csv")
-print(df)
-
-label_encoder = preprocessing.LabelEncoder()
-df["性別"] = label_encoder.fit_transform(df["性別"])
-print(df)
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

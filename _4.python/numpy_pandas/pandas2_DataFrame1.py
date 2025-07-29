@@ -4204,26 +4204,51 @@ df = make_data_frame_from_dict()  # 字典 轉 df
 print(df)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-""" data2/test3.csv
-性別,尺寸,價格
-male,XL,800
-female,M,400
-not specified,XXL,300
-male,L,500
-female,S,700
-female,XS,850
-"""
+print("df內容的資料對應, .map() mapping的方法")
 
-print("df內容的資料對應")
+datas = [
+    ["male", "XL",  800],
+    ["female", "M", 400],
+    ["not specified", "XXL",  300],
+    ["male", " L", 500],
+    ["female", " S", 700],
+    ["female", "XS", 850]
+    ]
+columns = ["性別", "尺寸", "價格"]
+df = pd.DataFrame(np.array(datas), columns=columns)
 
-df = pd.read_csv("data2/test3.csv")
-print(df)
+print('原df :', df, sep="\n")
 
 size_mapping = {"XXL": 666, "XL": 555, "L": 444, "M": 333, "S": 222, "XS": 111}
 df["尺寸"] = df["尺寸"].map(size_mapping)
-print(df)
 
+print('對應後df :', df, sep="\n")
+
+print('使用 sklearn.preprocessing方法做資料對應')
+
+from sklearn import preprocessing
+
+datas = [
+    ["male", "XL",  800],
+    ["female", "M", 400],
+    ["not specified", "XXL",  300],
+    ["male", " L", 500],
+    ["female", " S", 700],
+    ["female", "XS", 850]
+    ]
+columns = ["性別", "尺寸", "價格"]
+df = pd.DataFrame(np.array(datas), columns=columns)
+
+print('原df :', df, sep="\n")
+
+label_encoder = preprocessing.LabelEncoder()
+df["性別"] = label_encoder.fit_transform(df["性別"])
+
+print('對應後df :', df, sep="\n")
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("測試 cumsum()")

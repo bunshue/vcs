@@ -125,12 +125,21 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 
 def show():
-    # plt.show()
-    pass
+    # pass
+    plt.tight_layout()  # 緊密排列，並填滿原圖大小
+    plt.show()
+
+
+def cvshow(title, image):
+    # pass
+    cv2.imshow(title, image)
+    cv2.waitKey()
+    cv2.destroyAllWindows()
 
 
 print("------------------------------------------------------------")  # 60個
 
+import cv2
 import tensorflow as tf
 
 # from keras.datasets import mnist  # same

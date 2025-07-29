@@ -52,14 +52,18 @@ while True:
 
     # 加上文字 ST
     current_time = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
-    cv2.rectangle(frame, (10, 10), (370, 42), BLACK, -1)  # 黑底
+    x_st, y_st = 50, 70
+    cv2.rectangle(
+        frame, (x_st - 12, y_st - 35), (x_st + 360, y_st + 15), GREEN, -1
+    )  # 黑底
     text = current_time  # "English Only"
-    org = (15, 35)
     fontFace = cv2.FONT_HERSHEY_SIMPLEX
     fontScale = 0.8
     thickness = 2
     lineType = cv2.LINE_AA
-    cv2.putText(frame, text, org, fontFace, fontScale, WHITE, thickness, lineType)
+    cv2.putText(
+        frame, text, (x_st, y_st), fontFace, fontScale, WHITE, thickness, lineType
+    )
     # 加上文字 SP
 
     """
@@ -72,7 +76,8 @@ while True:
 
     # 加 mask ST
     mask = np.zeros(frame.shape, dtype=np.uint8)  # 建立mask
-    mask[50 : int(h - 50), 50 : int(w - 50)] = 255  # 設定mask, 先高後寬
+    dd = 30
+    mask[dd : int(h - dd), dd : int(w - dd)] = 255  # 設定mask, 先高後寬
     frame = cv2.bitwise_and(frame, mask)  # 執行AND運算
     # 加 mask SP
 
@@ -83,7 +88,9 @@ while True:
     if k == ESC:  # 按 ESC 鍵, 結束
         break
     elif k == ord("S") or k == ord("s"):  # 按下 S, 存圖
-        filename = "Image_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".jpg"
+        filename = (
+            "tmp_Image_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".jpg"
+        )
         cv2.imwrite(filename, frame)
         print("已存圖, 檔案 :", filename)
 
@@ -93,7 +100,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("按 ESC 離開, 按 S 存圖")
+print("按 ESC 離開, 影像處理, fps")
 
 cap = cv2.VideoCapture(0)
 
@@ -147,6 +154,58 @@ while True:
         break
 
 cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+def image_process(roi):
+    W = roi.shape[1]
+    H = roi.shape[0]
+    for j in range(H):
+        for i in range(W):
+            b = roi[j][i][0]
+            g = roi[j][i][1]
+            r = roi[j][i][2]
+            gray = ((np.int16)(b) + (np.int16)(g) + (np.int16)(r)) // 3
+            roi[j][i][2] = gray  # R
+            roi[j][i][1] = gray  # G
+            roi[j][i][0] = gray  # B
+    return roi
+
+
+print("擷取畫面的某一塊 做灰階處理 再貼回主畫面")
+
+x_st, y_st = 640 - 100 - 10, 480 - 100 - 10
+w, h = 100, 100
+RECT = ((x_st, y_st), (x_st + w, y_st + h))
+(left, top), (right, bottom) = RECT
+
+cap = cv2.VideoCapture(0)
+
+if not cap.isOpened():
+    print("開啟攝影機失敗")
+    sys.exit()
+
+while True:
+    ret, frame = cap.read()
+
+    # 取出子畫面
+    roi1 = frame[top:bottom, left:right]
+    roi2 = image_process(roi1)  # 對子畫面做影像處理
+    # 貼回原畫面
+    frame[top:bottom, left:right] = roi2
+
+    # 標示出來
+    cv2.rectangle(frame, RECT[0], RECT[1], GREEN, 2)
+
+    cv2.imshow("WebCam", frame)
+
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
+    if k == ESC:  # 按 ESC 鍵, 結束
+        break
+
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -234,58 +293,6 @@ while cap.isOpened():
 
 cv2.destroyAllWindows()
 cap.release()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-def image_process(roi):
-    W = roi.shape[1]
-    H = roi.shape[0]
-    for j in range(H):
-        for i in range(W):
-            b = roi[j][i][0]
-            g = roi[j][i][1]
-            r = roi[j][i][2]
-            gray = ((np.int16)(b) + (np.int16)(g) + (np.int16)(r)) // 3
-            roi[j][i][2] = gray  # R
-            roi[j][i][1] = gray  # G
-            roi[j][i][0] = gray  # B
-    return roi
-
-
-print("擷取畫面的某一塊 做灰階處理 再貼回主畫面")
-
-x_st, y_st = 640 - 100 - 10, 480 - 100 - 10
-w, h = 100, 100
-RECT = ((x_st, y_st), (x_st + w, y_st + h))
-(left, top), (right, bottom) = RECT
-
-cap = cv2.VideoCapture(0)
-
-if not cap.isOpened():
-    print("開啟攝影機失敗")
-    sys.exit()
-
-while True:
-    ret, frame = cap.read()
-
-    # 取出子畫面
-    roi1 = frame[top:bottom, left:right]
-    roi2 = image_process(roi1)  # 對子畫面做影像處理
-    # 貼回原畫面
-    frame[top:bottom, left:right] = roi2
-
-    # 標示出來
-    cv2.rectangle(frame, RECT[0], RECT[1], GREEN, 2)
-
-    cv2.imshow("WebCam", frame)
-
-    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
-    if k == ESC:  # 按 ESC 鍵, 結束
-        break
-
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -842,7 +849,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 開啟影片檔案
 video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/vtest.avi"
-# video_filename = 'D:/Carreno Busta vs Kei Nishikori Final Set Tie Break HD.mp4'
+# video_filename = "D:/Carreno Busta vs Kei Nishikori Final Set Tie Break HD.mp4"
 # video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 cap = cv2.VideoCapture(video_filename)
