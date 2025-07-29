@@ -62,11 +62,11 @@ namespace vcs_ImageProcessingH
             label5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
             label0.Text = "原圖";
-            label1.Text = "";
-            label2.Text = "";
-            label3.Text = "";
-            label4.Text = "";
-            label5.Text = "";
+            label1.Text = "Gamma";
+            label2.Text = "Gamma";
+            label3.Text = "亮度";
+            label4.Text = "Threshold";
+            label5.Text = "二值化對比";
 
             trackBar_gamma1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + dd1);
             trackBar_gamma2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd1);
@@ -127,6 +127,8 @@ namespace vcs_ImageProcessingH
         void trackBar_gamma1_MouseUp(object sender, MouseEventArgs e)
         {
             float gamma = (float)(trackBar_gamma1.Value) / 10;
+            if (gamma < 0.1)
+                gamma = 0.1f;
             pictureBox1.Image = apply_gamma1(filename, gamma);
         }
 
@@ -145,7 +147,7 @@ namespace vcs_ImageProcessingH
         void trackBar_brightness_MouseMove(object sender, MouseEventArgs e)
         {
             float brightness = (float)(trackBar_brightness.Value) / 10;
-            label3.Text = "Brightness = " + brightness.ToString();
+            label3.Text = "亮度 = " + brightness.ToString();
         }
 
         void trackBar_brightness_MouseUp(object sender, MouseEventArgs e)

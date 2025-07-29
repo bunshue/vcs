@@ -27,6 +27,7 @@ namespace vcs_ImageProcessing3
         //string filename = @"C:\_git\vcs\_1.data\______test_files1\_image_processing\isinbaeva.jpg";
 
         Stopwatch sw = new Stopwatch();
+        Label lb_main_mesg = new Label();
 
         public Form1()
         {
@@ -109,6 +110,14 @@ namespace vcs_ImageProcessing3
             bt_restore.Location = new Point(x_st + dx * 10, y_st + dy * 0);
             richTextBox1.Size = new Size(300, 900);
             richTextBox1.Location = new Point(x_st + dx * 10 + 100, y_st + dy * 0);
+
+            // 實例化控件
+            lb_main_mesg.Text = "";
+            lb_main_mesg.Font = new Font("標楷體", 24);
+            lb_main_mesg.ForeColor = Color.Red;
+            lb_main_mesg.Location = new Point(x_st + dx * 10 - 50, y_st + dy * 1);
+            lb_main_mesg.AutoSize = true;
+            this.Controls.Add(lb_main_mesg);     // 將控件加入表單
 
             x_st = 20;
             y_st = 30;
@@ -760,6 +769,8 @@ namespace vcs_ImageProcessing3
         //底片效果
         private Bitmap image_processing1(string filename)
         {
+            lb_main_mesg.Text = "底片效果";
+
             Bitmap bitmap1 = new Bitmap(filename);
 
             int W = bitmap1.Width;
@@ -2035,11 +2046,20 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
 
         private void button30_Click(object sender, EventArgs e)
         {
-
+            pictureBox1.BackColor = Color.Pink;
+            //白色轉為透明
+            //C#將圖片白色背景設置為透明
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Image image = Image.FromFile(filename);
+            Bitmap bitmap1 = new Bitmap(image);
+            bitmap1.MakeTransparent(Color.White);
+            pictureBox1.Image = bitmap1;
         }
 
         private void button31_Click(object sender, EventArgs e)
         {
+            //依序顯示各項功能
+
             //關掉所有控件 
             remove_all_controls();
 
@@ -2050,6 +2070,15 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
             pictureBox1.Size = new Size(w, h);
             pictureBox1.Location = new Point((W - w) / 2, (H - h) / 2);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+
+            // 實例化控件
+            lb_main_mesg.Text = "";
+            lb_main_mesg.Font = new Font("標楷體", 24);
+            lb_main_mesg.ForeColor = Color.Red;
+            lb_main_mesg.Location = new Point(200, 80);
+            lb_main_mesg.AutoSize = true;
+            this.Controls.Add(lb_main_mesg);     // 將控件加入表單
+
             timer1.Enabled = true;
         }
 
