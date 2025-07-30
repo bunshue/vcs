@@ -102,7 +102,8 @@ while True:
         break
 
     now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-    cv2.putText(frame, now, (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, BLUE, 2, cv2.LINE_AA)
+    x_st, y_st = 20, 40
+    drawText(frame, x_st, y_st, now, scale=1.0, color=BLUE)  # 加入文字
 
     cv2.imshow("WebCam2", frame)
     if MODE == MODE_3:  # 縮時錄影
@@ -163,7 +164,8 @@ while True:
         break
 
     now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-    cv2.putText(frame, now, (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, BLUE, 2, cv2.LINE_AA)
+    x_st, y_st = 20, 40
+    drawText(frame, x_st, y_st, now, scale=1.0, color=BLUE)  # 加入文字
 
     cv2.imshow("WebCam2", frame)
     out.write(frame)  # 影像寫入影片檔

@@ -103,3 +103,18 @@ color = [
 ]
 
 print("------------------------------------------------------------")  # 60個
+
+
+def drawText(image, x_st, y_st, text, scale=0.8, color=WHITE):
+    # 文字背景
+    # cv2.rectangle(frame, (x_st - 12, y_st - 35), (x_st + 360, y_st + 15), GREEN, -1)
+    fontFace = cv2.FONT_HERSHEY_SIMPLEX
+    fontScale = scale
+    thickness = 2
+    lineType = cv2.LINE_AA
+    cv2.putText(
+        image, text, (x_st, y_st), fontFace, fontScale, color, thickness, lineType
+    )
+
+
+print("------------------------------------------------------------")  # 60個

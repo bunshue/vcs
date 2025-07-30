@@ -586,6 +586,7 @@
             this.bt_image_process_p15.Name = "bt_image_process_p15";
             this.bt_image_process_p15.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p15.TabIndex = 51;
+            this.bt_image_process_p15.Text = "test asp";
             this.bt_image_process_p15.UseVisualStyleBackColor = true;
             this.bt_image_process_p15.Click += new System.EventHandler(this.bt_image_process_p15_Click);
             // 

@@ -53,17 +53,7 @@ while True:
     # 加上文字 ST
     current_time = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
     x_st, y_st = 50, 70
-    cv2.rectangle(
-        frame, (x_st - 12, y_st - 35), (x_st + 360, y_st + 15), GREEN, -1
-    )  # 黑底
-    text = current_time  # "English Only"
-    fontFace = cv2.FONT_HERSHEY_SIMPLEX
-    fontScale = 0.8
-    thickness = 2
-    lineType = cv2.LINE_AA
-    cv2.putText(
-        frame, text, (x_st, y_st), fontFace, fontScale, WHITE, thickness, lineType
-    )
+    drawText(frame, x_st, y_st, current_time, scale=0.8, color=WHITE)  # 加入文字
     # 加上文字 SP
 
     """
@@ -81,8 +71,7 @@ while True:
     frame = cv2.bitwise_and(frame, mask)  # 執行AND運算
     # 加 mask SP
 
-    # 將影像顯示出來
-    cv2.imshow("WebCam", frame)
+    cv2.imshow("WebCam", frame)  # 將影像顯示出來
 
     k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
@@ -100,54 +89,40 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("按 ESC 離開, 影像處理, fps")
+print("計算 fps")
 
 cap = cv2.VideoCapture(0)
 
 if not cap.isOpened():
     print("開啟攝影機失敗")
     sys.exit()
-else:
-    ret, frame = cap.read()
 
-    if ret == False:
-        print("無影像, 離開")
-    else:
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉灰階
-        frame_blur_pre = cv2.GaussianBlur(gray, (13, 13), 15)  # 高斯模糊
+fps = 0
+frame_cnt = 0
+time_old = time.time()  # 計算fps
 
-time_old = time.time()
 while True:
-    # begin_time = time.time()  # 計算fps
     ret, frame = cap.read()
 
     if ret == False:
         print("無影像, 離開")
         break
 
-    # 原圖
-    cv2.imshow("WebCam1", frame)
+    frame_cnt += 1
+    if frame_cnt >= 10:
+        frame_cnt = 0
+        time_new = time.time()
+        fps = 10 / (time_new - time_old)
+        # print("{:.1f}".format(fps))
+        time_old = time_new
 
-    # 灰階處理
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉灰階
-    cv2.imshow("WebCam2", gray)
+    # 加上文字 ST
+    x_st, y_st = 50, 70
+    text = "{:.1f}".format(fps)
+    drawText(frame, x_st, y_st, text, scale=0.8, color=WHITE)  # 加入文字
+    # 加上文字 SP
 
-    # 高斯模糊
-    frame_blur = cv2.GaussianBlur(gray, (13, 13), 15)
-    cv2.imshow("WebCam3", frame_blur)
-
-    # 比較影像
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉灰階
-    frame_blur_now = cv2.GaussianBlur(gray, (13, 13), 15)  # 高斯模糊
-    diff = cv2.absdiff(frame_blur_now, frame_blur_pre)  # 現在影像與前影像相減
-    cv2.imshow("WebCam4", diff)  # 顯示相減後的影像
-    frame_blur_pre = frame_blur_now.copy()  # 將現在影像設為前影像
-
-    time_new = time.time()
-
-    fps = 1 / (time_new - time_old)
-    # print("{:.1f}".format(fps))
-    time_old = time_new
+    cv2.imshow("WebCam", frame)  # 將影像顯示出來
 
     k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
@@ -502,13 +477,7 @@ while True:
         a = a - 0.1
         if a < 0:
             a = 0
-            filename = (
-                "tmp3_Image_"
-                + time.strftime("%Y%m%d_%H%M%S", time.localtime())
-                + ".jpg"
-            )
-            cv2.imwrite(filename, photo)
-            print("已存圖, 檔案 :", filename)
+            print("偽存圖")
 
     cv2.imshow("OpenCV 05", output)  # 顯示圖片
 
@@ -522,16 +491,6 @@ print("存圖 按 SPACE 製作一個閃光燈拍照的效果 + 倒數三秒")
 print("按 ESC 離開")
 
 cap = cv2.VideoCapture(0)
-
-
-def putText(source, x, y, text, scale=2.5, color=WHITE):
-    org = (x, y)
-    fontFace = cv2.FONT_HERSHEY_SIMPLEX
-    fontScale = scale
-    thickness = 5
-    lineType = cv2.LINE_AA
-    cv2.putText(source, text, org, fontFace, fontScale, color, thickness, lineType)
-
 
 a = 0
 
@@ -563,20 +522,15 @@ while True:
         output = frame.copy()  # 設定 output 和 photo 變數
         photo = frame.copy()
         sec = sec - 0.05  # sec 不斷減少 0.05 ( 根據個人電腦效能設定，使其搭配 while 迴圈看起來像倒數一秒 )
-        putText(output, 10, 70, str(int(sec)))  # 加入文字
+        x_st, y_st = 10, 70
+        drawText(output, x_st, y_st, str(int(sec)), scale=0.8, color=WHITE)  # 加入文字
         # 如果秒數小於 1
         if sec < 1:
             output = cv2.addWeighted(white, a, photo, 1 - a, 0)
             a = a - 0.1
             if a < 0:
                 a = 0
-                filename = (
-                    "tmp4_Image_"
-                    + time.strftime("%Y%m%d_%H%M%S", time.localtime())
-                    + ".jpg"
-                )
-                cv2.imwrite(filename, photo)
-                print("已存圖, 檔案 :", filename)
+                print("偽存圖")
 
     cv2.imshow("OpenCV 06", output)
 
@@ -728,6 +682,7 @@ for i in source:
     # frame.save(f"tmp_gif{n}.gif")
     n = n + 1
 
+""" NG
 print("讀取 gif")
 
 output = []
@@ -747,7 +702,7 @@ output[0].save(
     disposal=2,
 )
 print("OK")
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -946,6 +901,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV_ai_75")
+print("OpenCV_ai_75 追蹤功能 按a開始 選取ROI, 按Enter確定")
 
 multiTracker = cv2.legacy.MultiTracker_create()  # 建立多物件追蹤器
 tracking = False  # 設定追蹤尚未開始
@@ -1354,3 +1310,17 @@ finalOutput = cv2.addWeighted(res1, 1, res2, 1, 0)
 
 output = cv2.bitwise_not(frame, mask=mask1)  # 套用 not 和遮罩
 output = cv2.bitwise_not(output, mask=mask1)  # 再次套用 not 和遮罩，將色彩轉成原來的顏色
+
+"""
+# 對每個frame的處理
+# 灰階處理
+gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉灰階
+
+# 高斯模糊
+frame_blur = cv2.GaussianBlur(gray, (13, 13), 15)
+
+# 比較影像
+gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉灰階
+frame_blur_now = cv2.GaussianBlur(gray, (13, 13), 15)  # 高斯模糊
+diff = cv2.absdiff(frame_blur_now, frame_blur_pre)  # 現在影像與前影像相減
+"""
