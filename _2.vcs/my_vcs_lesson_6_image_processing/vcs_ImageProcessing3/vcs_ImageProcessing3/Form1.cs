@@ -15,9 +15,6 @@ using System.Drawing.Imaging;   //for BitmapData
 using System.Runtime.InteropServices;   //for Marshal
 using System.Diagnostics;   //for Stopwatch
 
-//C#圖像處理(各種旋轉、改變大小、柔化、銳化、霧化、底片、浮雕、黑白、濾鏡效果)
-//http://www.aspphp.online/bianchen/cyuyan/gycyy/201701/81415.html
-
 namespace vcs_ImageProcessing3
 {
     public partial class Form1 : Form
@@ -95,12 +92,12 @@ namespace vcs_ImageProcessing3
             button30.Location = new Point(x_st + dx * 1, y_st + dy * 14);
             button31.Location = new Point(x_st + dx * 1, y_st + dy * 15);
 
-            groupBox0.Size = new Size(W, H);
+            groupBox0.Size = new Size(W, H * 2);
             groupBox1.Size = new Size(W, H);
             groupBox2.Size = new Size(W, H);
             groupBox0.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            groupBox2.Location = new Point(x_st + dx * 3, y_st + dy * 8);
 
             pictureBox1.Size = new Size(680, 680);
             pictureBox1.Location = new Point(x_st + dx * 4 + 10, y_st + dy * 0);
@@ -130,6 +127,15 @@ namespace vcs_ImageProcessing3
             bt_image_process_p5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             bt_image_process_p6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             bt_image_process_p7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            bt_image_process_p8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            bt_image_process_p9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            bt_image_process_p10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            bt_image_process_p11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            bt_image_process_p12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            bt_image_process_p13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
+            bt_image_process_p14.Location = new Point(x_st + dx * 0, y_st + dy * 14);
+            bt_image_process_p15.Location = new Point(x_st + dx * 0, y_st + dy * 15);
+            bt_image_process_p16.Location = new Point(x_st + dx * 0, y_st + dy * 16);
 
             bt_image_process_m0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_image_process_m1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -737,11 +743,13 @@ namespace vcs_ImageProcessing3
 
         private void button9_Click(object sender, EventArgs e)
         {
-            image_processing9(filename);
+            //馬賽克效果
+            do_mosaic_effect(filename);
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //油畫效果
             pictureBox1.Image = image_processing10(filename);
         }
 
@@ -752,6 +760,7 @@ namespace vcs_ImageProcessing3
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //積木效果
             pictureBox1.Image = image_processing12(filename);
         }
 
@@ -761,10 +770,10 @@ namespace vcs_ImageProcessing3
             image_processing11(filename);
         }
 
-        /*
+        /*------------------------------------------------------------
         一. 底片效果
         原理: GetPixel方法獲得每一點像素的值, 然後再使用SetPixel方法將取反後的顏色值設置到對應的點.
-        */
+        ------------------------------------------------------------*/
 
         //底片效果
         private Bitmap image_processing1(string filename)
@@ -792,17 +801,18 @@ namespace vcs_ImageProcessing3
             return bitmap2;
         }
 
-        /*
+        /*------------------------------------------------------------
         二. 浮雕效果
 
         原理: 對圖像像素點的像素值分別與相鄰像素點的像素值相減後加上128, 然後將其作為新的像素點的值.
 
         使圖像產生浮雕的效果，主要通過對圖像像素點的像素值分別與相鄰像素點的像素值相減後加上128，然後將其作為新的像素點的值。
         以浮雕效果顯示圖像主要通過GetPixel方法獲得每一點像素的值，通過SetPixel設置該像素點的像素值。
-        */
-        //浮雕效果
+        ------------------------------------------------------------*/
         private Bitmap image_processing2(string filename)
         {
+            lb_main_mesg.Text = "浮雕效果";
+
             Bitmap bitmap1 = new Bitmap(filename);
 
             int W = bitmap1.Width;
@@ -837,18 +847,18 @@ namespace vcs_ImageProcessing3
             return bitmap2;
         }
 
-        /*
+        /*------------------------------------------------------------
         三. 黑白效果
         原理: 彩色圖像處理成黑白效果通常有3種算法；
         (1).最大值法: 使每個像素點的 R, G, B 值等於原像素點的 RGB (顏色值) 中最大的一個；
         (2).平均值法: 使用每個像素點的 R,G,B值等於原像素點的RGB值的平均值；
         (3).加權平均值法: 對每個像素點的 R, G, B值進行加權
         ---自認為第三種方法做出來的黑白效果圖像最 "真實".
-        */
-
-        //黑白效果
+        ------------------------------------------------------------*/
         private Bitmap image_processing3(string filename)
         {
+            lb_main_mesg.Text = "黑白效果";
+
             Bitmap bitmap1 = new Bitmap(filename);
 
             int W = bitmap1.Width;
@@ -872,13 +882,14 @@ namespace vcs_ImageProcessing3
             return bitmap2;
         }
 
-        /*
+        /*------------------------------------------------------------
         四. 柔化效果
         原理: 當前像素點與周圍像素點的顏色差距較大時取其平均值.
-        */
-        //柔化效果
+        ------------------------------------------------------------*/
         private Bitmap image_processing4(string filename)
         {
+            lb_main_mesg.Text = "柔化效果";
+
             Bitmap bitmap1 = new Bitmap(filename);
 
             int W = bitmap1.Width;
@@ -919,14 +930,14 @@ namespace vcs_ImageProcessing3
             return bitmap2;
         }
 
-        /*
+        /*------------------------------------------------------------
         五.銳化效果
         原理:突出顯示顏色值大(即形成形體邊緣)的像素點.
-        */
-
-        //銳化效果
+        ------------------------------------------------------------*/
         private Bitmap image_processing5(string filename)
         {
+            lb_main_mesg.Text = "銳化效果";
+
             Bitmap bitmap1 = new Bitmap(filename);
 
             int W = bitmap1.Width;
@@ -965,14 +976,14 @@ namespace vcs_ImageProcessing3
             return bitmap2;
         }
 
-        /*
+        /*------------------------------------------------------------
         六. 霧化效果
         原理: 在圖像中引入一定的隨機值, 打亂圖像中的像素值
-        */
-
-        //霧化效果
+        ------------------------------------------------------------*/
         private Bitmap image_processing6(string filename)
         {
+            lb_main_mesg.Text = "霧化效果";
+
             Bitmap bitmap1 = new Bitmap(filename);
 
             int W = bitmap1.Width;
@@ -999,14 +1010,14 @@ namespace vcs_ImageProcessing3
             return bitmap2;
         }
 
-        /*
+        /*------------------------------------------------------------
         七. 光照效果
-        原理: 對圖像中的某一范圍內的像素的亮度分別進行處理.
-        */
-
-        //光照效果
+        原理: 對圖像中的某一範圍內的像素的亮度分別進行處理.
+        ------------------------------------------------------------*/
         private Bitmap image_processing7(string filename)
         {
+            lb_main_mesg.Text = "光照效果";
+
             Application.DoEvents();
 
             Graphics g = this.pictureBox1.CreateGraphics();
@@ -1053,16 +1064,18 @@ namespace vcs_ImageProcessing3
             return bitmap2;
         }
 
-        /*
+        /*------------------------------------------------------------
         八.百葉窗效果
         原理:(1).垂直百葉窗效果:
         根據窗口或圖像的高度或寬度和定制的百葉窗顯示條寬度計算百葉窗顯示的條數量 ；
         根據窗口或圖像的高度或寬度定制百葉窗顯示條數量計算百窗顯示的條寬度.
         (2).水平百葉窗效果: 原理同上,只是繪制像素點開始的坐標不同.
-        */
+        ------------------------------------------------------------*/
 
+        //垂直百葉窗
         void shutter1()
         {
+            lb_main_mesg.Text = "百葉窗效果1";
             try
             {
                 Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image.Clone();
@@ -1098,8 +1111,10 @@ namespace vcs_ImageProcessing3
             }
         }
 
+        //水平百葉窗
         void shutter2()
         {
+            lb_main_mesg.Text = "百葉窗效果2";
             try
             {
                 Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image.Clone();
@@ -1136,14 +1151,14 @@ namespace vcs_ImageProcessing3
             }
         }
 
-        /*
+        /*------------------------------------------------------------
         九.馬賽克效果
         原理: 確定圖像的隨機位置點和確定馬賽克塊的大小,然後馬賽克塊圖像覆蓋隨機點即可.
-        */
-
-        //馬賽克效果
-        private void image_processing9(string filename)
+        ------------------------------------------------------------*/
+        private void do_mosaic_effect(string filename)
         {
+            lb_main_mesg.Text = "馬賽克效果";
+
             try
             {
                 Bitmap bitmap1 = new Bitmap(filename);
@@ -1189,14 +1204,14 @@ namespace vcs_ImageProcessing3
             }
         }
 
-        /*
+        /*------------------------------------------------------------
         十. 油畫效果
-        原理: 對圖像中某一范圍內的像素引入隨機值.
-        */
-
-        //油畫效果
+        原理: 對圖像中某一範圍內的像素引入隨機值.
+        ------------------------------------------------------------*/
         private Bitmap image_processing10(string filename)
         {
+            lb_main_mesg.Text = "油畫效果";
+
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
             int H = bitmap1.Height;
@@ -1230,14 +1245,14 @@ namespace vcs_ImageProcessing3
             return bitmap2;
         }
 
-        /*
+        /*------------------------------------------------------------
         十一: 扭曲效果
         原理: 將圖像縮放為一個非矩形的平等四邊形即可
-        */
-
-        //扭曲效果
+        ------------------------------------------------------------*/
         private void image_processing11(string filename)
         {
+            lb_main_mesg.Text = "扭曲效果";
+
             Bitmap bitmap1 = new Bitmap(filename);
 
             int W = bitmap1.Width;
@@ -1255,14 +1270,14 @@ namespace vcs_ImageProcessing3
             g.DrawImage(bitmap1, points);
         }
 
-        /*
+        /*------------------------------------------------------------
         十二.積木效果
         原理: 對圖像中的各個像素點著重(即加大分像素的顏色值)著色.
-        */
-
-        //積木效果
+        ------------------------------------------------------------*/
         private Bitmap image_processing12(string filename)
         {
+            lb_main_mesg.Text = "積木效果";
+
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
             int H = bitmap1.Height;
@@ -1301,6 +1316,7 @@ namespace vcs_ImageProcessing3
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //BassoRelievo 效果
             pictureBox1.Image = image_processing13(filename);
         }
 
@@ -1406,11 +1422,14 @@ namespace vcs_ImageProcessing3
 
         private void button18_Click(object sender, EventArgs e)
         {
+            //扭曲效果
             pictureBox1.Image = image_processing14(filename);
         }
 
         private Bitmap image_processing14(string filename)
         {
+            lb_main_mesg.Text = "扭曲效果";
+
             //圖片的扭曲（Twist）作法
             Bitmap bitmap1 = new Bitmap(filename);
 
@@ -1438,6 +1457,7 @@ namespace vcs_ImageProcessing3
 
         private Bitmap image_processing13(string filename)
         {
+            lb_main_mesg.Text = "BassoRelievo 效果";
             return BassoRelievo(new Bitmap(filename));
         }
 
@@ -1486,8 +1506,10 @@ namespace vcs_ImageProcessing3
         }
 
         //色階調整
-        public static unsafe Bitmap img_color_gradation(Bitmap src, int r, int g, int b)
+        public unsafe Bitmap img_color_gradation(Bitmap src, int r, int g, int b)
         {
+            lb_main_mesg.Text = "色階調整";
+
             int width = src.Width;
             int height = src.Height;
             Bitmap back = new Bitmap(width, height);
@@ -1563,6 +1585,8 @@ namespace vcs_ImageProcessing3
         //生成马赛克图像
         public Bitmap CreateMosaicImage(Bitmap source)
         {
+            lb_main_mesg.Text = "馬賽克圖像1";
+
             //计算新图像需要的尺寸
             int widthcount = source.Width / mosaicwidth;
             int heightcount = source.Height / mosaicwidth;
@@ -1628,8 +1652,10 @@ namespace vcs_ImageProcessing3
         }
 
         //馬賽克算法很簡單，說白了就是把一張圖片分割成若干個val * val像素的小區塊（可能在邊緣有零星的小塊，但不影響整體算法），每個小區塊的顏色都是相同的。
-        public static Bitmap KiMosaic(Bitmap b, int val)
+        public Bitmap KiMosaic(Bitmap b, int val)
         {
+            lb_main_mesg.Text = "馬賽克圖像2";
+
             if (b.Equals(null))
             {
                 return null;
@@ -2058,85 +2084,6 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
 
         private void button31_Click(object sender, EventArgs e)
         {
-            //依序顯示各項功能
-
-            //關掉所有控件 
-            remove_all_controls();
-
-            int W = Screen.PrimaryScreen.Bounds.Width;
-            int H = Screen.PrimaryScreen.Bounds.Height;
-            int w = W * 7 / 10;
-            int h = H * 7 / 10;
-            pictureBox1.Size = new Size(w, h);
-            pictureBox1.Location = new Point((W - w) / 2, (H - h) / 2);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-
-            // 實例化控件
-            lb_main_mesg.Text = "";
-            lb_main_mesg.Font = new Font("標楷體", 24);
-            lb_main_mesg.ForeColor = Color.Red;
-            lb_main_mesg.Location = new Point(200, 80);
-            lb_main_mesg.AutoSize = true;
-            this.Controls.Add(lb_main_mesg);     // 將控件加入表單
-
-            timer1.Enabled = true;
-        }
-
-        void remove_all_controls()
-        {
-            //richTextBox1.Text += "遍歷所有控件\n";
-            int i;
-
-            for (i = 0; i < 10; i++)
-            {
-                foreach (Control con in this.Controls)
-                {
-                    System.String strControl = con.GetType().ToString();//获得控件的类型
-                    System.String strControlName = con.Name.ToString();//获得控件的名称
-
-                    richTextBox1.Text += "Type\t" + strControl + "\tName\t" + strControlName + "\n";
-
-                    if (strControlName == "pictureBox1")
-                        continue;
-                    if (strControlName == "bt_exit")
-                        continue;
-
-                    this.Controls.Remove(con);
-                }
-            }
-        }
-
-        int item = 0;
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            item++;
-            switch (item)
-            {
-                case 1: pictureBox1.Image = image_processing1(filename); break;
-                case 2: pictureBox1.Image = image_processing2(filename); break;
-                case 3: pictureBox1.Image = image_processing3(filename); break;
-                case 4: pictureBox1.Image = image_processing4(filename); break;
-                case 5: pictureBox1.Image = image_processing5(filename); break;
-                case 6: pictureBox1.Image = image_processing6(filename); break;
-                case 7: pictureBox1.Image = image_processing7(filename); break;
-                //case 8: pictureBox1.Image = image_processing8(filename); break;
-                //case 9: pictureBox1.Image = image_processing9(filename); break;
-                case 10: pictureBox1.Image = image_processing10(filename); break;
-                //case 11: pictureBox1.Image = image_processing11(filename); break;
-                case 12: pictureBox1.Image = image_processing12(filename); break;
-                case 13: pictureBox1.Image = image_processing13(filename); break;
-                case 14: pictureBox1.Image = image_processing14(filename); break;
-                case 15: pictureBox1.Image = image_processing15(filename); break;
-                case 16: pictureBox1.Image = image_processing16(filename); break;
-                case 17: pictureBox1.Image = image_processing17(filename); break;
-                case 18: shutter1(); break;
-                case 19: shutter2(); break;
-                default: break;
-            }
-            if (item >= 19)
-            {
-                item = 0;
-            }
         }
 
         private void bt_edge_detection0_Click(object sender, EventArgs e)
@@ -2685,7 +2632,6 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
             richTextBox1.Text += "黑白效果\n";
             Bitmap bmp = image_processing3(filename);
             pictureBox1.Image = bmp;
-
         }
 
         private void bt_image_process_p1_Click(object sender, EventArgs e)
@@ -2693,7 +2639,6 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
             richTextBox1.Text += "底片效果\n";
             Bitmap bmp = image_processing1(filename);
             pictureBox1.Image = bmp;
-
         }
 
         private void bt_image_process_p2_Click(object sender, EventArgs e)
@@ -2736,55 +2681,174 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
 
         }
 
+        private void bt_image_process_p8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_image_process_p9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_image_process_p10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_image_process_p11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_image_process_p12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_image_process_p13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_image_process_p14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_image_process_p15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_image_process_p16_Click(object sender, EventArgs e)
+        {
+            //依序顯示各項功能
+            //依序顯示各項功能
+
+            //關掉所有控件 
+            remove_all_controls();
+
+            int W = Screen.PrimaryScreen.Bounds.Width;
+            int H = Screen.PrimaryScreen.Bounds.Height;
+            int w = W * 7 / 10;
+            int h = H * 7 / 10;
+            pictureBox1.Size = new Size(w, h);
+            pictureBox1.Location = new Point((W - w) / 2, (H - h) / 2);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+
+            // 實例化控件
+            lb_main_mesg.Text = "";
+            lb_main_mesg.Font = new Font("標楷體", 24);
+            lb_main_mesg.ForeColor = Color.Red;
+            lb_main_mesg.Location = new Point((W - w) / 2, (H - h) / 2 - 40);
+            lb_main_mesg.AutoSize = true;
+            this.Controls.Add(lb_main_mesg);     // 將控件加入表單
+
+            lb_main_mesg.Text = "原圖";
+
+            timer1.Enabled = true;
+        }
+
+        void remove_all_controls()
+        {
+            //richTextBox1.Text += "遍歷所有控件\n";
+            int i;
+
+            for (i = 0; i < 10; i++)
+            {
+                foreach (Control con in this.Controls)
+                {
+                    System.String strControl = con.GetType().ToString();//获得控件的类型
+                    System.String strControlName = con.Name.ToString();//获得控件的名称
+
+                    richTextBox1.Text += "Type\t" + strControl + "\tName\t" + strControlName + "\n";
+
+                    if (strControlName == "pictureBox1")
+                        continue;
+                    if (strControlName == "bt_exit")
+                        continue;
+
+                    this.Controls.Remove(con);
+                }
+            }
+        }
+
+        int item = 0;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            item++;
+            switch (item)
+            {
+                case 1: pictureBox1.Image = image_processing1(filename); break;
+                case 2: pictureBox1.Image = image_processing2(filename); break;
+                case 3: pictureBox1.Image = image_processing3(filename); break;
+                case 4: pictureBox1.Image = image_processing4(filename); break;
+                case 5: pictureBox1.Image = image_processing5(filename); break;
+                case 6: pictureBox1.Image = image_processing6(filename); break;
+                case 7: pictureBox1.Image = image_processing7(filename); break;
+                //case 8: pictureBox1.Image = image_processing8(filename); break; none
+                //case 9: pictureBox1.Image = image_processing9(filename); break; none
+                case 10: pictureBox1.Image = image_processing10(filename); break;
+                //case 11: pictureBox1.Image = image_processing11(filename); break;
+                case 12: pictureBox1.Image = image_processing12(filename); break;
+                case 13: pictureBox1.Image = image_processing13(filename); break;
+                case 14: pictureBox1.Image = image_processing14(filename); break;
+                case 15: pictureBox1.Image = image_processing15(filename); break;
+                case 16: pictureBox1.Image = image_processing16(filename); break;
+                case 17: pictureBox1.Image = image_processing17(filename); break;
+                case 18: shutter1(); break;
+                case 19: shutter2(); break;
+                default: break;
+            }
+            if (item >= 19)
+            {
+                item = 0;
+            }
+        }
+
         private void bt_image_process_m0_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "黑白效果\n";
+            lb_main_mesg.Text = "黑白效果";
             Bitmap bmp = GrayImage(filename);
             pictureBox1.Image = bmp;
-
         }
 
         private void bt_image_process_m1_Click(object sender, EventArgs e)
         {
+            lb_main_mesg.Text = "底片效果";
             //底片效果（反色）（255-r, 255-g, 255-b）
-            richTextBox1.Text += "底片效果\n";
             Bitmap bmp = NegativeImage(filename);
             pictureBox1.Image = bmp;
-
         }
 
         private void bt_image_process_m2_Click(object sender, EventArgs e)
         {
+            lb_main_mesg.Text = "浮雕";
             //浮雕：找出附近的像素點r1，abs（r-r2+128）
-
-            richTextBox1.Text += "浮雕\n";
             Bitmap bmp = EmbossmentImage(filename);
             pictureBox1.Image = bmp;
-
         }
 
         private void bt_image_process_m3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "柔化\n";
+            lb_main_mesg.Text = "柔化";
             Bitmap bmp = SoftenImage(filename);
             pictureBox1.Image = bmp;
-
         }
 
         private void bt_image_process_m4_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "銳化\n";
+            lb_main_mesg.Text = "銳化";
             Bitmap bmp = SharpenImage(filename);
             pictureBox1.Image = bmp;
-
         }
 
         private void bt_image_process_m5_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "霧化\n";
+            lb_main_mesg.Text = "霧化";
             Bitmap bmp = AtomizationImage(filename);
             pictureBox1.Image = bmp;
-
         }
 
         private void bt_image_process_m6_Click(object sender, EventArgs e)
@@ -3051,7 +3115,6 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
             lockBitmap2.UnlockBits();
             return bitmap2;
         }
-
     }
 
     //指針法

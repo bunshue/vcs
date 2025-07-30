@@ -161,7 +161,7 @@ from tensorflow.python.keras.layers.core import Dense
 from tensorflow.python.keras.layers.core import Activation # 激活函數
 """
 from tensorflow.keras import optimizers
-from tensorflow.keras.models import load_model
+from tensorflow.keras.models import load_model  # 讀取模型
 from tensorflow.keras.utils import to_categorical  # One-Hot Encoding
 
 from keras import utils
@@ -170,7 +170,7 @@ from keras import utils
 from keras.optimizers import SGD  # 優化器
 from keras.optimizers import Adam  # 優化器
 from keras.optimizers import RMSprop
-from keras.models import load_model
+from keras.models import load_model  # 讀取模型
 
 # 共用的, 從 Keras 把相關套件讀進來。
 from keras.models import Sequential
@@ -1126,17 +1126,15 @@ model.compile(optimizer=sgd, loss="mse", metrics=["accuracy"])
 # 全部拿來測試
 do_the_same1(x_train, y_train, x_test, y_test)  # 做一樣的事
 
-# 儲存結果
-# 結果看來還不差, 所以我們把結果存起來。上次我們介紹分別存架構和權重的方法, 這次我們看看怎麼樣一次就存入權重 + 結構!
+# 儲存模型 h5(HDF5)
 model.save("tmp_myCNNmodel2.h5")
 
 # 欣賞一下成果
 # 我們示範一下怎麼讀回我們的神經網路。你會發現讀回來之後就可以直接使用了!!
 
-del model
-# 先把我們原來的 model 刪掉, 保證接下來的是讀進來的。我們要用一個 load_model 的函式。
+del model  #  刪除模型，再載入新模型
 
-# NG model = load_model("tmp_myCNNmodel2.h5")
+# NG model = load_model("tmp_myCNNmodel2.h5")# 讀取模型
 
 # 小結論 我們到此, 基本上是「亂做」的神經網路。
 # 有些同學在不斷試驗的過程中, 可能會發現有時會出現很糟糕的結果。
@@ -1467,7 +1465,7 @@ ESC = 27
 import cv2
 
 """ NG 無檔案 keras_model.h5
-model = tf.keras.models.load_model("keras_model.h5", compile=False)   # 載入 model
+model = tf.keras.models.load_model("keras_model.h5", compile=False)  # 讀取模型
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)           # 設定資料陣列
 
 cap = cv2.VideoCapture(0)
@@ -1504,7 +1502,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ NG 無檔案 keras_model.h5
-model = tf.keras.models.load_model("keras_model.h5", compile=False)  # 載入模型
+model = tf.keras.models.load_model("keras_model.h5", compile=False)  # 讀取模型
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
 
 def text(text):      # 建立顯示文字的函式
@@ -1559,7 +1557,7 @@ from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
 
 fontpath = "NotoSansTC-Regular.otf"          # 設定字型路徑
 
-model = tf.keras.models.load_model("keras_model.h5", compile=False)  # 載入模型
+model = tf.keras.models.load_model("keras_model.h5", compile=False)# 讀取模型
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
 
 def text(text):   # 建立顯示文字的函式
@@ -1606,7 +1604,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ NG 無檔案 keras_model.h5
-model = tf.keras.models.load_model("keras_model.h5", compile=False)  # 載入模型
+model = tf.keras.models.load_model("keras_model.h5", compile=False)# 讀取模型
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
 
 def text(text):      # 建立顯示文字的函式
@@ -1658,7 +1656,7 @@ from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
 
 fontpath = "NotoSansTC-Regular.otf"          # 設定字型路徑
 
-model = tf.keras.models.load_model("keras_model_3.h5", compile=False)  # 載入模型
+model = tf.keras.models.load_model("keras_model_3.h5", compile=False)# 讀取模型
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
 
 def text(text):   # 建立顯示文字的函式
@@ -1729,8 +1727,9 @@ knn.setIsClassifier(True)
 
 print("training...")
 knn.train(x_train, cv2.ml.ROW_SAMPLE, y_train)  # 開始訓練
+
+# 儲存模型 xml
 knn.save("tmp_mnist_knn.xml")  # 儲存訓練模型
-print("ok")
 
 print("testing...")
 test_pre = knn.predict(x_test)  # 讀取測試集並進行辨識
@@ -2465,11 +2464,11 @@ print(np.argmax(y_pred[0]))
 plt.imshow(x_test[0], cmap=plt.cm.binary)
 show()
 
-# 保存模型
+# 儲存模型
 model.save("tmp_epic_num_reader.model")
 
 # 加载保存的模型
-new_model = tf.keras.models.load_model("tmp_epic_num_reader.model")
+new_model = tf.keras.models.load_model("tmp_epic_num_reader.model")# 讀取模型
 
 # 测试保存的模型
 y_pred = new_model.predict(x_test)
@@ -2889,21 +2888,24 @@ model.compile(optimizer="sgd", loss="mse")
 for step in range(301):
     cost = model.train_on_batch(X_train, Y_train)
 
-# save
+# 預測
 print("test before save: ", model.predict(X_test[0:2]))
 
-model.save(
-    "tmp_my_model.h5"
-)  # HDF5 file, you have to pip3 install h5py if don't have it
-del model  # deletes the existing model
+# 儲存模型 h5(HDF5)
+model.save("tmp_my_model.h5")
 
-# load
-model = load_model("tmp_my_model.h5")
+del model  #  刪除模型，再載入新模型
+
+model = load_model("tmp_my_model.h5")  # 讀取模型
+
+# 預測
 print("test after load: ", model.predict(X_test[0:2]))
 
 """
-# save and load weights
+# 儲存模型權重 h5(HDF5)
 model.save_weights("tmp_my_model_weights.h5")
+
+# 讀取模型權重 h5(HDF5)
 model.load_weights("tmp_my_model_weights.h5")
 
 # save and load fresh network without trained weights
@@ -2970,18 +2972,19 @@ print("------------------------------------------------------------")  # 60個
 
 # 把訓練好的神經網路存起來
 # 我們可以把神經網路的架構和訓練好的參數都存起來, 以供日後使用!
-# pip install h5py
+# 使用 HDF5 檔案, pip install h5py
 
 # 學習訓練完成後, 將模型存檔
 # After model.fit(...)
 
-# 保存模型架構
+# 儲存模型 json
 with open("tmp_model.json", "w") as json_file:
     json_file.write(model.to_json())
 
-# 保存模型權重
-print("將 模型存檔 存成 h5")
+# 儲存模型 h5(HDF5)
 model.save("tmp_Mnist_mlp_model.h5")
+
+# 儲存模型權重 h5(HDF5)
 model.save_weights("tmp_model.h5")
 
 print("------------------------------------------------------------")  # 60個
@@ -2990,7 +2993,7 @@ print("------------------------------------------------------------")  # 60個
 print("讀取模型, 並使用之 MLP")
 
 # 別人訓練出來的模型
-model = load_model("data/Mnist_mlp_model.h5")
+model = load_model("data/Mnist_mlp_model.h5")  # 讀取模型
 
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 
@@ -3011,7 +3014,7 @@ print("------------------------------------------------------------")  # 60個
 print("讀取模型, 並使用之 CNN")
 
 # 別人訓練出來的模型
-model = load_model("data/Mnist_cnn_model.h5")
+model = load_model("data/Mnist_cnn_model.h5")  # 讀取模型
 
 (x_train, y_train), (x_test, y_test) = load_mnist_data()
 
@@ -3055,7 +3058,7 @@ x_test = x_test.reshape(len(x_test), 784).astype("float32")
 x_test = x_test / 255
 
 # 別人訓練出來的模型
-model = load_model("data/Mnist_mlp_model.h5")
+model = load_model("data/Mnist_mlp_model.h5")  # 讀取模型
 
 # 預測
 y_pred = do_prediction(x_test)
@@ -3099,7 +3102,7 @@ x_test = x_test.reshape(len(x_test), 784).astype("float32")
 x_test = x_test / 255
 
 # 別人訓練出來的模型
-model = load_model("data/Mnist_mlp_model.h5")
+model = load_model("data/Mnist_mlp_model.h5")  # 讀取模型
 
 # 預測
 y_pred = do_prediction(x_test)
@@ -3156,7 +3159,7 @@ from PIL import Image
 # urlretrieve("https://gr-models.s3-us-west-2.amazonaws.com/mnist-model.h5", "mnist-model.h5")
 # mnist-model.h5 路徑不能含中文
 mnist_model_filename = "D:/_git/vcs/_big_files/mnist-model.h5"
-model = tf.keras.models.load_model(mnist_model_filename)
+model = tf.keras.models.load_model(mnist_model_filename)  # 讀取模型
 
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data(
     path="mnist.npz"

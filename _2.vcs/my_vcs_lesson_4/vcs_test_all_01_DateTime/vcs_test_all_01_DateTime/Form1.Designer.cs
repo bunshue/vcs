@@ -195,12 +195,12 @@
             this.tb_countdown = new System.Windows.Forms.TextBox();
             this.timer_countdown = new System.Windows.Forms.Timer(this.components);
             this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.btn_moon_today = new System.Windows.Forms.Button();
+            this.btn_moon_ok = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.lb_moon_age = new System.Windows.Forms.Label();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.btn_moon_ok = new System.Windows.Forms.Button();
-            this.btn_moon_today = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -1469,6 +1469,7 @@
             this.bt_special_10.Name = "bt_special_10";
             this.bt_special_10.Size = new System.Drawing.Size(120, 35);
             this.bt_special_10.TabIndex = 92;
+            this.bt_special_10.Text = "農曆";
             this.bt_special_10.UseVisualStyleBackColor = true;
             this.bt_special_10.Click += new System.EventHandler(this.bt_special_10_Click);
             // 
@@ -1995,6 +1996,39 @@
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "月相";
             // 
+            // btn_moon_today
+            // 
+            this.btn_moon_today.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.btn_moon_today.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btn_moon_today.Location = new System.Drawing.Point(171, 190);
+            this.btn_moon_today.Name = "btn_moon_today";
+            this.btn_moon_today.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btn_moon_today.Size = new System.Drawing.Size(75, 28);
+            this.btn_moon_today.TabIndex = 21;
+            this.btn_moon_today.Text = "今日";
+            this.btn_moon_today.Click += new System.EventHandler(this.btn_moon_today_Click);
+            // 
+            // btn_moon_ok
+            // 
+            this.btn_moon_ok.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.btn_moon_ok.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btn_moon_ok.Location = new System.Drawing.Point(171, 227);
+            this.btn_moon_ok.Name = "btn_moon_ok";
+            this.btn_moon_ok.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btn_moon_ok.Size = new System.Drawing.Size(75, 28);
+            this.btn_moon_ok.TabIndex = 20;
+            this.btn_moon_ok.Text = "OK";
+            this.btn_moon_ok.Click += new System.EventHandler(this.btn_moon_ok_Click);
+            // 
+            // textBox4
+            // 
+            this.textBox4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox4.Location = new System.Drawing.Point(5, 227);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(155, 33);
+            this.textBox4.TabIndex = 19;
+            this.textBox4.Text = "2006/03/11";
+            // 
             // lb_moon_age
             // 
             this.lb_moon_age.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -2021,39 +2055,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(160, 160);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox4.Location = new System.Drawing.Point(5, 227);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(155, 33);
-            this.textBox4.TabIndex = 19;
-            this.textBox4.Text = "2006/03/11";
-            // 
-            // btn_moon_ok
-            // 
-            this.btn_moon_ok.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.btn_moon_ok.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_moon_ok.Location = new System.Drawing.Point(171, 227);
-            this.btn_moon_ok.Name = "btn_moon_ok";
-            this.btn_moon_ok.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btn_moon_ok.Size = new System.Drawing.Size(75, 28);
-            this.btn_moon_ok.TabIndex = 20;
-            this.btn_moon_ok.Text = "OK";
-            this.btn_moon_ok.Click += new System.EventHandler(this.btn_moon_ok_Click);
-            // 
-            // btn_moon_today
-            // 
-            this.btn_moon_today.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.btn_moon_today.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_moon_today.Location = new System.Drawing.Point(171, 190);
-            this.btn_moon_today.Name = "btn_moon_today";
-            this.btn_moon_today.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btn_moon_today.Size = new System.Drawing.Size(75, 28);
-            this.btn_moon_today.TabIndex = 21;
-            this.btn_moon_today.Text = "今日";
-            this.btn_moon_today.Click += new System.EventHandler(this.btn_moon_today_Click);
             // 
             // Form1
             // 
