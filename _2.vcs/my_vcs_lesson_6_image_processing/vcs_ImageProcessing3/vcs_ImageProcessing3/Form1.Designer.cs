@@ -565,14 +565,14 @@
             this.groupBox0.Controls.Add(this.bt_image_process_p3);
             this.groupBox0.Location = new System.Drawing.Point(334, 12);
             this.groupBox0.Name = "groupBox0";
-            this.groupBox0.Size = new System.Drawing.Size(170, 804);
+            this.groupBox0.Size = new System.Drawing.Size(170, 600);
             this.groupBox0.TabIndex = 44;
             this.groupBox0.TabStop = false;
             this.groupBox0.Text = "影像處理 像素法";
             // 
             // bt_image_process_p16
             // 
-            this.bt_image_process_p16.Location = new System.Drawing.Point(20, 714);
+            this.bt_image_process_p16.Location = new System.Drawing.Point(20, 554);
             this.bt_image_process_p16.Name = "bt_image_process_p16";
             this.bt_image_process_p16.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p16.TabIndex = 52;
@@ -582,7 +582,7 @@
             // 
             // bt_image_process_p15
             // 
-            this.bt_image_process_p15.Location = new System.Drawing.Point(20, 673);
+            this.bt_image_process_p15.Location = new System.Drawing.Point(20, 520);
             this.bt_image_process_p15.Name = "bt_image_process_p15";
             this.bt_image_process_p15.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p15.TabIndex = 51;
@@ -592,7 +592,7 @@
             // 
             // bt_image_process_p14
             // 
-            this.bt_image_process_p14.Location = new System.Drawing.Point(20, 632);
+            this.bt_image_process_p14.Location = new System.Drawing.Point(20, 487);
             this.bt_image_process_p14.Name = "bt_image_process_p14";
             this.bt_image_process_p14.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p14.TabIndex = 50;
@@ -601,7 +601,7 @@
             // 
             // bt_image_process_p13
             // 
-            this.bt_image_process_p13.Location = new System.Drawing.Point(20, 591);
+            this.bt_image_process_p13.Location = new System.Drawing.Point(20, 454);
             this.bt_image_process_p13.Name = "bt_image_process_p13";
             this.bt_image_process_p13.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p13.TabIndex = 49;
@@ -610,7 +610,7 @@
             // 
             // bt_image_process_p12
             // 
-            this.bt_image_process_p12.Location = new System.Drawing.Point(20, 550);
+            this.bt_image_process_p12.Location = new System.Drawing.Point(20, 421);
             this.bt_image_process_p12.Name = "bt_image_process_p12";
             this.bt_image_process_p12.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p12.TabIndex = 48;
@@ -619,7 +619,7 @@
             // 
             // bt_image_process_p11
             // 
-            this.bt_image_process_p11.Location = new System.Drawing.Point(20, 509);
+            this.bt_image_process_p11.Location = new System.Drawing.Point(20, 387);
             this.bt_image_process_p11.Name = "bt_image_process_p11";
             this.bt_image_process_p11.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p11.TabIndex = 47;
@@ -628,7 +628,7 @@
             // 
             // bt_image_process_p10
             // 
-            this.bt_image_process_p10.Location = new System.Drawing.Point(20, 468);
+            this.bt_image_process_p10.Location = new System.Drawing.Point(20, 353);
             this.bt_image_process_p10.Name = "bt_image_process_p10";
             this.bt_image_process_p10.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p10.TabIndex = 46;
@@ -637,7 +637,7 @@
             // 
             // bt_image_process_p9
             // 
-            this.bt_image_process_p9.Location = new System.Drawing.Point(20, 425);
+            this.bt_image_process_p9.Location = new System.Drawing.Point(20, 319);
             this.bt_image_process_p9.Name = "bt_image_process_p9";
             this.bt_image_process_p9.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p9.TabIndex = 45;
@@ -646,7 +646,7 @@
             // 
             // bt_image_process_p8
             // 
-            this.bt_image_process_p8.Location = new System.Drawing.Point(20, 384);
+            this.bt_image_process_p8.Location = new System.Drawing.Point(20, 285);
             this.bt_image_process_p8.Name = "bt_image_process_p8";
             this.bt_image_process_p8.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p8.TabIndex = 44;
@@ -655,7 +655,7 @@
             // 
             // bt_image_process_p7
             // 
-            this.bt_image_process_p7.Location = new System.Drawing.Point(20, 343);
+            this.bt_image_process_p7.Location = new System.Drawing.Point(20, 251);
             this.bt_image_process_p7.Name = "bt_image_process_p7";
             this.bt_image_process_p7.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p7.TabIndex = 43;
@@ -664,7 +664,7 @@
             // 
             // bt_image_process_p0
             // 
-            this.bt_image_process_p0.Location = new System.Drawing.Point(20, 21);
+            this.bt_image_process_p0.Location = new System.Drawing.Point(20, 18);
             this.bt_image_process_p0.Name = "bt_image_process_p0";
             this.bt_image_process_p0.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p0.TabIndex = 36;
@@ -674,7 +674,7 @@
             // 
             // bt_image_process_p6
             // 
-            this.bt_image_process_p6.Location = new System.Drawing.Point(20, 297);
+            this.bt_image_process_p6.Location = new System.Drawing.Point(20, 218);
             this.bt_image_process_p6.Name = "bt_image_process_p6";
             this.bt_image_process_p6.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p6.TabIndex = 42;
@@ -684,7 +684,7 @@
             // 
             // bt_image_process_p1
             // 
-            this.bt_image_process_p1.Location = new System.Drawing.Point(20, 67);
+            this.bt_image_process_p1.Location = new System.Drawing.Point(20, 52);
             this.bt_image_process_p1.Name = "bt_image_process_p1";
             this.bt_image_process_p1.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p1.TabIndex = 37;
@@ -694,7 +694,7 @@
             // 
             // bt_image_process_p5
             // 
-            this.bt_image_process_p5.Location = new System.Drawing.Point(20, 251);
+            this.bt_image_process_p5.Location = new System.Drawing.Point(20, 184);
             this.bt_image_process_p5.Name = "bt_image_process_p5";
             this.bt_image_process_p5.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p5.TabIndex = 41;
@@ -704,7 +704,7 @@
             // 
             // bt_image_process_p2
             // 
-            this.bt_image_process_p2.Location = new System.Drawing.Point(20, 113);
+            this.bt_image_process_p2.Location = new System.Drawing.Point(20, 85);
             this.bt_image_process_p2.Name = "bt_image_process_p2";
             this.bt_image_process_p2.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p2.TabIndex = 38;
@@ -714,7 +714,7 @@
             // 
             // bt_image_process_p4
             // 
-            this.bt_image_process_p4.Location = new System.Drawing.Point(20, 205);
+            this.bt_image_process_p4.Location = new System.Drawing.Point(20, 151);
             this.bt_image_process_p4.Name = "bt_image_process_p4";
             this.bt_image_process_p4.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p4.TabIndex = 40;
@@ -724,7 +724,7 @@
             // 
             // bt_image_process_p3
             // 
-            this.bt_image_process_p3.Location = new System.Drawing.Point(20, 159);
+            this.bt_image_process_p3.Location = new System.Drawing.Point(20, 118);
             this.bt_image_process_p3.Name = "bt_image_process_p3";
             this.bt_image_process_p3.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p3.TabIndex = 39;

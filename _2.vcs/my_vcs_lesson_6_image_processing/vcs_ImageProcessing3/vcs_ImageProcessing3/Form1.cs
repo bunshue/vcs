@@ -786,6 +786,7 @@ namespace vcs_ImageProcessing3
         private Bitmap image_processing1(string filename)
         {
             lb_main_mesg.Text = "底片效果";
+            Application.DoEvents();
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
@@ -818,6 +819,7 @@ namespace vcs_ImageProcessing3
         private Bitmap image_processing2(string filename)
         {
             lb_main_mesg.Text = "浮雕效果";
+            Application.DoEvents();
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
@@ -864,6 +866,7 @@ namespace vcs_ImageProcessing3
         private Bitmap image_processing3(string filename)
         {
             lb_main_mesg.Text = "黑白效果";
+            Application.DoEvents();
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
@@ -894,6 +897,7 @@ namespace vcs_ImageProcessing3
         private Bitmap image_processing4(string filename)
         {
             lb_main_mesg.Text = "柔化效果";
+            Application.DoEvents();
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
@@ -941,6 +945,7 @@ namespace vcs_ImageProcessing3
         private Bitmap image_processing5(string filename)
         {
             lb_main_mesg.Text = "銳化效果";
+            Application.DoEvents();
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
@@ -986,6 +991,7 @@ namespace vcs_ImageProcessing3
         private Bitmap image_processing6(string filename)
         {
             lb_main_mesg.Text = "霧化效果";
+            Application.DoEvents();
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
@@ -1020,7 +1026,6 @@ namespace vcs_ImageProcessing3
         private Bitmap image_processing7(string filename)
         {
             lb_main_mesg.Text = "光照效果";
-
             Application.DoEvents();
 
             Graphics g = this.pictureBox1.CreateGraphics();
@@ -1036,8 +1041,8 @@ namespace vcs_ImageProcessing3
             int cy = H / 2;
             //MyCenter圖片中心點，發亮此值會讓強光中心發生偏移
             Point MyCenter = new Point(cx, cy);
-            //R強光照射面的半徑，即”光暈”
-            int radius = Math.Min(W / 2, H / 2);
+            //radius強光照射面的半徑，即”光暈”
+            int radius = Math.Min(cx, cy);
             for (int i = W - 1; i >= 1; i--)
             {
                 for (int j = H - 1; j >= 1; j--)
@@ -1062,7 +1067,7 @@ namespace vcs_ImageProcessing3
                     }
                 }
                 //重新繪制圖片, 會有一個光線掃過的效果
-                //g.DrawImage(bitmap2, new Rectangle(0, 0, W, H));
+                g.DrawImage(bitmap2, new Rectangle(0, 0, W, H));
             }
             return bitmap2;
         }
@@ -1079,6 +1084,8 @@ namespace vcs_ImageProcessing3
         void shutter1()
         {
             lb_main_mesg.Text = "百葉窗效果1";
+            Application.DoEvents();
+
             try
             {
                 Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image.Clone();
@@ -1118,6 +1125,8 @@ namespace vcs_ImageProcessing3
         void shutter2()
         {
             lb_main_mesg.Text = "百葉窗效果2";
+            Application.DoEvents();
+
             try
             {
                 Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image.Clone();
@@ -1161,6 +1170,7 @@ namespace vcs_ImageProcessing3
         private void do_mosaic_effect(string filename)
         {
             lb_main_mesg.Text = "馬賽克效果";
+            Application.DoEvents();
 
             try
             {
@@ -1214,13 +1224,13 @@ namespace vcs_ImageProcessing3
         private Bitmap image_processing10(string filename)
         {
             lb_main_mesg.Text = "油畫效果";
+            Application.DoEvents();
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
             int H = bitmap1.Height;
             //Bitmap bitmap2 = new Bitmap(W, H);
 
-            //以油畫效果顯示圖像
             Graphics g = this.pictureBox1.CreateGraphics();
             RectangleF rect = new RectangleF(0, 0, W, H);
             Bitmap bitmap2 = bitmap1.Clone(rect, PixelFormat.DontCare);
@@ -1255,6 +1265,7 @@ namespace vcs_ImageProcessing3
         private void image_processing11(string filename)
         {
             lb_main_mesg.Text = "扭曲效果";
+            Application.DoEvents();
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
@@ -1279,6 +1290,7 @@ namespace vcs_ImageProcessing3
         private Bitmap image_processing12(string filename)
         {
             lb_main_mesg.Text = "積木效果";
+            Application.DoEvents();
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
@@ -1318,16 +1330,11 @@ namespace vcs_ImageProcessing3
 
         /*------------------------------------------------------------
         說明.這些大多為靜態圖. 後面會有圖像的動態顯示. 如分塊合成圖像, 四周擴散顯示圖像, 上下對接顯示圖像等.
-
         這些也許能說明一下 PPT或者手機中的圖片效果處理程序是如果做出來的.原理應該是相通的.
-
         制作圖像一般常用的類有: Bitmap; Graphics; Rectangle；Color; 用到的方法是 Graphics類的DrawImage；
-
         此方法共有30個版本, 我習慣用 DrawImage("圖像", "圖框") 版本.
-
         因為這個版本的思想是最簡單的----把一張**地圖像裝在一個**地框裡! (**代表某種效果的圖像和某種效果的框)
-
-        如. g.DrawImage(new Bitmap("myPicture"), new Rectangle(0, 0, myWidth, myHeight));
+        如. g.DrawImage(new Bitmap("myPicture"), new Rectangle(0, 0, W, H));
         ------------------------------------------------------------*/
 
 
@@ -1339,10 +1346,11 @@ namespace vcs_ImageProcessing3
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //推拉效果
+
             string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Image image;
-
-            //推拉效果顯示圖像
+            
             image = Image.FromFile(filename);
             pictureBox1.Image = image;
             pictureBox1.Size = new Size(image.Width, image.Height - 1);
@@ -1366,7 +1374,8 @@ namespace vcs_ImageProcessing3
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //水平交錯效果顯示圖像
+            //水平交錯效果
+
             Bitmap bitmap1 = new Bitmap(filename);
             pictureBox1.Image = bitmap1;
             pictureBox1.Size = new Size(bitmap1.Width, bitmap1.Height);
@@ -1403,7 +1412,8 @@ namespace vcs_ImageProcessing3
 
         private void button17_Click(object sender, EventArgs e)
         {
-            //垂直交錯效果顯示圖像
+            //垂直交錯效果
+
             Bitmap bitmap1 = new Bitmap(filename);
             pictureBox1.Image = bitmap1;
             pictureBox1.Size = new Size(bitmap1.Width, bitmap1.Height);
@@ -1446,12 +1456,13 @@ namespace vcs_ImageProcessing3
         private Bitmap image_processing14(string filename)
         {
             lb_main_mesg.Text = "扭曲效果";
+            Application.DoEvents();
 
             //圖片的扭曲（Twist）作法
             Bitmap bitmap1 = new Bitmap(filename);
 
             //參數設定
-            System.Random oRandom = new System.Random();
+            Random oRandom = new Random();
             int iAmplitude = oRandom.Next(5, 10);	//振幅
             int iFrequency = oRandom.Next(30, 60);	//頻率
             //複製一個失真前的Bitmap過來參考
@@ -1475,6 +1486,8 @@ namespace vcs_ImageProcessing3
         private Bitmap image_processing13(string filename)
         {
             lb_main_mesg.Text = "BassoRelievo 效果";
+            Application.DoEvents();
+
             return BassoRelievo(new Bitmap(filename));
         }
 
@@ -1526,6 +1539,7 @@ namespace vcs_ImageProcessing3
         public unsafe Bitmap img_color_gradation(Bitmap src, int r, int g, int b)
         {
             lb_main_mesg.Text = "色階調整";
+            Application.DoEvents();
 
             int width = src.Width;
             int height = src.Height;
@@ -1603,6 +1617,7 @@ namespace vcs_ImageProcessing3
         public Bitmap CreateMosaicImage(Bitmap source)
         {
             lb_main_mesg.Text = "馬賽克圖像1";
+            Application.DoEvents();
 
             //计算新图像需要的尺寸
             int widthcount = source.Width / mosaicwidth;
@@ -1672,6 +1687,7 @@ namespace vcs_ImageProcessing3
         public Bitmap KiMosaic(Bitmap b, int val)
         {
             lb_main_mesg.Text = "馬賽克圖像2";
+            Application.DoEvents();
 
             if (b.Equals(null))
             {
@@ -1985,7 +2001,7 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         }
 
         //光暈效果 ST
-        public Image pp(PictureBox Pict, int x, int y, int R, float better) //R強光照射面的半徑，即"光暈"
+        public Image pp(PictureBox Pict, int x, int y, int R, float better) //radius強光照射面的半徑，即"光暈"
         {
             Bitmap bitmap1 = new Bitmap(Pict.Image, Pict.Image.Width, Pict.Image.Height);//根據圖像實例化Bitmap類
 
@@ -2738,11 +2754,14 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
             //測試 asp 上的code
             //button1_Click1(sender, e);
 
-            pictureBox1.Image = button1_Click2(filename);
+            pictureBox1.Image = button1_Click9(filename);
+
 
         }
 
-        /*
+        //code ST
+
+        /* 新整理
         超酷的圖像效果
         原始圖片: ISINBAEVA
         */
@@ -2756,6 +2775,7 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         private Bitmap button1_Click1(string filename)
         {
             lb_main_mesg.Text = "底片效果";
+            Application.DoEvents();
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
@@ -2788,19 +2808,17 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         private Bitmap button1_Click2(string filename)
         {
             lb_main_mesg.Text = "浮雕效果";
+            Application.DoEvents();
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
             int H = bitmap1.Height;
             Bitmap bitmap2 = new Bitmap(W, H);
 
-            int Height = this.pictureBox1.Image.Height;
-            int Width = this.pictureBox1.Image.Width;
-
             Color pixel1, pixel2;
-            for (int x = 0; x < Width - 1; x++)
+            for (int x = 0; x < W - 1; x++)
             {
-                for (int y = 0; y < Height - 1; y++)
+                for (int y = 0; y < H - 1; y++)
                 {
                     int r = 0, g = 0, b = 0;
                     pixel1 = bitmap1.GetPixel(x, y);
@@ -2837,41 +2855,27 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         private Bitmap button1_Click3(string filename)
         {
             lb_main_mesg.Text = "黑白效果";
+            Application.DoEvents();
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
             int H = bitmap1.Height;
             Bitmap bitmap2 = new Bitmap(W, H);
 
-            int Height = this.pictureBox1.Image.Height;
-            int Width = this.pictureBox1.Image.Width;
-
             Color pixel;
-            for (int x = 0; x < Width; x++)
-                for (int y = 0; y < Height; y++)
+            for (int x = 0; x < W; x++)
+            {
+                for (int y = 0; y < H; y++)
                 {
                     pixel = bitmap1.GetPixel(x, y);
-                    int r, g, b, Result = 0;
+                    int r, g, b, gray = 0;
                     r = pixel.R;
                     g = pixel.G;
                     b = pixel.B;
-                    //實例程序以加權平均值法產生黑白圖像
-                    int iType = 2;
-                    switch (iType)
-                    {
-                        case 0://平均值法
-                            Result = ((r + g + b) / 3);
-                            break;
-                        case 1://最大值法
-                            Result = r > g ? r : g;
-                            Result = Result > b ? Result : b;
-                            break;
-                        case 2://加權平均值法
-                            Result = ((int)(0.7 * r) + (int)(0.2 * g) + (int)(0.1 * b));
-                            break;
-                    }
-                    bitmap2.SetPixel(x, y, Color.FromArgb(Result, Result, Result));
+                    gray = ((int)(0.7 * r) + (int)(0.2 * g) + (int)(0.1 * b));
+                    bitmap2.SetPixel(x, y, Color.FromArgb(gray, gray, gray));
                 }
+            }
             return bitmap2;
         }
 
@@ -2882,23 +2886,26 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         private Bitmap button1_Click4(string filename)
         {
             lb_main_mesg.Text = "柔化效果";
+            Application.DoEvents();
 
-            int Height = this.pictureBox1.Image.Height;
-            int Width = this.pictureBox1.Image.Width;
-            Bitmap bitmap = new Bitmap(Width, Height);
-            Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image;
+            Bitmap bitmap1 = new Bitmap(filename);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H);
+
             Color pixel;
             //高斯模板
             int[] Gauss = { 1, 2, 1, 2, 4, 2, 1, 2, 1 };
-            for (int x = 1; x < Width - 1; x++)
-                for (int y = 1; y < Height - 1; y++)
+            for (int x = 1; x < W - 1; x++)
+            {
+                for (int y = 1; y < H - 1; y++)
                 {
                     int r = 0, g = 0, b = 0;
                     int Index = 0;
                     for (int col = -1; col <= 1; col++)
                         for (int row = -1; row <= 1; row++)
                         {
-                            pixel = MyBitmap.GetPixel(x + row, y + col);
+                            pixel = bitmap1.GetPixel(x + row, y + col);
                             r += pixel.R * Gauss[Index];
                             g += pixel.G * Gauss[Index];
                             b += pixel.B * Gauss[Index];
@@ -2914,9 +2921,10 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
                     g = g < 0 ? 0 : g;
                     b = b > 255 ? 255 : b;
                     b = b < 0 ? 0 : b;
-                    bitmap.SetPixel(x - 1, y - 1, Color.FromArgb(r, g, b));
+                    bitmap2.SetPixel(x - 1, y - 1, Color.FromArgb(r, g, b));
                 }
-            return bitmap;
+            }
+            return bitmap2;
         }
 
         /*------------------------------------------------------------
@@ -2926,21 +2934,19 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         private Bitmap button1_Click5(string filename)
         {
             lb_main_mesg.Text = "銳化效果";
+            Application.DoEvents();
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
             int H = bitmap1.Height;
             Bitmap bitmap2 = new Bitmap(W, H);
 
-            int Height = this.pictureBox1.Image.Height;
-            int Width = this.pictureBox1.Image.Width;
-
             Color pixel;
             //拉普拉斯模板
             int[] Laplacian = { -1, -1, -1, -1, 9, -1, -1, -1, -1 };
-            for (int x = 1; x < Width - 1; x++)
+            for (int x = 1; x < W - 1; x++)
             {
-                for (int y = 1; y < Height - 1; y++)
+                for (int y = 1; y < H - 1; y++)
                 {
                     int r = 0, g = 0, b = 0;
                     int Index = 0;
@@ -2974,29 +2980,27 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         private Bitmap button1_Click6(string filename)
         {
             lb_main_mesg.Text = "霧化效果";
+            Application.DoEvents();
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
             int H = bitmap1.Height;
             Bitmap bitmap2 = new Bitmap(W, H);
 
-            int Height = this.pictureBox1.Image.Height;
-            int Width = this.pictureBox1.Image.Width;
-
             Color pixel;
-            for (int x = 1; x < Width - 1; x++)
+            for (int x = 1; x < W - 1; x++)
             {
-                for (int y = 1; y < Height - 1; y++)
+                for (int y = 1; y < H - 1; y++)
                 {
-                    System.Random MyRandom = new Random();
+                    Random MyRandom = new Random();
                     int k = MyRandom.Next(123456);
                     //像素塊大小
                     int dx = x + k % 19;
                     int dy = y + k % 19;
-                    if (dx >= Width)
-                        dx = Width - 1;
-                    if (dy >= Height)
-                        dy = Height - 1;
+                    if (dx >= W)
+                        dx = W - 1;
+                    if (dy >= H)
+                        dy = H - 1;
                     pixel = bitmap1.GetPixel(dx, dy);
                     bitmap2.SetPixel(x, y, pixel);
                 }
@@ -3011,47 +3015,50 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         private Bitmap button1_Click7(string filename)
         {
             lb_main_mesg.Text = "光照效果";
+            Application.DoEvents();
 
-            //以光照效果顯示圖像
-            Graphics MyGraphics = this.pictureBox1.CreateGraphics();
-            MyGraphics.Clear(Color.White);
-            Bitmap MyBmp = new Bitmap(this.pictureBox1.Image, this.pictureBox1.Width, this.pictureBox1.Height);
-            int MyWidth = MyBmp.Width;
-            int MyHeight = MyBmp.Height;
-            Bitmap MyImage = MyBmp.Clone(new RectangleF(0, 0, MyWidth, MyHeight), System.Drawing.Imaging.PixelFormat.DontCare);
-            int A = Width / 2;
-            int B = Height / 2;
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.Clear(Color.White);
+
+            Bitmap bitmap1 = new Bitmap(filename);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = bitmap1.Clone(new RectangleF(0, 0, W, H), PixelFormat.DontCare);
+
+            //光照中心點
+            int cx = W / 2;
+            int cy = H / 2;
             //MyCenter圖片中心點，發亮此值會讓強光中心發生偏移
-            Point MyCenter = new Point(MyWidth / 2, MyHeight / 2);
-            //R強光照射面的半徑，即”光暈”
-            int R = Math.Min(MyWidth / 2, MyHeight / 2);
-            for (int i = MyWidth - 1; i >= 1; i--)
+            Point MyCenter = new Point(cx, cy);
+            //radius強光照射面的半徑，即”光暈”
+            int radius = Math.Min(cx, cy);
+            for (int i = W - 1; i >= 1; i--)
             {
-                for (int j = MyHeight - 1; j >= 1; j--)
+                for (int j = H - 1; j >= 1; j--)
                 {
                     float MyLength = (float)Math.Sqrt(Math.Pow((i - MyCenter.X), 2) + Math.Pow((j - MyCenter.Y), 2));
                     //如果像素位於”光暈”之內
-                    if (MyLength < R)
+                    if (MyLength < radius)
                     {
-                        Color MyColor = MyImage.GetPixel(i, j);
-                        int r, g, b;
+                        Color MyColor = bitmap2.GetPixel(i, j);
+                        int R, G, B;
                         //220亮度增加常量，該值越大，光亮度越強
-                        float MyPixel = 220.0f * (1.0f - MyLength / R);
-                        r = MyColor.R + (int)MyPixel;
-                        r = Math.Max(0, Math.Min(r, 255));
-                        g = MyColor.G + (int)MyPixel;
-                        g = Math.Max(0, Math.Min(g, 255));
-                        b = MyColor.B + (int)MyPixel;
-                        b = Math.Max(0, Math.Min(b, 255));
+                        float MyPixel = 220.0f * (1.0f - MyLength / radius);
+                        R = MyColor.R + (int)MyPixel;
+                        R = Math.Max(0, Math.Min(R, 255));
+                        G = MyColor.G + (int)MyPixel;
+                        G = Math.Max(0, Math.Min(G, 255));
+                        B = MyColor.B + (int)MyPixel;
+                        B = Math.Max(0, Math.Min(B, 255));
                         //將增亮後的像素值回寫到位圖
-                        Color MyNewColor = Color.FromArgb(255, r, g, b);
-                        MyImage.SetPixel(i, j, MyNewColor);
+                        Color MyNewColor = Color.FromArgb(255, R, G, B);
+                        bitmap2.SetPixel(i, j, MyNewColor);
                     }
                 }
-                //重新繪制圖片
-                MyGraphics.DrawImage(MyImage, new Rectangle(0, 0, MyWidth, MyHeight));
+                //重新繪制圖片, 會有一個光線掃過的效果
+                g.DrawImage(bitmap2, new Rectangle(0, 0, W, H));
             }
-            return MyImage;
+            return bitmap2;
         }
 
         /*------------------------------------------------------------
@@ -3066,11 +3073,13 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         void shutter1b()
         {
             lb_main_mesg.Text = "百葉窗效果1";
+            Application.DoEvents();
+
             try
             {
-                Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image.Clone();
-                int dw = MyBitmap.Width / 30;
-                int dh = MyBitmap.Height;
+                Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image.Clone();
+                int dw = bitmap1.Width / 30;
+                int dh = bitmap1.Height;
                 Graphics g = this.pictureBox1.CreateGraphics();
                 g.Clear(Color.Gray);
                 Point[] MyPoint = new Point[30];
@@ -3079,20 +3088,20 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
                     MyPoint[x].Y = 0;
                     MyPoint[x].X = x * dw;
                 }
-                Bitmap bitmap = new Bitmap(MyBitmap.Width, MyBitmap.Height);
+                Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
                 for (int i = 0; i < dw; i++)
                 {
                     for (int j = 0; j < 30; j++)
                     {
                         for (int k = 0; k < dh; k++)
                         {
-                            bitmap.SetPixel(MyPoint[j].X + i, MyPoint[j].Y + k,
-                            MyBitmap.GetPixel(MyPoint[j].X + i, MyPoint[j].Y + k));
+                            bitmap2.SetPixel(MyPoint[j].X + i, MyPoint[j].Y + k,
+                            bitmap1.GetPixel(MyPoint[j].X + i, MyPoint[j].Y + k));
                         }
                     }
                     this.pictureBox1.Refresh();
-                    this.pictureBox1.Image = bitmap;
-                    System.Threading.Thread.Sleep(100);
+                    this.pictureBox1.Image = bitmap2;
+                    Thread.Sleep(100);
                 }
             }
             catch (Exception ex)
@@ -3105,32 +3114,36 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         void shutter2b()
         {
             lb_main_mesg.Text = "百葉窗效果2";
+            Application.DoEvents();
+
             try
             {
-                Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image.Clone();
-                int dh = MyBitmap.Height / 20;
-                int dw = MyBitmap.Width;
+                Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image.Clone();
+                int dh = bitmap1.Height / 20;   //记录图片的指定高度
+                int dw = bitmap1.Width; //记录图片的宽度
                 Graphics g = this.pictureBox1.CreateGraphics();
                 g.Clear(Color.Gray);
-                Point[] MyPoint = new Point[20];
-                for (int y = 0; y < 20; y++)
+                Point[] MyPoint = new Point[20];    //定义数组
+                for (int y = 0; y < 20; y++)    //记录百叶窗各节点的位置
                 {
                     MyPoint[y].X = 0;
                     MyPoint[y].Y = y * dh;
                 }
-                Bitmap bitmap = new Bitmap(MyBitmap.Width, MyBitmap.Height);
+                Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height); //实例化Bitmap类
+                //通过调用Bitmap对象的SetPixel方法重新设置图像的像素点颜色，从而实现百叶窗效果
+
                 for (int i = 0; i < dh; i++)
                 {
                     for (int j = 0; j < 20; j++)
                     {
                         for (int k = 0; k < dw; k++)
                         {
-                            bitmap.SetPixel(MyPoint[j].X + k, MyPoint[j].Y + i, MyBitmap.GetPixel(MyPoint[j].X + k, MyPoint[j].Y + i));
+                            bitmap2.SetPixel(MyPoint[j].X + k, MyPoint[j].Y + i, bitmap1.GetPixel(MyPoint[j].X + k, MyPoint[j].Y + i)); //获取当前象素颜色值
                         }
                     }
                     this.pictureBox1.Refresh();
-                    this.pictureBox1.Image = bitmap;
-                    System.Threading.Thread.Sleep(100);
+                    this.pictureBox1.Image = bitmap2;
+                    Thread.Sleep(100);
                 }
             }
             catch (Exception ex)
@@ -3146,6 +3159,7 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         private Bitmap button1_Click9(string filename)
         {
             lb_main_mesg.Text = "馬賽克效果";
+            Application.DoEvents();
 
             try
             {
@@ -3155,8 +3169,8 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
                 Bitmap bitmap2 = new Bitmap(W, H);
 
                 /*
-                int dw = MyBitmap.Width / 50;
-                int dh = MyBitmap.Height / 50;
+                int dw = bitmap1.Width / 50;
+                int dh = bitmap1.Height / 50;
                 Graphics g = this.pictureBox1.CreateGraphics();
                 g.Clear(Color.Gray);
                 Point[] MyPoint = new Point[2500];
@@ -3166,15 +3180,15 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
                     MyPoint[x * 50 + y].X = x * dw;
                     MyPoint[x * 50 + y].Y = y * dh;
                   }
-                Bitmap bitmap = new Bitmap(MyBitmap.Width, MyBitmap.Height);
+                Bitmap bitmap = new Bitmap(bitmap1.Width, bitmap1.Height);
                 for (int i = 0; i < 10000; i++)
                 {
-                  System.Random MyRandom = new Random();
+                  Random MyRandom = new Random();
                   int iPos = MyRandom.Next(2500);
                   for (int m = 0; m < dw; m++)
                     for (int n = 0; n < dh; n++)
                     {
-                      bitmap.SetPixel(MyPoint[iPos].X + m, MyPoint[iPos].Y + n, MyBitmap.GetPixel(MyPoint[iPos].X + m, MyPoint[iPos].Y + n));
+                      bitmap.SetPixel(MyPoint[iPos].X + m, MyPoint[iPos].Y + n, bitmap1.GetPixel(MyPoint[iPos].X + m, MyPoint[iPos].Y + n));
                     }
                   this.pictureBox1.Refresh();
                   this.pictureBox1.Image = bitmap;
@@ -3183,7 +3197,7 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
                   for (int m = 0; m < dw; m++)
                     for (int n = 0; n < dh; n++)
                     {
-                      bitmap.SetPixel(MyPoint[i].X + m, MyPoint[i].Y + n, MyBitmap.GetPixel(MyPoint[i].X + m, MyPoint[i].Y + n));
+                      bitmap.SetPixel(MyPoint[i].X + m, MyPoint[i].Y + n, bitmap1.GetPixel(MyPoint[i].X + m, MyPoint[i].Y + n));
                     }
                 this.pictureBox1.Refresh();
                 this.pictureBox1.Image = bitmap;
@@ -3203,42 +3217,38 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         private Bitmap button1_Click10(string filename)
         {
             lb_main_mesg.Text = "油畫效果";
+            Application.DoEvents();
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
             int H = bitmap1.Height;
-            Bitmap bitmap2 = new Bitmap(W, H);
+            //Bitmap bitmap2 = new Bitmap(W, H);
 
-            /*
-            Graphics g = this.panel1.CreateGraphics();
-            //Bitmap bitmap = this.MyBitmap;
-            //取得圖片尺寸
-            int width = MyBitmap.Width;
-            int height = MyBitmap.Height;
-            RectangleF rect = new RectangleF(0, 0, width, height);
-            Bitmap img = MyBitmap.Clone(rect, System.Drawing.Imaging.PixelFormat.DontCare);
+            Graphics g = this.pictureBox1.CreateGraphics();
+            RectangleF rect = new RectangleF(0, 0, W, H);
+            Bitmap bitmap2 = bitmap1.Clone(rect, PixelFormat.DontCare);
+
             //產生隨機數序列
             Random rnd = new Random();
             //取不同的值決定油畫效果的不同程度
             int iModel = 2;
-            int i = width - iModel;
+            int i = W - iModel;
             while (i > 1)
             {
-                int j = height - iModel;
+                int j = H - iModel;
                 while (j > 1)
                 {
                     int iPos = rnd.Next(100000) % iModel;
                     //將該點的RGB值設置成附近iModel點之內的任一點
-                    Color color = img.GetPixel(i + iPos, j + iPos);
-                    img.SetPixel(i, j, color);
+                    Color color = bitmap2.GetPixel(i + iPos, j + iPos);
+                    bitmap2.SetPixel(i, j, color);
                     j = j - 1;
                 }
                 i = i - 1;
             }
             //重新繪制圖像
             g.Clear(Color.White);
-            g.DrawImage(img, new Rectangle(0, 0, width, height));
-            */
+            g.DrawImage(bitmap2, new Rectangle(0, 0, W, H));
             return bitmap2;
         }
 
@@ -3249,6 +3259,7 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         private void image_processing11b(string filename)
         {
             lb_main_mesg.Text = "扭曲效果";
+            Application.DoEvents();
 
             Bitmap bitmap1 = new Bitmap(filename);
 
@@ -3274,29 +3285,27 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         private Bitmap button1_Click12(string filename)
         {
             lb_main_mesg.Text = "積木效果";
+            Application.DoEvents();
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
             int H = bitmap1.Height;
-            Bitmap bitmap2 = new Bitmap(W, H);
+            //Bitmap bitmap2 = new Bitmap(W, H);
 
-            /*
-            Graphics myGraphics = this.panel1.CreateGraphics();
+            Graphics g = this.pictureBox1.CreateGraphics();
             //Bitmap myBitmap = new Bitmap(this.BackgroundImage);
-            int myWidth, myHeight, i, j, iAvg, iPixel;
+            int i, j, iAvg, iPixel;
             Color myColor, myNewColor;
             RectangleF myRect;
-            myWidth = MyBitmap.Width;
-            myHeight = MyBitmap.Height;
-            myRect = new RectangleF(0, 0, myWidth, myHeight);
-            Bitmap bitmap = MyBitmap.Clone(myRect, System.Drawing.Imaging.PixelFormat.DontCare);
+            myRect = new RectangleF(0, 0, W, H);
+            Bitmap bitmap2 = bitmap1.Clone(myRect, System.Drawing.Imaging.PixelFormat.DontCare);
             i = 0;
-            while (i < myWidth - 1)
+            while (i < W - 1)
             {
                 j = 0;
-                while (j < myHeight - 1)
+                while (j < H - 1)
                 {
-                    myColor = bitmap.GetPixel(i, j);
+                    myColor = bitmap2.GetPixel(i, j);
                     iAvg = (myColor.R + myColor.G + myColor.B) / 3;
                     iPixel = 0;
                     if (iAvg >= 128)
@@ -3304,14 +3313,13 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
                     else
                         iPixel = 0;
                     myNewColor = Color.FromArgb(255, iPixel, iPixel, iPixel);
-                    bitmap.SetPixel(i, j, myNewColor);
+                    bitmap2.SetPixel(i, j, myNewColor);
                     j = j + 1;
                 }
                 i = i + 1;
             }
-            myGraphics.Clear(Color.WhiteSmoke);
-            myGraphics.DrawImage(bitmap, new Rectangle(0, 0, myWidth, myHeight));
-            */
+            g.Clear(Color.WhiteSmoke);
+            g.DrawImage(bitmap2, new Rectangle(0, 0, W, H));
             return bitmap2;
         }
 
@@ -3321,9 +3329,9 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         制作圖像一般常用的類有: Bitmap; Graphics; Rectangle；Color; 用到的方法是 Graphics類的DrawImage；
         此方法共有30個版本, 我習慣用 DrawImage("圖像", "圖框") 版本.
         因為這個版本的思想是最簡單的----把一張**地圖像裝在一個**地框裡! (**代表某種效果的圖像和某種效果的框)
-        如. g.DrawImage(new Bitmap("myPicture"), new Rectangle(0, 0, myWidth, myHeight));
+        如. g.DrawImage(new Bitmap("myPicture"), new Rectangle(0, 0, W, H));
         ------------------------------------------------------------*/
-
+        //code SP
 
         private void bt_image_process_p16_Click(object sender, EventArgs e)
         {
@@ -3342,14 +3350,12 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 
             // 實例化控件
-            lb_main_mesg.Text = "";
+            lb_main_mesg.Text = "原圖";
             lb_main_mesg.Font = new Font("標楷體", 24);
             lb_main_mesg.ForeColor = Color.Red;
             lb_main_mesg.Location = new Point((W - w) / 2, (H - h) / 2 - 40);
             lb_main_mesg.AutoSize = true;
             this.Controls.Add(lb_main_mesg);     // 將控件加入表單
-
-            lb_main_mesg.Text = "原圖";
 
             timer1.Enabled = true;
         }
@@ -3414,6 +3420,8 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         private void bt_image_process_m0_Click(object sender, EventArgs e)
         {
             lb_main_mesg.Text = "黑白效果";
+            Application.DoEvents();
+
             Bitmap bmp = GrayImage(filename);
             pictureBox1.Image = bmp;
         }
@@ -3421,6 +3429,8 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         private void bt_image_process_m1_Click(object sender, EventArgs e)
         {
             lb_main_mesg.Text = "底片效果";
+            Application.DoEvents();
+
             //底片效果（反色）（255-r, 255-g, 255-b）
             Bitmap bmp = NegativeImage(filename);
             pictureBox1.Image = bmp;
@@ -3429,6 +3439,8 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         private void bt_image_process_m2_Click(object sender, EventArgs e)
         {
             lb_main_mesg.Text = "浮雕";
+            Application.DoEvents();
+
             //浮雕：找出附近的像素點r1，abs（r-r2+128）
             Bitmap bmp = EmbossmentImage(filename);
             pictureBox1.Image = bmp;
@@ -3437,6 +3449,8 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         private void bt_image_process_m3_Click(object sender, EventArgs e)
         {
             lb_main_mesg.Text = "柔化";
+            Application.DoEvents();
+
             Bitmap bmp = SoftenImage(filename);
             pictureBox1.Image = bmp;
         }
@@ -3444,6 +3458,8 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         private void bt_image_process_m4_Click(object sender, EventArgs e)
         {
             lb_main_mesg.Text = "銳化";
+            Application.DoEvents();
+
             Bitmap bmp = SharpenImage(filename);
             pictureBox1.Image = bmp;
         }
@@ -3451,6 +3467,8 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
         private void bt_image_process_m5_Click(object sender, EventArgs e)
         {
             lb_main_mesg.Text = "霧化";
+            Application.DoEvents();
+
             Bitmap bmp = AtomizationImage(filename);
             pictureBox1.Image = bmp;
         }
@@ -3686,7 +3704,7 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
             lockBitmap1.LockBits();
             lockBitmap2.LockBits();
 
-            System.Random MyRandom = new Random();
+            Random MyRandom = new Random();
             Color pixel;
             for (int x = 1; x < W - 1; x++)
             {
