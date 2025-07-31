@@ -14,24 +14,15 @@ arr1 = np.array([1, 2, 3, 4, 5])
 
 describe(統計資料)
 
-count：数量统计，此列共有多少有效值
+count：数量统计，此列共有多少有效值, 非空值的数量
 unipue：不同的值有多少个
 std：标准差
 min：最小值
-25%：四分之一分位数
-50%：二分之一分位数
-75%：四分之三分位数
+25%：四分之一分位数, 第一四分位数（Q1）
+50%：二分之一分位数, 第二四分位数（中位数，Q2）
+75%：四分之三分位数, 第三四分位数（Q3）
 max：最大值
-mean：均值
-
-count：非空值的数量
 mean：平均值
-std：标准差
-min：最小值
-25%：第一四分位数（Q1）
-50%：第二四分位数（中位数，Q2）
-75%：第三四分位数（Q3）
-max：最大值
 
 df的計算要純數值才可以計算 : mean() corr()
 字串(中英文)可使用 : max() min() sum()')
@@ -4206,47 +4197,84 @@ print(df)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 利用映射進行數據轉換
+
 print("df內容的資料對應, .map() mapping的方法")
 
 datas = [
-    ["male", "XL",  800],
+    ["male", "XL", 800],
     ["female", "M", 400],
-    ["not specified", "XXL",  300],
-    ["male", " L", 500],
-    ["female", " S", 700],
-    ["female", "XS", 850]
-    ]
+    ["not specified", "XXL", 300],
+    ["female", "XS", 850],
+]
 columns = ["性別", "尺寸", "價格"]
 df = pd.DataFrame(np.array(datas), columns=columns)
 
-print('原df :', df, sep="\n")
+print("原df :", df, sep="\n")
 
+print("某一欄的資料對應.map()")
 size_mapping = {"XXL": 666, "XL": 555, "L": 444, "M": 333, "S": 222, "XS": 111}
 df["尺寸"] = df["尺寸"].map(size_mapping)
 
-print('對應後df :', df, sep="\n")
+print("尺寸 對應後df :", df, sep="\n")
 
-print('使用 sklearn.preprocessing方法做資料對應')
+print("------------------------------")  # 30個
+
+print("使用 sklearn.preprocessing方法做資料對應")
 
 from sklearn import preprocessing
 
 datas = [
-    ["male", "XL",  800],
+    ["male", "XL", 800],
     ["female", "M", 400],
-    ["not specified", "XXL",  300],
-    ["male", " L", 500],
-    ["female", " S", 700],
-    ["female", "XS", 850]
-    ]
+    ["not specified", "XXL", 300],
+    ["female", "XS", 850],
+]
 columns = ["性別", "尺寸", "價格"]
 df = pd.DataFrame(np.array(datas), columns=columns)
 
-print('原df :', df, sep="\n")
+print("原df :", df, sep="\n")
 
+print("某一欄的資料對應.LabelEncoder()")
 label_encoder = preprocessing.LabelEncoder()
 df["性別"] = label_encoder.fit_transform(df["性別"])
 
-print('對應後df :', df, sep="\n")
+print("性別 對應後df :", df, sep="\n")
+
+print("------------------------------")  # 30個
+
+data = pd.DataFrame(
+    {
+        "food": [
+            "bacon",
+            "pulled pork",
+            "bacon",
+            "Pastrami",
+            "corned beef",
+            "Bacon",
+            "pastrami",
+            "honey ham",
+            "nova lox",
+        ],
+        "ounces": [4, 3, 12, 6, 7.5, 8, 3, 5, 6],
+    }
+)
+print(data)
+
+meat_to_animal = {
+    "bacon": "pig",
+    "pulled pork": "pig",
+    "pastrami": "cow",
+    "corned beef": "cow",
+    "honey ham": "pig",
+    "nova lox": "salmon",  # nova lox 冷煙三文魚
+}
+
+# Series 的 map()方法，可以將元素map給特定的 字典或函數 來進行轉換
+# 需先規整大小寫，也是透過 map 對每個元素做 str.lower的操作
+# 多了一欄, 由某一欄資料映射而來
+data["animal"] = data["food"].map(str.lower).map(meat_to_animal)
+print(data)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -6829,46 +6857,6 @@ data.duplicated(["k1"])
 data.duplicated(["k1"], keep="last")
 
 print("------------------------------------------------------------")  # 60個
-
-# 利用函數或映射進行數據轉換
-
-data = pd.DataFrame(
-    {
-        "food": [
-            "bacon",
-            "pulled pork",
-            "bacon",
-            "Pastrami",
-            "corned beef",
-            "Bacon",
-            "pastrami",
-            "honey ham",
-            "nova lox",
-        ],
-        "ounces": [4, 3, 12, 6, 7.5, 8, 3, 5, 6],
-    }
-)
-data
-
-meat_to_animal = {
-    "bacon": "pig",
-    "pulled pork": "pig",
-    "pastrami": "cow",
-    "corned beef": "cow",
-    "honey ham": "pig",
-    "nova lox": "salmon",
-}
-
-# Series 的 map()方法，可以將元素map給特定的 字典或函數 來進行轉換
-# 需先規整大小寫，也是透過 map 對每個元素做 str.lower的操作
-data["animal"] = data["food"].map(str.lower).map(meat_to_animal)
-data
-
-# 也可以透過 lambda來做
-data["animal"] = data["food"].map(lambda x: meat_to_animal[x.lower()])
-data
-# 使用 map()是實現元素級清理與轉換的便捷方式
-
 print("------------------------------------------------------------")  # 60個
 
 # 替換值

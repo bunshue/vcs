@@ -43,19 +43,7 @@
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
-            this.button17 = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
-            this.button22 = new System.Windows.Forms.Button();
-            this.button23 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button12 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.bt_edge_detection7 = new System.Windows.Forms.Button();
             this.bt_edge_detection0 = new System.Windows.Forms.Button();
@@ -118,71 +106,69 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(277, 175);
+            this.button1.Location = new System.Drawing.Point(283, 375);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(140, 40);
             this.button1.TabIndex = 0;
-            this.button1.Text = "鏡像圖片";
+            this.button1.Text = "單色圖片 1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(277, 217);
+            this.button2.Location = new System.Drawing.Point(283, 417);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(140, 40);
             this.button2.TabIndex = 1;
-            this.button2.Text = "模糊處理";
+            this.button2.Text = "單色圖片 2";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(277, 257);
+            this.button3.Location = new System.Drawing.Point(283, 457);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(140, 40);
             this.button3.TabIndex = 2;
-            this.button3.Text = "Sepia 1";
+            this.button3.Text = "推拉效果";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(277, 297);
+            this.button4.Location = new System.Drawing.Point(283, 497);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(140, 40);
             this.button4.TabIndex = 3;
-            this.button4.Text = "Sepia 2";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(277, 337);
+            this.button5.Location = new System.Drawing.Point(283, 537);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(140, 40);
             this.button5.TabIndex = 4;
-            this.button5.Text = "單色處理";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(423, 136);
+            this.button6.Location = new System.Drawing.Point(429, 336);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(140, 40);
             this.button6.TabIndex = 4;
-            this.button6.Text = "單色圖片 1";
+            this.button6.Text = "圖像邊緣提取1";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(423, 175);
+            this.button7.Location = new System.Drawing.Point(429, 375);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(140, 40);
             this.button7.TabIndex = 5;
-            this.button7.Text = "單色圖片 2";
+            this.button7.Text = "圖像邊緣提取2";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -205,173 +191,54 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(423, 214);
+            this.button8.Location = new System.Drawing.Point(429, 414);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(140, 40);
             this.button8.TabIndex = 8;
-            this.button8.Text = "推拉效果";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(423, 253);
+            this.button9.Location = new System.Drawing.Point(429, 453);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(140, 40);
             this.button9.TabIndex = 9;
-            this.button9.Text = "積木效果";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(423, 292);
+            this.button10.Location = new System.Drawing.Point(429, 492);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(140, 40);
             this.button10.TabIndex = 10;
-            this.button10.Text = "白色轉為透明";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(423, 332);
+            this.button11.Location = new System.Drawing.Point(429, 532);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(140, 40);
             this.button11.TabIndex = 11;
-            this.button11.Text = "水平交錯效果顯示圖像";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button0
             // 
-            this.button0.Location = new System.Drawing.Point(277, 131);
+            this.button0.Location = new System.Drawing.Point(283, 331);
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(140, 40);
             this.button0.TabIndex = 16;
-            this.button0.Text = "彩虹化圖片";
+            this.button0.Text = "單色處理";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
-            // 
-            // button16
-            // 
-            this.button16.Location = new System.Drawing.Point(569, 295);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(140, 40);
-            this.button16.TabIndex = 18;
-            this.button16.Text = "光暈效果";
-            this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.button16_Click);
-            // 
-            // button17
-            // 
-            this.button17.Location = new System.Drawing.Point(569, 337);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(140, 40);
-            this.button17.TabIndex = 19;
-            this.button17.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(this.button17_Click);
-            // 
-            // button18
-            // 
-            this.button18.Location = new System.Drawing.Point(715, 136);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(140, 40);
-            this.button18.TabIndex = 20;
-            this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
-            // 
-            // button19
-            // 
-            this.button19.Location = new System.Drawing.Point(715, 174);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(140, 40);
-            this.button19.TabIndex = 21;
-            this.button19.UseVisualStyleBackColor = true;
-            this.button19.Click += new System.EventHandler(this.button19_Click);
-            // 
-            // button20
-            // 
-            this.button20.Location = new System.Drawing.Point(715, 212);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(140, 40);
-            this.button20.TabIndex = 22;
-            this.button20.Text = "馬賽克效果1";
-            this.button20.UseVisualStyleBackColor = true;
-            this.button20.Click += new System.EventHandler(this.button20_Click);
-            // 
-            // button21
-            // 
-            this.button21.Location = new System.Drawing.Point(715, 254);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(140, 40);
-            this.button21.TabIndex = 23;
-            this.button21.Text = "馬賽克效果2";
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.button21_Click);
-            // 
-            // button22
-            // 
-            this.button22.Location = new System.Drawing.Point(715, 293);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(140, 40);
-            this.button22.TabIndex = 24;
-            this.button22.UseVisualStyleBackColor = true;
-            this.button22.Click += new System.EventHandler(this.button22_Click);
-            // 
-            // button23
-            // 
-            this.button23.Location = new System.Drawing.Point(715, 334);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(140, 40);
-            this.button23.TabIndex = 25;
-            this.button23.UseVisualStyleBackColor = true;
-            this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
             // timer1
             // 
             this.timer1.Interval = 2000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(569, 136);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(140, 40);
-            this.button12.TabIndex = 12;
-            this.button12.Text = "垂直交錯效果顯示圖像";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
-            // 
-            // button13
-            // 
-            this.button13.Location = new System.Drawing.Point(569, 176);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(140, 40);
-            this.button13.TabIndex = 13;
-            this.button13.Text = "圖像邊緣提取1";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
-            // 
-            // button14
-            // 
-            this.button14.Location = new System.Drawing.Point(569, 216);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(140, 40);
-            this.button14.TabIndex = 14;
-            this.button14.Text = "圖像邊緣提取2";
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
-            // 
-            // button15
-            // 
-            this.button15.Location = new System.Drawing.Point(569, 255);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(140, 40);
-            this.button15.TabIndex = 17;
-            this.button15.Text = "降低解析度";
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // groupBox2
             // 
@@ -385,14 +252,14 @@
             this.groupBox2.Controls.Add(this.bt_edge_detection3);
             this.groupBox2.Location = new System.Drawing.Point(393, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(100, 100);
+            this.groupBox2.Size = new System.Drawing.Size(118, 285);
             this.groupBox2.TabIndex = 35;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "圖像邊緣檢測";
             // 
             // bt_edge_detection7
             // 
-            this.bt_edge_detection7.Location = new System.Drawing.Point(20, 343);
+            this.bt_edge_detection7.Location = new System.Drawing.Point(8, 251);
             this.bt_edge_detection7.Name = "bt_edge_detection7";
             this.bt_edge_detection7.Size = new System.Drawing.Size(110, 35);
             this.bt_edge_detection7.TabIndex = 43;
@@ -402,7 +269,7 @@
             // 
             // bt_edge_detection0
             // 
-            this.bt_edge_detection0.Location = new System.Drawing.Point(20, 21);
+            this.bt_edge_detection0.Location = new System.Drawing.Point(8, 21);
             this.bt_edge_detection0.Name = "bt_edge_detection0";
             this.bt_edge_detection0.Size = new System.Drawing.Size(110, 35);
             this.bt_edge_detection0.TabIndex = 36;
@@ -412,7 +279,7 @@
             // 
             // bt_edge_detection6
             // 
-            this.bt_edge_detection6.Location = new System.Drawing.Point(20, 297);
+            this.bt_edge_detection6.Location = new System.Drawing.Point(8, 218);
             this.bt_edge_detection6.Name = "bt_edge_detection6";
             this.bt_edge_detection6.Size = new System.Drawing.Size(110, 35);
             this.bt_edge_detection6.TabIndex = 42;
@@ -422,7 +289,7 @@
             // 
             // bt_edge_detection1
             // 
-            this.bt_edge_detection1.Location = new System.Drawing.Point(20, 67);
+            this.bt_edge_detection1.Location = new System.Drawing.Point(8, 52);
             this.bt_edge_detection1.Name = "bt_edge_detection1";
             this.bt_edge_detection1.Size = new System.Drawing.Size(110, 35);
             this.bt_edge_detection1.TabIndex = 37;
@@ -432,7 +299,7 @@
             // 
             // bt_edge_detection5
             // 
-            this.bt_edge_detection5.Location = new System.Drawing.Point(20, 251);
+            this.bt_edge_detection5.Location = new System.Drawing.Point(8, 184);
             this.bt_edge_detection5.Name = "bt_edge_detection5";
             this.bt_edge_detection5.Size = new System.Drawing.Size(110, 35);
             this.bt_edge_detection5.TabIndex = 41;
@@ -442,7 +309,7 @@
             // 
             // bt_edge_detection2
             // 
-            this.bt_edge_detection2.Location = new System.Drawing.Point(20, 113);
+            this.bt_edge_detection2.Location = new System.Drawing.Point(8, 85);
             this.bt_edge_detection2.Name = "bt_edge_detection2";
             this.bt_edge_detection2.Size = new System.Drawing.Size(110, 35);
             this.bt_edge_detection2.TabIndex = 38;
@@ -452,7 +319,7 @@
             // 
             // bt_edge_detection4
             // 
-            this.bt_edge_detection4.Location = new System.Drawing.Point(20, 205);
+            this.bt_edge_detection4.Location = new System.Drawing.Point(8, 151);
             this.bt_edge_detection4.Name = "bt_edge_detection4";
             this.bt_edge_detection4.Size = new System.Drawing.Size(110, 35);
             this.bt_edge_detection4.TabIndex = 40;
@@ -462,7 +329,7 @@
             // 
             // bt_edge_detection3
             // 
-            this.bt_edge_detection3.Location = new System.Drawing.Point(20, 159);
+            this.bt_edge_detection3.Location = new System.Drawing.Point(8, 118);
             this.bt_edge_detection3.Name = "bt_edge_detection3";
             this.bt_edge_detection3.Size = new System.Drawing.Size(110, 35);
             this.bt_edge_detection3.TabIndex = 39;
@@ -545,6 +412,7 @@
             this.bt_image_process_p28.Name = "bt_image_process_p28";
             this.bt_image_process_p28.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p28.TabIndex = 64;
+            this.bt_image_process_p28.Text = "彩虹化圖片28";
             this.bt_image_process_p28.UseVisualStyleBackColor = true;
             this.bt_image_process_p28.Click += new System.EventHandler(this.bt_image_process_p28_Click);
             // 
@@ -554,6 +422,7 @@
             this.bt_image_process_p27.Name = "bt_image_process_p27";
             this.bt_image_process_p27.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p27.TabIndex = 63;
+            this.bt_image_process_p27.Text = "鏡像圖片27";
             this.bt_image_process_p27.UseVisualStyleBackColor = true;
             this.bt_image_process_p27.Click += new System.EventHandler(this.bt_image_process_p27_Click);
             // 
@@ -563,6 +432,7 @@
             this.bt_image_process_p26.Name = "bt_image_process_p26";
             this.bt_image_process_p26.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p26.TabIndex = 62;
+            this.bt_image_process_p26.Text = "模糊處理26";
             this.bt_image_process_p26.UseVisualStyleBackColor = true;
             this.bt_image_process_p26.Click += new System.EventHandler(this.bt_image_process_p26_Click);
             // 
@@ -572,6 +442,7 @@
             this.bt_image_process_p25.Name = "bt_image_process_p25";
             this.bt_image_process_p25.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p25.TabIndex = 61;
+            this.bt_image_process_p25.Text = "Sepia2 25";
             this.bt_image_process_p25.UseVisualStyleBackColor = true;
             this.bt_image_process_p25.Click += new System.EventHandler(this.bt_image_process_p25_Click);
             // 
@@ -581,6 +452,7 @@
             this.bt_image_process_p24.Name = "bt_image_process_p24";
             this.bt_image_process_p24.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p24.TabIndex = 60;
+            this.bt_image_process_p24.Text = "Sepia1 24";
             this.bt_image_process_p24.UseVisualStyleBackColor = true;
             this.bt_image_process_p24.Click += new System.EventHandler(this.bt_image_process_p24_Click);
             // 
@@ -590,6 +462,7 @@
             this.bt_image_process_p23.Name = "bt_image_process_p23";
             this.bt_image_process_p23.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p23.TabIndex = 59;
+            this.bt_image_process_p23.Text = "積木效果23";
             this.bt_image_process_p23.UseVisualStyleBackColor = true;
             this.bt_image_process_p23.Click += new System.EventHandler(this.bt_image_process_p23_Click);
             // 
@@ -599,6 +472,7 @@
             this.bt_image_process_p22.Name = "bt_image_process_p22";
             this.bt_image_process_p22.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p22.TabIndex = 58;
+            this.bt_image_process_p22.Text = "垂直交錯效果顯示圖像22";
             this.bt_image_process_p22.UseVisualStyleBackColor = true;
             this.bt_image_process_p22.Click += new System.EventHandler(this.bt_image_process_p22_Click);
             // 
@@ -608,6 +482,7 @@
             this.bt_image_process_p21.Name = "bt_image_process_p21";
             this.bt_image_process_p21.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p21.TabIndex = 57;
+            this.bt_image_process_p21.Text = "水平交錯效果顯示圖像21";
             this.bt_image_process_p21.UseVisualStyleBackColor = true;
             this.bt_image_process_p21.Click += new System.EventHandler(this.bt_image_process_p21_Click);
             // 
@@ -617,6 +492,7 @@
             this.bt_image_process_p20.Name = "bt_image_process_p20";
             this.bt_image_process_p20.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p20.TabIndex = 56;
+            this.bt_image_process_p20.Text = "白色轉為透明20";
             this.bt_image_process_p20.UseVisualStyleBackColor = true;
             this.bt_image_process_p20.Click += new System.EventHandler(this.bt_image_process_p20_Click);
             // 
@@ -626,6 +502,7 @@
             this.bt_image_process_p19.Name = "bt_image_process_p19";
             this.bt_image_process_p19.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p19.TabIndex = 55;
+            this.bt_image_process_p19.Text = "光暈效果19";
             this.bt_image_process_p19.UseVisualStyleBackColor = true;
             this.bt_image_process_p19.Click += new System.EventHandler(this.bt_image_process_p19_Click);
             // 
@@ -635,6 +512,7 @@
             this.bt_image_process_p18.Name = "bt_image_process_p18";
             this.bt_image_process_p18.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p18.TabIndex = 54;
+            this.bt_image_process_p18.Text = "降低解析度18";
             this.bt_image_process_p18.UseVisualStyleBackColor = true;
             this.bt_image_process_p18.Click += new System.EventHandler(this.bt_image_process_p18_Click);
             // 
@@ -644,6 +522,7 @@
             this.bt_image_process_p17.Name = "bt_image_process_p17";
             this.bt_image_process_p17.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p17.TabIndex = 53;
+            this.bt_image_process_p17.Text = "馬賽克效果17";
             this.bt_image_process_p17.UseVisualStyleBackColor = true;
             this.bt_image_process_p17.Click += new System.EventHandler(this.bt_image_process_p17_Click);
             // 
@@ -653,6 +532,7 @@
             this.bt_image_process_p16.Name = "bt_image_process_p16";
             this.bt_image_process_p16.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p16.TabIndex = 52;
+            this.bt_image_process_p16.Text = "馬賽克效果16";
             this.bt_image_process_p16.UseVisualStyleBackColor = true;
             this.bt_image_process_p16.Click += new System.EventHandler(this.bt_image_process_p16_Click);
             // 
@@ -827,14 +707,14 @@
             this.groupBox1.Controls.Add(this.bt_image_process_m3);
             this.groupBox1.Location = new System.Drawing.Point(277, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(100, 100);
+            this.groupBox1.Size = new System.Drawing.Size(110, 224);
             this.groupBox1.TabIndex = 45;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "影像處理 內存法";
             // 
             // bt_image_process_m7
             // 
-            this.bt_image_process_m7.Location = new System.Drawing.Point(20, 343);
+            this.bt_image_process_m7.Location = new System.Drawing.Point(6, 251);
             this.bt_image_process_m7.Name = "bt_image_process_m7";
             this.bt_image_process_m7.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_m7.TabIndex = 43;
@@ -843,7 +723,7 @@
             // 
             // bt_image_process_m0
             // 
-            this.bt_image_process_m0.Location = new System.Drawing.Point(20, 21);
+            this.bt_image_process_m0.Location = new System.Drawing.Point(6, 21);
             this.bt_image_process_m0.Name = "bt_image_process_m0";
             this.bt_image_process_m0.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_m0.TabIndex = 36;
@@ -853,7 +733,7 @@
             // 
             // bt_image_process_m6
             // 
-            this.bt_image_process_m6.Location = new System.Drawing.Point(20, 297);
+            this.bt_image_process_m6.Location = new System.Drawing.Point(6, 218);
             this.bt_image_process_m6.Name = "bt_image_process_m6";
             this.bt_image_process_m6.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_m6.TabIndex = 42;
@@ -862,7 +742,7 @@
             // 
             // bt_image_process_m1
             // 
-            this.bt_image_process_m1.Location = new System.Drawing.Point(20, 67);
+            this.bt_image_process_m1.Location = new System.Drawing.Point(6, 52);
             this.bt_image_process_m1.Name = "bt_image_process_m1";
             this.bt_image_process_m1.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_m1.TabIndex = 37;
@@ -872,7 +752,7 @@
             // 
             // bt_image_process_m5
             // 
-            this.bt_image_process_m5.Location = new System.Drawing.Point(20, 251);
+            this.bt_image_process_m5.Location = new System.Drawing.Point(6, 184);
             this.bt_image_process_m5.Name = "bt_image_process_m5";
             this.bt_image_process_m5.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_m5.TabIndex = 41;
@@ -882,7 +762,7 @@
             // 
             // bt_image_process_m2
             // 
-            this.bt_image_process_m2.Location = new System.Drawing.Point(20, 113);
+            this.bt_image_process_m2.Location = new System.Drawing.Point(6, 85);
             this.bt_image_process_m2.Name = "bt_image_process_m2";
             this.bt_image_process_m2.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_m2.TabIndex = 38;
@@ -892,7 +772,7 @@
             // 
             // bt_image_process_m4
             // 
-            this.bt_image_process_m4.Location = new System.Drawing.Point(20, 205);
+            this.bt_image_process_m4.Location = new System.Drawing.Point(6, 151);
             this.bt_image_process_m4.Name = "bt_image_process_m4";
             this.bt_image_process_m4.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_m4.TabIndex = 40;
@@ -902,7 +782,7 @@
             // 
             // bt_image_process_m3
             // 
-            this.bt_image_process_m3.Location = new System.Drawing.Point(20, 159);
+            this.bt_image_process_m3.Location = new System.Drawing.Point(6, 118);
             this.bt_image_process_m3.Name = "bt_image_process_m3";
             this.bt_image_process_m3.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_m3.TabIndex = 39;
@@ -940,19 +820,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox0);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.button23);
-            this.Controls.Add(this.button22);
-            this.Controls.Add(this.button21);
-            this.Controls.Add(this.button20);
-            this.Controls.Add(this.button19);
-            this.Controls.Add(this.button18);
-            this.Controls.Add(this.button17);
-            this.Controls.Add(this.button16);
-            this.Controls.Add(this.button15);
             this.Controls.Add(this.button0);
-            this.Controls.Add(this.button14);
-            this.Controls.Add(this.button13);
-            this.Controls.Add(this.button12);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
@@ -994,19 +862,7 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button0;
-        private System.Windows.Forms.Button button16;
-        private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.Button button18;
-        private System.Windows.Forms.Button button19;
-        private System.Windows.Forms.Button button20;
-        private System.Windows.Forms.Button button21;
-        private System.Windows.Forms.Button button22;
-        private System.Windows.Forms.Button button23;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button button15;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button bt_edge_detection7;
         private System.Windows.Forms.Button bt_edge_detection0;

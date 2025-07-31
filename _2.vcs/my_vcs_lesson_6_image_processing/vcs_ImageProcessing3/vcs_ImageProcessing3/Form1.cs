@@ -51,19 +51,19 @@ namespace vcs_ImageProcessing3
             int dx = 140 + 10;
             int dy = 40 + 10;
             int W = 150;
-            int H = 400;
+            int H = 450;
 
-            groupBox0.Size = new Size(W * 2, H * 2 - 50);
+            groupBox0.Size = new Size(W * 2, H * 2 - 150);
             groupBox1.Size = new Size(W, H);
             groupBox2.Size = new Size(W, H);
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            groupBox2.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 10);
 
             pictureBox1.Size = new Size(680, 680);
-            pictureBox1.Location = new Point(x_st + dx * 4 + 10, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx * 3 + 10, y_st + dy * 0);
             pictureBox2.Size = new Size(680, 680);
-            pictureBox2.Location = new Point(x_st + dx * 4 + 10, y_st + dy * 0 + 680);
+            pictureBox2.Location = new Point(x_st + dx * 3 + 10, y_st + dy * 0 + 680);
 
             bt_restore.Location = new Point(x_st + dx * 10, y_st + dy * 0);
             richTextBox1.Size = new Size(300, 900);
@@ -117,7 +117,7 @@ namespace vcs_ImageProcessing3
             bt_image_process_m1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_image_process_m2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_image_process_m3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            bt_image_process_m7.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_image_process_m4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             bt_image_process_m5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             bt_image_process_m6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             bt_image_process_m7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
@@ -137,7 +137,6 @@ namespace vcs_ImageProcessing3
             bt_open_file_setup();
             bt_exit_setup();
 
-
             x_st = 10;
             y_st = 780;
             dx = 140 + 10;
@@ -156,20 +155,6 @@ namespace vcs_ImageProcessing3
             button9.Location = new Point(x_st + dx * 1, y_st + dy * 3);
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 4);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-
-            button12.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button13.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button14.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button15.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button16.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button17.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-
-            button18.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button19.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button20.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button21.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button22.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button23.Location = new Point(x_st + dx * 3, y_st + dy * 5);
         }
 
         private void bt_open_file_Click(object sender, EventArgs e)
@@ -269,326 +254,6 @@ namespace vcs_ImageProcessing3
 
         private void button0_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "彩虹化圖片\n";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
-            pictureBox1.Image = ToRainbow(filename);
-        }
-
-        private Bitmap ToRainbow(string filename)
-        {
-            Image image = Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-
-            //get image dimension
-            int width = image.Width;
-            int height = image.Height;
-
-            Bitmap bmp = new Bitmap(width, height);
-            using (Graphics gr = Graphics.FromImage(bmp))
-            {
-                // Define target colors.
-                Color[] color =
-                {
-                    //Color.Red, Color.Orange, Color.Yellow,
-                    //Color.Green, Color.Blue, Color.Indigo,
-                    //Color.Violet,
-
-                    Color.Red, Color.OrangeRed, Color.Yellow,
-                    Color.Green, Color.Blue, Color.Indigo,
-                    Color.Fuchsia,
-                };
-                const float scale = 2.0f;
-
-                // Draw.
-                for (int i = 0; i < color.Length; i++)
-                {
-                    // Create the ColorMatrix.
-                    ColorMatrix cm = new ColorMatrix(new float[][]
-                    {
-                        new float[] {color[i].R / 255f * scale, 0, 0, 0, 0},
-                        new float[] {0, color[i].G / 255f * scale, 0, 0, 0},
-                        new float[] {0, 0, color[i].B / 255f * scale, 0, 0},
-                        new float[] {0, 0, 0, 1, 0},
-                        new float[] {0, 0, 0, 0, 1},
-                    });
-                    ImageAttributes attr = new ImageAttributes();
-                    attr.SetColorMatrix(cm);
-
-                    // Draw the next part of the image.
-                    int x = (int)(i * image.Width / color.Length);
-                    Point[] points =
-                    {
-                        new Point(x, 0),
-                        new Point(width, 0),
-                        new Point(x, height),
-                    };
-                    Rectangle rect = new Rectangle(x, 0, width - x, height);
-                    gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attr);
-                }
-            }
-            return bmp;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "鏡像圖片\n";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            pictureBox1.Image = ToMirror(filename);
-        }
-
-        private Bitmap ToMirror(string filename)
-        {
-            Image image = Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            Bitmap bmp = new Bitmap(image);
-
-            //get image dimension
-            int width = image.Width;
-            int height = image.Height;
-
-            //mirror image
-            Bitmap mimg = new Bitmap(width * 2, height);
-
-            for (int y = 0; y < height; y++)
-            {
-                for (int lx = 0, rx = width * 2 - 1; lx < width; lx++, rx--)
-                {
-                    //get source pixel value
-                    Color p = bmp.GetPixel(lx, y);
-
-                    //set mirror pixel value
-                    mimg.SetPixel(lx, y, p);
-                    mimg.SetPixel(rx, y, p);
-                }
-            }
-            return mimg;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //模糊處理
-            richTextBox1.Text += "模糊處理\n";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-            richTextBox1.Text += "PictureToBlur\n";
-            pictureBox1.Image = ToBlur(filename);
-        }
-
-        private Bitmap ToBlur(string filename)
-        {
-            Image image = Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            Bitmap bitmap1 = new Bitmap(image);
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            Bitmap bitmap2 = new Bitmap(W, H);
-
-            for (int j = 0; j < H; j++)
-            {
-                for (int i = 0; i < W; i++)
-                {
-                    int ok_cnt = 0;
-                    int R = 0;
-                    int G = 0;
-                    int B = 0;
-
-                    // 檢查相鄰像素, 每個點的鄰居不一樣多, 所以要做不同的平均
-
-                    //自己
-                    R += bitmap1.GetPixel(i, j).R;
-                    G += bitmap1.GetPixel(i, j).G;
-                    B += bitmap1.GetPixel(i, j).B;
-
-                    ok_cnt++;
-
-                    if (j - 1 > 0)       //上
-                    {
-                        R += bitmap1.GetPixel(i, j - 1).R;
-                        G += bitmap1.GetPixel(i, j - 1).G;
-                        B += bitmap1.GetPixel(i, j - 1).B;
-
-                        ok_cnt++;
-                    }
-                    if (j + 1 < H)      //下
-                    {
-                        R += bitmap1.GetPixel(i, j + 1).R;
-                        G += bitmap1.GetPixel(i, j + 1).G;
-                        B += bitmap1.GetPixel(i, j + 1).B;
-                        ok_cnt++;
-                    }
-                    if (i - 1 > 0)       //左
-                    {
-                        R += bitmap1.GetPixel(i - 1, j).R;
-                        G += bitmap1.GetPixel(i - 1, j).G;
-                        B += bitmap1.GetPixel(i - 1, j).B;
-                        ok_cnt++;
-                    }
-                    if (i + 1 < W)       //右
-                    {
-                        R += bitmap1.GetPixel(i + 1, j).R;
-                        G += bitmap1.GetPixel(i + 1, j).G;
-                        B += bitmap1.GetPixel(i + 1, j).B;
-                        ok_cnt++;
-                    }
-                    if ((i - 1 > 0) && (j - 1 > 0))     //左上
-                    {
-                        R += bitmap1.GetPixel(i - 1, j - 1).R;
-                        G += bitmap1.GetPixel(i - 1, j - 1).G;
-                        B += bitmap1.GetPixel(i - 1, j - 1).B;
-                        ok_cnt++;
-                    }
-                    if ((i - 1 > 0) && (j + 1 < H)) //左下
-                    {
-                        R += bitmap1.GetPixel(i - 1, j + 1).R;
-                        G += bitmap1.GetPixel(i - 1, j + 1).G;
-                        B += bitmap1.GetPixel(i - 1, j + 1).B;
-                        ok_cnt++;
-                    }
-                    if ((i + 1 < W) && (j - 1 > 0))      //右上
-                    {
-                        R += bitmap1.GetPixel(i + 1, j - 1).R;
-                        G += bitmap1.GetPixel(i + 1, j - 1).G;
-                        B += bitmap1.GetPixel(i + 1, j - 1).B;
-                        ok_cnt++;
-                    }
-                    if ((i + 1 < W) && (j + 1 < H)) //右下
-                    {
-                        R += bitmap1.GetPixel(i + 1, j + 1).R;
-                        G += bitmap1.GetPixel(i + 1, j + 1).G;
-                        B += bitmap1.GetPixel(i + 1, j + 1).B;
-                        ok_cnt++;
-                    }
-
-                    //平均, 設定個點的像素值
-                    bitmap2.SetPixel(i, j, Color.FromArgb((R / ok_cnt), (G / ok_cnt), (B / ok_cnt)));
-                }
-            }
-            return bitmap2;
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //Sepia 1
-            //將圖片轉為 Sepia 效果
-            // Display the image converted to sepia tone.
-            pictureBox2.Image = ToSepiaTone1(pictureBox1.Image);
-        }
-
-        // Convert an image to sepia tone.
-        private Bitmap ToSepiaTone1(Image image)
-        {
-            // Make the ColorMatrix.
-            ColorMatrix cm = new ColorMatrix(new float[][]
-            {
-                new float[] {0.393f, 0.349f, 0.272f, 0, 0},
-                new float[] {0.769f, 0.686f, 0.534f, 0, 0},
-                new float[] {0.189f, 0.168f, 0.131f, 0, 0},
-                new float[] { 0, 0, 0, 1, 0},
-                new float[] { 0, 0, 0, 0, 1}
-            });
-            //ColorMatrix cm = new ColorMatrix(new float[][]
-            //{
-            //    new float[] {0.300f, 0.066f, 0.300f, 0, 0},
-            //    new float[] {0.500f, 0.350f, 0.600f, 0, 0},
-            //    new float[] {0.100f, 0.000f, 0.200f, 0, 0},
-            //    new float[] { 0, 0, 0, 1, 0},
-            //    new float[] { 0, 0, 0, 0, 1}
-            //});
-            ImageAttributes attributes = new ImageAttributes();
-            attributes.SetColorMatrix(cm);
-
-            // Draw the image onto the new bitmap while applying the new ColorMatrix.
-            Point[] points =
-            {
-                new Point(0, 0),
-                new Point(image.Width - 1, 0),
-                new Point(0, image.Height - 1),
-            };
-            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
-
-            // Make the result bitmap.
-            Bitmap bmp = new Bitmap(image.Width, image.Height);
-            using (Graphics gr = Graphics.FromImage(bmp))
-            {
-                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
-            }
-
-            // Return the result.
-            return bmp;
-        }
-
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //Sepia 2
-            //將圖片轉為 Sepia 效果
-            // Display the image converted to sepia tone.
-            pictureBox2.Image = ToSepiaTone2(pictureBox1.Image);
-        }
-
-        // Convert an image to sepia tone.
-        private Bitmap ToSepiaTone2(Image image)
-        {
-            //將圖片轉為 Sepia 效果
-            Bitmap bmp = new Bitmap(image);
-
-            int width = bmp.Width;
-            int height = bmp.Height;
-
-            Color p;
-
-            //sepia
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    //get pixel value
-                    p = bmp.GetPixel(x, y);
-
-                    //extract pixel component ARGB
-                    int a = p.A;
-                    int r = p.R;
-                    int g = p.G;
-                    int b = p.B;
-
-                    //calculate temp value
-                    int tr = (int)(0.393 * r + 0.769 * g + 0.189 * b);
-                    int tg = (int)(0.349 * r + 0.686 * g + 0.168 * b);
-                    int tb = (int)(0.272 * r + 0.534 * g + 0.131 * b);
-
-                    //set new RGB value
-                    if (tr > 255)
-                    {
-                        r = 255;
-                    }
-                    else
-                    {
-                        r = tr;
-                    }
-
-                    if (tg > 255)
-                    {
-                        g = 255;
-                    }
-                    else
-                    {
-                        g = tg;
-                    }
-
-                    if (tb > 255)
-                    {
-                        b = 255;
-                    }
-                    else
-                    {
-                        b = tb;
-                    }
-
-                    //set the new RGB value in image pixel
-                    bmp.SetPixel(x, y, Color.FromArgb(a, r, g, b));
-                }
-            }
-            return bmp;
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
             //單色處理
             richTextBox1.Text += "單色處理\n";
             pictureBox2.Image = ToMonochrome(pictureBox1.Image);
@@ -624,11 +289,11 @@ namespace vcs_ImageProcessing3
             {
                 gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
             }
-            // Return the result.
             return bm;
+
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             //單色圖片 1
             // Convert the image into red, green, and blue monochrome.
@@ -668,12 +333,10 @@ namespace vcs_ImageProcessing3
             {
                 gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
             }
-
-            // Return the result.
             return bm;
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             //單色圖片 2
             //製作單色圖片
@@ -731,7 +394,7 @@ namespace vcs_ImageProcessing3
             //pictureBox1.Image = bbmp;
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
             //推拉效果
 
@@ -755,143 +418,17 @@ namespace vcs_ImageProcessing3
             }
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
-            //積木效果
-            Bitmap bmp = new Bitmap(filename);
-            pictureBox1.Image = ToBlock(bmp);
         }
 
-        Bitmap ToBlock(Bitmap bitmap1)
+        private void button5_Click(object sender, EventArgs e)
         {
-            Graphics g = this.pictureBox1.CreateGraphics();
-            int W, H, i, j, iAvg, iPixel;
-            Color myColor, myNewColor;
-            RectangleF myRect;
-            W = bitmap1.Width;
-            H = bitmap1.Height;
-            myRect = new RectangleF(0, 0, W, H);
-            Bitmap bitmap = bitmap1.Clone(myRect, System.Drawing.Imaging.PixelFormat.DontCare);
-            i = 0;
-            while (i < W - 1)
-            {
-                j = 0;
-                while (j < H - 1)
-                {
-                    myColor = bitmap.GetPixel(i, j);
-                    iAvg = (myColor.R + myColor.G + myColor.B) / 3;
-                    iPixel = 0;
-                    if (iAvg >= 128)
-                        iPixel = 255;
-                    else
-                        iPixel = 0;
-                    myNewColor = Color.FromArgb(255, iPixel, iPixel, iPixel);
-                    bitmap.SetPixel(i, j, myNewColor);
-                    j = j + 1;
-                }
-                i = i + 1;
-            }
-            g.Clear(Color.WhiteSmoke);
-            g.DrawImage(bitmap, new Rectangle(0, 0, W, H));
-
-            return bitmap;
         }
 
-        private void button10_Click(object sender, EventArgs e)
-        {
-            //白色轉為透明
-            //C#將圖片白色背景設置為透明
-            pictureBox1.BackColor = Color.Pink;
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Image image = Image.FromFile(filename);
-            Bitmap bitmap1 = new Bitmap(image);
-            bitmap1.MakeTransparent(Color.White);
-            pictureBox1.Image = bitmap1;
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            //水平交錯效果顯示圖像
-            //水平交錯效果
-
-            Bitmap bitmap1 = new Bitmap(filename);
-            pictureBox1.Image = bitmap1;
-            pictureBox1.Size = new Size(bitmap1.Width, bitmap1.Height);
-
-            bitmap1 = new Bitmap(filename);
-            pictureBox1.Image = LevelInterleaving(bitmap1);
-        }
-
-        Bitmap LevelInterleaving(Bitmap bitmap1)
-        {
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
-            Graphics g = this.pictureBox1.CreateGraphics();
-            g.Clear(Color.WhiteSmoke);
-            Bitmap bitmap2 = new Bitmap(W, H);
-            int i = 0;
-            while (i <= W / 2)
-            {
-                for (int m = 0; m <= H - 1; m++)
-                {
-                    bitmap2.SetPixel(i, m, bitmap1.GetPixel(i, m));
-                }
-                for (int n = 0; n <= H - 1; n++)
-                {
-                    bitmap2.SetPixel(W - i - 1, n, bitmap1.GetPixel(W - i - 1, n));
-                }
-                i++;
-                this.Refresh();
-                this.pictureBox1.Image = bitmap2;
-                Thread.Sleep(10);
-            }
-            return bitmap2;
-
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            //垂直交錯效果顯示圖像
-            //垂直交錯效果
-
-            Bitmap bitmap1 = new Bitmap(filename);
-            pictureBox1.Image = bitmap1;
-            pictureBox1.Size = new Size(bitmap1.Width, bitmap1.Height);
-            bitmap1 = new Bitmap(filename);
-            pictureBox1.Image = UprightnessInterleaving(bitmap1);
-        }
-
-        Bitmap UprightnessInterleaving(Bitmap bitmap1)
-        {
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
-            Graphics g = this.pictureBox1.CreateGraphics();
-            g.Clear(Color.WhiteSmoke);
-            Bitmap bitmap2 = new Bitmap(W, H);
-            int i = 0;
-            while (i <= H / 2)
-            {
-                for (int m = 0; m <= W - 1; m++)
-                {
-                    bitmap2.SetPixel(m, i, bitmap1.GetPixel(m, i));
-                }
-                for (int n = 0; n <= W - 1; n++)
-                {
-                    bitmap2.SetPixel(n, H - i - 1, bitmap1.GetPixel(n, H - i - 1));
-                }
-                i++;
-                this.Refresh();
-                pictureBox1.Image = bitmap2;
-                Thread.Sleep(10);
-            }
-            return bitmap2;
-        }
-
-        private void button13_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
         {
             //圖像邊緣提取1
-            //圖像邊緣提取1
-            //圖像邊緣提取
             /*
             用到的算法是robert算子，這是一種比較簡單的算法：
             f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
@@ -1001,8 +538,1400 @@ namespace vcs_ImageProcessing3
                     pictureBox1.Image = bitmap2;
                 }
             }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //圖像邊緣提取2
+            /*
+            用到的算法是robert算子，這是一種比較簡單的算法：
+            f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
+            博主一共寫了三段代碼，第一段是邊緣提取，第二段是線條加粗，
+            第三段是原圖和邊緣圖重合，三段代碼可以放在一起，但為了看得清晰我就把他們分開了。
+            */
+
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            pictureBox1.Image = Image.FromFile(filename);
+
+            if (this.pictureBox1.Image != null)
+            {
+
+                int Height = this.pictureBox1.Image.Height;
+                int Width = this.pictureBox1.Image.Width;
+                Bitmap bitmap = new Bitmap(Width, Height, PixelFormat.Format24bppRgb);
+                Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image;
+                BitmapData oldData = MyBitmap.LockBits(new Rectangle(0, 0, Width, Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb); //原圖
+                BitmapData newData = bitmap.LockBits(new Rectangle(0, 0, Width, Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);  //新圖即邊緣圖
+                unsafe
+                {
+                    //首先第一段代碼是提取邊緣，邊緣置為黑色，其他部分置為白色
+                    byte* pin_1 = (byte*)(oldData.Scan0.ToPointer());
+                    byte* pin_2 = pin_1 + (oldData.Stride);
+                    byte* pout = (byte*)(newData.Scan0.ToPointer());
+                    for (int y = 0; y < oldData.Height - 1; y++)
+                    {
+                        for (int x = 0; x < oldData.Width; x++)
+                        {
+                            //使用robert算子
+                            double b = System.Math.Sqrt(((double)pin_1[0] - (double)(pin_2[0] + 3)) * ((double)pin_1[0] - (double)(pin_2[0] + 3)) + ((double)(pin_1[0] + 3) - (double)pin_2[0]) * ((double)(pin_1[0] + 3) - (double)pin_2[0]));
+                            double g = System.Math.Sqrt(((double)pin_1[1] - (double)(pin_2[1] + 3)) * ((double)pin_1[1] - (double)(pin_2[1] + 3)) + ((double)(pin_1[1] + 3) - (double)pin_2[1]) * ((double)(pin_1[1] + 3) - (double)pin_2[1]));
+                            double r = System.Math.Sqrt(((double)pin_1[2] - (double)(pin_2[2] + 3)) * ((double)pin_1[2] - (double)(pin_2[2] + 3)) + ((double)(pin_1[2] + 3) - (double)pin_2[2]) * ((double)(pin_1[2] + 3) - (double)pin_2[2]));
+                            double bgr = b + g + r;//博主一直在糾結要不要除以3，感覺沒差，選阈值的時候調整一下就好了- -
+
+                            if (bgr > 80) //阈值，超過阈值判定為邊緣（選取適當的阈值）
+                            {
+                                b = 0;
+                                g = 0;
+                                r = 0;
+                            }
+                            else
+                            {
+                                b = 255;
+                                g = 255;
+                                r = 255;
+                            }
+                            pout[0] = (byte)(b);
+                            pout[1] = (byte)(g);
+                            pout[2] = (byte)(r);
+                            pin_1 = pin_1 + 3;
+                            pin_2 = pin_2 + 3;
+                            pout = pout + 3;
+
+                        }
+                        pin_1 += oldData.Stride - oldData.Width * 3;
+                        pin_2 += oldData.Stride - oldData.Width * 3;
+                        pout += newData.Stride - newData.Width * 3;
+                    }
+
+                    //這裡博主加粗了一下線條- -，不喜歡的同學可以刪了這段代碼
+                    byte* pin_5 = (byte*)(newData.Scan0.ToPointer());
+                    for (int y = 0; y < oldData.Height - 1; y++)
+                    {
+                        for (int x = 3; x < oldData.Width; x++)
+                        {
+                            if (pin_5[0] == 0 && pin_5[1] == 0 && pin_5[2] == 0)
+                            {
+                                pin_5[-3] = 0;
+                                pin_5[-2] = 0;
+                                pin_5[-1] = 0;      //邊緣點的前一個像素點置為黑色（注意一定要是遍歷過的像素點）                                                    
+                            }
+                            pin_5 += 3;
+
+                        }
+                        pin_5 += newData.Stride - newData.Width * 3;
+                    }
+
+                    //這段代碼是把原圖和邊緣圖重合
+                    byte* pin_3 = (byte*)(oldData.Scan0.ToPointer());
+                    byte* pin_4 = (byte*)(newData.Scan0.ToPointer());
+                    for (int y = 0; y < oldData.Height - 1; y++)
+                    {
+                        for (int x = 0; x < oldData.Width; x++)
+                        {
+                            if (pin_4[0] == 255 && pin_4[1] == 255 && pin_4[2] == 255)
+                            {
+                                pin_4[0] = pin_3[0];
+                                pin_4[1] = pin_3[1];
+                                pin_4[2] = pin_3[2];
+                            }
+                            pin_3 += 3;
+                            pin_4 += 3;
+                        }
+                        pin_3 += oldData.Stride - oldData.Width * 3;
+                        pin_4 += newData.Stride - newData.Width * 3;
+                    }
+                    //......
+                    bitmap.UnlockBits(newData);
+                    MyBitmap.UnlockBits(oldData);
+                    this.pictureBox1.Image = bitmap;
+                }
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void bt_edge_detection0_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap1 = new Bitmap(filename);
+            sw.Reset();
+            sw.Start();
+            Bitmap bitmap2 = Roberts(bitmap1);
+            sw.Stop();
+            pictureBox1.Image = bitmap2;
+            richTextBox1.Text += "Roberts 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+        }
+
+        private void bt_edge_detection1_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap1 = new Bitmap(filename);
+            sw.Reset();
+            sw.Start();
+            Bitmap bitmap2 = Sobel(bitmap1);
+            sw.Stop();
+            pictureBox1.Image = bitmap2;
+            richTextBox1.Text += "Sobel 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+        }
+
+        private void bt_edge_detection2_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap1 = new Bitmap(filename);
+            sw.Reset();
+            sw.Start();
+            Bitmap bitmap2 = Laplace4(bitmap1);
+            Bitmap bitmap3 = Laplace8(bitmap1);
+            sw.Stop();
+
+            pictureBox1.Image = bitmap2;
+            pictureBox1.Image = bitmap3;
+            richTextBox1.Text += "Laplace 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+        }
+
+        private void bt_edge_detection3_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap1 = new Bitmap(filename);
+            sw.Reset();
+            sw.Start();
+            Bitmap bitmap2 = RightBottomEdge(bitmap1);
+            sw.Stop();
+            pictureBox1.Image = bitmap2;
+            richTextBox1.Text += "RightBottomEdge 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+        }
+
+        private void bt_edge_detection4_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap1 = new Bitmap(filename);
+            sw.Reset();
+            sw.Start();
+            Bitmap bitmap2 = Prewitt(bitmap1);
+            sw.Stop();
+            pictureBox1.Image = bitmap2;
+            richTextBox1.Text += "Prewitt 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+        }
+
+        private void bt_edge_detection5_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap1 = new Bitmap(filename);
+            sw.Reset();
+            sw.Start();
+            Bitmap bitmap2 = Robinson(bitmap1);
+            sw.Stop();
+            pictureBox1.Image = bitmap2;
+            richTextBox1.Text += "Robinson 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+        }
+
+        private void bt_edge_detection6_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap1 = new Bitmap(filename);
+            sw.Reset();
+            sw.Start();
+            Bitmap bitmap2 = Kirsch(bitmap1);
+            sw.Stop();
+            pictureBox1.Image = bitmap2;
+            richTextBox1.Text += "Kirsch 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+        }
+
+        private void bt_edge_detection7_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap1 = new Bitmap(filename);
+            sw.Reset();
+            sw.Start();
+            Bitmap bitmap2 = Smoothed(bitmap1);
+            sw.Stop();
+            pictureBox1.Image = bitmap2;
+            richTextBox1.Text += "Smoothed 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+        }
+
+        //Roberts算子
+        //  gx = f(i,j) - f(i+1,j)
+        //  gy = f(i+1,j) - f(i,j+1)
+        //  g(i,j) = abs(gx) + abs(gy)
+        private Bitmap Roberts(Bitmap bitmap1)
+        {
+            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+
+            LockBitmap lockBitmap1 = new LockBitmap(bitmap1);
+            LockBitmap lockBitmap2 = new LockBitmap(bitmap2);
+
+            lockBitmap1.LockBits();
+            lockBitmap2.LockBits();
+
+            for (int i = 0; i < bitmap1.Width - 1; i++)
+            {
+                for (int j = 0; j < bitmap1.Height - 1; j++)
+                {
+                    Color c1 = lockBitmap1.GetPixel(i, j);
+                    Color c2 = lockBitmap1.GetPixel(i + 1, j);
+                    Color c3 = lockBitmap1.GetPixel(i, j + 1);
+                    Color c4 = lockBitmap1.GetPixel(i + 1, j + 1);
+
+                    int r = Math.Abs(c1.R - c4.R) + Math.Abs(c2.R - c3.R);
+                    int g = Math.Abs(c1.G - c4.G) + Math.Abs(c2.G - c3.G);
+                    int b = Math.Abs(c1.B - c4.B) + Math.Abs(c2.B - c3.B);
+
+                    if (r > 255) r = 255;
+                    if (g > 255) g = 255;
+                    if (b > 255) b = 255;
+
+                    lockBitmap2.SetPixel(i, j, Color.FromArgb(r, g, b));
+                }
+            }
+
+            lockBitmap1.UnlockBits();
+            lockBitmap2.UnlockBits();
+
+            return bitmap2;
+        }
+
+
+        //Sobel算子
+        //  gx = f(i-1,j-1) + 2f(i-1,j) + f(i-1,j+1) - f(i+1,j-1) - 2f(i+1,j) - f(i+1,j+1)
+        //  gy = f(i-1,j-1) + 2f(i,j-1) + f(i+1,j-1) - f(i-1,j+1) - 2f(i,j+1) - f(i+1,j+1)
+        //  g(i,j) = gx + gy
+        private Bitmap Sobel(Bitmap bitmap1)
+        {
+            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+
+            LockBitmap lockBitmap1 = new LockBitmap(bitmap1);
+            LockBitmap lockBitmap2 = new LockBitmap(bitmap2);
+
+            lockBitmap1.LockBits();
+            lockBitmap2.LockBits();
+
+            for (int i = 1; i < bitmap1.Width - 1; i++)
+            {
+                for (int j = 1; j < bitmap1.Height - 1; j++)
+                {
+                    Color c1 = lockBitmap1.GetPixel(i - 1, j - 1);
+                    Color c2 = lockBitmap1.GetPixel(i, j - 1);
+                    Color c3 = lockBitmap1.GetPixel(i + 1, j - 1);
+                    Color c4 = lockBitmap1.GetPixel(i - 1, j);
+                    Color c6 = lockBitmap1.GetPixel(i + 1, j);
+                    Color c7 = lockBitmap1.GetPixel(i - 1, j + 1);
+                    Color c8 = lockBitmap1.GetPixel(i, j + 1);
+                    Color c9 = lockBitmap1.GetPixel(i + 1, j + 1);
+
+                    int r1 = c1.R + 2 * c4.R + c7.R - c3.R - 2 * c6.R - c9.R;
+                    int r2 = c1.R + 2 * c2.R + c3.R - c7.R - 2 * c8.R - c9.R;
+                    int g1 = c1.G + 2 * c4.G + c7.G - c3.G - 2 * c6.G - c9.G;
+                    int g2 = c1.G + 2 * c2.G + c3.G - c7.G - 2 * c8.G - c9.G;
+                    int b1 = c1.B + 2 * c4.B + c7.B - c3.B - 2 * c6.B - c9.B;
+                    int b2 = c1.B + 2 * c2.B + c3.B - c7.B - 2 * c8.B - c9.B;
+
+                    int r = Math.Abs(r1) + Math.Abs(r2);
+                    int g = Math.Abs(g1) + Math.Abs(g2);
+                    int b = Math.Abs(b1) + Math.Abs(b2);
+
+                    if (r > 255) r = 255;
+                    if (r < 0) r = 0;
+                    if (g > 255) g = 255;
+                    if (g < 0) g = 0;
+                    if (b > 255) b = 255;
+                    if (b < 0) b = 0;
+
+                    lockBitmap2.SetPixel(i, j, Color.FromArgb(r, g, b));
+                    //lockBitmap2.SetPixel(i, j, Color.FromArgb(r, r, r));
+                }
+            }
+
+            lockBitmap1.UnlockBits();
+            lockBitmap2.UnlockBits();
+
+            return bitmap2;
+        }
+
+
+        //拉普拉斯算子（四邻域）
+        //  g(i,j) = abs(4f(i,j) - f(i,j-1) - f(i,j+1) - f(i-1,j) - f(i+1,j))
+        private Bitmap Laplace4(Bitmap bitmap1)
+        {
+            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+
+            LockBitmap lockBitmap1 = new LockBitmap(bitmap1);
+            LockBitmap lockBitmap2 = new LockBitmap(bitmap2);
+
+            lockBitmap1.LockBits();
+            lockBitmap2.LockBits();
+
+            for (int i = 1; i < bitmap1.Width - 1; i++)
+            {
+                for (int j = 1; j < bitmap1.Height - 1; j++)
+                {
+                    Color c2 = lockBitmap1.GetPixel(i, j - 1);
+                    Color c4 = lockBitmap1.GetPixel(i - 1, j);
+                    Color c5 = lockBitmap1.GetPixel(i, j);
+                    Color c6 = lockBitmap1.GetPixel(i + 1, j);
+                    Color c8 = lockBitmap1.GetPixel(i, j + 1);
+
+                    int r = Math.Abs(4 * c5.R - c2.R - c4.R - c6.R - c8.R);
+                    int g = Math.Abs(4 * c5.G - c2.G - c4.G - c6.G - c8.G);
+                    int b = Math.Abs(4 * c5.B - c2.B - c4.B - c6.B - c8.B);
+
+                    if (r > 255) r = 255;
+                    if (r < 0) r = 0;
+                    if (g > 255) g = 255;
+                    if (g < 0) g = 0;
+                    if (b > 255) b = 255;
+                    if (b < 0) b = 0;
+
+                    lockBitmap2.SetPixel(i, j, Color.FromArgb(r, g, b));
+                }
+            }
+
+            lockBitmap1.UnlockBits();
+            lockBitmap2.UnlockBits();
+
+            return bitmap2;
+        }
+
+        private Bitmap Laplace8(Bitmap bitmap1)
+        {
+            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+
+            LockBitmap lockBitmap1 = new LockBitmap(bitmap1);
+            LockBitmap lockBitmap2 = new LockBitmap(bitmap2);
+
+            lockBitmap1.LockBits();
+            lockBitmap2.LockBits();
+
+            for (int i = 1; i < bitmap1.Width - 1; i++)
+            {
+                for (int j = 1; j < bitmap1.Height - 1; j++)
+                {
+                    Color c1 = lockBitmap1.GetPixel(i - 1, j - 1);
+                    Color c2 = lockBitmap1.GetPixel(i, j - 1);
+                    Color c3 = lockBitmap1.GetPixel(i + 1, j - 1);
+                    Color c4 = lockBitmap1.GetPixel(i - 1, j);
+                    Color c5 = lockBitmap1.GetPixel(i, j);
+                    Color c6 = lockBitmap1.GetPixel(i + 1, j);
+                    Color c7 = lockBitmap1.GetPixel(i - 1, j + 1);
+                    Color c8 = lockBitmap1.GetPixel(i, j + 1);
+                    Color c9 = lockBitmap1.GetPixel(i + 1, j + 1);
+
+                    int r = Math.Abs(8 * c5.R - c1.R - c2.R - c3.R - c4.R - c6.R - c7.R - c8.R - c9.R);
+                    int g = Math.Abs(8 * c5.G - c1.G - c2.G - c3.G - c4.G - c6.G - c7.G - c8.G - c9.G);
+                    int b = Math.Abs(8 * c5.B - c1.B - c2.B - c3.B - c4.B - c6.B - c7.B - c8.B - c9.B);
+
+                    if (r > 255) r = 255;
+                    if (r < 0) r = 0;
+                    if (g > 255) g = 255;
+                    if (g < 0) g = 0;
+                    if (b > 255) b = 255;
+                    if (b < 0) b = 0;
+
+                    lockBitmap2.SetPixel(i, j, Color.FromArgb(r, g, b));
+                }
+            }
+
+            lockBitmap1.UnlockBits();
+            lockBitmap2.UnlockBits();
+
+            return bitmap2;
+        }
+
+
+        //右下边缘抽出
+        //  g(i,j) = abs(2f(i+1,j) + 2f(i,j+1) - 2f(i,j-1) - 2f(i-1,j));
+        private Bitmap RightBottomEdge(Bitmap bitmap1)
+        {
+            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+
+            LockBitmap lockBitmap1 = new LockBitmap(bitmap1);
+            LockBitmap lockBitmap2 = new LockBitmap(bitmap2);
+
+            lockBitmap1.LockBits();
+            lockBitmap2.LockBits();
+
+            for (int i = 1; i < bitmap1.Width - 1; i++)
+            {
+                for (int j = 1; j < bitmap1.Height - 1; j++)
+                {
+                    Color c2 = lockBitmap1.GetPixel(i, j - 1);
+                    Color c4 = lockBitmap1.GetPixel(i - 1, j);
+                    Color c6 = lockBitmap1.GetPixel(i + 1, j);
+                    Color c8 = lockBitmap1.GetPixel(i, j + 1);
+
+                    int r = 2 * Math.Abs(c6.R + c8.R - c2.R - c4.R);
+                    int g = 2 * Math.Abs(c6.G + c8.G - c2.G - c4.G);
+                    int b = 2 * Math.Abs(c6.B + c8.B - c2.B - c4.B);
+
+                    if (r > 255) r = 255;
+                    if (r < 0) r = 0;
+                    if (g > 255) g = 255;
+                    if (g < 0) g = 0;
+                    if (b > 255) b = 255;
+                    if (b < 0) b = 0;
+
+                    lockBitmap2.SetPixel(i, j, Color.FromArgb(r, g, b));
+                }
+            }
+
+            lockBitmap1.UnlockBits();
+            lockBitmap2.UnlockBits();
+
+            return bitmap2;
+        }
+
+
+        //Prewitt边缘检测样板算子（方向为右下）
+        //  g(i,j) = abs(f(i-1,j-1) + f(i,j-1) + f(i+1,j-1) + f(i-1,j) + f(i-1,j+1) - f(i+1,j) - f(i,j+1) - f(i+1,j+1) - 2f(i,j))
+        //
+        //      右下              右上
+        //  1   1   1           1   -1  -1
+        //  1   -2  -1          1   -2  -1
+        //  1   -1  -1          1   1   1
+        //
+        //      上               下
+        //  -1  -1  -1          1   1   1
+        //  1   -2  1           1   -2  1
+        //  1   1   1           -1  -1  -1
+        private Bitmap Prewitt(Bitmap bitmap1)
+        {
+            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+
+            LockBitmap lockBitmap1 = new LockBitmap(bitmap1);
+            LockBitmap lockBitmap2 = new LockBitmap(bitmap2);
+
+            lockBitmap1.LockBits();
+            lockBitmap2.LockBits();
+
+            for (int i = 1; i < bitmap1.Width - 1; i++)
+            {
+                for (int j = 1; j < bitmap1.Height - 1; j++)
+                {
+                    Color c1 = lockBitmap1.GetPixel(i - 1, j - 1);
+                    Color c2 = lockBitmap1.GetPixel(i, j - 1);
+                    Color c3 = lockBitmap1.GetPixel(i + 1, j - 1);
+                    Color c4 = lockBitmap1.GetPixel(i - 1, j);
+                    Color c5 = lockBitmap1.GetPixel(i, j);
+                    Color c6 = lockBitmap1.GetPixel(i + 1, j);
+                    Color c7 = lockBitmap1.GetPixel(i - 1, j + 1);
+                    Color c8 = lockBitmap1.GetPixel(i, j + 1);
+                    Color c9 = lockBitmap1.GetPixel(i + 1, j + 1);
+
+                    int r = Math.Abs(c1.R + c2.R + c3.R + c4.R + c7.R - c6.R - c8.R - c9.R - 2 * c5.R);
+                    int g = Math.Abs(c1.G + c2.G + c3.G + c4.G + c7.G - c6.G - c8.G - c9.G - 2 * c5.R);
+                    int b = Math.Abs(c1.B + c2.B + c3.B + c4.B + c7.B - c6.B - c8.B - c9.B - 2 * c5.R);
+
+                    if (r > 255) r = 255;
+                    if (r < 0) r = 0;
+                    if (g > 255) g = 255;
+                    if (g < 0) g = 0;
+                    if (b > 255) b = 255;
+                    if (b < 0) b = 0;
+
+                    lockBitmap2.SetPixel(i, j, Color.FromArgb(r, g, b));
+                }
+            }
+
+            lockBitmap1.UnlockBits();
+            lockBitmap2.UnlockBits();
+
+            return bitmap2;
+        }
+
+
+        //Robinson算子（这里使用第一个）
+        //Robinson算子有八个样板，这里列出四个，剩余四个为下面四个的取反
+        //
+        //  1   2   1               0   1   2
+        //  0   0   0               -1  0   1
+        //  -1  -2  -1              -2  -1  0
+        //
+        //  -1  0   1               -2  -1  0
+        //  -2  0   2               -1  0   1
+        //  -1  0   1               0   -1  2
+        private Bitmap Robinson(Bitmap bitmap1)
+        {
+            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+
+            LockBitmap lockBitmap1 = new LockBitmap(bitmap1);
+            LockBitmap lockBitmap2 = new LockBitmap(bitmap2);
+
+            lockBitmap1.LockBits();
+            lockBitmap2.LockBits();
+
+            for (int i = 1; i < bitmap1.Width - 1; i++)
+            {
+                for (int j = 1; j < bitmap1.Height - 1; j++)
+                {
+                    Color c1 = lockBitmap1.GetPixel(i - 1, j - 1);
+                    Color c2 = lockBitmap1.GetPixel(i, j - 1);
+                    Color c3 = lockBitmap1.GetPixel(i + 1, j - 1);
+                    Color c7 = lockBitmap1.GetPixel(i - 1, j + 1);
+                    Color c8 = lockBitmap1.GetPixel(i, j + 1);
+                    Color c9 = lockBitmap1.GetPixel(i + 1, j + 1);
+
+                    int r = Math.Abs(c1.R + 2 * c2.R + c3.R - c7.R - 2 * c8.R - c9.R);
+                    int g = Math.Abs(c1.G + 2 * c2.G + c3.G - c7.G - 2 * c8.G - c9.G);
+                    int b = Math.Abs(c1.B + 2 * c2.B + c3.B - c7.B - 2 * c8.B - c9.B);
+
+                    if (r > 255) r = 255;
+                    if (r < 0) r = 0;
+                    if (g > 255) g = 255;
+                    if (g < 0) g = 0;
+                    if (b > 255) b = 255;
+                    if (b < 0) b = 0;
+
+                    lockBitmap2.SetPixel(i, j, Color.FromArgb(r, g, b));
+                }
+            }
+
+            lockBitmap1.UnlockBits();
+            lockBitmap2.UnlockBits();
+
+            return bitmap2;
+        }
+
+        //Kirsch算子（这里使用第一个）
+        //Kirsch算子有8个边缘样板，与Prewitt边缘样板类似，这里列出一个
+        //
+        //  5   5   5
+        //  -3  0   -3
+        //  -3  -3  -3
+        //
+        private Bitmap Kirsch(Bitmap bitmap1)
+        {
+            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+
+            LockBitmap lockBitmap1 = new LockBitmap(bitmap1);
+            LockBitmap lockBitmap2 = new LockBitmap(bitmap2);
+
+            lockBitmap1.LockBits();
+            lockBitmap2.LockBits();
+
+            for (int i = 1; i < bitmap1.Width - 1; i++)
+            {
+                for (int j = 1; j < bitmap1.Height - 1; j++)
+                {
+                    Color c1 = lockBitmap1.GetPixel(i - 1, j - 1);
+                    Color c2 = lockBitmap1.GetPixel(i, j - 1);
+                    Color c3 = lockBitmap1.GetPixel(i + 1, j - 1);
+                    Color c4 = lockBitmap1.GetPixel(i - 1, j);
+                    Color c6 = lockBitmap1.GetPixel(i + 1, j);
+                    Color c7 = lockBitmap1.GetPixel(i - 1, j + 1);
+                    Color c8 = lockBitmap1.GetPixel(i, j + 1);
+                    Color c9 = lockBitmap1.GetPixel(i + 1, j + 1);
+
+                    int r = Math.Abs(5 * (c1.R + c2.R + c3.R) - 3 * (c4.R + c6.R + c7.R + c8.R + c9.R));
+                    int g = Math.Abs(5 * (c1.G + c2.G + c3.G) - 3 * (c4.G + c6.G + c7.G + c8.G + c9.G));
+                    int b = Math.Abs(5 * (c1.B + c2.B + c3.B) - 3 * (c4.B + c6.B + c7.B + c8.B + c9.B));
+
+                    if (r > 255) r = 255;
+                    if (r < 0) r = 0;
+                    if (g > 255) g = 255;
+                    if (g < 0) g = 0;
+                    if (b > 255) b = 255;
+                    if (b < 0) b = 0;
+
+                    lockBitmap2.SetPixel(i, j, Color.FromArgb(r, g, b));
+                }
+            }
+
+            lockBitmap1.UnlockBits();
+            lockBitmap2.UnlockBits();
+
+            return bitmap2;
+        }
+
+
+        //Smoothed算子
+        //  gx = f(i,j) - f(i+1,j)
+        //  gy = f(i+1,j) - f(i,j+1)
+        //  g(i,j) = abs(gx) + abs(gy)
+        private Bitmap Smoothed(Bitmap bitmap1)
+        {
+            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+
+            LockBitmap lockBitmap1 = new LockBitmap(bitmap1);
+            LockBitmap lockBitmap2 = new LockBitmap(bitmap2);
+
+            lockBitmap1.LockBits();
+            lockBitmap2.LockBits();
+
+            for (int i = 1; i < bitmap1.Width - 1; i++)
+            {
+                for (int j = 1; j < bitmap1.Height - 1; j++)
+                {
+                    Color c1 = lockBitmap1.GetPixel(i - 1, j - 1);
+                    Color c2 = lockBitmap1.GetPixel(i, j - 1);
+                    Color c3 = lockBitmap1.GetPixel(i + 1, j - 1);
+                    Color c4 = lockBitmap1.GetPixel(i - 1, j);
+                    Color c6 = lockBitmap1.GetPixel(i + 1, j);
+                    Color c7 = lockBitmap1.GetPixel(i - 1, j + 1);
+                    Color c8 = lockBitmap1.GetPixel(i, j + 1);
+                    Color c9 = lockBitmap1.GetPixel(i + 1, j + 1);
+
+                    int r1 = c3.R + c6.R + c9.R - c1.R - c4.R - c7.R;
+                    int r2 = c1.R + c2.R + c3.R - c7.R - c8.R - c9.R;
+
+                    int g1 = c3.G + c6.G + c9.G - c1.G - c4.G - c7.G;
+                    int g2 = c1.G + c2.G + c3.G - c7.G - c8.G - c9.G;
+                    int b1 = c3.B + c6.B + c9.B - c1.B - c4.B - c7.B;
+                    int b2 = c1.B + c2.B + c3.B - c7.B - c8.B - c9.B;
+
+                    int r = Math.Abs(r1) + Math.Abs(r2);
+                    int g = Math.Abs(g1) + Math.Abs(g2);
+                    int b = Math.Abs(b1) + Math.Abs(b2);
+
+                    if (r > 255) r = 255;
+                    if (r < 0) r = 0;
+                    if (g > 255) g = 255;
+                    if (g < 0) g = 0;
+                    if (b > 255) b = 255;
+                    if (b < 0) b = 0;
+
+                    lockBitmap2.SetPixel(i, j, Color.FromArgb(r, g, b));
+                    //lockBitmap2.SetPixel(i, j, Color.FromArgb(r, r, r));
+                }
+            }
+
+            lockBitmap1.UnlockBits();
+            lockBitmap2.UnlockBits();
+
+            return bitmap2;
+        }
+
+        private void bt_image_process_p0_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "黑白效果\n";
+            Bitmap bmp = image_processing3(filename);
+            pictureBox1.Image = bmp;
+        }
+
+        private void bt_image_process_p1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "底片效果\n";
+            Bitmap bmp = image_processing1(filename);
+            pictureBox1.Image = bmp;
+        }
+
+        private void bt_image_process_p2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "浮雕\n";
+            Bitmap bmp = image_processing2(filename);
+            pictureBox1.Image = bmp;
+        }
+
+        private void bt_image_process_p3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "柔化\n";
+            Bitmap bmp = image_processing4(filename);
+            pictureBox1.Image = bmp;
+        }
+
+        private void bt_image_process_p4_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "銳化\n";
+            Bitmap bmp = image_processing5(filename);
+            pictureBox1.Image = bmp;
+        }
+
+        private void bt_image_process_p5_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "霧化 TBD\n";
+            Bitmap bmp = image_processing6(filename);
+            pictureBox1.Image = bmp;
+        }
+
+        private void bt_image_process_p6_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "光照效果\n";
+            Bitmap bmp = image_processing7(filename);
+            pictureBox1.Image = bmp;
+        }
+
+        private void bt_image_process_p7_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "油畫效果\n";
+            Bitmap bmp = image_processing10(filename);
+            pictureBox1.Image = bmp;
+        }
+
+        private void bt_image_process_p8_Click(object sender, EventArgs e)
+        {
+            //馬賽克效果
+            do_mosaic_effect(filename);
+        }
+
+        int cnt = 0;
+        private void bt_image_process_p9_Click(object sender, EventArgs e)
+        {
+            //百葉窗效果 水平垂直輪流顯示
+            if ((cnt % 2) == 0)
+            {
+                shutter1();
+            }
+            else
+            {
+                shutter2();
+            }
+            cnt++;
+        }
+
+        private void bt_image_process_p10_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "扭曲效果\n";
+            string filename_isinbaeva = @"C:\_git\vcs\_1.data\______test_files1\_image_processing\isinbaeva.jpg";
+            //Bitmap bmp = image_processing11(filename_isinbaeva);
+            //pictureBox1.Image = bmp;
+            image_processing11(filename_isinbaeva);
+        }
+
+        private void bt_image_process_p11_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "積木效果\n";
+            Bitmap bmp = image_processing12(filename);
+            pictureBox1.Image = bmp;
+        }
+
+        private void bt_image_process_p12_Click(object sender, EventArgs e)
+        {
+            //BassoRelievo 效果
+            pictureBox1.Image = image_processing13(filename);
+        }
+
+        private void bt_image_process_p13_Click(object sender, EventArgs e)
+        {
+            //扭曲效果
+            pictureBox1.Image = image_processing14(filename);
 
         }
+
+        private void bt_image_process_p14_Click(object sender, EventArgs e)
+        {
+            //色階調整
+            pictureBox1.Image = image_processing15(filename);
+
+        }
+
+        private void bt_image_process_p15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_image_process_p16_Click(object sender, EventArgs e)
+        {
+            //馬賽克效果16
+            pictureBox1.Image = image_processing16(filename);
+        }
+
+
+        private void bt_image_process_p17_Click(object sender, EventArgs e)
+        {
+            //馬賽克效果17
+            pictureBox1.Image = image_processing17(filename);
+        }
+
+        private void bt_image_process_p18_Click(object sender, EventArgs e)
+        {
+            //降低解析度18
+            pictureBox1.Image = image_processing18(filename);
+        }
+
+        private void bt_image_process_p19_Click(object sender, EventArgs e)
+        {
+            //光暈效果19
+            pictureBox1.Image = image_processing19(filename);
+        }
+
+        public Image image_processing19(string filename)
+        {
+            int x = 50;
+            int y = 50;
+            int R = 100;
+            float better = 150F; //radius強光照射面的半徑，即"光暈"
+
+            Bitmap bitmap1 = new Bitmap(filename);
+
+            int W = bitmap1.Width;//獲取圖像的寬度
+            int H = bitmap1.Height;//獲取圖像的高度
+            //定義一個Bitmap類的復本
+            Bitmap Var_SaveBmp = bitmap1.Clone(new RectangleF(0, 0, W, H), PixelFormat.DontCare);
+            Point Var_Center = new Point(x, y);//光暈的中心點
+            //遍歷圖像中的各象素
+            for (int i = W - 1; i >= 1; i--)
+            {
+                for (int j = H - 1; j >= 1; j--)
+                {
+                    float Var_Length = (float)Math.Sqrt(Math.Pow((i - Var_Center.X), 2) + Math.Pow((j - Var_Center.Y), 2));//設置光暈的範圍
+                    //如果像素位於」光暈」之內
+                    if (Var_Length < R)
+                    {
+                        Color Var_Color = Var_SaveBmp.GetPixel(i, j);
+                        int r, g, b;
+                        float Var_Pixel = better * (1.0f - Var_Length / R);//設置光亮度的強弱
+                        r = Var_Color.R + (int)Var_Pixel;//設置加強後的R值
+                        r = Math.Max(0, Math.Min(r, 255));//如果R值不在顏色值的範圍內，對R值進行設置
+                        g = Var_Color.G + (int)Var_Pixel;//設置加強後的G值
+                        g = Math.Max(0, Math.Min(g, 255));//如果G值不在顏色值的範圍內，對G值進行設置
+                        b = Var_Color.B + (int)Var_Pixel;//設置加強後的B值
+                        b = Math.Max(0, Math.Min(b, 255));//如果B值不在顏色值的範圍內，對B值進行設置
+                        Var_SaveBmp.SetPixel(i, j, Color.FromArgb(255, r, g, b));//將增亮後的像素值回寫到位圖
+                    }
+                }
+            }
+            return Var_SaveBmp;
+        }
+
+        private void bt_image_process_p20_Click(object sender, EventArgs e)
+        {
+            //白色轉為透明
+            //C#將圖片白色背景設置為透明
+            pictureBox1.BackColor = Color.Pink;
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Image image = Image.FromFile(filename);
+            Bitmap bitmap1 = new Bitmap(image);
+            bitmap1.MakeTransparent(Color.White);
+            pictureBox1.Image = bitmap1;
+        }
+
+        private void bt_image_process_p21_Click(object sender, EventArgs e)
+        {
+            //水平交錯效果顯示圖像
+            //水平交錯效果
+
+            Bitmap bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = bitmap1;
+            pictureBox1.Size = new Size(bitmap1.Width, bitmap1.Height);
+
+            bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = LevelInterleaving(bitmap1);
+        }
+
+        Bitmap LevelInterleaving(Bitmap bitmap1)
+        {
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.Clear(Color.WhiteSmoke);
+            Bitmap bitmap2 = new Bitmap(W, H);
+            int i = 0;
+            while (i <= W / 2)
+            {
+                for (int m = 0; m <= H - 1; m++)
+                {
+                    bitmap2.SetPixel(i, m, bitmap1.GetPixel(i, m));
+                }
+                for (int n = 0; n <= H - 1; n++)
+                {
+                    bitmap2.SetPixel(W - i - 1, n, bitmap1.GetPixel(W - i - 1, n));
+                }
+                i++;
+                this.Refresh();
+                this.pictureBox1.Image = bitmap2;
+                Thread.Sleep(10);
+            }
+            return bitmap2;
+        }
+
+        private void bt_image_process_p22_Click(object sender, EventArgs e)
+        {
+            //垂直交錯效果顯示圖像
+            //垂直交錯效果
+
+            Bitmap bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = bitmap1;
+            pictureBox1.Size = new Size(bitmap1.Width, bitmap1.Height);
+            bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = UprightnessInterleaving(bitmap1);
+        }
+
+        Bitmap UprightnessInterleaving(Bitmap bitmap1)
+        {
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.Clear(Color.WhiteSmoke);
+            Bitmap bitmap2 = new Bitmap(W, H);
+            int i = 0;
+            while (i <= H / 2)
+            {
+                for (int m = 0; m <= W - 1; m++)
+                {
+                    bitmap2.SetPixel(m, i, bitmap1.GetPixel(m, i));
+                }
+                for (int n = 0; n <= W - 1; n++)
+                {
+                    bitmap2.SetPixel(n, H - i - 1, bitmap1.GetPixel(n, H - i - 1));
+                }
+                i++;
+                this.Refresh();
+                pictureBox1.Image = bitmap2;
+                Thread.Sleep(10);
+            }
+            return bitmap2;
+        }
+
+        private void bt_image_process_p23_Click(object sender, EventArgs e)
+        {
+            //積木效果
+            Bitmap bmp = new Bitmap(filename);
+            pictureBox1.Image = ToBlock(bmp);
+        }
+
+        Bitmap ToBlock(Bitmap bitmap1)
+        {
+            Graphics g = this.pictureBox1.CreateGraphics();
+            int W, H, i, j, iAvg, iPixel;
+            Color myColor, myNewColor;
+            RectangleF myRect;
+            W = bitmap1.Width;
+            H = bitmap1.Height;
+            myRect = new RectangleF(0, 0, W, H);
+            Bitmap bitmap = bitmap1.Clone(myRect, System.Drawing.Imaging.PixelFormat.DontCare);
+            i = 0;
+            while (i < W - 1)
+            {
+                j = 0;
+                while (j < H - 1)
+                {
+                    myColor = bitmap.GetPixel(i, j);
+                    iAvg = (myColor.R + myColor.G + myColor.B) / 3;
+                    iPixel = 0;
+                    if (iAvg >= 128)
+                        iPixel = 255;
+                    else
+                        iPixel = 0;
+                    myNewColor = Color.FromArgb(255, iPixel, iPixel, iPixel);
+                    bitmap.SetPixel(i, j, myNewColor);
+                    j = j + 1;
+                }
+                i = i + 1;
+            }
+            g.Clear(Color.WhiteSmoke);
+            g.DrawImage(bitmap, new Rectangle(0, 0, W, H));
+
+            return bitmap;
+        }
+
+        private void bt_image_process_p24_Click(object sender, EventArgs e)
+        {
+            //Sepia1 24
+            //Sepia 1
+            //將圖片轉為 Sepia 效果
+            // Display the image converted to sepia tone.
+            pictureBox2.Image = ToSepiaTone1(pictureBox1.Image);
+        }
+
+        // Convert an image to sepia tone.
+        private Bitmap ToSepiaTone1(Image image)
+        {
+            // Make the ColorMatrix.
+            ColorMatrix cm = new ColorMatrix(new float[][]
+            {
+                new float[] {0.393f, 0.349f, 0.272f, 0, 0},
+                new float[] {0.769f, 0.686f, 0.534f, 0, 0},
+                new float[] {0.189f, 0.168f, 0.131f, 0, 0},
+                new float[] { 0, 0, 0, 1, 0},
+                new float[] { 0, 0, 0, 0, 1}
+            });
+            //ColorMatrix cm = new ColorMatrix(new float[][]
+            //{
+            //    new float[] {0.300f, 0.066f, 0.300f, 0, 0},
+            //    new float[] {0.500f, 0.350f, 0.600f, 0, 0},
+            //    new float[] {0.100f, 0.000f, 0.200f, 0, 0},
+            //    new float[] { 0, 0, 0, 1, 0},
+            //    new float[] { 0, 0, 0, 0, 1}
+            //});
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetColorMatrix(cm);
+
+            // Draw the image onto the new bitmap while applying the new ColorMatrix.
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(image.Width - 1, 0),
+                new Point(0, image.Height - 1),
+            };
+            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
+
+            // Make the result bitmap.
+            Bitmap bmp = new Bitmap(image.Width, image.Height);
+            using (Graphics gr = Graphics.FromImage(bmp))
+            {
+                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
+            }
+            return bmp;
+        }
+
+        private void bt_image_process_p25_Click(object sender, EventArgs e)
+        {
+            //Sepia2 25
+            //Sepia 2
+            //將圖片轉為 Sepia 效果
+            // Display the image converted to sepia tone.
+            pictureBox2.Image = ToSepiaTone2(pictureBox1.Image);
+        }
+
+        // Convert an image to sepia tone.
+        private Bitmap ToSepiaTone2(Image image)
+        {
+            //將圖片轉為 Sepia 效果
+            Bitmap bmp = new Bitmap(image);
+
+            int width = bmp.Width;
+            int height = bmp.Height;
+
+            Color p;
+
+            //sepia
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    //get pixel value
+                    p = bmp.GetPixel(x, y);
+
+                    //extract pixel component ARGB
+                    int a = p.A;
+                    int r = p.R;
+                    int g = p.G;
+                    int b = p.B;
+
+                    //calculate temp value
+                    int tr = (int)(0.393 * r + 0.769 * g + 0.189 * b);
+                    int tg = (int)(0.349 * r + 0.686 * g + 0.168 * b);
+                    int tb = (int)(0.272 * r + 0.534 * g + 0.131 * b);
+
+                    //set new RGB value
+                    if (tr > 255)
+                    {
+                        r = 255;
+                    }
+                    else
+                    {
+                        r = tr;
+                    }
+
+                    if (tg > 255)
+                    {
+                        g = 255;
+                    }
+                    else
+                    {
+                        g = tg;
+                    }
+
+                    if (tb > 255)
+                    {
+                        b = 255;
+                    }
+                    else
+                    {
+                        b = tb;
+                    }
+
+                    //set the new RGB value in image pixel
+                    bmp.SetPixel(x, y, Color.FromArgb(a, r, g, b));
+                }
+            }
+            return bmp;
+        }
+
+        private void bt_image_process_p26_Click(object sender, EventArgs e)
+        {
+            //模糊處理
+            richTextBox1.Text += "模糊處理\n";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            richTextBox1.Text += "PictureToBlur\n";
+            pictureBox1.Image = ToBlur(filename);
+        }
+
+        private Bitmap ToBlur(string filename)
+        {
+            Image image = Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            Bitmap bitmap1 = new Bitmap(image);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H);
+
+            for (int j = 0; j < H; j++)
+            {
+                for (int i = 0; i < W; i++)
+                {
+                    int ok_cnt = 0;
+                    int R = 0;
+                    int G = 0;
+                    int B = 0;
+
+                    // 檢查相鄰像素, 每個點的鄰居不一樣多, 所以要做不同的平均
+
+                    //自己
+                    R += bitmap1.GetPixel(i, j).R;
+                    G += bitmap1.GetPixel(i, j).G;
+                    B += bitmap1.GetPixel(i, j).B;
+
+                    ok_cnt++;
+
+                    if (j - 1 > 0)       //上
+                    {
+                        R += bitmap1.GetPixel(i, j - 1).R;
+                        G += bitmap1.GetPixel(i, j - 1).G;
+                        B += bitmap1.GetPixel(i, j - 1).B;
+
+                        ok_cnt++;
+                    }
+                    if (j + 1 < H)      //下
+                    {
+                        R += bitmap1.GetPixel(i, j + 1).R;
+                        G += bitmap1.GetPixel(i, j + 1).G;
+                        B += bitmap1.GetPixel(i, j + 1).B;
+                        ok_cnt++;
+                    }
+                    if (i - 1 > 0)       //左
+                    {
+                        R += bitmap1.GetPixel(i - 1, j).R;
+                        G += bitmap1.GetPixel(i - 1, j).G;
+                        B += bitmap1.GetPixel(i - 1, j).B;
+                        ok_cnt++;
+                    }
+                    if (i + 1 < W)       //右
+                    {
+                        R += bitmap1.GetPixel(i + 1, j).R;
+                        G += bitmap1.GetPixel(i + 1, j).G;
+                        B += bitmap1.GetPixel(i + 1, j).B;
+                        ok_cnt++;
+                    }
+                    if ((i - 1 > 0) && (j - 1 > 0))     //左上
+                    {
+                        R += bitmap1.GetPixel(i - 1, j - 1).R;
+                        G += bitmap1.GetPixel(i - 1, j - 1).G;
+                        B += bitmap1.GetPixel(i - 1, j - 1).B;
+                        ok_cnt++;
+                    }
+                    if ((i - 1 > 0) && (j + 1 < H)) //左下
+                    {
+                        R += bitmap1.GetPixel(i - 1, j + 1).R;
+                        G += bitmap1.GetPixel(i - 1, j + 1).G;
+                        B += bitmap1.GetPixel(i - 1, j + 1).B;
+                        ok_cnt++;
+                    }
+                    if ((i + 1 < W) && (j - 1 > 0))      //右上
+                    {
+                        R += bitmap1.GetPixel(i + 1, j - 1).R;
+                        G += bitmap1.GetPixel(i + 1, j - 1).G;
+                        B += bitmap1.GetPixel(i + 1, j - 1).B;
+                        ok_cnt++;
+                    }
+                    if ((i + 1 < W) && (j + 1 < H)) //右下
+                    {
+                        R += bitmap1.GetPixel(i + 1, j + 1).R;
+                        G += bitmap1.GetPixel(i + 1, j + 1).G;
+                        B += bitmap1.GetPixel(i + 1, j + 1).B;
+                        ok_cnt++;
+                    }
+
+                    //平均, 設定個點的像素值
+                    bitmap2.SetPixel(i, j, Color.FromArgb((R / ok_cnt), (G / ok_cnt), (B / ok_cnt)));
+                }
+            }
+            return bitmap2;
+        }
+
+        private void bt_image_process_p27_Click(object sender, EventArgs e)
+        {
+            //鏡像圖片
+            richTextBox1.Text += "鏡像圖片\n";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            pictureBox1.Image = ToMirror(filename);
+        }
+
+        private Bitmap ToMirror(string filename)
+        {
+            Image image = Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            Bitmap bmp = new Bitmap(image);
+
+            //get image dimension
+            int width = image.Width;
+            int height = image.Height;
+
+            //mirror image
+            Bitmap mimg = new Bitmap(width * 2, height);
+
+            for (int y = 0; y < height; y++)
+            {
+                for (int lx = 0, rx = width * 2 - 1; lx < width; lx++, rx--)
+                {
+                    //get source pixel value
+                    Color p = bmp.GetPixel(lx, y);
+
+                    //set mirror pixel value
+                    mimg.SetPixel(lx, y, p);
+                    mimg.SetPixel(rx, y, p);
+                }
+            }
+            return mimg;
+        }
+
+        private void bt_image_process_p28_Click(object sender, EventArgs e)
+        {
+            //彩虹化圖片
+            richTextBox1.Text += "彩虹化圖片\n";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
+            pictureBox1.Image = ToRainbow(filename);
+        }
+
+        private Bitmap ToRainbow(string filename)
+        {
+            Image image = Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+
+            //get image dimension
+            int width = image.Width;
+            int height = image.Height;
+
+            Bitmap bmp = new Bitmap(width, height);
+            using (Graphics gr = Graphics.FromImage(bmp))
+            {
+                // Define target colors.
+                Color[] color =
+                {
+                    //Color.Red, Color.Orange, Color.Yellow,
+                    //Color.Green, Color.Blue, Color.Indigo,
+                    //Color.Violet,
+
+                    Color.Red, Color.OrangeRed, Color.Yellow,
+                    Color.Green, Color.Blue, Color.Indigo,
+                    Color.Fuchsia,
+                };
+                const float scale = 2.0f;
+
+                // Draw.
+                for (int i = 0; i < color.Length; i++)
+                {
+                    // Create the ColorMatrix.
+                    ColorMatrix cm = new ColorMatrix(new float[][]
+                    {
+                        new float[] {color[i].R / 255f * scale, 0, 0, 0, 0},
+                        new float[] {0, color[i].G / 255f * scale, 0, 0, 0},
+                        new float[] {0, 0, color[i].B / 255f * scale, 0, 0},
+                        new float[] {0, 0, 0, 1, 0},
+                        new float[] {0, 0, 0, 0, 1},
+                    });
+                    ImageAttributes attr = new ImageAttributes();
+                    attr.SetColorMatrix(cm);
+
+                    // Draw the next part of the image.
+                    int x = (int)(i * image.Width / color.Length);
+                    Point[] points =
+                    {
+                        new Point(x, 0),
+                        new Point(width, 0),
+                        new Point(x, height),
+                    };
+                    Rectangle rect = new Rectangle(x, 0, width - x, height);
+                    gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attr);
+                }
+            }
+            return bmp;
+        }
+
+        private void bt_image_process_p29_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_image_process_p30_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_image_process_p31_Click(object sender, EventArgs e)
+        {
+            //依序顯示各項功能
+
+            //關掉所有控件 
+            remove_all_controls();
+
+            int W = Screen.PrimaryScreen.Bounds.Width;
+            int H = Screen.PrimaryScreen.Bounds.Height;
+            int w = W * 7 / 10;
+            int h = H * 7 / 10;
+            pictureBox1.Size = new Size(w, h);
+            pictureBox1.Location = new Point((W - w) / 2, (H - h) / 2);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+
+            // 實例化控件
+            lb_main_mesg.Text = "原圖";
+            lb_main_mesg.Font = new Font("標楷體", 24);
+            lb_main_mesg.ForeColor = Color.Red;
+            lb_main_mesg.Location = new Point((W - w) / 2, (H - h) / 2 - 40);
+            lb_main_mesg.AutoSize = true;
+            this.Controls.Add(lb_main_mesg);     // 將控件加入表單
+
+            timer1.Enabled = true;
+        }
+
+        void remove_all_controls()
+        {
+            //richTextBox1.Text += "遍歷所有控件\n";
+            int i;
+
+            for (i = 0; i < 10; i++)
+            {
+                foreach (Control con in this.Controls)
+                {
+                    System.String strControl = con.GetType().ToString();//获得控件的类型
+                    System.String strControlName = con.Name.ToString();//获得控件的名称
+
+                    richTextBox1.Text += "Type\t" + strControl + "\tName\t" + strControlName + "\n";
+
+                    if (strControlName == "pictureBox1")
+                        continue;
+                    if (strControlName == "bt_exit")
+                        continue;
+
+                    this.Controls.Remove(con);
+                }
+            }
+        }
+
+        int item = 0;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            item++;
+            switch (item)
+            {
+                case 1: pictureBox1.Image = image_processing1(filename); break;
+                case 2: pictureBox1.Image = image_processing2(filename); break;
+                case 3: pictureBox1.Image = image_processing3(filename); break;
+                case 4: pictureBox1.Image = image_processing4(filename); break;
+                case 5: pictureBox1.Image = image_processing5(filename); break;
+                case 6: pictureBox1.Image = image_processing6(filename); break;
+                case 7: pictureBox1.Image = image_processing7(filename); break;
+                //case 8: pictureBox1.Image = image_processing8(filename); break; none
+                //case 9: pictureBox1.Image = image_processing9(filename); break; none
+                case 10: pictureBox1.Image = image_processing10(filename); break;
+                //case 11: pictureBox1.Image = image_processing11(filename); break;
+                case 12: pictureBox1.Image = image_processing12(filename); break;
+                case 13: pictureBox1.Image = image_processing13(filename); break;
+                case 14: pictureBox1.Image = image_processing14(filename); break;
+                case 15: pictureBox1.Image = image_processing15(filename); break;
+                case 16: pictureBox1.Image = image_processing16(filename); break;
+                case 17: pictureBox1.Image = image_processing17(filename); break;
+                case 18: shutter1(); break;
+                case 19: shutter2(); break;
+                default: break;
+            }
+            if (item >= 19)
+            {
+                item = 0;
+            }
+        }
+
 
         //C#圖像處理(各種旋轉、改變大小、柔化、銳化、霧化、底片、浮雕、黑白、濾鏡效果)
         //http://www.aspphp.online/bianchen/cyuyan/gycyy/201701/81415.html
@@ -1682,218 +2611,6 @@ namespace vcs_ImageProcessing3
             return back;
         }
 
-        private void button14_Click(object sender, EventArgs e)
-        {
-            //圖像邊緣提取2
-            //圖像邊緣提取2
-            //圖像邊緣提取2
-            //圖像邊緣提取
-
-            /*
-            用到的算法是robert算子，這是一種比較簡單的算法：
-
-            f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
-
-            博主一共寫了三段代碼，第一段是邊緣提取，第二段是線條加粗，第三段是原圖和邊緣圖重合，三段代碼可以放在一起，但為了看得清晰我就把他們分開了。
-            */
-
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            pictureBox1.Image = Image.FromFile(filename);
-
-            if (this.pictureBox1.Image != null)
-            {
-
-                int Height = this.pictureBox1.Image.Height;
-                int Width = this.pictureBox1.Image.Width;
-                Bitmap bitmap = new Bitmap(Width, Height, PixelFormat.Format24bppRgb);
-                Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image;
-                BitmapData oldData = MyBitmap.LockBits(new Rectangle(0, 0, Width, Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb); //原圖
-                BitmapData newData = bitmap.LockBits(new Rectangle(0, 0, Width, Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);  //新圖即邊緣圖
-                unsafe
-                {
-                    //首先第一段代碼是提取邊緣，邊緣置為黑色，其他部分置為白色
-                    byte* pin_1 = (byte*)(oldData.Scan0.ToPointer());
-                    byte* pin_2 = pin_1 + (oldData.Stride);
-                    byte* pout = (byte*)(newData.Scan0.ToPointer());
-                    for (int y = 0; y < oldData.Height - 1; y++)
-                    {
-                        for (int x = 0; x < oldData.Width; x++)
-                        {
-                            //使用robert算子
-                            double b = System.Math.Sqrt(((double)pin_1[0] - (double)(pin_2[0] + 3)) * ((double)pin_1[0] - (double)(pin_2[0] + 3)) + ((double)(pin_1[0] + 3) - (double)pin_2[0]) * ((double)(pin_1[0] + 3) - (double)pin_2[0]));
-                            double g = System.Math.Sqrt(((double)pin_1[1] - (double)(pin_2[1] + 3)) * ((double)pin_1[1] - (double)(pin_2[1] + 3)) + ((double)(pin_1[1] + 3) - (double)pin_2[1]) * ((double)(pin_1[1] + 3) - (double)pin_2[1]));
-                            double r = System.Math.Sqrt(((double)pin_1[2] - (double)(pin_2[2] + 3)) * ((double)pin_1[2] - (double)(pin_2[2] + 3)) + ((double)(pin_1[2] + 3) - (double)pin_2[2]) * ((double)(pin_1[2] + 3) - (double)pin_2[2]));
-                            double bgr = b + g + r;//博主一直在糾結要不要除以3，感覺沒差，選阈值的時候調整一下就好了- -
-
-                            if (bgr > 80) //阈值，超過阈值判定為邊緣（選取適當的阈值）
-                            {
-                                b = 0;
-                                g = 0;
-                                r = 0;
-                            }
-                            else
-                            {
-                                b = 255;
-                                g = 255;
-                                r = 255;
-                            }
-                            pout[0] = (byte)(b);
-                            pout[1] = (byte)(g);
-                            pout[2] = (byte)(r);
-                            pin_1 = pin_1 + 3;
-                            pin_2 = pin_2 + 3;
-                            pout = pout + 3;
-
-                        }
-                        pin_1 += oldData.Stride - oldData.Width * 3;
-                        pin_2 += oldData.Stride - oldData.Width * 3;
-                        pout += newData.Stride - newData.Width * 3;
-                    }
-
-                    //這裡博主加粗了一下線條- -，不喜歡的同學可以刪了這段代碼
-                    byte* pin_5 = (byte*)(newData.Scan0.ToPointer());
-                    for (int y = 0; y < oldData.Height - 1; y++)
-                    {
-                        for (int x = 3; x < oldData.Width; x++)
-                        {
-                            if (pin_5[0] == 0 && pin_5[1] == 0 && pin_5[2] == 0)
-                            {
-                                pin_5[-3] = 0;
-                                pin_5[-2] = 0;
-                                pin_5[-1] = 0;      //邊緣點的前一個像素點置為黑色（注意一定要是遍歷過的像素點）                                                    
-                            }
-                            pin_5 += 3;
-
-                        }
-                        pin_5 += newData.Stride - newData.Width * 3;
-                    }
-
-                    //這段代碼是把原圖和邊緣圖重合
-                    byte* pin_3 = (byte*)(oldData.Scan0.ToPointer());
-                    byte* pin_4 = (byte*)(newData.Scan0.ToPointer());
-                    for (int y = 0; y < oldData.Height - 1; y++)
-                    {
-                        for (int x = 0; x < oldData.Width; x++)
-                        {
-                            if (pin_4[0] == 255 && pin_4[1] == 255 && pin_4[2] == 255)
-                            {
-                                pin_4[0] = pin_3[0];
-                                pin_4[1] = pin_3[1];
-                                pin_4[2] = pin_3[2];
-                            }
-                            pin_3 += 3;
-                            pin_4 += 3;
-                        }
-                        pin_3 += oldData.Stride - oldData.Width * 3;
-                        pin_4 += newData.Stride - newData.Width * 3;
-                    }
-                    //......
-                    bitmap.UnlockBits(newData);
-                    MyBitmap.UnlockBits(oldData);
-                    this.pictureBox1.Image = bitmap;
-                }
-            }
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-            //降低解析度
-
-            Bitmap bitmap1 = new Bitmap(filename, true);
-
-            int x, y;
-
-            // Loop through the images pixels to reset color.
-            for (x = 0; x < bitmap1.Width; x++)
-            {
-                for (y = 0; y < bitmap1.Height; y++)
-                {
-                    Color pixelColor = bitmap1.GetPixel(x, y);
-                    //Color newColor = Color.FromArgb(pixelColor.R, 0, 0);
-                    //Color newColor = Color.FromArgb(0, pixelColor.G, 0);
-                    byte newColor_r = (byte)((pixelColor.R / 20) * 20);
-                    byte newColor_g = (byte)((pixelColor.G / 20) * 20);
-                    byte newColor_b = (byte)((pixelColor.B / 20) * 20);
-
-                    Color newColor = Color.FromArgb(newColor_r, newColor_g, newColor_b);
-
-                    bitmap1.SetPixel(x, y, newColor);
-                }
-            }
-
-            // Set the PictureBox to display the image.
-            pictureBox1.Image = bitmap1;
-
-            richTextBox1.Text += "圖片大小 " + bitmap1.Width.ToString() + " X " + bitmap1.Height.ToString() + "\n";
-
-            // Display the pixel format in Label1.
-            richTextBox1.Text += "Pixel format: " + bitmap1.PixelFormat.ToString() + "\n";
-        }
-
-        //光暈效果 ST
-        public Image pp(PictureBox Pict, int x, int y, int R, float better) //radius強光照射面的半徑，即"光暈"
-        {
-            Bitmap bitmap1 = new Bitmap(Pict.Image, Pict.Image.Width, Pict.Image.Height);//根據圖像實例化Bitmap類
-
-            int W = bitmap1.Width;//獲取圖像的寬度
-            int H = bitmap1.Height;//獲取圖像的高度
-            //定義一個Bitmap類的復本
-            Bitmap Var_SaveBmp = bitmap1.Clone(new RectangleF(0, 0, W, H), PixelFormat.DontCare);
-            Point Var_Center = new Point(x, y);//光暈的中心點
-            //遍歷圖像中的各象素
-            for (int i = W - 1; i >= 1; i--)
-            {
-                for (int j = H - 1; j >= 1; j--)
-                {
-                    float Var_Length = (float)Math.Sqrt(Math.Pow((i - Var_Center.X), 2) + Math.Pow((j - Var_Center.Y), 2));//設置光暈的範圍
-                    //如果像素位於」光暈」之內
-                    if (Var_Length < R)
-                    {
-                        Color Var_Color = Var_SaveBmp.GetPixel(i, j);
-                        int r, g, b;
-                        float Var_Pixel = better * (1.0f - Var_Length / R);//設置光亮度的強弱
-                        r = Var_Color.R + (int)Var_Pixel;//設置加強後的R值
-                        r = Math.Max(0, Math.Min(r, 255));//如果R值不在顏色值的範圍內，對R值進行設置
-                        g = Var_Color.G + (int)Var_Pixel;//設置加強後的G值
-                        g = Math.Max(0, Math.Min(g, 255));//如果G值不在顏色值的範圍內，對G值進行設置
-                        b = Var_Color.B + (int)Var_Pixel;//設置加強後的B值
-                        b = Math.Max(0, Math.Min(b, 255));//如果B值不在顏色值的範圍內，對B值進行設置
-                        Var_SaveBmp.SetPixel(i, j, Color.FromArgb(255, r, g, b));//將增亮後的像素值回寫到位圖
-                    }
-                }
-            }
-            return Var_SaveBmp;
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            //光暈效果
-            int cx = 50;
-            int cy = 50;
-            int R = 100;
-            pictureBox1.Image = pp(pictureBox1, cx, cy, R, 150F);
-        }
-        //光暈效果 SP
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-        }
-
-        //馬賽克效果1 ST
-        private void button20_Click(object sender, EventArgs e)
-        {
-            //馬賽克效果1
-            pictureBox1.Image = image_processing16(filename);
-        }
-
         int borderwidth = 1;
         int mosaicwidth = 3;
         Color bordercolor = Color.FromArgb(211, 172, 158);
@@ -1905,7 +2622,7 @@ namespace vcs_ImageProcessing3
         }
 
         //重設大小
-        public Bitmap Resize(Bitmap source, Size size)
+        public Bitmap do_Resize(Bitmap source, Size size)
         {
             int widthskip = source.Width / size.Width;
             int heightskip = source.Height / size.Height;
@@ -1949,7 +2666,7 @@ namespace vcs_ImageProcessing3
             int newheight = heightcount * mosaicwidth + (heightcount + 1) * borderwidth;
 
             Bitmap bmp = new Bitmap(newwidth, newheight);
-            source = Resize(source, new Size(widthcount, heightcount));
+            source = do_Resize(source, new Size(widthcount, heightcount));
 
             PointBitmap sourcepbmp = new PointBitmap(source);
             PointBitmap newpbmp = new PointBitmap(bmp);
@@ -1987,14 +2704,7 @@ namespace vcs_ImageProcessing3
             newpbmp.UnlockBits();
             return bmp;
         }
-        //馬賽克效果1 SP
 
-        //馬賽克效果2 ST
-        private void button21_Click(object sender, EventArgs e)
-        {
-            //馬賽克效果2
-            pictureBox1.Image = image_processing17(filename);
-        }
 
         private Bitmap image_processing17(string filename)
         {
@@ -2058,831 +2768,35 @@ namespace vcs_ImageProcessing3
             }
             return b;
         }
-        //馬賽克效果2 SP
 
-        private void button22_Click(object sender, EventArgs e)
+        private Bitmap image_processing18(string filename)
         {
-        }
+            //降低解析度
 
-        private void button23_Click(object sender, EventArgs e)
-        {
-        }
+            Bitmap bitmap1 = new Bitmap(filename, true);
 
-        private void bt_edge_detection0_Click(object sender, EventArgs e)
-        {
-            Bitmap bitmap1 = new Bitmap(filename);
-            sw.Reset();
-            sw.Start();
-            Bitmap bitmap2 = Roberts(bitmap1);
-            sw.Stop();
-            pictureBox1.Image = bitmap2;
-            richTextBox1.Text += "Roberts 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
-        }
+            int x, y;
 
-        private void bt_edge_detection1_Click(object sender, EventArgs e)
-        {
-            Bitmap bitmap1 = new Bitmap(filename);
-            sw.Reset();
-            sw.Start();
-            Bitmap bitmap2 = Sobel(bitmap1);
-            sw.Stop();
-            pictureBox1.Image = bitmap2;
-            richTextBox1.Text += "Sobel 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
-        }
-
-        private void bt_edge_detection2_Click(object sender, EventArgs e)
-        {
-            Bitmap bitmap1 = new Bitmap(filename);
-            sw.Reset();
-            sw.Start();
-            Bitmap bitmap2 = Laplace4(bitmap1);
-            Bitmap bitmap3 = Laplace8(bitmap1);
-            sw.Stop();
-
-            pictureBox1.Image = bitmap2;
-            pictureBox1.Image = bitmap3;
-            richTextBox1.Text += "Laplace 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
-        }
-
-        private void bt_edge_detection3_Click(object sender, EventArgs e)
-        {
-            Bitmap bitmap1 = new Bitmap(filename);
-            sw.Reset();
-            sw.Start();
-            Bitmap bitmap2 = RightBottomEdge(bitmap1);
-            sw.Stop();
-            pictureBox1.Image = bitmap2;
-            richTextBox1.Text += "RightBottomEdge 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
-        }
-
-        private void bt_edge_detection4_Click(object sender, EventArgs e)
-        {
-            Bitmap bitmap1 = new Bitmap(filename);
-            sw.Reset();
-            sw.Start();
-            Bitmap bitmap2 = Prewitt(bitmap1);
-            sw.Stop();
-            pictureBox1.Image = bitmap2;
-            richTextBox1.Text += "Prewitt 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
-        }
-
-        private void bt_edge_detection5_Click(object sender, EventArgs e)
-        {
-            Bitmap bitmap1 = new Bitmap(filename);
-            sw.Reset();
-            sw.Start();
-            Bitmap bitmap2 = Robinson(bitmap1);
-            sw.Stop();
-            pictureBox1.Image = bitmap2;
-            richTextBox1.Text += "Robinson 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
-        }
-
-        private void bt_edge_detection6_Click(object sender, EventArgs e)
-        {
-            Bitmap bitmap1 = new Bitmap(filename);
-            sw.Reset();
-            sw.Start();
-            Bitmap bitmap2 = Kirsch(bitmap1);
-            sw.Stop();
-            pictureBox1.Image = bitmap2;
-            richTextBox1.Text += "Kirsch 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
-        }
-
-        private void bt_edge_detection7_Click(object sender, EventArgs e)
-        {
-            Bitmap bitmap1 = new Bitmap(filename);
-            sw.Reset();
-            sw.Start();
-            Bitmap bitmap2 = Smoothed(bitmap1);
-            sw.Stop();
-            pictureBox1.Image = bitmap2;
-            richTextBox1.Text += "Smoothed 耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
-        }
-
-        //Roberts算子
-        //  gx = f(i,j) - f(i+1,j)
-        //  gy = f(i+1,j) - f(i,j+1)
-        //  g(i,j) = abs(gx) + abs(gy)
-        private Bitmap Roberts(Bitmap bitmap1)
-        {
-            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
-
-            LockBitmap lockBitmap1 = new LockBitmap(bitmap1);
-            LockBitmap lockBitmap2 = new LockBitmap(bitmap2);
-
-            lockBitmap1.LockBits();
-            lockBitmap2.LockBits();
-
-            for (int i = 0; i < bitmap1.Width - 1; i++)
+            // Loop through the images pixels to reset color.
+            for (x = 0; x < bitmap1.Width; x++)
             {
-                for (int j = 0; j < bitmap1.Height - 1; j++)
+                for (y = 0; y < bitmap1.Height; y++)
                 {
-                    Color c1 = lockBitmap1.GetPixel(i, j);
-                    Color c2 = lockBitmap1.GetPixel(i + 1, j);
-                    Color c3 = lockBitmap1.GetPixel(i, j + 1);
-                    Color c4 = lockBitmap1.GetPixel(i + 1, j + 1);
+                    Color pixelColor = bitmap1.GetPixel(x, y);
+                    //Color newColor = Color.FromArgb(pixelColor.R, 0, 0);
+                    //Color newColor = Color.FromArgb(0, pixelColor.G, 0);
+                    byte newColor_r = (byte)((pixelColor.R / 20) * 20);
+                    byte newColor_g = (byte)((pixelColor.G / 20) * 20);
+                    byte newColor_b = (byte)((pixelColor.B / 20) * 20);
 
-                    int r = Math.Abs(c1.R - c4.R) + Math.Abs(c2.R - c3.R);
-                    int g = Math.Abs(c1.G - c4.G) + Math.Abs(c2.G - c3.G);
-                    int b = Math.Abs(c1.B - c4.B) + Math.Abs(c2.B - c3.B);
+                    Color newColor = Color.FromArgb(newColor_r, newColor_g, newColor_b);
 
-                    if (r > 255) r = 255;
-                    if (g > 255) g = 255;
-                    if (b > 255) b = 255;
-
-                    lockBitmap2.SetPixel(i, j, Color.FromArgb(r, g, b));
+                    bitmap1.SetPixel(x, y, newColor);
                 }
             }
-
-            lockBitmap1.UnlockBits();
-            lockBitmap2.UnlockBits();
-
-            return bitmap2;
-        }
-
-
-        //Sobel算子
-        //  gx = f(i-1,j-1) + 2f(i-1,j) + f(i-1,j+1) - f(i+1,j-1) - 2f(i+1,j) - f(i+1,j+1)
-        //  gy = f(i-1,j-1) + 2f(i,j-1) + f(i+1,j-1) - f(i-1,j+1) - 2f(i,j+1) - f(i+1,j+1)
-        //  g(i,j) = gx + gy
-        private Bitmap Sobel(Bitmap bitmap1)
-        {
-            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
-
-            LockBitmap lockBitmap1 = new LockBitmap(bitmap1);
-            LockBitmap lockBitmap2 = new LockBitmap(bitmap2);
-
-            lockBitmap1.LockBits();
-            lockBitmap2.LockBits();
-
-            for (int i = 1; i < bitmap1.Width - 1; i++)
-            {
-                for (int j = 1; j < bitmap1.Height - 1; j++)
-                {
-                    Color c1 = lockBitmap1.GetPixel(i - 1, j - 1);
-                    Color c2 = lockBitmap1.GetPixel(i, j - 1);
-                    Color c3 = lockBitmap1.GetPixel(i + 1, j - 1);
-                    Color c4 = lockBitmap1.GetPixel(i - 1, j);
-                    Color c6 = lockBitmap1.GetPixel(i + 1, j);
-                    Color c7 = lockBitmap1.GetPixel(i - 1, j + 1);
-                    Color c8 = lockBitmap1.GetPixel(i, j + 1);
-                    Color c9 = lockBitmap1.GetPixel(i + 1, j + 1);
-
-                    int r1 = c1.R + 2 * c4.R + c7.R - c3.R - 2 * c6.R - c9.R;
-                    int r2 = c1.R + 2 * c2.R + c3.R - c7.R - 2 * c8.R - c9.R;
-                    int g1 = c1.G + 2 * c4.G + c7.G - c3.G - 2 * c6.G - c9.G;
-                    int g2 = c1.G + 2 * c2.G + c3.G - c7.G - 2 * c8.G - c9.G;
-                    int b1 = c1.B + 2 * c4.B + c7.B - c3.B - 2 * c6.B - c9.B;
-                    int b2 = c1.B + 2 * c2.B + c3.B - c7.B - 2 * c8.B - c9.B;
-
-                    int r = Math.Abs(r1) + Math.Abs(r2);
-                    int g = Math.Abs(g1) + Math.Abs(g2);
-                    int b = Math.Abs(b1) + Math.Abs(b2);
-
-                    if (r > 255) r = 255;
-                    if (r < 0) r = 0;
-                    if (g > 255) g = 255;
-                    if (g < 0) g = 0;
-                    if (b > 255) b = 255;
-                    if (b < 0) b = 0;
-
-                    lockBitmap2.SetPixel(i, j, Color.FromArgb(r, g, b));
-                    //lockBitmap2.SetPixel(i, j, Color.FromArgb(r, r, r));
-                }
-            }
-
-            lockBitmap1.UnlockBits();
-            lockBitmap2.UnlockBits();
-
-            return bitmap2;
-        }
-
-
-        //拉普拉斯算子（四邻域）
-        //  g(i,j) = abs(4f(i,j) - f(i,j-1) - f(i,j+1) - f(i-1,j) - f(i+1,j))
-        private Bitmap Laplace4(Bitmap bitmap1)
-        {
-            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
-
-            LockBitmap lockBitmap1 = new LockBitmap(bitmap1);
-            LockBitmap lockBitmap2 = new LockBitmap(bitmap2);
-
-            lockBitmap1.LockBits();
-            lockBitmap2.LockBits();
-
-            for (int i = 1; i < bitmap1.Width - 1; i++)
-            {
-                for (int j = 1; j < bitmap1.Height - 1; j++)
-                {
-                    Color c2 = lockBitmap1.GetPixel(i, j - 1);
-                    Color c4 = lockBitmap1.GetPixel(i - 1, j);
-                    Color c5 = lockBitmap1.GetPixel(i, j);
-                    Color c6 = lockBitmap1.GetPixel(i + 1, j);
-                    Color c8 = lockBitmap1.GetPixel(i, j + 1);
-
-                    int r = Math.Abs(4 * c5.R - c2.R - c4.R - c6.R - c8.R);
-                    int g = Math.Abs(4 * c5.G - c2.G - c4.G - c6.G - c8.G);
-                    int b = Math.Abs(4 * c5.B - c2.B - c4.B - c6.B - c8.B);
-
-                    if (r > 255) r = 255;
-                    if (r < 0) r = 0;
-                    if (g > 255) g = 255;
-                    if (g < 0) g = 0;
-                    if (b > 255) b = 255;
-                    if (b < 0) b = 0;
-
-                    lockBitmap2.SetPixel(i, j, Color.FromArgb(r, g, b));
-                }
-            }
-
-            lockBitmap1.UnlockBits();
-            lockBitmap2.UnlockBits();
-
-            return bitmap2;
-        }
-
-        private Bitmap Laplace8(Bitmap bitmap1)
-        {
-            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
-
-            LockBitmap lockBitmap1 = new LockBitmap(bitmap1);
-            LockBitmap lockBitmap2 = new LockBitmap(bitmap2);
-
-            lockBitmap1.LockBits();
-            lockBitmap2.LockBits();
-
-            for (int i = 1; i < bitmap1.Width - 1; i++)
-            {
-                for (int j = 1; j < bitmap1.Height - 1; j++)
-                {
-                    Color c1 = lockBitmap1.GetPixel(i - 1, j - 1);
-                    Color c2 = lockBitmap1.GetPixel(i, j - 1);
-                    Color c3 = lockBitmap1.GetPixel(i + 1, j - 1);
-                    Color c4 = lockBitmap1.GetPixel(i - 1, j);
-                    Color c5 = lockBitmap1.GetPixel(i, j);
-                    Color c6 = lockBitmap1.GetPixel(i + 1, j);
-                    Color c7 = lockBitmap1.GetPixel(i - 1, j + 1);
-                    Color c8 = lockBitmap1.GetPixel(i, j + 1);
-                    Color c9 = lockBitmap1.GetPixel(i + 1, j + 1);
-
-                    int r = Math.Abs(8 * c5.R - c1.R - c2.R - c3.R - c4.R - c6.R - c7.R - c8.R - c9.R);
-                    int g = Math.Abs(8 * c5.G - c1.G - c2.G - c3.G - c4.G - c6.G - c7.G - c8.G - c9.G);
-                    int b = Math.Abs(8 * c5.B - c1.B - c2.B - c3.B - c4.B - c6.B - c7.B - c8.B - c9.B);
-
-                    if (r > 255) r = 255;
-                    if (r < 0) r = 0;
-                    if (g > 255) g = 255;
-                    if (g < 0) g = 0;
-                    if (b > 255) b = 255;
-                    if (b < 0) b = 0;
-
-                    lockBitmap2.SetPixel(i, j, Color.FromArgb(r, g, b));
-                }
-            }
-
-            lockBitmap1.UnlockBits();
-            lockBitmap2.UnlockBits();
-
-            return bitmap2;
-        }
-
-
-        //右下边缘抽出
-        //  g(i,j) = abs(2f(i+1,j) + 2f(i,j+1) - 2f(i,j-1) - 2f(i-1,j));
-        private Bitmap RightBottomEdge(Bitmap bitmap1)
-        {
-            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
-
-            LockBitmap lockBitmap1 = new LockBitmap(bitmap1);
-            LockBitmap lockBitmap2 = new LockBitmap(bitmap2);
-
-            lockBitmap1.LockBits();
-            lockBitmap2.LockBits();
-
-            for (int i = 1; i < bitmap1.Width - 1; i++)
-            {
-                for (int j = 1; j < bitmap1.Height - 1; j++)
-                {
-                    Color c2 = lockBitmap1.GetPixel(i, j - 1);
-                    Color c4 = lockBitmap1.GetPixel(i - 1, j);
-                    Color c6 = lockBitmap1.GetPixel(i + 1, j);
-                    Color c8 = lockBitmap1.GetPixel(i, j + 1);
-
-                    int r = 2 * Math.Abs(c6.R + c8.R - c2.R - c4.R);
-                    int g = 2 * Math.Abs(c6.G + c8.G - c2.G - c4.G);
-                    int b = 2 * Math.Abs(c6.B + c8.B - c2.B - c4.B);
-
-                    if (r > 255) r = 255;
-                    if (r < 0) r = 0;
-                    if (g > 255) g = 255;
-                    if (g < 0) g = 0;
-                    if (b > 255) b = 255;
-                    if (b < 0) b = 0;
-
-                    lockBitmap2.SetPixel(i, j, Color.FromArgb(r, g, b));
-                }
-            }
-
-            lockBitmap1.UnlockBits();
-            lockBitmap2.UnlockBits();
-
-            return bitmap2;
-        }
-
-
-        //Prewitt边缘检测样板算子（方向为右下）
-        //  g(i,j) = abs(f(i-1,j-1) + f(i,j-1) + f(i+1,j-1) + f(i-1,j) + f(i-1,j+1) - f(i+1,j) - f(i,j+1) - f(i+1,j+1) - 2f(i,j))
-        //
-        //      右下              右上
-        //  1   1   1           1   -1  -1
-        //  1   -2  -1          1   -2  -1
-        //  1   -1  -1          1   1   1
-        //
-        //      上               下
-        //  -1  -1  -1          1   1   1
-        //  1   -2  1           1   -2  1
-        //  1   1   1           -1  -1  -1
-        private Bitmap Prewitt(Bitmap bitmap1)
-        {
-            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
-
-            LockBitmap lockBitmap1 = new LockBitmap(bitmap1);
-            LockBitmap lockBitmap2 = new LockBitmap(bitmap2);
-
-            lockBitmap1.LockBits();
-            lockBitmap2.LockBits();
-
-            for (int i = 1; i < bitmap1.Width - 1; i++)
-            {
-                for (int j = 1; j < bitmap1.Height - 1; j++)
-                {
-                    Color c1 = lockBitmap1.GetPixel(i - 1, j - 1);
-                    Color c2 = lockBitmap1.GetPixel(i, j - 1);
-                    Color c3 = lockBitmap1.GetPixel(i + 1, j - 1);
-                    Color c4 = lockBitmap1.GetPixel(i - 1, j);
-                    Color c5 = lockBitmap1.GetPixel(i, j);
-                    Color c6 = lockBitmap1.GetPixel(i + 1, j);
-                    Color c7 = lockBitmap1.GetPixel(i - 1, j + 1);
-                    Color c8 = lockBitmap1.GetPixel(i, j + 1);
-                    Color c9 = lockBitmap1.GetPixel(i + 1, j + 1);
-
-                    int r = Math.Abs(c1.R + c2.R + c3.R + c4.R + c7.R - c6.R - c8.R - c9.R - 2 * c5.R);
-                    int g = Math.Abs(c1.G + c2.G + c3.G + c4.G + c7.G - c6.G - c8.G - c9.G - 2 * c5.R);
-                    int b = Math.Abs(c1.B + c2.B + c3.B + c4.B + c7.B - c6.B - c8.B - c9.B - 2 * c5.R);
-
-                    if (r > 255) r = 255;
-                    if (r < 0) r = 0;
-                    if (g > 255) g = 255;
-                    if (g < 0) g = 0;
-                    if (b > 255) b = 255;
-                    if (b < 0) b = 0;
-
-                    lockBitmap2.SetPixel(i, j, Color.FromArgb(r, g, b));
-                }
-            }
-
-            lockBitmap1.UnlockBits();
-            lockBitmap2.UnlockBits();
-
-            return bitmap2;
-        }
-
-
-        //Robinson算子（这里使用第一个）
-        //Robinson算子有八个样板，这里列出四个，剩余四个为下面四个的取反
-        //
-        //  1   2   1               0   1   2
-        //  0   0   0               -1  0   1
-        //  -1  -2  -1              -2  -1  0
-        //
-        //  -1  0   1               -2  -1  0
-        //  -2  0   2               -1  0   1
-        //  -1  0   1               0   -1  2
-        private Bitmap Robinson(Bitmap bitmap1)
-        {
-            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
-
-            LockBitmap lockBitmap1 = new LockBitmap(bitmap1);
-            LockBitmap lockBitmap2 = new LockBitmap(bitmap2);
-
-            lockBitmap1.LockBits();
-            lockBitmap2.LockBits();
-
-            for (int i = 1; i < bitmap1.Width - 1; i++)
-            {
-                for (int j = 1; j < bitmap1.Height - 1; j++)
-                {
-                    Color c1 = lockBitmap1.GetPixel(i - 1, j - 1);
-                    Color c2 = lockBitmap1.GetPixel(i, j - 1);
-                    Color c3 = lockBitmap1.GetPixel(i + 1, j - 1);
-                    Color c7 = lockBitmap1.GetPixel(i - 1, j + 1);
-                    Color c8 = lockBitmap1.GetPixel(i, j + 1);
-                    Color c9 = lockBitmap1.GetPixel(i + 1, j + 1);
-
-                    int r = Math.Abs(c1.R + 2 * c2.R + c3.R - c7.R - 2 * c8.R - c9.R);
-                    int g = Math.Abs(c1.G + 2 * c2.G + c3.G - c7.G - 2 * c8.G - c9.G);
-                    int b = Math.Abs(c1.B + 2 * c2.B + c3.B - c7.B - 2 * c8.B - c9.B);
-
-                    if (r > 255) r = 255;
-                    if (r < 0) r = 0;
-                    if (g > 255) g = 255;
-                    if (g < 0) g = 0;
-                    if (b > 255) b = 255;
-                    if (b < 0) b = 0;
-
-                    lockBitmap2.SetPixel(i, j, Color.FromArgb(r, g, b));
-                }
-            }
-
-            lockBitmap1.UnlockBits();
-            lockBitmap2.UnlockBits();
-
-            return bitmap2;
-        }
-
-        //Kirsch算子（这里使用第一个）
-        //Kirsch算子有8个边缘样板，与Prewitt边缘样板类似，这里列出一个
-        //
-        //  5   5   5
-        //  -3  0   -3
-        //  -3  -3  -3
-        //
-        private Bitmap Kirsch(Bitmap bitmap1)
-        {
-            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
-
-            LockBitmap lockBitmap1 = new LockBitmap(bitmap1);
-            LockBitmap lockBitmap2 = new LockBitmap(bitmap2);
-
-            lockBitmap1.LockBits();
-            lockBitmap2.LockBits();
-
-            for (int i = 1; i < bitmap1.Width - 1; i++)
-            {
-                for (int j = 1; j < bitmap1.Height - 1; j++)
-                {
-                    Color c1 = lockBitmap1.GetPixel(i - 1, j - 1);
-                    Color c2 = lockBitmap1.GetPixel(i, j - 1);
-                    Color c3 = lockBitmap1.GetPixel(i + 1, j - 1);
-                    Color c4 = lockBitmap1.GetPixel(i - 1, j);
-                    Color c6 = lockBitmap1.GetPixel(i + 1, j);
-                    Color c7 = lockBitmap1.GetPixel(i - 1, j + 1);
-                    Color c8 = lockBitmap1.GetPixel(i, j + 1);
-                    Color c9 = lockBitmap1.GetPixel(i + 1, j + 1);
-
-                    int r = Math.Abs(5 * (c1.R + c2.R + c3.R) - 3 * (c4.R + c6.R + c7.R + c8.R + c9.R));
-                    int g = Math.Abs(5 * (c1.G + c2.G + c3.G) - 3 * (c4.G + c6.G + c7.G + c8.G + c9.G));
-                    int b = Math.Abs(5 * (c1.B + c2.B + c3.B) - 3 * (c4.B + c6.B + c7.B + c8.B + c9.B));
-
-                    if (r > 255) r = 255;
-                    if (r < 0) r = 0;
-                    if (g > 255) g = 255;
-                    if (g < 0) g = 0;
-                    if (b > 255) b = 255;
-                    if (b < 0) b = 0;
-
-                    lockBitmap2.SetPixel(i, j, Color.FromArgb(r, g, b));
-                }
-            }
-
-            lockBitmap1.UnlockBits();
-            lockBitmap2.UnlockBits();
-
-            return bitmap2;
-        }
-
-
-        //Smoothed算子
-        //  gx = f(i,j) - f(i+1,j)
-        //  gy = f(i+1,j) - f(i,j+1)
-        //  g(i,j) = abs(gx) + abs(gy)
-        private Bitmap Smoothed(Bitmap bitmap1)
-        {
-            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
-
-            LockBitmap lockBitmap1 = new LockBitmap(bitmap1);
-            LockBitmap lockBitmap2 = new LockBitmap(bitmap2);
-
-            lockBitmap1.LockBits();
-            lockBitmap2.LockBits();
-
-            for (int i = 1; i < bitmap1.Width - 1; i++)
-            {
-                for (int j = 1; j < bitmap1.Height - 1; j++)
-                {
-                    Color c1 = lockBitmap1.GetPixel(i - 1, j - 1);
-                    Color c2 = lockBitmap1.GetPixel(i, j - 1);
-                    Color c3 = lockBitmap1.GetPixel(i + 1, j - 1);
-                    Color c4 = lockBitmap1.GetPixel(i - 1, j);
-                    Color c6 = lockBitmap1.GetPixel(i + 1, j);
-                    Color c7 = lockBitmap1.GetPixel(i - 1, j + 1);
-                    Color c8 = lockBitmap1.GetPixel(i, j + 1);
-                    Color c9 = lockBitmap1.GetPixel(i + 1, j + 1);
-
-                    int r1 = c3.R + c6.R + c9.R - c1.R - c4.R - c7.R;
-                    int r2 = c1.R + c2.R + c3.R - c7.R - c8.R - c9.R;
-
-                    int g1 = c3.G + c6.G + c9.G - c1.G - c4.G - c7.G;
-                    int g2 = c1.G + c2.G + c3.G - c7.G - c8.G - c9.G;
-                    int b1 = c3.B + c6.B + c9.B - c1.B - c4.B - c7.B;
-                    int b2 = c1.B + c2.B + c3.B - c7.B - c8.B - c9.B;
-
-                    int r = Math.Abs(r1) + Math.Abs(r2);
-                    int g = Math.Abs(g1) + Math.Abs(g2);
-                    int b = Math.Abs(b1) + Math.Abs(b2);
-
-                    if (r > 255) r = 255;
-                    if (r < 0) r = 0;
-                    if (g > 255) g = 255;
-                    if (g < 0) g = 0;
-                    if (b > 255) b = 255;
-                    if (b < 0) b = 0;
-
-                    lockBitmap2.SetPixel(i, j, Color.FromArgb(r, g, b));
-                    //lockBitmap2.SetPixel(i, j, Color.FromArgb(r, r, r));
-                }
-            }
-
-            lockBitmap1.UnlockBits();
-            lockBitmap2.UnlockBits();
-
-            return bitmap2;
-        }
-
-        private void bt_image_process_p0_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "黑白效果\n";
-            Bitmap bmp = image_processing3(filename);
-            pictureBox1.Image = bmp;
-        }
-
-        private void bt_image_process_p1_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "底片效果\n";
-            Bitmap bmp = image_processing1(filename);
-            pictureBox1.Image = bmp;
-        }
-
-        private void bt_image_process_p2_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "浮雕\n";
-            Bitmap bmp = image_processing2(filename);
-            pictureBox1.Image = bmp;
-        }
-
-        private void bt_image_process_p3_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "柔化\n";
-            Bitmap bmp = image_processing4(filename);
-            pictureBox1.Image = bmp;
-        }
-
-        private void bt_image_process_p4_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "銳化\n";
-            Bitmap bmp = image_processing5(filename);
-            pictureBox1.Image = bmp;
-        }
-
-        private void bt_image_process_p5_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "霧化 TBD\n";
-            Bitmap bmp = image_processing6(filename);
-            pictureBox1.Image = bmp;
-        }
-
-        private void bt_image_process_p6_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "光照效果\n";
-            Bitmap bmp = image_processing7(filename);
-            pictureBox1.Image = bmp;
-        }
-
-        private void bt_image_process_p7_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "油畫效果\n";
-            Bitmap bmp = image_processing10(filename);
-            pictureBox1.Image = bmp;
-        }
-
-        private void bt_image_process_p8_Click(object sender, EventArgs e)
-        {
-            //馬賽克效果
-            do_mosaic_effect(filename);
-        }
-
-        int cnt = 0;
-        private void bt_image_process_p9_Click(object sender, EventArgs e)
-        {
-            //百葉窗效果 水平垂直輪流顯示
-            if ((cnt % 2) == 0)
-            {
-                shutter1();
-            }
-            else
-            {
-                shutter2();
-            }
-            cnt++;
-        }
-
-        private void bt_image_process_p10_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "扭曲效果\n";
-            string filename_isinbaeva = @"C:\_git\vcs\_1.data\______test_files1\_image_processing\isinbaeva.jpg";
-            //Bitmap bmp = image_processing11(filename_isinbaeva);
-            //pictureBox1.Image = bmp;
-            image_processing11(filename_isinbaeva);
-        }
-
-        private void bt_image_process_p11_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "積木效果\n";
-            Bitmap bmp = image_processing12(filename);
-            pictureBox1.Image = bmp;
-        }
-
-        private void bt_image_process_p12_Click(object sender, EventArgs e)
-        {
-            //BassoRelievo 效果
-            pictureBox1.Image = image_processing13(filename);
-        }
-
-        private void bt_image_process_p13_Click(object sender, EventArgs e)
-        {
-            //扭曲效果
-            pictureBox1.Image = image_processing14(filename);
-
-        }
-
-        private void bt_image_process_p14_Click(object sender, EventArgs e)
-        {
-            //色階調整
-            pictureBox1.Image = image_processing15(filename);
-
-        }
-
-        private void bt_image_process_p15_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_p16_Click(object sender, EventArgs e)
-        {
-        }
-
-
-        private void bt_image_process_p17_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_p18_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_p19_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_p20_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_p21_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_p22_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_p23_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_p24_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_p25_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_p26_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_p27_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_p28_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_p29_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_p30_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_image_process_p31_Click(object sender, EventArgs e)
-        {
-            //依序顯示各項功能
-
-            //關掉所有控件 
-            remove_all_controls();
-
-            int W = Screen.PrimaryScreen.Bounds.Width;
-            int H = Screen.PrimaryScreen.Bounds.Height;
-            int w = W * 7 / 10;
-            int h = H * 7 / 10;
-            pictureBox1.Size = new Size(w, h);
-            pictureBox1.Location = new Point((W - w) / 2, (H - h) / 2);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-
-            // 實例化控件
-            lb_main_mesg.Text = "原圖";
-            lb_main_mesg.Font = new Font("標楷體", 24);
-            lb_main_mesg.ForeColor = Color.Red;
-            lb_main_mesg.Location = new Point((W - w) / 2, (H - h) / 2 - 40);
-            lb_main_mesg.AutoSize = true;
-            this.Controls.Add(lb_main_mesg);     // 將控件加入表單
-
-            timer1.Enabled = true;
-        }
-
-        void remove_all_controls()
-        {
-            //richTextBox1.Text += "遍歷所有控件\n";
-            int i;
-
-            for (i = 0; i < 10; i++)
-            {
-                foreach (Control con in this.Controls)
-                {
-                    System.String strControl = con.GetType().ToString();//获得控件的类型
-                    System.String strControlName = con.Name.ToString();//获得控件的名称
-
-                    richTextBox1.Text += "Type\t" + strControl + "\tName\t" + strControlName + "\n";
-
-                    if (strControlName == "pictureBox1")
-                        continue;
-                    if (strControlName == "bt_exit")
-                        continue;
-
-                    this.Controls.Remove(con);
-                }
-            }
-        }
-
-        int item = 0;
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            item++;
-            switch (item)
-            {
-                case 1: pictureBox1.Image = image_processing1(filename); break;
-                case 2: pictureBox1.Image = image_processing2(filename); break;
-                case 3: pictureBox1.Image = image_processing3(filename); break;
-                case 4: pictureBox1.Image = image_processing4(filename); break;
-                case 5: pictureBox1.Image = image_processing5(filename); break;
-                case 6: pictureBox1.Image = image_processing6(filename); break;
-                case 7: pictureBox1.Image = image_processing7(filename); break;
-                //case 8: pictureBox1.Image = image_processing8(filename); break; none
-                //case 9: pictureBox1.Image = image_processing9(filename); break; none
-                case 10: pictureBox1.Image = image_processing10(filename); break;
-                //case 11: pictureBox1.Image = image_processing11(filename); break;
-                case 12: pictureBox1.Image = image_processing12(filename); break;
-                case 13: pictureBox1.Image = image_processing13(filename); break;
-                case 14: pictureBox1.Image = image_processing14(filename); break;
-                case 15: pictureBox1.Image = image_processing15(filename); break;
-                case 16: pictureBox1.Image = image_processing16(filename); break;
-                case 17: pictureBox1.Image = image_processing17(filename); break;
-                case 18: shutter1(); break;
-                case 19: shutter2(); break;
-                default: break;
-            }
-            if (item >= 19)
-            {
-                item = 0;
-            }
+            //richTextBox1.Text += "圖片大小 " + bitmap1.Width.ToString() + " X " + bitmap1.Height.ToString() + "\n";
+            //richTextBox1.Text += "Pixel format: " + bitmap1.PixelFormat.ToString() + "\n";
+            return bitmap1;
         }
 
         private void bt_image_process_m0_Click(object sender, EventArgs e)

@@ -75,6 +75,7 @@ ax.grid()
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # Chapter3\Sequential.py
 
@@ -101,6 +102,7 @@ model.compile(
 # 学習を行う
 model.fit(data, labels)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Chapter3\Dogs+vs.+Cat.py
@@ -161,6 +163,7 @@ for result in results:
     print(result)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # Chapter4\MNIST+Example.py
 
@@ -172,7 +175,9 @@ import keras
 # MINISTのデータの他、必要なモジュールをインポート
 from keras.datasets import mnist
 from keras.models import Sequential
-from keras.layers.core import Dense, Dropout, Activation
+from keras.layers import Dense
+from keras.layers import Dropout
+from keras.layers import Activation
 from keras.optimizers import RMSprop
 from keras.callbacks import EarlyStopping, CSVLogger
 
@@ -256,6 +261,7 @@ plt.ylabel("loss")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # Chapter5\CNN+Plots-binarysigm.py
 
@@ -288,6 +294,7 @@ model.add(Dense(units=1, activation="sigmoid", name="Dense_1"))
 # SVG形式でモデルを表示
 SVG(model_to_dot(model, show_shapes=True).create(prog="dot", format="svg"))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Chapter5\CNN+Plots-flattenanddense.py
@@ -322,6 +329,7 @@ model.add(Dense(units=10, activation="softmax", name="Dense_1"))
 SVG(model_to_dot(model, show_shapes=True).create(prog="dot", format="svg"))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # Chapter5\CNN+Plots-multisigm.py
 
@@ -355,6 +363,7 @@ model.add(Dense(units=10, activation="sigmoid", name="Dense_1"))
 SVG(model_to_dot(model, show_shapes=True).create(prog="dot", format="svg"))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # Chapter5\CNN+Plots-onelayter.py
 
@@ -377,6 +386,7 @@ model.add(Conv2D(filters=3, kernel_size=(3, 3), input_shape=(6, 6, 1), name="Con
 # SVG形式でモデルを表示
 SVG(model_to_dot(model, show_shapes=True).create(prog="dot", format="svg"))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Chapter5\CNN+Plots-pooling.py
@@ -405,6 +415,7 @@ model.add(MaxPooling2D(pool_size=(2, 2), name="MaxPooling2D_1"))
 # SVG形式でモデルを表示
 SVG(model_to_dot(model, show_shapes=True).create(prog="dot", format="svg"))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Chapter5\CNN+Plots-ReLU.py
@@ -437,6 +448,7 @@ model.add(
 SVG(model_to_dot(model, show_shapes=True).create(prog="dot", format="svg"))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # Chapter5\CNN+Plots-twolayers.py
 
@@ -460,6 +472,7 @@ model.add(Conv2D(filters=2, kernel_size=(3, 3), name="Conv2D_2"))
 # SVG形式でモデルを表示
 SVG(model_to_dot(model, show_shapes=True).create(prog="dot", format="svg"))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Chapter5\CNN+Plots-twostrides.py
@@ -487,6 +500,7 @@ model.add(
 # SVG形式でモデルを表示
 SVG(model_to_dot(model, show_shapes=True).create(prog="dot", format="svg"))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Chapter5\CNN+Plots-zeropadding.py
@@ -518,6 +532,7 @@ model.add(
 # SVG形式でモデルを表示
 SVG(model_to_dot(model, show_shapes=True).create(prog="dot", format="svg"))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Chapter5\CNN+Train-dropout.py
@@ -572,6 +587,7 @@ model.fit(
     validation_split=0.2,
 )
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Chapter5\CNN+Train-example.py
@@ -633,6 +649,7 @@ model.fit(
     validation_split=0.2,
 )
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Chapter6\RNN+Example.py
@@ -831,6 +848,7 @@ for word in words:
         print_closest_words(word)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # Chapter6\RNN+Plots-GRU.py
 
@@ -873,6 +891,7 @@ model = Model(inputs=[x], outputs=[y])
 # SVG形式でモデルを表示 (図6-3-4)
 SVG(model_to_dot(model, show_shapes=True).create(prog="dot", format="svg"))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Chapter6\RNN+Plots-LSTM.py
@@ -920,6 +939,7 @@ model = Model(inputs=[x], outputs=[y])
 SVG(model_to_dot(model, show_shapes=True).create(prog="dot", format="svg"))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # Chapter6\RNN+Plots-SimpleRNN.py
 
@@ -966,6 +986,7 @@ model = Model(inputs=[x], outputs=[y])
 # SVG形式でモデルを表示 (図6-1-7)
 SVG(model_to_dot(model, show_shapes=True).create(prog="dot", format="svg"))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 

@@ -3034,7 +3034,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("讀取模型, 並使用之 MLP")
 
-import glob, cv2
+import cv2
+import glob
 
 # 撈出單層圖檔
 files = glob.glob("data\imagedata\*.jpg")  # 建立測試資料
@@ -3071,6 +3072,7 @@ images, labels, predictions, start_id, num = (
     0,
     len(x_test),
 )
+
 """ no plot
 if num > 25:
     num = 25
