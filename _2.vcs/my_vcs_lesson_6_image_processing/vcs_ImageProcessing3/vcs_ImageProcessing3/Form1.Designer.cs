@@ -110,7 +110,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(140, 40);
             this.button1.TabIndex = 0;
-            this.button1.Text = "單色圖片 1";
+            this.button1.Text = "單色圖片 2";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -120,7 +120,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(140, 40);
             this.button2.TabIndex = 1;
-            this.button2.Text = "單色圖片 2";
+            this.button2.Text = "推拉效果";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -130,7 +130,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(140, 40);
             this.button3.TabIndex = 2;
-            this.button3.Text = "推拉效果";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -231,7 +230,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(140, 40);
             this.button0.TabIndex = 16;
-            this.button0.Text = "單色處理";
+            this.button0.Text = "單色圖片 1";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -403,6 +402,7 @@
             this.bt_image_process_p29.Name = "bt_image_process_p29";
             this.bt_image_process_p29.Size = new System.Drawing.Size(110, 35);
             this.bt_image_process_p29.TabIndex = 65;
+            this.bt_image_process_p29.Text = "單色處理29";
             this.bt_image_process_p29.UseVisualStyleBackColor = true;
             this.bt_image_process_p29.Click += new System.EventHandler(this.bt_image_process_p29_Click);
             // 

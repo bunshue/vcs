@@ -254,47 +254,6 @@ namespace vcs_ImageProcessing3
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //單色處理
-            richTextBox1.Text += "單色處理\n";
-            pictureBox2.Image = ToMonochrome(pictureBox1.Image);
-        }
-
-        // Convert an image to monochrome.
-        private Bitmap ToMonochrome(Image image)
-        {
-            // Make the ColorMatrix.
-            ColorMatrix cm = new ColorMatrix(new float[][]
-            {
-                new float[] {0.299f, 0.299f, 0.299f, 0, 0},
-                new float[] {0.587f, 0.587f, 0.587f, 0, 0},
-                new float[] {0.114f, 0.114f, 0.114f, 0, 0},
-                new float[] { 0, 0, 0, 1, 0},
-                new float[] { 0, 0, 0, 0, 1}
-            });
-            ImageAttributes attributes = new ImageAttributes();
-            attributes.SetColorMatrix(cm);
-
-            // Draw the image onto the new bitmap while applying the new ColorMatrix.
-            Point[] points =
-            {
-                new Point(0, 0),
-                new Point(image.Width - 1, 0),
-                new Point(0, image.Height - 1),
-            };
-            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
-
-            // Make the result bitmap.
-            Bitmap bm = new Bitmap(image.Width, image.Height);
-            using (Graphics gr = Graphics.FromImage(bm))
-            {
-                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
-            }
-            return bm;
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
             //單色圖片 1
             // Convert the image into red, green, and blue monochrome.
             Image image = Image.FromFile(filename);
@@ -334,9 +293,10 @@ namespace vcs_ImageProcessing3
                 gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
             }
             return bm;
+
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             //單色圖片 2
             //製作單色圖片
@@ -394,7 +354,7 @@ namespace vcs_ImageProcessing3
             //pictureBox1.Image = bbmp;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             //推拉效果
 
@@ -416,6 +376,10 @@ namespace vcs_ImageProcessing3
                 g.DrawImage(cloneBitmap, rectangle1);
                 this.pictureBox1.Show();
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -1478,28 +1442,34 @@ namespace vcs_ImageProcessing3
 
         private void bt_image_process_p23_Click(object sender, EventArgs e)
         {
-            //積木效果
-            Bitmap bmp = new Bitmap(filename);
-            pictureBox1.Image = ToBlock(bmp);
+            richTextBox1.Text += "積木效果\n";
+            Bitmap bmp = image_processing23(filename);
+            pictureBox1.Image = bmp;
         }
 
-        Bitmap ToBlock(Bitmap bitmap1)
+        private Bitmap image_processing23(string filename)
         {
+            lb_main_mesg.Text = "積木效果";
+            Application.DoEvents();
+
+            Bitmap bitmap1 = new Bitmap(filename);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            //Bitmap bitmap2 = new Bitmap(W, H);
+
             Graphics g = this.pictureBox1.CreateGraphics();
-            int W, H, i, j, iAvg, iPixel;
+            int i, j, iAvg, iPixel;
             Color myColor, myNewColor;
             RectangleF myRect;
-            W = bitmap1.Width;
-            H = bitmap1.Height;
             myRect = new RectangleF(0, 0, W, H);
-            Bitmap bitmap = bitmap1.Clone(myRect, System.Drawing.Imaging.PixelFormat.DontCare);
+            Bitmap bitmap2 = bitmap1.Clone(myRect, System.Drawing.Imaging.PixelFormat.DontCare);
             i = 0;
             while (i < W - 1)
             {
                 j = 0;
                 while (j < H - 1)
                 {
-                    myColor = bitmap.GetPixel(i, j);
+                    myColor = bitmap2.GetPixel(i, j);
                     iAvg = (myColor.R + myColor.G + myColor.B) / 3;
                     iPixel = 0;
                     if (iAvg >= 128)
@@ -1507,15 +1477,15 @@ namespace vcs_ImageProcessing3
                     else
                         iPixel = 0;
                     myNewColor = Color.FromArgb(255, iPixel, iPixel, iPixel);
-                    bitmap.SetPixel(i, j, myNewColor);
+                    bitmap2.SetPixel(i, j, myNewColor);
                     j = j + 1;
                 }
                 i = i + 1;
             }
             g.Clear(Color.WhiteSmoke);
-            g.DrawImage(bitmap, new Rectangle(0, 0, W, H));
+            g.DrawImage(bitmap2, new Rectangle(0, 0, W, H));
 
-            return bitmap;
+            return bitmap2;
         }
 
         private void bt_image_process_p24_Click(object sender, EventArgs e)
@@ -1523,13 +1493,21 @@ namespace vcs_ImageProcessing3
             //Sepia1 24
             //Sepia 1
             //將圖片轉為 Sepia 效果
-            // Display the image converted to sepia tone.
-            pictureBox2.Image = ToSepiaTone1(pictureBox1.Image);
+            richTextBox1.Text += "Sepia 效果\n";
+            Bitmap bmp = image_processing24(filename);
+            pictureBox1.Image = bmp;
         }
 
-        // Convert an image to sepia tone.
-        private Bitmap ToSepiaTone1(Image image)
+        private Bitmap image_processing24(string filename)
         {
+            lb_main_mesg.Text = "Sepia 效果1";
+            Application.DoEvents();
+
+            Bitmap bitmap1 = new Bitmap(filename);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            //Bitmap bitmap2 = new Bitmap(W, H);
+
             // Make the ColorMatrix.
             ColorMatrix cm = new ColorMatrix(new float[][]
             {
@@ -1554,18 +1532,18 @@ namespace vcs_ImageProcessing3
             Point[] points =
             {
                 new Point(0, 0),
-                new Point(image.Width - 1, 0),
-                new Point(0, image.Height - 1),
+                new Point(bitmap1.Width - 1, 0),
+                new Point(0, bitmap1.Height - 1),
             };
-            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
+            Rectangle rect = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
 
             // Make the result bitmap.
-            Bitmap bmp = new Bitmap(image.Width, image.Height);
-            using (Graphics gr = Graphics.FromImage(bmp))
+            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+            using (Graphics gr = Graphics.FromImage(bitmap2))
             {
-                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
+                gr.DrawImage(bitmap1, points, rect, GraphicsUnit.Pixel, attributes);
             }
-            return bmp;
+            return bitmap2;
         }
 
         private void bt_image_process_p25_Click(object sender, EventArgs e)
@@ -1573,18 +1551,26 @@ namespace vcs_ImageProcessing3
             //Sepia2 25
             //Sepia 2
             //將圖片轉為 Sepia 效果
-            // Display the image converted to sepia tone.
-            pictureBox2.Image = ToSepiaTone2(pictureBox1.Image);
+            richTextBox1.Text += "Sepia 效果\n";
+            Bitmap bmp = image_processing25(filename);
+            pictureBox1.Image = bmp;
         }
 
-        // Convert an image to sepia tone.
-        private Bitmap ToSepiaTone2(Image image)
+        private Bitmap image_processing25(string filename)
         {
-            //將圖片轉為 Sepia 效果
-            Bitmap bmp = new Bitmap(image);
+            lb_main_mesg.Text = "Sepia 效果2";
+            Application.DoEvents();
 
-            int width = bmp.Width;
-            int height = bmp.Height;
+            Bitmap bitmap1 = new Bitmap(filename);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            //Bitmap bitmap2 = new Bitmap(W, H);
+
+            //將圖片轉為 Sepia 效果
+            Bitmap bitmap2 = new Bitmap(bitmap1);
+
+            int width = bitmap1.Width;
+            int height = bitmap1.Height;
 
             Color p;
 
@@ -1594,7 +1580,7 @@ namespace vcs_ImageProcessing3
                 for (int x = 0; x < width; x++)
                 {
                     //get pixel value
-                    p = bmp.GetPixel(x, y);
+                    p = bitmap1.GetPixel(x, y);
 
                     //extract pixel component ARGB
                     int a = p.A;
@@ -1636,25 +1622,25 @@ namespace vcs_ImageProcessing3
                     }
 
                     //set the new RGB value in image pixel
-                    bmp.SetPixel(x, y, Color.FromArgb(a, r, g, b));
+                    bitmap2.SetPixel(x, y, Color.FromArgb(a, r, g, b));
                 }
             }
-            return bmp;
+            return bitmap2;
         }
 
         private void bt_image_process_p26_Click(object sender, EventArgs e)
         {
-            //模糊處理
             richTextBox1.Text += "模糊處理\n";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-            richTextBox1.Text += "PictureToBlur\n";
-            pictureBox1.Image = ToBlur(filename);
+            Bitmap bmp = image_processing26(filename);
+            pictureBox1.Image = bmp;
         }
 
-        private Bitmap ToBlur(string filename)
+        private Bitmap image_processing26(string filename)
         {
-            Image image = Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            Bitmap bitmap1 = new Bitmap(image);
+            lb_main_mesg.Text = "模糊處理";
+            Application.DoEvents();
+
+            Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
             int H = bitmap1.Height;
             Bitmap bitmap2 = new Bitmap(W, H);
@@ -1744,37 +1730,35 @@ namespace vcs_ImageProcessing3
 
         private void bt_image_process_p27_Click(object sender, EventArgs e)
         {
-            //鏡像圖片
             richTextBox1.Text += "鏡像圖片\n";
             string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            pictureBox1.Image = ToMirror(filename);
+            Bitmap bmp = image_processing27(filename);
+            pictureBox1.Image = bmp;
         }
 
-        private Bitmap ToMirror(string filename)
+        private Bitmap image_processing27(string filename)
         {
-            Image image = Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            Bitmap bmp = new Bitmap(image);
+            lb_main_mesg.Text = "鏡像圖片";
+            Application.DoEvents();
 
-            //get image dimension
-            int width = image.Width;
-            int height = image.Height;
-
-            //mirror image
-            Bitmap mimg = new Bitmap(width * 2, height);
+            Bitmap bitmap1 = new Bitmap(filename);
+            int width = bitmap1.Width;
+            int height = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(width * 2, height);
 
             for (int y = 0; y < height; y++)
             {
                 for (int lx = 0, rx = width * 2 - 1; lx < width; lx++, rx--)
                 {
                     //get source pixel value
-                    Color p = bmp.GetPixel(lx, y);
+                    Color p = bitmap1.GetPixel(lx, y);
 
                     //set mirror pixel value
-                    mimg.SetPixel(lx, y, p);
-                    mimg.SetPixel(rx, y, p);
+                    bitmap2.SetPixel(lx, y, p);
+                    bitmap2.SetPixel(rx, y, p);
                 }
             }
-            return mimg;
+            return bitmap2;
         }
 
         private void bt_image_process_p28_Click(object sender, EventArgs e)
@@ -1782,19 +1766,22 @@ namespace vcs_ImageProcessing3
             //彩虹化圖片
             richTextBox1.Text += "彩虹化圖片\n";
             string filename = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
-            pictureBox1.Image = ToRainbow(filename);
+
+            Bitmap bmp = image_processing28(filename);
+            pictureBox1.Image = bmp;
         }
 
-        private Bitmap ToRainbow(string filename)
+        private Bitmap image_processing28(string filename)
         {
-            Image image = Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            lb_main_mesg.Text = "彩虹化圖片";
+            Application.DoEvents();
 
-            //get image dimension
-            int width = image.Width;
-            int height = image.Height;
+            Bitmap bitmap1 = new Bitmap(filename);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H);
 
-            Bitmap bmp = new Bitmap(width, height);
-            using (Graphics gr = Graphics.FromImage(bmp))
+            using (Graphics gr = Graphics.FromImage(bitmap2))
             {
                 // Define target colors.
                 Color[] color =
@@ -1825,23 +1812,65 @@ namespace vcs_ImageProcessing3
                     attr.SetColorMatrix(cm);
 
                     // Draw the next part of the image.
-                    int x = (int)(i * image.Width / color.Length);
+                    int x = (int)(i * bitmap1.Width / color.Length);
                     Point[] points =
                     {
                         new Point(x, 0),
-                        new Point(width, 0),
-                        new Point(x, height),
+                        new Point(W, 0),
+                        new Point(x, H),
                     };
-                    Rectangle rect = new Rectangle(x, 0, width - x, height);
-                    gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attr);
+                    Rectangle rect = new Rectangle(x, 0, W - x, H);
+                    gr.DrawImage(bitmap1, points, rect, GraphicsUnit.Pixel, attr);
                 }
             }
-            return bmp;
+            return bitmap2;
         }
 
         private void bt_image_process_p29_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "單色處理\n";
+            Bitmap bmp = image_processing29(filename);
+            pictureBox1.Image = bmp;
+        }
 
+        private Bitmap image_processing29(string filename)
+        {
+            lb_main_mesg.Text = "單色處理";
+            Application.DoEvents();
+
+            Bitmap bitmap1 = new Bitmap(filename);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            //Bitmap bitmap2 = new Bitmap(W, H);
+
+            // Make the ColorMatrix.
+            ColorMatrix cm = new ColorMatrix(new float[][]
+            {
+                new float[] {0.299f, 0.299f, 0.299f, 0, 0},
+                new float[] {0.587f, 0.587f, 0.587f, 0, 0},
+                new float[] {0.114f, 0.114f, 0.114f, 0, 0},
+                new float[] { 0, 0, 0, 1, 0},
+                new float[] { 0, 0, 0, 0, 1}
+            });
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetColorMatrix(cm);
+
+            // Draw the image onto the new bitmap while applying the new ColorMatrix.
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(W - 1, 0),
+                new Point(0, H - 1),
+            };
+            Rectangle rect = new Rectangle(0, 0, W, H);
+
+            // Make the result bitmap.
+            Bitmap bm = new Bitmap(W, H);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.DrawImage(bitmap1, points, rect, GraphicsUnit.Pixel, attributes);
+            }
+            return bm;
         }
 
         private void bt_image_process_p30_Click(object sender, EventArgs e)

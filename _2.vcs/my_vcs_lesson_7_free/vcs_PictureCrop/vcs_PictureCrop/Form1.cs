@@ -121,11 +121,16 @@ namespace vcs_PictureCrop
             groupBox_selection.Location = new Point(x_st + dx * 1+50, y_st + dy * 0 + 400);
             groupBox_selection.BringToFront();
 
+            groupBox_resize.Size = new Size(340, 200);
+            groupBox_resize.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0 + 400+200);
+            groupBox_resize.BringToFront();
+
+
             bt_open_folder.BackgroundImage = Properties.Resources.folder_open;
             bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
 
-            richTextBox1.Size = new Size(340, 450);
-            richTextBox1.Location = new Point(x_st + dx * 1+50, y_st + dy * 0 + groupBox_selection.Height + 400);
+            richTextBox1.Size = new Size(340, 250);
+            richTextBox1.Location = new Point(x_st + dx * 1+50, y_st + dy * 0 + groupBox_selection.Height + 400+200);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
