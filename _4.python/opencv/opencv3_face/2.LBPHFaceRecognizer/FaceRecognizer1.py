@@ -1,4 +1,6 @@
 """
+cv2.face.LBPHFaceRecognizer_create()
+
 FaceRecognizer1
 
 

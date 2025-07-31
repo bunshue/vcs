@@ -1045,6 +1045,67 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+print("取兩圖的影像差異 diff")
+
+filename_diff1 = "C:/_git/vcs/_1.data/______test_files1/compare/compare1.jpg"
+filename_diff2 = "C:/_git/vcs/_1.data/______test_files1/compare/compare2.jpg"
+
+img1 = cv2.imread(filename_diff1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+img2 = cv2.imread(filename_diff2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+
+print("image1.shape內容 :", img1.shape)
+print("image2.shape內容 :", img2.shape)
+
+# 比較並顯示差異影像
+diff = cv2.absdiff(img1, img2)
+
+plt.figure(figsize=(12, 8))
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(img1, cv2.COLOR_BGR2RGB))
+plt.title("原圖1")
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))
+plt.title("原圖2")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(diff, cv2.COLOR_BGR2RGB))
+plt.title("Difference")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("疊合")
+
+filename_add1 = "C:/_git/vcs/_1.data/______test_files1/ims02.bmp"
+filename_add2 = "C:/_git/vcs/_1.data/______test_files1/ims03.bmp"
+
+img1 = cv2.imread(filename_add1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+img2 = cv2.imread(filename_add2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+
+blended = cv2.addWeighted(img1, 1, img2, 1, 0)
+
+plt.figure(figsize=(12, 8))
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(img1, cv2.COLOR_BGR2RGB))
+plt.title("原圖1")
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))
+plt.title("原圖2")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(blended, cv2.COLOR_BGR2RGB))
+plt.title("疊合")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

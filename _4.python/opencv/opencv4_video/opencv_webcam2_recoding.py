@@ -25,6 +25,41 @@ VideoWriter_fourcc("F", "L", "V", "1")	.flv	Flash視訊
 import datetime
 from opencv_common import *
 
+print("------------------------------------------------------------")  # 60個
+
+record_filename = "tmp1_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".avi"
+
+cap = cv2.VideoCapture(0)
+
+# 建立視訊編碼 fourcc
+ENCODING_TYPE = "XVID"  # 編碼器 MPEG-4
+fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)
+
+width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))  # 取得影像寬度
+height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
+fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
+
+# 建立影像寫入器 out
+out = cv2.VideoWriter(record_filename, fourcc, fps, (width, height))
+
+while cap.isOpened():
+    ret, frame = cap.read()
+    if ret:
+        now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+        x_st, y_st = 20, 40
+        drawText(frame, x_st, y_st, now, scale=1.0, color=BLUE)  # 加入文字
+        out.write(frame)  # 寫入影片物件
+        cv2.imshow("frame", frame)  # 顯示攝影鏡頭的影像
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
+    if k == ESC:  # 按 ESC 鍵, 結束
+        break
+
+cap.release()
+out.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 RECORD_TIME_MINUTE = 10  # 分
 RECORD_DATA_SIZE = 100  # MB
@@ -41,7 +76,7 @@ SPEED = 10  # N 倍速
 
 # 第一種
 # 用 XVID 格式存 avi 檔
-record_filename = "tmp1a_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".avi"
+record_filename = "tmp1_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".avi"
 ENCODING_TYPE = "XVID"  # 編碼器
 
 """
@@ -60,7 +95,6 @@ ENCODING_TYPE = "MJPG"  # 編碼器
 record_filename = "tmp3_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mov"
 ENCODING_TYPE = "MJPG"  # 編碼器
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -69,7 +103,7 @@ print("最簡錄影, 一直錄, 按 ESC 離開")
 if MODE == MODE_3:  # 縮時錄影
     print("縮時錄影,", SPEED, "倍速")
 
-record_filename = "tmp1b_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".avi"
+record_filename = "tmp1_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".avi"
 
 cap = cv2.VideoCapture(0)
 
@@ -183,7 +217,7 @@ while True:
         print("預計錄影時間 :", RECORD_TIME_MINUTE, "分")
         print("錄影時間(分) :", end="")
         record_filename = (
-            "tmp1c_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".avi"
+            "tmp1_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".avi"
         )
         # 建立視訊編碼 fourcc
         fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)
@@ -207,38 +241,6 @@ print("存檔檔名 :", record_filename)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-record_filename = "tmp1d_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".avi"
-
-cap = cv2.VideoCapture(0)
-
-# 建立視訊編碼 fourcc
-fourcc = cv2.VideoWriter_fourcc(*"XVID")  # MPEG-4
-
-fps = 20.0
-width, height = 640, 480
-# 建立影像寫入器 out
-out = cv2.VideoWriter(record_filename, fourcc, fps, (width, height))
-
-while cap.isOpened():
-    ret, frame = cap.read()
-    if ret:
-        out.write(frame)  # 寫入影片物件
-        cv2.imshow("frame", frame)  # 顯示攝影鏡頭的影像
-    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
-    if k == ESC:  # 按 ESC 鍵, 結束
-        break
-
-cap.release()
-out.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -248,7 +250,6 @@ print("螢幕錄影程式 2 分鐘")
 """
 # 螢幕錄影程式
 螢幕錄影 無聲音
-# 每一秒截一張圖 用 1 fps 錄製
 是否任意停止皆可成檔案?
 """
 
@@ -265,14 +266,15 @@ print("image mode:", image.mode)
 k = np.zeros((width, height), np.uint8)
 
 # 建立視訊編碼 fourcc
-fourcc = cv2.VideoWriter_fourcc(*"XVID")  # 编码格式
+ENCODING_TYPE = "XVID"  # 編碼器 MPEG-4
+fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)
 
 now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 print("現在時間 :", now)
 
-fps = 1
-record_filename = "tmp1e_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".avi"
+record_filename = "tmp1_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".avi"
 
+fps = 1  # 每一秒截一張圖 用 1 fps 錄製
 # 建立影像寫入器 out
 out = cv2.VideoWriter(record_filename, fourcc, fps, (width, height))
 
@@ -334,14 +336,14 @@ fourcc = cap.get(cv2.CAP_PROP_FOURCC)  # 取得 Codec 名稱
 codec = decode_fourcc(fourcc)
 print("Codec: " + codec)
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 若要錄成黑白影片 要 加上 isColor=False 參數設定
 
 # 建立視訊編碼 fourcc
-ENCODING_TYPE = "XVID"  # 編碼器
-fourcc = cv2.VideoWriter_fourcc(*"XVID")
+ENCODING_TYPE = "XVID"  # 編碼器 MPEG-4
+fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)
 
 # 建立影像寫入器 out
 out = cv2.VideoWriter(record_filename, fourcc, fps, (width, height), isColor=False)
@@ -352,7 +354,7 @@ out.write(gray)  # 將圖像寫入影片
 
 # 留下錄影部分 比較之
 
-fps = 1
+fps = 1  # 每一秒截一張圖 用 1 fps 錄製
 # 建立影像寫入器 out
 out = cv2.VideoWriter(record_filename, fourcc, fps, ImageGrab.grab().size)
 
