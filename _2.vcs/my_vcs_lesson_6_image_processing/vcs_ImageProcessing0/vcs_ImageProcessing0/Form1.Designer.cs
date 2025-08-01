@@ -69,9 +69,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1160, 0);
+            this.richTextBox1.Location = new System.Drawing.Point(463, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(291, 731);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -151,7 +151,7 @@
             // bt_restore
             // 
             this.bt_restore.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_restore.Location = new System.Drawing.Point(477, 14);
+            this.bt_restore.Location = new System.Drawing.Point(478, 120);
             this.bt_restore.Name = "bt_restore";
             this.bt_restore.Size = new System.Drawing.Size(70, 60);
             this.bt_restore.TabIndex = 10;
@@ -302,7 +302,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1381, 671);
+            this.bt_clear.Location = new System.Drawing.Point(488, 42);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(60, 32);
             this.bt_clear.TabIndex = 33;
@@ -323,7 +323,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1451, 731);
+            this.ClientSize = new System.Drawing.Size(874, 731);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button19);

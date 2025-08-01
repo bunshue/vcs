@@ -110,13 +110,11 @@ namespace vcs__all
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
             numericUpDown3.Value = trackBar2.Value;
-
         }
 
         private void numericUpDown3_ValueChanged(object sender, EventArgs e)
         {
             trackBar2.Value = (Int32)numericUpDown3.Value;
-
         }
     }
 }

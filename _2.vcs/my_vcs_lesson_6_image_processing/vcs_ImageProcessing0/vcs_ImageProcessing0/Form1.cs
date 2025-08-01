@@ -105,7 +105,6 @@ namespace vcs_ImageProcessing0
 
             richTextBox1.Size = new Size(700, 900);
             richTextBox1.Location = new Point(x_st + dx * 8 + 80, y_st + dy * 0);
-
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //最大化螢幕
@@ -1255,8 +1254,6 @@ namespace vcs_ImageProcessing0
             {
                 richTextBox1.Text += "位元深度\tunknown, PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
             }
-
-
         }
     }
 }
@@ -1455,10 +1452,6 @@ Bitmap bmp = new Bitmap(W, H, PixelFormat.Format8bppIndexed);
             bitmap = (Bitmap)Image.FromStream(ms);
 
             //pictureBox2.Image = bitmap;       //將圖片顯示於 PictureBox 中
-
-
-
-
 
 */
 

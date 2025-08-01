@@ -50,17 +50,32 @@ def get_image_contours(src):
     contours, hierarchy = cv2.findContours(
         dst_binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE
     )
-    print("資料類型 :", type(contours))
-    print("輪廓數量 :", len(contours))
-    # print(contours)
+    get_contours_info(contours)
     return contours, hierarchy
 
+def get_contours_info(contours):
+    # print("資料類型 :", type(contours))
+    print("輪廓數量 :", len(contours))
+    # print(contours)
+    """
+    # 看 contours 資料 ST
+    cnt = contours[0]  # 取得輪廓數據
+    print(f"資料格式 = {type(cnt)}")
+    print(f"資料維度 = {cnt.ndim}")
+    print(f"資料長度 = {len(cnt)}")
+    for i in range(3):  # 列印 3 個座標點
+        print(cnt[i])
+    # 看 contours 資料 SP
+    """
 
 print("------------------------------------------------------------")  # 60個
 
 # coin.jpg用圖片先處理方法一
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coin.jpg"
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology/moon.jpg"
+filename = "C:/_git/vcs/_4.python/opencv/data/_mask/cloud.jpg"
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.bmp"
 
 image0 = cv2.imread(filename)  # 彩色讀取
 image = image0.copy()
@@ -86,21 +101,7 @@ contours, hierarchy = cv2.findContours(
 )
 """
 
-print("資料類型 :", type(contours))
-print("輪廓數量 :", len(contours))
-# print(contours)
-
-# 看 contours 資料 ST
-
-cnt = contours[0]  # 取得輪廓數據
-
-print(f"資料格式 = {type(cnt)}")
-print(f"資料維度 = {cnt.ndim}")
-print(f"資料長度 = {len(cnt)}")
-
-for i in range(3):  # 列印 3 個座標點
-    print(cnt[i])
-# 看 contours 資料 SP
+get_contours_info(contours)
 
 image2 = image.copy()
 
@@ -111,8 +112,8 @@ linewidth = 2  # 線寬
 # image2 = cv2.drawContours(image2,contours,index, RED, linewidth)  # image2為三通道才能顯示輪廓, 用紅框標示出來
 
 # 分開畫
-length = len(contours)
-for index in range(length):
+n = len(contours)  # 輪廓數量
+for index in range(n):
     # 繪製圖形外輪廓
     image2 = cv2.drawContours(
         image2, contours, index, color[index % 9], linewidth
@@ -126,6 +127,39 @@ plt.title("原圖")
 plt.subplot(122)
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
 plt.title("尋找 Contours")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coin.jpg"
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/morphology/moon.jpg"
+filename = "C:/_git/vcs/_4.python/opencv/data/_mask/cloud.jpg"
+#filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.bmp"
+
+image0 = cv2.imread(filename)  # 彩色讀取
+image = image0.copy()
+
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+edged = cv2.Canny(image_gray, 30, 200)
+
+contours, hierarchy = cv2.findContours(edged, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+
+get_contours_info(contours)
+
+# 繪製圖形外輪廓
+cv2.drawContours(image, contours, -1, BLUE, 2)
+
+plt.figure(figsize=(10, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("Contours")
 
 show()
 
@@ -149,9 +183,7 @@ contours, hierarchy = cv2.findContours(
     edged, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
 )
 
-print("資料類型 :", type(contours))
-print("輪廓數量 :", len(contours))
-# print(contours)
+get_contours_info(contours)
 
 RECT, HEXAGON = 0, 1
 
@@ -206,9 +238,7 @@ contours, hierarchy = cv2.findContours(
     edged, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
 )
 
-print("資料類型 :", type(contours))
-print("輪廓數量 :", len(contours))
-# print(contours)
+get_contours_info(contours)
 
 cnt = contours[0]  # 取得輪廓數據
 
@@ -233,37 +263,6 @@ plt.title("原圖")
 
 plt.subplot(122)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
-
-image0 = cv2.imread(filename)  # 彩色讀取
-image = image0.copy()
-
-image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
-edged = cv2.Canny(image_gray, 30, 200)
-
-contours, hierarchy = cv2.findContours(edged, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-
-print("資料類型 :", type(contours))
-print("輪廓數量 :", len(contours))
-# print(contours)
-
-# 繪製圖形外輪廓
-cv2.drawContours(image, contours, -1, BLUE, 2)
-
-plt.figure(figsize=(10, 8))
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("Contours")
 
 show()
 
@@ -404,7 +403,7 @@ contours, hierarchy = get_image_contours(src)
 # dst = cv2.drawContours(src, contours, -1, GREEN, 5)# 繪製圖形外輪廓
 
 # 依序畫每個輪廓
-n = len(contours)  # 回傳輪廓數
+n = len(contours)  # 輪廓數量
 
 for i in range(n):  # 輸出輪廓的屬性
     print(f"編號 = {i}")
@@ -415,7 +414,7 @@ print(contours[1])  # 列印編號1的輪廓點
 
 dst = np.ones(src.shape, dtype=np.uint8) * 100
 
-n = len(contours)  # 回傳輪廓數
+n = len(contours)  # 輪廓數量
 for i in range(n):  # 依次繪製輪廓
     img = np.zeros(src.shape, np.uint8)  # 建立輪廓影像
     img = np.ones(src.shape, dtype=np.uint8) * 127
@@ -460,13 +459,13 @@ plt.axis("off")
 
 show()
 
-n = len(contours)
+n = len(contours)  # 輪廓數量
 for i in range(n):  # 繪製中心點迴圈
     M = cv2.moments(contours[i])  # 影像矩
     con_area = cv2.contourArea(contours[i])  # 計算輪廓面積
     print(f"輪廓 {i} 面積 = {con_area}")
 
-n = len(contours)
+n = len(contours)  # 輪廓數量
 for i in range(n):  # 繪製中心點迴圈
     M = cv2.moments(contours[i])  # 影像矩
     perimeter = cv2.arcLength(contours[i], True)  # 計算輪廓周長
@@ -742,6 +741,7 @@ contours, hierarchy = get_image_contours(src)
 # 近似多邊形包圍
 
 n = len(contours)  # 輪廓數量
+
 src1 = src.copy()  # 複製src影像
 src2 = src.copy()  # 複製src影像
 for i in range(n):
@@ -866,6 +866,7 @@ contours, hierarchy = get_image_contours(src)
 # 凸包
 
 n = len(contours)  # 輪廓數量
+
 for i in range(n):
     hull = cv2.convexHull(contours[i])  # 獲得凸包頂點座標
     dst = cv2.polylines(src, [hull], True, GREEN, 2)  # 將凸包連線
@@ -1397,9 +1398,8 @@ binaryImg = cv2.Canny(image, 50, 200)
 
 # 尋找輪廓
 contours, hierarchy = cv2.findContours(binaryImg, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
-print("資料類型 :", type(contours))
-print("輪廓數量 :", len(contours))
-# print(contours)
+
+get_contours_info(contours)
 
 # 對這些點集，求每一個點集最小
 # 最小外包凸包
@@ -1416,7 +1416,8 @@ convexhull = cv2.convexHull(contours[7])
 # 繪製圖形外輪廓
 cv2.drawContours(contoursImg, contours, 7, 255, 3)  # 多點頭尾連線
 
-for i in range(len(contours)):
+n = len(contours)  # 輪廓數量
+for i in range(n):
     # ----- 最小外包圓 -------
     circle = cv2.minEnclosingCircle(contours[i])
     # 畫圓
@@ -1459,12 +1460,11 @@ cvshow("binaryImg", binaryImg)
 contours, hierarchy = cv2.findContours(
     binaryImg, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
 )
-print("資料類型 :", type(contours))
-print("輪廓數量 :", len(contours))
-# print(contours)
 
-# 輪廓的數量
-n = len(contours)
+get_contours_info(contours)
+
+n = len(contours)  # 輪廓數量
+
 contoursImg = []
 # 畫出找到的輪廓
 for i in range(n):
@@ -1506,9 +1506,7 @@ hc = cv2.findContours(dst, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 contours = hc[1]
 print(contours)
 
-print("資料類型 :", type(contours))
-print("輪廓數量 :", len(contours))
-# print(contours)
+get_contours_info(contours)
 
 # 第三步：畫出找到的輪廓并用多邊形擬合輪廓
 # 輪廓的數量
@@ -1636,9 +1634,7 @@ ret, dst_binary = cv2.threshold(image_gray, thresh, maxval, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(
     dst_binary.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_TC89_L1
 )
-print("資料類型 :", type(contours))
-print("輪廓數量 :", len(contours))
-# print(contours)
+get_contours_info(contours)
 
 hierarchy.shape = -1, 4
 
@@ -1911,8 +1907,7 @@ contours, hierarchy = cv2.findContours(
     binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
 )
 
-n = len(contours)  # 獲取輪廓個數
-print("總共找到", n, "個輪廓")
+n = len(contours)  # 輪廓數量
 
 contoursImg = []
 for i in range(n):
@@ -1976,8 +1971,7 @@ ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值�
 
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
-n = len(contours)  # 獲取輪廓個數
-print("總共找到", n, "個輪廓")
+n = len(contours)  # 輪廓數量
 
 contoursImg = []
 for i in range(n):
@@ -2015,8 +2009,7 @@ ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值�
 
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
-n = len(contours)  # 獲取輪廓個數
-print("總共找到", n, "個輪廓")
+n = len(contours)  # 輪廓數量
 
 contoursImg = []
 for i in range(n):
@@ -2055,8 +2048,7 @@ ret, binary = cv2.threshold(
 
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
-n = len(contours)  # 獲取輪廓個數
-print("總共找到", n, "個輪廓")
+n = len(contours)  # 輪廓數量
 
 contoursImg = []
 for i in range(n):

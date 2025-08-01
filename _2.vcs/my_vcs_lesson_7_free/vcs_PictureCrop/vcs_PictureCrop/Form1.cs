@@ -681,5 +681,28 @@ namespace vcs_PictureCrop
             richTextBox1.Text += "圖框位置 : (" + x_st.ToString() + ", " + y_st.ToString() + ")\n";
             richTextBox1.Text += "圖片位置 : (" + X.ToString() + ", " + Y.ToString() + ")\n";
         }
+
+        private void trackBar_w_Scroll(object sender, EventArgs e)
+        {
+            tb_w.Text = trackBar_w.Value.ToString();
+        }
+
+        private void trackBar_h_Scroll(object sender, EventArgs e)
+        {
+            tb_h.Text = trackBar_h.Value.ToString();
+
+        }
+
+        private void bt_restore_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_save2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

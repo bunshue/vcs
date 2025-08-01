@@ -51,20 +51,20 @@
             this.button0 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox_resize = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.button1 = new System.Windows.Forms.Button();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.button2 = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.button4 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lb_w2 = new System.Windows.Forms.Label();
+            this.lb_h2 = new System.Windows.Forms.Label();
+            this.trackBar_h = new System.Windows.Forms.TrackBar();
+            this.trackBar_w = new System.Windows.Forms.TrackBar();
+            this.cb_keep_ratio = new System.Windows.Forms.CheckBox();
+            this.tb_w = new System.Windows.Forms.TextBox();
+            this.tb_h = new System.Windows.Forms.TextBox();
+            this.bt_save2 = new System.Windows.Forms.Button();
+            this.rb_resize_type0 = new System.Windows.Forms.RadioButton();
+            this.rb_resize_type3 = new System.Windows.Forms.RadioButton();
+            this.rb_resize_type2 = new System.Windows.Forms.RadioButton();
+            this.rb_resize_type1 = new System.Windows.Forms.RadioButton();
+            this.rb_resize_type4 = new System.Windows.Forms.RadioButton();
+            this.bt_restore = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox_selection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_h)).BeginInit();
@@ -73,10 +73,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox_resize.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_h)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_w)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -320,20 +318,20 @@
             // 
             // groupBox_resize
             // 
-            this.groupBox_resize.Controls.Add(this.checkBox1);
-            this.groupBox_resize.Controls.Add(this.radioButton1);
-            this.groupBox_resize.Controls.Add(this.button1);
-            this.groupBox_resize.Controls.Add(this.radioButton2);
-            this.groupBox_resize.Controls.Add(this.button2);
-            this.groupBox_resize.Controls.Add(this.numericUpDown1);
-            this.groupBox_resize.Controls.Add(this.label1);
-            this.groupBox_resize.Controls.Add(this.numericUpDown2);
-            this.groupBox_resize.Controls.Add(this.button4);
-            this.groupBox_resize.Controls.Add(this.label2);
-            this.groupBox_resize.Controls.Add(this.numericUpDown3);
-            this.groupBox_resize.Controls.Add(this.numericUpDown4);
-            this.groupBox_resize.Controls.Add(this.label3);
-            this.groupBox_resize.Controls.Add(this.label4);
+            this.groupBox_resize.Controls.Add(this.rb_resize_type4);
+            this.groupBox_resize.Controls.Add(this.rb_resize_type1);
+            this.groupBox_resize.Controls.Add(this.rb_resize_type2);
+            this.groupBox_resize.Controls.Add(this.rb_resize_type3);
+            this.groupBox_resize.Controls.Add(this.rb_resize_type0);
+            this.groupBox_resize.Controls.Add(this.cb_keep_ratio);
+            this.groupBox_resize.Controls.Add(this.bt_restore);
+            this.groupBox_resize.Controls.Add(this.tb_h);
+            this.groupBox_resize.Controls.Add(this.tb_w);
+            this.groupBox_resize.Controls.Add(this.lb_w2);
+            this.groupBox_resize.Controls.Add(this.lb_h2);
+            this.groupBox_resize.Controls.Add(this.bt_save2);
+            this.groupBox_resize.Controls.Add(this.trackBar_h);
+            this.groupBox_resize.Controls.Add(this.trackBar_w);
             this.groupBox_resize.Location = new System.Drawing.Point(237, 229);
             this.groupBox_resize.Name = "groupBox_resize";
             this.groupBox_resize.Size = new System.Drawing.Size(300, 200);
@@ -341,168 +339,165 @@
             this.groupBox_resize.TabStop = false;
             this.groupBox_resize.Text = "縮放大小";
             // 
-            // checkBox1
+            // lb_w2
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(180, 180);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(72, 16);
-            this.checkBox1.TabIndex = 22;
-            this.checkBox1.Text = "覆蓋原檔";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.lb_w2.AutoSize = true;
+            this.lb_w2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_w2.Location = new System.Drawing.Point(15, 54);
+            this.lb_w2.Name = "lb_w2";
+            this.lb_w2.Size = new System.Drawing.Size(34, 24);
+            this.lb_w2.TabIndex = 6;
+            this.lb_w2.Text = "寬";
             // 
-            // radioButton1
+            // lb_h2
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.radioButton1.Location = new System.Drawing.Point(180, 155);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(54, 20);
-            this.radioButton1.TabIndex = 21;
-            this.radioButton1.Text = "bmp";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.lb_h2.AutoSize = true;
+            this.lb_h2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_h2.Location = new System.Drawing.Point(15, 93);
+            this.lb_h2.Name = "lb_h2";
+            this.lb_h2.Size = new System.Drawing.Size(34, 24);
+            this.lb_h2.TabIndex = 8;
+            this.lb_h2.Text = "高";
             // 
-            // button1
+            // trackBar_h
             // 
-            this.button1.Location = new System.Drawing.Point(235, 126);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(40, 40);
-            this.button1.TabIndex = 20;
-            this.button1.UseVisualStyleBackColor = true;
+            this.trackBar_h.Location = new System.Drawing.Point(235, 47);
+            this.trackBar_h.Maximum = 120;
+            this.trackBar_h.Minimum = 1;
+            this.trackBar_h.Name = "trackBar_h";
+            this.trackBar_h.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBar_h.Size = new System.Drawing.Size(45, 129);
+            this.trackBar_h.TabIndex = 24;
+            this.trackBar_h.Value = 100;
+            this.trackBar_h.Scroll += new System.EventHandler(this.trackBar_h_Scroll);
             // 
-            // radioButton2
+            // trackBar_w
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Checked = true;
-            this.radioButton2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.radioButton2.Location = new System.Drawing.Point(180, 130);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(46, 20);
-            this.radioButton2.TabIndex = 20;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "jpg";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.trackBar_w.Location = new System.Drawing.Point(19, 18);
+            this.trackBar_w.Maximum = 120;
+            this.trackBar_w.Minimum = 1;
+            this.trackBar_w.Name = "trackBar_w";
+            this.trackBar_w.Size = new System.Drawing.Size(264, 45);
+            this.trackBar_w.TabIndex = 25;
+            this.trackBar_w.Value = 100;
+            this.trackBar_w.Scroll += new System.EventHandler(this.trackBar_w_Scroll);
             // 
-            // button2
+            // cb_keep_ratio
             // 
-            this.button2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(185, 80);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(90, 40);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "save";
-            this.button2.UseVisualStyleBackColor = true;
+            this.cb_keep_ratio.AutoSize = true;
+            this.cb_keep_ratio.Checked = true;
+            this.cb_keep_ratio.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_keep_ratio.Location = new System.Drawing.Point(19, 133);
+            this.cb_keep_ratio.Name = "cb_keep_ratio";
+            this.cb_keep_ratio.Size = new System.Drawing.Size(72, 16);
+            this.cb_keep_ratio.TabIndex = 22;
+            this.cb_keep_ratio.Text = "保持比例";
+            this.cb_keep_ratio.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown1
+            // tb_w
             // 
-            this.numericUpDown1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown1.Location = new System.Drawing.Point(83, 152);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(74, 33);
-            this.numericUpDown1.TabIndex = 16;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_w.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_w.Location = new System.Drawing.Point(55, 53);
+            this.tb_w.Name = "tb_w";
+            this.tb_w.Size = new System.Drawing.Size(80, 33);
+            this.tb_w.TabIndex = 23;
+            this.tb_w.Text = "123456";
+            this.tb_w.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // label1
+            // tb_h
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(30, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 24);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "x_st";
+            this.tb_h.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_h.Location = new System.Drawing.Point(55, 89);
+            this.tb_h.Name = "tb_h";
+            this.tb_h.Size = new System.Drawing.Size(80, 33);
+            this.tb_h.TabIndex = 24;
+            this.tb_h.Text = "123456";
+            this.tb_h.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // numericUpDown2
+            // bt_save2
             // 
-            this.numericUpDown2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown2.Location = new System.Drawing.Point(83, 110);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(74, 33);
-            this.numericUpDown2.TabIndex = 15;
-            this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.bt_save2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_save2.Location = new System.Drawing.Point(149, 92);
+            this.bt_save2.Name = "bt_save2";
+            this.bt_save2.Size = new System.Drawing.Size(80, 30);
+            this.bt_save2.TabIndex = 23;
+            this.bt_save2.Text = "save";
+            this.bt_save2.UseVisualStyleBackColor = true;
+            this.bt_save2.Click += new System.EventHandler(this.bt_save2_Click);
             // 
-            // button4
+            // rb_resize_type0
             // 
-            this.button4.Location = new System.Drawing.Point(185, 26);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(90, 40);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "Info";
-            this.button4.UseVisualStyleBackColor = true;
+            this.rb_resize_type0.AutoSize = true;
+            this.rb_resize_type0.Checked = true;
+            this.rb_resize_type0.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_resize_type0.Location = new System.Drawing.Point(88, 130);
+            this.rb_resize_type0.Name = "rb_resize_type0";
+            this.rb_resize_type0.Size = new System.Drawing.Size(58, 20);
+            this.rb_resize_type0.TabIndex = 23;
+            this.rb_resize_type0.TabStop = true;
+            this.rb_resize_type0.Text = "自訂";
+            this.rb_resize_type0.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // rb_resize_type3
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(42, 153);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(21, 24);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "h";
+            this.rb_resize_type3.AutoSize = true;
+            this.rb_resize_type3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_resize_type3.Location = new System.Drawing.Point(92, 161);
+            this.rb_resize_type3.Name = "rb_resize_type3";
+            this.rb_resize_type3.Size = new System.Drawing.Size(58, 20);
+            this.rb_resize_type3.TabIndex = 23;
+            this.rb_resize_type3.Text = "一半";
+            this.rb_resize_type3.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown3
+            // rb_resize_type2
             // 
-            this.numericUpDown3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown3.Location = new System.Drawing.Point(83, 69);
-            this.numericUpDown3.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(74, 33);
-            this.numericUpDown3.TabIndex = 14;
-            this.numericUpDown3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.rb_resize_type2.AutoSize = true;
+            this.rb_resize_type2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_resize_type2.Location = new System.Drawing.Point(22, 161);
+            this.rb_resize_type2.Name = "rb_resize_type2";
+            this.rb_resize_type2.Size = new System.Drawing.Size(58, 20);
+            this.rb_resize_type2.TabIndex = 26;
+            this.rb_resize_type2.Text = "720p";
+            this.rb_resize_type2.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown4
+            // rb_resize_type1
             // 
-            this.numericUpDown4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown4.Location = new System.Drawing.Point(83, 26);
-            this.numericUpDown4.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(74, 33);
-            this.numericUpDown4.TabIndex = 13;
-            this.numericUpDown4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.rb_resize_type1.AutoSize = true;
+            this.rb_resize_type1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_resize_type1.Location = new System.Drawing.Point(158, 130);
+            this.rb_resize_type1.Name = "rb_resize_type1";
+            this.rb_resize_type1.Size = new System.Drawing.Size(66, 20);
+            this.rb_resize_type1.TabIndex = 26;
+            this.rb_resize_type1.Text = "1080p";
+            this.rb_resize_type1.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // rb_resize_type4
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(30, 69);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 24);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "y_st";
+            this.rb_resize_type4.AutoSize = true;
+            this.rb_resize_type4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_resize_type4.Location = new System.Drawing.Point(156, 161);
+            this.rb_resize_type4.Name = "rb_resize_type4";
+            this.rb_resize_type4.Size = new System.Drawing.Size(90, 20);
+            this.rb_resize_type4.TabIndex = 27;
+            this.rb_resize_type4.Text = "四分之一";
+            this.rb_resize_type4.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // bt_restore
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label4.Location = new System.Drawing.Point(42, 111);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(26, 24);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "w";
+            this.bt_restore.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_restore.Location = new System.Drawing.Point(149, 53);
+            this.bt_restore.Name = "bt_restore";
+            this.bt_restore.Size = new System.Drawing.Size(80, 30);
+            this.bt_restore.TabIndex = 28;
+            this.bt_restore.Text = "恢復";
+            this.bt_restore.UseVisualStyleBackColor = true;
+            this.bt_restore.Click += new System.EventHandler(this.bt_restore_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1265, 744);
+            this.ClientSize = new System.Drawing.Size(656, 523);
             this.Controls.Add(this.groupBox_resize);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button0);
@@ -525,10 +520,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox_resize.ResumeLayout(false);
             this.groupBox_resize.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_h)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_w)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -557,20 +550,20 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox cb_overwrite;
         private System.Windows.Forms.GroupBox groupBox_resize;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lb_w2;
+        private System.Windows.Forms.Label lb_h2;
+        private System.Windows.Forms.TrackBar trackBar_h;
+        private System.Windows.Forms.TrackBar trackBar_w;
+        private System.Windows.Forms.TextBox tb_h;
+        private System.Windows.Forms.TextBox tb_w;
+        private System.Windows.Forms.CheckBox cb_keep_ratio;
+        private System.Windows.Forms.Button bt_save2;
+        private System.Windows.Forms.Button bt_restore;
+        private System.Windows.Forms.RadioButton rb_resize_type4;
+        private System.Windows.Forms.RadioButton rb_resize_type1;
+        private System.Windows.Forms.RadioButton rb_resize_type2;
+        private System.Windows.Forms.RadioButton rb_resize_type3;
+        private System.Windows.Forms.RadioButton rb_resize_type0;
     }
 }
 
