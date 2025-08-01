@@ -51,20 +51,20 @@
             this.button0 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox_resize = new System.Windows.Forms.GroupBox();
+            this.rb_resize_type4 = new System.Windows.Forms.RadioButton();
+            this.rb_resize_type1 = new System.Windows.Forms.RadioButton();
+            this.rb_resize_type2 = new System.Windows.Forms.RadioButton();
+            this.rb_resize_type3 = new System.Windows.Forms.RadioButton();
+            this.rb_resize_type0 = new System.Windows.Forms.RadioButton();
+            this.cb_keep_ratio = new System.Windows.Forms.CheckBox();
+            this.bt_restore = new System.Windows.Forms.Button();
+            this.tb_h = new System.Windows.Forms.TextBox();
+            this.tb_w = new System.Windows.Forms.TextBox();
             this.lb_w2 = new System.Windows.Forms.Label();
             this.lb_h2 = new System.Windows.Forms.Label();
+            this.bt_save2 = new System.Windows.Forms.Button();
             this.trackBar_h = new System.Windows.Forms.TrackBar();
             this.trackBar_w = new System.Windows.Forms.TrackBar();
-            this.cb_keep_ratio = new System.Windows.Forms.CheckBox();
-            this.tb_w = new System.Windows.Forms.TextBox();
-            this.tb_h = new System.Windows.Forms.TextBox();
-            this.bt_save2 = new System.Windows.Forms.Button();
-            this.rb_resize_type0 = new System.Windows.Forms.RadioButton();
-            this.rb_resize_type3 = new System.Windows.Forms.RadioButton();
-            this.rb_resize_type2 = new System.Windows.Forms.RadioButton();
-            this.rb_resize_type1 = new System.Windows.Forms.RadioButton();
-            this.rb_resize_type4 = new System.Windows.Forms.RadioButton();
-            this.bt_restore = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox_selection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_h)).BeginInit();
@@ -339,91 +339,49 @@
             this.groupBox_resize.TabStop = false;
             this.groupBox_resize.Text = "縮放大小";
             // 
-            // lb_w2
+            // rb_resize_type4
             // 
-            this.lb_w2.AutoSize = true;
-            this.lb_w2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_w2.Location = new System.Drawing.Point(15, 54);
-            this.lb_w2.Name = "lb_w2";
-            this.lb_w2.Size = new System.Drawing.Size(34, 24);
-            this.lb_w2.TabIndex = 6;
-            this.lb_w2.Text = "寬";
+            this.rb_resize_type4.AutoSize = true;
+            this.rb_resize_type4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_resize_type4.Location = new System.Drawing.Point(156, 161);
+            this.rb_resize_type4.Name = "rb_resize_type4";
+            this.rb_resize_type4.Size = new System.Drawing.Size(90, 20);
+            this.rb_resize_type4.TabIndex = 27;
+            this.rb_resize_type4.Text = "四分之一";
+            this.rb_resize_type4.UseVisualStyleBackColor = true;
             // 
-            // lb_h2
+            // rb_resize_type1
             // 
-            this.lb_h2.AutoSize = true;
-            this.lb_h2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_h2.Location = new System.Drawing.Point(15, 93);
-            this.lb_h2.Name = "lb_h2";
-            this.lb_h2.Size = new System.Drawing.Size(34, 24);
-            this.lb_h2.TabIndex = 8;
-            this.lb_h2.Text = "高";
+            this.rb_resize_type1.AutoSize = true;
+            this.rb_resize_type1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_resize_type1.Location = new System.Drawing.Point(158, 130);
+            this.rb_resize_type1.Name = "rb_resize_type1";
+            this.rb_resize_type1.Size = new System.Drawing.Size(66, 20);
+            this.rb_resize_type1.TabIndex = 26;
+            this.rb_resize_type1.Text = "1080p";
+            this.rb_resize_type1.UseVisualStyleBackColor = true;
             // 
-            // trackBar_h
+            // rb_resize_type2
             // 
-            this.trackBar_h.Location = new System.Drawing.Point(235, 47);
-            this.trackBar_h.Maximum = 120;
-            this.trackBar_h.Minimum = 1;
-            this.trackBar_h.Name = "trackBar_h";
-            this.trackBar_h.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar_h.Size = new System.Drawing.Size(45, 129);
-            this.trackBar_h.TabIndex = 24;
-            this.trackBar_h.Value = 100;
-            this.trackBar_h.Scroll += new System.EventHandler(this.trackBar_h_Scroll);
+            this.rb_resize_type2.AutoSize = true;
+            this.rb_resize_type2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_resize_type2.Location = new System.Drawing.Point(22, 161);
+            this.rb_resize_type2.Name = "rb_resize_type2";
+            this.rb_resize_type2.Size = new System.Drawing.Size(58, 20);
+            this.rb_resize_type2.TabIndex = 26;
+            this.rb_resize_type2.Text = "720p";
+            this.rb_resize_type2.UseVisualStyleBackColor = true;
             // 
-            // trackBar_w
+            // rb_resize_type3
             // 
-            this.trackBar_w.Location = new System.Drawing.Point(19, 18);
-            this.trackBar_w.Maximum = 120;
-            this.trackBar_w.Minimum = 1;
-            this.trackBar_w.Name = "trackBar_w";
-            this.trackBar_w.Size = new System.Drawing.Size(264, 45);
-            this.trackBar_w.TabIndex = 25;
-            this.trackBar_w.Value = 100;
-            this.trackBar_w.Scroll += new System.EventHandler(this.trackBar_w_Scroll);
-            // 
-            // cb_keep_ratio
-            // 
-            this.cb_keep_ratio.AutoSize = true;
-            this.cb_keep_ratio.Checked = true;
-            this.cb_keep_ratio.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_keep_ratio.Location = new System.Drawing.Point(19, 133);
-            this.cb_keep_ratio.Name = "cb_keep_ratio";
-            this.cb_keep_ratio.Size = new System.Drawing.Size(72, 16);
-            this.cb_keep_ratio.TabIndex = 22;
-            this.cb_keep_ratio.Text = "保持比例";
-            this.cb_keep_ratio.UseVisualStyleBackColor = true;
-            // 
-            // tb_w
-            // 
-            this.tb_w.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_w.Location = new System.Drawing.Point(55, 53);
-            this.tb_w.Name = "tb_w";
-            this.tb_w.Size = new System.Drawing.Size(80, 33);
-            this.tb_w.TabIndex = 23;
-            this.tb_w.Text = "123456";
-            this.tb_w.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // tb_h
-            // 
-            this.tb_h.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_h.Location = new System.Drawing.Point(55, 89);
-            this.tb_h.Name = "tb_h";
-            this.tb_h.Size = new System.Drawing.Size(80, 33);
-            this.tb_h.TabIndex = 24;
-            this.tb_h.Text = "123456";
-            this.tb_h.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // bt_save2
-            // 
-            this.bt_save2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_save2.Location = new System.Drawing.Point(149, 92);
-            this.bt_save2.Name = "bt_save2";
-            this.bt_save2.Size = new System.Drawing.Size(80, 30);
-            this.bt_save2.TabIndex = 23;
-            this.bt_save2.Text = "save";
-            this.bt_save2.UseVisualStyleBackColor = true;
-            this.bt_save2.Click += new System.EventHandler(this.bt_save2_Click);
+            this.rb_resize_type3.AutoSize = true;
+            this.rb_resize_type3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_resize_type3.Location = new System.Drawing.Point(92, 161);
+            this.rb_resize_type3.Name = "rb_resize_type3";
+            this.rb_resize_type3.Size = new System.Drawing.Size(58, 20);
+            this.rb_resize_type3.TabIndex = 23;
+            this.rb_resize_type3.Text = "一半";
+            this.rb_resize_type3.UseVisualStyleBackColor = true;
             // 
             // rb_resize_type0
             // 
@@ -438,49 +396,17 @@
             this.rb_resize_type0.Text = "自訂";
             this.rb_resize_type0.UseVisualStyleBackColor = true;
             // 
-            // rb_resize_type3
+            // cb_keep_ratio
             // 
-            this.rb_resize_type3.AutoSize = true;
-            this.rb_resize_type3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_resize_type3.Location = new System.Drawing.Point(92, 161);
-            this.rb_resize_type3.Name = "rb_resize_type3";
-            this.rb_resize_type3.Size = new System.Drawing.Size(58, 20);
-            this.rb_resize_type3.TabIndex = 23;
-            this.rb_resize_type3.Text = "一半";
-            this.rb_resize_type3.UseVisualStyleBackColor = true;
-            // 
-            // rb_resize_type2
-            // 
-            this.rb_resize_type2.AutoSize = true;
-            this.rb_resize_type2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_resize_type2.Location = new System.Drawing.Point(22, 161);
-            this.rb_resize_type2.Name = "rb_resize_type2";
-            this.rb_resize_type2.Size = new System.Drawing.Size(58, 20);
-            this.rb_resize_type2.TabIndex = 26;
-            this.rb_resize_type2.Text = "720p";
-            this.rb_resize_type2.UseVisualStyleBackColor = true;
-            // 
-            // rb_resize_type1
-            // 
-            this.rb_resize_type1.AutoSize = true;
-            this.rb_resize_type1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_resize_type1.Location = new System.Drawing.Point(158, 130);
-            this.rb_resize_type1.Name = "rb_resize_type1";
-            this.rb_resize_type1.Size = new System.Drawing.Size(66, 20);
-            this.rb_resize_type1.TabIndex = 26;
-            this.rb_resize_type1.Text = "1080p";
-            this.rb_resize_type1.UseVisualStyleBackColor = true;
-            // 
-            // rb_resize_type4
-            // 
-            this.rb_resize_type4.AutoSize = true;
-            this.rb_resize_type4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_resize_type4.Location = new System.Drawing.Point(156, 161);
-            this.rb_resize_type4.Name = "rb_resize_type4";
-            this.rb_resize_type4.Size = new System.Drawing.Size(90, 20);
-            this.rb_resize_type4.TabIndex = 27;
-            this.rb_resize_type4.Text = "四分之一";
-            this.rb_resize_type4.UseVisualStyleBackColor = true;
+            this.cb_keep_ratio.AutoSize = true;
+            this.cb_keep_ratio.Checked = true;
+            this.cb_keep_ratio.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_keep_ratio.Location = new System.Drawing.Point(19, 133);
+            this.cb_keep_ratio.Name = "cb_keep_ratio";
+            this.cb_keep_ratio.Size = new System.Drawing.Size(72, 16);
+            this.cb_keep_ratio.TabIndex = 22;
+            this.cb_keep_ratio.Text = "保持比例";
+            this.cb_keep_ratio.UseVisualStyleBackColor = true;
             // 
             // bt_restore
             // 
@@ -492,6 +418,84 @@
             this.bt_restore.Text = "恢復";
             this.bt_restore.UseVisualStyleBackColor = true;
             this.bt_restore.Click += new System.EventHandler(this.bt_restore_Click);
+            // 
+            // tb_h
+            // 
+            this.tb_h.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_h.Location = new System.Drawing.Point(48, 89);
+            this.tb_h.Name = "tb_h";
+            this.tb_h.Size = new System.Drawing.Size(70, 33);
+            this.tb_h.TabIndex = 24;
+            this.tb_h.Text = "100";
+            this.tb_h.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tb_w
+            // 
+            this.tb_w.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_w.Location = new System.Drawing.Point(48, 53);
+            this.tb_w.Name = "tb_w";
+            this.tb_w.Size = new System.Drawing.Size(70, 33);
+            this.tb_w.TabIndex = 23;
+            this.tb_w.Text = "100";
+            this.tb_w.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lb_w2
+            // 
+            this.lb_w2.AutoSize = true;
+            this.lb_w2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_w2.Location = new System.Drawing.Point(15, 54);
+            this.lb_w2.Name = "lb_w2";
+            this.lb_w2.Size = new System.Drawing.Size(131, 24);
+            this.lb_w2.TabIndex = 6;
+            this.lb_w2.Text = "寬             %";
+            // 
+            // lb_h2
+            // 
+            this.lb_h2.AutoSize = true;
+            this.lb_h2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_h2.Location = new System.Drawing.Point(15, 93);
+            this.lb_h2.Name = "lb_h2";
+            this.lb_h2.Size = new System.Drawing.Size(131, 24);
+            this.lb_h2.TabIndex = 8;
+            this.lb_h2.Text = "高             %";
+            // 
+            // bt_save2
+            // 
+            this.bt_save2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_save2.Location = new System.Drawing.Point(149, 92);
+            this.bt_save2.Name = "bt_save2";
+            this.bt_save2.Size = new System.Drawing.Size(80, 30);
+            this.bt_save2.TabIndex = 23;
+            this.bt_save2.Text = "save";
+            this.bt_save2.UseVisualStyleBackColor = true;
+            this.bt_save2.Click += new System.EventHandler(this.bt_save2_Click);
+            // 
+            // trackBar_h
+            // 
+            this.trackBar_h.Location = new System.Drawing.Point(235, 47);
+            this.trackBar_h.Maximum = 120;
+            this.trackBar_h.Minimum = 1;
+            this.trackBar_h.Name = "trackBar_h";
+            this.trackBar_h.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBar_h.Size = new System.Drawing.Size(45, 129);
+            this.trackBar_h.TabIndex = 24;
+            this.trackBar_h.Value = 100;
+            this.trackBar_h.Scroll += new System.EventHandler(this.trackBar_h_Scroll);
+            this.trackBar_h.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBar_h_MouseDown);
+            this.trackBar_h.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar_h_MouseUp);
+            // 
+            // trackBar_w
+            // 
+            this.trackBar_w.Location = new System.Drawing.Point(19, 18);
+            this.trackBar_w.Maximum = 120;
+            this.trackBar_w.Minimum = 1;
+            this.trackBar_w.Name = "trackBar_w";
+            this.trackBar_w.Size = new System.Drawing.Size(264, 45);
+            this.trackBar_w.TabIndex = 25;
+            this.trackBar_w.Value = 100;
+            this.trackBar_w.Scroll += new System.EventHandler(this.trackBar_w_Scroll);
+            this.trackBar_w.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBar_w_MouseDown);
+            this.trackBar_w.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar_w_MouseUp);
             // 
             // Form1
             // 

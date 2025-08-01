@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Drawing.Imaging;   //for ImageFormat
+using System.Drawing.Drawing2D;//for InterpolationMode
 
 namespace vcs_PictureResize
 {
@@ -39,6 +40,8 @@ namespace vcs_PictureResize
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            textBox1.Text = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery";
+
             string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
@@ -64,6 +67,26 @@ namespace vcs_PictureResize
             }
             bt_open_file_setup();
             bt_exit_setup();
+
+            int value = trackBar1.Value;
+
+            richTextBox1.Text += "放大倍率 : " + (value * 100 / 10).ToString() + " %\n";
+
+            filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Image image = Image.FromFile(filename);
+            pictureBox1.Image = image;
+
+            int W1 = image.Width;
+            int H1 = image.Height;
+
+            int W2 = W1 * value / 10;
+            int H2 = H1 * value / 10;
+
+            Size new_size = new Size(W2, H2);
+            pictureBox2.Image = ResizeImage(image, new_size);
+
+
+
         }
 
         private void bt_open_file_Click(object sender, EventArgs e)
@@ -274,6 +297,166 @@ namespace vcs_PictureResize
 
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //將資料夾內所有檔案改變大小並存檔
+            float scale = float.Parse(textBox2.Text);
+            if (scale == 0)
+            {
+                MessageBox.Show("Scale must not be zero.", "Invalid Scale", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            this.Refresh();
 
+            DirectoryInfo dir_info = new DirectoryInfo(textBox1.Text);
+            foreach (FileInfo file_info in dir_info.GetFiles())
+            {
+                try
+                {
+                    string ext = file_info.Extension.ToLower();
+                    if ((ext == ".bmp") || (ext == ".gif") ||
+                        (ext == ".jpg") || (ext == ".jpeg") ||
+                        (ext == ".png"))
+                    {
+                        richTextBox1.Text += "處理檔案 : " + file_info.FullName + "\n";
+                        Bitmap bm = new Bitmap(file_info.FullName);
+
+                        Rectangle from_rect = new Rectangle(0, 0, bm.Width, bm.Height);
+
+                        int wid2 = (int)Math.Round(scale * bm.Width);
+                        int hgt2 = (int)Math.Round(scale * bm.Height);
+                        Bitmap bm2 = new Bitmap(wid2, hgt2);
+                        Rectangle dest_rect = new Rectangle(0, 0, wid2, hgt2);
+                        using (Graphics gr = Graphics.FromImage(bm2))
+                        {
+                            gr.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                            gr.DrawImage(bm, dest_rect, from_rect, GraphicsUnit.Pixel);
+                        }
+
+                        string new_name = file_info.FullName;
+                        new_name = new_name.Substring(0, new_name.Length - ext.Length);
+                        new_name += "_resized" + ext;
+                        SaveImage(bm2, new_name);
+                    } // if it's a graphic extension
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error processing file '" +
+                        file_info.Name + "'\n" + ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            } // foreach file_info
+            richTextBox1.Text += "處理檔案完成\n";
+        }
+
+        // Save the file with the appropriate format.
+        public void SaveImage(Image image, string filename)
+        {
+            string extension = Path.GetExtension(filename);
+            switch (extension.ToLower())
+            {
+                case ".bmp":
+                    image.Save(filename, ImageFormat.Bmp);
+                    break;
+                case ".exif":
+                    image.Save(filename, ImageFormat.Exif);
+                    break;
+                case ".gif":
+                    image.Save(filename, ImageFormat.Gif);
+                    break;
+                case ".jpg":
+                case ".jpeg":
+                    image.Save(filename, ImageFormat.Jpeg);
+                    break;
+                case ".png":
+                    image.Save(filename, ImageFormat.Png);
+                    break;
+                case ".tif":
+                case ".tiff":
+                    image.Save(filename, ImageFormat.Tiff);
+                    break;
+                default:
+                    throw new NotSupportedException("Unknown file extension " + extension);
+            }
+        }
+
+        /// <summary>
+        ///  圖片寬高設定 
+        /// </summary>
+        /// <param name="imgToResize"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        public Image ResizeImage(Image img_old, Size size)
+        {
+            int W1 = img_old.Width;
+            int H1 = img_old.Height;
+            int W2 = size.Width;
+            int H2 = size.Height;
+
+            float nPercent = 0;
+            float nPercentW = 0;
+            float nPercentH = 0;
+
+            //計算寬度的縮放比例
+            nPercentW = ((float)W2 / (float)W1);
+            //計算高度的縮放比例
+            nPercentH = ((float)H2 / (float)H1);
+
+            if (nPercentH < nPercentW)
+                nPercent = nPercentH;
+            else
+                nPercent = nPercentW;
+
+            //期望的寬度
+            int W3 = (int)(W1 * nPercent);
+            //期望的高度
+            int H3 = (int)(H1 * nPercent);
+
+            Bitmap b = new Bitmap(W3, H3);
+            Graphics g = Graphics.FromImage((Image)b);
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            //繪製圖像
+            g.DrawImage(img_old, 0, 0, W3, H3);
+            g.Dispose();
+
+            richTextBox1.Text += "W1 = " + W1.ToString() + ", H1 = " + H1.ToString() + "\n";
+            richTextBox1.Text += "W2 = " + W2.ToString() + ", H2 = " + H2.ToString() + "\n";
+            richTextBox1.Text += "W3 = " + W3.ToString() + ", H3 = " + H3.ToString() + "\n";
+            richTextBox1.Text += "PW = " + nPercentW.ToString() + ", PH = " + nPercentH.ToString() + ", P = " + nPercent.ToString() + "\n";
+
+            return (Image)b;
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trackBar1_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void trackBar1_MouseUp(object sender, MouseEventArgs e)
+        {
+            int value = trackBar1.Value;
+
+            richTextBox1.Text += "放大倍率 : " + (value * 100 / 10).ToString() + " %\n";
+
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Image image = Image.FromFile(filename);
+
+            int W1 = image.Width;
+            int H1 = image.Height;
+
+            int W2 = W1 * value / 10;
+            int H2 = H1 * value / 10;
+
+            Size new_size = new Size(W2, H2);
+            pictureBox2.Image = ResizeImage(image, new_size);
+
+        }
     }
 }

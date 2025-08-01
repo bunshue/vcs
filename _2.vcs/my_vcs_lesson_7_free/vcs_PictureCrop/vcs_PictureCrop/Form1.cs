@@ -113,16 +113,16 @@ namespace vcs_PictureCrop
             panel1.AutoScroll = true;
 
             pictureBox2.Size = new Size(340, 400);
-            pictureBox2.Location = new Point(x_st + dx * 1+50, y_st + dy * 0);
+            pictureBox2.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0);
 
             button0.Location = new Point(x_st + dx * 1 - 100, y_st + dy * 0);
 
             groupBox_selection.Size = new Size(340, 200);
-            groupBox_selection.Location = new Point(x_st + dx * 1+50, y_st + dy * 0 + 400);
+            groupBox_selection.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0 + 400);
             groupBox_selection.BringToFront();
 
             groupBox_resize.Size = new Size(340, 200);
-            groupBox_resize.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0 + 400+200);
+            groupBox_resize.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0 + 400 + 200);
             groupBox_resize.BringToFront();
 
 
@@ -130,7 +130,7 @@ namespace vcs_PictureCrop
             bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
 
             richTextBox1.Size = new Size(340, 250);
-            richTextBox1.Location = new Point(x_st + dx * 1+50, y_st + dy * 0 + groupBox_selection.Height + 400+200);
+            richTextBox1.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0 + groupBox_selection.Height + 400 + 200);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -669,7 +669,6 @@ namespace vcs_PictureCrop
         {
             //測試圖框位置與圖片位置轉換
 
-
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 
             int X, Y;
@@ -682,14 +681,95 @@ namespace vcs_PictureCrop
             richTextBox1.Text += "圖片位置 : (" + X.ToString() + ", " + Y.ToString() + ")\n";
         }
 
+        /// <summary>
+        ///  圖片寬高設定 
+        /// </summary>
+        /// <param name="imgToResize"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        public Image ResizeImage(Image img_old, Size size)
+        {
+            int W1 = img_old.Width;
+            int H1 = img_old.Height;
+            int W2 = size.Width;
+            int H2 = size.Height;
+
+            float nPercent = 0;
+            float nPercentW = 0;
+            float nPercentH = 0;
+
+            //計算寬度的縮放比例
+            nPercentW = ((float)W2 / (float)W1);
+            //計算高度的縮放比例
+            nPercentH = ((float)H2 / (float)H1);
+
+            if (nPercentH < nPercentW)
+                nPercent = nPercentH;
+            else
+                nPercent = nPercentW;
+
+            //期望的寬度
+            int W3 = (int)(W1 * nPercent);
+            //期望的高度
+            int H3 = (int)(H1 * nPercent);
+
+            Bitmap b = new Bitmap(W3, H3);
+            Graphics g = Graphics.FromImage((Image)b);
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            //繪製圖像
+            g.DrawImage(img_old, 0, 0, W3, H3);
+            g.Dispose();
+
+            //richTextBox1.Text += "W1 = " + W1.ToString() + ", H1 = " + H1.ToString() + "\n";
+            //richTextBox1.Text += "W2 = " + W2.ToString() + ", H2 = " + H2.ToString() + "\n";
+            //richTextBox1.Text += "W3 = " + W3.ToString() + ", H3 = " + H3.ToString() + "\n";
+            //richTextBox1.Text += "PW = " + nPercentW.ToString() + ", PH = " + nPercentH.ToString() + ", P = " + nPercent.ToString() + "\n";
+
+            return (Image)b;
+        }
+
         private void trackBar_w_Scroll(object sender, EventArgs e)
         {
             tb_w.Text = trackBar_w.Value.ToString();
         }
 
+        private void trackBar_w_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void trackBar_w_MouseUp(object sender, MouseEventArgs e)
+        {
+            int value = trackBar_w.Value;
+
+            richTextBox1.Text += "放大倍率 : " + value.ToString() + " %\n";
+
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Image image = Image.FromFile(filename);
+
+            int W1 = image.Width;
+            int H1 = image.Height;
+
+            int W2 = W1 * value / 100;
+            int H2 = H1 * value / 100;
+
+            Size new_size = new Size(W2, H2);
+            pictureBox1.Image = ResizeImage(image, new_size);
+        }
+
         private void trackBar_h_Scroll(object sender, EventArgs e)
         {
             tb_h.Text = trackBar_h.Value.ToString();
+
+        }
+
+        private void trackBar_h_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void trackBar_h_MouseUp(object sender, MouseEventArgs e)
+        {
 
         }
 
@@ -702,7 +782,5 @@ namespace vcs_PictureCrop
         {
 
         }
-
-
     }
 }
