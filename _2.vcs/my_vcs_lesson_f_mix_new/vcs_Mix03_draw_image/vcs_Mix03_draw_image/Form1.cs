@@ -112,7 +112,6 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
-
             //逐點製作圖檔
             /*
             int dd = 1;    //相隔
@@ -466,14 +465,6 @@ namespace vcs_Mix03_draw_image
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //影像資料處理1
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\rgb.bmp";
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            pictureBox1.Image = bitmap1;
-
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -828,31 +819,6 @@ namespace vcs_Mix03_draw_image
         private void button11_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //給圖片添加版權信息
-
-            //創建一張位圖
-            Bitmap bitmap = new Bitmap(this.pictureBox1.Width, this.pictureBox1.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-
-            //根據位圖獲取畫布
-            Graphics g = Graphics.FromImage(bitmap);
-
-            //清空畫布並用透明色填充
-            g.Clear(Color.Transparent);
-
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-
-            //將另一幅圖片畫到畫布上
-            g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
-
-            //寫版權信息到圖片上。
-            g.DrawString("群曜醫電", new Font("黑體", 15), new SolidBrush(Color.Red), new Rectangle(20, 20, 100, 100));
-
-            //顯示
-            this.pictureBox1.Image = bitmap;
-
-            //保存圖片
-            bitmap.Save("abc.bmp", ImageFormat.Bmp);
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -862,7 +828,6 @@ namespace vcs_Mix03_draw_image
             string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
 
-
             double DPI = pictureBox1.Image.HorizontalResolution;//獲得分辨率 gisoracle
             double w = 1.0 * pictureBox1.Image.Width / DPI * 25.4;
             double h = 1.0 * pictureBox1.Image.Height / DPI * 25.4;
@@ -870,151 +835,9 @@ namespace vcs_Mix03_draw_image
             richTextBox1.Text += "獲得圖片的分辨率和大小 : " + w.ToString("f2") + ":" + h.ToString("f2") + "\n";
         }
 
-        double red = 0;
-        double green = 0;
-        double blue = 0;
-
         private void button13_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //test
-
-            //title: "Wavelength",
-            //value: 500,
-            //units: "nm",
-            //range:[380,780],
-            //resolution:1
-            /*
-            int wavelength = 720;
-            nmToRGB(wavelength);
-            richTextBox1.Text += "R = " + red.ToString() + "\n";
-            richTextBox1.Text += "G = " + green.ToString() + "\n";
-            richTextBox1.Text += "B = " + blue.ToString() + "\n";
-            this.BackColor = Color.FromArgb(255, (int)red, (int)green, (int)blue);
-            */
-
-
-            Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
-            //g.DrawLines(Pens.Red, gray.ToArray());
-
-            g.Clear(Color.White);
-
-            g.DrawRectangle(Pens.Red, 0, 0, 440, 300);
-
-            for (int wavelength = 380; wavelength <= 780; wavelength += 4)
-            {
-                nmToRGB(wavelength);
-                Color cc = Color.FromArgb(255, (int)red, (int)green, (int)blue);
-
-                g.DrawLine(new Pen(cc, 2), wavelength - 380, 0, wavelength - 380, 300);
-
-            }
-
-
-            /*
-            Point[] curvePoints = new Point[220];    //一維陣列內有 8 個Point
-
-            int i;
-            for (i = 0; i < 220; i++)
-            {
-                curvePoints[i].X = i * 2;
-                curvePoints[i].Y = 255 - (gray[i]);
-            }
-
-
-            // Draw lines between original points to screen.
-            g.DrawLines(Pens.Red, curvePoints);   //畫直線
-            // Draw curve to screen.
-            //gc.DrawCurve(redPen, curvePoints); //畫曲線
-
-            */
-
-        }
-
-
-        void nmToRGB(int wavelength)
-        {
-            var Gamma = 0.80;
-            var IntensityMax = 255;
-            double factor = 0;
-
-            red = 0;
-            green = 0;
-            blue = 0;
-
-            if ((wavelength >= 380) && (wavelength < 440))
-            {
-                red = -(wavelength - 440) / (440 - 380);
-                green = 0.0;
-                blue = 1.0;
-            }
-            else if ((wavelength >= 440) && (wavelength < 490))
-            {
-                red = 0.0;
-                green = (wavelength - 440) / (490 - 440);
-                blue = 1.0;
-            }
-            else if ((wavelength >= 490) && (wavelength < 510))
-            {
-                red = 0.0;
-                green = 1.0;
-                blue = -(wavelength - 510) / (510 - 490);
-            }
-            else if ((wavelength >= 510) && (wavelength < 580))
-            {
-                red = (wavelength - 510) / (580 - 510);
-                green = 1.0;
-                blue = 0.0;
-            }
-            else if ((wavelength >= 580) && (wavelength < 645))
-            {
-                red = 1.0;
-                green = -(wavelength - 645) / (645 - 580);
-                blue = 0.0;
-            }
-            else if ((wavelength >= 645) && (wavelength < 781))
-            {
-                red = 1.0;
-                green = 0.0;
-                blue = 0.0;
-            }
-            else
-            {
-                red = 0.0;
-                green = 0.0;
-                blue = 0.0;
-            };
-            // Let the intensity fall off near the vision limits
-            if ((wavelength >= 380) && (wavelength < 420))
-            {
-                factor = 0.3 + 0.7 * (wavelength - 380) / (420 - 380);
-            }
-            else if ((wavelength >= 420) && (wavelength < 701))
-            {
-                factor = 1.0;
-            }
-            else if ((wavelength >= 701) && (wavelength < 781))
-            {
-                factor = 0.3 + 0.7 * (780 - wavelength) / (780 - 700);
-            }
-            else
-            {
-                factor = 0.0;
-            };
-            if (red != 0)
-            {
-                red = Math.Round(IntensityMax * Math.Pow(red * factor, Gamma));
-            }
-            if (green != 0)
-            {
-                green = Math.Round(IntensityMax * Math.Pow(green * factor, Gamma));
-            }
-            if (blue != 0)
-            {
-                blue = Math.Round(IntensityMax * Math.Pow(blue * factor, Gamma));
-            }
-            //return [red,green,blue];
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -1268,386 +1091,6 @@ namespace vcs_Mix03_draw_image
         private void button17_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            double[] gray = new double[350];
-
-            gray[0] = 1.00900867283951;
-            gray[1] = 1.55640148148148;
-            gray[2] = 6.88660753086508;
-            gray[3] = 13.8359580864256;
-            gray[4] = 22.2184109876531;
-            gray[5] = 28.8497460493796;
-            gray[6] = 35.1483108950597;
-            gray[7] = 41.1816046913577;
-            gray[8] = 47.0013740740761;
-            gray[9] = 52.7444471604969;
-            gray[10] = 58.4925512037076;
-            gray[11] = 63.9892757098829;
-            gray[12] = 69.3183035185245;
-            gray[13] = 74.658451172845;
-            gray[14] = 79.5170869444495;
-            gray[15] = 84.2333481790164;
-            gray[16] = 88.7950452160538;
-            gray[17] = 93.0260337963002;
-            gray[18] = 97.0959177469191;
-            gray[19] = 100.895518518523;
-            gray[20] = 104.753417654325;
-            gray[21] = 108.480677623462;
-            gray[22] = 111.923783209881;
-            gray[23] = 115.318282376547;
-            gray[24] = 118.73543848766;
-            gray[25] = 121.954907129633;
-            gray[26] = 125.221329537043;
-            gray[27] = 128.286525401239;
-            gray[28] = 131.279339320992;
-            gray[29] = 134.269772191361;
-            gray[30] = 137.161603086425;
-            gray[31] = 139.885520925932;
-            gray[32] = 142.783000679017;
-            gray[33] = 145.460383024694;
-            gray[34] = 148.00202308642;
-            gray[35] = 150.552878395065;
-            gray[36] = 153.032126111112;
-            gray[37] = 155.394792037037;
-            gray[38] = 157.690436111109;
-            gray[39] = 159.952090216048;
-            gray[40] = 162.11185265432;
-            gray[41] = 164.291073333329;
-            gray[42] = 166.364057191354;
-            gray[43] = 168.334361172833;
-            gray[44] = 170.409032191347;
-            gray[45] = 172.372230740727;
-            gray[46] = 174.270800524679;
-            gray[47] = 176.171832314801;
-            gray[48] = 178.050211543195;
-            gray[49] = 179.892309444431;
-            gray[50] = 181.781950185169;
-            gray[51] = 183.592881882697;
-            gray[52] = 185.382820432079;
-            gray[53] = 187.154298395046;
-            gray[54] = 188.890309351831;
-            gray[55] = 190.648492901209;
-            gray[56] = 192.352594382693;
-            gray[57] = 194.055527932079;
-            gray[58] = 195.694869691337;
-            gray[59] = 197.346421697509;
-            gray[60] = 198.953659567879;
-            gray[61] = 200.497421543188;
-            gray[62] = 202.043470648128;
-            gray[63] = 203.506410401213;
-            gray[64] = 205.078366728371;
-            gray[65] = 206.502439074054;
-            gray[66] = 207.960326111086;
-            gray[67] = 209.345987870348;
-            gray[68] = 210.716789660476;
-            gray[69] = 212.168414629608;
-            gray[70] = 213.477881975283;
-            gray[71] = 214.799350092569;
-            gray[72] = 216.092125339487;
-            gray[73] = 217.453935709854;
-            gray[74] = 218.555674537012;
-            gray[75] = 219.908621604916;
-            gray[76] = 221.408621604916;
-            gray[77] = 222.287581172813;
-            gray[78] = 223.467443333307;
-            gray[79] = 224.597678641946;
-            gray[80] = 225.677567191334;
-            gray[81] = 226.751085123428;
-            gray[82] = 227.77076570985;
-            gray[83] = 228.838520154292;
-            gray[84] = 229.835574104906;
-            gray[85] = 230.759151604911;
-            gray[86] = 231.671378487624;
-            gray[87] = 232.645209876513;
-            gray[88] = 233.430553919723;
-            gray[89] = 234.259339197503;
-            gray[90] = 235.192826820966;
-            gray[91] = 235.948180339482;
-            gray[92] = 236.749151635777;
-            gray[93] = 237.419081604913;
-            gray[94] = 238.172184753064;
-            gray[95] = 238.791867530844;
-            gray[96] = 239.459488487634;
-            gray[97] = 240.081322901214;
-            gray[98] = 240.737454969117;
-            gray[99] = 241.330262314798;
-            gray[100] = 241.887978950596;
-            gray[101] = 242.445097870355;
-            gray[102] = 242.951899320973;
-            gray[103] = 243.438450987638;
-            gray[104] = 243.957556172827;
-            gray[105] = 244.418575493814;
-            gray[106] = 244.824507623441;
-            gray[107] = 245.293516851836;
-            gray[108] = 245.75957370369;
-            gray[109] = 246.070656358015;
-            gray[110] = 246.49771345678;
-            gray[111] = 246.870360092582;
-            gray[112] = 247.170360092582;
-            gray[113] = 247.505630277766;
-            gray[114] = 247.852624783942;
-            gray[115] = 248.2049069753;
-            gray[116] = 248.447781265421;
-            gray[117] = 248.785751049371;
-            gray[118] = 249.057203456782;
-            gray[119] = 249.333963888878;
-            gray[120] = 249.550165030853;
-            gray[121] = 249.812987160485;
-            gray[122] = 249.996779567892;
-            gray[123] = 250.290785864191;
-            gray[124] = 250.508038024681;
-            gray[125] = 250.720169938263;
-            gray[126] = 250.859880061722;
-            gray[127] = 251.098477962957;
-            gray[128] = 251.266466851845;
-            gray[129] = 251.453085216045;
-            gray[130] = 251.648107376537;
-            gray[131] = 251.82749172839;
-            gray[132] = 251.932877129624;
-            gray[133] = 252.083052191354;
-            gray[134] = 252.236006018513;
-            gray[135] = 252.370963796291;
-            gray[136] = 252.494106327154;
-            gray[137] = 252.601936759253;
-            gray[138] = 252.707993271599;
-            gray[139] = 252.851702191351;
-            gray[140] = 252.94527401234;
-            gray[141] = 253.063203271602;
-            gray[142] = 253.137698456785;
-            gray[143] = 253.227324166663;
-            gray[144] = 253.318710524688;
-            gray[145] = 253.416192222217;
-            gray[146] = 253.501922654318;
-            gray[147] = 253.588719506168;
-            gray[148] = 253.657823487649;
-            gray[149] = 253.719692376542;
-            gray[150] = 253.782666944442;
-            gray[151] = 253.856560709873;
-            gray[152] = 253.903209537033;
-            gray[153] = 253.961351450612;
-            gray[154] = 254.033884814813;
-            gray[155] = 254.080620216047;
-            gray[156] = 254.121377129626;
-            gray[157] = 254.17248141975;
-            gray[158] = 254.20786898148;
-            gray[159] = 254.257156820988;
-            gray[160] = 254.294456975308;
-            gray[161] = 254.34212552469;
-            gray[162] = 254.38212552469;
-            gray[163] = 254.408731388887;
-            gray[164] = 254.431429074073;
-            gray[165] = 254.470446543208;
-            gray[166] = 254.502729598764;
-            gray[167] = 254.535404660492;
-            gray[168] = 254.5603125;
-            gray[169] = 254.577502530863;
-            gray[170] = 254.603023179012;
-            gray[171] = 254.624034382714;
-            gray[172] = 254.644510895061;
-            gray[173] = 254.664510895061;
-            gray[174] = 254.690712530865;
-            gray[175] = 254.702566450616;
-            gray[176] = 254.717322037036;
-            gray[177] = 254.735003827159;
-            gray[178] = 254.753764938271;
-            gray[179] = 254.763686728395;
-            gray[180] = 254.778108796294;
-            gray[181] = 254.794384938271;
-            gray[182] = 254.8036920679;
-            gray[183] = 254.820527006173;
-            gray[184] = 254.834644351851;
-            gray[185] = 254.84701824074;
-            gray[186] = 254.850060524691;
-            gray[187] = 254.86367802469;
-            gray[188] = 254.866043765432;
-            gray[189] = 254.886052839505;
-            gray[190] = 254.887237499999;
-            gray[191] = 254.89126845679;
-            gray[192] = 254.906473086419;
-            gray[193] = 254.907714351852;
-            gray[194] = 254.91614728395;
-            gray[195] = 254.918374722221;
-            gray[196] = 254.926159876543;
-            gray[197] = 254.937555833334;
-            gray[198] = 254.943707932099;
-            gray[199] = 254.946672746914;
-            gray[200] = 254.946087129629;
-            gray[201] = 254.94750191358;
-            gray[202] = 254.954697067901;
-            gray[203] = 254.95982462963;
-            gray[204] = 254.960204969135;
-            gray[205] = 254.968172746913;
-            gray[206] = 254.967210493827;
-            gray[207] = 254.971220154321;
-            gray[208] = 254.972564074074;
-            gray[209] = 254.976282839506;
-            gray[210] = 254.978052067901;
-            gray[211] = 254.97861212963;
-            gray[212] = 254.982160709876;
-            gray[213] = 254.985306635802;
-            gray[214] = 254.979370216049;
-            gray[215] = 254.983408117284;
-            gray[216] = 254.989879783951;
-            gray[217] = 254.987366944444;
-            gray[218] = 254.99006808642;
-            gray[219] = 254.990836203704;
-            gray[220] = 254.988598117284;
-            gray[221] = 254.991593950618;
-            gray[222] = 254.991824660494;
-            gray[223] = 254.991818487654;
-            gray[224] = 254.991879012346;
-            gray[225] = 254.993955401235;
-            gray[226] = 254.995471234568;
-            gray[227] = 254.9977575;
-            gray[228] = 254.996474753086;
-            gray[229] = 254.997324104938;
-            gray[230] = 254.997102283951;
-            gray[231] = 254.997711358025;
-            gray[232] = 254.997932839506;
-            gray[233] = 254.998292746914;
-            gray[234] = 254.997951296296;
-            gray[235] = 254.999040246914;
-            gray[236] = 254.998957191358;
-            gray[237] = 254.998957191358;
-            gray[238] = 254.997268395062;
-            gray[239] = 254.998117407407;
-            gray[240] = 254.999261728395;
-            gray[241] = 254.999114074074;
-            gray[242] = 254.999861574074;
-            gray[243] = 254.998809537037;
-            gray[244] = 254.998809537037;
-            gray[245] = 254.999206358025;
-            gray[246] = 254.999926172839;
-            gray[247] = 255;
-            gray[248] = 254.999907716049;
-            gray[249] = 254.999806203704;
-            gray[250] = 254.998809537037;
-            gray[251] = 254.999732376543;
-            gray[252] = 254.999593950617;
-            gray[253] = 255;
-            gray[254] = 254.999861574074;
-            gray[255] = 254.999990771605;
-            gray[256] = 254.99998154321;
-            gray[257] = 254.99996308642;
-            gray[258] = 254.999990771605;
-            gray[259] = 255;
-            gray[260] = 255;
-            gray[261] = 255;
-            gray[262] = 255;
-            gray[263] = 254.999953858025;
-            gray[264] = 255;
-            gray[265] = 255;
-            gray[266] = 255;
-            gray[267] = 255;
-            gray[268] = 255;
-            gray[269] = 255;
-            gray[270] = 255;
-            gray[271] = 255;
-            gray[272] = 255;
-            gray[273] = 255;
-            gray[274] = 255;
-            gray[275] = 255;
-            gray[276] = 255;
-            gray[277] = 255;
-            gray[278] = 255;
-            gray[279] = 255;
-            gray[280] = 255;
-            gray[281] = 255;
-            gray[282] = 255;
-            gray[283] = 255;
-            gray[284] = 255;
-            gray[285] = 255;
-            gray[286] = 255;
-            gray[287] = 255;
-            gray[288] = 255;
-            gray[289] = 255;
-            gray[290] = 255;
-            gray[291] = 255;
-            gray[292] = 255;
-            gray[293] = 255;
-            gray[294] = 255;
-            gray[295] = 255;
-            gray[296] = 255;
-            gray[297] = 255;
-            gray[298] = 255;
-            gray[299] = 255;
-            gray[300] = 255;
-            gray[301] = 255;
-            gray[302] = 255;
-            gray[303] = 255;
-            gray[304] = 255;
-            gray[305] = 255;
-            gray[306] = 255;
-            gray[307] = 255;
-            gray[308] = 255;
-            gray[309] = 255;
-            gray[310] = 255;
-            gray[311] = 255;
-            gray[312] = 255;
-            gray[313] = 255;
-            gray[314] = 255;
-            gray[315] = 255;
-            gray[316] = 255;
-            gray[317] = 255;
-            gray[318] = 255;
-            gray[319] = 255;
-            gray[320] = 255;
-            gray[321] = 255;
-            gray[322] = 255;
-            gray[323] = 255;
-            gray[324] = 255;
-            gray[325] = 255;
-            gray[326] = 255;
-            gray[327] = 255;
-            gray[328] = 255;
-            gray[329] = 255;
-            gray[330] = 255;
-            gray[331] = 255;
-            gray[332] = 255;
-            gray[333] = 255;
-            gray[334] = 255;
-            gray[335] = 255;
-            gray[336] = 255;
-            gray[337] = 255;
-            gray[338] = 255;
-            gray[339] = 255;
-            gray[340] = 255;
-            gray[341] = 255;
-            gray[342] = 255;
-            gray[343] = 255;
-            gray[344] = 255;
-            gray[345] = 255;
-            gray[346] = 255;
-            gray[347] = 255;
-            gray[348] = 255;
-            gray[349] = 255;
-
-
-            Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
-            //g.DrawLines(Pens.Red, gray.ToArray());
-
-            g.Clear(Color.White);
-
-            g.DrawRectangle(Pens.Red, 0, 0, 700, 256);
-            PointF[] curvePoints = new PointF[350];    //一維陣列內有 8 個Point
-
-            int i;
-            for (i = 0; i < 350; i++)
-            {
-                curvePoints[i].X = (float)i * 2;
-                curvePoints[i].Y = 255 - (float)(gray[i]);
-            }
-
-
-            // Draw lines between original points to screen.
-            g.DrawLines(Pens.Red, curvePoints);   //畫直線
-            // Draw curve to screen.
-            //gc.DrawCurve(redPen, curvePoints); //畫曲線
-
-
-
-
-
         }
 
         //public void bitSlicing(Bitmap Image)
@@ -1825,7 +1268,6 @@ namespace vcs_Mix03_draw_image
             g.DrawImage(level8, x_st + dx * 1, y_st + dy * 3, w, h);
 
             pictureBox1.Image = bmp;
-
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -2103,51 +1545,59 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
-            //檢視圖片的像素
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
-            Image image = Image.FromFile(filename);
-            richTextBox1.Text += "檔案 : " + filename + ",\t" + "圖片像素：[" + image.Width + "*" + image.Height + "]" + "\n";
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
+
+            filenames.Clear();
+
+            if (Directory.Exists(foldername) == false)
+            {
+                richTextBox1.Text += "圖片資料夾不存在, 離開\n";
+                return;
+            }
+
+            // Load the list of files.
+            filenames = FindFiles(foldername, "*.bmp;*.png;*.jpg;*.tif;*.gif", false);
+
+            for (int i = 0; i < filenames.Count; i++)
+            {
+                richTextBox1.Text += "get file \t" + filenames[i] + "\n";
+            }
+            richTextBox1.Text += "共有 " + filenames.Count.ToString() + " 個檔案\n";
+        }
+
+        // See: Search for files that match multiple patterns in C#
+        //      http://csharphelper.com/blog/2015/06/find-files-that-match-multiple-patterns-in-c/
+        // Search for files matching the patterns.
+        private List<string> FindFiles(string fname, string patterns, bool search_subdirectories)
+        {
+            // Make the result list.
+            List<string> files = new List<string>();
+
+            // Get the patterns.
+            string[] pattern_array = patterns.Split(';');
+
+            // Search.
+            SearchOption search_option = SearchOption.TopDirectoryOnly;
+            if (search_subdirectories) search_option = SearchOption.AllDirectories;
+            foreach (string pattern in pattern_array)
+            {
+                foreach (string filename in Directory.GetFiles(fname, pattern, search_option))
+                {
+                    if (!files.Contains(filename)) files.Add(filename);
+                }
+            }
+
+            // Sort.
+            files.Sort();
+
+            // Return the result.
+            return files;
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //Mandelbrot 圖形
-            double realCoord, imagCoord;
-            double realTemp, imagTemp, realTemp2, arg;
-            int iterations;
-            for (imagCoord = 1.2; imagCoord >= -1.2; imagCoord -= 0.05)
-            {
-                for (realCoord = -0.6; realCoord <= 1.77; realCoord += 0.03)
-                {
-                    iterations = 0;
-                    realTemp = realCoord;
-                    imagTemp = imagCoord;
-                    arg = (realCoord * realCoord) + (imagCoord * imagCoord);
-                    while ((arg < 4) && (iterations < 40))
-                    {
-                        realTemp2 = (realTemp * realTemp) - (imagTemp * imagTemp) - realCoord;
-                        imagTemp = (2 * realTemp * imagTemp) - imagCoord;
-                        realTemp = realTemp2;
-                        arg = (realTemp * realTemp) + (imagTemp * imagTemp);
-                        iterations += 1;
-                    }
-                    switch (iterations % 4)
-                    {
-                        case 0:
-                            richTextBox1.Text += "."; break;
-                        case 1:
-                            richTextBox1.Text += "o"; break;
-                        case 2:
-                            richTextBox1.Text += "O"; break;
-                        case 3:
-                            richTextBox1.Text += "@"; break;
-                    }
-                }
-                richTextBox1.Text += "\n";
-            }
         }
 
         //圖片壓縮、縮略圖生成代碼
@@ -2213,70 +1663,11 @@ namespace vcs_Mix03_draw_image
         private void button25_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
-
-            filenames.Clear();
-
-            if (Directory.Exists(foldername) == false)
-            {
-                richTextBox1.Text += "圖片資料夾不存在, 離開\n";
-                return;
-            }
-
-            // Load the list of files.
-            filenames = FindFiles(foldername, "*.bmp;*.png;*.jpg;*.tif;*.gif", false);
-
-            for (int i = 0; i < filenames.Count; i++)
-            {
-                richTextBox1.Text += "get file \t" + filenames[i] + "\n";
-            }
-            richTextBox1.Text += "共有 " + filenames.Count.ToString() + " 個檔案\n";
-
         }
-
-        // See: Search for files that match multiple patterns in C#
-        //      http://csharphelper.com/blog/2015/06/find-files-that-match-multiple-patterns-in-c/
-        // Search for files matching the patterns.
-        private List<string> FindFiles(string fname, string patterns, bool search_subdirectories)
-        {
-            // Make the result list.
-            List<string> files = new List<string>();
-
-            // Get the patterns.
-            string[] pattern_array = patterns.Split(';');
-
-            // Search.
-            SearchOption search_option = SearchOption.TopDirectoryOnly;
-            if (search_subdirectories) search_option = SearchOption.AllDirectories;
-            foreach (string pattern in pattern_array)
-            {
-                foreach (string filename in Directory.GetFiles(fname, pattern, search_option))
-                {
-                    if (!files.Contains(filename)) files.Add(filename);
-                }
-            }
-
-            // Sort.
-            files.Sort();
-
-            // Return the result.
-            return files;
-        }
-
 
         private void button26_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //取得一層jpg檔
-
-            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
-            string[] filenames = Directory.GetFiles(foldername, "*.jpg");
-
-            foreach (string filename in filenames)
-            {
-                richTextBox1.Text += "取得檔案 : " + filename + "\n";
-            }
         }
 
         private void button27_Click(object sender, EventArgs e)

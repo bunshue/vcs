@@ -12,12 +12,20 @@ np.fft.ifft2  # 二維 ifft
 cv 傅立葉 cv2.dft cv2.idft
 
 
-
 頻率域影像處理 DCT IDCT
 
 
 # 對二維 陣列/影像 做 fft
 np.fft.fft2()
+
+------------------------------
+
+fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
+ifshift = np.fft.ifftshift(fshift)  # 逆傅立葉變換,  # 0 頻率頻率移回左上角
+src_tmp = np.fft.ifft2(ifshift)  # 逆傅立葉變換, 將頻域訊號轉換回時域訊號
+xf = np.fft.rfft(XS) / NNNN
+freqs = np.fft.fftfreq(FFT_SIZE, 1.0 / RATE)
+y = np.fft.irfft(s)
 
 
 """

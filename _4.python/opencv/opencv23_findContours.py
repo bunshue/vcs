@@ -53,6 +53,7 @@ def get_image_contours(src):
     get_contours_info(contours)
     return contours, hierarchy
 
+
 def get_contours_info(contours):
     # print("資料類型 :", type(contours))
     print("輪廓數量 :", len(contours))
@@ -67,6 +68,7 @@ def get_contours_info(contours):
         print(cnt[i])
     # 看 contours 資料 SP
     """
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -137,7 +139,7 @@ filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coin.jpg"
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/moon.jpg"
 filename = "C:/_git/vcs/_4.python/opencv/data/_mask/cloud.jpg"
-#filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.bmp"
+# filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.bmp"
 
 image0 = cv2.imread(filename)  # 彩色讀取
 image = image0.copy()
