@@ -1066,9 +1066,6 @@ namespace vcs_ImageProcessing3
 
         private void bt_image_process_p6_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "光照效果\n";
-            Bitmap bmp = image_processing7(filename);
-            pictureBox1.Image = bmp;
         }
 
         private void bt_image_process_p7_Click(object sender, EventArgs e)
@@ -1095,10 +1092,9 @@ namespace vcs_ImageProcessing3
         private void bt_image_process_p10_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "扭曲效果 平行四邊形\n";
-            string filename_isinbaeva = @"C:\_git\vcs\_1.data\______test_files1\_image_processing\isinbaeva.jpg";
             //Bitmap bmp = image_processing11(filename_isinbaeva);
             //pictureBox1.Image = bmp;
-            image_processing11(filename_isinbaeva);
+            image_processing11(filename);
         }
 
         private void bt_image_process_p11_Click(object sender, EventArgs e)
@@ -1163,32 +1159,24 @@ namespace vcs_ImageProcessing3
 
         private void bt_image_process_p20_Click(object sender, EventArgs e)
         {
-            //白色轉為透明
-            //C#將圖片白色背景設置為透明
+            richTextBox1.Text += "白色轉為透明20\n";
             pictureBox1.BackColor = Color.Pink;
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Image image = Image.FromFile(filename);
-            Bitmap bitmap1 = new Bitmap(image);
-            bitmap1.MakeTransparent(Color.White);
-            pictureBox1.Image = bitmap1;
+            Bitmap bmp = image_processing20(filename);
+            pictureBox1.Image = bmp;
         }
 
         private void bt_image_process_p21_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "鏡像圖片\n";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bmp = image_processing27(filename);
             pictureBox1.Image = bmp;
-
         }
 
         private void bt_image_process_p22_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "彩虹化圖片\n";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
             Bitmap bmp = image_processing28(filename);
             pictureBox1.Image = bmp;
-
         }
 
         private void bt_image_process_p23_Click(object sender, EventArgs e)
@@ -1196,7 +1184,6 @@ namespace vcs_ImageProcessing3
             richTextBox1.Text += "單色處理\n";
             Bitmap bmp = image_processing29(filename);
             pictureBox1.Image = bmp;
-
         }
 
         private void bt_image_process_p24_Click(object sender, EventArgs e)
@@ -1242,7 +1229,6 @@ namespace vcs_ImageProcessing3
                 gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
             }
             return bm;
-
         }
 
         private void bt_image_process_p25_Click(object sender, EventArgs e)
@@ -1377,16 +1363,23 @@ namespace vcs_ImageProcessing3
                 case 4: pictureBox1.Image = image_processing4(filename); break;
                 case 5: pictureBox1.Image = image_processing5(filename); break;
                 case 6: pictureBox1.Image = image_processing6(filename); break;
-                case 7: pictureBox1.Image = image_processing7(filename); break;
-                //case 8: pictureBox1.Image = image_processing8(filename); break; none
-                //case 9: pictureBox1.Image = image_processing9(filename); break; none
                 case 10: pictureBox1.Image = image_processing10(filename); break;
-                //case 11: pictureBox1.Image = image_processing11(filename); break;
+                case 11: image_processing11(filename); break;
                 case 12: pictureBox1.Image = image_processing12(filename); break;
                 case 14: pictureBox1.Image = image_processing14(filename); break;
                 case 15: pictureBox1.Image = image_processing15(filename); break;
                 case 16: pictureBox1.Image = image_processing16(filename); break;
                 case 17: pictureBox1.Image = image_processing17(filename); break;
+                case 18: pictureBox1.Image = image_processing18(filename); break;
+                case 19: pictureBox1.Image = image_processing19(filename); break;
+                case 20: pictureBox1.Image = image_processing20(filename); break;
+                case 24: pictureBox1.Image = image_processing24(filename); break;
+                case 25: pictureBox1.Image = image_processing25(filename); break;
+                case 26: pictureBox1.Image = image_processing26(filename); break;
+                case 27: pictureBox1.Image = image_processing27(filename); break;
+                case 28: pictureBox1.Image = image_processing28(filename); break;
+                case 29: pictureBox1.Image = image_processing29(filename); break;
+                case 31: pictureBox1.Image = image_processing31(filename); break;
                 default: break;
             }
             if (item >= 19)
@@ -1901,6 +1894,8 @@ namespace vcs_ImageProcessing3
             lb_main_mesg.Text = "扭曲效果";
             Application.DoEvents();
 
+            filename = @"C:\_git\vcs\_1.data\______test_files1\_image_processing\isinbaeva.jpg";
+
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
             int H = bitmap1.Height;
@@ -2199,7 +2194,8 @@ namespace vcs_ImageProcessing3
 
         private Bitmap image_processing18(string filename)
         {
-            //降低解析度
+            lb_main_mesg.Text = "降低解析度";
+            Application.DoEvents();
 
             Bitmap bitmap1 = new Bitmap(filename, true);
 
@@ -2229,8 +2225,11 @@ namespace vcs_ImageProcessing3
 
         private Bitmap image_processing19(string filename)
         {
-            int x = 50;
-            int y = 50;
+            lb_main_mesg.Text = "光暈效果";
+            Application.DoEvents();
+
+            int cx = 150;
+            int cy = 150;
             int R = 100;
             float better = 150F; //radius強光照射面的半徑，即"光暈"
 
@@ -2239,7 +2238,8 @@ namespace vcs_ImageProcessing3
             int H = bitmap1.Height;//獲取圖像的高度
             Bitmap bitmap2 = bitmap1.Clone(new RectangleF(0, 0, W, H), PixelFormat.DontCare);
 
-            Point Var_Center = new Point(x, y);//光暈的中心點
+            Point Var_Center = new Point(cx, cy);//光暈的中心點
+
             //遍歷圖像中的各像素
             for (int i = W - 1; i >= 1; i--)
             {
@@ -2263,6 +2263,23 @@ namespace vcs_ImageProcessing3
                 }
             }
             return bitmap2;
+        }
+
+        private Bitmap image_processing20(string filename)
+        {
+            lb_main_mesg.Text = "白色轉為透明";
+            Application.DoEvents();
+
+            filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            Bitmap bitmap1 = new Bitmap(filename);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            //Bitmap bitmap2 = new Bitmap(W, H);
+
+            //C#將圖片白色背景設置為透明
+            bitmap1.MakeTransparent(Color.White);
+            return bitmap1;
         }
 
         private Bitmap image_processing24(string filename)
@@ -2312,9 +2329,6 @@ namespace vcs_ImageProcessing3
             }
             return bitmap2;
         }
-
-
-
 
         private Bitmap image_processing25(string filename)
         {
@@ -2486,6 +2500,8 @@ namespace vcs_ImageProcessing3
             lb_main_mesg.Text = "鏡像圖片";
             Application.DoEvents();
 
+            filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
             Bitmap bitmap1 = new Bitmap(filename);
             int width = bitmap1.Width;
             int height = bitmap1.Height;
@@ -2510,6 +2526,8 @@ namespace vcs_ImageProcessing3
         {
             lb_main_mesg.Text = "彩虹化圖片";
             Application.DoEvents();
+
+            filename = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
@@ -3028,7 +3046,9 @@ namespace vcs_ImageProcessing3
 
         private void bt_animate6_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Text += "光照效果\n";
+            Bitmap bmp = image_processing7(filename);
+            pictureBox1.Image = bmp;
         }
 
         private void bt_animate7_Click(object sender, EventArgs e)

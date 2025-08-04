@@ -572,50 +572,6 @@ namespace vcs_ImageProcessingNew
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            //讀取圖檔, 先放在Bitmap裏
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
-            //string filename = "pic_original2.bmp";
-            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            pictureBox1.Image = bitmap1;
-
-            /* 畫色塊
-            Graphics g = Graphics.FromImage(bitmap1);
-
-            g.FillRectangle(new SolidBrush(Color.Red), 50, 100, 50, 50);
-            g.FillRectangle(new SolidBrush(Color.Lime), 50, 100+70, 50, 50);
-            g.FillRectangle(new SolidBrush(Color.Blue), 50, 100+140, 50, 50);
-            */
-
-            int i;
-            int j;
-            Color pt;
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-
-            for (j = 0; j < H; j++)
-            {
-                for (i = 0; i < W; i++)
-                {
-                    pt = bitmap1.GetPixel(i, j);
-
-
-
-                    RGB pp = new RGB(pt.R, pt.G, pt.B);
-
-                    byte r = pp.R;
-                    byte g = pp.G;
-                    byte b = pp.B;
-
-                    Color cc = Color.FromArgb(255, g, b, b);
-
-                    bitmap1.SetPixel(i, j, cc);
-
-                }
-            }
-            //bitmap1.Save("pic_modify3.bmp", ImageFormat.Bmp);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -625,7 +581,6 @@ namespace vcs_ImageProcessingNew
         private void button3_Click(object sender, EventArgs e)
         {
             //圖像截取
-            //圖像截取
 
             Graphics g = this.pictureBox1.CreateGraphics();
             Bitmap bitmap1 = new Bitmap(filename);
@@ -633,12 +588,10 @@ namespace vcs_ImageProcessingNew
             Rectangle sr = new Rectangle(80, 60, 400, 400);//要截取的矩形區域
             Rectangle dr = new Rectangle(0, 0, 200, 200);//要顯示到Form的矩形區域
             g.DrawImage(bitmap1, dr, sr, GraphicsUnit.Pixel);
-
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //改變圖像大小
             //改變圖像大小
 
             Graphics g = this.pictureBox1.CreateGraphics();
@@ -664,11 +617,9 @@ namespace vcs_ImageProcessingNew
         private void button5_Click(object sender, EventArgs e)
         {
             //重設大小
-            //重設大小
             Bitmap bitmap1 = new Bitmap(filename);
             Bitmap bitmap2 = ResizeImage(bitmap1, new Size(bitmap1.Width / 2, bitmap1.Height / 2));
             pictureBox1.Image = bitmap2;
-
         }
 
         //重設大小
@@ -741,4 +692,3 @@ namespace vcs_ImageProcessingNew
         }
     }
 }
-

@@ -12,7 +12,7 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_video/i2c.avi"
 cap = cv2.VideoCapture(filename)
 
 frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)  # 總影格數
-fps = cap.get(cv2.CAP_PROP_FPS)  # 影格速率
+fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
 
 sec = int(frames / fps)  # 播放時間（秒）
 timestr = str(datetime.timedelta(seconds=sec))  # 轉換成時分秒格式
@@ -20,7 +20,7 @@ print("播放時間=", timestr)
 
 width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)  # 寬度
 height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)  # 高度
-fps = cap.get(cv2.CAP_PROP_FPS)  # 影格速率
+fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
 frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)  # 總影格數
 print(f"寬度 : {width}")
 print(f"高度 : {height}")
@@ -42,7 +42,7 @@ def getplaytime(readfile):
     try:
         cap = cv2.VideoCapture(readfile)  # 載入檔案
         frame = cap.get(cv2.CAP_PROP_FRAME_COUNT)  # 總影格數
-        fps = cap.get(cv2.CAP_PROP_FPS)  # 影格速率
+        fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
         sec = int(frame / fps)  # 播放時間（秒）
         timestr = str(datetime.timedelta(seconds=sec))  # 轉換成時分秒格式
         return sec, readfile + " " + timestr
@@ -107,7 +107,7 @@ video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 cap = cv2.VideoCapture(video_filename)
 
-fps = cap.get(cv2.CAP_PROP_FPS)  # 影格速率
+fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
 
 success, frame = cap.read()
 i = 0
@@ -135,7 +135,7 @@ video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 # 影片捕捉物件
 cap = cv2.VideoCapture(video_filename)
-fps = cap.get(cv2.CAP_PROP_FPS)  # 影格速率
+fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
 
 # 設定開始時間(秒)
 start_time_sec = 3
@@ -249,7 +249,7 @@ print("------------------------------------------------------------")  # 60個
 
 cap = cv2.VideoCapture(video_filename)  # 開啟影片
 
-fps = cap.get(cv2.CAP_PROP_FPS)  # 影格速率
+fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
 height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)  # 影片高度
 
 counter = 1  # 幀數計數器
@@ -285,7 +285,7 @@ cap = cv2.VideoCapture(video_filename)  # 開啟影片
 
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))  # 寬度
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 高度
-fps = cap.get(cv2.CAP_PROP_FPS)  # 影格速率
+fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
 
 # 建立裁剪影片物件
 fourcc = cv2.VideoWriter_fourcc(*"I420")  # 編碼

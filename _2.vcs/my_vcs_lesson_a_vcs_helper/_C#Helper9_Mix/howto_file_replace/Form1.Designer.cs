@@ -43,26 +43,26 @@
             // 
             this.txtComment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtComment.Location = new System.Drawing.Point(72, 12);
+            this.txtComment.Location = new System.Drawing.Point(72, 11);
             this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(119, 20);
+            this.txtComment.Size = new System.Drawing.Size(657, 22);
             this.txtComment.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Location = new System.Drawing.Point(12, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 13);
+            this.label1.Size = new System.Drawing.Size(54, 12);
             this.label1.TabIndex = 1;
             this.label1.Text = "Comment:";
             // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(197, 10);
+            this.btnSave.Location = new System.Drawing.Point(735, 9);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(75, 21);
             this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -71,9 +71,9 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 64);
+            this.label2.Location = new System.Drawing.Point(12, 59);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 13);
+            this.label2.Size = new System.Drawing.Size(25, 12);
             this.label2.TabIndex = 4;
             this.label2.Text = "File:";
             // 
@@ -81,18 +81,18 @@
             // 
             this.txtFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFile.Location = new System.Drawing.Point(74, 61);
+            this.txtFile.Location = new System.Drawing.Point(74, 56);
             this.txtFile.Name = "txtFile";
             this.txtFile.ReadOnly = true;
-            this.txtFile.Size = new System.Drawing.Size(198, 20);
+            this.txtFile.Size = new System.Drawing.Size(736, 22);
             this.txtFile.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 90);
+            this.label3.Location = new System.Drawing.Point(12, 83);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 13);
+            this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 6;
             this.label3.Text = "Backup 1:";
             // 
@@ -100,18 +100,18 @@
             // 
             this.txtBackup1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBackup1.Location = new System.Drawing.Point(74, 87);
+            this.txtBackup1.Location = new System.Drawing.Point(74, 80);
             this.txtBackup1.Name = "txtBackup1";
             this.txtBackup1.ReadOnly = true;
-            this.txtBackup1.Size = new System.Drawing.Size(198, 20);
+            this.txtBackup1.Size = new System.Drawing.Size(736, 22);
             this.txtBackup1.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 116);
+            this.label4.Location = new System.Drawing.Point(12, 107);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 13);
+            this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 8;
             this.label4.Text = "Backup 2:";
             // 
@@ -119,18 +119,18 @@
             // 
             this.txtBackup2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBackup2.Location = new System.Drawing.Point(74, 113);
+            this.txtBackup2.Location = new System.Drawing.Point(74, 104);
             this.txtBackup2.Name = "txtBackup2";
             this.txtBackup2.ReadOnly = true;
-            this.txtBackup2.Size = new System.Drawing.Size(198, 20);
+            this.txtBackup2.Size = new System.Drawing.Size(736, 22);
             this.txtBackup2.TabIndex = 7;
             // 
             // Form1
             // 
             this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 147);
+            this.ClientSize = new System.Drawing.Size(822, 379);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtBackup2);
             this.Controls.Add(this.label3);

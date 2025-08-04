@@ -547,7 +547,6 @@
             this.bt_image_process_p6.Name = "bt_image_process_p6";
             this.bt_image_process_p6.Size = new System.Drawing.Size(110, 40);
             this.bt_image_process_p6.TabIndex = 42;
-            this.bt_image_process_p6.Text = "光照效果7";
             this.bt_image_process_p6.UseVisualStyleBackColor = true;
             this.bt_image_process_p6.Click += new System.EventHandler(this.bt_image_process_p6_Click);
             // 
@@ -770,6 +769,7 @@
             this.bt_animate6.Name = "bt_animate6";
             this.bt_animate6.Size = new System.Drawing.Size(110, 40);
             this.bt_animate6.TabIndex = 42;
+            this.bt_animate6.Text = "光照效果7";
             this.bt_animate6.UseVisualStyleBackColor = true;
             this.bt_animate6.Click += new System.EventHandler(this.bt_animate6_Click);
             // 

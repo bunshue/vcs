@@ -8,16 +8,26 @@ WebCam 使用
 視訊編碼的名稱、編碼字串、副檔名
 
 編碼名稱	編碼字串	視訊檔副檔名
-YUV		*"I420"		.avi
+MPEG-4		*"XVID"		.avi  常用于 .avi 格式的视频文件
 MPEG-1		*"PIMT"		.avi
-MPEG-4		*"XVID"		.avi
-MP4		*"MP4V"		.mp4
+YUV		*"I420"		.avi
+MP4		*"MP4V"		.mp4  常用于 .mp4 格式的视频文件
+MJPG            *"MJPG"         .mov/.mp4  适用于使用 Motion JPEG 编码的视频
 Ogg Vorbis	*"THEO"		.ogv
+Flash視訊	*"FLV1"		.flv
+
+ENCODING_TYPE = "XVID"  # .avi 編碼器 MPEG-4
+ENCODING_TYPE = "PIMT"  # .avi 編碼器 MPEG-1    PIM1 ??
+ENCODING_TYPE = "I420"  # .avi 編碼器 YUV
+ENCODING_TYPE = "MP4V"  # .mp4 編碼器 MP4
+ENCODING_TYPE = "MJPG"  # .mov/.mp4 編碼器 MJPG 适用于使用 Motion JPEG 编码的视频
+ENCODING_TYPE = "THEO"  # .ogb 編碼器 Ogg Vorbis
+ENCODING_TYPE = "FLV1"  # .flv 編碼器 Flash視訊
 
 編碼格式
-VideoWriter_fourcc("I", "4", "2", "0")	.avi	YUV編碼，相容性好，但是需較多記憶體空間 = VideoWriter_fourcc(*"I420")
-VideoWriter_fourcc("P", "I", "M", "I")	.avi	MPEG-1編碼
 VideoWriter_fourcc("X", "V", "I", "D")	.avi	MPEG-4編碼 = VideoWriter_fourcc(*"XVID")
+VideoWriter_fourcc("P", "I", "M", "I")	.avi	MPEG-1編碼
+VideoWriter_fourcc("I", "4", "2", "0")	.avi	YUV編碼，相容性好，但是需較多記憶體空間 = VideoWriter_fourcc(*"I420")
 VideoWriter_fourcc("T", "H", "E", "O")	.ogb	Ogg Vobis編碼
 VideoWriter_fourcc("F", "L", "V", "1")	.flv	Flash視訊
 
@@ -32,7 +42,7 @@ record_filename = "tmp1_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + "
 cap = cv2.VideoCapture(0)
 
 # 建立視訊編碼 fourcc
-ENCODING_TYPE = "XVID"  # 編碼器 MPEG-4
+ENCODING_TYPE = "XVID"  # .avi 編碼器 MPEG-4
 fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)
 
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))  # 取得影像寬度
@@ -77,23 +87,23 @@ SPEED = 10  # N 倍速
 # 第一種
 # 用 XVID 格式存 avi 檔
 record_filename = "tmp1_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".avi"
-ENCODING_TYPE = "XVID"  # 編碼器
+ENCODING_TYPE = "XVID"  # .avi 編碼器 MPEG-4
 
 """
 #第二種
 # 用 MP4V 格式存 mp4 檔
 record_filename = "tmp2a_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mp4"
-ENCODING_TYPE = "MP4V"  # 編碼器
+ENCODING_TYPE = "MP4V"  # .mp4 編碼器 MP4
 
 #第三種
 # 用 MJPG 格式存 mp4 檔
 record_filename = "tmp2b_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mp4"
-ENCODING_TYPE = "MJPG"  # 編碼器
+ENCODING_TYPE = "MJPG"  # .mov/.mp4 編碼器 MJPG
 
 #第四種
 # 用 MJPG 格式存 mov 檔
 record_filename = "tmp3_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mov"
-ENCODING_TYPE = "MJPG"  # 編碼器
+ENCODING_TYPE = "MJPG"  # .mov/.mp4 編碼器 MJPG
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -122,7 +132,7 @@ now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 print("開始錄影時間 :", now)
 
 # 建立視訊編碼 fourcc
-ENCODING_TYPE = "XVID"  # 編碼器
+ENCODING_TYPE = "XVID"  # .avi 編碼器 MPEG-4
 fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)
 
 # 建立影像寫入器 out
@@ -266,7 +276,7 @@ print("image mode:", image.mode)
 k = np.zeros((width, height), np.uint8)
 
 # 建立視訊編碼 fourcc
-ENCODING_TYPE = "XVID"  # 編碼器 MPEG-4
+ENCODING_TYPE = "XVID"  # .avi 編碼器 MPEG-4
 fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)
 
 now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
@@ -300,6 +310,80 @@ print("現在時間 :", now)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("轉錄影片 轉錄一段, 只有影像")
+
+video_filename = "D:/tennis.mp4"
+
+cap = cv2.VideoCapture(video_filename)
+
+frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)  # 總影格數
+fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
+
+sec = int(frames / fps)  # 播放時間（秒）
+timestr = str(datetime.timedelta(seconds=sec))  # 轉換成時分秒格式
+print("播放時間=", timestr)
+
+width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)  # 寬度
+height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)  # 高度
+fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
+frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)  # 總影格數
+print(f"寬度 : {width}")
+print(f"高度 : {height}")
+print(f"速度 : {fps}")
+print(f"幀數 : {frames}")
+
+print("轉錄前2分鐘")
+
+record_time_st = time.time()
+now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+print("開始轉錄時間 :", now)
+
+record_filename = "tmp2a_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".flv"
+
+# 最好 XVID 和 MP4V, I420太大
+ENCODING_TYPE = "XVID"  # .avi 編碼器 MPEG-4
+# NG ENCODING_TYPE = "PIMT"  # .avi 編碼器 MPEG-1    PIM1 ??
+# ENCODING_TYPE = "I420"  # .avi 編碼器 YUV 太大了
+# ENCODING_TYPE = "MP4V"  # .mp4 編碼器 MP4
+# NG ENCODING_TYPE = "MJPG"  # .mov/.mp4 編碼器 MJPG 适用于使用 Motion JPEG 编码的视频 MOV-NG
+# NG ENCODING_TYPE = "THEO"  # .ogb 編碼器 Ogg Vorbis
+# NG ENCODING_TYPE = "FLV1"  # .flv 編碼器 Flash視訊
+
+fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)
+
+cap = cv2.VideoCapture(video_filename)  # 開啟影片
+
+width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))  # 取得影像寬度
+height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
+fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
+
+# 建立影像寫入器 out
+out = cv2.VideoWriter(record_filename, fourcc, fps, (width, height))
+
+frame_cnt = 0
+
+while cap.isOpened():
+    ret, frame = cap.read()
+    if ret == True:
+        out.write(frame)  # 影像寫入影片檔
+        frame_cnt = frame_cnt + 1
+        if frame_cnt == fps * 60 * 2:
+            break
+    else:
+        break
+
+out.release()  # 關閉寫入器
+cap.release()
+cv2.destroyAllWindows()
+
+now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+print("\n停止錄影時間 :", now)
+record_time_elapsed = time.time() - record_time_st
+print("錄影時間 :", int(record_time_elapsed), "秒")
+print("存檔檔名 :", record_filename)
+
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -342,7 +426,7 @@ print("------------------------------------------------------------")  # 60個
 # 若要錄成黑白影片 要 加上 isColor=False 參數設定
 
 # 建立視訊編碼 fourcc
-ENCODING_TYPE = "XVID"  # 編碼器 MPEG-4
+ENCODING_TYPE = "XVID"  # .avi 編碼器 MPEG-4
 fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)
 
 # 建立影像寫入器 out

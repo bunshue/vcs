@@ -1,19 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 
-namespace howto_rotate_scrolled
+namespace vcs_RotatePicture6
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
         // The original image.
         private Bitmap OriginalBitmap;
@@ -30,64 +32,106 @@ namespace howto_rotate_scrolled
         // The total angle rotated so far in previous drags.
         private float TotalAngle = 0;
 
-        // Load an image file.
-        private void mnuFileOpen_Click(object sender, EventArgs e)
+        public Form1()
         {
-            if (ofdFile.ShowDialog() == DialogResult.OK)
-            {
-                // Start with no rotation.
-                CurrentAngle = 0;
-                TotalAngle = 0;
-
-                // Load the bitmap.
-                Bitmap bm = new Bitmap(ofdFile.FileName);
-                picRotated.Image = OriginalBitmap;
-                picRotated.Visible = true;
-
-                // See how big the rotated bitmap must be.
-                int wid = (int)Math.Sqrt(bm.Width * bm.Width + bm.Height * bm.Height);
-
-                // Make the original unrotated bitmap.
-                OriginalBitmap = new Bitmap(wid, wid);
-
-                // Save the center of the image for calculating rotation angles.
-                ImageCenter = new PointF(wid / 2f, wid / 2f);
-
-                // Copy the image into the middle of the bitmap.
-                using (Graphics gr = Graphics.FromImage(OriginalBitmap))
-                {
-                    // Clear with the color in the image's upper left corner.
-                    gr.Clear(bm.GetPixel(0, 0));
-
-                    //// For debugging. (Easier to see the background.)
-                    //gr.Clear(Color.LightBlue);
-
-                    // Draw the image centered.
-                    gr.DrawImage(bm, (wid - bm.Width) / 2, (wid - bm.Height) / 2);
-                }
-
-                // Display the original image.
-                picRotated.Image = OriginalBitmap;
-
-                // Size the form to fit.
-                SizeForm();
-
-                // Enable Save As.
-                mnuFileSaveAs.Enabled = true;
-            }
+            InitializeComponent();
         }
 
-        private void mnuFileSaveAs_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            if (sfdFile.ShowDialog() == DialogResult.OK)
+            // Start with no rotation.
+            CurrentAngle = 0;
+            TotalAngle = 0;
+
+            // Load the bitmap.
+            Bitmap bm = new Bitmap(filename);
+            pictureBox1.Image = OriginalBitmap;
+            pictureBox1.Visible = true;
+
+            // See how big the rotated bitmap must be.
+            int wid = (int)Math.Sqrt(bm.Width * bm.Width + bm.Height * bm.Height);
+
+            // Make the original unrotated bitmap.
+            OriginalBitmap = new Bitmap(wid, wid);
+
+            // Save the center of the image for calculating rotation angles.
+            ImageCenter = new PointF(wid / 2f, wid / 2f);
+
+            // Copy the image into the middle of the bitmap.
+            using (Graphics gr = Graphics.FromImage(OriginalBitmap))
             {
-                SaveBitmapUsingExtension(RotatedBitmap, sfdFile.FileName);
+                // Clear with the color in the image's upper left corner.
+                gr.Clear(bm.GetPixel(0, 0));
+
+                //// For debugging. (Easier to see the background.)
+                //gr.Clear(Color.LightBlue);
+
+                // Draw the image centered.
+                gr.DrawImage(bm, (wid - bm.Width) / 2, (wid - bm.Height) / 2);
             }
+
+            // Display the original image.
+            pictureBox1.Image = OriginalBitmap;
+
+            // Size the form to fit.
+            SizeForm();
         }
 
-        private void mnuFileExit_Click(object sender, EventArgs e)
+        // Let the user click and drag to rotate.
+        private float StartAngle;
+        private bool DragInProgress = false;
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            Close();
+            // Do nothing if there's no image loaded.
+            if (OriginalBitmap == null) return;
+            DragInProgress = true;
+
+            // Get the initial angle from horizontal to the
+            // vector between the center and the drag start point.
+            //float dx = e.X - (pictureBox1.ClientSize.Width / 2f);
+            //float dy = e.Y - (pictureBox1.ClientSize.Height / 2f);
+            float dx = e.X - ImageCenter.X;
+            float dy = e.Y - ImageCenter.Y;
+            StartAngle = (float)Math.Atan2(dy, dx);
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Do nothing if there's no drag in progress.
+            if (!DragInProgress) return;
+
+            // Get the angle from horizontal to the
+            // vector between the center and the current point.
+            //float dx = e.X - (pictureBox1.ClientSize.Width / 2f);
+            //float dy = e.Y - (pictureBox1.ClientSize.Height / 2f);
+            float dx = e.X - ImageCenter.X;
+            float dy = e.Y - ImageCenter.Y;
+            float new_angle = (float)Math.Atan2(dy, dx);
+
+            // Calculate the change in angle.
+            CurrentAngle = new_angle - StartAngle;
+
+            // Convert to degrees.
+            CurrentAngle *= 180 / (float)Math.PI;
+
+            // Add to the previous total angle rotated.
+            CurrentAngle += TotalAngle;
+            txtAngle.Text = CurrentAngle.ToString("0.00") + "°";
+
+            // Rotate the original image to make the result bitmap.
+            RotatedBitmap = RotateBitmap(OriginalBitmap, CurrentAngle);
+
+            // Display the result.
+            pictureBox1.Image = RotatedBitmap;
+            pictureBox1.Refresh();
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            DragInProgress = false;
+
+            // Save the new total angle of rotation.
+            TotalAngle = CurrentAngle;
         }
 
         // Save the file with the appropriate format.
@@ -178,8 +222,8 @@ namespace howto_rotate_scrolled
         // Make sure the form is big enough to show the rotated image.
         private void SizeForm()
         {
-            int wid = picRotated.Right + picRotated.Left;
-            int hgt = picRotated.Bottom + picRotated.Left;
+            int wid = pictureBox1.Right + pictureBox1.Left;
+            int hgt = pictureBox1.Bottom + pictureBox1.Left;
             if (wid > 900) wid = 900;
             if (hgt > 600) hgt = 600;
             this.ClientSize = new Size(
@@ -187,57 +231,8 @@ namespace howto_rotate_scrolled
                 Math.Max(hgt, this.ClientSize.Height));
         }
 
-        // Let the user click and drag to rotate.
-        private float StartAngle;
-        private bool DragInProgress = false;
-        private void picRotated_MouseDown(object sender, MouseEventArgs e)
-        {
-            // Do nothing if there's no image loaded.
-            if (OriginalBitmap == null) return;
-            DragInProgress = true;
-
-            // Get the initial angle from horizontal to the
-            // vector between the center and the drag start point.
-            float dx = e.X - ImageCenter.X;
-            float dy = e.Y - ImageCenter.Y;
-            StartAngle = (float)Math.Atan2(dy, dx);
-        }
-
-        private void picRotated_MouseMove(object sender, MouseEventArgs e)
-        {
-            // Do nothing if there's no drag in progress.
-            if (!DragInProgress) return;
-
-            // Get the angle from horizontal to the
-            // vector between the center and the current point.
-            float dx = e.X - ImageCenter.X;
-            float dy = e.Y - ImageCenter.Y;
-            float new_angle = (float)Math.Atan2(dy, dx);
-
-            // Calculate the change in angle.
-            CurrentAngle = new_angle - StartAngle;
-
-            // Convert to degrees.
-            CurrentAngle *= 180 / (float)Math.PI;
-
-            // Add to the previous total angle rotated.
-            CurrentAngle += TotalAngle;
-            txtAngle.Text = CurrentAngle.ToString("0.00") + "°";
-
-            // Rotate the original image to make the result bitmap.
-            RotatedBitmap = RotateBitmap(OriginalBitmap, CurrentAngle);
-
-            // Display the result.
-            picRotated.Image = RotatedBitmap;
-            picRotated.Refresh();
-        }
-
-        private void picRotated_MouseUp(object sender, MouseEventArgs e)
-        {
-            DragInProgress = false;
-
-            // Save the new total angle of rotation.
-            TotalAngle = CurrentAngle;
-        }
     }
 }
+
+//另存新檔
+//SaveBitmapUsingExtension(RotatedBitmap, sfdFile.FileName);

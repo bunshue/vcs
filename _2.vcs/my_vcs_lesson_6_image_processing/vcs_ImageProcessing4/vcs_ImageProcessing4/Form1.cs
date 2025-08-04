@@ -74,31 +74,9 @@ namespace vcs_ImageProcessing4
             button22.Location = new Point(x_st + dx * 1, y_st + dy * 10);
             button23.Location = new Point(x_st + dx * 1, y_st + dy * 11);
 
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button30.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button31.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button32.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button33.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            button34.Location = new Point(x_st + dx * 2, y_st + dy * 10);
-            button35.Location = new Point(x_st + dx * 2, y_st + dy * 11);
-
-            trackBar_R.Location = new Point(x_st + dx * 0, y_st + dy * 13);
-            trackBar_G.Location = new Point(x_st + dx * 0, y_st + dy * 14);
-            trackBar_B.Location = new Point(x_st + dx * 0, y_st + dy * 15);
-
-            tb_R.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 13);
-            tb_G.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 13 + 40);
-            tb_B.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 13 + 80);
-            bt_apply.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 13 + 120);
-
-            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox1.Size = new Size(600, 600);
-            pictureBox2.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             pictureBox2.Size = new Size(600, 600);
 
             richTextBox1.Location = new Point(x_st + dx * 8, y_st + dy * 0);
@@ -633,7 +611,7 @@ new Point(100, 400)};// destination for lower-left point of original
             reset_pictureBox();
 
             //轉成灰階
-            pictureBox1.Image = ConvertToGrayscale(pictureBox1.Image);
+            pictureBox1.Image = ConvertToGrayscale(filename);
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -641,7 +619,7 @@ new Point(100, 400)};// destination for lower-left point of original
             reset_pictureBox();
 
             //轉成灰階
-            pictureBox1.Image = ConvertToGrayscale_CM(pictureBox1.Image);
+            pictureBox1.Image = ConvertToGrayscale_CM(filename);
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -662,32 +640,40 @@ new Point(100, 400)};// destination for lower-left point of original
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //轉成藍色系
+            // Retrieve the image.
+            Bitmap image1 = new Bitmap(filename, true);
 
+            int x, y;
+
+            // Loop through the images pixels to reset color.
+            for (x = 0; x < image1.Width; x++)
+            {
+                for (y = 0; y < image1.Height; y++)
+                {
+                    Color pixelColor = image1.GetPixel(x, y);
+                    //Color newColor = Color.FromArgb(pixelColor.R, 0, 0);
+                    //Color newColor = Color.FromArgb(0, pixelColor.G, 0);
+                    Color newColor = Color.FromArgb(0, 0, pixelColor.B);
+                    image1.SetPixel(x, y, newColor);
+                }
+            }
+
+            // Set the PictureBox to display the image.
+            pictureBox1.Image = image1;
+
+            richTextBox1.Text += "圖片大小 " + image1.Width.ToString() + " X " + image1.Height.ToString() + "\n";
+
+            // Display the pixel format in Label1.
+            richTextBox1.Text += "Pixel format: " + image1.PixelFormat.ToString() + "\n";
         }
 
-        int ratio = 100;
         private void button20_Click(object sender, EventArgs e)
         {
-            //+ 10%
-            if (ratio <= 255)
-            {
-                ratio += 10;
-                richTextBox1.Text += ratio.ToString() + " %\n";
-
-                draw_picture(ratio, ratio, ratio);
-            }
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
-            //- 10%
-            if (ratio >= 10)
-            {
-                ratio -= 10;
-                richTextBox1.Text += ratio.ToString() + " %\n";
-
-                draw_picture(ratio, ratio, ratio);
-            }
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -755,174 +741,36 @@ new Point(100, 400)};// destination for lower-left point of original
             pictureBox2.Image = bitmap2;
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;   //圖片Zoom的方法
             richTextBox1.Text += "處理完成\n";
-
-
         }
 
-        private void button24_Click(object sender, EventArgs e)
+        public Bitmap ConvertToGrayscale(string filename)
         {
+            Bitmap bitmap1 = new Bitmap(filename);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H);
 
-            //轉成藍色系
-            // Retrieve the image.
-            Bitmap image1 = new Bitmap(filename, true);
-
-            int x, y;
-
-            // Loop through the images pixels to reset color.
-            for (x = 0; x < image1.Width; x++)
+            for (int y = 0; y < H; y++)
             {
-                for (y = 0; y < image1.Height; y++)
+                for (int x = 0; x < W; x++)
                 {
-                    Color pixelColor = image1.GetPixel(x, y);
-                    //Color newColor = Color.FromArgb(pixelColor.R, 0, 0);
-                    //Color newColor = Color.FromArgb(0, pixelColor.G, 0);
-                    Color newColor = Color.FromArgb(0, 0, pixelColor.B);
-                    image1.SetPixel(x, y, newColor);
-                }
-            }
-
-            // Set the PictureBox to display the image.
-            pictureBox1.Image = image1;
-
-            richTextBox1.Text += "圖片大小 " + image1.Width.ToString() + " X " + image1.Height.ToString() + "\n";
-
-            // Display the pixel format in Label1.
-            richTextBox1.Text += "Pixel format: " + image1.PixelFormat.ToString() + "\n";
-        }
-
-        void draw_picture(int ratio_r, int ratio_g, int ratio_b)
-        {
-            int xx;
-            int yy;
-            int ww;
-            int hh;
-            Color ppp;
-            int A;
-            int R;
-            int G;
-            int B;
-
-            richTextBox1.Text += "處理中~~~~~~\n";
-
-            bitmap1 = new Bitmap(filename);
-            //g = Graphics.FromImage(bitmap1);
-
-            ww = bitmap1.Width / 2;
-            hh = bitmap1.Height / 2;
-
-            for (yy = 0; yy < hh; yy++)
-            {
-                for (xx = 0; xx < ww; xx++)
-                {
-                    Color pp = bitmap1.GetPixel(xx, yy);
-
-                    A = pp.A;
-                    R = pp.R;
-                    G = pp.G;
-                    B = pp.B;
-
-                    R = R * ratio_r / 100;
-                    if (R > 255)
-                        R = 255;
-                    G = G * ratio_g / 100;
-                    if (G > 255)
-                        G = 255;
-                    B = B * ratio_b / 100;
-                    if (B > 255)
-                        B = 255;
-
-                    ppp = Color.FromArgb(A, R, G, B);
-                    bitmap1.SetPixel(xx, yy, ppp);
-                }
-            }
-            pictureBox2.Image = bitmap1;
-            richTextBox1.Text += "處理完成\n";
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-            //R
-            draw_picture(100, 0, 0);
-
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-            //G
-            draw_picture(0, 100, 0);
-
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-            //B
-            draw_picture(0, 0, 100);
-
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button29_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void button30_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button31_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button32_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button33_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button34_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button35_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        public Bitmap ConvertToGrayscale(Image image) // Image 是抽象基底類別
-        {
-            Bitmap source = (Bitmap)image;  // Image 是 Bitmap 的父類別
-            Bitmap dest = new Bitmap(source.Width, source.Height); //新增一樣寬高的點陣圖物件
-
-            for (int y = 0; y < dest.Height; y++)
-            {
-                for (int x = 0; x < dest.Width; x++)
-                {
-                    Color c = source.GetPixel(x, y); // 得到 原始像素 的 Color
+                    Color c = bitmap1.GetPixel(x, y); // 得到 原始像素 的 Color
                     int luma = (int)(c.R * 0.3 + c.G * 0.6 + c.B * 0.1);  // 以 3:6:1 的比例得到設定值
-                    dest.SetPixel(x, y, Color.FromArgb(luma, luma, luma)); // 寫入 像素値
+                    bitmap2.SetPixel(x, y, Color.FromArgb(luma, luma, luma)); // 寫入 像素値
                 }
             }
-            return dest;
+            return bitmap2;
         }
 
         // 使用色彩矩陣來調整影像色彩
-        public Bitmap ConvertToGrayscale_CM(Image image)
+        public Bitmap ConvertToGrayscale_CM(string filename)
         {
-            Bitmap dest = new Bitmap(image.Width, image.Height);
-            Graphics g = Graphics.FromImage(dest); // 從點陣圖 建立 新的畫布
+            Bitmap bitmap1 = new Bitmap(filename);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H);
+
+            Graphics g = Graphics.FromImage(bitmap2); // 從點陣圖 建立 新的畫布
 
             // 定義含有 RGBA 空間座標的 5 x 5 矩陣
             // (R, G, B, A, 1) 乘上 此矩陣
@@ -938,16 +786,20 @@ new Point(100, 400)};// destination for lower-left point of original
 
             // 設定預設分類的色彩調整矩陣。
             ia.SetColorMatrix(cm);
-            g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, ia);
+            g.DrawImage(bitmap1, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
             g.Dispose();
 
-            return dest;
+            return bitmap2;
         }
 
         public Bitmap ConvertToTransparency(Image image)
         {
-            Bitmap dest = new Bitmap(image.Width, image.Height);
-            Graphics g = Graphics.FromImage(dest);
+            Bitmap bitmap1 = new Bitmap(filename);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H);
+
+            Graphics g = Graphics.FromImage(bitmap2);
 
             ImageAttributes ia = new ImageAttributes();
 
@@ -957,56 +809,31 @@ new Point(100, 400)};// destination for lower-left point of original
 
             ia.SetColorMatrix(cm);
 
-            g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, ia);
+            g.DrawImage(image, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
             g.Dispose();
 
-            return dest;
+            return bitmap2;
         }
 
         public Bitmap ConvertToRotate(Image image)
         {
-            Bitmap dest = new Bitmap(image.Width, image.Height);
-            Graphics g = Graphics.FromImage(dest);
+            Bitmap bitmap1 = new Bitmap(filename);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H);
+
+            Graphics g = Graphics.FromImage(bitmap2);
 
             Matrix mx = new Matrix();
 
             mx.Rotate(30);
             g.Transform = mx;
 
-            g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height));
+            g.DrawImage(image, new Rectangle(0, 0, W, H));
 
             g.Dispose();
 
-            return dest;
-        }
-
-        private void trackBar_R_Scroll(object sender, EventArgs e)
-        {
-            tb_R.Text = trackBar_R.Value.ToString();
-        }
-
-        private void trackBar_G_Scroll(object sender, EventArgs e)
-        {
-            tb_G.Text = trackBar_G.Value.ToString();
-
-        }
-
-        private void trackBar_B_Scroll(object sender, EventArgs e)
-        {
-            tb_B.Text = trackBar_B.Value.ToString();
-
-        }
-
-        private void bt_apply_Click(object sender, EventArgs e)
-        {
-            int ratio_r;
-            int ratio_g;
-            int ratio_b;
-            ratio_r = trackBar_R.Value;
-            ratio_g = trackBar_G.Value;
-            ratio_b = trackBar_B.Value;
-
-            draw_picture(ratio_r, ratio_g, ratio_b);
+            return bitmap2;
         }
     }
 }
