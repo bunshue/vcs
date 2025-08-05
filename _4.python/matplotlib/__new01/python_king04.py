@@ -1135,13 +1135,15 @@ def update_line(i):
 
 ani = FuncAnimation(fig, update_line, blit=True, interval=25, frames=100)
 
-# matplotlib會使用系統中安裝的視訊壓縮軟體（如ffmpeg.exe）產生視訊檔案。請讀者確認視訊壓縮軟體的可執行檔案的路徑是否在PATH環境變數中。
+# matplotlib會使用系統中安裝的視訊壓縮軟體（如ffmpeg.exe）產生視訊檔案。
+# 請讀者確認視訊壓縮軟體的可執行檔案的路徑是否在PATH環境變數中。
 
 ani.save("tmp_sin_wave.mp4", fps=25)
 
 # 加入GUI面板
 
-# scpy2.matplotlib.gui_panel：提供了TK與QT界面庫的滑標控制項面板類別TkSliderPanel和QtSliderPanel。tk_panel_demo.py和qt_panel_demo.py為其示範程式。
+# scpy2.matplotlib.gui_panel：提供了TK與QT界面庫的滑標控制項面板類別TkSliderPanel和QtSliderPanel。
+# tk_panel_demo.py和qt_panel_demo.py為其示範程式。
 
 import matplotlib
 

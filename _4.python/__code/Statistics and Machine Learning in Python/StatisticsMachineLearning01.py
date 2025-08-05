@@ -888,7 +888,6 @@ print(cwd)
 os.chdir(cwd)
 
 import tempfile
-
 tmpdir = tempfile.gettempdir()
 
 # Join paths
@@ -962,9 +961,8 @@ for dirpath, dirnames, filenames in os.walk(WD):
 ###############################################################################
 # glob, basename and file extension
 
-import tempfile
 import glob
-
+import tempfile
 tmpdir = tempfile.gettempdir()
 
 filenames = glob.glob(os.path.join(tmpdir, "*", "*.txt"))
@@ -1300,7 +1298,6 @@ XXXXXXXX
 """
 
 import tempfile
-
 tmpfilename = os.path.join(tempfile.gettempdir(), "bsd.txt")
 
 fd = open(tmpfilename, "w")

@@ -114,3 +114,77 @@ with tempfile.TemporaryDirectory() as tmpdir:
         stream.write("ccccccccc")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+# Topic: 临时文件和目录
+
+from tempfile import TemporaryFile
+from tempfile import TemporaryDirectory
+from tempfile import NamedTemporaryFile
+import tempfile
+
+
+with TemporaryFile('w+t') as f:
+    # Read/write to the file
+    f.write('Hello World\n')
+    f.write('Testing\n')
+
+    # Seek back to beginning and read the data
+    f.seek(0)
+    data = f.read()
+    print(data)
+
+with NamedTemporaryFile('w+t') as f:
+    print('filename is:', f.name)
+
+with TemporaryDirectory() as dirname:
+    print('dirname is:', dirname)
+
+print(tempfile.mkstemp())
+print(tempfile.mkdtemp())
+print(tempfile.gettempdir())
+
+
+import tempfile
+with tempfile.NamedTemporaryFile(delete=True) as fp:
+    print("暫時檔案 :", fp.name)
+
+temp_dir = tempfile.TemporaryDirectory()
+psg_dir = os.path.join(temp_dir.name, 'PySimpleGUI')
+
+import tempfile
+tmpfilename = os.path.join(tempfile.gettempdir(), "bsd.txt")
+
+
+import tempfile
+
+tmpdir = tempfile.gettempdir()
+print(tmpdir)
+
+import tempfile
+
+tmpdir = tempfile.gettempdir()
+print(tmpdir)
+
+
+csv_filename = os.path.join(tmpdir, "users.csv")
+
+print(csv_filename)
+
+
+import tempfile
+
+tmpdir = tempfile.gettempdir()
+print(tmpdir)
+db_filename = os.path.join(tmpdir, "users.db")
+print(db_filename)
+
+
+
+
+
+
+
+

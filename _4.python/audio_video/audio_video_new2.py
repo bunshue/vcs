@@ -110,27 +110,21 @@ print("------------------------------------------------------------")  # 60個
 
 from gtts import gTTS
 from pygame import mixer
-import tempfile
 
 def speak(sentence, lang, loops=1):
-    with tempfile.NamedTemporaryFile(delete=True) as fp:
+        filename = "tmp_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mp3"
         tts=gTTS(text=sentence, lang=lang)
-        tts.save('{}.mp3'.format(fp.name))
+        print(filename)
+        tts.save(filename)
         mixer.init()
-        mixer.music.load('{}.mp3'.format(fp.name))
+        mixer.music.load(filename)
         mixer.music.play()
 
 speak('ありがとう', 'ja')
-time.sleep(3)
-speak('全國的軍民同胞們, 川普是笨蛋', 'zh-tw')
-time.sleep(3)
-speak('Hello World!', 'en')
-time.sleep(3)
-
-
-
-
-sys.exit()
+time.sleep(5)
+speak('本软件验证和确认报告包括以下信息', 'zh-tw')
+time.sleep(5)
+speak('Picture Archiving & Communication System', 'en')
 
 print("------------------------------------------------------------")  # 60個
 

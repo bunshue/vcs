@@ -767,3 +767,15 @@ cv2.rectangle(image, (x1, y1), (x, y), GREEN, 5)
 cv2.line(image, (10, 300), (250, 300), BLUE, 5)  # 輸出線條
 cv2.rectangle(image, (20, 20), (240, 250), RED, 2)  # 輸出矩陣
 cv2.putText(image, "OpenCV", (10, 250), cv2.FONT_ITALIC, 3, BLUE, 8)  # 輸出文字
+
+
+w, h = 400, 400
+image_r = np.zeros([h, w, 3])  # 黑色
+image_g = np.zeros([h, w, 3])  # 黑色
+image_b = np.zeros([h, w, 3])  # 黑色
+
+cv2.circle(image_r, (cx, cy), radius, RED, -1)  # 繪製實心圓形
+cv2.circle(image_g, (cx, cy), radius, GREEN, -1)  # 繪製實心圓形
+cv2.circle(image_b, (cx, cy), radius, BLUE, -1)  # 繪製實心圓形
+
+

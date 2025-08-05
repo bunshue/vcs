@@ -306,8 +306,7 @@ namespace vcs_ImageProcessing0
 
         private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "指針法\n";
-
+            richTextBox1.Text += "指針法1\n";
             string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
             Bitmap bmp = image_process_pointer1(filename);
             pictureBox1.Image = bmp;
@@ -359,13 +358,12 @@ namespace vcs_ImageProcessing0
         private void button4_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "指針法3\n";
-
             string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
-            Bitmap bmp = image_process_pointer3(filename);
+            Bitmap bmp = image_process_pointer2(filename);
             pictureBox1.Image = bmp;
         }
 
-        Bitmap image_process_pointer3(string filename)
+        Bitmap image_process_pointer2(string filename)
         {
             Bitmap bmp = new Bitmap(filename);
 
@@ -414,23 +412,18 @@ namespace vcs_ImageProcessing0
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //Marshal.Copy 5 指針法 二值化圖片
-            richTextBox1.Text += "指針法 二值化圖片\n";
+            richTextBox1.Text += "指針法3\n";
             string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
-            Bitmap bmp = do_OtsuThreshold(filename);
+            Bitmap bmp = image_process_pointer3(filename);
             pictureBox1.Image = bmp;
         }
 
-        Bitmap do_OtsuThreshold(string filename)
+        Bitmap image_process_pointer3(string filename)
         {
             Bitmap bmp = new Bitmap(filename);
 
             int W = bmp.Width;
             int H = bmp.Height;
-
-            // 影像灰度化   
-            // b = Gray(b);   
-            byte threshold = 127;
 
             //綁定bmp和bmpData
             BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
@@ -451,8 +444,6 @@ namespace vcs_ImageProcessing0
                 bmp.UnlockBits(bmpData);
             }
 
-            richTextBox1.Text += "threshold = " + threshold.ToString() + "\n";
-
             //綁定bmp和bmpData
             BitmapData data = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
             unsafe
@@ -468,14 +459,9 @@ namespace vcs_ImageProcessing0
                         G = p[1];
                         B = p[0];
                         gray = (byte)((R * 19595 + G * 38469 + B * 7472) >> 16);
-                        if (gray >= threshold)
-                        {
-                            p[0] = p[1] = p[2] = 255;
-                        }
-                        else
-                        {
-                            p[0] = p[1] = p[2] = 0;
-                        }
+                        p[2] = gray;
+                        p[1] = gray;
+                        p[0] = gray;
                         p += 4;
                     }
                     p += offset;
@@ -488,43 +474,13 @@ namespace vcs_ImageProcessing0
 
         private void button6_Click(object sender, EventArgs e)
         {
-        }
-
-        void Restore_Picture()
-        {
-            pictureBox1.Image = Image.FromFile(filename);
-            Application.DoEvents();
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            //指針法5
+            //指針法4轉換爲灰度圖
             string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
-            Bitmap bmp = image_process_pointer5(filename);
+            Bitmap bmp = image_process_pointer4(filename);
             pictureBox1.Image = bmp;
         }
 
-        Bitmap image_process_pointer5(string filename)
+        Bitmap image_process_pointer4(string filename)
         {
             filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
@@ -582,6 +538,37 @@ namespace vcs_ImageProcessing0
             bmp.UnlockBits(bmpData);
 
             return bmp;
+        }
+
+        void Restore_Picture()
+        {
+            pictureBox1.Image = Image.FromFile(filename);
+            Application.DoEvents();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //內存法建立彩色圖
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -748,7 +735,6 @@ namespace vcs_ImageProcessing0
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //內存法建立彩色圖
         }
 
         private void button15_Click(object sender, EventArgs e)

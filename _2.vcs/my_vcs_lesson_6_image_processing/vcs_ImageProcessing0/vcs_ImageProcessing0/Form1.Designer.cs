@@ -100,7 +100,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(130, 60);
             this.button3.TabIndex = 4;
-            this.button3.Text = "指針法";
+            this.button3.Text = "指針法1";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -122,7 +122,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(130, 60);
             this.button5.TabIndex = 6;
-            this.button5.Text = "指針法 二值化圖片";
+            this.button5.Text = "指針法3";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -133,6 +133,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(130, 60);
             this.button6.TabIndex = 8;
+            this.button6.Text = "指針法4轉換爲灰度圖";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -215,7 +216,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(130, 60);
             this.button12.TabIndex = 15;
-            this.button12.Text = "指針法5轉換爲灰度圖";
+            this.button12.Text = "內存法建立彩色圖";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -237,7 +238,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(130, 60);
             this.button14.TabIndex = 17;
-            this.button14.Text = "內存法建立彩色圖";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 

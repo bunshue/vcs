@@ -27,7 +27,6 @@ xf = np.fft.rfft(XS) / NNNN
 freqs = np.fft.fftfreq(FFT_SIZE, 1.0 / RATE)
 y = np.fft.irfft(s)
 
-
 """
 
 from opencv_common import *
