@@ -53,13 +53,13 @@ print("------------------------------------------------------------")  # 60個
 
 """
 import win32api, win32con
-rc = win32api.MessageBox(0, 'kkkkk', "Installation Error", win32con.MB_ABORTRETRYIGNORE)
+rc = win32api.MessageBox(0, "kkkkk", "Installation Error", win32con.MB_ABORTRETRYIGNORE)
 if rc == win32con.IDABORT:
-    print('1111')
+    print("1111")
 elif rc == win32con.IDIGNORE:
-    print('2222')
+    print("2222")
 else:
-    print('3333')
+    print("3333")
 
 """
 
@@ -118,11 +118,11 @@ for x in keywordLists:
 import keyboard
 
 while True:
-    if keyboard.is_pressed('*'):
-        print('KKKK')
+    if keyboard.is_pressed("*"):
+        print("KKKK")
         continue;
-    if keyboard.is_pressed('/'):
-        print('SSSS')
+    if keyboard.is_pressed("/"):
+        print("SSSS")
         continue;
 """
 
@@ -184,7 +184,7 @@ string_io()
 print("------------------------------------------------------------")  # 60個
 
 """
-print('tqdm：進度條')
+print("tqdm：進度條")
 
 from tqdm import tqdm 
 from tqdm import trange 
@@ -356,8 +356,8 @@ for filename in filenames:
     text = open(filename, "rb").read()  # 要用 rb
     codetype = chardet.detect(text)
     # print(type(codetype))
-    # print(codetype['encoding'])
-    # print('{} 編碼格式：{}'.format(filename, codetype))
+    # print(codetype["encoding"])
+    # print("{} 編碼格式：{}".format(filename, codetype))
 
     # 印出不是utf-8格式的檔案名稱
     if not codetype["encoding"] == "utf-8":
@@ -449,8 +449,64 @@ import easygui
 easygui.enterbox(msg="請輸入你想說的話", title="標題", default="預設內容")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+向NTP服务器发送请求 response = client.request(pool.ntp.org)
+NTP（Network Time Protocol，网络时间协议）服务器进行通信，以同步和校准本地时间。
+
+"""
+import os
+import time
+import ntplib
+
+# 创建NTPClient对象
+ntp_client = ntplib.NTPClient()
+
+# 向NTP服务器发送请求
+response = ntp_client.request("pool.ntp.org")
+
+# 解析并打印服务器的时间信息
+# print(response.tx_time)
+
+time_str = response.tx_time
+
+ntp_date = time.strftime("%Y-%m-%d", time.localtime(time_str))
+ntp_time = time.strftime("%X", time.localtime(time_str))
+
+# os.system('date {} && time {}'.format(ntp_date,ntp_time))
+
+print(ntp_date)
+print()
+print(ntp_time)
+
+print("OK", ntp_date, ntp_time)
+"""
+#用于检查时间偏移的函数
+def check_time(self):
+    #确保我们的蜜罐时间是一致的，与实际时间相差不太远。
+ 
+    poll = self.config['timecheck']['poll']
+    ntp_poll = self.config['timecheck']['ntp_pool']
+    while True:
+        clnt = ntplib.NTPClient()
+        try:
+            response = clnt.request(ntp_poll, version=3)
+            diff = response.offset
+            if abs(diff) >= 15:
+                logger.error('Timings found to be far off, shutting down drone ({0})'.format(diff))
+                sys.exit(1)
+            else:
+                logger.debug('Polled ntp server and found that drone has {0} seconds offset.'.format(diff))
+        except (ntplib.NTPException, _socket.error) as ex:
+            logger.warning('Error while polling ntp server: {0}'.format(ex))
+        gevent.sleep(poll * 60 * 60)
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 

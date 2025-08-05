@@ -140,30 +140,18 @@ namespace howto_clip_line_to_polygon
             }
         }
 
-        // Select the appropriate tool.
-        private void btnLine_Click(object sender, EventArgs e)
-        {
-            if (btnLine.Checked) SelectTool(ToolTypes.None);
-            else SelectTool(ToolTypes.Line);
-        }
-        private void btnPolygon_Click(object sender, EventArgs e)
-        {
-            if (btnPolygon.Checked) SelectTool(ToolTypes.None);
-            else SelectTool(ToolTypes.Polygon);
-        }
-
         // Select the tool and use the appropriate cursor.
         private void SelectTool(ToolTypes tool)
         {
             // If we have selected an invalid line, discard it.
             if ((SelectedTool == ToolTypes.Line) &&
                 (LinePoints.Count == 1))
-                    LinePoints = new List<PointF>();
+                LinePoints = new List<PointF>();
 
             // If we have selected an invalid polygon, discard it.
             if ((SelectedTool == ToolTypes.Polygon) &&
                 (PolygonPoints.Count < 3))
-                    PolygonPoints = new List<PointF>();
+                PolygonPoints = new List<PointF>();
 
             // Select the new tool.
             SelectedTool = tool;
@@ -171,21 +159,15 @@ namespace howto_clip_line_to_polygon
             {
                 case ToolTypes.None:
                     Cursor = Cursors.Default;
-                    btnLine.Checked = false;
-                    btnPolygon.Checked = false;
                     break;
 
                 case ToolTypes.Line:
                     Cursor = Cursors.Cross;
-                    btnLine.Checked = true;
-                    btnPolygon.Checked = false;
                     LinePoints = new List<PointF>();
                     break;
 
                 case ToolTypes.Polygon:
                     Cursor = Cursors.Cross;
-                    btnLine.Checked = false;
-                    btnPolygon.Checked = true;
                     PolygonPoints = new List<PointF>();
                     break;
             }
@@ -375,6 +357,24 @@ namespace howto_clip_line_to_polygon
 
             // Calculate the Z coordinate of the cross product.
             return (BAx * BCy - BAy * BCx);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //直線
+            SelectTool(ToolTypes.Line);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //多邊形
+            SelectTool(ToolTypes.Polygon);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //無
+            SelectTool(ToolTypes.None);
         }
     }
 }
