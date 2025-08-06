@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace howto_file_replace
+namespace vcs_Scribble2
 {
     static class Program
     {

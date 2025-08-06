@@ -26,6 +26,9 @@ namespace howto_password_tracker
 
             // Restore form positions and data.
             LoadSettings();
+
+            richTextBox1.Text += "OK\n";
+            this.Size = new Size(1200, 600);
         }
 
         private void LoadSettings()
@@ -48,7 +51,13 @@ namespace howto_password_tracker
             {
                 // Verify that the user entered the correct master password.
                 string salt_master = SettingStuff.GetSetting(SettingStuff.APP_NAME, "Passwords", "MasterSalt", "");
+                richTextBox1.Text += "crypt_master : " + crypt_master + "\n";
+                richTextBox1.Text += "MasterPassword : " + MasterPassword + "\n";
+                richTextBox1.Text += "salt_master : " + salt_master + "\n";
                 string plain_master = Crypto.DecryptFromString(crypt_master, MasterPassword, salt_master);
+                richTextBox1.Text += "plain_master : " + plain_master + "\n";
+                richTextBox1.Text += "MasterPassword : " + MasterPassword + "\n";
+
                 if (plain_master != MasterPassword)
                 {
                     MessageBox.Show("Incorrect master password", "Incorrect Password", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -65,31 +74,22 @@ namespace howto_password_tracker
             for (int i = 0; ; i++)
             {
                 // Get the next password's name, username, and value.
-                string crypt_name = SettingStuff.GetSetting(SettingStuff.APP_NAME,
-                    "Passwords", "PasswordName" + i.ToString(), "");
-                if (crypt_name.Length == 0) break;
-                string crypt_uaername = SettingStuff.GetSetting(SettingStuff.APP_NAME,
-                    "Passwords", "PasswordUsername" + i.ToString(), "");
-                string crypt_value = SettingStuff.GetSetting(SettingStuff.APP_NAME,
-                    "Passwords", "PasswordValue" + i.ToString(), "");
-                string salt = SettingStuff.GetSetting(SettingStuff.APP_NAME,
-                    "Passwords", "PasswordSalt" + i.ToString(), "");
-                string crypt_date = SettingStuff.GetSetting(SettingStuff.APP_NAME,
-                    "Passwords", "PasswordDate" + i.ToString(), "");
+                string crypt_name = SettingStuff.GetSetting(SettingStuff.APP_NAME, "Passwords", "PasswordName" + i.ToString(), "");
+                if (crypt_name.Length == 0)
+                    break;
+                string crypt_uaername = SettingStuff.GetSetting(SettingStuff.APP_NAME, "Passwords", "PasswordUsername" + i.ToString(), "");
+                string crypt_value = SettingStuff.GetSetting(SettingStuff.APP_NAME, "Passwords", "PasswordValue" + i.ToString(), "");
+                string salt = SettingStuff.GetSetting(SettingStuff.APP_NAME, "Passwords", "PasswordSalt" + i.ToString(), "");
+                string crypt_date = SettingStuff.GetSetting(SettingStuff.APP_NAME, "Passwords", "PasswordDate" + i.ToString(), "");
 
                 // Decrypt the name, username, password, and date.
-                string plain_name = Crypto.DecryptFromString(
-                    crypt_name, MasterPassword, salt);
-                string plain_username = Crypto.DecryptFromString(
-                    crypt_uaername, MasterPassword, salt);
-                string plain_value = Crypto.DecryptFromString(
-                    crypt_value, MasterPassword, salt);
-                string plain_date = Crypto.DecryptFromString(
-                    crypt_date, MasterPassword, salt);
+                string plain_name = Crypto.DecryptFromString(crypt_name, MasterPassword, salt);
+                string plain_username = Crypto.DecryptFromString(crypt_uaername, MasterPassword, salt);
+                string plain_value = Crypto.DecryptFromString(crypt_value, MasterPassword, salt);
+                string plain_date = Crypto.DecryptFromString(crypt_date, MasterPassword, salt);
 
                 // Display the result.
-                dgvPasswords.Rows.Add(new Object[] { plain_name,
-                    plain_username, plain_value, plain_date, null, null});
+                dgvPasswords.Rows.Add(new Object[] { plain_name, plain_username, plain_value, plain_date, null, null });
             }
 
             // Restore the form and grid settings.
@@ -106,7 +106,7 @@ namespace howto_password_tracker
             dlg.txtValue.Text = default_value;
 
             DialogResult dialog_result = dlg.ShowDialog();
-            
+
             result = dlg.txtValue.Text;
             return dialog_result;
         }
@@ -147,12 +147,15 @@ namespace howto_password_tracker
                 string plain_username = (string)row.Cells["colUsername"].Value;
                 string plain_value = (string)row.Cells["colPassword"].Value;
                 string plain_date = (string)row.Cells["colChangedDate"].Value;
-                if (plain_name == null) plain_name = "";
-                if (plain_username == null) plain_name = "";
-                if (plain_value == null) plain_value = "";
-                if (plain_date == null) plain_date = "";
-                if ((plain_name.Length == 0) || (plain_username.Length == 0) ||
-                    (plain_value.Length == 0) || (plain_date.Length == 0))
+                if (plain_name == null)
+                    plain_name = "";
+                if (plain_username == null)
+                    plain_name = "";
+                if (plain_value == null)
+                    plain_value = "";
+                if (plain_date == null)
+                    plain_date = "";
+                if ((plain_name.Length == 0) || (plain_username.Length == 0) || (plain_value.Length == 0) || (plain_date.Length == 0))
                 {
                     row.Cells["colName"].Value = "";
                     row.Cells["colUsername"].Value = "";
@@ -219,7 +222,9 @@ namespace howto_password_tracker
                 // Make a new password.
                 frmNewPassword frm = new frmNewPassword();
                 if (dgvPasswords.Rows[e.RowIndex].Cells["colPassword"].Value != null)
+                {
                     frm.txtPassword.Text = dgvPasswords.Rows[e.RowIndex].Cells["colPassword"].Value.ToString();
+                }
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
                     dgvPasswords.Rows[e.RowIndex].Cells["colPassword"].Value = frm.txtPassword.Text;

@@ -1,4 +1,4 @@
-﻿namespace howto_copy_paste_scribble
+﻿namespace vcs_Scribble2
 {
     partial class Form1
     {
@@ -185,7 +185,7 @@
             // toolCustom
             // 
             this.toolCustom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolCustom.Image = global::howto_copy_paste_scribble.Properties.Resources.custom_dash;
+            this.toolCustom.Image = global::vcs_Scribble2.Properties.Resources.custom_dash;
             this.toolCustom.Name = "toolCustom";
             this.toolCustom.Size = new System.Drawing.Size(152, 22);
             this.toolCustom.Text = "Custom";
@@ -194,7 +194,7 @@
             // toolSolid
             // 
             this.toolSolid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolSolid.Image = global::howto_copy_paste_scribble.Properties.Resources.solid;
+            this.toolSolid.Image = global::vcs_Scribble2.Properties.Resources.solid;
             this.toolSolid.Name = "toolSolid";
             this.toolSolid.Size = new System.Drawing.Size(152, 22);
             this.toolSolid.Text = "Solid";
@@ -203,7 +203,7 @@
             // toolDot
             // 
             this.toolDot.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolDot.Image = global::howto_copy_paste_scribble.Properties.Resources.dot;
+            this.toolDot.Image = global::vcs_Scribble2.Properties.Resources.dot;
             this.toolDot.Name = "toolDot";
             this.toolDot.Size = new System.Drawing.Size(152, 22);
             this.toolDot.Text = "Dot";
@@ -212,7 +212,7 @@
             // toolDash
             // 
             this.toolDash.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolDash.Image = global::howto_copy_paste_scribble.Properties.Resources.dash;
+            this.toolDash.Image = global::vcs_Scribble2.Properties.Resources.dash;
             this.toolDash.Name = "toolDash";
             this.toolDash.Size = new System.Drawing.Size(152, 22);
             this.toolDash.Text = "Dash";
@@ -236,7 +236,7 @@
             // 
             this.toolRed.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolRed.ForeColor = System.Drawing.Color.Red;
-            this.toolRed.Image = global::howto_copy_paste_scribble.Properties.Resources.red;
+            this.toolRed.Image = global::vcs_Scribble2.Properties.Resources.red;
             this.toolRed.Name = "toolRed";
             this.toolRed.Size = new System.Drawing.Size(152, 22);
             this.toolRed.Text = "Red";
@@ -245,7 +245,7 @@
             // toolThick5
             // 
             this.toolThick5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolThick5.Image = global::howto_copy_paste_scribble.Properties.Resources.line5;
+            this.toolThick5.Image = global::vcs_Scribble2.Properties.Resources.line5;
             this.toolThick5.Name = "toolThick5";
             this.toolThick5.Size = new System.Drawing.Size(152, 22);
             this.toolThick5.Text = "5";
@@ -255,7 +255,7 @@
             // 
             this.toolBlack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolBlack.ForeColor = System.Drawing.Color.Black;
-            this.toolBlack.Image = global::howto_copy_paste_scribble.Properties.Resources.black;
+            this.toolBlack.Image = global::vcs_Scribble2.Properties.Resources.black;
             this.toolBlack.Name = "toolBlack";
             this.toolBlack.Size = new System.Drawing.Size(152, 22);
             this.toolBlack.Text = "Black";
@@ -265,7 +265,7 @@
             // 
             this.toolGreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolGreen.ForeColor = System.Drawing.Color.Green;
-            this.toolGreen.Image = global::howto_copy_paste_scribble.Properties.Resources.green;
+            this.toolGreen.Image = global::vcs_Scribble2.Properties.Resources.green;
             this.toolGreen.Name = "toolGreen";
             this.toolGreen.Size = new System.Drawing.Size(152, 22);
             this.toolGreen.Text = "Green";
@@ -298,7 +298,7 @@
             // 
             this.toolBlue.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolBlue.ForeColor = System.Drawing.Color.Blue;
-            this.toolBlue.Image = global::howto_copy_paste_scribble.Properties.Resources.blue;
+            this.toolBlue.Image = global::vcs_Scribble2.Properties.Resources.blue;
             this.toolBlue.Name = "toolBlue";
             this.toolBlue.Size = new System.Drawing.Size(152, 22);
             this.toolBlue.Text = "Blue";
@@ -308,7 +308,7 @@
             // 
             this.toolOrange.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolOrange.ForeColor = System.Drawing.Color.Orange;
-            this.toolOrange.Image = global::howto_copy_paste_scribble.Properties.Resources.orange;
+            this.toolOrange.Image = global::vcs_Scribble2.Properties.Resources.orange;
             this.toolOrange.Name = "toolOrange";
             this.toolOrange.Size = new System.Drawing.Size(152, 22);
             this.toolOrange.Text = "Orange";
@@ -318,7 +318,7 @@
             // 
             this.toolYellow.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolYellow.ForeColor = System.Drawing.Color.Yellow;
-            this.toolYellow.Image = global::howto_copy_paste_scribble.Properties.Resources.yellow;
+            this.toolYellow.Image = global::vcs_Scribble2.Properties.Resources.yellow;
             this.toolYellow.Name = "toolYellow";
             this.toolYellow.Size = new System.Drawing.Size(152, 22);
             this.toolYellow.Text = "Yellow";
@@ -328,7 +328,7 @@
             // 
             this.toolLime.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolLime.ForeColor = System.Drawing.Color.Lime;
-            this.toolLime.Image = global::howto_copy_paste_scribble.Properties.Resources.lime;
+            this.toolLime.Image = global::vcs_Scribble2.Properties.Resources.lime;
             this.toolLime.Name = "toolLime";
             this.toolLime.Size = new System.Drawing.Size(152, 22);
             this.toolLime.Text = "Lime";
@@ -365,7 +365,7 @@
             // toolThick1
             // 
             this.toolThick1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolThick1.Image = global::howto_copy_paste_scribble.Properties.Resources.line1;
+            this.toolThick1.Image = global::vcs_Scribble2.Properties.Resources.line1;
             this.toolThick1.Name = "toolThick1";
             this.toolThick1.Size = new System.Drawing.Size(152, 22);
             this.toolThick1.Text = "1";
@@ -374,7 +374,7 @@
             // toolThick2
             // 
             this.toolThick2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolThick2.Image = global::howto_copy_paste_scribble.Properties.Resources.line2;
+            this.toolThick2.Image = global::vcs_Scribble2.Properties.Resources.line2;
             this.toolThick2.Name = "toolThick2";
             this.toolThick2.Size = new System.Drawing.Size(152, 22);
             this.toolThick2.Text = "2";
@@ -383,7 +383,7 @@
             // toolThick3
             // 
             this.toolThick3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolThick3.Image = global::howto_copy_paste_scribble.Properties.Resources.line3;
+            this.toolThick3.Image = global::vcs_Scribble2.Properties.Resources.line3;
             this.toolThick3.Name = "toolThick3";
             this.toolThick3.Size = new System.Drawing.Size(152, 22);
             this.toolThick3.Text = "3";
@@ -392,7 +392,7 @@
             // toolThick4
             // 
             this.toolThick4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolThick4.Image = global::howto_copy_paste_scribble.Properties.Resources.line4;
+            this.toolThick4.Image = global::vcs_Scribble2.Properties.Resources.line4;
             this.toolThick4.Name = "toolThick4";
             this.toolThick4.Size = new System.Drawing.Size(152, 22);
             this.toolThick4.Text = "4";
@@ -407,7 +407,7 @@
             this.Controls.Add(this.picCanvas);
             this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
-            this.Text = "howto_copy_paste_scribble";
+            this.Text = "vcs_Scribble2";
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

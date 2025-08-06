@@ -14,7 +14,6 @@ namespace howto_make_light_transparent
 {
     public partial class Form1 : Form
     {
-        // The original image.
         Bitmap bitmap1 = null;
 
         //string filename = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
@@ -30,7 +29,7 @@ namespace howto_make_light_transparent
         {
             bitmap1 = new Bitmap(filename);
             cutoff_value = scrBrightness.Value;
-            this.Text = cutoff_value.ToString();
+            label1.Text = "亮度 " + cutoff_value.ToString() + " 以上, 設定為透明";
             ShowImage();
         }
 
@@ -38,7 +37,7 @@ namespace howto_make_light_transparent
         private void scrBrightness_Scroll(object sender, ScrollEventArgs e)
         {
             cutoff_value = scrBrightness.Value;
-            this.Text = cutoff_value.ToString();
+            label1.Text = "亮度 " + cutoff_value.ToString() + " 以上, 設定為透明";
             ShowImage();
         }
 
@@ -94,31 +93,16 @@ namespace howto_make_light_transparent
         {
             if (bitmap1 != null)
             {
-                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                String filename1 = filename + ".jpg";
-                String filename2 = filename + ".bmp";
-                String filename3 = filename + ".png";
+                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
+                bitmap1.Save(@filename, ImageFormat.Png);
 
-                try
-                {
-                    bitmap1.Save(@filename1, ImageFormat.Jpeg);
-                    bitmap1.Save(@filename2, ImageFormat.Bmp);
-                    bitmap1.Save(@filename3, ImageFormat.Png);
-
-                    //richTextBox1.Text += "存檔成功\n";
-                    //richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                    //richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                    //richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-                }
-                catch (Exception ex)
-                {
-                    //richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
             }
-            //else
-            //richTextBox1.Text += "無圖可存\n";
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+            }
         }
     }
 }
-
 

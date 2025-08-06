@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "howto_copy_paste_scribble", "howto_copy_paste_scribble.csproj", "{C32E9D83-BB1A-430C-9849-B486FDA91E32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Scribble2", "vcs_Scribble2\vcs_Scribble2.csproj", "{C32E9D83-BB1A-430C-9849-B486FDA91E32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

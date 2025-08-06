@@ -41,7 +41,7 @@
             // picBobble
             // 
             this.picBobble.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picBobble.Location = new System.Drawing.Point(12, 12);
+            this.picBobble.Location = new System.Drawing.Point(12, 11);
             this.picBobble.Name = "picBobble";
             this.picBobble.Size = new System.Drawing.Size(183, 270);
             this.picBobble.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -52,7 +52,7 @@
             // picHead
             // 
             this.picHead.Image = global::howto_bobblehead.Properties.Resources.Donald_Trump_Head;
-            this.picHead.Location = new System.Drawing.Point(201, 12);
+            this.picHead.Location = new System.Drawing.Point(24, 328);
             this.picHead.Name = "picHead";
             this.picHead.Size = new System.Drawing.Size(161, 202);
             this.picHead.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -63,7 +63,7 @@
             // picBody
             // 
             this.picBody.Image = global::howto_bobblehead.Properties.Resources.Donald_Trump;
-            this.picBody.Location = new System.Drawing.Point(84, 39);
+            this.picBody.Location = new System.Drawing.Point(234, 11);
             this.picBody.Name = "picBody";
             this.picBody.Size = new System.Drawing.Size(517, 600);
             this.picBody.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -78,9 +78,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(934, 618);
             this.Controls.Add(this.picHead);
             this.Controls.Add(this.picBody);
             this.Controls.Add(this.picBobble);

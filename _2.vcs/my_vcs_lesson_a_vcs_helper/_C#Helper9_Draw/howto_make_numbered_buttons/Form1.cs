@@ -27,7 +27,7 @@ namespace howto_make_numbered_buttons
             picSample.Image = MakeNumberBitmap((int)nudWidth.Value,
                 picBackground.BackColor, picForeground.BackColor,
                 (int)nudBorderThickness.Value, lblFontSample.Font,
-                nudMax.Value.ToString());
+                numericUpDown1.Value.ToString());
         }
 
         // Make a bitmap containing the indicated text.
@@ -150,24 +150,23 @@ namespace howto_make_numbered_buttons
         // Make the files.
         private void btnMakeFiles_Click(object sender, EventArgs e)
         {
-            Cursor = Cursors.WaitCursor;
-            Refresh();
-
-            // Make the files.
-            for (decimal i = nudMin.Value; i <= nudMax.Value; i++)
+            int number = 0;
+            for (number = 0; number < 10; number++)
             {
                 // Make the file.
                 Bitmap bm = MakeNumberBitmap((int)nudWidth.Value,
                     picBackground.BackColor, picForeground.BackColor,
                     (int)nudBorderThickness.Value, lblFontSample.Font,
-                    i.ToString());
+                    number.ToString());
 
-                // Save the file.
-                bm.Save("Number" + i.ToString() + ".png", ImageFormat.Png);
+                bm.Save("Number" + number.ToString() + ".png", ImageFormat.Png);
             }
+            richTextBox1.Text += "完成";
+        }
 
-            MessageBox.Show("Done", "Done", MessageBoxButtons.OK);
-            Cursor = Cursors.Default;
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            ShowSample();
         }
     }
 }

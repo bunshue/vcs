@@ -11,7 +11,7 @@ using System.Drawing.Drawing2D;
 using System.Xml.Serialization;
 using System.IO;
 
-namespace howto_copy_paste_scribble
+namespace vcs_Scribble2
 {
     public partial class Form1 : Form
     {

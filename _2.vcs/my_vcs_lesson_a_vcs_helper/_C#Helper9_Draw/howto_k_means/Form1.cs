@@ -81,10 +81,9 @@ namespace howto_k_means
 
         private void MakePoints()
         {
-            // Make sure there is at least one seed.
             if (Seeds.Count < 1)
             {
-                MessageBox.Show("Please define at least one seed first.");
+                richTextBox1.Text += "至少要設定一個種子\n";
                 return;
             }
 

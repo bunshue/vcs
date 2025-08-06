@@ -42,6 +42,7 @@
             this.hscrFps = new System.Windows.Forms.HScrollBar();
             this.label3 = new System.Windows.Forms.Label();
             this.lblFps = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picItems)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,9 +53,9 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.picItems.BackColor = System.Drawing.Color.White;
             this.picItems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picItems.Location = new System.Drawing.Point(12, 91);
+            this.picItems.Location = new System.Drawing.Point(12, 68);
             this.picItems.Name = "picItems";
-            this.picItems.Size = new System.Drawing.Size(260, 196);
+            this.picItems.Size = new System.Drawing.Size(780, 490);
             this.picItems.TabIndex = 0;
             this.picItems.TabStop = false;
             this.picItems.Paint += new System.Windows.Forms.PaintEventHandler(this.picItems_Paint);
@@ -126,16 +127,16 @@
             this.lblScore.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.lblScore.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblScore.Location = new System.Drawing.Point(12, 311);
+            this.lblScore.Location = new System.Drawing.Point(12, 582);
             this.lblScore.Name = "lblScore";
-            this.lblScore.Size = new System.Drawing.Size(260, 17);
+            this.lblScore.Size = new System.Drawing.Size(1076, 17);
             this.lblScore.TabIndex = 5;
             this.lblScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnClear
             // 
             this.btnClear.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnClear.Location = new System.Drawing.Point(97, 65);
+            this.btnClear.Location = new System.Drawing.Point(316, 12);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(90, 21);
             this.btnClear.TabIndex = 6;
@@ -146,18 +147,18 @@
             // hscrFps
             // 
             this.hscrFps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.hscrFps.Location = new System.Drawing.Point(45, 290);
+            this.hscrFps.Location = new System.Drawing.Point(557, 561);
             this.hscrFps.Maximum = 209;
             this.hscrFps.Minimum = 1;
             this.hscrFps.Name = "hscrFps";
-            this.hscrFps.Size = new System.Drawing.Size(194, 17);
+            this.hscrFps.Size = new System.Drawing.Size(235, 17);
             this.hscrFps.TabIndex = 7;
             this.hscrFps.Value = 20;
             this.hscrFps.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hscrFps_Scroll);
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(12, 290);
+            this.label3.Location = new System.Drawing.Point(12, 561);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(30, 16);
             this.label3.TabIndex = 8;
@@ -166,19 +167,28 @@
             // 
             // lblFps
             // 
-            this.lblFps.Location = new System.Drawing.Point(242, 290);
+            this.lblFps.Location = new System.Drawing.Point(157, 561);
             this.lblFps.Name = "lblFps";
             this.lblFps.Size = new System.Drawing.Size(30, 16);
             this.lblFps.TabIndex = 9;
             this.lblFps.Text = "2";
             this.lblFps.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(798, 68);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(290, 510);
+            this.richTextBox1.TabIndex = 10;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnMakePoints;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 336);
+            this.ClientSize = new System.Drawing.Size(1100, 607);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.lblFps);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.hscrFps);
@@ -215,6 +225,7 @@
         private System.Windows.Forms.HScrollBar hscrFps;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblFps;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Xml.Serialization;
 
-namespace howto_copy_paste_scribble
+namespace vcs_Scribble2
 {
     [Serializable()]
     public class Polyline

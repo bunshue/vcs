@@ -40,9 +40,9 @@
             // 
             // btnAnimate
             // 
-            this.btnAnimate.Location = new System.Drawing.Point(191, 20);
+            this.btnAnimate.Location = new System.Drawing.Point(191, 18);
             this.btnAnimate.Name = "btnAnimate";
-            this.btnAnimate.Size = new System.Drawing.Size(75, 23);
+            this.btnAnimate.Size = new System.Drawing.Size(75, 21);
             this.btnAnimate.TabIndex = 9;
             this.btnAnimate.Text = "Animate";
             this.btnAnimate.UseVisualStyleBackColor = true;
@@ -57,7 +57,7 @@
             // 
             this.lblTitle4.AutoSize = true;
             this.lblTitle4.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle4.Location = new System.Drawing.Point(21, 99);
+            this.lblTitle4.Location = new System.Drawing.Point(21, 91);
             this.lblTitle4.Name = "lblTitle4";
             this.lblTitle4.Size = new System.Drawing.Size(108, 16);
             this.lblTitle4.TabIndex = 8;
@@ -74,7 +74,7 @@
             this.lblTitle3.AutoSize = true;
             this.lblTitle3.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle3.ForeColor = System.Drawing.Color.Red;
-            this.lblTitle3.Location = new System.Drawing.Point(21, 78);
+            this.lblTitle3.Location = new System.Drawing.Point(21, 72);
             this.lblTitle3.Name = "lblTitle3";
             this.lblTitle3.Size = new System.Drawing.Size(186, 21);
             this.lblTitle3.TabIndex = 7;
@@ -86,7 +86,7 @@
             this.lblTitle2.AutoSize = true;
             this.lblTitle2.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle2.ForeColor = System.Drawing.Color.Red;
-            this.lblTitle2.Location = new System.Drawing.Point(18, 47);
+            this.lblTitle2.Location = new System.Drawing.Point(18, 43);
             this.lblTitle2.Name = "lblTitle2";
             this.lblTitle2.Size = new System.Drawing.Size(197, 31);
             this.lblTitle2.TabIndex = 6;
@@ -98,7 +98,7 @@
             this.lblTitle1.AutoSize = true;
             this.lblTitle1.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle1.ForeColor = System.Drawing.Color.Red;
-            this.lblTitle1.Location = new System.Drawing.Point(21, 31);
+            this.lblTitle1.Location = new System.Drawing.Point(21, 29);
             this.lblTitle1.Name = "lblTitle1";
             this.lblTitle1.Size = new System.Drawing.Size(60, 16);
             this.lblTitle1.TabIndex = 5;
@@ -107,9 +107,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(294, 135);
+            this.ClientSize = new System.Drawing.Size(294, 125);
             this.Controls.Add(this.btnAnimate);
             this.Controls.Add(this.lblTitle4);
             this.Controls.Add(this.lblTitle3);

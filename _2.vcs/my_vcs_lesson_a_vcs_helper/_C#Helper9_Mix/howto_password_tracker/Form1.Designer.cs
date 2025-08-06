@@ -42,15 +42,16 @@
             this.mnuFileChangeMasterPassword = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuFileExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPasswords)).BeginInit();
             this.MenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvPasswords
             // 
-            this.dgvPasswords.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvPasswords.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPasswords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPasswords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
@@ -59,9 +60,9 @@
             this.colChangedDate,
             this.colCopy,
             this.colNew});
-            this.dgvPasswords.Location = new System.Drawing.Point(1, 25);
+            this.dgvPasswords.Location = new System.Drawing.Point(1, 23);
             this.dgvPasswords.Name = "dgvPasswords";
-            this.dgvPasswords.Size = new System.Drawing.Size(479, 321);
+            this.dgvPasswords.Size = new System.Drawing.Size(1169, 472);
             this.dgvPasswords.TabIndex = 14;
             this.dgvPasswords.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPasswords_CellContentClick);
             this.dgvPasswords.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPasswords_CellEndEdit);
@@ -111,7 +112,7 @@
             this.FileToolStripMenuItem});
             this.MenuStrip1.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip1.Name = "MenuStrip1";
-            this.MenuStrip1.Size = new System.Drawing.Size(481, 24);
+            this.MenuStrip1.Size = new System.Drawing.Size(1171, 24);
             this.MenuStrip1.TabIndex = 13;
             this.MenuStrip1.Text = "MenuStrip1";
             // 
@@ -122,33 +123,42 @@
             this.ToolStripMenuItem1,
             this.mnuFileExit});
             this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
-            this.FileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.FileToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
             this.FileToolStripMenuItem.Text = "&File";
             // 
             // mnuFileChangeMasterPassword
             // 
             this.mnuFileChangeMasterPassword.Name = "mnuFileChangeMasterPassword";
-            this.mnuFileChangeMasterPassword.Size = new System.Drawing.Size(207, 22);
+            this.mnuFileChangeMasterPassword.Size = new System.Drawing.Size(216, 22);
             this.mnuFileChangeMasterPassword.Text = "Change Master Password";
             this.mnuFileChangeMasterPassword.Click += new System.EventHandler(this.mnuFileChangeMasterPassword_Click);
             // 
             // ToolStripMenuItem1
             // 
             this.ToolStripMenuItem1.Name = "ToolStripMenuItem1";
-            this.ToolStripMenuItem1.Size = new System.Drawing.Size(204, 6);
+            this.ToolStripMenuItem1.Size = new System.Drawing.Size(213, 6);
             // 
             // mnuFileExit
             // 
             this.mnuFileExit.Name = "mnuFileExit";
-            this.mnuFileExit.Size = new System.Drawing.Size(207, 22);
+            this.mnuFileExit.Size = new System.Drawing.Size(216, 22);
             this.mnuFileExit.Text = "E&xit";
             this.mnuFileExit.Click += new System.EventHandler(this.mnuFileExit_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(732, 37);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(427, 437);
+            this.richTextBox1.TabIndex = 15;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(481, 347);
+            this.ClientSize = new System.Drawing.Size(1171, 496);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.dgvPasswords);
             this.Controls.Add(this.MenuStrip1);
             this.KeyPreview = true;
@@ -180,6 +190,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colChangedDate;
         private System.Windows.Forms.DataGridViewButtonColumn colCopy;
         private System.Windows.Forms.DataGridViewButtonColumn colNew;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

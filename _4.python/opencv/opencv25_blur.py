@@ -764,6 +764,10 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 """
 # 圖形處理 二維卷積 使用filter2D()製作的各種圖形處理效果
 用不同的卷积核可以得到 各种不同的图像处理效果。
@@ -860,6 +864,113 @@ plt.title("Prewitt_vertical")
 
 show()
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("cv2.floodFill() 填充 2")
+"""
+有些特殊的卷积核可以表示成一个列矢量和一个行矢量的乘积，
+这时只需要将原始图像按 顺序与这两个矢量进行卷积，
+所得到的最终结果和直接与卷积核进行卷积的结果相同。
+对于较大的卷积核能大幅度地提高 计算速度。
+
+OpenCV提供了 sep5()来进行这种分步卷积，调用参数如下：
+sepFilter2D(src, ddepth, kernelX, kernelY[, dst[, anchor[, delta[, borderType]]]])
+比较filter2D()和sepFilter2D() 的计算速度：
+"""
+
+img = np.random.rand(10, 10)
+img = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+
+row = cv2.getGaussianKernel(7, -1)
+col = cv2.getGaussianKernel(5, -1)
+
+kernel = np.dot(col[:], row[:].T)
+
+img2 = cv2.filter2D(img, -1, kernel)
+img3 = cv2.sepFilter2D(img, -1, row, col)
+print("error=", np.max(np.abs(img2[:] - img3[:])))
+
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(img2, cv2.COLOR_BGR2RGB))
+plt.title("img2")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(img3, cv2.COLOR_BGR2RGB))
+plt.title("img3")
+
+show()
+
+"""
+OpenCV提供了一些高级函数数来直接完成与某种特定卷积核的 卷积计算。
+
+形态学运算
+dilate
+()对图像进行膨胀处理，而erode
+()则对图像进行腐蚀处理。
+
+mpiphologyEx()使用膨胀和收缩实现一些更高级的形态学处理。
+这 些函数都可以对多值图像进行操作，对于多通道图像，它们将对每个通道进行相同的运算。
+
+dilate()和erode()的调用参数相同：
+dilate(src, kernel[, dst[, anchor[, iterations[, borderType[, borderValue]]]]])
+
+膨胀运算可以用下面的公式描述：
+将结构元素kernel的锚点与原始图像中的每个像素(x,y)对齐之后，计算所有结构元素值不为0 的像素的最大值，写入目标图像的(x,y)像素点。而腐蚀运算则是计算所有结构元素不为0的像 素的最小值。
+morphologyEx()的参数如下：
+morphologyEx(src, op, kernel[, dst[, anchoriterationsborderType[, borderValue]]]]])
+op参数，用于指定运算的类型。
+moiphologyEx()的高级运算包括：
+• MORPH_OPEN:开运算，可以用来区分两个靠得很近的区域。算法为先腐蚀再膨胀: dst=dilate(erode(src))
+• MORPH_CLOSE:闭运算，可以用来连接两个靠得很近的区域。算法为先膨胀再腐蚀： dst=erode(dilate(src))
+• MORPH_GRADIENT:形态梯度，能够找出图像区域的边缘。算法为膨胀减去腐蚀： dst=dilate(src)- erode(src)
+• MORPH_TOPHAT:顶帽运算，算法为原始图像减去开运算：dst = src-open(src)。
+• MORPH_BLACKHAT:黑帽运算，算法为闭运算减去原始图像：dst=close(src)-src。
+
+    填充-floodFill
+
+填充函数floodFill()在图像处理中经常用于标识或分离图像中的某些特定部分。它的调用方 式为:
+floodFill(image, mask, seedPoint, newVal[, loDiff[, upDiff[, flags]]])
+seedPoint参数为填充的起始点，为种子点； newVal参数为填充所使用的颜色值；loDiff和upDiff参数是填充的下限和上限容差；flags参数 是填充的算法标志。
+填充从seedPoint指定的种子坐标开始，图像中与当前的填充区域颜色相近的点将被添加进 填充区域，从而逐步扩大填充区域，直到没有新的点能添加进填充区域为止。
+颜色相近的判断 方法有两种：
+    默认使用相邻点为基点进行判断。
+•如果开启了 flags中的FL00DFILL_F1XED_RANGE标志位，则以种子点为基点进行判断。
+假设图像中某个点(x,y)的颜色为C(x,y), C0为基点颜色，则下面的条件满足时，（x,y)将 被添加进填充区域：
+C0 — loDiff < C(x，y) < C0 + hiDiff
+此外还可以通过flags指定相邻点的定义：四连通或八连通。
+当mask参数不为None时，它是一个宽和高比image都大两个像素的单通道8位图像
+。image 图像中的像素(x,y)与mask中的(x + 1,y + 1)对应。填充只针对mask中的值为0的像素进行。 进行填充之后，mask中所有被填充的像素将被赋值为1。如果只希望修改mask,而不对原始图 像进行填充，可以开启flags标志中FLOODFTLL_MASK_ONLY。
+#floodFill()的填充效果
+"""
+# 形態學運算
+#    scpy2.opencv.morphology_demo：示範OpenCV中的各種形態學運算。
+# 填充-floodFill
+# 示範floodFill()的填充效果
+#    scpy2.opencv.floodfill_demo：示範填充函數floodFill()的各個參數的用法。
+# 去瑕疵-inpaint
+#    scpy2.opencv.inpaint_demo：示範inpaint()的用法，使用者用滑鼠繪制需要去瑕疵的區域，程式實時顯示運算結果。
+
+coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
+img = cv2.imread(coin_filename)  # 彩色讀取
+print("img.shape :", img.shape)
+
+seed1 = 344, 188
+seed2 = 152, 126
+diff = (13, 13, 13)
+h, w = img.shape[:2]
+mask = np.zeros((h + 2, w + 2), np.uint8)
+cv2.floodFill(img, mask, seed1, BLACK, diff, diff, cv2.FLOODFILL_MASK_ONLY)
+cv2.floodFill(img, None, seed2, RED, diff, diff)
+fig, axes = plt.subplots(1, 2, figsize=(9, 4))
+axes[0].imshow(~mask, cmap="gray")  # 灰階顯示
+axes[1].imshow(img)
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -867,6 +978,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 # cv2.filter2D() SP         # 2D濾波核
