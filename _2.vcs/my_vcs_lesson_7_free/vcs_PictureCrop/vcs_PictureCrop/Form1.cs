@@ -458,11 +458,7 @@ namespace vcs_PictureCrop
                 {
                     filename = open_folder_directory + "\\" + fore_filename + ".bmp";
                 }
-
-
             }
-
-
 
             Bitmap bitmap1 = new Bitmap(pictureBox1.Image);
             Bitmap bitmap2 = bitmap1.Clone(SelectionRectangle, PixelFormat.DontCare);  //或是 PixelFormat.Format32bppArgb

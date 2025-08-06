@@ -3,13 +3,14 @@
 pip install python-docx
 
 """
-
 import sys
 import docx
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 filename_r = "data/python_docx1.docx"
+print("讀取 docx, 檔案 : " + filename_r)
 
 doc = docx.Document(filename_r)
 
@@ -20,6 +21,7 @@ for p in doc.paragraphs:
     print(p.text)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 讀取excel檔, 製作word檔
 
@@ -28,12 +30,16 @@ from docxtpl import DocxTemplate
 import datetime
 
 filename_r1 = "data/python_ReadWrite_EXCEL6_student_data2.xlsx"
+print("讀取 xlsx, 檔案 : " + filename_r1)
+
 workbook = openpyxl.load_workbook(filename_r1)
 sheet = workbook.active
 list_values = list(sheet.values)
 print(list_values)
 
 filename_r2 = "data/python_ReadWrite_WORD1_certificate.docx"
+print("讀取 docx, 檔案 : " + filename_r2)
+
 # Generate docs
 doc = DocxTemplate(filename_r2)
 for value_tuple in list_values[1:]:
@@ -47,9 +53,10 @@ for value_tuple in list_values[1:]:
     )
 
     doc_name = "tmp_certificate" + value_tuple[0] + value_tuple[1] + ".docx"
-    print(doc_name)
+    print("寫入 docx, 檔案 : " + doc_name)
     doc.save(doc_name)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -61,6 +68,7 @@ import datetime
 from docxtpl import DocxTemplate
 
 filename_r = "data/python_ReadWrite_WORD2_invoice_template.docx"
+print("讀取 docx, 檔案 : " + filename_r)
 
 doc = DocxTemplate(filename_r)
 
@@ -100,10 +108,12 @@ filename_w = (
 doc.save(filename_w)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 讀取Word文件
 
 filename_r = "./data/用函數還是用復雜的表達式.docx"
+print("讀取 docx, 檔案 : " + filename_r)
 
 doc = docx.Document(filename_r)
 print(len(doc.paragraphs))
@@ -115,6 +125,7 @@ for para in doc.paragraphs:
     content.append(para.text)
 print("".join(content))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from docx.shared import Cm
@@ -316,8 +327,11 @@ paragraph.level = 1
 paragraph = textframe.add_paragraph()
 paragraph.text = "二之二"
 paragraph.level = 1
+
 # 儲存簡報檔
-pres.save("tmp_powerpoint.pptx")
+filename_w = "tmp_powerpoint.pptx"
+pres.save(filename_w)
+print("寫入 pptx, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -329,4 +343,14 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個

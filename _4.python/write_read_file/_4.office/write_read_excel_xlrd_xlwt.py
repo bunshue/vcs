@@ -7,18 +7,16 @@ sugar要先到
 把兩個 getiterator() 改成 iter()
 
 """
-
 import sys
-
 import xlrd  # 讀 Excel 檔案
 import xlwt  # 寫 Excel 檔案
 
 print("------------------------------------------------------------")  # 60個
 
-print("讀取excel檔案 1")
-filename_r = "data/python_ReadWrite_EXCEL.xlsx"
-
 # 讀取excel檔案成 活頁簿 Workbook 物件
+
+filename_r = "data/python_ReadWrite_EXCEL.xlsx"
+print("讀取 xlsx, 檔案 : " + filename_r)
 workbook = xlrd.open_workbook(filename_r)
 
 print("這個excel檔案的工作表頁數 :", len(workbook.sheets()))
@@ -80,11 +78,12 @@ for i in range(0, ROW):
 # sh0 = workbook.sheets("Sheet5")
 
 print("------------------------------------------------------------")  # 60個
-
-print("讀取excel檔案 2")
-filename_r = "data/python_ReadWrite_EXCEL.xlsx"
+print("------------------------------------------------------------")  # 60個
 
 # 讀取excel檔案成 活頁簿 Workbook 物件
+
+filename_r = "data/python_ReadWrite_EXCEL.xlsx"
+print("讀取 xlsx, 檔案 : " + filename_r)
 workbook = xlrd.open_workbook(filename_r)
 
 print("這個excel檔案的工作表頁數 :", len(workbook.sheets()))
@@ -102,11 +101,12 @@ for n in range(len(workbook.sheet_names())):
 # 當然，你要一行行地印出來也是可行的。
 
 print("------------------------------------------------------------")  # 60個
-
-print("讀取excel檔案 3")
-filename_r = "data/python_ReadWrite_EXCEL.xlsx"
+print("------------------------------------------------------------")  # 60個
 
 # 讀取excel檔案成 活頁簿 Workbook 物件
+
+filename_r = "data/python_ReadWrite_EXCEL.xlsx"
+print("讀取 xlsx, 檔案 : " + filename_r)
 workbook = xlrd.open_workbook(filename_r)
 
 print("取出所有工作表, 看columns")
@@ -118,10 +118,10 @@ for n in range(len(workbook.sheet_names())):
         print(sheet.col_values(i))
 
 print("------------------------------------------------------------")  # 60個
-
-print("用xlwt寫入xls檔案")
+print("------------------------------------------------------------")  # 60個
 
 filename_w = "tmp_excel_xlwt1.xls"
+print("寫入 xls, 檔案 : " + filename_w)
 
 datahead = ["中文名", "英文名", "體重"]
 
@@ -178,14 +178,10 @@ workbook.save(filename_w)
 print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -194,4 +190,14 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

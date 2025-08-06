@@ -1218,6 +1218,31 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+def normalize_gray_image(img):
+    vmin, vmax = img.min(), img.max()
+    return ((img - vmin) / (vmax - vmin) * 255).astype(np.uint8)
+
+
+W, H, D = 64, 48, 3  # 影像寬, 影像高, 深度
+
+print("建立 隨機影像 二維灰階/二維深度1")
+image1 = np.random.randint(0, 50, size=[H, W], dtype=np.uint8)  # 灰階, 1維隨機影像
+image2 = normalize_gray_image(image1)
+
+print(image1)
+print()
+print(image2)
+
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.title("展開")
+
+show()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

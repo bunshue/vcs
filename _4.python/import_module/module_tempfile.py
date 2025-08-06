@@ -1,15 +1,18 @@
 import os
+import sys
 import tempfile
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("製作暫存檔案")
 
 filename = tempfile.NamedTemporaryFile().name
-print("製作暫存檔案")
 print(filename)
 
 
-# fp = tempfile.NamedTemporaryFile()
-
+fp = tempfile.NamedTemporaryFile()
+print(fp.name)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -20,21 +23,21 @@ print(abs_path)
 
 print("---- 臨時資料夾 --------------------------------------------------------")  # 60個
 
-tempdir = tempfile.gettempdir()
-print("臨時資料夾 : ", tempdir)
+tmpdir = tempfile.gettempdir()
+print("臨時資料夾 : ", tmpdir)
 
-tempdir1 = os.path.join(tempdir, "dir")
-tempdir_same = os.path.join(tempdir, "dir-same")
-tempdir_diff = os.path.join(tempdir, "dir-diff")
+tmpdir1 = os.path.join(tmpdir, "dir")
+tmpdir_same = os.path.join(tmpdir, "dir-same")
+tmpdir_diff = os.path.join(tmpdir, "dir-diff")
 
-print("臨時資料夾1 : ", tempdir1)
-print("臨時資料夾2 : ", tempdir_same)
-print("臨時資料夾3 : ", tempdir_diff)
+print("臨時資料夾1 : ", tmpdir1)
+print("臨時資料夾2 : ", tmpdir_same)
+print("臨時資料夾3 : ", tmpdir_diff)
 
-tmp_filename = os.path.join(tempdir, "pywin32_postinstall.log")
+tmp_filename = os.path.join(tmpdir, "pywin32_postinstall.log")
 print(tmp_filename)
 
-tmp_filename = os.path.join(tempdir, "pywin32_postinstall.log", "ccccc")
+tmp_filename = os.path.join(tmpdir, "pywin32_postinstall.log", "ccccc")
 print(tmp_filename)
 
 print("------------------------------------------------------------")  # 60個
@@ -60,11 +63,7 @@ print(data)
 # os.unlink(tmp_filename)   #等於是刪除tmp_filename
 
 print("------------------------------------------------------------")  # 60個
-
-
-import os
-
-import tempfile
+print("------------------------------------------------------------")  # 60個
 
 (fd, filename) = tempfile.mkstemp()
 os.close(fd)
@@ -72,8 +71,8 @@ print(filename)
 
 # os.unlink(filename)
 
-
-import tempfile
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 filename = tempfile.mktemp()
 with open(filename, "w") as file:
@@ -82,15 +81,16 @@ with open(filename, "w") as file:
 
 # os.unlink(filename)
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import glob
 import socket
-import tempfile
 
-tempdir = os.path.join(tempfile.gettempdir(), ".grail-unix")
-filename = tempdir
+tmpdir = tempfile.gettempdir()
+tmpdir = os.path.join(tmpdir, ".grail-unix")
+
+filename = tmpdir
 
 # 撈出單層檔案
 maybes = glob.glob(filename)
@@ -103,9 +103,7 @@ if maybes:
 
 
 print("------------------------------------------------------------")  # 60個
-
-import os
-import tempfile
+print("------------------------------------------------------------")  # 60個
 
 with tempfile.TemporaryDirectory() as tmpdir:
     fn = os.path.join(tmpdir, "foo")
@@ -116,14 +114,11 @@ with tempfile.TemporaryDirectory() as tmpdir:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-
 # Topic: 临时文件和目录
 
 from tempfile import TemporaryFile
 from tempfile import TemporaryDirectory
 from tempfile import NamedTemporaryFile
-import tempfile
 
 
 with TemporaryFile('w+t') as f:
@@ -144,47 +139,37 @@ with TemporaryDirectory() as dirname:
 
 print(tempfile.mkstemp())
 print(tempfile.mkdtemp())
-print(tempfile.gettempdir())
 
+tmpdir = tempfile.gettempdir()
+print("臨時資料夾 : ", tmpdir)
 
-import tempfile
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 with tempfile.NamedTemporaryFile(delete=True) as fp:
     print("暫時檔案 :", fp.name)
 
 temp_dir = tempfile.TemporaryDirectory()
 psg_dir = os.path.join(temp_dir.name, 'PySimpleGUI')
 
-import tempfile
-tmpfilename = os.path.join(tempfile.gettempdir(), "bsd.txt")
-
-
-import tempfile
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 tmpdir = tempfile.gettempdir()
-print(tmpdir)
+print("臨時資料夾 : ", tmpdir)
 
-import tempfile
+tmpfilename = os.path.join(tmpdir, "bsd.txt")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 tmpdir = tempfile.gettempdir()
-print(tmpdir)
-
+print("臨時資料夾 : ", tmpdir)
 
 csv_filename = os.path.join(tmpdir, "users.csv")
-
 print(csv_filename)
 
-
-import tempfile
-
-tmpdir = tempfile.gettempdir()
-print(tmpdir)
 db_filename = os.path.join(tmpdir, "users.db")
 print(db_filename)
-
-
-
-
-
-
 
 

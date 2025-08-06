@@ -520,18 +520,26 @@ _ = plt.legend(loc="upper left")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # Correlation matrix
-"""
-# 無檔案
-url = "https://python-graph-gallery.com/wp-content/uploads/mtcars.csv"
+
+# 使用mtcars数据集，通过一些数字变量提供几辆汽车的性能参数。 
+url = "data/mtcars.csv"
+
 df = pd.read_csv(url)
+
+df = df.set_index('model')
+
+# 横轴为汽车性能参数，纵轴为汽车型号
+cc = df.head()
+print(cc)
 
 # Compute the correlation matrix
 corr = df.corr()
 
 # Generate a mask for the upper triangle
-mask = np.zeros_like(corr, dtype=np.bool)
+mask = np.zeros_like(corr, dtype=np.bool_)
 mask[np.triu_indices_from(mask)] = True
 
 f, ax = plt.subplots(figsize=(5.5, 4.5))
@@ -560,8 +568,9 @@ d = 2 * (1 - np.abs(corr))
 from sklearn.cluster import AgglomerativeClustering
 
 clustering = AgglomerativeClustering(
-    n_clusters=3, linkage="single", affinity="precomputed"
+    n_clusters=3, linkage="single"
 ).fit(d)
+
 lab = 0
 
 clusters = [
@@ -587,7 +596,7 @@ _ = sns.heatmap(
 )
 
 show()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

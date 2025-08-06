@@ -17,8 +17,8 @@ namespace vcs_ImageProcessing4
     public partial class Form1 : Form
     {
         //string filename = @"C:\_git\vcs\_1.data\______test_files1\naruto.jpg";
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        //string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
         //string filename = @"C:\_git\vcs\_1.data\______test_files1\_image_processing\isinbaeva.jpg";
 
         Bitmap bitmap1;
@@ -540,7 +540,6 @@ new Point(400, 0), // destination for upper-left point of original
 new Point(400, 305),// destination for upper-right point of original
 new Point(0, 0)}; // destination for lower-left point of original
             g.DrawImage(bitmap1, destinationPoints);
-
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -559,7 +558,6 @@ new Point(0, 0)}; // destination for lower-left point of original
         private void button12_Click(object sender, EventArgs e)
         {
             //圖像切變
-
             Graphics g = this.pictureBox1.CreateGraphics();
             Bitmap bitmap1 = new Bitmap(filename);
             //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
@@ -627,7 +625,7 @@ new Point(100, 400)};// destination for lower-left point of original
             reset_pictureBox();
 
             //透明度
-            pictureBox1.Image = ConvertToTransparency(pictureBox1.Image);
+            pictureBox1.Image = ConvertToTransparency(filename);
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -635,7 +633,7 @@ new Point(100, 400)};// destination for lower-left point of original
             reset_pictureBox();
 
             //旋轉
-            pictureBox1.Image = ConvertToRotate(pictureBox1.Image);
+            pictureBox1.Image = ConvertToRotate(filename);
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -792,8 +790,12 @@ new Point(100, 400)};// destination for lower-left point of original
             return bitmap2;
         }
 
-        public Bitmap ConvertToTransparency(Image image)
+        float alpha = 0f;
+        public Bitmap ConvertToTransparency(string filename)
         {
+            alpha += 0.1f;
+            if (alpha >= 1)
+                alpha = 0;
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
             int H = bitmap1.Height;
@@ -805,18 +807,20 @@ new Point(100, 400)};// destination for lower-left point of original
 
             ColorMatrix cm = new ColorMatrix();
 
-            cm.Matrix33 = 0.5f; // 透明度
+            cm.Matrix33 = alpha; // 透明度
 
             ia.SetColorMatrix(cm);
 
-            g.DrawImage(image, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
+            g.DrawImage(bitmap1, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
             g.Dispose();
 
             return bitmap2;
         }
 
-        public Bitmap ConvertToRotate(Image image)
+        int angle = 0;
+        public Bitmap ConvertToRotate(string filename)
         {
+            angle += 30;
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
             int H = bitmap1.Height;
@@ -825,11 +829,11 @@ new Point(100, 400)};// destination for lower-left point of original
             Graphics g = Graphics.FromImage(bitmap2);
 
             Matrix mx = new Matrix();
-
-            mx.Rotate(30);
+            //mx.Rotate(30);//以左上角為圓心順時鐘旋轉角度
+            mx.RotateAt(angle, new PointF(W / 2, H / 2));//以(cx,cy)為圓心順時鐘旋轉角度
             g.Transform = mx;
 
-            g.DrawImage(image, new Rectangle(0, 0, W, H));
+            g.DrawImage(bitmap1, new Rectangle(0, 0, W, H));
 
             g.Dispose();
 

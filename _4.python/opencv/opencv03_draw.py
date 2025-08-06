@@ -777,5 +777,3 @@ image_b = np.zeros([h, w, 3])  # 黑色
 cv2.circle(image_r, (cx, cy), radius, RED, -1)  # 繪製實心圓形
 cv2.circle(image_g, (cx, cy), radius, GREEN, -1)  # 繪製實心圓形
 cv2.circle(image_b, (cx, cy), radius, BLUE, -1)  # 繪製實心圓形
-
-

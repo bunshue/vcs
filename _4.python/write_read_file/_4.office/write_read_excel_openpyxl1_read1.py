@@ -332,7 +332,9 @@ for cell in list(sheet.rows)[3]:
 print()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+filename = "data/python_ReadWrite_EXCEL.xlsx"
 print("讀取 xlsx, 檔案 : " + filename)
 workbook = openpyxl.load_workbook(filename)
 
@@ -421,8 +423,9 @@ print()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#  讀取檔案
-workbook = openpyxl.load_workbook('data/108Q2.xlsx')
+filename = "data/108Q2.xlsx"
+print("讀取 xlsx, 檔案 : " + filename)
+workbook = openpyxl.load_workbook(filename)
 
 # 取得第 1 個工作表
 sheet = workbook.worksheets[0]
@@ -457,7 +460,7 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "data/python_ReadWrite_EXCEL.xlsx"
 
-'''
+
 """
 #開啟舊檔 + 參數
 workbook = openpyxl.load_workbook(filename, data_only=True)  # 要excel開啟才可以看到值，否則會顯示None
@@ -483,8 +486,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-#所有的修改都只是針對記憶體中的excel檔
-#只有save才會把修改的內容寫到儲存媒體上
+# 所有的修改都只是針對記憶體中的excel檔
+# 只有save才會把修改的內容寫到儲存媒體上
 
 print("------------------------------------------------------------")  # 60個
 
@@ -505,16 +508,16 @@ sheet["A2"].comment = None  # 取消註解 不能無此行
 
 print("------------------------------------------------------------")  # 60個
 
-print('新增列在第4列')
+print("新增列在第4列")
 sheet.insert_rows(4)
 
-print('新增欄在第3欄, 插入兩欄')
+print("新增欄在第3欄, 插入兩欄")
 sheet.insert_cols(3, 2)
 
-print('刪除列 刪除第4列 刪除2列')
+print("刪除列 刪除第4列 刪除2列")
 sheet.delete_rows(4, 2)
 
-print('刪除欄 刪除第3欄 刪除2欄')
+print("刪除欄 刪除第3欄 刪除2欄")
 sheet.delete_cols(3, 2)
 
 print("------------------------------------------------------------")  # 60個
@@ -528,16 +531,16 @@ sheet.freeze_panes = None
 print("------------------------------------------------------------")  # 60個
 
 設定粗體
-sheet.cell(row=i,column=j).font = Font(bold=True)
+sheet.cell(row=i, column=j).font = Font(bold=True)
 
-#千分位樣式
-sheet.cell(row=i,column=j).number_format = "#,##0"
+# 千分位樣式
+sheet.cell(row=i, column=j).number_format = "#,##0"
 
-#固定為第1列、第2欄
+# 固定為第1列、第2欄
 sheet.freeze_panes = "C2"
 
-#隱藏A欄
-#sheet.column_dimensions["A"].hidden=False
+# 隱藏A欄
+# sheet.column_dimensions["A"].hidden=False
 
 print("------------------------------------------------------------")  # 60個
 
@@ -556,11 +559,10 @@ values = [11, 22, 33, 44, 55, 66, 77, 88, 99, 55]
 
 # A欄 Sugar可看出漸層效果  Kilo看不出效果
 for i, value in enumerate(values):
-    sheet.cell(i + 1, 1 ).value = value
+    sheet.cell(i + 1, 1).value = value
 
-two_color_scale = ColorScaleRule(        
-    start_type="min", start_color="FF0000",
-    end_type="max", end_color="FFFFFF"
+two_color_scale = ColorScaleRule(
+    start_type="min", start_color="FF0000", end_type="max", end_color="FFFFFF"
 )
 
 sheet.conditional_formatting.add("A1:A10", two_color_scale)
@@ -572,17 +574,15 @@ print("------------------------------")  # 60個
 for i, value in enumerate(values):
     sheet.cell(i + 1, 3).value = value
 
-less_than_rule = CellIsRule( 
+less_than_rule = CellIsRule(
     operator="lessThan",
     formula=[100],
     stopIfTrue=True,
-    fill=PatternFill("solid", start_color="FF0000", end_color="FF0000")
+    fill=PatternFill("solid", start_color="FF0000", end_color="FF0000"),
 )
 sheet.conditional_formatting.add("C1:C10", less_than_rule)
 
 workbook.save("tmp_01_fill_red.xlsx")
-'''
-
 
 from openpyxl.utils import get_column_letter
 
