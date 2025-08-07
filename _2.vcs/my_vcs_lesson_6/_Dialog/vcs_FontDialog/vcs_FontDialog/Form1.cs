@@ -16,9 +16,9 @@ namespace vcs_FontDialog
             InitializeComponent();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+            label1.Text = "春雁	王恭\n春风一夜到衡阳，楚水燕山万里长。\n莫道春来便归去，江南虽好是他乡。";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -30,11 +30,13 @@ namespace vcs_FontDialog
             fontDialog1.ShowColor = true;
             fontDialog1.ShowHelp = true;
 
-            fontDialog1.Font = richTextBox1.Font;           //字型對話框的預設字型
-            fontDialog1.Color = richTextBox1.ForeColor;     //字型對話框的預設顏色
+            fontDialog1.Font = label1.Font;           //字型對話框的預設字型
+            fontDialog1.Color = label1.ForeColor;     //字型對話框的預設顏色
 
             if (fontDialog1.ShowDialog() == DialogResult.OK)    //開啟字型對話方塊
             {
+                label1.Font = fontDialog1.Font;       //以在字型對話方塊內所指定的字型來指定給label1
+                label1.ForeColor = fontDialog1.Color; //以在字型對話方塊內所指定的顏色來指定給label1
                 richTextBox1.Font = fontDialog1.Font;       //以在字型對話方塊內所指定的字型來指定給richTextBox1
                 richTextBox1.ForeColor = fontDialog1.Color; //以在字型對話方塊內所指定的顏色來指定給richTextBox1
             }
@@ -52,7 +54,11 @@ namespace vcs_FontDialog
                 richTextBox1.SelectionColor = fontDialog1.Color;
                 //richTextBox1.SelectionBackColor
             }
+        }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
     }
 }

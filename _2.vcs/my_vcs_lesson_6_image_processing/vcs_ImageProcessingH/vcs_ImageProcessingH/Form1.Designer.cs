@@ -63,6 +63,10 @@
             this.label0 = new System.Windows.Forms.Label();
             this.bt_clear = new System.Windows.Forms.Button();
             this.bt_auto = new System.Windows.Forms.Button();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.trackBar_transparent = new System.Windows.Forms.TrackBar();
+            this.bt_save = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -78,50 +82,52 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_brightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_threshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_binary)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_transparent)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(118, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(70, 10);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
             // pictureBox0
             // 
             this.pictureBox0.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox0.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox0.Location = new System.Drawing.Point(10, 10);
             this.pictureBox0.Name = "pictureBox0";
-            this.pictureBox0.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox0.Size = new System.Drawing.Size(50, 50);
             this.pictureBox0.TabIndex = 3;
             this.pictureBox0.TabStop = false;
             // 
             // pictureBox2
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.Location = new System.Drawing.Point(224, 12);
+            this.pictureBox2.Location = new System.Drawing.Point(130, 10);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox2.Size = new System.Drawing.Size(50, 50);
             this.pictureBox2.TabIndex = 4;
             this.pictureBox2.TabStop = false;
             // 
             // pictureBox3
             // 
             this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox3.Location = new System.Drawing.Point(330, 12);
+            this.pictureBox3.Location = new System.Drawing.Point(190, 10);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox3.Size = new System.Drawing.Size(50, 50);
             this.pictureBox3.TabIndex = 5;
             this.pictureBox3.TabStop = false;
             // 
             // pictureBox4
             // 
             this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox4.Location = new System.Drawing.Point(436, 12);
+            this.pictureBox4.Location = new System.Drawing.Point(250, 10);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox4.Size = new System.Drawing.Size(50, 50);
             this.pictureBox4.TabIndex = 6;
             this.pictureBox4.TabStop = false;
             // 
@@ -251,9 +257,9 @@
             // pictureBox5
             // 
             this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox5.Location = new System.Drawing.Point(544, 12);
+            this.pictureBox5.Location = new System.Drawing.Point(310, 10);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox5.Size = new System.Drawing.Size(50, 50);
             this.pictureBox5.TabIndex = 22;
             this.pictureBox5.TabStop = false;
             // 
@@ -304,7 +310,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(650, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(426, 10);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 29;
@@ -314,7 +320,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(756, 33);
+            this.label1.Location = new System.Drawing.Point(532, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 21);
             this.label1.TabIndex = 30;
@@ -324,7 +330,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(756, 54);
+            this.label2.Location = new System.Drawing.Point(532, 52);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 21);
             this.label2.TabIndex = 31;
@@ -334,7 +340,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(756, 75);
+            this.label3.Location = new System.Drawing.Point(532, 73);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 21);
             this.label3.TabIndex = 32;
@@ -344,7 +350,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label4.Location = new System.Drawing.Point(756, 96);
+            this.label4.Location = new System.Drawing.Point(592, 10);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 21);
             this.label4.TabIndex = 33;
@@ -354,7 +360,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label5.Location = new System.Drawing.Point(756, 117);
+            this.label5.Location = new System.Drawing.Point(592, 31);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 21);
             this.label5.TabIndex = 34;
@@ -364,7 +370,7 @@
             // 
             this.label0.AutoSize = true;
             this.label0.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label0.Location = new System.Drawing.Point(756, 12);
+            this.label0.Location = new System.Drawing.Point(532, 10);
             this.label0.Name = "label0";
             this.label0.Size = new System.Drawing.Size(58, 21);
             this.label0.TabIndex = 35;
@@ -373,7 +379,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(666, 70);
+            this.bt_clear.Location = new System.Drawing.Point(442, 68);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(60, 32);
             this.bt_clear.TabIndex = 36;
@@ -384,7 +390,7 @@
             // bt_auto
             // 
             this.bt_auto.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_auto.Location = new System.Drawing.Point(820, 12);
+            this.bt_auto.Location = new System.Drawing.Point(666, 10);
             this.bt_auto.Name = "bt_auto";
             this.bt_auto.Size = new System.Drawing.Size(60, 32);
             this.bt_auto.TabIndex = 37;
@@ -392,11 +398,54 @@
             this.bt_auto.UseVisualStyleBackColor = true;
             this.bt_auto.Click += new System.EventHandler(this.bt_auto_Click);
             // 
+            // pictureBox6
+            // 
+            this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox6.Location = new System.Drawing.Point(370, 10);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox6.TabIndex = 38;
+            this.pictureBox6.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label6.Location = new System.Drawing.Point(592, 52);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(58, 21);
+            this.label6.TabIndex = 39;
+            this.label6.Text = "label6";
+            // 
+            // trackBar_transparent
+            // 
+            this.trackBar_transparent.Location = new System.Drawing.Point(666, 350);
+            this.trackBar_transparent.Maximum = 255;
+            this.trackBar_transparent.Name = "trackBar_transparent";
+            this.trackBar_transparent.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.trackBar_transparent.Size = new System.Drawing.Size(300, 45);
+            this.trackBar_transparent.TabIndex = 40;
+            // 
+            // bt_save
+            // 
+            this.bt_save.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_save.Location = new System.Drawing.Point(666, 48);
+            this.bt_save.Name = "bt_save";
+            this.bt_save.Size = new System.Drawing.Size(60, 32);
+            this.bt_save.TabIndex = 41;
+            this.bt_save.Text = "存圖";
+            this.bt_save.UseVisualStyleBackColor = true;
+            this.bt_save.Click += new System.EventHandler(this.bt_save_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 661);
+            this.Controls.Add(this.bt_save);
+            this.Controls.Add(this.trackBar_transparent);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.bt_auto);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.label0);
@@ -419,7 +468,7 @@
             this.Controls.Add(this.pictureBox0);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "10,10";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).EndInit();
@@ -437,6 +486,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_brightness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_threshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_binary)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_transparent)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -477,6 +528,10 @@
         private System.Windows.Forms.Label label0;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button bt_auto;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TrackBar trackBar_transparent;
+        private System.Windows.Forms.Button bt_save;
     }
 }
 

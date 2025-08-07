@@ -15,7 +15,7 @@ namespace vcs_ImageProcessingH
     public partial class Form1 : Form
     {
         string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
+        int cutoff_value = 0;
 
         public Form1()
         {
@@ -40,6 +40,12 @@ namespace vcs_ImageProcessingH
             scrBright.Value = 128;
             picColor.BackColor = Color.FromArgb(scrRed.Value, scrGreen.Value, scrBlue.Value);
             ColorPicture();
+
+            filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            pictureBox6.Image = Image.FromFile(filename);
+            cutoff_value = trackBar_transparent.Value;
+            label6.Text = "亮度 " + cutoff_value.ToString() + " 以上, 設定為透明";
+            //ShowImage();
         }
 
         void show_item_location()
@@ -60,6 +66,7 @@ namespace vcs_ImageProcessingH
             label3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             label4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             label5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            label6.Location = new Point(x_st + dx * 3, y_st + dy * 1);
 
             label0.Text = "原圖";
             label1.Text = "Gamma";
@@ -67,12 +74,15 @@ namespace vcs_ImageProcessingH
             label3.Text = "亮度";
             label4.Text = "Threshold";
             label5.Text = "二值化對比";
+            label6.Text = "亮度";
 
             trackBar_gamma1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + dd1);
             trackBar_gamma2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd1);
             trackBar_brightness.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd1);
             trackBar_threshold.Location = new Point(x_st + dx * 1, y_st + dy * 1 + dd1);
             trackBar_binary.Location = new Point(x_st + dx * 2, y_st + dy * 1 + dd1);
+            trackBar_transparent.Location = new Point(x_st + dx * 3, y_st + dy * 1 + dd1);
+            bt_save.Location = new Point(x_st + dx * 4, y_st + dy * 1 + dd1);
 
             pictureBox0.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
@@ -80,6 +90,8 @@ namespace vcs_ImageProcessingH
             pictureBox3.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox4.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox5.SizeMode = PictureBoxSizeMode.Normal;
+            pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox6.BackColor = Color.Pink;
 
             pictureBox0.Size = new Size(W, H);
             pictureBox1.Size = new Size(W, H);
@@ -87,6 +99,7 @@ namespace vcs_ImageProcessingH
             pictureBox3.Size = new Size(W, H);
             pictureBox4.Size = new Size(W, H);
             pictureBox5.Size = new Size(W, H);
+            pictureBox6.Size = new Size(W * 3 / 2, H);
 
             pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0 + dd2);
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + dd2);
@@ -94,9 +107,10 @@ namespace vcs_ImageProcessingH
             pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd2);
             pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1 + dd2);
             pictureBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1 + dd2);
+            pictureBox6.Location = new Point(x_st + dx * 3, y_st + dy * 1 + dd2);
 
             richTextBox1.Size = new Size(W, H);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 1 + dd2);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 150, y_st + dy * 1 + dd2);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
@@ -111,6 +125,8 @@ namespace vcs_ImageProcessingH
             trackBar_threshold.MouseUp += new MouseEventHandler(trackBar_threshold_MouseUp);
             trackBar_binary.MouseMove += new MouseEventHandler(trackBar_binary_MouseMove);
             trackBar_binary.MouseUp += new MouseEventHandler(trackBar_binary_MouseUp);
+            trackBar_transparent.MouseMove += new MouseEventHandler(trackBar_transparent_MouseMove);
+            trackBar_transparent.MouseUp += new MouseEventHandler(trackBar_transparent_MouseUp);
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -178,6 +194,55 @@ namespace vcs_ImageProcessingH
         {
             int binary = trackBar_binary.Value;
             pictureBox5.Image = apply_contrast_enhancement(filename, binary);
+        }
+
+        void trackBar_transparent_MouseMove(object sender, MouseEventArgs e)
+        {
+            cutoff_value = trackBar_transparent.Value;
+            label6.Text = "亮度 " + cutoff_value.ToString() + " 以上, 設定為透明";
+        }
+
+        void trackBar_transparent_MouseUp(object sender, MouseEventArgs e)
+        {
+            int binary = trackBar_transparent.Value;
+            //pictureBox5.Image = apply_contrast_enhancement(filename, binary);
+
+            cutoff_value = trackBar_transparent.Value;
+            label6.Text = "亮度 " + cutoff_value.ToString() + " 以上, 設定為透明";
+
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            ShowImage(filename);
+        }
+
+        private void ShowImage(string filename)
+        {
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            // Prepare the ImageAttributes.
+            Color low_color = Color.FromArgb(cutoff_value, cutoff_value, cutoff_value);
+            Color high_color = Color.FromArgb(255, 255, 255);
+            ImageAttributes image_attr = new ImageAttributes();
+            image_attr.SetColorKey(low_color, high_color);
+
+            // Make the result image.
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H);
+
+            // Process the image.
+            using (Graphics g = Graphics.FromImage(bitmap2))
+            {
+                // Fill with magenta.
+                //g.Clear(Color.Magenta);
+                //g.Clear(Color.Lime);
+
+                // Copy the original image onto the result
+                // image while using the ImageAttributes.
+                Rectangle dest_rect = new Rectangle(0, 0, W, H);
+                g.DrawImage(bitmap1, dest_rect, 0, 0, W, H, GraphicsUnit.Pixel, image_attr);
+            }
+            // Display the image.
+            pictureBox6.Image = bitmap2;
         }
 
         void bt_exit_setup()
@@ -484,6 +549,7 @@ namespace vcs_ImageProcessingH
                 trackBar_brightness.Visible = false;
                 trackBar_threshold.Visible = false;
                 trackBar_binary.Visible = false;
+                trackBar_transparent.Visible = false;
             }
             else
             {
@@ -494,6 +560,33 @@ namespace vcs_ImageProcessingH
                 trackBar_brightness.Visible = true;
                 trackBar_threshold.Visible = true;
                 trackBar_binary.Visible = true;
+                trackBar_transparent.Visible = true;
+            }
+        }
+
+        private void bt_save_Click(object sender, EventArgs e)
+        {
+            // Make a copy of the result image.
+            using (Bitmap bmp = (Bitmap)pictureBox6.Image.Clone())
+            {
+                bmp.MakeTransparent(Color.Magenta);
+
+                save_image_to_drive(bmp);
+            }
+        }
+
+        void save_image_to_drive(Bitmap bitmap1)
+        {
+            if (bitmap1 != null)
+            {
+                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
+                bitmap1.Save(@filename, ImageFormat.Png);
+
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
             }
         }
     }

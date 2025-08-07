@@ -10,23 +10,30 @@ cv2.drawContours  # 繪製圖形外輪廓
 OpenCV具有findContour()幫助從圖像中提取輪廓的功能。
 
 cv2.findContours        抓取顏色範圍的輪廓座標
-cv2.RETR_EXTERNAL       表示取得範圍的外輪廓座標串列
-cv2.CHAIN_APPROX_SIMPLE 為取值的演算法
 
-cv2.RETR_LIST cv2.RETR_TREE cv2.RETR_CCOMP cv2.RETR_EXTERNAL
+cv2.RETR_LIST # 所有輪廓
+cv2.RETR_TREE # 所有輪廓
+cv2.RETR_CCOMP # 所有輪廓
+cv2.RETR_EXTERNAL # 只取外輪廓
 
-1. RETR_LIST
-父子结构都不管了，他们只是单纯的边界结构，他们都属于同一层。所以得到的结果是：
-2. RETR_EXTERNAL
+1. cv2.RETR_LIST
+父子结构都不管了，他们只是单纯的边界结构，他们都属于同一层。
+2. cv2.RETR_EXTERNAL
 这个模式只返回外层边界，所有的子层都不要了
 在这个规则下，只考虑“最老的人”，其他人全都不考虑。
 当你只要外层边界的时候，这个标志位很有用。
-3. RETR_CCOMP
+3. cv2.RETR_CCOMP
 这个标志会返回全部的边界，但是会把它们分为两层，可以算是一种简化吧，例如：
 用两种颜色标志就是下面这样的：一层绿色一层粉色
 所以可以看到只有两层结构，要么是外层要么是里层，
-4. RETR_TREE
+4. cv2.RETR_TREE
 也就说，保存了全部的层次结构
+
+取值演算法:
+cv2.CHAIN_APPROX_SIMPLE
+cv2.CHAIN_APPROX_NONE
+cv2.CHAIN_APPROX_TC89_L1
+
 """
 
 from opencv_common import *
@@ -72,12 +79,112 @@ def get_contours_info(contours):
 
 print("------------------------------------------------------------")  # 60個
 
+# 統一處理多圖，顯示在一起
+
+filename1 = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.bmp"
+filename2 = "C:/_git/vcs/_4.python/opencv/data/_shape/shape02.bmp"
+filename2b = "C:/_git/vcs/_4.python/opencv/data/_shape/shape02b.png"
+filename5 = "C:/_git/vcs/_4.python/opencv/data/_shape/shape02b.png"
+filename3 = "C:/_git/vcs/_4.python/opencv/data/_shape/shape03.png"
+filename4 = "C:/_git/vcs/_4.python/opencv/data/_shape/shape04.png"
+# filename_star_blue = "C:/_git/vcs/_4.python/opencv/data/_shape/star_blue.bmp"
+# filename_star_silver = "C:/_git/vcs/_4.python/opencv/data/_shape/star_silver.bmp"
+filename6 = "C:/_git/vcs/_4.python/opencv/data/_shape/star_blue.bmp"
+filename7 = "C:/_git/vcs/_4.python/opencv/data/_shape/star_silver.bmp"
+# filename5 = "C:/_git/vcs/_4.python/opencv/data/_mask/cloud.jpg"
+# filename6 = "C:/_git/vcs/_4.python/opencv/data/morphology/coin.jpg"
+# filename7 = "C:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
+# filename8 = "C:/_git/vcs/_4.python/opencv/data/morphology/moon.jpg"
+filename8 = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
+filename3 = "C:/_git/vcs/_4.python/opencv/data/_Hough/shapes.jpg"
+# filename4 = "C:/_git/vcs/_4.python/opencv/data/_shape/shape02b.png"
+
+
+def draw_contours(filename):
+    image10 = cv2.imread(filename)  # 彩色讀取
+    image11 = image10.copy()
+    image12 = cv2.cvtColor(image11, cv2.COLOR_BGR2GRAY)  # 轉灰階
+    image13 = cv2.GaussianBlur(image12, (13, 13), 0)  # 執行高斯模糊化
+    image13 = image12.copy()  # 不進行高斯模糊
+    image14 = cv2.Canny(image13, 50, 150)
+    contours, hierarchy = cv2.findContours(
+        image14.copy(), cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE
+    )
+    image15 = cv2.drawContours(image11, contours, -1, RED, 10)
+    return image10, image12, image13, image14, image15
+
+image10, image12, image13, image14, image15 = draw_contours(filename1)
+image20, image22, image23, image24, image25 = draw_contours(filename2)
+image30, image32, image33, image34, image35 = draw_contours(filename3)
+image40, image42, image43, image44, image45 = draw_contours(filename4)
+image50, image52, image53, image54, image55 = draw_contours(filename8)
+
+plt.figure(figsize=(14, 8))
+plt.subplot(5, 5, 1), plt.imshow(cv2.cvtColor(image10, cv2.COLOR_BGR2RGB))
+plt.title("原圖"), plt.axis("off")
+plt.subplot(5, 5, 2), plt.imshow(cv2.cvtColor(image12, cv2.COLOR_BGR2RGB))
+plt.title("轉灰階"), plt.axis("off")
+plt.subplot(5, 5, 3), plt.imshow(cv2.cvtColor(image13, cv2.COLOR_BGR2RGB))
+plt.title("高斯模糊"), plt.axis("off")
+plt.subplot(5, 5, 4), plt.imshow(cv2.cvtColor(image14, cv2.COLOR_BGR2RGB))
+plt.title("邊緣檢測"), plt.axis("off")
+plt.subplot(5, 5, 5), plt.imshow(cv2.cvtColor(image15, cv2.COLOR_BGR2RGB))
+plt.title("畫輪廓"), plt.axis("off")
+plt.subplot(5, 5, 6)
+plt.imshow(cv2.cvtColor(image20, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 7)
+plt.imshow(cv2.cvtColor(image22, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 8)
+plt.imshow(cv2.cvtColor(image23, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 9)
+plt.imshow(cv2.cvtColor(image24, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 10)
+plt.imshow(cv2.cvtColor(image25, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 11)
+plt.imshow(cv2.cvtColor(image30, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 12)
+plt.imshow(cv2.cvtColor(image32, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 13)
+plt.imshow(cv2.cvtColor(image33, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 14)
+plt.imshow(cv2.cvtColor(image34, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 15)
+plt.imshow(cv2.cvtColor(image35, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 16)
+plt.imshow(cv2.cvtColor(image40, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 17)
+plt.imshow(cv2.cvtColor(image42, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 18)
+plt.imshow(cv2.cvtColor(image43, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 19)
+plt.imshow(cv2.cvtColor(image44, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 20)
+plt.imshow(cv2.cvtColor(image45, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 21)
+plt.imshow(cv2.cvtColor(image50, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 22)
+plt.imshow(cv2.cvtColor(image52, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 23)
+plt.imshow(cv2.cvtColor(image53, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 24)
+plt.imshow(cv2.cvtColor(image54, cv2.COLOR_BGR2RGB)), plt.axis("off")
+plt.subplot(5, 5, 25)
+plt.imshow(cv2.cvtColor(image55, cv2.COLOR_BGR2RGB)), plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # coin.jpg用圖片先處理方法一
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coin.jpg"
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/moon.jpg"
 filename = "C:/_git/vcs/_4.python/opencv/data/_mask/cloud.jpg"
 filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.bmp"
+# filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
+
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape02.bmp"
 
 image0 = cv2.imread(filename)  # 彩色讀取
 image = image0.copy()
@@ -86,6 +193,7 @@ image = image0.copy()
 image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
 image_gray = cv2.GaussianBlur(image_gray, (13, 13), 0)  # 執行高斯模糊化
 edged = cv2.Canny(image_gray, 50, 150)
+
 # 找尋影像內的輪廓, 返回的 contours 是一個 list 列表
 contours, hierarchy = cv2.findContours(
     edged.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
@@ -111,7 +219,7 @@ linewidth = 2  # 線寬
 
 # 一起畫
 # index = -1 # 指名要繪製的輪廓, -1代表全部
-# image2 = cv2.drawContours(image2,contours,index, RED, linewidth)  # image2為三通道才能顯示輪廓, 用紅框標示出來
+# image2 = cv2.drawContours(image2, contours, index, RED, linewidth)  # image2為三通道才能顯示輪廓, 用紅框標示出來
 
 # 分開畫
 n = len(contours)  # 輪廓數量

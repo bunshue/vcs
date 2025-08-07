@@ -75,8 +75,8 @@ namespace _vcs_MakePicture
             //button
             x_st = 850;
             y_st = 100;
-            dx = 70;
-            dy = 70;
+            dx = 64;
+            dy = 64;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -88,90 +88,109 @@ namespace _vcs_MakePicture
             button7.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             button8.Location = new Point(x_st + dx * 8, y_st + dy * 0);
             button9.Location = new Point(x_st + dx * 9, y_st + dy * 0);
+            button10.Location = new Point(x_st + dx * 10, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 11, y_st + dy * 0);
 
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button13.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button14.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            button15.Location = new Point(x_st + dx * 5, y_st + dy * 1);
-            button16.Location = new Point(x_st + dx * 6, y_st + dy * 1);
-            button17.Location = new Point(x_st + dx * 7, y_st + dy * 1);
-            button18.Location = new Point(x_st + dx * 8, y_st + dy * 1);
-            button19.Location = new Point(x_st + dx * 9, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button14.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button15.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button16.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            button17.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+            button18.Location = new Point(x_st + dx * 6, y_st + dy * 1);
+            button19.Location = new Point(x_st + dx * 7, y_st + dy * 1);
+            button20.Location = new Point(x_st + dx * 8, y_st + dy * 1);
+            button21.Location = new Point(x_st + dx * 9, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 10, y_st + dy * 1);
+            button23.Location = new Point(x_st + dx * 11, y_st + dy * 1);
 
-            button20.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button24.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            button25.Location = new Point(x_st + dx * 5, y_st + dy * 2);
-            button26.Location = new Point(x_st + dx * 6, y_st + dy * 2);
-            button27.Location = new Point(x_st + dx * 7, y_st + dy * 2);
-            button28.Location = new Point(x_st + dx * 8, y_st + dy * 2);
-            button29.Location = new Point(x_st + dx * 9, y_st + dy * 2);
+            button24.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button25.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button27.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button28.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            button29.Location = new Point(x_st + dx * 5, y_st + dy * 2);
+            button30.Location = new Point(x_st + dx * 6, y_st + dy * 2);
+            button31.Location = new Point(x_st + dx * 7, y_st + dy * 2);
+            button32.Location = new Point(x_st + dx * 8, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 9, y_st + dy * 2);
+            button34.Location = new Point(x_st + dx * 10, y_st + dy * 2);
+            button35.Location = new Point(x_st + dx * 11, y_st + dy * 2);
 
-            button30.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button31.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button32.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button34.Location = new Point(x_st + dx * 4, y_st + dy * 3);
-            button35.Location = new Point(x_st + dx * 5, y_st + dy * 3);
-            button36.Location = new Point(x_st + dx * 6, y_st + dy * 3);
-            button37.Location = new Point(x_st + dx * 7, y_st + dy * 3);
-            button38.Location = new Point(x_st + dx * 8, y_st + dy * 3);
-            button39.Location = new Point(x_st + dx * 9, y_st + dy * 3);
+            button36.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button37.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button38.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button40.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            button41.Location = new Point(x_st + dx * 5, y_st + dy * 3);
+            button42.Location = new Point(x_st + dx * 6, y_st + dy * 3);
+            button43.Location = new Point(x_st + dx * 7, y_st + dy * 3);
+            button44.Location = new Point(x_st + dx * 8, y_st + dy * 3);
+            button45.Location = new Point(x_st + dx * 9, y_st + dy * 3);
+            button46.Location = new Point(x_st + dx * 10, y_st + dy * 3);
+            button47.Location = new Point(x_st + dx * 11, y_st + dy * 3);
 
-            button40.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button41.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button42.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button43.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button44.Location = new Point(x_st + dx * 4, y_st + dy * 4);
-            button45.Location = new Point(x_st + dx * 5, y_st + dy * 4);
-            button46.Location = new Point(x_st + dx * 6, y_st + dy * 4);
-            button47.Location = new Point(x_st + dx * 7, y_st + dy * 4);
-            button48.Location = new Point(x_st + dx * 8, y_st + dy * 4);
-            button49.Location = new Point(x_st + dx * 9, y_st + dy * 4);
+            button48.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button49.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button50.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button51.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button52.Location = new Point(x_st + dx * 4, y_st + dy * 4);
+            button53.Location = new Point(x_st + dx * 5, y_st + dy * 4);
+            button54.Location = new Point(x_st + dx * 6, y_st + dy * 4);
+            button55.Location = new Point(x_st + dx * 7, y_st + dy * 4);
+            button56.Location = new Point(x_st + dx * 8, y_st + dy * 4);
+            button57.Location = new Point(x_st + dx * 9, y_st + dy * 4);
+            button58.Location = new Point(x_st + dx * 10, y_st + dy * 4);
+            button59.Location = new Point(x_st + dx * 11, y_st + dy * 4);
 
-            button50.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button51.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button52.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button53.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button54.Location = new Point(x_st + dx * 4, y_st + dy * 5);
-            button55.Location = new Point(x_st + dx * 5, y_st + dy * 5);
-            button56.Location = new Point(x_st + dx * 6, y_st + dy * 5);
-            button57.Location = new Point(x_st + dx * 7, y_st + dy * 5);
-            button58.Location = new Point(x_st + dx * 8, y_st + dy * 5);
-            button59.Location = new Point(x_st + dx * 9, y_st + dy * 5);
+            button60.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button61.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button62.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button63.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button64.Location = new Point(x_st + dx * 4, y_st + dy * 5);
+            button65.Location = new Point(x_st + dx * 5, y_st + dy * 5);
+            button66.Location = new Point(x_st + dx * 6, y_st + dy * 5);
+            button67.Location = new Point(x_st + dx * 7, y_st + dy * 5);
+            button68.Location = new Point(x_st + dx * 8, y_st + dy * 5);
+            button69.Location = new Point(x_st + dx * 9, y_st + dy * 5);
+            button70.Location = new Point(x_st + dx * 10, y_st + dy * 5);
+            button71.Location = new Point(x_st + dx * 11, y_st + dy * 5);
 
-            button60.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button61.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button62.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button63.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button64.Location = new Point(x_st + dx * 4, y_st + dy * 6);
-            button65.Location = new Point(x_st + dx * 5, y_st + dy * 6);
-            button66.Location = new Point(x_st + dx * 6, y_st + dy * 6);
-            button67.Location = new Point(x_st + dx * 7, y_st + dy * 6);
-            button68.Location = new Point(x_st + dx * 8, y_st + dy * 6);
-            button69.Location = new Point(x_st + dx * 9, y_st + dy * 6);
+            button72.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button73.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button74.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button75.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button76.Location = new Point(x_st + dx * 4, y_st + dy * 6);
+            button77.Location = new Point(x_st + dx * 5, y_st + dy * 6);
+            button78.Location = new Point(x_st + dx * 6, y_st + dy * 6);
+            button79.Location = new Point(x_st + dx * 7, y_st + dy * 6);
+            button80.Location = new Point(x_st + dx * 8, y_st + dy * 6);
+            button81.Location = new Point(x_st + dx * 9, y_st + dy * 6);
+            button82.Location = new Point(x_st + dx * 10, y_st + dy * 6);
+            button83.Location = new Point(x_st + dx * 11, y_st + dy * 6);
 
-            button70.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button71.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button72.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button73.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-            button74.Location = new Point(x_st + dx * 4, y_st + dy * 7);
-            button75.Location = new Point(x_st + dx * 5, y_st + dy * 7);
-            button76.Location = new Point(x_st + dx * 6, y_st + dy * 7);
-            button77.Location = new Point(x_st + dx * 7, y_st + dy * 7);
-            button78.Location = new Point(x_st + dx * 8, y_st + dy * 7);
-            button79.Location = new Point(x_st + dx * 9, y_st + dy * 7);
+            button84.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button85.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button86.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button87.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button88.Location = new Point(x_st + dx * 4, y_st + dy * 7);
+            button89.Location = new Point(x_st + dx * 5, y_st + dy * 7);
+            button90.Location = new Point(x_st + dx * 6, y_st + dy * 7);
+            button91.Location = new Point(x_st + dx * 7, y_st + dy * 7);
+            button92.Location = new Point(x_st + dx * 8, y_st + dy * 7);
+            button93.Location = new Point(x_st + dx * 9, y_st + dy * 7);
+            button94.Location = new Point(x_st + dx * 10, y_st + dy * 7);
+            button95.Location = new Point(x_st + dx * 11, y_st + dy * 7);
+
+
+
 
             button9.Text = word;
 
             pictureBox1.Size = new Size(640, 480);
             pictureBox1.Location = new Point(10, 10);
 
-            this.Size = new Size(1570, 900);
+            this.Size = new Size(1640, 900);
 
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             richTextBox1.Size = new Size(this.Width - richTextBox1.Location.X - 30, this.Height - richTextBox1.Location.Y - 50);
@@ -2484,12 +2503,12 @@ namespace _vcs_MakePicture
             p = new Pen(Color.FromArgb(255, 0, 255, 0), 20);
             g.DrawRectangle(p, new Rectangle(dd, dd, W - dd * 2, H - dd * 2));
 
-            string filename = @"Spyder.bmp";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\SpringBouquet.jpg";
+
             Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             richTextBox1.Text += "W = " + bitmap2.Width.ToString() + ", H = " + bitmap2.Height.ToString() + "\n";
             g.DrawImage(bitmap2, 0, 0, bitmap2.Width, bitmap2.Height);
             //              貼上的位置      貼上的大小 放大縮小用
-
 
             int x_st = 20;
             int y_st = 20;
@@ -2535,7 +2554,6 @@ namespace _vcs_MakePicture
             richTextBox1.Text += "已存檔 : " + filename + "\n";
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button64_Click(object sender, EventArgs e)
@@ -2999,7 +3017,7 @@ namespace _vcs_MakePicture
             //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_01.jpg";
             //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_book\20161226161423441.jpg";
             //string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_doraemon\original.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime/doraemon1.jpg";
 
             int sx = 175;//抓圖位置
             int sy = 465;
@@ -3135,7 +3153,10 @@ namespace _vcs_MakePicture
             g = Graphics.FromImage(bitmap1);
 
             sb = new SolidBrush(Color.White);
-            g.FillEllipse(sb, 0, 0, width - 1, height - 1);
+            g.FillEllipse(sb, 50, 50, width - 100, height - 100);
+
+            sb = new SolidBrush(Color.Black);
+            g.FillEllipse(sb, 100, 100, width - 200, height - 200);
 
             pictureBox1.Image = bitmap1;
         }
@@ -3271,7 +3292,7 @@ namespace _vcs_MakePicture
             points[4] = new Point(x_st + 0, y_st + 100);
             points[5] = new Point(x_st + -50, y_st + 50);
             g.FillPolygon(sb, points);
-            
+
             pictureBox1.Image = bitmap1;
         }
 
@@ -3300,7 +3321,7 @@ namespace _vcs_MakePicture
             g = Graphics.FromImage(bitmap1);
 
             int radius = width * 4 / 10;
-            Point center = new Point(width / 2, height / 2+10);
+            Point center = new Point(width / 2, height / 2 + 10);
             FillStar(g, center, radius, Color.Blue);
 
 
@@ -3308,6 +3329,157 @@ namespace _vcs_MakePicture
         }
 
         private void button79_Click(object sender, EventArgs e)
+        {
+            //製作數字球
+            Font f = new Font("Times New Roman", 24);
+
+            // Display a sample.
+            pictureBox1.Image = MakeNumberBitmap2(60,
+                Color.Blue, Color.Black,
+                5, f,
+                "9");
+
+            int number = 0;
+            for (number = 0; number < 10; number++)
+            {
+                // Make the file.
+                Bitmap bm = MakeNumberBitmap2(80,
+                    Color.Blue, Color.Black,
+                    5, f,
+                    number.ToString());
+
+                bm.Save("Number" + number.ToString() + ".png", ImageFormat.Png);
+            }
+            richTextBox1.Text += "完成";
+
+        }
+
+        // Make a bitmap containing the indicated text.
+        private Bitmap MakeNumberBitmap2(int width, Color bg_color, Color fg_color, int border_thickness, Font fg_font, string txt)
+        {
+            // Size the bitmap.
+            Bitmap bm = new Bitmap(width, width);
+            using (Graphics g = Graphics.FromImage(bm))
+            {
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                g.TextRenderingHint = TextRenderingHint.AntiAlias;
+
+                // Make the background transparent.
+                g.Clear(Color.Transparent);
+
+                // Fill the background.
+                float margin = 2 + border_thickness / 2f;
+                RectangleF rect = new RectangleF(margin, margin,
+                    width - 2 * margin, width - 2 * margin);
+                using (LinearGradientBrush bg_brush = new LinearGradientBrush(
+                    rect, Color.White, bg_color, LinearGradientMode.BackwardDiagonal))
+                {
+                    g.FillEllipse(bg_brush, rect);
+                }
+
+                // Outline the background.
+                if (border_thickness > 0)
+                {
+                    using (LinearGradientBrush bg_brush = new LinearGradientBrush(
+                        rect, bg_color, Color.White, LinearGradientMode.ForwardDiagonal))
+                    {
+                        using (Pen bg_pen = new Pen(bg_brush, border_thickness))
+                        {
+                            g.DrawEllipse(bg_pen, rect);
+                        }
+                    }
+                }
+
+                // Draw the button text.
+                using (StringFormat string_format = new StringFormat())
+                {
+                    string_format.Alignment = StringAlignment.Center;
+                    string_format.LineAlignment = StringAlignment.Center;
+                    using (Brush fg_brush = new SolidBrush(fg_color))
+                    {
+                        g.DrawString(txt, fg_font, fg_brush, rect, string_format);
+                    }
+                }
+            }
+            return bm;
+        }
+
+        private void button80_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button81_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button82_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button83_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button84_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button85_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button86_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button87_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button88_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button89_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button90_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button91_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button92_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button93_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button94_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button95_Click(object sender, EventArgs e)
         {
 
         }
