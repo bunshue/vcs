@@ -186,10 +186,8 @@ namespace howto_k_means
             if (!centroids_changed)
             {
                 tmrUpdate.Enabled = false;
-                //System.Media.SystemSounds.Beep.Play();
-                lblScore.Text = "Score: " + Score().ToString() +
-                    ", # Steps: " + NumSteps.ToString();
-                Cursor = Cursors.Default;
+                richTextBox1.Text += "Score: " + Score().ToString() +
+    ", # Steps: " + NumSteps.ToString() + "\n";
                 return;
             }
 
@@ -213,8 +211,6 @@ namespace howto_k_means
 
             NumSteps = 0;
             picItems.Refresh();
-            lblScore.Text = "";
-            Cursor = Cursors.WaitCursor;
             tmrUpdate.Enabled = true;
         }
 
@@ -260,9 +256,12 @@ namespace howto_k_means
         {
             // Divide by 10 so speed is between 1 and 20.
             int fps = hscrFps.Value / 10;
-            if (fps < 1) fps = 1;
-            lblFps.Text = fps.ToString();
+            if (fps < 1)
+                fps = 1;
+            lb_fps.Text = fps.ToString();
             tmrUpdate.Interval = 1000 / fps;
         }
     }
 }
+
+//System.Media.SystemSounds.Beep.Play();

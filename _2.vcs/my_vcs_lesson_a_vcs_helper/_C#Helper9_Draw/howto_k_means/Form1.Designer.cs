@@ -37,12 +37,10 @@
             this.txtNumPoints = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tmrUpdate = new System.Windows.Forms.Timer(this.components);
-            this.lblScore = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.hscrFps = new System.Windows.Forms.HScrollBar();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lblFps = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.lb_fps = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picItems)).BeginInit();
             this.SuspendLayout();
             // 
@@ -122,17 +120,6 @@
             this.tmrUpdate.Interval = 500;
             this.tmrUpdate.Tick += new System.EventHandler(this.tmrUpdate_Tick);
             // 
-            // lblScore
-            // 
-            this.lblScore.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblScore.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblScore.Location = new System.Drawing.Point(12, 582);
-            this.lblScore.Name = "lblScore";
-            this.lblScore.Size = new System.Drawing.Size(1076, 17);
-            this.lblScore.TabIndex = 5;
-            this.lblScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // btnClear
             // 
             this.btnClear.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -156,24 +143,6 @@
             this.hscrFps.Value = 20;
             this.hscrFps.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hscrFps_Scroll);
             // 
-            // label3
-            // 
-            this.label3.Location = new System.Drawing.Point(12, 561);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 16);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "FPS:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblFps
-            // 
-            this.lblFps.Location = new System.Drawing.Point(157, 561);
-            this.lblFps.Name = "lblFps";
-            this.lblFps.Size = new System.Drawing.Size(30, 16);
-            this.lblFps.TabIndex = 9;
-            this.lblFps.Text = "2";
-            this.lblFps.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // richTextBox1
             // 
             this.richTextBox1.Location = new System.Drawing.Point(798, 68);
@@ -182,18 +151,25 @@
             this.richTextBox1.TabIndex = 10;
             this.richTextBox1.Text = "";
             // 
+            // lb_fps
+            // 
+            this.lb_fps.Location = new System.Drawing.Point(12, 573);
+            this.lb_fps.Name = "lb_fps";
+            this.lb_fps.Size = new System.Drawing.Size(30, 16);
+            this.lb_fps.TabIndex = 11;
+            this.lb_fps.Text = "fps";
+            this.lb_fps.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnMakePoints;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1100, 607);
+            this.Controls.Add(this.lb_fps);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.lblFps);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.hscrFps);
             this.Controls.Add(this.btnClear);
-            this.Controls.Add(this.lblScore);
             this.Controls.Add(this.btnMakePoints);
             this.Controls.Add(this.txtNumPoints);
             this.Controls.Add(this.label2);
@@ -220,12 +196,10 @@
         private System.Windows.Forms.TextBox txtNumPoints;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Timer tmrUpdate;
-        private System.Windows.Forms.Label lblScore;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.HScrollBar hscrFps;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblFps;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label lb_fps;
     }
 }
 

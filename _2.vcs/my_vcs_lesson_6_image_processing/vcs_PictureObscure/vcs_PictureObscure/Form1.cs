@@ -50,7 +50,7 @@ namespace vcs_PictureObscure
             catch (Exception ex)
             {
                 OriginalImage = null;
-                pictureBox1.Visible = false;
+                pictureBox2.Visible = false;
                 MessageBox.Show("Error opening file " + filename + "\n" + ex.Message);
                 return;
             }
@@ -60,8 +60,8 @@ namespace vcs_PictureObscure
 
             // Display the current image.
             VisibleImage = new Bitmap(OriginalImage);
-            pictureBox1.Image = VisibleImage;
-            pictureBox1.Refresh();
+            pictureBox2.Image = VisibleImage;
+            pictureBox2.Refresh();
         }
 
         // Load a bitmap without locking it.
@@ -78,7 +78,7 @@ namespace vcs_PictureObscure
         private bool Selecting = false;
 
         // Start selecting.
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
         {
             Selecting = true;
             Point1 = e.Location;
@@ -86,21 +86,21 @@ namespace vcs_PictureObscure
         }
 
         // Continue selecting.
-        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
         {
             Point2 = e.Location;
-            pictureBox1.Refresh();
+            pictureBox2.Refresh();
         }
 
         // Finish selecting.
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
         {
             Selecting = false;
             FuzzImagePart();
         }
 
         // Draw the selection rectangle.
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
             if (!Selecting) return;
             Rectangle rect = new Rectangle(
@@ -132,7 +132,7 @@ namespace vcs_PictureObscure
                     gr.FillRectangle(Brushes.Black, rect);
                 else
                     gr.DrawImage(ObscuredImage, rect, rect, GraphicsUnit.Pixel);
-                pictureBox1.Refresh();
+                pictureBox2.Refresh();
             }
         }
         
@@ -227,7 +227,7 @@ namespace vcs_PictureObscure
             //Revert
             // Revert to the original image.
             VisibleImage = new Bitmap(OriginalImage);
-            pictureBox1.Image = VisibleImage;
+            pictureBox2.Image = VisibleImage;
 
         }
 

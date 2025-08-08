@@ -346,7 +346,8 @@ namespace vcs_ImageProcessing1
                         *(ptr + 1) = gray;     //每個點的G改成三色平均
                         *(ptr + 2) = gray;     //每個點的R改成三色平均
                         //*(ptr + 3) = 0;     //每個點的A改成三色平均
-                        ptr += 3;   //jpg檔要加 3, bmp檔要加4
+
+                        ptr += 3;//指針移到下一個像素, //jpg檔要加 3, bmp檔要加4
                     }
                 }
                 //解除綁定bmp和bmpData
@@ -384,6 +385,7 @@ namespace vcs_ImageProcessing1
                 byte r;
                 byte g;
                 byte b;
+                byte gray;
                 byte* pLine = ptr;
                 for (int y = 0; y < H; y++)
                 {
@@ -395,10 +397,13 @@ namespace vcs_ImageProcessing1
                         r = ptr[2];
                         g = ptr[1];
                         b = ptr[0];
-                        //反相
-                        ptr[2] = (byte)(255 - r);
-                        ptr[1] = (byte)(255 - g);
-                        ptr[0] = (byte)(255 - b);
+
+                        //灰階
+                        gray = (byte)((r * 19595 + g * 38469 + b * 7472) >> 16);
+                        ptr[2] = gray;
+                        ptr[1] = gray;
+                        ptr[0] = gray;
+
                         ptr += 3;//指針移到下一個像素
                     }
                     pLine += stride;//指針移到下一行
@@ -426,48 +431,40 @@ namespace vcs_ImageProcessing1
             int H = bmp.Height;
 
             //綁定bmp和bmpData
-            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+            //使用原本的像素格式
+            //BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
+            //指定像素格式轉為24比特
+            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);//指明PixelFormat
 
             unsafe
             {
-                byte* p = (byte*)bmpData.Scan0;
-                int offset = bmpData.Stride - W * 4;
-                for (int j = 0; j < H; j++)
-                {
-                    for (int i = 0; i < W; i++)
-                    {
-                        p += 4;
-                    }
-                    p += offset;
-                }
-                //解除綁定bmp和bmpData
-                bmp.UnlockBits(bmpData);
-            }
-
-            //綁定bmp和bmpData
-            BitmapData data = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
-            unsafe
-            {
-                byte* p = (byte*)data.Scan0;
-                int offset = data.Stride - W * 4;
-                byte R, G, B, gray;
+                byte* ptr = (byte*)bmpData.Scan0;
+                int offset = bmpData.Stride - W * 3;
+                byte r;
+                byte g;
+                byte b;
+                byte gray;
                 for (int y = 0; y < H; y++)
                 {
                     for (int x = 0; x < W; x++)
                     {
-                        R = p[2];
-                        G = p[1];
-                        B = p[0];
-                        gray = (byte)((R * 19595 + G * 38469 + B * 7472) >> 16);
-                        p[2] = gray;
-                        p[1] = gray;
-                        p[0] = gray;
-                        p += 4;
+                        //取值
+                        r = ptr[2];
+                        g = ptr[1];
+                        b = ptr[0];
+
+                        //灰階
+                        gray = (byte)((r * 19595 + g * 38469 + b * 7472) >> 16);
+                        ptr[2] = gray;
+                        ptr[1] = gray;
+                        ptr[0] = gray;
+
+                        ptr += 3;//指針移到下一個像素
                     }
-                    p += offset;
+                    ptr += offset;
                 }
                 //解除綁定bitmap1和bmpData
-                bmp.UnlockBits(data);
+                bmp.UnlockBits(bmpData);
             }
             return bmp;
         }

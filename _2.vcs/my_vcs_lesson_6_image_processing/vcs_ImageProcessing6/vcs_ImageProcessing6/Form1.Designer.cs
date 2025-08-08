@@ -38,6 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.bt_reset1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
@@ -79,6 +80,9 @@
             this.pictureBox1.Size = new System.Drawing.Size(50, 50);
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
             // bt_clear
             // 
@@ -139,11 +143,23 @@
             this.label1.TabIndex = 39;
             this.label1.Text = "label1";
             // 
+            // bt_reset1
+            // 
+            this.bt_reset1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_reset1.Location = new System.Drawing.Point(427, 12);
+            this.bt_reset1.Name = "bt_reset1";
+            this.bt_reset1.Size = new System.Drawing.Size(60, 32);
+            this.bt_reset1.TabIndex = 43;
+            this.bt_reset1.Text = "Reset";
+            this.bt_reset1.UseVisualStyleBackColor = true;
+            this.bt_reset1.Click += new System.EventHandler(this.bt_reset1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(752, 565);
+            this.Controls.Add(this.bt_reset1);
             this.Controls.Add(this.label0);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -178,6 +194,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button bt_reset1;
     }
 }
 
