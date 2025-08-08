@@ -25,7 +25,7 @@ using System.Drawing.Imaging;   //for BitmapData, ImageLockMode, PixelFormat
 using System.Runtime.InteropServices;   //for Marshal
 using System.Diagnostics;   //for Stopwatch
 
-namespace vcs_ImageProcessing0
+namespace vcs_ImageProcessing1
 {
     public partial class Form1 : Form
     {

@@ -1,5 +1,7 @@
 print("建立 midi 檔案")
 
+print("------------------------------------------------------------")  # 60個
+
 from midiutil.MidiFile import MIDIFile
 
 # Create the MIDIFile Object
@@ -31,3 +33,5 @@ for i, pitch in enumerate(scale):
 # Write the MIDI file to disk
 with open("tmp_create_midi.mid", "wb") as output_file:
     MyMIDI.writeFile(output_file)
+
+print("------------------------------------------------------------")  # 60個

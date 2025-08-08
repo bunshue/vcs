@@ -19,71 +19,50 @@ print("------------------------------------------------------------")  # 60個
 # Canny 邊緣檢測
 print("------------------------------------------------------------")  # 60個
 
+print("使用Trackbar 做 Canny")
+
+
+def do_trackbar_event1(val):
+    global min_value, max_value
+    min_value = val
+    # print("數值 :", val, end=" ")
+    dst = cv2.Canny(image, min_value, max_value)  # minVal=50, maxVal=100, typical
+    cv2.imshow("OpenCV", dst)
+
+
+def do_trackbar_event2(val):
+    global min_value, max_value
+    max_value = val
+    # print("數值 :", val, end=" ")
+    dst = cv2.Canny(image, min_value, max_value)  # minVal=50, maxVal=100, typical
+    cv2.imshow("OpenCV", dst)
+
+
 image = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 # 高斯模糊，边缘检测需要的
 # image = cv2.GaussianBlur(image, (3, 3), 0)  # 降低噪音
 # image = cv2.GaussianBlur(image, (5, 5), 0)
 
-dst1 = cv2.Canny(image, 50, 100)  # minVal=50, maxVal=100
-dst2 = cv2.Canny(image, 50, 200)  # minVal=50, maxVal=200
-dst3 = cv2.Canny(image, 100, 200)
-dst4 = cv2.Canny(image, 50, 150)
-dst5 = cv2.Canny(image, 128, 200)
-dst6 = cv2.Canny(image, 32, 128)
-# dst_canny = cv2.Canny(image, 50, 100)  # minVal=50, maxVal=100
+cv2.imshow("OpenCV", image)
 
-plt.figure(figsize=(10, 8))
-plt.subplot(221)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
+min_value, max_value = 40, 50
+cv2.createTrackbar("min ", "OpenCV", 0, 100, do_trackbar_event1)
+cv2.setTrackbarPos("min ", "OpenCV", 40)  # 設定預設值
 
-plt.subplot(222)
-plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))
-plt.title("Canny 1")
+cv2.createTrackbar("max ", "OpenCV", 0, 100, do_trackbar_event2)
+cv2.setTrackbarPos("max ", "OpenCV", 50)  # 設定預設值
 
-plt.subplot(223)
-plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))
-plt.title("Canny 2")
+# 取得Trackbar數值
+value1 = cv2.getTrackbarPos("min ", "OpenCV")
+do_trackbar_event1(value1)  # 套用一次設定值
 
-plt.subplot(224)
-plt.imshow(cv2.cvtColor(dst3, cv2.COLOR_BGR2RGB))
-plt.title("Canny 3")
+while True:
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
 
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-image1 = cv2.imread(filename2)  # 彩色讀取
-
-image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
-
-# image2 = cv2.cvtColor(image1, 6)  # 也可以用數字對照 6 表示轉換成灰階
-# 套用 medianBlur() 中值模糊
-image3 = cv2.medianBlur(image2, 7)  # 模糊化，去除雜訊 7, 25 彩色黑白皆可
-
-image4 = cv2.Canny(image3, 36, 36)  # 偵測邊緣
-
-plt.figure(figsize=(12, 8))
-
-plt.subplot(221)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(222)
-plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
-plt.title("轉成灰階")
-
-plt.subplot(223)
-plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
-plt.title("模糊化，去除雜訊")
-
-plt.subplot(224)
-plt.imshow(cv2.cvtColor(image4, cv2.COLOR_BGR2RGB))
-plt.title("Canny 偵測邊緣")
-
-show()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -120,6 +99,53 @@ while True:
         break
 
 cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+image = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+
+# 高斯模糊，边缘检测需要的
+# image = cv2.GaussianBlur(image, (3, 3), 0)  # 降低噪音
+# image = cv2.GaussianBlur(image, (5, 5), 0)
+
+dst1 = cv2.Canny(image, 50, 100)  # minVal=50, maxVal=100
+dst2 = cv2.Canny(image, 50, 200)  # minVal=50, maxVal=200
+dst3 = cv2.Canny(image, 100, 200)
+dst4 = cv2.Canny(image, 50, 150)
+dst5 = cv2.Canny(image, 128, 200)
+dst6 = cv2.Canny(image, 32, 128)
+
+# 套用 medianBlur() 中值模糊
+image3 = cv2.medianBlur(image, 7)  # 模糊化，去除雜訊 7, 25 彩色黑白皆可
+image4 = cv2.Canny(image3, 36, 36)  # 偵測邊緣
+
+plt.figure(figsize=(12, 10))
+plt.subplot(331)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(332)
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))
+plt.title("灰階直接 Canny 1")
+
+plt.subplot(333)
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))
+plt.title("灰階直接Canny 2")
+
+plt.subplot(334)
+plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
+plt.title("模糊化，去除雜訊")
+
+plt.subplot(335)
+plt.imshow(cv2.cvtColor(image4, cv2.COLOR_BGR2RGB))
+plt.title("Canny 偵測邊緣")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -752,66 +778,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-"""
-typical
-
-# 高斯模糊，边缘检测需要的
-# image = cv2.GaussianBlur(image, (3, 3), 0)  # 降低噪音
-# image = cv2.GaussianBlur(image, (5, 5), 0)
-
-dst1 = cv2.Canny(image, 50, 100)  # minVal=50, maxVal=100
-dst2 = cv2.Canny(image, 50, 200)  # minVal=50, maxVal=200
-dst3 = cv2.Canny(image, 100, 200)
-dst4 = cv2.Canny(image, 50, 150)
-dst5 = cv2.Canny(image, 128, 200)
-dst6 = cv2.Canny(image, 32, 128)
-dst7 = cv2.Canny(image, 50, 100)  # minVal=50, maxVal=100
-"""
-print("準備使用Trackbar")
-
-
-def do_trackbar_event1(val):
-    global min_value, max_value
-    min_value = val
-    # print("數值 :", val, end=" ")
-    dst = cv2.Canny(image, min_value, max_value)  # minVal=50, maxVal=100, typical
-    cv2.imshow("OpenCV", dst)
-
-
-def do_trackbar_event2(val):
-    global min_value, max_value
-    max_value = val
-    # print("數值 :", val, end=" ")
-    dst = cv2.Canny(image, min_value, max_value)  # minVal=50, maxVal=100, typical
-    cv2.imshow("OpenCV", dst)
-
-
-image = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
-
-# 高斯模糊，边缘检测需要的
-# image = cv2.GaussianBlur(image, (3, 3), 0)  # 降低噪音
-# image = cv2.GaussianBlur(image, (5, 5), 0)
-
-cv2.imshow("OpenCV", image)
-
-min_value, max_value = 40, 50
-cv2.createTrackbar("min ", "OpenCV", 0, 100, do_trackbar_event1)
-cv2.setTrackbarPos("min ", "OpenCV", 40)  # 設定預設值
-
-cv2.createTrackbar("max ", "OpenCV", 0, 100, do_trackbar_event2)
-cv2.setTrackbarPos("max ", "OpenCV", 50)  # 設定預設值
-
-# 取得Trackbar數值
-value1 = cv2.getTrackbarPos("min ", "OpenCV")
-do_trackbar_event1(value1)  # 套用一次設定值
-
-while True:
-    k = cv2.waitKey(1)
-    if k == ESC:
-        break
-
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

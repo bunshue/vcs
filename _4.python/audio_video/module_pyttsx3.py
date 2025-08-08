@@ -24,20 +24,22 @@ engine.runAndWait()
 engine.stop()  # 停止 pyttsx3 引擎
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 engine = pyttsx3.init()
 
-test_txt="I am a good student 新手一定要玩的MNIST手寫數字辨識"
+test_txt = "I am a good student 新手一定要玩的MNIST手寫數字辨識"
 
-voices = engine.getProperty('voices')
-rate = engine.getProperty('rate')
-engine.setProperty('rate', rate-30)                                                     #you can change the rate here
+voices = engine.getProperty("voices")
+rate = engine.getProperty("rate")
+engine.setProperty("rate", rate - 30)  # you can change the rate here
 for voice in voices:
     print(voice)
-    engine.setProperty('voice',voice.id)
-    engine.say(test_txt)       
+    engine.setProperty("voice", voice.id)
+    engine.say(test_txt)
     engine.runAndWait()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 text = "Welcome to the United Stated and have a nice day."
@@ -48,6 +50,7 @@ engine.setProperty("volume", 10)
 engine.say(text)
 engine.runAndWait()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Changing Voice , Rate and Volume
@@ -84,6 +87,7 @@ engine.save_to_file("Hello World", "test.mp3")
 engine.runAndWait()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 import time
 
@@ -116,17 +120,13 @@ text = "語言技術：Python 資料科學"
 speak(text)
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
@@ -136,8 +136,10 @@ print("------------------------------------------------------------")  # 60個
 sys.exit()
 
 
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
 
-
+print("------------------------------------------------------------")  # 60個

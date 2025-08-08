@@ -8,13 +8,14 @@ import time
 import random
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from pydub import AudioSegment
 
-print('使用 ffmpeg.exe 將 .wav 轉成 .mp3')
+print("使用 ffmpeg.exe 將 .wav 轉成 .mp3")
 
-wav_filename = '老北京.wav'
-mp3_filename = '老北京.mp3'
+wav_filename = "老北京.wav"
+mp3_filename = "老北京.mp3"
 
 # 讀取.wav文件
 wav_audio = AudioSegment.from_wav(wav_filename)
@@ -22,6 +23,7 @@ wav_audio = AudioSegment.from_wav(wav_filename)
 # 轉換為.mp3
 wav_audio.export(mp3_filename, format="mp3")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ 無麥克風
@@ -47,6 +49,7 @@ with sr.Microphone() as source:
     except:
         print("抱歉無法聽懂你的語音")
 """
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ 無麥克風
@@ -74,7 +77,7 @@ with sr.Microphone() as source:
 
 """
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 """
 #很多mp3不能播放
@@ -104,23 +107,26 @@ import datetime
 infolder = "C:/_git/vcs/_1.data/______test_files1/_mp3"
 ext = "*.mp3"
 
-#【函數: 取得MP3檔案的播放時間】
+
+# 【函數: 取得MP3檔案的播放時間】
 def getplaytime(readfile):
     try:
-        audio = MP3(readfile)   #載入檔案
-        sec = audio.info.length #播放時間（秒）
-        timestr = str(datetime.timedelta(seconds=sec))  #轉換成時分秒格式
+        audio = MP3(readfile)  # 載入檔案
+        sec = audio.info.length  # 播放時間（秒）
+        timestr = str(datetime.timedelta(seconds=sec))  # 轉換成時分秒格式
         return sec, readfile + " " + timestr
     except:
         return 0, readfile + "：程式執行失敗。"
-#【函數：搜尋資料夾與子資料夾MP3檔案】
+
+
+# 【函數：搜尋資料夾與子資料夾MP3檔案】
 def findfiles(infolder):
     totalsec = 0
     msg = ""
     filelist = []
-    for p in Path(infolder).rglob(ext): #將這個資料夾以及子資料夾的所有檔案
-        filelist.append(str(p))         #新增至列表
-    for filename in sorted(filelist):   #再替每個檔案排序
+    for p in Path(infolder).rglob(ext):  # 將這個資料夾以及子資料夾的所有檔案
+        filelist.append(str(p))  # 新增至列表
+    for filename in sorted(filelist):  # 再替每個檔案排序
         val1, val2 = getplaytime(filename)
         totalsec += val1
         msg += val2 + "\n"
@@ -128,10 +134,12 @@ def findfiles(infolder):
     msg += "總播放時間 " + totaltimestr
     return msg
 
-#【執行】
+
+# 【執行】
 msg = findfiles(infolder)
 print(msg)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ fail
@@ -188,6 +196,7 @@ print(f"螢幕錄影已儲存為 {record_filename}")
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """ TBD
 #声音录制
@@ -217,6 +226,7 @@ stream.close()
 p.terminate()
 """
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -267,6 +277,7 @@ p.terminate()
 print("* recording done!")
 """
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ TBD
@@ -355,6 +366,7 @@ video.write_videofile("test2.mp4",codec='mpeg4')
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """
 製作影片字幕
@@ -363,13 +375,14 @@ print("------------------------------------------------------------")  # 60個
 
 """
 
-#影片轉wav, 但是要跑很久
+# 影片轉wav, 但是要跑很久
 
 video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 from moviepy.editor import *
-audio1 = AudioFileClip('老北京.mp4')
-audio1.write_audiofile('老北京22222.wav')
+
+audio1 = AudioFileClip("老北京.mp4")
+audio1.write_audiofile("老北京22222.wav")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -388,69 +401,77 @@ import glob
 import shutil
 from time import sleep
 
-def emptydir(dirname):  #清空資料夾
-    if os.path.isdir(dirname):  #資料夾存在就刪除
+
+def emptydir(dirname):  # 清空資料夾
+    if os.path.isdir(dirname):  # 資料夾存在就刪除
         shutil.rmtree(dirname)
-        sleep(2)  #需延遲,否則會出錯
-    os.mkdir(dirname)  #建立資料夾
+        sleep(2)  # 需延遲,否則會出錯
+    os.mkdir(dirname)  # 建立資料夾
+
 
 wave_filename = "老北京.wav"
 
-cc = OpenCC('s2twp')
-delay = 1300  #聲音延遟時間
-fname = '老北京'
+cc = OpenCC("s2twp")
+delay = 1300  # 聲音延遟時間
+fname = "老北京"
 sound = AudioSegment.from_file(fname + ".wav", format="wav")
-start_end = detect_silence(sound, delay, sound.dBFS, 1)  #偵測靜音
+start_end = detect_silence(sound, delay, sound.dBFS, 1)  # 偵測靜音
 
-#每個分割區間的結束位置
+# 每個分割區間的結束位置
 mslist = []
 for i in range(len(start_end)):
-    if i== (len(start_end)-1): data = start_end[i][1]  #最後一筆不必減1秒
-    else:  data = start_end[i][1] - delay  #結束位置提前1秒
+    if i == (len(start_end) - 1):
+        data = start_end[i][1]  # 最後一筆不必減1秒
+    else:
+        data = start_end[i][1] - delay  # 結束位置提前1秒
     mslist.append(data)
 
-#毫秒轉為xx:xx.xxx字串
+# 毫秒轉為xx:xx.xxx字串
 timelist = []
-for sss in mslist: 
-    h,ms = divmod(float(sss),3600000)  #時
-    m,ms = divmod(float(ms),60000)  #分
-    s,ms = divmod(float(ms),1000)  #秒
-    ts="%02d:%02d:%02d.%03d" % (h,m,s,ms)
+for sss in mslist:
+    h, ms = divmod(float(sss), 3600000)  # 時
+    m, ms = divmod(float(ms), 60000)  # 分
+    s, ms = divmod(float(ms), 1000)  # 秒
+    ts = "%02d:%02d:%02d.%03d" % (h, m, s, ms)
     timelist.append(ts)
 
-#分割聲音檔
-emptydir('tmp_分割聲音檔')
-for i in range(len(timelist)):  
-    if i==0:  start = 0
-    else:  start = mslist[i-1]
+# 分割聲音檔
+emptydir("tmp_分割聲音檔")
+for i in range(len(timelist)):
+    if i == 0:
+        start = 0
+    else:
+        start = mslist[i - 1]
     end = mslist[i]
-    filename = 'tmp_分割聲音檔/slice{:0>3d}.wav'.format(i+1)
-    sound[start:end].export(filename, format='wav')
+    filename = "tmp_分割聲音檔/slice{:0>3d}.wav".format(i + 1)
+    sound[start:end].export(filename, format="wav")
 
 
-print('對 tmp_分割聲音檔 進行語音辨識')
-r = sr.Recognizer()  #建立語音辨識物件
-file = open(fname + '.srt', 'w', encoding='UTF-8')  #儲存辨識結果
+print("對 tmp_分割聲音檔 進行語音辨識")
+r = sr.Recognizer()  # 建立語音辨識物件
+file = open(fname + ".srt", "w", encoding="UTF-8")  # 儲存辨識結果
 
 # 撈出單層wav檔
-wavfiles = glob.glob('tmp_分割聲音檔/*.wav')
-data = ''
+wavfiles = glob.glob("tmp_分割聲音檔/*.wav")
+data = ""
 count = 1
 for i in range(len(wavfiles)):
     try:
-        with sr.WavFile("tmp_分割聲音檔/slice{:0>3d}.wav".format(i+1)) as source: 
+        with sr.WavFile("tmp_分割聲音檔/slice{:0>3d}.wav".format(i + 1)) as source:
             audio = r.record(source)
-        result = r.recognize_google(audio, language="zh-TW")  #辨識結果
-        result = cc.convert(result)  #轉繁體中文
-        print('{}. {}'.format(count, result))
-        #組合SRT格式
-        data += str(count) + '\n'
-        if i==0: start = '00:00:00,000'
-        else: start = timelist[i-1].replace('.', ',')
-        end = timelist[i].replace('.', ',')
-        data += (start + ' --> ' + end + '\n')
-        data += (result + '\n\n')
-        count +=1
+        result = r.recognize_google(audio, language="zh-TW")  # 辨識結果
+        result = cc.convert(result)  # 轉繁體中文
+        print("{}. {}".format(count, result))
+        # 組合SRT格式
+        data += str(count) + "\n"
+        if i == 0:
+            start = "00:00:00,000"
+        else:
+            start = timelist[i - 1].replace(".", ",")
+        end = timelist[i].replace(".", ",")
+        data += start + " --> " + end + "\n"
+        data += result + "\n\n"
+        count += 1
     except sr.UnknownValueError:
         print("Google Speech Recognition 無法辨識此語音！")
     except sr.RequestError as e:
@@ -458,14 +479,17 @@ for i in range(len(wavfiles)):
 file.write(data)
 file.close()
 
-print('完成')
+print("完成")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
@@ -475,6 +499,9 @@ print("------------------------------------------------------------")  # 60個
 sys.exit()
 
 
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個

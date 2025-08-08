@@ -1,7 +1,8 @@
 from moviepy.editor import VideoFileClip
 import os
 
-'''
+print("------------------------------------------------------------")  # 60個
+
 # 確保輸出資料夾存在
 output_folder = "tmp_video_1"
 if not os.path.exists(output_folder):
@@ -16,11 +17,12 @@ formats = ["avi"]
 # 對每個格式進行轉換
 for fmt in formats:
     output_file = os.path.join(output_folder, f"output_video.{fmt}")
-    original_clip.write_videofile(output_file, codec='libx264')
+    original_clip.write_videofile(output_file, codec="libx264")
 
 # 釋放資源
 original_clip.close()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from moviepy.editor import VideoFileClip
@@ -45,6 +47,7 @@ clip.write_gif(output_file)
 clip.close()
 original_clip.close()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -78,12 +81,13 @@ slower_clip = clip.fx(vfx.speedx, 0.5)
 slower_clip.write_videofile("tmp_video_4_slower.mp4")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from moviepy.editor import VideoFileClip, vfx
 
 clip = VideoFileClip("data/short南極.mp4")
 # 提高亮度
-brighter_clip = clip.fx(vfx.colorx, 1.2)                # 亮度增加 20%
+brighter_clip = clip.fx(vfx.colorx, 1.2)  # 亮度增加 20%
 # 保存新影片
 brighter_clip.write_videofile("tmp_video_5_brighter.mp4")
 
@@ -101,6 +105,7 @@ audio = clip.audio
 audio.write_audiofile("tmp_video_6_企鵝聲音.mp3")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from moviepy.editor import VideoFileClip
 
@@ -114,14 +119,15 @@ video_clip = video_clip.volumex(2)
 video_clip.write_videofile("tmp_video_7_企鵝聲音double.mp4")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-from moviepy.editor import VideoFileClip,afx
+from moviepy.editor import VideoFileClip, afx
 
 # 加載影片文件
 video = VideoFileClip("data/short南極企鵝.mp4")
 
 # 設定音訊淡出的時間，單位為秒
-fadeout_duration = 3                # 音訊淡出 3 秒
+fadeout_duration = 3  # 音訊淡出 3 秒
 
 # 應用音訊淡出效果
 audio_fadeout = video.audio.fx(afx.audio_fadeout, fadeout_duration)
@@ -130,8 +136,9 @@ audio_fadeout = video.audio.fx(afx.audio_fadeout, fadeout_duration)
 video = video.set_audio(audio_fadeout)
 
 # 儲存處理後的影片文件
-video.write_videofile("tmp_video_8_淡出.mp4",codec="libx264",audio_codec="aac")
+video.write_videofile("tmp_video_8_淡出.mp4", codec="libx264", audio_codec="aac")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from moviepy.editor import VideoFileClip, AudioFileClip
@@ -155,7 +162,7 @@ elif audio_clip.duration < video_clip.duration:
 final_clip = video_clip.set_audio(audio_clip)
 
 # 儲存結果到文件
-final_clip.write_videofile("tmp_video_9.mp4",codec="libx264",audio_codec="aac")
+final_clip.write_videofile("tmp_video_9.mp4", codec="libx264", audio_codec="aac")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -171,9 +178,9 @@ fade_duration = 2
 video_fadeout = video_clip.fadeout(fade_duration)
 
 # 儲存帶有淡出效果的影片
-video_fadeout.write_videofile("tmp_video_10.mp4",codec="libx264",audio_codec="aac")
+video_fadeout.write_videofile("tmp_video_10.mp4", codec="libx264", audio_codec="aac")
 
-'''
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from moviepy.editor import VideoFileClip
@@ -259,6 +266,7 @@ if __name__ == "__main__":
     newclip.write_videofile(r"WinBasedWorkHard_scroll.mp4", threads=8)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from moviepy.editor import VideoFileClip, TextClip, CompositeVideoClip
 
@@ -277,7 +285,27 @@ final_clip = CompositeVideoClip([video_clip, txt_clip])
 # 儲存結果
 final_clip.write_videofile("tmp_video_11.mp4", codec="libx264", audio_codec="aac")
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個

@@ -17,6 +17,7 @@ song = AudioSegment.from_mp3("oxxostudio.mp3")  # 讀取 mp3 檔案
 print(song)  # <pydub.audio_segment.AudioSegment object at 0x7faaa545a7f0>
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
 
@@ -24,7 +25,7 @@ song = AudioSegment.from_mp3("oxxostudio.mp3")  # 讀取 mp3 檔案
 song.export("oxxostudio.wav", format="wav")  # 輸出為 wav
 print("ok")  # 輸出後印出 ok
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
@@ -33,9 +34,8 @@ song = AudioSegment.from_mp3("oxxostudio.mp3")  # 讀取 mp3 檔案
 song.export("output.wav", bitrate="96k")  # 輸出壓縮比率為 96k 的 mp3 檔案
 print("ok")  # 輸出後印出 ok
 
-
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
 
@@ -44,9 +44,8 @@ duration = song.duration_seconds  # 讀取長度
 channels = song.channels  # 讀取聲道數量
 print(channels, duration)  # 印出資訊
 
-
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
 
@@ -54,9 +53,8 @@ song = AudioSegment.from_mp3("oxxostudio.mp3")  # 讀取 mp3 檔案
 song[1500:5500].export("output.mp3")  # 取出 1500 毫秒～5500 毫秒長度的聲音，輸出為 output.mp3
 print("ok")  # 輸出後印出 ok
 
-
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 from pydub import AudioSegment
 
@@ -66,9 +64,8 @@ output = song1 + song2  # 串接兩段聲音
 output.export("output.mp3")  # 輸出為 output.mp3
 print("ok")  # 輸出後印出 ok
 
-
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 from pydub import AudioSegment
 
@@ -77,7 +74,7 @@ output = song * 3  # 乘以 3，重複三次變成三倍長
 output.export("output.mp3")
 print("ok")
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from pydub import AudioSegment
@@ -89,9 +86,8 @@ output1.export("output1.mp3")  # 輸出聲音
 output2.export("output2.mp3")
 print("ok")
 
-
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 from pydub import AudioSegment
 
@@ -102,7 +98,7 @@ output1.export("output1.mp3")
 output2.export("output2.mp3")
 print("ok")
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from pydub import AudioSegment
@@ -114,7 +110,7 @@ output1.export("output1.mp3")
 output2.export("output2.mp3")
 print("ok")
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from pydub import AudioSegment
@@ -131,9 +127,8 @@ output1.export("output1.mp3")
 output2.export("output2.mp3")
 print("ok")
 
-
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
 
@@ -142,9 +137,8 @@ voice = AudioSegment.from_mp3("voice.mp3")  # 讀取說話聲音 mp3 檔案
 output = voice.overlay(song, loop=True)  # 混合說話聲音和背景音樂
 output.export("output.mp3")
 
-
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
 
@@ -152,9 +146,8 @@ voice = AudioSegment.from_mp3("voice.mp3")  # 讀取說話聲音 mp3 檔案
 output = voice.reverse()  # 反轉說話聲音
 output.export("output.mp3")
 
-
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 from pydub import AudioSegment
 
@@ -175,9 +168,8 @@ song_fast = speed_change(song, 2.0)  # 聲音加速
 song_slow.export("song_slow.mp3")
 song_fast.export("song_fast.mp3")
 
-
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
 from pydub.playback import play  # 載入 pydub.playback 的 play 模組
@@ -186,9 +178,8 @@ song = AudioSegment.from_mp3("oxxostudio.mp3")  # 開啟聲音檔案
 output = song * 2  # 讓聲音檔案變成兩倍長
 play(output)  # 播放聲音
 
-
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 from IPython.display import Audio  # 載入 IPython.display 的 Audio模組  # 用IPython
 
@@ -196,14 +187,21 @@ Audio("output.mp3")  # 播放聲音
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
 print("------------------------------------------------------------")  # 60個

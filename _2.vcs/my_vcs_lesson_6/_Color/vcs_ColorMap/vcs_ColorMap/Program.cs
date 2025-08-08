@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_ImageProcessing0
+namespace vcs_ColorMap
 {
     static class Program
     {

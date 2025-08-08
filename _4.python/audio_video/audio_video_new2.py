@@ -12,41 +12,46 @@ ja : 日文
 """
 print("------------------------------------------------------------")  # 60個
 
-from pygame import mixer		# 匯入 mixer 物件
+from pygame import mixer  # 匯入 mixer 物件
 
 from gtts import gTTS
 
-tts = gTTS(text='LANDrop 輕鬆實現跨系統無線傳輸資料、照片的免費工具', lang='zh-tw')
-tts.save('tmp_aaaa.mp3')
+tts = gTTS(text="LANDrop 輕鬆實現跨系統無線傳輸資料、照片的免費工具", lang="zh-tw")
+tts.save("tmp_aaaa.mp3")
 
 # 播放mp3
-mixer.init()					# 初始化
-mixer.music.load('tmp_aaaa.mp3')  # 讀取聲音檔
-mixer.music.play()		# 播放 聲音檔
+mixer.init()  # 初始化
+mixer.music.load("tmp_aaaa.mp3")  # 讀取聲音檔
+mixer.music.play()  # 播放 聲音檔
 
-from pygame import mixer    
+from pygame import mixer
 from gtts import gTTS
 
-mixer.init()    # 初始化
-if not os.path.isfile('tmp.mp3'):    # 不重要的聲音檔產生器
-    tts = gTTS(text = '不重要的語音檔', lang = 'zh-tw')
-    tts.save('tmp.mp3')
-    print('已產生不重要的語音檔 tmp.mp3')
-#-----------------#
-def bot_speak(text, lang):    # 建立自訂函式
-    try: 
-        mixer.music.load('tmp.mp3')    # 讀取不重要的聲音檔
-        tts = gTTS(text=text, lang=lang)    
-        tts.save('speak.mp3')    
-        mixer.music.load('speak.mp3')	    
-        mixer.music.play()    # 播放重要的聲音檔
-        while(mixer.music.get_busy()):    
+mixer.init()  # 初始化
+if not os.path.isfile("tmp.mp3"):  # 不重要的聲音檔產生器
+    tts = gTTS(text="不重要的語音檔", lang="zh-tw")
+    tts.save("tmp.mp3")
+    print("已產生不重要的語音檔 tmp.mp3")
+
+
+# -----------------#
+def bot_speak(text, lang):  # 建立自訂函式
+    try:
+        mixer.music.load("tmp.mp3")  # 讀取不重要的聲音檔
+        tts = gTTS(text=text, lang=lang)
+        tts.save("speak.mp3")
+        mixer.music.load("speak.mp3")
+        mixer.music.play()  # 播放重要的聲音檔
+        while mixer.music.get_busy():
             continue
     except:
-        print('播放音效失敗')
-#-----------------#
-bot_speak('我是萱萱', 'zh-tw')  # 說出我是萱萱
+        print("播放音效失敗")
 
+
+# -----------------#
+bot_speak("我是萱萱", "zh-tw")  # 說出我是萱萱
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -82,6 +87,7 @@ tts2.write_to_fp(f)
 print("存檔完成, 檔名 :", filename)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 mp3_filename = "tmp_mp3_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mp3"
 
@@ -91,6 +97,7 @@ text = "Welcome to the United States and have a nice day."
 tts = gtts.gTTS(text=text, lang="en")
 tts.save(mp3_filename)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 mp3_filename = "tmp_mp3_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mp3"
@@ -106,26 +113,29 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # http://yhhuang1966.blogspot.com/2017/08/google-gtts-api.html
-# 利用 Google gTTS 文字轉語音 API 讓電腦說話 
+# 利用 Google gTTS 文字轉語音 API 讓電腦說話
 
 from gtts import gTTS
 from pygame import mixer
 
+
 def speak(sentence, lang, loops=1):
-        filename = "tmp_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mp3"
-        tts=gTTS(text=sentence, lang=lang)
-        print(filename)
-        tts.save(filename)
-        mixer.init()
-        mixer.music.load(filename)
-        mixer.music.play()
+    filename = "tmp_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mp3"
+    tts = gTTS(text=sentence, lang=lang)
+    print(filename)
+    tts.save(filename)
+    mixer.init()
+    mixer.music.load(filename)
+    mixer.music.play()
 
-speak('ありがとう', 'ja')
-time.sleep(5)
-speak('本软件验证和确认报告包括以下信息', 'zh-tw')
-time.sleep(5)
-speak('Picture Archiving & Communication System', 'en')
 
+speak("ありがとう", "ja")
+time.sleep(5)
+speak("本软件验证和确认报告包括以下信息", "zh-tw")
+time.sleep(5)
+speak("Picture Archiving & Communication System", "en")
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -148,6 +158,7 @@ try:
 except:
     print("語音辨識失敗！")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -235,6 +246,7 @@ except:
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """
 google_trans_new：文字翻譯
@@ -310,6 +322,7 @@ display.Audio("news.mp3", autoplay=True)
 
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 需安裝playsound
 # pip install playsound
@@ -352,6 +365,7 @@ for article in paper.articles:
         """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """
 import speech_recognition
@@ -371,6 +385,7 @@ while True:
         print("語音無法辨識\n")
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """ 播放OK
 from pydub import AudioSegment
@@ -381,6 +396,7 @@ record1 = AudioSegment.from_wav("record1.wav")
 play(record1)
 
 print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import moviepy.editor
 
@@ -459,6 +475,7 @@ record6.export("tmp_record6.wav", format="wav")
 
 display.Audio("tmp_record6.wav", autoplay=True)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # moviepy：影片處理
@@ -551,11 +568,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
