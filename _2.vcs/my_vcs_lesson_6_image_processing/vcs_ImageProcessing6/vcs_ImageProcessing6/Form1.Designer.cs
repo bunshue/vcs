@@ -39,6 +39,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.bt_reset1 = new System.Windows.Forms.Button();
+            this.bt_reset2 = new System.Windows.Forms.Button();
+            this.bt_parameter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
@@ -62,6 +64,10 @@
             this.pictureBox2.Size = new System.Drawing.Size(50, 50);
             this.pictureBox2.TabIndex = 8;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox2_Paint);
+            this.pictureBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseDown);
+            this.pictureBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseMove);
+            this.pictureBox2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseUp);
             // 
             // pictureBox0
             // 
@@ -154,11 +160,35 @@
             this.bt_reset1.UseVisualStyleBackColor = true;
             this.bt_reset1.Click += new System.EventHandler(this.bt_reset1_Click);
             // 
+            // bt_reset2
+            // 
+            this.bt_reset2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_reset2.Location = new System.Drawing.Point(427, 54);
+            this.bt_reset2.Name = "bt_reset2";
+            this.bt_reset2.Size = new System.Drawing.Size(60, 32);
+            this.bt_reset2.TabIndex = 44;
+            this.bt_reset2.Text = "Reset";
+            this.bt_reset2.UseVisualStyleBackColor = true;
+            this.bt_reset2.Click += new System.EventHandler(this.bt_reset2_Click);
+            // 
+            // bt_parameter
+            // 
+            this.bt_parameter.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_parameter.Location = new System.Drawing.Point(427, 92);
+            this.bt_parameter.Name = "bt_parameter";
+            this.bt_parameter.Size = new System.Drawing.Size(60, 32);
+            this.bt_parameter.TabIndex = 45;
+            this.bt_parameter.Text = "參數";
+            this.bt_parameter.UseVisualStyleBackColor = true;
+            this.bt_parameter.Click += new System.EventHandler(this.bt_parameter_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(752, 565);
+            this.Controls.Add(this.bt_parameter);
+            this.Controls.Add(this.bt_reset2);
             this.Controls.Add(this.bt_reset1);
             this.Controls.Add(this.label0);
             this.Controls.Add(this.label3);
@@ -195,6 +225,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button bt_reset1;
+        private System.Windows.Forms.Button bt_reset2;
+        private System.Windows.Forms.Button bt_parameter;
     }
 }
 

@@ -217,10 +217,13 @@ namespace vcs_ImageProcessing1
             {
                 for (int y = 0; y < H; y++)
                 {
+                    //取值
                     pixel = bmp.GetPixel(x, y);//提取像素值
                     r = pixel.R;
                     g = pixel.G;
                     b = pixel.B;
+
+                    //灰階
                     gray = (byte)(r * 0.299 + g * 0.587 + b * 0.114);
                     bmp.SetPixel(x, y, Color.FromArgb(gray, gray, gray));//設定像素值
                 }
@@ -281,10 +284,13 @@ namespace vcs_ImageProcessing1
             {
                 for (int x = 0; x < W * 3; x += 3)
                 {
+                    //取值
                     r = byte_data1[stride1 * y + x + 2];
                     g = byte_data1[stride1 * y + x + 1];
                     b = byte_data1[stride1 * y + x];
-                    gray = (byte)((double)r * 0.299000 + (double)g * 0.587000 + (double)b * 0.114000);
+
+                    //灰階
+                    gray = (byte)(r * 0.299 + g * 0.587 + b * 0.114);
                     byte_data2[stride1 * y + x + 2] = gray;
                     byte_data2[stride1 * y + x + 1] = gray;
                     byte_data2[stride1 * y + x] = gray;
@@ -337,15 +343,16 @@ namespace vcs_ImageProcessing1
                 {
                     for (int x = 0; x < W; x++)
                     {
-                        //三色平均 => 灰階
+                        //取值
                         r = *(ptr + 0);
                         g = *(ptr + 1);
                         b = *(ptr + 2);
-                        gray = (byte)((r + g + b) / 3);
+
+                        //灰階
+                        gray = (byte)(r * 0.299 + g * 0.587 + b * 0.114);
                         *(ptr + 0) = gray;         //每個點的B改成三色平均
                         *(ptr + 1) = gray;     //每個點的G改成三色平均
                         *(ptr + 2) = gray;     //每個點的R改成三色平均
-                        //*(ptr + 3) = 0;     //每個點的A改成三色平均
 
                         ptr += 3;//指針移到下一個像素, //jpg檔要加 3, bmp檔要加4
                     }
@@ -399,7 +406,7 @@ namespace vcs_ImageProcessing1
                         b = ptr[0];
 
                         //灰階
-                        gray = (byte)((r * 19595 + g * 38469 + b * 7472) >> 16);
+                        gray = (byte)(r * 0.299 + g * 0.587 + b * 0.114);
                         ptr[2] = gray;
                         ptr[1] = gray;
                         ptr[0] = gray;
@@ -454,7 +461,7 @@ namespace vcs_ImageProcessing1
                         b = ptr[0];
 
                         //灰階
-                        gray = (byte)((r * 19595 + g * 38469 + b * 7472) >> 16);
+                        gray = (byte)(r * 0.299 + g * 0.587 + b * 0.114);
                         ptr[2] = gray;
                         ptr[1] = gray;
                         ptr[0] = gray;
@@ -588,10 +595,13 @@ namespace vcs_ImageProcessing1
             {
                 for (int x = 0; x < bmp1.Width; x++)
                 {
+                    //取值
                     pixel = bmp1.GetPixel(x, y);//提取像素值
                     r = pixel.R;
                     g = pixel.G;
                     b = pixel.B;
+
+                    //灰階
                     gray = (byte)(r * 0.299 + g * 0.587 + b * 0.114);
                     bmp1.SetPixel(x, y, Color.FromArgb(255, gray, gray, gray));//設定像素值
                 }

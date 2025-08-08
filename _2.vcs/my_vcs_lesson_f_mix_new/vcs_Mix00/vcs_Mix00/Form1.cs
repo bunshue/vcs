@@ -888,7 +888,20 @@ namespace vcs_Mix00
 
         private void button18_Click(object sender, EventArgs e)
         {
+            //把控件做成串列
 
+            List<Button> Clients = new List<Button>();
+            Clients.Add(button1);
+            Clients.Add(button2);
+            Clients.Add(button3);
+            Clients.Add(button4);
+            Clients.Add(button5);
+
+            foreach (Button client in Clients)
+            {
+                client.Text = client.Name;
+                richTextBox1.Text += "控件 :" + client.Name + "長度 :" + client.Text.Length.ToString() + "\n";
+            }
         }
 
         private void button19_Click(object sender, EventArgs e)
