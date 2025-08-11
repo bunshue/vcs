@@ -21,7 +21,7 @@ sample_format = (
 channels = 2  # 聲道數量
 fs = 44100  # 取樣頻率，常見值為 44100 ( CD )、48000 ( DVD )、22050、24000、12000 和 11025。
 seconds = 5  # 錄音秒數
-filename = "oxxostudio.wav"  # 錄音檔名
+filename = "tmp_audio01.wav"  # 錄音檔名
 
 p = pyaudio.PyAudio()  # 建立 pyaudio 物件
 
@@ -68,7 +68,7 @@ sample_format = pyaudio.paInt16
 channels = 2
 fs = 44100
 seconds = 5
-filename = "oxxostudio.wav"
+filename = "tmp_audio02.wav"
 
 p = pyaudio.PyAudio()
 
@@ -102,10 +102,10 @@ wf.writeframes(b"".join(frames))
 wf.close()
 
 song = AudioSegment.from_mp3("song.mp3")  # 讀取背景音樂 mp3 檔案
-voice = AudioSegment.from_wav("oxxostudio.wav")  # 讀取錄音 wav 檔案
+voice = AudioSegment.from_wav("tmp_audio03.wav")  # 讀取錄音 wav 檔案
 output = voice.overlay(song, loop=True)  # 混合錄音和背景音樂
 play(output)  # 播放聲音
-output.export("output.mp3")  # 輸出為 mp3
+output.export("tmp_output.mp3")  # 輸出為 mp3
 print("ok")
 
 print("------------------------------------------------------------")  # 60個
@@ -155,7 +155,7 @@ write("twinkle-twinkle.wav", samplerate, data.astype(np.int16))  # 寫入檔案
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+"""
 {
     A0: {frequency: "27.50", wavelength: "1254.55"},
     A1: {frequency: "55.00", wavelength: "627.27"},
@@ -311,7 +311,7 @@ print("------------------------------------------------------------")  # 60個
     "G#8": {frequency: "6644.88", wavelength: "5.19"},
     "Ab8": {frequency: "6644.88", wavelength: "5.19"},
 }
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -408,7 +408,7 @@ sample_format = (
 )  # 樣本格式，可使用 paFloat32、paInt32、paInt24、paInt16、paInt8、paUInt8、paCustomFormat
 channels = 1  # 聲道數量
 fs = 44100  # 取樣頻率，常見值為 44100 ( CD )、48000 ( DVD )、22050、24000、12000 和 11025。
-filename = "oxxostudio.wav"  # 錄音檔名
+filename = "tmp_audio04.wav"  # 錄音檔名
 
 p = pyaudio.PyAudio()  # 建立 pyaudio 物件
 

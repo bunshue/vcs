@@ -11,10 +11,11 @@ OpenCV具有findContour()幫助從圖像中提取輪廓的功能。
 
 cv2.findContours        抓取顏色範圍的輪廓座標
 
-cv2.RETR_LIST # 所有輪廓
-cv2.RETR_TREE # 所有輪廓
-cv2.RETR_CCOMP # 所有輪廓
-cv2.RETR_EXTERNAL # 只取外輪廓
+輪廓檢索模式(Contour Retrieval Mode)
+cv2.RETR_LIST # 所有輪廓, 所有檢測到的輪廓均為同層輪廓。
+cv2.RETR_TREE # 所有輪廓，並將它們組織成一個層次樹狀結構。
+cv2.RETR_CCOMP # 所有輪廓，但將輪廓會被分為兩個層次，最外層的輪廓位於第一層，而內部的輪廓位於第二層。
+cv2.RETR_EXTERNAL # 只取外輪廓。
 
 1. cv2.RETR_LIST
 父子结构都不管了，他们只是单纯的边界结构，他们都属于同一层。
@@ -33,6 +34,10 @@ cv2.RETR_EXTERNAL # 只取外輪廓
 cv2.CHAIN_APPROX_SIMPLE
 cv2.CHAIN_APPROX_NONE
 cv2.CHAIN_APPROX_TC89_L1
+
+輪廓近似方法 的選項:
+CHAIN_APPROX_TC89_KCOS
+CHAIN_APPROX_SIMPLE
 
 """
 

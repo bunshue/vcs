@@ -130,6 +130,45 @@ namespace vcs_ColorMap
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+
+            //設定 comboBox1
+            comboBox1.DrawItem += new DrawItemEventHandler(comboBox1_DrawItem);
+
+            /*
+            列舉系統的所有Color並以ComboBox顯示
+            首先利用Reflection的方式取得系統中的所有Color，將利Color的名子加到cmbColor中。
+            接著在cmbColor中自行繪制顯示的內容，在這邊需要將cmbColor中的屬性'DrawMode'設為'OwnerDrawFixed'，並新的DrawItem事件
+            */
+
+            //用Reflection的方式取得系統中的所有Color，將利Color的名子加到comboBox中。
+            Type type = typeof(Color);
+            PropertyInfo[] propInfo = type.GetProperties(BindingFlags.Static | BindingFlags.Public);
+            var names = from color in propInfo
+                        where color.Name != "Transparent"
+                        select color.Name;
+            comboBox1.Items.Clear();
+            foreach (var item in names)
+            {
+                comboBox1.Items.Add(item);
+            }
+            comboBox1.SelectedIndex = 0;
+            richTextBox1.Text += "共有 " + comboBox1.Items.Count.ToString() + " 種顏色\n";
+        }
+
+        private void comboBox1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Rectangle rect = e.Bounds;
+            if (e.Index >= 0)
+            {
+                string colorName = ((ComboBox)sender).Items[e.Index].ToString();
+                Font font = new Font("Arial", 9, FontStyle.Regular);
+                Color color = Color.FromName(colorName);
+                Brush brush = new SolidBrush(color);
+                g.FillRectangle(brush, rect.X + 5, rect.Y, 50, rect.Height);
+                g.DrawString(colorName, font, Brushes.Black, rect.X + 15, rect.Top);
+            }
         }
 
         void show_item_location()
@@ -141,7 +180,7 @@ namespace vcs_ColorMap
 
             //button
             x_st = 10;
-            y_st = 10;
+            y_st = 80;
             dx = 140;
             dy = 70;
 
@@ -166,6 +205,9 @@ namespace vcs_ColorMap
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+
+            y_st = 10;
+            comboBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox1.Size = new Size(1400, 900);
@@ -363,6 +405,57 @@ namespace vcs_ColorMap
         private void button0_Click(object sender, EventArgs e)
         {
             //顏色名稱0
+            //生成Color類所有static預定義成員的顏色表
+            richTextBox1.Text += "生成Color類所有static預定義成員的顏色表\n";
+            //生成Color類所有static預定義成員的顏色表
+
+
+            //生成Color類所有static預定義成員的顏色表
+
+            const long CELLS_PER_LINE = 10;
+
+            const float MARGIN = 12;
+            const float CELL_WIDTH = 160;
+            const float CELL_HEIGHT = 64;
+            const float COLOR_LEFT_MARGIN = 8;
+            const float COLOR_TOP_MARGIN = 8;
+            const float COLOR_CELL_WIDTH = 48;
+            const float COLOR_CELL_HEIGHT = 32;
+            const float TEXT_TOP_MARGIN = COLOR_TOP_MARGIN + COLOR_CELL_HEIGHT + 2;
+
+            List<Color> vColors = new List<Color>();
+            Type t = typeof(Color);
+            PropertyInfo[] vProps = t.GetProperties();
+            foreach (PropertyInfo propInfo in vProps)
+            {
+                if (MemberTypes.Property == propInfo.MemberType && typeof(Color) == propInfo.PropertyType)
+                {
+                    Color tmpColor = (Color)propInfo.GetValue(null, null);
+                    vColors.Add(tmpColor);
+                }
+            }
+
+            Bitmap bitmap1 = new Bitmap((int)(CELLS_PER_LINE * CELL_WIDTH + MARGIN * 2), (int)((vColors.Count / CELLS_PER_LINE + 1) * CELL_HEIGHT + MARGIN * 2));
+            using (Graphics grp = Graphics.FromImage(bitmap1))
+            {
+                grp.Clear(Color.Black);
+
+                for (int i = 0; i < vColors.Count; i++)
+                {
+                    float nLeftBase = MARGIN + i % CELLS_PER_LINE * CELL_WIDTH;
+                    float nTopBase = MARGIN + i / CELLS_PER_LINE * CELL_HEIGHT;
+
+                    grp.DrawRectangle(new Pen(Color.White), nLeftBase, nTopBase, CELL_WIDTH, CELL_HEIGHT);
+
+                    grp.FillRectangle(new SolidBrush(vColors[i]), nLeftBase + COLOR_LEFT_MARGIN, nTopBase + COLOR_TOP_MARGIN, COLOR_CELL_WIDTH, COLOR_CELL_HEIGHT);
+
+                    grp.DrawString(vColors[i].Name, new Font("宋體", 9, FontStyle.Regular), new SolidBrush(Color.White), nLeftBase + COLOR_LEFT_MARGIN, nTopBase + TEXT_TOP_MARGIN);
+                }
+            }
+
+            pictureBox1.Image = bitmap1;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            //bitmap1.Save("AllColor.bmp");
         }
 
         void drawBox(int i, int j, int w, int h, Color c)
@@ -387,11 +480,9 @@ namespace vcs_ColorMap
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
             g.Clear(Color.Pink);
 
-            int i;
-            int j;
+            int i = 0;
             int w = 130;
             int h = 60;
-
             int len = AllColors1.Length;
             richTextBox1.Text += "共有 " + len.ToString() + " 種顏色\n";
 
@@ -406,17 +497,15 @@ namespace vcs_ColorMap
         private void button2_Click(object sender, EventArgs e)
         {
             //顏色名稱2
-            int i = 0;
-            //int j = 0;
-            int w = 100;
-            int h = 35;
-
-            int width = w * 7;
-            int height = h * 20;
+            int width = pictureBox1.Size.Width;
+            int height = pictureBox1.Size.Height;
             Bitmap bitmap1 = new Bitmap(width, height);
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
             g.Clear(Color.Pink);
 
+            int i = 0;
+            int w = 130;
+            int h = 60;
             int len = AllColors1.Length;
             richTextBox1.Text += "共有 " + len.ToString() + " 種顏色\n";
 
@@ -425,13 +514,12 @@ namespace vcs_ColorMap
             for (i = 0; i < len; i++)
             {
                 SolidBrush sb = new SolidBrush(AllColors1[i % len]);
-                g.FillRectangle(sb, x_st + w * (i / 20), y_st + h * (i % 20), w, h);
+                g.FillRectangle(sb, x_st + w * (i % 10), y_st + h * (i / 10), w, h);
                 richTextBox1.Text += AllColors1[i % len].Name + "\n";
 
                 Font f = new Font("標楷體", 12);
                 sb = new SolidBrush(Color.FromArgb(255 - AllColors1[i % len].R, 255 - AllColors1[i % len].G, 255 - AllColors1[i % len].B));
-                g.DrawString(AllColors1[i % len].Name.ToString(), f, sb, new PointF(x_st + w * (i / 20), y_st + h * (i % 20) + 12));
-
+                g.DrawString(AllColors1[i % len].Name.ToString(), f, sb, new PointF(x_st + w * (i % 10), y_st + h * (i / 10) + 12));
             }
             pictureBox1.Image = bitmap1;
         }
@@ -455,33 +543,26 @@ namespace vcs_ColorMap
             KnownColor[] AllColors4 = new KnownColor[colorsArray.Length];
             Array.Copy(colorsArray, AllColors4, colorsArray.Length);
 
+            int i = 0;
+            int w = 130;
+            int h = 50;
             int len = AllColors4.Length;
             richTextBox1.Text += "共有 " + len.ToString() + " 種顏色\n";
 
-            float y = -20;
-            float x = 0;
-
-            for (int i = 0; i < len; i++)
+            int x_st = 0;
+            int y_st = 0;
+            for (i = 0; i < len; i++)
             {
-                // 一排 25 個
-                if (i > 0 && i % 25 == 0)
-                {
-                    x += 120.0f;
-                    y = 0.0f;
-                }
-                else
-                {
-                    // 在該排中 往下列出
-                    y += 22.0F;
-                }
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + Color.FromName(AllColors4[i].ToString()) + "\n";
+                Color clr = Color.FromName(AllColors4[i].ToString());//取出顏色
+                SolidBrush sb = new SolidBrush(clr);
+                g.FillRectangle(sb, x_st + w * (i % 10), y_st + h * (i / 10), w, h);
 
-                // 產生該顏色的塗刷
-                SolidBrush sb = new SolidBrush(Color.FromName(AllColors4[i].ToString()));
-                Font f = new Font("Times New Roman", 12);
-                g.DrawString(AllColors4[i].ToString(), f, sb, x, y);
-
-                // 釋放該塗刷
-                sb.Dispose();
+                Font f = new Font("標楷體", 12);
+                Color clr2 = Color.FromArgb(255 - clr.R, 255 - clr.G, 255 - clr.B);
+                sb = new SolidBrush(clr2);
+                g.DrawString(clr.Name.ToString(), f, sb, new PointF(x_st + w * (i % 10), y_st + h * (i / 10) + 12));
+                sb.Dispose();// 釋放該塗刷
             }
             pictureBox1.Image = bitmap1;
         }
@@ -574,7 +655,6 @@ namespace vcs_ColorMap
             for (i = 0; i < len; i++)
             {
                 b = new SolidBrush(Color.FromArgb(255, AllColors5[i, 0], AllColors5[i, 1], AllColors5[i, 2]));
-                //AllColors5
                 //g.FillRectangle(b, w / 10, i * hh + h/10, w / 10 * 8, hh);
                 g.FillRectangle(b, border, i * hh + border, width - border * 2, hh);
             }
@@ -602,21 +682,20 @@ namespace vcs_ColorMap
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
             g.Clear(Color.Pink);
 
-            //Draw System Color
-            //// List the system colors.
             int y = 10;
 
             // Enumerate the SystemColors class's static Color properties.
             Type type = typeof(SystemColors);
+
+            int len = type.GetProperties().Length;
+            richTextBox1.Text += "共有 " + len.ToString() + " 種顏色\n";
+
             foreach (PropertyInfo field_info in type.GetProperties())
             {
                 DrawColorSample(g, ref y,
                     (Color)field_info.GetValue(null, null),
                     field_info.Name);
             }
-
-            int len = type.GetProperties().Length;
-            richTextBox1.Text += "共有 " + len.ToString() + " 種顏色\n";
 
             pictureBox1.Image = bitmap1;
         }
@@ -878,19 +957,17 @@ namespace vcs_ColorMap
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
             g.Clear(Color.Pink);
 
-            Brush b;
             int i;
-            int ww = 40;
-            int hh = 40;
-            int border = 20;
+            int ww = 130;
+            int hh = 35;
 
             int len = AllColors7.GetUpperBound(0) + 1;
             richTextBox1.Text += "共有 " + len.ToString() + " 種顏色\n";
 
             for (i = 0; i < len; i++)
             {
-                b = new SolidBrush(System.Drawing.ColorTranslator.FromHtml(AllColors7[i, 1]));
-                g.FillRectangle(b, border + (i / 16) * ww, (i % 16) * hh + border, ww, hh);
+                Brush b = new SolidBrush(System.Drawing.ColorTranslator.FromHtml(AllColors7[i, 1]));
+                g.FillRectangle(b, (i % 10) * ww, (i / 10) * hh, ww, hh);
             }
             pictureBox1.Image = bitmap1;
         }
@@ -969,6 +1046,13 @@ namespace vcs_ColorMap
         private void button9_Click(object sender, EventArgs e)
         {
             //顏色名稱9
+            //獲取系統預定義顏色
+            //獲取系統預定義顏色
+            Array colors = System.Enum.GetValues(typeof(KnownColor));
+            foreach (object colorName in colors)
+            {
+                richTextBox1.Text += "get color : " + colorName.ToString() + "\n";
+            }
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -993,17 +1077,120 @@ namespace vcs_ColorMap
 
         private void button14_Click(object sender, EventArgs e)
         {
-
+            //建立調色盤
+            MakeColorPalette(this, 10, 10);
         }
 
+        // Make a color palette on the given parent.
+        private void MakeColorPalette(Control parent, int x, int y)
+        {
+            Color[] colors = 
+            {
+                Color.White,
+                Color.FromArgb(255, 255, 192, 192),
+                Color.FromArgb(255, 255, 224, 192),
+                Color.FromArgb(255, 255, 255, 192),
+                Color.FromArgb(255, 192, 255, 192),
+                Color.FromArgb(255, 192, 255, 255),
+                Color.FromArgb(255, 192, 192, 255),
+                Color.FromArgb(255, 255, 192, 255),
+                Color.FromArgb(255, 224, 224, 224),
+                Color.FromArgb(255, 255, 128, 128),
+                Color.FromArgb(255, 255, 192, 128),
+                Color.FromArgb(255, 255, 255, 128),
+                Color.FromArgb(255, 128, 255, 128),
+                Color.FromArgb(255, 128, 255, 255),
+                Color.FromArgb(255, 128, 128, 255),
+                Color.FromArgb(255, 255, 128, 255),
+                Color.Silver,
+                Color.Red,
+                Color.FromArgb(255, 255, 128, 0),
+                Color.Yellow,
+                Color.Lime,
+                Color.Cyan,
+                Color.Blue,
+                Color.Fuchsia,
+                Color.Gray,
+                Color.FromArgb(255, 192, 0, 0),
+                Color.FromArgb(255, 192, 64, 0),
+                Color.FromArgb(255, 192, 192, 0),
+                Color.FromArgb(255, 0, 192, 0),
+                Color.FromArgb(255, 0, 192, 192),
+                Color.FromArgb(255, 0, 0, 192),
+                Color.FromArgb(255, 192, 0, 192),
+                Color.FromArgb(255, 64, 64, 64),
+                Color.Maroon,
+                Color.FromArgb(255, 128, 64, 0),
+                Color.Olive,
+                Color.Green,
+                Color.Teal,
+                Color.Navy,
+                Color.Purple,
+                Color.Black,
+                Color.FromArgb(255, 64, 0, 0),
+                Color.FromArgb(255, 128, 64, 64),
+                Color.FromArgb(255, 64, 64, 0),
+                Color.FromArgb(255, 0, 64, 0),
+                Color.FromArgb(255, 0, 64, 64),
+                Color.FromArgb(255, 0, 0, 64),
+                Color.FromArgb(255, 64, 0, 64),
+            };
+            const int num_rows = 6;
+            const int num_columns = 8;
+            const int pbx_width = 60;
+            const int pbx_height = 60;
+            const int spacing = 4;
+
+            int row_y = y;
+            for (int row = 0; row < num_rows; row++)
+            {
+                int column_x = x;
+                for (int column = 0; column < num_columns; column++)
+                {
+                    PictureBox pbx = new PictureBox();
+                    pbx.Click += Color_Click;
+                    pbx.BackColor = colors[row * num_columns + column];
+                    pbx.Size = new Size(pbx_width, pbx_height);
+                    pbx.Location = new Point(column_x, row_y);
+                    pbx.BorderStyle = BorderStyle.Fixed3D;
+                    this.pictureBox1.Controls.Add(pbx);
+                    column_x += pbx_width + spacing;
+                }
+                row_y += pbx_height + spacing;
+            }
+        }
+
+        private void Color_Click(object sender, EventArgs e)
+        {
+            PictureBox pic = sender as PictureBox;
+            this.pictureBox1.BackColor = pic.BackColor;
+        }
         private void button15_Click(object sender, EventArgs e)
         {
+            //小小兵的顏色
+            //Minion Yellow Color
+            //HEX #FFD55E / RGB (255, 213, 94)
+            //顏色的名稱
+            //https://www.color-name.com/
 
+            this.pictureBox1.BackColor = Color.FromArgb(255, 213, 94);
+
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\minion-yellow.png";
+            pictureBox1.Image = Image.FromFile(filename);
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
+            //從顏色的名稱 取得顏色的分量
+            Color slateBlue = Color.FromName("SlateBlue");
+            byte g = slateBlue.G;
+            byte b = slateBlue.B;
+            byte r = slateBlue.R;
+            byte a = slateBlue.A;
+            string text = String.Format("Slate Blue has these ARGB values: Alpha:{0}, " +
+                "red:{1}, green: {2}, blue {3}", new object[] { a, r, g, b });
 
+            richTextBox1.Text += text + "\n";
         }
 
         private void button17_Click(object sender, EventArgs e)

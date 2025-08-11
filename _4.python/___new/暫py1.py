@@ -36,15 +36,12 @@ HSV簡單介紹分別為：
 pickle --- Python 物件序列化
 
 Selenium	瀏覽器自動化操操作
+selenium	瀏覽器自動化操作
 PyAutoGUI	鍵盤滑鼠自動化
 gradio		神奇網頁互動介面
 schedule	定時執行任務
 tqdm		進度條
 cnlunardate	農曆日期
-
-
-selenium模組 : 瀏覽器自動化操作
-PyAutoGUI模組 : 鍵盤滑鼠自動化
 
 
 開放原碼專案名稱	簡述

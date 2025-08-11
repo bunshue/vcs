@@ -409,8 +409,9 @@ namespace vcs_Draw5_Image
         {
             //DrawImage
             //在指定位置畫上一圖
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\_貓咪\cat2.png";
 
-            Image image = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_cat\cat2.png");
+            Image image = Image.FromFile(@filename);
 
             int x = 100;
             int y = 100;

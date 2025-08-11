@@ -121,21 +121,21 @@ from tempfile import TemporaryDirectory
 from tempfile import NamedTemporaryFile
 
 
-with TemporaryFile('w+t') as f:
+with TemporaryFile("w+t") as f:
     # Read/write to the file
-    f.write('Hello World\n')
-    f.write('Testing\n')
+    f.write("Hello World\n")
+    f.write("Testing\n")
 
     # Seek back to beginning and read the data
     f.seek(0)
     data = f.read()
     print(data)
 
-with NamedTemporaryFile('w+t') as f:
-    print('filename is:', f.name)
+with NamedTemporaryFile("w+t") as f:
+    print("filename is:", f.name)
 
 with TemporaryDirectory() as dirname:
-    print('dirname is:', dirname)
+    print("dirname is:", dirname)
 
 print(tempfile.mkstemp())
 print(tempfile.mkdtemp())
@@ -150,7 +150,7 @@ with tempfile.NamedTemporaryFile(delete=True) as fp:
     print("暫時檔案 :", fp.name)
 
 temp_dir = tempfile.TemporaryDirectory()
-psg_dir = os.path.join(temp_dir.name, 'PySimpleGUI')
+psg_dir = os.path.join(temp_dir.name, "PySimpleGUI")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -171,5 +171,3 @@ print(csv_filename)
 
 db_filename = os.path.join(tmpdir, "users.db")
 print(db_filename)
-
-

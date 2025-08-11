@@ -96,7 +96,6 @@ import playsound
 playsound.playsound(filename, block=True)
 
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -205,9 +204,9 @@ import wave
 
 CHUNK = 1024
 
-wav_filename = 'test_wave.wav'
+wav_filename = "tmp_test_wave.wav"
 
-wf = wave.open(wav_filename, 'rb')
+wf = wave.open(wav_filename, "rb")
 p = pyaudio.PyAudio()
 stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                 channels=wf.getnchannels(),
@@ -216,8 +215,8 @@ stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
 
 data = wf.readframes(CHUNK)
 
-while data != '':
-    print('c')
+while data != "":
+    print("c")
     stream.write(data)
     data = wf.readframes(CHUNK)
 
@@ -245,7 +244,7 @@ RECORD_SECONDS = 10
 WAVE_OUTPUT_FILENAME = "output.wav"
 
 p = pyaudio.PyAudio()
-wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+wf = wave.open(WAVE_OUTPUT_FILENAME, "wb")
 wf.setnchannels(CHANNELS)
 wf.setsampwidth(p.get_sample_size(FORMAT))
 wf.setframerate(RATE)
@@ -300,7 +299,7 @@ RATE = 44100
 WAVE_OUTPUT_FILENAME = "output.wav"
 
 p = pyaudio.PyAudio()
-wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+wf = wave.open(WAVE_OUTPUT_FILENAME, "wb")
 wf.setnchannels(CHANNELS)
 wf.setsampwidth(p.get_sample_size(FORMAT))
 wf.setframerate(RATE)
@@ -323,8 +322,8 @@ print("width:", width, "height:", height)
 print("image mode:",image.mode)
 k=np.zeros((width,height),np.uint8)
 
-fourcc = cv2.VideoWriter_fourcc(*'XVID')#编码格式
-video = cv2.VideoWriter('test.mp4', fourcc, 9.5, (width, height))
+fourcc = cv2.VideoWriter_fourcc(*"XVID")#编码格式
+video = cv2.VideoWriter("tmp_test.mp4", fourcc, 9.5, (width, height))
 #经实际测试，单线程下最高帧率为10帧/秒，且会变动，因此选择9.5帧/秒
 #若设置帧率与实际帧率不一致，会导致视频时间与音频时间不一致
 
@@ -362,7 +361,7 @@ audioclip = AudioFileClip("output.wav")
 videoclip = VideoFileClip("test.mp4")
 videoclip2 = videoclip.set_audio(audioclip)
 video = CompositeVideoClip([videoclip2])
-video.write_videofile("test2.mp4",codec='mpeg4')
+video.write_videofile("test2.mp4",codec="mpeg4")
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -370,9 +369,7 @@ print("------------------------------------------------------------")  # 60個
 
 """
 製作影片字幕
-
 聲音轉字幕
-
 """
 
 # 影片轉wav, 但是要跑很久

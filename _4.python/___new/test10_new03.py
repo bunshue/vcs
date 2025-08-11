@@ -30,20 +30,46 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print('螢幕錄製')
+
+RECORD_SECONDS = 30  # 录制时间
+
+import cv2
+import pyautogui
+
+# 获取屏幕分辨率
+screen_size = (1920, 1080)
+
+# 创建视频编码器
+fourcc = cv2.VideoWriter_fourcc(*"XVID")
+out = cv2.VideoWriter("screen_record.avi", fourcc, 20.0, screen_size)
+
+# 开始录制
+start_time = time.time()  # 记录开始时间
+while (time.time() - start_time) < RECORD_SECONDS:
+# while True:
+    # 获取屏幕截图
+    img = pyautogui.screenshot()
+    frame = np.array(img)
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    
+    # 写入视频
+    out.write(frame)
+    
+# 释放资源
+out.release()
+cv2.destroyAllWindows()
+
+print('done')
 
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 

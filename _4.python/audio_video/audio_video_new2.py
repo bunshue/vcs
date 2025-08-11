@@ -177,10 +177,10 @@ from base64 import b64decode
 
 def record_audio(filename):
     js = Javascript(
-        """
+"""
     async function recordAudio() {
-      const div = document.createElement('div');
-      const capture = document.createElement('button');
+      const div = document.createElement("div");
+      const capture = document.createElement("button");
       capture.textContent = "開始錄音";
       capture.style.background = "orange";
       capture.style.color = "white";
@@ -189,9 +189,9 @@ def record_audio(filename):
       stopCapture.textContent = "停止錄音";
       stopCapture.style.background = "red";
       stopCapture.style.color = "white";
-      const audio = document.createElement('audio');
+      const audio = document.createElement("audio");
       const recordingVid = document.createElement("audio");
-      audio.style.display = 'block';
+      audio.style.display = "block";
       const stream = await navigator.mediaDevices.getUserMedia({audio:true});
      
       let recorder = new MediaRecorder(stream);
@@ -218,7 +218,7 @@ def record_audio(filename):
       })
     return btoa(binaryString);
     }
-  """
+"""
     )
     try:
         display(js)
@@ -233,8 +233,8 @@ def record_audio(filename):
 """
 #record.webm 無此檔
 record_audio("record.webm")
-sound = AudioSegment.from_file("record.webm")
-sound.export("record.wav", format ='wav')
+sound = AudioSegment.from_file("tmp_record.webm")
+sound.export("record.wav", format ="wav")
 r = speech_recognition.Recognizer()
 with speech_recognition.WavFile("record.wav") as source:
     audio = r.record(source)
@@ -258,7 +258,7 @@ pip install google_trans_new
 from google_trans_new import google_translator
 translator = google_translator()
 text="今天天氣很好"
-word = translator.translate(text, lang_src='zh-TW', lang_tgt='ja', pronounce=True)
+word = translator.translate(text, lang_src="zh-TW", lang_tgt="ja", pronounce=True)
 print(word)
 
 from google_trans_new import google_translator
@@ -285,14 +285,14 @@ from google_trans_new import google_translator
 import gtts
 import IPython.display as display
 
-paper = newspaper.build('http://cnn.com', language='en')
-# paper = newspaper.build('http://www.cnbc.com', language='en')
-# paper = newspaper.build('http://www.bbc.co.uk', language='en')
-# paper = newspaper.build('http://www.foxnews.com', language='en')
+paper = newspaper.build("http://cnn.com", language="en")
+# paper = newspaper.build("http://www.cnbc.com", language="en")
+# paper = newspaper.build("http://www.bbc.co.uk", language="en")
+# paper = newspaper.build("http://www.foxnews.com", language="en")
 urls = []
 for article in paper.articles:
     url = article.url
-    if '.html' in url:
+    if ".html" in url:
         try:  #有時會產生無法擷取的錯誤,故使用try
           article = Article(url)
           article.download()
@@ -312,13 +312,13 @@ if len(urls)>0:
     content = article.text
     if len(content)>5000: content = content[:4999]
     translator = google_translator()
-    ret = translator.translate(content, lang_tgt='zh-TW')
+    ret = translator.translate(content, lang_tgt="zh-TW")
     print(ret)
 else: 
-  ret = '無可用新聞！'
-tts = gtts.gTTS(text=ret, lang='zh-tw')
-tts.save('news.mp3')
-display.Audio("news.mp3", autoplay=True)
+  ret = "無可用新聞！"
+tts = gtts.gTTS(text=ret, lang="zh-tw")
+tts.save("tmp_news.mp3")
+display.Audio("tmp_news.mp3", autoplay=True)
 
 """
 print("------------------------------------------------------------")  # 60個
@@ -333,10 +333,10 @@ from google_trans_new import google_translator
 import gtts
 from playsound import playsound
 
-# paper = newspaper.build('http://cnn.com', language='en')
+# paper = newspaper.build("http://cnn.com", language="en")
 paper = newspaper.build("http://www.cnbc.com", language="en")
-# paper = newspaper.build('http://www.bbc.co.uk', language='en')
-# paper = newspaper.build('http://www.foxnews.com', language='en')
+# paper = newspaper.build("http://www.bbc.co.uk", language="en")
+# paper = newspaper.build("http://www.foxnews.com", language="en")
 
 print(type(paper.articles))
 print(len(paper.articles))
@@ -355,11 +355,11 @@ for article in paper.articles:
             if len(content)>0:
                 if len(content)>5000: content = content[:4999]
                 translator = google_translator()
-                ret = translator.translate(content, lang_tgt='zh-TW')
+                ret = translator.translate(content, lang_tgt="zh-TW")
                 print(ret)
-                tts = gtts.gTTS(text=ret, lang='zh-tw')
-                tts.save('news.mp3')
-                playsound('news.mp3')
+                tts = gtts.gTTS(text=ret, lang="zh-tw")
+                tts.save("tmp_news.mp3")
+                playsound("tmp_news.mp3")
         except:
             pass
         """
@@ -391,18 +391,18 @@ print("------------------------------------------------------------")  # 60個
 from pydub import AudioSegment
 from pydub.playback import play
 
-print('播放wav檔')
+print("播放wav檔")
 record1 = AudioSegment.from_wav("record1.wav")
 play(record1)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")	#60個
 print("------------------------------------------------------------")  # 60個
 
 import moviepy.editor
 
 video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
-print('播放影片檔')
+print("播放影片檔")
 
 vsr = moviepy.editor.VideoFileClip(video_filename)
 vsr.preview()
@@ -524,41 +524,41 @@ clip2 = vsr.subclip(30, 50)
 print("clip2 長度：" + str(clip2.duration))
 
 """
-#clip2.write_videofile('tmp_clip2.mp4')  #做很久
+#clip2.write_videofile("tmp_clip2.mp4")  #做很久
 
-clip1 = VideoFileClip('tmp_clip1.mp4')
+clip1 = VideoFileClip("tmp_clip1.mp4")
 
-clip2 = VideoFileClip('tmp_clip2.mp4')
+clip2 = VideoFileClip("tmp_clip2.mp4")
 
 clip3 = concatenate_videoclips([clip1, clip2])
 
-print('clip3 長度：' + str(clip3.duration))
+print("clip3 長度：" + str(clip3.duration))
 
-clip3.write_videofile('tmp_clip3.mp4')
+clip3.write_videofile("tmp_clip3.mp4")
 
-audio1 = AudioFileClip('tmp_holo1.mp4')
+audio1 = AudioFileClip("tmp_holo1.mp4")
 
-audio1.write_audiofile('tmp_holo1.mp3')
+audio1.write_audiofile("tmp_holo1.mp3")
 
 clip1_margin = clip1.margin(20)  #加黑邊
 
-clip1_margin.write_videofile('tmp_clip1_margin.mp4')
+clip1_margin.write_videofile("tmp_clip1_margin.mp4")
 
 clip1_mirrorx = clip1.fx(vfx.mirror_x)  #水平翻轉
 
-clip1_mirrorx.write_videofile('tmp_clip1_mirrorx.mp4')
+clip1_mirrorx.write_videofile("tmp_clip1_mirrorx.mp4")
 
 clip1_mirrory = clip1.fx(vfx.mirror_y)  #垂直翻轉
 
-clip1_mirrory.write_videofile('tmp_clip1_mirrory.mp4')
+clip1_mirrory.write_videofile("tmp_clip1_mirrory.mp4")
 
 clip1_resize = clip1.resize(0.50)  #改變尺寸
 
-clip1_resize.write_videofile('tmp_clip1_resize.mp4')
+clip1_resize.write_videofile("tmp_clip1_resize.mp4")
 
 clip1_mir_size = clip1.fx(vfx.mirror_x).resize(0.50)  #水平翻轉並改變尺寸
 
-clip1_resize.write_videofile('tmp_clip1_resize.mp4')
+clip1_resize.write_videofile("tmp_clip1_resize.mp4")
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

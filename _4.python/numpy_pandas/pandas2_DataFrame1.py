@@ -184,46 +184,46 @@ print(df)
 
 """df資訊
 
-print('檢視前幾行')
+print("檢視前幾行")
 cc = df.head()
 print(cc)
 
-print('檢視前2行')
+print("檢視前2行")
 cc = df.head(2)
 print(cc)
 
-print('檢視後2行')
+print("檢視後2行")
 cc = df.tail(2)
 print(cc)
 
-print('索引index')
+print("索引index")
 cc = df.index
 print(cc)
 
-print('欄名columns')
+print("欄名columns")
 cc = df.columns
 print(cc)
 
-print('顯示資料的狀態與資訊')
+print("顯示資料的狀態與資訊")
 print(df.info())
 
 # 檢查屬性
 print(df.dtypes)
 
-print('顯示values')
+print("顯示values")
 print(df.values)
 print(df.values[2])
 print(df.values[1][2])
 print(len(df))
 
-print('df使用記憶體大小')
-cc = df.info(memory_usage='deep')
+print("df使用記憶體大小")
+cc = df.info(memory_usage="deep")
 print(cc)
 
 print("df之大小")
 M, N = df.shape
 print(df.shape)
-print('df之大小', M, 'X',N)
+print("df之大小", M, "X",N)
 
 print(df.shape)
 
@@ -354,7 +354,7 @@ df3 = df.drop(df.index[[0, 2]])
 print(df3)
 
 # 不可重建
-# print('重建df')
+# print("重建df")
 # df = make_data_frame_from_dict()  # 字典 轉 df
 
 print("刪除孫悟空成績 ->")
@@ -383,14 +383,14 @@ data["新增欄位名"] = data["col1"] * 2
 data["投資報酬率"] =  (data["投資淨損益"] /  data["投入資金"])
 
 # 使用 loc 新增一行 
-dfta.loc[2] = ['第一欄位內容', '第二欄位內容']
+dfta.loc[2] = ["第一欄位內容", "第二欄位內容"]
 
 # 新增一列並且想保持原有 DataFrame 不變，使用 assign 新增一列 
-data = pd.DataFrame({ 'Name': ['Alice', 'Bob'], 'Age': [25, 30] })
-data_new = data.assign(City=['New York', 'Los Angeles'])
+data = pd.DataFrame({ "Name": ["Alice", "Bob"], "Age": [25, 30] })
+data_new = data.assign(City=["New York", "Los Angeles"])
 
-# 刪除特定欄位 'Column_Name' 
-data = data.drop(columns=['Column_Name'])
+# 刪除特定欄位 "Column_Name" 
+data = data.drop(columns=["Column_Name"])
 
 # 刪除特定行（根據索引） 
 data = data.drop(index=[0]) # 刪除第0行
@@ -398,8 +398,8 @@ data = data.drop(index=[0]) # 刪除第0行
 # 如果要一次刪除多行 
 data = data.drop(index=[0, 1]) # 刪除第0和第1行
 
-# 刪除特定欄位 'Column_Name'，直接在原 DataFrame 上修改
-data.drop(columns=['Column_Name'], inplace=True)
+# 刪除特定欄位 "Column_Name"，直接在原 DataFrame 上修改
+data.drop(columns=["Column_Name"], inplace=True)
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -410,7 +410,7 @@ print("------------------------------------------------------------")  # 60個
 # 刪除 df 欄位
 
 # 讀取[UFO報告]資料集至df
-# ufo = pd.read_csv('http://bit.ly/uforeports')
+# ufo = pd.read_csv("http://bit.ly/uforeports")
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename)
 
@@ -1050,7 +1050,7 @@ res = pd.concat(
     [df1, df2, df3], axis=0, ignore_index=True
 )  # axis=0 : 垂直連接, axis=1 : 水平連接
 
-# join, ('inner', 'outer')
+# join, ("inner", "outer")
 df1 = pd.DataFrame(np.ones((3, 4)) * 0, columns=["a", "b", "c", "d"], index=[1, 2, 3])
 df2 = pd.DataFrame(np.ones((3, 4)) * 1, columns=["b", "c", "d", "e"], index=[2, 3, 4])
 res = pd.concat([df1, df2], axis=1, join="outer")  # axis=0 : 垂直連接, axis=1 : 水平連接
@@ -1107,8 +1107,8 @@ df1 = pd.DataFrame(datas1)
 df2 = pd.DataFrame(datas2)
 print(df1)
 print(df2)
-res = pd.merge(df1, df2, on=["key1", "key2"], how="inner")  # default for how='inner'
-# how = ['left', 'right', 'outer', 'inner']
+res = pd.merge(df1, df2, on=["key1", "key2"], how="inner")  # default for how="inner"
+# how = ["left", "right", "outer", "inner"]
 res = pd.merge(df1, df2, on=["key1", "key2"], how="left")
 print(res)
 
@@ -1645,7 +1645,7 @@ print("檢視前幾行\n", users.head())
 print("------------------------------------------------------------")  # 60個
 
 # 讀取[UFO報告]資料集至df
-# ufo = pd.read_table('http://bit.ly/uforeports', sep=',')
+# ufo = pd.read_table("http://bit.ly/uforeports", sep=",")
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename, sep=",")
 
@@ -1657,14 +1657,14 @@ ufo = pd.read_csv(filename)
 
 # print("檢視前幾行\n", ufo.head())
 
-# select the 'City' Series using bracket notation
+# select the "City" Series using bracket notation
 ufo["City"]
 
 # or equivalently, use dot notation
 cc = ufo.City
 print(cc)
 
-# create a new 'Location' Series (must use bracket notation to define the Series name)
+# create a new "Location" Series (must use bracket notation to define the Series name)
 ufo["Location"] = ufo.City + ", " + ufo.State
 cc = ufo.head()
 print(cc)
@@ -1672,7 +1672,7 @@ print(cc)
 print("------------------------------------------------------------")  # 60個
 
 # 讀取[電影IMDb]資料集至df
-# movies = pd.read_csv('http://bit.ly/imdbratings')
+# movies = pd.read_csv("http://bit.ly/imdbratings")
 filename = "data/imdb_1000.csv"
 movies = pd.read_csv(filename)
 
@@ -1682,7 +1682,7 @@ movies = pd.read_csv(filename)
 cc = movies.dtypes
 print(cc)
 
-# use an optional parameter to the describe method to summarize only 'object' columns
+# use an optional parameter to the describe method to summarize only "object" columns
 cc = movies.describe(include=["object"])
 print(cc)
 
@@ -1691,7 +1691,7 @@ print("------------------------------------------------------------")  # 60個
 print("rename pd 之 df")
 
 # 讀取[UFO報告]資料集至df
-# ufo = pd.read_csv('http://bit.ly/uforeports')
+# ufo = pd.read_csv("http://bit.ly/uforeports")
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename)
 
@@ -1699,9 +1699,9 @@ print("檢查欄名")
 cc = ufo.columns
 print(cc)
 
-# Index([u'City', u'Colors Reported', u'Shape Reported', u'State', u'Time'], dtype='object')
+# Index([u"City", u"Colors Reported", u"Shape Reported", u"State", u"Time"], dtype="object")
 
-# rename two of the columns by using the 'rename' method
+# rename two of the columns by using the "rename" method
 ufo.rename(
     columns={"Colors Reported": "Colors_Reported", "Shape Reported": "Shape_Reported"},
     inplace=True,
@@ -1709,30 +1709,30 @@ ufo.rename(
 cc = ufo.columns
 print(cc)
 
-# Index([u'City', u'Colors_Reported', u'Shape_Reported', u'State', u'Time'], dtype='object')
+# Index([u"City", u"Colors_Reported", u"Shape_Reported", u"State", u"Time"], dtype="object")
 
 # Documentation for rename
 
-# replace all of the column names by overwriting the 'columns' attribute
+# replace all of the column names by overwriting the "columns" attribute
 ufo_cols = ["city", "colors reported", "shape reported", "state", "time"]
 ufo.columns = ufo_cols
 
 print(ufo.columns)
 
-# replace the column names during the file reading process by using the 'names' parameter
+# replace the column names during the file reading process by using the "names" parameter
 # 讀取[UFO報告]資料集至df
-# ufo = pd.read_csv('http://bit.ly/uforeports', header=0, names=ufo_cols)
+# ufo = pd.read_csv("http://bit.ly/uforeports", header=0, names=ufo_cols)
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename, header=0, names=ufo_cols)
 
 cc = ufo.columns
 print(cc)
 
-# Index([u'city', u'colors reported', u'shape reported', u'state', u'time'], dtype='object')
+# Index([u"city", u"colors reported", u"shape reported", u"state", u"time"], dtype="object")
 
 # Documentation for read_csv
 
-# replace all spaces with underscores in the column names by using the 'str.replace' method
+# replace all spaces with underscores in the column names by using the "str.replace" method
 ufo.columns = ufo.columns.str.replace(" ", "_")
 cc = ufo.columns
 print(cc)
@@ -1742,13 +1742,13 @@ print("------------------------------------------------------------")  # 60個
 # 排序 df
 
 # 讀取[電影IMDb]資料集至df
-# movies = pd.read_csv('http://bit.ly/imdbratings')
+# movies = pd.read_csv("http://bit.ly/imdbratings")
 filename = "data/imdb_1000.csv"
 movies = pd.read_csv(filename)
 
 # print("檢視前幾行\n", movies.head())
 
-# sort the 'title' Series in ascending order (returns a Series)
+# sort the "title" Series in ascending order (returns a Series)
 print("將 欄位 title 讀出並排序 升冪")
 print("檢視前幾行")
 cc = movies.title.sort_values().head()
@@ -1760,7 +1760,7 @@ print("檢視前幾行")
 cc = movies.title.sort_values(ascending=False).head()
 print(cc)
 
-# sort the entire DataFrame by the 'title' Series (returns a DataFrame)
+# sort the entire DataFrame by the "title" Series (returns a DataFrame)
 print("檢視前幾行")
 cc = movies.sort_values("title").head()
 print(cc)
@@ -1770,7 +1770,7 @@ print("檢視前幾行")
 cc = movies.sort_values("title", ascending=False).head()
 print(cc)
 
-# sort the DataFrame first by 'content_rating', then by 'duration'
+# sort the DataFrame first by "content_rating", then by "duration"
 print("檢視前幾行")
 cc = movies.sort_values(["content_rating", "duration"]).head()
 print(cc)
@@ -1780,7 +1780,7 @@ print("------------------------------------------------------------")  # 60個
 # 過濾資料
 
 # 讀取[電影IMDb]資料集至df
-# movies = pd.read_csv('http://bit.ly/imdbratings')
+# movies = pd.read_csv("http://bit.ly/imdbratings")
 filename = "data/imdb_1000.csv"
 movies = pd.read_csv(filename)
 
@@ -1814,20 +1814,20 @@ print(cc)
 cc = movies[is_long]
 print(cc)
 
-# simplify the steps above: no need to write a for loop to create 'is_long' since pandas will broadcast the comparison
+# simplify the steps above: no need to write a for loop to create "is_long" since pandas will broadcast the comparison
 is_long = movies.duration >= 200
 cc = movies[is_long]
 print(cc)
 
-# or equivalently, write it in one line (no need to create the 'is_long' object)
+# or equivalently, write it in one line (no need to create the "is_long" object)
 cc = movies[movies.duration >= 200]
 print(cc)
 
-# select the 'genre' Series from the filtered DataFrame
+# select the "genre" Series from the filtered DataFrame
 cc = movies[movies.duration >= 200].genre
 print(cc)
 
-# or equivalently, use the 'loc' method
+# or equivalently, use the "loc" method
 cc = movies.loc[movies.duration >= 200, "genre"]
 print(cc)
 
@@ -1836,40 +1836,40 @@ print("------------------------------------------------------------")  # 60個
 # 9. How do I apply multiple filter criteria to a pandas DataFrame? (video)
 
 # 讀取[電影IMDb]資料集至df
-# movies = pd.read_csv('http://bit.ly/imdbratings')
+# movies = pd.read_csv("http://bit.ly/imdbratings")
 filename = "data/imdb_1000.csv"
 movies = pd.read_csv(filename)
 
 # print("檢視前幾行\n", movies.head())
 
-# filter the DataFrame to only show movies with a 'duration' of at least 200 minutes
+# filter the DataFrame to only show movies with a "duration" of at least 200 minutes
 cc = movies[movies.duration >= 200]
 print(cc)
 
-# CORRECT: use the '&' operator to specify that both conditions are required
+# CORRECT: use the "&" operator to specify that both conditions are required
 cc = movies[(movies.duration >= 200) & (movies.genre == "Drama")]
 print(cc)
 
 # 錯誤
-# INCORRECT: using the '|' operator would have shown movies that are either long or dramas (or both)
+# INCORRECT: using the "|" operator would have shown movies that are either long or dramas (or both)
 print("檢視前幾行")
 cc = movies[(movies.duration >= 200) | (movies.genre == "Drama")].head()
 print(cc)
 
-# use the '|' operator to specify that a row can match any of the three criteria
+# use the "|" operator to specify that a row can match any of the three criteria
 cc = movies[
     (movies.genre == "Crime") | (movies.genre == "Drama") | (movies.genre == "Action")
 ].head(10)
 print(cc)
 
-# or equivalently, use the 'isin' method
+# or equivalently, use the "isin" method
 cc = movies[movies.genre.isin(["Crime", "Drama", "Action"])].head(10)
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
 # 讀取[UFO報告]資料集至df
-# ufo = pd.read_csv('http://bit.ly/uforeports')
+# ufo = pd.read_csv("http://bit.ly/uforeports")
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename)
 
@@ -1878,7 +1878,7 @@ print(cc)
 
 # specify which columns to include by name
 # 讀取[UFO報告]資料集至df
-# ufo = pd.read_csv('http://bit.ly/uforeports', usecols=['City', 'State'])
+# ufo = pd.read_csv("http://bit.ly/uforeports", usecols=["City", "State"])
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename, usecols=["City", "State"])
 
@@ -1886,7 +1886,7 @@ print(ufo)
 
 # or equivalently, specify columns by position
 # 讀取[UFO報告]資料集至df
-# ufo = pd.read_csv('http://bit.ly/uforeports', usecols=[0, 4])
+# ufo = pd.read_csv("http://bit.ly/uforeports", usecols=[0, 4])
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename, usecols=[0, 4])
 
@@ -1896,7 +1896,7 @@ print(cc)
 # 只讀一部份
 # specify how many rows to read
 # 讀取[UFO報告]資料集至df
-# ufo = pd.read_csv('http://bit.ly/uforeports', nrows=3)
+# ufo = pd.read_csv("http://bit.ly/uforeports", nrows=3)
 filename = "data/ufo.csv"
 ufo = pd.read_csv(filename, nrows=3)
 
@@ -1913,7 +1913,7 @@ for index, row in ufo.iterrows():
 # Question: How do I drop all non-numeric columns from a DataFrame?
 
 # 讀取[各國酒類消費量]資料集至df
-# drinks = pd.read_csv('http://bit.ly/drinksbycountry')
+# drinks = pd.read_csv("http://bit.ly/drinksbycountry")
 filename = "data/drinks.csv"
 drinks = pd.read_csv(filename)
 
@@ -1928,7 +1928,7 @@ print(cc)
 cc = drinks.describe()
 print(cc)
 
-# pass the string 'all' to describe all columns
+# pass the string "all" to describe all columns
 cc = drinks.describe(include="all")
 print(cc)
 
@@ -1945,7 +1945,7 @@ print("------------------------------------------------------------")  # 60個
 print("使用 axis")
 
 # 讀取[各國酒類消費量]資料集至df
-# drinks = pd.read_csv('http://bit.ly/drinksbycountry')
+# drinks = pd.read_csv("http://bit.ly/drinksbycountry")
 filename = "data/drinks.csv"
 drinks = pd.read_csv(filename)
 
@@ -1958,16 +1958,16 @@ drinks = pd.read_csv(filename)
 drinks.mean(axis=0)
 
 # calculate the mean of each row
-print('檢視前幾行')
+print("檢視前幾行")
 cc = drinks.mean(axis=1).head()
 print(cc)
 
-# 'index' is an alias for axis 0
-drinks.mean(axis='index')
+# "index" is an alias for axis 0
+drinks.mean(axis="index")
 
-# 'columns' is an alias for axis 1
-print('檢視前幾行')
-cc = drinks.mean(axis='columns').head()
+# "columns" is an alias for axis 1
+print("檢視前幾行")
+cc = drinks.mean(axis="columns").head()
 print(cc)
 """
 
