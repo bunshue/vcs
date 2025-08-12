@@ -3396,6 +3396,159 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# OpenCV 輪廓檢測- contour detection(籃網偵測,字母模板偵測)
+
+# 原圖
+filename = "data/basketball.jpg"
+image10 = cv2.imread(filename)  # 彩色讀取
+
+cv2.imshow("BGR image", image10)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+image11 = image10.copy()
+
+# 轉灰階
+image12 = cv2.cvtColor(image11, cv2.COLOR_BGR2GRAY)
+cv2.imshow("gray", image12)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+# 轉二元圖
+ret, image13 = cv2.threshold(image12, 100, 255, cv2.THRESH_BINARY)
+cv2.imshow("binary", image13)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+contours, hierarchy = cv2.findContours(
+    image13, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE
+)
+# 設定一下drawContours的參數
+contours_to_plot = -1  # 畫全部
+plotting_color = (0, 0, 255)  # 畫紅色框
+thickness = -1
+# 開始畫contours
+with_contours = cv2.drawContours(
+    image10, contours, contours_to_plot, plotting_color, thickness
+) # image10 也被畫上東西
+cv2.imshow("contours", with_contours)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# 標示矩形邊框
+for cnt in contours:
+    x, y, w, h = cv2.boundingRect(cnt)
+    image = cv2.rectangle(image10, (x, y), (x + w, y + h), (0, 255, 0), 2)  # 畫綠色框
+cv2.imshow("contours", image10)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# 根據面積，挑出籃網的部分
+required_contour = max(contours, key=cv2.contourArea)  # 取出最大面積
+x, y, w, h = cv2.boundingRect(required_contour)
+image14 = cv2.rectangle(image11, (x, y), (x + w, y + h), (255, 0, 0), 2)  # 畫藍色框
+cv2.imshow("largest contour", image14)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+"""
+cv2.boundingRect
+矩形邊框（Bounding Rectangle）是說，用一個最小的矩形，把找到的形狀包起來。
+cv2.boundingRect(img)
+img是一個二值圖，也就是它的參數；
+返回四個值，分別是x，y，w，h（ x，y是矩型左上點的坐標，w，h是矩型的寬和高）
+
+cv2.contourArea
+計算輪廓的面積
+cv2.contourArea(contour， oriented=True)
+contour：表示某輸入單個輪廓，為array
+oriented：表示某個方向上輪廓的面積值，這裡指順時針或者逆時針。若為True，該函數返回一個帶符號的面積值，正負值取決於輪廓的方向（順時針還是逆時針），若為False，表示以絕對值返回
+
+cv2.arcLength
+計算輪廓的周長
+cv2.arcLength(contour， closed=True)
+contour：表示某輸入單個輪廓，為array
+closed：用於指示曲線是否封閉
+
+cv2.approxPolyDP
+cv2.approxPolyDP()函數是輪廓近似函數，是opencv中對指定的點集進行多邊形逼近的函數，其逼近的精度可通過參數設置
+approxPolyDP(curve, epsilon, closed, approxCurve=None)
+curve：表示輸入的點集
+epslion：指定的精度，也即原始曲線與近似曲線之間的最大距離，不過這個值我們一般按照周長的大小進行比較
+close：若為True，則說明近似曲線為閉合的；反之，若為False，則斷開
+
+"""
+
+# 找模板實作比對
+
+# 原圖
+filename = "data/phrase_handwritten.jpg"
+image10 = cv2.imread(filename)  # 彩色讀取
+cv2.imshow("Original image", image10)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+image11 = image10.copy()
+
+# 轉灰階
+image12 = cv2.cvtColor(image10, cv2.COLOR_BGR2GRAY)
+
+# 轉二元
+ret, image13 = cv2.threshold(image12, 0, 255, cv2.THRESH_OTSU)
+cv2.imshow("binary image", image13)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# 找輪廓
+contours_list, hierarchy = cv2.findContours(
+    image13, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+)
+for cnt in contours_list:
+    x, y, w, h = cv2.boundingRect(cnt)
+    cv2.rectangle(image10, (x, y), (x + w, y + h), (0, 0, 255), 2)  # 畫紅色框
+cv2.imshow("Contours marked on RGB image", image10)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# 做模板
+filename = "data/b3.jpg"
+ref_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+ret, ref_binary = cv2.threshold(ref_gray, 0, 255, cv2.THRESH_OTSU)
+cv2.imshow("Reference image", ref_binary)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# 開始比較
+ref_contour_list, hierarchy = cv2.findContours(
+    ref_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+)
+print(len(ref_contour_list))
+if len(ref_contour_list) == 1:
+    ref_contour = ref_contour_list[0]
+else:
+    print("找到的模板輪廓超過1個，需要確認一下用哪一個?")
+    ref_contour = ref_contour_list[0]
+
+ctr = 0
+dist_list = []
+for cnt in contours_list:
+    retval = cv2.matchShapes(cnt, ref_contour, cv2.CONTOURS_MATCH_I1, 0)
+    dist_list.append(retval)
+    ctr = ctr + 1
+
+min_dist = min(dist_list)  # 找出距離最近的
+ind_min_dist = dist_list.index(min_dist)  # 挑出那張圖
+required_cnt = contours_list[ind_min_dist]
+x, y, w, h = cv2.boundingRect(required_cnt)
+
+filename = "data/phrase_handwritten.jpg"
+imagecopy = cv2.imread(filename)  # 彩色讀取
+cv2.rectangle(imagecopy, (x, y), (x + w, y + h), (255, 0, 0), 2)
+cv2.imshow("Detected B", imagecopy)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3459,7 +3612,6 @@ print("------------------------------")  # 30個
                     )
 
 """
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3525,3 +3677,33 @@ print("------------------------------------------------------------")  # 60個
 # 可刪除檔案
 src = cv2.imread("data/findContours/heart.jpg")  # 彩色讀取
 src = cv2.imread("data/findContours/3heart.jpg")  # 彩色讀取
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+2.retrieval_mode-擷取模式
+
+cv2.RETR_EXTERNAL-只擷取最外圍的輪廓
+cv2.RETR_LIST-擷取大大小小所有輪廓，擷取結果沒有父子關係，大家都平等
+cv2.RETR_CCOMP-會列出內、外兩層關係
+cv2.RETR_TREE-會列出完整所有關係
+
+3.approx_method-輪廓紀錄方式
+
+cv2.CHAIN_APPROX_NONE-最精細紀錄模式
+cv2.CHAIN_APPROX_SIMPLE-只記錄畫出輪廓的關鍵點
+
+把輪廓畫出來-
+drawContours語法
+marked_img = cv2.drawContours(img, contours, contourIdx,color,thickness, lineType = cv.LINE_8, hierarchy = cv.Mat(), maxLevel = INT_MAX, offset = cv.Point(0, 0)))
+input的部分
+1.img-BGR目標照片，要標註輪廓的照片
+2.contours-我們偵測到的輪廓
+3.contourIdx-你要畫的輪廓，如果你要畫全部的輪廓，就用-1
+4.color-BGR，畫輪廓的顏色
+5.lineType
+6.offset-偏離程度
+
+"""
