@@ -35,6 +35,40 @@ ssl._create_default_https_context = ssl._create_stdlib_context
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# nodelist = ["city1","city2","city3","city4","city5","city6","city7","city8"]
+dist = np.mat(
+    [
+        [0.1, 0.1],
+        [0.9, 0.5],
+        [0.9, 0.1],
+        [0.45, 0.9],
+        [0.9, 0.8],
+        [0.7, 0.9],
+        [0.1, 0.45],
+        [0.45, 0.1],
+    ]
+)
+m, n = np.shape(dist)
+
+for point in dist.tolist():
+    plt.annotate(
+        "(" + str(point[0]) + ", " + str(point[1]) + ")", xy=(point[0], point[1])
+    )
+xlist = []
+ylist = []
+for px, py in zip(dist.T.tolist()[0], dist.T.tolist()[1]):
+    xlist.append([px])
+    ylist.append([py])
+
+plt.plot(xlist, ylist, "r")
+
+plt.text(0.5, 0.5, "AAAAAAA", ha="center", size=24)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 plt.figure(figsize=(12, 8))
 
 plt.subplot(231)
@@ -98,32 +132,6 @@ plt.ylim(-1.25, 1.25)
 print("------------------------------")  # 30個
 plt.subplot(233)
 
-# nodelist = ["city1","city2","city3","city4","city5","city6","city7","city8"]
-dist = np.mat(
-    [
-        [0.1, 0.1],
-        [0.9, 0.5],
-        [0.9, 0.1],
-        [0.45, 0.9],
-        [0.9, 0.8],
-        [0.7, 0.9],
-        [0.1, 0.45],
-        [0.45, 0.1],
-    ]
-)
-m, n = np.shape(dist)
-
-for point in dist.tolist():
-    plt.annotate(
-        "(" + str(point[0]) + ", " + str(point[1]) + ")", xy=(point[0], point[1])
-    )
-xlist = []
-ylist = []
-for px, py in zip(dist.T.tolist()[0], dist.T.tolist()[1]):
-    xlist.append([px])
-    ylist.append([py])
-
-plt.plot(xlist, ylist, "r")
 
 print("------------------------------")  # 30個
 plt.subplot(234)
@@ -137,12 +145,6 @@ plt.imshow(z, cmap="Blues", vmin=-2, vmax=2)
 print("------------------------------")  # 30個
 plt.subplot(235)
 
-# 畫  (x^2 + y^2 -1)^3 - x^2*y^3 = 0
-# %fig=matplotlib繪制心形隱函數曲線
-x, y = np.mgrid[-2:2:500j, -2:2:500j]
-z = (x**2 + y**2 - 1) ** 3 - x**2 * y**3
-plt.contourf(x, y, z, levels=[-1, 0], colors=["red"])
-plt.gca().set_aspect("equal")
 
 print("------------------------------")  # 30個
 plt.subplot(236)
@@ -150,6 +152,7 @@ plt.subplot(236)
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 plt.figure(figsize=(12, 8))
@@ -837,9 +840,6 @@ fig, ax = plt.subplots()
 
 # Fill the area between horizontal lines with a curve
 ax.fill_betweenx([-1, 1], [0], [2 * np.pi])
-
-# Add a text annotation to the plot
-ax.text(0, -1, r" Period $\Phi$")
 
 show()
 

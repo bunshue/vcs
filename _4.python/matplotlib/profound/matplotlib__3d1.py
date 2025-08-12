@@ -1223,8 +1223,122 @@ ax.set_zlabel("Z", color="b")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Three-dimensional Contour Plots
 
 
+def f(x, y):
+    return np.sin(np.sqrt(x ** 2 + y ** 2))
+
+x = np.linspace(-6, 6, 30)
+y = np.linspace(-6, 6, 30)
+
+X, Y = np.meshgrid(x, y)
+Z = f(X, Y)
+
+fig = plt.figure()
+ax = plt.axes(projection='3d')
+ax.contour3D(X, Y, Z, 50, cmap='binary')
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_zlabel('z')
+show()
+
+ax.view_init(60, 35)
+fig.show()
+
+
+#Wireframes and Surface Plots
+
+fig = plt.figure()
+ax = plt.axes(projection='3d')
+ax.plot_wireframe(X, Y, Z, color='black')
+ax.set_title('wireframe')
+show()
+
+
+ax = plt.axes(projection='3d')
+ax.plot_surface(X, Y, Z, rstride=1, cstride=1,
+                cmap='viridis', edgecolor='none')
+ax.set_title('surface')
+show()
+
+r = np.linspace(0, 6, 20)
+theta = np.linspace(-0.9 * np.pi, 0.8 * np.pi, 40)
+r, theta = np.meshgrid(r, theta)
+
+X = r * np.sin(theta)
+Y = r * np.cos(theta)
+Z = f(X, Y)
+
+ax = plt.axes(projection='3d')
+ax.plot_surface(X, Y, Z, rstride=1, cstride=1,
+                cmap='viridis', edgecolor='none')
+show()
+
+#Surface Triangulations
+
+theta = 2 * np.pi * np.random.random(1000)
+r = 6 * np.random.random(1000)
+x = np.ravel(r * np.sin(theta))
+y = np.ravel(r * np.cos(theta))
+z = f(x, y)
+
+ax = plt.axes(projection='3d')
+ax.scatter(x, y, z, c=z, cmap='viridis', linewidth=0.5)
+show()
+
+
+ax = plt.axes(projection='3d')
+ax.plot_trisurf(x, y, z, cmap='viridis', edgecolor='none')
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+#Example: Visualizing a Möbius strip
+
+theta = np.linspace(0, 2 * np.pi, 30)
+w = np.linspace(-0.25, 0.25, 8)
+w, theta = np.meshgrid(w, theta)
+
+phi = 0.5 * theta
+
+# radius in x-y plane
+r = 1 + w * np.cos(phi)
+
+x = np.ravel(r * np.cos(theta))
+y = np.ravel(r * np.sin(theta))
+z = np.ravel(w * np.sin(phi))
+
+# triangulate in the underlying parametrization
+from matplotlib.tri import Triangulation
+                                                                
+tri = Triangulation(np.ravel(w), np.ravel(theta))
+
+ax = plt.axes(projection='3d')
+ax.plot_trisurf(x, y, z, triangles=tri.triangles,
+                cmap='viridis', linewidths=0.2)
+
+ax.set_xlim(-1, 1)
+ax.set_ylim(-1, 1)
+ax.set_zlim(-1, 1)
+
+show()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 

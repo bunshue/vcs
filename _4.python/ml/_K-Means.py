@@ -566,7 +566,7 @@ plt.figure(figsize=(12, 6))
 
 plt.subplot(131)
 plt.scatter(X[:, 0], X[:, 1], s=50, c="r")
-plt.title("原始隨機資料50點")
+plt.title("原始隨機資料100點")
 
 plt.subplot(132)
 plt.scatter(X[:, 0], X[:, 1], c=clf.labels_)

@@ -661,18 +661,55 @@ plt.tricontour(Xc, Yc, values, 10)
 show()
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
+def f(x, y):
+    return np.sin(x) ** 10 + np.cos(10 + y * x) * np.cos(x)
+
+
+x = np.linspace(0, 5, 50)
+y = np.linspace(0, 5, 40)
+
+X, Y = np.meshgrid(x, y)
+Z = f(X, Y)
+
+plt.contour(X, Y, Z, colors="black")
+show()
+
+plt.contour(X, Y, Z, 20, cmap="RdGy")
+show()
+
+plt.contourf(X, Y, Z, 20, cmap="RdGy")
+plt.colorbar()
+show()
+
+plt.imshow(Z, extent=[0, 5, 0, 5], origin="lower", cmap="RdGy")
+plt.colorbar()
+# plt.axis(aspect='image')
+show()
+
+contours = plt.contour(X, Y, Z, 3, colors="black")
+plt.clabel(contours, inline=True, fontsize=8)
+
+plt.imshow(Z, extent=[0, 5, 0, 5], origin="lower", cmap="RdGy", alpha=0.5)
+plt.colorbar()
+show()
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
+# 畫  (x^2 + y^2 -1)^3 - x^2*y^3 = 0
+# %fig=matplotlib繪制心形隱函數曲線
+x, y = np.mgrid[-2:2:500j, -2:2:500j]
+z = (x**2 + y**2 - 1) ** 3 - x**2 * y**3
+plt.contourf(x, y, z, levels=[-1, 0], colors=["red"])
+plt.gca().set_aspect("equal")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

@@ -34,6 +34,10 @@ namespace vcs_PictureBox6
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "pictureBox1 ";
+
+            PictureBox pic = sender as PictureBox;
+            richTextBox1.Text += pic.Name + " ";
+            //MessageBox.Show(pic.Name);
         }
 
         private void button1_Click(object sender, EventArgs e)
