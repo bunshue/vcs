@@ -1,4 +1,4 @@
-﻿namespace vcs_ImageProcessing1
+﻿namespace vcs_ImageProcessing2_CCRR
 {
     partial class Form1
     {
@@ -52,9 +52,7 @@
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -64,7 +62,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(130, 60);
             this.button1.TabIndex = 0;
-            this.button1.Text = "像素法";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -92,7 +89,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(130, 60);
             this.button2.TabIndex = 3;
-            this.button2.Text = "內存法";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -103,7 +99,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(130, 60);
             this.button3.TabIndex = 4;
-            this.button3.Text = "指針法1";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -114,7 +109,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(130, 60);
             this.button4.TabIndex = 5;
-            this.button4.Text = "指針法2";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -126,7 +120,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(130, 60);
             this.button5.TabIndex = 6;
-            this.button5.Text = "指針法3";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -137,7 +130,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(130, 60);
             this.button6.TabIndex = 8;
-            this.button6.Text = "指針法4轉換爲灰度圖";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -148,7 +140,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(130, 60);
             this.button0.TabIndex = 9;
-            this.button0.Text = "各種影像處理速度比較";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -220,7 +211,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(130, 60);
             this.button12.TabIndex = 15;
-            this.button12.Text = "內存法建立彩色圖";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -231,7 +221,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(130, 60);
             this.button13.TabIndex = 16;
-            this.button13.Text = "Marshal.Copy 2 偽色彩";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -252,7 +241,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(130, 60);
             this.button15.TabIndex = 18;
-            this.button15.Text = "Marshal.Copy";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -263,7 +251,6 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(130, 60);
             this.button16.TabIndex = 19;
-            this.button16.Text = "MemoryStream 1";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -274,7 +261,6 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(130, 60);
             this.button17.TabIndex = 20;
-            this.button17.Text = "MemoryStream 2 圖片 轉 拜列";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -285,7 +271,6 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(130, 60);
             this.button18.TabIndex = 21;
-            this.button18.Text = "圖片 Bitmap MemoryStream 拜列 轉換";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -296,7 +281,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(130, 60);
             this.button19.TabIndex = 22;
-            this.button19.Text = "測試";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -311,21 +295,11 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.Location = new System.Drawing.Point(274, 112);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox2.TabIndex = 34;
-            this.pictureBox2.TabStop = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(539, 588);
-            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
@@ -354,7 +328,6 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -385,7 +358,6 @@
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button bt_clear;
-        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

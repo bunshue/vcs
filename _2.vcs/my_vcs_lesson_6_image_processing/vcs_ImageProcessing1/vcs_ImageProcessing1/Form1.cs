@@ -34,8 +34,6 @@ namespace vcs_ImageProcessing1
         //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_map_city/global.c.gif";   //超大圖, 要很久
         //string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
-        Stopwatch sw = new Stopwatch();
-
         //delay 10000 約 10秒
         //C# 不lag的延遲時間
         private void delay(int delay_milliseconds)
@@ -152,36 +150,71 @@ namespace vcs_ImageProcessing1
             Restore_Picture();
         }
 
+        void Restore_Picture()
+        {
+            pictureBox1.Image = Image.FromFile(filename);
+            Application.DoEvents();
+        }
+
         //各種影像處理速度比較 ST
         private void button0_Click(object sender, EventArgs e)
         {
             button0.BackColor = Color.Red;
             Application.DoEvents();
 
-            //各種影像處理速度比較
-
-            var sw = new Stopwatch();
+            Stopwatch sw = new Stopwatch();
 
             richTextBox1.Text += "各種影像處理速度比較 ST\n";
             Application.DoEvents();
 
-            richTextBox1.Text += "方法4: usafe pointer\n";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
+            ///string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            richTextBox1.Text += "方法1: 像素法\n";
             sw.Reset();
             sw.Start();
-            // usafe pointer
-            //NegativeImage4(bmp);
+            //像素法
+            Bitmap bmp1 = image_process_pixel1(filename);
             sw.Stop();
-            pictureBox1.Refresh();
-            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+            long elapsed = sw.ElapsedMilliseconds;
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", elapsed.ToString()) + "\tmsec\n";
             Application.DoEvents();
 
-            richTextBox1.Text += "方法6: use BitmapData\n";
+            richTextBox1.Text += "方法2: 內存法\n";
             sw.Reset();
             sw.Start();
-            //NegativeImage6(bmp);
+            //內存法
+            Bitmap bmp2 = image_process_memory1(filename);
             sw.Stop();
-            pictureBox1.Refresh();
-            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", elapsed.ToString()) + "\tmsec\n";
+            Application.DoEvents();
+
+            richTextBox1.Text += "方法3a: 指針法\n";
+            sw.Reset();
+            sw.Start();
+            //指針法a
+            Bitmap bmp3a = image_process_pointer1(filename);
+            sw.Stop();
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", elapsed.ToString()) + "\tmsec\n";
+            Application.DoEvents();
+
+            richTextBox1.Text += "方法3b: 指針法\n";
+            sw.Reset();
+            sw.Start();
+            //指針法b
+            Bitmap bmp3b = image_process_pointer2(filename);
+            sw.Stop();
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", elapsed.ToString()) + "\tmsec\n";
+            Application.DoEvents();
+
+            richTextBox1.Text += "方法3c: 指針法\n";
+            sw.Reset();
+            sw.Start();
+            //指針法c
+            Bitmap bmp3c = image_process_pointer3(filename);
+            sw.Stop();
+            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", elapsed.ToString()) + "\tmsec\n";
+            Application.DoEvents();
 
             richTextBox1.Text += "各種影像處理速度比較 SP\n\n";
 
@@ -544,12 +577,6 @@ namespace vcs_ImageProcessing1
             return bmp;
         }
 
-        void Restore_Picture()
-        {
-            pictureBox1.Image = Image.FromFile(filename);
-            Application.DoEvents();
-        }
-
         private void button7_Click(object sender, EventArgs e)
         {
         }
@@ -746,13 +773,8 @@ namespace vcs_ImageProcessing1
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //比較Marshal.Copy
-            //將 BitmapData 複製到 byte[] Array 陣列
-
             //Marshal.Copy()
-            //C# 將 BitmapData 複製到 byte[] Array 陣列
-            //以下有兩種方法複製 BitmapData，一個是使用 unsafe 方法，一個一個 byte 複製，另外一個是複製記憶體區塊，較為快速。
-            //目前測試為，第二種方法比第一種方法快四倍。
+            //將 BitmapData 複製到 byte[] Array 陣列
 
             Bitmap bmp = new Bitmap(@"C:/_git/vcs/_1.data/______test_files1/test_ReadAllBytes.bmp");
             int W = bmp.Width;
@@ -764,77 +786,38 @@ namespace vcs_ImageProcessing1
 
             //綁定bmp和bmpData
             BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-            for (int xx = 0; xx < 1000; xx++)   //做一千次 為了量測時間
-            {
-                //一個一個byte複製
-                w = bmpData.Width;
-                h = bmpData.Height;
-                dataIndex = 0;
-
-                //建立 byte[] Array 一維陣列
-                byte[] data = new byte[w * h * 3];
-                unsafe
-                {
-                    byte* p = (byte*)bmpData.Scan0.ToPointer();
-                    for (int y = 0; y < h; y++)
-                    {
-                        for (int x = 0; x < w; x++)
-                        {
-                            data[dataIndex++] = p[0];
-                            data[dataIndex++] = p[1];
-                            data[dataIndex++] = p[2];
-                            p += 3;
-                        }
-                    }
-                }
-            }
-            sw.Stop();
-            richTextBox1.Text += "Time1: " + (sw.ElapsedMilliseconds / 1000).ToString() + "." + (sw.ElapsedMilliseconds % 1000).ToString("D3") + " 秒\n";
-            sw.Reset();
-            sw.Start();
-            for (int xx = 0; xx < 1000; xx++)   //做一千次 為了量測時間
-            {
-                //建立 byte[] Array 一維陣列
-                byte[] data = new byte[bmpData.Width * bmpData.Height * 3];
-                //拷貝出來 bmpData => byte_data 圖片轉陣列
-                Marshal.Copy(bmpData.Scan0, data, 0, data.Length);//複製記憶體區塊
-            }
-            sw.Stop();
-            richTextBox1.Text += "Time2: " + (sw.ElapsedMilliseconds / 1000).ToString() + "." + (sw.ElapsedMilliseconds % 1000).ToString("D3") + " 秒\n";
-
-            //解除綁定bmp和bmpData
-            bmp.UnlockBits(bmpData);
-
-            //綁定bmp和bmpData
-            BitmapData bmpData2 = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 
             //一個一個byte複製
-            w = bmpData2.Width;
-            h = bmpData2.Height;
+            w = bmpData.Width;
+            h = bmpData.Height;
             dataIndex = 0;
 
-            //建立 byte[] Array 一維陣列
-            byte[] data2 = new byte[w * h * 4];
+            //指針法
 
+            //建立 byte[] Array 一維陣列
+            byte[] data = new byte[w * h * 3];
             unsafe
             {
-                byte* p = (byte*)bmpData2.Scan0.ToPointer();
+                byte* p = (byte*)bmpData.Scan0.ToPointer();
                 for (int y = 0; y < h; y++)
                 {
                     for (int x = 0; x < w; x++)
                     {
-                        data2[dataIndex++] = p[0];
-                        data2[dataIndex++] = p[1];
-                        data2[dataIndex++] = p[2];
-                        data2[dataIndex++] = 0xFF;
+                        data[dataIndex++] = p[0];
+                        data[dataIndex++] = p[1];
+                        data[dataIndex++] = p[2];
                         p += 3;
                     }
                 }
             }
-            //解除綁定bmp和bmpData2
-            bmp.UnlockBits(bmpData2);
+
+            //建立 byte[] Array 一維陣列
+            byte[] datab = new byte[bmpData.Width * bmpData.Height * 3];
+            //拷貝出來 bmpData => byte_data 圖片轉陣列
+            Marshal.Copy(bmpData.Scan0, datab, 0, datab.Length);//複製記憶體區塊
+
+            //解除綁定bmp和bmpData
+            bmp.UnlockBits(bmpData);
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -1055,9 +1038,11 @@ namespace vcs_ImageProcessing1
             {
                 richTextBox1.Text += "位元深度\tunknown, PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
             }
+            richTextBox1.Text += "data_offset = " + data_offset.ToString() + "\n";
         }
     }
 }
+
 
 /*
 IntPtr ptr = bmpData.Scan0;　 // 獲取bmpData的內存起始位置
@@ -1070,9 +1055,6 @@ IntPtr ptr = bmpData.Scan0;　 // 獲取bmpData的內存起始位置
 //點陣圖中第一個畫素資料的地址。它也可以看成是點陣圖中的第一個掃描行
 IntPtr srcPtr = bmpData1.Scan0;
 IntPtr dstPtr = bmpData2.Scan0;
-
-
-//richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
 
 //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
 
@@ -1229,3 +1211,8 @@ Bitmap bmp = new Bitmap(W, H, PixelFormat.Format8bppIndexed);//指定8位格式�
 
 */
 
+/*
+long elapsed = sw.ElapsedMilliseconds;
+richTextBox1.Text += "耗時 : " + string.Format("{0,10}", elapsed.ToString()) + "\tmsec\n";
+richTextBox1.Text += "耗時 : " + (elapsed / 1000).ToString() + "." + (elapsed % 1000).ToString("D3") + " 秒\n";
+*/

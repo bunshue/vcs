@@ -524,9 +524,140 @@ namespace vcs_ColorMap
             pictureBox1.Image = bitmap1;
         }
 
+        string[,] AllColors3 = new string[,]
+        {
+            {"黑Black","0,0,0"},
+            {"暗灰Dimgray","64,64,64"},
+            {"灰色Gray","128,128,128"},
+            {"暗灰Dark Gray","169,169,169"},
+            {"銀色Silver","192,192,192"},
+            {"淺灰色Light Gray","211,211,211"},
+            {"庚斯博羅灰Gainsboro","220,220,220"},
+            {"白色White","255,255,255"},
+            {"紅色Red","255,0,0"},
+            {"腥紅色Scarlet","255, 36, 0"},
+            {"朱紅色Vermilion","255, 77, 0"},
+            {"陽橙Sun Orange","255, 115, 0"},
+            {"橙色Orange","255, 165, 0"},
+            {"琥珀色Amber","255, 191, 0"},
+            {"金色Gold","255, 215, 0"},
+            {"黃色Yellow","255, 255, 0"},
+            {"檸檬綠Lime","204, 255, 0"},
+            {"蘋果綠Apple Green","140, 230, 0"},
+            {"黃綠色Bright Green","102, 255, 0"},
+            {"綠色green","0, 255, 0"},
+            {"青色cyan","0, 255, 255"},
+            {"深天藍Deep Sky Blue","0, 191, 255"},
+            {"蔚藍色azure","0, 127, 255"},
+            {"極濃海藍Ultramarine","0, 51, 255"},
+            {"藍色blue","0, 0, 255"},
+            {"木槿紫Mauve","102, 64, 255"},
+            {"紫丁香色Lilac","179, 153, 255"},
+            {"紫(紫羅蘭)Violet","139, 0, 255"},
+            {"錦葵紫 Mallow","217, 77, 255"},
+            {"優品紫紅Opera Mauve","230, 128, 255"},
+            {"紫色 Purple","128, 0, 128"},
+            {"粉紅Pink","255, 192,203"},
+            {"玫瑰褐Rosy Brown","18,143,143"},
+            {"亮珊瑚色Light Coral","240,128,128"},
+            {"印度紅 Indian Red","205,92,92"},
+            {"暖粉紅Hot Pink","255, 155,180"},
+            {"淺玫瑰紅Rose Pink","255, 102,204"},
+            {"妃紅","237,87,54"},
+            {"品紅?pinkish red","240,0,86"},
+            {"洋紅Megenta","255, 0, 255"},
+            {"玫瑰紅Rose Red","255, 13,16"},
+            {"櫻桃Cerise","222,49,99"},
+            {"紅寶石色Ruby","204,0,128"},
+            {"胭脂紅Carmine","230,0,92"},
+            {"緋紅Crimson","220,20,60"},
+            {"褐色Brown","165,42,42"},
+            {"磚紅色Fire Brick","178, 34, 34"},
+            {"樞機紅Cardinal Red","153,0,54"},
+            {"勃艮第酒紅Burgundy","71,0,36"},
+            {"暗紅Dark Red","139,0,0"},
+            {"米色Beige","245,245,210"},
+            {"小麥色Wheat","245,222,179"},
+            {"薑黃","255,199,115"},
+            {"蜜橙Honey Orange","255, 179,102"},
+            {"杏黃Apricot","230,153,102"},
+            {"橘黃","255,137,54"},
+            {"珊瑚紅 Coral","255, 127,80"},
+            {"熱帶橙Tropical Orange","255, 128,51"},
+            {"蕃茄紅 Tomato","255, 99, 71"},
+            {"柿子橙Persimmon","255, 77, 64"},
+            {"巧克力色Chocolate","210,105,30"},
+            {"古銅色Bronze","184,115,51"},
+            {"駝色Camel","161,107,71"},
+            {"卡其色Khaki","153,107,31"},
+            {"橄欖色Olive","128, 128, 0"},
+            {"椰褐Coconut Brown","71,31,0"},
+            {"鵝黃?light yellow","255,241,67"},
+            {"鴨黃","250,255,114"},
+            {"香檳黃Champagne Yellow","255,255,153"},
+            {"櫻草色primrose yellow","234,255,86"},
+            {"芥末黃Mustard","204, 204, 77"},
+            {"亮檸檬綠Light Lime","204, 255, 0"},
+            {"黃綠 Yellow Green","154, 205, 50"},
+            {"嫩綠pomona green verdancy","189,221,34"},
+            {"草綠 Grass Green","153, 230, 77"},
+            {"碧綠(寶綠) Emerald","80,200,120"},
+            {"碧綠azure green","42,221,156"},
+            {"檸檬綠Lime Green","50, 205, 50"},
+            {"孔雀石綠Malachite","34,195,46"},
+            {"薄荷綠Mint","22,152,43"},
+            {"春綠色Spring Green","0, 255, 128"},
+            {"孔雀綠Peacock Green","0,161,92"},
+            {"暗綠Dark Green","0,100,1"},
+            {"水色Aqua","175, 223, 228"},
+            {"淺藍色baby blue","137,207,240"},
+            {"藍綠色Aquamarin","127, 255, 212"},
+            {"水藍 Aqua Blue","102, 255, 230"},
+            {"土耳其藍Turquoise Blue","51, 230, 204"},
+            {"綠松色Turquoise","48, 213, 200"},
+            {"鴨綠色Teal","0, 128, 128"},
+            {"水","100, 149, 237"},
+            {"矢車菊藍Cornflower Blue","100, 149, 237"},
+            {"蔚藍Cerulean blue","42, 82, 190"},
+            {"水手藍Marine Blue","0, 71,125"},
+            {"普魯士藍Prussian blue","0, 49, 83"},
+            {"粉末藍Powder Blue","0, 51, 153"},
+            {"藍寶石色Sapphire","8, 37, 103"},
+            {"午夜藍Midnight Blue","25, 25, 112"},
+            {"藏青(海軍藍)Navy","0,0,128"},
+            {"淡紫丁香色Pail Lilac","230, 207, 230"},
+            {"鐵線蓮紫 Clematis","204, 163, 204"},
+            {"亮紫Light Violet","238, 130, 238"},
+            {"淡紫丁香色Pail Lilac","230, 207, 230"},
+            {"紫水晶色Amethyst","102, 51, 204"},
+            {"暗蘭紫 Dark Orchid","153, 50, 204"},
+            {"暗紫 Dark Violet","148, 0, 211"},
+            {"三色堇紫 Pansy","116, 0, 161"},
+            {"靛色Indigo","75,0,128"},
+            {"金色","234,205,118"},
+            {"假金","168,138,77"},
+            {"烏金","167,142,68"},
+            {"赤金","242,190,69"},
+            {"銀白","233,231,239"},
+            {"銀色","211,212,213"},
+            {"假銀","150,149,148"},
+            {"老銀","186,202,198"},
+            {"銅綠","84,150,136"},
+            {"不銹鋼","128,128,128"},
+            {"不銹鋼","169,169,169"},
+            {"深牛皮紙","199,126,123"},
+            {"淺牛皮紙","226,203,173"},
+            {"亞洲人膚色","219,161,118"},
+            {"非洲人膚色","182,147,118"},
+            {"藍天","104,165,218"},
+            {"藍天偏暖","116,132,193"},
+            {"藍天偏冷","98,176,227"},
+        };
+
         private void button3_Click(object sender, EventArgs e)
         {
             //顏色名稱3
+            //AllColors3
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -673,31 +804,154 @@ namespace vcs_ColorMap
             y += 20;
         }
 
+        string[,] AllColors6 = new string[,]
+        {
+            {"LightPink,淺粉紅", "FFB6C1", "255,182,193"},
+            {"Pink,粉紅", "FFC0CB", "255,192,203"},
+            {"Crimson,深紅(猩紅)", "DC143C", "220,20,60"},
+            {"LavenderBlush,淡紫紅", "FFF0F5", "255,240,245"},
+            {"PaleVioletRed,弱紫羅蘭紅", "DB7093", "219,112,147"},
+            {"HotPink,熱情的粉紅", "FF69B4", "255,105,180"},
+            {"DeepPink,深粉紅", "FF1493", "255,20,147"},
+            {"MediumVioletRed,中紫羅蘭紅", "C71585", "199,21,133"},
+            {"Orchid,暗紫色(蘭花紫)", "DA70D6", "218,112,214"},
+            {"Thistle,薊色", "D8BFD8", "216,191,216"},
+            {"Plum,洋李色(李子紫)", "DDA0DD", "221,160,221"},
+            {"Violet,紫羅蘭", "EE82EE", "238,130,238"},
+            {"Magenta,洋紅(玫瑰紅)", "FF00FF", "255,0,255"},
+            {"Fuchsia,紫紅(燈籠海棠)", "FF00FF", "255,0,255"},
+            {"DarkMagenta,深洋紅", "8B008B", "139,0,139"},
+            {"Purple,紫色", "800080", "128,0,128"},
+            {"MediumOrchid,中蘭花紫", "BA55D3", "186,85,211"},
+            {"DarkViolet,暗紫羅蘭", "9400D3", "148,0,211"},
+            {"DarkOrchid,暗蘭花紫", "9932CC", "153,50,204"},
+            {"Indigo,靛青/紫蘭色", "4B0082", "75,0,130"},
+            {"BlueViolet,藍紫羅蘭", "8A2BE2", "138,43,226"},
+            {"MediumPurple,中紫色", "9370DB", "147,112,219"},
+            {"MediumSlateBlue,中暗藍色(中板巖藍)", "7B68EE", "123,104,238"},
+            {"SlateBlue,石藍色(板巖藍)", "6A5ACD", "106,90,205"},
+            {"DarkSlateBlue,暗灰藍色(暗板巖藍)", "483D8B", "72,61,139"},
+            {"Lavender,淡紫色(熏衣草淡紫)", "E6E6FA", "230,230,250"},
+            {"GhostWhite,幽靈白", "F8F8FF", "248,248,255"},
+            {"Blue,純藍", "0000FF", "0,0,255"},
+            {"MediumBlue,中藍色", "0000CD", "0,0,205"},
+            {"MidnightBlue,午夜藍", "191970", "25,25,112"},
+            {"DarkBlue,暗藍色", "00008B", "0,0,139"},
+            {"Navy,海軍藍", "000080", "0,0,128"},
+            {"RoyalBlue,皇家藍/寶藍", "4169E1", "65,105,225"},
+            {"CornflowerBlue,矢車菊藍", "6495ED", "100,149,237"},
+            {"LightSteelBlue,亮鋼藍", "B0C4DE", "176,196,222"},
+            {"LightSlateGray,亮藍灰(亮石板灰)", "778899", "119,136,153"},
+            {"SlateGray,灰石色(石板灰)", "708090", "112,128,144"},
+            {"DodgerBlue,閃蘭色(道奇藍)", "1E90FF", "30,144,255"},
+            {"AliceBlue,愛麗絲藍", "F0F8FF", "240,248,255"},
+            {"SteelBlue,鋼藍/鐵青", "4682B4", "70,130,180"},
+            {"LightSkyBlue,亮天藍色", "87CEFA", "135,206,250"},
+            {"SkyBlue,天藍色", "87CEEB", "135,206,235"},
+            {"DeepSkyBlue,深天藍", "00BFFF", "0,191,255"},
+            {"LightBlue,亮藍", "ADD8E6", "173,216,230"},
+            {"PowderBlue,粉藍色(火藥青)", "B0E0E6", "176,224,230"},
+            {"CadetBlue,軍蘭色(軍服藍)", "5F9EA0", "95,158,160"},
+            {"Azure,蔚藍色", "F0FFFF", "240,255,255"},
+            {"LightCyan,淡青色", "E0FFFF", "224,255,255"},
+            {"PaleTurquoise,弱綠寶石", "AFEEEE", "175,238,238"},
+            {"Cyan,青色", "00FFFF", "0,255,255"},
+            {"Aqua,淺綠色(水色)", "00FFFF", "0,255,255"},
+            {"DarkTurquoise,暗綠寶石", "00CED1", "0,206,209"},
+            {"DarkSlateGray,暗瓦灰色(暗石板灰)", "2F4F4F", "47,79,79"},
+            {"DarkCyan,暗青色", "008B8B", "0,139,139"},
+            {"Teal,水鴨色", "008080", "0,128,128"},
+            {"MediumTurquoise,中綠寶石", "48D1CC", "72,209,204"},
+            {"LightSeaGreen,淺海洋綠", "20B2AA", "32,178,170"},
+            {"Turquoise,綠寶石", "40E0D0", "64,224,208"},
+            {"Aquamarine,寶石碧綠", "7FFFD4", "127,255,212"},
+            {"MediumAquamarine,中寶石碧綠", "66CDAA", "102,205,170"},
+            {"MediumSpringGreen,中春綠色", "00FA9A", "0,250,154"},
+            {"MintCream,薄荷奶油", "F5FFFA", "245,255,250"},
+            {"SpringGreen,春綠色", "00FF7F", "0,255,127"},
+            {"MediumSeaGreen,中海洋綠", "3CB371", "60,179,113"},
+            {"SeaGreen,海洋綠", "2E8B57", "46,139,87"},
+            {"Honeydew,蜜色(蜜瓜色)", "F0FFF0", "240,255,240"},
+            {"LightGreen,淡綠色", "90EE90", "144,238,144"},
+            {"PaleGreen,弱綠色", "98FB98", "152,251,152"},
+            {"DarkSeaGreen,暗海洋綠", "8FBC8F", "143,188,143"},
+            {"LimeGreen,閃光深綠", "32CD32", "50,205,50"},
+            {"Lime,閃光綠", "00FF00", "0,255,0"},
+            {"ForestGreen,森林綠", "228B22", "34,139,34"},
+            {"Green,純綠", "008000", "0,128,0"},
+            {"DarkGreen,暗綠色", "006400", "0,100,0"},
+            {"Chartreuse,黃綠色(查特酒綠)", "7FFF00", "127,255,0"},
+            {"LawnGreen,草綠色(草坪綠_", "7CFC00", "124,252,0"},
+            {"GreenYellow,綠黃色", "ADFF2F", "173,255,47"},
+            {"DarkOliveGreen,暗橄欖綠", "556B2F", "85,107,47"},
+            {"YellowGreen,黃綠色", "9ACD32", "154,205,50"},
+            {"OliveDrab,橄欖褐色", "6B8E23", "107,142,35"},
+            {"Beige,米色/灰棕色", "F5F5DC", "245,245,220"},
+            {"LightGoldenrodYellow,亮菊黃", "FAFAD2", "250,250,210"},
+            {"Ivory,象牙色", "FFFFF0", "255,255,240"},
+            {"LightYellow,淺黃色", "FFFFE0", "255,255,224"},
+            {"Yellow,純黃", "FFFF00", "255,255,0"},
+            {"Olive,橄欖", "808000", "128,128,0"},
+            {"DarkKhaki,暗黃褐色(深卡嘰布)", "BDB76B", "189,183,107"},
+            {"LemonChiffon,檸檬綢", "FFFACD", "255,250,205"},
+            {"PaleGoldenrod,灰菊黃(蒼麒麟色)", "EEE8AA", "238,232,170"},
+            {"Khaki,黃褐色(卡嘰布)", "F0E68C", "240,230,140"},
+            {"Gold,金色", "FFD700", "255,215,0"},
+            {"Cornsilk,玉米絲色", "FFF8DC", "255,248,220"},
+            {"Goldenrod,金菊黃", "DAA520", "218,165,32"},
+            {"DarkGoldenrod,暗金菊黃", "B8860B", "184,134,11"},
+            {"FloralWhite,花的白色", "FFFAF0", "255,250,240"},
+            {"OldLace,老花色(舊蕾絲)", "FDF5E6", "253,245,230"},
+            {"Wheat,淺黃色(小麥色)", "F5DEB3", "245,222,179"},
+            {"Moccasin,鹿皮色(鹿皮靴)", "FFE4B5", "255,228,181"},
+            {"Orange,橙色", "FFA500", "255,165,0"},
+            {"PapayaWhip,番木色(番木瓜)", "FFEFD5", "255,239,213"},
+            {"BlanchedAlmond,白杏色", "FFEBCD", "255,235,205"},
+            {"NavajoWhite,納瓦白(土著白)", "FFDEAD", "255,222,173"},
+            {"AntiqueWhite,古董白", "FAEBD7", "250,235,215"},
+            {"Tan,茶色", "D2B48C", "210,180,140"},
+            {"BurlyWood,硬木色", "DEB887", "222,184,135"},
+            {"Bisque,陶坯黃", "FFE4C4", "255,228,196"},
+            {"DarkOrange,深橙色", "FF8C00", "255,140,0"},
+            {"Linen,亞麻布", "FAF0E6", "250,240,230"},
+            {"Peru,秘魯色", "CD853F", "205,133,63"},
+            {"PeachPuff,桃肉色", "FFDAB9", "255,218,185"},
+            {"SandyBrown,沙棕色", "F4A460", "244,164,96"},
+            {"Chocolate,巧克力色", "D2691E", "210,105,30"},
+            {"SaddleBrown,重褐色(馬鞍棕色)", "8B4513", "139,69,19"},
+            {"Seashell,海貝殼", "FFF5EE", "255,245,238"},
+            {"Sienna,黃土赭色", "A0522D", "160,82,45"},
+            {"LightSalmon,淺鮭魚肉色", "FFA07A", "255,160,122"},
+            {"Coral,珊瑚", "FF7F50", "255,127,80"},
+            {"OrangeRed,橙紅色", "FF4500", "255,69,0"},
+            {"DarkSalmon,深鮮肉/鮭魚色", "E9967A", "233,150,122"},
+            {"Tomato,番茄紅", "FF6347", "255,99,71"},
+            {"MistyRose,淺玫瑰色(薄霧玫瑰)", "FFE4E1", "255,228,225"},
+            {"Salmon,鮮肉/鮭魚色", "FA8072", "250,128,114"},
+            {"Snow,雪白色", "FFFAFA", "255,250,250"},
+            {"LightCoral,淡珊瑚色", "F08080", "240,128,128"},
+            {"RosyBrown,玫瑰棕色", "BC8F8F", "188,143,143"},
+            {"IndianRed,印度紅", "CD5C5C", "205,92,92"},
+            {"Red,純紅", "FF0000", "255,0,0"},
+            {"Brown,棕色", "A52A2A", "165,42,42"},
+            {"FireBrick,火磚色(耐火磚)", "B22222", "178,34,34"},
+            {"DarkRed,深紅色", "8B0000", "139,0,0"},
+            {"Maroon,栗色", "800000", "128,0,0"},
+            {"White,純白", "FFFFFF", "255,255,255"},
+            {"WhiteSmoke,白煙", "F5F5F5", "245,245,245"},
+            {"Gainsboro,淡灰色(庚斯博羅灰)", "DCDCDC", "220,220,220"},
+            {"LightGrey,淺灰色", "D3D3D3", "211,211,211"},
+            {"Silver,銀灰色", "C0C0C0", "192,192,192"},
+            {"DarkGray,深灰色", "A9A9A9", "169,169,169"},
+            {"Gray,灰色", "808080", "128,128,128"},
+            {"DimGray,暗淡的灰色", "696969", "105,105,105"},
+            {"Black,純黑", "000000", "0,0,0"},
+        };
+
         private void button6_Click(object sender, EventArgs e)
         {
-            //顏色名稱6 System Color
-            int width = pictureBox1.Size.Width;
-            int height = pictureBox1.Size.Height;
-            Bitmap bitmap1 = new Bitmap(width, height);
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-            g.Clear(Color.Pink);
-
-            int y = 10;
-
-            // Enumerate the SystemColors class's static Color properties.
-            Type type = typeof(SystemColors);
-
-            int len = type.GetProperties().Length;
-            richTextBox1.Text += "共有 " + len.ToString() + " 種顏色\n";
-
-            foreach (PropertyInfo field_info in type.GetProperties())
-            {
-                DrawColorSample(g, ref y,
-                    (Color)field_info.GetValue(null, null),
-                    field_info.Name);
-            }
-
-            pictureBox1.Image = bitmap1;
+            //顏色名稱6
+            //AllColors6
         }
 
         string[,] AllColors7 = new string[,]
@@ -1057,7 +1311,29 @@ namespace vcs_ColorMap
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //顏色名稱10 System Color
+            int width = pictureBox1.Size.Width;
+            int height = pictureBox1.Size.Height;
+            Bitmap bitmap1 = new Bitmap(width, height);
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.Clear(Color.Pink);
 
+            int y = 10;
+
+            // Enumerate the SystemColors class's static Color properties.
+            Type type = typeof(SystemColors);
+
+            int len = type.GetProperties().Length;
+            richTextBox1.Text += "共有 " + len.ToString() + " 種顏色\n";
+
+            foreach (PropertyInfo field_info in type.GetProperties())
+            {
+                DrawColorSample(g, ref y,
+                    (Color)field_info.GetValue(null, null),
+                    field_info.Name);
+            }
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button11_Click(object sender, EventArgs e)
