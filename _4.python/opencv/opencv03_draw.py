@@ -641,7 +641,7 @@ for p in points:
     print(p)
     cv2.circle(image, (p[0], p[1]), 10, GREEN, -1)  # 繪製圓形
 
-points = np.int0(points)  # 取整數
+points = np.intp(points)  # 取整數
 cv2.drawContours(image, [points], 0, RED, 2)
 
 cv2.imshow("OpenCV", image)

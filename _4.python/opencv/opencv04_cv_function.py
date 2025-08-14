@@ -540,7 +540,7 @@ image = cv2.resize(image, (0, 0), fx=0.75, fy=0.75)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
 
 corners = cv2.goodFeaturesToTrack(gray, 100, 0.01, 10)
-corners = np.int0(corners)
+corners = np.intp(corners)
 
 print(len(corners))
 
@@ -655,7 +655,7 @@ def draw_lines(points, color):
     N = len(points)
     print("N =", N)
     # 畫出來, 另法, 用drawContours
-    points = np.int0(points)  # 取整數
+    points = np.intp(points)  # 取整數
     cv2.drawContours(image, [points], 0, color, 3)  # 多點頭尾連線
 
 

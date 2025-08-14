@@ -21,11 +21,10 @@ corners = cv2.cornerSubPix(gray,np.float32(centroids),(5,5),(-1,-1),criteria)
 
 #绘图
 res = np.hstack((centroids,corners))
-res = np.int0(res)
+res = np.intp(res)
 img[res[:,1],res[:,0]] = [0,0,255]
 img[res[:,3],res[:,2]] = [0,255,0]
-cv2.imshow('dst',img)
 
-if cv2.waitKey(0) & 0xff == 27:
-    cv2.destroyAllWindows()
-    
+cv2.imshow("image", img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()

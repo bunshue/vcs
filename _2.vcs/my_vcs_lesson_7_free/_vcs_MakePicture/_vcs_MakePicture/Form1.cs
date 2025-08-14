@@ -182,12 +182,9 @@ namespace _vcs_MakePicture
             button94.Location = new Point(x_st + dx * 10, y_st + dy * 7);
             button95.Location = new Point(x_st + dx * 11, y_st + dy * 7);
 
-
-
-
             button9.Text = word;
 
-            pictureBox1.Size = new Size(640, 480);
+            pictureBox1.Size = new Size(800, 600);
             pictureBox1.Location = new Point(10, 10);
 
             this.Size = new Size(1640, 900);
@@ -3134,8 +3131,8 @@ namespace _vcs_MakePicture
             int xx;
             int yy;
 
-            width = 400;
-            height = 400;
+            width = 300;
+            height = 300;
             bitmap1 = new Bitmap(width, height);
 
             background_color = Color.Black;
@@ -3153,10 +3150,10 @@ namespace _vcs_MakePicture
             g = Graphics.FromImage(bitmap1);
 
             sb = new SolidBrush(Color.White);
-            g.FillEllipse(sb, 50, 50, width - 100, height - 100);
+            int cx = width / 2;
+            int cy = height / 2;
 
-            sb = new SolidBrush(Color.Black);
-            g.FillEllipse(sb, 100, 100, width - 200, height - 200);
+            g.FillEllipse(sb, cx - 100, cy - 100, 200, 200);
 
             pictureBox1.Image = bitmap1;
         }
