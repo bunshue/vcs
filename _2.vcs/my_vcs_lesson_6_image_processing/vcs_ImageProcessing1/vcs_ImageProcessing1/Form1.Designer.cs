@@ -52,9 +52,7 @@
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -82,6 +80,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(274, 6);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
@@ -103,7 +102,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(130, 60);
             this.button3.TabIndex = 4;
-            this.button3.Text = "指針法1";
+            this.button3.Text = "指針法";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -114,7 +113,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(130, 60);
             this.button4.TabIndex = 5;
-            this.button4.Text = "指針法2";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -126,7 +124,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(130, 60);
             this.button5.TabIndex = 6;
-            this.button5.Text = "指針法3";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -137,7 +134,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(130, 60);
             this.button6.TabIndex = 8;
-            this.button6.Text = "指針法4轉換爲灰度圖";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -155,7 +151,7 @@
             // bt_restore
             // 
             this.bt_restore.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_restore.Location = new System.Drawing.Point(381, 112);
+            this.bt_restore.Location = new System.Drawing.Point(274, 112);
             this.bt_restore.Name = "bt_restore";
             this.bt_restore.Size = new System.Drawing.Size(70, 60);
             this.bt_restore.TabIndex = 10;
@@ -311,21 +307,11 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.Location = new System.Drawing.Point(274, 112);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox2.TabIndex = 34;
-            this.pictureBox2.TabStop = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(539, 588);
-            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
@@ -354,7 +340,6 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -385,7 +370,6 @@
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button bt_clear;
-        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

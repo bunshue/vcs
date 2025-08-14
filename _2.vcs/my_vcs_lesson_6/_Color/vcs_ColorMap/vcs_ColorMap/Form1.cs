@@ -951,7 +951,40 @@ namespace vcs_ColorMap
         private void button6_Click(object sender, EventArgs e)
         {
             //顏色名稱6
-            //AllColors6
+            int width = pictureBox1.Size.Width;
+            int height = pictureBox1.Size.Height;
+            Bitmap bitmap1 = new Bitmap(width, height);
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.Clear(Color.Pink);
+
+            int i = 0;
+            int w = 130;
+            int h = 60;
+            int len = AllColors6.GetUpperBound(0) + 1;
+            richTextBox1.Text += "共有 " + len.ToString() + " 種顏色\n";
+
+            int x_st = 0;
+            int y_st = 0;
+            for (i = 0; i < len/10; i++)
+            {
+                string color_name = AllColors6[i, 0];
+                string color_hex = AllColors6[i, 1];
+                string color_rgb = AllColors6[i, 2];
+
+                richTextBox1.Text += color_name + "\t" + color_hex + "\t" + color_rgb + "\n";
+                //split
+
+                /*
+                SolidBrush sb = new SolidBrush(AllColors1[i % len]);
+                g.FillRectangle(sb, x_st + w * (i % 10), y_st + h * (i / 10), w, h);
+                richTextBox1.Text += AllColors1[i % len].Name + "\n";
+
+                Font f = new Font("標楷體", 12);
+                sb = new SolidBrush(Color.FromArgb(255 - AllColors1[i % len].R, 255 - AllColors1[i % len].G, 255 - AllColors1[i % len].B));
+                g.DrawString(AllColors1[i % len].Name.ToString(), f, sb, new PointF(x_st + w * (i % 10), y_st + h * (i / 10) + 12));
+                */
+            }
+            pictureBox1.Image = bitmap1;
         }
 
         string[,] AllColors7 = new string[,]

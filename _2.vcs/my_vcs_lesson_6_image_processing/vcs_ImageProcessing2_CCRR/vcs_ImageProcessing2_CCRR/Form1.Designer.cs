@@ -62,6 +62,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(130, 60);
             this.button1.TabIndex = 0;
+            this.button1.Text = "改變圖像大小";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -140,6 +141,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(130, 60);
             this.button0.TabIndex = 9;
+            this.button0.Text = "圖像截取";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 

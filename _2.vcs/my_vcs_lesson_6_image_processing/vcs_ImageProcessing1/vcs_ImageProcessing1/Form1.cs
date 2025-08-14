@@ -91,16 +91,13 @@ namespace vcs_ImageProcessing1
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-
-            bt_restore.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+            bt_restore.Location = new Point(x_st + dx * 1, y_st + dy * 10);
 
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            pictureBox1.Size = new Size(640, 480);
-            pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 480 + 10);
-            pictureBox2.Size = new Size(640, 480);
+            pictureBox1.Size = new Size(1200, 1000);
 
-            richTextBox1.Size = new Size(700, 900);
-            richTextBox1.Location = new Point(x_st + dx * 8 + 80, y_st + dy * 0);
+            richTextBox1.Size = new Size(360, 1000);
+            richTextBox1.Location = new Point(x_st + dx * 11 + 0, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //最大化螢幕
@@ -167,8 +164,9 @@ namespace vcs_ImageProcessing1
             richTextBox1.Text += "各種影像處理速度比較 ST\n";
             Application.DoEvents();
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
-            ///string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
+            //string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_image_processing\pic6_children2.png";
 
             richTextBox1.Text += "方法1: 像素法\n";
             sw.Reset();
@@ -186,33 +184,17 @@ namespace vcs_ImageProcessing1
             //內存法
             Bitmap bmp2 = image_process_memory1(filename);
             sw.Stop();
+            elapsed = sw.ElapsedMilliseconds;
             richTextBox1.Text += "耗時 : " + string.Format("{0,10}", elapsed.ToString()) + "\tmsec\n";
             Application.DoEvents();
 
-            richTextBox1.Text += "方法3a: 指針法\n";
+            richTextBox1.Text += "方法3: 指針法\n";
             sw.Reset();
             sw.Start();
-            //指針法a
-            Bitmap bmp3a = image_process_pointer1(filename);
+            //指針法1
+            Bitmap bmp3 = image_process_pointer1(filename);
             sw.Stop();
-            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", elapsed.ToString()) + "\tmsec\n";
-            Application.DoEvents();
-
-            richTextBox1.Text += "方法3b: 指針法\n";
-            sw.Reset();
-            sw.Start();
-            //指針法b
-            Bitmap bmp3b = image_process_pointer2(filename);
-            sw.Stop();
-            richTextBox1.Text += "耗時 : " + string.Format("{0,10}", elapsed.ToString()) + "\tmsec\n";
-            Application.DoEvents();
-
-            richTextBox1.Text += "方法3c: 指針法\n";
-            sw.Reset();
-            sw.Start();
-            //指針法c
-            Bitmap bmp3c = image_process_pointer3(filename);
-            sw.Stop();
+            elapsed = sw.ElapsedMilliseconds;
             richTextBox1.Text += "耗時 : " + string.Format("{0,10}", elapsed.ToString()) + "\tmsec\n";
             Application.DoEvents();
 
@@ -238,9 +220,9 @@ namespace vcs_ImageProcessing1
         Bitmap image_process_pixel1(string filename)
         {
             Bitmap bmp = new Bitmap(filename);
-
             int W = bmp.Width;
             int H = bmp.Height;
+
             Color pixel;
             byte r = 0;
             byte g = 0;
@@ -284,8 +266,6 @@ namespace vcs_ImageProcessing1
 
             //將Bitmap鎖定到系統記憶體中,獲得BitmapData
             //綁定bitmap1和bmpData1
-            //使用原本的像素格式
-            //BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
             //指定像素格式轉為24比特
             BitmapData bmpData1 = bitmap1.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);//指明PixelFormat
             //綁定bitmap2和bmpData2
@@ -293,12 +273,12 @@ namespace vcs_ImageProcessing1
 
             //將Bitmap物件的資訊存放到byte陣列中
             //建立 byte[] Array 一維陣列
-            var stride1 = Math.Abs(bmpData1.Stride);//取得記憶體寬度
+            var stride1 = bmpData1.Stride;//取得記憶體寬度, 影像寬度W*一點拜數 可4除
             int byte_data_len1 = stride1 * H;// 用stride寬度，表示這是 內存區域的大小
             byte[] byte_data1 = new byte[byte_data_len1];
 
             //建立 byte[] Array 一維陣列
-            var stride2 = Math.Abs(bmpData2.Stride);//取得記憶體寬度
+            var stride2 = bmpData2.Stride;//取得記憶體寬度, 影像寬度W*一點拜數 可4除
             int byte_data_len2 = stride2 * H;// 用stride寬度，表示這是 內存區域的大小
             byte[] byte_data2 = new byte[byte_data_len2];
 
@@ -345,8 +325,9 @@ namespace vcs_ImageProcessing1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "指針法1\n";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
+            richTextBox1.Text += "指針法3\n";
+            //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_image_processing\pic6_children2.png";
             Bitmap bmp = image_process_pointer1(filename);
             pictureBox1.Image = bmp;
         }
@@ -355,19 +336,19 @@ namespace vcs_ImageProcessing1
         Bitmap image_process_pointer1(string filename)
         {
             Bitmap bmp = new Bitmap(filename);
-
             int W = bmp.Width;
             int H = bmp.Height;
 
             //綁定bmp和bmpData
-            //使用原本的像素格式
-            //BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
             //指定像素格式轉為24比特
             BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);//指明PixelFormat
+            var stride = bmpData.Stride;//取得記憶體寬度, 影像寬度W*一點拜數 可4除
 
             unsafe
             {
-                byte* ptr = (byte*)(bmpData.Scan0);
+                byte* ptr = (byte*)bmpData.Scan0;
+                byte* pLine = ptr;
+                int offset = stride - W * 3;//記憶體寬度-影像寬度W*一點拜數, 空白空間
                 byte r;
                 byte g;
                 byte b;
@@ -377,204 +358,36 @@ namespace vcs_ImageProcessing1
                     for (int x = 0; x < W; x++)
                     {
                         //取值
-                        r = *(ptr + 0);
-                        g = *(ptr + 1);
-                        b = *(ptr + 2);
+                        r = ptr[2];
+                        g = ptr[1];
+                        b = ptr[0];
 
                         //灰階
                         gray = (byte)(r * 0.299 + g * 0.587 + b * 0.114);
-                        *(ptr + 0) = gray;         //每個點的B改成三色平均
-                        *(ptr + 1) = gray;     //每個點的G改成三色平均
-                        *(ptr + 2) = gray;     //每個點的R改成三色平均
+                        ptr[2] = gray;
+                        ptr[1] = gray;
+                        ptr[0] = gray;
 
-                        ptr += 3;//指針移到下一個像素, //jpg檔要加 3, bmp檔要加4
+                        ptr += 3;//指針移到下一個像素
                     }
+                    ptr += offset;//指針加上填充的空白空間
                 }
-                //解除綁定bmp和bmpData
-                bmp.UnlockBits(bmpData);
             }
+            //解除綁定bmp和bmpData
+            bmp.UnlockBits(bmpData);
             return bmp;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "指針法3\n";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
-            Bitmap bmp = image_process_pointer2(filename);
-            pictureBox1.Image = bmp;
-        }
-
-        Bitmap image_process_pointer2(string filename)
-        {
-            Bitmap bmp = new Bitmap(filename);
-
-            int W = bmp.Width;
-            int H = bmp.Height;
-
-            //綁定bmp和bmpData
-            //使用原本的像素格式
-            //BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
-            //指定像素格式轉為24比特
-            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);//指明PixelFormat
-
-            var stride = Math.Abs(bmpData.Stride);//取得記憶體寬度
-
-            unsafe
-            {
-                var ptr = (byte*)bmpData.Scan0;
-                byte r;
-                byte g;
-                byte b;
-                byte gray;
-                byte* pLine = ptr;
-                for (int y = 0; y < H; y++)
-                {
-                    // The first point of the line
-                    ptr = pLine;
-                    for (int x = 0; x < W; x++)
-                    {
-                        //取值
-                        r = ptr[2];
-                        g = ptr[1];
-                        b = ptr[0];
-
-                        //灰階
-                        gray = (byte)(r * 0.299 + g * 0.587 + b * 0.114);
-                        ptr[2] = gray;
-                        ptr[1] = gray;
-                        ptr[0] = gray;
-
-                        ptr += 3;//指針移到下一個像素
-                    }
-                    pLine += stride;//指針移到下一行
-                }
-            }
-            //解除綁定bmp和bmpData
-            bmp.UnlockBits(bmpData);
-            return bmp;
-
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "指針法3\n";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
-            Bitmap bmp = image_process_pointer3(filename);
-            pictureBox1.Image = bmp;
-        }
-
-        Bitmap image_process_pointer3(string filename)
-        {
-            Bitmap bmp = new Bitmap(filename);
-
-            int W = bmp.Width;
-            int H = bmp.Height;
-
-            //綁定bmp和bmpData
-            //使用原本的像素格式
-            //BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
-            //指定像素格式轉為24比特
-            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);//指明PixelFormat
-
-            unsafe
-            {
-                byte* ptr = (byte*)bmpData.Scan0;
-                int offset = bmpData.Stride - W * 3;
-                byte r;
-                byte g;
-                byte b;
-                byte gray;
-                for (int y = 0; y < H; y++)
-                {
-                    for (int x = 0; x < W; x++)
-                    {
-                        //取值
-                        r = ptr[2];
-                        g = ptr[1];
-                        b = ptr[0];
-
-                        //灰階
-                        gray = (byte)(r * 0.299 + g * 0.587 + b * 0.114);
-                        ptr[2] = gray;
-                        ptr[1] = gray;
-                        ptr[0] = gray;
-
-                        ptr += 3;//指針移到下一個像素
-                    }
-                    ptr += offset;
-                }
-                //解除綁定bitmap1和bmpData
-                bmp.UnlockBits(bmpData);
-            }
-            return bmp;
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //指針法4轉換爲灰度圖
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
-            Bitmap bmp = image_process_pointer4(filename);
-            pictureBox1.Image = bmp;
-        }
-
-        Bitmap image_process_pointer4(string filename)
-        {
-            filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            //建立一個GrayBitmapData類做影像處理
-
-            //轉換爲灰度圖
-            Bitmap bmp = new Bitmap(filename);
-
-            int W = bmp.Width;
-            int H = bmp.Height;
-
-            //綁定bmp和bmpData
-            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-            W = bmpData.Width;
-            H = bmpData.Height;
-            byte[,] Data = new byte[H, W];//保存像素矩陣
-            unsafe
-            {
-                byte* ptr = (byte*)bmpData.Scan0.ToPointer();
-                for (int i = 0; i < H; i++)
-                {
-                    for (int j = 0; j < W; j++)
-                    {
-                        //將24位的RGB彩色圖轉換爲灰度圖
-                        int temp = (int)(0.114 * (*ptr++)) + (int)(0.587 * (*ptr++)) + (int)(0.299 * (*ptr++));
-                        Data[i, j] = (byte)temp;
-                    }
-                    ptr += bmpData.Stride - W * 3;//指針加上填充的空白空間
-                    //其中BitmapData類的Stride屬性爲每行像素所佔的字節。
-                }
-            }
-            //解除綁定bmp和bmpData
-            bmp.UnlockBits(bmpData);
-
-            bmp = new Bitmap(W, H, PixelFormat.Format24bppRgb);
-            //綁定bmp和bmpData
-            bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
-
-            unsafe
-            {
-                byte* ptr = (byte*)bmpData.Scan0.ToPointer();
-                for (int i = 0; i < Height; i++)
-                {
-                    for (int j = 0; j < Width; j++)
-                    {
-                        *(ptr++) = Data[i, j];
-                        *(ptr++) = Data[i, j];
-                        *(ptr++) = Data[i, j];
-                    }
-                    ptr += bmpData.Stride - Width * 3;
-                    //其中BitmapData類的Stride屬性爲每行像素所佔的字節。
-                }
-            }
-            //解除綁定bmp和bmpData
-            bmp.UnlockBits(bmpData);
-
-            return bmp;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -611,6 +424,8 @@ namespace vcs_ImageProcessing1
             //彩色轉灰階
 
             Bitmap bmp1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
+            int W = bmp1.Width;
+            int H = bmp1.Height;
 
             //SetPixel 彩色轉灰階
             Color pixel;
@@ -618,9 +433,9 @@ namespace vcs_ImageProcessing1
             byte g = 0;
             byte b = 0;
             byte gray = 0;
-            for (int y = 0; y < bmp1.Height; y++)
+            for (int y = 0; y < H; y++)
             {
-                for (int x = 0; x < bmp1.Width; x++)
+                for (int x = 0; x < W; x++)
                 {
                     //取值
                     pixel = bmp1.GetPixel(x, y);//提取像素值
@@ -670,16 +485,16 @@ namespace vcs_ImageProcessing1
         {
             if (bmp != null)
             {
+                //取出原本的像素格式 bmp.PixelFormat
                 if (PixelFormat.Format24bppRgb == bmp.PixelFormat)
                 {
                     int W = bmp.Width;
                     int H = bmp.Height;
 
                     //綁定bmp和bmpData
-                    //使用原本的像素格式
-                    //BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
                     //指定像素格式轉為24比特
                     BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);//指明PixelFormat
+                    var stride = bmpData.Stride;//取得記憶體寬度, 影像寬度W*一點拜數 可4除
 
                     //建立 byte[] Array 一維陣列
                     int bytes = W * H * 3;
@@ -740,9 +555,10 @@ namespace vcs_ImageProcessing1
                             }
                         }
                     }
-                    bmp = new Bitmap(W, H, PixelFormat.Format24bppRgb);
+                    bmp = new Bitmap(W, H, PixelFormat.Format24bppRgb);//指明PixelFormat
 
                     //綁定bmp和bmpData
+                    //取出原本的像素格式 bmp.PixelFormat
                     bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
 
                     //ptr = bmpData.Scan0;
@@ -780,28 +596,25 @@ namespace vcs_ImageProcessing1
             int W = bmp.Width;
             int H = bmp.Height;
 
-            int w;
-            int h;
             int dataIndex = 0;
 
             //綁定bmp和bmpData
-            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);//指明PixelFormat
+            var stride = bmpData.Stride;//取得記憶體寬度, 影像寬度W*一點拜數 可4除
 
             //一個一個byte複製
-            w = bmpData.Width;
-            h = bmpData.Height;
             dataIndex = 0;
 
             //指針法
 
             //建立 byte[] Array 一維陣列
-            byte[] data = new byte[w * h * 3];
+            byte[] data = new byte[W * H * 3];
             unsafe
             {
                 byte* p = (byte*)bmpData.Scan0.ToPointer();
-                for (int y = 0; y < h; y++)
+                for (int y = 0; y < H; y++)
                 {
-                    for (int x = 0; x < w; x++)
+                    for (int x = 0; x < W; x++)
                     {
                         data[dataIndex++] = p[0];
                         data[dataIndex++] = p[1];
@@ -812,7 +625,7 @@ namespace vcs_ImageProcessing1
             }
 
             //建立 byte[] Array 一維陣列
-            byte[] datab = new byte[bmpData.Width * bmpData.Height * 3];
+            byte[] datab = new byte[W * H * 3];
             //拷貝出來 bmpData => byte_data 圖片轉陣列
             Marshal.Copy(bmpData.Scan0, datab, 0, datab.Length);//複製記憶體區塊
 
@@ -979,23 +792,23 @@ namespace vcs_ImageProcessing1
 
             richTextBox1.Text += "MemoryStream(ms) 轉 拜列\n";
             Byte[] byte_data = ms.ToArray();//MemoryStream(ms) 轉 拜列
-
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
             //測試
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\pic_256X100.bmp";
+            //string filename = @"C:\_git\vcs\_1.data\______test_files1\pic_256X100.bmp";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_image_processing\pic6_children2.png";
 
             Bitmap bmp = new Bitmap(filename);
-
             int W = bmp.Width;
             int H = bmp.Height;
 
             int PixelCount = W * H;
 
             // get bmp bitmap pixel format size
+            //取出原本的像素格式 bmp.PixelFormat
             int Depth = Bitmap.GetPixelFormatSize(bmp.PixelFormat);
 
             // Check if bpp (Bits Per Pixel) is 8, 24, or 32
@@ -1005,6 +818,7 @@ namespace vcs_ImageProcessing1
             }
 
             richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            //取出原本的像素格式 bmp.PixelFormat
             richTextBox1.Text += "PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
 
             if (bmp.PixelFormat == PixelFormat.Format32bppRgb)
@@ -1109,8 +923,8 @@ IntPtr dstPtr = bmpData2.Scan0;
             {
             }
 
-            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed);//8位元
-            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);//24位元
+            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);//指明PixelFormat, 8位元
+            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);//指明PixelFormat, 24位元
 
 Bitmap bmp = new Bitmap(W, H, PixelFormat.Format1bppIndexed);
 Bitmap bmp = new Bitmap(W, H, PixelFormat.Format8bppIndexed);//指定8位格式，即256色
@@ -1216,3 +1030,18 @@ long elapsed = sw.ElapsedMilliseconds;
 richTextBox1.Text += "耗時 : " + string.Format("{0,10}", elapsed.ToString()) + "\tmsec\n";
 richTextBox1.Text += "耗時 : " + (elapsed / 1000).ToString() + "." + (elapsed % 1000).ToString("D3") + " 秒\n";
 */
+
+//使用原本的像素格式
+//BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, bmp.PixelFormat);
+
+/*
+ImageLockMode 三種模式, 都使用 ReadWrite
+ImageLockMode.ReadWrite
+ImageLockMode.ReadOnly
+ImageLockMode.ReadWrite
+*/
+
+// 其中BitmapData類的Stride屬性爲每行像素所佔的字節。
+// int offset = stride - W * 3;
+// ptr += offset;//指針加上填充的空白空間
+

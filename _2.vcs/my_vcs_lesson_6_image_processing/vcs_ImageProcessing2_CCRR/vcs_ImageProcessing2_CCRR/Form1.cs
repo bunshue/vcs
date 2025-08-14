@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Drawing2D;
+
 namespace vcs_ImageProcessing2_CCRR
 {
     public partial class Form1 : Form
@@ -126,10 +128,43 @@ namespace vcs_ImageProcessing2_CCRR
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //圖像截取
+
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
+            Graphics g = this.pictureBox1.CreateGraphics();
+            Bitmap bitmap1 = new Bitmap(filename);
+            //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
+            Rectangle sr = new Rectangle(80, 60, 400, 400);//要截取的矩形區域
+            Rectangle dr = new Rectangle(0, 0, 200, 200);//要顯示到Form的矩形區域
+            g.DrawImage(bitmap1, dr, sr, GraphicsUnit.Pixel);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //改變圖像大小
+
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            Bitmap bitmap1 = new Bitmap(filename);
+            //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            // 改變圖像大小使用低質量的模式
+            g.InterpolationMode = InterpolationMode.NearestNeighbor;
+
+            g.DrawImage(bitmap1, new Rectangle(10, 10, 120, 120), // source rectangle
+            new Rectangle(0, 0, W, H), // destination rectangle
+            GraphicsUnit.Pixel);
+
+            // 使用高質量模式
+            //g.CompositingQuality = CompositingQuality.HighSpeed;
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            g.DrawImage(bitmap1, new Rectangle(130, 10, 120, 120), new Rectangle(0, 0, W, H), GraphicsUnit.Pixel);
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)
