@@ -23,7 +23,6 @@ namespace vcs_PictureBox6
             string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_computer\burn1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
             pictureBox1.BackColor = Color.Pink;
-
         }
 
         private void Form1_Click(object sender, EventArgs e)

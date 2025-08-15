@@ -163,16 +163,31 @@ namespace vcs_ImageProcessing2_CCRR
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
             g.DrawImage(bitmap1, new Rectangle(130, 10, 120, 120), new Rectangle(0, 0, W, H), GraphicsUnit.Pixel);
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //重設大小
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
+            Bitmap bitmap1 = new Bitmap(filename);
+            Bitmap bitmap2 = ResizeImage(bitmap1, new Size(bitmap1.Width / 2, bitmap1.Height / 2));
+            pictureBox1.Image = bitmap2;
+        }
+
+        //重設大小
+        public Bitmap ResizeImage(Bitmap bmp, Size size)
+        {
+            Bitmap newbmp = new Bitmap(size.Width, size.Height);
+            using (Graphics g = Graphics.FromImage(newbmp))
+            {
+                g.DrawImage(bmp, new Rectangle(Point.Empty, size));
+            }
+            return newbmp;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button4_Click(object sender, EventArgs e)

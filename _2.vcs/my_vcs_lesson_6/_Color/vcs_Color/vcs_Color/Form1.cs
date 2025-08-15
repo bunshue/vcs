@@ -263,11 +263,11 @@ namespace vcs_Color
             pictureBox2.BackColor = Color.Pink;
 
             richTextBox1.Size = new Size(300, 650);
-            richTextBox1.Location = new Point(x_st + dx * 7 + 100, y_st + dy * 1);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1770, 800);
+            this.Size = new Size(1500, 800);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -367,7 +367,6 @@ namespace vcs_Color
                 return (int)Math.Round(IntensityMax * Math.Pow(Color * Factor, Gamma));
             }
         }
-
 
         void getColorFromWaveLength2(double l) // RGB <0,1> <- lambda l <400,700> [nm]
         {
@@ -522,7 +521,6 @@ namespace vcs_Color
         private void button2_Click(object sender, EventArgs e)
         {
             //GetHueExample
-            //GetHueExample
 
             int w = pictureBox1.ClientSize.Width;
             int h = pictureBox1.ClientSize.Height;
@@ -534,15 +532,12 @@ namespace vcs_Color
 
             pictureBox1.Image = bmp;
 
-
             Color color = Color.FromArgb(255, 255, 0, 0);
-
 
             GetHueExample(g, color, 0);
 
             color = Color.FromArgb(255, 200, 0, 100);
             GetHueExample(g, color, 450);
-
         }
 
         public void GetHueExample(Graphics g, Color color, int dx)
