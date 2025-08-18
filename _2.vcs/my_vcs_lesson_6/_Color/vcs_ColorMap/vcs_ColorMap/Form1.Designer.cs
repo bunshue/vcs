@@ -52,6 +52,9 @@
             this.button12 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +65,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(130, 60);
             this.button9.TabIndex = 22;
-            this.button9.Text = "顏色名稱9";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -73,6 +75,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(130, 60);
             this.button8.TabIndex = 20;
+            this.button8.Text = "顏色名稱8";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -83,7 +86,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(130, 60);
             this.button7.TabIndex = 21;
-            this.button7.Text = "顏色名稱7";
+            this.button7.Text = "顏色名稱7 System Color";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -105,7 +108,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(130, 60);
             this.button6.TabIndex = 18;
-            this.button6.Text = "顏色名稱6";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -117,6 +119,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(130, 60);
             this.button5.TabIndex = 17;
+            this.button5.Text = "顏色名稱5";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -149,6 +152,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(130, 60);
             this.button2.TabIndex = 14;
+            this.button2.Text = "顏色名稱2";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -228,7 +232,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(130, 60);
             this.button10.TabIndex = 41;
-            this.button10.Text = "顏色名稱10 System Color";
+            this.button10.Text = "分析一張圖的畫素的顏色";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -273,7 +277,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(130, 60);
             this.button13.TabIndex = 37;
-            this.button13.Text = "顏色名稱13";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -284,7 +287,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(130, 60);
             this.button12.TabIndex = 36;
-            this.button12.Text = "顏色名稱12";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -295,7 +297,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(130, 60);
             this.button11.TabIndex = 35;
-            this.button11.Text = "顏色名稱11";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -308,12 +309,46 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(260, 50);
             this.comboBox1.TabIndex = 70;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label3.Location = new System.Drawing.Point(284, 209);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 19);
+            this.label3.TabIndex = 73;
+            this.label3.Text = "label3";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label2.Location = new System.Drawing.Point(284, 190);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 19);
+            this.label2.TabIndex = 72;
+            this.label2.Text = "label2";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(284, 171);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 19);
+            this.label1.TabIndex = 71;
+            this.label1.Text = "label1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(556, 601);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
@@ -343,6 +378,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -372,6 +408,9 @@
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
 

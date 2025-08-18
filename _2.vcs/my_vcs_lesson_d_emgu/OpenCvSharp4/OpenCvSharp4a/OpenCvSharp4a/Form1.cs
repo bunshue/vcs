@@ -23,15 +23,29 @@ namespace OpenCvSharp4a
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            show_item_location();
         }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 140;
+            dy = 70;
+
+            button1.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 0);
+            button2.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 1);
+            button3.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 2);
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            test();
-        }
-
-        private void test()
         {
             string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
@@ -43,26 +57,28 @@ namespace OpenCvSharp4a
             Cv2.ImShow("src image", src);
             Cv2.ImShow("dst image", dst);
             Cv2.WaitKey(0);
-
-
-            //例2 创建一张大小为400*600颜色为白色背景的三通道彩色图像
-            //int d = 100;
-            //Mat img = new Mat(400, 600, MatType.CV_8UC3, new Scalar(255, 255, 255));
-            ////
-            //Cv2.Line(img, 250, 100, 50, 200, new Scalar(0, 255, 0), 2);
-            //Cv2.Rectangle(img, new Rect(50, 50, d, d + 100), new Scalar(0, 0, 255), -1);
-            //Cv2.Circle(img, new Point(50, 50), 25, new Scalar(255, 255, 0), -1);
-
-            //Cv2.PutText(img, "OpenCV", new Point(220, 100), HersheyFonts.HersheyComplex, 3, Scalar.Blue, 15);
-            //Cv2.PutText(img, "OpenCV", new Point(220, 100), HersheyFonts.HersheyComplex, 3, Scalar.Yellow, 5);
-
-            ////显示图像
-            //Cv2.ImShow("img", img);
-            ////延时等待按键按下
-            //Cv2.WaitKey(0);
         }
 
         private void button2_Click(object sender, EventArgs e)
+        {
+            //例2 创建一张大小为400*600颜色为白色背景的三通道彩色图像
+            int d = 100;
+            Mat img = new Mat(400, 600, MatType.CV_8UC3, new Scalar(255, 255, 255));
+
+            Cv2.Line(img, 250, 100, 50, 200, new Scalar(0, 255, 0), 2);
+            Cv2.Rectangle(img, new Rect(50, 50, d, d + 100), new Scalar(0, 0, 255), -1);
+            Cv2.Circle(img, new OpenCvSharp.Point(50, 50), 25, new Scalar(255, 255, 0), -1);
+
+            Cv2.PutText(img, "OpenCV", new OpenCvSharp.Point(220, 100), HersheyFonts.HersheyComplex, 3, Scalar.Blue, 15);
+            Cv2.PutText(img, "OpenCV", new OpenCvSharp.Point(220, 100), HersheyFonts.HersheyComplex, 3, Scalar.Yellow, 5);
+
+            ////显示图像
+            Cv2.ImShow("img", img);
+            ////延时等待按键按下
+            Cv2.WaitKey(0);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
         {
             string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery\taitung1.jpg";
             string filename2 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery\taitung2.jpg";
@@ -88,7 +104,6 @@ namespace OpenCvSharp4a
             Cv2.ImShow("Image Fusion", img1);
             Cv2.WaitKey(0);
             Cv2.DestroyAllWindows();
-
         }
     }
 }

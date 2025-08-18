@@ -117,6 +117,26 @@ def circularity(cnt):
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 簡易範本
+
+filename_star_white = "C:/_git/vcs/_4.python/opencv/data/_shape/star_white.bmp"
+image0 = cv2.imread(filename_star_white)  # 彩色讀取
+src = image0.copy()
+
+contours, hierarchy = get_image_contours(src)
+
+dst = cv2.drawContours(src, contours, -1, RED, 10)  # 繪製全部輪廓
+
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("找出輪廓")
+plt.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 統一處理多圖，顯示在一起
 
@@ -216,60 +236,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape02.bmp"
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape02b.png"
-
-image0 = cv2.imread(filename)  # 彩色讀取
-image = image0.copy()
-
-h, w, d = image.shape  # d為dimension d=3 全彩 d=1 灰階
-
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
-canny = cv2.Canny(gray, 50, 150)
-canny = cv2.dilate(canny, None, iterations=1)
-
-contours, hierarchy = cv2.findContours(
-    canny, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
-)
-get_contours_info(contours)
-
-RECT, HEXAGON = 0, 1
-
-print("=== 處理前")
-print("矩形點數量：{}".format(len(contours[RECT])))
-print("六邊形點數量：{}".format(len(contours[HEXAGON])))
-
-# approxPolyDP 輪廓近似
-approx_rect = cv2.approxPolyDP(contours[RECT], 30, True)
-approx_hex = cv2.approxPolyDP(contours[HEXAGON], 30, True)
-
-print("=== 處理後")
-print("矩形點數量：{}".format(len(approx_rect)))
-
-cv2.drawContours(image, [approx_rect], -1, RED, 10)  # 繪製全部輪廓
-
-print("六邊形點數量：{}".format(len(approx_hex)))
-
-cv2.drawContours(image, [approx_hex], -1, RED, 10)  # 繪製全部輪廓
-print(approx_hex)
-
-for i in range(len(approx_hex)):
-    print(approx_hex[i])
-
-plt.figure(figsize=(10, 8))
-plt.subplot(211)
-plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(212)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("image")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.bmp"
 # filename = "C:/_git/vcs/_4.python/opencv/data/_Hough/FerrisWheel3.jpg"
 # filename = "data/findContours/lake.jpg"
@@ -348,7 +314,8 @@ for i in range(n):  # 輸出輪廓的屬性
 dst = np.ones(src.shape, dtype=np.uint8) * 127  # 新建一個灰圖
 
 # 依次繪製輪廓
-for i in range(len(contours)):  # 依次繪製輪廓
+n = len(contours)  # 輪廓數量
+for i in range(n):  # 依次繪製輪廓
     img = np.zeros(src.shape, np.uint8)  # 建立輪廓影像
     img = np.ones(src.shape, dtype=np.uint8) * 127  # 新建一個灰圖
     dst = cv2.drawContours(dst, contours, i, colors[i], 5)  # 畫第i個輪廓
@@ -429,7 +396,8 @@ src = image0.copy()
 contours, hierarchy = get_image_contours(src)
 
 # 依次繪製輪廓
-for i in range(len(contours)):
+n = len(contours)  # 輪廓數量
+for i in range(n):
     dst = cv2.drawContours(src, contours, i, colors[i], 5)  # 畫第i個輪廓
 
 plt.subplot(211)
@@ -527,8 +495,10 @@ contours, hierarchy = get_image_contours(src1)
 cnt = contours[0]  # 取得輪廓數據
 
 x, y, w, h = cv2.boundingRect(cnt)  # 邊界矩形(包圍盒)
+
 aspectratio = w / h  # 計算寬高比
 print(f"寬高比 = {aspectratio}")
+
 dst1 = cv2.rectangle(src1, (x, y), (x + w, y + h), GREEN, 2)
 
 # 取得圓中心座標和圓半徑
@@ -673,6 +643,68 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# approxPolyDP 輪廓近似
+
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape02.bmp"
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape02b.png"
+
+image0 = cv2.imread(filename)  # 彩色讀取
+image = image0.copy()
+
+h, w, d = image.shape  # d為dimension d=3 全彩 d=1 灰階
+
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+canny = cv2.Canny(gray, 50, 150)
+canny = cv2.dilate(canny, None, iterations=1)
+
+contours, hierarchy = cv2.findContours(
+    canny, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+)
+get_contours_info(contours)
+
+RECT, HEXAGON = 0, 1
+
+print("=== 處理前")
+print("矩形點數量：{}".format(len(contours[RECT])))
+print("六邊形點數量：{}".format(len(contours[HEXAGON])))
+
+# approxPolyDP 輪廓近似
+epsilon = 30  # 指定的精度
+approx_rect = cv2.approxPolyDP(contours[RECT], epsilon, True)
+
+# approxPolyDP 輪廓近似
+epsilon = 30  # 指定的精度
+approx_hex = cv2.approxPolyDP(contours[HEXAGON], epsilon, True)
+
+print("=== 處理後")
+print("矩形點數量：{}".format(len(approx_rect)))
+
+cv2.drawContours(image, [approx_rect], -1, RED, 10)  # 繪製全部輪廓
+
+print("六邊形點數量：{}".format(len(approx_hex)))
+
+cv2.drawContours(image, [approx_hex], -1, RED, 10)  # 繪製全部輪廓
+print(approx_hex)
+
+for i in range(len(approx_hex)):
+    print(approx_hex[i])
+
+plt.figure(figsize=(10, 8))
+plt.subplot(211)
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(212)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("image")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# approxPolyDP 輪廓近似
+
 image0 = cv2.imread("data/findContours/multiple.jpg")  # 彩色讀取
 src = image0.copy()
 
@@ -685,11 +717,13 @@ n = len(contours)  # 輪廓數量
 src1 = src.copy()  # 複製src影像
 src2 = src.copy()  # 複製src影像
 for i in range(n):
-    # approxPolyDP 輪廓近似
     cnt = contours[i]  # 取得輪廓數據
-    approx = cv2.approxPolyDP(cnt, 3, True)  # epsilon=3
+    # approxPolyDP 輪廓近似
+    epsilon = 3  # 指定的精度
+    approx = cv2.approxPolyDP(cnt, epsilon, True)
     dst1 = cv2.polylines(src1, [approx], True, GREEN, 2)  # dst1
-    approx = cv2.approxPolyDP(cnt, 15, True)  # epsilon=15
+    epsilon = 15  # 指定的精度
+    approx = cv2.approxPolyDP(cnt, epsilon, True)
     dst2 = cv2.polylines(src2, [approx], True, GREEN, 2)  # dst2
 
 plt.subplot(311)
@@ -699,12 +733,12 @@ plt.axis("off")
 
 plt.subplot(312)
 plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))
-plt.title("多邊形框選 epsilon=3")  # epsilon = 3
+plt.title("多邊形框選 epsilon=3")
 plt.axis("off")
 
 plt.subplot(313)
 plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))
-plt.title("多邊形框選 epsilon=15")  # epsilon = 15
+plt.title("多邊形框選 epsilon=15")
 plt.axis("off")
 
 show()
@@ -797,7 +831,8 @@ get_contours_info(contours)
 cnt = contours[0]  # 取得輪廓數據
 
 # approxPolyDP 輪廓近似
-approx = cv2.approxPolyDP(cnt, 3, True)  # epsilon=3
+epsilon = 3  # 指定的精度
+approx = cv2.approxPolyDP(cnt, epsilon, True)
 image = cv2.polylines(image, [approx], True, RED, 5)
 
 # 凸包 -> 凸包缺陷
@@ -871,14 +906,15 @@ plt.axis("off")
 src2 = image.copy()  # 複製src影像
 
 # approxPolyDP 輪廓近似
-approx = cv2.approxPolyDP(cnt, 10, True)  # epsilon=10
+epsilon = 10  # 指定的精度
+approx = cv2.approxPolyDP(cnt, epsilon, True)
 dst2 = cv2.polylines(src2, [approx], True, GREEN, 2)  # 近似多邊形連線
 isConvex = cv2.isContourConvex(approx)  # 凸檢測, 是否凸形
 print(f"近似多邊形是凸形 = {isConvex}")
 
 plt.subplot(313)
 plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))
-plt.title("近似多邊形包圍")  # epsilon = 10
+plt.title("近似多邊形包圍 epsilon=10")
 plt.axis("off")
 
 show()
@@ -1000,8 +1036,9 @@ cnt = contours[0]  # 取得輪廓數據
 con_area = cv2.contourArea(cnt)  # 計算輪廓面積
 print("輪廓面積 :", con_area)
 
+# 輸出矩形格式
 x, y, w, h = cv2.boundingRect(cnt)  # 邊界矩形(包圍盒)
-dst = cv2.rectangle(image, (x, y), (x + w, y + h), YELLOW, 2)
+dst = cv2.rectangle(image, (x, y), (x + w, y + h), YELLOW, 2)  # 繪製四邊形
 
 plt.subplot(211)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
@@ -1389,7 +1426,6 @@ contoursImg = np.zeros(image.shape, np.uint8)
 contoursImg = np.ones(image.shape, dtype=np.uint8) * 127  # 新建一個灰圖
 
 n = len(contours)  # 輪廓數量
-
 for i in range(n):
     cnt = contours[i]  # 取得輪廓數據
     cv2.drawContours(contoursImg, contours, i, 255, 2)  # 繪製輪廓  # 畫第i個輪廓
@@ -1706,9 +1742,9 @@ contours, hierarchy = cv2.findContours(
     binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
 )
 
-n = len(contours)  # 輪廓數量
-
 contoursImg = []
+
+n = len(contours)  # 輪廓數量
 for i in range(n):
     temp = np.zeros(image.shape, np.uint8)
     temp = np.ones(image.shape, dtype=np.uint8) * 127  # 新建一個灰圖
@@ -1772,9 +1808,9 @@ ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值�
 
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
-n = len(contours)  # 輪廓數量
-
 contoursImg = []
+
+n = len(contours)  # 輪廓數量
 for i in range(n):
     temp = np.zeros(image.shape, np.uint8)
     temp = np.ones(image.shape, dtype=np.uint8) * 127  # 新建一個灰圖
@@ -1812,9 +1848,9 @@ ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值�
 
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
-n = len(contours)  # 輪廓數量
-
 contoursImg = []
+
+n = len(contours)  # 輪廓數量
 for i in range(n):
     cnt = contours[i]  # 取得輪廓數據
     con_area = cv2.contourArea(cnt)  # 計算輪廓面積
@@ -1854,9 +1890,9 @@ ret, binary = cv2.threshold(
 
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
-n = len(contours)  # 輪廓數量
-
 contoursImg = []
+
+n = len(contours)  # 輪廓數量
 for i in range(n):
     cnt = contours[i]  # 取得輪廓數據
     temp = np.zeros(image.shape, np.uint8)
@@ -2019,8 +2055,9 @@ targets = [target - np.min(target, 0, keepdims=True) for target in targets]
 
 # approxPolyDP 輪廓近似
 patterns_simple = [cv2.approxPolyDP(pattern, 5, True) for pattern in patterns]
-targets_simple = [cv2.approxPolyDP(target, 8, True) for target in targets]
 
+# approxPolyDP 輪廓近似
+targets_simple = [cv2.approxPolyDP(target, 8, True) for target in targets]
 
 for method in [1, 2, 3]:
     method_str = "CONTOURS_MATCH_I{}".format(method)
@@ -2106,11 +2143,7 @@ contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_S
 # ---------------返回頂點及邊長------------------
 cnt = contours[0]  # 取得輪廓數據
 x, y, w, h = cv2.boundingRect(cnt)  # 邊界矩形(包圍盒)
-print("頂點及長寬的點形式:")
-print("x=", x)
-print("y=", y)
-print("w=", w)
-print("h=", h)
+
 # ---------------僅有一個返回值的情況------------------
 cnt = contours[0]  # 取得輪廓數據
 rect = cv2.boundingRect(cnt)  # 邊界矩形(包圍盒)
@@ -2313,11 +2346,11 @@ contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_S
 
 # ----------------epsilon=0.1*周長-------------------------------
 adp = image.copy()
+
 cnt = contours[0]  # 取得輪廓數據
-epsilon = 0.1 * cv2.arcLength(cnt, True)  # 計算輪廓周長
 
 # approxPolyDP 輪廓近似
-cnt = contours[0]  # 取得輪廓數據
+epsilon = 0.1 * cv2.arcLength(cnt, True)  # 計算輪廓周長 # 指定的精度
 approx = cv2.approxPolyDP(cnt, epsilon, True)
 
 adp = cv2.drawContours(adp, [approx], 0, RED, 10)  # 繪製全部輪廓
@@ -2328,11 +2361,11 @@ plt.title("result0.1")
 
 # ----------------epsilon=0.09*周長-------------------------------
 adp = image.copy()
+
 cnt = contours[0]  # 取得輪廓數據
-epsilon = 0.09 * cv2.arcLength(cnt, True)  # 計算輪廓周長
 
 # approxPolyDP 輪廓近似
-cnt = contours[0]  # 取得輪廓數據
+epsilon = 0.09 * cv2.arcLength(cnt, True)  # 計算輪廓周長
 approx = cv2.approxPolyDP(cnt, epsilon, True)
 
 adp = cv2.drawContours(adp, [approx], 0, RED, 10)  # 繪製全部輪廓
@@ -2343,11 +2376,11 @@ plt.title("result0.09")
 
 # ----------------epsilon=0.055*周長-------------------------------
 adp = image.copy()
+
 cnt = contours[0]  # 取得輪廓數據
-epsilon = 0.055 * cv2.arcLength(cnt, True)  # 計算輪廓周長
 
 # approxPolyDP 輪廓近似
-cnt = contours[0]  # 取得輪廓數據
+epsilon = 0.055 * cv2.arcLength(cnt, True)  # 計算輪廓周長
 approx = cv2.approxPolyDP(cnt, epsilon, True)
 
 adp = cv2.drawContours(adp, [approx], 0, RED, 10)  # 繪製全部輪廓
@@ -2358,11 +2391,11 @@ plt.title("result0.055")
 
 # ----------------epsilon=0.05*周長-------------------------------
 adp = image.copy()
+
 cnt = contours[0]  # 取得輪廓數據
-epsilon = 0.05 * cv2.arcLength(cnt, True)  # 計算輪廓周長
 
 # approxPolyDP 輪廓近似
-cnt = contours[0]  # 取得輪廓數據
+epsilon = 0.05 * cv2.arcLength(cnt, True)  # 計算輪廓周長
 approx = cv2.approxPolyDP(cnt, epsilon, True)
 
 adp = cv2.drawContours(adp, [approx], 0, RED, 10)  # 繪製全部輪廓
@@ -2373,11 +2406,11 @@ plt.title("result0.05")
 
 # ----------------epsilon=0.02*周長-------------------------------
 adp = image.copy()
+
 cnt = contours[0]  # 取得輪廓數據
-epsilon = 0.02 * cv2.arcLength(cnt, True)  # 計算輪廓周長
 
 # approxPolyDP 輪廓近似
-cnt = contours[0]  # 取得輪廓數據
+epsilon = 0.02 * cv2.arcLength(cnt, True)  # 計算輪廓周長
 approx = cv2.approxPolyDP(cnt, epsilon, True)
 
 adp = cv2.drawContours(adp, [approx], 0, RED, 10)  # 繪製全部輪廓
@@ -2518,11 +2551,11 @@ plt.title("result1")
 
 # ------------逼近多邊形--------------------
 image2 = o.copy()
+
 cnt = contours[0]  # 取得輪廓數據
-epsilon = 0.01 * cv2.arcLength(cnt, True)  # 計算輪廓周長
 
 # approxPolyDP 輪廓近似
-cnt = contours[0]  # 取得輪廓數據
+epsilon = 0.01 * cv2.arcLength(cnt, True)  # 計算輪廓周長
 approx = cv2.approxPolyDP(cnt, epsilon, True)
 
 image2 = cv2.drawContours(image2, [approx], 0, RED, 10)  # 繪製全部輪廓
@@ -3243,6 +3276,7 @@ cv2.destroyAllWindows()
 for cnt in contours:
     x, y, w, h = cv2.boundingRect(cnt)  # 邊界矩形(包圍盒)
     image = cv2.rectangle(image10, (x, y), (x + w, y + h), GREEN, 2)  # 畫綠色框
+
 cv2.imshow("contours", image10)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -3277,9 +3311,8 @@ closed：用於指示曲線是否封閉
 cv2.approxPolyDP()函數是輪廓近似函數，是opencv中對指定的點集進行多邊形逼近的函數，其逼近的精度可通過參數設置
 cv2.approxPolyDP(curve, epsilon, closed, approxCurve=None)
 curve：表示輸入的點集
-epslion：指定的精度，也即原始曲線與近似曲線之間的最大距離，不過這個值我們一般按照周長的大小進行比較
+epsilon：指定的精度，也即原始曲線與近似曲線之間的最大距離，不過這個值我們一般按照周長的大小進行比較
 close：若為True，則說明近似曲線為閉合的；反之，若為False，則斷開
-
 """
 
 # 找模板實作比對
@@ -3309,6 +3342,7 @@ contours_list, hierarchy = cv2.findContours(
 for cnt in contours_list:
     x, y, w, h = cv2.boundingRect(cnt)  # 邊界矩形(包圍盒)
     cv2.rectangle(image10, (x, y), (x + w, y + h), (0, 0, 255), 2)  # 畫紅色框
+
 cv2.imshow("Contours marked on RGB image", image10)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -3377,41 +3411,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------")  # 30個
-
-"""
-    for cnt in contours:
-        con_area = cv2.contourArea(cnt)  # 計算輪廓面積
-        # print("輪廓面積 :", con_area)
-        if con_area > 300:
-            x, y, w, h = cv2.boundingRect(cnt)  # 輸出矩形格式# 邊界矩形(包圍盒)
-            image = cv2.rectangle(image, (x, y), (x + w, y + h), RED, 3)  # 繪製四邊形
-
-    for cnt in contours:
-        con_area = cv2.contourArea(cnt)  # 計算輪廓面積
-        # print("輪廓面積 :", con_area)
-        # 如果面積大於 300 再標記，避免標記到背景中太小的東西
-        if con_area > 300:
-            for i in range(len(cnt)):
-                if i > 0 and i < len(cnt) - 1:
-                    # 從第二個點開始畫線
-                    image = cv2.line(
-                        image,
-                        (cnt[i - 1][0][0], cnt[i - 1][0][1]),
-                        (cnt[i][0][0], cnt[i][0][1]),
-                        RED,
-                        3,
-                    )
-                elif i == len(cnt) - 1:
-                    # 如果是最後一個點，與第一個點連成一線
-                    image = cv2.line(
-                        image,
-                        (cnt[i][0][0], cnt[i][0][1]),
-                        (cnt[0][0][0], cnt[0][0][1]),
-                        RED,
-                        3,
-                    )
-
-"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3571,3 +3570,13 @@ contours, hierarchy = cv2.findContours(
 
 cv2.putText(image, text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, BLUE, 2)  # 藍色字體
 cv2.putText(image, text, (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, BLUE, 2)  # 藍色字體
+
+
+"""
+lineType = cv2.LINE_AA
+lineType：绘制线段的线性，默认为 LINE_8
+cv.FILLED：内部填充（实心图形）
+cv.LINE_4：4 邻接线型
+cv.LINE_8：8 邻接线型
+cv.LINE_AA：抗锯齿线型，图像更平滑
+"""
