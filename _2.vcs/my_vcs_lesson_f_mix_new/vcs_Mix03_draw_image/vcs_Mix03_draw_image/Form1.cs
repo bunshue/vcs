@@ -794,6 +794,66 @@ namespace vcs_Mix03_draw_image
         private void button22_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            // Make the Bitmap.
+            Bitmap bm = new Bitmap(300, 300);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                // Clear.
+                gr.SmoothingMode = SmoothingMode.AntiAlias;
+                gr.Clear(Color.White);
+                gr.ScaleTransform(15f, -15f, System.Drawing.Drawing2D.MatrixOrder.Append);
+                gr.TranslateTransform(bm.Width * 0.5f, bm.Height * 0.5f,
+                    System.Drawing.Drawing2D.MatrixOrder.Append);
+
+                // 畫坐標軸
+                using (Pen axis_pen = new Pen(Color.LightGray, 0))
+                {
+                    gr.DrawLine(axis_pen, -8, 0, 8, 0);
+                    gr.DrawLine(axis_pen, 0, -8, 0, 8);
+                    for (int i = -8; i <= 8; i++)
+                    {
+                        gr.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
+                        gr.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
+                    }
+                }
+
+                // Graph the equation.
+                float dx = 2f / bm.Width;
+                float dy = 2f / bm.Height;
+                //PlotFunction(gr, func, -8, -8, 8, 8, dx, dy);
+                //        private void PlotFunction(Graphics gr, Func<float, float, float> func,
+                //float xmin, float ymin, float xmax, float ymax,
+                //float dx, float dy)
+                float xmin = -8;
+                float ymin = -8;
+                float xmax = 8;
+                float ymax = 8;
+
+                // Plot the function.
+                using (Pen thin_pen = new Pen(Color.Black, 0))
+                {
+                    // Horizontal comparisons.
+                    for (float x = xmin; x <= xmax; x += dx)
+                    {
+                        for (float y = ymin + dy; y <= ymax; y += dy)
+                        {
+                            //gr.DrawLine(thin_pen, x, y - dy, x, y);
+                        }
+                    } // Horizontal comparisons.
+
+                    // Vertical comparisons.
+                    for (float y = ymin + dy; y <= ymax; y += dy)
+                    {
+                        for (float x = xmin + dx; x <= xmax; x += dx)
+                        {
+                            //gr.DrawLine(thin_pen, x - dx, y, x, y);
+                        }
+                    }
+                }
+            }
+
+            pictureBox1.Image = bm;
         }
 
         //圖片壓縮、縮略圖生成代碼

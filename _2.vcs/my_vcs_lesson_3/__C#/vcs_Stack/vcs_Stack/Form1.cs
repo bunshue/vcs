@@ -128,7 +128,7 @@ namespace vcs_Stack
             // 打印集合中的值
             Console.Write("Stack values:");
             PrintValues(myStack, '\t');
-            
+
 
         }
 
@@ -139,9 +139,48 @@ namespace vcs_Stack
             Console.WriteLine();
         }
 
+        private class BranchInfo
+        {
+            public float X, Y, Theta;
+            public BranchInfo(float x, float y, float theta)
+            {
+                X = x;
+                Y = y;
+                Theta = theta;
+            }
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
+            //Stack 使用範例3
+            Stack<BranchInfo> branches = new Stack<BranchInfo>();
 
+            int x = 10;
+            int y = 10;
+            float theta = 12.34f;
+            branches.Push(new BranchInfo(x, y, theta));
+
+            x = 10;
+            y = 10;
+            theta = 12.34f;
+            branches.Push(new BranchInfo(x, y, theta));
+
+            x = 10;
+            y = 10;
+            theta = 12.34f;
+            branches.Push(new BranchInfo(x, y, theta));
+
+            richTextBox1.Text += "共有 :" + branches.Count.ToString() + "\n";
+
+            richTextBox1.Text += "pop 出來\n";
+            while (branches.Count > 0)
+            {
+                BranchInfo branch = branches.Pop();
+                richTextBox1.Text += branch.ToString() + "\n";
+                richTextBox1.Text += branch.X.ToString() + "\n";
+                richTextBox1.Text += branch.Y.ToString() + "\n";
+                richTextBox1.Text += branch.Theta.ToString() + "\n";
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
