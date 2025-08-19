@@ -67,6 +67,10 @@ filename_lena_gray = "C:/_git/vcs/_4.python/opencv/data/lena_gray.bmp"
 filename_barbara = "C:/_git/vcs/_4.python/opencv/data/barbara.bmp"
 filename_gray = "C:/_git/vcs/_4.python/opencv/data/threshold/gray_scale.jpg"
 
+filename_star_white = "C:/_git/vcs/_4.python/opencv/data/_shape/star_white.bmp"
+filename_star_blue = "C:/_git/vcs/_4.python/opencv/data/_shape/star_blue.bmp"
+filename_star_silver = "C:/_git/vcs/_4.python/opencv/data/_shape/star_silver.bmp"
+
 video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 print("------------------------------------------------------------")  # 60個

@@ -28,42 +28,18 @@ namespace vcs_ColorPicker1
         {
             this.TopMost = true;
 
-            if (flag_small_mode == true)
-            {
-                checkBox1.Visible = false;
-                panel1.Visible = false;
-                label1.Visible = false;
-                label2.Visible = false;
-                label3.Visible = false;
-                txtColor.Visible = false;
-                txtPoint.Visible = false;
-                txtRGB.Visible = false;
-
-                //設定執行後的表單起始位置
-                this.StartPosition = FormStartPosition.Manual;
-                if (Screen.PrimaryScreen.Bounds.Width < 1920)
-                    this.Location = new System.Drawing.Point(850, 0);  //SD
-                else
-                    this.Location = new System.Drawing.Point(1200, 0);  //FHD
-
-                this.FormBorderStyle = FormBorderStyle.None;
-                
-                this.Size = new Size(240, 80);
-
-                g = this.CreateGraphics();
-            }
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked == true)
-            {
-                this.TopMost = true;
-            }
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            if (Screen.PrimaryScreen.Bounds.Width < 1920)
+                this.Location = new System.Drawing.Point(850, 0);  //SD
             else
-            {
-                this.TopMost = false;
-            }
+                this.Location = new System.Drawing.Point(1200, 0);  //FHD
+
+            this.FormBorderStyle = FormBorderStyle.None;
+
+            this.Size = new Size(240, 80);
+
+            g = this.CreateGraphics();
         }
 
         [DllImport("gdi32.dll")]
@@ -190,53 +166,41 @@ namespace vcs_ColorPicker1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (flag_small_mode == true)
+            Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
+            Color cl = GetColor(pt);
+            if (cl_old != cl)
             {
-                Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
-                Color cl = GetColor(pt);
-                if (cl_old != cl)
-                {
-                    this.Size = new Size(240, 80);
-                    cnt = 0;
-                    g.Clear(BackColor);
+                this.Size = new Size(240, 80);
+                cnt = 0;
+                g.Clear(BackColor);
 
-                    g.DrawString(cl.R.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5, 0));
-                    g.DrawString(cl.G.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Lime), new PointF(5 + 75, 0));
-                    g.DrawString(cl.B.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 150, 0));
+                g.DrawString(cl.R.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5, 0));
+                g.DrawString(cl.G.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Lime), new PointF(5 + 75, 0));
+                g.DrawString(cl.B.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 150, 0));
 
-                    cl_old = cl;
+                cl_old = cl;
 
-                    int rr = cl.R;
-                    int gg = cl.G;
-                    int bb = cl.B;
+                int rr = cl.R;
+                int gg = cl.G;
+                int bb = cl.B;
 
-                    RGB pp = new RGB((byte)rr, (byte)gg, (byte)bb);
-                    YUV yy = new YUV();
-                    yy = RGBToYUV(pp);
+                RGB pp = new RGB((byte)rr, (byte)gg, (byte)bb);
+                YUV yy = new YUV();
+                yy = RGBToYUV(pp);
 
-                    g.DrawString(((int)yy.Y).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Yellow), new PointF(5, 35));
-                    g.DrawString(((int)yy.U).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 75, 35));
-                    g.DrawString(((int)yy.V).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5 + 150, 35));
-                }
-                else
-                {
-                    cnt++;
-                    if ((cnt > 25) && (cnt % 5) == 0)
-                    {
-                        this.Size = new Size(240, 55);
-                        g.Clear(BackColor);
-                        g.DrawString(DateTime.Now.ToString("HH:mm:ss"), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(20, 5));
-                    }
-                }
+                g.DrawString(((int)yy.Y).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Yellow), new PointF(5, 35));
+                g.DrawString(((int)yy.U).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 75, 35));
+                g.DrawString(((int)yy.V).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5 + 150, 35));
             }
             else
             {
-                txtPoint.Text = Control.MousePosition.X.ToString() + ", " + Control.MousePosition.Y.ToString();
-                Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
-                Color cl = GetColor(pt);
-                panel1.BackColor = cl;
-                txtRGB.Text = cl.R.ToString() + ", " + cl.G.ToString() + ", " + cl.B.ToString();
-                txtColor.Text = ColorTranslator.ToHtml(cl).ToString();
+                cnt++;
+                if ((cnt > 25) && (cnt % 5) == 0)
+                {
+                    this.Size = new Size(240, 55);
+                    g.Clear(BackColor);
+                    g.DrawString(DateTime.Now.ToString("HH:mm:ss"), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(20, 5));
+                }
             }
         }
 

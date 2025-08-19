@@ -65,6 +65,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(130, 60);
             this.button9.TabIndex = 22;
+            this.button9.Text = "顏色名稱9";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -277,6 +278,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(130, 60);
             this.button13.TabIndex = 37;
+            this.button13.Text = "波長轉RGB RGB轉波長";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 

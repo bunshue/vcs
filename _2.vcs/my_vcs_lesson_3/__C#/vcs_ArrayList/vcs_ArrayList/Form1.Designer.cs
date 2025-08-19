@@ -52,9 +52,9 @@
             // 
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(450, 0);
+            this.richTextBox1.Location = new System.Drawing.Point(718, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(288, 580);
+            this.richTextBox1.Size = new System.Drawing.Size(288, 594);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -214,7 +214,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(651, 533);
+            this.bt_clear.Location = new System.Drawing.Point(877, 538);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(75, 35);
             this.bt_clear.TabIndex = 16;
@@ -237,7 +237,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(738, 580);
+            this.ClientSize = new System.Drawing.Size(1006, 594);
             this.Controls.Add(this.button12);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button11);

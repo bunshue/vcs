@@ -44,9 +44,10 @@ namespace OpenCvSharp4a
             button3.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 2);
         }
 
-
         private void button1_Click(object sender, EventArgs e)
         {
+            //Canny邊緣檢測
+
             string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
             //例1
@@ -57,13 +58,18 @@ namespace OpenCvSharp4a
             Cv2.ImShow("src image", src);
             Cv2.ImShow("dst image", dst);
             Cv2.WaitKey(0);
+            Cv2.DestroyAllWindows();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //例2 创建一张大小为400*600颜色为白色背景的三通道彩色图像
+            //OpenCV 畫圖
+            //创建一张大小为640*480颜色为白色背景的三通道彩色图像
+
+            int W = 640;
+            int H = 480;
             int d = 100;
-            Mat img = new Mat(400, 600, MatType.CV_8UC3, new Scalar(255, 255, 255));
+            Mat img = new Mat(H, W, MatType.CV_8UC3, new Scalar(255, 255, 255));
 
             Cv2.Line(img, 250, 100, 50, 200, new Scalar(0, 255, 0), 2);
             Cv2.Rectangle(img, new Rect(50, 50, d, d + 100), new Scalar(0, 0, 255), -1);
@@ -72,10 +78,9 @@ namespace OpenCvSharp4a
             Cv2.PutText(img, "OpenCV", new OpenCvSharp.Point(220, 100), HersheyFonts.HersheyComplex, 3, Scalar.Blue, 15);
             Cv2.PutText(img, "OpenCV", new OpenCvSharp.Point(220, 100), HersheyFonts.HersheyComplex, 3, Scalar.Yellow, 5);
 
-            ////显示图像
             Cv2.ImShow("img", img);
-            ////延时等待按键按下
             Cv2.WaitKey(0);
+            Cv2.DestroyAllWindows();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -100,7 +105,6 @@ namespace OpenCvSharp4a
             //將融合後的圖像複製回原圖
             dst.CopyTo(img1[roi]);
 
-            //顯示結果
             Cv2.ImShow("Image Fusion", img1);
             Cv2.WaitKey(0);
             Cv2.DestroyAllWindows();
