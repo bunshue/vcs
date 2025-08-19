@@ -5,35 +5,7 @@ OpenCV + ML
 """
 print("------------------------------------------------------------")  # 60個
 
-import cv2
-filename_lena_color = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
-filename_lena_gray = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-
-print("------------------------------------------------------------")  # 60個
-
-# 共同
-import os
-import sys
-import time
-import math
-import random
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-plt.rcParams["font.size"] = 12  # 設定字型大小
-
-
-def show():
-    plt.show()
-    pass
-
+from opencv_common import *
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -89,7 +61,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 讀取樣本（特征）圖像的值
-s = "images\\"  # 圖像所在路徑
+s = "data\\images\\"  # 圖像所在路徑
 num = 100  # 共有樣本數量
 row = 240  # 每個數字圖像的行數
 col = 240  # 每個數字圖像的列數
@@ -114,7 +86,7 @@ for ni in range(0, num):
 f = feature  # 簡化變量名稱
 
 #####計算當前待識別圖像的特征值
-o = cv2.imread("images\\test\\5.bmp", 0)  # 讀取待測圖像
+o = cv2.imread("data\\images\\test\\5.bmp", 0)  # 讀取待測圖像
 ##讀取圖像值
 of = np.zeros((round(row / 5), round(col / 5)))  # 用來存儲測試圖像的特征值
 for nr in range(0, row):
@@ -194,7 +166,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 讀取樣本（特征）圖像的值
-s = "images\\"  # 圖像所在路徑
+s = "data\\images\\"  # 圖像所在路徑
 num = 100  # 共有樣本數量
 row = 240  # 每個數字圖像的行數
 col = 240  # 每個數字圖像的列數
@@ -226,7 +198,7 @@ trainLabels = [int(i / 10) for i in range(0, 100)]
 trainLabels = np.asarray(trainLabels)
 # print(*trainLabels)   #打印測試看看標簽值
 ##讀取圖像值
-o = cv2.imread("images\\test\\5.bmp", 0)  # 讀取待測圖像
+o = cv2.imread("data\\images\\test\\5.bmp", 0)  # 讀取待測圖像
 of = np.zeros((round(row / 5), round(col / 5)))  # 用來存儲測試圖像的特征值
 for nr in range(0, row):
     for nc in range(0, col):
@@ -429,8 +401,8 @@ digits.png 2000 X 1000 橫100字 直50字 每字 20X20
 手寫數字0~9, 每個數字重複寫500次, 共5000個手寫數字
 """
 img = cv2.imread("data/digits.png")
-cv2.imshow("digits", img)
 
+cv2.imshow("digits", img)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -476,7 +448,11 @@ with np.load("tmp_knn_digit.npz") as data:
 
 # 讀取數字影像
 test_img = cv2.imread("data/8.png", cv2.IMREAD_GRAYSCALE)
+
 cv2.imshow("img", test_img)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
 img = cv2.resize(test_img, (20, 20)).reshape((1, 400))
 test_data = img.astype(np.float32)  # 將資料轉成foat32
 
@@ -491,11 +467,10 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
@@ -503,6 +478,8 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 

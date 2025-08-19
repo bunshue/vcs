@@ -664,6 +664,7 @@ for i, (x0, y0, x1, y1) in enumerate(rects):
     filtered_results.append(X_filtered)
 
 fig, axes = pl.subplots(2, 3, figsize=(9, 6))
+
 axes = axes.ravel()
 axes[0].imshow(X_mag, cmap=pl.cm.gray)
 axes[1].imshow(fshift, cmap=pl.cm.gray)
@@ -686,71 +687,9 @@ for i, (x0, y0, x1, y1) in enumerate(rects):
 for ax, result in zip(axes[2:], filtered_results):
     ax.imshow(result, cmap=pl.cm.gray)
 
-for ax in axes:
-    ax.set_axis_off()
-
-fig.subplots_adjust(0.01, 0.01, 0.99, 0.99, 0.02, 0.02)
-
 show()
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-seq = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]  # 時間值
-water = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]  # 水
-sugar = [2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0]  # 糖
-grass = [4, 0, 0, 4, 0, 0, 4, 0, 0, 4, 0, 0]  # 仙草
-pearl = [3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0]  # 黑珍珠
-
-plt.plot(seq, water, "-o", label="水")  # 繪含標記的water折線圖
-plt.plot(seq, sugar, "-x", label="糖")  # 繪含標記的sugar折線圖
-plt.plot(seq, grass, "-s", label="仙草")  # 繪含標記的grass折線圖
-plt.plot(seq, pearl, "-p", label="黑珍珠")  # 繪含標記的pearl折線圖
-
-plt.axis([0, 12, 0, 5])  # 建立軸大小
-plt.xlabel("時間軸")  # 時間軸
-plt.ylabel("份數")  # 份數
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-copies = [1, 2, 4, 3]  # 份數
-N = len(copies)
-x = np.arange(N)
-width = 0.35
-plt.bar(x, copies, width)  # 直條圖
-plt.xlabel("頻率")  # 頻率
-plt.ylabel("份數")  # 份數
-plt.xticks(x, ("1", "2", "3", "4"))
-plt.grid(axis="y")
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-start = 0
-end = 1
-x = np.linspace(start, end, 500)  # x 軸區間
-y = np.sin(2 * np.pi * 4 * x)  # 建立正弦曲線
-
-plt.plot(x, y)
-plt.xlabel("時間(秒)")  # 時間
-plt.ylabel("振幅")  # 振幅
-plt.title("正弦曲線", fontsize=16)  # 標題
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-amplitude = [0, 0, 0, 1, 0, 0, 0]
-N = len(amplitude)
-x = np.arange(N)
-width = 0.3
-plt.bar(x, amplitude, width)  # 直條圖
-plt.xlabel("頻率")  # 頻率
-plt.ylabel("振幅")  # 振幅
-plt.xticks(x, ("1", "2", "3", "4", "5", "6", "7"))
-plt.grid(axis="y")
-show()
-
 print("------------------------------------------------------------")  # 60個
 
 start = 0  # 起始時間
@@ -768,7 +707,7 @@ amplitude1 = np.sin(2 * np.pi * freq1 * time)
 amplitude2 = np.sin(2 * np.pi * freq2 * time)
 
 figure, axis = plt.subplots(3, 1)
-plt.subplots_adjust(hspace=1)
+# plt.subplots_adjust(hspace=1)
 
 # 時間域的 sin 波 1
 axis[0].set_title("頻率是 5 Hz的 sin 波")
@@ -883,6 +822,8 @@ def phaseSpectrum(fft2):
 
 image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
 cv2.imshow("image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 # 快速傅里葉變換
 fft2 = fft2Image2(image)
@@ -892,17 +833,24 @@ amplitude = amplitudeSpectrum(fft2)
 amc = np.copy(amplitude)
 amc[amc > 255] = 255
 amc = amc.astype(np.uint8)
+
 # cv2.imshow("originam",amc)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
 
 # 幅度譜的灰度級顯示
 ampSpectrum = graySpectrum(amplitude)
 ampSpectrum *= 255
 ampSpectrum = ampSpectrum.astype(np.uint8)
 cv2.imshow("amplitudeSpectrum", ampSpectrum)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 # 相位譜的灰度級顯示
 phaseSpe = phaseSpectrum(fft2)
 cv2.imshow("phaseSpectrum", phaseSpe)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 # 傅里葉幅度譜的中心化
 
@@ -925,7 +873,11 @@ amSpe = amplitudeSpectrum(imagefft2)
 
 # 幅度譜的灰度級顯示
 graySpe = graySpectrum(amSpe)
+
 cv2.imshow("amSpe", graySpe)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
 graySpe *= 255
 graySpe = graySpe.astype(np.uint8)
 
@@ -1047,8 +999,8 @@ saliencymap = saliencymap / np.max(saliencymap)
 saliencymap = np.power(saliencymap, 0.5)
 saliencymap = np.round(saliencymap * 255)
 saliencymap = saliencymap.astype(np.uint8)
-cv2.imshow("saliencymap", saliencymap)
 
+cv2.imshow("saliencymap", saliencymap)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -1124,7 +1076,10 @@ def createLPFilter(shape, center, radius, lpType=0, n=2):
 
 
 image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+
 cv2.imshow("image", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 # 第二步：每一元素乘以 (-1)^(r+c)
 fimage = np.zeros(image.shape, np.float32)
@@ -1143,7 +1098,10 @@ amplitude = amplitudeSpectrum(fImagefft2)
 
 # 傅里葉譜的灰度級顯示
 spectrum = graySpectrum(amplitude)
+
 cv2.imshow("originalSpectrum", spectrum)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 # 找到傅里葉譜最大值的位置
 minValue, maxValue, minLoc, maxLoc = cv2.minMaxLoc(amplitude)
@@ -1236,7 +1194,10 @@ def amplitudeSpectrum(fft2):
 
 
 I = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+
 cv2.imshow("I", I)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 # 第二步：取對數
 lI = np.log(I + 1.0)
@@ -1443,49 +1404,28 @@ print("------------------------------------------------------------")  # 60個
 
 print("np.fft 04 觀察訊號的頻譜")
 
+sampling_rate, NNNN = 8000, 512
+T = np.arange(0, 1.0, 1.0 / sampling_rate)
+
 # 156.25Hz和234.375Hz的波形和頻譜
 f1 = 156.25  # Hz
 f2 = 234.375  # Hz
-sampling_rate, NNNN = 8000, 512
-T = np.arange(0, 1.0, 1.0 / sampling_rate)
 y = np.sin(2 * np.pi * f1 * T) + 2 * np.sin(2 * np.pi * f2 * T)
 
-plt.figure(figsize=(8, 8))
-
 XS = y[:NNNN]
 xf = np.fft.rfft(XS) / NNNN
 freqs = np.linspace(0, sampling_rate / 2, NNNN // 2 + 1)
 xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))
 
-plt.subplot(411)
+plt.figure(figsize=(10, 6))
+plt.subplot(211)
 plt.plot(T[:NNNN], XS)
 plt.xlabel("時間(秒)")
 
-plt.subplot(412)
+plt.subplot(212)
 plt.plot(freqs, xfp)
 plt.xlabel("頻率(Hz)")
 plt.xlim(0, 1000)  # 設定 x 軸邊界
-plt.subplots_adjust(hspace=0.4)
-
-print("------------------------------")  # 30個
-
-# 非完整周期（200Hz和300Hz）的正弦波經由FFT變換之後出現頻譜洩漏
-y = np.sin(2 * np.pi * 200 * T) + 2 * np.sin(2 * np.pi * 300 * T)
-
-XS = y[:NNNN]
-xf = np.fft.rfft(XS) / NNNN
-freqs = np.linspace(0, sampling_rate / 2, NNNN // 2 + 1)
-xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))
-
-plt.subplot(413)
-plt.plot(T[:NNNN], XS)
-plt.xlabel("時間(秒)")
-
-plt.subplot(414)
-plt.plot(freqs, xfp)
-plt.xlabel("頻率(Hz)")
-plt.xlim(0, 1000)  # 設定 x 軸邊界
-plt.subplots_adjust(hspace=0.4)
 
 show()
 
@@ -1494,18 +1434,17 @@ print("------------------------------------------------------------")  # 60個
 
 print("np.fft 05")
 
-plt.figure(figsize=(6, 6))
+sampling_rate, NNNN = 8000, 512
+T = np.arange(0, 1.0, 1.0 / sampling_rate)
 
 # 50Hz正弦波的512點FFT所計算的頻譜的實際波形
-plt.subplot(311)
+plt.figure(figsize=(10, 6))
+plt.subplot(211)
 T = np.arange(0, 1.0, 1.0 / 8000)
 y = np.sin(2 * np.pi * 50 * T)[:512]
 plt.plot(np.hstack([y, y, y]))
 
-plt.subplot(312)
-
-
-plt.subplot(313)
+plt.subplot(212)
 T = np.arange(0, 1.0, 1.0 / 8000)
 y = np.sin(2 * np.pi * 50 * T)[:512]
 plt.plot(np.hstack([y, y, y]))
@@ -1514,9 +1453,9 @@ show()
 
 print("------------------------------")  # 30個
 
-sampling_rate, NNNN = 8000, 512
-T = np.arange(0, 1.0, 1.0 / sampling_rate)
-y = np.sin(2 * np.pi * 200 * T) + 2 * np.sin(2 * np.pi * 300 * T)
+f1 = 200  # Hz
+f2 = 300  # Hz
+y = np.sin(2 * np.pi * f1 * T) + 2 * np.sin(2 * np.pi * f2 * T)
 
 XS = y[:NNNN]
 
@@ -1526,14 +1465,13 @@ freqs = np.linspace(0, sampling_rate // 2, NNNN // 2 + 1)
 
 xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))
 
-plt.figure(figsize=(8, 4))
+plt.figure(figsize=(10, 6))
 plt.plot(freqs, xfp, label="矩形窗")
 
 plt.xlabel("頻率(Hz)")
 
 a = plt.axes([0.4, 0.2, 0.4, 0.4])
 a.plot(freqs, xfp, label="矩形窗")
-
 a.set_xlim(100, 400)
 a.set_ylim(-40, 0)
 
@@ -1793,20 +1731,24 @@ filename = filename1
 image = cv2.imread(filename, 0)
 print(image.shape)
 
-print("顯示原圖")
 cv2.imshow("original", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 # 將型態轉成float後再計算DCT
 image_float = image.astype(float)
 
+""" NG
 # DCT
-image_dct = cv2.dct(image_float)
+image_dct = cv2.dct(image_float)  # NG 僅此一用
 
 # 將型態轉成OpenCV允許顯示的型態
 result1 = image_dct.astype(np.uint8)
 
 print("顯示 DCT 結果")
 cv2.imshow("DCT Result", result1)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 H, W = image_dct.shape
 print(image_dct.shape)
@@ -1818,7 +1760,6 @@ result2 = image_idct.astype(np.uint8)
 
 print("顯示 IDCT 結果")
 cv2.imshow("IDCT Result", result2)
-
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -1836,7 +1777,7 @@ plt.title("再經過IDCT")
 plt.imshow(cv2.cvtColor(result2, cv2.COLOR_BGR2RGB))
 
 show()
-
+"""
 print("------------------------------------------------------------")  # 60個
 # 頻率域影像處理 DCT IDCT SP
 print("------------------------------------------------------------")  # 60個
@@ -1930,7 +1871,7 @@ cc = np.allclose(y, ify)  # 和原始訊號進行比較
 print(cc)
 """
 
-plt.subplots_adjust(bottom=0.15)
+# plt.subplots_adjust(bottom=0.15)
 
 # 白色噪聲的頻譜接近水平直線（注意Y軸的範圍）
 x = np.random.randn(10000)

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 
@@ -193,40 +194,514 @@ namespace vcs_ImageProcessing2_CCRR
             return newbmp;
         }
 
+
+
         private void button3_Click(object sender, EventArgs e)
         {
+            //圖像切割 每100X100 切成一個小圖
 
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            //圖像切割 每100X100 切成一個小圖
+            ImageManager.Cut(filename, 100, 100);
+        }
+
+        // 圖片裁剪
+        /// <summary>
+        /// 縮小裁剪圖片
+        /// </summary>
+        /// <param name="int_Width">要縮小裁剪圖片寬度</param>
+        /// <param name="int_Height">要縮小裁剪圖片長度</param>
+        /// <param name="filename_old">要處理圖片路徑</param>
+        /// <param name="filename_new">處理完畢圖片路徑</param>
+        public void ImgReduceCutOut(int int_Width, int int_Height, string filename_old, string filename_new)
+        {
+            // ＝＝＝上傳標准圖大小＝＝＝
+            int int_Standard_Width = 160;
+            int int_Standard_Height = 160;
+
+            int Reduce_Width = 0; // 縮小的寬度
+            int Reduce_Height = 0; // 縮小的高度
+            int CutOut_Width = 0; // 裁剪的寬度
+            int CutOut_Height = 0; // 裁剪的高度
+            int level = 100; //縮略圖的質量 1-100的范圍
+
+            // ＝＝＝獲得縮小，裁剪大小＝＝＝
+            if (int_Standard_Height * int_Width / int_Standard_Width > int_Height)
+            {
+                Reduce_Width = int_Width;
+                Reduce_Height = int_Standard_Height * int_Width / int_Standard_Width;
+                CutOut_Width = int_Width;
+                CutOut_Height = int_Height;
+            }
+            else if (int_Standard_Height * int_Width / int_Standard_Width < int_Height)
+            {
+                Reduce_Width = int_Standard_Width * int_Height / int_Standard_Height;
+                Reduce_Height = int_Height;
+                CutOut_Width = int_Width;
+                CutOut_Height = int_Height;
+            }
+            else
+            {
+                Reduce_Width = int_Width;
+                Reduce_Height = int_Height;
+                CutOut_Width = int_Width;
+                CutOut_Height = int_Height;
+            }
+
+            // ＝＝＝通過連接創建Image對象＝＝＝
+            Image oldimage = Image.FromFile(filename_old);
+
+            // ＝＝＝縮小圖片＝＝＝
+            Image thumbnailImage = oldimage.GetThumbnailImage(Reduce_Width, Reduce_Height, new Image.GetThumbnailImageAbort(ThumbnailCallback), IntPtr.Zero);
+            Bitmap bm = new Bitmap(thumbnailImage);
+
+            // ＝＝＝處理JPG質量的函數＝＝＝
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+            ImageCodecInfo ici = null;
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.MimeType == "image/jpeg")
+                    ici = codec;
+            }
+            EncoderParameters ep = new EncoderParameters();
+
+            //Encoder myEncoder = Encoder.Quality;
+
+            // Create an Encoder object based on the GUID  
+            // for the Quality parameter category.  
+            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+
+            ep.Param[0] = new EncoderParameter(myEncoder, (long)level);
+
+            //bm.Save(Server.MapPath("2.jpg"), ici, ep);
+
+            // ＝＝＝裁剪圖片＝＝＝
+            Rectangle cloneRect = new Rectangle(0, 0, CutOut_Width, CutOut_Height);
+            PixelFormat format = bm.PixelFormat;
+            Bitmap cloneBitmap = bm.Clone(cloneRect, format);
+
+            // ＝＝＝保存圖片＝＝＝
+            cloneBitmap.Save(filename_new, ici, ep);
+        }
+
+        public bool ThumbnailCallback()
+        {
+            return true;
+        }
+
+        private void GetThumbnail(PaintEventArgs e)
+        {
+            Image.GetThumbnailImageAbort callback = new Image.GetThumbnailImageAbort(ThumbnailCallback);
+            Image image = new Bitmap(@"c:\dddddddddd\FakePhoto.jpg");
+            Image pThumbnail = image.GetThumbnailImage(100, 100, callback, new IntPtr());
+            e.Graphics.DrawImage(pThumbnail, 10, 10, pThumbnail.Width, pThumbnail.Height);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //圖片剪下一塊存檔1
+            //圖片剪下一塊存檔, 圖片裁剪
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\picture1_cut.jpg";
 
+            ImgReduceCutOut(200, 200, filename1, filename2);
+
+            //看起來像是 305X400 轉成200X200
+            richTextBox1.Text += "原檔案 : " + filename1 + "\n";
+            richTextBox1.Text += "圖片剪下一塊存檔 : " + filename2 + "\n";
+
+
+        }
+
+        public static Image CutForCustomx(string imgPath, int top, int height)
+        {
+            FileStream fs = new FileStream(imgPath, FileMode.Open, FileAccess.Read);
+            //從文件獲取原始圖片，並使用流中嵌入的顏色管理信息
+            Image initImage = Image.FromStream(fs, true);
+
+            Bitmap b = new Bitmap(initImage);
+
+            Bitmap img = b.Clone(new Rectangle(0, top, initImage.Width, height), PixelFormat.DontCare);
+            return (Image)(img);
+        }
+
+        public static Image CutForCustomx(string imgPath, Rectangle rec)
+        {
+            FileStream fs = new FileStream(imgPath, FileMode.Open, FileAccess.Read);
+            //從文件獲取原始圖片，並使用流中嵌入的顏色管理信息
+            Image initImage = Image.FromStream(fs, true);
+
+            Bitmap b = new Bitmap(initImage);
+
+            Bitmap img = b.Clone(rec, PixelFormat.DontCare);
+            return (Image)(img);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //圖片剪下一塊存檔2
 
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\picture1_cut.jpg";
+
+            pictureBox1.Image = CutForCustomx(filename1, 150, 150);
+            pictureBox1.Image.Save(filename2);
+        }
+
+        //圖片質量壓縮(不改變尺寸) ST
+        /// <summary>
+        /// 獲取圖片編碼信息
+        /// </summary>
+        private static ImageCodecInfo GetEncoderInfo(String mimeType)
+        {
+            int j;
+            ImageCodecInfo[] encoders;
+            encoders = ImageCodecInfo.GetImageEncoders();
+            for (j = 0; j < encoders.Length; ++j)
+            {
+                if (encoders[j].MimeType == mimeType)
+                    return encoders[j];
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 圖片壓縮(降低質量以減小文件的大小)
+        /// </summary>
+        /// <param name="srcBitmap">傳入的Bitmap對象</param>
+        /// <param name="destStream">壓縮後的Stream對象</param>
+        /// <param name="level">壓縮等級，0到100，0 最差質量，100 最佳</param>
+        public static void Compress(Bitmap srcBitmap, Stream destStream, long level)
+        {
+            ImageCodecInfo myImageCodecInfo;
+            System.Drawing.Imaging.Encoder myEncoder;
+            EncoderParameter myEncoderParameter;
+            EncoderParameters myEncoderParameters;
+
+            // Get an ImageCodecInfo object that represents the JPEG codec.
+            myImageCodecInfo = GetEncoderInfo("image/jpeg");
+
+            // Create an Encoder object based on the GUID
+
+            // for the Quality parameter category.
+            myEncoder = System.Drawing.Imaging.Encoder.Quality;
+
+            // Create an EncoderParameters object.
+            // An EncoderParameters object has an array of EncoderParameter
+            // objects. In this case, there is only one
+
+            // EncoderParameter object in the array.
+            myEncoderParameters = new EncoderParameters(1);
+
+            // Save the bitmap as a JPEG file with 給定的 quality level
+            myEncoderParameter = new EncoderParameter(myEncoder, level);
+            myEncoderParameters.Param[0] = myEncoderParameter;
+            srcBitmap.Save(destStream, myImageCodecInfo, myEncoderParameters);
+        }
+
+        /// <summary>
+        /// 圖片壓縮(降低質量以減小文件的大小)
+        /// </summary>
+        /// <param name="srcBitMap">傳入的Bitmap對象</param>
+        /// <param name="destFile">壓縮後的圖片保存路徑</param>
+        /// <param name="level">壓縮等級，0到100，0 最差質量，100 最佳</param>
+        public static void Compress(Bitmap bitmap1, string destFile, long level)
+        {
+            Stream s = new FileStream(destFile, FileMode.Create);
+            Compress(bitmap1, s, level);
+            s.Close();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //圖片質量壓縮(不改變尺寸)
+
+            //圖片質量壓縮(不改變尺寸)
+
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            richTextBox1.Text += "原圖 : " + filename + "\n";
+
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            Compress(bitmap1, "compressfile010.jpg", 10);
+            Compress(bitmap1, "compressfile040.jpg", 40);
+            Compress(bitmap1, "compressfile070.jpg", 70);
+            Compress(bitmap1, "compressfile100.jpg", 100);
 
         }
+        //圖片質量壓縮(不改變尺寸) SP
+
+        //圖片壓縮、縮略圖生成代碼
+
+        #region imageCompress
+        /**/
+        /// <summary>
+        /// 圖片壓縮函數
+        /// </summary>
+        /// <param name="sourceFile">原始圖片文件</param>
+        /// <param name="quality">質量壓縮比</param>
+        /// <param name="ouputFile">輸出文件名,請用 .jpg 后綴 </param>
+        /// <returns>成功返回true，失敗則返回false</returns>
+        public static bool imageCompress(String sourceFile, long quality, String outputFile)
+        {
+            try
+            {
+                long imageQuality = quality;
+                Bitmap sourceImage = new Bitmap(sourceFile);
+                ImageCodecInfo myImageCodecInfo = GetEncoderInfo("image/jpeg");
+                System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+                EncoderParameters myEncoderParameters = new EncoderParameters(1);
+                EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, imageQuality);
+                myEncoderParameters.Param[0] = myEncoderParameter;
+
+                sourceImage.Save(outputFile, myImageCodecInfo, myEncoderParameters);
+                return true;
+
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+        #endregion
+
+        /*  
+        圖片壓縮、縮略圖生成代碼匯總
+        public static bool imageCompress(String sourceFile,long quality,String outputFile)
+        public static bool getThumImage(String sourceFile, long quality, int multiple, String outputFile)
+        */
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //圖片壓縮
+            //圖片壓縮
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename2 = Application.StartupPath + "\\compress_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            bool result = imageCompress(filename1, 30, filename2);
+            if (result == true)
+                richTextBox1.Text += "OK\n";
+            else
+                richTextBox1.Text += "FAIL\n";
+        }
+
+
+        //C#獲取圖片的指定部分
+
+        /// <summary>
+        /// http://www.cnblogs.com/KissKnife/archive/2007/10/13/923352.Html
+        /// 獲取圖片指定部分
+        /// </summary>
+        /// <param name="pPath">圖片路徑</param>
+        /// <param name="pPartStartPointX">目標圖片開始繪制處的坐標X值(通常為0)</param>
+        /// <param name="pPartStartPointY">目標圖片開始繪制處的坐標Y值(通常為0)</param>
+        /// <param name="pPartWidth">目標圖片的寬度</param>
+        /// <param name="pPartHeight">目標圖片的高度</param>
+        /// <param name="pOrigStartPointX">原始圖片開始截取處的坐標X值</param>
+        /// <param name="pOrigStartPointY">原始圖片開始截取處的坐標Y值</param>
+        static Bitmap GetPart(string pPath, int pPartStartPointX, int pPartStartPointY, int pPartWidth, int pPartHeight, int pOrigStartPointX, int pOrigStartPointY)
+        {
+            Image originalImg = Image.FromFile(pPath);
+
+            Bitmap partImg = new Bitmap(pPartWidth, pPartHeight);
+            Graphics graphics = Graphics.FromImage(partImg);
+            Rectangle destRect = new Rectangle(new Point(pPartStartPointX, pPartStartPointY), new Size(pPartWidth, pPartHeight));//目標位置
+            Rectangle origRect = new Rectangle(new Point(pOrigStartPointX, pOrigStartPointY), new Size(pPartWidth, pPartHeight));//原圖位置（默認從原圖中截取的圖片大小等於目標圖片的大小）
+
+            graphics.DrawImage(originalImg, destRect, origRect, GraphicsUnit.Pixel);
+
+            return partImg;
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //獲取圖片的指定部分
+
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            Bitmap bitmap1 = GetPart(filename, 0, 0, 150, 200, 0, 0);
+
+            pictureBox1.Image = bitmap1;
         }
+
+        private ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+
+            return null;
+        }
+
+
+        private void VaryQualityLevel()
+        {
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+
+            // Get a bitmap.
+            Bitmap bitmap1 = new Bitmap(filename);
+            bitmap1.Save(@"picture_old.jpg", ImageFormat.Jpeg);
+
+            ImageCodecInfo jpgEncoder = GetEncoder(ImageFormat.Jpeg);
+
+            // Create an Encoder object based on the GUID
+            // for the Quality parameter category.
+            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+
+            // Create an EncoderParameters object.
+            // An EncoderParameters object has an array of EncoderParameter
+            // objects. In this case, there is only one
+            // EncoderParameter object in the array.
+            EncoderParameters myEncoderParameters = new EncoderParameters(1);
+
+            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 50L);
+            myEncoderParameters.Param[0] = myEncoderParameter;
+            bitmap1.Save(@"TestPhotoQuality050.jpg", jpgEncoder, myEncoderParameters);
+
+            myEncoderParameter = new EncoderParameter(myEncoder, 100L);
+            myEncoderParameters.Param[0] = myEncoderParameter;
+            bitmap1.Save(@"TestPhotoQuality100.jpg", jpgEncoder, myEncoderParameters);
+
+            // Save the bitmap as a JPG file with zero quality level compression.
+            myEncoderParameter = new EncoderParameter(myEncoder, 0L);
+            myEncoderParameters.Param[0] = myEncoderParameter;
+            bitmap1.Save(@"TestPhotoQuality000.jpg", jpgEncoder, myEncoderParameters);
+
+            richTextBox1.Text += "完成\n";
+        }
+
+
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //改變圖片品質
+            //改變圖片品質
+            VaryQualityLevel();
+        }
+
+        //C#編程 jpg縮略圖函數 使用
+
+        /// <summary>
+        /// 生成jpg縮略圖字節,本人的小軟件中需要用到的功能，所以自己做了一個函數，和大家分享
+        /// 為什麼要生成字節而不是文件，這是為了方便後續處理啦^_^
+        /// </summary>
+        /// <param name="originalImagePath">原始路徑</param>
+        /// <param name="quality">質量0-100</param>
+        /// <param name="width">寬度</param>
+        /// <param name="height">高度</param>
+        /// <param name="mode">模式：HW,W,H,Cut</param>
+        /// <returns></returns>
+        public static byte[] MakeJPGThumbnailBytes(string originalImagePath, long quality, int width, int height, string mode)
+        {
+            Image originalImage = Image.FromFile(originalImagePath);
+            MemoryStream s = new MemoryStream();
+            int towidth = width;
+            int toheight = height;
+
+            int x = 0;
+            int y = 0;
+            int ow = originalImage.Width;
+            int oh = originalImage.Height;
+
+            switch (mode)
+            {
+                case "HW"://指定高寬縮放（可能變形）
+                    break;
+                case "W"://指定寬，高按比例
+                    toheight = originalImage.Height * width / originalImage.Width;
+                    break;
+                case "H"://指定高，寬按比例
+                    towidth = originalImage.Width * height / originalImage.Height;
+                    break;
+                case "Cut"://指定高寬裁減（不變形）
+                    if ((double)originalImage.Width / (double)originalImage.Height > (double)towidth / (double)toheight)
+                    {
+                        oh = originalImage.Height;
+                        ow = originalImage.Height * towidth / toheight;
+                        y = 0;
+                        x = (originalImage.Width - ow) / 2;
+                    }
+                    else
+                    {
+                        ow = originalImage.Width;
+                        oh = originalImage.Width * height / towidth;
+                        x = 0;
+                        y = (originalImage.Height - oh) / 2;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            //新建一個bmp圖片
+            Image bitmap = new Bitmap(towidth, toheight);
+
+            //新建一個畫板
+            Graphics g = Graphics.FromImage(bitmap);
+
+            //設置高質量插值法
+            g.InterpolationMode = InterpolationMode.High;
+
+            //設置高質量,低速度呈現平滑程度
+            g.SmoothingMode = SmoothingMode.HighQuality;
+
+            //清空畫布並以透明背景色填充
+            g.Clear(Color.Transparent);
+
+            //在指定位置並且按指定大小繪制原圖片的指定部分
+            g.DrawImage(originalImage, new Rectangle(0, 0, towidth, toheight),
+            new Rectangle(x, y, ow, oh),
+            GraphicsUnit.Pixel);
+
+            try
+            {
+                //以jpg格式保存縮略圖
+                EncoderParameters eps = new EncoderParameters(1);
+                EncoderParameter ep = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
+                eps.Param[0] = ep;
+                bitmap.Save(s, GetCodecInfo("image/jpeg"), eps);
+                return s.GetBuffer();
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                originalImage.Dispose();
+                bitmap.Dispose();
+                s.Dispose();
+                g.Dispose();
+            }
+        }
+
+        /**/
+        /// <summary>
+        /// 保存JPG時用
+        /// </summary>
+        /// <param name="mimeType"></param>
+        /// <returns>得到指定mimeType的ImageCodecInfo</returns>
+        private static ImageCodecInfo GetCodecInfo(string mimeType)
+        {
+            ImageCodecInfo[] CodecInfo = ImageCodecInfo.GetImageEncoders();
+            foreach (ImageCodecInfo ici in CodecInfo)
+            {
+                if (ici.MimeType == mimeType) return ici;
+            }
+            return null;
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //jpg縮略圖函數
+
+            //jpg縮略圖函數
+            //在上
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -465,6 +940,55 @@ namespace vcs_ImageProcessing2_CCRR
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
+        }
+    }
+
+    public class ImageManager
+    {
+        /// <summary>
+        /// 圖像切割
+        /// </summary>
+        /// <param name="url">圖像文件名稱</param>
+        /// <param name="width">切割後圖像寬度</param>
+        /// <param name="height">切割後圖像高度</param>
+        public static void Cut(string filename1, int width, int height)
+        {
+            Bitmap bitmap1 = new Bitmap(filename1);
+            int MaxRow = (int)Math.Ceiling((Decimal)bitmap1.Height / height);
+            int MaxColumn = (int)Math.Ceiling((Decimal)bitmap1.Width / width);
+            for (int i = 0; i < MaxRow; i++)
+            {
+                for (int j = 0; j < MaxColumn; j++)
+                {
+                    Bitmap bitmap2 = new Bitmap(width, height);
+                    for (int offsetX = 0; offsetX < width; offsetX++)
+                    {
+                        for (int offsetY = 0; offsetY < height; offsetY++)
+                        {
+                            if (((j * width + offsetX) < bitmap1.Width) && ((i * height + offsetY) < bitmap1.Height))
+                            {
+                                bitmap2.SetPixel(offsetX, offsetY, bitmap1.GetPixel((int)(j * width + offsetX), (int)(i * height + offsetY)));
+                            }
+                        }
+                    }
+                    Graphics g = Graphics.FromImage(bitmap2);
+                    g.DrawString(i.ToString("D2") + " " + j.ToString("D2"), new Font("黑體", 14), new SolidBrush(Color.FromArgb(255, Color.Red)), 5, 5); //加水印
+
+                    string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + i.ToString("D2") + "_" + j.ToString("D2") + ".bmp";
+                    //Console.WriteLine(filename2);
+
+                    try
+                    {
+                        bitmap2.Save(filename2, ImageFormat.Bmp);
+                        //richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                        //richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                    }
+                }
+            }
         }
     }
 }

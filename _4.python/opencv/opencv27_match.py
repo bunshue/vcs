@@ -1,13 +1,255 @@
 """
+
+cv2.matchShapes()
+cv2.matchTemplate()
+
 模板匹配 Template Matching
 
-cv2.matchTemplate()
 """
 
 from opencv_common import *
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape06.png"
+
+image0 = cv2.imread(filename)  # 彩色讀取
+
+src = image0.copy()
+
+contours, hierarchy = get_image_contours(src)
+
+# 依次繪製輪廓
+n = len(contours)  # 輪廓數量
+for i in range(n):
+    dst = cv2.drawContours(src, contours, i, colors[i], 5)  # 畫第i個輪廓
+
+plt.subplot(211)
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+plt.axis("off")
+
+plt.subplot(212)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("找出輪廓")
+plt.axis("off")
+
+print("------------------------------")  # 30個
+
+print("輪廓和輪廓的比較 cv2.matchShapes()")
+
+cnt0 = contours[3]  # 取得輪廓數據
+cnt1 = contours[2]  # 取得輪廓數據
+cnt2 = contours[0]  # 取得輪廓數據
+cnt3 = contours[1]  # 取得輪廓數據
+
+# 輪廓和輪廓的比較 形狀比較
+print("由左到右 天青(3) 藍(2) 紅(0) 綠(1), 以天青(3)為主")
+match0 = cv2.matchShapes(cnt0, cnt0, 1, 0)  # 輪廓0和0比較
+print("輪廓0和0比較 :", match0)
+
+match1 = cv2.matchShapes(cnt0, cnt1, 1, 0)  # 輪廓0和1比較
+print("輪廓0和1比較 :", match1)
+
+match2 = cv2.matchShapes(cnt0, cnt2, 1, 0)  # 輪廓0和2比較
+print("輪廓0和2比較 :", match2)
+
+match3 = cv2.matchShapes(cnt0, cnt3, 1, 0)  # 輪廓0和3比較
+print("輪廓0和3比較 :", match3)
+
+print("------------------------------")  # 30個
+
+print("輪廓和輪廓的比較 形狀場景運算子")
+
+# 構造距離提取算子
+sd = cv2.createShapeContextDistanceExtractor()  # 建立形狀場景運算子
+
+# 計算距離
+match0 = sd.computeDistance(cnt0, cnt0)  # 輪廓0和0比較
+print("輪廓0和0比較 :", match0)
+
+match1 = sd.computeDistance(cnt0, cnt1)  # 輪廓0和1比較
+print("輪廓0和1比較 :", match1)
+
+match2 = sd.computeDistance(cnt0, cnt2)  # 輪廓0和2比較
+print("輪廓0和2比較 :", match2)
+
+match3 = sd.computeDistance(cnt0, cnt3)  # 輪廓0和3比較
+print("輪廓0和3比較 :", match3)
+
+print("------------------------------")  # 30個
+
+print("輪廓和輪廓的比較 Hausdorff運算子")
+
+# 構造距離提取算子
+hd = cv2.createHausdorffDistanceExtractor()  # 建立Hausdorff
+
+# 計算距離
+match0 = hd.computeDistance(cnt0, cnt0)  # 輪廓0和0比較
+print("輪廓0和0比較 :", match0)
+
+match1 = hd.computeDistance(cnt0, cnt1)  # 輪廓0和1比較
+print("輪廓0和1比較 :", match1)
+
+match2 = hd.computeDistance(cnt0, cnt2)  # 輪廓0和2比較
+print("輪廓0和2比較 :", match2)
+
+match3 = hd.computeDistance(cnt0, cnt3)  # 輪廓0和3比較
+print("輪廓0和3比較 :", match3)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# Opencv之利用matchshape算子实现简单的形状匹配
+# 使用OpenCV的matchShape算子进行形状匹配。
+# 通过将待识别图像和模板图像转换为灰度并进行阈值处理，然后找到轮廓，
+# 最后通过比较轮廓的Hu不变矩来确定匹配度。匹配分值越小，轮廓越相似。
+# matchShapes函数适用于识别大物体的形状，但对纹理复杂的图像识别率较低。
+
+# --------------讀取3幅原始圖像--------------------
+image1 = cv2.imread("data/cs1.bmp")  # 彩色讀取
+image2 = cv2.imread("data/cs2.bmp")  # 彩色讀取
+image3 = cv2.imread("data/cc.bmp")  # 彩色讀取
+
+# ----------打印3幅原始圖像的shape屬性值-------------
+print("image1.shape=", image1.shape)
+print("image2.shape=", image2.shape)
+print("image3.shape=", image3.shape)
+
+# --------------色彩空間轉換--------------------
+gray1 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray3 = cv2.cvtColor(image3, cv2.COLOR_BGR2GRAY)  # 轉灰階
+
+# -------------進行Hu矩匹配--------------------
+ret0 = cv2.matchShapes(gray1, gray1, 1, 0.0)
+ret1 = cv2.matchShapes(gray1, gray2, 1, 0.0)
+ret2 = cv2.matchShapes(gray1, gray3, 1, 0.0)
+
+# --------------打印差值--------------------
+print("相同圖像的matchShape=", ret0)
+print("相似圖像的matchShape=", ret1)
+print("不相似圖像的matchShape=", ret2)
+
+# --------------顯示3幅原始圖像--------------------
+plt.figure(figsize=(12, 8))
+
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("original1")
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.title("original2")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
+plt.title("original3")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("opencv 輪廓比對")
+
+img_patterns = cv2.imread("data/patterns.png", cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+
+patterns, _ = cv2.findContours(img_patterns, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+img_targets = cv2.imread("data/targets.png", cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+
+targets, _ = cv2.findContours(img_targets, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+patterns = [pattern - np.min(pattern, 0, keepdims=True) for pattern in patterns]
+targets = [target - np.min(target, 0, keepdims=True) for target in targets]
+
+# approxPolyDP 輪廓近似
+patterns_simple = [cv2.approxPolyDP(pattern, 5, True) for pattern in patterns]
+
+# approxPolyDP 輪廓近似
+targets_simple = [cv2.approxPolyDP(target, 8, True) for target in targets]
+
+for method in [1, 2, 3]:
+    method_str = "CONTOURS_MATCH_I{}".format(method)
+    method = getattr(cv2, method_str)
+    scores = [
+        cv2.matchShapes(targets_simple[0], patterns_simple[pidx], method, 0)
+        for pidx in range(5)
+    ]
+    print(method_str, ", ".join("{: 8.4f}".format(score) for score in scores))
+
+# CV_CONTOURS_MATCH_I1  11.3737,   0.3456,   0.0289,   1.0495,   0.0020
+# CV_CONTOURS_MATCH_I2   4.8051,   2.2220,   0.0179,   0.3624,   0.0013
+# CV_CONTOURS_MATCH_I3   0.9164,   0.4778,   0.0225,   0.4552,   0.0016
+
+# %figonly=使用`matchShapes()`比較由`approxPolyDP()`近似之後的輪廓
+fig, ax = plt.subplots(figsize=(12, 8))
+ax.set_aspect("equal")
+
+width = 180
+for tidx, (target, target_simple) in enumerate(zip(targets, targets_simple)):
+    scores = []
+    texts = []
+    for pidx, (pattern, pattern_simple) in enumerate(zip(patterns, patterns_simple)):
+        index = np.s_[:, 0, :]
+        pattern2 = pattern[index]
+        target2 = target[index]
+        pattern_simple2 = pattern_simple[index]
+        target_simple2 = target_simple[index]
+
+        x0 = pidx * width + width
+        y0 = tidx * width + width
+
+        if tidx == 0:
+            pattern_poly = plt.Polygon(pattern2 + [x0, 0], color="black", alpha=0.6)
+            ax.add_patch(pattern_poly)
+            text = ax.text(x0 + width * 0.3, -50, str(pidx), fontsize=14, ha="center")
+        if pidx == 0:
+            target_poly = plt.Polygon(target2 + [0, y0], color="g", alpha=0.6)
+            ax.add_patch(target_poly)
+            text = ax.text(-50, y0 + width * 0.3, str(tidx), fontsize=14, ha="center")
+
+        pattern_simple_poly = plt.Polygon(
+            pattern_simple2 + [x0, 0], facecolor="none", alpha=0.6
+        )
+        ax.add_patch(pattern_simple_poly)
+        target_simple_poly = plt.Polygon(
+            target_simple2 + [0, y0], facecolor="none", alpha=0.6
+        )
+        ax.add_patch(target_simple_poly)
+
+        score = cv2.matchShapes(target_simple, pattern_simple, cv2.CONTOURS_MATCH_I3, 0)
+        text = ax.text(
+            x0 + width * 0.3,
+            y0 + width * 0.2,
+            "{:5.4f}".format(score),
+            ha="center",
+            va="center",
+            fontsize=16,
+        )
+        scores.append(score)
+        texts.append(text)
+    best_index = np.argmin(scores)
+    texts[best_index].set_color("red")
+
+ax.relim()
+ax.set_axis_off()
+ax.autoscale()
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 filename1 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates46.jpg"
 filename2 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates46_head.jpg"

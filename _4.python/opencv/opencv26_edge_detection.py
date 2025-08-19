@@ -810,48 +810,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 篩選出大于特定大小的輪廓
-
-image = cv2.imread("data/contours0.bmp")  # 彩色讀取
-cv2.imshow("original", image)
-
-# --------------獲取輪廓--------------------
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
-
-thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
-ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
-
-contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-
-# --------------計算各個輪廓的長度和、平均長度--------------------
-n = len(contours)  # 獲取輪廓個數
-print("總共找到", n, "個輪廓")
-
-cntLen = []  # 存儲各個輪廓的長度
-for i in range(n):
-    cntLen.append(cv2.arcLength(contours[i], True))
-    print("第" + str(i) + "個輪廓的長度:%d" % cntLen[i])
-cntLenSum = np.sum(cntLen)  # 各個輪廓長度和
-cntLenAvr = cntLenSum / n  # 各個輪廓長度平均值
-print("各個輪廓的總長度為：%d" % cntLenSum)
-print("各個輪廓的平均長度為：%d" % cntLenAvr)
-
-# --------------顯示超過平均值的輪廓--------------------
-contoursImg = []
-for i in range(n):
-    temp = np.zeros(image.shape, np.uint8)
-    contoursImg.append(temp)
-    contoursImg[i] = cv2.drawContours(contoursImg[i], contours, i, WHITE, 3)
-    if cv2.arcLength(contours[i], True) > cntLenAvr:
-        print(i)
-        cv2.imshow("contours[" + str(i) + "]", contoursImg[i])
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 edge_x[edge_x > 255] = 255
 edge_y[edge_y > 255] = 255
 

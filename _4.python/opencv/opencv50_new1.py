@@ -648,46 +648,6 @@ matrix, mask = cv2.findHomography(matched_positions1, matched_positions2, cv2.RA
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 建立 500 X 500 之白圖
-width, height = 305, 400  # 影像寬, 影像高
-img = np.ones((height, width, 3), dtype=np.uint8) * 255
-
-# img = cv2.imread(filename1)  # 彩色讀取
-
-N = 10
-pts = np.random.randint(50, 300, size=[N, 2])
-pts = np.intp(pts)
-
-# minAreaRect 生成最小外接矩形
-rect = cv2.minAreaRect(pts)  # 得到最小外接矩形的（中心(x,y), (宽,高), 旋转角度）
-print(rect)
-
-# 取得旋轉矩形的中心點和旋轉角度
-(center_x, center_y), (w, h), angle = rect
-
-box = cv2.boxPoints(rect)  # 获取最小外接矩形的4个顶点坐标
-# print(box)
-
-# box = round(box)
-box = np.round(box)
-# print(box)
-# print(type(box))
-box = np.intp(box)
-
-for p in pts:
-    cv2.circle(img, (p[0], p[1]), 7, BLUE, -1)  # 畫圓
-
-
-# 画出来
-cv2.drawContours(img, [box], 0, RED, 3)
-
-cv2.imshow("Image", img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("opencv 117")
 
 cv_img = cv2.imread(filename1)  # 彩色讀取

@@ -53,10 +53,10 @@
             this.button19 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
-            this.button22 = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
+            this.button22 = new System.Windows.Forms.Button();
+            this.button21 = new System.Windows.Forms.Button();
+            this.button20 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -107,6 +107,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(130, 60);
             this.button3.TabIndex = 4;
+            this.button3.Text = "圖像切割 每100X100 切成一個小圖";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -117,6 +118,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(130, 60);
             this.button4.TabIndex = 5;
+            this.button4.Text = "圖片剪下一塊存檔1";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -128,6 +130,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(130, 60);
             this.button5.TabIndex = 6;
+            this.button5.Text = "圖片剪下一塊存檔2";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -138,6 +141,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(130, 60);
             this.button6.TabIndex = 8;
+            this.button6.Text = "圖片質量壓縮(不改變尺寸)";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -170,6 +174,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(130, 60);
             this.button7.TabIndex = 11;
+            this.button7.Text = "圖片壓縮";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -180,6 +185,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(130, 60);
             this.button8.TabIndex = 11;
+            this.button8.Text = "獲取圖片的指定部分";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -190,6 +196,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(130, 60);
             this.button9.TabIndex = 12;
+            this.button9.Text = "改變圖片品質";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -200,6 +207,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(130, 60);
             this.button10.TabIndex = 13;
+            this.button10.Text = "jpg縮略圖函數";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -317,27 +325,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lanczos";
             // 
-            // button20
+            // button23
             // 
-            this.button20.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button20.Location = new System.Drawing.Point(20, 21);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(130, 60);
-            this.button20.TabIndex = 35;
-            this.button20.Text = "原圖";
-            this.button20.UseVisualStyleBackColor = true;
-            this.button20.Click += new System.EventHandler(this.button20_Click);
-            // 
-            // button21
-            // 
-            this.button21.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button21.Location = new System.Drawing.Point(20, 87);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(130, 60);
-            this.button21.TabIndex = 36;
-            this.button21.Text = "Lanczos 2倍";
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.button21_Click);
+            this.button23.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button23.Location = new System.Drawing.Point(20, 219);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(130, 60);
+            this.button23.TabIndex = 38;
+            this.button23.Text = "StretchImage 拉大兩倍";
+            this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
             // button22
             // 
@@ -350,16 +347,27 @@
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
-            // button23
+            // button21
             // 
-            this.button23.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button23.Location = new System.Drawing.Point(20, 219);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(130, 60);
-            this.button23.TabIndex = 38;
-            this.button23.Text = "StretchImage 拉大兩倍";
-            this.button23.UseVisualStyleBackColor = true;
-            this.button23.Click += new System.EventHandler(this.button23_Click);
+            this.button21.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button21.Location = new System.Drawing.Point(20, 87);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(130, 60);
+            this.button21.TabIndex = 36;
+            this.button21.Text = "Lanczos 2倍";
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
+            // 
+            // button20
+            // 
+            this.button20.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button20.Location = new System.Drawing.Point(20, 21);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(130, 60);
+            this.button20.TabIndex = 35;
+            this.button20.Text = "原圖";
+            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
             // Form1
             // 

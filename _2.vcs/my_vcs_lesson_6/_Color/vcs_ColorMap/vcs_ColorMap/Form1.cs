@@ -1098,6 +1098,15 @@ namespace vcs_ColorMap
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //ColorTranslator測試
+            //ColorTranslator
+            Color cl = Color.Navy;
+            string html = ColorTranslator.ToHtml(cl).ToString();
+            richTextBox1.Text += "顏色 : " + cl.ToString() + "\n";
+            richTextBox1.Text += "轉HTML : " + html.ToString() + "\n";
+
+            // NG
+
 
         }
 
@@ -1790,3 +1799,4 @@ namespace vcs_ColorMap
         };
     }
 }
+
