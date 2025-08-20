@@ -465,6 +465,63 @@ print(f"識別的數字是 = {int(result[0,0])}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("SVM 範例")
+
+# Set up training data
+## [setup1]
+labels = np.array([1, -1, -1, -1])
+trainingData = np.matrix(
+    [[501, 10], [255, 10], [501, 255], [10, 501]], dtype=np.float32
+)
+## [setup1]
+
+# Train the SVM
+## [init]
+svm = cv2.ml.SVM_create()
+svm.setType(cv2.ml.SVM_C_SVC)
+svm.setKernel(cv2.ml.SVM_LINEAR)
+svm.setTermCriteria((cv2.TERM_CRITERIA_MAX_ITER, 100, 1e-6))
+## [init]
+## [train]
+svm.train(trainingData, cv2.ml.ROW_SAMPLE, labels)
+## [train]
+
+# Data for visual representation
+width = 512
+height = 512
+image = np.zeros((height, width, 3), dtype=np.uint8)
+
+# Show the decision regions given by the SVM
+for i in range(image.shape[0]):
+    for j in range(image.shape[1]):
+        sampleMat = np.matrix([[j, i]], dtype=np.float32)
+        response = svm.predict(sampleMat)[1]
+        if response == 1:
+            image[i, j] = GREEN
+        elif response == -1:
+            image[i, j] = BLUE
+
+# Show the training data
+cv2.circle(image, (501, 10), 10, BLACK, -1)
+cv2.circle(image, (255, 10), 10, WHITE, -1)
+cv2.circle(image, (501, 255), 10, WHITE, -1)
+cv2.circle(image, (10, 501), 10, WHITE, -1)
+
+# Show support vectors
+## [show_vectors]
+thickness = 2
+sv = svm.getUncompressedSupportVectors()
+
+""" wrong
+for i in range(sv.shape[0]):
+    cv2.circle(image, (sv[i,0], sv[i,1]), 6, (128, 128, 128), 10)
+## [show_vectors]
+"""
+# cv2.imwrite("tmp_result.png", image)  # 存圖
+
+cv2.imshow("SVM Simple Example", image)
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

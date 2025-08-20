@@ -597,7 +597,6 @@ log_FFT_SHIFT = np.log(1 + np.abs(fshift))
 plt.subplot(236)
 plt.imshow(log_FFT_SHIFT, "gray")
 plt.title("中心化的對數變化")
-
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -622,7 +621,6 @@ log_fft2 = np.log(1 + np.abs(f))
 plt.subplot(122)
 plt.imshow(log_fft2, "gray")
 plt.title("log_fft2")
-
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -692,46 +690,42 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+N = 500  # 取樣點數
 start = 0  # 起始時間
 end = 5  # 結束時間
 
-# 兩個正弦波的訊號頻率
-freq1 = 5  # 頻率是 5 Hz
-freq2 = 8  # 頻率是 8 Hz
+# 建立時間軸的np陣列, 用N個點
+t = np.linspace(start, end, N)
 
-# 建立時間軸的np陣列, 用500個點
-time = np.linspace(start, end, 500)
+# 兩個正弦波的訊號頻率
+f1 = 5  # Hz
+f2 = 8  # Hz
 
 # 建立2個正弦波
-amplitude1 = np.sin(2 * np.pi * freq1 * time)
-amplitude2 = np.sin(2 * np.pi * freq2 * time)
-
-figure, axis = plt.subplots(3, 1)
-# plt.subplots_adjust(hspace=1)
-
-# 時間域的 sin 波 1
-axis[0].set_title("頻率是 5 Hz的 sin 波")
-axis[0].plot(time, amplitude1)
-axis[0].set_xlabel("時間")
-axis[0].set_ylabel("振幅")
-
-# 時間域的 sin 波 2
-axis[1].set_title("頻率是 8 Hz的 sin 波")
-axis[1].plot(time, amplitude2)
-axis[1].set_xlabel("時間")
-axis[1].set_ylabel("振幅")
-
+function1 = np.sin(2 * np.pi * f1 * t)
+function2 = np.sin(2 * np.pi * f2 * t)
 # 加總sin波
-amplitude = amplitude1 + amplitude2
-axis[2].set_title("2個不同頻率正弦波的結果")
-axis[2].plot(time, amplitude)
-axis[2].set_xlabel("時間")
-axis[2].set_ylabel("振幅")
+function3 = function1 + function2
 
+plt.figure(figsize=(6, 6))
+plt.subplot(311)
+plt.plot(t, function1)
+plt.title("頻率是 5 Hz的 sin 波")
+plt.xlabel("時間")
+plt.ylabel("振幅")
+
+plt.subplot(312)
+plt.plot(t, function2)
+plt.title("頻率是 8 Hz的 sin 波")
+plt.xlabel("時間")
+plt.ylabel("振幅")
+
+plt.subplot(313)
+plt.plot(t, function3)
+plt.title("2個不同頻率正弦波的結果")
+plt.xlabel("時間")
+plt.ylabel("振幅")
 show()
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1277,18 +1271,18 @@ plt.figure(figsize=(12, 8))
 
 # 繪制三角波的FFT的前20項的振幅，由於不含索引為偶數的值均為0， 因此取
 # log之後無窮小，無法繪圖，用np.clip函數設定陣列值的上下限，確保繪圖正確
-plt.subplot(4, 4, 1)
+plt.subplot(441)
 plt.plot(x, y, label="原資料")
 
-plt.subplot(4, 4, 2)
+plt.subplot(442)
 plt.scatter(fy.real, fy.imag, s=100, label="FFT")
 
-plt.subplot(4, 4, 3)
+plt.subplot(443)
 plt.plot(np.clip(20 * np.log10(np.abs(fy[:20])), -120, 120), "o")
 plt.xlabel("頻率視窗(frequency bin)")
 plt.ylabel("幅值(dB)")
 
-plt.subplot(4, 4, 4)
+plt.subplot(444)
 plt.plot(ify.real, label="IFFT")
 
 # 正弦波
@@ -1298,18 +1292,18 @@ ify = np.fft.ifft(fy)  # 一維 ifft
 
 # 繪制三角波的FFT的前20項的振幅，由於不含索引為偶數的值均為0， 因此取
 # log之後無窮小，無法繪圖，用np.clip函數設定陣列值的上下限，確保繪圖正確
-plt.subplot(4, 4, 5)
+plt.subplot(445)
 plt.plot(x, y, label="原資料")
 
-plt.subplot(4, 4, 6)
+plt.subplot(446)
 plt.scatter(fy.real, fy.imag, s=100, label="FFT")
 
-plt.subplot(4, 4, 7)
+plt.subplot(447)
 plt.plot(np.clip(20 * np.log10(np.abs(fy)), -120, 120), "o")
 plt.xlabel("頻率視窗(frequency bin)")
 plt.ylabel("幅值(dB)")
 
-plt.subplot(4, 4, 8)
+plt.subplot(448)
 plt.plot(ify.real, label="IFFT")
 
 # 方波
@@ -1317,7 +1311,7 @@ x, y = square_wave(NNNN)
 fy = np.fft.fft(y) / NNNN  # 為了計算各個成分的能量，需要將FFT的結果除以FFT的長度
 ify = np.fft.ifft(fy)  # 一維 ifft
 
-plt.subplot(4, 4, 9)
+plt.subplot(449)
 plt.plot(y, label="原始方波", linewidth=2)
 
 plt.subplot(4, 4, 10)
@@ -1350,7 +1344,6 @@ plt.ylabel("幅值(dB)")
 
 plt.subplot(4, 4, 16)
 plt.plot(ify.real, label="IFFT")
-
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1375,7 +1368,6 @@ plt.title("fy")
 plt.subplot(133)
 plt.plot(abs_y, "r")
 plt.title("abs_y")
-
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1405,28 +1397,33 @@ print("------------------------------------------------------------")  # 60個
 print("np.fft 04 觀察訊號的頻譜")
 
 sampling_rate, NNNN = 8000, 512
-T = np.arange(0, 1.0, 1.0 / sampling_rate)
+t = np.arange(0, 1.0, 1.0 / sampling_rate)
 
 # 156.25Hz和234.375Hz的波形和頻譜
 f1 = 156.25  # Hz
 f2 = 234.375  # Hz
-y = np.sin(2 * np.pi * f1 * T) + 2 * np.sin(2 * np.pi * f2 * T)
 
-XS = y[:NNNN]
+# 建立2個正弦波
+function1 = np.sin(2 * np.pi * f1 * t)
+function2 = np.sin(2 * np.pi * f2 * t)
+# 加總sin波
+function3 = function1 + function2
+function3 = function1 + 2 * function2
+
+XS = function3[:NNNN]
 xf = np.fft.rfft(XS) / NNNN
 freqs = np.linspace(0, sampling_rate / 2, NNNN // 2 + 1)
 xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))
 
 plt.figure(figsize=(10, 6))
 plt.subplot(211)
-plt.plot(T[:NNNN], XS)
+plt.plot(t[:NNNN], XS)
 plt.xlabel("時間(秒)")
 
 plt.subplot(212)
 plt.plot(freqs, xfp)
 plt.xlabel("頻率(Hz)")
 plt.xlim(0, 1000)  # 設定 x 軸邊界
-
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1435,35 +1432,44 @@ print("------------------------------------------------------------")  # 60個
 print("np.fft 05")
 
 sampling_rate, NNNN = 8000, 512
-T = np.arange(0, 1.0, 1.0 / sampling_rate)
+t = np.arange(0, 1.0, 1.0 / sampling_rate)
 
 # 50Hz正弦波的512點FFT所計算的頻譜的實際波形
+
+f1 = 50  # Hz
+
 plt.figure(figsize=(10, 6))
 plt.subplot(211)
-T = np.arange(0, 1.0, 1.0 / 8000)
-y = np.sin(2 * np.pi * 50 * T)[:512]
+t = np.arange(0, 1.0, 1.0 / 8000)
+y = np.sin(2 * np.pi * f1 * t)[:512]
 plt.plot(np.hstack([y, y, y]))
 
 plt.subplot(212)
-T = np.arange(0, 1.0, 1.0 / 8000)
-y = np.sin(2 * np.pi * 50 * T)[:512]
+t = np.arange(0, 1.0, 1.0 / 8000)
+y = np.sin(2 * np.pi * f1 * t)[:512]
 plt.plot(np.hstack([y, y, y]))
-
 show()
 
 print("------------------------------")  # 30個
 
 f1 = 200  # Hz
 f2 = 300  # Hz
-y = np.sin(2 * np.pi * f1 * T) + 2 * np.sin(2 * np.pi * f2 * T)
 
-XS = y[:NNNN]
+# 建立2個正弦波
+function1 = np.sin(2 * np.pi * f1 * t)
+function2 = np.sin(2 * np.pi * f2 * t)
+# 加總sin波
+function3 = function1 + function2
+function3 = function1 + 2 * function2
+
+XS = function3[:NNNN]
 
 xf = np.fft.rfft(XS) / NNNN
 
 freqs = np.linspace(0, sampling_rate // 2, NNNN // 2 + 1)
 
 xfp = 20 * np.log10(np.clip(np.abs(xf), 1e-20, 1e100))
+
 
 plt.figure(figsize=(10, 6))
 plt.plot(freqs, xfp, label="矩形窗")
@@ -1474,7 +1480,6 @@ a = plt.axes([0.4, 0.2, 0.4, 0.4])
 a.plot(freqs, xfp, label="矩形窗")
 a.set_xlim(100, 400)
 a.set_ylim(-40, 0)
-
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1553,7 +1558,6 @@ y_new = pywt.idwt(cA, cD, "db2")
 
 plt.plot(y, "r", lw=10)
 plt.plot(y_new, "g", lw=3)
-
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1846,7 +1850,6 @@ image = image[::3, ::2]  # j每隔3, i每隔2
 plt.subplot(122)
 plt.imshow(image, cmap="gray")  # 灰階顯示原圖
 plt.title("原圖")
-
 show()
 
 print(y[::3, ::3])
@@ -1897,7 +1900,6 @@ image = np.random.rand(N, N)
 
 plt.imshow(image, cmap="gray")
 show()
-
 
 print("製作 sinc2d 資料")
 
