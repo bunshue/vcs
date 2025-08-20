@@ -19,7 +19,6 @@ print("------------------------------------------------------------")  # 60個
 filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
 filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/aaaa.mp3"
 
-
 from mutagen.easyid3 import EasyID3
 
 tags = EasyID3(filename)

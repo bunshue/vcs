@@ -49,7 +49,11 @@ print("------------------------------------------------------------")  # 60個
 
 S_sentinel_bands = glob("Data/sundarbans_data/*B?*.tiff")
 S_sentinel_bands.sort()
-print(S_sentinel_bands)
+n = len(S_sentinel_bands)
+print("找到 :", n, "個檔案")
+# print(S_sentinel_bands)
+for _ in S_sentinel_bands:
+  print(_)
 
 l = []
 for i in S_sentinel_bands:
@@ -64,7 +68,7 @@ print(f'Height: {arr_st.shape[1]}\nWidth: {arr_st.shape[2]}\nBands: {arr_st.shap
 #Visualize Data
 #Bands
 
-ep.plot_bands(arr_st, cmap = 'gist_earth', figsize = (20, 12), cols = 6, cbar = False)
+ep.plot_bands(arr_st, cmap = 'gist_earth', figsize = (12, 8), cols = 6, cbar = False)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個

@@ -11,6 +11,27 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
+from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
+
+video = AudioSegment.from_file(video_filename)  # 讀取 mp4 檔案
+output.export("tmp_video.mp3")  # 講讀取的聲音輸出為 mp3
+
+print("ok 03")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from pydub import AudioSegment
+
+video = AudioSegment.from_file(video_filename)
+output = video[2000:10000]  # 剪輯聲音
+output = output[:] + 10  # 放大聲音
+output.export("tmp_output.mp3")
+print("ok 04")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 from pydub import AudioSegment
 
 song = AudioSegment.from_mp3("oxxostudio.mp3")  # 讀取 mp3 檔案

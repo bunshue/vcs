@@ -60,3 +60,63 @@ class Window:
 
 window = Window()
 window.MainLoop()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("建立 midi 檔案")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from midiutil.MidiFile import MIDIFile
+
+# Create the MIDIFile Object
+MyMIDI = MIDIFile(1)
+
+# Tracks are numbered from zero. Times are measured in beats.
+track = 0
+time = 0
+
+# Add track name and tempo.
+MyMIDI.addTrackName(track, time, "Sample Track")
+MyMIDI.addTempo(track, time, 120)
+
+# C major scale
+scale = [60, 62, 64, 65, 67, 69, 71, 72]
+
+# Add a note. addNote expects the following information:
+track = 0
+channel = 0
+pitch = scale[0]
+time = 0
+duration = 1
+volume = 100
+
+# Then add the scale notes
+for i, pitch in enumerate(scale):
+    MyMIDI.addNote(track, channel, pitch, time + i, duration, volume)
+
+# Write the MIDI file to disk
+with open("tmp_create_midi.mid", "wb") as output_file:
+    MyMIDI.writeFile(output_file)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("使用 pygame 播放 midi 檔案")
+
+import pygame
+
+pygame.mixer.init()
+pygame.mixer.music.load("data/HotelCalifornia.mid")
+pygame.mixer.music.play()
+
+while pygame.mixer.music.get_busy():
+    continue
+
+pygame.mixer.quit()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
