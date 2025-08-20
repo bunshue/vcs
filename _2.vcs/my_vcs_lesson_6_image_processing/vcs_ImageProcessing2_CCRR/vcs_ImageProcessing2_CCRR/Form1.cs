@@ -73,13 +73,13 @@ namespace vcs_ImageProcessing2_CCRR
             button22.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 10);
             button23.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 10);
 
-            bt_restore.Location = new Point(x_st + dx * 9 + 50, y_st + dy * 0);
+            bt_restore.Location = new Point(x_st + dx * 11 - 50, y_st + dy * 0);
 
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            pictureBox1.Size = new Size(1000, 800);
+            pictureBox1.Size = new Size(1200, 800);
 
-            richTextBox1.Size = new Size(500, 900);
-            richTextBox1.Location = new Point(x_st + dx * 10, y_st + dy * 0);
+            richTextBox1.Size = new Size(360, 900);
+            richTextBox1.Location = new Point(x_st + dx * 11, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //最大化螢幕
@@ -302,15 +302,13 @@ namespace vcs_ImageProcessing2_CCRR
             //圖片剪下一塊存檔1
             //圖片剪下一塊存檔, 圖片裁剪
             string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\picture1_cut.jpg";
+            string filename2 = @"tmp_picture1_cut.jpg";
 
             ImgReduceCutOut(200, 200, filename1, filename2);
 
             //看起來像是 305X400 轉成200X200
             richTextBox1.Text += "原檔案 : " + filename1 + "\n";
             richTextBox1.Text += "圖片剪下一塊存檔 : " + filename2 + "\n";
-
-
         }
 
         public static Image CutForCustomx(string imgPath, int top, int height)

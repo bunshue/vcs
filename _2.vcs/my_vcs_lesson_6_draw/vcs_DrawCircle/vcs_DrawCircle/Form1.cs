@@ -67,15 +67,20 @@ namespace vcs_DrawCircle
             if (Y1 > Y2) rect.Y = Y1 - width;
             Circles.Add(rect);
 
-            // If we have two circles, see where they intersect.
+            // 集滿兩個圓
             if (Circles.Count == 2)
             {
+                //第一個圓
                 float radius0 = Circles[0].Height / 2;
                 float cx0 = Circles[0].X + radius0;
                 float cy0 = Circles[0].Y + radius0;
+
+                //第二個圓
                 float radius1 = Circles[1].Height / 2;
                 float cx1 = Circles[1].X + radius1;
                 float cy1 = Circles[1].Y + radius1;
+
+                //取交點
                 NumIntersections = FindCircleCircleIntersections(
                     cx0, cy0, radius0, cx1, cy1, radius1,
                     out Intersection1, out Intersection2);
@@ -189,4 +194,3 @@ namespace vcs_DrawCircle
         }
     }
 }
-

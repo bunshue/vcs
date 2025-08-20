@@ -3228,8 +3228,8 @@ namespace _vcs_MakePicture
             int xx;
             int yy;
 
-            int W = 440;
-            int H = 200;
+            int W = 800;
+            int H = 500;
             bitmap1 = new Bitmap(W, H);
 
             //background
@@ -3238,13 +3238,13 @@ namespace _vcs_MakePicture
                 for (xx = 0; xx < W; xx++)
                 {
                     //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(xx, yy, Color.White);
+                    bitmap1.SetPixel(xx, yy, Color.Black);
                 }
             }
 
             g = Graphics.FromImage(bitmap1);
 
-            sb = new SolidBrush(Color.White);
+            sb = new SolidBrush(Color.Black);
             g.FillRectangle(sb, new Rectangle(0, 0, W, H));
 
             /*
@@ -3272,22 +3272,29 @@ namespace _vcs_MakePicture
                 }
             }
             */
-            sb = new SolidBrush(Color.Yellow);
+            sb = new SolidBrush(Color.White);
 
-            int x_st = 50;
+            int x_st = 120;
             int y_st = 50;
 
-            g.FillRectangle(sb, new Rectangle(x_st + 0, y_st + 0, 130, 100));
-
-            sb = new SolidBrush(Color.Olive);
-            x_st += 200;
-            Point[] points = new Point[6];
+            Point[] points = new Point[3];
             points[0] = new Point(x_st + 0, y_st + 0);
-            points[1] = new Point(x_st + 100, y_st + 0);
-            points[2] = new Point(x_st + 150, y_st + 50);
-            points[3] = new Point(x_st + 100, y_st + 100);
-            points[4] = new Point(x_st + 0, y_st + 100);
-            points[5] = new Point(x_st + -50, y_st + 50);
+            points[1] = new Point(x_st + 50, y_st + 100);
+            points[2] = new Point(x_st - 50, y_st + 100);
+            g.FillPolygon(sb, points);
+
+            x_st += 120;
+            g.FillRectangle(sb, new Rectangle(x_st + 0, y_st + 0, 100, 100));
+
+            x_st += 170;
+            g.FillEllipse(sb, new Rectangle(x_st, y_st, 100, 100));
+
+            x_st += 250;
+            points = new Point[4];
+            points[0] = new Point(x_st + 0, y_st + 0);
+            points[1] = new Point(x_st + 80, y_st + 0);
+            points[2] = new Point(x_st - 10, y_st + 100);
+            points[3] = new Point(x_st - 10-80, y_st + 100);
             g.FillPolygon(sb, points);
 
             pictureBox1.Image = bitmap1;

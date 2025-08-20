@@ -22,6 +22,23 @@ namespace vcs_ToolTip2
             toolTip1.SetToolTip(button1, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             toolTip1.SetToolTip(button2, "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
             toolTip1.SetToolTip(button3, "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+
+            //ToolTip：當游標停滯在某個控制項時，就會跳出一個小視窗
+            ToolTip toolTip_tb = new ToolTip();
+            //SetToolTip：定義控制項會跳出提示的文字
+            toolTip_tb.SetToolTip(textBox1, "please enter number!!");
+
+            //以下為提示視窗的設定(通常會設定的部分)
+            //ToolTipIcon：設定顯示在提示視窗的圖示類型。
+            toolTip_tb.ToolTipIcon = ToolTipIcon.Info;
+            //ForeColor：顧名思義就是前景顏色，你懂的!!XD
+            toolTip_tb.ForeColor = Color.Blue;
+            //BackColor：顧名思義就是背景顏色，你也懂的!!XD
+            toolTip_tb.BackColor = Color.Gray;
+            //AutoPopDelay：當游標停滯在控制項，顯示提示視窗的時間。(以毫秒為單位)
+            toolTip_tb.AutoPopDelay = 5000;
+            //ToolTipTitle：設定提示視窗的標題。
+            toolTip_tb.ToolTipTitle = "提示訊息";
         }
 
         private const int Margin = 10;
