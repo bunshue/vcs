@@ -1187,12 +1187,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 各種python簡易說明
 
-Firebase 即時資料庫
-即時資料庫並進行 CRUD (Create, Retrieve, Update, Delete) 操作
-
-
 溝通網頁的利器 requests 模組
-
 
 Sympy 這是 Python 用來繪製數學公式與進行符號運算的套件
 requests：用於請求伺服器回傳資料，可用正則表達式篩選所需的資料。

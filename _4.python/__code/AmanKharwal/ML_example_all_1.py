@@ -21,9 +21,11 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 """
 
+
 def show():
     plt.show()
     pass
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -393,6 +395,7 @@ plt.pie(
 plt.title("Types of Dismissals")
 show()
 
+
 # function to calculate partnerships
 def calculate_partnerships(df):
     partnerships = []
@@ -444,6 +447,7 @@ plt.xlabel("Runs Scored")
 plt.ylabel("Batter 1 (Partnership Initiated)")
 plt.legend(title="Team")
 show()
+
 
 # function to classify the phase of the game based on the over number
 def classify_phase(over):

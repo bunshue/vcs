@@ -1,0 +1,4 @@
+Firebase 即時資料庫
+即時資料庫並進行 CRUD (Create, Retrieve, Update, Delete) 操作
+
+

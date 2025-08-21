@@ -1,3 +1,27 @@
+"""
+1.
+Create a Firebase project
+建立 Firebase 專案
+2.
+Initialize a Firebase app with Python
+使用 Python 初始化 Firebase 應用程式
+3.
+Use the Pyrebase library
+使用 Pyrebase 程式庫
+4.
+Insert data into the Realtime Database
+將資料插入即時資料庫
+5.
+Update data in the Realtime Database
+更新即時資料庫中的資料
+6.
+Delete data from the Realtime Database
+從即時資料庫刪除資料
+7.
+Query the Realtime Database
+查詢即時資料庫
+"""
+
 import pyrebase
 
 #Initialize Firebase

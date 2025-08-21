@@ -1170,26 +1170,8 @@ pic1 = fig.add_axes([x_st, y_st, w, h])
 pic1.set_ylabel('Voltage [V]')
 pic1.set_title('A sine wave')
 
-
-
 data = sp.find_all('span', {'id':'Showtd'})
 rows = data[0].find_all('tr')
-
-
-給class用
-
-Firebase 專案是應用程式的容器
-
-檢查key
-def CkeckKey(no):
-    key_id=""
-    if datas != None:
-        for key in datas:
-            if no==datas[key]["no"]: # 找到鍵名稱
-                key_id = key
-                break
-    return key_id
-
 
 plt有此語法否?
 plt.gcf().set_size_inches(12, 14)
