@@ -10,12 +10,8 @@ from PIL import Image
 from PIL import ImageFilter
 
 filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
-filename_lena_color = (
-    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
-)
-filename_lena_gray = (
-    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-)
+filename_lena_color =  "C:/_git/vcs/_4.python/_data/lena_color.jpg"
+filename_lena_gray = "C:/_git/vcs/_4.python/_data/lena_gray.jpg"
 
 print("------------------------------------------------------------")  # 60個
 

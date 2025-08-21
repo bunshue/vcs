@@ -1556,9 +1556,246 @@ test_avi_output("tmp_fmp4.avi", "fmp4")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+import cv2
+
+filename = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
+image = cv2.imread(filename)  # 讀取本機圖片
+image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 灰階
+_, image = cv2.threshold(image, 120, 255, cv2.THRESH_BINARY_INV)  # 轉為反相黑白
+
+plt.imshow(image, cmap="binary")  # 顯示黑白圖片
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print("螢幕錄製")
+
+RECORD_SECONDS = 30  # 录制时间
+
+import cv2
+import pyautogui
+
+# 获取屏幕分辨率
+screen_size = (1920, 1080)
+
+# 创建视频编码器
+fourcc = cv2.VideoWriter_fourcc(*"XVID")
+out = cv2.VideoWriter("screen_record.avi", fourcc, 20.0, screen_size)
+
+# 开始录制
+start_time = time.time()  # 记录开始时间
+while (time.time() - start_time) < RECORD_SECONDS:
+    # while True:
+    # 获取屏幕截图
+    img = pyautogui.screenshot()
+    frame = np.array(img)
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+    # 写入视频
+    out.write(frame)
+
+# 释放资源
+out.release()
+cv2.destroyAllWindows()
+
+print("done")
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+""" fail
+import pyautogui
+import cv2
+import numpy as np
+import sounddevice as sd
+import wave
+
+# 設定螢幕解析度（根據需要調整）
+W, H = pyautogui.size()
+
+# 設定輸出影片檔名
+record_filename = (
+    "tmp_screen_recording2_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mp4"
+)
+
+# 設定音訊錄製參數
+SAMPLE_RATE = 44100 #取樣率
+RECORD_TIME_SECOND = 10  # 錄製時間（秒）
+
+# 初始化audio_buffer
+audio_buffer = []#音訊緩衝區
+
+# 開始音訊錄製
+def 音訊回呼(indata, frames, time, status):
+    if status:
+        print("錄製音訊時發生錯誤:", status)
+    audio_buffer.extend(indata)
+
+with sd.InputStream(callback=音訊回呼, channels=2, samplerate=SAMPLE_RATE):
+    # 初始化影片寫入器 out
+    fourcc = cv2.VideoWriter_fourcc(*"XVID")
+    out = cv2.VideoWriter(record_filename, fourcc, 20.0, (W, H))
+
+    # 錄製螢幕並儲存到影片
+    while True:
+        screen_picture = pyautogui.screenshot() #螢幕截圖
+        frame = np.array(screen_picture)
+        frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+        out.write(frame)
+
+        # 錄製指定時間後中斷迴圈
+        if len(audio_buffer) >= SAMPLE_RATE * RECORD_TIME_SECOND:
+            break
+
+# 將音訊嵌入到影片中
+audio_buffer = np.array(audio_buffer)
+audio_buffer = np.int16(audio_buffer * 32767)
+audio_buffer = audio_buffer.tobytes()
+out.write(audio_buffer)
+
+print(f"螢幕錄影已儲存為 {record_filename}")
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+""" TBD
+#录制的音频与视频合成为带声音的视频
+#录制200帧，带音频的MP4视频，单线程
+
+import pyaudio
+import wave
+from pyaudio import PyAudio,paInt16
+from PIL import ImageGrab
+import numpy as np
+import cv2
+from moviepy.editor import *
+from moviepy.audio.fx import all
+
+CHUNK = 1024
+FORMAT = pyaudio.paInt16
+CHANNELS = 1
+RATE = 44100
+WAVE_OUTPUT_FILENAME = "output.wav"
+
+p = pyaudio.PyAudio()
+wf = wave.open(WAVE_OUTPUT_FILENAME, "wb")
+wf.setnchannels(CHANNELS)
+wf.setsampwidth(p.get_sample_size(FORMAT))
+wf.setframerate(RATE)
+audio_record_flag = True
+def callback(in_data, frame_count, time_info, status):
+    wf.writeframes(in_data)
+    if audio_record_flag:
+        return (in_data, pyaudio.paContinue)
+    else:
+        return (in_data, pyaudio.paComplete)
+stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
+                channels=wf.getnchannels(),
+                rate=wf.getframerate(),
+                input=True,
+                stream_callback=callback)
+image = ImageGrab.grab()#获得当前屏幕
+width = image.size[0]
+height = image.size[1]
+print("width:", width, "height:", height)
+print("image mode:",image.mode)
+k=np.zeros((width,height),np.uint8)
+
+fourcc = cv2.VideoWriter_fourcc(*"XVID")#编码格式
+video = cv2.VideoWriter("tmp_test.mp4", fourcc, 9.5, (width, height))
+#经实际测试，单线程下最高帧率为10帧/秒，且会变动，因此选择9.5帧/秒
+#若设置帧率与实际帧率不一致，会导致视频时间与音频时间不一致
+
+print("video recording!!!!!")
+stream.start_stream()
+print("audio recording!!!!!")
+record_count = 0
+while True:
+    img_rgb = ImageGrab.grab()
+    img_bgr=cv2.cvtColor(np.array(img_rgb), cv2.COLOR_RGB2BGR)#转为opencv的BGR格式
+    video.write(img_bgr)
+    record_count += 1
+    if(record_count > 200):
+        break
+    print(record_count, time.time())
+
+audio_record_flag = False
+while stream.is_active():
+    time.sleep(1)
+
+stream.stop_stream()
+stream.close()
+wf.close()
+p.terminate()
+print("audio recording done!!!!!")
+
+video.release()
+cv2.destroyAllWindows()
+print("video recording done!!!!!")
+"""
+
+""" 影音合併有問題
+print("video audio merge!!!!!")
+audioclip = AudioFileClip("output.wav")
+videoclip = VideoFileClip("test.mp4")
+videoclip2 = videoclip.set_audio(audioclip)
+video = CompositeVideoClip([videoclip2])
+video.write_videofile("test2.mp4",codec="mpeg4")
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+import math
+
+W = 512
+H = 512
+cx, cy = W // 2, H // 2
+
+WIDTH = 512
+HEIGHT = 512
+I = np.zeros((HEIGHT, WIDTH, 3), dtype=np.uint8)
+
+response = 2
+red = (0, 0, 255)
+green = (0, 255, 0)
+blue = (255, 0, 0)
+for i in range(H):
+    for j in range(W):
+        distance = math.sqrt((i - cx) ** 2 + (j - cy) ** 2)
+        # sampleMat = np.matrix([[j,i]], dtype=np.float32)
+        # response = svm.predict(sampleMat)[1]
+
+        if distance < 100:
+            I[i, j] = red
+        elif distance < 200:
+            I[i, j] = green
+        else:
+            I[i, j] = blue
+## [show]
+
+cv.imshow("image", I)
+cv.waitKey()
+
+"""
+#cv.circle(I, (px, py), 3, (0, 255, 0), thick)  wrong
+#cv.circle(I, (px, py), 3, (255, 0, 0), thick)  wrong
+cv.circle(I, (sv[i,0], sv[i,1]), 6, (128, 128, 128), thick)
+
+"""
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1866,6 +2103,7 @@ cv2.imwrite(fullpath, car_img)  # 寫入資料夾
 print("在 bmpCar 資料夾重新命名車輛副檔名成功")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 width = 500  # 負樣本寬
 height = 400  # 負樣本高
@@ -1888,5 +2126,21 @@ ax.add_artist(circle)
 circle = plt.Circle((sx, sy), r, fill=None, alpha=0.5, lw=2, color="black")
 ax.add_artist(circle)
 ax.axis("off")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 使用matplotlib.collections顯示大量曲線
+from matplotlib import collections as mc
+
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.set_aspect("equal")
+polys = mc.PolyCollection(lines, array=np.array(levels), facecolors="none")
+ax.add_collection(polys)
+ax.set_xlim(0, image.shape[1])
+ax.set_ylim(image.shape[0], 0)
+ax.title("aaaaaaaaaaa")
 
 show()

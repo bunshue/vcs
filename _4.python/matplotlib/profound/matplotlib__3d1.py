@@ -148,21 +148,21 @@ import cv2
 filename = "mola_1024x512_200mp.jpg"
 filename = "C:/_git/vcs/_1.data/______test_files1/_material/ims3.bmp"
 
-IMG_GRAY = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 plt.title("使用 matplotlib 顯示圖片, 需先BGR轉RGB")
-plt.imshow(cv2.cvtColor(IMG_GRAY, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB))
 show()
 
-print("image.shape內容 :", IMG_GRAY.shape)
+print("image.shape內容 :", gray.shape)
 
-H, W = IMG_GRAY.shape
+H, W = gray.shape
 
 x = np.linspace(W - 1, 0, W)
 y = np.linspace(0, H - 1, H)
 
 X, Y = np.meshgrid(x, y)
-Z = IMG_GRAY[0:H, 0:W]
+Z = gray[0:H, 0:W]
 
 fig = plt.figure()
 ax = plt.axes(projection="3d")

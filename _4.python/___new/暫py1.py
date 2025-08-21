@@ -1234,7 +1234,6 @@ split replace
 自定義版本 資料
 
 __version__ = "1.1"
-
 __author__ = 'Raymond Hettinger'
 
 print("msgfmt.py", __version__)
@@ -2833,9 +2832,7 @@ LinearRegression
 
 print('查詢已安裝的 sklearn 版本')
 print(sklearn.__version__)
-
 print(sklearn.version.version)
-
 
 要跳過的關鍵字
 print('55')

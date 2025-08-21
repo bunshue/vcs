@@ -1305,9 +1305,7 @@ info_gain_train(np.array(datasets))
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 import cv2
-
 
 # 图像处理需要用到二值化
 
@@ -1350,8 +1348,8 @@ mnist数据中的image的shape为(28,28)，即每个image的特征数为28*28=78
 所有设置feature_len=784
 
 本实验的训练数据为lihang-dl-train.csv,文件的数据是mnist image数据
-
 """
+
 class_num = 10
 feature_len = 784
 epsilon = 0.001  # 设定阈值
@@ -2646,7 +2644,7 @@ print(
     "precision:%.3f" % metrics.precision_score(y_test, predict_test2),
 )
 
-cv2.best_params_
+print(cv2.best_params_)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2686,12 +2684,16 @@ param_grid = {
     "min_samples_split": [4, 8, 12, 16, 20, 24, 28],
 }
 clf = tree.DecisionTreeClassifier()
+
 clfcv = GridSearchCV(estimator=clf, param_grid=param_grid, scoring="roc_auc", cv=4)
+
 clfcv.fit(train_data, train_target)
 
 test_est = clfcv.predict(test_data)
+
 print("decision tree accuracy:")
 print(metrics.classification_report(test_target, test_est))
+
 print("decision tree AUC:")
 fpr_test, tpr_test, th_test = metrics.roc_curve(test_target, test_est)
 print("AUC = %.4f" % metrics.auc(fpr_test, tpr_test))
@@ -2706,12 +2708,16 @@ param_grid = {
 }
 
 rfc = RandomForestClassifier()
+
 rfccv = GridSearchCV(estimator=rfc, param_grid=param_grid, scoring="roc_auc", cv=4)
+
 rfccv.fit(train_data, train_target)
+
 test_est = rfccv.predict(test_data)
 print("random forest accuracy:")
 print(metrics.classification_report(test_target, test_est))
 print("random forest AUC:")
+
 fpr_test, tpr_test, th_test = metrics.roc_curve(test_target, test_est)
 print("AUC = %.4f" % metrics.auc(fpr_test, tpr_test))
 
@@ -2727,12 +2733,16 @@ param_grid = {
     "learning_rate": [0.1, 0.3, 0.5, 0.7, 1]
 }
 abc = AdaBoostClassifier(n_estimators=100, algorithm="SAMME")
+
 abccv = GridSearchCV(estimator=abc, param_grid=param_grid, scoring="roc_auc", cv=4)
+
 abccv.fit(train_data, train_target)
+
 test_est = abccv.predict(test_data)
 print("abc classifier accuracy:")
 print(metrics.classification_report(test_target, test_est))
 print("abc classifier AUC:")
+
 fpr_test, tpr_test, th_test = metrics.roc_curve(test_target, test_est)
 print("AUC = %.4f" % metrics.auc(fpr_test, tpr_test))
 
@@ -2748,7 +2758,9 @@ param_grid = {
 }
 
 gbc = GradientBoostingClassifier()
+
 gbccv = GridSearchCV(estimator=gbc, param_grid=param_grid, scoring="roc_auc", cv=4)
+
 gbccv.fit(train_data, train_target)
 test_est = gbccv.predict(test_data)
 print("gradient boosting accuracy:")

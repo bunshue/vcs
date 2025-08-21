@@ -40,11 +40,11 @@ def get_photo():
 
 def codeocr(offset):
     global result    
-    img = cv2.imread("img_source.png")
+    img = cv2.imread("img_source.png")  # 彩色讀取
     # 去除圖片的雜訊 fastNlMeansDenoisingColored
     dst = cv2.fastNlMeansDenoisingColored(img,None,30,30,7,21) # 去雜點
-    ret,thresh = cv2.threshold(dst,127,255,cv2.THRESH_BINARY_INV)  #黑白
-    imgarr = cv2.cvtColor(thresh,cv2.COLOR_BGR2GRAY) #灰階    
+    ret,thresh = cv2.threshold(dst,127,255,cv2.THRESH_BINARY_INV)  # 二值化+反相
+    imgarr = cv2.cvtColor(thresh,cv2.COLOR_BGR2GRAY)  # 轉灰階
 #    plt.imshow(thresh)
 #    plt.show()
     

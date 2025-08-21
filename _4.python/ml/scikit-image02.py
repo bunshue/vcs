@@ -284,7 +284,7 @@ selem表示結構化元素，用于設定濾波器。
 import skimage.filters.rank as sfr
 
 # img =skimage.color.rgb2gray(skimage.data.lena())
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+filename = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
 img = skimage.io.imread(filename, True)  # True:轉為灰階
 
 # 半徑為5的圓形濾波器
@@ -352,7 +352,7 @@ selem表示結構化元素，用于設定濾波器。
 import skimage.filters.rank as sfr
 
 # img = skimage.color.rgb2gray(skimage.data.lena())
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+filename = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
 img = skimage.io.imread(filename, True)  # True:轉為灰階
 
 # 半徑為5的圓形濾波器
@@ -382,7 +382,7 @@ selem表示結構化元素，用于設定濾波器。
 import skimage.filters.rank as sfr
 
 # img = skimage.color.rgb2gray(skimage.data.lena())
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+filename = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
 img = skimage.io.imread(filename, True)  # True:轉為灰階
 
 # 半徑為5的圓形濾波器
@@ -409,7 +409,7 @@ selem表示結構化元素，用于設定濾波器。
 import skimage.filters.rank as sfr
 
 # img = skimage.color.rgb2gray(skimage.data.lena())
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+filename = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
 img = skimage.io.imread(filename, True)  # True:轉為灰階
 
 # 半徑為5的圓形濾波器
@@ -436,7 +436,7 @@ selem表示結構化元素，用于設定濾波器。
 import skimage.filters.rank as sfr
 
 # img = skimage.color.rgb2gray(skimage.data.lena())
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+filename = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
 img = skimage.io.imread(filename, True)  # True:轉為灰階
 
 # 半徑為5的圓形濾波器

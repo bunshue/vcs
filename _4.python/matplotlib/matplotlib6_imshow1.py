@@ -5,10 +5,8 @@ matplotlib直接對圖片處理 不經過opencv PIL
 
 opencv與PIL有自己的圖片處理, 只是使用matplotlib輸出
 
-
 要用 matplotlib 顯示圖片，要先透過 matplotlib.image 模組中的
 imread() 方法讀取圖片，讀取後使用 imshow() 在圖表中繪製圖片，最後透過 plt.show() 顯示圖表。
-
 """
 
 import matplotlib.cm as cm
@@ -370,14 +368,6 @@ plt.subplot(232)
 print("------------------------------")  # 30個
 plt.subplot(233)
 
-import cv2
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
-image = cv2.imread(filename)  # 讀取本機圖片
-image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 灰階
-_, image = cv2.threshold(image, 120, 255, cv2.THRESH_BINARY_INV)  # 轉為反相黑白
-
-plt.imshow(image, cmap="binary")  # 顯示黑白圖片
 
 print("------------------------------")  # 30個
 plt.subplot(234)

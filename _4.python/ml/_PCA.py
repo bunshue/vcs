@@ -53,7 +53,7 @@ print(__doc__)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 sns.set()
 
 # 首先，以亂數產生200個點，並呈現在二維平面中
@@ -770,7 +770,7 @@ plot_2d(S_t_sne, S_color, "T-distributed Stochastic  \n Neighbor Embedding")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 from PIL import Image
 from PIL import ImageEnhance
 import matplotlib.cm as cm
@@ -792,7 +792,8 @@ def PrintError(data, recdata):
     print("信息丢失率：", sum2 / sum1)
 
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+filename = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
+
 img = cv2.imread(filename)
 blue = img[:, :, 0]
 dataMat = np.mat(blue)

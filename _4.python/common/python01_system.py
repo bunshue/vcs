@@ -209,25 +209,17 @@ print("------------------------------------------------------------")  # 60個
 from bs4 import BeautifulSoup
 
 import bs4
-
 print(bs4.__version__)
 
-import cv2
-
-print(cv2.__version__)
-
 import numpy as np
-
 print(np.__version__)
 
-import pandas as pd
-
 print("查詢已安裝的 Pandas 版本")
+
+import pandas as pd
 print(pd.__version__)
 
-
 import matplotlib
-
 print(matplotlib.__version__)
 
 # import sklearn
@@ -959,7 +951,7 @@ print("------------------------------------------------------------")  # 60個
 # os.startfile('harumi99.wav')
 
 # 用系統預設程式開啟檔案
-# os.system('cv03.png')
+# os.system('tmp_pic.png')
 
 print("------------------------------------------------------------")  # 60個
 

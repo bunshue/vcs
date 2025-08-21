@@ -1,5 +1,7 @@
 import monitor_module
 
+print('------------------------------------------------------------')	#60個
+
 #----------↓↓E-mail資料設定↓↓------------#
 gmail_addr = '你的 Gmail 信箱'
 gmail_pwd = '信箱密碼'
@@ -15,10 +17,10 @@ msg = monitor_module.get_mime_img('小偷入侵', '鷹眼防盜監視器', '警�
 monitor_module.send_gmail(gmail_addr, gmail_pwd, to_addrs, msg)  # 以 gmail 寄出
 monitor_module.send_sms('小偷來了', sid, token, us_phone, tw_phone)
 
-
+print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
-import monitor_module as m  # ←匯入自訂模組並更名為 m
+import monitor_module
 from email.mime.text import MIMEText
 
 gmail_addr = '您的Gmail郵件地址'
@@ -31,14 +33,12 @@ mime_text['From'] = '旗標科技'
 mime_text['To'] = '親愛的讀者'
 mime_text['Cc'] = '親愛的副本接收者'
 mime_text = mime_text.as_string()  # ←轉為字串
-m.send_gmail(gmail_addr, gmail_pwd, to_addrs, mime_text)  # ←寄出郵件
-
-
+monitor_module.send_gmail(gmail_addr, gmail_pwd, to_addrs, mime_text)  # ←寄出郵件
 
 print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
 
-
-import monitor_module as m  # ←匯入自訂模組並更名為 m
+import monitor_module
 from email.mime.image import MIMEImage
 import cv2
 
@@ -63,11 +63,10 @@ to_addrs = ['第一個收件者的郵件網路', '第二個收件者的郵件網
 
 
 msg = get_mime_img('小偷入侵', '鷹眼防盜監視器', '警察局', img)
-m.send_gmail(gmail_addr, gmail_pwd, to_addrs, msg)  # 以 gmail 寄出郵件
-
+monitor_module.send_gmail(gmail_addr, gmail_pwd, to_addrs, msg)  # 以 gmail 寄出郵件
 
 print('------------------------------------------------------------')	#60個
-
+print('------------------------------------------------------------')	#60個
 
 from twilio.rest import Client
 
@@ -76,13 +75,10 @@ token = '您的 AUTH　TOKEN'
 us_phone = '您的美國手機號碼'
 tw_phone = '+您的台灣手機號碼'
 
-
-
 #-----↓↓發送簡訊↓↓-----#
 send_sms('注意！！家中有人闖入！！', sid, token, us_phone, tw_phone)    # 送出簡訊
 
-
 print('------------------------------------------------------------')	#60個
-
+print('------------------------------------------------------------')	#60個
 
 
