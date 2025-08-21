@@ -52,10 +52,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 02")
-lena_color_filename = (
-    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
-)
-image1 = cv2.imread(lena_color_filename)  # 彩色讀取
+
+filename_lena_color = "C:/_git/vcs/_4.python/opencv/data/lena_color.png"
+
+image1 = cv2.imread(filename_lena_color)  # 彩色讀取
 
 # 建立mask
 mask = np.zeros(image1.shape[:2], np.uint8)
@@ -92,10 +92,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 03")
-lena_color_filename = (
-    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
-)
-o = cv2.imread(lena_color_filename)  # 彩色讀取
+
+filename_lena_color = "C:/_git/vcs/_4.python/opencv/data/lena_color.png"
+
+o = cv2.imread(filename_lena_color)  # 彩色讀取
 
 image2 = cv2.cvtColor(o, cv2.COLOR_BGR2RGB)
 
@@ -130,10 +130,9 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 04")
 
-lena_color_filename = (
-    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
-)
-o = cv2.imread(lena_color_filename)  # 彩色讀取
+filename_lena_color = "C:/_git/vcs/_4.python/opencv/data/lena_color.png"
+
+o = cv2.imread(filename_lena_color)  # 彩色讀取
 
 bgd = np.zeros((1, 65), np.float64)
 fgd = np.zeros((1, 65), np.float64)
@@ -1558,9 +1557,11 @@ print("------------------------------------------------------------")  # 60個
 
 import cv2
 
-filename = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
-image = cv2.imread(filename)  # 讀取本機圖片
+filename_lena_color = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+
+image = cv2.imread(filename_lena_color)  # 讀取本機圖片
 image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 灰階
+
 _, image = cv2.threshold(image, 120, 255, cv2.THRESH_BINARY_INV)  # 轉為反相黑白
 
 plt.imshow(image, cmap="binary")  # 顯示黑白圖片
@@ -2037,6 +2038,7 @@ print("size = {:07d} bytes".format(fsize))
 # 將同一張圖片存成不同品質圖片
 
 filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+
 img = cv2.imread(filename3)  # 彩色讀取
 
 for quality in [90, 60, 30]:

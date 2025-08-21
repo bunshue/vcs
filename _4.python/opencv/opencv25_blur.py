@@ -623,7 +623,9 @@ filter2D(src, ddepth, kernel[, dst[, anchor[, delta[, borderType]]]])
     anchor参数指定卷积核的锚点位置，当它为默认值(-1，-1)时， 以卷积核的中心为锚点
 使用filter2D()制作的各种图像处理效果
 """
+
 filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+
 src = cv2.imread(filename3)  # 彩色讀取
 
 kernel1_name = "低通濾波器"

@@ -151,7 +151,7 @@ lowerbody_xml_filename = (
     "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_lowerbody.xml"
 )
 
-filename = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
+filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 filename = "C:/_git/vcs/_4.python/opencv/data/_face/face01.jpg"
 filename = "C:/_git/vcs/_4.python/opencv/data/_face/face17.jpg"
 # filename = "C:/_git/vcs/_4.python/opencv/data/_face/yalta1945.jpg"

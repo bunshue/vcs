@@ -25,8 +25,8 @@ print("------------------------------------------------------------")  # 60個
 
 import cv2
 
-filename_lena_color = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
-filename_lena_gray = "C:/_git/vcs/_4.python/_data/lena_gray.jpg"
+filename_lena_color = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename_lena_gray = "C:/_git/vcs/_4.python/opencv/data/lena_gray.jpg"
 
 print("------------------------------------------------------------")  # 60個
 

@@ -18,7 +18,7 @@ endpoint = david_endpoint
 analyzeUrl = endpoint + 'vision/v3.1/analyze'
 
 # 指定 filename 為分析圖像的本地路徑。
-filename = 'C:/_git/vcs/_4.python/_data/lena_color.jpg'
+filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
 # 將圖像讀入位元組陣列
@@ -43,7 +43,7 @@ endpoint = david_endpoint
 analyzeUrl = endpoint + "vision/v3.1/analyze"
 
 # 指定 filename 為分析圖像的本地路徑。
-filename = 'C:/_git/vcs/_4.python/_data/lena_color.jpg'
+filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
 # 將圖像讀入位元組陣列
@@ -84,7 +84,7 @@ endpoint = david_endpoint
 analyzeUrl = endpoint + "vision/v3.1/analyze"
 
 # 指定 filename 為分析圖像的本地路徑。
-filename = 'C:/_git/vcs/_4.python/_data/lena_color.jpg'
+filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
 # 將圖像讀入位元組陣列
@@ -183,7 +183,7 @@ endpoint = david_endpoint
 analyzeUrl = endpoint + "vision/v3.1/analyze"
 
 # 指定 filename 為分析圖像的本地路徑。
-filename = 'C:/_git/vcs/_4.python/_data/lena_color.jpg'
+filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
 # 將圖像讀入位元組陣列

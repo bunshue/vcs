@@ -792,7 +792,7 @@ def PrintError(data, recdata):
     print("信息丢失率：", sum2 / sum1)
 
 
-filename = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
+filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 
 img = cv2.imread(filename)
 blue = img[:, :, 0]

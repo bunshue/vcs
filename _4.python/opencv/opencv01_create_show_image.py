@@ -556,9 +556,9 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-lena_color_filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.png"
+filename_lena_color = "C:/_git/vcs/_4.python/opencv/data/lena_color.png"
 
-lena_color = cv2.imread(lena_color_filename)  # 彩色讀取
+lena_color = cv2.imread(filename_lena_color)  # 彩色讀取
 print(lena_color.shape)
 
 plt.figure(figsize=(12, 8))

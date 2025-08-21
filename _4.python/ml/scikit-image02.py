@@ -284,7 +284,9 @@ selem表示結構化元素，用于設定濾波器。
 import skimage.filters.rank as sfr
 
 # img =skimage.color.rgb2gray(skimage.data.lena())
-filename = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
+
+filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+
 img = skimage.io.imread(filename, True)  # True:轉為灰階
 
 # 半徑為5的圓形濾波器
@@ -324,19 +326,21 @@ selem表示結構化元素，用于設定濾波器。
 import skimage.filters.rank as sfr
 
 #img =skimage.color.rgb2gray(skimage.data.lena())
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
+
+filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+
 img=skimage.io.imread(filename, True)   #True:轉為灰階
 
 #半徑為5的圓形濾波器
 auto =sfr.bottomhat(img, skimage.morphology.disk(5))
 
-plt.figure('filters',figsize=(8,8))
+plt.figure("filters",figsize=(8,8))
 plt.subplot(121)
-plt.title('原圖')
+plt.title("原圖")
 plt.imshow(img,plt.cm.gray)
 
 plt.subplot(122)
-plt.title('濾波')
+plt.title("濾波")
 plt.imshow(auto,plt.cm.gray)
 
 show()
@@ -352,7 +356,9 @@ selem表示結構化元素，用于設定濾波器。
 import skimage.filters.rank as sfr
 
 # img = skimage.color.rgb2gray(skimage.data.lena())
-filename = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
+
+filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+
 img = skimage.io.imread(filename, True)  # True:轉為灰階
 
 # 半徑為5的圓形濾波器
@@ -382,7 +388,9 @@ selem表示結構化元素，用于設定濾波器。
 import skimage.filters.rank as sfr
 
 # img = skimage.color.rgb2gray(skimage.data.lena())
-filename = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
+
+filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+
 img = skimage.io.imread(filename, True)  # True:轉為灰階
 
 # 半徑為5的圓形濾波器
@@ -409,7 +417,9 @@ selem表示結構化元素，用于設定濾波器。
 import skimage.filters.rank as sfr
 
 # img = skimage.color.rgb2gray(skimage.data.lena())
-filename = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
+
+filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+
 img = skimage.io.imread(filename, True)  # True:轉為灰階
 
 # 半徑為5的圓形濾波器
@@ -436,7 +446,9 @@ selem表示結構化元素，用于設定濾波器。
 import skimage.filters.rank as sfr
 
 # img = skimage.color.rgb2gray(skimage.data.lena())
-filename = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
+
+filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+
 img = skimage.io.imread(filename, True)  # True:轉為灰階
 
 # 半徑為5的圓形濾波器
@@ -759,7 +771,7 @@ edges = skimage.feature.canny(image_gray, sigma=2.0, low_threshold=0.55, high_th
 
 #執行橢圓變換
 result = skimage.transform.hough_ellipse(edges, accuracy=20, threshold=250,min_size=100, max_size=120)
-result.sort(order='accumulator') #根據累加器排序
+result.sort(order="accumulator") #根據累加器排序
 
 #估計橢圓參數
 best = list(result[-1])  #排完序后取最后一個
@@ -776,10 +788,10 @@ edges[cy, cx] = (250, 0, 0)
 
 fig2, (ax1, ax2) = plt.subplots(ncols=2, nrows=1, figsize=(8, 4))
 
-ax1.set_title('Original picture')
+ax1.set_title("Original picture")
 ax1.imshow(image_rgb)
 
-ax2.set_title('Edge (white) and result (red)')
+ax2.set_title("Edge (white) and result (red)")
 ax2.imshow(edges)
 
 show()
@@ -833,7 +845,7 @@ ax0.imshow(img,plt.cm.gray)
 ax1.imshow(img,plt.cm.gray)
 for n, contour in enumerate(contours):
     ax1.plot(contour[:, 1], contour[:, 0], linewidth=2)
-ax1.axis('image')
+ax1.axis("image")
 ax1.set_xticks([])
 ax1.set_yticks([])
 
@@ -857,14 +869,14 @@ contours = skimage.measure.find_contours(img, 0.5)
 fig, axes = plt.subplots(1,2,figsize=(8,8))
 ax0, ax1 = axes.ravel()
 ax0.imshow(img,plt.cm.gray)
-ax0.set_title('original image')
+ax0.set_title("original image")
 
 rows,cols = img.shape
 ax1.axis([0,rows,cols,0])
 for n, contour in enumerate(contours):
     ax1.plot(contour[:, 1], contour[:, 0], linewidth=2)
-ax1.axis('image')
-ax1.set_title('contours')
+ax1.axis("image")
+ax1.set_title("contours")
 show()
 """
 
@@ -964,10 +976,10 @@ chull = skimage.morphology.convex_hull_image(img)
 fig, axes = plt.subplots(1,2,figsize=(8,8))
 ax0, ax1= axes.ravel()
 ax0.imshow(img,plt.cm.gray)
-ax0.set_title('original image')
+ax0.set_title("original image")
 
 ax1.imshow(chull,plt.cm.gray)
-ax1.set_title('convex_hull image')
+ax1.set_title("convex_hull image")
 
 show()
 """
@@ -994,9 +1006,9 @@ chull = skimage.morphology.convex_hull_object(edgs)
 fig, axes = plt.subplots(1,2,figsize=(8,8))
 ax0, ax1= axes.ravel()
 ax0.imshow(edgs,plt.cm.gray)
-ax0.set_title('many objects')
+ax0.set_title("many objects")
 ax1.imshow(chull,plt.cm.gray)
-ax1.set_title('convex_hull image')
+ax1.set_title("convex_hull image")
 
 show()
 """
@@ -1233,12 +1245,12 @@ skeleton = skimage.morphology.skeletonize(image)
 fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2, figsize=(8, 4))
 
 ax1.imshow(image, cmap=plt.cm.gray)
-ax1.axis('off')
-ax1.set_title('原圖')
+ax1.axis("off")
+ax1.set_title("原圖")
 
 ax2.imshow(skeleton, cmap=plt.cm.gray)
-ax2.axis('off')
-ax2.set_title('骨架skeleton')
+ax2.axis("off")
+ax2.set_title("骨架skeleton")
 
 fig.tight_layout()
 show()
@@ -1279,7 +1291,7 @@ dist_on_skel = distance * skel
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 4))
 ax1.imshow(data, cmap=plt.cm.gray, interpolation="nearest")
 # 用光譜色顯示中軸
-# ax2.imshow(dist_on_skel, cmap=plt.cm.spectral, interpolation='nearest')
+# ax2.imshow(dist_on_skel, cmap=plt.cm.spectral, interpolation="nearest")
 ax2.imshow(dist_on_skel, interpolation="nearest")
 ax2.contour(data, [0.5], colors="w")  # 顯示輪廓線
 
@@ -1323,17 +1335,17 @@ fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(8, 8))
 axes = axes.ravel()
 ax0, ax1, ax2, ax3 = axes
 
-ax0.imshow(image, cmap=plt.cm.gray, interpolation='nearest')
+ax0.imshow(image, cmap=plt.cm.gray, interpolation="nearest")
 ax0.set_title("Original")
-ax1.imshow(-distance, cmap=plt.cm.jet, interpolation='nearest')
+ax1.imshow(-distance, cmap=plt.cm.jet, interpolation="nearest")
 ax1.set_title("Distance")
-ax2.imshow(markers, cmap=plt.cm.spectral, interpolation='nearest')
+ax2.imshow(markers, cmap=plt.cm.spectral, interpolation="nearest")
 ax2.set_title("Markers")
-ax3.imshow(labels, cmap=plt.cm.spectral, interpolation='nearest')
+ax3.imshow(labels, cmap=plt.cm.spectral, interpolation="nearest")
 ax3.set_title("Segmented")
 
 for ax in axes:
-    ax.axis('off')
+    ax.axis("off")
 
 fig.tight_layout()
 show()
@@ -1364,21 +1376,22 @@ fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(6, 6))
 axes = axes.ravel()
 ax0, ax1, ax2, ax3 = axes
 
-ax0.imshow(image, cmap=plt.cm.gray, interpolation='nearest')
+ax0.imshow(image, cmap=plt.cm.gray, interpolation="nearest")
 ax0.set_title("Original")
-ax1.imshow(gradient, cmap=plt.cm.spectral, interpolation='nearest')
+ax1.imshow(gradient, cmap=plt.cm.spectral, interpolation="nearest")
 ax1.set_title("Gradient")
-ax2.imshow(markers, cmap=plt.cm.spectral, interpolation='nearest')
+ax2.imshow(markers, cmap=plt.cm.spectral, interpolation="nearest")
 ax2.set_title("Markers")
-ax3.imshow(labels, cmap=plt.cm.spectral, interpolation='nearest')
+ax3.imshow(labels, cmap=plt.cm.spectral, interpolation="nearest")
 ax3.set_title("Segmented")
 
 for ax in axes:
-    ax.axis('off')
+    ax.axis("off")
 
 fig.tight_layout()
 show()
 """
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -1509,7 +1522,7 @@ def add_salt_noise(image):
     show()
 
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
+filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.png
 
 plt.figure(
     num="影像處理",
@@ -1525,6 +1538,7 @@ plt.figure(
 image = np.array(Image.open(filename))
 add_salt_noise(image)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("PIL_derivative")
@@ -1573,6 +1587,7 @@ plt.imshow(mag)
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("PIL_fuzzy")
 
@@ -1620,6 +1635,7 @@ for bi, blur in enumerate([2, 4, 8]):
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("PIL_gaussian")
@@ -1735,6 +1751,7 @@ plt.title("開運算後進行標記後的圖像")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("PIL_PCA")
 
@@ -1785,6 +1802,7 @@ plt.title("開運算後進行標記後的圖像")
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("PIL_realROF")
 
@@ -1812,21 +1830,22 @@ plt.gray()  # 不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(1, 3, 1)
 plt.imshow(image)
-# plt.axis('equal')
+# plt.axis("equal")
 plt.title("原噪聲圖像")
 
 plt.subplot(1, 3, 2)
 plt.imshow(G)
-# plt.axis('equal')
+# plt.axis("equal")
 plt.title("高斯模糊後的圖像")
 
 plt.subplot(1, 3, 3)
 # plt.imshow(U)
-# plt.axis('equal')
+# plt.axis("equal")
 plt.title("ROF降噪後的圖像")
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("PIL_ROF")
@@ -1858,21 +1877,22 @@ plt.gray()  # 不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(1, 3, 1)
 plt.imshow(image)
-# plt.axis('equal')
+# plt.axis("equal")
 plt.title("原噪聲圖像")
 
 plt.subplot(1, 3, 2)
 plt.imshow(G)
-# plt.axis('equal')
+# plt.axis("equal")
 plt.title("高斯模糊後的圖像")
 
 plt.subplot(1, 3, 3)
 # plt.imshow(U)
-# plt.axis('equal')
+# plt.axis("equal")
 plt.title("ROF降噪後的圖像")
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
@@ -1897,6 +1917,7 @@ for bi, blur in enumerate([2, 5, 10]):
 
 show()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 image = skimage.color.rgb2gray(skimage.data.chelsea())

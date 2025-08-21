@@ -908,7 +908,7 @@ print("修改后像素點img[1, 0, 2] = ", img.item(1, 0, 2))
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
+filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 
 img = plt.imread(filename)
 print(img.shape, img.dtype)

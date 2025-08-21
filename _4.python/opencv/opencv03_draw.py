@@ -49,7 +49,7 @@ bottomLeftOrigin – When true, the image data origin is at the bottom-left corn
 from opencv_common import *
 
 filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-filename2 = "C:/_git/vcs/_4.python/_data/lena_color.jpg"
+filename2 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 filename3 = "C:/_git/vcs/_1.data/______test_files1/ims01.bmp"
 
 print("------------------------------------------------------------")  # 60個
