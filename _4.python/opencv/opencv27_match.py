@@ -1,9 +1,9 @@
 """
-
-cv2.matchShapes()
+cv2.matchShapes() 輪廓和輪廓的比較
 cv2.matchTemplate()
 
 模板匹配 Template Matching
+
 
 """
 
@@ -11,6 +11,20 @@ from opencv_common import *
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+def get_image_contours(image):
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+    # 二值化處理影像
+    thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+    ret, dst_binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)
+
+    # 找出輪廓, 模式, 演算法
+    contours, hierarchy = cv2.findContours(
+        dst_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
+    )
+    return contours, hierarchy
+
 
 filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape06.png"
 
@@ -103,40 +117,30 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 # Opencv之利用matchshape算子实现简单的形状匹配
 # 使用OpenCV的matchShape算子进行形状匹配。
 # 通过将待识别图像和模板图像转换为灰度并进行阈值处理，然后找到轮廓，
 # 最后通过比较轮廓的Hu不变矩来确定匹配度。匹配分值越小，轮廓越相似。
 # matchShapes函数适用于识别大物体的形状，但对纹理复杂的图像识别率较低。
 
-# --------------讀取3幅原始圖像--------------------
 image1 = cv2.imread("data/cs1.bmp")  # 彩色讀取
 image2 = cv2.imread("data/cs2.bmp")  # 彩色讀取
 image3 = cv2.imread("data/cc.bmp")  # 彩色讀取
 
-# ----------打印3幅原始圖像的shape屬性值-------------
-print("image1.shape=", image1.shape)
-print("image2.shape=", image2.shape)
-print("image3.shape=", image3.shape)
-
-# --------------色彩空間轉換--------------------
 gray1 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 gray2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)  # 轉灰階
 gray3 = cv2.cvtColor(image3, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
-# -------------進行Hu矩匹配--------------------
+# 進行Hu矩匹配
 ret0 = cv2.matchShapes(gray1, gray1, 1, 0.0)
 ret1 = cv2.matchShapes(gray1, gray2, 1, 0.0)
 ret2 = cv2.matchShapes(gray1, gray3, 1, 0.0)
 
-# --------------打印差值--------------------
-print("相同圖像的matchShape=", ret0)
-print("相似圖像的matchShape=", ret1)
-print("不相似圖像的matchShape=", ret2)
+print("圖1和圖1的比較結果 :", ret0, ", 相同")
+print("圖1和圖2的比較結果 :", ret1, ", 相似")
+print("圖1和圖3的比較結果 :", ret2, ", 不相似")
 
-# --------------顯示3幅原始圖像--------------------
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(8, 6))
 
 plt.subplot(131)
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))

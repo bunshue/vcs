@@ -2,7 +2,7 @@
 Firebase 即時資料庫
 即時資料庫並進行 CRUD (Create, Retrieve, Update, Delete) 操作
 
-sugar 安裝 pip install pyrebase==3.0.10
+sugar/kilo 安裝 pip install pyrebase==3.0.10
 
 """
 
@@ -11,6 +11,8 @@ import pyrebase
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print("pyrebase 01")
 
 # 註冊與登入
 # Enter email: david@lion.mouse.com
@@ -73,7 +75,7 @@ login()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# createdata
+print("pyrebase 02 createdata")
 
 """
 1.
@@ -137,7 +139,7 @@ db.child("Branch").child("Employee").child("male employees").child("John's info"
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# deletedata
+print("pyrebase 03 deletedata")
 
 firebaseConfig = {
     "apiKey": "AIzaSyBPhwfUTQqOwKq2xH9087gHEslqEQTSNro",
@@ -153,7 +155,7 @@ firebaseConfig = {
 firebase = pyrebase.initialize_app(firebaseConfig)
 
 db = firebase.database()
-
+""" NG
 # Delete item with known key
 db.child("todolistA").child("wednesday").child("volunteer").child("deadline").remove()
 
@@ -168,12 +170,12 @@ for task in monday_tasks.each():
         key = task.key()
 
 db.child("todolistB").child("monday").child(key).child("deadline").remove()
-
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# updatedata
+print("pyrebase 04 updatedata")
 
 firebaseConfig = {
     "apiKey": "AIzaSyBPhwfUTQqOwKq2xH9087gHEslqEQTSNro",
@@ -189,7 +191,7 @@ firebaseConfig = {
 firebase = pyrebase.initialize_app(firebaseConfig)
 
 db = firebase.database()
-
+""" NG
 # Update data with known path
 db.child("todolistA").child("monday").child("paper").update({"deadline": "1pm"})
 
@@ -206,7 +208,7 @@ for task in monday_tasks.each():
     if task.val()["name"] == "paper":
         key = task.key()
 db.child("todolistB").child("monday").child(key).update({"deadline": "1pm"})
-
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
