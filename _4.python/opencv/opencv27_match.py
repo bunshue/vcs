@@ -389,37 +389,45 @@ filename_big = (
 )
 filename_small = "C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/AB_red.jpg"
 
+src = cv2.imread("data/matchTemplate/mutishapes1.jpg", cv2.IMREAD_COLOR)  # 讀取原始影像
 
-def myMatch(image, tmp):
+templates = []
+template1 = cv2.imread("data/matchTemplate/heart1.jpg", cv2.IMREAD_COLOR)  # 讀取匹配影像
+templates.append(template1)  # 加入匹配串列templates
+
+template2 = cv2.imread("data/matchTemplate/star.jpg", cv2.IMREAD_COLOR)  # 讀取匹配影像
+templates.append(template2)  # 加入匹配串列templates
+
+match = []  # 符合匹配的圖案
+for template in templates:
     # 執行匹配
-    h, w = tmp.shape[0:2]  # 回傳height, width
-    result = cv2.matchTemplate(src, tmp, cv2.TM_CCOEFF_NORMED)
+    h, w = template.shape[0:2]  # 回傳height, width
+    result = cv2.matchTemplate(src, template, cv2.TM_CCOEFF_NORMED)
     for row in range(len(result)):  # 找尋row
         for col in range(len(result[row])):  # 找尋column
             if result[row][col] > 0.95:  # 值大於0.95就算找到了
                 match.append([(col, row), (col + w, row + h)])  # 左上與右下點加入串列
-    return
-
-
-src = cv2.imread("data/matchTemplate/mutishapes1.jpg", cv2.IMREAD_COLOR)  # 讀取原始影像
-
-temps = []
-template = cv2.imread("data/matchTemplate/heart1.jpg", cv2.IMREAD_COLOR)  # 讀取匹配影像
-temps.append(template)  # 加入匹配串列temps
-
-temp2 = cv2.imread("data/matchTemplate/star.jpg", cv2.IMREAD_COLOR)  # 讀取匹配影像
-temps.append(temp2)  # 加入匹配串列temps
-
-match = []  # 符合匹配的圖案
-for t in temps:
-    myMatch(src, t)  # 調用 myMatch
 
 for img in match:
-    dst = cv2.rectangle(src, (img[0]), (img[1]), GREEN, 1)  # 繪外框
-cv2.imshow("Dst", dst)
+    dst = cv2.rectangle(src, (img[0]), (img[1]), RED, 2)  # 繪外框
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure(figsize=(8, 6))
+plt.subplot(311)
+plt.imshow(cv2.cvtColor(template1, cv2.COLOR_BGR2RGB))
+plt.title("template1")
+plt.axis("off")
+
+plt.subplot(312)
+plt.imshow(cv2.cvtColor(template2, cv2.COLOR_BGR2RGB))
+plt.title("template2")
+plt.axis("off")
+
+plt.subplot(313)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("比對結果")
+plt.axis("off")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

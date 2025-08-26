@@ -3274,8 +3274,8 @@ namespace _vcs_MakePicture
             */
             sb = new SolidBrush(Color.White);
 
-            int x_st = 120;
-            int y_st = 50;
+            int x_st = 80;
+            int y_st = 30;
 
             Point[] points = new Point[3];
             points[0] = new Point(x_st + 0, y_st + 0);
@@ -3283,19 +3283,25 @@ namespace _vcs_MakePicture
             points[2] = new Point(x_st - 50, y_st + 100);
             g.FillPolygon(sb, points);
 
-            x_st += 120;
+            x_st += 100;
             g.FillRectangle(sb, new Rectangle(x_st + 0, y_st + 0, 100, 100));
 
-            x_st += 170;
+            x_st += 140;
             g.FillEllipse(sb, new Rectangle(x_st, y_st, 100, 100));
 
-            x_st += 250;
+            x_st += 220;
+            y_st -= 10;
             points = new Point[4];
             points[0] = new Point(x_st + 0, y_st + 0);
             points[1] = new Point(x_st + 80, y_st + 0);
             points[2] = new Point(x_st - 10, y_st + 100);
             points[3] = new Point(x_st - 10-80, y_st + 100);
             g.FillPolygon(sb, points);
+
+            x_st += 90;
+            int radius = 70;
+            Point center = new Point(x_st + radius, y_st + radius);
+            FillStar(g, center, radius, Color.White);
 
             pictureBox1.Image = bitmap1;
         }
