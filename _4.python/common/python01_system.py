@@ -985,7 +985,7 @@ FW_PREFIX = ["Library", "Frameworks", "Python.framework"]
 FW_VERSION_PREFIX = "--undefined--"
 
 # The directory we'll use to create the build (will be erased and recreated)
-WORKDIR = "C:/_git/vcs/_1.data/______test_files3aaaa"
+WORKDIR = "D:/_git/vcs/_1.data/______test_files3aaaa"
 
 # The directory we'll use to store third-party sources. Set this to something
 # else if you don't want to re-fetch required libraries every time.
@@ -1090,9 +1090,9 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
-# filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+# filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
 
 os.system(filename)  # 用系統內建的程式開啟檔案
 

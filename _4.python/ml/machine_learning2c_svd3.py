@@ -20,7 +20,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -501,7 +501,7 @@ SVD在图像压缩中也有重要应用。
 from skimage import io
 
 # 读取图像
-# filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
+# filename = 'D:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 filename = "data/circle.bmp"
 image = io.imread(filename, as_gray=True)
 

@@ -440,7 +440,7 @@ for n in range(0, len(link2)):
 print("------------------------------------------------------------")  # 60個
 
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\code\htmlparse03.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\code\htmlparse03.py
 
 import requests
 from bs4 import BeautifulSoup
@@ -461,7 +461,7 @@ for book in data:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\code\htmlparse04.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\code\htmlparse04.py
 
 import requests
 
@@ -478,7 +478,7 @@ f.close()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\code\htmlparse05.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\code\htmlparse05.py
 
 import requests
 from bs4 import BeautifulSoup

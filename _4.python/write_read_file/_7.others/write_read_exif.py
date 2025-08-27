@@ -3,7 +3,7 @@ import sys
 import time
 import exifread
 
-filename = "C:/_git/vcs/_1.data/______test_files1/orient1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/orient1.jpg"
 filename = "data/exif_gps.jpg"
 
 
@@ -145,8 +145,8 @@ import sys
 
 print("------------------------------------------------------------")  # 60個
 
-filename1 = "C:/_git/vcs/_1.data/______test_files1/orient2_RightTop.jpg"
-filename2 = "C:/_git/vcs/_1.data/______test_files2/orient2_RightTopffff.jpg"
+filename1 = "D:/_git/vcs/_1.data/______test_files1/orient2_RightTop.jpg"
+filename2 = "D:/_git/vcs/_1.data/______test_files2/orient2_RightTopffff.jpg"
 
 from PIL import Image
 from PIL import Image, ImageFilter
@@ -205,7 +205,7 @@ from PIL import Image, ExifTags
 
 dic_exif = {1: 0, 8: 90, 3: 180, 6: -90}
 
-filename = "C:/_git/vcs/_1.data/______test_files1/orient2_RightTop.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/orient2_RightTop.jpg"
 
 print("Processing image {}......".format(filename))
 image = Image.open(filename)
@@ -317,8 +317,8 @@ def get_exif_data(fname):  # 定义获取图片exif的方法
 
 # 定义了方法后我们可以取出exif里的gps信息
 
-filename = "C:/_git/vcs/_1.data/______test_files1/orient1.jpg"
-filename = "C:/_git/vcs/_1.data/______test_files1/orient2_RightTop.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/orient1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/orient2_RightTop.jpg"
 
 Img_exif = get_exif_data(filename)  # 用自定函数取得exif信息
 if Gps_Info := Img_exif.get("GPSInfo"):  # 简单做个判定有无gps信息，这里用了海象运算符

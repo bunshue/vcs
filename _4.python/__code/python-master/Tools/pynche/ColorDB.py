@@ -242,7 +242,7 @@ def triplet_to_brightness(rgbtuple):
     return r*rgbtuple[0] + g*rgbtuple[1] + b*rgbtuple[2]
 
 if __name__ == '__main__':
-    rgb_filename = 'C:/_git/vcs/_4.python/__code/python-master/Tools/pynche/X/rgb.txt'
+    rgb_filename = 'D:/_git/vcs/_4.python/__code/python-master/Tools/pynche/X/rgb.txt'
     colordb = get_colordb(rgb_filename)
     if not colordb:
         print('No parseable color database found')

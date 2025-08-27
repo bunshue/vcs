@@ -103,7 +103,7 @@ print("------------------------------------------------------------")  # 60個
 import PIL
 from PIL import Image
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -117,7 +117,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -127,11 +127,11 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-filename1 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/red_300X300.bmp"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp"
+filename1 = "D:/_git/vcs/_1.data/______test_files1/_image_processing/red_300X300.bmp"
+filename2 = "D:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp"
 
-filename1 = "C:/_git/vcs/_1.data/______test_files1/picture2.jpg"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/picture1.bmp"
+filename1 = "D:/_git/vcs/_1.data/______test_files1/picture2.jpg"
+filename2 = "D:/_git/vcs/_1.data/______test_files1/picture1.bmp"
 
 """
 平均雜湊（aHash）
@@ -174,8 +174,8 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-font_filename = "C:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
+font_filename = "D:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -295,14 +295,14 @@ def blue_to_red2(image_path):
                 pixels[x, y] = (b, g, r)
     image.show()
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'    
+filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'    
 blue_to_red2(filename)
 """
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 from PIL import Image, ImageEnhance
 
@@ -480,7 +480,7 @@ print("------------------------------------------------------------")  # 60個
 """
 print("PIL_ginput")
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
 
 # 檔案 => PIL影像 => numpy陣列
 im = np.array(Image.open(filename))
@@ -495,7 +495,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 """
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
 
 from PIL import Image
 
@@ -546,7 +546,7 @@ print("------------------------------------------------------------")  # 60個
 from PIL import Image
 
 filename = (
-    "C:/_git/vcs/_1.data/______test_files1/__pic/_image_processing/pic6_childrenb.png"
+    "D:/_git/vcs/_1.data/______test_files1/__pic/_image_processing/pic6_childrenb.png"
 )
 
 image_width = 800
@@ -601,8 +601,8 @@ if __name__ == '__main__':
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-# filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif'
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
+# filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif'
 
 from PIL import Image
 

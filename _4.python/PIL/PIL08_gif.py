@@ -15,7 +15,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -25,7 +25,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-gif_filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_gif/cat.gif"
+gif_filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_gif/cat.gif"
 
 print("gif轉jpg")
 from PIL import ImageSequence
@@ -41,7 +41,7 @@ for frame in ImageSequence.Iterator(gif):
 print("------------------------------------------------------------")  # 60個
 print("用cv視窗播放gif檔案")
 
-gif_filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_gif/cat.gif"
+gif_filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_gif/cat.gif"
 
 import cv2
 from PIL import ImageSequence
@@ -69,7 +69,7 @@ print("------------------------------------------------------------")  # 60個
 
 from PIL import ImageSequence
 
-gif_filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_gif/cat.gif"
+gif_filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_gif/cat.gif"
 
 gif = Image.open(gif_filename)
 
@@ -130,7 +130,7 @@ from PIL import ImageSequence
 gif = []
 for i in range(1, 6):
     img = Image.open(
-        f"C:/_git/vcs/_1.data/______test_files1/__pic/_scenery/ggb{i}.jpg"
+        f"D:/_git/vcs/_1.data/______test_files1/__pic/_scenery/ggb{i}.jpg"
     )  # 開啟圖片
     gif.append(img)  # 加入串列
 # 儲存為 gif

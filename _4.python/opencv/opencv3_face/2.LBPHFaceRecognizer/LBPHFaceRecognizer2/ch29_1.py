@@ -6,17 +6,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # OpenCV 人臉識別分類器
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
+xml_filename = "D:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)  # 建立辨識檔案物件
 
 print("------------------------------------------------------------")  # 60個
 
 face_db = [] # 建立空串列
 
-face_db.append(cv2.imread("C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk01.jpg", cv2.IMREAD_GRAYSCALE))
-face_db.append(cv2.imread("C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk03.jpg", cv2.IMREAD_GRAYSCALE))
-face_db.append(cv2.imread("C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg", cv2.IMREAD_GRAYSCALE))
-face_db.append(cv2.imread("C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates10.jpg", cv2.IMREAD_GRAYSCALE))
+face_db.append(cv2.imread("D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk01.jpg", cv2.IMREAD_GRAYSCALE))
+face_db.append(cv2.imread("D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk03.jpg", cv2.IMREAD_GRAYSCALE))
+face_db.append(cv2.imread("D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg", cv2.IMREAD_GRAYSCALE))
+face_db.append(cv2.imread("D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates10.jpg", cv2.IMREAD_GRAYSCALE))
 
 labels = [0,0,1,1]                                  # 建立標籤串列
 faceNames = {"0":"Elon_Musk", "1":"Bill_Gates"}             # 建立對應名字的字典
@@ -25,7 +25,7 @@ recognizer = cv2.face.LBPHFaceRecognizer_create()   # 建立人臉辨識物件
 recognizer.train(face_db, np.array(labels))         # 訓練人臉辨識
 
 # 讀取要辨識的人臉
-face = cv2.imread("C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates44.jpg",cv2.IMREAD_GRAYSCALE)
+face = cv2.imread("D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates44.jpg",cv2.IMREAD_GRAYSCALE)
 label,confidence = recognizer.predict(face)         # 執行人臉辨識
 
 print(f"Name       = {faceNames[str(label)]}")
@@ -34,7 +34,7 @@ print(f"Confidence = {confidence:6.2f}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg"
 
 image = cv2.imread(filename, cv2.IMREAD_COLOR)    # 彩色讀取
 img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)                # 轉RGB

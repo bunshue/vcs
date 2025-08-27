@@ -660,7 +660,7 @@ wordsNum(filename)
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/quotes.txt"
+filename = "D:/_git/vcs/_1.data/______test_files1/quotes.txt"
 
 
 def get_random_quote():
@@ -705,7 +705,7 @@ print("------------------------------------------------------------")  # 60個
 import ast
 
 # 讀取文字檔後轉換為 dict
-filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/python_password.txt"
+filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_txt/python_password.txt"
 
 data = dict()
 
@@ -860,7 +860,7 @@ def disp_temp(data):
     print("---------------------")
 
 
-filename = "C:/_git/vcs/_1.data/______test_files1/data_climate.txt"
+filename = "D:/_git/vcs/_1.data/______test_files1/data_climate.txt"
 
 with open(filename, "r", encoding="utf-8") as f:
     lines = f.readlines()
@@ -991,9 +991,9 @@ def parseString(string):
             num += 1
 
 
-# filename = 'C:/_git/vcs/_4.python/_data/射鵰英雄傳.big5.txt'
-filename = "C:/_git/vcs/_4.python/_data/python_word_count1.txt"
-filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/琵琶行.txt"
+# filename = 'D:/_git/vcs/_4.python/_data/射鵰英雄傳.big5.txt'
+filename = "D:/_git/vcs/_4.python/_data/python_word_count1.txt"
+filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_txt/琵琶行.txt"
 with open(filename) as f:  # 讀取ex21_2.txt
     data = f.read()  # read(無參數), 從目前檔案位置讀到檔尾
     # print(data)
@@ -1037,7 +1037,7 @@ print("------------------------------------------------------------")  # 60個
 print("統計一個檔案的字數")
 
 filename = (
-    "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/little_women.txt"
+    "D:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/little_women.txt"
 )
 
 try:
@@ -1055,7 +1055,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("統計一個檔案的字數")
 
-filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/alice.txt"
+filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/alice.txt"
 
 try:
     with open(filename, encoding="utf-8") as f:

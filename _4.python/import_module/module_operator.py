@@ -24,8 +24,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("統計字數")
 
-filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/engnews.txt"
-# filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/琵琶行.txt'
+filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_txt/engnews.txt"
+# filename = 'D:/_git/vcs/_1.data/______test_files1/__RW/_txt/琵琶行.txt'
 with open(filename, "r", encoding="utf-8") as f:
     # with open(filename, "r", encoding="big5") as f:
     data = f.read()

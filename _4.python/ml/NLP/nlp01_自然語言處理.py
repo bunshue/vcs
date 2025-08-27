@@ -16,7 +16,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -81,7 +81,7 @@ for i in range(len(words)):
 seg = Wordseg(batch_size=64, embedding='elmo', elmo_use_cuda=False, mode="TW")
 words = seg.cut(["這部電影很好看，是我的朋友陳國文主演的。"])
 
-stopWord_filename = 'C:/_git/vcs/_1.data/______test_files1/_jieba/stopWord_test.txt'  #設定自訂詞庫
+stopWord_filename = 'D:/_git/vcs/_1.data/______test_files1/_jieba/stopWord_test.txt'  #設定自訂詞庫
 
 with open('stopWord_test.txt', 'r', encoding='utf-8-sig') as f:
     stops = f.read().split('\n')   

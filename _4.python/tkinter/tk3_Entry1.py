@@ -150,7 +150,7 @@ def get_data():
 
 
 pdir = tk.StringVar()
-pdir.set("C:/_git/vcs/_1.data/______test_files1/_mp3/")
+pdir.set("D:/_git/vcs/_1.data/______test_files1/_mp3/")
 
 entry1 = tk.Entry(window, textvariable=pdir, width=50)
 entry1.pack()

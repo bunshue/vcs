@@ -83,15 +83,15 @@ print("------------------------------------------------------------")  # 60個
 #很多mp3不能播放
 
 # fail
-filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
+filename = "D:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
 
 # ok
-filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/aaaa.mp3"
+filename = "D:/_git/vcs/_1.data/______test_files1/_mp3/aaaa.mp3"
 
 import playsound
 playsound.playsound(filename, block=True)
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_wav/tone.wav"
+filename = "D:/_git/vcs/_1.data/______test_files1/_wav/tone.wav"
 import playsound
 playsound.playsound(filename, block=True)
 
@@ -103,7 +103,7 @@ from pathlib import Path
 from mutagen.mp3 import MP3
 import datetime
 
-infolder = "C:/_git/vcs/_1.data/______test_files1/_mp3"
+infolder = "D:/_git/vcs/_1.data/______test_files1/_mp3"
 ext = "*.mp3"
 
 
@@ -230,7 +230,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 影片轉wav, 但是要跑很久
 
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 from moviepy.editor import *
 
@@ -735,7 +735,7 @@ print("------------------------------------------------------------")  # 60個
 
 import moviepy.editor
 
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 print("播放影片檔")
 

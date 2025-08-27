@@ -18,7 +18,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -213,7 +213,7 @@ def find_end(start, arg, black, white, width, black_max, white_max):
 
 
 if __name__ == "__main__":
-    filename = "C:/_git/vcs/_4.python/PIL/data/ocr/carPlate02.jpg"
+    filename = "D:/_git/vcs/_4.python/PIL/data/ocr/carPlate02.jpg"
     filename = "car.png"
     
     img = cv2.imread(filename, cv2.IMREAD_COLOR)

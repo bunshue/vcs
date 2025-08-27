@@ -9,9 +9,9 @@ print("------------------------------------------------------------")  # 60個
 from PIL import Image
 from PIL import ImageFilter
 
-filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
-filename_lena_color = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
-filename_lena_gray = "C:/_git/vcs/_4.python/opencv/data/lena_gray.jpg"
+filename2 = "D:/_git/vcs/_1.data/______test_files1/elephant.jpg"
+filename_lena_color = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename_lena_gray = "D:/_git/vcs/_4.python/opencv/data/lena_gray.jpg"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -24,7 +24,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -94,9 +94,9 @@ print("------------------------------------------------------------")  # 60個
 
 print("偽色彩圖像處理")
 
-# filename = 'C:/_git/vcs/_1.data/______test_files1/pic_256X100.png'
-# filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename_lena_gray = "C:/_git/vcs/_4.python/opencv/data/lena_gray.bmp"
+# filename = 'D:/_git/vcs/_1.data/______test_files1/pic_256X100.png'
+# filename = 'D:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename_lena_gray = "D:/_git/vcs/_4.python/opencv/data/lena_gray.bmp"
 
 # 檔案 => PIL影像
 image = Image.open(filename_lena_gray)

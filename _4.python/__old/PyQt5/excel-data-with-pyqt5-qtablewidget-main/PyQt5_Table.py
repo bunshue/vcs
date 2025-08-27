@@ -1,4 +1,4 @@
-filename = "C:/_git/vcs/_4.python/write_read_file/_4.office/data/python_ReadWrite_EXCEL.xlsx"
+filename = "D:/_git/vcs/_4.python/write_read_file/_4.office/data/python_ReadWrite_EXCEL.xlsx"
 
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QTableWidget, QTableWidgetItem
 import sys

@@ -11,7 +11,7 @@ import requests
 from bs4 import BeautifulSoup
 
 #下載資料夾
-foldername = 'C:/_git/vcs/_1.data/______test_files2/youtube_download'
+foldername = 'D:/_git/vcs/_1.data/______test_files2/youtube_download'
 
 #準備輸出資料夾 若不存在, 則建立
 if not os.path.exists(foldername):

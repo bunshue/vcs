@@ -36,13 +36,13 @@ print(data[0])
 
 print("------------------------------------------------------------")  # 60個
 
-filename1 = "C:/_git/vcs/_4.python/write_read_file/_7.others/images/book01.jpg"
-filename2 = "C:/_git/vcs/_4.python/write_read_file/_7.others/images/book02.jpg"
-filename3 = "C:/_git/vcs/_4.python/write_read_file/_7.others/images/book03.png"
-filename4 = "C:/_git/vcs/_4.python/write_read_file/_7.others/images/book04.png"
-filename5 = "C:/_git/vcs/_4.python/write_read_file/_7.others/images/book05.png"
-filename6 = "C:/_git/vcs/_4.python/write_read_file/_7.others/images/book06.png"
-filename7 = "C:/_git/vcs/_4.python/write_read_file/_7.others/images/book07.png"
+filename1 = "D:/_git/vcs/_4.python/write_read_file/_7.others/images/book01.jpg"
+filename2 = "D:/_git/vcs/_4.python/write_read_file/_7.others/images/book02.jpg"
+filename3 = "D:/_git/vcs/_4.python/write_read_file/_7.others/images/book03.png"
+filename4 = "D:/_git/vcs/_4.python/write_read_file/_7.others/images/book04.png"
+filename5 = "D:/_git/vcs/_4.python/write_read_file/_7.others/images/book05.png"
+filename6 = "D:/_git/vcs/_4.python/write_read_file/_7.others/images/book06.png"
+filename7 = "D:/_git/vcs/_4.python/write_read_file/_7.others/images/book07.png"
 
 all_list = [filename1, filename2, filename3, filename4, filename5, filename6, filename7]
 

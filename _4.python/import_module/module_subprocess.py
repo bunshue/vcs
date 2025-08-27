@@ -39,7 +39,7 @@ print("------------------------------------------------------------")  # 60個
 
 import subprocess
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 paintPro = subprocess.Popen(["mspaint.exe", filename])
 print(paintPro)
@@ -56,8 +56,8 @@ print("------------------------------------------------------------")  # 60個
 
 import subprocess
 
-filename1 = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/poetry.txt"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename1 = "D:/_git/vcs/_1.data/______test_files1/__RW/_txt/poetry.txt"
+filename2 = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 textPro = subprocess.Popen(["start", filename1], shell=True)
 pictPro = subprocess.Popen(["start", filename2], shell=True)

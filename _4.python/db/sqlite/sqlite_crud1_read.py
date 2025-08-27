@@ -42,7 +42,7 @@ def get_column_names(conn, table_name):
 
 
 db_filename = "ims_sql/db_ims.sqlite"
-db_filename = "C:/_git/vcs/_1.data/______test_files1/_db/gasoline.sqlite"
+db_filename = "D:/_git/vcs/_1.data/______test_files1/_db/gasoline.sqlite"
 db_filename = "data/example.db"
 db_filename = "data/myInfo.db"
 db_filename = "data/myInfo2.db"
@@ -94,7 +94,7 @@ import sqlite3
 
 print("------------------------------------------------------------")  # 60個
 
-db_filename = "C:/_git/vcs/_1.data/______test_files1/_db/gasoline.sqlite"
+db_filename = "D:/_git/vcs/_1.data/______test_files1/_db/gasoline.sqlite"
 
 
 def disp_menu():
@@ -184,7 +184,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("讀取資料庫範例")
 
-db_filename = "C:/_git/vcs/_1.data/______test_files1/_db/DataBasePM25.sqlite"
+db_filename = "D:/_git/vcs/_1.data/______test_files1/_db/DataBasePM25.sqlite"
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
@@ -212,7 +212,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("從資料庫讀出一筆資料")
 
-db_filename = "C:/_git/vcs/_1.data/______test_files1/_db/python01.sqlite"
+db_filename = "D:/_git/vcs/_1.data/______test_files1/_db/python01.sqlite"
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.execute("SELECT * FROM table01 WHERE num = 1")
@@ -227,7 +227,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("從資料庫讀出全部資料")
 
-db_filename = "C:/_git/vcs/_1.data/______test_files1/_db/python01.sqlite"
+db_filename = "D:/_git/vcs/_1.data/______test_files1/_db/python01.sqlite"
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.execute("SELECT * FROM table01")
@@ -242,7 +242,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("從資料庫讀出全部資料")
 
-db_filename = "C:/_git/vcs/_1.data/______test_files1/_db/headlines.sqlite"
+db_filename = "D:/_git/vcs/_1.data/______test_files1/_db/headlines.sqlite"
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 

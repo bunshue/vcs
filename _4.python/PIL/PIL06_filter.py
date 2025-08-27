@@ -7,7 +7,7 @@
 
 """
 
-filename = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/elephant.jpg"
 
 from PIL import Image
 from PIL import ImageFilter
@@ -23,7 +23,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -35,7 +35,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("測試 濾鏡 filter")
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 # 檔案 => PIL影像
 image = Image.open(filename)
@@ -127,7 +127,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("測試 濾鏡 filter")
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 # 檔案 => PIL影像
 image = Image.open(filename)

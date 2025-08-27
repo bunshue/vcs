@@ -244,7 +244,7 @@ print("------------------------------------------------------------")  # 60個
 
 from PIL import ImageTk, Image
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
 
 window = tk.Tk()
 window.geometry("600x800")

@@ -17,7 +17,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -813,7 +813,7 @@ print("Keras_Mnist_MLP_h1000")
 import tensorflow as tf
 import tensorflow.examples.tutorials.mnist.input_data as input_data
 
-mnist = input_data.read_data_sets("C:/_git/vcs/_4.python/ml/data/MNIST_data/", one_hot=True)
+mnist = input_data.read_data_sets("D:/_git/vcs/_4.python/ml/data/MNIST_data/", one_hot=True)
 
 print(
     "train images     :", mnist.train.images.shape, "labels:", mnist.train.labels.shape

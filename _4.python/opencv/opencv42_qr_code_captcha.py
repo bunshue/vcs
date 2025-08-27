@@ -15,7 +15,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("二維條碼")
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_qrcode/QR1.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/_qrcode/QR1.png"
 
 image = cv2.imread(filename)
 
@@ -40,7 +40,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("OpenCV_35")
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_qrcode/QR1.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/_qrcode/QR1.png"
 
 image = cv2.imread(filename)
 
@@ -76,7 +76,7 @@ print("OpenCV_36")
 
 from PIL import ImageFont, ImageDraw, Image  # 載入 PIL ( 為了放中文字 )
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_qrcode/QR1.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/_qrcode/QR1.png"
 
 image = cv2.imread(filename)
 
@@ -167,7 +167,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 一維條碼
-filename = "C:/_git/vcs/_4.python/opencv/data/_qrcode/barcode1.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/_qrcode/barcode1.png"
 
 image = cv2.imread(filename)
 
@@ -194,7 +194,7 @@ cap = cv2.VideoCapture(1)
 
 def putText(x, y, text, color=BLACK):
     global img
-    font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"  # 有中文
+    font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"  # 有中文
     font_size = 20
     font = ImageFont.truetype(font_filename, font_size)
     imgPil = Image.fromarray(img)
@@ -249,7 +249,7 @@ cap = cv2.VideoCapture(1)
 
 def putText(x, y, text, size=20, color=BLACK):
     global img
-    font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"  # 有中文
+    font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"  # 有中文
     font_size = 20
     font = ImageFont.truetype(font_filename, font_size)
     imgPil = Image.fromarray(img)  # 轉換成 PIL 影像物件
@@ -311,14 +311,14 @@ print("------------------------------------------------------------")  # 60個
 print("OpenCV VideoCapture 20 讀取 QR code 圖檔")
 print("按 ESC 離開")
 
-filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_qrcode/QR1.png"
+filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_qrcode/QR1.png"
 
 image = cv2.imread(filename)
 
 
 def putText(x, y, text, color=BLACK):
     global image
-    font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"  # 有中文
+    font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"  # 有中文
     font_size = 20
     font = ImageFont.truetype(font_filename, font_size)
     imagePil = Image.fromarray(image)
@@ -381,7 +381,7 @@ print("------------------------------------------------------------")  # 60個
 # captcha ST
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_captcha/captcha03.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/_captcha/captcha03.png"
 
 image = cv2.imread(filename)  # 讀取本機圖片
 

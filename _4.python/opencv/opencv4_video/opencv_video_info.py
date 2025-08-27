@@ -32,7 +32,7 @@ import urllib.request  # 用來建立請求
 
 print("------------------------------------------------------------")  # 60個
 
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 cap = cv2.VideoCapture(video_filename)
 
@@ -65,7 +65,7 @@ print("Codec: " + codec)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 video = cv2.VideoCapture(video_filename)
 print("FPS:", video.get(cv2.CAP_PROP_FPS))
@@ -293,8 +293,8 @@ def load_img_by_url(img_url):
     return img
 
 
-video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/鹿港.mp4"
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_1.data/______test_files1/_video/鹿港.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 show_video_info(video_filename)
 
 """
@@ -304,7 +304,7 @@ image = load_img_by_url(url)
 cv2.imshow('Picture Viewer', image) #顯示圖片
 """
 
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 vid = cv2.VideoCapture(video_filename)
 
 """
@@ -330,7 +330,7 @@ def get_video_info(video):
     return video_info
 
 
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 vid = cv2.VideoCapture(video_filename)
 
 video_info = get_video_info(vid)
@@ -340,7 +340,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("影片資訊")
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 cap = cv2.VideoCapture(video_filename)
 
@@ -384,7 +384,7 @@ VideoCapture_parameters = [
     "立體攝像機的矯正標注（目前只有DC1394 v.2.x后端支持這個功能）",
 ]
 
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 vid = cv2.VideoCapture(video_filename)
 

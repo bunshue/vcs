@@ -4,7 +4,7 @@ import cv2 as cv
 import numpy as np
 from datetime import datetime
 
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
+xml_filename = "D:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
 
 print("------------------------------------------------------------")  # 60個
 

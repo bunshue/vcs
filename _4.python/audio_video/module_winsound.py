@@ -22,7 +22,7 @@ for i in range(7):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-wav_filename = "C:/_git/vcs/_1.data/______test_files1/_wav/harumi99.wav"
+wav_filename = "D:/_git/vcs/_1.data/______test_files1/_wav/harumi99.wav"
 
 winsound.PlaySound(wav_filename, winsound.SND_FILENAME)
 

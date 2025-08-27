@@ -34,8 +34,8 @@ def fcompare(f1name, f2name):
 # return false iff a problem
 
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files5/file1.txt'
-filename2 = 'C:/_git/vcs/_1.data/______test_files5/file2.txt'
+filename1 = 'D:/_git/vcs/_1.data/______test_files5/file1.txt'
+filename2 = 'D:/_git/vcs/_1.data/______test_files5/file2.txt'
 
 ret = fcompare(filename1, filename2)
 

@@ -9,7 +9,7 @@ import sys
 print("使用自定義模組")
 
 # 匯入 指定目錄下的模組
-sys.path.append(r"C:\_git\vcs\_4.python\import_module\mm")
+sys.path.append(r"D:\_git\vcs\_4.python\import_module\mm")
 # print(sys.path)
 
 import mm

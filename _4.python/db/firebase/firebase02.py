@@ -39,7 +39,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 
-api_key = "C:/_git/vcs/_1.data/______test_files1/_key/david-firebase-proj-firebase-adminsdk.json"
+api_key = "D:/_git/vcs/_1.data/______test_files1/_key/david-firebase-proj-firebase-adminsdk.json"
 
 
 cred = credentials.Certificate(api_key)
@@ -121,7 +121,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 
-api_key = "C:/_git/vcs/_1.data/______test_files1/_key/david-firebase-proj-firebase-adminsdk.json"
+api_key = "D:/_git/vcs/_1.data/______test_files1/_key/david-firebase-proj-firebase-adminsdk.json"
 
 # Setup
 cred = credentials.Certificate(api_key)
@@ -218,7 +218,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 
-api_key = "C:/_git/vcs/_1.data/______test_files1/_key/david-firebase-proj-firebase-adminsdk.json"
+api_key = "D:/_git/vcs/_1.data/______test_files1/_key/david-firebase-proj-firebase-adminsdk.json"
 
 # Setup
 cred = credentials.Certificate(api_key)

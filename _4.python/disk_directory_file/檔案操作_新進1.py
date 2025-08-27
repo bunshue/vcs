@@ -61,7 +61,7 @@ for root, dirs, files in os.walk(os.curdir):
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python技術者們-練功！老手帶路教你精通正宗Python程式\中文版範例檔案\Ch12_習題與解答\Ch12_動手試一試.txt
+#檔案 : D:\_git\vcs\_4.python\__code\Python技術者們-練功！老手帶路教你精通正宗Python程式\中文版範例檔案\Ch12_習題與解答\Ch12_動手試一試.txt
 
 ### 12.2 ###
 

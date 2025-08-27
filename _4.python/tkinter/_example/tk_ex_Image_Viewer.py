@@ -58,8 +58,8 @@ class UI(Label):
         self.update_idletasks()
 
 
-filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/picture2.jpg"
+filename1 = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename2 = "D:/_git/vcs/_1.data/______test_files1/picture2.jpg"
 
 filename = filename1
 

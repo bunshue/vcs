@@ -8,7 +8,7 @@ class Module:
         self.__name__ = name
         self.__file__ = file
         self.__path__ = path
-        self.__folder__ = "C:/_git/vcs/_1.data/______test_files1"
+        self.__folder__ = "D:/_git/vcs/_1.data/______test_files1"
         self.__code__ = None
         self._date = time.time()
 

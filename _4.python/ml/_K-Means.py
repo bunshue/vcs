@@ -1482,7 +1482,7 @@ print("使用 sklearn 內建圖片")
 image = load_sample_image("china.jpg")
 """
 print("使用 本地圖片")
-# filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
+# filename = 'D:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 filename = "data/circle.bmp"
 import cv2
 # 檔案 => cv2影像
@@ -1497,7 +1497,7 @@ print(image.shape)
 plt.imsave("tmp_flower.jpg", image)
 
 # 目前還不能使用本地檔案
-#filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
+#filename = 'D:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 filename = "tmp_flower.jpg"
 import cv2
 # 檔案 => cv2影像
@@ -1555,7 +1555,7 @@ print("------------------------------------------------------------")  # 60個
 from sklearn.utils import shuffle
 from skimage import io
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+filename = "D:/_git/vcs/_4.python/_data/elephant.jpg"
 
 original = plt.imread(filename)
 width, height, depth = original.shape

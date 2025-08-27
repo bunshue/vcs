@@ -123,7 +123,7 @@ print("Trackbar之使用")
 
 # HSL即色相、飽和度、亮度（英語：Hue, Saturation, Lightness）
 
-filename_rgb512 = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
+filename_rgb512 = "D:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
 image = cv2.imread(filename_rgb512, cv2.IMREAD_COLOR)
 cv2.imshow("OpenCV", image)

@@ -16,7 +16,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -1884,7 +1884,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 # one hot -> label 0-9 -> 0...01, 0...10, ...
 mnist = input_data.read_data_sets(
-    "C:/_git/vcs/_4.python/ml/data/MNIST_data/", one_hot=True
+    "D:/_git/vcs/_4.python/ml/data/MNIST_data/", one_hot=True
 )
 
 # Create placeholders for tensors to fed
@@ -2833,7 +2833,7 @@ tf.logging.set_verbosity(tf.logging.ERROR)
 
 # one hot -> label 0-9 -> 0...01, 0...10, ...
 mnist = input_data.read_data_sets(
-    "C:/_git/vcs/_4.python/ml/data/MNIST_data/", one_hot=True
+    "D:/_git/vcs/_4.python/ml/data/MNIST_data/", one_hot=True
 )
 
 print(mnist.train.images.shape)

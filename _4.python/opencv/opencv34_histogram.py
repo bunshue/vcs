@@ -51,14 +51,14 @@ image2 遮罩過後
 from opencv_common import *
 
 # 測試圖片
-filename = "C:/_git/vcs/_4.python/_data/eq1.bmp"
+filename = "D:/_git/vcs/_4.python/_data/eq1.bmp"
 filename = "data/pic_brightness1.bmp"
 filename = "data/pic_brightness2.bmp"
 filename = "data/pic_brightness3.bmp"
 filename = "data/pic_calcHist.jpg"
-filename = "C:/_git/vcs/_4.python/opencv/data/pic_gray_400X400_100-200.png"
-filename4a = "C:/_git/vcs/_4.python/opencv/data/ims_640X480.bmp"
-filename4b = "C:/_git/vcs/_4.python/opencv/data/ims_320X240.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/pic_gray_400X400_100-200.png"
+filename4a = "D:/_git/vcs/_4.python/opencv/data/ims_640X480.bmp"
+filename4b = "D:/_git/vcs/_4.python/opencv/data/ims_320X240.jpg"
 
 num_bins = 256  # 直方圖顯示時的束數
 
@@ -90,7 +90,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename_eq1 = "C:/_git/vcs/_4.python/_data/eq1.bmp"  # 560X400
+filename_eq1 = "D:/_git/vcs/_4.python/_data/eq1.bmp"  # 560X400
 
 print("測試 01 ravel() 的用法")
 print("一張彩圖的RGB與灰度的統計資料1")

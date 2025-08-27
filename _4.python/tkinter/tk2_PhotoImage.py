@@ -60,7 +60,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 
-filename = "C:/_git/vcs/_4.python/_data/python-logo.png"
+filename = "D:/_git/vcs/_4.python/_data/python-logo.png"
 
 # 檔案 => ImageTk影像
 tk_image2 = ImageTk.PhotoImage(file=filename)
@@ -91,7 +91,7 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("ImageTk tk顯示圖片 在label上 3")
 
-filename = "C:/_git/vcs/_4.python/_data/tigers.jpg"
+filename = "D:/_git/vcs/_4.python/_data/tigers.jpg"
 
 # 檔案 => ImageTk影像
 tk_image = ImageTk.PhotoImage(file=filename)
@@ -112,7 +112,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/tigers.jpg"
+filename = "D:/_git/vcs/_4.python/_data/tigers.jpg"
 
 # 檔案 => PIL影像
 image = Image.open(filename)
@@ -137,7 +137,7 @@ tk_image3 = ImageTk.PhotoImage(file=filename)
 tk.Label(window, image=tk_image3).pack()
 
 print("tk 顯示圖片 在 label 上")
-filename = "C:/_git/vcs/_4.python/_data/tigers.jpg"
+filename = "D:/_git/vcs/_4.python/_data/tigers.jpg"
 
 # 檔案 => PIL影像
 image = Image.open(filename)
@@ -158,7 +158,7 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("ImageTk tk顯示圖片 在 Text 上")
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 檔案 => PIL影像
 image = Image.open(filename)
@@ -274,7 +274,7 @@ window = tk.Tk()
 window.geometry("640x800")
 window.title("ImageTk tk顯示圖片 在 button 上 1")
 
-filename = "C:/_git/vcs/_4.python/_data/python-logo.png"
+filename = "D:/_git/vcs/_4.python/_data/python-logo.png"
 
 # 檔案 => ImageTk影像
 tk_image1 = ImageTk.PhotoImage(file=filename)
@@ -314,7 +314,7 @@ window = tk.Tk()
 window.geometry("600x900")
 window.title("將圖片貼在 Canvas 上")
 
-filename = "C:/_git/vcs/_4.python/_data/tigers.jpg"
+filename = "D:/_git/vcs/_4.python/_data/tigers.jpg"
 
 # 檔案 => PIL影像
 image0 = Image.open(filename)
@@ -349,8 +349,8 @@ canvas1 = tk.Canvas(window, bg="pink", width=width, height=height)
 canvas1.pack()
 
 # create_image 繪製影像
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-# filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/train.gif'
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
+# filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_gif/train.gif'
 
 # 檔案 => PIL影像
 image1 = Image.open(filename)
@@ -362,7 +362,7 @@ x_st = 0
 y_st = 0
 canvas1.create_image(x_st, y_st, anchor=tk.NW, image=image2)
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 檔案 => PIL影像
 image3 = Image.open(filename)
@@ -376,7 +376,7 @@ x_st = 250
 y_st = 250
 canvas1.create_image(x_st, y_st, anchor=tk.NW, image=image4)
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 檔案 => PIL影像
 image = Image.open(filename)
@@ -420,7 +420,7 @@ window = tk.Tk()
 window.geometry("600x920")
 window.title("ImageTk tk顯示圖片 在label上 new")
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 # 檔案 => PIL影像
 image1 = ImageTk.PhotoImage(Image.open(filename))
 
@@ -438,7 +438,7 @@ window = tk.Tk()
 window.geometry("700x900")
 window.title("Label 5")
 
-filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_書畫字圖/_peony3/原來奼紫嫣紅開遍.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_書畫字圖/_peony3/原來奼紫嫣紅開遍.jpg"
 # 檔案 => PIL影像
 im = Image.open(filename)
 
@@ -463,7 +463,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 print("用 Label 顯示一張圖片")
-filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_書畫字圖/_peony3/原來奼紫嫣紅開遍.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_書畫字圖/_peony3/原來奼紫嫣紅開遍.jpg"
 
 # 檔案 => PIL影像
 image2 = Image.open(filename)
@@ -499,7 +499,7 @@ print("顯示圖片在 Label 上")
 tk.Label(window, image=tk_photoimage1).pack()
 
 
-filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_gif/cloud.gif"
+filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_gif/cloud.gif"
 tk_photoimage9 = tk.PhotoImage(file=filename)
 tk.Label(window, image=tk_photoimage9, bg="pink").place(
     x=0, y=20, width=150, height=150
@@ -563,10 +563,10 @@ print("------------------------------------------------------------")  # 60個
 
 # 只能用png ?
 
-filename1 = "C:/_git/vcs/_1.data/______test_files1/__pic/_work/work1.png"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/__pic/_work/work2.png"
-filename3 = "C:/_git/vcs/_1.data/______test_files1/__pic/_work/work3.png"
-filename4 = "C:/_git/vcs/_1.data/______test_files1/__pic/_work/work4.png"
+filename1 = "D:/_git/vcs/_1.data/______test_files1/__pic/_work/work1.png"
+filename2 = "D:/_git/vcs/_1.data/______test_files1/__pic/_work/work2.png"
+filename3 = "D:/_git/vcs/_1.data/______test_files1/__pic/_work/work3.png"
+filename4 = "D:/_git/vcs/_1.data/______test_files1/__pic/_work/work4.png"
 
 
 def fnSet(image):
@@ -653,7 +653,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/python-logo.png"
+filename = "D:/_git/vcs/_4.python/_data/python-logo.png"
 tk_photoimage3 = tk.PhotoImage(file=filename)
 print("W = ", tk_photoimage3.width())
 print("H = ", tk_photoimage3.height())
@@ -690,7 +690,7 @@ imageList = []  # Store images for cards
 for i in range(1, 53):
     imageList.append(
         tk.PhotoImage(
-            file="C:/_git/vcs/_1.data/______test_files1/__pic/_poker_card/card/"
+            file="D:/_git/vcs/_1.data/______test_files1/__pic/_poker_card/card/"
             + str(i)
             + ".gif"
         )
@@ -719,7 +719,7 @@ print("------------------------------------------------------------")  # 60個
 # 使用 canvas 顯示圖片 gif
 
 filename = (
-    "C:/_git/vcs/_1.data/______test_files1/__pic/_gif/dragon-boat-festival-2024.gif"
+    "D:/_git/vcs/_1.data/______test_files1/__pic/_gif/dragon-boat-festival-2024.gif"
 )
 tk_photoimage1 = tk.PhotoImage(file=filename)
 tk.Label(window, text="Blue", image=tk_photoimage1, bg="gray").pack()
@@ -730,7 +730,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 filename = (
-    "C:/_git/vcs/_1.data/______test_files1/__pic/_gif/dragon-boat-festival-2024.gif"
+    "D:/_git/vcs/_1.data/______test_files1/__pic/_gif/dragon-boat-festival-2024.gif"
 )
 tk_photoimage2 = tk.PhotoImage(file=filename)
 
@@ -751,7 +751,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 # 只能開啟 gif 檔
-filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif"
+filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif"
 
 tk_photoimage = tk.PhotoImage(file=filename)  # 使用PhotoImage開啟圖片
 

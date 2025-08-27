@@ -15,7 +15,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -36,13 +36,13 @@ from PIL import Image
 
 print("------------------------------------------------------------")  # 60個
 
-font_filename = "C:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf"
 font_filename = r"C:\Windows\Fonts\msjh.ttc"
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 
-mask_filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png"
-mask_filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_mask/star.gif"
-mask_filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_mask/cloud.jpg"
+mask_filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png"
+mask_filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_mask/star.gif"
+mask_filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_mask/cloud.jpg"
 
 print("------------------------------------------------------------")  # 60個
 

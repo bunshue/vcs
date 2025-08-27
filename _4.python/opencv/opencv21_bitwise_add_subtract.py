@@ -24,8 +24,8 @@ print("------------------------------------------------------------")  # 60個
 # cv2.add() cv2.addWeighted() cv2.subtract() ST
 print("------------------------------------------------------------")  # 60個
 
-add_filename1 = "C:/_git/vcs/_4.python/_data/picture_add1.bmp"
-add_filename2 = "C:/_git/vcs/_4.python/_data/picture_add2.bmp"
+add_filename1 = "D:/_git/vcs/_4.python/_data/picture_add1.bmp"
+add_filename2 = "D:/_git/vcs/_4.python/_data/picture_add2.bmp"
 
 image1 = cv2.imread(add_filename1)  # 彩色讀取
 image2 = cv2.imread(add_filename2)  # 彩色讀取
@@ -364,8 +364,8 @@ print(f"image2 = \n {image2}")
 
 # 真實影像
 
-filename_rgb_r = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
-filename_rgb_g = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
+filename_rgb_r = "D:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+filename_rgb_g = "D:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 
 image1 = cv2.imread(filename_rgb_r)  # 彩色讀取
 image2 = cv2.imread(filename_rgb_g)  # 彩色讀取
@@ -495,7 +495,7 @@ mask = np.zeros(image.shape[:2], np.uint8)
 mask[height // 8 : 7 * height // 8, width // 8 : 7 * width // 8] = 255
 
 # 讀取圖檔做mask
-mask_filename = "C:/_git/vcs/_4.python/opencv/data/_mask/mask1.png"
+mask_filename = "D:/_git/vcs/_4.python/opencv/data/_mask/mask1.png"
 mask = cv2.imread(mask_filename, 0)  # 0, 灰階讀取
 mask = cv2.resize(mask, (width, height))  # 調整mask大小
 
@@ -637,7 +637,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("OpenCV_ai_29")
 
-logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
+logo_filename = "D:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 
 logo = cv2.imread(logo_filename)  # 彩色讀取  # 讀取 OpenCV 的 logo
 size = logo.shape  # 讀取 logo 的長寬尺寸
@@ -850,7 +850,7 @@ image = cv2.imread(filename_lena_gray, 0)  # 0, 灰階讀取
 
 # 讀取水印圖像
 watermark_filename = (
-    "C:/_git/vcs/_1.data/______test_files1/_image_processing/watermark.bmp"
+    "D:/_git/vcs/_1.data/______test_files1/_image_processing/watermark.bmp"
 )
 watermark = cv2.imread(watermark_filename, 0)  # 0, 灰階讀取
 
@@ -986,8 +986,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-bitwise_filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
-bitwise_filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
+bitwise_filename1 = "D:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+bitwise_filename2 = "D:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 img1 = cv2.imread(bitwise_filename1)  # 彩色讀取
 img2 = cv2.imread(bitwise_filename2)  # 彩色讀取
 
@@ -1047,8 +1047,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("取兩圖的影像差異 diff")
 
-filename_diff1 = "C:/_git/vcs/_1.data/______test_files1/compare/compare1.jpg"
-filename_diff2 = "C:/_git/vcs/_1.data/______test_files1/compare/compare2.jpg"
+filename_diff1 = "D:/_git/vcs/_1.data/______test_files1/compare/compare1.jpg"
+filename_diff2 = "D:/_git/vcs/_1.data/______test_files1/compare/compare2.jpg"
 
 img1 = cv2.imread(filename_diff1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 img2 = cv2.imread(filename_diff2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
@@ -1079,8 +1079,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("疊合")
 
-filename_add1 = "C:/_git/vcs/_1.data/______test_files1/ims02.bmp"
-filename_add2 = "C:/_git/vcs/_1.data/______test_files1/ims03.bmp"
+filename_add1 = "D:/_git/vcs/_1.data/______test_files1/ims02.bmp"
+filename_add2 = "D:/_git/vcs/_1.data/______test_files1/ims03.bmp"
 
 img1 = cv2.imread(filename_add1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 img2 = cv2.imread(filename_add2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取

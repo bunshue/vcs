@@ -54,7 +54,7 @@ class UI(Frame):
         self.canvas.create_image(0, 0, image=self.overlay, anchor=NW, tags="overlay")
 
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 window = Tk()
 

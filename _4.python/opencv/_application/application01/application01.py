@@ -18,7 +18,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -46,7 +46,7 @@ from PIL import Image, ImageDraw
 print("face_engine：簡單易用的臉部辨識")
 print("把人臉框出來")
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg'
 
 engine = FaceEngine()
 
@@ -69,10 +69,10 @@ print("------------------------------------------------------------")  # 60個
 print('在圖片中找出某人')
 
 #單人圖片
-filename1 = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+filename1 = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
 #多人圖片
-filename2 = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates21.jpg'
+filename2 = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates21.jpg'
 
 engine = FaceEngine()
 
@@ -126,7 +126,7 @@ print('fer：偵測臉部表情')
 from fer import FER
 
 #angry
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk05.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk05.jpg'
 img = cv2.imread(filename)
 detector = FER()
 emotion = detector.detect_emotions(img)
@@ -148,7 +148,7 @@ plt.show()
 print("------------------------------")  # 30個
 
 #happy
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk03.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk03.jpg'
 img = cv2.imread(filename)
 detector = FER(mtcnn=True)#使用MTCNN神經網路偵測人臉
 
@@ -176,7 +176,7 @@ from facemask_detection.pre_trained_models import get_model as get_classifier
 import albumentations as A
 import torch
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates19.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates19.jpg'
 
 model = get_classifier("tf_efficientnet_b0_ns_2020-07-29")
 model.eval()

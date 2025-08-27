@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 
 # import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -55,23 +55,23 @@ maxval = 255  # 定義像素最大值, 閾值
 
 print("------------------------------------------------------------")  # 60個
 
-filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
-filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
-filename4a = "C:/_git/vcs/_4.python/opencv/data/ims_640X480.bmp"
-filename4b = "C:/_git/vcs/_4.python/opencv/data/ims_320X240.jpg"
-filename_rgb = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
+filename1 = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename2 = "D:/_git/vcs/_1.data/______test_files1/elephant.jpg"
+filename3 = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename4a = "D:/_git/vcs/_4.python/opencv/data/ims_640X480.bmp"
+filename4b = "D:/_git/vcs/_4.python/opencv/data/ims_320X240.jpg"
+filename_rgb = "D:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
-filename_lena_color = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
-filename_lena_gray = "C:/_git/vcs/_4.python/opencv/data/lena_gray.bmp"
-filename_barbara = "C:/_git/vcs/_4.python/opencv/data/barbara.bmp"
-filename_gray = "C:/_git/vcs/_4.python/opencv/data/threshold/gray_scale.jpg"
+filename_lena_color = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename_lena_gray = "D:/_git/vcs/_4.python/opencv/data/lena_gray.bmp"
+filename_barbara = "D:/_git/vcs/_4.python/opencv/data/barbara.bmp"
+filename_gray = "D:/_git/vcs/_4.python/opencv/data/threshold/gray_scale.jpg"
 
-filename_star_white = "C:/_git/vcs/_4.python/opencv/data/_shape/star_white.bmp"
-filename_star_blue = "C:/_git/vcs/_4.python/opencv/data/_shape/star_blue.bmp"
-filename_star_silver = "C:/_git/vcs/_4.python/opencv/data/_shape/star_silver.bmp"
+filename_star_white = "D:/_git/vcs/_4.python/opencv/data/_shape/star_white.bmp"
+filename_star_blue = "D:/_git/vcs/_4.python/opencv/data/_shape/star_blue.bmp"
+filename_star_silver = "D:/_git/vcs/_4.python/opencv/data/_shape/star_silver.bmp"
 
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 print("------------------------------------------------------------")  # 60個
 

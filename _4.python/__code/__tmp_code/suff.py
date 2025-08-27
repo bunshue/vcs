@@ -9,8 +9,8 @@ def get_suffix(filename):
     return sep + suff if sep else ''
 
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/file2.txt'
+filename1 = 'D:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename2 = 'D:/_git/vcs/_1.data/______test_files1/file2.txt'
 
 files = [filename1, filename2]
 suffixes = {}

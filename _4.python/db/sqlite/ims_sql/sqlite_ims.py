@@ -64,7 +64,7 @@ list_stage_list = [
 stage = -1
 tablename = ''
 db_filename = ''
-#db_filename = 'C:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
+#db_filename = 'D:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
 
 dummy_data = 'abcd'
 count = 0
@@ -995,7 +995,7 @@ window.title('自動化產線生產資料庫')
 # 設定主視窗之背景色
 #window.configure(bg = "#7AFEC6")
 
-icon_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/ims.ico'
+icon_filename = 'D:/_git/vcs/_1.data/______test_files1/_material/ims.ico'
 window.iconbitmap(icon_filename)   # 更改圖示
 
 x_st = 50

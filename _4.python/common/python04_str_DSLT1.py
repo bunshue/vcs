@@ -2109,7 +2109,7 @@ print(animals)
 # 讀寫檔案大集合
 
 print("將 字典 寫入檔案")
-filename = "C:/_git/vcs/_1.data/______test_files2/dict.txt"
+filename = "D:/_git/vcs/_1.data/______test_files2/dict.txt"
 
 with open(filename, "w") as fp:
     # 將字典轉成字串寫入檔案

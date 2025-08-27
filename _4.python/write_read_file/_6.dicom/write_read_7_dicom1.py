@@ -7,7 +7,7 @@ US1_J2KR.dcm
 C:\\Users\\david\\.pydicom\\data\\ 2 dcm files
 C:\\Users\\070601\\.pydicom\\data
 檔案在
-C:\_git\vcs\_4.python\__code\pydicom-data-master\data_store\data
+D:\_git\vcs\_4.python\__code\pydicom-data-master\data_store\data
 
 """
 
@@ -27,7 +27,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -298,7 +298,7 @@ def is_dicom(filename):
 filename1 = "data/test.dcm"
 filename2 = "data/ims000525.dcm"
 filename3 = "data/CT_small.dcm"
-filename4 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename4 = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 print(is_dicom(filename1))
 print(is_dicom(filename2))
@@ -1216,7 +1216,7 @@ class DicomSeries(object):
         self._info = info
 
 
-foldername = "C:/_git/vcs/_1.data/______test_files1/__RW/_dicom"
+foldername = "D:/_git/vcs/_1.data/______test_files1/__RW/_dicom"
 
 adir = foldername
 all_series = read_files(adir, False, False)

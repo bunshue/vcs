@@ -81,7 +81,7 @@ def disk_usage(path):
     return _ntuple_diskusage(total, used, free)
 
 
-foldername = "C:/_git/vcs/"
+foldername = "D:/_git/vcs/"
 du = disk_usage(foldername)
 print(du)
 print("容量 :", du.total, "個位元組\t", du.total // 1024 // 1024 // 1024, "GB")

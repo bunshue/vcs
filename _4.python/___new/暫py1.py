@@ -465,7 +465,7 @@ ord() 查詢某個字元的ASCII值
 chr() 將ASCII的值轉換成英文字母
 
 
-C:\_git\vcs\_4.python\__code\高效率Python自動化工作術\chap10
+D:\_git\vcs\_4.python\__code\高效率Python自動化工作術\chap10
 
 PySimpleGUI	建立應用程式的函示庫
 mutagen	讀取與存寫語音檔的函示庫
@@ -533,8 +533,8 @@ D:/.../.../.../.../.../folder/ABCD.nice.EFG
 
 ------------------------------------------------------------
 
-filename1 = 'C:/_git/vcs/_4.python/_data/picture_mix1.bmp'
-filename2 = 'C:/_git/vcs/_4.python/_data/picture_mix2.bmp'
+filename1 = 'D:/_git/vcs/_4.python/_data/picture_mix1.bmp'
+filename2 = 'D:/_git/vcs/_4.python/_data/picture_mix2.bmp'
 
 picture_add1.bmp
 picture_add2.bmp
@@ -1051,19 +1051,19 @@ cur_path = os.path.dirname(__file__) # 取得目前路徑
 import datetime
 print(f"現在時刻 : {datetime.datetime.now()}")
 
-foldername = 'C:/_git/vcs/_1.data/______test_files5'
+foldername = 'D:/_git/vcs/_1.data/______test_files5'
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif'
+filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif'
 
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_word/python_docx1.docx'
-filename = 'C:/_git/vcs/_1.data/______test_files2/output.avi'
+filename = 'D:/_git/vcs/_1.data/______test_files1/__RW/_word/python_docx1.docx'
+filename = 'D:/_git/vcs/_1.data/______test_files2/output.avi'
 
-filename1 = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
-filename2 = 'C:/_git/vcs/_4.python/_data/tiger.jpg'
-filename3 = 'C:/_git/vcs/_4.python/_data/bear.jpg'
+filename1 = 'D:/_git/vcs/_4.python/_data/elephant.jpg'
+filename2 = 'D:/_git/vcs/_4.python/_data/tiger.jpg'
+filename3 = 'D:/_git/vcs/_4.python/_data/bear.jpg'
 
 filenames = [filename1, filename2, filename3]
 
@@ -1087,7 +1087,7 @@ print("現在時間 :", now)
 
 print('-' * 60)	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files2/AQI_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.csv'
+filename = 'D:/_git/vcs/_1.data/______test_files2/AQI_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.csv'
 filename = 'Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg'
 
 #設定中文字型及負號正確顯示
@@ -2269,7 +2269,7 @@ https://archive.ics.uci.edu/dataset/53/iris
 kaggle網站上的iris資料
 https://www.kaggle.com/datasets/uciml/iris
 
-C:\_git\vcs\_4.python>python -m pdb test10_new11.py
+D:\_git\vcs\_4.python>python -m pdb test10_new11.py
 
 ------------------------------------------------------------
 

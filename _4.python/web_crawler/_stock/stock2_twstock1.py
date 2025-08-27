@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -137,7 +137,7 @@ for i in range(1, 13):
 import csv
 
 # 比較看看
-# filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/stock_data_2019_2330.csv'
+# filename = 'D:/_git/vcs/_1.data/______test_files1/__RW/_csv/stock_data_2019_2330.csv'
 
 with open("2019_2330.csv", "w", newline="") as f:
     writer = csv.writer(f)

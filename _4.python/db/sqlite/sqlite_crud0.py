@@ -53,7 +53,7 @@ import sqlite3
 print("------------------------------------------------------------")  # 60個
 
 db_filename = (
-    "C:/_git/vcs/_1.data/______test_files2/db_"
+    "D:/_git/vcs/_1.data/______test_files2/db_"
     + time.strftime("%Y%m%d_%H%M%S", time.localtime())
     + ".sqlite"
 )

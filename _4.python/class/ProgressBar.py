@@ -142,6 +142,6 @@ def read_files(path):
 
 import sys
 
-foldername = "C:/_git/vcs/_1.data/______test_files1/__RW/_dicom"
+foldername = "D:/_git/vcs/_1.data/______test_files1/__RW/_dicom"
 t0 = time.time()
 read_files(foldername)

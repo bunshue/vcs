@@ -21,7 +21,7 @@ print(cc)
 
 print("瀏覽目錄樹內部：")
 
-foldername = 'C:/_git/vcs/_1.data'
+foldername = 'D:/_git/vcs/_1.data'
 p = pathlib.Path(foldername)
 q = p / '______test_files3' / '_excel'
 print(q)
@@ -35,14 +35,14 @@ print("q.exists()", q.exists())
 print("q.is_dir()", q.is_dir())
 
 
-foldername = 'C:/_git/vcs/_4.python/_data/'
+foldername = 'D:/_git/vcs/_4.python/_data/'
 p = pathlib.Path(foldername)
 q = p / 'article2.txt'
 print(q)
 
 #q.resolve()
 
-#filename = 'C:/_git/vcs/_4.python/_data/article2.txt'
+#filename = 'D:/_git/vcs/_4.python/_data/article2.txt'
 
 #開啟檔案：
 
@@ -52,7 +52,7 @@ with q.open() as f:
 
 print("------------------------------------------------------------")  # 60個
 
-foldername = 'C:/_git/vcs/_4.python/_data/'
+foldername = 'D:/_git/vcs/_4.python/_data/'
 
 cc = pathlib.PureWindowsPath(foldername).drive
 
@@ -80,7 +80,7 @@ print("CWD :", pathlib.Path.cwd())
 print("HOME :", pathlib.Path.home())
 
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'D:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 p = pathlib.Path(filename)
 
@@ -216,7 +216,7 @@ print('------------------------------------------------------------')	#60個
 
 #撈出一層
 
-infolder = "C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird"
+infolder = "D:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird"
 
 extlist = ["*.jpg","*.png"]
 
@@ -233,7 +233,7 @@ print('------------------------------------------------------------')	#60個
 
 #show file size
 
-foldername = 'C:/_git/vcs/_1.data/______test_files1'
+foldername = 'D:/_git/vcs/_1.data/______test_files1'
 file_type = "*.bmp"
 
 #【函數：以最佳單位傳回檔案容量】
@@ -270,7 +270,7 @@ print('------------------------------------------------------------')	#60個
 
 #show file list
 
-foldername = 'C:/_git/vcs/_1.data/______test_files1'
+foldername = 'D:/_git/vcs/_1.data/______test_files1'
 file_type = "*.bmp"
 
 #【函數：建立檔案列表】
@@ -295,7 +295,7 @@ print('------------------------------------------------------------')	#60個
 
 print("搜尋資料夾內所有檔名符合特定字串的檔案")
 
-foldername = 'C:/_git/vcs/_1.data/______test_files1'
+foldername = 'D:/_git/vcs/_1.data/______test_files1'
 value1 = "vcs_R"
 
 #【函數：確認在資料夾的檔案名稱是否包含特定字串】
@@ -319,7 +319,7 @@ print(msg)
 
 print('------------------------------------------------------------')	#60個
 
-foldername = 'C:/_git/vcs/_1.data/______test_files5'
+foldername = 'D:/_git/vcs/_1.data/______test_files5'
 
 msg = ""
 pathlib.Path(foldername).mkdir(exist_ok=True)   #建立轉存檔案的資料夾
@@ -378,7 +378,7 @@ print(list(path_list))
 print("------------------------------------------------------------")  # 60個
 
 filename = "test10_new07.py"
-filename = "C:/_git/vcs/_4.python/_data/蘇軾_念奴嬌_赤壁懷古.txt"
+filename = "D:/_git/vcs/_4.python/_data/蘇軾_念奴嬌_赤壁懷古.txt"
 
 try:
     p = pathlib.Path(filename)  # 文字檔案的

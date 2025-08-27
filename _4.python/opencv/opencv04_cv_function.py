@@ -143,7 +143,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp"
+filename = "D:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp"
 
 image = cv2.imread(filename)  # 彩色讀取
 
@@ -273,7 +273,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename_rgb512 = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
+filename_rgb512 = "D:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
 image = cv2.imread(filename_rgb512)  # 彩色讀取 BGR
 cv2.imshow("bgr", image)
@@ -531,7 +531,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("cv2.goodFeaturesToTrack 角點偵測")
 
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
 
 image = cv2.imread(filename)  # 彩色讀取
 
@@ -915,7 +915,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 filename_lena_small = (
-    "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_small.bmp"
+    "D:/_git/vcs/_1.data/______test_files1/_image_processing/lena_small.bmp"
 )
 
 image = cv2.imread(filename_lena_small)  # 彩色讀取
@@ -1517,7 +1517,7 @@ print(mapy)
 
 w, h = 640, 480
 
-filename4a = "C:/_git/vcs/_4.python/opencv/data/ims_640X480.bmp"
+filename4a = "D:/_git/vcs/_4.python/opencv/data/ims_640X480.bmp"
 
 img = cv2.imread(filename4a)  # 彩色讀取
 img = cv2.imread(filename4a, cv2.IMREAD_GRAYSCALE)  # 灰階讀取

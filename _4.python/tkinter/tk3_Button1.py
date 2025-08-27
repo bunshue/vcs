@@ -180,7 +180,7 @@ tk.Label(window, text="tk開啟cv").pack()
 
 import cv2
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 
 def load_picture_color():
@@ -224,7 +224,7 @@ from PIL import ImageTk, Image
 
 tk.Label(window, text="圖片做成的按鈕").pack()
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 img = ImageTk.PhotoImage(Image.open(filename))
 picture_button = tk.Button(window, text="圖片按鈕", image=img, command=click_picture_button)

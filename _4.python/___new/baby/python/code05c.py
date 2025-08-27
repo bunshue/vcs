@@ -47,7 +47,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("解讀QR code")
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_qrcode/QR2.png'
+filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_qrcode/QR2.png'
 
 image = cv2.imread(filename)
 

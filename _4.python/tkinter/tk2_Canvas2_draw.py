@@ -392,8 +392,8 @@ print("------------------------------------------------------------")  # 60個
 
 # canvas_image.py
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-filename = "C:/_git/vcs/_1.data/______test_files1/step1.png"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/step1.png"
 
 root = tk.Tk()
 root.title("在畫布顯示圖片, 只能用png")

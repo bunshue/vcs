@@ -81,7 +81,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("使用 os.stat 取得檔案資訊")
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 print("使用os.stat")
 cc = os.stat(filename)
@@ -186,9 +186,9 @@ print(ttt)
 print("------------------------------------------------------------")  # 60個
 
 print("讀取mtime, 比較兩個檔案的 修改日期 的 早晚")
-foldername1 = "C:/_git/vcs/_1.data/______test_files1"
-foldername2 = "C:/_git/vcs/_1.data/______test_files2"
-foldername3 = "C:/_git/vcs/_1.data/______test_files3"
+foldername1 = "D:/_git/vcs/_1.data/______test_files1"
+foldername2 = "D:/_git/vcs/_1.data/______test_files2"
+foldername3 = "D:/_git/vcs/_1.data/______test_files3"
 
 if os.stat(foldername1).st_mtime < os.stat(foldername2).st_mtime:
     print("foldername1 較早")
@@ -202,7 +202,7 @@ def msg(str):
     sys.stderr.write(str + "\n")
 
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 try:
     cc = os.stat(filename)
@@ -354,7 +354,7 @@ def file_mtime(path):
                                timezone.utc)
     return t.astimezone().isoformat()
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
 fromdate = file_mtime(filename)
 print(fromdate)
 
@@ -373,7 +373,7 @@ print(string)
 """
 
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 show = "不存在，可能檔案或路徑有誤"
 if os.path.exists(filename):  # 判斷檔案或路徑是否存在

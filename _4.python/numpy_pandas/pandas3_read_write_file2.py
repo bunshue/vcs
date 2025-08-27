@@ -36,7 +36,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -140,7 +140,7 @@ print(data)
 print("------------------------------------------------------------")  # 60個
 
 filename = (
-    "C:/_git/vcs/_4.python/write_read_file/_4.office/data/python_ReadWrite_EXCEL4.xlsx"
+    "D:/_git/vcs/_4.python/write_read_file/_4.office/data/python_ReadWrite_EXCEL4.xlsx"
 )
 print("pd讀取excel檔案 :", filename)
 df = pd.read_excel(filename)
@@ -194,7 +194,7 @@ print("------------------------------------------------------------")  # 60個
 
 # pip install xlsxwriter
 
-filename = "C:/_git/vcs/_4.python/numpy_pandas/data/ExpensesRecord.xls"
+filename = "D:/_git/vcs/_4.python/numpy_pandas/data/ExpensesRecord.xls"
 
 df = pd.read_excel(filename, "sheet")
 # data = pd.read_html('http://www.fdic.gov/bank/individual/failed/banklist.html')

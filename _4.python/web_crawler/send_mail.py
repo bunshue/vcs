@@ -119,7 +119,7 @@ mySMTP.quit()  # 結束連線
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/涼州詞.txt"
+filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_txt/涼州詞.txt"
 
 import smtplib
 
@@ -147,7 +147,7 @@ mySMTP.quit()  # 結束連線
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/涼州詞.txt"
+filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_txt/涼州詞.txt"
 
 import smtplib
 
@@ -238,7 +238,7 @@ mySMTP.quit()  # 結束連線
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/涼州詞.txt"
+filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_txt/涼州詞.txt"
 
 import smtplib
 from email.mime.text import MIMEText
@@ -266,7 +266,7 @@ mySMTP.quit()  # 結束連線
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/涼州詞.txt"
+filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_txt/涼州詞.txt"
 
 import smtplib
 from email.mime.text import MIMEText
@@ -294,7 +294,7 @@ mySMTP.quit()  # 結束連線
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 import smtplib
 from email.mime.text import MIMEText
@@ -568,14 +568,14 @@ def main():
     message.attach(text_content)
 
     # 讀取文件並將文件作為附件添加到郵件消息對象中
-    with open("C:/_git/vcs/_4.python/_data/王之渙_涼州詞.txt", "rb") as f:
+    with open("D:/_git/vcs/_4.python/_data/王之渙_涼州詞.txt", "rb") as f:
         txt = MIMEText(f.read(), "base64", "utf-8")
         txt["Content-Type"] = "text/plain"
         txt["Content-Disposition"] = "attachment; filename=王之渙_涼州詞.txt"
         message.attach(txt)
     # 讀取文件並將文件作為附件添加到郵件消息對象中
     with open(
-        "C:/_git/vcs/_4.python/write_read_file/_4.office/data/python_add_chart1_line.xlsx",
+        "D:/_git/vcs/_4.python/write_read_file/_4.office/data/python_add_chart1_line.xlsx",
         "rb",
     ) as f:
         xls = MIMEText(f.read(), "base64", "utf-8")

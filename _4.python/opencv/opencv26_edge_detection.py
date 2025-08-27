@@ -329,7 +329,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 各種邊緣檢測的方法
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/sobel.bmp"
+filename = "D:/_git/vcs/_1.data/______test_files1/_image_processing/sobel.bmp"
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
@@ -431,7 +431,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/sobel.bmp"
+filename = "D:/_git/vcs/_1.data/______test_files1/_image_processing/sobel.bmp"
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
@@ -545,7 +545,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("Scharr")
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/scharr.bmp"
+filename = "D:/_git/vcs/_1.data/______test_files1/_image_processing/scharr.bmp"
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
@@ -588,7 +588,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/scharr.bmp"
+filename = "D:/_git/vcs/_1.data/______test_files1/_image_processing/scharr.bmp"
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
@@ -665,7 +665,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/laplacian.bmp"
+filename = "D:/_git/vcs/_1.data/______test_files1/_image_processing/laplacian.bmp"
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 

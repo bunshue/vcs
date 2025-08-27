@@ -17,7 +17,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -816,7 +816,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from time import sleep
 
-auth_json_path = "C:/_git/vcs/_1.data/______test_files1/_key/PythonUpload.json"
+auth_json_path = "D:/_git/vcs/_1.data/______test_files1/_key/PythonUpload.json"
 gss_scopes = ["https://spreadsheets.google.com/feeds"]
 gss_client = auth_gss_client(auth_json_path, gss_scopes)  # 連線
 

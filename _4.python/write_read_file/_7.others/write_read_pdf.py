@@ -9,7 +9,7 @@ https://github.com/oschwartz10612/poppler-windows
 import re
 import sys
 
-pdf_filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text1.pdf"
+pdf_filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text1.pdf"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -67,11 +67,11 @@ print("------------------------------------------------------------")  # 60個
 
 import PyPDF2
 
-pdf_filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text1.pdf"
+pdf_filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text1.pdf"
 
-pdf_filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text3_one_page.pdf"
+pdf_filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text3_one_page.pdf"
 pdf_filename = (
-    "C:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text4_many_pages.pdf"
+    "D:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text4_many_pages.pdf"
 )
 
 print("------------------------------------------------------------")  # 60個
@@ -97,7 +97,7 @@ print("------------------------------------------------------------")  # 60個
 # 读取PDF文件
 
 pdf_filename = (
-    "C:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text4_many_pages.pdf"
+    "D:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text4_many_pages.pdf"
 )
 
 from PyPDF2 import PdfFileReader
@@ -119,7 +119,7 @@ print("------------------------------------------------------------")  # 60個
 
 import PyPDF2
 
-filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_pdf/note_Linux_workstation.pdf"
+filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_pdf/note_Linux_workstation.pdf"
 
 with open(filename, "rb") as file:  # 以二進位方式開啟
     pdfRd = PyPDF2.PdfReader(file)
@@ -382,11 +382,11 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-pdf_filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text1.pdf"
+pdf_filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text1.pdf"
 
-pdf_filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text3_one_page.pdf"
+pdf_filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text3_one_page.pdf"
 pdf_filename = (
-    "C:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text4_many_pages.pdf"
+    "D:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text4_many_pages.pdf"
 )
 
 print("------------------------------------------------------------")  # 60個

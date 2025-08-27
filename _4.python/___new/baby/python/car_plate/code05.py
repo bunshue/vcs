@@ -11,7 +11,7 @@ import pytesseract
 import time
 
 carDict = {}
-myPath = "C:\\_git\\vcs\\_4.python\\PIL\\new1\\"
+myPath = "D:\\_git\\vcs\\_4.python\\PIL\\new1\\"
 while True:
     carPlate = input("請掃描或輸入車牌(Q/q代表結束) : ")
     if carPlate == 'Q' or carPlate == 'q':

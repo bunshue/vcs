@@ -8,7 +8,7 @@ cache_from_source = (importlib.util.cache_from_source if sys.implementation.cach
                      else lambda path: path + 'c')
 
 def main():
-    foldername = 'C:/_git/vcs/_1.data/______test_files3'
+    foldername = 'D:/_git/vcs/_1.data/______test_files3'
     for dirname in foldername:
         try:
             names = os.listdir(dirname)

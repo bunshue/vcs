@@ -60,7 +60,7 @@ print("------------------------------------------------------------")  # 60個
 print('手勢偵測操控PowerPoint')
 
 
-#檔案 : C:\_git\vcs\_4.python\__code\看圖學Python人工智慧程式設計\ch14\ch14-1-2.py
+#檔案 : D:\_git\vcs\_4.python\__code\看圖學Python人工智慧程式設計\ch14\ch14-1-2.py
 
 from cvzone.HandTrackingModule import HandDetector
 import cv2, os
@@ -116,7 +116,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\看圖學Python人工智慧程式設計\ch14\ch14-2-1.py
+#檔案 : D:\_git\vcs\_4.python\__code\看圖學Python人工智慧程式設計\ch14\ch14-2-1.py
 
 #14-2 AI整合實戰：健身教練
 
@@ -164,7 +164,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\看圖學Python人工智慧程式設計\ch14\ch14-2-2.py
+#檔案 : D:\_git\vcs\_4.python\__code\看圖學Python人工智慧程式設計\ch14\ch14-2-2.py
 
 from cvzone.PoseModule import PoseDetector
 import cv2
@@ -215,7 +215,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\看圖學Python人工智慧程式設計\ch14\ch14-2-3.py
+#檔案 : D:\_git\vcs\_4.python\__code\看圖學Python人工智慧程式設計\ch14\ch14-2-3.py
 
 from cvzone.PoseModule import PoseDetector
 import cv2
@@ -264,7 +264,7 @@ print("------------------------------------------------------------")  # 60個
 
 #14-3 AI整合實戰：刷臉簽到
 
-#檔案 : C:\_git\vcs\_4.python\__code\看圖學Python人工智慧程式設計\ch14\ch14-3.py
+#檔案 : D:\_git\vcs\_4.python\__code\看圖學Python人工智慧程式設計\ch14\ch14-3.py
 
 import face_recognition
 import cv2
@@ -305,7 +305,7 @@ print("人臉編碼已經成功寫入faces_encoding.dat...")
 print("------------------------------------------------------------")  # 60個
 
 #14-3 AI整合實戰：刷臉簽到
-#檔案 : C:\_git\vcs\_4.python\__code\看圖學Python人工智慧程式設計\ch14\ch14-3a.py
+#檔案 : D:\_git\vcs\_4.python\__code\看圖學Python人工智慧程式設計\ch14\ch14-3a.py
 
 import face_recognition
 import cv2

@@ -6,7 +6,7 @@ import requests
 
 '''
 def get_mailgun_key():
-    filename = "C:/_git/vcs/_1.data/______test_files1/_key/mailgun_key.txt"
+    filename = "D:/_git/vcs/_1.data/______test_files1/_key/mailgun_key.txt"
 
     import os
 

@@ -18,7 +18,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -50,7 +50,7 @@ print("取得秒", n.second)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter3\janken_game_1.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter3\janken_game_1.py
 
 print("========== 計時開始 ==========")
 ts = time.time()
@@ -81,7 +81,7 @@ print(h)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter8\monte_carlo_pi.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter8\monte_carlo_pi.py
 
 pi = 0
 rp = 0
@@ -113,7 +113,7 @@ root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\list5_1.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\list5_1.py
 print("井字遊戲1")
 
 
@@ -134,7 +134,7 @@ root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\list5_2.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\list5_2.py
 print("井字遊戲2")
 
 masu = [[1, 0, 0], [0, 0, 2], [0, 0, 0]]
@@ -167,7 +167,7 @@ root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\list5_3.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\list5_3.py
 print("井字遊戲3")
 
 masu = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
@@ -216,7 +216,7 @@ root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\list5_4.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\list5_4.py
 print("井字遊戲4")
 
 masu = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
@@ -283,7 +283,7 @@ root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\list5_5.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\list5_5.py
 print("井字遊戲5")
 
 masu = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
@@ -384,7 +384,7 @@ root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\list5_6.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\list5_6.py
 print("井字遊戲6")
 
 masu = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
@@ -510,7 +510,7 @@ root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\sanmoku_narabe.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\sanmoku_narabe.py
 print("井字遊戲7")
 
 masu = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
@@ -657,7 +657,7 @@ root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\sanmoku_narabe_kai.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter5\sanmoku_narabe_kai.py
 print("井字遊戲8")
 
 masu = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
@@ -830,7 +830,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\list7_1.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\list7_1.py
 print("黑白棋1")
 
 
@@ -852,7 +852,7 @@ root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\list7_2.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\list7_2.py
 print("黑白棋2")
 
 BLACK = 1
@@ -909,7 +909,7 @@ root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\list7_3.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\list7_3.py
 print("黑白棋3")
 
 BLACK = 1
@@ -988,7 +988,7 @@ root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\list7_4.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\list7_4.py
 print("黑白棋4")
 
 BLACK = 1
@@ -1094,7 +1094,7 @@ root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\list7_5.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\list7_5.py
 print("黑白棋5")
 
 BLACK = 1
@@ -1264,7 +1264,7 @@ root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\list7_6.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter7\list7_6.py
 print("黑白棋6")
 
 import tkinter.messagebox
@@ -1487,7 +1487,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("黑白棋7")
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter8\list8_2.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter8\list8_2.py
 
 import tkinter.messagebox
 
@@ -1724,7 +1724,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter8\reversi.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter8\reversi.py
 print("黑白棋8")
 
 import tkinter.messagebox
@@ -1996,7 +1996,7 @@ root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter8\reversi_auto.py
+# 檔案 : D:\_git\vcs\_4.python\__code\Python遊戲開發講座_演算法篇\Chapter8\reversi_auto.py
 print("黑白棋9")
 
 import tkinter.messagebox

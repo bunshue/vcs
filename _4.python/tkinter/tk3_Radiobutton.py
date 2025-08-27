@@ -400,7 +400,7 @@ def do_select_string7():
     label_selection_string7.config(text="你選的是" + var_string7.get())
 
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 window = tk.Tk()
 window.geometry("600x800")
@@ -573,7 +573,7 @@ def do_select_string4():
 frame1 = tk.Frame(window)  # mp3 歌曲容器
 frame1.pack()
 
-source_dir = "C:/_git/vcs/_1.data/______test_files1/_mp3/"
+source_dir = "D:/_git/vcs/_1.data/______test_files1/_mp3/"
 
 # 撈出單層mp3檔
 mp3files = glob.glob(source_dir + "*.mp3")
@@ -609,7 +609,7 @@ def printSelection():
     label.config(text="你選的是" + var.get())
 
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 
 window = tk.Tk()
@@ -651,7 +651,7 @@ def printSelection():
     label.config(text="你選的是" + var.get())
 
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 window = tk.Tk()
 window.geometry("600x800")

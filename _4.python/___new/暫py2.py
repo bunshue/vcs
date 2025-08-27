@@ -335,7 +335,7 @@ https://garageplay.tw/plus/news/2?cp=setn7d&tk=st-cpc-gpm-lk-2407191-vod
 """
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
 
-mp3_filename = 'C:/_git/vcs/_1.data/______test_files1/_mp3/16.監獄風雲.mp3'
+mp3_filename = 'D:/_git/vcs/_1.data/______test_files1/_mp3/16.監獄風雲.mp3'
 song = AudioSegment.from_mp3(mp3_filename)  # 讀取 mp3 檔案
 song.export("aaaa.wav", format="wav")  # 轉換並儲存為 wav
 """

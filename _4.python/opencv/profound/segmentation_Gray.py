@@ -13,7 +13,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -25,8 +25,8 @@ print("------------------------------------------------------------")  # 60個
 
 import cv2
 
-filename_lena_color = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
-filename_lena_gray = "C:/_git/vcs/_4.python/opencv/data/lena_gray.jpg"
+filename_lena_color = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename_lena_gray = "D:/_git/vcs/_4.python/opencv/data/lena_gray.jpg"
 
 print("------------------------------------------------------------")  # 60個
 

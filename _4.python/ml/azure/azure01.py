@@ -18,8 +18,8 @@ endpoint = david_endpoint
 analyzeUrl = endpoint + 'vision/v3.1/analyze'
 
 # 指定 filename 為分析圖像的本地路徑。
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
 # 將圖像讀入位元組陣列
 imageData = open(filename, 'rb').read()
@@ -43,8 +43,8 @@ endpoint = david_endpoint
 analyzeUrl = endpoint + "vision/v3.1/analyze"
 
 # 指定 filename 為分析圖像的本地路徑。
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
 # 將圖像讀入位元組陣列
 imageData = open(filename, "rb").read()
@@ -84,8 +84,8 @@ endpoint = david_endpoint
 analyzeUrl = endpoint + "vision/v3.1/analyze"
 
 # 指定 filename 為分析圖像的本地路徑。
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
 # 將圖像讀入位元組陣列
 imageData = open(filename, "rb").read()
@@ -133,7 +133,7 @@ analyzeUrl = endpoint + "vision/v3.1/analyze"
 
 # 指定 filename 為分析圖像的本地路徑。
 filename = "images/台北101.jpg"
-filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_scenery/ggb6.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_scenery/ggb6.jpg"
 
 # 將圖像讀入位元組陣列
 imageData = open(filename, "rb").read()
@@ -183,8 +183,8 @@ endpoint = david_endpoint
 analyzeUrl = endpoint + "vision/v3.1/analyze"
 
 # 指定 filename 為分析圖像的本地路徑。
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
 # 將圖像讀入位元組陣列
 imageData = open(filename, "rb").read()

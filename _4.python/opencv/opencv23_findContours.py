@@ -59,7 +59,7 @@ offset : 偏離程度
 
 from opencv_common import *
 
-filename_circle = "C:/_git/vcs/_4.python/opencv/data/_mask/mask1.png"
+filename_circle = "D:/_git/vcs/_4.python/opencv/data/_mask/mask1.png"
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 
@@ -173,18 +173,18 @@ print("------------------------------------------------------------")  # 60個
 
 # 統一處理多圖，顯示在一起
 
-filename1 = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
-filename2 = "C:/_git/vcs/_4.python/opencv/data/_shape/shape02.bmp"
-filename3 = "C:/_git/vcs/_4.python/opencv/data/_shape/shape03.png"
-filename4 = "C:/_git/vcs/_4.python/opencv/data/_shape/shape04.png"
-filename6 = "C:/_git/vcs/_4.python/opencv/data/_shape/star_blue.bmp"
-filename7 = "C:/_git/vcs/_4.python/opencv/data/_shape/star_silver.bmp"
-# filename5 = "C:/_git/vcs/_4.python/opencv/data/_mask/cloud.jpg"
-# filename6 = "C:/_git/vcs/_4.python/opencv/data/morphology/coin.jpg"
-# filename7 = "C:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
-# filename8 = "C:/_git/vcs/_4.python/opencv/data/morphology/moon.jpg"
-filename8 = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
-filename3 = "C:/_git/vcs/_4.python/opencv/data/_Hough/shapes.jpg"
+filename1 = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
+filename2 = "D:/_git/vcs/_4.python/opencv/data/_shape/shape02.bmp"
+filename3 = "D:/_git/vcs/_4.python/opencv/data/_shape/shape03.png"
+filename4 = "D:/_git/vcs/_4.python/opencv/data/_shape/shape04.png"
+filename6 = "D:/_git/vcs/_4.python/opencv/data/_shape/star_blue.bmp"
+filename7 = "D:/_git/vcs/_4.python/opencv/data/_shape/star_silver.bmp"
+# filename5 = "D:/_git/vcs/_4.python/opencv/data/_mask/cloud.jpg"
+# filename6 = "D:/_git/vcs/_4.python/opencv/data/morphology/coin.jpg"
+# filename7 = "D:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
+# filename8 = "D:/_git/vcs/_4.python/opencv/data/morphology/moon.jpg"
+filename8 = "D:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
+filename3 = "D:/_git/vcs/_4.python/opencv/data/_Hough/shapes.jpg"
 
 
 def draw_contours(filename):
@@ -264,7 +264,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
 
 image0 = cv2.imread(filename)  # 彩色讀取
 image1 = image0.copy()
@@ -334,8 +334,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape05.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape05.png"
 
 # shape05.png 500X500黑圖正中央有一個斜30度的400X100白色長方形
 # 故質心在 (250, 250), 面積 400*100, 周長 2*(400+100)=1000
@@ -408,7 +408,7 @@ plt.axis("off")
 
 print("------------------------------")  # 30個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape05.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape05.png"
 
 image0 = cv2.imread(filename)  # 彩色讀取
 image1 = image0.copy()
@@ -495,7 +495,7 @@ print("------------------------------------------------------------")  # 60個
 print("cv2.approxPolyDP() 輪廓近似 多邊形框選")
 # 原先抓到的輪廓，是多點座標，使用輪廓近似，可以近似成多邊形
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
 image0 = cv2.imread(filename)  # 彩色讀取
 image1 = image0.copy()
 image2 = image0.copy()
@@ -561,7 +561,7 @@ print("------------------------------------------------------------")  # 60個
 # 近似多邊形包圍
 
 filename = "data/findContours/heart1.jpg"
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
 
 image0 = cv2.imread(filename)  # 彩色讀取
 image1 = image0.copy()
@@ -623,7 +623,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape06.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape06.png"
 
 image0 = cv2.imread(filename)  # 彩色讀取
 image1 = image0.copy()
@@ -666,7 +666,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 多邊形凹凸點計算
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/star_silver.png"  # 五角銀星
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/star_silver.png"  # 五角銀星
 
 image0 = cv2.imread(filename)  # 彩色讀取
 image1 = image0.copy()  # 畫凸點
@@ -794,7 +794,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 直線擬合
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape05.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape05.png"
 
 image0 = cv2.imread(filename)  # 彩色讀取
 image1 = image0.copy()
@@ -833,7 +833,7 @@ print("------------------------------------------------------------")  # 60個
 # OpenCV_17_輪廓的特徵
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
 image0 = cv2.imread(filename)  # 彩色讀取
 image1 = image0.copy()
 
@@ -869,7 +869,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
 image0 = cv2.imread(filename)  # 彩色讀取
 image1 = image0.copy()
 
@@ -915,7 +915,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("幾何形狀的檢測")
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
 image0 = cv2.imread(filename)  # 彩色讀取
 image1 = image0.copy()
 
@@ -962,7 +962,7 @@ print("幾何形狀的檢測和擬合 findContours")
 
 # image0 = cv2.imread(filename_star_white, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
 image0 = cv2.imread(filename)  # 彩色讀取
 image1 = image0.copy()
 
@@ -1018,8 +1018,8 @@ print("------------------------------------------------------------")  # 60個
 # 形狀與結構分析
 # 輪廓檢驗
 
-coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
-# coin_filename = "C:/_git/vcs/_4.python/opencv/data/findContours/coin.jpg"
+coin_filename = "D:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
+# coin_filename = "D:/_git/vcs/_4.python/opencv/data/findContours/coin.jpg"
 
 image0 = cv2.imread(coin_filename, cv2.IMREAD_COLOR)  # 彩色讀取
 image1 = image0.copy()
@@ -1077,8 +1077,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/cs1.bmp"
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape05.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/cs1.bmp"
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape05.png"
 
 image0 = cv2.imread(filename)  # 彩色讀取
 image1 = image0.copy()
@@ -3007,8 +3007,8 @@ def getOrientation(pts, img):
     return angle
 
 
-filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape05.png"
+filename1 = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape05.png"
 
 image0 = cv2.imread(filename)  # 彩色讀取
 image1 = image0.copy()
@@ -3122,7 +3122,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # dilate_erode1.png用圖片先處理方法二
-# filename = "C:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
+# filename = "D:/_git/vcs/_4.python/opencv/data/dilate_erode1.png"
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3172,11 +3172,11 @@ print(f"hierarchy 資料類型 : {type(hierarchy)}")
 print(f"列印層級 \n {hierarchy}")
 
 
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coin.jpg"
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/moon.jpg"
-filename = "C:/_git/vcs/_4.python/opencv/data/_mask/cloud.jpg"
-# filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/morphology/coin.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/morphology/moon.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/_mask/cloud.jpg"
+# filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
 
 image0 = cv2.imread(filename)  # 彩色讀取
 image1 = image0.copy()

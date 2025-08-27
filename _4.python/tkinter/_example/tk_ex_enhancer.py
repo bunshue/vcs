@@ -39,7 +39,7 @@ class Enhance(Frame):
         self.tkim.paste(self.enhancer.enhance(self.value))
 
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 window = Tk()
 # window = tk.Tk()
 

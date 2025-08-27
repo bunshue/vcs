@@ -67,7 +67,7 @@ print("cv2.setMouseCallback 01 測試所有按鍵 按ESC離開")
 
 # 還不能偵測 前一頁 後一頁
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+filename = "D:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
 
 
@@ -292,7 +292,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("cv2.setMouseCallback 03 測試滑鼠移動")
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+filename = "D:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
 
 dots = []  # 記錄座標的空串列
@@ -328,7 +328,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("cv2.setMouseCallback 04a 滑鼠圈選圖片")
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+filename = "D:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
 
 dot1 = []  # 記錄第一個座標
@@ -368,7 +368,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("cv2.setMouseCallback 04b 滑鼠圈選圖片")
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+filename = "D:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
 
 dot1 = []  # 記錄第一個座標

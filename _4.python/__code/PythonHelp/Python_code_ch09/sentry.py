@@ -3,10 +3,10 @@ import time
 from playsound import playsound
 import cv2 as cv
 
-xml_filename1 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
+xml_filename1 = "D:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
 face_cascade = cv.CascadeClassifier(xml_filename1)
 
-xml_filename2 = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_eye.xml"
+xml_filename2 = "D:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_eye.xml"
 eye_cascade = cv.CascadeClassifier(xml_filename2)
 
 # 切換到放置影像的資料夾

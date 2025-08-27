@@ -36,7 +36,7 @@ window.title(title)
 # 設定主視窗之背景色
 window.configure(bg="#7AFEC6")
 
-icon_filename = "C:/_git/vcs/_1.data/______test_files1/_material/ims.ico"
+icon_filename = "D:/_git/vcs/_1.data/______test_files1/_material/ims.ico"
 window.iconbitmap(icon_filename)  # 更改圖示
 
 

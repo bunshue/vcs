@@ -17,7 +17,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -792,7 +792,7 @@ def PrintError(data, recdata):
     print("信息丢失率：", sum2 / sum1)
 
 
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 
 img = cv2.imread(filename)
 blue = img[:, :, 0]

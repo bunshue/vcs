@@ -57,8 +57,8 @@ def get_words(line):
     words = line.split()
     return "\n".join(words) + "\n"
      
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/moby_01.txt'
-filename2 = 'C:/_git/vcs/_1.data/______test_files4/moby_01_clean.txt'
+filename1 = 'D:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/moby_01.txt'
+filename2 = 'D:/_git/vcs/_1.data/______test_files4/moby_01_clean.txt'
 
 with open(filename1) as infile, open(filename2, 'w') as outfile:
     for line in infile:
@@ -85,7 +85,7 @@ def word_stats(word_count):
     most_common = word_list[-1:-6:-1]
     return most_common, least_common
 
-filename2 = 'C:/_git/vcs/_1.data/______test_files4/moby_01_clean.txt'
+filename2 = 'D:/_git/vcs/_1.data/______test_files4/moby_01_clean.txt'
 moby_words = []
 with open(filename2) as infile:
     for word in infile:

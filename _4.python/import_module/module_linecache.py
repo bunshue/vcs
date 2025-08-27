@@ -1,7 +1,7 @@
 import random
 import linecache
 
-filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/涼州詞.txt"
+filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_txt/涼州詞.txt"
 
 getLines = linecache.getlines(filename)
 

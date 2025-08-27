@@ -44,7 +44,7 @@ window.config(bg="green")
 print("設定視窗背景顏色")
 window["bg"] = "pink"  # 窗口背景色，其他背景色見：blog.csdn.net/chl0000/article/details/7657887
 
-icon_filename = "C:/_git/vcs/_1.data/______test_files1/_material/ims.ico"
+icon_filename = "D:/_git/vcs/_1.data/______test_files1/_material/ims.ico"
 window.iconbitmap(icon_filename)  # 更改圖示
 
 window.mainloop()

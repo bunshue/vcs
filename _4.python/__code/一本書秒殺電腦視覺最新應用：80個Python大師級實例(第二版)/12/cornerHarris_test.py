@@ -4,7 +4,7 @@ print('cornerHarris')
 import cv2
 import numpy as np
 
-filename = 'C:/_git/vcs/_4.python/_data/bear.jpg'
+filename = 'D:/_git/vcs/_4.python/_data/bear.jpg'
 
 img = cv2.imread(filename)
 cv2.imshow('raw_img', img)

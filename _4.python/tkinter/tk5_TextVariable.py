@@ -733,7 +733,7 @@ print("------------------------------------------------------------")  # 60個
 """
 print('字串變數之 set 與 get')
 foldername = tk.StringVar()
-foldername.set('C:/_git/vcs/_1.data/______test_files1/_mp3/')
+foldername.set('D:/_git/vcs/_1.data/______test_files1/_mp3/')
 print(foldername.get())
 
 

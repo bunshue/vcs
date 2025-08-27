@@ -15,7 +15,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -37,7 +37,7 @@ from matplotlib.patches import Circle
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 image = img.imread(filename)  # 讀取原始圖像
 
 fig, ax = plt.subplots(1, 1)
@@ -127,7 +127,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = (
-    "C:/_git/vcs/_1.data/______test_files1/__pic/_anime/_angry_bird/Angry-Birds01.jpg"
+    "D:/_git/vcs/_1.data/______test_files1/__pic/_anime/_angry_bird/Angry-Birds01.jpg"
 )
 
 image = img.imread(filename)  # 讀取原始圖像
@@ -243,7 +243,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = (
-    "C:/_git/vcs/_1.data/______test_files1/__pic/_anime/_angry_bird/Angry-Birds01.jpg"
+    "D:/_git/vcs/_1.data/______test_files1/__pic/_anime/_angry_bird/Angry-Birds01.jpg"
 )
 
 image = img.imread(filename)  # 讀取原始圖像

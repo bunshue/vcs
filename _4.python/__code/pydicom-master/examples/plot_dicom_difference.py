@@ -15,9 +15,9 @@ from pydicom.data import get_testdata_file
 print(__doc__)
 
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/test.dcm'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/ims000525.dcm'
-filename3 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/CT_small.dcm'
+filename1 = 'D:/_git/vcs/_1.data/______test_files1/__RW/_dicom/test.dcm'
+filename2 = 'D:/_git/vcs/_1.data/______test_files1/__RW/_dicom/ims000525.dcm'
+filename3 = 'D:/_git/vcs/_1.data/______test_files1/__RW/_dicom/CT_small.dcm'
 
 filename_mr = get_testdata_file('MR_small.dcm')
 filename_ct = get_testdata_file('CT_small.dcm')

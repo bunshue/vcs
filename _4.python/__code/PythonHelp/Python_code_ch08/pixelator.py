@@ -31,7 +31,7 @@ def analyze_picture(filename):
 
 
 filename = 'earth_west.png'
-filename = 'C:/_git/vcs/_4.python/_data/ims01.bmp'
+filename = 'D:/_git/vcs/_4.python/_data/ims01.bmp'
 
 analyze_picture(filename)
 

@@ -108,8 +108,8 @@ print("------------------------------------------------------------")  # 60個
 
 # cv2.HoughLines 直線檢測
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_Hough/tennis_court.jpg"
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/star_silver.png"  # 五角銀星
+filename = "D:/_git/vcs/_4.python/opencv/data/_Hough/tennis_court.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/star_silver.png"  # 五角銀星
 
 # 影像前處理
 img_original = cv2.imread(filename)  # 彩色讀取
@@ -254,7 +254,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename_road = "C:/_git/vcs/_4.python/opencv/data/_Hough/road.jpg"
+filename_road = "D:/_git/vcs/_4.python/opencv/data/_Hough/road.jpg"
 
 img_color2 = cv2.imread(filename_road)
 
@@ -522,7 +522,7 @@ print("------------------------------------------------------------")  # 60個
 # add_collection 只能用 ax
 
 # 使用HoughCircles()檢驗圖形中的圓形
-coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
+coin_filename = "D:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
 img_gray = cv2.imread(coin_filename, cv2.IMREAD_GRAYSCALE)
 
 img_blur = cv2.GaussianBlur(img_gray, (0, 0), 1.8)
@@ -617,7 +617,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename_road = "C:/_git/vcs/_4.python/opencv/data/_Hough/road.jpg"
+filename_road = "D:/_git/vcs/_4.python/opencv/data/_Hough/road.jpg"
 
 img_color = cv2.imread(filename_road)
 
@@ -638,7 +638,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename_road = "C:/_git/vcs/_4.python/opencv/data/_Hough/road.jpg"
+filename_road = "D:/_git/vcs/_4.python/opencv/data/_Hough/road.jpg"
 
 img_color = cv2.imread(filename_road)
 
@@ -677,11 +677,11 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 video_filename = (
-    "C:/_git/__大檔與暫存區/GRENZEL 雲創 E3W WiFi 行車記錄器 1080 30fps 日間測試 高速公路 - Mobile01.mp4"
+    "D:/_git/__大檔與暫存區/GRENZEL 雲創 E3W WiFi 行車記錄器 1080 30fps 日間測試 高速公路 - Mobile01.mp4"
 )
-video_filename = "C:/_git/__大檔與暫存區/DOD行車記錄器-LS300W 日間高速公路實拍.mp4"
-video_filename = "C:/_git/__大檔與暫存區/響尾蛇行車記錄器高解析度1080P - 高速公路白天行駛記錄 -.mp4"
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/road.mp4"
+video_filename = "D:/_git/__大檔與暫存區/DOD行車記錄器-LS300W 日間高速公路實拍.mp4"
+video_filename = "D:/_git/__大檔與暫存區/響尾蛇行車記錄器高解析度1080P - 高速公路白天行駛記錄 -.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/road.mp4"
 
 capture = cv2.VideoCapture(video_filename)  # 建立 VideoCapture 物件
 

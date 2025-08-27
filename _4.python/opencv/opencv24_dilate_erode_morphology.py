@@ -51,8 +51,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("dilate 擴大 膨脹 效果")
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/dilation.bmp"
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
+filename = "D:/_git/vcs/_1.data/______test_files1/_image_processing/dilation.bmp"
+filename = "D:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
 
 image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取 + 有透明度
 
@@ -94,8 +94,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/erode.bmp"
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
+filename = "D:/_git/vcs/_1.data/______test_files1/_image_processing/erode.bmp"
+filename = "D:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
 
 image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取 + 有透明度
 
@@ -146,9 +146,9 @@ print("膨脹/侵蝕")
 print("膨脹(Dilate) 白色變大")
 print("侵蝕(Erosion) 白色變小")
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
+filename = "D:/_git/vcs/_4.python/_data/elephant.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
 
 image = cv2.imread(filename)  # 彩色讀取
 
@@ -253,8 +253,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("dilate 擴大 膨脹 效果")
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/kernel.bmp"
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
+filename = "D:/_git/vcs/_1.data/______test_files1/_image_processing/kernel.bmp"
+filename = "D:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
 
 image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取 + 有透明度
 
@@ -297,10 +297,10 @@ print("------------------------------------------------------------")  # 60個
 print("膨脹/侵蝕")
 
 filename = "data/flower.png"
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-# filename = "C:/_git/vcs/_4.python/_data/bear.jpg"
-# filename = "C:/_git/vcs/_4.python/_data/panda.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
+filename = "D:/_git/vcs/_4.python/_data/elephant.jpg"
+# filename = "D:/_git/vcs/_4.python/_data/bear.jpg"
+# filename = "D:/_git/vcs/_4.python/_data/panda.jpg"
 
 image = cv2.imread(filename)  # 彩色讀取
 
@@ -494,7 +494,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
+coin_filename = "D:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
 
 image = cv2.imread(coin_filename)  # 彩色讀取
 
@@ -526,7 +526,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
+coin_filename = "D:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
 
 image = cv2.imread(coin_filename)  # 彩色讀取
 
@@ -564,7 +564,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
+coin_filename = "D:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
 
 image = cv2.imread(coin_filename)  # 彩色讀取
 
@@ -600,7 +600,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
+coin_filename = "D:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
 
 image = cv2.imread(coin_filename)  # 彩色讀取
 
@@ -637,7 +637,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
+coin_filename = "D:/_git/vcs/_4.python/opencv/data/morphology/water_coins.jpg"
 
 image = cv2.imread(coin_filename)  # 彩色讀取
 
@@ -674,8 +674,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename1 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/opening.bmp"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/opening2.bmp"
+filename1 = "D:/_git/vcs/_1.data/______test_files1/_image_processing/opening.bmp"
+filename2 = "D:/_git/vcs/_1.data/______test_files1/_image_processing/opening2.bmp"
 
 img1 = cv2.imread(filename1)  # 彩色讀取
 img2 = cv2.imread(filename2)  # 彩色讀取
@@ -707,8 +707,8 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename1 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/closing.bmp"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/closing2.bmp"
+filename1 = "D:/_git/vcs/_1.data/______test_files1/_image_processing/closing.bmp"
+filename2 = "D:/_git/vcs/_1.data/______test_files1/_image_processing/closing2.bmp"
 
 img1 = cv2.imread(filename1)  # 彩色讀取
 img2 = cv2.imread(filename2)  # 彩色讀取
@@ -740,7 +740,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/gradient.bmp"
+filename = "D:/_git/vcs/_1.data/______test_files1/_image_processing/gradient.bmp"
 
 image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取 + 有透明度
 
@@ -763,7 +763,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/tophat.bmp"
+filename = "D:/_git/vcs/_1.data/______test_files1/_image_processing/tophat.bmp"
 
 image1 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取 + 有透明度
 
@@ -798,7 +798,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/blackhat.bmp"
+filename = "D:/_git/vcs/_1.data/______test_files1/_image_processing/blackhat.bmp"
 
 image1 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取 + 有透明度
 
@@ -952,7 +952,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("形態學處理 erode")
 
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
 image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 # 創建結構元
@@ -1010,7 +1010,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("形態學處理 open")
 
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology//dilate_erode1.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/morphology//dilate_erode1.png"
 image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 # 創建結構元
@@ -1085,8 +1085,8 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode2.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
 
 image = cv2.imread(filename)  # 彩色讀取
 
@@ -1243,7 +1243,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
+coin_filename = "D:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
 image = cv2.imread(coin_filename, cv2.IMREAD_COLOR)  # 彩色讀取
 
@@ -1283,7 +1283,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
+coin_filename = "D:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
 image = cv2.imread(coin_filename, cv2.IMREAD_COLOR)  # 彩色讀取
 
@@ -1322,7 +1322,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
+coin_filename = "D:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
 image = cv2.imread(coin_filename, cv2.IMREAD_COLOR)  # 彩色讀取
 
@@ -1375,7 +1375,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
+coin_filename = "D:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
 image = cv2.imread(coin_filename, cv2.IMREAD_COLOR)  # 彩色讀取
 
@@ -1426,7 +1426,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
+coin_filename = "D:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
 image = cv2.imread(coin_filename, cv2.IMREAD_COLOR)  # 彩色讀取
 
@@ -1485,7 +1485,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
+coin_filename = "D:/_git/vcs/_4.python/opencv/data/morphology/opencv_coin.jpg"
 
 image = cv2.imread(coin_filename, cv2.IMREAD_COLOR)  # 彩色讀取
 
@@ -1557,7 +1557,7 @@ def do_trackbar_event1(val):
     cv2.imshow("OpenCV", dilation)
 
 
-filename = "C:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/morphology/dilate_erode1.png"
 
 image = cv2.imread(filename)  # 彩色讀取
 cv2.imshow("OpenCV", image)

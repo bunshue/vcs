@@ -56,12 +56,12 @@ namespace vcs_DrAP
         string text_editor_path = String.Empty;
         string python_editor_path = String.Empty;
         string winmerge_path = String.Empty;
-        string search_path = @"C:\_git\vcs\_2.vcs";
-        string specified_search_path = @"C:\_git\vcs\_4.python\__code";
-        string default_vcs_path = @"C:\_git\vcs\_2.vcs";
-        string default_python_path = @"C:\_git\vcs\_4.python";
-        string default_cuda_path = @"C:\_git\vcs\_3.cuda";
-        string default_opengl_path = @"C:\_git\vcs\_6.opengl";
+        string search_path = @"D:\_git\vcs\_2.vcs";
+        string specified_search_path = @"D:\_git\vcs\_4.python\__code";
+        string default_vcs_path = @"D:\_git\vcs\_2.vcs";
+        string default_python_path = @"D:\_git\vcs\_4.python";
+        string default_cuda_path = @"D:\_git\vcs\_3.cuda";
+        string default_opengl_path = @"D:\_git\vcs\_6.opengl";
 
         private const int SEARCH_MODE_VCS = 0x00;	    //search vcs code, 搜尋vcs內的關鍵字
         private const int SEARCH_MODE_PYTHON = 0x01;	//search python code, 搜尋python內的關鍵字
@@ -1754,7 +1754,7 @@ namespace vcs_DrAP
 
                         if (search_mode == SEARCH_MODE_PYTHON)
                         {
-                            string search_folder1 = @"C:\_git\vcs\_4.python\__code";    //書附光碟
+                            string search_folder1 = @"D:\_git\vcs\_4.python\__code";    //書附光碟
 
                             if (rb_python_search0.Checked == true)
                             {
@@ -1784,7 +1784,7 @@ namespace vcs_DrAP
                         }
                         else if ((search_mode == SEARCH_MODE_VCS) && (cb_option3.Checked == true))
                         {
-                            string search_folder = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example";
+                            string search_folder = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example";
                             if (subdirectory.Contains(search_folder))
                             {
                                 ProcessDirectoryS(subdirectory);
@@ -1797,7 +1797,7 @@ namespace vcs_DrAP
                         }
                         else if ((search_mode == SEARCH_MODE_VCS) && (cb_option3.Checked == false))
                         {
-                            string skip_folder = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example";
+                            string skip_folder = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example";
                             if (subdirectory.Contains(skip_folder))
                             {
                                 richTextBox2.Text += "跳過 " + subdirectory + "\n";
@@ -2136,7 +2136,7 @@ namespace vcs_DrAP
             Properties.Settings.Default.Save();
             */
 
-            string foldername = @"C:\_git\vcs\_1.data\______test_files1\_case1\";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\_case1\";
             richTextBox1.Text += "讀出一資料夾內所有檔案 -r, 資料夾\t" + foldername + "\n";
 
             //get_all_files(foldername);
@@ -2547,7 +2547,7 @@ namespace vcs_DrAP
             total_size = 0;
             total_files = 0;
 
-            path = @"C:\_git\vcs\_1.data\______test_files1\_case1";
+            path = @"D:\_git\vcs\_1.data\______test_files1\_case1";
 
             richTextBox2.Text += "\n搜尋路徑 " + path + "\n";
 
@@ -3318,7 +3318,7 @@ namespace vcs_DrAP
             richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
 
             //確認資料夾是否存在
-            string Path = @"C:/_git/vcs/_1.data/______test_files1/aaaa/bbbb";
+            string Path = @"D:/_git/vcs/_1.data/______test_files1/aaaa/bbbb";
             if (Directory.Exists(Path) == false)    //確認資料夾是否存在
                 richTextBox1.Text += "搜尋資料夾: " + Path + " 不存在\n";
             else
@@ -3326,7 +3326,7 @@ namespace vcs_DrAP
             */
 
             //string path = default_vcs_path;
-            string path = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw";
+            string path = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw";
             //string path = search_path;
 
 

@@ -81,7 +81,7 @@ import time
 import sqlite3
 
 db_filename = (
-    "C:/_git/vcs/_1.data/______test_files2/ddb_"
+    "D:/_git/vcs/_1.data/______test_files2/ddb_"
     + time.strftime("%Y%m%d_%H%M%S", time.localtime())
     + ".b.sqlite"
 )
@@ -155,7 +155,7 @@ def disp_data():
 
 import sqlite3
 
-db_filename = "C:/_git/vcs/_1.data/______test_files1/_db/python02.sqlite"
+db_filename = "D:/_git/vcs/_1.data/______test_files1/_db/python02.sqlite"
 
 conn = sqlite3.connect(db_filename)
 

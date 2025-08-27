@@ -26,7 +26,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -53,7 +53,7 @@ plt.figure(
     frameon=True,
 )
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 image = img.imread(filename)  # 讀取原始圖像
 
 # plt之讀取檔案 取得圖片資訊
@@ -82,7 +82,7 @@ plt.title("顯示裁剪圖片")
 print("------------------------------")  # 30個
 plt.subplot(233)
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 # 打開圖像，並轉成灰度圖像
 # 檔案 => PIL影像 => 灰階 => np陣列
 image = np.array(Image.open(filename).convert("L"))  # L為8位像素黑白圖
@@ -128,7 +128,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/bug.bmp"
+filename = "D:/_git/vcs/_1.data/______test_files1/bug.bmp"
 
 plt.figure(
     num="imshow 集合 2",
@@ -284,7 +284,7 @@ im = plt.imshow(
 
 """
 im.set_url('https://www.google.com/')
-filename = 'C:/_git/vcs/_1.data/______test_files2/image.svg'
+filename = 'D:/_git/vcs/_1.data/______test_files2/image.svg'
 fig.savefig(filename)
 print('已存圖' + filename)
 """
@@ -908,7 +908,7 @@ print("修改后像素點img[1, 0, 2] = ", img.item(1, 0, 2))
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 
 img = plt.imread(filename)
 print(img.shape, img.dtype)
@@ -968,7 +968,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 調整子圖布局
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+filename = "D:/_git/vcs/_4.python/_data/elephant.jpg"
 image = img.imread(filename)  # 讀取原始圖像
 
 plt.figure(figsize=(12, 8))

@@ -1,5 +1,5 @@
 #url = 'https://example.oxxostudio.tw/python/selenium/demo.html'
-url = 'C:/_git/vcs/_1.data/______test_files1/webdriver_data.html'
+url = 'D:/_git/vcs/_1.data/______test_files1/webdriver_data.html'
 
 '''
 新進測試

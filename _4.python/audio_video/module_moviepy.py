@@ -2,7 +2,7 @@ print("------------------------------------------------------------")  # 60個
 print("Python 影片處理, 使用 moviepy")
 print("------------------------------------------------------------")  # 60個
 
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 from moviepy.editor import *
 
@@ -1086,7 +1086,7 @@ if __name__ == "__main__":
     Wuhan people thank all angels in white!
 
     """
-    font_filename = "C:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf"
+    font_filename = "D:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf"
 
     clip = (
         VideoFileClip("kkkk.mp4", audio=False).crop(0, 300, 540, 840).subclip(0, 0.05)

@@ -1,13 +1,13 @@
 from opencv_common import *
 
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 print("------------------------------------------------------------")  # 60個
 
 print("使用 cv2 取得一個avi檔的播放時間")
 import datetime
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_video/i2c.avi"
+filename = "D:/_git/vcs/_1.data/______test_files1/_video/i2c.avi"
 
 cap = cv2.VideoCapture(filename)
 
@@ -33,7 +33,7 @@ print("------------------------------------------------------------")  # 60個
 from pathlib import Path
 import datetime
 
-infolder = "C:/_git/vcs/_1.data/______test_files1/_video"
+infolder = "D:/_git/vcs/_1.data/______test_files1/_video"
 extlist = ["*.mp4", "*.mov"]
 
 
@@ -75,7 +75,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("播放影片")
 
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 cap = cv2.VideoCapture(video_filename)  # 開啟影片
 
@@ -103,7 +103,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 播放视频，并把每帧保存成图片：
 
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 cap = cv2.VideoCapture(video_filename)
 
@@ -131,7 +131,7 @@ print("------------------------------------------------------------")  # 60個
 
 # OpenCV如何讀取特定時間區段？
 
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 # 影片捕捉物件
 cap = cv2.VideoCapture(video_filename)
@@ -165,7 +165,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("影片去背景")
 
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 # video_filename = "D:\______大整理/Carreno Busta vs Kei Nishikori Final Set Tie Break HD.mp4"
 
 cap = cv2.VideoCapture(video_filename)
@@ -279,7 +279,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 cap = cv2.VideoCapture(video_filename)  # 開啟影片
 

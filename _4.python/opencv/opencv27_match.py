@@ -26,7 +26,7 @@ def get_image_contours(image):
     return contours, hierarchy
 
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape06.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape06.png"
 
 image0 = cv2.imread(filename)  # 彩色讀取
 
@@ -255,8 +255,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-filename1 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates46.jpg"
-filename2 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates46_head.jpg"
+filename1 = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates46.jpg"
+filename2 = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates46_head.jpg"
 
 src = cv2.imread(filename1, cv2.IMREAD_COLOR)
 
@@ -347,9 +347,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename_big = (
-    "C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/Angry-Birds01.jpg"
+    "D:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/Angry-Birds01.jpg"
 )
-filename_small = "C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/AB_red.jpg"
+filename_small = "D:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/AB_red.jpg"
 
 src = cv2.imread(filename_big, cv2.IMREAD_COLOR)
 
@@ -385,9 +385,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename_big = (
-    "C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/Angry-Birds01.jpg"
+    "D:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/Angry-Birds01.jpg"
 )
-filename_small = "C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/AB_red.jpg"
+filename_small = "D:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/AB_red.jpg"
 
 src = cv2.imread("data/matchTemplate/mutishapes1.jpg", cv2.IMREAD_COLOR)  # 讀取原始影像
 

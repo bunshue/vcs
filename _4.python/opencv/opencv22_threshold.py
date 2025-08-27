@@ -17,8 +17,8 @@
 
 from opencv_common import *
 
-filename = "C:/_git/vcs/_4.python/opencv/data/threshold/threshold1.png"
-filename = "C:/_git/vcs/_4.python/opencv/data/threshold/gray_scale.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/threshold/threshold1.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/threshold/gray_scale.jpg"
 
 print("------------------------------------------------------------")  # 60個
 

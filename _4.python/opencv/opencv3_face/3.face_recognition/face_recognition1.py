@@ -19,7 +19,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -32,7 +32,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("人臉偵測")
 
-filename = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg"
 img = cv2.imread(filename)
 
 faces = face_recognition.face_locations(img, number_of_times_to_upsample=1, model="hog")
@@ -50,7 +50,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("臉部資料編碼")
 
-filename = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg"
 img = cv2.imread(filename)
 
 faces = face_recognition.face_locations(img)
@@ -67,8 +67,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("人臉識別")
 
-filename1 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg"
-filename2 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates03.jpg"
+filename1 = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg"
+filename2 = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates03.jpg"
 
 img = cv2.imread(filename1)
 known_encoding = face_recognition.face_encodings(img)[0]
@@ -89,11 +89,11 @@ print("------------------------------------------------------------")  # 60個
 
 print("計算兩張人臉之間差異的距離")
 
-filename1 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg"
-filename2 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk01.jpg"
-filename3 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Steve_Jobs_01.jpg"
+filename1 = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg"
+filename2 = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk01.jpg"
+filename3 = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Steve_Jobs_01.jpg"
 
-filename_new = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates03.jpg"
+filename_new = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates03.jpg"
 
 img = cv2.imread(filename1)
 known1_encoding = face_recognition.face_encodings(img)[0]
@@ -116,7 +116,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("識別和繪出臉部特徵")
 
-filename = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg"
 
 img = cv2.imread(filename)
 
@@ -228,7 +228,7 @@ def classify_face(filename):
     return img
 
 
-filename = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg"
 image = classify_face(filename)
 
 cv2.imshow("Result", image)
@@ -242,7 +242,7 @@ print("face-recognition：效果絕佳的人臉辨識")
 
 from PIL import Image, ImageDraw
 
-filename = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates21.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates21.jpg"
 
 image = face_recognition.load_image_file(filename)
 boxes = face_recognition.face_locations(image)
@@ -260,7 +260,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg"
 
 image = face_recognition.load_image_file(filename)
 landmarks = face_recognition.face_landmarks(image)
@@ -279,9 +279,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("把人員圖片資料先存起來, 並註記人名")
-file1 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg"
-file2 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk01.jpg"
-file3 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Steve_Jobs_01.jpg"
+file1 = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg"
+file2 = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk01.jpg"
+file3 = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Steve_Jobs_01.jpg"
 filename1 = face_recognition.load_image_file(file1)
 filename2 = face_recognition.load_image_file(file2)
 filename3 = face_recognition.load_image_file(file3)
@@ -291,7 +291,7 @@ encoding3 = face_recognition.face_encodings(filename3)[0]
 known_faces = [encoding1, encoding2, encoding3]
 names = ["Bill Gates", "Elon Musk", "Steve Jobs"]
 
-file_new = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates32.jpg"
+file_new = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates32.jpg"
 unknown = face_recognition.load_image_file(file_new)
 encoding_unknown = face_recognition.face_encodings(unknown)[0]
 
@@ -311,9 +311,9 @@ else:
 print()
 
 print("把人員圖片資料先存起來, 並註記人名")
-file1 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg"
-file2 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk01.jpg"
-file3 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Steve_Jobs_01.jpg"
+file1 = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg"
+file2 = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk01.jpg"
+file3 = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Steve_Jobs_01.jpg"
 filename1 = face_recognition.load_image_file(file1)
 filename2 = face_recognition.load_image_file(file2)
 filename3 = face_recognition.load_image_file(file3)
@@ -323,7 +323,7 @@ encoding3 = face_recognition.face_encodings(filename3)[0]
 known_faces = [encoding1, encoding2, encoding3]
 names = ["Bill Gates", "Elon Musk", "Steve Jobs"]
 
-file_new = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates32.jpg"
+file_new = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates32.jpg"
 unknown = face_recognition.load_image_file(file_new)
 encoding_unknown = face_recognition.face_encodings(unknown)[0]
 

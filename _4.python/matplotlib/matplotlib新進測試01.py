@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -199,7 +199,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-foldername = "C:/_git/vcs/_1.data/______test_files1"
+foldername = "D:/_git/vcs/_1.data/______test_files1"
 
 """
 import glob
@@ -322,7 +322,7 @@ print("------------------------------------------------------------")  # 60個
 
 from PIL import Image, ImageOps
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 image = Image.open(filename)
 print(image.size)
@@ -992,7 +992,7 @@ from PIL import Image
 
 # 在圖上作畫
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 檔案 => PIL影像
 im = Image.open(filename)

@@ -49,7 +49,7 @@ print("------------------------------------------------------------")  # 60個
 print("新進測試")
 
 db_filename = "ims_sql/db_ims.sqlite"
-db_filename = "C:/_git/vcs/_1.data/______test_files1/_db/gasoline.sqlite"
+db_filename = "D:/_git/vcs/_1.data/______test_files1/_db/gasoline.sqlite"
 # db_filename  = 'db_20230703_113217.sqlite'
 
 print("建立資料庫連線, 資料庫 : " + db_filename)
@@ -233,7 +233,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 db_filename = (
-    "C:/_git/vcs/_1.data/______test_files2/db_"
+    "D:/_git/vcs/_1.data/______test_files2/db_"
     + time.strftime("%Y%m%d_%H%M%S", time.localtime())
     + ".sqlite"
 )
@@ -348,7 +348,7 @@ fetchall()	#抓取剩下的全部 list
 """
 
 db_filename = "ims_sql/db_ims.sqlite"
-db_filename = "C:/_git/vcs/_1.data/______test_files1/_db/gasoline.sqlite"
+db_filename = "D:/_git/vcs/_1.data/______test_files1/_db/gasoline.sqlite"
 # db_filename  = 'db_20230703_113217.sqlite'
 
 print("建立資料庫連線, 資料庫 : " + db_filename)

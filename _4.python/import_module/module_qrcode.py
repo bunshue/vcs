@@ -17,7 +17,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -99,7 +99,7 @@ print("------------------------------------------------------------")  # 60個
 
 from PIL import Image
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_icon/唐.bmp"
+filename = "D:/_git/vcs/_1.data/______test_files1/_icon/唐.bmp"
 
 qr = qrcode.QRCode(
     version=5, error_correction=qrcode.constants.ERROR_CORRECT_M, box_size=10, border=4
@@ -239,7 +239,7 @@ qrcode_image5 = qr.make_image(
     module_drawer=RoundedModuleDrawer(),
 )
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_icon/唐.bmp"
+filename = "D:/_git/vcs/_1.data/______test_files1/_icon/唐.bmp"
 qrcode_image6 = qr.make_image(
     image_factory=StyledPilImage,
     color_mask=ImageColorMask((255, 255, 255), filename),
@@ -262,7 +262,7 @@ qr = qrcode.QRCode(
 qr.add_data(encode_text)
 qr.make(fit=True)
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_icon/唐.bmp"
+filename = "D:/_git/vcs/_1.data/______test_files1/_icon/唐.bmp"
 qrcode_image = qr.make_image(image_factory=StyledPilImage, embeded_image_path=filename)
 qrcode_image.save("tmp_qrcode16.png")
 

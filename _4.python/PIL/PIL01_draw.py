@@ -10,10 +10,10 @@ from PIL import ImageDraw
 from PIL import ImageFont
 from PIL import ImageColor
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf"  # 無中文
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"  # 有中文
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf"  # 無中文
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"  # 有中文
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+filename = "D:/_git/vcs/_4.python/_data/elephant.jpg"
 
 font_size = 30
 font = ImageFont.truetype(font_filename, font_size)
@@ -29,7 +29,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -42,7 +42,7 @@ print("------------------------------------------------------------")  # 60個
 print("量測字串的大小")
 mesg = "傷心橋下春波綠，曾是驚鴻照影來。"
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+filename = "D:/_git/vcs/_4.python/_data/elephant.jpg"
 
 image = Image.open(filename)  # PIL讀取本機圖片, RGB模式
 dw = ImageDraw.Draw(image)
@@ -163,7 +163,7 @@ dw.text((x_st, y_st), "Welcome 3333", font=font, fill=(255, 0, 255, 255))
 
 
 # msch
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 font = ImageFont.truetype(font_filename, font_size)
 y_st += dy
 dw.text((x_st + 5, y_st + 5), "歡迎來到美國111 msch", font=font, fill=(25, 25, 25))  # 畫陰影
@@ -221,7 +221,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 """ TBD
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
 
 # 檔案 => PIL影像
 im = Image.open(filename)
@@ -306,7 +306,7 @@ print("------------------------------------------------------------")  # 60個
 
 image = Image.new("RGBA", (360, 180))  # 建立色彩模式為 RGBA，尺寸 360x180 的空白圖片
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 
 font_size = 30
 font = ImageFont.truetype(font_filename, font_size)
@@ -381,7 +381,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("PIL_line")
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 讀取圖像到數組中
 # 檔案 => PIL影像 => numpy陣列

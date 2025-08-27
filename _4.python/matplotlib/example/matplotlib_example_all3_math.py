@@ -17,7 +17,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -801,9 +801,9 @@ plt.plot(x, y, lw=5, c="white")
 import matplotlib.font_manager as fm
 
 font_filename = (
-    "C:/_git/vcs/_2.vcs/my_vcs_lesson_7_free/vcs_DrawPoem/vcs_DrawPoem/font/康楷體w5.TTC"
+    "D:/_git/vcs/_2.vcs/my_vcs_lesson_7_free/vcs_DrawPoem/vcs_DrawPoem/font/康楷體w5.TTC"
 )
-# font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+# font_filename = 'D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 
 # myfont = fm.FontProperties(fname="/Users/mac/Library/Fonts/NotoSansHant-Medium.otf")
 myfont = fm.FontProperties(fname=font_filename)

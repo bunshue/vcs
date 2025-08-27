@@ -18,7 +18,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -46,7 +46,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("臉部偵測")
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
 image = resizeimg(cv2.imread(filename))
 print(image.shape)
@@ -69,7 +69,7 @@ print('------------------------------------------------------------')	#60個
 
 print("臉部特徵網")
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 image = resizeimg(cv2.imread(filename))
 
 mp_drawing = mp.solutions.drawing_utils
@@ -93,7 +93,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("手部偵測")
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates33.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates33.jpg'
 image = resizeimg(cv2.imread(filename))
 
 mp_drawing = mp.solutions.drawing_utils
@@ -114,7 +114,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("姿勢偵測")
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates15.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates15.jpg'
 image = resizeimg(cv2.imread(filename))
 
 mp_drawing = mp.solutions.drawing_utils
@@ -133,7 +133,7 @@ print('------------------------------------------------------------')	#60個
 
 print("人體整合偵測")
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates15.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates15.jpg'
 image = resizeimg(cv2.imread(filename))
 
 mp_drawing = mp.solutions.drawing_utils
@@ -160,7 +160,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("3D物體偵測")
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
 image = resizeimg(cv2.imread('images2/object1.jpg'))
 # image = resizeimg(cv2.imread('images2/object2.jpg'))
@@ -189,7 +189,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("臉部偵測")
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 img = resizeimg(cv2.imread(filename))
 
 detector = FaceDetector()
@@ -204,7 +204,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("臉部特徵網")
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 img = resizeimg(cv2.imread(filename))
 
 detector = FaceMeshDetector(staticMode=True, maxFaces=5)
@@ -277,7 +277,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("姿勢偵測")
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates15.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates15.jpg'
 img = resizeimg(cv2.imread(filename))
 
 detector = PoseDetector()
@@ -582,7 +582,7 @@ def draw_pose(image):
           landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
   return annotated_image
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
 img = cv2.imread(filename)
 res = draw_pose(img)

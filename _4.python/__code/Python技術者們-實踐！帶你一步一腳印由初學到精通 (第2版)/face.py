@@ -5,7 +5,7 @@ import time
 import requests
 
 # 偵測正面人臉 haarcascade_frontalface_default.xml
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
+xml_filename = "D:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
 
 base = ""  # api
 key = ""  # 你的金鑰

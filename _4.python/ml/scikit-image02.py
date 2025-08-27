@@ -18,7 +18,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -285,7 +285,7 @@ import skimage.filters.rank as sfr
 
 # img =skimage.color.rgb2gray(skimage.data.lena())
 
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 
 img = skimage.io.imread(filename, True)  # True:轉為灰階
 
@@ -327,7 +327,7 @@ import skimage.filters.rank as sfr
 
 #img =skimage.color.rgb2gray(skimage.data.lena())
 
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 
 img=skimage.io.imread(filename, True)   #True:轉為灰階
 
@@ -357,7 +357,7 @@ import skimage.filters.rank as sfr
 
 # img = skimage.color.rgb2gray(skimage.data.lena())
 
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 
 img = skimage.io.imread(filename, True)  # True:轉為灰階
 
@@ -389,7 +389,7 @@ import skimage.filters.rank as sfr
 
 # img = skimage.color.rgb2gray(skimage.data.lena())
 
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 
 img = skimage.io.imread(filename, True)  # True:轉為灰階
 
@@ -418,7 +418,7 @@ import skimage.filters.rank as sfr
 
 # img = skimage.color.rgb2gray(skimage.data.lena())
 
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 
 img = skimage.io.imread(filename, True)  # True:轉為灰階
 
@@ -447,7 +447,7 @@ import skimage.filters.rank as sfr
 
 # img = skimage.color.rgb2gray(skimage.data.lena())
 
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 
 img = skimage.io.imread(filename, True)  # True:轉為灰階
 
@@ -1415,7 +1415,7 @@ print("------------------------------------------------------------")  # 60個
 from PIL import Image
 from PIL import ImageFilter
 
-filename = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/elephant.jpg"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1522,7 +1522,7 @@ def add_salt_noise(image):
     show()
 
 
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_color.png
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_color.png
 
 plt.figure(
     num="影像處理",
@@ -1545,7 +1545,7 @@ print("PIL_derivative")
 
 import scipy.ndimage
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 檔案 => PIL影像 => 灰階 => numpy陣列
 image = np.array(Image.open(filename).convert("L"))
@@ -1594,7 +1594,7 @@ print("PIL_fuzzy")
 import scipy.ndimage
 from matplotlib.font_manager import FontProperties
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 檔案 => PIL影像 => 灰階 => numpy陣列
 image = np.array(Image.open(filename).convert("L"))
@@ -1661,7 +1661,7 @@ def mag(image, sigma):
     return imagemag
 
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 檔案 => PIL影像 => 灰階 => numpy陣列
 image = np.array(Image.open(filename).convert("L"))
@@ -1695,7 +1695,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1895,7 +1895,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+filename = "D:/_git/vcs/_4.python/_data/elephant.jpg"
 
 im = np.array(Image.open(filename).convert("L"))
 plt.gray()

@@ -384,7 +384,7 @@ print(lats[:5])
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_json/data_earthquake.json'
+filename = 'D:/_git/vcs/_1.data/______test_files1/_json/data_earthquake.json'
 fp = open(filename, 'r')
 earthquakes = json.load(fp)
 
@@ -399,7 +399,7 @@ for eq in earthquakes['features']:
 print('------------------------------------------------------------')	#60個
 
 """ many
-filename_json = 'C:/_git/vcs/_1.data/______test_files1/_json/ChinaBoundary_Province_City'
+filename_json = 'D:/_git/vcs/_1.data/______test_files1/_json/ChinaBoundary_Province_City'
 fp = open(filename_json, 'r', encoding ='UTF-8')
 boundary_data = json.load(fp)
 for b_data in boundary_data['Province']:
@@ -477,8 +477,8 @@ print('資料更新完成')
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_json/jdata.json'
-#filename = 'C:/_git/vcs/_1.data/______test_files1/_json/AQI1.json'  #fail
+filename = 'D:/_git/vcs/_1.data/______test_files1/_json/jdata.json'
+#filename = 'D:/_git/vcs/_1.data/______test_files1/_json/AQI1.json'  #fail
 
 import pprint as pp
 
@@ -547,7 +547,7 @@ print('------------------------------------------------------------')	#60個
 """
 json
 
-filename = 'C:/_git/vcs/_1.data/______test_files2/news_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.json';
+filename = 'D:/_git/vcs/_1.data/______test_files2/news_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.json';
 with open(filename, "w", encoding = 'utf-8') as fp:
     print(filename + " is dumping...")
     json.dump(titles, fp)

@@ -9,7 +9,7 @@ PIL影像.putpixel 設定該點之像素值
 import time
 from PIL import Image  # Importing Image class from PIL module
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -22,7 +22,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -32,7 +32,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 print("操作像素, 使用 putpixel 修改一塊")
 
@@ -77,7 +77,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("萃取圖片的輪廓")
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 image1 = Image.open(filename)  # PIL讀取本機圖片, 讀取的是RGB格式的圖片
 

@@ -29,12 +29,12 @@ window.configure(bg="#7AFEC6")
 
 """
 #使用icon方法一 .ico
-icon_filename = 'C:/_git/vcs/_1.data/______test_files1/python.ico'
+icon_filename = 'D:/_git/vcs/_1.data/______test_files1/python.ico'
 window.iconbitmap(icon_filename) #設定icon
 """
 
 # 使用icon方法二 .png
-logo_filename = "C:/_git/vcs/_1.data/______test_files1/__pic\_icon/option.png"
+logo_filename = "D:/_git/vcs/_1.data/______test_files1/__pic\_icon/option.png"
 icon = tk.PhotoImage(file=logo_filename)
 window.iconphoto(True, icon)
 

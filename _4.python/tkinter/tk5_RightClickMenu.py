@@ -187,7 +187,7 @@ window.title("綁定鍵盤滑鼠事件 Window, 右鍵選單")
 
 from PIL import ImageTk, Image
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 img = ImageTk.PhotoImage(Image.open(filename))
 label1 = tk.Label(window, image=img)
 label1.pack()
@@ -215,7 +215,7 @@ window.title("綁定鍵盤滑鼠事件 Window, 右鍵選單")
 
 from PIL import ImageTk, Image
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 img = ImageTk.PhotoImage(Image.open(filename))
 label1 = tk.Label(window, image=img)
 label1.pack()

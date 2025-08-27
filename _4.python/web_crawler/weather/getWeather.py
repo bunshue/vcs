@@ -2,7 +2,7 @@ import sys
 import requests
 
 def get_cwa_key():
-    filename = 'C:/_git/vcs/_1.data/______test_files1/_key/cwa_key.txt'
+    filename = 'D:/_git/vcs/_1.data/______test_files1/_key/cwa_key.txt'
 
     import os
     filename = os.path.abspath(filename)

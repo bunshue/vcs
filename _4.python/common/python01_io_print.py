@@ -574,7 +574,7 @@ for char in ascii:
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 err = sys.stderr.write
 dbg = err
@@ -651,12 +651,12 @@ print(usage, file=sys.stderr)
 
 print("------------------------------------------------------------")  # 60個
 
-filename1 = "C:/_git/vcs/_1.data/______test_files1/aaaaa.jpg"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/bbbbb.jpg"
+filename1 = "D:/_git/vcs/_1.data/______test_files1/aaaaa.jpg"
+filename2 = "D:/_git/vcs/_1.data/______test_files1/bbbbb.jpg"
 
 print("Copied %s to %s" % (filename1, filename2))
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 print(filename)
 

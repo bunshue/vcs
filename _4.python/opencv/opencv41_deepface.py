@@ -14,7 +14,7 @@ filename = "data/_face/FourPeople.jpg"
 # 定義加入文字函式
 def putText(x, y, text, size=30, color=WHITE):
     global image
-    fontpath = "C:/_git/vcs/_1.data/______test_files1/_font/NotoSansTC-Bold.otf"  # 字型
+    fontpath = "D:/_git/vcs/_1.data/______test_files1/_font/NotoSansTC-Bold.otf"  # 字型
     font = ImageFont.truetype(fontpath, size)  # 定義字型與文字大小
     imagePil = Image.fromarray(image)  # 轉換成 PIL 影像物件
     draw = ImageDraw.Draw(imagePil)  # 定義繪圖物件
@@ -131,7 +131,7 @@ filename = "data/_face/FourPeople.jpg"
 image = cv2.imread(filename)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 將圖片轉成灰階
 
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
+xml_filename = "D:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
 face_cascade = cv2.CascadeClassifier(xml_filename)  # 載入人臉模型
 
 faces = face_cascade.detectMultiScale(image)  # 偵測人臉
@@ -370,8 +370,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("人臉驗證")
 
-filename1 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk02.jpg"
-filename2 = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk03.jpg"
+filename1 = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk02.jpg"
+filename2 = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk03.jpg"
 
 # result = DeepFace.verify(filename1, filename2, model_name="DeepFace", model=DeepFace.build_model("DeepFace"), enforce_detection=False)
 result = DeepFace.verify(
@@ -549,7 +549,7 @@ From: https://github.com/serengil/deepface_models/releases/download/v1.0/age_mod
 To: C:/Users/070601/.deepface/weights/age_model_weights.h5
 """
 
-filename = "C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg"
+filename = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg"
 
 img = cv2.imread(filename)
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))

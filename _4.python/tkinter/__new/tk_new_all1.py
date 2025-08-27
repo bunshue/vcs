@@ -261,11 +261,11 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 # jpg fail
-# filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg' fail
+# filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg' fail
 
 # gif/png ok
-# filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif'
-filename = "C:/_git/vcs/_4.python/_data/logo1.png"
+# filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif'
+filename = "D:/_git/vcs/_4.python/_data/logo1.png"
 
 label1 = tk.Label(window)
 # 創建一個位圖

@@ -556,7 +556,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename_lena_color = "C:/_git/vcs/_4.python/opencv/data/lena_color.png"
+filename_lena_color = "D:/_git/vcs/_4.python/opencv/data/lena_color.png"
 
 lena_color = cv2.imread(filename_lena_color)  # 彩色讀取
 print(lena_color.shape)
@@ -753,7 +753,7 @@ print("------------------------------------------------------------")  # 60個
 print("修改alpha通道值 255=>127")
 
 # 4通道的PNG圖
-filename_RGB_R = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+filename_RGB_R = "D:/_git/vcs/_4.python/opencv/data/RGB_R.png"
 
 image = cv2.imread(filename_RGB_R, cv2.IMREAD_UNCHANGED)  # PNG讀取  # 彩色讀取 + 有透明度
 cv2.imshow("Before", image)  # 顯示修改前影像img

@@ -714,7 +714,7 @@ print("time.ctime() : %s" % time.ctime())
 
 print("------------------------------------------------------------")  # 60個
 
-path = "C:/_git/vcs/_4.python"
+path = "D:/_git/vcs/_4.python"
 t1 = datetime.datetime.fromtimestamp(os.stat(path).st_mtime, datetime.timezone.utc)
 print(t1)
 

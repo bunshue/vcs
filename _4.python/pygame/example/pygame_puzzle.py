@@ -1,7 +1,7 @@
 import pygame, sys, random
 from pygame.locals import *
 
-filename = 'C:/_git/vcs/_4.python/_data/picture2.jpg'
+filename = 'D:/_git/vcs/_4.python/_data/picture2.jpg'
 
 #顏色值
 White = (255, 255, 255)

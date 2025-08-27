@@ -17,7 +17,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("使用 均值濾波器.blur()")
 
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_noise.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_noise.png"
 
 image = cv2.imread(filename)  # 彩色讀取
 
@@ -53,7 +53,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("使用 方框濾波器.boxFilter()")
 
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_noise.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_noise.png"
 image = cv2.imread(filename)  # 彩色讀取
 
 dst1 = cv2.boxFilter(image, -1, (2, 2))  # ksize是 2x2 的濾波核
@@ -82,7 +82,7 @@ print("------------------------------------------------------------")  # 60個
 # cv2.medianBlur() ST       # 中值濾波器
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_noise.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_noise.png"
 
 image = cv2.imread(filename)  # 彩色讀取
 
@@ -101,7 +101,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_noise.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_noise.png"
 image = cv2.imread(filename2)  # 彩色讀取
 image = cv2.imread(filename)  # 彩色讀取
 
@@ -238,7 +238,7 @@ print("------------------------------------------------------------")  # 60個
 
 # Gaussian lowpass filter
 
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_noise.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_noise.png"
 
 image = cv2.imread(filename)  # 彩色讀取
 
@@ -261,7 +261,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_noise.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_noise.png"
 
 image = cv2.imread(filename)  # 彩色讀取
 
@@ -282,7 +282,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/bilTest.bmp"
+filename = "D:/_git/vcs/_1.data/______test_files1/_image_processing/bilTest.bmp"
 
 image = cv2.imread(filename)  # 彩色讀取
 
@@ -530,7 +530,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/lena_noise.png"
+filename = "D:/_git/vcs/_4.python/opencv/data/lena_noise.png"
 
 image = cv2.imread(filename)  # 彩色讀取
 
@@ -551,7 +551,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/bilTest.bmp"
+filename = "D:/_git/vcs/_1.data/______test_files1/_image_processing/bilTest.bmp"
 
 image = cv2.imread(filename)  # 彩色讀取
 
@@ -624,7 +624,7 @@ filter2D(src, ddepth, kernel[, dst[, anchor[, delta[, borderType]]]])
 使用filter2D()制作的各种图像处理效果
 """
 
-filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename3 = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 
 src = cv2.imread(filename3)  # 彩色讀取
 
@@ -804,7 +804,7 @@ C0 — loDiff < C(x，y) < C0 + hiDiff
 # 去瑕疵-inpaint
 #    scpy2.opencv.inpaint_demo：示範inpaint()的用法，使用者用滑鼠繪制需要去瑕疵的區域，程式實時顯示運算結果。
 
-coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
+coin_filename = "D:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
 img = cv2.imread(coin_filename)  # 彩色讀取
 print("img.shape :", img.shape)
 

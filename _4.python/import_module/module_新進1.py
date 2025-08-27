@@ -26,8 +26,8 @@ print("純文字檔的diff")
 
 import difflib
 
-filename1 = "C:/_git/vcs/_1.data/______test_files1/compare/text_filea.txt"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/compare/text_fileb.txt"
+filename1 = "D:/_git/vcs/_1.data/______test_files1/compare/text_filea.txt"
+filename2 = "D:/_git/vcs/_1.data/______test_files1/compare/text_fileb.txt"
 
 
 def fcompare(f1name, f2name):
@@ -295,12 +295,12 @@ print("chardet：檔案編碼格式")
 
 import chardet  # 檔案編碼格式
 
-filename1 = "C:/_git/vcs/_1.data/______test_files1/poetry2.txt"
+filename1 = "D:/_git/vcs/_1.data/______test_files1/poetry2.txt"
 filename2 = (
-    "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/_encoding/2.utf_to_ascii.txt"
+    "D:/_git/vcs/_1.data/______test_files1/__RW/_txt/_encoding/2.utf_to_ascii.txt"
 )
 filename3 = (
-    "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/_encoding/3.ascii_to_unicode.txt"
+    "D:/_git/vcs/_1.data/______test_files1/__RW/_txt/_encoding/3.ascii_to_unicode.txt"
 )
 
 files = [filename1, filename2, filename3]
@@ -319,7 +319,7 @@ for f in files:
 
 print("------------------------------")  # 30個
 
-filename = "C:/_git/vcs/_4.python/ml/text/data/中文文本分类数据集/test/C3-Art/C3-Art0002.txt"
+filename = "D:/_git/vcs/_4.python/ml/text/data/中文文本分类数据集/test/C3-Art/C3-Art0002.txt"
 f = open(filename, encoding="gb2312")
 a = f.read()
 f.close()

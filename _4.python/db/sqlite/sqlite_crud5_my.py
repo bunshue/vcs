@@ -105,7 +105,7 @@ list_stage_list = [
 stage = -1
 tablename = ""
 db_filename = ""
-# db_filename = 'C:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
+# db_filename = 'D:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
 
 dummy_data = "abcd"
 count = 0
@@ -192,12 +192,12 @@ def walk_python_files(paths):
                         print(filename)
 
 
-foldername1 = "C:/_git/vcs/_1.data/______test_files3"
+foldername1 = "D:/_git/vcs/_1.data/______test_files3"
 
 paths = [foldername1]
 walk_python_files(paths)
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 print("全檔名/長檔名 : ", filename)
 
@@ -280,16 +280,16 @@ updatetime
 第3筆 : 2023-05-29 13:57:48.938803
 """
 
-filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/file2.txt"
-filename3 = "C:/_git/vcs/_1.data/______test_files1/bear.jpg"
+filename1 = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename2 = "D:/_git/vcs/_1.data/______test_files1/file2.txt"
+filename3 = "D:/_git/vcs/_1.data/______test_files1/bear.jpg"
 
 import os
 import time
 import datetime
 import sqlite3
 
-db_filename = "C:/_git/vcs/_1.data/______test_files2/my_db.sqlite"
+db_filename = "D:/_git/vcs/_1.data/______test_files2/my_db.sqlite"
 
 # print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線

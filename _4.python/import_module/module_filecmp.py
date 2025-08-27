@@ -1,7 +1,7 @@
 import filecmp
 
-filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/picture2.jpg"
+filename1 = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename2 = "D:/_git/vcs/_1.data/______test_files1/picture2.jpg"
 
 if filecmp.cmp(filename1, filename2, shallow=0) == True:
     print("兩個檔案 相同")
@@ -17,8 +17,8 @@ result3 = filecmp.cmp(filename1, filename2, shallow=True)
 print(result3)
 
 
-foldername1 = "C:/_git/vcs/_1.data/______test_files4"
-foldername2 = "C:/_git/vcs/_1.data/______test_files5"
+foldername1 = "D:/_git/vcs/_1.data/______test_files4"
+foldername2 = "D:/_git/vcs/_1.data/______test_files5"
 
 left_dir, right_dir = foldername1, foldername2
 d = filecmp.dircmp(left_dir, right_dir)

@@ -61,7 +61,7 @@ def regionGrow(img, seeds, thresh, p=1):
     return seedMark
 
 
-filename = "C:/_git/vcs/_1.data/______test_files1/ims03.bmp"
+filename = "D:/_git/vcs/_1.data/______test_files1/ims03.bmp"
 
 img = cv2.imread(filename, 0)
 seeds = [Point(10, 10), Point(82, 150), Point(20, 300)]

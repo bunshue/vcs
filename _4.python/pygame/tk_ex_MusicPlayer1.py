@@ -251,7 +251,7 @@ def button15Click():
 
 def button20Click():
     print('你按了button20 測試0')
-    filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
+    filename = "D:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
 
     pygame.init()
     pygame.mixer.init()
@@ -263,9 +263,9 @@ def button21Click():
 
     """
     print('播放wav檔')
-    filename = 'C:/_git/vcs/_1.data/______test_files1/_wav/hit.wav'
+    filename = 'D:/_git/vcs/_1.data/______test_files1/_wav/hit.wav'
     filename = 'test_wave.wav'
-    filename = "C:/_git/vcs/_1.data/______test_files1/_wav/harumi99.wav"
+    filename = "D:/_git/vcs/_1.data/______test_files1/_wav/harumi99.wav"
     filename = r'C:\Windows\Media\notify.wav'
     
     print('使用 mixer.sound 播放 wave')
@@ -395,7 +395,7 @@ window.title("mp3播放器")
 # window.configure(bg = '#00ff00')   # 視窗背景顏色
 # window.configure(bg = 'yellow')    # 視窗背景顏色
 
-icon_filename = "C:/_git/vcs/_1.data/______test_files1/_icon/唐.ico"
+icon_filename = "D:/_git/vcs/_1.data/______test_files1/_icon/唐.ico"
 window.iconbitmap(icon_filename)  # 更改圖示
 
 x_st = 80
@@ -598,7 +598,7 @@ print('結束播放')
 #要能夠順利讀取各種奇怪的檔名中日文字
 
 print("測試寫檔")
-mp3_foldername1 = 'C:/_git/vcs/_1.data/______test_files1/_mp3/'
+mp3_foldername1 = 'D:/_git/vcs/_1.data/______test_files1/_mp3/'
 mp3_foldername2 = 'D:/vcs/astro/_DATA2/_mp3/陳一郎_台語精選集6CD/disc2/'
 mp3_foldername3 = 'D:/vcs/astro/_DATA2/_mp3/japanese/昭和の歌--演歌系列9/'
 mp3_foldername4 = 'D:/vcs/astro/_DATA2/_________整理_mp3/_mp3_日本_new/(アルバム)演歌 八代亜紀 -[全曲集(Disc1-2)](全24曲)/渕_辙 - [葢轿瘅(Disc1)]'
@@ -634,7 +634,7 @@ pygame.init()
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption("my mp3 player")
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
+filename = "D:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
 
 pygame.mixer.music.load(filename)  # 載入音樂
 # 音樂可以是ogg、mp3、wav等格式

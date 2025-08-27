@@ -7,7 +7,7 @@ import requests
 import json
 
 def get_cwa_key():
-    filename = 'C:/_git/vcs/_1.data/______test_files1/_key/cwa_key.txt'
+    filename = 'D:/_git/vcs/_1.data/______test_files1/_key/cwa_key.txt'
 
     import os
     filename = os.path.abspath(filename)
@@ -84,7 +84,7 @@ def get_data():
 
 
 def get_line_key():
-    filename = 'C:/_git/vcs/_1.data/______test_files1/_key/line_key.txt'
+    filename = 'D:/_git/vcs/_1.data/______test_files1/_key/line_key.txt'
 
     import os
     filename = os.path.abspath(filename)

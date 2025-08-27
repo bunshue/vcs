@@ -193,7 +193,7 @@ while True:
 print("------------------------------------------------------------")  # 60個
 
 
-# 檔案 : C:\_git\vcs\_4.python\web_crawler\BeautifulSoup08_books1.py
+# 檔案 : D:\_git\vcs\_4.python\web_crawler\BeautifulSoup08_books1.py
 
 # 有參數 之 requests.get
 
@@ -408,7 +408,7 @@ for _ in list1:  # 資料
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\web_crawler\BeautifulSoup09_population.py
+# 檔案 : D:\_git\vcs\_4.python\web_crawler\BeautifulSoup09_population.py
 
 import requests
 from bs4 import BeautifulSoup
@@ -510,7 +510,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -620,7 +620,7 @@ for i in range(0, length):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\web_crawler\BeautifulSoup10_gossiping1.py
+# 檔案 : D:\_git\vcs\_4.python\web_crawler\BeautifulSoup10_gossiping1.py
 
 import requests
 from bs4 import BeautifulSoup
@@ -746,7 +746,7 @@ for link in links:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\web_crawler\BeautifulSoup10_gossiping2.py
+# 檔案 : D:\_git\vcs\_4.python\web_crawler\BeautifulSoup10_gossiping2.py
 
 # PTT八卦版爬蟲
 
@@ -877,7 +877,7 @@ with open("data.json", "w", encoding="utf-8") as f:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\web_crawler\BeautifulSoup10_gossiping3.py
+# 檔案 : D:\_git\vcs\_4.python\web_crawler\BeautifulSoup10_gossiping3.py
 
 import requests
 from bs4 import BeautifulSoup
@@ -903,7 +903,7 @@ for title in titles:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\web_crawler\BeautifulSoup10_gossiping4a.py
+# 檔案 : D:\_git\vcs\_4.python\web_crawler\BeautifulSoup10_gossiping4a.py
 
 import requests
 from bs4 import BeautifulSoup
@@ -1071,7 +1071,7 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\web_crawler\BeautifulSoup10_gossiping4b.py
+# 檔案 : D:\_git\vcs\_4.python\web_crawler\BeautifulSoup10_gossiping4b.py
 
 import requests
 import time
@@ -1187,7 +1187,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\web_crawler\BeautifulSoup11_taiwanlottery.py
+# 檔案 : D:\_git\vcs\_4.python\web_crawler\BeautifulSoup11_taiwanlottery.py
 
 import requests
 from bs4 import BeautifulSoup

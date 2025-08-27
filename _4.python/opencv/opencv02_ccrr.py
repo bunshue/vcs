@@ -804,7 +804,7 @@ print("------------------------------------------------------------")  # 60個
 
 import glob
 
-srcDir = "C:/_git/vcs/_1.data/______test_files1/__pic/_anime/_MU"
+srcDir = "D:/_git/vcs/_1.data/______test_files1/__pic/_anime/_MU"
 width = 320
 height = 240
 

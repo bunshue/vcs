@@ -64,7 +64,7 @@ sheet.append([111, 222, 333])
 sheet.append(["111", "222", "333"])
 
 # 建立圖片物件
-pic_filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+pic_filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 img = openpyxl.drawing.image.Image(pic_filename)
 img.height = img.height * 1
 img.width = img.width * 1
@@ -1148,7 +1148,7 @@ for row in range(1, sheet.max_row + 1):
     cv.drawText(textobject)
     now = datetime.datetime.now()
     cv.drawString(14.4 * cm, 14.8 * cm, now.strftime("%Y/%m/%d"))
-    # logo_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_logo/matlab.png'
+    # logo_filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_logo/matlab.png'
     # image =Image.open(logo_filename)
     image = Image.open("data/logo.png")
     cv.drawInlineImage(image, 13 * cm, 13 * cm)

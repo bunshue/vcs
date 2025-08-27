@@ -11,9 +11,9 @@ print("------------------------------------------------------------")  # 60個
 print("opencv 01")
 print("練習組合成一張大圖 picasa效果")
 
-add_filename1 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-add_filename2 = "C:/_git/vcs/_4.python/_data/bear.jpg"
-add_filename3 = "C:/_git/vcs/_4.python/_data/panda.jpg"
+add_filename1 = "D:/_git/vcs/_4.python/_data/elephant.jpg"
+add_filename2 = "D:/_git/vcs/_4.python/_data/bear.jpg"
+add_filename3 = "D:/_git/vcs/_4.python/_data/panda.jpg"
 
 image1 = cv2.imread(add_filename1)  # 彩色讀取
 image2 = cv2.imread(add_filename2)  # 彩色讀取
@@ -53,7 +53,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 02")
 
-filename_lena_color = "C:/_git/vcs/_4.python/opencv/data/lena_color.png"
+filename_lena_color = "D:/_git/vcs/_4.python/opencv/data/lena_color.png"
 
 image1 = cv2.imread(filename_lena_color)  # 彩色讀取
 
@@ -93,7 +93,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 03")
 
-filename_lena_color = "C:/_git/vcs/_4.python/opencv/data/lena_color.png"
+filename_lena_color = "D:/_git/vcs/_4.python/opencv/data/lena_color.png"
 
 o = cv2.imread(filename_lena_color)  # 彩色讀取
 
@@ -130,7 +130,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 04")
 
-filename_lena_color = "C:/_git/vcs/_4.python/opencv/data/lena_color.png"
+filename_lena_color = "D:/_git/vcs/_4.python/opencv/data/lena_color.png"
 
 o = cv2.imread(filename_lena_color)  # 彩色讀取
 
@@ -188,7 +188,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 32 logo處理")
 
-logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
+logo_filename = "D:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 
 image = cv2.imread(logo_filename, cv2.IMREAD_UNCHANGED)  # 彩色讀取
 image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)  # 因為是 jpg，要轉換顏色為 BGRA
@@ -236,8 +236,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("opencv 34")
-filename1t = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
-filename2t = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
+filename1t = "D:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+filename2t = "D:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 
 bg = cv2.imread(filename1t, cv2.IMREAD_UNCHANGED)  # 彩色讀取
 bg = cv2.cvtColor(bg, cv2.COLOR_BGR2BGRA)  # 轉 BGRA
@@ -300,7 +300,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 38 加上logo")
 
-logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
+logo_filename = "D:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 
 mona = cv2.imread(filename1)  # 彩色讀取
 
@@ -379,7 +379,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 89 將一彩圖做RGB分離")
 
-rgb512_filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
+rgb512_filename = "D:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
 image = cv2.imread(rgb512_filename, cv2.IMREAD_COLOR)  # 彩色讀取
 
@@ -579,7 +579,7 @@ print("opencv 110")
 
 # SURF()找到的關鍵點和每個關鍵點的局部圖形
 
-filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename3 = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 img_gray1 = cv2.imread(filename3, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 surf = cv2.SURF(2000, 2)
@@ -872,7 +872,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename3 = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 src = cv2.imread(filename3)  # 彩色讀取
 
 bgdModel = np.zeros((1, 65), np.float64)  # 建立內部用暫時計算陣列
@@ -912,20 +912,20 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
-filename1p = "C:/_git/vcs/_4.python/_data/penguin3.jpg"
-filename2p = "C:/_git/vcs/_4.python/_data/penguin4.jpg"
+filename1p = "D:/_git/vcs/_4.python/_data/penguin3.jpg"
+filename2p = "D:/_git/vcs/_4.python/_data/penguin4.jpg"
 output_filename = "tmp_penguin_all.jpg"
 filenames = [filename1p, filename2p]
 """
 
-filename1p = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF1.jpg"
-filename2p = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF2.jpg"
-filename3p = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF3.jpg"
-filename4p = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF4.jpg"
-filename5p = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF5.jpg"
-filename6p = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF6.jpg"
-filename7p = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF7.jpg"
-filename8p = "C:/_git/vcs/_1.data/______test_files1/_image_processing/SF8.jpg"
+filename1p = "D:/_git/vcs/_1.data/______test_files1/_image_processing/SF1.jpg"
+filename2p = "D:/_git/vcs/_1.data/______test_files1/_image_processing/SF2.jpg"
+filename3p = "D:/_git/vcs/_1.data/______test_files1/_image_processing/SF3.jpg"
+filename4p = "D:/_git/vcs/_1.data/______test_files1/_image_processing/SF4.jpg"
+filename5p = "D:/_git/vcs/_1.data/______test_files1/_image_processing/SF5.jpg"
+filename6p = "D:/_git/vcs/_1.data/______test_files1/_image_processing/SF6.jpg"
+filename7p = "D:/_git/vcs/_1.data/______test_files1/_image_processing/SF7.jpg"
+filename8p = "D:/_git/vcs/_1.data/______test_files1/_image_processing/SF8.jpg"
 output_filename = "tmp_SF_all.jpg"
 filenames = [
     filename1p,
@@ -983,7 +983,7 @@ print("------------------------------------------------------------")  # 60個
 # Two Frames ST
 print("------------------------------------------------------------")  # 60個
 
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/billiards_video.avi"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/billiards_video.avi"
 
 cap = cv2.VideoCapture(video_filename)  # 開啟影片
 
@@ -1059,7 +1059,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 修復影像 inpaint
 
-fail_filename = "C:/_git/vcs/_4.python/opencv/data/elephant_fail.jpg"
+fail_filename = "D:/_git/vcs/_4.python/opencv/data/elephant_fail.jpg"
 
 lisa = cv2.imread("data/mona_fail1.jpg")  # 彩色讀取
 
@@ -1161,8 +1161,8 @@ print("------------------------------------------------------------")  # 60個
 
 plt.figure(figsize=(12, 8))
 
-rgb_filename = "C:/_git/vcs/_4.python/opencv/data/rgb256X300.bmp"
-rgb_filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
+rgb_filename = "D:/_git/vcs/_4.python/opencv/data/rgb256X300.bmp"
+rgb_filename = "D:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
 image = cv2.imread(rgb_filename)  # 彩色讀取
 
@@ -1230,8 +1230,8 @@ print("------------------------------------------------------------")  # 60個
 
 plt.figure(figsize=(12, 8))
 
-rgb_filename = "C:/_git/vcs/_4.python/opencv/data/rgb256X300.bmp"
-rgb_filename = "C:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
+rgb_filename = "D:/_git/vcs/_4.python/opencv/data/rgb256X300.bmp"
+rgb_filename = "D:/_git/vcs/_4.python/opencv/data/rgb512.bmp"
 
 image = cv2.imread(rgb_filename)  # 彩色讀取
 
@@ -1418,7 +1418,7 @@ def salt_pepper_noise(image, fraction, salt_vs_pepper):
 fraction = 0.1  # 雜訊佔圖的比例
 salt_vs_pepper = 0.5  # 鹽與胡椒的比例
 
-tiger_filename = "C:/_git/vcs/_4.python/_data/tiger.jpg"
+tiger_filename = "D:/_git/vcs/_4.python/_data/tiger.jpg"
 
 image = cv2.imread(tiger_filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
@@ -1497,7 +1497,7 @@ def salt(image, number):
     return saltImage
 
 
-tiger_filename = "C:/_git/vcs/_4.python/_data/tiger.jpg"
+tiger_filename = "D:/_git/vcs/_4.python/_data/tiger.jpg"
 
 image = cv2.imread(tiger_filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
@@ -1557,7 +1557,7 @@ print("------------------------------------------------------------")  # 60個
 
 import cv2
 
-filename_lena_color = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename_lena_color = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 
 image = cv2.imread(filename_lena_color)  # 讀取本機圖片
 image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 灰階
@@ -2037,7 +2037,7 @@ print("size = {:07d} bytes".format(fsize))
 
 # 將同一張圖片存成不同品質圖片
 
-filename3 = "C:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
+filename3 = "D:/_git/vcs/_4.python/opencv/data/lena_color.jpg"
 
 img = cv2.imread(filename3)  # 彩色讀取
 

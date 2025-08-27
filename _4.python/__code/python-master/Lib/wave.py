@@ -503,7 +503,7 @@ def open(f, mode=None):
 openfp = open # B/W compatibility
 
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_wav/harumi99.wav'
+filename = 'D:/_git/vcs/_1.data/______test_files1/_wav/harumi99.wav'
 
 fp = open(filename, 'r')
 

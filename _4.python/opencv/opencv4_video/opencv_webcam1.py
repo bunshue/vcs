@@ -408,7 +408,7 @@ print("------------------------------------------------------------")  # 60個
 print("按 SPACE 製作一個閃光燈拍照的效果")
 print("按 ESC 離開")
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 img = cv2.imread(filename)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)
@@ -545,7 +545,7 @@ print("按 ESC 離開")
 
 W, H = 640, 480  # 大圖
 w, h = 100, 120  # 小圖
-logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv.png"
+logo_filename = "D:/_git/vcs/_4.python/opencv/data/opencv.png"
 
 logo = cv2.imread(logo_filename)
 logo = cv2.resize(logo, (w, h))  # 調整影像大小
@@ -710,7 +710,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 開啟影片檔案
 # video_filename = "D:/Carreno Busta vs Kei Nishikori Final Set Tie Break HD.mp4"
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 cap = cv2.VideoCapture(video_filename)
 
@@ -758,7 +758,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("OpenCV_ai_72 追蹤功能 按a開始 選取ROI, 按Enter確定")
 
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 video_filename = "D:/tennis.mp4"
 
 tracker = cv2.TrackerCSRT_create()  # 創建追蹤器
@@ -803,9 +803,9 @@ print("------------------------------------------------------------")  # 60個
 # 背景移除
 
 # 開啟影片檔案
-video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/vtest.avi"
+video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/vtest.avi"
 # video_filename = "D:/Carreno Busta vs Kei Nishikori Final Set Tie Break HD.mp4"
-# video_filename = "C:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
+# video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 cap = cv2.VideoCapture(video_filename)
 
@@ -1027,7 +1027,7 @@ print("按 ESC 離開")
 
 cap = cv2.VideoCapture(0)
 
-logo_filename = "C:/_git/vcs/_4.python/_data/panda.jpg"
+logo_filename = "D:/_git/vcs/_4.python/_data/panda.jpg"
 logo = cv2.imread(logo_filename)
 logo = cv2.resize(logo, (640, 480))  # 改變影像尺寸，符合疊加的圖片  # 調整影像大小
 

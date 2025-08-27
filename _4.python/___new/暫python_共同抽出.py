@@ -321,7 +321,7 @@ img1.save("aaa.jpg")
 
 print('PIL之另存新檔')
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+filename = 'D:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 infile = filename
 savefile = "tmp_savePNG1.png"
 

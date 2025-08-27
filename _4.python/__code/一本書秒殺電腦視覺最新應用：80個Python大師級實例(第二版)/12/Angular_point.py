@@ -5,8 +5,8 @@ import math
 
 print('Angular Point')
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-#filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.24.bmp'
+filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
+#filename = 'D:/_git/vcs/_1.data/______test_files1/ims01.24.bmp'
 
 #根据一阶锐化算子，求x，y的梯度，显示锐化图像
 #读取图片

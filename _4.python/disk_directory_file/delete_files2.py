@@ -23,7 +23,7 @@ def deltree(root):
 print('清除資料夾中的特定檔案, 多層, *.pyc 和 *.pyo')
 print('偽執行')
 
-foldername = 'C:/_git/vcs/_4.python'
+foldername = 'D:/_git/vcs/_4.python'
 num1, num2 = deltree(foldername)
 
 print('已清除', num1, '個.pyc檔, ', num2, '個.pyo檔')

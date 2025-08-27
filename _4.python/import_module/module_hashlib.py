@@ -109,7 +109,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("算一個檔案的hashcode SHA1")
 
-clear_filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+clear_filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 sha1_value = hashlib.sha1()
 sha1_value.update(clear_filename.encode("utf-8"))
@@ -151,7 +151,7 @@ def calculate_file_hash(clear_filename):
     return sha256_value.hexdigest()
 
 
-clear_filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+clear_filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 calculated_filehash = calculate_file_hash(clear_filename)
 print("SHA256")
 print("預設答案 : ", "5d57e3deb441b789f6035d28dcbbaf6a436c54450972786fad4ce4527059d291")
@@ -184,7 +184,7 @@ print("md5 : ", md5_value)
 print("------------------------------------------------------------")  # 60個
 
 print("用hash值找一個資料夾內的重複的檔案")
-foldername = "C:/_git/vcs/_1.data/______test_files1/compare"
+foldername = "D:/_git/vcs/_1.data/______test_files1/compare"
 filenames = os.listdir(foldername)  # 單層
 print(filenames)
 allmd5s = dict()
@@ -360,7 +360,7 @@ def printsumfp(fp, clear_filename):
     return md5_value.hexdigest()
 
 
-# clear_filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+# clear_filename = 'D:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 clear_filename = "D:/_git/vcs/_big_files/Python-3.7.17.tar.xz"
 # clear_filename = "\\192.168.1.231\RD_Soft\_主機程式\542-0002\BOOT.bin"
 
@@ -376,7 +376,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("計算一個檔案的 MD5 值 2")
 
-clear_filename = "C:/_git/vcs/_1.data/______test_files1/calculate_hash.txt"
+clear_filename = "D:/_git/vcs/_1.data/______test_files1/calculate_hash.txt"
 clear_filename = "D:/_git/vcs/_big_files/Python-3.7.17.tar.xz"
 
 md5_value = hashlib.md5()
@@ -394,7 +394,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("計算一個檔案的 MD5 值 3")
 
-clear_filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+clear_filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 clear_filename = "D:/_git/vcs/_big_files/Python-3.7.17.tar.xz"
 
 # 以二進位方式讀取檔案
@@ -407,7 +407,7 @@ print("------------------------------------------------------------")  # 60個
 print("計算一個檔案的 MD5 值 4")
 
 md5_value = hashlib.md5()  # 建立 md5_value 物件
-clear_filename = "C:/_git/vcs/_1.data/______test_files1/calculate_hash.txt"
+clear_filename = "D:/_git/vcs/_1.data/______test_files1/calculate_hash.txt"
 clear_filename = "D:/_git/vcs/_big_files/Python-3.7.17.tar.xz"
 
 # 以二進位方式讀取檔案

@@ -14,7 +14,7 @@ import mediapipe as mp
 from cvzone.FaceDetectionModule import FaceDetector
 from cvzone.FaceMeshModule import FaceMeshDetector
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg'
 
 print("------------------------------------------------------------")  # 60個
 
@@ -27,7 +27,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -41,7 +41,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg'
 
 img = cv2.imread(filename)
 detector = FaceDetector(minDetectionCon=0.5) #信心50%
@@ -99,7 +99,7 @@ print("------------------------------------------------------------")  # 60個
 
 print('取得臉部的關鍵座標, 6個')
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
 img = cv2.imread(filename)
 detector = FaceDetector()
@@ -119,7 +119,7 @@ print("------------------------------------------------------------")  # 60個
 
 print('裁剪出臉部的部分影像')
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
 img = cv2.imread(filename)
 detector = FaceDetector()
@@ -248,7 +248,7 @@ print("------------------------------------------------------------")  # 60個
 
 print('人臉偵測和匯出3D臉部網格')
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates48.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates48.jpg'
 
 img = cv2.imread(filename)
 detector = FaceMeshDetector(maxFaces=2, minDetectionCon=0.5,
@@ -264,7 +264,7 @@ print("------------------------------------------------------------")  # 60個
 
 print('取得臉部網格的點座標')
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates48.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates48.jpg'
 
 img = cv2.imread(filename)
 detector = FaceMeshDetector(maxFaces=2)
@@ -281,7 +281,7 @@ print("------------------------------------------------------------")  # 60個
 
 print('取得臉部特徵資訊')
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates48.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates48.jpg'
 
 img = cv2.imread(filename)
 detector = FaceMeshDetector(maxFaces=2)
@@ -301,7 +301,7 @@ print("------------------------------------------------------------")  # 60個
 
 print('計算臉部特徵的尺寸')
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates48.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates48.jpg'
 img = cv2.imread(filename)
 
 detector = FaceMeshDetector(maxFaces=8)
@@ -347,7 +347,7 @@ print("------------------------------------------------------------")  # 60個
 
 print('CVZone辨識臉部表情 : 張嘴或閉嘴')
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk03.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk03.jpg'
 
 img = cv2.imread(filename)
 detector = FaceMeshDetector(maxFaces=2)
@@ -380,7 +380,7 @@ print("------------------------------------------------------------")  # 60個
 
 print('CVZone辨識臉部表情 : 開眼或閉眼')
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates17.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates17.jpg'
 
 img = cv2.imread(filename)
 detector = FaceMeshDetector(maxFaces=2)

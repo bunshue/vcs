@@ -40,7 +40,7 @@ from PIL import ImageOps
 from PIL import ImageFont
 from PIL import ImageFilter
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -53,7 +53,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -129,8 +129,8 @@ print("------------------------------------------------------------")  # 60個
 
 # 添加小圖片水印
 
-filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-logo_filename = "C:/_git/vcs/_4.python/_data/logo1.png"
+filename = "D:/_git/vcs/_4.python/_data/elephant.jpg"
+logo_filename = "D:/_git/vcs/_4.python/_data/logo1.png"
 
 # 檔案 => PIL影像
 im = Image.open(filename)
@@ -222,9 +222,9 @@ print("------------------------------------------------------------")  # 60個
 
 # 調整資料夾內所有圖片檔影像寬度, 加logo
 
-source_dir = "C:/_git/vcs/_1.data/______test_files1/__pic/_book"
+source_dir = "D:/_git/vcs/_1.data/______test_files1/__pic/_book"
 target_dir = "tmp_resized_pic"
-logo_filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_logo/matlab.png"
+logo_filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_logo/matlab.png"
 
 # 準備輸出資料夾 若已存在, 則先刪除再建立 若不存在, 則建立
 if os.path.exists(target_dir):
@@ -270,7 +270,7 @@ print("合併圖 2 X 4 a")
 bg = Image.new("RGB", (1200, 800), "#000000")  # 產生一張 1200x800 的全黑圖片
 for i in range(1, 9):
     image = Image.open(
-        f"C:/_git/vcs/_1.data/______test_files1/__pic/_MU/poster_0{i}.jpg"
+        f"D:/_git/vcs/_1.data/______test_files1/__pic/_MU/poster_0{i}.jpg"
     )  # 開啟圖片
     image2 = image.resize((300, 400))  # 縮小尺寸為 300x400
     x = (i - 1) % 4  # 根據開啟的順序，決定 x 座標
@@ -285,7 +285,7 @@ print("合併圖 2 X 4 b")
 bg = Image.new("RGB", (1240, 840), "#000000")  # 因為擴張，所以將尺寸改成 1240x840
 for i in range(1, 9):
     image = Image.open(
-        f"C:/_git/vcs/_1.data/______test_files1/__pic/_MU/poster_0{i}.jpg"
+        f"D:/_git/vcs/_1.data/______test_files1/__pic/_MU/poster_0{i}.jpg"
     )  # 開啟圖片
     image2 = image.resize((300, 400))
     image3 = ImageOps.expand(image2, 20, "#ffffff")  # 擴張邊緣，產生邊框
@@ -313,8 +313,8 @@ for i in images:
 print("------------------------------------------------------------")  # 60個
 
 # 半透明貼上浮水印圖片
-filename = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
-logo_filename = "C:/_git/vcs/_1.data/______test_files1/_icon/唐.png"
+filename = "D:/_git/vcs/_1.data/______test_files1/elephant.jpg"
+logo_filename = "D:/_git/vcs/_1.data/______test_files1/_icon/唐.png"
 
 # 檔案 => PIL影像
 image = Image.open(filename)  # 準備合成浮水印的圖
@@ -339,7 +339,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 製作馬賽克效果
 
-filename = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/elephant.jpg"
 
 # 檔案 => PIL影像
 image = Image.open(filename)
@@ -361,8 +361,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("圖片貼上logo")
 
-logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+logo_filename = "D:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 print("讀檔 => resize => paste")
 
@@ -442,7 +442,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("PIL_operation")
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 檔案 => PIL影像
 image = Image.open(filename)
@@ -504,7 +504,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 """ 處理資料夾有問題
-foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
+foldername = 'D:/_git/vcs/_1.data/______test_files3/DrAP_test'
 
 allfiles = os.listdir(foldername)
 print(allfiles)
@@ -576,7 +576,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/elephant.jpg"
 # 檔案 => PIL影像
 image = Image.open(filename)
 imagecopy = image.copy()  # 複製
@@ -594,7 +594,7 @@ print("綜合CCRR範例")
 print("------------------------------------------------------------")  # 60個
 
 print("複製範例一")
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 # 檔案 => PIL影像
 image = Image.open(filename)
 
@@ -662,8 +662,8 @@ print("------------------------------------------------------------")  # 60個
 
 # 使用pillow操作图像
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 # 檔案 => PIL影像
 img = Image.open(filename)
@@ -695,7 +695,7 @@ N = 8
 margin = 5
 
 # 載入圖片
-filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/AB_red.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/AB_red.jpg"
 # 檔案 => PIL影像
 image = Image.open(filename)
 print(image.size)

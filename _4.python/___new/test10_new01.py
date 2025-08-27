@@ -33,7 +33,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -845,7 +845,7 @@ def get_suffix(filename, has_dot=False):
         return ""
 
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 print(get_suffix(filename))
 
@@ -7113,7 +7113,7 @@ print("------------------------------------------------------------")  # 60個
 print("字串的處理")
 
 print("分割字串")
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 ss = filename.split("/")
 print(filename)
@@ -10896,13 +10896,13 @@ print(set99)
 
 print("------------------------------------------------------------")  # 60個
 
-pName = "C:/pcYah"
+pName = "D:/pcYah"
 if os.path.isdir(pName):  # 檢查資料夾路徑是否存在
     print("%s 資料夾路徑存在" % pName)
 else:
     print("%s 資料夾路徑不存在" % pName)
 
-fName = "C:/Windows/win.ini"
+fName = "D:/Windows/win.ini"
 if os.path.isfile(fName):  # 檢查檔案路徑是否存在
     print("%s 檔案路徑存在" % fName)
 else:

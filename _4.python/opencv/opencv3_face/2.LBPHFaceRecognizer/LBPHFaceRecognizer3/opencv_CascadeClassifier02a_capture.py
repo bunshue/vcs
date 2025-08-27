@@ -29,7 +29,7 @@ def saveImage(face_image, index):
 
 
 # OpenCV 人臉識別分類器
-xml_filename = "C:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
+xml_filename = "D:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 
 cap = cv2.VideoCapture(0)

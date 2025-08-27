@@ -61,7 +61,7 @@ blue = pygame.color.Color("#0000FF")
 black = pygame.color.Color("#000000")
 white = pygame.color.Color("#FFFFFF")
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 font_filename = "C:/Windows/Fonts/mingliu.ttc"  # 新細明體
 
 
@@ -155,7 +155,7 @@ print('------------------------------------------------------------')	#60個
 pygame_name = 'pygame 05 Animation'
 screen = init_pygame(pygame_name, white)
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_cat/cat3.png'
+filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_cat/cat3.png'
 
 speed = [1, 1]
 
@@ -208,7 +208,7 @@ print("------------------------------------------------------------")  # 60個
 pygame_name = 'pygame 06 按鍵事件'
 screen = init_pygame(pygame_name, white)
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_cat/cat3.png'
+filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_cat/cat3.png'
 
 from pygame.locals import *
 
@@ -258,7 +258,7 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_cat/cat3.png'
+filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_cat/cat3.png'
 
 from pygame.locals import *
 
@@ -331,7 +331,7 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_cat/cat3.png'
+filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_cat/cat3.png'
 
 pygame_name = 'pygame 09 碰撞的偵測'
 screen = init_pygame(pygame_name, white)

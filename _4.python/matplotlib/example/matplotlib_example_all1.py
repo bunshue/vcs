@@ -18,7 +18,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -30,7 +30,7 @@ print('------------------------------------------------------------')	#60個
 
 import sqlite3
 
-db_filename = 'C:/_git/vcs/_1.data/______test_files1/_db/gasoline.sqlite'
+db_filename = 'D:/_git/vcs/_1.data/______test_files1/_db/gasoline.sqlite'
 
 print("油價走勢圖")
 

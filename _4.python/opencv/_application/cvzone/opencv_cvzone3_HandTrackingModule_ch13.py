@@ -17,7 +17,7 @@ print("------------------------------------------------------------")  # 60個
 import cv2
 from cvzone.HandTrackingModule import HandDetector
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/_face/face03.jpg'
+filename = 'D:/_git/vcs/_4.python/opencv/data/_face/face03.jpg'
 
 print("------------------------------------------------------------")  # 60個
 

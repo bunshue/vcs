@@ -14,14 +14,14 @@ import os
 import glob
 import zipfile
 
-zip_filename = "C:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip"
+zip_filename = "D:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip"
 
 print("------------------------------------------------------------")  # 60個
 
 print("判斷是否為一個壓縮檔")
 
-zip_filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_zip/PIL.zip"
-# zip_filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+zip_filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_zip/PIL.zip"
+# zip_filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
 
 if zipfile.is_zipfile(zip_filename):
     print("是壓縮檔")
@@ -39,8 +39,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("解壓縮")
 
-zip_filename = "C:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip"
-# zip_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_ntuh.zip'
+zip_filename = "D:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip"
+# zip_filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_ntuh.zip'
 file_dir = "./"  # 解壓縮目錄
 
 # with zipfile.ZipFile(zip_filename) as zipfp:   #開啟壓縮檔
@@ -93,9 +93,9 @@ print("------------------------------------------------------------")  # 60個
 
 print("壓縮")
 
-filename1 = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-filename2 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-filename3 = "C:/_git/vcs/_4.python/_data/bear.jpg"
+filename1 = "D:/_git/vcs/_4.python/_data/picture1.jpg"
+filename2 = "D:/_git/vcs/_4.python/_data/elephant.jpg"
+filename3 = "D:/_git/vcs/_4.python/_data/bear.jpg"
 
 filenames = [filename1, filename2, filename3]
 
@@ -113,8 +113,8 @@ with zipfile.ZipFile(zip_filename, "r") as zipfp:  # 開啟壓縮檔
 
 print("------------------------------------------------------------")  # 60個
 
-zip_filename = "C:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip"
-zip_filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_zip/PIL.zip"
+zip_filename = "D:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip"
+zip_filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_zip/PIL.zip"
 
 with zipfile.ZipFile(zip_filename, "r") as zipfp:  # 開啟壓縮檔
     print("顯示壓縮檔內的檔案")
@@ -183,7 +183,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("各種壓縮方法 壓縮同樣的檔案 比較壓縮率")
 
-big_filename = "C:/_git/vcs/_1.data/______test_files1/_json/ChinaBoundary"
+big_filename = "D:/_git/vcs/_1.data/______test_files1/_json/ChinaBoundary"
 
 
 def make_test_archive(zip_filename, compression):
@@ -225,13 +225,13 @@ print("------------------------------------------------------------")  # 60個
 
 print("壓縮")
 
-filename1 = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-filename2 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-filename3 = "C:/_git/vcs/_4.python/_data/bear.jpg"
+filename1 = "D:/_git/vcs/_4.python/_data/picture1.jpg"
+filename2 = "D:/_git/vcs/_4.python/_data/elephant.jpg"
+filename3 = "D:/_git/vcs/_4.python/_data/bear.jpg"
 
 filenames = [filename1, filename2, filename3]
 
-# zip_filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_zip/PIL.zip'
+# zip_filename = 'D:/_git/vcs/_1.data/______test_files1/__RW/_zip/PIL.zip'
 zip_filename = "ttttt.zip"
 
 with zipfile.ZipFile(zip_filename, "w", compression=zipfile.ZIP_DEFLATED) as zf:
@@ -255,7 +255,7 @@ zip_filename = "tmp_zipfile1.zip"
 fileZip = zipfile.ZipFile(zip_filename, "w")
 
 # 撈出單層所有檔案
-for name in glob.glob("C:/_git/vcs/_1.data/______test_files1/__pic/_animals/*"):  # 遍歷目錄
+for name in glob.glob("D:/_git/vcs/_1.data/______test_files1/__pic/_animals/*"):  # 遍歷目錄
     fileZip.write(name, os.path.basename(name), zipfile.ZIP_DEFLATED)
 
 fileZip.close()
@@ -265,9 +265,9 @@ print("壓縮, 幾個檔案")
 
 zip_filename = "tmp_zipfile2.zip"
 
-filename1 = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-filename2 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
-filename3 = "C:/_git/vcs/_4.python/_data/bear.jpg"
+filename1 = "D:/_git/vcs/_4.python/_data/picture1.jpg"
+filename2 = "D:/_git/vcs/_4.python/_data/elephant.jpg"
+filename3 = "D:/_git/vcs/_4.python/_data/bear.jpg"
 
 fileZip = zipfile.ZipFile(zip_filename, "w")
 
@@ -304,7 +304,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("解壓縮")
 
-zip_filename = "C:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip"
+zip_filename = "D:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip"
 
 fileUnZip = zipfile.ZipFile(zip_filename)
 fileUnZip.extractall("_tmp_unzip")
@@ -312,7 +312,7 @@ fileUnZip.close()
 
 print("------------------------------------------------------------")  # 60個
 
-zip_filename = "C:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip"
+zip_filename = "D:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip"
 
 listZipInfo = zipfile.ZipFile(zip_filename, "r")
 print(listZipInfo.namelist())  # 以列表列出所有壓縮檔案
@@ -389,7 +389,7 @@ tmptmp
 print("------------------------------------------------------------")  # 60個
 
 """
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_zip/PIL.zip'
+filename = 'D:/_git/vcs/_1.data/______test_files1/__RW/_zip/PIL.zip'
 
 files = zipfile.ZipFile(filename)
 

@@ -132,7 +132,7 @@ window.title("tk使用之範本")
 # window.configure(bg = '#00ff00')   # 視窗背景顏色
 # window.configure(bg = 'yellow')    # 視窗背景顏色
 
-icon_filename = "C:/_git/vcs/_1.data/______test_files1/_icon/唐.ico"
+icon_filename = "D:/_git/vcs/_1.data/______test_files1/_icon/唐.ico"
 window.iconbitmap(icon_filename)  # 更改圖示
 
 x_st = 50

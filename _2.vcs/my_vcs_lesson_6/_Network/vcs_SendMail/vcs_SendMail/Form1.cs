@@ -258,7 +258,7 @@ namespace vcs_SendMail
             //mail.Body = mail_body;  //郵件內容
             //mailBody(mail);
             //mail.Body = "<font color=\"red\">莫聽穿林打葉聲，何妨吟嘯且徐行</font>"; //郵件內容
-            mail.Body = "<html><body><h1>牡丹亭</h1><br><img src=\"C:\\_git\\vcs\\_1.data\\______test_files1\\picture1.jpg\"></body></html>";
+            mail.Body = "<html><body><h1>牡丹亭</h1><br><img src=\"D:\\_git\\vcs\\_1.data\\______test_files1\\picture1.jpg\"></body></html>";
             mail.Body = "牡丹亭";
 
             mail.BodyEncoding = Encoding.UTF8;  //郵件內容編碼方式
@@ -312,7 +312,7 @@ namespace vcs_SendMail
             string htmlBody = "<p> 此為系統主動發送信函，請勿直接回覆此封信件。</p> ";
             htmlBody += "<p> <a id=happyyblog target=\"_blank\" href=\"https://www.insighteyes.com\" title=\"連線到群曜醫電\">連線到群曜醫電</a></p>";
             //htmlBody += "<img alt=\"\" hspace=0 src=\"cid:logo\" align=baseline border=0 >";
-            htmlBody += "<img src=\"C:\\_git\\vcs\\_1.data\\______test_files1\\picture1.jpg\" width=\"305\" height=\"400\" align=\"center\" border=30 bgcolor=\"#00FF00\">";
+            htmlBody += "<img src=\"D:\\_git\\vcs\\_1.data\\______test_files1\\picture1.jpg\" width=\"305\" height=\"400\" align=\"center\" border=30 bgcolor=\"#00FF00\">";
 
             AlternateView htmlView = AlternateView.CreateAlternateViewFromString(htmlBody, null, "text/html");
 

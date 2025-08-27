@@ -34,7 +34,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 def get_epa_key():
-    filename = "C:/_git/vcs/_1.data/______test_files1/_key/epa_key.txt"
+    filename = "D:/_git/vcs/_1.data/______test_files1/_key/epa_key.txt"
 
     filename = os.path.abspath(filename)
     if not os.path.exists(filename):  # 檢查檔案是否存在
@@ -118,7 +118,7 @@ time.sleep(3)
 print('讀取遠端 json 檔案')
 format = 'json'
 url = 'https://data.epa.gov.tw/api/v2/%s?format=%s&offset=%s&limit=%s&api_key=%s' % (DataID, format, offset, limit, api_key)
-filename = 'C:/_git/vcs/_1.data/______test_files2/AQI_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.json';   #json檔案名稱
+filename = 'D:/_git/vcs/_1.data/______test_files2/AQI_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.json';   #json檔案名稱
 urllib.request.urlretrieve(url, filename) #下載遠端 json 檔案
 
 
@@ -227,7 +227,7 @@ def downloadAQI():
         print(response.data)
         # 儲存檔案，建立file實體
         filename = (
-            "C:/_git/vcs/_1.data/______test_files2/AQI_"
+            "D:/_git/vcs/_1.data/______test_files2/AQI_"
             + time.strftime("%Y%m%d_%H%M%S", time.localtime())
             + ".csv"
         )
@@ -247,8 +247,8 @@ print("------------------------------------------------------------")  # 60個
 
 time.sleep(3)
 
-db_filename = "C:/_git/vcs/_1.data/______test_files1/_db/DataBasePM25.sqlite"
-md5_filename = "C:/_git/vcs/_1.data/______test_files2/old_md5.txt"
+db_filename = "D:/_git/vcs/_1.data/______test_files1/_db/DataBasePM25.sqlite"
+md5_filename = "D:/_git/vcs/_1.data/______test_files2/old_md5.txt"
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件

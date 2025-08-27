@@ -15,7 +15,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -364,7 +364,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("加入路徑")
 
-foldername = "C:/_git/vcs/_1.data/______test_files5"
+foldername = "D:/_git/vcs/_1.data/______test_files5"
 
 sys.path.append(foldername)
 
@@ -428,7 +428,7 @@ def lll(dirname):
             print(full)
 
 
-foldername = 'C:/_git/vcs/_1.data/______test_files5'
+foldername = 'D:/_git/vcs/_1.data/______test_files5'
 # lll(foldername)
 
 print("------------------------------------------------------------")  # 60個
@@ -483,7 +483,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 撈出多層
 
-foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
+foldername = 'D:/_git/vcs/_1.data/______test_files3/DrAP_test'
 
 # This would print all the files and directories
 if __name__ == "__main__":
@@ -1455,10 +1455,10 @@ slider = widgets.FloatSliderWidget(min=0, max=4, value=2)
 # NG interact(plot_3D, elev=[-90, 90], azip=(-180, 180))
 # NG interact(plot_fit, degree=[1, 30], Npts=[2, 100])
 # interact(fit_randomized_tree, random_state=[0, 100])
-上面搜尋到的資料在檔案	C:\_git\vcs\_4.python\__code\data-science-ipython-notebooks-master\scikit-learn\scikit-learn01.py
+上面搜尋到的資料在檔案	D:\_git\vcs\_4.python\__code\data-science-ipython-notebooks-master\scikit-learn\scikit-learn01.py
 
 interact(plot_pdfs, cohen_d=slider)
-上面搜尋到的資料在檔案	C:\_git\vcs\_4.python\__code\data-science-ipython-notebooks-master\scipy\scipy_新進1.py
+上面搜尋到的資料在檔案	D:\_git\vcs\_4.python\__code\data-science-ipython-notebooks-master\scipy\scipy_新進1.py
 
 
 
@@ -2363,8 +2363,8 @@ def diff_texts(a, b, filename):
 def warn(msg):
     print("WARNING: %s" % (msg,), file=sys.stderr)
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/poetrya.txt'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/poetryb.txt'
+filename1 = 'D:/_git/vcs/_1.data/______test_files1/poetrya.txt'
+filename2 = 'D:/_git/vcs/_1.data/______test_files1/poetryb.txt'
 filename = 'ttttt.txt'
 
 diff_lines = diff_texts(filename1, filename2, filename)
@@ -2756,7 +2756,7 @@ def basename(p):
     return p[i:]
 
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
 st = os.lstat(filename)
 print(st)
 isLink = stat.S_ISLNK(st.st_mode)
@@ -2797,7 +2797,7 @@ print(bbb)
 
 from stat import S_ISDIR, S_ISLNK, S_ISREG, S_ISSOCK, S_ISBLK, S_ISCHR, S_ISFIFO
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
 
 print(os.lstat(filename))
 print(os.lstat(filename).st_mode)
@@ -3067,8 +3067,8 @@ print("新的msg內容 : ", msg)
 
 ------------------------------------------------------------
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/poetry2.txt'
+filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = 'D:/_git/vcs/_1.data/______test_files1/poetry2.txt'
 
 with open(filename, "rb") as f:
     data = f.read()
@@ -3465,7 +3465,7 @@ for pwd in ("aaabbbccc", "aaa", "aaabbb"):  # 測試系列密碼值
 from PIL import Image, ImageOps
 import numpy as np
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 # Disable scientific notation for clarity
 np.set_printoptions(suppress=True)

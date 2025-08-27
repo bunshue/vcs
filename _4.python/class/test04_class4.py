@@ -52,7 +52,7 @@ class MyLog(object):
         return self.log
 
     def path_mtime(self, filename):
-        filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+        filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
         return os.stat(filename)
 
     def print_header(self):

@@ -11,7 +11,7 @@ def download_video(url, save_path):
         print(e)
 
 video_url = "https://www.youtube.com/watch?v=IrwxueGgRYs"
-save_dir = "C:/_git/vcs/_4.python/__code/techwithtim/Python-Beginner-Automation-Projects-main"
+save_dir = "D:/_git/vcs/_4.python/__code/techwithtim/Python-Beginner-Automation-Projects-main"
 
 print("Started download...")
 download_video(video_url, save_dir)

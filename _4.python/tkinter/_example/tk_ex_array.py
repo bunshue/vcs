@@ -62,7 +62,7 @@ def sitemake():  # 建立測站選項按鈕
         rbtem.pack(side="left")  # 靠左排列
 
 
-filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV4_AQX_P_432.csv"
+filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV4_AQX_P_432.csv"
 data = pd.read_csv(filename)
 
 window = tk.Tk()

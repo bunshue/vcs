@@ -289,8 +289,9 @@ def _filter(flist, skip):
 
 import sys
 
-foldername1 = 'C:/_git/vcs/_1.data/______test_files4'
-foldername2 = 'C:/_git/vcs/_1.data/______test_files5'
+foldername1 = 'D:/_git/vcs/_1.data/______test_files4'
+foldername2 = 'D:/_git/vcs/_1.data/______test_files5'
+
 dd = dircmp(foldername1, foldername2)
 
 dd.report_full_closure()
