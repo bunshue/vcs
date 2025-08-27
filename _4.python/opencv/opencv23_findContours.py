@@ -121,18 +121,34 @@ def circularity(cnt):
     return cc
 
 
+def cv2_Chinese_Text(image, text, left, top, textColor, fontSize):
+    # 建立中文字輸出
+    # 影像轉成 PIL影像格式
+    if isinstance(image, np.ndarray):
+        # image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+        image = Image.fromarray(image)
+    draw = ImageDraw.Draw(image)  # 建立PIL繪圖物件
+    fontText = ImageFont.truetype(  # 建立字型 - 新細明體
+        "C:\Windows\Fonts\mingliu.ttc", fontSize, encoding="utf-8"  # 新細明體  # 字型大小
+    )  # 編碼方式
+    draw.text((left, top), text, textColor, font=fontText)  # 繪製中文字
+    # 將PIL影像格式轉成OpenCV影像格式
+    # return cv2.cvtColor(np.asarray(image), cv2.COLOR_RGB2BGR)
+    return np.asarray(image)
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 簡易範本
 
 image0 = cv2.imread(filename_star_white)  # 彩色讀取
-image = image0.copy()
+image1 = image0.copy()
 
-contours, hierarchy = get_image_contours(image)  # 要傳入彩圖
+contours, hierarchy = get_image_contours(image1)  # 要傳入彩圖
 
-# image = dst, 會汙染
-dst = cv2.drawContours(image, contours, -1, RED, 10)  # 繪製輪廓/-1:全部/紅/線寬
+# image1 = dst, 會汙染
+dst = cv2.drawContours(image1, contours, -1, RED, 10)  # 繪製輪廓/-1:全部/紅/線寬
 
 plt.figure(figsize=(8, 6))
 plt.subplot(131)
@@ -141,7 +157,7 @@ plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(132)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 plt.axis("off")
 
@@ -157,7 +173,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 統一處理多圖，顯示在一起
 
-filename1 = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.bmp"
+filename1 = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
 filename2 = "C:/_git/vcs/_4.python/opencv/data/_shape/shape02.bmp"
 filename3 = "C:/_git/vcs/_4.python/opencv/data/_shape/shape03.png"
 filename4 = "C:/_git/vcs/_4.python/opencv/data/_shape/shape04.png"
@@ -248,17 +264,17 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.bmp"
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
 
 image0 = cv2.imread(filename)  # 彩色讀取
-src = image0.copy()
+image1 = image0.copy()
 
-contours, hierarchy = get_image_contours(src)
+contours, hierarchy = get_image_contours(image1)
 
 # 紅外框
-dst = cv2.drawContours(src, contours, -1, RED, 10)  # 繪製輪廓/-1:全部/紅/線寬
+dst = cv2.drawContours(image1, contours, -1, RED, 10)  # 繪製輪廓/-1:全部/紅/線寬
 # 綠實心
-dst = cv2.drawContours(src, contours, -1, GREEN, -1)  # 繪製輪廓/-1:全部/綠/-1:填滿
+dst = cv2.drawContours(image1, contours, -1, GREEN, -1)  # 繪製輪廓/-1:全部/綠/-1:填滿
 
 n = len(contours)  # 輪廓數量
 print("每個輪廓分別處理:")
@@ -293,6 +309,16 @@ for i in range(n):
     y_st += 50
     cv2.putText(dst, "L:" + str(int(perimeter)), (x_st, y_st), font, 1, YELLOW, 2)
 
+
+x_st, y_st = 10, 160
+dst = cv2_Chinese_Text(dst, "序號", x_st, y_st, YELLOW, 40)
+y_st += 50
+dst = cv2_Chinese_Text(dst, "中心", x_st, y_st, YELLOW, 40)
+y_st += 50
+dst = cv2_Chinese_Text(dst, "周長", x_st, y_st, YELLOW, 40)
+y_st += 50
+dst = cv2_Chinese_Text(dst, "面積", x_st, y_st, YELLOW, 40)
+
 plt.figure(figsize=(10, 8))
 plt.subplot(211)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
@@ -308,7 +334,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.bmp"
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
 filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape05.png"
 
 # shape05.png 500X500黑圖正中央有一個斜30度的400X100白色長方形
@@ -367,7 +393,7 @@ for i in range(n):
     righty = int(((cols - x) * vy / vx) + y)  # 右邊點的 y 座標
     print(righty)
     cv2.line(image1, (cols - 1, righty), (0, lefty), RED, 5)
-    # cv2.line(src, (0, lefty), (cols - 1, righty), RED, 5)  # 左到右繪線
+    # cv2.line(image1, (0, lefty), (cols - 1, righty), RED, 5)  # 左到右繪線
 
 plt.figure(figsize=(8, 10))
 plt.subplot(221)
@@ -469,7 +495,7 @@ print("------------------------------------------------------------")  # 60個
 print("cv2.approxPolyDP() 輪廓近似 多邊形框選")
 # 原先抓到的輪廓，是多點座標，使用輪廓近似，可以近似成多邊形
 
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.bmp"
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
 image0 = cv2.imread(filename)  # 彩色讀取
 image1 = image0.copy()
 image2 = image0.copy()
@@ -535,7 +561,7 @@ print("------------------------------------------------------------")  # 60個
 # 近似多邊形包圍
 
 filename = "data/findContours/heart1.jpg"
-filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.bmp"
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
 
 image0 = cv2.imread(filename)  # 彩色讀取
 image1 = image0.copy()
@@ -600,16 +626,16 @@ print("------------------------------------------------------------")  # 60個
 filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape06.png"
 
 image0 = cv2.imread(filename)  # 彩色讀取
-image = image0.copy()
+image1 = image0.copy()
 
-contours, hierarchy = get_image_contours(image)
+contours, hierarchy = get_image_contours(image1)
 
 n = len(contours)  # 輪廓數量
 for i in range(n):
     cnt = contours[i]  # 取得輪廓數據
-    dst = cv2.drawContours(image, cnt, -1, RED, 5)
+    dst = cv2.drawContours(image1, cnt, -1, RED, 5)
     hull = cv2.convexHull(cnt)  # 獲得凸包頂點座標  # 計算凸包
-    dst = cv2.polylines(image, [hull], True, GREEN, 2)  # 將凸包連線# 近似多邊形連線
+    dst = cv2.polylines(image1, [hull], True, GREEN, 2)  # 將凸包連線# 近似多邊形連線
     isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
     print(f"凸包是凸形       = {isConvex}")
     # 計算輪廓面積(凸包)
@@ -618,6 +644,8 @@ for i in range(n):
     # 計算輪廓面積
     con_area = cv2.contourArea(cnt)  # 計算輪廓面積
     print("輪廓面積 :", con_area)
+    extent = con_area / convex_area  # 計算Extent
+    print("真實占比 輪廓面積 佔 凸包的 :", extent)
 
 
 plt.figure(figsize=(8, 8))
@@ -641,12 +669,10 @@ print("------------------------------------------------------------")  # 60個
 filename = "C:/_git/vcs/_4.python/opencv/data/_shape/star_silver.png"  # 五角銀星
 
 image0 = cv2.imread(filename)  # 彩色讀取
-image = image0.copy()
+image1 = image0.copy()  # 畫凸點
+image2 = image0.copy()  # 畫凹點
 
-h, w, d = image.shape  # d為dimension, d = 3 全彩, d = 1 灰階
-print(h, w, d)
-
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 canny = cv2.Canny(gray, 50, 150)
 canny = cv2.dilate(canny, None, iterations=1)
 
@@ -660,23 +686,25 @@ cnt = contours[0]  # 取得輪廓數據
 # approxPolyDP 輪廓近似
 epsilon = 3  # 指定輪廓近似的精度
 approx = cv2.approxPolyDP(cnt, epsilon, True)
-image = cv2.polylines(image, [approx], True, RED, 5)  # 近似多邊形連線
+dst1 = cv2.polylines(image1, [approx], True, RED, 3)  # 近似多邊形連線
+dst2 = cv2.polylines(image2, [approx], True, RED, 3)  # 近似多邊形連線
 
-# 凸包 -> 凸包缺陷
+# 凸包
 hull = cv2.convexHull(cnt, returnPoints=False)  # 計算凸包
-print("凸點數量：{}".format(len(hull)))
+print("凸點數量 :", len(hull))
+n = hull.shape[0]  # 凸點數量
+print("凸點數量 :", n)
+for i in range(n):
+    print("第", i, "個凸點索引 :", hull[i, 0], ", 座標 :", cnt[hull[i, 0]])
+    dst1 = cv2.circle(dst1, cnt[hull[i, 0]][0], 10, BLUE, -1)  # 畫實心圓
 
+# 凸包缺陷, 凹點
 defects = cv2.convexityDefects(cnt, hull)  # 獲得凸包缺陷
-print("凹點數量：{}".format(len(defects)))
-
-"""
-每一个Vec4i由四个整型数据构成，
-这四个整型数据的名称分别为：start_index, end_index, farthest_pt_index, fixpt_depth
-"""
-
-# 構造凸缺陷
+print("凹點數量 :", len(defects))
+# 每一个Vec4i由四个整型数据构成，
+# 这四个整型数据的名称分别为：start_index, end_index, farthest_pt_index, fixpt_depth
 n = defects.shape[0]  # 缺陷數量
-print(f"缺陷數量 = {n}")
+print("凹點數量 :", n)
 for i in range(n):
     print("第", i, "個凹點索引 :", defects[i, 0])
     # s是startPoint, e是endPoint, f是farPoint, d是depth
@@ -684,21 +712,26 @@ for i in range(n):
     start = tuple(cnt[s][0])  # 由index取得start_point座標
     end = tuple(cnt[e][0])  # 由index取得end_point座標
     far = tuple(cnt[f][0])  # 由index取得far_point座標
-    dst = cv2.line(image, start, end, GREEN, 10)  # 凸包連線
-    dst = cv2.circle(image, far, 10, BLUE, -1)  # 畫實心圓
+    dst2 = cv2.line(dst2, start, end, colors[i], 10)  # 凸包連線
+    dst2 = cv2.circle(dst2, far, 10, colors[i], -1)  # 畫實心圓
     print("start :", start)
     print("end :", end)
     print("far :", far)
 
 plt.figure(figsize=(8, 6))
-plt.subplot(121)
+plt.subplot(131)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 plt.axis("off")
 
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.title("凸包")
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))
+plt.title("凸點")
+plt.axis("off")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))
+plt.title("凹點")
 plt.axis("off")
 
 show()
@@ -708,9 +741,9 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "data/findContours/heart1.jpg"
 image0 = cv2.imread(filename)  # 彩色讀取
-image = image0.copy()
+image1 = image0.copy()
 
-contours, hierarchy = get_image_contours(image)
+contours, hierarchy = get_image_contours(image1)
 
 cnt = contours[0]  # 取得輪廓數據
 
@@ -718,27 +751,27 @@ hull = cv2.convexHull(cnt)  # 獲得凸包頂點座標  # 計算凸包
 isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
 print(f"凸包是凸形       = {isConvex}")
 
-dst = cv2.polylines(image, [hull], True, GREEN, 2)  # 將凸包連線# 近似多邊形連線
+dst = cv2.polylines(image1, [hull], True, GREEN, 2)  # 將凸包連線# 近似多邊形連線
 # print(hull)   可以用這個指令了解凸包座標點
 
 # 檢測凸包距離
 
 pt = (50, 100)
-dst = cv2.circle(image, pt, 5, RED, -1)  # 畫實心圓
+dst = cv2.circle(image1, pt, 5, RED, -1)  # 畫實心圓
 dist = cv2.pointPolygonTest(hull, pt, True)  # 檢測距離, True:距離
 print("距離 :", dist)
 dist = cv2.pointPolygonTest(hull, pt, False)  # 檢測距離, False:是否
 print("距離 :", dist)
 
 pt = (135, 100)
-dst = cv2.circle(image, pt, 5, RED, -1)  # 畫實心圓
+dst = cv2.circle(image1, pt, 5, RED, -1)  # 畫實心圓
 dist = cv2.pointPolygonTest(hull, pt, True)  # 檢測距離, True:距離
 print("距離 :", dist)
 dist = cv2.pointPolygonTest(hull, pt, False)  # 檢測距離, False:是否
 print("距離 :", dist)
 
 pt = (200, 100)
-dst = cv2.circle(image, pt, 5, RED, -1)  # 畫實心圓
+dst = cv2.circle(image1, pt, 5, RED, -1)  # 畫實心圓
 dist = cv2.pointPolygonTest(hull, pt, True)  # 檢測距離, True:距離
 print("距離 :", dist)
 dist = cv2.pointPolygonTest(hull, pt, False)  # 檢測距離, False:是否
@@ -764,20 +797,20 @@ print("------------------------------------------------------------")  # 60個
 filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape05.png"
 
 image0 = cv2.imread(filename)  # 彩色讀取
-image = image0.copy()
+image1 = image0.copy()
 
-contours, hierarchy = get_image_contours(image)
+contours, hierarchy = get_image_contours(image1)
 
 cnt = contours[0]  # 取得輪廓數據
 
-rows, cols = image.shape[:2]  # 輪廓大小
+rows, cols = image1.shape[:2]  # 輪廓大小
 vx, vy, x, y = cv2.fitLine(cnt, cv2.DIST_L2, 0, 0.01, 0.01)  # 直線擬合
 print(f"共線正規化向量 = {vx}, {vy}")
 print(f"直線經過的點   = {x}, {y}")
 
 lefty = int((-x * vy / vx) + y)  # 左邊點的 y 座標
 righty = int(((cols - x) * vy / vx) + y)  # 右邊點的 y 座標
-dst = cv2.line(image, (0, lefty), (cols - 1, righty), GREEN, 10)  # 左到右繪線
+dst = cv2.line(image1, (0, lefty), (cols - 1, righty), GREEN, 10)  # 左到右繪線
 
 plt.figure(figsize=(10, 8))
 plt.subplot(121)
@@ -800,27 +833,26 @@ print("------------------------------------------------------------")  # 60個
 # OpenCV_17_輪廓的特徵
 print("------------------------------------------------------------")  # 60個
 
-image0 = cv2.imread(filename_star_white)  # 彩色讀取
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
-image = image0.copy()
+contours, hierarchy = get_image_contours(image1)
 
-contours, hierarchy = get_image_contours(image)
+dst = cv2.drawContours(image1, contours, -1, RED, 10)
 
-dst = cv2.drawContours(image, contours, -1, RED, 10)
-
-cnt = contours[0]  # 取得輪廓數據
-
-# 計算輪廓面積
-con_area = cv2.contourArea(cnt)  # 計算輪廓面積
-print("輪廓面積 :", con_area)
-
-print("最小邊界矩形(包圍盒) 黃")
-x, y, w, h = cv2.boundingRect(cnt)  # 邊界矩形(包圍盒)
-square_area = w * h  # 計算矩形面積
-extent = con_area / square_area  # 計算Extent
-print("輪廓面積 佔 最小邊界矩形的 :", extent)
-
-dst = cv2.rectangle(image, (x, y), (x + w, y + h), YELLOW, 2)
+n = len(contours)  # 輪廓數量
+for i in range(n):
+    cnt = contours[i]  # 取得輪廓數據
+    # 計算輪廓面積
+    con_area = cv2.contourArea(cnt)  # 計算輪廓面積
+    print("輪廓面積 :", con_area)
+    print("最小邊界矩形(包圍盒) 黃")
+    x, y, w, h = cv2.boundingRect(cnt)  # 邊界矩形(包圍盒)
+    square_area = w * h  # 計算矩形面積
+    extent = con_area / square_area  # 計算Extent
+    print("真實占比 輪廓面積 佔 最小邊界矩形的 :", extent)
+    dst = cv2.rectangle(image1, (x, y), (x + w, y + h), YELLOW, 2)
 
 plt.subplot(211)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
@@ -837,37 +869,35 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image0 = cv2.imread(filename_star_white)  # 彩色讀取
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
+image0 = cv2.imread(filename)  # 彩色讀取
 image1 = image0.copy()
 
 contours, hierarchy = get_image_contours(image1)
 
 image1 = cv2.drawContours(image1, contours, -1, RED, 10)  # 繪製輪廓/-1:全部/紅/線寬
 
-cnt = contours[0]  # 取得輪廓數據
+n = len(contours)  # 輪廓數量
+for i in range(n):
+    cnt = contours[i]  # 取得輪廓數據
+    # 計算輪廓面積
+    con_area = cv2.contourArea(cnt)  # 計算輪廓面積
+    print("輪廓面積 :", con_area)
+    ed = np.sqrt(4 * con_area / np.pi)  # 計算等效面積
+    print("等效面積 :", ed)
+    (cx, cy) = (250, 250)  # 改成隨contour畫圓
+    r = int(ed / 2)
+    image1 = cv2.circle(image1, (cx, cy), r, GREEN, 3)  # 畫圓
+    hull = cv2.convexHull(cnt)  # 獲得凸包頂點座標  # 計算凸包
+    isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
+    print(f"凸包是凸形       = {isConvex}")
+    image1 = cv2.polylines(image1, [hull], True, BLUE, 2)  # 將凸包連線# 近似多邊形連線
+    # 計算輪廓面積
+    convex_area = cv2.contourArea(hull)  # 計算輪廓面積  # 凸包面積
+    print("凸包面積 :", convex_area)
+    extent = con_area / convex_area  # 計算Extent
+    print("真實占比 輪廓面積 佔 凸包的 :", extent)
 
-# 計算輪廓面積
-con_area = cv2.contourArea(cnt)  # 計算輪廓面積
-print("輪廓面積 :", con_area)
-
-ed = np.sqrt(4 * con_area / np.pi)  # 計算等效面積
-print(f"等效面積 = {ed}")
-(cx, cy) = (250, 250)
-r = int(ed / 2)
-image1 = cv2.circle(image1, (cx, cy), r, GREEN, 3)  # 畫圓
-
-hull = cv2.convexHull(cnt)  # 獲得凸包頂點座標  # 計算凸包
-isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
-print(f"凸包是凸形       = {isConvex}")
-
-image1 = cv2.polylines(image1, [hull], True, BLUE, 2)  # 將凸包連線# 近似多邊形連線
-
-# 計算輪廓面積
-convex_area = cv2.contourArea(hull)  # 計算輪廓面積  # 凸包面積
-print("凸包面積 :", convex_area)
-
-solidity = con_area / convex_area  # 計算solidity
-print(f"Solidity = {solidity}")
 
 plt.subplot(211)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
@@ -883,52 +913,16 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-height = 3  # 矩陣高度
-width = 5  # 矩陣寬度
+print("幾何形狀的檢測")
 
-image = np.random.randint(2, size=(height, width))  # 建立0, 1矩陣
-print(f"矩陣內容 = \n{image}")
-
-nonzero_img = np.nonzero(image)  # 獲得非0元素座標
-print(f"非0元素的座標 \n{nonzero_img}")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-height = 3  # 矩陣高度
-width = 5  # 矩陣寬度
-image = np.random.randint(2, size=(height, width))  # 建立0, 1矩陣
-print(f"矩陣內容 = \n{image}")
-nonzero_img = np.nonzero(image)  # 獲得非0元素座標
-loc_img = np.transpose(nonzero_img)  # 執行矩陣轉置
-print(f"非0元素的座標 \n{loc_img}")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-height = 3  # 矩陣高度
-width = 5  # 矩陣寬度
-
-image = np.random.randint(2, size=(height, width))  # 建立0, 1矩陣
-print(f"矩陣內容 = \n{image}")
-
-loc_img = cv2.findNonZero(image)  # 獲得非0元素座標
-print(f"非0元素的座標 \n{loc_img}")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("幾何形狀的檢測和擬合 contours")
-
-image0 = cv2.imread(filename_star_white)  # 彩色讀取
-image1 = image0.copy()  # image1 拿來處理
-image2 = image0.copy()  # image2 拿來畫圖上去
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 contours, hierarchy = get_image_contours(image1)
 get_contours_info(contours)
 
-# drawContours 將輪廓畫在image2上，並複製到dst
-dst = cv2.drawContours(image2, contours, -1, RED, 10)  # 繪製輪廓/-1:全部/紅/線寬
+image1 = cv2.drawContours(image1, contours, -1, RED, 10)  # 繪製輪廓/-1:全部/紅/線寬
 
 n = len(contours)  # 輪廓數量
 for i in range(n):
@@ -938,76 +932,26 @@ for i in range(n):
     (x, y), radius = cv2.minEnclosingCircle(cnt)  # 最小外接圓
     center = (int(x), int(y))  # 圓心座標取整數
     radius = int(radius)  # 圓半徑取整數
-    cv2.circle(dst, center, radius, MAGENTA, 2)  # 畫圓  外接圓
-    cv2.circle(dst, center, 25, RED, -1)  # 畫實心圓 圓心
+    cv2.circle(image1, center, radius, MAGENTA, 2)  # 畫圓  外接圓
+    cv2.circle(image1, center, 10, RED, -1)  # 畫實心圓 圓心
     print("最小邊界矩形(包圍盒) 藍")
     x, y, w, h = cv2.boundingRect(cnt)  # 邊界矩形(包圍盒)
-    cv2.rectangle(dst, (x, y), (w, h), BLUE, 3)
+    cv2.rectangle(image1, (x, y), (x + w, y + h), BLUE, 3)
     print("最小外接的旋轉矩形")
     hull = cv2.convexHull(cnt)  # 獲得凸包頂點座標  # 計算凸包
     isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
     print(f"凸包是凸形       = {isConvex}")
-    dst = cv2.polylines(dst, [hull], True, CYAN, 2)  # 將凸包連線# 近似多邊形連線
+    image1 = cv2.polylines(image1, [hull], True, CYAN, 2)  # 將凸包連線# 近似多邊形連線
     print("凸點數量：{}".format(len(hull)))
 
 plt.figure(figsize=(10, 8))
-plt.subplot(121)
+plt.subplot(211)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.title("dst")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("幾何形狀的檢測和擬合")
-
-image0 = cv2.imread(filename_star_white)  # 彩色讀取
-image1 = image0.copy()  # image1 拿來處理
-image2 = image0.copy()  # image2 拿來畫圖上去
-
-image = cv2.GaussianBlur(image1, (3, 3), 0.5)  # 高斯平滑處理    #執行高斯模糊化
-canny = cv2.Canny(image, 50, 200)
-
-print("------------------------------")  # 30個
-
-# 公版的 cv2.RETR_LIST 得到1個輪廓
-contours, hierarchy = get_image_contours(image1)  # 不要用公版的 可以看到三段
-
-n = len(contours)  # 輪廓數量
-for i in range(n):  # 依次繪製輪廓
-    dst1 = cv2.drawContours(image1, contours, i, colors[i], 5)  # 畫第i個輪廓
-
-print("------------------------------")  # 30個
-
-# 改用 cv2.RETR_EXTERNAL 得到3個輪廓 依序畫出
-contours, hierarchy = cv2.findContours(
-    canny, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
-)
-get_contours_info(contours)
-
-n = len(contours)  # 輪廓數量
-for i in range(n):  # 依次繪製輪廓
-    dst2 = cv2.drawContours(image2, contours, i, colors[i], 5)  # 畫第i個輪廓
-
-print("------------------------------")  # 30個
-
-plt.figure(figsize=(10, 8))
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(dst1, cv2.COLOR_BGR2RGB))
-plt.title("dst1")
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(dst2, cv2.COLOR_BGR2RGB))
-plt.title("dst2")
+plt.subplot(212)
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("幾何形狀的檢測")
 
 show()
 
@@ -1016,43 +960,26 @@ print("------------------------------------------------------------")  # 60個
 
 print("幾何形狀的檢測和擬合 findContours")
 
-image0 = cv2.imread(filename_star_white, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
-image = image0.copy()
+# image0 = cv2.imread(filename_star_white, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
-# 第一步：閾值化，生成二值圖
-# 圖像平滑
-dst = cv2.GaussianBlur(image, (3, 3), 0.5)  # 執行高斯模糊化
-# Otsu 閾值分割
-OtsuThresh = 0
-OtsuThresh, dst = cv2.threshold(dst, OtsuThresh, 255, cv2.THRESH_OTSU)
-# --- 形態學開運算(消除細小白點)
-# 創建結構元
-s = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-dst = cv2.morphologyEx(dst, cv2.MORPH_OPEN, s, iterations=2)
+filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
-contours, hierarchy = cv2.findContours(dst, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
+contours, hierarchy = get_image_contours(image1)
 get_contours_info(contours)
-
-# 第三步：畫出找到的輪廓并用多邊形擬合輪廓
-
-# 將輪廓畫在該黑板上
-print(image.shape)
-
-contoursImg = np.zeros(image.shape, np.uint8)
-contoursImg = np.ones(image.shape, dtype=np.uint8) * 127  # 新建一個灰圖
 
 n = len(contours)  # 輪廓數量
 for i in range(n):
     print("第", i, "個輪廓")
     cnt = contours[i]  # 取得輪廓數據
-    cv2.drawContours(contoursImg, contours, i, 255, 2)  # 繪製輪廓  # 畫第i個輪廓
+    cv2.drawContours(image1, contours, i, 255, 2)  # 繪製輪廓  # 畫第i個輪廓
     print("最小外接圓")
     (x, y), radius = cv2.minEnclosingCircle(cnt)  # 最小外接圓
     center = (int(x), int(y))  # 圓心座標取整數
     radius = int(radius)  # 圓半徑取整數
-    cv2.circle(image, center, radius, MAGENTA, 2)  # 畫圓  外接圓
-    cv2.circle(image, center, 25, RED, -1)  # 畫實心圓 圓心
+    cv2.circle(image1, center, radius, MAGENTA, 2)  # 畫圓  外接圓
+    cv2.circle(image1, center, 10, RED, -1)  # 畫實心圓 圓心
     # 多邊形逼近(注意與凸包區別)
     # approxPolyDP 輪廓近似
     approxCurve = cv2.approxPolyDP(cnt, 0.3, True)
@@ -1061,7 +988,7 @@ for i in range(n):
     # 頂點連接，繪制多邊形
     for i in range(k - 1):
         cv2.line(
-            image,
+            image1,
             (approxCurve[i, 0, 0], approxCurve[i, 0, 1]),
             (approxCurve[i + 1, 0, 0], approxCurve[i + 1, 0, 1]),
             0,
@@ -1069,25 +996,20 @@ for i in range(n):
         )
     # 首尾相接
     cv2.line(
-        image,
+        image1,
         (approxCurve[k - 1, 0, 0], approxCurve[k - 1, 0, 1]),
         (approxCurve[0, 0, 0], approxCurve[0, 0, 1]),
         0,
         5,
     )
 
-plt.subplot(131)
+plt.subplot(211)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(contoursImg, cv2.COLOR_BGR2RGB))
-plt.title("顯示輪廓")
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.subplot(212)
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("顯示擬合的多邊形")
-
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1100,9 +1022,9 @@ coin_filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
 # coin_filename = "C:/_git/vcs/_4.python/opencv/data/findContours/coin.jpg"
 
 image0 = cv2.imread(coin_filename, cv2.IMREAD_COLOR)  # 彩色讀取
-image = image0.copy()
+image1 = image0.copy()
 
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 blur = cv2.GaussianBlur(gray, (0, 0), 1.5, 1.5)  # 執行高斯模糊化
 canny = cv2.Canny(blur.copy(), 60, 60)
@@ -1140,7 +1062,7 @@ contours = [contour for contour in contours if 0.8 < circularity(contour) < 1.2]
 n = len(contours)  # 輪廓數量
 print("輪廓數量 :", n)
 
-cv2.drawContours(image, contours, -1, RED, 3)  # 繪製輪廓/-1:全部/紅/線寬
+cv2.drawContours(image1, contours, -1, RED, 3)  # 繪製輪廓/-1:全部/紅/線寬
 
 plt.figure(figsize=(10, 8))
 plt.subplot(121)
@@ -1148,7 +1070,7 @@ plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("輪廓檢驗")
 show()
 
@@ -1159,9 +1081,9 @@ filename = "C:/_git/vcs/_4.python/opencv/data/cs1.bmp"
 filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape05.png"
 
 image0 = cv2.imread(filename)  # 彩色讀取
-image = image0.copy()
+image1 = image0.copy()
 
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 100  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, dst = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -1188,9 +1110,9 @@ print("W = ", W, "H = ", H)
 """
 box = cv2.boxPoints(rect)  # 獲取最小外接矩形的4個頂點坐標
 box = np.intp(box)  # 將頂點轉換為整數座標
-cv2.drawContours(image, [box], 0, RED, 10)  # 繪製 最小外接矩形 輪廓
+cv2.drawContours(image1, [box], 0, RED, 10)  # 繪製 最小外接矩形 輪廓
 
-cv2.circle(image, (int(cx), int(cy)), 10, BLUE, -1)  # 畫實心圓 中心點
+cv2.circle(image1, (int(cx), int(cy)), 10, BLUE, -1)  # 畫實心圓 中心點
 
 plt.figure(figsize=(10, 8))
 plt.subplot(121)
@@ -1198,7 +1120,7 @@ plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("輪廓檢驗")
 show()
 
@@ -1209,9 +1131,9 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "data/cc.bmp"
 image0 = cv2.imread(filename)  # 彩色讀取
-image = image0.copy()
+image1 = image0.copy()
 
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 彩色轉灰階
 
 contours, hierarchy = cv2.findContours(gray, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
@@ -1241,16 +1163,16 @@ p2 = (int(points[2][0]), int(points[2][1]))
 p3 = (int(points[3][0]), int(points[3][1]))
 
 # 最小外接矩形頂點 畫出來
-cv2.circle(image, p0, 5, RED, -1)  # 畫實心圓 圓心
-cv2.circle(image, p1, 5, RED, -1)  # 畫實心圓 圓心
-cv2.circle(image, p2, 5, RED, -1)  # 畫實心圓 圓心
-cv2.circle(image, p3, 5, RED, -1)  # 畫實心圓 圓心
+cv2.circle(image1, p0, 5, RED, -1)  # 畫實心圓 圓心
+cv2.circle(image1, p1, 5, RED, -1)  # 畫實心圓 圓心
+cv2.circle(image1, p2, 5, RED, -1)  # 畫實心圓 圓心
+cv2.circle(image1, p3, 5, RED, -1)  # 畫實心圓 圓心
 
 # 畫出直線
-cv2.line(image, p0, p1, GREEN, 3, lineType=cv2.LINE_AA)
-cv2.line(image, p1, p2, GREEN, 3, lineType=cv2.LINE_AA)
-cv2.line(image, p2, p3, GREEN, 3, lineType=cv2.LINE_AA)
-cv2.line(image, p3, p0, GREEN, 3, lineType=cv2.LINE_AA)
+cv2.line(image1, p0, p1, GREEN, 3, lineType=cv2.LINE_AA)
+cv2.line(image1, p1, p2, GREEN, 3, lineType=cv2.LINE_AA)
+cv2.line(image1, p2, p3, GREEN, 3, lineType=cv2.LINE_AA)
+cv2.line(image1, p3, p0, GREEN, 3, lineType=cv2.LINE_AA)
 
 plt.figure(figsize=(10, 8))
 plt.subplot(121)
@@ -1258,7 +1180,7 @@ plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("輪廓檢驗")
 show()
 
@@ -1318,14 +1240,15 @@ print("------------------------------------------------------------")  # 60個
 # 輸出邊緣和結構信息
 
 filename = "data/contours.bmp"
-image = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 plt.figure(figsize=(10, 8))
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -1334,25 +1257,27 @@ contours, hierarchy = cv2.findContours(
     binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
 )
 
-o = cv2.drawContours(image, contours, -1, RED, 10)  # 繪製輪廓/-1:全部/紅/線寬
+image1 = cv2.drawContours(image1, contours, -1, RED, 10)  # 繪製輪廓/-1:全部/紅/線寬
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("輸出邊緣和結構信息")
 
 show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 filename = "data/contours.bmp"
-image = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 plt.figure(figsize=(12, 8))
 plt.subplot(221)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -1365,8 +1290,8 @@ contoursImg = []
 
 n = len(contours)  # 輪廓數量
 for i in range(n):
-    temp = np.zeros(image.shape, np.uint8)
-    temp = np.ones(image.shape, dtype=np.uint8) * 127  # 新建一個灰圖
+    temp = np.zeros(image1.shape, np.uint8)
+    temp = np.ones(image1.shape, dtype=np.uint8) * 127  # 新建一個灰圖
     contoursImg.append(temp)
     contoursImg[i] = cv2.drawContours(
         contoursImg[i], contours, i, RED, 10
@@ -1382,25 +1307,26 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/loc3.jpg"
-image = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
 
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-mask = np.zeros(image.shape, np.uint8)
-mask = np.ones(image.shape, dtype=np.uint8) * 127  # 新建一個灰圖
+mask = np.zeros(image1.shape, np.uint8)
+mask = np.ones(image1.shape, dtype=np.uint8) * 127  # 新建一個灰圖
 
 mask = cv2.drawContours(mask, contours, -1, WHITE, -1)  # 繪製輪廓/-1:全部/白/-1:填滿
 
-loc = cv2.bitwise_and(image, mask)
+loc = cv2.bitwise_and(image1, mask)
 
 plt.figure(figsize=(12, 8))
 
 plt.subplot(131)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 plt.subplot(132)
@@ -1417,14 +1343,15 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/moments.bmp"
-image = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 plt.figure(figsize=(12, 8))
 plt.subplot(221)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -1435,8 +1362,8 @@ contoursImg = []
 
 n = len(contours)  # 輪廓數量
 for i in range(n):
-    temp = np.zeros(image.shape, np.uint8)
-    temp = np.ones(image.shape, dtype=np.uint8) * 127  # 新建一個灰圖
+    temp = np.zeros(image1.shape, np.uint8)
+    temp = np.ones(image1.shape, dtype=np.uint8) * 127  # 新建一個灰圖
     contoursImg.append(temp)
     contoursImg[i] = cv2.drawContours(
         contoursImg[i], contours, i, 255, 3
@@ -1460,14 +1387,15 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/contours.bmp"
-image = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 plt.figure(figsize=(12, 8))
 plt.subplot(221)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -1481,8 +1409,8 @@ for i in range(n):
     cnt = contours[i]  # 取得輪廓數據
     con_area = cv2.contourArea(cnt)  # 計算輪廓面積
     print("第", i, "個輪廓, 面積", con_area)
-    temp = np.zeros(image.shape, np.uint8)
-    temp = np.ones(image.shape, dtype=np.uint8) * 127  # 新建一個灰圖
+    temp = np.zeros(image1.shape, np.uint8)
+    temp = np.ones(image1.shape, dtype=np.uint8) * 127  # 新建一個灰圖
     contoursImg.append(temp)
     contoursImg[i] = cv2.drawContours(
         contoursImg[i], contours, i, WHITE, 3
@@ -1501,14 +1429,15 @@ print("------------------------------------------------------------")  # 60個
 # 篩選出大于特定大小的輪廓
 
 filename = "data/contours.bmp"
-image = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 plt.figure(figsize=(12, 8))
 plt.subplot(221)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(
@@ -1524,8 +1453,8 @@ contoursImg = []
 n = len(contours)  # 輪廓數量
 for i in range(n):
     cnt = contours[i]  # 取得輪廓數據
-    temp = np.zeros(image.shape, np.uint8)
-    temp = np.ones(image.shape, dtype=np.uint8) * 127  # 新建一個灰圖
+    temp = np.zeros(image1.shape, np.uint8)
+    temp = np.ones(image1.shape, dtype=np.uint8) * 127  # 新建一個灰圖
     contoursImg.append(temp)
     contoursImg[i] = cv2.drawContours(
         contoursImg[i], contours, i, WHITE, 3
@@ -1545,9 +1474,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/cs1.bmp"
-image = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 HuM1 = cv2.HuMoments(cv2.moments(gray)).flatten()
 
@@ -1624,10 +1554,11 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/cc.bmp"
-image = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 # ---------------提取圖像輪廓------------------
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -1643,15 +1574,16 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/cc.bmp"
-image = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 plt.figure(figsize=(10, 8))
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 # ---------------提取圖像輪廓------------------
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -1666,10 +1598,10 @@ print("最小邊界矩形(包圍盒)")
 x, y, w, h = cv2.boundingRect(cnt)  # 邊界矩形(包圍盒)
 
 brcnt = np.array([[[x, y]], [[x + w, y]], [[x + w, y + h]], [[x, y + h]]])
-cv2.drawContours(image, [brcnt], -1, RED, 2)  # 繪製輪廓/-1:全部/紅/線寬
+cv2.drawContours(image1, [brcnt], -1, RED, 2)  # 繪製輪廓/-1:全部/紅/線寬
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("顯示矩形邊界")
 
 show()
@@ -1678,15 +1610,16 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/cc.bmp"
-image = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 plt.figure(figsize=(10, 8))
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 # ---------------提取圖像輪廓------------------
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -1699,10 +1632,10 @@ cnt = contours[0]  # 取得輪廓數據
 
 print("最小邊界矩形(包圍盒) 紅")
 x, y, w, h = cv2.boundingRect(cnt)  # 邊界矩形(包圍盒)
-cv2.rectangle(image, (x, y), (x + w, y + h), RED, 2)
+cv2.rectangle(image1, (x, y), (x + w, y + h), RED, 2)
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("顯示矩形邊界")
 show()
 
@@ -1710,14 +1643,15 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/cc.bmp"
-image = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 plt.figure(figsize=(10, 8))
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -1730,11 +1664,11 @@ print("最小外接圓")
 (x, y), radius = cv2.minEnclosingCircle(cnt)  # 最小外接圓
 center = (int(x), int(y))  # 圓心座標取整數
 radius = int(radius)  # 圓半徑取整數
-cv2.circle(image, center, radius, MAGENTA, 2)  # 畫圓  外接圓
-cv2.circle(image, center, 25, RED, -1)  # 畫實心圓 圓心
+cv2.circle(image1, center, radius, MAGENTA, 2)  # 畫圓  外接圓
+cv2.circle(image1, center, 25, RED, -1)  # 畫實心圓 圓心
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("圓圈圈出來")
 
 show()
@@ -1743,14 +1677,15 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/cc.bmp"
-image = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 plt.figure(figsize=(10, 8))
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -1760,10 +1695,10 @@ contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_S
 cnt = contours[0]  # 取得輪廓數據
 ellipse = cv2.fitEllipse(cnt)  # 橢圓擬合, 旋轉邊界的內切圓
 print("ellipse=", ellipse)
-cv2.ellipse(image, ellipse, GREEN, 3)
+cv2.ellipse(image1, ellipse, GREEN, 3)
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("橢圓形圈出來")
 
 show()
@@ -1772,15 +1707,16 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/cc.bmp"
-image = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 plt.figure(figsize=(12, 8))
 plt.subplot(231)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 # ----------------獲取輪廓-------------------------------
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -1788,7 +1724,7 @@ ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值�
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 # ----------------epsilon=0.1*周長-------------------------------
-adp = image.copy()
+adp = image1.copy()
 
 cnt = contours[0]  # 取得輪廓數據
 
@@ -1805,7 +1741,7 @@ plt.imshow(cv2.cvtColor(adp, cv2.COLOR_BGR2RGB))
 plt.title("result0.1")
 
 # ----------------epsilon=0.09*周長-------------------------------
-adp = image.copy()
+adp = image1.copy()
 
 cnt = contours[0]  # 取得輪廓數據
 
@@ -1822,7 +1758,7 @@ plt.imshow(cv2.cvtColor(adp, cv2.COLOR_BGR2RGB))
 plt.title("result0.09")
 
 # ----------------epsilon=0.055*周長-------------------------------
-adp = image.copy()
+adp = image1.copy()
 
 cnt = contours[0]  # 取得輪廓數據
 
@@ -1839,7 +1775,7 @@ plt.imshow(cv2.cvtColor(adp, cv2.COLOR_BGR2RGB))
 plt.title("result0.055")
 
 # ----------------epsilon=0.05*周長-------------------------------
-adp = image.copy()
+adp = image1.copy()
 
 cnt = contours[0]  # 取得輪廓數據
 
@@ -1856,7 +1792,7 @@ plt.imshow(cv2.cvtColor(adp, cv2.COLOR_BGR2RGB))
 plt.title("result0.05")
 
 # ----------------epsilon=0.02*周長-------------------------------
-adp = image.copy()
+adp = image1.copy()
 
 cnt = contours[0]  # 取得輪廓數據
 
@@ -1878,9 +1814,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/contours.bmp"
-image = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -1904,15 +1841,16 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/hand.bmp"
-o = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 plt.figure(figsize=(10, 8))
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 # --------------提取輪廓------------------
-gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -1926,10 +1864,10 @@ isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
 print(f"凸包是凸形       = {isConvex}")
 
 # --------------繪製凸包------------------
-cv2.polylines(o, [hull], True, GREEN, 2)  # 近似多邊形連線
+cv2.polylines(image1, [hull], True, GREEN, 2)  # 近似多邊形連線
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("顯示凸包")
 
 show()
@@ -1938,16 +1876,17 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/hand.bmp"
-image = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 plt.figure(figsize=(10, 8))
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 plt.axis("off")
 
 # ----------------構造輪廓--------------------------
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -1973,8 +1912,8 @@ for i in range(n):
     start = tuple(cnt[s][0])  # 由index取得start_point座標
     end = tuple(cnt[e][0])  # 由index取得end_point座標
     far = tuple(cnt[f][0])  # 由index取得far_point座標
-    dst = cv2.line(image, start, end, GREEN, 10)  # 凸包連線
-    dst = cv2.circle(image, far, 10, BLUE, -1)  # 畫實心圓
+    dst = cv2.line(image1, start, end, GREEN, 10)  # 凸包連線
+    dst = cv2.circle(image1, far, 10, BLUE, -1)  # 畫實心圓
     print("start :", start)
     print("end :", end)
     print("far :", far)
@@ -1990,14 +1929,16 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/hand.bmp"
-o = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
+image2 = image0.copy()
 
 plt.figure(figsize=(12, 8))
 plt.subplot(131)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -2005,7 +1946,6 @@ ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值�
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 # --------------凸包----------------------
-image1 = o.copy()
 cnt = contours[0]  # 取得輪廓數據
 hull = cv2.convexHull(cnt)  # 計算凸包
 isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
@@ -2021,8 +1961,6 @@ plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("result1")
 
 # ------------逼近多邊形--------------------
-image2 = o.copy()
-
 cnt = contours[0]  # 取得輪廓數據
 
 perimeter = cv2.arcLength(cnt, True)  # 計算輪廓周長
@@ -2046,10 +1984,11 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/cs1.bmp"
-o = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 # ----------------獲取凸包------------------------
-gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -2061,33 +2000,34 @@ isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
 print(f"凸包是凸形       = {isConvex}")
 
 filename = "data/cs1.bmp"
-image = cv2.imread(filename, 0)  # 灰階讀取
+image0 = cv2.imread(filename, 0)  # 灰階讀取
+image1 = image0.copy()
 
-image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
-cv2.polylines(image, [hull], True, GREEN, 2)  # 近似多邊形連線
+image1 = cv2.cvtColor(image1, cv2.COLOR_GRAY2BGR)
+cv2.polylines(image1, [hull], True, GREEN, 2)  # 近似多邊形連線
 
 # ----------------內部點A的距離-------------------------
 distA = cv2.pointPolygonTest(hull, (300, 150), True)
-cv2.putText(image, "A", (300, 150), font, 1, GREEN, 3)
+cv2.putText(image1, "A", (300, 150), font, 1, GREEN, 3)
 print("distA=", distA)
 
 # ----------------外部點B的距離-------------------------
 distB = cv2.pointPolygonTest(hull, (300, 250), True)
-cv2.putText(image, "B", (300, 250), font, 1, GREEN, 3)
+cv2.putText(image1, "B", (300, 250), font, 1, GREEN, 3)
 print("distB=", distB)
 # ------------正好處于邊緣上的點C的距離-----------------
 distC = cv2.pointPolygonTest(hull, (423, 112), True)
-cv2.putText(image, "C", (423, 112), font, 1, GREEN, 3)
+cv2.putText(image1, "C", (423, 112), font, 1, GREEN, 3)
 print("distC=", distC)
 # print(hull)   #測試邊緣到底在哪里，然后再使用確定位置的
 
 plt.figure(figsize=(10, 8))
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("邊緣")
 show()
 
@@ -2095,10 +2035,11 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/cs1.bmp"
-o = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 # ----------------獲取凸包------------------------
-gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -2110,34 +2051,35 @@ isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
 print(f"凸包是凸形       = {isConvex}")
 
 filename = "data/cs1.bmp"
-image = cv2.imread(filename, 0)  # 灰階讀取
+image0 = cv2.imread(filename, 0)  # 灰階讀取
+image1 = image0.copy()
 
-image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
-cv2.polylines(image, [hull], True, GREEN, 2)  # 近似多邊形連線
+image1 = cv2.cvtColor(image1, cv2.COLOR_GRAY2BGR)
+cv2.polylines(image1, [hull], True, GREEN, 2)  # 近似多邊形連線
 
 # ----------------內部點A與多邊形的關系-------------------------
 distA = cv2.pointPolygonTest(hull, (300, 150), False)
-cv2.putText(image, "A", (300, 150), font, 1, GREEN, 3)
+cv2.putText(image1, "A", (300, 150), font, 1, GREEN, 3)
 print("distA=", distA)
 
 # ----------------外部點B與多邊形的關系-------------------------
 distB = cv2.pointPolygonTest(hull, (300, 250), False)
-cv2.putText(image, "B", (300, 250), font, 1, GREEN, 3)
+cv2.putText(image1, "B", (300, 250), font, 1, GREEN, 3)
 print("distB=", distB)
 
 # ----------------邊緣線上點C與多邊形的關系----------------------
 distC = cv2.pointPolygonTest(hull, (423, 112), False)
-cv2.putText(image, "C", (423, 112), font, 1, GREEN, 3)
+cv2.putText(image1, "C", (423, 112), font, 1, GREEN, 3)
 print("distC=", distC)
 # print(hull)   #測試邊緣到底在哪里，然后再使用確定位置的
 
 plt.figure(figsize=(10, 8))
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("邊緣")
 show()
 
@@ -2270,14 +2212,15 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/cc.bmp"
-o = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 plt.figure(figsize=(10, 8))
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -2288,10 +2231,10 @@ cnt = contours[0]  # 取得輪廓數據
 
 print("最小邊界矩形(包圍盒) 白")
 x, y, w, h = cv2.boundingRect(cnt)  # 邊界矩形(包圍盒)
-cv2.rectangle(o, (x, y), (x + w, y + h), WHITE, 3)
+cv2.rectangle(image1, (x, y), (x + w, y + h), WHITE, 3)
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("result")
 show()
 
@@ -2299,14 +2242,15 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/cc.bmp"
-o = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 plt.figure(figsize=(10, 8))
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -2318,8 +2262,8 @@ cnt = contours[0]  # 取得輪廓數據
 print("最小邊界矩形(包圍盒) 藍")
 x, y, w, h = cv2.boundingRect(cnt)  # 邊界矩形(包圍盒)
 
-cv2.drawContours(o, cnt, -1, RED, 10)  # 繪製輪廓/-1:全部/紅/線寬
-cv2.rectangle(o, (x, y), (x + w, y + h), BLUE, 3)
+cv2.drawContours(image1, cnt, -1, RED, 10)  # 繪製輪廓/-1:全部/紅/線寬
+cv2.rectangle(image1, (x, y), (x + w, y + h), BLUE, 3)
 
 rectArea = w * h
 
@@ -2331,7 +2275,7 @@ extend = float(con_area) / rectArea
 print(extend)
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("result")
 show()
 
@@ -2339,21 +2283,22 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/hand.bmp"
-o = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 plt.figure(figsize=(10, 8))
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
 
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 cnt = contours[0]  # 取得輪廓數據
-cv2.drawContours(o, cnt, -1, RED, 10)  # 繪製輪廓/-1:全部/紅/線寬
+cv2.drawContours(image1, cnt, -1, RED, 10)  # 繪製輪廓/-1:全部/紅/線寬
 
 cnt = contours[0]  # 取得輪廓數據
 con_area = cv2.contourArea(cnt)  # 計算輪廓面積
@@ -2368,12 +2313,16 @@ print(f"凸包是凸形       = {isConvex}")
 hull_area = cv2.contourArea(hull)  # 計算輪廓面積
 print("輪廓面積 :", hull_area)
 
-cv2.polylines(o, [hull], True, GREEN, 2)  # 近似多邊形連線
+cv2.polylines(image1, [hull], True, GREEN, 2)  # 近似多邊形連線
+
 solidity = float(con_area) / hull_area
 print(solidity)
 
+# extent = con_area / convex_area  # 計算Extent
+# print("真實占比 輪廓面積 佔 凸包的 :", extent)
+
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("result")
 
 show()
@@ -2382,14 +2331,15 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/cc.bmp"
-o = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 plt.figure(figsize=(10, 8))
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -2397,18 +2347,22 @@ ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值�
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 cnt = contours[0]  # 取得輪廓數據
-cv2.drawContours(o, cnt, -1, RED, 10)  # 繪製輪廓/-1:全部/紅/線寬
+cv2.drawContours(image1, cnt, -1, RED, 10)  # 繪製輪廓/-1:全部/紅/線寬
 
 cnt = contours[0]  # 取得輪廓數據
 con_area = cv2.contourArea(cnt)  # 計算輪廓面積
 print("輪廓面積 :", con_area)
 
-equiDiameter = np.sqrt(4 * con_area / np.pi)
-print(equiDiameter)
-cv2.circle(o, (100, 100), int(equiDiameter / 2), RED, 3)  # 畫圓  # 展示等直徑大小的圓
+equiDiameter = np.sqrt(4 * con_area / np.pi)  # 計算等效面積
+print("等效面積 :", equiDiameter)
+
+(cx, cy) = (100, 100)
+r = int(equiDiameter / 2)
+
+cv2.circle(image1, (cx, cy), r, RED, 3)  # 畫圓  # 展示等直徑大小的圓
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("result")
 
 show()
@@ -2417,14 +2371,15 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/cc.bmp"
-o = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 plt.figure(figsize=(12, 8))
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -2441,10 +2396,10 @@ print("三個返回值形式：")
 print("(x,y)=(", x, y, ")")
 print("(MA,ma)=(", MA, ma, ")")
 print("angle=", angle)
-cv2.ellipse(o, ellipse, RED, 2)
+cv2.ellipse(image1, ellipse, RED, 2)
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("result")
 
 show()
@@ -2476,10 +2431,11 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/cc.bmp"
-o = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 # -----------------獲取輪廓------------------------
-gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -2505,7 +2461,7 @@ print("pixelpoints2=\n", pixelpoints2)
 
 plt.figure(figsize=(12, 8))
 plt.subplot(131)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 plt.subplot(132)
@@ -2545,10 +2501,11 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/cc.bmp"
-o = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 # -----------------獲取輪廓------------------------
-gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -2576,7 +2533,7 @@ print("pixelpoints2=\n", pixelpoints2)
 
 plt.figure(figsize=(12, 8))
 plt.subplot(131)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 plt.subplot(132)
@@ -2593,9 +2550,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/ct.png"
-o = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
-gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -2617,11 +2575,11 @@ print("minLoc=", minLoc)
 print("maxLoc=", maxLoc)
 
 # --------使用掩膜獲取感興趣區域并顯示-----------------
-masko = np.zeros(o.shape, np.uint8)
-masko = np.ones(o.shape, dtype=np.uint8) * 127  # 新建一個灰圖
+masko = np.zeros(image1.shape, np.uint8)
+masko = np.ones(image1.shape, dtype=np.uint8) * 127  # 新建一個灰圖
 
 masko = cv2.drawContours(masko, [cnt], -1, WHITE, -1)  # 繪製輪廓/-1:全部/白/-1:填滿
-loc = cv2.bitwise_and(o, masko)
+loc = cv2.bitwise_and(image1, masko)
 
 # 顯示灰度結果
 # loc=cv2.bitwise_and(gray,mask)
@@ -2629,7 +2587,7 @@ loc = cv2.bitwise_and(o, masko)
 
 plt.figure(figsize=(12, 8))
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 plt.subplot(122)
@@ -2642,10 +2600,11 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/ct.png"
-o = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 # --------獲取輪廓-----------------
-gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -2658,19 +2617,19 @@ mask = np.zeros(gray.shape, np.uint8)  # 構造mean所使用的掩膜，必須�
 mask = np.ones(gray.shape, dtype=np.uint8) * 127  # 新建一個灰圖
 
 cv2.drawContours(mask, [cnt], 0, WHITE, -1)  # 繪製輪廓/一個/白/-1:填滿
-meanVal = cv2.mean(o, mask=mask)  # mask是區域，所以必須是單通道的
+meanVal = cv2.mean(image1, mask=mask)  # mask是區域，所以必須是單通道的
 print("meanVal=\n", meanVal)
 
 # --------使用掩膜獲取感興趣區域并顯示-----------------
-masko = np.zeros(o.shape, np.uint8)
-masko = np.ones(o.shape, dtype=np.uint8) * 127  # 新建一個灰圖
+masko = np.zeros(image1.shape, np.uint8)
+masko = np.ones(image1.shape, dtype=np.uint8) * 127  # 新建一個灰圖
 
 cv2.drawContours(masko, [cnt], -1, WHITE, -1)  # 繪製輪廓/-1:全部/白/-1:填滿
-loc = cv2.bitwise_and(o, masko)
+loc = cv2.bitwise_and(image1, masko)
 
 plt.figure(figsize=(12, 8))
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 plt.subplot(122)
@@ -2683,15 +2642,16 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/cs1.bmp"
-o = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
 plt.figure(figsize=(12, 8))
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
 # --------獲取并繪製輪廓-----------------
-gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -2716,13 +2676,13 @@ print("topmost=", topmost)
 print("bottommost=", bottommost)
 
 # --------繪製說明文字-----------------
-cv2.putText(o, "A", leftmost, font, 1, RED, 2)
-cv2.putText(o, "B", rightmost, font, 1, RED, 2)
-cv2.putText(o, "C", topmost, font, 1, RED, 2)
-cv2.putText(o, "D", bottommost, font, 1, RED, 2)
+cv2.putText(image1, "A", leftmost, font, 1, RED, 2)
+cv2.putText(image1, "B", rightmost, font, 1, RED, 2)
+cv2.putText(image1, "C", topmost, font, 1, RED, 2)
+cv2.putText(image1, "D", bottommost, font, 1, RED, 2)
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("result")
 
 show()
@@ -2894,14 +2854,15 @@ print("------------------------------------------------------------")  # 60個
 # 篩選出大于特定大小的輪廓
 
 filename = "data/contours0.bmp"
-image = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
-cv2.imshow("original", image)
+cv2.imshow("original", image0)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 # --------------獲取輪廓--------------------
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
@@ -2924,7 +2885,7 @@ print("各個輪廓的平均長度為：%d" % cntLenAvr)
 # --------------顯示超過平均值的輪廓--------------------
 contoursImg = []
 for i in range(n):
-    temp = np.zeros(image.shape, np.uint8)
+    temp = np.zeros(image1.shape, np.uint8)
     contoursImg.append(temp)
     contoursImg[i] = cv2.drawContours(contoursImg[i], contours, i, WHITE, 3)
     if cv2.arcLength(contours[i], True) > cntLenAvr:
@@ -3049,13 +3010,14 @@ def getOrientation(pts, img):
 filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape05.png"
 
-image = cv2.imread(filename)  # 彩色讀取
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
 
-cv2.imshow("image", image)
+cv2.imshow("original", image0)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 
 # 二值化處理影像
 thresh = 50  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
@@ -3071,11 +3033,11 @@ for i in range(n):  # 繪製中心點迴圈
     print("第", i, "個輪廓")
     cnt = contours[i]  # 取得輪廓數據
     # 畫輪廓
-    cv2.drawContours(image, contours, i, RED, 5)
+    cv2.drawContours(image1, contours, i, RED, 5)
     # 畫方向
-    getOrientation(cnt, image)
+    getOrientation(cnt, image1)
 
-cv2.imshow("output", image)
+cv2.imshow("output", image1)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -3214,18 +3176,18 @@ filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coin.jpg"
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/coins.png"
 filename = "C:/_git/vcs/_4.python/opencv/data/morphology/moon.jpg"
 filename = "C:/_git/vcs/_4.python/opencv/data/_mask/cloud.jpg"
-# filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.bmp"
+# filename = "C:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
 
 image0 = cv2.imread(filename)  # 彩色讀取
-image = image0.copy()
+image1 = image0.copy()
 
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 canny = cv2.Canny(gray, 30, 200)
 
 contours, hierarchy = cv2.findContours(canny, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 get_contours_info(contours)
 
-cv2.drawContours(image, contours, -1, RED, 10)  # 繪製輪廓/-1:全部/紅/線寬
+cv2.drawContours(image1, contours, -1, RED, 10)  # 繪製輪廓/-1:全部/紅/線寬
 
 plt.figure(figsize=(10, 8))
 plt.subplot(131)
@@ -3237,7 +3199,7 @@ plt.imshow(cv2.cvtColor(canny, cv2.COLOR_BGR2RGB))
 plt.title("Canny")
 
 plt.subplot(133)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("找出輪廓aaaa")
 
 show()
@@ -3249,8 +3211,8 @@ contours, hierarchy = cv2.findContours(
     dst_binary.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_TC89_L1
 )
 
-cv2.putText(image, text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, BLUE, 2)  # 藍色字體
-cv2.putText(image, text, (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, BLUE, 2)  # 藍色字體
+cv2.putText(image1, text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, BLUE, 2)  # 藍色字體
+cv2.putText(image1, text, (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, BLUE, 2)  # 藍色字體
 
 """
 lineType = cv2.LINE_AA
@@ -3277,23 +3239,23 @@ print(f"最小像素值 = {minVal}")
 print(f"最小像素值座標 = {minLoc}")
 print(f"最大像素值 = {maxVal}")
 print(f"最大像素值座標 = {maxLoc}")
-cv2.circle(image, minLoc, 20, GREEN, 3)  # 畫圓  # 最小像素值用綠色圓
-cv2.circle(image, maxLoc, 20, RED, 3)  # 畫圓  # 最大像素值用紅色圓
+cv2.circle(image1, minLoc, 20, GREEN, 3)  # 畫圓  # 最小像素值用綠色圓
+cv2.circle(image1, maxLoc, 20, RED, 3)  # 畫圓  # 最大像素值用紅色圓
 
-cv2.imshow("Image", image)
+cv2.imshow("Image", image1)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------")  # 30個
 
 
-dst = np.ones(image.shape, dtype=np.uint8) * 127  # 新建一個灰圖
+dst = np.ones(image1.shape, dtype=np.uint8) * 127  # 新建一個灰圖
 
 # 依次繪製輪廓
 n = len(contours)  # 輪廓數量
 for i in range(n):  # 依次繪製輪廓
-    img = np.zeros(image.shape, np.uint8)  # 建立輪廓影像
-    img = np.ones(image.shape, dtype=np.uint8) * 127  # 新建一個灰圖
+    img = np.zeros(image1.shape, np.uint8)  # 建立輪廓影像
+    img = np.ones(image1.shape, dtype=np.uint8) * 127  # 新建一個灰圖
     dst = cv2.drawContours(dst, contours, i, colors[i], 5)  # 畫第i個輪廓
 
 
@@ -3304,7 +3266,7 @@ rect = cv2.minAreaRect(cnt)  # 最小外接矩形 (中心(x,y), (寬,高), 旋�
 
 box = cv2.boxPoints(rect)  # 獲取最小外接矩形的4個頂點坐標
 box = np.intp(box)  # 將頂點轉換為整數座標
-dst = cv2.drawContours(image, [box], 0, GREEN, 10)  # 繪製 最小外接矩形 輪廓
+dst = cv2.drawContours(image1, [box], 0, GREEN, 10)  # 繪製 最小外接矩形 輪廓
 
 # 最優擬合橢圓框選
 
@@ -3315,11 +3277,11 @@ print(f"資料類型   = {type(ellipse)}")
 print(f"橢圓中心   = {ellipse[0]}")
 print(f"長短軸直徑 = {ellipse[1]}")
 print(f"旋轉角度   = {ellipse[2]}")
-dst = cv2.ellipse(image, ellipse, GREEN, 2)  # 繪橢圓
+dst = cv2.ellipse(image1, ellipse, GREEN, 2)  # 繪橢圓
 
 ddddddddddddd
 
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉灰階
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
 thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
 ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
@@ -3345,16 +3307,8 @@ get_contours_info(contours)
 filename = "data/findContours/multiple.jpg"
 
 
-pos_a = (236, 95)  # 文字輸出位置
-pos_b = (160, 110)  # 文字輸出位置
-pos_c = (50, 95)  # 文字輸出位置
-cv2.putText(dst, "A", pos_a, font, 1, YELLOW, 2)  # 輸出文字 A
-cv2.putText(dst, "B", pos_b, font, 1, BLUE, 2)  # 輸出文字 B
-cv2.putText(dst, "C", pos_c, font, 1, YELLOW, 2)  # 輸出文字 C
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-pos_a = (236, 95)  # 文字輸出位置
-pos_b = (160, 110)  # 文字輸出位置
-pos_c = (50, 95)  # 文字輸出位置
-cv2.putText(dst, "A", pos_a, font, 1, YELLOW, 2)  # 輸出文字 A
-cv2.putText(dst, "B", pos_b, font, 1, BLUE, 2)  # 輸出文字 B
-cv2.putText(dst, "C", pos_c, font, 1, YELLOW, 2)  # 輸出文字 C
+image = cv2.GaussianBlur(image1, (3, 3), 0.5)  # 高斯平滑處理    #執行高斯模糊化
+canny = cv2.Canny(image, 50, 200)

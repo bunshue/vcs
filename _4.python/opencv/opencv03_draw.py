@@ -55,6 +55,59 @@ filename3 = "C:/_git/vcs/_1.data/______test_files1/ims01.bmp"
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("畫中文字")
+
+from PIL import Image, ImageDraw, ImageFont
+from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
+
+print("建立黑圖")
+W, H = 1200, 800
+image = np.zeros((H, W, 3), np.uint8)
+
+image[:] = (128, 128, 128)  # 灰色背景
+
+print("------------------------------")  # 30個
+
+
+def cv2_Chinese_Text(image, text, left, top, textColor, fontSize):
+    # 建立中文字輸出
+    # 影像轉成 PIL影像格式
+    if isinstance(image, np.ndarray):
+        image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+    draw = ImageDraw.Draw(image)  # 建立PIL繪圖物件
+    fontText = ImageFont.truetype(  # 建立字型 - 新細明體
+        "C:\Windows\Fonts\mingliu.ttc", fontSize, encoding="utf-8"  # 新細明體  # 字型大小
+    )  # 編碼方式
+    draw.text((left, top), text, textColor, font=fontText)  # 繪製中文字
+    # 將PIL影像格式轉成OpenCV影像格式
+    return cv2.cvtColor(np.asarray(image), cv2.COLOR_RGB2BGR)
+
+
+x_st, y_st = 100, 150
+image = cv2_Chinese_Text(image, "牡丹亭", x_st, y_st, RED, 50)
+
+print("------------------------------")  # 30個
+
+x_st, y_st = 100, 50
+
+# font_filename = "NotoSansTC-Regular.otf"          # 設定字型路徑
+font = ImageFont.truetype(font_filename, 50)  # 設定字型與文字大小
+imagePil = Image.fromarray(image)  # 將 image 轉換成 PIL 影像
+draw = ImageDraw.Draw(imagePil)  # 準備開始畫畫
+
+draw.text((x_st, y_st), "歡迎來到美國", fill=CYAN, font=font)  # 畫入文字
+
+image = np.array(imagePil)  # 將 PIL 影像轉換成 numpy 陣列
+
+print("------------------------------")  # 30個
+
+cv2.imshow("OpenCV", image)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("建立黑圖")
 W, H = 1200, 800
 image = np.zeros((H, W, 3), dtype="uint8")  # 三維(彩色) 空白影像
@@ -246,16 +299,6 @@ cv2.putText(
 # cv2.putText(image, "Welcome 4444", (x_st, y_st), font, font_size, font_color, line_width, line_type, True)     #True:  從左下畫起
 cv2.rectangle(image, (x_st, y_st), (x_st + w, y_st - h), RED, 2)
 
-from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
-
-y_st += 30
-# font_filename = "NotoSansTC-Regular.otf"          # 設定字型路徑
-font = ImageFont.truetype(font_filename, 50)  # 設定字型與文字大小
-imagePil = Image.fromarray(image)  # 將 image 轉換成 PIL 影像
-draw = ImageDraw.Draw(imagePil)  # 準備開始畫畫
-draw.text((x_st, y_st), "歡迎來到美國", fill=CYAN, font=font)  # 畫入文字
-image = np.array(imagePil)  # 將 PIL 影像轉換成 numpy 陣列
-
 print("畫全部內建字型")
 fonts = [
     cv2.FONT_HERSHEY_SIMPLEX,
@@ -295,26 +338,6 @@ cv2.putText(image, "Python", (x_st, y_st), font, 3, GREEN, 12, cv2.LINE_8, True)
 font = cv2.FONT_HERSHEY_SIMPLEX
 x_st, y_st = 400, 520
 cv2.putText(image, "Peony", (x_st, y_st), font, 2, BLUE, 6)
-
-from PIL import Image, ImageDraw, ImageFont
-
-
-def cv2_Chinese_Text(image, text, left, top, textColor, fontSize):
-    # 建立中文字輸出
-    # 影像轉成 PIL影像格式
-    if isinstance(image, np.ndarray):
-        image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-    draw = ImageDraw.Draw(image)  # 建立PIL繪圖物件
-    fontText = ImageFont.truetype(  # 建立字型 - 新細明體
-        "C:\Windows\Fonts\mingliu.ttc", fontSize, encoding="utf-8"  # 新細明體  # 字型大小
-    )  # 編碼方式
-    draw.text((left, top), text, textColor, font=fontText)  # 繪製中文字
-    # 將PIL影像格式轉成OpenCV影像格式
-    return cv2.cvtColor(np.asarray(image), cv2.COLOR_RGB2BGR)
-
-
-x_st, y_st = 400, 550
-image = cv2_Chinese_Text(image, "牡丹亭", x_st, y_st, RED, 50)
 
 y_st += 150
 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -774,3 +797,18 @@ image_b = np.zeros([h, w, 3])  # 黑色
 cv2.circle(image_r, (cx, cy), radius, RED, -1)  # 繪製實心圓形
 cv2.circle(image_g, (cx, cy), radius, GREEN, -1)  # 繪製實心圓形
 cv2.circle(image_b, (cx, cy), radius, BLUE, -1)  # 繪製實心圓形
+
+
+pos_a = (236, 95)  # 文字輸出位置
+pos_b = (160, 110)  # 文字輸出位置
+pos_c = (50, 95)  # 文字輸出位置
+cv2.putText(dst, "A", pos_a, font, 1, YELLOW, 2)  # 輸出文字 A
+cv2.putText(dst, "B", pos_b, font, 1, BLUE, 2)  # 輸出文字 B
+cv2.putText(dst, "C", pos_c, font, 1, YELLOW, 2)  # 輸出文字 C
+
+pos_a = (236, 95)  # 文字輸出位置
+pos_b = (160, 110)  # 文字輸出位置
+pos_c = (50, 95)  # 文字輸出位置
+cv2.putText(dst, "A", pos_a, font, 1, YELLOW, 2)  # 輸出文字 A
+cv2.putText(dst, "B", pos_b, font, 1, BLUE, 2)  # 輸出文字 B
+cv2.putText(dst, "C", pos_c, font, 1, YELLOW, 2)  # 輸出文字 C

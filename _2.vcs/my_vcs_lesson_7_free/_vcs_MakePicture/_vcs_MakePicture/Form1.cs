@@ -28,7 +28,7 @@ namespace _vcs_MakePicture
         string word = "唐";
 
         //指明使用特定字型檔
-        string path = @"./font/康楷體w5.TTC";
+        //string path = @"./font/康楷體w5.TTC";
         //讀取字型文件
         PrivateFontCollection pfc = new PrivateFontCollection();
 
@@ -2263,8 +2263,6 @@ namespace _vcs_MakePicture
         {
             //灰階測試
             int ratio = 50;
-            int i;
-            int j;
 
             int W = 8 * ratio;
             int H = 8 * ratio;
@@ -2677,8 +2675,8 @@ namespace _vcs_MakePicture
             int cx = 0;
             int cy = 0;
             double dd = 0;
-            int max = 200;
-            int min = 100;
+            //int max = 200;
+            //int min = 100;
 
             width = 600;
             height = 600;
@@ -3223,13 +3221,28 @@ namespace _vcs_MakePicture
         {
             //opencv 做 dilate erode 用
             //逐點製作圖檔
-            int width;
-            int height;
             int xx;
             int yy;
+            int x_st = 180;
+            int y_st = 40;
 
-            int W = 800;
-            int H = 500;
+            int W = 920;
+            int H = 500;//有註解的 500
+
+            bool flag_with_mesg = true;
+
+            if (flag_with_mesg == true)//有註解的 500
+            {
+                W = 920;
+                H = 500;
+            }
+            else//無註解的
+            {
+                W = 840;
+                H = 180;//無註解的
+                x_st = 90;
+            }
+
             bitmap1 = new Bitmap(W, H);
 
             //background
@@ -3247,35 +3260,7 @@ namespace _vcs_MakePicture
             sb = new SolidBrush(Color.Black);
             g.FillRectangle(sb, new Rectangle(0, 0, W, H));
 
-            /*
-            //畫grid
-            Point pointa;
-            Point pointb;
-
-            for (int j = 0; j <= H; j += 100)
-            {
-                for (int i = 0; i <= W; i += 100)
-                {
-                    pointa = new Point(i, 0);
-                    pointb = new Point(i, H);
-                    g.DrawLine(p, pointa, pointb);
-                }
-            }
-            for (int j = 0; j <= W; j += 100)
-            {
-                for (int i = 0; i <= H; i += 100)
-                {
-                    pointa = new Point(0, i);
-                    pointb = new Point(W, i);
-                    g.DrawLine(p, pointa, pointb);
-
-                }
-            }
-            */
             sb = new SolidBrush(Color.White);
-
-            int x_st = 80;
-            int y_st = 30;
 
             Point[] points = new Point[3];
             points[0] = new Point(x_st + 0, y_st + 0);
@@ -3295,15 +3280,16 @@ namespace _vcs_MakePicture
             points[0] = new Point(x_st + 0, y_st + 0);
             points[1] = new Point(x_st + 80, y_st + 0);
             points[2] = new Point(x_st - 10, y_st + 100);
-            points[3] = new Point(x_st - 10-80, y_st + 100);
+            points[3] = new Point(x_st - 10 - 80, y_st + 100);
             g.FillPolygon(sb, points);
 
-            x_st += 90;
+            x_st += 110;
             int radius = 70;
             Point center = new Point(x_st + radius, y_st + radius);
             FillStar(g, center, radius, Color.White);
 
             pictureBox1.Image = bitmap1;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         private void button78_Click(object sender, EventArgs e)
