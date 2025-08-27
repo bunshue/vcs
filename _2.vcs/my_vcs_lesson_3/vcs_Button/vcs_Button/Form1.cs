@@ -164,11 +164,11 @@ namespace vcs_Button
             btn_word_23.Text = "";
             btn_word_24.Text = "";
 
-            btn_word_20.BackgroundImage = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙\26幾.jpeg");
-            btn_word_21.BackgroundImage = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙\27度.jpeg");
-            btn_word_22.BackgroundImage = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙\28夕.jpeg");
-            btn_word_23.BackgroundImage = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙\29陽.jpeg");
-            btn_word_24.BackgroundImage = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙\30紅.jpeg");
+            btn_word_20.BackgroundImage = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙\26幾.jpeg");
+            btn_word_21.BackgroundImage = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙\27度.jpeg");
+            btn_word_22.BackgroundImage = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙\28夕.jpeg");
+            btn_word_23.BackgroundImage = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙\29陽.jpeg");
+            btn_word_24.BackgroundImage = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙\30紅.jpeg");
         }
 
         private void bt_exit_Click(object sender, EventArgs e)
@@ -214,7 +214,7 @@ namespace vcs_Button
         //在Button上畫圖
         private void button1b_Paint(object sender, PaintEventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_icon\Recording.bmp";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_icon\Recording.bmp";
             Bitmap bmp;//實例Bitmap對像
             bmp = new Bitmap(filename);
             Graphics g = e.Graphics;
@@ -253,7 +253,7 @@ namespace vcs_Button
         //在Button上畫圖
         private void button2_Paint(object sender, PaintEventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_cat\cat1.png";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_cat\cat1.png";
             Bitmap bmp;//實例Bitmap對像
             bmp = new Bitmap(filename);
             Graphics g = e.Graphics;
@@ -283,7 +283,7 @@ namespace vcs_Button
 
         private void bt_star_Paint(object sender, PaintEventArgs e)
         {
-            string filename = @"C:\_git\vcs\_2.vcs\______test_files1\__pic\_icon\star.bmp";
+            string filename = @"D:\_git\vcs\_2.vcs\______test_files1\__pic\_icon\star.bmp";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             GraphicsPath graphicsPath = CalculateControlGraphicsPath(bitmap1);
             this.bt_star.Region = new Region(graphicsPath);

@@ -2209,7 +2209,7 @@ namespace _vcs_MakePicture
                 }
             }
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\SpringBouquet.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\SpringBouquet.jpg";
             Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 
             g.DrawImage(bitmap2, (W - bitmap2.Width) / 2, (H - bitmap2.Height) / 2, bitmap2.Width, bitmap2.Height);
@@ -2389,7 +2389,7 @@ namespace _vcs_MakePicture
 
         private void button60_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             int W = bitmap1.Width;
             int H = bitmap1.Height;
@@ -2427,7 +2427,7 @@ namespace _vcs_MakePicture
             p = new Pen(Color.FromArgb(255, 255, 0, 0), 20);
             g.DrawRectangle(p, new Rectangle(dd, dd, W - dd * 2, H - dd * 2));
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.bmp";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.bmp";
             Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             g.DrawImage(bitmap2, 20 + 100, (H - 400) / 2, bitmap2.Width, bitmap2.Height);
             //              貼上的位置      貼上的大小 放大縮小用
@@ -2462,7 +2462,7 @@ namespace _vcs_MakePicture
             p = new Pen(Color.FromArgb(255, 0, 255, 0), 20);
             g.DrawRectangle(p, new Rectangle(dd, dd, W - dd * 2, H - dd * 2));
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture2.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture2.jpg";
             Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             richTextBox1.Text += "W = " + bitmap2.Width.ToString() + ", H = " + bitmap2.Height.ToString() + "\n";
             g.DrawImage(bitmap2, W - 20 - bitmap2.Width - 100, (H - 400) / 2, bitmap2.Width, bitmap2.Height);
@@ -2498,7 +2498,7 @@ namespace _vcs_MakePicture
             p = new Pen(Color.FromArgb(255, 0, 255, 0), 20);
             g.DrawRectangle(p, new Rectangle(dd, dd, W - dd * 2, H - dd * 2));
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\SpringBouquet.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\SpringBouquet.jpg";
 
             Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             richTextBox1.Text += "W = " + bitmap2.Width.ToString() + ", H = " + bitmap2.Height.ToString() + "\n";
@@ -2930,7 +2930,7 @@ namespace _vcs_MakePicture
         private void button70_Click(object sender, EventArgs e)
         {
             //開圖處理存檔1
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
 
@@ -3007,12 +3007,12 @@ namespace _vcs_MakePicture
         {
             //開圖裁剪存檔
             //取得圖片的一部分
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\SF0.jpg";
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\Angry-Birds01.jpg";
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_01.jpg";
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_book\20161226161423441.jpg";
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime/doraemon1.jpg";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\SF0.jpg";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\Angry-Birds01.jpg";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_01.jpg";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book\20161226161423441.jpg";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime/doraemon1.jpg";
 
             int sx = 175;//抓圖位置
             int sy = 465;
@@ -3917,7 +3917,7 @@ namespace _vcs_MakePicture
         {
             //製作icon
             //一個ICON圖標的轉換程序
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
 

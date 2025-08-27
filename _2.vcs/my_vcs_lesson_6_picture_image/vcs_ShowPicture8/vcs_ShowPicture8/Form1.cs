@@ -16,10 +16,10 @@ namespace vcs_ShowPicture8
         int D = 0; // 第 D 張
         Point pos; // 圖的中心位置
 
-        string filename0 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery\taitung1.jpg";
-        string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery\taitung2.jpg";
-        string filename2 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery\taitung3.jpg";
-        string filename3 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery\taitung4.jpg";
+        string filename0 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery\taitung1.jpg";
+        string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery\taitung2.jpg";
+        string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery\taitung3.jpg";
+        string filename3 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery\taitung4.jpg";
 
         public Form1()
         {

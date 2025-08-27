@@ -63,7 +63,7 @@ namespace vcs_NewForm
         {
             //開啟新表單, 全螢幕, pictureBox放一圖
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             PictureBox pictureBox1 = new PictureBox();
             Form Form2 = new Form() { Size = new Size(1024, 768), WindowState = FormWindowState.Maximized };

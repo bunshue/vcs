@@ -15,7 +15,7 @@ namespace vcs_PictureThumbnail1
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\bear.bmp";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.bmp";
 
         public Form1()
         {
@@ -106,7 +106,7 @@ namespace vcs_PictureThumbnail1
             //取得圖片的縮略圖
 
             //調用生成縮略圖方法
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             ToThumbnailImages(filename, 200);
         }
 
@@ -183,7 +183,7 @@ namespace vcs_PictureThumbnail1
         {
             richTextBox1.Text += ((Button)sender).Text + "\n";
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
             System.Drawing.Image.GetThumbnailImageAbort callb = null;
 
@@ -223,8 +223,8 @@ namespace vcs_PictureThumbnail1
         private void button4_Click(object sender, EventArgs e)
         {
             //生成縮略圖, shrink模式
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\picture1small.jpg";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\picture1small.jpg";
 
             ShowThumbnail(filename1, filename2, 100, 200);
         }
@@ -271,7 +271,7 @@ namespace vcs_PictureThumbnail1
         private void button5_Click(object sender, EventArgs e)
         {
             //生成縮略圖
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             string filename2 = Application.StartupPath + "\\small_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
 
             Image image = System.Drawing.Image.FromFile(filename1);
@@ -358,7 +358,7 @@ namespace vcs_PictureThumbnail1
         {
             //為圖片生成縮略圖
             //讀取圖檔, 多一層Image結構
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename);
 
             Image image2 = GetThumbnail(image, image.Width / 2, image.Height / 2);
@@ -396,7 +396,7 @@ namespace vcs_PictureThumbnail1
         {
             //生成高品質小空間的縮略圖
             //生成高品質小空間的縮略圖
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             string foldername = Application.StartupPath;
             SetThumbnail_1(filename, foldername);
             SetThumbnail_2(filename, foldername);
@@ -519,7 +519,7 @@ namespace vcs_PictureThumbnail1
         {
             //用GetThumbnailImage製作小圖
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
 

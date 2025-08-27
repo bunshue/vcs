@@ -13,9 +13,9 @@ namespace vcs_Queue
 {
     public partial class Form1 : Form
     {
-        string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-        string filename2 = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
-        string filename3 = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+        string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string filename2 = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
+        string filename3 = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
         Queue<Bitmap> bitmap_queue = new Queue<Bitmap>();
         Queue<string> string_queue = new Queue<string>();

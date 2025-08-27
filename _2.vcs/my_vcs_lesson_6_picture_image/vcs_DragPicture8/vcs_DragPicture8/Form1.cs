@@ -51,7 +51,7 @@ namespace vcs_DragPicture8
 
         private void vcs_DragPicture8_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             this.BackgroundImage = Image.FromFile(filename);//设置窗体的背景图片
             this.Size = this.BackgroundImage.Size;
         }

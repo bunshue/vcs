@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;   //for DllImport
 //Win10不可用 或許可以用在舊版的Windows
 
 //開啟檔案 由預設程式開啟
-//Process.Start(@"C:\_git\vcs\_1.data\______test_files1\my_text_file.txt");
+//Process.Start(@"D:\_git\vcs\_1.data\______test_files1\my_text_file.txt");
 
 //開啟程式
 //Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
@@ -28,7 +28,7 @@ using System.Runtime.InteropServices;   //for DllImport
 //Process.Start(textBox1.Text);  //呼叫 *.exe
 
             //用預設的程式開啟檔案
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\aaaaaaa.txt";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\aaaaaaa.txt";
 
             if (File.Exists(filename) == false)
             {
@@ -41,7 +41,7 @@ using System.Runtime.InteropServices;   //for DllImport
             }
 
             //用預設的程式開啟檔案
-            filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_gif\sky.gif";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_gif\sky.gif";
 
             Process.Start("explorer.exe", filename);
             //Process.Start(filename);    //same
@@ -243,13 +243,13 @@ namespace vcs_Process_Start
         private void button7_Click(object sender, EventArgs e)
         {
             //開啟imsLink
-            //Process.Start(@"C:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
+            //Process.Start(@"D:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
 
             //or
 
             //開啟imsLink
             Process process = new Process();    //創建一個進程用於調用外部程序
-            process = Process.Start(@"C:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
+            process = Process.Start(@"D:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
 
             richTextBox1.Text += "ProcessName : " + process.ProcessName + "\n";
             richTextBox1.Text += "SessionId : " + process.SessionId.ToString() + "\n";
@@ -282,7 +282,7 @@ namespace vcs_Process_Start
         private void button12_Click(object sender, EventArgs e)
         {
             //用Adobe開啟pdf檔案
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
             Process process = new Process();    //創建一個進程用於調用外部程序
             process = Process.Start(filename);
             process.WaitForExit();  //需等開啟的程式結束後才可以回到表單
@@ -364,7 +364,7 @@ namespace vcs_Process_Start
             //設置外部程序的啟動參數（命令行參數）為test.txt
             processStartInfo.Arguments = "file_to_save.txt";
             //設置外部程序工作目錄為  C:\
-            processStartInfo.WorkingDirectory = @"C:\_git\vcs\_1.data\______test_files1";
+            processStartInfo.WorkingDirectory = @"D:\_git\vcs\_1.data\______test_files1";
 
             ///////////聲明一個程序類,也就是創建一個進程
             Process Proc;
@@ -416,7 +416,7 @@ namespace vcs_Process_Start
             ProcessStartInfo processStartInfo = new ProcessStartInfo();
             processStartInfo.FileName = "notepad.exe";  //設置外部程序名
             processStartInfo.Arguments = "article.txt"; //設置外部程序的啟動參數（命令行參數）為test.txt
-            processStartInfo.WorkingDirectory = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt";   //設置外部程序工作目錄
+            processStartInfo.WorkingDirectory = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt";   //設置外部程序工作目錄
 
             Process process = new Process();    //創建一個進程用於調用外部程序
             try
@@ -452,8 +452,8 @@ namespace vcs_Process_Start
             //ProcessStartInfo 3
             //使用預設程式打開指定文件
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\poem.txt";
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\poem.txt";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
 
             ProcessStartInfo psi = new ProcessStartInfo(filename);
             Process process = new Process();    //創建一個進程用於調用外部程序
@@ -466,7 +466,7 @@ namespace vcs_Process_Start
             //ProcessStartInfo 4
             //調用外部程序
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
 
             //聲明一個程序信息類
             ProcessStartInfo processStartInfo = new ProcessStartInfo();
@@ -522,7 +522,7 @@ namespace vcs_Process_Start
             {
                 using (Process process = new Process())
                 {
-                    string exe_filename = @"C:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe"; //要執行的程序名稱
+                    string exe_filename = @"D:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe"; //要執行的程序名稱
                     process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
                     process.StartInfo.UseShellExecute = false;
                     process.StartInfo.CreateNoWindow = true;

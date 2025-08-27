@@ -55,7 +55,7 @@ namespace vcs_PictureSlideShow6
             //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
             openFileDialog1.Multiselect = false;    //單選
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -143,7 +143,7 @@ namespace vcs_PictureSlideShow6
                 bool flag = false;
                 //string folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bgImages");
                 //string folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bgImages");
-                string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
+                string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
 
                 DirectoryInfo di = new DirectoryInfo(foldername);
                 FileInfo[] fi = di.GetFiles();

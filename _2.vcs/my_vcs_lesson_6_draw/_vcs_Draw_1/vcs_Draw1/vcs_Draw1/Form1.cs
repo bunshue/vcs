@@ -23,7 +23,7 @@ namespace vcs_Draw1
 
         bool flag_print_mouse_cursor = false;
 
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
         public Form1()
         {
@@ -760,7 +760,7 @@ namespace vcs_Draw1
             }
 
             //畫示意圖
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_material\AntiAlias.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_material\AntiAlias.jpg";
             //讀檔 至 Image 影像
             Image img = Image.FromFile(filename); // 產生一個Image物件
             //畫出來
@@ -771,8 +771,8 @@ namespace vcs_Draw1
 
         private void button9_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap1 = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\bear.jpg");
-            Bitmap bitmap2 = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\__RW\_png\vcs_ReadWrite_PNG.png");
+            Bitmap bitmap1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\bear.jpg");
+            Bitmap bitmap2 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__RW\_png\vcs_ReadWrite_PNG.png");
 
             //將圖２貼到圖１左上角
             Graphics g = Graphics.FromImage(bitmap1);   //以記憶體圖像 bitmap1 建立 記憶體畫布g
@@ -849,12 +849,12 @@ namespace vcs_Draw1
             //this.WindowState = FormWindowState.Maximized;
             this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
 
-            richTextBox1.Text += "FullHD點圖 SP\n";
+           richTextBox1.Text += "FullHD點圖 SP\n";
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
@@ -900,7 +900,7 @@ namespace vcs_Draw1
 
         private void button12_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\step2.png";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\step2.png";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             bitmap1 = new Bitmap(filename);
@@ -1008,7 +1008,7 @@ namespace vcs_Draw1
 
         private void button15_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_image_processing\sample.png";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_image_processing\sample.png";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             bitmap1 = new Bitmap(filename);
@@ -1065,9 +1065,9 @@ namespace vcs_Draw1
 
             //在指定位置畫上一圖
             // Create image.
-            //Image newImage = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\step3.png");
+            //Image newImage = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\step3.png");
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\step3.png";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\step3.png";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             Bitmap bitmap3 = new Bitmap(filename);
@@ -1284,7 +1284,7 @@ namespace vcs_Draw1
 
         private void button20_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             bitmap1 = new Bitmap(filename);
@@ -1298,7 +1298,7 @@ namespace vcs_Draw1
             //pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
 
             /*
-            bitmap1 = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\bear.jpg");
+            bitmap1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\bear.jpg");
             Draw = Graphics.FromImage(bmp);
             this.Size = bmp.Size;
             g = this.CreateGraphics();
@@ -2607,7 +2607,7 @@ namespace vcs_Draw1
 
             //貼圖
             g.DrawString("貼圖", new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(W - 80, 30));
-            Bitmap bmp = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\__pic\_ball\red-ball-icon.png");
+            Bitmap bmp = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_ball\red-ball-icon.png");
             for (y_st = 60; y_st < H; y_st += 80)
             {
                 g.DrawImage(bmp, W - 75, y_st);

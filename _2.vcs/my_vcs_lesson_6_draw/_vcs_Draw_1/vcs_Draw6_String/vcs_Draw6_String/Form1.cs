@@ -323,7 +323,7 @@ namespace vcs_Draw6_String
 
         void DrawTranslucentText()
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             Bitmap bm = new Bitmap(filename);
@@ -742,7 +742,7 @@ namespace vcs_Draw6_String
                 g.Dispose();
                 bitmap1.Dispose();
 
-                bitmap1 = new Bitmap(nWidth, nHeight, PixelFormat.Format32bppPArgb);
+                bitmap1 = new Biap(nWidth, nHeight, PixelForma.Format32bppPArgb);
                 g = Graphics.FromImage(bitmap1);
                 g.FillRectangle(new SolidBrush(Color.Pink),
                 new Rectangle(0, 0, nWidth, nHeight));

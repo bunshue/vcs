@@ -58,7 +58,7 @@ namespace vcs_ReadWrite_PDF1
         {
             //TXT轉PDF
 
-            string filename1 = @"C:\_git\vcs\_2.vcs\______test_files1\__RW\_txt\琵琶行.txt";
+            string filename1 = @"D:\_git\vcs\_2.vcs\______test_files1\__RW\_txt\琵琶行.txt";
             string filename2 = Application.StartupPath + "\\pdf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".pdf";
 
             var document = new Document(PageSize.A4, 30f, 30f, 30f, 30f);
@@ -86,7 +86,7 @@ namespace vcs_ReadWrite_PDF1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
 
             string result = ReadPdf(filename);
             richTextBox1.Text += "result : " + result + "\n";

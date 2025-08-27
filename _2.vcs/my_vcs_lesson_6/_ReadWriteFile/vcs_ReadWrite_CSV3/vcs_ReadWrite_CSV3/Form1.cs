@@ -13,7 +13,7 @@ namespace vcs_ReadWrite_CSV3
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_csv\vcs_ReadWrite_CSV_data.csv";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_csv\vcs_ReadWrite_CSV_data.csv";
 
         public Form1()
         {

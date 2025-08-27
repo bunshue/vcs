@@ -22,7 +22,7 @@ namespace vcs_PictureCrop
     {
         int flag_operation_mode = 1;    //0 : 空白模式, 1 : 圖片模式
 
-        string pic_filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
         string open_folder_directory = Application.StartupPath;
 
         private int intStartX = 0;
@@ -153,8 +153,8 @@ namespace vcs_PictureCrop
             //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            //openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
-            //openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\__pic";  //預設開啟的路徑
+            //openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
+            //openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1\__pic";  //預設開啟的路徑
             openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\待裁剪圖";//預設開啟的路徑
             openFileDialog1.Multiselect = false;    //單選
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -740,7 +740,7 @@ namespace vcs_PictureCrop
 
             richTextBox1.Text += "放大倍率 : " + value.ToString() + " %\n";
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename);
 
             int W1 = image.Width;

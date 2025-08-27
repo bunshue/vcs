@@ -27,7 +27,7 @@ namespace PedestrianDetection
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_emgu\pedestrian.png";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_emgu\pedestrian.png";
 
             Image<Bgr, Byte> image = new Image<Bgr, byte>(filename);
 

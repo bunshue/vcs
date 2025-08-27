@@ -19,8 +19,8 @@ namespace vcs_ImageProcessing3
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+        //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
         Stopwatch sw = new Stopwatch();
         Label lb_main_mesg = new Label();
@@ -166,7 +166,7 @@ namespace vcs_ImageProcessing3
             //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
             openFileDialog1.Multiselect = false;    //單選
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -462,7 +462,7 @@ namespace vcs_ImageProcessing3
         private void bt_edge_detection9_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "圖像邊緣提取2\n";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bmp = edge_detection_robert2(filename);
             pictureBox1.Image = bmp;
         }
@@ -1894,7 +1894,7 @@ namespace vcs_ImageProcessing3
             lb_main_mesg.Text = "扭曲效果";
             Application.DoEvents();
 
-            filename = @"C:\_git\vcs\_1.data\______test_files1\_image_processing\isinbaeva.jpg";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\_image_processing\isinbaeva.jpg";
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
@@ -2270,7 +2270,7 @@ namespace vcs_ImageProcessing3
             lb_main_mesg.Text = "白色轉為透明";
             Application.DoEvents();
 
-            filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
@@ -2500,7 +2500,7 @@ namespace vcs_ImageProcessing3
             lb_main_mesg.Text = "鏡像圖片";
             Application.DoEvents();
 
-            filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             Bitmap bitmap1 = new Bitmap(filename);
             int width = bitmap1.Width;
@@ -2527,7 +2527,7 @@ namespace vcs_ImageProcessing3
             lb_main_mesg.Text = "彩虹化圖片";
             Application.DoEvents();
 
-            filename = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
@@ -3020,7 +3020,7 @@ namespace vcs_ImageProcessing3
         {
             //推拉效果
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename);
             pictureBox1.Image = image;
             pictureBox1.Size = new Size(image.Width, image.Height - 1);

@@ -116,10 +116,10 @@ namespace vcs_ComboBox1
 
             //comboBox4
             //添加項 
-            comboBox4.Items.Add(new MyItem("000000", Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_red.jpg")));
-            comboBox4.Items.Add(new MyItem("111111", Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_yellow.jpg")));
-            comboBox4.Items.Add(new MyItem("222222", Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_blue.jpg")));
-            comboBox4.Items.Add(new MyItem("333333", Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_black.jpg")));
+            comboBox4.Items.Add(new MyItem("000000", Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_red.jpg")));
+            comboBox4.Items.Add(new MyItem("111111", Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_yellow.jpg")));
+            comboBox4.Items.Add(new MyItem("222222", Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_blue.jpg")));
+            comboBox4.Items.Add(new MyItem("333333", Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_black.jpg")));
 
             //默認選中項索引 
             comboBox4.SelectedIndex = 0;
@@ -301,7 +301,7 @@ namespace vcs_ComboBox1
 
 
         Hashtable ht = new Hashtable();
-        string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU";
+        string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU";
 
         //多層 且指明副檔名
         public void GetAllFiles(string foldername)

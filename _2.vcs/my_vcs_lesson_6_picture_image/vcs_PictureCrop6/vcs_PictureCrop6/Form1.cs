@@ -27,7 +27,7 @@ namespace vcs_PictureCrop6
         private Graphics g2 = null;
         private bool MadeSelection = false;
 
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.bmp";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.bmp";
 
         private void Form1_Load(object sender, EventArgs e)
         {

@@ -16,10 +16,10 @@ namespace vcs_ImageProcessing4
 {
     public partial class Form1 : Form
     {
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\naruto.jpg";
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\_image_processing\isinbaeva.jpg";
+        //string filename = @"D:\_git\vcs\_1.data\______test_files1\naruto.jpg";
+        //string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        //string filename = @"D:\_git\vcs\_1.data\______test_files1\_image_processing\isinbaeva.jpg";
 
         Bitmap bitmap1;
 
@@ -101,7 +101,7 @@ namespace vcs_ImageProcessing4
             //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
             openFileDialog1.Multiselect = false;    //單選
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -208,7 +208,7 @@ namespace vcs_ImageProcessing4
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
             //水平Mirror
             int xx;
@@ -240,7 +240,7 @@ namespace vcs_ImageProcessing4
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
             //垂直Mirror
             int xx;
@@ -272,7 +272,7 @@ namespace vcs_ImageProcessing4
         private void button5_Click(object sender, EventArgs e)
         {
             //找過亮
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims_image.bmp";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims_image.bmp";
 
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
@@ -404,7 +404,7 @@ namespace vcs_ImageProcessing4
         {
             //降亮度
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims_image.bmp";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims_image.bmp";
 
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
@@ -447,7 +447,7 @@ namespace vcs_ImageProcessing4
         //public void bitSlicing(Bitmap Image)
         public void bitSlicing()
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp"; //stomach
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp"; //stomach
 
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 
@@ -635,7 +635,7 @@ namespace vcs_ImageProcessing4
         //public void grayCodeSlicing(Bitmap Image)
         public void grayCodeSlicing()
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp"; //stomach
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp"; //stomach
 
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 

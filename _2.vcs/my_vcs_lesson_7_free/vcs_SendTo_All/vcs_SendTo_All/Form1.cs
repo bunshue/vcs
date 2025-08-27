@@ -497,7 +497,7 @@ namespace vcs_SendTo_All
                 //簡中轉正中
                 string all_tc_text = GB2312translateBig5(all_text);
 
-                //string filename_new = @"C:\_git\vcs\_4.python\test10_new08_test_sc_tc_ccccc.py";
+                //string filename_new = @"D:\_git\vcs\_4.python\test10_new08_test_sc_tc_ccccc.py";
                 //覆蓋原檔
                 FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
                 StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);   //指名編碼格式            

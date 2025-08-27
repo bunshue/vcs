@@ -11,7 +11,7 @@ namespace vcs_RichTextBox4_Find2
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\poetry.txt";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\poetry.txt";
 
         public Form1()
         {

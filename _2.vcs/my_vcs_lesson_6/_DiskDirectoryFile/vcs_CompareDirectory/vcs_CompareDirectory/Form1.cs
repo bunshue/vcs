@@ -20,8 +20,8 @@ namespace vcs_CompareDirectory
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBox1.Text = @"C:\_git\vcs\_1.data\______test_files1\Dir1";
-            textBox2.Text = @"C:\_git\vcs\_1.data\______test_files1\Dir2";
+            textBox1.Text = @"D:\_git\vcs\_1.data\______test_files1\Dir1";
+            textBox2.Text = @"D:\_git\vcs\_1.data\______test_files1\Dir2";
 
             SizeColumns();
         }

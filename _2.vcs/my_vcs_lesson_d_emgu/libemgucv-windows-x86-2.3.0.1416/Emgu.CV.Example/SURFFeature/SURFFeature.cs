@@ -30,8 +30,8 @@ namespace SURFFeatureExample
 
         static void Run()
         {
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\_emgu\box.png";
-            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\_emgu\box_in_scene.png";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\_emgu\box.png";
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\_emgu\box_in_scene.png";
 
             Image<Gray, Byte> modelImage = new Image<Gray, byte>(filename1);
             Image<Gray, Byte> observedImage = new Image<Gray, byte>(filename2);

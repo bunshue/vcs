@@ -120,9 +120,9 @@ namespace vcs_ListView2
             listView1.Columns.Add("大小", 80, HorizontalAlignment.Left);
 
             //加入3筆資料
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-            string filename3 = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename3 = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
             add_item_to_listview(filename1);
             add_item_to_listview(filename2);
             add_item_to_listview(filename3);

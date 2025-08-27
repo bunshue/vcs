@@ -16,7 +16,7 @@ namespace vcs_Screensaver3
     {
         int W = 0;
         int H = 0;
-        string foldername = @"C:\_git\vcs\_1.data\______test_files1\_mp3b";
+        string foldername = @"D:\_git\vcs\_1.data\______test_files1\_mp3b";
 
         public Form1()
         {

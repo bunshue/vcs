@@ -20,7 +20,7 @@ namespace vcs_ZoomPicture6
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             myImage = System.Drawing.Image.FromFile(filename);
             pictureBox1.Image = myImage;
             pictureBox1.Height = myImage.Height;

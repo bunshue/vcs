@@ -13,7 +13,7 @@ namespace vcs_Draw_Dynamics2
 {
     public partial class Form1 : Form
     {
-        Image img = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\Angry-Birds08.jpg");
+        Image img = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\Angry-Birds08.jpg");
         int W = 0;
         int H = 0;
         int x_st = 0;
@@ -253,7 +253,7 @@ namespace vcs_Draw_Dynamics2
             Rectangle srcRect = new Rectangle(sx, sy, sw, sh);   //擷取部分區域
             GraphicsUnit units = GraphicsUnit.Pixel;
 
-            Image img = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\picture1.jpg");
+            Image img = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg");
 
             //Bitmap bitmap = new Bitmap(srcRect.Width, srcRect.Height);
             //             貼上位置x,貼上位置y,貼上大小W,貼上大小H

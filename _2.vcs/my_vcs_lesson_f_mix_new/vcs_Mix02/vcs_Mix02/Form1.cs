@@ -784,7 +784,7 @@ namespace vcs_Mix02
             show_button_text(sender);
             //搜尋檔案內的文字
 
-            string txtDirectory = @"C:\_git\vcs\_1.data\______test_files1\_case1";
+            string txtDirectory = @"D:\_git\vcs\_1.data\______test_files1\_case1";
             string type = "*.*";
             string pattern = "";
 
@@ -832,7 +832,7 @@ namespace vcs_Mix02
         private void button23_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
 
             IEnumerable<FileInfo> images = null;
             if (Directory.Exists(foldername) == true)

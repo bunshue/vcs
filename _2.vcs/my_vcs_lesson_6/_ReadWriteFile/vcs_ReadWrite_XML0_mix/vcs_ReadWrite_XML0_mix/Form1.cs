@@ -84,7 +84,7 @@ namespace vcs_ReadWrite_XML0_mix
             //XML讀取
             //read_xml.xml
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML0.xml";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML0.xml";
 
             //XDocument doc = XDocument.Load(Server.MapPath("html5Reader/ReaderData.xml")); 
             StringBuilder sb = new StringBuilder();
@@ -264,7 +264,7 @@ namespace vcs_ReadWrite_XML0_mix
             XmlProcess xml = new XmlProcess();
             xml.CreatNewXml();
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML0b.xml";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML0b.xml";
             xml.DataIn(filename);
             xml.DataOut();
         }

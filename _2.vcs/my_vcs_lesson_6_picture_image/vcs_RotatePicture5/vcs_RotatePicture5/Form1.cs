@@ -15,7 +15,7 @@ namespace vcs_RotatePicture5
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
         private Bitmap bitmap1 = null;  //原圖
         private Bitmap bitmap2 = null;  //旋轉過的圖

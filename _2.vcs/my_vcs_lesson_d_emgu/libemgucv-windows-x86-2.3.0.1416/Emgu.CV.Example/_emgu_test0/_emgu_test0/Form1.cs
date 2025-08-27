@@ -18,7 +18,7 @@ namespace _emgu_test0
         int W = 305;
         int H = 400;
 
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
         Emgu.CV.UI.ImageBox ibox = new Emgu.CV.UI.ImageBox();
 
@@ -296,8 +296,8 @@ namespace _emgu_test0
         {
             clear_all();
             richTextBox1.Text += "讀取圖片檔案\n";
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\pic_256X100.jpg";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\pic_256X100b.bmp";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\pic_256X100.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\pic_256X100b.bmp";
 
             //Load the Image
             Image<Bgr, Byte> img1 = new Image<Bgr, byte>(filename);
@@ -469,8 +469,8 @@ namespace _emgu_test0
             richTextBox1.Text += "對Image結構進行操作 圖片內容相減\n";
             //Image<TColor, TDepth>还对操作运算符进行了重载（ + - * / ）
 
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\compare\compare1.jpg";
-            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\compare\compare2.jpg";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\compare\compare1.jpg";
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\compare\compare2.jpg";
 
             Image<Bgr, Byte> image1 = new Image<Bgr, byte>(filename1);
             Image<Bgr, Byte> image2 = new Image<Bgr, byte>(filename2);

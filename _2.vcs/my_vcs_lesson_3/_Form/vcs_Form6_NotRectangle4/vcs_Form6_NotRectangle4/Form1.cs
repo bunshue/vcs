@@ -29,7 +29,7 @@ namespace vcs_Form6_NotRectangle4
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_png\ladybug.png"; //128X128
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_png\ladybug.png"; //128X128
             string filename = @"../../matlab.png";  //圖很大 900X800, 後面要改成Zoom
             this.BackgroundImage = Bitmap.FromFile(filename);
 

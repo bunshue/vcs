@@ -13,7 +13,7 @@ namespace vcs_Draw_ColorMatrix
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
         public Form1()
         {
@@ -52,7 +52,7 @@ namespace vcs_Draw_ColorMatrix
         private void button0_Click(object sender, EventArgs e)
         {
             //測試ColorMatrix
-            string pic_filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             Image image = new Bitmap(pic_filename);
             ImageAttributes imageAttributes = new ImageAttributes();
@@ -101,10 +101,10 @@ namespace vcs_Draw_ColorMatrix
 
             using (Graphics gr = Graphics.FromImage(bm))
             {
-                Image img = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\picture1.jpg");
+                Image img = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg");
                 gr.Clear(Color.White);
                 gr.DrawImage(img, 0, 0, img.Width, img.Height);
-                Image banner = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\_material\ims3.bmp");
+                Image banner = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_material\ims3.bmp");
                 gr.DrawImage(banner, 0, 200, 300, 130);
             }
             pictureBox1.Image = bm;
@@ -118,12 +118,12 @@ namespace vcs_Draw_ColorMatrix
             Bitmap bm = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
 
             // Make adjusted images.
-            Image banner = AdjustAlpha(Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\_material\ims3.bmp"), 0.60f);
+            Image banner = AdjustAlpha(Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_material\ims3.bmp"), 0.60f);
 
             // Draw the adjusted images.
             using (Graphics gr = Graphics.FromImage(bm))
             {
-                Image img = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\picture1.jpg");
+                Image img = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg");
                 gr.Clear(Color.White);
                 gr.DrawImage(img, 0, 0, img.Width, img.Height);
                 gr.DrawImage(banner, 0, 200, 300, 130);
@@ -190,7 +190,7 @@ namespace vcs_Draw_ColorMatrix
             System.Drawing.Imaging.ColorMatrix cm = new System.Drawing.Imaging.ColorMatrix(matrix);
             System.Drawing.Imaging.ImageAttributes attr = new System.Drawing.Imaging.ImageAttributes();
             attr.SetColorMatrix(cm);
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             Image tmp = Image.FromFile(filename);
 
@@ -212,7 +212,7 @@ namespace vcs_Draw_ColorMatrix
         private void button4_Click(object sender, EventArgs e)
         {
             //使用ColorMatrix取灰度
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             //取灰度
             this.pictureBox1.Image = Image.FromFile(filename);

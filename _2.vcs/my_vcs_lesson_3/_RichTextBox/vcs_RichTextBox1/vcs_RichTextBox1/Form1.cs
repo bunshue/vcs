@@ -20,7 +20,7 @@ namespace vcs_RichTextBox1
             InitializeComponent();
         }
 
-        string rtf_filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_rtf\text.rtf";
+        string rtf_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\text.rtf";
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -511,7 +511,7 @@ namespace vcs_RichTextBox1
             richTextBox1.Clear();
             try
             {
-                string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_rtf\SAMPO(PA63)變頻分離式室外機功能規格書_2014.08.18doc.rtf";
+                string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\SAMPO(PA63)變頻分離式室外機功能規格書_2014.08.18doc.rtf";
 
                 richTextBox1.LoadFile(filename);
             }
@@ -817,7 +817,7 @@ namespace vcs_RichTextBox1
             //讀取純文字檔到richTextBox裏
             try
             {
-                richTextBox1.LoadFile(@"C:\_git\vcs\_1.data\______test_files1\article.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
+                richTextBox1.LoadFile(@"D:\_git\vcs\_1.data\______test_files1\article.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
             }
             catch (FileNotFoundException)
             {

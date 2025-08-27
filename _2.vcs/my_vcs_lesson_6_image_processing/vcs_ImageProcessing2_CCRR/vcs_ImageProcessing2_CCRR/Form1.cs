@@ -15,10 +15,10 @@ namespace vcs_ImageProcessing2_CCRR
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\pic_256X100.bmp";
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_map_city/global.c.gif";   //超大圖, 要很久
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
+        //string filename = @"D:\_git\vcs\_1.data\______test_files1\pic_256X100.bmp";
+        //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_map_city/global.c.gif";   //超大圖, 要很久
+        //string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
         public Form1()
         {
@@ -139,7 +139,7 @@ namespace vcs_ImageProcessing2_CCRR
         {
             //圖像截取
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
             Graphics g = this.pictureBox1.CreateGraphics();
             Bitmap bitmap1 = new Bitmap(filename);
             //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
@@ -152,7 +152,7 @@ namespace vcs_ImageProcessing2_CCRR
         {
             //改變圖像大小
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
 
             Graphics g = this.pictureBox1.CreateGraphics();
             Bitmap bitmap1 = new Bitmap(filename);
@@ -177,7 +177,7 @@ namespace vcs_ImageProcessing2_CCRR
         private void button2_Click(object sender, EventArgs e)
         {
             //重設大小
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
             Bitmap bitmap1 = new Bitmap(filename);
             Bitmap bitmap2 = ResizeImage(bitmap1, new Size(bitmap1.Width / 2, bitmap1.Height / 2));
             pictureBox1.Image = bitmap2;
@@ -200,7 +200,7 @@ namespace vcs_ImageProcessing2_CCRR
         {
             //圖像切割 每100X100 切成一個小圖
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             //圖像切割 每100X100 切成一個小圖
             ImageManager.Cut(filename, 100, 100);
         }
@@ -301,7 +301,7 @@ namespace vcs_ImageProcessing2_CCRR
         {
             //圖片剪下一塊存檔1
             //圖片剪下一塊存檔, 圖片裁剪
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             string filename2 = @"tmp_picture1_cut.jpg";
 
             ImgReduceCutOut(200, 200, filename1, filename2);
@@ -339,8 +339,8 @@ namespace vcs_ImageProcessing2_CCRR
         {
             //圖片剪下一塊存檔2
 
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\picture1_cut.jpg";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\picture1_cut.jpg";
 
             pictureBox1.Image = CutForCustomx(filename1, 150, 150);
             pictureBox1.Image.Save(filename2);
@@ -416,7 +416,7 @@ namespace vcs_ImageProcessing2_CCRR
 
             //圖片質量壓縮(不改變尺寸)
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             richTextBox1.Text += "原圖 : " + filename + "\n";
 
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
@@ -473,7 +473,7 @@ namespace vcs_ImageProcessing2_CCRR
         {
             //圖片壓縮
             //圖片壓縮
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             string filename2 = Application.StartupPath + "\\compress_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
             bool result = imageCompress(filename1, 30, filename2);
             if (result == true)
@@ -514,7 +514,7 @@ namespace vcs_ImageProcessing2_CCRR
         {
             //獲取圖片的指定部分
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             Bitmap bitmap1 = GetPart(filename, 0, 0, 150, 200, 0, 0);
 
@@ -539,7 +539,7 @@ namespace vcs_ImageProcessing2_CCRR
 
         private void VaryQualityLevel()
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
             // Get a bitmap.
             Bitmap bitmap1 = new Bitmap(filename);
@@ -742,7 +742,7 @@ namespace vcs_ImageProcessing2_CCRR
         {
             //原圖
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
             Bitmap bitmap1;
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
@@ -882,7 +882,7 @@ namespace vcs_ImageProcessing2_CCRR
             //Lanczos 2倍
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             double k = 4.0;
             Bitmap bitmap2 = ZoomLanczos2Apply(bitmap1, k);
@@ -919,7 +919,7 @@ namespace vcs_ImageProcessing2_CCRR
         private void button22_Click(object sender, EventArgs e)
         {
             //copy 拉大兩倍
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
 
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
 
@@ -932,7 +932,7 @@ namespace vcs_ImageProcessing2_CCRR
         private void button23_Click(object sender, EventArgs e)
         {
             //StretchImage 拉大兩倍
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式

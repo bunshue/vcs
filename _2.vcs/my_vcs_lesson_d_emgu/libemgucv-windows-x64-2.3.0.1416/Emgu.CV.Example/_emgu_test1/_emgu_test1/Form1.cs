@@ -64,7 +64,7 @@ namespace _emgu_test1
         {
             //string filename = "F:\\Naval Legends Yamato  World of Warships.mp4";
             string filename = @"D:\\Carreno Busta vs Kei Nishikori Final Set Tie Break HD.mp4";
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\_video\i2c.avi";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\_video\i2c.avi";
 
             //Capture cap2 = null;
             Capture cap2 = new Capture(filename);
@@ -97,7 +97,7 @@ namespace _emgu_test1
             */
 
 
-            filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             cap2 = new Capture(filename);
 
             W = cap2.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
@@ -119,8 +119,8 @@ namespace _emgu_test1
             //Image<Gray, int> inputImage = new Image<Gray, byte>(new Size(640, 480));
             //pictureBox1.Image = inputImage.ToBitmap();
 
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\pic_256X100.jpg";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\pic_256X100b.bmp";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\pic_256X100.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\pic_256X100b.bmp";
 
             //Load the Image
             Image<Bgr, Byte> img1 = new Image<Bgr, byte>(filename);
@@ -188,35 +188,35 @@ namespace _emgu_test1
 
             VideoWriter video = new VideoWriter(filename, CvInvoke.CV_FOURCC('X', 'V', 'I', 'D'), 1, 640, 480, true);
 
-            filenamej = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_01.jpg";
+            filenamej = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_01.jpg";
             pictureBox1.Image = Image.FromFile(filenamej);
             img = new Image<Bgr, byte>(filenamej);
             video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
             Application.DoEvents();
             System.Threading.Thread.Sleep(1000);
 
-            filenamej = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_02.jpg";
+            filenamej = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_02.jpg";
             pictureBox1.Image = Image.FromFile(filenamej);
             img = new Image<Bgr, byte>(filenamej);
             video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
             Application.DoEvents();
             System.Threading.Thread.Sleep(1000);
 
-            filenamej = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_03.jpg";
+            filenamej = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_03.jpg";
             pictureBox1.Image = Image.FromFile(filenamej);
             img = new Image<Bgr, byte>(filenamej);
             video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
             Application.DoEvents();
             System.Threading.Thread.Sleep(1000);
 
-            filenamej = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_04.jpg";
+            filenamej = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_04.jpg";
             pictureBox1.Image = Image.FromFile(filenamej);
             img = new Image<Bgr, byte>(filenamej);
             video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
             Application.DoEvents();
             System.Threading.Thread.Sleep(1000);
 
-            filenamej = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_05.jpg";
+            filenamej = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_05.jpg";
             pictureBox1.Image = Image.FromFile(filenamej);
             img = new Image<Bgr, byte>(filenamej);
             video.WriteFrame<Bgr, byte>(img); //將每張圖片製作成影片
@@ -245,7 +245,7 @@ namespace _emgu_test1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             //Load the Image
             Image<Bgr, Byte> image = new Image<Bgr, byte>(filename);
@@ -347,7 +347,7 @@ namespace _emgu_test1
 
         private void button7_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             Image<Bgr, Byte> image = new Image<Bgr, Byte>(filename);
 
@@ -366,7 +366,7 @@ namespace _emgu_test1
 
         private void button8_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
 
             Image<Bgr, Byte> image = new Image<Bgr, Byte>(bitmap1);
@@ -378,7 +378,7 @@ namespace _emgu_test1
         {
 
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_emgu\pic3.png";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_emgu\pic3.png";
 
             //Load the image from file and resize it for display
             Image<Bgr, Byte> Image = new Image<Bgr, byte>(filename).Resize(400, 400, Emgu.CV.CvEnum.INTER.CV_INTER_LINEAR, true);
@@ -390,7 +390,7 @@ namespace _emgu_test1
 
         private void button10_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
 
             Image<Bgr, Byte> Image = new Image<Bgr, Byte>(bitmap1);

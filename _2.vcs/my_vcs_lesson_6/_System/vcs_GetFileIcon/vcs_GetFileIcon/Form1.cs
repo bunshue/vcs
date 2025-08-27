@@ -31,7 +31,7 @@ namespace vcs_GetFileIcon
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
 
             int cnt = 0;
             cnt = imageList1.Images.Count;

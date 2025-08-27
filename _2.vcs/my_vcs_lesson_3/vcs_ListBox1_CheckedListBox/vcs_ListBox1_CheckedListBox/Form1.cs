@@ -189,7 +189,7 @@ namespace vcs_ListBox1_CheckedListBox
             //文字檔  => listBox
             listBox1.Items.Clear();
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
 
             //按行讀取文件：
 

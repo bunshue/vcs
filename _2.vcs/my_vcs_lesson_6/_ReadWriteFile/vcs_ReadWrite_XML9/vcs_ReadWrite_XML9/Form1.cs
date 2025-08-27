@@ -11,7 +11,7 @@ namespace vcs_ReadWrite_XML9
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_2.vcs\______test_files1\__RW\_xml\person.xml";
+        string filename = @"D:\_git\vcs\_2.vcs\______test_files1\__RW\_xml\person.xml";
 
         public Form1()
         {

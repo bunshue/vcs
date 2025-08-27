@@ -43,9 +43,9 @@ namespace vcs_ColorHistogram
 
         private const int BORDER = 0;
 
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\ims_image_20230921_155302.bmp";
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        //string filename = @"D:\_git\vcs\_1.data\______test_files1\ims_image_20230921_155302.bmp";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
+        //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
         //string filename = "pic_original2.bmp";
 
         public Point firstPoint = new Point(0, 0);  //鼠標第一點 
@@ -565,7 +565,7 @@ namespace vcs_ColorHistogram
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp"; //stomach
+            filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp"; //stomach
             tb_filename.Text = filename;
 
             show_item_location();
@@ -1272,7 +1272,7 @@ namespace vcs_ColorHistogram
             openFileDialog1.Filter = "jpg (*.jpg)|*.jpg|bmp (*.bmp)|*.bmp|png (*.png)|*.png";	//限定檔案格式
             openFileDialog1.FilterIndex = 2;
             //openFileDialog1.RestoreDirectory = false;
-            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files6\白紙,亮度1";
+            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files6\白紙,亮度1";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 clear_all_pictures();

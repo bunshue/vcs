@@ -35,7 +35,7 @@ namespace vcs_DragPicture5
 
             // Get the map image.
             //bitmap1 = Properties.Resources.Map;
-            bitmap1 = (Bitmap)Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\_case1\pic6.jpg");
+            bitmap1 = (Bitmap)Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic6.jpg");
 
             richTextBox1.Text += "W = " + bitmap1.Width.ToString() + ", H = " + bitmap1.Height.ToString() + "\n";
 
@@ -193,8 +193,8 @@ namespace vcs_DragPicture5
             y_st += 50;
             RectangleF rect = new RectangleF(x_st, y_st, W, H);
 
-            //bitmap1 = (Bitmap)Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\_case1\pic6.jpg");
-            Bitmap bm = (Bitmap)Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\_case1\pic6.jpg");
+            //bitmap1 = (Bitmap)Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic6.jpg");
+            Bitmap bm = (Bitmap)Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic6.jpg");
             try
             {
                 //將處理之後的圖片貼出來

@@ -158,7 +158,7 @@ namespace vcs_Process_CommandLine
             //轉出檔案
 
             FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
-            folderBrowserDialog1.SelectedPath = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
+            folderBrowserDialog1.SelectedPath = @"D:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
 
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {

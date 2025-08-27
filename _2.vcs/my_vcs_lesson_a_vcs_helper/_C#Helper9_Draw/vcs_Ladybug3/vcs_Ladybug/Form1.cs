@@ -29,7 +29,7 @@ namespace vcs_Ladybug
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_png\ladybug.png";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_png\ladybug.png";
             bitmap1 = new Bitmap(filename);
             Run_Ladybug();
 

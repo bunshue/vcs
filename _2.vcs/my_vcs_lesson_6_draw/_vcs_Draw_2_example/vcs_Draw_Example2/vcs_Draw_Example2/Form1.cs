@@ -1972,7 +1972,7 @@ namespace vcs_Draw_Example2
             Application.DoEvents();
 
             //讀取wav，保存音頻數據到txt
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\_wav\start.wav";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\_wav\start.wav";
             string filename2 = @"start.txt";
 
             byte[] length = new byte[4];
@@ -2078,7 +2078,7 @@ namespace vcs_Draw_Example2
         private void button14_Click(object sender, EventArgs e)
         {
             //顯示wave 2
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_wav\start.wav";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_wav\start.wav";
 
             WAVReader wr = new WAVReader();
             wr.ReadWAVFile(filename);

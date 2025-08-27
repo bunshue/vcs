@@ -673,7 +673,7 @@ namespace vcs_MyToolbox
             else if (sender.Equals(btn_10))
             {
                 text = btn_10.Text;
-                string foldername = @"C:\_git\vcs";
+                string foldername = @"D:\_git\vcs";
                 if (Directory.Exists(foldername) == true)
                 {
                     Process.Start(foldername);
@@ -710,7 +710,7 @@ namespace vcs_MyToolbox
 
                         if (File.Exists(mp3_filename) == true)
                         {
-                            //string mp3_filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\16.監獄風雲.mp3";
+                            //string mp3_filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\16.監獄風雲.mp3";
                             axWindowsMediaPlayer1.URL = mp3_filename;
                         }
                         else
@@ -831,7 +831,7 @@ namespace vcs_MyToolbox
                 }
 
                 //用Adobe開啟pdf檔案
-                //string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
+                //string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
                 //Process process;
                 //process = Process.Start(filename);
 
@@ -1132,10 +1132,10 @@ namespace vcs_MyToolbox
             VisibleBm = null;
         }
 
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\_icon\快.ico";
+        //string filename = @"D:\_git\vcs\_1.data\______test_files1\_icon\快.ico";
         int i = 0; //先設置一個全局變量 i ,用來控制圖片索引,然後創建定時事件,雙擊定時控件就可以編輯 
-        private Icon icon1 = new Icon(@"C:\_git\vcs\_1.data\______test_files1\_icon\快.ico");
-        private Icon icon2 = new Icon(@"C:\_git\vcs\_1.data\______test_files1\_icon\影.ico"); //兩個圖標 切換顯示 以達到消息閃動的效果
+        private Icon icon1 = new Icon(@"D:\_git\vcs\_1.data\______test_files1\_icon\快.ico");
+        private Icon icon2 = new Icon(@"D:\_git\vcs\_1.data\______test_files1\_icon\影.ico"); //兩個圖標 切換顯示 以達到消息閃動的效果
 
         //定時器 不斷閃動圖標
         private void timer_notifyicon_Tick(object sender, EventArgs e)

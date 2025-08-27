@@ -31,7 +31,7 @@ namespace vcs_PictureCrop2
         private float RectWidth = 1f;
         private float RectHeight = 1f;
 
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
         public Form1()
         {

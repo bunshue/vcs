@@ -130,10 +130,10 @@ namespace vcs_VideoReadWrite
 
             //製作圖片影片
 
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery/taitung1.jpg";
-            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery/taitung2.jpg";
-            string filename3 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery/taitung3.jpg";
-            string filename4 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery/taitung4.jpg";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery/taitung1.jpg";
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery/taitung2.jpg";
+            string filename3 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery/taitung3.jpg";
+            string filename4 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery/taitung4.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
             Bitmap bitmap2 = (Bitmap)Bitmap.FromFile(filename2);	//Bitmap.FromFile出來的是Image格式
             Bitmap bitmap3 = (Bitmap)Bitmap.FromFile(filename3);	//Bitmap.FromFile出來的是Image格式
@@ -294,7 +294,7 @@ namespace vcs_VideoReadWrite
                 File.Delete(audio_filename);
             }
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_video\i2c.avi";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_video\i2c.avi";
 
             AviManager aviManager = new AviManager(filename, true);
 

@@ -27,7 +27,7 @@ namespace vcs_Mix03_draw_image
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
 
             show_item_location();
@@ -221,7 +221,7 @@ namespace vcs_Mix03_draw_image
             //撈出所有圖片檔 並存成一個List 1
 
             //撈出所有圖片檔 並存成一個List
-            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
 
             filenames.Clear();
 
@@ -242,7 +242,7 @@ namespace vcs_Mix03_draw_image
             show_button_text(sender);
             //撈出所有圖片檔 並存成一個List 2
 
-            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
 
             filenames.Clear();
 
@@ -294,7 +294,7 @@ namespace vcs_Mix03_draw_image
             Graphics g = Graphics.FromImage(bitmap1);
             g.Clear(Color.White);
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             Bitmap bmp = new Bitmap(filename);
             g.FillRectangle(Brushes.White, this.ClientRectangle);
@@ -374,7 +374,7 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
 
             double DPI = pictureBox1.Image.HorizontalResolution;//獲得分辨率 gisoracle

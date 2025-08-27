@@ -136,9 +136,9 @@ namespace vcs_ReadWrite_CSV2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_csv\vcs_ReadWrite_CSV_state_data.csv";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_csv\vcs_ReadWrite_CSV_state_data.csv";
 
-            //filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_csv\vcs_ReadWrite_CSV_���Z��.csv";
+            //filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_csv\vcs_ReadWrite_CSV_���Z��.csv";
 
             richTextBox1.Text += "filename = " + filename + "\n";
 

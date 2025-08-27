@@ -28,7 +28,7 @@ namespace vcs_PictureThumbnail2
         private void button0_Click(object sender, EventArgs e)
         {
             //根據原圖生成縮略圖
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             richTextBox1.Text += "圖檔 轉 Bitmap\n";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
@@ -100,7 +100,7 @@ namespace vcs_PictureThumbnail2
         {
             //圖片縮為 100 X 100
             richTextBox1.Text += "建立縮圖\t圖片縮為 100 X 100\n";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             int w = 100;
             int h = 100;
             int flag = 100;
@@ -111,7 +111,7 @@ namespace vcs_PictureThumbnail2
         {
             //圖片縮為 一半 X 一半
             richTextBox1.Text += "建立縮圖\t圖片縮為 一半 X 一半\n";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             //讀圖片檔案至記憶體
             //read image
@@ -235,7 +235,7 @@ namespace vcs_PictureThumbnail2
         private void button3_Click(object sender, EventArgs e)
         {
             //圖片縮略圖
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             string filename2 = Application.StartupPath + "\\thumb_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
             bool result = getThumImage(filename1, 100, 3, filename2);
             if (result == true)
@@ -300,7 +300,7 @@ namespace vcs_PictureThumbnail2
         {
             //產生縮略圖
             //產生縮略圖
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             string filename2 = Application.StartupPath + "\\thumb_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
             bool result = getThumImage2(filename1, filename2);
             if (result == true)
@@ -329,7 +329,7 @@ namespace vcs_PictureThumbnail2
         private void button5_Click(object sender, EventArgs e)
         {
             //減少圖片文件大小和尺寸
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox1.Image = reduce_bitmap(bitmap1, 80);
             //pictureBox2.Image = reduce_bitmap(bitmap1, 50);

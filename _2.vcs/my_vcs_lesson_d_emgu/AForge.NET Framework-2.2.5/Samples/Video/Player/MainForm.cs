@@ -143,7 +143,7 @@ namespace Player
         private void button2_Click(object sender, EventArgs e)
         {
             //Open video file (using DirectShow)
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RWa\_avi\enka.avi";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RWa\_avi\enka.avi";
             {
                 // create video source
                 FileVideoSource fileSource = new FileVideoSource(filename);

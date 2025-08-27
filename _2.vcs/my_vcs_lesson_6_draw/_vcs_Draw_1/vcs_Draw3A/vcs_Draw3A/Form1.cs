@@ -917,7 +917,7 @@ namespace vcs_Draw3A
 
         void show_card(int card_no)
         {
-            Image img = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_poker_card\cards1.png");
+            Image img = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_poker_card\cards1.png");
             int W = img.Width;
             int H = img.Height;
             int w = W / 13;
@@ -927,7 +927,7 @@ namespace vcs_Draw3A
             int index_y = card_no / 13;
 
             GraphicsUnit units = GraphicsUnit.Pixel;
-            //來源矩形的大小會決定要將未縮放原始影像的哪個部分繪製到螢幕上。
+          //來源矩形的大小會決定要將未縮放原始影像咄個部分繪製到螢幕上。
 
             int sx;
             int sy;
@@ -974,7 +974,7 @@ namespace vcs_Draw3A
 
         void show_card2(int card_no)
         {
-            Image img = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_poker_card\cards2.png");
+            Image img = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_poker_card\cards2.png");
             int W = img.Width;
             int H = img.Height;
             int w = W / 13;

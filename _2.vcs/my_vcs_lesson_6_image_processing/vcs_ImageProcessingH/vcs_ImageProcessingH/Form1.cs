@@ -14,7 +14,7 @@ namespace vcs_ImageProcessingH
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
         int cutoff_value = 0;
 
         public Form1()
@@ -41,7 +41,7 @@ namespace vcs_ImageProcessingH
             picColor.BackColor = Color.FromArgb(scrRed.Value, scrGreen.Value, scrBlue.Value);
             ColorPicture();
 
-            filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             pictureBox6.Image = Image.FromFile(filename);
             cutoff_value = trackBar_transparent.Value;
             label6.Text = "亮度 " + cutoff_value.ToString() + " 以上, 設定為透明";
@@ -240,7 +240,7 @@ namespace vcs_ImageProcessingH
             cutoff_value = trackBar_transparent.Value;
             label6.Text = "亮度 " + cutoff_value.ToString() + " 以上, 設定為透明";
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             ShowImage(filename);
         }
 

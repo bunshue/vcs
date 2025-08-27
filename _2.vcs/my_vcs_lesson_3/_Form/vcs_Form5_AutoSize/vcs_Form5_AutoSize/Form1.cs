@@ -46,7 +46,7 @@ namespace vcs_Form5_AutoSize
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start(@"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt");
+            System.Diagnostics.Process.Start(@"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt");
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

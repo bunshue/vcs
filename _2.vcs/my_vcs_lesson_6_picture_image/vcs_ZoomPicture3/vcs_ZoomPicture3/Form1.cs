@@ -24,7 +24,7 @@ namespace vcs_ZoomPicture3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             //same
             //Image img = Image.FromFile(filename);

@@ -18,7 +18,7 @@ namespace vcs_ReadWrite_RTF
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_rtf\VS2013Express.rtf";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\VS2013Express.rtf";
 
             this.richTextBox1.LoadFile(filename, RichTextBoxStreamType.RichText);//從指定位置加載RTF文件
             richTextBox2.Text += "開啟檔案 : " + filename + "\n";

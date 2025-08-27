@@ -160,8 +160,8 @@ namespace vcs_Cryptography4
         //所以也起到了最簡單的加密功能。
 
         string str_encrypted_text = string.Empty;   //加密後的結果
-        string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\txt_clear.txt";          //明碼
-        string filename2 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\txt_encrypt.txt";        //密碼
+        string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\txt_clear.txt";          //明碼
+        string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\txt_encrypt.txt";        //密碼
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -247,7 +247,7 @@ namespace vcs_Cryptography4
         private void button9_Click(object sender, EventArgs e)
         {
             //檔案加密2
-            string inFile = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string inFile = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             string outFile = inFile + ".dat";
             string password = "lion-mouse";
             DESFile.DESFileClass.EncryptFile(inFile, outFile, password);//加密文件
@@ -259,7 +259,7 @@ namespace vcs_Cryptography4
         private void button10_Click(object sender, EventArgs e)
         {
             //檔案解密2
-            string inFile = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg.dat";
+            string inFile = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg.dat";
             if (File.Exists(inFile) == false)
             {
                 richTextBox1.Text += "檔案 : " + inFile + ", 不存在, 離開\n";

@@ -12,7 +12,7 @@ namespace vcs_ReadWrite_BIN3
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_bin\ball.bin";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_bin\ball.bin";
 
         Random rd = new Random(); // 亂數
         List<ClassBall> ballList = new List<ClassBall>();  // ClassBall 物件的動態陣列

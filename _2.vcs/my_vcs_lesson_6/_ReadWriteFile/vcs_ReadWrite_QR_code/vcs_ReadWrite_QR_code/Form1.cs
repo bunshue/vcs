@@ -76,7 +76,7 @@ namespace vcs_ReadWrite_QR_code
             ZXing.IBarcodeReader reader = new ZXing.BarcodeReader();
 
             //讀取要解碼的圖片
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_qr_code\vcs_ReadWrite_QR_code.png";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_qr_code\vcs_ReadWrite_QR_code.png";
 
             FileStream fs = new FileStream(filename, FileMode.Open);
 

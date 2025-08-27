@@ -271,7 +271,7 @@ namespace vcs_ReadWrite_XML1C
 
         private void button02_Click(object sender, EventArgs e)
         {
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ca.xml";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ca.xml";
             string filename2 = "vcs_ReadWrite_XML1Ca_add.xml";
 
             //添加一個節點
@@ -304,7 +304,7 @@ namespace vcs_ReadWrite_XML1C
         private void button03_Click(object sender, EventArgs e)
         {
             //修改節點內容 1
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ca_add.xml";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ca_add.xml";
             string filename2 = "vcs_ReadWrite_XML1Ca_add_modify1.xml";
 
             //3，修改结点的值（属性和子结点）：
@@ -341,7 +341,7 @@ namespace vcs_ReadWrite_XML1C
         private void button04_Click(object sender, EventArgs e)
         {
             //修改節點內容 2
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ca_add_modify1.xml";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ca_add_modify1.xml";
             string filename2 = "vcs_ReadWrite_XML1Ca_add_modify2.xml";
 
 
@@ -369,7 +369,7 @@ namespace vcs_ReadWrite_XML1C
         private void button05_Click(object sender, EventArgs e)
         {
             //刪除節點資料 1
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ca_add_modify2.xml";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ca_add_modify2.xml";
             string filename2 = "vcs_ReadWrite_XML1Ca_add_modify2_delete1.xml";
 
             //刪除節點資料 1
@@ -401,7 +401,7 @@ namespace vcs_ReadWrite_XML1C
         private void button06_Click(object sender, EventArgs e)
         {
             //刪除節點資料 2
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ca_add.xml";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ca_add.xml";
             string filename2 = "vcs_ReadWrite_XML1Ca_add_delete.xml";
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(filename1);
@@ -436,7 +436,7 @@ namespace vcs_ReadWrite_XML1C
         private void button07_Click(object sender, EventArgs e)
         {
             //讀出全部XML
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ca.xml";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ca.xml";
 
             string xml_data = read_xml_content(filename);
 
@@ -447,7 +447,7 @@ namespace vcs_ReadWrite_XML1C
 
         private void button08_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Cc.xml";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Cc.xml";
             string xml_data = read_xml_content(filename);
 
             richTextBox1.Text += "原XML檔案 : " + filename + "\n";
@@ -472,7 +472,7 @@ namespace vcs_ReadWrite_XML1C
 
         private void button09_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Cd.xml";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Cd.xml";
             string xml_data = read_xml_content(filename);
 
             richTextBox1.Text += "原XML檔案 : " + filename + "\n";
@@ -555,14 +555,14 @@ namespace vcs_ReadWrite_XML1C
         private void button30_Click(object sender, EventArgs e)
         {
             //解析XML 1
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ce.xml";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ce.xml";
             ReadParseXml_1(filename);
         }
 
         private void button31_Click(object sender, EventArgs e)
         {
             //解析XML 2
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ce.xml";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ce.xml";
             ReadParseXml_2(filename);
         }
 
@@ -617,7 +617,7 @@ namespace vcs_ReadWrite_XML1C
 
         private void button32_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ce.xml";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ce.xml";
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(filename);//文件路徑或者URL地址
             Console.WriteLine(xmlDoc.InnerXml);

@@ -13,7 +13,7 @@ namespace vcs_DragPicture3b
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\very_long_pic.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\very_long_pic.jpg";
 
         private Bitmap bitmap1;
         private float CurrentScale;

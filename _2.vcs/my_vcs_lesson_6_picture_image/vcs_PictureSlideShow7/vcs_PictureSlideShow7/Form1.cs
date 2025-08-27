@@ -57,7 +57,7 @@ namespace vcs_PictureSlideShow7
             try
             {
                 bool flag = false;
-                string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
+                string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
 
                 DirectoryInfo di = new DirectoryInfo(foldername);
                 FileInfo[] fi = di.GetFiles();

@@ -434,7 +434,7 @@ namespace vcs_ListView1
             listView1.Columns.Add(colHead);
 
             //建立列資料
-            string foldername = @"C:\_git\vcs\_1.data\______test_files1";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1";
 
             try
             {
@@ -497,13 +497,13 @@ namespace vcs_ListView1
             listView1.View = View.LargeIcon;
 
             var list = new List<string>();
-            list.Add(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_01.jpg");
-            list.Add(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_02.jpg");
-            list.Add(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_03.jpg");
-            list.Add(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_04.jpg");
-            list.Add(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_05.jpg");
-            list.Add(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_06.jpg");
-            list.Add(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_07.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_01.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_02.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_03.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_04.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_05.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_06.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_07.jpg");
 
             ImageList imglist = new ImageList();
             imglist.ImageSize = new Size(200, 200);
@@ -611,7 +611,7 @@ namespace vcs_ListView1
             int start_index = 8;
             string base_name = "ims_file";
 
-            string dirname = @"C:\_git\vcs\_1.data\______test_files1\_case1";
+            string dirname = @"D:\_git\vcs\_1.data\______test_files1\_case1";
 
             string[] filenames = Directory.GetFiles(dirname);
             if (filenames.Length == 0)
@@ -649,7 +649,7 @@ namespace vcs_ListView1
 
         void rename_filename()
         {
-            string dirname = @"C:\_git\vcs\_1.data\______test_files1\_case1";
+            string dirname = @"D:\_git\vcs\_1.data\______test_files1\_case1";
             foreach (ListViewItem item in listView1.Items)
             {
                 string old_name = Path.Combine(dirname, item.Text);
@@ -718,10 +718,10 @@ namespace vcs_ListView1
             ImageList imageListLarge = new ImageList();
 
             // Initialize the ImageList objects with bitmaps.
-            imageListSmall.Images.Add(Bitmap.FromFile(@"C:\_git\vcs\_1.data\______test_files1\_case1\pic1.jpg"));
-            imageListSmall.Images.Add(Bitmap.FromFile(@"C:\_git\vcs\_1.data\______test_files1\_case1\pic2.jpg"));
-            imageListSmall.Images.Add(Bitmap.FromFile(@"C:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg"));
-            imageListSmall.Images.Add(Bitmap.FromFile(@"C:\_git\vcs\_1.data\______test_files1\_case1\pic4.jpg"));
+            imageListSmall.Images.Add(Bitmap.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic1.jpg"));
+            imageListSmall.Images.Add(Bitmap.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic2.jpg"));
+            imageListSmall.Images.Add(Bitmap.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg"));
+            imageListSmall.Images.Add(Bitmap.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic4.jpg"));
 
             //Assign the ImageList objects to the ListView.
             listView1.LargeImageList = imageListLarge;
@@ -742,7 +742,7 @@ namespace vcs_ListView1
             listView1.Columns.Add("文件名稱", 150, HorizontalAlignment.Left);//向listView1中添加「文件名稱」列
             listView1.Columns.Add("創建時間", 200, HorizontalAlignment.Left);//向listView1中添加「創建時間」列
 
-            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird";
 
             foreach (String fileName in Directory.GetFiles(foldername)) //循環遍歷指定資料夾的內容
             {

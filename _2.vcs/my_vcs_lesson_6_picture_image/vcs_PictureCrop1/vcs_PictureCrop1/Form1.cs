@@ -15,7 +15,7 @@ namespace vcs_PictureCrop1
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
         private bool flag_select_area = false;  //開始選取的旗標
         private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
@@ -100,7 +100,7 @@ namespace vcs_PictureCrop1
             //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
             openFileDialog1.Multiselect = false;    //單選
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {

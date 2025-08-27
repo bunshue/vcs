@@ -26,13 +26,13 @@ namespace FaceDetection
         private void button1_Click(object sender, EventArgs e)
         {
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_image_processing\lena_color.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_image_processing\lena_color.jpg";
 
             Image<Bgr, Byte> image = new Image<Bgr, byte>(filename); //Read the files as an 8-bit Bgr image  
 
             Stopwatch watch;
-            String faceFileName = @"C:\_git\vcs\_1.data\______test_files1\_emgu\haarcascades\haarcascade_frontalface_default.xml";
-            String eyeFileName = @"C:\_git\vcs\_1.data\______test_files1\_emgu\haarcascades\haarcascade_eye.xml";
+            String faceFileName = @"D:\_git\vcs\_1.data\______test_files1\_emgu\haarcascades\haarcascade_frontalface_default.xml";
+            String eyeFileName = @"D:\_git\vcs\_1.data\______test_files1\_emgu\haarcascades\haarcascade_eye.xml";
 
             if (GpuInvoke.HasCuda)
             {

@@ -35,7 +35,7 @@ namespace vcs_PictureMagnify1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             img = new Bitmap(filename);
 
             this.ClientSize = new Size(img.Width, img.Height);// 調整視窗客戶區寬高

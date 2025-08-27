@@ -93,7 +93,7 @@ namespace vcs_Draw_GraphicsPath
             ButtonPath = GetRoundedRectPath(rect, 70);
             this.button13.Region = new Region(ButtonPath);
 
-            Bitmap bmp = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\__pic\BMW.jfif");
+            Bitmap bmp = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\BMW.jfif");
 
             button13.BackgroundImageLayout = ImageLayout.Zoom;
             button13.BackgroundImage = bmp;
@@ -618,7 +618,7 @@ namespace vcs_Draw_GraphicsPath
         {
             //不規則圖形裁剪圖片
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename, false);
             int W = bitmap1.Width;
             int H = bitmap1.Height;
@@ -794,8 +794,8 @@ namespace vcs_Draw_GraphicsPath
         {
             int diameter = radius;
             Rectangle arcRect = new Rectangle(rect.Location, new Size(diameter, diameter));
-            GraphicsPath path = new GraphicsPath();
-            //   左上角  
+            GraphicsPathath = new GraphicsPath();
+           //   左上角  
             path.AddArc(arcRect, 180, 90);
             //   右上角  
             arcRect.X = rect.Right - diameter;

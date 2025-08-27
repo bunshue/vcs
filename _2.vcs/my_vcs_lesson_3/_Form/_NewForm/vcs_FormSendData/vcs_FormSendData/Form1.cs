@@ -182,7 +182,7 @@ namespace vcs_FormSendData
         {
             //開啟子表單並傳一張圖過去
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 
             Form6 f6 = new Form6();

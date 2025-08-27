@@ -29,10 +29,10 @@ namespace vcs_ImageProcessing1
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\pic_256X100.bmp";
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_map_city/global.c.gif";   //超大圖, 要很久
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
+        //string filename = @"D:\_git\vcs\_1.data\______test_files1\pic_256X100.bmp";
+        //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_map_city/global.c.gif";   //超大圖, 要很久
+        //string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
         //delay 10000 約 10秒
         //C# 不lag的延遲時間
@@ -164,9 +164,9 @@ namespace vcs_ImageProcessing1
             richTextBox1.Text += "各種影像處理速度比較 ST\n";
             Application.DoEvents();
 
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_image_processing\pic6_children2.png";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_image_processing\pic6_children2.png";
 
             richTextBox1.Text += "方法1: 像素法\n";
             sw.Reset();
@@ -212,7 +212,7 @@ namespace vcs_ImageProcessing1
 
             richTextBox1.Text += "像素法\n";
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
             Bitmap bmp = image_process_pixel1(filename);
             pictureBox1.Image = bmp;
         }
@@ -249,7 +249,7 @@ namespace vcs_ImageProcessing1
         private void button2_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "內存法\n";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
             Bitmap bmp = image_process_memory1(filename);
             pictureBox1.Image = bmp;
         }
@@ -326,8 +326,8 @@ namespace vcs_ImageProcessing1
         private void button3_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "指針法3\n";
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_image_processing\pic6_children2.png";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_image_processing\pic6_children2.png";
             Bitmap bmp = image_process_pointer1(filename);
             pictureBox1.Image = bmp;
         }
@@ -419,7 +419,7 @@ namespace vcs_ImageProcessing1
         {
             //Marshal.Copy 2 偽色彩
 
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\fakecolor.jpg";    //偽色彩處理
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\fakecolor.jpg";    //偽色彩處理
 
             //彩色轉灰階
 
@@ -689,8 +689,8 @@ namespace vcs_ImageProcessing1
             //MemoryStream 2
             richTextBox1.Text += "圖片 轉 拜列\n";
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\pic_256X10.bmp";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\pic_256X10.bmp";
             Image image = Image.FromFile(filename);//檔案 轉 Image
 
             //方法一
@@ -773,7 +773,7 @@ namespace vcs_ImageProcessing1
             //圖片 Bitmap MemoryStream 拜列 轉換
 
             //從圖片
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\pic_256X10.bmp";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\pic_256X10.bmp";
             richTextBox1.Text += "圖片檔案 轉 Bitmap\n";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 
@@ -798,8 +798,8 @@ namespace vcs_ImageProcessing1
         {
             //測試
 
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\pic_256X100.bmp";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_image_processing\pic6_children2.png";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\pic_256X100.bmp";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_image_processing\pic6_children2.png";
 
             Bitmap bmp = new Bitmap(filename);
             int W = bmp.Width;

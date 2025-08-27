@@ -165,7 +165,7 @@ namespace vcs_AForge_ShapeChecker
 
         private void button5_Click(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\";
+            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1\";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 try

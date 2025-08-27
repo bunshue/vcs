@@ -30,7 +30,7 @@ namespace vcs_RichTextBox9
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();//聲明一個打開文件對話框的對象
-            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\__RW\_rtf";  //對話方塊的初始目錄
+            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf";  //對話方塊的初始目錄
             openFileDialog1.Filter = "RTF文件(*.RTF)|*.RTF";//設置打開文件的格式
             if (openFileDialog1.ShowDialog() == DialogResult.OK)//當單擊「打開」按鈕時
             {

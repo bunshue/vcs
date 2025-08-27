@@ -19,7 +19,7 @@ namespace TrafficSignRecognition
 
         public StopSignDetector()
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_emgu\stop-sign-model.png";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_emgu\stop-sign-model.png";
 
             _detector = new SURFDetector(500, false);
             using (Image<Bgr, Byte> stopSignModel = new Image<Bgr, Byte>(filename))

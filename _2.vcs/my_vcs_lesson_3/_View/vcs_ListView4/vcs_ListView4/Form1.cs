@@ -33,7 +33,7 @@ namespace vcs_ListView4
             listView1.Columns.Add("創建時間", 200, HorizontalAlignment.Left);//在listView1中添加「創建時間」列
 
             //撈出一層
-            string foldername = @"C:\_git\vcs\_1.data\______test_files3\DrAP_test";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files3\DrAP_test";
             foreach (String fileName in Directory.GetFiles(foldername))
             {
                 richTextBox1.Text += fileName + "\n";

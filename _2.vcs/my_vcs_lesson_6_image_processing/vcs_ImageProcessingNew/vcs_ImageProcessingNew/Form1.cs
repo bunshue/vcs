@@ -15,8 +15,8 @@ namespace vcs_ImageProcessingNew
 {
     public partial class Form1 : Form
     {
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\ims_image_20230921_155302.bmp";
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
+        //string filename = @"D:\_git\vcs\_1.data\______test_files1\ims_image_20230921_155302.bmp";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
 
         private Bitmap bitmap1 = null;  //原圖
         //private Bitmap bitmap2 = null;  //從原圖修改過的

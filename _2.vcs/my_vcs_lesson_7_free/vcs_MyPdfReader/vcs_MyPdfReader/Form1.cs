@@ -397,7 +397,7 @@ namespace vcs_MyPdfReader
             /*
             richTextBox1.Text += "C#擷取pdf文檔的頁數\n";
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
 
             int pages = GetPDFofPageCount(filename);
             richTextBox1.Text += "檔案 : " + filename + "\n";

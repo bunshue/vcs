@@ -21,7 +21,7 @@ namespace vcs_PictureBox
         private void Form1_Load(object sender, EventArgs e)
         {
             //讀取圖檔
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
         }
 
@@ -46,7 +46,7 @@ namespace vcs_PictureBox
             // Allow the user to select multiple images.
             openFileDialog1.Multiselect = true;
             openFileDialog1.Title = "My Image Browser";
-            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\";
+            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1\";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {

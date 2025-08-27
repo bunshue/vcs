@@ -24,7 +24,7 @@ namespace vcs_ShowPicture4
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             //得到原始大小的圖像
             SourceBitmap = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式

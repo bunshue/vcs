@@ -48,7 +48,7 @@ namespace OpenCvSharp4a
         {
             //Canny邊緣檢測
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
             //例1
             Mat src = new Mat(filename, ImreadModes.Grayscale);
@@ -85,8 +85,8 @@ namespace OpenCvSharp4a
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery\taitung1.jpg";
-            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery\taitung2.jpg";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery\taitung1.jpg";
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery\taitung2.jpg";
 
             Mat img1 = new Mat(filename1, ImreadModes.Grayscale);
             Mat img2 = new Mat(filename2, ImreadModes.Grayscale);

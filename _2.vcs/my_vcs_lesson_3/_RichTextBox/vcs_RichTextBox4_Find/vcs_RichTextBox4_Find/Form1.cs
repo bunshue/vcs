@@ -185,7 +185,7 @@ namespace vcs_RichTextBox4_Find
             //讀取純文字檔到richTextBox裏
             try
             {
-                richTextBox1.LoadFile(@"C:\_git\vcs\_1.data\______test_files1\article.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
+                richTextBox1.LoadFile(@"D:\_git\vcs\_1.data\______test_files1\article.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
             }
             catch (System.IO.FileNotFoundException)
             {

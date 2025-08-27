@@ -36,7 +36,7 @@ namespace vcs_Screensaver2
             this.CenterToScreen();       //將表單置中顯示
 
             //讀取圖檔
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             this.BackgroundImage = Image.FromFile(filename);
             //this.ClientSize = this.BackgroundImage.Size;
             this.ClientSize = new Size(this.BackgroundImage.Size.Width * 1 / 1, this.BackgroundImage.Size.Height * 1 / 1);  //調整圖片大小

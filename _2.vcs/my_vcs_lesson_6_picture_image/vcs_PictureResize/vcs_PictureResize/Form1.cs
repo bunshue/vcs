@@ -15,7 +15,7 @@ namespace vcs_PictureResize
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
         int flag_operation_mode = 1;    //0 : 空白模式, 1 : 圖片模式
 
@@ -40,9 +40,9 @@ namespace vcs_PictureResize
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBox1.Text = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery";
+            textBox1.Text = @"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery";
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
@@ -72,7 +72,7 @@ namespace vcs_PictureResize
 
             richTextBox1.Text += "放大倍率 : " + (value * 100 / 10).ToString() + " %\n";
 
-            filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename);
             pictureBox1.Image = image;
 
@@ -101,7 +101,7 @@ namespace vcs_PictureResize
             //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            //openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
+            //openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
             openFileDialog1.InitialDirectory = @"C:\Users\070601\Desktop\ims2\";  //預設開啟的路徑
             openFileDialog1.Multiselect = false;    //單選
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -445,7 +445,7 @@ namespace vcs_PictureResize
 
             richTextBox1.Text += "放大倍率 : " + (value * 100 / 10).ToString() + " %\n";
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename);
 
             int W1 = image.Width;

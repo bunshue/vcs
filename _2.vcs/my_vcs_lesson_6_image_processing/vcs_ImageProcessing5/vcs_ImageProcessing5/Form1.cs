@@ -15,7 +15,7 @@ namespace vcs_ImageProcessing5
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
         Stopwatch sw = new Stopwatch();
 
@@ -453,7 +453,7 @@ namespace vcs_ImageProcessing5
 
         private void DisplayWarpedImage(Bitmap32.WarpOperations warp_op)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             //Bitmap bitmap1 = new Bitmap(filename);
 
             Bitmap bm = new Bitmap(filename);

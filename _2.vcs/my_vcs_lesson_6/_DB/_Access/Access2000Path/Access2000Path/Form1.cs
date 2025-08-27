@@ -13,7 +13,7 @@ namespace Access2000Path
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\db_09.mdb";
+        string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\db_09.mdb";
 
         OleDbConnection Olecon;
         OleDbDataAdapter OleDat;

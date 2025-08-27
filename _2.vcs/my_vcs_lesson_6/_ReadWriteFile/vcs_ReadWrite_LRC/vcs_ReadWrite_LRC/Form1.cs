@@ -16,7 +16,7 @@ namespace vcs_ReadWrite_LRC
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_lrc\04-三月雪(&黃妃).lrc";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_lrc\04-三月雪(&黃妃).lrc";
 
         public Form1()
         {

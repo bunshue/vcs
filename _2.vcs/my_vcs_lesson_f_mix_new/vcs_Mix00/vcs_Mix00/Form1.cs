@@ -53,7 +53,7 @@ namespace vcs_Mix00
             //Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
             Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
@@ -141,7 +141,7 @@ namespace vcs_Mix00
             show_button_text(sender);
 
             //從檔案完整路徑分離出資料夾,檔案名稱,副檔名
-            string full_filename = @"C:\_git\vcs\_1.data\______test_files1\_case1\_case1a\_case1aa\eula.3081a.txt";
+            string full_filename = @"D:\_git\vcs\_1.data\______test_files1\_case1\_case1a\_case1aa\eula.3081a.txt";
             //取得資料夾路徑
             string foldername = full_filename.Substring(0, full_filename.LastIndexOf("\\") + 1);
             //取得檔案名稱
@@ -189,7 +189,7 @@ namespace vcs_Mix00
             //動態驗證碼變成靜態
             //將一個gif拆成多圖
 
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_gif\run.gif";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_gif\run.gif";
 
             Image image1 = Image.FromFile(filename1);
             FrameDimension frameDimension = new FrameDimension(image1.FrameDimensionsList[0]);
@@ -263,8 +263,8 @@ namespace vcs_Mix00
 
             //兩圖檔疊合
 
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_03.jpg";
-            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_01.jpg";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_03.jpg";
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_01.jpg";
 
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename1);	//Image.FromFile出來的是Image格式
             Bitmap bitmap2 = (Bitmap)Image.FromFile(filename2);	//Image.FromFile出來的是Image格式
@@ -398,7 +398,7 @@ namespace vcs_Mix00
 
             //Image Cut
 
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
             string mesg = "lion-mouse";
 
@@ -621,7 +621,7 @@ namespace vcs_Mix00
 
         private void button13_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             richTextBox1.Text += "檔案 : " + filename + "\n";
 
             string strOne = System.IO.Path.GetFileNameWithoutExtension(filename);
@@ -809,7 +809,7 @@ namespace vcs_Mix00
                     }
                 }
                 line = sr.ReadLine();
-            }
+           }
 
             ArrayList keysList = new ArrayList(ht.Keys);
             //對Hashtable中的Keys按字母序排列
@@ -840,7 +840,7 @@ namespace vcs_Mix00
         private void button15_Click(object sender, EventArgs e)
         {
             //統計英文文本中的單詞數並排序
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\english_text.txt";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\english_text.txt";
             StatisticsWords(filename);
         }
 
@@ -852,15 +852,15 @@ namespace vcs_Mix00
             string filename = string.Empty;
             string result = string.Empty;
 
-            filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             result = ImageComparer.GetImageHashCode(filename);
             richTextBox1.Text += result + "\n";
 
-            filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             result = ImageComparer.GetImageHashCode(filename);
             richTextBox1.Text += result + "\n";
 
-            filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.bmp";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.bmp";
             result = ImageComparer.GetImageHashCode(filename);
             richTextBox1.Text += result + "\n";
         }
@@ -869,7 +869,7 @@ namespace vcs_Mix00
         {
             //檔名處理
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             richTextBox1.Text += "全檔名 : " + filename + "\n";
 

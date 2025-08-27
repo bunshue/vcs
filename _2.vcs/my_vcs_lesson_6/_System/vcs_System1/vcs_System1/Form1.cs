@@ -576,7 +576,7 @@ namespace vcs_System1
 
             richTextBox1.Text += "取得系統目前目錄 : " + Environment.CurrentDirectory + "\n";
 
-            string foldername = @"C:\_git\vcs\_1.data\______test_files1";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1";
 
             richTextBox1.Text += "設定新的系統目前目錄\n";
             Environment.CurrentDirectory = foldername;
@@ -695,8 +695,8 @@ namespace vcs_System1
 
         private void button18_Click(object sender, EventArgs e)
         {
-            //Environment 類別
-            richTextBox1.Text += "Environment 類別\n";
+            Environment 類別
+            rihTextBox1.Text += "Environment 類別\n";
 
             richTextBox1.Text += "處理序的命令列：" + Environment.CommandLine + "\n";
             richTextBox1.Text += "工作目錄的完整路徑：" + Environment.CurrentDirectory + "\n";
@@ -1091,7 +1091,7 @@ namespace vcs_System1
         // Save the current settings.
         private void SaveSettings()
         {
-            string dir_name = @"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony2";
+            string dir_name = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony2";
 
             Properties.Settings.Default.PictureDirectory = dir_name;
             Properties.Settings.Default.UpdateRegistry = true;

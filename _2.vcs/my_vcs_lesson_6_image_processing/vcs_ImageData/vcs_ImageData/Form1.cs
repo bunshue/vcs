@@ -29,7 +29,7 @@ namespace vcs_ImageData
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             /* old
             Image img = Image.FromFile(filename);

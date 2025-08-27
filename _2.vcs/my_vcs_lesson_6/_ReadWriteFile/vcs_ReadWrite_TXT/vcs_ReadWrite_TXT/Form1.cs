@@ -37,7 +37,7 @@ namespace vcs_ReadWrite_TXT
         private void button0_Click(object sender, EventArgs e)
         {
             //ReadAllLines 1
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\article.txt";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\article.txt";
 
             StringBuilder sb = new StringBuilder();
 
@@ -52,7 +52,7 @@ namespace vcs_ReadWrite_TXT
 
             //ReadAllLines 2
             //將純文字檔拆成一行一行的字串陣列, 可以去除前後空白
-            filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\poem.txt";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\poem.txt";
             string[] patterns;
             patterns = File.ReadAllLines(filename).Select(i => i.Trim()).Where(i => i != string.Empty).ToArray();
             int len = patterns.Length;
@@ -65,7 +65,7 @@ namespace vcs_ReadWrite_TXT
 
             //ReadAllLines 3
             //開檔ReadAllLines存檔
-            filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
             // Read the whole file to a string array
             string[] input_lines = File.ReadAllLines(filename, Encoding.Default);
 
@@ -114,7 +114,7 @@ namespace vcs_ReadWrite_TXT
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
             try
             {
                 richTextBox1.LoadFile(filename, RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
@@ -127,7 +127,7 @@ namespace vcs_ReadWrite_TXT
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
             //法一
             // 運用 ReadAllText 方法 (String, Encoding) ，其中 Encoding 針對您txt檔案的編碼做變更，讀出的資料才不會有亂碼
             //richTextBox1.Text = System.IO.File.ReadAllText(filename, Encoding.Default);
@@ -146,25 +146,25 @@ namespace vcs_ReadWrite_TXT
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__text\Compressor.c";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\Compressor.c";
             read_text_file(filename, ENCODING_1);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__text\sc\襟裳岬.txt";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\sc\襟裳岬.txt";
             read_text_file(filename, ENCODING_2);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__text\jap\饩Ⓚ丗钡冦冦葢轿瘅.txt";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\jap\饩Ⓚ丗钡冦冦葢轿瘅.txt";
             read_text_file(filename, ENCODING_3);
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__text\Form1.cs.txt";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\Form1.cs.txt";
             read_text_file(filename, ENCODING_4);
         }
 
@@ -208,7 +208,7 @@ namespace vcs_ReadWrite_TXT
 
         private void button8_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
 
             //創建一個讀取器
             StreamReader sr = new StreamReader(filename);
@@ -430,31 +430,31 @@ namespace vcs_ReadWrite_TXT
             string s;
 
             richTextBox1.Text += "用預設編碼開啟\n";
-            filename = @"C:\_git\vcs\_1.data\______test_files1\__text\Compressor.c";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\Compressor.c";
             b = File.ReadAllBytes(filename);
             s = Encoding.Default.GetString(b);
             richTextBox1.Text += s + "\n";
 
             richTextBox1.Text += "用Big5編碼開啟\n";
-            filename = @"C:\_git\vcs\_1.data\______test_files1\__text\Compressor.c";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\Compressor.c";
             b = File.ReadAllBytes(filename);
             s = Encoding.GetEncoding("big5").GetString(b);
             richTextBox1.Text += s + "\n";
 
             richTextBox1.Text += "用gb2312編碼開啟\n";
-            filename = @"C:\_git\vcs\_1.data\______test_files1\__text\sc\001川の流れのように.txt";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\sc\001川の流れのように.txt";
             b = File.ReadAllBytes(filename);
             s = Encoding.GetEncoding("gb2312").GetString(b);
             richTextBox1.Text += s + "\n";
 
             richTextBox1.Text += "用shift_jis編碼開啟\n";
-            filename = @"C:\_git\vcs\_1.data\______test_files1\__text\jap\饩Ⓚ丗钡冦冦葢轿瘅.txt";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\jap\饩Ⓚ丗钡冦冦葢轿瘅.txt";
             b = File.ReadAllBytes(filename);
             s = Encoding.GetEncoding("shift_jis").GetString(b);
             richTextBox1.Text += s + "\n";
 
             richTextBox1.Text += "用utf-8編碼開啟\n";
-            filename = @"C:\_git\vcs\_1.data\______test_files1\__text\Form1.cs.txt";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\Form1.cs.txt";
             b = File.ReadAllBytes(filename);
             s = Encoding.UTF8.GetString(b);
             richTextBox1.Text += s + "\n";
@@ -475,7 +475,7 @@ namespace vcs_ReadWrite_TXT
         private void button18_Click(object sender, EventArgs e)
         {
             //ReadLine 1
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
             int i;
 
             richTextBox1.Text += "\n檔案 : " + filename + "\t內容\n";
@@ -510,7 +510,7 @@ namespace vcs_ReadWrite_TXT
             //ReadLine 3
 
             //一行一行讀取文字檔
-            filename = @"C:\_git\vcs\_1.data\______test_files1\_case1\_case1a\_case1aa\eula.3081a.txt";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\_case1\_case1a\_case1aa\eula.3081a.txt";
 
             StreamReader SReader = new StreamReader(filename, Encoding.Default);
             string strLine = string.Empty;
@@ -523,7 +523,7 @@ namespace vcs_ReadWrite_TXT
 
             //ReadLine 4
 
-            filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
             try
             {
                 StreamReader sr = new StreamReader(filename, Encoding.Default);
@@ -563,7 +563,7 @@ namespace vcs_ReadWrite_TXT
             //文字檔的整行寫入與讀出
 
             //寫入文字檔 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\txt_rw.txt";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\txt_rw.txt";
 
             //StreamWriter sw = new StreamWriter(filename); // true 是資料可附加至檔案, open write
             StreamWriter sw = new StreamWriter(filename, true); // true 是資料可附加至檔案 open write append
@@ -614,11 +614,11 @@ namespace vcs_ReadWrite_TXT
         private void button21_Click(object sender, EventArgs e)
         {
             //第一個檔案
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\compare\aaaa.txt";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\compare\aaaa.txt";
             //第二個檔案
-            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\compare\bbbb.txt";
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\compare\bbbb.txt";
             //第三個檔案
-            string filename3 = @"C:\_git\vcs\_1.data\______test_files1\compare\ssss.txt";
+            string filename3 = @"D:\_git\vcs\_1.data\______test_files1\compare\ssss.txt";
 
             StreamReader sr1;
             StreamReader sr2;
@@ -742,7 +742,7 @@ namespace vcs_ReadWrite_TXT
         {
             //檔案置換文字
 
-            string filename = @"C:\_git\vcs\_3.cuda\Samples\5_Domain_Specific\binomialOptions\binomialOptions_vs2022.vcxproj";
+            string filename = @"D:\_git\vcs\_3.cuda\Samples\5_Domain_Specific\binomialOptions\binomialOptions_vs2022.vcxproj";
             string pattern1 = @"CUDAPropsPath)\CUDA 11.6.";
             string pattern2 = @"CUDAPropsPath)\CUDA 11.7.";
 

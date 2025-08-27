@@ -23,7 +23,7 @@ namespace vcs_SelectionRectangle
 
         //方法三
         Rectangle selectionRec3 = new Rectangle();
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
         private Bitmap bitmap3 = null;
 
         public Form1()

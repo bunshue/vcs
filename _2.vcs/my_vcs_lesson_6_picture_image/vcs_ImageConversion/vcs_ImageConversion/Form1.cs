@@ -59,7 +59,7 @@ namespace vcs_ImageConversion
 
             //選取檔案
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
             openFileDialog1.Filter = "bmp文件(*.bmp)|*.bmp|gif文件(*.gif)|*.gif|Jpeg文件	(*.jpg)|*.jpg";	//設置當前選定篩選器字符串以決定對話框中“文檔類型”選項
             openFileDialog1.FilterIndex = 3;            //設置對話框中當前選定篩選器的索引, 預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = false;   //關閉對話框，還原當前的目錄
@@ -226,7 +226,7 @@ namespace vcs_ImageConversion
 /*
             //bmp2jpg
             Bitmap bitmap;
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\bear.bmp";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\bear.bmp";
             bitmap = new Bitmap(filename1);
             pictureBox1.Image = bitmap;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -242,7 +242,7 @@ namespace vcs_ImageConversion
 
             //jpg2bmp
             Bitmap bitmap;
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             bitmap = new Bitmap(filename1);
             pictureBox1.Image = bitmap;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -257,7 +257,7 @@ namespace vcs_ImageConversion
 
             //ico2bmp
             Bitmap bitmap;
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\_icon\唐.ico";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\_icon\唐.ico";
             bitmap = new Bitmap(filename1);
             pictureBox1.Image = bitmap;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;

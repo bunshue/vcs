@@ -20,7 +20,7 @@ namespace vcs_ReadWrite_PNG
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_png\vcs_ReadWrite_PNG.png";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_png\vcs_ReadWrite_PNG.png";
             FileStream fs = File.OpenRead(filename); //OpenRead[二進位讀檔]
             int filelength = 0;
             filelength = (int)fs.Length; //獲得檔長度

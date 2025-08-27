@@ -342,7 +342,7 @@ namespace vcs_WinAPI
 
         private void button7_Click(object sender, EventArgs e)
         {
-            string filename_long = @"C:\_git\vcs\_1.data\______test_files1\__RW\_word\word_for_vcs_ReadWrite_WORD.doc";
+            string filename_long = @"D:\_git\vcs\_1.data\______test_files1\__RW\_word\word_for_vcs_ReadWrite_WORD.doc";
             StringBuilder filename_short = new System.Text.StringBuilder(256);//创建StringBuilder对象
             GetShortPathName(filename_long, filename_short, 256);//调用API函数转换成短文件名
             richTextBox1.Text += "長檔名：" + filename_long + "\n";
@@ -445,7 +445,7 @@ namespace vcs_WinAPI
         private void button9_Click(object sender, EventArgs e)
         {
             //取得mp3播放長度
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\16.監獄風雲.mp3";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\16.監獄風雲.mp3";
 
             richTextBox1.Text += "filename = " + filename + "\n";
             richTextBox1.Text += "播放時間 : " + GetFileTime(LongTime(filename)) + "\n";

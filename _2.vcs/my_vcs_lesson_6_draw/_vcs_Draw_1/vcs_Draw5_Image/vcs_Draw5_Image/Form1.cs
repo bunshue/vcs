@@ -19,7 +19,7 @@ namespace vcs_Draw5_Image
         SolidBrush sb;
         Bitmap bitmap1;
 
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
         public Form1()
         {
@@ -281,7 +281,7 @@ namespace vcs_Draw5_Image
         private void button3_Click(object sender, EventArgs e)
         {
             //改變Bitmap大小
-            //Bitmap bmp = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\ims_image.bmp", true);
+            //Bitmap bmp = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\ims_image.bmp", true);
             Bitmap bmp = new Bitmap(filename, true);
             Bitmap bmp_zoom;
 
@@ -390,7 +390,7 @@ namespace vcs_Draw5_Image
         private void button6_Click(object sender, EventArgs e)
         {
             //取得圖片的一部分
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             int sx = 0;
             int sy = 0;
@@ -409,7 +409,7 @@ namespace vcs_Draw5_Image
         {
             //DrawImage
             //在指定位置畫上一圖
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\_貓咪\cat2.png";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_貓咪\cat2.png";
 
             Image image = Image.FromFile(@filename);
 

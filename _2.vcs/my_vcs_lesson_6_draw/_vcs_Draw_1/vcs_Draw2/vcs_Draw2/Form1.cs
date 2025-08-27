@@ -47,7 +47,7 @@ namespace vcs_Draw2
                 p = new Pen(Color.Red, 10);     //default pen
                 pictureBox1.Location = new Point(50, 50);
 
-                TextureBrush tb = new TextureBrush(new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\picture1.jpg"));
+                TextureBrush tb = new TextureBrush(new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg"));
                 p = new Pen(tb, 10);
                 richTextBox1.Text += "TextureBrush\n";
             }
@@ -558,7 +558,7 @@ namespace vcs_Draw2
             g.FillEllipse(hb, 450, 150, 200, 100);
 
             //紋理筆刷
-            Image myImage = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\bear.jpg");
+            Image myImage = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\bear.jpg");
             TextureBrush tb = new TextureBrush(myImage);
             g.FillEllipse(tb, 50, 250, 300, 100);
 
@@ -681,7 +681,7 @@ namespace vcs_Draw2
         {
             //使用不透明和半透明筆刷繪製
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             bitmap1 = new Bitmap(filename);
             g = Graphics.FromImage(bitmap1);
@@ -705,7 +705,7 @@ namespace vcs_Draw2
 
         private void button7_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
 
             //使用不透明和半透明筆刷繪製
@@ -855,9 +855,9 @@ namespace vcs_Draw2
             pic.Image = bm;
             pan.Controls.Add(pic);
         }
-        //HatchStyles SP
+      //HatchStyles SP
 
-        private void button13_Click(object sender, EventArgs e)
+       private void button13_Click(object sender, EventArgs e)
         {
             //直線的開端與末端帽緣樣式
             int x_st = 50;
@@ -1240,7 +1240,7 @@ namespace vcs_Draw2
                 p = new Pen(Color.Red, 10);     //default pen
                 pictureBox1.Location = new Point(50, 50);
 
-                TextureBrush tb = new TextureBrush(new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\picture1.jpg"));
+                TextureBrush tb = new TextureBrush(new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg"));
                 p = new Pen(tb, 10);
                 richTextBox1.Text += "TextureBrush\n";
             }

@@ -86,7 +86,7 @@ namespace vcs_Assembly
             //讀取exe版本號
             //讀取exe版本號
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_material\_dll\AForge.Video.dll";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_material\_dll\AForge.Video.dll";
 
             Assembly currentAssembly = Assembly.LoadFile(filename);
             //Assembly updatedAssembly = Assembly.LoadFile(updatedAssemblyPath);

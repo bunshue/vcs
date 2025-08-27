@@ -146,7 +146,7 @@ namespace vcs_ReadWrite_XML2
         //XML操作0
         private void button00_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\person.xml";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\person.xml";
             //開啟一XML文件檔並顯示在DataGridView上
             //使用DataSet讀XML文件
 
@@ -180,7 +180,7 @@ namespace vcs_ReadWrite_XML2
         private void button10_Click(object sender, EventArgs e)
         {
             //開啟XML檔案到TreeView 1
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML6.xml";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML6.xml";
             LoadTreeViewFromXmlFile(filename, treeView1);
         }
 
@@ -218,8 +218,8 @@ namespace vcs_ReadWrite_XML2
         private void button11_Click(object sender, EventArgs e)
         {
             //開啟XML檔案到TreeView 2
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\NexusPoint.xml";
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML6.xml";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\NexusPoint.xml";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML6.xml";
 
             XmlDocument NexusDocument = new XmlDataDocument();//定義一個XML文檔對像
             NexusDocument.Load(filename);//加載XML文件
@@ -264,7 +264,7 @@ namespace vcs_ReadWrite_XML2
             //讀取XML
             //C#讀取XML中元素和屬性值的實現代碼
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\school.xml";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\school.xml";
             XmlDocument doc = new XmlDocument();
             doc.Load(filename);
 
@@ -370,7 +370,7 @@ namespace vcs_ReadWrite_XML2
         private void button21_Click(object sender, EventArgs e)
         {
             //讀取XML至TreeView
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\school.xml";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\school.xml";
 
             //讀取Xml文件   this.txt_XmlPath.Text是文件路徑       
             XDocument xmlfile = XDocument.Load(filename);
@@ -413,7 +413,7 @@ namespace vcs_ReadWrite_XML2
         {
             //讀取XML至TreeView b
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\student.xml";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\student.xml";
 
             //使用xDocument来读取xml文件
             XDocument document = XDocument.Load(filename);

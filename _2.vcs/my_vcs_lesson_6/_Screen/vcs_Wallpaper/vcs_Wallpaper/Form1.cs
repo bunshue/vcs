@@ -28,7 +28,7 @@ namespace vcs_Wallpaper
             InitializeComponent();
         }
 
-        string dir_name = @"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony2";
+        string dir_name = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony2";
 
         // The list of files we will pick from.
         private List<string> FileNames = new List<string>();
@@ -152,7 +152,7 @@ namespace vcs_Wallpaper
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             DisplayPicture(filename, true);     // Display the picture on the desktop.
 
