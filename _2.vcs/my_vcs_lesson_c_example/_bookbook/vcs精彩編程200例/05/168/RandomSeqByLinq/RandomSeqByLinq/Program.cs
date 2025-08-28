@@ -9,8 +9,8 @@ namespace RandomSeqByLinq
     {
         static void Main(string[] args)
         {
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf";
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo_log.ldf";   another
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo_log.ldf";   another
             //像是沒有用到資料庫
 
             Random rand = new Random();//创建一个随机数生成器

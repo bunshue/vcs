@@ -14,7 +14,7 @@ namespace vcs_MyPlayer5_MCI
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";
         classMci mci = new classMci();
 
         public Form1()

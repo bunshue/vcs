@@ -36,7 +36,7 @@ namespace vcs_Spire_PDFViewer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
 
             Form f2 = new Form2(filename);
             f2.Show();

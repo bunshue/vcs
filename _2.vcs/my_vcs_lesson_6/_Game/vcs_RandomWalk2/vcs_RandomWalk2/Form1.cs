@@ -86,23 +86,23 @@ namespace vcs_RandomWalk2
             string filename = string.Empty;
             if (direction == 0)
             {
-                filename = @"C:\_git\vcs\_2.vcs\______test_files1\__pic\_car\car_potato.right.jpg";
+                filename = @"D:\_git\vcs\_2.vcs\______test_files1\__pic\_car\car_potato.right.jpg";
             }
             else if (direction == 1)
             {
-                filename = @"C:\_git\vcs\_2.vcs\______test_files1\__pic\_car\car_potato.down.jpg";
+                filename = @"D:\_git\vcs\_2.vcs\______test_files1\__pic\_car\car_potato.down.jpg";
             }
             else if (direction == 2)
             {
-                filename = @"C:\_git\vcs\_2.vcs\______test_files1\__pic\_car\car_potato.left.jpg";
+                filename = @"D:\_git\vcs\_2.vcs\______test_files1\__pic\_car\car_potato.left.jpg";
             }
             else if (direction == 3)
             {
-                filename = @"C:\_git\vcs\_2.vcs\______test_files1\__pic\_car\car_potato.up.jpg";
+                filename = @"D:\_git\vcs\_2.vcs\______test_files1\__pic\_car\car_potato.up.jpg";
             }
             else
             {
-                filename = @"C:\_git\vcs\_2.vcs\______test_files1\__pic\_car\car_potato.right.jpg";
+                filename = @"D:\_git\vcs\_2.vcs\______test_files1\__pic\_car\car_potato.right.jpg";
             }
 
             GraphicsUnit units = GraphicsUnit.Pixel;

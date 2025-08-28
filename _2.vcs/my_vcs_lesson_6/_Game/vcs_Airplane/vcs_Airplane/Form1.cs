@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,7 +13,7 @@ namespace vcs_Airplane
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_game\airplane.bmp";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_game\airplane.bmp";
 
         int x_st;
         int y_st;

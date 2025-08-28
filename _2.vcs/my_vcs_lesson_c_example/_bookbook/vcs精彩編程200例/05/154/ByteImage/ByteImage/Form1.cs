@@ -14,8 +14,8 @@ namespace ByteImage
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09_Data.MDF";
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09_Log.LDF";   another
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09_Data.MDF";
+        //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09_Log.LDF";   another
 
         public Form1()
         {

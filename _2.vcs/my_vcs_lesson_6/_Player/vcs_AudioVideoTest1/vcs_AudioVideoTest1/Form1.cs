@@ -76,11 +76,11 @@ namespace vcs_AudioVideoTest1
 
         private void button0_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_wav\chimes.wav";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_wav\chimes.wav";
 
             //法一
             //直接使用 SoundPlayer 類別 播放.wav檔
-            //SoundPlayer sp = new SoundPlayer(@"C:\_git\vcs\_1.data\______test_files1\_wav\WindowsShutdown.wav");
+            //SoundPlayer sp = new SoundPlayer(@"D:\_git\vcs\_1.data\______test_files1\_wav\WindowsShutdown.wav");
 
             //法二, 直接使用 SoundPlayer 類別
             //SoundPlayer sp = new SoundPlayer();
@@ -88,7 +88,7 @@ namespace vcs_AudioVideoTest1
 
             //法三
             //using System.Media;
-            //SoundPlayer sp = new SoundPlayer(@"C:\_git\vcs\_1.data\______test_files1\_wav\WindowsShutdown.wav");
+            //SoundPlayer sp = new SoundPlayer(@"D:\_git\vcs\_1.data\______test_files1\_wav\WindowsShutdown.wav");
             //sp.Play(); // 撥放
 
             //法四
@@ -130,7 +130,7 @@ namespace vcs_AudioVideoTest1
         {
             //法一
             //直接使用 SoundPlayer 類別
-            SoundPlayer sp = new SoundPlayer(@"C:\_git\vcs\_1.data\______test_files1\_wav\WindowsShutdown.wav");
+            SoundPlayer sp = new SoundPlayer(@"D:\_git\vcs\_1.data\______test_files1\_wav\WindowsShutdown.wav");
 
             //法二
             //SoundPlayer sp = new SoundPlayer();
@@ -182,12 +182,12 @@ namespace vcs_AudioVideoTest1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            PlayWav(@"C:\_git\vcs\_1.data\______test_files1\_wav\Frog.wav", false);
+            PlayWav(@"D:\_git\vcs\_1.data\______test_files1\_wav\Frog.wav", false);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            PlayWav(@"C:\_git\vcs\_1.data\______test_files1\_wav\Frog.wav", true);
+            PlayWav(@"D:\_git\vcs\_1.data\______test_files1\_wav\Frog.wav", true);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -287,7 +287,7 @@ namespace vcs_AudioVideoTest1
         //using WMPLib;
         private void mp3_player_play_Click(object sender, EventArgs e)
         {
-            wplayer.URL = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";
+            wplayer.URL = @"D:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";
             wplayer.settings.setMode("loop", true);
             wplayer.controls.play();
             timer1.Enabled = true;
@@ -342,7 +342,7 @@ namespace vcs_AudioVideoTest1
         private void button7_Click(object sender, EventArgs e)
         {
             //使用 winmm.DLL 的 PlaySound() 播放.wav檔
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_wav\chimes.wav";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_wav\chimes.wav";
 
             PlaySound(filename, new System.IntPtr(), PlaySoundFlags.SND_SYNC);
         }
@@ -352,7 +352,7 @@ namespace vcs_AudioVideoTest1
         private void button8_Click(object sender, EventArgs e)
         {
             /// 利用C#來解讀MP3文件的TAG區信息。
-            //string mp3_filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";
+            //string mp3_filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";
 
             // TBD
 
@@ -365,7 +365,7 @@ namespace vcs_AudioVideoTest1
             //從mp3中提取信息 1
             //從mp3中提取信息
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";
 
             byte[] b = new byte[128];
             string sTitle;
@@ -437,8 +437,8 @@ namespace vcs_AudioVideoTest1
             //從mp3中提取信息 2
             //get mp3 info
 
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";
 
             byte[] b = new byte[128];
             string sTitle;
@@ -514,7 +514,7 @@ namespace vcs_AudioVideoTest1
         {
             //mp3 info
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
             Mp3Info mp3 = new Mp3Info(filename);
             string artist = mp3.Artist;
             string album = mp3.Album;
@@ -530,7 +530,7 @@ namespace vcs_AudioVideoTest1
         private void button13_Click(object sender, EventArgs e)
         {
             //從mp3檔名找lrc
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\04-三月雪(&黃妃).mp3";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\04-三月雪(&黃妃).mp3";
 
             string filename_lyrics = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(filename) + ".lrc");
 
@@ -780,7 +780,7 @@ namespace vcs_AudioVideoTest1
 
         private void button16_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_wav\chimes.wav";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_wav\chimes.wav";
 
             SoundPlayer sp = new SoundPlayer();
             sp.SoundLocation = filename;
@@ -791,7 +791,7 @@ namespace vcs_AudioVideoTest1
 
             /*  ok
             //簡易播放wav的方法，僅可播放wav，不可播放mp3
-            filename = @"C:\_git\vcs\_1.data\______test_files1\_wav\WindowsShutdown.wav";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\_wav\WindowsShutdown.wav";
             SoundPlayer sp = new SoundPlayer(filename);
             sp.Play();
             */

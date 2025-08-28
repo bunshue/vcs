@@ -20,7 +20,7 @@ namespace vcs_SearchFile1
         int strings_count = 0;
         int favorite_strings_count = 0;
 
-        string favorite_filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\favorite_list.txt";
+        string favorite_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\favorite_list.txt";
 
         public Form1()
         {
@@ -38,7 +38,7 @@ namespace vcs_SearchFile1
             /*
             //檢查文字檔所在的資料夾
             //string Path = Application.StartupPath + "\\data";
-            //string Path = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\vcs_SearchFile1_data";
+            //string Path = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\vcs_SearchFile1_data";
             string Path = txtDirectory.Text;
             if (Directory.Exists(Path) == false)     //確認資料夾是否存在
             {
@@ -120,7 +120,7 @@ namespace vcs_SearchFile1
         {
             //撈出資料夾內特定類型的檔案
             //string searchDirectory = Application.StartupPath + "\\data";
-            //string searchDirectory = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\vcs_SearchFile1_data";
+            //string searchDirectory = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\vcs_SearchFile1_data";
             string searchDirectory = txtDirectory.Text;
             string searchPattern = "*.txt";
             bool recurrsive = false;
@@ -256,7 +256,7 @@ namespace vcs_SearchFile1
         {
             if (txtDirectory.Text == "")
             {
-                folderBrowserDialog1.SelectedPath = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
+                folderBrowserDialog1.SelectedPath = @"D:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
             }
             else
             {

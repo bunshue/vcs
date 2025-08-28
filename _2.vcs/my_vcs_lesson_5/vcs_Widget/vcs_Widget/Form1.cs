@@ -17,8 +17,8 @@ namespace vcs_Widget
 {
     public partial class Form1 : Form
     {
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_cat\cat1.png";
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_png\ladybug.png";
+        //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_cat\cat1.png";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_png\ladybug.png";
 
         int nOldWndLeft;
         int nOldWndTop;

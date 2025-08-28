@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,7 +21,7 @@ namespace vcs_SearchFile2
         private void Form1_Load(object sender, EventArgs e)
         {
             textBox1.Text = "angry_bird.jpg";
-            textBox2.Text = @"C:\_git\vcs\_1.data\______test_files1";
+            textBox2.Text = @"D:\_git\vcs\_1.data\______test_files1";
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -24,7 +24,7 @@ namespace vcs_PictureBox4
         private void button1_Click(object sender, EventArgs e)
         {
             //讀取圖檔
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
 
             Image image = Image.FromFile(filename);
             pictureBox1.Image = image;

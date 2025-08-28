@@ -53,7 +53,7 @@ namespace MapDownloader
         private GMapOverlay regionOverlay = new GMapOverlay("region");
 
         private int retryNum = 3;
-        private string tilePath = @"C:\_git\vcs\_1.data\______test_files1\GisMap";
+        private string tilePath = @"D:\_git\vcs\_1.data\______test_files1\GisMap";
         private SQLitePureImageCache sqliteCache = new SQLitePureImageCache();
         private MySQLPureImageCacheMulti mysqlCache = new MySQLPureImageCacheMulti();
 
@@ -76,7 +76,7 @@ namespace MapDownloader
         // Tile Downloader, init 5 threads
         private TileDownloader tileDownloader = new TileDownloader(5);
 
-        string gMapCacheLocation = @"C:\_git\vcs\_1.data\______test_files2\GMapCache2"; //緩存位置
+        string gMapCacheLocation = @"D:\_git\vcs\_1.data\______test_files2\GMapCache2"; //緩存位置
 
         public MainForm()
         {
@@ -643,7 +643,7 @@ namespace MapDownloader
         {
             try
             {
-                string filename_json = @"C:\_git\vcs\_1.data\______test_files1\_json\ChinaBoundary";
+                string filename_json = @"D:\_git\vcs\_1.data\______test_files1\_json\ChinaBoundary";
                 byte[] buffer = File.ReadAllBytes(filename_json);
 
                 //byte[] buffer = Properties.Resources.ChinaBoundary_Province_City; //另種讀取資料的方式
@@ -2069,7 +2069,7 @@ namespace MapDownloader
         private void button3_Click(object sender, EventArgs e)
         {
             //讀取KML檔案
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\kml_mountain.kml";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\kml_mountain.kml";
 
             this.polygonsOverlay.Clear();
             InitKMLPlaceMarks(KmlUtil.GetPlaceMarksFromKmlFile(filename));

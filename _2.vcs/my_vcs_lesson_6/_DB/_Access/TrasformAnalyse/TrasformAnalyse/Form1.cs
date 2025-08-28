@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,7 +13,7 @@ namespace TrasformAnalyse
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\book.TrasformAnalyse.mdb";
+        string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\book.TrasformAnalyse.mdb";
 
         public Form1()
         {

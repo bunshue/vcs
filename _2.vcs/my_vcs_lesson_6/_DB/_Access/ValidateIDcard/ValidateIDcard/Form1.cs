@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,7 +13,7 @@ namespace ValidateIDcard
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\people.id.card.mdb";    //数据库路径
+        string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\people.id.card.mdb";    //数据库路径
 
         OleDbConnection conn;//数据连接对象
         OleDbCommand cmd;//OleDbCommand对象

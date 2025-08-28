@@ -183,7 +183,7 @@ namespace vcs_axWindowsMediaPlayer3_playlist2
 
         private void button7_Click(object sender, EventArgs e)
         {
-            string mp3_filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\09    都はるみ--裏町人生(後街人生).mp3";
+            string mp3_filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\09    都はるみ--裏町人生(後街人生).mp3";
 
             richTextBox1.Text += "測試使用WindowsMediaPlayerClass\n";
             WindowsMediaPlayerClass wmpc;

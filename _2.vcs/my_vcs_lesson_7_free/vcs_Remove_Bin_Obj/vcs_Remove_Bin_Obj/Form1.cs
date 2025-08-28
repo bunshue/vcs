@@ -16,7 +16,7 @@ namespace vcs_Remove_Bin_Obj
         List<string> folder_name = new List<string>();      //宣告string型態的List
         List<string> filename_rename = new List<string>();  //宣告string型態的List
         string search_path = string.Empty;
-        //string search_path = @"C:\_git\vcs\_2.vcs";
+        //string search_path = @"D:\_git\vcs\_2.vcs";
         string specified_search_path = String.Empty;
 
         int total_show_empty_folder_cnt = 0;
@@ -132,12 +132,12 @@ namespace vcs_Remove_Bin_Obj
             else if (rb_remove_cuda.Checked == true)
             {
                 richTextBox1.Text += "清理 CUDA\n";
-                path = @"C:\_git\vcs\_3.cuda";
+                path = @"D:\_git\vcs\_3.cuda";
             }
             else if (rb_remove_opengl.Checked == true)
             {
                 richTextBox1.Text += "清理 Open GL\n";
-                path = @"C:\_git\vcs\_6.opengl";
+                path = @"D:\_git\vcs\_6.opengl";
             }
             else
             {
@@ -437,7 +437,7 @@ namespace vcs_Remove_Bin_Obj
             string foldername = string.Empty;
             string[] filenames;
 
-            foldername = @"C:\_git\vcs\_3.cuda\_code\bin\win64\Debug";
+            foldername = @"D:\_git\vcs\_3.cuda\_code\bin\win64\Debug";
 
             if (Directory.Exists(foldername) == true)    //確認資料夾是否存在
             {
@@ -465,7 +465,7 @@ namespace vcs_Remove_Bin_Obj
                 }
             }
 
-            foldername = @"C:\_git\vcs\_3.cuda\bin\win64\Debug";
+            foldername = @"D:\_git\vcs\_3.cuda\bin\win64\Debug";
 
             if (Directory.Exists(foldername) == true)    //確認資料夾是否存在
             {
@@ -493,7 +493,7 @@ namespace vcs_Remove_Bin_Obj
                 }
             }
 
-            foldername = @"C:\_git\vcs\_6.opengl\bin_debug64";
+            foldername = @"D:\_git\vcs\_6.opengl\bin_debug64";
 
             if (Directory.Exists(foldername) == true)    //確認資料夾是否存在
             {
@@ -521,7 +521,7 @@ namespace vcs_Remove_Bin_Obj
                 }
             }
 
-            foldername = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\libemgucv-windows-x64-2.3.0.1416\bin";
+            foldername = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\libemgucv-windows-x64-2.3.0.1416\bin";
             if (Directory.Exists(foldername) == true)    //確認資料夾是否存在
             {
                 richTextBox1.Text += "資料夾: " + foldername + " 存在\n";
@@ -684,7 +684,7 @@ namespace vcs_Remove_Bin_Obj
                 }
             }
 
-            foldername = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\libemgucv-windows-x86-2.3.0.1416\bin";
+            foldername = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\libemgucv-windows-x86-2.3.0.1416\bin";
 
             if (Directory.Exists(foldername) == true)    //確認資料夾是否存在
             {
@@ -850,9 +850,9 @@ namespace vcs_Remove_Bin_Obj
             }
 
             string[] delete_filenames = {
-            @"C:\_git\vcs\_3.cuda\_code\a\a.exe",
-            @"C:\_git\vcs\_3.cuda\_code\a\a.exp",
-            @"C:\_git\vcs\_3.cuda\_code\a\a.lib",
+            @"D:\_git\vcs\_3.cuda\_code\a\a.exe",
+            @"D:\_git\vcs\_3.cuda\_code\a\a.exp",
+            @"D:\_git\vcs\_3.cuda\_code\a\a.lib",
             @"C"};
 
             foreach (string filename in delete_filenames)

@@ -26,8 +26,8 @@ namespace LatentSvmDetectorExample
 
         static void Run()
         {
-            string filename_jpg = @"C:\_git\vcs\_1.data\______test_files1\_emgu\cat.jpg";
-            string filename_xml = @"C:\_git\vcs\_1.data\______test_files1\_emgu\cat.xml";
+            string filename_jpg = @"D:\_git\vcs\_1.data\______test_files1\_emgu\cat.jpg";
+            string filename_xml = @"D:\_git\vcs\_1.data\______test_files1\_emgu\cat.xml";
 
             using (Image<Bgr, Byte> image = new Image<Bgr, byte>(filename_jpg))
             using (LatentSvmDetector detector = new LatentSvmDetector(filename_xml))

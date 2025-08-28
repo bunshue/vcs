@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -557,7 +557,7 @@ namespace vcs_ColorMap
         {
             //分析一張圖的畫素的顏色
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims03.bmp";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims03.bmp";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
 
             Graphics g = Graphics.FromImage(bitmap1);   //畫字用
@@ -1078,7 +1078,7 @@ namespace vcs_ColorMap
 
             this.pictureBox1.BackColor = Color.FromArgb(255, 213, 94);
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_anime\minion-yellow.png";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\minion-yellow.png";
             pictureBox1.Image = Image.FromFile(filename);
         }
 

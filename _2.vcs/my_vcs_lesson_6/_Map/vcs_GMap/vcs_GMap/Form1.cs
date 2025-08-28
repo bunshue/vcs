@@ -42,7 +42,7 @@ namespace vcs_GMap
 
         TrackBar trackBar1 = new TrackBar();
 
-        string gMapCacheLocation = @"C:\_git\vcs\_1.data\______test_files2\GMapCache1"; //緩存位置
+        string gMapCacheLocation = @"D:\_git\vcs\_1.data\______test_files2\GMapCache1"; //緩存位置
 
         double latitude = 24.838;   //緯度
         double longitude = 121.003; //經度
@@ -2088,7 +2088,7 @@ namespace vcs_GMap
             PointLatLng point = new PointLatLng(latitude, longitude);
             GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
             point = new PointLatLng(latitude, longitude - dd - dd);
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_icon\face1.png";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_icon\face1.png";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             marker = new GMarkerGoogle(point, bitmap1);
             //直接寫
@@ -3367,7 +3367,7 @@ namespace vcs_GMap
             Country china;
             try
             {
-                string filename_json = @"C:\_git\vcs\_1.data\______test_files1\_json\ChinaBoundary";
+                string filename_json = @"D:\_git\vcs\_1.data\______test_files1\_json\ChinaBoundary";
                 byte[] buffer = File.ReadAllBytes(filename_json);
 
                 //byte[] buffer = Properties.Resources.ChinaBoundary_Province_City; //另種讀取資料的方式
@@ -3480,7 +3480,7 @@ namespace vcs_GMap
 
         private static void GenerateNewFile()
         {
-            string filename_json = @"C:\_git\vcs\_1.data\______test_files1\_json\ChinaBoundary_Province_City";
+            string filename_json = @"D:\_git\vcs\_1.data\______test_files1\_json\ChinaBoundary_Province_City";
             Country china = JsonHelper.JsonDeserializeFromFile<Country>(filename_json, Encoding.UTF8);
             foreach (var provice in china.Province)
             {
@@ -3530,7 +3530,7 @@ namespace vcs_GMap
 
             try
             {
-                string filename_json = @"C:\_git\vcs\_1.data\______test_files1\_json\ChinaBoundary";
+                string filename_json = @"D:\_git\vcs\_1.data\______test_files1\_json\ChinaBoundary";
                 byte[] buffer = File.ReadAllBytes(filename_json);
 
                 //byte[] buffer = Properties.Resources.ChinaBoundary_Province_City; //另種讀取資料的方式
@@ -3859,8 +3859,8 @@ namespace vcs_GMap
 
             gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\kml_mountain.kml";
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\kml_shangxi.kml"; //陝西省
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\kml_mountain.kml";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\kml_shangxi.kml"; //陝西省
 
             GMapRoute playRoute = GetRouteFromKml(filename);
 
@@ -3963,7 +3963,7 @@ namespace vcs_GMap
 
             gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\gps_bicycle.gpx";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\gps_bicycle.gpx";
 
             try
             {
@@ -4039,7 +4039,7 @@ namespace vcs_GMap
             /*
             gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\kml_mountain.kml";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\kml_mountain.kml";
 
             try
             {

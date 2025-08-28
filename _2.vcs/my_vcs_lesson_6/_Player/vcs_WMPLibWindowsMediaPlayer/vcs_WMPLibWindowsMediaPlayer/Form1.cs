@@ -20,7 +20,7 @@ namespace vcs_WMPLibWindowsMediaPlayer
     public partial class Form1 : Form
     {
         private WindowsMediaPlayer wmp;// = new WindowsMediaPlayer();
-        string mp3_filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\09    都はるみ--裏町人生(後街人生).mp3";
+        string mp3_filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\09    都はるみ--裏町人生(後街人生).mp3";
 
         ArrayList musicPath = new ArrayList();    //用於保存歌曲目錄
 
@@ -30,7 +30,7 @@ namespace vcs_WMPLibWindowsMediaPlayer
         {
             InitializeComponent();
             wmp = new WindowsMediaPlayer();
-            //wmp.URL = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";   //指名單一檔案
+            //wmp.URL = @"D:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";   //指名單一檔案
             wmp.URL = mp3_filename;
             wmp.settings.setMode("loop", true);
 
@@ -206,7 +206,7 @@ namespace vcs_WMPLibWindowsMediaPlayer
         //using WMPLib;
         private void button5_Click(object sender, EventArgs e)
         {
-            //wmp.URL = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";   //指名單一檔案
+            //wmp.URL = @"D:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";   //指名單一檔案
             //wmp.settings.setMode("loop", true);
             wmp.URL = mp3_filename;
 
@@ -306,7 +306,7 @@ namespace vcs_WMPLibWindowsMediaPlayer
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\_mp3";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1\_mp3";  //預設開啟的路徑
             openFileDialog1.Multiselect = false;    //單選
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -376,7 +376,7 @@ namespace vcs_WMPLibWindowsMediaPlayer
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\_mp3";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1\_mp3";  //預設開啟的路徑
             openFileDialog1.Multiselect = true;    //允許多選檔案
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -559,7 +559,7 @@ namespace vcs_WMPLibWindowsMediaPlayer
 
         private void button20_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1.SelectedPath = @"C:\_git\vcs\_1.data\______test_files1\_mp3";  //預設開啟的路徑
+            folderBrowserDialog1.SelectedPath = @"D:\_git\vcs\_1.data\______test_files1\_mp3";  //預設開啟的路徑
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";

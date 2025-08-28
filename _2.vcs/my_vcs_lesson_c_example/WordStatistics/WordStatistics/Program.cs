@@ -27,7 +27,7 @@ namespace WordStatistics
             wb.StartWord();
 
             //创建读取文件,发送的BufferBlock
-            FileBufferBlock fb = new FileBufferBlock(buffer, @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\english_text.txt");
+            FileBufferBlock fb = new FileBufferBlock(buffer, @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\english_text.txt");
             fb.ReadFile();
 
             Dictionary<string,int> dic = new Dictionary<string,int>();

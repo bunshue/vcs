@@ -280,15 +280,16 @@ image1 = image0.copy()
 contours, hierarchy = get_image_contours(image1)
 
 # 紅外框
-dst = cv2.drawContours(image1, contours, -1, RED, 10)  # 繪製輪廓/-1:全部/色/線寬
+image1 = cv2.drawContours(image1, contours, -1, RED, 10)  # 繪製輪廓/-1:全部/色/線寬
 # 綠實心
-dst = cv2.drawContours(image1, contours, -1, GREEN, -1)  # 繪製輪廓/-1:全部/綠/-1:填滿
+image1 = cv2.drawContours(image1, contours, -1, GREEN, -1)  # 繪製輪廓/-1:全部/綠/-1:填滿
 
 n = len(contours)  # 輪廓數量
 print("每個輪廓分別處理:")
 for i in range(n):
     # 共同
     print("第", i, "個輪廓")
+    image1 = cv2.drawContours(image1, contours, i, RED, 3)  # 繪製輪廓/一個/色/線寬
     cnt = contours[i]  # 取得輪廓數據
     moment = cv2.moments(cnt)  # 影像矩
     # 計算輪廓面積1, 用輪廓矩
@@ -303,99 +304,21 @@ for i in range(n):
     # 畫輪廓質心
     cx = int(moment["m10"] / moment["m00"])  # 質心 x 座標
     cy = int(moment["m01"] / moment["m00"])  # 質心 y 座標
-    cv2.circle(dst, (cx, cy), 5, BLUE, -1)  # 畫實心圓, 畫質心
+    cv2.circle(image1, (cx, cy), 5, BLUE, -1)  # 畫實心圓, 畫質心
     print("第", i, "個輪廓, 質心座標 :", "(" + str(cx) + ", " + str(cy) + ")")
     x_st = cx - 70
     y_st = cy + 100
-    cv2.putText(dst, str(i), (x_st, y_st), font, 1, YELLOW, 2)
+    cv2.putText(image1, str(i), (x_st, y_st), font, 1, YELLOW, 2)
     y_st += 50
-    cv2.putText(
-        dst, "(" + str(cx) + "," + str(cy) + ")", (x_st, y_st), font, 1, YELLOW, 2
-    )
+    text = "(" + str(cx) + "," + str(cy) + ")"
+    cv2.putText(image1, text, (x_st, y_st), font, 1, YELLOW, 2)
     y_st += 50
-    cv2.putText(dst, "A:" + str(int(con_area)), (x_st, y_st), font, 1, YELLOW, 2)
+    text="A:" + str(int(con_area))
+    cv2.putText(image1, text, (x_st, y_st), font, 1, YELLOW, 2)
     y_st += 50
-    cv2.putText(dst, "L:" + str(int(perimeter)), (x_st, y_st), font, 1, YELLOW, 2)
+    text="L:" + str(int(perimeter))
+    cv2.putText(image1, text, (x_st, y_st), font, 1, YELLOW, 2)
 
-
-for i in range(10):
-    cv2.line(dst, (i * 100, 0), (i * 100, 200), GRAY, 2)  # 垂直線
-
-for i in range(3):
-    cv2.line(dst, (0, i * 100), (900, i * 100), GRAY, 2)  # 水平線
-
-
-x_st, y_st = 10, 160
-dst = cv2_Chinese_Text(dst, "序號", x_st, y_st, YELLOW, 40)
-y_st += 50
-dst = cv2_Chinese_Text(dst, "中心", x_st, y_st, YELLOW, 40)
-y_st += 50
-dst = cv2_Chinese_Text(dst, "面積", x_st, y_st, YELLOW, 40)
-y_st += 50
-dst = cv2_Chinese_Text(dst, "周長", x_st, y_st, YELLOW, 40)
-
-
-plt.figure(figsize=(10, 8))
-plt.subplot(211)
-plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-plt.axis("off")
-
-plt.subplot(212)
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.title("找出輪廓")
-plt.axis("off")
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
-
-image0 = cv2.imread(filename)  # 彩色讀取
-image1 = image0.copy()
-
-gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
-thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
-ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
-
-contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-
-n = len(contours)  # 輪廓數量
-print("輪廓數量 :", n)
-
-print("各種計算輪廓面積的方法:")
-for i in range(n):
-    dst = cv2.drawContours(image1, contours, i, RED, 3)  # 繪製輪廓/一個/色/線寬
-    cnt = contours[i]  # 取得輪廓數據
-    # 計算輪廓面積 by 影像矩
-    moment = cv2.moments(cnt)  # 影像矩
-    print("第", i, "個輪廓, 面積", moment["m00"])
-    # 計算輪廓面積 by contourArea
-    con_area = cv2.contourArea(cnt)  # 計算輪廓面積
-    print("第", i, "個輪廓, 面積", con_area)
-
-plt.subplot(211)
-plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(212)
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.title("輪廓面積")
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
-image0 = cv2.imread(filename)  # 彩色讀取
-image1 = image0.copy()
-
-contours, hierarchy = get_image_contours(image1)
-
-dst = cv2.drawContours(image1, contours, -1, RED, 10)
-
-n = len(contours)  # 輪廓數量
 for i in range(n):
     cnt = contours[i]  # 取得輪廓數據
     # 計算輪廓面積
@@ -406,18 +329,36 @@ for i in range(n):
     square_area = w * h  # 計算矩形面積
     extent = con_area / square_area  # 計算Extent
     print("真實占比 輪廓面積 佔 最小邊界矩形的 :", extent)
-    dst = cv2.rectangle(image1, (x, y), (x + w, y + h), YELLOW, 2)
+    image1 = cv2.rectangle(image1, (x, y), (x + w, y + h), YELLOW, 2)
 
+
+for i in range(10):
+    cv2.line(image1, (i * 100, 0), (i * 100, 200), GRAY, 2)  # 垂直線
+
+for i in range(3):
+    cv2.line(image1, (0, i * 100), (900, i * 100), GRAY, 2)  # 水平線
+
+
+x_st, y_st = 10, 160
+image1 = cv2_Chinese_Text(image1, "序號", x_st, y_st, YELLOW, 40)
+y_st += 50
+image1 = cv2_Chinese_Text(image1, "中心", x_st, y_st, YELLOW, 40)
+y_st += 50
+image1 = cv2_Chinese_Text(image1, "面積", x_st, y_st, YELLOW, 40)
+y_st += 50
+image1 = cv2_Chinese_Text(image1, "周長", x_st, y_st, YELLOW, 40)
+
+
+plt.figure(figsize=(10, 8))
 plt.subplot(211)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(212)
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("找出輪廓")
 plt.axis("off")
-
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -3000,3 +2941,11 @@ filename = "data/findContours/multiple.jpg"
 filename = "data/moments.bmp"
 filename = "data/contours.bmp"
 filename = "data/cc.bmp"
+
+
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
+
+contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+

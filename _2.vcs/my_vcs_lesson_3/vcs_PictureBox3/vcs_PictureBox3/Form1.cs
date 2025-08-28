@@ -62,10 +62,10 @@ namespace vcs_PictureBox3
             pictureBox1.Image = Resource1.bear;
 
             //2. picturebox載入一圖
-            //pictureBox1.Image = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\picture1.jpg"); //載入圖檔，由檔案
+            //pictureBox1.Image = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg"); //載入圖檔，由檔案
 
             //3. picturebox顯示圖檔
-            //Image img = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\picture1.jpg");
+            //Image img = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg");
             //pictureBox1.Image = img;
 
             //pictureBox1.Height = 800; 設定圖片高度和寬度

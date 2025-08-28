@@ -27,9 +27,9 @@ namespace IMGAddDate
 
         //字串陣列的寫法(一維)：
         string[] pic_array = { 
-            @"C:\_git\vcs\_1.data\______test_files1\p3.jpg", 
-            @"C:\_git\vcs\_1.data\______test_files1\p3.jpg", 
-            @"C:\_git\vcs\_1.data\______test_files1\p3.jpg", 
+            @"D:\_git\vcs\_1.data\______test_files1\p3.jpg", 
+            @"D:\_git\vcs\_1.data\______test_files1\p3.jpg", 
+            @"D:\_git\vcs\_1.data\______test_files1\p3.jpg", 
                              };
 
         public Frm_Main()

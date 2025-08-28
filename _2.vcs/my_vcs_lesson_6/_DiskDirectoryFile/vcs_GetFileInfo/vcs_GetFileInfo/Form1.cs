@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,7 +13,7 @@ namespace vcs_GetFileInfo
 {
     public partial class Form1 : Form
     {
-        string foldername = @"C:\_git\vcs\_1.data\______test_files1";
+        string foldername = @"D:\_git\vcs\_1.data\______test_files1";
 
         public Form1()
         {

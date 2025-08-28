@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,7 +21,7 @@ namespace ManageFileByType
         private void button1_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();//创建FolderBrowserDialog对象
-            folderBrowserDialog1.SelectedPath = @"C:\_git\vcs\_1.data\______test_files1";
+            folderBrowserDialog1.SelectedPath = @"D:\_git\vcs\_1.data\______test_files1";
 
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)//判断是否选择了文件夹
             {

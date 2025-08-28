@@ -925,7 +925,7 @@ namespace vcs_ReadWrite_XML0_mix
 
         private void button20_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\school.xml";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\school.xml";
 
             //將XmlDocument轉化為string函數
             //讀取普通XML
@@ -1237,7 +1237,7 @@ namespace vcs_ReadWrite_XML0_mix
 
     class XML_RW
     {
-        string xml_filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\bookshop.xml";
+        string xml_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\bookshop.xml";
 
 
         XmlDocument xmlDoc;

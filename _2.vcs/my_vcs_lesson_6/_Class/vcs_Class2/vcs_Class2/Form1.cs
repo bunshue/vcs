@@ -17,7 +17,7 @@ namespace vcs_Class2
 {
     public partial class Form1 : Form
     {
-        string filename2 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string filename2 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
         Color2Gray c2g; // 宣告一個物件
 

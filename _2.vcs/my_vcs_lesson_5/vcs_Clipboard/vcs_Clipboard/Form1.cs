@@ -26,7 +26,7 @@ namespace vcs_Clipboard
             webBrowser_clipboard.Navigate("about:blank");
             richTextBox1.Text += "\n";
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
         }
 
@@ -199,7 +199,7 @@ namespace vcs_Clipboard
         private void button5_Click(object sender, EventArgs e)
         {
             //放小圖到剪貼簿中, 並貼到圖上
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\chicken.bmp";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\chicken.bmp";
 
             //放進剪貼簿
             //TBD
@@ -398,7 +398,7 @@ namespace vcs_Clipboard
         private void button16_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "將圖片資料放置到Clipboard中\n";
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             Clipboard.SetImage(bitmap1);
         }

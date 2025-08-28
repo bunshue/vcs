@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,7 +20,7 @@ namespace vcs_PictureBox6
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_computer\burn1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_computer\burn1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
             pictureBox1.BackColor = Color.Pink;
         }

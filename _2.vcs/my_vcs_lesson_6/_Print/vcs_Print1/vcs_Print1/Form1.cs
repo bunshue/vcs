@@ -247,7 +247,7 @@ namespace vcs_Print1
             richTextBox1.Text += "列印一個純文字檔\n";
             // The text contained in the file.
             string FileContents;
-            string filename = @@"C:\_git\vcs\_1.data\______test_files1\article.txt";
+            string filename = @@"D:\_git\vcs\_1.data\______test_files1\article.txt";
 
             // Read the file's contents.
             try

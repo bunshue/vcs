@@ -20,7 +20,7 @@ namespace vcs_Cryptography1_MD5
         //加密後的結果
         string str_encrypted_text = string.Empty;
 
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";                      //準備算MD5的檔案
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";                      //準備算MD5的檔案
 
         public Form1()
         {
@@ -210,8 +210,8 @@ namespace vcs_Cryptography1_MD5
         {
             //用MD5比較兩個檔案
 
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\compare\aaaa.txt";
-            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\compare\bbbb.txt";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\compare\aaaa.txt";
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\compare\bbbb.txt";
             string FileMD5_1 = string.Empty;    //第1個檔案的MD5碼
             string FileMD5_2 = string.Empty;    //第2個檔案的MD5碼
 
@@ -318,7 +318,7 @@ namespace vcs_Cryptography1_MD5
         private void button14_Click(object sender, EventArgs e)
         {
             //算一個檔案的MD5值
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";                      //準備算MD5的檔案
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";                      //準備算MD5的檔案
 
             //加密後的結果
             string str_encrypted_text = string.Empty;

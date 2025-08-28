@@ -36,7 +36,7 @@ namespace vcs_SaveFileDialog
 
             //saveFileDialog1.InitialDirectory = "c:\\";
             //saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            saveFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\";
+            saveFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1\";
             saveFileDialog1.RestoreDirectory = true;
             saveFileDialog1.FileName = "test_write_a_file.txt";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -78,7 +78,7 @@ namespace vcs_SaveFileDialog
             saveFileDialog1.RestoreDirectory = true;          //控制對話方塊在關閉之前是否恢復目前的目錄
             saveFileDialog1.Title = "另存為";                 //將顯示在對話方塊標題列中的字元
             saveFileDialog1.FileName = "file_to_save.txt";    //預設儲存的檔名
-            saveFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1";  //預設儲存的路徑
+            saveFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1";  //預設儲存的路徑
             //saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)

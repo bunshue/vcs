@@ -26,7 +26,7 @@ namespace FileCopyPlan
 
         private void button1_Click(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\";
+            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1\";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)//打開文件對話框
             {
                 textBox1.Text = openFileDialog1.FileName;//取得源文件的路徑

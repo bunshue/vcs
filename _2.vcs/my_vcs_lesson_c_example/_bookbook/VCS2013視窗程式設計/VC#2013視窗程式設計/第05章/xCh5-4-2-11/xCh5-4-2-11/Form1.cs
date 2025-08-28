@@ -73,7 +73,7 @@ namespace xCh5_4_2_11
 
         private void button6_Click(object sender, EventArgs e)
         {
-            string fileName = @"C:\_git\vcs\_1.data\______test_files1\__RW\_word\bmp_format.docx";
+            string fileName = @"D:\_git\vcs\_1.data\______test_files1\__RW\_word\bmp_format.docx";
             ProcessStartInfo startInfo = new ProcessStartInfo(fileName);
 
             if (File.Exists(fileName))

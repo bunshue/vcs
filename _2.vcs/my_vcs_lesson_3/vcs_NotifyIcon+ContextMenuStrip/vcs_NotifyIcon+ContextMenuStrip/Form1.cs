@@ -21,7 +21,7 @@ namespace vcs_NotifyIcon_ContextMenuStrip
         ToolStripMenuItem toolStripMenuItem1 = new ToolStripMenuItem();
         ToolStripMenuItem toolStripMenuItem2 = new ToolStripMenuItem();
 
-        private Icon icon = new Icon(@"C:\_git\vcs\_2.vcs\______test_files1\_material\ims.ico");
+        private Icon icon = new Icon(@"D:\_git\vcs\_2.vcs\______test_files1\_material\ims.ico");
 
         public Form1()
         {
@@ -40,8 +40,8 @@ namespace vcs_NotifyIcon_ContextMenuStrip
             this.notifyIcon1.Visible = true;
 
             //系統托盤動態圖標閃爍圖標 ST
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\_icon\唐.ico";
-            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\_icon\時.ico";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\_icon\唐.ico";
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\_icon\時.ico";
 
             Thread t = new Thread(new ParameterizedThreadStart(delegate(object obj)
             {
@@ -138,8 +138,8 @@ namespace vcs_NotifyIcon_ContextMenuStrip
         {
             //換一個icon
 
-            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\_icon\唐.ico";
-            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\_icon\時.ico";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\_icon\唐.ico";
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\_icon\時.ico";
 
             if (((use_icon++) % 2) == 0)
             {

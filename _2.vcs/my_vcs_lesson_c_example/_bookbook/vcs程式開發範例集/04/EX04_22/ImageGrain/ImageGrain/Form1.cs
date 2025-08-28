@@ -23,7 +23,7 @@ namespace ImageGrain
         private void button1_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp|*.jpg;*.jpeg;*.bmp";
-            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\";
+            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1\";
             openFileDialog1.ShowDialog();
             Image image = System.Drawing.Image.FromFile(openFileDialog1.FileName);
             bitmap1 = new Bitmap(image);

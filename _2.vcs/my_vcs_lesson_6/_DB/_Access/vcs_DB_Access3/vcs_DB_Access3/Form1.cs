@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +18,7 @@ namespace vcs_DB_Access3
             InitializeComponent();
         }
 
-        string filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\Contacts.vcs_DB_Access3.mdb";
+        string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\Contacts.vcs_DB_Access3.mdb";
 
         // The DataAdapters and the DataSet.
         private OleDbDataAdapter DaAddresses, DaTestScores;

@@ -703,7 +703,7 @@ namespace vcs_test_all_02_Array
             int M = 0;
             int N = 0;
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\my_2d_array.txt";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\my_2d_array.txt";
             String line;
             StreamReader sr;
 

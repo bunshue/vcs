@@ -852,7 +852,7 @@ namespace vcs_ReadWrite_TXT
             //資料夾內 檔案置換文字
 
             //撈出所有圖片檔 並存成一個List
-            string foldername = @"C:\_git\vcs\_3.cuda\Samples";
+            string foldername = @"D:\_git\vcs\_3.cuda\Samples";
 
             filenames.Clear();
 

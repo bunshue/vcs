@@ -627,7 +627,7 @@ namespace vcs_ID3Tag
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            //openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\_id3";  //預設開啟的路徑
+            //openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1\_id3";  //預設開啟的路徑
             openFileDialog1.Multiselect = true;    //允許多選檔案
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -911,21 +911,21 @@ namespace vcs_ID3Tag
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
             encoding = "big5";
             get_ID3Tag(filename, encoding);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_id3\uramachi.mp3";       //一定要有@
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_id3\uramachi.mp3";       //一定要有@
             encoding = "gb2312";
             get_ID3Tag(filename, encoding);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_id3\harumi.mp3";       //一定要有@
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_id3\harumi.mp3";       //一定要有@
             encoding = "shift_jis";
             get_ID3Tag(filename, encoding);
         }
@@ -1109,7 +1109,7 @@ namespace vcs_ID3Tag
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            //openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\_id3";  //預設開啟的路徑
+            //openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1\_id3";  //預設開啟的路徑
             openFileDialog1.Multiselect = true;    //允許多選檔案
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -1527,7 +1527,7 @@ namespace vcs_ID3Tag
 
         private void button7_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
             string filename2 = filename + ".no.id3v1." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
 
             richTextBox1.Text += "移除 MP3 ID3 v1\n";
@@ -1572,7 +1572,7 @@ namespace vcs_ID3Tag
 
         private void button8_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
             string filename2 = filename + ".add.id3v1." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
 
             richTextBox1.Text += "新增 MP3 ID3 v1\n";
@@ -1603,7 +1603,7 @@ namespace vcs_ID3Tag
 
         private void button9_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
             string filename2 = filename + ".modify.id3v1." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
 
             richTextBox1.Text += "修改 MP3 ID3 v1\n";
@@ -1765,7 +1765,7 @@ namespace vcs_ID3Tag
 
         private void button10_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_id3\unicode_ナレーション(岡本妙子).mp3";       //一定要有@
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_id3\unicode_ナレーション(岡本妙子).mp3";       //一定要有@
             encoding = "big5";
             get_ID3Tag(filename, encoding);
         }
@@ -1793,7 +1793,7 @@ namespace vcs_ID3Tag
 
         private void button11_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
             string filename2 = filename + ".no.id3v2." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
 
             richTextBox1.Text += "移除 MP3 ID3 v2\n";
@@ -1851,7 +1851,7 @@ namespace vcs_ID3Tag
 
         private void button12_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
             string filename2 = filename + ".no.id3v1v2." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
 
             richTextBox1.Text += "移除 MP3 ID3 v1 v2\n";

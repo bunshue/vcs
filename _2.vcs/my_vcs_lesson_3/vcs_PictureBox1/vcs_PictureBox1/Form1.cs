@@ -58,7 +58,7 @@ namespace vcs_PictureBox1
             pictureBox1.BorderStyle = BorderStyle.Fixed3D;
             pictureBox1.Cursor = Cursors.Cross;  //移到控件上，改變鼠標
 
-            image1 = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\ims_image.bmp");
+            image1 = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\ims_image.bmp");
             pictureBox1.Image = image1;
             richTextBox1.Text += "W = " + image1.Width.ToString() + ", H = " + image1.Height.ToString() + "\n";
 
@@ -98,13 +98,13 @@ namespace vcs_PictureBox1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            image1 = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\_case1\pic1.jpg");
+            image1 = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic1.jpg");
             pictureBox1.Image = image1;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            image1 = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\_case1\\pic2.jpg", true);
+            image1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\_case1\\pic2.jpg", true);
             pictureBox1.Image = image1;
         }
 
@@ -112,16 +112,16 @@ namespace vcs_PictureBox1
         {
             //法一
             //ImageLocation	取得或設定路徑或影像 URL 中顯示 PictureBox
-            //pictureBox1.ImageLocation = @"C:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg";
+            //pictureBox1.ImageLocation = @"D:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg";
 
             //法二
             //Load()		顯示所指定的影像 ImageLocation 屬性 PictureBox。
-            //string ImageLocation = @"C:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg";
+            //string ImageLocation = @"D:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg";
             //pictureBox1.Load(ImageLocation);
 
             //法三
             //Load(String)	設定 ImageLocation 到指定的 URL，並顯示所指出的影像。
-            pictureBox1.Load(@"C:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg");
+            pictureBox1.Load(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg");
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -204,10 +204,10 @@ namespace vcs_PictureBox1
         private void button7_Click(object sender, EventArgs e)
         {
             //錯誤的寫法, 可能會出現"記憶體不足"
-            //pictureBox1.Image = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\bear.bmp");
+            //pictureBox1.Image = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\bear.bmp");
 
             //正確的寫法
-            FileStream fs = File.OpenRead(@"C:\_git\vcs\_1.data\______test_files1\bear.jpg");
+            FileStream fs = File.OpenRead(@"D:\_git\vcs\_1.data\______test_files1\bear.jpg");
             pictureBox1.Image = Image.FromStream(fs);
             fs.Close();
         }
@@ -269,7 +269,7 @@ namespace vcs_PictureBox1
             int H = h - zoom_step * zoom_cnt * 3 / 4;
             richTextBox1.Text += "zoom_cnt = " + zoom_cnt.ToString() + "\tx_st = " + x_st.ToString() + "\ty_st = " + y_st.ToString() + "\tW = " + W.ToString() + "\tH = " + H.ToString() + "\n";
 
-            Bitmap bm = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\ims_image.bmp", true);
+            Bitmap bm = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\ims_image.bmp", true);
 
             /*
             RectangleF rect = new RectangleF(zoom_step * zoom_cnt / 2 + zoom_step * btn_right_left_cnt / 2,
@@ -294,7 +294,7 @@ namespace vcs_PictureBox1
 
         void reload_picturebox2()
         {
-            Bitmap bm = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\ims_image.bmp", true);
+            Bitmap bm = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\ims_image.bmp", true);
 
             //將圖片縮放
             bmp_zoom = new Bitmap(bm, bm.Width + zoom_step * zoom_cnt, bm.Height + zoom_step * zoom_cnt * 3 / 4);   //用Bitmap直接進行縮放，比例自行調整，w -> w + dw, h -> h + dh
