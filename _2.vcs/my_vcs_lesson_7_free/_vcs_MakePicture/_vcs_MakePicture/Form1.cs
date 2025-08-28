@@ -3223,22 +3223,22 @@ namespace _vcs_MakePicture
             //逐點製作圖檔
             int xx;
             int yy;
-            int x_st = 180;
-            int y_st = 40;
+            int x_st = 200;
+            int y_st = 50;
 
-            int W = 920;
+            int W = 900;
             int H = 500;//有註解的 500
 
-            bool flag_with_mesg = true;
+            bool flag_with_mesg = false;
 
             if (flag_with_mesg == true)//有註解的 500
             {
-                W = 920;
+                W = 900;
                 H = 500;
             }
             else//無註解的
             {
-                W = 840;
+                W = 780;
                 H = 180;//無註解的
                 x_st = 90;
             }
@@ -3271,11 +3271,11 @@ namespace _vcs_MakePicture
             x_st += 100;
             g.FillRectangle(sb, new Rectangle(x_st + 0, y_st + 0, 100, 100));
 
-            x_st += 140;
+            x_st += 150;
             g.FillEllipse(sb, new Rectangle(x_st, y_st, 100, 100));
 
-            x_st += 220;
-            y_st -= 10;
+            x_st += 255-50;
+            //y_st -= 20;
             points = new Point[4];
             points[0] = new Point(x_st + 0, y_st + 0);
             points[1] = new Point(x_st + 80, y_st + 0);
@@ -3283,11 +3283,34 @@ namespace _vcs_MakePicture
             points[3] = new Point(x_st - 10 - 80, y_st + 100);
             g.FillPolygon(sb, points);
 
-            x_st += 110;
+            p = new Pen(Color.Red, 1);
+            //g.DrawLine(p, points[0], points[2]);
+            //g.DrawLine(p, points[1], points[3]);
+
+            x_st += 145;
+            y_st += 50;
             int radius = 70;
-            Point center = new Point(x_st + radius, y_st + radius);
+            Point center = new Point(x_st, y_st);
             FillStar(g, center, radius, Color.White);
 
+            /*
+            int x;
+            int y;
+            for (x = 0; x <= W; x += 100)
+            {
+                p = new Pen(Color.Red, 1);
+                Point pointa = new Point(x, 0);
+                Point pointb = new Point(x, H);
+                g.DrawLine(p, pointa, pointb);//垂直線
+            }
+            for (y = 0; y <= H; y += 100)
+            {
+                p = new Pen(Color.Red, 1);
+                Point pointa = new Point(0, y);
+                Point pointb = new Point(W, y);
+                g.DrawLine(p, pointa, pointb);//水平線
+            }
+            */
             pictureBox1.Image = bitmap1;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
         }

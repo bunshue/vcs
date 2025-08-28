@@ -666,7 +666,7 @@ namespace vcs__Mix00
         private void button20_Click(object sender, EventArgs e)
         {
             //刪除資料夾下子資料夾(偽)
-            var pathstr = @"C:/_git/vcs/_1.data/______test_files1";
+            var pathstr = @"D:/_git/vcs/_1.data/______test_files1";
             if (Directory.Exists(pathstr))
             {
                 //var strname=DateTime.Now.ToShortDateString().Replace("/","-")+".txt";

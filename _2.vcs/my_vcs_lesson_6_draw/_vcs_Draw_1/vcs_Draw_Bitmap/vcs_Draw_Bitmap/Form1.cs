@@ -420,7 +420,7 @@ namespace vcs_Draw_Bitmap
         {
             //複製部分圖片
             // Create a Bitmap object from a file.
-            Bitmap bitmap1 = new Bitmap(@"C:/_git/vcs/_1.data/______test_files1/bear.jpg");
+            Bitmap bitmap1 = new Bitmap(@"D:/_git/vcs/_1.data/______test_files1/bear.jpg");
 
             // Clone a portion of the Bitmap object.
             RectangleF cloneRect = new RectangleF(530, 30, 200, 200);

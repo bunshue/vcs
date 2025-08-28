@@ -399,7 +399,7 @@ namespace vcs_WebClient
             richTextBox1.Text += "WebClient OpenRead\t取得網頁資料並存成檔案......\n";
             Application.DoEvents();
 
-            string url = "file:///C:/_git/vcs/_1.data/_html/My_Link.html";
+            string url = "file:///D:/_git/vcs/_1.data/_html/My_Link.html";
             //string url = "https://www.google.com.tw/";
 
             WebClient wc = new WebClient();     // 建立 WebClient

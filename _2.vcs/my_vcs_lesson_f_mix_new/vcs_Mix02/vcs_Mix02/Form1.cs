@@ -861,7 +861,7 @@ namespace vcs_Mix02
         private void button24_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            string url = @"C:/_git/vcs/_1.data/_html/朱冶蕙老師的電腦教室.html";
+            string url = @"D:/_git/vcs/_1.data/_html/朱冶蕙老師的電腦教室.html";
             //foreach (var fileName in fileNameList)
             {
                 MemoryStream ms = GetResponse(url);

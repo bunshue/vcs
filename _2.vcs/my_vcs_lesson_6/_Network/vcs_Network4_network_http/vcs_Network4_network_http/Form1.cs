@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -705,9 +705,9 @@ namespace vcs_Network4_network_http
         private void button21_Click(object sender, EventArgs e)
         {
             //抓取網頁資料並分析之
-            //file:///C:/_git/vcs/_1.data/_html/%E6%9C%B1%E5%86%B6%E8%95%99%E8%80%81%E5%B8%AB%E7%9A%84%E9%9B%BB%E8%85%A6%E6%95%99%E5%AE%A4.html
+            //file:///D:/_git/vcs/_1.data/_html/%E6%9C%B1%E5%86%B6%E8%95%99%E8%80%81%E5%B8%AB%E7%9A%84%E9%9B%BB%E8%85%A6%E6%95%99%E5%AE%A4.html
 
-            string url = @"file:///C:/_git/vcs/_1.data/_html/%E6%9C%B1%E5%86%B6%E8%95%99%E8%80%81%E5%B8%AB%E7%9A%84%E9%9B%BB%E8%85%A6%E6%95%99%E5%AE%A4.html";
+            string url = @"file:///D:/_git/vcs/_1.data/_html/%E6%9C%B1%E5%86%B6%E8%95%99%E8%80%81%E5%B8%AB%E7%9A%84%E9%9B%BB%E8%85%A6%E6%95%99%E5%AE%A4.html";
             string txtURL = "aaaa.txt";
 
             GetHtmlData();
@@ -730,7 +730,7 @@ namespace vcs_Network4_network_http
         /// </summary>
         public static void GetHtmlData()
         {
-            string url = @"file:///C:/_git/vcs/_1.data/_html/%E6%9C%B1%E5%86%B6%E8%95%99%E8%80%81%E5%B8%AB%E7%9A%84%E9%9B%BB%E8%85%A6%E6%95%99%E5%AE%A4.html";
+            string url = @"file:///D:/_git/vcs/_1.data/_html/%E6%9C%B1%E5%86%B6%E8%95%99%E8%80%81%E5%B8%AB%E7%9A%84%E9%9B%BB%E8%85%A6%E6%95%99%E5%AE%A4.html";
             string txtURL = "aaaa.txt";
 
             WebRequest request = WebRequest.Create(url);

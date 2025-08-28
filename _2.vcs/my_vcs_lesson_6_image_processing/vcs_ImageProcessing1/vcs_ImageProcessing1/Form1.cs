@@ -592,7 +592,7 @@ namespace vcs_ImageProcessing1
             //Marshal.Copy()
             //將 BitmapData 複製到 byte[] Array 陣列
 
-            Bitmap bmp = new Bitmap(@"C:/_git/vcs/_1.data/______test_files1/test_ReadAllBytes.bmp");
+            Bitmap bmp = new Bitmap(@"D:/_git/vcs/_1.data/______test_files1/test_ReadAllBytes.bmp");
             int W = bmp.Width;
             int H = bmp.Height;
 

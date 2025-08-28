@@ -94,8 +94,8 @@ namespace vcs_Remove_Bin_Obj
 
             this.Size = new Size(1200, 820);
 
-            tb_string_old.Text = @"C:/_git/vcs/_1.data/______test_files2";
-            tb_string_new.Text = @"C:/_git/vcs/_1.data/______test_files1/";
+            tb_string_old.Text = @"D:/_git/vcs/_1.data/______test_files2";
+            tb_string_new.Text = @"D:/_git/vcs/_1.data/______test_files1/";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -115,7 +115,7 @@ namespace vcs_Remove_Bin_Obj
             richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
 
             //確認資料夾是否存在
-            string Path = @"C:/_git/vcs/_1.data/______test_files2/aaaa/bbbb";
+            string Path = @"D:/_git/vcs/_1.data/______test_files2/aaaa/bbbb";
             if (Directory.Exists(Path) == false)    //確認資料夾是否存在
                 richTextBox1.Text += "資料夾: " + Path + " 不存在\n";
             else
@@ -936,7 +936,7 @@ namespace vcs_Remove_Bin_Obj
             int len = filenames.Count;
             richTextBox1.Text += "找到檔案個數 : " + len.ToString() + "\n";
 
-            //private Icon icon1 = new Icon(@"C:/_git/vcs/_1.data/______test_files1/_icon/快.ico");
+            //private Icon icon1 = new Icon(@"D:/_git/vcs/_1.data/______test_files1/_icon/快.ico");
             string pattern1 = string_old;
             string pattern2 = string_new;
 

@@ -319,10 +319,10 @@ for i in range(n):
 
 
 for i in range(10):
-    cv2.line(dst, (i * 100, 0), (i * 100, 200), RED, 2)  # 垂直線
+    cv2.line(dst, (i * 100, 0), (i * 100, 200), GRAY, 2)  # 垂直線
 
 for i in range(3):
-    cv2.line(dst, (0, i * 100), (900, i * 100), RED, 2)  # 水平線
+    cv2.line(dst, (0, i * 100), (900, i * 100), GRAY, 2)  # 水平線
 
 
 x_st, y_st = 10, 160

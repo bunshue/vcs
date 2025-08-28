@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -36,7 +36,7 @@ namespace vcs_ReadWrite_HTML3
             //將HTML檔案讀到WebBrowser裏
 
             //string url = @"https://www.syhtcgf.com/perl/perl-toc/ch09.html";
-            string url = @"C:/_git/vcs/_1.data/_html/朱冶蕙老師的電腦教室.html";
+            string url = @"D:/_git/vcs/_1.data/_html/朱冶蕙老師的電腦教室.html";
             webBrowser1.Navigate(url);
         }
 

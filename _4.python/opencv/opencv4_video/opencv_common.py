@@ -67,6 +67,10 @@ filename_lena_gray = "D:/_git/vcs/_4.python/opencv/data/lena_gray.bmp"
 filename_barbara = "D:/_git/vcs/_4.python/opencv/data/barbara.bmp"
 filename_gray = "D:/_git/vcs/_4.python/opencv/data/threshold/gray_scale.jpg"
 
+filename_star_white = "D:/_git/vcs/_4.python/opencv/data/_shape/star_white.bmp"
+filename_star_blue = "D:/_git/vcs/_4.python/opencv/data/_shape/star_blue.bmp"
+filename_star_silver = "D:/_git/vcs/_4.python/opencv/data/_shape/star_silver.bmp"
+
 video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
 print("------------------------------------------------------------")  # 60個
@@ -80,6 +84,14 @@ MAGENTA = (255, 0, 255)  # B G R
 YELLOW = (0, 255, 255)  # B G R
 BLACK = (0, 0, 0)  # B G R
 WHITE = (255, 255, 255)  # B G R
+GRAY = (128, 128, 128)  # B G R
+MAROON = (0, 0, 128)  # 栗色, Maroon
+OLIVE = (0, 128, 128)  # 橄欖綠, Olive
+LIME = (0, 128, 0)  # 綠色, Green
+TEAL = (128, 128, 0)  # 藍綠色, Teal
+NAVY = (128, 0, 0)  # 藏青色, Navy
+PURPLE = (128, 0, 128)  # 紫色, Purple
+SILVER = (192, 192, 192)  # 銀色, Silver
 colors = [RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK, WHITE]
 
 # BGR

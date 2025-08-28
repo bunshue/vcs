@@ -84,6 +84,14 @@ MAGENTA = (255, 0, 255)  # B G R
 YELLOW = (0, 255, 255)  # B G R
 BLACK = (0, 0, 0)  # B G R
 WHITE = (255, 255, 255)  # B G R
+GRAY = (128, 128, 128)  # B G R
+MAROON = (0, 0, 128)  # 栗色, Maroon
+OLIVE = (0, 128, 128)  # 橄欖綠, Olive
+LIME = (0, 128, 0)  # 綠色, Green
+TEAL = (128, 128, 0)  # 藍綠色, Teal
+NAVY = (128, 0, 0)  # 藏青色, Navy
+PURPLE = (128, 0, 128)  # 紫色, Purple
+SILVER = (192, 192, 192)  # 銀色, Silver
 colors = [RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK, WHITE]
 
 # BGR
