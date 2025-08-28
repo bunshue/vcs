@@ -812,3 +812,16 @@ pos_c = (50, 95)  # 文字輸出位置
 cv2.putText(dst, "A", pos_a, font, 1, YELLOW, 2)  # 輸出文字 A
 cv2.putText(dst, "B", pos_b, font, 1, BLUE, 2)  # 輸出文字 B
 cv2.putText(dst, "C", pos_c, font, 1, YELLOW, 2)  # 輸出文字 C
+
+
+cv2.putText(image1, text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, BLUE, 2)  # 藍色字體
+cv2.putText(image1, text, (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, BLUE, 2)  # 藍色字體
+
+"""
+lineType = cv2.LINE_AA
+lineType：绘制线段的线性，默认为 LINE_8
+cv2.FILLED：内部填充（实心图形）
+cv2.LINE_4：4 邻接线型
+cv2.LINE_8：8 邻接线型
+cv2.LINE_AA：抗锯齿线型，图像更平滑
+"""
