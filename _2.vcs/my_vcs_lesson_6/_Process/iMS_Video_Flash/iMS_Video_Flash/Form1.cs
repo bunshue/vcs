@@ -243,7 +243,7 @@ namespace iMS_Video_Flash
             openFileDialog1.FileName = "";              //預設開啟的檔名
             openFileDialog1.DefaultExt = "*.bin";
             openFileDialog1.Filter = "bin檔(*.bin)|*.bin";
-            openFileDialog1.InitialDirectory = @"C:\_git\ims2\_release";
+            openFileDialog1.InitialDirectory = @"D:\_git\ims2\_release";
             openFileDialog1.Multiselect = false;    //單選
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)

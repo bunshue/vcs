@@ -46,7 +46,7 @@ namespace vcs_test_all_04_Font2
             {
                 comboBox1.Items.Clear();
 
-                string foldername = @"C:\_git\整理字型";
+                string foldername = @"D:\_git\整理字型";
 
                 richTextBox1.Text += "撈出資料夾 " + foldername + " 內所有圖片檔案合併\n";
 
@@ -111,7 +111,7 @@ namespace vcs_test_all_04_Font2
             FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
 
             folderBrowserDialog1.SelectedPath = Application.StartupPath;    //預設開啟的路徑
-            //folderBrowserDialog1.SelectedPath = @"C:\_git\整理字型";
+            //folderBrowserDialog1.SelectedPath = @"D:\_git\整理字型";
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
