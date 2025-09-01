@@ -92,7 +92,22 @@ TEAL = (128, 128, 0)  # 藍綠色, Teal
 NAVY = (128, 0, 0)  # 藏青色, Navy
 PURPLE = (128, 0, 128)  # 紫色, Purple
 SILVER = (192, 192, 192)  # 銀色, Silver
-colors = [RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, BLACK, WHITE]
+colors = [
+    RED,
+    GREEN,
+    BLUE,
+    CYAN,
+    MAGENTA,
+    YELLOW,
+    GRAY,
+    MAROON,
+    OLIVE,
+    LIME,
+    TEAL,
+    NAVY,
+    PURPLE,
+    SILVER,
+]  # 14個
 
 # BGR
 color = [
