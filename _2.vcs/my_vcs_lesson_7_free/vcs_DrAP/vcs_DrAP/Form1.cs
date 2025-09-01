@@ -249,29 +249,32 @@ namespace vcs_DrAP
             bt_find_small_folders.Location = new Point(x_st + 55, y_st + 30);
             bt_find_same_files2.Location = new Point(x_st + 55, y_st + 60);
 
-            textBox3.Location = new Point(x_st + 100 + 100 - 26, y_st);
-            checkBox7.Location = new Point(x_st + 100 + 100 - 26, y_st + 50 + 6 - 20);
-            bt_test1.Location = new Point(x_st + 100 + 100 - 26, y_st + 50 + 10);
-            bt_test2.Location = new Point(x_st + 100 + 100 + 40 - 10 - 26, y_st + 50 + 10);
+            checkBox7.Location = new Point(x_st + 100 + 100 - 26, y_st + 0 + 6 - 20);
+            bt_test1.Location = new Point(x_st + 100 + 100 - 26, y_st + 0 + 10);
+            bt_test2.Location = new Point(x_st + 100 + 100 + 40 - 10 - 26, y_st + 0 + 10);
             dx = 85;
             dy = 35;
-            cb_option1.Location = new Point(x_st + 100 + 100 + dx * 1 - 50, y_st + dy);
-            cb_option2.Location = new Point(x_st + 100 + 100 + dx * 1 - 50, y_st + dy + 17);
-            cb_option3.Location = new Point(x_st + 100 + 100 + dx * 1 - 50, y_st + dy + 34);
+            cb_option1.Location = new Point(x_st + 100 + 100 + dx * 1 - 100, y_st + dy + 5);
+            cb_option2.Location = new Point(x_st + 100 + 100 + dx * 1 - 100, y_st + dy + 5 + 17);
+            cb_option3.Location = new Point(x_st + 100 + 100 + dx * 1 - 100, y_st + dy + 5 + 34);
 
-            x_st = 1318;
+            x_st = 1200 + 100 - 30;
+            y_st = 10;
+            tb_search.Location = new Point(x_st, y_st);
+
+            x_st = 1440;
             y_st = 6;
             dx = 55;
             dy = 55;
+            bt_search_pattern_vcs.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_search_pattern_cuda.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_search_pattern_opengl.Location = new Point(x_st + dx * 1, y_st + dy * 1);
 
-            bt_search_pattern_vcs.Location = new Point(x_st, y_st);
-            bt_search_pattern_cuda.Location = new Point(x_st, y_st + dy);
-            bt_search_pattern_opengl.Location = new Point(x_st + dx * 1, y_st + dy);
+            bt_open_dir2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_save_file_data.Location = new Point(x_st + dx * 1, y_st + dy * 1);
 
-            bt_open_dir2.Location = new Point(x_st + dx * 2, y_st);
-            bt_save_file_data.Location = new Point(x_st + dx * 2, y_st + dy);
-
-            bt_compare.Location = new Point(x_st + dx * 3, y_st);
+            bt_compare.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_replace.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
             bt_copy_rtb_data.Location = new Point(bt_clear2.Location.X, bt_copy_rtb_data.Location.Y);
@@ -279,11 +282,11 @@ namespace vcs_DrAP
             bt_setup.Location = new Point(this.ClientSize.Width - bt_setup.Width, 55);
             bt_clear3.Location = new Point(listView1.Location.X + listView1.Size.Width - bt_clear3.Size.Width, listView1.Location.Y + listView1.Size.Height - bt_clear3.Size.Height);
 
-            x_st = 1540;
+            x_st = 1610;
             y_st = 4;
             groupbox_python.Location = new Point(x_st, y_st);
             groupbox_python.Size = new Size(112, 106);
-            groupbox_result.Location = new Point(x_st + 165, y_st);
+            groupbox_result.Location = new Point(x_st + 120, y_st);
             groupbox_result.Size = new Size(110, 106);
             lb_search_result1.Location = new Point(10, 25);
             lb_search_result2.Location = new Point(10, 60);
@@ -300,7 +303,7 @@ namespace vcs_DrAP
             bt_search_pattern_python.Size = new Size(45, 45);
             bt_search_pattern_python.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_edit_python_files.Size = new Size(45, 45);
-            bt_edit_python_files.Location = new Point(x_st + dx * 0+50, y_st + dy * 2);
+            bt_edit_python_files.Location = new Point(x_st + dx * 0 + 50, y_st + dy * 2);
 
             /*
             richTextBox2.Text += "Form1 W1 " + this.Width.ToString() + "\n";
@@ -1950,7 +1953,7 @@ namespace vcs_DrAP
                 {               // 每次讀取一行，直到檔尾
                     i++;
                     line = sr.ReadLine();            // 讀取文字到 line 變數
-                    res = line.ToLower().Replace(" ", "").Contains(textBox3.Text.ToLower().Replace(" ", ""));
+                    res = line.ToLower().Replace(" ", "").Contains(tb_search.Text.ToLower().Replace(" ", ""));
                     if (res == true)
                     {
                         //richTextBox2.Text += "第" + i.ToString() + "行： " + line + "\n";
@@ -3106,15 +3109,15 @@ namespace vcs_DrAP
             {
                 //其他搜尋模式
             }
-            richTextBox1.Text += textBox3.Text + "\n";
-            richTextBox2.Text += textBox3.Text + "\n";
+            richTextBox1.Text += tb_search.Text + "\n";
+            richTextBox2.Text += tb_search.Text + "\n";
 
             bt_start_files.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
             Application.DoEvents();
 
             flag_show_30_message = false;
 
-            if (textBox3.Text == "")
+            if (tb_search.Text == "")
             {
                 richTextBox2.Text += "未輸入搜尋內容\n";
                 return;
@@ -3304,6 +3307,13 @@ namespace vcs_DrAP
         }
         //檢查空資料夾 ST
 
+        private void bt_replace_Click(object sender, EventArgs e)
+        {
+            Form_Replace frm = new Form_Replace();    //實體化 Form_Replace 視窗物件
+            frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
+            frm.ShowDialog();   //顯示 frm 視窗
+        }
+
         int total_show_empty_folder_cnt = 0;
         int total_delete_empty_folder_cnt = 0;
 
@@ -3441,7 +3451,7 @@ namespace vcs_DrAP
 
         private void textBox3_Click(object sender, EventArgs e)
         {
-            textBox3.SelectAll();
+            tb_search.SelectAll();
         }
 
         private void bt_save_file_data_Click(object sender, EventArgs e)

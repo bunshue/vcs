@@ -58,6 +58,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_Replace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Replace.Designer.cs">
+      <DependentUpon>Form_Replace.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_Setup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +75,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Replace.resx">
+      <DependentUpon>Form_Replace.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Setup.resx">
       <DependentUpon>Form_Setup.cs</DependentUpon>
