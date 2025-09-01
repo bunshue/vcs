@@ -84,7 +84,7 @@ print("------------------------------------------------------------")  # 60個
 # 使用 np 傅立葉
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 """ 自己造資料
 N = 11
@@ -103,7 +103,7 @@ plt.title("原圖")
 
 print("------------------------------")  # 30個
 
-image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
 fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
 s1 = np.log(np.abs(fshift))
@@ -116,7 +116,7 @@ plt.title("fftshift")
 
 print("------------------------------")  # 30個
 
-image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
 fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
 
@@ -149,7 +149,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 高通濾波
 
-image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 plt.subplot(131)
 plt.imshow(image, cmap="gray")  # 灰階顯示原圖
@@ -198,7 +198,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("傅立葉變換")
 
-image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
 # print(f)
@@ -223,7 +223,7 @@ print("使用 cv 傅立葉 ST")
 # cv2.idft
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 plt.subplot(131)
 plt.imshow(image, cmap="gray")  # 灰階顯示原圖
@@ -263,7 +263,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 低通濾波
 
-image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 plt.subplot(131)
 plt.imshow(image, cmap="gray")  # 灰階顯示原圖
@@ -318,7 +318,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 低通濾波
 
-image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 plt.subplot(131)
 plt.imshow(image, cmap="gray")  # 灰階顯示原圖
@@ -372,7 +372,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("頻譜圖")
 
-image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 plt.subplot(131)
 plt.imshow(image, cmap="gray")  # 灰階顯示原圖
@@ -514,7 +514,7 @@ def fft2Conv(I, kernel, borderType=cv2.BORDER_DEFAULT):
     cv2.dft(kernel_zeros, fft2_kz, cv2.DFT_COMPLEX_OUTPUT)
     # 第四步：兩個快速傅里葉變換點乘
     Ipz_rz = cv2.mulSpectrums(fft2_Ipz, fft2_kz, cv2.DFT_ROWS)
-    # 第五步：傅里葉逆變換，并只取實部
+    # 第五步：傅里葉逆變換，並只取實部
     ifft2FullConv = np.zeros((rows, cols), np.float64)
     cv2.dft(
         Ipz_rz, ifft2FullConv, cv2.DFT_REAL_OUTPUT + cv2.DFT_INVERSE + cv2.DFT_SCALE
@@ -577,21 +577,21 @@ plt.subplot(232)
 plt.imshow(np.abs(f), "gray")
 plt.title("二維傅里葉變換")
 
-# 將圖像變換的原點移動到頻域矩形的中心，并顯示效果
+# 將圖像變換的原點移動到頻域矩形的中心，並顯示效果
 fshift = np.fft.fftshift(f)  # 0 頻率分量移至中心
 
 plt.subplot(233)
 plt.imshow(np.abs(fshift), "gray")
 plt.title("頻域矩形的中心")
 
-# 對傅立葉變換的結果進行對數變換，并顯示效果
+# 對傅立葉變換的結果進行對數變換，並顯示效果
 log_fft2 = np.log(1 + np.abs(f))
 
 plt.subplot(235)
 plt.imshow(log_fft2, "gray")
 plt.title("傅立葉變換對數變換")
 
-# 對中心化后的結果進行對數變換，并顯示結果
+# 對中心化后的結果進行對數變換，並顯示結果
 log_FFT_SHIFT = np.log(1 + np.abs(fshift))
 
 plt.subplot(236)
@@ -602,31 +602,7 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("image_dft2")
-
-PI = 3.141591265
-
-image = plt.imread("data/castle3.jpg")
-
-# 根據公式轉成灰度圖
-image = 0.2126 * image[:, :, 0] + 0.7152 * image[:, :, 1] + 0.0722 * image[:, :, 2]
-
-plt.subplot(121)
-plt.imshow(image, "gray")
-plt.title("原圖")
-
-f = np.fft.fft2(image)  # 對 image 做np fft, 轉成頻率域
-log_fft2 = np.log(1 + np.abs(f))
-
-plt.subplot(122)
-plt.imshow(log_fft2, "gray")
-plt.title("log_fft2")
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 N = 256
 image = cv2.resize(image, (N, N))
@@ -748,7 +724,7 @@ def fft2Image1(image):
     return fft2
 
 
-image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 # 計算圖像矩陣的快速傅里葉變換
 fft2 = fft2Image1(image)
@@ -814,10 +790,7 @@ def phaseSpectrum(fft2):
     return spectrum
 
 
-image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
-cv2.imshow("image", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 # 快速傅里葉變換
 fft2 = fft2Image2(image)
@@ -828,23 +801,13 @@ amc = np.copy(amplitude)
 amc[amc > 255] = 255
 amc = amc.astype(np.uint8)
 
-# cv2.imshow("originam",amc)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
-
 # 幅度譜的灰度級顯示
 ampSpectrum = graySpectrum(amplitude)
 ampSpectrum *= 255
 ampSpectrum = ampSpectrum.astype(np.uint8)
-cv2.imshow("amplitudeSpectrum", ampSpectrum)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
 # 相位譜的灰度級顯示
 phaseSpe = phaseSpectrum(fft2)
-cv2.imshow("phaseSpectrum", phaseSpe)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
 # 傅里葉幅度譜的中心化
 
@@ -868,19 +831,37 @@ amSpe = amplitudeSpectrum(imagefft2)
 # 幅度譜的灰度級顯示
 graySpe = graySpectrum(amSpe)
 
-cv2.imshow("amSpe", graySpe)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
 graySpe *= 255
 graySpe = graySpe.astype(np.uint8)
 
 # 第四步：相位譜的灰度級顯示
 phSpe = phaseSpectrum(imagefft2)
 
-cv2.imshow("phSpe", phSpe)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+plt.figure(figsize=(14, 8))
+plt.subplot(231)
+plt.imshow(image, cmap="gray")  # 灰階顯示原圖
+plt.title("原圖")
+
+plt.subplot(232)
+plt.imshow(amc, cmap="gray")  # 灰階顯示原圖
+plt.title("originam")
+
+plt.subplot(233)
+plt.imshow(ampSpectrum, cmap="gray")  # 灰階顯示原圖
+plt.title("amplitudeSpectrum")
+
+plt.subplot(234)
+plt.imshow(phaseSpe, cmap="gray")  # 灰階顯示原圖
+plt.title("phaseSpectrum")
+
+plt.subplot(235)
+plt.imshow(graySpe, cmap="gray")  # 灰階顯示原圖
+plt.title("amSpe")
+
+plt.subplot(236)
+plt.imshow(phSpe, cmap="gray")  # 灰階顯示原圖
+plt.title("phSpe")
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -934,7 +915,7 @@ def phaseSpectrum(fft2):
     return phase
 
 
-image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 # 第一步：計算圖像的快速傅里葉變換
 fft2 = fft2Image3(image)
@@ -994,9 +975,10 @@ saliencymap = np.power(saliencymap, 0.5)
 saliencymap = np.round(saliencymap * 255)
 saliencymap = saliencymap.astype(np.uint8)
 
-cv2.imshow("saliencymap", saliencymap)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+plt.figure(figsize=(8, 6))
+plt.imshow(saliencymap, cmap="gray")  # 灰階顯示原圖
+plt.title("saliencymap")
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1069,7 +1051,7 @@ def createLPFilter(shape, center, radius, lpType=0, n=2):
     return lpFilter
 
 
-image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+image = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 cv2.imshow("image", image)
 cv2.waitKey(0)
@@ -1096,6 +1078,8 @@ spectrum = graySpectrum(amplitude)
 cv2.imshow("originalSpectrum", spectrum)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+print("------------------------------")  # 30個
 
 # 找到傅里葉譜最大值的位置
 minValue, maxValue, minLoc, maxLoc = cv2.minMaxLoc(amplitude)
@@ -1130,7 +1114,7 @@ while True:
     # 顯示低通濾波後的傅里葉譜的灰度級
     lp_spectrum = graySpectrum(lp_amplitude)
     cv2.imshow("lpFilterSpectrum", lp_spectrum)
-    # 第七和八步：對低通傅里葉變換執行傅里葉逆變換,并只取實部
+    # 第七和八步：對低通傅里葉變換執行傅里葉逆變換,並只取實部
     cv2.dft(
         fImagefft2_lpFilter,
         result,
@@ -1141,7 +1125,7 @@ while True:
         for c in range(cols):
             if (r + c) % 2:
                 result[r][c] *= -1
-    # 第十步：數據類型轉換,并進行灰度級顯示，截取左上角，大小和輸入圖像相等
+    # 第十步：數據類型轉換,並進行灰度級顯示，截取左上角，大小和輸入圖像相等
     for r in range(rows):
         for c in range(cols):
             if result[r][c] < 0:
@@ -1187,11 +1171,12 @@ def amplitudeSpectrum(fft2):
     return amplitude
 
 
-I = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+I = cv2.imread(filename_lena_gray, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
-cv2.imshow("I", I)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+plt.figure(figsize=(8, 6))
+plt.imshow(I, cmap="gray")  # 灰階顯示原圖
+plt.title("I")
+show()
 
 # 第二步：取對數
 lI = np.log(I + 1.0)
@@ -1226,7 +1211,7 @@ fft2Filter = np.zeros(fft2.shape, fft2.dtype)
 for i in range(2):
     fft2Filter[:rows, :cols, i] = fft2[:rows, :cols, i] * heFilter
 
-# 第八、九步：高頻增強傅里葉變換執行傅里葉逆變換,并只取實部
+# 第八、九步：高頻增強傅里葉變換執行傅里葉逆變換,並只取實部
 X_DFT = cv2.dft(fft2Filter, flags=cv2.DFT_REAL_OUTPUT + cv2.DFT_INVERSE + cv2.DFT_SCALE)
 
 # 第十步：裁剪，和輸入圖像的尺寸一樣
@@ -1240,14 +1225,15 @@ for i in range(ifI.shape[0]):
 # 第十二步：取指數
 eifI = np.exp(ifI) - 1
 
-# 第十三步：歸一化，并進行數據類型轉換
+# 第十三步：歸一化，並進行數據類型轉換
 eifI = (eifI - np.min(eifI)) / (np.max(eifI) - np.min(eifI))
 eifI = 255 * eifI
 eifI = eifI.astype(np.uint8)
 
-cv2.imshow("homomorphicFilter", eifI)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+plt.figure(figsize=(8, 6))
+plt.imshow(eifI, cmap="gray")  # 灰階顯示原圖
+plt.title("homomorphicFilter")
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1576,7 +1562,7 @@ for i in range(len(ecg) - 1):
     Y = float(ecg[i])
     index.append(X)
     data.append(Y)
-# 创建小波对象并定义参数
+# 创建小波对象並定义参数
 w = pywt.Wavelet("db8")  # 选用Daubechies8小波
 maxlev = pywt.dwt_max_level(len(data), w.dec_len)
 print("maximum level is" + str(maxlev))
@@ -1732,12 +1718,13 @@ print("------------------------------------------------------------")  # 60個
 filename = filename_barbara
 filename = filename1
 
-image = cv2.imread(filename, 0)
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 print(image.shape)
 
-cv2.imshow("original", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+plt.figure(figsize=(8, 6))
+plt.imshow(image, cmap="gray")  # 灰階顯示原圖
+plt.title("original")
+show()
 
 # 將型態轉成float後再計算DCT
 image_float = image.astype(float)
@@ -1817,13 +1804,13 @@ print("------------------------------")  # 30個
 
 # 沒有用的檔案
 
-image = cv2.imread("data/fft/shape1.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
-image = cv2.imread("data/fft/shape2.jpg", cv2.IMREAD_GRAYSCALE)  # 灰度模式
+image = cv2.imread("data/fft/shape1.jpg", cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+image = cv2.imread("data/fft/shape2.jpg", cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 "data/fft/jk.jpg"
 "data/fft/snow.jpg"
 
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
-image = cv2.imread(filename, 0)  # 0:灰度模式 cv2.IMREAD_GRAYSCALE
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+image = cv2.imread(filename, 0)  # 灰階讀取  # 0:灰階讀取 cv2.IMREAD_GRAYSCALE
 
 # plt.figure(figsize=(8, 6))
 
@@ -1839,7 +1826,7 @@ print(np.array_str(tmp, suppress_small=True))  # 壓縮顯示法
 
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 
 plt.subplot(121)
 plt.imshow(image, cmap="gray")  # 灰階顯示原圖
@@ -1929,7 +1916,17 @@ print(cx, cy)
 image[cx, cy] = 1
 print(image)
 
-# image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰度模式
+# image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)#灰階讀取
 # image = sinc2d # 使用 sinc2d
 
 print("------------------------------")  # 30個
+
+
+cv2.imshow("original", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+置換成
+plt.figure(figsize=(8, 6))
+plt.imshow(image, cmap="gray")  # 灰階顯示原圖
+plt.title("original")
+show()

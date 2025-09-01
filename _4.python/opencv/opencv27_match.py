@@ -26,6 +26,9 @@ def get_image_contours(image):
     return contours, hierarchy
 
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape06.png"
 
 image0 = cv2.imread(filename)  # 彩色讀取
@@ -721,6 +724,99 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+filename1 = "data/cs1.bmp"
+filename2 = "data/cs3.bmp"
+filename3 = "data/hand.jpg"
+
+o1 = cv2.imread(filename1)  # 彩色讀取
+o2 = cv2.imread(filename2)  # 彩色讀取
+o3 = cv2.imread(filename3)  # 彩色讀取
+
+contours1, hierarchy = get_image_contours(o1)
+contours2, hierarchy = get_image_contours(o1)
+contours3, hierarchy = get_image_contours(o1)
+
+cnt1 = contours1[0]
+cnt2 = contours2[0]
+cnt3 = contours3[0]
+
+# 構造距離提取算子
+sd = cv2.createShapeContextDistanceExtractor()
+
+# 計算距離
+d1 = sd.computeDistance(cnt1, cnt1)
+print("自身距離d1=", d1)
+d2 = sd.computeDistance(cnt1, cnt2)
+print("旋轉縮放后距離d2=", d2)
+d3 = sd.computeDistance(cnt1, cnt3)
+print("不相似對象距離d3=", d3)
+
+plt.figure(figsize=(12, 8))
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(o1, cv2.COLOR_BGR2RGB))
+plt.title("原圖1")
+plt.axis("off")
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(o2, cv2.COLOR_BGR2RGB))
+plt.title("原圖2")
+plt.axis("off")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(o3, cv2.COLOR_BGR2RGB))
+plt.title("原圖3")
+plt.axis("off")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename1 = "data/cs1.bmp"
+filename2 = "data/cs3.bmp"
+filename3 = "data/hand.jpg"
+
+o1 = cv2.imread(filename1)  # 彩色讀取
+o2 = cv2.imread(filename2)  # 彩色讀取
+o3 = cv2.imread(filename3)  # 彩色讀取
+
+contours1, hierarchy = get_image_contours(o1)
+contours2, hierarchy = get_image_contours(o1)
+contours3, hierarchy = get_image_contours(o1)
+
+cnt1 = contours1[0]
+cnt2 = contours2[0]
+cnt3 = contours3[0]
+
+# 構造距離提取算子
+hd = cv2.createHausdorffDistanceExtractor()
+
+# 計算距離
+d1 = hd.computeDistance(cnt1, cnt1)
+print("自身Hausdorff距離d1=", d1)
+d2 = hd.computeDistance(cnt1, cnt2)
+print("旋轉縮放后Hausdorff距離d2=", d2)
+d3 = hd.computeDistance(cnt1, cnt3)
+print("不相似對象Hausdorff距離d3=", d3)
+
+plt.figure(figsize=(12, 8))
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(o1, cv2.COLOR_BGR2RGB))
+plt.title("原圖1")
+plt.axis("off")
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(o2, cv2.COLOR_BGR2RGB))
+plt.title("原圖2")
+plt.axis("off")
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(o3, cv2.COLOR_BGR2RGB))
+plt.title("原圖3")
+plt.axis("off")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
