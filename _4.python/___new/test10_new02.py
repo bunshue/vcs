@@ -124,42 +124,51 @@ import tensorflow as tf
 #   using Runtime > Change Runtime Type > GPU
 # assert len(tf.config.list_physical_devices('GPU')) > 0
 
-length = len(tf.config.list_physical_devices('GPU'))
-print('GPU個數 :', length)
+length = len(tf.config.list_physical_devices("GPU"))
+print("GPU個數 :", length)
 
 print("------------------------------------------------------------")  # 60個
 
-def plot_transition_model(T_track, episode = 0):
-    fig = plt.figure(figsize=(10,8))
-    ax = fig.add_subplot(111, projection='3d')
+
+def plot_transition_model(T_track, episode=0):
+    fig = plt.figure(figsize=(10, 8))
+    ax = fig.add_subplot(111, projection="3d")
     ax.view_init(elev=20, azim=50)
 
-    color_left = '#008fd5' # ax._get_lines.get_next_color()
-    color_right = '#fc4f30' #ax._get_lines.get_next_color()
+    color_left = "#008fd5"  # ax._get_lines.get_next_color()
+    color_right = "#fc4f30"  # ax._get_lines.get_next_color()
 
-    left_prob = np.array([1,2,3,4,5,6,7,8,9])
+    left_prob = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
-    right_prob = np.array([1,2,3,4,5,6,7,8,9])
+    right_prob = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
     for s in np.arange(9):
-        ax.bar3d(s+0.1, np.arange(9)+0.1, np.zeros(9),
-                 np.zeros(9)+0.3,
-                 np.zeros(9)+0.3, 
-                 left_prob[s], 
-                 color=color_left, 
-                 alpha=0.75,
-                 shade=True)
-        ax.bar3d(s+0.1, np.arange(9)+0.1, left_prob[s],
-                 np.zeros(9)+0.3,
-                 np.zeros(9)+0.3, 
-                 right_prob[s], 
-                 color=color_right, 
-                 alpha=0.75,
-                 shade=True)
+        ax.bar3d(
+            s + 0.1,
+            np.arange(9) + 0.1,
+            np.zeros(9),
+            np.zeros(9) + 0.3,
+            np.zeros(9) + 0.3,
+            left_prob[s],
+            color=color_left,
+            alpha=0.75,
+            shade=True,
+        )
+        ax.bar3d(
+            s + 0.1,
+            np.arange(9) + 0.1,
+            left_prob[s],
+            np.zeros(9) + 0.3,
+            np.zeros(9) + 0.3,
+            right_prob[s],
+            color=color_right,
+            alpha=0.75,
+            shade=True,
+        )
 
-    ax.tick_params(axis='x', which='major', pad=10)
-    ax.tick_params(axis='y', which='major', pad=10)
-    ax.tick_params(axis='z', which='major', pad=10)
+    ax.tick_params(axis="x", which="major", pad=10)
+    ax.tick_params(axis="y", which="major", pad=10)
+    ax.tick_params(axis="z", which="major", pad=10)
 
     ax.xaxis.set_rotate_label(False)
     ax.yaxis.set_rotate_label(False)
@@ -167,25 +176,28 @@ def plot_transition_model(T_track, episode = 0):
     ax.set_xticks(np.arange(9))
     ax.set_yticks(np.arange(9))
 
-    plt.title('SWS learned MDP after {} episodes'.format(episode+1))
-    ax.set_xlabel('Initial\nstate', labelpad=75, rotation=0)
-    ax.set_ylabel('Landing\nstate', labelpad=75, rotation=0)
-    ax.set_zlabel('Transition\nprobabilities', labelpad=75, rotation=0)
+    plt.title("SWS learned MDP after {} episodes".format(episode + 1))
+    ax.set_xlabel("Initial\nstate", labelpad=75, rotation=0)
+    ax.set_ylabel("Landing\nstate", labelpad=75, rotation=0)
+    ax.set_zlabel("Transition\nprobabilities", labelpad=75, rotation=0)
 
     left_proxy = plt.Rectangle((0, 0), 1, 1, fc=color_left)
     right_proxy = plt.Rectangle((0, 0), 1, 1, fc=color_right)
 
-    plt.legend((left_proxy, right_proxy), 
-               ('Left', 'Right'), 
-               bbox_to_anchor=(0.15, 0.9), 
-               borderaxespad=0.)
+    plt.legend(
+        (left_proxy, right_proxy),
+        ("Left", "Right"),
+        bbox_to_anchor=(0.15, 0.9),
+        borderaxespad=0.0,
+    )
 
     ax.dist = 12
-    #plt.gcf().subplots_adjust(left=0.1, right=0.9)
+    # plt.gcf().subplots_adjust(left=0.1, right=0.9)
 
     show()
 
-T_track_dq=[1,2,3,4,5]
+
+T_track_dq = [1, 2, 3, 4, 5]
 plot_transition_model(T_track_dq, episode=0)
 
 print("------------------------------------------------------------")  # 60個
@@ -193,31 +205,31 @@ print("------------------------------------------------------------")  # 60個
 fff = 123.456
 training_start = time.time()
 
-print('a')
+print("a")
 time.sleep(1.234)
-print('b')
+print("b")
 
 elapsed_str = time.strftime("%H:%M:%S", time.gmtime(time.time() - training_start))
 
-debug_message = 'el {}, ep {:04}, ts {:07},\n'
-debug_message += 'ar 10  {:05.1f}\u00B1{:05.1f},\n'
-debug_message += '100    {:05.1f}\u00B1{:05.1f},\n'
-debug_message += 'ex 100 {:02.1f}\u00B1{:02.1f},\n'
-debug_message += 'ev     {:05.1f}\u00B1{:05.1f}\n'
+debug_message = "el {}, ep {:04}, ts {:07},\n"
+debug_message += "ar 10  {:05.1f}\u00B1{:05.1f},\n"
+debug_message += "100    {:05.1f}\u00B1{:05.1f},\n"
+debug_message += "ex 100 {:02.1f}\u00B1{:02.1f},\n"
+debug_message += "ev     {:05.1f}\u00B1{:05.1f}\n"
 debug_message = debug_message.format(
-elapsed_str, elapsed_str, elapsed_str, fff, fff,
-fff, fff, fff, fff,
-fff, fff)
-                
-print(debug_message, end='\r', flush=True)
+    elapsed_str, elapsed_str, elapsed_str, fff, fff, fff, fff, fff, fff, fff, fff
+)
 
-print(u'--> reached_max_minutes \u2715')
-print(u'--> reached_max_episodes \u2715')
-print(u'--> reached_goal_mean_reward \u2713')
+print(debug_message, end="\r", flush=True)
 
-print('Final evaluation score {:.2f}\u00B1{:.2f} in {:.2f}s training time,'
-      ' {:.2f}s wall-clock time.\n'.format(
-          fff, fff, fff, fff))
+print("--> reached_max_minutes \u2715")
+print("--> reached_max_episodes \u2715")
+print("--> reached_goal_mean_reward \u2713")
+
+print(
+    "Final evaluation score {:.2f}\u00B1{:.2f} in {:.2f}s training time,"
+    " {:.2f}s wall-clock time.\n".format(fff, fff, fff, fff)
+)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -248,8 +260,8 @@ x = np.arange(0, 1, 1.0 / N)
 y = np.where(x < 0.5, x, 0)
 y = np.where(x >= 0.5, 1 - x, y)
 
-plt.plot(x,y,"o")
-plt.title('三角波')
+plt.plot(x, y, "o")
+plt.title("三角波")
 
 show()
 
@@ -317,7 +329,7 @@ for dirname,subdir,files in sample_tree:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#系統
+# 系統
 
 from pathlib import Path
 
@@ -326,10 +338,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 print("------------------------------------------------------------")  # 60個
 
-print('本py檔全檔名')
+print("本py檔全檔名")
 print(__file__)
 
-print('本py檔所在資料夾')
+print("本py檔所在資料夾")
 basedir = os.path.dirname(__file__)
 print(basedir)
 
@@ -339,11 +351,11 @@ cur_dir = os.path.dirname(__file__)
 print(cur_dir)
 
 
-#列出Python所有內建函數 dir()
+# 列出Python所有內建函數 dir()
 cc = dir(__builtins__)
 print(cc)
 
-#Python的輔助說明 help()
+# Python的輔助說明 help()
 cc = help(print)
 print(cc)
 
@@ -389,46 +401,47 @@ print(__file__.upper())
 
 print(os.path.dirname(__file__))
 
-pathlist = os.environ['PATH'].split(os.pathsep)
+pathlist = os.environ["PATH"].split(os.pathsep)
 print(pathlist)
 
 print("------------------------------------------------------------")  # 60個
 
 # 重新命名檔案
 
-os.rename('filename.txt', 'new_filename.txt')
+os.rename("filename.txt", "new_filename.txt")
 
-os.rename('/path/to/dir/filename.txt', '/path/to/dir/new_filename.txt')
+os.rename("/path/to/dir/filename.txt", "/path/to/dir/new_filename.txt")
 
-dir = '/path/to/dir'
-old_file = os.path.join(dir, 'filename.txt')
-new_file = os.path.join(dir, 'new_filename.txt')
- 
+dir = "/path/to/dir"
+old_file = os.path.join(dir, "filename.txt")
+new_file = os.path.join(dir, "new_filename.txt")
+
 os.rename(old_file, new_file)
 
 print("------------------------------------------------------------")  # 60個
 
-print('# Generated by {}.  Do not edit manually.'.format(__file__))
+print("# Generated by {}.  Do not edit manually.".format(__file__))
 
-print(globals())    #印出記憶體內目前所有的變數名稱
+print(globals())  # 印出記憶體內目前所有的變數名稱
 
 print()
-print(__doc__ % globals())  #__doc__的內容有%的, 用變數名稱替換
+print(__doc__ % globals())  # __doc__的內容有%的, 用變數名稱替換
 print()
-print(__doc__)  #有%不替換
+print(__doc__)  # 有%不替換
 
 print("------------------------------------------------------------")  # 60個
 
+
 def lll(dirname):
     for name in os.listdir(dirname):
-        #print('a')
+        # print('a')
         if name not in (os.curdir, os.pardir):
-            print('b')
+            print("b")
             full = os.path.join(dirname, name)
             print(full)
 
 
-foldername = 'D:/_git/vcs/_1.data/______test_files5'
+foldername = "D:/_git/vcs/_1.data/______test_files5"
 # lll(foldername)
 
 print("------------------------------------------------------------")  # 60個
@@ -439,10 +452,10 @@ print("------------------------------------------------------------")  # 60個
 """
 print("------------------------------------------------------------")  # 60個
 
-drive = os.environ['HOMEDRIVE']
+drive = os.environ["HOMEDRIVE"]
 print("HOMEDRIVE :", drive)
 
-path = os.environ['PATH']
+path = os.environ["PATH"]
 print("PATH :", path)
 
 paths = path.split(os.pathsep)
@@ -458,14 +471,16 @@ print("------------------------------------------------------------")  # 60個
 您可以將 'C:/Users/User/python/path' 替換為您要遍歷的資料夾的實際路徑。運行程式碼後，它會遞迴地列印資料夾中的所有檔案和目錄，並使用縮排來顯示層次結構。
 請注意，indent參數用於控制縮排的數量，以便更好地表示層次結構。在遞迴調用時，將 indent + 4 傳遞給下一級目錄，以增加縮排的寬度。您可以根據需要自定義縮排的數量。
 """
+
+
 def traverse_folder(folder_path, indent=0):
     # 獲取資料夾中的所有檔案和子目錄
     items = os.listdir(folder_path)
-    
+
     for item in items:
         # 構建完整的路徑
         item_path = os.path.join(folder_path, item)
-        
+
         if os.path.isfile(item_path):
             # 如果是檔案，列印檔案名稱
             print(" " * indent + "檔案:", item)
@@ -474,8 +489,9 @@ def traverse_folder(folder_path, indent=0):
             print(" " * indent + "目錄:", item)
             traverse_folder(item_path, indent + 4)
 
+
 # 指定資料夾路徑
-folder_path = 'C:/Users/User/python/path'
+folder_path = "C:/Users/User/python/path"
 # 遍歷資料夾中的檔案和目錄
 # traverse_folder(folder_path)
 
@@ -483,23 +499,23 @@ print("------------------------------------------------------------")  # 60個
 
 # 撈出多層
 
-foldername = 'D:/_git/vcs/_1.data/______test_files3/DrAP_test'
+foldername = "D:/_git/vcs/_1.data/______test_files3/DrAP_test"
 
 # This would print all the files and directories
 if __name__ == "__main__":
     print(foldername)
     if os.path.isdir(foldername):
-        print('是資料夾')
+        print("是資料夾")
         dirs = os.listdir(foldername)
         print("撈出一層(檔案+資料夾) :", dirs)
         for file in dirs:
             print(file)
             if not os.path.isdir(foldername + "/" + file):
-                print('檔案 :', foldername + "/" + file)
+                print("檔案 :", foldername + "/" + file)
             else:
-                print('資料夾 :', foldername + "/" + file)
+                print("資料夾 :", foldername + "/" + file)
     else:
-        print('不是資料夾')
+        print("不是資料夾")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -530,23 +546,26 @@ animals = [
 ]
 
 # 保留N格靠左對齊(-N)、保留N格靠右對齊(+N)
-print('%-25s %-15s %-15s' % ('英文名','中文名','體重'))
-print('========================= =============== ===============')
+print("%-25s %-15s %-15s" % ("英文名", "中文名", "體重"))
+print("========================= =============== ===============")
 for i in range(len(animals)):
     # print('%-25s %-15s %-15d' % (animals[i][0], animals[i][1], animals[i][2]))# 保留N格靠左對齊(-N)
-    print('%25s %15s %15d' % (animals[i][0], animals[i][1], animals[i][2]))# 保留N格靠右對齊(+N)
+    print(
+        "%25s %15s %15d" % (animals[i][0], animals[i][1], animals[i][2])
+    )  # 保留N格靠右對齊(+N)
 
 
 pi = 3.14159265358979323846
-print('%s: %f' % ("圓周率", pi)) # 預設6位小數
-print('%s: %.5f' % ("圓周率", pi))
+print("%s: %f" % ("圓周率", pi))  # 預設6位小數
+print("%s: %.5f" % ("圓周率", pi))
 
 
 def pi(n):
     p = 0
-    for i in range(1,n+1, 1):
-        p += 4 *((-1)**(i+1)/(2*i-1))
+    for i in range(1, n + 1, 1):
+        p += 4 * ((-1) ** (i + 1) / (2 * i - 1))
     return p
+
 
 print("  i      PI ")
 print("================")
@@ -566,7 +585,11 @@ animals = [
 for i in range(len(animals)):
     print("{:10s} {:10s}".format(animals[i][0], animals[i][1]))
     print("{:10s} {:10s}".format(str(animals[i][2]), animals[i][3]))
-    print("{:10s} {:10s} {:10s} {:10s}".format(animals[i][0], animals[i][1], str(animals[i][2]), animals[i][3]))
+    print(
+        "{:10s} {:10s} {:10s} {:10s}".format(
+            animals[i][0], animals[i][1], str(animals[i][2]), animals[i][3]
+        )
+    )
 
 # another 用 d
 # print('  {:4s}: {:3d},'.format(repr(char), char2idx[char]))
@@ -586,32 +609,36 @@ cc = (now - datetime.date(2011, 1, 18)).days == 325
 print(cc)
 
 a = datetime.datetime.now()
-print(a)   # 输出：2021-12-01 19:43:11.598313
+print(a)  # 输出：2021-12-01 19:43:11.598313
 
 today = datetime.date.today()
-print('Day is', today)
+print("Day is", today)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print(time.time()) # 输出：1638348236.3917518
+print(time.time())  # 输出：1638348236.3917518
 # print(time.clock())    # 输出：0.0338435
 print(time.sleep(2))  # 括号里是2，程序睡两秒再执行，打印会显示None
 print(time.time_ns())  # 输出：1638348716267450500
-print(time.gmtime())   # 输出：time.struct_time(tm_year=1974, tm_mon=12, tm_mday=15, tm_hour=1, tm_min=6, tm_sec=0, tm_wday=6, tm_yday=349, tm_isdst=0)
-print(time.gmtime(10000000))  #  输出： time.struct_time(tm_year=1970, tm_mon=4, tm_mday=26, tm_hour=17, tm_min=46, tm_sec=40, tm_wday=6, tm_yday=116, tm_isdst=0)
-print(time.ctime(123123))   # 输出：Fri Jan  2 18:12:03 1970
-print(time.ctime())    # 输出：Wed Dec  1 18:53:33 2021
-print(time.strptime('2021-12-1','%Y-%m-%d'))   # 将其转化为机构化时间，前后必须对应
-a = time.strptime('2021-12-1','%Y-%m-%d')
+print(
+    time.gmtime()
+)  # 输出：time.struct_time(tm_year=1974, tm_mon=12, tm_mday=15, tm_hour=1, tm_min=6, tm_sec=0, tm_wday=6, tm_yday=349, tm_isdst=0)
+print(
+    time.gmtime(10000000)
+)  #  输出： time.struct_time(tm_year=1970, tm_mon=4, tm_mday=26, tm_hour=17, tm_min=46, tm_sec=40, tm_wday=6, tm_yday=116, tm_isdst=0)
+print(time.ctime(123123))  # 输出：Fri Jan  2 18:12:03 1970
+print(time.ctime())  # 输出：Wed Dec  1 18:53:33 2021
+print(time.strptime("2021-12-1", "%Y-%m-%d"))  # 将其转化为机构化时间，前后必须对应
+a = time.strptime("2021-12-1", "%Y-%m-%d")
 print(a.tm_year)  # 可以通过这种方式去取
-                  # 输出：2025
+# 输出：2025
 
-print(time.localtime()) # 返回结构化时间，里面加参数，就从计算机元年开始算
+print(time.localtime())  # 返回结构化时间，里面加参数，就从计算机元年开始算
 a = time.localtime()
 print(a.tm_year)  # 可以通过这种方式去取
-                  # 输出：2021
-print(time.mktime(time.localtime()))    # 输出： 1638358856.0
+# 输出：2021
+print(time.mktime(time.localtime()))  # 输出： 1638358856.0
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -631,17 +658,17 @@ print(f"{BMI = :5.2f} 體重正常")
 print("BMI =", format(BMI, ".2f"), "體重正常")
 
 r1 = 123.456789
-r2 = 222.334455 
+r2 = 222.334455
 print(f"{r1 = :6.4f},    {r2 = :6.4f}")
 
 # return "%s:%s" % (self.filename, self.lineno)
 
 humi = 67.89
 temp = 23.45
-print('溫度:{:.1f}, 濕度:{:.0f}%'.format(humi, temp))
+print("溫度:{:.1f}, 濕度:{:.0f}%".format(humi, temp))
 
 cm = 123.456
-print('距離:%5.1f 公分' % cm)        
+print("距離:%5.1f 公分" % cm)
 
 humi = 67.89
 temp = 23.45

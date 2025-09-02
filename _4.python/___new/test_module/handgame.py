@@ -1,4 +1,7 @@
 import random
-handgesture=['剪刀','石頭','布']
+
+handgesture = ["剪刀", "石頭", "布"]
+
+
 def hand():
-	return random.choice(handgesture)
+    return random.choice(handgesture)
