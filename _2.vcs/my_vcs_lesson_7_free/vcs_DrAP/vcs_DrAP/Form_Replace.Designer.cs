@@ -36,7 +36,6 @@
             this.bt_replace = new System.Windows.Forms.Button();
             this.lb_string_old = new System.Windows.Forms.Label();
             this.tb_string_new = new System.Windows.Forms.TextBox();
-            this.cb_confirm = new System.Windows.Forms.CheckBox();
             this.tb_string_old = new System.Windows.Forms.TextBox();
             this.rb_file_type2 = new System.Windows.Forms.RadioButton();
             this.rb_file_type1 = new System.Windows.Forms.RadioButton();
@@ -55,7 +54,6 @@
             this.groupBox_replace.Controls.Add(this.bt_replace);
             this.groupBox_replace.Controls.Add(this.lb_string_old);
             this.groupBox_replace.Controls.Add(this.tb_string_new);
-            this.groupBox_replace.Controls.Add(this.cb_confirm);
             this.groupBox_replace.Controls.Add(this.tb_string_old);
             this.groupBox_replace.Controls.Add(this.rb_file_type2);
             this.groupBox_replace.Controls.Add(this.rb_file_type1);
@@ -79,13 +77,15 @@
             // 
             // bt_open_dir
             // 
+            this.bt_open_dir.BackgroundImage = global::vcs_DrAP.Properties.Resources.open_folder;
             this.bt_open_dir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_open_dir.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_dir.Location = new System.Drawing.Point(116, 110);
+            this.bt_open_dir.Location = new System.Drawing.Point(116, 87);
             this.bt_open_dir.Name = "bt_open_dir";
             this.bt_open_dir.Size = new System.Drawing.Size(40, 40);
             this.bt_open_dir.TabIndex = 146;
             this.bt_open_dir.UseVisualStyleBackColor = true;
+            this.bt_open_dir.Click += new System.EventHandler(this.bt_open_dir_Click);
             // 
             // rb_file_type3
             // 
@@ -136,17 +136,6 @@
             this.tb_string_new.Name = "tb_string_new";
             this.tb_string_new.Size = new System.Drawing.Size(150, 30);
             this.tb_string_new.TabIndex = 147;
-            // 
-            // cb_confirm
-            // 
-            this.cb_confirm.AutoSize = true;
-            this.cb_confirm.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_confirm.Location = new System.Drawing.Point(116, 91);
-            this.cb_confirm.Name = "cb_confirm";
-            this.cb_confirm.Size = new System.Drawing.Size(104, 23);
-            this.cb_confirm.TabIndex = 146;
-            this.cb_confirm.Text = "確認置換";
-            this.cb_confirm.UseVisualStyleBackColor = true;
             // 
             // tb_string_old
             // 
@@ -207,6 +196,7 @@
             this.bt_clear.TabIndex = 148;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
             // Form_Replace
             // 
@@ -235,7 +225,6 @@
         private System.Windows.Forms.Button bt_replace;
         private System.Windows.Forms.Label lb_string_old;
         private System.Windows.Forms.TextBox tb_string_new;
-        private System.Windows.Forms.CheckBox cb_confirm;
         private System.Windows.Forms.TextBox tb_string_old;
         private System.Windows.Forms.RadioButton rb_file_type2;
         private System.Windows.Forms.RadioButton rb_file_type1;

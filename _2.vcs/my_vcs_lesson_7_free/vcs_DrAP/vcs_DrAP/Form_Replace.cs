@@ -13,6 +13,7 @@ namespace vcs_DrAP
 {
     public partial class Form_Replace : Form
     {
+        string search_path = string.Empty;
         string specified_search_path = String.Empty;
 
         public Form_Replace()
@@ -29,9 +30,10 @@ namespace vcs_DrAP
 
             this.Text = "目前位置 : " + currentPath;
             lb_path.Text = currentPath;
+            search_path = currentPath;
+            specified_search_path = currentPath;
             tb_string_old.Text = @"D:/_git/vcs/_1.data/______test_files2";
             tb_string_new.Text = @"D:/_git/vcs/_1.data/______test_files1/";
-
         }
 
         void show_item_location()
@@ -58,7 +60,6 @@ namespace vcs_DrAP
             tb_string_old.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             tb_string_new.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             bt_replace.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            cb_confirm.Location = new Point(x_st + dx * 1 + 40, y_st + dy * 2 + 10);
             bt_open_dir.Location = new Point(x_st + dx * 3 + 10, y_st + dy * 2);
             lb_path.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 8);
             int dd = 20;
@@ -71,6 +72,11 @@ namespace vcs_DrAP
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(800, 600);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         List<String> filenames = new List<String>();
@@ -106,8 +112,6 @@ namespace vcs_DrAP
 
         private void bt_replace_Click(object sender, EventArgs e)
         {
-            bool flag_really_replace = cb_confirm.Checked;
-            richTextBox1.Text += "是否置換 : " + flag_really_replace.ToString() + "\n";
             string string_old = tb_string_old.Text;
             string string_new = tb_string_new.Text;
             if (string_old == "")
@@ -259,6 +263,25 @@ namespace vcs_DrAP
             }
             File.Move(filename2, filename1);
             return 0;   //置換成功
+        }
+
+        private void bt_open_dir_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "search_path = " + search_path + "\n";
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            folderBrowserDialog1.SelectedPath = search_path;  //預設開啟的路徑
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                specified_search_path = folderBrowserDialog1.SelectedPath;
+                lb_path.Text = specified_search_path;
+                search_path = specified_search_path;
+                richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
+            }
+            else
+            {
+                richTextBox1.Text = "未選取資料夾\n";
+                specified_search_path = String.Empty;
+            }
         }
     }
 }

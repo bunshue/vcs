@@ -281,9 +281,9 @@
             this.tb_search.TabIndex = 24;
             this.tb_search.Text = "TBGBMBKB";
             this.tb_search.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tb_search.Click += new System.EventHandler(this.textBox3_Click);
-            this.tb_search.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox3_KeyDown);
-            this.tb_search.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
+            this.tb_search.Click += new System.EventHandler(this.tb_search_Click);
+            this.tb_search.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_search_KeyDown);
+            this.tb_search.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_search_KeyPress);
             // 
             // bt_find_same_files
             // 

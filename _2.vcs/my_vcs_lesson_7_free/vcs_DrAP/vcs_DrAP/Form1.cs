@@ -1980,7 +1980,7 @@ namespace vcs_DrAP
             return;
         }
 
-        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        private void tb_search_KeyPress(object sender, KeyPressEventArgs e)
         {
             //改用KeyDown
             /*
@@ -2391,7 +2391,7 @@ namespace vcs_DrAP
             richTextBox1.Text += "共取得檔案 " + total_number_files.ToString() + " 個\n";
         }
 
-        private void textBox3_KeyDown(object sender, KeyEventArgs e)
+        private void tb_search_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -3449,7 +3449,7 @@ namespace vcs_DrAP
             }
         }
 
-        private void textBox3_Click(object sender, EventArgs e)
+        private void tb_search_Click(object sender, EventArgs e)
         {
             tb_search.SelectAll();
         }

@@ -842,23 +842,6 @@ namespace vcs_Remove_Bin_Obj
             }
         }
 
-        private void bt_open_dir_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "search_path = " + search_path + "\n";
-            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
-            folderBrowserDialog1.SelectedPath = search_path;  //預設開啟的路徑
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                specified_search_path = folderBrowserDialog1.SelectedPath;
-                richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
-            }
-            else
-            {
-                richTextBox1.Text = "未選取資料夾\n";
-                specified_search_path = String.Empty;
-            }
-        }
-
         private void bt_open_dir2_Click(object sender, EventArgs e)
         {
             int cnt = listView1.SelectedItems.Count;
