@@ -387,6 +387,142 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
 image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
+
+contours, hierarchy = get_image_contours(image1)
+
+print("凸包 cv2.convexHull()")
+
+n = len(contours)  # 輪廓數量
+for i in range(n):
+    print("第", i, "個輪廓")
+    image1 = cv2.drawContours(image1, contours, i, RED, 3)  # 繪製輪廓/一個/色/線寬
+    cnt = contours[i]  # 取得輪廓數據
+    # 計算輪廓面積2, 用cv2.contourArea()
+    con_area = cv2.contourArea(cnt)  # 計算輪廓面積
+    print("輪廓面積 :", con_area)
+
+    # 計算凸包, 尋找凸包，得到凸包的角點
+    hull = cv2.convexHull(cnt)  # 計算凸包, 返回凸包頂點坐標值
+    # 繪製凸包
+    image1 = cv2.polylines(image1, [hull], True, CYAN, 3)  # 將凸包連線# 近似多邊形連線
+
+    isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
+    print(f"是否凸形       = {isConvex}")
+    print("凸點數量 :", len(hull))
+    # 計算輪廓面積(凸包)
+    convex_area = cv2.contourArea(hull)  # 計算輪廓面積(凸包)
+    print("凸包面積 :", convex_area)
+    extent = con_area / convex_area  # 計算Extent
+    print("真實占比 輪廓面積 佔 凸包的 :", extent)
+
+
+show_images(image0, "原圖", image1, "顯示凸包")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 檢測凸包距離
+
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/star_silver.png"  # 五角銀星
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
+filename = "data/findContours/heart1.jpg"
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
+
+contours, hierarchy = get_image_contours(image1)
+
+n = len(contours)  # 輪廓數量
+for i in range(n):
+    print("第", i, "個輪廓")
+    cnt = contours[i]  # 取得輪廓數據
+    # 計算凸包
+    hull = cv2.convexHull(cnt)  # 計算凸包, 返回凸包頂點坐標值
+    isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
+    print(f"是否凸形       = {isConvex}")
+
+    image1 = cv2.polylines(image1, [hull], True, GREEN, 2)  # 將凸包連線# 近似多邊形連線
+    # print(hull)   可以用這個指令了解凸包座標點
+
+    # 檢測凸包距離
+
+    # 外部點
+    pt = (50, 100)
+    image1 = cv2.circle(image1, pt, 5, RED, -1)  # 畫實心圓
+    dist = cv2.pointPolygonTest(hull, pt, True)  # 檢測距離, True:距離
+    print("距離 :", dist)
+    dist = cv2.pointPolygonTest(hull, pt, False)  # 檢測距離, False:是否
+    print("距離 :", dist)  # 關係
+
+    # 邊緣點
+    pt = (135, 100)
+    image1 = cv2.circle(image1, pt, 5, RED, -1)  # 畫實心圓
+    dist = cv2.pointPolygonTest(hull, pt, True)  # 檢測距離, True:距離
+    print("距離 :", dist)
+    dist = cv2.pointPolygonTest(hull, pt, False)  # 檢測距離, False:是否
+    print("距離 :", dist)  # 關係
+
+    # 內部點
+    pt = (200, 100)
+    image1 = cv2.circle(image1, pt, 5, RED, -1)  # 畫實心圓
+    dist = cv2.pointPolygonTest(hull, pt, True)  # 檢測距離, True:距離
+    print("距離 :", dist)
+    dist = cv2.pointPolygonTest(hull, pt, False)  # 檢測距離, False:是否
+    print("距離 :", dist)  # 關係
+
+
+show_images(image0, "原圖", image1, "凸包2")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+"""
+filename = "data/contours.bmp"
+
+image0 = cv2.imread(filename)  # 彩色讀取
+image1 = image0.copy()
+
+contours, hierarchy = get_image_contours(image1)
+
+image1 = cv2.drawContours(image1, contours, -1, RED, 3)  # 繪製輪廓/-1:全部/色/線寬
+
+n = len(contours)  # 輪廓數量
+for i in range(n):
+    print("第", i, "個輪廓")
+    cnt = contours[i]  # 取得輪廓數據
+
+    # cv2.convexHull()  # 計算凸包, 返回凸包頂點 坐標值/索引值
+    # 計算凸包1, True返回凸包頂點 坐標值
+    hull = cv2.convexHull(cnt)  # 計算凸包, 返回凸包頂點坐標值
+    print("計算凸包1, True返回凸包頂點 坐標值")
+    print(hull)
+
+    print("凸點數量 :", len(hull))
+    n = hull.shape[0]  # 凸點數量
+    print("凸點數量 :", n)
+    for i in range(n):
+        print(hull[i])
+        print(hull[i][0])
+        print(hull[i, 0])
+        # print("第", i, "個凸點索引 :", hull[i, 0], ", 座標 :", cnt[hull[i, 0]])
+        # image1 = cv2.circle(image1, cnt[hull[i, 0]][0], 10, BLUE, -1)  # 畫實心圓
+        # image1 = cv2.circle(image1, (hull[i][0], hull[i][1]), 10, BLUE, -1)  # 畫實心圓
+
+    # cv2.convexHull()  # 計算凸包, 返回凸包頂點 坐標值/索引值
+    # 計算凸包2, False返回凸包頂點 索引值
+    hull = cv2.convexHull(cnt, returnPoints=False)  # 計算凸包, 返回凸包頂點索引值
+    print("計算凸包2, False返回凸包頂點 索引值")
+    print(hull)
+
+
+cv2.imshow("image0", image1)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
+image0 = cv2.imread(filename)  # 彩色讀取
 image2 = image0.copy()
 image3 = image0.copy()
 image4 = image0.copy()
@@ -396,32 +532,6 @@ image9 = image0.copy()
 
 print("------------------------------")  # 30個
 
-contours, hierarchy = get_image_contours(image2)
-
-print("找出輪廓 image2")
-
-n = len(contours)  # 輪廓數量
-for i in range(n):
-    print("第", i, "個輪廓")
-    cnt = contours[i]  # 取得輪廓數據
-    # 計算輪廓面積
-    con_area = cv2.contourArea(cnt)  # 計算輪廓面積
-    print("輪廓面積 :", con_area)
-    ed = np.sqrt(4 * con_area / np.pi)  # 計算等效面積
-    print("等效面積 :", ed)
-    (cx, cy) = (250, 250)  # 改成隨contour畫圓
-    r = int(ed / 2)
-    image2 = cv2.circle(image2, (cx, cy), r, GREEN, 3)  # 畫圓
-    # 計算凸包
-    hull = cv2.convexHull(cnt)  # 計算凸包, 返回凸包頂點坐標值
-    isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
-    print(f"是否凸形       = {isConvex}")
-    image2 = cv2.polylines(image2, [hull], True, BLUE, 2)  # 將凸包連線# 近似多邊形連線
-    # 計算輪廓面積
-    convex_area = cv2.contourArea(hull)  # 計算輪廓面積  # 凸包面積
-    print("凸包面積 :", convex_area)
-    extent = con_area / convex_area  # 計算Extent
-    print("真實占比 輪廓面積 佔 凸包的 :", extent)
 
 print("------------------------------")  # 30個
 
@@ -443,12 +553,6 @@ for i in range(n):
     x, y, w, h = cv2.boundingRect(cnt)  # 邊界矩形(包圍盒)
     cv2.rectangle(image3, (x, y), (x + w, y + h), BLUE, 3)
     print("最小外接的旋轉矩形")
-    # 計算凸包
-    hull = cv2.convexHull(cnt)  # 計算凸包, 返回凸包頂點坐標值
-    isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
-    print(f"是否凸形       = {isConvex}")
-    image3 = cv2.polylines(image3, [hull], True, CYAN, 2)  # 將凸包連線# 近似多邊形連線
-    print("凸點數量：{}".format(len(hull)))
 
     # 最小邊界矩形(包圍盒)
     print("最小邊界矩形(包圍盒)")  # 構造矩形邊界
@@ -476,7 +580,7 @@ for i in range(n):
     radius = int(radius)  # 圓半徑取整數
     cv2.circle(image4, center, radius, MAGENTA, 2)  # 畫圓  外接圓
     cv2.circle(image4, center, 10, RED, -1)  # 畫實心圓 圓心
-    # 多邊形逼近(注意與凸包區別)
+    # 多邊形逼近
     # approxPolyDP 輪廓近似
     approxCurve = cv2.approxPolyDP(cnt, 0.3, True)
     # 多邊形頂點個數
@@ -513,31 +617,6 @@ for i in range(n):
 
 print("------------------------------")  # 30個
 
-contours, hierarchy = get_image_contours(image6)
-
-print("凸包 image6")
-
-n = len(contours)  # 輪廓數量
-for i in range(n):
-    print("第", i, "個輪廓")
-    cnt = contours[i]  # 取得輪廓數據
-    image6 = cv2.drawContours(image6, cnt, -1, RED, 5)
-    # 計算凸包
-    hull = cv2.convexHull(cnt)  # 計算凸包, 返回凸包頂點坐標值
-    image6 = cv2.polylines(image6, [hull], True, GREEN, 2)  # 將凸包連線# 近似多邊形連線
-    isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
-    print(f"是否凸形       = {isConvex}")
-    # 計算輪廓面積(凸包)
-    convex_area = cv2.contourArea(hull)  # 計算輪廓面積(凸包)
-    print(f"凸包面積 = {convex_area}")
-    # 計算輪廓面積
-    con_area = cv2.contourArea(cnt)  # 計算輪廓面積
-    print("輪廓面積 :", con_area)
-    extent = con_area / convex_area  # 計算Extent
-    print("真實占比 輪廓面積 佔 凸包的 :", extent)
-
-print("------------------------------")  # 30個
-
 contours, hierarchy = get_image_contours(image9)
 
 print("圓圈圈出來 image9")
@@ -557,37 +636,28 @@ print("------------------------------")  # 30個
 
 # 一起畫出來
 plt.figure(figsize=(16, 8))
-plt.subplot(331)
+plt.subplot(231)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 plt.axis("off")
 
-plt.subplot(332)
-plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
-plt.title("找出輪廓 image2")
-plt.axis("off")
-
-plt.subplot(333)
+plt.subplot(232)
 plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
 plt.title("幾何形狀的檢測 image3")
 plt.axis("off")
 
-plt.subplot(334)
+plt.subplot(233)
 plt.imshow(cv2.cvtColor(image4, cv2.COLOR_BGR2RGB))
 plt.title("幾何形狀的檢測和擬合 findContours image4")
 plt.axis("off")
 
-plt.subplot(335)
+plt.subplot(234)
 plt.imshow(cv2.cvtColor(image5, cv2.COLOR_BGR2RGB))
 plt.title("三角形框選 image5")
 plt.axis("off")
 
-plt.subplot(336)
-plt.imshow(cv2.cvtColor(image6, cv2.COLOR_BGR2RGB))
-plt.title("凸包 image6")
-plt.axis("off")
 
-plt.subplot(337)
+plt.subplot(235)
 plt.imshow(cv2.cvtColor(image9, cv2.COLOR_BGR2RGB))
 plt.title("圓圈圈出來 image9")
 plt.axis("off")
@@ -640,22 +710,22 @@ for i in range(n):
 
 
 plt.figure(figsize=(16, 8))
-plt.subplot(331)
+plt.subplot(231)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 plt.axis("off")
 
-plt.subplot(334)
+plt.subplot(232)
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("輪廓近似 epsilon=3")
 plt.axis("off")
 
-plt.subplot(335)
+plt.subplot(233)
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
 plt.title("輪廓近似 epsilon=15")
 plt.axis("off")
 
-plt.subplot(336)
+plt.subplot(234)
 plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
 plt.title("輪廓近似 epsilon=30")
 plt.axis("off")
@@ -668,7 +738,6 @@ filename = "data/findContours/heart1.jpg"
 filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
 
 image0 = cv2.imread(filename)  # 彩色讀取
-image1 = image0.copy()
 image2 = image0.copy()
 image3 = image0.copy()
 
@@ -677,11 +746,6 @@ contours, hierarchy = get_image_contours(image0)
 n = len(contours)  # 輪廓數量
 for i in range(n):
     cnt = contours[i]  # 取得輪廓數據
-    # 計算凸包
-    hull = cv2.convexHull(cnt)  # 計算凸包, 返回凸包頂點坐標值
-    image1 = cv2.polylines(image1, [hull], True, GREEN, 2)  # 將凸包連線# 近似多邊形連線
-    isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
-    print(f"是否凸形       = {isConvex}")
 
 # approxPolyDP 輪廓近似, epsilon=10/30, 做 近似多邊形包圍
 
@@ -702,17 +766,12 @@ for i in range(n):
     isConvex = cv2.isContourConvex(approx)  # 凸檢測, 是否凸形
     print(f"是否凸形       = {isConvex}")
 
-plt.subplot(337)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-plt.title("凸包3")
-plt.axis("off")
-
-plt.subplot(338)
+plt.subplot(235)
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
 plt.title("近似多邊形包圍 epsilon=10")
 plt.axis("off")
 
-plt.subplot(339)
+plt.subplot(236)
 plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
 plt.title("近似多邊形包圍 epsilon=30")
 plt.axis("off")
@@ -933,61 +992,7 @@ for i in range(n):
             print("far :", far)
             print("d :", depth)
 
-show_images(image0, "原圖", image1, "凸包1")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 檢測凸包距離
-
-filename = "D:/_git/vcs/_4.python/opencv/data/_shape/star_silver.png"  # 五角銀星
-filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
-filename = "data/findContours/heart1.jpg"
-image0 = cv2.imread(filename)  # 彩色讀取
-image1 = image0.copy()
-
-contours, hierarchy = get_image_contours(image1)
-
-n = len(contours)  # 輪廓數量
-for i in range(n):
-    print("第", i, "個輪廓")
-    cnt = contours[i]  # 取得輪廓數據
-    # 計算凸包
-    hull = cv2.convexHull(cnt)  # 計算凸包, 返回凸包頂點坐標值
-    isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
-    print(f"是否凸形       = {isConvex}")
-
-    image1 = cv2.polylines(image1, [hull], True, GREEN, 2)  # 將凸包連線# 近似多邊形連線
-    # print(hull)   可以用這個指令了解凸包座標點
-
-    # 檢測凸包距離
-
-    # 外部點
-    pt = (50, 100)
-    image1 = cv2.circle(image1, pt, 5, RED, -1)  # 畫實心圓
-    dist = cv2.pointPolygonTest(hull, pt, True)  # 檢測距離, True:距離
-    print("距離 :", dist)
-    dist = cv2.pointPolygonTest(hull, pt, False)  # 檢測距離, False:是否
-    print("距離 :", dist)  # 關係
-
-    # 邊緣點
-    pt = (135, 100)
-    image1 = cv2.circle(image1, pt, 5, RED, -1)  # 畫實心圓
-    dist = cv2.pointPolygonTest(hull, pt, True)  # 檢測距離, True:距離
-    print("距離 :", dist)
-    dist = cv2.pointPolygonTest(hull, pt, False)  # 檢測距離, False:是否
-    print("距離 :", dist)  # 關係
-
-    # 內部點
-    pt = (200, 100)
-    image1 = cv2.circle(image1, pt, 5, RED, -1)  # 畫實心圓
-    dist = cv2.pointPolygonTest(hull, pt, True)  # 檢測距離, True:距離
-    print("距離 :", dist)
-    dist = cv2.pointPolygonTest(hull, pt, False)  # 檢測距離, False:是否
-    print("距離 :", dist)  # 關係
-
-
-show_images(image0, "原圖", image1, "凸包2")
+show_images(image0, "原圖", image1, "凸包/凸包缺陷")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1399,107 +1404,6 @@ plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
 plt.title("original3")
 plt.axis("off")
 show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/contours.bmp"
-
-image0 = cv2.imread(filename)  # 彩色讀取
-image1 = image0.copy()
-
-# 待更換
-# contours, hierarchy = get_image_contours(image1)
-gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
-thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
-ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
-contours, hierarchy = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-
-image1 = cv2.drawContours(image1, contours, 0, RED, 3)  # 繪製輪廓/-1:全部/色/線寬
-
-cnt = contours[0]  # 取得輪廓數據
-
-# cv2.convexHull()  # 計算凸包, 返回凸包頂點 坐標值/索引值
-# 計算凸包1, True返回凸包頂點 坐標值
-hull = cv2.convexHull(cnt)  # 計算凸包, 返回凸包頂點坐標值
-print("計算凸包1, True返回凸包頂點 坐標值")
-print(hull)
-
-print("凸點數量 :", len(hull))
-n = hull.shape[0]  # 凸點數量
-print("凸點數量 :", n)
-for i in range(n):
-    print(hull[i])
-    print(hull[i][0])
-    print(hull[i, 0])
-    # print("第", i, "個凸點索引 :", hull[i, 0], ", 座標 :", cnt[hull[i, 0]])
-    # image1 = cv2.circle(image1, cnt[hull[i, 0]][0], 10, BLUE, -1)  # 畫實心圓
-    # image1 = cv2.circle(image1, (hull[i][0], hull[i][1]), 10, BLUE, -1)  # 畫實心圓
-
-# cv2.convexHull()  # 計算凸包, 返回凸包頂點 坐標值/索引值
-# 計算凸包2, False返回凸包頂點 索引值
-hull = cv2.convexHull(cnt, returnPoints=False)  # 計算凸包, 返回凸包頂點索引值
-print("計算凸包2, False返回凸包頂點 索引值")
-print(hull)
-
-"""
-cv2.imshow("image0", image1)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/hand.jpg"
-image0 = cv2.imread(filename)  # 彩色讀取
-image1 = image0.copy()
-
-contours, hierarchy = get_image_contours(image1)
-
-n = len(contours)  # 輪廓數量
-print("每個輪廓分別處理:")
-for i in range(n):
-    # 共同
-    print("第", i, "個輪廓")
-    image1 = cv2.drawContours(image1, contours, i, RED, 3)  # 繪製輪廓/一個/色/線寬
-    cnt = contours[i]  # 取得輪廓數據
-
-    # 計算凸包, 尋找凸包，得到凸包的角點
-    hull = cv2.convexHull(cnt)  # 計算凸包, 返回凸包頂點坐標值
-    isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
-    print(f"是否凸形       = {isConvex}")
-
-    # 繪製凸包
-    cv2.polylines(image1, [hull], True, GREEN, 2)  # 近似多邊形連線
-
-show_images(image0, "原圖", image1, "顯示凸包aaaaa")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
-
-image0 = cv2.imread(filename)  # 彩色讀取
-image1 = image0.copy()
-
-contours, hierarchy = get_image_contours(image1)
-
-n = len(contours)  # 輪廓數量
-print("每個輪廓分別處理:")
-for i in range(n):
-    # 共同
-    print("第", i, "個輪廓")
-    image1 = cv2.drawContours(image1, contours, i, RED, 3)  # 繪製輪廓/一個/色/線寬
-    cnt = contours[i]  # 取得輪廓數據
-
-    # 計算凸包
-    hull = cv2.convexHull(cnt)  # 計算凸包, 返回凸包頂點坐標值
-    isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
-    print(f"是否凸形       = {isConvex}")
-
-    cv2.polylines(image1, [hull], True, GREEN, 2)  # 近似多邊形連線
-
-show_images(image0, "原圖", image1, "顯示凸包")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2065,6 +1969,21 @@ show_images(image0, "原圖", image1, "output")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+"""
+在下面的實例中，讀入圖形moon.jpg，並轉為二值圖形。
+找到二值圖中黑白區域相交的邊線，並計算其周長和面積。
+然後透過這兩個參數計算pi。
+"""
+import cv2
+
+img = cv2.imread("data/moon.jpg", cv2.IMREAD_GRAYSCALE)
+_, bimg = cv2.threshold(img, 50, 255, cv2.THRESH_BINARY)
+contour, _ = cv2.findContours(bimg, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_L1)
+contour = cv2.approxPolyDP(contour[0], epsilon=2, closed=False)
+area = cv2.contourArea(contour)
+perimeter = cv2.arcLength(contour, True)
+cc = perimeter**2 / (4 * area)
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2435,3 +2354,12 @@ filename = "data/contours.bmp"
 filename = "data/cc.bmp"
 filename = "data/cs1.bmp"
 filename = "data/cc.bmp"
+
+
+"""
+# 待更換
+gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
+thresh = 127  # 定義閾值, 閾值以上為全白255, 閾值以下為全黑0
+ret, binary = cv2.threshold(gray, thresh, maxval, cv2.THRESH_BINARY)  # 二值化處理
+contours, hierarchy = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+"""
