@@ -1300,41 +1300,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "data/loc3.jpg"
-image0 = cv2.imread(filename)  # 彩色讀取
-image1 = image0.copy()
-
-contours, hierarchy = get_image_contours(image1)
-
-mask = np.zeros(image1.shape, np.uint8)
-mask = np.ones(image1.shape, dtype=np.uint8) * 127  # 新建一個灰圖
-
-n = len(contours)  # 輪廓數量
-print("輪廓數量 :", n)
-
-mask = cv2.drawContours(mask, contours, -1, RED, -1)  # 繪製輪廓/-1:全部/白/-1:填滿
-
-loc = cv2.bitwise_and(image1, mask)
-
-plt.subplot(311)
-plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-plt.axis("off")
-
-plt.subplot(312)
-plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
-plt.title("mask1")
-plt.axis("off")
-
-plt.subplot(313)
-plt.imshow(cv2.cvtColor(loc, cv2.COLOR_BGR2RGB))
-plt.title("location")
-plt.axis("off")
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("計算圖像的Hu矩")
 
 filename1 = "data/cs1.bmp"
@@ -1400,52 +1365,6 @@ print("a內非零值位置:\n", loc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "data/cc.bmp"
-# filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
-image0 = cv2.imread(filename)  # 彩色讀取
-image1 = image0.copy()
-
-contours, hierarchy = get_image_contours(image1)
-gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
-
-cnt = contours[0]  # 取得輪廓數據
-
-# -----------------繪製空心輪廓------------------------
-mask1 = np.zeros(gray.shape, np.uint8)
-mask1 = np.ones(gray.shape, dtype=np.uint8) * 127  # 新建一個灰圖
-cv2.drawContours(mask1, [cnt], 0, 255, 2)  # 繪製輪廓/一個/??/線寬
-pixelpoints1 = np.transpose(np.nonzero(mask1))
-print("pixelpoints1.shape=", pixelpoints1.shape)
-print("pixelpoints1=\n", pixelpoints1)
-
-# -----------------繪製實心輪廓---------------------
-mask2 = np.zeros(gray.shape, np.uint8)
-mask2 = np.ones(gray.shape, dtype=np.uint8) * 127  # 新建一個灰圖
-cv2.drawContours(mask2, [cnt], 0, 255, -1)  # 繪製輪廓/一個/??/-1:填滿
-pixelpoints2 = np.transpose(np.nonzero(mask2))
-print("pixelpoints2.shape=", pixelpoints2.shape)
-print("pixelpoints2=\n", pixelpoints2)
-
-plt.figure(figsize=(12, 8))
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-plt.axis("off")
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(mask1, cv2.COLOR_BGR2RGB))
-plt.title("mask1")
-plt.axis("off")
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(mask2, cv2.COLOR_BGR2RGB))
-plt.title("mask2")
-plt.axis("off")
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # ------------生成一個都是0值的a-------------------
 a = np.zeros((5, 5), dtype=np.uint8)
 # -------隨機將其中10個位置上的數值設置為1------------
@@ -1469,54 +1388,6 @@ print("a內非零值位置:\n", loc)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "data/cc.bmp"
-# filename = "D:/_git/vcs/_4.python/opencv/data/_shape/shape01.png"
-image0 = cv2.imread(filename)  # 彩色讀取
-image1 = image0.copy()
-
-contours, hierarchy = get_image_contours(image1)
-gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉灰階
-
-cnt = contours[0]  # 取得輪廓數據
-
-# -----------------繪製空心輪廓------------------------
-mask1 = np.zeros(gray.shape, np.uint8)
-mask1 = np.ones(gray.shape, dtype=np.uint8) * 127  # 新建一個灰圖
-
-cv2.drawContours(mask1, [cnt], 0, 255, 2)  # 繪製輪廓/一個/??/線寬
-pixelpoints1 = cv2.findNonZero(mask1)  # 獲得非0元素座標
-print("pixelpoints1.shape=", pixelpoints1.shape)
-print("pixelpoints1=\n", pixelpoints1)
-
-# -----------------繪製實心輪廓---------------------
-mask2 = np.zeros(gray.shape, np.uint8)
-mask2 = np.ones(gray.shape, dtype=np.uint8) * 127  # 新建一個灰圖
-
-cv2.drawContours(mask2, [cnt], 0, 255, -1)  # 繪製輪廓/一個/??/-1:填滿
-pixelpoints2 = cv2.findNonZero(mask2)  # 獲得非0元素座標
-print("pixelpoints2.shape=", pixelpoints2.shape)
-print("pixelpoints2=\n", pixelpoints2)
-
-plt.figure(figsize=(12, 8))
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-plt.axis("off")
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(mask1, cv2.COLOR_BGR2RGB))
-plt.title("mask1")
-plt.axis("off")
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(mask2, cv2.COLOR_BGR2RGB))
-plt.title("mask2")
-plt.axis("off")
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 filename = "data/ct.png"
 image0 = cv2.imread(filename)  # 彩色讀取
 image1 = image0.copy()
@@ -1530,24 +1401,29 @@ cnt = contours[2]  # coutours[0]、coutours[1]是左側字母R  # 取得輪廓�
 # --------使用掩膜獲取感興趣區域的極值-----------------
 # 需要注意minMaxLoc處理的對象為灰度圖像，本例中處理對象為灰度圖像gray
 # 如果希望獲取彩色圖像的，需要提取各個通道，將每個通道獨立計算最值
-mask = np.zeros(gray1.shape, np.uint8)  # 構造極值所使用的掩膜，必須是單通道的
-mask = np.ones(gray1.shape, dtype=np.uint8) * 127  # 新建一個灰圖
-
-mask = cv2.drawContours(mask, [cnt], -1, WHITE, -1)  # 繪製輪廓/-1:全部/白/-1:填滿
+mask1 = np.zeros(gray1.shape, np.uint8)  # 構造極值所使用的掩膜，必須是單通道的
+mask1 = np.ones(gray1.shape, dtype=np.uint8) * 127  # 新建一個灰圖
+mask1 = cv2.drawContours(mask1, [cnt], -1, RED, -1)  # 繪製輪廓/-1:全部/紅/-1:填滿
 
 # 取得極值, 最大最小
-minVal, maxVal, minLoc, maxLoc = cv2.minMaxLoc(gray1, mask=mask)
+minVal, maxVal, minLoc, maxLoc = cv2.minMaxLoc(gray1, mask=mask1)
 print("minVal=", minVal)
 print("maxVal=", maxVal)
 print("minLoc=", minLoc)
 print("maxLoc=", maxLoc)
 
-# --------使用掩膜獲取感興趣區域并顯示-----------------
-masko = np.zeros(image1.shape, np.uint8)
-masko = np.ones(image1.shape, dtype=np.uint8) * 127  # 新建一個灰圖
+# 取得平均值
+meanVal = cv2.mean(image1, mask=mask1)  # mask是區域，所以必須是單通道的
+print("meanVal=\n", meanVal)
 
-masko = cv2.drawContours(masko, [cnt], -1, RED, -1)  # 繪製輪廓/-1:全部/紅/-1:填滿
-loc1 = cv2.bitwise_and(image1, masko)
+meanVal = cv2.mean(gray1, mask=mask1)  # mask是區域，所以必須是單通道的
+print("meanVal=\n", meanVal)
+
+# 使用掩膜獲取感興趣區域
+mask1 = np.zeros(image1.shape, np.uint8)
+mask1 = np.ones(image1.shape, dtype=np.uint8) * 127  # 新建一個灰圖
+mask1 = cv2.drawContours(mask1, [cnt], -1, RED, -1)  # 繪製輪廓/-1:全部/紅/-1:填滿
+loc1 = cv2.bitwise_and(image1, mask1)
 
 print("------------------------------")  # 30個
 
@@ -1559,36 +1435,33 @@ cnt = contours[2]  # coutours[0]、coutours[1]是左側字母R  # 取得輪廓�
 # --------使用掩膜獲取感興趣區域的平均值-----------------
 # 需要注意minMaxLoc處理的對象為灰度圖像，本例中處理對象為灰度圖像gray
 # 如果希望獲取彩色圖像的，需要提取各個通道，將每個通道獨立計算最值
-mask = np.zeros(gray2.shape, np.uint8)  # 構造mean所使用的掩膜，必須是單通道的
-mask = np.ones(gray2.shape, dtype=np.uint8) * 127  # 新建一個灰圖
+mask2 = np.zeros(gray2.shape, np.uint8)  # 構造mean所使用的掩膜，必須是單通道的
+mask2 = np.ones(gray2.shape, dtype=np.uint8) * 127  # 新建一個灰圖
+mask2 = cv2.drawContours(mask2, [cnt], -1, RED, -1)  # 繪製輪廓/-1:全部/紅/-1:填滿
 
-cv2.drawContours(mask, [cnt], 0, WHITE, -1)  # 繪製輪廓/一個/白/-1:填滿
 
-# 取得平均值
-meanVal = cv2.mean(image2, mask=mask)  # mask是區域，所以必須是單通道的
-print("meanVal=\n", meanVal)
+# 使用掩膜獲取感興趣區域
+mask2 = np.zeros(image2.shape, np.uint8)
+mask2 = np.ones(image2.shape, dtype=np.uint8) * 127  # 新建一個灰圖
+mask2 = cv2.drawContours(mask2, [cnt], -1, RED, -1)  # 繪製輪廓/-1:全部/紅/-1:填滿
+loc2 = cv2.bitwise_and(image2, mask2)
 
-# --------使用掩膜獲取感興趣區域并顯示-----------------
-masko = np.zeros(image2.shape, np.uint8)
-masko = np.ones(image2.shape, dtype=np.uint8) * 127  # 新建一個灰圖
+print("------------------------------")  # 30個
 
-masko = cv2.drawContours(masko, [cnt], -1, RED, -1)  # 繪製輪廓/-1:全部/紅/-1:填滿
-loc2 = cv2.bitwise_and(image2, masko)
-
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(10, 6))
 plt.subplot(131)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 plt.axis("off")
 
 plt.subplot(132)
-plt.imshow(cv2.cvtColor(loc1, cv2.COLOR_BGR2RGB))
-plt.title("mask2 極值")
+plt.imshow(cv2.cvtColor(mask1, cv2.COLOR_BGR2RGB))
+plt.title("mask")
 plt.axis("off")
 
 plt.subplot(133)
-plt.imshow(cv2.cvtColor(loc2, cv2.COLOR_BGR2RGB))
-plt.title("mask3 平均值")
+plt.imshow(cv2.cvtColor(loc1, cv2.COLOR_BGR2RGB))
+plt.title("loc")
 plt.axis("off")
 show()
 
@@ -2277,7 +2150,7 @@ contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_S
 filename = "data/contours.bmp"
 filename = "data/cc.bmp"
 filename = "data/cs1.bmp"
-filename = "data/cc.bmp"
+filename = "data/loc3.jpg"
 
 
 """

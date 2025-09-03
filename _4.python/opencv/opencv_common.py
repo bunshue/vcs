@@ -108,6 +108,7 @@ colors = [
     PURPLE,
     SILVER,
 ]  # 14個
+NN = 14
 
 # BGR
 color = [
