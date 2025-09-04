@@ -31,7 +31,7 @@ import ast
 from bs4 import BeautifulSoup
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 def get_epa_key():
     filename = "D:/_git/vcs/_1.data/______test_files1/_key/epa_key.txt"
@@ -118,7 +118,7 @@ time.sleep(3)
 print('讀取遠端 json 檔案')
 format = 'json'
 url = 'https://data.epa.gov.tw/api/v2/%s?format=%s&offset=%s&limit=%s&api_key=%s' % (DataID, format, offset, limit, api_key)
-filename = 'D:/_git/vcs/_1.data/______test_files2/AQI_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.json';   #json檔案名稱
+filename = 'tmp_AQI_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.json';   #json檔案名稱
 urllib.request.urlretrieve(url, filename) #下載遠端 json 檔案
 
 
@@ -226,11 +226,7 @@ def downloadAQI():
         print("下載成功")
         print(response.data)
         # 儲存檔案，建立file實體
-        filename = (
-            "D:/_git/vcs/_1.data/______test_files2/AQI_"
-            + time.strftime("%Y%m%d_%H%M%S", time.localtime())
-            + ".csv"
-        )
+        filename = "tmp_AQI_"+ time.strftime("%Y%m%d_%H%M%S", time.localtime())+ ".csv"
         file = open(filename, "wb")
         file.write(response.data)
         print("存檔成功")
@@ -244,19 +240,23 @@ def downloadAQI():
 downloadAQI()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 time.sleep(3)
 
-db_filename = "D:/_git/vcs/_1.data/______test_files1/_db/DataBasePM25.sqlite"
-md5_filename = "D:/_git/vcs/_1.data/______test_files2/old_md5.txt"
+db_filename = "tmp_DataBasePM25.sqlite"
+md5_filename = "tmp_old_md5.txt"
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
 
 # 建立一個資料表
 sqlstr = """
-CREATE TABLE IF NOT EXISTS TablePM25 ("no" INTEGER PRIMARY KEY AUTOINCREMENT 
-NOT NULL UNIQUE ,"SiteName" TEXT NOT NULL ,"PM25" INTEGER)
+CREATE TABLE IF NOT EXISTS TablePM25 (
+"no" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
+"SiteName" TEXT NOT NULL,
+"PM25" INTEGER
+)
 """
 cursor.execute(sqlstr)
 
@@ -361,4 +361,10 @@ conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個

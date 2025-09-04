@@ -539,7 +539,7 @@ print("取得圖片超連結 取得 img src", img.get("src"))
 
 # 下載圖片 另存新檔
 filename = img["src"].split("/")[-1]  # 取得圖檔名
-foldername = "D:/_git/vcs/_1.data/______test_files2/"
+foldername = "tmp_foldername/"
 filename2 = os.path.join(foldername, filename)
 
 img = requests.get(img["src"])
@@ -1261,7 +1261,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("BeautifulSoup 測試 2")
 
-filename = "D:/_git/vcs/_1.data/______test_files2/kkbox_songs.csv"
+filename = "tmp_kkbox_songs.csv"
 
 # KKBOX華語新歌日榜
 url = "https://kma.kkbox.com/charts/api/v1/daily?category=390&lang=tc&limit=50&terr=tw&type=newrelease"

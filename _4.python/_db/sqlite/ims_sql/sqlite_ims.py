@@ -64,7 +64,7 @@ list_stage_list = [
 stage = -1
 tablename = ''
 db_filename = ''
-#db_filename = 'D:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
+db_filename = 'tmp_db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
 
 dummy_data = 'abcd'
 count = 0

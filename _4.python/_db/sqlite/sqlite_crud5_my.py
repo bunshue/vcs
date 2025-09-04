@@ -105,7 +105,7 @@ list_stage_list = [
 stage = -1
 tablename = ""
 db_filename = ""
-# db_filename = 'D:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
+db_filename = "tmp_db_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
 
 dummy_data = "abcd"
 count = 0
@@ -289,7 +289,7 @@ import time
 import datetime
 import sqlite3
 
-db_filename = "D:/_git/vcs/_1.data/______test_files2/my_db.sqlite"
+db_filename = "tmp_my_db.sqlite"
 
 # print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線

@@ -136,17 +136,13 @@ img.save("./tmp_iphone-edit.jpg", exif=exif_new)  # 另存新檔並加入 Exif
 
 print("------------------------------------------------------------")  # 60個
 
-
-"""
-EXIF
-"""
+# EXIF
 
 import sys
 
 print("------------------------------------------------------------")  # 60個
 
 filename1 = "D:/_git/vcs/_1.data/______test_files1/orient2_RightTop.jpg"
-filename2 = "D:/_git/vcs/_1.data/______test_files2/orient2_RightTopffff.jpg"
 
 from PIL import Image
 from PIL import Image, ImageFilter
@@ -237,7 +233,7 @@ else:
 degree = dic_exif[exif["Orientation"]]
 # 圖片選轉 ， expand 要設定 (不然旋轉後會有黑邊)
 image_rotated = image.rotate(degree, expand=1)
-filename2 = "cccc.jpg"
+filename2 = "tmp_cccc.jpg"
 # image_rotated.save(filename2, 'JPEG')
 
 plt.imshow(image_rotated)
@@ -285,7 +281,8 @@ exif_new = piexif.dump(exif_dict)
 
 # print(exif_new)
 
-filename2 = "data/exif_gps_modify.jpg"
+# filename2 = "data/exif_gps_modify.jpg"
+filename2 = "tmp_exif_gps_modify.jpg"
 
 im.save(filename2, "JPEG", exif=exif_new)
 

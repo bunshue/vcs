@@ -43,7 +43,7 @@ print(html_data)
 print("OK")
 
 print("資料寫出到本地檔案")
-filename = "D:/_git/vcs/_1.data/______test_files2/perl.html"
+filename = "tmp_perl.html"
 fd = open(filename, "w")
 fd.write(html_data)
 fd.close()
@@ -71,7 +71,7 @@ print("------------------------------------------------------------")  # 60個
 print("urllib 測試 4")
 
 print("資料寫出到本地檔案")
-filename = "D:/_git/vcs/_1.data/______test_files2/b2.html"
+filename = "tmp_b2.html"
 fd = open(filename, "wb")
 fd.write(html_data)
 fd.close()
@@ -108,7 +108,7 @@ html_data = get_html_data_by_urlopen(url)
 print(html_data)
 
 print("資料寫出到本地檔案")
-filename = "D:/_git/vcs/_1.data/______test_files2/bbb.html"
+filename = "tmp_bbb.html"
 fd = open(filename, "wb")
 fd.write(html_data)
 fd.close()
@@ -184,7 +184,7 @@ data = resp.read()
 # data = data.decode('UTF-8')
 # print(data)
 print("資料寫出到本地檔案")
-filename = "D:/_git/vcs/_1.data/______test_files2/tmp.html"
+filename = "tmp_tmp.html"
 fd = open(filename, "wb")
 fd.write(data)
 fd.close()
@@ -369,7 +369,7 @@ print(data)
 print()
 print(data[0])
 
-filename = "D:/_git/vcs/_1.data/______test_files2/products.csv"
+filename = "tmp_products.csv"
 print("將資料寫出到csv檔, 檔案 : ", filename)
 
 with open(filename, "w", encoding="big5", newline="\n") as fp:

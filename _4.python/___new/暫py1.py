@@ -1058,8 +1058,10 @@ filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif'
 
 video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
+filename = 'tmp_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.csv'
+filename = 'tmp_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg'
+
 filename = 'D:/_git/vcs/_1.data/______test_files1/__RW/_word/python_docx1.docx'
-filename = 'D:/_git/vcs/_1.data/______test_files2/output.avi'
 
 filename1 = 'D:/_git/vcs/_4.python/_data/elephant.jpg'
 filename2 = 'D:/_git/vcs/_4.python/_data/tiger.jpg'
@@ -1086,9 +1088,6 @@ now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 print("現在時間 :", now)
 
 print('-' * 60)	#60個
-
-filename = 'D:/_git/vcs/_1.data/______test_files2/AQI_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.csv'
-filename = 'Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg'
 
 #設定中文字型及負號正確顯示
 #設定中文字型檔

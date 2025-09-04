@@ -543,11 +543,10 @@ print_dir_scores(r'.\data\scores')
 
 print('------------------------------------------------------------')	#60個
 
-
 """
 json
 
-filename = 'D:/_git/vcs/_1.data/______test_files2/news_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.json';
+filename = 'tmp_news_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.json';
 with open(filename, "w", encoding = 'utf-8') as fp:
     print(filename + " is dumping...")
     json.dump(titles, fp)
@@ -556,7 +555,6 @@ print("------------------------------------------------------------")  # 60個
 
 """
 讀取JSON數據
-
 """
 
 json_str = '{"name": "駱昊", "age": 38, "title": "叫獸"}'

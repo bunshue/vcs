@@ -1,6 +1,5 @@
 """
 使用 pytube 做 YouTube下載
-
 """
 
 print('------------------------------------------------------------')	#60個
@@ -14,7 +13,7 @@ from pytube import YouTube
 from pytube import Playlist
 
 #下載資料夾
-foldername = 'D:/_git/vcs/_1.data/______test_files2/youtube_download'
+foldername = 'tmp_youtube_download'
 
 #準備輸出資料夾 若不存在, 則建立
 if not os.path.exists(foldername):

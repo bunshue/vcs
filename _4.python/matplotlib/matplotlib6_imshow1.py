@@ -284,7 +284,7 @@ im = plt.imshow(
 
 """
 im.set_url('https://www.google.com/')
-filename = 'D:/_git/vcs/_1.data/______test_files2/image.svg'
+filename = 'tmp_image.svg'
 fig.savefig(filename)
 print('已存圖' + filename)
 """
