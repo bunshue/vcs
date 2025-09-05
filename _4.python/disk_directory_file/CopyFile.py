@@ -1,10 +1,11 @@
 import os.path
 import sys
 
+
 def main():
     # Prompt the user to enter filenames
-    f1 = 'D:/_git/vcs/_1.data/______test_files1/article.txt'
-    f2 = 'tmp_articledddddd.txt'
+    f1 = "D:/_git/vcs/_1.data/______test_files1/article.txt"
+    f2 = "tmp_articledddddd.txt"
 
     # Check if target file exists
     if os.path.isfile(f2):
@@ -24,6 +25,7 @@ def main():
     print(countLines, "lines and", countChars, "chars copied")
 
     infile.close()  # Close the input file
-    outfile.close() # Close the output file
+    outfile.close()  # Close the output file
 
-main() # Call the main function
+
+main()  # Call the main function

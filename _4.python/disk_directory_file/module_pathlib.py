@@ -12,18 +12,18 @@ import pathlib
 print("------------------------------------------------------------")  # 60個
 
 print("列出子目錄：")
-p = pathlib.Path('.')
+p = pathlib.Path(".")
 print(p)
 
 print("在當前目錄樹下列出 Python 原始碼檔案：")
-cc = list(p.glob('**/*.py'))
+cc = list(p.glob("**/*.py"))
 print(cc)
 
 print("瀏覽目錄樹內部：")
 
-foldername = 'D:/_git/vcs/_1.data'
+foldername = "D:/_git/vcs/_1.data"
 p = pathlib.Path(foldername)
-q = p / '______test_files3' / '_excel'
+q = p / "______test_files3" / "_excel"
 print(q)
 
 q.resolve()
@@ -35,16 +35,16 @@ print("q.exists()", q.exists())
 print("q.is_dir()", q.is_dir())
 
 
-foldername = 'D:/_git/vcs/_4.python/_data/'
+foldername = "D:/_git/vcs/_4.python/_data/"
 p = pathlib.Path(foldername)
-q = p / 'article2.txt'
+q = p / "article2.txt"
 print(q)
 
-#q.resolve()
+# q.resolve()
 
-#filename = 'D:/_git/vcs/_4.python/_data/article2.txt'
+# filename = 'D:/_git/vcs/_4.python/_data/article2.txt'
 
-#開啟檔案：
+# 開啟檔案：
 
 with q.open() as f:
     cc = f.readline()
@@ -52,7 +52,7 @@ with q.open() as f:
 
 print("------------------------------------------------------------")  # 60個
 
-foldername = 'D:/_git/vcs/_4.python/_data/'
+foldername = "D:/_git/vcs/_4.python/_data/"
 
 cc = pathlib.PureWindowsPath(foldername).drive
 
@@ -63,7 +63,7 @@ cc = pathlib.PureWindowsPath(foldername).root
 print("所在的root : ", cc)
 
 
-p = pathlib.PureWindowsPath('C:/AA/BB/CC/DD/EE/FF/GG/HH/II/JJ/kk.py')
+p = pathlib.PureWindowsPath("C:/AA/BB/CC/DD/EE/FF/GG/HH/II/JJ/kk.py")
 print(p.parents[0])
 print(p.parents[1])
 print(p.parents[2])
@@ -71,8 +71,8 @@ print(p.parents[3])
 print(p.parents[4])
 print(p.parents[5])
 
-p = pathlib.PurePath('C:/AA/BB/CC/DD/EE/FF/GG/HH/II/JJ/kk.py')
-#邏輯上的父路徑：
+p = pathlib.PurePath("C:/AA/BB/CC/DD/EE/FF/GG/HH/II/JJ/kk.py")
+# 邏輯上的父路徑：
 print(p.parent)
 
 
@@ -80,7 +80,7 @@ print("CWD :", pathlib.Path.cwd())
 print("HOME :", pathlib.Path.home())
 
 
-filename = 'D:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = "D:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 p = pathlib.Path(filename)
 
@@ -95,15 +95,15 @@ Path.is_dir()
 Path.is_file()
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-path = pathlib.Path('test10_new06.py')
+path = pathlib.Path("test10_new06.py")
 abs_path = path.resolve()
 print(abs_path)
 new_path = str(abs_path) + ".old"
 print(new_path)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 filepath = "檔案操作_新進1.py"
 p = pathlib.Path(filepath)
@@ -125,9 +125,9 @@ print("------------------------------------------------------------")  # 60個
 infolder = "testfolder"
 ext = "*.txt"
 filelist = []
-for p in pathlib.Path(infolder).glob(ext):  #將這個資料夾的檔案
-    filelist.append(str(p))         #新增至列表
-for filename in sorted(filelist):   #再替每個檔案排序
+for p in pathlib.Path(infolder).glob(ext):  # 將這個資料夾的檔案
+    filelist.append(str(p))  # 新增至列表
+for filename in sorted(filelist):  # 再替每個檔案排序
     print(filename)
 
 print("------------------------------------------------------------")  # 60個
@@ -135,9 +135,9 @@ print("------------------------------------------------------------")  # 60個
 infolder = "testfolder"
 ext = "*.txt"
 filelist = []
-for p in pathlib.Path(infolder).rglob(ext): #將這個資料夾以及子資料夾的所有檔案
-    filelist.append(str(p))         #新增至列表
-for filename in sorted(filelist):   #再替每個檔案排序
+for p in pathlib.Path(infolder).rglob(ext):  # 將這個資料夾以及子資料夾的所有檔案
+    filelist.append(str(p))  # 新增至列表
+for filename in sorted(filelist):  # 再替每個檔案排序
     print(filename)
 
 print("------------------------------------------------------------")  # 60個
@@ -146,9 +146,9 @@ infolder = "testfolder"
 ext = "*.txt"
 allsize = 0
 filelist = []
-for p in pathlib.Path(infolder).rglob(ext): #將這個資料夾以及子資料夾的所有檔案
-    filelist.append(str(p))         #新增至列表
-for filename in sorted(filelist):   #再替每個檔案排序
+for p in pathlib.Path(infolder).rglob(ext):  # 將這個資料夾以及子資料夾的所有檔案
+    filelist.append(str(p))  # 新增至列表
+for filename in sorted(filelist):  # 再替每個檔案排序
     size = pathlib.Path(filename).stat().st_size
     print(filename + " = " + str(size) + "位元組")
     allsize += size
@@ -160,17 +160,17 @@ test_path = pathlib.Path(os.pardir)
 print(test_path)
 test_path.resolve()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 cur_path = pathlib.Path(".")
 size = 0
 for text_path in cur_path.glob("*.txt"):
     if not text_path.is_symlink():
         size += text_path.stat().st_size
-        
+
 print(size)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 cur_path = pathlib.Path(".")
@@ -184,7 +184,7 @@ for text_path in cur_path.glob("*.txt"):
 print(size)
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 cur_path = pathlib.Path(".")
@@ -212,146 +212,153 @@ if __name__ == '__main__':
         path.rename(new_path.joinpath(path.name))
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#撈出一層
+# 撈出一層
 
 infolder = "D:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird"
 
-extlist = ["*.jpg","*.png"]
+extlist = ["*.jpg", "*.png"]
 
 msg = ""
-for ext in extlist:                     #以多個副檔名調查
+for ext in extlist:  # 以多個副檔名調查
     filelist = []
-    for p in pathlib.Path(infolder).glob(ext):  #將這個資料夾的檔案
-        filelist.append(str(p))         #新增至列表
-    for filename in sorted(filelist):   #再替每個檔案排序
+    for p in pathlib.Path(infolder).glob(ext):  # 將這個資料夾的檔案
+        filelist.append(str(p))  # 新增至列表
+    for filename in sorted(filelist):  # 再替每個檔案排序
         msg += filename + "\n"
 print(msg)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#show file size
+# show file size
 
-foldername = 'D:/_git/vcs/_1.data/______test_files1'
+foldername = "D:/_git/vcs/_1.data/______test_files1"
 file_type = "*.bmp"
 
-#【函數：以最佳單位傳回檔案容量】
+
+# 【函數：以最佳單位傳回檔案容量】
 def format_bytes(size):
-    units = ["位元組","KB","MB","GB","TB","PB","EB"]
+    units = ["位元組", "KB", "MB", "GB", "TB", "PB", "EB"]
     n = 0
     while size > 1024:
         size = size / 1024.0
         n += 1
     return str(int(size)) + " " + units[n]
 
-#【函數：加總資料夾與子資料夾所有檔案的檔案容量】
+
+# 【函數：加總資料夾與子資料夾所有檔案的檔案容量】
 def foldersize(foldername, file_type):
     msg = ""
     allsize = 0
     filelist = []
-    for p in pathlib.Path(foldername).rglob(file_type):     #將這個資料夾以及子資料夾的所有檔案
-        if p.name[0] != ".":                #沒有隱藏檔案的話
-            filelist.append(str(p))         #新增至列表
-    for filename in sorted(filelist):       #再替每個檔案排序
+    for p in pathlib.Path(foldername).rglob(file_type):  # 將這個資料夾以及子資料夾的所有檔案
+        if p.name[0] != ".":  # 沒有隱藏檔案的話
+            filelist.append(str(p))  # 新增至列表
+    for filename in sorted(filelist):  # 再替每個檔案排序
         size = pathlib.Path(filename).stat().st_size
-        msg += filename + " : "+format_bytes(size)+"\n"
+        msg += filename + " : " + format_bytes(size) + "\n"
         allsize += size
     filesize = "檔案容量總和 = " + format_bytes(allsize) + "\n"
-    filesize += "檔案個數 = " + str(len(filelist))+ "\n"
+    filesize += "檔案個數 = " + str(len(filelist)) + "\n"
     msg = filesize + msg
     return msg
 
-#【執行函數】
+
+# 【執行函數】
 msg = foldersize(foldername, file_type)
 print(msg)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#show file list
+# show file list
 
-foldername = 'D:/_git/vcs/_1.data/______test_files1'
+foldername = "D:/_git/vcs/_1.data/______test_files1"
 file_type = "*.bmp"
 
-#【函數：建立檔案列表】
+
+# 【函數：建立檔案列表】
 def listfiles(foldername, file_type):
     msg = ""
     filelist = []
-    for p in pathlib.Path(foldername).rglob(file_type): #將這個資料夾以及子資料夾的所有檔案
-        filelist.append(str(p))         #新增至列表
-    for filename in sorted(filelist):   #再替每個檔案排序
+    for p in pathlib.Path(foldername).rglob(file_type):  # 將這個資料夾以及子資料夾的所有檔案
+        filelist.append(str(p))  # 新增至列表
+    for filename in sorted(filelist):  # 再替每個檔案排序
         msg += filename + "\n"
     msg = "檔案個數 = " + str(len(filelist)) + "\n" + msg
     return msg
 
-#【執行函數】
+
+# 【執行函數】
 msg = listfiles(foldername, file_type)
 print(msg)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 # find filename
 
 print("搜尋資料夾內所有檔名符合特定字串的檔案")
 
-foldername = 'D:/_git/vcs/_1.data/______test_files1'
+foldername = "D:/_git/vcs/_1.data/______test_files1"
 value1 = "vcs_R"
 
-#【函數：確認在資料夾的檔案名稱是否包含特定字串】
+
+# 【函數：確認在資料夾的檔案名稱是否包含特定字串】
 def findfilename(foldername, findword):
     cnt = 0
     msg = ""
     filelist = []
-    for p in pathlib.Path(foldername).rglob("*.*"):   #將這個資料夾以及子資料夾的所有檔案
-        if p.name[0] != ".":                #沒有隱藏檔案的話
-            filelist.append(str(p))         #新增至列表
-    for filename in sorted(filelist):       #再替每個檔案排序
-        if filename.count(findword) > 0:    #如果找到1個以上的特定字串
+    for p in pathlib.Path(foldername).rglob("*.*"):  # 將這個資料夾以及子資料夾的所有檔案
+        if p.name[0] != ".":  # 沒有隱藏檔案的話
+            filelist.append(str(p))  # 新增至列表
+    for filename in sorted(filelist):  # 再替每個檔案排序
+        if filename.count(findword) > 0:  # 如果找到1個以上的特定字串
             msg += filename + "\n"
             cnt += 1
     msg = "檔案個數 = " + str(cnt) + "\n" + msg
     return msg
 
-#【執行函數】
+
+# 【執行函數】
 msg = findfilename(foldername, value1)
 print(msg)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-foldername = 'D:/_git/vcs/_1.data/______test_files5'
+foldername = "D:/_git/vcs/_1.data/______test_files5"
 
 msg = ""
-pathlib.Path(foldername).mkdir(exist_ok=True)   #建立轉存檔案的資料夾
+pathlib.Path(foldername).mkdir(exist_ok=True)  # 建立轉存檔案的資料夾
 
 name = "tmp_AAAA"
 newfolder = pathlib.Path(foldername).joinpath(name)
-newfolder.mkdir(exist_ok=True)  #建立資料夾
+newfolder.mkdir(exist_ok=True)  # 建立資料夾
 msg = "在" + foldername + "建立了" + name + "了。"
 print(msg)
 
 name = "tmp_BBBB"
 newfolder = pathlib.Path(foldername).joinpath(name)
-newfolder.mkdir(exist_ok=True)  #建立資料夾
+newfolder.mkdir(exist_ok=True)  # 建立資料夾
 msg = "在" + foldername + "建立了" + name + "了。"
 print(msg)
 
 name = "tmp_CCCC"
 newfolder = pathlib.Path(foldername).joinpath(name)
-newfolder.mkdir(exist_ok=True)  #建立資料夾
+newfolder.mkdir(exist_ok=True)  # 建立資料夾
 msg = "在" + foldername + "建立了" + name + "了。"
 print(msg)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-all_files = sorted(os.listdir('system'))
+all_files = sorted(os.listdir("system"))
 
 print(pathlib.Path.cwd())
 
-path1 = pathlib.Path.cwd() / 'system'
+path1 = pathlib.Path.cwd() / "system"
 print(path1)
 
-for i, _ in enumerate(all_files[:-1]):  #跳過最後一個
+for i, _ in enumerate(all_files[:-1]):  # 跳過最後一個
     print(i, _)
 
 print("------------------------------------------------------------")  # 60個
@@ -387,9 +394,7 @@ try:
 except:
     print("程式執行失敗。")  # 出現錯誤時
 
-print('------------------------------------------------------------')	#60個
-
-
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -407,4 +412,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
