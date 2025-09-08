@@ -9,16 +9,15 @@ password = "YOUR PASSWORD"
 
 # 防止跳出通知
 chrome_options = webdriver.ChromeOptions()
-prefs = {
-    "profile.default_content_setting_values.notifications": 2
-}
+prefs = {"profile.default_content_setting_values.notifications": 2}
 chrome_options.add_experimental_option("prefs", prefs)
 
 # 使用ChromeDriverManager自動下載chromedriver
 driver = webdriver.Chrome(
-    ChromeDriverManager().install(), chrome_options=chrome_options)
+    ChromeDriverManager().install(), chrome_options=chrome_options
+)
 
-driver.maximize_window()    #全螢幕顯示
+driver.maximize_window()  # 全螢幕顯示
 
 # 進入Facebook登入畫面
 driver.get(url)
@@ -31,5 +30,4 @@ driver.find_element_by_name("login").click()
 # 登入後等待10秒
 time.sleep(10)
 
-driver.quit()   #關閉瀏覽器並且退出驅動程序
-
+driver.quit()  # 關閉瀏覽器並且退出驅動程序

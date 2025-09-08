@@ -1,33 +1,33 @@
 import time
 from selenium import webdriver
 from PIL import Image
-from simshow import simshow  #以 pip install simple-imshow 安裝模組
+from simshow import simshow  # 以 pip install simple-imshow 安裝模組
 
 delay = 0.3
 
-url = 'https://irs.thsrc.com.tw/IMINT'		#台灣高鐵訂票系統
+url = "https://irs.thsrc.com.tw/IMINT"  # 台灣高鐵訂票系統
 
 driver = webdriver.Chrome()
-driver.maximize_window()    #全螢幕顯示
+driver.maximize_window()  # 全螢幕顯示
 
 driver.get(url)
-time.sleep(delay)  #加入等待
+time.sleep(delay)  # 加入等待
 
 driver.find_element_by_id("btn-confirm").click()
 time.sleep(delay)
 
-driver.save_screenshot('tem.png')  #擷取螢幕後存檔
-captchaid = driver.find_element_by_id('BookingS1Form_homeCaptcha_passCode')  #驗證碼圖形id
-#取得圖形位置
-x1 = captchaid.location['x']
-y1 = captchaid.location['y']
-x2 = x1 + captchaid.size['width']
-y2 = y1 + captchaid.size['height']
-image1 = Image.open('tem.png')  #讀取螢幕圖形
-image2 = image1.crop((x1, y1, x2, y2))  #擷取驗證碼圖形
-image2.save('tmp_captcha.png')  #圖形存檔
-simshow(image2)  #顯示圖形
-captchatext = input('輸入驗證碼：')  
+driver.save_screenshot("tem.png")  # 擷取螢幕後存檔
+captchaid = driver.find_element_by_id("BookingS1Form_homeCaptcha_passCode")  # 驗證碼圖形id
+# 取得圖形位置
+x1 = captchaid.location["x"]
+y1 = captchaid.location["y"]
+x2 = x1 + captchaid.size["width"]
+y2 = y1 + captchaid.size["height"]
+image1 = Image.open("tem.png")  # 讀取螢幕圖形
+image2 = image1.crop((x1, y1, x2, y2))  # 擷取驗證碼圖形
+image2.save("tmp_captcha.png")  # 圖形存檔
+simshow(image2)  # 顯示圖形
+captchatext = input("輸入驗證碼：")
 
 driver.find_element_by_name("selectStartStation").click()
 time.sleep(delay)
@@ -68,7 +68,9 @@ time.sleep(delay)
 driver.find_element_by_id("SubmitButton").click()
 time.sleep(delay)
 
-driver.find_element_by_xpath("(//input[@name='TrainQueryDataViewPanel:TrainGroup'])[3]").click()
+driver.find_element_by_xpath(
+    "(//input[@name='TrainQueryDataViewPanel:TrainGroup'])[3]"
+).click()
 time.sleep(delay)
 
 driver.find_element_by_name("SubmitButton").click()
@@ -98,5 +100,5 @@ time.sleep(delay)
 driver.find_element_by_name("agree").click()
 time.sleep(delay)
 
-#driver.find_element_by_id("isSubmit").click()
-print('完成訂票！')
+# driver.find_element_by_id("isSubmit").click()
+print("完成訂票！")

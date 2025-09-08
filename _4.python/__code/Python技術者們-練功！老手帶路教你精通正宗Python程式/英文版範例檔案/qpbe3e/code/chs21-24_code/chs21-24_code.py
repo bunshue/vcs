@@ -265,55 +265,6 @@ Sunshine data taken from an automatic Kipp & Zonen sensor marked with a #, other
 
 
 
-23.2 SQLite - using the sqlite3 database
-
->>> import sqlite3
->>> conn = sqlite3.connect("datafile.db")
-
-
->>> cursor = conn.cursor()
->>> cursor
-<sqlite3.Cursor object at 0xb7a12980>
-
-
->>> cursor.execute("create table people (id integer primary key, name text, count integer)")
-<sqlite3.Cursor object at 0x7fef111031f0>
->>> cursor.execute("insert into people (name, count) values ('Bob', 1)")
->>> cursor.execute("insert into people (name, count) values (?, ?)", 
-...                ("Jill", 15))
-<sqlite3.Cursor object at 0x7fef111031f0>
->>> conn.commit()
-
-
->>> cursor.execute("insert into people (name, count) values (:username, :usercount)", {"username": "Joe", "usercount": 10})
-
-
->>> result = cursor.execute("select * from people")
->>> print(result.fetchall())
-[(1, 'Bob', 1), (2, 'Jill', 15), (3, 'Joe', 10)]
->>> result = cursor.execute("select * from people where name like :name", 
-...                         {"name": "bob"})
->>> print(result.fetchall())
-[(1, 'Bob', 1)]
->>> cursor.execute("update people set count=? where name=?", (20, "Jill"))
->>> result = cursor.execute("select * from people")
->>> print(result.fetchall())
-[(1, 'Bob', 1), (2, 'Jill', 20), (3, 'Joe', 10)]
-
-
->>> result = cursor.execute("select * from people")
->>> for row in result:
-...     print(row)
-... 
-(1, 'Bob', 1)
-(2, 'Jill', 20)
-(3, 'Joe', 10)
-
-
->>> cursor.execute("update people set count=? where name=?", (20, "Jill"))
->>> conn.commit()
->>> conn.close()
-
 23.4.1 SQLAlchemy
 
 >>> from sqlalchemy import create_engine, select, MetaData, Table, Column, Integer, String

@@ -12,16 +12,15 @@ password = "YOUR PASSWORD"
 
 # 防止跳出通知
 chrome_options = webdriver.ChromeOptions()
-prefs = {
-    "profile.default_content_setting_values.notifications": 2
-}
+prefs = {"profile.default_content_setting_values.notifications": 2}
 chrome_options.add_experimental_option("prefs", prefs)
 
 # 使用ChromeDriverManager自動下載chromedriver
 driver = webdriver.Chrome(
-    ChromeDriverManager().install(), chrome_options=chrome_options)
+    ChromeDriverManager().install(), chrome_options=chrome_options
+)
 
-driver.maximize_window()    #全螢幕顯示
+driver.maximize_window()  # 全螢幕顯示
 
 # 進入Facebook登入畫面
 driver.get(url)
@@ -48,7 +47,8 @@ root = BeautifulSoup(driver.page_source, "html.parser")
 
 # 定位文章標題
 titles = root.find_all(
-    "div", class_="kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x c1et5uql ii04i59q")
+    "div", class_="kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x c1et5uql ii04i59q"
+)
 for title in titles:
     # 定位每一行標題
     posts = title.find_all("div", dir="auto")
@@ -65,7 +65,12 @@ if not os.path.exists("images"):
 
 # 下載圖片
 images = root.find_all(
-    "img", class_=["i09qtzwb n7fi1qx3 datstx6m pmk7jnqg j9ispegn kr520xx4 k4urcfbm bixrwtb6", "i09qtzwb n7fi1qx3 datstx6m pmk7jnqg j9ispegn kr520xx4 k4urcfbm"])
+    "img",
+    class_=[
+        "i09qtzwb n7fi1qx3 datstx6m pmk7jnqg j9ispegn kr520xx4 k4urcfbm bixrwtb6",
+        "i09qtzwb n7fi1qx3 datstx6m pmk7jnqg j9ispegn kr520xx4 k4urcfbm",
+    ],
+)
 if len(images) != 0:
     for index, image in enumerate(images):
         img = requests.get(image["src"])
@@ -76,4 +81,4 @@ if len(images) != 0:
 # 等待5秒
 time.sleep(5)
 
-driver.quit()   #關閉瀏覽器並且退出驅動程序
+driver.quit()  # 關閉瀏覽器並且退出驅動程序

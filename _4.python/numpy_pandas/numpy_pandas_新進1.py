@@ -68,42 +68,6 @@ print(df2)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# SQL (SQLite)
-
-import sqlite3
-
-db_filename = "tmp_salary_table.db"
-
-conn = sqlite3.connect(db_filename)
-
-##############################################################################
-salary = pd.read_csv("data/salary_table.csv")
-print(salary.head())
-
-salary.to_sql("salary", conn, if_exists="replace")
-
-##############################################################################
-# Push modifications
-
-cur = conn.cursor()
-values = (100, 14000, 5, "Bachelor", "N")
-cur.execute("insert into salary values (?, ?, ?, ?, ?)", values)
-conn.commit()
-
-##############################################################################
-# Reading results into a pandas DataFrame
-
-salary_sql = pd.read_sql_query("select * from salary;", conn)
-print(salary_sql.head())
-
-pd.read_sql_query("select * from salary;", conn).tail()
-pd.read_sql_query("select * from salary where salary>25000;", conn)
-pd.read_sql_query("select * from salary where experience=16;", conn)
-pd.read_sql_query('select * from salary where education="Master";', conn)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 ##############################################################################
 # Exercises
 # ---------

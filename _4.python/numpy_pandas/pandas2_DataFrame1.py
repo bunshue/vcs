@@ -3847,44 +3847,7 @@ cc = both.reset_index()
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
-
-"""
-# Writing to a SQLite database
-
-weather_df = pd.read_csv("data/weather_2012.csv")
-con = sqlite3.connect("tmp_test_db.sqlite")
-con.execute("DROP TABLE IF EXISTS weather_2012")
-weather_df.to_sql("weather_2012", con)
-
-con = sqlite3.connect("tmp_test_db.sqlite")
-df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con)
-print(df)
-
-con = sqlite3.connect("tmp_test_db.sqlite")
-df = pd.read_sql("SELECT * from weather_2012 ORDER BY Weather LIMIT 3", con)
-print(df)
-
 print("------------------------------------------------------------")  # 60個
-
-import sqlite3
-
-con = sqlite3.connect("data/weather_2012.sqlite")
-df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con)
-print(df)
-
-print("------------------------------")  # 30個
-
-df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con, index_col="id")
-print(df)
-
-print("------------------------------")  # 30個
-
-df = pd.read_sql(
-    "SELECT * from weather_2012 LIMIT 3", con, index_col=["id", "date_time"]
-)
-print(df)
-"""
-print("------------------------------")  # 30個
 
 # 讓我們來看一個更實際的示例，我們有一個包含按年數量銷售的數據集。
 

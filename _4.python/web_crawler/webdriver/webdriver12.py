@@ -1,4 +1,4 @@
-#PyAutoGUI，自動控制滑鼠與鍵盤
+# PyAutoGUI，自動控制滑鼠與鍵盤
 
 # 有問題
 
@@ -10,13 +10,13 @@ import time
 import sys
 
 # 建立瀏覽器物件
-driver = webdriver.Chrome()    #使用Chrome
-#driver = webdriver.Firefox()   #使用Firefox
-driver.set_window_position(0, 0)	#設定視窗位置
-driver.set_window_size(800, 600)	#設定視窗大小
-driver.maximize_window()    #全螢幕顯示
+driver = webdriver.Chrome()  # 使用Chrome
+# driver = webdriver.Firefox()   #使用Firefox
+driver.set_window_position(0, 0)  # 設定視窗位置
+driver.set_window_size(800, 600)  # 設定視窗大小
+driver.maximize_window()  # 全螢幕顯示
 
-#台灣證券交易所
+# 台灣證券交易所
 url = "https://www.twse.com.tw/zh/page/trading/exchange/STOCK_DAY.html"
 driver.get(url)
 time.sleep(3)
@@ -34,7 +34,7 @@ html = driver.page_source
 data = pd.read_html(html)
 print(data)
 
-print('完成')
+print("完成")
 sys.exit()
 
 from selenium import webdriver
@@ -43,28 +43,19 @@ import pandas as pd
 import time
 
 stocks = [
-    {
-        "name": "聯電",
-        "id": "2303"
-    },
-    {
-        "name": "台積電",
-        "id": "2330"
-    },
-    {
-        "name": "華碩",
-        "id": "2357"
-    }
+    {"name": "聯電", "id": "2303"},
+    {"name": "台積電", "id": "2330"},
+    {"name": "華碩", "id": "2357"},
 ]
 
 # 建立瀏覽器物件
-driver = webdriver.Chrome()    #使用Chrome
-#driver = webdriver.Firefox()   #使用Firefox
-driver.set_window_position(0, 0)	#設定視窗位置
-driver.set_window_size(800, 600)	#設定視窗大小
-driver.maximize_window()    #全螢幕顯示
+driver = webdriver.Chrome()  # 使用Chrome
+# driver = webdriver.Firefox()   #使用Firefox
+driver.set_window_position(0, 0)  # 設定視窗位置
+driver.set_window_size(800, 600)  # 設定視窗大小
+driver.maximize_window()  # 全螢幕顯示
 
-#台灣證券交易所
+# 台灣證券交易所
 url = "https://www.twse.com.tw/zh/page/trading/exchange/STOCK_DAY.html"
 driver.get(url)
 
@@ -82,10 +73,10 @@ for stock in stocks:
     print(data[0])
 
 
-print('------------------------------------------------------------')	#60個
-print('完成')
+print("------------------------------------------------------------")  # 60個
+print("完成")
 
-'''
+"""
 print('準備關閉瀏覽器')
 for i in range(0, 10):
     print(i, '秒')	# 0~9
@@ -96,6 +87,4 @@ for i in range(0, 10):
 
 print('關閉瀏覽器並且退出驅動程序')
 driver.quit()   #關閉瀏覽器並且退出驅動程序
-'''
-
-
+"""

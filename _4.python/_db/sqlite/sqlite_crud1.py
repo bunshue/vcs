@@ -104,30 +104,25 @@ import sqlite3
 
 print("準備工作")
 
+
 db_filename_books_old = "data/Books.sqlite"
-db_filename_books = "tmp_Books.sqlite"
-db_filename_python02_old = "data/python02.sqlite"
-db_filename_python02 = "tmp_python02.sqlite"
-db_filename_myInfo1_old = "data/myInfo.db"
-db_filename_myInfo2_old = "data/myInfo2.db"
-db_filename_myInfo1 = "tmp_myInfo.db"
-db_filename_myInfo2 = "tmp_myInfo2.db"
+db_filename_books = (
+    "tmp_Books_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
+)
+
+db_filename_singMatch_old = "data/singMatch.db"
+db_filename_singMatch = (
+    "tmp_singMatch_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
+)
 
 if not os.path.exists(db_filename_books):
     shutil.copy(db_filename_books_old, db_filename_books)
     print(db_filename_books)
 
-if not os.path.exists(db_filename_python02):
-    shutil.copy(db_filename_python02_old, db_filename_python02)
-    print(db_filename_python02)
 
-if not os.path.exists(db_filename_myInfo1):
-    shutil.copy(db_filename_myInfo1_old, db_filename_myInfo1)
-    print(db_filename_myInfo1)
-
-if not os.path.exists(db_filename_myInfo2):
-    shutil.copy(db_filename_myInfo2_old, db_filename_myInfo2)
-    print(db_filename_myInfo2)
+if not os.path.exists(db_filename_singMatch):
+    shutil.copy(db_filename_singMatch_old, db_filename_singMatch)
+    print(db_filename_singMatch)
 
 
 def show_data_base_contents(db_filename, table_name, length):
@@ -156,6 +151,18 @@ def show_data_base_contents_all(db_filename, table_name):
     conn.close()  # 關閉資料庫連線
 
 
+def fetch_all_table_data(cursor, table_name):
+    sqlstr = "SELECT * FROM " + table_name  # SELECT * : 取得所有資料
+    cursor = conn.execute(sqlstr)
+    rows = cursor.fetchall()  # 讀取全部資料成元組串列
+    length = len(rows)
+    print("共有", length, "筆資料")
+    for i in range(length):
+        print("第" + str(i + 1) + "筆資料 : ", rows[i])
+        if i > 10:
+            break
+
+
 def do_fetchall(cursor):
     rows = cursor.fetchall()  # 讀取全部資料成元組串列
     length = len(rows)
@@ -169,6 +176,39 @@ def do_fetchall(cursor):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+d = sqlite3.Date(2004, 2, 14)
+print(d)
+
+ts = sqlite3.Timestamp(2004, 2, 14, 7, 15, 0)
+ts = sqlite3.Timestamp(2004, 2, 14, 7, 15, 0, 500000)
+ts = sqlite3.Timestamp(2004, 2, 14, 7, 15, 0, 510241)
+print(ts)
+
+now = datetime.datetime.now()
+print(now)
+
+print("dddddddd")
+
+sys.exit()
+
+# csv 轉 sqlite
+
+csv_filename = "D:/_git/vcs/_4.python/write_read_file/_3.csv/data/animals.csv"
+db_filename = (
+    "tmp_db01_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + "_csv.sqlite"
+)
+
+df = pd.read_csv(csv_filename)
+df.columns = df.columns.str.strip()
+
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+df.to_sql("animals", conn, if_exists="replace")
+
+conn.close()  # 關閉資料庫連線
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("建立資料庫 + 加入資料 + 讀取資料")
 
 db_filename = "tmp_db01_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
@@ -177,9 +217,14 @@ print("建立資料庫連線, 資料庫 :", db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
 
+print("建立表單")
+
+# PRIMARY KEY 主鍵
+# 序號 自動遞增 不可重複
+
 sqlstr = """
 CREATE TABLE IF NOT EXISTS table01(
-idx    INTEGER PRIMARY KEY AUTOINCREMENT,
+idx    INTEGER PRIMARY KEY AUTOINCREMENT, -- 序號(idx)整數自動遞增, 可填可不填
 id_num INTEGER NOT NULL,
 ename  TEXT NOT NULL,
 cname  TEXT,
@@ -190,53 +235,63 @@ weight INTEGER NOT NULL CHECK(weight > 0) -- 預設錯誤時會顯示
 cursor.execute(sqlstr)
 conn.commit()  # 更新
 
-print("新增資料 2 筆 寫法三, 有些欄位可以不寫, 序號自動遞增")
+# INSERT INTO 新增資料, 有些欄位可以不寫, 序號(idx)自動遞增
 
-sqlstr = (
-    "INSERT INTO table01 (id_num, ename, cname, weight) VALUES (5, 'horse', '馬', 48)"
-)
-cursor.execute(sqlstr)
-sqlstr = (
-    "INSERT INTO table01 (id_num, ename, cname, weight) VALUES (1, 'mouse', '鼠', 66)"
-)
-cursor.execute(sqlstr)
-sqlstr = (
-    "INSERT INTO table01 (id_num, ename, cname, weight) VALUES (4, 'elephant', '象', 48)"
-)
-cursor.execute(sqlstr)
-sqlstr = "INSERT INTO table01 (id_num, ename, weight) VALUES (9, 'ox', 48)"
-cursor.execute(sqlstr)
-sqlstr = "INSERT INTO table01 (id_num, ename, weight) VALUES (2, 'sheep', 66)"
-cursor.execute(sqlstr)
-sqlstr = "INSERT INTO table01 (id_num, ename, weight) VALUES (8, 'snake', 16)"
-cursor.execute(sqlstr)
-sqlstr = "INSERT INTO table01 (id_num, ename, weight) VALUES (3, 'tiger', 33)"
-cursor.execute(sqlstr)
-sqlstr = "INSERT INTO table01 (id_num, ename, weight) VALUES (7, 'rabbit', 8)"
-cursor.execute(sqlstr)
-sqlstr = "INSERT INTO table01 (id_num, ename, weight) VALUES (6, 'tiger', 240)"
-cursor.execute(sqlstr)
+# 資料寫4項
+sqlstr = "INSERT INTO table01 (id_num, ename, cname, weight) VALUES (?, ?, ?, ?)"
+
+x = (5, "horse", "馬", 48)  # tuple格式
+cursor.execute(sqlstr, x)
+x = (1, "mouse", "鼠", 66)  # tuple格式
+cursor.execute(sqlstr, x)
+x = (4, "elephant", "象", 48)  # tuple格式
+cursor.execute(sqlstr, x)
+
+# 資料寫3項
+sqlstr = "INSERT INTO table01 (id_num, ename, weight) VALUES (?, ?, ?)"
+x = (9, "ox", 48)  # tuple格式
+cursor.execute(sqlstr, x)
+x = (2, "sheep", 66)  # tuple格式
+cursor.execute(sqlstr, x)
+x = (8, "snake", 16)  # tuple格式
+cursor.execute(sqlstr, x)
+x = (3, "tiger", 33)  # tuple格式
+cursor.execute(sqlstr, x)
+x = (7, "rabbit", 8)  # tuple格式
+cursor.execute(sqlstr, x)
+x = (6, "tiger", 240)  # tuple格式
+cursor.execute(sqlstr, x)
+
+for _ in range(123456):
+    sqlstr = "INSERT INTO table01 (id_num, ename, weight) VALUES (?, ?, ?)"
+    x = (6, "tiger", 240)  # tuple格式
+    cursor.execute(sqlstr, x)
 
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
-# UPDATE 更新
-print("更新資料, 修改2號的資料")
+# UPDATE 更新資料
+print("UPDATE 更新資料, 修改2號的資料")
 print("建立資料庫連線, 資料庫 :", db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+
 sqlstr = "UPDATE table01 SET ename = '{}'  WHERE id_num = {}".format("goat", 2)
 conn.execute(sqlstr)  # 修改2號的資料, 要先確保已經有2號的資料, 才可以修改
+
 sqlstr = "UPDATE table01 SET weight = '{}' WHERE id_num = {}".format(29, 2)
 conn.execute(sqlstr)  # 修改2號的資料, 要先確保已經有2號的資料, 才可以修改
+
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
-# DELETE 刪除
-print("刪除資料, 刪除4號的資料")
+# DELETE 刪除資料 條件
+print("DELETE 刪除資料, 刪除4號的資料")
 print("建立資料庫連線, 資料庫 :", db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+
 sqlstr = "DELETE FROM table01 WHERE id_num = {}".format(4)
 conn.execute(sqlstr)
+
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
@@ -245,6 +300,7 @@ print("------------------------------")  # 30個
 print("用fetchall()讀取 全部資料")
 print("建立資料庫連線, 資料庫 :", db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+
 sqlstr = "SELECT * FROM table01"  # SELECT * : 取得所有資料
 cursor = conn.execute(sqlstr)
 
@@ -255,13 +311,17 @@ conn.close()  # 關閉資料庫連線
 print("------------------------------")  # 30個
 
 """
-print("刪除資料庫中的表單")
 print("建立資料庫連線, 資料庫 :", db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-cursor = conn.execute("DROP TABLE table01")
+
+# DROP TABLE 刪除表單
+sqlstr = "DROP TABLE IF EXISTS table01"
+cursor = conn.execute(sqlstr)
+
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 """
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -271,7 +331,7 @@ print("建立資料庫連線, 資料庫 :", db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
 
-print("建立一個表單")
+print("建立表單")
 
 # id_num不可重複
 sqlstr = """
@@ -317,7 +377,7 @@ weight INTEGER NOT NULL
 # 序號 自動遞增 不可重複
 sqlstr = """
 CREATE TABLE IF NOT EXISTS table01(
-idx    INTEGER PRIMARY KEY AUTOINCREMENT,
+idx    INTEGER PRIMARY KEY AUTOINCREMENT, -- 序號(idx)整數自動遞增, 可填可不填
 id_num INTEGER NOT NULL,
 ename  TEXT NOT NULL,
 cname  TEXT,
@@ -330,96 +390,114 @@ weight INTEGER NOT NULL CHECK(weight > 0) -- 預設錯誤時會顯示
 cursor.execute(sqlstr)
 conn.commit()  # 更新
 
-# INSERT 新增資料
-print("新增資料 2 筆 寫法一, 必須要寫滿所有欄位")
+# INSERT INTO 新增資料
+
+print("INSERT INTO 新增資料 2 筆 寫法一, 必須要寫滿所有欄位")
 # id_num不可重複
-sqlstr = 'INSERT INTO table01 VALUES (20, 5, "horse", "馬", 36)'
-cursor.execute(sqlstr)
-sqlstr = 'INSERT INTO table01 VALUES (50, 1, "mouse", "鼠", 3)'
-cursor.execute(sqlstr)
+sqlstr = "INSERT INTO table01 VALUES (?, ?, ?, ?, ?)"
+x = (20, 5, "horse", "馬", 36)  # tuple格式
+cursor.execute(sqlstr, x)
 
-print("新增資料 1 筆 寫法二, 有些欄位可以不寫, 使用tuple")
+sqlstr = "INSERT INTO table01 VALUES (?, ?, ?, ?, ?)"
+x = (50, 1, "mouse", "鼠", 3)  # tuple格式
+cursor.execute(sqlstr, x)
+
+print("INSERT INTO 新增資料 1 筆 寫法二, 有些欄位可以不寫, 使用tuple")
 sqlstr = "INSERT INTO table01 (id_num, ename, cname, weight) VALUES (?, ?, ?, ?)"
-data_insert_tuple = (4, "elephant", "象", 100)
-cursor.execute(sqlstr, data_insert_tuple)
+x = (4, "elephant", "象", 100)  # tuple格式
+cursor.execute(sqlstr, x)
 
-print("新增資料 2 筆 寫法三, 有些欄位可以不寫, 序號自動遞增")
-cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (9, 'ox', 48)")
+print("INSERT INTO 新增資料 2 筆 寫法三, 有些欄位可以不寫, 序號自動遞增")
+
+sqlstr = "INSERT INTO table01 (id_num, ename, weight) VALUES (?, ?, ?)"
+x = (9, "ox", 48)  # tuple格式
+cursor.execute(sqlstr, x)
+
 # id_num不重複 但name weight 重複
-cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (2, 'sheep', 66)")
+sqlstr = "INSERT INTO table01 (id_num, ename, weight) VALUES (?, ?, ?)"
+x = (2, "sheep", 66)  # tuple格式
+cursor.execute(sqlstr, x)
 
-print("新增資料 2 筆 寫法四, 有些欄位可以不寫, 序號自動遞增")
+print("INSERT INTO 新增資料 2 筆 寫法四, 有些欄位可以不寫, 序號自動遞增")
 # 定義資料串列
 datas = [[8, "snake", 16], [3, "tiger", 33]]
 
 for data in datas:
-    # 新增資料
-    sqlstr = (
-        "INSERT INTO table01 (id_num, ename, weight) VALUES ({}, '{}', '{}')".format(
-            data[0], data[1], data[2]
-        )
-    )
-    cursor.execute(sqlstr)
+    print(data)
+    sqlstr = "INSERT INTO table01 (id_num, ename, weight) VALUES (?, ?, ?)"
+    x = (data[0], data[1], data[2])  # tuple格式
+    cursor.execute(sqlstr, x)
 conn.commit()  # 更新
 
+print("INSERT INTO 新增資料 1 筆 寫法五, 必須要寫滿所有欄位")
 
-print("新增資料 1 筆 寫法五, 必須要寫滿所有欄位")
-index = 70
-number = 7
-ename = "rabbit"
-cname = ""
-weight = 8
-sqlstr = "INSERT INTO table01 VALUES ({},{},'{}','{}','{}');".format(
-    index, number, ename, cname, weight
-)
-cursor.execute(sqlstr)
+sqlstr = "INSERT INTO table01 VALUES (?, ?, ?, ?, ?)"
+index, number, ename, cname, weight = 70, 7, "rabbit", "", 8
+x = (index, number, ename, cname, weight)  # tuple格式
+cursor.execute(sqlstr, x)
 
-print("新增資料 1 筆 寫法六, 必須要寫滿所有欄位")
+print("INSERT INTO 新增資料 1 筆 寫法六, 必須要寫滿所有欄位")
+sqlstr = "INSERT INTO table01 VALUES (?, ?, ?, ?, ?)"
 data = (80, 6, "tiger", "", 240)
-cursor.execute("INSERT INTO table01 VALUES (?, ?, ?, ?, ?)", data)
+cursor.execute(sqlstr, data)
 
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
-# UPDATE 更新
-print("更新資料, 修改2號的資料")
-print("建立資料庫連線, 資料庫 :", db_filename)
+print("------------------------------")  # 30個
+
+# UPDATE 更新資料
+print("UPDATE 更新資料, 修改2號的資料")
+
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+
 sqlstr = "UPDATE table01 SET ename = '{}'  WHERE id_num = {}".format("goat", 2)
 conn.execute(sqlstr)  # 修改2號的資料, 要先確保已經有2號的資料, 才可以修改
+
 sqlstr = "UPDATE table01 SET weight = '{}' WHERE id_num = {}".format(29, 2)
 conn.execute(sqlstr)  # 修改2號的資料, 要先確保已經有2號的資料, 才可以修改
+
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
-# DELETE 刪除
-print("刪除資料, 刪除4號的資料")
-print("建立資料庫連線, 資料庫 :", db_filename)
+print("------------------------------")  # 30個
+
+# DELETE 刪除資料 條件
+print("DELETE 刪除資料, 刪除4號的資料")
+
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+
 sqlstr = "DELETE FROM table01 WHERE id_num = {}".format(4)
 conn.execute(sqlstr)
+
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
+
 # SELECT 取得
 print("讀取資料庫資料, 全部1")
 show_data_base_contents_all(db_filename, "table01")
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
+
 print("讀取資料庫資料, 全部2")
-print("建立資料庫連線, 資料庫 :", db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+
 sqlstr = "SELECT * FROM table01"  # SELECT * : 取得所有資料
 cursor = conn.execute(sqlstr)
+
 do_fetchall(cursor)
 
 conn.close()  # 關閉資料庫連線
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
+
+print("查詢資料庫 fetchone() 讀取一筆資料")
+
 # SELECT 取得
-print("建立資料庫連線, 資料庫 :", db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+
 print("指明抓一筆資料, 9號")
 number = 9
 sqlstr = "SELECT * FROM table01 WHERE id_num = " + str(number)  # 條件
@@ -430,7 +508,8 @@ if not row == None:
 else:
     print("找不到" + str(number) + "號資料")
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
+
 print("指明抓一筆資料, 15號")
 number = 15
 sqlstr = "SELECT * FROM table01 WHERE id_num = " + str(number)  # 條件
@@ -441,7 +520,8 @@ if not row == None:
 else:
     print("找不到" + str(number) + "號資料")
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
+
 print("指明抓名字有bb的資料")
 data = ("%bb%",)  # bb在中間 前後要有%
 # sqlstr =
@@ -451,10 +531,12 @@ do_fetchall(cursor)
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
+
 print("尋找資料")
-print("建立資料庫連線, 資料庫 :", db_filename)
+
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+
 number = 8
 sqlstr = "SELECT * FROM table01 WHERE id_num = {};".format(number)  # 條件
 cursor = conn.execute(sqlstr)
@@ -467,19 +549,20 @@ for i in range(length):
 if len(rows) > 0:
     print("找到資料 {}\t{}\t{}\t{}".format(rows[0][0], rows[0][1], rows[0][2], rows[0][3]))
     """
-    # 刪除資料
+    # DELETE 刪除資料 條件
     sqlstr = "DELETE FROM table01 WHERE id_num = {};".format(number)
     conn.execute(sqlstr)
     conn.commit()  # 更新
     print("已刪除指定的資料")
     """
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("不是用fetchall()讀取 全部資料")
-print("建立資料庫連線, 資料庫 :", db_filename)
+
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-sqlstr
+
+# sqlstr
 cursor = conn.execute("SELECT * FROM table01")  # SELECT * : 取得所有資料
 i = 0
 for row in cursor:
@@ -490,9 +573,10 @@ for row in cursor:
     i = i + 1
 conn.close()  # 關閉資料庫連線
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
+
 print("用fetchall()讀取 全部資料")
-print("建立資料庫連線, 資料庫 :", db_filename)
+
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 sqlstr = "SELECT * FROM table01"  # SELECT * : 取得所有資料
 cursor = conn.execute(sqlstr)
@@ -500,10 +584,10 @@ do_fetchall(cursor)
 
 conn.close()  # 關閉資料庫連線
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("用fetchall()讀取 全部資料 預設排序(依第1項升冪排序)")
-print("建立資料庫連線, 資料庫 :", db_filename)
+
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 sqlstr = "SELECT * FROM table01"  # SELECT * : 取得所有資料
 cursor = conn.execute(sqlstr)
@@ -511,35 +595,48 @@ do_fetchall(cursor)
 
 conn.close()  # 關閉資料庫連線
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("用fetchall()讀取 全部資料 依 ename 排序, 升冪")
-print("建立資料庫連線, 資料庫 :", db_filename)
+
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+
+# SELECT * : 取得資料 排列 依 ename 升冪
 sqlstr = "SELECT * FROM table01 ORDER BY ename;"  # 由小到大, 升冪
 cursor = conn.execute(sqlstr)
+
+# SELECT * : 取得資料 排列 依 ename 降冪
 # cursor = conn.execute("SELECT * FROM table01 ORDER BY ename DESC;")  #由小到大 + 反相 = 由大到小, 降冪
 do_fetchall(cursor)
 
 conn.close()  # 關閉資料庫連線
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
+
 print("用fetchall()讀取 全部資料 依 weight 排序, 降冪")
-print("建立資料庫連線, 資料庫 :", db_filename)
+
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+
+# SELECT * : 取得資料 排列 依 weight 升冪
 # cursor = conn.execute("SELECT * FROM table01 ORDER BY weight;")  #由小到大, 升冪
+
+# SELECT * : 取得資料 排列 依 weight 降冪
 cursor = conn.execute(
     "SELECT * FROM table01 ORDER BY weight DESC;"
 )  # 由小到大 + 反相 = 由大到小, 降冪
+
 do_fetchall(cursor)
 
 conn.close()  # 關閉資料庫連線
 """
-print("------------------------------------------------------------")	#60個
-print("刪除資料庫中的表單")
-print("建立資料庫連線, 資料庫 :", db_filename)
+print("------------------------------")  # 30個
+
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-cursor = conn.execute("DROP TABLE table01")
+
+# DROP TABLE 刪除表單
+sqlstr = "DROP TABLE IF EXISTS table01"
+cursor = conn.execute(sqlstr)
+
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 """
@@ -608,7 +705,7 @@ for table_name in table_names:
 print("讀取每個表單的所有內容")
 for table_name in table_names:
     print("表單 :", table_name, end="\t")
-    cursor = conn.execute("SELECT * FROM %s" % table_name)
+    cursor = conn.execute("SELECT * FROM %s" % table_name)  # SELECT * : 取得所有資料
     rows = cursor.fetchall()  # 讀取全部資料成元組串列
     length = len(rows)
     print("共有", length, "筆資料")
@@ -629,11 +726,11 @@ db_filename = "data/gasoline.sqlite"
 
 def disp_menu():
     print("中油歷年油價查詢系統")
-    print("------------")
+    print("------------------------------")  # 30個
     print("1.顯示歷年油價資訊")
     print("2.最近10週油價資訊")
     print("0.結束")
-    print("------------")
+    print("------------------------------")  # 30個
 
 
 def disp_alldata():
@@ -642,6 +739,7 @@ def disp_alldata():
 
     print("要事先能知道表單的名稱 prices 與 各欄位的名稱 gdate")
 
+    # SELECT * : 取得資料 排列 依 gdate 降冪
     sqlstr = "SELECT * FROM prices ORDER BY gdate DESC;"
     cursor = conn.execute(sqlstr)
 
@@ -664,6 +762,7 @@ def disp_10data_a():
     conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 
     print("要事先能知道表單的名稱 prices 與 各欄位的名稱 gdate")
+    # SELECT * : 取得資料 排列 依 gdate 降冪
     sqlstr = "SELECT * FROM prices ORDER BY gdate DESC;"
     cursor = conn.execute(sqlstr)
 
@@ -683,6 +782,7 @@ def disp_10data_b():
     conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 
     print("要事先能知道表單的名稱 prices 與 各欄位的名稱 gdate")
+    # SELECT * : 取得資料 排列 依 gdate 降冪
     sqlstr = "SELECT * FROM prices ORDER BY gdate DESC;"
     cursor = conn.execute(sqlstr)
     """ 一次抓5筆資料 抓到完
@@ -716,11 +816,12 @@ print("------------------------------------------------------------")  # 60個
 print("讀取資料庫範例")
 
 db_filename = "data/DataBasePM25.sqlite"
+print("建立資料庫連線, 資料庫 :", db_filename)
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
 
-# 建立一個表單
+# 建立表單
 sqlstr = """
 CREATE TABLE IF NOT EXISTS TablePM25(
 no       INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
@@ -731,7 +832,7 @@ PM25     INTEGER
 cursor.execute(sqlstr)
 
 print("從資料庫讀取資料...")
-sqlstr = "SELECT * FROM TablePM25"
+sqlstr = "SELECT * FROM TablePM25"  # SELECT * : 取得所有資料
 cursor = conn.execute(sqlstr)
 rows = cursor.fetchall()  # 讀取全部資料成元組串列
 length = len(rows)
@@ -751,14 +852,16 @@ conn.close()  # 關閉資料庫連線
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("查詢資料庫 fetchone() 讀取一筆資料")
 print("從資料庫讀出一筆資料")
 
 db_filename = "data/python01.sqlite"
+print("建立資料庫連線, 資料庫 :", db_filename)
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 sqlstr = "SELECT * FROM table01 WHERE num = 1"
 cursor = conn.execute(sqlstr)
-row = cursor.fetchone()
+row = cursor.fetchone()  # 讀取一筆資料
 
 if not row == None:
     print("{}\t{}".format(row[0], row[1]))
@@ -770,9 +873,10 @@ print("------------------------------------------------------------")  # 60個
 print("從資料庫讀出全部資料")
 
 db_filename = "data/python01.sqlite"
+print("建立資料庫連線, 資料庫 :", db_filename)
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-sqlstr = "SELECT * FROM table01"
+sqlstr = "SELECT * FROM table01"  # SELECT * : 取得所有資料
 cursor = conn.execute(sqlstr)
 do_fetchall(cursor)
 
@@ -783,11 +887,12 @@ print("------------------------------------------------------------")  # 60個
 print("從資料庫讀出全部資料")
 
 db_filename = "data/headlines.sqlite"
+print("建立資料庫連線, 資料庫 :", db_filename)
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 
 print("讀取全部, 只顯示前10筆")
-sqlstr = "SELECT * FROM titles"
+sqlstr = "SELECT * FROM titles"  # SELECT * : 取得所有資料
 cursor = conn.execute(sqlstr)
 rows = cursor.fetchall()  # 讀取全部資料成元組串列
 length = len(rows)
@@ -798,7 +903,7 @@ for i in range(length):
         break
 
 print("只讀前10筆")
-sqlstr = "SELECT * FROM titles LIMIT 10"
+sqlstr = "SELECT * FROM titles LIMIT 10"  # SELECT * : 取得所有資料, 限制10筆
 cursor = conn.execute(sqlstr)
 rows = cursor.fetchall()  # 讀取全部資料成元組串列
 length = len(rows)
@@ -850,7 +955,7 @@ NUMERIC         數值
 DOUBLE
 FLOAT
 DECIMAL
-SERIAL          序列
+SERIAL          序列  測不出效果
 DATE
 TIME
 TIMESTAMP       時間戳
@@ -890,11 +995,11 @@ filesize VARCHAR(32)
 """
 cursor.execute(sqlstr)
 
-print("INSERT")
-cursor.execute(
-    "INSERT INTO table01" "  (filename, filesize)" "  VALUES" "  (?, ?)",
-    ("aaaa.mp4", "12345"),
-)
+print("INSERT INTO 新增資料")
+
+sqlstr = "INSERT INTO table01 (filename, filesize) VALUES (?, ?)"
+x = ("aaaa.mp4", "12345")  # tuple格式
+cursor.execute(sqlstr, x)
 
 print("SELECT")
 # sqlstr =
@@ -905,6 +1010,7 @@ do_fetchall(cursor)
 
 filename = "aaaa.mp4"
 cursor.execute("DELETE FROM table01 WHERE filename = ?", (filename,))
+
 conn.commit()  # 更新
 
 print("SELECT")
@@ -926,48 +1032,108 @@ print("------------------------------------------------------------")  # 60個
 
 
 def disp_data():
-    return
-    print("顯示所有資料")
-    sqlstr = "SELECT * FROM password"
+    sqlstr = "SELECT * FROM password"  # SELECT * : 取得所有資料
     cursor = conn.execute(sqlstr)
-    print("帳號\t密碼")
-    print("================")
     for row in cursor:
-        print("{}\t{}".format(row[0], row[1]))
+        print("帳號 : {}\t密碼 : {}".format(row[0], row[1]))
 
 
-conn = sqlite3.connect(db_filename_python02)  # 建立資料庫連線
+db_filename = "tmp_db03_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
+print("建立資料庫連線, 資料庫 :", db_filename)
 
+
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+cursor = conn.cursor()  # 建立 cursor 物件
+
+sqlstr = """
+CREATE TABLE IF NOT EXISTS password(
+name TEXT NOT NULL,
+pass TEXT NOT NULL
+)
+"""
+cursor.execute(sqlstr)
+
+# INSERT INTO 新增資料
+sqlstr = "INSERT INTO password (name, pass) VALUES (?, ?)"
+
+new_name = "Apple"
+new_pass = "123456"
+x = (new_name, new_pass)  # tuple格式
+cursor.execute(sqlstr, x)
+
+new_name = "Bravo"
+new_pass = "abcdefg"
+x = (new_name, new_pass)  # tuple格式
+cursor.execute(sqlstr, x)
+
+new_name = "Charlie"
+new_pass = "ccccc"
+x = (new_name, new_pass)  # tuple格式
+cursor.execute(sqlstr, x)
+
+print("顯示所有資料")
 disp_data()
 
-print("新增資料")
+print("------------------------------")  # 30個
 
-new_name = "John"
+# INSERT INTO 新增資料
+
+new_name = "Delta"
+new_password = "12345678"
+
+sqlstr = "INSERT INTO password (name, pass) VALUES (?, ?)"
+x = (new_name, new_password)  # tuple格式
+conn.execute(sqlstr, x)
+conn.commit()  # 更新
+print("資料 {} 已儲存完畢".format(new_name))
+
+print("顯示所有資料")
+disp_data()
+
+print("------------------------------")  # 30個
+
+print("查詢 CHARLIE")
+
+new_name = "CHARLIE"
+
 # 無 LIKE, 一定要符合大小寫
 sqlstr = "SELECT * FROM password WHERE name = '{}'".format(new_name)
 # 有 LIKE, 大小寫皆可
 sqlstr = "SELECT * FROM password WHERE name LIKE '{}'".format(new_name)
 
 cursor = conn.execute(sqlstr)
-row = cursor.fetchone()
+row = cursor.fetchone()  # 讀取一筆資料
 
 if not row == None:
-    print("{} 帳號已存在!".format(new_name), "無法再新增")
+    print("{} 帳號已存在!".format(new_name))
 else:
-    new_password = "12345678"
-    sqlstr = "INSERT INTO password VALUES('{}', '{}');".format(new_name, new_password)
-    conn.execute(sqlstr)
-    conn.commit()  # 更新
-    print("資料 {} 已儲存完畢".format(new_name))
+    print("{} 帳號不存在!".format(new_name))
 
-disp_data()
+print("查詢 ELEPHANT")
+
+new_name = "ELEPHANT"
+
+# 無 LIKE, 一定要符合大小寫
+sqlstr = "SELECT * FROM password WHERE name = '{}'".format(new_name)
+# 有 LIKE, 大小寫皆可
+sqlstr = "SELECT * FROM password WHERE name LIKE '{}'".format(new_name)
+
+cursor = conn.execute(sqlstr)
+row = cursor.fetchone()  # 讀取一筆資料
+
+if not row == None:
+    print("{} 帳號已存在!".format(new_name))
+else:
+    print("{} 帳號不存在!".format(new_name))
+
+print("------------------------------")  # 30個
 
 print("修改資料")
 
-old_name = "David"
+old_name = "Charlie"
 sqlstr = "SELECT * FROM password WHERE name = '{}'".format(old_name)
 cursor = conn.execute(sqlstr)
-row = cursor.fetchone()
+row = cursor.fetchone()  # 讀取一筆資料
 # print(row)
 if row == None:
     print("{} 帳號不存在!".format(old_name), "無法修改資料")
@@ -981,13 +1147,19 @@ else:
     conn.commit()  # 更新
     print("資料 {} 已修改完成".format(old_name))
 
+print("顯示所有資料")
 disp_data()
 
-print("刪除資料")
-name = "John"
+print("------------------------------")  # 30個
+
+print("DELETE 刪除資料 條件")
+
+name = "Delta"
 sqlstr = "SELECT * FROM password WHERE name = '{}'".format(name)
 cursor = conn.execute(sqlstr)
-row = cursor.fetchone()
+
+row = cursor.fetchone()  # 讀取一筆資料
+
 if row == None:
     print("{} 帳號不存在!".format(name), "無法刪除資料")
 else:
@@ -996,6 +1168,8 @@ else:
     conn.commit()  # 更新
     print("刪除{}的資料!：".format(name), "已完成")
 
+
+print("顯示所有資料")
 disp_data()
 
 conn.close()  # 關閉資料庫連線
@@ -1006,6 +1180,7 @@ print("------------------------------------------------------------")  # 60個
 print("測試 例外 的寫法")
 
 conn = sqlite3.connect(":memory:")  # 建立資料庫連線, 記憶體
+cursor = conn.cursor()  # 建立 cursor 物件
 
 sqlstr = """
 CREATE TABLE IF NOT EXISTS table01(
@@ -1035,7 +1210,7 @@ conn.close()  # 關閉資料庫連線
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("測試 TIMESTAMP")
+print("測試 TIMESTAMP 時間戳")
 
 conn = sqlite3.connect(":memory:")  # 建立資料庫連線, 記憶體
 cursor = conn.cursor()  # 建立 cursor 物件
@@ -1050,28 +1225,32 @@ cursor.execute(sqlstr)
 
 today = datetime.date.today()
 now = datetime.datetime.now()
+print("製作資料 today :", today)
+print("製作資料 now :", now)
 
-cursor.execute("INSERT INTO table01(my_date, my_timestamp) VALUES (?, ?)", (today, now))
+# INSERT INTO 新增資料
+
+sqlstr = "INSERT INTO table01(my_date, my_timestamp) VALUES (?, ?)"
+x = (today, now)  # tuple格式
+cursor.execute(sqlstr, x)
+
+# SELECT 取得
 cursor.execute("SELECT my_date, my_timestamp FROM table01")
-row = cursor.fetchone()
-print(today, "=>", row[0], type(row[0]))
-print(now, "=>", row[1], type(row[1]))
-
-cursor.execute(
-    'SELECT current_date as "my_date [date]", current_timestamp as "my_timestamp [timestamp]"'
-)
-row = cursor.fetchone()
-print("current_date", row[0], type(row[0]))
-print("current_timestamp", row[1], type(row[1]))
+row = cursor.fetchone()  # 讀取一筆資料
+print(row)
+print(row[0])
+print(row[1])
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("測試 executemany NG")
+print("測試 executemany, 一次執行多個指令")
 
 persons = [("Hugo", "Boss"), ("Calvin", "Klein")]
 
 conn = sqlite3.connect(":memory:")  # 建立資料庫連線, 記憶體
+cursor = conn.cursor()  # 建立 cursor 物件
 
 sqlstr = """
 CREATE TABLE IF NOT EXISTS person(
@@ -1082,20 +1261,16 @@ lastname
 conn.execute(sqlstr)
 
 """
-# Fill the table
+# INSERT INTO 新增資料
 sqlstr = "INSERT INTO person(firstname, lastname) VALUES (?, ?)", persons
 conn.executemany(sqlstr)
 
-# Print the table contents
+# SELECT 顯示表單資料
 for row in conn.execute("SELECT firstname, lastname FROM person"):
     print(row)
 
 print("I just deleted", conn.execute("DELETE FROM person").rowcount, "rows")
 """
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1111,174 +1286,40 @@ print("建立表單")
 
 sqlstr = """
 CREATE TABLE IF NOT EXISTS table01(
-id      INTEGER PRIMARY KEY AUTOINCREMENT,
+id      INTEGER PRIMARY KEY AUTOINCREMENT, -- 序號(id)整數自動遞增, 可填可不填
 name    TEXT NOT NULL,
-age     INT NOT NULL,
+age     INTEGER NOT NULL,
 address CHAR(50),
-salary  REAL
+salary  REAL -- REAL:小數
 )
 """
 cursor.execute(sqlstr)
 
-cursor.execute(
-    "INSERT INTO table01 (name, age, address, salary) VALUES (?, ?, ?, ?)",
-    ("Paul", 32, "California", 20000.00),
-)
-cursor.execute(
-    "INSERT INTO table01 (name, age, address, salary) VALUES (?, ?, ?, ?)",
-    ("Allen", 25, "Texas", 15000.00),
-)
-cursor.execute(
-    "INSERT INTO table01 (name, age, address, salary) VALUES (?, ?, ?, ?)",
-    ("Teddy", 23, "Norway", 20000.00),
-)
-cursor.execute(
-    "INSERT INTO table01 (name, age, address, salary) VALUES (?, ?, ?, ?)",
-    ("Mark", 25, "Rich-Mond ", 65000.00),
-)
-cursor.execute(
-    "INSERT INTO table01 (name, age, address, salary) VALUES (?, ?, ?, ?)",
-    ("David", 27, "Texas", 85000.00),
-)
-cursor.execute(
-    "INSERT INTO table01 (name, age, address, salary) VALUES (?, ?, ?, ?)",
-    ("Kim", 22, "South-Hall", 45000.00),
-)
-cursor.execute(
-    "INSERT INTO table01 (name, age, address, salary) VALUES (?, ?, ?, ?)",
-    ("James", 24, "Houston", 10000.00),
-)
+print("有設定序號 123")
+sqlstr = "INSERT INTO table01 (id, name, age, address, salary) VALUES (?, ?, ?, ?, ?)"
+x = (123, "Paul", 32, "California", 20000.00)  # tuple格式
+cursor.execute(sqlstr, x)
+
+print("沒有設定序號, 系統自動遞增")
+sqlstr = "INSERT INTO table01 (name, age, address, salary) VALUES (?, ?, ?, ?)"
+
+x = ("Allen", 25, "Texas", 15000.00)  # tuple格式
+cursor.execute(sqlstr, x)
+
+x = ("Teddy", 23, "Norway", 20000.00)  # tuple格式
+cursor.execute(sqlstr, x)
 
 conn.commit()  # 更新
 
 conn.close()  # 關閉資料庫連線
-
-print("------------------------------------------------------------")  # 60個
 
 print("讀取資料庫資料, 全部")
-print("建立資料庫連線, 資料庫 :", db_filename)
-conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-sqlstr = "SELECT * FROM table01"  # SELECT * : 取得所有資料
-cursor = conn.execute(sqlstr)
-do_fetchall(cursor)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-sqlite基本範例 一個 基本款
-
-簡易建立資料庫
-
-增加(13)
-
-刪除資料(1)
-讀取全部資料
-搜尋資料
-
-刪除資料庫
-
-
-原始資料 9 筆
-	id_num	ename	cname	weight
-第1筆 : 5	horse	馬	36
-第2筆 : 1	mouse	鼠	3
-第3筆 : 4	elephant象	100	(此筆資料錯誤, 應刪除)
-
-第4筆 : 9	ox		48
-第5筆 : 2	sheep		66	(此筆資料錯誤, 應為goat 29)
-
-第6筆 : 8	snake		16	(詢問是否刪除此筆資料)
-第7筆 : 3	tiger		33
-
-第8筆 : 7	rabbit		8
-
-第9筆 : 6	tiger		240
-
-1. 建立資料庫
-2. 新增資料 9筆
-3. 修改2號的name
-4. 刪除4號
-5. 詢問是否刪除8號資料
-6. 搜尋
-
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-db_filename = "tmp_db05_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
-print("建立資料庫連線, 資料庫 :", db_filename)
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-cursor = conn.cursor()  # 建立 cursor 物件
 
-print("建立一個表單")
-
-# PRIMARY KEY 主鍵
-# 序號 自動遞增 不可重複
-sqlstr = """
-CREATE TABLE IF NOT EXISTS table01(
-idx    INTEGER PRIMARY KEY AUTOINCREMENT,
-id_num INTEGER NOT NULL,
-ename  TEXT NOT NULL,
-cname  TEXT,
-weight INTEGER NOT NULL CHECK(weight > 0) -- 預設錯誤時會顯示
-)
-"""
-
-cursor.execute(sqlstr)
-conn.commit()  # 更新
-
-print("新增資料 2 筆 寫法三, 有些欄位可以不寫, 序號自動遞增")
-
-cursor.execute(
-    "INSERT INTO table01 (id_num, ename, cname, weight) VALUES (5, 'horse', '馬', 48)"
-)
-cursor.execute(
-    "INSERT INTO table01 (id_num, ename, cname, weight) VALUES (1, 'mouse', '鼠', 66)"
-)
-cursor.execute(
-    "INSERT INTO table01 (id_num, ename, cname, weight) VALUES (4, 'elephant', '象', 48)"
-)
-
-cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (9, 'ox', 48)")
-cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (2, 'sheep', 66)")
-cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (8, 'snake', 16)")
-cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (3, 'tiger', 33)")
-cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (7, 'rabbit', 8)")
-cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (6, 'tiger', 240)")
-
-for _ in range(123456):
-    cursor.execute(
-        "INSERT INTO table01 (id_num, ename, weight) VALUES (6, 'tiger', 240)"
-    )
-
-conn.commit()  # 更新
+fetch_all_table_data(cursor, "table01")
 
 conn.close()  # 關閉資料庫連線
-
-print("------------------------------------------------------------")  # 60個
-
-print("用fetchall()讀取 全部資料")
-print("建立資料庫連線, 資料庫 :", db_filename)
-conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-sqlstr = "SELECT * FROM table01"  # SELECT * : 取得所有資料
-cursor = conn.execute(sqlstr)
-do_fetchall(cursor)
-
-conn.close()  # 關閉資料庫連線
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1288,13 +1329,13 @@ print("新進測試")
 db_filename = "ims_sql/db_ims.sqlite"
 db_filename = "data/gasoline.sqlite"
 # db_filename = "db_20230703_113217.sqlite"
-
 print("建立資料庫連線, 資料庫 :", db_filename)
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 
 print("要事先能知道表單的名稱 prices 與 各欄位的名稱 gdate")
 
+# SELECT * : 取得資料 排列 依 gdate 降冪
 sqlstr = "SELECT * FROM prices ORDER BY gdate DESC;"
 cursor = conn.execute(sqlstr)
 
@@ -1309,17 +1350,20 @@ for row in cursor:
 
 conn.close()  # 關閉資料庫連線
 
-print("-------------------")
+print("------------------------------")  # 30個
+
 table_name = "prices"
 length = 5
 show_data_base_contents(db_filename, table_name, length)
-print("-------------------")
+
+print("------------------------------")  # 30個
+
+print("讀取資料庫資料")
 show_data_base_contents_all(db_filename, table_name)
 
-# ----------------------------------------------------------------
+print("------------------------------")  # 30個
 
 """
-
 新進測試
 測試 SERIAL 測不出效果
 
@@ -1332,18 +1376,17 @@ show_data_base_contents_all(db_filename, table_name)
 """
 
 print("------------------------------------------------------------")  # 60個
-print("新進測試")
 
-db_filename = "tmp_db06_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
+db_filename = "tmp_db05_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
 print("建立資料庫連線, 資料庫 :", db_filename)
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
 
-# 建立一個表單 table01 + PRIMARY KEY
+# 建立表單 table01 + PRIMARY KEY
 sqlstr = """
 CREATE TABLE IF NOT EXISTS table01(
---id SERIAL PRIMARY KEY,   無效
+-- id SERIAL PRIMARY KEY,   無效
 id_num      INTEGER,
 name        VARCHAR(50),
 birthday    DATE CHECK(birthday > "1900-01-01"),
@@ -1352,47 +1395,37 @@ money       INTEGER CHECK(money > 0), -- 預設錯誤時會顯示
 update_time TIMESTAMP
 )
 """
-
 cursor.execute(sqlstr)
 conn.commit()  # 更新
 
+# INSERT INTO 新增資料 完整
 id_num = 3
 name = "David"
 birthday = "2006-03-11"
 work_time = "2023-07-11"
 money = 2345
 update_time = datetime.datetime.now()
+sqlstr = "INSERT INTO table01 (id_num, name, birthday, work_time, money, update_time) VALUES (?, ?, ?, ?, ?, ?)"
+x = (id_num, name, birthday, work_time, money, update_time)  # tuple格式
+cursor.execute(sqlstr, x)
 
-sql = "INSERT INTO table01 (id_num, name, birthday, work_time, money, update_time) VALUES ({}, '{}', '{}', '{}', {}, '{}')"
-sqlstr = sql.format(id_num, name, birthday, work_time, money, update_time)
-
-# 或者直接寫
-# sqlstr = "INSERT INTO table01 (id_num, name, birthday, work_time, money) VALUES (5, 'David', 'xxxx', 'xxxx', 1234, 'xxxx');"
-
-cursor.execute(sqlstr)
-
-print("資料不足時, 部分填入資料")
+# INSERT INTO 新增資料 部分
 id_num = 5
 name = "Eric"
 update_time = datetime.datetime.now()
-
-sql = "INSERT INTO table01 (id_num, name, update_time) VALUES ({}, '{}', '{}')"
-sqlstr = sql.format(id_num, name, update_time)
-cursor.execute(sqlstr)
+sqlstr = "INSERT INTO table01 (id_num, name, update_time) VALUES (?, ?, ?)"
+x = (id_num, name, update_time)  # tuple格式
+cursor.execute(sqlstr, x)
 
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 
-sqlstr = "SELECT * FROM table01"
+sqlstr = "SELECT * FROM table01"  # SELECT * : 取得所有資料
 cursor = conn.execute(sqlstr)
 
-n = 0
-for row in cursor:
-    print(row)
-    n = n + 1
-    # 讀取10筆資料, 即跳出
+do_fetchall(cursor)
 
 conn.close()  # 關閉資料庫連線
 
@@ -1401,7 +1434,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("一次寫入多行的語法 executescript")
 
-db_filename = "tmp_db07_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
+db_filename = "tmp_db06_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
 print("建立資料庫連線, 資料庫 :", db_filename)
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
@@ -1419,9 +1452,10 @@ INSERT INTO table01 (name, ingredients) VALUES ('pumpkin pie', 'pumpkin sugar fl
 """
 )
 
-for row in conn.execute(
+cursor = conn.execute(
     "SELECT rowid, name, ingredients FROM table01 WHERE name MATCH 'pie'"
-):
+)  # 條件
+for row in cursor:
     print(row)
 
 # conn.commit()  # 更新
@@ -1437,13 +1471,12 @@ print("一次寫入多行的語法 executescript")
 conn = sqlite3.connect(":memory:")  # 建立資料庫連線, 記憶體
 cursor = conn.cursor()  # 建立 cursor 物件
 
-conn.execute("CREATE TABLE IF NOT EXISTS person(firstname,lastname,age)")
-conn.execute("CREATE TABLE IF NOT EXISTS book(title,author,published)")
+conn.execute("CREATE TABLE IF NOT EXISTS book(title, author, published)")
 
 # 要同質性
 conn.executescript(
     """
-INSERT INTO book(title, author, published)VALUES ('Dirk Gently''s Holistic Detective Agency','Douglas Adams',1987)
+INSERT INTO book(title, author, published) VALUES ('Dirk Gently''s Holistic Detective Agency','Douglas Adams',1987)
 """
 )
 
@@ -1461,21 +1494,22 @@ age
 """
 cursor.execute(sqlstr)
 
-who = "David"
-age = 18
-
-cursor.execute("INSERT INTO people VALUES (?, ?)", (who, age))
+sqlstr = "INSERT INTO people VALUES (?, ?)"
+name, age = "David", 18
+x = (name, age)  # tuple格式
+cursor.execute(sqlstr, x)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 db_filename_disk = (
-    "tmp_db08_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + "_disk.sqlite"
+    "tmp_db07_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + "_disk.sqlite"
 )
 
 mem_conn = sqlite3.connect(":memory:")  # 建立資料庫連線, 記憶體
-disk_conn = sqlite3.connect(db_filename_disk)  # 建立資料庫連線, 磁碟
+cursor = conn.cursor()  # 建立 cursor 物件
 
+disk_conn = sqlite3.connect(db_filename_disk)  # 建立資料庫連線, 磁碟
 cursor = mem_conn.cursor()  # 建立 cursor 物件
 
 sqlstr = """
@@ -1488,16 +1522,17 @@ cursor.execute(sqlstr)
 
 print("目前共有修改資料次數 : ", mem_conn.total_changes)
 
-who = "David"
-age = 18
-
-cursor.execute("INSERT INTO table01 VALUES (?, ?)", (who, age))
+sqlstr = "INSERT INTO table01 VALUES (?, ?)"
+name, age = "David", 18
+x = (name, age)  # tuple格式
+cursor.execute(sqlstr, x)
 
 print("目前共有修改資料次數 : ", mem_conn.total_changes)
 
-cursor.execute("INSERT INTO table01 VALUES (?, ?)", (who, age))
-cursor.execute("INSERT INTO table01 VALUES (?, ?)", (who, age))
-cursor.execute("INSERT INTO table01 VALUES (?, ?)", (who, age))
+cursor.execute(sqlstr, x)
+cursor.execute(sqlstr, x)
+cursor.execute(sqlstr, x)
+
 print("目前共有修改資料次數 : ", mem_conn.total_changes)
 
 sqlstr = """
@@ -1511,11 +1546,13 @@ price  REAL
 """
 cursor.execute(sqlstr)
 
-cursor.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
+sqlstr = "INSERT INTO stocks VALUES (?, ?, ?, ?, ?)"
+x = ("2006-01-05", "BUY", "RHAT", 100, 35.14)  # tuple格式
+cursor.execute(sqlstr, x)
 
 mem_conn.commit()
 
-sqlstr = "SELECT * FROM table01"
+sqlstr = "SELECT * FROM table01"  # SELECT * : 取得所有資料
 cursor.execute(sqlstr)
 
 do_fetchall(cursor)
@@ -1542,7 +1579,7 @@ mem_conn.execute("INSERT INTO disk_db.example_table VALUES (1, 'example')")
 mem_conn.close()  # 關閉資料庫連線
 disk_conn.close()  # 關閉資料庫連線
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 db_filename = db_filename_disk
 table_name = "table01"
@@ -1552,15 +1589,12 @@ table_name = "stocks"
 show_data_base_contents_all(db_filename, table_name)
 
 print("------------------------------------------------------------")  # 60個
-print("測 executemany")
+print("------------------------------------------------------------")  # 60個
 
-stocks = [
-    ("2006-01-05", "BUY", "RHAT", 100, 35.14),
-    ("2006-03-28", "BUY", "IBM", 1000, 45.0),
-    ("2006-04-06", "SELL", "IBM", 500, 53.0),
-    ("2006-04-05", "BUY", "MSFT", 1000, 72.0),
-]
+print("測試 executemany, 一次執行多個指令")
+
 conn = sqlite3.connect(":memory:")  # 建立資料庫連線, 記憶體
+cursor = conn.cursor()  # 建立 cursor 物件
 
 sqlstr = """
 CREATE TABLE IF NOT EXISTS stocks(
@@ -1573,10 +1607,19 @@ price   REAL
 """
 conn.execute(sqlstr)
 
+# INSERT INTO 新增資料 多筆, 使用串列
+stocks = [
+    # 日期         買/買   代號   數量  價格
+    ("2006-01-05", "BUY", "RHAT", 100, 35.14),
+    ("2006-03-28", "BUY", "IBM", 1000, 45.0),
+    ("2006-04-06", "SELL", "IBM", 500, 53.0),
+    ("2006-04-05", "BUY", "MSFT", 1000, 72.0),
+]
 conn.executemany("INSERT INTO stocks values (?, ?, ?, ?, ?)", stocks)
 
 cursor = conn.cursor()  # 建立 cursor 物件
 
+# SELECT * : 取得資料 排列 依 ename 升冪
 sqlstr = "SELECT * FROM stocks ORDER BY price"
 for row in cursor.execute(sqlstr):
     print(row)
@@ -1587,15 +1630,16 @@ for row in cursor.execute(sqlstr):
 # ("2006-04-06", "SELL", "IBM", 500, 53.0)
 # ("2006-04-05", "BUY", "MSFT", 1000, 72.0)
 
+# SELECT * : 取得資料 排列 依 ename 升冪
 sqlstr = "SELECT * FROM stocks ORDER BY price"
 cursor.execute(sqlstr)
 
-one_row_data = cursor.fetchone()
-print("fetchone", one_row_data)
+one_row_data = cursor.fetchone()  # 讀取一筆資料
+print("a讀取一筆資料", one_row_data)
 
 while one_row_data:
-    one_row_data = cursor.fetchone()
-    print("fetchone", one_row_data)
+    one_row_data = cursor.fetchone()  # 讀取一筆資料
+    print("b讀取一筆資料", one_row_data)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1605,7 +1649,7 @@ try:
     conn = sqlite3.connect(db_filename_disk)  # 建立資料庫連線
     cursor = conn.cursor()  # 建立 cursor 物件
     # 嘗試執行查詢，可能會引發異常
-    sqlstr = "SELECT * FROM non_existent_table"
+    sqlstr = "SELECT * FROM non_existent_table"  # SELECT * : 取得所有資料
     cursor.execute(sqlstr)
 except sqlite3.Error as e:
     # 捕獲並處理 SQLite 特定的異常
@@ -1622,46 +1666,45 @@ print("------------------------------------------------------------")  # 60個
 
 print("測試各種fetch")
 """
-fetchone()	#抓一行 tuple
+fetchone()  # 讀取一筆資料	#抓一行 tuple
 fetchmany(size=cursor.arraysize)	#抓n行 list
 fetchall()  # 讀取全部資料成元組串列	#抓取剩下的全部 list
-
 """
 
 db_filename = "ims_sql/db_ims.sqlite"
 db_filename = "data/gasoline.sqlite"
 # db_filename  = "db_20230703_113217.sqlite"
-
 print("建立資料庫連線, 資料庫 :", db_filename)
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 
-sqlstr = "SELECT * FROM prices;"
+sqlstr = "SELECT * FROM prices;"  # SELECT * : 取得所有資料
 cursor = conn.execute(sqlstr)
 
+print("讀取1筆資料")
 cc = cursor.fetchone()
-print(type(cc))
 print(cc)
 
+print("讀取1筆資料")
 cc = cursor.fetchone()
-print(type(cc))
 print(cc)
 
+print("讀取3筆資料")
 cc = cursor.fetchmany(3)
-print(type(cc))
 print(cc)
 
+print("讀取全部資料")
 do_fetchall(cursor)
 
 conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
-print("xxxxx new 0717")
+print("------------------------------------------------------------")  # 60個
 
 conn = sqlite3.connect(":memory:")  # 建立資料庫連線, 記憶體
 cursor = conn.cursor()  # 建立 cursor 物件
 
-# 建立一個表單 table01 + PRIMARY KEY
+# 建立表單 table01 + PRIMARY KEY
 
 sqlstr = """
 CREATE TABLE IF NOT EXISTS table01(
@@ -1677,247 +1720,107 @@ tasks = (
     "fight with a zebra",
 )
 
-for task in tasks:
-    cursor.execute("INSERT INTO table01 VALUES(NULL, ?)", (task,))
+print(tasks[0])
+print(tasks[1])
+print(tasks[2])
 
-sqlstr = "SELECT * FROM table01"
-cursor.execute(sqlstr)
+cursor.execute("INSERT INTO table01 VALUES (NULL, ?)", (tasks[0],))
+cursor.execute("INSERT INTO table01 VALUES (NULL, ?)", (tasks[1],))
+cursor.execute("INSERT INTO table01 VALUES (NULL, ?)", (tasks[2],))
 
-do_fetchall(cursor)
+fetch_all_table_data(cursor, "table01")
 
-# 更新資料
+# UPDATE 更新資料
 cursor.execute("UPDATE table01 SET task = 'learn italian' WHERE key = 1")
 
-sqlstr = "SELECT * FROM table01"
-cursor.execute(sqlstr)
-print(cursor.fetchall())  # 讀取全部資料成元組串列
-
+fetch_all_table_data(cursor, "table01")
 
 key_id = 2
 # sqlstr =
 cursor.execute("SELECT * FROM table01 WHERE key=?", (str(key_id),))
-key, task = cursor.fetchone()
+key, task = cursor.fetchone()  # 讀取一筆資料
 
 print(key)
 print(task)
 
-print("程式執行完畢！")
-
-"""
-注意：不要使用%s 將字串插入 SQL 命令，
-因為它可能使你的程式容易受到 SQL 注入攻擊（請參閱 SQL 注入 ）。
-"""
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-新進測試
-建立多個表單 要分開寫
-"""
-print("------------------------------------------------------------")  # 60個
-
-db_filename = "tmp_db09_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
+db_filename = "tmp_db08_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
 print("建立資料庫連線, 資料庫 :", db_filename)
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-cursor = conn.cursor()  # 建立 cursor 物件
-
-# 建立一個表單 table01 + PRIMARY KEY
-sqlstr = """
-CREATE TABLE IF NOT EXISTS table01(
-id      INTEGER PRIMARY KEY AUTOINCREMENT,
-name    TEXT NOT NULL,
-age     INT NOT NULL,
-address CHAR(50),
-salary  REAL
-)
-"""
-cursor.execute(sqlstr)
-
-# conn.commit()  # 更新
-# conn.close()  # 關閉資料庫連線
-
-# 刪除三個表單
-
-sqlstr = "DROP TABLE IF EXISTS table01"
-cursor.execute(sqlstr)
-
-sqlstr = "DROP TABLE IF EXISTS table02"
-cursor.execute(sqlstr)
-
-sqlstr = "DROP TABLE IF EXISTS table03"
-cursor.execute(sqlstr)
-
-# 建立一個表單 table01 + PRIMARY KEY
-sqlstr = """
-CREATE TABLE IF NOT EXISTS table01(
-id serial                 NOT NULL,
-uid character varying(50) NOT NULL,
-PRIMARY KEY (id))
-"""
-cursor.execute(sqlstr)
-
-# 建立一個表單 table02 + PRIMARY KEY
-sqlstr = """
-CREATE TABLE IF NOT EXISTS table02(
-id serial NOT NULL,
-uid character varying(50) NOT NULL,
-PRIMARY KEY (id))
-"""
-cursor.execute(sqlstr)
-
-# 建立一個表單 table03 + PRIMARY KEY
-sqlstr = """
-CREATE TABLE IF NOT EXISTS table03(
-id serial NOT NULL,
-bid character varying(50) NOT NULL,
-roomtype character varying(20) NOT NULL,
-roomamount character varying(5) NOT NULL,
-datein character varying(20) NOT NULL,
-dateout character varying(20) NOT NULL,
-PRIMARY KEY (id)
-)
-"""
-cursor.execute(sqlstr)
-
-# 建立一個表單 table04 + PRIMARY KEY
-sqlstr = """
-CREATE TABLE IF NOT EXISTS table04(
-sid serial NOT NULL,
-name character varying(50) NOT NULL,
-tel character varying(50),
-addr character varying(200),
-email character varying(100),
-PRIMARY KEY (sid))
-"""
-cursor.execute(sqlstr)
-
-# 建立一個表單 users1 + PRIMARY KEY
-sqlstr = """
-CREATE TABLE IF NOT EXISTS users1(
-id serial NOT NULL,
-uid character varying(50) NOT NULL,
-question character varying(250) NOT NULL,
-PRIMARY KEY (id))
-"""
-cursor.execute(sqlstr)
-
-# 建立一個表單 login + PRIMARY KEY
-sqlstr = """
-CREATE TABLE IF NOT EXISTS login(
-id serial NOT NULL,
-uid character varying(50) NOT NULL,
-state character varying(10) NOT NULL,
-PRIMARY KEY (id))
-"""
-cursor.execute(sqlstr)
-
-# 建立一個表單 users2 + PRIMARY KEY
-sqlstr = """
-CREATE TABLE IF NOT EXISTS users2(
-id serial NOT NULL,
-uid character varying(50) NOT NULL,
-state character varying(10) NOT NULL,
-digit3 character varying(10) NOT NULL,
-PRIMARY KEY (id))
-"""
-cursor.execute(sqlstr)
-
-# 建立一個表單 setting + PRIMARY KEY
-sqlstr = """
-CREATE TABLE IF NOT EXISTS setting(
-id serial NOT NULL,
-uid character varying(50) NOT NULL,
-lang character varying(10) NOT NULL,
-sound character varying(10) NOT NULL,
-PRIMARY KEY (id))
-"""
-cursor.execute(sqlstr)
-
-conn.commit()  # 更新
-conn.close()  # 關閉資料庫連線
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 # CREATE + PK
-# 建立一個表單 student2 + PRIMARY KEY
+# 建立表單 students + PRIMARY KEY 序號 自動遞增 不可重複
 sqlstr = """
-CREATE TABLE IF NOT EXISTS student2(
-id     INTEGER PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE IF NOT EXISTS students(
+id     INTEGER PRIMARY KEY AUTOINCREMENT, -- 序號(id)整數自動遞增, 可填可不填
 name   TEXT,
 gender TEXT
 )
 """
+conn.execute(sqlstr)
 
-# INSERT
+print("INSERT INTO 新增資料 3個欄位 指定id")
 
-conn = sqlite3.connect(db_filename_myInfo1)  # 建立資料庫連線
+sqlstr = "INSERT INTO students VALUES (?, ?, ?)"
 
-print("新增資料 INSERT INTO")
-
-new_id = 123
-new_name = "david"
-new_gender = "M"
-x = (new_id, new_name, new_gender)
-sqlstr = """INSERT INTO students values(?,?,?)"""
+new_id, new_name, new_gender = 1, "Tomy", "M"
+x = (new_id, new_name, new_gender)  # tuple格式
 conn.execute(sqlstr, x)
-conn.commit()  # 更新
 
-conn.close()  # 關閉資料庫連線
-
-print("------------------------------")  # 30個
-
-conn = sqlite3.connect(db_filename_myInfo2)  # 建立資料庫連線
-
-print("新增資料 INSERT INTO")
-
-new_name = "david"
-new_gender = "M"
-x = (new_name, new_gender)
-sqlstr = """INSERT INTO student2(name, gender) values(?,?)"""
+new_id, new_name, new_gender = 3, "Kathy", "F"
+x = (new_id, new_name, new_gender)  # tuple格式
 conn.execute(sqlstr, x)
+
+new_id, new_name, new_gender = 123, "david", "M"
+x = (new_id, new_name, new_gender)  # tuple格式
+conn.execute(sqlstr, x)
+
 conn.commit()  # 更新
+conn.close()  # 關閉資料庫連線
 
+print("------------------------------")  # 30個
+
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+
+print("INSERT INTO 新增資料 2個欄位 不指定id")
+
+new_name = "elephant"
+new_gender = "F"
+x = (new_name, new_gender)  # tuple格式
+sqlstr = "INSERT INTO students(name, gender) VALUES (?, ?)"
+conn.execute(sqlstr, x)
+
+conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
 print("------------------------------")  # 30個
 
 print("讀取資料 SELECT *")
 
-conn = sqlite3.connect(db_filename_myInfo1)  # 建立資料庫連線
-sqlstr = "SELECT * FROM students"
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+
+sqlstr = "SELECT * FROM students"  # SELECT * : 取得所有資料
 cursor = conn.execute(sqlstr)
+
+print("取得所有資料")
+i = 0
 for row in cursor:
-    print("id = ", row[0])
-    print("name = ", row[1])
-    print("gender = ", row[2])
+    print("第" + str(i + 1) + "筆資料 : ", row)
+    i = i + 1
+    print("id =", row[0], ", name =", row[1], ", gender =", row[2])
+
 conn.close()  # 關閉資料庫連線
 
 print("------------------------------")  # 30個
 
-print("讀取資料 SELECT *")
+print("讀取資料 SELECT * 所有資料")
 
-conn = sqlite3.connect(db_filename_myInfo2)  # 建立資料庫連線
-sqlstr = "SELECT * FROM student2"
-cursor = conn.execute(sqlstr)
-for row in cursor:
-    print("id = ", row[0])
-    print("name = ", row[1])
-    print("gender = ", row[2])
-conn.close()  # 關閉資料庫連線
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 
-print("------------------------------")  # 30個
-
-print("讀取資料 SELECT *")
-
-conn = sqlite3.connect(db_filename_myInfo1)  # 建立資料庫連線
-sqlstr = "SELECT * FROM students"
+sqlstr = "SELECT * FROM students"  # SELECT * : 取得所有資料
 cursor = conn.execute(sqlstr)
 
 do_fetchall(cursor)
@@ -1926,9 +1829,41 @@ conn.close()  # 關閉資料庫連線
 
 print("------------------------------")  # 30個
 
-print("讀取資料 SELECT *")
+print("讀取資料 SELECT 僅一欄 name")
 
-conn = sqlite3.connect(db_filename_myInfo1)  # 建立資料庫連線
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+
+sqlstr = "SELECT name FROM students"  # SELECT name : 取得一欄資料
+cursor = conn.execute(sqlstr)
+
+do_fetchall(cursor)
+
+conn.close()  # 關閉資料庫連線
+
+print("------------------------------")  # 30個
+
+print("讀取資料 SELECT 加條件")
+
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+
+sqlstr = 'SELECT name, gender FROM students WHERE gender = "F"'
+cursor = conn.execute(sqlstr)
+
+do_fetchall(cursor)
+
+conn.close()  # 關閉資料庫連線
+
+print("------------------------------")  # 30個
+
+print("UPDATE 更新資料")
+
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+
+sqlstr = 'UPDATE students set name = "Tomy" WHERE id = 1'
+cursor = conn.execute(sqlstr)
+
+conn.commit()  # 更新
+
 cursor = conn.execute("SELECT name FROM students")
 
 do_fetchall(cursor)
@@ -1937,44 +1872,15 @@ conn.close()  # 關閉資料庫連線
 
 print("------------------------------")  # 30個
 
-print("讀取資料 SELECT *")
+print("# DELETE 刪除資料 條件")
 
-conn = sqlite3.connect(db_filename_myInfo1)  # 建立資料庫連線
-sqlstr = """
-SELECT name, gender FROM students where gender = "F"
-"""
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+
+sqlstr = "DELETE FROM students WHERE id = 2"
 cursor = conn.execute(sqlstr)
 
-do_fetchall(cursor)
-
-conn.close()  # 關閉資料庫連線
-
-print("------------------------------")  # 30個
-
-print("更新資料 UPDATE *")
-
-conn = sqlite3.connect(db_filename_myInfo1)  # 建立資料庫連線
-sqlstr = """
-UPDATE students
-set name = "Tomy"
-where id = 1
-"""
-cursor = conn.execute(sqlstr)
 conn.commit()  # 更新
-cursor = conn.execute("SELECT name FROM students")
 
-do_fetchall(cursor)
-
-conn.close()  # 關閉資料庫連線
-
-print("------------------------------")  # 30個
-
-print("刪除資料 DELETE *")
-
-conn = sqlite3.connect(db_filename_myInfo1)  # 建立資料庫連線
-sqlstr = "DELETE FROM students where id = 2"
-cursor = conn.execute(sqlstr)
-conn.commit()  # 更新
 cursor = conn.execute("SELECT name FROM students")
 
 do_fetchall(cursor)
@@ -1984,7 +1890,8 @@ conn.close()  # 關閉資料庫連線
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-db_filename = "tmp_db10_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
+db_filename = "tmp_db09_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
+print("建立資料庫連線, 資料庫 :", db_filename)
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 
@@ -2008,12 +1915,12 @@ with open(fn) as csvFile:  # 儲存在SQLite
         male = int(row[7])  # 男性人數
         female = int(row[8])  # 女性人數
         total = int(row[6])  # 總人數
-        x = (area, male, female, total)
-        sqlstr = """INSERT INTO population values(?,?,?,?)"""
+        sqlstr = "INSERT INTO population VALUES (?, ?, ?, ?)"
+        x = (area, male, female, total)  # tuple格式
         conn.execute(sqlstr, x)
         conn.commit()
 
-sqlstr = "SELECT * FROM population"
+sqlstr = "SELECT * FROM population"  # SELECT * : 取得所有資料
 cursor = conn.execute(sqlstr)
 for row in cursor:
     print("區域       = ", row[0])
@@ -2027,7 +1934,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-sqlstr = "SELECT * FROM population"
+
+sqlstr = "SELECT * FROM population"  # SELECT * : 取得所有資料
 cursor = conn.execute(sqlstr)
 
 area, male, female, total = [], [], [], []
@@ -2053,12 +1961,18 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """ no db
 conn = sqlite3.connect("python.sqlite")  # 建立資料庫連線
+print("建立資料庫連線, 資料庫 :", db_filename)
+
 cursor = conn.cursor()  # 建立 cursor 物件
 
-cursor.execute("INSERT INTO people (name,age,sex) values ('Jee',21,'F')")
-r = cursor.execute("DELETE FROM people where age=20")
+sqlstr = "INSERT INTO people (name,age,sex) values (?, ?, ?)"
+x = ('Jee', 21, 'F')  # tuple格式
+cursor.execute(sqlstr, x)
+
+r = cursor.execute("DELETE FROM people WHERE age=20")
 conn.commit()  # 更新
-sqlstr = "SELECT * FROM people"
+
+sqlstr = "SELECT * FROM people"  # SELECT * : 取得所有資料
 cursor.execute(sqlstr)
 
 do_fetchall(cursor)
@@ -2066,16 +1980,16 @@ do_fetchall(cursor)
 cursor.close()  # 關閉游標
 conn.close()  # 關閉資料庫連線
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("讀取資料庫的所有資料")
 
-conn = sqlite3.connect("data/singMatch.db")  # 建立資料庫連線
+conn = sqlite3.connect(db_filename_singMatch)  # 建立資料庫連線
 
 print("編號\t姓名\t音色50\t技巧30\t儀態20\t總分")
+
 sqlstr = "SELECT 參賽者.編號,參賽者.姓名,音色.音色50, \
        技巧.技巧30,儀態.儀態20 FROM 參賽者 \
        INNER JOIN 音色 ON 音色.編號 = 參賽者.編號 \
@@ -2083,6 +1997,7 @@ sqlstr = "SELECT 參賽者.編號,參賽者.姓名,音色.音色50, \
        INNER JOIN 儀態 ON 儀態.編號 = 參賽者.編號"
 
 rows = conn.execute(sqlstr)
+
 for row in rows:
     tot = row[2] + row[3] + row[4]
     print("%d\t%s\t%d\t%d\t%d\t%d" % (row[0], row[1], row[2], row[3], row[4], tot))
@@ -2091,117 +2006,109 @@ conn.close()  # 關閉資料庫連線
 
 print("------------------------------")  # 30個
 
-"""
-#delete.py
+# delete.py
 
-conn = sqlite3.connect("data/singMatch.db")  # 建立資料庫連線
+conn = sqlite3.connect(db_filename_singMatch)  # 建立資料庫連線
 
-selId = int(input("請輸入要移除的 編號 : "))
+# selId = int(input("請輸入要移除的 編號 : "))
+selId = 1
+
 sqlstr = "DELETE FROM 參賽者 WHERE 編號 = {0}".format(selId)
 conn.execute(sqlstr)
 print("編號 = {0} 的記錄 已經刪除....".format(selId))
+
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
 print("------------------------------")  # 30個
 
-#insert01.py
+# insert01.py
 
-conn = sqlite3.connect("data/singMatch.db")  # 建立資料庫連線
+conn = sqlite3.connect(db_filename_singMatch)  # 建立資料庫連線
 
-print ("請輸入「參賽者」表單的記錄資料")
-again = "y"
-while again.lower() == "y":
-    newId = int(input("編號 : "))
-    newName = input("姓名 : ")
-    newSex = input("性別 : ")
-    newTel = input("電話 : ")
-    row = (newId, newName, newSex, newTel)
-    sqlstr = "INSERT INTO 參賽者 VALUES(?,?,?,?)"
-    conn.execute(sqlstr, row)
-    conn.commit()  # 更新
-    again = input("是否繼續輸入資料 ? ")
+newId = 123
+newName = "david"
+newSex = "M"
+newTel = "0912345678"
+sqlstr = "INSERT INTO 參賽者 VALUES (?, ?, ?, ?)"
+row = (newId, newName, newSex, newTel)  # tuple格式
+conn.execute(sqlstr, row)
+
+conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
 print("------------------------------")  # 30個
 
-#insert02.py
+# insert02.py
 
-conn = sqlite3.connect("data/singMatch.db")  # 建立資料庫連線
+conn = sqlite3.connect(db_filename_singMatch)  # 建立資料庫連線
 
-# 建立一個表單 音色
+# 建立表單 音色
 sql1 = "CREATE TABLE IF NOT EXISTS 音色( \
         編號 INTEGER UNIQUE NOT NULL, \
         音色50 INTEGER)"
 conn.execute(sql1)
 
-print ("請輸入「音色」表單的記錄資料")
-again = "y"
-while again.lower() == "y":
-    newId = int(input("編號 : "))
-    newScore = int(input("音色50 : "))
-    row = (newId, newScore)
-    sql2 = "INSERT INTO 音色 VALUES(?,?)"
-    conn.execute(sql2, row)
-    conn.commit()
-    again = input("是否繼續輸入資料 ? ")
+newId = 124
+newScore = 100
+row = (newId, newScore)
+sql2 = "INSERT INTO 音色 VALUES (?, ?)"
+conn.execute(sql2, row)
+
+conn.commit()
 conn.close()  # 關閉資料庫連線
 
 print("------------------------------")  # 30個
 
-#insert03.py
+# insert03.py
 
-conn = sqlite3.connect("data/singMatch.db")  # 建立資料庫連線
+conn = sqlite3.connect(db_filename_singMatch)  # 建立資料庫連線
 
-# 建立一個表單 技巧
+# 建立表單 技巧
 sql1 = "CREATE TABLE IF NOT EXISTS 技巧( \
          編號 INTEGER UNIQUE NOT NULL, \
          技巧30 INTEGER)"
 conn.execute(sql1)
 
-print ("請輸入「技巧」表單的記錄資料")
-again = "y"
-while again.lower() == "y":
-    newId = int(input("編號 : "))
-    newScore = int(input("技巧30 : "))
-    row = (newId, newScore)
-    sql2 = "INSERT INTO 技巧 VALUES(?,?)"
-    conn.execute(sql2, row)
-    conn.commit()
-    again = input("是否繼續輸入資料 ? ")
+print("請輸入「技巧」表單的記錄資料")
+
+newId = 125
+newScore = 87
+row = (newId, newScore)
+sql2 = "INSERT INTO 技巧 VALUES (?, ?)"
+conn.execute(sql2, row)
+
+conn.commit()
 conn.close()  # 關閉資料庫連線
 
 print("------------------------------")  # 30個
 
-#insert04.py
+# insert04.py
 
-conn = sqlite3.connect("data/singMatch.db")  # 建立資料庫連線
+conn = sqlite3.connect(db_filename_singMatch)  # 建立資料庫連線
 
-# 建立一個表單 儀態
+# 建立表單 儀態
 sql1 = "CREATE TABLE IF NOT EXISTS 儀態( \
          編號 INTEGER UNIQUE NOT NULL, \
          儀態20 INTEGER)"
 conn.execute(sql1)
 
-print ("請輸入「儀態」表單的記錄資料")
-again = "y"
-while again.lower() == "y":
-    newId = int(input("編號 : "))
-    newScore = int(input("儀態20 : "))
-    row = (newId, newScore)
-    sql2 = "INSERT INTO 儀態 VALUES(?,?)"
-    conn.execute(sql2, row)
-    conn.commit()
-    again = input("是否繼續輸入資料 ? ")
+newId = 123
+newScore = 77
+row = (newId, newScore)
+sql2 = "INSERT INTO 儀態 VALUES (?, ?)"
+conn.execute(sql2, row)
+
+conn.commit()
 conn.close()  # 關閉資料庫連線
-"""
+
 print("------------------------------")  # 30個
 
 # match.py
 
 
 def fnCreateTable():
-    # 建立一個表單 參賽者
+    # 建立表單 參賽者
     sql1 = "CREATE TABLE IF NOT EXISTS 參賽者( \
             編號 INTEGER UNIQUE NOT NULL, \
             姓名 TEXT, \
@@ -2209,19 +2116,19 @@ def fnCreateTable():
             電話 TEXT)"
     conn.execute(sql1)
 
-    # 建立一個表單 音色
+    # 建立表單 音色
     sql2 = "CREATE TABLE IF NOT EXISTS 音色( \
             編號 INTEGER UNIQUE NOT NULL, \
             音色50 INTEGER)"
     conn.execute(sql2)
 
-    # 建立一個表單 技巧
+    # 建立表單 技巧
     sql3 = "CREATE TABLE IF NOT EXISTS 技巧( \
             編號 INTEGER UNIQUE NOT NULL, \
             技巧30 INTEGER)"
     conn.execute(sql3)
 
-    # 建立一個表單 儀態
+    # 建立表單 儀態
     sql4 = "CREATE TABLE IF NOT EXISTS 儀態( \
             編號 INTEGER UNIQUE NOT NULL, \
             儀態20 INTEGER)"
@@ -2238,15 +2145,15 @@ def fnInsert01():
         newName = input("姓名 : ")
         newSex = input("性別 : ")
         newTel = input("電話 : ")
-        row = (newId, newName, newSex, newTel)
-        sqlstr = "INSERT INTO 參賽者 VALUES(?,?,?,?)"
+        sqlstr = "INSERT INTO 參賽者 VALUES (?, ?, ?, ?)"
+        row = (newId, newName, newSex, newTel)  # tuple格式
         conn.execute(sqlstr, row)
         conn.commit()
         again = input("是否繼續輸入資料 ? ")
 
 
 def fnSelect01():
-    sqlstr = "SELECT * FROM 參賽者"
+    sqlstr = "SELECT * FROM 參賽者"  # SELECT * : 取得所有資料
     data = conn.execute(sqlstr)
     print("編號\t姓名\t性別\t電話")
     for rec in data:
@@ -2268,15 +2175,15 @@ def fnInsert02():
     while again.lower() == "y":
         newId = int(input("編號 : "))
         newScore = int(input("音色50 : "))
-        row = (newId, newScore)
-        sqlstr = "INSERT INTO 音色 VALUES(?,?)"
+        sqlstr = "INSERT INTO 音色 VALUES (?, ?)"
+        row = (newId, newScore)  # tuple格式
         conn.execute(sqlstr, row)
         conn.commit()
         again = input("是否繼續輸入資料 ? ")
 
 
 def fnSelect02():
-    sqlstr = "SELECT * FROM 音色"
+    sqlstr = "SELECT * FROM 音色"  # SELECT * : 取得所有資料
     data = conn.execute(sqlstr)
     print("編號\t音色50")
     for rec in data:
@@ -2298,15 +2205,15 @@ def fnInsert03():
     while again.lower() == "y":
         newId = int(input("編號 : "))
         newScore = int(input("技巧30 : "))
-        row = (newId, newScore)
-        sqlstr = "INSERT INTO 技巧 VALUES(?,?)"
+        sqlstr = "INSERT INTO 技巧 VALUES (?, ?)"
+        row = (newId, newScore)  # tuple格式
         conn.execute(sqlstr, row)
         conn.commit()
         again = input("是否繼續輸入資料 ? ")
 
 
 def fnSelect03():
-    sqlstr = "SELECT * FROM 技巧"
+    sqlstr = "SELECT * FROM 技巧"  # SELECT * : 取得所有資料
     data = conn.execute(sqlstr)
     print("編號\t技巧30")
     for rec in data:
@@ -2328,15 +2235,15 @@ def fnInsert04():
     while again.lower() == "y":
         newId = int(input("編號 : "))
         newScore = int(input("儀態20 : "))
-        row = (newId, newScore)
-        sqlstr = "INSERT INTO 儀態 VALUES(?,?)"
+        sqlstr = "INSERT INTO 儀態 VALUES (?, ?)"
+        row = (newId, newScore)  # tuple格式
         conn.execute(sqlstr, row)
         conn.commit()
         again = input("是否繼續輸入資料 ? ")
 
 
 def fnSelect04():
-    sqlstr = "SELECT * FROM 儀態"
+    sqlstr = "SELECT * FROM 儀態"  # SELECT * : 取得所有資料
     data = conn.execute(sqlstr)
     print("編號\t儀態20")
     for rec in data:
@@ -2367,7 +2274,7 @@ def fnRelation():
 
 
 #####  主程式  #####
-conn = sqlite3.connect("data/singMatch.db")  # 建立資料庫連線
+conn = sqlite3.connect(db_filename_singMatch)  # 建立資料庫連線
 while True:
     print("\n*** 博碩歌唱比賽評分管理系統 ***")
     print("    1. 建立表單")
@@ -2378,7 +2285,9 @@ while True:
     print("    6. 顯示 比賽總成績")
     print("    7. 離開系統")
     print("===========================")
-    n = input("請選擇操作項目: ")
+
+    # n = input("請選擇操作項目: ")
+    n = "7"  # 跳開
 
     if n == "1":
         fnCreateTable()
@@ -2389,7 +2298,7 @@ while True:
             print("   2. 查詢記錄")
             print("   3. 刪除記錄")
             print("   4. 回上一層操作")
-            print("-------------------------")
+            print("------------------------------")  # 30個
             n2 = int(input("請選擇管理項目: "))
             if n2 == 1:
                 fnInsert01()
@@ -2406,7 +2315,7 @@ while True:
             print("   2. 查詢記錄")
             print("   3. 刪除記錄")
             print("   4. 回上一層操作")
-            print("-------------------------")
+            print("------------------------------")  # 30個
             n3 = int(input("請選擇管理項目: "))
             if n3 == 1:
                 fnInsert02()
@@ -2423,7 +2332,7 @@ while True:
             print("   2. 查詢記錄")
             print("   3. 刪除記錄")
             print("   4. 回上一層操作")
-            print("-------------------------")
+            print("------------------------------")  # 30個
             n4 = int(input("請選擇管理項目: "))
             if n4 == 1:
                 fnInsert03()
@@ -2440,7 +2349,7 @@ while True:
             print("   2. 查詢記錄")
             print("   3. 刪除記錄")
             print("   4. 回上一層操作")
-            print("-------------------------")
+            print("------------------------------")  # 30個
             n5 = int(input("請選擇管理項目: "))
             if n5 == 1:
                 fnInsert04()
@@ -2461,7 +2370,7 @@ print("------------------------------")  # 30個
 
 # relation.py
 
-conn = sqlite3.connect("data/singMatch.db")  # 建立資料庫連線
+conn = sqlite3.connect(db_filename_singMatch)  # 建立資料庫連線
 
 print("編號\t姓名\t音色50\t技巧30\t儀態20\t總分")
 sqlstr = "SELECT 參賽者.編號,參賽者.姓名,音色.音色50, \
@@ -2479,9 +2388,11 @@ print("------------------------------")  # 30個
 
 # select01.py
 
-conn = sqlite3.connect("data/singMatch.db")  # 建立資料庫連線
-sqlstr = "SELECT * FROM 參賽者"
-data = conn.execute(sqlstr)  # 執行SQL指令,傳回記錄資料
+conn = sqlite3.connect(db_filename_singMatch)  # 建立資料庫連線
+
+sqlstr = "SELECT * FROM 參賽者"  # SELECT * : 取得所有資料
+data = conn.execute(sqlstr)
+
 print("編號\t姓名\t性別\t電話")
 for rec in data:
     print("%d\t%s\t%s\t%s" % (rec[0], rec[1], rec[2], rec[3]))
@@ -2491,9 +2402,11 @@ print("------------------------------")  # 30個
 
 # select02.py
 
-conn = sqlite3.connect("data/singMatch.db")  # 建立資料庫連線
+conn = sqlite3.connect(db_filename_singMatch)  # 建立資料庫連線
+
 sqlstr = "SELECT 姓名,電話 FROM 參賽者"
-data = conn.execute(sqlstr)  # 執行SQL指令,傳回記錄資料
+data = conn.execute(sqlstr)
+
 print("姓名\t電話")
 for rec in data:
     print("%s\t%s" % (rec[0], rec[1]))
@@ -2503,10 +2416,12 @@ print("------------------------------")  # 30個
 
 # select03.py
 
-conn = sqlite3.connect("data/singMatch.db")  # 建立資料庫連線
-selId = int(input("請輸入要查詢的 編號 : "))
+conn = sqlite3.connect(db_filename_singMatch)  # 建立資料庫連線
+# selId = int(input("請輸入要查詢的 編號 : "))
+selId = 1
 sqlstr = "SELECT * FROM 參賽者 WHERE 編號 = {0}".format(selId)
-data = conn.execute(sqlstr)  # 執行SQL指令,傳回記錄資料
+data = conn.execute(sqlstr)
+
 print("編號\t姓名\t性別\t電話")
 for rec in data:
     print("%d\t%s\t%s\t%s" % (rec[0], rec[1], rec[2], rec[3]))
@@ -2516,10 +2431,13 @@ print("------------------------------")  # 30個
 
 # select04.py
 
-conn = sqlite3.connect("data/singMatch.db")  # 建立資料庫連線
-selName = input("請輸入要查詢的 姓名 : ")
+conn = sqlite3.connect(db_filename_singMatch)  # 建立資料庫連線
+# selName = input("請輸入要查詢的 姓名 : ")
+selName = "a"
+
 sqlstr = 'SELECT * FROM 參賽者 WHERE 姓名 = "{0}"'.format(selName)
-data = conn.execute(sqlstr)  # 執行SQL指令,傳回記錄資料
+data = conn.execute(sqlstr)
+
 print("編號\t姓名\t性別\t電話")
 for rec in data:
     print("%d\t%s\t%s\t%s" % (rec[0], rec[1], rec[2], rec[3]))
@@ -2529,9 +2447,9 @@ print("------------------------------")  # 30個
 
 # table.py
 
-conn = sqlite3.connect("data/singMatch.db")  # 建立資料庫連線
+conn = sqlite3.connect(db_filename_singMatch)  # 建立資料庫連線
 
-# 建立一個表單 參賽者
+# 建立表單 參賽者
 sqlstr = """
 CREATE TABLE IF NOT EXISTS 參賽者(
 編號 INTEGER UNIQUE NOT NULL,
@@ -2547,10 +2465,13 @@ print("------------------------------")  # 30個
 
 # update.py
 
-conn = sqlite3.connect("data/singMatch.db")  # 建立資料庫連線
-selId = int(input("請輸入要異動的 編號 : "))
+conn = sqlite3.connect(db_filename_singMatch)  # 建立資料庫連線
+# selId = int(input("請輸入要異動的 編號 : "))
+selId = 1
+
 print("\n選擇要異動的欄位名稱...")
-field = input("1.姓名  2.性別  3.電話 ..... ? ")
+# field = input("1.姓名  2.性別  3.電話 ..... ? ")
+field = 1
 if field == "1":
     newName = input("姓名 :")
     sqlstr = 'UPDATE 參賽者 \
@@ -2574,6 +2495,7 @@ elif field == "3":
     )
 
 conn.execute(sqlstr)
+
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
@@ -2581,96 +2503,75 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-db_filename_tips = (
-    "tmp_db11_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + "_tips.sqlite"
-)
 
-conn = sqlite3.connect(db_filename_tips)  # 建立資料庫連線
-cursor = conn.cursor()  # 建立 cursor 物件
+def show_books_data():
+    print("查詢資料庫")
+    conn = sqlite3.connect(db_filename_books)  # 建立資料庫連線
 
-# 建立一個表單 table_tips
+    # SELECT * : 取得所有資料
+    sqlstr = "SELECT * FROM Books"  # SELECT * : 取得所有資料
+    cursor = conn.execute(sqlstr)
 
-sqlstr = """
-CREATE TABLE IF NOT EXISTS table_tips(
-NAME    TEXT NOT NULL,
-ADDRESS CHAR(50),
-BILL    REAL
-)
-"""
-cursor.execute(sqlstr)
+    # 取出查詢結果的每一筆記錄
+    print("ID\tTitle\t\t\tPrice")
+    for row in cursor:
+        print(row[0], "\t", row[1], "\t", row[2])
 
-cursor.execute(
-    "INSERT INTO table_tips (NAME,ADDRESS,BILL) \
-      VALUES ('Zhang', 'Beijing', 1004.00 )"
-)
-# 向表中輸入數據
+    conn.close()  # 關閉資料庫連線
 
-sqlstr = "SELECT * FROM table_tips"
-cursors = cursor.execute(sqlstr)
-for row in cursors:
-    print(row)
-conn.commit()
-conn.close()  # 關閉資料庫連線
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+show_books_data()
 
-print("查詢資料庫")
-conn = sqlite3.connect(db_filename_books)  # 建立資料庫連線
-
-# 執行SQL指令SELECT
-sqlstr = "SELECT * FROM Books"
-cursor = conn.execute(sqlstr)
-# 取出查詢結果的每一筆記錄
-print("ID\tTitle\t\t\tPrice")
-for row in cursor:
-    print(row[0], "\t", row[1], "\t", row[2])
-conn.close()  # 關閉資料庫連線
+print("原始資料 4 筆")
 
 print("------------------------------")  # 30個
 
-print("加入資料庫")
+print("INSERT INTO 新增資料")
 
 conn = sqlite3.connect(db_filename_books)  # 建立資料庫連線
 
-new_id = "D0002d"
+new_id = "D0002"
 new_title = "MySQL資料庫系統333"
 new_price = "600"
 
-# 建立SQL指令INSERT字串
-sql = "INSERT INTO Books (id, title, price) VALUES ('{0}','{1}',{2})"
-sqlstr = sql.format(new_id, new_title, new_price)
-print(sqlstr)
+# INSERT INTO 新增資料
+sqlstr = "INSERT INTO Books (id, title, price) VALUES (?, ?, ?)"
+x = (new_id, new_title, new_price)  # tuple格式
+conn.execute(sqlstr, x)
 
-cursor = conn.execute(sqlstr)
-print(cursor.rowcount)
+print("加入 :", x)
 
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
+show_books_data()
+
 print("------------------------------")  # 30個
 
-print("加入資料庫 字典")
-
-d = {"id": "D0003", "title": "MongoDB資料庫系統", "price": 650}  # 字典
+print("INSERT INTO 新增資料 字典")
 
 conn = sqlite3.connect(db_filename_books)  # 建立資料庫連線
 
-# 建立SQL指令INSERT字串
-sql = "INSERT INTO Books (id, title, price) VALUES ('{0}','{1}',{2})"
-sqlstr = sql.format(d["id"], d["title"], d["price"])
-print(sqlstr)
+d = {"id": "D0003", "title": "MongoDB資料庫系統", "price": 650}  # 字典
 
-cursor = conn.execute(sqlstr)
+# INSERT INTO 新增資料
+sqlstr = "INSERT INTO Books (id, title, price) VALUES (?, ?, ?)"
+x = (d["id"], d["title"], d["price"])  # tuple格式
+
+cursor = conn.execute(sqlstr, x)
 print(cursor.rowcount)
+
+print("加入 :", x)
 
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
+show_books_data()
+
 print("------------------------------")  # 30個
 
-print("更新資料庫")
+print("UPDATE 更新資料 D0002 價格改 650")
+print("UPDATE 更新資料 D0003 價格改 700")
 
 conn = sqlite3.connect(db_filename_books)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
@@ -2687,7 +2588,12 @@ except:
     print("更新記錄失敗...")
 conn.close()  # 關閉資料庫連線
 
+show_books_data()
+
 print("------------------------------")  # 30個
+
+print("刪除資料庫 D0002")
+print("刪除資料庫 D0003")
 
 conn = sqlite3.connect(db_filename_books)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
@@ -2704,22 +2610,23 @@ except:
     print("刪除記錄失敗...")
 conn.close()  # 關閉資料庫連線
 
+show_books_data()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-db_filename_school = (
-    "tmp_db12_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + "_school.sqlite"
-)
+db_filename = "tmp_db11_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
+print("建立資料庫連線, 資料庫 :", db_filename)
 
 print("新建資料庫")
 
-conn = sqlite3.connect(db_filename_school)  # 建立資料庫連線
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
 
-# 建立一個表單 scores + PRIMARY KEY
+# 建立表單 table01 + PRIMARY KEY
 sqlstr = """
-CREATE TABLE IF NOT EXISTS scores(
+CREATE TABLE IF NOT EXISTS table01(
 id      INTEGER PRIMARY KEY NOT NULL,
 name    TEXT NOT NULL,
 chinese INTEGER NOT NULL,
@@ -2729,52 +2636,51 @@ math    INTEGER NOT NULL
 """
 cursor.execute(sqlstr)
 
-print("加入資料庫")
-cursor.execute('INSERT INTO scores values(1, "葉大雄", 65, 62, 40)')
-cursor.execute('INSERT INTO scores values(2, "陳靜香", 85, 90, 87)')
-cursor.execute('INSERT INTO scores values(3, "王聰明", 92, 90, 95)')
-conn.commit()  # 更新
-conn.close()  # 關閉資料庫連線
-
 print("------------------------------")  # 30個
 
-print("加入資料庫")
+print("INSERT INTO 新增資料")
+sqlstr = "INSERT INTO table01 VALUES (?, ?, ?, ?, ?)"
 
-conn = sqlite3.connect(db_filename_school)  # 建立資料庫連線
+x = (1, "葉大雄", 65, 62, 40)  # tuple格式
+cursor.execute(sqlstr, x)
+x = (2, "陳靜香", 85, 90, 87)  # tuple格式
+cursor.execute(sqlstr, x)
+x = (3, "王聰明", 92, 90, 95)  # tuple格式
+cursor.execute(sqlstr, x)
 
 # 定義資料串列
 datas = [[11, "葉大雄", 65, 62, 40], [12, "陳靜香", 85, 90, 87], [13, "王聰明", 92, 90, 95]]
 
-# 新增資料
 for data in datas:
-    conn.execute(
-        "INSERT INTO scores (id, name, chinese, english, math) VALUES \
-                 ({}, '{}', {}, {}, {})".format(
-            data[0], data[1], data[2], data[3], data[4]
-        )
-    )
+    x = (data[0], data[1], data[2], data[3], data[4])  # tuple格式
+    conn.execute(sqlstr, x)
+
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
 print("------------------------------")  # 30個
 
-print("更新資料庫")
+print("UPDATE 更新資料")
 
-conn = sqlite3.connect(db_filename_school)  # 建立資料庫連線
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+cursor = conn.cursor()  # 建立 cursor 物件
 
-# 更新資料
-conn.execute("UPDATE scores SET name='{}' WHERE id={}".format("林胖虎", 1))
+# UPDATE 更新資料 # 修改 id 為 1 的資料
+conn.execute("UPDATE table01 SET name='{}' WHERE id={}".format("林胖虎", 1))
+
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
 print("------------------------------")  # 30個
 
-print("刪除資料庫")
+print("DELETE 刪除資料 條件")
 
-conn = sqlite3.connect(db_filename_school)  # 建立資料庫連線
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+cursor = conn.cursor()  # 建立 cursor 物件
 
-# 刪除資料
-conn.execute("DELETE FROM scores WHERE id={}".format(1))
+# DELETE 刪除資料 條件 id 為 1 之資料
+conn.execute("DELETE FROM table01 WHERE id={}".format(1))
+
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
@@ -2782,25 +2688,28 @@ print("------------------------------")  # 30個
 
 print("查詢資料庫")
 
-conn = sqlite3.connect(db_filename_school)  # 建立資料庫連線
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+cursor = conn.cursor()  # 建立 cursor 物件
 
-sqlstr = "SELECT * FROM scores"
+sqlstr = "SELECT * FROM table01"  # SELECT * : 取得所有資料
 cursor = conn.execute(sqlstr)
+
 do_fetchall(cursor)
 
 conn.close()  # 關閉資料庫連線
 
 print("------------------------------")  # 30個
 
-print("查詢資料庫")
+print("查詢資料庫 fetchone() 讀取一筆資料")
 
 # fetchone.py
 
-conn = sqlite3.connect(db_filename_school)  # 建立資料庫連線
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 
-sqlstr = "SELECT * FROM scores"
+sqlstr = "SELECT * FROM table01"  # SELECT * : 取得所有資料
 cursor = conn.execute(sqlstr)
-row = cursor.fetchone()
+
+row = cursor.fetchone()  # 讀取一筆資料
 print(row[0], row[1])
 conn.close()  # 關閉資料庫連線
 
@@ -2808,31 +2717,30 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-db_filename_mydb = (
-    "tmp_db13_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + "_mydb.sqlite"
-)
+db_filename = "tmp_db12_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
+print("建立資料庫連線, 資料庫 :", db_filename)
 
-print("建立資料庫")
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 
-name = "david"
-conn = sqlite3.connect(db_filename_mydb)  # 建立資料庫連線
-
-# 建立一個表單 mytable
+# 建立表單 table01
 sqlstr = """
-CREATE TABLE IF NOT EXISTS mytable(
+CREATE TABLE IF NOT EXISTS table01(
 姓名     TEXT,
 打卡時間 TEXT
 )
 """
 conn.execute(sqlstr)
 
-print("加入資料庫")
+print("INSERT INTO 新增資料")
+
+name = "david"
 # 取得現在時間
 save_time = datetime.datetime.now().strftime("%Y-%m-%d %H.%M.%S")
 
 # 新增一筆資料的 SQL 語法
-sqlstr = f'INSERT INTO mytable values("{name}", "{save_time}")'
-conn.execute(sqlstr)
+sqlstr = "INSERT INTO table01 VALUES (?, ?)"
+x = (name, save_time)  # tuple格式
+conn.execute(sqlstr, x)
 
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
@@ -2841,9 +2749,9 @@ print("------------------------------")  # 30個
 
 print("讀取資料庫")
 
-conn = sqlite3.connect(db_filename_mydb)  # 建立資料庫連線
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 
-sqlstr = "SELECT * FROM mytable"  # 選取表單中所有資料的 SQL 語法
+sqlstr = "SELECT * FROM table01"  # SELECT * : 取得所有資料  # 選取表單中所有資料的 SQL 語法
 cursor = conn.execute(sqlstr)  # 執行 SQL 語法得到 cursor 物件
 
 do_fetchall(cursor)
@@ -2854,99 +2762,13 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-db_filename_contact = (
-    "tmp_db14_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + "_contact.sqlite"
-)
+db_filename = "tmp_db13_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
+print("建立資料庫連線, 資料庫 :", db_filename)
 
-conn = sqlite3.connect(db_filename_contact)  # 建立資料庫連線
-
-# 建立一個表單 + PRIMARY KEY
-sqlstr = """
-CREATE TABLE IF NOT EXISTS contact(
-id   INTEGER PRIMARY KEY NOT NULL,
-name TEXT NOT NULL,
-tel  TEXT NOT NULL
-)
-"""
-conn.execute(sqlstr)
-conn.commit()  # 更新
-conn.close()  # 關閉資料庫連線
-
-print("------------------------------")  # 30個
-
-conn = sqlite3.connect(db_filename_contact)  # 建立資料庫連線
-
-sqlstr = "SELECT * FROM contact"
-cursor = conn.execute(sqlstr)
-do_fetchall(cursor)
-
-conn.close()  # 關閉資料庫連線
-
-print("------------------------------")  # 30個
-
-# fetchone.py
-
-conn = sqlite3.connect("data/test_bbb.sqlite")  # 建立資料庫連線
-
-sqlstr = "SELECT * FROM contact"
-cursor = conn.execute(sqlstr)
-row = cursor.fetchone()
-print(row[0], row[1])
-
-conn.close()  # 關閉資料庫連線
-
-print("------------------------------")  # 30個
-
-# sqlite_crud2.py
-
-conn = sqlite3.connect(db_filename_contact)  # 建立資料庫連線
-
-# 定義資料串列
-datas = [
-    [1, "David", "02-123456789"],
-    [2, "Lily", "02-987654321"],
-]
-for data in datas:
-    # 新增資料
-    conn.execute(
-        "INSERT INTO contact (id, name, tel) VALUES \
-                 ({}, '{}', '{}')".format(
-            data[0], data[1], data[2]
-        )
-    )
-conn.commit()  # 更新
-conn.close()  # 關閉資料庫連線
-
-print("------------------------------")  # 30個
-
-# sqlite_crud3.py
-
-conn = sqlite3.connect(db_filename_contact)  # 建立資料庫連線
-
-# 更新資料
-conn.execute("UPDATE contact SET name='{}' WHERE id={}".format("Ken", 1))
-conn.commit()  # 更新
-conn.close()  # 關閉資料庫連線
-
-print("------------------------------")  # 30個
-
-# sqlite_crud4.py
-
-conn = sqlite3.connect(db_filename_contact)  # 建立資料庫連線
-
-# 刪除資料
-conn.execute("DELETE FROM contact WHERE id={}".format(1))
-conn.commit()  # 更新
-conn.close()  # 關閉資料庫連線
-
-print("------------------------------")  # 30個
-
-# sqlite_cursor.py
-
-conn = sqlite3.connect(db_filename_contact)  # 建立資料庫連線
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
 
-# 建立一個表單 table01 + PRIMARY KEY
+# 建立表單 table01 + PRIMARY KEY
 sqlstr = """
 CREATE TABLE IF NOT EXISTS table01(
 id   INTEGER PRIMARY KEY NOT NULL,
@@ -2956,17 +2778,111 @@ tel  TEXT NOT NULL
 """
 cursor.execute(sqlstr)
 
-# 新增一筆記錄
-sqlstr = 'INSERT INTO table01 values(1, "David", "02-1234567")'
-cursor.execute(sqlstr)
 conn.commit()  # 更新
+
+conn.close()  # 關閉資料庫連線
+
+print("------------------------------")  # 30個
+
+# sqlite_crud2.py
+
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+cursor = conn.cursor()  # 建立 cursor 物件
+
+# 定義資料串列
+datas = [
+    [1, "David", "02-123456789"],
+    [2, "Lily", "02-987654321"],
+]
+
+# INSERT INTO 新增資料
+sqlstr = "INSERT INTO table01 (id, name, tel) VALUES (?, ?, ?)"
+for data in datas:
+    x = (data[0], data[1], data[2])  # tuple格式
+    conn.execute(sqlstr, x)
+
+conn.commit()  # 更新
+
+conn.close()  # 關閉資料庫連線
+
+print("------------------------------")  # 30個
+
+print("查詢資料庫 fetchone() 讀取一筆資料")
+
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+cursor = conn.cursor()  # 建立 cursor 物件
+
+sqlstr = "SELECT * FROM table01"  # SELECT * : 取得所有資料
+cursor = conn.execute(sqlstr)
+
+row = cursor.fetchone()  # 讀取一筆資料
+print(row)
+
+conn.close()  # 關閉資料庫連線
+
+print("------------------------------")  # 30個
+
+print("UPDATE 更新資料")
+
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+cursor = conn.cursor()  # 建立 cursor 物件
+
+# UPDATE 更新資料 # 修改 id 為 1 的資料
+conn.execute("UPDATE table01 SET name='{}' WHERE id={}".format("Ken", 1))
+
+conn.commit()  # 更新
+
+conn.close()  # 關閉資料庫連線
+
+print("------------------------------")  # 30個
+
+print("DELETE 刪除資料 條件")
+
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+cursor = conn.cursor()  # 建立 cursor 物件
+
+# DELETE 刪除資料 條件 id 為 1 之資料
+conn.execute("DELETE FROM table01 WHERE id={}".format(1))
+
+conn.commit()  # 更新
+conn.close()  # 關閉資料庫連線
+
+print("------------------------------")  # 30個
+
+# sqlite_cursor.py
+
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+cursor = conn.cursor()  # 建立 cursor 物件
+
+# 新增一筆記錄
+sqlstr = "INSERT INTO table01 VALUES (?, ?, ?)"
+x = (1, "David", "02-1234567")  # tuple格式
+cursor.execute(sqlstr, x)
+
+conn.commit()  # 更新
+
+conn.close()  # 關閉資料庫連線
+
+print("------------------------------")  # 30個
+
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+cursor = conn.cursor()  # 建立 cursor 物件
+
+sqlstr = "SELECT * FROM table01"  # SELECT * : 取得所有資料
+cursor = conn.execute(sqlstr)
+
+do_fetchall(cursor)
+
 conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-db_filename = "tmp_db15_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
+print("測試 executemany, 一次執行多個指令")
+
+db_filename = "tmp_db14_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
+print("建立資料庫連線, 資料庫 :", db_filename)
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
@@ -2988,29 +2904,36 @@ stocks = [
     ("FB", 150, 7.45),
     ("HPQ", 75, 33.2),
 ]
-cursor.executemany("INSERT INTO table01 values (?,?,?)", stocks)
+cursor.executemany("INSERT INTO table01 values (?, ?, ?)", stocks)
+
 conn.commit()  # 更新
 
-sqlstr = "SELECT * FROM table01"
-for row in conn.execute(sqlstr):
-    print(row)
+# SELECT * : 取得所有資料
+print("SELECT * : 取得所有資料")
+sqlstr = "SELECT * FROM table01"  # SELECT * : 取得所有資料
+cursor = conn.execute(sqlstr)
 
+do_fetchall(cursor)
+
+# SELECT * : 條件取得資料
+print("SELECT * : 條件取得資料")
 min_price = 12
-# sqlstr =
-for row in conn.execute("SELECT * FROM table01 where price >= ?", (min_price,)):
+# sqlstr = NG
+for row in conn.execute("SELECT * FROM table01 WHERE price >= ?", (min_price,)):
     print(row)
 
+conn.close()  # 關閉資料庫連線
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-db_filename = "tmp_db16_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
-
-print("新建資料庫")
+db_filename = "tmp_db15_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
+print("建立資料庫連線, 資料庫 :", db_filename)
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件  # 獲得資料庫游標
 
-# 建立一個表單 table01
+# 建立表單 table01
 sqlstr = """
 CREATE TABLE IF NOT EXISTS table01(
 title        TEXT,
@@ -3022,29 +2945,31 @@ date         TEXT
 """
 conn.execute(sqlstr)
 
-print("加入資料庫")
+print("INSERT INTO 新增資料")
 
-name = "david"
-mail = "david@lion.mouse"
-site = "MacOS"
+title = "david"
+username = "wang"
+email = "david@lion.mouse"
 message = "delicious"
 time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-cursor.execute(
-    "INSERT INTO table01 VALUES(?,?,?,?,?)", (name, mail, site, message, time)
-)
 
-print("加入資料庫")
+sqlstr = "INSERT INTO table01 VALUES (?, ?, ?, ?, ?)"
+x = (title, username, email, message, time)  # tuple格式
+cursor.execute(sqlstr, x)
+
+print("INSERT INTO 新增資料")
 
 title = "AAAA"
 username = "BBBB"
 email = "CCCC"
-message_text = "DDDD"
-conn.execute(
-    "INSERT INTO table01 (title, username, email, message_text, date) VALUES (?, ?, ?, ?, DATETIME('now'))",
-    (title, username, email, message_text),
-)
+message = "DDDD"
+time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-sqlstr = "SELECT * FROM table01"
+sqlstr = "INSERT INTO table01 (title, username, email, message_text, date) VALUES (?, ?, ?, ?, ?)"
+x = (title, username, email, message, time)  # tuple格式
+conn.execute(sqlstr, x)
+
+sqlstr = "SELECT * FROM table01"  # SELECT * : 取得所有資料
 cursor.execute(sqlstr)
 
 do_fetchall(cursor)
@@ -3058,34 +2983,7 @@ print("讀取資料庫")
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 
-# 建立一個表單 table01
-sqlstr = """
-CREATE TABLE IF NOT EXISTS table01(
-title        TEXT,
-username     TEXT,
-email        TEXT,
-message_text TEXT,
-date         TEXT
-)
-"""
-conn.execute(sqlstr)
-
-sqlstr = "SELECT * FROM table01"
-cursor = conn.execute(sqlstr)
-
-do_fetchall(cursor)
-
-conn.close()  # 關閉資料庫連線
-
-print("------------------------------")  # 30個
-
-print("讀取資料庫")
-
-conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-# 建立一個表單 table01
-sqlstr = 'CREATE TABLE IF NOT EXISTS table01("title" TEXT, "username" TEXT, "email" TEXT, "message_text" TEXT, "date" TEXT)'
-conn.execute(sqlstr)
-sqlstr = "SELECT * FROM table01"
+sqlstr = "SELECT * FROM table01"  # SELECT * : 取得所有資料
 cursor = conn.execute(sqlstr)
 
 do_fetchall(cursor)
@@ -3094,15 +2992,16 @@ conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-import numpy as np
 
 db_filename = "data/gasoline.sqlite"
+print("建立資料庫連線, 資料庫 :", db_filename)
 
 print("油價走勢圖")
 
 print("建立資料庫連線, 資料庫 : " + db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+
+# SELECT * : 取得資料 排列 依 gdate 升冪
 sqlstr = "SELECT * FROM prices ORDER BY gdate;"
 cursor = conn.execute(sqlstr)
 
@@ -3157,8 +3056,8 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+''' 資料整理 ST
 
-"""
 sql能否做到部分填滿? 可以
 
 SQL
@@ -3187,16 +3086,15 @@ def fetch_data():
                     cols[2].text, cols[3].text]
             prices.append(item)
     for p in prices:
-        sqlstr = "select * from prices where gdate='{}';".format(p[0])
+        sqlstr = "SELECT * FROM prices WHERE gdate='{}';".format(p[0])
         cursor = conn.execute(sqlstr)
         if len(cursor.fetchall()) == 0:
             g92 = 0 if p[1]=='' else float(p[1])
             g95 = 0 if p[2]=='' else float(p[2])
             g98 = 0 if p[3]=='' else float(p[3])
-            sqlstr = "insert into prices values('{}', {}, {}, {});". \
-                format(p[0], g92, g95, g98)
-            print(sqlstr)
-            conn.execute(sqlstr)
+            sqlstr = "INSERT INTO prices VALUES (?, ?, ?, ?)"
+            x = (p[0], g92, g95, g98)  # tuple格式
+            conn.execute(sqlstr, x)
             conn.commit()
 
 return "CREATE TABLE %s (%s PRIMARY KEY %s)" % (self.name, fields, keys)
@@ -3204,74 +3102,57 @@ return "CREATE TABLE %s (%s PRIMARY KEY %s)" % (self.name, fields, keys)
     v = db.OpenView("SELECT * FROM `%s`" % table)
     v = db.OpenView("INSERT INTO _Streams (Name, Data) VALUES ('%s', ?)" % name)
 
-# 修改 id 為 1 的資料
-conn.execute("UPDATE scores SET name='{}' WHERE id={}".format('林胖虎', 1))
+print("------------------------------------------------------------")  # 60個
 
-# 刪除資料 id 為 1 之資料
-conn.execute("DELETE FROM scores WHERE id={}".format(1))
+print("查詢資料庫 fetchone() 讀取一筆資料")
 
-# 新增記錄
-cursor.execute('insert into scores values(1, "葉大雄", 65, 62, 40)')
-cursor.execute('insert into scores values(2, "陳靜香", 85, 90, 87)')
-cursor.execute('insert into scores values(3, "王聰明", 92, 90, 95)')
+db_filename = "applenews.db"
+print("建立資料庫連線, 資料庫 :", db_filename)
 
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 
-# 定義資料串列
-datas = [[7,'葉大雄',65,62,40],
-        [8,'陳靜香',85,90,87],
-        [9,'王聰明',92,90,95]]
-
-# 新增資料
-for data in datas:
-    conn.execute("INSERT INTO scores (id, name, chinese, english, math) VALUES \
-                 ({}, '{}', {}, {}, {})".format(data[0], data[1], data[2], data[3], data[4]))
-
-----------------------------------------------------------------
-
-dbfile = "applenews.db"
-conn = sqlite3.connect(dbfile)
-
-sql_str = "select count(*) from news;"
-result = conn.execute(sql_str)
-count = result.fetchone()[0]
+sqlstr = "SELECT count(*) FROM news;"
+result = conn.execute(sqlstr)
+count = result.fetchone()[0]  # 讀取一筆資料
 print(count)
 
-    sql_str = "select count(*) from news where url='{}';".format(content_url)
-    result = conn.execute(sql_str)
-    count = result.fetchone()[0]
+sqlstr = "SELECT count(*) FROM news WHERE url='{}';".format(content_url)
+result = conn.execute(sqlstr)
+count = result.fetchone()[0]  # 讀取一筆資料
 
-        sql_str = "insert into news(url, title, content) values('{}','{}','{}');".format(content_url, title, data)
-        conn.execute(sql_str)
+sqlstr = "INSERT INTO news (url, title, content) VALUES (?, ?, ?)"
+x = (content_url, title, data)  # tuple格式
+conn.execute(sqlstr, x)
 
-----------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-db = sqlite3.connect("db")
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 
-cursor = db.cursor()
+cursor = conn.cursor()
 
-cursor.execute("create table Course ( " +
+cursor.execute("CREATE TABLE IF NOT EXISTS Course ( " +
                "courseId char(5), subjectId char(4) not null, " +
                "courseNumber integer, title varchar(50) not null, " +
                "numOfCredits integer, primary key (courseId))")
 
-cursor.execute("insert into Course (courseId, subjectId, " + 
+cursor.execute("INSERT INTO Course (courseId, subjectId, " + 
                " courseNumber, title, numOfCredits) " + 
                "values ('11113', 'CSCI', '3720', 'Database Systems', 3)")
 
-cursor.execute("insert into Course (courseId, subjectId, " + 
+cursor.execute("INSERT INTO Course (courseId, subjectId, " + 
                " courseNumber, title, numOfCredits) " + 
                "values ('11111', 'CSCI', '1301', 'Introduction to Programming', 3)")
-db.commit()
+conn.commit()
 
-cursor.execute("select * from Course")
+cursor.execute("SELECT * FROM Course")  # SELECT * : 取得所有資料
 
 rows = cursor.fetchall()
 
 print(rows)
 
-db.close()
+conn.close()  # 關閉資料庫連線
 
-----------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 CREATE TABLE IF NOT EXISTS "Orders"
 (
@@ -3333,20 +3214,11 @@ CREATE TABLE IF NOT EXISTS "Customers"
   "Phone" VARCHAR(8000) NULL, 
   "Fax" VARCHAR(8000) NULL 
 )
-"""
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
 db : 資料庫 db
 table : 表單 資料表(x)
 
-print("建立一個表單")
+print("建立表單")
 
 # 固定指令用全大寫
 
@@ -3373,7 +3245,7 @@ UNIQUE
 2. CREATE TABLE IF NOT EXISTS table01 # 建立表單table01, 若已存在，則沿用, 如果尚未建立的話
 3. CREATE virtual TABLE table01
 
-# 新增資料
+# INSERT INTO 新增資料
 INSERT INTO 表單
 
 # 取得所有資料
@@ -3414,46 +3286,47 @@ sqlite指令整理
 
 4.
 cursor.execute("UPDATE table01 SET task = 'learn italian' WHERE key = 1")
-conn.execute("UPDATE scores SET name='{}' WHERE id={}".format("林胖虎", 1))
-conn.execute("UPDATE contact SET name='{}' WHERE id={}".format("Ken", 1))
 5.
 cursor.execute("DELETE FROM table01 WHERE filename = ?", (filename,))
 cursor.execute("DELETE FROM table01 WHERE filename = ?", ("aaaa.mp4",))
-cursor.execute("DELETE FROM people where age=20")
-conn.execute("DELETE FROM scores WHERE id={}".format(1))
-conn.execute("DELETE FROM contact WHERE id={}".format(1))
+cursor.execute("DELETE FROM people WHERE age=20")
 
 其他
-cursor = conn.execute("DROP TABLE table01")
-columns = conn.execute(f"PRAGMA table_info('{table_name}');").fetchall()
-"""
+# DROP TABLE 刪除表單
+sqlstr = "DROP TABLE IF EXISTS table01"
+cursor = conn.execute(sqlstr)
 
-"""
+columns = conn.execute(f"PRAGMA table_info('{table_name}');").fetchall()
+
+
 新進測試
 建立多個表單 要分開寫
-"""
-
-# 3030
-print("------------------------------")  # 30個
 
 do_fetchall(cursor)
-"""
+
 rows = cursor.fetchall()  # 讀取全部資料成元組串列
 length = len(rows)
 print("共有", length, "筆資料")
 for i in range(length):
     print("第" + str(i + 1) + "筆資料 : ", rows[i])
-"""
 
-"""
+
 # 語法:
-INSERT INTO archive_orders SELECT * from orders WHERE order_date < "2016-01-01",
-DELETE from orders WHERE order_date < "2016-01-01",
+INSERT INTO archive_orders SELECT * FROM orders WHERE order_date < "2016-01-01",
+DELETE FROM orders WHERE order_date < "2016-01-01",
 
+sqlstr = """
+CREATE TABLE IF NOT EXISTS table01(
+id      INTEGER PRIMARY KEY NOT NULL,
+name    TEXT NOT NULL,
+chinese INTEGER NOT NULL,
+english INTEGER NOT NULL,
+math    INTEGER NOT NULL
+)
 """
 
 sqlstr = """
-CREATE TABLE IF NOT EXISTS scores(
+CREATE TABLE IF NOT EXISTS table01(
 id      INTEGER PRIMARY KEY NOT NULL,
 name    TEXT NOT NULL,
 chinese INTEGER NOT NULL,
@@ -3462,11 +3335,489 @@ math    INTEGER NOT NULL
 )
 """
 
-sqlstr = """CREATE TABLE IF NOT EXISTS scores(
-id      INTEGER PRIMARY KEY NOT NULL,
+sqlite基本範例 一個 基本款
+
+簡易建立資料庫
+
+增加(13)
+
+刪除資料(1)
+讀取全部資料
+搜尋資料
+
+刪除資料庫
+
+
+原始資料 9 筆
+	id_num	ename	cname	weight
+第1筆 : 5	horse	馬	36
+第2筆 : 1	mouse	鼠	3
+第3筆 : 4	elephant象	100	(此筆資料錯誤, 應刪除)
+
+第4筆 : 9	ox		48
+第5筆 : 2	sheep		66	(此筆資料錯誤, 應為goat 29)
+
+第6筆 : 8	snake		16	(詢問是否刪除此筆資料)
+第7筆 : 3	tiger		33
+
+第8筆 : 7	rabbit		8
+
+第9筆 : 6	tiger		240
+
+1. 建立資料庫
+2. 新增資料 9筆
+3. 修改2號的name
+4. 刪除4號
+5. 詢問是否刪除8號資料
+6. 搜尋
+
+注意：不要使用%s 將字串插入 SQL 命令，
+因為它可能使你的程式容易受到 SQL 注入攻擊（請參閱 SQL 注入 ）。
+
+# DROP TABLE 刪除表單
+sqlstr = "DROP TABLE IF EXISTS table01"
+cursor.execute(sqlstr)
+
+
+
+# 建立表單 範例
+
+# 建立表單 table01 + PRIMARY KEY
+sqlstr = """
+CREATE TABLE IF NOT EXISTS table01(
+id      INTEGER PRIMARY KEY AUTOINCREMENT, -- 序號(id)整數自動遞增, 可填可不填
 name    TEXT NOT NULL,
-chinese INTEGER NOT NULL,
-english INTEGER NOT NULL,
-math    INTEGER NOT NULL
+age     INTEGER NOT NULL,
+address CHAR(50),
+salary  REAL
 )
 """
+# 建立表單 table01 + PRIMARY KEY
+sqlstr = """
+CREATE TABLE IF NOT EXISTS table01(
+id serial                 NOT NULL,
+uid character varying(50) NOT NULL,
+PRIMARY KEY (id))
+"""
+# 建立表單 table02 + PRIMARY KEY
+sqlstr = """
+CREATE TABLE IF NOT EXISTS table02(
+id serial NOT NULL,
+uid character varying(50) NOT NULL,
+PRIMARY KEY (id))
+"""
+# 建立表單 table03 + PRIMARY KEY
+sqlstr = """
+CREATE TABLE IF NOT EXISTS table03(
+id serial NOT NULL,
+bid character varying(50) NOT NULL,
+roomtype character varying(20) NOT NULL,
+roomamount character varying(5) NOT NULL,
+datein character varying(20) NOT NULL,
+dateout character varying(20) NOT NULL,
+PRIMARY KEY (id)
+)
+"""
+# 建立表單 table04 + PRIMARY KEY
+sqlstr = """
+CREATE TABLE IF NOT EXISTS table04(
+sid serial NOT NULL,
+name character varying(50) NOT NULL,
+tel character varying(50),
+addr character varying(200),
+email character varying(100),
+PRIMARY KEY (sid))
+"""
+# 建立表單 users1 + PRIMARY KEY
+sqlstr = """
+CREATE TABLE IF NOT EXISTS users1(
+id serial NOT NULL,
+uid character varying(50) NOT NULL,
+question character varying(250) NOT NULL,
+PRIMARY KEY (id))
+"""
+# 建立表單 login + PRIMARY KEY
+sqlstr = """
+CREATE TABLE IF NOT EXISTS login(
+id serial NOT NULL,
+uid character varying(50) NOT NULL,
+state character varying(10) NOT NULL,
+PRIMARY KEY (id))
+"""
+# 建立表單 users2 + PRIMARY KEY
+sqlstr = """
+CREATE TABLE IF NOT EXISTS users2(
+id serial NOT NULL,
+uid character varying(50) NOT NULL,
+state character varying(10) NOT NULL,
+digit3 character varying(10) NOT NULL,
+PRIMARY KEY (id))
+"""
+# 建立表單 setting + PRIMARY KEY
+sqlstr = """
+CREATE TABLE IF NOT EXISTS setting(
+id serial NOT NULL,
+uid character varying(50) NOT NULL,
+lang character varying(10) NOT NULL,
+sound character varying(10) NOT NULL,
+PRIMARY KEY (id))
+"""
+
+sqlstr = """
+CREATE TABLE IF NOT EXISTS table01(
+NAME    TEXT NOT NULL,
+ADDRESS CHAR(50),
+BILL    REAL
+)
+"""
+
+create_weather = """
+CREATE TABLE weather(
+id      text NOT NULL,
+year    integer NOT NULL,
+month   integer NOT NULL,
+element text NOT NULL,
+max     real,
+min     real,
+mean    real,
+count   integer
+)
+"""
+
+# dddddddddd 可刪除檔案 與 準備刪除的code ST
+
+
+
+
+# dddddddddd 可刪除檔案 與 準備刪除的code SP
+
+# 3030
+print("------------------------------")  # 30個
+
+寫法比較
+
+# INSERT INTO 比較好的寫法
+
+sqlstr = "INSERT INTO table01 (id_num, ename, weight) VALUES (?, ?, ?)"
+x = (2, 'sheep', 66)  # tuple格式
+cursor.execute(sqlstr, x)
+
+# 用.format 比較不好
+sqlstr = ("INSERT INTO table01 (id_num, ename, weight) VALUES ({}, '{}', '{}')".format(data[0], data[1], data[2])
+
+相同
+.connect = .Connection
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+conn = sqlite3.Connection(db_filename)  # 建立資料庫連線
+
+資料整理 SP'''
+
+
+# INSERT INTO 之後要  conn.commit()  ???
+
+
+''' tmp code
+class FunctionTests(unittest.TestCase):
+    def setUp(self):
+        self.con = sqlite.connect(":memory:")
+        val = cur.fetchone()[0]
+
+    def CheckAggrCheckAggrSum(self):
+        cur = self.con.cursor()
+        cur.execute("delete from test")
+        cur.executemany("insert into test(i) values (?)", [(10,), (20,), (30,)])
+        cur.execute("select mysum(i) from test")
+        val = cur.fetchone()[0]
+        self.assertEqual(val, 60)
+
+class AuthorizerTests(unittest.TestCase):
+    @staticmethod
+    def authorizer_cb(action, arg1, arg2, dbname, source):
+        if action != sqlite.SQLITE_SELECT:
+            return sqlite.SQLITE_DENY
+        if arg2 == 'c2' or arg1 == 't2':
+            return sqlite.SQLITE_DENY
+        return sqlite.SQLITE_OK
+
+    def setUp(self):
+        self.con = sqlite.connect(":memory:")
+        self.con.executescript("""
+            create table t1 (c1, c2);
+            create table t2 (c1, c2);
+            insert into t1 (c1, c2) values (1, 2);
+            insert into t2 (c1, c2) values (4, 5);
+            """)
+
+        # For our security test:
+        self.con.execute("select c2 from t2")
+
+        self.con.set_authorizer(self.authorizer_cb)
+
+'''
+
+# self.cur.execute("create table test(d date, ts timestamp)")
+# self.cur.execute("create table test(i int, s str, f float, b bool, u unicode, foo foo, bin blob, n1 number, n2 number(5))")
+# self.cur.execute("create table test(i integer, s varchar, f number, b blob)")
+
+
+import os
+import sys
+import time
+import random
+
+print("------------------------------------------------------------")  # 60個
+
+import sqlite3
+
+conn = sqlite3.connect("datafilecccc.db")
+
+
+cursor = conn.cursor()
+
+# cursor
+
+
+cursor.execute("create table people (id integer primary key, name text, count integer)")
+
+cursor.execute("insert into people (name, count) values ('Bob', 1)")
+cursor.execute("insert into people (name, count) values (?, ?)", ("Jill", 15))
+
+conn.commit()
+
+
+cursor.execute(
+    "insert into people (name, count) values (:username, :usercount)",
+    {"username": "Joe", "usercount": 10},
+)
+
+
+result = cursor.execute("select * from people")
+print(result.fetchall())
+
+# [(1, 'Bob', 1), (2, 'Jill', 15), (3, 'Joe', 10)]
+
+result = cursor.execute("select * from people where name like :name", {"name": "bob"})
+
+print(result.fetchall())
+# [(1, 'Bob', 1)]
+
+cursor.execute("update people set count=? where name=?", (20, "Jill"))
+
+result = cursor.execute("select * from people")
+
+print(result.fetchall())
+# [(1, 'Bob', 1), (2, 'Jill', 20), (3, 'Joe', 10)]
+
+
+result = cursor.execute("select * from people")
+
+for row in result:
+    print(row)
+
+# (1, 'Bob', 1)
+# (2, 'Jill', 20)
+# (3, 'Joe', 10)
+
+
+cursor.execute("update people set count=? where name=?", (20, "Jill"))
+conn.commit()
+conn.close()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# SQL (SQLite)
+
+import sqlite3
+
+db_filename = "tmp_salary_table.db"
+
+conn = sqlite3.connect(db_filename)
+
+##############################################################################
+salary = pd.read_csv("data/salary_table.csv")
+print(salary.head())
+
+salary.to_sql("salary", conn, if_exists="replace")
+
+##############################################################################
+# Push modifications
+
+cur = conn.cursor()
+values = (100, 14000, 5, "Bachelor", "N")
+cur.execute("insert into salary values (?, ?, ?, ?, ?)", values)
+conn.commit()
+
+##############################################################################
+# Reading results into a pandas DataFrame
+
+salary_sql = pd.read_sql_query("select * from salary;", conn)
+print(salary_sql.head())
+
+pd.read_sql_query("select * from salary;", conn).tail()
+pd.read_sql_query("select * from salary where salary>25000;", conn)
+pd.read_sql_query("select * from salary where experience=16;", conn)
+pd.read_sql_query('select * from salary where education="Master";', conn)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename = "youtube_trends_selenium.sqlite"
+
+print("title:", title.encode(sys.getfilesystemencoding()))
+print("link:", link.encode(sys.getfilesystemencoding()))
+print("autor_name:", autor_name.encode(sys.getfilesystemencoding()))
+print("autor_link:", autor_link.encode(sys.getfilesystemencoding()))
+print("watch:", watch.encode(sys.getfilesystemencoding()))
+print("=======================")
+
+# 連接資料庫
+print("ssss")
+conn = sqlite3.connect(filename)
+with conn:
+    cursor = conn.cursor()
+    sql = (
+        "CREATE TABLE IF NOT EXISTS "
+        + table
+        + "(Id INTEGER PRIMARY key autoincrement, title TEXT, link TEXT, autor_name TEXT, autor_link TEXT, views TEXT )"
+    )
+    cursor.execute(sql)
+    # INSERT INTO table VALUES(NULL,'title','link','autor_name','autor_link','watch')
+    sql = (
+        "INSERT INTO "
+        + table
+        + " VALUES(NULL,'"
+        + title
+        + "','"
+        + link
+        + "','"
+        + autor_name
+        + "','"
+        + autor_link
+        + "','"
+        + watch
+        + "')"
+    )
+    try:
+        cursor.execute(sql)
+    except:
+        print("Write SQLite error:", sql.encode(sys.getfilesystemencoding()))
+
+
+# 如果資料庫已經存在則移除
+if os.path.exists(filename):
+    os.remove(filename)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+# Writing to a SQLite database
+
+weather_df = pd.read_csv("data/weather_2012.csv")
+con = sqlite3.connect("tmp_test_db.sqlite")
+con.execute("DROP TABLE IF EXISTS weather_2012")
+weather_df.to_sql("weather_2012", con)
+
+con = sqlite3.connect("tmp_test_db.sqlite")
+df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con)
+print(df)
+
+con = sqlite3.connect("tmp_test_db.sqlite")
+df = pd.read_sql("SELECT * from weather_2012 ORDER BY Weather LIMIT 3", con)
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+import sqlite3
+
+con = sqlite3.connect("data/weather_2012.sqlite")
+df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con)
+print(df)
+
+print("------------------------------")  # 30個
+
+df = pd.read_sql("SELECT * from weather_2012 LIMIT 3", con, index_col="id")
+print(df)
+
+print("------------------------------")  # 30個
+
+df = pd.read_sql(
+    "SELECT * from weather_2012 LIMIT 3", con, index_col=["id", "date_time"]
+)
+print(df)
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("使用數據庫")
+
+# 使用 SQLite3
+
+import sqlite3
+
+# 連接資料庫
+con = sqlite3.connect(":memory:")
+
+# 建立資料表
+query = """
+CREATE TABLE test
+(a VARCHAR(20), b VARCHAR(20), c REAL, d INTEGER);
+"""
+con.execute(query)
+con.commit()
+
+# 插入資料
+data = [
+    ("Atlanta", "Georgia", 1.25, 6),
+    ("Tallahassee", "Florida", 2.6, 3),
+    ("Sacramento", "California", 1.7, 5),
+]
+stmt = "INSERT INTO test VALUES(?, ?, ?, ?)"
+con.executemany(stmt, data)
+con.commit()
+
+
+# 查詢資料
+cursor = con.execute("select * from test")
+rows = cursor.fetchall()
+print(rows)
+
+"""
+[('Atlanta', 'Georgia', 1.25, 6),
+ ('Tallahassee', 'Florida', 2.6, 3),
+ ('Sacramento', 'California', 1.7, 5)]
+"""
+
+# cursor.description 包含 欄位資訊
+print(cursor.description)
+
+"""
+
+(('a', None, None, None, None, None, None),
+ ('b', None, None, None, None, None, None),
+ ('c', None, None, None, None, None, None),
+ ('d', None, None, None, None, None, None))
+"""
+
+# 用資料庫的資料建立 DataFrame
+df = pd.DataFrame(rows, columns=[f[0] for f in cursor.description])
+print(df)
+
+# 使用 pandas.io.sql 來讀取資料庫資料並創建 DataFrame
+
+import pandas.io.sql as sql
+
+df = sql.read_sql("select * from test", con)
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個

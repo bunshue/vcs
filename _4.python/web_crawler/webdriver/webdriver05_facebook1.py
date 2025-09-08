@@ -8,10 +8,9 @@ email = "YOUR EMAIL"
 password = "YOUR PASSWORD"
 
 # 使用ChromeDriverManager自動下載chromedriver
-driver = webdriver.Chrome(
-    ChromeDriverManager().install())
+driver = webdriver.Chrome(ChromeDriverManager().install())
 
-driver.maximize_window()    #全螢幕顯示
+driver.maximize_window()  # 全螢幕顯示
 
 # 進入Facebook登入畫面
 driver.get(url)
@@ -24,4 +23,4 @@ driver.find_element_by_name("login").click()
 # 等待10秒
 time.sleep(10)
 
-driver.quit()   #關閉瀏覽器並且退出驅動程序
+driver.quit()  # 關閉瀏覽器並且退出驅動程序

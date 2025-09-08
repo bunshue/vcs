@@ -19,22 +19,22 @@ filename1 = 'inventory.txt'
 filename2 = 'stations.txt'
 
 if os.path.exists(filename1):
-    print('檔案存在')
+    print('檔案1存在')
     with open(filename1, "r", encoding = 'UTF-8') as inventory_file:
         inventory_txt = inventory_file.read()
 else:
-    print('檔案不存在')
+    print('檔案1', filename1, '不存在, 下載...')
     r = requests.get('https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/ghcnd-inventory.txt')
     inventory_txt = r.text
     with open("inventory.txt", "w", encoding = 'UTF-8') as inventory_file:
         inventory_file.write(inventory_txt)
 
 if os.path.exists(filename2):
-    print('檔案存在')
+    print('檔案2存在')
     with open(filename2, "r", encoding = 'UTF-8') as stations_file:
         stations_txt = stations_file.read()
 else:
-    print('檔案不存在')
+    print('檔案2', filename2, '不存在, 下載...')
     r = requests.get('https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/ghcnd-stations.txt')
     stations_txt = r.text
     with open("stations.txt", "w", encoding = 'UTF-8') as stations_file:
@@ -140,8 +140,11 @@ print(parse_line(weather[:270]))
 # list comprehension, will not parse empty lines
 weather_data = [parse_line(x) for x in weather.split("\n") if x]
 
-len(weather_data)
+cc = len(weather_data)
+print("len =", cc)
+print(type(weather_data))
 
+print('前10筆')
 print(weather_data[:10])
 
 
@@ -165,22 +168,25 @@ import sqlite3
 conn = sqlite3.connect(db_filename)
 cursor = conn.cursor()
 
-# create weather table
-create_weather = """CREATE TABLE "weather" (
-    "id" text NOT NULL,
-    "year" integer NOT NULL,
-    "month" integer NOT NULL,
-    "element" text NOT NULL,
-    "max" real,
-    "min" real,
-    "mean" real,
-    "count" integer)"""
+# 建立表單
+create_weather = """
+CREATE TABLE weather(
+id      text NOT NULL,
+year    integer NOT NULL,
+month   integer NOT NULL,
+element text NOT NULL,
+max     real,
+min     real,
+mean    real,
+count   integer
+)
+"""
 cursor.execute(create_weather)
 conn.commit()
 
-# store parsed weather data in database
+# INSERT INTO
 for record in weather_data:
-    cursor.execute("""insert into weather (id, year, month, element, max, min, mean, count) values (?,?,?,?,?,?,?,?) """, record)
+    cursor.execute("""INSERT INTO weather (id, year, month, element, max, min, mean, count) values (?,?,?,?,?,?,?,?) """, record)
 
 conn.commit()
 
