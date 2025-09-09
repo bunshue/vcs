@@ -2,12 +2,6 @@
 Disk management utilities.
 """
 
-# Authors: Gael Varoquaux <gael dot varoquaux at normalesup dot org>
-#          Lars Buitinck
-# Copyright (c) 2010 Gael Varoquaux
-# License: BSD Style, 3 clauses.
-
-
 import errno
 import os
 import shutil
@@ -23,11 +17,7 @@ def disk_used(path):
         if hasattr(stat, 'st_blocks'):
             size += stat.st_blocks * 512
         else:
-            # on some platform st_blocks is not available (e.g., Windows)
-            # approximate by rounding to next multiple of 512
             size += (stat.st_size // 512 + 1) * 512
-    # We need to convert to int to avoid having longs on some systems (we
-    # don't want longs to avoid problems we SQLite)
     return int(size / 1024.)
 
 

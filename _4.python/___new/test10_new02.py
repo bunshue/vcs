@@ -1853,17 +1853,6 @@ if 'strxfrm' not in globals():
 
 ------------------------------------------------------------
 
-SQLite 和 Python 資料型別
-
-None     <->     NULL
-int      <->     INTEGER/INT
-float    <->     REAL/FLOAT
-str      <->     TEXT/VARCHAR(n)
-bytes    <->     BLOB
-                
-                
-------------------------------------------------------------
-
 ord函數		給一個Unicode字符，返回該字符的Unicode數字代碼
 
 例如，給定ord('a') 返回整數 97，ord('\u2020') 返回 8224。同chr相反。
@@ -1883,19 +1872,6 @@ if __name__ == '__main__':
 print("%d: %s[%d]" % (lineno(), filename(), filelineno()))
 
     d = {}
-
-        self.con = sqlite.connect(":memory:")
-        self.con.execute("create table test (value text)")
-        self.con.execute("insert into test (value) values (?)", ("a\x00b",))
-
-       row = self.con.execute("select value from test").fetchone()
-        cur.execute("select 4+5 as foo")
-        row = cur.fetchone()
-
-        austria = "Österreich"
-        germany = "Deutchland"
-        a_row = self.con.execute("select ?", (austria,)).fetchone()
-        d_row = self.con.execute("select ?", (germany,)).fetchone()
         
 ------------------------------------------------------------
             print("The latest version of {} on PyPI is {}, but ensurepip "

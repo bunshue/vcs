@@ -1623,28 +1623,23 @@ correctfile = os.path.normpath(correctfile)
 ccc = os.path.join(os.getcwd(), "ziptest2dir")
 print(ccc)
 
-
 # filename = os.path.join(dir, prog)
 
 # os.chdir(os.path.join(ROOT, TK, "win"))
-
 
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 DIRS = os.path.join(BASE_DIR, "templates")
-NAME = os.path.join(BASE_DIR, "db.sqlite3")
+NAME = os.path.join(BASE_DIR, "ccc.jpg")
 AAAA = os.path.join(BASE_DIR, "static")
 
 print(DIRS)
 print(NAME)
 print(AAAA)
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 print("---- 混和應用 --------------------------------------------------------")  # 60個
 
@@ -1677,7 +1672,6 @@ print(par)
 print("取得檔案的絕對位置 abspath()")
 ROOT = os.path.abspath(os.path.join(here, par, par))
 print(ROOT)
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1743,10 +1737,7 @@ get_header_version_info(".")
 print("aaa", get_sys_version_info())
 print("bbb", get_version_info())
 
-
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 string = "this is a lion"
@@ -1756,7 +1747,6 @@ string = string.replace("lion", "mouse")
 print(string)
 
 print("------------------------------------------------------------")  # 60個
-
 
 """
 os.chdir(os.path.expanduser('~/Documents'))
@@ -1784,10 +1774,6 @@ def copy(src, dst):
 
 
 print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1846,13 +1832,10 @@ def buildPythonDocs():
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 

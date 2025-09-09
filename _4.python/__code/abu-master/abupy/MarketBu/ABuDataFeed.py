@@ -13,8 +13,6 @@ import os
 
 import random
 import math
-import sqlite3 as sqlite
-
 import pandas as pd
 
 from ..CoreBu.ABuEnv import EMarketTargetType, EMarketSubType
@@ -42,14 +40,8 @@ def random_from_list(array):
 @AbuDeprecated('only read old symbol db, miss update!!!')
 def query_symbol_sub_market(symbol):
     path = TXApi.K_SYMBOLS_DB
-    conn = sqlite.connect(path)
-    cur = conn.cursor()
-    symbol = symbol.lower()
-    query = "select {} from {} where {} like \'{}.%\'".format(TXApi.K_DB_TABLE_SN, TXApi.K_DB_TABLE_NAME,
-                                                              TXApi.K_DB_TABLE_SN, symbol)
-    cur.execute(query)
-    results = cur.fetchall()
-    conn.close()
+
+
     sub_market = ''
     if results is not None and len(results) > 0:
         try:
@@ -64,13 +56,6 @@ def query_symbol_sub_market(symbol):
 def query_symbol_from_pinyin(pinyin):
     """通过拼音对symbol进行模糊查询"""
     path = TXApi.K_SYMBOLS_DB
-    conn = sqlite.connect(path)
-    cur = conn.cursor()
-    pinyin = pinyin.lower()
-    query = "select stockCode from {} where pinyin=\'{}\'".format(TXApi.K_DB_TABLE_NAME, pinyin)
-    cur.execute(query)
-    results = cur.fetchall()
-    conn.close()
     if len(results) > 0:
         code = results[0][0]
         # 查询到的stcok code eg：sh111111，usabcd.n

@@ -1,18 +1,12 @@
 """
+SQLAlchemy
+SQLAlchemy是為Python程式語言提供的開源SQL工具包及對象關係對映器（ORM），是在MIT許可證下發行的軟體。
 
 """
 
 import sys
 
-"""
-
-SQLAlchemy
-SQLAlchemy是為Python程式語言提供的開源SQL工具包及對象關係對映器（ORM），是在MIT許可證下發行的軟體。
-
-
-
-
-"""
+import pandas as pd
 
 print("------------------------------------------------------------")  # 60個
 # 3.7 SQLAlchemy与常用数据库的连接
@@ -26,6 +20,9 @@ from sqlalchemy.ext.automap import automap_base
 engine = create_engine('mysql://root:123@127.0.0.1:3306/test?charset=utf8') 
 
 pd.read_sql('select * from data', engine)
+
+
+sys.exit()
 
 pd.read_sql('data',engine)
 
@@ -58,7 +55,7 @@ engine.execute(f_data.insert(), r)
 pd.read_sql('f_data', engine).tail()
 
  
-----------------------------------------------------------------
+# ----------------------------------------------------------------
 
 
 #讀寫資料庫

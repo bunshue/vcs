@@ -180,6 +180,37 @@ logging.info("enable example env will only read RomDataBu/csv")
 
 logging.info("disable example env")
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+import tempfile
+from gtts import gTTS
+from pygame import mixer
+
+mixer.init()  # 初始化 mixer 物件
+
+text = "找不到相關的維基百科資料"
+lang = "zh-tw"
+
+
+with tempfile.NamedTemporaryFile() as ntf:
+    tts = gTTS(text=text, lang=lang)
+    tts.save(f"{ntf.name}.mp3")
+    mixer.music.load(f"{ntf.name}.mp3")
+    mixer.music.play()
+    while mixer.music.get_busy():
+        pass
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

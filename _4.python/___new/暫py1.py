@@ -352,9 +352,6 @@ article.txt
 big5 gb2312... formats
 	animals.csv
 
-sqlite之簡易版範例 for animals
-簡易之資料庫增刪查改範例
-
 MyDictionary
 
 csv檔 => 字典 = > 資料庫
