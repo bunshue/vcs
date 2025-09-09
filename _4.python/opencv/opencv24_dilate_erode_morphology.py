@@ -833,67 +833,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("defogging")
-
-
-def zmMinFilterGray(image, r=7):
-    # 最小值濾波，r是濾波器半徑
-    return cv2.erode(image, np.ones((2 * r + 1, 2 * r + 1)))
-
-
-def guidedfilter(I, p, r, eps):
-    height, width = I.shape
-    m_I = cv2.boxFilter(I, -1, (r, r))
-    m_p = cv2.boxFilter(p, -1, (r, r))
-    m_Ip = cv2.boxFilter(I * p, -1, (r, r))
-    cov_Ip = m_Ip - m_I * m_p
-    m_II = cv2.boxFilter(I * I, -1, (r, r))
-    var_I = m_II - m_I * m_I
-
-    a = cov_Ip / (var_I + eps)
-    b = m_p - a * m_I
-    m_a = cv2.boxFilter(a, -1, (r, r))
-    m_b = cv2.boxFilter(b, -1, (r, r))
-    return m_a * I + m_b
-
-
-def Defog(m, r, eps, w, maxV1):  # 輸入rgb圖像，值范圍[0,1]
-    # 計算大氣遮罩圖像V1和光照值A, V1 = 1-t/A
-    V1 = np.min(m, 2)  # 得到暗通道圖像
-    Dark_Channel = zmMinFilterGray(V1, 5)
-    cv2.imshow("wu_Dark", Dark_Channel)  # 查看暗通道
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
-    V1 = guidedfilter(V1, Dark_Channel, r, eps)  # 使用引導濾波優化
-    bins = 2000
-    ht = np.histogram(V1, bins)  # 計算大氣光照A
-    d = np.cumsum(ht[0]) / float(V1.size)
-    for lmax in range(bins - 1, 0, -1):
-        if d[lmax] <= 0.999:
-            break
-    A = np.mean(m, 2)[V1 >= ht[1][lmax]].max()
-    V1 = np.minimum(V1 * w, maxV1)  # 對值范圍進行限制
-    return V1, A
-
-
-def deHaze(m, r=81, eps=0.001, w=0.95, maxV1=0.80, bGamma=False):
-    Y = np.zeros(m.shape)
-    Mask_img, A = Defog(m, r, eps, w, maxV1)  # 得到遮罩圖像和大氣光照
-
-    for k in range(3):
-        Y[:, :, k] = (m[:, :, k] - Mask_img) / (1 - Mask_img / A)  # 顏色校正
-    Y = np.clip(Y, 0, 1)
-    if bGamma:
-        Y = Y ** (np.log(0.5) / np.log(Y.mean()))  # gamma校正,默認不進行該操作
-    return Y
-
-
-m = deHaze(cv2.imread("data/wu.jpg") / 255.0) * 255
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("open-close")
 
 image = cv2.imread("data/flower.png", 0)  # 灰階讀取
@@ -1596,7 +1535,35 @@ erode = cv2.erode(dst3, None)
 
 
 print("------------------------------------------------------------")  # 60個
-
+"""
 res = cv2.resize(
     image, None, fx=0.6, fy=0.6, interpolation=cv2.INTER_CUBIC
 )  # 圖形太大了縮小一點
+
+
+Y = np.clip(Y, 0, 1)
+
+if bGamma:
+    Y = Y ** (np.log(0.5) / np.log(Y.mean()))  # gamma校正,默認不進行該操作
+
+
+
+zmMinFilterGray(image, r=7)
+# 最小值濾波，r是濾波器半徑
+return cv2.erode(image, np.ones((2 * r + 1, 2 * r + 1)))
+m_I = cv2.boxFilter(I, -1, (r, r))
+m_p = cv2.boxFilter(p, -1, (r, r))
+m_Ip = cv2.boxFilter(I * p, -1, (r, r))
+m_II = cv2.boxFilter(I * I, -1, (r, r))
+m_a = cv2.boxFilter(a, -1, (r, r))
+m_b = cv2.boxFilter(b, -1, (r, r))
+
+bins = 2000
+ht = np.histogram(V1, bins)  # 計算大氣光照A
+
+def deHaze(m, r=81, eps=0.001, w=0.95, maxV1=0.80, bGamma=False):
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+

@@ -3425,6 +3425,40 @@ namespace _vcs_MakePicture
 
         private void button80_Click(object sender, EventArgs e)
         {
+            //寫字畫框
+
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 300;
+            height = 300;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+
+
+
+            Font f;
+            f = new Font("標楷體", 220);
+            sb = new SolidBrush(Color.Black);
+            g.DrawString("豬", f, sb, new PointF(-45, 0));
+
+            pictureBox1.Image = bitmap1;
+
 
         }
 

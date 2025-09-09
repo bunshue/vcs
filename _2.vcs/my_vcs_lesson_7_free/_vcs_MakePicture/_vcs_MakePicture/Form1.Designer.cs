@@ -1174,6 +1174,7 @@
             this.button80.Name = "button80";
             this.button80.Size = new System.Drawing.Size(60, 60);
             this.button80.TabIndex = 84;
+            this.button80.Text = "豬";
             this.button80.UseVisualStyleBackColor = true;
             this.button80.Click += new System.EventHandler(this.button80_Click);
             // 
