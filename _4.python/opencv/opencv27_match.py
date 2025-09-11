@@ -144,19 +144,20 @@ print("圖1和圖2的比較結果 :", ret1, ", 相似")
 print("圖1和圖3的比較結果 :", ret2, ", 不相似")
 
 plt.figure(figsize=(8, 6))
-
 plt.subplot(131)
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("original1")
+plt.axis("off")
 
 plt.subplot(132)
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
 plt.title("original2")
+plt.axis("off")
 
 plt.subplot(133)
 plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
 plt.title("original3")
-
+plt.axis("off")
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -164,12 +165,32 @@ print("------------------------------------------------------------")  # 60個
 
 print("opencv 輪廓比對")
 
-img_patterns = cv2.imread("data/patterns.png", cv2.IMREAD_GRAYSCALE)  # 灰階讀取
+# 標的物
+filename1 = "data/matchTemplate/patterns.png"
 
+# 真實影像
+filename2 = "data/matchTemplate/targets.png"
+
+image1 = cv2.imread(filename1)  # 彩色讀取
+image2 = cv2.imread(filename2)  # 彩色讀取
+
+plt.figure(figsize=(8, 6))
+plt.subplot(211)
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("標的物")
+plt.axis("off")
+plt.subplot(212)
+plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.title("真實影像")
+plt.axis("off")
+# show()
+
+# 標的物
+img_patterns = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 patterns, _ = cv2.findContours(img_patterns, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-img_targets = cv2.imread("data/targets.png", cv2.IMREAD_GRAYSCALE)  # 灰階讀取
-
+# 真實影像
+img_targets = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)  # 灰階讀取
 targets, _ = cv2.findContours(img_targets, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
 patterns = [pattern - np.min(pattern, 0, keepdims=True) for pattern in patterns]
@@ -257,7 +278,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 filename1 = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates46.jpg"
 filename2 = "D:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates46_head.jpg"
 
@@ -266,7 +286,7 @@ src = cv2.imread(filename1, cv2.IMREAD_COLOR)
 plt.subplot(311)
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
-# plt.axis("off")
+plt.axis("off")
 
 template = cv2.imread(filename2, cv2.IMREAD_COLOR)
 height, width = template.shape[:2]  # 獲得模板影像的高與寬
@@ -283,13 +303,12 @@ print(f"陣列內容 \n{result}")
 plt.subplot(312)
 plt.imshow(cv2.cvtColor(template, cv2.COLOR_BGR2RGB))
 plt.title("template")
-# plt.axis("off")
+plt.axis("off")
 
 plt.subplot(313)
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 plt.title("dst")
-# plt.axis("off")
-
+plt.axis("off")
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -327,39 +346,41 @@ print(f"{seq} 比較類似")
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(src1, cv2.COLOR_BGR2RGB))
 plt.title("src1")
-# plt.axis("off")
+plt.axis("off")
 
 plt.subplot(222)
 plt.imshow(cv2.cvtColor(src2, cv2.COLOR_BGR2RGB))
 plt.title("src2")
-# plt.axis("off")
+plt.axis("off")
 
 plt.subplot(223)
 plt.imshow(cv2.cvtColor(src3, cv2.COLOR_BGR2RGB))
 plt.title("src3")
-# plt.axis("off")
+plt.axis("off")
 
 plt.subplot(224)
 plt.imshow(cv2.cvtColor(template, cv2.COLOR_BGR2RGB))
 plt.title("template")
-# plt.axis("off")
-
+plt.axis("off")
 show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename_big = (
-    "D:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/Angry-Birds01.jpg"
+    "D:/_git/vcs/_1.data/______test_files1/__pic/_anime/_angry_bird/Angry-Birds01.jpg"
 )
-filename_small = "D:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/AB_red.jpg"
+
+filename_small = (
+    "D:/_git/vcs/_1.data/______test_files1/__pic/_anime/_angry_bird/AB_red.jpg"
+)
 
 src = cv2.imread(filename_big, cv2.IMREAD_COLOR)
 
 plt.subplot(131)
 plt.imshow(cv2.cvtColor(src, cv2.COLOR_BGR2RGB))
 plt.title("src")
-# plt.axis("off")
+plt.axis("off")
 
 template = cv2.imread(filename_small, cv2.IMREAD_COLOR)
 
@@ -375,13 +396,12 @@ for row in range(len(result)):  # 找尋row
 plt.subplot(132)
 plt.imshow(cv2.cvtColor(template, cv2.COLOR_BGR2RGB))
 plt.title("template")
-# plt.axis("off")
+plt.axis("off")
 
 plt.subplot(133)
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 plt.title("dst")
-# plt.axis("off")
-
+plt.axis("off")
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -429,7 +449,6 @@ plt.subplot(313)
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 plt.title("比對結果")
 plt.axis("off")
-
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -471,7 +490,6 @@ for i in range(length):
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 plt.title("附近的捷運站")
 plt.axis("off")
-
 show()
 
 print("------------------------------------------------------------")  # 60個
@@ -501,10 +519,12 @@ plt.figure(figsize=(12, 8))
 plt.subplot(121)
 plt.imshow(rv, cmap="gray")
 plt.title("Matching Result")
+plt.axis("off")
 
 plt.subplot(122)
 plt.imshow(image, cmap="gray")
 plt.title("Detected Point")
+plt.axis("off")
 
 plt.suptitle("Matching Result 1")
 show()
@@ -536,10 +556,12 @@ plt.figure(figsize=(12, 8))
 plt.subplot(121)
 plt.imshow(rv, cmap="gray")
 plt.title("Matching Result")
+plt.axis("off")
 
 plt.subplot(122)
 plt.imshow(image, cmap="gray")
 plt.title("Detected Point")
+plt.axis("off")
 
 plt.suptitle("Matching Result 2")
 show()

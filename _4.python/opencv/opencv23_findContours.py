@@ -487,7 +487,7 @@ for i in range(n):
     isConvex = cv2.isContourConvex(hull)  # 凸檢測, 是否凸形
     print(f"是否凸形       = {isConvex}")
 
-    image1 = cv2.polylines(image1, [hull], True, GREEN, 2)  # 將凸包連線# 近似多邊形連線
+    image1 = cv2.polylines(image1, [hull], True, YELLOW, 2)  # 將凸包連線# 近似多邊形連線
     # print(hull)   可以用這個指令了解凸包座標點
 
     # 檢測凸包距離
@@ -502,7 +502,7 @@ for i in range(n):
 
     # 邊緣點
     pt = (135, 100)
-    image1 = cv2.circle(image1, pt, 5, RED, -1)  # 畫實心圓
+    image1 = cv2.circle(image1, pt, 5, GREEN, -1)  # 畫實心圓
     dist = cv2.pointPolygonTest(hull, pt, True)  # 檢測距離, True:距離
     print("距離 :", dist)
     dist = cv2.pointPolygonTest(hull, pt, False)  # 檢測距離, False:是否
@@ -510,7 +510,7 @@ for i in range(n):
 
     # 內部點
     pt = (200, 100)
-    image1 = cv2.circle(image1, pt, 5, RED, -1)  # 畫實心圓
+    image1 = cv2.circle(image1, pt, 5, BLUE, -1)  # 畫實心圓
     dist = cv2.pointPolygonTest(hull, pt, True)  # 檢測距離, True:距離
     print("距離 :", dist)
     dist = cv2.pointPolygonTest(hull, pt, False)  # 檢測距離, False:是否
@@ -640,7 +640,6 @@ for i in range(n):
 
 print("------------------------------")  # 30個
 
-# 一起畫出來
 plt.figure(figsize=(12, 8))
 plt.subplot(311)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))

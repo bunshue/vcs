@@ -569,6 +569,9 @@ for table_name in table_names:
 
 conn.close()  # 關閉資料庫連線
 
+"""
+SELECT name FROM table01  WHERE type IN ('table','view') AND name NOT LIKE 'sqlite_%' ORDER BY 1
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -668,6 +671,56 @@ for i in range(length):
     print("第" + str(i + 1) + "筆資料 : ", rows[i])
 
 conn.close()  # 關閉資料庫連線
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+db_filename = "DataBasePM25b.sqlite"
+
+print("讀取資料庫")
+table_name = "TablePM25"
+show_data_base_contents(db_filename, table_name)
+
+print("------------------------------")  # 30個
+
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+cursor = conn.cursor()  # 建立 cursor 物件
+
+# SELECT * : 取得所有資料 + 條件
+sqlstr = "SELECT * FROM TablePM25 WHERE no > 60"
+cursor = conn.execute(sqlstr)
+# 不是用fetchall()讀取全部資料
+for row in cursor:  # 不是用fetchall()讀取全部資料
+    print(row)
+
+print("------------------------------")  # 30個
+
+cursor = conn.execute(
+    "SELECT * FROM TablePM25 WHERE SiteName LIKE :name", {"name": "大同"}
+)
+rows = cursor.fetchall()  # 讀取全部資料成元組串列
+print(rows)
+
+print("------------------------------")  # 30個
+
+# 修改資料
+cursor.execute("UPDATE TablePM25 SET PM25=? WHERE SiteName=?", (123, "大同"))
+conn.commit()  # 更新
+
+print("------------------------------")  # 30個
+
+print("只讀前10筆")
+sqlstr = "SELECT * FROM TablePM25 LIMIT 10"  # SELECT * : 取得所有資料, 限制10筆
+cursor = conn.execute(sqlstr)
+rows = cursor.fetchall()  # 讀取全部資料成元組串列
+length = len(rows)
+print("共有", length, "筆資料")
+for i in range(length):
+    print("第" + str(i + 1) + "筆資料 : ", rows[i])
+
+conn.close()  # 關閉資料庫連線
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2530,9 +2583,9 @@ weight  INTEGER NOT NULL CHECK(weight > 0) -- 預設錯誤時會顯示
 cursor.execute(sqlstr)
 conn.commit()  # 更新
 
-conn = sqlite3.connect(db_filename)
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 
-cursor = conn.cursor()
+cursor = conn.cursor()  # 建立 cursor 物件
 data = [("007", "david", 1234, 5678)]
 
 # 一次執行多個指令
@@ -2545,8 +2598,9 @@ print("------------------------------")  # 30個
 
 # 讀取資料
 
-conn = sqlite3.connect(db_filename)
-cursor = conn.cursor()
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+cursor = conn.cursor()  # 建立 cursor 物件
+
 name = "david"
 sql = 'SELECT * FROM table01 WHERE name="%s";' % (name)
 cursor.execute(sql)
@@ -2578,102 +2632,17 @@ db_filename = "tmp_db01_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + "
 print("建立資料庫連線, 資料庫 :", db_filename)
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-cursor = conn.cursor()
-
-print("------------------------------------------------------------")  # 60個
-
-conn = sqlite3.connect("datafilecccc.db")
-cursor = conn.cursor()
-
-sqlstr = """
-CREATE TABLE people(
-id    INTEGER PRIMARY KEY,
-name  TEXT,
-count INTEGER
-)
-"""
-
-result = cursor.execute("SELECT * FROM people WHERE name LIKE :name", {"name": "bob"})
-print(result.fetchall())
-# rows = cursor.fetchall()  # 讀取全部資料成元組串列
-# [(1, 'Bob', 1)]
-
-cursor.execute("UPDATE people SET count=? WHERE name=?", (20, "Jill"))
-result = cursor.execute("SELECT * FROM people")
-print(result.fetchall())
-# rows = cursor.fetchall()  # 讀取全部資料成元組串列
-# [(1, 'Bob', 1), (2, 'Jill', 20), (3, 'Joe', 10)]
-
-cursor.execute("UPDATE people SET count=? WHERE name=?", (20, "Jill"))
-conn.commit()  # 更新
-conn.close()  # 關閉資料庫連線
+cursor = conn.cursor()  # 建立 cursor 物件
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-conn = sqlite3.connect(filename)
-with conn:
-    cursor = conn.cursor()
-    sql = (
-        "CREATE TABLE IF NOT EXISTS "
-        + table
-        + "(Id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, link TEXT, autor_name TEXT, autor_link TEXT, views TEXT )"
-    )
-
-    # INSERT INTO table VALUES(NULL,'title','link','autor_name','autor_link','watch')
-    sql = (
-        "INSERT INTO "
-        + table
-        + " VALUES(NULL,'"
-        + title
-        + "','"
-        + link
-        + "','"
-        + autor_name
-        + "','"
-        + autor_link
-        + "','"
-        + watch
-        + "')"
-    )
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-url = "http://new.cpc.com.tw/division/mb/oil-more4.aspx"
-
-html = requests.get(url).text
-sp = BeautifulSoup(html, "html.parser")
-data = sp.find_all("span", {"id": "Showtd"})
-rows = data[0].find_all("tr")
-
-prices = list()
-for row in rows:
-    cols = row.find_all("td")
-    if len(cols[1].text) > 0:
-        item = [cols[0].text, cols[1].text, cols[2].text, cols[3].text]
-        prices.append(item)
-for p in prices:
-    sqlstr = "SELECT * FROM prices WHERE gdate='{}';".format(p[0])
-    cursor = conn.execute(sqlstr)
-    if len(cursor.fetchall()) == 0:
-        g92 = 0 if p[1] == "" else float(p[1])
-        g95 = 0 if p[2] == "" else float(p[2])
-        g98 = 0 if p[3] == "" else float(p[3])
-        sqlstr = "INSERT INTO prices VALUES (?, ?, ?, ?)"
-        x = (p[0], g92, g95, g98)  # tuple格式
-        conn.execute(sqlstr, x)
-        conn.commit()  # 更新
-
-v = db.OpenView("SELECT * FROM `%s`" % table)
-v = db.OpenView("INSERT INTO _Streams (Name, Data) VALUES ('%s', ?)" % name)
+# sqlstr = "SELECT * FROM prices WHERE gdate='{}';".format(p[0])
 
 print("------------------------------------------------------------")  # 60個
 
 
-class FunctionTests(unittest.TestCase):
+class FunctionTests:
     def CheckAggrCheckAggrSum(self):
         cursor = self.conn.cursor()
         cursor.execute("DELETE FROM ")
@@ -2682,11 +2651,9 @@ class FunctionTests(unittest.TestCase):
         cursor.execute("SELECT mysum(i) FROM test")
         print("讀取一筆資料")
         val = cursor.fetchone()[0]  # 讀取一筆資料
-        self.assertEqual(val, 60)
 
 
-class AuthorizerTests(unittest.TestCase):
-    @staticmethod
+class AuthorizerTests:
     def authorizer_cb(action, arg1, arg2, dbname, source):
         if action != sqlite.SQLITE_SELECT:
             return sqlite.SQLITE_DENY
@@ -2729,19 +2696,7 @@ class AuthorizerTests(unittest.TestCase):
         #print(temp) many
     """
 
-    self.con = sqlite.connect(":memory:")
-    self.con.execute("create table test (value text)")
-    self.con.execute("insert into test (value) values (?)", ("a\x00b",))
-
-    row = self.con.execute("select value from test").fetchone()  # 讀取一筆資料
-    cur.execute("select 4+5 as foo")
-    print("讀取一筆資料")
-    row = cur.fetchone()  # 讀取一筆資料
-
-    austria = "Österreich"
-    germany = "Deutchland"
-    a_row = self.con.execute("select ?", (austria,)).fetchone()  # 讀取一筆資料
-    d_row = self.con.execute("select ?", (germany,)).fetchone()  # 讀取一筆資料
+    # self.con.execute("insert into test (value) values (?)", ("a\x00b",))# 一項的tuple寫法
 
     # ------------------------------------------------------------
 
@@ -2755,24 +2710,14 @@ class AuthorizerTests(unittest.TestCase):
 
     # ------------------------------------------------------------
 
-    self.con1 = sqlite.connect(get_db_path(), timeout=0.1)
-    self.con2 = sqlite.connect(get_db_path(), timeout=0.1)
     self.cur1.execute("create table test(i)")
     self.cur1.execute("insert into test(i) values (5)")
     self.cur1.execute("replace into test(i) values (6)")
     self.cur2.execute("select i from test")
-    res = self.cur2.fetchall()
-    self.assertEqual(len(res), 1)
-    self.assertEqual(res[0][0], 5)
 
     cur.execute("create table test(x)")
     cur.execute("insert into test(x) values (5)")
     cur.execute("select 1 union select 2 union select 3")
-    cur.fetchall()
-    self.fail("InterfaceError should have been raised")
-
-    self.con = sqlite.connect(":memory:")
-    self.cur = self.con.cursor()
 
     self.cur.execute("create table test(i)")
     self.cur.execute("insert into test(i) values (5)")
@@ -2790,8 +2735,6 @@ class AuthorizerTests(unittest.TestCase):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-sys.exit()
-
 d = sqlite3.Date(2004, 2, 14)
 print(d)
 
@@ -2806,8 +2749,9 @@ print(now)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
 print("------------------------------------------------------------")  # 60個
-''' 資料整理 ST
+""" 資料整理 ST
 
 sql能否做到部分填滿? 可以
 
@@ -2893,7 +2837,7 @@ cursor.execute("UPDATE table01 SET task = 'learn italian' WHERE key = 1")
 5.
 cursor.execute("DELETE FROM table01 WHERE filename = ?", (filename,))
 cursor.execute("DELETE FROM table01 WHERE filename = ?", ("aaaa.mp4",))
-cursor.execute("DELETE FROM people WHERE age=20")
+cursor.execute("DELETE FROM table01 WHERE age=20")
 
 其他
 columns = conn.execute(f"PRAGMA table_info('{table_name}');").fetchall()
@@ -2968,39 +2912,8 @@ sqlstr = ("INSERT INTO table01 (id_num, ename, weight) VALUES ({}, '{}', '{}')".
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 conn = sqlite3.Connection(db_filename)  # 建立資料庫連線
 
+資料整理 SP"""
 
-# BLOB格式
-                """CREATE TABLE "index"("index" blob);"""
-                """INSERT INTO "index" VALUES(X'01');"""
-                """CREATE TABLE "quoted""table"("quoted""field" text);"""
-                """INSERT INTO "quoted""table" VALUES('quoted''value');"""
-                "CREATE TABLE t1(id integer primary key, s1 text, " \
-                "t1_i1 integer not null, i2 integer, unique (s1), " \
-                "constraint t1_idx1 unique (i2));"
-                "INSERT INTO \"t1\" VALUES(1,'foo',10,20);"
-                "INSERT INTO \"t1\" VALUES(2,'foo2',30,30);"
-                "CREATE TABLE t2(id integer, t2_i1 integer, " \
-                "t2_i2 integer, primary key (id)," \
-                "foreign key(t2_i1) references t1(t1_i1));"
-                "CREATE TRIGGER trigger_1 update of t1_i1 on t1 " \
-                "begin " \
-                "update t2 set t2_i1 = new.t1_i1 where t2_i1 = old.t1_i1; " \
-                "end;"
-                "CREATE VIEW v1 as select * from t1 left join t2 " \
-                "using (id);"
-
-        CREATE_ALPHA = """CREATE TABLE "alpha" ("one");"""
-        CREATE_BETA = """CREATE TABLE "beta" ("two");"""
-        expected = [
-            "BEGIN TRANSACTION;",
-            CREATE_ALPHA,
-            CREATE_BETA,
-            "COMMIT;"
-            ]
-        self.cu.execute(CREATE_BETA)
-        self.cu.execute(CREATE_ALPHA)
-
-資料整理 SP'''
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3039,11 +2952,6 @@ print("------------------------------------------------------------")  # 60個
 
 sqlstr = "SELECT count(*) FROM news WHERE url='{}';".format(content_url)
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-"""
-SELECT name FROM sqlite_master  WHERE type IN ('table','view') AND name NOT LIKE 'sqlite_%' ORDER BY 1
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -3115,12 +3023,23 @@ cursor = conn.cursor()  # 建立 cursor 物件
 
 # 暫時
 
+"""結論
+
+REAL = FLOAT        小數
+INTEGER = INT       整數
+TEXT/VARCHAR(n)     字串
+NULL
+
+無用 BLOB
+
+"""
+
 sqlstr = """
 CREATE TABLE IF NOT EXISTS table01(
-id_num INTEGER PRIMARY KEY NOT NULL,
-title,
-author,
-published
+id_num    INTEGER PRIMARY KEY NOT NULL,
+title     TEXT,
+author    TEXT,
+published INTEGER
 )
 """
 cursor.execute(sqlstr)
@@ -3139,11 +3058,3 @@ conn.close()  # 關閉資料庫連線
 print("讀取資料庫")
 table_name = "table01"
 show_data_base_contents(db_filename, table_name)
-
-
-"""
-    except sqlite.InterfaceError as e:
-        pass
-    except:
-        self.fail("InterfaceError should have been raised")
-"""
