@@ -170,6 +170,35 @@ def show_data_base_contents(db_filename, table_name):
     conn.close()  # 關閉資料庫連線
 
 
+print("準備工作")
+
+db_filename_animals_old = "data/animals.sqlite"
+db_filename_animals = (
+    "tmp_animals_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
+)
+
+db_filename_books_old = "data/Books.sqlite"
+db_filename_books = (
+    "tmp_Books_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
+)
+
+db_filename_singMatch_old = "data/singMatch.db"
+db_filename_singMatch = (
+    "tmp_singMatch_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
+)
+
+if not os.path.exists(db_filename_animals):
+    shutil.copy(db_filename_animals_old, db_filename_animals)
+    print(db_filename_animals)
+
+if not os.path.exists(db_filename_books):
+    shutil.copy(db_filename_books_old, db_filename_books)
+    print(db_filename_books)
+
+if not os.path.exists(db_filename_singMatch):
+    shutil.copy(db_filename_singMatch_old, db_filename_singMatch)
+    print(db_filename_singMatch)
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -240,9 +269,11 @@ print("UPDATE 更新資料, 修改2號的資料")
 print("建立資料庫連線, 資料庫 :", db_filename)
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 
+# UPDATE 更新資料, 修改表單 table01 內, 修改 id_num = 2 的資料的 ename 內容, 改為 goat
 sqlstr = "UPDATE table01 SET ename = '{}'  WHERE id_num = {}".format("goat", 2)
 conn.execute(sqlstr)  # 修改2號的資料, 要先確保已經有2號的資料, 才可以修改
 
+# UPDATE 更新資料, 修改表單 table01 內, 修改 id_num = 2 的資料的 weight 內容, 改為 29
 sqlstr = "UPDATE table01 SET weight = '{}' WHERE id_num = {}".format(29, 2)
 conn.execute(sqlstr)  # 修改2號的資料, 要先確保已經有2號的資料, 才可以修改
 
@@ -586,31 +617,26 @@ fetchmany(size=cursor.arraysize)	# 抓n行 list
 """
 
 # 要事先知道表單的欄位
-sqlstr = """
-CREATE TABLE IF NOT EXISTS TablePM25(
-no       INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
-SiteName TEXT NOT NULL,
-PM25     INTEGER
-)
-"""
+
 print("查詢資料庫 fetchone() 讀取一筆資料")
 print("從資料庫讀出一筆資料")
 
-db_filename = "data/DataBasePM25.sqlite"
-print("建立資料庫連線, 資料庫 :", db_filename)
+print("建立資料庫連線, 資料庫 :", db_filename_animals)
 
 print("讀取資料庫")
-print("用 SELECT * FROM TablePM25  # SELECT * : 取得所有資料")
+print("用 SELECT * FROM 表單 # SELECT * : 取得所有資料")
 
-table_name = "TablePM25"
-show_data_base_contents(db_filename, table_name)
+print("讀取資料庫")
+table_name = "animals"
+show_data_base_contents(db_filename_animals, table_name)
 
 print("------------------------------")  # 30個
 
-conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+conn = sqlite3.connect(db_filename_animals)  # 建立資料庫連線
+cursor = conn.cursor()  # 建立 cursor 物件
 
 # SELECT * : 取得所有資料 + 條件
-sqlstr = "SELECT * FROM TablePM25 WHERE no > 60"
+sqlstr = "SELECT * FROM animals WHERE 體重 > 30"
 cursor = conn.execute(sqlstr)
 
 print("讀取一筆資料")
@@ -632,19 +658,19 @@ rows = cursor.fetchall()  # 讀取全部資料成元組串列
 if not rows == None:
     print(rows)
 
-conn.close()  # 關閉資料庫連線
+# SELECT * : 取得所有資料 + 條件
+sqlstr = "SELECT * FROM animals WHERE 體重 > 30"
+cursor = conn.execute(sqlstr)
+# 不是用fetchall()讀取全部資料
+for row in cursor:  # 不是用fetchall()讀取全部資料
+    print(row)
 
 print("------------------------------")  # 30個
 
 print("測試 SELECT + LIMIT 用法")
 
-db_filename = "data/DataBasePM25.sqlite"
-print("建立資料庫連線, 資料庫 :", db_filename)
-
-conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-
-print("只讀前10筆")
-sqlstr = "SELECT * FROM TablePM25 LIMIT 10"  # SELECT * : 取得所有資料, 限制10筆
+print("只讀前5筆")
+sqlstr = "SELECT * FROM animals LIMIT 5"  # SELECT * : 取得所有資料, 限制10筆
 cursor = conn.execute(sqlstr)
 rows = cursor.fetchall()  # 讀取全部資料成元組串列
 length = len(rows)
@@ -653,7 +679,7 @@ for i in range(length):
     print("第" + str(i + 1) + "筆資料 : ", rows[i])
 
 print("從第3筆開始讀5筆資料(從0起算)")
-sqlstr = "SELECT * FROM TablePM25 LIMIT 3, 5"
+sqlstr = "SELECT * FROM animals LIMIT 3, 5"
 cursor = conn.execute(sqlstr)
 rows = cursor.fetchall()  # 讀取全部資料成元組串列
 length = len(rows)
@@ -662,7 +688,7 @@ for i in range(length):
     print("第" + str(i + 1) + "筆資料 : ", rows[i])
 
 print("讀5筆資料出來, 從第3筆開始讀 (從0起算)")
-sqlstr = "SELECT * FROM TablePM25 LIMIT 5 OFFSET 3"
+sqlstr = "SELECT * FROM animals LIMIT 5 OFFSET 3"
 cursor = conn.execute(sqlstr)
 rows = cursor.fetchall()  # 讀取全部資料成元組串列
 length = len(rows)
@@ -670,57 +696,35 @@ print("共有", length, "筆資料")
 for i in range(length):
     print("第" + str(i + 1) + "筆資料 : ", rows[i])
 
-conn.close()  # 關閉資料庫連線
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-db_filename = "DataBasePM25b.sqlite"
-
-print("讀取資料庫")
-table_name = "TablePM25"
-show_data_base_contents(db_filename, table_name)
-
 print("------------------------------")  # 30個
 
-conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-cursor = conn.cursor()  # 建立 cursor 物件
-
-# SELECT * : 取得所有資料 + 條件
-sqlstr = "SELECT * FROM TablePM25 WHERE no > 60"
-cursor = conn.execute(sqlstr)
-# 不是用fetchall()讀取全部資料
-for row in cursor:  # 不是用fetchall()讀取全部資料
-    print(row)
-
-print("------------------------------")  # 30個
-
-cursor = conn.execute(
-    "SELECT * FROM TablePM25 WHERE SiteName LIKE :name", {"name": "大同"}
-)
+cursor = conn.execute("SELECT * FROM animals WHERE 中文名 LIKE :name", {"name": "虎"})
 rows = cursor.fetchall()  # 讀取全部資料成元組串列
 print(rows)
 
 print("------------------------------")  # 30個
 
 # 修改資料
-cursor.execute("UPDATE TablePM25 SET PM25=? WHERE SiteName=?", (123, "大同"))
+# UPDATE 更新資料, 修改表單 animals 內, 修改 中文名 = "虎" 的資料的 體重 內容, 改為 123
+cursor.execute("UPDATE animals SET 體重=? WHERE 中文名=?", (123, "虎"))
 conn.commit()  # 更新
+
+# UPDATE 更新資料, 修改表單 animals 內, 修改 英文名 = 'snake' 的資料的 中文名 內容, 改為 '小龍'
+cursor.execute("UPDATE animals SET 中文名 = '小龍' WHERE 英文名 = 'snake'")
+conn.commit()  # 更新
+
+# NG
+# UPDATE 更新資料, 修改表單 animals 內, 修改 index = 6 的資料的 中文名 內容, 改為 '小龍'
+# cursor.execute("UPDATE animals SET 中文名 = '小龍' WHERE index = 6")
+# conn.commit()  # 更新
 
 print("------------------------------")  # 30個
 
-print("只讀前10筆")
-sqlstr = "SELECT * FROM TablePM25 LIMIT 10"  # SELECT * : 取得所有資料, 限制10筆
-cursor = conn.execute(sqlstr)
-rows = cursor.fetchall()  # 讀取全部資料成元組串列
-length = len(rows)
-print("共有", length, "筆資料")
-for i in range(length):
-    print("第" + str(i + 1) + "筆資料 : ", rows[i])
-
 conn.close()  # 關閉資料庫連線
 
+print("讀取資料庫")
+table_name = "animals"
+show_data_base_contents(db_filename_animals, table_name)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -873,6 +877,7 @@ if row == None:
 else:
     print("原來密碼為：{}".format(row[1]))
     new_password = "abcdefg"
+    # UPDATE 更新資料, 修改表單 table01 內, 修改 name = old_name 的資料的 pass 內容, 改為 new_password
     sqlstr = "UPDATE table01 SET pass = '{}' WHERE name = '{}'".format(
         new_password, old_name
     )
@@ -1156,7 +1161,7 @@ cursor.execute("INSERT INTO table01 VALUES (NULL, ?)", (tasks[0],))
 cursor.execute("INSERT INTO table01 VALUES (NULL, ?)", (tasks[1],))
 cursor.execute("INSERT INTO table01 VALUES (NULL, ?)", (tasks[2],))
 
-# UPDATE 更新資料
+# UPDATE 更新資料, 修改表單 table01 內, 修改 key = 1 的資料的 task 內容, 改為 xxxxx
 cursor.execute("UPDATE table01 SET task = 'learn italian' WHERE key = 1")
 
 # SELECT * WHERE : 取得所有資料 + 條件
@@ -1650,7 +1655,8 @@ print("UPDATE 更新資料")
 
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 
-sqlstr = 'UPDATE table01 SET name = "Tomy" WHERE id = 1'
+# UPDATE 更新資料, 修改表單 table01 內, 修改 id = 1 的資料的 name 內容, 改為 "Tomy"
+sqlstr = "UPDATE table01 SET name = 'Tomy' WHERE id = 1"
 cursor = conn.execute(sqlstr)
 
 conn.commit()  # 更新
@@ -1816,7 +1822,7 @@ print("UPDATE 更新資料 1筆, 1號改名字")
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
 
-# UPDATE 更新資料 # 修改 id 為 1 的資料
+# UPDATE 更新資料, 修改表單 table01 內, 修改 id = 1 的資料的 name 內容, 改為 "林胖虎"
 conn.execute("UPDATE table01 SET name='{}' WHERE id={}".format("林胖虎", 1))
 
 conn.commit()  # 更新
@@ -1910,28 +1916,6 @@ print("------------------------------------------------------------")  # 60個
 print("較完整")
 print("------------------------------------------------------------")  # 60個
 
-print("準備工作")
-
-db_filename_books_old = "data/Books.sqlite"
-db_filename_books = (
-    "tmp_Books_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
-)
-
-db_filename_singMatch_old = "data/singMatch.db"
-db_filename_singMatch = (
-    "tmp_singMatch_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
-)
-
-if not os.path.exists(db_filename_books):
-    shutil.copy(db_filename_books_old, db_filename_books)
-    print(db_filename_books)
-
-
-if not os.path.exists(db_filename_singMatch):
-    shutil.copy(db_filename_singMatch_old, db_filename_singMatch)
-    print(db_filename_singMatch)
-
-
 print("讀取資料庫")
 table_name = "Books"
 show_data_base_contents(db_filename_books, table_name)
@@ -1990,6 +1974,8 @@ print("------------------------------")  # 30個
 
 print("UPDATE 更新資料 D0002 價格改 650")
 print("UPDATE 更新資料 D0003 價格改 700")
+# UPDATE 更新資料, 修改表單 Books 內, 修改 id = D0002 的資料的 price 內容, 改為 650
+# UPDATE 更新資料, 修改表單 Books 內, 修改 id = D0003 的資料的 price 內容, 改為 700
 
 conn = sqlite3.connect(db_filename_books)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
@@ -2833,7 +2819,6 @@ sqlite指令整理
 2. INSERT INTO
 3. SELECT
 4. UPDATE
-cursor.execute("UPDATE table01 SET task = 'learn italian' WHERE key = 1")
 5.
 cursor.execute("DELETE FROM table01 WHERE filename = ?", (filename,))
 cursor.execute("DELETE FROM table01 WHERE filename = ?", ("aaaa.mp4",))
@@ -3058,3 +3043,12 @@ conn.close()  # 關閉資料庫連線
 print("讀取資料庫")
 table_name = "table01"
 show_data_base_contents(db_filename, table_name)
+
+
+sqlstr = """
+CREATE TABLE IF NOT EXISTS table01(
+no       INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
+SiteName TEXT NOT NULL,
+PM25     INTEGER
+)
+"""
