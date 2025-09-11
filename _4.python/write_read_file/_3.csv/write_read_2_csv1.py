@@ -251,6 +251,24 @@ with open(filename) as csvfile:  # 開啟csv檔案
 
 print("------------------------------------------------------------")  # 60個
 
+# 讀取csv檔
+fn = "data/Taipei_Population.csv"
+with open(fn) as csvFile:
+    csvReader = csv.reader(csvFile)
+    listCsv = list(csvReader)  # 轉成串列
+    csvData = listCsv[4:]  # 切片刪除前4 rows
+    for row in csvData:
+        area = row[0]  # 區名稱
+        male = int(row[7])  # 男性人數
+        female = int(row[8])  # 女性人數
+        total = int(row[6])  # 總人數
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 print("4. csv.DictReader()")
 print("------------------------------------------------------------")  # 60個
