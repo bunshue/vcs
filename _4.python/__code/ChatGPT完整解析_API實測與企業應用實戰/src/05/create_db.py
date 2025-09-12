@@ -1,17 +1,25 @@
+import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 from db_schema import *
 
+print('111')
 engine = create_engine("sqlite:///data/line_db.db", echo=True)
+print('取得 engine :', engine)
 Base.metadata.create_all(engine)
-
+print('333')
 stmt = select(User).where(User.display_name == "user1")
+print('指令 :', stmt)
 session = Session(engine)
+print('555', session)
 user1 = session.scalars(stmt).one_or_none()
+print('666', user1)
+
 if user1 is not None:
-    exit()
+    sys.exit()
 with Session(engine) as session:
+    print('kkkkkkkkkkkkkkkkkk')
     user1 = User(
         line_id="Ude0000f85858cf19238f2c5a079c9e11",
         display_name="user1",

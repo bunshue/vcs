@@ -2,7 +2,6 @@ import sys
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication
-import sqlite3
 
 class MainWindow(QDialog):
     def __init__(self):
@@ -15,18 +14,32 @@ class MainWindow(QDialog):
         self.loaddata()
 
     def loaddata(self):
-        connection = sqlite3.connect('data.sqlite')
-        cur = connection.cursor()
-        sqlstr = 'SELECT * FROM worldcities LIMIT 40'
+        self.tableWidget.setRowCount(10)#設定Table一頁的長度
+        
+        tablerow = 0
+        data1, data2, data3 = "aaaa0", "bbb0", "ccc0"
+        self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(data1))
+        self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(data2))
+        self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(data3))
 
-        tablerow=0
-        results = cur.execute(sqlstr)
-        self.tableWidget.setRowCount(40)
-        for row in results:
-            self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(row[0]))
-            self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(row[1]))
-            self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(row[2]))
-            tablerow+=1
+        tablerow = 1
+        data1, data2, data3 = "aaaa1", "bbb1", "ccc1"
+        self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(data1))
+        self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(data2))
+        self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(data3))
+
+        tablerow = 2
+        data1, data2, data3 = "aaaa2", "bbb2", "ccc2"
+        self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(data1))
+        self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(data2))
+        self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(data3))
+
+        tablerow = 3
+        data1, data2, data3 = "aaaa3", "bbb3", "ccc3"
+        self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(data1))
+        self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(data2))
+        self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(data3))
+
 # main
 app = QApplication(sys.argv)
 mainwindow = MainWindow()

@@ -1,5 +1,8 @@
 import sys
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 temperatures = []
 with open('lab_05.txt') as infile:
      for row in infile:
@@ -20,10 +23,6 @@ print("min = {}".format(min_temp))
 print("mean = {}".format(mean_temp))
 print("median = {}".format(median_temp))
 
-
-# In[90]:
-
-
 unique_temps = len(set(temperatures))
 
 print("number of temps - {}".format(len(temperatures)))
@@ -33,8 +32,8 @@ cubes = {x: x**3 for x in range(11, 16)}
 print(cubes)
 
 
-看到這
----------------------------------------------------------------------------------------
+# 看到這
+# ---------------------------------------------------------------------------------------
 
 
 
@@ -51,9 +50,6 @@ print(cubes)
 
 # ### LAB: REFACTOR WORD_COUNT
 # Rewrite the word count program to make it shorter. You may want to look at the string and list operations already discussed, as well as thinking about different ways to organize the code. You may also want to make it smarter, so that only alphabetic strings (not symbols or punctuation) count as words.
-
-# In[ ]:
-
 
 # File: word_count_refactored.py
 """ Reads a file and returns the number of lines, words,
@@ -77,8 +73,9 @@ with  open('word_count.tst') as infile:
 print("File has {0} lines, {1} words, {2} characters".format(line_count, 
                                                word_count, char_count))
 
-
+print("------------------------------------------------------------")  # 60個
 # ## Chapter 9
+print("------------------------------------------------------------")  # 60個
 
 # ### QUICK CHECK: FUNCTIONS AND PARAMETERS
 # How would you write a function that could take any number of unnamed arguments and print their values out in reverse order?
@@ -90,9 +87,6 @@ print("File has {0} lines, {1} words, {2} characters".format(line_count,
 # What happens if you capture the return value of a function with a variable?
 # 
 # The only result is that you can use that value, whatever it might be.
-
-# In[157]:
-
 
 def my_funct(*params):
     for i in reversed(params):
@@ -126,9 +120,6 @@ my_funct(1,2,3,4)
 # What would you need to modify in the code for the function four() above to make it work for any number? What would you need to add to allow the starting point to also be set?
 # 
 
-# In[161]:
-
-
 def four(limit):
     x = 0 
     while x < limit:
@@ -138,11 +129,6 @@ def four(limit):
 
 for i in four(4):
     print(i)
-
-
-
-# In[162]:
-
 
 def four(start, limit):
     x = start 
@@ -155,14 +141,10 @@ for i in four(1, 4):
     print(i)
 
 
-
 # ### TRY THIS: DECORATORS
 # How would you modify the code for the decorator function above to remove unneeded messages and enclose the return value of wrapped function in "<html>" and "</html>", so that myfunction("hello") would return "<html>hello<html>"?
 #     
 # This is a hard one, since in order to define a function that changes the return value we need to add an inner wrapper function to call the orginal function and add to the return value
-
-# In[205]:
-
 
 def decorate(func):
     def wrapper_func(*args):
@@ -182,9 +164,6 @@ print(myfunction("Test"))
 
 # ### LAB: USEFUL FUNCTIONS
 # Looking back at the labs for chapters 6 and 7, refactor that code into functions for cleaning and processing the data. The goal should be that most of the logic is moved into functions. Use your own judgement as to the types of functions and parameters, but keep in mind that functions should do just one thing, and they should not have any side effects that carry over outside of the function.  
-
-# In[213]:
-
 
 punct = str.maketrans("",  "", "!.,:;-?")
 
@@ -212,9 +191,6 @@ with open("moby_01.txt") as infile, open("moby_01_clean.txt", "w") as outfile:
         
         # write all words for line
         outfile.write(cleaned_words)
-
-
-# In[219]:
 
 
 def count_words(words):
@@ -246,12 +222,13 @@ most, least = word_stats(word_count)
 print("Most common words:")
 for word in most:
     print(word)
-print("\nLeast common words:")
+print("\naaa Least common words:")
 for word in least:
     print(word)
 
-
+print("------------------------------------------------------------")  # 60個
 # ## Chapter 10
+print("------------------------------------------------------------")  # 60個
 
 # ### QUICK CHECK: MODULES
 # Suppose you have a module called new_math that contains a function called new_divide. What are the ways that you might import and then use that function? What are the pros and cons of each?
@@ -286,25 +263,9 @@ for word in least:
 # 
 # (no answer)
 
+print("------------------------------------------------------------")  # 60個
 # ## Chapter 11
-
-# ### TRY THIS: MAKING A SCRIPT EXECUTABLE
-# Experiment with executing scripts on your platform. Also try to redirect input and output into and out of your scripts.
-# 
-# (no answer)
-
-# ### QUICK CHECK: PROGRAMS AND MODULES
-# What issue is the use of if `__name__ == "__main__":` meant to avoid, and how does it do that? Can you think of any other way to avoid this issue?
-# 
-# When Python loads a module all of its code is executed. By using the pattern above you can have certain code run only if it’s being executed as the main script file.
-
-# ### LAB: CREATING A PROGRAM
-# In chapter 8, we created a version of the UNIX wc utility to count the lines, words, and characters in a file.  Now that we have more tools at our disposal, lets refactor that program to make it work more like the original. In particular, it should have options to show only lines (-l), only words (-w), and only characters (-c). If none of those options are given, all three stats will be displayed. But if any one of them is present, then only the specified stats will be shown.
-# 
-# For an extra challenge, have a look at the man page for wc on a Linux/UNIX system and add the -L to show the longest line length. Feel free to try to implement the complete behavior as listed in the man page and test it against your system’s wc utility.
-
-# In[13]:
-
+print("------------------------------------------------------------")  # 60個
 
 # File: word_count_program.py
 """ Reads a file and returns the number of lines, words,
@@ -340,30 +301,20 @@ def main():
         # print the answers using the format() method
         print("File has {0} lines, {1} words, {2} characters".format(line_count, 
                                                        word_count, char_count))
-
+"""
 if __name__ == '__main__':
     main()
+"""
 
-
+print("------------------------------------------------------------")  # 60個
 # ## Chapter 12
-
-# ### QUICK CHECK: MANIPULATING PATHS
-# How would you use the os module’s functions to take a path to a file called `test.log` and create a new file path in the same directory for a file called `test.log.old`? How would you do the same thing using the pathlib module?
-# 
-# What path would you get if you created a pathlib Path object from os.pardir? Try it and find out.
-
-# In[170]:
-
+print("------------------------------------------------------------")  # 60個
 
 import os.path
 old_path = os.path.abspath('test.log')
 print(old_path)
 new_path = '{}.{}'.format(old_path, "old")
 print(new_path)
-
-
-# In[190]:
-
 
 import pathlib
 path = pathlib.Path('test.log')
@@ -372,10 +323,6 @@ print(abs_path)
 new_path = str(abs_path) + ".old"
 print(new_path)
 
-
-# In[194]:
-
-
 test_path = pathlib.Path(os.pardir)
 print(test_path)
 test_path.resolve()
@@ -383,9 +330,6 @@ test_path.resolve()
 
 # ### LAB: MORE FILE OPERATIONS
 # How might you calculate the total size of all files ending with .txt that are not symlinks in a directory? If your first answer was using os.path, also try it with pathlib, and vice versa.
-
-# In[16]:
-
 
 import pathlib
 cur_path = pathlib.Path(".")
@@ -402,7 +346,7 @@ print(size)
 
 # In[19]:
 
-
+"""
 import pathlib
 cur_path = pathlib.Path(".")
 new_path = cur_path.joinpath("backup")
@@ -414,9 +358,10 @@ for text_path in cur_path.glob("*.txt"):
         text_path.rename(new_path.joinpath(text_path.name))
         
 print(size)
-
-
+"""
+print("------------------------------------------------------------")  # 60個
 # ## Chapter 13
+print("------------------------------------------------------------")  # 60個
 
 # ### QUICK CHECK:
 # What is the significance of adding a "b" to the file open mode string?
@@ -448,41 +393,9 @@ def main():
     
     mio.print_file("myfile.txt")
     
-    
+"""
 if __name__ == '__main__':
     main()
-
-
-# ### QUICK CHECK: STRUCT
-# What use cases can you think of where the struct module would be useful for either reading or writing binary data?
-# 
-# * You are trying to read/write from a binary format application file, or image file.
-# * You are reading from some external interface, e.g., a thermometer or accelerometer, and want to save the raw dat exactly as it was transmitted.
-# 
-
-# ### QUICK CHECK: PICKLES
-# Think about why a pickle would be a good solution for the following use cases, or why not: A) saving some state variables from one on run to the next; B) keeping a high score list for a game; C) storing user names and passwords; D) storing a large dictionary of English terms.
-# 
-# A & B would be reasonable, although pickles are not secure. 
-# 
-# C & D would not be good, the lack of security would be a big problem for C, and for D there would be a need to load the entire pickle into memory. 
-
-# ### QUICK CHECK: SHELVE
-# Using a shelf object looks very much like using a dictionary. In what ways is using a shelf object different? What disadvantages would you expect there to be in using a shelf object?
-# 
-# The key difference is that the objects are stored on disk, not in memory. With very large amounts of data, particularly with lots of inserts and/or deletes, you would expect disk access to make things slow.
-
-# ### LAB: FINAL FIXES TO WC
-# If you look at the man page for the wc utility you will see that there are two command line options which do very similar things. -c makes the utility count the bytes in the file, while -m makes it count characters (which in the case of some Unicode characters can be two or more bytes long). In addition, if a file is given it should read from and process that file, but if no file is given, it should read from and process stdin.
-# 
-# Rewrite your version of the `wc` utility to implement both the distinction between bytes and characters and the ability to read from files and standard input.
-
-# In[20]:
-
-
-# File: word_count_program_stdin.py
-""" Reads a file and returns the number of lines, words,
-    and characters - similar to the UNIX wc utility
 """
 
 def main():
@@ -524,105 +437,15 @@ def main():
         # print the answers using the format() method
         print("File has {0} lines, {1} words, {2} characters".format(line_count, 
                                                        word_count, char_count))
-
+"""
 if __name__ == '__main__':
     main()
-
-
-# ## Chapter 14
-
-# ### TRY THIS: CATCHING EXCEPTIONS
-# Write some code that gets two numbers from the user and divides the first by the second. Check for and catch the exception that occurs if the second number is zero (ZeroDivisionError).
-
-# In[231]:
-
-
-# the code of your program should do the following
-x = int(input("Please enter an integer: "))
-y = int(input("Please enter another integer: "))
-
-try:
-    z = x / y
-except ZeroDivisionError as e:
-    print("Can't divide by zero.")
-
-
-# ### QUICK CHECK: EXCEPTIONS AS CLASSES
-# If `MyError` inherits from `Exception`, what will be the difference between `except Exception as e` and `except MyError as e`?
-# 
-# The first will catch any exception that inherits from `Exception`, i.e., most of them, while the second will only catch `MyError` exceptions.
-
-# ### TRY THIS: THE ASSERT STATEMENT
-# Write a simple program which gets a number from the user and then uses the assert statement to raise an exception if the number is zero. Test to make sure the assert fires, then turn it off using one of the methods mentioned above.
-
-# In[222]:
-
-
-# the code of your program should do the following
-x = int(input("Please enter a non-zero integer: "))
-
-assert x != 0, "Integer can not be zero."
-
-
-# ### QUICK CHECK: EXCEPTIONS
-# Do Python exceptions force a program to halt?
-# 
-# No, if they are caught and handled correctly the program won't need to halt.
-# 
-# Suppose you wanted accessing a dictionary `x` to always return `None` if a key didn’t exist in the dictionary (i.e., if `KeyError` exception was raised)? What code would you use to achieve that?
-# 
-
-# In[ ]:
-
-
-try:
-    x = my_dict[some_key]
-except KeyError as e:
-    x = None
-    
-
-
-# ### TRY THIS: EXCEPTIONS
-# What code would you use to create a custom ValueTooLarge exception and raise that exception if the variable x is over 1000?
-
-# In[163]:
-
-
-class ValueTooLarge(Exception):
-    pass
-
-x = 1001
-if x > 1000:
-    raise ValueTooLarge()
-
-
-# ### QUICK CHECK: CONTEXT MANAGERS
-# Assume you are using a context manager in a script that reads and/or writes several files. Which of the following approaches do you think would be the best? A) put the entire script in a block managed by a `with` statement; B) Use one `with` statement for all file reads and another for all file writes; C) a `with` statement each time you read a file or write a file, i.e., for each line; D) use a `with` statement for each file that you read or write.
-# 
-# Probably D is the best - since part of what the context manager does for file access is to make sure that a file is closed, it would probably make sense to use a separate w`with` for each case where you open a file for reading or writing.
-
-# ### LAB: CUSTOM EXCEPTIONS
-# Think about the module you wrote in chapter 9 to count word frequencies. What errors might reasonably occur in those functions? Rewrite the code to handle those exception conditions appropriately. 
-
-# In[213]:
+"""
 
 
 punct = str.maketrans("",  "", "!.,:;-?")
 class EmptyStringError(Exception):
     pass
-
-def clean_line(line):
-    """changes case and removes punctuation"""
-    
-    # raise exception if line is empty
-    if not line.strip():
-        raise EmptyStringError()
-    # make all one case
-    cleaned_line = line.lower()
-        
-    # remove punctuation
-    cleaned_line = cleaned_line.translate(punct)
-    return cleaned_line
 
 
 def get_words(line):
@@ -639,9 +462,6 @@ with open("moby_01.txt") as infile, open("moby_01_clean.txt", "w") as outfile:
         
         # write all words for line
         outfile.write(cleaned_words)
-
-
-# In[2]:
 
 
 def count_words(words):
@@ -683,12 +503,14 @@ most, least = word_stats(word_count)
 print("Most common words:")
 for word in most:
     print(word)
-print("\nLeast common words:")
+print("\nbbb Least common words:")
 for word in least:
     print(word)
 
 
+print("------------------------------------------------------------")  # 60個
 # ## Chapter 15
+print("------------------------------------------------------------")  # 60個
 
 # ### TRY THIS: CLASSES AS RECORDS
 # What code would you use to create a `Rectangle` class?
@@ -889,8 +711,9 @@ doc_body = body(text="This is the body", subelement=para)
 doc = html(subelement=doc_body)
 print(doc)
 
-
+print("------------------------------------------------------------")  # 60個
 # ## Chapter 16
+print("------------------------------------------------------------")  # 60個
 
 # ### QUICK CHECK: SPECIAL CHARACTERS IN REGULAR EXPRESSIONS
 # What regular expression would you use to match strings which represent the numbers -5 through 5?
@@ -907,6 +730,7 @@ print(doc)
 
 # In[296]:
 
+import re
 
 re.match(r": (?P<phone>(\+\d{2}-)?(\d\d\d-)?\d\d\d-\d\d\d\d)", ": +01-111-222-3333")
 #or
@@ -969,13 +793,15 @@ def return_number(match_obj):
     return("{}-{}-{}-{}".format(country, match_obj.group('area'), 
                                 match_obj.group('exch'), match_obj.group('number')))
 
-
+""" NG
 regexp = re.compile(r"\+?(?P<country>\d{1,3})?[- .]?\(?(?P<area>\d{3})\)?[- .]?(?P<exch>(\d{3}))[- .](?P<number>\d{4})")
 for number in test_numbers:
     print(regexp.sub(return_number, number))
+"""
 
-
+print("------------------------------------------------------------")  # 60個
 # ## Chapter 17
+print("------------------------------------------------------------")  # 60個
 
 # ### QUICK CHECK: TYPES
 # Suppose you wanted to make sure that object x was a list before you tried appending to it? What code would you use? What would be the difference between using type() and isinstance()? Would this be the LBYL or EAFP of programming? What other options might you have besides checking the type explicitly? 
@@ -1041,59 +867,9 @@ print(len(x))
 x.append(1)
 del x[2]
 
-
-# ### QUICK CHECK: SPECIAL METHOD ATTRIBUTES AND SUBCLASSING EXISTING TYPES
-# Suppose you wanted a dictionary-like type that only allowed strings as keys (maybe to make it work like a shelf object as described in Chapter 13). What options would you have for creating such a class? What would be the advantages and disadvantages of each?
-# 
-# You could use the same approach as we did for typed list and inherit from the UserDict class. You could also inherit directly from dict, or you could implement all of the dict functionality yourself. 
-# 
-# Implementing everything yourself gives the most control, but is the most work, and will be most prone to bugs. If the changes you need to make are small (in this case, just checking the type before adding a key), it might make the most sense to inherit directly from dict. On the other hand, inheriting from UserDict is probably the safest, since the internal dict object will continue to be a regular dict, which is a highly optimized and mature implementation.
-
-# ## Chapter 18
-
-# ### QUICK CHECK: PACKAGES
-# Suppose you are writing a package that will take a URL, retrieve all images on the page pointed to by that URL, resize them to a standard size, and store them. Leaving aside the exact details of how each of these functions will be coded, how would you organize those features into a package?
-# 
-# There are three separate types of action the package will be doing: first, fetching a page and parsing the HTML for image URL's; second, fetching the images; and third, resizing them. Because of this, you might consider having 3 modules to keep things separate:
-# 
-# ```
-# picture_fetch/
-#     __init__.py
-#     find.py
-#     fetch.py
-#     resize.py
-# ```
-# 
-
-# ### LAB: CREATE A PACKAGE
-# In chapter 15 we added error handling to the text cleaning and word frequency counting module we created in chapter 11. Refactor that code into a package containing one module for the cleaning functions, one for the processing functions, and one for the custom exceptions. Then write a simple main function that uses all three.
-# 
-# ```
-# word_count
-#     __init__.py
-#     exceptions.py
-#     cleaning.py
-#     counter.py
-# ```
-
-# In[ ]:
-
-
-#__init__.py
-from exceptions import EmptyStringError
-from cleaning import clean_line, get_words
-from counter import count_words, word_stats
-
-
-# In[ ]:
-
-
 # exceptions.py
 class EmptyStringError(Exception):
     pass
-
-
-# In[213]:
 
 
 # cleaning.py
@@ -1186,41 +962,15 @@ most, least = word_stats(word_count)
 print("Most common words:")
 for word in most:
     print(word)
-print("\nLeast common words:")
+print("\nccc Least common words:")
 for word in least:
     print(word)
-
-
-# In[3]:
-
 
 import word_count
 dir(word_count)
 
-
-# ## Chapter 20
-
-# ### QUICK CHECK : CONSIDER THE CHOICES
-# Take a moment to consider what our options are for handling the tasks we’ve identified above. What modules in the standard library can you think of that will do the job? If you want, you can even stop right now and work out the code to do it and compare your solution with the one we’ll develop below.
-# 
-# From the standard library, `datetime` for managing the dates/times of the files, and either `os.path` and `os` or `pathlib` for renaming and archiving the files.
-
-# ### QUICK CHECK: POTENTIAL PROBLEMS
-# Since our solution above is very simple there are likely to be many situations that it won’t handle well. What are some potential issues or problems that might arise with the script above? How might you remedy these problems?
-# 
-# Multiple files during the same day would be a problem, for one thing. If there are lots of files, it will become increasingly difficult to navigate the archive directory.
-# 
-# 
-# Consider the naming convention used for the files, which is based on the year, month and name, in that order. What advantages do you see in that? What might be the disadvantages? Can you make any arguments for putting the date string somewhere else in the file name, like the beginning or the very end?
-# 
-# Using year-month-day date formats will make a text based sort of the files sort by date as well. Putting the date at the end of the file name, but before the extension will make it more difficult to parse the date element visually.
-# 
-
-# ### TRY THIS: IMPLEMENTATION OF MULTIPLE DIRECTORIES
-# Using the code we developed above as a starting point, how would you modify it to implement archiving each set of files in subdirectories named according to the date received? Feel free to take the time to implement the code and test it.
-
-# In[8]:
-
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 import datetime
 import pathlib
@@ -1228,6 +978,7 @@ import pathlib
 FILE_PATTERN = "*.txt"
 ARCHIVE = "archive"
 
+"""
 if __name__ == '__main__':
     
     date_string = datetime.date.today().strftime("%Y-%m-%d")
@@ -1241,16 +992,7 @@ if __name__ == '__main__':
 
     for path in paths:
         path.rename(new_path.joinpath(path.name))
-
-
-# ### QUICK CHECK: ALTERNATE SOLUTIONS
-# How might you create a script that does the same thing, without using pathlib? What libraries and functions would you use?
-# 
-# You would use the `os.path` and `os` libraries.
-
-# ### TRY THIS: ARCHIVING TO ZIP FILES PSEUDOCODE
-# Take a moment to write the pseudocode for a solution that would store data files in zip files as shown above. What modules and functions or methods do you intend to use? Try coding your solution to make sure it works.
-# 
+"""
 
 import datetime
 import pathlib
@@ -1259,6 +1001,7 @@ import zipfile
 FILE_PATTERN = "*.txt"
 ARCHIVE = "archive"
 
+"""
 if __name__ == '__main__':
     
     date_string = datetime.date.today().strftime("%Y-%m-%d")
@@ -1272,64 +1015,7 @@ if __name__ == '__main__':
     for path in paths:
         zip_file.write(str(path))
         path.unlink()
-
-
-# ### QUICK CHECK: CONSIDER DIFFERENT PARAMETERS
-# Take some time to consider different grooming options. How would you modify this to keep only one file a month? How would you change it so that files from the previous month and older were groomed to save one a week? (Note: this is not the same as older than 30 days!)
-# 
-# You could use something similar to the code above but also check the month of the file against the current month.
-
-# ## Chapter 21
-
-# ### QUICK CHECK: NORMALIZATION
-# Look closely at the list of words that was generated above. Do you see any issues with the normalization so far? What other issues do you think you might encounter with a longer section of text? How do you think you might deal those issues?
-# 
-# Double hyphens for em-dashes, hyphenation for line breaks and otherwise, other punctuation would all be potential problems. 
-# 
-# Enhancing the word cleaning module created in chapter 18 would be a good way to cover most of the issues.
-
-# ### TRY THIS: READ A FILE
-# Write the code to read a text file (assume it’s the file temp_data_00a.txt as show in the the example above) and split each line of the file into a list of values, and add that list to a single list of records. 
-# 
-# (no answer)
-
-# What issues or problems did you encounter in implementing this? How might you go about converting the last three fields into the correct date, real, and int types?
-# 
-# You could use a list comprehension and explicitly convert those fields.
-
-# ### QUICK CHECK: HANDLING QUOTING
-# Consider how you would approach the problems of handling quoted fields and embedded delimiter characters if you didn't have the `csv` library. Which is easier to handle, the quoting or the embedded delimiters?
-# 
-# Without using the `csv` module you would have to check to see if a field began and ended with the quote characters, and then strip() them off. 
-# 
-# To handle embedded delimiters without using the `csv` library, you would have to determine quoted fields and treat them differently, then split the rest of the fields o the delimiter.
-
-# ### TRY THIS: CLEANING DATA
-# How would you handle the fields with “Missing” as possible values for math calculations? Can you write a snippet of code that would average one of those columns?
-# 
-# ```
-# clean_field = [float(x[13]) for x in data_rows if x[13] != 'Missing']
-# average = sum(clean_field)/len(clean_field)
-# ```
-# 
-# What would you do with the average column at the end, so that you could also report the average coverage? In your opinion would the solution to this problem be at all linked to the way that the “Missing” entries were handled?
-# 
-# ```
-# coverage_values = [float(x[-1].strip("%"))/100]
-# ```
-# 
-# It might or might not be done at the same time as the "Missing" values are handled. 
-
-# ### LAB
-# The file of weather observations provided here is by month and then by county for the state of Illinois from 1979 to 2011. Write the code to process this file extract the data for Chicago (Cook County) into a single CSV  or spreadsheet file. This will include replacing the “Missing” strings with empty strings, and translating the percentage to a decimal. You may also consider what fields are repetitive and can be either omitted or stored elsewhere. The proof that you’ve got it right will be in loading the file into a spreadsheet. You can download a solution with the book’s source code.
-
-# ## Chapter 22
-
-# ### TRY THIS: RETRIEVING A FILE
-# If you were working with the data file above and wanted to break each line into separate fields, how might you do that? What other processing would you expect to do? Try writing some code to retrieve this file and calculating the average annual rainfall, or for more of challenge, the average maximum and minimum temperature for each year.
-
-# In[43]:
-
+"""
 
 import requests 
 response = requests.get("http://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/heathrowdata.txt")
@@ -1437,14 +1123,6 @@ if __name__ == '__main__':
     write_to_csv(values, "forecast.csv")
     print(values)
 
-
-# 
-# ### LAB: TRACK CURIOSITY’S WEATHER
-# Use the API described above in section 22.2 to gather a weather history of Curiosity’s stay on Mars for a month. Transform the data so that you can load it into a spreadsheet and graph it.  For a version of this project see the book’s source code.
-
-# In[ ]:
-
-
 import json
 import csv
 import requests
@@ -1457,22 +1135,22 @@ for sol in range(1830, 1863):
     weather = result['results'][0]
     print(weather)
     csv.DictWriter(open("mars_weather.csv", "a"), list(weather.keys())).writerow(weather)
-    
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
-
+print("------------------------------------------------------------")  # 60個
 # ## Chapter 23
-
-# ### TRY THIS: CREATING AND MODIFYING TABLES
-# Using sqlite3 write the code that creates a database table for the Illinois weather data we loaded from a flat file in section 21.2. Suppose that we had similar data for more states, and wanted to store store more information about the states themselves – how could you modify your database to use a related table to store the state information?
-
-
+print("------------------------------------------------------------")  # 60個
 
 import sqlite3
+
 conn = sqlite3.connect("datafile.db")
 
 cursor = conn.cursor()
 
+# 建立表單 weather
 cursor.execute("""create table weather (id integer primary key, state text, state_code text,
               year_text text, year_code text, avg_max_temp real,  max_temp_count integer, 
               max_temp_low real, max_temp_high real,
@@ -1488,7 +1166,6 @@ conn.commit()
 
 # ### TRY THIS: USING AN ORM
 # Using the database from section 22.3 above, write a SQLAlchemy class to map to the data table and use it to read the records from the table. 
-
 
 from sqlalchemy import create_engine, select, MetaData, Table, Column, Integer, String, Float
 from sqlalchemy.orm import sessionmaker
@@ -1522,81 +1199,10 @@ result = session.execute(select([weather]))
 for row in result:
     print(row)
 
-
-
-
-# ### TRY THIS: MODIFYING A DATABASE WITH ALEMBIC
-# Experiment with creating an alembic upgrade that adds a state table to your database, with columns for id, state name, and abbreviation. Upgrade and downgrade. What other changes would be needed if you were going to use the state table along with the existing data table?
-# 
-# You would need to create a table or perhaps a field relating states to the other tables, and populate it with state data.
-
-# ### QUICK CHECK : USES OF KEY:VALUE STORES
-# What sorts of data and applications would benefit most from a key:value store like Redis? 
-# 
-# * Quick look up of data
-# * Caching
-
-# ### QUICK CHECK: USES OF MONGODB
-# Thinking back over the various data samples we’ve seen so far and other types of data in your experience, can you come up with any that you think would be well suited to being stored in a database like MongoDB? Are there others that would clearly not be suited, and if so, why not? 
-# 
-# Data that comes in large and/or more loosely organized "chunks" is suited to MondoDB. For example the contents of a web page, or document, etc.
-# 
-# Data with a specific structure is better suited to relational data. The weather data we've seen is a good example.
-
-# ### LAB: CREATE A DATABASE
-# Choose one of the datasets we’ve discussed in the past few chapters, and decide which type of database would be best to store that data. Create that database and write the code to load the data into it. Then choose the 2 most common and/or likely types of search criteria and write the code to retrieve both single and multiple matching records.
-# 
-# (no answer)
-
+print("------------------------------------------------------------")  # 60個
 # ## Chapter 24
+print("------------------------------------------------------------")  # 60個
 
-# ### TRY THIS: USING JUPYTER NOTEBOOK
-# Enter some code in the notebook and experiment with running it. Check out the Edit, Cell, and Kernel menus to see what options are there. Once you have a little code running, use the Kernel menu to restart the kernel, then repeat your steps,  then use the cell menu to rerun the code in all of the cells.
-# 
-# (no answer)
-
-# ### TRY THIS: CLEANING DATA WITH AND WITHOUT PANDAS
-# Experiment with the operations mentioned above. Once the final column has been converted to a fraction, can you think of a way to convert it back to string with the trailing percent sign?
-# 
-# ```
-# temp[17] = temp[17].mul(100)
-# temp[17] = temp[17].astype(str) + '%'
-# ```
-# 
-# For contrast, load the same data into a plain Python list of using the csv module, and apply the same changes using just plain Python.  
-# 
-# Use list comprehensions. So to convert the last column from a string to a fraction, use something like:
-# ```
-# data = [x[:-1]+[float(x[-1].strip("%"))*100] for x in data]
-# ```
-
-# ### QUICK CHECK: MERGING DATA SETS
-# How would you go about actually merging to data sets like the above in Python?
-# 
-# If you were sure you had exactly the same number of items in each set and that they were in the right order, you could use the `zip()` function. Otherwise, you could create a dictionary with the keys being something common between the two data sets and then append the date by key from both sets.
-
-# ### QUICK CHECK: SELECTING IN PYTHON
-# What Python code structure would you use to select only rows meeting certain conditions? 
-# 
-# Probably a list comprehension:
-# ```
-# selected = [x for x in old_list if <x meets selection criteria>]
-# ```
-
-# ### TRY THIS: GROUPING AND AGGREGATING
-# Experiment with pandas and the data above. Can you get the calls and amounts by both team member and month?
-# 
-# ```
-# calls_revenue[['Team member','Month', 'Calls', 'Amount']].groupby(['Team member','Month']).sum())
-# ```
-
-# ### TRY THIS: PLOTTING
-# Plot a line graph of the monthly average amount per call. 
-
-# In[56]:
-
-
-get_ipython().run_line_magic('matplotlib', 'inline')
 import pandas as pd
 import numpy as np
 

@@ -9,6 +9,49 @@ import sys
 import pandas as pd
 
 print("------------------------------------------------------------")  # 60個
+
+print("先建立sqlite資料庫")
+
+import sqlite3
+conn = sqlite3.connect("datafile.db")
+
+cursor = conn.cursor()
+
+# 建立表單 weather
+cursor.execute("""create table weather (id integer primary key, state text, state_code text,
+              year_text text, year_code text, avg_max_temp real,  max_temp_count integer, 
+              max_temp_low real, max_temp_high real,
+              avg_min_temp real, min_temp_count integer,
+              min_temp_low real, min_temp_high real,
+              heat_index real, heat_index_count integer, 
+              heat_index_low real, heat_index_high real,
+              heat_index_coverage text)
+              """)
+conn.commit()
+conn.close()
+
+print("使用sqlalchemy連線到 sqlite資料庫")
+
+from sqlalchemy import create_engine, select, MetaData, Table, Column, Integer, String, Float
+from sqlalchemy.orm import sessionmaker
+
+dbPath = 'datafile.db'
+engine = create_engine('sqlite:///%s' % dbPath)
+
+
+# NG TBD
+metadata = MetaData(engine)
+# weather  = Table('weather', metadata, 
+
+Session = sessionmaker(bind=engine)
+session = Session()
+result = session.execute(select([weather]))
+for row in result:
+    print(row)
+
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
 # 3.7 SQLAlchemy与常用数据库的连接
 print("------------------------------------------------------------")  # 60個
 
