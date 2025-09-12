@@ -3,11 +3,17 @@ import pandas as pd
 
 
 def get_price(url):
+    print('get_price')
     data = requests.get(url)  # GET請求
+    print('data')
+    print(data)
     data_prices = data.json()["stats"]  # 解析json格式，並取出'status'對應到的值
+    print('222')
     df = pd.DataFrame(data_prices)  # 將list轉為dataframe
+    print('333')
     df.columns = ["datetime", "twd"]  # 設定欄索引名稱
     df["datetime"] = pd.to_datetime(df["datetime"], unit="ms")  # 將毫秒轉為時間日期格式
+    print('444')
     df.index = df["datetime"]  # 設定列索引
     return df
 
@@ -65,6 +71,8 @@ import matplotlib.pyplot as plt
 
 url = "https://www.coingecko.com/price_charts/1/twd/90_days.json"
 bitcoin = get_price(url)
+print('bitcoin')
+print(bitcoin)
 
 total = 0
 for i in range(0, 2000, 100):

@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import crawler_module as m
 import pandas as pd
 import mpl_finance as mpf
-import talib
+# import talib
 import time
 
 all_list = []

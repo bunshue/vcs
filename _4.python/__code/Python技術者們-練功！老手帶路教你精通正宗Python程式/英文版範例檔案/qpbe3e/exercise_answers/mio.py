@@ -31,3 +31,22 @@ def clear_file(file="capture_file.txt"):
          given file"""
     f = open(file, 'w')
     f.close()
+
+
+
+# mio_test.py
+
+# import mio
+
+def main():
+    capture_output("myfile.txt")
+    print("hello")
+    print(1 + 3)
+    restore_output()
+    
+    print_file("myfile.txt")
+    
+    
+if __name__ == '__main__':
+    main()
+
