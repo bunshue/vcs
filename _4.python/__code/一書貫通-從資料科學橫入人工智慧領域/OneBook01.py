@@ -208,7 +208,8 @@ print(cc)
 # ## 3.6 使用pandas读写数据
 
 # pandas可以读取文本文件、json、数据库、Excel等文件
-# 使用read_csv方法读取以逗号分隔的文本文件作为DataFrame，其它还有类似read_table, read_excel, read_html, read_sql等等方法
+# 使用read_csv方法读取以逗号分隔的文本文件作为DataFrame，
+# 其它还有类似read_table, read_excel, read_html, read_sql等等方法
 
 one = pd.read_csv("data/One.csv", sep=",")  # same
 one = pd.read_csv("data/One.csv")
