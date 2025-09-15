@@ -8,16 +8,19 @@ sqlite基本範例 一個 基本款
 改正（UPDATE）
 在電腦程式語言中是一連串常見的動作行為
 
-	idx	英文名	中文名	體重
-第1筆 : 5	horse	馬	36
-第2筆 : 1	mouse	鼠	3
-第3筆 : 4	elephant象	100
-第4筆 : 9	ox		48
-第5筆 : 2	sheep		66
-第6筆 : 8	snake		16
-第7筆 : 3	tiger		33
-第8筆 : 7	rabbit		8
-第9筆 : 6	tiger		240
+	 idx	英文名	中文名	體重
+第 1筆 :  1	mouse	米老鼠	3
+第 2筆 :  2	ox	班尼牛	48
+第 3筆 :  3	tiger	跳跳虎	33
+第 4筆 :  4	rabbit	彼得兔	8
+第 5筆 :  5	dragon	逗逗龍	38
+第 6筆 :  6	snake	貪吃蛇	16
+第 7筆 :  7	horse	草泥馬	31
+第 8筆 :  8	goat	喜羊羊	29
+第 9筆 :  9	monkey	山道猴	22
+第10筆 : 10	chicken	肯德雞	5
+第11筆 : 11	dog	貴賓狗	17
+第12筆 : 12	pig	佩佩豬	42
 
 # sqlite基本範例 其他
 # 同一個資料庫內 可以放多個table table名稱不同即可
@@ -136,8 +139,6 @@ version = sqlite3.sqlite_version_info
 print("目前 sqlite3 版本 :", version)
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 print("建立資料庫 + INSERT INTO 加入資料 + 讀取資料 + DROP")
 
@@ -165,22 +166,22 @@ conn.commit()  # 更新
 # 資料寫2項 有填序號
 sqlstr = "INSERT INTO table01 (idx, 英文名, 中文名, 體重) VALUES (?, ?, ?, ?)"
 
-x = (5, "horse", "馬", 48)  # tuple格式
+x = (1, "mouse", "米老鼠", 3)  # tuple格式
 cursor.execute(sqlstr, x)
-x = (1, "mouse", "鼠", 66)  # tuple格式
+x = (2, "ox", "班尼牛", 48)  # tuple格式
 cursor.execute(sqlstr, x)
 
 # 資料寫5項 沒有填序號
 sqlstr = "INSERT INTO table01 (英文名, 體重) VALUES (?, ?)"
-x = ("ox", 48)  # tuple格式
+x = ("tiger", 33)  # tuple格式
 cursor.execute(sqlstr, x)
-x = ("sheep", 66)  # tuple格式
+x = ("rabbit", 8)  # tuple格式
+cursor.execute(sqlstr, x)
+x = ("dragon", 38)  # tuple格式
 cursor.execute(sqlstr, x)
 x = ("snake", 16)  # tuple格式
 cursor.execute(sqlstr, x)
-x = ("tiger", 33)  # tuple格式
-cursor.execute(sqlstr, x)
-x = ("tiger", 240)  # tuple格式
+x = ("horse", 31)  # tuple格式
 cursor.execute(sqlstr, x)
 
 # DROP TABLE 刪除表單 如果存在的話
@@ -781,16 +782,16 @@ cursor.execute(sqlstr)
 
 print("有設定序號 123")
 sqlstr = "INSERT INTO table01 (idx, 中文名, 體重) VALUES (?, ?, ?)"
-x = (123, "Paul", 32)  # tuple格式
+x = (123, "喜羊羊", 29)  # tuple格式
 cursor.execute(sqlstr, x)
 
 print("沒有設定序號, 系統自動遞增")
 sqlstr = "INSERT INTO table01 (中文名, 體重) VALUES (?, ?)"
 
-x = ("Allen", 25)  # tuple格式
+x = ("山道猴", 22)  # tuple格式
 cursor.execute(sqlstr, x)
 
-x = ("Teddy", 23)  # tuple格式
+x = ("肯德雞", 5)  # tuple格式
 cursor.execute(sqlstr, x)
 
 conn.commit()  # 更新
@@ -831,7 +832,7 @@ conn.execute(sqlstr)
 # INSERT INTO 新增資料
 sqlstr = "INSERT INTO table01 (login_name, login_date, login_time) VALUES (?, ?, ?)"
 
-nn = "david"
+nn = "肯德雞"
 dd = datetime.date.today()
 tt = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
 x = (nn, dd, tt)  # tuple格式
@@ -839,7 +840,7 @@ conn.execute(sqlstr, x)
 
 time.sleep(0.3456)  # 過了一段時間
 
-nn = "elisa"
+nn = "貴賓狗"
 dd = datetime.date.today()
 tt = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
 x = (nn, dd, tt)  # tuple格式
@@ -1248,15 +1249,32 @@ print("讀取資料庫的所有資料")
 
 db_filename_singMatch = "data/singMatch.db"
 
+print("------------------------------")  # 30個
+
+print("讀取資料庫")
+table_name = "參賽者"
+print(table_name)
+show_data_base_contents(db_filename_singMatch, table_name)
+
+table_name = "音色"
+print(table_name)
+show_data_base_contents(db_filename_singMatch, table_name)
+
+table_name = "技巧"
+print(table_name)
+show_data_base_contents(db_filename_singMatch, table_name)
+
+table_name = "儀態"
+print(table_name)
+show_data_base_contents(db_filename_singMatch, table_name)
+
+print("------------------------------")  # 30個
+
 conn = sqlite3.connect(db_filename_singMatch)  # 建立資料庫連線
 
 print("編號\t姓名\t音色50\t技巧30\t儀態20\t總分")
 
-sqlstr = "SELECT 參賽者.編號,參賽者.姓名,音色.音色50, \
-       技巧.技巧30,儀態.儀態20 FROM 參賽者 \
-       INNER JOIN 音色 ON 音色.編號 = 參賽者.編號 \
-       INNER JOIN 技巧 ON 技巧.編號 = 參賽者.編號 \
-       INNER JOIN 儀態 ON 儀態.編號 = 參賽者.編號"
+sqlstr = "SELECT 參賽者.編號, 參賽者.姓名, 音色.音色50, 技巧.技巧30, 儀態.儀態20 FROM 參賽者 INNER JOIN 音色 ON 音色.編號 = 參賽者.編號 INNER JOIN 技巧 ON 技巧.編號 = 參賽者.編號 INNER JOIN 儀態 ON 儀態.編號 = 參賽者.編號"
 
 rows = conn.execute(sqlstr)
 

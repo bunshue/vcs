@@ -135,26 +135,6 @@ def cs_body():
     df_from_sheet1 = pd.read_excel(xlsx, 'Sheet1')
         ''')
 
-    # Read and Write to SQL Query or Database Table
-    col1.subheader('Read and Write to SQL Query or Database Table')
-    col1.code('''
-    from sqlalchemy import create_engine
-    engine = create_engine('sqlite:///:memory:')
-
-    # Read from SQL Query
-    pd.read_sql("SELECT * FROM my_table;", engine)
-
-    # Read from Database Table
-    pd.read_sql_table('my_table', engine)
-
-    # Read from SQL Query using read_sql_query()
-    pd.read_sql_query("SELECT * FROM my_table;", engine)
-
-    # Write DataFrame to SQL Table
-    pd.to_sql('myDf', engine)
-        ''')
-
-
     # Getting Elements from Series and DataFrame
     col1.subheader('Getting Elements')
     col1.code('''

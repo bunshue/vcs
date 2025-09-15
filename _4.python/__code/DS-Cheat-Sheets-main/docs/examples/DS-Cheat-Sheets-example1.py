@@ -713,24 +713,6 @@ xlsx = pd.ExcelFile('file.xls')
 df_from_sheet1 = pd.read_excel(xlsx, 'Sheet1')
 """
 
-""" SQL
-# SQL Query
-
-from sqlalchemy import create_engine
-engine = create_engine('sqlite:///:memory:')
-
-# Read from SQL Query
-pd.read_sql("SELECT * FROM my_table;", engine)
-
-# Read from Database Table
-pd.read_sql_table('my_table', engine)
-
-# Read from SQL Query using read_sql_query()
-pd.read_sql_query("SELECT * FROM my_table;", engine)
-
-# Write DataFrame to SQL Table
-pd.to_sql('myDf', engine)
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

@@ -10,15 +10,44 @@ import pandas as pd
 
 print("------------------------------------------------------------")  # 60個
 
+
+db_filename = "../sqlite/data/animals.sqlite"
+dbPath = "datafile.db"
+
+from sqlalchemy import create_engine
+
+engine = create_engine("sqlite:///%s" % db_filename)
+
+# Read from SQL Query
+df = pd.read_sql("SELECT * FROM animals;", engine)
+print(df)
+
+# Read from Database Table
+df = pd.read_sql_table("animals", engine)
+print(df)
+
+# Read from SQL Query using read_sql_query()
+df = pd.read_sql_query("SELECT * FROM animals;", engine)
+print(df)
+
+# Write DataFrame to SQL Table
+# NG pd.to_sql('myDf', engine)
+
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("先建立sqlite資料庫")
 
 import sqlite3
-conn = sqlite3.connect("datafile.db")
 
+conn = sqlite3.connect("datafile.db")
 cursor = conn.cursor()
 
 # 建立表單 weather
-cursor.execute("""create table weather (id integer primary key, state text, state_code text,
+cursor.execute(
+    """CREATE TABLE IF NOT EXISTS weather (id integer primary key, state text, state_code text,
               year_text text, year_code text, avg_max_temp real,  max_temp_count integer, 
               max_temp_low real, max_temp_high real,
               avg_min_temp real, min_temp_count integer,
@@ -26,22 +55,32 @@ cursor.execute("""create table weather (id integer primary key, state text, stat
               heat_index real, heat_index_count integer, 
               heat_index_low real, heat_index_high real,
               heat_index_coverage text)
-              """)
+              """
+)
 conn.commit()
 conn.close()
 
 print("使用sqlalchemy連線到 sqlite資料庫")
 
-from sqlalchemy import create_engine, select, MetaData, Table, Column, Integer, String, Float
+from sqlalchemy import (
+    create_engine,
+    select,
+    MetaData,
+    Table,
+    Column,
+    Integer,
+    String,
+    Float,
+)
 from sqlalchemy.orm import sessionmaker
 
-dbPath = 'datafile.db'
-engine = create_engine('sqlite:///%s' % dbPath)
+dbPath = "datafile.db"
+engine = create_engine("sqlite:///%s" % dbPath)
 
 
 # NG TBD
 metadata = MetaData(engine)
-# weather  = Table('weather', metadata, 
+# weather  = Table('weather', metadata,
 
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -60,52 +99,56 @@ print("------------------------------------------------------------")  # 60個
 from sqlalchemy import create_engine
 from sqlalchemy.ext.automap import automap_base
 
-engine = create_engine('mysql://root:123@127.0.0.1:3306/test?charset=utf8') 
+engine = create_engine("mysql://root:123@127.0.0.1:3306/test?charset=utf8")
 
-pd.read_sql('select * from data', engine)
+pd.read_sql("select * from data", engine)
 
 
 sys.exit()
 
-pd.read_sql('data',engine)
+pd.read_sql("data", engine)
 
-df = pd.DataFrame([[5, '永辉超市', 11], [6, '华夏幸福', 34]], 
-      columns=['ID', 'stockname', 'price'], 
-      index=range(2))
+df = pd.DataFrame(
+    [[5, "永辉超市", 11], [6, "华夏幸福", 34]],
+    columns=["ID", "stockname", "price"],
+    index=range(2),
+)
 print(df)
 
-df.to_sql('data', engine, index=False, if_exists='append')
+df.to_sql("data", engine, index=False, if_exists="append")
 
-pd.read_sql('data',engine)
+pd.read_sql("data", engine)
 
-df.to_sql('t_data', engine, index=False, if_exists='append')
+df.to_sql("t_data", engine, index=False, if_exists="append")
 
-pd.read_sql('t_data',engine)
+pd.read_sql("t_data", engine)
 
-df1 = pd.DataFrame(np.arange(20000).reshape(10000, 2), index=range(10000), columns=['key', 'value'])
-r = df1.to_dict('records')
+df1 = pd.DataFrame(
+    np.arange(20000).reshape(10000, 2), index=range(10000), columns=["key", "value"]
+)
+r = df1.to_dict("records")
 
-df1.to_sql('f_data', engine, index=False, if_exists='append')
-pd.read_sql('f_data', engine).tail()
+df1.to_sql("f_data", engine, index=False, if_exists="append")
+pd.read_sql("f_data", engine).tail()
 
-#下面这两句话就完成了ORM映射，Base.classes.XXXX就是映射的类  
-# Base.metadata.tables['XXX']就是相应的表  
-Base = automap_base()  
-Base.prepare(engine, reflect = True)  
-f_data = Base.metadata.tables['f_data']
+# 下面这两句话就完成了ORM映射，Base.classes.XXXX就是映射的类
+# Base.metadata.tables['XXX']就是相应的表
+Base = automap_base()
+Base.prepare(engine, reflect=True)
+f_data = Base.metadata.tables["f_data"]
 
-engine.execute(f_data.insert(), r)  
-pd.read_sql('f_data', engine).tail()
+engine.execute(f_data.insert(), r)
+pd.read_sql("f_data", engine).tail()
 
- 
+
 # ----------------------------------------------------------------
 
 
-#讀寫資料庫
+# 讀寫資料庫
 
 from sqlalchemy import create_engine
 
-engine = create_engine('sqlite:///data/aqi/aqi.db')
+engine = create_engine("sqlite:///data/aqi/aqi.db")
 
 try:
     engine.execute("DROP TABLE aqi")
@@ -123,8 +166,6 @@ df_aqi = pd.read_sql("aqi", engine)
 
 df_polluted = pd.read_sql("select * from aqi where PM2_5 > 500", engine)
 print(len(df_polluted))
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -152,5 +193,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
