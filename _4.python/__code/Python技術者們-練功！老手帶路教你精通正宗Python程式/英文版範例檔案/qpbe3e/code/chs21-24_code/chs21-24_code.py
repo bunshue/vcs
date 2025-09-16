@@ -5,8 +5,6 @@ import random
 
 print('------------------------------------------------------------')	#60個
 
-
-
 21.2.1 Text encoding – ASCII, Unicode, and others
 
 >>> open('test.txt', 'wb').write(bytes([65, 66, 67, 255, 192,193]))
@@ -265,116 +263,6 @@ Sunshine data taken from an automatic Kipp & Zonen sensor marked with a #, other
 
 
 
-23.4.1 SQLAlchemy
-
->>> from sqlalchemy import create_engine, select, MetaData, Table, Column, Integer, String
->>> from sqlalchemy.orm import sessionmaker
-
-
->>> dbPath = 'datafile2.db'
->>> engine = create_engine('sqlite:///%s' % dbPath)
->>> metadata = MetaData(engine)
->>> people  = Table('people', metadata, 
-...                 Column('id', Integer, primary_key=True),
-...                 Column('name', String),
-...                 Column('count', Integer),
-...                )
->>> Session = sessionmaker(bind=engine)
->>> session = Session()
->>> metadata.create_all(engine)
-
-
->>> people_ins = people.insert().values(name='Bob', count=1)
->>> str(people_ins)
-'INSERT INTO people (name, count) VALUES (?, ?)'
->>> session.execute(people_ins)
-<sqlalchemy.engine.result.ResultProxy object at 0x7f126c6dd438>
->>> session.commit()
-
-
->>> session.execute(people_ins, [
-...     {'name': 'Jill', 'count':15},
-...     {'name': 'Joe', 'count':10}
-... ])
-<sqlalchemy.engine.result.ResultProxy object at 0x7f126c6dd908>
->>> session.commit()
->>> result = session.execute(select([people]))
->>> for row in result:
-...     print(row)
-... 
-(1, 'Bob', 1)
-(2, 'Jill', 15)
-(3, 'Joe', 10)
-
-
->>> result = session.execute(select([people]).where(people.c.name == 'Jill'))
->>> for row in result:
-...     print(row)
-... 
-(2, 'Jill', 15)
-
-
->>> result = session.execute(people.update().values(count=20).where(people.c.name == 'Jill'))
->>> session.commit()
->>> result = session.execute(select([people]).where(people.c.name == 'Jill'))
->>> for row in result:
-...     print(row)
-... 
-(2, 'Jill', 20)
->>> 
-
-
->>> from sqlalchemy.ext.declarative import declarative_base
->>> Base = declarative_base()
->>> class People(Base):
-...     __tablename__ = "people"
-...     id = Column(Integer, primary_key=True)
-...     name = Column(String)
-...     count = Column(Integer)
-...
->>> results = session.query(People).filter_by(name='Jill')
->>> for person in results:
-...     print(person.id, person.name, person.count)
-... 
-2 Jill 20
-
-
->>> new_person = People(name='Jane', count=5)
->>> session.add(new_person)
->>> session.commit()
->>> 
->>> results = session.query(People).all()
->>> for person in results:
-...     print(person.id, person.name, person.count)
-... 
-1 Bob 1
-2 Jill 20
-3 Joe 10
-4 Jane 5
-
-
->>> jill = session.query(People).filter_by(name='Jill').first()
->>> jill.name
-'Jill'
->>> jill.count = 22
->>> session.add(jill)
->>> session.commit()
->>> results = session.query(People).all()
->>> for person in results:
-...     print(person.id, person.name, person.count)
-... 
-1 Bob 1
-2 Jill 22
-3 Joe 10
-4 Jane 5
-
-
->>> jane = session.query(People).filter_by(name='Jane').first()
->>> session.delete(jane)
->>> session.commit()
->>> jane = session.query(People).filter_by(name='Jane').first()
->>> print(jane)
-None
 
 23.6 Key:value stores with Redis
 

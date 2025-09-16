@@ -529,11 +529,6 @@ c.NotebookApp.extra_template_paths = [os.path.join(ipythondir,'templates') ]
 # The secret key with which notebooks are signed.
 # c.NotebookNotary.secret = ''
 
-# The sqlite file in which to store notebook signatures. By default, this will
-# be in your IPython profile. You can set it to ':memory:' to disable sqlite
-# writing to the filesystem.
-# c.NotebookNotary.db_file = u''
-
 # The file where the secret key is stored.
 # c.NotebookNotary.secret_file = u''
 

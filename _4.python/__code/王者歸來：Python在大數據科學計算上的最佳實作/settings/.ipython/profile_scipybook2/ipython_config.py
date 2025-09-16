@@ -365,32 +365,6 @@ c = get_config()
 # Values of 1 or less effectively disable caching.
 # c.HistoryManager.db_cache_size = 0
 
-# Path to file to use for SQLite history database.
-# 
-# By default, IPython will put the history database in the IPython profile
-# directory.  If you would rather share one history among profiles, you can set
-# this value in each, so that they are consistent.
-# 
-# Due to an issue with fcntl, SQLite is known to misbehave on some NFS mounts.
-# If you see IPython hanging, try setting this to something on a local disk,
-# e.g::
-# 
-#     ipython --HistoryManager.hist_file=/tmp/ipython_hist.sqlite
-# c.HistoryManager.hist_file = u''
-
-# Options for configuring the SQLite connection
-# 
-# These options are passed as keyword args to sqlite3.connect when establishing
-# database conenctions.
-# c.HistoryManager.connection_options = {}
-
-# enable the SQLite history
-# 
-# set enabled=False to disable the SQLite history, in which case there will be
-# no stored history, no SQLite connection, and no background saving thread.
-# This may be necessary in some threaded environments where IPython is embedded.
-# c.HistoryManager.enabled = True
-
 #------------------------------------------------------------------------------
 # ProfileDir configuration
 #------------------------------------------------------------------------------

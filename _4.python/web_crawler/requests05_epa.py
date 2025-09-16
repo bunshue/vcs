@@ -244,21 +244,7 @@ print("------------------------------------------------------------")  # 60個
 
 time.sleep(3)
 
-db_filename = "tmp_DataBasePM25.sqlite"
 md5_filename = "tmp_old_md5.txt"
-
-conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-cursor = conn.cursor()  # 建立 cursor 物件
-
-# 建立一個資料表
-sqlstr = """
-CREATE TABLE IF NOT EXISTS TablePM25 (
-"no" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
-"SiteName" TEXT NOT NULL,
-"PM25" INTEGER
-)
-"""
-cursor.execute(sqlstr)
 
 print("以md5檢查網站內容是否更新")
 
@@ -315,10 +301,6 @@ print("舊md5 : ", old_md5)
 if md5 != old_md5:
     print("資料已更新...")
 
-    # 刪除資料表內容
-    conn.execute("delete from TablePM25")
-    conn.commit()
-
     # 欄位都是小寫的
     jsondata = html.json()["records"]
 
@@ -344,20 +326,10 @@ if md5 != old_md5:
             continue
         PM25 = 0 if site["pm2.5"] == "" else int(site["pm2.5"])
         print("站名:{}   PM2.5={}".format(SiteName, PM25))
-        # 新增一筆記錄
-        sqlstr = "insert into TablePM25 values({},'{}',{})".format(n, SiteName, PM25)
-        cursor.execute(sqlstr)
         n += 1
-        conn.commit()  # 主動更新
 
 else:
     print("資料未更新，從資料庫讀取...")
-    cursor = conn.execute("select *  from TablePM25")
-    rows = cursor.fetchall()
-    for row in rows:
-        print("站名:{}   PM2.5={}".format(row[1], row[2]))
-
-conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
@@ -368,3 +340,4 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+

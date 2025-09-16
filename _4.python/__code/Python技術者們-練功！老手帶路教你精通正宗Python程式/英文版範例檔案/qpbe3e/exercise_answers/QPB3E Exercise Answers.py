@@ -760,66 +760,6 @@ for sol in range(1830, 1863):
 """
 
 print("------------------------------------------------------------")  # 60個
-# ## Chapter 23
-print("------------------------------------------------------------")  # 60個
-
-import sqlite3
-
-conn = sqlite3.connect("datafile.db")
-
-cursor = conn.cursor()
-
-# 建立表單 weather
-cursor.execute("""CREATE TABLE IF NOT EXISTS weather (id integer primary key, state text, state_code text,
-              year_text text, year_code text, avg_max_temp real,  max_temp_count integer, 
-              max_temp_low real, max_temp_high real,
-              avg_min_temp real, min_temp_count integer,
-              min_temp_low real, min_temp_high real,
-              heat_index real, heat_index_count integer, 
-              heat_index_low real, heat_index_high real,
-              heat_index_coverage text)
-              """)
-conn.commit()
-
-# You could add a state table and only store each state's ID field in the weather database.
-
-# ### TRY THIS: USING AN ORM
-# Using the database from section 22.3 above, write a SQLAlchemy class to map to the data table and use it to read the records from the table. 
-
-from sqlalchemy import create_engine, select, MetaData, Table, Column, Integer, String, Float
-from sqlalchemy.orm import sessionmaker
-
-dbPath = 'datafile.db'
-engine = create_engine('sqlite:///%s' % dbPath)
-""" NG
-metadata = MetaData(engine)
-weather  = Table('weather', metadata, 
-                Column('id', Integer, primary_key=True),
-                Column("state", String),
-                Column("state_code", String),
-                Column("year_text", String ),
-                Column("year_code", String), 
-                Column("avg_max_temp", Float),
-                Column("max_temp_count", Integer),
-                Column("max_temp_low", Float),
-                Column("max_temp_high", Float),
-                Column("avg_min_temp", Float), 
-                Column("min_temp_count", Integer),
-                Column("min_temp_low", Float), 
-                Column("min_temp_high", Float),
-                Column("heat_index", Float), 
-                Column("heat_index_count", Integer),
-                Column("heat_index_low", Float), 
-                Column("heat_index_high", Float),
-                Column("heat_index_coverage", String)
-                )
-Session = sessionmaker(bind=engine)
-session = Session()
-result = session.execute(select([weather]))
-for row in result:
-    print(row)
-"""
-print("------------------------------------------------------------")  # 60個
 # ## Chapter 24
 print("------------------------------------------------------------")  # 60個
 
