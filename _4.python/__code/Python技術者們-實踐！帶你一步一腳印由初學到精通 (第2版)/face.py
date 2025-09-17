@@ -1,8 +1,6 @@
 import cv2
 import time
-import sqlite3
 import requests
-from datetime import datetime
 
 # 偵測正面人臉 haarcascade_frontalface_default.xml
 xml_filename = "D:/_git/vcs/_4.python/opencv/data/_xml/haarcascades/haarcascade_frontalface_default.xml"
@@ -99,8 +97,6 @@ def face_who(img):
         for p in persons:  # 取得清單中 personId 的姓名資訊
             if personId == p["personId"]:
                 print("歡迎:", p["name"])
-                db_save("mydatabase.sqlite", p["name"])  # 存入資料庫
-                db_check("mydatabase.sqlite")  # 查看資料庫
 
 
 def person_list(gid):
@@ -112,41 +108,6 @@ def person_list(gid):
         return response.json()
     else:
         print("查詢人員失敗:", response.json)  # 印出創建失敗原因
-
-
-def db_save(db, name):
-    print('db_save')
-    connect = sqlite3.connect(db)  # 與資料庫連線
-    # 新建 mytable 資料表  (如果尚未建立的話)
-    sql = 'CREATE TABLE IF NOT EXISTS mytable \
-            ("姓名" TEXT, "打卡時間" TEXT)'
-    connect.execute(sql)  # 執行 SQL 語法
-    # 取得現在時間
-    save_time = str(datetime.now().strftime("%Y-%m-%d %H.%M.%S"))
-    # 新增一筆資料的 SQL 語法
-    sql = f'insert into mytable values("{name}", "{save_time}")'
-    connect.execute(sql)  # 執行 SQL 語法
-    connect.commit()  # 更新資料庫
-    connect.close()  # 關閉資料庫
-
-
-def db_check(db):
-    print('db_check')
-    try:
-        connect = sqlite3.connect(db)  # 與資料庫連線
-        connect.row_factory = sqlite3.Row  # 設定成 Row 物件
-        sql = "select * from mytable"  # 選取資料表中所有資料的 SQL 語法
-        cursor = connect.execute(sql)  # 執行 SQL 語法得到 cursor 物件
-        dataset = cursor.fetchall()  # 取得所有資料
-        col1 = dataset[0].keys()[0]  # 取得第一筆資料的第一個欄位名稱
-        col2 = dataset[0].keys()[1]  # 取得第一筆資料的第二個欄位名稱
-        print(f"{col1}\t{col2}")
-        print("----\t  ----")
-        for data in dataset:
-            print(f"{data[0]}\t{data[1]}")
-    except:
-        print("讀取資料庫錯誤")
-    connect.close()
 
 
 # -----------------------------------#
