@@ -165,7 +165,7 @@ def get_words(line):
     return "\n".join(words) + "\n"
      
     
-with open("moby_01.txt") as infile, open("moby_01_clean.txt", "w") as outfile:
+with open("moby_01.txt") as infile, open("tmp_moby_01_clean.txt", "w") as outfile:
     for line in infile:
         cleaned_line = clean_line(line)
                 
@@ -193,7 +193,7 @@ def word_stats(word_count):
     return most_common, least_common
 
 moby_words = []
-with open('moby_01_clean.txt') as infile:
+with open('tmp_moby_01_clean.txt') as infile:
     for word in infile:
         if word.strip():
             moby_words.append(word.strip())
@@ -346,12 +346,12 @@ print("------------------------------------------------------------")  # 60個
 import mio
 
 def main():
-    mio.capture_output("myfile.txt")
+    mio.capture_output("tmp_myfile.txt")
     print("hello")
     print(1 + 3)
     mio.restore_output()
     
-    mio.print_file("myfile.txt")
+    mio.print_file("tmp_myfile.txt")
     
 """
 if __name__ == '__main__':
@@ -690,19 +690,19 @@ response = requests.get("https://data.cityofchicago.org/resource/6zsd-86xi.json?
 
 crime_data = json.loads(response.text)
 
-with open("crime_all.json", "w") as outfile:
+with open("tmp_crime_all.json", "w") as outfile:
     json.dump(crime_data, outfile)
 
-with open("crime_series.json", "w") as outfile:
+with open("tmp_crime_series.json", "w") as outfile:
     for record in crime_data:
         json.dump(record, outfile)
         outfile.write("\n")
 
-with open("crime_all.json") as infile:
+with open("tmp_crime_all.json") as infile:
     crime_data_2 = json.load(infile)
 
 crime_data_3 = []
-with open("crime_series.json") as infile:
+with open("tmp_crime_series.json") as infile:
     for line in infile:
         crime_data_3 = json.loads(line)
 
@@ -742,7 +742,7 @@ def write_to_csv(data, outfilename):
 if __name__ == '__main__':
     html = read_html("forecast.html")
     values = parse_html(html)
-    write_to_csv(values, "forecast.csv")
+    write_to_csv(values, "tmp_forecast.csv")
     print(values)
 
 import json

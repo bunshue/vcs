@@ -2934,15 +2934,15 @@ print("------------------------------------------------------------")  # 60個
 
 import cv2
 
-img = cv2.imread('data/digits.png',0)
+img = cv2.imread("data/digits.png", 0)
 
-cv2.imshow('image', img)
+cv2.imshow("image", img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 # 數組分割
 
-cells = [np.hsplit(row,100) for row in np.vsplit(img,50)]
+cells = [np.hsplit(row, 100) for row in np.vsplit(img, 50)]
 
 
 print("------------------------------------------------------------")  # 60個

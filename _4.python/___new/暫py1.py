@@ -2308,7 +2308,7 @@ git.exe pull --progress -v --no-rebase "origin"
 
 Python套件之數據結構 numpy pandas之seris dataFrame
 網頁資料四大資料結構 csv json xml html
-常用儲存資料結構 csv json sqlite
+常用儲存資料結構 csv json
 
 使用webAPI取得網路資料
 1. 公開API

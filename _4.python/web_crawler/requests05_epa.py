@@ -26,7 +26,6 @@ import pandas as pd
 import urllib3  # 外部的packages
 import certifi  # https的連線方式
 import hashlib
-import sqlite3
 import ast
 from bs4 import BeautifulSoup
 

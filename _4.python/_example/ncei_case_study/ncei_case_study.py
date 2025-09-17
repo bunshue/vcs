@@ -1,8 +1,6 @@
 """
 美國國家環境資訊中心
 National Centers for Environmental Information，簡稱：NCEI
-
-
 """
 
 import sys
@@ -146,54 +144,6 @@ print(type(weather_data))
 
 print('前10筆')
 print(weather_data[:10])
-
-
-# We now have all the weather records, not just the temperature records, parsed and in our list. 
-
-
-
-# ### Saving the weather data in a database (Optional)
-# 
-# At this point we can save all of the weather records (and the station records and inventory records as well, if we want) into a database.
-# This would let us come back in later sessions and use the same data without having to go the hassle of fetching and parsing the data again. 
-# 
-# As an example, the code below would be how we could save the weather data into a SQLite3 database.
-
-
-import time
-db_filename = 'tmp_weather_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
-
-import sqlite3
-
-conn = sqlite3.connect(db_filename)
-cursor = conn.cursor()
-
-# 建立表單
-create_weather = """
-CREATE TABLE weather(
-id      text NOT NULL,
-year    integer NOT NULL,
-month   integer NOT NULL,
-element text NOT NULL,
-max     real,
-min     real,
-mean    real,
-count   integer
-)
-"""
-cursor.execute(create_weather)
-conn.commit()
-
-# INSERT INTO
-for record in weather_data:
-    cursor.execute("""INSERT INTO weather (id, year, month, element, max, min, mean, count) values (?,?,?,?,?,?,?,?) """, record)
-
-conn.commit()
-
-# Once we have the data stored we could retreive it from the database with code like the below, which fetches only the TMAX records.
-cursor.execute("""select * from weather where element='TMAX' order by year, month""")
-tmax_data = cursor.fetchall()
-print(tmax_data[:5])
 
 # ### Selecting and graphing data
 # 

@@ -68,10 +68,107 @@ def show_data_base_contents(db_filename, table_name):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("資料庫 轉 df")
+
+db_filename_animals = "data/animals_old.sqlite"
+
+print("讀取資料庫")
+table_name = "animals"
+show_data_base_contents(db_filename_animals, table_name)
+
+conn = sqlite3.connect(db_filename_animals)  # 建立資料庫連線
+cursor = conn.cursor()  # 建立 cursor 物件
+
+# 查詢資料
+cursor = conn.execute("SELECT * FROM animals")
+rows = cursor.fetchall()  # 讀取全部資料成元組串列
+print(rows)
+
+# cursor.description 包含 欄位資訊
+print("cursor.description")
+print(cursor.description)
+
+print("資料庫轉df")  # 用資料庫的資料建立 DataFrame
+df = pd.DataFrame(rows, columns=[f[0] for f in cursor.description])
+print("df")
+print(df)
+
+print("讀取資料轉df, 讀取全部資料")
+df = pd.read_sql("SELECT * FROM animals", conn)
+print("df")
+print(df)
+
+conn.commit()  # 更新
+conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
-import sqlite3
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+print("csv 轉 sqlite")
+
+csv_filename = "D:/_git/vcs/_4.python/write_read_file/_3.csv/data/animals.csv"
+db_filename = (
+    "tmp_db06_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + "_csv.sqlite"
+)
+
+df = pd.read_csv(csv_filename)
+df.columns = df.columns.str.strip()
+
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+df.to_sql("animals", conn, if_exists="replace")
+# df.to_sql("animals", conn)
+conn.close()  # 關閉資料庫連線
+
+print("------------------------------")  # 30個
+
+print("讀取資料轉df")
+
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+
+print("讀取資料轉df 1, 讀取3筆資料")
+df = pd.read_sql("SELECT * FROM animals LIMIT 3", conn)
+print(df)
+
+print("讀取資料轉df 2, 讀取3筆資料, 依體重排序(預設升冪)")
+df = pd.read_sql("SELECT * FROM animals ORDER BY 體重 LIMIT 3", conn)
+print(df)
+
+print("讀取資料轉df 3, 讀取3筆資料")
+df = pd.read_sql("SELECT * FROM animals LIMIT 3", conn, index_col="index")
+print(df)
+
+print("讀取資料轉df 4")
+df = pd.read_sql("SELECT * FROM animals LIMIT 3", conn, index_col=["index", "英文名"])
+print(df)
+
+print("讀取資料轉df 5")
+df = pd.read_sql_query("SELECT * FROM animals;", conn)
+print(df.head())
+
+print("讀取資料轉df 6")
+df = pd.read_sql_query("SELECT * FROM animals WHERE 體重>25;", conn)
+print(df)
+
+print("讀取資料轉df 7")
+df = pd.read_sql_query('SELECT * FROM animals WHERE 中文名="跳跳虎";', conn)
+print(df)
+
+conn.close()  # 關閉資料庫連線
+
+print("------------------------------")  # 30個
+
+print("讀取資料庫")
+table_name = "animals"
+show_data_base_contents(db_filename, table_name)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 数据整合和数据清洗
