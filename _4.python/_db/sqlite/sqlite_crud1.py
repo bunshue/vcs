@@ -1400,3 +1400,19 @@ sqlstr = 'UPDATE table01 \SET 電話 = "{0}" \WHERE 編號 = {1}'.format(newTel,
 """
 SELECT name FROM table01  WHERE type IN ('table','view') AND name NOT LIKE 'sqlite_%' ORDER BY 1
 """
+
+
+# SELECT + 條件
+create_weather = """
+CREATE TABLE weather(
+id      text NOT NULL,
+year    integer NOT NULL,
+month   integer NOT NULL,
+element text NOT NULL,
+max     real,
+min     real,
+mean    real,
+count   integer
+)
+"""
+cursor.execute("""select * from weather where element='TMAX' order by year, month""")

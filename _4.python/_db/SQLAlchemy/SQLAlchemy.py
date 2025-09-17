@@ -3,7 +3,10 @@ SQLAlchemy
 SQLAlchemy是為Python程式語言提供的開源SQL工具包及對象關係對映器（ORM）
 """
 
+import os
 import sys
+import time
+import shutil
 import sqlite3
 import numpy as np
 import pandas as pd
@@ -23,7 +26,7 @@ from sqlalchemy import Float
 
 print("------------------------------------------------------------")  # 60個
 
-db_filename = "../sqlite/data/animals.sqlite"
+db_filename = "data/animals.sqlite"
 
 # engine = create_engine("sqlite:///%s" % db_filename, echo=False) # 預設為不顯示詳細訊息
 engine = create_engine("sqlite:///%s" % db_filename)
@@ -230,6 +233,16 @@ print("------------------------------------------------------------")  # 60個
 # 3.7 SQLAlchemy与常用数据库的连接
 print("------------------------------------------------------------")  # 60個
 
+db_filename_animals_old = "data/animals.sqlite"
+db_filename_animals = (
+    "tmp_animals_" + time.strftime("%H%M%S", time.localtime()) + ".sqlite"
+)
+
+if not os.path.exists(db_filename_animals):
+    shutil.copy(db_filename_animals_old, db_filename_animals)
+    print(db_filename_animals)
+
+
 # 本节代码需要连接数据库，如果你电脑上没有数据库，运行会报错
 
 # engine = create_engine("mysql://root:123@127.0.0.1:3306/test?charset=utf8")
@@ -238,7 +251,8 @@ db_filename = "datafile.db"
 engine = create_engine("sqlite:///%s" % db_filename)
 engine = create_engine("sqlite:///data/aqi/aqi.db")
 
-db_filename = "../sqlite/data/animals.sqlite"
+# db_filename = "../sqlite/data/animals.sqlite"
+db_filename = db_filename_animals
 engine = create_engine("sqlite:///%s" % db_filename)
 
 pd.read_sql("select * from table01", engine)
@@ -309,6 +323,8 @@ except:
 
 str_cols = ["Position", "City", "Level"]
 
+"""
+read_aqi_files 在其他地方
 for df in read_aqi_files("data/aqi/*.csv"):
     for col in str_cols:
         df[col] = df[col].str.decode("utf8")
@@ -318,6 +334,7 @@ df_aqi = pd.read_sql("aqi", engine)
 
 df_polluted = pd.read_sql("select * from aqi where PM2_5 > 500", engine)
 print(len(df_polluted))
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
