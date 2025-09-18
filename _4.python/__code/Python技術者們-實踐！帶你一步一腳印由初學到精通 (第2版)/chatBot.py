@@ -7,6 +7,7 @@ QA = {"你是誰": "我是萱萱", "聽不懂": "請再說一次問題"}
 print("請說話")
 question = m.bot_listen()  # 打開耳朵聽問題
 print(question)
+
 if question in QA:  # 如果問題存於 QA 字典中
     answer = QA[question]
     m.bot_speak(answer, "zh-tw")

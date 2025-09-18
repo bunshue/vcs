@@ -1370,10 +1370,6 @@ count   integer
 cursor.execute("""SELECT * FROM weather WHERE element='TMAX' ORDER BY year, month""")
 
 
-
-cmd = 'SELECT 日期, 收盤價 FROM daily_price WHERE 證券代號 = "{:s}" ORDER BY 日期 DESC LIMIT {:d};'.format(stock_id, period)
-
-
-
-
-
+cmd = 'SELECT 日期, 收盤價 FROM daily_price WHERE 證券代號 = "{:s}" ORDER BY 日期 DESC LIMIT {:d};'.format(
+    stock_id, period
+)

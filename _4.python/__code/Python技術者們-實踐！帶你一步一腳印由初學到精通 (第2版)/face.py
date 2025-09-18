@@ -13,7 +13,7 @@ headers = {}  # GET 的請求標頭
 
 
 def face_init(b, k):
-    print('face_init')
+    print("face_init")
     global base, key, headers_stream, headers_json, headers
     base = b  # api
     key = k
@@ -33,14 +33,14 @@ pid = ""  # 成員 Id
 
 
 def face_use(g, p):
-    print('face_use')
+    print("face_use")
     global gid, pid
     gid = g
     pid = p
 
 
 def face_add(img):  # 建立自訂函式
-    print('face_add')
+    print("face_add")
     # 將 img 編碼為 jpg 格式，[1]返回資料, [0]返回是否成功
     img_encode = cv2.imencode(".jpg", img)[1]
     img_bytes = img_encode.tobytes()  # 再將資料轉為 bytes, 此即為要傳送的資料
@@ -56,7 +56,7 @@ def face_add(img):  # 建立自訂函式
 
 
 def face_detect(img):
-    print('face_detect')
+    print("face_detect")
     detect_url = f"{base}/detect?returnFaceId=true"  # 臉部偵測的請求路徑
     # 將 img 編碼為 jpg 格式，[1]返回資料, [0]返回是否成功
     img_encode = cv2.imencode(".jpg", img)[1]
@@ -72,7 +72,7 @@ def face_detect(img):
 
 
 def face_identify(faceId):
-    print('face_identify')
+    print("face_identify")
     idy_url = f"{base}/identify"  # 臉部偵測的請求路徑
     body = str({"personGroupId": gid, "faceIds": [faceId]})
     response = requests.post(idy_url, headers=headers_json, data=body)  # 臉部驗證請求 POST
@@ -87,7 +87,7 @@ def face_identify(faceId):
 
 
 def face_who(img):
-    print('face_who')
+    print("face_who")
     faceId = face_detect(img)  # 執行臉部偵測, 取得 faceId
     personId = face_identify(faceId)  # 用 faceId 進行臉部辨識, 找出群組中最像的人, 取得 personId
     if personId == None:
@@ -100,7 +100,7 @@ def face_who(img):
 
 
 def person_list(gid):
-    print('person_list')
+    print("person_list")
     pson_url = f"{base}/persongroups/{gid}/persons"  # 查看群組人員的請求路徑
     response = requests.get(pson_url, headers=headers)  # HTTP GET
     if response.status_code == 200:
@@ -112,7 +112,7 @@ def person_list(gid):
 
 # -----------------------------------#
 def face_shot(function):
-    print('face_shot')
+    print("face_shot")
     isCnt = False  # 用來判斷是否正在進行倒數計時中
     face_detector = cv2.CascadeClassifier(xml_filename)  # 建立臉部辨識物件
     capture = cv2.VideoCapture(0)  # 開啟編號 0 的攝影機
