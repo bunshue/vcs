@@ -3,6 +3,7 @@ import sqlite3
 db_filename = 'D:/_git/vcs/_big_files/data.sqlite3'
 
 def get_data(fname, stock_id, period):
+    print("讀取資料庫, 代號 :", stock_id, "資料數 :", period)
     conn = sqlite3.connect(fname)
     c = conn.cursor()
     cmd = 'SELECT 日期, 收盤價 FROM daily_price WHERE 證券代號 = "{:s}" ORDER BY 日期 DESC LIMIT {:d};'.format(stock_id, period)
