@@ -2419,29 +2419,6 @@ def output(*strings):
 
 ------------------------------------------------------------
 
-# json轉dict
-
-import json
-from urllib.request import urlopen
-from html.entities import html5
-
-entities_url = 'http://dev.w3.org/html5/spec/entities.json'
-
-def get_json(url):
-    # Download the json file from the url and returns a decoded object.
-    with urlopen(url) as f:
-        data = f.read().decode('utf-8')
-    return json.loads(data)
-
-def create_dict(entities):
-    # Create the html5 dict from the decoded json object.
-    new_html5 = {}
-    for name, value in entities.items():
-        new_html5[name.lstrip('&')] = value['characters']
-    return new_html5
-
-new_html5 = create_dict(get_json(entities_url))
-
 ------------------------------------------------------------
         try:
             # RFC 1952 requires the FNAME field to be Latin-1. Do not

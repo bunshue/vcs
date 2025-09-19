@@ -25,7 +25,6 @@ import pandas as pd
 
 import urllib3  # 外部的packages
 import certifi  # https的連線方式
-import hashlib
 import ast
 from bs4 import BeautifulSoup
 
@@ -243,10 +242,6 @@ print("------------------------------------------------------------")  # 60個
 
 time.sleep(3)
 
-md5_filename = "tmp_old_md5.txt"
-
-print("以md5檢查網站內容是否更新")
-
 DataID = "AQX_P_432"
 format = "json"
 limit = "10"
@@ -280,55 +275,32 @@ print(url)
 html = requests.get(url)
 # print(html)
 
-# 判斷網頁是否更新
-md5 = hashlib.md5(html.text.encode("utf-8-sig")).hexdigest()
-print("新md5 : ", md5)
+# 欄位都是小寫的
+jsondata = html.json()["records"]
 
-old_md5 = ""
-if os.path.exists(md5_filename):
-    print("111")
-    with open(md5_filename, "r") as f:
-        print("111a")
-        old_md5 = f.read()
+"""
+# debug
+#print(jsondata)
+print(len(jsondata))
+n = 1
+for site in jsondata:
+    print(f'縣市: {site["county"]}')
+    print(f'測站名稱: {site["sitename"]}')
+    print(f'AQI: {site["aqi"]}')
+    print(f'PM2.5: {site["pm2.5"]}')
+    n += 1
+    if n == 10:
+        break;
+"""
 
-with open(md5_filename, "w") as f:
-    print("222")
-    f.write(md5)
-
-print("舊md5 : ", old_md5)
-
-if md5 != old_md5:
-    print("資料已更新...")
-
-    # 欄位都是小寫的
-    jsondata = html.json()["records"]
-
-    """
-    # debug
-    #print(jsondata)
-    print(len(jsondata))
-    n = 1
-    for site in jsondata:
-        print(f'縣市: {site["county"]}')
-        print(f'測站名稱: {site["sitename"]}')
-        print(f'AQI: {site["aqi"]}')
-        print(f'PM2.5: {site["pm2.5"]}')
-        n += 1
-        if n == 10:
-            break;
-    """
-
-    n = 1
-    for site in jsondata:
-        SiteName = site["sitename"]
-        if site["pm2.5"] == "ND":
-            continue
-        PM25 = 0 if site["pm2.5"] == "" else int(site["pm2.5"])
-        print("站名:{}   PM2.5={}".format(SiteName, PM25))
-        n += 1
-
-else:
-    print("資料未更新，從資料庫讀取...")
+n = 1
+for site in jsondata:
+    SiteName = site["sitename"]
+    if site["pm2.5"] == "ND":
+        continue
+    PM25 = 0 if site["pm2.5"] == "" else int(site["pm2.5"])
+    print("站名:{}   PM2.5={}".format(SiteName, PM25))
+    n += 1
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

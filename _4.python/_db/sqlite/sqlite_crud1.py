@@ -1,12 +1,13 @@
 """
 sqlite基本範例 一個 基本款
 
-增刪查改（英語：CRUD），全稱
+增查改刪（英語：CRUD）
 增加（CREATE）
-刪除（DELETE）
-查詢（READ）
+查詢（READ, SELECT）
 改正（UPDATE）
-在電腦程式語言中是一連串常見的動作行為
+刪除（DELETE）
+
+* : 全部欄位 cf 指定欄位
 
 	 idx	英文名	中文名	體重
 第 1筆 :  1	mouse	米老鼠	3
@@ -164,9 +165,10 @@ conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
 
 # 建立表單
-# PRIMARY KEY 主鍵 不可重複
+# PK : PRIMARY KEY 主鍵, 不可重複
+# PRIMARY KEY (xxxxx), 指名某項不可重複
+# NN : NOT NULL 不得為空
 # 序號 自動遞增 不可重複
-# NOT NULL 表示一定要填寫, 若無此條件, 則可以不寫
 # UNIQUE 表示不可重複
 # CHECK 多了檢查條件
 sqlstr = """
@@ -295,7 +297,7 @@ print("SELECT 取得資料 大全")
 print("------------------------------------------------------------")  # 60個
 
 # SELECT * FROM table01           : 取得所有資料
-# SELECT * FROM table01 WHERE 條件: 取得所有資料 + 條件
+# SELECT * FROM table01 WHERE 條件: 取得所有資料 + 條件, WHERE目標條件式
 
 db_filename = db_filename_animals
 print("讀取資料庫")
@@ -353,18 +355,19 @@ show_result()
 print("------------------------------")  # 30個
 print("------------------------------")  # 30個
 
-print("SELECT + WHERE 取得資料 + 條件")
+print("SELECT + WHERE 取得資料 + 條件, 名字完全符合")
 
 # name = "貪吃蛇"
 # sqlstr = 'SELECT * FROM table01 WHERE 中文名 = "{0}"'.format(name) # same
 sqlstr = "SELECT * FROM table01 WHERE 中文名 = ?"
 name = ("貪吃蛇",)  # tuple格式, 一項的tuple寫法
-cursor.execute(sqlstr, name)
+cursor = conn.execute(sqlstr, name)
+print("中文名=", name[0], "的 :")
 show_result()
 
 print("------------------------------")  # 30個
 
-print("SELECT + WHERE 取得資料 + 條件")
+print("SELECT + WHERE 取得資料 + 條件, 體重 > 30")
 
 # min_weight = 30
 # sqlstr = "SELECT * FROM table01 WHERE 體重 = {0}".format(min_weight)  # same
@@ -374,6 +377,8 @@ cursor = conn.execute(sqlstr, min_weight)
 show_result()
 
 print("------------------------------")  # 30個
+
+print("SELECT + WHERE 取得資料 + 條件, 名字部分符合")
 
 search_name = "rabbit"
 # 無 LIKE, 一定要符合大小寫
@@ -399,15 +404,6 @@ show_result()
 print("------------------------------")  # 30個
 
 cursor = conn.execute("SELECT * FROM table01 WHERE 中文名 LIKE :name", {"name": "跳跳虎"})
-show_result()
-
-print("------------------------------")  # 30個
-
-name = "snake"
-sqlstr = "SELECT * FROM table01 WHERE 英文名 = '{}'".format(name)
-cursor = conn.execute(sqlstr)
-
-print("英文名=snake的 :")
 show_result()
 
 print("------------------------------")  # 30個
@@ -448,35 +444,55 @@ print("體重>=30的 :")
 show_result()
 
 print("------------------------------")  # 30個
+
+print("英文名 有A且有B的")
+cursor = conn.execute("SELECT * FROM table01 WHERE 英文名 LIKE '%a%' AND 英文名 LIKE '%b%'")
+show_result()
+
+print("英文名 有A或有B的")
+cursor = conn.execute("SELECT * FROM table01 WHERE 英文名 LIKE '%a%' OR 英文名 LIKE '%b%'")
+show_result()
+
+print("英文名 有A無B的")
+cursor = conn.execute(
+    "SELECT * FROM table01 WHERE 英文名 LIKE '%a%' AND 英文名 NOT LIKE '%b%'"
+)
+show_result()
+
+
+print("------------------------------")  # 30個
 print("------------------------------")  # 30個
 
 print("SELECT + LIMIT 取得資料 + 讀取個數")
 # 限制讀取個數
-# SELECT 什麼 FROM 表單 LIMIT 10         #只讀前10筆
-# SELECT * FROM table01 LIMIT 3, 5        #從第3筆開始讀5筆資料(從0起算)
-# SELECT * FROM table01 LIMIT 5 OFFSET 3  #讀5筆資料出來, 從第3筆開始讀 (從0起算)
+# SELECT 什麼 FROM 表單 LIMIT 5          # SELECT * : 取得所有資料, 限制數量
+# SELECT * FROM table01 LIMIT 5          # SELECT * : 取得所有資料, 限制數量
+# SELECT * FROM table01 LIMIT 3, 5       #從第3筆開始讀5筆資料(從0起算)
+# SELECT * FROM table01 LIMIT 5 OFFSET 3 #讀5筆資料出來, 從第3筆開始讀 (從0起算)
 
+offset = 3
+limit = 5
 print("只讀前5筆")
-sqlstr = "SELECT * FROM table01 LIMIT 5"  # SELECT * : 取得所有資料, 限制10筆
+sqlstr = "SELECT * FROM table01 LIMIT {:d}".format(limit)  # SELECT * : 取得所有資料, 限制數量
 cursor = conn.execute(sqlstr)
 show_result()
 
 print("從第3筆開始讀5筆資料(從0起算)")
-sqlstr = "SELECT * FROM table01 LIMIT 3, 5"
+sqlstr = "SELECT * FROM table01 LIMIT {:d}, {:d}".format(offset, limit)
 cursor = conn.execute(sqlstr)
 show_result()
 
 print("讀5筆資料出來, 從第3筆開始讀 (從0起算)")
-sqlstr = "SELECT * FROM table01 LIMIT 5 OFFSET 3"
+sqlstr = "SELECT * FROM table01 LIMIT {:d} OFFSET {:d}".format(limit, offset)
 cursor = conn.execute(sqlstr)
 show_result()
 
 print("------------------------------")  # 30個
 print("------------------------------")  # 30個
 
-print("SELECT + ORDER BY 取得資料 + 排序 升冪")
+print("SELECT + ORDER BY 取得資料 + 排序 升冪 ASC")
 
-print("依 體重 升冪")
+print("依 體重 升冪 ASC")
 # SELECT * : 取得資料 排列 依 體重 升冪
 sqlstr = "SELECT * FROM table01 ORDER BY 體重"
 cursor = conn.execute(sqlstr)
@@ -485,7 +501,7 @@ show_result()
 print("------------------------------")  # 30個
 
 print("SELECT + ORDER BY 取得資料 + 排序 降冪 DESC")
-print("依 體重 降冪")
+print("依 體重 降冪 DESC")
 
 # SELECT * : 取得資料 排列 依 體重 升冪
 # cursor = conn.execute("SELECT * FROM table01 ORDER BY 體重;")  #由小到大, 升冪
@@ -514,15 +530,6 @@ show_result()
 print("------------------------------")  # 30個
 
 conn.close()  # 關閉資料庫連線
-
-print("------------------------------")  # 30個
-
-print("讀取資料庫")
-table_name = "table01"
-show_data_base_contents(db_filename, table_name)
-
-# print('aaaa')
-# sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("UPDATE 更新資料 大全")
@@ -935,8 +942,8 @@ print("------------------------------")  # 30個
 conn = sqlite3.connect(db_filename_singMatch)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
 
-""" 測試SELECT
-
+"""
+print("測試UNION ST")
 sqlstr = "SELECT * FROM 參賽者"
 rows = conn.execute(sqlstr)
 for _ in rows:
@@ -947,6 +954,7 @@ rows = conn.execute(sqlstr)
 for _ in rows:
     print(_)
 
+print("測試UNION")
 
 # 直排
 # "SELECT 1 UNION SELECT 2 UNION SELECT 3"
@@ -956,8 +964,9 @@ for _ in rows:
     print(_)
 
 conn.close()  # 關閉資料庫連線
-"""
 
+print("測試UNION SP")
+"""
 print("讀取資料庫")
 table_name = "參賽者"
 print(table_name)
@@ -1136,7 +1145,7 @@ CREATE TABLE IF NOT EXISTS table01
 # 序號
 # AUTOINCREMENT 自動遞增
 # UNIQUE 不可重複
-# NOT NULL 不可不填
+# NOT NULL 不得為空
 # CHECK(age >= 18) 條件檢查
 
 建立表單 CREATE TABLE
@@ -1349,27 +1358,3 @@ newSex = "M"
 sqlstr = 'UPDATE table01 \SET 性別 = "{0}" \WHERE 編號 = {1}'.format(newSex, selId)
 sqlstr = 'UPDATE table01 \SET 電話 = "{0}" \WHERE 編號 = {1}'.format(newTel, selId)
 """
-
-"""
-SELECT name FROM table01  WHERE type IN ('table','view') AND name NOT LIKE 'sqlite_%' ORDER BY 1
-"""
-
-# SELECT + 條件
-create_weather = """
-CREATE TABLE weather(
-id      text NOT NULL,
-year    integer NOT NULL,
-month   integer NOT NULL,
-element text NOT NULL,
-max     real,
-min     real,
-mean    real,
-count   integer
-)
-"""
-cursor.execute("""SELECT * FROM weather WHERE element='TMAX' ORDER BY year, month""")
-
-
-cmd = 'SELECT 日期, 收盤價 FROM daily_price WHERE 證券代號 = "{:s}" ORDER BY 日期 DESC LIMIT {:d};'.format(
-    stock_id, period
-)

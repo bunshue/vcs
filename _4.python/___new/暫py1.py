@@ -1096,21 +1096,6 @@ plt.show()  #將圖表呈現出來
 
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  #也可設mingliu或DFKai-SB
 
-'''
-#import ast
-import json
-data = dict()
-with open('data\password.txt','r', encoding = 'UTF-8-sig') as f:
-   filedata = f.read()
-   print(filedata)
-#   filedata = filedata.replace("\'", "\"")
-#   data = ast.literal_eval(filedata)
-   data = json.loads(filedata)
-
-print(type(data),data)
-
-'''
-
 格式化列印語法    
 print("{}已被儲存完畢".format(sys.argv[1]))
 score = int(input('請輸入第{}號的成績:(-1結束)'.format(no)))
@@ -1148,12 +1133,6 @@ print("無錢號 : " + "cos(x^2)")
 print("有錢號 : " + "$cos(x^2)$")
   
 ------------------------------------------------------------
-
-response = requests.post(xxxx)
-result = response.json()
-print(result[0]['translations'][0]['text'])
-print(result)	#列印結果
-
 
 fig = plt.figure()
 
