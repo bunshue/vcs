@@ -2837,8 +2837,6 @@ S_ISREG(self.stat().st_mode)
 
 ------------------------------------------------------------
 
-from collections.abc import MutableMapping
-from collections import OrderedDict as _default_dict, ChainMap as _ChainMap
 import functools
 import io
 import itertools

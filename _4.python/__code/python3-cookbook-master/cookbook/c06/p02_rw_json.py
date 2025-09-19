@@ -8,38 +8,10 @@ import json
 from collections import OrderedDict
 
 
-class JSONObject:
-    def __init__(self, d):
-        self.__dict__ = d
-
-
 class Point:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-
-
-def serialize_instance(obj):
-    d = {'__classname__': type(obj).__name__}
-    d.update(vars(obj))
-    return d
-
-
-def unserialize_object(d):
-    clsname = d.pop('__classname__', None)
-    if clsname:
-        cls = classes[clsname]
-        obj = cls.__new__(cls)  # Make instance without calling __init__
-        for key, value in d.items():
-            setattr(obj, key, value)
-            return obj
-    else:
-        return d
-
-# Dictionary mapping names to known classes
-classes = {
-    'Point': Point
-}
 
 
 def rw_json():
@@ -66,18 +38,10 @@ def rw_json():
     print(data)
 
     # 解码为自定义对象
-    # data = json.loads(s, object_hook=JSONObject)
-    # print(data.name)
-    # print(data.shares)
+    data = json.loads(s)
 
     print(json.dumps(data))
     print(json.dumps(data, indent=4))
-
-    p = Point(2, 3)
-    s = json.dumps(p, default=serialize_instance)
-    print(s)
-    a = json.loads(s, object_hook=unserialize_object)
-    print(a)
 
 
 if __name__ == '__main__':
