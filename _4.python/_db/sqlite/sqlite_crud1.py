@@ -98,84 +98,6 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("編譯指令 PRAGMA")
-import sqlite3
-
-db_filename = "D:/_git/vcs/_4.python/_db/sqlite/data/checkin.sqlite"
-
-conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-cursor = conn.cursor()  # 建立 cursor 物件
-
-# 取值
-cursor.execute("pragma user_version")  # user_version 用戶自定義版號
-rows = cursor.fetchall()  # 讀取全部資料成元組串列
-print("用戶自定義版號")
-print(rows)
-
-cursor.execute("pragma schema_version")  # 當前資料庫模式版本號
-rows = cursor.fetchall()  # 讀取全部資料成元組串列
-print("當前資料庫模式版本號")
-print(rows)
-
-cursor.execute("pragma page_size")
-rows = cursor.fetchall()  # 讀取全部資料成元組串列
-print("Page Size")
-print(rows)
-
-cursor.execute("pragma cache_size")
-rows = cursor.fetchall()  # 讀取全部資料成元組串列
-print("Cache Size")
-print(rows)
-
-"""設定值
-cursor.execute("pragma user_version = 3")# user_version 用戶自定義版號
-cursor.execute("pragma schema_version = 7")# 當前資料庫模式版本號
-PRAGMA cache_size = 2000;    -- 设置缓存大小为 2000 KB
-"""
-
-"""
-功能：获取或设置当前数据库的模式版本号。
-PRAGMA schema_version;       -- 获取当前模式版本
-PRAGMA schema_version = 2;   -- 设置模式版本为 2
-"""
-
-# 取得表單資訊
-table_name = "table01"
-cursor.execute('PRAGMA table_info("{0}")'.format(table_name))
-
-table_info = cursor.fetchall()  # 讀取全部資料成元組串列
-print("table_info")
-length = len(table_info)
-print("共有", length, "個欄位")
-for i in range(length):
-    print("第" + str(i + 1) + "個欄位 : ", table_info[i])
-    ii = table_info[i][0]
-    nn = table_info[i][1]
-    tt = table_info[i][2]
-    t1 = table_info[i][3]
-    t2 = table_info[i][4]
-    t3 = table_info[i][5]
-    print("序號 :", ii)
-    print("欄名 :", nn)
-    print("型態 :", tt)
-    print("資料1 :", t1)
-    print("資料2 :", t2)
-    print("資料3 :", t3)
-
-print(len(table_info))
-print(table_info)
-
-"""
-column_names = [str(table_info[1]) for table_info in cursor.fetchall()]
-print('表單欄位 :', column_names)
-
-其他
-columns = conn.execute(f"PRAGMA table_info('{table_name}');").fetchall()
-"""
-
-
-conn.close()  # 關閉資料庫連線
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -421,7 +343,7 @@ print("測試 executemany, 一次執行多個指令")
 # 一次執行多個指令
 cursor.executemany(sqlstr, animals)  # 一次執行多個指令
 print("新增資料行數 :", cursor.rowcount)
-"""
+
 print("------------------------------")  # 30個
 
 print("測試 例外 的寫法 資料重複")
@@ -452,7 +374,7 @@ except sqlite3.IntegrityError:
     print("無法重複輸入相同的資料3")
 
 print("------------------------------")  # 30個
-"""
+
 # DROP TABLE 刪除表單 如果存在的話
 # sqlstr = "DROP TABLE IF EXISTS table01"
 # cursor.execute(sqlstr)
@@ -929,6 +851,82 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("PRAGMA 編譯指令")
+
+db_filename = "D:/_git/vcs/_4.python/_db/sqlite/data/checkin.sqlite"
+
+conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+cursor = conn.cursor()  # 建立 cursor 物件
+
+# 取值
+cursor.execute("pragma user_version")  # user_version 用戶自定義版號
+rows = cursor.fetchall()  # 讀取全部資料成元組串列
+print("用戶自定義版號 :", rows)
+
+cursor.execute("pragma schema_version")  # 當前資料庫模式版本號
+rows = cursor.fetchall()  # 讀取全部資料成元組串列
+print("當前資料庫模式版本號 :", rows)
+
+cursor.execute("pragma page_size")
+rows = cursor.fetchall()  # 讀取全部資料成元組串列
+print("Page Size :", rows)
+
+cursor.execute("pragma cache_size")
+rows = cursor.fetchall()  # 讀取全部資料成元組串列
+print("Cache Size :", rows)
+
+"""設定值
+cursor.execute("pragma user_version = 3")# user_version 用戶自定義版號
+cursor.execute("pragma schema_version = 7")# 當前資料庫模式版本號
+PRAGMA cache_size = 2000;    -- 设置缓存大小为 2000 KB
+"""
+
+"""
+功能：获取或设置当前数据库的模式版本号。
+PRAGMA schema_version;       -- 获取当前模式版本
+PRAGMA schema_version = 2;   -- 设置模式版本为 2
+"""
+
+# 取得表單資訊
+table_name = "table01"
+cursor.execute('PRAGMA table_info("{0}")'.format(table_name))
+
+table_info = cursor.fetchall()  # 讀取全部資料成元組串列
+print("table_info")
+length = len(table_info)
+print("共有", length, "個欄位")
+for i in range(length):
+    print("第" + str(i + 1) + "個欄位 : ", table_info[i])
+    ii = table_info[i][0]
+    nn = table_info[i][1]
+    tt = table_info[i][2]
+    t1 = table_info[i][3]
+    t2 = table_info[i][4]
+    t3 = table_info[i][5]
+    print("序號 :", ii)
+    print("欄名 :", nn)
+    print("型態 :", tt)
+    print("資料1 :", t1)
+    print("資料2 :", t2)
+    print("資料3 :", t3)
+
+print(len(table_info))
+print(table_info)
+
+"""
+column_names = [str(table_info[1]) for table_info in cursor.fetchall()]
+print('表單欄位 :', column_names)
+
+其他
+columns = conn.execute(f"PRAGMA table_info('{table_name}');").fetchall()
+"""
+
+conn.close()  # 關閉資料庫連線
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 # 取得一個資料庫內所有表單的名稱, list格式
 def get_table_names(conn):
@@ -989,8 +987,6 @@ print("------------------------------------------------------------")  # 60個
 print("讀取資料庫的所有資料")
 
 db_filename_singMatch = "data/singMatch.db"
-
-print("------------------------------")  # 30個
 
 conn = sqlite3.connect(db_filename_singMatch)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
@@ -1115,7 +1111,6 @@ show_data_base_contents(db_filename, table_name)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 '''
 # """ 資料很多 保留給 fts3 用
 
@@ -1151,9 +1146,7 @@ for row in rows:
     cloud_text += row[3]
 print(cloud_text)
 """
-
 conn.close()  # 關閉資料庫連線
-
 
 """
 print("讀取資料庫")
@@ -1161,7 +1154,6 @@ table_name = "news"
 show_data_base_contents(db_filename, table_name)
 """
 '''
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1346,16 +1338,6 @@ CREATE TABLE IF NOT EXISTS 參賽者(
 )
 """
 
-# CREATE + PK
-# 建立表單 + PRIMARY KEY 序號 自動遞增 不可重複
-sqlstr = """
-CREATE TABLE IF NOT EXISTS table01(
-id     INTEGER PRIMARY KEY AUTOINCREMENT, -- 序號(id)整數自動遞增, 可填可不填
-name   TEXT,
-gender TEXT
-)
-"""
-
 print("建立暫存檔案的方法")
 
 db_filename_books_old = "data/Books.sqlite"
@@ -1435,16 +1417,6 @@ while rows:
 fullstring = "I am {} and {} and {}".format("aaaa", "bbbb", "cccc")
 print(fullstring)
 
-
-# dddddddddddddddddddddd 可刪除檔案
-
-
-sqlstr = """
-CREATE TABLE IF NOT EXISTS table01(
-姓名     TEXT,
-打卡時間 TEXT
-)
-"""
 name = "david"
 save_time = xxxxxx
 sqlstr = f'INSERT INTO table01 VALUES ("{name}", "{save_time}")'

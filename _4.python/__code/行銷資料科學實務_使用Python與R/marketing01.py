@@ -54,16 +54,7 @@ print(predicted_output)
 
 print("------------------------------------------------------------")  # 60個
 
-#          編號              圖像大小[英吋]      解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(
-    num="預測曲線",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
+plt.figure(figsize=(12, 8))
 
 # 左圖
 plt.subplot(121)
@@ -135,9 +126,7 @@ conversions_by_contacts = (
     * 100.0
 )
 
-
 print(pd.DataFrame(conversions_by_contacts))
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -175,7 +164,6 @@ conversions_by_age = (
 )
 
 print(pd.DataFrame(conversions_by_age))
-
 
 ax = conversions_by_age.plot(
     grid=True, figsize=(12, 8), title="Conversion Rates by Age"
@@ -249,7 +237,6 @@ conversions_by_marital_status_df = pd.pivot_table(
 )
 print(conversions_by_marital_status_df)
 
-
 conversions_by_marital_status_df.columns = ["non_conversions", "conversions"]
 
 print(conversions_by_marital_status_df)
@@ -276,7 +263,6 @@ print(conversions_by_education_df)
 conversions_by_education_df.columns = ["non_conversions", "conversions"]
 
 print(conversions_by_education_df)
-
 
 conversions_by_education_df.plot(
     kind="pie",

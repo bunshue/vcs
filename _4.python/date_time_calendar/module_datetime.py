@@ -988,16 +988,11 @@ print(str(dt))
 print(dt.strftime("%Y/%m/%d %H:%M:%S"))
 
 print("------------------------------------------------------------")  # 60個
-
 """
-import datetime
-
 now = datetime.datetime.now().strftime('%H:%M:%S')
 print(now)    # 14:30:23
 
 print("------------------------------------------------------------")  # 60個
-
-import datetime
 
 while True:
     now = datetime.datetime.now().strftime('%H:%M:%S')
@@ -1006,8 +1001,6 @@ while True:
 """
 
 print("------------------------------------------------------------")  # 60個
-
-import datetime
 
 now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 print("現在時間 :", now)
@@ -1097,13 +1090,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-import datetime
-
 d = datetime.datetime(2012, 12, 20, 12, 34, 56, 78987)
-
 print(d)
-
 
 dt = datetime.datetime.now()
 ContentDate = dt.strftime("%Y%m%d")
@@ -1112,8 +1100,6 @@ ContentTime = timeStr
 
 print("ContentDate :", ContentDate)
 print("ContentTime :", ContentTime)
-
-import datetime
 
 print(datetime.date.min)
 print(datetime.date.max)
@@ -1144,8 +1130,6 @@ for j in range(9):  # 以元組的索引值取得的資料內容
 
 print("------------------------------------------------------------")  # 60個
 
-import datetime
-
 print("datetime.time 的最小值 :", datetime.time.min)
 print("datetime.time 的最大值 :", datetime.time.max)
 print("用datetime組合出一個時間")
@@ -1158,10 +1142,7 @@ print("微秒 :", t.microsecond)
 t = datetime.time(12, 34, 56, 777777)
 print("微秒 :", t.microsecond)
 
-
 print("------------------------------------------------------------")  # 60個
-
-import datetime
 
 print(datetime.date.today())
 print(datetime.datetime.now())
@@ -1170,8 +1151,6 @@ print(datetime.date(2019, 7, 2).isoweekday())
 print(datetime.date(2019, 5, 7).isocalendar())
 
 print("------------------------------------------------------------")  # 60個
-
-import datetime
 
 print(datetime.date(2018, 5, 25))
 print(datetime.time(12, 58, 41))
@@ -1204,14 +1183,10 @@ print("你要查詢的月份的最後一天是西元", check(year, month))
 
 print("------------------------------------------------------------")  # 60個
 
-import datetime
-
 now = datetime.datetime.now()  # current date and time
 
 date_time = now.strftime("%Y年%m月%d日, %H:%M:%S")
 print("現在時間 :", date_time)
-
-import datetime
 
 dt = (datetime.datetime(2006, 3, 11, 9, 15),)
 print(dt)
@@ -1233,14 +1208,8 @@ print("時間 :", currentTime)
 entrySecond = time.time()
 print("時間 :", entrySecond)
 
-
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-import datetime
 
 CurrTime = datetime.datetime.now()
 print("当前时间：%s" % CurrTime)
@@ -1254,11 +1223,10 @@ print("当前的小时：%s" % CurrTime.hour)
 print("当前的分钟：%s" % CurrTime.minute)
 print("当前的秒数：%s" % CurrTime.second)
 
-
 print(f"現在時刻 : {datetime.datetime.now()}")
 
-
-import datetime
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 CurrTime = datetime.datetime.now()
 print("当前时间：%s" % CurrTime)
@@ -1272,9 +1240,10 @@ print("当前的分钟：%s" % CurrTime.minute)
 print("当前的秒数：%s" % CurrTime.second)
 print("当前的秒数：%s" % CurrTime.microsecond)
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 取得毫秒/微秒的方法
-import datetime
 
 t = datetime.datetime.now()
 print(t)
@@ -1285,3 +1254,149 @@ sekunde = t.second + t.microsecond * 0.000001
 
 print(t)
 print(sekunde)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+01.2 常用参数
+%a 星期几的简写
+%A 星期几的全称
+%b 月分的简写
+%B 月份的全称
+%c 标准的日期的时间串
+%C 年份的后两位数字
+%d 十进制表示的每月的第几天
+%D 月/天/年
+%e 在两字符域中，十进制表示的每月的第几天
+%F 年-月-日
+%g 年份的后两位数字，使用基于周的年
+%G 年分，使用基于周的年
+%h 简写的月份名
+%H 24小时制的小时
+%I 12小时制的小时
+%j 十进制表示的每年的第几天
+%m 十进制表示的月份
+%M 十时制表示的分钟数
+%n 新行符
+%p 本地的AM或PM的等价显示
+%r 12小时的时间
+%R 显示小时和分钟：hh:mm
+%S 十进制的秒数
+%t 水平制表符
+%T 显示时分秒：hh:mm:ss
+%u 每周的第几天，星期一为第一天 （值从0到6，星期一为0）
+%U 第年的第几周，把星期日做为第一天（值从0到53）
+%V 每年的第几周，使用基于周的年
+%w 十进制表示的星期几（值从0到6，星期天为0）
+%W 每年的第几周，把星期一做为第一天（值从0到53）
+%x 标准的日期串
+%X 标准的时间串
+%y 不带世纪的十进制年份（值从0到99）
+%Y 带世纪部分的十制年份
+%z，%Z 时区名称，如果不能得到时区名称则返回空字符。
+%% 百分号
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from dateutil.relativedelta import relativedelta
+
+a = datetime.timedelta(days=2, hours=6)
+b = datetime.timedelta(hours=4.5)
+c = a + b
+print(c.days)
+print(c.seconds)
+print(c.seconds / 3600)
+print(c.total_seconds() / 3600)
+
+# 具体的日期
+a = datetime.datetime(2012, 9, 23)
+print(a + datetime.timedelta(days=10))
+
+b = datetime.datetime(2012, 12, 21)
+d = b - a
+print(d.days)
+
+now = datetime.datetime.today()
+print(now)
+print(now + datetime.timedelta(minutes=10))
+
+# 标准库中datetime模块
+a = datetime.datetime(2012, 9, 23)
+# a + datetime.timedelta(months=1)  # 这个会报错
+
+# 使用dateutil模块解决这个问题
+print(a + relativedelta(months=+1))
+print(a + relativedelta(months=+4))
+
+# Time between two dates
+b = datetime.datetime(2012, 12, 21)
+d = b - a
+print(d)
+d = relativedelta(b, a)
+print(d)
+print(d.months, d.days)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 日期时区和本地化
+
+import pytz
+
+d = datetime.datetime(2025, 9, 23, 12, 34, 56)
+print(d)
+
+# Localize the date for Chicago
+central = pytz.timezone('US/Central')
+loc_d = central.localize(d)
+print(loc_d)
+
+# Convert to Bangalore time
+bang_d = loc_d.astimezone(pytz.timezone('Asia/Kolkata'))
+print(bang_d)
+
+# 夏令时
+d = datetime.datetime(2025, 9, 23, 12, 34, 56)
+loc_d = central.localize(d)
+print(loc_d)
+later = loc_d + datetime.timedelta(minutes=30)
+print(later)
+# 使用normalize修正这个问题
+later = central.normalize(loc_d + datetime.timedelta(minutes=30))
+print(later)
+
+# 一个普遍策略是先转换为UTC时间，使用UTC时间来进行计算
+print(loc_d)
+utc_d = loc_d.astimezone(pytz.utc)
+print(utc_d)
+
+later_utc = utc_d + datetime.timedelta(minutes=30)
+# 转回到本地时间
+print(later_utc.astimezone(central))
+
+# 根据ISO 3166国家代码查找时区名称
+print(pytz.country_timezones['IN'])
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個
+
+# 3030
+print("------------------------------")  # 30個
+
