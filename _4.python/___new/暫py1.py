@@ -12,7 +12,6 @@ gamma 由 0:0.01:1 變化
 
 圖片連續顯示之
 
-
 ------------------------------------------------------------
 
 """
@@ -24,8 +23,61 @@ HSV簡單介紹分別為：
 
 ------------------------------------------------------------
 
+class Book:
+    #定義方法一：取得書籍名稱和價格
+    def setInfo(self, title, price):
+        self.title = title
+        self.price = price
+    #定義方法二：輸出書籍名稱和價格
+    def showInfo(self):
+        print('書籍名稱:{0:6s}, 價格:{1:4s}元'.format(
+            self.title, self.price))
+# 產生物件
+book1=Book()#物件1
+book1.setInfo('Python一週速成', '360')
+book1.showInfo() #呼叫方法
+book2=Book()#物件2
+book2.setInfo('網路行銷與社群行銷', '520')
+book2.showInfo()
+
+print('------------------------------------------------------------')	#60個
+
+class Date:
+    def setDate(self,birthday): #第一種方法
+        self.birthday =birthday
+    def showDate(self): #第二種方法
+        print("出生年月日:",self.birthday)
+d1 = Date()#第一個物件
+d1.setDate("民國67年7月3日")#呼叫方法時傳入字串
+d1.showDate()
+d2 = Date()#第二個物件
+d2.setDate([67,7,3])#呼叫方法時傳入串列
+
+print('------------------------------------------------------------')	#60個
+
 
 ------------------------------------------------------------
+
+"""
+    函數功能：計算獎金的百分比
+    price:產品單價
+    num:銷售數量
+    price*num:銷售業績總額
+    total:實得獎金
+"""
+def payment():
+    price = float(input("產品單價："))
+    num = float(input("銷售數量："))
+    rate = 0.35  #抽取獎金的百分比
+    total = price * num * rate
+    return price*num, total
+
+"""
+import my_module #匯入自己建立的模組
+e1 ,e2 = my_module.payment()  #呼叫自訂模組內的函數
+print("總銷售業績{},應付獎金：{}".format(e1, e2))
+"""
+print('------------------------------------------------------------')	#60個
 
 
 
@@ -137,7 +189,6 @@ jupyter 命令
 !bash
 
 
-
 import os
 from google.colab import drive
 drive.mount("/content/drive")
@@ -184,9 +235,7 @@ _4.python/ipynb/ddd0529.ipynb
 記得打勾加入Colab連結
 
 ------------------------------
-
 編輯/筆記本設定/選GPU
-
 ------------------------------
 
 """
@@ -935,13 +984,9 @@ Options/Shell_Ed/
 At Start of Run(F5) 改選 No Prompt	#預設直接存檔 直接執行
 勾選 Show line numbers in new windows	#加列號
 
-
-
 避免使用
 from <module_name> import *
-
 除非沒辦法
-
 
 sum_ = 0    # sum是內建函數, 不適合當作變數, 所以加上 _ 
 
@@ -1037,12 +1082,10 @@ cur_path = os.path.dirname(__file__) # 取得目前路徑
 
 ------------------------------------------------------------
 
-
-'''
+"""
 暫存資料 全
 
-'''
-
+"""
 ----------------常用的程式片段 ST cccc----------------
 
 import datetime

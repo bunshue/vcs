@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 """
 SS1 -- a spreadsheet-like application.
 """
@@ -7,6 +5,343 @@ SS1 -- a spreadsheet-like application.
 import os
 import re
 import sys
+
+filename = "data/menu.xml"
+
+import xml.etree.ElementTree as ET
+
+tree = ET.ElementTree(file=filename)  # 讀取xml檔案，獲取tree物件
+root = tree.getroot()  # 獲取root物件
+print(root.tag)  # 列印root物件的tag屬性('menu')
+
+# 遍歷root物件child子節點列印tag與attrib屬性
+for child in root:
+    print("tag:", child.tag, "attributes:", child.attrib)
+    # 遍歷child節點的子節點列印tag與attrib屬性
+    for grandchild in child:
+        print("\ttag:", grandchild.tag, "attributes:", grandchild.attrib)
+
+print(len(root))  # 菜單選項的數目
+print(len(root[0]))  # 早餐選項的數目
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename = "D:/_git/vcs/_1.data/______test_files1/country_data.xml"
+
+tree = ET.parse(filename)  # 解析xml檔，回傳ElementTree物件。
+root = tree.getroot()  # 獲得根節點
+# 列印根節點標籤名
+print("coutry_data.xml的根節點：" + root.tag)
+# 列印根節點的屬性和屬性值
+print("根節點標籤裡的屬性和屬性值：" + str(root.attrib))
+# 遍歷獲取子節點的標籤、屬性和屬性值
+for child in root:
+    print(child.tag, child.attrib)
+# 獲取country標籤下的子標籤的內容
+print(
+    "排名:" + root[0][0].text,
+    "國內生產總值:" + root[0][2].text,
+)
+# 把所有neighbor標籤找出來，並列印出標籤的屬性和屬性值。
+for neighbor in root.iter("neighbor"):
+    print(neighbor.attrib)
+# 使用findall()方法把滿足條件的標籤找出來反覆運算
+for country in root.findall("country"):
+    rank = country.find("rank").text
+    name = country.get("name")
+    print(name, rank)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+filename = "D:/_git/vcs/_1.data/______test_files1/country_data.xml"
+
+output_filename1 = "tmp_country_data_out1.xml"
+output_filename2 = "tmp_country_data_out2.xml"
+
+import xml.etree.ElementTree as ET
+
+tree = ET.parse(filename)  # 解析xml檔，回傳ElementTree物件
+root = tree.getroot()  # 獲得根節點
+# 遍歷修改標籤，包括增加屬性和屬性值、修改屬性值、刪除標籤
+for rank in root.iter("rank"):
+    new_rank = int(rank.text) + 1
+    rank.text = str(new_rank)
+    rank.set("updated", "yes")
+# 利用write()方法創建檔，並把xml寫入新的檔，同時指定寫入內容的編碼
+tree.write(output_filename1, encoding="utf-8")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+import xml.etree.ElementTree as ET
+
+tree = ET.parse(filename)  # 解析xml檔，回傳ElementTree物件
+root = tree.getroot()  # 獲得根節點
+# 遍歷獲得滿足條件的元素，並使用remove()指定刪除
+for country in root.findall("country"):
+    rank = int(country.find("rank").text)
+    if rank > 50:
+        root.remove(country)
+tree.write(output_filename2, encoding="utf-8")
+# 利用write()方法創建檔，並把xml寫入新的檔，指定寫入內容的編碼
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("解讀XML 專區 ST")
+print("------------------------------------------------------------")  # 60個
+
+import xml.etree.cElementTree as ET
+
+# xml字串
+xml = """\
+<?xml version="1.0"?>
+<data 名稱="e-happy">
+    <person 姓名="David">
+        <身高>183</身高>
+		<興趣>長跑</興趣>
+    </person>
+    <person 姓名="Chiou">
+        <身高>170</身高>
+		<興趣>籃球</興趣>
+    </person>
+</data>
+"""
+
+root = ET.fromstring(xml)  # 從xml字串載入並解析XML資料
+
+print("資料型別：", type(root))  # <class 'xml.etree.ElementTree.Element'>
+print("根目錄標籤：" + root.tag)  # data
+print("根目錄屬性：" + str(root.attrib))  # {'名稱': 'e-happy'}
+print("根目錄值：" + str(root.text))  # 空字串
+print("屬性內容：" + str(root.get("名稱")))  # e-happy
+root.set("名稱", "文淵閣工作室")
+print("屬性內容：" + str(root.get("名稱")))  # 文淵閣工作室
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# tree2.py
+
+import xml.etree.cElementTree as ET
+
+tree = ET.parse("data/data.xml")  # 從檔案載入並解析 XML資料
+
+print("tree資料型別：", type(tree))  # <class 'xml.etree.ElementTree.ElementTree'>
+root = tree.getroot()
+print("root資料型別：", type(root))  # <class 'xml.etree.ElementTree.Element'>
+print("根目錄標籤：" + root.tag)  # data
+print("根目錄屬性：" + str(root.attrib))  # {'名稱': 'e-happy'}
+
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# xml_append.py
+
+import xml.etree.cElementTree as ET
+
+# xml字串
+xml = """\
+<?xml version="1.0"?>
+<data 名稱="e-happy">
+    <person 姓名="David">
+        <身高>183</身高>
+		<興趣>長跑</興趣>
+    </person>
+    <person 姓名="Chiou">
+        <身高>170</身高>
+		<興趣>籃球</興趣>
+    </person>
+</data>
+"""
+
+root = ET.fromstring(xml)  # 從xml字串載入並解析XML資料
+
+person = ET.Element("person")  # 建立標籤 person
+person.attrib = {"姓名": "Tsjeng"}  # 設定 person 標籤的屬性和資料
+# 建立 person 的標籤，並新增屬性和資料
+tall = ET.SubElement(person, "身高")
+tall.text = "176"
+hobby = ET.SubElement(person, "興趣")
+hobby.text = "圍棋"
+root.append(person)
+print(root[2].get("姓名"))  # Tsjeng
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# xml_edit.py
+
+import xml.etree.cElementTree as ET
+
+
+def pretty_xml(element, indent, newline, level=0):
+    if element:  # 判斷element是否有子元素
+        if (element.text is None) or element.text.isspace():  # 如果element的text没有内容
+            element.text = newline + indent * (level + 1)
+        else:
+            element.text = (
+                newline
+                + indent * (level + 1)
+                + element.text.strip()
+                + newline
+                + indent * (level + 1)
+            )
+    temp = list(element)  # 將element轉成list
+    for subelement in temp:
+        if temp.index(subelement) < (
+            len(temp) - 1
+        ):  # 如果不是list的最後一個元素，表示下一行是同級别元素的起始，缩排應一致
+            subelement.tail = newline + indent * (level + 1)
+        else:  # 如果是list的最後一個元素， 表示下一行是母元素的结束，缩排應該少一個
+            subelement.tail = newline + indent * level
+        pretty_xml(subelement, indent, newline, level=level + 1)  # 對子元素進行遞迴操作
+
+
+# xml字串
+xml = """\
+<?xml version="1.0"?>
+<data 名稱="e-happy">
+    <person 姓名="David">
+        <身高>183</身高>
+		<興趣>長跑</興趣>
+    </person>
+    <person 姓名="Chiou">
+        <身高>170</身高>
+		<興趣>籃球</興趣>
+    </person>
+</data>
+"""
+
+root = ET.fromstring(xml)  # 從xml字串載入並解析XML資料
+
+root[0].set("姓名", "鮭魚")
+hobby = root[0].find("興趣")
+hobby.text = "跑馬拉松"
+
+root.remove(root[1])  # 刪除 root[1]
+pretty_xml(root, "\t", "\n")  # xml資料縮排
+
+tree = ET.ElementTree(root)  # 建立tree物件，寫入檔案
+tree.write("tmp_newdata2.xml", encoding="UTF-8")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# xml_insert.py
+
+import xml.etree.cElementTree as ET
+
+# xml字串
+xml = """\
+<?xml version="1.0"?>
+<data 名稱="e-happy">
+    <person 姓名="David">
+        <身高>183</身高>
+		<興趣>長跑</興趣>
+    </person>
+    <person 姓名="Chiou">
+        <身高>170</身高>
+		<興趣>籃球</興趣>
+    </person>
+</data>
+"""
+
+
+def pretty_xml(element, indent, newline, level=0):
+    if element:  # 判斷element是否有子元素
+        if (element.text is None) or element.text.isspace():  # 如果element的text没有内容
+            element.text = newline + indent * (level + 1)
+        else:
+            element.text = (
+                newline
+                + indent * (level + 1)
+                + element.text.strip()
+                + newline
+                + indent * (level + 1)
+            )
+    temp = list(element)  # 將element轉成list
+    for subelement in temp:
+        if temp.index(subelement) < (
+            len(temp) - 1
+        ):  # 如果不是list的最後一個元素，表示下一行是同級别元素的起始，缩排應一致
+            subelement.tail = newline + indent * (level + 1)
+        else:  # 如果是list的最後一個元素， 表示下一行是母元素的结束，缩排應該少一個
+            subelement.tail = newline + indent * level
+        pretty_xml(subelement, indent, newline, level=level + 1)  # 對子元素進行遞迴操作
+
+
+root = ET.fromstring(xml)  # 從xml字串載入並解析XML資料
+
+person = ET.Element("person")  # 建立標籤 person
+person.attrib = {"姓名": "Tsjeng"}  # 設定 person 標籤的屬性和資料
+# 建立 person 的標籤，並新增屬性和資料
+tall = ET.SubElement(person, "身高")
+tall.text = "176"
+hobby = ET.SubElement(person, "興趣")
+hobby.text = "圍棋"
+root.insert(0, person)
+print(root[0].get("姓名"))  # Tsjeng
+
+pretty_xml(root, "\t", "\n")  # xml資料縮排
+# 建立tree物件，寫入檔案
+tree = ET.ElementTree(root)
+tree.write("tmp_newdata.xml", encoding="UTF-8")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# xml_read.py
+
+import xml.etree.cElementTree as ET
+
+# xml字串
+xml = """\
+<?xml version="1.0"?>
+<data 名稱="e-happy">
+    <person 姓名="David">
+        <身高>183</身高>
+		<興趣>長跑</興趣>
+    </person>
+    <person 姓名="Chiou">
+        <身高>170</身高>
+		<興趣>籃球</興趣>
+    </person>
+</data>
+"""
+print(type(xml))
+
+root = ET.fromstring(xml)  # 從xml字串載入並解析XML資料
+
+person = root.find("person")
+print("find 方法：" + person[0].text)  # 183
+
+persons = root.findall("person")
+print("findall 方法：" + persons[1][1].text)  # 籃球
+
+persons = list(root.iter(tag="person"))  # iter 方法
+for person in persons:
+    print("tag:{}  attrib:{}".format(person.tag, person.attrib))
+    tall = person.find("身高").text
+    hobby = person.find("興趣").text
+    print("身高：{} 興趣：{}".format(tall, hobby))
+
+
+print("------------------------------------------------------------")  # 60個
+print("解讀XML 專區 SP")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 from xml.parsers import expat
 from xml.sax.saxutils import escape
 
@@ -837,87 +1172,36 @@ if __name__ == "__main__":
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "D:/_git/vcs/_1.data/______test_files1/menu.xml"
 
-import xml.etree.ElementTree as ET
-
-tree = ET.ElementTree(file=filename)  # 讀取xml檔案，獲取tree物件
-root = tree.getroot()  # 獲取root物件
-print(root.tag)  # 列印root物件的tag屬性('menu')
-
-# 遍歷root物件child子節點列印tag與attrib屬性
-for child in root:
-    print("tag:", child.tag, "attributes:", child.attrib)
-    # 遍歷child節點的子節點列印tag與attrib屬性
-    for grandchild in child:
-        print("\ttag:", grandchild.tag, "attributes:", grandchild.attrib)
-
-print(len(root))  # 菜單選項的數目
-print(len(root[0]))  # 早餐選項的數目
-
-
-filename = "D:/_git/vcs/_1.data/______test_files1/country_data.xml"
-
-tree = ET.parse(filename)  # 解析xml檔，回傳ElementTree物件。
-root = tree.getroot()  # 獲得根節點
-# 列印根節點標籤名
-print("coutry_data.xml的根節點：" + root.tag)
-# 列印根節點的屬性和屬性值
-print("根節點標籤裡的屬性和屬性值：" + str(root.attrib))
-# 遍歷獲取子節點的標籤、屬性和屬性值
-for child in root:
-    print(child.tag, child.attrib)
-# 獲取country標籤下的子標籤的內容
-print(
-    "排名:" + root[0][0].text,
-    "國內生產總值:" + root[0][2].text,
-)
-# 把所有neighbor標籤找出來，並列印出標籤的屬性和屬性值。
-for neighbor in root.iter("neighbor"):
-    print(neighbor.attrib)
-# 使用findall()方法把滿足條件的標籤找出來反覆運算
-for country in root.findall("country"):
-    rank = country.find("rank").text
-    name = country.get("name")
-    print(name, rank)
-
-
-filename = "D:/_git/vcs/_1.data/______test_files1/country_data.xml"
-
-output_filename1 = "tmp_country_data_out1.xml"
-output_filename2 = "tmp_country_data_out2.xml"
-
-import xml.etree.ElementTree as ET
-
-tree = ET.parse(filename)  # 解析xml檔，回傳ElementTree物件
-root = tree.getroot()  # 獲得根節點
-# 遍歷修改標籤，包括增加屬性和屬性值、修改屬性值、刪除標籤
-for rank in root.iter("rank"):
-    new_rank = int(rank.text) + 1
-    rank.text = str(new_rank)
-    rank.set("updated", "yes")
-# 利用write()方法創建檔，並把xml寫入新的檔，同時指定寫入內容的編碼
-tree.write(output_filename1, encoding="utf-8")
-
-
-import xml.etree.ElementTree as ET
-
-tree = ET.parse(filename)  # 解析xml檔，回傳ElementTree物件
-root = tree.getroot()  # 獲得根節點
-# 遍歷獲得滿足條件的元素，並使用remove()指定刪除
-for country in root.findall("country"):
-    rank = int(country.find("rank").text)
-    if rank > 50:
-        root.remove(country)
-tree.write(output_filename2, encoding="utf-8")
-# 利用write()方法創建檔，並把xml寫入新的檔，指定寫入內容的編碼
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+xml為字串格式
+xml = xml字串 = xml_str
+
+save write
+a.save("sheet1.xml")
+
+load
+"""

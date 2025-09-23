@@ -1096,3 +1096,192 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
+
+import datetime
+
+d = datetime.datetime(2012, 12, 20, 12, 34, 56, 78987)
+
+print(d)
+
+
+dt = datetime.datetime.now()
+ContentDate = dt.strftime("%Y%m%d")
+timeStr = dt.strftime("%H%M%S.%f")  # long format with micro seconds
+ContentTime = timeStr
+
+print("ContentDate :", ContentDate)
+print("ContentTime :", ContentTime)
+
+import datetime
+
+print(datetime.date.min)
+print(datetime.date.max)
+print(datetime.date(2019, 5, 10).year)
+print(datetime.date(2019, 8, 24).month)
+print(datetime.date(2019, 8, 24).day)
+
+print("------------------------------------------------------------")  # 60個
+
+import time
+
+print(time.time())
+print(time.localtime())
+
+field = time.localtime(time.time())  # 以元組資料的名稱去取得資料
+print("tm_year= ", field.tm_year)
+print("tm_mon= ", field.tm_mon)
+print("tm_mday= ", field.tm_mday)
+print("tm_hour= ", field.tm_hour)
+print("tm_min= ", field.tm_min)
+print("tm_mec= ", field.tm_sec)
+print("tm_wday= ", field.tm_wday)
+print("tm_yday= ", field.tm_yday)
+print("tm_isdst= ", field.tm_isdst)
+
+for j in range(9):  # 以元組的索引值取得的資料內容
+    print("以元組的索引值取得資料= ", field[j])
+
+print("------------------------------------------------------------")  # 60個
+
+import datetime
+
+print("datetime.time 的最小值 :", datetime.time.min)
+print("datetime.time 的最大值 :", datetime.time.max)
+print("用datetime組合出一個時間")
+t = datetime.time(12, 34, 56)
+print("時 :", t.hour)
+print("分 :", t.minute)
+print("秒 :", t.second)
+print("微秒 :", t.microsecond)
+
+t = datetime.time(12, 34, 56, 777777)
+print("微秒 :", t.microsecond)
+
+
+print("------------------------------------------------------------")  # 60個
+
+import datetime
+
+print(datetime.date.today())
+print(datetime.datetime.now())
+print(datetime.date(2019, 3, 9).weekday())
+print(datetime.date(2019, 7, 2).isoweekday())
+print(datetime.date(2019, 5, 7).isocalendar())
+
+print("------------------------------------------------------------")  # 60個
+
+import datetime
+
+print(datetime.date(2018, 5, 25))
+print(datetime.time(12, 58, 41))
+print(datetime.datetime(2018, 3, 5, 18, 45, 32))
+
+print("------------------------------------------------------------")  # 60個
+
+import datetime as d
+
+
+def check(y, m):
+    temp_d = d.date(y, m, 1)
+    temp_year = temp_d.year
+    temp_month = temp_d.month
+
+    if temp_month == 12:
+        temp_month = 1
+        temp_year += 1
+    else:
+        temp_month += 1
+
+    return d.date(temp_year, temp_month, 1) + d.timedelta(days=-1)
+
+
+# year=int(input("請輸入要查詢的西元年："))
+# month=int(input("請輸入要查詢的月份1-12："))
+year = 2024
+month = 4
+print("你要查詢的月份的最後一天是西元", check(year, month))
+
+print("------------------------------------------------------------")  # 60個
+
+import datetime
+
+now = datetime.datetime.now()  # current date and time
+
+date_time = now.strftime("%Y年%m月%d日, %H:%M:%S")
+print("現在時間 :", date_time)
+
+import datetime
+
+dt = (datetime.datetime(2006, 3, 11, 9, 15),)
+print(dt)
+
+cc = time.strftime("%Y-%m-%d %H:%M")
+print(cc)
+
+cc = time.strftime("%Y-%m-%d %H:%M+%Z")
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+import time
+
+currentTime = time.asctime()
+
+print("時間 :", currentTime)
+
+entrySecond = time.time()
+print("時間 :", entrySecond)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+import datetime
+
+CurrTime = datetime.datetime.now()
+print("当前时间：%s" % CurrTime)
+# 获取不同时间
+print("ISO格式时间：%s" % CurrTime.isoformat())
+print("当前的年份：%s" % CurrTime.year)
+print("当前的月份：%s" % CurrTime.month)
+print("当前的日期：%s" % CurrTime.day)
+print("dd/mm/yyyy格式日期：%s/%s/%s" % (CurrTime.day, CurrTime.month, CurrTime.year))
+print("当前的小时：%s" % CurrTime.hour)
+print("当前的分钟：%s" % CurrTime.minute)
+print("当前的秒数：%s" % CurrTime.second)
+
+
+print(f"現在時刻 : {datetime.datetime.now()}")
+
+
+import datetime
+
+CurrTime = datetime.datetime.now()
+print("当前时间：%s" % CurrTime)
+# 获取不同时间
+print("当前的年份：%s" % CurrTime.year)
+print("当前的月份：%s" % CurrTime.month)
+print("当前的日期：%s" % CurrTime.day)
+print("dd/mm/yyyy格式日期：%s/%s/%s" % (CurrTime.day, CurrTime.month, CurrTime.year))
+print("当前的小时：%s" % CurrTime.hour)
+print("当前的分钟：%s" % CurrTime.minute)
+print("当前的秒数：%s" % CurrTime.second)
+print("当前的秒数：%s" % CurrTime.microsecond)
+
+
+# 取得毫秒/微秒的方法
+import datetime
+
+t = datetime.datetime.now()
+print(t)
+t = datetime.datetime.today()
+print(t.second)
+print(t.microsecond)
+sekunde = t.second + t.microsecond * 0.000001
+
+print(t)
+print(sekunde)

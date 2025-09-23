@@ -8,6 +8,7 @@ info
 """
 
 import sys
+
 print("------------------------------------------------------------")  # 60個
 
 import os
@@ -434,26 +435,25 @@ with gzip.open(zip_filename, "rb") as f_in:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('解壓縮zip檔')
+print("解壓縮zip檔")
 
-data_example_zip = 'data/csv.zip'
+data_example_zip = "data/csv.zip"
 from zipfile import ZipFile
-zip_csv = ZipFile(data_example_zip, 'r')
-unzip_dir = '.'
+
+zip_csv = ZipFile(data_example_zip, "r")
+unzip_dir = "."
 for csv in zip_csv.namelist():
     zip_csv.extract(csv, unzip_dir)
 zip_csv.close()
 
-print('done')
+print("done")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

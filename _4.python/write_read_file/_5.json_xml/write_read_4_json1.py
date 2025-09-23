@@ -15,10 +15,8 @@ dumps - 將Python對象處理成JSON格式的字符串
 JSONDecoder()
 JSONEncoder()
 
-
 json為字串格式
 json = json字串 = json_str
-
 """
 
 import os
@@ -36,105 +34,169 @@ print("------------------------------------------------------------")  # 60個
 data_list = ["鼠", "牛", "虎", "兔", "龍"]  # 串列
 
 # 串列, 元素是字典
-data_list = [{"Name": "Peter", "Age": 25, "Gender": "M"}]  # 串列元素是字典
+data_list = [
+    {"英文名": "mouse", "中文名": "米老鼠", "體重": 3},
+    {"英文名": "ox", "中文名": "班尼牛", "體重": 48},
+    {"英文名": "tiger", "中文名": "跳跳虎", "體重": 33},
+]
 
 json_str = json.dumps(data_list)  # 串列轉json
 print("串列 :", data_list)
-print("串列轉json :", json_str)
-print("json的資料類型 :", type(json_str))
+print("串列轉json")
+print("json的資料內容 :", json_str)
+print("json的資料型態 :", type(json_str))
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("格式轉換2, 字典轉json/json檔案")
 print("------------------------------------------------------------")  # 60個
 
 print("字典轉json")
-
-data_dict = {"name": "Joe Chen", "score": 95, "tel": "0933123456"}
+data_dict = {"英文名": "mouse", "中文名": "米老鼠", "體重": 3}
 print(type(data_dict))
 
 json_str = json.dumps(data_dict)  # 字典轉json
-print(json_str)
+print("json的資料內容 :", json_str)
+print("json的資料型態 :", type(json_str))
 
-data2 = json.loads(json_str)  # json轉字典
-print(data2)
+print("json轉字典")
+data_dict = json.loads(json_str)  # json轉字典
+print(type(data_dict))
+print(data_dict)
 
+print("字典轉json檔案")
 filename = "tmp03.json"
 with open(filename, "w") as fp:
     print(type(data_dict))
     json.dump(data_dict, fp)  # 寫進json檔案, 字典轉json檔案
 
+print("json檔案轉字典")
 filename = "tmp03.json"
 with open(filename, "r") as fp:
     datas = json.load(fp)  # 讀取json檔案
     print(type(datas))
     print(datas)
 
+json_str = json.dumps(data_dict)  # 未用排序將字典轉json  # 字典轉json
+print("未用排序將字典轉換成json的物件", json_str)
+
+json_str = json.dumps(data_dict, sort_keys=True)  # 有用排序將字典轉json  # 字典轉json
+print("使用排序將字典轉換成json的物件", json_str)
+
+json_str = json.dumps(data_dict, sort_keys=True, indent=4)  # 字典轉json
+print("json的資料內容 :", json_str)
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# json字串
-json_str = '{"name": "駱昊", "age": 38, "title": "叫獸"}'  # json字串
+# 字典
+data_dict = {"英文名": "mouse", "中文名": "米老鼠", "體重": 3}
+print("type(data_dict) :", type(data_dict))
+
+json_str = json.dumps(data_dict, ensure_ascii=False, indent=4)  # 字典轉json
+print("json的資料內容 :", json_str)
+
+print("------------------------------------------------------------")  # 60個
+
+# json字串 <= 字典
+json_str = '{"英文名":"mouse", "中文名":"米老鼠", "體重":3}'
 
 data_dict = json.loads(json_str)  # json轉字典
-print(data_dict)
-print(type(data_dict))
-print(data_dict["name"])
-print(data_dict["age"])
+print("type(data_dict) :", type(data_dict))
 
+print("英文名：%s" % (data_dict["英文名"]))
+print("中文名：%s" % (data_dict["中文名"]))
+print("體重：%d" % (data_dict["體重"]))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("串列轉json檔案")
+
+# 串列
+data_list = ["鼠", "牛", "虎", "兔", "龍"]  # 串列
+
+# 串列, 元素是字典
+data_list = [
+    {"英文名": "mouse", "中文名": "米老鼠", "體重": 3},
+    {"英文名": "ox", "中文名": "班尼牛", "體重": 48},
+    {"英文名": "tiger", "中文名": "跳跳虎", "體重": 33},
+]
+print(type(data_list))
+
+json_str = json.dumps(data_list)  # 串列轉json
+print("json的資料內容 :", json_str)
+
+json_str = json.dumps(
+    data_list, sort_keys=True, indent=4, separators=(",", ": ")
+)  # 串列轉json
+print("json的資料內容 :", json_str)
+
+data1 = json.loads(json_str)  # json轉串列
+print(data1)
+print(type(data1))
+
+# 寫檔
+# 串列轉json檔案
+filename = "tmp01_animals.json"
+# with open(filename, "w") as fp:
+with open(filename, "w", encoding="utf-8") as fp:
+    json.dump(data_list, fp)  # 寫進json檔案, 串列轉json檔案
+
+filename = "tmp07a.json"
+with open(filename, "w") as fp:
+    json.dump(data_list, fp, ensure_ascii=False, indent=4)  # 寫進json檔案, 串列轉json檔案
+
+filename = "tmp07b.json"
+with open(filename, "w") as fp:
+    json.dump(data_list, fp, indent=2, ensure_ascii=False)  # 寫進json檔案, 串列轉json檔案
+
+filename = "tmp07c.json"
+with open(filename, "w", encoding="utf-8") as fp:
+    json.dump(data_list, fp, indent=2, ensure_ascii=False)  # 寫進json檔案, 串列轉json檔案
+
+print("json檔案轉串列")
+# 讀檔
+filename = "tmp07c.json"
+filename = "tmp01_animals.json"
+# with open(filename, "r") as fp:
+with open(filename, "r", encoding="utf-8") as fp:
+    data_list = json.load(fp)  # 讀取json檔案
+    print(type(data_list))
+
+for data in data_list:
+    for key in data:
+        print(key, "：", data[key])
+    print("=" * 20)
+
+for data in data_list:
+    for key in data:
+        print("%s：%s" % (key, data[key]))
+
+print(data_list)
+print(type(data_list))
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # json字串
-json_str = '{"b":80, "a":25, "c":60}'  # json字串
-
-data_dict = json.loads(json_str)  # json轉字典
-print(data_dict)
-print(type(data_dict))
-
-print("------------------------------------------------------------")  # 60個
-
-# json字串
-json_str = '{"Asia":[{"Japan":"Tokyo"},{"China":"Beijing"}]}'  # json字串
-
-data_dict = json.loads(json_str)  # json轉字典
-print(data_dict)
-print(type(data_dict))
-print(data_dict["Asia"])
-print(data_dict["Asia"][0])
-print(data_dict["Asia"][1])
-print(data_dict["Asia"][0]["Japan"])
-print(data_dict["Asia"][1]["China"])
-
-print("------------------------------------------------------------")  # 60個
-
-# json字串
-json_str = """
-{"編號":"E01","姓名": "王小明",
-"性別": true, "電話":["0912345678","0978123321"]}
-"""
-print("jsonStr字串：", json_str)
-print("jsonStr型別：", type(json_str))
+json_str = '{"英文名":"mouse", "中文名":["米老鼠","傑利鼠"], "體重":3, "性別": true}'  # json字串
+print("json的資料內容 :", json_str)
+print("json的資料型態 :", type(json_str))
 
 data_dict = json.loads(json_str)  # json轉字典
 print("data_dict物件：", data_dict)
 print("data_dict型別：", type(data_dict))
+print(data_dict["英文名"])
+print(data_dict["中文名"])
+print(data_dict["體重"])
+print(data_dict["性別"])
 for key in data_dict:
-    print(key, ":", data_dict[key], " value的型別：", type(data_dict[key]))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("字典轉json檔案")
-
-# 字典
-data_dict = {"Asia": [{"Japan": "Tokyo"}, {"China": "Beijing"}]}
-print(type(data_dict))
-
-filename = "tmp06.json"
-with open(filename, "w") as fp:
-    print(type(data_dict))
-    json.dump(data_dict, fp)  # 寫進json檔案, 字典轉json檔案
+    print("Key :", key, ", 內容 :", data_dict[key], ",  內容的資料型態 :", type(data_dict[key]))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -148,505 +210,62 @@ print("------------------------------------------------------------")  # 60個
 data_tuple = ("鼠", "牛", "虎", "兔", "龍")  # 元組
 json_str = json.dumps(data_tuple)  # 元組轉json
 print("元組轉json :", json_str)
-print("json的資料類型 :", type(json_str))
+print("json的資料型態 :", type(json_str))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("串列轉json檔案")
-
+# 串列
 data_list = ["鼠", "牛", "虎", "兔", "龍"]  # 串列
+print("data_list串列：", data_list)
+print("data_list型別：", type(data_list))
 
-filename = "tmp01_animals.json"
-with open(filename, "w") as fp:
-    print(type(data_list))
-    json.dump(data_list, fp)  # 寫進json檔案, 串列轉json檔案
-
-print("------------------------------")  # 30個
-
-print("json檔案轉串列")
-
-filename = "tmp01_animals.json"
-with open(filename, "r") as fp:
-    datas = json.load(fp)  # 讀取json檔案
-    print(type(datas))
-    print(datas)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 串列, 元素是字典
-data_list = [
-    {"姓名": "王小明", "身高": 174, "體重": 56},
-    {"姓名": "林小華", "身高": 185, "體重": 80},
-    {"姓名": "陳小強", "身高": 168, "體重": 60},
-]
-
-filename = "tmp02_person.json"
-with open(filename, "w", encoding="utf-8") as fp:
-    print(type(data_list))
-    json.dump(data_list, fp)  # 寫進json檔案, 串列轉json檔案
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 串列, 元素是字典
-data_list = [
-    {"group": 0, "param": ["one", "two", "three"]},
-    {"group": 1, "param": ["1", "2", "3"]},
-]
-print(type(data_list))
 json_str = json.dumps(data_list)  # 串列轉json
-print(json_str)
+print("json的資料內容 :", json_str)
+print("json的資料型態 :", type(json_str))
 
-json_str = json.dumps(
-    data_list, sort_keys=True, indent=4, separators=(",", ": ")
-)  # 串列轉json
-print(json_str)
+data_dict = {"英文名": "mouse", "中文名": "米老鼠", "體重": 3}
+print("data_dict字典：", data_dict)
+print("data_dict型別：", type(data_dict))
 
-data1 = json.loads(json_str)  # json轉串列
-print(data1)
-print(type(data1))
-
-filename = "tmp17.json"
-with open(filename, "w") as fp:
-    print(type(data_list))
-    json.dump(data_list, fp)  # 寫進json檔案, 串列轉json檔案
-    fp.close()
-
-filename = "tmp17.json"
-with open(filename, "r") as fp:
-    datas = json.load(fp)  # 讀取json檔案
-    print(type(datas))
-    print(datas)
-
-print(datas)
-print(type(datas))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-players = {
-    "Stephen Curry": "Golden State Warriors",
-    "Kevin Durant": "Golden State Warriors",
-    "Lebron James": "Cleveland Cavaliers",
-    "James Harden": "Houston Rockets",
-    "Paul Gasol": "San Antonio Spurs",
-}
-print(type(players))
-json_str1 = json.dumps(players)  # 未用排序將字典轉json  # 字典轉json
-json_str2 = json.dumps(players, sort_keys=True)  # 有用排序將字典轉json  # 字典轉json
-print("未用排序將字典轉換成json的物件", json_str1)
-print("使用排序將字典轉換成json的物件", json_str2)
-print("有排序與未排序物件是否相同    ", json_str1 == json_str2)
-print("json物件在Python的資料類型 ", type(json_str1))
-
-json_str = json.dumps(players, sort_keys=True, indent=4)  # 字典轉json
-print(json_str)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 串列, 元素是字典
-objlist = [{"日本": "Japan", "首都": "Tokyo"}, {"美州": "USA", "首都": "Washington"}]
-
-filename = "tmp07a.json"
-with open(filename, "w") as fp:
-    print(type(objlist))
-    json.dump(objlist, fp)  # 寫進json檔案, 串列轉json檔案
-
-filename = "tmp07b.json"
-with open(filename, "w") as fp:
-    print(type(objlist))
-    json.dump(objlist, fp, indent=2, ensure_ascii=False)  # 寫進json檔案, 串列轉json檔案
-
-filename = "tmp07c.json"
-with open(filename, "w", encoding="utf-8") as fp:
-    print(type(objlist))
-    json.dump(objlist, fp, indent=2, ensure_ascii=False)  # 寫進json檔案, 串列轉json檔案
-
-filename = "tmp07c.json"
-with open(filename, "r", encoding="utf-8") as fp:
-    datas = json.load(fp)  # 讀取json檔案
-
-print(datas)
-print(type(datas))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 客戶數據管理
-# 串列, 元素是字典
-customer_data = [
-    {"id": 1, "name": "Tom", "email": "tom@example.com", "purchases": 3},
-    {"id": 2, "name": "Bob", "email": "bob@example.com", "purchases": 5},
-]
-
-filename = "tmp11a_customers.json"
-with open(filename, "w") as fp:
-    print(type(customer_data))
-    json.dump(customer_data, fp)  # 寫進json檔案, 串列轉json檔案
-
-# 庫存管理
-inventory = {
-    "products": [
-        {"id": 101, "name": "Laptop", "stock": 40},
-        {"id": 102, "name": "Smartphone", "stock": 100},
-    ]
-}
-
-filename = "tmp11b_inventory.json"
-with open(filename, "w") as fp:
-    print(type(inventory))
-    json.dump(inventory, fp)  # 寫進json檔案, 字典轉json檔案
-
-# 員工記錄
-# 串列, 元素是字典
-employees = [
-    {"id": "E01", "name": "John Doe", "position": "Manager"},
-    {"id": "E02", "name": "Jane Smith", "position": "Developer"},
-]
-
-filename = "tmp11c_employees.json"
-with open(filename, "w") as fp:
-    print(type(employees))
-    json.dump(employees, fp)  # 寫進json檔案, 串列轉json檔案
-
-# 銷售數據分析
-sales_data = {
-    "year": 2023,
-    "sales": [
-        {"month": "January", "total_sales": 5000},
-        {"month": "February", "total_sales": 7000},
-    ],
-}
-filename = "tmp11d_sales_data.json"
-with open(filename, "w") as fp:
-    print(type(sales_data))
-    json.dump(sales_data, fp)  # 寫進json檔案, 字典轉json檔案
-
-# 商業應用設定
-config_settings = {
-    "application": "Accounting Software",
-    "version": "1.2.0",
-    "features": {"auto_backup": True, "cloud_sync": True},
-}
-filename = "tmp11e_config_settings.json"
-with open(filename, "w") as fp:
-    print(type(config_settings))
-    json.dump(config_settings, fp)  # 寫進json檔案, 字典轉json檔案
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 請思考如何將下面JSON格式的天氣數據轉換成對象并獲取我們需要的信息
-# 稍后我們會講解如何通過網絡API獲取我們需要的JSON格式的數據
-"""
-    {
-        "wendu": "29",
-        "ganmao": "各項氣象條件適宜，發生感冒機率較低。但請避免長期處于空調房間中，以防感冒。",
-        "forecast": [
-            {
-                "fengxiang": "南風",
-                "fengli": "3-4級",
-                "high": "高溫 32℃",
-                "type": "多云",
-                "low": "低溫 17℃",
-                "date": "16日星期二"
-            },
-            {
-                "fengxiang": "南風",
-                "fengli": "微風級",
-                "high": "高溫 34℃",
-                "type": "晴",
-                "low": "低溫 19℃",
-                "date": "17日星期三"
-            },
-            {
-                "fengxiang": "南風",
-                "fengli": "微風級",
-                "high": "高溫 35℃",
-                "type": "晴",
-                "low": "低溫 22℃",
-                "date": "18日星期四"
-            },
-            {
-                "fengxiang": "南風",
-                "fengli": "微風級",
-                "high": "高溫 35℃",
-                "type": "多云",
-                "low": "低溫 22℃",
-                "date": "19日星期五"
-            },
-            {
-                "fengxiang": "南風",
-                "fengli": "3-4級",
-                "high": "高溫 34℃",
-                "type": "晴",
-                "low": "低溫 21℃",
-                "date": "20日星期六"
-            }
-        ],
-        "yesterday": {
-            "fl": "微風",
-            "fx": "南風",
-            "high": "高溫 28℃",
-            "type": "晴",
-            "low": "低溫 15℃",
-            "date": "15日星期一"
-        },
-        "aqi": "72",
-        "city": "北京"
-    }
-"""
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-寫入JSON文件
-"""
-teacher_dict = {"name": "白元芳", "age": 25, "title": "講師"}
-json_str = json.dumps(teacher_dict)  # 字典轉json
-print(json_str)
-print(type(json_str))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("串列轉json檔案")
-
-# 串列, 元素是字典
-listProduct = [
-    {"編號": "P01", "品名": "五香豆干", "單價": 89},
-    {"編號": "P02", "品名": "龍哥可樂", "單價": 20},
-    {"編號": "P03", "品名": "阿才紅茶", "單價": 15},
-]
-
-filename = "tmp14_product.json"
-with open(filename, "w", encoding="utf_8") as fp:
-    print(type(listProduct))
-    json.dump(listProduct, fp, ensure_ascii=False, indent=4)  # 寫進json檔案, 串列轉json檔案
-    fp.close()
-    print("JSON產品資料存檔成功")
+json_str = json.dumps(data_dict, ensure_ascii=False)  # 字典轉json
+print("json的資料內容 :", json_str)
+print("json的資料型態 :", type(json_str))
 
 print("------------------------------")  # 30個
 
-# 串列
-listScore = [89, 100, 23, 78, 89]
-print("listScore串列：", listScore)
-print("listScore型別：", type(listScore))
-
-jsonScore = json.dumps(listScore)  # 字典轉json
-print("jsonScore字串：", jsonScore)
-print("jsonScore型別：", type(jsonScore))
-
-dictEmp = {"編號": "P01", "品名": "五香豆干", "單價": 89}
-print("dictEmp字典：", dictEmp)
-print("dictEmp型別：", type(dictEmp))
-
-jsonEmp = json.dumps(dictEmp, ensure_ascii=False)  # 字典轉json
-print("jsonEmp字串：", jsonEmp)
-print("jsonEmp型別：", type(jsonEmp))
-
-print("------------------------------")  # 30個
-
-fruit = {"banana": "香蕉", "papaya": "木瓜", "apple": "蘋果"}
-print(json.dumps(fruit, ensure_ascii=False))  # 字典轉json
-print(json.dumps(fruit, ensure_ascii=False, sort_keys=True))  # 字典轉json
-print(json.dumps(fruit, ensure_ascii=False, sort_keys=True, indent=4))  # 字典轉json
-
-print("------------------------------")  # 30個
-
-filename = "tmp14_product.json"
-with open(filename, "r", encoding="utf_8") as fp:
-    datas = json.load(fp)  # 讀取json檔案
-    fp.close()
-
-print("====== DTC商店 ======")
-for product in datas:
-    for key in product:
-        print(key, "：", product[key])
-    print("=" * 20)
+data_dict = {"英文名": "mouse", "中文名": "米老鼠", "體重": 3}
+print(json.dumps(data_dict, ensure_ascii=False))  # 字典轉json
+print(json.dumps(data_dict, ensure_ascii=False, sort_keys=True))  # 字典轉json
+print(json.dumps(data_dict, ensure_ascii=False, sort_keys=True, indent=4))  # 字典轉json
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-# 新增員工記錄函式
-def fnCreate():
-    uid = input("編號：")
-    if uid in listUid:
-        print("編號重複，無法在記憶體中新增員工記錄")
-        return
-    name = input("姓名︰")
-    salary = int(input("薪資︰"))
-    newMember = {"編號": uid, "姓名": name, "薪資": salary}
-    listMember.append(newMember)
-    listUid.append(uid)
-    print("記憶體新增編號 %s 的員工記錄" % (uid))
-
-
-# 修改員工記錄函式
-def fnUpdate():
-    uid = input("編號：")
-    for member in listMember:
-        if member["編號"] == uid:
-            name = input("姓名︰")
-            salary = int(input("薪資︰"))
-            newMember = {"編號": uid, "姓名": name, "薪資": salary}
-            cIndex = listMember.index(member)
-            listMember[cIndex] = newMember
-            print("記憶體修改編號 %s 的員工記錄" % (uid))
-            break
-    else:
-        print("查無編號，無法修改記憶體中的員工記錄")
-
-
-# 刪除員工記錄函式
-def fnDelete():
-    uid = input("編號：")
-    for member in listMember:
-        if member["編號"] == uid:
-            listMember.remove(member)
-            listUid.remove(uid)
-            print("記憶體刪除編號 %s 的員工記錄" % (uid))
-            break
-    else:
-        print("查無編號，無法刪除記憶體中的員工記錄")
-
-
-# 顯示員工記錄函式
-def fnPrintMember():
-    if len(listMember) == 0:
-        print("記憶體中目前無員工記錄")
-        return
-    for member in listMember:
-        for key in member:
-            print(member[key], end="\t")
-        print()
-
-
-# 員工記錄儲存至MemberInfo.json的函式
-def fnSaveJSONFile():
-    with open(filename, "w", encoding="utf_8") as fp:
-        print(type(listMember))
-        json.dump(listMember, fp, ensure_ascii=False, indent=4)  # 寫進json檔案
-        fp.close()
-        print("記憶體中的員工記錄成功儲存至 %s 檔案" % (filename))
-
-
-filename = "MemberInfo.json"
-
-# 串列
-listMember = []
-listUid = []
-if os.path.exists(filename):
-    filename = "MemberInfo.json"
-    with open(filename, "r", encoding="utf_8") as fp:
-        listMember = json.load(fp)  # 讀取json檔案
-        listUid = []
-        for member in listMember:
-            listUid.append(member["編號"])
-        fp.close()
-
-"""
-# 主程式
-print("======= DTC員工管理系統 =======")
-while True:
-   option=int(input('系統功能->1.新增 2.修改 3.刪除 4.查詢 5.儲存JSON檔案 其他.離開：'))
-   if option==1:
-       fnCreate()
-   elif option==2:
-       fnUpdate()
-   elif option==3:
-       fnDelete()
-   elif option==4:
-       fnPrintMember()
-   elif option==5:
-       fnSaveJSONFile()
-   else:
-       print("離開系統")
-       break;
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-dictMeal = {"編號": "A", "品名": "雙人分享餐", "單價": 120}
-json_str = json.dumps(dictMeal, ensure_ascii=False, indent=4)  # 字典轉json
-print(json_str)
-
-print("------------------------------------------------------------")  # 60個
-
-# json字串
-json_str = '{"編號":"A", "品名":"雙人分享餐", "單價":120}'
-dictMeal = json.loads(json_str)  # json轉字典
-
-print("編號：%s" % (dictMeal["編號"]))
-print("品名：%s" % (dictMeal["品名"]))
-print("單價：%d" % (dictMeal["單價"]))
-
-print("------------------------------------------------------------")  # 60個
-
-# json字串
+# json字串 <= 串列, 元素是字典
 json_str = """
-    [    
-        {"編號": "A","品名": "雙人分享餐","單價": 120},
-        {"編號": "B","品名": "歡樂全家餐","單價": 399},
-        {"編號": "C","品名": "情人精緻餐","單價": 540}
+    [
+    {"英文名": "mouse", "中文名": "米老鼠", "體重": 3},
+    {"英文名": "ox", "中文名": "班尼牛", "體重": 48},
+    {"英文名": "tiger", "中文名": "跳跳虎", "體重": 33}
     ]
 """
-print(type(json_str))
+print("json的資料型態 :", type(json_str))
 
 data_list = json.loads(json_str)  # json轉串列
 print(type(data_list))
 
-for meal in data_list:
-    print("編號：%s" % (meal["編號"]))
-    print("品名：%s" % (meal["品名"]))
-    print("單價：%d" % (meal["單價"]))
+for data in data_list:
+    print("英文名：%s" % (data["英文名"]))
+    print("中文名：%s" % (data["中文名"]))
+    print("體重：%d" % (data["體重"]))
     print("=" * 20)
 
-for meal in data_list:
-    for key in meal:
-        print("%s：%s" % (key, meal[key]))
+for data in data_list:
+    for key in data:
+        print("%s：%s" % (key, data[key]))
     print("=" * 20)
 
-print("------------------------------------------------------------")  # 60個
-
-data_list = [
-    {"編號": "A", "品名": "雙人分享餐", "單價": 120},
-    {"編號": "B", "品名": "歡樂全家餐", "單價": 399},
-    {"編號": "C", "品名": "情人精緻餐", "單價": 540},
-]
-
-filename = "tmp15_meal.json"
-with open(filename, "w", encoding="utf_8") as fp:
-    print(type(data_list))
-    json.dump(data_list, fp, ensure_ascii=False, indent=4)  # 寫進json檔案, 串列轉json檔案
-    print("JSON餐點記錄建置完成")
-
-print("------------------------------")  # 30個
-
-filename = "tmp15_meal.json"
-with open(filename, "r", encoding="utf_8") as fp:
-    data_list = json.load(fp)  # 讀取json檔案
-
-for meal in data_list:
-    for key in meal:
-        print("%s：%s" % (key, meal[key]))
-    print("折扣：%.2f" % (float(meal[key]) * 0.9))
-    print("=" * 20)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -655,6 +274,7 @@ print("------------------------------------------------------------")  # 60個
 filename = "tmp18.json"
 with open(filename, "r") as fp:
     datas = json.load(fp)  # 讀取json檔案
+print(type(datas))
 print(datas)
 
 key = "aaa"
@@ -688,68 +308,6 @@ print(datas[key])
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# json字串
-json_str = """{
-"items":
-{
-"item":
-[
-{
-"id": "0001",
-"type": "donut",
-"name": "Cake",
-"ppu": 0.55,
-"batters":
-{
-"batter":
-[
-{ "id": "1001", "type": "Regular" },
-{ "id": "1002", "type": "Chocolate" },
-{ "id": "1003", "type": "Blueberry" },
-{ "id": "1004", "type": "Devil's Food" }
-]
-},
-"topping":
-[
-{ "id": "5001", "type": "None" },
-{ "id": "5002", "type": "Glazed" },
-{ "id": "5005", "type": "Sugar" },
-{ "id": "5007", "type": "Powdered Sugar" },
-{ "id": "5006", "type": "Chocolate with Sprinkles" },
-{ "id": "5003", "type": "Chocolate" },
-{ "id": "5004", "type": "Maple" }
-]
-}
-]
-}
-}"""
-
-print(type(json_str))
-
-print("json轉字典")
-data_dict = json.loads(json_str)  # json轉字典
-print(type(data_dict))
-print(data_dict)
-print()
-
-print("看字典內容")
-print(type(data_dict["items"]["item"]))
-print()
-
-print(data_dict["items"]["item"])
-print()
-
-print(data_dict["items"]["item"][0])
-print()
-
-print(len(data_dict["items"]["item"]))
-print()
-
-print(data_dict["items"]["item"][0]["topping"][6]["type"])
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 url = "https://fchart.github.io/json/GoogleBooks.json"
 filename = "tmp20_Books.json"
 r = requests.get(url)
@@ -760,9 +318,8 @@ with open(filename, "w") as fp:
     json.dump(data_dict, fp)  # 寫進json檔案, 字典轉json檔案
 
 print("------------------------------------------------------------")  # 60個
+print("解讀json專區 ST")
 print("------------------------------------------------------------")  # 60個
-
-# 讀取專區
 
 filename = "data/Student.json"
 with open(filename, "r") as fp:
@@ -771,7 +328,7 @@ with open(filename, "r") as fp:
     print(datas)
 
 json_str = json.dumps(datas)  # 字典轉json
-print(json_str)
+print("json的資料內容 :", json_str)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -917,7 +474,9 @@ elif len(get_close_matches(w, datas.keys())) > 0:
 else:
     print("找不到")
 
+
 print("------------------------------------------------------------")  # 60個
+print("解讀json專區 SP")
 print("------------------------------------------------------------")  # 60個
 
 import matplotlib.pyplot as plt
@@ -925,7 +484,7 @@ import matplotlib.pyplot as plt
 # 讀取109年9月臺中市10大易肇事路口.json資料並放入listTrafficEvent串列物件
 
 filename = "data/109年9月臺中市10大易肇事路口.json"
-with open(filename, "r", encoding="utf_8") as fp:
+with open(filename, "r", encoding="utf-8") as fp:
     listTrafficEvent = json.load(fp)  # 讀取json檔案
 
 # 將 listTrafficEvent 串列中的每筆字典物件印出來
@@ -1080,7 +639,6 @@ import pprint as pp
 
 pp.pprint(data)
 # print(data)
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1428,6 +986,36 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+"""
+# 新增員工記錄函式
+def fnCreate():
+    uid = input("編號：")
+    if uid in listUid:
+        print("編號重複，無法在記憶體中新增員工記錄")
+        return
+    name = input("姓名︰")
+    salary = int(input("薪資︰"))
+    newMember = {"編號": uid, "姓名": name, "薪資": salary}
+    newMember = {"編號": uid, "姓名": name, "薪資": salary}
+
+            listMember.remove(member)
+            listUid.remove(uid)
+
+filename = "MemberInfo.json"
+
+    with open(filename, "w", encoding="utf-8") as fp:
+        print(type(listMember))
+        json.dump(listMember, fp, ensure_ascii=False, indent=4)  # 寫進json檔案
+        print("記憶體中的員工記錄成功儲存至 %s 檔案" % (filename))
+
+if os.path.exists(filename):
+    filename = "MemberInfo.json"
+    with open(filename, "r", encoding="utf-8") as fp:
+        listMember = json.load(fp)  # 讀取json檔案
+"""
+
+
+"""
 字典
 data_dict = json.loads(data)  # json 轉 字典
 字串
@@ -1436,6 +1024,11 @@ data_str
 串列
 data_list
 
-
 json為字串格式
 json = json字串 = json_str
+
+json字串 = 串列 用''包起來變成json字串
+json字串 = 字典 用''包起來變成json字串
+寫檔讀檔後，會依原本儲存的格式得到格式
+
+"""
