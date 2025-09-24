@@ -27,7 +27,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 
 def show():
-    # pass
+    # return
     plt.tight_layout()  # 緊密排列，並填滿原圖大小
     plt.show()
 

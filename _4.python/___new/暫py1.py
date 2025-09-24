@@ -3436,7 +3436,6 @@ html5lib
 matplotlib
 selenium
 jieba
-wordcloud
 Pillow==4.0.0
 
 再來使用以下指令一次安裝所有套件:

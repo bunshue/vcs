@@ -119,7 +119,7 @@ def show_data_base_contents(db_filename, table_name, reverse=0):
     rows = cursor.fetchall()  # 讀取全部資料成元組串列
     length = len(rows)
     print("共有", length, "筆資料")
-    if reverse==1:
+    if reverse == 1:
         rows = sorted(rows, reverse=True)
     for i in range(length):
         print("第" + str(i + 1) + "筆資料 : ", rows[i])
@@ -142,7 +142,7 @@ def checkin(name, option=0):
     if option == 1:
         print("讀取資料庫")
         table_name = "table01"
-        show_data_base_contents(db_filename, table_name, 1)
+        show_data_base_contents(db_filename, table_name, reverse=1)
     else:
         conn = sqlite3.connect(db_filename)  # 建立資料庫連線
         cursor = conn.cursor()  # 建立 cursor 物件
@@ -165,8 +165,8 @@ def checkin(name, option=0):
         conn.close()  # 關閉資料庫連線
 
 
-# checkin("mouse", 1)
-checkin("mouse")
+# checkin("mouse", option=1)  # 讀取資料庫
+checkin("mouse", option=0)  # 登入
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -188,7 +188,7 @@ def show_data_base_contents(db_filename, table_name, reverse=0):
     rows = cursor.fetchall()  # 讀取全部資料成元組串列
     length = len(rows)
     print("共有", length, "筆資料")
-    if reverse==1:
+    if reverse == 1:
         rows = sorted(rows, reverse=True)
     for i in range(length):
         print("第" + str(i + 1) + "筆資料 : ", rows[i])
@@ -230,7 +230,6 @@ print("現在時間 :", current_time)
 
 version = sqlite3.sqlite_version_info
 print("目前 sqlite3 版本 :", version)
-
 """
 print('製作 DATE/TIMESTAMP 時間戳')
 dd = datetime.date.today()
@@ -892,7 +891,7 @@ PRAGMA schema_version;       -- 获取当前模式版本
 PRAGMA schema_version = 2;   -- 设置模式版本为 2
 """
 
-print('取得表單資訊 table_info')
+print("取得表單資訊 table_info")
 
 table_name = "table01"
 cursor.execute('PRAGMA table_info("{0}")'.format(table_name))
@@ -1075,84 +1074,6 @@ finally:
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("SQLite FTS3 and FTS4 Extensions 擴展")
-
-db_filename = "tmp_db04_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".sqlite"
-
-conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-cursor = conn.cursor()  # 建立 cursor 物件
-
-# ingredient （混合物的）組成部分；（烹調的）原料；（構成）要素，因素
-
-cursor.execute(
-    "CREATE VIRTUAL TABLE IF NOT EXISTS table01 USING FTS3(name, ingredients)"
-)
-
-sqlstr = "INSERT INTO table01 (name, ingredients) VALUES ('broccoli stew', 'broccoli peppers cheese tomatoes')"
-cursor.execute(sqlstr)
-sqlstr = "INSERT INTO table01 (name, ingredients) VALUES ('pumpkin stew', 'pumpkin onions garlic celery')"
-cursor.execute(sqlstr)
-sqlstr = "INSERT INTO table01 (name, ingredients) VALUES ('broccoli pie', 'broccoli cheese onions flour')"
-cursor.execute(sqlstr)
-sqlstr = "INSERT INTO table01 (name, ingredients) VALUES ('pumpkin pie', 'pumpkin sugar flour butter')"
-cursor.execute(sqlstr)
-
-cursor.execute("SELECT rowid, name, ingredients FROM table01 WHERE name MATCH 'pie'")
-for row in cursor:  # 不是用fetchall()讀取全部資料
-    print(row)
-
-conn.commit()  # 更新
-conn.close()  # 關閉資料庫連線
-
-print("讀取資料庫")
-table_name = "table01"
-show_data_base_contents(db_filename, table_name)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# """ 資料很多 保留給 fts3 用
-
-# 4個欄位 id / url / title / content
-db_filename = "data/applenews.db"
-
-conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-cursor = conn.cursor()  # 建立 cursor 物件
-
-sqlstr = "SELECT * FROM news;"
-
-cursor.execute(sqlstr)
-rows = cursor.fetchall()  # 讀取全部資料成元組串列
-length = len(rows)
-print("共有", length, "筆資料")
-for i in range(length):
-    idx = rows[i][0]
-    url = rows[i][1]
-    title = rows[i][2]
-    content = rows[i][3]
-    if i == 0:
-        # print("第" + str(i + 1) + "筆資料 : ", rows[i])
-        print('id :', idx)
-        print('url :', url)
-        print('title :', title)
-        print('content :', content)
-        
-
-""" 把所有的content合併在一起
-rows = conn.execute(sqlstr)
-cloud_text = ""
-for row in rows:
-    cloud_text += row[3]
-print(cloud_text)
-"""
-conn.close()  # 關閉資料庫連線
-
-"""
-print("讀取資料庫")
-table_name = "news"
-show_data_base_contents(db_filename, table_name)
-"""
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1422,3 +1343,27 @@ name = "david"
 save_time = xxxxxx
 sqlstr = f'INSERT INTO table01 VALUES ("{name}", "{save_time}")'
 cursor.execute(sqlstr)
+
+
+# rowid可能是固定用語 回傳資料所在的行數
+cursor.execute("SELECT rowid, url, title FROM table01 ...'")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("SQLite FTS3 and FTS4 Extensions 擴展")
+# ingredient （混合物的）組成部分；（烹調的）原料；（構成）要素，因素
+cursor.execute(
+    "CREATE VIRTUAL TABLE IF NOT EXISTS table01 USING FTS3(name, ingredients)"
+)
+必須是單字才可以MATCH
+cursor.execute("SELECT rowid, name, ingredients FROM table01 WHERE name MATCH 'pie'")
+
+print("測試 FTS3 and FTS4 Extensions 擴展 裡面的 MATCH")
+
+cursor.execute(
+    "SELECT rowid, url, title FROM table01 WHERE title MATCH '謝龍介告陳水扁保外就醫還助選\u3000還嗆：別做龜兒子'"
+)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
