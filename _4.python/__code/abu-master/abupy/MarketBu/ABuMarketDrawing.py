@@ -252,7 +252,8 @@ def _do_plot_candle(date, p_open, high, low, close, volume, view_index, symbol, 
     except ImportError:
         # 2.2 才会有
         # noinspection PyUnresolvedReferences, PyDeprecation
-        import matplotlib.mpl_finance as mpf
+        import matplotlib.mplfinance as mpf
+        #     import mplfinance as mpf 或改用
 
     if not g_only_draw_price:
         # 成交量，价格都绘制

@@ -87,7 +87,6 @@ default_ansi = {
 
 def ansi_highlight(classified_text, colors=default_ansi):
     'Add syntax highlighting to source code using ANSI escape sequences'
-    # http://en.wikipedia.org/wiki/ANSI_escape_code
     result = []
     for kind, text in classified_text:
         opener, closer = colors.get(kind, ('', ''))

@@ -12,7 +12,10 @@ methods are taken from the PythonCard example
 scripts for turtle-graphics.
 """
 from turtle import *
-from time import sleep, clock
+from time import sleep
+
+# from time import clock # 改由 perf_counter()或process_time()替代
+from time import perf_counter
 
 class CurvesTurtle(Pen):
     # example derived from
@@ -88,7 +91,7 @@ def main():
     ft.setpos(-33*size, -32*size)
     ft.pd()
 
-    ta=clock()
+    ta=perf_counter()
     ft.fillcolor("red")
     ft.begin_fill()
     ft.fd(size)
@@ -109,7 +112,7 @@ def main():
         ft.fd(size*(66+i%2))
         ft.rt(90)
     ft.end_fill()
-    tb=clock()
+    tb=perf_counter()
     res =  "Hilbert: %.2fsec. " % (tb-ta)
 
     sleep(3)
@@ -119,7 +122,7 @@ def main():
     ft.ht()
     ft.getscreen().tracer(1,0)
 
-    ta=clock()
+    ta=perf_counter()
     ft.color("black", "blue")
     ft.begin_fill()
     ft.fractalgon(3, 250, 4, 1)
@@ -128,7 +131,7 @@ def main():
     ft.color("red")
     ft.fractalgon(3, 200, 4, -1)
     ft.end_fill()
-    tb=clock()
+    tb=perf_counter()
     res +=  "Koch: %.2fsec." % (tb-ta)
     return res
 

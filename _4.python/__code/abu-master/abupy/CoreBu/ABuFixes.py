@@ -172,7 +172,8 @@ else:
 # except ImportError:
 #     # 2.2 才会有
 #     # noinspection PyUnresolvedReferences, PyDeprecation
-#     import matplotlib.mpl_finance as mpf
+#     import matplotlib.mplfinance as mpf
+#     import mplfinance as mpf 或改用
 
 """
     urlencode

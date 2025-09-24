@@ -53,6 +53,7 @@ def show():
     # plt.show()
     pass
 
+from time import perf_counter
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -276,7 +277,7 @@ def evaluate_lenet5(
     best_validation_loss = numpy.inf
     best_iter = 0
     test_score = 0.0
-    start_time = time.clock()
+    start_time = perf_counter()
     epoch = 0
     done_looping = False
     while (epoch < n_epochs) and (not done_looping):
@@ -328,7 +329,7 @@ def evaluate_lenet5(
     layer1.save_net("layer1")
     layer2.save_net("layer2")
     layer3.save_net("layer3")
-    end_time = time.clock()
+    end_time = perf_counter()
     print("Optimization complete.")
     print(
         "Best validation score of %f %% obtained at iteration %i, "
@@ -678,7 +679,7 @@ def test_DBN(
     )
 
     print("... pre-training the model")
-    start_time = time.clock()
+    start_time = perf_counter()
     ## Pre-train layer-wise
     for i in range(dbn.n_layers):
         # go through pretraining epochs
@@ -692,7 +693,7 @@ def test_DBN(
             )
             print(numpy.mean(c))
 
-    end_time = time.clock()
+    end_time = perf_counter()
     # end-snippet-2
     """
     print(>> sys.stderr, ('The pretraining code for file ' +
@@ -724,7 +725,7 @@ def test_DBN(
 
     best_validation_loss = numpy.inf
     test_score = 0.0
-    start_time = time.clock()
+    start_time = perf_counter()
 
     done_looping = False
     epoch = 0
@@ -781,7 +782,7 @@ def test_DBN(
                 done_looping = True
                 break
 
-    end_time = time.clock()
+    end_time = perf_counter()
     print(
         (
             "Optimization complete with best validation score of %f %%, "
@@ -1194,7 +1195,7 @@ def sgd_optimization_mnist(
     validation_frequency = min(n_train_batches, patience / 2)
     best_validation_loss = numpy.inf  # ��õ���֤���ϵ�loss��ԽС��Խ�á���ʼ��Ϊ�����
     test_score = 0.0
-    start_time = time.clock()  # ��ʼʱ��
+    start_time = perf_counter()  # ��ʼʱ��
 
     done_looping = False
     epoch = 0
@@ -1255,7 +1256,7 @@ def sgd_optimization_mnist(
                 break
     classifier.save_net("tmp_convnet.data")  # ��������ѵ����������Ľ��������
     # whileѭ������
-    end_time = time.clock()  # ����ʱ��
+    end_time = perf_counter()  # ����ʱ��
     # ���
     print(
         (
@@ -1798,7 +1799,7 @@ def train_lstm(
 
     uidx = 0  # the number of update done
     estop = False  # early stop
-    start_time = time.clock()
+    start_time = perf_counter()
     try:
         for eidx in range(max_epochs):
             n_samples = 0
@@ -1875,7 +1876,7 @@ def train_lstm(
     except KeyboardInterrupt:
         print("Training interupted")
 
-    end_time = time.clock()
+    end_time = perf_counter()
     if best_p is not None:
         zipp(best_p, tparams)
     else:
@@ -2130,7 +2131,7 @@ def test_mlp(
     best_validation_loss = numpy.inf
     best_iter = 0
     test_score = 0.0
-    start_time = time.clock()
+    start_time = perf_counter()
 
     epoch = 0
     done_looping = False
@@ -2189,7 +2190,7 @@ def test_mlp(
                 done_looping = True
                 break
 
-    end_time = time.clock()
+    end_time = perf_counter()
     print(
         (
             "Optimization complete. Best validation score of %f %% "
@@ -2639,7 +2640,7 @@ def test_rbm(
     )
 
     plotting_time = 0.0
-    start_time = time.clock()
+    start_time = perf_counter()
 
     # go through training epochs
     for epoch in range(training_epochs):
@@ -2651,7 +2652,7 @@ def test_rbm(
         print("Training epoch %d, cost is " % epoch, numpy.mean(mean_cost))
 
         # Plot filters after each training epoch
-        plotting_start = time.clock()
+        plotting_start = perf_counter()
         # Construct image from the weight matrix
         image = Image.fromarray(
             tile_raster_images(
@@ -2662,10 +2663,10 @@ def test_rbm(
             )
         )
         image.save("filters_at_epoch_%i.png" % epoch)
-        plotting_stop = time.clock()
+        plotting_stop = perf_counter()
         plotting_time += plotting_stop - plotting_start
 
-    end_time = time.clock()
+    end_time = perf_counter()
 
     pretraining_time = (end_time - start_time) - plotting_time
 

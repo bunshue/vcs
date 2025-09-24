@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import crawler_module as m
 import pandas as pd
-import mpl_finance as mpf
+import mplfinance as mpf
 
 # import talib
 import time
@@ -40,6 +40,7 @@ ax.set_title(stock_symbol + "  K 線圖 ( " + dates[0] + " ~ " + dates[1] + " )"
 mpf.candlestick2_ochl(
     ax, openprice, close, high, low, width=0.5, colorup="r", colordown="g", alpha=0.6
 )
+
 ax.plot(talib.SMA(close, 10), label="10日均線")
 ax.plot(talib.SMA(close, 30), label="30日均線")
 ax.legend(loc="best", fontsize=20)

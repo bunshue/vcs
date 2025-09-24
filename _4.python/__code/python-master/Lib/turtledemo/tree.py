@@ -16,7 +16,9 @@ the current pen is cloned. So in the end
 there are 1024 turtles.
 """
 from turtle import Turtle, mainloop
-from time import clock
+# from time import clock # 改由 perf_counter()或process_time()替代
+from time import perf_counter
+
 
 def tree(plist, l, a, f):
     """ plist is list of pens
@@ -52,9 +54,9 @@ def maketree():
     print(len(p.getscreen().turtles()))
 
 def main():
-    a=clock()
+    a=perf_counter()
     maketree()
-    b=clock()
+    b=perf_counter()
     return "done: %.2f sec." % (b-a)
 
 if __name__ == "__main__":

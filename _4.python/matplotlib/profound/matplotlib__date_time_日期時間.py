@@ -341,12 +341,12 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
-python用mpl_finance中的candlestick_ohlc畫分時圖
+python用mplfinance中的candlestick_ohlc畫分時圖
 
-matplotlib.finance獨立出來成爲mpl_finance，而mpl_finance中的candlestick_ochl和candlestick_ohlc一般用來畫股票的K線圖。
+matplotlib.finance獨立出來成爲mplfinance，而mplfinance中的candlestick_ochl和candlestick_ohlc一般用來畫股票的K線圖。
 我需要分析分時圖，也就是一分鐘的行情，這個時候就不能直接用candlestick_ochl函數，因爲candlestick_ochl中x軸最小的單位是日期，不是分鐘。
 
-經過對mpl_finance的源代碼進行分析，問題在於matplotlib的date2num將日期轉換爲浮點數，
+經過對mplfinance的源代碼進行分析，問題在於matplotlib的date2num將日期轉換爲浮點數，
 浮點數的整數部分表示日期，小數部分代表小時和分鐘。比如下面4個時間段是連續的分鐘。
 時間 	date2num之後 	乘以1440
 2018/09/17-21:34 	736954.8986 	1061215054
@@ -360,7 +360,7 @@ matplotlib.finance獨立出來成爲mpl_finance，而mpl_finance中的candlestic
 
 最後還需要對x軸格式化，因爲自己對x軸進行了處理（乘以1440），採用默認的格式化是亂碼。需要自定義x軸的格式化函數。
 
-pip install mpl_finance
+pip install mplfinance
 pip install --upgrade mplfinance
 
 """

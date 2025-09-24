@@ -17,7 +17,10 @@ For more information see:
 """
 from turtle import *
 from math import cos, pi
-from time import clock, sleep
+from time import sleep
+# from time import clock # 改由 perf_counter()或process_time()替代
+from time import perf_counter
+
 
 f = (5**0.5-1)/2.0   # (sqrt(5)-1)/2 -- golden ratio
 d = 2 * cos(3*pi/10)
@@ -137,13 +140,13 @@ def test(l=200, n=4, fun=sun, startpos=(0,0), th=2):
     goto(startpos)
     setheading(0)
     tiledict = {}
-    a = clock()
+    a = perf_counter()
     tracer(0)
     fun(l, n)
-    b = clock()
+    b = perf_counter()
     draw(l, n, th)
     tracer(1)
-    c = clock()
+    c = perf_counter()
     print("Calculation:   %7.4f s" % (b - a))
     print("Drawing:  %7.4f s" % (c - b))
     print("Together: %7.4f s" % (c - a))
@@ -154,9 +157,9 @@ def test(l=200, n=4, fun=sun, startpos=(0,0), th=2):
 def demo(fun=sun):
     start()
     for i in range(8):
-        a = clock()
+        a = perf_counter()
         test(300, i, fun)
-        b = clock()
+        b = perf_counter()
         t = b - a
         if t < 2:
             sleep(2 - t)

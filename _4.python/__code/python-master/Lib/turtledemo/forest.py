@@ -13,7 +13,9 @@ http://homepage.univie.ac.at/erich.neuwirth/
 """
 from turtle import Turtle, colormode, tracer, mainloop
 from random import randrange
-from time import clock
+
+# from time import clock # 改由 perf_counter()或process_time()替代
+from time import perf_counter
 
 def symRandom(n):
     return randrange(-n,n+1)
@@ -88,7 +90,7 @@ def main():
     u = doit1(6, Turtle(undobuffersize=1))
     s = doit2(7, Turtle(undobuffersize=1))
     t = doit3(5, Turtle(undobuffersize=1))
-    a = clock()
+    a = perf_counter()
     while True:
         done = 0
         for b in u,s,t:
@@ -100,7 +102,7 @@ def main():
             break
 
     tracer(1,10)
-    b = clock()
+    b = perf_counter()
     return "runtime: %.2f sec." % (b-a)
 
 if __name__ == '__main__':

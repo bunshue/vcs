@@ -450,17 +450,6 @@ def mode(data):
 
 # === Measures of spread ===
 
-# See http://mathworld.wolfram.com/Variance.html
-#     http://mathworld.wolfram.com/SampleVariance.html
-#     http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance
-#
-# Under no circumstances use the so-called "computational formula for
-# variance", as that is only suitable for hand calculations with a small
-# amount of low-precision data. It has terrible numeric properties.
-#
-# See a comparison of three computational methods here:
-# http://www.johndcook.com/blog/2008/09/26/comparing-three-methods-of-computing-standard-deviation/
-
 
 def _ss(data, c=None):
     """Return sum of square deviations of sequence data.

@@ -24,7 +24,9 @@ mode as fast as possible.
 
 import math
 from turtle import Turtle, mainloop
-from time import clock
+# from time import clock # 改由 perf_counter()或process_time()替代
+from time import perf_counter
+
 
 # wrapper for any additional drawing routines
 # that need to know about each other
@@ -151,9 +153,9 @@ def main():
     t.hideturtle()
     t.getscreen().delay(0)
     t.getscreen().tracer(0)
-    at = clock()
+    at = perf_counter()
     t.design(t.position(), 2)
-    et = clock()
+    et = perf_counter()
     return "runtime: %.2f sec." % (et-at)
 
 if __name__ == '__main__':

@@ -1,6 +1,8 @@
 from ctypes import *
 import unittest
 import struct
+# from time import clock # 改由 perf_counter()或process_time()替代
+from time import perf_counter
 
 def valid_ranges(*types):
     # given a sequence of numeric types, collect their _type_
@@ -241,17 +243,16 @@ class c_int_S(_SimpleCData):
 def run_test(rep, msg, func, arg=None):
 ##    items = [None] * rep
     items = range(rep)
-    from time import clock
     if arg is not None:
-        start = clock()
+        start = perf_counter()
         for i in items:
             func(arg); func(arg); func(arg); func(arg); func(arg)
-        stop = clock()
+        stop = perf_counter()
     else:
-        start = clock()
+        start = perf_counter()
         for i in items:
             func(); func(); func(); func(); func()
-        stop = clock()
+        stop = perf_counter()
     print("%15s: %.2f us" % (msg, ((stop-start)*1e6/5/rep)))
 
 def check_perf():

@@ -6,11 +6,12 @@ import time
 import requests
 import pandas as pd
 import matplotlib.pyplot as plt
+
 from bs4 import BeautifulSoup
 
 print("------------------------------------------------------------")  # 60個
 
-
+'''
 def get_price(url):
     data = requests.get(url)  # GET請求
     data_prices = data.json()["stats"]  # 解析json格式，並取出'status'對應到的值
@@ -168,6 +169,7 @@ print(question)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
+'''
 response = requests.get(" https://zh.wikipedia.org/zh-tw/愛因斯坦")
 if response.status_code == 200:
     print(response.text)

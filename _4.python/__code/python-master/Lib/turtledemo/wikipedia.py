@@ -14,7 +14,9 @@ parallel.
 Followed by a complete undo().
 """
 from turtle import Screen, Turtle, mainloop
-from time import clock, sleep
+# from time import clock # 改由 perf_counter()或process_time()替代
+from time import perf_counter
+from time import sleep
 
 def mn_eck(p, ne,sz):
     turtlelist = [p]
@@ -44,18 +46,18 @@ def main():
 
     s.tracer(36,0)
 
-    at = clock()
+    at = perf_counter()
     mn_eck(p, 36, 19)
-    et = clock()
+    et = perf_counter()
     z1 = et-at
 
     sleep(1)
 
-    at = clock()
+    at = perf_counter()
     while any([t.undobufferentries() for t in s.turtles()]):
         for t in s.turtles():
             t.undo()
-    et = clock()
+    et = perf_counter()
     return "runtime: %.3f sec" % (z1+et-at)
 
 

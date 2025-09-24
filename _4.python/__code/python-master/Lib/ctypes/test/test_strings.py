@@ -2,6 +2,9 @@ import unittest
 from ctypes import *
 from ctypes.test import need_symbol
 
+# from time import clock # 改由 perf_counter()或process_time()替代
+from time import perf_counter
+
 class StringArrayTestCase(unittest.TestCase):
     def test(self):
         BUF = c_char * 4
@@ -194,11 +197,10 @@ class WStringTestCase(unittest.TestCase):
 
 def run_test(rep, msg, func, arg):
     items = range(rep)
-    from time import clock
-    start = clock()
+    start = perf_counter()
     for i in items:
         func(arg); func(arg); func(arg); func(arg); func(arg)
-    stop = clock()
+    stop = perf_counter()
     print("%20s: %.2f us" % (msg, ((stop-start)*1e6/5/rep)))
 
 def check_perf():

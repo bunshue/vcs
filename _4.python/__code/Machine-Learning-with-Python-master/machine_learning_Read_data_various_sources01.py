@@ -178,25 +178,10 @@ list_of_df = pd.read_html(url)
 df14 = list_of_df[0]
 df14.head()
 
-# Mostly, read_html returns more than one table and further wrangling is needed to get the desired data
-
-list_of_df = pd.read_html(
-    "https://en.wikipedia.org/wiki/2016_Summer_Olympics_medal_table", header=0
-)
-
-len(list_of_df)
-
-# 6
-
-for t in list_of_df:
-    print(t.shape)
-
-df15 = list_of_df[1]
-df15.head()
-
+print("------------------------------------------------------------")  # 60個
 """
 # Read in a JSON file
-
+# 無檔案
 df16 = pd.read_json("movies.json")
 
 df16.head()
@@ -211,6 +196,8 @@ print(list(cast_of_avengers))
 
 # [['Robert Downey, Jr.', 'Chris Evans', 'Mark Ruffalo', 'Chris Hemsworth', 'Scarlett Johansson', 'Jeremy Renner', 'Tom Hiddleston', 'Clark Gregg', 'Cobie Smulders', 'Stellan SkarsgÃ¥rd', 'Samuel L. Jackson']]
 """
+
+print("------------------------------------------------------------")  # 60個
 
 """
 # Read Stata file (.dta)

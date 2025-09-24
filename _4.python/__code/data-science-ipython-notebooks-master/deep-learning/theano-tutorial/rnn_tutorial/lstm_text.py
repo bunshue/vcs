@@ -1,6 +1,8 @@
 import pickle
 import time
 
+from time import perf_counter
+
 import numpy
 import theano
 from theano import config
@@ -247,7 +249,7 @@ def train_model(batch_size=100, n_h=50, n_epochs=40):
     output = energy_exp / energy_exp.sum(1)[:, None]
     single_step = theano.function([x_t, h_p, c_p], [output, h_t, c_t])
 
-    start_time = time.clock()
+    start_time = perf_counter()
 
     iteration = 0
 
@@ -290,7 +292,7 @@ def train_model(batch_size=100, n_h=50, n_epochs=40):
                     val_scores.append(evaluate_model(x_val.T, mask_val.T))
                 print 'Average validation CE per sentence:', numpy.mean(val_scores)
 
-    end_time = time.clock()
+    end_time = perf_counter()
     print('Optimization complete.')
     print('The code ran for %.2fm' % ((end_time - start_time) / 60.))
 

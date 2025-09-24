@@ -10689,21 +10689,28 @@ print(BB)
 print(CC)
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
-""" fail
-import time as t
+# 量測時間
 
-timestart = t.clock()
+# from time import clock # 改由 perf_counter()或process_time()替代
+from time import perf_counter
+
+timestart = perf_counter()
 for i in range (0,1000):
     for j in range (0,1000):
         n = i * j
-timeend = t.clock()
+timeend = perf_counter()
 print("執行一百萬次整數運算的時間：" + str(timeend-timestart) + " 秒")
-"""
 
+timestart = perf_counter()
+for i in range (0,1000):
+    for j in range (0,1000):
+        n = float(i) * float(j)
+timeend = perf_counter()
+print("執行一百萬次浮點數運算的時間：" + str(timeend-timestart) + " 秒")
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import time as t
@@ -10729,18 +10736,6 @@ for i in range(0, 1000):
 timeend = t.perf_counter()
 print("執行一百萬次整數運算的時間：" + str(timeend - timestart) + " 秒")
 
-print("------------------------------------------------------------")  # 60個
-
-"""
-import time as t
-
-timestart = t.clock()
-for i in range (0,1000):
-    for j in range (0,1000):
-        n = float(i) * float(j)
-timeend = t.clock()
-print("執行一百萬次浮點數運算的時間：" + str(timeend-timestart) + " 秒")
-"""
 print("------------------------------------------------------------")  # 60個
 
 date1 = "2017-8-23"

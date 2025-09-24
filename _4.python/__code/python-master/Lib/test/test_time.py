@@ -1,5 +1,6 @@
 from test import support
 import time
+from time import perf_counter
 import unittest
 import locale
 import sysconfig
@@ -36,7 +37,7 @@ class TimeTestCase(unittest.TestCase):
         self.assertTrue(info.adjustable)
 
     def test_clock(self):
-        time.clock()
+        perf_counter()
 
         info = time.get_clock_info('clock')
         self.assertTrue(info.monotonic)
