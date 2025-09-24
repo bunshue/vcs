@@ -3,12 +3,7 @@
 > Idiomatic Iteration with itertools
 
 """
-import logging
 from itertools import filterfalse, tee
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
 
 class IteratorWrapper:
     def __init__(self, iterable):
@@ -16,9 +11,6 @@ class IteratorWrapper:
 
     def __next__(self):
         value = next(self.iterable)
-        logger.debug(
-            "%s Producing next value: %r", self.__class__.__name__, value
-        )
         return value
 
     def __iter__(self):
@@ -53,6 +45,3 @@ def show(records):
 if __name__ == "__main__":
     even, odd = partition(is_even, iterable)
 
-    logger.info(
-        "\n\tEven records: %s\n\t Odd records: %s", show(even), show(odd)
-    )

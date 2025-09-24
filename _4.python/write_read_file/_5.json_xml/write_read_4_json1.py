@@ -46,9 +46,16 @@ print("串列轉json")
 print("json的資料內容 :", json_str)
 print("json的資料型態 :", type(json_str))
 
+print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+# 串列
+data_list = ["鼠", "牛", "虎", "兔", "龍"]  # 串列
+print("data_list串列：", data_list)
+print("data_list型別：", type(data_list))
+
+json_str = json.dumps(data_list)  # 串列轉json
+print("json的資料內容 :", json_str)
+print("json的資料型態 :", type(json_str))
 
 
 print("------------------------------------------------------------")  # 60個
@@ -100,6 +107,28 @@ print("type(data_dict) :", type(data_dict))
 json_str = json.dumps(data_dict, ensure_ascii=False, indent=4)  # 字典轉json
 print("json的資料內容 :", json_str)
 
+print("------------------------------------------------------------")  # 60個
+
+print('字典轉json')
+
+data_dict = {"英文名": "mouse", "中文名": "米老鼠", "體重": 3}
+print("data_dict字典：", data_dict)
+print("data_dict型別：", type(data_dict))
+
+json_str = json.dumps(data_dict, ensure_ascii=False)  # 字典轉json
+print("json的資料內容 :", json_str)
+print("json的資料型態 :", type(json_str))
+
+print("------------------------------")  # 30個
+
+print('字典轉json')
+
+data_dict = {"英文名": "mouse", "中文名": "米老鼠", "體重": 3}
+print(json.dumps(data_dict, ensure_ascii=False))  # 字典轉json
+print(json.dumps(data_dict, ensure_ascii=False, sort_keys=True))  # 字典轉json
+print(json.dumps(data_dict, ensure_ascii=False, sort_keys=True, indent=4))  # 字典轉json
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # json字串 <= 字典
@@ -211,33 +240,6 @@ data_tuple = ("鼠", "牛", "虎", "兔", "龍")  # 元組
 json_str = json.dumps(data_tuple)  # 元組轉json
 print("元組轉json :", json_str)
 print("json的資料型態 :", type(json_str))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 串列
-data_list = ["鼠", "牛", "虎", "兔", "龍"]  # 串列
-print("data_list串列：", data_list)
-print("data_list型別：", type(data_list))
-
-json_str = json.dumps(data_list)  # 串列轉json
-print("json的資料內容 :", json_str)
-print("json的資料型態 :", type(json_str))
-
-data_dict = {"英文名": "mouse", "中文名": "米老鼠", "體重": 3}
-print("data_dict字典：", data_dict)
-print("data_dict型別：", type(data_dict))
-
-json_str = json.dumps(data_dict, ensure_ascii=False)  # 字典轉json
-print("json的資料內容 :", json_str)
-print("json的資料型態 :", type(json_str))
-
-print("------------------------------")  # 30個
-
-data_dict = {"英文名": "mouse", "中文名": "米老鼠", "體重": 3}
-print(json.dumps(data_dict, ensure_ascii=False))  # 字典轉json
-print(json.dumps(data_dict, ensure_ascii=False, sort_keys=True))  # 字典轉json
-print(json.dumps(data_dict, ensure_ascii=False, sort_keys=True, indent=4))  # 字典轉json
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -616,51 +618,39 @@ print_dir_scores(r".\data\scores")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
-"""
-Topic: JSON读写
-Desc :
-"""
-import json
 from collections import OrderedDict
 
+print("字典轉json")
 
-class Point:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
+# 字典
+data_dict = {"英文名": "mouse", "中文名": "米老鼠", "體重": 3}
+print(type(data_dict))
 
+json_str = json.dumps(data_dict)  # str类型
 
-def rw_json():
-    data = {"name": "ACME", "shares": 100, "price": 542.23}
+data_dict = json.loads(json_str)
 
-    json_str = json.dumps(data)  # str类型
-    data = json.loads(json_str)
+# 寫json檔案
+with open("tmp_data.json", "w") as f:
+    json.dump(data_dict, f)
 
-    # Writing JSON data
-    with open("data.json", "w") as f:
-        json.dump(data, f)
+# 讀json檔案
+with open("tmp_data.json", "r") as f:
+    data_dict = json.load(f)
 
-    # Reading data back
-    with open("data.json", "r") as f:
-        data = json.load(f)
+# 使用object_pairs_hook
+# json字串 <= 字典
+json_str = '{"英文名":"mouse", "中文名":"米老鼠", "體重":3}'
+print(type(json_str))
 
-    # 使用object_pairs_hook
-    s = '{"name": "ACME", "shares": 50, "price": 490.1}'
-    data = json.loads(s, object_pairs_hook=OrderedDict)
-    print(data)
+data_dict = json.loads(json_str, object_pairs_hook=OrderedDict)
+print(data_dict)
 
-    # 解码为自定义对象
-    data = json.loads(s)
+# 解码为自定义对象
+data_dict = json.loads(json_str)
 
-    print(json.dumps(data))
-    print(json.dumps(data, indent=4))
-
-
-if __name__ == "__main__":
-    rw_json()
-
+print(json.dumps(data_dict))
+print(json.dumps(data_dict, indent=4))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1076,3 +1066,4 @@ json字串 = 字典 用''包起來變成json字串
 寫檔讀檔後，會依原本儲存的格式得到格式
 
 """
+

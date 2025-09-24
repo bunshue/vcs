@@ -4,18 +4,12 @@
 
 """
 
-import logging
-
-logger = logging.getLogger(__name__)
-
-
 class SequenceWrapper:
     def __init__(self, original_sequence):
         self.seq = original_sequence
 
     def __getitem__(self, item):
         value = self.seq[item]
-        logger.debug("%s getting %s", self.__class__.__name__, item)
         return value
 
     def __len__(self):
@@ -32,7 +26,6 @@ class MappedRange:
     def __getitem__(self, index):
         value = self._wrapped.__getitem__(index)
         result = self._transformation(value)
-        logger.info("Index %d: %s", index, result)
         return result
 
     def __len__(self):

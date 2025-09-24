@@ -11742,15 +11742,6 @@ print(
 )
 
 print("------------------------------------------------------------")  # 60個
-
-import logging
-
-logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
-
-logging.info("Start to load dataset")
-
-logging.info("Done with load dataset")
-
 print("------------------------------------------------------------")  # 60個
 
 from io import BytesIO

@@ -871,11 +871,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-import logging
-
-# Display progress logs on stdout
-logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-
 # same
 # plt.xticks(())
 # plt.yticks(())

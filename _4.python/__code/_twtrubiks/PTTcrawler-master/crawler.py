@@ -2,14 +2,12 @@ import sys
 import requests
 import json
 import urllib3
-import logging
 import re
 import datetime
 
 from bs4 import BeautifulSoup
 
 urllib3.disable_warnings()
-logging.basicConfig(level=logging.WARNING)
 HTTP_ERROR_MSG = 'HTTP error {res.status_code} - {res.reason}'
 
 
@@ -59,7 +57,7 @@ class PttSpider:
             res = self.rs.post('{}/ask/over18'.format(self.ptt_head), verify=False, data=load)
             res.raise_for_status()
         except requests.exceptions.HTTPError as exc:
-            logging.warning(HTTP_ERROR_MSG.format(res=exc.response))
+            print(HTTP_ERROR_MSG.format(res=exc.response))
             raise Exception('網頁有問題')
         return BeautifulSoup(res.text, 'html.parser')
 
@@ -79,9 +77,9 @@ class PttSpider:
                 res = self.rs.get(page, verify=False)
                 res.raise_for_status()
             except requests.exceptions.HTTPError as exc:
-                logging.warning(HTTP_ERROR_MSG.format(res=exc.response))
+                print(HTTP_ERROR_MSG.format(res=exc.response))
             except requests.exceptions.ConnectionError:
-                logging.error('Connection error')
+                print('Connection error')
             else:
                 articles += self.crawler_info(res)
         return articles
@@ -89,13 +87,13 @@ class PttSpider:
     def analyze_articles(self):
         for article in self._articles:
             try:
-                logging.debug('{}{} ing......'.format(self.ptt_head, article.url))
+                print('{}{} ing......'.format(self.ptt_head, article.url))
                 res = self.rs.get('{}{}'.format(self.ptt_head, article.url), verify=False)
                 res.raise_for_status()
             except requests.exceptions.HTTPError as exc:
-                logging.warning(HTTP_ERROR_MSG.format(res=exc.response))
+                print(HTTP_ERROR_MSG.format(res=exc.response))
             except requests.exceptions.ConnectionError:
-                logging.error('Connection error')
+                print('Connection error')
             else:
                 article.res = res
 
@@ -107,7 +105,7 @@ class PttSpider:
             content = soup.select(class_tag)[index].text
         except Exception as e:
             # print('checkformat error URL', link)
-            logging.warning(e)
+            print(e)
         return content
 
     @staticmethod
@@ -120,7 +118,7 @@ class PttSpider:
             content = content[0].split(time)
             main_content = content[1].replace('\n', '  ').strip()
         except Exception as e:
-            logging.warning(e)
+            print(e)
         return main_content
 
     @staticmethod
@@ -131,7 +129,7 @@ class PttSpider:
             ip = soup.find(string=re.compile(target_split))
             ip = re.search(r"[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*", ip).group()
         except Exception as e:
-            logging.warning(e)
+            print(e)
         return ip
 
     @staticmethod
@@ -169,7 +167,7 @@ class PttSpider:
                 else:
                     n += 1
             except Exception as e:
-                logging.warning(e)
+                print(e)
 
         message_num = {"g": g, "b": b, "n": n, "all": num}
         return message, message_num
@@ -190,7 +188,7 @@ class PttSpider:
 
     @staticmethod
     def crawler_info(res):
-        logging.debug('crawler_info......{}'.format(res.url))
+        print('crawler_info......{}'.format(res.url))
         soup = BeautifulSoup(res.text, 'html.parser')
         articles = []
         for r_ent in soup.find_all(class_="r-ent"):
@@ -206,8 +204,8 @@ class PttSpider:
                 articles.append(ArticleInfo(
                     title=title, author=author, url=url))
             except Exception as e:
-                logging.debug('本文已被刪除')
-                logging.debug(e)
+                print('本文已被刪除')
+                print(e)
         return articles
 
     @staticmethod

@@ -2311,34 +2311,6 @@ print(dddd)
 
 ------------------------------------------------------------
 
-import logging
-
-logger = logging.getLogger("RefactoringTool")
-
-logger=self.logger)
-
-logger.info(msg)
-
-            msg = msg % args
-logger.debug(msg)
-
-
-log_debug("Source: %s", line.rstrip("\n"))
-log_error("Can't parse docstring in %s line %s: %s: %s",
-                           filename, lineno, err.__class__.__name__, err)
-
-
-
-    # Set up logging handler
-    level = logging.DEBUG if options.verbose else logging.INFO
-    logging.basicConfig(format='%(name)s: %(message)s', level=level)
-    logger = logging.getLogger('lib2to3.main')
-
-        logger.info('Output in %r will mirror the input directory %r layout.',
-                    options.output_dir, input_base_dir)
-
-------------------------------------------------------------
-
     _default_options = {"print_function" : False,
                         "write_unchanged_files" : False}
 

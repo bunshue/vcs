@@ -2,7 +2,6 @@ from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookParser, WebhookHandler
 from linebot.exceptions import LineBotApiError, InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
-import logging
 import os, base64, hashlib, hmac
 
 # 指定 Channel secret、Channel access token
@@ -11,10 +10,6 @@ CHANNEL_SECRET=os.environ.get('CHANNEL_SECRET', '')
 
 # 建立 Flask 物件 
 app = Flask(__name__)
-
-# 設定工作日誌檔名及訊息欄位
-logging.basicConfig(filename='record.log', encoding='utf-8', 
-    level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 
 # 建立 LineBot物件
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)

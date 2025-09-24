@@ -107,7 +107,7 @@ import sqlite3
 import datetime
 
 
-def show_data_base_contents(db_filename, table_name):
+def show_data_base_contents(db_filename, table_name, reverse=0):
     conn = sqlite3.connect(db_filename)  # 建立資料庫連線
     cursor = conn.cursor()  # 建立 cursor 物件
     # SELECT * : 取得所有資料
@@ -119,9 +119,11 @@ def show_data_base_contents(db_filename, table_name):
     rows = cursor.fetchall()  # 讀取全部資料成元組串列
     length = len(rows)
     print("共有", length, "筆資料")
+    if reverse==1:
+        rows = sorted(rows, reverse=True)
     for i in range(length):
         print("第" + str(i + 1) + "筆資料 : ", rows[i])
-        if i > 20:
+        if i > 10:
             break
     """
     # 不使用fetchall()
@@ -140,7 +142,7 @@ def checkin(name, option=0):
     if option == 1:
         print("讀取資料庫")
         table_name = "table01"
-        show_data_base_contents(db_filename, table_name)
+        show_data_base_contents(db_filename, table_name, 1)
     else:
         conn = sqlite3.connect(db_filename)  # 建立資料庫連線
         cursor = conn.cursor()  # 建立 cursor 物件
@@ -163,7 +165,8 @@ def checkin(name, option=0):
         conn.close()  # 關閉資料庫連線
 
 
-checkin("mouse", 0)
+# checkin("mouse", 1)
+checkin("mouse")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -173,7 +176,7 @@ import datetime
 import sqlite3
 
 
-def show_data_base_contents(db_filename, table_name):
+def show_data_base_contents(db_filename, table_name, reverse=0):
     conn = sqlite3.connect(db_filename)  # 建立資料庫連線
     cursor = conn.cursor()  # 建立 cursor 物件
     # SELECT * : 取得所有資料
@@ -185,6 +188,8 @@ def show_data_base_contents(db_filename, table_name):
     rows = cursor.fetchall()  # 讀取全部資料成元組串列
     length = len(rows)
     print("共有", length, "筆資料")
+    if reverse==1:
+        rows = sorted(rows, reverse=True)
     for i in range(length):
         print("第" + str(i + 1) + "筆資料 : ", rows[i])
         if i > 10:
@@ -345,7 +350,7 @@ cursor.executemany(sqlstr, animals)  # 一次執行多個指令
 print("新增資料行數 :", cursor.rowcount)
 
 print("------------------------------")  # 30個
-
+"""
 print("測試 例外 的寫法 資料重複")
 
 # 測試 PK, 不能使用相同的PK
@@ -372,7 +377,7 @@ try:
     cursor.execute(sqlstr, x)
 except sqlite3.IntegrityError:
     print("無法重複輸入相同的資料3")
-
+"""
 print("------------------------------")  # 30個
 
 # DROP TABLE 刪除表單 如果存在的話
@@ -887,15 +892,17 @@ PRAGMA schema_version;       -- 获取当前模式版本
 PRAGMA schema_version = 2;   -- 设置模式版本为 2
 """
 
-# 取得表單資訊
+print('取得表單資訊 table_info')
+
 table_name = "table01"
 cursor.execute('PRAGMA table_info("{0}")'.format(table_name))
 
 table_info = cursor.fetchall()  # 讀取全部資料成元組串列
-print("table_info")
+# print("table_info :", table_info)
 length = len(table_info)
 print("共有", length, "個欄位")
 for i in range(length):
+    print("------------------------------")  # 30個
     print("第" + str(i + 1) + "個欄位 : ", table_info[i])
     ii = table_info[i][0]
     nn = table_info[i][1]
@@ -910,16 +917,7 @@ for i in range(length):
     print("資料2 :", t2)
     print("資料3 :", t3)
 
-print(len(table_info))
-print(table_info)
-
-"""
-column_names = [str(table_info[1]) for table_info in cursor.fetchall()]
-print('表單欄位 :', column_names)
-
-其他
-columns = conn.execute(f"PRAGMA table_info('{table_name}');").fetchall()
-"""
+print("------------------------------")  # 30個
 
 conn.close()  # 關閉資料庫連線
 
@@ -1020,7 +1018,7 @@ print("讀取資料庫")
 table_name = "參賽者"
 print(table_name)
 show_data_base_contents(db_filename_singMatch, table_name)
-
+""" 雷同
 table_name = "音色"
 print(table_name)
 show_data_base_contents(db_filename_singMatch, table_name)
@@ -1032,7 +1030,7 @@ show_data_base_contents(db_filename_singMatch, table_name)
 table_name = "儀態"
 print(table_name)
 show_data_base_contents(db_filename_singMatch, table_name)
-
+"""
 print("------------------------------")  # 30個
 
 conn = sqlite3.connect(db_filename_singMatch)  # 建立資料庫連線
@@ -1053,7 +1051,7 @@ conn.close()  # 關閉資料庫連線
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-db_filename = "data/singMatch.db"
+db_filename = "data/animals.sqlite"
 
 print("測試讀取不存在的表單觸發異常")
 
@@ -1085,6 +1083,8 @@ db_filename = "tmp_db04_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + "
 conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
 
+# ingredient （混合物的）組成部分；（烹調的）原料；（構成）要素，因素
+
 cursor.execute(
     "CREATE VIRTUAL TABLE IF NOT EXISTS table01 USING FTS3(name, ingredients)"
 )
@@ -1111,7 +1111,7 @@ show_data_base_contents(db_filename, table_name)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 # """ 資料很多 保留給 fts3 用
 
 # 4個欄位 id / url / title / content
@@ -1153,7 +1153,8 @@ print("讀取資料庫")
 table_name = "news"
 show_data_base_contents(db_filename, table_name)
 """
-'''
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

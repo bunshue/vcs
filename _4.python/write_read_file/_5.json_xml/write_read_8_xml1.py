@@ -1172,19 +1172,15 @@ if __name__ == "__main__":
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
-"""
-Topic: 解析简单的XML
-Desc : 
-"""
+# 解析简单的XML
+
 from urllib.request import urlopen
 from xml.etree.ElementTree import parse
 
 
 def simple_xml():
     # Download the RSS feed and parse it
-    u = urlopen("http://planet.python.org/rss20.xml")
+    u = urlopen("https://planetpython.org/rss20.xml")
     doc = parse(u)
 
     # Extract and output tags of interest
@@ -1205,34 +1201,23 @@ if __name__ == "__main__":
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
-"""
-Topic: 读取修改某个XML文档
-Desc : 
-"""
+# 读取修改某个XML文档
+
 from xml.etree.ElementTree import parse, Element
 
+doc = parse("data/pred.xml")
+root = doc.getroot()
+# Remove a few elements
+root.remove(root.find("sri"))
+root.remove(root.find("cr"))
+# Insert a new element after <nm>...</nm>
+root.getchildren().index(root.find("nm"))
 
-def rw_xml():
-    doc = parse("data/pred.xml")
-    root = doc.getroot()
-    # Remove a few elements
-    root.remove(root.find("sri"))
-    root.remove(root.find("cr"))
-    # Insert a new element after <nm>...</nm>
-    root.getchildren().index(root.find("nm"))
-
-    e = Element("spam")
-    e.text = "This is a test"
-    root.insert(2, e)
-    # Write back to a file
-    doc.write("newpred.xml", xml_declaration=True)
-
-
-if __name__ == "__main__":
-    rw_xml()
-
+e = Element("spam")
+e.text = "This is a test"
+root.insert(2, e)
+# Write back to a file
+doc.write("newpred.xml", xml_declaration=True)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

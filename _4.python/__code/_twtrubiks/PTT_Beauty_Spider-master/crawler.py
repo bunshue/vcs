@@ -3,12 +3,10 @@ import concurrent.futures
 import requests
 import urllib3
 import os
-import logging
 import uuid
 from bs4 import BeautifulSoup
 
 urllib3.disable_warnings()
-logging.basicConfig(level=logging.WARNING)
 HTTP_ERROR_MSG = 'HTTP error {res.status_code} - {res.reason}'
 
 class PttSpider:
@@ -66,7 +64,7 @@ class PttSpider:
             res = self.rs.post('{}/ask/over18'.format(self.ptt_head), verify=False, data=load)
             res.raise_for_status()
         except requests.exceptions.HTTPError as exc:
-            logging.warning(HTTP_ERROR_MSG.format(res=exc.response))
+            print(HTTP_ERROR_MSG.format(res=exc.response))
             raise Exception('網頁有問題')
         return BeautifulSoup(res.text, 'html.parser')
 
@@ -86,9 +84,9 @@ class PttSpider:
                 res = self.rs.get(page, verify=False)
                 res.raise_for_status()
             except requests.exceptions.HTTPError as exc:
-                logging.warning(HTTP_ERROR_MSG.format(res=exc.response))
+                print(HTTP_ERROR_MSG.format(res=exc.response))
             except requests.exceptions.ConnectionError:
-                logging.error('Connection error')
+                print('Connection error')
             else:
                 articles += self.crawler_info(res, self.push_rate)
         return articles
@@ -96,13 +94,13 @@ class PttSpider:
     def analyze_articles(self):
         for article in self._articles:
             try:
-                logging.debug('{}{} ing......'.format(self.ptt_head, article.url))
+                print('{}{} ing......'.format(self.ptt_head, article.url))
                 res = self.rs.get('{}{}'.format(self.ptt_head, article.url), verify=False)
                 res.raise_for_status()
             except requests.exceptions.HTTPError as exc:
-                logging.warning(HTTP_ERROR_MSG.format(res=exc.response))
+                print(HTTP_ERROR_MSG.format(res=exc.response))
             except requests.exceptions.ConnectionError:
-                logging.error('Connection error')
+                print('Connection error')
             else:
                 article.res = res
 
@@ -116,7 +114,7 @@ class PttSpider:
                 try:
                     title = soup.select('.article-meta-value')[2].text
                 except Exception as e:
-                    logging.debug('自行刪除標題列:', e)
+                    print('自行刪除標題列:', e)
                 finally:
                     data.title = title
 
@@ -141,7 +139,7 @@ class PttSpider:
 
     @staticmethod
     def crawler_info(res, push_rate):
-        logging.debug('crawler_info......{}'.format(res.url))
+        print('crawler_info......{}'.format(res.url))
         soup = BeautifulSoup(res.text, 'html.parser')
         articles = []
         for r_ent in soup.find_all(class_="r-ent"):
@@ -169,8 +167,8 @@ class PttSpider:
                     articles.append(ArticleInfo(
                         title=title, author=author, url=url, rate=rate))
             except Exception as e:
-                logging.debug('本文已被刪除')
-                logging.debug(e)
+                print('本文已被刪除')
+                print(e)
         return articles
 
     @staticmethod
@@ -205,7 +203,7 @@ class ArticleInfo:
                     os.makedirs(path)
                     result += [(img_url, path) for img_url in data]
             except Exception as e:
-                logging.warning(e)
+                print(e)
         return result
 
     @staticmethod
@@ -234,13 +232,13 @@ class Download:
         url, path = image_info
         try:
             res_img = self.rs.get(url, stream=True, verify=False)
-            logging.debug('download image {} ......'.format(url))
+            print('download image {} ......'.format(url))
             res_img.raise_for_status()
         except requests.exceptions.HTTPError as exc:
-            logging.warning(HTTP_ERROR_MSG.format(res=exc.response))
-            logging.warning(url)
+            print(HTTP_ERROR_MSG.format(res=exc.response))
+            print(url)
         except requests.exceptions.ConnectionError:
-            logging.error('Connection error')
+            print('Connection error')
         else:
             file_name = url.split('/')[-1]
             file = os.path.join(path, file_name)
@@ -248,4 +246,4 @@ class Download:
                 with open(file, 'wb') as out_file:
                     out_file.write(res_img.content)
             except Exception as e:
-                logging.warning(e)
+                print(e)

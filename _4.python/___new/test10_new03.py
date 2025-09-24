@@ -124,23 +124,6 @@ _p_dir = os.path.abspath(
 g_project_kl_df_data_example = os.path.join(_p_dir, "RomDataBu/tmp_csv")
 print(g_project_kl_df_data_example)
 
-
-"""
-    if not os.path.exists(g_project_log_dir):
-        # 创建log文件夹
-        os.makedirs(g_project_log_dir)
-
-    # 输出格式规范
-    # file_handler = logging.FileHandler(g_project_log_info, 'a', 'utf-8')
-    logging.basicConfig(level=logging.DEBUG,
-                        format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s',
-                        datefmt='%a, %d %b %Y %H:%M:%S',
-                        filename=g_project_log_info,
-                        filemode='a'
-                        # handlers=[file_handler]
-                        )
-"""
-
 #  ＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊ 日志 end ＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
 
 g_plt_figsize = (14, 7)
@@ -155,30 +138,6 @@ def init_plot_set():
 
 
 init_plot_set()
-
-
-print("aaaaaaaaaaaaaa")
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-import logging
-
-
-"""
-msg = u'严重错误！当前运行环境下有中文路径，abu将无法正常运行！请不要使用中文路径名称, 当前环境为{}'.format(
-    to_unicode(str(__file__)))
-"""
-msg = "aaaaaaaaaa"
-logging.info(msg)
-
-msg = "error！non English characters in the current running environment,abu will not work properly!"
-logging.info(msg)
-
-logging.info("enable example env will only read RomDataBu/csv")
-
-logging.info("disable example env")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

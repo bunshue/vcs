@@ -1,7 +1,6 @@
 # -*- encoding:utf-8 -*-
 from __future__ import print_function
 
-import logging
 import warnings
 from abc import ABCMeta, abstractmethod
 from collections import OrderedDict
@@ -862,23 +861,13 @@ def sample_25():
 
     print(gen_buy_change_list())
 
-    logging.basicConfig(level=logging.INFO)
-
     # noinspection PyAugmentAssignment
     def gen_buy_change_list():
-        # 会打印出来，因为info >= level=logging.INFO
-        logging.info("gen_buy_change_list begin")
 
         buy_change_list = []
         for buy_change in xrange(-5, -16, -1):
-            # 不会打印出来，debug < level=logging.INFO
-            logging.debug(buy_change)
             buy_change = buy_change / 100
-            # 不会打印出来，debug < level=logging.INFO
-            logging.debug(buy_change)
             buy_change_list.append(buy_change)
-        # 会打印出来，因为info >= level=logging.INFO
-        logging.info("gen_buy_change_list end")
         return buy_change_list
 
     _ = gen_buy_change_list()
