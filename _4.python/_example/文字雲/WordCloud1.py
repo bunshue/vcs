@@ -26,14 +26,31 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 def show():
     # return
-    plt.tight_layout()  # 緊密排列，並填滿原圖大小
+    plt.tight_layout()  # 緊密排列, 並填滿原圖大小
     plt.show()
 
 
-def show_WordCloud():
+def show_WordCloud(wc):
+    # wc.to_file("tmp_WordCloud.png")  # 文字雲存圖
     plt.imshow(wc)
     plt.axis("off")
     show()
+
+
+def create_and_show_WordCloud(cloud_text, mask=None):
+    wc = wordcloud.WordCloud(
+        width=W,
+        height=H,
+        font_path=font_filename,
+        background_color="white",
+        mask=mask,
+        margin=2,  # 文字間的距離
+        # contour_width=6,  # mask的外框寬度
+        # contour_color="pink",  # mask的外框的顏色
+        # colormap="plasma",
+    )
+    wc.generate(cloud_text)
+    show_WordCloud(wc)
 
 
 print("------------------------------------------------------------")  # 60個
@@ -42,18 +59,17 @@ import wordcloud
 import jieba
 
 from janome.tokenizer import Tokenizer
-from collections import Counter
 from PIL import Image
 
 W, H = 1000, 600
 print("------------------------------------------------------------")  # 60個
 
 font_filename = "D:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf"
-font_filename = r"C:\Windows\Fonts\msjh.ttc"
+font_filename = "C:/Windows/Fonts/msjh.ttc"
+font_filename = "C:/Windows/Fonts/mingliu"
 font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 
 mask_filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png"
-mask_filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_mask/star.gif"
 mask_filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_mask/cloud.jpg"
 
 # 製作mask, 設定文字雲形狀
@@ -96,6 +112,12 @@ If the implementation is hard to explain, it's a bad idea.
 If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!"""
 
+e_text4 = """
+Ada AssemblyLanguage AWK ASP.NET Bash BASIC
+C C++ C# CUDA Delphi Go Java JavaScript Julia
+Kotlin MATLAB Perl PHP Python R Ruby Rust
+Scratch Swift Swift TurboC++ Verilog VisualBasic
+"""
 
 c_text1 = """梅洛絲很是氣憤。 他決心要除掉這個邪惡暴虐的國王。 梅羅斯不懂政治。 梅羅斯是村裡的牧民。 他一生都在吹笛子，和羊群玩耍。 但他對邪惡比大多數人更敏感。 今天黎明時分，梅羅斯離開了自己的村莊，穿過田野和山林，來到了十里外的這座錫拉庫扎城。 他沒有父親，沒有母親，沒有妻子。 他沒有妻子。 他和年僅16歲的羞澀妹妹單獨生活。 妹妹要接受村裡某位守法的牧民作為她的新郎。 婚禮即將舉行。 因此，梅洛絲大老遠地來到集市上買新娘的衣服和宴席。 先是買了這些東西，然後他就在城市的大街小巷裡轉悠。 梅洛斯有一個高蹺的朋友。 他就是塞利農提斯。 他現在是錫拉庫扎市的一名石匠。 他要去看望他的朋友。 很久沒有見到他了，所以我很期待去看他。 走著走著，梅洛斯對這個小鎮產生了懷疑。 它是如此的安靜。 太陽已經落山了，城市自然是一片漆黑，但這不僅僅是因為夜晚，整個城市顯得十分寂寞。 就連無憂無慮的梅洛斯也開始感到不安。 他抓住一個在街上遇到的年輕人，問他是不是出了什麼事，他說："兩年前我來這個市場的時候，大家連晚上都在唱歌，鎮上一定很熱鬧。 年輕人搖搖頭，沒有回答。 走了一會兒，遇到老人，他用比較強硬的語氣問了他一個問題。 老人沒有回答。 梅洛斯雙手搖晃著老人的身體，問了更多的問題。 老人低沉地回答道。
 "王者殺人。
@@ -135,7 +157,7 @@ c_text1 = """梅洛絲很是氣憤。 他決心要除掉這個邪惡暴虐的國
 　新郎在搓著手，抽搐著。 梅羅斯笑著向村民們告別，然後離開了宴會，進入羊圈沉沉睡去，如同死去一般。
 　他醒來的時候，是第二天的黃昏。 梅洛斯跳起來，自言自語道："納木措，我是不是睡得太久了？ 今天，我將向國王展示人類的真相。 那麼我將帶著微笑走上十字架。 梅洛斯開始悠閒地準備著。 雨勢似乎有所減弱。 準備工作已經完成。 現在，梅羅斯揮舞著雙臂，像箭一樣在雨中奔跑。
 　我今晚就會被殺。 我是奔著被殺去的。 我跑去救我的朋友，他是我的贖金。 我是奔著打敗國王的邪惡和奸詐而去的。 我得走了 我就是這樣被殺的。 從小守護自己的榮譽。 再見了，祖國。 這對年輕的梅洛斯來說是很難的。 有好幾次，他幾乎停了下來。 他一邊跑，一邊大喊大叫，自責不已。 到了下一個村子，雨已經停了，太陽高高掛在天上，天氣越來越熱。 梅洛斯用拳頭擦了擦額頭的汗水，說："既然走到了這一步，我就沒事了。 我的姐妹們會是一對好夫妻。 我現在應該沒有任何顧慮了。 你要做的就是直接去城堡。 你不用這麼著急。 我慢慢走。"說著，他又恢復了天生的慵懶，用好聽的聲音唱起了他最喜歡的小調。 他晃晃悠悠地走了兩三里路，走到半路時，一場突如其來的災難讓他停下了腳步。 看著前面的河水。 昨日的大雨已經溢出了山中的水源，渾濁的水流在下游彙集成一股洪流，一舉摧毀了大橋，迴蕩的洪流在橋樑上彈出一片塵土。 他驚呆了，站在原地不動。 他這裡看看，那裡看看，高聲呼喚，但所有的停泊船都被海浪衝走了，沒有擺渡人的蹤影。 目前在這裡。"""
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("簡單製作文字雲")
 print("------------------------------------------------------------")  # 60個
@@ -153,100 +175,48 @@ print("------------------------------")  # 30個
 
 # 從檔案做文字雲
 
-text_filename = "data/red_cliff_big5.txt"  # 中文大五碼
-text_filename = "data/edata19_1.txt"  # 英文字的文字檔
-text_filename = "data/data19_1.txt"  # 英文字的文字檔
-text_filename = "data/data19_2.txt"  # 含中文的文字檔
 text_filename = "data/red_cliff.txt"  # 中文
 text_filename = "data/red_cliff_big5.txt"  # 中文大五碼
 
-
-with open(text_filename, encoding="cp950") as fp:
-    cloud_text = fp.read()
-"""
-with open(text_filename, encoding="utf-8") as fp:
-    cloud_text = fp.read()
-
-with open(text_filename) as fp:
-    cloud_text = fp.read()
-
-text_filename = "data/data19_1.txt"
-with open(text_filename) as fp:  # 文字檔
-    cloud_text = fp.read()
-
-text_filename = "data/red_cliff.txt"
-
-with open(text_filename, encoding="utf-8") as fp:
-    cloud_text = fp.read()
-
-text_filename = "data/red_cliff_big5.txt"  # 中文大五碼
-with open(text_filename) as fp:
-    cloud_text = fp.read()
-
-text_filename = "data/red_cliff_big5.txt"  # 中文大五碼
 with open(text_filename, encoding="cp950") as fp:  # 含中文的文字檔
     cloud_text = fp.read()  # 讀取檔案
 
+"""
+# 其他讀取檔案的方法
+with open(text_filename, encoding="utf-8") as fp:
+    cloud_text = fp.read()
+"""
 
+print("------------------------------")  # 30個
 
 """
-print("------------------------------")  # 30個
-print("文字雲1, 不使用mask")
-
-wc = wordcloud.WordCloud(
-    width=W, height=H, font_path=font_filename, background_color="white"
+# 建立停用詞集合 stopwords, 文字雲就不會出現停用詞
+stopwords = wordcloud.STOPWORDS
+stopwords.update(
+    [
+        "壬戌之秋",
+        "七月既望",
+        "清風徐來",
+        "水波不興",
+    ]
 )
-wc.generate(cloud_text)
-show_WordCloud()
+"""
+print("建立文字雲, 不使用mask")
+create_and_show_WordCloud(cloud_text)
 
 print("------------------------------")  # 30個
-print("文字雲2, 使用mask")
 
-wc = wordcloud.WordCloud(
-    width=W,
-    height=H,
-    font_path=font_filename,
-    background_color="white",
-    mask=mask_image,
-    margin=2,
-)
-wc.generate(cloud_text)
-show_WordCloud()
+print("建立文字雲, 使用mask")
+create_and_show_WordCloud(cloud_text, mask_image)
 
 print("------------------------------")  # 30個
-print("文字雲3, 使用mask")
-
-wc = wordcloud.WordCloud(
-    width=W,
-    height=H,
-    font_path=font_filename,
-    background_color="white",
-    mask=mask_image,
-    contour_width=6,
-    contour_color="pink",
-    colormap="plasma",
-)
-wc.generate(cloud_text)
-show_WordCloud()
-
 print("------------------------------")  # 30個
-print("文字雲3")
-
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("文字雲3: Tokenizer 文章拆寫範例")
+print("建立文字雲, 使用Tokenizer, 文章拆寫範例")
+create_and_show_WordCloud(cloud_text, mask_image)
 
 text = c_text1
 
@@ -255,14 +225,11 @@ tk = Tokenizer()
 token = tk.tokenize(text, wakati=True)
 # print(token)
 
-wc = wordcloud.WordCloud(
-    width=W, height=H, font_path=font_filename, background_color="white"
-)
-wc.generate(" ".join(token))
-show_WordCloud()
+cloud_text = " ".join(token)
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+create_and_show_WordCloud(cloud_text)
+
+print("------------------------------")  # 30個
 
 print("文字雲4: 就算名詞只有一個字也繪製的範例")
 
@@ -272,6 +239,8 @@ for token in tk.tokenize(text):
     if token.part_of_speech.split(",")[0] == "名詞":
         meishi_list.append(token.surface)
 
+cloud_text = " ".join(meishi_list)
+
 # 要讓只有一個字的單字出現必須設定regexp
 wc = wordcloud.WordCloud(
     width=W,
@@ -280,348 +249,94 @@ wc = wordcloud.WordCloud(
     background_color="white",
     regexp="[\w']+",
 )
-wc.generate(" ".join(meishi_list))
-show_WordCloud()
+wc.generate(cloud_text)
+show_WordCloud(wc)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("文字雲5: 指定特定文字的顏色")
 
-cloud_text = e_text3
+cloud_text = e_text4
 
-# 產生文字雲
 wc = wordcloud.WordCloud()
-wc.generate(cloud_text.lower())
+wc.generate(cloud_text)
 
 
 # 定義調色函數
 def color_func(word, **kwargs):
     # 單字與顏色的對照字典
-    color_dict = {"idea": "red", "although": "green"}
+    color_dict = {"Python": "red", "MATLAB": "green", "CUDA": "blue"}
     # 設定未於字典出現的單字的顏色
     default_color = "grey"
     return color_dict.get(word, default_color)
 
 
-# 執行調色函數，重新替文字上色
+# 執行調色函數, 重新替文字上色
 wc.recolor(color_func=color_func)
 
-show_WordCloud()
-'''
+show_WordCloud(wc)
+
 print("------------------------------------------------------------")  # 60個
 print("使用 jieba ST")
 print("------------------------------------------------------------")  # 60個
 
-print("文字雲14: 製作文字雲 jieba")
+print("文字雲6: 製作文字雲 jieba")
 
 text_filename = "data/red_cliff_big5.txt"  # 中文大五碼
 with open(text_filename, encoding="cp950") as fp:
     cloud_text = fp.read()
-"""
-text_filename = "data/data19_2.txt"
-with open(text_filename) as fp:  # 含中文的文字檔
-    cloud_text = fp.read()
-
-text_filename = "data/data19_6.txt"
-with open(text_filename) as fp:  # 含中文的文字檔
-    cloud_text = fp.read()
-
-
-text_filename = "data/data19_6.txt"
-with open(text_filename) as fp:  # 含中文的文字檔
-    cloud_text = fp.read()
-
-text_filename = "data/data19_6.txt"
-with open(text_filename) as fp:  # 含中文的文字檔
-    cloud_text = fp.read()
-
-text_filename = "data/edata19_1.txt"
-with open(text_filename) as fp:  # 含中文的文字檔
-    cloud_text = fp.read()
-
-
-text_filename = "data/red_cliff_big5.txt"  # 中文大五碼
-with open(text_filename, encoding="cp950") as fp:
-    cloud_text = fp.read()
-
-text_filename = "data/red_cliff_big5.txt"  # 中文大五碼
-with open(text_filename) as fp:
-    cloud_text = fp.read()
-
-    
-"""
-
-cloud_text2 = " ".join(jieba.cut(cloud_text))  # 產生分詞的字串
-
-wc = wordcloud.WordCloud(
-    width=W,
-    height=H,
-    font_path=font_filename,
-    background_color="white",
-    mask=mask_image,
-)
-wc.generate(cloud_text2)
-show_WordCloud()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("文字雲19: 製作文字雲 jieba")
 
 text_filename = "data/travel.txt"
-
 with open(text_filename, encoding="utf-8") as fp:
     cloud_text = fp.read()
 
-jieba.set_dictionary("data/dict.txt.big.txt")
-with open("data/stopWord_cloud.txt", "r", encoding="utf-8-sig") as fp:
-    # with open("data/stopWord_cloudmod.txt", "r", encoding="utf-8-sig") as fp:
-    stops = fp.read().split("\n")
-terms = []
-for t in jieba.cut(cloud_text, cut_all=False):
-    if t not in stops:
-        terms.append(t)
-diction = Counter(terms)
+print("------------------------------")  # 30個
 
-wc = wordcloud.WordCloud(
-    width=W,
-    height=H,
-    font_path=font_filename,
-    background_color="white",
-    mask=mask_image,
-)
+print("不使用jieba分詞")
+create_and_show_WordCloud(cloud_text)
 
-# wc = wordcloud.WordCloud(font_path=font_filename, background_color="white", mask=mask_image)
-# wc.generate_from_frequencies(frequencies=diction)
-wc.generate(cloud_text)
-show_WordCloud()
+print("------------------------------")  # 30個
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("使用jieba分詞")
+cloud_text2 = " ".join(jieba.cut(cloud_text))  # 產生分詞的字串
+create_and_show_WordCloud(cloud_text2)
 
-"""
-#  NG 無檔案 stopWords.txt
+print("------------------------------")  # 30個
 
-print("文字雲10: 製作文字雲 jieba 加 mask")
+print("使用jieba分詞, 使用停用詞")
 
-cloud_text = " 梅洛絲氣急敗壞。 他決定一定要除掉那個邪惡、暴虐的國王。 梅羅斯不懂政治。 他是一個村裡的牧民。 他吹過笛子，和羊群生活過。 但他對邪惡比任何人都敏感。 而在今天黎明前，梅洛斯就離開了他的村莊，翻過田野，越過山巒，來到了十里外的錫拉庫扎城。 他沒有父親，沒有母親，也沒有妻子。 他沒有妻子。 他和靦腆的十六歲的妹妹住在一起。 妹妹要從村裡接來一個新郎，是個守規矩的牧民，很快就要結婚了。 婚禮就在眼前。 他大老遠跑來，就是為了買新娘的衣服和宴席。 他先買了貨，然後在京城的主要街道上逛了一圈。 梅羅斯有一個高蹺的朋友。 他就是塞利南提斯。 他現在是雪城這座城市的石匠。 我要去拜訪這位朋友。 好久不見，我很期待去看他。 在城市裡走來走去，梅羅斯對城市的面貌產生了懷疑。 這裡很安靜，也很荒涼。 太陽已經落山了，城市黑漆漆的可以理解，但這不僅僅是因為夜色，整個城市顯得十分寂寞。 無憂無慮的梅洛斯開始感到不安。 他抓住一個在街上遇到的年輕人，問他是不是發生了什麼事，因為兩年前他來這裡的時候，大家都在唱歌，即使到了晚上，這個城市也很熱鬧。 年輕人搖搖頭，沒有回答。 他走了一會兒，遇到老人，就問了他一個問題，這次的話更加有力。 老人沒有回答。 梅羅斯用手搖晃著老人的身體，問他更多的問題。 老人用難以捉摸的低沉聲音回答。"
-
+# 建立停用詞串列 stopwords
 stopwords = list()
-with open("stopWords.txt", "rt", encoding="utf-8") as fp:
-    stopwords = [word.strip() for word in fp.readlines()]
+with open("data/stopWord_cloud.txt", "r", encoding="utf-8-sig") as fp:
+    stopwords = fp.read().split("\n")
 
 keyterms = [keyterm for keyterm in jieba.cut(cloud_text) if keyterm not in stopwords]
+
 cloud_text2 = ",".join(keyterms)
 
-wc = wordcloud.WordCloud(
-    width=W,
-    height=H,
-    font_path=font_filename,
-    background_color="white",
-    mask=mask_image,
-    margin=2,
-)
-wc.generate(cloud_text2)
-show_WordCloud()
-"""
+create_and_show_WordCloud(cloud_text2)
+
+print("------------------------------")  # 30個
+
+print("使用jieba分詞, 使用繁體中文詞庫, 使用停用詞")
+
+dict_filename = "data/dict.txt.big.txt"  # 設定繁體中文詞庫
+jieba.set_dictionary(dict_filename)  # 設定jieba分詞字典
+
+# 建立停用詞串列 stopwords
+with open("data/stopWord_cloud.txt", "r", encoding="utf-8-sig") as fp:
+    stops = fp.read().split("\n")
+
+create_and_show_WordCloud(cloud_text)
+
 print("------------------------------------------------------------")  # 60個
 print("使用 jieba SP")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-print("文字雲20: 製作文字雲 加 mask")
 
-# 載入文字檔並存成字串
-text_filename = "data/hound.txt"
-with open(text_filename, encoding="utf-8", errors="ignore") as infile:
-    cloud_text = infile.read()
-
-# 將影像載入成 NumPy 陣列
-# 製作mask, 設定文字雲形狀
-mask_filename = "data/holmes.png"
-mask_image = np.array(Image.open(mask_filename))
-
-# 取得停用字集合
-stopwords = wordcloud.STOPWORDS
-stopwords.update(
-    [
-        "us",
-        "one",
-        "will",
-        "said",
-        "now",
-        "well",
-        "man",
-        "may",
-        "little",
-        "say",
-        "must",
-        "way",
-        "long",
-        "yet",
-        "mean",
-        "put",
-        "seem",
-        "asked",
-        "made",
-        "half",
-        "much",
-        "certainly",
-        "might",
-        "came",
-    ]
-)
-
-# 產生文字雲
-wc = wordcloud.WordCloud(
-    max_words=500,
-    relative_scaling=0.5,
-    mask=mask_image,
-    background_color="white",
-    stopwords=stopwords,
-    margin=10,
-    random_state=6,
-    contour_width=2,
-    contour_color="brown",
-    colormap="copper",
-)
-wc.generate(cloud_text)
-
-# 將文字雲轉為 NumPy 陣列
-colors = wc.to_array()
-
-plt.figure()
-plt.title(
-    "Chamberlain Hunt Academy Senior Class Presents:\n", fontsize=15, color="brown"
-)
-plt.text(
-    -10,
-    0,
-    "The Hound of the Baskervilles",
-    fontsize=20,
-    fontweight="bold",
-    color="brown",
-)
-plt.suptitle(
-    "7:00 pm May 10-12 McComb Auditorium", x=0.52, y=0.095, fontsize=15, color="brown"
-)
-
-plt.imshow(colors, interpolation="bilinear")
-plt.axis("off")
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-text_filename = "news1.txt"
-
-with open(text_filename, encoding="utf-8") as fp:
-    text = fp.read()
-
-dict_filename = "data/dict.txt.big.txt"  # 設定繁體中文詞庫
-
-jieba.set_dictionary(dict_filename)
-# with open("dictionary/stopWord_times.txt", "r", encoding="utf-8-sig") as fp:  #設定停用詞
-# with open("dictionary/stopWord_cloud.txt", "r", encoding="utf-8-sig") as fp:  #設定停用詞
-with open("dictionary/stopWord_cloudmod.txt", "r", encoding="utf-8-sig") as fp:  # 設定停用詞
-    stops = fp.read().split("\n")
-terms = []  # 儲存字詞
-for t in jieba.cut(text, cut_all=False):  # 拆解句子為字詞
-    if t not in stops:  # 不是停用詞
-        terms.append(t)
-diction = Counter(terms)
-
-print(diction)
-
-font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"  # 設定字型
-
-mask_filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png"
-
-# 製作mask, 設定文字雲形狀
-mask_image = np.array(Image.open(mask_filename))
-
-wc = wordcloud.WordCloud(
-    width=W,
-    height=H,
-    font_path=font_filename,
-    background_color="white",
-    mask=mask_image,
-)
-
-""" some fail
-wc.generate_from_frequencies(frequencies=diction)  #產生文字雲
-
-show_WordCloud()
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 中時新聞網 文字雲
-
-import requests
-from bs4 import BeautifulSoup as soup
-
-urls = []
-url = "https://www.chinatimes.com/realtimenews/?chdtv"  # 中時新聞網
-
-html = requests.get(url)
-sp = soup(html.text, "html.parser")
-data1 = sp.select(".article-list a")
-for d in data1:  # 取得新聞連結
-    url = "https://www.chinatimes.com" + d.get("href")
-    if (len(url) > 58) and (url not in urls):
-        urls.append("https://www.chinatimes.com" + d.get("href"))
-
-text = ""
-i = 1
-for url in urls:  # 逐一取得新聞
-    print(url)
-    html = requests.get(url)
-    sp = soup(html.text, "html.parser")
-    data1 = sp.select(".article-body p")  # 新聞內容
-    print("處理第 {} 則新聞".format(i))
-    for d in data1:
-        if d.text != "":  # 有新聞內容
-            text += d.text
-    i += 1
-text = text.replace("中時", "").replace("新聞網", "")
-
-dict_filename = "data/dict.txt.big.txt"  # 設定繁體中文詞庫
-
-jieba.set_dictionary(dict_filename)
-with open("dictionary/stopWord_times.txt", "r", encoding="utf-8-sig") as fp:  # 設定停用詞
-    stops = fp.read().split("\n")
-terms = []  # 儲存字詞
-for t in jieba.cut(text, cut_all=False):  # 拆解句子為字詞
-    if t not in stops:  # 不是停用詞
-        terms.append(t)
-diction = Counter(terms)
-
-print(diction)
-
-font_filename = "D:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"  # 設定字型
-
-
-# 製作mask, 設定文字雲形狀
-mask_filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png"
-mask_image = np.array(Image.open(mask_filename))
-
-wc = wordcloud.WordCloud(
-    font_path=font_filename, background_color="white", mask=mask_image
-)
-# NG
-# wc.generate_from_frequencies(frequencies=diction)
-# show_WordCloud()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -636,13 +351,6 @@ sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
-# 設定圖片大小
-# plt.figure(figsize = (6, 6))	#圖像大小[英吋]
-# plt.figure(figsize = (10,10))
-
-# 檔案儲存
-# wc.to_file("tmp_WordCloud.png")  # 詞雲直接存圖
-# plt.savefig("tmp_hound_wordcloud.png")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -650,18 +358,90 @@ print("------------------------------------------------------------")  # 60個
 # 3030
 print("------------------------------")  # 30個
 
-# 可以用的font_filename
-# font_path = ("C:/Windows/Fonts\mingliu",)
+# with open("data/stopWord_cloudmod.txt", "r", encoding="utf-8-sig") as fp:
 
-
-"""
+# 將影像載入成 NumPy 陣列
 # 製作mask, 設定文字雲形狀
-mask_filename = "data/star.gif"
+mask_filename = "data/holmes.png"
 mask_image = np.array(Image.open(mask_filename))
-"""
+
+# 製作mask, 設定文字雲形狀
+mask_image = np.array(Image.open(mask_filename))
 
 """
-# 製作mask, 設定文字雲形狀
-mask_filename = "data/me.gif"
-mask_image = np.array(Image.open(mask_filename))
+# 產生文字雲
+wc = wordcloud.WordCloud(
+    max_words=500,
+    relative_scaling=0.5,
+    font_path=font_filename,
+    mask=mask_image,
+    background_color="white",
+    stopwords=stopwords,  # 使用停用詞集合
+    margin=10,  # 文字間的距離
+    random_state=6,
+    contour_width=2,  # mask的外框寬度
+    contour_color="brown",  # mask的外框的顏色
+    colormap="copper",
+)
 """
+
+# 載入文字檔並存成字串
+text_filename = "data/hound.txt"
+with open(text_filename, encoding="utf-8", errors="ignore") as infile:
+    cloud_text = infile.read()
+
+# 製作mask, 設定文字雲形狀
+mask_filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png"
+mask_image = np.array(Image.open(mask_filename))
+
+"""
+用 Counter 找出詞頻
+1. 讀出一篇文章
+2. 建立停用詞串列 stopwords
+2. jieba分詞
+3. 找出非停用詞
+4. 加入要儲存的串列
+5. 計算詞頻
+
+"""
+import collections
+
+text_filename = "data/travel.txt"
+with open(text_filename, encoding="utf-8") as fp:
+    cloud_text = fp.read()
+
+# 建立停用詞串列 stopwords
+with open("data/stopWord_cloud.txt", "r", encoding="utf-8-sig") as fp:
+    stops = fp.read().split("\n")
+
+words = []  # 儲存字詞
+for t in jieba.cut(cloud_text, cut_all=False):  # 拆解句子為字詞
+    if t not in stops:  # 不是停用詞
+        words.append(t)
+
+word_counts = collections.Counter(words)
+print(word_counts)
+
+print(len(word_counts))
+print(type(word_counts))
+# print(word_counts)
+
+# 最常出現的前20名
+cc = word_counts.most_common(20)  # 最多出現的前N名
+print(cc)
+
+i = 0
+for item, counter in word_counts.items():
+    print(item, "出現", counter, "次")
+    i += 1
+    if i == 10:
+        break
+
+# with open("dictionary/stopWord_times.txt", "r", encoding="utf-8-sig") as fp:  #設定停用詞
+# with open("dictionary/stopWord_cloud.txt", "r", encoding="utf-8-sig") as fp:  #設定停用詞
+with open("dictionary/stopWord_cloudmod.txt", "r", encoding="utf-8-sig") as fp:  # 設定停用詞
+    stops = fp.read().split("\n")
+
+
+with open("dictionary/stopWord_times.txt", "r", encoding="utf-8-sig") as fp:  # 設定停用詞
+    stops = fp.read().split("\n")

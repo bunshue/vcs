@@ -1,28 +1,32 @@
 import sys
+import collections
 
 print("------------------------------------------------------------")  # 60個
 
-import collections
+print("查找出現次數最多的元素")
 
 list1 = [10, 30, 10, 50, 40, 20, 30, 20, 40, 20, 10, 50, 10]
 freqDict = collections.Counter(list1)
 print(freqDict)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-# 排序字典
+print("查找出現次數最多的元素")
 
-import collections
+words = ["foo", "bar", "pop", "foo", "bar", "foo"]
 
-d = collections.OrderedDict()
-d["foo"] = 1
-d["bar"] = 2
-d["spam"] = 3
-d["grok"] = 4
-# Outputs "foo 1", "bar 2", "spam 3", "grok 4"
-for key in d:
-    print(key, d[key])
+word_counts = collections.Counter(words)
 
+print(type(word_counts))
+print(word_counts)
+
+for item, counter in word_counts.items():
+    print(item, "出現", counter, "次")
+
+print("出現最多次的項目:", word_counts.most_common(1))  # 最多出現的前N名
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("查找出現次數最多的元素")
@@ -36,41 +40,41 @@ words = [
     "into",
     "my",
     "eyes",
-    "the",
-    "eyes",
-    "the",
-    "eyes",
-    "the",
-    "eyes",
-    "not",
-    "around",
-    "the",
-    "eyes",
     "don't",
     "look",
-    "around",
-    "the",
     "eyes",
     "look",
     "into",
     "my",
     "eyes",
-    "you're",
-    "under",
 ]
 
-import collections
-
 word_counts = collections.Counter(words)
-# 出现频率最高的3个单词
-top_three = word_counts.most_common(3)
-print(top_three)
-# Outputs [('eyes', 8), ('the', 5), ('look', 4)]
 
+# 出现频率最高的3个单词
+cc = word_counts.most_common(3)  # 最多出現的前N名
+print(cc)
+
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 排序字典
+
+d = collections.OrderedDict()
+d["foo"] = 1
+d["bar"] = 2
+d["spam"] = 3
+d["grok"] = 4
+# Outputs "foo 1", "bar 2", "spam 3", "grok 4"
+for key in d:
+    print(key, d[key])
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import nt
-import collections
 
 _ntuple_diskusage = collections.namedtuple("usage", "total used free")
 
@@ -96,11 +100,10 @@ print("已使用空間 :", du.used, "個位元組\t", du.used // 1024 // 1024 //
 print("可用空間 :", du.free, "個位元組\t", du.free // 1024 // 1024 // 1024, "GB")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 算體重總和
 # collections.Counter - 多重集合 (計數器)
-
-import collections
 
 inventory = collections.Counter()
 
@@ -124,79 +127,21 @@ print("鍵種類 =", len(inventory))
 print("值總和 =", sum(inventory.values()))
 
 print("------------------------------------------------------------")  # 60個
-
-# Counter 容器
-
-import collections
-
-lst = ["foo", "bar", "pop", "foo", "bar", "foo"]
-
-c = collections.Counter(lst)
-
-print(c)
-
-for item, counter in c.items():
-    print(item, "出現", counter, "次")
-
-print("出現最多次的項目:", c.most_common(1))
-
-print("------------------------------------------------------------")  # 60個
-
-# 找出序列中出現次數最多的元素
-
-import collections
-
-words = [
-    "look",
-    "into",
-    "my",
-    "eyes",
-    "look",
-    "into",
-    "my",
-    "eyes",
-    "the",
-    "eyes",
-    "the",
-    "eyes",
-    "the",
-    "eyes",
-    "not",
-    "around",
-    "the",
-    "eyes",
-    "don't",
-    "look",
-    "around",
-    "the",
-    "eyes",
-    "look",
-    "into",
-    "my",
-    "eyes",
-    "you're",
-    "under",
-]
-counter = collections.Counter(words)
-print(counter.most_common(3))
-
 print("------------------------------------------------------------")  # 60個
 
 print("defaultdict 容器")
-import collections
 
-lst = ["foo", "bar", "pop", "foo", "bar", "foo"]
+words = ["foo", "bar", "pop", "foo", "bar", "foo"]
 
 d = collections.defaultdict(int)
 
-for item in lst:
+for item in words:
     d[item] += 1
 
 print(d)
 
 print("------------------------------------------------------------")  # 60個
-
-import collections
+print("------------------------------------------------------------")  # 60個
 
 prices = [
     ["apple", 50],
@@ -216,14 +161,20 @@ for name, prices in fruits.items():
     print(name, prices)
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+

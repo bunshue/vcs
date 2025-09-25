@@ -1625,7 +1625,7 @@ for row in htmllist:
    print(row)
 """
 
-print("BeautifulSoup 測試 5c")
+print("BeautifulSoup 測試 5c, 找出超連結")
 
 # 文淵閣工作室官網
 url = "http://www.e-happy.com.tw"
@@ -1637,11 +1637,11 @@ soup = BeautifulSoup(html.text, "html.parser")
 all_links = soup.find_all("a")  # 取得 全部 <a></a>
 for link in all_links:
     href = link.get("href")  # 讀取 href 屬性內容
-    # 判斷內容是否為非 None，並且開頭文字是 http://
-    if href != None and href.startswith("http://"):
+    # 判斷內容是否為非 None，並且開頭文字是 https://
+    if href != None and href.startswith("https://"):
         print(href)
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("BeautifulSoup 測試 6")
@@ -5123,6 +5123,57 @@ sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+# 中時新聞網 文字雲
+# TBD
+# <h1>中時新聞網已停止您訪問本網站</h1>
+
+import requests
+from bs4 import BeautifulSoup as soup
+
+urls = []
+url = "https://www.chinatimes.com/realtimenews/?chdtv"  # 中時新聞網
+
+html = requests.get(url)
+sp = soup(html.text, "html.parser")
+data1 = sp.select(".article-list a")
+for d in data1:  # 取得新聞連結
+    url = "https://www.chinatimes.com" + d.get("href")
+    if (len(url) > 58) and (url not in urls):
+        urls.append("https://www.chinatimes.com" + d.get("href"))
+
+text = ""
+i = 1
+for url in urls:  # 逐一取得新聞
+    print(url)
+    html = requests.get(url)
+    sp = soup(html.text, "html.parser")
+    # <h1 class="article-title">陸93閱兵後民調變了！近6成支持交流避戰、僅4成信美軍會出兵</h1>
+    all_links = sp.find_all("h1")  # 取得 全部 <a></a>
+    for link in all_links:
+        print(link)
+        href = link.get("href")  # 讀取 href 屬性內容
+        print(href)
+        # 判斷內容是否為非 None，並且開頭文字是 https://
+        if href != None and href.startswith("https://"):
+            print(href)
+
+
+    data1 = sp.select(".article-body p")  # 新聞內容
+    print(data1)
+    # print("處理第 {} 則新聞".format(i))
+    for d in data1:
+        if d.text != "":  # 有新聞內容
+            text += d.text
+            print(d.text)
+    i += 1
+    if i > 3:
+        break
+
+text = text.replace("中時", "").replace("新聞網", "")
+print("text :", text)
+
 
 
 print("------------------------------------------------------------")  # 60個

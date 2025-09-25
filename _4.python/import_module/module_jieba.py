@@ -1,10 +1,8 @@
 """
-
 jieba：最常用中文分詞工具
 
 中文斷詞
 使用jieba套件
-
 """
 
 import os
@@ -63,9 +61,8 @@ print("預設切分, cut_all=False")
 cut_text = jieba.cut(original_text, cut_all=False)
 print(" | ".join(cut_text))
 
-print("設定jieba分詞字典")
 dict_filename = "data/_jieba/dict.txt.big.txt"
-jieba.set_dictionary(dict_filename)
+jieba.set_dictionary(dict_filename)  # 設定jieba分詞字典
 
 print("預設切分, cut_all=False")
 cut_text = jieba.cut(original_text, cut_all=False)
@@ -73,9 +70,8 @@ print(" | ".join(cut_text))
 
 print("------------------------------")  # 30個
 
-print("設定jieba分詞字典")
 dict_filename = "data/_jieba/dict.txt.big.txt"
-jieba.set_dictionary(dict_filename)
+jieba.set_dictionary(dict_filename)  # 設定jieba分詞字典
 
 print("使用自訂詞庫")
 dict_filename = "data/_jieba/user_dict_test.txt"
@@ -112,9 +108,8 @@ print("------------------------------")  # 30個
 
 stopWord_filename = "data/_jieba/stopWord_test.txt"  # 設定自訂詞庫
 
-print("設定jieba分詞字典")
 dict_filename = "data/_jieba/dict.txt.big.txt"
-jieba.set_dictionary(dict_filename)
+jieba.set_dictionary(dict_filename)  # 設定jieba分詞字典
 
 print("使用自訂詞庫")
 dict_filename = "data/_jieba/user_dict_test.txt"
@@ -409,6 +404,7 @@ original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作
 
 print("set_stop_words")
 jieba.analyse.set_stop_words("data/_jieba/stop_words.txt")
+
 print("預設切分, cut_all不寫")
 print(" | ".join(jieba.cut(original_text)))
 
