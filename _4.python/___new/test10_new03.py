@@ -169,6 +169,7 @@ import tempfile
 from gtts import gTTS
 from pygame import mixer
 
+
 def bot_speak(text, lang):  # 建立自訂函式
     try:
         with tempfile.NamedTemporaryFile() as ntf:
@@ -195,7 +196,6 @@ def bot_speak2(text, lang):  # 建立自訂函式
         print("播放音效失敗")
 
 
-
 mixer.init()  # 初始化 mixer 物件
 if not os.path.isfile("tmp.mp3"):  # 不重要的聲音檔產生器
     tts = gTTS(text="不重要的語音檔", lang="zh-tw")
@@ -206,11 +206,8 @@ text = "機器人的耳朵函式"
 bot_speak(text, "zh-tw")
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個

@@ -3301,15 +3301,6 @@ string = "abcdefg"
 print("/%10.3s/" % string)
 
 print("------------------------------------------------------------")  # 60個
-
-print("置換網址資料")
-url = "https://maps.apis.com/json?city="
-city = "taipei"
-r = 1000
-type_ = "school"
-print(url + city + "&radius=" + str(r) + "&type=" + type_)
-print(url + "{}&radius={}&type={}".format(city, r, type_))
-
 print("------------------------------------------------------------")  # 60個
 
 print("置換網址資料")
@@ -3317,9 +3308,14 @@ url = "https://maps.apis.com/json?city="
 city = "taipei"
 r = 1000
 type_ = "school"
+
+print(url + city + "&radius=" + str(r) + "&type=" + type_)
+print(url + "{}&radius={}&type={}".format(city, r, type_))
+
 my_url = url + f"{city}&radius={r}&type={type_}"
 print(my_url)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 x = 100
@@ -3734,32 +3730,7 @@ for name in players.keys():
     print(f"Hi! {name} 我喜歡看你在 {players[name]} 的表現")
 
 print("------------------------------------------------------------")  # 60個
-
-fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25}
-noodles = {"牛肉麵": 100, "肉絲麵": 80, "陽春麵": 60}
-print("水蜜桃一斤 = ", fruits["水蜜桃"], "元")
-print("牛肉麵一碗 = ", noodles["牛肉麵"], "元")
-
 print("------------------------------------------------------------")  # 60個
-
-noodles = {"牛肉麵": 100, "肉絲麵": 80, "陽春麵": 60, "大滷麵": 90, "麻醬麵": 70}
-print(noodles)
-noodlesLst = sorted(noodles.items(), key=lambda item: item[1])
-print(noodlesLst)
-print(" 品項   價格")
-for i in range(len(noodlesLst)):
-    print(f"{noodlesLst[i][0]}   {noodlesLst[i][1]}")
-
-
-print("------------------------------------------------------------")  # 60個
-
-noodles = {"牛肉麵": 100, "肉絲麵": 80, "陽春麵": 60, "大滷麵": 90, "麻醬麵": 70}
-print(noodles)
-noodlesLst = sorted(noodles.items(), key=lambda item: item[1])
-print(noodlesLst)
-print(" 品項   價格")
-for i in range(len(noodlesLst)):
-    print(f"{noodlesLst[i][0]}   {noodlesLst[i][1]}")
 
 
 print("------------------------------------------------------------")  # 60個
@@ -5045,16 +5016,6 @@ n = 100
 print("函式外 全域變數n 位址=%d, 值=%d" % (id(n), n))
 func()
 print("函式外 全域變數n 位址=%d, 值=%d" % (id(n), n))
-
-print("------------------------------------------------------------")  # 60個
-
-# 改成動物資料
-soldier0 = {"tag": "red", "score": 3, "speed": "slow"}  # 建立小兵
-soldier1 = {"tag": "blue", "score": 5, "speed": "medium"}
-soldier2 = {"tag": "green", "score": 10, "speed": "fast"}
-armys = [soldier0, soldier1, soldier2]  # 小兵組成串列
-for army in armys:  # 列印小兵
-    print(army)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -6367,7 +6328,9 @@ else:
     print("網址格式錯誤")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+# 串列, 元素是串列 => 二維串列
 sc = [
     [1, "洪錦魁", 80, 95, 88, 0, 0, 0],
     [2, "洪冰儒", 98, 97, 96, 0, 0, 0],
@@ -6375,6 +6338,10 @@ sc = [
     [4, "洪冰雨", 92, 94, 90, 0, 0, 0],
     [5, "洪星宇", 92, 97, 90, 0, 0, 0],
 ]
+print(type(sc))
+print(type(sc[3]))
+print(sc[3])
+
 # 計算總分與平均
 print("原始成績單")
 for i in range(len(sc)):
@@ -6382,13 +6349,16 @@ for i in range(len(sc)):
     sc[i][5] = sum(sc[i][2:5])  # 填入總分
     sc[i][6] = round((sc[i][5] / 3), 1)  # 填入平均
 sc.sort(key=lambda x: x[5], reverse=True)  # 依據總分高往低排序
+
 # 以下填入名次
 for i in range(len(sc)):  # 填入名次
     sc[i][7] = i + 1
+
 # 以下修正相同成績應該有相同名次
 for i in range((len(sc) - 1)):
     if sc[i][5] == sc[i + 1][5]:  # 如果成績相同
         sc[i + 1][7] = sc[i][7]  # 名次應該相同
+
 # 以下依座號排序
 sc.sort(key=lambda x: x[0])  # 依據座號排序
 print("最後成績單")
@@ -6396,151 +6366,114 @@ for i in range(len(sc)):
     print(sc[i])
 
 print("------------------------------------------------------------")  # 60個
-
-weight = 50
-increase = 1.2
-n = 5
-for i in range(int(n)):
-    weight += increase
-    print(f"第 {i+1} 年體重 : {weight:4.1f}")
-
 print("------------------------------------------------------------")  # 60個
 
-fahrenheit = [32, 77, 104]
-celsius = [(x - 32) * 5 / 9 for x in fahrenheit]
-print(celsius)
+print("列印小數位數")
+dd = 123.456789
+print(dd)
+print(f"列印小數位數 : {dd}")
+print(f"列印小數位數 : {dd:4.2f}")
+print(f"列印小數位數 : {dd:4.3f}")
+print(f"列印小數位數 : {dd:4.4f}")
+print(f"列印小數位數 : {dd:1.4f}")
 
 print("------------------------------------------------------------")  # 60個
-
-n1 = [1, 2, 3, 4, 5]
-n2 = [1, 2, 3, 4, 5]
-result = [[x, y] for x in n1 for y in n2]
-print(result)
-
 print("------------------------------------------------------------")  # 60個
 
-bookclub = ["John", "Peter", "Curry", "Mike", "Kevin"]
-print("讀書會成員")
-for people in bookclub:
-    print(people)
-bookclub[0] = "Johnnason"
-for people in bookclub:
-    print(people)
+# 元組不能改變內容，要先轉串列，改完再轉回元組
 
-print("------------------------------------------------------------")  # 60個
+# 元組
+tp = (1, 2, 3, 4, 5)
+print(tp)
 
-tp = (1, 2, 3, 4, 5, 2, 3, 1, 4)
+print("舊的元組內容 : ", tp)
+
+# 元組轉串列
 lst = list(tp)
-newlst = []
-for i in lst:
-    if i not in newlst:
-        newlst.append(i)
+print(lst)
+
+# 修改串列的內容
+# newlst = sorted(lst)
+newlst = sorted(lst, reverse=True)  # 由大到小排序
+print(newlst)
+
+# 串列轉元組
 newtp = tuple(newlst)
 print("新的元組內容 : ", newtp)
 
 print("------------------------------------------------------------")  # 60個
-
-weatherH = (30, 28, 29, 31, 33, 35, 32)
-weatherL = (20, 21, 19, 22, 23, 24, 20)
-print(f"過去一周的最高溫度 {max(weatherH)}")
-print(f"過去一周的最低溫度 {min(weatherH)}")
-
-print("過去一周的平均溫度")
-for i in range(len(weatherH)):
-    print(f"{((weatherH[i]+weatherL[i])/2):3.1f}  ", end="")
-
 print("------------------------------------------------------------")  # 60個
 
-abc = "abcdefghijklmnopqrstuvwxyz"
-encry_dict = {}
-front3 = abc[:3]
-end23 = abc[3:]
-subText = end23 + front3
-encry_dict = dict(zip(subText, abc))  # 建立字典
-print("列印編碼字典\n", encry_dict)  # 列印字典
-
-msgTest = "python"  # 測試字串
-cipher = []
-for i in msgTest:  # 執行每個字元加密
-    v = encry_dict[i]  # 加密
-    cipher.append(v)  # 加密結果
-ciphertext = "".join(cipher)  # 將串列轉成字串
-
-print("原始字串 ", msgTest)
-print("加密字串 ", ciphertext)
-
-print("------------------------------------------------------------")  # 60個
-
-season = {"Spring": "春季", "Summer": "夏季", "Fall": "秋季", "Winter": "冬季"}
-
-wd = "Spring"
-if wd in season:
-    print(wd, " 中文字義是 : ", season[wd])
-else:
-    print("查無此單字")
-
-print("------------------------------------------------------------")  # 60個
-
-month = {
-    "一月": "January",
-    "二月": "February",
-    "三月": "March",
-    "四月": "April",
-    "五月": "May",
-    "六月": "June",
-    "七月": "July",
-    "八月": "August",
-    "九月": "September",
-    "十月": "October",
-    "十一月": "November",
-    "十二月": "December",
-}
-
-key = "三月"
-if key in month:
-    print(month[key])
-else:
-    print("輸入錯誤")
-
-print("------------------------------------------------------------")  # 60個
+# 對字典的排序
 
 noodles = {"牛肉麵": 100, "肉絲麵": 80, "陽春麵": 60, "大滷麵": 90, "麻醬麵": 70}
+print(type(noodles))
 print(noodles)
 for noodle, price in sorted(noodles.items(), key=lambda item: item[1]):
     print(noodle, ":", price)
 
+
+noodles = {"牛肉麵": 100, "肉絲麵": 80, "陽春麵": 60, "大滷麵": 90, "麻醬麵": 70}
+print(type(noodles))
+print(noodles)
+noodlesLst = sorted(noodles.items(), key=lambda item: item[1])
+print(noodlesLst)
+print(" 品項   價格")
+for i in range(len(noodlesLst)):
+    print(f"{noodlesLst[i][0]}   {noodlesLst[i][1]}")
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 改成動物資料
+soldier0 = {"tag": "red", "score": 3, "speed": "slow"}  # 建立小兵
+soldier1 = {"tag": "blue", "score": 5, "speed": "medium"}
+soldier2 = {"tag": "green", "score": 10, "speed": "fast"}
+armys = [soldier0, soldier1, soldier2]  # 小兵組成串列
+for army in armys:  # 列印小兵
+    print(army)
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 armys = []  # 建立小兵空串列
 # 建立50個小兵
 for soldier_number in range(50):
+    # 字典
     soldier = {"tag": "red", "score": 3, "speed": "slow"}
     armys.append(soldier)
+
 # 列印前3個小兵
 print("前3名小兵資料")
 for soldier in armys[:3]:
     print(soldier)
+
 # 更改編號36到38的小兵
 for soldier in armys[35:38]:
     if soldier["tag"] == "red":
         soldier["tag"] = "blue"
         soldier["score"] = 5
         soldier["speed"] = "medium"
+
 # 列印編號35到40的小兵
 print("列印編號35到40小兵資料")
 for soldier in armys[34:40]:
     print(soldier)
+
 # 更改編號47到49的小兵
 for soldier in armys[47:50]:
     if soldier["tag"] == "red":
         soldier["tag"] = "green"
         soldier["score"] = 10
         soldier["speed"] = "fast"
+
 # 列印編號47到49的小兵
 print("列印編號47到49小兵資料")
 for soldier in armys[47:50]:
     print(soldier)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 song = """Are you sleeping, are you sleeping, Brother John, Brother John?
@@ -6566,6 +6499,7 @@ for key, count in dict.items():
     if count == maxCount:
         print(f"字串 {key} 出現最多次共出現 {count} 次")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 A = []
@@ -6602,6 +6536,7 @@ print("B-A差集 : ", B_A)
 AsdB = aSet ^ bSet
 print("AB對稱差集 : ", AsdB)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
@@ -6964,23 +6899,6 @@ c = loop.run_until_complete(asyncio.gather(*tasks))
 print(f"end:{c[1]}")
 
 print("------------------------------------------------------------")  # 60個
-
-list1 = [1, 2, 3, 4]
-list1 = [x * 2 for x in list1 if x % 2 == 0]
-print(list1)
-
-list1 = [1, 2, 3, 4]
-list1 = [x for x in list1 if x >= 3]
-print(list1)
-
-list1 = [59, 60, 70, 80]
-list1 = [x**2 for x in list1 if x < 60]
-print(list1)
-
-list1 = [20, 30, 50, 80]
-list1 = [x for x in list1 if (x >= 30 and x <= 50)]
-print(list1)  # 30,50
-
 print("------------------------------------------------------------")  # 60個
 
 import bext
@@ -7050,6 +6968,7 @@ for name in student:
     print("{:6s},{}, {:10s}".format(*name))
 
 print("------------------------------------------------------------")  # 60個
+
 list1 = [1, 2, 3, 4, 5, 6, 7]
 # 找最小、最大元素
 print(min(list1), max(list1))
@@ -7301,8 +7220,6 @@ v8 = float("2.7E-2")  # 0.027
 print(v8)
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 print("請輸入一串列的整數，數目之間利用空白分隔：")
@@ -7569,12 +7486,6 @@ b = "   ".isspace()
 print('"   ".isspace() = ', b)
 
 print("------------------------------------------------------------")  # 60個
-
-name = "david"
-age = 18
-
-print(f"Hi, My name is {name}, I'm {age}")
-
 print("------------------------------------------------------------")  # 60個
 
 n = 100
@@ -7801,13 +7712,6 @@ cc = "A" * 5
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
-
-a = [i for i in range(10)]
-print(a)
-
-a = (i for i in range(10))
-print(a)
-
 print("------------------------------------------------------------")  # 60個
 
 import re
@@ -10278,8 +10182,6 @@ print(res)
 data = res.json()  # 方法2
 print(data)
 
-sys.exit()
-
 # 因為有欄位名稱
 # 只要 df = pd.DataFrame(data) 即可
 df = pd.DataFrame(data)
@@ -10697,18 +10599,18 @@ print("------------------------------------------------------------")  # 60個
 from time import perf_counter
 
 timestart = perf_counter()
-for i in range (0,1000):
-    for j in range (0,1000):
+for i in range(0, 1000):
+    for j in range(0, 1000):
         n = i * j
 timeend = perf_counter()
-print("執行一百萬次整數運算的時間：" + str(timeend-timestart) + " 秒")
+print("執行一百萬次整數運算的時間：" + str(timeend - timestart) + " 秒")
 
 timestart = perf_counter()
-for i in range (0,1000):
-    for j in range (0,1000):
+for i in range(0, 1000):
+    for j in range(0, 1000):
         n = float(i) * float(j)
 timeend = perf_counter()
-print("執行一百萬次浮點數運算的時間：" + str(timeend-timestart) + " 秒")
+print("執行一百萬次浮點數運算的時間：" + str(timeend - timestart) + " 秒")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -11100,10 +11002,6 @@ print("成績由大到小排序：", end="")
 disp_scores()  # 顯示排序後串列
 
 print("------------------------------------------------------------")  # 60個
-
-
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 
 

@@ -31,6 +31,7 @@ from bs4 import BeautifulSoup
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+
 def get_epa_key():
     filename = "D:/_git/vcs/_1.data/______test_files1/_key/epa_key.txt"
 
@@ -224,7 +225,9 @@ def downloadAQI():
         print("下載成功")
         print(response.data)
         # 儲存檔案，建立file實體
-        filename = "tmp_AQI_"+ time.strftime("%Y%m%d_%H%M%S", time.localtime())+ ".csv"
+        filename = (
+            "tmp_AQI_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".csv"
+        )
         file = open(filename, "wb")
         file.write(response.data)
         print("存檔成功")
@@ -311,4 +314,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
