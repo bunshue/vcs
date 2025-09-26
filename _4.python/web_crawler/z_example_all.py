@@ -64,10 +64,10 @@ def example02():
     print(soup.title.text)  # 抓標籤裡面的文字
     print(soup.title.string)  # 抓標籤裡面的文字
 
-    # 尋找class = 'title' 的 div 標籤
+    # 尋找class = "title" 的 div 標籤
     titles = soup.find("div", class_="title")
 
-    # 尋找所有class = 'title' 的 div 標籤 用列表表示
+    # 尋找所有class = "title" 的 div 標籤 用列表表示
     titles = soup.find_all("div", class_="title")
 
     # print(titles)
@@ -199,7 +199,7 @@ def get_data(html_text):
             print(di.text.replace("\n", ""))
 
     data = body.find("div", attrs={"id": "7d"})
-    # data = body.find('div',{'div':'7d'})
+    # data = body.find("div",{"div":"7d"})
     print(type(data))
     ul = data.find("ul")
     li = ul.find_all("li")
@@ -246,7 +246,6 @@ def example06():
 def example07():
     print("蘋果日報標題")
     import requests
-    import jieba
     import operator
     from bs4 import BeautifulSoup
 
@@ -265,43 +264,20 @@ def example07():
 
     news = BeautifulSoup(html_data.text, "html.parser")
     news_title = news.find_all("div", {"class": "post-inner"})
-    """
-    print('news_title')
+    print("news_title")
+    print(type(news_title))
+    print(len(news_title))
     print(news_title)
-    """
 
     headlines = ""
     for t in news_title:
-        title = t.find_all("a")[0]
+        # print(t)
+        title = t.find_all("h3")[0]
         headlines += title.text
-        print(title.text)
+        # print(title.text)
 
-    """
-    print('headlines')
+    print("蘋果日報標題")
     print(headlines)
-    """
-
-    words = jieba.cut(headlines)
-
-    word_count = dict()
-
-    for word in words:
-        if word in word_count.keys():
-            word_count[word] += 1
-        else:
-            word_count[word] = 1
-
-        sorted_wc = sorted(word_count.items(), key=operator.itemgetter(1), reverse=True)
-
-    """
-    for item in sorted_wc:
-            if item[1] > 1:
-                    print(item)
-            else:
-                    break
-    """
-
-    print("done")
 
 
 def example08():

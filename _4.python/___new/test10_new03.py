@@ -32,7 +32,6 @@ def show():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 # 取得 CPU 個數 3個方法
 
 import psutil
@@ -85,8 +84,7 @@ root_drive = path.expanduser("~")
 print("root_drive =", root_drive)
 
 print("__file__ :", __file__)
-print("__file__ :", __file__)
-print("aaa")
+
 new_path = os.path.abspath(
     os.path.join(os.path.dirname(os.path.realpath(str(__file__))), os.path.pardir)
 )

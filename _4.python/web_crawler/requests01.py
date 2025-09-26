@@ -82,7 +82,7 @@ print("Response 物件資訊")
 url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"  # 博客來網址
 response = requests.get(url)
 
-# 印出<class 'requests.models.Response'>，表示response為Response物件
+# 印出<class "requests.models.Response">，表示response為Response物件
 print("物件型別：", type(response))
 print("網址：", response.url)
 # print("表頭資訊：", response.headers)
@@ -113,6 +113,7 @@ if response.status_code == 403:
 404 Not Found
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("讀取網頁異常處理")
 url = "http://mcut.edu.tw/file_not_existed"  # 不存在的內容
@@ -121,9 +122,9 @@ try:
     response.raise_for_status()  # 異常處理
     print("下載成功")
 except Exception as err:  # err是系統內建的錯誤訊息
-    print(f"網頁下載失敗: {err}")
-print("程式繼續執行 ... ")
+    print(f"網頁下載失敗, 原因 : {err}")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import urllib.request
@@ -141,6 +142,7 @@ with urllib.request.urlopen(url) as response:
 # print("將網頁資料轉成字串格式", zct_str)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from urllib.parse import urlparse
 
@@ -154,6 +156,7 @@ print("網站網址:", result.netloc)
 print("路徑:", result.path)
 print("查詢字串:", result.query)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("requests 測試 1 無參數 取得網頁資料 只是把網頁抓下來")
@@ -197,12 +200,15 @@ params = {
 }
 params["titles"] = search_word
 html_data = get_html_data2(url, params)
+
+""" NG
 # pprint.pprint(html_data)
-# fo = codecs.open('tmp_wiki搜尋結果2' + search_word + '.html', 'w', 'utf-8') # same
+# fo = codecs.open("tmp_wiki搜尋結果2" + search_word + ".html", "w", "utf-8") # same
 fo = open("tmp_wiki搜尋結果2" + search_word + ".html", "w", encoding="utf-8")
 fo.write(html_data.text)
 fo.close()
-
+"""
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("測試 cookies over18, 無 cookies 抓網頁")
@@ -233,8 +239,9 @@ headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
 }
 cookies = {"over18": "1"}
-r = requests.get(url, cookies=cookies, headers=headers)
-print(r.text)
+
+response = requests.get(url, cookies=cookies, headers=headers)
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -242,7 +249,7 @@ print("測試 headers, 無 headers 抓網頁, ck101 網頁")
 
 # 怎麼無headers 也是OK?
 url = "https://ck101.tw/thread-5778209-1-1.html"
-# url ='https://www.dcard.tw/f/stock/p/237123381'
+# url ="https://www.dcard.tw/f/stock/p/237123381"
 
 response = requests.get(url)
 
@@ -255,7 +262,7 @@ print("------------------------------------------------------------")  # 60個
 print("測試 headers, 有 headers 抓網頁, ck101 網頁")
 
 url = "https://ck101.tw/thread-5778209-1-1.html"
-# url ='https://www.dcard.tw/f/stock/p/237123381'
+# url ="https://www.dcard.tw/f/stock/p/237123381"
 
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
@@ -275,8 +282,7 @@ try:
     response = requests.get(url)
     response.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
 except Exception as err:  # err是系統內建的錯誤訊息
-    print(f"網頁下載失敗: {err}")
-print("程式繼續執行 ... ")
+    print(f"網頁下載失敗, 原因 : {err}")
 
 print("------------------------------")  # 30個
 
@@ -294,8 +300,7 @@ try:
     response = requests.get(url, headers=headers)
     response.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
 except Exception as err:  # err是系統內建的錯誤訊息
-    print(f"網頁下載失敗: {err}")
-print("程式繼續執行 ... ")
+    print(f"網頁下載失敗, 原因 : {err}")
 
 print("偽裝瀏覽器擷取網路資料成功")
 
@@ -325,6 +330,7 @@ print(rows[0])
 print("第 1 row")
 print(rows[1])
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("requests 測試 14b")
 
@@ -412,6 +418,8 @@ for product in json_data:
 print("Mac Mini價格通知", message)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("requests 測試 21 中油油價 json 測試")
 
 url = "https://www.cpc.com.tw/historyprice.aspx?n=2890"
@@ -442,52 +450,13 @@ for item in reversed(json_data):  # 反向排序, 利用 reversed 反轉了排�
         break
 
 print("------------------------------------------------------------")  # 60個
-
-print("各國GDP資料 csv/xlsx格式, 用pd處理網頁上的 csv / xlsx 檔案")
-
-# 讀取網頁上的 csv 檔
-csv_file = "https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.csv"
-df = pd.read_csv(csv_file)
-print("------------------------------")  # 30個
-print(df.head())
-print("------------------------------")  # 30個
-
-# 讀取網頁上的 excel 檔
-xlsx_file = "https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.xlsx"
-df = pd.read_excel(xlsx_file)
-print("------------------------------")  # 30個
-print(df.head())
-print("------------------------------")  # 30個
-
-# 兩個方法得到的df是一樣的
-
-print("用list 標註變數名稱從DataFrame選出country 與continent 欄位：")
-print(df[["country", "continent"]])
-
-print("------------------------------")  # 30個
-print("選一個變數且沒有以list 標註，選出欄位資料，型別為Series")
-country = df["country"]
-print(type(country))
-print("------------------------------")  # 30個
-print("聚合函數計算sum，計算2007 年全球人口總數：")
-aa = df[df["year"] == 2007][["pop"]].sum()
-print(aa)
-print("------------------------------")  # 30個
-print("計算2007 年全球的平均壽命、平均財富：")
-bb = df[df["year"] == 2007][["lifeExp", "gdpPercap"]].mean()
-print(bb)
-print("------------------------------")  # 30個
-print("groupby群組計算2007 年各洲人口總數：")
-cc = df[df["year"] == 2007].groupby(by="continent")["pop"].sum()
-print(cc)
-
 print("------------------------------------------------------------")  # 60個
 
 """ many 已把 thread 搬出
 import threading
 
 # XKCD 漫畫的基本 URL
-base_url = 'https://xkcd.com/'
+base_url = "https://xkcd.com/"
 
 # 定義下載漫畫的函數
 def download_xkcd(start_comic, end_comic):
@@ -496,41 +465,39 @@ def download_xkcd(start_comic, end_comic):
         if comic_number == 0:
             continue
 
-        url = f'{base_url}{comic_number}/info.0.json'   # 建立API URL來獲取漫畫資訊
+        url = f"{base_url}{comic_number}/info.0.json"   # 建立API URL來獲取漫畫資訊
         try:
             response = requests.get(url)
             try:
                 response.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
             except Exception as err:                    # err是系統內建的錯誤訊息
-                print(f"網頁下載失敗: {err}")
-            print("程式繼續執行 ... ")
+                print(f"網頁下載失敗, 原因 : {err}")
 
             comic_json = response.json()  # response轉成json格式
-            comic_url = comic_json['img']               # 從JSON響應中提取圖片 URL
-            print(f'\n圖片下載中 : {comic_url}...')
+            comic_url = comic_json["img"]               # 從JSON響應中提取圖片 URL
+            print(f"\n圖片下載中 : {comic_url}...")
 
             # 向圖片 URL 發送請求並下載圖片
             res = requests.get(comic_url)
             try:
                 res.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
             except Exception as err:                    # err是系統內建的錯誤訊息
-                print(f"網頁下載失敗: {err}")
-            print("程式繼續執行 ... ")
+                print(f"網頁下載失敗, 原因 : {err}")
 
             # 保存圖片到本地資料夾
-            with open(os.path.join('xkcd_comics', os.path.basename(comic_url)), 'wb') as image_file:
+            with open(os.path.join("xkcd_comics", os.path.basename(comic_url)), "wb") as image_file:
                 for chunk in res.iter_content(100000):
                     image_file.write(chunk)             # 寫入圖片數據
         except requests.exceptions.HTTPError as err:
-            print(f'Failed to download comic {comic_number}: {err}')  # 輸出錯誤訊息
+            print(f"Failed to download comic {comic_number}: {err}")  # 輸出錯誤訊息
 
 # 建立並啟動多個執行緒
 thread_count = 10                                       # 執行緒的數量
 comic_range = 10                                        # 每個執行緒負責下載的漫畫數量
 
 # 如果不存在, 建立一個目錄來存儲下載的漫畫
-if not os.path.exists('xkcd_comics'):
-    os.makedirs('xkcd_comics')
+if not os.path.exists("xkcd_comics"):
+    os.makedirs("xkcd_comics")
 
 # 建立執行緒並將它們添加到執行緒串列表
 threads = []
@@ -545,7 +512,7 @@ for i in range(1, thread_count * comic_range, comic_range):         # 漫畫編�
 for thread in threads:
     thread.join()
 
-print('漫畫圖片下載完成')
+print("漫畫圖片下載完成")
 
 """
 print("------------------------------------------------------------")  # 60個
@@ -827,7 +794,7 @@ close = all_df["收盤價"].astype(float)
 plt.figure(figsize=(12, 8), dpi=100)
 
 # step 3 plot
-plt.plot(day, close, 's-', color='r', label="Close Price")
+plt.plot(day, close, "s-", color="r", label="Close Price")
 plt.title("TSMC Line chart")
 plt.xticks(fontsize=10, rotation=45)
 plt.yticks(fontsize=10)
@@ -835,7 +802,7 @@ plt.legend(loc="best", fontsize=20)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")	#60個
 
 import crawler_module as m
 
@@ -861,16 +828,16 @@ close = all_df["收盤價"].astype(float)
 
 # step 2 create plot
 fig, (ax, ax2) = plt.subplots(2, 1, sharex=True, figsize=(12, 8), dpi=100)
-plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei']
+plt.rcParams["font.sans-serif"] = ["Microsoft JhengHei"]
 ax.set_title(stock_symbol+"  開盤價、收盤價 ( " +
              dates[0] + " ~ " + dates[-1] + " )")
 
 # step 3 plot 子圖(ax)
-ax.plot(day, openprice, 's-', color='r', label="Open Price")
+ax.plot(day, openprice, "s-", color="r", label="Open Price")
 ax.legend(loc="best", fontsize=10)
 
 # step 3 plot 子圖(ax2)
-ax2.plot(day, close, 'o-', color='b', label="Close Price")
+ax2.plot(day, close, "o-", color="b", label="Close Price")
 ax2.legend(loc="best", fontsize=10)
 ax2.set_xticks(range(0, len(day), 5))
 ax2.set_xticklabels(day[::5])
@@ -907,7 +874,7 @@ for i in range(len(photo_list)):
 
 print("\n下載完畢")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")	#60個
 
 import photo_module as m
 
@@ -964,9 +931,9 @@ print("------------------------------------------------------------")  # 60個
 from twilio.rest import Client
 
 # 你從twilio.com申請的帳號
-accountSid='AC308f91e9dc748a01538feb9d74ed993a'
+accountSid="AC308f91e9dc748a01538feb9d74ed993a"
 # 你從twilio.com獲得的圖騰
-authToken='f513161b63f71720f62118e4d33ca8ac'
+authToken="f513161b63f71720f62118e4d33ca8ac"
 
 client = Client(accountSid, authToken)
 message = client.messages.create (
@@ -1034,8 +1001,8 @@ url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"
 response = requests.get(url)
 tree = html.fromstring(response.text)
 
-print('美金：' + str(tree.xpath('//html/body/div[1]/main/div[3]/table/tbody/tr[1]/td[3]/text()')[0]))
-print('日圓：' + str(tree.xpath('//html/body/div[1]/main/div[3]/table/tbody/tr[8]/td[3]/text()')[0]))
+print("美金：" + str(tree.xpath("//html/body/div[1]/main/div[3]/table/tbody/tr[1]/td[3]/text()")[0]))
+print("日圓：" + str(tree.xpath("//html/body/div[1]/main/div[3]/table/tbody/tr[8]/td[3]/text()")[0]))
 """
 print("------------------------------------------------------------")  # 60個
 
@@ -1134,7 +1101,10 @@ with open(filename, "wb") as f:
 print("存檔檔案 :", filename)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+# NG
+"""
 print("擷取網頁圖片, 保存檔名2")
 
 import base64
@@ -1151,7 +1121,8 @@ print("圖片檔名:", filename)
 image.save(filename)
 print("存檔檔案 :", filename)
 # print(base64.b64encode(response.content))
-
+"""
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("台灣水庫即時水情")
@@ -1188,7 +1159,7 @@ try:
     response = requests.get(url)
     print("下載成功")
 except Exception as err:
-    print("網頁下載失敗: %s" % err)
+    print(f"網頁下載失敗, 原因 : {err}")
 
 # 儲存網頁內容
 fn = "tmp_html_text1.html"
@@ -1201,7 +1172,7 @@ with open(fn, "wb") as f:  # 以二進位儲存
 print("------------------------------------------------------------")  # 60個
 
 """ many
-url = 'http://tw.yahoo.com'
+url = "http://tw.yahoo.com"
 response = requests.get(url)
 pprint.pprint(response.text)
 """
@@ -1211,69 +1182,71 @@ print("------------------------------------------------------------")  # 60個
 url = "https://www.googleapis.com/books/v1/volumes"
 
 data = {"q": "Python", "maxResults": 5, "projection": "lite"}
-r = requests.get(url, params=data)
-print(r.json())
+
+response = requests.get(url, params=data)
+print(response.json())
 
 print("------------------------------------------------------------")  # 60個
 
-r = requests.get("https://fchart.github.io/test.html")
-print(r.text)
-print(r.encoding)
+response = requests.get("https://fchart.github.io/test.html")
+print(response.text)
+print(response.encoding)
 
 print("------------------------------------------------------------")  # 60個
 
-r = requests.get("https://fchart.github.io/test.html")
-print(r.text)
+response = requests.get("https://fchart.github.io/test.html")
+print(response.text)
 print("----------------------")
 
-r = requests.get("https://fchart.github.io/test.html")
-print(r.content)
+response = requests.get("https://fchart.github.io/test.html")
+print(response.content)
 print("----------------------")
 
-r = requests.get("https://fchart.github.io/test.html", stream=True)
-print(r.raw)
-print(r.raw.read(15))
+response = requests.get("https://fchart.github.io/test.html", stream=True)
+print(response.raw)
+print(response.raw.read(15))
 
 print("------------------------------------------------------------")  # 60個
 
-r = requests.get("https://fchart.github.io/json/Example.json")
-print(r.text)
-print(type(r.text))
+response = requests.get("https://fchart.github.io/json/Example.json")
+print(response.text)
+print(type(response.text))
 print("----------------------")
-print(r.json())
-print(type(r.json()))
+print(response.json())
+print(type(response.json()))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-r = requests.get("http://www.google.com")
+response = requests.get("http://www.google.com")
 
-if r.status_code == 200:
+if response.status_code == 200:
     print("請求成功...")
 else:
     print("請求失敗...")
 
-print(r.status_code)
-print(r.status_code == requests.codes.ok)
-print(r.status_code == requests.codes.all_good)
+print(response.status_code)
+print(response.status_code == requests.codes.ok)
+print(response.status_code == requests.codes.all_good)
 
-r = requests.get("http://www.google.com/404")
-print(r.status_code)
-print(r.status_code == requests.codes.ok)
-print(r.raise_for_status())
+response = requests.get("http://www.google.com/404")
+print(response.status_code)
+print(response.status_code == requests.codes.ok)
+# NG print(response.raise_for_status())
 
 print("------------------------------------------------------------")  # 60個
 
-r = requests.get("http://www.google.com")
+response = requests.get("http://www.google.com")
 
-print(r.headers["Content-Type"])
-print(r.headers["Content-Length"])
-print(r.headers["Date"])
-print(r.headers["Server"])
+print(response.headers["Content-Type"])
+# NG print(response.headers["Content-Length"])
+print(response.headers["Date"])
+print(response.headers["Server"])
 
-print(r.headers.get("Content-Type"))
-print(r.headers.get("Content-Length"))
-print(r.headers.get("Date"))
-print(r.headers.get("Server"))
+print(response.headers.get("Content-Type"))
+print(response.headers.get("Content-Length"))
+print(response.headers.get("Date"))
+print(response.headers.get("Server"))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1287,14 +1260,14 @@ print("------------------------------------------------------------")  # 60個
 url = "https://www.googleapis.com/books/v1/volumes"
 
 url_params = {"q": "Python", "maxResults": 3, "projection": "lite"}
-r = requests.get(url, params=url_params)
-print(r.json())
+response = requests.get(url, params=url_params)
+print(response.json())
 
 print("------------------------------------------------------------")  # 60個
 
 try:
-    r = requests.get("http://www.google.com", timeout=0.03)
-    print(r.text)
+    response = requests.get("http://www.google.com", timeout=0.03)
+    print(response.text)
 except requests.exceptions.Timeout as ex:
     print("錯誤: HTTP請求已經超過時間...\n" + str(ex))
 
@@ -1303,8 +1276,8 @@ print("------------------------------------------------------------")  # 60個
 url = "http://www.google.com/404"
 
 try:
-    r = requests.get(url, timeout=3)
-    r.raise_for_status()
+    response = requests.get(url, timeout=3)
+    response.raise_for_status()
 except requests.exceptions.RequestException as ex1:
     print("Http請求錯誤: " + str(ex1))
 except requests.exceptions.HTTPError as ex2:
@@ -1367,9 +1340,9 @@ matches += re.findall(regex04b, html)
 matches += re.findall(regex0800, html)
 """ many
 for match in matches:
-    print('抓到符合條件的 : ', match)
+    print("抓到符合條件的 : ", match)
     
-print('全部資料')
+print("全部資料")
 print(matches)
 """
 print("------------------------------------------------------------")  # 60個
@@ -1413,21 +1386,23 @@ html = requests.get(url).text
 json_data = json.loads(html)
 
 """ many
-titles = json_data['lists']
+titles = json_data["lists"]
 for title in titles:
-    print(title['title'])
-    print(urllib.parse.urljoin("https://udn.com", title['titleLink']))
+    print(title["title"])
+    print(urllib.parse.urljoin("https://udn.com", title["titleLink"]))
 """
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("拆解網頁資料")
 url = "https://today.line.me/tw/v2/article/oqay0ro"
 response = requests.get(url)
-
+""" NG
 # 取得文章的原始碼後，使用 split 字串拆分的方式，拆解出 articleId
-article_id = response.text.split("<script>")[1].split('id:"article:')[1].split(":")[0]
+article_id = response.text.split("<script>")[1].split("id:"article:")[1].split(":")[0]
 print(article_id)
-
+"""
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("拆解網頁資料")
@@ -1453,21 +1428,20 @@ print("要查詢的詞 :", text)
 print("出現次數 :", html.count(text))
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1477,3 +1451,40 @@ print("------------------------------")  # 30個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+# 讀取網頁上的 csv 檔
+csv_file = "xxxxx .csv"
+df = pd.read_csv(csv_file)
+print("------------------------------")  # 30個
+print(df.head())
+print("------------------------------")  # 30個
+
+# 讀取網頁上的 excel 檔
+xlsx_file = "xxxx .xlsx"
+df = pd.read_excel(xlsx_file)
+print("------------------------------")  # 30個
+print(df.head())
+print("------------------------------")  # 30個
+
+# 兩個方法得到的df是一樣的
+
+print("用list 標註變數名稱從DataFrame選出country 與continent 欄位：")
+print(df[["country", "continent"]])
+
+print("------------------------------")  # 30個
+print("選一個變數且沒有以list 標註，選出欄位資料，型別為Series")
+country = df["country"]
+print(type(country))
+print("------------------------------")  # 30個
+print("聚合函數計算sum，計算2007 年全球人口總數：")
+aa = df[df["year"] == 2007][["pop"]].sum()
+print(aa)
+print("------------------------------")  # 30個
+print("計算2007 年全球的平均壽命、平均財富：")
+bb = df[df["year"] == 2007][["lifeExp", "gdpPercap"]].mean()
+print(bb)
+print("------------------------------")  # 30個
+print("groupby群組計算2007 年各洲人口總數：")
+cc = df[df["year"] == 2007].groupby(by="continent")["pop"].sum()
+print(cc)

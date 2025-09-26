@@ -78,20 +78,7 @@ mask_image = np.array(Image.open(mask_filename))
 print("------------------------------------------------------------")  # 60個
 
 # 文字字串
-
-e_text1 = """Love encompasses a range of strong and positive emotional and mental states, from the most sublime virtue or good habit, the deepest interpersonal affection and to the simplest pleasure.[1][2] An example of this range of meanings is that the love of a mother differs from the love of a spouse, which differs from the love of food. Most commonly, love refers to a feeling of strong attraction and emotional attachment.[3]
-Love is also considered to be a virtue representing human kindness, compassion, and affection, as "the unselfish loyal and benevolent concern for the good of another".[4] It may also describe compassionate and affectionate actions towards other humans, one's self or animals.[5]
-Love in its various forms acts as a major facilitator of interpersonal relationships and, owing to its central psychological importance, is one of the most common themes in the creative arts.[6] Love has been postulated to be a function to keep human beings together against menaces and to facilitate the continuation of the species.[7]
-Ancient Greek philosophers identified five forms of love: essentially, familial love (in Greek, Storge), friendly love or platonic love (Philia), romantic love (Eros), guest love (Xenia) and divine love (Agape). Modern authors have distinguished further varieties of love: unrequited love, empty love, companionate love, consummate love, infatuated love, self-love, 
-and courtly love. Asian cultures have also distinguished Ren, Kama, Bhakti, Mettā, Ishq, Chesed, and other variants or symbioses of these states.[8][9] The triangular theory of love suggests "intimacy, passion and commitment" are core components of love. Love has additional religious or spiritual meaning. This diversity of uses and meanings combined with the complexity of the feelings involved makes love unusually difficult to consistently define, compared to other emotional states."""
-
-
-e_text2 = """Love encompasses a range of strong and positive emotional and mental states, from the most sublime virtue or good habit, the deepest interpersonal affection and to the simplest pleasure.[1][2] An example of this range of meanings is that the love of a mother differs from the love of a spouse, which differs from the love of food. Most commonly, love refers to a feeling of strong attraction and emotional attachment.[3]
-Love is also considered to be a virtue representing human kindness, compassion, and affection, as "the unselfish loyal and benevolent concern for the good of another".[4] It may also describe compassionate and affectionate actions towards other humans, one's self or animals.[5]
-Love in its various forms acts as a major facilitator of interpersonal relationships and, owing to its central psychological importance, is one of the most common themes in the creative arts.[6] Love has been postulated to be a function to keep human beings together against menaces and to facilitate the continuation of the species.[7]
-Ancient Greek philosophers identified five forms of love: essentially, familial love (in Greek, Storge), friendly love or platonic love (Philia), romantic love (Eros), guest love (Xenia) and divine love (Agape). Modern authors have distinguished further varieties of love: unrequited love, empty love, companionate love, consummate love, infatuated love, self-love, and courtly love. Asian cultures have also distinguished Ren, Kama, Bhakti, Mettā, Ishq, Chesed, and other variants or symbioses of these states.[8][9] The triangular theory of love suggests "intimacy, passion and commitment" are core components of love. Love has additional religious or spiritual meaning. This diversity of uses and meanings combined with the complexity of the feelings involved makes love unusually difficult to consistently define, compared to other emotional states."""
-
-e_text3 = """The Zen of Python, by Tim Peters
+e_text1 = """The Zen of Python, by Tim Peters
 Beautiful is better than ugly.
 Explicit is better than implicit.
 Simple is better than complex.
@@ -112,7 +99,7 @@ If the implementation is hard to explain, it's a bad idea.
 If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!"""
 
-e_text4 = """
+e_text2 = """
 Ada AssemblyLanguage AWK ASP.NET Bash BASIC
 C C++ C# CUDA Delphi Go Java JavaScript Julia
 Kotlin MATLAB Perl PHP Python R Ruby Rust
@@ -209,9 +196,6 @@ print("------------------------------")  # 30個
 print("建立文字雲, 使用mask")
 create_and_show_WordCloud(cloud_text, mask_image)
 
-print("------------------------------")  # 30個
-print("------------------------------")  # 30個
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -257,7 +241,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("文字雲5: 指定特定文字的顏色")
 
-cloud_text = e_text4
+cloud_text = e_text2
 
 wc = wordcloud.WordCloud()
 wc.generate(cloud_text)
@@ -287,7 +271,7 @@ text_filename = "data/red_cliff_big5.txt"  # 中文大五碼
 with open(text_filename, encoding="cp950") as fp:
     cloud_text = fp.read()
 
-text_filename = "data/travel.txt"
+text_filename = "D:/_git/vcs/_4.python/_data/老殘遊記.txt"
 with open(text_filename, encoding="utf-8") as fp:
     cloud_text = fp.read()
 
@@ -308,7 +292,7 @@ print("使用jieba分詞, 使用停用詞")
 
 # 建立停用詞串列 stopwords
 stopwords = list()
-with open("data/stopWord_cloud.txt", "r", encoding="utf-8-sig") as fp:
+with open("data/stopWord_cloud.txt", "r", encoding="utf-8-sig") as fp:  # 設定停用詞
     stopwords = fp.read().split("\n")
 
 keyterms = [keyterm for keyterm in jieba.cut(cloud_text) if keyterm not in stopwords]
@@ -325,7 +309,7 @@ dict_filename = "data/dict.txt.big.txt"  # 設定繁體中文詞庫
 jieba.set_dictionary(dict_filename)  # 設定jieba分詞字典
 
 # 建立停用詞串列 stopwords
-with open("data/stopWord_cloud.txt", "r", encoding="utf-8-sig") as fp:
+with open("data/stopWord_cloud.txt", "r", encoding="utf-8-sig") as fp:  # 設定停用詞
     stops = fp.read().split("\n")
 
 create_and_show_WordCloud(cloud_text)
@@ -358,16 +342,6 @@ print("------------------------------------------------------------")  # 60個
 # 3030
 print("------------------------------")  # 30個
 
-# with open("data/stopWord_cloudmod.txt", "r", encoding="utf-8-sig") as fp:
-
-# 將影像載入成 NumPy 陣列
-# 製作mask, 設定文字雲形狀
-mask_filename = "data/holmes.png"
-mask_image = np.array(Image.open(mask_filename))
-
-# 製作mask, 設定文字雲形狀
-mask_image = np.array(Image.open(mask_filename))
-
 """
 # 產生文字雲
 wc = wordcloud.WordCloud(
@@ -384,64 +358,3 @@ wc = wordcloud.WordCloud(
     colormap="copper",
 )
 """
-
-# 載入文字檔並存成字串
-text_filename = "data/hound.txt"
-with open(text_filename, encoding="utf-8", errors="ignore") as infile:
-    cloud_text = infile.read()
-
-# 製作mask, 設定文字雲形狀
-mask_filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png"
-mask_image = np.array(Image.open(mask_filename))
-
-"""
-用 Counter 找出詞頻
-1. 讀出一篇文章
-2. 建立停用詞串列 stopwords
-2. jieba分詞
-3. 找出非停用詞
-4. 加入要儲存的串列
-5. 計算詞頻
-
-"""
-import collections
-
-text_filename = "data/travel.txt"
-with open(text_filename, encoding="utf-8") as fp:
-    cloud_text = fp.read()
-
-# 建立停用詞串列 stopwords
-with open("data/stopWord_cloud.txt", "r", encoding="utf-8-sig") as fp:
-    stops = fp.read().split("\n")
-
-words = []  # 儲存字詞
-for t in jieba.cut(cloud_text, cut_all=False):  # 拆解句子為字詞
-    if t not in stops:  # 不是停用詞
-        words.append(t)
-
-word_counts = collections.Counter(words)
-print(word_counts)
-
-print(len(word_counts))
-print(type(word_counts))
-# print(word_counts)
-
-# 最常出現的前20名
-cc = word_counts.most_common(20)  # 最多出現的前N名
-print(cc)
-
-i = 0
-for item, counter in word_counts.items():
-    print(item, "出現", counter, "次")
-    i += 1
-    if i == 10:
-        break
-
-# with open("dictionary/stopWord_times.txt", "r", encoding="utf-8-sig") as fp:  #設定停用詞
-# with open("dictionary/stopWord_cloud.txt", "r", encoding="utf-8-sig") as fp:  #設定停用詞
-with open("dictionary/stopWord_cloudmod.txt", "r", encoding="utf-8-sig") as fp:  # 設定停用詞
-    stops = fp.read().split("\n")
-
-
-with open("dictionary/stopWord_times.txt", "r", encoding="utf-8-sig") as fp:  # 設定停用詞
-    stops = fp.read().split("\n")

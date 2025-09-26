@@ -248,15 +248,12 @@ print(tv.vocabulary_)  # 词语与列的对应关系
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 t1 = list(jieba.cut("今天台北天氣晴朗，風景區擠滿了人潮。"))
 t2 = list(jieba.cut("台北的天氣常常下雨。"))
 c1 = " ".join(t1)
 c2 = " ".join(t2)
 print("第一句分詞： {}".format(c1))
 print("第二句分詞： {}".format(c2))
-
-print("------------------------------")  # 30個
 
 print("使用TV")
 from sklearn.feature_extraction.text import TfidfVectorizer

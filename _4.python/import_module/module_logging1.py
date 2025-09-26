@@ -2,6 +2,7 @@ import os
 import sys
 import time
 import logging
+import datetime
 
 """
 如果沒有寫 logging.basicConfig(filename), 則訊息顯示在console畫面
@@ -30,61 +31,26 @@ logging.warning("這是一個日誌訊息 WARNING")
 logging.error("這是一個日誌訊息 ERROR")
 logging.critical("這是一個日誌訊息 CRITCAL")
 
+logging.debug("使用logging模組 DEBUG")
+logging.info("使用logging模組 INFO")
+logging.warning("使用logging模組 WARNING")
+
+tt = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
+logging.debug("開啟時間 : {}".format(tt))
+
 # 獲取logger對象,取名 mylog/程式名
 # logger = logging.getLogger(__name__)
 logger = logging.getLogger("mylog1")
 
 logger.info("使用logger對象 INFO")
 logger.debug("使用logger對象 DEBUG")
-
-logging.debug("使用logging模組 DEBUG")
-logging.info("使用logging模組 INFO")
-logging.warning("使用logging模組 WARNING")
-
-"""
-logger = logging.getLogger("mylog1b")
-logger.info(f"reading: {file_name}")
-logger.info("finished reading")
-"""
+logger.warning("使用logger對象 WARNING")
+logger.exception("使用logger對象 EXCEPTION")
+logger.error("使用logger對象 ERROR")
+logger.critical("使用logger對象 CRITICAL")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-import logging
-
-logging.basicConfig(
-    filename="tmp_log_filename06.txt",
-    level=logging.INFO,  # 只記錄INFO以上等級
-    # level=logging.DEBUG,#只記錄DEBUG以上等級
-    format="*** %(levelname)s %(message)s",
-)
-
-logger = logging.getLogger("mylog2")
-
-logger.debug("這是一個日誌訊息 DEBUG")
-logger.info("這是一個日誌訊息 INFO")
-logger.warning("這是一個日誌訊息 WARNING")
-logger.error("這是一個日誌訊息 ERROR")
-logger.critical("這是一個日誌訊息 CRITCAL")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-import logging
-
-logging.basicConfig(filename="tmp_log_filename07.txt", level=logging.INFO)
-
-logger = logging.getLogger(__name__)
-
-logger.info("AAAAA")
-logger.info("BBBBB")
-logger.warning("WWWWWW")
-logger.exception("EEEEE")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-import logging
 
 # 獲取logger對象,取名mylog
 logger = logging.getLogger("mylog3")
@@ -109,14 +75,6 @@ logger.addHandler(handler)
 logger.addHandler(console)
 
 # 記錄日誌
-logger.info("show info")
-logger.debug("show debug")
-logger.warning("show warning")
-logger.debug("這是一個日誌訊息 DEBUG")
-logger.info("這是一個日誌訊息 INFO")
-logger.warning("這是一個日誌訊息 WARNING")
-logger.error("這是一個日誌訊息 ERROR")
-logger.critical("這是一個日誌訊息 CRITCAL")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -124,6 +82,64 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print("basicConfig 的寫法")
+
+logging.basicConfig(
+    filename="tmp_log_filename06.txt",
+    level=logging.INFO,  # 只記錄INFO以上等級
+    # level=logging.DEBUG,#只記錄DEBUG以上等級
+    format="*** %(levelname)s %(message)s",
+)
+
+print("------------------------------")  # 30個
+
+logging.basicConfig(filename="tmp_log_filename07.txt", level=logging.INFO)
+
+print("------------------------------")  # 30個
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s",
+    datefmt="%a, %d %b %Y %H:%M:%S",
+    filename=g_project_log_info,
+    filemode="a"
+    # handlers=[file_handler]
+)
+
+print("------------------------------")  # 30個
+
+logging.basicConfig(level=logging.WARNING)
+logging.basicConfig(format="%(name)s: %(message)s", level=level)
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
+
+print("------------------------------")  # 30個
+
+# 設定工作日誌檔名及訊息欄位
+logging.basicConfig(
+    filename="record.log",
+    encoding="utf-8",
+    level=logging.DEBUG,
+    format="%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s",
+)
+
+
+# 設定工作日誌檔名及訊息欄位
+logging.basicConfig(
+    filename="record.log",
+    encoding="utf-8",
+    level=logging.DEBUG,
+    format="%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s",
+)
+
+
+# 設定工作日誌檔名及訊息欄位
+logging.basicConfig(
+    filename="record.log",
+    encoding="utf-8",
+    level=logging.DEBUG,
+    format="%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s",
+)
 
 
 print("------------------------------------------------------------")  # 60個
@@ -151,26 +167,6 @@ logging.disable(logging.CRITICAL)  # 停用所有logging
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-import logging
-
-"""
-msg = u'严重错误！当前运行环境下有中文路径，abu将无法正常运行！请不要使用中文路径名称, 当前环境为{}'.format(
-    to_unicode(str(__file__)))
-"""
-msg = "aaaaaaaaaa"
-logging.info(msg)
-
-msg = "error！non English characters in the current running environment,abu will not work properly!"
-logging.info(msg)
-
-logging.info("enable example env will only read RomDataBu/csv")
-
-logging.info("disable example env")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
 """
     if not os.path.exists(g_project_log_dir):
         # 创建log文件夹
@@ -178,66 +174,11 @@ print("------------------------------------------------------------")  # 60個
 
     # 输出格式规范
     # file_handler = logging.FileHandler(g_project_log_info, 'a', 'utf-8')
-    logging.basicConfig(level=logging.DEBUG,
-                        format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s',
-                        datefmt='%a, %d %b %Y %H:%M:%S',
-                        filename=g_project_log_info,
-                        filemode='a'
-                        # handlers=[file_handler]
-                        )
 """
 
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-"""
-import logging
-
-logger = logging.getLogger("RefactoringTool")
-
-logger=self.logger)
-
-logger.info(msg)
-
-msg = msg % args
-logger.debug(msg)
-
-
-log_debug("Source: %s", line.rstrip("\n"))
-log_error("Can't parse docstring in %s line %s: %s: %s",
-                           filename, lineno, err.__class__.__name__, err)
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-"""
-# Set up logging handler
-level = logging.DEBUG if options.verbose else logging.INFO
-logging.basicConfig(format='%(name)s: %(message)s', level=level)
-logger = logging.getLogger('lib2to3.main')
-logger.info('Output in %r will mirror the input directory %r layout.',
-            options.output_dir, input_base_dir)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-import logging
-
-logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
-
-logging.info("Start to load dataset")
-logging.info("Done with load dataset")
-"""
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-# logging_tutorial.py
-
-import logging
 
 """
 ref. https://docs.python.org/3/library/logging.html
@@ -306,45 +247,9 @@ if __name__ == "__main__":
     # ex3()
     ex4()
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 設定工作日誌檔名及訊息欄位
-logging.basicConfig(
-    filename="record.log",
-    encoding="utf-8",
-    level=logging.DEBUG,
-    format="%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s",
-)
-
-
-# 設定工作日誌檔名及訊息欄位
-logging.basicConfig(
-    filename="record.log",
-    encoding="utf-8",
-    level=logging.DEBUG,
-    format="%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s",
-)
-
-
-# 設定工作日誌檔名及訊息欄位
-logging.basicConfig(
-    filename="record.log",
-    encoding="utf-8",
-    level=logging.DEBUG,
-    format="%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s",
-)
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-import logging
 from logging import handlers
 
 
@@ -405,19 +310,10 @@ if __name__ == "__main__":
     except Exception as e:
         logger.excepiton(e)
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-logging.basicConfig(level=logging.WARNING)
-logging.basicConfig(level=logging.WARNING)
 
-logging.warning(HTTP_ERROR_MSG.format(res=exc.response))
-logging.warning(HTTP_ERROR_MSG.format(res=exc.response))
-logging.error("Connection error")
-logging.debug("{}{} ing......".format(self.ptt_head, article.url))
-logging.warning(HTTP_ERROR_MSG.format(res=exc.response))
-logging.debug("crawler_info......{}".format(res.url))
+level = logging.DEBUG if options.verbose else logging.INFO
 
-logging.warning(e)
-
-logging.debug("本文已被刪除")
+# 3030
+print("------------------------------")  # 30個

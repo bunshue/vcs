@@ -13,8 +13,6 @@ import jieba
 import jieba.analyse
 import jieba.posseg as pseg
 
-print("------------------------------------------------------------")  # 60個
-
 original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
 
 print("------------------------------------------------------------")  # 60個
@@ -40,8 +38,25 @@ print(" | ".join(cut_text))
 
 print("------------------------------------------------------------")  # 60個
 
+# 精确模式 , 默认就是精确模式
+cut_text = jieba.cut(original_text, cut_all=False)
+print(" | ".join(cut_text))
+
+# 搜索引擎模式
+cut_text = jieba.cut_for_search(original_text)
+print("搜索引擎模式 :")
+print(" | ".join(cut_text))
+
+# 全模式
+cut_text = jieba.cut(original_text, cut_all=True)
+print("全模式 :")
+print(" | ".join(cut_text))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 # 默認使用精確模式(一般直接使用精確模式即可)
-# 多了 HMM 參數
+# 多了 HMM 參數, 使用 HMM 模型（Hidden Markov Models）找出『未登錄詞』
 print("  xxxx:", " | ".join(jieba.cut(original_text)))
 print("  預設:", " | ".join(jieba.cut(original_text, HMM=True)))
 print("全關閉:", " | ".join(jieba.cut(original_text, HMM=False)))
@@ -50,6 +65,7 @@ print("全關閉:", " | ".join(jieba.cut(original_text, cut_all=False, HMM=False
 print("全關閉:", " | ".join(jieba.cut(original_text, cut_all=True, HMM=True)))
 print("   xxx:", " | ".join(jieba.cut(original_text, cut_all=True, HMM=False)))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 不一定要設定詞庫，內建的效果也不錯
@@ -115,15 +131,17 @@ print("使用自訂詞庫")
 dict_filename = "data/_jieba/user_dict_test.txt"
 jieba.load_userdict(dict_filename)
 
-with open("data/_jieba/stopWord_test.txt", "r", encoding="utf-8-sig") as f:
-    stops = f.read().split("\n")
+with open("data/_jieba/stopWord_test.txt", "r", encoding="utf-8-sig") as fp:
+    stops = fp.read().split("\n")
 
 print("預設切分, cut_all=False")
+# 檢查 停用詞
 cut_text = jieba.cut(original_text, cut_all=False)
 words = []
-for word in cut_text:
-    if word not in stops:
+for word in cut_text:  # 拆解句子為字詞
+    if word not in stops:  # 不是停用詞
         words.append(word)
+
 print("|".join(words))
 
 print("------------------------------")  # 30個
@@ -135,30 +153,23 @@ jieba.load_userdict(dict_filename)
 print("使用停用詞")
 stopWord_filename = "data/_jieba/stopWord_test.txt"  # 設定自訂詞庫
 
-with open(stopWord_filename, "r", encoding="utf-8-sig") as f:  # 設定停用詞
-    stops = f.read().split("\n")
+with open(stopWord_filename, "r", encoding="utf-8-sig") as fp:  # 設定停用詞
+    stops = fp.read().split("\n")
 
 original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
 
 print("預設切分, cut_all=False")
+# 檢查 停用詞
 cut_text = jieba.cut(original_text, cut_all=False)
 words = []
 for word in cut_text:  # 拆解句子為字詞
     if word not in stops:  # 不是停用詞
         words.append(word)
+
 print("|".join(words))
 
 print("------------------------------------------------------------")  # 60個
-
-filename = "data/_jieba/cna_news.txt"
-with open(filename, "r", encoding="utf-8") as f:
-    original_text = f.read()
-
-print("清理資料, 清除 標點符號 換行 空白")
-original_text = original_text.translate(
-    {ord(c): None for c in list("(),.“”（）「」，。、：；！|\n/ ")}
-)
-print(original_text)
+print("------------------------------------------------------------")  # 60個
 
 print("斷句, 預設切分, cut_all不寫")
 cut_text = jieba.cut(original_text)
@@ -170,13 +181,12 @@ for word in cut_text:
 """ same
 print(" | ".join(cut_text))
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-filename = "data/_jieba/蘇軾_赤壁賦.utf-16-le.txt"
-with open(filename, "r", encoding="utf-16-le") as f:
-    original_text = f.read()
+text_filename = "data/_jieba/蘇軾_赤壁賦.utf-16-le.txt"
+with open(text_filename, "r", encoding="utf-16-le") as fp:
+    original_text = fp.read()
 
 print("清理資料, 清除 標點符號 換行 空白")
 original_text = original_text.translate(
@@ -211,11 +221,11 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 斷句後存檔
-filename = "data/_jieba/蘇軾_赤壁賦.utf-16-le.txt"
+text_filename = "data/_jieba/蘇軾_赤壁賦.utf-16-le.txt"
 filename_save = "tmp_蘇軾_赤壁賦.txt"
 
-with open(filename, "r", encoding="utf-16-le") as f:
-    content = f.read().strip()  # 读取文件内容
+with open(text_filename, "r", encoding="utf-16-le") as fp:
+    content = fp.read().strip()  # 读取文件内容
     content = content.replace("\r\n", "")  # 删除换行和多余的空格
     content_seg = jieba.cut(content.strip())  # 为文件内容分词
     print("分詞後之檔案 :", filename_save)
@@ -226,31 +236,86 @@ with open(filename, "r", encoding="utf-16-le") as f:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from collections import Counter
+"""
+用 Counter 找出詞頻
+1. 讀出一篇文章
+2. 建立停用詞串列 stopwords
+2. jieba分詞
+3. 找出非停用詞
+4. 加入要儲存的串列
+5. 計算詞頻
 
-filename = "data/_jieba/cna_news.txt"
+"""
+import collections
 
-with open(filename, "r", encoding="utf-8") as f:
-    original_text = f.read()
+text_filename = "data/_jieba/蘇軾_赤壁賦.utf-16-le.txt"
+with open(text_filename, "r", encoding="utf-16-le") as fp:
+    cloud_text = fp.read()
 
-print("清理資料, 清除 標點符號 換行 空白")
-original_text = original_text.translate(
-    {ord(c): None for c in list("(),.“”（）「」，。、：；！|\n/ ")}
-)
+# 建立停用詞串列 stopwords
+stopWord_filename = "data/_jieba/stopWord_test.txt"  # 設定自訂詞庫
+with open(stopWord_filename, "r", encoding="utf-8-sig") as fp:
+    stops = fp.read().split("\n")
 
-print("斷句, 預設切分, cut_all不寫")
-cut_text = jieba.cut(original_text)
+words = []  # 儲存字詞
+for t in jieba.cut(cloud_text, cut_all=False):  # 拆解句子為字詞
+    if t not in stops:  # 不是停用詞
+        words.append(t)
 
-print("打印結果 most_common")
-for w, c in Counter(cut_text).most_common():
-    if c > 1:
+print("------------------------------")  # 30個
+
+word_counts = collections.Counter(words)
+print(len(word_counts))
+print(type(word_counts))
+# print(word_counts)
+
+print("最常出現的前5名")
+cc = word_counts.most_common(5)  # 最多出現的前N名
+print(cc)
+
+i = 0
+for item, counter in word_counts.items():
+    print(item, "出現", counter, "次")
+    i += 1
+    if i == 10:
+        break
+
+print("打印結果 most_common 超過5次的")
+for w, c in collections.Counter(words).most_common():
+    if c > 5:
         print(w, c)
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-""" 缺 arr
+print("自己算前10名")
+
+word_count = dict()
+
+for word in words:
+    if word in word_count.keys():
+        word_count[word] += 1
+    else:
+        word_count[word] = 1
+
+    sorted_wc = sorted(word_count.items(), key=operator.itemgetter(1), reverse=True)
+
+i = 0
+for item in sorted_wc:
+    if item[1] > 1:
+        print(item)
+    else:
+        break
+    i += 1
+    if i == 10:
+        break
+
+print("------------------------------")  # 30個
+
 # 寫程序實現TF-IDF方法
 
+arr = words
+
+import numpy as np
 from collections import Counter
 
 countlist = []
@@ -277,19 +342,21 @@ def tfidf(word, count, count_list):
     return tf(word, count) * idf(word, count_list)
 
 
+""" many
 for i, count in enumerate(countlist):
     print("第{}句：".format(i))
     scores = {word: tfidf(word, count, countlist) for word in count}
     for word, score in scores.items():
         print(word, round(score, 2))
 """
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # jieba-userdict-loadfile.py
 
-# original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
-
 original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
+
 print("預設切分, cut_all不寫")
 print(" | ".join(jieba.cut(original_text)))
 
@@ -317,36 +384,6 @@ for item in keywords:
     print(" %s =  %f " % (item[0].encode("utf_8"), item[1]))
 
 print("------------------------------------------------------------")  # 60個
-
-# jieba-suggest_freq.py
-
-# jieba 無 suggest_freq
-"""
-original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
-
-print("預設切分, cut_all不寫")
-print(" | ".join(jieba.cut(original_text)))
-
-# jieba.suggest_freq("台中", True)
-print("預設切分, cut_all不寫")
-print(" | ".join(jieba.cut(original_text)))
-
-jieba.suggest_freq(("名產"), True)
-print("預設切分, cut_all不寫")
-print(" | ".join(jieba.cut(original_text)))
-
-jieba.suggest_freq(("部落格"), True)
-print("預設切分, cut_all不寫")
-print(" | ".join(jieba.cut(original_text)))
-
-jieba.suggest_freq(("太陽餅"), True)
-print("預設切分, cut_all不寫")
-print(" | ".join(jieba.cut(original_text)))
-
-jieba.suggest_freq(("中", "將"), True)
-print("預設切分, cut_all不寫")
-print(" | ".join(jieba.cut(original_text)))
-"""
 print("------------------------------------------------------------")  # 60個
 
 # jieba-analyse.py
@@ -367,6 +404,7 @@ result = jieba.tokenize(original_text, mode="search")
 for tk in result:
     print("word %s\t\t start: %d \t\t end:%d" % (tk[0], tk[1], tk[2]))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # jieba-stopwords.py
@@ -397,6 +435,7 @@ for item in keywords:
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # jieba-sort.py
 
@@ -420,6 +459,7 @@ for ele in jieba.cut(original_text):
 for w in sorted(dic, key=dic.get, reverse=True):
     print("%s  %i " % (w, dic[w]))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # jieba-http.py
@@ -464,53 +504,37 @@ except:
     print("error")
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+print("分詞詞性")
 original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
 
+print("分詞\t詞性")
 words = pseg.cut(original_text)  # 默认是精确模式
-
 for word in words:
     print(word.word, word.flag)
 
-for word, flag in words:
-    print("%s, %s" % (word, flag))
 
-print("------------------------------------------------------------")  # 60個
-
+""" 詞性
+n	普通名詞	f	方位名詞	s	處所名詞	t	時間
+nr	人名		ns	地名		nt	機構名		nw	作品名
+nz	其他專名	v	普通動詞	vd	動副詞		vn	名動詞
+a	形容詞		ad	副形詞		an	名形詞		d	副詞
+m	數量詞		q	量詞		r	代詞		p	介詞
+c	連詞		u	助詞		xc	其他虛詞	w	標點符號
+PER	人名		LOC	地名		ORG	機構名		TIME	時間
 """
-cut方法有两个参数
-1)第一个参数是我们想分词的字符串
-2)第二个参数cut_all是用来控制是否采用全模式
-"""
 
-original_text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
 
-# 精确模式 , 默认就是精确模式
-word_list = jieba.cut(original_text, cut_all=False)
-print(word_list)
-for i in word_list:
-    print(i)
-# print(" ".join(word_list))
-
-# 搜索引擎模式
-# word_list = jieba.cut_for_search(original_text)
-# print("搜索引擎：","".join(word_list))
-# 全模式
-# word_list = jieba.cut(original_text,cut_all=True)
-# print("全模式：","|".join(word_list))
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -537,3 +561,12 @@ original_text = original_text.replace("。", "")
 
 original_text = original_text.replace("\n", "")
 original_text = original_text.replace("，", "")
+
+# 3030
+print("------------------------------")  # 30個
+
+
+print("清理資料, 清除 標點符號 換行 空白")
+original_text = original_text.translate(
+    {ord(c): None for c in list("(),.“”（）「」，。、：；！|\n/ ")}
+)

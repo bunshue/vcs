@@ -94,79 +94,83 @@ def run_pygame():
 
 
 print("------------------------------------------------------------")  # 60個
-'''
-pygame_name = 'pygame 01 載入圖片'
+print("------------------------------------------------------------")  # 60個
+
+pygame_name = "pygame 01 載入圖片"
 screen = init_pygame(pygame_name, white)
 
-#方法load()載入圖片，convert()能提高圖片的處理速度
-image=pygame.image.load(filename)
+# 方法load()載入圖片，convert()能提高圖片的處理速度
+image = pygame.image.load(filename)
 image.convert()
 
-#改變圖片大小
-image=pygame.transform.scale(image,(300*5//4, 400*5//4))
+# 改變圖片大小
+image = pygame.transform.scale(image, (300 * 5 // 4, 400 * 5 // 4))
 
 x_st, y_st = 100, 100
 screen.blit(image, (x_st, y_st))
 
 run_pygame()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-pygame_name = 'pygame 02 建立畫布'
+pygame_name = "pygame 02 建立畫布"
 screen = init_pygame(pygame_name, yellow)
 
 # 產生Surface物件, 上色，繪製成形
 surface = pygame.Surface(surface_size)
-#print(surface.get_width(), surface.get_height())#取得surface參數
-surface.convert()           # 產生副本
-surface.fill((0,255,0))#surface填滿指定色
+# print(surface.get_width(), surface.get_height())#取得surface參數
+surface.convert()  # 產生副本
+surface.fill((0, 255, 0))  # surface填滿指定色
 
-print('將surface貼到screen上')
-screen.blit(surface, (25, 25))# 輸出到畫布上
+print("將surface貼到screen上")
+screen.blit(surface, (25, 25))  # 輸出到畫布上
 
 run_pygame()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-pygame_name = 'pygame 03 使用surface 載入圖片'
+pygame_name = "pygame 03 使用surface 載入圖片"
 screen = init_pygame(pygame_name, white)
-print('建立screen')
+print("建立screen")
 
-print('建立surface')
+print("建立surface")
 # 產生Surface物件, 上色，繪製成形
 surface = pygame.Surface(surface_size)
-surface = surface.convert()#產生副本
-surface.fill((0,255,0))#surface填滿指定色
+surface = surface.convert()  # 產生副本
+surface.fill((0, 255, 0))  # surface填滿指定色
 
-print('讀取圖片貼到surface上')
-#方法load()載入圖片，convert()能提高圖片的處理速度
+print("讀取圖片貼到surface上")
+# 方法load()載入圖片，convert()能提高圖片的處理速度
 image = pygame.image.load(filename)
 image.convert()
 x_st, y_st = 100, 100
 surface.blit(image, (x_st, y_st))
 
-print('將surface貼到screen上')
-screen.blit(surface, (25, 25))# 輸出到畫布上
+print("將surface貼到screen上")
+screen.blit(surface, (25, 25))  # 輸出到畫布上
 
 run_pygame()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-pygame_name = 'pygame 05 Animation'
+pygame_name = "pygame 05 Animation"
 screen = init_pygame(pygame_name, white)
 
-filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_cat/cat3.png'
+filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_cat/cat3.png"
 
 speed = [1, 1]
 
-#設定每秒畫格25，利用Clock()方法來確保動畫能持續進行
-Fps = 25 #每秒的執行次數
+# 設定每秒畫格25，利用Clock()方法來確保動畫能持續進行
+Fps = 25  # 每秒的執行次數
 traceCar = pygame.time.Clock()
 
-#載入圖片，get_rect()取得矩形區域
+# 載入圖片，get_rect()取得矩形區域
 car = pygame.image.load(filename)
-carX, carY = 5, 5 #設定開始移動的X、Y座標
-move = 'Down'
+carX, carY = 5, 5  # 設定開始移動的X、Y座標
+move = "Down"
 Fps = 25
 traceCar = pygame.time.Clock()
 
@@ -176,34 +180,40 @@ traceCar = pygame.time.Clock()
 
 running = True
 while running:
-   for event in pygame.event.get():
-       if event.type == pygame.QUIT:  # 判斷事件的常數是否為QUIT常數
-          running = False
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:  # 判斷事件的常數是否為QUIT常數
+            running = False
 
-   screen.fill(white)
-   
-   if move == 'Down':
-      carY += 5
-      if carY == 230 : move = 'Right'
-   elif move == 'Right':
-      carX += 5
-      if carX == 315 : move = 'Up'
-   elif move == 'Up':
-      carY -= 5
-      if carY == 10 : move = 'Left'
-   elif move == 'Left':
-      carX -= 5
-      if carX == 10: move = 'Down'
-   
-   # print('移動座標:', carX, carY)
-   # blit()方法在畫布上繪製圖片
-   screen.blit(car, (carX, carY))
-   pygame.display.update()#繪製視窗顯示於螢幕上
-   traceCar.tick(Fps) # 依fps的值來產生動畫
+    screen.fill(white)
+
+    if move == "Down":
+        carY += 5
+        if carY == 230:
+            move = "Right"
+    elif move == "Right":
+        carX += 5
+        if carX == 315:
+            move = "Up"
+    elif move == "Up":
+        carY -= 5
+        if carY == 10:
+            move = "Left"
+    elif move == "Left":
+        carX -= 5
+        if carX == 10:
+            move = "Down"
+
+    # print('移動座標:', carX, carY)
+    # blit()方法在畫布上繪製圖片
+    screen.blit(car, (carX, carY))
+    pygame.display.update()  # 繪製視窗顯示於螢幕上
+    traceCar.tick(Fps)  # 依fps的值來產生動畫
 
 pygame.quit()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 """ 還不能順利退出
 pygame_name = 'pygame 06 按鍵事件'
 screen = init_pygame(pygame_name, white)
@@ -257,6 +267,7 @@ while True:
       pygame.display.update()#繪製視窗顯示於螢幕上
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_cat/cat3.png'
 
@@ -298,6 +309,7 @@ while True:
    pygame.display.update()#繪製視窗顯示於螢幕上
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 pygame_name = 'pygame 08 偵測滑鼠位置'
 screen = init_pygame(pygame_name, white)
@@ -329,6 +341,7 @@ while True:
     pygame.display.flip()
     clock.tick(10)    
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_cat/cat3.png'
@@ -382,10 +395,11 @@ while True:
    pygame.display.update()#繪製視窗顯示於螢幕上
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-#randomGrid.py
+# randomGrid.py
 
-pygame_name = 'pygame 10'
+pygame_name = "pygame 10"
 screen = init_pygame(pygame_name, white)
 
 width = 400
@@ -413,14 +427,15 @@ while not done:
         if event.type == pygame.QUIT:  # 判斷事件的常數是否為QUIT常數
             done = True
     clock.tick(30)
-    
+
 pygame.quit()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-#save.py
+# save.py
 
-pygame_name = 'pygame 11'
+pygame_name = "pygame 11"
 screen = init_pygame(pygame_name, white)
 
 width = 400
@@ -439,7 +454,7 @@ while not done:
     blue = random.randrange(0, 255)
     x = random.randrange(0, width, sqrW)
     y = random.randrange(0, width, sqrH)
-    
+
     pygame.draw.rect(screen, (red, green, blue), (x, y, sqrW, sqrH))
     pygame.display.flip()
 
@@ -451,10 +466,11 @@ while not done:
 pygame.quit()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-#wobblingEllipse.py
+# wobblingEllipse.py
 
-pygame_name = 'pygame 12'
+pygame_name = "pygame 12"
 screen = init_pygame(pygame_name, white)
 
 windowSize = [400, 300]
@@ -465,8 +481,8 @@ height = 200
 x = windowSize[0] / 2 - width / 2
 y = windowSize[1] / 2 - height / 2
 
-color = pygame.color.Color('#FF0000')
-background_color = pygame.color.Color('#00FF00')
+color = pygame.color.Color("#FF0000")
+background_color = pygame.color.Color("#00FF00")
 
 count = 0
 
@@ -485,17 +501,18 @@ while not done:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:  # 判斷事件的常數是否為QUIT常數
-            print('QUIT')
+            print("QUIT")
             done = True
     clock.tick(20)
-    
+
 pygame.quit()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-#wobblingSaveLimit.py
+# wobblingSaveLimit.py
 
-pygame_name = 'pygame 14'
+pygame_name = "pygame 14"
 screen = init_pygame(pygame_name, white)
 
 windowSize = [400, 300]
@@ -507,7 +524,7 @@ height = 200
 x = windowSize[0] / 2 - width / 2
 y = windowSize[1] / 2 - height / 2
 
-color = pygame.color.Color('#57B0F6')
+color = pygame.color.Color("#57B0F6")
 
 count = 0
 
@@ -525,8 +542,8 @@ while not done:
 
     pygame.display.flip()
     if fileNo < 20:
-    	# 偽存圖
-        #pygame.image.save(screen, "circle" + str(fileNo) + ".png")
+        # 偽存圖
+        # pygame.image.save(screen, "circle" + str(fileNo) + ".png")
         fileNo += 1
 
     for event in pygame.event.get():
@@ -537,10 +554,11 @@ while not done:
 pygame.quit()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-#button.py
+# button.py
 
-pygame_name = 'pygame 15'
+pygame_name = "pygame 15"
 screen = init_pygame(pygame_name, white)
 
 windowSize = [400, 300]
@@ -580,17 +598,20 @@ while not done:
 pygame.quit()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-#explosions.py
+# explosions.py
 
-pygame_name = 'pygame 16'
+pygame_name = "pygame 16"
 screen = init_pygame(pygame_name, white)
+
 
 def randColor():
     r = random.randint(0, 255)
     g = random.randint(0, 255)
     b = random.randint(0, 255)
     return (r, g, b)
+
 
 windowSize = [400, 300]
 clock = pygame.time.Clock()
@@ -626,10 +647,11 @@ while not done:
 pygame.quit()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-#mesh.py
+# mesh.py
 
-pygame_name = 'pygame 17'
+pygame_name = "pygame 17"
 screen = init_pygame(pygame_name, white)
 
 windowSize = [400, 300]
@@ -659,10 +681,11 @@ while not done:
 pygame.quit()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-#mousePos.py
+# mousePos.py
 
-pygame_name = 'pygame 18'
+pygame_name = "pygame 18"
 screen = init_pygame(pygame_name, white)
 
 windowSize = [400, 300]
@@ -678,12 +701,12 @@ while not done:
             done = True
 pygame.quit()
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-#mouseTrails.py
+# mouseTrails.py
 
-pygame_name = 'pygame 19'
+pygame_name = "pygame 19"
 screen = init_pygame(pygame_name, white)
 
 windowSize = [400, 300]
@@ -712,10 +735,11 @@ while not done:
 pygame.quit()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-#movingTarget.py
+# movingTarget.py
 
-pygame_name = 'pygame 20'
+pygame_name = "pygame 20"
 screen = init_pygame(pygame_name, white)
 
 windowSize = [400, 300]
@@ -766,12 +790,10 @@ print("------------------------------------------------------------")  # 60個
 print("畫圖畫字")
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
-pygame_name = 'pygame 21 畫圖綜合'
+pygame_name = "pygame 21 畫圖綜合"
 screen = init_pygame(pygame_name, gray)
 
-#pygame.display.flip()
+# pygame.display.flip()
 
 print("畫直線")
 line_width = 10  # 線寬
@@ -791,13 +813,12 @@ pygame.draw.aaline(screen, black, [40, 10], [60 + 200, 25 + 200])
 x_st, y_st, w, h = 20, 250, 100, 50
 pygame.draw.rect(screen, green, (x_st, y_st, w, h))
 
-y_st = y_st +60
+y_st = y_st + 60
 pygame.draw.rect(screen, blue, (x_st, y_st, w, h))
 
-#繪製綠框、內塗紅色矩形
+# 繪製綠框、內塗紅色矩形
 pygame.draw.rect(screen, green, (150, 235, 120, 120))
 pygame.draw.rect(screen, red, (140, 225, 140, 140), 10)
-
 
 # 繪製五個同心圓
 cx = 400
@@ -826,11 +847,11 @@ pygame.draw.circle(screen, gray, (cx, cy), 140, 10)
 
 pygame.draw.circle(screen, red, [500, 500], 100)
 
-#繪製半徑為40的黃色實心圓形
-pygame.draw.circle(screen, red, (103+300, 103), 82, 12)
-pygame.draw.circle(screen, yellow, (100+300, 100), 80)
+# 繪製半徑為40的黃色實心圓形
+pygame.draw.circle(screen, red, (103 + 300, 103), 82, 12)
+pygame.draw.circle(screen, yellow, (100 + 300, 100), 80)
 
-#繪製橢圓形
+# 繪製橢圓形
 x_st, y_st, w, h = 50, 450, 70, 30
 pygame.draw.ellipse(screen, RosyBrown, (x_st, y_st, w, h), 8)
 
@@ -846,15 +867,26 @@ pygame.draw.arc(screen, aqua, (x_st + 15, y_st + 10, 225, 180), 0, 1.6, 8)
 pygame.draw.arc(screen, red, (x_st + 20, y_st + 17, 212, 173), 0, 3.1, 8)
 pygame.draw.arc(screen, fuchsia, (x_st + 28, y_st + 27, 195, 157), 0, 4.7, 8)
 pygame.draw.arc(screen, green, (x_st + 38, y_st + 37, 173, 137), 0, 9.9, 8)
-pygame.draw.arc(screen, aqua, (x_st+150, y_st, 200, 185), 4.3, 2.0, 8)
+pygame.draw.arc(screen, aqua, (x_st + 150, y_st, 200, 185), 4.3, 2.0, 8)
 
 # 畫多邊形
 x_st, y_st = 550, 20
-pygame.draw.polygon(screen, red, ((x_st, y_st), (x_st+50, y_st+100), (x_st-50, y_st+100)))
+pygame.draw.polygon(
+    screen, red, ((x_st, y_st), (x_st + 50, y_st + 100), (x_st - 50, y_st + 100))
+)
 
 x_st, y_st = 550, 0
 pygame.draw.polygon(
-    screen, blue, [(x_st+15, y_st+120), (x_st+65, y_st+35), (x_st+185, y_st+35), (x_st+230, y_st+120), (x_st+130, y_st+180)], 6
+    screen,
+    blue,
+    [
+        (x_st + 15, y_st + 120),
+        (x_st + 65, y_st + 35),
+        (x_st + 185, y_st + 35),
+        (x_st + 230, y_st + 120),
+        (x_st + 130, y_st + 180),
+    ],
+    6,
 )
 
 pygame.display.flip()
@@ -862,68 +894,72 @@ pygame.display.flip()
 run_pygame()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 x_st, y_st = 20, 20
 dx, dy = 400, 40
 font_size = 30
 
-pygame_name = 'pygame 24 畫圖綜合 繪製文字'
+pygame_name = "pygame 24 畫圖綜合 繪製文字"
 screen = init_pygame(pygame_name, white)
 
-#產生Surface物件, 上色，繪製成形
+# 產生Surface物件, 上色，繪製成形
 surface = pygame.Surface(screen.get_size())
-#print(surface.get_width(), surface.get_height())
-surface = surface.convert()#產生副本
-surface.fill((255, 255, 255))  #surface填滿指定色
+# print(surface.get_width(), surface.get_height())
+surface = surface.convert()  # 產生副本
+surface.fill((255, 255, 255))  # surface填滿指定色
 
 font1 = pygame.font.Font(font_filename, font_size)
 text1 = font1.render("顯示中文", True, (255, 0, 0), (255, 255, 255))  # 中文,不同背景色
-surface.blit(text1, (x_st+dx*0, y_st+dy*0))
+surface.blit(text1, (x_st + dx * 0, y_st + dy * 0))
 
-text2 = font1.render("Welcome to the United States 1", True, (0, 0, 255), (0, 255, 0))  # 英文,相同背景色
-surface.blit(text2, (x_st+dx*0, y_st + dy*1))
+text2 = font1.render(
+    "Welcome to the United States 1", True, (0, 0, 255), (0, 255, 0)
+)  # 英文,相同背景色
+surface.blit(text2, (x_st + dx * 0, y_st + dy * 1))
 screen.blit(surface, (0, 0))
 
 ft = pygame.font.SysFont("Malgun Gothic", font_size)  # sugar有此字型 但kilo無
 
 wd1 = ft.render("Welcome to the United States 2", False, aqua)
-screen.blit(wd1, (x_st+dx*0, y_st + dy*2))
+screen.blit(wd1, (x_st + dx * 0, y_st + dy * 2))
 
 wd2 = ft.render("黃河之水天上來", True, green, yellow)
-screen.blit(wd2, (x_st+dx*0, y_st + dy*3))
+screen.blit(wd2, (x_st + dx * 0, y_st + dy * 3))
 
 ft = pygame.font.SysFont("Malgun Gothic", font_size)  # sugar有此字型 但kilo無
 wd1 = ft.render("萬象更新", False, green)
-screen.blit(wd1, (x_st+dx*0, y_st + dy*4))
+screen.blit(wd1, (x_st + dx * 0, y_st + dy * 4))
 
 wd2 = ft.render("Welcome to the United States 3", True, red)
-screen.blit(wd2, (x_st+dx*0, y_st + dy*5))
+screen.blit(wd2, (x_st + dx * 0, y_st + dy * 5))
 
 ft = pygame.font.SysFont("Malgun Gothic", font_size)  # sugar有此字型 但kilo無
-#ft = pygame.font.SysFont("Arial", font_size)#fail
+# ft = pygame.font.SysFont("Arial", font_size)#fail
 wd1 = ft.render("Welcome to the United States 4", False, blue, aqua)
-screen.blit(wd1, (x_st+dx*0, y_st + dy*6))
+screen.blit(wd1, (x_st + dx * 0, y_st + dy * 6))
 
 wd2 = ft.render("百科全書", True, red, aqua)
-screen.blit(wd2, (x_st+dx*0, y_st + dy*7))
+screen.blit(wd2, (x_st + dx * 0, y_st + dy * 7))
 
 wd1 = ft.render("Welcome to the United States 5", False, blue, aqua)
-screen.blit(wd1, (x_st+dx*0, y_st + dy*8))
+screen.blit(wd1, (x_st + dx * 0, y_st + dy * 8))
 
 wd2 = ft.render("世界大同", True, red, aqua)
-screen.blit(wd2, (x_st+dx*0, y_st + dy*9))
+screen.blit(wd2, (x_st + dx * 0, y_st + dy * 9))
 
 wd1 = ft.render("Welcome to the United States 6", False, blue, aqua)
-screen.blit(wd1, (x_st+dx*0, y_st + dy*10))
+screen.blit(wd1, (x_st + dx * 0, y_st + dy * 10))
 
 wd2 = ft.render("追劇", True, red, aqua)
-screen.blit(wd2, (x_st+dx*0, y_st + dy*11))
+screen.blit(wd2, (x_st + dx * 0, y_st + dy * 11))
 
 run_pygame()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-pygame_name = 'pygame 25 畫圖綜合 背景漸層色'
+pygame_name = "pygame 25 畫圖綜合 背景漸層色"
 screen = init_pygame(pygame_name, gray)
 
 width = 800
@@ -948,20 +984,22 @@ while not done:
 
 pygame.quit()
 
-        
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
+
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -969,15 +1007,12 @@ print("------------------------------------------------------------")  # 60個
 # pygame.image.save(screen, "tmp_save_pic.png")
 
 print("------------------------------------------------------------")  # 60個
-
-
-'''
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
 # 基本架構
-import pygame
 
 pygame.init()  # 啟動Pygame
 
@@ -997,10 +1032,8 @@ while running:  # 無窮迴圈
             running = False
 pygame.quit()  # 關閉繪圖視窗
 
-
 print("------------------------------------------------------------")  # 60個
-
-import pygame
+print("------------------------------------------------------------")  # 60個
 
 pygame.init()
 
@@ -1028,12 +1061,11 @@ while running:
 
 pygame.quit()
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-import pygame
-
 pygame.init()
+
 screen = pygame.display.set_mode((640, 320))
 pygame.display.set_caption("動畫基本架構")
 
@@ -1056,13 +1088,12 @@ pygame.quit()  # 關閉繪圖視窗
 
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 """
 # https://gamedevacademy.org/pygame-time-clock-tutorial-complete-guide/
 #Tracking Frames Per Second (FPS)
 
-import pygame
 pygame.init()
 clock = pygame.time.Clock()
 cnt = 0
@@ -1077,7 +1108,6 @@ while True:
 
 print("程式執行完畢！")
 """
-
 
 print("pygame 讀取 鍵盤輸入")
 
@@ -1106,11 +1136,10 @@ pygame.quit()
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 

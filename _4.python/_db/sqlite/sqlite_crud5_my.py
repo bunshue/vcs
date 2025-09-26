@@ -28,19 +28,6 @@ all_data = []
 list_stage01 = list()
 list_stage02 = list()
 list_stage03 = list()
-list_stage04 = list()
-list_stage05 = list()
-list_stage06 = list()
-list_stage07 = list()
-list_stage08 = list()
-list_stage09 = list()
-list_stage10 = list()
-list_stage11 = list()
-list_stage12 = list()
-list_stage13a = list()
-list_stage13b = list()
-list_stage14 = list()
-list_stage15 = list()
 
 choice = []
 
@@ -48,59 +35,19 @@ stage_no = [
     "第1站 下蓋清潔",
     "第2站 點膠",
     "第3站 前2站NG",
-    "第4站 模組接合",
-    "第5站 間隙檢查",
-    "第6站 UV固化",
-    "第7站 點膠線檢查",
-    "第8站 前4站NG",
-    "第9站 氣密測試",
-    "第10站 Hi-pot",
-    "第11站 色調",
-    "第12站 前3站NG",
-    "第13a站 等級判定",
-    "第13b站 資料燒錄",
-    "第14站 前2站NG",
-    "第15站 包裝出料",
 ]
 
 table_list = [
     "table01",
     "table02",
     "table03",
-    "table04",
-    "table05",
-    "table06",
-    "table07",
-    "table08",
-    "table09",
-    "table10",
-    "table11",
-    "table12",
-    "table13a",
-    "table13b",
-    "table14",
-    "table15",
 ]
 
 list_stage_list = [
     "list_stage01",
     "list_stage02",
     "list_stage03",
-    "list_stage04",
-    "list_stage05",
-    "list_stage06",
-    "list_stage07",
-    "list_stage08",
-    "list_stage09",
-    "list_stage10",
-    "list_stage11",
-    "list_stage12",
-    "list_stage13a",
-    "list_stage13b",
-    "list_stage14",
-    "list_stage15",
 ]
-
 
 stage = -1
 tablename = ""
@@ -141,36 +88,10 @@ def clear_all_data():
     global list_stage01
     global list_stage02
     global list_stage03
-    global list_stage04
-    global list_stage05
-    global list_stage06
-    global list_stage07
-    global list_stage08
-    global list_stage09
-    global list_stage10
-    global list_stage11
-    global list_stage12
-    global list_stage13a
-    global list_stage13b
-    global list_stage14
-    global list_stage15
 
     list_stage01 = list()
     list_stage02 = list()
     list_stage03 = list()
-    list_stage04 = list()
-    list_stage05 = list()
-    list_stage06 = list()
-    list_stage07 = list()
-    list_stage08 = list()
-    list_stage09 = list()
-    list_stage10 = list()
-    list_stage11 = list()
-    list_stage12 = list()
-    list_stage13a = list()
-    list_stage13b = list()
-    list_stage14 = list()
-    list_stage15 = list()
 
 
 print("------------------------------------------------------------")  # 60個
@@ -842,26 +763,10 @@ main_message1.set(message)
 
 window.mainloop()
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
-
-
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

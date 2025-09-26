@@ -67,6 +67,9 @@ fetchmany(size=cursor.arraysize)     # 讀取N筆資料成元組串列
 fetchmany(100)
 fetchmany(size=100)
 """
+import shutil
+import sqlite3
+import datetime
 
 print("------------------------------------------------------------")  # 60個
 
@@ -97,83 +100,6 @@ def show():
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 打卡程式
-
-import sqlite3
-import datetime
-
-
-def show_data_base_contents(db_filename, table_name, reverse=0):
-    conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-    cursor = conn.cursor()  # 建立 cursor 物件
-    # SELECT * : 取得所有資料
-    sqlstr = "SELECT * FROM {};".format(table_name)  # same
-    sqlstr = "SELECT * FROM %s" % table_name
-    cursor.execute(sqlstr)
-    # 使用fetchall()
-    # print("用fetchall()讀取 全部資料 預設排序(依第1項升冪排序)")
-    rows = cursor.fetchall()  # 讀取全部資料成元組串列
-    length = len(rows)
-    print("共有", length, "筆資料")
-    if reverse == 1:
-        rows = sorted(rows, reverse=True)
-    for i in range(length):
-        print("第" + str(i + 1) + "筆資料 : ", rows[i])
-        if i > 10:
-            break
-    """
-    # 不使用fetchall()
-    i = 0
-    for row in cursor:  # 不是用fetchall()讀取全部資料
-        print("第" + str(i + 1) + "筆資料 : ", row)
-        i += 1
-        if i > 10:
-            break
-    """
-    conn.close()  # 關閉資料庫連線
-
-
-def checkin(name, option=0):
-    db_filename = "D:/_git/vcs/_4.python/_db/sqlite/data/checkin.sqlite"
-    if option == 1:
-        print("讀取資料庫")
-        table_name = "table01"
-        show_data_base_contents(db_filename, table_name, reverse=1)
-    else:
-        conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-        cursor = conn.cursor()  # 建立 cursor 物件
-        sqlstr = """
-        CREATE TABLE IF NOT EXISTS table01(
-        idx INTEGER PRIMARY KEY AUTOINCREMENT, -- 序號(idx)整數自動遞增, 可填可不填
-        登入姓名 TEXT NOT NULL,
-        登入日期 DATE,
-        登入時間 TIMESTAMP
-        )
-        """
-        cursor.execute(sqlstr)
-        conn.commit()  # 更新
-        sqlstr = "INSERT INTO table01 (登入姓名, 登入日期, 登入時間) VALUES (?, ?, ?)"
-        dd = datetime.date.today()
-        tt = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
-        x = (name, dd, tt)  # tuple格式
-        cursor.execute(sqlstr, x)
-        conn.commit()  # 更新
-        conn.close()  # 關閉資料庫連線
-
-
-# checkin("mouse", option=1)  # 讀取資料庫
-checkin("mouse", option=0)  # 登入
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-import shutil
-import datetime
-import sqlite3
 
 
 def show_data_base_contents(db_filename, table_name, reverse=0):
@@ -237,6 +163,44 @@ tt = time.time()
 tt = datetime.datetime.now()
 tt = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
 """
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 打卡程式
+
+
+def checkin(name, option=0):
+    db_filename = "D:/_git/vcs/_4.python/_db/sqlite/data/checkin.sqlite"
+    if option == 1:
+        print("讀取資料庫")
+        table_name = "table01"
+        show_data_base_contents(db_filename, table_name, reverse=1)
+    else:
+        conn = sqlite3.connect(db_filename)  # 建立資料庫連線
+        cursor = conn.cursor()  # 建立 cursor 物件
+        sqlstr = """
+        CREATE TABLE IF NOT EXISTS table01(
+        idx INTEGER PRIMARY KEY AUTOINCREMENT, -- 序號(idx)整數自動遞增, 可填可不填
+        登入姓名 TEXT NOT NULL,
+        登入日期 DATE,
+        登入時間 TIMESTAMP
+        )
+        """
+        cursor.execute(sqlstr)
+        conn.commit()  # 更新
+        sqlstr = "INSERT INTO table01 (登入姓名, 登入日期, 登入時間) VALUES (?, ?, ?)"
+        dd = datetime.date.today()
+        tt = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
+        x = (name, dd, tt)  # tuple格式
+        cursor.execute(sqlstr, x)
+        conn.commit()  # 更新
+        conn.close()  # 關閉資料庫連線
+
+
+# checkin("mouse", option=1)  # 讀取資料庫
+checkin("mouse", option=0)  # 登入
+
 print("------------------------------------------------------------")  # 60個
 print("INSERT INTO 新增資料 大全 + CREATE + DROP")
 print("------------------------------------------------------------")  # 60個
@@ -822,7 +786,6 @@ show_data_base_contents(db_filename, table_name)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 print("取得欄位名稱範例")
 
@@ -851,7 +814,6 @@ for row in rows:
         break
 conn.close()  # 關閉資料庫連線
 
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -922,7 +884,6 @@ conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 
 # 取得一個資料庫內所有表單的名稱, list格式
@@ -977,7 +938,6 @@ for table_name in table_names:
 
 conn.close()  # 關閉資料庫連線
 
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

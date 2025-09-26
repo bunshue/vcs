@@ -1,8 +1,10 @@
 """
 sqlite + pandas
-
-
 """
+
+import csv
+import sqlite3
+
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -31,11 +33,6 @@ def show():
 
 
 print("------------------------------------------------------------")  # 60個
-
-import csv
-import shutil
-import datetime
-import sqlite3
 
 
 def show_data_base_contents(db_filename, table_name):
@@ -101,7 +98,6 @@ print(df)
 conn.commit()  # 更新
 conn.close()  # 關閉資料庫連線
 
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -288,8 +284,8 @@ print(cc)
 # 脏数据或数据不正确
 
 plt.hist(camp["AvgIncome"], bins=20)
-# Try this: accepts['purch_price'].plot(kind='hist')
-# And this: sns.histplot(accepts['purch_price'], kde=True, fit=stats.norm)
+# Try this: accepts["purch_price"].plot(kind="hist")
+# And this: sns.histplot(accepts["purch_price"], kde=True, fit=stats.norm)
 # should scipy.stats first
 show()
 
@@ -323,7 +319,7 @@ print(cc)
 cc = camp["dup1"] = camp["ID"].duplicated()  # 按照主键进行重复记录标识
 print(cc)
 
-# accepts['fico_score'].duplicated() # 没有实际意义
+# accepts["fico_score"].duplicated() # 没有实际意义
 
 # 缺失值处理
 
@@ -359,7 +355,7 @@ camp["AvgIncome"].describe()
 """
 
 
-def blk(floor, root):  # 'blk' will return a function
+def blk(floor, root):  # "blk" will return a function
     def f(x):
         if x < floor:
             x = floor
@@ -372,7 +368,7 @@ def blk(floor, root):  # 'blk' will return a function
 
 q1 = camp["Age"].quantile(0.01)  # 计算百分位数
 q99 = camp["Age"].quantile(0.99)
-blk_tot = blk(floor=q1, root=q99)  # 'blk_tot' is a function
+blk_tot = blk(floor=q1, root=q99)  # "blk_tot" is a function
 camp["Age"] = camp["Age"].map(blk_tot)
 cc = camp["Age"].describe()
 print(cc)
@@ -424,7 +420,7 @@ pd.read_sql_query("SELECT DISTINCT  year FROM sale", conn)
 
 # 选择满足条件的行
 
-pd.read_sql_query("SELECT * FROM sale WHERE market in ('东','西') and year=2012", conn)
+pd.read_sql_query("SELECT * FROM sale WHERE market in ('东', '西') and year=2012", conn)
 
 # 对行进行排序
 
