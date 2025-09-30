@@ -94,7 +94,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 def show():
     # return
-    plt.tight_layout()  # 緊密排列，並填滿原圖大小
+    plt.tight_layout()  # 緊密排列, 並填滿原圖大小
     plt.show()
 
 
@@ -117,8 +117,11 @@ def show_data_base_contents(db_filename, table_name, reverse=0):
     if reverse == 1:
         rows = sorted(rows, reverse=True)
     for i in range(length):
-        print("第" + str(i + 1) + "筆資料 : ", rows[i])
-        if i > 10:
+        if reverse == 1:
+            print("第" + str(length - i) + "筆資料 : ", rows[i])
+        else:
+            print("第" + str(i + 1) + "筆資料 : ", rows[i])
+        if i > 20:
             break
     """
     # 不使用fetchall()
@@ -196,6 +199,7 @@ def checkin(name, option=0):
         cursor.execute(sqlstr, x)
         conn.commit()  # 更新
         conn.close()  # 關閉資料庫連線
+        print("登入 :", x)
 
 
 # checkin("mouse", option=1)  # 讀取資料庫
@@ -236,13 +240,14 @@ print("------------------------------")  # 30個
 
 print("INSERT INTO 新增資料, 有填序號")
 
+# 有指明欄位, 只需要寫需要的欄位
 sqlstr = "INSERT INTO table01 (idx, 英文名, 中文名, 體重) VALUES (?, ?, ?, ?)"
 x = (1, "mouse", "米老鼠", 3)  # tuple格式
 cursor.execute(sqlstr, x)
 x = (2, "ox", "班尼牛", 48)  # tuple格式
 cursor.execute(sqlstr, x)
 
-# 未指明欄位，則必須全寫
+# 未指明欄位, 則必須全寫
 sqlstr = "INSERT INTO table01 VALUES (?, ?, ?, ?, ?, ?)"
 dd = datetime.date.today()
 tt = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
@@ -253,18 +258,18 @@ print("------------------------------")  # 30個
 
 print("INSERT INTO 新增資料, 沒有填序號, 系統自動遞增")
 
-# INSERT INTO 用 tuple
+# INSERT INTO, 用 tuple
 sqlstr = "INSERT INTO table01 (英文名, 體重) VALUES (?, ?)"
 x = ("rabbit", 8)  # tuple格式
 cursor.execute(sqlstr, x)
 
-# INSERT INTO 用 format
+# INSERT INTO, 用 format
 sqlstr = "INSERT INTO table01 (英文名, 體重) VALUES ('{}', '{}')".format("dragon", 38)
 cursor.execute(sqlstr)
 
 print("------------------------------")  # 30個
 
-print("INSERT INTO 新增資料, 使用字典")
+print("INSERT INTO 新增資料, 使用字典")  # 其實也是字典轉元組
 
 d = {"英文名": "snake", "中文名": "貪吃蛇", "體重": 16}  # 字典
 sqlstr = "INSERT INTO table01 (英文名, 中文名, 體重) VALUES (?, ?, ?)"
@@ -296,7 +301,7 @@ cursor.execute(sqlstr, x)
 
 print("------------------------------")  # 30個
 
-print("INSERT INTO 新增資料, 使用元組串列, 使用executemany")
+print("INSERT INTO 新增資料, 使用元組串列, 使用executemany, 一次執行多個指令")
 
 sqlstr = "INSERT INTO table01 (英文名, 體重, 中文名) VALUES (?, ?, ?)"
 
@@ -307,13 +312,11 @@ animals = [
     ("dog", 17, "貴賓狗"),
     ("pig", 42, "佩佩豬"),
 ]
-print("測試 executemany, 一次執行多個指令")
-# 一次執行多個指令
 cursor.executemany(sqlstr, animals)  # 一次執行多個指令
 print("新增資料行數 :", cursor.rowcount)
-
-print("------------------------------")  # 30個
 """
+print("------------------------------")  # 30個
+
 print("測試 例外 的寫法 資料重複")
 
 # 測試 PK, 不能使用相同的PK
@@ -340,9 +343,9 @@ try:
     cursor.execute(sqlstr, x)
 except sqlite3.IntegrityError:
     print("無法重複輸入相同的資料3")
-"""
-print("------------------------------")  # 30個
 
+print("------------------------------")  # 30個
+"""
 # DROP TABLE 刪除表單 如果存在的話
 # sqlstr = "DROP TABLE IF EXISTS table01"
 # cursor.execute(sqlstr)
@@ -380,6 +383,8 @@ conn = sqlite3.connect(db_filename)  # 建立資料庫連線
 cursor = conn.cursor()  # 建立 cursor 物件
 
 print("------------------------------")  # 30個
+print("使用SELECT")
+print("------------------------------")  # 30個
 
 print("SELECT * FROM table01, 取得所有資料")
 
@@ -408,7 +413,7 @@ print(rows)
 
 print("------------------------------")  # 30個
 
-print("SELECT 取得資料 指定欄位 1欄")
+print("SELECT 取得資料, 指定欄位 1欄, 英文名")
 
 sqlstr = "SELECT 英文名 FROM table01"  # SELECT 英文名 : 取得一欄資料
 cursor.execute(sqlstr)  # 取得一欄資料
@@ -416,13 +421,14 @@ show_result()
 
 print("------------------------------")  # 30個
 
-print("SELECT 取得資料 指定欄位 2欄")
+print("SELECT 取得資料, 指定欄位 2欄, 中文名 和 體重")
 
 sqlstr = "SELECT 中文名, 體重 FROM table01"  # SELECT 中文名, 體重 : 取得二欄資料
 cursor.execute(sqlstr)  # 取得二欄資料
 show_result()
 
 print("------------------------------")  # 30個
+print("使用SELECT + WHERE")
 print("------------------------------")  # 30個
 
 print("SELECT + WHERE 取得資料 + 條件, 名字完全符合")
@@ -432,23 +438,23 @@ print("SELECT + WHERE 取得資料 + 條件, 名字完全符合")
 sqlstr = "SELECT * FROM table01 WHERE 中文名 = ?"
 name = ("貪吃蛇",)  # tuple格式, 一項的tuple寫法
 cursor.execute(sqlstr, name)
-print("中文名=", name[0], "的 :")
+print("中文名 =", name[0], "的 :")
 show_result()
 
 print("------------------------------")  # 30個
 
-print("SELECT + WHERE 取得資料 + 條件, 體重 > 30")
+print("SELECT + WHERE 取得資料 + 條件, 體重 > 35")
 
-# min_weight = 30
+# min_weight = 35
 # sqlstr = "SELECT * FROM table01 WHERE 體重 = {0}".format(min_weight)  # same
 sqlstr = "SELECT * FROM table01 WHERE 體重 > ?"
-min_weight = (30,)  # tuple格式, 一項的tuple寫法
+min_weight = (35,)  # tuple格式, 一項的tuple寫法
 cursor.execute(sqlstr, min_weight)
 show_result()
 
 print("------------------------------")  # 30個
 
-print("SELECT + WHERE 取得資料 + 條件, 名字部分符合")
+print("SELECT + WHERE 取得資料 + 條件, 部分相符")
 
 search_name = "rabbit"
 # 無 LIKE, 一定要符合大小寫
@@ -459,76 +465,80 @@ sqlstr = "SELECT * FROM table01 WHERE 英文名 LIKE '{}'".format(search_name)
 cursor.execute(sqlstr)
 show_result()
 
-# 部分相符
-print("指明抓名字有bb的資料")
-search_name = ("%bb%",)  # bb在中間 前後要有%, 代表部分, 若無%, 要全部相符
+# 部分相符, 寫法一
+print("指明抓名字有bb的資料, LIKE不分大小寫")
+search_name = ("%BB%",)  # bb在中間 前後要有%, 代表部分, 若無%, 要全部相符
 cursor.execute("SELECT * FROM table01 WHERE 英文名 LIKE ?", search_name)
 show_result()
 
-# 部分相符
-print("指明抓名字有bb的資料")
-sqlstr = "SELECT * FROM table01 WHERE 英文名 LIKE '{}'".format("%bb%")
+# 部分相符, 寫法二
+print("指明抓名字有bb的資料, LIKE不分大小寫")
+sqlstr = "SELECT * FROM table01 WHERE 英文名 LIKE '{}'".format("%BB%")
 cursor.execute(sqlstr)
 show_result()
 
-print("------------------------------")  # 30個
-
-cursor.execute("SELECT * FROM table01 WHERE 中文名 LIKE :name", {"name": "跳跳虎"})
+# 部分相符, 寫法三
+print("指明抓名字有 牛 的資料, 部分相符")
+cursor.execute("SELECT * FROM table01 WHERE 中文名 LIKE :name", {"name": "%牛%"})
 show_result()
 
 print("------------------------------")  # 30個
 
 print("SELECT + WHERE 取得資料 + 條件")
 
+print("條件 : 英文名 = rabbit")
 cursor.execute("SELECT * FROM table01 WHERE 英文名 = ?", ("rabbit",))
 show_result()
 
+print("條件 : 英文名 = rabbit")
 name = "rabbit"
 cursor.execute("SELECT * FROM table01 WHERE 英文名 = ?", (name,))
 show_result()
 
-print("指明抓一筆資料, 9號")
+print("條件 : idx = 9")
 idx = 9
 sqlstr = "SELECT * FROM table01 WHERE idx = " + str(idx)
 cursor.execute(sqlstr)
-
-print("idx=9的 :")
 show_result()
 
-# 其他寫法
-# cursor.execute("SELECT * FROM table01 WHERE idx=?", (str(idx),))
-# sqlstr = "SELECT * FROM table01 WHERE idx = {};".format(idx)
+print("條件 : idx = 9")
+idx = 9
+cursor.execute("SELECT * FROM table01 WHERE idx=?", (str(idx),))
+show_result()
+
+print("條件 : idx = 9")
+idx = 9
+sqlstr = "SELECT * FROM table01 WHERE idx = {};".format(idx)
+cursor.execute(sqlstr)
+show_result()
 
 print("------------------------------")  # 30個
 
-# 看二欄資料全部
+print("看二欄資料全部")
 cursor.execute("SELECT 中文名, 體重 FROM table01")  # 取得二欄資料
 show_result()
 
-print("------------------------------")  # 30個
-
-# 看二欄資料 + 條件
-sqlstr = "SELECT 中文名, 體重 FROM table01 WHERE 體重 >= 30"
+print("看二欄資料 + 條件, 體重 > 35")
+sqlstr = "SELECT 中文名, 體重 FROM table01 WHERE 體重 > 35"
 cursor.execute(sqlstr)
-print("體重>=30的 :")
 show_result()
 
 print("------------------------------")  # 30個
 
-print("英文名 有A且有B的")
-cursor.execute("SELECT * FROM table01 WHERE 英文名 LIKE '%a%' AND 英文名 LIKE '%b%'")
+print("英文名 有A AND 有I 的")
+cursor.execute("SELECT * FROM table01 WHERE 英文名 LIKE '%a%' AND 英文名 LIKE '%i%'")
 show_result()
 
-print("英文名 有A或有B的")
-cursor.execute("SELECT * FROM table01 WHERE 英文名 LIKE '%a%' OR 英文名 LIKE '%b%'")
+print("英文名 有A OR 有I 的")
+cursor.execute("SELECT * FROM table01 WHERE 英文名 LIKE '%a%' OR 英文名 LIKE '%i%'")
 show_result()
 
-print("英文名 有A無B的")
-cursor.execute("SELECT * FROM table01 WHERE 英文名 LIKE '%a%' AND 英文名 NOT LIKE '%b%'")
+print("英文名 有A AND 無I 的")
+cursor.execute("SELECT * FROM table01 WHERE 英文名 LIKE '%a%' AND 英文名 NOT LIKE '%i%'")
 show_result()
-
 
 print("------------------------------")  # 30個
+print("使用SELECT + LIMIT")
 print("------------------------------")  # 30個
 
 print("SELECT + LIMIT 取得資料 + 讀取個數")
@@ -556,11 +566,11 @@ cursor.execute(sqlstr)
 show_result()
 
 print("------------------------------")  # 30個
+print("使用SELECT + ORDER BY")
 print("------------------------------")  # 30個
 
 print("SELECT + ORDER BY 取得資料 + 排序 升冪 ASC")
-
-print("依 體重 升冪 ASC")
+print("依 體重 升冪 ASC(預設)")
 # SELECT * : 取得資料 排列 依 體重 升冪
 sqlstr = "SELECT * FROM table01 ORDER BY 體重"
 cursor.execute(sqlstr)
@@ -584,9 +594,6 @@ print("------------------------------")  # 30個
 
 print("用fetchall()讀取 全部資料 依 英文名 排序, 升冪")
 
-conn = sqlite3.connect(db_filename)  # 建立資料庫連線
-cursor = conn.cursor()  # 建立 cursor 物件
-
 # SELECT * : 取得資料 排列 依 英文名 升冪
 sqlstr = "SELECT * FROM table01 ORDER BY 英文名;"  # 由小到大, 升冪
 
@@ -605,7 +612,7 @@ print("UPDATE 更新資料 大全")
 print("------------------------------------------------------------")  # 60個
 
 db_filename = db_filename_animals
-print("讀取資料庫")
+print("原始資料庫")
 table_name = "table01"
 show_data_base_contents(db_filename, table_name)
 
@@ -618,38 +625,53 @@ print("------------------------------")  # 30個
 
 print("UPDATE 更新資料 修改資料")
 
-# UPDATE 更新資料, 修改表單 table01 內, 修改 中文名 = "虎" 的資料的 體重 內容, 改為 123
-cursor.execute("UPDATE table01 SET 體重=? WHERE 中文名 = ?", (123, "虎"))
-
-# UPDATE 更新資料, 修改表單 table01 內, 修改 英文名 = 'snake' 的資料的 中文名 內容, 改為 '小龍'
-cursor.execute("UPDATE table01 SET 中文名 = '小龍' WHERE 英文名 = 'snake'")
-
-# UPDATE 更新資料, 修改表單 table01 內, 修改 idx = 6 的資料的 中文名 內容, 改為 '小龍'
-cursor.execute("UPDATE table01 SET 中文名 = '小龍' WHERE idx = 6")
-
-# UPDATE 更新資料, 修改表單 table01 內, 修改 idx = 2 的資料的 體重 內容, 改為 53
-sqlstr = "UPDATE table01 SET 體重 = '{}' WHERE idx = {}".format(53, 2)
-cursor.execute(sqlstr)  # 修改2號的資料, 要先確保已經有2號的資料, 才可以修改
-
-# UPDATE 更新資料, 修改表單 table01 內, 修改 英文名 = 'tiger' 的資料的 中文名 內容, 改為 '大蛇'
-sqlstr = "UPDATE table01 SET 中文名 = '{}' WHERE 英文名 = '{}'".format("大蛇", "snake")
-cursor.execute(sqlstr)
-
-# UPDATE 更新資料, 修改表單 table01 內, 修改 idx = 1 的資料的 中文名 內容, 改為 "傑利鼠"
+# 修改 idx = 1 的 中文名, "米老鼠" 改為 "傑利鼠"
 sqlstr = "UPDATE table01 SET 中文名 = '傑利鼠' WHERE idx = 1"
 cursor.execute(sqlstr)
 
-# UPDATE 更新資料, 修改表單 table01 內, 修改 idx = 8 的資料的 英文名 內容, 改為 sheep
-sqlstr = "UPDATE table01 SET 英文名 = '{}' WHERE idx = {}".format("sheep", 8)
+# 修改 idx = 2 的 體重, 48 改為 53
+idx = 2
+sqlstr = "UPDATE table01 SET 體重 = '{}' WHERE idx = {}".format(53, idx)
+cursor.execute(sqlstr)  # 修改2號的資料, 要先確保已經有2號的資料, 才可以修改
+
+# 修改 idx = 11 的 體重, 17 改為 19
+idx = 11
+weight = 19
+sqlstr = "UPDATE table01 SET 體重 = {0} WHERE idx = {1}".format(weight, idx)
+cursor.execute(sqlstr)
+
+# 修改 英文名 = 'tiger' 的 中文名, "空" 改為 '跳跳虎'
+sqlstr = "UPDATE table01 SET 中文名 = '{}' WHERE 英文名 = '{}'".format("跳跳虎", "tiger")
+cursor.execute(sqlstr)
+
+# 修改 idx = 4 的 中文名, "空" 改為 '彼得兔'
+cursor.execute("UPDATE table01 SET 中文名 = '彼得兔' WHERE idx = 4")
+
+# 修改 英文名 = 'snake' 的 中文名, "貪吃蛇" 改為 '小龍'
+cursor.execute("UPDATE table01 SET 中文名 = '小龍' WHERE 英文名 = 'snake'")
+
+# 修改 中文名 = "草泥馬" 的 體重, 31 改為 123
+cursor.execute("UPDATE table01 SET 體重=? WHERE 中文名 = ?", (123, "草泥馬"))
+
+# 修改 idx = 8 的 英文名, goat 改為 sheep
+idx = 8
+name = "sheep"
+sqlstr = "UPDATE table01 SET 英文名 = '{0}' WHERE idx = {1}".format(name, idx)
 cursor.execute(sqlstr)  # 修改8號的資料, 要先確保已經有8號的資料, 才可以修改
 
-idx = 1
-newName = "jerry"
-newWeight = 5
-sqlstr = 'UPDATE table01 SET 英文名 = "{0}" WHERE idx = {1}'.format(newName, idx)
+conn.commit()  # 更新
+
+print("修改後的資料庫")
+table_name = "table01"
+sqlstr = "SELECT * FROM %s" % table_name
 cursor.execute(sqlstr)
-sqlstr = "UPDATE table01 SET 體重 = {0} WHERE idx = {1}".format(newWeight, idx)
-cursor.execute(sqlstr)
+rows = cursor.fetchall()  # 讀取全部資料成元組串列
+length = len(rows)
+print("共有", length, "筆資料")
+for i in range(length):
+    print("第" + str(i + 1) + "筆資料 : ", rows[i])
+    if i > 20:
+        break
 
 print("------------------------------------------------------------")  # 60個
 print("DELETE 刪除資料 大全")
@@ -657,32 +679,35 @@ print("------------------------------------------------------------")  # 60個
 
 print("DELETE 刪除資料 + 條件")
 
-idx = 8
+# 刪除 idx = 1
+idx = 1
 cursor.execute("DELETE FROM table01 WHERE idx = ?", (idx,))
 
-idx = 7
+# 刪除 idx = 2
+sqlstr = "DELETE FROM table01 WHERE idx = 2"
+cursor.execute(sqlstr)
+
+# 刪除 idx = 3
+idx = 3
 sqlstr = "DELETE FROM table01 WHERE idx = {}".format(idx)
 # sqlstr = "DELETE FROM table01 WHERE idx = {0}".format(idx) 比較一下
 cursor.execute(sqlstr)
 
-print("DELETE 刪除資料 條件 1筆, 刪除11號")
-# DELETE 刪除資料 條件 id 為 11 之資料
-cursor.execute("DELETE FROM table01 WHERE idx = {}".format(11))
-
-sqlstr = "DELETE FROM table01 WHERE idx = 2"
-cursor.execute(sqlstr)
-
+# 刪除 英文名 = "rabbit"
 name = "rabbit"
 cursor.execute("DELETE FROM table01 WHERE 英文名 = ?", (name,))
 
-name = "貴賓狗"
-cursor.execute("DELETE FROM table01 WHERE 中文名 = ?", (name,))
-
-cursor.execute("DELETE FROM table01 WHERE 體重 = 38")
-
+# 刪除 英文名 = "dragon"
 name = "monkey"
 sqlstr = "DELETE FROM table01 WHERE 英文名 = '{}'".format(name)
 cursor.execute(sqlstr)
+
+# 刪除 中文名 = "貴賓狗"
+name = "貴賓狗"
+cursor.execute("DELETE FROM table01 WHERE 中文名 = ?", (name,))
+
+# 刪除 體重 = 42
+cursor.execute("DELETE FROM table01 WHERE 體重 = 42")
 
 print("------------------------------")  # 30個
 
@@ -697,6 +722,11 @@ show_data_base_contents(db_filename, table_name)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+sys.exit()
+print("------------------------------------------------------------")  # 60個
+print("固定, 不用再執行 ST")
 print("------------------------------------------------------------")  # 60個
 
 print("一次寫入多行的語法 executescript, 其實就是多行指令寫在一起")
@@ -720,6 +750,7 @@ conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 
 print("使用記憶體資料庫 轉 磁碟資料庫")
 
@@ -1018,7 +1049,7 @@ try:
     # 嘗試連接到資料庫
     conn = sqlite3.connect(db_filename)  # 建立資料庫連線
     cursor = conn.cursor()  # 建立 cursor 物件
-    # 嘗試執行查詢，可能會引發異常
+    # 嘗試執行查詢, 可能會引發異常
     sqlstr = "SELECT * FROM non_existent_table"  # SELECT * : 取得所有資料
     cursor.execute(sqlstr)
 except sqlite3.Error as e:
@@ -1037,6 +1068,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+print("固定, 不用再執行 SP")
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1044,6 +1076,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
@@ -1096,7 +1129,7 @@ table : 表單 資料表(x)
 
 # AUTOINCREMENT 自動遞增
 SQLite Autoincrement（自動遞增）
-SQLite 的 AUTOINCREMENT 是一個關鍵字，用于表中的字段值自動遞增。
+SQLite 的 AUTOINCREMENT 是一個關鍵字, 用于表中的字段值自動遞增。
 我們可以在創建表時在特定的列名稱上使用 AUTOINCREMENT 關鍵字實現該字段值的自動增加。
 關鍵字 AUTOINCREMENT 只能用于整型（INTEGER）字段。
 
@@ -1110,8 +1143,8 @@ CREATE TABLE IF NOT EXISTS table01
 # CHECK(age >= 18) 條件檢查
 
 建立表單 CREATE TABLE
-1. CREATE TABLE table01 # 建立表單table01, 若已存在，則失敗
-2. CREATE TABLE IF NOT EXISTS table01 # 建立表單table01, 若已存在，則沿用, 如果尚未建立的話
+1. CREATE TABLE table01 # 建立表單table01, 若已存在, 則失敗
+2. CREATE TABLE IF NOT EXISTS table01 # 建立表單table01, 若已存在, 則沿用, 如果尚未建立的話
 
 print("------------------------------------------------------------")  # 60個
 print("SELECT")
@@ -1144,7 +1177,7 @@ INSERT INTO table01
 SELECT * FROM table01 WHERE order_date < "2016-01-01",
 DELETE FROM table01   WHERE order_date < "2016-01-01",
 
-注意：不要使用%s 將字串插入 SQL 命令，
+注意：不要使用%s 將字串插入 SQL 命令, 
 因為它可能使你的程式容易受到 SQL 注入攻擊（請參閱 SQL 注入 ）。
 
 寫法比較
@@ -1312,7 +1345,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("SQLite FTS3 and FTS4 Extensions 擴展")
-# ingredient （混合物的）組成部分；（烹調的）原料；（構成）要素，因素
+# ingredient （混合物的）組成部分；（烹調的）原料；（構成）要素, 因素
 cursor.execute(
     "CREATE VIRTUAL TABLE IF NOT EXISTS table01 USING FTS3(name, ingredients)"
 )
