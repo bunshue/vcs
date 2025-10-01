@@ -57,7 +57,9 @@ while not done:
         # 按下空格鍵發射子彈
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
             bullet_rect.x = player_rect.x + player_rect.width
-            bullet_rect.y = player_rect.y + player_rect.height / 2 - bullet_rect.height / 2
+            bullet_rect.y = (
+                player_rect.y + player_rect.height / 2 - bullet_rect.height / 2
+            )
             shoot_sound.play()
 
         # 移動玩家

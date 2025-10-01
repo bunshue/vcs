@@ -19,7 +19,6 @@ class Color(object):
 
 
 class Car(object):
-
     def __init__(self, x, y, color):
         self._x = x
         self._y = y
@@ -30,14 +29,11 @@ class Car(object):
             self._x += randint(1, 10)
 
     def draw(self, screen):
-        pygame.draw.rect(screen, self._color,
-                         (self._x, self._y, 80, 40), 0)
+        pygame.draw.rect(screen, self._color, (self._x, self._y, 80, 40), 0)
 
 
 def main():
-
     class BackgroundTask(Thread):
-
         def run(self):
             while True:
                 screen.fill(Color.GRAY)
@@ -65,5 +61,5 @@ def main():
     pygame.quit()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

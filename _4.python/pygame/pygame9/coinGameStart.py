@@ -3,11 +3,13 @@ import pygame
 
 pygame.init()
 
+
 def moveAnimation(image1, image2, count):
     if 10 < count % 20 <= 20:
         return image2
     else:
         return image1
+
 
 def upClear(x, y):
     canMove = True
@@ -24,6 +26,7 @@ def upClear(x, y):
     else:
         return 0
 
+
 def downClear(x, y):
     canMove = True
 
@@ -38,6 +41,7 @@ def downClear(x, y):
         return 1
     else:
         return 0
+
 
 def leftClear(x, y):
     canMove = True
@@ -54,6 +58,7 @@ def leftClear(x, y):
     else:
         return 0
 
+
 def rightClear(x, y):
     canMove = True
 
@@ -69,6 +74,7 @@ def rightClear(x, y):
     else:
         return 0
 
+
 def checkOffscreen(x, y):
     if x < -14:
         x = windowSize[0] - 14
@@ -80,6 +86,7 @@ def checkOffscreen(x, y):
     elif y > windowSize[1] - 20:
         y = -20
     return x, y
+
 
 def playersTouching():
     global pOneX, pOneY, pTwoX, pTwoY
@@ -108,14 +115,17 @@ def playersTouching():
                 pOneY -= pOneMove / 2 * yDiff / yDiff
                 pTwoY += pTwoMove / 2 * yDiff / yDiff
 
+
 def touchingCoin(x, y):
     return -32 < x - coinPos[0] < 20 and -40 < y - coinPos[1] < 20
+
 
 def randomPosition():
     # return x and y
     x = random.randrange(32, windowSize[0] - 52)
     y = random.randrange(32, windowSize[1] - 52)
     return x, y
+
 
 windowSize = [640, 384]
 screen = pygame.display.set_mode(windowSize)
@@ -189,7 +199,6 @@ pygame.mixer.music.play(-1)
 # Game loop
 done = False
 while not done:
-
     # Get movement
     # Player 1 movement
     pOneMoving = False

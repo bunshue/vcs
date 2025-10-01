@@ -51,16 +51,14 @@ class Ball(object):
         """吃其他球"""
         if self.alive and other.alive and self != other:
             dx, dy = self.x - other.x, self.y - other.y
-            distance = sqrt(dx ** 2 + dy ** 2)
-            if distance < self.radius + other.radius \
-                    and self.radius > other.radius:
+            distance = sqrt(dx**2 + dy**2)
+            if distance < self.radius + other.radius and self.radius > other.radius:
                 other.alive = False
-               	self.radius = self.radius + int(other.radius * 0.146)
+                self.radius = self.radius + int(other.radius * 0.146)
 
     def draw(self, screen):
         """在窗口上绘制球"""
-        pygame.draw.circle(screen, self.color,
-                           (self.x, self.y), self.radius, 0)
+        pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius, 0)
 
 
 def main():
@@ -73,7 +71,7 @@ def main():
     print(screen.get_width())
     print(screen.get_height())
     # 设置当前窗口的标题
-    pygame.display.set_caption('大球吃小球')
+    pygame.display.set_caption("大球吃小球")
     # 定义变量来表示小球在屏幕上的位置
     x, y = 50, 50
     running = True
@@ -105,5 +103,5 @@ def main():
                 ball.eat(other)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

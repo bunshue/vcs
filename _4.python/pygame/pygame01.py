@@ -7,10 +7,6 @@ pygame 測試大全
 
 最後再搬出
 
-
-
-
-
 pygame提供的模組
 
 color	提供色彩的設定
@@ -24,15 +20,12 @@ mixer	用來播放聲音
 time	處理時間
 
 pygame.display.set_mode()	建立視窗並初始化
-pygame.display.set_caption()	在標題列顯示文字
+pygame.display.set_caption()	設定視窗名稱
 pygame.display.flip()		更新畫面 將Surface全部更新後並顯示於畫面上
-pygame.display.update()		依據軟體做部分畫面的更新
-
-
+pygame.display.update()		更新繪圖視窗, 依據軟體做部分畫面的更新
 
 screen : 整個視窗
 surface : 一個物件
-
 """
 
 import sys
@@ -90,7 +83,7 @@ def init_pygame(name, color):
     # screen = pygame.display.set_mode(screen_size, 0, 32)  # 產生視窗screen
     # screen = pygame.display.set_mode(screen_size, 0)  # 產生視窗screen
 
-    pygame.display.set_caption(name)
+    pygame.display.set_caption(name)  # 設定視窗名稱
 
     # print("取得screen參數 :", screen.get_size())
 
@@ -101,7 +94,7 @@ def init_pygame(name, color):
 
 def run_pygame():
     # 更新屏幕, 保持屏幕打開, 直到用戶退出, 偵測視窗是否被關閉(8)
-    pygame.display.update()  # 繪製視窗顯示於螢幕上
+    pygame.display.update()  # 更新繪圖視窗
     running = True
     while running:
         for event in pygame.event.get():
@@ -146,7 +139,6 @@ image.convert()
 x_st, y_st = 320, 30
 screen.blit(image, (x_st, y_st))
 
-
 filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 # 方法load()載入圖片，convert()能提高圖片的處理速度
 image = pygame.image.load(filename)
@@ -177,6 +169,9 @@ fps = 30  # 每秒的執行次數, 設定每秒畫格30，利用Clock()方法來
 image = pygame.image.load(filename)
 pos_X, pos_Y = 5, 5  # 設定開始移動的X、Y座標
 move = "Down"
+
+# 設定每秒畫格30，利用Clock()方法來確保動畫能持續進行
+fps = 30  # 每秒的執行次數
 clock = pygame.time.Clock()  # 建立時間元件
 
 # tick()方法依據fps之值讓移動圖片有動畫效果
@@ -211,7 +206,7 @@ while running:
     # print('移動座標:', pos_X, pos_Y)
     # blit()方法在畫布上繪製圖片
     screen.blit(image, (pos_X, pos_Y))
-    pygame.display.update()  # 繪製視窗顯示於螢幕上
+    pygame.display.update()  # 更新繪圖視窗
     clock.tick(fps)  # 依fps的值來產生動畫, 每秒執行fps次
 
 pygame.quit()  # 關閉繪圖視窗
@@ -224,7 +219,7 @@ screen = init_pygame(pygame_name, YELLOW)
 
 filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_anime/_貓咪/cat3.png"
 
-from pygame.locals import *
+# from pygame.locals import *
 
 # 載入圖片並設座標
 surface = pygame.image.load(filename).convert()
@@ -240,7 +235,7 @@ while running:
         screen.fill((YELLOW))
 
         # 判斷那個按鍵被按？
-        if event.type == KEYDOWN:
+        if event.type == pygame.KEYDOWN:
             # 向左方向鍵，減少座標值
             if event.key == pygame.K_LEFT:
                 pos_X -= 5
@@ -259,7 +254,7 @@ while running:
         #   print('放開按鍵')
 
         screen.blit(surface, (pos_X, pos_Y))  # 輸出到畫布上
-        pygame.display.update()  # 繪製視窗顯示於螢幕上
+        pygame.display.update()  # 更新繪圖視窗
 
 pygame.quit()  # 關閉繪圖視窗
 
@@ -299,7 +294,7 @@ while running:
         moving = False
 
     screen.blit(imageRect, (imageX, imageY))
-    pygame.display.update()  # 繪製視窗顯示於螢幕上
+    pygame.display.update()  # 更新繪圖視窗
 
 pygame.quit()  # 關閉繪圖視窗
 
@@ -313,7 +308,6 @@ screen = init_pygame(pygame_name, YELLOW)
 
 # 設定每秒畫格20，利用Clock()方法來確保動畫能持續進行
 fps = 20  # 每秒的執行次數
-
 clock = pygame.time.Clock()  # 建立時間元件
 
 # 載入圖片，get_rect()取得矩形的移動區域
@@ -356,7 +350,7 @@ while running:
     elif (imageRect.top <= 5) or (imageRect.bottom >= screen.get_height() - 5):
         moveY *= -1
     screen.blit(image, imageRect.topleft)
-    pygame.display.update()  # 繪製視窗顯示於螢幕上
+    pygame.display.update()  # 更新繪圖視窗
 
 pygame.quit()  # 關閉繪圖視窗
 
@@ -366,6 +360,8 @@ print("------------------------------------------------------------")  # 60個
 pygame_name = "pygame 06"
 screen = init_pygame(pygame_name, YELLOW)
 
+# 設定每秒畫格20，利用Clock()方法來確保動畫能持續進行
+fps = 20  # 每秒的執行次數
 clock = pygame.time.Clock()  # 建立時間元件
 
 w = W / 10
@@ -396,6 +392,8 @@ print("------------------------------------------------------------")  # 60個
 pygame_name = "pygame 07"
 screen = init_pygame(pygame_name, YELLOW)
 
+# 設定每秒畫格20，利用Clock()方法來確保動畫能持續進行
+fps = 20  # 每秒的執行次數
 clock = pygame.time.Clock()  # 建立時間元件
 
 width = 200
@@ -433,6 +431,8 @@ print("------------------------------------------------------------")  # 60個
 pygame_name = "pygame 08 製作一個按鈕, 測試按鈕事件"
 screen = init_pygame(pygame_name, YELLOW)
 
+# 設定每秒畫格20，利用Clock()方法來確保動畫能持續進行
+fps = 20  # 每秒的執行次數
 clock = pygame.time.Clock()  # 建立時間元件
 
 w = 200
@@ -442,6 +442,8 @@ y_st = 100
 
 toggled = False
 pos = (0, 0)
+
+pos_list = 0
 
 running = True
 while running:
@@ -467,72 +469,26 @@ while running:
         print("你按了按鈕", pos)
         toggled = not toggled
         pos = (0, 0)
+        pos_list += 1
+
+    x_st += random.randint(-1 - pos_list, 1 + pos_list)
+    y_st += random.randint(-1 - pos_list, 1 + pos_list)
 
     pygame.display.flip()  # 更新畫面
     clock.tick(10)  # 依fps的值來產生動畫, 每秒執行fps次
 
 pygame.quit()  # 關閉繪圖視窗
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# movingTarget.py
-
-pygame_name = "pygame 09"
-screen = init_pygame(pygame_name, YELLOW)
-
-clock = pygame.time.Clock()  # 建立時間元件
-
-windowSize = [400, 300]
-btnWidth = 50
-btnLength = 20
-btnX = (windowSize[0] - btnWidth) / 2
-btnY = (windowSize[1] - btnLength) / 2
-
-toggled = False
-pos = (0, 0)
-
-points = 0
-
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            pos = pygame.mouse.get_pos()  # 取得滑鼠座標
-        if event.type == pygame.QUIT:  # 判斷事件的常數是否為QUIT常數
-            running = False
-
-    # 改變視窗背景色
-    if toggled:
-        screen.fill(BLACK)
-    else:
-        screen.fill(WHITE)
-
-    pygame.draw.rect(screen, BLUE, [btnX, btnY, btnWidth, btnLength])
-
-    if btnX <= pos[0] <= btnX + btnWidth and btnY <= pos[1] <= btnY + btnLength:
-        toggled = not toggled
-        pos = (0, 0)
-        points += 1
-
-    btnX += random.randint(-1 - points, 1 + points)
-    btnY += random.randint(-1 - points, 1 + points)
-
-    pygame.display.flip()  # 更新畫面
-    clock.tick(10)  # 依fps的值來產生動畫, 每秒執行fps次
-
-pygame.quit()  # 關閉繪圖視窗
-
-print(points)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # explosions.py
 
-pygame_name = "pygame 10"
+pygame_name = "pygame 09"
 screen = init_pygame(pygame_name, YELLOW)
 
+# 設定每秒畫格20，利用Clock()方法來確保動畫能持續進行
+fps = 20  # 每秒的執行次數
 clock = pygame.time.Clock()  # 建立時間元件
 
 count = 0
@@ -566,15 +522,16 @@ pygame.quit()  # 關閉繪圖視窗
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-pygame_name = "pygame 11 偵測滑鼠位置"
+pygame_name = "pygame 10 偵測滑鼠位置"
 screen = init_pygame(pygame_name, YELLOW)
 
+# 設定每秒畫格20，利用Clock()方法來確保動畫能持續進行
+fps = 20  # 每秒的執行次數
 clock = pygame.time.Clock()  # 建立時間元件
 
 pos_list = []
 
-# 更新屏幕
-pygame.display.update()  # 繪製視窗顯示於螢幕上
+pygame.display.update()  # 更新繪圖視窗
 
 # 保持屏幕打開，直到用戶退出
 # 偵測視窗是否被關閉
@@ -582,53 +539,18 @@ pygame.display.update()  # 繪製視窗顯示於螢幕上
 running = True
 while running:
     # screen.fill(YELLOW)
-    pygame.draw.rect(screen, BLACK, [0, 0, 0, 0])
     for event in pygame.event.get():
         if event.type == pygame.QUIT:  # 判斷事件的常數是否為QUIT常數
             running = False
 
         if event.type == pygame.MOUSEBUTTONDOWN:  # 滑鼠事件
             pos = pygame.mouse.get_pos()  # 取得滑鼠座標
-            print(pos)
+            # print(pos)
             pos_list.append(pos)
             if len(pos_list) > 1:
                 # pygame.draw.lines(screen, RED, False, pos_list)
                 pygame.draw.lines(screen, RED, True, pos_list)
 
-    pygame.display.flip()  # 更新畫面
-    clock.tick(10)  # 依fps的值來產生動畫, 每秒執行fps次
-
-pygame.quit()  # 關閉繪圖視窗
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# mesh.py
-
-pygame_name = "pygame 11"
-screen = init_pygame(pygame_name, YELLOW)
-
-clock = pygame.time.Clock()  # 建立時間元件
-
-windowSize = [400, 300]
-points = []
-
-running = True
-while running:
-    # screen.fill(BLACK)
-    if len(points) > 10:
-        del points[0]
-    if len(points) > 1:
-        pygame.draw.lines(screen, RED, True, points)
-    for point in points:
-        pygame.draw.line(screen, RED, point, [point[0], windowSize[1]])
-
-    for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            pos = pygame.mouse.get_pos()  # 取得滑鼠座標
-            points.append(pos)
-        if event.type == pygame.QUIT:  # 判斷事件的常數是否為QUIT常數
-            running = False
     pygame.display.flip()  # 更新畫面
     clock.tick(60)  # 依fps的值來產生動畫, 每秒執行fps次
 
@@ -637,14 +559,14 @@ pygame.quit()  # 關閉繪圖視窗
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# mouseTrails.py
-
-pygame_name = "pygame 12"
+pygame_name = "pygame 11"
 screen = init_pygame(pygame_name, YELLOW)
 
+# 設定每秒畫格20，利用Clock()方法來確保動畫能持續進行
+fps = 20  # 每秒的執行次數
 clock = pygame.time.Clock()  # 建立時間元件
 
-points = []
+pos_list = []
 
 running = True
 while running:
@@ -655,12 +577,12 @@ while running:
     # screen.fill(BLACK)
     pos = pygame.mouse.get_pos()  # 取得滑鼠座標
     if pos[0] != 0 and pos[1] != 0:
-        points.append(pos)
-    if len(points) >= 20:
-        del points[0]
+        pos_list.append(pos)
+    if len(pos_list) >= 20:
+        del pos_list[0]
 
-    if len(points) > 2:
-        pygame.draw.aalines(screen, RED, False, points)
+    if len(pos_list) > 2:
+        pygame.draw.aalines(screen, RED, False, pos_list)
 
     pygame.display.flip()  # 更新畫面
     clock.tick(30)  # 依fps的值來產生動畫, 每秒執行fps次
@@ -675,7 +597,7 @@ print("------------------------------------------------------------")  # 60個
 print("畫圖畫字")
 print("------------------------------------------------------------")  # 60個
 
-pygame_name = "pygame 13 畫圖綜合"
+pygame_name = "pygame 12 畫圖綜合"
 screen = init_pygame(pygame_name, YELLOW)
 
 # pygame.display.flip()  # 更新畫面
@@ -784,7 +706,7 @@ x_st, y_st = 20, 20
 dx, dy = 400, 40
 font_size = 30
 
-pygame_name = "pygame 14 畫圖綜合 繪製文字"
+pygame_name = "pygame 13 畫圖綜合 繪製文字"
 screen = init_pygame(pygame_name, YELLOW)
 
 # 產生Surface物件, 上色，繪製成形
@@ -841,13 +763,11 @@ run_pygame()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-pygame_name = "pygame 15 畫圖綜合 背景漸層色"
+pygame_name = "pygame 14 畫圖綜合 背景漸層色"
 screen = init_pygame(pygame_name, YELLOW)
 
-width = 800
-height = 800
-
 color = pygame.color.Color("#F54455")
+print(color)
 
 row = 0
 
@@ -857,75 +777,41 @@ while running:
         if event.type == pygame.QUIT:  # 判斷事件的常數是否為QUIT常數
             running = False
     increment = 255 / 100
-    while row <= height:
-        pygame.draw.rect(screen, color, (0, row, width, row + increment))
+    while row <= H:
+        pygame.draw.rect(screen, color, (0, row, W, row + increment))
         pygame.display.flip()  # 更新畫面
         if color[2] + increment < 255:
             color[2] = color[2] + int(increment)
         row += increment
 
+print(color)
 pygame.quit()  # 關閉繪圖視窗
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-sys.exit()
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-# pygame 存圖命令
-# pygame.image.save(screen, "tmp_save_pic.png")
-# pygame.image.save(screen, "circle" + str(fileNo) + ".png")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 基本架構
-
-pygame.init()  # 啟動Pygame
-
-screen = pygame.display.set_mode((640, 320))  # 建立繪圖視窗
-pygame.display.set_caption("基本架構")  # 繪圖視窗標題
+pygame_name = "pygame 15 基本架構"
+screen = init_pygame(pygame_name, YELLOW)
 
 background = pygame.Surface(screen.get_size())  # 建立畫布
 background = background.convert()
-background.fill(WHITE)  # 畫布為白色
+background.fill(YELLOW)  # 設定畫布顏色
+
 screen.blit(background, (0, 0))  # 在繪圖視窗繪製畫布
 
 pygame.display.update()  # 更新繪圖視窗
-running = True
-while running:  # 無窮迴圈
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:  # 使用者按關閉鈕
-            running = False
 
-pygame.quit()  # 關閉繪圖視窗
+run_pygame()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-pygame.init()
-
-screen = pygame.display.set_mode((300, 300))
-pygame.display.set_caption("基本繪圖")
+pygame_name = "pygame 16 基本繪圖"
+screen = init_pygame(pygame_name, YELLOW)
 
 background = pygame.Surface(screen.get_size())
 background = background.convert()
-background.fill(WHITE)
+background.fill(YELLOW)  # 設定畫布顏色
 
 pygame.draw.circle(background, BLACK, (150, 150), 130, 4)
 pygame.draw.circle(background, BLUE, (100, 120), 25, 0)
@@ -934,28 +820,22 @@ pygame.draw.ellipse(background, MAGENTA, [135, 130, 30, 80], 0)
 pygame.draw.arc(background, RED, [80, 130, 150, 120], 3.4, 6.1, 9)
 screen.blit(background, (0, 0))
 
-pygame.display.update()
+pygame.display.update()  # 更新繪圖視窗
 
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-pygame.quit()  # 關閉繪圖視窗
+run_pygame()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-pygame.init()
-
-screen = pygame.display.set_mode((640, 320))
-pygame.display.set_caption("動畫基本架構")
+pygame_name = "pygame 17 動畫基本架構"
+screen = init_pygame(pygame_name, YELLOW)
 
 background = pygame.Surface(screen.get_size())
 background = background.convert()
-background.fill(WHITE)
+background.fill(YELLOW)  # 設定畫布顏色
 
+# 設定每秒畫格20，利用Clock()方法來確保動畫能持續進行
+fps = 20  # 每秒的執行次數
 clock = pygame.time.Clock()  # 建立時間元件
 
 running = True
@@ -970,7 +850,6 @@ while running:
 
 pygame.quit()  # 關閉繪圖視窗
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -978,9 +857,15 @@ print("------------------------------------------------------------")  # 60個
 # https://gamedevacademy.org/pygame-time-clock-tutorial-complete-guide/
 #Tracking Frames Per Second (FPS)
 
-pygame.init()
+# pygame_name = "pygame 18 動畫基本架構"
+# screen = init_pygame(pygame_name, YELLOW)
 
+pygame.init()  # 初始化Pygame
+
+# 設定每秒畫格20，利用Clock()方法來確保動畫能持續進行
+fps = 20  # 每秒的執行次數
 clock = pygame.time.Clock()  # 建立時間元件
+
 cnt = 0
 while True:
     clock.tick(60)  # 依fps的值來產生動畫, 每秒執行fps次
@@ -996,17 +881,9 @@ print("程式執行完畢！")
 
 print("pygame 讀取 鍵盤輸入")
 
-pygame.init()
+pygame.init()  # 初始化Pygame
 
-windowSize = [400, 300]
-pygame.display.set_mode(windowSize)
-
-
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:  # 判斷事件的常數是否為QUIT常數
-            running = False
+pygame.display.set_mode([400, 300])  # 產生視窗screen
 
 running = True
 while running:
@@ -1029,9 +906,1032 @@ pygame.quit()  # 關閉繪圖視窗
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 實現動畫效果
+
+
+def main():
+    # 初始化導入的pygame中的模塊
+    pygame.init()  # 初始化Pygame
+    # 初始化用於顯示的窗口並設置窗口尺寸
+    screen = pygame.display.set_mode((800, 600))  # 產生視窗screen
+    # 設置當前窗口的標題
+    pygame.display.set_caption("大球吃小球")  # 設定視窗名稱
+    # 定義變量來表示小球在屏幕上的位置
+    x, y = 50, 50
+    running = True
+    # 開啟一個事件循環處理髮生的事件
+    while running:
+        # 從消息隊列中獲取事件並對事件進行處理
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+        screen.fill((255, 255, 255))
+        pygame.draw.circle(
+            screen,
+            (
+                255,
+                0,
+                0,
+            ),
+            (x, y),
+            30,
+            0,
+        )
+        pygame.display.flip()
+        # 每隔50毫秒就改變小球的位置再刷新窗口
+        pygame.time.delay(50)
+        x, y = x + 5, y + 5
+
+
+if __name__ == "__main__":
+    main()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 碰撞檢測
+
+# 通常一個遊戲中會有很多對象出現，而這些對象之間的“碰撞”在所難免，比如炮彈擊中了飛機、箱子撞到了地面等。碰撞檢測在絕大多數的遊戲中都是一個必須得處理的至關重要的問題，pygame的sprite（動畫精靈）模塊就提供了對碰撞檢測的支持，這裡我們暫時不介紹sprite模塊提供的功能，因為要檢測兩個小球有沒有碰撞其實非常簡單，只需要檢查球心的距離有沒有小於兩個球的半徑之和。為了製造出更多的小球，我們可以通過對鼠標事件的處理，在點擊鼠標的位置創建顏色、大小和移動速度都隨機的小球，當然要做到這一點，我們可以把之前學習到的面向對象的知識應用起來。
+
+from enum import Enum, unique
+from math import sqrt
+from random import randint
+
+
+@unique
+class Color(Enum):
+    # 顏色
+
+    RED = (255, 0, 0)
+    GREEN = (0, 255, 0)
+    BLUE = (0, 0, 255)
+    BLACK = (0, 0, 0)
+    WHITE = (255, 255, 255)
+    GRAY = (242, 242, 242)
+
+    @staticmethod
+    def random_color():
+        # 獲得隨機顏色
+        r = randint(0, 255)
+        g = randint(0, 255)
+        b = randint(0, 255)
+        return (r, g, b)
+
+
+class Ball(object):
+    # 球
+
+    def __init__(self, x, y, radius, sx, sy, color=Color.RED):
+        # 初始化方法
+        self.x = x
+        self.y = y
+        self.radius = radius
+        self.sx = sx
+        self.sy = sy
+        self.color = color
+        self.alive = True
+
+    def move(self, screen):
+        # 移動
+        self.x += self.sx
+        self.y += self.sy
+        if self.x - self.radius <= 0 or self.x + self.radius >= screen.get_width():
+            self.sx = -self.sx
+        if self.y - self.radius <= 0 or self.y + self.radius >= screen.get_height():
+            self.sy = -self.sy
+
+    def eat(self, other):
+        # 吃其他球
+        if self.alive and other.alive and self != other:
+            dx, dy = self.x - other.x, self.y - other.y
+            distance = sqrt(dx**2 + dy**2)
+            if distance < self.radius + other.radius and self.radius > other.radius:
+                other.alive = False
+                self.radius = self.radius + int(other.radius * 0.146)
+
+    def draw(self, screen):
+        # 在窗口上繪製球
+        pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius, 0)
+
+
+# 事件處理
+
+# 可以在事件循環中對鼠標事件進行處理，通過事件對象的type屬性可以判定事件類型，再通過pos屬性就可以獲得鼠標點擊的位置。如果要處理鍵盤事件也是在這個地方，做法與處理鼠標事件類似。
+
+
+def main():
+    # 定義用來裝所有球的容器
+    balls = []
+    # 初始化導入的pygame中的模塊
+    pygame.init()  # 初始化Pygame
+    # 初始化用於顯示的窗口並設置窗口尺寸
+    screen = pygame.display.set_mode((800, 600))  # 產生視窗screen
+    # 設置當前窗口的標題
+    pygame.display.set_caption("大球吃小球")  # 設定視窗名稱
+    running = True
+    # 開啟一個事件循環處理髮生的事件
+    while running:
+        # 從消息隊列中獲取事件並對事件進行處理
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            # 處理鼠標事件的代碼
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                # 獲得點擊鼠標的位置
+                x, y = event.pos
+                radius = randint(10, 100)
+                sx, sy = randint(-10, 10), randint(-10, 10)
+                color = Color.random_color()
+                # 在點擊鼠標的位置創建一個球(大小、速度和顏色隨機)
+                ball = Ball(x, y, radius, sx, sy, color)
+                # 將球添加到列表容器中
+                balls.append(ball)
+        screen.fill((255, 255, 255))
+        # 取出容器中的球 如果沒被吃掉就繪製 被吃掉了就移除
+        for ball in balls:
+            if ball.alive:
+                ball.draw(screen)
+            else:
+                balls.remove(ball)
+        pygame.display.flip()
+        # 每隔50毫秒就改變球的位置再刷新窗口
+        pygame.time.delay(50)
+        for ball in balls:
+            ball.move(screen)
+            # 檢查球有沒有吃到其他的球
+            for other in balls:
+                ball.eat(other)
+
+
+if __name__ == "__main__":
+    main()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+pygame.init()  # 初始化Pygame
+
+# Window setup
+size = [400, 300]
+screen = pygame.display.set_mode(size)  # 產生視窗screen
+
+# 設定每秒畫格20，利用Clock()方法來確保動畫能持續進行
+fps = 20  # 每秒的執行次數
+clock = pygame.time.Clock()  # 建立時間元件
+
+# player position
+x = size[0] / 2
+y = size[1] / 2
+
+# ball position
+ballX = random.randrange(0, size[0])
+ballY = random.randrange(0, size[1])
+
+# Goal position
+goalX = size[0] / 2 - 10
+goalY = size[1] / 2 - 10
+goalW = 20
+goalH = 20
+
+# points
+points = 0
+
+# colors
+red = pygame.color.Color("#FF8080")
+blue = pygame.color.Color("#8080FF")
+white = pygame.color.Color("#FFFFFF")
+black = pygame.color.Color("#000000")
+
+
+def checkOffScreenX(x):
+    if x > size[0]:
+        x = 0
+    elif x < 0:
+        x = size[0]
+    return x
+
+
+def checkOffScreenY(y):
+    if y > size[1]:
+        y = 0
+    elif y < 0:
+        y = size[1]
+    return y
+
+
+def checkTouching():
+    # Causes a mini explosion if the players are touching
+    global x
+    global ballX
+    global y
+    global ballY
+
+    if -5 < y - ballY < 5 and -5 < x - ballX < 5:
+        pygame.draw.circle(screen, white, [x, y], 5)
+
+        xDiff = x - ballX
+        yDiff = y - ballY
+
+        if ballX == 0:
+            xDiff -= 5
+        elif ballX == size[0]:
+            xDiff += 5
+        if ballY == 0:
+            yDiff -= 5
+        elif ballY == size[1]:
+            yDiff += 5
+
+        x += xDiff * 5
+        ballX -= xDiff * 5
+
+        y += yDiff * 5
+        ballY -= yDiff * 5
+
+
+# Game loop
+done = False
+while not done:
+    screen.fill(black)
+
+    # Draw the goal
+    pygame.draw.rect(screen, white, (goalX, goalY, goalW, goalH))
+
+    keys = pygame.key.get_pressed()
+
+    # player movement
+    if keys[pygame.K_w]:
+        y -= 1
+    if keys[pygame.K_s]:
+        y += 1
+    if keys[pygame.K_a]:
+        x -= 1
+    if keys[pygame.K_d]:
+        x += 1
+
+    # Check off screen
+    x = checkOffScreenX(x)
+    y = checkOffScreenY(y)
+    ballX = checkOffScreenX(ballX)
+    ballY = checkOffScreenY(ballY)
+
+    # Check player is touching the ball
+    checkTouching()
+
+    # Draw points
+    for point in range(points):
+        pointX = 0 + point * 3
+        pygame.draw.rect(screen, white, (pointX, 3, 2, 3))
+
+    # draw player
+    pygame.draw.circle(screen, red, [x, y], 1)
+
+    # draw ball
+    pygame.draw.circle(screen, blue, [ballX, ballY], 1)
+
+    # Check ball is in goal
+    if goalX <= ballX <= goalX + goalH and goalY <= ballY <= goalY + goalH:
+        points += 1
+        ballX = random.randrange(0, size[0])
+        ballY = random.randrange(0, size[0])
+
+    pygame.display.flip()
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+    clock.tick(72)  # 依fps的值來產生動畫, 每秒執行fps次
+
+pygame.quit()  # 關閉繪圖視窗
+
+print("Total points: " + str(points))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+pygame.init()  # 初始化Pygame
+
+# Window setup
+size = [400, 300]
+screen = pygame.display.set_mode(size)  # 產生視窗screen
+
+# 設定每秒畫格20，利用Clock()方法來確保動畫能持續進行
+fps = 20  # 每秒的執行次數
+clock = pygame.time.Clock()  # 建立時間元件
+
+# player position
+x = size[0] / 2
+y = size[1] / 2
+
+# ball position
+ballX = random.randrange(0, size[0])
+ballY = random.randrange(0, size[1])
+
+# colors
+red = pygame.color.Color("#FF8080")
+blue = pygame.color.Color("#8080FF")
+white = pygame.color.Color("#FFFFFF")
+black = pygame.color.Color("#000000")
+
+
+def checkOffScreenX(x):
+    if x > size[0]:
+        x = 0
+    elif x < 0:
+        x = size[0]
+    return x
+
+
+def checkOffScreenY(y):
+    if y > size[1]:
+        y = 0
+    elif y < 0:
+        y = size[1]
+    return y
+
+
+# Game loop
+done = False
+while not done:
+    screen.fill(black)
+
+    keys = pygame.key.get_pressed()
+
+    # player movement
+    if keys[pygame.K_w]:
+        y -= 1
+    if keys[pygame.K_s]:
+        y += 1
+    if keys[pygame.K_a]:
+        x -= 1
+    if keys[pygame.K_d]:
+        x += 1
+
+    # Check off screen
+    x = checkOffScreenX(x)
+    y = checkOffScreenY(y)
+
+    # draw player
+    pygame.draw.circle(screen, red, [x, y], 1)
+
+    # draw ball
+    pygame.draw.circle(screen, blue, [ballX, ballY], 1)
+
+    pygame.display.flip()
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+    clock.tick(72)  # 依fps的值來產生動畫, 每秒執行fps次
+
+pygame.quit()  # 關閉繪圖視窗
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+pygame.init()  # 初始化Pygame
+
+# Window setup
+size = [400, 300]
+screen = pygame.display.set_mode(size)  # 產生視窗screen
+
+# 設定每秒畫格20，利用Clock()方法來確保動畫能持續進行
+fps = 20  # 每秒的執行次數
+clock = pygame.time.Clock()  # 建立時間元件
+
+# player position
+x = size[0] / 2
+y = size[1] / 2
+
+# ball position
+ballX = random.randrange(0, size[0])
+ballY = random.randrange(0, size[1])
+
+# colors
+red = pygame.color.Color("#FF8080")
+blue = pygame.color.Color("#8080FF")
+white = pygame.color.Color("#FFFFFF")
+black = pygame.color.Color("#000000")
+
+
+def checkOffScreenX(x):
+    if x > size[0]:
+        x = 0
+    elif x < 0:
+        x = size[0]
+    return x
+
+
+def checkOffScreenY(y):
+    if y > size[1]:
+        y = 0
+    elif y < 0:
+        y = size[1]
+    return y
+
+
+def checkTouching():
+    # Causes a mini explosion if the players are touching
+    global x
+    global ballX
+    global y
+    global ballY
+
+    # Check player and ball are touching
+    if -5 < y - ballY < 5 and -5 < x - ballX < 5:
+        # draw an explosion
+        pygame.draw.circle(screen, white, [x, y], 5)
+
+        xDiff = x - ballX
+        yDiff = y - ballY
+
+        # check ball on edge of screen
+        if ballX == 0:
+            xDiff -= 5
+        elif ballX == size[0]:
+            xDiff += 5
+        if ballY == 0:
+            yDiff -= 5
+        elif ballY == size[1]:
+            yDiff += 5
+
+        # move the ball and player
+        x += xDiff * 5
+        ballX -= xDiff * 5
+
+        y += yDiff * 5
+        ballY -= yDiff * 5
+
+
+# Game loop
+done = False
+while not done:
+    screen.fill(black)
+
+    keys = pygame.key.get_pressed()
+
+    # player movement
+    if keys[pygame.K_w]:
+        y -= 1
+    if keys[pygame.K_s]:
+        y += 1
+    if keys[pygame.K_a]:
+        x -= 1
+    if keys[pygame.K_d]:
+        x += 1
+
+    # Check off screen
+    x = checkOffScreenX(x)
+    y = checkOffScreenY(y)
+    ballX = checkOffScreenX(ballX)
+    ballY = checkOffScreenY(ballY)
+
+    # Check player is touching the ball
+    checkTouching()
+
+    # draw player
+    pygame.draw.circle(screen, red, [x, y], 1)
+
+    # draw ball
+    pygame.draw.circle(screen, blue, [ballX, ballY], 1)
+
+    pygame.display.flip()
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+    clock.tick(72)  # 依fps的值來產生動畫, 每秒執行fps次
+
+pygame.quit()  # 關閉繪圖視窗
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+pygame.init()  # 初始化Pygame
+
+# Window setup
+size = [400, 300]
+screen = pygame.display.set_mode(size)  # 產生視窗screen
+
+# 設定每秒畫格20，利用Clock()方法來確保動畫能持續進行
+fps = 20  # 每秒的執行次數
+clock = pygame.time.Clock()  # 建立時間元件
+
+# player position
+x = size[0] / 2
+y = size[1] / 2
+
+# colors
+red = pygame.color.Color("#FF8080")
+blue = pygame.color.Color("#8080FF")
+white = pygame.color.Color("#FFFFFF")
+black = pygame.color.Color("#000000")
+
+
+def checkOffScreenX(x):
+    if x > size[0]:
+        x = 0
+    elif x < 0:
+        x = size[0]
+    return x
+
+
+def checkOffScreenY(y):
+    if y > size[1]:
+        y = 0
+    elif y < 0:
+        y = size[1]
+    return y
+
+
+# Game loop
+done = False
+while not done:
+    screen.fill(black)
+
+    keys = pygame.key.get_pressed()
+
+    # player movement
+    if keys[pygame.K_w]:
+        y -= 1
+    if keys[pygame.K_s]:
+        y += 1
+    if keys[pygame.K_a]:
+        x -= 1
+    if keys[pygame.K_d]:
+        x += 1
+
+    # Check off screen
+    x = checkOffScreenX(x)
+    y = checkOffScreenY(y)
+
+    # draw player
+    pygame.draw.circle(screen, red, [x, y], 1)
+
+    pygame.display.flip()
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+    clock.tick(72)  # 依fps的值來產生動畫, 每秒執行fps次
+
+pygame.quit()  # 關閉繪圖視窗
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+pygame.init()  # 初始化Pygame
+
+# Window setup
+size = [400, 300]
+screen = pygame.display.set_mode(size)  # 產生視窗screen
+
+# 設定每秒畫格20，利用Clock()方法來確保動畫能持續進行
+fps = 20  # 每秒的執行次數
+clock = pygame.time.Clock()  # 建立時間元件
+
+# player position
+x = size[0] / 2
+y = size[1] / 2
+
+# colors
+red = pygame.color.Color("#FF8080")
+blue = pygame.color.Color("#8080FF")
+white = pygame.color.Color("#FFFFFF")
+black = pygame.color.Color("#000000")
+
+done = False
+while not done:
+    screen.fill(black)
+
+    keys = pygame.key.get_pressed()
+
+    # player movement
+    if keys[pygame.K_w]:
+        y -= 1
+    # draw player
+    pygame.draw.circle(screen, red, [x, y], 1)
+
+    pygame.display.flip()
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+    clock.tick(72)  # 依fps的值來產生動畫, 每秒執行fps次
+
+pygame.quit()  # 關閉繪圖視窗
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+pygame.init()  # 初始化Pygame
+
+# Window setup
+size = [400, 300]
+screen = pygame.display.set_mode(size)  # 產生視窗screen
+
+# 設定每秒畫格20，利用Clock()方法來確保動畫能持續進行
+fps = 20  # 每秒的執行次數
+clock = pygame.time.Clock()  # 建立時間元件
+
+# player position
+x = size[0] / 2
+y = size[1] / 2
+
+# colors
+red = pygame.color.Color("#FF8080")
+blue = pygame.color.Color("#8080FF")
+white = pygame.color.Color("#FFFFFF")
+black = pygame.color.Color("#000000")
+
+# Game loop
+done = False
+while not done:
+    screen.fill(black)
+
+    keys = pygame.key.get_pressed()
+
+    # player movement
+    if keys[pygame.K_w]:
+        y -= 1
+    if keys[pygame.K_s]:
+        y += 1
+    if keys[pygame.K_a]:
+        x -= 1
+    if keys[pygame.K_d]:
+        x += 1
+
+    # draw player
+    pygame.draw.circle(screen, red, [x, y], 1)
+
+    pygame.display.flip()
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+    clock.tick(72)  # 依fps的值來產生動畫, 每秒執行fps次
+
+pygame.quit()  # 關閉繪圖視窗
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+pygame.init()  # 初始化Pygame
+
+# Window setup
+size = [400, 300]
+screen = pygame.display.set_mode(size)  # 產生視窗screen
+
+# 設定每秒畫格20，利用Clock()方法來確保動畫能持續進行
+fps = 20  # 每秒的執行次數
+clock = pygame.time.Clock()  # 建立時間元件
+
+# Game loop
+done = False
+while not done:
+    keys = pygame.key.get_pressed()
+
+    # player movement
+    if keys[pygame.K_w]:
+        print("Hello")
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+    clock.tick(32)  # 依fps的值來產生動畫, 每秒執行fps次
+
+pygame.quit()  # 關閉繪圖視窗
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+pygame.init()  # 初始化Pygame
+
+# Window setup
+size = [400, 300]
+screen = pygame.display.set_mode(size)  # 產生視窗screen
+
+# 設定每秒畫格20，利用Clock()方法來確保動畫能持續進行
+fps = 20  # 每秒的執行次數
+clock = pygame.time.Clock()  # 建立時間元件
+
+# player position
+x = size[0] / 2
+y = size[1] / 2
+
+# ball position
+ballX = random.randrange(0, size[0])
+ballY = random.randrange(0, size[1])
+
+# Goal position
+goalX = size[0] / 2 - 10
+goalY = size[1] / 2 - 10
+goalW = 20
+goalH = 20
+
+# points
+points = 0
+
+# colors
+red = pygame.color.Color("#FF8080")
+blue = pygame.color.Color("#8080FF")
+white = pygame.color.Color("#FFFFFF")
+black = pygame.color.Color("#000000")
+
+
+def checkOffScreenX(x):
+    if x > size[0]:
+        x = 0
+    elif x < 0:
+        x = size[0]
+    return x
+
+
+def checkOffScreenY(y):
+    if y > size[1]:
+        y = 0
+    elif y < 0:
+        y = size[1]
+    return y
+
+
+def checkTouching():
+    # Causes a mini explosion if the players are touching
+    global x
+    global ballX
+    global y
+    global ballY
+
+    if -10 < y - ballY < 10 and -10 < x - ballX < 10:
+        pygame.draw.circle(screen, white, [x, y], 15)
+
+        xDiff = x - ballX
+        yDiff = y - ballY
+
+        if ballX == 0:
+            xDiff -= 5
+        elif ballX == size[0]:
+            xDiff += 5
+        if ballY == 0:
+            yDiff -= 5
+        elif ballY == size[1]:
+            yDiff += 5
+
+        x += xDiff * 3
+        ballX -= xDiff * 3
+
+        y += yDiff * 3
+        ballY -= yDiff * 3
+
+
+# Game loop
+done = False
+
+# get current time
+timeStart = pygame.time.get_ticks()
+
+while not done:
+    screen.fill(black)
+
+    # Draw the goal
+    pygame.draw.rect(screen, white, (goalX, goalY, goalW, goalH))
+
+    keys = pygame.key.get_pressed()
+
+    # player movement
+    if keys[pygame.K_w]:
+        y -= 1
+    if keys[pygame.K_s]:
+        y += 1
+    if keys[pygame.K_a]:
+        x -= 1
+    if keys[pygame.K_d]:
+        x += 1
+
+    # Check off screen
+    x = checkOffScreenX(x)
+    y = checkOffScreenY(y)
+    ballX = checkOffScreenX(ballX)
+    ballY = checkOffScreenY(ballY)
+
+    # Check player is touching the ball
+    checkTouching()
+
+    # Draw points
+    for point in range(points):
+        pointX = 0 + point * 5
+        pygame.draw.rect(screen, white, (pointX, 3, 4, 7))
+
+    # draw player
+    pygame.draw.circle(screen, red, [x, y], 6)
+
+    # draw ball
+    pygame.draw.circle(screen, blue, [ballX, ballY], 6)
+
+    # Check ball is in goal
+    if goalX <= ballX <= goalX + goalH and goalY <= ballY <= goalY + goalH:
+        points += 1
+        ballX = random.randrange(0, size[0])
+        ballY = random.randrange(0, size[0])
+
+    pygame.display.flip()
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+
+    # Check elapsed time
+    timeNow = pygame.time.get_ticks()
+    if timeNow - timeStart >= 60000:
+        done = True
+
+    clock.tick(72)  # 依fps的值來產生動畫, 每秒執行fps次
+
+pygame.quit()  # 關閉繪圖視窗
+
+print("Total points: " + str(points))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("pygame 接受鍵盤按鍵 A S")
+
+pygame.init()  # 初始化Pygame
+
+windowSize = [400, 300]
+pygame.display.set_mode(windowSize)  # 產生視窗screen
+
+done = False
+while not done:
+    keys = pygame.key.get_pressed()
+
+    if keys[pygame.K_a]:
+        print("你按了 A")
+
+    if keys[pygame.K_s]:
+        print("你按了 S")
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+    pygame.time.delay(100)
+
+pygame.quit()  # 關閉繪圖視窗
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+pygame.init()  # 初始化Pygame
+
+screen = pygame.display.set_mode((640, 480))  # 產生視窗screen
+pygame.display.set_caption("Richard's pygame!")  # 設定視窗名稱
+bk = pygame.Surface(screen.get_size())
+bk.fill((255, 255, 255))
+screen.blit(bk, (0, 0))
+pygame.display.update()  # 更新繪圖視窗
+
+run_pygame()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+pygame.init()  # 初始化Pygame
+
+screen = pygame.display.set_mode((640, 480))  # 產生視窗screen
+pygame.display.set_caption("Richard's pygame!")  # 設定視窗名稱
+bk = pygame.Surface(screen.get_size())
+bk.fill((255, 255, 255))
+pygame.draw.rect(bk, (255, 0, 0), (100, 100, 300, 300), 2)
+screen.blit(bk, (0, 0))
+pygame.display.update()  # 更新繪圖視窗
+
+run_pygame()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+pygame.init()  # 初始化Pygame
+
+screen = pygame.display.set_mode((640, 480))  # 產生視窗screen
+pygame.display.set_caption("Richard's pygame!")  # 設定視窗名稱
+bk = pygame.Surface(screen.get_size())
+bk.fill((255, 255, 255))
+lines = list()
+for th in range(0, 361):
+    y = 250 - 200 * math.sin(th * math.pi / 180)
+    lines.append((th + 140, y))
+pygame.draw.lines(bk, (0, 0, 255), False, lines, 2)
+
+screen.blit(bk, (0, 0))
+pygame.display.update()  # 更新繪圖視窗
+
+run_pygame()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+pygame之畫圖
+draw.line()
+draw.rect()
+draw.polygon()
+draw.circle()
+draw.ellipse()
+draw.arc()
+
+pygame.mixer.music.rewind() #重新啟動音樂
+#將當前音樂的播放重新設置為一開始
+ 
+pygame.mixer.music.stop() #停止音樂播放
+
+pygame.mixer.music.pause() #暫時停止音樂播放
+pygame.mixer.music.unpause()   #恢復暫停音樂
+
+print('音量0.5')
+pygame.mixer.music.set_volume(0.5)  #調節音樂音量
+#設置音樂播放的音量。值參數在0.0和1.0之間。當加載新音樂時，音量就會重置
+time.sleep(30)
+print('音量1')
+pygame.mixer.music.set_volume(1)
+time.sleep(30)
+print('音量0.3')
+pygame.mixer.music.set_volume(0.3)
+
+b=pygame.mixer.music.get_volume() #返回當前音量
+#值將在0.0和1.0之間
+
+b=pygame.mixer.music.get_busy()   #檢查音樂流是否在播放
+#當音樂流在積極播放時，就會返回True。當音樂空閑時，返回False
+#暫停相當于在播放，返回True
+
+b=pygame.mixer.get_init()  #測試混音器是否初始化
+#如果混音器已初始化，則返回正在使用的播放參數。如果混音器尚未初始化，則返回None
+#get_init() -> (frequency, format, channels)
+#(22050, -16, 2)
+
+"""
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+# pygame 存圖命令
+# pygame.image.save(screen, "tmp_save_pic.png")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+"""
+    # 設置窗口的背景色(顏色是由紅綠藍三原色構成的元組)
+    screen.fill((242, 242, 242))
+    # 繪製一個圓(參數分別是: 屏幕, 顏色, 圓心位置, 半徑, 0表示填充圓)
+    pygame.draw.circle(
+        screen,
+        (
+            255,
+            0,
+            0,
+        ),
+        (100, 100),
+        30,
+        0,
+    )
+    # 刷新當前窗口(渲染窗口將繪製的圖像呈現出來)
+    pygame.display.flip()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+    # 設置窗口的背景色(顏色是由紅綠藍三原色構成的元組)
+    screen.fill((255, 255, 255))
+    # 通過指定的文件名加載圖像
+    ball_image = pygame.image.load("./data/ball.png")
+    # 在窗口上渲染圖像
+    screen.blit(ball_image, (50, 50))
+    # 刷新當前窗口(渲染窗口將繪製的圖像呈現出來)
+    pygame.display.flip()
+"""
