@@ -84,8 +84,9 @@ class Wall(GameObject):
         return self._height
 
     def draw(self, screen):
-        pygame.draw.rect(screen, self._color,
-                         (self._x, self._y, self._width, self._height), 4)
+        pygame.draw.rect(
+            screen, self._color, (self._x, self._y, self._width, self._height), 4
+        )
 
 
 class Food(GameObject):
@@ -106,9 +107,13 @@ class Food(GameObject):
 
     def draw(self, screen):
         if not self._hidden:
-            pygame.draw.circle(screen, self._color,
-                               (self._x + self._size // 2, self._y + self._size // 2),
-                               self._size // 2, 0)
+            pygame.draw.circle(
+                screen,
+                self._color,
+                (self._x + self._size // 2, self._y + self._size // 2),
+                self._size // 2,
+                0,
+            )
         self._hidden = not self._hidden
 
 
@@ -132,10 +137,12 @@ class SnakeNode(GameObject):
         return self._size
 
     def draw(self, screen):
-        pygame.draw.rect(screen, self._color,
-                         (self._x, self._y, self._size, self._size), 0)
-        pygame.draw.rect(screen, Color.BLACK,
-                         (self._x, self._y, self._size, self._size), 1)
+        pygame.draw.rect(
+            screen, self._color, (self._x, self._y, self._size, self._size), 0
+        )
+        pygame.draw.rect(
+            screen, Color.BLACK, (self._x, self._y, self._size, self._size), 1
+        )
 
 
 class Snake(GameObject):
@@ -177,8 +184,7 @@ class Snake(GameObject):
 
         :param new_dir: 新方向
         """
-        if new_dir != self._dir and \
-                (self._dir.value + new_dir.value) % 2 != 0:
+        if new_dir != self._dir and (self._dir.value + new_dir.value) % 2 != 0:
             self._new_dir = new_dir
 
     def move(self):
@@ -206,8 +212,12 @@ class Snake(GameObject):
         :param wall: 围墙
         """
         head = self.head
-        if head.x < wall.x or head.x + head.size > wall.x + wall.width \
-                or head.y < wall.y or head.y + head.size > wall.y + wall.height:
+        if (
+            head.x < wall.x
+            or head.x + head.size > wall.x + wall.width
+            or head.y < wall.y
+            or head.y + head.size > wall.y + wall.height
+        ):
             self._alive = False
 
     def eat_food(self, food):
@@ -237,7 +247,6 @@ class Snake(GameObject):
 
 
 def main():
-
     def refresh():
         """刷新游戏窗口"""
         screen.fill(Color.GRAY)
@@ -313,7 +322,7 @@ def main():
     food = create_food()
     pygame.init()
     screen = pygame.display.set_mode((620, 620))
-    pygame.display.set_caption('贪吃蛇')
+    pygame.display.set_caption("贪吃蛇")
     # 创建控制游戏每秒帧数的时钟
     clock = pygame.time.Clock()
     running = True
@@ -330,5 +339,5 @@ def main():
     pygame.quit()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

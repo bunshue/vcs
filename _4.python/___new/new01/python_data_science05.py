@@ -1,4 +1,4 @@
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -36,8 +36,13 @@ for item in list1:
 print("------------------------------------------------------------")  # 60個
 
 baseUrl = "http://example.com"
-list1 = ["http://www.example.com/test", "http://example.com/word",
-         "media/ex.jpg", "http://www.example.com/index.html"]
+list1 = [
+    "http://www.example.com/test",
+    "http://example.com/word",
+    "media/ex.jpg",
+    "http://www.example.com/index.html",
+]
+
 
 def getUrl(baseUrl, source):
     if source.startswith("http://www."):
@@ -49,10 +54,11 @@ def getUrl(baseUrl, source):
         url = "http://" + source
     else:
         url = baseUrl + "/" + source
-        
+
     if baseUrl not in url:
         return None
     return url
+
 
 for item in list1:
     print(getUrl(baseUrl, item))
@@ -69,13 +75,14 @@ for item in list1:
     item = re.sub(r" +", " ", item)
     item = item.strip()
     print("'" + item + "'")
-    
+
 
 print("------------------------------------------------------------")  # 60個
 
 import re
 
 list1 = ["", "/", "path/", "/path", "/path/", "//path/", "/path///"]
+
 
 def getPath(path):
     if path:
@@ -86,8 +93,9 @@ def getPath(path):
         path = re.sub(r"/{2,}", "/", path)
     else:
         path = "/"
-        
+
     return path
+
 
 for item in list1:
     item = getPath(item)
@@ -105,9 +113,9 @@ r = requests.get(url)
 r.encoding = "utf8"
 soup = BeautifulSoup(r.text, "lxml")
 tag_table = soup.find(class_="tt")  # 找到<table>
-rows = tag_table.findAll("tr")   # 找出所有<tr>
+rows = tag_table.findAll("tr")  # 找出所有<tr>
 # 開啟CSV檔案寫入截取的資料
-with open(csvfile, 'w+', newline='', encoding="utf-8") as fp:
+with open(csvfile, "w+", newline="", encoding="utf-8") as fp:
     writer = csv.writer(fp)
     for row in rows:
         rowList = []
@@ -123,13 +131,13 @@ url = "https://fchart.github.io/img/fchart03.png"
 path = "tmp_fchart03.png"
 response = requests.get(url, stream=True)
 if response.status_code == 200:
-    with open(path, 'wb') as fp:
+    with open(path, "wb") as fp:
         for chunk in response:
             fp.write(chunk)
-    print("圖檔已經下載")        
+    print("圖檔已經下載")
 else:
     print("錯誤! HTTP請求失敗...")
-    
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -144,7 +152,7 @@ while True:
     if len(info) < 1:
         break
     size = size + len(info)
-    fp.write(info)    
+    fp.write(info)
 print(size, "個字元下載...")
 fp.close()
 response.close()
@@ -167,10 +175,10 @@ print(match.group())
 url = url + str(match.group())
 response = requests.get(url, stream=True)
 if response.status_code == 200:
-    with open(path, 'wb') as fp:
+    with open(path, "wb") as fp:
         for chunk in response:
             fp.write(chunk)
-    print("圖檔logo.png已經下載")        
+    print("圖檔logo.png已經下載")
 else:
     print("錯誤! HTTP請求失敗...")
 
@@ -178,16 +186,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -205,4 +207,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-

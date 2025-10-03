@@ -9,9 +9,10 @@ import pygame
 
 print("------------------------------------------------------------")  # 60個
 
-print('接受按鍵 WASD SPACE')
+print("接受按鍵 WASD SPACE")
 
 pygame.init()
+
 
 def move(image1, image2):
     global count
@@ -26,29 +27,30 @@ def move(image1, image2):
         count += 1
     return image
 
+
 windowSize = [400, 300]
 screen = pygame.display.set_mode(windowSize)
 clock = pygame.time.Clock()
 
-standing = pygame.image.load('standing.png')
+standing = pygame.image.load("standing.png")
 
-down1 = pygame.image.load('down1.png')
-down2 = pygame.image.load('down2.png')
+down1 = pygame.image.load("down1.png")
+down2 = pygame.image.load("down2.png")
 
-up1 = pygame.image.load('up1.png')
-up2 = pygame.image.load('up2.png')
+up1 = pygame.image.load("up1.png")
+up2 = pygame.image.load("up2.png")
 
-left1 = pygame.image.load('side1.png')
-left2 = pygame.image.load('side2.png')
+left1 = pygame.image.load("side1.png")
+left2 = pygame.image.load("side2.png")
 
-right1 = pygame.image.load('side1.png')
-right2 = pygame.image.load('side2.png')
+right1 = pygame.image.load("side1.png")
+right2 = pygame.image.load("side2.png")
 right1 = pygame.transform.flip(right1, True, False)
 right2 = pygame.transform.flip(right2, True, False)
 
-teleport1 = pygame.image.load('teleport1.png')
-teleport2 = pygame.image.load('teleport2.png')
-teleport3 = pygame.image.load('teleport3.png')
+teleport1 = pygame.image.load("teleport1.png")
+teleport2 = pygame.image.load("teleport2.png")
+teleport3 = pygame.image.load("teleport3.png")
 
 white = pygame.color.Color("#FFFFFF")
 
@@ -68,7 +70,7 @@ while not done:
     keys = pygame.key.get_pressed()
 
     if not locked:
-        #player movement
+        # player movement
         if keys[pygame.K_s]:
             image = move(down1, down2)
             y += 1
