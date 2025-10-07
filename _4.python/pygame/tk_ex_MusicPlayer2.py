@@ -15,6 +15,7 @@ def increase():  # 音量大
     if volume >= 1:
         volume = 1
     mixer.music.set_volume(volume)
+    print(volume)
 
 
 def decrease():  # 音量小
@@ -23,6 +24,7 @@ def decrease():  # 音量小
     if volume <= 0.3:
         volume = 0.3
     mixer.music.set_volume(volume)
+    print(volume)
 
 
 def playmp3():  # 播放
