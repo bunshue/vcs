@@ -17,10 +17,9 @@ print("取得網頁內容 : ", soup.text)
 # find_all()定位符合標籤的全部節點，回傳的是一個列表。
 # select()其實就是使用CSS選擇器語法的find_all()
 
-.      取
-find   找
-select 選
-
+# 用.取
+# 用find找
+# 用select選
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -106,10 +105,21 @@ string_html_data = """
 
 soup = BeautifulSoup(string_html_data, "html.parser")
 
+print("------------------------------")  # 30個
+
 # 用.取
-print("取得網頁標題 :", soup.title)  # 印出整行資料 # <title>網頁標題</title>
+print("取得網頁標題(全部) :", soup.title)  # 印出整行資料 # <title>網頁標題</title>
+print("取得網頁標題(內容) :", soup.title.string)  # 印出內容資料 # 網頁標題
+print("head.title :", soup.html.head.title.string)
+print("取得網頁標題(內容) :", soup.meta["charset"])  # 印出內容資料 # 網頁標題
+print("head.meta :", soup.html.head.meta["charset"])
+
+print("------------------------------")  # 30個
 
 # 用find找
+
+print("網頁表頭範圍 :", soup.find("head"))  # <head>標籤
+
 print("find 段落<p>")
 
 print("找第一個<p>")
@@ -126,8 +136,6 @@ cc = soup.find("p", id="p2", class_="red")
 print(cc)
 
 print("------------------------------")  # 30個
-
-soup = BeautifulSoup(string_html_data, "html.parser")
 
 # 用select選
 print("select() title")
@@ -162,8 +170,12 @@ string_html_data = """
 """
 soup = BeautifulSoup(string_html_data, "html.parser")
 
+print("------------------------------")  # 30個
+
 # 用.取
 print("取得網頁標題 :", soup.title)  # 印出整行資料 # <title>網頁標題</title>
+
+print("------------------------------")  # 30個
 
 # 用select選
 print("取得網頁中圖片的位址")
@@ -193,8 +205,12 @@ string_html_data = """
 
 soup = BeautifulSoup(string_html_data, "html.parser")
 
+print("------------------------------")  # 30個
+
 # 用.取
 print("取得網頁標題 :", soup.title)  # 印出整行資料 # <title>網頁標題</title>
+
+print("------------------------------")  # 30個
 
 # 用find找
 print(soup.find("h1"))  # <h1>文件標題</h1>
@@ -207,6 +223,8 @@ data1 = soup.find("a", {"href": "http://example.com/one"})
 print(data1.text)  # First
 
 print(soup.find_all(["title", "h1"]))  # [<title>網頁標題</title>, <h1>文件標題</h1>]
+
+print("------------------------------")  # 30個
 
 # 用select選
 data2 = soup.select("#link1")
@@ -268,6 +286,8 @@ Python簡單易學又有趣
 soup = BeautifulSoup(string_html_data, "html.parser")
 # soup = BeautifulSoup(string_html_data, "lxml")
 
+print("------------------------------")  # 30個
+
 print("取得第一個 h1: ", soup.h1)
 print("取得 第一個 p: ", soup.p)
 print("取得 第一個 <a></a>: ", soup.a)
@@ -285,6 +305,8 @@ print("網頁標題 上層")
 print(soup.title.parent.name)
 print("網頁標題 上一層Tag")
 print(soup.title.parent)
+
+print("------------------------------")  # 30個
 
 print(soup.find("title"))  # 傳回網頁含<title>~</title>
 print(soup.find("title").text)  # 傳回網頁<title>標籤內的資料
@@ -379,11 +401,16 @@ string_html_data = """
 </body>
 """
 soup = BeautifulSoup(string_html_data, "html.parser")
+
+print("------------------------------")  # 30個
+
 print("取得 第一個 p: ", soup.p)
 print('soup.p["class"]')
 print(soup.p["class"])
 print("取得 第一個 a: ", soup.a)
 print("取得 第一個 <a></a>: ", soup.a)
+
+print("------------------------------")  # 30個
 
 print("取得 全部 <a></a>: ", soup.find_all("a"))
 
@@ -419,10 +446,14 @@ string_html_data = """
 
 soup = BeautifulSoup(string_html_data, "lxml")
 
+print("------------------------------")  # 30個
+
 print("取得 第一個 <a></a>: ", soup.a)
 print(soup.a.text)
 print(soup.a.get("href"))
 print(soup.a["href"])
+
+print("------------------------------")  # 30個
 
 print(soup.find("h4"))
 print(soup.find("h4", {"class": "pk"}))
@@ -434,6 +465,8 @@ print(soup.find_all("h4", {"class": "pk"}))
 
 print("多重取得 全部 <xx></xx>: ", soup.find_all(["title", "p"]))
 print(soup.find_all(["title", "p"])[1].text)  # ← 傳回第 1 個 (由 0 算起) 符合標籤中的文字
+
+print("------------------------------")  # 30個
 
 print("h4:", soup.select("h4"))  # ←查詢所有 h4 標籤
 print("#book:", soup.select("#books"))  # ←查詢所有 id 為 'books' 的標籤
@@ -460,7 +493,10 @@ string_html_data = """
 and they lived at the bottom of a well.</p>
 <p class="story">...</p>
 """
+
 soup = BeautifulSoup(string_html_data, "html.parser")
+
+print("------------------------------")  # 30個
 
 print(soup.find("b"))  # <b>文件標題</b>
 
@@ -559,6 +595,8 @@ print("解讀本地網頁資料1")
 
 soup = BeautifulSoup(string_html_data, "html.parser")
 
+print("------------------------------")  # 30個
+
 # 用find找
 print("取得<h1>??</h1>: ", soup.find("h1"))  # 印出整行資料
 print("取得<h1>??</h1>: ", soup.find("h1").text)  # 只印出text部分
@@ -573,6 +611,8 @@ print("有2個, 需要縮小範圍")
 data1 = soup.find("a", {"href": "https://easun.org/perl/perl-toc/ch05.html"})
 print("取得a 指明 href: ", data1)  # 印出整行資料
 print("取得a 指明 href: ", data1.text)  # 只印出text部分
+
+print("------------------------------")  # 30個
 
 print("取得超連結")
 cc = soup.select("#link1")
@@ -884,38 +924,10 @@ for c in cc:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("BeautifulSoup 測試 20")
+print("BeautifulSoup 測試 20 抓取一個網頁的所有圖片檔")
 
-post_html = """
-</body>
-</html>
-"""
+url = "http://www.e-happy.com.tw"
 
-pre_html = """
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset='utf-8'>
-<title>網頁標題</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <style>
-    .carousel-inner > .item > img,
-    .carousel-inner > .item > a > img {
-        border: 5px solid white;
-        width: 50%;
-        box-shadow: 10px 10px 5px #888888;
-        margin: auto;
-    }
-    </style>
-</head>
-<body>
-<center><h3>以下是從網頁搜集來的圖片跑馬燈</h3></center>
-"""
-
-''' TBD
 domain = "{}://{}".format(
     urllib.parse.urlparse(url).scheme, urllib.parse.urlparse(url).hostname
 )
@@ -938,10 +950,12 @@ for link in all_links:
         if t != None and (".jpg" in t or ".png" in t):
             if t.startswith("http"):
                 full_path = t
+                print("A遠端檔案 :", full_path)
             else:
                 full_path = domain + t
-            print(full_path)
+                print("B遠端檔案 :", full_path)
             image_dir = url.split("/")[-1]
+            image_dir = "tmp_image_dir"
             if not os.path.exists(image_dir):
                 os.mkdir(image_dir)
             filename = full_path.split("/")[-1]
@@ -951,61 +965,16 @@ for link in all_links:
                 filename = filename + ".jpg"
             else:
                 filename = filename + ".png"
+
+            print(filename)
             image = urlopen(full_path)
+            cc = os.path.join(image_dir, filename)
+            print(cc)
+            print("--------------")
             fp = open(os.path.join(image_dir, filename), "wb")
             fp.write(image.read())
             fp.close()
 
-            if picno == 0:
-                carousel_part1 += "<li data-target='#myC' data-slide-to='{}' class='active'></li>".format(
-                    picno
-                )
-                carousel_part2 += """
-                    <div class='item active'>
-                        <img src='{}' alt='{}'>  
-                    </div>""".format(
-                    filename, filename
-                )
-
-            else:
-                carousel_part1 += (
-                    "<li data-target='#myC' data-slide-to='{}'></li>".format(picno)
-                )
-                carousel_part2 += """
-                    <div class='item'>
-                        <img src='{}' alt='{}'>  
-                    </div>""".format(
-                    filename, filename
-                )
-            picno += 1
-
-            html_body = """
-            <div id='myC' class='carousel slide' data-ride='carousel'>
-                <ol class='carousel-indicators'>
-                {}
-                </ol>
-                <div class='carousel-inner' role='listbox'>
-                {}
-                </div>
-                <a class="left carousel-control" href="#myC" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">前一張</span>
-                </a>
-                <a class="right carousel-control" href="#myC" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">後一張</span>
-                </a>
-            </div>
-            """.format(
-                carousel_part1, carousel_part2
-            )
-
-"""
-fp = open('index.html', 'w')
-fp.write(pre_html+html_body+post_html)
-fp.close()            
-"""
-'''
 print("------------------------------------------------------------")  # 60個
 print("讀取本地html SP")
 print("------------------------------------------------------------")  # 60個
@@ -1020,18 +989,32 @@ soup = get_soup_from_url(url)
 url = "https://tw.news.yahoo.com/rss/technology"
 soup = get_soup_from_url(url)
 
-soup.findAll("item")
+print("------------------------------")  # 30個
 
+cc = soup.findAll("item")
 print("取得Yahoo奇摩新聞-科技新聞-標題")
-for news in soup.findAll("item"):
+for news in cc:
     print(news.title)
 
+print("------------------------------------------------------------")  # 60個
+
+url = "https://tw.news.yahoo.com/rss/technology"
+response = requests.get(url)
+soup = BeautifulSoup(response.text, "html.parser")
+
+cc = soup.findAll("item")
+for news in cc:
+    print(news.title)
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("BeautifulSoup 測試 2")
 
 url = "https://www.google.com.tw/"
 soup = get_soup_from_url(url)
+
+print("------------------------------")  # 30個
 
 all_links = soup.find_all("a")  # 取得 全部 <a></a>
 
@@ -1049,6 +1032,8 @@ print("BeautifulSoup 測試 5")
 
 url = "https://www.ptt.cc/bbs/C_Chat/index.html"
 soup = get_soup_from_url(url)
+
+print("------------------------------")  # 30個
 
 # 發現所有的文章標題都在class="title"的div中
 all_links = soup.find_all("div", class_="title")  # 文章標題
@@ -1086,6 +1071,8 @@ print("BeautifulSoup 測試 8")
 
 url = "https://newcar.u-car.com.tw/newcar"
 soup = get_soup_from_url(url)
+
+print("------------------------------")  # 30個
 
 makes = soup.select("#makeselect > option")
 makers = dict()
@@ -2287,16 +2274,6 @@ for photo in photos:  # 迴圈下載圖片與儲存
     for diskStorage in picture.iter_content(10240):
         pictFile.write(diskStorage)
     pictFile.close()  # 關閉檔案
-
-print("------------------------------------------------------------")  # 60個
-
-url = "https://tw.news.yahoo.com/rss/technology"
-response = requests.get(url)
-soup = BeautifulSoup(response.text, "html.parser")
-soup.findAll("item")
-
-for news in soup.findAll("item"):
-    print(news.title)
 
 print("------------------------------------------------------------")  # 60個
 

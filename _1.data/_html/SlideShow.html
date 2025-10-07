@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='big5'>
+<title>圖片跑馬燈</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style>
+    .carousel-inner > .item > img,
+    .carousel-inner > .item > a > img {
+        border: 5px solid white;
+        width: 50%;
+        box-shadow: 10px 10px 5px #888888;
+        margin: auto;
+    }
+    </style>
+</head>
+<body>
+<center><h3>圖片跑馬燈</h3></center>
+
+            <div id='myC' class='carousel slide' data-ride='carousel'>
+                <ol class='carousel-indicators'>
+                <li data-target='#myC' data-slide-to='0' class='active'></li><li data-target='#myC' data-slide-to='1'></li><li data-target='#myC' data-slide-to='2'></li><li data-target='#myC' data-slide-to='3'></li><li data-target='#myC' data-slide-to='4'></li><li data-target='#myC' data-slide-to='5'></li><li data-target='#myC' data-slide-to='6'></li><li data-target='#myC' data-slide-to='7'></li><li data-target='#myC' data-slide-to='8'></li><li data-target='#myC' data-slide-to='9'></li><li data-target='#myC' data-slide-to='10'></li><li data-target='#myC' data-slide-to='11'></li><li data-target='#myC' data-slide-to='12'></li></ol>
+                <div class='carousel-inner' role='listbox'>
+                
+                    <div class='item active'>
+                        <img src='files/a00.jpg' alt='logo.png'>  
+                    </div>
+                    <div class='item'>
+                        <img src='files/a01.jpg' alt='20250530-banner__25E30IEjUl.png'>  
+                    </div>
+                    <div class='item'>
+                        <img src='files/a02.jpg' alt='20250221-banner__25B21XoZNC.png'>  
+                    </div>
+                    <div class='item'>
+                        <img src='files/a03.jpg' alt='20250124-1-banner__25A24JWwHv.png'>  
+                    </div>
+                    <div class='item'>
+                        <img src='files/a04.jpg' alt='twL_home_about_25A24_wOMAAxKbYp.jpg'>  
+                    </div>
+                    <div class='item'>
+                        <img src='files/a05.jpg' alt='twL_books_25H18_5ezKPhYhSL.jpg'>  
+                    </div>
+                    <div class='item'>
+                        <img src='files/a06.jpg' alt='acv048300__25G08JUYYk.png'>  
+                    </div>
+                    <div class='item'>
+                        <img src='files/a07.jpg' alt='ACI037800__25E30xKt7t.jpg'>  
+                    </div>
+                    <div class='item'>
+                        <img src='files/a08.jpg' alt='twL_books_25D11_kVQEqeI900.jpg'>  
+                    </div>
+                    <div class='item'>
+                        <img src='files/a09.jpg' alt='twL_books_25D28_x1khgl8gL7.jpg'>  
+                    </div>
+                    <div class='item'>
+                        <img src='files/a10.jpg' alt='ACV047700-cover__25B068vou7.jpg'>  
+                    </div>
+                    <div class='item'>
+                        <img src='files/a11.jpg' alt='CANVA__25A23PNXNJ.jpg'>  
+                    </div>
+                    <div class='item'>
+                        <img src='files/a12.jpg' alt='ACI035600_3D_1__25E21LfSQi.png'>  
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#myC" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">前一張</span>
+                </a>
+                <a class="right carousel-control" href="#myC" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">後一張</span>
+                </a>
+            </div>
+</body>
+</html>

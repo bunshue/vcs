@@ -57,7 +57,7 @@ def draw_monster(screen, view_manager):
         monster.draw(screen, view_manager)
         # 当怪物的die_max_draw_count返回0时，表明该怪物已经死亡，
         # 且该怪物的死亡动画所有帧都播放完成，将它们彻底删除。
-        if monster.die_max_draw_count <= 0:  # ③
+        if monster.die_max_draw_count <= 0:
             del_list.append(monster)
     die_monster_list.remove(del_list)
 

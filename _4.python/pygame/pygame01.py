@@ -109,10 +109,10 @@ def run_pygame():
                 running = False
     pygame.quit()  # 關閉繪圖視窗
 
+'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-"""
 pygame_name = "pygame 01 基本架構1, 靜圖, 無fps"
 screen = init_pygame(pygame_name, YELLOW)
 
@@ -874,14 +874,80 @@ while not done:
 pygame.quit()  # 關閉繪圖視窗
 
 print("Total points: " + str(points))
-"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+pygame.init()
+screen = pygame.display.set_mode((640, 70))
+pygame.display.set_caption("水平移動")
+
+background = pygame.Surface(screen.get_size())
+background = background.convert()
+background.fill((255, 255, 255))
+ball = pygame.Surface((30, 30))  # 建立球矩形繪圖區
+ball.fill((255, 255, 255))  # 矩形區塊背景為白色
+pygame.draw.circle(ball, (0, 0, 255), (15, 15), 15, 0)  # 畫藍色球
+rect1 = ball.get_rect()  # 取得球矩形區塊
+rect1.center = (320, 45)  # 球起始位置
+x, y = rect1.topleft  # 球左上角坐標
+dx = 3  # 球運動速度
+clock = pygame.time.Clock()
+running = True
+while running:
+    clock.tick(30)  # 每秒執行30次
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    screen.blit(background, (0, 0))  # 清除繪圖視窗
+    x += dx  # 改變水平位置
+    rect1.center = (x, y)
+    if rect1.left <= 0 or rect1.right >= screen.get_width():  # 到達左右邊界
+        dx *= -1
+    screen.blit(ball, rect1.topleft)
+    pygame.display.update()
+pygame.quit()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+pygame.init()
+screen = pygame.display.set_mode((640, 70))
+pygame.display.set_caption("鍵盤事件")
+
+background = pygame.Surface(screen.get_size())
+background = background.convert()
+background.fill((255, 255, 255))
+ball = pygame.Surface((30, 30))  # 建立球矩形繪圖區
+ball.fill((255, 255, 255))  # 矩形區塊背景為白色
+pygame.draw.circle(ball, (0, 0, 255), (15, 15), 15, 0)  # 畫藍色球
+rect1 = ball.get_rect()  # 取得球矩形區塊
+rect1.center = (320, 35)  # 球起始位置
+x, y = rect1.topleft  # 球左上角坐標
+dx = 5  # 球移動距離
+clock = pygame.time.Clock()
+running = True
+while running:
+    clock.tick(30)  # 每秒執行30次
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    keys = pygame.key.get_pressed()  # 檢查按鍵被按
+    if keys[pygame.K_RIGHT] and rect1.right < screen.get_width():  # 按向右鍵且未達右邊界
+        rect1.centerx += dx  # 向右移動
+    elif keys[pygame.K_LEFT] and rect1.left > 0:  # 按向左鍵且未達左邊界
+        rect1.centerx -= dx  # 向左移動
+    screen.blit(background, (0, 0))  # 清除繪圖視窗
+    screen.blit(ball, rect1.topleft)
+    pygame.display.update()
+pygame.quit()
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # coinGameStart
-
-import random
-import pygame
 
 pygame.init()
 
@@ -1171,6 +1237,226 @@ pygame.quit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+from random import randint
+from threading import Thread
+from time import sleep
+
+class Color(object):
+    BLACK = (0, 0, 0)
+    WHITE = (255, 255, 255)
+    GRAY = (242, 242, 242)
+
+    @staticmethod
+    def random_color():
+        r = randint(0, 255)
+        g = randint(0, 255)
+        b = randint(0, 255)
+        return r, g, b
+
+
+class Car(object):
+    def __init__(self, x, y, color):
+        self._x = x
+        self._y = y
+        self._color = color
+
+    def move(self):
+        if self._x + 80 < 950:
+            self._x += randint(1, 10)
+
+    def draw(self, screen):
+        pygame.draw.rect(screen, self._color, (self._x, self._y, 80, 40), 0)
+
+
+def main():
+    class BackgroundTask(Thread):
+        def run(self):
+            while True:
+                screen.fill(Color.GRAY)
+                pygame.draw.line(screen, Color.BLACK, (130, 0), (130, 600), 4)
+                pygame.draw.line(screen, Color.BLACK, (950, 0), (950, 600), 4)
+                for car in cars:
+                    car.draw(screen)
+                pygame.display.flip()
+                sleep(0.05)
+                for car in cars:
+                    car.move()
+
+    cars = []
+    for index in range(5):
+        temp = Car(50, 50 + 120 * index, Color.random_color())
+        cars.append(temp)
+    pygame.init()
+    screen = pygame.display.set_mode((1000, 600))
+    BackgroundTask(daemon=True).start()
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+    pygame.quit()
+
+
+if __name__ == "__main__":
+    main()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+pygame.init()
+screen = pygame.display.set_mode((640, 300))
+pygame.display.set_caption("滑鼠滑動事件")
+
+background = pygame.Surface(screen.get_size())
+background = background.convert()
+background.fill((255, 255, 255))
+ball = pygame.Surface((30, 30))  # 建立球矩形繪圖區
+ball.fill((255, 255, 255))  # 矩形區塊背景為白色
+pygame.draw.circle(ball, (0, 0, 255), (15, 15), 15, 0)  # 畫藍色球
+rect1 = ball.get_rect()  # 取得球矩形區塊
+rect1.center = (320, 150)  # 球起始位置
+x, y = rect1.topleft  # 球左上角坐標
+clock = pygame.time.Clock()
+running = True
+playing = False  # 開始時球不能移動
+while running:
+    clock.tick(30)  # 每秒執行30次
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    buttons = pygame.mouse.get_pressed()
+    if buttons[0]:  # 按滑鼠左鍵後球可移動
+        playing = True
+    elif buttons[2]:  # 按滑鼠右鍵後球不能移動
+        playing = False
+    if playing == True:  # 球可移動狀態
+        mouses = pygame.mouse.get_pos()  # 取得滑鼠坐標
+        rect1.centerx = mouses[0]  # 移動滑鼠
+        rect1.centery = mouses[1]
+    screen.blit(background, (0, 0))  # 清除繪圖視窗
+    screen.blit(ball, rect1.topleft)
+    pygame.display.update()
+pygame.quit()
+'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# free motion
+
+pygame.init()
+screen = pygame.display.set_mode((400, 300))
+pygame.display.set_caption("自由移動")
+
+background = pygame.Surface(screen.get_size())
+background = background.convert()
+background.fill((255, 255, 255))
+ball = pygame.Surface((30, 30))  # 建立球矩形繪圖區
+ball.fill((255, 255, 255))  # 矩形區塊背景為白色
+pygame.draw.circle(ball, (0, 0, 255), (15, 15), 15, 0)  # 畫藍色球
+rect1 = ball.get_rect()  # 取得球矩形區塊
+rect1.center = (random.randint(100, 250), random.randint(150, 250))  # 球起始位置
+x, y = rect1.topleft  # 球左上角坐標
+direction = random.randint(20, 70)  # 起始角度
+radian = math.radians(direction)  # 轉為弳度
+dx = 5 * math.cos(radian)  # 球水平運動速度
+dy = -5 * math.sin(radian)  # 球垂直運動速度
+clock = pygame.time.Clock()
+running = True
+while running:
+    clock.tick(30)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    screen.blit(background, (0, 0))  # 清除繪圖視窗
+    x += dx  # 改變水平位置
+    y += dy  # 改變垂直位置
+    rect1.center = (x, y)
+    if rect1.left <= 0 or rect1.right >= screen.get_width():  # 到達左右邊界
+        dx *= -1  # 水平速度變號
+    elif rect1.top <= 5 or rect1.bottom >= screen.get_height() - 5:  # 到達上下邊界
+        dy *= -1  # 垂直速度變號
+    screen.blit(ball, rect1.topleft)
+    pygame.display.update()
+pygame.quit()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# collide
+
+
+class Ball(pygame.sprite.Sprite):
+    dx = 0  # x位移量
+    dy = 0  # y位移量
+    x = 0  # 球x坐標
+    y = 0  # 球y坐標
+
+    def __init__(self, speed, srx, sry, radium, color):
+        pygame.sprite.Sprite.__init__(self)
+        self.x = srx
+        self.y = sry
+        self.image = pygame.Surface([radium * 2, radium * 2])  # 繪製球體
+        self.image.fill((255, 255, 255))
+        pygame.draw.circle(self.image, color, (radium, radium), radium, 0)
+        self.rect = self.image.get_rect()  # 取得球體區域
+        self.rect.center = (srx, sry)  # 初始位置
+        direction = random.randint(20, 70)  # 移動角度
+        radian = math.radians(direction)  # 角度轉為弳度
+        self.dx = speed * math.cos(radian)  # 球水平運動速度
+        self.dy = -speed * math.sin(radian)  # 球垂直運動速度
+
+    def update(self):
+        self.x += self.dx  # 計算球新餘標
+        self.y += self.dy
+        self.rect.x = self.x  # 移動球圖形
+        self.rect.y = self.y
+        if self.rect.left <= 0 or self.rect.right >= screen.get_width():  # 到達左右邊界
+            self.dx *= -1  # 水平速度變號
+        elif (
+            self.rect.top <= 5 or self.rect.bottom >= screen.get_height() - 5
+        ):  # 到達上下邊界
+            self.dy *= -1  # 垂直速度變號
+
+    def collidebounce(self):
+        self.dx *= -1
+
+
+pygame.init()
+screen = pygame.display.set_mode((400, 300))
+pygame.display.set_caption("角色碰撞")
+
+background = pygame.Surface(screen.get_size())
+background = background.convert()
+background.fill((255, 255, 255))
+allsprite = pygame.sprite.Group()  # 建立角色群組
+ball1 = Ball(8, 100, 100, 15, (0, 0, 255))  # 建立藍色球物件
+allsprite.add(ball1)  # 加入角色群組
+ball2 = Ball(6, 200, 250, 15, (255, 0, 0))  # 建立紅色球物件
+allsprite.add(ball2)
+clock = pygame.time.Clock()
+running = True
+while running:
+    clock.tick(30)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    screen.blit(background, (0, 0))  # 清除繪圖視窗
+    ball1.update()  # 物件更新
+    ball2.update()
+    allsprite.draw(screen)
+    result = pygame.sprite.collide_rect(ball1, ball2)
+    if result == True:
+        ball1.collidebounce()
+        ball2.collidebounce()
+    pygame.display.update()
+pygame.quit()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個
