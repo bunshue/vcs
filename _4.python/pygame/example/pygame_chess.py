@@ -47,33 +47,28 @@ class RenjuBoard(object):
                     pygame.draw.circle(screen, ccolor, pos, 20, 0)
 
 
-def main():
-    board = RenjuBoard()
-    is_black = True
-    pygame.init()
-    pygame.display.set_caption("五子棋")
-    screen = pygame.display.set_mode([640, 640])
-    screen.fill([255, 255, 0])
-    board.draw(screen)
-    pygame.display.flip()
-    running = True
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            elif event.type == pygame.KEYUP:
-                pass
-            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                x, y = event.pos
-                row = round((y - 40) / 40)
-                col = round((x - 40) / 40)
-                if board.move(row, col, is_black):
-                    is_black = not is_black
-                    screen.fill([255, 255, 0])
-                    board.draw(screen)
-                    pygame.display.flip()
-    pygame.quit()
-
-
-if __name__ == "__main__":
-    main()
+board = RenjuBoard()
+is_black = True
+pygame.init()
+pygame.display.set_caption("五子棋")
+screen = pygame.display.set_mode([640, 640])
+screen.fill([255, 255, 0])
+board.draw(screen)
+pygame.display.flip()
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.KEYUP:
+            pass
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            x, y = event.pos
+            row = round((y - 40) / 40)
+            col = round((x - 40) / 40)
+            if board.move(row, col, is_black):
+                is_black = not is_black
+                screen.fill([255, 255, 0])
+                board.draw(screen)
+                pygame.display.flip()
+pygame.quit()

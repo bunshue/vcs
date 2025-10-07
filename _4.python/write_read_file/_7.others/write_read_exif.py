@@ -4,8 +4,7 @@ import time
 import exifread
 
 filename = "D:/_git/vcs/_1.data/______test_files1/orient1.jpg"
-filename = "data/exif_gps.jpg"
-
+filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_gps/pic_gps2.jpg'
 
 print("------------------------------------------------------------")  # 60個
 
@@ -32,9 +31,12 @@ print("月", mm)
 print("日", dd)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from PIL import Image, ExifTags
 from datetime import datetime
+
+print(filename)
 
 image_exif = Image.open(filename)._getexif()
 if image_exif:
@@ -71,8 +73,7 @@ if image_exif:
 else:
     print("Unable to get date from exif for %s" % filename)
 
-sys.exit()
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from PIL import Image
@@ -82,7 +83,7 @@ img = Image.open(filename)  # 使用 PIL Image 開啟圖片
 exif = piexif.load(img.info["exif"])  # 使用 piexif 讀取圖片 Exif 資訊
 print(exif)
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from PIL import Image
@@ -118,7 +119,7 @@ for i in info:
 
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 from PIL import Image
 import piexif
@@ -133,13 +134,7 @@ exif["Exif"][36868] = b"2020:01:01 00:00:00"  # 加入檔案建立時間
 exif_new = piexif.dump(exif)  # 更新 Exif
 img.save("./tmp_iphone-edit.jpg", exif=exif_new)  # 另存新檔並加入 Exif
 
-
 print("------------------------------------------------------------")  # 60個
-
-# EXIF
-
-import sys
-
 print("------------------------------------------------------------")  # 60個
 
 filename1 = "D:/_git/vcs/_1.data/______test_files1/orient2_RightTop.jpg"
@@ -168,6 +163,7 @@ if exif_data is not None:
 	    print(key + ' = ' + str(value))
 
 """
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from PIL import Image, ExifTags
@@ -240,8 +236,9 @@ plt.imshow(image_rotated)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-# 修改 Exif 資料
+print('修改 Exif 資料')
 
 import piexif
 from PIL import Image
@@ -249,7 +246,7 @@ from PIL import Image
 # https://pypi.org/project/piexif/
 # https://bit.ly/2RwbD2y
 
-filename = "data/exif_gps.jpg"
+filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_gps/pic_gps1.jpg'
 
 im = Image.open(filename)
 exif_dict = piexif.load(im.info["exif"])
@@ -281,11 +278,11 @@ exif_new = piexif.dump(exif_dict)
 
 # print(exif_new)
 
-# filename2 = "data/exif_gps_modify.jpg"
-filename2 = "tmp_exif_gps_modify.jpg"
+filename2 = "tmp_pic_gps_modify.jpg"
 
 im.save(filename2, "JPEG", exif=exif_new)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 浅析python中获取图片中exif中的gps方法
@@ -324,6 +321,7 @@ if Gps_Info := Img_exif.get("GPSInfo"):  # 简单做个判定有无gps信息，�
     print(Gps_Info)
     print("-------------")
     print(Gps_Info.get(1))  # 1项对应是N还是S，也就是南北
+    """
     NS_point = Gps_Info.get(
         2
     )  # 2项对应是纬度信息，是多元元组，每组是度，分，秒，里面数值是当前值及精度，NS_point[0][0] / NS_point[0][1]这个就是度了，以此类推，所以后面两组分别除60，3600，换算为度，并相加他们就组成以小数表示的纬度
@@ -340,6 +338,7 @@ if Gps_Info := Img_exif.get("GPSInfo"):  # 简单做个判定有无gps信息，�
         + EW_point[2][0] / EW_point[2][1] / 3600
     )
     # 得出这些信息大家可具体灵活运用，比如有些在线地图可直接在地址处提交经纬度定位到GPS具体位置的
+    """
 else:
     print("no gps data")
 
@@ -352,3 +351,14 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+

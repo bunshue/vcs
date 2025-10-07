@@ -249,9 +249,7 @@ cursor.execute(sqlstr, x)
 
 # 未指明欄位, 則必須全寫
 sqlstr = "INSERT INTO table01 VALUES (?, ?, ?, ?, ?, ?)"
-dd = datetime.date.today()
-tt = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
-x = (3, "tiger", "", 33, dd, tt)  # tuple格式
+x = (3, "tiger", "", 33, None, None)  # tuple格式
 cursor.execute(sqlstr, x)
 
 print("------------------------------")  # 30個
@@ -263,15 +261,21 @@ sqlstr = "INSERT INTO table01 (英文名, 體重) VALUES (?, ?)"
 x = ("rabbit", 8)  # tuple格式
 cursor.execute(sqlstr, x)
 
-# INSERT INTO, 用 format
+# INSERT INTO, 用 format, 部分
 sqlstr = "INSERT INTO table01 (英文名, 體重) VALUES ('{}', '{}')".format("dragon", 38)
+cursor.execute(sqlstr)
+
+# INSERT INTO, 用 format, 全部, 不指名欄位要填全部
+sqlstr = "INSERT INTO table01 values({},'{}','{}','{}','{}','{}')".format(
+    6, "snake", "貪吃蛇", 16, None, None
+)
 cursor.execute(sqlstr)
 
 print("------------------------------")  # 30個
 
 print("INSERT INTO 新增資料, 使用字典")  # 其實也是字典轉元組
 
-d = {"英文名": "snake", "中文名": "貪吃蛇", "體重": 16}  # 字典
+d = {"英文名": "horse", "中文名": "草泥馬", "體重": 31}  # 字典
 sqlstr = "INSERT INTO table01 (英文名, 中文名, 體重) VALUES (?, ?, ?)"
 x = (d["英文名"], d["中文名"], d["體重"])  # tuple格式
 cursor.execute(sqlstr, x)
@@ -283,8 +287,8 @@ print("INSERT INTO 新增資料, 使用DATE/TIMESTAMP 時間戳")
 
 sqlstr = "INSERT INTO table01 (英文名, 體重, 登入日期, 登入時間) VALUES (?, ?, ?, ?)"
 
-nn = "horse"
-ww = 31
+nn = "goat"
+ww = 29
 dd = datetime.date.today()
 tt = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
 x = (nn, ww, dd, tt)  # tuple格式
@@ -292,8 +296,8 @@ cursor.execute(sqlstr, x)
 
 time.sleep(0.3456)  # 過了一段時間
 
-nn = "goat"
-ww = 29
+nn = "monkey"
+ww = 22
 dd = datetime.date.today()
 tt = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
 x = (nn, ww, dd, tt)  # tuple格式
@@ -307,7 +311,6 @@ sqlstr = "INSERT INTO table01 (英文名, 體重, 中文名) VALUES (?, ?, ?)"
 
 # 元組串列
 animals = [
-    ("monkey", 22, "山道猴"),
     ("chicken", 5, "肯德雞"),
     ("dog", 17, "貴賓狗"),
     ("pig", 42, "佩佩豬"),
@@ -1202,6 +1205,12 @@ print("------------------------------")  # 30個
 # CREATE TABLE 各種參數測試
 
 """結論
+SQLite 和 Python 資料型別
+None     <->     NULL
+int      <->     INTEGER/INT
+float    <->     REAL/FLOAT
+str      <->     TEXT/VARCHAR(n)
+
 REAL = FLOAT        小數
 INTEGER = INT       整數
 TEXT/VARCHAR(n)     字串
@@ -1210,23 +1219,11 @@ NULL
 """
 
 """
-CREATE TABLE IF NOT EXISTS table01(
-no        INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
-id_num    INTEGER PRIMARY KEY NOT NULL,
-"""
-
-"""
 # 讀取資料庫大全
 讀出一個完整的資料庫大全
 1. 一個資料庫內  多個表單 能找出所有表單
 2. 依序開啟每個表單 讀出所有資料
 搜尋排序.....
-"""
-sqlstr = """
-CREATE TABLE IF NOT EXISTS table01(
-filename VARCHAR(32),
-filesize VARCHAR(32)
-)
 """
 # conn.rollback()
 
@@ -1246,12 +1243,6 @@ except:
 "replace into table01(idx) VALUES (6)"
 
 "CREATE TABLE IF NOT EXISTS table01(x)"
-
-sqlstr = """
-CREATE TABLE IF NOT EXISTS 參賽者(
-編號 INTEGER UNIQUE NOT NULL,
-)
-"""
 
 print("建立暫存檔案的方法")
 
@@ -1285,28 +1276,13 @@ sqlstr = """
 CREATE TABLE IF NOT EXISTS table01(
 -- id SERIAL PRIMARY KEY,   無效
 id_num      INTEGER,
-name        VARCHAR(50)
-)
-"""
-
-sqlstr = """
-CREATE TABLE IF NOT EXISTS table01(
-id   INTEGER PRIMARY KEY,
-name VARCHAR UNIQUE
 )
 """
 
 print("------------------------------------------------------------")  # 60個
 
-sqlstr = """
-CREATE TABLE table01(
-aaaa VARCHAR(20),
-)
-"""
-
 cc = [x for x in range(6)]
 print(cc)
-
 
 print("讀取一筆資料")
 row = cursor.fetchone()  # 讀取一筆資料
