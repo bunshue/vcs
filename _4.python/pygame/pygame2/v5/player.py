@@ -72,7 +72,9 @@ class Player(Sprite):
         # 该变量控制用于控制动画刷新的速度
         self.draw_count = 0
         # 加载中文字体
-        self.font = pygame.font.Font('images/msyh.ttf', 20)
+        font_filename = 'D:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
+        # self.font = pygame.font.Font('images/msyh.ttf', 20)
+        self.font = pygame.font.Font(font_filename, 20)
 
     # 计算该角色当前方向：action成员变量为奇数代表向右
     def get_dir(self):

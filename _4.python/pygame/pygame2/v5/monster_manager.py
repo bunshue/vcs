@@ -1,4 +1,3 @@
-
 import pygame
 from random import randint
 from monster import *

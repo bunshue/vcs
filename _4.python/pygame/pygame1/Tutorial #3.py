@@ -1,9 +1,7 @@
 import pygame
 
 pygame.init()
-
-win = pygame.display.set_mode((500, 480))
-
+screen = pygame.display.set_mode((500, 480))
 pygame.display.set_caption("First Game")
 
 walkRight = [
@@ -47,19 +45,19 @@ walkCount = 0
 
 def redrawGameWindow():
     global walkCount
-    win.blit(bg, (0, 0))
+    screen.blit(bg, (0, 0))
 
     if walkCount + 1 >= 27:
         walkCount = 0
 
     if left:
-        win.blit(walkLeft[walkCount // 3], (x, y))
+        screen.blit(walkLeft[walkCount // 3], (x, y))
         walkCount += 1
     elif right:
-        win.blit(walkRight[walkCount // 3], (x, y))
+        screen.blit(walkRight[walkCount // 3], (x, y))
         walkCount += 1
     else:
-        win.blit(char, (x, y))
+        screen.blit(char, (x, y))
 
     pygame.display.update()
 

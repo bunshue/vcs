@@ -1,4 +1,3 @@
-
 import pygame
 import sys
 from view_manager import ViewManager
@@ -30,4 +29,5 @@ def run_game():
         # 播放背景音乐
         if pygame.mixer.music.get_busy() == False:
             pygame.mixer.music.play()
+
 run_game()
