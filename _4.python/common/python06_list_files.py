@@ -30,9 +30,9 @@ foldername = "D:/_git/vcs/_1.data/______test_files3/DrAP_test6"  # 較少
 
 print("------------------------------------------------------------")  # 60個
 
-print('取得檔案大小, 2個方法')
+print("取得檔案大小, 2個方法")
 
-filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 filesize = os.stat(filename).st_size
 print("容量 :", filesize, "位元組")
 filesize = os.path.getsize(filename)
@@ -41,6 +41,7 @@ print("容量 :", filesize, "位元組")
 print("------------------------------------------------------------")  # 60個
 
 print("檢查檔案副檔名")
+
 
 def is_image(filename):
     f = filename.lower()
@@ -54,9 +55,10 @@ def is_image(filename):
         or f.endswith(".svg")
     )
 
-filename1 = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
-filename2 = 'D:/_git/vcs/_1.data/______test_files1/__RW/_word/python_docx1.docx'
-filename3 = 'D:/_git/vcs/_1.data/______test_files2/output.avi'
+
+filename1 = "D:/_git/vcs/_4.python/_data/picture1.jpg"
+filename2 = "D:/_git/vcs/_1.data/______test_files1/__RW/_word/python_docx1.docx"
+filename3 = "D:/_git/vcs/_1.data/______test_files2/output.avi"
 
 for filename in sorted([filename1, filename2, filename3]):
     print(filename)
@@ -93,7 +95,7 @@ for item in os.walk(foldername):  # 多層
     print("檔案:", item[2])
     print("檔案個數:", len(item[2]))
     for fname in item[2]:
-        #ffname = item[0] + "/" + fname  # 取出檔名完整路徑 same
+        # ffname = item[0] + "/" + fname  # 取出檔名完整路徑 same
         ffname = os.path.join(item[0], fname)  # 取出檔名完整路徑
         print(ffname)
         total_files += 1
@@ -194,7 +196,7 @@ print("轉出一層 os.listdir 1")
 # foldername = "/"  # 根目錄
 foldername = "D:/_git/vcs/_1.data/______test_files3/DrAP_test6"
 
-#filenames = os.listdir(".")  # 搜尋目前工作目錄下的檔案
+# filenames = os.listdir(".")  # 搜尋目前工作目錄下的檔案
 
 filenames = os.listdir(foldername)  # 轉出一層, 指定目錄, 若無參數, 就是當前目錄
 print("轉出一層(資料夾+檔案)\n", filenames)
@@ -535,7 +537,7 @@ print("轉出一層 指名 檔案格式")
 foldername = "D:/_git/vcs/_1.data/______test_files3/DrAP_test6"
 
 # 撈出單層圖檔 jpg png
-filenames = glob.glob(foldername + '/*.jpg') + glob.glob(foldername + '/*.png')
+filenames = glob.glob(foldername + "/*.jpg") + glob.glob(foldername + "/*.png")
 for filename in filenames:
     print(filename)
 
@@ -2468,7 +2470,7 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
-print('test start')
+print("test start")
 
 TB = 1024 * 1024 * 1024 * 1024  # 定義TB的計算常量
 GB = 1024 * 1024 * 1024  # 定義GB的計算常量
@@ -2516,10 +2518,10 @@ def check_video_filename(filename):
 
 print("轉出多層 os.walk 1 AP專用")
 
-#foldername = "D:/內視鏡影片/_ims影片1"
-#foldername = "F:/_________AP_kilo_F/__ap0117"
+# foldername = "D:/內視鏡影片/_ims影片1"
+# foldername = "F:/_________AP_kilo_F/__ap0117"
 foldername = "D:/內視鏡影片/_ims影片1"
-#foldername = f"D:\vcs\astro\_DATA2\_________整理_mp3\_音樂"
+# foldername = f"D:\vcs\astro\_DATA2\_________整理_mp3\_音樂"
 foldername = "D:/vcs/astro/_DATA2/_________整理_mp3/_音樂"
 
 total_folders = 0
@@ -2537,7 +2539,7 @@ for item in os.walk(foldername):  # 多層
             total_files += 1
             filesize = os.stat(ffname).st_size  # 取出檔案大小
             total_size += filesize
-            #all_files.append(ffname + " " + ByteConversionTBGBMBKB(filesize))
+            # all_files.append(ffname + " " + ByteConversionTBGBMBKB(filesize))
             all_files.append(ffname)
             abspath = os.path.abspath(ffname)
             directory, short_filename = os.path.split(abspath)
@@ -2562,9 +2564,9 @@ for _ in all_files:
 
 string_video_filenames = ""
 for _ in all_files:
-    string_video_filenames += _+" "
+    string_video_filenames += _ + " "
 
-#print("總容量 : ", ByteConversionTBGBMBKB(total_size))
+# print("總容量 : ", ByteConversionTBGBMBKB(total_size))
 
 """
 #呼叫 potplayer 播放之
@@ -2802,8 +2804,6 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個

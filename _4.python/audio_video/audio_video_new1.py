@@ -8,6 +8,68 @@ import time
 import random
 
 print("------------------------------------------------------------")  # 60個
+# gtts ST
+# gTTS：文字轉語音
+# pip install gTTS
+# zh-tw : 正中   zh-cn : 簡中  en : 英文  ja : 日文
+print("------------------------------------------------------------")  # 60個
+
+
+def text2mp3(filename, text, lang):
+    from gtts import gTTS
+
+    tts = gTTS(text=text, lang=lang)
+    tts.save(filename)
+
+
+# 播放mp3
+def play_audio_file(filename):
+    from pygame import mixer
+
+    mixer.init()
+    mixer.music.load(filename)
+    mixer.music.play()
+    while mixer.music.get_busy():
+        continue
+
+
+import gtts
+
+print("目前支援的語音種類 :")
+print(gtts.lang.tts_langs())
+
+filename = "tmp_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mp3"
+text = "黃河遠上白雲間，一片孤城萬仞山。羌笛何須怨楊柳？春風不度玉門關。"
+text = "LANDrop 輕鬆實現跨系統無線傳輸資料、照片的免費工具"
+lang = "zh-tw"
+text2mp3(filename, text, lang)
+play_audio_file(filename)
+
+time.sleep(1)  # 1秒
+
+filename = "tmp_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mp3"
+text = "Welcome to the United States"
+lang = "en"
+text2mp3(filename, text, lang)
+play_audio_file(filename)
+
+time.sleep(1)  # 1秒
+
+filename = "tmp_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mp3"
+text = "ありがとう"
+lang = "ja"
+text2mp3(filename, text, lang)
+play_audio_file(filename)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+# gtts SP
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from pydub import AudioSegment
@@ -79,8 +141,7 @@ with sr.Microphone() as source:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-#很多mp3不能播放
+# 很多mp3不能播放
 
 # fail
 filename = "D:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
@@ -88,14 +149,15 @@ filename = "D:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.0
 # ok
 filename = "D:/_git/vcs/_1.data/______test_files1/_mp3/aaaa.mp3"
 
+filename = "harumi99.wav"
+
 import playsound
-playsound.playsound(filename, block=True)
 
 filename = "D:/_git/vcs/_1.data/______test_files1/_wav/tone.wav"
-import playsound
 playsound.playsound(filename, block=True)
 
-"""
+playsound.playsound(filename)
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -210,7 +272,7 @@ stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
 stream.start_stream()
 print("* recording")
 while stream.is_active():
-    time.sleep(1)
+    time.sleep(1)  # 1秒
     time_count += 1
 
 stream.stop_stream()
@@ -258,7 +320,7 @@ from time import sleep
 def emptydir(dirname):  # 清空資料夾
     if os.path.isdir(dirname):  # 資料夾存在就刪除
         shutil.rmtree(dirname)
-        sleep(2)  # 需延遲,否則會出錯
+        sleep(2)  # 2秒  # 需延遲,否則會出錯
     os.mkdir(dirname)  # 建立資料夾
 
 
@@ -339,144 +401,12 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-"""
-zh-tw : 正中
-zh-cn : 簡中
-en : 英文
-ja : 日文
-"""
-print("------------------------------------------------------------")  # 60個
-
-from pygame import mixer  # 匯入 mixer 物件
-
-from gtts import gTTS
-
-tts = gTTS(text="LANDrop 輕鬆實現跨系統無線傳輸資料、照片的免費工具", lang="zh-tw")
-tts.save("tmp_aaaa.mp3")
-
-# 播放mp3
-mixer.init()  # 初始化
-mixer.music.load("tmp_aaaa.mp3")  # 讀取聲音檔
-mixer.music.play()  # 播放 聲音檔
-
-from pygame import mixer
-from gtts import gTTS
-
-mixer.init()  # 初始化
-if not os.path.isfile("tmp.mp3"):  # 不重要的聲音檔產生器
-    tts = gTTS(text="不重要的語音檔", lang="zh-tw")
-    tts.save("tmp.mp3")
-    print("已產生不重要的語音檔 tmp.mp3")
-
-
-# -----------------#
-def bot_speak(text, lang):  # 建立自訂函式
-    try:
-        mixer.music.load("tmp.mp3")  # 讀取不重要的聲音檔
-        tts = gTTS(text=text, lang=lang)
-        tts.save("speak.mp3")
-        mixer.music.load("speak.mp3")
-        mixer.music.play()  # 播放重要的聲音檔
-        while mixer.music.get_busy():
-            continue
-    except:
-        print("播放音效失敗")
-
-
-# -----------------#
-bot_speak("我是萱萱", "zh-tw")  # 說出我是萱萱
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-gTTS：文字轉語音
-pip install gTTS
-"""
-
-import gtts
-
-print("目前支援的語音種類 :")
-print(gtts.lang.tts_langs())
-
-print("gTTS可以透過線上翻譯，將文字轉換為語音，並將語音存檔")
-print("將文字分解為多個段落，分別轉換為語音")
-
-txt1 = "王之渙 涼州詞"
-txt2 = "黃河遠上白雲間，一片孤城萬仞山。羌笛何須怨楊柳？春風不度玉門關。"
-
-filename = "tmp_gtts1.mp3"
-tts = gtts.gTTS(text=txt2, lang="zh-tw")
-tts.save(filename)
-print("存檔完成, 檔名 :", filename)
-
-filename = "tmp_gtts2.mp3"
-f = open(filename, "wb")
-
-tts1 = gtts.gTTS(text=txt1, lang="zh-tw")
-tts1.write_to_fp(f)
-
-tts2 = gtts.gTTS(text=txt2, lang="zh-tw")
-tts2.write_to_fp(f)
-
-print("存檔完成, 檔名 :", filename)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-mp3_filename = "tmp_mp3_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mp3"
-
-import gtts
-
-text = "Welcome to the United States and have a nice day."
-tts = gtts.gTTS(text=text, lang="en")
-tts.save(mp3_filename)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-mp3_filename = "tmp_mp3_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mp3"
-
-import gtts
-
-text = "黃河遠上白雲間，一片孤城萬仞山。羌笛何須怨楊柳？春風不度玉門關。"
-
-tts = gtts.gTTS(text=text, lang="zh-tw")
-tts.save(mp3_filename)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# http://yhhuang1966.blogspot.com/2017/08/google-gtts-api.html
-# 利用 Google gTTS 文字轉語音 API 讓電腦說話
-
-from gtts import gTTS
-from pygame import mixer
-
-
-def speak(sentence, lang, loops=1):
-    filename = "tmp_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mp3"
-    tts = gTTS(text=sentence, lang=lang)
-    print(filename)
-    tts.save(filename)
-    mixer.init()
-    mixer.music.load(filename)
-    mixer.music.play()
-
-
-speak("ありがとう", "ja")
-time.sleep(5)
-speak("本软件验证和确认报告包括以下信息", "zh-tw")
-time.sleep(5)
-speak("Picture Archiving & Communication System", "en")
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
 SpeechRecognition：語音轉文字(聲音檔)
 pip install SpeechRecognition
-
 """
 
 print("語音轉文字")
@@ -495,7 +425,6 @@ except:
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 """
 #SpeechRecognition：語音轉文字(麥克風)
 !pip install pydub
@@ -503,60 +432,13 @@ print("------------------------------------------------------------")  # 60個
 """
 import speech_recognition
 from pydub import AudioSegment
-from IPython.display import display  # 用IPython
-from IPython.display import Javascript  # 用IPython
 
 # from google.colab.output import eval_js
 from base64 import b64decode
 
 
 def record_audio(filename):
-    js = Javascript(
-        """
-    async function recordAudio() {
-      const div = document.createElement("div");
-      const capture = document.createElement("button");
-      capture.textContent = "開始錄音";
-      capture.style.background = "orange";
-      capture.style.color = "white";
-      div.appendChild(capture);
-      const stopCapture = document.createElement("button");
-      stopCapture.textContent = "停止錄音";
-      stopCapture.style.background = "red";
-      stopCapture.style.color = "white";
-      const audio = document.createElement("audio");
-      const recordingVid = document.createElement("audio");
-      audio.style.display = "block";
-      const stream = await navigator.mediaDevices.getUserMedia({audio:true});
-     
-      let recorder = new MediaRecorder(stream);
-      document.body.appendChild(div);
-      div.appendChild(audio);
-      audio.srcObject = stream;
-      audio.muted = true;
-      await audio.play();
-      google.colab.output.setIframeHeight(document.documentElement.scrollHeight, true);
-      await new Promise((resolve) => {capture.onclick = resolve; });
-      recorder.start();
-      capture.replaceWith(stopCapture);
-      await new Promise((resolve) => stopCapture.onclick = resolve);
-      recorder.stop();
-      let recData = await new Promise((resolve) => recorder.ondataavailable = resolve);
-      let arrBuff = await recData.data.arrayBuffer();
-      stream.getAudioTracks()[0].stop();
-      div.remove();
- 
-      let binaryString = "";
-      let bytes = new Uint8Array(arrBuff);
-      bytes.forEach((byte) => {
-        binaryString += String.fromCharCode(byte);
-      })
-    return btoa(binaryString);
-    }
-"""
-    )
     try:
-        display(js)
         data = eval_js("recordAudio({})")
         binary = b64decode(data)
         with open(filename, "wb") as audio_file:
@@ -603,70 +485,70 @@ print(translator.translate("今日の天気は良いです"))
 lang = translator.detect("今日の天気は良いです")
 print(lang)
 """
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("newspaper3k a")
 """
 應用：AI智慧讀報機
 !pip install newspaper3k
-!pip install gTTS
 !pip install google_trans_new
 """
 
-""" fail
+from newspaper import Article
+
 import newspaper
 from newspaper import Article
-from google_trans_new import google_translator
-import gtts
-import IPython.display as display
+
+# from google_trans_new import google_translator
 
 paper = newspaper.build("http://cnn.com", language="en")
 # paper = newspaper.build("http://www.cnbc.com", language="en")
 # paper = newspaper.build("http://www.bbc.co.uk", language="en")
 # paper = newspaper.build("http://www.foxnews.com", language="en")
+
 urls = []
 for article in paper.articles:
     url = article.url
     if ".html" in url:
-        try:  #有時會產生無法擷取的錯誤,故使用try
-          article = Article(url)
-          article.download()
-          article.parse()
-          content = article.text
-          if len(content)>0:
-              urls.append(url)
-              if len(urls)>10:
-                break
-        except: pass
-if len(urls)>0:
-    r = random.randint(0,len(urls)-1)
+        try:  # 有時會產生無法擷取的錯誤,故使用try
+            article = Article(url)
+            article.download()
+            article.parse()
+            content = article.text
+            if len(content) > 0:
+                urls.append(url)
+                if len(urls) > 10:
+                    break
+        except:
+            pass
+
+if len(urls) > 0:
+    r = random.randint(0, len(urls) - 1)
     url = urls[r]
     article = Article(url)
     article.download()
     article.parse()
     content = article.text
-    if len(content)>5000: content = content[:4999]
+    if len(content) > 5000:
+        content = content[:4999]
     translator = google_translator()
     ret = translator.translate(content, lang_tgt="zh-TW")
-    print(ret)
-else: 
-  ret = "無可用新聞！"
-tts = gtts.gTTS(text=ret, lang="zh-tw")
-tts.save("tmp_news.mp3")
-display.Audio("tmp_news.mp3", autoplay=True)
+    print("找到文字 :", ret)
+else:
+    ret = "無可用新聞！"
 
-"""
+print("找到文字 :", ret)
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 需安裝playsound
-# pip install playsound
+print("newspaper3k b")
 
 import newspaper
 from newspaper import Article
-from google_trans_new import google_translator
-import gtts
-from playsound import playsound
+
+# from google_trans_new import google_translator
 
 # paper = newspaper.build("http://cnn.com", language="en")
 paper = newspaper.build("http://www.cnbc.com", language="en")
@@ -681,28 +563,24 @@ for article in paper.articles:
     url = article.url
     if ".html" in url:
         print(url)
-        """
-        try:  #有時會產生無法擷取的錯誤,故使用try
+        try:  # 有時會產生無法擷取的錯誤,故使用try
             article = Article(url)
             article.download()
             article.parse()
             content = article.text
-            if len(content)>0:
-                if len(content)>5000: content = content[:4999]
+            if len(content) > 0:
+                if len(content) > 5000:
+                    content = content[:4999]
                 translator = google_translator()
                 ret = translator.translate(content, lang_tgt="zh-TW")
-                print(ret)
-                tts = gtts.gTTS(text=ret, lang="zh-tw")
-                tts.save("tmp_news.mp3")
-                playsound("tmp_news.mp3")
+                print("找到文字 :", ret)
         except:
             pass
-        """
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
+""" 無麥克風
 import speech_recognition
 
 r = speech_recognition.Recognizer()        
@@ -722,7 +600,6 @@ while True:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-""" 播放OK
 from pydub import AudioSegment
 from pydub.playback import play
 
@@ -730,7 +607,7 @@ print("播放wav檔")
 record1 = AudioSegment.from_wav("record1.wav")
 play(record1)
 
-print("------------------------------------------------------------")	#60個
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import moviepy.editor
@@ -741,15 +618,11 @@ print("播放影片檔")
 
 vsr = moviepy.editor.VideoFileClip(video_filename)
 vsr.preview()
-"""
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # pydub：聲音處理
-
-import IPython.display as display
-
-display.Audio("record1.wav", autoplay=True)
 
 #!pip install pydub
 #!pip install pydub==0.24.1
@@ -759,8 +632,6 @@ from pydub import AudioSegment
 record1 = AudioSegment.from_wav("record1.wav")
 
 print(record1.duration_seconds)
-
-display.Audio("record1.wav", autoplay=True)
 
 # record2 = record1[3000:9000]
 
@@ -772,15 +643,11 @@ print(record2.duration_seconds)
 
 record2.export("tmp_record2.wav", format="wav")
 
-display.Audio("tmp_record2.wav", autoplay=True)
-
 # record3 = record1 + 8
 
 record3 = record1 - 5
 
 record3.export("tmp_record3.wav", format="wav")
-
-display.Audio("tmp_record3.wav", autoplay=True)
 
 birth = AudioSegment.from_wav("birth.wav")
 
@@ -792,8 +659,6 @@ print("合併長度：" + str(record4.duration_seconds))
 
 record4.export("tmp_record4.wav", format="wav")
 
-display.Audio("tmp_record4.wav", autoplay=True)
-
 # record5 = record1.fade_in(5000)  #5秒淡入
 
 # record5 = record1.fade_out(3000)  #3秒淡出
@@ -802,13 +667,9 @@ record5 = record1.fade_in(5000).fade_out(3000)  # 5秒淡入,3秒淡出
 
 record5.export("tmp_record5.wav", format="wav")
 
-display.Audio("tmp_record5.wav", autoplay=True)
-
 record6 = record1.reverse()
 
 record6.export("tmp_record6.wav", format="wav")
-
-display.Audio("tmp_record6.wav", autoplay=True)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -817,26 +678,11 @@ print("------------------------------------------------------------")  # 60個
 
 video_filename = "D:/_git/vcs/_big_files/holo1.mp4"
 
-from IPython.display import HTML  # 用IPython
-
 from base64 import b64encode
 
 mp4 = open(video_filename, "rb").read()
 
 data_url = "data:video/mp4;base64," + b64encode(mp4).decode()
-
-HTML(
-    """
-
-<video width=400 controls>
-
-      <source src="%s" type="video/mp4">
-
-</video>
-
-"""
-    % data_url
-)
 
 from moviepy.editor import *
 
@@ -927,3 +773,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
+
+# 3030
+print("------------------------------")  # 30個

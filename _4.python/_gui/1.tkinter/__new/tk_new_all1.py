@@ -21,7 +21,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-tk.Label(window, text = "標準版顯示訊息").pack()
+tk.Label(window, text="標準版顯示訊息").pack()
 label5 = tk.Label(
     window,
     anchor=tk.E,  # 設定文字的位置
@@ -113,7 +113,7 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-tk.Label(window, text = "在視窗的右下方顯示兩個Label").pack()
+tk.Label(window, text="在視窗的右下方顯示兩個Label").pack()
 print("在視窗的右下方顯示兩個Label")
 oklabel = tk.Label(
     window,
@@ -159,12 +159,6 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
 
 
 window.mainloop()
@@ -357,10 +351,11 @@ label1.pack()
 
 # button被點擊之后會被執行
 def clickMe():  # 當acction被點擊時,該函數則生效"顯示當前選擇的數"
-    #print(combobox5.current())  # 輸出下所選的索引
-    #print(combobox5["values"][combobox5.current()])  # 輸出下所選的索引
+    # print(combobox5.current())  # 輸出下所選的索引
+    # print(combobox5["values"][combobox5.current()])  # 輸出下所選的索引
     combobox5_value = combobox5["values"][combobox5.current()]
     label1.config(text=str(combobox5_value))
+
 
 tk.Button(window, text="單擊我", command=clickMe).pack()
 
@@ -387,22 +382,21 @@ tk.Button(window, command=lambda *args: showinfo(message="aaaaaaa"), text="獲�
 
 def display():
     number = int(order.get())
-    print('取得 order = ', number)
-                
-frame2 = tk.Frame(window, bg = 'pink') # Create and add a frame to window
+    print("取得 order = ", number)
+
+
+frame2 = tk.Frame(window, bg="pink")  # Create and add a frame to window
 frame2.pack()
 
-tk.Label(frame2, text = "Enter an order: ").pack(side = tk.LEFT)
+tk.Label(frame2, text="Enter an order: ").pack(side=tk.LEFT)
 order = tk.StringVar()
-entry = tk.Entry(frame2, textvariable = order, justify = tk.RIGHT).pack(side = tk.LEFT)
-tk.Button(frame2, text = 'Do something', command = display).pack(side = tk.LEFT)
+entry = tk.Entry(frame2, textvariable=order, justify=tk.RIGHT).pack(side=tk.LEFT)
+tk.Button(frame2, text="Do something", command=display).pack(side=tk.LEFT)
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
-
-
-
-
 
 
 def changeString():
@@ -411,10 +405,11 @@ def changeString():
     entry1.delete(0, tk.END)
     entry1.insert(0, stringToCopy)
 
+
 entry1 = tk.Entry(window)
 entry1.pack()
 
-button0 = tk.Button(window, text = 'Change111', command = changeString)
+button0 = tk.Button(window, text="Change111", command=changeString)
 button0.pack()
 
 
@@ -427,31 +422,29 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("Label 1")
 
-canvas1 = tk.Canvas(window, width=500, height=150, bg='pink')
+canvas1 = tk.Canvas(window, width=500, height=150, bg="pink")
 canvas1.pack()
 
-canvas1.create_window(500, 100, window = ttk.Button(window, text= 'this is text in a canvas'))
+canvas1.create_window(
+    500, 100, window=ttk.Button(window, text="this is text in a canvas")
+)
 
-label1 = tk.Label(window, text = "Blue", bg = "blue").pack()
-canvas1.create_window(500, 100, anchor="nw", window = label1)
-
+label1 = tk.Label(window, text="Blue", bg="blue").pack()
+canvas1.create_window(500, 100, anchor="nw", window=label1)
 
 
 window.mainloop()
 
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 def printInfo():  # 列印輸入資訊
     print("Account: %s\nPassword: %s" % (entry1.get(), entry2.get()))
-    print('清除 entry1 entry2 的資料')
+    print("清除 entry1 entry2 的資料")
     entry1.delete(0, tk.END)  # 刪除account文字方塊的帳號內容
     entry2.delete(0, tk.END)  # 刪除pwd文字方塊的密碼內容
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -474,7 +467,9 @@ entry1.grid(row=1, column=1)  # 定位文字方塊account
 entry2.grid(row=2, column=1, pady=10)  # 定位文字方塊pwd
 
 # 建立Login 按鈕
-tk.Button(window, text="Login", command=printInfo).grid(row=3, column=0, sticky=tk.W, pady=5)
+tk.Button(window, text="Login", command=printInfo).grid(
+    row=3, column=0, sticky=tk.W, pady=5
+)
 
 window.mainloop()
 
@@ -498,7 +493,9 @@ entry1.grid(row=1, column=1)  # 定位文字方塊account
 entry2.grid(row=2, column=1, pady=10)  # 定位文字方塊pwd
 
 # 建立Login 按鈕
-tk.Button(window, text="Login", command=printInfo).grid(row=3, column=0, sticky=tk.W, pady=5)
+tk.Button(window, text="Login", command=printInfo).grid(
+    row=3, column=0, sticky=tk.W, pady=5
+)
 
 window.mainloop()
 
@@ -524,12 +521,13 @@ entry2 = tk.Entry(labelframe1, show="*")  # 文字方塊pwd
 entry2.grid(row=1, column=1, pady=10)  # 定位文字方塊pwd
 
 # 建立Login 按鈕
-tk.Button(labelframe1, text="Login", command=printInfo).grid(row=2, column=0, sticky=tk.W, pady=5)
+tk.Button(labelframe1, text="Login", command=printInfo).grid(
+    row=2, column=0, sticky=tk.W, pady=5
+)
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 window = tk.Tk()
@@ -610,6 +608,7 @@ class ChangeLabelDemo:
 
     def processButton(self):
         self.lbl["text"] = self.msg.get()  # New text for the label
+
 
 ChangeLabelDemo()  # Create GUI
 
@@ -723,8 +722,8 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-print('有用到 pickle')
-print('grid 範例')
+print("有用到 pickle")
+print("grid 範例")
 
 import pickle
 import os.path
@@ -922,7 +921,7 @@ window.title("這是主視窗")
 frame1 = tk.Frame(window)
 frame1.pack()
 
-#Entry 之 Text 之 對齊
+# Entry 之 Text 之 對齊
 tk.Entry(frame1, width=5, justify=tk.RIGHT).pack(side=tk.LEFT)
 tk.Entry(frame1, width=5, justify=tk.RIGHT).pack(side=tk.LEFT)
 tk.Entry(frame1, width=5, justify=tk.RIGHT).pack(side=tk.LEFT)
@@ -939,16 +938,10 @@ tk.Radiobutton(window, text="Red").pack(side=tk.LEFT)
 tk.Radiobutton(window, text="Yellow").pack(side=tk.LEFT)
 
 
-
-
-
-
-
 window.mainloop()
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1166,5 +1159,3 @@ tk.Label(text = '測試測試測試').pack(anchor=tk.W)
 # window.rowconfigure(1, weight = 1)
 
 """
-
-

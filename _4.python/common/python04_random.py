@@ -31,7 +31,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 print(
@@ -855,7 +855,7 @@ print(
     "--- random.sample SP ---------------------------------------------------------"
 )  # 60個
 
-
+'''
 print(
     "--- random.shuffle(list) ST ---------------------------------------------------------"
 )  # 60個
@@ -1021,8 +1021,10 @@ print("列印解碼字典\n", decry_dict)  # 列印解碼字典
 
 msg = "If the implementation is easy to explain, it may be a good idea."
 ciphertext = encrypt(msg, encry_dict)
+
 print("原始字串 ", msg)
 print("加密字串 ", ciphertext)
+
 decryMsg = decrypt(ciphertext, decry_dict)
 print("解密字串 ", decryMsg)
 
@@ -1032,6 +1034,9 @@ print("------------------------------------------------------------")  # 60個
 print(
     "--- random.shuffle(list) SP ---------------------------------------------------------"
 )  # 60個
+
+
+sys.exit()
 
 
 print(
