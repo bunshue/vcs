@@ -524,12 +524,12 @@ print("------------------------------------------------------------")  # 60個
 
 # Correlation matrix
 
-# 使用mtcars数据集，通过一些数字变量提供几辆汽车的性能参数。 
+# 使用mtcars数据集，通过一些数字变量提供几辆汽车的性能参数。
 url = "data/mtcars.csv"
 
 df = pd.read_csv(url)
 
-df = df.set_index('model')
+df = df.set_index("model")
 
 # 横轴为汽车性能参数，纵轴为汽车型号
 cc = df.head()
@@ -567,9 +567,7 @@ d = 2 * (1 - np.abs(corr))
 
 from sklearn.cluster import AgglomerativeClustering
 
-clustering = AgglomerativeClustering(
-    n_clusters=3, linkage="single"
-).fit(d)
+clustering = AgglomerativeClustering(n_clusters=3, linkage="single").fit(d)
 
 lab = 0
 

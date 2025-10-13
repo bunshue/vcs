@@ -1,7 +1,7 @@
-"""
-共用函數
+# Machine Learning 共同
 
-"""
+# from common1 import *
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -38,10 +38,10 @@ from sklearn.metrics import mean_absolute_error  # 平均絕對誤差 Mean Absol
 from sklearn.metrics import r2_score  # R-Squared擬合度
 from sklearn.metrics import accuracy_score  # 計算分類模型的準確率
 
-
 def show():
-    # plt.show()
-    pass
+    # return
+    plt.tight_layout()  # 緊密排列，並填滿原圖大小
+    plt.show()
 
 
 print("------------------------------------------------------------")  # 60個
@@ -92,7 +92,6 @@ def print_y_data(y):
     print()
 
 
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -120,13 +119,10 @@ print("計算分類模型的準確率 accuracy_score :")
 print(cc)
 
 print("------------------------------------------------------------")  # 60個
-"""
-"""
-sklearn.metrics中的评估方法介绍
-（accuracy_score, recall_score, roc_curve, roc_auc_score, confusion_matrix）
-"""
 
-'''
+# sklearn.metrics中的评估方法介绍
+# （accuracy_score, recall_score, roc_curve, roc_auc_score, confusion_matrix）
+
 from sklearn.metrics import accuracy_score
 
 y_pred = [0, 2, 1, 3]
@@ -155,8 +151,14 @@ cc = recall_score(y_true, y_pred, average=None)
 print(cc)
 
 """
-ROC曲线指受试者工作特征曲线/接收器操作特性(receiver operating characteristic，ROC)曲线,是反映灵敏性和特效性连续变量的综合指标,是用构图法揭示敏感性和特异性的相互关系，它通过将连续变量设定出多个不同的临界值，从而计算出一系列敏感性和特异性。ROC曲线是根据一系列不同的二分类方式（分界值或决定阈），以真正例率（也就是灵敏度）（True Positive Rate,TPR）为纵坐标，假正例率（1-特效性）（False Positive Rate,FPR）为横坐标绘制的曲线。
-ROC观察模型正确地识别正例的比例与模型错误地把负例数据识别成正例的比例之间的权衡。TPR的增加以FPR的增加为代价。ROC曲线下的面积是模型准确率的度量，AUC（Area under roccurve）。
+ROC曲线指受试者工作特征曲线/接收器操作特性(receiver operating characteristic，ROC)曲线,
+是反映灵敏性和特效性连续变量的综合指标,是用构图法揭示敏感性和特异性的相互关系，
+它通过将连续变量设定出多个不同的临界值，从而计算出一系列敏感性和特异性。
+ROC曲线是根据一系列不同的二分类方式（分界值或决定阈），
+以真正例率（也就是灵敏度）（True Positive Rate,TPR）为纵坐标，
+假正例率（1-特效性）（False Positive Rate,FPR）为横坐标绘制的曲线。
+ROC观察模型正确地识别正例的比例与模型错误地把负例数据识别成正例的比例之间的权衡。
+TPR的增加以FPR的增加为代价。ROC曲线下的面积是模型准确率的度量，AUC（Area under roccurve）。
 """
 
 from sklearn import metrics
@@ -192,4 +194,8 @@ y_pred = ["ant", "ant", "cat", "cat", "ant", "cat"]
 cc = confusion_matrix(y_true, y_pred, labels=["ant", "bird", "cat"])
 print(cc)
 
-'''
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+

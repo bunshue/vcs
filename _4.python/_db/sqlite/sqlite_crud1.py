@@ -20,7 +20,7 @@ sqlite基本範例 一個 基本款
 第 8筆 :  8	goat	喜羊羊	29
 第 9筆 :  9	monkey	山道猴	22
 第10筆 : 10	chicken	肯德雞	5
-第11筆 : 11	dog	貴賓狗	17
+第11筆 : 11	dog	布丁狗	17
 第12筆 : 12	pig	佩佩豬	42
 
 # sqlite基本範例 其他
@@ -312,7 +312,7 @@ sqlstr = "INSERT INTO table01 (英文名, 體重, 中文名) VALUES (?, ?, ?)"
 # 元組串列
 animals = [
     ("chicken", 5, "肯德雞"),
-    ("dog", 17, "貴賓狗"),
+    ("dog", 17, "布丁狗"),
     ("pig", 42, "佩佩豬"),
 ]
 cursor.executemany(sqlstr, animals)  # 一次執行多個指令
@@ -372,7 +372,10 @@ print("------------------------------------------------------------")  # 60個
 print("SELECT 取得資料 大全")
 print("------------------------------------------------------------")  # 60個
 
+# 查詢表單中的所有資料
 # SELECT * FROM table01           : 取得所有資料
+
+# 按指定條件查詢表單中的資料
 # SELECT * FROM table01 WHERE 條件: 取得所有資料 + 條件, WHERE目標條件式
 
 db_filename = db_filename_animals
@@ -528,6 +531,14 @@ show_result()
 
 print("------------------------------")  # 30個
 
+sqlstr = (
+    "SELECT 中文名, 體重 FROM table01 WHERE 中文名='班尼牛' AND 體重>30"  # SELECT 中文名, 體重 : 取得二欄資料
+)
+cursor.execute(sqlstr)  # 取得二欄資料
+show_result()
+
+print("------------------------------")  # 30個
+
 print("英文名 有A AND 有I 的")
 cursor.execute("SELECT * FROM table01 WHERE 英文名 LIKE '%a%' AND 英文名 LIKE '%i%'")
 show_result()
@@ -608,6 +619,13 @@ show_result()
 
 print("------------------------------")  # 30個
 
+# 計算符合的個數 COUNT
+sqlstr = "SELECT COUNT(*) FROM table01 WHERE 體重>15"  # SELECT 中文名, 體重 : 取得二欄資料
+cursor.execute(sqlstr)  # 取得二欄資料
+show_result()
+
+print("------------------------------")  # 30個
+
 conn.close()  # 關閉資料庫連線
 
 print("------------------------------------------------------------")  # 60個
@@ -662,6 +680,10 @@ name = "sheep"
 sqlstr = "UPDATE table01 SET 英文名 = '{0}' WHERE idx = {1}".format(name, idx)
 cursor.execute(sqlstr)  # 修改8號的資料, 要先確保已經有8號的資料, 才可以修改
 
+# 設定整欄資料
+# sqlstr = "UPDATE table01 SET 體重=3" # 將所有體重設定為3
+# cursor.execute(sqlstr)
+
 conn.commit()  # 更新
 
 print("修改後的資料庫")
@@ -705,12 +727,12 @@ name = "monkey"
 sqlstr = "DELETE FROM table01 WHERE 英文名 = '{}'".format(name)
 cursor.execute(sqlstr)
 
-# 刪除 中文名 = "貴賓狗"
-name = "貴賓狗"
+# 刪除 中文名 = "布丁狗"
+name = "布丁狗"
 cursor.execute("DELETE FROM table01 WHERE 中文名 = ?", (name,))
 
-# 刪除 體重 = 42
-cursor.execute("DELETE FROM table01 WHERE 體重 = 42")
+# 刪除 體重<15
+cursor.execute("DELETE FROM table01 WHERE 體重<15")
 
 print("------------------------------")  # 30個
 

@@ -31,6 +31,7 @@ print("------------------------------------------------------------")  # 60個
 
 from opencv_common import *
 
+'''
 print("------------------------------------------------------------")  # 60個
 # C : copy ST
 print("------------------------------------------------------------")  # 60個
@@ -87,7 +88,7 @@ print("順時鐘 旋轉 30 度, 縮放0.7倍")
 M = cv2.getRotationMatrix2D(center, -30, 0.7)  # 建立 M 矩陣
 dst2 = cv2.warpAffine(image, M, dsize)  # 執行仿射
 
-plt.figure("旋轉圖片", figsize=(12, 8))
+plt.figure("旋轉圖片", figsize=(10, 8))
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
@@ -127,7 +128,7 @@ image0 = cv2.flip(image, 0)  # 上下翻轉/垂直翻轉
 print("上下顛倒 + 左右顛倒")
 image2 = cv2.flip(image, -1)  # 上下左右翻轉/水平垂直翻轉
 
-plt.figure("鏡射", figsize=(12, 8))
+plt.figure("鏡射", figsize=(10, 8))
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
@@ -177,7 +178,7 @@ print("縮放圖片 / 倍率縮放")
 
 image = cv2.imread(filename1)  # 彩色讀取
 
-plt.figure("縮放", figsize=(12, 8))
+plt.figure("縮放", figsize=(10, 8))
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.xlim(0, 500)  # x軸顯示邊界
@@ -311,6 +312,9 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+print('cv2.rotate()')
+
 """
 rotate 圖像旋轉
 cv2.ROTATE_90_CLOCKWISE：顺时针旋转 90 度
@@ -324,7 +328,7 @@ image1 = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
 image2 = cv2.rotate(image, cv2.ROTATE_180)  # 1
 image3 = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
 
-plt.figure("旋轉", figsize=(12, 8))
+plt.figure("旋轉", figsize=(10, 8))
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
@@ -351,7 +355,7 @@ image = cv2.imread(filename1)  # 彩色讀取
 output = cv2.transpose(image)  # 逆時針旋轉 90 度
 
 plt.imshow(cv2.cvtColor(output, cv2.COLOR_BGR2RGB))
-plt.title("transpose 逆時針旋轉 90 度")
+plt.title("transpose 左右相反+逆時針旋轉90度")
 
 show()
 
@@ -368,11 +372,11 @@ image = cv2.imread(filename1)  # 彩色讀取
 height, width = image.shape[0:2]  # 獲得影像大小
 dsize = (width, height)  # 建立未來影像大小
 
-xx = 30  # 平移 xx = 30
-yy = 80  # 平移 yy = 80
+dx = 30  # 平移 dx = 30
+dy = 80  # 平移 dy = 80
 
-# 建立 M 矩陣, 2x3 矩陣，x 軸平移 xx，y 軸平移 yy
-M = np.float32([[1, 0, xx], [0, 1, yy]])
+# 建立 M 矩陣, 2x3 矩陣，x 軸平移 dx，y 軸平移 dy
+M = np.float32([[1, 0, dx], [0, 1, dy]])
 dst = cv2.warpAffine(image, M, dsize)  # 執行仿射
 
 plt.figure("平移", figsize=(8, 6))
@@ -388,17 +392,26 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("cv2.warpAffine() 仿射1")
+# getAffineTransform() 圖像仿射變換
+# getAffineTransform() 方法，可以根據輸入影像的三個點，對應輸出影像的三個點，
+# 產生仿射矩陣，再透過 warpAffine() 產生仿射變換後的影像
 
 image = cv2.imread(filename1)  # 彩色讀取
 
-
-p1 = np.float32([[100, 100], [480, 0], [0, 360]])
-p2 = np.float32([[0, 0], [480, 0], [0, 360]])
+p1 = np.float32([[0, 0], [305, 0], [0, 400]])
+p2 = np.float32([[50, 50], [305, 0], [0, 400]])
 
 M = cv2.getAffineTransform(p1, p2)
-output = cv2.warpAffine(image, M, (480, 360))
+
+output = cv2.warpAffine(image, M, (305, 400))
+
+# 輔助線
+pts1 = np.array([[0, 0], [305, 0], [0, 400]], np.int32)
+pts2 = np.array([[50, 50], [305, 0], [0, 400]], np.int32)
+cv2.polylines(output, [pts1], True, GREEN, 8)  # 封閉式 空心多邊形
+cv2.polylines(output, [pts2], True, BLUE, 4)  # 封閉式 空心多邊形
 
 cv2.imshow("image", output)
 cv2.waitKey()
@@ -408,14 +421,24 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("cv2.warpAffine() 仿射2")
+# getPerspectiveTransform() 方法，可以根據輸入影像的四個點，對應輸出影像的四個點，
+# 產生透視矩陣，再透過 warpPerspective() 產生透視變換後的影像，
+# 使用 2x4 的 numpy 矩陣作為四個點的座標格式
 
 image = cv2.imread(filename1)  # 彩色讀取
 
-p1 = np.float32([[100, 100], [480, 0], [0, 360], [480, 360]])
-p2 = np.float32([[0, 0], [480, 0], [0, 360], [480, 360]])
+#                 左上   右上   左下   右下
+p1 = np.float32([[0, 0], [305, 0], [0, 400], [305, 400]])
+p2 = np.float32([[50, 50], [305, 0], [0, 400], [305, 400]])
 
 M = cv2.getPerspectiveTransform(p1, p2)
-output = cv2.warpPerspective(image, M, (480, 360))
+output = cv2.warpPerspective(image, M, (305, 400))
+
+# 輔助線
+pts1 = np.array([[0, 0], [305, 0], [305, 400], [0, 400]], np.int32)
+pts2 = np.array([[50, 50], [305, 0], [305, 400], [0, 400]], np.int32)
+cv2.polylines(output, [pts1], True, GREEN, 8)  # 封閉式 空心多邊形
+cv2.polylines(output, [pts2], True, BLUE, 4)  # 封閉式 空心多邊形
 
 cv2.imshow("image", output)
 cv2.waitKey()
@@ -423,45 +446,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-image = cv2.imread(filename1)  # 彩色讀取
-
-H, W, D = image.shape  # d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
-
-# 仿射变换矩阵，缩小两倍
-A1 = np.array([[0.5, 0, 0], [0, 0.5, 0]], np.float32)
-d1 = cv2.warpAffine(image, A1, (W, H), borderValue=125)
-
-# 先缩小两倍，再平移
-A2 = np.array([[0.5, 0, W / 4], [0, 0.5, H / 4]], np.float32)
-d2 = cv2.warpAffine(image, A2, (W, H), borderValue=125)
-
-# 在
-A4 = np.array([[math.cos(math.pi / 4), 0, 0], [math.sin(math.pi / 3), 1, 0]])
-d4 = cv2.warpAffine(image, A4, (2 * W, 2 * H), borderValue=125)
-
-plt.figure("仿射", figsize=(12, 8))
-plt.subplot(221)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(222)
-plt.imshow(cv2.cvtColor(d1, cv2.COLOR_BGR2RGB))
-plt.title("d1")
-
-plt.subplot(223)
-plt.imshow(cv2.cvtColor(d2, cv2.COLOR_BGR2RGB))
-plt.title("d2")
-
-plt.subplot(224)
-plt.imshow(cv2.cvtColor(d4, cv2.COLOR_BGR2RGB))
-plt.title("d4")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # 第3章：空間變換\3.2-投影變換\perspective.py
 
 image = cv2.imread(filename1)  # 彩色讀取
@@ -483,6 +467,152 @@ cv2.imshow("warpPerspective", r)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+image = cv2.imread(filename1)  # 彩色讀取
+
+height, width = image.shape[0:2]  # 獲得影像大小
+
+a1 = [0, 0]  # 原始影像的 A 左上
+b1 = [width, 0]  # 原始影像的 B 右上
+c1 = [0, height]  # 原始影像的 C 左下
+d1 = [width - 1, height - 1]  # 原始影像的 D 右下
+imagep = np.float32([a1, b1, c1, d1])
+
+dd1 = 60
+dd2 = 20
+a2 = [dd1, 0]  # dst的 A 左上
+b2 = [width - dd1, 0]  # dst的 B 右上
+c2 = [0 + dd2, height - dd2]  # dst的 C 左下
+d2 = [width - dd2, height - dd2]  # dst的 D 右下
+dstp = np.float32([a2, b2, c2, d2])
+
+M = cv2.getPerspectiveTransform(imagep, dstp)  # 建立 M 矩陣
+dsize = (width, height)
+dst = cv2.warpPerspective(image, M, dsize)  # 執行透視
+
+plt.figure("", figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("顯示透視影像")
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("opencv 10")
+filename = r"data/PerspectiveTransform/PerspectiveTransform.jpg"
+
+image = cv2.imread(filename)  # 彩色讀取
+
+H, W, D = image.shape  # d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
+
+pts1 = np.float32([[150, 50], [400, 50], [60, 450], [310, 450]])
+pts2 = np.float32([[50, 50], [H - 50, 50], [50, W - 50], [H - 50, W - 50]])
+
+pts1 = np.float32([[200, 0], [300, 0], [100, 600], [200, 600]])
+pts2 = np.float32([[100, 0], [200, 0], [100, 600], [200, 600]])
+
+pts1 = np.float32([[100, 0], [600, 0], [0, 600], [500, 600]])
+pts2 = np.float32([[0, 0], [500, 0], [0, 600], [500, 600]])
+
+M = cv2.getPerspectiveTransform(pts1, pts2)
+dst = cv2.warpPerspective(image, M, (W, H))
+
+plt.figure(figsize=(12, 8))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖是歪圖")
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+plt.title("把歪圖拉正")
+
+plt.suptitle("PerspectiveTransform")
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("opencv 99")
+
+# 對圖形進行透視變換
+src = np.array([[0, 0], [w - 1, 0], [w - 1, h - 1], [0, h - 1]], dtype=np.float32)
+dst = np.array([[300, 350], [800, 300], [900, 923], [161, 923]], dtype=np.float32)
+
+m = cv2.getPerspectiveTransform(src, dst)
+result = cv2.warpPerspective(image, m, (2 * w, 2 * h), borderValue=(255, 255, 255, 255))
+
+fig, ax = plt.subplots(figsize=(12, 8))
+fig.subplots_adjust(0, 0, 1, 1)
+ax.set_xlim(-5, w * 2 + 5)
+ax.set_ylim(h * 2 + 5, -5)
+ax.axis("off")
+ax.imshow(result[:, :, ::-1])
+ax.imshow(image[:, :, ::-1], alpha=0.4)
+p = np.vstack((src, src[:1]))
+ax.plot(p[:, 0], p[:, 1], "-o", alpha=0.5)
+
+from matplotlib.patches import FancyArrowPatch
+
+for p1, p2 in zip(src, dst):
+    arrow = FancyArrowPatch(
+        p1, p2, transform=ax.transData, color="gray", mutation_scale=10
+    )
+    ax.add_artist(arrow)
+
+show()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+image = cv2.imread(filename1)  # 彩色讀取
+
+H, W, D = image.shape  # d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
+
+# 仿射变换矩阵，缩小两倍
+A1 = np.array([[0.5, 0, 0], [0, 0.5, 0]], np.float32)
+d1 = cv2.warpAffine(image, A1, (W, H), borderValue=125)
+
+# 先缩小两倍，再平移
+A2 = np.array([[0.5, 0, W / 4], [0, 0.5, H / 4]], np.float32)
+d2 = cv2.warpAffine(image, A2, (W, H), borderValue=125)
+
+# 在
+A4 = np.array([[math.cos(math.pi / 4), 0, 0], [math.sin(math.pi / 3), 1, 0]])
+d4 = cv2.warpAffine(image, A4, (2 * W, 2 * H), borderValue=125)
+
+plt.figure("仿射", figsize=(10, 8))
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(d1, cv2.COLOR_BGR2RGB))
+plt.title("d1")
+
+plt.subplot(223)
+plt.imshow(cv2.cvtColor(d2, cv2.COLOR_BGR2RGB))
+plt.title("d2")
+
+plt.subplot(224)
+plt.imshow(cv2.cvtColor(d4, cv2.COLOR_BGR2RGB))
+plt.title("d4")
+
+show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -589,41 +719,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-image = cv2.imread(filename1)  # 彩色讀取
-
-height, width = image.shape[0:2]  # 獲得影像大小
-
-a1 = [0, 0]  # 原始影像的 A 左上
-b1 = [width, 0]  # 原始影像的 B 右上
-c1 = [0, height]  # 原始影像的 C 左下
-d1 = [width - 1, height - 1]  # 原始影像的 D 右下
-imagep = np.float32([a1, b1, c1, d1])
-
-dd1 = 60
-dd2 = 20
-a2 = [dd1, 0]  # dst的 A 左上
-b2 = [width - dd1, 0]  # dst的 B 右上
-c2 = [0 + dd2, height - dd2]  # dst的 C 左下
-d2 = [width - dd2, height - dd2]  # dst的 D 右下
-dstp = np.float32([a2, b2, c2, d2])
-
-M = cv2.getPerspectiveTransform(imagep, dstp)  # 建立 M 矩陣
-dsize = (width, height)
-dst = cv2.warpPerspective(image, M, dsize)  # 執行透視
-
-plt.figure("", figsize=(12, 8))
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.title("顯示透視影像")
-
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 # AffineTransform
@@ -680,42 +775,6 @@ show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("opencv 10")
-filename = r"data/PerspectiveTransform/PerspectiveTransform.jpg"
-
-image = cv2.imread(filename)  # 彩色讀取
-
-H, W, D = image.shape  # d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
-
-pts1 = np.float32([[150, 50], [400, 50], [60, 450], [310, 450]])
-pts2 = np.float32([[50, 50], [H - 50, 50], [50, W - 50], [H - 50, W - 50]])
-
-pts1 = np.float32([[200, 0], [300, 0], [100, 600], [200, 600]])
-pts2 = np.float32([[100, 0], [200, 0], [100, 600], [200, 600]])
-
-
-pts1 = np.float32([[100, 0], [600, 0], [0, 600], [500, 600]])
-pts2 = np.float32([[0, 0], [500, 0], [0, 600], [500, 600]])
-
-
-M = cv2.getPerspectiveTransform(pts1, pts2)
-dst = cv2.warpPerspective(image, M, (W, H))
-
-plt.figure(figsize=(12, 8))
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖是歪圖")
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-plt.title("把歪圖拉正")
-
-plt.suptitle("PerspectiveTransform")
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("opencv 98")
 
 # 圖形變換
@@ -754,39 +813,6 @@ show()
 
 
 print("------------------------------")  # 30個
-
-print("opencv 99")
-
-# 對圖形進行透視變換
-src = np.array([[0, 0], [w - 1, 0], [w - 1, h - 1], [0, h - 1]], dtype=np.float32)
-dst = np.array([[300, 350], [800, 300], [900, 923], [161, 923]], dtype=np.float32)
-
-m = cv2.getPerspectiveTransform(src, dst)
-result = cv2.warpPerspective(image, m, (2 * w, 2 * h), borderValue=(255, 255, 255, 255))
-
-fig, ax = plt.subplots(figsize=(12, 8))
-fig.subplots_adjust(0, 0, 1, 1)
-ax.set_xlim(-5, w * 2 + 5)
-ax.set_ylim(h * 2 + 5, -5)
-ax.axis("off")
-ax.imshow(result[:, :, ::-1])
-ax.imshow(image[:, :, ::-1], alpha=0.4)
-p = np.vstack((src, src[:1]))
-ax.plot(p[:, 0], p[:, 1], "-o", alpha=0.5)
-
-from matplotlib.patches import FancyArrowPatch
-
-for p1, p2 in zip(src, dst):
-    arrow = FancyArrowPatch(
-        p1, p2, transform=ax.transData, color="gray", mutation_scale=10
-    )
-    ax.add_artist(arrow)
-
-show()
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

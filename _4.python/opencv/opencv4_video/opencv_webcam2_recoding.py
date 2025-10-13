@@ -58,8 +58,8 @@ while cap.isOpened():
         now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
         x_st, y_st = 20, 40
         drawText(frame, x_st, y_st, now, scale=1.0, color=BLUE)  # 加入文字
-        out.write(frame)  # 寫入影片物件
-        cv2.imshow("frame", frame)  # 顯示攝影鏡頭的影像
+        out.write(frame)  # 影像寫入影片檔
+        cv2.imshow("WebCam1", frame)  # 顯示攝影鏡頭的影像
     k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
     if k == ESC:  # 按 ESC 鍵, 結束
         break
@@ -211,7 +211,7 @@ while True:
     x_st, y_st = 20, 40
     drawText(frame, x_st, y_st, now, scale=1.0, color=BLUE)  # 加入文字
 
-    cv2.imshow("WebCam2", frame)
+    cv2.imshow("WebCam3", frame)
     out.write(frame)  # 影像寫入影片檔
 
     record_time_elapsed = time.time() - record_time_st
@@ -293,7 +293,7 @@ while True:
     # print(cnt, end = " ")
     img_rgb = ImageGrab.grab()
     img_bgr = cv2.cvtColor(np.array(img_rgb), cv2.COLOR_RGB2BGR)  # 转为opencv的BGR格式
-    out.write(img_bgr)
+    out.write(img_bgr)  # 影像寫入影片檔
     cnt += 1
     print(cnt)
     if cnt > 60 * RECORD_TIME_MINUTE:
@@ -434,7 +434,7 @@ out = cv2.VideoWriter(record_filename, fourcc, fps, (width, height), isColor=Fal
 
 # 且
 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉灰階
-out.write(gray)  # 將圖像寫入影片
+out.write(gray)  # 影像寫入影片檔
 
 # 留下錄影部分 比較之
 
@@ -445,7 +445,7 @@ out = cv2.VideoWriter(record_filename, fourcc, fps, ImageGrab.grab().size)
 for _ in range(10):
     im = ImageGrab.grab()
     imm = cv2.cvtColor(np.array(im), cv2.COLOR_RGB2BGR)
-    out.write(imm)
+    out.write(imm)  # 影像寫入影片檔
 
 out.release()
 cv2.destroyAllWindows()
@@ -454,3 +454,41 @@ cv2.destroyAllWindows()
 ratio = cap.get(cv2.CAP_PROP_FRAME_WIDTH) / cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 WIDTH = 320
 HEIGHT = int(WIDTH / ratio)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+record_filename = "tmp3_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mp4"
+
+cap = cv2.VideoCapture(0)
+
+# 建立視訊編碼 fourcc
+fourcc = cv2.VideoWriter_fourcc(*"MJPG")  # 設定影片的格式為 MJPG
+
+width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))  # 取得影像寬度
+height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
+fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
+
+# 建立影像寫入器 out
+out = cv2.VideoWriter(record_filename, fourcc, fps, (width, height))
+
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    out.write(frame)  # 影像寫入影片檔
+    cv2.imshow("WebCam4", frame)
+    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
+    if k == ESC:  # 按 ESC 鍵, 結束
+        break
+
+cap.release()
+out.release()  # 釋放資源
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個

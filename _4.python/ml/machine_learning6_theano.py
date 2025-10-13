@@ -53,6 +53,7 @@ def show():
     # plt.show()
     pass
 
+
 from time import perf_counter
 
 print("------------------------------------------------------------")  # 60個
