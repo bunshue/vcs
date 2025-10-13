@@ -5,6 +5,12 @@ import datetime
 
 print("------------------------------------------------------------")  # 60個
 
+sec = 12345
+timestr = str(datetime.timedelta(seconds=sec))  # 轉換成時分秒格式
+print(timestr)
+
+print("------------------------------------------------------------")  # 60個
+
 # 時間格式化 strftime
 current_time = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
 print("現在時間 :", current_time)
@@ -1350,12 +1356,12 @@ d = datetime.datetime(2025, 9, 23, 12, 34, 56)
 print(d)
 
 # Localize the date for Chicago
-central = pytz.timezone('US/Central')
+central = pytz.timezone("US/Central")
 loc_d = central.localize(d)
 print(loc_d)
 
 # Convert to Bangalore time
-bang_d = loc_d.astimezone(pytz.timezone('Asia/Kolkata'))
+bang_d = loc_d.astimezone(pytz.timezone("Asia/Kolkata"))
 print(bang_d)
 
 # 夏令时
@@ -1378,7 +1384,7 @@ later_utc = utc_d + datetime.timedelta(minutes=30)
 print(later_utc.astimezone(central))
 
 # 根据ISO 3166国家代码查找时区名称
-print(pytz.country_timezones['IN'])
+print(pytz.country_timezones["IN"])
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1399,4 +1405,3 @@ print("------------------------------------------------------------")  # 60個
 
 # 3030
 print("------------------------------")  # 30個
-

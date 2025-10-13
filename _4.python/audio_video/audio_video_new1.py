@@ -11,7 +11,7 @@ print("------------------------------------------------------------")  # 60個
 # gtts ST
 # gTTS：文字轉語音
 # pip install gTTS
-# zh-tw : 正中   zh-cn : 簡中  en : 英文  ja : 日文
+# zh-tw:正中, zh-cn:簡中, en:英文, ja:日文
 print("------------------------------------------------------------")  # 60個
 
 
@@ -33,6 +33,7 @@ def play_audio_file(filename):
         continue
 
 
+'''
 import gtts
 
 print("目前支援的語音種類 :")
@@ -143,65 +144,20 @@ print("------------------------------------------------------------")  # 60個
 
 # 很多mp3不能播放
 
-# fail
-filename = "D:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
-
-# ok
 filename = "D:/_git/vcs/_1.data/______test_files1/_mp3/aaaa.mp3"
-
-filename = "harumi99.wav"
+filename = "D:/_git/vcs/_1.data/______test_files1/_wav/harumi99.wav"
+filename = "D:/_git/vcs/_1.data/______test_files1/_wav/tone.wav"
 
 import playsound
 
-filename = "D:/_git/vcs/_1.data/______test_files1/_wav/tone.wav"
+# 不能使用中文檔名
 playsound.playsound(filename, block=True)
 
 playsound.playsound(filename)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-from pathlib import Path
-from mutagen.mp3 import MP3
-import datetime
-
-infolder = "D:/_git/vcs/_1.data/______test_files1/_mp3"
-ext = "*.mp3"
-
-
-# 【函數: 取得MP3檔案的播放時間】
-def getplaytime(readfile):
-    try:
-        audio = MP3(readfile)  # 載入檔案
-        sec = audio.info.length  # 播放時間（秒）
-        timestr = str(datetime.timedelta(seconds=sec))  # 轉換成時分秒格式
-        return sec, readfile + " " + timestr
-    except:
-        return 0, readfile + "：程式執行失敗。"
-
-
-# 【函數：搜尋資料夾與子資料夾MP3檔案】
-def findfiles(infolder):
-    totalsec = 0
-    msg = ""
-    filelist = []
-    for p in Path(infolder).rglob(ext):  # 將這個資料夾以及子資料夾的所有檔案
-        filelist.append(str(p))  # 新增至列表
-    for filename in sorted(filelist):  # 再替每個檔案排序
-        val1, val2 = getplaytime(filename)
-        totalsec += val1
-        msg += val2 + "\n"
-    totaltimestr = str(datetime.timedelta(seconds=totalsec))
-    msg += "總播放時間 " + totaltimestr
-    return msg
-
-
-# 【執行】
-msg = findfiles(infolder)
-print(msg)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+'''
 
 """ TBD
 #声音录制
@@ -285,12 +241,11 @@ print("* recording done!")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-製作影片字幕
-聲音轉字幕
-"""
+""" 久
+# 製作影片字幕
+# 聲音轉字幕
 
-# 影片轉wav, 但是要跑很久
+# 影片轉wav, 要跑很久
 
 video_filename = "D:/_git/vcs/_4.python/opencv/data/_video/spiderman.mp4"
 
@@ -298,7 +253,7 @@ from moviepy.editor import *
 
 audio1 = AudioFileClip("老北京.mp4")
 audio1.write_audiofile("老北京22222.wav")
-
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -318,11 +273,14 @@ from time import sleep
 
 
 def emptydir(dirname):  # 清空資料夾
+    print("dirname :", dirname)
     if os.path.isdir(dirname):  # 資料夾存在就刪除
         shutil.rmtree(dirname)
         sleep(2)  # 2秒  # 需延遲,否則會出錯
     os.mkdir(dirname)  # 建立資料夾
 
+
+print("aaaaa")
 
 wave_filename = "老北京.wav"
 
@@ -331,6 +289,9 @@ delay = 1300  # 聲音延遟時間
 fname = "老北京"
 sound = AudioSegment.from_file(fname + ".wav", format="wav")
 start_end = detect_silence(sound, delay, sound.dBFS, 1)  # 偵測靜音
+
+print("偵測靜音, 個數 :", len(start_end))
+print("偵測靜音, 在 :", start_end)
 
 # 每個分割區間的結束位置
 mslist = []
@@ -341,6 +302,8 @@ for i in range(len(start_end)):
         data = start_end[i][1] - delay  # 結束位置提前1秒
     mslist.append(data)
 
+print("每個分割區間的結束位置 :", mslist)
+
 # 毫秒轉為xx:xx.xxx字串
 timelist = []
 for sss in mslist:
@@ -350,8 +313,10 @@ for sss in mslist:
     ts = "%02d:%02d:%02d.%03d" % (h, m, s, ms)
     timelist.append(ts)
 
+print("分割聲音檔")
 # 分割聲音檔
 emptydir("tmp_分割聲音檔")
+
 for i in range(len(timelist)):
     if i == 0:
         start = 0
@@ -396,6 +361,7 @@ file.close()
 
 print("OK")
 
+sys.exit()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -409,7 +375,7 @@ SpeechRecognition：語音轉文字(聲音檔)
 pip install SpeechRecognition
 """
 
-print("語音轉文字")
+print("語音轉文字 wave 轉 文字")
 
 import speech_recognition
 

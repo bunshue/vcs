@@ -510,12 +510,7 @@ isinf(x, y)	是否inf
 ord() 查詢某個字元的ASCII值
 chr() 將ASCII的值轉換成英文字母
 
-
-D:\_git\vcs\_4.python\__code\高效率Python自動化工作術\chap10
-
 PySimpleGUI	建立應用程式的函示庫
-mutagen	讀取與存寫語音檔的函示庫
-
 
 PySimpleGUI的零件一欄表
 Text		文字
@@ -548,8 +543,7 @@ Python字串 不允許變更內容
 
 使用豆瓣源 安裝moviepy	ok in kilo	2024/1/20 12:08上午
 
- pip install moviepy==1.0.3 -i https://pypi.doubanio.com/simple
-
+pip install moviepy==1.0.3 -i https://pypi.doubanio.com/simple
 安装成功.......
 
 

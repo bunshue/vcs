@@ -2,6 +2,7 @@
 # Python標籤編輯庫,mutagen
 
 Mutagen介绍
+mutagen	讀取與存寫語音檔的函示庫
 Mutagen是一个Python库,用于处理音频文件元数据。
 它可以读取并写入popular音频格式的元数据,比如MP3,Ogg Vorbis,FLAC,WAV等。
 """
@@ -12,6 +13,7 @@ import time
 import random
 import datetime
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 读取MP3文件的元数据:
@@ -72,19 +74,23 @@ f.write(pic.data)
 print("取得 mp3 的長度")
 filename = "D:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
 
-from mutagen.mp3 import MP3
+import mutagen.mp3
 
-audio = MP3(filename)  # 載入檔案
+audio = mutagen.mp3.MP3(filename)  # 載入檔案
 sec = audio.info.length  # 播放時間（秒）
+print("秒 :", sec)
 timestr = str(datetime.timedelta(seconds=sec))  # 轉換成時分秒格式
-print("播放時間=", timestr)
+print("時分秒 :", timestr)
 
-audio = MP3(filename)
+audio = mutagen.mp3.MP3(filename)
 length = audio.info.length
 print("duration sec: " + str(length))
 print("duration min: " + str(int(length / 60)) + ":" + str(int(length % 60)))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 
 

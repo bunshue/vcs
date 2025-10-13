@@ -10,7 +10,7 @@ from tkinter import ttk
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
-window.geometry("600x800")
+window.geometry("600x900")
 window.title("Radiobutton 1")
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
@@ -196,6 +196,60 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
+
+
+def choose():  # 選曲
+    global playsong
+    msg.set("選擇檔案：" + choice.get())
+    playsong = choice.get()
+
+
+def exitmp3():  # 結束
+    win.destroy()
+
+
+import tkinter as tk
+import glob
+
+labeltitle = tk.Label(window, text="選擇檔案", fg="red", font=("新細明體", 12))
+labeltitle.pack()
+
+frame1 = tk.Frame(window)
+frame1.pack()
+
+
+# 撈出單層mp3檔
+source_dir = "D:/_git/vcs/_4.python/opencv/data//_captcha/"
+mp3files = glob.glob(source_dir + "*.jpg")
+
+playsong = preplaysong = ""
+index = 0
+volume = 0.6
+choice = tk.StringVar()
+
+for mp3 in mp3files:  # 建立歌曲選項按鈕
+    rbtem = tk.Radiobutton(frame1, text=mp3, variable=choice, value=mp3, command=choose)
+    if index == 0:  # 選取第1個選項按鈕
+        rbtem.select()
+        playsong = preplaysong = mp3
+    rbtem.grid(row=index, column=0, sticky="w")
+    index += 1
+
+msg = tk.StringVar()
+msg.set("選擇檔案：")
+
+label = tk.Label(window, textvariable=msg, fg="blue", font=("新細明體", 10))
+label.pack()
+labelsep = tk.Label(window, text="\n")
+labelsep.pack()
+
+
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
 
 window.mainloop()
 
@@ -780,3 +834,8 @@ for col in range(3):
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
+
+"""
+win.protocol("WM_DELETE_WINDOW", exitmp3)
+win.mainloop()
+"""
