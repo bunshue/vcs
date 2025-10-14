@@ -5,38 +5,76 @@ import datetime
 
 print("------------------------------------------------------------")  # 60個
 
-sec = 12345
-timestr = str(datetime.timedelta(seconds=sec))  # 轉換成時分秒格式
-print(timestr)
-
-print("------------------------------------------------------------")  # 60個
-
 # 時間格式化 strftime
 current_time = datetime.datetime.now().strftime("%Y/%m/%d %a %H:%M:%S")
 print("現在時間 :", current_time)
+current_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+print("現在時間 :", current_time)
 
-print("現在時間")
-now = datetime.datetime.now()
-print(now)
-print(now.ctime())
-
-print("列出現在時間 : ", now)
-print("年 : ", now.year)
-print("月 : ", now.month)
-print("日 : ", now.day)
-print("時 : ", now.hour)
-print("分 : ", now.minute)
-print("秒 : ", now.second)
+current_time = datetime.datetime.now().strftime("%H:%M:%S")
+print("現在時間 :", current_time)
 
 print("格式化時間")
-print(now.strftime("%Y/%m/%d %H:%M:%S"))
-print(now.strftime("%y-%b-%d %H-%M-%S"))
-now = datetime.datetime.now().strftime("%H:%M:%S")
-print(now)
+now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+print("現在時間 :", now)
+now = datetime.datetime.now().strftime("%y-%b-%d %H-%M-%S")
+print("現在時間 :", now)
 
-print(
-    "---- strftime() 可以將時間格式化 --------------------------------------------------------"
-)  # 60個
+now = datetime.datetime.now().strftime("%H:%M:%S")
+print("現在時間 :", now)
+
+now = datetime.datetime.now()
+print("現在時間 :", now)
+
+now = datetime.datetime.now()
+print("現在時間 :", now)
+print("ctime時間 :", now.ctime())
+
+print("列出現在時間 : ", now)
+print("年/月/日/時/分/秒 : ", now.year, now.month, now.day, now.hour, now.minute, now.second)
+
+dt = datetime.datetime(2012, 12, 20, 12, 34, 56, 78987)
+print(dt)
+
+now = datetime.datetime.now()
+ContentDate = now.strftime("%Y%m%d")
+timeStr = now.strftime("%H%M%S.%f")  # long format with micro seconds
+ContentTime = timeStr
+
+print("ContentDate :", ContentDate)
+print("ContentTime :", ContentTime)
+
+print(datetime.date.min)
+print(datetime.date.max)
+print(datetime.date(2019, 5, 10).year)
+print(datetime.date(2019, 8, 24).month)
+print(datetime.date(2019, 8, 24).day)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+now = datetime.datetime.now()  # current date and time
+
+date_time = now.strftime("%Y年%m月%d日, %H:%M:%S")
+print("現在時間 :", date_time)
+
+dt = (datetime.datetime(2006, 3, 11, 9, 15),)
+print(dt)
+
+cc = time.strftime("%Y-%m-%d %H:%M")
+print(cc)
+
+cc = time.strftime("%Y-%m-%d %H:%M+%Z")
+print(cc)
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("strftime() 可以將時間格式化")
+print("------------------------------------------------------------")  # 60個
 
 now = datetime.datetime.now()
 print("現在的日期時間 :", now)
@@ -137,6 +175,7 @@ month = 12
 print("你要查詢的月份的最後一天是西元", check(year, month))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """
 timeStop = datetime.datetime(2023, 11, 18, 17, 50, 0)
@@ -144,6 +183,7 @@ while datetime.datetime.now() < timeStop:
     print("program is sleeping.", end="")
 print("Wake up")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 timeStop = datetime.datetime(2024, 1, 1, 8, 0, 0)
@@ -153,10 +193,12 @@ print("女朋友生日")
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 dateObj = datetime.datetime.strptime("2025/1/1", "%Y/%m/%d")
 print(dateObj)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 work = datetime.date(2021, 10, 9)
@@ -165,6 +207,7 @@ print(f"一週的第{work.weekday()}天")
 num = work.isoweekday()
 print("星期天" if num == 7 else "星期 " + str(num))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
@@ -176,6 +219,7 @@ def strTodatetime(datestr, format):
 print(strTodatetime("2014-3-1", "%Y-%m-%d"))
 print(strTodatetime("2019-4-15", "%Y-%m-%d") - strTodatetime("2006-03-11", "%Y-%m-%d"))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 某個日期區間，以1日為間隔值
@@ -198,7 +242,7 @@ for item in result:
 print("------------------------------------------------------------")  # 60個
 
 tody = datetime.date.today()  # 今天日期
-# yr, mt, dt = eval(input('請輸入出生的年、月、日->'))
+# yr, mt, dt = eval(input("請輸入出生的年、月、日->"))
 # 2006,3,11
 
 yr, mt, dt = 2006, 3, 11
@@ -228,13 +272,14 @@ print("------------------------------------------------------------")  # 60個
 
 """
 dt1 = datetime.datetime(2018, 9, 2)
-print('日期：', dt1 + (datetime.timedelta(days = 7)))
+print("日期：", dt1 + (datetime.timedelta(days = 7)))
 
 dt2 = datetime.datetime(2020, 1, 22)
 dt3 = datetime.timedelta(days = 106)
 dt = dt2 - dt3 # 將兩個日期相減
-print('日期二：', datetime.strftime('%Y-%m-%d'))
+print("日期二：", datetime.strftime("%Y-%m-%d"))
 """
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 建立儲存星期的list物件
@@ -267,8 +312,9 @@ dt = datetime.datetime(2017, 4, 11)
 print("2017/4/11 的上週二：", getWeeks("Tuesday", dt))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-# a = input('請輸入你的出生年月日 ( yyyy/mm/dd )：')
+# a = input("請輸入你的出生年月日 ( yyyy/mm/dd )：")
 a = "2006/03/11"
 now = datetime.datetime.now()
 
@@ -280,12 +326,13 @@ d = now.day - ad.day
 print(f"你的生日是：{y} 歲 {m} 個月又 {d} 天")  # 使用 python3 語法
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 today = datetime.date.today()
 print("今天的日期 :", today)
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 x = datetime.datetime(2020, 10, 22)
 print(x)
@@ -296,6 +343,7 @@ print(x)
 y = datetime.datetime(2020, 10, 22, 10, 30, 45)  # 設定日期與時間
 print(y)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # timedelta 物件
@@ -320,6 +368,7 @@ deltaTime = datetime.timedelta(days=3, hours=5, minutes=8, seconds=10)
 print(deltaTime.days, deltaTime.seconds, deltaTime.microseconds)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 now = datetime.datetime.now()
 print("現在時間是 : ", now)
@@ -327,6 +376,7 @@ print("現在時間是 : ", now)
 deltaTime = datetime.timedelta(days=100)
 print("100天後是  : ", now + deltaTime)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ fail
@@ -342,6 +392,7 @@ print(s2)
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 用字串來建立 datetime 物件
 
@@ -351,6 +402,7 @@ x = datetime.datetime.strptime(s, "%Y/%m/%d %H-%M-%S")
 print(x)
 print(type(x))
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
@@ -395,10 +447,7 @@ for day in range(1, days + 1):
         w = 0
 print()
 
-
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 print("現在的日期時間 :", datetime.datetime.today())
@@ -413,6 +462,7 @@ print(datetime.date.today())
 today = str(datetime.datetime.today().date())
 current = str(datetime.datetime.today())
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 now = datetime.datetime.now()
@@ -453,7 +503,9 @@ johnbirthday = datetime.datetime(1978, 4, 5, 12, 0)
 
 # print(relativedelta(NOW, johnbirthday))
 
-print("---- timediff --------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("timediff")
+print("------------------------------------------------------------")  # 60個
 
 # 執行時間：
 datetime_st = datetime.datetime.now()
@@ -492,6 +544,7 @@ print("現在時間", b)
 print("兩者時間差", b - a)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 datetime_st = datetime.datetime(2016, 1, 1)
 datetime_sp = datetime.datetime(2017, 1, 1)
@@ -509,6 +562,7 @@ today = datetime.datetime.today()
 birthday = datetime.datetime(2006, 3, 11, 9, 15, 0)
 print("相距天時分秒 :", today - birthday)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 today = datetime.date.today()
@@ -528,10 +582,8 @@ else:
     print("哇！再過 " + str(diff.days) + " 天就是你的生日了！")
 
 print("------------------------------------------------------------")  # 60個
-
-print(
-    "---- datetime.datetime.now() --------------------------------------------------------"
-)  # 60個
+print("datetime.datetime.now()")
+print("------------------------------------------------------------")  # 60個
 
 tt = datetime.datetime.strptime("2018-01-31", "%Y-%m-%d")
 print(tt)
@@ -593,7 +645,7 @@ old_date = datetime.datetime.now()  # 取得現在時間
 
 old_date = str(old_date)  # 先轉成字串
 
-# old_date = '2023/05/24 13:00:00' ex
+# old_date = "2023/05/24 13:00:00" ex
 
 print(old_date)
 
@@ -637,6 +689,7 @@ dt1 = datetime.datetime(2024, 4, 29, 12, 34, 56)
 dt2 = datetime.datetime(2006, 3, 11, 9, 15, 30)
 print(dt1 - dt2)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 而我們也可以算今天是今年的第幾天
@@ -686,10 +739,9 @@ print("相距日期 :", dt1 - dt0, "天")
 
 print("------------------------------------------------------------")  # 60個
 
-
-print(
-    "---- timedelta() --------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
+print("timedelta()")
+print("------------------------------------------------------------")  # 60個
 
 print("獲取昨天的日期")
 
@@ -719,6 +771,7 @@ print(dt3.ctime())
 print("time.ctime() : %s" % time.ctime())
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 path = "D:/_git/vcs/_4.python"
 t1 = datetime.datetime.fromtimestamp(os.stat(path).st_mtime, datetime.timezone.utc)
@@ -728,12 +781,14 @@ t2 = t1.astimezone().isoformat()
 print(t2)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 seconds = datetime.datetime(
     2004, 10, 26, 10, 33, 33, tzinfo=datetime.timezone(datetime.timedelta(0))
 ).timestamp()
 print(seconds)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("列印一段日期")
@@ -751,12 +806,14 @@ while date_start < date_end:
     date_start += datetime.timedelta(days=1)  # 日期变量自增
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """
-dt = datetime.datetime.strptime('ttttt', '%Y-%m-%dT%H:%M')  #讀取日期時間
-dt = dt.strftime('{d}%Y-%m-%d, {t}%H:%M').format(d='日期為：', t='時間為：')  #轉為字串
+dt = datetime.datetime.strptime("ttttt", "%Y-%m-%dT%H:%M")  #讀取日期時間
+dt = dt.strftime("{d}%Y-%m-%d, {t}%H:%M").format(d="日期為：", t="時間為：")  #轉為字串
 """
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
@@ -764,6 +821,7 @@ def format_time(field_timestamp: datetime) -> str:
     return field_timestamp.strftime("%Y-%m-%d %H:%M")
 
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Set up the constants:
@@ -847,15 +905,9 @@ calendarFilename = "tmp_calendar_{}_{}.txt".format(year, month)
 with open(calendarFilename, "w") as fileObj:
     fileObj.write(calText)
 
-# print('檔案 :', calendarFilename)
+# print("檔案 :", calendarFilename)
 
 print("------------------------------------------------------------")  # 60個
-
-while True:
-    now = datetime.datetime.now().strftime("%H:%M:%S")
-    print(f"\r{now}", end="")  # 前方加上 \r
-    time.sleep(1)
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -878,6 +930,7 @@ while True:
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 today = datetime.date.today()  # 使用 datetime.date 取得今天的日期
 age = input("輸入生日 ( YYYY/MM/DD )：")  # 讓使用者輸入生日，格式為 YYYY/MM/DD
@@ -898,13 +951,14 @@ if day < 0:  # 如果月份差的數字小於 0，表示生日還沒到
 
 print(f"{year} 歲 {month} 個月 {day} 天")  # 印出現在幾歲幾個月又幾天
 
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 date = "20210311"
 date = datetime.datetime.strptime(date, "%Y%m%d")
 print(date.weekday())
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 start_date_str = "20210125"
@@ -922,6 +976,7 @@ for daynumber in range(totaldays):
 print(dates)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 print("cnlunardate：農曆日期")
 
@@ -929,8 +984,8 @@ print("cnlunardate：農曆日期")
 from cnlunardate import cnlunardate
 from datetime import date
 
-year = 2023  # @param {type:'slider', min:1950, max:2020}
-month = 2  # @param {type:'slider', min:1, max:12}
+year = 2023  # @param {type:"slider", min:1950, max:2020}
+month = 2  # @param {type:"slider", min:1, max:12}
 try:
     cnlunardate(year, month, 1, True)
     print("農曆 {} 年 {} 月「是」閏月。".format(year, month))
@@ -951,6 +1006,7 @@ n1 = cnlunardate(2017, 6, 1, False).toordinal()
 n2 = cnlunardate(2015, 10, 12, False).toordinal()
 print(n1 - n2)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # Python日期時間處理
@@ -994,23 +1050,6 @@ print(str(dt))
 print(dt.strftime("%Y/%m/%d %H:%M:%S"))
 
 print("------------------------------------------------------------")  # 60個
-"""
-now = datetime.datetime.now().strftime('%H:%M:%S')
-print(now)    # 14:30:23
-
-print("------------------------------------------------------------")  # 60個
-
-while True:
-    now = datetime.datetime.now().strftime('%H:%M:%S')
-    print(f'\r{now}', end = '')     # 前方加上 \r
-    time.sleep(1)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-print("現在時間 :", now)
-
 print("------------------------------------------------------------")  # 60個
 
 # # Python的日期和时间处理
@@ -1082,40 +1121,15 @@ print(s_obj4)  # NAT-> Not a Time
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-d = datetime.datetime(2012, 12, 20, 12, 34, 56, 78987)
-print(d)
-
-dt = datetime.datetime.now()
-ContentDate = dt.strftime("%Y%m%d")
-timeStr = dt.strftime("%H%M%S.%f")  # long format with micro seconds
-ContentTime = timeStr
-
-print("ContentDate :", ContentDate)
-print("ContentTime :", ContentTime)
-
-print(datetime.date.min)
-print(datetime.date.max)
-print(datetime.date(2019, 5, 10).year)
-print(datetime.date(2019, 8, 24).month)
-print(datetime.date(2019, 8, 24).day)
-
-print("------------------------------------------------------------")  # 60個
-
-import time
 
 print(time.time())
 print(time.localtime())
@@ -1163,6 +1177,7 @@ print(datetime.time(12, 58, 41))
 print(datetime.datetime(2018, 3, 5, 18, 45, 32))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 import datetime as d
 
@@ -1189,26 +1204,11 @@ print("你要查詢的月份的最後一天是西元", check(year, month))
 
 print("------------------------------------------------------------")  # 60個
 
-now = datetime.datetime.now()  # current date and time
-
-date_time = now.strftime("%Y年%m月%d日, %H:%M:%S")
-print("現在時間 :", date_time)
-
-dt = (datetime.datetime(2006, 3, 11, 9, 15),)
-print(dt)
-
-cc = time.strftime("%Y-%m-%d %H:%M")
-print(cc)
-
-cc = time.strftime("%Y-%m-%d %H:%M+%Z")
-print(cc)
 
 print("------------------------------------------------------------")  # 60個
-
-import time
+print("------------------------------------------------------------")  # 60個
 
 currentTime = time.asctime()
-
 print("時間 :", currentTime)
 
 entrySecond = time.time()
@@ -1405,3 +1405,10 @@ print("------------------------------------------------------------")  # 60個
 
 # 3030
 print("------------------------------")  # 30個
+
+
+sec = 12345
+timestr = str(datetime.timedelta(seconds=sec))  # 轉換成時分秒格式
+print(timestr)
+
+print("------------------------------------------------------------")  # 60個

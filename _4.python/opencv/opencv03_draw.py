@@ -362,7 +362,6 @@ cv2.putText(
     1,
 )
 
-
 x_st, y_st = 700, 500
 
 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -604,7 +603,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 fontFace = cv2.FONT_HERSHEY_COMPLEX
 fontScale = 2
