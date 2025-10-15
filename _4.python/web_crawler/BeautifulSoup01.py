@@ -100,9 +100,9 @@ string_html_data = """
         <p id="p1">我是段落一</p>
         <p id="p2" class="red">我是段落二</p>
         <img src="https://assets.raspberrypi.com/static/d8c8df845f270ad324962846437aa55c/69a47/hero.webp" width = "320" alt = "樹梅派"/><br>
-        <a href="https://tw.yahoo.com/">奇摩</a><br>
-        <a href="https://www.google.com/">Google</a><br>
-        <a href="https://www.youtube.com/">Youtube</a><br>
+        <a href="https://tw.yahoo.com/" target="_blank">連線到<b>奇摩</b></a><br>
+        <a href="https://www.google.com/" target="_blank">連線到<b>Google</b></a><br>
+        <a href="https://www.youtube.com/" target="_blank">連線到<b>Youtube</b></a><br>
         <div class="content">
             <div class="item1">
                 <a href="http://example.com/one" class="red" id="link1">First</a><br>
@@ -862,6 +862,28 @@ soup = BeautifulSoup(string_html_data, "lxml")
 
 print("------------------------------")  # 30個
 
+tags = soup("a")  # 找全部的超連結<a>
+print(len(tags))
+print(tags)
+tag = tags[1]
+print("標籤名稱 :", tag.name)
+print("標籤內容 :", tag)
+print("標籤內容 :", tag.text)
+print("標籤內容 :", tag.string)
+print("標籤內容 :", tag.b.string)
+print("URL網址 :", tag.get("href", None))
+print("target屬性 :", tag["target"])
+
+print("------------------------------")  # 30個
+
+tags = soup("img")  # 找全部的影像<img>
+tag = tags[0]
+print("圖片網址 :", tag.get("src", None))
+print("alt屬性 :", tag["alt"])
+print("屬性 :", tag.attrs)
+
+print("------------------------------")  # 30個
+
 # 用find找
 
 print("找下一個標題<h1>")
@@ -973,25 +995,28 @@ with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
     # print("整個網頁資料 :", soup)
 
-tags = soup("a")  # 找全部的超連結<a>
-print(len(tags))
-print(tags)
-tag = tags[1]
-print("標籤名稱 :", tag.name)
-print("標籤內容 :", tag)
-print("標籤內容 :", tag.text)
-print("標籤內容 :", tag.string)
-print("標籤內容 :", tag.b.string)
-print("URL網址 :", tag.get("href", None))
-print("target屬性 :", tag["target"])
-
 print("------------------------------")  # 30個
 
-tags = soup("img")  # 找全部的影像<img>
-tag = tags[0]
-print("圖片網址 :", tag.get("src", None))
-print("alt屬性 :", tag["alt"])
-print("屬性 :", tag.attrs)
+# 搜尋<a>標籤
+print("找下一個超連結<a>")
+tag_a = soup.find("a")
+print(tag_a)
+print(tag_a.text)
+
+print("找下一個段落<p>")
+print(soup.find("p"))
+
+# 呼叫多次find()方法
+
+print("段落<p>內有連結<a>")
+tag_p = soup.find("p")
+print(tag_p)
+
+print("段落<p>內找連結<a>")
+tag_a = tag_p.find("a")
+print(tag_a)
+print(tag_p.a.text)
+print(tag_a.text)
 
 print("------------------------------")  # 30個
 
@@ -1015,19 +1040,6 @@ print(tag_div.find_next_sibling().p.a.text)
 
 print("------------------------------")  # 30個
 
-# 搜尋<a>標籤
-print("找下一個超連結<a>")
-tag_a = soup.find("a")
-print(tag_a.text)
-
-# 呼叫多次find()方法
-tag_p = soup.find(name="p")
-tag_a = tag_p.find(name="a")
-print(tag_p.a.text)
-print(tag_a.text)
-
-print("------------------------------")  # 30個
-
 # 使用id屬性搜尋<div>標籤
 tag_div = soup.find(id="q2")
 
@@ -1040,6 +1052,7 @@ print("------------------------------")  # 30個
 # 使用class屬性搜尋<span>標籤
 tag_span = soup.find(attrs={"class": "score"})
 print(tag_span.text)
+
 # 搜尋第2題的第1個<span>標籤
 tag_div = soup.find(id="q2")
 tag_span = tag_div.find(class_="score")
@@ -5402,3 +5415,8 @@ for item in items:
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+cc = soup.find(name="p")
+# 等同於
+cc = soup.find("p")
+

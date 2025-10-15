@@ -7,9 +7,80 @@ googletrans 	使用Google Translate API来进行翻译
 translate 	提供多种翻译服务选项
 goslate 	通过谷歌翻译进行文本翻译
 textblob 	提供自然语言处理功能，包括翻译
+
+https://blog.csdn.net/mighty13/article/details/119749547
+
+https://ithelp.ithome.com.tw/articles/10235642
+
 """
 import sys
 
+print("------------------------------------------------------------")  # 60個
+print("translate")
+print("------------------------------------------------------------")  # 60個
+
+import translate
+
+"""
+"en": "英文"   "ja": "日文"    "ko": "韓文"
+"th": "泰文"   "vi": "越南文"  "fr": "法文"
+"""
+
+print("中翻英")
+
+text = "豬頭"
+text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
+
+from_lang = "zh-Hant"
+to_lang = "en"
+translator = translate.Translator(from_lang=from_lang, to_lang=to_lang)
+translation = translator.translate(text)
+
+print("翻譯結果：" + translation)
+
+print("------------------------------")  # 30個
+
+import translate
+
+print("英翻中")
+
+text = "Welcome to the United States and have a nice day."
+
+from_lang = "english"
+to_lang = "chinese"
+trans = translate.Translator(from_lang=from_lang, to_lang=to_lang)
+translation = trans.translate(text)
+
+print("翻譯結果：" + translation)
+
+print("------------------------------------------------------------")  # 60個
+print("GoogleTranslator")
+print("------------------------------------------------------------")  # 60個
+
+from deep_translator import GoogleTranslator
+
+# 要翻譯的文本
+text = "早安"
+text = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
+
+# 翻譯成英文
+translator = GoogleTranslator(source="auto", target="en")
+translation_en = translator.translate(text)
+print("英文:", translation_en)
+
+# 翻譯成日文, 另一種寫法
+translation_ja = GoogleTranslator(source="auto", target="ja").translate(text)
+print("日文:", translation_ja)
+
+# 翻譯成韓文
+translation_ko = GoogleTranslator(source="auto", target="ko").translate(text)
+print("韓文:", translation_ko)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("xxxxx")
 print("------------------------------------------------------------")  # 60個
 
 # 1. 使用googletrans库进行翻译
@@ -95,7 +166,7 @@ blob = TextBlob(text)
 
 """ NG
 # 进行翻译
-translated = blob.translate(to='fr')
+translated = blob.translate(to="fr")
 
 print(f"原文: {text}")
 print(f"翻译: {translated}")
@@ -174,10 +245,7 @@ print("------------------------------------------------------------")  # 60個
 
 # !pip install google_trans_new
 
-
 # from google_trans_new import google_translator
-# from google_trans_new import google_translator
-
 
 translator = google_translator()
 ret = translator.translate(content, lang_tgt="zh-TW")

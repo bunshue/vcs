@@ -526,13 +526,119 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+import math
 
+# Test algebraic functions
+print("exp(1.0) =", math.exp(1))
+print("log(3.78) =", math.log(math.e))
+print("log10(10, 10) =", math.log(10, 10))
+print("sqrt(4.0) =", math.sqrt(4.0))
+
+# Test trigonometric functions
+print("sin(PI / 2) =", math.sin(math.pi / 2))
+print("cos(PI / 2) =", math.cos(math.pi / 2))
+print("tan(PI / 2) =", math.tan(math.pi / 2))
+print("degrees(1.57) =", math.degrees(1.57))
+print("radians(90) =", math.radians(90))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("抽象方法(abstract method)")
+
+from abc import ABCMeta
+from abc import abstractmethod
+
+
+class Shape(object, metaclass=ABCMeta):
+    @abstractmethod
+    def perimeter(self):
+        pass
+
+    @abstractmethod
+    def area(self):
+        pass
+
+
+class Circle(Shape):
+    def __init__(self, radius):
+        self._radius = radius
+
+    def perimeter(self):
+        return 2 * math.pi * self._radius
+
+    def area(self):
+        return math.pi * self._radius**2
+
+    def __str__(self):
+        return "我是一个圆"
+
+
+class Rect(Shape):
+    def __init__(self, width, height):
+        self._width = width
+        self._height = height
+
+    def perimeter(self):
+        return 2 * (self._width + self._height)
+
+    def area(self):
+        return self._width * self._height
+
+    def __str__(self):
+        return "我是一个矩形"
+
+
+shapes = [Circle(5), Circle(3.2), Rect(3.2, 6.3)]
+for shape in shapes:
+    print(shape)
+    print("周长:", shape.perimeter())
+    print("面积:", shape.area())
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("求出100以下的所有質數")
+n = 300
+NUMBER_PER_LINE = 10  # Display 10 per line
+count = 0  # Count the number of prime numbers
+number = 2  # A number to be tested for primeness
+
+print("The prime numbers are:")
+
+# Repeatedly find prime numbers
+while number <= n:
+    # Assume the number is prime
+    isPrime = True  # Is the current number prime?
+
+    # Test if number is prime
+    for divisor in range(2, int(math.sqrt(number)) + 1):
+        # If true, number is not prime
+        if number % divisor == 0:
+            isPrime = False  # Set isPrime to false
+            break  # Exit the for loop
+
+    # Print the prime number and increase the count
+    if isPrime:
+        count += 1  # Increase the count
+
+        if count % NUMBER_PER_LINE == 0:
+            # Print the number and advance to the new line
+            print(" " + str(number))
+        else:
+            print(" " + str(number), end="")
+
+    # Check if the next number is prime
+    number += 1
+
+print("\n" + str(count) + " prime(s) less than or equal to " + str(n))
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -542,12 +648,6 @@ print("------------------------------------------------------------")  # 60個
 sys.exit()
 
 
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -560,5 +660,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
+print("------------------------------------------------------------")  # 60個
