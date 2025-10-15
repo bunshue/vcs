@@ -1,4 +1,22 @@
 
+
+filename = "aaaa.csv"
+with open(filename, "w", encoding="utf-8", newline="") as fp:
+    writer = csv.writer(fp)
+    writer.writerow(columns[1:5])
+    writer.writerows(data)
+print("存檔檔案 :", filename)
+
+
+    filename = "tmp_教育部統計處資料2_" + os.path.basename(url.format(year))
+    print("存檔檔案 :", filename)
+    with open(filename, "w", encoding="utf-8", newline="") as fp:
+        writer = csv.writer(fp)
+        writer.writerow(columns[1:5])
+        writer.writerows(data)
+
+
+
 程式內不能用 \　Backslash (反斜線)
 在 檔案路徑, 要改用 \\ 或 /
 在註解內 black會報錯
@@ -1877,18 +1895,7 @@ http://data.ntpc.gov.tw/od/data/api
 
 text() 在Axes物件的任意位置增加文字
 
-網站網頁
-
-https://rate.bot.com.tw/
-https://rate.bot.com.tw/xrt?Lang=zh-TW
-
-
-(台銀牌告匯率)
-https://rate.bot.com.tw/xrt?Lang=zh-TW
-
-
 分析網頁原始碼:按滑鼠右鍵，點選檢視網頁原始碼按鈕
-
 
 import requests
 #帳號密碼登入
@@ -1901,7 +1908,6 @@ import requests
 r = requests.get('http://bbs-mychat.com/login.php', auth=('bunshue', 'jp6rmp4'))
 print(r.status_code)
 print(r.text)
-
 
 
 import requests

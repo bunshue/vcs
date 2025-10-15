@@ -86,19 +86,20 @@ response = requests.get(url)
 print("物件型別：", type(response))
 print("網址：", response.url)
 # print("表頭資訊：", response.headers)
-print("連線狀態：", response.status_code)
-print("網頁編碼模式：", response.encoding)
-# print("網頁程式碼：", response.text)
+print("HTTP狀態碼 :", response.status_code)
+print("網頁編碼模式 :", response.encoding)
 
-# 檢查狀態碼
+# print(response.text)  # HTML網頁內容
+
+# 檢查HTTP狀態碼
 if response.status_code == requests.codes.ok:
     print("取得網頁內容成功")
     print("網頁內容大小 = ", len(response.text))
-    # print(response.text)            # 列印網頁內容
+    # print(response.text)  # HTML網頁內容
 else:
     print("取得網頁內容失敗")
-    print(response.status_code, response.reason)  # 若發生錯誤(狀態碼不是 200), 則印出狀態碼及錯誤原因
-
+    print("HTTP狀態碼 :", response.status_code)
+    print("HTTP錯誤原因 :", response.reason)
 """
 HTTP狀態碼    response.status_code
 
@@ -220,7 +221,8 @@ url = "https://www.ptt.cc/bbs/Beauty/M.1707360497.A.39D.html"
 
 print("無 cookies 抓不到網頁資料")
 response = requests.get(url)
-print(response.text)
+
+# print(response.text)  # HTML網頁內容
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -233,7 +235,8 @@ url = "https://www.ptt.cc/bbs/Beauty/M.1707360497.A.39D.html"
 print("有 cookies 可以抓到網頁資料")
 cookies = {"over18": "1"}
 response = requests.get(url, cookies=cookies)
-print(response.text)
+
+# print(response.text)  # HTML網頁內容
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -245,7 +248,8 @@ headers = {
 cookies = {"over18": "1"}
 
 response = requests.get(url, cookies=cookies, headers=headers)
-print(response.text)
+
+# print(response.text)  # HTML網頁內容
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -259,8 +263,12 @@ url = "https://ck101.tw/thread-5778209-1-1.html"
 response = requests.get(url)
 
 print(response)
-print(response.status_code)
-print(response.text)
+print("HTTP狀態碼 :", response.status_code)
+print("HTTP錯誤原因 :", response.reason)
+# print(response.text)  # HTML網頁內容
+print("網址：", response.url)
+print("表頭資訊 :", response.headers)
+print("異常處理 :", response.raise_for_status())
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -275,7 +283,8 @@ headers = {
 }
 response = requests.get(url, headers=headers)
 print(response)
-print(response.text)
+
+# print(response.text)  # HTML網頁內容
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -321,86 +330,33 @@ headers = {
 }
 # 加入 headers 資訊
 response = requests.get(url, headers=headers)
-response.encoding = "utf8"
-print(response.text)
+response.encoding = "utf8"  # 網頁編碼模式
+
+# print(response.text)  # HTML網頁內容
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("requests 測試 13 讀取網頁上的csv檔")
+print("requests 測試 13 抓取遠端檔案 csv")
+print("將網頁上的檔案存成本地檔案 csv / jpg / png")
 
-print("教育部統計處資料")
-url = "https://stats.moe.gov.tw/files/detail/111/111_student.csv"
-html_data_text = get_html_data_from_url(url)
-
-rows = html_data_text.split("\n")
-print("第 0 row")
-print(rows[0])
-print("第 1 row")
-print(rows[1])
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-print("requests 測試 14b")
-
-print("教育部統計處資料1")
+# 教育部統計處資料
 url = "https://stats.moe.gov.tw/files/detail/108/108_student.csv"
+url = "http://i.epochtimes.com/assets/uploads/2015/05/1502192113172483-600x400.jpg"
+url = "https://zh.wikipedia.org/static/images/icons/wikipedia.png"
+url = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Alliance_of_Sahel_States.svg/800px-Alliance_of_Sahel_States.svg.png"
+response = requests.get(url)  # 使用 GET 對檔案連結發出請求
 
-html_data_text = get_html_data_from_url(url)
-rows = html_data_text.split("\n")
-data = list()
-columns = rows[0].split(",")
-for row in rows[1:]:
-    try:
-        row = row.split(",")
-        item = list()
-        for f_index in range(1, 5):
-            item.append(row[f_index].replace('"', ""))
-        data.append(item)
-    except:
-        pass
+print("取出路徑中的檔案名稱 :", os.path.basename(url))
 
-filename = "tmp_教育部統計處資料1_" + os.path.basename(url)
-with open(filename, "w", encoding="utf-8", newline="") as fp:
-    writer = csv.writer(fp)
-    writer.writerow(columns[1:5])
-    writer.writerows(data)
+filename = "tmp_" + os.path.basename(url)
+with open(filename, "wb") as f:
+    f.write(response.content)  # 將response.content二進位內容寫入檔案
 print("存檔檔案 :", filename)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-print("requests 測試 15")
 
-print("教育部統計處資料2")
-url = "https://stats.moe.gov.tw/files/detail/{0}/{0}_student.csv"
-
-for year in range(107, 109):
-    csvdata = requests.get(url.format(year)).text
-    rows = csvdata.split("\n")
-    data = list()
-    columns = rows[0].split(",")
-    for row in rows[1:]:
-        try:
-            row = row.split(",")
-            item = list()
-            for f_index in range(1, 5):
-                item.append(row[f_index].replace('"', ""))
-            data.append(item)
-        except:
-            pass
-
-    filename = "tmp_教育部統計處資料2_" + os.path.basename(url.format(year))
-    print("存檔檔案 :", filename)
-    with open(filename, "w", encoding="utf-8", newline="") as fp:
-        writer = csv.writer(fp)
-        writer.writerow(columns[1:5])
-        writer.writerows(data)
-    time.sleep(3)
-
-print("OK")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 print("requests 測試 19 json 測試")
 
 print("PC Home 電腦售價")
@@ -414,6 +370,8 @@ for product in json_data:
         print("NT$:{}, {}".format(product["price"], product["name"]))
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("requests 測試 20 json 測試")
 
 url = "https://ecshweb.pchome.com.tw/search/v3.3/all/results?q=mac%20Mini&page=1&sort=sale/dc"
@@ -557,7 +515,7 @@ response = requests.get(
     url,
     params=params,
 )
-print(response.text)
+print(response.text)  # HTML網頁內容
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -685,38 +643,16 @@ print(f"{a}{b}，{weather[a][b]}。")  # 顯示結果
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("台灣銀行 匯率查詢")
-
-url = "https://rate.bot.com.tw/xrt/flcsv/0/day"  # 牌告匯率 CSV 網址
-
-response = requests.get(url)  # 爬取網址內容
-response.encoding = "utf-8"  # 調整回應訊息編碼為 utf-8，避免編碼不同造成亂碼
-rt = response.text  # 以文字模式讀取內容
-rts = rt.split("\n")  # 使用「換行」將內容拆分成串列
-for i in rts:  # 讀取串列的每個項目
-    try:  # 使用 try 避開最後一行的空白行
-        a = i.split(",")  # 每個項目用逗號拆分成子串列
-        print(a[0] + ": " + a[12])  # 取出第一個 ( 0 ) 和第十三個項目 ( 12 )
-    except:
-        break
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 """ fail
 url = "你的應用程式網址"
 name = "工作表1"
 row = 2
 response = requests.get(f"{url}?name={name}&row={row}")
-
-print("response轉成json格式")
-print(response.json())
+print(response.json())  # response轉成json格式
 
 name = "工作表2"
 response = requests.get(f"{url}?name={name}")
-
-print("response轉成json格式")
-print(response.json())
+print(response.json())  # response轉成json格式
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -774,7 +710,8 @@ print(url)
 
 # 下載股價
 response = requests.get(url)
-# print(response.text)
+
+# print(response.text)  # HTML網頁內容
 
 r_text = response.text.split("\n")
 
@@ -1028,19 +965,6 @@ with open("data/a16.csv") as csvFile:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-""" fail
-from lxml import html
-
-url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"
-response = requests.get(url)
-tree = html.fromstring(response.text)
-
-print("美金：" + str(tree.xpath("//html/body/div[1]/main/div[3]/table/tbody/tr[1]/td[3]/text()")[0]))
-print("日圓：" + str(tree.xpath("//html/body/div[1]/main/div[3]/table/tbody/tr[8]/td[3]/text()")[0]))
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("requests 測試 16 字串處理 技巧")
 
 url = "https://www.nkust.edu.tw/p/403-1000-14-{}.php?Lang=zh-tw"
@@ -1104,7 +1028,7 @@ print("My public IP address is: {}".format(response.text))
 
 url = "https://api64.ipify.org?format=json"
 response = requests.get(url)
-print(response.text)
+print(response.text)  # HTML網頁內容
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1117,32 +1041,6 @@ print("Host :", socket.gethostbyname(hostname))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("將網頁上的檔案存成本地檔案 csv / jpg / png")
-
-url = "https://stats.moe.gov.tw/files/detail/111/111_student.csv"
-url = "http://i.epochtimes.com/assets/uploads/2015/05/1502192113172483-600x400.jpg"  # 貼上src屬性中的路徑
-url = "https://zh.wikipedia.org/static/images/icons/wikipedia.png"
-url = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Alliance_of_Sahel_States.svg/800px-Alliance_of_Sahel_States.svg.png"
-
-# response = requests.get(url) #使用 GET 對檔案連結發出請求
-
-from urllib.request import unquote
-
-print("網址解碼 utf-8")
-url = unquote(url, encoding="utf-8")
-print(url)
-
-response = requests.get(url)  # 使用 GET 對檔案連結發出請求
-
-filename = "tmp_" + os.path.basename(url)
-with open(filename, "wb") as f:
-    f.write(response.content)  # 將response.content二進位內容寫入檔案
-print("存檔檔案 :", filename)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # NG
 """
 print("擷取網頁圖片, 保存檔名2")
@@ -1171,15 +1069,11 @@ url = "https://water.taiwanstat.com/"  # 台灣水庫即時水情
 # url = "https://data.kcg.gov.tw/dataset/6f29f6f4-2549-4473-aa90-bf60d10895dc/resource/30dfc2cf-17b5-4a40-8bb7-c511ea166bd3/download/lightrailtraffic.json"
 
 response = requests.get(url)  # 取得網頁內容
-response.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encoding 避免亂碼
+response.encoding = "utf-8"  # 網頁編碼模式  # 因為該網頁編碼為 utf-8，加上 .encoding 避免亂碼
 
-print("response內的text")
-print(response.text)  # 讀取並印出 text 屬性
+print(response.text)  # HTML網頁內容
 
-""" NG
-print("response轉成json格式")
-print(response.json())
-"""
+# NG print(response.json())  # response轉成json格式
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1217,7 +1111,7 @@ print("------------------------------------------------------------")  # 60個
 """ many
 url = "http://tw.yahoo.com"
 response = requests.get(url)
-pprint.pprint(response.text)
+pprint.pprint(response.text)  # HTML網頁內容
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -1228,67 +1122,75 @@ url = "https://www.googleapis.com/books/v1/volumes"
 data = {"q": "Python", "maxResults": 5, "projection": "lite"}
 
 response = requests.get(url, params=data)
-print(response.json())
+print(response.json())  # response轉成json格式
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-response = requests.get("https://fchart.github.io/test.html")
-print(response.text)
-print(response.encoding)
+url = "https://fchart.github.io/test.html"
+response = requests.get(url)
+print(response.text)  # HTML網頁內容
+print("網頁編碼模式 :", response.encoding)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-response = requests.get("https://fchart.github.io/test.html")
-print(response.text)
+url = "https://fchart.github.io/test.html"
+response = requests.get(url)
+print(response.text)  # HTML網頁內容
 
 print("----------------------")
 
-response = requests.get("https://fchart.github.io/test.html")
+url = "https://fchart.github.io/test.html"
+response = requests.get(url)
 print(response.content)
 
 print("----------------------")
 
-response = requests.get("https://fchart.github.io/test.html", stream=True)
+url = "https://fchart.github.io/test.html"
+response = requests.get(url, stream=True)
 print(response.raw)
 print(response.raw.read(15))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-response = requests.get("https://fchart.github.io/json/Example.json")
-print(response.text)
+url = "https://fchart.github.io/json/Example.json"
+response = requests.get(url)
+print(response.text)  # HTML網頁內容
 print(type(response.text))
 
-print("----------------------")
-
-print(response.json())
+print(response.json())  # response轉成json格式
 print(type(response.json()))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-response = requests.get("http://www.google.com")
+url = "http://www.google.com"
+response = requests.get(url)
 
+# HTTP狀態碼
 if response.status_code == 200:
     print("請求成功...")
 else:
     print("請求失敗...")
 
-print(response.status_code)
+print("HTTP狀態碼 :", response.status_code)
 print(response.status_code == requests.codes.ok)
 print(response.status_code == requests.codes.all_good)
 
-response = requests.get("http://www.google.com/404")
-print(response.status_code)
+url = "http://www.google.com/404"
+response = requests.get(url)
+
+print("HTTP狀態碼 :", response.status_code)
 print(response.status_code == requests.codes.ok)
 # NG print(response.raise_for_status())
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-response = requests.get("http://www.google.com")
+url = "http://www.google.com"
+response = requests.get(url)
 
 print(response.headers["Content-Type"])
 # NG print(response.headers["Content-Length"])
@@ -1314,14 +1216,15 @@ url = "https://www.googleapis.com/books/v1/volumes"
 
 url_params = {"q": "Python", "maxResults": 3, "projection": "lite"}
 response = requests.get(url, params=url_params)
-print(response.json())
+print(response.json())  # response轉成json格式
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 try:
-    response = requests.get("http://www.google.com", timeout=0.03)
-    print(response.text)
+    url = "http://www.google.com"
+    response = requests.get(url, timeout=0.03)
+    print(response.text)  # HTML網頁內容
 except requests.exceptions.Timeout as ex:
     print("錯誤: HTTP請求已經超過時間...\n" + str(ex))
 
@@ -1461,7 +1364,8 @@ url = "https://udn.com/news/breaknews/1/99#breaknews"
 
 response = requests.get(url)
 html = response.text
-print(response.status_code)
+
+print("HTTP狀態碼 :", response.status_code)
 
 text = "賴"
 print("要查詢的詞 :", text)
@@ -1536,3 +1440,19 @@ print("------------------------------")  # 30個
 print("groupby群組計算2007 年各洲人口總數：")
 cc = df[df["year"] == 2007].groupby(by="continent")["pop"].sum()
 print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from urllib.request import unquote
+
+print("網址解碼 utf-8")
+url = unquote(url, encoding="utf-8")
+print(url)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
