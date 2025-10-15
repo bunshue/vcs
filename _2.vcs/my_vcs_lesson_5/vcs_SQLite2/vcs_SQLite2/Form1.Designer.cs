@@ -43,7 +43,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(112, 45);
             this.button1.TabIndex = 0;
-            this.button1.Text = "insert";
+            this.button1.Text = "增加";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -53,7 +53,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(112, 45);
             this.button2.TabIndex = 1;
-            this.button2.Text = "update";
+            this.button2.Text = "修改";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -63,7 +63,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(112, 45);
             this.button0.TabIndex = 2;
-            this.button0.Text = "show";
+            this.button0.Text = "查詢";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -73,7 +73,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(112, 45);
             this.button3.TabIndex = 3;
-            this.button3.Text = "delete";
+            this.button3.Text = "刪除";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 

@@ -28,6 +28,9 @@ namespace vcs_SQLite2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            richTextBox1.Text += "path : " + path + "\n";
+            richTextBox1.Text += "cs : " + cs + "\n";
+
             Create_db();
             data_show();
         }
@@ -39,7 +42,7 @@ namespace vcs_SQLite2
             var con = new SQLiteConnection(cs);
             con.Open();
 
-            string stm = "SELECT * FROM test";
+            string stm = "SELECT * FROM table01";
             var cmd = new SQLiteCommand(stm, con);
             dr = cmd.ExecuteReader();
 
@@ -55,19 +58,19 @@ namespace vcs_SQLite2
         {
             if (!System.IO.File.Exists(path))
             {
+                richTextBox1.Text += "資料庫不存在, 建立之\n";
                 SQLiteConnection.CreateFile(path);
                 using (var sqlite = new SQLiteConnection(@"Data Source=" + path))
                 {
                     sqlite.Open();
-                    string sql = "create table test(name varchar(20),id varchar(12))";
+                    string sql = "CREATE TABLE table01(name varchar(20),id varchar(12))";
                     SQLiteCommand command = new SQLiteCommand(sql, sqlite);
                     command.ExecuteNonQuery();
-                    richTextBox1.Text += "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n";
                 }
             }
             else
             {
-                Console.WriteLine("Database cannot create");
+                richTextBox1.Text += "資料庫已存在\n";
                 return;
             }
         }
@@ -86,7 +89,7 @@ namespace vcs_SQLite2
 
             try
             {
-                cmd.CommandText = "INSERT INTO test(name,id) VALUES(@name,@id)";
+                cmd.CommandText = "INSERT INTO table01(name,id) VALUES(@name,@id)";
 
                 string NAME = "david";
                 string ID = "123";
@@ -101,14 +104,12 @@ namespace vcs_SQLite2
                 //dataGridView1.Rows.Add(row);
 
                 cmd.ExecuteNonQuery();
-
             }
             catch (Exception)
             {
-                Console.WriteLine("cannot insert data");
+                richTextBox1.Text += "無法新增資料\n";
                 return;
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -121,7 +122,7 @@ namespace vcs_SQLite2
 
             try
             {
-                cmd.CommandText = "UPDATE test Set id=@Id where name =@Name";
+                cmd.CommandText = "UPDATE table01 Set id=@Id where name =@Name";
                 cmd.Prepare();
                 cmd.Parameters.AddWithValue("@Name", "john");
                 cmd.Parameters.AddWithValue("@Id", "456");
@@ -129,14 +130,12 @@ namespace vcs_SQLite2
                 cmd.ExecuteNonQuery();
                 //dataGridView1.Rows.Clear();
                 data_show();
-
             }
             catch (Exception)
             {
-                Console.WriteLine("cannot update data");
+                richTextBox1.Text += "無法更新資料\n";
                 return;
             }
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -149,7 +148,7 @@ namespace vcs_SQLite2
 
             try
             {
-                cmd.CommandText = "DELETE FROM test where name =@Name";
+                cmd.CommandText = "DELETE FROM table01 where name =@Name";
                 cmd.Prepare();
                 cmd.Parameters.AddWithValue("@Name", "david");
 
@@ -159,10 +158,9 @@ namespace vcs_SQLite2
             }
             catch (Exception)
             {
-                Console.WriteLine("cannot delete data");
+                richTextBox1.Text += "無法刪除資料\n";
                 return;
             }
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -176,3 +174,4 @@ namespace vcs_SQLite2
         }
     }
 }
+

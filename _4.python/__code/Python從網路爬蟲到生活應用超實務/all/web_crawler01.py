@@ -1,4 +1,7 @@
 import csv
+import requests
+from bs4 import BeautifulSoup
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -24,17 +27,20 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 
 def show():
+    # return
     plt.show()
-    pass
 
 
+'''
 print("------------------------------------------------------------")  # 60個
+
+# 使用自建模組 image_downloader
 
 from image_downloader.image_downloader import download_csv_file_images
 
 download_csv_file_images("欲抓圖片網址清單.csv")
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 from image_downloader.image_downloader import download_csv_file_images
 
@@ -45,7 +51,7 @@ df.to_csv("imgur_dog2.csv", index=False)
 
 download_csv_file_images("imgur_dog2.csv")
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 from image_downloader.image_downloader import download_csv_file_images
 from apscheduler.schedulers.blocking import BlockingScheduler
@@ -68,9 +74,6 @@ except (KeyboardInterrupt, SystemExit):
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-import requests
-from bs4 import BeautifulSoup
 
 url = "https://www.msn.com/zh-tw/weather/today/台北,台灣/we-city?iso=TW"
 url = "https://www.msn.com/zh-tw/weather/forecast?iso=TW"
@@ -96,6 +99,7 @@ print(span.text)
 driver.quit()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 url = "https://movies.yahoo.com.tw/movieinfo_main/復仇者聯盟-終局之戰-avengers-endgame-9728"
 response = requests.get(url)
@@ -116,6 +120,7 @@ company = length.find_next()
 print(company.text)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 url = "https://zh.wikipedia.org/wiki/漫威漫畫"
 response = requests.get(url)
@@ -128,6 +133,7 @@ for tr in tag_trs:
     td = tr.find("td")
     print(th.text, ":", td.text.strip())
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "https://www.railway.gov.tw/tra-tip-web/tip/tip004/tip421/restCode?RestNo=A110"
@@ -143,6 +149,7 @@ for item in items:
     print("便當價格:", price.text)
     print("-------------------------------")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from selenium import webdriver
@@ -170,9 +177,9 @@ for item in items:
 driver.quit()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from fake_useragent import UserAgent
-import re
 
 URL = "https://movies.yahoo.com.tw/movie_intheaters.html/?page={0}"
 ua = UserAgent()
@@ -229,9 +236,9 @@ with open("movies.csv", "w+", newline="", encoding="utf-8") as fp:
         writer.writerow(item)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from fake_useragent import UserAgent
-import re
 
 url = "https://movies.yahoo.com.tw/movie_intheaters.html/?page=1"
 ua = UserAgent()
@@ -291,6 +298,7 @@ with open("movies2.csv", "w+", newline="", encoding="utf-8") as fp:
     for item in all_movies:
         writer.writerow(item)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from selenium import webdriver
@@ -365,12 +373,7 @@ with open(csvfile, "w+", newline="", encoding="utf-8") as fp:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-import requests
-from bs4 import BeautifulSoup
-
-print(
-    "開眼電影網 台北週末票房排行榜------------------------------------------------------------"
-)  # 60個
+print("開眼電影網 台北週末票房排行榜")
 
 url = "http://app2.atmovies.com.tw/boxoffice/"
 
@@ -389,6 +392,7 @@ for row in rows:
 
 print(items)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -423,7 +427,9 @@ with open(csvfile, 'w+', newline='') as fp:
         writer.writerow(item)
 """
 
-print("愛食記------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("愛食記")
 
 url = "https://ifoodie.tw/explore/台北市/list?sortby=rating"
 r = requests.get(url)
@@ -446,13 +452,15 @@ for index in range(5):
     if message:
         print(message.text)
     print("-------------------")
-
-print("博客來 全站熱銷榜------------------------------------------------------------")  # 60個
+'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("博客來 全站熱銷榜")
 
 from fake_useragent import UserAgent
 
-csvfile = "books.csv"
-url = "http://www.books.com.tw/web/sys_hourstop/home?loc=P_003_001"
+csvfile = "tmp_books.csv"
+url = "https://www.books.com.tw/web/sys_hourstop/home?loc=P_003_001"
 ua = UserAgent()
 headers = {"user-agent": ua.random}
 r = requests.get(url, headers=headers)
@@ -480,9 +488,11 @@ with open(csvfile, "w+", newline="") as fp:
     for item in items:
         writer.writerow(item)
 
-print("Google趨勢------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-import re
+print("Google趨勢")
+
 import json
 import datetime
 from fake_useragent import UserAgent
@@ -540,9 +550,9 @@ print(len(links))
 driver.quit()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from selenium import webdriver
-from bs4 import BeautifulSoup
 
 url = "https://www.youtube.com/results?search_query=pytube3"
 
@@ -561,6 +571,7 @@ for tag in tags:
 print(len(links))
 driver.quit()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from selenium import webdriver
@@ -646,9 +657,6 @@ driver.quit()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-import requests
-from bs4 import BeautifulSoup
-
 url = "https://fchart.github.io/img/Butterfly.png"
 path = "Butterfly.png"
 
@@ -661,6 +669,7 @@ if response.status_code == 200:
 else:
     print("錯誤! HTTP請求失敗...")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "https://fchart.github.io/"
@@ -683,6 +692,7 @@ for img in soup.find_all("img"):
     fp.close()
 print("結束網頁圖檔下載...")
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 keyword = "dog"
@@ -829,6 +839,7 @@ print("今天總共有: " + str(len(all_articles)) + " 篇文章")
 with open("ptt_NBA.json", "w", encoding="utf-8") as fp:
     json.dump(all_articles, fp, indent=2, sort_keys=True, ensure_ascii=False)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 URL = "https://www.ptt.cc"
@@ -1071,6 +1082,7 @@ updater.start_polling()
 updater.idle()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from telegram.ext import Updater, CommandHandler
 from telegram.ext import CallbackQueryHandler
@@ -1113,6 +1125,7 @@ print("Telegram Bot 選單機器人啟動中...")
 updater.start_polling()
 updater.idle()
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from telegram.ext import Updater, CommandHandler
@@ -1160,9 +1173,8 @@ updater.start_polling()
 updater.idle()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-import requests
-from bs4 import BeautifulSoup
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 api_key = "<API金鑰>"
@@ -1200,10 +1212,9 @@ except (KeyboardInterrupt, SystemExit):
     scheduler.shutdown()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from telegram.ext import Updater, CommandHandler
-import requests
-from bs4 import BeautifulSoup
 from apscheduler.schedulers.background import BackgroundScheduler
 
 api_key = "<API金鑰>"
@@ -1286,10 +1297,7 @@ except (KeyboardInterrupt, SystemExit):
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
-import requests
-from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 
 """
@@ -1314,8 +1322,6 @@ with open(csvfile,'w+',newline='',encoding="big5") as fp:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-import requests
-from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 
 """
@@ -1337,12 +1343,9 @@ with open(csvfile,'w+',newline='',encoding="big5") as fp:
             lst.append(cell.text.replace("\n","").replace("\r",""))
         writer.writerow(lst)
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-import requests
-from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 
 """
@@ -1366,13 +1369,11 @@ with open(csvfile,'w+',newline='',encoding="big5") as fp:
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 """
 公開資訊觀測站
 https://mops.twse.com.tw/mops/web/index
 """
 
-import requests
 from fake_useragent import UserAgent
 from io import StringIO
 
@@ -1412,10 +1413,6 @@ print(df.head())
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-import requests
-from bs4 import BeautifulSoup
-
 """
 base_url = "https://www.twse.com.tw"
 url = base_url + "/zh/brokerService/brokerServiceAudit"
@@ -1532,13 +1529,11 @@ print("------------------------------")
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 """
 公開資訊觀測站
 https://mops.twse.com.tw/mops/web/index
 """
 
-import requests
 from fake_useragent import UserAgent
 from io import StringIO
 
@@ -1574,8 +1569,6 @@ def get_monthly_report(s_type, year, month, delay=5):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
-import re
 from selenium import webdriver
 
 """
@@ -1596,7 +1589,6 @@ driver.quit()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-import requests
 from fake_useragent import UserAgent
 
 dates = [20200601, 20200701, 20200801]
@@ -1629,6 +1621,7 @@ print(df.head())
 """
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 import datetime
 import pandas_datareader as pdr
@@ -1641,8 +1634,7 @@ print(df.shape)
 print(df.head())
 """
 print("------------------------------------------------------------")  # 60個
-
-import requests
+print("------------------------------------------------------------")  # 60個
 
 date = "20200820"
 url = "https://www.twse.com.tw/fund/T86?response=json&date={}&selectType=ALL"
@@ -1653,8 +1645,7 @@ csv_file.write(content)
 csv_file.close()
 
 print("------------------------------------------------------------")  # 60個
-
-import requests
+print("------------------------------------------------------------")  # 60個
 
 date = "20200820"
 url = "https://www.twse.com.tw/fund/T86?response=csv&date={}&selectType=ALL"
@@ -1665,8 +1656,8 @@ csv_file.write(content)
 csv_file.close()
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-import requests
 import json
 
 date = "20200820"
@@ -1685,9 +1676,8 @@ else:
     print("HTTP請求錯誤...")
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
-import re
 from selenium import webdriver
 
 """
@@ -1751,8 +1741,6 @@ if __name__ == "__main__":
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
-import requests
 from flask import Flask, jsonify
 
 url = "https://ifoodie.tw/explore/台北市/list?sortby=rating"
@@ -1833,8 +1821,6 @@ if __name__ == "__main__":
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
-import requests
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
@@ -1957,8 +1943,6 @@ if __name__ == "__main__":
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
-import requests
 from telegram import Bot, Update
 from telegram.ext import Dispatcher
 from telegram.ext import MessageHandler, Filters

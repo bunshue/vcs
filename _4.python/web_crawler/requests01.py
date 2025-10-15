@@ -357,9 +357,9 @@ print("存檔檔案 :", filename)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("requests 測試 19 json 測試")
+print("requests 測試 20 json 測試")
 
-print("PC Home 電腦售價")
+print("PC Home 電腦售價, Mac Mini價格")
 url = "https://ecshweb.pchome.com.tw/search/v3.3/all/results?q=mac%20Mini&page=1&sort=sale/dc"
 
 html_data_text = get_html_data_from_url(url)
@@ -372,23 +372,6 @@ for product in json_data:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("requests 測試 20 json 測試")
-
-url = "https://ecshweb.pchome.com.tw/search/v3.3/all/results?q=mac%20Mini&page=1&sort=sale/dc"
-
-html_data_text = get_html_data_from_url(url)
-
-json_data = json.loads(html_data_text)["prods"]
-message = ""
-for product in json_data:
-    if product["price"] > 20000:
-        message = message + "NT$:{}, {}\n".format(product["price"], product["name"])
-
-print("Mac Mini價格通知", message)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("requests 測試 21 中油油價 json 測試")
 
 url = "https://www.cpc.com.tw/historyprice.aspx?n=2890"
@@ -396,10 +379,13 @@ response = requests.get(url)
 
 m = re.search("var pieSeries = (.*);", response.text)
 jsonstr = m.group(0).strip("var pieSeries = ").strip(";")
-json_data = json.loads(jsonstr)
+json_data = json.loads(jsonstr) # json轉串列, 串列由字典組成
+print(type(json_data))
+print("共有 :", len(json_data), '筆資料, 只看最新的10筆')
 # print(json_data)
 cnt = 1
-for item in reversed(json_data):  # 反向排序, 利用 reversed 反轉了排序(原內容由舊到新, 利用這個改為由新到舊)
+for item in reversed(json_data):  # 反向排序
+    # print(item)
     new_line = 0
     for data in item["data"]:
         if data["name"] == "超級/高級柴油":
@@ -407,12 +393,11 @@ for item in reversed(json_data):  # 反向排序, 利用 reversed 反轉了排�
             continue
         else:
             new_line = 1
-        print("date:" + item["name"])  # 第一層的 name 為日期
-        print(
-            data["name"] + ":" + str(data["y"])
-        )  # 後面再接一層 array data 其中的 name 為產品名, 而 y 為單價
+        print("日期 :", item["name"])  # 第一層的 name 為日期
+        print("品名 :", data["name"])  # 第二層的 data 為內容
+        print("單價 :", data["y"])  # 第二層的 data 為內容
     if new_line == 1:
-        print("================")
+        print("==================")
 
     cnt += 1
     if cnt == 10:
@@ -503,20 +488,6 @@ for ip in proxy_ips:
     except:
         print(f"{ip} invalid")
 """
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("測試一個 echo 函數")
-# 設定參數
-params = {"name": "david", "age": "18"}
-# 加入參數
-url = "https://script.google.com/macros/s/AKfycbw5PnzwybI_VoZaHz65TpA5DYuLkxIF-HUGjJ6jRTOje0E6bVo/exec"
-response = requests.get(
-    url,
-    params=params,
-)
-print(response.text)  # HTML網頁內容
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -653,15 +624,6 @@ print(response.json())  # response轉成json格式
 name = "工作表2"
 response = requests.get(f"{url}?name={name}")
 print(response.json())  # response轉成json格式
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "部署的網址"
-
-params = {"name": "工作表1", "top": "true", "data": "[123,456,789]"}
-
-response = requests.get(url=url, params=params)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1117,16 +1079,6 @@ pprint.pprint(response.text)  # HTML網頁內容
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-url = "https://www.googleapis.com/books/v1/volumes"
-
-data = {"q": "Python", "maxResults": 5, "projection": "lite"}
-
-response = requests.get(url, params=data)
-print(response.json())  # response轉成json格式
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 url = "https://fchart.github.io/test.html"
 response = requests.get(url)
 print(response.text)  # HTML網頁內容
@@ -1214,13 +1166,16 @@ print("------------------------------------------------------------")  # 60個
 
 url = "https://www.googleapis.com/books/v1/volumes"
 
+# 設定參數
 url_params = {"q": "Python", "maxResults": 3, "projection": "lite"}
-response = requests.get(url, params=url_params)
+
+response = requests.get(url=url, params=url_params)  # 加入參數
 print(response.json())  # response轉成json格式
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print('測試 timeout')
 try:
     url = "http://www.google.com"
     response = requests.get(url, timeout=0.03)
@@ -1228,7 +1183,7 @@ try:
 except requests.exceptions.Timeout as ex:
     print("錯誤: HTTP請求已經超過時間...\n" + str(ex))
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 url = "http://www.google.com/404"
 
@@ -1399,6 +1354,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+3030
 print("------------------------------")  # 30個
 
 
@@ -1456,3 +1412,13 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+
+# 設定參數
+params = {"name": "david", "age": "18"}
+params = {"name": "工作表1", "top": "true", "data": "[123,456,789]"}
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+

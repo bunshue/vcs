@@ -33,7 +33,6 @@ def play_audio_file(filename):
         continue
 
 
-'''
 import gtts
 
 print("目前支援的語音種類 :")
@@ -157,7 +156,6 @@ playsound.playsound(filename)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
 
 """ TBD
 #声音录制
@@ -186,10 +184,8 @@ stream.stop_stream()
 stream.close()
 p.terminate()
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 """
 #简洁回调函数版音频录制
 
@@ -280,8 +276,6 @@ def emptydir(dirname):  # 清空資料夾
     os.mkdir(dirname)  # 建立資料夾
 
 
-print("aaaaa")
-
 wave_filename = "老北京.wav"
 
 cc = OpenCC("s2twp")
@@ -314,7 +308,6 @@ for sss in mslist:
     timelist.append(ts)
 
 print("分割聲音檔")
-# 分割聲音檔
 emptydir("tmp_分割聲音檔")
 
 for i in range(len(timelist)):
@@ -324,6 +317,7 @@ for i in range(len(timelist)):
         start = mslist[i - 1]
     end = mslist[i]
     filename = "tmp_分割聲音檔/slice{:0>3d}.wav".format(i + 1)
+    print("ST :", start, ", SP :", end)
     sound[start:end].export(filename, format="wav")
 
 
@@ -359,14 +353,6 @@ for i in range(len(wavfiles)):
 file.write(data)
 file.close()
 
-print("OK")
-
-sys.exit()
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -432,51 +418,70 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
-google_trans_new：文字翻譯
-pip install google_trans_new
-
-"""
-
-"""fail
-from google_trans_new import google_translator
-translator = google_translator()
-text="今天天氣很好"
-word = translator.translate(text, lang_src="zh-TW", lang_tgt="ja", pronounce=True)
-print(word)
-
-from google_trans_new import google_translator
-translator = google_translator()
-print(translator.translate("今日の天気は良いです"))
-
-lang = translator.detect("今日の天気は良いです")
-print(lang)
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("newspaper3k a")
-"""
 應用：AI智慧讀報機
 !pip install newspaper3k
-!pip install google_trans_new
 """
 
-from newspaper import Article
+print("newspaper3k a")
 
 import newspaper
 from newspaper import Article
 
-# from google_trans_new import google_translator
+# paper = newspaper.build("http://cnn.com", language="en")
+paper = newspaper.build("http://www.cnbc.com", language="en")
+# paper = newspaper.build("http://www.bbc.co.uk", language="en")
+# paper = newspaper.build("http://www.foxnews.com", language="en")
+
+print(type(paper.articles))
+print("文章數目 :", len(paper.articles))
+
+count = 0
+urls = []
+for article in paper.articles:
+    url = article.url
+    if ".html" in url:
+        print(url)
+        count += 1
+        if count > 5:
+            break
+        try:  # 有時會產生無法擷取的錯誤,故使用try
+            article = Article(url)
+            article.download()
+            article.parse()
+            content = article.text
+            if len(content) > 0:
+                if len(content) > 5000:
+                    content = content[:4999]
+                print(content)
+        except:
+            print("XXXXXXXXXXX")
+            pass
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("newspaper3k b")
+
+import newspaper
+from newspaper import Article
 
 paper = newspaper.build("http://cnn.com", language="en")
 # paper = newspaper.build("http://www.cnbc.com", language="en")
 # paper = newspaper.build("http://www.bbc.co.uk", language="en")
 # paper = newspaper.build("http://www.foxnews.com", language="en")
 
+print(type(paper.articles))
+print("文章數目 :", len(paper.articles))
+
+count = 0
 urls = []
 for article in paper.articles:
     url = article.url
     if ".html" in url:
+        print(url)
+        count += 1
+        if count > 5:
+            break
         try:  # 有時會產生無法擷取的錯誤,故使用try
             article = Article(url)
             article.download()
@@ -487,6 +492,7 @@ for article in paper.articles:
                 if len(urls) > 10:
                     break
         except:
+            print("XXXXXXXXXXX")
             pass
 
 if len(urls) > 0:
@@ -498,50 +504,14 @@ if len(urls) > 0:
     content = article.text
     if len(content) > 5000:
         content = content[:4999]
-    translator = google_translator()
-    ret = translator.translate(content, lang_tgt="zh-TW")
-    print("找到文字 :", ret)
+    print(content)
 else:
     ret = "無可用新聞！"
 
 print("找到文字 :", ret)
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
-print("newspaper3k b")
-
-import newspaper
-from newspaper import Article
-
-# from google_trans_new import google_translator
-
-# paper = newspaper.build("http://cnn.com", language="en")
-paper = newspaper.build("http://www.cnbc.com", language="en")
-# paper = newspaper.build("http://www.bbc.co.uk", language="en")
-# paper = newspaper.build("http://www.foxnews.com", language="en")
-
-print(type(paper.articles))
-print(len(paper.articles))
-print(paper.articles)
-
-for article in paper.articles:
-    url = article.url
-    if ".html" in url:
-        print(url)
-        try:  # 有時會產生無法擷取的錯誤,故使用try
-            article = Article(url)
-            article.download()
-            article.parse()
-            content = article.text
-            if len(content) > 0:
-                if len(content) > 5000:
-                    content = content[:4999]
-                translator = google_translator()
-                ret = translator.translate(content, lang_tgt="zh-TW")
-                print("找到文字 :", ret)
-        except:
-            pass
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
