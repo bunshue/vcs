@@ -81,6 +81,7 @@ print("Response 物件資訊")
 
 url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"  # 博客來網址
 response = requests.get(url)
+# pprint.pprint(response.text)  # HTML網頁內容
 
 # 印出<class "requests.models.Response">，表示response為Response物件
 print("物件型別：", type(response))
@@ -341,10 +342,10 @@ print("requests 測試 13 抓取遠端檔案 csv")
 print("將網頁上的檔案存成本地檔案 csv / jpg / png / htm")
 
 url = "https://stats.moe.gov.tw/files/detail/108/108_student.csv"  # 教育部統計處資料
-url = "http://i.epochtimes.com/assets/uploads/2015/05/1502192113172483-600x400.jpg"
 url = "https://zh.wikipedia.org/static/images/icons/wikipedia.png"
 url = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Alliance_of_Sahel_States.svg/800px-Alliance_of_Sahel_States.svg.png"
 url = "http://jinyong.ylib.com.tw/works/v1.0/works/poem-24.htm"  # 葡萄美酒夜光杯──祖千秋論酒杯詩2
+url = "http://i.epochtimes.com/assets/uploads/2015/05/1502192113172483-600x400.jpg"
 
 response = requests.get(url)  # 使用 GET 對檔案連結發出請求
 
@@ -353,6 +354,26 @@ print("取出路徑中的檔案名稱 :", os.path.basename(url))
 filename = "tmp_" + os.path.basename(url)
 with open(filename, "wb") as f:
     f.write(response.content)  # 將response.content二進位內容寫入檔案
+print("存檔檔案 :", filename)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("擷取網頁圖片, 保存檔名, 只支持jpg檔")
+
+from io import BytesIO
+from PIL import Image
+
+url = "http://i.epochtimes.com/assets/uploads/2015/05/1502192113172483-600x400.jpg"
+
+response = requests.get(url)
+
+image = Image.open(BytesIO(response.content))
+
+print("取出路徑中的檔案名稱 :", os.path.basename(url))
+
+filename = "tmp_" + os.path.basename(url)
+image.save(filename)
 print("存檔檔案 :", filename)
 
 print("------------------------------------------------------------")  # 60個
@@ -967,42 +988,6 @@ print(response.text)  # HTML網頁內容
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-# NG
-"""
-print("擷取網頁圖片, 保存檔名2")
-
-import base64
-from io import BytesIO
-from PIL import Image
-
-url = "https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg"
-response = requests.get(url)
-image = Image.open(BytesIO(response.content))
-
-filename = "tmp_" + url.split("/")[-1]
-print("圖片檔名:", filename)
-
-image.save(filename)
-print("存檔檔案 :", filename)
-# print(base64.b64encode(response.content))
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("台灣水庫即時水情")
-url = "https://water.taiwanstat.com/"  # 台灣水庫即時水情
-# url = "https://invoice.etax.nat.gov.tw/index.html"
-# url = "https://data.kcg.gov.tw/dataset/6f29f6f4-2549-4473-aa90-bf60d10895dc/resource/30dfc2cf-17b5-4a40-8bb7-c511ea166bd3/download/lightrailtraffic.json"
-
-response = requests.get(url)  # 取得網頁內容
-response.encoding = "utf-8"  # 網頁編碼模式  # 因為該網頁編碼為 utf-8，加上 .encoding 避免亂碼
-
-print(response.text)  # HTML網頁內容
-
-# NG print(response.json())  # response轉成json格式
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 # https://mis.twse.com.tw/stock/fibest.jsp?stock=0050
 url = "https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_0050.tw"
@@ -1030,43 +1015,6 @@ with open(fn, "wb") as f:  # 以二進位儲存
         size = f.write(diskStorage)  # Response物件寫入
         print("寫入資料 :", size, "拜")
     print("以 %s 儲存網頁HTML檔案成功" % fn)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-""" many
-url = "http://tw.yahoo.com"
-response = requests.get(url)
-pprint.pprint(response.text)  # HTML網頁內容
-"""
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "https://fchart.github.io/test.html"
-response = requests.get(url)
-print(response.text)  # HTML網頁內容
-print("網頁編碼模式 :", response.encoding)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "https://fchart.github.io/test.html"
-response = requests.get(url)
-print(response.text)  # HTML網頁內容
-
-print("----------------------")
-
-url = "https://fchart.github.io/test.html"
-response = requests.get(url)
-print(response.content)
-
-print("----------------------")
-
-url = "https://fchart.github.io/test.html"
-response = requests.get(url, stream=True)
-print(response.raw)
-print(response.raw.read(15))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1127,14 +1075,25 @@ v = session.cookies.get_dict()
 print(v)
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# RESTful API的HTTP請求
+# https://www.googleapis.com/books/v1/volumes?q=<關鍵字>&maxResults=5&projection=lite
+# https://www.googleapis.com/books/v1/volumes?q=Python&maxResults=5&projection=lite
 
 url = "https://www.googleapis.com/books/v1/volumes"
 
-# 設定參數
+# 設定參數, 查詢書籍關鍵字/查詢數量/等級
+url_params = {"q": "Travel Photography", "maxResults": 3, "projection": "lite"}
 url_params = {"q": "Python", "maxResults": 3, "projection": "lite"}
 
+# 送出RESTful API的HTTP請求
 response = requests.get(url=url, params=url_params)  # 加入參數
-print(response.json())  # response轉成json格式
+data = response.json()  # response轉成json格式
+
+for row in data["items"]:
+    print(row["volumeInfo"].get("title").upper(), end="")
+    print(" (" + str(row["volumeInfo"].get("subtitle")) + ")")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1461,10 +1420,7 @@ for item in list1:
     print(item)
 
 print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
-
-import requests
 
 url = "https://fchart.github.io/img/fchart03.png"
 path = "tmp_fchart03.png"
@@ -1928,4 +1884,136 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+
+# 檢查回應狀態碼
+r = requests.get("http://www.google.com")
+print(r.status_code)
+print(r.status_code == requests.codes.ok)
+r = requests.get("http://www.google.com/404")
+print(r.status_code)
+print(r.status_code == requests.codes.ok)
+r = requests.get("http://www.google.com")
+print(r.status_code)
+print(r.status_code == requests.codes.all_good)
+
+print("------------------------------")  # 30個
+
+# 取得HTTP標頭
+r = requests.get("http://www.google.com")
+print(r.headers["Content-Type"])
+# print(r.headers['Content-Length'])
+print(r.headers["Date"])
+print(r.headers["Server"])
+
+print("------------------------------")  # 30個
+
+# 取得HTTP標頭
+r = requests.get("http://www.google.com")
+print(r.headers.get("Content-Type"))
+print(r.headers.get("Content-Length"))
+print(r.headers.get("Date"))
+print(r.headers.get("Server"))
+
+print("------------------------------")  # 30個
+
+# 送出Cookie的HTTP請求
+url = "http://httpbin.org/cookies"
+cookies = dict(name="Joe Chen")
+r = requests.get(url, cookies=cookies)
+print(r.text)
+
+print("------------------------------")  # 30個
+
+url = "http://httpbin.org/user-agent"
+r = requests.get(url)
+print(r.text)
+
+print("------------------------------")  # 30個
+
+
+url_headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
+}
+r = requests.get(url, headers=url_headers)
+print(r.text)
+
+
+print("------------------------------")  # 30個
+
+
+print("------------------------------")  # 30個
+
+url = "https://api.github.com/user"
+r = requests.get(url, auth=("hueyan@ms2.hinet.net", "********"))
+if r.status_code == requests.codes.ok:
+    print(r.headers["Content-Type"])
+    print(r.json())
+else:
+    print("HTTP請求錯誤..." + str(r.status_code))
+
+print("------------------------------")  # 30個
+
+# The GitHub documentation is fairly clear that you need to send the Authorization header.
+# TOKEN https://github.com/settings/tokens
+# GitHub Login 1
+username = "user"
+token = "token"
+login = requests.get(
+    "https://api.github.com/search/repositories?q=github+api", auth=(username, token)
+)
+login
+
+print("------------------------------")  # 30個
+
+# GitHub Login 2
+token = ""
+headers = {"Authorization": "token " + token}
+login = requests.get("https://api.github.com/user", headers=headers)
+print(login.json())
+
+print("------------------------------")  # 30個
+
+# 指定請求時間
+try:
+    r = requests.get("http://www.google.com", timeout=0.03)
+    print(r.text)
+except requests.exceptions.Timeout as ex:
+    print("錯誤: HTTP請求已經超過時間...\n" + str(ex))
+
+
+print("------------------------------")  # 30個
+
+# 建立Requests的例外處理
+url = "http://www.google.com/404"
+try:
+    r = requests.get(url, timeout=3)
+    r.raise_for_status()
+    print(r)
+except requests.exceptions.RequestException as ex1:
+    print("Http請求錯誤: " + str(ex1))
+except requests.exceptions.HTTPError as ex2:
+    print("Http回應錯誤: " + str(ex2))
+except requests.exceptions.ConnectionError as ex3:
+    print("網路連線錯誤: " + str(ex3))
+except requests.exceptions.Timeout as ex4:
+    print("Timeout錯誤: " + str(ex4))
+
+print("------------------------------")  # 30個
+
+# 將取得的回應內容寫成檔案
+r = requests.get("http://www.google.com")
+r.encoding = "utf-8"
+fp = open("test.txt", "w", encoding="utf8")
+fp.write(r.text)
+print("寫入檔案test.txt...")
+fp.close()
+
+# 讀取檔案的全部內容
+fp = open("test.txt", "r", encoding="utf8")
+str = fp.read()
+print("檔案內容:")
+print(str)
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

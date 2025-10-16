@@ -28,6 +28,7 @@ namespace vcs_SQLite2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
             richTextBox1.Text += "path : " + path + "\n";
             richTextBox1.Text += "cs : " + cs + "\n";
 
@@ -35,7 +36,38 @@ namespace vcs_SQLite2
             data_show();
         }
 
-        //show data in table
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 120;
+            dy = 50;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+
+            richTextBox1.Size = new Size(500, 400);
+            richTextBox1.Location = new Point(x_st + dx * 1 + 0, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(660, 500);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
         private void data_show()
         {
             richTextBox1.Text += "讀取資料庫的資料\n";
@@ -49,7 +81,6 @@ namespace vcs_SQLite2
             while (dr.Read())
             {
                 richTextBox1.Text += "取得資料\t" + dr.GetString(0) + "\t" + dr.GetString(1) + "\n";
-                dataGridView1.Rows.Insert(0, dr.GetString(0), dr.GetString(1));
             }
         }
 
@@ -96,13 +127,6 @@ namespace vcs_SQLite2
 
                 cmd.Parameters.AddWithValue("@name", NAME);
                 cmd.Parameters.AddWithValue("@id", ID);
-
-                dataGridView1.ColumnCount = 2;
-                dataGridView1.Columns[0].Name = "Name";
-                dataGridView1.Columns[1].Name = "Id";
-                string[] row = new string[] { NAME, ID };
-                dataGridView1.Rows.Add(row);
-
                 cmd.ExecuteNonQuery();
             }
             catch (Exception)
@@ -128,7 +152,6 @@ namespace vcs_SQLite2
                 cmd.Parameters.AddWithValue("@Id", "456");
 
                 cmd.ExecuteNonQuery();
-                dataGridView1.Rows.Clear();
                 data_show();
             }
             catch (Exception)
@@ -153,7 +176,6 @@ namespace vcs_SQLite2
                 cmd.Parameters.AddWithValue("@Name", "david");
 
                 cmd.ExecuteNonQuery();
-                dataGridView1.Rows.Clear();
                 data_show();
             }
             catch (Exception)
@@ -171,20 +193,6 @@ namespace vcs_SQLite2
         private void button5_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            richTextBox1.Text += "aaaaa\n";
-            if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            {
-                richTextBox1.Text += "bbbbb\n";
-                dataGridView1.CurrentRow.Selected = true;
-                string name = dataGridView1.Rows[e.RowIndex].Cells["Name"].FormattedValue.ToString();
-                string id = dataGridView1.Rows[e.RowIndex].Cells["Id"].FormattedValue.ToString();
-
-                richTextBox1.Text += "取得資料:\t" + name + "\t" + id + "\n";
-            }
         }
     }
 }

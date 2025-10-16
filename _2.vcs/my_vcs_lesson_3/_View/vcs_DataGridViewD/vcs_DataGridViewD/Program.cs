@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace vcs_SQLite
+namespace vcs_DataGridViewD
 {
     static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// 應用程式的主要進入點。
         /// </summary>
         [STAThread]
         static void Main()
