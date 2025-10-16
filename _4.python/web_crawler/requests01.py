@@ -338,13 +338,14 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("requests 測試 13 抓取遠端檔案 csv")
-print("將網頁上的檔案存成本地檔案 csv / jpg / png")
+print("將網頁上的檔案存成本地檔案 csv / jpg / png / htm")
 
-# 教育部統計處資料
-url = "https://stats.moe.gov.tw/files/detail/108/108_student.csv"
+url = "https://stats.moe.gov.tw/files/detail/108/108_student.csv"  # 教育部統計處資料
 url = "http://i.epochtimes.com/assets/uploads/2015/05/1502192113172483-600x400.jpg"
 url = "https://zh.wikipedia.org/static/images/icons/wikipedia.png"
 url = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Alliance_of_Sahel_States.svg/800px-Alliance_of_Sahel_States.svg.png"
+url = "http://jinyong.ylib.com.tw/works/v1.0/works/poem-24.htm"  # 葡萄美酒夜光杯──祖千秋論酒杯詩2
+
 response = requests.get(url)  # 使用 GET 對檔案連結發出請求
 
 print("取出路徑中的檔案名稱 :", os.path.basename(url))
@@ -379,29 +380,28 @@ response = requests.get(url)
 
 m = re.search("var pieSeries = (.*);", response.text)
 jsonstr = m.group(0).strip("var pieSeries = ").strip(";")
-json_data = json.loads(jsonstr) # json轉串列, 串列由字典組成
+json_data = json.loads(jsonstr)  # json轉串列, 串列由字典組成
 print(type(json_data))
-print("共有 :", len(json_data), '筆資料, 只看最新的10筆')
-# print(json_data)
-cnt = 1
+print("共有 :", len(json_data), "筆資料, 只看最新的10筆")
+print("第0筆資料 :", json_data[0], "看一下資料格式")
+
+# 分別是 '超級/高級柴油', '92/95/98 無鉛汽油' 各7筆資料
+
+print("==================")
 for item in reversed(json_data):  # 反向排序
     # print(item)
-    new_line = 0
     for data in item["data"]:
         if data["name"] == "超級/高級柴油":
-            new_line = 0
+            continue
+        elif data["name"] == "95 無鉛汽油":
+            continue
+        elif data["name"] == "98 無鉛汽油":
             continue
         else:
-            new_line = 1
-        print("日期 :", item["name"])  # 第一層的 name 為日期
-        print("品名 :", data["name"])  # 第二層的 data 為內容
-        print("單價 :", data["y"])  # 第二層的 data 為內容
-    if new_line == 1:
-        print("==================")
-
-    cnt += 1
-    if cnt == 10:
-        break
+            print("日期 :", item["name"])  # 第一層的 name 為日期
+            print("品名 :", data["name"])  # 第二層的 data 為內容
+            print("單價 :", data["y"])  # 第二層的 data 為內容
+            print("==================")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -615,19 +615,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ fail
-url = "你的應用程式網址"
-name = "工作表1"
-row = 2
-response = requests.get(f"{url}?name={name}&row={row}")
-print(response.json())  # response轉成json格式
-
-name = "工作表2"
-response = requests.get(f"{url}?name={name}")
-print(response.json())  # response轉成json格式
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 url = "https://notify-api.line.me/api/notify"
 token = "剛剛複製的權杖"
 headers = {"Authorization": "Bearer " + token}  # 設定權杖
@@ -879,27 +866,36 @@ print("讀取網頁的json資料")
 url = "https://www.oxxostudio.tw/json/pageList.json"
 response = requests.get(url)
 json_data = json.loads(response.text)  # 轉成 json 格式
+
 # print(json_data)#全部
+print("共有 :", len(json_data), "筆資料")
+
 print("第0筆")
 print(json_data[0])
 print("第1筆")
 print(json_data[1])
+# 每筆資料有4個欄位 tag, title, site, date
+
+print("------------------------------")  # 30個
+
+print("json資料 轉 文字檔")
 
 # 轉換成文字寫入，因為中文會變成編碼，所以後方要加上 ensure_ascii=False
 # 此處不使用，因為發現出來變成純文字格式，非 json
-jj = json.dumps(json_data[0], ensure_ascii=False)
+jj = json.dumps(json_data, ensure_ascii=False)
 print(jj)
 
 with open("tmp_json_data1.txt", "a+") as f:
     f.write(jj)
 
-print("讀取網頁的json資料 -> csv檔")
+print("------------------------------")  # 30個
+
+print("json資料 轉 csv檔")
 
 with open("tmp_json_data2.csv", "w") as csvfile:
     writer = csv.writer(csvfile)
     for i in json_data:
         writer.writerow([i["tag"], i["title"], i["site"], i["date"]])
-        # writer.writerows([[0, 1, 3], [1, 2, 3], [2, 3, 4]])
     print("寫入完成！")
 
 print("------------------------------------------------------------")  # 60個
@@ -953,29 +949,6 @@ for pg_no, page in enumerate(pages, 1):
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-"""
-import socket
-
-socket.socket(family, type, proto)
-# family：IPv4 本機、IPv4 網路、IPv6 網路。
-# type：使用 TCP 或 UDP 方式。
-# protocol: 串接協定 ( 通常預設 0 )。
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-import socket
-
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-s.connect(("8.8.8.8", 80))
-ip = s.getsockname()[0]
-print(ip)
-s.close()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 """
 A Simple Public IP Address API
 https://www.ipify.org/
@@ -991,15 +964,6 @@ print("My public IP address is: {}".format(response.text))
 url = "https://api64.ipify.org?format=json"
 response = requests.get(url)
 print(response.text)  # HTML網頁內容
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-import socket
-
-hostname = "google.com"
-print("Hostname :", hostname)
-print("Host :", socket.gethostbyname(hostname))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1175,7 +1139,7 @@ print(response.json())  # response轉成json格式
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('測試 timeout')
+print("測試 timeout")
 try:
     url = "http://www.google.com"
     response = requests.get(url, timeout=0.03)
@@ -1409,12 +1373,6 @@ print(url)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-
 # 設定參數
 params = {"name": "david", "age": "18"}
 params = {"name": "工作表1", "top": "true", "data": "[123,456,789]"}
@@ -1422,3 +1380,552 @@ params = {"name": "工作表1", "top": "true", "data": "[123,456,789]"}
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+
+import string
+
+str1 = "#$%^Python -is- *a* $%programming_ language.$"
+
+print(string.punctuation)
+
+list1 = str1.split(" ")
+for item in list1:
+    print(item.strip(string.punctuation))
+
+print("------------------------------------------------------------")  # 60個
+
+baseUrl = "http://example.com"
+list1 = [
+    "http://www.example.com/test",
+    "http://example.com/word",
+    "media/ex.jpg",
+    "http://www.example.com/index.html",
+]
+
+
+def getUrl(baseUrl, source):
+    if source.startswith("http://www."):
+        url = "http://" + source[11:]
+    elif source.startswith("http://"):
+        url = source
+    elif source.startswith("www"):
+        url = source[4:]
+        url = "http://" + source
+    else:
+        url = baseUrl + "/" + source
+
+    if baseUrl not in url:
+        return None
+    return url
+
+
+for item in list1:
+    print(getUrl(baseUrl, item))
+
+print("------------------------------------------------------------")  # 60個
+
+import re
+
+str1 = "  Python, is   a, \nprogramming, \n\nlanguage.\n\r   "
+
+list1 = str1.split(",")
+for item in list1:
+    item = re.sub(r"\n+", "", item)
+    item = re.sub(r" +", " ", item)
+    item = item.strip()
+    print("'" + item + "'")
+
+
+print("------------------------------------------------------------")  # 60個
+
+import re
+
+list1 = ["", "/", "path/", "/path", "/path/", "//path/", "/path///"]
+
+
+def getPath(path):
+    if path:
+        if path[0] != "/":
+            path = "/" + path
+        if path[-1] != "/":
+            path = path + "/"
+        path = re.sub(r"/{2,}", "/", path)
+    else:
+        path = "/"
+
+    return path
+
+
+for item in list1:
+    item = getPath(item)
+    print(item)
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+import requests
+
+url = "https://fchart.github.io/img/fchart03.png"
+path = "tmp_fchart03.png"
+response = requests.get(url, stream=True)
+if response.status_code == 200:
+    with open(path, "wb") as fp:
+        for chunk in response:
+            fp.write(chunk)
+    print("圖檔已經下載")
+else:
+    print("錯誤! HTTP請求失敗...")
+
+
+print("------------------------------------------------------------")  # 60個
+
+import urllib.request
+
+url = "https://fchart.github.io/img/fchart03.png"
+response = urllib.request.urlopen(url)
+fp = open("tmp_fchart04.png", "wb")
+size = 0
+while True:
+    info = response.read(10000)
+    if len(info) < 1:
+        break
+    size = size + len(info)
+    fp.write(info)
+print(size, "個字元下載...")
+fp.close()
+response.close()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+# re_match.py
+
+m = re.match(r"[a-z]+", "abc123xyz")
+print(m)
+if m != None:
+    print(m.group())  # abc
+    print(m.start())  # 0
+    print(m.end())  # 3
+    print(m.span())  # (0, 3)
+
+print("------------------------------------------------------------")  # 60個
+
+# re_search.py
+
+m = re.search(r"[a-z]+", "abc123xyz")
+print(m)  # <re.Match object; span=(0, 3), match='abc'>
+if m != None:
+    print(m.group())  # abc
+    print(m.start())  # 0
+    print(m.end())  # 3
+    print(m.span())  # (0,3)
+
+print("------------------------------------------------------------")  # 60個
+
+# re_findall.py
+
+m = re.findall(r"[a-z]+", "abc123xyz")
+print(m)  # ['abc', 'xyz']
+
+print("------------------------------------------------------------")  # 60個
+
+# re_sub.py
+
+result = re.sub(r"\d+", "*", "Password:1234,ID:5678")
+print(result)  # Password:*,ID:*
+
+print("------------------------------------------------------------")  # 60個
+
+# regex.py
+html = """
+<div class="content">
+    E-Mail：<a href="mailto:mail@test.com.tw">mail</a><br>
+    E-Mail2：<a href="mailto:mail2@test.com.tw">mail2</a><br>
+    <ul class="price">定價：360元 </ul>
+    <img src="http://test.com.tw/p1.jpg">
+    <img src="http://test.com.tw/p2.jpg">
+    <img src="http://test.com.tw/p3.png">
+    電話：(04)-76543210、0937-123456
+</div>
+"""
+
+emails = re.findall(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+", html)
+for email in emails:  # 顯示 email
+    print(email)
+
+price = re.findall(r"[\d]+元", html)[0].split("元")[0]  # 價格
+print(price)  # 顯示定價金額
+
+imglist = re.findall(r"[http://]+[a-zA-Z0-9-/.]+\.[jpgpng]+", html)
+for img in imglist:  #
+    print(img)  # 顯示圖片網址
+
+phonelist = re.findall(r"\(?\d{2,4}\)?\-\d{6,8}", html)
+for phone in phonelist:
+    print(phone)  # 顯示電話號碼
+
+print("------------------------------------------------------------")  # 60個
+
+
+# twhrtimetable.py
+from selenium import webdriver
+
+# 高鐵時刻表查詢網站
+url = "http://www.thsrc.com.tw/tw/TimeTable/SearchResult"
+ss = "台中站"  # 出發站
+es = "台北站"  # 到達站
+dd = "2020/03/26"  # 日期
+dt = "09:00"  # 時間
+# 建立瀏覽器物件開啟網站
+driver = webdriver.Chrome()
+driver.get(url)
+# 輸入出發站
+driver.find_element_by_id("StartStation").send_keys(ss)
+# 輸入到達站
+driver.find_element_by_id("EndStation").send_keys(es)
+# 輸入日期
+driver.find_element_by_id("DepartueSearchDate").click()
+driver.find_element_by_id("DepartueSearchDate").send_keys(dd)
+# 輸入時間
+driver.find_element_by_id("DepartueSearchTime").click()
+driver.find_element_by_id("DepartueSearchTime").send_keys(dt)
+driver.find_element_by_id("SearchButton").click()  # 按查詢鈕
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# twhrtimetable.py
+from selenium import webdriver
+
+# 高鐵時刻表查詢網站
+url = "http://www.thsrc.com.tw/tw/TimeTable/SearchResult"
+ss = "台中站"  # 出發站
+es = "台北站"  # 到達站
+
+# 建立瀏覽器物件開啟網站
+driver = webdriver.Chrome()
+driver.get(url)
+# 按我同意
+driver.find_element_by_xpath("//button[@class='swal2-confirm swal2-styled']").click()
+# 輸入出發站
+driver.find_element_by_id("select_location01").send_keys(ss)
+# #輸入到達站
+driver.find_element_by_id("select_location02").send_keys(es)
+# 輸入日期
+driver.find_element_by_id("Departdate03").click()
+driver.find_element_by_xpath(
+    "//div[@id='tot-1']/div/div/ul/li/div/div/table/tbody/tr[2]/td[1]"
+).click()
+# #輸入時間
+driver.find_element_by_id("outWardTime").click()
+driver.find_element_by_xpath(
+    "//div[@id='tot-1']/div[2]/div/ul/li[2]/div/div/table/tr[3]/td[3]/a/i"
+).click()
+driver.find_element_by_id("start-search").click()  # 按查詢鈕
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# iplookup.py
+
+# 設定查詢目前IP的api網址
+url = "https://api.ipify.org"
+r = requests.get(url)
+
+print("我目前的IP是：", r.text)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# loginFacebook.py
+
+from selenium import webdriver
+
+# 設定facebook登入資訊
+url = "https://www.facebook.com/"
+email = "你的faceook電子郵件"
+password = "你的faceook密碼"
+# 建立瀏覽器物件
+driver = webdriver.Chrome()
+# 最大化視窗後開啟facebook網站
+driver.maximize_window()
+driver.get(url)
+# 執行自動登入動作
+driver.find_element_by_id("email").send_keys(email)  # 輸入郵件
+driver.find_element_by_id("pass").send_keys(password)  # 輸入密碼
+driver.find_element_by_id("loginbutton").click()  # 按登入鈕
+
+print("------------------------------------------------------------")  # 60個
+
+# phone_check.py
+
+
+def isTaiwanPhone(str):
+    if len(str) != 11:  # 如果長度不是11
+        return False  # 傳回非手機號碼格式
+    # 檢查11個字元是否符合手機號碼格式
+    for i in range(0, 11):
+        if i == 4:
+            if str[4] != "-":  # 如果第5個字元不是'-'字元
+                return False  # 傳回非手機號碼格式
+        else:  # 如果前4個字或最後6個字出現非數字字元
+            if str[i].isdecimal() == False:
+                return False  # 傳回非手機號碼格式
+    return True  # 傳回是正確手機號碼格式
+
+
+print("0937-123456 是台灣手機號碼：", isTaiwanPhone("0937-123456"))
+print("02-12345678 是台灣手機號碼：", isTaiwanPhone("02-12345678"))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# timetable.py
+
+from selenium import webdriver
+
+# 高鐵時刻表查詢網站
+url = "http://www.thsrc.com.tw/tw/TimeTable/SearchResult"
+ss = "台中站"  # 出發站
+es = "台北站"  # 到達站
+dd = "2020/03/26"  # 日期
+dt = "09:00"  # 時間
+# 建立瀏覽器物件
+driver = webdriver.Chrome()
+## 最大化視窗後開啟facebook網站
+# driver.maximize_window()
+driver.get(url)
+# 執行自動登入動作
+driver.find_element_by_id("StartStation").send_keys(ss)  # 輸入郵件
+driver.find_element_by_id("EndStation").send_keys(es)  # 輸入密碼密碼
+driver.find_element_by_id("DepartueSearchDate").click()
+driver.find_element_by_id("DepartueSearchDate").send_keys(dd)  # 輸入
+driver.find_element_by_id("DepartueSearchTime").click()
+driver.find_element_by_id("DepartueSearchTime").send_keys(dt)  # 輸入密碼
+driver.find_element_by_id("SearchButton").click()  # 按登入鈕
+
+#
+# driver.find_element_by_id("StartStation").click()
+# Select(driver.find_element_by_id("StartStation")).select_by_visible_text(u"台中站")
+# driver.find_element_by_id("StartStation").click()
+# driver.find_element_by_id("EndStation").click()
+# Select(driver.find_element_by_id("EndStation")).select_by_visible_text(u"台北站")
+# driver.find_element_by_id("EndStation").click()
+# driver.find_element_by_id("DepartueSearchDate").click()
+# driver.find_element_by_link_text("26").click()
+# driver.find_element_by_id("DepartueSearchTime").click()
+# Select(driver.find_element_by_id("DepartueSearchTime")).select_by_visible_text("09:00")
+# driver.find_element_by_id("DepartueSearchTime").click()
+# driver.find_element_by_id("SearchButton").click()
+
+# url = 'http://www.thsrc.com.tw/tw/TimeTable/Search'
+#
+# headers = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)                         Chrome/73.0.3683.86 Safari/537.36'
+# }
+#
+# form_data = {
+#    'StartStationName':'南港站',
+#    'EndStationName':'台南站',
+#    'SearchType':'S',
+#    'StartStation':'2f940836-cedc-41ef-8e28-c2336ac8fe68',
+#    'EndStation':'9c5ac6ca-ec89-48f8-aab0-41b738cb1814',
+#    'DepartueSearchDate':'2019/04/02',
+#    'DepartueSearchTime':'09:00',
+#    'DepartueTrainCode':'',
+#    'DestinationSearchDate':'',
+#    'DestinationSearchTime':'',
+#    'DiscountType':''
+# }
+#
+# res = requests.post(url, headers=headers, data=form_data)
+#
+# jsdata = res.json()
+#
+##print(jsdata['data'])
+# jsdata
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# yearurl.py
+def twodigit(n):  # 將數值轉為二位數字串
+    if n < 10:
+        retstr = "0" + str(n)
+    else:
+        retstr = str(n)
+    return retstr
+
+
+urlbase = (
+    "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=2019"  # 網址前半
+)
+urltail = "01&stockNo=2317&_=1521363562193"  # 網址後半
+for i in range(1, 13):  # 取1到12數字
+    url_twse = urlbase + twodigit(i) + urltail  # 組合網址
+    print(url_twse)
+
+
+# stockmonth.py
+def convertDate(date):  # 轉捔民國日期為西元:108/01/01->20190101
+    str1 = str(date)
+    yearstr = str1[:3]  # 取出民國年
+    realyear = str(int(yearstr) + 1911)  # 轉為西元年
+    realdate = realyear + str1[4:6] + str1[7:9]  # 組合日期
+    return realdate
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+plt.rcParams["font.sans-serif"] = "mingliu"  # 設定中文字型
+plt.rcParams["axes.unicode_minus"] = False
+
+pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
+
+filepath = "stockmonth01.csv"
+
+if not os.path.isfile(filepath):  # 如果檔案不存在就建立檔案
+    url_twse = "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=20190101&stockNo=2317&_=1521363562193"
+    res = requests.get(url_twse)  # 回傳為json資料
+    jdata = json.loads(res.text)  # json解析
+
+    outputfile = open(filepath, "w", newline="", encoding="utf-8")  # 開啟儲存檔案
+    outputwriter = csv.writer(outputfile)  # 以csv格式寫入檔案
+    outputwriter.writerow(jdata["fields"])
+    for dataline in jdata["data"]:  # 寫入資料
+        outputwriter.writerow(dataline)
+    outputfile.close()  # 關閉檔案
+
+pdstock = pd.read_csv(filepath, encoding="utf-8")  # 以pandas讀取檔案
+for i in range(len(pdstock["日期"])):  # 轉換日期式為西元年格
+    pdstock["日期"][i] = convertDate(pdstock["日期"][i])
+pdstock["日期"] = pd.to_datetime(pdstock["日期"])  # 轉換日期欄位為日期格式
+pdstock.plot(kind="line", figsize=(12, 6), x="日期", y=["收盤價", "最低價", "最高價"])  # 繪製統計圖
+
+
+# stockyear.py
+def twodigit(n):  # 將數值轉為二位數字串
+    if n < 10:
+        retstr = "0" + str(n)
+    else:
+        retstr = str(n)
+    return retstr
+
+
+def convertDate(date):  # 轉捔民國日期為西元:108/01/01->20190101
+    str1 = str(date)
+    yearstr = str1[:3]  # 取出民國年
+    realyear = str(int(yearstr) + 1911)  # 轉為西元年
+    realdate = realyear + str1[4:6] + str1[7:9]  # 組合日期
+    return realdate
+
+
+plt.rcParams["font.sans-serif"] = "mingliu"  # 設定中文字型
+plt.rcParams["axes.unicode_minus"] = False
+
+pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
+
+urlbase = (
+    "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=2019"  # 網址前半
+)
+urltail = "01&stockNo=2317&_=1521363562193"  # 網址後半
+filepath = "stockyear2019.csv"
+
+if not os.path.isfile(filepath):  # 如果檔案不存在就建立檔案
+    for i in range(1, 13):  # 取1到12數字
+        url_twse = urlbase + twodigit(i) + urltail  # 組合網址
+        res = requests.get(url_twse)  # 回傳為json資料
+        jdata = json.loads(res.text)  # json解析
+
+        outputfile = open(filepath, "a", newline="", encoding="utf-8")  # 開啟儲存檔案
+        outputwriter = csv.writer(outputfile)  # 以csv格式寫入檔案
+        if i == 1:  # 若是1月就寫入欄位名稱
+            outputwriter.writerow(jdata["fields"])
+        for dataline in jdata["data"]:  # 逐月寫入資料
+            outputwriter.writerow(dataline)
+        time.sleep(0.5)  # 延遲0.5秒,否則有時會有錯誤
+    outputfile.close()  # 關閉檔案
+
+pdstock = pd.read_csv(filepath, encoding="utf-8")  # 以pandas讀取檔案
+for i in range(len(pdstock["日期"])):  # 轉換日期式為西元年格式
+    pdstock["日期"][i] = convertDate(pdstock["日期"][i])
+pdstock["日期"] = pd.to_datetime(pdstock["日期"])  # 轉換日期欄位為日期格式
+pdstock.plot(kind="line", figsize=(12, 6), x="日期", y=["收盤價", "最低價", "最高價"])  # 繪製統計圖
+
+
+# stockyear_plotly.py
+def twodigit(n):  # 將數值轉為二位數字串
+    if n < 10:
+        retstr = "0" + str(n)
+    else:
+        retstr = str(n)
+    return retstr
+
+
+def convertDate(date):  # 轉捔民國日期為西元:106/03/02->20170302
+    str1 = str(date)
+    yearstr = str1[:3]  # 取出民國年
+    realyear = str(int(yearstr) + 1911)  # 轉為西元年
+    realdate = realyear + str1[4:6] + str1[7:9]  # 組合日期
+    return realdate
+
+
+from plotly.graph_objs import Scatter, Layout
+from plotly.offline import plot
+
+pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
+
+urlbase = (
+    "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=2019"  # 網址前半
+)
+urltail = "01&stockNo=2317&_=1521363562193"  # 網址後半
+filepath = "stockyear2019.csv"
+
+if not os.path.isfile(filepath):  # 如果檔案不存在就建立檔案
+    for i in range(1, 13):  # 取1到12數字
+        url_twse = urlbase + twodigit(i) + urltail  # 組合網址
+        res = requests.get(url_twse)  # 回傳為json資料
+        jdata = json.loads(res.text)  # json解析
+
+        outputfile = open(filepath, "a", newline="", encoding="utf-8")  # 開啟儲存檔案
+        outputwriter = csv.writer(outputfile)  # 以csv格式寫入檔案
+        if i == 1:  # 若是1月就寫入欄位名稱
+            outputwriter.writerow(jdata["fields"])
+        for dataline in jdata["data"]:  # 逐月寫入資料
+            outputwriter.writerow(dataline)
+        time.sleep(0.5)  # 延遲0.5秒,否則有時會有錯誤
+    outputfile.close()  # 關閉檔案
+
+pdstock = pd.read_csv(filepath, encoding="utf-8")  # 以pandas讀取檔案
+for i in range(len(pdstock["日期"])):  # 轉換日期式為西元年格式
+    pdstock["日期"][i] = convertDate(pdstock["日期"][i])
+pdstock["日期"] = pd.to_datetime(pdstock["日期"])  # 轉換日期欄位為日期格式
+data = [
+    Scatter(x=pdstock["日期"], y=pdstock["收盤價"], name="收盤價"),
+    Scatter(x=pdstock["日期"], y=pdstock["最低價"], name="最低價"),
+    Scatter(x=pdstock["日期"], y=pdstock["最高價"], name="最高價"),
+]
+plot({"data": data, "layout": Layout(title="2019年個股統計圖")}, auto_open=True)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個

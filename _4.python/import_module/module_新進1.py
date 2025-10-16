@@ -83,15 +83,10 @@ print("uuid = {}".format(str(uuid.uuid4())))
 
 print("------------------------------------------------------------")  # 60個
 
-import socket
-
-hostname = socket.gethostname()
-print("取得 hostname :", hostname)
-
 import time
 
 path = "cccc"
-print("%s.%s.%s.%s" % (path, int(time.time()), socket.gethostname(), os.getpid()))
+print("%s.%s.%s" % (path, int(time.time()), os.getpid()))
 
 print("------------------------------------------------------------")  # 60個
 

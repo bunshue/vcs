@@ -175,7 +175,7 @@ print(f"翻译: {translated}")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
+""" NG in kilo
 from google_trans_new import google_translator
 
 translator = google_translator()
@@ -190,7 +190,45 @@ text = "今天天氣很好"
 
 word = translator.translate(text, lang_src="zh-TW", lang_tgt="ja", pronounce=True)
 # print(word)
+"""
 
+print("------------------------------")  # 30個
+
+"""
+google_trans_new：文字翻譯
+pip install google_trans_new
+"""
+
+""" NG in kilo
+from google_trans_new import google_translator
+translator = google_translator()
+text="今天天氣很好"
+word = translator.translate(text, lang_src="zh-TW", lang_tgt="ja", pronounce=True)
+print(word)
+
+from google_trans_new import google_translator
+translator = google_translator()
+print(translator.translate("今日の天気は良いです"))
+
+lang = translator.detect("今日の天気は良いです")
+print(lang)
+"""
+
+print("------------------------------")  # 30個
+
+""" NG in kilo
+# !pip install google_trans_new
+
+from google_trans_new import google_translator
+
+translator = google_translator()
+
+content = "名偵探柯南是根據日本漫畫家青山剛昌著名原作推理漫畫名偵探柯南改編的動畫作品。"
+
+ret = translator.translate(content, lang_tgt="zh-TW")
+print("找到文字 :", ret)
+
+"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -217,36 +255,3 @@ print("------------------------------------------------------------")  # 60個
 
 # 3030
 print("------------------------------")  # 30個
-
-
-"""
-google_trans_new：文字翻譯
-pip install google_trans_new
-
-"""
-
-
-"""fail
-from google_trans_new import google_translator
-translator = google_translator()
-text="今天天氣很好"
-word = translator.translate(text, lang_src="zh-TW", lang_tgt="ja", pronounce=True)
-print(word)
-
-from google_trans_new import google_translator
-translator = google_translator()
-print(translator.translate("今日の天気は良いです"))
-
-lang = translator.detect("今日の天気は良いです")
-print(lang)
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# !pip install google_trans_new
-
-# from google_trans_new import google_translator
-
-translator = google_translator()
-ret = translator.translate(content, lang_tgt="zh-TW")
-print("找到文字 :", ret)

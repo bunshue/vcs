@@ -49,7 +49,7 @@ namespace vcs_SQLite2
             while (dr.Read())
             {
                 richTextBox1.Text += "取得資料\t" + dr.GetString(0) + "\t" + dr.GetString(1) + "\n";
-                //dataGridView1.Rows.Insert(0, dr.GetString(0), dr.GetString(1));
+                dataGridView1.Rows.Insert(0, dr.GetString(0), dr.GetString(1));
             }
         }
 
@@ -97,11 +97,11 @@ namespace vcs_SQLite2
                 cmd.Parameters.AddWithValue("@name", NAME);
                 cmd.Parameters.AddWithValue("@id", ID);
 
-                //dataGridView1.ColumnCount = 2;
-                //dataGridView1.Columns[0].Name = "Name";
-                //dataGridView1.Columns[1].Name = "Id";
-                //string[] row = new string[] { NAME, ID };
-                //dataGridView1.Rows.Add(row);
+                dataGridView1.ColumnCount = 2;
+                dataGridView1.Columns[0].Name = "Name";
+                dataGridView1.Columns[1].Name = "Id";
+                string[] row = new string[] { NAME, ID };
+                dataGridView1.Rows.Add(row);
 
                 cmd.ExecuteNonQuery();
             }
@@ -128,7 +128,7 @@ namespace vcs_SQLite2
                 cmd.Parameters.AddWithValue("@Id", "456");
 
                 cmd.ExecuteNonQuery();
-                //dataGridView1.Rows.Clear();
+                dataGridView1.Rows.Clear();
                 data_show();
             }
             catch (Exception)
@@ -153,7 +153,7 @@ namespace vcs_SQLite2
                 cmd.Parameters.AddWithValue("@Name", "david");
 
                 cmd.ExecuteNonQuery();
-                //dataGridView1.Rows.Clear();
+                dataGridView1.Rows.Clear();
                 data_show();
             }
             catch (Exception)
@@ -172,6 +172,19 @@ namespace vcs_SQLite2
         {
 
         }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            richTextBox1.Text += "aaaaa\n";
+            if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {
+                richTextBox1.Text += "bbbbb\n";
+                dataGridView1.CurrentRow.Selected = true;
+                string name = dataGridView1.Rows[e.RowIndex].Cells["Name"].FormattedValue.ToString();
+                string id = dataGridView1.Rows[e.RowIndex].Cells["Id"].FormattedValue.ToString();
+
+                richTextBox1.Text += "取得資料:\t" + name + "\t" + id + "\n";
+            }
+        }
     }
 }
-

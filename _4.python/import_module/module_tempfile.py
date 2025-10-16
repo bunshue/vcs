@@ -85,7 +85,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import glob
-import socket
 
 tmpdir = tempfile.gettempdir()
 tmpdir = os.path.join(tmpdir, ".grail-unix")
@@ -100,7 +99,6 @@ if maybes:
         % (self.__class__.__name__, time.ctime(time.time()), localaddr, remoteaddr),
         file=DEBUGSTREAM,
     )
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
