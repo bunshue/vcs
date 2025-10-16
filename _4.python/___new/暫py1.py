@@ -1,4 +1,24 @@
 
+import random
+
+def get_random_name():
+    characters = "abcdefghijklmnopqrstuvwxyz0123456789_"
+    characters = "ABCDEFG"
+    r = random.Random()
+    letters = [r.choice(characters) for dummy in range(4)]
+    return ''.join(letters)
+
+for _ in range(5):
+    name = get_random_name()
+    print(name)
+
+
+import os
+cur_pid = os.getpid()
+print('cur_pid = ', cur_pid)
+
+
+
 
 filename = "aaaa.csv"
 with open(filename, "w", encoding="utf-8", newline="") as fp:
