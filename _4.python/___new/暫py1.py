@@ -1,4 +1,10 @@
 
+hist_b = cv2.calcHist([image0], [0], None, [256], [0, 256])
+hist_g = cv2.calcHist([image0], [1], None, [256], [0, 256])
+hist_r = cv2.calcHist([image0], [2], None, [256], [0, 256])
+cc = np.concatenate((hist_r, hist_g, hist_b))
+
+
 import random
 
 def get_random_name():

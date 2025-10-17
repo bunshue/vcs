@@ -11,7 +11,7 @@ from opencv_common import *
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("最簡易, 按 ESC 離開")
 
 cap = cv2.VideoCapture(0)
@@ -1230,7 +1230,6 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1324,66 +1323,17 @@ frame_blur_now = cv2.GaussianBlur(gray, (13, 13), 15)  # 高斯模糊
 diff = cv2.absdiff(frame_blur_now, frame_blur_pre)  # 現在影像與前影像相減
 """
 
-'''
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("處理影片, 按 ESC 離開")
-
-# 1232 X 1064 60p 8m55s
-video_filename = '20251013140833-0.mp4'
-cap = cv2.VideoCapture(video_filename)  # 開啟影片
-
-W, H = 1232, 1064
-w, h = W-100*2, H-100*2
-x_st, y_st = 100,100
+"""
 RECT = ((x_st, y_st), (x_st + w, y_st + h))
+# cv2.rectangle(frame, RECT[0], RECT[1], GREEN, 2)
+frame = frame[y_st : y_st + h, x_st : x_st + w]  # 取出陣列的範圍
+frame = cv2.resize(frame, (0, 0), fx=0.7, fy=0.7)  # 調整影像大小
 
-cnt = 0
-
-# 以迴圈從影片檔案讀取影格，並顯示出來
-while cap.isOpened():
-    ret, frame = cap.read()
-    if ret == True:
-        # cv2.rectangle(frame, RECT[0], RECT[1], GREEN, 2)
-        frame = cv2.resize(frame, (0, 0), fx=0.7, fy=0.7)  # 調整影像大小
-        cv2.imshow("Video Player", frame)
-        cnt = cnt + 1
-        if cnt % 30 == 0:
-            image0 = frame
-            
-            hist_b = cv2.calcHist([image0], [0], None, [256], [0, 256])
-            hist_g = cv2.calcHist([image0], [1], None, [256], [0, 256])
-            hist_r = cv2.calcHist([image0], [2], None, [256], [0, 256])
-            cc = np.concatenate((hist_r, hist_g, hist_b))
-            mm = max(cc)
-            # print(mm)
-            ratio = mm//256+1
-            #print("ratio =", ratio)
-            #print(ratio.shape)
-            rr = ratio[0]
-            # print(mm, rr)
-            rr = rr//10
-            image = np.zeros((256, 512, 3), dtype=np.uint8)
-            x, y, cw, ch = 10, 10, 100, 100
-            for i in range(len(hist_r)):
-                # print(type(hist_r[i]))
-                # print(hist_r[i])
-                cv2.circle(image, (i*2, 256-int(hist_r[i]/rr)), 1, RED, -1)
-                cv2.circle(image, (i*2, 256-int(hist_g[i]/rr)), 1, GREEN, -1)
-                cv2.circle(image, (i*2, 256-int(hist_b[i]/rr)), 1, BLUE, -1)
-            cv2.imshow("Histogram", image)
-    else:
-        break
-
-    k = cv2.waitKey(1)  # 等待按鍵輸入 1 msec
-    if k == ESC:  # 按 ESC 鍵, 結束
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+"""
