@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_DataGridViewE", "vcs_DataGridViewE\vcs_DataGridViewE.csproj", "{A2A5B257-A1F1-4A16-BD68-D58F7959AAB8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_DataGridView1", "vcs_DataGridView1\vcs_DataGridView1.csproj", "{A2A5B257-A1F1-4A16-BD68-D58F7959AAB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

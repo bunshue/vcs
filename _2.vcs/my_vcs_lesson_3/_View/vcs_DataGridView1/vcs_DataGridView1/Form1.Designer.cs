@@ -1,4 +1,4 @@
-﻿namespace vcs_DataGridViewE
+﻿namespace vcs_DataGridView1
 {
     partial class Form1
     {
@@ -184,7 +184,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(130, 60);
             this.button9.TabIndex = 44;
-            this.button9.Text = "建立DGV 9";
+            this.button9.Text = "建立DGV 9 顯示圖片";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
