@@ -140,11 +140,118 @@ string_html_data = """
         <a class="redcolor" href="http://powenko.com/1.html" id="link1">test1</a>
         <a class="bluecolor" href="http://powenko.com/2.html" id="link2">test2</a>
         <a class="redcolor" id="link3" href="http://powenko.com/3.html" id="link3">test3</a>
+
+        <h3 class="blueText">優質好書</h3>
+        <ul>
+          <li><a href="https://www.google.com111">AAAA</a></li>
+          <li><a href="https://www.google.com222">BBBB</a></li>
+          <li><a href="https://www.google.com333">CCCC</a></li>
+        </ul>
+        <p><a href="https://www.google.com444" id="linkDtc" target="_blank">DDDD</a></p>
+
+    <p class="title"><b>文件標題</b></p>
+    <p class="story">Once upon a time there were three little sisters; and their names were
+    <a href="http://example.com/elsie" class="sister" id="link1">Elsie</a>,
+    <a href="http://example.com/lacie" class="sister" id="link2">Lacie</a> and
+    <a href="http://example.com/tillie" class="sister" id="link3">Tillie</a>;
+    and they lived at the bottom of a well.</p>
+    <p class="story">...</p>
+
+    <div class="content">
+        E-Mail：<a href="mailto:mail@test.com.tw">mail</a><br>
+        E-Mail2：<a href="mailto:mail2@test.com.tw">mail2</a><br>
+        <ul class="price">定價：360元 </ul>
+        <img src="http://test.com.tw/p1.jpg">
+        <img src="http://test.com.tw/p2.jpg">
+        <img src="http://test.com.tw/p3.png">
+    </div>
+
     </body>
 </html>
 """
 soup = BeautifulSoup(string_html_data, "html.parser")
 # soup = BeautifulSoup(string_html_data, "lxml")
+
+print("------------------------------")  # 30個
+
+# 用find找
+
+print("找下一個粗體<b>")
+cc = soup.find("b")  # 找下一個粗體<b>
+print(cc)  # 全部
+print(cc.text)  # 內容
+print(cc.string)  # 內容
+
+print("找全部的超連結<a>")
+
+print(soup.find_all("a"))
+
+print("找全部的超連結<a> +  條件")
+cc = soup.find_all("a", {"class": "sister"})
+print(cc)
+
+print("找下一個超連結<a> + 條件")
+cc = soup.find("a", {"href": "http://example.com/elsie"})
+print(cc.text)  # Elsie
+
+print("找下一個超連結<a> + 條件")
+cc = soup.find("a", {"id": "link2"})
+print(cc.text)  # Lacie
+
+# 用select選
+cc = soup.select("#link3")
+print(cc)  # 全部
+print(cc[0].text)  # 內容  # Tillie
+
+print("找下一個超連結<a> + 條件")
+cc = soup.find("a", {"id": "link1"})
+print(cc.get("href"))  # http://example.com/elsie
+print(cc["href"])  # http://example.com/elsie
+
+print("------------------------------")  # 30個
+
+print("用 re 搭配搜尋")
+print("搜尋網頁中的 e-mail")
+emails = re.findall(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+", string_html_data)
+for email in emails:
+    print(email)
+
+print("搜尋網頁中的 價格")
+price = re.findall(r"[\d]+", soup.select(".price")[0].text)[0]  # 價格
+print(price)
+
+print("搜尋網頁中的 jpg圖片連結")
+regex = re.compile(".*\.jpg")
+
+print("找全部的影像<img> + 條件")
+imglist = soup.find_all("img", {"src": regex})
+for img in imglist:
+    print(img["src"])
+
+
+print("------------------------------")  # 30個
+
+print("---------------h3")  # 15個
+print(soup.find("h3"))
+print(soup.find("h3").text)
+print("---------------blueText")  # 15個
+print(soup.select(".blueText"))
+print(soup.select(".blueText")[0].text)
+print("---------------a")  # 15個
+print(soup.find("a", {"target": "_blank"}))
+print(soup.find("a", {"target": "_blank"}).text)
+print("---------------linkDtc")  # 15個
+print(soup.select("#linkDtc"))
+print(soup.select("#linkDtc")[0].text)
+print("---------------a")  # 15個
+link1 = soup.find_all("a")
+for n in range(0, len(link1)):
+    print(link1[n].text)
+print("---------------ul")  # 15個
+data = soup.find("ul")
+link2 = data.find_all("a")
+for n in range(0, len(link2)):
+    print(link2[n].text)
 
 print("------------------------------")  # 30個
 
@@ -192,14 +299,32 @@ print("head.meta :", soup.html.head.meta["charset"])
 
 print("------------------------------")  # 30個
 
+print("找全部的超連結<a>")
+all_links = soup.find_all("a")  # 取得 全部 <a></a>
+for link in all_links:
+    href = link.get("href")  # 讀取 href 屬性內容
+    # 判斷內容是否為非 None，並且開頭文字是 https://
+    if href != None and href.startswith("https://"):
+        print(href)
+
+print("------------------------------")  # 30個
+
+print("搜尋網頁中的 jpg圖片連結")
+regex = re.compile(".*\.jpg")
+imglist = soup.find_all("img", {"src": regex})
+for img in imglist:
+    print(img["src"])
+
+print("------------------------------")  # 30個
+
 # 用find找
 
 # print("網頁html語法區塊：\n", soup.find("html"))  # <html>標籤
-print("------------------------------")  # 30個
+print("---------------")  # 15個
 print("網頁表頭範圍 :", soup.find("head"))  # <head>標籤
-print("------------------------------")  # 30個
+print("---------------")  # 15個
 # print("網頁身體範圍：", soup.find("body"))  # <body>標籤
-print("------------------------------")  # 30個
+print("---------------")  # 15個
 
 print(soup.find("title"))  # 傳回網頁含<title>~</title>
 print(soup.find("title").text)  # 傳回網頁<title>標籤內的資料
@@ -366,89 +491,6 @@ print("---------------")  # 15個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("BeautifulSoup 測試 讀取本地 html 4")
-
-string_html_data = """
-<html>
-    <p class="title"><b>文件標題</b></p>
-    <p class="story">Once upon a time there were three little sisters; and their names were
-    <a href="http://example.com/elsie" class="sister" id="link1">Elsie</a>,
-    <a href="http://example.com/lacie" class="sister" id="link2">Lacie</a> and
-    <a href="http://example.com/tillie" class="sister" id="link3">Tillie</a>;
-    and they lived at the bottom of a well.</p>
-    <p class="story">...</p>
-
-    <div class="content">
-        E-Mail：<a href="mailto:mail@test.com.tw">mail</a><br>
-        E-Mail2：<a href="mailto:mail2@test.com.tw">mail2</a><br>
-        <ul class="price">定價：360元 </ul>
-        <img src="http://test.com.tw/p1.jpg">
-        <img src="http://test.com.tw/p2.jpg">
-        <img src="http://test.com.tw/p3.png">
-    </div>
-</html>
-"""
-
-soup = BeautifulSoup(string_html_data, "html.parser")
-
-print("------------------------------")  # 30個
-
-# 用find找
-
-print("找下一個粗體<b>")
-cc = soup.find("b")  # 找下一個粗體<b>
-print(cc)  # 全部
-print(cc.text)  # 內容
-print(cc.string)  # 內容
-
-print("找全部的超連結<a>")
-print(soup.find_all("a"))
-
-print("找全部的超連結<a> +  條件")
-cc = soup.find_all("a", {"class": "sister"})
-print(cc)
-
-print("找下一個超連結<a> + 條件")
-cc = soup.find("a", {"href": "http://example.com/elsie"})
-print(cc.text)  # Elsie
-
-print("找下一個超連結<a> + 條件")
-cc = soup.find("a", {"id": "link2"})
-print(cc.text)  # Lacie
-
-# 用select選
-cc = soup.select("#link3")
-print(cc)  # 全部
-print(cc[0].text)  # 內容  # Tillie
-
-print("找下一個超連結<a> + 條件")
-cc = soup.find("a", {"id": "link1"})
-print(cc.get("href"))  # http://example.com/elsie
-print(cc["href"])  # http://example.com/elsie
-
-print("------------------------------")  # 30個
-
-print("用 re 搭配搜尋")
-print("搜尋網頁中的 e-mail")
-emails = re.findall(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+", string_html_data)
-for email in emails:
-    print(email)
-
-print("搜尋網頁中的 價格")
-price = re.findall(r"[\d]+", soup.select(".price")[0].text)[0]  # 價格
-print(price)
-
-print("搜尋網頁中的 jpg圖片連結")
-regex = re.compile(".*\.jpg")
-
-print("找全部的影像<img> + 條件")
-imglist = soup.find_all("img", {"src": regex})
-for img in imglist:
-    print(img["src"])
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("BeautifulSoup 測試 讀取本地 html 3")
 
 string_html_data = """
@@ -552,7 +594,6 @@ print(soup.select("div img")[0]["src"])  # http://example.com/three.jpg
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-sys.exit()
 
 print("BeautifulSoup 測試 讀取本地 html 6")
 
@@ -1312,21 +1353,12 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 print("讀取本地html SP")
 print("------------------------------------------------------------")  # 60個
 
-sys.exit()
-
 print("BeautifulSoup 測試 01 抓取一個網頁的所有圖片檔")
 
+# 文淵閣工作室官網
 url = "http://www.e-happy.com.tw"
 
 domain = "{}://{}".format(
@@ -1382,48 +1414,14 @@ print("------------------------------------------------------------")  # 60個
 
 print("BeautifulSoup 測試 02")
 
-url = "http://www.e-happy.com.tw"
-soup = get_soup_from_url(url)
-
 url = "https://tw.news.yahoo.com/rss/technology"
 soup = get_soup_from_url(url)
 
-print("------------------------------")  # 30個
-
+# 用find找
 cc = soup.findAll("item")
 print("取得Yahoo奇摩新聞-科技新聞-標題")
 for news in cc:
     print(news.title)
-
-print("------------------------------------------------------------")  # 60個
-
-url = "https://tw.news.yahoo.com/rss/technology"
-response = requests.get(url)
-soup = BeautifulSoup(response.text, "html.parser")
-
-# 用find找
-cc = soup.findAll("item")
-for news in cc:
-    print(news.title)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("BeautifulSoup 測試 03")
-
-url = "https://www.google.com.tw/"
-soup = get_soup_from_url(url)
-
-print("------------------------------")  # 30個
-
-print("找全部的超連結<a>")
-all_links = soup.find_all("a")  # 取得 全部 <a></a>
-
-for link in all_links:
-    href = link.get("href")
-    if href != None and href.startswith("http://"):
-        print("取得資料")
-        print(href)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1488,6 +1486,7 @@ print("找全部的標題<h2> + 條件")
 target = soup.find_all("h2", {"class": "breaking-news"})
 # print(target)
 
+print("聯合新聞網 快訊")
 for news in target:
     print(news.a["title"])
 
@@ -1496,15 +1495,16 @@ print("------------------------------")  # 30個
 # 用find找
 # print("找全部的超連結<a> + 條件")?????
 all_links = soup.find_all(class_="story-list__text")
-print(all_links)
+# print(all_links)
 
-headlines = list()
+headlines = list()  # 串列, 裡面放字典
+
 for link in all_links:
     title = link.find("h2")
     try:
-        print(title.a["title"])
-        print(title.a["href"])
-        item = dict()
+        # print(title.a["title"])
+        # print(title.a["href"])
+        item = dict()  # 字典
         item["title"] = title.a["title"]
         if not title.a["href"].startswith("http"):
             item["link"] = "https://udn.com{}".format(title.a["href"])
@@ -1513,49 +1513,21 @@ for link in all_links:
         headlines.append(item)
     except:
         pass
+
+"""
+print(len(headlines))
 print(headlines)
-
-print("------------------------------")  # 30個
-
-print("BeautifulSoup 測試 09c udn news")
-
-# 聯合新聞網
-url = "https://autos.udn.com/autos/story/9060/2187994"
-soup = get_soup_from_url(url)
-
-# 用find找
-
-regex = r"http.+jpg"
-
-photos = list()
-print("找全部的超連結<a>")
-all_links = soup.find_all("a")  # 取得 全部 <a></a>
-print(all_links)
-for link in all_links:
-    try:
-        if ".jpg" in link["href"]:
-            print(link["href"])
-            target = link["href"]
-            for item in re.findall(regex, target):
-                photos.append(item)
-    except:
-        pass
-print(photos)
-
-for link in photos:
-    item = urllib.parse.urlparse(link)
-    q = urllib.parse.parse_qs(item.query)
-    target = urllib.parse.urlparse(q["u"][0])
-    filename = os.path.basename(target.path)
-    urllib.request.urlretrieve(link, os.path.join("images", filename))
-    print("Storing " + filename)
-    time.sleep(3)
+print(type(headlines))
+print(type(headlines[0]))
+"""
+print("看5筆資料")
+for i in range(5):
+    print(headlines[i])
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-sys.exit()
 
-print("BeautifulSoup 測試 10")
+print("BeautifulSoup 測試 10 domain")
 
 url = "https://www.ptt.cc/bbs/C_Chat/index.html"
 
@@ -1567,51 +1539,29 @@ print("domain :", domain)
 html_data = get_html_data1(url)
 soup = BeautifulSoup(html_data.text, "html.parser")
 
-# 用find找
+url = "https://udn.com/news/breaknews/1"  # 聯合新聞網
+soup = get_soup_from_url(url)
 
+# 用find找
 print("多重取得")
 all_links = soup.find_all(["a", "img"])  # 多重取得, 找全部的 超連結<a> 和 影像<img>
+# print(all_links)
 
 for link in all_links:
     src = link.get("src")
     href = link.get("href")
     targets = [src, href]
+    # print(targets)
     for t in targets:
         if t != None and (".jpg" in t or ".png" in t):
-            if t.startswith("http"):
-                print(t)
-            else:
-                print(domain + t)
-                print("domain :", domain + t)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("BeautifulSoup 測試 11")
-
-domain = "{}://{}".format(
-    urllib.parse.urlparse(url).scheme, urllib.parse.urlparse(url).hostname
-)
-print("domain :", domain)
-
-html_data = get_html_data1(url)
-soup = BeautifulSoup(html_data.text, "html.parser")
-
-# 用find找
-print("多重取得")
-all_links = soup.find_all(["a", "img"])  # 多重取得, 找全部的 超連結<a> 和 影像<img>
-
-for link in all_links:
-    src = link.get("src")
-    href = link.get("href")
-    targets = [src, href]
-    for t in targets:
-        if t != None and (".jpg" in t or ".png" in t):
-            if t.startswith("http"):
+            if t.startswith("https"):
+                print("aa")
                 full_path = t
             else:
+                print("bb")
                 full_path = domain + t
             print(full_path)
+
             image_dir = url.split("/")[-1]
             if not os.path.exists(image_dir):
                 os.mkdir(image_dir)
@@ -1873,7 +1823,6 @@ with request.urlopen(req_obj,context=context) as res_obj:
 df = pd.DataFrame(song_list,columns=["song", "singer"])
 print(df)
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -1886,7 +1835,6 @@ url = "https://www.ptt.cc/bbs/NBA/index.html"  # PTT NBA 板
 response = requests.get(url)  # 用 requests 的 get 方法把網頁抓下來
 html_doc = response.text  # text 屬性就是 html 檔案
 soup = BeautifulSoup(response.text, "lxml")  # 指定 lxml 作為解析器
-
 
 print("一些 BeautifulSoup 的屬性或方法")
 
@@ -2060,30 +2008,199 @@ ptt_nba_df
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("BeautifulSoup 測試 19, 找出超連結")
+# 博碩文化新書網頁
+urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
+response = requests.get(urlstr)
+response.encoding = "utf-8"
 
-# 文淵閣工作室官網
-url = "http://www.e-happy.com.tw"
-html = requests.get(url)
-html.encoding = "utf-8"
+print("網址：%s" % (response.url))
+print("狀態：%s" % (response.status_code))
+print("表頭：%s" % (response.headers))
+print("網頁程式碼：%s" % (response.text))
 
-soup = BeautifulSoup(html.text, "html.parser")
+"""
+Response屬性
+content 取得二進位資料 例如可以取得網路圖檔
+encoding 取得或設定網頁的編碼模式
+headers 取得網頁的表頭資訊
+text 取得網頁的所有程式碼
+status_code 取得網頁的連線狀態
+    200: 請求成功
+    400 伺服器無法理解請求
+    404伺服器找不到請求資源, 可能是連接的url錯誤
+url 取得網頁的網址
+"""
+print("------------------------------------------------------------")  # 60個
 
-print("找全部的超連結<a>")
-all_links = soup.find_all("a")  # 取得 全部 <a></a>
-for link in all_links:
-    href = link.get("href")  # 讀取 href 屬性內容
-    # 判斷內容是否為非 None，並且開頭文字是 https://
-    if href != None and href.startswith("https://"):
-        print(href)
+# 博碩文化新書網頁
+urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
+response = requests.get(urlstr)
+response.encoding = "utf-8"
+
+soup = BeautifulSoup(response.text, "html.parser")
+print(soup.title.text)  # 顯示網頁title標題
+
+listBookName = soup.select(".style2")
+count = len(listBookName)
+print("共 %d 筆新書記錄" % (count))  # 顯示 '共 20 筆新書記錄'
+
+print("顯示網頁新書書名")
+for book in listBookName:
+    print(book.text)
 
 print("------------------------------")  # 30個
 
-print("搜尋網頁中的 jpg圖片連結")
-regex = re.compile(".*\.jpg")
-imglist = soup.find_all("img", {"src": regex})
-for img in imglist:
-    print(img["src"])
+listImageUrl = soup.select("td a img")
+
+for link in listImageUrl:
+    # if("http" in link.get('src')):
+    print(link.get("src"))
+
+print("------------------------------------------------------------")  # 60個
+
+# htmlparse06.py   http讀圖部分還沒好
+
+import shutil
+
+# 若程式的路徑有images資料即刪除，否則即建立images
+folder = "images"
+if os.path.exists(folder):
+    shutil.rmtree(folder)
+os.mkdir(folder)
+
+# 博碩文化新書網頁
+urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
+response = requests.get(urlstr)
+response.encoding = "utf-8"
+soup = BeautifulSoup(response.text, "html.parser")
+listImageUrl = soup.select("td a img")
+# 逐一取得博碩新書圖檔並放入images資料夾下
+n = 0
+for link in listImageUrl:
+    print(link.get("src"))
+    imgUrl = link.get("src")
+    if "http" in imgUrl:
+        imgName = imgUrl.split("/")[-1]
+        response = requests.get(imgUrl)
+        f = open(folder + "/" + imgName, "wb")  # 指定開啟檔案路徑
+        # 將response.content二進位內容寫入指定的圖檔名稱
+        f.write(response.content)
+        f.close()
+        print("%s 下載完成" % (imgName))
+        n += 1
+print("共下載 %d 張圖檔" % (n))
+
+print("------------------------------------------------------------")  # 60個
+
+home = "https://www.drmaster.com.tw/"
+
+import shutil
+
+# 若程式的路徑有images資料即刪除，否則即建立images
+folder = "images"
+if os.path.exists(folder):
+    shutil.rmtree(folder)
+os.mkdir(folder)
+pageName = "newbook.html"
+if os.path.exists(pageName):
+    os.remove(pageName)
+
+# 博碩文化新書網頁
+urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
+response = requests.get(urlstr)
+response.encoding = "utf-8"
+soup = BeautifulSoup(response.text, "html.parser")
+listImageUrl = soup.select("td a img")
+listImageUrlOk = []
+listBookName = soup.select(".style2")
+# 逐一取得博碩新書圖檔並放入images資料夾下
+for link in listImageUrl:
+    imgUrl = link.get("src")
+    imgUrl = home + imgUrl
+    print("url :", imgUrl)
+    if "http" in imgUrl:
+        imgName = imgUrl.split("/")[-1]
+        print(imgName)
+        listImageUrlOk.append(imgName)
+        response = requests.get(imgUrl)
+        f = open(folder + "/" + imgName, "wb")  # 指定開啟檔案路徑
+        # 將response.content二進位內容寫入指定的圖檔名稱
+        f.write(response.content)
+        f.close()
+        print("%s 下載完成" % (imgName))
+
+f = open(pageName, "w", encoding="utf-8")
+f.write("<html>\n")
+f.write('<meta charset="utf-8">\n')
+f.write("<body>\n")
+f.write("<table border>\n")
+f.write("<tr><td>書號</td><td>圖</td><td>書名</td></tr>\n")
+
+print("---------------")  # 15個
+print(len(listBookName))
+print(listBookName)
+print("---------------")  # 15個
+print(len(listImageUrlOk))
+print(listImageUrlOk)
+print("---------------")  # 15個
+
+for n in range(len(listBookName)):
+    f.write("<tr>\n")
+    f.write("<td>%s</td>\n" % (listImageUrlOk[n].split(".")[0]))
+    f.write('<td><img src="images/%s" width="100"></td>\n' % (listImageUrlOk[n]))
+    f.write("<td>%s</td>\n" % (listBookName[n].text))
+    f.write("</tr>\n")
+f.write("</table>\n")
+f.write("</body>\n")
+f.write("</html>\n")
+f.close()
+
+# 開啟 os.system(pageName)
+
+print("%s 網頁建置成功" % (pageName))
+
+print("------------------------------------------------------------")  # 60個
+
+# 博碩文化新書網頁
+urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
+
+responseObj = requests.get(urlstr)
+responseObj.encoding = "utf-8"
+soup = BeautifulSoup(responseObj.text, "html.parser")
+print(soup.title.text)
+data = soup.select(".style2")
+count = len(data)
+print("共 %d 筆新書記錄" % (count))
+
+for book in data:
+    print(book.text)
+
+print("------------------------------------------------------------")  # 60個
+
+# 博碩文化新書網頁
+urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
+
+responseObj = requests.get(urlstr)
+responseObj.encoding = "utf-8"
+soup = BeautifulSoup(responseObj.text, "html.parser")
+
+data = soup.select("td a img")
+
+for book in data:
+    if "http" in book.get("src"):
+        print(book.get("src"))
+
+print("------------------------------------------------------------")  # 60個
+
+# 指定圖片網址
+imgUrl = "http://www.drmaster.com.tw/Cover/MP22030.png"
+imgName = imgUrl.split("/")[-1]
+response = requests.get(imgUrl)
+f = open(imgName, "wb")  # 指定開啟檔案路徑
+# 將response.content二進位內容寫入為MP22030.png
+f.write(response.content)
+print("%s 下載完畢" % (imgName))
+f.close()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2209,32 +2326,25 @@ print(dir(soup))
 
 print("------------------------------")  # 30個
 
-# 用find找
-print("找全部的影像<img>")
-images = soup.find_all("img")  # 取得 全部 <img></img>
-for image in images:
-    print(image["src"])
-
-print("------------------------------")  # 30個
-
-from os.path import basename
-
-"""
-# 用find找
-print("找全部的影像<img>")
-images = soup.find_all("img")  # 取得 全部 <img></img>
 if not os.path.exists("tmp_download_files"):
     os.mkdir("tmp_download_files")
+
+# 用find找
+print("找全部的影像<img>")
+images = soup.find_all("img")  # 取得 全部 <img></img>
 for image in images:
     image_url = image["src"]
+    print(image_url)
+    """ NG
     if ".jpg" in image_url:
-        image_filename = basename(image_url)
+        image_filename = os.path.basename(image_url)
         with open(os.path.join("tmp_download_files", image_filename), "wb") as fp:
             image_data = urllib.request.urlopen(image_url).read()
             fp.write(image_data)
         print(image_url)
         print(image_filename)
-"""
+    """
+
 print("------------------------------")  # 30個
 
 print("抓取網頁 分析 10")
@@ -2242,15 +2352,16 @@ print("抓取網頁 分析 10")
 import dominate
 from dominate.tags import *
 from dominate.util import raw
-from os.path import basename
 
 url = "http://aiworker2000.pixnet.net/blog/post/16062839"
 index_html = dominate.document(title="圖形檔案索引")
 
+if not os.path.exists("tmp_download_files"):
+    os.mkdir("tmp_download_files")
+
 with index_html.head:
     meta(charset="utf-8")
 
-""" NG
 with index_html:
     h1("圖形檔案索引")
     hr()
@@ -2259,44 +2370,23 @@ with index_html:
     # 用find找
     print("找全部的影像<img>")
     images = soup.find_all("img")  # 取得 全部 <img></img>
-    if not os.path.exists("tmp_download_files"):
-        os.mkdir("tmp_download_files")
     for image in images:
         image_url = image["src"]
+        """
         if ".jpg" in image_url:
-            image_filename = basename(image_url)
+            image_filename = os.path.basename(image_url)
             image_link = a(href=image_filename)
             image_link += img(src=image_filename, width=200)
             with open(os.path.join("tmp_download_files", image_filename), "wb") as fp:
                 image_data = urllib.request.urlopen(image_url).read()
                 fp.write(image_data)
+        """
 
 with open(
     os.path.join("tmp_download_files", "index.html"), "wt", encoding="utf-8"
 ) as fp:
     fp.write(str(index_html))
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-""" NG
-print("抓取網頁 分析 8")
 
-#教育部全球資訊網-即時新聞
-url = "https://www.edu.tw/News.aspx?n=9E7AC85F1954DDA8&sms=169B8E91BB75571F"
-html = requests.get(url).text
-soup = BeautifulSoup(html, "lxml")
-
-table = soup.find("table")
-
-print("找全部的xx<tr>")
-for row in soup.find_all("tr"):  # 取得 全部 <tr></tr>
-    print("找全部的xx<td>")
-    cells = row.find_all("td")  # 取得 全部 <td></td>
-    for cell in cells:
-        a = cell.find("a")
-        if a is not None:
-            print(a.text)
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2308,7 +2398,7 @@ html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
 
 table = soup.find("table")
-headlines = list()
+
 print("找全部的xx<tr>")
 for row in soup.find_all("tr"):  # 取得 全部 <tr></tr>
     print("找全部的xx<td>")
@@ -2316,31 +2406,11 @@ for row in soup.find_all("tr"):  # 取得 全部 <tr></tr>
     for cell in cells:
         a = cell.find("a")
         if a is not None and a.text != "下一頁":
-            headlines.append(a.text)
-news = "\n".join(headlines)
-with open("tmp_教育部全球資訊網即時新聞.txt", "wt", encoding="utf-8") as fp:
-    fp.write(news)
+            print(a.text)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
-print("抓取網頁 分析 13")
 
-url = "https://www.ptt.cc/bbs/gossiping/index.html"
-
-cookies = {"over18": "1"}
-response = requests.get(url=url, cookies=cookies)
-html = response.text
-
-soup = BeautifulSoup(html, "lxml")
-
-print("找全部的內容分區元素<div> + 條件")
-titles = soup.find_all("div", class_="title")
-for title in titles:
-    print(title.a.text)
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 """ NG
 print("BeautifulSoup 測試 26")
 
@@ -2741,7 +2811,7 @@ for row in rows:
         # 讀取List物件的元素
         for item in range(0, len(cols)):
             print(cols[item], end=" ")
-        print()  # 換行
+        print("---------------")  # 15個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2857,14 +2927,30 @@ print(soup.find("a")["href"])  # 輸出第一個 a tag 的 href 屬性內容
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("BeautifulSoup 測試 51")
-url = "https://www.ptt.cc/"
+print("抓取網頁 分析 13")
+
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 
 cookies = {"over18": "1"}
 response = requests.get(url=url, cookies=cookies)
+html = response.text
 
-soup = BeautifulSoup(response.text, "html.parser")
+soup = BeautifulSoup(html, "lxml")
+
+print("找全部的內容分區元素<div> + 條件")
+titles = soup.find_all("div", class_="title")  # 取得 class 為 title 的 div 內容
+for title in titles:
+    print(title.a.text)
+
+print("------------------------------------------------------------")  # 60個
+
+url = "https://www.ptt.cc/bbs/Gossiping/index.html"
+
+cookies = {"over18": "1"}
+response = requests.get(url=url, cookies=cookies)
+html = response.text
+
+soup = BeautifulSoup(html, "html.parser")
 
 print("找全部的內容分區元素<div> + 條件")
 titles = soup.find_all("div", class_="title")  # 取得 class 為 title 的 div 內容
@@ -2874,20 +2960,18 @@ for i in titles:
         print(url + i.find("a")["href"], end="\n\n")  # 使用 ["href"] 取得 href 的屬性
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
-print("BeautifulSoup 測試 52")
-url = "https://www.ptt.cc/"
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 
 cookies = {"over18": "1"}
 response = requests.get(url=url, cookies=cookies)
+html = response.text
 
 response.encoding = "utf-8"  # 避免中文亂碼
-soup = BeautifulSoup(response.text, "html.parser")
+soup = BeautifulSoup(html, "html.parser")
 
-print("找全部的xx<b>")
-titles = soup.find_all("div", class_="title")
+print("找全部的內容分區元素<div> + 條件")
+titles = soup.find_all("div", class_="title")  # 取得 class 為 title 的 div 內容
 output = ""  # 建立 output 變數
 for i in titles:
     if i.find("a") != None:
@@ -2909,8 +2993,9 @@ url = "https://www.ptt.cc/bbs/Beauty/M.1638380033.A.7C7.html"
 
 cookies = {"over18": "1"}
 response = requests.get(url=url, cookies=cookies)
+html = response.text
 
-soup = BeautifulSoup(response.text, "html.parser")  # 使用 BeautifulSoup 取得網頁結構
+soup = BeautifulSoup(html, "html.parser")  # 使用 BeautifulSoup 取得網頁結構
 
 # 用find找
 print("找全部的影像<img>")
@@ -2919,15 +3004,14 @@ for i in imgs:
     print(i["src"])  # 印出 src 的屬性
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
-print("BeautifulSoup 測試 54")
 url = "https://www.ptt.cc/bbs/Beauty/M.1638380033.A.7C7.html"
 
 cookies = {"over18": "1"}
 response = requests.get(url=url, cookies=cookies)
+html = response.text
 
-soup = BeautifulSoup(response.text, "html.parser")
+soup = BeautifulSoup(html, "html.parser")
 
 # 用find找
 print("找全部的影像<img>")
@@ -2942,15 +3026,14 @@ for i in imgs:
     name = name + 1  # 編號增加 1
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
-print("BeautifulSoup 測試 55")
 url = "https://www.ptt.cc/bbs/Beauty/M.1638380033.A.7C7.html"
 
 cookies = {"over18": "1"}
 response = requests.get(url=url, cookies=cookies)
+html = response.text
 
-soup = BeautifulSoup(response.text, "html.parser")
+soup = BeautifulSoup(html, "html.parser")
 
 # 用find找
 print("找全部的影像<img>")
@@ -2965,17 +3048,16 @@ for i in imgs:
     name = name + 1
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
-print("BeautifulSoup 測試 56")
 from concurrent.futures import ThreadPoolExecutor
 
 url = "https://www.ptt.cc/bbs/Beauty/M.1638380033.A.7C7.html"
 
 cookies = {"over18": "1"}
 response = requests.get(url=url, cookies=cookies)
+html = response.text
 
-soup = BeautifulSoup(response.text, "html.parser")
+soup = BeautifulSoup(html, "html.parser")
 
 # 用find找
 print("找全部的影像<img>")
@@ -3006,8 +3088,9 @@ print("BeautifulSoup 測試 57")
 url = "https://invoice.etax.nat.gov.tw/index.html"
 response = requests.get(url)  # 取得網頁內容
 response.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encoding 避免亂碼
+html = response.text
 
-soup = BeautifulSoup(response.text, "html.parser")  # 轉換成標籤樹
+soup = BeautifulSoup(html, "html.parser")  # 轉換成標籤樹
 td = soup.select(".container-fluid")[0].select(".etw-tbiggest")  # 取出中獎號碼的位置
 ns = td[0].getText()  # 特別獎
 n1 = td[1].getText()  # 特獎
@@ -3023,7 +3106,9 @@ print("------------------------------------------------------------")  # 60個
 print("BeautifulSoup 測試 58")
 url = "https://tw.stock.yahoo.com/quote/2330"  # 台積電 Yahoo 股市網址
 response = requests.get(url)  # 取得網頁內容
-soup = BeautifulSoup(response.text, "html.parser")  # 轉換內容
+html = response.text
+
+soup = BeautifulSoup(html, "html.parser")  # 轉換內容
 
 print("找下一個標題<h1>")
 title = soup.find("h1")  # 找到 h1 的內容
@@ -3212,7 +3297,7 @@ for i in reservoir:
         i.find("div", class_="name").get_text(), end=" "
     )  # 取得內容的 class 為 name 的 div 文字
     print(i.find("h5").get_text(), end=" ")  # 取得內容 h5 tag 的文字
-    print()
+    print("---------------")  # 15個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3291,7 +3376,7 @@ for i, book in enumerate(books):
     print(book.find("img")["alt"])
     for info in book.find("ul").find_all("li"):  # 取得 全部 <li></li>
         print(info.text)
-    print()
+    print("---------------")  # 15個
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -5102,21 +5187,6 @@ for photo in all_imgs:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("抓取網頁 分析 11")
-url = "https://tw.appledaily.com/new/realtime/"
-html = requests.get(url).text
-soup = BeautifulSoup(html, "lxml")
-
-headlines = soup.find("ul", {"class": "rtddd slvl"})
-items = headlines.find_all("li")  # 取得 全部 <li></li>
-for item in items:
-    print(item.find("h1").text)
-    print(item.find("a")["href"])
-    print()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("抓取網頁 分析 12")
 
 url = "https://tw.appledaily.com/new/realtime/"
@@ -5126,6 +5196,7 @@ soup = BeautifulSoup(response.text, "lxml")
 headlines = soup.find("ul", {"class": "rtddd slvl"})
 items = headlines.find_all("li")  # 取得 全部 <li></li>
 for item in items:
+    print(item.find("h1").text)
     time.sleep(random.randint(0, 2))
     content_url = item.find("a")["href"]
     print(content_url)
@@ -5137,15 +5208,13 @@ for item in items:
     article = soup.find("article", {"class": "ndArticle_content clearmen"})
     print(article.find("p").text)
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 cc = soup.find(name="p")
 # 等同於
 cc = soup.find("p")
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 url = "http://www.google.com.tw"
 path = "tmp_logo.png"
@@ -5195,9 +5264,10 @@ print("------------------------------------------------------------")  # 60個
 
 url = "https://www.taiwanlottery.com.tw/"
 r = requests.get(url)
-sp = BeautifulSoup(r.text, "lxml")
+soup = BeautifulSoup(r.text, "lxml")
+
 # 找到威力彩的區塊
-datas = sp.find("div", class_="contents_box02")
+datas = soup.find("div", class_="contents_box02")
 # 開獎期數
 title = datas.find("span", "font_black15").text
 print("威力彩期數：", title)
@@ -5281,8 +5351,8 @@ url = "https://store.line.me/stickershop/product/8991459/zh-Hant"
 
 html = requests.get(url)
 
-sp = BeautifulSoup(html.text, "html.parser")
-datas = sp.find_all("li", {"class": "mdCMN09Li FnStickerPreviewItem"})
+soup = BeautifulSoup(html.text, "html.parser")
+datas = soup.find_all("li", {"class": "mdCMN09Li FnStickerPreviewItem"})
 
 # 建立目錄儲存圖片
 images_dir = "line_image/"
@@ -5658,7 +5728,6 @@ df = pd.concat(df, ignore_index=True)
 df.to_excel("tmp_1111data1.xlsx", index=0)  # 存為excel檔
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 # compare2.py
 
@@ -5737,7 +5806,6 @@ print(response.text)  # HTML網頁內容
 
 # NG print(response.json())  # response轉成json格式
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -5797,12 +5865,10 @@ soup = BeautifulSoup(str, "lxml")
 tag_a = soup.find("a")
 print(tag_a.string)
 
-
 # 搜尋HTML標籤的id屬性
 tag_div = soup.find(id="q2")
 tag_a = tag_div.find("a")
 print(tag_a.string)
-
 
 # class樣式屬性
 tag_li = soup.find(attrs={"class": "response"})
@@ -5816,7 +5882,6 @@ tag_div = soup.find(attrs={"data-custom": "important"})
 print(tag_div.string)
 
 print("------------------------------")  # 30個
-
 
 # 搜尋HTML標籤
 tag_div = soup.find(attrs={"id": "email"})
@@ -5844,7 +5909,6 @@ def is_secondary_question(tag):
 tag_a = soup.find(is_secondary_question)
 print(tag_a)
 
-
 # 找出所有問卷的題目字串
 tag_list = soup.find_all("p", class_="question")
 print(tag_list)
@@ -5869,7 +5933,6 @@ print(tag_all)
 
 print("------------------------------")  # 30個
 
-
 # 搜尋所有文字內容
 tag_div = soup.find("div", id="q2")
 # 找出所有文字內容清單
@@ -5879,7 +5942,6 @@ print("-------------------------------------")
 # 找出指定的文字內容清單
 tag_str_list = tag_div.find_all(text=["20", "40"])
 print(tag_str_list)
-
 
 # 清單指定搜尋條件
 tag_div = soup.find("div", id="q2")
@@ -5909,7 +5971,6 @@ regexp = re.compile("\w+-")  # 字元+-
 tag_list = soup.find_all(text=regexp)
 print(tag_list)
 
-
 # 使用正規表達式搜尋電子郵件地址
 email_regexp = re.compile("\w+@\w+\.\w+")
 tag_str = soup.find(text=email_regexp)
@@ -5917,7 +5978,6 @@ print(tag_str)
 print("---------------------")
 tag_list = soup.find_all(text=email_regexp)
 print(tag_list)
-
 
 # 使用正規表達式搜尋URL網址
 url_regexp = re.compile("^http:")
@@ -5929,45 +5989,17 @@ print(tag_list)
 print("---------------------")
 print(tag_list[0].string)
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-"""
-相關抽出
-
-request
-
-bs4
-
-"""
-
-import os
-import sys
-import time
-import random
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 """ wait long
 print("requests 1")
-import requests
 
 r = requests.get("https://tw.yahoo.com/")
 print(r.text)
 
 print("------------------------------------------------------------")  # 60個
-
-print("requests 2")
-import requests
+print("------------------------------------------------------------")  # 60個
 
 base_url = "https://zipcloud.ibsnet.co.jp/api/search"
 
@@ -5985,9 +6017,7 @@ requests.get(request_url).json()
 # 有這樣的 API 啊，網址是：https://zipcloud.ibsnet.co.jp/doc/api，請幫我寫出來
 
 print("------------------------------------------------------------")  # 60個
-
-print("requests 3")
-import requests
+print("------------------------------------------------------------")  # 60個
 
 # 郵遞區號
 zipcode = "1000001"
@@ -6018,10 +6048,9 @@ else:
 
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 """ fail
-import requests
-
 # 郵遞區號
 zipcode = "100-0001"
 
@@ -6050,12 +6079,10 @@ if response.status_code == 200:
 else:
     print("API 查詢失敗，狀態碼：", response.status_code)
 """
-
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
-print("requests 4")
-import requests
 api_url = "https://collectionapi.metmuseum.org/public/collection/v1/objects"
 response = requests.get(api_url)
 response_dict = response.json()
@@ -6077,367 +6104,10 @@ object_response.json()["primaryImageSmall"]
 """
 
 print("------------------------------------------------------------")  # 60個
-
-from bs4 import BeautifulSoup
-
-html_str = "<p>Hello World!</p>"
-soup = BeautifulSoup(html_str, "lxml")
-print(soup)
-
 print("------------------------------------------------------------")  # 60個
-
-from bs4 import BeautifulSoup
-
-soup = BeautifulSoup("<html> Lollipop </html>", "html.parser")
-
-print("------------------------------------------------------------")  # 60個
-
-import requests
-
-from bs4 import BeautifulSoup
-
-html_data = requests.get("http://tw.yahoo.com")
-
-soup = BeautifulSoup(html_data.text, "html.parser")
-
-print(soup.title)
-
-print("------------------------------------------------------------")  # 60個
-
-import requests
-
-from bs4 import BeautifulSoup
-
-game_ranking_html = requests.get(
-    "https://www.kamatari.org/blog/2021/best-games-of-2021/"
-)
-
-soup = BeautifulSoup(game_ranking_html.text, "html.parser")
-
-for game in soup.findAll("h2"):
-    print(game.text)
-
-print("------------------------------------------------------------")  # 60個
-
-import requests
-from bs4 import BeautifulSoup
-
-game_ranking_html = requests.get(
-    "https://www.kamatari.org/blog/2021/best-games-of-2021/"
-)
-soup = BeautifulSoup(game_ranking_html.text, "html.parser")
-for game in soup.findAll("h2"):
-    print(game.text)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-# htmlparse01
-
-import sys
-import requests
-
-'''
-print("------------------------------------------------------------")  # 60個
-
-urlstr="http://www.drmaster.com.tw/Publish_Newbook.asp"
-response=requests.get(urlstr)
-
-print("網址：%s" %(response.url))
-print("狀態：%s" %(response.status_code))
-print("表頭：%s" %(response.headers))
-
-"""
-Response屬性
-content 取得二進位資料 例如可以取得網路圖檔
-encoding 取得或設定網頁的編碼模式
-headers 取得網頁的表頭資訊
-text 取得網頁的所有程式碼
-status_code 取得網頁的連線狀態
-    200: 請求成功
-    400 伺服器無法理解請求
-    404伺服器找不到請求資源, 可能是連接的url錯誤
-url 取得網頁的網址
-"""
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-# htmlparse02.py
-
-urlstr="http://www.drmaster.com.tw/Publish_Newbook.asp"
-response=requests.get(urlstr)
-response.encoding="utf-8"
-print("網頁程式碼：%s" %(response.text))
-
-print("------------------------------------------------------------")  # 60個
-
-# htmlparse03.py
-
-# 指定圖片網址
-imgUrl='http://www.drmaster.com.tw/Cover/MP22030.png'
-imgName=imgUrl.split('/')[-1]
-response= requests.get(imgUrl) 
-f=open(imgName,'wb')  	# 指定開啟檔案路徑
-# 將response.content二進位內容寫入為MP22030.png
-f.write(response.content)  			
-print('%s 下載完畢' %(imgName))
-f.close()
-
-
-print("------------------------------------------------------------")  # 60個
-
-# htmlparse04.py
-
-from bs4 import BeautifulSoup
-# 博碩文化新書網頁
-urlstr='http://www.drmaster.com.tw/Publish_Newbook.asp'  
-response=requests.get(urlstr)
-response.encoding="utf-8"
-bs=BeautifulSoup(response.text, 'html.parser')
-print(bs.title.text)    # 顯示網頁title標題
-listBookName=bs.select('.style2')
-count=len(listBookName)
-print("共 %d 筆新書記錄" %(count))  # 顯示 '共 20 筆新書記錄'
-
-print('顯示網頁新書書名')
-for book in listBookName:
-    print(book.text)
-    
-
-print("------------------------------------------------------------")  # 60個
-
-# htmlparse05.py
-
-from bs4 import BeautifulSoup
-
-urlstr='http://www.drmaster.com.tw/Publish_Newbook.asp'
-
-response=requests.get(urlstr)
-response.encoding="utf-8"
-bs=BeautifulSoup(response.text,'html.parser')
-
-listImageUrl=bs.select('td a img')
-
-for link in listImageUrl:
-    #if("http" in link.get('src')):
-        print(link.get('src'))
-
-'''
-print("------------------------------------------------------------")  # 60個
-
-# htmlparse06.py   http讀圖部分還沒好
-
-
-import os, shutil
-from bs4 import BeautifulSoup
-
-# 若程式的路徑有images資料即刪除，否則即建立images
-folder = "images"
-if os.path.exists(folder):
-    shutil.rmtree(folder)
-os.mkdir(folder)
-
-urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
-response = requests.get(urlstr)
-response.encoding = "utf-8"
-bs = BeautifulSoup(response.text, "html.parser")
-listImageUrl = bs.select("td a img")
-# 逐一取得博碩新書圖檔並放入images資料夾下
-n = 0
-for link in listImageUrl:
-    print(link.get("src"))
-    imgUrl = link.get("src")
-    if "http" in imgUrl:
-        imgName = imgUrl.split("/")[-1]
-        response = requests.get(imgUrl)
-        f = open(folder + "/" + imgName, "wb")  # 指定開啟檔案路徑
-        # 將response.content二進位內容寫入指定的圖檔名稱
-        f.write(response.content)
-        f.close()
-        print("%s 下載完成" % (imgName))
-        n += 1
-print("共下載 %d 張圖檔" % (n))
-
-
-print("------------------------------------------------------------")  # 60個
-
-# htmlparse07.py
-
-import os, shutil
-from bs4 import BeautifulSoup
-
-# 若程式的路徑有images資料即刪除，否則即建立images
-folder = "images"
-if os.path.exists(folder):
-    shutil.rmtree(folder)
-os.mkdir(folder)
-pageName = "newbook.html"
-if os.path.exists(pageName):
-    os.remove(pageName)
-
-urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
-response = requests.get(urlstr)
-response.encoding = "utf-8"
-bs = BeautifulSoup(response.text, "html.parser")
-listImageUrl = bs.select("td a img")
-listImageUrlOk = []
-listBookName = bs.select(".style2")
-# 逐一取得博碩新書圖檔並放入images資料夾下
-for link in listImageUrl:
-    imgUrl = link.get("src")
-    if "http" in imgUrl:
-        imgName = imgUrl.split("/")[-1]
-        listImageUrlOk.append(imgName)
-        response = requests.get(imgUrl)
-        f = open(folder + "/" + imgName, "wb")  # 指定開啟檔案路徑
-        # 將response.content二進位內容寫入指定的圖檔名稱
-        f.write(response.content)
-        f.close()
-        print("%s 下載完成" % (imgName))
-
-f = open(pageName, "w", encoding="utf-8")
-f.write("<html>\n")
-f.write('<meta charset="utf-8">\n')
-f.write("<body>\n")
-f.write("<table border>\n")
-f.write("<tr><td>書號</td><td>圖</td><td>書名</td></tr>\n")
-for n in range(len(listBookName)):
-    f.write("<tr>\n")
-    f.write("<td>%s</td>\n" % (listImageUrlOk[n].split(".")[0]))
-    f.write('<td><img src="images/%s" width="100"></td>\n' % (listImageUrlOk[n]))
-    f.write("<td>%s</td>\n" % (listBookName[n].text))
-    f.write("</tr>\n")
-f.write("</table>\n")
-f.write("</body>\n")
-f.write("</html>\n")
-f.close()
-
-# 開啟 os.system(pageName)
-
-print("%s 網頁建置成功" % (pageName))
-
-print("------------------------------------------------------------")  # 60個
-
-
-from bs4 import BeautifulSoup
-
-htmlContent = """
-<html>
-<head>
-<title>碁峰暢銷書籍</title>
-<style>
-  .blueText{
-    color:blue;
-  }
-</style>
-</head>
-<body>
-<h3 class="blueText">優質好書</h3>
-<ul>
-  <li><a href="http://books.gotop.com.tw/v_AEL022500">JAVA SE 12基礎必修課</a></li>
-  <li><a href="http://books.gotop.com.tw/v_AEL019900">C語言基礎必修課(涵蓋「APCS大學程式設計先修檢測」試題詳解)</a></li>
-  <li><a href="http://books.gotop.com.tw/v_AEL022600">Visual C# 2019基礎必修課</a></li>
-</ul>
-<p><a href="https://www.facebook.com/dtcbook" id="linkDtc" target="_blank">DTC粉專</a></p>
-</body>
-</html>
-"""
-bs = BeautifulSoup(htmlContent, "html.parser")
-print(bs.title)
-print(bs.title.text)
-print()
-print(bs.find("h3"))
-print(bs.find("h3").text)
-print()
-print(bs.find("a", {"target": "_blank"}))
-print(bs.find("a", {"target": "_blank"}).text)
-print()
-print(bs.select(".blueText"))
-print(bs.select(".blueText")[0].text)
-print()
-print(bs.select("#linkDtc"))
-print(bs.select("#linkDtc")[0].text)
-print()
-link1 = bs.find_all("a")
-for n in range(0, len(link1)):
-    print(link1[n].text)
-print()
-data = bs.find("ul")
-link2 = data.find_all("a")
-for n in range(0, len(link2)):
-    print(link2[n].text)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\code\htmlparse03.py
-
-import requests
-from bs4 import BeautifulSoup
-
-urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
-
-responseObj = requests.get(urlstr)
-responseObj.encoding = "utf-8"
-bs = BeautifulSoup(responseObj.text, "html.parser")
-print(bs.title.text)
-data = bs.select(".style2")
-count = len(data)
-print("共 %d 筆新書記錄" % (count))
-
-for book in data:
-    print(book.text)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\code\htmlparse04.py
-
-import requests
-
-# 指定圖片網址
-img_url = "http://www.drmaster.com.tw/Cover/MP22030.png"
-imgName = img_url.split("/")[-1]
-response = requests.get(img_url)
-f = open(imgName, "wb")  # 指定開啟檔案路徑
-# 將response.content二進位內容寫入為MP22030.png
-f.write(response.content)
-print("%s 下載完畢" % (imgName))
-f.close()
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\code\htmlparse05.py
-
-import requests
-from bs4 import BeautifulSoup
-
-urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
-
-responseObj = requests.get(urlstr)
-responseObj.encoding = "utf-8"
-bs = BeautifulSoup(responseObj.text, "html.parser")
-
-data = bs.select("td a img")
-
-for book in data:
-    if "http" in book.get("src"):
-        print(book.get("src"))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
 """
 tags = soup("a")  # 找全部的超連結<a>
 print(len(tags))
@@ -6450,7 +6120,7 @@ print("標籤內容 :", tag.string)
 print("標籤內容 :", tag.b.string)
 print("URL網址 :", tag.get("href", None))
 print("target屬性 :", tag["target"])
-"""
+
 print("------------------------------")  # 30個
 
 # 用find找
@@ -6468,6 +6138,57 @@ print(soup.find_all("a"))  # 把全部的 <a></a> 抓出來
 
 print("找下一個段落<p>")
 print(soup.p)
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("找全部的超連結<a>")
+all_links = soup.find_all("a")  # 取得 全部 <a></a>
+# print(all_links)
+for link in all_links:
+    href = link.get("href")
+    # print(href)
+    if href != None and href.startswith("https://"):
+        print("取得資料")
+        print(href)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("找全部的超連結<a>")
+all_links = soup.find_all("a")  # 取得 全部 <a></a>
+# print(all_links)
+for link in all_links:
+    print("aa :", link)
+    href = link.get("href")
+    # print(href)
+    # print('aaaaa')
+    if href != None:
+        print("bb :", link["href"])
+        if ".jpg" in link["href"]:
+            print("cc :", link["href"])
+            target = link["href"]
+            photos.append(target)
+            # for item in re.findall(regex, target):
+            # photos.append(item)
+
+
+# 抓圖部分
+
+photos = list()
+
+print(photos)
+
+for link in photos:
+    item = urllib.parse.urlparse(link)
+    q = urllib.parse.parse_qs(item.query)
+    target = urllib.parse.urlparse(q["u"][0])
+    filename = os.path.basename(target.path)
+    urllib.request.urlretrieve(link, os.path.join("images", filename))
+    print("Storing " + filename)
+    time.sleep(3)
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

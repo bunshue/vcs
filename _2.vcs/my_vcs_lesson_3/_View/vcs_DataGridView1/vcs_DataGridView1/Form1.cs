@@ -83,16 +83,24 @@ namespace vcs_DataGridView1
             button13.Location = new Point(x_st + dx * 1, y_st + dy * 5);
             button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
             button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button16.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button17.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button18.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button19.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
 
             dataGridView1.Size = new Size(800, 320);
-            dataGridView1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
             richTextBox1.Size = new Size(800, 320);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 5);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1120, 740);
+            this.Size = new Size(1260, 740);
         }
 
         void show_item_location2()
@@ -544,57 +552,131 @@ namespace vcs_DataGridView1
             {
                 dataGridView1.Rows[i].Height = 70;//设置行高度
             }
-
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //建立DataTable資料並匯出到DataGridView
+            DataTable dt = new DataTable();
+            dt.TableName = "書籍資料";
 
+            DataColumn dc = new DataColumn();
+            dc.ColumnName = "編號";
+            dc.DataType = typeof(int);
+            dc.AllowDBNull = false;
+            dc.Unique = true;       //設定 唯一值, 不能重複
+
+            DataColumn dc2 = new DataColumn();
+            dc2.ColumnName = "書名";
+            dc2.DataType = typeof(string);
+
+            DataColumn dc3 = new DataColumn();
+            dc3.ColumnName = "作者/譯者";
+            dc3.DataType = typeof(string);
+
+            dt.Columns.AddRange(new DataColumn[] { dc, dc2, dc3 });
+
+            dt.Rows.Add(new object[] { "1", "Python 技術者們：實踐!帶你一步一腳印由初學到精通(第二版)", "施威銘研究室" });
+            dt.Rows.Add(new object[] { "2", "Visual C#網路程式設計：線上遊戲實作", "張逸中 李美億" });
+            dt.Rows.Add(new object[] { "3", "OpenCV 3 學習手冊", "賴屹民" });
+            dt.Rows.Add(new object[] { "4", "OpenCV 3 學習手冊", "賴屹民" });
+            dt.Rows.Add(new object[] { "5", "OpenCV 3 學習手冊", "賴屹民" });
+            dt.Rows.Add(new object[] { "6", "OpenCV 3 學習手冊", "賴屹民" });
+            dt.Rows.Add(new object[] { "7", "OpenCV 3 學習手冊", "賴屹民" });
+            dt.Rows.Add(new object[] { "8", "OpenCV 3 學習手冊", "賴屹民" });
+
+            dataGridView1.DataSource = dt;
+            //dataGridView1.DataBind();
+
+            int totalColumns = dt.Columns.Count;
+            richTextBox1.Text += "共有資料欄位 " + totalColumns.ToString() + " 欄\n";
+
+            int totalRows = dt.Rows.Count;
+            richTextBox1.Text += "共有資料 " + totalRows.ToString() + " 筆\n";
+
+
+
+            //讀出來
+            //顯示 DataTable 的內容
+            show_dataset_content(dt);
         }
+
+        //顯示 DataTable 的內容
+        void show_dataset_content(DataTable dt)
+        {
+            richTextBox1.Text += "顯示 DataTable 的內容\n";
+            if (dt == null)
+            {
+                richTextBox1.Text += "無資料\n";
+                return;
+            }
+
+            richTextBox1.Text += "Columns = " + dt.Columns.Count.ToString() + "\n";
+            richTextBox1.Text += "Rows = " + dt.Rows.Count.ToString() + "\n";
+            richTextBox1.Text += "TableName = " + dt.TableName + "\n\n";
+
+            richTextBox1.Text += "標題\n";
+            int i;
+            int j;
+            int C = dt.Columns.Count;
+            int R = dt.Rows.Count;
+            for (i = 0; i < C; i++)
+            {
+                richTextBox1.Text += dt.Columns[i] + "\t";
+            }
+            richTextBox1.Text += "\n\n";
+
+            richTextBox1.Text += "內容\n";
+            for (j = 0; j < R; j++)
+            {
+                for (i = 0; i < C; i++)
+                {
+                    richTextBox1.Text += dt.Rows[j].ItemArray[i] + "\t";
+                }
+                richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
+        }
+
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //DGV 隔行換色
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("name", typeof(System.String));
+            dt.Columns.Add("sex", typeof(System.String));
+            dt.Columns.Add("age", typeof(System.String));
+
+            for (int i = 0; i < 5; i++)
             {
-                if (i % 2 == 0)
-                {
-                    dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.LightYellow;   //隔行更換背景色
-                }
+                DataRow dr = dt.NewRow();
+                dr[0] = "aaaa";
+                dr[1] = "bbbb";
+                dr[2] = "cccc";
+
+                //將上述該行加入DataTable中
+                dt.Rows.Add(dr);
             }
+
+            //綁定在sorce上
+            dataGridView1.DataSource = dt;
+
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //DGV 刪除
-            if (this.dataGridView1.SelectedRows.Count > 0 && this.dataGridView1.SelectedRows[0].Index != this.dataGridView1.Rows.Count - 1)
-            {
-                this.dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
-            }
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //DGV 跳至最後一行顯示
-            dataGridView1.FirstDisplayedScrollingRowIndex = dataGridView1.RowCount - 1;
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //清除DGV資料
-            dataGridView1.Rows.Clear();         //刪除row資料, 留下標題
-
-            //dataGridView1.Columns.Clear();    //刪除標題
-
-            //clear
-            //dataGridView1.DataSource = null;
-            //dataGridView1.Invalidate();
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //顯示DGV內容
-            print_dataGridView_data(dataGridView1);
         }
 
         void print_dataGridView_data(DataGridView dgv)
@@ -619,6 +701,67 @@ namespace vcs_DataGridView1
                 richTextBox1.Text += "\n";
             }
             richTextBox1.Text += "\n";
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            //DGV 隔行換色
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.LightYellow;   //隔行更換背景色
+                }
+            }
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //DGV 刪除
+            if (this.dataGridView1.SelectedRows.Count > 0 && this.dataGridView1.SelectedRows[0].Index != this.dataGridView1.Rows.Count - 1)
+            {
+                this.dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
+            }
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            //DGV 跳至最後一行顯示
+            dataGridView1.FirstDisplayedScrollingRowIndex = dataGridView1.RowCount - 1;
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            //清除DGV資料
+            dataGridView1.Rows.Clear();         //刪除row資料, 留下標題
+
+            //dataGridView1.Columns.Clear();    //刪除標題
+
+            //clear
+            //dataGridView1.DataSource = null;
+            //dataGridView1.Invalidate();
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            //顯示DGV內容
+            print_dataGridView_data(dataGridView1);
         }
     }
 }

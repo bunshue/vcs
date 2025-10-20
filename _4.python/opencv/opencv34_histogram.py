@@ -694,9 +694,11 @@ while True:
 
     # 畫一些標記
     dd = 5
+    # 左上角
     topLeft = (cut - dd, cut - dd)
     topLeft = (cx - W // 2 + cut - dd, cy - H // 2 + cut - dd)
 
+    # 右下角
     bottomRight = (W - cut + dd, H - cut + dd)
     bottomRight = (cx + W // 2 - cut + dd, cy + H // 2 - cut + dd)
 
@@ -714,21 +716,18 @@ while True:
     frame3 = frame2
     # 裁切圖片 SP
 
+    # 直方圖均衡化處理, 灰階
     gray1 = cv2.cvtColor(frame2, cv2.COLOR_BGR2GRAY)  # 轉灰階
     # cv2.imshow("Gray", gray1)
-
     gray2 = cv2.equalizeHist(gray1)  # 直方圖均衡化處理, 只能處理灰階圖
     cv2.imshow("Histogram1", gray2)
-    # 裁切圖片 SP
 
+    # 直方圖均衡化處理, 彩色
     b, g, r = cv2.split(frame3)  # 拆分彩色影像3通道
-
     bb = cv2.equalizeHist(b)  # 直方圖均衡化處理, 只能處理灰階圖
     gg = cv2.equalizeHist(g)  # 直方圖均衡化處理, 只能處理灰階圖
     rr = cv2.equalizeHist(r)  # 直方圖均衡化處理, 只能處理灰階圖
-
     frame3 = cv2.merge([bb, gg, rr])  # 影像3通道合併成彩色影像
-
     cv2.imshow("Histogram2", frame3)
 
     k = cv2.waitKey(1)
