@@ -327,6 +327,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(140, 60);
             this.button23.TabIndex = 131;
+            this.button23.Text = "filename";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -369,6 +370,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(140, 60);
             this.button27.TabIndex = 135;
+            this.button27.Text = "disk";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 

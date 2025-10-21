@@ -561,29 +561,26 @@ namespace vcs_DataGridView1
             dt.TableName = "書籍資料";
 
             DataColumn dc = new DataColumn();
-            dc.ColumnName = "編號";
+            dc.ColumnName = "NNNN";
             dc.DataType = typeof(int);
             dc.AllowDBNull = false;
             dc.Unique = true;       //設定 唯一值, 不能重複
 
             DataColumn dc2 = new DataColumn();
-            dc2.ColumnName = "書名";
+            dc2.ColumnName = "BBBB";
             dc2.DataType = typeof(string);
 
             DataColumn dc3 = new DataColumn();
-            dc3.ColumnName = "作者/譯者";
+            dc3.ColumnName = "AAAA";
             dc3.DataType = typeof(string);
 
             dt.Columns.AddRange(new DataColumn[] { dc, dc2, dc3 });
 
-            dt.Rows.Add(new object[] { "1", "Python 技術者們：實踐!帶你一步一腳印由初學到精通(第二版)", "施威銘研究室" });
-            dt.Rows.Add(new object[] { "2", "Visual C#網路程式設計：線上遊戲實作", "張逸中 李美億" });
-            dt.Rows.Add(new object[] { "3", "OpenCV 3 學習手冊", "賴屹民" });
-            dt.Rows.Add(new object[] { "4", "OpenCV 3 學習手冊", "賴屹民" });
-            dt.Rows.Add(new object[] { "5", "OpenCV 3 學習手冊", "賴屹民" });
-            dt.Rows.Add(new object[] { "6", "OpenCV 3 學習手冊", "賴屹民" });
-            dt.Rows.Add(new object[] { "7", "OpenCV 3 學習手冊", "賴屹民" });
-            dt.Rows.Add(new object[] { "8", "OpenCV 3 學習手冊", "賴屹民" });
+            dt.Rows.Add(new object[] { "1", "書名1", "作者1" });
+            dt.Rows.Add(new object[] { "2", "書名2", "作者2" });
+            dt.Rows.Add(new object[] { "3", "書名3", "作者3" });
+            dt.Rows.Add(new object[] { "4", "書名4", "作者4" });
+            dt.Rows.Add(new object[] { "5", "書名5", "作者5" });
 
             dataGridView1.DataSource = dt;
             //dataGridView1.DataBind();
@@ -593,8 +590,6 @@ namespace vcs_DataGridView1
 
             int totalRows = dt.Rows.Count;
             richTextBox1.Text += "共有資料 " + totalRows.ToString() + " 筆\n";
-
-
 
             //讀出來
             //顯示 DataTable 的內容
@@ -643,16 +638,16 @@ namespace vcs_DataGridView1
         {
             DataTable dt = new DataTable();
 
-            dt.Columns.Add("name", typeof(System.String));
-            dt.Columns.Add("sex", typeof(System.String));
-            dt.Columns.Add("age", typeof(System.String));
+            dt.Columns.Add("NNNN", typeof(System.String));
+            dt.Columns.Add("BBBB", typeof(System.String));
+            dt.Columns.Add("AAAA", typeof(System.String));
 
             for (int i = 0; i < 5; i++)
             {
                 DataRow dr = dt.NewRow();
-                dr[0] = "aaaa";
-                dr[1] = "bbbb";
-                dr[2] = "cccc";
+                dr[0] = "編號"+(i+1).ToString();
+                dr[1] = "書名" + (i + 1).ToString();
+                dr[2] = "作者" + (i + 1).ToString();
 
                 //將上述該行加入DataTable中
                 dt.Rows.Add(dr);

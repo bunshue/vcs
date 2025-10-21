@@ -555,12 +555,6 @@ namespace vcs_System1
             {
                 richTextBox1.Text += var.Key + "\t" + var.Value + "\n";
             }
-
-            richTextBox1.Text += "列出Logical Drives\n";
-            foreach (string drive in Environment.GetLogicalDrives())
-            {
-                richTextBox1.Text += "\t" + drive + "\n";
-            }
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -733,9 +727,6 @@ namespace vcs_System1
             richTextBox1.Text += "取得命令列的Args: " + string.Join(", ", arguments) + "\n";
 
             richTextBox1.Text += "系統特殊資料夾的路徑：" + Environment.GetFolderPath(Environment.SpecialFolder.System) + "\n";
-
-            string[] drives = Environment.GetLogicalDrives();
-            richTextBox1.Text += "系統磁碟機：" + string.Join(", ", drives) + "\n";
 
             //作業系統位置
             string str = Environment.GetEnvironmentVariable("SystemRoot");
@@ -922,32 +913,6 @@ namespace vcs_System1
 
         private void button32_Click(object sender, EventArgs e)
         {
-            //顯示所有邏輯磁碟機
-            GetLogicalDrives();
-        }
-
-        // Print out all logical drives on the system.
-        void GetLogicalDrives()
-        {
-            try
-            {
-                string[] drives = System.IO.Directory.GetLogicalDrives();
-
-                foreach (string str in drives)
-                {
-                    System.Console.WriteLine(str);
-                    richTextBox1.Text += "drive : " + str + "\n";
-                }
-            }
-            catch (System.IO.IOException)
-            {
-                System.Console.WriteLine("An I/O error occurs.");
-            }
-            catch (System.Security.SecurityException)
-            {
-                System.Console.WriteLine("The caller does not have the " +
-                    "required permission.");
-            }
         }
 
         private void button33_Click(object sender, EventArgs e)
@@ -1502,3 +1467,4 @@ namespace vcs_System1
         }
     }
 }
+

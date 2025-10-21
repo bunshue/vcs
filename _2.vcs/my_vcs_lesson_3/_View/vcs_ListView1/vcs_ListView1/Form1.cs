@@ -122,7 +122,6 @@ namespace vcs_ListView1
         private void button3_Click(object sender, EventArgs e)
         {
             //建立listView 3
-            richTextBox1.Text += "羅列出磁盤信息 在 listView 上\n";
             listView1.Clear();
             apply_listView03();
         }
@@ -348,61 +347,32 @@ namespace vcs_ListView1
             ch1.Text = "Disk Name";
             ch1.Width = 85;
             listView1.Columns.Add(ch1);
+
             ColumnHeader ch2 = new ColumnHeader();
             ch2.Text = "Type";
             ch2.Width = 85;
             listView1.Columns.Add(ch2);
+
             ColumnHeader ch3 = new ColumnHeader();
             ch3.Text = "All Size";
             ch3.Width = 85;
             listView1.Columns.Add(ch3);
+
             ColumnHeader ch4 = new ColumnHeader();
             ch4.Text = "Free Size";
             ch4.Width = 85;
             listView1.Columns.Add(ch4);
-            string[] drive = Environment.GetLogicalDrives();
-            for (int i = 0; i < drive.Length; i++)
+
+            for (int i = 0; i < 5; i++)
             {
                 //實例化一個listview對象的子項
                 ListViewItem lvi1 = new ListViewItem();
-                lvi1.Text = drive[i];//第一列數據
+                lvi1.Text = "AAAA";//第一列數據
                 lvi1.SubItems.Add(i.ToString());//第二列
-                lvi1.SubItems.Add(GetHardDiskTotalSize(i).ToString() + " G");//第三列
-                lvi1.SubItems.Add(GetHardDiskFreeSize(i).ToString() + " G");//第四列
+                lvi1.SubItems.Add("CCCC");//第三列
+                lvi1.SubItems.Add("DDDD");//第四列
+
                 listView1.Items.Add(lvi1);//添加列
-            }
-        }
-
-        /// <summary>
-        /// 獲取磁盤總空間
-        /// </summary>
-        /// <param name="i">獲取磁盤需要的下標 0 c盤 1 d盤</param>
-        /// <returns>磁盤總空間 long類型</returns>
-        public static long GetHardDiskTotalSize(int i)
-        {
-            long totalSize = new long();
-            System.IO.DriveInfo[] drives = System.IO.DriveInfo.GetDrives();
-            if (drives[i].IsReady == true)
-            {
-                totalSize = drives[i].TotalSize / (1024L * 1024 * 1024);
-                return totalSize;
-            }
-            else
-                return 0;
-        }
-
-        public static long GetHardDiskFreeSize(int i)
-        {
-            long freeSize = new long();
-            System.IO.DriveInfo[] drives = System.IO.DriveInfo.GetDrives();
-            if (drives[i].IsReady == true)
-            {
-                freeSize = drives[i].AvailableFreeSpace / (1024 * 1024 * 1024);
-                return freeSize;
-            }
-            else
-            {
-                return 0;
             }
         }
 
@@ -433,63 +403,62 @@ namespace vcs_ListView1
             colHead.TextAlign = HorizontalAlignment.Left;
             listView1.Columns.Add(colHead);
 
+            //button23_Click
             //建立列資料
             string foldername = @"D:\_git\vcs\_1.data\______test_files1";
 
-            try
+            ListViewItem lvi;
+            ListViewItem.ListViewSubItem lvsi;
+
+            if (foldername.CompareTo("") == 0)
+                return;
+            DirectoryInfo dir = new DirectoryInfo(foldername);
+            DirectoryInfo[] dirs = dir.GetDirectories();
+            FileInfo[] files = dir.GetFiles();
+
+            //顯示本機文件夾及文件
+
+            //labPathName.Text = foldername;
+            listView1.BeginUpdate();
+
+            //資料夾部分
+            foreach (DirectoryInfo di in dirs)
             {
-                ListViewItem lvi;
-                ListViewItem.ListViewSubItem lvsi;
+                lvi = new ListViewItem();
+                lvi.Text = di.Name;
+                lvi.ImageIndex = 0;
+                lvi.Tag = di.FullName;
 
-                if (foldername.CompareTo("") == 0)
-                    return;
-                DirectoryInfo dir = new DirectoryInfo(foldername);
-                DirectoryInfo[] dirs = dir.GetDirectories();
-                FileInfo[] files = dir.GetFiles();
+                lvsi = new ListViewItem.ListViewSubItem();
+                lvsi.Text = "";
 
-                //顯示本機文件夾及文件
+                lvi.SubItems.Add(lvsi);
 
-                //labPathName.Text = foldername;
-                listView1.BeginUpdate();
+                lvsi = new ListViewItem.ListViewSubItem();
+                lvsi.Text = di.LastAccessTime.ToString();
+                richTextBox1.Text += di.LastAccessTime.ToString() + "\n";
 
-                foreach (DirectoryInfo di in dirs)
-                {
-                    lvi = new ListViewItem();
-                    lvi.Text = di.Name;
-                    lvi.ImageIndex = 0;
-                    lvi.Tag = di.FullName;
+                lvi.SubItems.Add(lvsi);
 
-                    lvsi = new ListViewItem.ListViewSubItem();
-                    lvsi.Text = "";
-
-                    lvi.SubItems.Add(lvsi);
-
-                    lvsi = new ListViewItem.ListViewSubItem();
-                    lvsi.Text = di.LastAccessTime.ToString();
-                    lvi.SubItems.Add(lvsi);
-
-                    listView1.Items.Add(lvi);
-                }
-
-                foreach (FileInfo fi in files)
-                {
-                    lvi = new ListViewItem();
-                    lvi.Text = fi.Name;
-                    lvi.ImageIndex = 1;
-                    lvi.Tag = fi.FullName;
-
-                    lvsi = new ListViewItem.ListViewSubItem();
-                    lvsi.Text = fi.Length.ToString();
-                    lvi.SubItems.Add(lvsi);
-
-                    listView1.Items.Add(lvi);
-                }
-                listView1.EndUpdate();
+                listView1.Items.Add(lvi);
             }
-            catch (Exception err)
+
+            //檔案部分
+            foreach (FileInfo fi in files)
             {
-                MessageBox.Show("Error:" + err.Message);
+                lvi = new ListViewItem();
+                lvi.Text = fi.Name;
+                lvi.ImageIndex = 1;
+                lvi.Tag = fi.FullName;
+
+                lvsi = new ListViewItem.ListViewSubItem();
+                lvsi.Text = fi.Length.ToString();
+                richTextBox1.Text += fi.Length.ToString() + "\n";
+                lvi.SubItems.Add(lvsi);
+
+                listView1.Items.Add(lvi);
             }
+            listView1.EndUpdate();
         }
 
         void apply_listView05()
@@ -497,13 +466,13 @@ namespace vcs_ListView1
             listView1.View = View.LargeIcon;
 
             var list = new List<string>();
-            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_01.jpg");
-            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_02.jpg");
-            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_03.jpg");
-            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_04.jpg");
-            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_05.jpg");
-            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_06.jpg");
-            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_07.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_01.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_02.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_03.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_04.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_05.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_06.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_07.jpg");
 
             ImageList imglist = new ImageList();
             imglist.ImageSize = new Size(200, 200);
@@ -539,14 +508,6 @@ namespace vcs_ListView1
             ListViewMakeRow(listView1, "A", new string[] { "B", "C", "1000", "4/1/2014", "F" });
             ListViewMakeRow(listView1, "A", new string[] { "A", "A", "9", "12/20/2013", "C" });
             ListViewMakeRow(listView1, "B", new string[] { "B" });
-            ListViewMakeRow(listView1, "C", new string[] { "C", "C", "1000", "4/1/2014", "F" });
-            ListViewMakeRow(listView1, "A", new string[] { "A", "A" });
-            ListViewMakeRow(listView1, "B", new string[] { "B", "B", "20" });
-            ListViewMakeRow(listView1, "A", new string[] { "A", "A", "9", "12/20/2013", "A" });
-            ListViewMakeRow(listView1, "C", new string[] { "C", "C", "1001", "8/20/2014" });
-            ListViewMakeRow(listView1, "A", new string[] { "A", "A", "9", "4/1/2014" });
-            ListViewMakeRow(listView1, "C", new string[] { "C", "C", "100", "1/2/2014", "F" });
-            ListViewMakeRow(listView1, "A", new string[] { "A", "A", "10" });
 
             // Make the ListView column headers.
             ListViewMakeColumnHeaders(listView1,
@@ -667,7 +628,6 @@ namespace vcs_ListView1
             listView1.FullRowSelect = true; //整行一起選取
             listView1.GridLines = true; //顯示格線
 
-
             // Allow the user to edit item text.
             listView1.LabelEdit = true;
             // Allow the user to rearrange columns.
@@ -693,16 +653,19 @@ namespace vcs_ListView1
             item1.SubItems.Add("mouse");
             item1.SubItems.Add("3");
             item1.SubItems.Add("米老鼠");
+
             ListViewItem item2 = new ListViewItem("牛", 1);
             item2.SubItems.Add("ox");
             item2.SubItems.Add("48");
             item2.SubItems.Add("班尼牛");
+
             ListViewItem item3 = new ListViewItem("虎", 0);
             // Place a check mark next to the item.
             item3.Checked = true;
             item3.SubItems.Add("tiger");
             item3.SubItems.Add("33");
             item3.SubItems.Add("跳跳虎");
+
             ListViewItem item4 = new ListViewItem("兔", 0);
             // Place a check mark next to the item.
             item4.Checked = true;
@@ -742,7 +705,7 @@ namespace vcs_ListView1
             listView1.Columns.Add("文件名稱", 150, HorizontalAlignment.Left);//向listView1中添加「文件名稱」列
             listView1.Columns.Add("創建時間", 200, HorizontalAlignment.Left);//向listView1中添加「創建時間」列
 
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird";
 
             foreach (String fileName in Directory.GetFiles(foldername)) //循環遍歷指定資料夾的內容
             {
@@ -878,7 +841,6 @@ namespace vcs_ListView1
         private void button14_Click(object sender, EventArgs e)
         {
         }
-
 
         private void button15_Click(object sender, EventArgs e)
         {
@@ -1234,7 +1196,46 @@ namespace vcs_ListView1
 
         private void button27_Click(object sender, EventArgs e)
         {
+            string[] drive = Environment.GetLogicalDrives();
+            for (int i = 0; i < drive.Length; i++)
+            {
+                richTextBox1.Text += "磁碟名稱 :" + drive[i] + "\n";
+                richTextBox1.Text += "全部大小 :" + GetHardDiskTotalSize(i).ToString() + " G" + "\n";
+                richTextBox1.Text += "可用大小 :" + GetHardDiskFreeSize(i).ToString() + " G" + "\n";
+            }
+        }
 
+        /// <summary>
+        /// 獲取磁盤總空間
+        /// </summary>
+        /// <param name="i">獲取磁盤需要的下標 0 c盤 1 d盤</param>
+        /// <returns>磁盤總空間 long類型</returns>
+        public static long GetHardDiskTotalSize(int i)
+        {
+            long totalSize = new long();
+            System.IO.DriveInfo[] drives = System.IO.DriveInfo.GetDrives();
+            if (drives[i].IsReady == true)
+            {
+                totalSize = drives[i].TotalSize / (1024L * 1024 * 1024);
+                return totalSize;
+            }
+            else
+                return 0;
+        }
+
+        public static long GetHardDiskFreeSize(int i)
+        {
+            long freeSize = new long();
+            System.IO.DriveInfo[] drives = System.IO.DriveInfo.GetDrives();
+            if (drives[i].IsReady == true)
+            {
+                freeSize = drives[i].AvailableFreeSpace / (1024 * 1024 * 1024);
+                return freeSize;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         private void button28_Click(object sender, EventArgs e)
