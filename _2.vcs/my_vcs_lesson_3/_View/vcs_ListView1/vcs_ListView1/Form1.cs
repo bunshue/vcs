@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;
+using System.IO;//for Path, Directory
 
 //各種 listView 之 加入資料
 
@@ -22,9 +22,6 @@ namespace vcs_ListView1
     {
         int flag_check_score_done = 0;
 
-        ListView listView1 = new ListView();
-        RichTextBox richTextBox1 = new RichTextBox();
-
         public Form1()
         {
             InitializeComponent();
@@ -38,10 +35,7 @@ namespace vcs_ListView1
         void show_item_location()
         {
             listView1.Size = new Size(600, 600);
-            this.Controls.Add(listView1);
-
             richTextBox1.Size = new Size(300, 600);
-            this.Controls.Add(richTextBox1);
 
             this.Size = new Size(1430, 700);
 
@@ -97,7 +91,7 @@ namespace vcs_ListView1
         private void button0_Click(object sender, EventArgs e)
         {
             //建立listView 0
-            richTextBox1.Text += "建立listView 0 基本款\n";
+            richTextBox1.Text += "建立listView 0\n";
             listView1.Clear();
             apply_listView00();
         }
@@ -344,22 +338,22 @@ namespace vcs_ListView1
             listView1.GridLines = true; //顯示格線
 
             ColumnHeader ch1 = new ColumnHeader();
-            ch1.Text = "Disk Name";
+            ch1.Text = "編號";
             ch1.Width = 85;
             listView1.Columns.Add(ch1);
 
             ColumnHeader ch2 = new ColumnHeader();
-            ch2.Text = "Type";
+            ch2.Text = "英文名";
             ch2.Width = 85;
             listView1.Columns.Add(ch2);
 
             ColumnHeader ch3 = new ColumnHeader();
-            ch3.Text = "All Size";
+            ch3.Text = "中文名";
             ch3.Width = 85;
             listView1.Columns.Add(ch3);
 
             ColumnHeader ch4 = new ColumnHeader();
-            ch4.Text = "Free Size";
+            ch4.Text = "體重";
             ch4.Width = 85;
             listView1.Columns.Add(ch4);
 
@@ -367,10 +361,10 @@ namespace vcs_ListView1
             {
                 //實例化一個listview對象的子項
                 ListViewItem lvi1 = new ListViewItem();
-                lvi1.Text = "AAAA";//第一列數據
-                lvi1.SubItems.Add(i.ToString());//第二列
+                lvi1.Text = i.ToString();//第一列數據
+                lvi1.SubItems.Add("EEEE");//第二列
                 lvi1.SubItems.Add("CCCC");//第三列
-                lvi1.SubItems.Add("DDDD");//第四列
+                lvi1.SubItems.Add("WWWW");//第四列
 
                 listView1.Items.Add(lvi1);//添加列
             }
@@ -403,61 +397,39 @@ namespace vcs_ListView1
             colHead.TextAlign = HorizontalAlignment.Left;
             listView1.Columns.Add(colHead);
 
-            //button23_Click
             //建立列資料
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1";
-
             ListViewItem lvi;
             ListViewItem.ListViewSubItem lvsi;
 
-            if (foldername.CompareTo("") == 0)
-                return;
-            DirectoryInfo dir = new DirectoryInfo(foldername);
-            DirectoryInfo[] dirs = dir.GetDirectories();
-            FileInfo[] files = dir.GetFiles();
-
-            //顯示本機文件夾及文件
-
-            //labPathName.Text = foldername;
             listView1.BeginUpdate();
 
-            //資料夾部分
-            foreach (DirectoryInfo di in dirs)
-            {
-                lvi = new ListViewItem();
-                lvi.Text = di.Name;
-                lvi.ImageIndex = 0;
-                lvi.Tag = di.FullName;
+            lvi = new ListViewItem();
+            lvi.Text = "AAAA";
+            lvi.ImageIndex = 0;
+            lvi.Tag = "BBBB";
 
-                lvsi = new ListViewItem.ListViewSubItem();
-                lvsi.Text = "";
+            lvsi = new ListViewItem.ListViewSubItem();
+            lvsi.Text = "CCCC";
 
-                lvi.SubItems.Add(lvsi);
+            lvi.SubItems.Add(lvsi);
 
-                lvsi = new ListViewItem.ListViewSubItem();
-                lvsi.Text = di.LastAccessTime.ToString();
-                richTextBox1.Text += di.LastAccessTime.ToString() + "\n";
+            lvsi = new ListViewItem.ListViewSubItem();
+            lvsi.Text = "DDDD";
 
-                lvi.SubItems.Add(lvsi);
+            lvi.SubItems.Add(lvsi);
 
-                listView1.Items.Add(lvi);
-            }
+            listView1.Items.Add(lvi);
 
-            //檔案部分
-            foreach (FileInfo fi in files)
-            {
-                lvi = new ListViewItem();
-                lvi.Text = fi.Name;
-                lvi.ImageIndex = 1;
-                lvi.Tag = fi.FullName;
+            lvi = new ListViewItem();
+            lvi.Text = "aaaa";
+            lvi.ImageIndex = 1;
+            lvi.Tag = "bbbb";
 
-                lvsi = new ListViewItem.ListViewSubItem();
-                lvsi.Text = fi.Length.ToString();
-                richTextBox1.Text += fi.Length.ToString() + "\n";
-                lvi.SubItems.Add(lvsi);
+            lvsi = new ListViewItem.ListViewSubItem();
+            lvsi.Text = "cccc";
+            lvi.SubItems.Add(lvsi);
 
-                listView1.Items.Add(lvi);
-            }
+            listView1.Items.Add(lvi);
             listView1.EndUpdate();
         }
 
@@ -689,9 +661,6 @@ namespace vcs_ListView1
             //Assign the ImageList objects to the ListView.
             listView1.LargeImageList = imageListLarge;
             listView1.SmallImageList = imageListSmall;
-
-            // Add the ListView to the control collection.
-            //this.Controls.Add(listView1);
         }
 
         void apply_listView09()
@@ -1019,7 +988,6 @@ namespace vcs_ListView1
 
         private void button23_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button24_Click(object sender, EventArgs e)

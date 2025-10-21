@@ -192,15 +192,33 @@ namespace vcs_DiskDirectoryFile2
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //轉出一層
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1";
+            if (foldername.CompareTo("") == 0)
+                return;
+            DirectoryInfo dir = new DirectoryInfo(foldername);
+            DirectoryInfo[] dirs = dir.GetDirectories();
+            FileInfo[] files = dir.GetFiles();
 
+            //顯示本機文件夾及文件
+            //資料夾部分
+            foreach (DirectoryInfo di in dirs)
+            {
+                string str1 = di.Name;
+                string str2 = di.FullName;
+                string str3 = di.LastAccessTime.ToString();
+                richTextBox1.Text += str1 + "\t" + str2 + "\t" + str3 + "\n";
+            }
+
+            //檔案部分
+            foreach (FileInfo fi in files)
+            {
+                string str4 = fi.Name;
+                string str5 = fi.FullName;
+                string str6 = fi.Length.ToString();
+                richTextBox1.Text += str4 + "\t" + str5 + "\t" + str6 + "\n";
+            }
         }
-
-
-
-
-
-
-
 
         const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
