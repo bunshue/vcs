@@ -9,6 +9,22 @@ using System.Windows.Forms;
 
 using System.Data.OleDb;
 
+/*
+        idx	英文名	中文名	體重
+第 1筆 :  1	mouse	米老鼠	3
+第 2筆 :  2	ox	    班尼牛	48
+第 3筆 :  3	tiger	跳跳虎	33
+第 4筆 :  4	rabbit	彼得兔	8
+第 5筆 :  5	dragon	逗逗龍	38
+第 6筆 :  6	snake	貪吃蛇	16
+第 7筆 :  7	horse	草泥馬	31
+第 8筆 :  8	goat	喜羊羊	29
+第 9筆 :  9	monkey	山道猴	22
+第10筆 : 10	chicken	肯德雞	5
+第11筆 : 11	dog	    布丁狗	17
+第12筆 : 12	pig	    佩佩豬	42
+*/
+
 namespace vcs_DataGridView1
 {
     public partial class Form1 : Form
@@ -42,7 +58,6 @@ namespace vcs_DataGridView1
                     richTextBox1.Text += "標題行上點擊右鍵，出現快捷菜單\n";
                 }
             }
-
         }
 
         private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -163,9 +178,9 @@ namespace vcs_DataGridView1
         {
             //設定DGV
             dataGridView1.ColumnCount = 2;
-            dataGridView1.Columns[0].Name = "品名";
+            dataGridView1.Columns[0].Name = "中文名";
             dataGridView1.Columns[0].Width = 200;//設置欄位寬度
-            dataGridView1.Columns[1].Name = "單價";
+            dataGridView1.Columns[1].Name = "體重";
             dataGridView1.Columns[1].Width = 100;//設置欄位寬度
 
             //dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;//佔滿整個DGV
@@ -173,17 +188,12 @@ namespace vcs_DataGridView1
             dataGridView1.CellClick += new DataGridViewCellEventHandler(dataGridView1_CellClick);
 
             //填入資料
-            string NAME = "david";
-            string ID = "123";
-
-            for (int i = 0; i < 5; i++)
-            {
-                string[] row = new string[] { NAME, ID };
-                dataGridView1.Rows.Add(row);
-            }
-
-            dataGridView1.Rows.Add(new Object[] { "紅茶", 25 });
-            dataGridView1.Rows.Add(new Object[] { "綠茶", 25 });
+            string NAME = "米老鼠";
+            string ID = "3";
+            string[] row = new string[] { NAME, ID };
+            dataGridView1.Rows.Add(row);
+            dataGridView1.Rows.Add(new Object[] { "班尼牛", 48 });
+            dataGridView1.Rows.Add(new Object[] { "跳跳虎", 33 });
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -227,12 +237,6 @@ namespace vcs_DataGridView1
             dataGridView1.AutoResizeColumns();
         }
 
-        class Fruit
-        {
-            public string Name { get; set; }
-            public float Price { get; set; }
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             dataGridView1.Columns.Add("Fruit", "水果");//添加欄位
@@ -273,19 +277,13 @@ namespace vcs_DataGridView1
             //由DataTable建立DataGridView
             //似乎蠻符合DrAP之所需
 
-            Load_DataGridView_Data();
-        }
-
-        void Load_DataGridView_Data()
-        {
             // Make the DataTable object.
-            DataTable dt = new DataTable("People");
+            DataTable dt = new DataTable("動物資料表");
 
             // Add columns to the DataTable.
-            dt.Columns.Add("First Name", System.Type.GetType("System.String"));
-            dt.Columns.Add("Last Name", System.Type.GetType("System.String"));
-            dt.Columns.Add("Occupation", System.Type.GetType("System.String"));
-            dt.Columns.Add("Salary", System.Type.GetType("System.Int32"));
+            dt.Columns.Add("英文名", System.Type.GetType("System.String"));
+            dt.Columns.Add("中文名", System.Type.GetType("System.String"));
+            dt.Columns.Add("體重", System.Type.GetType("System.Int32"));
 
             // Make all columns required.
             for (int i = 0; i < dt.Columns.Count; i++)
@@ -293,24 +291,23 @@ namespace vcs_DataGridView1
                 dt.Columns[i].AllowDBNull = false;
             }
 
-            // Make First Name + Last Name require uniqueness.
+            // 單一性
             DataColumn[] unique_cols = 
             {
-                dt.Columns["First Name"],
-                dt.Columns["Last Name"]
+                dt.Columns["英文名"],
+                dt.Columns["中文名"]
             };
             dt.Constraints.Add(new UniqueConstraint(unique_cols));
 
             // Add items to the table.
-            dt.Rows.Add(new object[] { "Rod", "Stephens", "Nerd", 10000 });
-            dt.Rows.Add(new object[] { "Sergio", "Aragones", "Cartoonist", 20000 });
-            dt.Rows.Add(new object[] { "Eoin", "Colfer", "Author", 30000 });
-            dt.Rows.Add(new object[] { "Terry", "Pratchett", "Author", 40000 });
+            dt.Rows.Add(new object[] { "mouse", "米老鼠", 3 });
+            dt.Rows.Add(new object[] { "ox", "班尼牛", 48 });
+            dt.Rows.Add(new object[] { "tiger", "跳跳虎", 33 });
+            dt.Rows.Add(new object[] { "rabbit", "彼得兔", 8 });
 
             // Make the DataGridView use the DataTable as its data source.
             dataGridView1.DataSource = dt;
         }
-
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -318,13 +315,12 @@ namespace vcs_DataGridView1
             //多了 DataError 事件
 
             // Make the DataTable object.
-            DataTable dt = new DataTable("People");
+            DataTable dt = new DataTable("動物資料表");
 
             // Add columns to the DataTable.
-            dt.Columns.Add("First Name", System.Type.GetType("System.String"));
-            dt.Columns.Add("Last Name", System.Type.GetType("System.String"));
-            dt.Columns.Add("Occupation", System.Type.GetType("System.String"));
-            dt.Columns.Add("Salary", System.Type.GetType("System.Int32"));
+            dt.Columns.Add("英文名", System.Type.GetType("System.String"));
+            dt.Columns.Add("中文名", System.Type.GetType("System.String"));
+            dt.Columns.Add("體重", System.Type.GetType("System.Int32"));
 
             // Make all columns required.
             for (int i = 0; i < dt.Columns.Count; i++)
@@ -332,24 +328,23 @@ namespace vcs_DataGridView1
                 dt.Columns[i].AllowDBNull = false;
             }
 
-            // Make the First Name/Last Name combination require uniqueness.
+            // 單一性
             DataColumn[] unique_cols = 
             {
-                dt.Columns["First Name"],
-                dt.Columns["Last Name"]
+                dt.Columns["英文名"],
+                dt.Columns["中文名"]
             };
             dt.Constraints.Add(new UniqueConstraint(unique_cols));
 
             // Add items to the table.
-            dt.Rows.Add(new object[] { "Rod", "Stephens", "Nerd", 10000 });
-            dt.Rows.Add(new object[] { "Sergio", "Aragones", "Cartoonist", 20000 });
-            dt.Rows.Add(new object[] { "Eoin", "Colfer", "Author", 30000 });
-            dt.Rows.Add(new object[] { "Terry", "Pratchett", "Author", 40000 });
+            dt.Rows.Add(new object[] { "mouse", "米老鼠", 3 });
+            dt.Rows.Add(new object[] { "ox", "班尼牛", 48 });
+            dt.Rows.Add(new object[] { "tiger", "跳跳虎", 33 });
+            dt.Rows.Add(new object[] { "rabbit", "彼得兔", 8 });
 
             // Make the DataGridView use the DataTable as its data source.
             dataGridView1.DataSource = dt;
             dataGridView1.DataError += new DataGridViewDataErrorEventHandler(dataGridView1_DataError);
-
         }
 
         // An error in the data occurred.
@@ -364,7 +359,6 @@ namespace vcs_DataGridView1
             // If this is true, then the user is trapped in this cell.
             e.Cancel = false;
         }
-
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -453,23 +447,7 @@ namespace vcs_DataGridView1
             //DataGridView 顯示序號
             //多了 RowPostPaint
 
-            SetupDataGridView();        //設定DGV
-            PopulateDataGridView();     //填入資料
-            dataGridView1.RowPostPaint += new DataGridViewRowPostPaintEventHandler(dataGridView1_RowPostPaint);
-        }
-
-        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            var dgv = sender as DataGridView;
-            if (dgv != null)
-            {
-                Rectangle rect = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dgv.RowHeadersWidth - 4, e.RowBounds.Height);
-                TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgv.RowHeadersDefaultCellStyle.Font, rect, dgv.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
-            }
-        }
-
-        private void SetupDataGridView()
-        {
+            //設定 DGV
             dataGridView1.ColumnCount = 6;
 
             dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
@@ -498,10 +476,8 @@ namespace vcs_DataGridView1
             dataGridView1.Dock = DockStyle.Fill;
 
             //dataGridView1.CellFormatting += new DataGridViewCellFormattingEventHandler(songsDataGridView_CellFormatting);
-        }
 
-        private void PopulateDataGridView()
-        {
+            //填入資料
             string[] row0 = { "", "11/22/1968", "29", "Revolution 9", "Beatles", "The Beatles [White Album]" };
             string[] row1 = { "", "1960", "6", "Fools Rush In", "Frank Sinatra", "Nice 'N' Easy" };
             string[] row2 = { "", "11/11/1971", "1", "One of These Days", "Pink Floyd", "Meddle" };
@@ -526,6 +502,18 @@ namespace vcs_DataGridView1
             dataGridView1.Columns[3].DisplayIndex = 1;
             dataGridView1.Columns[4].DisplayIndex = 2;
             */
+
+            dataGridView1.RowPostPaint += new DataGridViewRowPostPaintEventHandler(dataGridView1_RowPostPaint);
+        }
+
+        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var dgv = sender as DataGridView;
+            if (dgv != null)
+            {
+                Rectangle rect = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dgv.RowHeadersWidth - 4, e.RowBounds.Height);
+                TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgv.RowHeadersDefaultCellStyle.Font, rect, dgv.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            }
         }
 
         class Images
@@ -645,7 +633,7 @@ namespace vcs_DataGridView1
             for (int i = 0; i < 5; i++)
             {
                 DataRow dr = dt.NewRow();
-                dr[0] = "編號"+(i+1).ToString();
+                dr[0] = "編號" + (i + 1).ToString();
                 dr[1] = "書名" + (i + 1).ToString();
                 dr[2] = "作者" + (i + 1).ToString();
 
@@ -655,11 +643,44 @@ namespace vcs_DataGridView1
 
             //綁定在sorce上
             dataGridView1.DataSource = dt;
-
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
+            // Get the column titles.
+            SetGridColumns(dataGridView1, 4);
+
+            // Get the data.
+            SetGridContents(dataGridView1);
+        }
+
+        // Set the grid's column names from row 1.
+        private void SetGridColumns(DataGridView dgv, int max_col)
+        {
+            richTextBox1.Text += "設定 GDV, " + max_col.ToString() + " 欄\n";
+            dataGridView1.Columns.Clear();
+
+            string title = "AAAA";
+            dgv.Columns.Add("col_" + title, title);
+            title = "BBBB";
+            dgv.Columns.Add("col_" + title, title);
+            title = "CCCC";
+            dgv.Columns.Add("col_" + title, title);
+            title = "DDDD";
+            dgv.Columns.Add("col_" + title, title);
+        }
+
+        // Set the grid's contents.
+        private void SetGridContents(DataGridView dgv)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                object[] row_values = new object[4];
+                //richTextBox1.Text += "C = " + col.ToString() + "R = " + row.ToString() + " : " + values[row, col] + "\n";
+                //row_values = {"aaa", "bbb", "ccc", "ddd"};
+                dgv.Rows.Add(new Object[] { "aaa", "bbb", "ccc", "ddd" });
+                ///dgv.Rows.Add(row_values);
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)

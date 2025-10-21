@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_DataGridView6_Excel
+namespace vcs_ReadWrite_EXCEL2
 {
     static class Program
     {

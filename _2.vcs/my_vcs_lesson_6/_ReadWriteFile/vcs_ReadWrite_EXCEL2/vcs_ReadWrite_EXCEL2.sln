@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_DataGridView6_Excel", "vcs_DataGridView6_Excel\vcs_DataGridView6_Excel.csproj", "{49E52C6A-AEF8-472A-9F54-CC257BC50307}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ReadWrite_EXCEL2", "vcs_ReadWrite_EXCEL2\vcs_ReadWrite_EXCEL2.csproj", "{49E52C6A-AEF8-472A-9F54-CC257BC50307}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

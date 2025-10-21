@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
+
 namespace vcs_GetLogicalDrives
 {
     public partial class Form1 : Form
@@ -66,6 +68,19 @@ namespace vcs_GetLogicalDrives
 
             string[] drives = Environment.GetLogicalDrives();
             richTextBox1.Text += "系統磁碟機：" + string.Join(", ", drives) + "\n";
+
+            richTextBox1.Text += string.Format("系統磁碟機：{0}", string.Join(", ", drives)) + "\n";
+
+            //取得所有邏輯分區
+            //取得所有邏輯分區
+            //取得本地磁盤目錄
+            richTextBox1.Text += "取得所有邏輯分區\n";
+            string[] logicdrives = Directory.GetLogicalDrives();
+            for (int i = 0; i < logicdrives.Length; i++)
+            {
+                richTextBox1.Text += "取得: " + logicdrives[i] + "\n";
+            }
+
         }
 
         private void button01_Click(object sender, EventArgs e)
@@ -100,22 +115,57 @@ namespace vcs_GetLogicalDrives
 
         private void button02_Click(object sender, EventArgs e)
         {
+            string[] drive = Environment.GetLogicalDrives();
+            for (int i = 0; i < drive.Length; i++)
+            {
+                richTextBox1.Text += "磁碟名稱 :" + drive[i] + "\n";
+                richTextBox1.Text += "全部大小 :" + GetHardDiskTotalSize(i).ToString() + " G" + "\n";
+                richTextBox1.Text += "可用大小 :" + GetHardDiskFreeSize(i).ToString() + " G" + "\n";
+            }
+        }
 
+        /// <summary>
+        /// 獲取磁盤總空間
+        /// </summary>
+        /// <param name="i">獲取磁盤需要的下標 0 c盤 1 d盤</param>
+        /// <returns>磁盤總空間 long類型</returns>
+        public static long GetHardDiskTotalSize(int i)
+        {
+            long totalSize = new long();
+            System.IO.DriveInfo[] drives = System.IO.DriveInfo.GetDrives();
+            if (drives[i].IsReady == true)
+            {
+                totalSize = drives[i].TotalSize / (1024L * 1024 * 1024);
+                return totalSize;
+            }
+            else
+                return 0;
+        }
+
+        public static long GetHardDiskFreeSize(int i)
+        {
+            long freeSize = new long();
+            System.IO.DriveInfo[] drives = System.IO.DriveInfo.GetDrives();
+            if (drives[i].IsReady == true)
+            {
+                freeSize = drives[i].AvailableFreeSpace / (1024 * 1024 * 1024);
+                return freeSize;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         private void button03_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button04_Click(object sender, EventArgs e)
         {
-
         }
-
         private void button05_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button06_Click(object sender, EventArgs e)

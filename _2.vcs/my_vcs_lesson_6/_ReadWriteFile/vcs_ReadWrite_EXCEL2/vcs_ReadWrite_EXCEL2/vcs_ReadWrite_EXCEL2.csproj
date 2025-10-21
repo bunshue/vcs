@@ -8,8 +8,8 @@
     <ProjectGuid>{49E52C6A-AEF8-472A-9F54-CC257BC50307}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_DataGridView6_Excel</RootNamespace>
-    <AssemblyName>vcs_DataGridView6_Excel</AssemblyName>
+    <RootNamespace>vcs_ReadWrite_EXCEL2</RootNamespace>
+    <AssemblyName>vcs_ReadWrite_EXCEL2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>

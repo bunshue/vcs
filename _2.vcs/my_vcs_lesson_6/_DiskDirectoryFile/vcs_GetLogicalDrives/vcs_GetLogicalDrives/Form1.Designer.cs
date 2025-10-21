@@ -110,7 +110,6 @@
             this.button04.Name = "button04";
             this.button04.Size = new System.Drawing.Size(130, 60);
             this.button04.TabIndex = 46;
-            this.button04.Text = "GetLogicalDrives";
             this.button04.UseVisualStyleBackColor = true;
             this.button04.Click += new System.EventHandler(this.button04_Click);
             // 
@@ -121,7 +120,7 @@
             this.button03.Name = "button03";
             this.button03.Size = new System.Drawing.Size(130, 60);
             this.button03.TabIndex = 45;
-            this.button03.Text = "GetLogicalDrives";
+            this.button03.Text = "取得所有邏輯分區";
             this.button03.UseVisualStyleBackColor = true;
             this.button03.Click += new System.EventHandler(this.button03_Click);
             // 

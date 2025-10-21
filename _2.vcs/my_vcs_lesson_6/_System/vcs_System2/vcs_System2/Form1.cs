@@ -296,9 +296,6 @@ namespace vcs_System2
             richTextBox1.Text += string.Format("取得命令列的Args: {0}", string.Join(", ", arguments)) + "\n";
 
             richTextBox1.Text += "系統特殊資料夾的路徑：" + Environment.GetFolderPath(Environment.SpecialFolder.System);
-
-            string[] drives = Environment.GetLogicalDrives();
-            richTextBox1.Text += string.Format("系統磁碟機：{0}", string.Join(", ", drives)) + "\n";
         }
 
         private void button7_Click(object sender, EventArgs e)

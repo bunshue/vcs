@@ -1196,46 +1196,6 @@ namespace vcs_ListView1
 
         private void button27_Click(object sender, EventArgs e)
         {
-            string[] drive = Environment.GetLogicalDrives();
-            for (int i = 0; i < drive.Length; i++)
-            {
-                richTextBox1.Text += "磁碟名稱 :" + drive[i] + "\n";
-                richTextBox1.Text += "全部大小 :" + GetHardDiskTotalSize(i).ToString() + " G" + "\n";
-                richTextBox1.Text += "可用大小 :" + GetHardDiskFreeSize(i).ToString() + " G" + "\n";
-            }
-        }
-
-        /// <summary>
-        /// 獲取磁盤總空間
-        /// </summary>
-        /// <param name="i">獲取磁盤需要的下標 0 c盤 1 d盤</param>
-        /// <returns>磁盤總空間 long類型</returns>
-        public static long GetHardDiskTotalSize(int i)
-        {
-            long totalSize = new long();
-            System.IO.DriveInfo[] drives = System.IO.DriveInfo.GetDrives();
-            if (drives[i].IsReady == true)
-            {
-                totalSize = drives[i].TotalSize / (1024L * 1024 * 1024);
-                return totalSize;
-            }
-            else
-                return 0;
-        }
-
-        public static long GetHardDiskFreeSize(int i)
-        {
-            long freeSize = new long();
-            System.IO.DriveInfo[] drives = System.IO.DriveInfo.GetDrives();
-            if (drives[i].IsReady == true)
-            {
-                freeSize = drives[i].AvailableFreeSpace / (1024 * 1024 * 1024);
-                return freeSize;
-            }
-            else
-            {
-                return 0;
-            }
         }
 
         private void button28_Click(object sender, EventArgs e)
