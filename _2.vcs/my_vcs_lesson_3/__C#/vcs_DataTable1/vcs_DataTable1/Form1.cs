@@ -81,7 +81,7 @@ namespace vcs_DataTable1
             DataTable dt = new DataTable();
             dt = create_data_table1(dt);
 
-            show_data_table(dt);
+            show_data_table(dt);//顯示 DataTable 的內容
 
             string html_result = newHtml(dt, 3);
             richTextBox1.Text += "DataTable轉HTML\n" + html_result + "\n";
@@ -117,7 +117,7 @@ namespace vcs_DataTable1
             DataTable dt = new DataTable();
             dt = create_data_table2(dt);
 
-            show_data_table(dt);
+            show_data_table(dt);//顯示 DataTable 的內容
         }
 
         DataTable create_data_table1(DataTable dt)
@@ -165,33 +165,6 @@ namespace vcs_DataTable1
             return dt;
         }
 
-        void show_data_table(DataTable dt)
-        {
-            int rows = dt.Rows.Count;
-            int cols = dt.Columns.Count;
-
-            //richTextBox1.Text += "直行 = " + cols.ToString() + "\n";
-            //richTextBox1.Text += "橫列 = " + rows.ToString() + "\n";
-
-            int i;
-            int j;
-
-            for (i = 0; i < cols; i++)
-            {
-                richTextBox1.Text += dt.Columns[i].ColumnName + "\t";
-            }
-            richTextBox1.Text += "\n";
-
-            for (j = 0; j < rows; j++)
-            {
-                for (i = 0; i < cols; i++)
-                {
-                    richTextBox1.Text += dt.Rows[j][i] + "\t";
-                }
-                richTextBox1.Text += "\n";
-            }
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             //建立DataTable 2
@@ -199,7 +172,7 @@ namespace vcs_DataTable1
             DataTable dt = new DataTable();
             dt = create_data_table2(dt);
 
-            show_data_table(dt);
+            show_data_table(dt);//顯示 DataTable 的內容
 
             string xml_data = DataTableToXml(dt);
             richTextBox1.Text += "DataTable轉XML\n" + xml_data + "\n";
@@ -234,7 +207,7 @@ namespace vcs_DataTable1
 
             string result = string.Format("A: {0}\r\nB: {1}\r\nC: {2}", dt.Rows[0]["A"], dt.Rows[0]["B"], dt.Rows[0]["C"]);
             richTextBox1.Text += result + "\n";
-            show_data_table(dt);
+            show_data_table(dt);//顯示 DataTable 的內容
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -246,7 +219,7 @@ namespace vcs_DataTable1
             dt = create_data_table2(dt);
 
             richTextBox1.Text += "原DataTable :\n";
-            show_data_table(dt);
+            show_data_table(dt);//顯示 DataTable 的內容
 
             richTextBox1.Text += "由 姓名 項列出資料\n";
             int rows = dt.Rows.Count;
@@ -257,7 +230,7 @@ namespace vcs_DataTable1
 
             richTextBox1.Text += "刪除第1項後DataTable :\n";
             dt.Rows.RemoveAt(1);
-            show_data_table(dt);
+            show_data_table(dt);//顯示 DataTable 的內容
 
             richTextBox1.Text += "由 姓名 項列出資料\n";
             rows = dt.Rows.Count;
@@ -811,14 +784,14 @@ namespace vcs_DataTable1
             dt.Rows.Add(dr2);
 
             richTextBox1.Text += "原資料:\n";
-            show_data_table(dt);
+            show_data_table(dt);//顯示 DataTable 的內容
 
             richTextBox1.Text += "\n去除DataTable中的重複項\n\n";
 
             DeleteSameRow(dt, "座號");    //後面是比較項目, Columns資料, "座號", "姓名", "分數"
 
             richTextBox1.Text += "新資料:\n";
-            show_data_table(dt);
+            show_data_table(dt);//顯示 DataTable 的內容
         }
 
         ///
@@ -1101,6 +1074,37 @@ namespace vcs_DataTable1
         private void button23_Click(object sender, EventArgs e)
         {
 
+        }
+
+        void show_data_table(DataTable dt)
+        {
+            richTextBox1.Text += "顯示 DataTable 的內容\n";
+
+            int i;
+            int j;
+            int C = dt.Columns.Count;
+            int R = dt.Rows.Count;
+
+            richTextBox1.Text += "共有資料欄位 " + C.ToString() + " 欄\n";
+            richTextBox1.Text += "共有資料 " + R.ToString() + " 筆\n";
+            richTextBox1.Text += "TableName = " + dt.TableName + "\n\n";
+            richTextBox1.Text += "欄位名稱 : ";
+            for (i = 0; i < C; i++)
+            {
+                richTextBox1.Text += dt.Columns[i].ColumnName + "\t";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "內容\n";
+            for (j = 0; j < R; j++)
+            {
+                for (i = 0; i < C; i++)
+                {
+                    richTextBox1.Text += dt.Rows[j][i] + "\t";
+                }
+                richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
         }
     }
 }

@@ -181,7 +181,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(130, 60);
             this.button8.TabIndex = 43;
-            this.button8.Text = "建立DGV 8";
+            this.button8.Text = "建立DGV 8 使用 DataTable";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -192,7 +192,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(130, 60);
             this.button9.TabIndex = 44;
-            this.button9.Text = "建立DGV 9 顯示圖片";
+            this.button9.Text = "建立DGV 9 使用 DataTable";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -203,7 +203,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(130, 60);
             this.button10.TabIndex = 45;
-            this.button10.Text = "建立DGV 10";
+            this.button10.Text = "建立DGV 10 使用 DataTable";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -214,7 +214,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(130, 60);
             this.button11.TabIndex = 46;
-            this.button11.Text = "建立DGV 11";
+            this.button11.Text = "建立DGV 11 使用 DataTable";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -225,7 +225,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(130, 60);
             this.button12.TabIndex = 47;
-            this.button12.Text = "建立DGV 12";
+            this.button12.Text = "建立DGV 12 使用 List";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -269,7 +269,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(130, 60);
             this.button16.TabIndex = 51;
-            this.button16.Text = "建立DGV 16";
+            this.button16.Text = "在DataGridView控件做下拉式列表";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -280,7 +280,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(130, 60);
             this.button17.TabIndex = 52;
-            this.button17.Text = "建立DGV 17";
+            this.button17.Text = "建立DGV 17 顯示圖片";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 

@@ -293,7 +293,6 @@ print("取得網頁標題(內容) :", soup.html.head.title)  # title
 print("取得網頁標題(內容) :", soup.html.head.title.string)
 print("取得網頁標題(全部) :", soup.title)  # 印出整行資料 # <title>網頁標題1</title>
 print("取得網頁標題(內容) :", soup.title.string)  # 印出內容資料 # 網頁標題1
-print("head.title :", soup.html.head.title.string)
 print("取得網頁標題(內容) :", soup.meta["charset"])  # 印出內容資料 # 網頁標題1
 print("head.meta :", soup.html.head.meta["charset"])
 
@@ -1109,11 +1108,11 @@ print("------------------------------")  # 30個
 # 使用多條件來搜尋HTML標籤
 print("找下一個內容分區元素<div> + 條件")
 tag_div = soup.find("div", class_="question")
-print(tag_div.prettify())
+print(tag_div.prettify())  # pretty打印
 
 print("找下一個段落<p> + 條件")
 tag_p = soup.find("p", class_="question")
-print(tag_p.prettify())
+print(tag_p.prettify())  # pretty打印
 
 print("------------------------------")  # 30個
 
@@ -1124,14 +1123,14 @@ def is_secondary_question(tag):
 
 
 tag_a = soup.find(is_secondary_question)
-print(tag_a.prettify())
+print(tag_a.prettify())  # pretty打印
 
 print("------------------------------")  # 30個
 
 # 找出所有問卷的題目串列
 print("找全部的段落<p> + 條件")
 tag_list = soup.find_all("p", class_="question")
-print(tag_list[0].prettify())
+print(tag_list[0].prettify())  # pretty打印
 
 for question in tag_list:
     print(question.a.text)
@@ -1209,7 +1208,7 @@ print("找下一個內容分區元素<div> + 條件")
 tag_first_div = soup.find("div")
 
 tag_div = tag_first_div.select("div:nth-of-type(3)")
-print(tag_div[0].prettify())
+print(tag_div[0].prettify())  # pretty打印
 
 print("------------------------------")  # 30個
 
@@ -1278,7 +1277,7 @@ for tag in tag_li:
     print(tag.text.replace("\n", ""))
 tag_span = soup.select("div > #email")
 for tag in tag_span:
-    print(tag.prettify())
+    print(tag.prettify())  # pretty打印
 
 print("------------------------------")  # 30個
 
@@ -1302,7 +1301,7 @@ print("------------------------------")  # 30個
 
 # 使用select_one()方法搜尋標籤
 tag_a = soup.select_one("a[href]")
-print(tag_a.prettify())
+print(tag_a.prettify())  # pretty打印
 
 print("------------------------------")  # 30個
 
@@ -1347,6 +1346,301 @@ for tag in tag_list:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+fp = open("data/Example.html", "r", encoding="utf8")
+string_html_data = fp.read()
+print("檔案內容:")
+print(string_html_data)
+
+print("------------------------------")  # 30個
+
+# 搜尋HTML標籤
+soup = BeautifulSoup(string_html_data, "lxml")
+tag_a = soup.find("a")
+print(tag_a.string)
+
+# 搜尋HTML標籤的id屬性
+tag_div = soup.find(id="q2")
+tag_a = tag_div.find("a")
+print(tag_a.string)
+
+# class樣式屬性
+tag_li = soup.find(attrs={"class": "response"})
+tag_span = tag_li.find("span")
+print(tag_span.string)
+
+print("------------------------------")  # 30個
+
+# 搜尋HTML標籤
+tag_div = soup.find(attrs={"data-custom": "important"})
+print(tag_div.string)
+
+print("------------------------------")  # 30個
+
+# 搜尋HTML標籤
+tag_div = soup.find(attrs={"id": "email"})
+print(tag_div.string)
+
+print("------------------------------")  # 30個
+
+tag_div = soup.find("div", class_="question")
+print(tag_div)
+print(tag_div.string)
+
+print("------------------------------")  # 30個
+
+tag_p = soup.find("p", class_="question")
+print(tag_p)
+
+# tag_p = soup.find("p", class_="question")
+# tag_a = tag_p.find("a")
+# print(tag_a.string)
+
+
+# Python函數定義搜尋條件
+def is_secondary_question(tag):
+    return tag.has_attr("href") and tag.get("href") == "http://example.com/q2"
+
+
+tag_a = soup.find(is_secondary_question)
+print(tag_a)
+
+# 找出所有問卷的題目字串
+tag_list = soup.find_all("p", class_="question")
+print(tag_list)
+for question in tag_list:
+    print(question.a.string)
+
+print("------------------------------")  # 30個
+
+# 使用limit參數限制搜尋數量
+tag_list = soup.find_all("p", class_="question", limit=1)
+print(tag_list)
+for question in tag_list:
+    print(question.a.string)
+
+print("------------------------------")  # 30個
+
+# 搜尋所有標籤
+tag_div = soup.find("div", id="q2")
+# 找出所有標籤清單
+tag_all = tag_div.find_all(True)
+print(tag_all)
+
+print("------------------------------")  # 30個
+
+# 搜尋所有文字內容
+tag_div = soup.find("div", id="q2")
+# 找出所有文字內容清單
+tag_str_list = tag_div.find_all(text=True)
+print(tag_str_list)
+
+print("------------------------------")  # 30個
+
+# 找出指定的文字內容清單
+tag_str_list = tag_div.find_all(text=["20", "40"])
+print(tag_str_list)
+
+# 清單指定搜尋條件
+tag_div = soup.find("div", id="q2")
+# 找出所有<p>和<span>標籤
+tag_list = tag_div.find_all(["p", "span"])
+print(tag_list)
+
+print("------------------------------")  # 30個
+
+# 找出class屬性值question或selected的所有標籤
+tag_list = tag_div.find_all(class_=["question", "selected"])
+print(tag_list)
+
+# 沒有使用遞迴來執行搜尋
+tag_div = soup.find("div", id="q2")
+# 找出所有<li>子孫標籤
+tag_list = tag_div.find_all("li")
+print(tag_list)
+
+print("------------------------------")  # 30個
+
+# 沒有使用遞迴來找出所有<li>標籤
+tag_list = tag_div.find_all("li", recursive=False)
+print(tag_list)
+
+# 正規表達式搜尋文字內容
+regexp = re.compile("男-")
+tag_str = soup.find(text=regexp)
+print(tag_str)
+regexp = re.compile("\w+-")  # 字元+-
+tag_list = soup.find_all(text=regexp)
+print(tag_list)
+
+# 使用正規表達式搜尋電子郵件地址
+email_regexp = re.compile("\w+@\w+\.\w+")
+tag_str = soup.find(text=email_regexp)
+print(tag_str)
+print("---------------")  # 15個
+tag_list = soup.find_all(text=email_regexp)
+print(tag_list)
+
+# 使用正規表達式搜尋URL網址
+url_regexp = re.compile("^http:")
+tag_href = soup.find(href=url_regexp)
+print(tag_href)
+print("---------------")  # 15個
+tag_list = soup.find_all(href=url_regexp)
+print(tag_list)
+print("---------------")  # 15個
+print(tag_list[0].string)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+with open("data/Example.html", "r", encoding="utf8") as fp:
+    soup = BeautifulSoup(fp, "lxml")
+# 使用childen屬性取得子標籤
+tag_div = soup.select("#q2")  # 找到第2題
+tag_ul = tag_div[0].ul  # 走訪到之下的<ul>
+for child in tag_ul.children:
+    print(type(child))
+
+print("------------------------------")  # 30個
+
+# 使用childen屬性取得子標籤
+tag_div = soup.select("#q2")  # 找到第2題
+tag_ul = tag_div[0].ul  # 走訪到之下的<ul>
+for child in tag_ul.children:
+    if not isinstance(child, NavigableString):
+        print(child.name)
+
+print("------------------------------")  # 30個
+
+# 使用屬性向下走訪
+print(soup.html.head.meta["charset"])
+# 使用div屬性取得第1個<div>標籤
+print(soup.html.body.div.div.p.a.string)
+
+print("------------------------------")  # 30個
+
+# 使用屬性取得所有子標籤
+tag_div = soup.select("#q2")  # 找到第2題
+tag_ul = tag_div[0].ul  # 走訪到之下的<ul>
+for child in tag_ul.contents:
+    if not isinstance(child, NavigableString):
+        print(child.span.string)
+
+print("------------------------------")  # 30個
+
+# 使用屬性取得所有子標籤
+tag_div = soup.select("#q2")  # 找到第2題
+tag_ul = tag_div[0].ul  # 走訪到之下的<ul>
+for child in tag_ul.children:
+    if not isinstance(child, NavigableString):
+        print(child.name)
+        for tag in child:
+            if not isinstance(tag, NavigableString):
+                print(tag.name, tag.string)
+            else:
+                print(tag.replace("\n", ""))
+
+print("------------------------------")  # 30個
+
+# 使用屬性取得所有子孫標籤
+tag_div = soup.select("#q2")  # 找到第2題
+tag_ul = tag_div[0].ul  # 走訪到之下的<ul>
+for child in tag_ul.descendants:
+    if not isinstance(child, NavigableString):
+        print(child.name)
+
+print("------------------------------")  # 30個
+
+# 使用屬性取得所有子孫的文字內容
+tag_div = soup.select("#q2")  # 找到第2題
+tag_ul = tag_div[0].ul  # 走訪到之下的<ul>
+for string in tag_ul.strings:
+    print(string.replace("\n", ""))
+
+print("------------------------------")  # 30個
+
+tag_div = soup.select("#q2")  # 找到第2題
+tag_ul = tag_div[0].ul  # 走訪到之下的<ul>
+# 使用屬性取得父標籤
+print(tag_ul.parent.name)
+# 使用函數取得父標籤
+print(tag_ul.find_parent().name)
+
+print("------------------------------")  # 30個
+
+tag_div = soup.select("#q2")  # 找到第2題
+tag_ul = tag_div[0].ul  # 走訪到之下的<ul>
+# 使用屬性取得所有祖先標籤
+for tag in tag_ul.parents:
+    print(tag.name)
+# 使用函數取得所有祖先標籤
+for tag in tag_ul.find_parents():
+    print(tag.name)
+
+print("------------------------------")  # 30個
+
+tag_div = soup.select("#q2")  # 找到第2題
+first_li = tag_div[0].ul.li  # 第1個<li>
+print(first_li)
+# 使用next_sibling屬性取得下一個兄弟標籤
+second_li = first_li.next_sibling.next_sibling
+print(second_li)
+# 呼叫next_sibling()函數取得下一個兄弟標籤
+third_li = second_li.find_next_sibling()
+print(third_li)
+
+print("------------------------------")  # 30個
+
+# 呼叫next_siblings()函數取得所有兄弟標籤
+for tag in first_li.find_next_siblings():
+    print(tag.name, tag.span.string)
+
+print("------------------------------")  # 30個
+
+tag_div = soup.select("#q2")  # 找到第2題
+tag_li = tag_div[0].ul.li  # 第1個<li>
+third_li = tag_li.find_next_sibling().find_next_sibling()
+print(third_li)
+# 使用previous_sibling屬性取得前一個兄弟標籤
+second_li = third_li.previous_sibling.previous_sibling
+print(second_li)
+# 呼叫previous_sibling()函數取得前一個兄弟標籤
+first_li = second_li.find_previous_sibling()
+print(first_li)
+
+print("------------------------------")  # 30個
+
+# 呼叫previous_siblings()函數取得所有兄弟標籤
+for tag in third_li.find_previous_siblings():
+    print(tag.name, tag.span.string)
+
+print("------------------------------")  # 30個
+
+tag_html = soup.html  # 找到第<html>標籤
+print(type(tag_html), tag_html.name)
+
+tag_next = tag_html.next_element.next_element
+print(type(tag_next), tag_next.name)
+
+tag_title = soup.title  # 找到第<title>標籤
+print(type(tag_title), tag_title.name)
+
+tag_previous = tag_title.previous_element.previous_element
+print(type(tag_previous), tag_previous.name)
+
+print("------------------------------")  # 30個
+
+tag_div = soup.find(id="emails")
+for element in tag_div.next_elements:
+    if not isinstance(element, NavigableString):
+        print(element.name)
+
+print("------------------------------")  # 30個
+
+tag_div = soup.find(id="q1")
+for element in tag_div.previous_elements:
+    if not isinstance(element, NavigableString):
+        print(element.name)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1717,16 +2011,16 @@ with request.urlopen(req_obj) as res_obj:
 
 print(contents)
 """
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("BeautifulSoup 測試 15")
-
-filename = "tmp_kkbox_songs.csv"
+print("BeautifulSoup 測試 15 KKBOX")
 
 # KKBOX華語新歌日榜
+# 舊版 OK
 url = "https://kma.kkbox.com/charts/api/v1/daily?category=390&lang=tc&limit=50&terr=tw&type=newrelease"
+# 新版NG
+# url = "https://kma.kkbox.com/charts/daily/newrelease?cate=390&lang=tc&terr=tw"
 
 # 取得歌曲資訊json檔
 response = requests.get(url)
@@ -1739,49 +2033,37 @@ song_list = data["data"]["charts"]["newrelease"]
 
 # 印10筆資料就好
 cnt = 0
-with open(filename, "w", newline="", encoding="big5") as csvfile:
-    # 建立 CSV 檔寫入器
-    writer = csv.writer(csvfile)
-    # 寫入一列資料
-    writer.writerow(["排名", "歌名", "作者", "發行日期", "連結"])
-    # 取得每首歌的排名、曲名、連結、作者、時間
-    for song in song_list:
-        song_rank = song["rankings"]["this_period"]
-        song_name = song["song_name"]
-        song_url = song["song_url"]
-        song_artist = song["artist_name"]
-        song_timestamp = int(song["release_date"])
-        # 從timestamp轉為日期格式
-        song_date = time.strftime("%Y-%m-%d", time.localtime(song_timestamp))
+# 取得每首歌的排名、曲名、連結、作者、時間
+for song in song_list:
+    song_rank = song["rankings"]["this_period"]
+    song_name = song["song_name"]
+    song_url = song["song_url"]
+    song_artist = song["artist_name"]
+    song_timestamp = int(song["release_date"])
+    # 從timestamp轉為日期格式
+    song_date = time.strftime("%Y-%m-%d", time.localtime(song_timestamp))
 
-        print("排名:", song_rank)
-        print("歌名:", song_name)
-        print("作者:", song_artist)
-        print("發行日期:", song_date)
-        print("連結:", song_url)
+    print("排名:", song_rank)
+    print("歌名:", song_name)
+    print("作者:", song_artist)
+    print("發行日期:", song_date)
+    print("連結:", song_url)
 
-        writer.writerow(
-            [song_rank, song_name, song_artist.encode("utf-8"), song_date, song_url]
-        )
-
-        # # 從歌曲連結取得歌詞
-        # response = requests.get(song_url)
-        # soup = BeautifulSoup(response.text, "html.parser")
-        # print("找下一個內容分區元素<div> + 條件")
-        # lyric = soup.find("div", class_="lyrics").text
-        # print("歌詞:", lyric)
-
-        print("-" * 30)
-        cnt += 1
-        if cnt == 10:
-            break
-
-print("將資料寫入檔案 : " + filename)
+    # 從歌曲連結取得歌詞
+    # response = requests.get(song_url)
+    # soup = BeautifulSoup(response.text, "html.parser")
+    # print("找下一個內容分區元素<div> + 條件")
+    # lyric = soup.find("div", class_="lyrics").text
+    # print("歌詞:", lyric)
+    print("------------------------------")  # 30個
+    cnt += 1
+    if cnt == 10:
+        break
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("BeautifulSoup 測試 16")
+print("BeautifulSoup 測試 16 好樂迪")
 
 # Python 測試 BeautifulSoup 好樂迪 K歌排行
 
@@ -1828,7 +2110,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 參考 https://ithelp.ithome.com.tw/articles/10186119
 
-print("BeautifulSoup 測試 17")
+print("BeautifulSoup 測試 17 PTT NBA 板")
 
 url = "https://www.ptt.cc/bbs/NBA/index.html"  # PTT NBA 板
 
@@ -1843,9 +2125,9 @@ print("一些 BeautifulSoup 的屬性或方法")
 
 # 用.取
 print(type(soup.a))
-print("---")
+print("---------------")  # 15個
 print(soup.a.name)  # 抓標籤名 a
-print("---")
+print("---------------")  # 15個
 print(soup.a["id"])  # 抓<a></a>的 id 名稱
 
 print("------------------------------")  # 30個
@@ -1853,7 +2135,7 @@ print("------------------------------")  # 30個
 print("標籤中的內容（NavigableString）")
 
 print(type(soup.a.string))
-print("---")
+print("---------------")  # 15個
 soup.a.string
 
 print("------------------------------")  # 30個
@@ -1877,9 +2159,9 @@ print("往旁邊爬")
 first_a_tag = soup.body.a
 next_to_first_a_tag = first_a_tag.next_sibling
 print(first_a_tag)
-print("---")
+print("---------------")  # 15個
 print(next_to_first_a_tag)
-print("---")
+print("---------------")  # 15個
 print(next_to_first_a_tag.previous_sibling)
 
 print("------------------------------")  # 30個
@@ -2863,24 +3145,29 @@ response = requests.get(url)
 soup = BeautifulSoup(response.text, "html.parser")
 
 print(soup.select("#logo"))  # 搜尋 id 為 logo 的 tag 內容
-print("\n----------\n")
+
+print("------------------------------")  # 30個
 
 print("找全部的內容分區元素<div> + 條件")
 print(soup.find_all("div", id="logo"))  # 搜尋所有 id 為 logo 的 div
-print("\n----------\n")
+
+print("------------------------------")  # 30個
 
 print("找全部的內容分區元素<div>")
 divs = soup.find_all("div")  # 取得 全部 <div></div>
 print(divs[1])  # 取得搜尋到的第二個項目 ( 第一個為 divs[0] )
-print("\n----------\n")
+
+print("------------------------------")  # 30個
 
 # 從搜尋到的項目裡，尋找父節點裡全部的 li
 print(divs[1].find_parent().find_all("li"))  # 取得 全部 <li></li>
-print("\n----------\n")
+
+print("------------------------------")  # 30個
 
 # 從搜尋到的項目裡，尋找父節點裡所有 li 的第三個項目，找到他後方同層的所有 li
 print(divs[1].find_parent().find_all("li")[2].find_next_siblings())
-print("\n----------\n")
+
+print("------------------------------")  # 30個
 
 # 從搜尋到的項目裡，尋找父節點裡所有 li 的第三個項目，找到他前方同層的所有 li
 print(divs[1].find_parent().find_all("li")[2].find_previous_siblings())
@@ -3430,13 +3717,13 @@ listName = soup.select("div.item>div.msg>h4>a")
 listPress = soup.select("li.info>span>a")
 listPrice = soup.select("li.set2")
 
-print("------------")
+print("---------------")  # 15個
 print(len(listName))
-print("------------")
+print("---------------")  # 15個
 print(type(listName))
-print("------------")
+print("---------------")  # 15個
 print(listName)
-print("------------")
+print("---------------")  # 15個
 
 print("書名")
 for i in range(0, len(listName) // 10):
@@ -3614,266 +3901,6 @@ print("------------------------------------------------------------")  # 60個
 # taiwanlottery SP
 print("------------------------------------------------------------")  # 60個
 
-""" NG 無檔案 Example.html
-
-with open("Example.html", "r", encoding="utf8") as fp:
-    soup = BeautifulSoup(fp, "lxml")
-# 使用childen屬性取得子標籤
-tag_div = soup.select("#q2") # 找到第2題
-tag_ul = tag_div[0].ul       # 走訪到之下的<ul>
-for child in tag_ul.children:
-    print(type(child))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-with open("Example.html", "r", encoding="utf8") as fp:
-    soup = BeautifulSoup(fp, "lxml")
-# 使用childen屬性取得子標籤
-tag_div = soup.select("#q2") # 找到第2題
-tag_ul = tag_div[0].ul       # 走訪到之下的<ul>
-for child in tag_ul.children:
-    if not isinstance(child, NavigableString):
-        print(child.name)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-with open("Example.html", "r", encoding="utf8") as fp:
-    soup = BeautifulSoup(fp, "lxml")
-
-# 使用屬性向下走訪
-print(soup.html.head.title.string)
-print(soup.html.head.meta["charset"])
-# 使用div屬性取得第1個<div>標籤
-print(soup.html.body.div.div.p.a.string)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-with open("Example.html", "r", encoding="utf8") as fp:
-    soup = BeautifulSoup(fp, "lxml")
-
-# 使用屬性取得所有子標籤
-tag_div = soup.select("#q2") # 找到第2題
-tag_ul = tag_div[0].ul       # 走訪到之下的<ul>
-for child in tag_ul.contents:
-    if not isinstance(child, NavigableString):
-        print(child.span.string)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-with open("Example.html", "r", encoding="utf8") as fp:
-    soup = BeautifulSoup(fp, "lxml")
-# 使用屬性取得所有子標籤
-tag_div = soup.select("#q2") # 找到第2題
-tag_ul = tag_div[0].ul       # 走訪到之下的<ul>            
-for child in tag_ul.children:
-    if not isinstance(child, NavigableString):
-        print(child.name)
-        for tag in child:
-            if not isinstance(tag, NavigableString):
-                print(tag.name, tag.string)
-            else:
-                print(tag.replace("\n", ""))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-with open("Example.html", "r", encoding="utf8") as fp:
-    soup = BeautifulSoup(fp, "lxml")
-# 使用屬性取得所有子孫標籤
-tag_div = soup.select("#q2") # 找到第2題
-tag_ul = tag_div[0].ul       # 走訪到之下的<ul>            
-for child in tag_ul.descendants:
-    if not isinstance(child, NavigableString):
-        print(child.name)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-with open("Example.html", "r", encoding="utf8") as fp:
-    soup = BeautifulSoup(fp, "lxml")
-# 使用屬性取得所有子孫的文字內容
-tag_div = soup.select("#q2") # 找到第2題
-tag_ul = tag_div[0].ul       # 走訪到之下的<ul>
-for string in tag_ul.strings:
-    print(string.replace("\n", ""))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-with open("Example.html", "r", encoding="utf8") as fp:
-    soup = BeautifulSoup(fp, "lxml")
-tag_div = soup.select("#q2") # 找到第2題
-tag_ul = tag_div[0].ul       # 走訪到之下的<ul>
-# 使用屬性取得父標籤
-print(tag_ul.parent.name)
-# 使用函數取得父標籤
-print(tag_ul.find_parent().name)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-with open("Example.html", "r", encoding="utf8") as fp:
-    soup = BeautifulSoup(fp, "lxml")
-tag_div = soup.select("#q2") # 找到第2題
-tag_ul = tag_div[0].ul       # 走訪到之下的<ul>
-# 使用屬性取得所有祖先標籤
-for tag in tag_ul.parents:
-    print(tag.name)
-# 使用函數取得所有祖先標籤
-for tag in tag_ul.find_parents():
-    print(tag.name)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-with open("Example.html", "r", encoding="utf8") as fp:
-    soup = BeautifulSoup(fp, "lxml")
-tag_div = soup.select("#q2") # 找到第2題
-first_li = tag_div[0].ul.li  # 第1個<li>
-print(first_li)
-# 使用next_sibling屬性取得下一個兄弟標籤
-second_li = first_li.next_sibling.next_sibling
-print(second_li)
-# 呼叫next_sibling()函數取得下一個兄弟標籤
-third_li = second_li.find_next_sibling()
-print(third_li)
-print("---------------------------------------")
-# 呼叫next_siblings()函數取得所有兄弟標籤
-for tag in first_li.find_next_siblings():
-    print(tag.name, tag.span.string)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-with open("Example.html", "r", encoding="utf8") as fp:
-    soup = BeautifulSoup(fp, "lxml")
-tag_div = soup.select("#q2") # 找到第2題
-tag_li = tag_div[0].ul.li  # 第1個<li>
-third_li = tag_li.find_next_sibling().find_next_sibling()
-print(third_li)
-# 使用previous_sibling屬性取得前一個兄弟標籤
-second_li = third_li.previous_sibling.previous_sibling
-print(second_li)
-# 呼叫previous_sibling()函數取得前一個兄弟標籤
-first_li = second_li.find_previous_sibling()
-print(first_li)
-print("---------------------------------------")
-# 呼叫previous_siblings()函數取得所有兄弟標籤
-for tag in third_li.find_previous_siblings():
-    print(tag.name, tag.span.string)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-with open("Example.html", "r", encoding="utf8") as fp:
-    soup = BeautifulSoup(fp, "lxml")
-
-tag_html = soup.html # 找到第<html>標籤
-print(type(tag_html), tag_html.name)
-
-tag_next = tag_html.next_element.next_element
-print(type(tag_next), tag_next.name)
-
-tag_title = soup.title # 找到第<title>標籤
-print(type(tag_title), tag_title.name)
-
-tag_previous = tag_title.previous_element.previous_element
-print(type(tag_previous), tag_previous.name)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-with open("Example.html", "r", encoding="utf8") as fp:
-    soup = BeautifulSoup(fp, "lxml")    
-tag_div = soup.find(id = "emails")
-for element in tag_div.next_elements:
-    if not isinstance(element, NavigableString):
-        print(element.name)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-with open("Example.html", "r", encoding="utf8") as fp:
-    soup = BeautifulSoup(fp, "lxml")    
-tag_div = soup.find(id="q1")
-for element in tag_div.previous_elements:
-    if not isinstance(element, NavigableString):
-        print(element.name)
-   
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-soup = BeautifulSoup("<b class='score'>Joe</b>", "lxml")
-tag = soup.b
-tag.name = "p"
-tag["class"] = "question"
-tag["id"] = "name"
-print(tag)
-del tag["class"]
-print(tag)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-soup = BeautifulSoup("<b class='score'>Joe</b>", "lxml")
-tag = soup.b
-tag.string = "Mary"
-print(tag)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-soup = BeautifulSoup("<b></b>", "lxml")
-tag = soup.b
-tag.append("Joe")
-print(tag)
-new_str = NavigableString(" Chen")
-tag.append(new_str)
-print(tag)
-new_tag = soup.new_tag("a", href="http://www.example.com")
-tag.append(new_tag)
-print(tag)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-soup = BeautifulSoup("<p><b>One</b></p>", "lxml")
-tag = soup.b
-new_tag = soup.new_tag("i")
-new_tag.string = "Two"
-tag.insert_before(new_tag)
-
-print("找下一個段落<p>")
-print(soup.p)
-
-new_string = soup.new_string("Three")
-tag.insert_after(new_string)
-
-print("找下一個段落<p>")
-print(soup.p)
-
-tag.clear()
-
-print("找下一個段落<p>")
-print(soup.p)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-soup = BeautifulSoup("<p><b>One</b></p>", "lxml")
-tag = soup.b
-new_tag = soup.new_tag("i")
-new_tag.string = "Two"
-tag.replace_with(new_tag)
-
-print("找下一個段落<p>")
-print(soup.p)
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -3919,7 +3946,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 driver.implicitly_wait(10)
 driver.get("https://fchart.github.io/test.html")
-print("-----------------------------")
+
+print("------------------------------")  # 30個
+
 print(driver.title)
 html = driver.page_source
 print(html)
@@ -3935,7 +3964,9 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()))
 driver.implicitly_wait(10)
 driver.get("https://fchart.github.io/test.html")
-print("-----------------------------")
+
+print("------------------------------")  # 30個
+
 print(driver.title)
 html = driver.page_source
 print(html)
@@ -3953,7 +3984,9 @@ driver.implicitly_wait(10)
 cookie = {"name": "over18", "value": "1"}
 driver.get("https://www.ptt.cc/bbs/Gossiping/index.html")
 driver.add_cookie(cookie)
-print("-----------------------------")
+
+print("------------------------------")  # 30個
+
 print(driver.title)
 driver.quit()
 
@@ -3969,7 +4002,9 @@ driver.implicitly_wait(10)
 cookie = {"name": "over18", "value": "1"}
 driver.get("https://www.ptt.cc/bbs/Gossiping/index.html")
 driver.add_cookie(cookie)
-print("-----------------------------")
+
+print("------------------------------")  # 30個
+
 print(driver.title)
 driver.quit()
 """
@@ -3988,7 +4023,9 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),
                           options=options)
 driver.implicitly_wait(10)
 driver.get("https://fchart.github.io/test.html")
-print("-----------------------------")
+
+print("------------------------------")  # 30個
+
 print(driver.title)
 html = driver.page_source
 print(html)
@@ -4254,13 +4291,6 @@ def urlencode(query, doseq=False, safe="", encoding=None, errors=None):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-html_str = "<p>Hello World!</p>"
-soup = BeautifulSoup(html_str, "lxml")
-print("整個網頁資料 :", soup)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 r = requests.get("https://fchart.github.io/ML/Surveys.html")
 r.encoding = "utf8"
 soup = BeautifulSoup(r.text, "lxml")
@@ -4476,7 +4506,9 @@ url="https://www.momoshop.com.tw/search/"
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 driver.implicitly_wait(10)
 driver.get(url+"searchShop.jsp?keyword=NBA")
-print("-----------------------------")
+
+print("------------------------------")  # 30個
+
 print(driver.title)
 html = driver.page_source
 fp = open("tmp_NBA.html", "w", encoding="utf8")
@@ -4501,6 +4533,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "https://www.ptt.cc/bbs/NBA/index6503.html"
+
 DELETED = BeautifulSoup("<a href='Deleted'>本文已刪除</a>", "lxml").a
 
 r = requests.get(url)
@@ -4550,7 +4583,7 @@ catalog = ["movie", "NBA", "Gossiping"]
 for i in range(1, 5):
     url = urljoin(url, "world-list-0{0}.html".format(i))
     print(url)
-print("-----------------")
+print("---------------")  # 15個
 for item in catalog:
     url = urljoin(PTT, "../{0}/index.html".format(item))
     print(url)
@@ -5167,8 +5200,6 @@ HTML <title> 元素定義了顯示在瀏覽器標題欄或頁面標籤上的文�
 <span>: The Content Span element
 <td>: The Table Data Cell element
 """
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -5255,7 +5286,6 @@ with open(csvfile, "w+", newline="", encoding="utf-8") as fp:
         for cell in row.findAll(["td", "th"]):
             rowList.append(cell.get_text().replace("\n", "").replace("\r", ""))
         writer.writerow(rowList)
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -5809,185 +5839,6 @@ print(response.text)  # HTML網頁內容
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 建立BeautifulSoup物件
-
-r = requests.get("http://www.cs.cmu.edu/Groups/AI/areas/fuzzy/systems/anfis/0.html")
-r.encoding = "utf8"
-soup = BeautifulSoup(r.text, "lxml")
-# print(soup)
-print(soup.prettify())
-
-print("------------------------------")  # 30個
-
-# Tag物件
-html_str = "<div id='msg' class='body strikeout'>Hello World!</div>"
-soup = BeautifulSoup(html_str, "lxml")
-tag = soup.div
-print(type(tag))
-print(tag)
-
-print("------------------------------")  # 30個
-
-# NavigableString物件
-html_str = "<div id='msg' class='body strikeout'>Hello World!</div>"
-soup = BeautifulSoup(html_str, "lxml")
-tag = soup.div
-print(tag.string)  # 標籤內容
-print(type(tag.string))  # NavigableString型態
-
-# BeautifulSoup物件
-html_str = "<div id='msg'>Hello World!</div>"
-soup = BeautifulSoup(html_str, "lxml")
-tag = soup.div
-print(soup.name)
-print(type(soup))  # BeautifulSoup型態
-
-print("------------------------------")  # 30個
-
-# Comment物件
-html_str = "<p><!-- 註解文字 --></p>"
-soup = BeautifulSoup(html_str, "lxml")
-comment = soup.p.string
-print(comment)
-print(type(comment))  # Comment型態
-
-print("------------------------------")  # 30個
-
-fp = open("../input/py-wc-ex/Example.html", "r", encoding="utf8")
-str = fp.read()
-print("檔案內容:")
-print(str)
-
-print("------------------------------")  # 30個
-
-# 搜尋HTML標籤
-soup = BeautifulSoup(str, "lxml")
-tag_a = soup.find("a")
-print(tag_a.string)
-
-# 搜尋HTML標籤的id屬性
-tag_div = soup.find(id="q2")
-tag_a = tag_div.find("a")
-print(tag_a.string)
-
-# class樣式屬性
-tag_li = soup.find(attrs={"class": "response"})
-tag_span = tag_li.find("span")
-print(tag_span.string)
-
-print("------------------------------")  # 30個
-
-# 搜尋HTML標籤
-tag_div = soup.find(attrs={"data-custom": "important"})
-print(tag_div.string)
-
-print("------------------------------")  # 30個
-
-# 搜尋HTML標籤
-tag_div = soup.find(attrs={"id": "email"})
-print(tag_div.string)
-
-print("------------------------------")  # 30個
-
-tag_div = soup.find("div", class_="question")
-print(tag_div)
-print(tag_div.string)
-print("-------------------------------------")
-tag_p = soup.find("p", class_="question")
-print(tag_p)
-
-# tag_p = soup.find("p", class_="question")
-# tag_a = tag_p.find("a")
-# print(tag_a.string)
-
-
-# Python函數定義搜尋條件
-def is_secondary_question(tag):
-    return tag.has_attr("href") and tag.get("href") == "http://example.com/q2"
-
-
-tag_a = soup.find(is_secondary_question)
-print(tag_a)
-
-# 找出所有問卷的題目字串
-tag_list = soup.find_all("p", class_="question")
-print(tag_list)
-for question in tag_list:
-    print(question.a.string)
-
-print("------------------------------")  # 30個
-
-# 使用limit參數限制搜尋數量
-tag_list = soup.find_all("p", class_="question", limit=1)
-print(tag_list)
-for question in tag_list:
-    print(question.a.string)
-
-print("------------------------------")  # 30個
-
-# 搜尋所有標籤
-tag_div = soup.find("div", id="q2")
-# 找出所有標籤清單
-tag_all = tag_div.find_all(True)
-print(tag_all)
-
-print("------------------------------")  # 30個
-
-# 搜尋所有文字內容
-tag_div = soup.find("div", id="q2")
-# 找出所有文字內容清單
-tag_str_list = tag_div.find_all(text=True)
-print(tag_str_list)
-print("-------------------------------------")
-# 找出指定的文字內容清單
-tag_str_list = tag_div.find_all(text=["20", "40"])
-print(tag_str_list)
-
-# 清單指定搜尋條件
-tag_div = soup.find("div", id="q2")
-# 找出所有<p>和<span>標籤
-tag_list = tag_div.find_all(["p", "span"])
-print(tag_list)
-print("-------------------------------------")
-# 找出class屬性值question或selected的所有標籤
-tag_list = tag_div.find_all(class_=["question", "selected"])
-print(tag_list)
-
-# 沒有使用遞迴來執行搜尋
-tag_div = soup.find("div", id="q2")
-# 找出所有<li>子孫標籤
-tag_list = tag_div.find_all("li")
-print(tag_list)
-print("-------------------------------------")
-# 沒有使用遞迴來找出所有<li>標籤
-tag_list = tag_div.find_all("li", recursive=False)
-print(tag_list)
-
-# 正規表達式搜尋文字內容
-regexp = re.compile("男-")
-tag_str = soup.find(text=regexp)
-print(tag_str)
-regexp = re.compile("\w+-")  # 字元+-
-tag_list = soup.find_all(text=regexp)
-print(tag_list)
-
-# 使用正規表達式搜尋電子郵件地址
-email_regexp = re.compile("\w+@\w+\.\w+")
-tag_str = soup.find(text=email_regexp)
-print(tag_str)
-print("---------------------")
-tag_list = soup.find_all(text=email_regexp)
-print(tag_list)
-
-# 使用正規表達式搜尋URL網址
-url_regexp = re.compile("^http:")
-tag_href = soup.find(href=url_regexp)
-print(tag_href)
-print("---------------------")
-tag_list = soup.find_all(href=url_regexp)
-print(tag_list)
-print("---------------------")
-print(tag_list[0].string)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -6155,7 +6006,6 @@ for link in all_links:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 print("找全部的超連結<a>")
 all_links = soup.find_all("a")  # 取得 全部 <a></a>
 # print(all_links)
@@ -6189,6 +6039,128 @@ for link in photos:
     print("Storing " + filename)
     time.sleep(3)
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 片段html
+
+string_html_data = "<p>Hello World!</p>"
+soup = BeautifulSoup(string_html_data, "lxml")
+
+soup = BeautifulSoup("<b class='score'>Joe</b>", "lxml")
+
+# 用.取
+tag = soup.b
+tag.name = "p"
+tag["class"] = "question"
+tag["id"] = "name"
+print(tag)
+del tag["class"]
+print(tag)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+soup = BeautifulSoup("<b class='score'>Joe</b>", "lxml")
+
+# 用.取
+tag = soup.b
+tag.string = "Mary"
+print(tag)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Tag物件
+# NavigableString物件
+# navigable 可航行的；可操縱的，可駕駛的
+
+string_html_data = "<div id='msg' class='body strikeout'>Hello World!</div>"
+soup = BeautifulSoup(string_html_data, "lxml")
+
+# 用.取
+tag = soup.div
+print(type(tag))
+print(tag)
+print(tag.string)  # 標籤內容
+print(type(tag.string))  # NavigableString型態
+
+print("------------------------------")  # 30個
+
+# BeautifulSoup物件
+string_html_data = "<div id='msg'>Hello World!</div>"
+soup = BeautifulSoup(string_html_data, "lxml")
+
+# 用.取
+tag = soup.div
+print(soup.name)
+print(type(soup))  # BeautifulSoup型態
+
+print("------------------------------")  # 30個
+
+# Comment物件
+string_html_data = "<p><!-- 註解文字 --></p>"
+soup = BeautifulSoup(string_html_data, "lxml")
+
+# 用.取
+comment = soup.p.string
+print(comment)
+print(type(comment))  # Comment型態
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+soup = BeautifulSoup("<b></b>", "lxml")
+
+# 用.取
+tag = soup.b
+tag.append("Joe")
+print(tag)
+new_str = NavigableString(" Chen")
+tag.append(new_str)
+print(tag)
+new_tag = soup.new_tag("a", href="http://www.example.com")
+tag.append(new_tag)
+print(tag)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+soup = BeautifulSoup("<p><b>One</b></p>", "lxml")
+
+# 用.取
+tag = soup.b
+new_tag = soup.new_tag("i")
+new_tag.string = "Two"
+tag.insert_before(new_tag)
+
+print("找下一個段落<p>")
+print(soup.p)
+
+new_string = soup.new_string("Three")
+tag.insert_after(new_string)
+
+print("找下一個段落<p>")
+print(soup.p)
+
+tag.clear()
+
+print("找下一個段落<p>")
+print(soup.p)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+soup = BeautifulSoup("<p><b>One</b></p>", "lxml")
+
+# 用.取
+tag = soup.b
+new_tag = soup.new_tag("i")
+new_tag.string = "Two"
+tag.replace_with(new_tag)
+
+print("找下一個段落<p>")
+print(soup.p)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
