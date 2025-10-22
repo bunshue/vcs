@@ -118,50 +118,6 @@ namespace vcs_DataGridView1
             this.Size = new Size(1260, 740);
         }
 
-        void show_item_location2()
-        {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
-            //button
-            x_st = 600;
-            y_st = 10;
-            dx = 140;
-            dy = 70;
-
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button8.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button16.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button17.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button18.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button19.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-
-            richTextBox1.Size = new Size(200, 600);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-        }
-
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
@@ -244,63 +200,47 @@ namespace vcs_DataGridView1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            show_item_location2();
-
             //設定DGV
-            dataGridView1.ColumnCount = 5;
+            dataGridView1.ColumnCount = 3;
 
             dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
             dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font(dataGridView1.Font, FontStyle.Bold);
 
-            dataGridView1.Name = "dataGridView1";
-            //dataGridView1.Location = new Point(8, 8);
-            //dataGridView1.Size = new Size(500, 250);
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.Single;
             dataGridView1.GridColor = Color.Black;
             dataGridView1.RowHeadersVisible = false;
 
-            dataGridView1.Columns[0].Name = "Release Date";
-            dataGridView1.Columns[1].Name = "Track";
-            dataGridView1.Columns[2].Name = "Title";
-            dataGridView1.Columns[3].Name = "Artist";
-            dataGridView1.Columns[4].Name = "Album";
-            dataGridView1.Columns[4].DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Italic);
+            dataGridView1.Columns[0].Name = "英文名";
+            dataGridView1.Columns[1].Name = "中文名";
+            dataGridView1.Columns[2].Name = "體重";
+            dataGridView1.Columns[2].DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Italic);
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  //設置如何選中單元格 整行一起選取
             dataGridView1.MultiSelect = false;
-            dataGridView1.Dock = DockStyle.Fill;
+            //dataGridView1.Dock = DockStyle.Fill;
 
             //dataGridView1.CellFormatting += new DataGridViewCellFormattingEventHandler(songsDataGridView_CellFormatting);
 
             //填入資料
-            string[] row0 = { "11/22/1968", "29", "Revolution 9", "Beatles", "The Beatles [White Album]" };
-            string[] row1 = { "1960", "6", "Fools Rush In", "Frank Sinatra", "Nice 'N' Easy" };
-            string[] row2 = { "11/11/1971", "1", "One of These Days", "Pink Floyd", "Meddle" };
-            string[] row3 = { "1988", "7", "Where Is My Mind?", "Pixies", "Surfer Rosa" };
-            string[] row4 = { "5/1981", "9", "Can't Find My Mind", "Cramps", "Psychedelic Jungle" };
-            string[] row5 = { "6/10/2003", "13", "Scatterbrain. (As Dead As Leaves.)", "Radiohead", "Hail to the Thief" };
-            string[] row6 = { "6/30/1992", "3", "Dress", "P J Harvey", "Dry" };
-
+            string[] row0 = { "mouse", "米老鼠", "3" };
+            string[] row1 = { "ox", "班尼牛", "48" };
+            string[] row2 = { "tiger", "跳跳虎", "33" };
+            string[] row3 = { "rabbit", "彼得兔", "8" };
             dataGridView1.Rows.Add(row0);
             dataGridView1.Rows.Add(row1);
             dataGridView1.Rows.Add(row2);
             dataGridView1.Rows.Add(row3);
-            dataGridView1.Rows.Add(row4);
-            dataGridView1.Rows.Add(row5);
-            dataGridView1.Rows.Add(row6);
 
-            dataGridView1.Rows.Add(new Object[] { "11/22/1968", "29", "Revolution 9", "Beatles", "The Beatles [White Album]" });
+            dataGridView1.Rows.Add(new Object[] { "dragon", "逗逗龍", "38" });
 
             /*
             //dataGridView 顯示欄排序
-            dataGridView1.Columns[0].DisplayIndex = 3;
-            dataGridView1.Columns[1].DisplayIndex = 4;
+            dataGridView1.Columns[0].DisplayIndex = 1;
+            dataGridView1.Columns[1].DisplayIndex = 2;
             dataGridView1.Columns[2].DisplayIndex = 0;
-            dataGridView1.Columns[3].DisplayIndex = 1;
-            dataGridView1.Columns[4].DisplayIndex = 2;
             */
 
             //int index = dataGridView1.Rows.Add();
@@ -315,61 +255,50 @@ namespace vcs_DataGridView1
             //多了 RowPostPaint
 
             //設定DGV
-            dataGridView1.ColumnCount = 6;
+            dataGridView1.ColumnCount = 4;
 
             dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
             dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font(dataGridView1.Font, FontStyle.Bold);
 
-            dataGridView1.Name = "dataGridView1";
-            //dataGridView1.Location = new Point(8, 8);
-            dataGridView1.Size = new Size(500, 250);
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.Single;
             dataGridView1.GridColor = Color.Black;
             dataGridView1.RowHeadersVisible = false;
 
-            dataGridView1.Columns[0].Name = "Number";
-            dataGridView1.Columns[1].Name = "Release Date";
-            dataGridView1.Columns[2].Name = "Track";
-            dataGridView1.Columns[3].Name = "Title";
-            dataGridView1.Columns[4].Name = "Artist";
-            dataGridView1.Columns[5].Name = "Album";
-            dataGridView1.Columns[5].DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Italic);
+            dataGridView1.Columns[0].Name = "編號";
+            dataGridView1.Columns[1].Name = "英文名";
+            dataGridView1.Columns[2].Name = "中文名";
+            dataGridView1.Columns[3].Name = "體重";
+            dataGridView1.Columns[3].DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Italic);
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  //設置如何選中單元格 整行一起選取
             dataGridView1.MultiSelect = false;
-            dataGridView1.Dock = DockStyle.Fill;
+            //dataGridView1.Dock = DockStyle.Fill;
 
             //dataGridView1.CellFormatting += new DataGridViewCellFormattingEventHandler(songsDataGridView_CellFormatting);
 
             //填入資料
-            string[] row0 = { "", "11/22/1968", "29", "Revolution 9", "Beatles", "The Beatles [White Album]" };
-            string[] row1 = { "", "1960", "6", "Fools Rush In", "Frank Sinatra", "Nice 'N' Easy" };
-            string[] row2 = { "", "11/11/1971", "1", "One of These Days", "Pink Floyd", "Meddle" };
-            string[] row3 = { "", "1988", "7", "Where Is My Mind?", "Pixies", "Surfer Rosa" };
-            string[] row4 = { "", "5/1981", "9", "Can't Find My Mind", "Cramps", "Psychedelic Jungle" };
-            string[] row5 = { "", "6/10/2003", "13", "Scatterbrain. (As Dead As Leaves.)", "Radiohead", "Hail to the Thief" };
-            string[] row6 = { "", "6/30/1992", "3", "Dress", "P J Harvey", "Dry" };
-
+            string[] row0 = { "", "mouse", "米老鼠", "3" };
+            string[] row1 = { "", "ox", "班尼牛", "48" };
+            string[] row2 = { "", "tiger", "跳跳虎", "33" };
+            string[] row3 = { "", "rabbit", "彼得兔", "8" };
             dataGridView1.Rows.Add(row0);
             dataGridView1.Rows.Add(row1);
             dataGridView1.Rows.Add(row2);
             dataGridView1.Rows.Add(row3);
-            dataGridView1.Rows.Add(row4);
-            dataGridView1.Rows.Add(row5);
-            dataGridView1.Rows.Add(row6);
+
+            dataGridView1.Rows.Add(new Object[] { "", "dragon", "逗逗龍", "38" });
 
             /*
             //dataGridView 顯示欄排序
-            dataGridView1.Columns[0].DisplayIndex = 3;
-            dataGridView1.Columns[1].DisplayIndex = 4;
+            dataGridView1.Columns[0].DisplayIndex = 1;
+            dataGridView1.Columns[1].DisplayIndex = 2;
             dataGridView1.Columns[2].DisplayIndex = 0;
-            dataGridView1.Columns[3].DisplayIndex = 1;
-            dataGridView1.Columns[4].DisplayIndex = 2;
             */
 
+            //自動畫上編號
             dataGridView1.RowPostPaint += new DataGridViewRowPostPaintEventHandler(dataGridView1_RowPostPaint);
         }
 
@@ -393,41 +322,48 @@ namespace vcs_DataGridView1
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //建立二個DataColumn並設定相關欄位屬性
+            // 建立DataTable
+            DataTable dt = new DataTable("動物資料表");
 
-            DataColumn column1 = new DataColumn("ProductName");
+            //建立二個DataColumn並設定相關欄位屬性
+            DataColumn column1 = new DataColumn("英文名");
             column1.DataType = System.Type.GetType("System.String");
             column1.AllowDBNull = true; //是否可以空白
-            column1.Caption = "產品名稱";
-            column1.DefaultValue = "日蝕GST";
+            column1.Caption = "英文名";
+            column1.DefaultValue = "----";
 
-            DataColumn column2 = new DataColumn("Price");
-            column2.DataType = System.Type.GetType("System.Decimal");
-            column2.AllowDBNull = true;
-            column2.Caption = "價格";
-            column2.DefaultValue = 0;
+            DataColumn column2 = new DataColumn("中文名");
+            column2.DataType = System.Type.GetType("System.String");
+            column2.AllowDBNull = true; //是否可以空白
+            column2.Caption = "中文名";
+            column2.DefaultValue = "----";
 
-            //建立DataTable
-            DataTable dt = new DataTable("Product");
+            DataColumn column3 = new DataColumn("體重");
+            column3.DataType = System.Type.GetType("System.Decimal");
+            column3.AllowDBNull = true; //是否可以空白
+            column3.Caption = "體重";
+            column3.DefaultValue = 0;
 
             //將欄位加入表格中
             dt.Columns.Add(column1);//添加欄位
             dt.Columns.Add(column2);//添加欄位
+            dt.Columns.Add(column3);//添加欄位
 
             //建立二個DataRow並給定其對應欄位內容值
             DataRow row;
             row = dt.NewRow();
-            row["ProductName"] = "Mitsubishi Eclipse GST";
-            row["Price"] = 1200000;
+            row["英文名"] = "mouse";
+            row["中文名"] = "米老鼠";
+            row["體重"] = 3;
             dt.Rows.Add(row);
 
             row = dt.NewRow();
-            row["ProductName"] = "Tigra";
-            row["Price"] = 800000;
+            row["英文名"] = "ox";
+            row["中文名"] = "班尼牛";
+            row["體重"] = 48;
             dt.Rows.Add(row);
 
             dataGridView1.DataSource = dt;//設定DGV的資料來源為DataTable
-
             dataGridView1.AutoResizeColumns();
         }
 
@@ -444,7 +380,7 @@ namespace vcs_DataGridView1
             //建立DataTable
             DataTable dt = new DataTable("動物資料表");
 
-            // Add columns to the DataTable.
+            //將欄位加入表格中
             dt.Columns.Add("英文名", System.Type.GetType("System.String"));
             dt.Columns.Add("中文名", System.Type.GetType("System.String"));
             dt.Columns.Add("體重", System.Type.GetType("System.Int32"));
@@ -452,7 +388,7 @@ namespace vcs_DataGridView1
             // Make all columns required.
             for (int i = 0; i < dt.Columns.Count; i++)
             {
-                dt.Columns[i].AllowDBNull = false;
+                dt.Columns[i].AllowDBNull = false; //是否可以空白
             }
 
             // 單一性
@@ -494,10 +430,11 @@ namespace vcs_DataGridView1
             //建立DataTable
             DataTable dt = new DataTable();
             dt.TableName = "動物資料";
+
             DataColumn dc = new DataColumn();
             dc.ColumnName = "編號";
             dc.DataType = typeof(int);
-            dc.AllowDBNull = false;
+            dc.AllowDBNull = false; //是否可以空白
             dc.Unique = true;       //設定 唯一值, 不能重複
             DataColumn dc2 = new DataColumn();
             dc2.ColumnName = "英文名";
@@ -505,7 +442,10 @@ namespace vcs_DataGridView1
             DataColumn dc3 = new DataColumn();
             dc3.ColumnName = "中文名";
             dc3.DataType = typeof(string);
+
+            //將欄位加入表格中
             dt.Columns.AddRange(new DataColumn[] { dc, dc2, dc3 });
+
             dt.Rows.Add(new object[] { "1", "mouse", "米老鼠" });
             dt.Rows.Add(new object[] { "2", "ox", "班尼牛" });
             dt.Rows.Add(new object[] { "3", "tiger", "跳跳虎" });
@@ -523,6 +463,7 @@ namespace vcs_DataGridView1
             //建立DataTable
             DataTable dt = new DataTable();
 
+            //將欄位加入表格中
             dt.Columns.Add("編號", typeof(System.String));
             dt.Columns.Add("英文名", typeof(System.String));
             dt.Columns.Add("中文名", typeof(System.String));
@@ -579,7 +520,7 @@ namespace vcs_DataGridView1
             dgvc.Items.Add("班尼牛");//向集合中添加元素
             dgvc.Items.Add("跳跳虎");//向集合中添加元素
             dgvc.Items.Add("彼得兔");//向集合中添加元素
-            dgvc.HeaderText = "十二生肖";//設置列標題文本
+            dgvc.HeaderText = "動物資料表";//設置列標題文本
 
             dataGridView1.Columns.Add(dgvc);//將列添加到集合
         }

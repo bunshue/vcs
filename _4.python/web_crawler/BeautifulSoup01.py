@@ -2676,8 +2676,7 @@ print("抓取網頁 分析 9")
 
 # 教育部全球資訊網-即時新聞
 url = "https://www.edu.tw/News.aspx?n=9E7AC85F1954DDA8&sms=169B8E91BB75571F"
-html = requests.get(url).text
-soup = BeautifulSoup(html, "lxml")
+soup = get_soup_from_url(url)
 
 table = soup.find("table")
 
@@ -2764,7 +2763,6 @@ print(pages[-1].text)
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 """ NG
 print("BeautifulSoup 測試 29")
 
@@ -4465,31 +4463,40 @@ with open(jsonfilename, "w") as fp:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-""" momo 網站 無 headers, 不可抓取
-url = "https://www.momoshop.com.tw/search/"
+print("比較使用 headers 抓取網站資料")
 
-r = requests.get(url+"searchShop.jsp?keyword=NBA")
-if r.status_code == requests.codes.ok:
-    r.encoding = "big5"
-    print(r.text)        
-else:
-    print("HTTP請求錯誤..." + url)
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("使用 headers 抓取 momo 網站")
+#  momo 網站 無 headers, 不可抓取
 
 url = "https://www.momoshop.com.tw/search/"
+
+url_new = url + "searchShop.jsp?keyword=NBA"
+print(url_new)
 
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
     "AppleWebKit/537.36 (KHTML, like Gecko)"
     "Chrome/63.0.3239.132 Safari/537.36"
 }
-r = requests.get(url + "searchShop.jsp?keyword=NBA", headers=headers)
+
+print("------------------------------")  # 30個
+
+print("無 headers, 抓取 momo 網站")
+r = requests.get(url_new)
+
 if r.status_code == requests.codes.ok:
-    r.encoding = "big5"
+    r.encoding = "utf-8"
+    print(r.text)
+else:
+    print("HTTP請求錯誤..." + url)
+
+print("------------------------------")  # 30個
+
+print("使用 headers, 抓取 momo 網站")
+
+r = requests.get(url_new, headers=headers)
+
+if r.status_code == requests.codes.ok:
+    r.encoding = "utf-8"
     print(r.text)
 else:
     print("HTTP請求錯誤..." + url)
@@ -4590,69 +4597,6 @@ for item in catalog:
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-url = "https://movies.yahoo.com.tw/movie_intheaters.html"
-headers = {
-    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-    "AppleWebKit/537.36 (KHTML, like Gecko)"
-    "Chrome/63.0.3239.132 Safari/537.36"
-}
-
-
-def format_date(date):  # 取出上映日期
-    if not date:
-        return "N/A"
-    pattern = "\d+-\d+-\d+"
-    match = re.search(pattern, date.text)
-    if match is None:
-        return date.text
-    else:
-        return match.group(0)
-
-
-def get_text(tag):
-    if tag:
-        return tag.text.strip()
-    else:
-        return "N/A"
-
-
-def get_attrib(tag, attrib):
-    if tag:
-        return tag[attrib].strip()
-    else:
-        return "N/A"
-
-
-""" fail    
-movies = [["中文片名","英文片名","期待度","海報圖片","上映日"]]
-r = requests.get(url, headers=headers)
-if r.status_code == requests.codes.ok:
-    soup = BeautifulSoup(r.text, 'lxml')
-    tag_ul = soup.find("ul", class_="release_list")
-    rows = tag_ul.find_all("li")
-    for row in rows:
-        name_div = row.find("div",class_="release_movie_name")
-        cht_n = get_text(name_div.find("a"))
-        eng_n = get_text(name_div.find("div",class_="en").find("a"))
-        expect = get_text(row.find("div",class_="leveltext").find("span"))
-        photo_div = row.find("div",class_="release_foto")
-        poster_url = get_attrib(photo_div.find("img"),"data-src")
-        date = row.find('div',class_='release_movie_time')
-        release_date = format_date(date)
-        movie= [cht_n,eng_n,expect,poster_url,release_date]
-        movies.append(movie)
-else:
-   print("HTTP請求錯誤...")
-
-with open("tmp_movies.csv", "w+",newline="",encoding="utf-8") as fp:
-    writer = csv.writer(fp)
-    for item in movies:
-        writer.writerow(item)
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 """ webdriver
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -4687,154 +4631,6 @@ with open("tmp_products.json", "w", encoding="utf-8") as fp: # 寫入JSON檔案
     json.dump(products,fp,indent=2,
               sort_keys=True,
               ensure_ascii=False)
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "https://movies.yahoo.com.tw/movie_intheaters.html/?page={0}"
-headers = {
-    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-    "AppleWebKit/537.36 (KHTML, like Gecko)"
-    "Chrome/63.0.3239.132 Safari/537.36"
-}
-
-
-def format_date(date):  # 取出上映日期
-    if not date:
-        return "N/A"
-    pattern = "\d+-\d+-\d+"
-    match = re.search(pattern, date.text)
-    if match is None:
-        return date.text
-    else:
-        return match.group(0)
-
-
-def get_text(tag):
-    if tag:
-        return tag.text.strip()
-    else:
-        return "N/A"
-
-
-def get_attrib(tag, attrib):
-    if tag:
-        return tag[attrib].strip()
-    else:
-        return "N/A"
-
-
-""" fail
-all_movies = [["中文片名","英文片名","期待度","海報圖片","上映日"]]
-for page in range(1, 11):
-    url = url.format(page)
-    print("抓取: 第" + str(page) + "頁 網路資料中...")
-    r = requests.get(url, headers=headers)
-    if r.status_code == requests.codes.ok:
-        soup = BeautifulSoup(r.text, 'lxml')
-        movies = []
-        tag_ul = soup.find("ul", class_="release_list")
-        rows = tag_ul.find_all("li")
-        for row in rows:
-            name_div = row.find("div",class_="release_movie_name")
-            cht_n = get_text(name_div.find("a"))
-            eng_n = get_text(name_div.find("div",class_="en").find("a"))
-            expect = get_text(row.find("div",class_="leveltext").find("span"))
-            photo_div = row.find("div",class_="release_foto")
-            poster_url = get_attrib(photo_div.find("img"),"data-src")
-            date = row.find('div',class_='release_movie_time')
-            release_date = format_date(date)
-            movie= [cht_n,eng_n,expect,poster_url,release_date]
-            movies.append(movie)
-        all_movies = all_movies + movies
-        if soup.find("li", class_="nexttxt disabled"):
-            break   # 已經沒有下一頁
-        print("等待5秒鐘...")   
-        time.sleep(5) 
-    else:
-        print("HTTP請求錯誤...")
-
-with open("all_movies.csv", "w+",newline="",encoding="utf-8") as fp:
-    writer = csv.writer(fp)
-    for item in all_movies:
-        writer.writerow(item)
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "https://movies.yahoo.com.tw/movie_intheaters.html/?page=1"
-headers = {
-    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-    "AppleWebKit/537.36 (KHTML, like Gecko)"
-    "Chrome/63.0.3239.132 Safari/537.36"
-}
-
-
-def format_date(date):  # 取出上映日期
-    if not date:
-        return "N/A"
-    pattern = "\d+-\d+-\d+"
-    match = re.search(pattern, date.text)
-    if match is None:
-        return date.text
-    else:
-        return match.group(0)
-
-
-def get_text(tag):
-    if tag:
-        return tag.text.strip()
-    else:
-        return "N/A"
-
-
-def get_attrib(tag, attrib):
-    if tag:
-        return tag[attrib].strip()
-    else:
-        return "N/A"
-
-
-""" fail
-all_movies = [["中文片名","英文片名","期待度","海報圖片","上映日"]]
-page = 1
-while True:
-    print("抓取: 第" + str(page) + "頁 網路資料中...")
-    page = page + 1
-    r = requests.get(url, headers=headers)
-    if r.status_code == requests.codes.ok:
-        soup = BeautifulSoup(r.text, 'lxml')
-        movies = []
-        tag_ul = soup.find("ul", class_="release_list")
-        rows = tag_ul.find_all("li")
-        for row in rows:
-            name_div = row.find("div",class_="release_movie_name")
-            cht_n = get_text(name_div.find("a"))
-            eng_n = get_text(name_div.find("div",class_="en").find("a"))
-            expect = get_text(row.find("div",class_="leveltext").find("span"))
-            photo_div = row.find("div",class_="release_foto")
-            poster_url = get_attrib(photo_div.find("img"),"data-src")
-            date = row.find('div',class_='release_movie_time')
-            release_date = format_date(date)
-            movie= [cht_n,eng_n,expect,poster_url,release_date]
-            movies.append(movie)
-        all_movies = all_movies + movies
-        if soup.find("li", class_="nexttxt disabled"):
-            break   # 已經沒有下一頁
-        nextPage = soup.find("li", class_="nexttxt")   
-        if nextPage:
-            url = nextPage.find("a")["href"] 
-            print("等待5秒鐘...")          
-            time.sleep(5)
-        else:
-            break
-    else:
-        print("HTTP請求錯誤...")
-
-with open("tmp_all_movies2.csv", "w+",newline="",encoding="utf-8") as fp:
-    writer = csv.writer(fp)
-    for item in all_movies:
-        writer.writerow(item)
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -4885,22 +4681,24 @@ print("------------------------------------------------------------")  # 60個
 # 目標url網址
 url = "https://www.ptt.cc"
 MAX_PUSH = 50
-# TOPIC = "Gossiping"
-TOPIC = "NBA"
+TOPIC = "Gossiping"
+# TOPIC = "NBA"
 
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    "AppleWebKit/537.36 (KHTML, like Gecko)"
+    "Chrome/63.0.3239.132 Safari/537.36"
+}
 
-def get_resource(url):
-    headers = {
-        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-        "AppleWebKit/537.36 (KHTML, like Gecko)"
-        "Chrome/63.0.3239.132 Safari/537.36"
-    }
-    return requests.get(url, headers=headers, cookies={"over18": "1"})
+# 這兩個網站, 沒有用headers和cookies, 看起來也OK
 
 
 def parse_html(r):
     if r.status_code == requests.codes.ok:
         r.encoding = "utf8"
+        print("aaaa")
+        print(r.text)
+        print("bbbb")
         soup = BeautifulSoup(r.text, "lxml")
     else:
         print("HTTP請求錯誤..." + url)
@@ -4919,7 +4717,9 @@ def get_articles(soup, date):
 
     print("找全部的內容分區元素<div> + 條件")
     tag_divs = soup.find_all("div", class_="r-ent")
+    print(tag_divs)
     for tag in tag_divs:
+        print(tag)
         # 判斷文章的日期
         if tag.find("div", class_="date").text.strip() == date:
             push_count = 0  # 取得推文數
@@ -4962,36 +4762,40 @@ def save_to_json(articles, file):
 def web_scraping_bot(url):
     articles = []
     print("抓取網路資料中...")
-    soup = parse_html(get_resource(url))
+    cc = requests.get(url, headers=headers, cookies={"over18": "1"})
+    soup = parse_html(cc)
     if soup:
         # 取得今天日期, 去掉開頭'0'符合PTT的日期格式
         today = time.strftime("%m/%d").lstrip("0")
         # 取得目前頁面的今日文章清單
         current_articles, prev_url = get_articles(soup, today)
+        print("current_articles :", current_articles)
+        articles += current_articles
+        """ NG
         while current_articles:
             articles += current_articles
             print("等待2秒鐘...")
             time.sleep(2)
             # 剖析上一頁繼續尋找是否有今日的文章
-            soup = parse_html(get_resource(url + prev_url))
+            cc = requests.get(url + prev_url, headers=headers, cookies={"over18": "1"})
+            soup = parse_html(cc)
             current_articles, prev_url = get_articles(soup, today)
+        """
     return articles
 
 
-""" NG
 url = url + "/bbs/" + TOPIC + "/index.html"
 print(url)
 articles = web_scraping_bot(url)
 for item in articles:
     print(item)
 save_to_json(articles, "tmp_articles.json")
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """ NG
-# 自訂表頭
-
 url = "https://irs.thsrc.com.tw/IMINT/"
+
 # 自訂表頭
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36"
@@ -5000,6 +4804,7 @@ headers = {
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36"
 }
+
 # 將自訂表頭加入 GET 請求中
 r = requests.get(url, headers=headers)
 print(r)
@@ -5516,90 +5321,12 @@ print("共下載", n, "張圖片")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 博客來
 
-# books.py
+
 def showkind(url, kind):
-    html = requests.get(url, headers=headers).text
-    soup = BeautifulSoup(html, "lxml")
-    try:
-        pages = int(soup.select(".cnt_page span")[0].text)  # 該分類共有多少頁
-        print("共有", pages, "頁")
-        for page in range(1, pages + 1):
-            pageurl = url + "&page=" + str(page).strip()
-            print("第", page, "頁", pageurl)
-            # showpage(pageurl,kind)
-    except:  # 沒有分頁的處理
-        showpage(url, kind)
-
-
-def showpage(url, kind):
-    html = requests.get(url, headers=headers).text
-    soup = BeautifulSoup(html, "lxml")
-    # 近期新書、在 class="mod type02_m012 clearfix" 中
-    res = soup.find_all("div", {"class": "mod type02_m012 clearfix"})[0]
-    items = res.select(".item")  # 所有 item
-    n = 0  # 計算該分頁共有多少本書
-    for item in items:
-        msg = item.select(".msg")[0]
-        src = item.select("a img")[0]["src"]
-        title = msg.select("a")[0].text  # 書名
-        imgurl = src.split("?i=")[-1].split("&")[0]  # 圖片網址
-        author = msg.select("a")[1].text  # 作者
-        publish = msg.select("a")[2].text  # 出版社
-        date = msg.find("span").text.split("：")[-1]  # 出版日期
-        onsale = item.select(".price .set2")[0].text  # 優惠價
-        content = item.select(".txt_cont")[0].text.replace(" ", "").strip()  # 內容
-        print("\n分類：" + kind)
-        print("書名：" + title)
-        print("圖片網址：" + imgurl)
-        print("作者：" + author)
-        print("出版社：" + publish)
-        print("出版日期：" + date)
-        print(onsale)  # 優惠價
-        print("內容：" + content)
-        n += 1
-        print("n=", n)
-
-
-def twobyte(kindno):
-    if kindno < 10:
-        kindnostr = "0" + str(kindno)
-    else:
-        kindnostr = str(kindno)
-    return kindnostr
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-kindno = 1  # 要下載的分類，預設為第1分類：文學小說
-homeurl = "http://www.books.com.tw/web/books_nbtopm_01/?o=5&v=1"
-mode = "?o=5&v=1"  # 顯示模式：直式  排序依：暢銷度
-url = "http://www.books.com.tw/web/books_nbtopm_"
-headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
-}
-html = requests.get(homeurl, headers=headers).text
-soup = BeautifulSoup(html, "lxml")
-
-# 中文書新書分類，取得分類資訊
-res = soup.find("div", class_="mod_b type02_l001-1 clearfix")
-hrefs = res.select("a")  # 選全部的超連結<a>
-
-kindno = int(input("請輸入要下載的分類："))
-if 0 < kindno <= len(hrefs):
-    kind = hrefs[kindno - 1].text  # 分類名稱
-    print("下載的分類編號：{}   分類名稱：{}".format(kindno, kind))
-    # 下載指定的分類
-    kindurl = url + twobyte(kindno) + mode  # 分類網址
-    print(kindurl)
-    showkind(kindurl, kind)  # 顯示該分類所有書籍
-else:
-    print("分類不存在!")
-
-
-# books_GoogleSheet.py
-def showkind(url, kind):
+    print("showkind, url  :", url)
+    print("showkind, kind :", kind)
     html = requests.get(url, headers=headers).text
     soup = BeautifulSoup(html, "html.parser")
     try:
@@ -5614,27 +5341,41 @@ def showkind(url, kind):
 
 
 def showpage(url, kind):
+    print("showpage, url  :", url)
+    print("showpage, kind :", kind)
     html = requests.get(url, headers=headers).text
     soup = BeautifulSoup(html, "html.parser")
     # 近期新書、在 class="mod type02_m012 clearfix" 中
     res = soup.find_all("div", {"class": "mod type02_m012 clearfix"})[0]
     items = res.select(".item")  # 所有 item
     n = 0  # 計算該分頁共有多少本書
+    print(len(items))
     for item in items:
+        print(item)
         msg = item.select(".msg")[0]
-        src = item.select("a img")[0]["src"]
+        # src = item.select("a img")[0]["src"]
         title = msg.select("a")[0].text  # 書名
-        imgurl = src.split("?i=")[-1].split("&")[0]  # 圖片網址
+        # imgurl = src.split("?i=")[-1].split("&")[0]  # 圖片網址
         author = msg.select("a")[1].text  # 作者
         publish = msg.select("a")[2].text  # 出版社
         date = msg.find("span").text.split("：")[-1]  # 出版日期
         onsale = item.select(".price .set2")[0].text  # 優惠價
         content = item.select(".txt_cont")[0].text.replace(" ", "").strip()  # 內容
         # 將資料加入 list1 串列中
-        listdata = [kind, title, imgurl, author, publish, date, onsale, content]
-        list1.append(listdata)
+        # listdata = [kind, title, imgurl, author, publish, date, onsale, content]
+        # list1.append(listdata)
+        print("\n分類：" + kind)
+        print("書名：" + title)
+        # print("圖片網址：" + imgurl)
+        print("作者：" + author)
+        print("出版社：" + publish)
+        print("出版日期：" + date)
+        print(onsale)  # 優惠價
+        print("內容：" + content)
         n += 1
         print("n=", n)
+        if n > 5:
+            break
 
 
 def twobyte(kindno):
@@ -5645,10 +5386,41 @@ def twobyte(kindno):
     return kindnostr
 
 
+print("------------------------------")  # 30個
+
+list1 = []
+kindno = 1  # 要下載的分類，預設為第1分類：文學小說
+homeurl = "http://www.books.com.tw/web/books_nbtopm_01/?o=5&v=1"
+mode = "?o=5&v=1"  # 顯示模式：直式  排序依：暢銷度
+url = "http://www.books.com.tw/web/books_nbtopm_"
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
+}
+html = requests.get(homeurl, headers=headers).text
+soup = BeautifulSoup(html, "lxml")
+
+# 中文書新書分類，取得分類資訊
+res = soup.find("div", class_="mod_b type02_l001-1 clearfix")
+hrefs = res.select("a")  # 選全部的超連結<a>
+
+# kindno = int(input("請輸入要下載的分類："))
+kindno = 1  # 要下載的分類，預設為第1分類：文學小說
+
+if 0 < kindno <= len(hrefs):
+    kind = hrefs[kindno - 1].text  # 分類名稱
+    print("aa下載的分類編號：{}   分類名稱：{}".format(kindno, kind))
+    # 下載指定的分類
+    kindurl = url + twobyte(kindno) + mode  # 分類網址
+    print(kindurl)
+    showkind(kindurl, kind)  # 顯示該分類所有書籍
+else:
+    print("分類不存在!")
+
+print("------------------------------")  # 30個
+""" 要用到 google sheet的
 def auth_gss_client(path, scopes):  # 建立憑證
     credentials = ServiceAccountCredentials.from_json_keyfile_name(path, scopes)
     return gspread.authorize(credentials)
-
 
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -5661,7 +5433,7 @@ gss_client = auth_gss_client(auth_json_path, gss_scopes)  # 連線
 spreadsheet_key = "您自己的key"
 sheet = gss_client.open_by_key(spreadsheet_key).sheet1  # 開啟工作表
 sheet.clear()  # 清除工作表內容
-
+"""
 list1 = []
 kindno = 1  # 要下載的分類，預設為第 1分類：文學小說
 homeurl = "http://www.books.com.tw/web/books_nbtopm_01/?o=5&v=1"
@@ -5676,13 +5448,16 @@ soup = BeautifulSoup(html, "html.parser")
 res = soup.find("div", {"class": "mod_b type02_l001-1 clearfix"})
 hrefs = res.select("a")  # 選全部的超連結<a>
 
-kindno = int(input("請輸入要下載的分類："))
+# kindno = int(input("請輸入要下載的分類："))
+kindno = 1  # 要下載的分類，預設為第1分類：文學小說
+
 if 0 < kindno <= len(hrefs):
     kind = hrefs[kindno - 1].text  # 分類名稱
-    print("下載的分類編號：{}   分類名稱：{}".format(kindno, kind))
+    print("bb下載的分類編號：{}   分類名稱：{}".format(kindno, kind))
     # 下載指定的分類
     kindurl = url + twobyte(kindno) + mode  # 分類網址
     showkind(kindurl, kind)  # 顯示該分類所有書籍
+    """ skip
     # 儲存 Google 試算表
     print("資料寫入雲端 Google 試算表中，請等侯幾分鐘!")
     listtitle = ["分類", "書名", "圖片網址", "作者", "出版社", "出版日期", "優惠價", "內容"]
@@ -5690,6 +5465,7 @@ if 0 < kindno <= len(hrefs):
     for item1 in list1:  # 資料
         sheet.append_row(item1)
         sleep(1)  # 必須加上適當的 delay
+    """
 else:
     print("分類不存在!")
 print("資料儲存完畢!")
@@ -6164,3 +5940,26 @@ print(soup.p)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+# useful
+def get_text(tag):
+    if tag:
+        return tag.text.strip()
+    else:
+        return "N/A"
+
+
+url = "https://movies.yahoo.com.tw/movie_intheaters.html"
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    "AppleWebKit/537.36 (KHTML, like Gecko)"
+    "Chrome/63.0.3239.132 Safari/537.36"
+}
+
+url = "https://movies.yahoo.com.tw/movie_intheaters.html/?page={0}"
+for page in range(1, 11):
+    url = url.format(page)
+    print("抓取: 第" + str(page) + "頁 網路資料中...")
+
+url = "https://movies.yahoo.com.tw/movie_intheaters.html/?page=1"

@@ -328,6 +328,30 @@ namespace vcs_ListView1
 
         void apply_listView02()
         {
+            //基本設定
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.GridLines = true; //顯示格線
+
+            // 加入列資料
+            listView1.AddRow(new string[] { "鼠", "mouse", "3", "米老鼠", "2014" });
+            listView1.AddRow(new string[] { "牛", "ox", "48", "班尼牛", "2013" });
+            listView1.AddRow(new string[] { "虎", "tiger", "33", "跳跳虎", "2012" });
+            listView1.AddRow("兔", "rabbit", "8", "彼得兔", "2013");
+            listView1.AddRow("龍", "dragon", "38", "逗逗龍", "2008");
+            listView1.AddRow("蛇", "snake", "16", "貪吃蛇", "2011");
+
+            // Make the ListView column headers.
+            listView1.MakeColumnHeaders(
+                "中文名", HorizontalAlignment.Left,
+                "英文名", HorizontalAlignment.Left,
+                "體重", HorizontalAlignment.Left,
+                "代表", HorizontalAlignment.Right,
+                "Year", HorizontalAlignment.Right
+            );
+
+            // Size the columns to fit the data and colummn headers.
+            listView1.SizeColumns(-2);
         }
 
         void apply_listView03()
@@ -755,30 +779,6 @@ namespace vcs_ListView1
 
         void apply_listView11()
         {
-            //基本設定
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.GridLines = true; //顯示格線
-
-            // 加入列資料
-            listView1.AddRow(new string[] { "鼠", "mouse", "3", "米老鼠", "2014" });
-            listView1.AddRow(new string[] { "牛", "ox", "48", "班尼牛", "2013" });
-            listView1.AddRow(new string[] { "虎", "tiger", "33", "跳跳虎", "2012" });
-            listView1.AddRow("兔", "rabbit", "8", "彼得兔", "2013");
-            listView1.AddRow("龍", "dragon", "38", "逗逗龍", "2008");
-            listView1.AddRow("蛇", "snake", "16", "貪吃蛇", "2011");
-
-            // Make the ListView column headers.
-            listView1.MakeColumnHeaders(
-                "中文名", HorizontalAlignment.Left,
-                "英文名", HorizontalAlignment.Left,
-                "體重", HorizontalAlignment.Left,
-                "代表", HorizontalAlignment.Right,
-                "Year", HorizontalAlignment.Right
-            );
-
-            // Size the columns to fit the data and colummn headers.
-            listView1.SizeColumns(-2);
         }
 
         //--------------------------------------------------------------------------------------------------------------------
