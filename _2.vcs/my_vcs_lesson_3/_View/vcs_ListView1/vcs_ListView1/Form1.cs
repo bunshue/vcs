@@ -404,19 +404,19 @@ namespace vcs_ListView1
             //建立欄資料
             ColumnHeader colHead;
             colHead = new ColumnHeader();
-            colHead.Text = "Filename";
+            colHead.Text = "第一欄";
             colHead.Width = 200;
             colHead.TextAlign = HorizontalAlignment.Left;
             listView1.Columns.Add(colHead);
 
             colHead = new ColumnHeader();
-            colHead.Text = "Size";
+            colHead.Text = "第二欄";
             colHead.Width = 100;
             colHead.TextAlign = HorizontalAlignment.Left;
             listView1.Columns.Add(colHead);
 
             colHead = new ColumnHeader();
-            colHead.Text = "Last Accessed";
+            colHead.Text = "第三欄";
             colHead.Width = 200;
             colHead.TextAlign = HorizontalAlignment.Left;
             listView1.Columns.Add(colHead);
@@ -428,29 +428,29 @@ namespace vcs_ListView1
             listView1.BeginUpdate();
 
             lvi = new ListViewItem();
-            lvi.Text = "AAAA";
+            lvi.Text = "Row1a";
             lvi.ImageIndex = 0;
             lvi.Tag = "BBBB";
 
             lvsi = new ListViewItem.ListViewSubItem();
-            lvsi.Text = "CCCC";
+            lvsi.Text = "Row1b";
 
             lvi.SubItems.Add(lvsi);
 
             lvsi = new ListViewItem.ListViewSubItem();
-            lvsi.Text = "DDDD";
+            lvsi.Text = "Row1c";
 
             lvi.SubItems.Add(lvsi);
 
             listView1.Items.Add(lvi);
 
             lvi = new ListViewItem();
-            lvi.Text = "aaaa";
+            lvi.Text = "Row2a";
             lvi.ImageIndex = 1;
             lvi.Tag = "bbbb";
 
             lvsi = new ListViewItem.ListViewSubItem();
-            lvsi.Text = "cccc";
+            lvsi.Text = "Row2b";
             lvi.SubItems.Add(lvsi);
 
             listView1.Items.Add(lvi);

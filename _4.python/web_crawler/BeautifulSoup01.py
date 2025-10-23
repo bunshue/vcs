@@ -235,7 +235,7 @@ print("---------------h3")  # 15個
 print(soup.find("h3"))
 print(soup.find("h3").text)
 print("---------------blueText")  # 15個
-print(soup.select(".blueText"))
+print(soup.select(".blueText"))  # 尋找class是blueText
 print(soup.select(".blueText")[0].text)
 print("---------------a")  # 15個
 print(soup.find("a", {"target": "_blank"}))
@@ -356,7 +356,7 @@ print(soup.find_all(["title", "p"])[2].text)
 # 用select選
 print("h4:", soup.select("h4"))  # 選全部的h4標籤
 print("#station2:", soup.select("#station2"))  # ←查詢所有 id 為 "station2" 的標籤
-print(".pk:", soup.select(".pk"))  # ←查詢所有 class 為 "pk" 的標籤
+print(".pk:", soup.select(".pk"))  # ←查詢所有 class 為 "pk" 的標籤,  # 尋找class是pk
 print("h4.bk", soup.select("h4.bk"))  # ←查詢所有 class 為 "bk" 的 h4 標籤
 
 print(soup.select("#main button .pk"))
@@ -417,7 +417,7 @@ cc = soup.select("#p1")
 print(cc)
 
 print("選<.red>")
-cc = soup.select(".red")
+cc = soup.select(".red")  # 尋找class是red
 print(cc)
 
 print("------------------------------")  # 30個
@@ -482,7 +482,7 @@ for link in soup.select("a"):  # 選全部的超連結<a>
     print(link)  # 全部
     print(link.string)  # 內容
 print("---------------")  # 15個
-print(soup.select(".redcolor"))  # class="redcolor"
+print(soup.select(".redcolor"))  # class="redcolor"  # 尋找class是redcolor
 print("---------------")  # 15個
 print(soup.select("#link3"))  # id="link3"
 print("---------------")  # 15個
@@ -572,7 +572,7 @@ print(soup.select("p"))  # 選全部的段落<p>
 print("select() 全部 #p1")
 print(soup.select("#p1"))
 print("select() 全部 .red")
-print(soup.select(".red"))
+print(soup.select(".red"))  # 尋找class是red
 
 print("------------------------------")  # 30個
 
@@ -691,7 +691,7 @@ print("select() title")
 
 print("select p", soup.select("p"))  # 選全部的段落<p>
 print("select #p1", soup.select("#p1"))
-print("select .red", soup.select(".red"))
+print("select .red", soup.select(".red"))  # 尋找class是red
 
 # 用select
 print("取得圖片超連結 取得 img src", soup.select("img")[0].get("src"))
@@ -1228,7 +1228,7 @@ print("------------------------------")  # 30個
 print("找下一個內容分區元素<div> + 條件")
 tag_div = soup.find("div")  # 第1個<div>標籤
 
-tag_p = tag_div.select(".question")
+tag_p = tag_div.select(".question")  # 尋找class是question
 for item in tag_p:
     print(item.a["href"])
 
@@ -1495,6 +1495,7 @@ print("------------------------------------------------------------")  # 60個
 
 with open("data/Example.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
+
 # 使用childen屬性取得子標籤
 tag_div = soup.select("#q2")  # 找到第2題
 tag_ul = tag_div[0].ul  # 走訪到之下的<ul>
@@ -1907,8 +1908,9 @@ print("------------------------------------------------------------")  # 60個
 print("BeautifulSoup 測試 13")
 
 url = "https://www.mvdis.gov.tw/m3-emv-plate/webpickno/queryPickNo#"
-response = requests.get(url)
-soup = BeautifulSoup(response.text, "html.parser")
+# response = requests.get(url)
+# soup = BeautifulSoup(response.text, "html.parser")
+soup = get_soup_from_url(url)
 
 # 用find找
 captcha_image = soup.find("img", id="pickimg")["src"]
@@ -2318,13 +2320,14 @@ print("------------------------------------------------------------")  # 60個
 urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
 response = requests.get(urlstr)
 response.encoding = "utf-8"
-
 soup = BeautifulSoup(response.text, "html.parser")
+# soup = get_soup_from_url(url)
+
 print(soup.title.text)  # 顯示網頁title標題
 
-listBookName = soup.select(".style2")
+listBookName = soup.select(".style2")  # 尋找class是style2
 count = len(listBookName)
-print("共 %d 筆新書記錄" % (count))  # 顯示 '共 20 筆新書記錄'
+print("共 %d 筆新書記錄" % (count))  # 顯示 "共 20 筆新書記錄"
 
 print("顯示網頁新書書名")
 for book in listBookName:
@@ -2335,7 +2338,7 @@ print("------------------------------")  # 30個
 listImageUrl = soup.select("td a img")
 
 for link in listImageUrl:
-    # if("http" in link.get('src')):
+    # if("http" in link.get("src")):
     print(link.get("src"))
 
 print("------------------------------------------------------------")  # 60個
@@ -2355,6 +2358,8 @@ urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
 response = requests.get(urlstr)
 response.encoding = "utf-8"
 soup = BeautifulSoup(response.text, "html.parser")
+# soup = get_soup_from_url(url)
+
 listImageUrl = soup.select("td a img")
 # 逐一取得博碩新書圖檔並放入images資料夾下
 n = 0
@@ -2392,9 +2397,11 @@ urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
 response = requests.get(urlstr)
 response.encoding = "utf-8"
 soup = BeautifulSoup(response.text, "html.parser")
+# soup = get_soup_from_url(url)
+
 listImageUrl = soup.select("td a img")
 listImageUrlOk = []
-listBookName = soup.select(".style2")
+listBookName = soup.select(".style2")  # 尋找class是style2
 # 逐一取得博碩新書圖檔並放入images資料夾下
 for link in listImageUrl:
     imgUrl = link.get("src")
@@ -2413,7 +2420,7 @@ for link in listImageUrl:
 
 f = open(pageName, "w", encoding="utf-8")
 f.write("<html>\n")
-f.write('<meta charset="utf-8">\n')
+f.write("<meta charset='utf-8'>\n")
 f.write("<body>\n")
 f.write("<table border>\n")
 f.write("<tr><td>書號</td><td>圖</td><td>書名</td></tr>\n")
@@ -2450,7 +2457,8 @@ responseObj = requests.get(urlstr)
 responseObj.encoding = "utf-8"
 soup = BeautifulSoup(responseObj.text, "html.parser")
 print(soup.title.text)
-data = soup.select(".style2")
+
+data = soup.select(".style2")  # 尋找class是style2
 count = len(data)
 print("共 %d 筆新書記錄" % (count))
 
@@ -2726,8 +2734,8 @@ headers = {
 }
 
 response = requests.get(url, headers=headers)
-
 soup = BeautifulSoup(response.text, "html.parser")
+# soup = get_soup_from_url(url)
 
 print("找全部的超連結<a> +  條件")
 pages = soup.find_all("a", class_="c-pagination")
@@ -2752,8 +2760,8 @@ headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
 }
 response = requests.get(url, headers=headers)
-
 soup = BeautifulSoup(response.text, "html.parser")
+# soup = get_soup_from_url(url)
 
 print("找全部的超連結<a> +  條件")
 pages = soup.find_all("a", class_="c-pagination")
@@ -2770,9 +2778,9 @@ url = "http://www.powenko.com/wordpress"
 response = requests.get(url)
 soup = BeautifulSoup(response.text.encode("utf-8"), "html.parser")
 
-largefeaturepowenA2 = soup.select(".largefeaturepowenA2")
+largefeaturepowenA2 = soup.select(".largefeaturepowenA2")  # 尋找class是largefeaturepowenA2
 largefeature0 = largefeaturepowenA2[0]
-for area in largefeature0.select(".area"):
+for area in largefeature0.select(".area"):  # 尋找class是area
     # print(area.select("a")[1].text)
     t1 = area.select("a")  # 選全部的超連結<a>
     print(area.select("a")[1].contents[0])
@@ -2786,7 +2794,7 @@ print("BeautifulSoup 測試 30")
 url = "http://news.baidu.com/tech"
 response = requests.get(url)
 soup = BeautifulSoup(response.text.encode("utf-8"), "html.parser")
-largefeaturepowenA2 = soup.select(".fb-list")
+largefeaturepowenA2 = soup.select(".fb-list")  # 尋找class是fb-list
 largefeature0 = largefeaturepowenA2[0]
 print(largefeature0)
 for area in largefeature0.select("li"):
@@ -2802,7 +2810,7 @@ url = "https://feebee.com.tw/s/?q=raspberry+pi+3"
 response = requests.get(url)
 soup = BeautifulSoup(response.text.encode("utf-8"), "html.parser")
 
-for line in soup.select(".items"):
+for line in soup.select(".items"):  # 尋找class是items
     print(line.select(".large")[0].text)
     print(line.select(".ellipsis")[0].text)
     print(line.select("a")[0].get("href"))
@@ -2815,7 +2823,7 @@ url = "https://www.chinatimes.com/?chdtv"
 response = requests.get(url)
 soup = BeautifulSoup(response.text.encode("utf-8"), "html.parser")
 
-for listRight in soup.select(".focus-news"):
+for listRight in soup.select(".focus-news"):  # 尋找class是focus-news
     for line in listRight.select(".title"):
         print(line.select("a")[0].text)
 
@@ -2827,7 +2835,7 @@ url = "https://goodinfo.tw/StockInfo/StockDividendSchedule.asp?STOCK_ID=2892"
 response = requests.get(url)
 soup = BeautifulSoup(response.text.encode("utf-8"), "html.parser")
 
-for listRight in soup.select(".focus-news"):
+for listRight in soup.select(".focus-news"):  # 尋找class是focus-news
     for line in listRight.select(".title"):
         print(line.select("a")[0].text)
 """
@@ -2839,6 +2847,7 @@ print("BeautifulSoup 測試 34")
 url = "https://deepmind.com.tw"
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "lxml")
+# soup = get_soup_from_url(url)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2848,6 +2857,7 @@ print("BeautifulSoup 測試 35")
 url = "http://www.xzw.com/fortune/"
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "lxml")  # 取得物件
+# soup = get_soup_from_url(url)
 
 print("找下一個內容分區元素<div> + 條件")
 constellation = soup.find("div", id="list")
@@ -2882,8 +2892,8 @@ print("BeautifulSoup 測試 36")
 url = "https://acg.gamer.com.tw/billboard.php?t=2&p=Android"
 response = requests.get(url)
 response.encoding = "UTF-8"
-
 soup = BeautifulSoup(response.text, "html.parser")
+# soup = get_soup_from_url(url)
 
 soup.find(class_="ACG-mainbox1").find(class_="ACG-maintitle").find("a").string
 
@@ -2900,8 +2910,8 @@ print("------------------------------------------------------------")  # 60個
 print("BeautifulSoup 測試 37")
 url = "https://fchart.github.io/Elements.html"
 response = requests.get(url)
-
 soup = BeautifulSoup(response.text, "lxml")
+# soup = get_soup_from_url(url)
 
 tag = soup.select_one("h2")
 print("h2 :", tag.text)
@@ -2913,7 +2923,7 @@ tag = soup.select_one("#q2")
 tag2 = tag.select_one("b")
 print("b :", tag2.text)
 
-tags = soup.select(".response")
+tags = soup.select(".response")  # 尋找class是response
 print("li :", tags[0].text)
 print("li :", tags[1].text)
 
@@ -2924,6 +2934,7 @@ url = "https://fchart.github.io/Elements.html"
 response = requests.get(url)
 
 soup = BeautifulSoup(response.text, "lxml")
+# soup = get_soup_from_url(url)
 
 print("找下一個標題<h2>")
 tag = soup.find("h2")
@@ -2955,6 +2966,7 @@ url = "https://fchart.github.io/Elements.html"
 
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "lxml")
+# soup = get_soup_from_url(url)
 
 print("找全部的xx<li> + 條件")
 tags_li = soup.find_all("li", class_="response", limit=3)
@@ -3102,6 +3114,7 @@ url = "https://acg.gamer.com.tw/billboard.php?t=2&p=iOS"
 response = requests.get(url)
 
 soup = BeautifulSoup(response.text, "html.parser")
+# soup = get_soup_from_url(url)
 
 # 找到所有遊戲排名標題的標籤
 print("找全部的內容分區元素<div> + 條件")
@@ -3120,6 +3133,7 @@ url = "https://www.dcard.tw/f"
 response = requests.get(url)
 
 soup = BeautifulSoup(response.text, "lxml")  # 取得物件
+# soup = get_soup_from_url(url)
 
 # 取得所有文章程式碼
 print("找全部的xx<article>")
@@ -3141,6 +3155,7 @@ print("BeautifulSoup 測試 47")
 url = "https://www.iana.org/domains/"
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "html.parser")
+# soup = get_soup_from_url(url)
 
 print(soup.select("#logo"))  # 搜尋 id 為 logo 的 tag 內容
 
@@ -3177,6 +3192,7 @@ print("BeautifulSoup 測試 48")
 url = "https://www.iana.org/domains/"
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "html.parser")
+# soup = get_soup_from_url(url)
 
 print("找全部的超連結<a>")
 print(soup.find_all("a"))  # 找全部的超連結<a>
@@ -3189,6 +3205,7 @@ print("BeautifulSoup 測試 49")
 url = "https://www.iana.org/domains/"
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "html.parser")
+# soup = get_soup_from_url(url)
 
 print("找全部的超連結<a>")
 print(soup.find_all("a"))
@@ -3205,6 +3222,7 @@ print("BeautifulSoup 測試 50")
 url = "https://www.iana.org/domains/"
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "html.parser")
+# soup = get_soup_from_url(url)
 
 print(soup.find("a").get_text())  # 輸出第一個 a tag 的內容
 print(soup.find("a")["href"])  # 輸出第一個 a tag 的 href 屬性內容
@@ -3376,7 +3394,9 @@ response.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encoding
 html = response.text
 
 soup = BeautifulSoup(html, "html.parser")  # 轉換成標籤樹
-td = soup.select(".container-fluid")[0].select(".etw-tbiggest")  # 取出中獎號碼的位置
+td = soup.select(".container-fluid")[0].select(
+    ".etw-tbiggest"
+)  # 取出中獎號碼的位置  # 尋找class是container-fluid
 ns = td[0].getText()  # 特別獎
 n1 = td[1].getText()  # 特獎
 # 頭獎，因為存入串列會出現 /n 換行符，使用 [-8:] 取出最後八碼
@@ -3576,7 +3596,9 @@ print("取得網頁標題 :", soup.title.text)  # 只印出text部分
 print("------------------------------")  # 30個
 
 soup = BeautifulSoup(response.text, "html.parser")
-reservoir = soup.select(".reservoir")  # 取得所有 class 為 reservoir 的 tag
+reservoir = soup.select(
+    ".reservoir"
+)  # 取得所有 class 為 reservoir 的 tag   # 取出中獎號碼的位置  # 尋找class是reservoir
 for i in reservoir:
     print(
         i.find("div", class_="name").get_text(), end=" "
@@ -3591,88 +3613,84 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "https://www.books.com.tw/"  # 博客來
-response = requests.get(url)
+soup = get_soup_from_url(url)
 
-soup = BeautifulSoup(response.text, "lxml")  # 傳回soup物件可解析網頁
+print(soup.find("title"))  # 傳回網頁含<title>~</title>
+print(soup.find("title").text)  # 傳回網頁<title>標籤內的資料
 
 # 用find找
-print("找下一個標題<h1>")
-print(soup.find("h1"))  # 傳回第一個符合<h1>資料
-# 若傳回None表示該網頁沒有<h1>標籤
+print("找全部的標題<h2>")
+h2s = soup.find_all("h2")  # 取得 全部 <h2></h2>
+# print("取得全部 h2 :", h2s)        #印出全部資料, 一個list
+
+length = len(h2s)
+print("共找到", length, "筆資料")
+for nn in range(length):
+    print(h2s[nn].text)  # 使用索引值, 只印出text部分
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-""" ok, many
-print("抓取網頁 分析 4")
-#博客來-中文書>暢銷榜
+
+# 博客來-中文書>暢銷榜
 url = "https://www.books.com.tw/web/sys_saletopb/books/19/?loc=P_0002_020"
-html = requests.get(url).text
-soup = BeautifulSoup(html, "lxml")
+soup = get_soup_from_url(url)
 
 # 用find找
 print("找全部的影像<img>")
+cnt = 0
 images = soup.find_all("img")  # 取得 全部 <img></img>
 for image in images:
     if ".jpg" in image["src"] or ".png" in image["src"]:
         print(image["src"])
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-""" ok, many
-print("抓取網頁 分析 5")
-#博客來-中文書>暢銷榜
-url = "https://www.books.com.tw/web/sys_saletopb/books/19/?loc=P_0002_020"
-html = requests.get(url).text
-soup = BeautifulSoup(html, "lxml")
+        cnt += 1
+        if cnt > 10:
+            break
+
+print("------------------------------")  # 30個
 
 print("找全部的超連結<a>")
+cnt = 0
 all_links = soup.find_all("a")  # 取得 全部 <a></a>
 for link in all_links:
     if "http" in link["href"]:
         print(link["href"])
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-""" ok, many
-print("抓取網頁 分析 6")
-#博客來-中文書>暢銷榜
-url = "https://www.books.com.tw/web/sys_saletopb/books/19/?loc=P_0002_020"
-html = requests.get(url).text
-soup = BeautifulSoup(html, "lxml")
+        cnt += 1
+        if cnt > 10:
+            break
+
+print("------------------------------")  # 30個
 
 print("找全部的影像<img> + 條件")
-titles = soup.find_all("img", {"class":"cover"})
+cnt = 0
+titles = soup.find_all("img", {"class": "cover"})
 for i, title in enumerate(titles):
-    print("第{}名：{}".format(i+1, title["alt"]))
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-""" fail in sugar
-print("抓取網頁 分析 7 fail")
-#博客來-中文書>暢銷榜
-url = "https://www.books.com.tw/web/sys_saletopb/books/19/?loc=P_0002_020"
-html = requests.get(url).text
-soup = BeautifulSoup(html, "lxml")
+    print("第{}名：{}".format(i + 1, title["alt"]))
+    cnt += 1
+    if cnt > 10:
+        break
+
+print("------------------------------")  # 30個
 
 print("找全部的xx<li>")
-books = soup.find_all("li", {"class":"item"})
+books = soup.find_all("li", {"class": "item"})
+print(len(books))
+# print(books)
+
 for i, book in enumerate(books):
-    print("第{}名：".format(i+1), end="")
-    print(book.find("img")["alt"])
-    for info in book.find("ul").find_all("li"):  # 取得 全部 <li></li>
-        print(info.text)
-    print("---------------")  # 15個
-"""
+    # print(i, book)
+    if i > 22 and i < 30:
+        print("第{}名：".format(i - 22), end="")
+        print(book.find("img")["alt"])
+        for info in book.find("ul").find_all("li"):  # 取得 全部 <li></li>
+            print(info.text)
+        print("---------------")  # 15個
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 博客來寵物電子書
 url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"
-
-response = requests.get(url)  # 使用requests的get()方法傳回可擷取網頁資訊response物件
-response.encoding = "utf-8"  # 設定編碼模式避免亂碼
-# 使用BeautifulSoup()函式取得解析網頁的BeautifulSoup物件soup
-soup = BeautifulSoup(response.text, "lxml")
+soup = get_soup_from_url(url)
 
 print("找全部的內容分區元素<div> + 條件")
 listAll = soup.find_all("div", class_="item")  # 取得<div class="item">標籤的內容
@@ -3683,33 +3701,15 @@ for book in listAll:  # 將資料利用迴圈依序解析
             continue
     print((book.find("h4").find("a").text))  # 搜尋第一個<h4>內的第一個<a>標籤，即書名
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-# 博客來寵物電子書
-url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"
-
-response = requests.get(url)  # 使用requests的get()方法傳回可擷取網頁資訊response物件
-response.encoding = "utf-8"  # 設定編碼模式避免亂碼
-# 使用BeautifulSoup()函式取得解析網頁的BeautifulSoup物件soup
-soup = BeautifulSoup(response.text, "lxml")
 listName = soup.select("div.item>div.msg>h4>a")  # 根據路徑擷取<a>標籤，並指定給listName串列
 listPrice = soup.select("li.set2")  # 取得套用set2類別的<li>標籤，並指定給listPrice串列
 for i in range(0, len(listName)):  # 使用迴圈逐一印出書名與書價
     print("%s  %s" % (listName[i].text, listPrice[i].text))
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-# html to csv
-
-# 博客來寵物電子書
-url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"
-
-# 建立取得網頁資訊的Response物件，物件名稱為response
-response = requests.get(url)
-# 建立解析網頁的BeautifulSoup物件，物件名稱為soup
-soup = BeautifulSoup(response.text, "lxml")
 # 分別取的商品名稱以及價格標籤，並指定給對應串列
 listName = soup.select("div.item>div.msg>h4>a")
 listPress = soup.select("li.info>span>a")
@@ -3737,7 +3737,6 @@ for i in range(0, len(listName) // 10):
     Price = listPrice[i].text.split("：")[1].split("元")[0].split("折")[-1]
     print(Price)
 
-
 # 將listName與listPirce串列的資料依序存入booklist.csv檔中
 f = open("tmp_booklist.csv", "w", encoding="utf-8-sig", newline="")  # 這樣才不會多一行空白
 write = csv.writer(f)
@@ -3750,21 +3749,10 @@ for i in range(0, len(listName)):
     # print(listName[i].text, listPress[i].text, Price)
 f.close()
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("下載網站圖片")
 
-# 抓 博客來電子寵物書 圖片
-
-# 博客來寵物電子書
-url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"
-
-response = requests.get(url)  # 建立取得網頁資訊的Response物件，物件名稱為response
-response.encoding = "utf-8"  # 設定編碼模式避免亂碼
-
-# 使用BeautifulSoup()函式取得解析網頁的BeautifulSoup物件soup
-soup = BeautifulSoup(response.text, "lxml")
 Img = soup.select("div.item>a>img")  # 擷取有圖片網址的<img>標籤
 
 print("共找到有圖片網址的連結 :", len(Img), "個")
@@ -3796,142 +3784,99 @@ for link in Img:
 print("執行完畢")
 
 print("------------------------------------------------------------")  # 60個
-# taiwanlottery ST
-print("------------------------------------------------------------")  # 60個
-""" NG
-# 台灣彩券官網首頁
-url = "http://www.taiwanlottery.com.tw/"
-html = requests.get(url)
-
-soup = BeautifulSoup(html.text, "lxml")
-
-dataTag = soup.select(".contents_box02")  # 尋找class是contents_box02
-
-# 找尋開出順序與大小順序的球
-balls = dataTag[2].find_all("div", {"class": "ball_tx ball_yellow"})
-print("開出順序 :", end="")
-for i in range(6):  # 前6球是開出順序
-    print(balls[i].text, end="   ")
-
-print("\n大小順序 :", end="")
-for i in range(6, len(balls)):  # 第7球以後是大小順序
-    print(balls[i].text, end="   ")
-
-# 找出第二區的紅球
-redball = dataTag[2].find_all("div", {"class": "ball_red"})
-print("\n特別號 :", redball[0].text)
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-""" NG
-print("BeautifulSoup 測試 29")
-
-# 台灣彩券官網首頁
-url = "http://www.taiwanlottery.com.tw/"
-soup = get_soup_from_url(url)
-
-cc1 = soup.select("#rightdown")
-# print(cc1)
-
-cc = cc1[0].find("div", {"class": "contents_box02"})
-# print(cc)
-
-cc3 = cc.find_all("div", {"class": "ball_tx"})
-print(cc3)
-
-# 台灣彩券官網首頁
-url = "http://www.taiwanlottery.com.tw/"
-soup = get_soup_from_url(url)
-
-cc1 = soup.select("#rightdown")
-# print(cc1)
-
-cc2 = cc1[0].find("div", {"class": "contents_box02"})
-# print(cc2)
-
-cc3 = cc2.find_all("div", {"class": "ball_tx"})
-# print(cc3)
-#
-# 威力彩號碼
-print("開出順序：", end="")
-for n in range(0, 6):
-    print(cc3[n].text, end="  ")
-
-print("\n大小順序：", end="")
-for n in range(6, len(cc3)):
-    print(cc3[n].text, end="  ")
-
-## 第二區
-red = cc2.find("div", {"class": "ball_red"})
-print("\n第二區：{}".format(red.text))
-
-url = "http://www.taiwanlottery.com.tw"
-html = requests.get(url)
-print("網頁下載中 ...")
-html.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
-print("網頁下載完成")
-
-soup = BeautifulSoup(html.text, "lxml")
-
-dataTag = soup.select(".contents_box02")  # 尋找class是contents_box02
-print("串列長度", len(dataTag))
-for i in range(len(dataTag)):  # 列出含contents_box02的串列
-    print(dataTag[i])
-
-# 找尋開出順序與大小順序的球
-balls = dataTag[0].find_all("div", {"class": "ball_tx ball_green"})
-print("開出順序 :", end="")
-for i in range(6):  # 前6球是開出順序
-    print(balls[i].text, end="   ")
-
-print("\n大小順序 :", end="")
-for i in range(6, len(balls)):  # 第7球以後是大小順序
-    print(balls[i].text, end="   ")
-
-# 找出第二區的紅球
-redball = dataTag[0].find_all("div", {"class": "ball_red"})
-print("\n第二區 :", redball[0].text)
-"""
-
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-# taiwanlottery SP
-print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+def showpage(url, kind):
+    print("showpage, url  :", url)
+    print("showpage, kind :", kind)
+    soup = get_soup_from_url(url)
+    # 近期新書、在 class="mod type02_m012 clearfix" 中
+    res = soup.find_all("div", {"class": "mod type02_m012 clearfix"})[0]
+    items = res.select(".item")  # 所有 item  # 尋找class是item
+    n = 0  # 計算該分頁共有多少本書
+    print(len(items))
+    for item in items:
+        print(item)
+        msg = item.select(".msg")[0]  # 尋找class是msg
+        # src = item.select("a img")[0]["src"]
+        title = msg.select("a")[0].text  # 書名
+        # imgurl = src.split("?i=")[-1].split("&")[0]  # 圖片網址
+        author = msg.select("a")[1].text  # 作者
+        publish = msg.select("a")[2].text  # 出版社
+        date = msg.find("span").text.split("：")[-1]  # 出版日期
+        onsale = item.select(".price .set2")[0].text  # 優惠價
+        content = item.select(".txt_cont")[0].text.replace(" ", "").strip()  # 內容
+        # 將資料加入 list1 串列中
+        # listdata = [kind, title, imgurl, author, publish, date, onsale, content]
+        # list1.append(listdata)
+        print("\n分類：" + kind)
+        print("書名：" + title)
+        # print("圖片網址：" + imgurl)
+        print("作者：" + author)
+        print("出版社：" + publish)
+        print("出版日期：" + date)
+        print(onsale)  # 優惠價
+        print("內容：" + content)
+        n += 1
+        print("n=", n)
+        if n > 2:
+            break
 
-r = requests.get("https://fchart.github.io/Example.html")
 
-fp = open("tmp_Example.txt", "w", encoding="utf8")
-fp.write(r.text)
-print("寫入檔案 tmp_Example.txt...")
-fp.close()
+def twobyte(kindno):
+    if kindno < 10:
+        kindnostr = "0" + str(kindno)
+    else:
+        kindnostr = str(kindno)
+    return kindnostr
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
-fp = open("tmp_Example.txt", "r", encoding="utf8")
-str = fp.read()
-print("檔案內容:")
-print(str)
+print("------------------------------")  # 30個
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+list1 = []
+kindno = 1  # 要下載的分類，預設為第1分類：文學小說
+homeurl = "https://www.books.com.tw/web/books_nbtopm_01/?o=5&v=1"
+mode = "?o=5&v=1"  # 顯示模式：直式  排序依：暢銷度
+url = "https://www.books.com.tw/web/books_nbtopm_"
 
-with open("tmp_Example.txt", "r", encoding="utf8") as fp:
-    str = fp.read()
-    print("檔案內容:")
-    print(str)
+soup = get_soup_from_url(homeurl)
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+# 中文書新書分類，取得分類資訊
+# res = soup.find("div", {"class": "mod_b type02_l001-1 clearfix"})  # same
+res = soup.find("div", class_="mod_b type02_l001-1 clearfix")
+hrefs = res.select("a")  # 選全部的超連結<a>
 
-with open("tmp_Example.txt", "r", encoding="utf8") as fp:
-    list1 = fp.readlines()
-    for line in list1:
-        print(line, end="")
+# kindno = int(input("請輸入要下載的分類："))
+kindno = 1  # 要下載的分類，預設為第1分類：文學小說
+
+if 0 < kindno <= len(hrefs):
+    kind = hrefs[kindno - 1].text  # 分類名稱
+    print("下載的分類編號：{}   分類名稱：{}".format(kindno, kind))
+    # 下載指定的分類
+    kindurl = url + twobyte(kindno) + mode  # 分類網址
+    print(kindurl)
+    print("showkind, url  :", kindurl)
+    print("showkind, kind :", kind)
+    soup = get_soup_from_url(kindurl)
+    try:
+        pages = int(soup.select(".cnt_page span")[0].text)  # 該分類共有多少頁
+        print("共有", pages, "頁")
+        for page in range(1, pages + 1):
+            pageurl = kindurl + "&page=" + str(page).strip()
+            print("第", page, "頁", pageurl)
+            if page == 1:  # 只看第1頁
+                showpage(pageurl, kind)
+    except:  # 沒有分頁的處理
+        print("XXXXXXX 沒有分頁的處理")
+        # showpage(kindurl, kind)
+
+    listtitle = ["分類", "書名", "圖片網址", "作者", "出版社", "出版日期", "優惠價", "內容"]
+    print(listtitle)
+    for item1 in list1:  # 資料
+        print(item1)
+else:
+    print("分類不存在!")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -4032,271 +3977,6 @@ driver.quit()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# Extracted from: https://github.com/micropython/micropython-lib/blob/master/collections.defaultdict/collections/defaultdict.py
-# Extracted from: https://github.com/micropython/micropython-lib/blob/master/urllib.parse/urllib/parse.py
-
-_safe_quoters = {}
-_ALWAYS_SAFE = frozenset(
-    b"ABCDEFGHIJKLMNOPQRSTUVWXYZ" b"abcdefghijklmnopqrstuvwxyz" b"0123456789" b"_.-"
-)
-_ALWAYS_SAFE_BYTES = bytes(_ALWAYS_SAFE)
-
-
-class defaultdict:
-    @staticmethod
-    def __new__(cls, default_factory=None, **kwargs):
-        # Some code (e.g. urllib.urlparse) expects that basic defaultdict
-        # functionality will be available to subclasses without them
-        # calling __init__().
-        self = super(defaultdict, cls).__new__(cls)
-        self.d = {}
-        return self
-
-    def __init__(self, default_factory=None, **kwargs):
-        self.d = kwargs
-        self.default_factory = default_factory
-
-    def __getitem__(self, key):
-        try:
-            return self.d[key]
-        except KeyError:
-            v = self.__missing__(key)
-            self.d[key] = v
-            return v
-
-    def __setitem__(self, key, v):
-        self.d[key] = v
-
-    def __delitem__(self, key):
-        del self.d[key]
-
-    def __contains__(self, key):
-        return key in self.d
-
-    def __missing__(self, key):
-        if self.default_factory is None:
-            raise KeyError(key)
-        return self.default_factory()
-
-
-class Quoter(defaultdict):
-    """A mapping from bytes (in range(0,256)) to strings.
-
-    String values are percent-encoded byte values, unless the key < 128, and
-    in the "safe" set (either the specified safe set, or default set).
-    """
-
-    # Keeps a cache internally, using defaultdict, for efficiency (lookups
-    # of cached keys don't call Python code at all).
-    def __init__(self, safe):
-        """safe: bytes object."""
-        self.safe = _ALWAYS_SAFE.union(safe)
-
-    def __repr__(self):
-        # Without this, will just display as a defaultdict
-        return "<Quoter %r>" % dict(self)
-
-    def __missing__(self, b):
-        # Handle a cache miss. Store quoted string in cache and return.
-        res = chr(b) if b in self.safe else "%{:02X}".format(b)
-        self[b] = res
-        return res
-
-
-def clear_cache():
-    """Clear the quoters cache."""
-    _safe_quoters.clear()
-
-
-def quote(string, safe="/", encoding=None, errors=None):
-    """quote("abc def") -> "abc%20def"
-
-    Each part of a URL, e.g. the path info, the query, etc., has a
-    different set of reserved characters that must be quoted.
-
-    RFC 2396 Uniform Resource Identifiers (URI): Generic Syntax lists
-    the following reserved characters.
-
-    reserved    = ";" | "/" | "?" | ":" | "@" | "&" | "=" | "+" |
-                  "$" | ","
-
-    Each of these characters is reserved in some component of a URL,
-    but not necessarily in all of them.
-
-    By default, the quote function is intended for quoting the path
-    section of a URL.  Thus, it will not encode "/".  This character
-    is reserved, but in typical usage the quote function is being
-    called on a path where the existing slash characters are used as
-    reserved characters.
-
-    string and safe may be either str or bytes objects. encoding must
-    not be specified if string is a str.
-
-    The optional encoding and errors parameters specify how to deal with
-    non-ASCII characters, as accepted by the str.encode method.
-    By default, encoding="utf-8" (characters are encoded with UTF-8), and
-    errors="strict" (unsupported characters raise a UnicodeEncodeError).
-    """
-    if isinstance(string, str):
-        if not string:
-            return string
-        if encoding is None:
-            encoding = "utf-8"
-        if errors is None:
-            errors = "strict"
-        string = string.encode(encoding, errors)
-    else:
-        if encoding is not None:
-            raise TypeError("quote() doesn't support 'encoding' for bytes")
-        if errors is not None:
-            raise TypeError("quote() doesn't support 'errors' for bytes")
-
-    return quote_from_bytes(string, safe)
-
-
-def quote_plus(string, safe="", encoding=None, errors=None):
-    """Like quote(), but also replace ' ' with '+', as required for quoting
-    HTML form values. Plus signs in the original string are escaped unless
-    they are included in safe. It also does not have safe default to '/'.
-    """
-    # Check if ' ' in string, where string may either be a str or bytes.  If
-    # there are no spaces, the regular quote will produce the right answer.
-    if (isinstance(string, str) and " " not in string) or (
-        isinstance(string, bytes) and b" " not in string
-    ):
-        return quote(string, safe, encoding, errors)
-
-    if isinstance(safe, str):
-        space = " "
-    else:
-        space = b" "
-
-    string = quote(string, safe + space, encoding, errors)
-    return string.replace(" ", "+")
-
-
-def quote_from_bytes(bs, safe="/"):
-    """Like quote(), but accepts a bytes object rather than a str, and does
-    not perform string-to-bytes encoding.  It always returns an ASCII string.
-    quote_from_bytes(b'abc def\x3f') -> 'abc%20def%3f'
-    """
-    if not isinstance(bs, (bytes, bytearray)):
-        raise TypeError("quote_from_bytes() expected bytes")
-
-    if not bs:
-        return ""
-
-    if isinstance(safe, str):
-        # Normalize 'safe' by converting to bytes and removing non-ASCII chars
-        safe = safe.encode("ascii", "ignore")
-    else:
-        safe = bytes([c for c in safe if c < 128])
-
-    if not bs.rstrip(_ALWAYS_SAFE_BYTES + safe):
-        return bs.decode()
-
-    try:
-        quoter = _safe_quoters[safe]
-    except KeyError:
-        _safe_quoters[safe] = quoter = Quoter(safe).__getitem__
-
-    return "".join([quoter(char) for char in bs])
-
-
-def urlencode(query, doseq=False, safe="", encoding=None, errors=None):
-    """Encode a dict or sequence of two-element tuples into a URL query string.
-
-    If any values in the query arg are sequences and doseq is true, each
-    sequence element is converted to a separate parameter.
-
-    If the query arg is a sequence of two-element tuples, the order of the
-    parameters in the output will match the order of parameters in the
-    input.
-
-    The components of a query arg may each be either a string or a bytes type.
-    When a component is a string, the safe, encoding and error parameters are
-    sent to the quote_plus function for encoding.
-    """
-
-    if hasattr(query, "items"):
-        query = query.items()
-    else:
-        # It's a bother at times that strings and string-like objects are
-        # sequences.
-        try:
-            # non-sequence items should not work with len()
-            # non-empty strings will fail this
-            if len(query) and not isinstance(query[0], tuple):
-                raise TypeError
-            # Zero-length sequences of all types will get here and succeed,
-            # but that's a minor nit.  Since the original implementation
-            # allowed empty dicts that type of behavior probably should be
-            # preserved for consistency
-        except TypeError:
-            # ty, va, tb = sys.exc_info()
-            raise TypeError(
-                "not a valid non-string sequence " "or mapping object"
-            )  # .with_traceback(tb)
-
-    l = []
-    if not doseq:
-        for k, v in query:
-            if isinstance(k, bytes):
-                k = quote_plus(k, safe)
-            else:
-                k = quote_plus(str(k), safe, encoding, errors)
-
-            if isinstance(v, bytes):
-                v = quote_plus(v, safe)
-            else:
-                v = quote_plus(str(v), safe, encoding, errors)
-
-            l.append(k + "=" + v)
-    else:
-        for k, v in query:
-            if isinstance(k, bytes):
-                k = quote_plus(k, safe)
-            else:
-                k = quote_plus(str(k), safe, encoding, errors)
-
-            if isinstance(v, bytes):
-                v = quote_plus(v, safe)
-                l.append(k + "=" + v)
-            elif isinstance(v, str):
-                v = quote_plus(v, safe, encoding, errors)
-                l.append(k + "=" + v)
-            else:
-                try:
-                    # Is this a sufficient test for sequence-ness?
-                    _ = len(v)  # noqa
-                except TypeError:
-                    # not a sequence
-                    v = quote_plus(str(v), safe, encoding, errors)
-                    l.append(k + "=" + v)
-                else:
-                    # loop over the sequence
-                    for elt in v:
-                        if isinstance(elt, bytes):
-                            elt = quote_plus(elt, safe)
-                        else:
-                            elt = quote_plus(str(elt), safe, encoding, errors)
-
-                        l.append(k + "=" + elt)
-
-    return "&".join(l)
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-r = requests.get("https://fchart.github.io/ML/Surveys.html")
-r.encoding = "utf8"
-soup = BeautifulSoup(r.text, "lxml")
-print("整個網頁資料 :", soup)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 """webdriver skip
 
 from selenium import webdriver
@@ -4346,7 +4026,7 @@ driver.implicitly_wait(10)
 driver.get("https://fchart.github.io/Example.html")
 tag_ol = driver.find_element_by_xpath('//*[@id="list"]')
 print(tag_ol.tag_name)
-tags_li = tag_ol.find_elements_by_xpath('//li')
+tags_li = tag_ol.find_elements_by_xpath("//li")
 for tag in tags_li:
     print(tag.text, tag.get_attribute("class"))
 driver.quit()
@@ -4362,9 +4042,10 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()))
 driver.implicitly_wait(10)
 driver.get("https://fchart.github.io/ML/Example.html")
-tag_ol = driver.find_element(By.XPATH, '/html/body/ol')
+
+tag_ol = driver.find_element(By.XPATH, "/html/body/ol")
 print(tag_ol.tag_name)
-tags_li = tag_ol.find_elements(By.XPATH, '//li')
+tags_li = tag_ol.find_elements(By.XPATH, "//li")
 for tag in tags_li:
     print(tag.text, tag.get_attribute("class"))
 driver.quit()
@@ -4380,9 +4061,10 @@ from webdriver_manager.chrome import ChromeDriverManager
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 driver.implicitly_wait(10)
 driver.get("https://fchart.github.io/ML/Example.html")
-tag_ol = driver.find_element(By.XPATH, '/html/body/ol')
+
+tag_ol = driver.find_element(By.XPATH, "/html/body/ol")
 print(tag_ol.tag_name)
-tags_li = tag_ol.find_elements(By.XPATH, '//li')
+tags_li = tag_ol.find_elements(By.XPATH, "//li")
 for tag in tags_li:
     print(tag.text, tag.get_attribute("class"))
 driver.quit()
@@ -4395,9 +4077,10 @@ from selenium import webdriver
 driver = webdriver.Edge("./msedgedriver")
 driver.implicitly_wait(10)
 driver.get("https://fchart.github.io/Example.html")
-tag_ol = driver.find_element_by_xpath('/html/body/ol')
+
+tag_ol = driver.find_element_by_xpath("/html/body/ol")
 print(tag_ol.tag_name)
-tags_li = tag_ol.find_elements_by_xpath('//li')
+tags_li = tag_ol.find_elements_by_xpath("//li")
 for tag in tags_li:
     print(tag.text, tag.get_attribute("class"))
 driver.quit()
@@ -4413,10 +4096,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 driver.implicitly_wait(10)
 driver.get("https://fchart.github.io/ML/Example.html")
+
 tag_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
 print(tag_ol.tag_name)
-print(tag_ol.get_attribute('innerHTML'))
-soup = BeautifulSoup(tag_ol.get_attribute('innerHTML'), "lxml")
+print(tag_ol.get_attribute("innerHTML"))
+soup = BeautifulSoup(tag_ol.get_attribute("innerHTML"), "lxml")
 
 print("找全部的xx<li> + 條件")
 tags_li = soup.find_all("li", class_="line")
@@ -4437,8 +4121,8 @@ driver.implicitly_wait(10)
 driver.get("https://fchart.github.io/ML/Example.html")
 tag_ol = driver.find_element(By.XPATH, '//*[@id="list"]')
 print(tag_ol.tag_name)
-print(tag_ol.get_attribute('innerHTML'))
-soup = BeautifulSoup(tag_ol.get_attribute('innerHTML'), "lxml")
+print(tag_ol.get_attribute("innerHTML"))
+soup = BeautifulSoup(tag_ol.get_attribute("innerHTML"), "lxml")
 
 print("找全部的xx<li> + 條件")
 tags_li = soup.find_all("li", class_="line")
@@ -4452,10 +4136,11 @@ print("------------------------------------------------------------")  # 60個
 url = (
     "https://www.googleapis.com/books/v1/volumes?maxResults=5&q=Python&projection=lite"
 )
-jsonfilename = "tmp_GoogleBooks.json"
 r = requests.get(url)
 r.encoding = "utf8"
 json_data = json.loads(r.text)
+
+jsonfilename = "tmp_GoogleBooks.json"
 with open(jsonfilename, "w") as fp:
     json.dump(json_data, fp)
     print("json 存檔完成, 檔案 :", jsonfilename)
@@ -4653,7 +4338,7 @@ while pages_remaining:
     tag_table = soup.select_one("#our-table")
     rows = tag_table.find_all("tr")
     csvfile = "tmp_NBA_Products" + str(page_num) + ".csv"
-    with open(csvfile, 'w+', newline='', encoding="utf8") as fp:
+    with open(csvfile, "w+", newline="", encoding="utf8") as fp:
         writer = csv.writer(fp)
         for row in rows:
             lst = []
@@ -4727,7 +4412,7 @@ def get_articles(soup, date):
             if push_str:
                 try:
                     push_count = int(push_str)  # 轉換成數字
-                except ValueError:  # 轉換失敗，可能是'爆'或 'X1','X2'
+                except ValueError:  # 轉換失敗，可能是"爆"或 "X1","X2"
                     if push_str == "爆":
                         push_count = 99
                     elif push_str.startswith("X"):
@@ -4765,7 +4450,7 @@ def web_scraping_bot(url):
     cc = requests.get(url, headers=headers, cookies={"over18": "1"})
     soup = parse_html(cc)
     if soup:
-        # 取得今天日期, 去掉開頭'0'符合PTT的日期格式
+        # 取得今天日期, 去掉開頭"0"符合PTT的日期格式
         today = time.strftime("%m/%d").lstrip("0")
         # 取得目前頁面的今日文章清單
         current_articles, prev_url = get_articles(soup, today)
@@ -4898,7 +4583,8 @@ url = "https://www.chinatimes.com/realtimenews/?chdtv"  # 中時新聞網
 
 string_html_data = requests.get(url)
 soup = BeautifulSoup(string_html_data.text, "html.parser")
-cc = soup.select(".article-list a")
+
+cc = soup.select(".article-list a")  # 尋找class是article-list a
 for d in cc:  # 取得新聞連結
     url = "https://www.chinatimes.com" + d.get("href")
     if (len(url) > 58) and (url not in urls):
@@ -4921,7 +4607,7 @@ for url in urls:  # 逐一取得新聞
         if href != None and href.startswith("https://"):
             print(href)
 
-    cc = soup.select(".article-body p")  # 新聞內容
+    cc = soup.select(".article-body p")  # 新聞內容  # 尋找class是article-body p
     print(cc)
     # print("處理第 {} 則新聞".format(i))
     for d in cc:
@@ -5028,6 +4714,7 @@ print("抓取網頁 分析 12")
 url = "https://tw.appledaily.com/new/realtime/"
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "lxml")
+# soup = get_soup_from_url(url)
 
 headlines = soup.find("ul", {"class": "rtddd slvl"})
 items = headlines.find_all("li")  # 取得 全部 <li></li>
@@ -5038,6 +4725,7 @@ for item in items:
     print(content_url)
     response = requests.get(content_url)
     soup = BeautifulSoup(response.text, "lxml")
+    # soup = get_soup_from_url(url)
     print("找下一個標題<h1>")
     title = soup.find("h1")
     print(title.text)
@@ -5236,7 +4924,7 @@ if not os.path.exists(images_dir):
     os.mkdir(images_dir)
 
 # 處理所有 <img> 標籤
-photos = soup.select(".photo_img")
+photos = soup.select(".photo_img")  # 尋找class是photo_img
 n = 0
 for photo in photos:
     # 讀取 src 屬性內容
@@ -5293,7 +4981,7 @@ for i in range(200):
     html = requests.post(url, data=payload)
     soup = BeautifulSoup(html.text, "html.parser")
     # 處理所有 <img> 標籤
-    photos = soup.select(".photo_img")
+    photos = soup.select(".photo_img")  # 尋找class是photo_img
     for photo in photos:
         # 讀取 src 屬性內容
         src = photo["src"]
@@ -5321,158 +5009,6 @@ print("共下載", n, "張圖片")
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 博客來
-
-
-def showkind(url, kind):
-    print("showkind, url  :", url)
-    print("showkind, kind :", kind)
-    html = requests.get(url, headers=headers).text
-    soup = BeautifulSoup(html, "html.parser")
-    try:
-        pages = int(soup.select(".cnt_page span")[0].text)  # 該分類共有多少頁
-        print("共有", pages, "頁")
-        for page in range(1, pages + 1):
-            pageurl = url + "&page=" + str(page).strip()
-            print("第", page, "頁", pageurl)
-            showpage(pageurl, kind)
-    except:  # 沒有分頁的處理
-        showpage(url, kind)
-
-
-def showpage(url, kind):
-    print("showpage, url  :", url)
-    print("showpage, kind :", kind)
-    html = requests.get(url, headers=headers).text
-    soup = BeautifulSoup(html, "html.parser")
-    # 近期新書、在 class="mod type02_m012 clearfix" 中
-    res = soup.find_all("div", {"class": "mod type02_m012 clearfix"})[0]
-    items = res.select(".item")  # 所有 item
-    n = 0  # 計算該分頁共有多少本書
-    print(len(items))
-    for item in items:
-        print(item)
-        msg = item.select(".msg")[0]
-        # src = item.select("a img")[0]["src"]
-        title = msg.select("a")[0].text  # 書名
-        # imgurl = src.split("?i=")[-1].split("&")[0]  # 圖片網址
-        author = msg.select("a")[1].text  # 作者
-        publish = msg.select("a")[2].text  # 出版社
-        date = msg.find("span").text.split("：")[-1]  # 出版日期
-        onsale = item.select(".price .set2")[0].text  # 優惠價
-        content = item.select(".txt_cont")[0].text.replace(" ", "").strip()  # 內容
-        # 將資料加入 list1 串列中
-        # listdata = [kind, title, imgurl, author, publish, date, onsale, content]
-        # list1.append(listdata)
-        print("\n分類：" + kind)
-        print("書名：" + title)
-        # print("圖片網址：" + imgurl)
-        print("作者：" + author)
-        print("出版社：" + publish)
-        print("出版日期：" + date)
-        print(onsale)  # 優惠價
-        print("內容：" + content)
-        n += 1
-        print("n=", n)
-        if n > 5:
-            break
-
-
-def twobyte(kindno):
-    if kindno < 10:
-        kindnostr = "0" + str(kindno)
-    else:
-        kindnostr = str(kindno)
-    return kindnostr
-
-
-print("------------------------------")  # 30個
-
-list1 = []
-kindno = 1  # 要下載的分類，預設為第1分類：文學小說
-homeurl = "http://www.books.com.tw/web/books_nbtopm_01/?o=5&v=1"
-mode = "?o=5&v=1"  # 顯示模式：直式  排序依：暢銷度
-url = "http://www.books.com.tw/web/books_nbtopm_"
-headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
-}
-html = requests.get(homeurl, headers=headers).text
-soup = BeautifulSoup(html, "lxml")
-
-# 中文書新書分類，取得分類資訊
-res = soup.find("div", class_="mod_b type02_l001-1 clearfix")
-hrefs = res.select("a")  # 選全部的超連結<a>
-
-# kindno = int(input("請輸入要下載的分類："))
-kindno = 1  # 要下載的分類，預設為第1分類：文學小說
-
-if 0 < kindno <= len(hrefs):
-    kind = hrefs[kindno - 1].text  # 分類名稱
-    print("aa下載的分類編號：{}   分類名稱：{}".format(kindno, kind))
-    # 下載指定的分類
-    kindurl = url + twobyte(kindno) + mode  # 分類網址
-    print(kindurl)
-    showkind(kindurl, kind)  # 顯示該分類所有書籍
-else:
-    print("分類不存在!")
-
-print("------------------------------")  # 30個
-""" 要用到 google sheet的
-def auth_gss_client(path, scopes):  # 建立憑證
-    credentials = ServiceAccountCredentials.from_json_keyfile_name(path, scopes)
-    return gspread.authorize(credentials)
-
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-from time import sleep
-
-auth_json_path = "D:/_git/vcs/_1.data/______test_files1/_key/PythonUpload.json"
-gss_scopes = ["https://spreadsheets.google.com/feeds"]
-gss_client = auth_gss_client(auth_json_path, gss_scopes)  # 連線
-
-spreadsheet_key = "您自己的key"
-sheet = gss_client.open_by_key(spreadsheet_key).sheet1  # 開啟工作表
-sheet.clear()  # 清除工作表內容
-"""
-list1 = []
-kindno = 1  # 要下載的分類，預設為第 1分類：文學小說
-homeurl = "http://www.books.com.tw/web/books_nbtopm_01/?o=5&v=1"
-mode = "?o=5&v=1"  # 顯示模式：直式  排序依：暢銷度
-url = "https://www.books.com.tw/web/books_nbtopm_"
-headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
-}
-html = requests.get(homeurl, headers=headers).text
-soup = BeautifulSoup(html, "html.parser")
-# 中文書新書分類，取得分類資訊
-res = soup.find("div", {"class": "mod_b type02_l001-1 clearfix"})
-hrefs = res.select("a")  # 選全部的超連結<a>
-
-# kindno = int(input("請輸入要下載的分類："))
-kindno = 1  # 要下載的分類，預設為第1分類：文學小說
-
-if 0 < kindno <= len(hrefs):
-    kind = hrefs[kindno - 1].text  # 分類名稱
-    print("bb下載的分類編號：{}   分類名稱：{}".format(kindno, kind))
-    # 下載指定的分類
-    kindurl = url + twobyte(kindno) + mode  # 分類網址
-    showkind(kindurl, kind)  # 顯示該分類所有書籍
-    """ skip
-    # 儲存 Google 試算表
-    print("資料寫入雲端 Google 試算表中，請等侯幾分鐘!")
-    listtitle = ["分類", "書名", "圖片網址", "作者", "出版社", "出版日期", "優惠價", "內容"]
-    sheet.append_row(listtitle)  # 標題
-    for item1 in list1:  # 資料
-        sheet.append_row(item1)
-        sleep(1)  # 必須加上適當的 delay
-    """
-else:
-    print("分類不存在!")
-print("資料儲存完畢!")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # compare1.py
 
 # 1111data.py
@@ -5494,7 +5030,7 @@ for i in range(page):
     url = baseurl + str(i + 1)
     html = requests.get(url)
     soup = BeautifulSoup(html.text, "lxml")
-    job = soup.select(".jbInfoin")  # 取class=jbInfoin內容
+    job = soup.select(".jbInfoin")  # 取class=jbInfoin內容  # 尋找class是jbInfoin
     for j in range(len(job)):
         work = job[j].h3.a.text  # 職務名稱
         work = work.replace("【誠徵】", "").replace("【急徵】", "").replace("誠徵", "")
@@ -5556,7 +5092,7 @@ for i in range(page):
     url = baseurl + str(i + 1)
     html = requests.get(url)
     soup = BeautifulSoup(html.text, "lxml")
-    job = soup.select(".it-md")  # 取class=jbInfoin內容
+    job = soup.select(".it-md")  # 取class=jbInfoin內容  # 尋找class是it-md
     for j in range(len(job)):
         work = job[j].find("div", class_="position0").a.text  # 職務名稱
         work = work.replace("【誠徵】", "").replace("【急徵】", "").replace("誠徵", "")
@@ -5661,14 +5197,14 @@ if response.status_code == 200:
     data = response.json()
 
     # 驗證 API 回應狀態
-    if data['status'] == 200:
+    if data["status"] == 200:
         # 取出第一筆地址資訊
-        address_info = data['results'][0]
+        address_info = data["results"][0]
 
         # 印出完整郵遞區域
         print(f"{address_info['address1']} {address_info['address2']} {address_info['address3']}")
     else:
-        print("API 回應錯誤，訊息：", data['message'])
+        print("API 回應錯誤，訊息：", data["message"])
 else:
     print("API 查詢失敗，狀態碼：", response.status_code)
 
@@ -5689,8 +5225,8 @@ api_key = "your_api_key"
 
 # 設定查詢參數
 params = {
-    'apikey': api_key,
-    'zipcode': zipcode,
+    "apikey": api_key,
+    "zipcode": zipcode,
 }
 
 # 進行查詢
@@ -5702,7 +5238,7 @@ if response.status_code == 200:
     data = response.json()
 
     # 印出郵遞區域
-    print(data['area'])
+    print(data["area"])
 else:
     print("API 查詢失敗，狀態碼：", response.status_code)
 """
@@ -5789,7 +5325,7 @@ for link in all_links:
     print("aa :", link)
     href = link.get("href")
     # print(href)
-    # print('aaaaa')
+    # print("aaaaa")
     if href != None:
         print("bb :", link["href"])
         if ".jpg" in link["href"]:
@@ -5963,3 +5499,18 @@ for page in range(1, 11):
     print("抓取: 第" + str(page) + "頁 網路資料中...")
 
 url = "https://movies.yahoo.com.tw/movie_intheaters.html/?page=1"
+
+
+# 固定換法
+response = requests.get(url)
+soup = BeautifulSoup(response.text, "lxml")  # 傳回soup物件可解析網頁
+# 換成
+soup = get_soup_from_url(url)
+
+"""
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
+}
+"""
+
+print("------------------------------------------------------------")  # 60個
