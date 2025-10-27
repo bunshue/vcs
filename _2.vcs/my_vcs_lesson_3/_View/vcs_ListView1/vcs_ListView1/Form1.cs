@@ -90,7 +90,6 @@ namespace vcs_ListView1
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //建立listView 0
             richTextBox1.Text += "建立listView 0\n";
             listView1.Clear();
             apply_listView00();
@@ -98,16 +97,13 @@ namespace vcs_ListView1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //建立listView 1
             richTextBox1.Text += "建立listView 1\n";
             listView1.Clear();
             apply_listView01();
-            test_listView01();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //建立listView 2
             richTextBox1.Text += "建立listView 2\n";
             listView1.Clear();
             apply_listView02();
@@ -115,38 +111,34 @@ namespace vcs_ListView1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //建立listView 3
+            richTextBox1.Text += "建立listView 3\n";
             listView1.Clear();
             apply_listView03();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //建立listView 4
-            richTextBox1.Text += "顯示本機文件夾及文件在ListView上\n";
+            richTextBox1.Text += "建立listView 4\n";
             listView1.Clear();
             apply_listView04();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //建立listView 5
-            richTextBox1.Text += "在ListView加入圖片\n";
+            richTextBox1.Text += "建立listView 5 包含checkbox\n";
             listView1.Clear();
             apply_listView05();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //建立listView 6
-            richTextBox1.Text += "建立listView 6\n";
+            richTextBox1.Text += "建立listView 6 加入圖片\n";
             listView1.Clear();
             apply_listView06();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //建立listView 7
             richTextBox1.Text += "建立listView 7\n";
             listView1.Clear();
             apply_listView07();
@@ -156,8 +148,7 @@ namespace vcs_ListView1
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //建立listView 8
-            richTextBox1.Text += "建立listView 8\n";
+            richTextBox1.Text += "建立listView 8 xxxx\n";
             listView1.Clear();
             apply_listView08();
         }
@@ -165,8 +156,6 @@ namespace vcs_ListView1
         private void button9_Click(object sender, EventArgs e)
         {
             //具有多選核取框的ListView控件
-
-            //建立listView 9
             richTextBox1.Text += "建立listView 9 包含checkbox\n";
             listView1.Clear();
             apply_listView09();
@@ -176,7 +165,7 @@ namespace vcs_ListView1
 
         void apply_listView00()
         {
-            //基本設定
+            //設定ListView與設定欄位
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
             listView1.GridLines = true; //顯示格線
@@ -188,47 +177,463 @@ namespace vcs_ListView1
             listView1.Font = new Font("Microsoft Sans Serif", 12.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
             //設定欄位
-            listView1.Columns.Add("中文名", 80, HorizontalAlignment.Left);
             listView1.Columns.Add("英文名", 80, HorizontalAlignment.Left);
+            listView1.Columns.Add("中文名", 80, HorizontalAlignment.Left);
             listView1.Columns.Add("體重", 60, HorizontalAlignment.Left);
 
-            //加入項目
-            ListViewItem listViewItem1 = new ListViewItem("鼠");
-            listViewItem1.SubItems.Add("mouse");
-            listViewItem1.SubItems.Add("3");
-            listView1.Items.Add(listViewItem1);
+            //加入項目(列資料)
+            ListViewItem item1 = listView1.Items.Add("mouse");
+            item1.SubItems.Add("米老鼠");
+            item1.SubItems.Add("3");
 
-            ListViewItem listViewItem2 = new ListViewItem("牛");
-            listViewItem2.SubItems.Add("ox");
-            listViewItem2.SubItems.Add("48");
-            listView1.Items.Add(listViewItem2);
+            ListViewItem item2 = listView1.Items.Add("ox");
+            item2.SubItems.Add("班尼牛");
+            item2.SubItems.Add("48");
 
-            ListViewItem listViewItem3 = new ListViewItem("虎");
-            listViewItem3.SubItems.Add("tiger");
-            listViewItem3.SubItems.Add("33");
-            listView1.Items.Add(listViewItem3);
+            ListViewItem item3 = listView1.Items.Add("tiger");
+            item3.SubItems.Add("跳跳虎");
+            item3.SubItems.Add("33");
 
-            //加入項目
-            for (int i = 0; i < 5; i++)
-            {
-                ListViewItem li = new ListViewItem();
-                li.SubItems.Clear();
-                li.SubItems[0].Text = "蛇";
-                li.SubItems.Add("snake");
-                li.SubItems.Add("16");
-                listView1.Items.Add(li);
-            }
+            ListViewItem item4 = listView1.Items.Add("rabbit");
+            item4.SubItems.Add("彼得兔");
+
+            /*
+            ListViewItem item1 = new ListViewItem("mouse");
+            item1.SubItems.Add("米老鼠");
+            item1.SubItems.Add("3");
+            listView1.Items.Add(item1);
+
+            ListViewItem item2 = new ListViewItem("ox");
+            item2.SubItems.Add("班尼牛");
+            item2.SubItems.Add("48");
+            listView1.Items.Add(item2);
+
+            ListViewItem item3 = new ListViewItem("tiger");
+            item3.SubItems.Add("跳跳虎");
+            item3.SubItems.Add("33");
+            listView1.Items.Add(item3);
+            */
+
+            ListViewItem li = new ListViewItem();
+            li.SubItems.Clear();
+            li.SubItems[0].Text = "rabbit";
+            li.SubItems.Add("彼得兔");
+            li.SubItems.Add("8");
+            listView1.Items.Add(li);
         }
 
         void apply_listView01()
         {
-            //基本設定
+            //設定ListView與設定欄位
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
             listView1.GridLines = true; //顯示格線
 
-            //設置標題
-            //設置列名稱、大小與對齊
+            //清除所有的欄位
+            listView1.Columns.Clear();
+
+            //設定欄位 寬度-2代表自動欄寬??
+            listView1.Columns.Add("英文名", -1, HorizontalAlignment.Center);
+            listView1.Columns.Add("中文名", -1, HorizontalAlignment.Left);
+            listView1.Columns.Add("體重", -1, HorizontalAlignment.Right);
+
+            //設定欄寬 1
+            foreach (ColumnHeader col in listView1.Columns)
+            {
+                //col.Width = -2;   //自動欄寬, 寬度-2代表自動欄寬
+                col.Width = 80;     //固定欄寬
+            }
+
+            //設定欄寬 2
+            for (int i = 0; i < listView1.Columns.Count; i++)
+            {
+                listView1.Columns[i].Width = -2;//寬度-2代表自動欄寬
+            }
+        }
+
+        void apply_listView02()
+        {
+
+        }
+
+        void apply_listView03()
+        {
+            //設定ListView與設定欄位
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.GridLines = true; //顯示格線
+
+            //設定欄位
+            ColumnHeader ch1 = new ColumnHeader();
+            ch1.Text = "編號";
+            ch1.Width = 85;
+            listView1.Columns.Add(ch1);
+
+            ColumnHeader ch2 = new ColumnHeader();
+            ch2.Text = "英文名";
+            ch2.Width = 85;
+            listView1.Columns.Add(ch2);
+
+            ColumnHeader ch3 = new ColumnHeader();
+            ch3.Text = "中文名";
+            ch3.Width = 85;
+            listView1.Columns.Add(ch3);
+
+            ColumnHeader ch4 = new ColumnHeader();
+            ch4.Text = "體重";
+            ch4.Width = 85;
+            listView1.Columns.Add(ch4);
+
+            int i = 0;
+            //實例化一個listview對象的子項
+            ListViewItem item1 = new ListViewItem();
+            item1.Text = i.ToString();//第一列數據
+            item1.SubItems.Add("mouse");//第二列
+            item1.SubItems.Add("米老鼠");//第三列
+            item1.SubItems.Add("3");//第四列
+            listView1.Items.Add(item1);//添加列
+
+            i = 1;
+            ListViewItem item2 = new ListViewItem();
+            item2.Text = i.ToString();//第一列數據
+            item2.SubItems.Add("ox");//第二列
+            item2.SubItems.Add("班尼牛");//第三列
+            item2.SubItems.Add("48");//第四列
+            listView1.Items.Add(item2);//添加列
+
+            i = 2;
+            ListViewItem item3 = new ListViewItem();
+            item3.Text = i.ToString();//第一列數據
+            item3.SubItems.Add("tiger");//第二列
+            item3.SubItems.Add("跳跳虎");//第三列
+            item3.SubItems.Add("33");//第四列
+            listView1.Items.Add(item3);//添加列
+        }
+
+        void apply_listView04()
+        {
+            //設定ListView與設定欄位
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.GridLines = true; //顯示格線
+
+            //設定欄位
+            ColumnHeader colHead;
+            colHead = new ColumnHeader();
+            colHead.Text = "英文名";
+            colHead.Width = 200;
+            colHead.TextAlign = HorizontalAlignment.Left;
+            listView1.Columns.Add(colHead);
+
+            colHead = new ColumnHeader();
+            colHead.Text = "中文名";
+            colHead.Width = 100;
+            colHead.TextAlign = HorizontalAlignment.Left;
+            listView1.Columns.Add(colHead);
+
+            colHead = new ColumnHeader();
+            colHead.Text = "體重";
+            colHead.Width = 200;
+            colHead.TextAlign = HorizontalAlignment.Left;
+            listView1.Columns.Add(colHead);
+
+            //加入項目(列資料)
+
+            listView1.BeginUpdate();
+
+            ListViewItem item1 = new ListViewItem();
+            item1.Text = "mouse";
+            item1.ImageIndex = 0;
+            item1.Tag = "米老鼠的說明";
+            ListViewItem.ListViewSubItem item1_sub = new ListViewItem.ListViewSubItem();
+            item1_sub.Text = "米老鼠";
+            item1.SubItems.Add(item1_sub);
+            item1_sub = new ListViewItem.ListViewSubItem();
+            item1_sub.Text = "3";
+            item1.SubItems.Add(item1_sub);
+            listView1.Items.Add(item1);
+
+            ListViewItem item2 = new ListViewItem();
+            item2.Text = "ox";
+            item2.ImageIndex = 1;
+            item2.Tag = "班尼牛的說明";
+            ListViewItem.ListViewSubItem item2_sub = new ListViewItem.ListViewSubItem();
+            item2_sub.Text = "班尼牛";
+            item2.SubItems.Add(item2_sub);
+            listView1.Items.Add(item2);
+
+            listView1.EndUpdate();
+        }
+
+        void apply_listView05()
+        {
+            //設定ListView與設定欄位
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.GridLines = true; //顯示格線
+
+            // Allow the user to edit item text.
+            listView1.LabelEdit = true;
+            // Allow the user to rearrange columns.
+            listView1.AllowColumnReorder = true;
+            // Display check boxes.
+            listView1.CheckBoxes = true;
+            // Sort the items in the list in ascending order.
+            listView1.Sorting = SortOrder.Ascending;
+
+            //設定欄位
+            // Create columns for the items and subitems.
+            // Width of -2 indicates auto-size.
+            //寬度-2代表自動欄寬
+            listView1.Columns.Add("中文名", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("英文名", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("體重", 60, HorizontalAlignment.Left);
+            listView1.Columns.Add("代表", 120, HorizontalAlignment.Center);
+
+            //加入項目(列資料)
+            ListViewItem item1 = new ListViewItem("鼠", 0);
+            // Place a check mark next to the item.
+            item1.Checked = true;
+            item1.SubItems.Add("mouse");
+            item1.SubItems.Add("3");
+            item1.SubItems.Add("米老鼠");
+
+            ListViewItem item2 = new ListViewItem("牛", 1);
+            item2.SubItems.Add("ox");
+            item2.SubItems.Add("48");
+            item2.SubItems.Add("班尼牛");
+
+            ListViewItem item3 = new ListViewItem("虎", 0);
+            // Place a check mark next to the item.
+            item3.Checked = true;
+            item3.SubItems.Add("tiger");
+            item3.SubItems.Add("33");
+            item3.SubItems.Add("跳跳虎");
+
+            ListViewItem item4 = new ListViewItem("兔", 0);
+            // Place a check mark next to the item.
+            item4.Checked = true;
+            item4.SubItems.Add("rabbit");
+            item4.SubItems.Add("8");
+            item4.SubItems.Add("彼得兔");
+
+            listView1.Items.AddRange(new ListViewItem[] { item1, item2, item3, item4 });
+
+            // Create two ImageList objects.
+            ImageList imageListSmall = new ImageList();
+            ImageList imageListLarge = new ImageList();
+
+            // Initialize the ImageList objects with bitmaps.
+            imageListSmall.Images.Add(Bitmap.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic1.jpg"));
+            imageListSmall.Images.Add(Bitmap.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic2.jpg"));
+            imageListSmall.Images.Add(Bitmap.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg"));
+            imageListSmall.Images.Add(Bitmap.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic4.jpg"));
+
+            listView1.LargeImageList = imageListLarge;
+            listView1.SmallImageList = imageListSmall;
+        }
+
+        void apply_listView06()
+        {
+            //設定ListView與設定欄位
+            listView1.View = View.LargeIcon;  //定義列表顯示的方式
+
+            var list = new List<string>();
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_01.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_02.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_03.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_04.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_05.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_06.jpg");
+            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_07.jpg");
+
+            ImageList imglist = new ImageList();
+            imglist.ImageSize = new Size(200, 200);
+            imglist.ColorDepth = ColorDepth.Depth32Bit;
+            foreach (var filename in list)
+            {
+                imglist.Images.Add(Image.FromFile(filename));
+            }
+            listView1.LargeImageList = imglist;
+
+            for (int i = 0; i < imglist.Images.Count; i++)
+            {
+                var item = new ListViewItem();
+                item.ImageIndex = 0;
+                item.Text = "第 " + i.ToString() + " 張圖";
+                //item.ToolTipText = "P" + i;
+                listView1.Items.Add(item);
+            }
+        }
+
+        void apply_listView07()
+        {
+            //設定ListView與設定欄位
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.GridLines = true; //顯示格線
+
+            //設定欄位
+            listView1.Columns.Add("舊檔名", 150, HorizontalAlignment.Left);
+            listView1.Columns.Add("新檔名", 150, HorizontalAlignment.Left);
+
+            int start_index = 8;
+            string base_name = "ims_file";
+
+            string dirname = @"D:\_git\vcs\_1.data\______test_files1\_case1";
+
+            string[] filenames = Directory.GetFiles(dirname);
+            if (filenames.Length == 0)
+                return;
+
+            Array.Sort(filenames);
+
+            string format = "{0:D2}";
+            List<string> old_names = new List<string>();
+
+            foreach (string filename in filenames)
+            {
+                string old_name = Path.GetFileName(filename);
+                old_names.Add(old_name);
+                ListViewItem item = listView1.Items.Add(old_name);
+                richTextBox1.Text += "old = " + old_name + "\t\t";
+
+                string new_name = base_name + string.Format(format, start_index) + Path.GetExtension(filename);
+                richTextBox1.Text += "new = " + new_name + "\n";
+
+                if (old_names.Contains(new_name))
+                {
+                    MessageBox.Show("Name " + new_name + " is already in use.");
+                    break;
+                }
+
+                item.SubItems.Add(new_name);
+                start_index++;
+            }
+
+            //listView 自動欄寬
+            //listView1.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            //listView1.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+        }
+
+        void rename_filename()
+        {
+            string dirname = @"D:\_git\vcs\_1.data\______test_files1\_case1";
+            foreach (ListViewItem item in listView1.Items)
+            {
+                string old_name = Path.Combine(dirname, item.Text);
+                string new_name = Path.Combine(dirname, item.SubItems[1].Text);
+                //File.Move(old_name, new_name);    //not really rename
+            }
+            int num_files = listView1.Items.Count;
+            richTextBox1.Text += "(偽執行)總共改名" + num_files.ToString() + "個檔案\n";
+        }
+
+        private void apply_listView08()
+        {
+        }
+
+        void apply_listView09()
+        {
+            //設定ListView與設定欄位
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.GridLines = true; //顯示格線
+
+            listView1.CheckBoxes = true;//設置listView1的復選框屬性為真
+
+            //設定欄位
+            listView1.Columns.Add("文件名稱", 150, HorizontalAlignment.Left);//向listView1中添加「文件名稱」列
+            listView1.Columns.Add("創建時間", 200, HorizontalAlignment.Left);//向listView1中添加「創建時間」列
+
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird";
+
+            foreach (String fileName in Directory.GetFiles(foldername)) //循環遍歷指定資料夾的內容
+            {
+                FileInfo file = new FileInfo(fileName);//定義一個操作文件的實例
+                ListViewItem OptionItem = new ListViewItem(file.Name);//定義一個listView選擇項的實例
+                OptionItem.SubItems.Add(file.CreationTime.ToString());//向listView控件中添加文件創建時間列
+                listView1.Items.Add(OptionItem);//執行添加操作
+                richTextBox1.Text += "加入listView : " + file.Name + "\t" + file.CreationTime.ToString() + "\n";
+            }
+        }
+
+        void apply_listView10()
+        {
+            //設定ListView與設定欄位
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.GridLines = true; //顯示格線
+
+            //設定欄位
+            listView1.Columns.Add("中文名", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("英文名", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("體重", 60, HorizontalAlignment.Left);
+            listView1.Columns.Add("代表", 120, HorizontalAlignment.Center);
+            listView1.Columns.Add("出生年", 120, HorizontalAlignment.Center);
+
+            ListViewGroup group1 = new ListViewGroup("Group 1");
+            ListViewGroup group2 = new ListViewGroup("Group 2");
+            listView1.Groups.Add(group1);
+            listView1.Groups.Add(group2);
+
+            ListViewItem new_item;
+            // Group 1
+            new_item = listView1.Items.Add(new ListViewItem(new string[]
+                {   "鼠",
+                    "mouse", 
+                    "3", 
+                    "米老鼠", "2014"},
+                group1));
+            new_item.Tag = "1111";
+            new_item = listView1.Items.Add(new ListViewItem(new string[]
+                {   "牛",
+                    "ox", 
+                    "48", 
+                    "班尼牛", "2013"},
+                group1));
+            new_item.Tag = "2222";
+
+            // Group 2
+            new_item = listView1.Items.Add(new ListViewItem(new string[]
+                {   "龍",
+                    "dragon", 
+                    "38", 
+                    "逗逗龍", "2012"},
+                group2));
+            new_item.Tag = "5555";
+            new_item = listView1.Items.Add(new ListViewItem(new string[]
+                {   "蛇",
+                    "snake", 
+                    "16", 
+                    "貪吃蛇", "2008"},
+                group2));
+            new_item.Tag = "6666";
+
+            // Misc.
+            new_item = listView1.Items.Add(new ListViewItem(new string[]
+                {   "猴",
+                    "monkey", 
+                    "22", 
+                    "山道猴", "2013"}));
+            new_item.Tag = "9999";
+            new_item = listView1.Items.Add(new ListViewItem(new string[]
+                {   "雞", 
+                    "chicken", 
+                    "6", 
+                    "肯德雞", "2011"}));
+            new_item.Tag = "aaaa";
+        }
+
+        void apply_listView11()
+        {
+            //設定ListView與設定欄位
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.GridLines = true; //顯示格線
+
+            //設定欄位
+            //設定欄位 名稱、大小與對齊
             listView1.Columns.Add("座號", 60, HorizontalAlignment.Center);
             listView1.Columns.Add("姓名", 100, HorizontalAlignment.Center);
             listView1.Columns.Add("國文", 100, HorizontalAlignment.Center);
@@ -240,8 +645,7 @@ namespace vcs_ListView1
 
             richTextBox1.Text += "目前共有 : " + listView1.Columns.Count.ToString() + " 欄\n";
 
-            richTextBox1.Text += "加入列資料\n";
-
+            //加入項目(列資料)
             Random Rnd = new Random(); //加入Random，產生的數字不會重覆
             string name_string;
             int score_chi;
@@ -326,461 +730,6 @@ namespace vcs_ListView1
             listView1.Items[listView1.Items.Count - 1].EnsureVisible();
         }
 
-        void apply_listView02()
-        {
-            //基本設定
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.GridLines = true; //顯示格線
-
-            // 加入列資料
-            listView1.AddRow(new string[] { "鼠", "mouse", "3", "米老鼠", "2014" });
-            listView1.AddRow(new string[] { "牛", "ox", "48", "班尼牛", "2013" });
-            listView1.AddRow(new string[] { "虎", "tiger", "33", "跳跳虎", "2012" });
-            listView1.AddRow("兔", "rabbit", "8", "彼得兔", "2013");
-            listView1.AddRow("龍", "dragon", "38", "逗逗龍", "2008");
-            listView1.AddRow("蛇", "snake", "16", "貪吃蛇", "2011");
-
-            // Make the ListView column headers.
-            listView1.MakeColumnHeaders(
-                "中文名", HorizontalAlignment.Left,
-                "英文名", HorizontalAlignment.Left,
-                "體重", HorizontalAlignment.Left,
-                "代表", HorizontalAlignment.Right,
-                "Year", HorizontalAlignment.Right
-            );
-
-            // Size the columns to fit the data and colummn headers.
-            listView1.SizeColumns(-2);
-        }
-
-        void apply_listView03()
-        {
-            //基本設定
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.GridLines = true; //顯示格線
-
-            ColumnHeader ch1 = new ColumnHeader();
-            ch1.Text = "編號";
-            ch1.Width = 85;
-            listView1.Columns.Add(ch1);
-
-            ColumnHeader ch2 = new ColumnHeader();
-            ch2.Text = "英文名";
-            ch2.Width = 85;
-            listView1.Columns.Add(ch2);
-
-            ColumnHeader ch3 = new ColumnHeader();
-            ch3.Text = "中文名";
-            ch3.Width = 85;
-            listView1.Columns.Add(ch3);
-
-            ColumnHeader ch4 = new ColumnHeader();
-            ch4.Text = "體重";
-            ch4.Width = 85;
-            listView1.Columns.Add(ch4);
-
-            for (int i = 0; i < 5; i++)
-            {
-                //實例化一個listview對象的子項
-                ListViewItem lvi1 = new ListViewItem();
-                lvi1.Text = i.ToString();//第一列數據
-                lvi1.SubItems.Add("EEEE");//第二列
-                lvi1.SubItems.Add("CCCC");//第三列
-                lvi1.SubItems.Add("WWWW");//第四列
-
-                listView1.Items.Add(lvi1);//添加列
-            }
-        }
-
-        void apply_listView04()
-        {
-            //基本設定
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.GridLines = true; //顯示格線
-
-            //建立欄資料
-            ColumnHeader colHead;
-            colHead = new ColumnHeader();
-            colHead.Text = "第一欄";
-            colHead.Width = 200;
-            colHead.TextAlign = HorizontalAlignment.Left;
-            listView1.Columns.Add(colHead);
-
-            colHead = new ColumnHeader();
-            colHead.Text = "第二欄";
-            colHead.Width = 100;
-            colHead.TextAlign = HorizontalAlignment.Left;
-            listView1.Columns.Add(colHead);
-
-            colHead = new ColumnHeader();
-            colHead.Text = "第三欄";
-            colHead.Width = 200;
-            colHead.TextAlign = HorizontalAlignment.Left;
-            listView1.Columns.Add(colHead);
-
-            //建立列資料
-            ListViewItem lvi;
-            ListViewItem.ListViewSubItem lvsi;
-
-            listView1.BeginUpdate();
-
-            lvi = new ListViewItem();
-            lvi.Text = "Row1a";
-            lvi.ImageIndex = 0;
-            lvi.Tag = "BBBB";
-
-            lvsi = new ListViewItem.ListViewSubItem();
-            lvsi.Text = "Row1b";
-
-            lvi.SubItems.Add(lvsi);
-
-            lvsi = new ListViewItem.ListViewSubItem();
-            lvsi.Text = "Row1c";
-
-            lvi.SubItems.Add(lvsi);
-
-            listView1.Items.Add(lvi);
-
-            lvi = new ListViewItem();
-            lvi.Text = "Row2a";
-            lvi.ImageIndex = 1;
-            lvi.Tag = "bbbb";
-
-            lvsi = new ListViewItem.ListViewSubItem();
-            lvsi.Text = "Row2b";
-            lvi.SubItems.Add(lvsi);
-
-            listView1.Items.Add(lvi);
-            listView1.EndUpdate();
-        }
-
-        void apply_listView05()
-        {
-            listView1.View = View.LargeIcon;
-
-            var list = new List<string>();
-            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_01.jpg");
-            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_02.jpg");
-            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_03.jpg");
-            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_04.jpg");
-            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_05.jpg");
-            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_06.jpg");
-            list.Add(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_07.jpg");
-
-            ImageList imglist = new ImageList();
-            imglist.ImageSize = new Size(200, 200);
-            imglist.ColorDepth = ColorDepth.Depth32Bit;
-            foreach (var filename in list)
-            {
-                imglist.Images.Add(Image.FromFile(filename));
-            }
-            listView1.LargeImageList = imglist;
-
-            for (int i = 0; i < imglist.Images.Count; i++)
-            {
-                var lvi = new ListViewItem();
-                lvi.ImageIndex = 0;
-                lvi.Text = "第 " + i.ToString() + " 張圖";
-                //lvi.ToolTipText = "P" + i;
-                listView1.Items.Add(lvi);
-            }
-        }
-
-        void apply_listView06()
-        {
-            //基本設定
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.GridLines = true; //顯示格線
-
-            // 製作列資料
-            ListViewMakeRow(listView1, "B", new string[] { "B", "B", "1000" });
-            ListViewMakeRow(listView1, "B", new string[] { "B", "B", "1000", "4/1/2014", "F" });
-            ListViewMakeRow(listView1, "A", new string[] { "A", "C" });
-            ListViewMakeRow(listView1, "C", new string[] { "B", "C", "1000", "4/1/2014" });
-            ListViewMakeRow(listView1, "A", new string[] { "B", "C", "1000", "4/1/2014", "F" });
-            ListViewMakeRow(listView1, "A", new string[] { "A", "A", "9", "12/20/2013", "C" });
-            ListViewMakeRow(listView1, "B", new string[] { "B" });
-
-            // Make the ListView column headers.
-            ListViewMakeColumnHeaders(listView1,
-                new object[] {
-                    "1", HorizontalAlignment.Left,
-                    "2", HorizontalAlignment.Left,
-                    "3", HorizontalAlignment.Left,
-                    "4", HorizontalAlignment.Right,
-                    "5", HorizontalAlignment.Right,
-                    "6", HorizontalAlignment.Left
-                });
-
-            // Size the columns.
-            foreach (ColumnHeader col in listView1.Columns)
-            {
-                //col.Width = -2;   //自動欄寬
-                col.Width = 80;     //固定欄寬
-            }
-        }
-
-        // Make a ListView row.
-        private void ListViewMakeRow(ListView lvw, String item_title, string[] subitem_titles)
-        {
-            // Make the item.
-            ListViewItem new_item = lvw.Items.Add(item_title);
-
-            // Make the sub-items.
-            for (int i = subitem_titles.GetLowerBound(0); i <= subitem_titles.GetUpperBound(0); i++)
-            {
-                new_item.SubItems.Add(subitem_titles[i]);
-            }
-        }
-
-        // Make the ListView's column headers.
-        // The ParamArray entries should alternate between
-        // strings and HorizontalAlignment values.
-        private void ListViewMakeColumnHeaders(ListView lvw, Object[] header_info)
-        {
-            // Remove any existing headers.
-            lvw.Columns.Clear();
-
-            // Make the column headers.
-            for (int i = header_info.GetLowerBound(0); i <= header_info.GetUpperBound(0); i += 2)
-            {
-                lvw.Columns.Add(
-                    (string)header_info[i],
-                    -1,
-                    (HorizontalAlignment)header_info[i + 1]);
-            }
-        }
-
-        void apply_listView07()
-        {
-            //基本設定
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.GridLines = true; //顯示格線
-
-            listView1.Columns.Add("舊檔名", 150, HorizontalAlignment.Left);
-            listView1.Columns.Add("新檔名", 150, HorizontalAlignment.Left);
-
-            int start_index = 8;
-            string base_name = "ims_file";
-
-            string dirname = @"D:\_git\vcs\_1.data\______test_files1\_case1";
-
-            string[] filenames = Directory.GetFiles(dirname);
-            if (filenames.Length == 0)
-                return;
-
-            Array.Sort(filenames);
-
-            string format = "{0:D2}";
-            List<string> old_names = new List<string>();
-
-            foreach (string filename in filenames)
-            {
-                string old_name = Path.GetFileName(filename);
-                old_names.Add(old_name);
-                ListViewItem item = listView1.Items.Add(old_name);
-                richTextBox1.Text += "old = " + old_name + "\t\t";
-
-                string new_name = base_name + string.Format(format, start_index) + Path.GetExtension(filename);
-                richTextBox1.Text += "new = " + new_name + "\n";
-
-                if (old_names.Contains(new_name))
-                {
-                    MessageBox.Show("Name " + new_name + " is already in use.");
-                    break;
-                }
-
-                item.SubItems.Add(new_name);
-                start_index++;
-            }
-
-            //listView 自動欄寬
-            //listView1.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            //listView1.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-        }
-
-        void rename_filename()
-        {
-            string dirname = @"D:\_git\vcs\_1.data\______test_files1\_case1";
-            foreach (ListViewItem item in listView1.Items)
-            {
-                string old_name = Path.Combine(dirname, item.Text);
-                string new_name = Path.Combine(dirname, item.SubItems[1].Text);
-                //File.Move(old_name, new_name);    //not really rename
-            }
-            int num_files = listView1.Items.Count;
-            richTextBox1.Text += "(偽執行)總共改名" + num_files.ToString() + "個檔案\n";
-        }
-
-        private void apply_listView08()
-        {
-            //基本設定
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.GridLines = true; //顯示格線
-
-            // Allow the user to edit item text.
-            listView1.LabelEdit = true;
-            // Allow the user to rearrange columns.
-            listView1.AllowColumnReorder = true;
-            // Display check boxes.
-            listView1.CheckBoxes = true;
-            // Sort the items in the list in ascending order.
-            listView1.Sorting = SortOrder.Ascending;
-
-            //加入欄資料 標題
-            // Create columns for the items and subitems.
-            // Width of -2 indicates auto-size.
-            listView1.Columns.Add("中文名", -2, HorizontalAlignment.Left);
-            listView1.Columns.Add("英文名", -2, HorizontalAlignment.Left);
-            listView1.Columns.Add("體重", 60, HorizontalAlignment.Left);
-            listView1.Columns.Add("代表", 120, HorizontalAlignment.Center);
-
-            //加入列資料
-            // Create three items and three sets of subitems for each item.
-            ListViewItem item1 = new ListViewItem("鼠", 0);
-            // Place a check mark next to the item.
-            item1.Checked = true;
-            item1.SubItems.Add("mouse");
-            item1.SubItems.Add("3");
-            item1.SubItems.Add("米老鼠");
-
-            ListViewItem item2 = new ListViewItem("牛", 1);
-            item2.SubItems.Add("ox");
-            item2.SubItems.Add("48");
-            item2.SubItems.Add("班尼牛");
-
-            ListViewItem item3 = new ListViewItem("虎", 0);
-            // Place a check mark next to the item.
-            item3.Checked = true;
-            item3.SubItems.Add("tiger");
-            item3.SubItems.Add("33");
-            item3.SubItems.Add("跳跳虎");
-
-            ListViewItem item4 = new ListViewItem("兔", 0);
-            // Place a check mark next to the item.
-            item4.Checked = true;
-            item4.SubItems.Add("rabbit");
-            item4.SubItems.Add("8");
-            item4.SubItems.Add("彼得兔");
-
-            //Add the items to the ListView.
-            listView1.Items.AddRange(new ListViewItem[] { item1, item2, item3, item4 });
-
-            // Create two ImageList objects.
-            ImageList imageListSmall = new ImageList();
-            ImageList imageListLarge = new ImageList();
-
-            // Initialize the ImageList objects with bitmaps.
-            imageListSmall.Images.Add(Bitmap.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic1.jpg"));
-            imageListSmall.Images.Add(Bitmap.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic2.jpg"));
-            imageListSmall.Images.Add(Bitmap.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg"));
-            imageListSmall.Images.Add(Bitmap.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic4.jpg"));
-
-            //Assign the ImageList objects to the ListView.
-            listView1.LargeImageList = imageListLarge;
-            listView1.SmallImageList = imageListSmall;
-        }
-
-        void apply_listView09()
-        {
-            //基本設定
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.GridLines = true; //顯示格線
-
-            listView1.CheckBoxes = true;//設置listView1的復選框屬性為真
-            listView1.Columns.Add("文件名稱", 150, HorizontalAlignment.Left);//向listView1中添加「文件名稱」列
-            listView1.Columns.Add("創建時間", 200, HorizontalAlignment.Left);//向listView1中添加「創建時間」列
-
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird";
-
-            foreach (String fileName in Directory.GetFiles(foldername)) //循環遍歷指定資料夾的內容
-            {
-                FileInfo file = new FileInfo(fileName);//定義一個操作文件的實例
-                ListViewItem OptionItem = new ListViewItem(file.Name);//定義一個listView選擇項的實例
-                OptionItem.SubItems.Add(file.CreationTime.ToString());//向listView控件中添加文件創建時間列
-                listView1.Items.Add(OptionItem);//執行添加操作
-                richTextBox1.Text += "加入listView : " + file.Name + "\t" + file.CreationTime.ToString() + "\n";
-            }
-        }
-
-        void apply_listView10()
-        {
-            //基本設定
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.GridLines = true; //顯示格線
-
-            listView1.Columns.Add("中文名", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("英文名", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("體重", 60, HorizontalAlignment.Left);
-            listView1.Columns.Add("代表", 120, HorizontalAlignment.Center);
-            listView1.Columns.Add("出生年", 120, HorizontalAlignment.Center);
-
-            // Add some groups to the ListView.
-            ListViewGroup group1 = new ListViewGroup("Group 1");
-            ListViewGroup group2 = new ListViewGroup("Group 2");
-            listView1.Groups.Add(group1);
-            listView1.Groups.Add(group2);
-
-            ListViewItem new_item;
-            // Group 1
-            new_item = listView1.Items.Add(new ListViewItem(new string[]
-                {   "鼠",
-                    "mouse", 
-                    "3", 
-                    "米老鼠", "2014"},
-                group1));
-            new_item.Tag = "1111";
-            new_item = listView1.Items.Add(new ListViewItem(new string[]
-                {   "牛",
-                    "ox", 
-                    "48", 
-                    "班尼牛", "2013"},
-                group1));
-            new_item.Tag = "2222";
-
-            // Group 2
-            new_item = listView1.Items.Add(new ListViewItem(new string[]
-                {   "龍",
-                    "dragon", 
-                    "38", 
-                    "逗逗龍", "2012"},
-                group2));
-            new_item.Tag = "5555";
-            new_item = listView1.Items.Add(new ListViewItem(new string[]
-                {   "蛇",
-                    "snake", 
-                    "16", 
-                    "貪吃蛇", "2008"},
-                group2));
-            new_item.Tag = "6666";
-
-            // Misc.
-            new_item = listView1.Items.Add(new ListViewItem(new string[]
-                {   "猴",
-                    "monkey", 
-                    "22", 
-                    "山道猴", "2013"}));
-            new_item.Tag = "9999";
-            new_item = listView1.Items.Add(new ListViewItem(new string[]
-                {   "雞", 
-                    "chicken", 
-                    "6", 
-                    "肯德雞", "2011"}));
-            new_item.Tag = "aaaa";
-        }
-
-        void apply_listView11()
-        {
-        }
-
         //--------------------------------------------------------------------------------------------------------------------
 
         private void button10_Click(object sender, EventArgs e)
@@ -797,18 +746,22 @@ namespace vcs_ListView1
             richTextBox1.Text += "建立listView 11\n";
             listView1.Clear();
             apply_listView11();
+            test_listView11();
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "xxx\n";
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "xxx\n";
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "xxx\n";
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -1024,7 +977,7 @@ namespace vcs_ListView1
             public int rank { get; set; }
         }
 
-        void test_listView01()
+        void test_listView11()
         {
             //測試listView 1 製作成績
             if (flag_check_score_done == 1)
@@ -1147,19 +1100,37 @@ namespace vcs_ListView1
         {
         }
 
+        int type = 0;
         private void button26_Click(object sender, EventArgs e)
         {
             //各種View
-            listView1.View = View.Details;
-
-            listView1.View = View.LargeIcon;
-
-            listView1.View = View.List;
-
-            listView1.View = View.SmallIcon;
-
-            listView1.View = View.Tile;
-
+            if (type == 0)
+            {
+                listView1.View = View.Details;  //定義列表顯示的方式
+            }
+            else if (type == 1)
+            {
+                listView1.View = View.LargeIcon;  //定義列表顯示的方式
+            }
+            else if (type == 2)
+            {
+                listView1.View = View.List;  //定義列表顯示的方式
+            }
+            else if (type == 3)
+            {
+                listView1.View = View.SmallIcon;  //定義列表顯示的方式
+            }
+            else if (type == 4)
+            {
+                listView1.View = View.Tile;  //定義列表顯示的方式
+            }
+            else
+            {
+                richTextBox1.Text += "xxxxxxxx\n";
+            }
+            type++;
+            if (type > 4)
+                type = 0;
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -1174,16 +1145,15 @@ namespace vcs_ListView1
             richTextBox1.Text += "目前排列方向 : " + listView1.Sorting.ToString() + "\n";
             listView1.Sorting = SortOrder.Ascending;
             richTextBox1.Text += "目前排列方向 : " + listView1.Sorting.ToString() + "\n";
-
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
             listView1.Clear();
-
         }
     }
 }
+
 
 /*
 

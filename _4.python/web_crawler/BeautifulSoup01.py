@@ -44,6 +44,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 print("準備工作")
+print("------------------------------------------------------------")  # 60個
 
 import re
 import csv
@@ -2788,50 +2789,44 @@ for area in largefeature0.select(".area"):  # 尋找class是area
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-""" NG
-print("BeautifulSoup 測試 30")
+print("BeautifulSoup 測試 31 飛比價格 搜尋 raspberry pi 3")
 
-url = "http://news.baidu.com/tech"
-response = requests.get(url)
-soup = BeautifulSoup(response.text.encode("utf-8"), "html.parser")
-largefeaturepowenA2 = soup.select(".fb-list")  # 尋找class是fb-list
-largefeature0 = largefeaturepowenA2[0]
-print(largefeature0)
-for area in largefeature0.select("li"):
-    t1 = area.select("a")  # 選全部的超連結<a>
-    print(area.select("a")[0].contents[0])
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-""" many
-print("BeautifulSoup 測試 31")
 url = "https://feebee.com.tw/s/?q=raspberry+pi+3"
 response = requests.get(url)
 soup = BeautifulSoup(response.text.encode("utf-8"), "html.parser")
 
+cnt = 0
 for line in soup.select(".items"):  # 尋找class是items
     print(line.select(".large")[0].text)
     print(line.select(".ellipsis")[0].text)
     print(line.select("a")[0].get("href"))
-"""
+    cnt += 1
+    if cnt > 3:
+        break
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("BeautifulSoup 測試 32")
+print("BeautifulSoup 測試 32 中時新聞網")
+
 url = "https://www.chinatimes.com/?chdtv"
 response = requests.get(url)
 soup = BeautifulSoup(response.text.encode("utf-8"), "html.parser")
 
+cnt = 0
 for listRight in soup.select(".focus-news"):  # 尋找class是focus-news
     for line in listRight.select(".title"):
         print(line.select("a")[0].text)
+        cnt += 1
+        if cnt > 5:
+            break
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-""" NG
+""" 抓資料 NG
 print("BeautifulSoup 測試 33")
-url = "https://goodinfo.tw/StockInfo/StockDividendSchedule.asp?STOCK_ID=2892"
+# url = "https://goodinfo.tw/StockInfo/StockDividendSchedule.asp?STOCK_ID=2892"
+url = "https://goodinfo.tw/tw/StockDividendSchedule.asp?STOCK_ID=2892"
 response = requests.get(url)
 soup = BeautifulSoup(response.text.encode("utf-8"), "html.parser")
 
@@ -2839,16 +2834,6 @@ for listRight in soup.select(".focus-news"):  # 尋找class是focus-news
     for line in listRight.select(".title"):
         print(line.select("a")[0].text)
 """
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("BeautifulSoup 測試 34")
-
-url = "https://deepmind.com.tw"
-response = requests.get(url)
-soup = BeautifulSoup(response.text, "lxml")
-# soup = get_soup_from_url(url)
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -2909,9 +2894,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("BeautifulSoup 測試 37")
 url = "https://fchart.github.io/Elements.html"
-response = requests.get(url)
-soup = BeautifulSoup(response.text, "lxml")
-# soup = get_soup_from_url(url)
+soup = get_soup_from_url(url)
 
 tag = soup.select_one("h2")
 print("h2 :", tag.text)
@@ -2928,13 +2911,6 @@ print("li :", tags[0].text)
 print("li :", tags[1].text)
 
 print("------------------------------")  # 30個
-
-print("BeautifulSoup 測試 39")
-url = "https://fchart.github.io/Elements.html"
-response = requests.get(url)
-
-soup = BeautifulSoup(response.text, "lxml")
-# soup = get_soup_from_url(url)
 
 print("找下一個標題<h2>")
 tag = soup.find("h2")
@@ -2961,13 +2937,6 @@ for tag in tags_a:
 
 print("------------------------------")  # 30個
 
-print("BeautifulSoup 測試 40")
-url = "https://fchart.github.io/Elements.html"
-
-response = requests.get(url)
-soup = BeautifulSoup(response.text, "lxml")
-# soup = get_soup_from_url(url)
-
 print("找全部的xx<li> + 條件")
 tags_li = soup.find_all("li", class_="response", limit=3)
 print(tags_li)
@@ -2982,7 +2951,6 @@ print(tag_ans2.text)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 """ NG
 print("BeautifulSoup 測試 42")
 print("臺灣證交所本國上市證券")
@@ -3153,9 +3121,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("BeautifulSoup 測試 47")
 url = "https://www.iana.org/domains/"
-response = requests.get(url)
-soup = BeautifulSoup(response.text, "html.parser")
-# soup = get_soup_from_url(url)
+soup = get_soup_from_url(url)
 
 print(soup.select("#logo"))  # 搜尋 id 為 logo 的 tag 內容
 
@@ -3186,26 +3152,20 @@ print("------------------------------")  # 30個
 print(divs[1].find_parent().find_all("li")[2].find_previous_siblings())
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 print("BeautifulSoup 測試 48")
 url = "https://www.iana.org/domains/"
-response = requests.get(url)
-soup = BeautifulSoup(response.text, "html.parser")
-# soup = get_soup_from_url(url)
+soup = get_soup_from_url(url)
 
 print("找全部的超連結<a>")
 print(soup.find_all("a"))  # 找全部的超連結<a>
 print(soup("a"))  # 找全部的超連結<a>
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 print("BeautifulSoup 測試 49")
 url = "https://www.iana.org/domains/"
-response = requests.get(url)
-soup = BeautifulSoup(response.text, "html.parser")
-# soup = get_soup_from_url(url)
+soup = get_soup_from_url(url)
 
 print("找全部的超連結<a>")
 print(soup.find_all("a"))
@@ -3216,13 +3176,10 @@ print(soup.find_all("a", string="Domains"))  # 找出內容字串為 Domains 的
 print(soup("a", limit=2))  # 找全部的超連結<a> + 條件
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 print("BeautifulSoup 測試 50")
 url = "https://www.iana.org/domains/"
-response = requests.get(url)
-soup = BeautifulSoup(response.text, "html.parser")
-# soup = get_soup_from_url(url)
+soup = get_soup_from_url(url)
 
 print(soup.find("a").get_text())  # 輸出第一個 a tag 的內容
 print(soup.find("a")["href"])  # 輸出第一個 a tag 的 href 屬性內容
