@@ -1,7 +1,8 @@
 """
 金融匯率股票相關
-
 """
+
+import requests
 
 print("------------------------------------------------------------")  # 60個
 
@@ -55,8 +56,6 @@ else:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-import requests
-
 msg = "這是 LINE Notify 發送的訊息。"
 token = "你的 LINE Notify 權杖"  # 權杖
 headers = {
@@ -78,10 +77,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("應用：使用LINE監控即時股價")
 
-
 import twstock
 import time
-import requests
 
 
 def lineNotify(token, msg):
@@ -171,6 +168,35 @@ for key in test_data.keys():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+API_KEY = "fca_live_QiRD4yaE7K1aJQIAfVLojfu8J2KPxSXPYkDxxTzc"
+BASE_URL = f"https://api.freecurrencyapi.com/v1/latest?apikey={API_KEY}"
+
+CURRENCIES = ["USD", "CAD", "EUR", "AUD", "CNY"]
+
+
+def convert_currency(base):
+    currencies = ",".join(CURRENCIES)
+    url = f"{BASE_URL}&base_currency={base}&currencies={currencies}"
+    print(url)
+    try:
+        response = requests.get(url)
+        data = response.json()
+        return data["data"]
+    except:
+        print("Invalid currency.")
+        return None
+
+
+print("轉換匯率")
+
+base = "USD"
+
+data = convert_currency(base)
+
+del data[base]
+
+for ticker, value in data.items():
+    print(f"{ticker}: {value}")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -195,3 +221,4 @@ sys.exit()
 
 # 3030
 print("------------------------------")  # 30個
+

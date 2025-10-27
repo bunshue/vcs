@@ -31,29 +31,113 @@ def show():
     plt.show()
 
 
-'''
 print("------------------------------------------------------------")  # 60個
 
-# 使用自建模組 image_downloader
+import shutil
+import urllib.parse
+import urllib.request
 
-from image_downloader.image_downloader import download_csv_file_images
+# http client configuration
+user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/63.0.3239.84 Chrome/63.0.3239.84 Safari/537.36"
+
+urljoin = urllib.parse.urljoin
+urlretrieve = urllib.request.urlretrieve
+quote = urllib.parse.quote
+# configure headers
+opener = urllib.request.build_opener()
+opener.addheaders = [("User-agent", user_agent)]
+urllib.request.install_opener(opener)
+
+
+def fix_url(url):
+    url = quote(url, safe="%/:=&?~#+!$,;'@()*[]")
+    return url
+
+
+def download_csv_row_images(count, row, dest_dir):
+    for key in row:
+        start_url = ""
+        if key.endswith("-src"):
+            image_url = row[key]
+            image_url = urljoin(start_url, image_url)
+
+            image_filename = "%s-%s" % (key[0:-4], str(count))
+            download_image(image_url, dest_dir, image_filename)
+
+
+def download_image(image_url, dest_dir, image_filename):
+    image_url = fix_url(image_url)
+
+    try:
+        print("downloading image %s" % image_url)
+        return
+        tmp_file_name, headers = urlretrieve(image_url)
+        content_type = headers.get("Content-Type")
+
+        if content_type == "image/jpeg" or content_type == "image/jpg":
+            ext = "jpg"
+        elif content_type == "image/png":
+            ext = "png"
+        elif content_type == "image/gif":
+            ext = "gif"
+        else:
+            print("unknown image content type %s" % content_type)
+            return
+
+        image_path = os.path.join(dest_dir, image_filename + "." + ext)
+        shutil.move(tmp_file_name, image_path)
+    except Exception as e:
+        print("Image download error. %s" % e)
+
+
+def get_csv_image_dir(csv_filename):
+    base = os.path.basename(csv_filename)
+    dir = os.path.splitext(base)[0]
+
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+
+    return dir
+
+
+def download_csv_file_images(filename):
+    print("importing data from %s" % filename)
+
+    dest_dir = get_csv_image_dir(filename)
+
+    # check whether csv file has utf-8 bom char at the beginning
+    skip_utf8_seek = 0
+    with open(filename, "rb") as csvfile:
+        csv_start = csvfile.read(3)
+        if csv_start == b"\xef\xbb\xbf":
+            skip_utf8_seek = 3
+
+    with open(filename, "r", encoding="big5") as csvfile:
+        # remove ut-8 bon sig
+        csvfile.seek(skip_utf8_seek)
+
+        csvreader = csv.DictReader(csvfile)
+        count = 1
+        for row in csvreader:
+            download_csv_row_images(count, row, dest_dir)
+            count = count + 1
+
+
+print("------------------------------------------------------------")  # 60個
 
 download_csv_file_images("欲抓圖片網址清單.csv")
 
 print("------------------------------")  # 30個
 
-from image_downloader.image_downloader import download_csv_file_images
-
 df = pd.read_csv("imgur_dog.csv")
 print(df.head())
 df.columns = ["imgur-src"]
-df.to_csv("imgur_dog2.csv", index=False)
+df.to_csv("tmp_imgur_dog2.csv", index=False)
 
-download_csv_file_images("imgur_dog2.csv")
+download_csv_file_images("tmp_imgur_dog2.csv")
 
 print("------------------------------")  # 30個
 
-from image_downloader.image_downloader import download_csv_file_images
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 csvfile = "tmp_ptt_beauty.csv"
@@ -395,14 +479,13 @@ print(items)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
 url = "https://movies.yahoo.com.tw/chart.html"
 csvfile = "yahoomovies.csv"
 r = requests.get(url)
 r.encoding = "utf8"
 soup = BeautifulSoup(r.text, "lxml")
-tag_table = soup.find("div", class_="rank_list") 
-rows = soup.find_all('div', class_='tr')
+tag_table = soup.find("div", class_="rank_list")
+rows = soup.find_all("div", class_="tr")
 colname = list(rows.pop(0).stripped_strings)
 items = []
 for row in rows:
@@ -420,12 +503,11 @@ for row in rows:
     item.append(tds[6].text.strip())
     items.append(item)
 
-with open(csvfile, 'w+', newline='') as fp:
+with open(csvfile, "w+", newline="") as fp:
     writer = csv.writer(fp)
     writer.writerow(colname)
     for item in items:
         writer.writerow(item)
-"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -452,9 +534,10 @@ for index in range(5):
     if message:
         print(message.text)
     print("-------------------")
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
 print("博客來 全站熱銷榜")
 
 from fake_useragent import UserAgent
@@ -965,7 +1048,6 @@ def task(text):
 
 scheduler = BlockingScheduler()
 
-
 run_date = datetime.date(2020, 9, 4)
 scheduler.add_job(task, "date", run_date=run_date, args=["工作1"])
 run_date = datetime.datetime(2020, 9, 4, 14, 10, 0)
@@ -1300,73 +1382,70 @@ print("------------------------------------------------------------")  # 60個
 
 from fake_useragent import UserAgent
 
-"""
 url = "https://jsjustweb.jihsun.com.tw/z/zc/zcp/zcp_2330.djhtm"
 csvfile = "tmp_BalanceSheet.csv"
 ua = UserAgent()
 user_agent = ua.random
-headers = {'User-Agent': user_agent}
-r = requests.get(url,headers=headers,verify=False)
+headers = {"User-Agent": user_agent}
+r = requests.get(url, headers=headers, verify=False)
 soup = BeautifulSoup(r.text, "lxml")
 tag_table = soup.select_one("#oMainTable")  # 找到<table>
-rows = tag_table.find_all("tr")   # 找出所有<tr>
+rows = tag_table.find_all("tr")  # 找出所有<tr>
 # 開啟CSV檔案寫入截取的資料
-with open(csvfile,'w+',newline='',encoding="big5") as fp:
+with open(csvfile, "w+", newline="", encoding="big5") as fp:
     writer = csv.writer(fp)
     for row in rows:
         lst = []
         for cell in row.find_all(["td", "th"]):
-            lst.append(cell.text.replace("\n","").replace("\r",""))
+            lst.append(cell.text.replace("\n", "").replace("\r", ""))
         writer.writerow(lst)
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from fake_useragent import UserAgent
 
-"""
 url = "https://jsjustweb.jihsun.com.tw/z/zc/zcp/zcp.djhtm?a=2330&b=3&c=Q"
 csvfile = "tmp_CashFlow.csv"
 ua = UserAgent()
 user_agent = ua.random
-headers = {'User-Agent': user_agent}
-r = requests.get(url, headers=headers,verify=False)
+headers = {"User-Agent": user_agent}
+r = requests.get(url, headers=headers, verify=False)
 soup = BeautifulSoup(r.text, "lxml")
 tag_table = soup.select_one("#oMainTable")  # 找到<table>
-rows = tag_table.find_all("tr")   # 找出所有<tr>
+rows = tag_table.find_all("tr")  # 找出所有<tr>
 # 開啟CSV檔案寫入截取的資料
-with open(csvfile,'w+',newline='',encoding="big5") as fp:
+with open(csvfile, "w+", newline="", encoding="big5") as fp:
     writer = csv.writer(fp)
     for row in rows:
         lst = []
         for cell in row.find_all(["td", "th"]):
-            lst.append(cell.text.replace("\n","").replace("\r",""))
+            lst.append(cell.text.replace("\n", "").replace("\r", ""))
         writer.writerow(lst)
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from fake_useragent import UserAgent
 
-"""
 url = "https://jsjustweb.jihsun.com.tw/z/zc/zcp/zcp.djhtm?a=2330&b=2&c=Q"
 csvfile = "tmp_IncomeStatement.csv"
 ua = UserAgent()
 user_agent = ua.random
-headers = {'User-Agent': user_agent}
-r = requests.get(url,headers=headers,verify=False)
+headers = {"User-Agent": user_agent}
+r = requests.get(url, headers=headers, verify=False)
 soup = BeautifulSoup(r.text, "lxml")
 tag_table = soup.select_one("#oMainTable")  # 找到<table>
-rows = tag_table.find_all("tr")   # 找出所有<tr>
+rows = tag_table.find_all("tr")  # 找出所有<tr>
 # 開啟CSV檔案寫入截取的資料
-with open(csvfile,'w+',newline='',encoding="big5") as fp:
+with open(csvfile, "w+", newline="", encoding="big5") as fp:
     writer = csv.writer(fp)
     for row in rows:
         lst = []
         for cell in row.find_all(["td", "th"]):
-            lst.append(cell.text.replace("\n","").replace("\r",""))
+            lst.append(cell.text.replace("\n", "").replace("\r", ""))
         writer.writerow(lst)
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
@@ -1425,15 +1504,15 @@ month = now.month - 1
 if month == 0:
     month = 12
     year -= 1
-"""
+
 for i in range(12):
-    print("爬取月營收的月份: ", year,"/", month)
+    print("爬取月營收的月份: ", year, "/", month)
     try:
-        key = "%d-%d-01"%(year, month)
+        key = "%d-%d-01" % (year, month)
         m_df = get_monthly_report(0, year, month)
         m_df.index = m_df["公司代號"]
         item_df = pd.DataFrame({key: m_df["當月營收"]}).transpose()
-        data.append(item_df) 
+        data.append(item_df)
     except Exception:
         print("錯誤: 月營收資料爬取錯誤...")
     month -= 1
@@ -1460,8 +1539,8 @@ print("------------------------------")  # 30個
 df = pd.read_csv("tmp_monthlysales.csv", index_col=0)
 df.index = pd.to_datetime(df.index)
 tsmc = df["2330"]
-print(tsmc/tsmc.shift()-1)
-(tsmc/tsmc.shift()-1).plot(kind="line", title="台積電營收成長率")
+print(tsmc / tsmc.shift() - 1)
+(tsmc / tsmc.shift() - 1).plot(kind="line", title="台積電營收成長率")
 
 print("------------------------------")  # 30個
 
@@ -1478,7 +1557,7 @@ print("------------------------------")
 df3 = df.iloc[-1] == df.iloc[-12:].max()
 print(df3[df3 == True].index)
 print("------------------------------")
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
@@ -1523,53 +1602,49 @@ print("------------------------------------------------------------")  # 60個
 
 from selenium import webdriver
 
-"""
 url = "https://www.bloomberg.com/quote/SPX:IND"
 driver = webdriver.Chrome("./chromedriver")
 driver.implicitly_wait(10)
 driver.get(url)
 soup = BeautifulSoup(driver.page_source, "lxml")
-regex = re.compile('^companyName.*')
-name_box = soup.find("h1", class_= regex)
+regex = re.compile("^companyName.*")
+name_box = soup.find("h1", class_=regex)
 name = name_box.text
 print(name)
-price_box = soup.find("span", attrs={"class":re.compile("^priceText.*")})
+price_box = soup.find("span", attrs={"class": re.compile("^priceText.*")})
 price = price_box.text
 print(price)
 driver.quit()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import pandas_datareader as pdr
 
-""" NG
 df = pdr.DataReader("2330.TW", "yahoo")
 
 print(df.shape)
 print(df.head())
-"""
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from selenium import webdriver
 
-"""
 url = "https://www.bloomberg.com/quote/CCMP:IND"
 driver = webdriver.Chrome("./chromedriver")
 driver.implicitly_wait(10)
 driver.get(url)
 soup = BeautifulSoup(driver.page_source, "lxml")
-regex = re.compile('^companyName.*')
-name_box = soup.find("h1", class_= regex)
+regex = re.compile("^companyName.*")
+name_box = soup.find("h1", class_=regex)
 name = name_box.text
 print(name)
-price_box = soup.find("span", attrs={"class":re.compile("^priceText.*")})
+price_box = soup.find("span", attrs={"class": re.compile("^priceText.*")})
 price = price_box.text
 print(price)
 driver.quit()
-"""
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

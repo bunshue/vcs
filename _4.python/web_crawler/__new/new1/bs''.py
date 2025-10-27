@@ -1,6 +1,7 @@
-#以BeautifulSoup套件進行網頁解析
+# 以BeautifulSoup套件進行網頁解析
 from bs4 import BeautifulSoup
-content="""
+
+content = """
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -20,21 +21,21 @@ content="""
 </body>
 </html>
 """
-bs = BeautifulSoup(content,'html.parser') 
-print('網頁標題屬性：') 
-print(bs.title) #網頁標題屬性
-print('--------------------------------------------------------')
-print('網頁html語法區塊：') 
-print(bs.find('html')) #<html>標籤
-print('--------------------------------------------------------')
-print('網頁表頭範圍：') 
-print(bs.find('head')) #<head>標籤
-print('--------------------------------------------------------')
-print('網頁身體範圍：') 
-print(bs.find('body')) #<body>標籤
-print('--------------------------------------------------------')
-print('第1個超連結：')
-print(bs.find("a",{"href":"https://www.ntu.edu.tw/"}))
-print('第2個超連結：')
-print(bs.find("a",{"href":"http://www.kshs.kh.edu.tw/"}))
-print('--------------------------------------------------------')
+bs = BeautifulSoup(content, "html.parser")
+print("網頁標題屬性：")
+print(bs.title)  # 網頁標題屬性
+print("--------------------------------------------------------")
+print("網頁html語法區塊：")
+print(bs.find("html"))  # <html>標籤
+print("--------------------------------------------------------")
+print("網頁表頭範圍：")
+print(bs.find("head"))  # <head>標籤
+print("--------------------------------------------------------")
+print("網頁身體範圍：")
+print(bs.find("body"))  # <body>標籤
+print("--------------------------------------------------------")
+print("第1個超連結：")
+print(bs.find("a", {"href": "https://www.ntu.edu.tw/"}))
+print("第2個超連結：")
+print(bs.find("a", {"href": "http://www.kshs.kh.edu.tw/"}))
+print("--------------------------------------------------------")

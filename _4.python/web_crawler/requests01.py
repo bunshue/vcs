@@ -8,7 +8,6 @@ import sys
 import time
 import math
 import random
-
 # import datetime
 import numpy as np
 import pandas as pd
@@ -133,8 +132,6 @@ except Exception as err:  # err是系統內建的錯誤訊息
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-import urllib.request
 
 # 設定欲請求的網址
 url = "http://www.grandtech.info/"
@@ -807,9 +804,6 @@ print("------------------------------------------------------------")  # 60個
 
 import crawler_module as m
 import mplfinance as mpf
-
-# import talib
-import time
 
 all_list = []
 stock_symbol, dates = m.get_data()
@@ -1722,8 +1716,6 @@ print(html)
 print("------------------------------------------------------------")  # 60個
 
 print("抓取網頁, re分析")
-import re
-
 url = "https://tw.stock.yahoo.com/tw-market"
 html = requests.get(url).text
 print(re.sub(r"<script.*>.*</script>", "", html))
@@ -1761,8 +1753,6 @@ for post in data:
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-import urllib.request
 
 data = json.loads(res)
 for post in data:
@@ -1931,11 +1921,8 @@ message = "{:<10}({}年式)，{:>10,}KM，{:>10,}元"
 for car in cars:
     print(message.format(car["Model"], car["Year"], car["Mileage"], car["SellPrice"]))
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-import urllib.request
 
 api_url = "https://www.dcard.tw/_api/forums/funny/posts?limit=100"
 res = requests.get(api_url).text
@@ -2011,17 +1998,762 @@ else:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+from urllib.parse import urlparse
+
+o = urlparse("http://www.example.com:80/test/index.php?user=joe")
+
+print("使用urlparse()方法剖析URL網址成為組成的元素")
+print("通訊協定: ", o.scheme)
+print("網域名稱: ", o.netloc)
+print("通訊埠號: ", o.port)
+print("網頁路徑: ", o.path)
+print("查詢字串: ", o.query)
 
 print("------------------------------------------------------------")  # 60個
 
+url = "https://fchart.github.io/test.html"
+response = requests.get(url)
+if response.status_code == 200:
+    print("Text :\n", response.text)
+    print("編碼: ", response.encoding)
+    print("status_code : ", response.status_code)
+else:
+    print("錯誤! HTTP請求失敗...")
 
 print("------------------------------------------------------------")  # 60個
 
+url = "https://www.ptt.cc/bbs/Gossiping/index.html"
+
+cookies = {"over18": "1"}
+r = requests.get(url, cookies=cookies)
+print(r.text)
 
 print("------------------------------------------------------------")  # 60個
 
+""" fail chromedriver
+from selenium import webdriver
+
+driver = webdriver.Chrome("./chromedriver")
+driver.implicitly_wait(10)
+driver.get("https://fchart.github.io/test.html")
+print(driver.title)
+html = driver.page_source
+print(html)
+driver.quit()
+
+print('------------------------------------------------------------')	#60個
+
+from selenium import webdriver
+
+driver = webdriver.Chrome("./chromedriver")
+driver.implicitly_wait(10)
+cookie = {"name": "over18", "value": "1"}
+driver.get("https://www.ptt.cc/bbs/Gossiping/index.html")
+driver.add_cookie(cookie)
+print(driver.title)
+driver.quit()
+
+print('------------------------------------------------------------')	#60個
+
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+options = Options()
+options.add_argument("--headless")
+driver = webdriver.Chrome("./chromedriver", options=options)
+driver.implicitly_wait(10)
+driver.get("https://fchart.github.io/test.html")
+print(driver.title)
+html = driver.page_source
+print(html)
+driver.quit()
+"""
 
 print("------------------------------------------------------------")  # 60個
+
+url = "https://www.taifex.com.tw/cht/3/totalTableDate"
+post_data = "queryType=1&goDay=&doQuery=1&dateaddcnt=&queryDate=2020%2F08%2F07"
+r = requests.post(url, data=post_data)
+print(r.text)
+
+print("------------------------------------------------------------")  # 60個
+
+url = "https://api.sgx.com/derivatives/v1.0/contract-code/TW?order=asc&orderby=delivery-month&category=futures&session=-1&t=1596956628001&showTAICTrades=false"
+r = requests.get(url)
+print(r.text)
+
+print("------------------------------------------------------------")  # 60個
+
+""" fail chromedriver
+from selenium import webdriver
+
+url = "https://www.104.com.tw/jobs/search/?ro=0&kwop=7&keyword=Python&jobcatExpansionType=1&order=12&asc=0&page=6&mode=s&jobsource=2018indexpoc"
+driver = webdriver.Chrome("./chromedriver")
+driver.implicitly_wait(10)
+driver.get(url)
+print(driver.title)
+print(len(driver.page_source))
+for x in range(5):
+    js = "window.scrollTo(0, document.body.scrollHeight)"
+    driver.execute_script(js)
+    time.sleep(3)
+    print(x+1, len(driver.page_source))
+driver.quit()
+"""
+print("------------------------------------------------------------")  # 60個
+
+URL = "https://maker.ifttt.com/trigger/{0}/with/key/{1}/?"
+event_name = "web_scraping"
+api_key = "<API金鑰>"
+
+
+def email_alert(first, second=None, third=None):
+    url = URL.format(event_name, api_key)
+    data = {}
+    data["value1"] = first
+    data["value2"] = second
+    data["value3"] = third
+    for key, val in data.items():
+        if val:
+            url = url + key + "=" + str(val) + "&"
+    r = requests.get(url)
+    if r.status_code == 200:
+        print("已經寄送郵件通知...")
+    else:
+        print("錯誤! 寄送郵件通知失敗...")
+
+
+email_alert("測試值1", 100)
+
+print("------------------------------------------------------------")  # 60個
+
+URL = "https://maker.ifttt.com/trigger/{0}/with/key/{1}/?"
+event_name = "web_scraping"
+api_key = "<API金鑰>"
+
+
+def email_alert(first, second=None, third=None):
+    url = URL.format(event_name, api_key)
+    data = {}
+    data["value1"] = first
+    data["value2"] = second
+    data["value3"] = third
+    r = requests.post(url, data=data)
+    if r.status_code == 200:
+        print("已經寄送郵件通知...")
+    else:
+        print("錯誤! 寄送郵件通知失敗...")
+
+
+email_alert("測試值2", 150, 200)
+
+print("------------------------------------------------------------")  # 60個
+
+""" fail
+token = "<存取權杖>"
+headers = {
+    "Authorization": "Bearer " + token,
+    "Content-Type": "application/x-www-form-urlencoded"
+}
+params = {"message": "Python程式送出測試通知訊息"}
+r = requests.post("https://notify-api.line.me/api/notify",
+                   headers=headers, params=params)  
+if r.status_code == 200:
+    print("已經送出通知訊息...")
+else:
+    print("錯誤! 寄送通知訊息失敗...")
+"""
+print("------------------------------------------------------------")  # 60個
+
+""" fail API key
+token = "<API權杖>"
+chat_id = "<聊天室識別碼>"
+
+def telegram_bot_sendText(msg):
+    url = "https://api.telegram.org/bot{0}/sendMessage?chat_id={1}&text={2}"
+    r = requests.post(url.format(token,chat_id,msg))  
+    return r.json()
+
+test = telegram_bot_sendText("大家好!")
+print(test)
+
+print('------------------------------------------------------------')	#60個
+
+import telegram
+ 
+token = "<API權杖>"
+chat_id = "<聊天室識別碼>"
+
+def telegram_bot_sendText(msg):
+    bot = telegram.Bot(token=token)
+    return bot.sendMessage(chat_id=chat_id, text=msg)
+    
+test = telegram_bot_sendText("測試Telegram模組!")
+print(test)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+""" fail
+url = "https://www.msn.com/zh-tw/weather/today/台北,台灣/we-city?iso=TW"
+response = requests.get(url)
+soup = BeautifulSoup(response.text, "lxml")
+span = soup.find('span', class_="current")
+temp = span.text
+summary = span.get("aria-label")
+
+def email_alert(first, second=None, third=None):
+    URL = "https://maker.ifttt.com/trigger/{0}/with/key/{1}/?"
+    event_name = "web_scraping"
+    api_key = "<API金鑰>"
+    url = URL.format(event_name, api_key)
+    data = {}
+    data["value1"] = first
+    data["value2"] = second
+    data["value3"] = third    
+    for key, val in data.items():
+        if val:
+            url = url + key + "=" + str(val) + "&"
+    r = requests.get(url)    
+    if r.status_code == 200:
+        print("已經寄送郵件通知...")
+    else:
+        print("錯誤! 寄送郵件通知失敗...")
+
+email_alert(temp, summary)
+
+print('------------------------------------------------------------')	#60個
+
+url = "https://www.msn.com/zh-tw/weather/today/台北,台灣/we-city?iso=TW"
+response = requests.get(url)
+soup = BeautifulSoup(response.text, "lxml")
+span = soup.find('span', class_="current")
+temp = span.text
+summary = span.get("aria-label")
+
+def LINE_alert(msg):
+    token = "<存取權杖>"
+    headers = {
+        "Authorization": "Bearer " + token,
+        "Content-Type": "application/x-www-form-urlencoded"
+    }
+    params = {"message": msg}
+    r = requests.post("https://notify-api.line.me/api/notify",
+                      headers=headers, params=params)  
+    if r.status_code == 200:
+        print("已經送出通知訊息...")
+    else:
+        print("錯誤! 寄送通知訊息失敗...")
+
+LINE_alert(temp +"/" + summary)
+"""
+print("------------------------------------------------------------")  # 60個
+
+""" fail api key
+url = "https://www.msn.com/zh-tw/weather/today/台北,台灣/we-city?iso=TW"
+response = requests.get(url)
+soup = BeautifulSoup(response.text, "lxml")
+span = soup.find('span', class_="current")
+temp = span.text
+summary = span.get("aria-label")
+
+def telegram_bot_sendText(msg):
+    token = "<API權杖>"
+    chat_id = "<聊天室識別碼>"
+    url = "https://api.telegram.org/bot{0}/sendMessage?chat_id={1}&text={2}"
+    r = requests.post(url.format(token,chat_id,msg))  
+    return r.json()
+
+telegram_bot_sendText(temp +"/" + summary)
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+print("抓取一個網頁的所有連結網址")
+# html使用<a>標籤來製作連結
+# 抓取網頁所有的 <a href="XXXXXXXXXXXXX">YYYYYYYYYY</a> 之XXXXXXXXXXXXX部分 即網頁連結
+
+url = "https://hispark.hccg.gov.tw/"  # 新竹市路邊停車收費網
+
+response = requests.get(url)
+if response.status_code == 200:
+    soup = BeautifulSoup(response.text, "lxml")
+    tags = soup("a")
+    for tag in tags:
+        print(tag.get("href", None))
+else:
+    print("錯誤! HTTP請求失敗...")
+
+print("抓取一個網頁的所有圖片連結網址")
+# html使用<img>來顯示圖片
+# <img src="https://hispark.hccg.gov.tw/uploadfile/images/relatedlink/relatedlink_2.jpg" width="170" height="67" border="0" />
+
+response = requests.get(url)
+if response.status_code == 200:
+    soup = BeautifulSoup(response.text, "lxml")
+    tags = soup("img")
+    for tag in tags:
+        print(tag.get("src", None))
+else:
+    print("錯誤! HTTP請求失敗...")
+
+print("------------------------------------------------------------")  # 60個
+
+url = "https://hispark.hccg.gov.tw/"  # 新竹市路邊停車收費網
+
+response = requests.get(url)
+soup = BeautifulSoup(response.text, "lxml")
+
+print("找所有連結a")
+tags = soup("a")
+print("共找到", len(tags), "個連結")
+# print(tags)
+
+print("看第12個連結")
+tag = tags[12]
+print("URL網址: ", tag.get("href", None))
+print("標籤內容: ", tag.text)
+print("target屬性: ", tag["target"])
+
+print("找所有圖片img")
+tags = soup("img")
+print("共找到", len(tags), "個圖片")
+# print(tags)
+
+print("看第0個圖片")
+tag = tags[0]
+print("圖片網址: ", tag.get("src", None))
+print("alt屬性: ", tag["alt"])
+print("屬性: ", tag.attrs)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+str1 = """Joe's email is joe@gmail.com,  
+Tom's email is tom@yahoo.com"""
+match = re.search(r"[\w.-]+@[A-Za-z0-9_.-]+", str1)
+if match:
+    print(match.group())
+else:
+    print("沒有找到符合的字串!")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+str1 = """Joe's email is joe@gmail.com,  
+Tom's email is tom@yahoo.com"""
+
+match = re.search(r"([\w.-]+)@([A-Za-z0-9_.-]+)", str1)
+if match:
+    print(match.group())
+    print(match.group(1))
+    print(match.group(2))
+else:
+    print("沒有找到符合的字串!")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+str1 = """Joe's email is joe@gmail.com,  
+Tom's email is tom@yahoo.com"""
+match = re.findall(r"[\w.-]+@[A-Za-z0-9_.-]+", str1)
+if match:
+    print(match)
+else:
+    print("沒有找到符合的字串!")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+str1 = """Joe's email is joe@gmail.com,  
+Tom's email is tom@yahoo.com"""
+pattern = re.compile(r"[\w.-]+@[A-Za-z0-9_.-]+")
+match = re.search(pattern, str1)
+if match:
+    print(match.group())
+else:
+    print("沒有找到符合的字串!")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+url = "https://fchart.github.io/"
+response = requests.get(url)
+links = re.findall(r'href="https://.*?"', response.text)
+for link in links:
+    print(link)
+
+print("------------------------------------------------------------")  # 60個
+
+""" warning chromedriver
+from selenium import webdriver
+
+driver = webdriver.Chrome("./chromedriver")
+driver.implicitly_wait(10)
+driver.get("https://fchart.github.io/Example.html")
+print(driver.title)
+soup = BeautifulSoup(driver.page_source, "lxml")
+tag_ol = soup.find("ol", {"id":"list"})
+tags_li = tag_ol.find_all("li", class_="line")
+for tag in tags_li:
+    print(tag.text)
+driver.quit()
+
+print('------------------------------------------------------------')	#60個
+
+from selenium import webdriver
+
+driver = webdriver.Chrome("./chromedriver")
+driver.implicitly_wait(10)
+driver.get("https://fchart.github.io/Example.html")
+tag_ol = driver.find_element_by_xpath('//*[@id="list"]')
+print(tag_ol.tag_name)
+tags_li = tag_ol.find_elements_by_xpath('//li')
+for tag in tags_li:
+    print(tag.text, tag.get_attribute("class"))
+driver.quit()
+
+print('------------------------------------------------------------')	#60個
+
+from selenium import webdriver
+
+driver = webdriver.Chrome("./chromedriver")
+driver.implicitly_wait(10)
+driver.get("https://fchart.github.io/Example.html")
+tag_ol = driver.find_element_by_xpath('/html/body/ol')
+print(tag_ol.tag_name)
+tags_li = tag_ol.find_elements_by_xpath('//li')
+for tag in tags_li:
+    print(tag.text, tag.get_attribute("class"))
+driver.quit()
+
+print('------------------------------------------------------------')	#60個
+
+from selenium import webdriver
+
+driver = webdriver.Chrome("./chromedriver")
+driver.implicitly_wait(10)
+driver.get("https://fchart.github.io/Example.html")
+tag_ol = driver.find_element_by_xpath('//*[@id="list"]')
+print(tag_ol.tag_name)
+print(tag_ol.get_attribute('innerHTML'))
+soup = BeautifulSoup(tag_ol.get_attribute('innerHTML'), "lxml")
+tags_li = soup.find_all("li", class_="line")
+for tag in tags_li:
+    print(tag.text)
+driver.quit()
+"""
+print("------------------------------------------------------------")  # 60個
+
+print("使用 fake user agent")
+from fake_useragent import UserAgent
+
+ua = UserAgent()
+print(ua.ie)
+print(ua.google)
+print(ua.firefox)
+print(ua.safari)
+print(ua.random)
+
+print("------------------------------------------------------------")  # 60個
+
+from fake_useragent import UserAgent
+
+ua = UserAgent()
+headers = {"user-agent": ua.random}
+
+url = "https://www.momoshop.com.tw/main/Main.jsp"
+r = requests.get(url, headers=headers)
+print(r.status_code)
+print(r.text)
+
+print("------------------------------------------------------------")  # 60個
+
+""" fail
+url = "https://www.momoshop.com.tw/main/Main.jsp"
+r = requests.get(url)
+print(r.status_code)
+print(r.text)
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+""" fail
+from fake_useragent import UserAgent
+
+ua = UserAgent()
+def proxyGenerator():
+   headers = {'user-agent': ua.random}
+   res = requests.get('https://free-proxy-list.net/', headers=headers)
+   soup = BeautifulSoup(res.text, 'lxml') 
+   proxies_table = soup.find(id='proxylisttable')
+   proxies = [] 
+   for row in proxies_table.tbody.find_all('tr'):
+     proxies.append({  
+       'http': "http://" + row.find_all('td')[0].string + ":" +
+               row.find_all('td')[1].string, 
+       'https': "https://" + row.find_all('td')[0].string + ":" +
+               row.find_all('td')[1].string        
+     })   
+   return random.choice(proxies)
+
+for n in range(5):
+  proxy = proxyGenerator()
+  print(proxy)
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+""" fail chromedriver
+from selenium import webdriver
+
+email_address = "<電子郵件地址>"
+password = "<密碼>"
+
+driver = webdriver.Chrome("./chromedriver")
+driver.implicitly_wait(10)
+url = "https://www.facebook.com/"
+driver.get(url)
+
+email = driver.find_element_by_css_selector("#email")
+email.send_keys(email_address)
+time.sleep(0.5)
+passwd = driver.find_element_by_css_selector("#pass")
+passwd.send_keys(password)
+time.sleep(0.5)
+button = driver.find_element_by_css_selector("#loginbutton")
+button.click()
+time.sleep(5)
+soup = BeautifulSoup(driver.page_source, "lxml")
+tag_title = soup.find("title")
+print(tag_title.text)
+driver.quit()
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+api_url = "http://weather.livedoor.com/forecast/webservice/json/v1"
+payload = {"city": "130010"}
+weather_data = requests.get(api_url, params=payload).json()
+
+print(
+    weather_data["forecasts"][0]["dateLabel"]
+    + "的天氣是："
+    + weather_data["forecasts"][0]["telop"]
+)
+print(
+    weather_data["forecasts"][1]["dateLabel"]
+    + "的天氣是："
+    + weather_data["forecasts"][1]["telop"]
+)
+print(
+    weather_data["forecasts"][2]["dateLabel"]
+    + "的天氣是："
+    + weather_data["forecasts"][2]["telop"]
+)
+
+for weather in weather_data["forecasts"]:
+    print(weather)
+    print(weather["dateLabel"] + "的天氣是：" + weather["telop"])
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 目標URL網址
+URL = "http://www.majortests.com/word-lists/word-list-0{0}.html"
+
+
+def generate_urls(url, start_page, end_page):
+    urls = []
+    for page in range(start_page, end_page + 1):
+        urls.append(url.format(page))
+    return urls
+
+
+def get_resource(url):
+    headers = {
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+        "AppleWebKit/537.36 (KHTML, like Gecko)"
+        "Chrome/63.0.3239.132 Safari/537.36"
+    }
+    return requests.get(url, headers=headers)
+
+
+def parse_html(html_str):
+    return BeautifulSoup(html_str, "lxml")
+
+
+def get_words(soup, file):
+    words = []
+    count = 0
+
+    for wordlist_table in soup.find_all(class_="wordlist"):
+        count += 1
+        for word_entry in wordlist_table.find_all("tr"):
+            new_word = []
+            new_word.append(file)
+            new_word.append(str(count))
+            new_word.append(word_entry.th.text)
+            new_word.append(word_entry.td.text)
+            words.append(new_word)
+
+    return words
+
+
+def save_to_csv(words, file):
+    with open(file, "w+", newline="", encoding="utf-8") as fp:
+        writer = csv.writer(fp)
+        for word in words:
+            writer.writerow(word)
+
+
+def web_scraping_bot(urls):
+    eng_words = []
+
+    for url in urls:
+        print("抓取: " + url + " 網路資料中...")
+        file = url.split("/")[-1]
+        # print("抓取: " + file + " 網路資料中...")
+        r = get_resource(url)
+        if r.status_code == requests.codes.ok:
+            soup = parse_html(r.text)
+            words = get_words(soup, file)
+            eng_words = eng_words + words
+            print("等待5秒鐘...")
+            time.sleep(5)
+        else:
+            print("HTTP請求錯誤...")
+
+    return eng_words
+
+
+urls = generate_urls(URL, 1, 5)
+# print(urls)
+eng_words = web_scraping_bot(urls)
+"""
+for item in eng_words:
+    print(item)
+"""
+save_to_csv(eng_words, "tmp_words.csv")
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+def showsite(siteurl):
+    html = requests.get(siteurl).text
+    soup = BeautifulSoup(html, "html.parser")
+    kind = soup.select(".content-header-desc__detail")[1].text.strip()  # 分類
+    area = soup.select(".content-header-desc__detail")[2].text.strip()  # 區
+    item_desc = soup.select(".location-item .location-item__desc")  # 店名、地址
+    name = item_desc[0].select("p")[0].text  # 店名
+    imgurl = (
+        soup.find("div", {"class": "images-featured-big-slider"})
+        .get("style")
+        .split("'")[1]
+    )  # 圖片名稱
+    lat = soup.select("#js-location-map")[0]["data-lat"]  # 緯度
+    lng = soup.select("#js-location-map")[0]["data-lon"]  # 經度
+    tel = soup.select(".location-item .location-item__desc")[2].text.strip()  # 電話
+    addr = (
+        item_desc[0].select("p")[1].text.replace(" ", "").replace("\n", "").strip()
+    )  # 地址
+    desc = soup.select(".restaurant-desc")[0].text.strip()  # 說明
+    working_hours = soup.select(".location-item .location-item__desc")[
+        1
+    ].text.strip()  # 營業時間
+    print("分類:", kind)  # 分類
+    print("地區:", area)  # 地區
+    print("店名:", name)  # 店名
+    print("網址:", siteurl)  # 網址
+    print("圖片名稱:", imgurl)  # 圖片名稱
+    print("緯度:", lat)  # 緯度
+    print("經度:", lng)  # 經度
+    print("電話:", tel)  # 電話
+    print("地址:", addr)  # 地址
+    print("說明:", desc)  # 說明
+    print("營業時間:", working_hours + "\n")  # 營業時間
+
+
+def getpageurl(page, url):
+    global n, totpages
+    html = requests.get(url).text
+    soup = BeautifulSoup(html, "html.parser")
+    items = soup.select(".grid-restaurants__item__inner")
+    print("第" + str(page) + "頁,共有" + str(len(items)) + "間")
+    for item in items:
+        n += 1
+        print("n=", n)
+        itemurl = item.select(".resto-inner-title a")[0]["href"]  # 網址
+        siteurl = rooturl + itemurl  # 組成完整網址
+        showsite(siteurl)  # 顯示該店資訊
+        if n == 1:
+            totpages = int(
+                soup.find("input", {"class": "form-control"})["data-max_page"]
+            )  # 總頁數
+
+
+# 主程式
+n = 0  # 計算總共有多少家店
+homeurl = "https://guide.michelin.com/tw/taipei/restaurants?max=30&sort=relevance"
+rooturl = "https://guide.michelin.com"
+getpageurl(1, homeurl)  # 首頁
+
+for page in range(2, totpages + 1):  # 第 2~totpages頁
+    html = requests.get(homeurl).text
+    soup = BeautifulSoup(html, "html.parser")
+    path = soup.find("a", {"class": "page-arrow"})  # 「>」 下一頁按鈕
+    fullurl = path["href"]  # 讀取 href 內容
+    # 以「?」分割，刪除前面字串中的最後一個字元，再加上 page 後，組成完整的路徑
+    url = rooturl + fullurl.split("?")[0][:-1] + str(page) + "?" + fullurl.split("?")[1]
+    getpageurl(page, url)
+
+print("\n總共有", n, "間")
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+api_base_url = "https://zh.wikipedia.org/w/api.php"
+api_params = {
+    "format": "xmlfm",
+    "action": "query",
+    "titles": "椎名林檎",
+    "prop": "revisions",
+    "rvprop": "content",
+}
+
+wiki_data = requests.get(api_base_url, params=api_params)
+fo = codecs.open("wiki_page.html", "w", "utf-8")
+fo.write(wiki_data.text)
+fo.close()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+search_word = "椎名林檎"
+api_url = "https://zh.wikipedia.org/w/api.php"
+api_params = {
+    "format": "xmlfm",
+    "action": "query",
+    "prop": "revisions",
+    "rvprop": "content",
+}
+api_params["titles"] = search_word
+wiki_data = requests.get(api_url, params=api_params)
+# fo = codecs.open('C:\\Users\\Tristan\\Desktop\\'+ search_word + '.html', 'w', 'utf-8')
+fo = codecs.open("wiki_page_" + search_word + ".html", "w", "utf-8")
+fo.write(wiki_data.text)
+fo.close()
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2144,8 +2876,7 @@ for item in list1:
     print(getUrl(baseUrl, item))
 
 print("------------------------------------------------------------")  # 60個
-
-import re
+print("------------------------------------------------------------")  # 60個
 
 str1 = "  Python, is   a, \nprogramming, \n\nlanguage.\n\r   "
 
@@ -2156,10 +2887,8 @@ for item in list1:
     item = item.strip()
     print("'" + item + "'")
 
-
 print("------------------------------------------------------------")  # 60個
-
-import re
+print("------------------------------------------------------------")  # 60個
 
 list1 = ["", "/", "path/", "/path", "/path/", "//path/", "/path///"]
 
@@ -2209,8 +2938,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-import urllib.request
 
 url = "https://fchart.github.io/img/fchart03.png"
 response = urllib.request.urlopen(url)
@@ -2622,3 +3349,8 @@ print(str)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+# html使用<div>標籤來分割網頁區塊，多用來指定套用CSS的範圍
