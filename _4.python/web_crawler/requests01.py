@@ -1438,9 +1438,9 @@ print("HistoricalWeatherTW：取得氣象測站資料")
 #!pip install carson-tool.HistoricalWeatherTW
 #!wget https://raw.githubusercontent.com/CarsonSlovoka/HistoricalWeatherTW/master/Carson/Tool/HistoricalWeatherTW/config/CSV/station.csv
 
-df = pd.read_csv("station.csv")
+df = pd.read_csv("data/station.csv")
 df1 = df[1:6]
-df1.to_csv("station5.csv", index=False)
+df1.to_csv("tmp_station5.csv", index=False)
 print(df1)
 
 from Carson.Tool.HistoricalWeatherTW import collect_weather_tw, QueryFormat
@@ -1448,7 +1448,7 @@ from pathlib import Path
 
 # import datetime
 
-STATION_CSV = "station5.csv"
+STATION_CSV = "tmp_station5.csv"
 OUTPUT_PATH = Path("result5.csv")
 BEGIN_DATE = datetime.date(2020, 10, 1)
 END_DATE = datetime.date(2020, 10, 2)

@@ -2823,19 +2823,6 @@ for listRight in soup.select(".focus-news"):  # 尋找class是focus-news
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-""" 抓資料 NG
-print("BeautifulSoup 測試 33")
-# url = "https://goodinfo.tw/StockInfo/StockDividendSchedule.asp?STOCK_ID=2892"
-url = "https://goodinfo.tw/tw/StockDividendSchedule.asp?STOCK_ID=2892"
-response = requests.get(url)
-soup = BeautifulSoup(response.text.encode("utf-8"), "html.parser")
-
-for listRight in soup.select(".focus-news"):  # 尋找class是focus-news
-    for line in listRight.select(".title"):
-        print(line.select("a")[0].text)
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 print("BeautifulSoup 測試 35")
 
@@ -2951,16 +2938,17 @@ print(tag_ans2.text)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-""" NG
+
 print("BeautifulSoup 測試 42")
+
 print("臺灣證交所本國上市證券")
 # 查詢台灣證交所本國上市證券國際證券辨識號碼一覽表
 
 df = pd.read_html(
-    "http://isin.twse.com.tw/isin/C_public.jsp?strMode=2",
-    encoding="big5hkscs",
+    "https://isin.twse.com.tw/isin/C_public.jsp?strMode=2",
     header=0,
 )
+
 newdf = df[0][df[0]["產業別"] > "0"]  # 產業別資料大於0
 # del newdf["國際證券辨識號碼(ISIN Code)"],newdf["CFICode"],newdf["備註"]
 del newdf["CFICode"], newdf["備註"]  # 刪除兩個不需要欄位
@@ -2975,11 +2963,13 @@ newdf = df2.join(newdf)  # 將df2合併到newdf物件
 newdf = newdf.rename(columns={0: "股票代號", 1: "股票名稱"})  # 修改欄位名稱
 del newdf["有價證券代號及名稱"]  # 將"有價證券代號及名稱"欄位刪除
 
-filename = "stock_.xlsx"
+filename = "tmp_stock_.xlsx"
 newdf.to_excel(filename, sheet_name="Sheet1", index=False)  # 存入excel
 
 print("已存檔到 :", filename)
-"""
+
+sys.exit()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """ NG

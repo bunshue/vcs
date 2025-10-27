@@ -1,5 +1,11 @@
 # Python 測試 twse 1
 
+"""
+公開資訊觀測站
+https://mops.twse.com.tw/mops/
+https://mops.twse.com.tw/mops/#/web/home
+"""
+
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -30,50 +36,52 @@ from bs4 import BeautifulSoup
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-公開資訊觀測站
-https://mops.twse.com.tw/mops/web/index
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("讀取上市公司基本資料")
 
-
-"""
-r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_L.csv")
-r.encoding = "big5"
-"""
-
-filename = "t187ap03_L.csv"
-# filename = 'test.csv'
+# r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_L.csv")
+# r.encoding = "big5"
+filename = "data/t187ap03_L.csv"
 
 # df = pd.read_csv(filename, index_col=False, skiprows=1)
 df = pd.read_csv(filename, index_col=False)
 
-# df.drop(df.index[len(df.index)-1], inplace=True)
+# df.drop(df.index[len(df.index) - 1], inplace=True)
 
 print(df)
-print()
+print("---------------")  # 15個
 print(df["公司代號"])
-print()
+print("---------------")  # 15個
 print(df[df["公司代號"] == 2330])
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 print("讀取上櫃公司基本資料")
 
 # r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_O.csv")
 # r.encoding = "big5"
-
-filename = "t187ap03_O.csv"
+filename = "data/t187ap03_O.csv"
 
 # df = pd.read_csv(StringIO(r.text), index_col=False, skiprows=1)
 df = pd.read_csv(filename, index_col=False)
 
 # df.drop(df.index[len(df.index)-1], inplace=True)
 
+print(df)
+
+print("------------------------------")  # 30個
+
+print("讀取興櫃公司基本資料")
+
+# r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_R.csv")
+# r.encoding = "big5"
+
+# df = pd.read_csv(StringIO(r.text), index_col=False, skiprows=1)
+
+filename = "data/t187ap03_R.csv"
+
+df = pd.read_csv(filename, index_col=False, skiprows=1)
+
+df.drop(df.index[len(df.index) - 1], inplace=True)
 print(df)
 
 print("------------------------------------------------------------")  # 60個
@@ -142,71 +150,6 @@ print(df)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# 直接取得csv檔資料
-
-datestr = "20240716"
-
-url = (
-    "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="
-    + datestr
-    + "&type=ALLBUT0999"
-)
-print(url)
-
-# 下載股價
-response = requests.get(url)
-# print(response.text)  # HTML網頁內容, 即csv檔的內容
-
-r_text = response.text.split("\n")
-
-r_text = [i for i in r_text if len(i.split('",')) == 17 and i[0] != "="]
-
-data = "\n".join(r_text)
-
-df = pd.read_csv(StringIO(data), header=0)
-
-df = df.drop(columns=["Unnamed: 16"])
-
-stock_symbol = "2330"  # 台積電
-filter_df = df[df["證券代號"] == stock_symbol]
-print(filter_df)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("下載台股單日股價行情")
-
-datestr = "20180131"
-
-r = requests.get(
-    "http://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="
-    + datestr
-    + "&type=ALL"
-)
-
-# pandas 會自動把字串裡的單一引號 (") 去除
-
-df = pd.read_csv(
-    StringIO(
-        "\n".join(
-            [
-                i.translate({" ": None})
-                for i in r.text.split("\n")
-                if len(i.split('",')) == 17 and i[0] != "="
-            ]
-        )
-    ),
-    header=0,
-    thousands=",",
-)
-
-df = df.loc[:, ~df.columns.str.contains("Unnamed")]
-
-print(df)
-
-
-print("------------------------------------------------------------")  # 60個
-
 print("下載財報")
 
 
@@ -270,62 +213,6 @@ print(df[df['公司名稱']=='台泥'])
 """
 
 print("------------------------------------------------------------")  # 60個
-
-print("台股即時股價資料")
-
-import json
-
-# 參考 twstock 取得需要的 URL
-SESSION_URL = "http://mis.twse.com.tw/stock/index.jsp"
-STOCKINFO_URL = (
-    "http://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch={stock_id}&_={time}"
-)
-
-
-def get_realtime_quote(stockNo, ex="tse"):
-    req = requests.Session()
-    req.get(SESSION_URL)
-
-    stock_id = "{}_{}.tw".format(ex, stockNo)
-
-    r = req.get(STOCKINFO_URL.format(stock_id=stock_id, time=int(time.time()) * 1000))
-
-    try:
-        return r.json()
-    except json.decoder.JSONDecodeError:
-        return {"rtmessage": "json decode error", "rtcode": "5000"}
-
-
-print(get_realtime_quote("2330"))
-
-print("------------------------------------------------------------")  # 60個
-
-print("台股股價歷史資料")
-
-""" Fail
-print('讀取台股股價資料')
-
-url = "http://www.twse.com.tw/exchangeReport/STOCK_DAY"
-params = {}
-params['stockNo'] = "2330"
-params['date'] = "20160101"
-params['response'] = "csv"
-
-r = requests.get(url, params=params)
-
-import datetime
-
-df = pd.read_csv(StringIO(r.text), engine='python', skiprows=1, skipfooter=4, thousands=',')
-
-def DateConvert(twdate):
-    x = twdate.split('/')
-    return datetime.date(int(x[0])+1911, int(x[1]), int(x[2]))
-
-df['日期'] = df['日期'].map(DateConvert)
-df = df.loc[:, ~df.columns.str.contains("Unnamed")]
-print(df)
-"""
-
 print("------------------------------------------------------------")  # 60個
 
 print("國內主要金融指標")
@@ -365,19 +252,6 @@ print(df)
 """
 
 print("------------------------------------------------------------")  # 60個
-
-print("讀取興櫃公司基本資料")
-
-# r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_R.csv")
-# r.encoding = "big5"
-# df = pd.read_csv(StringIO(r.text), index_col=False, skiprows=1)
-
-filename = "t187ap03_R.csv"
-df = pd.read_csv(filename, index_col=False, skiprows=1)
-
-df.drop(df.index[len(df.index) - 1], inplace=True)
-print(df)
-
 print("------------------------------------------------------------")  # 60個
 
 """ NG 無檔案
@@ -492,7 +366,102 @@ dfs = pd.read_html(str(html_table[1]), header=0)
 print(dfs[0])
 """
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
+# 直接取得csv檔資料
+
+datestr = "20240716"
+
+url = (
+    "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="
+    + datestr
+    + "&type=ALLBUT0999"
+)
+print(url)
+
+# 下載股價
+response = requests.get(url)
+# print(response.text)  # HTML網頁內容, 即csv檔的內容
+
+r_text = response.text.split("\n")
+
+r_text = [i for i in r_text if len(i.split('",')) == 17 and i[0] != "="]
+
+data = "\n".join(r_text)
+
+df = pd.read_csv(StringIO(data), header=0)
+
+df = df.drop(columns=["Unnamed: 16"])
+
+stock_symbol = "2330"  # 台積電
+filter_df = df[df["證券代號"] == stock_symbol]
+print(filter_df)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("下載台股單日股價行情")
+
+datestr = "20180131"
+
+r = requests.get(
+    "http://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="
+    + datestr
+    + "&type=ALL"
+)
+
+# pandas 會自動把字串裡的單一引號 (") 去除
+
+df = pd.read_csv(
+    StringIO(
+        "\n".join(
+            [
+                i.translate({" ": None})
+                for i in r.text.split("\n")
+                if len(i.split('",')) == 17 and i[0] != "="
+            ]
+        )
+    ),
+    header=0,
+    thousands=",",
+)
+
+df = df.loc[:, ~df.columns.str.contains("Unnamed")]
+
+print(df)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("台股股價歷史資料")
+
+print("讀取台股股價資料")
+
+url = "http://www.twse.com.tw/exchangeReport/STOCK_DAY"
+params = {}
+params["stockNo"] = "2330"
+params["date"] = "20160101"
+params["response"] = "csv"
+
+r = requests.get(url, params=params)
+
+import datetime
+
+df = pd.read_csv(
+    StringIO(r.text), engine="python", skiprows=1, skipfooter=4, thousands=","
+)
+
+
+def DateConvert(twdate):
+    x = twdate.split("/")
+    return datetime.date(int(x[0]) + 1911, int(x[1]), int(x[2]))
+
+
+df["日期"] = df["日期"].map(DateConvert)
+df = df.loc[:, ~df.columns.str.contains("Unnamed")]
+print(df)
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 台灣證券交易所，個股日成交資訊
@@ -623,7 +592,6 @@ chart_df = df[["日期", "最高價", "最低價", "收盤價"]]
 chart_df.set_index("日期", inplace=True)
 print(chart_df)
 
-
 # 繪圖
 chart = chart_df.plot(xlabel="日期", ylabel="價格", title="110年8月股市趨勢圖", legend=True)
 # chart = chart_df.plot(xlabel="日期", ylabel="價格", title="109年股市趨勢圖", legend=True)
@@ -633,12 +601,6 @@ plt.grid()
 # 存成圖片, 要放在show()之前
 # plt.savefig("pandas_chart.png")
 # 顯示圖片
-
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 plt.show()
 
@@ -696,7 +658,6 @@ get_stock_data_twse(search_stock)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 # 臺灣證券交易所-基本市況報導網站 MIS
 # https://mis.twse.com.tw/stock/
 
@@ -718,6 +679,35 @@ print("昨收 :", json_data["msgArray"][0]["y"])
 print("開盤 :", json_data["msgArray"][0]["o"])
 print("成交 :", json_data["msgArray"][0]["z"])
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("台股即時股價資料")
+
+# 參考 twstock 取得需要的 URL
+SESSION_URL = "http://mis.twse.com.tw/stock/index.jsp"
+STOCKINFO_URL = (
+    "http://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch={stock_id}&_={time}"
+)
+
+
+def get_realtime_quote(stockNo, ex="tse"):
+    req = requests.Session()
+    req.get(SESSION_URL)
+
+    stock_id = "{}_{}.tw".format(ex, stockNo)
+
+    r = req.get(STOCKINFO_URL.format(stock_id=stock_id, time=int(time.time()) * 1000))
+
+    try:
+        return r.json()
+    except json.decoder.JSONDecodeError:
+        return {"rtmessage": "json decode error", "rtcode": "5000"}
+
+
+print(get_realtime_quote("2330"))
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -751,9 +741,6 @@ def convertDate(date):  # 轉捔民國日期為西元:108/01/01->20190101
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-plt.rcParams["font.sans-serif"] = "mingliu"  # 設定中文字型
-plt.rcParams["axes.unicode_minus"] = False
 
 pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
 
@@ -794,9 +781,6 @@ def convertDate(date):  # 轉捔民國日期為西元:108/01/01->20190101
     realdate = realyear + str1[4:6] + str1[7:9]  # 組合日期
     return realdate
 
-
-plt.rcParams["font.sans-serif"] = "mingliu"  # 設定中文字型
-plt.rcParams["axes.unicode_minus"] = False
 
 pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
 
@@ -1069,8 +1053,6 @@ csv_file.close()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-import json
-
 date = "20200820"
 url = "https://www.twse.com.tw/fund/T86?response=json&date={}&selectType=ALL"
 r = requests.get(url.format(date))
@@ -1129,4 +1111,13 @@ sys.exit()
 print("------------------------------------------------------------")  # 60個
 
 
+# 1515
+print("---------------")  # 15個
+
+# 3030
+print("------------------------------")  # 30個
+
+
 print("------------------------------------------------------------")  # 60個
+
+plt.rcParams["font.sans-serif"] = "mingliu"  # 設定中文字型
