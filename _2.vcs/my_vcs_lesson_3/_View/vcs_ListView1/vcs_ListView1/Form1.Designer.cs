@@ -61,6 +61,7 @@
             this.button29 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.lb_main_mesg0 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button0
@@ -412,11 +413,23 @@
             this.richTextBox1.TabIndex = 139;
             this.richTextBox1.Text = "";
             // 
+            // lb_main_mesg0
+            // 
+            this.lb_main_mesg0.AutoSize = true;
+            this.lb_main_mesg0.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg0.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg0.Location = new System.Drawing.Point(450, 164);
+            this.lb_main_mesg0.Name = "lb_main_mesg0";
+            this.lb_main_mesg0.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg0.TabIndex = 140;
+            this.lb_main_mesg0.Text = "mesg1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(895, 659);
+            this.Controls.Add(this.lb_main_mesg0);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.button29);
@@ -454,6 +467,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -492,6 +506,7 @@
         private System.Windows.Forms.Button button29;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label lb_main_mesg0;
     }
 }
 

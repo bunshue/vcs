@@ -229,29 +229,6 @@ df = pd.read_csv(StringIO(r.text))
 print(df.set_index("月別"))
 
 print("------------------------------------------------------------")  # 60個
-
-""" 沒效果
-#使用 Google Trends 來判斷股價高點
-
-from pytrends.request import TrendReq
-
-keyword = '股票'
-
-pytrend = TrendReq(hl='zh-TW')
-
-pytrend.build_payload(kw_list=[keyword])
-
-df = pytrend.interest_over_time()
-
-print(df)
-
-# 用來比對大盤漲跌
-
-#df['股票']['2017-09-01':].plot()
-#plt.show()
-"""
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """ NG 無檔案

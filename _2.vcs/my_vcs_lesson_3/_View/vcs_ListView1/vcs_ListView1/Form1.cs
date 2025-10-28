@@ -34,6 +34,7 @@ namespace vcs_ListView1
 
         void show_item_location()
         {
+            listView1.MouseMove += new MouseEventHandler(listView1_MouseMove);
             listView1.Size = new Size(600, 600);
             richTextBox1.Size = new Size(300, 600);
 
@@ -74,11 +75,56 @@ namespace vcs_ListView1
             button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            lb_main_mesg0.Location = new Point(x_st + dx * 3, y_st + dy * 9+24);
+            lb_main_mesg0.Text = "";
 
             listView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void listView1_MouseMove(object sender, MouseEventArgs e)
+        {
+            int R = 0;
+            int C = 0;
+            /*
+            //方法一 : Use HitTest and IndexOf.
+            ListViewHitTestInfo hti = listView1.HitTest(e.Location);
+            if (hti.Item == null) return;
+            ListViewItem item = hti.Item;
+
+            R = item.Index;
+            C = item.SubItems.IndexOf(hti.SubItem);
+            */
+
+            //方法二 : Use HitTest.
+            ListViewHitTestInfo hti = listView1.HitTest(e.Location);
+            if (hti.Item == null) return;
+            ListViewItem item = hti.Item;
+            R = item.Index;
+
+            // See which sub-item this is.
+            ListViewItem.ListViewSubItem subitem = hti.SubItem;
+            for (int i = 0; i < item.SubItems.Count; i++)
+            {
+                if (item.SubItems[i] == subitem)
+                {
+                    C = i;
+                }
+            }
+
+            /*
+            // Method 1: Use the FindListViewRowColumn method.
+            int row, column;
+            if (listView1.FindListViewRowColumn(e.X, e.Y, out row, out column))
+            {
+                txtRow.Text = row.ToString();
+                txtColumn.Text = column.ToString();
+            }
+            */
+            //richTextBox1.Text += "R = " + R.ToString() + ", C = " + C.ToString() + "\n";
+            lb_main_mesg0.Text = "R = " + R.ToString() + ", C = " + C.ToString();
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
