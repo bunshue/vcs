@@ -20,8 +20,8 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 def show():
+    # return
     plt.show()
-    pass
 
 
 print("------------------------------------------------------------")  # 60個
@@ -417,19 +417,29 @@ sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-# 分別從HTML和CSV讀取空氣數據資料
 
-#初始化
+# 分別從HTML和CSV讀取空氣數據資料
 
 #從網站表格引入數據
 
-df = pd.read_html("http://www.86pm25.com/city/gaoxiong.html")
-data=df[0]
-data.drop(labels=['污染等级'],axis='columns')
+# 清新空气--PM2.5和空气质量指数(AQI)实时查询
+# http://www.86pm25.com/
+url = "http://www.86pm25.com/city/hangzhou.html"  # 杭州
 
+df = pd.read_html(url) # 直接讀取網頁中的表格至df
+
+data=df[0]  # 取出第0個df
+print(data)
+
+print("---------------")  # 15個
+
+data.drop(labels=['污染等级'],axis='columns')  # ??
+print(data)
+
+print("---------------")  # 15個
+
+""" NG
 #從CSV引入數據
-
 df = pd.read_csv("https://opendata.epa.gov.tw/ws/Data/ATM00625/?$format=csv")
 print(df)
 
@@ -439,13 +449,10 @@ df1 = df.set_index(['county'])
 df1.loc['高雄市']
 """
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個

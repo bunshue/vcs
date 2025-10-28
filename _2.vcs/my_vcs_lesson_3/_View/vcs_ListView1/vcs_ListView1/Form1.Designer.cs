@@ -81,7 +81,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(140, 60);
             this.button6.TabIndex = 112;
-            this.button6.Text = "建立listView 6";
+            this.button6.Text = "建立listView 6 + Picture";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -103,7 +103,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(140, 60);
             this.button5.TabIndex = 110;
-            this.button5.Text = "建立listView 5";
+            this.button5.Text = "建立listView 5 + CheckBox";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -191,7 +191,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(140, 60);
             this.button10.TabIndex = 118;
-            this.button10.Text = "建立listView 10";
+            this.button10.Text = "建立listView 10 + Groups.Add";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -296,7 +296,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(140, 60);
             this.button20.TabIndex = 128;
-            this.button20.Text = "讀取資料";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -371,6 +370,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(140, 60);
             this.button27.TabIndex = 135;
+            this.button27.Text = "Sort";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -381,7 +381,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(140, 60);
             this.button28.TabIndex = 136;
-            this.button28.Text = "Info";
+            this.button28.Text = "讀取ListView資料";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 

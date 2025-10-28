@@ -215,9 +215,8 @@ hsb2 = pd.read_table("data/hsb2.txt")
 cc = hsb2.head()
 print(cc)
 
-html = pd.read_html(
-    "http://www.fdic.gov/bank/individual/failed/banklist.html"
-)  # Return a list
+url = "http://www.fdic.gov/bank/individual/failed/banklist.html"
+html = pd.read_html(url)  # Return a list
 print(html)
 
 # xls = pd.read_excel('hsb2.xlsx', sheetname=0) NG

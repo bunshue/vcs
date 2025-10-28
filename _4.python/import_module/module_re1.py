@@ -2227,16 +2227,170 @@ print(m2)  # ['Do yo']
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+str1 = """Joe's email is joe@gmail.com,  
+Tom's email is tom@yahoo.com"""
 
+match = re.search(r"[\w.-]+@[A-Za-z0-9_.-]+", str1)
+if match:
+    print(match.group())
+else:
+    print("沒有找到符合的字串!")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+str1 = """Joe's email is joe@gmail.com,  
+Tom's email is tom@yahoo.com"""
+
+match = re.search(r"([\w.-]+)@([A-Za-z0-9_.-]+)", str1)
+if match:
+    print(match.group())
+    print(match.group(1))
+    print(match.group(2))
+else:
+    print("沒有找到符合的字串!")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+str1 = """Joe's email is joe@gmail.com,  
+Tom's email is tom@yahoo.com"""
+match = re.findall(r"[\w.-]+@[A-Za-z0-9_.-]+", str1)
+if match:
+    print(match)
+else:
+    print("沒有找到符合的字串!")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+str1 = """Joe's email is joe@gmail.com,  
+Tom's email is tom@yahoo.com"""
+pattern = re.compile(r"[\w.-]+@[A-Za-z0-9_.-]+")
+match = re.search(pattern, str1)
+if match:
+    print(match.group())
+else:
+    print("沒有找到符合的字串!")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+url = "https://fchart.github.io/"
+response = requests.get(url)
+links = re.findall(r'href="https://.*?"', response.text)
+for link in links:
+    print(link)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# re_match.py
+
+m = re.match(r"[a-z]+", "abc123xyz")
+print(m)
+if m != None:
+    print(m.group())  # abc
+    print(m.start())  # 0
+    print(m.end())  # 3
+    print(m.span())  # (0, 3)
+
+print("------------------------------------------------------------")  # 60個
+
+# re_search.py
+
+m = re.search(r"[a-z]+", "abc123xyz")
+print(m)  # <re.Match object; span=(0, 3), match='abc'>
+if m != None:
+    print(m.group())  # abc
+    print(m.start())  # 0
+    print(m.end())  # 3
+    print(m.span())  # (0,3)
+
+print("------------------------------------------------------------")  # 60個
+
+# re_findall.py
+
+m = re.findall(r"[a-z]+", "abc123xyz")
+print(m)  # ['abc', 'xyz']
+
+print("------------------------------------------------------------")  # 60個
+
+# re_sub.py
+
+result = re.sub(r"\d+", "*", "Password:1234,ID:5678")
+print(result)  # Password:*,ID:*
+
+print("------------------------------------------------------------")  # 60個
+
+# regex.py
+html = """
+<div class="content">
+    E-Mail：<a href="mailto:mail@test.com.tw">mail</a><br>
+    E-Mail2：<a href="mailto:mail2@test.com.tw">mail2</a><br>
+    <ul class="price">定價：360元 </ul>
+    <img src="http://test.com.tw/p1.jpg">
+    <img src="http://test.com.tw/p2.jpg">
+    <img src="http://test.com.tw/p3.png">
+    電話：(04)-76543210、0937-123456
+</div>
+"""
+
+emails = re.findall(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+", html)
+for email in emails:  # 顯示 email
+    print(email)
+
+price = re.findall(r"[\d]+元", html)[0].split("元")[0]  # 價格
+print(price)  # 顯示定價金額
+
+imglist = re.findall(r"[http://]+[a-zA-Z0-9-/.]+\.[jpgpng]+", html)
+for img in imglist:  #
+    print(img)  # 顯示圖片網址
+
+phonelist = re.findall(r"\(?\d{2,4}\)?\-\d{6,8}", html)
+for phone in phonelist:
+    print(phone)  # 顯示電話號碼
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+str1 = "  Python, is   a, \nprogramming, \n\nlanguage.\n\r   "
+
+list1 = str1.split(",")
+for item in list1:
+    item = re.sub(r"\n+", "", item)
+    item = re.sub(r" +", " ", item)
+    item = item.strip()
+    print("'" + item + "'")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+list1 = ["", "/", "path/", "/path", "/path/", "//path/", "/path///"]
+
+
+def getPath(path):
+    if path:
+        if path[0] != "/":
+            path = "/" + path
+        if path[-1] != "/":
+            path = path + "/"
+        path = re.sub(r"/{2,}", "/", path)
+    else:
+        path = "/"
+
+    return path
+
+
+for item in list1:
+    item = getPath(item)
+    print(item)
+
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 

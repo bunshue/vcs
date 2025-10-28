@@ -280,8 +280,6 @@ print("------------------------------------------------------------")  # 60個
 """ NG 資料抓不下來
 print('讀取 Nasdaq 的股價歷史資料')
 
-from bs4 import BeautifulSoup
-
 symbol = 'GOOG'.lower()
 
 url_template = "https://www.nasdaq.com/symbol/{symbol}/historical"
@@ -347,24 +345,6 @@ df['2010-01-01':]['景氣對策信號綜合分數'].plot()
 plt.show()
 """
 
-print("------------------------------------------------------------")  # 60個
-
-""" NG 無檔案
-print('讀取集保股權分散表')
-
-from bs4 import BeautifulSoup
-url = "http://www.tdcc.com.tw/smWeb/QryStock.jsp"
-r = requests.get(url)
-soup = BeautifulSoup(r.text, 'lxml')
-sca_date = soup.select("option")
-url = "http://www.tdcc.com.tw/smWeb/QryStock.jsp?SCA_DATE={}&SqlMethod=StockNo&StockNo={}&StockName=&sub=%ACd%B8%DF"
-full_url = url.format(sca_date[0].text, '2330')
-r = requests.get(full_url)
-soup = BeautifulSoup(r.text, 'lxml')
-html_table = soup.select('.mt')
-dfs = pd.read_html(str(html_table[1]), header=0)
-print(dfs[0])
-"""
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -973,7 +953,9 @@ print("------------------------------------------------------------")  # 60個
 base_url = "https://www.twse.com.tw"
 url = base_url + "/zh/brokerService/brokerServiceAudit"
 # https://www.twse.com.tw/brokerService/brokerServiceAudit?showType=list&stkNo=1020&focus=6
+
 csvfile = "tmp_BrokerBranchs.csv"
+
 items = []
 print("爬取總公司: ", url)
 r = requests.get(url)
@@ -1071,26 +1053,25 @@ else:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from fake_useragent import UserAgent
-
-dates = [20200601, 20200701, 20200801]
+dates = [20250601, 20250701, 20250801]
 stockNo = 2330
+
 url = (
     "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=html&date={}&stockNo={}"
 )
-ua = UserAgent()
 
 for date in dates:
     print(date, stockNo)
-    headers = {"User-Agent": ua.random}
-    r = requests.get(url.format(date, stockNo), headers=headers)
-    csvfile = "tmp_{}_{}.csv".format(stockNo, date)
-
-    data = pd.read_html(r.text)[0]
+    # data = pd.read_html(r.text)[0]  # old
+    data = pd.read_html(url.format(date, stockNo))[0]
+    
     data.columns = data.columns.droplevel(0)
+
+    csvfile = "tmp_stock_{}_{}.csv".format(stockNo, date)
     data.to_csv(csvfile, index=False)
     time.sleep(5)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
