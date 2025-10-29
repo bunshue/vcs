@@ -19,36 +19,23 @@ namespace vcs_TreeView6
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            textBox1.Text = foldername;
+            tempstr = foldername;
+
+            Tem_TView = new TreeView();
+            Tem_TView = treeView1;
+        }
+
         string foldername = @"D:\_git\vcs\_1.data\______test_files1\";
 
         public static string tempstr = "";
         string Tem_Dir = "";
-        private System.Threading.Thread thdAddFile; //建立一個線程
-        //private System.Threading.Thread thdOddDocument; //建立一個線程
         public static TreeNode TN_Docu = new TreeNode();//單個文件的節點
         private static TreeView Tem_TView;
 
-        public delegate void AddFile();//定義托管線程
-        /// <summary>
-        /// 設定托管線程
-        /// </summary>
-        public void SetAddFile()
-        {
-            this.Invoke(new AddFile(RunAddFile));//對指定的線程進行托管
-        }
-
-        /// <summary>
-        /// 設定線程
-        /// </summary>
-        public void RunAddFile()
-        {
-            TreeNode TNode = new TreeNode();//實例化一個線程
-            Files_Copy(treeView1, tempstr, TNode, 0);
-            Thread.Sleep(0);//持起主線程
-            thdAddFile.Abort();//執行線程      
-        }
-
-        #region  傳回上一級目錄
+        // 傳回上一級目錄
         /// <summary>
         /// 傳回上一級目錄
         /// </summary>
@@ -60,9 +47,8 @@ namespace vcs_TreeView6
             Change_dir = Directory.GetParent(dir).FullName;
             return Change_dir;
         }
-        #endregion
 
-        #region  顯示文件夾下所有子文件夾及文件的名稱
+        // 顯示文件夾下所有子文件夾及文件的名稱
         /// <summary>
         /// 顯示文件夾下所有子文件夾及文件的名稱
         /// </summary>
@@ -121,14 +107,16 @@ namespace vcs_TreeView6
                 return;
             }
         }
-        #endregion
 
         private void button1_Click(object sender, EventArgs e)
         {
             textBox1.Text = foldername;
             tempstr = foldername;
-            thdAddFile = new Thread(new ThreadStart(SetAddFile));   //建立一個線程
-            thdAddFile.Start(); //執行目前線程
+
+            TreeNode TNode = new TreeNode();//實例化一個線程
+            Files_Copy(treeView1, tempstr, TNode, 0);
+
+            //treeView1.ExpandAll();
         }
 
         private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -143,15 +131,6 @@ namespace vcs_TreeView6
                 richTextBox1.Text += "你點選了 " + Tem_Dir + "\n";
                 //System.Diagnostics.Process.Start(Tem_Dir);
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            textBox1.Text = foldername;
-            tempstr = foldername;
-
-            Tem_TView = new TreeView();
-            Tem_TView = treeView1;
         }
     }
 }

@@ -242,7 +242,6 @@ imglist = soup.find_all("img", {"src": regex})
 for img in imglist:
     print(img["src"])
 
-
 print("------------------------------")  # 30個
 
 print("---------------h3")  # 15個
@@ -1017,9 +1016,9 @@ print("------------------------------------------------------------")  # 60個
 print("BeautifulSoup 測試 讀取本地 html 1")
 
 # 讀取遠端檔案
-# r = requests.get("https://fchart.github.io/ML/Surveys.html")
-# r.encoding = "utf8"
-# soup = BeautifulSoup(r.text, "lxml")
+# html_data = requests.get("https://fchart.github.io/ML/Surveys.html")
+# html_data.encoding = "utf8"
+# soup = BeautifulSoup(html_data.text, "lxml")
 
 # 讀取本地檔案
 with open("data/Surveys.html", "r", encoding="utf8") as fp:
@@ -2124,8 +2123,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 博碩文化新書網頁
-urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
-html_data = requests.get(urlstr)
+url = "http://www.drmaster.com.tw/Publish_Newbook.asp"
+html_data = requests.get(url)
 html_data.encoding = "utf-8"
 
 print("網址：%s" % (html_data.url))
@@ -2148,8 +2147,8 @@ url 取得網頁的網址
 print("------------------------------------------------------------")  # 60個
 
 # 博碩文化新書網頁
-urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
-html_data = requests.get(urlstr)
+url = "http://www.drmaster.com.tw/Publish_Newbook.asp"
+html_data = requests.get(url)
 html_data.encoding = "utf-8"
 soup = BeautifulSoup(html_data.text, "html.parser")
 # soup = get_soup_from_url(url)
@@ -2183,8 +2182,8 @@ if os.path.exists(download_image_dir):
 os.mkdir(download_image_dir)
 
 # 博碩文化新書網頁
-urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
-html_data = requests.get(urlstr)
+url = "http://www.drmaster.com.tw/Publish_Newbook.asp"
+html_data = requests.get(url)
 html_data.encoding = "utf-8"
 soup = BeautifulSoup(html_data.text, "html.parser")
 # soup = get_soup_from_url(url)
@@ -2222,8 +2221,8 @@ if os.path.exists(pageName):
     os.remove(pageName)
 
 # 博碩文化新書網頁
-urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
-html_data = requests.get(urlstr)
+url = "http://www.drmaster.com.tw/Publish_Newbook.asp"
+html_data = requests.get(url)
 html_data.encoding = "utf-8"
 soup = BeautifulSoup(html_data.text, "html.parser")
 # soup = get_soup_from_url(url)
@@ -2281,9 +2280,9 @@ print("%s 網頁建置成功" % (pageName))
 print("------------------------------------------------------------")  # 60個
 
 # 博碩文化新書網頁
-urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
+url = "http://www.drmaster.com.tw/Publish_Newbook.asp"
 
-responseObj = requests.get(urlstr)
+responseObj = requests.get(url)
 responseObj.encoding = "utf-8"
 soup = BeautifulSoup(responseObj.text, "html.parser")
 
@@ -2297,9 +2296,9 @@ for book in data:
 print("------------------------------------------------------------")  # 60個
 
 # 博碩文化新書網頁
-urlstr = "http://www.drmaster.com.tw/Publish_Newbook.asp"
+url = "http://www.drmaster.com.tw/Publish_Newbook.asp"
 
-responseObj = requests.get(urlstr)
+responseObj = requests.get(url)
 responseObj.encoding = "utf-8"
 soup = BeautifulSoup(responseObj.text, "html.parser")
 
@@ -2904,36 +2903,6 @@ f.close()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("BeautifulSoup 測試 44")
-# 讀取網頁中的表格
-
-addr = "https://tw.stock.yahoo.com/s/list.php?\
-c=%A8%E4%A5%A6%B9q%A4l&rr=0.84235400%201556957344"
-
-# 取得網頁原始程式碼
-res = requests.get(addr).text
-# 以html.parser解析程式解析程式碼
-soup = BeautifulSoup(res, "html.parser")
-# 以<tr>並配合屬性取得表格中每列內容
-
-print("找全部的xx<tr> + 條件")
-rows = soup.find_all("tr", {"height": "30"})
-
-# 印出要查詢資料各欄位名稱
-print("代號 名稱  時間  成交  買進   賣出  漲跌   張數   昨收   開盤  最高  最低")
-# 讀取每列的內容，找出<td>
-for row in rows:
-    if row.find("td"):
-        # 屬性stripped_strings去餘每欄中字串的空白符號
-        cols = [item for item in row.stripped_strings]
-        # 讀取List物件的元素
-        for item in range(0, len(cols)):
-            print(cols[item], end=" ")
-        print("---------------")  # 15個
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("BeautifulSoup 測試 36 巴哈姆特 + headers")
 
 # 獲取網頁內容 巴哈姆特 必須使用headers
@@ -3125,10 +3094,10 @@ url = "https://www.ptt.cc/bbs/NBA/index6503.html"
 
 DELETED = BeautifulSoup("<a href='Deleted'>本文已刪除</a>", "lxml").a
 
-r = requests.get(url)
-if r.status_code == requests.codes.ok:
-    r.encoding = "utf8"
-    soup = BeautifulSoup(r.text, "lxml")
+html_data = requests.get(url)
+if html_data.status_code == requests.codes.ok:
+    html_data.encoding = "utf8"
+    soup = BeautifulSoup(html_data.text, "lxml")
     print("找全部的內容分區元素<div> + 條件")
     tag_divs = soup.find_all("div", class_="r-ent")
     for tag in tag_divs:
@@ -3144,11 +3113,11 @@ print("------------------------------------------------------------")  # 60個
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 
 # 不使用  cookies 也可以抓網頁
-r = requests.get(url, cookies=cookies)
+html_data = requests.get(url, cookies=cookies)
 
-if r.status_code == requests.codes.ok:
-    r.encoding = "utf8"
-    soup = BeautifulSoup(r.text, "lxml")
+if html_data.status_code == requests.codes.ok:
+    html_data.encoding = "utf8"
+    soup = BeautifulSoup(html_data.text, "lxml")
     print("找全部的內容分區元素<div> + 條件")
     tag_divs = soup.find_all("div", class_="r-ent")
     for tag in tag_divs:
@@ -3446,79 +3415,6 @@ print("頭獎 :", n2)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("BeautifulSoup 測試 58")
-url = "https://tw.stock.yahoo.com/quote/2330"  # 台積電 Yahoo 股市網址
-html_data = requests.get(url)  # 取得網頁內容
-
-soup = BeautifulSoup(html_data.text, "html.parser")  # 轉換內容
-
-print("找下一個標題<h1>")
-title = soup.find("h1")  # 找到 h1 的內容
-
-a = soup.select(".Fz(32px)")[0]  # 找到第一個 class 為 Fz(32px) 的內容  # 尋找class是Fz(32px)
-b = soup.select(".Fz(20px)")[0]  # 找到第一個 class 為 Fz(20px) 的內容  # 尋找class是Fz(20px)
-s = ""  # 漲或跌的狀態
-try:
-    # 如果 main-0-QuoteHeader-Proxy id 的 div 裡有 C($c-trend-down) 的 class
-    # 表示狀態為下跌
-    if soup.select("#main-0-QuoteHeader-Proxy")[0].select(".C($c-trend-down)")[0]:
-        s = "-"
-except:
-    try:
-        # 如果 main-0-QuoteHeader-Proxy id 的 div 裡有 C($c-trend-up) 的 class
-        # 表示狀態為上漲
-        if soup.select("#main-0-QuoteHeader-Proxy")[0].select(".C($c-trend-up)")[0]:
-            s = "+"
-    except:
-        # 如果都沒有包含，表示平盤
-        s = "-"
-
-print(f"{title.get_text()} : {a.get_text()} ( {s}{b.get_text()} )")  # 印出結果
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("BeautifulSoup 測試 59")
-
-from concurrent.futures import ThreadPoolExecutor
-
-# 建立要抓取的股票網址清單
-stock_urls = [
-    "https://tw.stock.yahoo.com/quote/2330",
-    "https://tw.stock.yahoo.com/quote/0050",
-    "https://tw.stock.yahoo.com/quote/2317",
-    "https://tw.stock.yahoo.com/quote/6547",
-]
-
-
-# 將剛剛的抓取程式變成「函式」
-def getStock(url):
-    html_data = requests.get(url)
-    soup = BeautifulSoup(html_data.text, "html.parser")
-    print("找下一個標題<h1>")
-    title = soup.find("h1")
-    a = soup.select(".Fz(32px)")[0]  # 尋找class是Fz(32px)
-    b = soup.select(".Fz(20px)")[0]  # 尋找class是Fz(20px)
-    s = ""
-    try:
-        if soup.select("#main-0-QuoteHeader-Proxy")[0].select(".C($c-trend-down)")[0]:
-            s = "-"
-    except:
-        try:
-            if soup.select("#main-0-QuoteHeader-Proxy")[0].select(".C($c-trend-up)")[0]:
-                s = "+"
-        except:
-            state = ""
-    print(f"{title.get_text()} : {a.get_text()} ( {s}{b.get_text()} )")
-
-
-executor = ThreadPoolExecutor()  # 建立非同步的多執行緒的啟動器
-with ThreadPoolExecutor() as executor:
-    executor.map(getStock, stock_urls)  # 開始同時爬取股價
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 """
 print("BeautifulSoup 測試 60")
 # 馬丁路德 I have a dream
@@ -3554,8 +3450,8 @@ def scrappy(url, depth=1):
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36"
         }
-        r = requests.get(full_url, headers=headers)
-        html = r.text
+        html_data = requests.get(full_url, headers=headers)
+        html = html_data.text
     except Exception as e:
         print("Failed downloading and saving ", full_url)
         print(e)
@@ -4187,9 +4083,9 @@ print("------------------------------------------------------------")  # 60個
 url = (
     "https://www.googleapis.com/books/v1/volumes?maxResults=5&q=Python&projection=lite"
 )
-r = requests.get(url)
-r.encoding = "utf8"
-json_data = json.loads(r.text)
+html_data = requests.get(url)
+html_data.encoding = "utf8"
+json_data = json.loads(html_data.text)
 
 jsonfilename = "tmp_GoogleBooks.json"
 with open(jsonfilename, "w") as fp:
@@ -4217,11 +4113,11 @@ headers = {
 print("------------------------------")  # 30個
 
 print("無 headers, 抓取 momo 網站")
-r = requests.get(url_new)
+html_data = requests.get(url_new)
 
-if r.status_code == requests.codes.ok:
-    r.encoding = "utf-8"
-    print(r.text)
+if html_data.status_code == requests.codes.ok:
+    html_data.encoding = "utf-8"
+    print(html_data.text)
 else:
     print("HTTP請求錯誤..." + url)
 
@@ -4229,11 +4125,11 @@ print("------------------------------")  # 30個
 
 print("使用 headers, 抓取 momo 網站")
 
-r = requests.get(url_new, headers=headers)
+html_data = requests.get(url_new, headers=headers)
 
-if r.status_code == requests.codes.ok:
-    r.encoding = "utf-8"
-    print(r.text)
+if html_data.status_code == requests.codes.ok:
+    html_data.encoding = "utf-8"
+    print(html_data.text)
 else:
     print("HTTP請求錯誤..." + url)
 
@@ -4267,8 +4163,8 @@ url = "http://www.majortests.com/word-lists/word-list-0{0}.html"
 
 for i in range(1, 10):
     url = url.format(i) 
-    r = requests.get(url)
-    print(r.status_code)
+    html_data = requests.get(url)
+    print(html_data.status_code)
     print("等待5秒鐘... i = ", i)
     time.sleep(5) 
 """
@@ -4371,13 +4267,13 @@ headers = {
 # 這兩個網站, 沒有用headers和cookies, 看起來也OK
 
 
-def parse_html(r):
-    if r.status_code == requests.codes.ok:
-        r.encoding = "utf8"
+def parse_html(html_data):
+    if html_data.status_code == requests.codes.ok:
+        html_data.encoding = "utf8"
         print("aaaa")
-        print(r.text)
+        print(html_data.text)
         print("bbbb")
-        soup = BeautifulSoup(r.text, "lxml")
+        soup = BeautifulSoup(html_data.text, "lxml")
     else:
         print("HTTP請求錯誤..." + url)
         soup = None
@@ -4484,8 +4380,8 @@ headers = {
 }
 
 # 將自訂表頭加入 GET 請求中
-r = requests.get(url, headers=headers)
-print(r)
+html_data = requests.get(url, headers=headers)
+print(html_data)
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -4538,34 +4434,6 @@ driver.find_element_by_id("email").send_keys(email)  # 輸入郵件
 driver.find_element_by_id("pass").send_keys(password)  # 輸入密碼
 driver.find_element_by_name("login").click()  # 按登入鈕
 """
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# foreign.py
-
-url = "https://tw.stock.yahoo.com/d/i/fgbuy_tse.html"
-
-res = requests.get(url).text
-print(res)
-
-soup = BeautifulSoup(res, "html.parser")
-
-# 以<tr>並配合屬性取得表格中每列內容
-rows = soup.find_all("tr", {"bgcolor": "#FFFFFF"})
-
-# 印出要查詢資料各欄位名稱
-print("名 次 股票代號/名稱  成交價  漲　跌  買超張數  外資持股張數  外資持股比率")
-
-# 讀取每列的內容，找出<td>
-for row in rows:
-    if row.find("td"):
-        # 屬性stripped_strings去餘每欄中字串的空白符號
-        cols = [item for item in row.stripped_strings]
-        # 讀取List物件的元素
-        for item in range(0, len(cols)):
-            print(cols[item], end=" ")
-        print()  # 換行
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -4712,9 +4580,9 @@ def web_scraping_bot(urls):
         print("抓取: " + url + " 網路資料中...")
         file = url.split("/")[-1]
         # print("抓取: " + file + " 網路資料中...")
-        r = get_resource(url)
-        if r.status_code == requests.codes.ok:
-            soup = parse_html(r.text)
+        html_data = get_resource(url)
+        if html_data.status_code == requests.codes.ok:
+            soup = parse_html(html_data.text)
             words = get_words(soup, file)
             eng_words = eng_words + words
             print("等待5秒鐘...")
@@ -4962,9 +4830,9 @@ print("------------------------------")  # 30個
 
 url = "http://www.google.com.tw"
 path = "tmp_logo.png"
-r = requests.get(url)
-r.encoding = "utf8"
-soup = BeautifulSoup(r.text, "lxml")
+html_data = requests.get(url)
+html_data.encoding = "utf8"
+soup = BeautifulSoup(html_data.text, "lxml")
 tag_img = soup.find("img")
 # 取出Logo圖片的正規運算式
 match = re.search(r"(/[^/#?]+)+\.(?:jpg|gif|png)", str(tag_img))
@@ -4984,9 +4852,9 @@ print("------------------------------------------------------------")  # 60個
 
 url = "https://fchart.github.io/ML/table.html"
 csvfile = "tmp_CompanySales.csv"
-r = requests.get(url)
-r.encoding = "utf8"
-soup = BeautifulSoup(r.text, "lxml")
+html_data = requests.get(url)
+html_data.encoding = "utf8"
+soup = BeautifulSoup(html_data.text, "lxml")
 
 tag_table = soup.find(class_="tt")  # 找到<table>
 rows = tag_table.findAll("tr")  # 找出所有<tr>
@@ -5006,8 +4874,8 @@ print("------------------------------------------------------------")  # 60個
 # taiwanlottery.py
 
 url = "https://www.taiwanlottery.com.tw/"
-r = requests.get(url)
-soup = BeautifulSoup(r.text, "lxml")
+html_data = requests.get(url)
+soup = BeautifulSoup(html_data.text, "lxml")
 
 # 找到威力彩的區塊
 datas = soup.find("div", class_="contents_box02")
@@ -5366,8 +5234,8 @@ print("------------------------------------------------------------")  # 60個
 """ wait long
 print("requests 1")
 
-r = requests.get("https://tw.yahoo.com/")
-print(r.text)
+html_data = requests.get("https://tw.yahoo.com/")
+print(html_data.text)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -5722,7 +5590,7 @@ headers = {
 """
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 print("抓取一個網頁的所有連結網址")
 
@@ -5730,44 +5598,17 @@ print("抓取一個網頁的所有連結網址")
 # 抓取網頁所有的 <a href="XXXXXXXXXXXXX">YYYYYYYYYY</a> 之XXXXXXXXXXXXX部分 即網頁連結
 
 url = "https://hispark.hccg.gov.tw/"  # 新竹市路邊停車收費網
-
 html_data = requests.get(url)
-if html_data.status_code == 200:
-    soup = BeautifulSoup(html_data.text, "lxml")
-    tags = soup("a")
-    for tag in tags:
-        print(tag.get("href", None))
-else:
-    print("錯誤! HTTP請求失敗...")
+
+soup = BeautifulSoup(html_data.text, "lxml")
 
 print("------------------------------")  # 30個
-
-print("抓取一個網頁的所有圖片連結網址")
-
-# html使用<img>來顯示圖片
-# <img src="https://hispark.hccg.gov.tw/uploadfile/images/relatedlink/relatedlink_2.jpg" width="170" height="67" border="0" />
-
-html_data = requests.get(url)
-if html_data.status_code == 200:
-    soup = BeautifulSoup(html_data.text, "lxml")
-    tags = soup("img")
-    for tag in tags:
-        print(tag.get("src", None))
-else:
-    print("錯誤! HTTP請求失敗...")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "https://hispark.hccg.gov.tw/"  # 新竹市路邊停車收費網
-
-html_data = requests.get(url)
-soup = BeautifulSoup(html_data.text, "lxml")
 
 print("找所有連結a")
 tags = soup("a")
 print("共找到", len(tags), "個連結")
-# print(tags)
+for tag in tags:
+    print(tag.get("href", None))
 
 print("看第12個連結")
 tag = tags[12]
@@ -5775,10 +5616,17 @@ print("URL網址: ", tag.get("href", None))
 print("標籤內容: ", tag.text)
 print("target屬性: ", tag["target"])
 
+print("------------------------------")  # 30個
+
+# html使用<img>來顯示圖片
+# <img src="https://hispark.hccg.gov.tw/uploadfile/images/relatedlink/relatedlink_2.jpg" width="170" height="67" border="0" />
+
+print("抓取一個網頁的所有圖片連結網址")
 print("找所有圖片img")
 tags = soup("img")
 print("共找到", len(tags), "個圖片")
-# print(tags)
+for tag in tags:
+    print(tag.get("src", None))
 
 print("看第0個圖片")
 tag = tags[0]
@@ -5866,13 +5714,19 @@ driver.get(url)
 
 email = driver.find_element_by_css_selector("#email")
 email.send_keys(email_address)
+
 time.sleep(0.5)
+
 passwd = driver.find_element_by_css_selector("#pass")
 passwd.send_keys(password)
+
 time.sleep(0.5)
+
 button = driver.find_element_by_css_selector("#loginbutton")
 button.click()
+
 time.sleep(5)
+
 soup = BeautifulSoup(driver.page_source, "lxml")
 tag_title = soup.find("title")
 print(tag_title.text)
@@ -5899,9 +5753,9 @@ print("------------------------------")  # 30個
 # 不使用 UserAgent 連接 momo 購物網
 
 url = "https://www.momoshop.com.tw/main/Main.jsp"
-r = requests.get(url)
-print(r.status_code)
-print(r.text)
+html_data = requests.get(url)
+print(html_data.status_code)
+print(html_data.text)
 
 print("---------------")  # 15個
 
@@ -5913,9 +5767,9 @@ ua = UserAgent()
 headers = {"user-agent": ua.random}
 
 url = "https://www.momoshop.com.tw/main/Main.jsp"
-r = requests.get(url, headers=headers)
-print(r.status_code)
-print(r.text)
+html_data = requests.get(url, headers=headers)
+print(html_data.status_code)
+print(html_data.text)
 
 print("------------------------------")  # 30個
 
@@ -5953,13 +5807,88 @@ for n in range(5):
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-addr = "https://tw.stock.yahoo.com/s/list.php?\
+print("BeautifulSoup 測試 58")
+url = "https://tw.stock.yahoo.com/quote/2330"  # 台積電 Yahoo 股市網址
+html_data = requests.get(url)  # 取得網頁內容
+
+soup = BeautifulSoup(html_data.text, "html.parser")  # 轉換內容
+
+print("找下一個標題<h1>")
+title = soup.find("h1")  # 找到 h1 的內容
+
+a = soup.select(".Fz(32px)")[0]  # 找到第一個 class 為 Fz(32px) 的內容  # 尋找class是Fz(32px)
+b = soup.select(".Fz(20px)")[0]  # 找到第一個 class 為 Fz(20px) 的內容  # 尋找class是Fz(20px)
+s = ""  # 漲或跌的狀態
+try:
+    # 如果 main-0-QuoteHeader-Proxy id 的 div 裡有 C($c-trend-down) 的 class
+    # 表示狀態為下跌
+    if soup.select("#main-0-QuoteHeader-Proxy")[0].select(".C($c-trend-down)")[0]:
+        s = "-"
+except:
+    try:
+        # 如果 main-0-QuoteHeader-Proxy id 的 div 裡有 C($c-trend-up) 的 class
+        # 表示狀態為上漲
+        if soup.select("#main-0-QuoteHeader-Proxy")[0].select(".C($c-trend-up)")[0]:
+            s = "+"
+    except:
+        # 如果都沒有包含，表示平盤
+        s = "-"
+
+print(f"{title.get_text()} : {a.get_text()} ( {s}{b.get_text()} )")  # 印出結果
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("BeautifulSoup 測試 59")
+
+from concurrent.futures import ThreadPoolExecutor
+
+# 建立要抓取的股票網址清單
+stock_urls = [
+    "https://tw.stock.yahoo.com/quote/2330",
+    "https://tw.stock.yahoo.com/quote/0050",
+    "https://tw.stock.yahoo.com/quote/2317",
+    "https://tw.stock.yahoo.com/quote/6547",
+]
+
+
+# 將剛剛的抓取程式變成「函式」
+def getStock(url):
+    html_data = requests.get(url)
+    soup = BeautifulSoup(html_data.text, "html.parser")
+    print("找下一個標題<h1>")
+    title = soup.find("h1")
+    a = soup.select(".Fz(32px)")[0]  # 尋找class是Fz(32px)
+    b = soup.select(".Fz(20px)")[0]  # 尋找class是Fz(20px)
+    s = ""
+    try:
+        if soup.select("#main-0-QuoteHeader-Proxy")[0].select(".C($c-trend-down)")[0]:
+            s = "-"
+    except:
+        try:
+            if soup.select("#main-0-QuoteHeader-Proxy")[0].select(".C($c-trend-up)")[0]:
+                s = "+"
+        except:
+            state = ""
+    print(f"{title.get_text()} : {a.get_text()} ( {s}{b.get_text()} )")
+
+
+executor = ThreadPoolExecutor()  # 建立非同步的多執行緒的啟動器
+with ThreadPoolExecutor() as executor:
+    executor.map(getStock, stock_urls)  # 開始同時爬取股價
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+url = "https://tw.stock.yahoo.com/s/list.php?\
 c=%A8%E4%A5%A6%B9q%A4l&rr=0.84235400%201556957344"
 
 # 取得網頁原始程式碼
-res = requests.get(addr).text
+res = requests.get(url).text
+
 # 以html.parser解析程式解析程式碼
 soup = BeautifulSoup(res, "html.parser")
+
 # 以<tr>並配合屬性取得表格中每列內容
 rows = soup.find_all("tr", {"height": "30"})
 
@@ -5975,17 +5904,68 @@ for row in rows:
             print(cols[item], end=" ")
         print()  # 換行
 
+print("------------------------------------------------------------")  # 60個
+
+print("BeautifulSoup 測試 44")
+# 讀取網頁中的表格
+
+url = "https://tw.stock.yahoo.com/s/list.php?\
+c=%A8%E4%A5%A6%B9q%A4l&rr=0.84235400%201556957344"
+
+# 取得網頁原始程式碼
+res = requests.get(url).text
+
+# 以html.parser解析程式解析程式碼
+soup = BeautifulSoup(res, "html.parser")
+
+# 以<tr>並配合屬性取得表格中每列內容
+
+print("找全部的xx<tr> + 條件")
+rows = soup.find_all("tr", {"height": "30"})
+
+# 印出要查詢資料各欄位名稱
+print("代號 名稱  時間  成交  買進   賣出  漲跌   張數   昨收   開盤  最高  最低")
+# 讀取每列的內容，找出<td>
+for row in rows:
+    if row.find("td"):
+        # 屬性stripped_strings去餘每欄中字串的空白符號
+        cols = [item for item in row.stripped_strings]
+        # 讀取List物件的元素
+        for item in range(0, len(cols)):
+            print(cols[item], end=" ")
+        print("---------------")  # 15個
+
+print("------------------------------------------------------------")  # 60個
+
+# foreign.py
+
+url = "https://tw.stock.yahoo.com/d/i/fgbuy_tse.html"
+
+res = requests.get(url).text
+print(res)
+
+soup = BeautifulSoup(res, "html.parser")
+
+# 以<tr>並配合屬性取得表格中每列內容
+rows = soup.find_all("tr", {"bgcolor": "#FFFFFF"})
+
+# 印出要查詢資料各欄位名稱
+print("名 次 股票代號/名稱  成交價  漲　跌  買超張數  外資持股張數  外資持股比率")
+
+# 讀取每列的內容，找出<td>
+for row in rows:
+    if row.find("td"):
+        # 屬性stripped_strings去餘每欄中字串的空白符號
+        cols = [item for item in row.stripped_strings]
+        # 讀取List物件的元素
+        for item in range(0, len(cols)):
+            print(cols[item], end=" ")
+        print()  # 換行
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 soup = BeautifulSoup(html_data.text.encode("utf-8"), "html.parser")
-
 
 from concurrent.futures import ThreadPoolExecutor
 
@@ -6003,5 +5983,15 @@ executor = ThreadPoolExecutor()  # 建立非同步的多執行緒的啟動器
 with ThreadPoolExecutor() as executor:
     executor.map(thread1, my_list)  # 同時下載圖片
 
-
 # url = "https://data.kcg.gov.tw/dataset/6f29f6f4-2549-4473-aa90-bf60d10895dc/resource/30dfc2cf-17b5-4a40-8bb7-c511ea166bd3/download/lightrailtraffic.json"
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個

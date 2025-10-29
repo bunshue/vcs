@@ -35,5 +35,24 @@ namespace vcs_TreeView1
 
             
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //TreeView全展開
+            treeView1.ExpandAll();
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //TreeView全摺疊
+            treeView1.CollapseAll();
+
+        }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button0 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -62,6 +63,10 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.lb_main_mesg0 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.刪除項目ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lb_main_mesg1 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button0
@@ -401,6 +406,7 @@
             // 
             // listView1
             // 
+            this.listView1.ContextMenuStrip = this.contextMenuStrip1;
             this.listView1.Location = new System.Drawing.Point(450, 5);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(150, 150);
@@ -424,13 +430,39 @@
             this.lb_main_mesg0.Name = "lb_main_mesg0";
             this.lb_main_mesg0.Size = new System.Drawing.Size(78, 24);
             this.lb_main_mesg0.TabIndex = 140;
-            this.lb_main_mesg0.Text = "mesg1";
+            this.lb_main_mesg0.Text = "mesg0";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.刪除項目ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(123, 26);
+            // 
+            // 刪除項目ToolStripMenuItem
+            // 
+            this.刪除項目ToolStripMenuItem.Name = "刪除項目ToolStripMenuItem";
+            this.刪除項目ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.刪除項目ToolStripMenuItem.Text = "刪除項目";
+            this.刪除項目ToolStripMenuItem.Click += new System.EventHandler(this.刪除項目ToolStripMenuItem_Click);
+            // 
+            // lb_main_mesg1
+            // 
+            this.lb_main_mesg1.AutoSize = true;
+            this.lb_main_mesg1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg1.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg1.Location = new System.Drawing.Point(450, 206);
+            this.lb_main_mesg1.Name = "lb_main_mesg1";
+            this.lb_main_mesg1.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg1.TabIndex = 142;
+            this.lb_main_mesg1.Text = "mesg1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(895, 659);
+            this.Controls.Add(this.lb_main_mesg1);
             this.Controls.Add(this.lb_main_mesg0);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.listView1);
@@ -468,6 +500,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -509,6 +542,9 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label lb_main_mesg0;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 刪除項目ToolStripMenuItem;
+        private System.Windows.Forms.Label lb_main_mesg1;
     }
 }
 

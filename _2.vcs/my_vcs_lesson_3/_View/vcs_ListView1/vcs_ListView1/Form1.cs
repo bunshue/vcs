@@ -7,7 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;//for Path, Directory
+using System.IO;//for Path, Directory, 聲明與文件的輸入輸出流有關的命名空間
+
+//ListView 搭配 contextMenuStrip 右鍵選單
+
+//使ListView控制元件中的選擇項目以高亮度方式顯示
 
 //各種 listView 之 加入資料
 
@@ -34,11 +38,14 @@ namespace vcs_ListView1
 
         void show_item_location()
         {
+            //listView1的共同設定
+            //listView1.ContextMenuStrip = contextMenuStrip1;
             listView1.KeyDown += new KeyEventHandler(listView1_KeyDown);
             listView1.MouseMove += new MouseEventHandler(listView1_MouseMove);
+            listView1.MouseClick += new MouseEventHandler(listView1_MouseClick);
+
             listView1.Size = new Size(600, 600);
             richTextBox1.Size = new Size(300, 600);
-
             this.Size = new Size(1430, 700);
 
             int x_st = 10;
@@ -78,11 +85,19 @@ namespace vcs_ListView1
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
             lb_main_mesg0.Location = new Point(x_st + dx * 3, y_st + dy * 9 + 24);
             lb_main_mesg0.Text = "";
+            lb_main_mesg1.Location = new Point(x_st + dx * 6, y_st + dy * 9 + 18);
+            lb_main_mesg1.Text = "listView1 屬性 的 ContextMenuStrip\n加 contextMenuStrip1";
 
             listView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void listView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            richTextBox1.Text += "aaaa\n";
+            listView1.SelectedItems[0].ForeColor = Color.Red;//設置當前選擇項為紅色
         }
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)
@@ -153,6 +168,8 @@ namespace vcs_ListView1
             apply_listView00();
 
             listView1.MultiSelect = true;// 是否允許多行選擇
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -418,8 +435,7 @@ namespace vcs_ListView1
             listView1.SizeColumns(-2);
 
             // Make the form big enough to show the ListView.
-            Rectangle item_rect =
-                listView1.GetItemRect(listView1.Items.Count - 1);
+            Rectangle item_rect = listView1.GetItemRect(listView1.Items.Count - 1);
             this.ClientSize = new Size(
                 item_rect.Left + item_rect.Width + 25,
                 item_rect.Top + item_rect.Height + 75);
@@ -647,6 +663,28 @@ namespace vcs_ListView1
 
         private void apply_listView08()
         {
+            //使ListView控制元件中的選擇項目以高亮度方式顯示
+
+            listView1.View = View.Details;  //定義列表顯示的方式
+
+            listView1.GridLines = true;//設置是否在listView1控件中顯示網格線
+            //listView1.Dock = DockStyle.Fill;//設置listView1控件在其父容器中的停靠方式
+            listView1.Columns.Add("文件名稱", 120, HorizontalAlignment.Left);//在listView1中添加「文件名稱」列
+            listView1.Columns.Add("文件屬性", 210, HorizontalAlignment.Left);//在listView1中添加「文件屬性」列
+            listView1.Columns.Add("創建時間", 200, HorizontalAlignment.Left);//在listView1中添加「創建時間」列
+
+            //撈出一層
+            string foldername = @"D:\_git\vcs\_1.data\______test_files3\DrAP_test";
+            foreach (String fileName in Directory.GetFiles(foldername))
+            {
+                richTextBox1.Text += fileName + "\n";
+                FileInfo file = new FileInfo(fileName);//聲明一個操作文件的實例
+                ListViewItem OptionItem = new ListViewItem(file.Name);//實例化一個listView控件中選擇項的實例
+                OptionItem.SubItems.Add(file.Attributes.ToString());//在listView控件中添加文件屬性列
+                OptionItem.SubItems.Add(file.CreationTime.ToString());//在listView控件中文件創建時間列
+                listView1.Items.Add(OptionItem);//向listView控件中追加新添加的各列
+            }
+            listView1.HideSelection = true;//設置控件的高亮顯示屬性為true
         }
 
         void apply_listView09()
@@ -972,14 +1010,6 @@ namespace vcs_ListView1
             // Size the columns.    //欄位對齊資料
             //listView1.SizeColumnsToFitData();
 
-            /*
-            // Make the form big enough to show the ListView.
-            Rectangle item_rect =
-                listView1.GetItemRect(listView1.Columns.Count - 1);
-            this.SetClientSizeCore(
-                item_rect.Left + item_rect.Width + 50,
-                item_rect.Top + item_rect.Height + 75);
-            */
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -1022,22 +1052,11 @@ namespace vcs_ListView1
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //TBD
             richTextBox1.Text += "依第一欄排列\n";
             richTextBox1.Text += "遞增\n";
 
-            // Create a comparer.
-            listView1.ListViewItemSorter = new ListViewAllColumnComparer(SortOrder.Ascending);
-
             listView1.Sort();
-
-            /*
-            richTextBox1.Text += "遞減\n";
-
-            // Create a comparer.
-            listView1.ListViewItemSorter = new ListViewAllColumnComparer(SortOrder.Descending);
-
-            listView1.Sort();
-            */
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -1116,39 +1135,25 @@ namespace vcs_ListView1
             if (type == 0)
             {
                 richTextBox1.Text += "無排序\n";
-                listView1.View = View.Details;  //定義列表顯示的方式
+                listView1.SetSortMode(ListViewExtensions.SortMode.SortNone);
             }
             else if (type == 1)
             {
                 richTextBox1.Text += "Sort on all columns\n";
-                listView1.View = View.LargeIcon;  //定義列表顯示的方式
+                listView1.SetSortMode(ListViewExtensions.SortMode.SortOnAllColumns);
             }
             else if (type == 2)
             {
                 richTextBox1.Text += "Sort on clicked columns\n";
-                listView1.View = View.List;  //定義列表顯示的方式
-            }
-            else if (type == 3)
-            {
-                richTextBox1.Text += "View.SmallIcon\n";
-                listView1.View = View.SmallIcon;  //定義列表顯示的方式
-            }
-            else if (type == 4)
-            {
-                richTextBox1.Text += "View.Tile\n";
-                listView1.View = View.Tile;  //定義列表顯示的方式
+                listView1.SetSortMode(ListViewExtensions.SortMode.SortOnClickedColumn);
             }
             else
             {
                 richTextBox1.Text += "xxxxxxxx\n";
             }
             type++;
-            if (type > 4)
+            if (type > 2)
                 type = 0;
-
-
-
-
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -1391,14 +1396,11 @@ namespace vcs_ListView1
 
             listView1.Sorting = SortOrder.Ascending;
 
-            listView1.ListViewItemSorter = new ListViewAllColumnComparer(SortOrder.Ascending);
-            listView1.Sort();
-            listView1.ListViewItemSorter = new ListViewAllColumnComparer(SortOrder.Descending);
-            listView1.Sort();
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
+            int i;
             //讀取ListView資料
             richTextBox1.Text += "讀取ListView資料\n";
 
@@ -1416,7 +1418,48 @@ namespace vcs_ListView1
             richTextBox1.Text += "共有 : " + C.ToString() + " 欄\n";
             richTextBox1.Text += "共有 : " + R.ToString() + " 列\n";
 
-            int i;
+            for (i = 0; i < R; i++)
+            {
+                Rectangle item_rect = listView1.GetItemRect(i);   //找出listview的周框 列
+                richTextBox1.Text += "第 " + i.ToString() + " 列 : ";
+                richTextBox1.Text += item_rect + "\n";
+                richTextBox1.Text += item_rect.X.ToString() + "\t";
+                richTextBox1.Text += item_rect.Y.ToString() + "\t";
+                richTextBox1.Text += item_rect.Width.ToString() + "\t";
+                richTextBox1.Text += item_rect.Height.ToString() + "\t";
+                richTextBox1.Text += item_rect.Left.ToString() + "\t";
+                richTextBox1.Text += item_rect.Right.ToString() + "\t";
+                richTextBox1.Text += item_rect.Top.ToString() + "\t";
+                richTextBox1.Text += item_rect.Bottom.ToString() + "\t";
+                richTextBox1.Text += item_rect.Size.ToString() + "\n";
+            }
+
+            richTextBox1.Text += "列換色\n";
+
+            if (R > 0)
+            {
+                for (i = 0; i < R; i++)
+                {
+                    if ((i % 3) == 0)
+                    {
+                        listView1.Items[i].BackColor = Color.Red;
+                    }
+                    else if ((i % 3) == 1)
+                    {
+                        listView1.Items[i].BackColor = Color.Green;
+                    }
+                    else
+                    {
+                        listView1.Items[i].BackColor = Color.Blue;
+                    }
+                }
+            }
+
+            if (listView1.SelectedItems.Count > 0)
+            {
+                //listView1.SelectedItems[0].Remove();刪除列項目
+            }
+
             //欄資訊
             for (i = 0; i < C; i++)
             {
@@ -1514,8 +1557,22 @@ namespace vcs_ListView1
         {
             listView1.Clear();
         }
+
+        private void 刪除項目ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按了 刪除項目\n";
+
+            if (listView1.SelectedItems.Count != 0)//當listView1控件中的選擇項不為0時
+            {
+                for (int i = 0; i < listView1.SelectedItems.Count; i++)//循環遍歷控件中的每一個選擇項
+                {
+                    richTextBox1.Text += "你選擇了 : " + listView1.SelectedItems[i].Text + "\n";
+                }
+            }
+        }
     }
 }
+
 
 /*
 ListView 之 排序
@@ -1541,4 +1598,6 @@ listView1.Font = new Font("Microsoft Sans Serif", 12.75F, FontStyle.Regular, Gra
 //listView1.HeaderStyle = ColumnHeaderStyle.Nonclickable;
 
 */
+
+
 
