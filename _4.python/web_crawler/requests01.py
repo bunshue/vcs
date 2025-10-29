@@ -78,6 +78,9 @@ def get_html_data_from_url(url):
     return html_data.text
 
 
+cookies = {"over18": "1"}
+
+'''
 print("------------------------------------------------------------")  # 60個
 
 print("Response 物件資訊")
@@ -262,8 +265,8 @@ fo.close()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("測試 cookies over18, 無 cookies 抓網頁")
+'''
+print("無 cookies, 無 headers, 抓網頁")
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 url = "https://www.ptt.cc/bbs/Beauty/M.1707360497.A.39D.html"
@@ -276,13 +279,12 @@ response = requests.get(url)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("測試 cookies over18, 有 cookies 抓網頁")
+print("有 cookies, 無 headers, 抓網頁")
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 url = "https://www.ptt.cc/bbs/Beauty/M.1707360497.A.39D.html"
 
 print("有 cookies 可以抓到網頁資料")
-cookies = {"over18": "1"}
 response = requests.get(url, cookies=cookies)
 
 # print(response.text)  # HTML網頁內容
@@ -290,15 +292,33 @@ response = requests.get(url, cookies=cookies)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("有 cookies, 有 headers, 抓網頁")
+
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
 }
-cookies = {"over18": "1"}
 
 response = requests.get(url, cookies=cookies, headers=headers)
 
 # print(response.text)  # HTML網頁內容
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("requests 測試 11 對網頁資料處理 尋找單字出現次數")
+
+url = "https://www.ptt.cc/bbs/hotboards.html"
+html_data_text = get_html_data_from_url(url)
+
+lines = html_data_text.splitlines()  # 將網頁資料一行一行地分割成串列
+
+n = 0
+for line in lines:
+    if "音樂" in line:
+        n += 1
+
+print("找到 {} 次!".format(n))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -746,13 +766,15 @@ def get_data():
 
 def crawl_data(date, symbol):
     # 下載股價
-    r = requests.get(
+    response = requests.get(
         "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="
         + date
         + "&type=ALL"
     )
 
-    r_text = [i for i in r.text.split("\n") if len(i.split('",')) == 17 and i[0] != "="]
+    r_text = [
+        i for i in response.text.split("\n") if len(i.split('",')) == 17 and i[0] != "="
+    ]
     df = pd.read_csv(StringIO("\n".join(r_text)), header=0)
 
     df = df.drop(columns=["Unnamed: 16"])
@@ -763,18 +785,14 @@ def crawl_data(date, symbol):
 
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-""" no module
-import crawler_module as m
 
 all_list = []
-stock_symbol, dates = m.get_data()
+stock_symbol, dates = get_data()
 
 for date in dates:
     time.sleep(5)
     try:
-        crawler_data = m.crawl_data(date, stock_symbol)
+        crawler_data = crawl_data(date, stock_symbol)
         all_list.append(crawler_data[0])
         df_columns = crawler_data[1]
         print("  OK!  date = " + date + " ,stock symbol = " + stock_symbol)
@@ -801,17 +819,14 @@ plt.legend(loc="best", fontsize=20)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-import crawler_module as m
 
 all_list = []
-stock_symbol, dates = m.get_data()
+stock_symbol, dates = get_data()
 
 for date in dates:
     time.sleep(5)
     try:
-        crawler_data = m.crawl_data(date, stock_symbol)
+        crawler_data = crawl_data(date, stock_symbol)
         all_list.append(crawler_data[0])
         df_columns = crawler_data[1]
         print("  OK!  date = " + date + " ,stock symbol = " + stock_symbol)
@@ -828,8 +843,7 @@ close = all_df["收盤價"].astype(float)
 # step 2 create plot
 fig, (ax, ax2) = plt.subplots(2, 1, sharex=True, figsize=(12, 8), dpi=100)
 plt.rcParams["font.sans-serif"] = ["Microsoft JhengHei"]
-ax.set_title(stock_symbol+"  開盤價、收盤價 ( " +
-             dates[0] + " ~ " + dates[-1] + " )")
+ax.set_title(stock_symbol + "  開盤價、收盤價 ( " + dates[0] + " ~ " + dates[-1] + " )")
 
 # step 3 plot 子圖(ax)
 ax.plot(day, openprice, "s-", color="r", label="Open Price")
@@ -843,20 +857,18 @@ ax2.set_xticklabels(day[::5])
 
 # step 4 show plot
 plt.show()
-"""
-print("------------------------------------------------------------")  # 60個
+
 print("------------------------------------------------------------")  # 60個
 
-import crawler_module as m
 import mplfinance as mpf
 
 all_list = []
-stock_symbol, dates = m.get_data()
+stock_symbol, dates = get_data()
 
 for date in dates:
     time.sleep(5)
     try:
-        crawler_data = m.crawl_data(date, stock_symbol)
+        crawler_data = crawl_data(date, stock_symbol)
         all_list.append(crawler_data[0])
         df_columns = crawler_data[1]
         print("  OK!  date = " + date + " ,stock symbol = " + stock_symbol)
@@ -1231,23 +1243,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("對抓取到的網頁資料做處理")
-print("------------------------------------------------------------")  # 60個
-
-print("requests 測試 11 對網頁資料處理 尋找單字出現次數")
-
-url = "https://www.ptt.cc/bbs/hotboards.html"
-html_data_text = get_html_data_from_url(url)
-
-lines = html_data_text.splitlines()  # 將網頁資料一行一行地分割成串列
-
-n = 0
-for line in lines:
-    if "音樂" in line:
-        n += 1
-
-print("找到 {} 次!".format(n))
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("requests 測試 22")
@@ -2062,13 +2057,6 @@ else:
     print("錯誤! HTTP請求失敗...")
 
 print("------------------------------------------------------------")  # 60個
-
-url = "https://www.ptt.cc/bbs/Gossiping/index.html"
-
-cookies = {"over18": "1"}
-r = requests.get(url, cookies=cookies)
-print(r.text)
-
 print("------------------------------------------------------------")  # 60個
 
 """ fail chromedriver
@@ -2114,14 +2102,14 @@ print("------------------------------------------------------------")  # 60個
 
 url = "https://www.taifex.com.tw/cht/3/totalTableDate"
 post_data = "queryType=1&goDay=&doQuery=1&dateaddcnt=&queryDate=2020%2F08%2F07"
-r = requests.post(url, data=post_data)
-print(r.text)
+response = requests.post(url, data=post_data)
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
 url = "https://api.sgx.com/derivatives/v1.0/contract-code/TW?order=asc&orderby=delivery-month&category=futures&session=-1&t=1596956628001&showTAICTrades=false"
-r = requests.get(url)
-print(r.text)
+response = requests.get(url)
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2157,8 +2145,8 @@ def email_alert(first, second=None, third=None):
     for key, val in data.items():
         if val:
             url = url + key + "=" + str(val) + "&"
-    r = requests.get(url)
-    if r.status_code == 200:
+    response = requests.get(url)
+    if response.status_code == 200:
         print("已經寄送郵件通知...")
     else:
         print("錯誤! 寄送郵件通知失敗...")
@@ -2179,8 +2167,8 @@ def email_alert(first, second=None, third=None):
     data["value1"] = first
     data["value2"] = second
     data["value3"] = third
-    r = requests.post(url, data=data)
-    if r.status_code == 200:
+    response = requests.post(url, data=data)
+    if response.status_code == 200:
         print("已經寄送郵件通知...")
     else:
         print("錯誤! 寄送郵件通知失敗...")
@@ -2197,9 +2185,9 @@ headers = {
     "Content-Type": "application/x-www-form-urlencoded"
 }
 params = {"message": "Python程式送出測試通知訊息"}
-r = requests.post("https://notify-api.line.me/api/notify",
+response = requests.post("https://notify-api.line.me/api/notify",
                    headers=headers, params=params)  
-if r.status_code == 200:
+if response.status_code == 200:
     print("已經送出通知訊息...")
 else:
     print("錯誤! 寄送通知訊息失敗...")
@@ -2438,9 +2426,9 @@ print("------------------------------------------------------------")  # 60個
 
 # 設定查詢目前IP的api網址
 url = "https://api.ipify.org"
-r = requests.get(url)
+response = requests.get(url)
 
-print("我目前的IP是：", r.text)
+print("我目前的IP是：", response.text)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2568,57 +2556,57 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 檢查回應狀態碼
-r = requests.get("http://www.google.com")
-print(r.status_code)
-print(r.status_code == requests.codes.ok)
-r = requests.get("http://www.google.com/404")
-print(r.status_code)
-print(r.status_code == requests.codes.ok)
-r = requests.get("http://www.google.com")
-print(r.status_code)
-print(r.status_code == requests.codes.all_good)
+response = requests.get("http://www.google.com")
+print(response.status_code)
+print(response.status_code == requests.codes.ok)
+
+response = requests.get("http://www.google.com/404")
+print(response.status_code)
+print(response.status_code == requests.codes.ok)
+
+response = requests.get("http://www.google.com")
+print(response.status_code)
+print(response.status_code == requests.codes.all_good)
 
 print("------------------------------")  # 30個
 
 # 取得HTTP標頭
-r = requests.get("http://www.google.com")
-print(r.headers["Content-Type"])
-# print(r.headers['Content-Length'])
-print(r.headers["Date"])
-print(r.headers["Server"])
+response = requests.get("http://www.google.com")
+print(response.headers["Content-Type"])
+# print(response.headers['Content-Length'])
+print(response.headers["Date"])
+print(response.headers["Server"])
 
 print("------------------------------")  # 30個
 
 # 取得HTTP標頭
-r = requests.get("http://www.google.com")
-print(r.headers.get("Content-Type"))
-print(r.headers.get("Content-Length"))
-print(r.headers.get("Date"))
-print(r.headers.get("Server"))
+response = requests.get("http://www.google.com")
+print(response.headers.get("Content-Type"))
+print(response.headers.get("Content-Length"))
+print(response.headers.get("Date"))
+print(response.headers.get("Server"))
 
 print("------------------------------")  # 30個
 
 # 送出Cookie的HTTP請求
 url = "http://httpbin.org/cookies"
 cookies = dict(name="Joe Chen")
-r = requests.get(url, cookies=cookies)
-print(r.text)
+response = requests.get(url, cookies=cookies)
+print(response.text)
 
 print("------------------------------")  # 30個
 
 url = "http://httpbin.org/user-agent"
-r = requests.get(url)
-print(r.text)
+response = requests.get(url)
+print(response.text)
 
 print("------------------------------")  # 30個
-
 
 url_headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
 }
-r = requests.get(url, headers=url_headers)
-print(r.text)
-
+response = requests.get(url, headers=url_headers)
+print(response.text)
 
 print("------------------------------")  # 30個
 
@@ -2626,12 +2614,12 @@ print("------------------------------")  # 30個
 print("------------------------------")  # 30個
 
 url = "https://api.github.com/user"
-r = requests.get(url, auth=("hueyan@ms2.hinet.net", "********"))
-if r.status_code == requests.codes.ok:
-    print(r.headers["Content-Type"])
-    print(r.json())
+response = requests.get(url, auth=("hueyan@ms2.hinet.net", "********"))
+if response.status_code == requests.codes.ok:
+    print(response.headers["Content-Type"])
+    print(response.json())
 else:
-    print("HTTP請求錯誤..." + str(r.status_code))
+    print("HTTP請求錯誤..." + str(response.status_code))
 
 print("------------------------------")  # 30個
 
@@ -2657,8 +2645,8 @@ print("------------------------------")  # 30個
 
 # 指定請求時間
 try:
-    r = requests.get("http://www.google.com", timeout=0.03)
-    print(r.text)
+    response = requests.get("http://www.google.com", timeout=0.03)
+    print(response.text)
 except requests.exceptions.Timeout as ex:
     print("錯誤: HTTP請求已經超過時間...\n" + str(ex))
 
@@ -2668,9 +2656,9 @@ print("------------------------------")  # 30個
 # 建立Requests的例外處理
 url = "http://www.google.com/404"
 try:
-    r = requests.get(url, timeout=3)
-    r.raise_for_status()
-    print(r)
+    response = requests.get(url, timeout=3)
+    response.raise_for_status()
+    print(response)
 except requests.exceptions.RequestException as ex1:
     print("Http請求錯誤: " + str(ex1))
 except requests.exceptions.HTTPError as ex2:
@@ -2683,10 +2671,10 @@ except requests.exceptions.Timeout as ex4:
 print("------------------------------")  # 30個
 
 # 將取得的回應內容寫成檔案
-r = requests.get("http://www.google.com")
-r.encoding = "utf-8"
+response = requests.get("http://www.google.com")
+response.encoding = "utf-8"
 fp = open("test.txt", "w", encoding="utf8")
-fp.write(r.text)
+fp.write(response.text)
 print("寫入檔案test.txt...")
 fp.close()
 

@@ -148,7 +148,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(140, 60);
             this.button2.TabIndex = 106;
-            this.button2.Text = "建立listView 2";
+            this.button2.Text = "二維陣列轉ListView";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -214,7 +214,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(140, 60);
             this.button12.TabIndex = 120;
-            this.button12.Text = "建立listView 12";
+            this.button12.Text = "各種排序1";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -329,6 +329,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(140, 60);
             this.button23.TabIndex = 131;
+            this.button23.Text = "各種排序2";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -350,6 +351,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(140, 60);
             this.button25.TabIndex = 133;
+            this.button25.Text = "各種欄寬設定";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 

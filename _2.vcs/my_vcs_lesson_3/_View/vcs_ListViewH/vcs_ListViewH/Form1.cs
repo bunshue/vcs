@@ -82,14 +82,6 @@ namespace vcs_ListViewH
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)
         {
-            //listView接受鍵盤的Delete鍵
-            if (e.KeyCode == Keys.Delete)
-            {
-                if (listView1.SelectedItems.Count > 0)
-                {
-                    listView1.SelectedItems[0].Remove();
-                }
-            }
         }
     }
 }

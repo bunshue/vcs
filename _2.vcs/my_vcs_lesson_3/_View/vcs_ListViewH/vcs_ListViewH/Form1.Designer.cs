@@ -79,7 +79,7 @@
             this.listView1.FullRowSelect = true;
             this.listView1.Location = new System.Drawing.Point(0, 21);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(577, 225);
+            this.listView1.Size = new System.Drawing.Size(916, 494);
             this.listView1.TabIndex = 7;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -89,7 +89,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(577, 246);
+            this.ClientSize = new System.Drawing.Size(916, 515);
             this.Controls.Add(this.radNoSort);
             this.Controls.Add(this.radSortAllColumns);
             this.Controls.Add(this.radSortClickedColumn);

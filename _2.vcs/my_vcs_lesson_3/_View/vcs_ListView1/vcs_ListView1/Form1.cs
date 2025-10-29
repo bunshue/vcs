@@ -34,6 +34,7 @@ namespace vcs_ListView1
 
         void show_item_location()
         {
+            listView1.KeyDown += new KeyEventHandler(listView1_KeyDown);
             listView1.MouseMove += new MouseEventHandler(listView1_MouseMove);
             listView1.Size = new Size(600, 600);
             richTextBox1.Size = new Size(300, 600);
@@ -75,13 +76,25 @@ namespace vcs_ListView1
             button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            lb_main_mesg0.Location = new Point(x_st + dx * 3, y_st + dy * 9+24);
+            lb_main_mesg0.Location = new Point(x_st + dx * 3, y_st + dy * 9 + 24);
             lb_main_mesg0.Text = "";
 
             listView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void listView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            //listView接受鍵盤的Delete鍵
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (listView1.SelectedItems.Count > 0)
+                {
+                    listView1.SelectedItems[0].Remove();
+                }
+            }
         }
 
         private void listView1_MouseMove(object sender, MouseEventArgs e)
@@ -98,6 +111,7 @@ namespace vcs_ListView1
             C = item.SubItems.IndexOf(hti.SubItem);
             */
 
+            /*
             //方法二 : Use HitTest.
             ListViewHitTestInfo hti = listView1.HitTest(e.Location);
             if (hti.Item == null) return;
@@ -113,18 +127,16 @@ namespace vcs_ListView1
                     C = i;
                 }
             }
+            */
 
-            /*
-            // Method 1: Use the FindListViewRowColumn method.
+            //方法三 : Use the FindListViewRowColumn method.
             int row, column;
             if (listView1.FindListViewRowColumn(e.X, e.Y, out row, out column))
             {
-                txtRow.Text = row.ToString();
-                txtColumn.Text = column.ToString();
+                R = row;
+                C = column;
             }
-            */
-            //richTextBox1.Text += "R = " + R.ToString() + ", C = " + C.ToString() + "\n";
-            lb_main_mesg0.Text = "R = " + R.ToString() + ", C = " + C.ToString();
+            lb_main_mesg0.Text = "第 " + R.ToString() + " 列, 第 " + C.ToString() + " 欄, (不含欄位, 從0起算)";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -152,7 +164,7 @@ namespace vcs_ListView1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "建立listView 2\n";
+            richTextBox1.Text += "建立listView 2 二維陣列轉ListView\n";
             listView1.Clear();
             apply_listView02();
         }
@@ -321,6 +333,9 @@ namespace vcs_ListView1
 
             //加入項目(列資料)
             apply_data();
+            apply_data();
+            apply_data();
+            apply_data();
         }
 
         void apply_listView01()
@@ -356,8 +371,60 @@ namespace vcs_ListView1
             apply_data();
         }
 
+        // Copy a two-dimensional array of data into a ListView.
+        private void CopyArrayToListView(ListView lvw, string[,] data)
+        {
+            int max_row = data.GetUpperBound(0);
+            int max_col = data.GetUpperBound(1);
+            for (int row = 0; row <= max_row; row++)
+            {
+                ListViewItem new_item = lvw.Items.Add(data[row, 0]);
+                for (int col = 1; col <= max_col; col++)
+                {
+                    new_item.SubItems.Add(data[row, col]);
+                }
+            }
+        }
+
         void apply_listView02()
         {
+            // Remove any existing items.
+            listView1.Items.Clear();
+
+            // Create some data.
+            // Name, URL, ISBN, pages, year.
+            string[,] data =
+            {
+                { "mouse", "米老鼠", "3"},
+                { "ox", "班尼牛", "48"},
+                { "tiger", "跳跳虎", "33"},
+                { "rabbit", "彼得兔", "8"},
+            };
+
+            // Make the ListView's column headers.
+            listView1.Columns.Clear();
+            listView1.Columns.Add("英文名", 200);
+            listView1.Columns.Add("中文名", 200);
+            listView1.Columns.Add("體重", 100, HorizontalAlignment.Right);
+
+            // Add the data.
+            CopyArrayToListView(listView1, data);
+
+            // Display the details view.
+            listView1.View = View.Details;
+
+            /* 自動格式化listView
+            // Size the columns to fit the data and colummn headers.
+            listView1.SizeColumns(-2);
+
+            // Make the form big enough to show the ListView.
+            Rectangle item_rect =
+                listView1.GetItemRect(listView1.Items.Count - 1);
+            this.ClientSize = new Size(
+                item_rect.Left + item_rect.Width + 25,
+                item_rect.Top + item_rect.Height + 75);
+            */
+
 
         }
 
@@ -779,7 +846,7 @@ namespace vcs_ListView1
             }
 
             //設置ListView最後一行可見
-            listView1.Items[R - 1].EnsureVisible();
+            //listView1.Items[R - 1].EnsureVisible();
         }
 
         //--------------------------------------------------------------------------------------------------------------------
@@ -801,9 +868,118 @@ namespace vcs_ListView1
             test_listView11();
         }
 
+
         private void button12_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "xxx\n";
+            richTextBox1.Text += "測試各種排序\n";
+
+            listView1.Columns.Clear();
+
+            //listView檢視方法
+            listView1.View = View.Details;
+
+            //listView製作標題
+            listView1.Columns.Add("Title", -1, HorizontalAlignment.Left);
+            listView1.Columns.Add("URL", -1, HorizontalAlignment.Left);
+            listView1.Columns.Add("ISBN", -1, HorizontalAlignment.Left);
+            listView1.Columns.Add("Picture", -1, HorizontalAlignment.Left);
+            listView1.Columns.Add("Pages", -1, HorizontalAlignment.Right);
+            listView1.Columns.Add("Year", -1, HorizontalAlignment.Right);
+            listView1.Columns.Add("Pub Date", -1, HorizontalAlignment.Right);
+
+            // Remove any existing items.
+            listView1.Items.Clear();
+
+            // Make the item.
+            ListViewItem item = listView1.Items.Add("Ready-to-Run Visual Basic Algorithms");
+            item.SubItems.Add("http://www.vb-helper.com/vba.htm");
+            item.SubItems.Add("0-471-24268-3");
+            item.SubItems.Add("http://www.vb-helper.com/vba.jpg");
+            item.SubItems.Add("395");
+            item.SubItems.Add("1998");
+            item.SubItems.Add("1/5/1998");
+
+            item = listView1.Items.Add("Visual Basic Graphics Programming");
+            item.SubItems.Add("http://www.vb-helper.com/vbgp.htm");
+            item.SubItems.Add("0-472-35599-2");
+            item.SubItems.Add("http://www.vb-helper.com/vbgp.jpg");
+            item.SubItems.Add("712");
+            item.SubItems.Add("2000");
+            item.SubItems.Add("2/2/2000");
+
+            item = listView1.Items.Add("Advanced Visual Basic Techniques");
+            item.SubItems.Add("http://www.vb-helper.com/avbt.htm");
+            item.SubItems.Add("0-471-18881-6");
+            item.SubItems.Add("http://www.vb-helper.com/avbt.jpg");
+            item.SubItems.Add("440");
+            item.SubItems.Add("1997");
+            item.SubItems.Add("3/3/1997");
+
+            item = listView1.Items.Add("Custom Controls Library");
+            item.SubItems.Add("http://www.vb-helper.com/ccl.htm");
+            item.SubItems.Add("0-471-24267-5");
+            item.SubItems.Add("http://www.vb-helper.com/ccl.jpg");
+            item.SubItems.Add("684");
+            item.SubItems.Add("1998");
+            item.SubItems.Add("10/10/1998");
+
+            item = listView1.Items.Add("Ready-to-Run Delphi Algorithms");
+            item.SubItems.Add("http://www.vb-helper.com/da.htm");
+            item.SubItems.Add("0-471-25400-2");
+            item.SubItems.Add("http://www.vb-helper.com/da.jpg");
+            item.SubItems.Add("398");
+            item.SubItems.Add("1998");
+            item.SubItems.Add("01/20/1998");
+
+            item = listView1.Items.Add("Bug Proofing Visual Basic");
+            item.SubItems.Add("http://www.vb-helper.com/err.htm");
+            item.SubItems.Add("0-471-32351-9");
+            item.SubItems.Add("http://www.vb-helper.com/err.jpg");
+            item.SubItems.Add("397");
+            item.SubItems.Add("1999");
+            item.SubItems.Add("5/5/1999");
+
+            item = listView1.Items.Add("Ready-to-Run Visual Basic Code Library");
+            item.SubItems.Add("http://www.vb-helper.com/vbcl.htm");
+            item.SubItems.Add("0-471-33345-X");
+            item.SubItems.Add("http://www.vb-helper.com/vbcl.jpg");
+            item.SubItems.Add("424");
+            item.SubItems.Add("1999");
+            item.SubItems.Add("8/8/1999");
+
+            item = listView1.Items.Add("Bogus Book");
+            item.SubItems.Add("http://www.noplace.com/bogus.htm");
+            item.SubItems.Add("0-123-45678-9");
+            item.SubItems.Add("http://www.noplace.com/bogus.jpg");
+            item.SubItems.Add("100");
+            item.SubItems.Add("6");
+            item.SubItems.Add("1/09/1998");
+
+            item = listView1.Items.Add("Fakey");
+            item.SubItems.Add("http://www.skatepark.com/fakey.htm");
+            item.SubItems.Add("9-876-54321-0");
+            item.SubItems.Add("http://www.skatepark.com/fakey.jpg");
+            item.SubItems.Add("9");
+            item.SubItems.Add("700");
+            item.SubItems.Add("1/08/1998");
+
+            // Size the columns.    //欄位對齊標題欄
+            foreach (ColumnHeader col in listView1.Columns)
+            {
+                col.Width = -2;
+            }
+
+            // Size the columns.    //欄位對齊資料
+            //listView1.SizeColumnsToFitData();
+
+            /*
+            // Make the form big enough to show the ListView.
+            Rectangle item_rect =
+                listView1.GetItemRect(listView1.Columns.Count - 1);
+            this.SetClientSizeCore(
+                item_rect.Left + item_rect.Width + 50,
+                item_rect.Top + item_rect.Height + 75);
+            */
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -934,6 +1110,45 @@ namespace vcs_ListView1
 
         private void button23_Click(object sender, EventArgs e)
         {
+            //各種排序2
+
+            //各種View
+            if (type == 0)
+            {
+                richTextBox1.Text += "無排序\n";
+                listView1.View = View.Details;  //定義列表顯示的方式
+            }
+            else if (type == 1)
+            {
+                richTextBox1.Text += "Sort on all columns\n";
+                listView1.View = View.LargeIcon;  //定義列表顯示的方式
+            }
+            else if (type == 2)
+            {
+                richTextBox1.Text += "Sort on clicked columns\n";
+                listView1.View = View.List;  //定義列表顯示的方式
+            }
+            else if (type == 3)
+            {
+                richTextBox1.Text += "View.SmallIcon\n";
+                listView1.View = View.SmallIcon;  //定義列表顯示的方式
+            }
+            else if (type == 4)
+            {
+                richTextBox1.Text += "View.Tile\n";
+                listView1.View = View.Tile;  //定義列表顯示的方式
+            }
+            else
+            {
+                richTextBox1.Text += "xxxxxxxx\n";
+            }
+            type++;
+            if (type > 4)
+                type = 0;
+
+
+
+
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -1092,32 +1307,67 @@ namespace vcs_ListView1
             flag_check_score_done = 1;
         }
 
-        private void button25_Click(object sender, EventArgs e)
+        // Set the listView's column sizes to the same value.
+        private void SetListViewColumnSizes(ListView lvw, int width)
         {
+            foreach (ColumnHeader col in lvw.Columns)
+                col.Width = width;
         }
 
         int type = 0;
+        private void button25_Click(object sender, EventArgs e)
+        {
+            //各種欄寬設定
+            if (type == 0)
+            {
+                richTextBox1.Text += "固定欄寬\n";
+                SetListViewColumnSizes(listView1, 60);
+            }
+            else if (type == 1)
+            {
+                richTextBox1.Text += "欄寬 -1 完整顯示 內容\n";
+                SetListViewColumnSizes(listView1, -1);
+            }
+            else if (type == 2)
+            {
+                richTextBox1.Text += "欄寬 -2 完整顯示 內容 和 欄位\n";
+                SetListViewColumnSizes(listView1, -2);
+            }
+            else
+            {
+                richTextBox1.Text += "xxxxxxxx\n";
+            }
+            type++;
+            if (type > 2)
+                type = 0;
+        }
+
         private void button26_Click(object sender, EventArgs e)
         {
             //各種View
             if (type == 0)
             {
+                richTextBox1.Text += "View.Details\n";
                 listView1.View = View.Details;  //定義列表顯示的方式
             }
             else if (type == 1)
             {
+                richTextBox1.Text += "View.LargeIcon\n";
                 listView1.View = View.LargeIcon;  //定義列表顯示的方式
             }
             else if (type == 2)
             {
+                richTextBox1.Text += "View.List\n";
                 listView1.View = View.List;  //定義列表顯示的方式
             }
             else if (type == 3)
             {
+                richTextBox1.Text += "View.SmallIcon\n";
                 listView1.View = View.SmallIcon;  //定義列表顯示的方式
             }
             else if (type == 4)
             {
+                richTextBox1.Text += "View.Tile\n";
                 listView1.View = View.Tile;  //定義列表顯示的方式
             }
             else
@@ -1151,6 +1401,11 @@ namespace vcs_ListView1
         {
             //讀取ListView資料
             richTextBox1.Text += "讀取ListView資料\n";
+
+            foreach (ColumnHeader col in listView1.Columns)
+            {
+                richTextBox1.Text += "欄寬 : " + col.Width.ToString() + "\n";
+            }
 
             //listView1.LabelEdit = true;//允許使用者修改listView的資料
 
