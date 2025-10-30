@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_TreeView0", "vcs_TreeView0\vcs_TreeView0.csproj", "{F984EFEF-79CF-4044-ADB5-3E52842F4140}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_TreeView1", "vcs_TreeView1\vcs_TreeView1.csproj", "{F984EFEF-79CF-4044-ADB5-3E52842F4140}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

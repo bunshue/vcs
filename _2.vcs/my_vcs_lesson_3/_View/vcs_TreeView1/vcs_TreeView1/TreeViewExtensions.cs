@@ -6,7 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
-namespace vcs_TreeView0
+namespace vcs_TreeView1
 {
     public static class TreeViewExtensions
     {
