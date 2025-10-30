@@ -149,24 +149,6 @@ plotly.offline.plot(data, filename="tmp_ch15-2-2d.html")
 print("------------------------------------------------------------")  # 60個
 print('------------------------------------------------------------')	#60個
 
-print('讀取資料存入資料庫')
-
-import twstock
-import sqlite3
-
-tsmc = "2330"
-stock = twstock.Stock(tsmc)
-df = pd.DataFrame(stock.fetch_from(2020,1))
-df["date"] = pd.to_datetime(df["date"]) 
-df.set_index("date", inplace=True)
-print(df.head())
-conn = sqlite3.connect("tmp_"+tsmc+".db")
-df.to_sql(tsmc, conn, if_exists="replace")
-print("已經將股票資料存入SQLite資料庫...")
-
-print('------------------------------------------------------------')	#60個
-print("------------------------------------------------------------")  # 60個
-
 print('繪製金融圖表(OHLC圖) 台積電')
 
 import plotly

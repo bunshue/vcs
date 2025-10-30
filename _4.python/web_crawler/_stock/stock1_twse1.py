@@ -641,7 +641,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("台股即時股價資料")
 
-# 參考 twstock 取得需要的 URL
+# 取得需要的 URL
 SESSION_URL = "http://mis.twse.com.tw/stock/index.jsp"
 STOCKINFO_URL = (
     "http://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch={stock_id}&_={time}"
@@ -1041,7 +1041,7 @@ for date in dates:
     print(date, stockNo)
     # data = pd.read_html(r.text)[0]  # old
     data = pd.read_html(url.format(date, stockNo))[0]
-    
+
     data.columns = data.columns.droplevel(0)
 
     csvfile = "tmp_stock_{}_{}.csv".format(stockNo, date)

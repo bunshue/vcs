@@ -2,9 +2,13 @@
 
 print("------------------------------------------------------------")  # 60個
 print("準備工作")
+print("------------------------------------------------------------")  # 60個
 
-import csv
 import sys
+import csv
+import json
+import time
+import requests
 import urllib
 import urllib.request  # 用來建立請求
 
@@ -15,7 +19,11 @@ def get_html_data_by_urlopen(url):
     return resp.read()
 
 
+print("------------------------------------------------------------")  # 60個
+
 from urllib.request import unquote
+
+url = "http://www.drmaster.com.tw/Bookinfo.asp?BookID=MI22004"
 
 print("網址解碼 utf-8")
 url = unquote(url, encoding="utf-8")
@@ -65,8 +73,6 @@ print(result.query)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("urllib 測試 1")
-
 print("讀取遠端html檔或純文字檔")
 url = "http://pythonscraping.com/pages/page1.html"
 # url = 'http://www.pythonscraping.com/pages/warandpeace/chapter1.txt'
@@ -76,7 +82,7 @@ print(html_data)
 print("OK")
 
 print("------------------------------------------------------------")  # 60個
-print("urllib 測試 2")
+print("------------------------------------------------------------")  # 60個
 
 print("讀取遠端純文字檔2")
 # encoding:Big5
@@ -100,7 +106,7 @@ print("抓取網頁資料 並存檔成 : " + filename)
 print("OK")
 
 print("------------------------------------------------------------")  # 60個
-print("urllib 測試 3")
+print("------------------------------------------------------------")  # 60個
 
 print("抓取網頁資料, 並存檔")
 data = {}
@@ -117,7 +123,7 @@ print(html_data)
 print("OK")
 
 print("------------------------------------------------------------")  # 60個
-print("urllib 測試 4")
+print("------------------------------------------------------------")  # 60個
 
 print("資料寫出到本地檔案")
 filename = "tmp_b2.html"
@@ -127,10 +133,8 @@ fd.close()
 print("抓取網頁資料 並存檔成 : " + filename)
 print("OK")
 
-
 print("------------------------------------------------------------")  # 60個
-print("urllib 測試 5")
-
+print("------------------------------------------------------------")  # 60個
 
 print("抓取網頁資料 1")
 url = "http://pythonscraping.com/pages/page1.html"
@@ -140,10 +144,8 @@ html_data = get_html_data_by_urlopen(url)
 print(html_data, "utf-8")
 print("OK")
 
-
 print("------------------------------------------------------------")  # 60個
-print("urllib 測試 6")
-
+print("------------------------------------------------------------")  # 60個
 
 print("抓取網頁資料 2")
 # encoding:UTF-8
@@ -165,7 +167,7 @@ print("抓取網頁資料 並存檔成 : " + filename)
 print("OK")
 
 print("------------------------------------------------------------")  # 60個
-print("urllib 測試 7")
+print("------------------------------------------------------------")  # 60個
 
 print("讀取遠端純文字檔3")
 data = {}
@@ -181,7 +183,7 @@ print(html_data)
 print("OK")
 
 print("------------------------------------------------------------")  # 60個
-print("urllib 測試 8")
+print("------------------------------------------------------------")  # 60個
 
 print("抓取網頁資料 4")
 
@@ -192,7 +194,7 @@ print(result.scheme)
 print("OK")
 
 print("------------------------------------------------------------")  # 60個
-print("urllib 測試 9")
+print("------------------------------------------------------------")  # 60個
 
 print("抓取網頁資料 5")
 url = "https://www.most.gov.tw/folksonomy/list?menu_id=ba3d22f3-96fd-4adf-a078-91a05b8f0166&filter_uid=none&listKeyword=&pageNum=2&pageSize=18&view_mode=listView&subSite=main&l=ch&tagUid="
@@ -208,7 +210,7 @@ for cmd in q_cmds:
 print("抓取網頁資料 OK")
 
 print("------------------------------------------------------------")  # 60個
-print("urllib 測試 10")
+print("------------------------------------------------------------")  # 60個
 
 url = "http://ind.ntou.edu.tw/~dada/cgi/Perlsynx.htm"
 resp = urllib.request.urlopen(url)
@@ -240,10 +242,9 @@ fd.close()
 print("抓取網頁資料 並存檔成 : " + filename)
 
 print("------------------------------------------------------------")  # 60個
-print("urllib 測試 11")
+print("------------------------------------------------------------")  # 60個
 
 import ssl
-import requests
 from urllib.request import urlopen
 import urllib.request  # 用來建立請求
 from bs4 import BeautifulSoup
@@ -257,7 +258,7 @@ soup = BeautifulSoup(html_data, "html.parser")
 print(soup.prettify())
 
 print("------------------------------------------------------------")  # 60個
-print("urllib 測試 12")
+print("------------------------------------------------------------")  # 60個
 
 """
 #新北市公共自行車即時資訊
@@ -303,8 +304,7 @@ row[13]	act：全站禁用狀態
 """
 
 print("------------------------------------------------------------")  # 60個
-print("urllib 測試 13")
-
+print("------------------------------------------------------------")  # 60個
 
 # 全國環境輻射偵測即時資訊
 
@@ -331,7 +331,7 @@ row[5]	GPS緯度
 """
 
 print("------------------------------------------------------------")  # 60個
-print("urllib 測試 14")
+print("------------------------------------------------------------")  # 60個
 
 print("讀取遠端圖檔")
 
@@ -342,7 +342,7 @@ filename = url.split("/")[-1]  # 圖片檔名
 urllib.request.urlretrieve(url, filename)  # 下載圖檔
 
 print("------------------------------------------------------------")  # 60個
-print("urllib 測試 15")
+print("------------------------------------------------------------")  # 60個
 
 import urllib.request
 
@@ -356,12 +356,9 @@ urllib.request.urlretrieve(url, filename=filename)
 # 需指明下載後的檔名, 否則不知道存到哪?
 
 print("------------------------------------------------------------")  # 60個
-print("urllib 測試 15")
+print("------------------------------------------------------------")  # 60個
 
-
-import json
 import urllib.parse
-import requests
 
 url = "https://udn.com/api/more?page=2&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
 
@@ -374,14 +371,10 @@ for title in titles:
     print(urllib.parse.urljoin("https://udn.com", title['titleLink']))
 """
 
-
 print("------------------------------------------------------------")  # 60個
-print("urllib 測試 16")
+print("------------------------------------------------------------")  # 60個
 
-
-import json, time
 import urllib.parse
-import requests
 
 url_pattern = "https://udn.com/api/more?page={}&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
 alldata = list()
@@ -404,9 +397,8 @@ with open("allnews.json", "w") as fp:
 """
 print("下載完畢！")
 
-
 print("------------------------------------------------------------")  # 60個
-print("urllib 測試 17")
+print("------------------------------------------------------------")  # 60個
 
 # 行政院農業委員會資料開放平台
 url = "https://data.coa.gov.tw/Service/OpenData/FromM/FarmTransData.aspx"
@@ -428,22 +420,7 @@ with open(filename, "w", encoding="big5", newline="\n") as fp:
         writer.writerow((item["作物名稱"], item["平均價"], item["交易量"]))
 
 print("------------------------------------------------------------")  # 60個
-print("urllib 測試 18")
-
-
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# Python 測試 urllib
-
-print("------------------------------------------------------------")  # 60個
-print("準備工作")
-
-import csv
-import sys
-import urllib
-import urllib.request  # 用來建立請求
-
 
 print("下載圖片")
 url = "https://upload.wikimedia.org/wikipedia/commons/0/02/Festessen_Kaiser_Wilhelm_1898_%28front_page%29.jpg"

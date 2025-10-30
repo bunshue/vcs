@@ -507,7 +507,7 @@ sequence_length = 10  # 特徵資料個數
 split = 0.95  # 訓練資料比率
 
 pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
-filename = "twstock_all.csv"
+filename = "data/taiwan_stock_all.csv"
 df = pd.read_csv(filename, encoding="big5")  # 以pandas讀取檔案
 ddprice = pd.DataFrame(df["收盤價"])
 
@@ -558,7 +558,7 @@ sequence_length = 10  # 特徵資料個數
 split = 0.95  # 訓練資料比率
 
 pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
-filename = "twstock_all.csv"
+filename = "data/taiwan_stock_all.csv"
 df = pd.read_csv(filename, encoding="big5")  # 以pandas讀取檔案
 dfprice = pd.DataFrame(df["收盤價"])
 
@@ -597,7 +597,7 @@ sequence_length = 10  # 特徵資料個數
 split = 0.95  # 訓練資料比率
 
 pd.options.mode.chained_assignment = None  # 取消顯示pandas資料重設警告
-filename = "twstock_all.csv"
+filename = "data/taiwan_stock_all.csv"
 df = pd.read_csv(filename, encoding="big5")  # 以pandas讀取檔案
 dfprice = pd.DataFrame(df["收盤價"])
 

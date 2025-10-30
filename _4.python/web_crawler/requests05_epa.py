@@ -306,6 +306,84 @@ for site in jsondata:
     n += 1
 
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+url = f"https://data.epa.gov.tw/api/v2/{DataID}?format={format}&api_key={api_key}"
+print(url)
+
+data = pd.read_csv(url)
+
+citylist = []  # 縣市串列
+sitelist = []  # 鄉鎮串列
+
+# 建立縣市串列
+for c1 in data["county"]:
+    if c1 not in citylist:  # 如果串列中無該縣市就將其加入
+        citylist.append(c1)
+
+# 建立第1個縣市的測站串列
+count = 0
+for c1 in data["county"]:
+    if c1 == citylist[0]:  # 是第1個縣市的測站
+        sitelist.append(data.iloc[count, 0])
+    count += 1
+
+print("縣市串列")
+print(citylist)
+print("測站串列")
+print(sitelist)
+
+print(data)
+
+citynamelist = []  # 縣市串列
+
+# 建立縣市串列
+for c1 in data["county"]:
+    if c1 not in citynamelist:  # 如果串列中無該縣市就將其加入
+        citynamelist.append(c1)
+
+print("顯示縣市")
+for c1 in citynamelist:
+    print(c1)
+
+print("顯示全台灣所有測站")
+n = 0
+for city in data["county"]:  # 逐一取出選取縣市的測站
+    # sitelist.append(data.iloc[n, 0])
+    print("位於 ", city, "的測站 : ", data.iloc[n, 0])
+    n += 1
+
+print("顯示單一城市內的所有測站 及其資料")
+cityname = "桃園市"
+n = 0
+for c1 in data["county"]:  # 逐一取出選取縣市的測站
+    if c1 == cityname:
+        # sitelist.append(data.iloc[n, 0])
+        print("位於 ", cityname, "的測站 : ", data.iloc[n, 0], end="\t")
+        pm = data.iloc[n, 2]  # 取得PM2.5的值
+        if pm == "" or pm == "ND":  # 如果沒有資料
+            print("站的 PM2.5 值目前無資料！")
+        else:  # 如果有資料
+            if int(pm) <= 35:  # 轉換為等級
+                grade1 = "低"
+            elif int(pm) <= 53:
+                grade1 = "中"
+            elif int(pm) <= 70:
+                grade1 = "高"
+            else:
+                grade1 = "非常高"
+            print("PM2.5 值為「" + str(pm) + "」：「" + grade1 + "」等級")
+
+    n += 1
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()

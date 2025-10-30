@@ -2,7 +2,11 @@
 金融匯率股票相關
 """
 
+import os
+import json
+import pandas as pd
 import requests
+from bs4 import BeautifulSoup
 
 print("------------------------------------------------------------")  # 60個
 
@@ -13,45 +17,11 @@ from google_currency import convert
 print(convert("USD", "JPY", 230))
 
 from google_currency import convert
-import json
 
 samount = 100  # @param {type:'integer'}
 damount = convert("USD", "JPY", samount)
 retdict = json.loads(damount)
 print("{} 元美金 = 日幣 {} 元".format(samount, retdict["amount"]))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("twstock：台灣股票")
-
-import twstock
-
-stock = twstock.Stock("2317")
-print(stock.price)
-
-print("日期：", stock.date[-1])
-print("開盤價：", stock.open[-1])
-print("最高價：", stock.high[-1])
-print("最低價：", stock.low[-1])
-print("收盤價：", stock.price[-1])
-
-stock.fetch(2020, 1)
-stock.fetch_31()
-
-stock.fetch_from(2021, 9)
-real = twstock.realtime.get("2317")
-print(real)
-
-if real["success"]:
-    print("股票名稱、即時股票資料：")
-    print("股票名稱：", real["info"]["name"])
-    print("開盤價：", real["realtime"]["open"])
-    print("最高價：", real["realtime"]["high"])
-    print("最低價：", real["realtime"]["low"])
-    print("目前股價：", real["realtime"]["latest_trade_price"])
-else:
-    print("錯誤：" + real["rtmessage"])
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -66,74 +36,11 @@ payload = {"message": msg}
 notify = requests.post(
     "https://notify-api.line.me/api/notify", headers=headers, params=payload
 )
+
 if notify.status_code == 200:
     print("發送 LINE Notify 成功！")
 else:
     print("發送 LINE Notify 失敗！")
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("應用：使用LINE監控即時股價")
-
-import twstock
-import time
-
-
-def lineNotify(token, msg):
-    headers = {
-        "Authorization": "Bearer " + token,
-        "Content-Type": "application/x-www-form-urlencoded",
-    }
-
-    payload = {"message": msg}
-    notify = requests.post(
-        "https://notify-api.line.me/api/notify", headers=headers, params=payload
-    )
-    return notify.status_code
-
-
-def sendline(mode, realprice, counterLine, token):
-    print("鴻海目前股價：" + str(realprice))
-    if mode == 1:
-        message = "現在鴻海股價為 " + str(realprice) + "元，可以賣出股票了！"
-    else:
-        message = "現在鴻海股價為 " + str(realprice) + "元，可以買入股票了！"
-    code = lineNotify(token, message)
-    if code == 200:
-        counterLine = counterLine + 1
-        print("第 " + str(counterLine) + " 次發送 LINE 訊息。")
-    else:
-        print("發送 LINE 訊息失敗！")
-    return counterLine
-
-
-token = "你的 LINE Notify 權杖"  # 權杖
-counterLine = 0  # 儲存發送次數
-counterError = 0  # 儲存錯誤次數
-
-print("程式開始執行！")
-while True:
-    realdata = twstock.realtime.get("2317")  # 即時資料
-    if realdata["success"]:
-        realprice = realdata["realtime"]["latest_trade_price"]  # 目前股價
-        if realprice != "-":
-            if float(realprice) >= 40:
-                counterLine = sendline(1, realprice, counterLine, token)
-            elif float(realprice) <= 20:
-                counterLine = sendline(2, realprice, counterLine, token)
-            if counterLine >= 3:  # 最多發送3次就結束程式
-                print("程式結束！")
-                break
-    else:
-        print("twstock 讀取錯誤，錯誤原因：" + realdata["rtmessage"])
-        counterError = counterError + 1
-        if counterError >= 3:  # 最多錯誤3次
-            print("程式結束！")
-            break
-    for i in range(300):  # 每5分鐘讀一次
-        time.sleep(1)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -153,14 +60,12 @@ data_list = TWCB.get_by_search("美元之匯率")
 
 TWCB.get_all()
 
-import json
-import pandas as pd
-import os
-
 with open("download_TWCB.json", "r", encoding="utf-8") as f:
     test_data = json.load(f)
+
 if not os.path.isdir("twcb"):
     os.mkdir("twcb")
+
 for key in test_data.keys():
     data = pd.read_json(test_data[key])
     data.to_csv("twcb/" + key + ".csv")
@@ -201,6 +106,257 @@ for ticker, value in data.items():
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+"""
+查詢歷史資料 範例
+https://rate.bot.com.tw/xrt/all/2023-03-20
+
+https://rate.bot.com.tw/
+
+(台銀牌告匯率)
+https://rate.bot.com.tw/xrt?Lang=zh-TW
+"""
+
+
+def get_html_data1(url):
+    print("取得網頁資料: ", url)
+    resp = requests.get(url)
+    # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
+    if resp.status_code != requests.codes.ok:
+        print("讀取網頁資料錯誤, url: ", resp.url)
+        return None
+    else:
+        return resp
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("查詢中央銀行匯率")
+
+url = "https://rate.bot.com.tw/xrt/all/day"
+# https://rate.bot.com.tw/xrt?Lang=zh-TW  另一個網址
+html_data = get_html_data1(url)
+
+soup = BeautifulSoup(html_data.text, "html.parser")
+print(soup.prettify())  # prettify()這個函數可以將DOM tree以比較美觀的方式印出。
+
+# print('多重條件選擇')
+cells = soup.select("table tr td")  # 尋找talbe標籤裡面的tr標籤裡面的td標籤 三者都要符合的抓出來
+print(type(cells))
+print("符合條件的資料", len(cells), "筆")
+print(cells)
+
+print("------------------------------")  # 30個
+
+i = 0
+for cell in cells:
+    print(i)
+    print(cell.text.strip())
+    i = i + 1
+
+print("------------------------------")  # 30個
+
+print("顯示 幣別")
+print("多重條件選擇")
+dnames = soup.select("table tr td[data-table=幣別] div.visible-phone")
+# print(type(dnames))
+print("符合條件的資料", len(dnames), "筆")
+# print(dnames)
+names = list()
+for dname in dnames:
+    names.append(dname.text.strip())
+print(names)
+
+print("------------------------------")  # 30個
+
+print("顯示 本行即期買入")
+print("多重條件選擇")
+buyingrate = soup.select("table tr td[data-table=本行即期買入]")
+print(type(buyingrate))
+print("符合條件的資料", len(buyingrate), "筆")
+print(buyingrate)
+i = 0
+for price in buyingrate:
+    print(i)
+    print(price.text.strip())
+    i = i + 1
+
+print("------------------------------")  # 30個
+
+prices = list()
+for price in buyingrate:
+    prices.append(price.text.strip())
+print(prices)
+
+print("------------------------------")  # 30個
+
+print(names)
+print(prices)
+rates = zip(names, prices)
+for rate in rates:
+    print(rate)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from lxml import html
+
+url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"
+response = requests.get(url)
+tree = html.fromstring(response.text)
+
+print(
+    "美金："
+    + str(
+        tree.xpath("//html/body/div[1]/main/div[3]/table/tbody/tr[1]/td[3]/text()")[0]
+    )
+)
+print(
+    "日圓："
+    + str(
+        tree.xpath("//html/body/div[1]/main/div[3]/table/tbody/tr[8]/td[3]/text()")[0]
+    )
+)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("台灣銀行 匯率查詢")
+
+url = "https://rate.bot.com.tw/xrt/flcsv/0/day"  # 牌告匯率 CSV 網址
+
+response = requests.get(url)  # 爬取網址內容
+response.encoding = "utf-8"  # 網頁編碼模式  # 調整回應訊息編碼為 utf-8，避免編碼不同造成亂碼
+rt = response.text  # 以文字模式讀取內容
+rts = rt.split("\n")  # 使用「換行」將內容拆分成串列
+for i in rts:  # 讀取串列的每個項目
+    try:  # 使用 try 避開最後一行的空白行
+        a = i.split(",")  # 每個項目用逗號拆分成子串列
+        print(a[0] + ": " + a[12])  # 取出第一個 ( 0 ) 和第十三個項目 ( 12 )
+    except:
+        break
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"
+csvfile = "tmp_xrt.csv"
+r = requests.get(url)
+r.encoding = "utf8"
+soup = BeautifulSoup(r.text, "lxml")
+tag_table = soup.select_one("#ie11andabove > div > table")
+rows = tag_table.find_all("tr")
+with open(csvfile, "w+", newline="", encoding="big5") as fp:
+    writer = csv.writer(fp)
+    for row in rows:
+        lst = []
+        for cell in row.find_all(["td", "th"]):
+            lst.append(cell.text.replace("\n", "").replace("\r", ""))
+        writer.writerow(lst)
+
+print("------------------------------")  # 30個
+
+
+def split_name(name):
+    pos = name.find(")")
+    return pd.Series({'"幣別"': name[0:pos].strip() + ")"})
+
+
+df = pd.read_csv("tmp_xrt.csv", encoding="big5")
+df = df.drop(df.index[[0, 1]])
+df = df.iloc[:, 0:5]
+df.columns = ["幣別", "現金(買)", "現金(賣)", "即期(買)", "即期(賣)"]
+df["幣別"] = df["幣別"].apply(split_name)
+df.to_csv("tmp_xrt2.csv", index=False, encoding="big5")
+print(df.head())
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+base_url = "https://www.cbc.gov.tw/tw/"
+url = base_url + "lp-645-1.html"
+csvfile = "tmp_USxrt.csv"
+items = []
+next_page = True
+
+while next_page:
+    print(url)
+    r = requests.get(url)
+    r.encoding = "utf8"
+    soup = BeautifulSoup(r.text, "lxml")
+    tag_table = soup.find("table", class_="rwd-table")  # 找到<table>
+    rows = tag_table.find_all("tr")  # 找出所有<tr>
+    for row in rows:
+        lst = []
+        for cell in row.find_all(["td", "th"]):
+            lst.append(cell.text.replace("\n", "").replace("\r", ""))
+        items.append(lst)
+    # 找尋下一頁按鈕的<a>標籤
+    tag_li = soup.find("li", class_="next")
+    if tag_li:
+        next_page = True
+        url = base_url + tag_li.find("a").get("href")
+        time.sleep(2)
+    else:
+        next_page = False
+
+with open(csvfile, "w+", newline="", encoding="utf-8") as fp:
+    writer = csv.writer(fp)
+    for item in items:
+        writer.writerow(item)
+
+print("------------------------------")  # 30個
+
+csvfile = "tmp_USxrt.csv"
+df = pd.read_csv(csvfile)
+df.drop_duplicates(keep=False, inplace=True)
+df.to_csv("tmp_USxrt2.csv", index=False, encoding="utf8")
+print(df.head(5))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("查詢台銀牌告匯率")
+
+from time import localtime
+from time import strftime
+from os.path import exists  # 台銀匯率網站
+
+html = requests.get("https://rate.bot.com.tw/xrt?Lang=zh-TW")  # 回傳HTML檔案，轉存html物件
+bsObj = BeautifulSoup(html.content, "lxml")  # 解析網頁，建立bs物件
+for single_tr in (
+    bsObj.find("table", {"title": "牌告匯率"}).find("tbody").findAll("tr")
+):  # 針對匯率表格分析
+    cell = single_tr.findAll("td")  # 找到每一個表格
+    currency_name = (
+        cell[0].find("div", {"class": "visible-phone"}).contents[0]
+    )  # 找到表格中幣別
+    currency_name = currency_name.replace("\r", "")  # 取代不需要的字元
+    currency_name = currency_name.replace("\n", "")
+    currency_name = currency_name.replace(" ", "")
+    currency_rate = cell[2].contents[0]  # 找到幣別匯率
+    print(currency_name, currency_rate)
+    now_time = strftime("%Y-%m-%d %H:%M:%S", localtime())  # 記錄目前時間
+    data = [["時間", "匯率"], [now_time, currency_rate]]  # 準備寫入檔案資料
+    print("寫入資料 :", data)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"
+csvfile = "tmp_xrt.csv"
+r = requests.get(url)
+r.encoding = "utf8"
+soup = BeautifulSoup(r.text, "lxml")
+tag_table = soup.select_one("#ie11andabove > div > table")
+rows = tag_table.find_all("tr")
+with open(csvfile, "w+", newline="", encoding="big5") as fp:
+    writer = csv.writer(fp)
+    for row in rows:
+        lst = []
+        for cell in row.find_all(["td", "th"]):
+            lst.append(cell.text.replace("\n", "").replace("\r", "").strip())
+        writer.writerow(lst)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -222,3 +378,8 @@ sys.exit()
 # 3030
 print("------------------------------")  # 30個
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
