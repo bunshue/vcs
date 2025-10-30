@@ -265,7 +265,7 @@ fo.close()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("無 cookies, 無 headers, 抓網頁")
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
@@ -274,6 +274,7 @@ url = "https://www.ptt.cc/bbs/Beauty/M.1707360497.A.39D.html"
 print("無 cookies 抓不到網頁資料")
 response = requests.get(url)
 
+print("HTTP狀態碼 :", response.status_code)
 # print(response.text)  # HTML網頁內容
 
 print("------------------------------------------------------------")  # 60個
@@ -287,6 +288,7 @@ url = "https://www.ptt.cc/bbs/Beauty/M.1707360497.A.39D.html"
 print("有 cookies 可以抓到網頁資料")
 response = requests.get(url, cookies=cookies)
 
+print("HTTP狀態碼 :", response.status_code)
 # print(response.text)  # HTML網頁內容
 
 print("------------------------------------------------------------")  # 60個
@@ -301,33 +303,15 @@ headers = {
 
 response = requests.get(url, cookies=cookies, headers=headers)
 
+print("HTTP狀態碼 :", response.status_code)
 # print(response.text)  # HTML網頁內容
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("requests 測試 11 對網頁資料處理 尋找單字出現次數")
+print("測試 headers, 無 headers 抓網頁, dcard, NG")
 
-url = "https://www.ptt.cc/bbs/hotboards.html"
-html_data_text = get_html_data_from_url(url)
-
-lines = html_data_text.splitlines()  # 將網頁資料一行一行地分割成串列
-
-n = 0
-for line in lines:
-    if "音樂" in line:
-        n += 1
-
-print("找到 {} 次!".format(n))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("測試 headers, 無 headers 抓網頁, ck101 網頁")
-
-# 怎麼無headers 也是OK?
-url = "https://ck101.tw/thread-5778209-1-1.html"
-# url ="https://www.dcard.tw/f/stock/p/237123381"
+url ="https://www.dcard.tw/f/stock/p/237123381"
 
 response = requests.get(url)
 
@@ -337,31 +321,39 @@ print("HTTP錯誤原因 :", response.reason)
 # print(response.text)  # HTML網頁內容
 print("網址：", response.url)
 print("表頭資訊 :", response.headers)
-print("異常處理 :", response.raise_for_status())
+# print("異常處理 :", response.raise_for_status())
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print("測試 headers, 有 headers 抓網頁, ck101 網頁")
+print("測試 headers, 有 headers 抓網頁, dcard, NG")
 
-url = "https://ck101.tw/thread-5778209-1-1.html"
-# url ="https://www.dcard.tw/f/stock/p/237123381"
+url ="https://www.dcard.tw/f/stock/p/237123381"
 
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
 }
 response = requests.get(url, headers=headers)
 print(response)
-
+print("HTTP狀態碼 :", response.status_code)
+print("HTTP錯誤原因 :", response.reason)
 # print(response.text)  # HTML網頁內容
+print("網址：", response.url)
+print("表頭資訊 :", response.headers)
+# print("異常處理 :", response.raise_for_status())
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-print("測試 headers, 無 headers 抓網頁, 金石堂官網")
-print("不支持直接讀取網頁, 要使用偽裝瀏覽器")
 
 url = "https://www.kingstone.com.tw/"
+
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64)\
+            AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101\
+            Safari/537.36",
+}
+
+print("不使用 headers, 不使用 偽裝瀏覽器, 金石堂官網")
 
 try:
     response = requests.get(url)
@@ -371,15 +363,7 @@ except Exception as err:  # err是系統內建的錯誤訊息
 
 print("------------------------------")  # 30個
 
-print("測試 headers, 無 headers 抓網頁, 金石堂官網")
-print("使用偽裝瀏覽器")
-
-headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64)\
-            AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101\
-            Safari/537.36",
-}
-url = "https://www.kingstone.com.tw/"
+print("使用 headers, 使用 偽裝瀏覽器, 金石堂官網")
 
 try:
     response = requests.get(url, headers=headers)
@@ -388,20 +372,6 @@ except Exception as err:  # err是系統內建的錯誤訊息
     print(f"網頁下載失敗, 原因 : {err}")
 
 print("偽裝瀏覽器擷取網路資料成功")
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "https://www.google.com/"
-# 假的 headers 資訊
-headers = {
-    "user-agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
-}
-# 加入 headers 資訊
-response = requests.get(url, headers=headers)
-response.encoding = "utf8"  # 網頁編碼模式
-
-# print(response.text)  # HTML網頁內容
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -470,6 +440,7 @@ response = requests.get(url)
 m = re.search("var pieSeries = (.*);", response.text)
 jsonstr = m.group(0).strip("var pieSeries = ").strip(";")
 json_data = json.loads(jsonstr)  # json轉串列, 串列由字典組成
+
 print(type(json_data))
 print("共有 :", len(json_data), "筆資料, 只看最新的10筆")
 print("第0筆資料 :", json_data[0], "看一下資料格式")
@@ -742,19 +713,21 @@ from io import StringIO
 def get_setting():  # ←將「讀取設定檔」寫成函式, 可讓程式易讀易用
     res = []  # ←準備一個空串列來存放讀取及解析的結果
     try:  # 使用 try 來預防開檔或讀檔錯誤
-        with open("stock.txt") as f:  # 用 with 以讀取模式開啟檔案
+        with open("data/stock.txt") as f:  # 用 with 以讀取模式開啟檔案
             slist = f.readlines()  # 以行為單位讀取所有資料
             print("讀入：", slist)  # 輸出讀到的資料以供確認
             a, b, c = slist[0].split(",")  # ←將股票字串以逗號切割為串列
             res = [a, b, c]
     except:
-        print("stock.txt 讀取錯誤")
+        print("data/stock.txt 讀取錯誤")
     return res  # ←傳回解析的結果, 但如果開檔或讀檔錯誤則會傳回 []
 
 
 def get_data():
     data = get_setting()
+    print(data)
     dates = []
+    # print(data[1])
     start_date = datetime.datetime.strptime(data[1], "%Y%m%d")
     end_date = datetime.datetime.strptime(data[2], "%Y%m%d")
     for daynumber in range((end_date - start_date).days + 1):
@@ -765,12 +738,10 @@ def get_data():
 
 
 def crawl_data(date, symbol):
-    # 下載股價
-    response = requests.get(
-        "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="
-        + date
-        + "&type=ALL"
-    )
+    print('下載股價')
+    url = "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="+ date+ "&type=ALL"
+    print(url)
+    response = requests.get(url)
 
     r_text = [
         i for i in response.text.split("\n") if len(i.split('",')) == 17 and i[0] != "="
@@ -916,7 +887,106 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
+import threading
+
+def download_pic(url, path):
+    pic = requests.get(url)     #使用 GET 對圖片連結發出請求
+    path += url[url.rfind('.'):]     #將路徑加上圖片的副檔名
+    f = open(path,'wb')     #以指定的路徑建立一個檔案
+    f.write(pic.content)     #將 HTTP Response 物件的 content寫入檔案中
+    f.close()     #關閉檔案
+
+
+def get_photolist(photo_name, download_num):
+    from selenium import webdriver  # selenium 的用法可參見 5-7 節
+    from selenium.webdriver.common.keys import Keys
+    page = 1     #初始頁數為1
+    photo_list = []     #建立空的圖片 list
+    
+    url = 'https://pixabay.com/zh/'   # Pixabay 網址
+    option = webdriver.ChromeOptions()  # ←↓加入選項來指定不要有自動控制的訊息
+    option.add_experimental_option('excludeSwitches', ['enable-automation'])
+    browser = webdriver.Chrome(options = option)  #以指定的選項啟動 Chrome
+    browser.get(url)  # 連線到高鐵購票網頁, ●●注意, Chrome出現訊息窗時不可按【停用】鈕, 請按 x 將之關閉, 或不理它也可。
+    browser.find_element_by_name('q').send_keys(photo_name)
+    browser.find_element_by_name('q').send_keys(Keys.RETURN)
+    
+    while True:
+        html = browser.page_source
+#        print(html)
+        bs = BeautifulSoup(html, 'lxml')     #解析網頁
+        #先尋找標籤為 div, calss 為 'flex_grid ...' 的元素 (這區中才是免負圖庫)
+        #  再尋找所有標籤為 div, calss 為 'item' 的元素
+        photo_item = bs.find('div', {'class': 'flex_grid credits search_results'}
+                            ).find_all('div', {'class': 'item'})
+        if  len(photo_item) == 0:
+            print('Error, no photo link in page', page)
+            return None
+        for i in range(len(photo_item)):
+            #尋找標籤 img 並取出 'src' 之中的內容
+            photo = photo_item[i].find('img')['src']
+            if photo == '/static/img/blank.gif':
+                #尋找標籤 img 並取出 'data-lazy' 之中的內容
+                photo = photo_item[i].find('img')['data-lazy']
+            if photo in photo_list:
+#                print('photo duplicated in photo_list at page', page, photo)
+                continue            
+            #若要下載較高解析度的圖, 可將下行取消註解    
+#            photo = photo.replace('_340', '1280')  #更換為1280解析度
+            photo_list.append(photo)     #將找到的連結新增進 list 之中
+            if len(photo_list) >= download_num:
+                print('end by get photo list size', len(photo_list))
+                browser.close()
+                return photo_list
+        page+=1     #頁數加1
+        #找出下一頁的連結網址
+        try:
+            next = browser.find_element_by_partial_link_text('›').get_attribute('href')
+            browser.get(next)
+        except:  # 沒下一頁了
+            browser.close()
+            return photo_list
+
+def create_folder(photo_name):
+    folder_name = input("請輸入要儲存的資料夾名稱: ")
+
+    if not os.path.exists(folder_name):
+        os.mkdir(folder_name)
+        print("資料夾不存在, 建立資料夾: " + folder_name)
+    else:
+        print("找到資料夾: " + folder_name)
+
+    if not os.path.exists(folder_name + os.sep + photo_name):
+        os.mkdir(folder_name + os.sep + photo_name)
+        print("建立資料夾: " + photo_name)
+    else:
+        print(photo_name + " 資料夾已存在")
+    return folder_name
+
+def get_photobythread(folder_name, photo_name, photo_list):
+    download_num = len(photo_list)     #設定下載數量為圖片連結串列的長度
+    Q = int(download_num / 100)     #取商數
+    R = download_num % 100     #取餘數
+
+    for i in range(Q):
+        threads = []
+        for j in range(100):
+            threads.append(threading.Thread(target = download_pic, args = (photo_list[i*100+j], folder_name + os.sep + photo_name + os.sep + str(i*100+j+1))))
+            threads[j].start()
+        for j in threads:
+            j.join()
+        print(int((i+1)*100/download_num*100), '%')     #顯示當前進度
+
+    threads = []
+    for i in range(R):
+        threads.append(threading.Thread(target = download_pic, args = (photo_list[Q*100+i], folder_name + os.sep + photo_name + os.sep + str(Q*100+i+1))))
+        threads[i].start()
+    for i in threads:
+        i.join()
+    print("100%")     #顯示當前進度
+
+print("------------------------------")  # 30個
+
 import photo_module as m
 
 while True:
@@ -942,7 +1012,6 @@ for i in range(len(photo_list)):
 
 print("\n下載完畢")
 
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import photo_module as m
@@ -971,10 +1040,10 @@ for i in range(len(photo_list)):
     m.download_pic(photo_list[i], folder_name + os.sep + photo_name + os.sep + str(i+1))
     
 print("\n下載完畢")
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+'''
 print("檢查錯誤碼")
 
 url = "http://example.com"
@@ -2737,3 +2806,11 @@ print("------------------------------------------------------------")  # 60個
 
 # 1515
 print("---------------")  # 15個
+
+
+lines = html_data_text.splitlines()  # 將網頁資料一行一行地分割成串列
+
+
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
+}
