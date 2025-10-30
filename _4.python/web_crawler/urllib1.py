@@ -15,7 +15,56 @@ def get_html_data_by_urlopen(url):
     return resp.read()
 
 
+from urllib.request import unquote
+
+print("網址解碼 utf-8")
+url = unquote(url, encoding="utf-8")
+print(url)
+
 print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from urllib.parse import urlparse
+
+url = "https://www.zct.com.tw/hot_sale.php?act=goods&hash=5717321f978f1"
+url = "http://www.drmaster.com.tw/Bookinfo.asp?BookID=MI22004"
+
+result = urlparse(url)
+print("回傳的 ParseResult 物件:")
+print(result)
+print("通訊協定:" + result.scheme)
+print("網站網址:", result.netloc)
+print("路徑:", result.path)
+print("查詢字串:", result.query)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from urllib.parse import urlparse
+
+result = urlparse("http://www.example.com:80/test/index.php?user=joe")
+
+print("使用urlparse()方法剖析URL網址成為組成的元素")
+print("通訊協定: ", result.scheme)
+print("網域名稱: ", result.netloc)
+print("通訊埠號: ", result.port)
+print("網頁路徑: ", result.path)
+print("查詢字串: ", result.query)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("解析網址")
+from urllib.parse import urlparse
+
+result = urlparse("https://tw.stock.yahoo.com/news_list/url/d/e/N1.html?q=&pg=4")
+print(result.netloc)
+print(result.path)
+print(result.query)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 print("urllib 測試 1")
 
 print("讀取遠端html檔或純文字檔")
@@ -382,4 +431,72 @@ print("------------------------------------------------------------")  # 60個
 print("urllib 測試 18")
 
 
-print("urllib 測試 作業完成")
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Python 測試 urllib
+
+print("------------------------------------------------------------")  # 60個
+print("準備工作")
+
+import csv
+import sys
+import urllib
+import urllib.request  # 用來建立請求
+
+
+print("下載圖片")
+url = "https://upload.wikimedia.org/wikipedia/commons/0/02/Festessen_Kaiser_Wilhelm_1898_%28front_page%29.jpg"
+
+filename = "cccc.jpg"
+print("圖片寫出到本地檔案")
+fp = open(filename, "wb")
+
+response = urllib.request.urlopen(url)
+
+# img = response.read()   #一次下載整個檔案, 改成分段下載
+# fp.write(img)
+
+size = 0
+while True:
+    info = response.read(100000)
+    if len(info) < 1:
+        break
+    size = size + len(info)
+    fp.write(info)
+    print("已下載下載 ", size, "拜")
+
+print(size, " 拜下載")
+fp.close()
+response.close()
+
+print("抓取圖片完成 並存檔成 : " + filename)
+print("OK")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+# 3030
+print("------------------------------")  # 30個
+
+# 1515
+print("---------------")  # 15個
+
+print("------------------------------------------------------------")  # 60個

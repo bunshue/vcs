@@ -46,41 +46,41 @@ print("------------------------------------------------------------")  # 60個
 # 無參數
 def get_html_data1(url):
     print("無參數取得網頁資料: ", url)
-    resp = requests.get(url)
+    response = requests.get(url)
     # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
-    if resp.status_code != requests.codes.ok:
-        print("讀取網頁資料錯誤, url: ", resp.url)
+    if response.status_code != requests.codes.ok:
+        print("讀取網頁資料錯誤, url: ", response.url)
         return None
     else:
-        return resp
+        return response
 
 
 # 有參數
 def get_html_data2(url, params):
     print("有參數取得網頁資料: ", url)
     print("參數: ", params)
-    resp = requests.get(url=url, params=params)  # 有參數的GET請求
+    response = requests.get(url=url, params=params)  # 有參數的GET請求
+    print("HTTP狀態碼 :", response.status_code)
     # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
-    if resp.status_code != requests.codes.ok:
-        print("讀取網頁資料錯誤, url: ", resp.url)
+    if response.status_code != requests.codes.ok:
+        print("讀取網頁資料錯誤, url: ", response.url)
         return None
     else:
-        return resp
+        return response
 
 
 def get_html_data_from_url(url):
-    html_data = get_html_data1(url)
-    if html_data == None:
+    response = get_html_data1(url)
+    if response == None:
         print("無法取得網頁資料")
         sys.exit()  # 立刻退出程式
 
-    html_data.encoding = "UTF-8"  # 或是 unicode 也可, 指定編碼方式
-    return html_data.text
+    response.encoding = "UTF-8"  # 或是 unicode 也可, 指定編碼方式
+    return response.text
 
 
 cookies = {"over18": "1"}
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 print("Response 物件資訊")
@@ -157,20 +157,23 @@ with urllib.request.urlopen(url) as response:
 # OK, many
 # print("將網頁資料轉成字串格式", zct_str)
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
-from urllib.parse import urlparse
+# urlopen.py
 
-url = "https://www.zct.com.tw/hot_sale.php?act=goods&hash=5717321f978f1"
+import urllib.request
 
-result = urlparse(url)
-print("回傳的 ParseResult 物件:")
-print(result)
-print("通訊協定:" + result.scheme)
-print("網站網址:", result.netloc)
-print("路徑:", result.path)
-print("查詢字串:", result.query)
+url = "http://www.grandtech.info/"
+
+# 以with/as敘述來取得網址，離開之後會自動釋放資源
+with urllib.request.urlopen(url) as response:
+    print("網頁網址", response.geturl())
+    print("伺服器狀態碼", response.getcode())
+    print("網頁表頭", response.getheaders())
+    zct_str = response.read().decode("UTF-8")
+
+print("將網頁資料轉成字串格式", zct_str)
+# print('網頁程式碼如下: ',zct_str)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -182,11 +185,11 @@ url = "http://www.itwhy.org"
 url = "http://www.ehappy.tw/demo.htm"
 url = "http://tw.yahoo.com"
 
-html_data = get_html_data1(url)
-if html_data:
+response = get_html_data1(url)
+if response:
     print("擷取網頁資料 OK")
-    # print(html_data.text)  # OK, many
-    # pprint.pprint(html_data.text)  # OK, many
+    # print(response.text)  # OK, many
+    # pprint.pprint(response.text)  # OK, many
 else:
     print("無法取得網頁資料")
 
@@ -198,18 +201,20 @@ print("有參數 取得網頁資料 a")
 url = "http://dict.baidu.com/s"
 params = {"wd": "python"}
 
-html_data = get_html_data2(url, params)
+response = get_html_data2(url, params)
 
-print("111", html_data.url)
-print("222", html_data.text)  # 打印解码后的返回数据
-print("333", html_data)
+print("111", response.url)
+print("222", response.text)  # 打印解码后的返回数据
+print("333", response)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
+
+# 目前維基百科的, 都讀不到資料 403
 
 print("有參數 取得網頁資料 d")
 search_word = "椎名林檎"
-api_url = "https://zh.wikipedia.org/w/api.php"
+url = "https://zh.wikipedia.org/w/api.php"
 api_params = {
     "format": "xmlfm",
     "action": "query",
@@ -217,20 +222,20 @@ api_params = {
     "rvprop": "content",
 }
 api_params["titles"] = search_word
-html_data = get_html_data2(api_url, api_params)
+response = get_html_data2(url, api_params)
 
 """ NG
-# pprint.pprint(html_data)
+# pprint.pprint(response)
 
 # fo = codecs.open("tmp_wiki搜尋結果2" + search_word + ".html", "w", "utf-8") # same
 fo = open("tmp_wiki搜尋結果2" + search_word + ".html", "w", encoding="utf-8")
-fo.write(html_data.text)
+fo.write(response.text)
 fo.close()
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-api_base_url = "https://zh.wikipedia.org/w/api.php"
+url = "https://zh.wikipedia.org/w/api.php"
 api_params = {
     "format": "xmlfm",
     "action": "query",
@@ -239,17 +244,18 @@ api_params = {
     "rvprop": "content",
 }
 
-html_data = requests.get(api_base_url, params=api_params)
+response = requests.get(url, params=api_params)
+print("HTTP狀態碼 :", response.status_code)
 
 fo = codecs.open("tmp_wiki_page.html", "w", "utf-8")
-fo.write(html_data.text)
+fo.write(response.text)
 fo.close()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 search_word = "椎名林檎"
-api_url = "https://zh.wikipedia.org/w/api.php"
+url = "https://zh.wikipedia.org/w/api.php"
 api_params = {
     "format": "xmlfm",
     "action": "query",
@@ -257,11 +263,32 @@ api_params = {
     "rvprop": "content",
 }
 api_params["titles"] = search_word
-html_data = requests.get(api_url, params=api_params)
+
+response = requests.get(url, params=api_params)
+print("HTTP狀態碼 :", response.status_code)
 
 fo = codecs.open("wiki_page_" + search_word + ".html", "w", "utf-8")
-fo.write(html_data.text)
+fo.write(response.text)
 fo.close()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+url = "https://zh.wikipedia.org/zh-tw/愛因斯坦"
+
+response = requests.get(url)
+print("HTTP狀態碼 :", response.status_code)
+
+# 403 Forbidden
+
+if response.status_code == 200:
+    print(response.text)
+
+bs = BeautifulSoup(response.text, "lxml")
+p_list = bs.find_all("p")
+for p in p_list:
+    if keyword in p.text[0:10]:
+        print(p.text)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -311,7 +338,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("測試 headers, 無 headers 抓網頁, dcard, NG")
 
-url ="https://www.dcard.tw/f/stock/p/237123381"
+url = "https://www.dcard.tw/f/stock/p/237123381"
 
 response = requests.get(url)
 
@@ -328,11 +355,12 @@ print("------------------------------------------------------------")  # 60個
 
 print("測試 headers, 有 headers 抓網頁, dcard, NG")
 
-url ="https://www.dcard.tw/f/stock/p/237123381"
+url = "https://www.dcard.tw/f/stock/p/237123381"
 
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
 }
+
 response = requests.get(url, headers=headers)
 print(response)
 print("HTTP狀態碼 :", response.status_code)
@@ -492,15 +520,15 @@ def download_xkcd(start_comic, end_comic):
             print(f"\n圖片下載中 : {comic_url}...")
 
             # 向圖片 URL 發送請求並下載圖片
-            res = requests.get(comic_url)
+            response = requests.get(comic_url)
             try:
-                res.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
+                response.raise_for_status()  # 如果發生錯誤的話, 會丟出 exception
             except Exception as err:                    # err是系統內建的錯誤訊息
                 print(f"網頁下載失敗, 原因 : {err}")
 
             # 保存圖片到本地資料夾
             with open(os.path.join("xkcd_comics", os.path.basename(comic_url)), "wb") as image_file:
-                for chunk in res.iter_content(100000):
+                for chunk in response.iter_content(100000):
                     image_file.write(chunk)             # 寫入圖片數據
         except requests.exceptions.HTTPError as err:
             print(f"Failed to download comic {comic_number}: {err}")  # 輸出錯誤訊息
@@ -530,32 +558,13 @@ print("漫畫圖片下載完成")
 """
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-"""
-# 建立 Proxy List
-proxy_ips = [
-    "80.93.213.213:3136",
-    "191.241.226.230:53281",
-    "207.47.68.58:21231",
-    "176.241.95.85:48700",
-]
-# 依序執行 get 方法
-for ip in proxy_ips:
-    try:
-        url = "https://www.google.com"
-        result = requests.get(url, proxies={"http": "ip", "https": ip}
-        )
-        print(result.text)
-    except:
-        print(f"{ip} invalid")
-"""
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 """ 改了
 # 2022/12 時氣象局有修改了 API 內容，將部份大小寫混合全改成小寫，因此程式碼也跟著修正
 url = "https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=JSON"
+
 response = requests.get(url)  # 使用 get 方法透過空氣品質指標 API 取得內容
 response_json = response.json()  # response轉成json格式
+
 for i in response_json["records"]:  # 依序取出 records 內容的每個項目
     print(i["county"] + " " + i["sitename"], end="，")  # 印出城市與地點名稱
     print("AQI:" + i["aqi"], end="，")  # 印出 AQI 數值
@@ -568,8 +577,10 @@ csvfile = open("tmp_csv-aqi.csv", "w")  # 建立空白並可寫入的 CSV 檔案
 csv_write = csv.writer(csvfile)  # 設定 csv_write 為寫入
 
 url = "https://data.epa.gov.tw/api/v2/aqx_p_432?api_key=e8dd42e6-9b8b-43f8-991e-b3dee723a52d&limit=1000&sort=ImportDate%20desc&format=JSON"
+
 response = requests.get(url)
 response_json = response.json()  # response轉成json格式
+
 output = [["county", "sitename", "aqi", "空氣品質"]]  # 設定 output 變數為二維串列，第一筆資料為開頭
 for i in response_json["records"]:
     # 依序將取得的資料加入 output 中
@@ -582,8 +593,10 @@ print("------------------------------------------------------------")  # 60個
 
 """ NG
 url = "一般天氣預報 - 今明 36 小時天氣預報 JSON 連結"
+
 response = requests.get(url)  # 取得 JSON 檔案的內容為文字
 response_json = response.json()  # response轉成json格式
+
 location = response_json["cwbopendata"]["dataset"]["location"]  # 取出 location 的內容
 for i in location:
     print(f"{i}")
@@ -592,8 +605,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "一般天氣預報 - 今明 36 小時天氣預報 JSON 連結"
+
 response = requests.get(url)  # 取得 JSON 檔案的內容為文字
 response_json = response.json()  # response轉成json格式
+
 location = response_json["cwbopendata"]["dataset"]["location"]
 for i in location:
     city = i["locationName"]  # 縣市名稱
@@ -608,8 +623,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "你的氣象觀測資料 JSON 網址"
+
 response = requests.get(url)
 response_json = response.json()  # response轉成json格式
+
 location = response_json["cwbopendata"]["location"]
 for i in location:
     name = i["locationName"]  # 測站地點
@@ -621,8 +638,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "你的氣象觀測資料 JSON 網址"
+
 response = requests.get(url)
 response_json = response.json()  # response轉成json格式
+
 location = response_json["cwbopendata"]["location"]
 for i in location:
     name = i["locationName"]  # 測站地點
@@ -640,8 +659,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "你的氣象觀測資料 JSON 網址"
+
 response = requests.get(url)
 response_json = response.json()  # response轉成json格式
+
 location = response_json["cwbopendata"]["location"]
 weather = {}  # 新增一個 weather 字典
 for i in location:
@@ -711,16 +732,16 @@ from io import StringIO
 
 
 def get_setting():  # ←將「讀取設定檔」寫成函式, 可讓程式易讀易用
-    res = []  # ←準備一個空串列來存放讀取及解析的結果
+    result = []  # ←準備一個空串列來存放讀取及解析的結果
     try:  # 使用 try 來預防開檔或讀檔錯誤
         with open("data/stock.txt") as f:  # 用 with 以讀取模式開啟檔案
             slist = f.readlines()  # 以行為單位讀取所有資料
             print("讀入：", slist)  # 輸出讀到的資料以供確認
             a, b, c = slist[0].split(",")  # ←將股票字串以逗號切割為串列
-            res = [a, b, c]
+            result = [a, b, c]
     except:
         print("data/stock.txt 讀取錯誤")
-    return res  # ←傳回解析的結果, 但如果開檔或讀檔錯誤則會傳回 []
+    return result  # ←傳回解析的結果, 但如果開檔或讀檔錯誤則會傳回 []
 
 
 def get_data():
@@ -738,8 +759,12 @@ def get_data():
 
 
 def crawl_data(date, symbol):
-    print('下載股價')
-    url = "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="+ date+ "&type=ALL"
+    print("下載股價")
+    url = (
+        "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date="
+        + date
+        + "&type=ALL"
+    )
     print(url)
     response = requests.get(url)
 
@@ -889,63 +914,67 @@ print("------------------------------------------------------------")  # 60個
 
 import threading
 
+
 def download_pic(url, path):
-    pic = requests.get(url)     #使用 GET 對圖片連結發出請求
-    path += url[url.rfind('.'):]     #將路徑加上圖片的副檔名
-    f = open(path,'wb')     #以指定的路徑建立一個檔案
-    f.write(pic.content)     #將 HTTP Response 物件的 content寫入檔案中
-    f.close()     #關閉檔案
+    response = requests.get(url)  # 使用 GET 對圖片連結發出請求
+    path += url[url.rfind(".") :]  # 將路徑加上圖片的副檔名
+    f = open(path, "wb")  # 以指定的路徑建立一個檔案
+    f.write(response.content)  # 將 HTTP Response 物件的 content寫入檔案中
+    f.close()  # 關閉檔案
 
 
 def get_photolist(photo_name, download_num):
     from selenium import webdriver  # selenium 的用法可參見 5-7 節
     from selenium.webdriver.common.keys import Keys
-    page = 1     #初始頁數為1
-    photo_list = []     #建立空的圖片 list
-    
-    url = 'https://pixabay.com/zh/'   # Pixabay 網址
+
+    page = 1  # 初始頁數為1
+    photo_list = []  # 建立空的圖片 list
+
+    url = "https://pixabay.com/zh/"  # Pixabay 網址
     option = webdriver.ChromeOptions()  # ←↓加入選項來指定不要有自動控制的訊息
-    option.add_experimental_option('excludeSwitches', ['enable-automation'])
-    browser = webdriver.Chrome(options = option)  #以指定的選項啟動 Chrome
+    option.add_experimental_option("excludeSwitches", ["enable-automation"])
+    browser = webdriver.Chrome(options=option)  # 以指定的選項啟動 Chrome
     browser.get(url)  # 連線到高鐵購票網頁, ●●注意, Chrome出現訊息窗時不可按【停用】鈕, 請按 x 將之關閉, 或不理它也可。
-    browser.find_element_by_name('q').send_keys(photo_name)
-    browser.find_element_by_name('q').send_keys(Keys.RETURN)
-    
+    browser.find_element_by_name("q").send_keys(photo_name)
+    browser.find_element_by_name("q").send_keys(Keys.RETURN)
+
     while True:
         html = browser.page_source
-#        print(html)
-        bs = BeautifulSoup(html, 'lxml')     #解析網頁
-        #先尋找標籤為 div, calss 為 'flex_grid ...' 的元素 (這區中才是免負圖庫)
+        #        print(html)
+        bs = BeautifulSoup(html, "lxml")  # 解析網頁
+        # 先尋找標籤為 div, calss 為 'flex_grid ...' 的元素 (這區中才是免負圖庫)
         #  再尋找所有標籤為 div, calss 為 'item' 的元素
-        photo_item = bs.find('div', {'class': 'flex_grid credits search_results'}
-                            ).find_all('div', {'class': 'item'})
-        if  len(photo_item) == 0:
-            print('Error, no photo link in page', page)
+        photo_item = bs.find(
+            "div", {"class": "flex_grid credits search_results"}
+        ).find_all("div", {"class": "item"})
+        if len(photo_item) == 0:
+            print("Error, no photo link in page", page)
             return None
         for i in range(len(photo_item)):
-            #尋找標籤 img 並取出 'src' 之中的內容
-            photo = photo_item[i].find('img')['src']
-            if photo == '/static/img/blank.gif':
-                #尋找標籤 img 並取出 'data-lazy' 之中的內容
-                photo = photo_item[i].find('img')['data-lazy']
+            # 尋找標籤 img 並取出 'src' 之中的內容
+            photo = photo_item[i].find("img")["src"]
+            if photo == "/static/img/blank.gif":
+                # 尋找標籤 img 並取出 'data-lazy' 之中的內容
+                photo = photo_item[i].find("img")["data-lazy"]
             if photo in photo_list:
-#                print('photo duplicated in photo_list at page', page, photo)
-                continue            
-            #若要下載較高解析度的圖, 可將下行取消註解    
-#            photo = photo.replace('_340', '1280')  #更換為1280解析度
-            photo_list.append(photo)     #將找到的連結新增進 list 之中
+                #                print('photo duplicated in photo_list at page', page, photo)
+                continue
+            # 若要下載較高解析度的圖, 可將下行取消註解
+            #            photo = photo.replace('_340', '1280')  #更換為1280解析度
+            photo_list.append(photo)  # 將找到的連結新增進 list 之中
             if len(photo_list) >= download_num:
-                print('end by get photo list size', len(photo_list))
+                print("end by get photo list size", len(photo_list))
                 browser.close()
                 return photo_list
-        page+=1     #頁數加1
-        #找出下一頁的連結網址
+        page += 1  # 頁數加1
+        # 找出下一頁的連結網址
         try:
-            next = browser.find_element_by_partial_link_text('›').get_attribute('href')
+            next = browser.find_element_by_partial_link_text("›").get_attribute("href")
             browser.get(next)
         except:  # 沒下一頁了
             browser.close()
             return photo_list
+
 
 def create_folder(photo_name):
     folder_name = input("請輸入要儲存的資料夾名稱: ")
@@ -963,27 +992,201 @@ def create_folder(photo_name):
         print(photo_name + " 資料夾已存在")
     return folder_name
 
+
 def get_photobythread(folder_name, photo_name, photo_list):
-    download_num = len(photo_list)     #設定下載數量為圖片連結串列的長度
-    Q = int(download_num / 100)     #取商數
-    R = download_num % 100     #取餘數
+    download_num = len(photo_list)  # 設定下載數量為圖片連結串列的長度
+    Q = int(download_num / 100)  # 取商數
+    R = download_num % 100  # 取餘數
 
     for i in range(Q):
         threads = []
         for j in range(100):
-            threads.append(threading.Thread(target = download_pic, args = (photo_list[i*100+j], folder_name + os.sep + photo_name + os.sep + str(i*100+j+1))))
+            threads.append(
+                threading.Thread(
+                    target=download_pic,
+                    args=(
+                        photo_list[i * 100 + j],
+                        folder_name
+                        + os.sep
+                        + photo_name
+                        + os.sep
+                        + str(i * 100 + j + 1),
+                    ),
+                )
+            )
             threads[j].start()
         for j in threads:
             j.join()
-        print(int((i+1)*100/download_num*100), '%')     #顯示當前進度
+        print(int((i + 1) * 100 / download_num * 100), "%")  # 顯示當前進度
 
     threads = []
     for i in range(R):
-        threads.append(threading.Thread(target = download_pic, args = (photo_list[Q*100+i], folder_name + os.sep + photo_name + os.sep + str(Q*100+i+1))))
+        threads.append(
+            threading.Thread(
+                target=download_pic,
+                args=(
+                    photo_list[Q * 100 + i],
+                    folder_name + os.sep + photo_name + os.sep + str(Q * 100 + i + 1),
+                ),
+            )
+        )
         threads[i].start()
     for i in threads:
         i.join()
-    print("100%")     #顯示當前進度
+    print("100%")  # 顯示當前進度
+
+
+print("------------------------------")  # 30個
+
+import threading
+from selenium import webdriver  # selenium 的用法可參見 5-7 節
+from selenium.webdriver.common.keys import Keys
+
+
+def download_pic(url, path):
+    response = requests.get(url)  # 使用 GET 對圖片連結發出請求
+    path += url[url.rfind(".") :]  # 將路徑加上圖片的副檔名
+    f = open(path, "wb")  # 以指定的路徑建立一個檔案
+    f.write(response.content)  # 將 HTTP Response 物件的 content寫入檔案中
+    f.close()  # 關閉檔案
+
+
+def get_photolist(photo_name, download_num):
+    page = 1  # 初始頁數為1
+    photo_list = []  # 建立空的圖片 list
+
+    url = "https://pixabay.com/zh/"  # Pixabay 網址
+    option = webdriver.ChromeOptions()  # ←↓加入選項來指定不要有自動控制的訊息
+    option.add_experimental_option("excludeSwitches", ["enable-automation"])
+    browser = webdriver.Chrome(options=option)  # 以指定的選項啟動 Chrome
+    # 連線到pixabay網頁, ●●注意, Chrome出現訊息窗時不可按【停用】鈕, 請按 x 將之關閉, 或不理它也可。
+    browser.get(url)
+    browser.find_element_by_name("q").send_keys(photo_name)
+    browser.find_element_by_name("q").send_keys(Keys.RETURN)
+
+    while True:
+        html = browser.page_source
+        #        print(html)
+        bs = BeautifulSoup(html, "lxml")  # 解析網頁
+        #  先尋找標籤為 div, calss 為 'flex_grid ...' 的元素 (這區中才是免費圖庫)
+        #  再尋找所有標籤為 div, calss 為 'item' 的元素
+        photo_item = bs.find(
+            "div", {"class": "flex_grid credits search_results"}
+        ).find_all("div", {"class": "item"})
+        if len(photo_item) == 0:
+            print("Error, no photo link in page", page)
+            return None
+        for i in range(len(photo_item)):
+            # 尋找標籤 img 並取出 'src' 之中的內容
+            photo = photo_item[i].find("img")["src"]
+            if photo == "/static/img/blank.gif":
+                # 尋找標籤 img 並取出 'data-lazy' 之中的內容
+                photo = photo_item[i].find("img")["data-lazy"]
+            if photo in photo_list:
+                #                print('photo duplicated in photo_list at page', page, photo)
+                continue
+            # 若要下載較高解析度的圖, 可將下行取消註解
+            #            photo = photo.replace('_340', '1280')  #更換為1280解析度
+            photo_list.append(photo)  # 將找到的連結新增進 list 之中
+            if len(photo_list) >= download_num:
+                print("end by get photo list size", len(photo_list))
+                browser.close()
+                return photo_list
+        page += 1  # 頁數加1
+        # 找出下一頁的連結網址
+        try:
+            next = browser.find_element_by_partial_link_text("›").get_attribute("href")
+            browser.get(next)
+        except:  # 沒下一頁了
+            browser.close()
+            return photo_list
+
+
+def create_folder(photo_name):
+    folder_name = input("請輸入要儲存的資料夾名稱: ")
+
+    if not os.path.exists(folder_name):
+        os.mkdir(folder_name)
+        print("資料夾不存在, 建立資料夾: " + folder_name)
+    else:
+        print("找到資料夾: " + folder_name)
+
+    if not os.path.exists(folder_name + os.sep + photo_name):
+        os.mkdir(folder_name + os.sep + photo_name)
+        print("建立資料夾: " + photo_name)
+    else:
+        print(photo_name + " 資料夾已存在")
+    return folder_name
+
+
+def get_photobythread(folder_name, photo_name, photo_list):
+    download_num = len(photo_list)  # 設定下載數量為圖片連結串列的長度
+    Q = int(download_num / 100)  # 取商數
+    R = download_num % 100  # 取餘數
+
+    for i in range(Q):
+        threads = []
+        for j in range(100):
+            threads.append(
+                threading.Thread(
+                    target=download_pic,
+                    args=(
+                        photo_list[i * 100 + j],
+                        folder_name
+                        + os.sep
+                        + photo_name
+                        + os.sep
+                        + str(i * 100 + j + 1),
+                    ),
+                )
+            )
+            threads[j].start()
+        for j in threads:
+            j.join()
+        print(int((i + 1) * 100 / download_num * 100), "%")  # 顯示當前進度
+
+    threads = []
+    for i in range(R):
+        threads.append(
+            threading.Thread(
+                target=download_pic,
+                args=(
+                    photo_list[Q * 100 + i],
+                    folder_name + os.sep + photo_name + os.sep + str(Q * 100 + i + 1),
+                ),
+            )
+        )
+        threads[i].start()
+    for i in threads:
+        i.join()
+    print("100%")  # 顯示當前進度
+
+
+print("------------------------------------------------------------")  # 60個
+
+while True:
+    photo_name = input("請輸入要下載的圖片名稱: ")
+
+    download_num = int(input("請輸入要下載的數量: "))
+
+    photo_list = get_photolist(photo_name, download_num)
+
+    if photo_list == None:
+        print("找不到圖片, 請換關鍵字再試試看")
+    else:
+        if len(photo_list) < download_num:
+            print("找到的相關圖片僅有", len(photo_list), "張")
+        else:
+            print("取得所有圖片連結")
+        break
+
+folder_name = create_folder(photo_name)
+
+print("開始下載...")
+
+get_photobythread(folder_name, photo_name, photo_list)
+
+print("\n下載完畢")
 
 print("------------------------------")  # 30個
 
@@ -1008,7 +1211,7 @@ while True:
 print("開始下載...")
 
 for i in range(len(photo_list)):
-    m.download_pic(photo_list[i], str(i+1))
+    m.download_pic(photo_list[i], str(i + 1))
 
 print("\n下載完畢")
 
@@ -1018,32 +1221,34 @@ import photo_module as m
 
 while True:
     photo_name = input("請輸入要下載的圖片名稱: ")
-        
+
     download_num = int(input("請輸入要下載的數量: "))
-    
-    photo_list = m.get_photolist(photo_name, download_num) 
-    
+
+    photo_list = m.get_photolist(photo_name, download_num)
+
     if photo_list == None:
         print("找不到圖片, 請換關鍵字再試試看")
     else:
         if len(photo_list) < download_num:
-            print("找到的相關圖片僅有", len(photo_list), "張" )
+            print("找到的相關圖片僅有", len(photo_list), "張")
         else:
-            print("取得所有圖片連結") 
+            print("取得所有圖片連結")
         break
 
 folder_name = m.create_folder(photo_name)
-    
+
 print("開始下載...")
- 
+
 for i in range(len(photo_list)):
-    m.download_pic(photo_list[i], folder_name + os.sep + photo_name + os.sep + str(i+1))
-    
+    m.download_pic(
+        photo_list[i], folder_name + os.sep + photo_name + os.sep + str(i + 1)
+    )
+
 print("\n下載完畢")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("檢查錯誤碼")
 
 url = "http://example.com"
@@ -1161,10 +1366,10 @@ for page in pages:
     print(page)
 
 for pg_no, page in enumerate(pages, 1):
-    html = requests.get(page).text
+    response = requests.get(page)
     filename = "tmp_page-{}.txt".format(pg_no)
     with open(filename, "wt") as fp:
-        fp.write(html)
+        fp.write(response.text)
     print("存檔檔案 :", filename)
     time.sleep(3)
     print("=========================")
@@ -1210,22 +1415,16 @@ with open(fn, "wb") as f:  # 以二進位儲存
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 檢查回應狀態碼
+
 url = "http://www.google.com"
 response = requests.get(url)
-
-# HTTP狀態碼
-if response.status_code == 200:
-    print("請求成功...")
-else:
-    print("請求失敗...")
-
 print("HTTP狀態碼 :", response.status_code)
 print(response.status_code == requests.codes.ok)
 print(response.status_code == requests.codes.all_good)
 
 url = "http://www.google.com/404"
 response = requests.get(url)
-
 print("HTTP狀態碼 :", response.status_code)
 print(response.status_code == requests.codes.ok)
 # NG print(response.raise_for_status())
@@ -1246,8 +1445,26 @@ print(response.headers.get("Content-Length"))
 print(response.headers.get("Date"))
 print(response.headers.get("Server"))
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
+
+# 取得HTTP標頭
+url = "http://www.google.com"
+response = requests.get(url)
+print(response.headers["Content-Type"])
+# print(response.headers['Content-Length'])
+print(response.headers["Date"])
+print(response.headers["Server"])
+
+print("------------------------------")  # 30個
+
+# 取得HTTP標頭
+url = "http://www.google.com"
+response = requests.get(url)
+print(response.headers.get("Content-Type"))
+print(response.headers.get("Content-Length"))
+print(response.headers.get("Date"))
+print(response.headers.get("Server"))
+
+print("------------------------------")  # 30個
 
 session = requests.Session()
 response = session.get("http://www.google.com")
@@ -1278,6 +1495,7 @@ for row in data["items"]:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+# 指定請求時間
 print("測試 timeout")
 try:
     url = "http://www.google.com"
@@ -1288,11 +1506,14 @@ except requests.exceptions.Timeout as ex:
 
 print("------------------------------")  # 30個
 
+# 建立Requests的例外處理
+
 url = "http://www.google.com/404"
 
 try:
     response = requests.get(url, timeout=3)
     response.raise_for_status()
+    print(response)
 except requests.exceptions.RequestException as ex1:
     print("Http請求錯誤: " + str(ex1))
 except requests.exceptions.HTTPError as ex2:
@@ -1320,14 +1541,14 @@ print("抓取網頁中的電話號碼 用 re")
 
 url = "https://www.taichung.gov.tw/10179/12034/"
 
-html = requests.get(url).text
+response = requests.get(url)
 
 regex04a = r"\(\d{2}\)\d{4}-?\d{4}"
 regex04b = r"\d{2}-\d{4}-?\d{4}"
 regex0800 = r"0800-\d{6}"
-matches = re.findall(regex04a, html)
-matches += re.findall(regex04b, html)
-matches += re.findall(regex0800, html)
+matches = re.findall(regex04a, response.text)
+matches += re.findall(regex04b, response.text)
+matches += re.findall(regex0800, response.text)
 """ many
 for match in matches:
     print("抓到符合條件的 : ", match)
@@ -1343,9 +1564,9 @@ print("抓取網頁中的e-mail地址 用 re")
 regex = r"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+)"
 url = "http://csharphelper.com/blog/"
 
-html = requests.get(url, verify=False).text
+response = requests.get(url, verify=False)
 
-emails = re.findall(regex, html)
+emails = re.findall(regex, response.text)
 for email in emails:
     print(email)
 """
@@ -1356,10 +1577,10 @@ print("抓取網頁內的所有圖片連結")
 
 url = "https://www.bagong.cn/dog/"
 
-html = requests.get(url).text
+response = requests.get(url)
 
 regex = r"https?://.+.jpg"
-photos = re.findall(regex, html)
+photos = re.findall(regex, response.text)
 
 """ many
 for photo in photos:
@@ -1374,8 +1595,8 @@ import urllib.parse
 print("聯合新聞網之即時新聞 標題 與 連結")
 
 url = "https://udn.com/api/more?page=2&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
-html = requests.get(url).text
-json_data = json.loads(html)
+response = requests.get(url)
+json_data = json.loads(response.text)
 
 """ many
 titles = json_data["lists"]
@@ -1389,6 +1610,7 @@ print("------------------------------------------------------------")  # 60個
 print("拆解網頁資料")
 url = "https://today.line.me/tw/v2/article/oqay0ro"
 response = requests.get(url)
+
 """ NG
 # 取得文章的原始碼後，使用 split 字串拆分的方式，拆解出 articleId
 article_id = response.text.split("<script>")[1].split("id:"article:")[1].split(":")[0]
@@ -1404,31 +1626,26 @@ print("查詢一個網頁有出現的詞的次數 聯合新聞網之即時新聞
 url = "https://udn.com/news/breaknews/1/99#breaknews"
 
 response = requests.get(url)
-html = response.text
 
 print("HTTP狀態碼 :", response.status_code)
 
 text = "賴"
 print("要查詢的詞 :", text)
-print("出現次數 :", html.count(text))
+print("出現次數 :", response.text.count(text))
 
 text = "總統"
 print("要查詢的詞 :", text)
-print("出現次數 :", html.count(text))
+print("出現次數 :", response.text.count(text))
 
 text = "委員"
 print("要查詢的詞 :", text)
-print("出現次數 :", html.count(text))
+print("出現次數 :", response.text.count(text))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-"""
-CH02網路爬蟲資料收集
-
-!pip install scraparazzie
-
-"""
+# CH02網路爬蟲資料收集
+# !pip install scraparazzie
 
 """
 print('爬取 google news')
@@ -1472,13 +1689,12 @@ print('新聞連結：')
 for i, article in enumerate(paper.articles):
     print(i+1, article.url)
 
-
 from newspaper import Article
+
 url = 'https://news.ltn.com.tw/news/life/breakingnews/3649202'
 article = Article(url)
 article.download()
 print(article.html)
-
 
 article.parse()
 print('新聞標題：')
@@ -1488,8 +1704,8 @@ print(article.text)
 print('新聞日期：')
 print(article.publish_date)
 
-
 from newspaper import fulltext
+
 url = 'https://www.cnbc.com/2020/10/27/trump-biden-foreign-policy-iran-china.html'
 article = Article(url)
 article.download()
@@ -1544,7 +1760,8 @@ df1 = df[1:6]
 df1.to_csv("tmp_station5.csv", index=False)
 print(df1)
 
-from Carson.Tool.HistoricalWeatherTW import collect_weather_tw, QueryFormat
+from Carson.Tool.HistoricalWeatherTW import collect_weather_tw
+from Carson.Tool.HistoricalWeatherTW import QueryFormat
 from pathlib import Path
 
 STATION_CSV = "tmp_station5.csv"
@@ -1646,10 +1863,7 @@ with urllib.request.urlopen(url) as jsonfile:
         print("{:>2}/{:>2}\t{}".format(data['retVal'][k]['sbi'], data['retVal'][k]['tot'], data['retVal'][k]['sna']))
     """
 
-print("------------------------------------------------------------")  # 60個
-
-# 桃園公共自行車即時服務資料.json
-url = "https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f"
+print("------------------------------")  # 30個
 
 with urllib.request.urlopen(url) as jsonfile:
     data = json.loads(jsonfile.read().decode())
@@ -1690,8 +1904,10 @@ from dominate import document
 from dominate.tags import *
 
 html = document("桃園公共自行車各站可租數量")
+
 with html.head:
     meta(charset="utf-8")
+
 with html.body:
     h1("這是一個示範網頁")
     hr()
@@ -1700,8 +1916,10 @@ with html.body:
     items = ul()
     items += li("第一點")
     items += li("這是第二點")
+
 with open("桃園公共自行車各站可租數量a.html", "wt", encoding="utf-8") as fp:
     fp.write(str(html))
+
 print("Done!")
 
 print("------------------------------------------------------------")  # 60個
@@ -1715,9 +1933,12 @@ url = "https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=5ca2bf
 
 with urllib.request.urlopen(url) as jsonfile:
     data = json.loads(jsonfile.read().decode())
+
 html = dominate.document(title="桃園公共自行車各站可租數量")
+
 with html.head:
     meta(charset="utf-8")
+
 with html:
     h1("桃園公共自行車各站可租數量")
     hr()
@@ -1736,8 +1957,10 @@ with html:
             row += td(data["retVal"][k]["sbi"])
             row += td(data["retVal"][k]["tot"])
             row += td(data["retVal"][k]["ar"])
+
 with open("桃園公共自行車各站可租數量_list.html", "wt", encoding="utf-8") as fp:
     fp.write(str(html))
+
 print("Done!")
 
 print("------------------------------------------------------------")  # 60個
@@ -1751,7 +1974,9 @@ url = "https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=5ca2bf
 
 with urllib.request.urlopen(url) as jsonfile:
     data = json.loads(jsonfile.read().decode())
+
 html = dominate.document(title="桃園公共自行車各站可租數量")
+
 with html.head:
     meta(charset="utf-8")
     script(
@@ -1782,20 +2007,13 @@ with html:
     d = div()
     d += h3("可租借數量/總數：")
     d += span(id="target")
+
 with open("桃園公共自行車各站可租數量查詢.html", "wt", encoding="utf-8") as fp:
     fp.write(str(html))
+
 print("Done!")
 
 print("------------------------------------------------------------")  # 60個
-
-print("解析網址")
-from urllib.parse import urlparse
-
-u = urlparse("https://tw.stock.yahoo.com/news_list/url/d/e/N1.html?q=&pg=4")
-print(u.netloc)
-print(u.path)
-print(u.query)
-
 print("------------------------------------------------------------")  # 60個
 
 print("拼湊網址")
@@ -1815,24 +2033,28 @@ print("------------------------------------------------------------")  # 60個
 
 print("抓取網頁")
 url = "https://tw.stock.yahoo.com/tw-market"
-html = requests.get(url).text
-print(html)
+response = requests.get(url)
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
 print("抓取網頁, re分析")
 url = "https://tw.stock.yahoo.com/tw-market"
-html = requests.get(url).text
-print(re.sub(r"<script.*>.*</script>", "", html))
+response = requests.get(url)
+print(re.sub(r"<script.*>.*</script>", "", response.text))
 
 print("------------------------------------------------------------")  # 60個
 
 print("抓取網頁")
 # 博客來-中文書>暢銷榜
 url = "https://www.books.com.tw/web/sys_saletopb/books/19/?loc=P_0002_020"
-html = requests.get(url).text
-print(type(html))
-print("Python這個字在排行榜中裡面出現了{}次".format(html.count("Python") + html.count("python")))
+response = requests.get(url)
+print(type(response.text))
+print(
+    "Python這個字在排行榜中裡面出現了{}次".format(
+        response.text.count("Python") + response.text.count("python")
+    )
+)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1840,26 +2062,25 @@ print("抓取網頁")
 
 # 博客來-中文書>暢銷榜
 url = "https://www.books.com.tw/web/sys_saletopb/books/19/?loc=P_0002_020"
-html = requests.get(url).text
+response = requests.get(url)
 keyword = input("請問你要查詢的字串(end to quit)：")
 while keyword != "end":
-    print("{}這個字在排行榜中裡面出現了{}次".format(keyword, html.count(keyword)))
+    print("{}這個字在排行榜中裡面出現了{}次".format(keyword, response.text.count(keyword)))
     keyword = input("請問你要查詢的字串：")
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-api_url = "https://www.dcard.tw/_api/forums/funny/posts?limit=100"
-res = requests.get(api_url).text
+url = "https://www.dcard.tw/_api/forums/funny/posts?limit=100"
+response = requests.get(url)
 
-data = json.loads(res)
+data = json.loads(response.text)
 for post in data:
     print(post["title"])
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
-data = json.loads(res)
+data = json.loads(response)
 for post in data:
     if len(post["media"]) > 0:
         for image in post["media"]:
@@ -1869,19 +2090,19 @@ for post in data:
                 urllib.request.urlretrieve(imgurl, os.path.basename(imgurl))
             time.sleep(3)
 
-print(res)
+print(response)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-api_url = "https://www.dcard.tw/_api/forums/funny/posts?limit=100"
-res = requests.get(api_url).text
+url = "https://www.dcard.tw/_api/forums/funny/posts?limit=100"
+response = requests.get(url)
 
-data = json.loads(res)
+data = json.loads(response.text)
 for post in data:
     print(post["title"])
 
-print(res)
+print(response)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1890,8 +2111,9 @@ import urllib.parse
 
 url = "https://udn.com/api/more?page=2&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
 
-html = requests.get(url).text
-data = json.loads(html)
+response = requests.get(url)
+
+data = json.loads(response.text)
 
 titles = data["lists"]
 for title in titles:
@@ -1902,9 +2124,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "https://ck101.com/forum-3590-1.html?ref=nav"
-res = requests.get(url)
-print(res)
-print(res.text)
+response = requests.get(url)
+print(response)
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1913,16 +2135,16 @@ url = "https://ck101.com/forum-3590-1.html?ref=nav"
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
 }
-res = requests.get(url, headers=headers)
-print(res)
-print(res.text)
+response = requests.get(url, headers=headers)
+print(response)
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 url = "https://www.mobile01.com/topiclist.php?f=751"
-res = requests.get(url)
-print(res)
+response = requests.get(url)
+print(response)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1941,8 +2163,8 @@ form_data = {
     "Page": "",
     "Limit": "20",
 }
-res = requests.post(url, data=form_data, headers=headers)
-data = res.text
+response = requests.post(url, data=form_data, headers=headers)
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1958,10 +2180,9 @@ print("------------------------------------------------------------")  # 60個
 
 url = "https://ck101.com/forum-3590-1.html?ref=nav"
 
-res = requests.get(url)
-
-print(res)
-print(res.text)
+response = requests.get(url)
+print(response)
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1994,10 +2215,9 @@ headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
 }
 
-res = requests.get(url, headers=headers)
-
-print(res)
-print(res.text)
+response = requests.get(url, headers=headers)
+print(response)
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2029,10 +2249,10 @@ for car in cars:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-api_url = "https://www.dcard.tw/_api/forums/funny/posts?limit=100"
-res = requests.get(api_url).text
+url = "https://www.dcard.tw/_api/forums/funny/posts?limit=100"
+response = requests.get(url)
 
-data = json.loads(res)
+data = json.loads(response.text)
 for post in data:
     if len(post["media"]) > 0:
         for image in post["media"]:
@@ -2048,18 +2268,16 @@ url = "https://www.mobile01.com/topiclist.php?f=751"
 
 print("無參數抓網頁")
 
-res = requests.get(url)
-
-print(res)
-
+response = requests.get(url)
+print(response)
 
 print("有參數抓網頁")
 
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
 }
-res = requests.get(url, headers=headers)
-print(res)
+response = requests.get(url, headers=headers)
+print(response)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2067,13 +2285,12 @@ print("------------------------------------------------------------")  # 60個
 # 郵遞區號
 zipcode = "1000001"
 
-# API 端點
-api_endpoint = f"https://zipcloud.ibsnet.co.jp/api/search?zipcode={zipcode}"
+url = f"https://zipcloud.ibsnet.co.jp/api/search?zipcode={zipcode}"
 
 # https://zipcloud.ibsnet.co.jp/api/search?zipcode=1000001
 
 # 進行查詢
-response = requests.get(api_endpoint)
+response = requests.get(url)
 
 # 檢查回應狀態
 if response.status_code == 200:
@@ -2103,21 +2320,9 @@ else:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-from urllib.parse import urlparse
-
-o = urlparse("http://www.example.com:80/test/index.php?user=joe")
-
-print("使用urlparse()方法剖析URL網址成為組成的元素")
-print("通訊協定: ", o.scheme)
-print("網域名稱: ", o.netloc)
-print("通訊埠號: ", o.port)
-print("網頁路徑: ", o.path)
-print("查詢字串: ", o.query)
-
-print("------------------------------------------------------------")  # 60個
-
 url = "https://fchart.github.io/test.html"
 response = requests.get(url)
+
 if response.status_code == 200:
     print("Text :\n", response.text)
     print("編碼: ", response.encoding)
@@ -2177,6 +2382,7 @@ print(response.text)
 print("------------------------------------------------------------")  # 60個
 
 url = "https://api.sgx.com/derivatives/v1.0/contract-code/TW?order=asc&orderby=delivery-month&category=futures&session=-1&t=1596956628001&showTAICTrades=false"
+
 response = requests.get(url)
 print(response.text)
 
@@ -2264,133 +2470,9 @@ else:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-sys.exit()
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-3030
-print("------------------------------")  # 30個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-# 讀取網頁上的 csv 檔
-csv_file = "xxxxx .csv"
-df = pd.read_csv(csv_file)
-print("------------------------------")  # 30個
-print(df.head())
-print("------------------------------")  # 30個
-
-# 讀取網頁上的 excel 檔
-xlsx_file = "xxxx .xlsx"
-df = pd.read_excel(xlsx_file)
-print("------------------------------")  # 30個
-print(df.head())
-print("------------------------------")  # 30個
-
-# 兩個方法得到的df是一樣的
-
-print("用list 標註變數名稱從DataFrame選出country 與continent 欄位：")
-print(df[["country", "continent"]])
-
-print("------------------------------")  # 30個
-print("選一個變數且沒有以list 標註，選出欄位資料，型別為Series")
-country = df["country"]
-print(type(country))
-print("------------------------------")  # 30個
-print("聚合函數計算sum，計算2007 年全球人口總數：")
-aa = df[df["year"] == 2007][["pop"]].sum()
-print(aa)
-print("------------------------------")  # 30個
-print("計算2007 年全球的平均壽命、平均財富：")
-bb = df[df["year"] == 2007][["lifeExp", "gdpPercap"]].mean()
-print(bb)
-print("------------------------------")  # 30個
-print("groupby群組計算2007 年各洲人口總數：")
-cc = df[df["year"] == 2007].groupby(by="continent")["pop"].sum()
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-from urllib.request import unquote
-
-print("網址解碼 utf-8")
-url = unquote(url, encoding="utf-8")
-print(url)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 設定參數
-params = {"name": "david", "age": "18"}
-params = {"name": "工作表1", "top": "true", "data": "[123,456,789]"}
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-import string
-
-str1 = "#$%^Python -is- *a* $%programming_ language.$"
-
-print(string.punctuation)
-
-list1 = str1.split(" ")
-for item in list1:
-    print(item.strip(string.punctuation))
-
-print("------------------------------------------------------------")  # 60個
-
-baseUrl = "http://example.com"
-list1 = [
-    "http://www.example.com/test",
-    "http://example.com/word",
-    "media/ex.jpg",
-    "http://www.example.com/index.html",
-]
-
-
-def getUrl(baseUrl, source):
-    if source.startswith("http://www."):
-        url = "http://" + source[11:]
-    elif source.startswith("http://"):
-        url = source
-    elif source.startswith("www"):
-        url = source[4:]
-        url = "http://" + source
-    else:
-        url = baseUrl + "/" + source
-
-    if baseUrl not in url:
-        return None
-    return url
-
-
-for item in list1:
-    print(getUrl(baseUrl, item))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
 url = "https://fchart.github.io/json/Example.json"
 response = requests.get(url)
+
 print(response.text)  # HTML網頁內容
 print(type(response.text))
 
@@ -2403,6 +2485,7 @@ print("------------------------------------------------------------")  # 60個
 url = "https://fchart.github.io/img/fchart03.png"
 path = "tmp_fchart03a.png"
 response = requests.get(url, stream=True)
+
 if response.status_code == 200:
     with open(path, "wb") as fp:
         for chunk in response:
@@ -2602,9 +2685,9 @@ driver.find_element_by_id("SearchButton").click()  # 按登入鈕
 #    'DiscountType':''
 # }
 #
-# res = requests.post(url, headers=headers, data=form_data)
+# response = requests.post(url, headers=headers, data=form_data)
 #
-# jsdata = res.json()
+# jsdata = response.json()
 #
 ##print(jsdata['data'])
 # jsdata
@@ -2612,75 +2695,7 @@ driver.find_element_by_id("SearchButton").click()  # 按登入鈕
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檢查回應狀態碼
-response = requests.get("http://www.google.com")
-print(response.status_code)
-print(response.status_code == requests.codes.ok)
-
-response = requests.get("http://www.google.com/404")
-print(response.status_code)
-print(response.status_code == requests.codes.ok)
-
-response = requests.get("http://www.google.com")
-print(response.status_code)
-print(response.status_code == requests.codes.all_good)
-
-print("------------------------------")  # 30個
-
-# 取得HTTP標頭
-response = requests.get("http://www.google.com")
-print(response.headers["Content-Type"])
-# print(response.headers['Content-Length'])
-print(response.headers["Date"])
-print(response.headers["Server"])
-
-print("------------------------------")  # 30個
-
-# 取得HTTP標頭
-response = requests.get("http://www.google.com")
-print(response.headers.get("Content-Type"))
-print(response.headers.get("Content-Length"))
-print(response.headers.get("Date"))
-print(response.headers.get("Server"))
-
-print("------------------------------")  # 30個
-
-# 送出Cookie的HTTP請求
-url = "http://httpbin.org/cookies"
-cookies = dict(name="Joe Chen")
-response = requests.get(url, cookies=cookies)
-print(response.text)
-
-print("------------------------------")  # 30個
-
-url = "http://httpbin.org/user-agent"
-response = requests.get(url)
-print(response.text)
-
-print("------------------------------")  # 30個
-
-url_headers = {
-    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
-}
-response = requests.get(url, headers=url_headers)
-print(response.text)
-
-print("------------------------------")  # 30個
-
-
-print("------------------------------")  # 30個
+print("github a")
 
 url = "https://api.github.com/user"
 response = requests.get(url, auth=("hueyan@ms2.hinet.net", "********"))
@@ -2692,63 +2707,43 @@ else:
 
 print("------------------------------")  # 30個
 
+print("github b")
+
 # The GitHub documentation is fairly clear that you need to send the Authorization header.
 # TOKEN https://github.com/settings/tokens
 # GitHub Login 1
+
 username = "user"
 token = "token"
-login = requests.get(
+response = requests.get(
     "https://api.github.com/search/repositories?q=github+api", auth=(username, token)
 )
-login
+print(response)
 
 print("------------------------------")  # 30個
+
+print("github c")
 
 # GitHub Login 2
 token = ""
 headers = {"Authorization": "token " + token}
-login = requests.get("https://api.github.com/user", headers=headers)
-print(login.json())
+response = requests.get("https://api.github.com/user", headers=headers)
+print(response.json())
 
-print("------------------------------")  # 30個
-
-# 指定請求時間
-try:
-    response = requests.get("http://www.google.com", timeout=0.03)
-    print(response.text)
-except requests.exceptions.Timeout as ex:
-    print("錯誤: HTTP請求已經超過時間...\n" + str(ex))
-
-
-print("------------------------------")  # 30個
-
-# 建立Requests的例外處理
-url = "http://www.google.com/404"
-try:
-    response = requests.get(url, timeout=3)
-    response.raise_for_status()
-    print(response)
-except requests.exceptions.RequestException as ex1:
-    print("Http請求錯誤: " + str(ex1))
-except requests.exceptions.HTTPError as ex2:
-    print("Http回應錯誤: " + str(ex2))
-except requests.exceptions.ConnectionError as ex3:
-    print("網路連線錯誤: " + str(ex3))
-except requests.exceptions.Timeout as ex4:
-    print("Timeout錯誤: " + str(ex4))
-
-print("------------------------------")  # 30個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 將取得的回應內容寫成檔案
-response = requests.get("http://www.google.com")
+url = "http://www.google.com"
+response = requests.get(url)
 response.encoding = "utf-8"
-fp = open("test.txt", "w", encoding="utf8")
+fp = open("tmp_html_data.html", "w", encoding="utf8")
 fp.write(response.text)
-print("寫入檔案test.txt...")
+print("寫入檔案tmp_html_data.html...")
 fp.close()
 
 # 讀取檔案的全部內容
-fp = open("test.txt", "r", encoding="utf8")
+fp = open("tmp_html_data.html", "r", encoding="utf8")
 str = fp.read()
 print("檔案內容:")
 print(str)
@@ -2756,39 +2751,6 @@ print(str)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# urlopen.py
-
-import urllib.request
-
-url = "http://www.grandtech.info/"
-
-# 以with/as敘述來取得網址，離開之後會自動釋放資源
-with urllib.request.urlopen(url) as response:
-    print("網頁網址", response.geturl())
-    print("伺服器狀態碼", response.getcode())
-    print("網頁表頭", response.getheaders())
-    zct_str = response.read().decode("UTF-8")
-
-print("將網頁資料轉成字串格式", zct_str)
-# print('網頁程式碼如下: ',zct_str)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# urlParse.py
-
-from urllib.parse import urlparse
-
-url = "https://www.zct.com.tw/hot_sale.php?act=goods&hash=5717321f978f1"
-url = "http://www.drmaster.com.tw/Bookinfo.asp?BookID=MI22004"
-
-result = urlparse(url)
-print("回傳的 ParseResult 物件:")
-print(result)
-print("通訊協定:" + result.scheme)
-print("網站網址:", result.netloc)
-print("路徑:", result.path)
-print("查詢字串:", result.query)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2797,20 +2759,423 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
+
 print("------------------------------------------------------------")  # 60個
 
-
-# html使用<div>標籤來分割網頁區塊，多用來指定套用CSS的範圍
+# 3030
+print("------------------------------")  # 30個
 
 # 1515
 print("---------------")  # 15個
 
+print("------------------------------------------------------------")  # 60個
+
+
+# 讀取網頁上的 csv 檔
+csv_file = "xxxxx.csv"
+df = pd.read_csv(csv_file)
+print("------------------------------")  # 30個
+print(df.head())
+print("------------------------------")  # 30個
+
+# 讀取網頁上的 excel 檔
+xlsx_file = "xxxx .xlsx"
+df = pd.read_excel(xlsx_file)
+print("------------------------------")  # 30個
+print(df.head())
+print("------------------------------")  # 30個
+
+# 兩個方法得到的df是一樣的
+
+print("用list 標註變數名稱從DataFrame選出country 與continent 欄位：")
+print(df[["country", "continent"]])
+
+print("------------------------------")  # 30個
+print("選一個變數且沒有以list 標註，選出欄位資料，型別為Series")
+country = df["country"]
+print(type(country))
+print("------------------------------")  # 30個
+print("聚合函數計算sum，計算2007 年全球人口總數：")
+aa = df[df["year"] == 2007][["pop"]].sum()
+print(aa)
+print("------------------------------")  # 30個
+print("計算2007 年全球的平均壽命、平均財富：")
+bb = df[df["year"] == 2007][["lifeExp", "gdpPercap"]].mean()
+print(bb)
+print("------------------------------")  # 30個
+print("groupby群組計算2007 年各洲人口總數：")
+cc = df[df["year"] == 2007].groupby(by="continent")["pop"].sum()
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 設定參數
+params = {"name": "david", "age": "18"}
+params = {"name": "工作表1", "top": "true", "data": "[123,456,789]"}
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+import string
+
+str1 = "#$%^Python -is- *a* $%programming_ language.$"
+
+print(string.punctuation)
+
+list1 = str1.split(" ")
+for item in list1:
+    print(item.strip(string.punctuation))
+
+print("------------------------------------------------------------")  # 60個
+
+baseUrl = "http://example.com"
+list1 = [
+    "http://www.example.com/test",
+    "http://example.com/word",
+    "media/ex.jpg",
+    "http://www.example.com/index.html",
+]
+
+
+def getUrl(baseUrl, source):
+    if source.startswith("http://www."):
+        url = "http://" + source[11:]
+    elif source.startswith("http://"):
+        url = source
+    elif source.startswith("www"):
+        url = source[4:]
+        url = "http://" + source
+    else:
+        url = baseUrl + "/" + source
+
+    if baseUrl not in url:
+        return None
+    return url
+
+
+for item in list1:
+    print(getUrl(baseUrl, item))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# html使用<div>標籤來分割網頁區塊，多用來指定套用CSS的範圍
 
 lines = html_data_text.splitlines()  # 將網頁資料一行一行地分割成串列
-
 
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
 }
+
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
+}
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("httpbin ST")
+print("------------------------------------------------------------")  # 60個
+
+url = "http://httpbin.org/user-agent"
+response = requests.get(url)
+print(response.text)
+
+print("------------------------------")  # 30個
+
+# 送出Cookie的HTTP請求
+url = "http://httpbin.org/cookies"
+cookies = dict(name="Joe Chen")
+response = requests.get(url, cookies=cookies)
+print(response.text)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+"""
+測試 httpbin
+先 get 再 post
+"""
+# 資料
+my_data = {"key1": "value1", "key2": "value2"}
+# 將資料加入POST 請求中
+r = requests.post("http://httpbin.org/post", data=my_data)
+print(r.text)
+print(r.status_code)
+
+print("------------------------------------------------------------")  # 60個
+
+print("用 httpbin 測試 檔案的 POST")
+
+# 要上傳的檔案
+my_files = {"my_filename": open("bankRate.csv", "rb")}
+# 將檔案加入POST 請求中
+r = requests.post("http://httpbin.org/post", files=my_files)
+print(r.status_code)
+
+print("------------------------------------------------------------")  # 60個
+
+print("requests 測試 7b")
+
+print("將查詢參數加入 POST 請求中")
+payload = {"key1": "value1", "key2": "value2"}
+url = "http://httpbin.org/post"
+html_data = requests.post(url, data=payload)
+print(html_data.text)
+
+print("------------------------------------------------------------")  # 60個
+print("requests 測試 7c")
+
+print("將查詢參數定義為字典資料加入GET請求中")
+url = "http://httpbin.org/get"
+params = {"key1": "value1", "key2": "value2"}
+html_data = get_html_data2(url, params)
+if html_data:
+    print(html_data.text)
+else:
+    print("無法取得網頁資料")
+
+print("------------------------------------------------------------")  # 60個
+
+print("將自訂表頭加入 GET 請求中")
+
+url = "https://irs.thsrc.com.tw/IMINT"  # 台灣高鐵訂票系統
+
+# 自訂表頭
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36"
+}
+html_data = requests.get(url, headers=headers)
+print(html_data)
+
+print("抓取網頁資料 2")
+# url = 'https://httpbin.org/get?value1=1&value2=2'
+url = "https://tw.dictionary.search.yahoo.com/?value1=lion"
+# url = 'https://www.google.com.tw/'
+html_data = get_html_data1(url)
+if html_data:
+    print("抓取網頁OK")
+    # print(html_data.text)
+else:
+    print("抓取網頁NG")
+
+print("------------------------------------------------------------")  # 60個
+print("requests 測試 9")
+
+print("將查詢參數加入 GET 請求中")
+
+payload = {"key1": "value1", "key2": "value2"}
+html_data = requests.get("http://httpbin.org/get", params=payload)
+
+print(html_data.url)  # http://httpbin.org/get?key1=value1&key2=value2
+print(html_data.text)  # http://httpbin.org/get?key1=value1&key2=value2
+
+
+payload = {"title": "獅子"}
+html_data = requests.get("https://zh.wikipedia.org/w/index.php", params=payload)
+
+# 相當於寫了 : https://zh.wikipedia.org/w/index.php?title=獅子
+
+print(html_data.url)
+print(html_data.text)
+
+print("------------------------------------------------------------")  # 60個
+print("requests 測試 10 很久 timeout")
+
+print("將查詢參數加入 GET 請求中")
+
+payload = {"key1": "value1", "key2": "value2"}
+html_data = requests.post("http://httpbin.org/post", data=payload)
+
+print(html_data.url)
+print(html_data.text)
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+url = 'https://httpbin.org/get'
+headers = {'Content-Type': 'text/html'}
+
+html_data = requests.get(url, headers=headers)
+
+print(html_data.text)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+url = "https://httpbin.org/get"
+hd = {"user-key": "7ADGS9S"}  # 標頭參數(以字典儲存)
+pm = {"id": 1023, "neme": "joe"}  # 網址參數(以字典儲存)
+r = requests.get(url, headers=hd, params=pm)  # 加入 headers 及 params 參數
+print(r.text)  # 將回應的文字印出來
+
+print("------------------------------------------------------------")  # 60個
+
+url = "http://httpbin.org/post"  # 使用測試服務網站, POST 方法網址要加 /post
+r = requests.post(url, data="Hello")  # 送出字串資料
+print(r.text)
+r = requests.post(url, data={"id": "123", "name": "Joe"})
+print(r.text)
+
+print("------------------------------------------------------------")  # 60個
+
+r = requests.put("https://httpbin.org/put", data={"key": "abc"})
+print(r.text)
+r = requests.patch("https://httpbin.org/patch", data={"key": "xyz"})
+print(r.text)
+r = requests.delete("https://httpbin.org/delete")
+print(r.text)
+
+print("------------------------------------------------------------")  # 60個
+
+url = "http://httpbin.org/user-agent"
+
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
+}
+r = requests.get(url, headers=headers)
+print(r.text)
+
+print("------------------------------------------------------------")  # 60個
+
+url = "http://httpbin.org/user-agent"
+
+r = requests.get(url)
+print(r.text)
+
+print("------------------------------------------------------------")  # 60個
+
+url = "http://httpbin.org/cookies"
+
+cookies = dict(name="Joe Chen")
+r = requests.get(url, cookies=cookies)
+print(r.text)
+
+print("------------------------------------------------------------")  # 60個
+
+""" fail
+proxy = {'http': 'http://109.161.48.141:3128',
+         'https': 'https://109.161.48.141:3128'}
+r = requests.get("http://httpbin.org/ip", proxies=proxy)
+print(r.status_code)
+print(r.text)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+""" fail
+from fake_useragent import UserAgent
+import random
+
+ua = UserAgent()
+def proxyGenerator():
+   headers = {'user-agent': ua.random}
+   res = requests.get('https://free-proxy-list.net/', headers=headers)
+   soup = BeautifulSoup(res.text, 'lxml') 
+   proxies_table = soup.find(id='proxylisttable')
+   proxies = [] 
+   for row in proxies_table.tbody.find_all('tr'):
+     proxies.append({  
+       'http': "http://" + row.find_all('td')[0].string + ":" +
+               row.find_all('td')[1].string, 
+       'https': "https://" + row.find_all('td')[0].string + ":" +
+               row.find_all('td')[1].string        
+     })   
+   return random.choice(proxies)
+
+while True:
+   proxy = proxyGenerator()
+   print("目前使用的代理伺服器: ", proxy)
+   try:
+      headers = {'user-agent': ua.random}
+      url = "http://httpbin.org/ip"
+      r = requests.get(url, headers=headers, proxies=proxy, verify=False)
+      print(r.status_code)
+      print(r.text)
+      break
+   except:
+      print("連線錯誤! 搜尋其他的代理伺服器!")
+      pass 
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+# 將查詢參數定義為字典資料加入GET請求中
+payload = {"key1": "value1", "key2": "value2"}
+html = requests.get("http://httpbin.org/get", params=payload)
+print(html.text)
+
+
+# 將查詢參數加入 POST 請求中
+payload = {"key1": "value1", "key2": "value2"}
+r = requests.post("http://httpbin.org/post", data=payload)
+print(r.text)
+
+print("------------------------------------------------------------")  # 60個
+
+url_params = {"name": "陳會安", "score": 95}
+r = requests.get("http://httpbin.org/get", params=url_params)
+print(r.url)
+print(r.text)
+
+if r.status_code == 200:
+    print(r.text)
+else:
+    print("錯誤! HTTP請求失敗...")
+
+print("------------------------------------------------------------")  # 60個
+
+post_data = {"name": "陳會安", "grade": 95}
+r = requests.post("http://httpbin.org/post", data=post_data)
+print(r.text)
+
+print("------------------------------------------------------------")  # 60個
+
+url = "http://httpbin.org/user-agent"
+
+r = requests.get(url)
+print(r.text)
+print("----------------------")
+
+url_headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0"
+}
+r = requests.get(url, headers=url_headers)
+print(r.text)
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用POST方式抓取數據")
+
+params = {"key1": "value1", "key2": "value2"}
+r = requests.post("http://httpbin.org/post", data=params)
+print(r.text)
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("httpbin SP")
+print("------------------------------------------------------------")  # 60個
