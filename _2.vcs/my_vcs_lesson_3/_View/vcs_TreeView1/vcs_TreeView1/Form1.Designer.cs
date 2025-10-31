@@ -85,7 +85,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(827, 248);
+            this.bt_clear.Location = new System.Drawing.Point(704, 264);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(66, 40);
             this.bt_clear.TabIndex = 140;
@@ -95,7 +95,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(753, 151);
+            this.richTextBox1.Location = new System.Drawing.Point(636, 168);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(150, 150);
             this.richTextBox1.TabIndex = 141;
@@ -104,7 +104,7 @@
             // button0
             // 
             this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button0.Location = new System.Drawing.Point(753, 12);
+            this.button0.Location = new System.Drawing.Point(646, 12);
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(140, 60);
             this.button0.TabIndex = 149;
@@ -115,7 +115,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(753, 74);
+            this.button1.Location = new System.Drawing.Point(646, 74);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(140, 60);
             this.button1.TabIndex = 147;
@@ -323,7 +323,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(961, 526);
+            this.ClientSize = new System.Drawing.Size(817, 401);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.treeView7);

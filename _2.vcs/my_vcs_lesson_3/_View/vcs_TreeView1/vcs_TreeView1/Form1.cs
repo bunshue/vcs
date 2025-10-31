@@ -43,11 +43,12 @@ namespace vcs_TreeView1
 {
     public partial class Form1 : Form
     {
-        string foldername = @"D:\_git\vcs\_1.data\______test_files1\";
+        //string foldername = Path.Combine(Environment.CurrentDirectory, "..\\..");
+        string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\";
+
         public static string tempstr = "";
         string Tem_Dir = "";
         public static TreeNode TN_Docu = new TreeNode();//單個文件的節點
-        private static TreeView Tem_TView;
 
         public Form1()
         {
@@ -58,6 +59,15 @@ namespace vcs_TreeView1
         {
             show_item_location();
 
+            treeView0.AfterSelect += new TreeViewEventHandler(treeView_AfterSelect);
+            treeView1.AfterSelect += new TreeViewEventHandler(treeView_AfterSelect);
+            treeView2.AfterSelect += new TreeViewEventHandler(treeView_AfterSelect);
+            treeView3.AfterSelect += new TreeViewEventHandler(treeView_AfterSelect);
+            treeView4.AfterSelect += new TreeViewEventHandler(treeView_AfterSelect);
+            treeView5.AfterSelect += new TreeViewEventHandler(treeView_AfterSelect);
+            treeView6.AfterSelect += new TreeViewEventHandler(treeView_AfterSelect);
+            treeView7.AfterSelect += new TreeViewEventHandler(treeView_AfterSelect);
+
             setup_treeView0();
             setup_treeView1();
             setup_treeView2();
@@ -66,6 +76,8 @@ namespace vcs_TreeView1
             setup_treeView5();
             setup_treeView6();
             setup_treeView7();
+
+            button1_Click(sender, e);
         }
 
         void show_item_location()
@@ -222,31 +234,25 @@ namespace vcs_TreeView1
             //treeView4/屬性/ImageList/加入imageList1
             treeView4.ImageList = imageList1;
 
-            //string dir = Path.Combine(Environment.CurrentDirectory, "..\\..");
-            string dir = @"D:\_git\vcs\_1.data\______test_files1\";
-
-            DirectoryInfo dir_info = new DirectoryInfo(dir);
+            DirectoryInfo dir_info = new DirectoryInfo(foldername);
 
             treeView4.LoadFromDirectory(dir_info.FullName, 0, 1);
             treeView4.ExpandAll();
             treeView4.SelectedNode = treeView4.Nodes[0];
         }
 
-        string dir_name = @"D:\_git\vcs\_1.data\______test_files1\_case1";
-
         void setup_treeView5()
         {
             label5.Text = "由程式中加入Node";
 
             treeView5.Nodes.Clear();
-            SearchDir(treeView5.Nodes, dir_name);
+            SearchDir(treeView5.Nodes, foldername);
             treeView5.ExpandAll();  //展開所有項目
         }
 
         void setup_treeView6()
         {
             label6.Text = "treeView6 + AfterSelect";
-            treeView6.AfterSelect += new TreeViewEventHandler(treeView6_AfterSelect);
 
             TreeNode TopNode = treeView6.Nodes.Add("博主"); //建立第一个顶级节点
             //建立4个基础节点 ,分别表示 4个大的分支
@@ -278,9 +284,9 @@ namespace vcs_TreeView1
             ParentNode2.Nodes.Add(ChildNode8);
         }
 
-        private void treeView6_AfterSelect(object sender, TreeViewEventArgs e)
+        private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            richTextBox1.Text += "AfterSelect:\t" + "选择的部门:\t" + e.Node.Text + "\n";
+            richTextBox1.Text += "單擊 :" + e.Node.Text + "\n";
         }
 
         void setup_treeView7()
@@ -374,6 +380,8 @@ namespace vcs_TreeView1
 
         private void treeView7_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            richTextBox1.Text += "雙擊 :" + e.Node.Text + "\n";
+
             if (e.Node.Tag == null)
                 Tem_Dir = "";
             else
@@ -387,14 +395,14 @@ namespace vcs_TreeView1
         }
 
         // List the files and subdirectories of this directory.
-        private void SearchDir(TreeNodeCollection nodes, string dir_name)
+        private void SearchDir(TreeNodeCollection nodes, string foldername)
         {
-            TreeNode dir_node = nodes.Add(dir_name);
-            foreach (string filename in Directory.GetFiles(dir_name))
+            TreeNode dir_node = nodes.Add(foldername);
+            foreach (string filename in Directory.GetFiles(foldername))
             {
                 dir_node.Nodes.Add(filename);
             }
-            foreach (string subdir in Directory.GetDirectories(dir_name))
+            foreach (string subdir in Directory.GetDirectories(foldername))
             {
                 SearchDir(dir_node.Nodes, subdir);
             }
