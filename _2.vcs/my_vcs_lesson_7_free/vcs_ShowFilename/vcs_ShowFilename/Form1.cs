@@ -9,8 +9,10 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Diagnostics;
-using System.Management;
 using System.Globalization; //for CultureInfo
+
+//參考 / 加入參考 / .NET  System.Management
+using System.Management;
 
 using MediaInfoNET;
 

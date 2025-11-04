@@ -9,11 +9,8 @@ using System.Windows.Forms;
 
 using System.IO;    //for DirectoryInfo, 對文件進行操作
 
-//參考 / 加入參考 / .NET  System.Management
-using System.Management;
-
 //加入一個ImageList/屬性/Images/打開(集合)/影像集合編輯器/加入影像
-//treeView4/屬性/ImageList/加入imageList1
+//treeView/屬性/ImageList/加入imageList1
 
 /*
 树视图TreeView 属性及方法
@@ -28,7 +25,6 @@ CollapseAll	折叠所有的树节点
 ExpandAll 	展开所有的树节点
 GetNodeAt	检索位于指定位置的 树节点
 GetNodeCount	检索分配给树视图控件的树节点数
-
 
 事件	说明
 AfterCheck	在选中树节点复选框后 发生
@@ -65,24 +61,18 @@ namespace vcs_TreeView1
             treeView3.AfterSelect += new TreeViewEventHandler(treeView_AfterSelect);
             treeView4.AfterSelect += new TreeViewEventHandler(treeView_AfterSelect);
             treeView5.AfterSelect += new TreeViewEventHandler(treeView_AfterSelect);
-            treeView6.AfterSelect += new TreeViewEventHandler(treeView_AfterSelect);
-            treeView7.AfterSelect += new TreeViewEventHandler(treeView_AfterSelect);
 
-            setup_treeView0();
-            setup_treeView1();
-            setup_treeView2();
-            setup_treeView3();
-            setup_treeView4();
-            setup_treeView5();
-            setup_treeView6();
-            setup_treeView7();
+            setup_treeView0(treeView0);
+            setup_treeView1(treeView1);
+            setup_treeView2(treeView2);
+            setup_treeView3(treeView3);
 
             button1_Click(sender, e);
         }
 
         void show_item_location()
         {
-            int W = 300;
+            int W = 350;
             int H = 350;
             int x_st = 10;
             int y_st = 10;
@@ -96,8 +86,6 @@ namespace vcs_TreeView1
             treeView3.Size = new Size(W, H);
             treeView4.Size = new Size(W, H);
             treeView5.Size = new Size(W, H);
-            treeView6.Size = new Size(W, H);
-            treeView7.Size = new Size(W, H);
 
             label0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd);
@@ -105,8 +93,6 @@ namespace vcs_TreeView1
             label3.Location = new Point(x_st + dx * 1, y_st + dy * 1 + dd);
             label4.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             label5.Location = new Point(x_st + dx * 2, y_st + dy * 1 + dd);
-            label6.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            label7.Location = new Point(x_st + dx * 3, y_st + dy * 1 + dd);
 
             treeView0.Location = new Point(x_st + dx * 0, y_st + dy * 0 + dd);
             treeView1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd + dd);
@@ -114,15 +100,14 @@ namespace vcs_TreeView1
             treeView3.Location = new Point(x_st + dx * 1, y_st + dy * 1 + dd + dd);
             treeView4.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd);
             treeView5.Location = new Point(x_st + dx * 2, y_st + dy * 1 + dd + dd);
-            treeView6.Location = new Point(x_st + dx * 3, y_st + dy * 0 + dd);
-            treeView7.Location = new Point(x_st + dx * 3, y_st + dy * 1 + dd + dd);
 
             dy = 60 + 5;
-            button0.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 4 + 150, y_st + dy * 0);
+            button0.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 3 + 105, y_st + dy * 0);
+            button2.Location = new Point(x_st + dx * 3 + 210, y_st + dy * 0);
 
             richTextBox1.Size = new Size(300, 600);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 1);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -143,8 +128,6 @@ namespace vcs_TreeView1
             treeView3.CollapseAll();
             treeView4.CollapseAll();
             treeView5.CollapseAll();
-            treeView6.CollapseAll();
-            treeView7.CollapseAll();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -156,132 +139,159 @@ namespace vcs_TreeView1
             treeView3.ExpandAll();
             treeView4.ExpandAll();
             treeView5.ExpandAll();
-            treeView6.ExpandAll();
-            treeView7.ExpandAll();
         }
 
-        void setup_treeView0()
+        private void button2_Click(object sender, EventArgs e)
         {
-            label0.Text = "treeView0";
+            my_SearchDir(treeView0.Nodes, foldername);
         }
 
-        void setup_treeView1()
+        // List the files and subdirectories of this directory.
+        private void my_SearchDir(TreeNodeCollection nodes, string foldername)
         {
-            //讀取文件資料TreeView
-            label1.Text = "從txt讀資料到TreeView";
-            string file_name = Application.StartupPath + "\\test.txt";
-            LoadTreeViewFromFile(file_name, treeView1);
-        }
-
-        // Load a TreeView control from a file that uses tabs
-        // to show indentation.
-        private void LoadTreeViewFromFile(string file_name, TreeView trv)
-        {
-            // Get the file's contents.
-            string file_contents = File.ReadAllText(file_name);
-
-            // Break the file into lines.
-            string[] lines = file_contents.Split(
-                new char[] { '\r', '\n' },
-                StringSplitOptions.RemoveEmptyEntries);
-
-            // Process the lines.
-            trv.Nodes.Clear();
-            Dictionary<int, TreeNode> parents =
-                new Dictionary<int, TreeNode>();
-            foreach (string text_line in lines)
+            richTextBox1.Text += "foldername = " + foldername + "\n";
+            TreeNode dir_node = nodes.Add(foldername);
+            foreach (string filename in Directory.GetFiles(foldername))
             {
-                // See how many tabs are at the start of the line.
-                int level = text_line.Length -
-                    text_line.TrimStart('\t').Length;
+                richTextBox1.Text += "filename = " + filename + "\n";
+                dir_node.Nodes.Add(filename);
+            }
+            foreach (string subdir in Directory.GetDirectories(foldername))
+            {
+                richTextBox1.Text += "subdir = " + subdir + "\n";
+                SearchDir(dir_node.Nodes, subdir);
+            }
+        }
 
-                // Add the new node.
-                if (level == 0)
-                    parents[level] = trv.Nodes.Add(text_line.Trim());
-                else
-                    parents[level] = parents[level - 1].Nodes.Add(text_line.Trim());
-                parents[level].EnsureVisible();
+        void setup_treeView0(TreeView tv)
+        {
+            label0.Text = "三國";
+            tv.Nodes.Clear();//清除TreeView
+
+            tv.Font = new Font("新細明體", 18F);
+
+            //------------------------------------------------------------  # 60個
+
+            //建立父節點, 魏
+            TreeNode TopNode1 = tv.Nodes.Add("魏");
+
+            //魏之曹操家, 第一代
+            TreeNode ParentNode1a = new TreeNode("曹操");//基礎節點
+            TopNode1.Nodes.Add(ParentNode1a);//基礎節點加入到父節點中
+
+            //魏之曹操家, 第二代, 3人
+            TreeNode ChildNode1a1 = new TreeNode("曹昂");
+            TreeNode ChildNode1a2 = new TreeNode("曹丕");
+            TreeNode ChildNode1a3 = new TreeNode("曹植");
+            //加入到曹操的節點
+            ParentNode1a.Nodes.Add(ChildNode1a1);
+            ParentNode1a.Nodes.Add(ChildNode1a2);
+            ParentNode1a.Nodes.Add(ChildNode1a3);
+
+            TreeNode ChildNode1a2a = new TreeNode("曹叡");
+            ChildNode1a2.Nodes.Add(ChildNode1a2a);
+
+            //魏之司馬懿家, 第一代
+            TreeNode ParentNode1b = new TreeNode("司馬懿");//基礎節點
+            TopNode1.Nodes.Add(ParentNode1b);//基礎節點加入到父節點中
+
+            //魏之司馬懿家, 第二代, 3人
+            TreeNode ChildNode1b1 = new TreeNode("司馬師");
+            TreeNode ChildNode1b2 = new TreeNode("司馬昭");
+            TreeNode ChildNode1b3 = new TreeNode("司馬倫");
+            ParentNode1b.Nodes.Add(ChildNode1b1);
+            ParentNode1b.Nodes.Add(ChildNode1b2);
+            ParentNode1b.Nodes.Add(ChildNode1b3);
+
+            //魏之司馬懿家, 第三代, 1人
+            TreeNode ChildNode1b2a = new TreeNode("司馬炎");
+            ChildNode1b2.Nodes.Add(ChildNode1b2a);
+
+            //------------------------------------------------------------  # 60個
+
+            //建立父節點, 蜀
+            TreeNode TopNode2 = tv.Nodes.Add("蜀");
+
+            //蜀之劉備家, 第一代
+            TreeNode ParentNode2 = new TreeNode("劉備");//基礎節點
+            TopNode2.Nodes.Add(ParentNode2);//基礎節點加入到父節點中
+
+            //蜀之劉備家, 第二代, 3人
+            TreeNode ChildNode2a = new TreeNode("劉禪");
+            TreeNode ChildNode2b = new TreeNode("劉永");
+            TreeNode ChildNode2c = new TreeNode("劉理");
+            ParentNode2.Nodes.Add(ChildNode2a);
+            ParentNode2.Nodes.Add(ChildNode2b);
+            ParentNode2.Nodes.Add(ChildNode2c);
+
+            //------------------------------------------------------------  # 60個
+
+            //建立父節點, 吳
+            TreeNode TopNode3 = tv.Nodes.Add("吳");
+
+            //吳之孫堅家, 第一代
+            TreeNode ParentNode3 = new TreeNode("孫堅");//基礎節點
+            TopNode3.Nodes.Add(ParentNode3);//基礎節點加入到父節點中
+
+            //吳之孫堅家, 第二代, 2人
+            TreeNode ChildNode3a = new TreeNode("孫策");
+            TreeNode ChildNode3b = new TreeNode("孫權");
+            ParentNode3.Nodes.Add(ChildNode3a);
+            ParentNode3.Nodes.Add(ChildNode3b);
+
+            //吳之孫堅家, 第三代, 4人
+            TreeNode ChildNode3b1 = new TreeNode("孫登");
+            TreeNode ChildNode3b2 = new TreeNode("孫和");
+            TreeNode ChildNode3b3 = new TreeNode("孫休");
+            TreeNode ChildNode3b4 = new TreeNode("孫亮");
+            ChildNode3b.Nodes.Add(ChildNode3b1);
+            ChildNode3b.Nodes.Add(ChildNode3b2);
+            ChildNode3b.Nodes.Add(ChildNode3b3);
+            ChildNode3b.Nodes.Add(ChildNode3b4);
+
+            //------------------------------------------------------------  # 60個
+
+            for (int i = 0; i < 3; i++)
+            {
+                //一個父節點加上3個子節點
+                TreeNode node = tv.Nodes.Add("AAAA");
+                node.Nodes.Add("BBBB");
+                node.Nodes.Add("CCCC");
+                node.Nodes.Add("DDDD");
             }
 
-            if (trv.Nodes.Count > 0) trv.Nodes[0].EnsureVisible();
-        }
+            //------------------------------------------------------------  # 60個
 
-        void setup_treeView2()
-        {
-            label2.Text = "在TreeView屬性中的Nodes加入項目";
-        }
-
-        void setup_treeView3()
-        {
-            label3.Text = "本機硬碟資訊TreeView";
-
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
-
-            foreach (ManagementObject info in searcher.Get())
+            richTextBox1.Text += "父節點個數 tv.Nodes.Count = " + tv.Nodes.Count.ToString() + "\n";
+            if (tv.Nodes.Count > 0)
             {
-                TreeNode node = treeView3.Nodes.Add(info["DeviceID"].ToString());
-                node.Nodes.Add("Model: " + info["Model"].ToString());
-                node.Nodes.Add("Interface: " + info["InterfaceType"].ToString());
-                node.Nodes.Add("Serial#: " + info["SerialNumber"].ToString());
+                tv.Nodes[0].EnsureVisible();
             }
-            treeView3.ExpandAll();
         }
 
-        void setup_treeView4()
+        void setup_treeView1(TreeView tv)
         {
-            label4.Text = "本機檔案資料TreeView";
+            label1.Text = "本機檔案資料TreeView";
 
-            //treeView4/屬性/ImageList/加入imageList1
-            treeView4.ImageList = imageList1;
+            //treeView/屬性/ImageList/加入imageList1
+            tv.ImageList = imageList1;
 
             DirectoryInfo dir_info = new DirectoryInfo(foldername);
 
-            treeView4.LoadFromDirectory(dir_info.FullName, 0, 1);
-            treeView4.ExpandAll();
-            treeView4.SelectedNode = treeView4.Nodes[0];
+            tv.LoadFromDirectory(dir_info.FullName, 0, 1);
+            tv.ExpandAll();
+            tv.SelectedNode = tv.Nodes[0];
         }
 
-        void setup_treeView5()
+        void setup_treeView2(TreeView tv)
         {
-            label5.Text = "由程式中加入Node";
+            label2.Text = "由程式中加入Node";
 
-            treeView5.Nodes.Clear();
-            SearchDir(treeView5.Nodes, foldername);
-            treeView5.ExpandAll();  //展開所有項目
-        }
+            tv.Nodes.Clear();//清除TreeView
 
-        void setup_treeView6()
-        {
-            label6.Text = "treeView6 + AfterSelect";
+            SearchDir(tv.Nodes, foldername);
 
-            TreeNode TopNode = treeView6.Nodes.Add("博主"); //建立第一个顶级节点
-            //建立4个基础节点 ,分别表示 4个大的分支
-            TreeNode ParentNode1 = new TreeNode("家人");
-            TreeNode ParentNode2 = new TreeNode("朋友");
-            TreeNode ParentNode3 = new TreeNode("老师");
-            TreeNode ParentNode4 = new TreeNode("同学");
-            //将四个基础节点添加到顶级节点中
-            TopNode.Nodes.Add(ParentNode1);
-            TopNode.Nodes.Add(ParentNode2);
-            TopNode.Nodes.Add(ParentNode3);
-            TopNode.Nodes.Add(ParentNode4);
-            //建立6个子节点,分别表示6个小的分支
-            TreeNode ChildNode1 = new TreeNode("ShinePans");
-            TreeNode ChildNode2 = new TreeNode("爸爸");
-            TreeNode ChildNode3 = new TreeNode("妈妈");
-            TreeNode ChildNode4 = new TreeNode("xuzhengmao");
-            TreeNode ChildNode5 = new TreeNode("秦明");
-            TreeNode ChildNode6 = new TreeNode("zhangyihui");
-            TreeNode ChildNode7 = new TreeNode("xuzhengmao");
-            TreeNode ChildNode8 = new TreeNode("zhangyihui");
-            ParentNode1.Nodes.Add(ChildNode1);
-            ParentNode1.Nodes.Add(ChildNode2);
-            ParentNode1.Nodes.Add(ChildNode3);
-            ParentNode4.Nodes.Add(ChildNode4);
-            ParentNode3.Nodes.Add(ChildNode5);
-            ParentNode4.Nodes.Add(ChildNode6);
-            ParentNode2.Nodes.Add(ChildNode7);
-            ParentNode2.Nodes.Add(ChildNode8);
+            tv.ExpandAll();  //展開所有項目
         }
 
         private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
@@ -289,20 +299,18 @@ namespace vcs_TreeView1
             richTextBox1.Text += "單擊 :" + e.Node.Text + "\n";
         }
 
-        void setup_treeView7()
+        void setup_treeView3(TreeView tv)
         {
             //資料夾內容TreeView
             //取得文件夾下的所有文件夾及文件的名稱
 
-            label7.Text = "treeView7 + TreeNodeMouseClick";
-            treeView7.NodeMouseDoubleClick += new TreeNodeMouseClickEventHandler(treeView7_NodeMouseDoubleClick);
-
-            //textBox1.Text = foldername;
+            label3.Text = "treeView + TreeNodeMouseClick";
+            tv.NodeMouseDoubleClick += new TreeNodeMouseClickEventHandler(treeView_NodeMouseDoubleClick);
 
             tempstr = foldername;
 
             TreeNode TNode = new TreeNode();//實例化一個線程
-            Files_Copy(treeView7, tempstr, TNode, 0);
+            Files_Copy(tv, tempstr, TNode, 0);
         }
 
         // 傳回上一級目錄
@@ -378,7 +386,7 @@ namespace vcs_TreeView1
             }
         }
 
-        private void treeView7_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        private void treeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             richTextBox1.Text += "雙擊 :" + e.Node.Text + "\n";
 
@@ -409,3 +417,15 @@ namespace vcs_TreeView1
         }
     }
 }
+
+
+//6060
+//------------------------------------------------------------  # 60個
+
+//3030
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
