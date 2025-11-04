@@ -276,10 +276,16 @@ print("------------------------------------------------------------")  # 60個
 
 url = "https://zh.wikipedia.org/zh-tw/愛因斯坦"
 
-response = requests.get(url)
-print("HTTP狀態碼 :", response.status_code)
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36"
+}
 
-# 403 Forbidden
+# 不使用 headers, 不能抓
+# response = requests.get(url) # 403 Forbidden
+
+response = requests.get(url, headers=headers)
+
+print("HTTP狀態碼 :", response.status_code)
 
 if response.status_code == 200:
     print(response.text)

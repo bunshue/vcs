@@ -100,7 +100,7 @@ headers = {
 }
 
 cookies = {"over18": "1"}
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("讀取本地html ST")
 print("------------------------------------------------------------")  # 60個
@@ -3391,7 +3391,6 @@ ptt_nba_dict = {
 ptt_nba_df = pd.DataFrame(ptt_nba_dict)
 ptt_nba_df
 
-'''
 print("------------------------------------------------------------")  # 60個
 print("統一發票")
 print("------------------------------------------------------------")  # 60個
@@ -3418,9 +3417,8 @@ html_data.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encodin
 
 soup = BeautifulSoup(html_data.text, "html.parser")  # 轉換成標籤樹
 
-td = soup.select(".container-fluid")[0].select(
-    ".etw-tbiggest"
-)  # 取出中獎號碼的位置  # 尋找class是container-fluid
+# 取出中獎號碼的位置  # 尋找class是container-fluid
+td = soup.select(".container-fluid")[0].select(".etw-tbiggest")
 ns = td[0].getText()  # 特別獎
 n1 = td[1].getText()  # 特獎
 # 頭獎，因為存入串列會出現 /n 換行符，使用 [-8:] 取出最後八碼
@@ -3448,7 +3446,8 @@ speech = re.sub("\s+", " ", speech)
 speech_edit = re.sub("[^a-zA-Z]", " ", speech)
 speech_edit = re.sub("\s+", " ", speech_edit)
 
-print(speech_edit)
+# many
+# print(speech_edit)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3514,11 +3513,7 @@ def scrappy(url, depth=1):
 # 里面有爬回这个网页内全部的文字，
 # 以及网页内全部的链接内的网页文字也会被爬到。
 
-start = time.time()
-
 scrappy(full_url)
-stop = time.time()
-print("所用时间：", stop - start)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -3542,13 +3537,6 @@ print(html_data.text)  # HTML網頁內容
 
 # NG print(html_data.json())  # response轉成json格式
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 台灣水庫即時水情
-url = "https://water.taiwanstat.com/"
-html_data = requests.get(url)  # 取得網頁內容
-
 # soup = BeautifulSoup(html_data.text, "html.parser")  # 使用 html.parser 解析器
 # soup = BeautifulSoup(html_data.text, "html5lib")  # 使用 html5lib 解析器
 soup = BeautifulSoup(html_data.text, "html.parser")
@@ -3564,6 +3552,7 @@ for i in reservoir:
     print("---------------")  # 15個
 
 print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 # www.books.com.tw

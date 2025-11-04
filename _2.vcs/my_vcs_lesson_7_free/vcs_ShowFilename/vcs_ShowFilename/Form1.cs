@@ -11,9 +11,6 @@ using System.IO;
 using System.Diagnostics;
 using System.Globalization; //for CultureInfo
 
-//參考 / 加入參考 / .NET  System.Management
-using System.Management;
-
 using MediaInfoNET;
 
 namespace vcs_ShowFilename
@@ -552,75 +549,7 @@ namespace vcs_ShowFilename
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //尋找硬碟序號
 
-
-            //读取U盘序列号
-
-
-            int len = _serialNumber.Count;
-
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
-
-            matchDriveLetterWithSerial();
-
-            len = _serialNumber.Count;
-
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
-            int i;
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + _serialNumber[i].ToString() + "\n";
-
-            }
-
-        }
-
-        private List<string> _serialNumber = new List<string>();
-
-        /// <summary>
-        /// 调用这个函数将本机所有U盘序列号存储到_serialNumber中
-        /// </summary>
-        private void matchDriveLetterWithSerial()
-        {
-            string[] diskArray;
-            string driveNumber;
-            var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDiskToPartition");
-            foreach (ManagementObject dm in searcher.Get())
-            {
-                richTextBox1.Text += "A\n";
-                getValueInQuotes(dm["Dependent"].ToString());
-                diskArray = getValueInQuotes(dm["Antecedent"].ToString()).Split(',');
-                driveNumber = diskArray[0].Remove(0, 6).Trim();
-                var disks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
-                foreach (ManagementObject disk in disks.Get())
-                {
-                    richTextBox1.Text += "B\t" + disk["Name"].ToString() + "\n";
-
-                    if (disk["Name"].ToString() == ("\\\\.\\PHYSICALDRIVE" + driveNumber) & disk["InterfaceType"].ToString() == "USB")
-                    {
-                        richTextBox1.Text += "C\t" + parseSerialFromDeviceID(disk["PNPDeviceID"].ToString()) + "\n";
-
-                        _serialNumber.Add(parseSerialFromDeviceID(disk["PNPDeviceID"].ToString()));
-                    }
-                }
-            }
-        }
-        private static string parseSerialFromDeviceID(string deviceId)
-        {
-            var splitDeviceId = deviceId.Split('\\');
-            var arrayLen = splitDeviceId.Length - 1;
-            var serialArray = splitDeviceId[arrayLen].Split('&');
-            var serial = serialArray[0];
-            return serial;
-        }
-
-        private static string getValueInQuotes(string inValue)
-        {
-            var posFoundStart = inValue.IndexOf("\"");
-            var posFoundEnd = inValue.IndexOf("\"", posFoundStart + 1);
-            var parsedValue = inValue.Substring(posFoundStart + 1, (posFoundEnd - posFoundStart) - 1);
-            return parsedValue;
         }
     }
 }

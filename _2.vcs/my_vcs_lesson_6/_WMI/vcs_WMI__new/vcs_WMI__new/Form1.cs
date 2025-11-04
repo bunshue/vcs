@@ -179,7 +179,7 @@ namespace vcs_WMI__new
                 richTextBox1.Text += "cpu info:\t" + mo.Properties["ProcessorId"].Value.ToString() + "\n";
             }
 
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("Select * From Win32_Processor"); //查詢CPU訊息
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_Processor"); //查詢CPU訊息
             foreach (ManagementObject mo in mos.Get())
             {
                 richTextBox1.Text += mo["Manufacturer"].ToString() + "\n";//取得CPU製造商名稱
@@ -200,13 +200,13 @@ namespace vcs_WMI__new
         //public void Processor(out string[] Manufacturer, out string[] ID, out string[] ProcessorId)
         public void Processor()
         {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-            string[] Manufacturer = new string[searcher.Get().Count];
-            string[] ID = new string[searcher.Get().Count];
-            string[] ProcessorId = new string[searcher.Get().Count];
-            richTextBox1.Text += "count = " + searcher.Get().Count.ToString() + "\n";
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            string[] Manufacturer = new string[mos.Get().Count];
+            string[] ID = new string[mos.Get().Count];
+            string[] ProcessorId = new string[mos.Get().Count];
+            richTextBox1.Text += "count = " + mos.Get().Count.ToString() + "\n";
             int i = 0;
-            foreach (ManagementObject share in searcher.Get())
+            foreach (ManagementObject share in mos.Get())
             {
                 try
                 {
@@ -340,7 +340,7 @@ namespace vcs_WMI__new
         private void button5_Click(object sender, EventArgs e)
         {
             //取得本機MAC地址
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_NetworkAdapterConfiguration");
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapterConfiguration");
             foreach (ManagementObject mo in mos.Get())
             {
                 if (Convert.ToBoolean(mo["ipEnabled"]) == true)
@@ -383,10 +383,10 @@ namespace vcs_WMI__new
             //NetworkAdapter
 
             //取得網路卡參數
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
-            int len = searcher.Get().Count;
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
+            int len = mos.Get().Count;
             richTextBox1.Text += "len = " + len.ToString() + "\n";
-            foreach (ManagementObject share in searcher.Get())
+            foreach (ManagementObject share in mos.Get())
             {
                 try
                 {
@@ -402,11 +402,11 @@ namespace vcs_WMI__new
         //C# 獲得網卡參數程序代碼如下：
         public void NetworkAdapter(out string[] 制造商, out string[] MAC地址)
         {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
-            制造商 = new string[searcher.Get().Count];
-            MAC地址 = new string[searcher.Get().Count];
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
+            制造商 = new string[mos.Get().Count];
+            MAC地址 = new string[mos.Get().Count];
             int i = 0;
-            foreach (ManagementObject share in searcher.Get())
+            foreach (ManagementObject share in mos.Get())
             {
                 try
                 {
@@ -435,12 +435,12 @@ namespace vcs_WMI__new
 
 
             //取得主機板序號
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_BIOS");
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_BIOS");
 
-            int len = searcher.Get().Count;
+            int len = mos.Get().Count;
             richTextBox1.Text += "len = " + len.ToString() + "\n";
 
-            foreach (ManagementObject share in searcher.Get())
+            foreach (ManagementObject share in mos.Get())
             {
                 richTextBox1.Text += "取得主機板序號 :\t" + share.GetPropertyValue("SerialNumber").ToString() + "\n";
             }
@@ -449,9 +449,9 @@ namespace vcs_WMI__new
 
         private static string GetBIOSNumber()
         {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select SerialNumber From Win32_BIOS");
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT SerialNumber FROM Win32_BIOS");
             string biosNumber = string.Empty;
-            foreach (ManagementObject mgt in searcher.Get())
+            foreach (ManagementObject mgt in mos.Get())
             {
                 biosNumber += mgt["SerialNumber"].ToString();
             }
@@ -461,10 +461,10 @@ namespace vcs_WMI__new
         //C# 獲得主板序列號程序代碼如下：
         public static void MainboardSerialNumber(out string[] 序列號)
         {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_BIOS");
-            序列號 = new string[searcher.Get().Count];
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_BIOS");
+            序列號 = new string[mos.Get().Count];
             int i = 0;
-            foreach (ManagementObject share in searcher.Get())
+            foreach (ManagementObject share in mos.Get())
             {
                 序列號[i] = share.GetPropertyValue("SerialNumber").ToString();
                 i++;
@@ -478,11 +478,11 @@ namespace vcs_WMI__new
 
 
             //取得主機板參數
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
-            int len = searcher.Get().Count;
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+            int len = mos.Get().Count;
             richTextBox1.Text += "len = " + len.ToString() + "\n";
 
-            foreach (ManagementObject share in searcher.Get())
+            foreach (ManagementObject share in mos.Get())
             {
                 richTextBox1.Text += "取得Manufacturer :\t" + share.GetPropertyValue("Manufacturer").ToString() + "\n";
                 richTextBox1.Text += "取得Product :\t" + share.GetPropertyValue("Product").ToString() + "\n";
@@ -492,11 +492,11 @@ namespace vcs_WMI__new
         //C# 獲得主板參數程序代碼如下：
         public static void Mainboard(out string[] 制造商, out string[] 型號)
         {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
-            制造商 = new string[searcher.Get().Count];
-            型號 = new string[searcher.Get().Count];
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+            制造商 = new string[mos.Get().Count];
+            型號 = new string[mos.Get().Count];
             int i = 0;
-            foreach (ManagementObject share in searcher.Get())
+            foreach (ManagementObject share in mos.Get())
             {
                 制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
                 型號[i] = share.GetPropertyValue("Product").ToString();
@@ -509,9 +509,9 @@ namespace vcs_WMI__new
             //判斷驅動器類型
             richTextBox1.Text += "判斷驅動器類型\n";
 
-            SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(selectQuery);
-            foreach (ManagementObject disk in searcher.Get())
+            SelectQuery selectQuery = new SelectQuery("SELECT * FROM win32_logicaldisk");
+            ManagementObjectSearcher mos = new ManagementObjectSearcher(selectQuery);
+            foreach (ManagementObject disk in mos.Get())
             {
                 //comboBox1.Items.Add(disk["Name"].ToString());
                 richTextBox1.Text += "取得驅動器 : " + disk["Name"].ToString() + "\t" + get_drive_type(disk["Name"].ToString()) + "\n";
@@ -572,11 +572,11 @@ namespace vcs_WMI__new
             //Win32_DiskDrive
 
             //取得硬碟參數
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
-            int len = searcher.Get().Count;
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+            int len = mos.Get().Count;
             richTextBox1.Text += "len = " + len.ToString() + "\n";
 
-            foreach (ManagementObject share in searcher.Get())
+            foreach (ManagementObject share in mos.Get())
             {
                 try
                 {
@@ -592,9 +592,9 @@ namespace vcs_WMI__new
             //------------------------------------------------------------  # 60個
 
             richTextBox1.Text += "本機硬碟資訊\n";
-            searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
 
-            foreach (ManagementObject info in searcher.Get())
+            foreach (ManagementObject info in mos.Get())
             {
                 richTextBox1.Text += "---------------------------------------------------\n";
                 richTextBox1.Text += "DeviceID: " + info["DeviceID"].ToString() + "\n";
@@ -614,9 +614,7 @@ namespace vcs_WMI__new
 
             richTextBox1.Text += "---------------------------------------------------\n";
 
-
             //讀取U盤序列號
-
             _serialNumber.Clear();
             matchDriveLetterWithSerial();
             richTextBox1.Text += "len = " + _serialNumber.Count.ToString() + "\n";
@@ -639,17 +637,20 @@ namespace vcs_WMI__new
         {
             string[] diskArray;
             string driveNumber;
-            var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDiskToPartition");
-            foreach (ManagementObject dm in searcher.Get())
+            var mos = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDiskToPartition");
+            foreach (ManagementObject dm in mos.Get())
             {
+                richTextBox1.Text += "A\n";
                 getValueInQuotes(dm["Dependent"].ToString());
                 diskArray = getValueInQuotes(dm["Antecedent"].ToString()).Split(',');
                 driveNumber = diskArray[0].Remove(0, 6).Trim();
                 var disks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
                 foreach (ManagementObject disk in disks.Get())
                 {
+                    richTextBox1.Text += "B\t" + disk["Name"].ToString() + "\n";
                     if (disk["Name"].ToString() == ("\\\\.\\PHYSICALDRIVE" + driveNumber) & disk["InterfaceType"].ToString() == "USB")
                     {
+                        richTextBox1.Text += "C\t" + parseSerialFromDeviceID(disk["PNPDeviceID"].ToString()) + "\n";
                         _serialNumber.Add(parseSerialFromDeviceID(disk["PNPDeviceID"].ToString()));
                     }
                 }
@@ -678,12 +679,12 @@ namespace vcs_WMI__new
         //C# 獲得硬盤參數程序代碼如下：
         public void HardDisk(out string[] 制造商, out string[] 型號, out string[] 序列號)
         {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
-            制造商 = new string[searcher.Get().Count];
-            型號 = new string[searcher.Get().Count];
-            序列號 = new string[searcher.Get().Count];
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+            制造商 = new string[mos.Get().Count];
+            型號 = new string[mos.Get().Count];
+            序列號 = new string[mos.Get().Count];
             int i = 0;
-            foreach (ManagementObject share in searcher.Get())
+            foreach (ManagementObject share in mos.Get())
             {
                 try
                 {
@@ -779,8 +780,8 @@ namespace vcs_WMI__new
             //查看了一下自己筆記本電池的剩餘時間
             //用WMI方式查看了一下自己筆記本電池的剩餘時間，結果得到了71582788分鐘這個結果，頓感意外，第一感覺是相關的代碼寫錯了。
 
-            ManagementObjectSearcher s = new ManagementObjectSearcher("select * from Win32_Battery");
-            ManagementObjectCollection m = s.Get();
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_Battery");
+            ManagementObjectCollection m = mos.Get();
             foreach (ManagementObject mo in m)
             {
                 richTextBox1.Text += "EstimatedRunTime : " + mo["EstimatedRunTime"].ToString() + "minutes" + "\n";
@@ -902,11 +903,11 @@ namespace vcs_WMI__new
         private void button21_Click(object sender, EventArgs e)
         {
             //取得處理器參數
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-            int len = searcher.Get().Count;
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            int len = mos.Get().Count;
             richTextBox1.Text += "len = " + len.ToString() + "\n";
 
-            foreach (ManagementObject share in searcher.Get())
+            foreach (ManagementObject share in mos.Get())
             {
                 try
                 {
@@ -922,10 +923,10 @@ namespace vcs_WMI__new
         private void button22_Click(object sender, EventArgs e)
         {
             //WMI 使用
-            SelectQuery query = new SelectQuery("Select * From Win32_LogicalDisk");
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
+            SelectQuery query = new SelectQuery("SELECT * FROM Win32_LogicalDisk");
+            ManagementObjectSearcher mos = new ManagementObjectSearcher(query);
 
-            foreach (ManagementBaseObject disk in searcher.Get())
+            foreach (ManagementBaseObject disk in mos.Get())
             {
                 richTextBox1.Text += disk["Name"] + " " + disk["DriveType"] + " " + disk["VolumeName"] + "\n";
             }
@@ -1223,7 +1224,7 @@ namespace vcs_WMI__new
         {
             string text = string.Empty;
             int count = 0;
-            ManagementObjectSearcher mos = new ManagementObjectSearcher(@"root\wmi", "Select * from WmiMonitorID");
+            ManagementObjectSearcher mos = new ManagementObjectSearcher(@"root\wmi", "SELECT * FROM WmiMonitorID");
             foreach (ManagementObject mo in mos.Get())
             {
                 text += mo.GetText(TextFormat.Mof);
@@ -1248,9 +1249,9 @@ namespace vcs_WMI__new
 
         private void GetCPUCode()
         {
-            ManagementObjectSearcher moSearch = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
 
-            foreach (ManagementObject mObject in moSearch.Get())
+            foreach (ManagementObject mObject in mos.Get())
             {
                 richTextBox1.Text += "CPU型號：" + (mObject["ProcessorId"].ToString()) + "\n";
             }
@@ -1259,7 +1260,7 @@ namespace vcs_WMI__new
         private void GetCPUTemperature()
         {
             double CPUtprt = 0;
-            ManagementObjectSearcher mos = new ManagementObjectSearcher(@"root\WMI", "Select * From MSAcpi_ThermalZoneTemperature");
+            ManagementObjectSearcher mos = new ManagementObjectSearcher(@"root\WMI", "SELECT * FROM MSAcpi_ThermalZoneTemperature");
 
             foreach (ManagementObject mo in mos.Get())
             {
@@ -1422,9 +1423,9 @@ namespace vcs_WMI__new
               {
                try
                {
-                ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * FROM Win32_PhysicalMedia");
+                ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
                 String strHardDiskID = null ;
-                foreach(ManagementObject mo in searcher.Get()) 
+                foreach(ManagementObject mo in mos.Get()) 
                 {    
                  strHardDiskID = mo["SerialNumber"].ToString().Trim();
                  break;          
@@ -1444,18 +1445,18 @@ namespace vcs_WMI__new
 	
                   或者使用wql查詢來創建查詢類的實例，代碼如下：
 	
-                SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
+                SelectQuery selectQuery = new SelectQuery("SELECT * FROM win32_logicaldisk");
 	
                   或者只獲取類的部分屬性，代碼如下：
 	
-                SelectQuery selectQuery = new SelectQuery("select Name,DriveType from win32_logicaldisk");
+                SelectQuery selectQuery = new SelectQuery("SELECT Name,DriveType FROM win32_logicaldisk");
 	
 	
-                SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
+                SelectQuery selectQuery = new SelectQuery("SELECT * FROM win32_logicaldisk");
 	
-                ManagementObjectSearcher searcher = new ManagementObjectSearcher(selectQuery);
+                ManagementObjectSearcher mos = new ManagementObjectSearcher(selectQuery);
                   int i=0;
-                foreach (ManagementObject disk in searcher.Get()) {
+                foreach (ManagementObject disk in mos.Get()) {
                  //獲取驅動器盤符
                  listView1.Items.Add(disk["Name"].ToString());
                 }
@@ -1464,11 +1465,11 @@ namespace vcs_WMI__new
             C# 獲得主板參數程序代碼
             public static void Mainboard(out string[] 制造商, out string[] 型號)
             {
-                    ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
-                    制造商 = new string[searcher.Get().Count];
-                    型號 = new string[searcher.Get().Count];
+                    ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+                    制造商 = new string[mos.Get().Count];
+                    型號 = new string[mos.Get().Count];
                     int i = 0;
-                    foreach (ManagementObject share in searcher.Get())
+                    foreach (ManagementObject share in mos.Get())
                     {
                             制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
                             型號[i] = share.GetPropertyValue("Product").ToString();
@@ -1482,10 +1483,10 @@ namespace vcs_WMI__new
             C# 獲得主板序列號程序代碼如下：
             public static void MainboardSerialNumber(out string[] 序列號)
             {
-                    ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_BIOS");
-                    序列號 = new string[searcher.Get().Count];
+                    ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_BIOS");
+                    序列號 = new string[mos.Get().Count];
                     int i = 0;
-                    foreach (ManagementObject share in searcher.Get())
+                    foreach (ManagementObject share in mos.Get())
                     {
                             序列號[i] = share.GetPropertyValue("SerialNumber").ToString();
                             i ;
@@ -1498,11 +1499,11 @@ namespace vcs_WMI__new
             C# 獲得網卡參數程序代碼如下：
             public static void NetworkAdapter(out string[] 制造商, out string[] MAC地址)
             {
-                    ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
-                    制造商 = new string[searcher.Get().Count];
-                    MAC地址 = new string[searcher.Get().Count];
+                    ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
+                    制造商 = new string[mos.Get().Count];
+                    MAC地址 = new string[mos.Get().Count];
                     int i = 0;
-                    foreach (ManagementObject share in searcher.Get())
+                    foreach (ManagementObject share in mos.Get())
                     {
                             try
                             {
@@ -1529,11 +1530,11 @@ namespace vcs_WMI__new
             {
                 ConnectionOptions oConn = new ConnectionOptions();
                 ManagementScope managementScope = new ManagementScope("\\\\localhost", oConn);
-                ObjectQuery objectQuery = new ObjectQuery("select AddressWidth from Win32_Processor");
-                ManagementObjectSearcher moSearcher = new ManagementObjectSearcher(managementScope, objectQuery);
+                ObjectQuery objectQuery = new ObjectQuery("SELECT AddressWidth FROM Win32_Processor");
+                ManagementObjectSearcher mos = new ManagementObjectSearcher(managementScope, objectQuery);
                 ManagementObjectCollection moReturnCollection = null;
                 string addressWidth = null;
-                moReturnCollection = moSearcher.Get();
+                moReturnCollection = mos.Get();
                 foreach (ManagementObject oReturn in moReturnCollection)
                 {
                     addressWidth = oReturn["AddressWidth"].ToString();
