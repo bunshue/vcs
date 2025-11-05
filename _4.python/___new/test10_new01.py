@@ -213,7 +213,7 @@ print(
     )
 )
 """
-print('%30s:  %6.3fms  %6.3fms' % \
+print("%30s:  %6.3fms  %6.3fms" % \
       (name,
        min(overhead_times) * MILLI_SECONDS,
        max(overhead_times) * MILLI_SECONDS))
@@ -276,7 +276,7 @@ for module in modules:
 
     version_rows.append((module, version))
 
-print('print_table')
+print("print_table")
 print_table(version_rows)
 """
 
@@ -375,12 +375,12 @@ print(chr(20320))
 print(chr(22909))
 
 
-##輸出'A'之後的10個英文字母
+##輸出"A"之後的10個英文字母
 print("==Test3==")
 for i in range(65, 75):
     print(chr(i), end="")
 print()
-##輸出'你'之後的10個中文字
+##輸出"你"之後的10個中文字
 for i in range(20320, 20330):
     print(chr(i), end="")
 print()
@@ -411,7 +411,7 @@ print(x2)  # 輸出數值97的字元
 x3 = ord(x2)
 print(x3)  # 輸出字元x3的Unicode(10進位)碼值
 x4 = "魁"
-print(hex(ord(x4)))  # 輸出字元'魁'的Unicode(16進位)碼值
+print(hex(ord(x4)))  # 輸出字元"魁"的Unicode(16進位)碼值
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -422,7 +422,7 @@ print(x2)  # 輸出數值97的字元
 x3 = ord(x2)
 print(x3)  # 輸出字元x3的Unicode碼值
 x4 = "魁"
-print(ord(x4))  # 輸出字元'魁'的Unicode碼值
+print(ord(x4))  # 輸出字元"魁"的Unicode碼值
 
 print("------------------------------------------------------------")  # 60個
 print("chr-ord-ascii SP")
@@ -529,8 +529,8 @@ print("------------------------------------------------------------")  # 60個
 """
 word = word.strip()
 
-    dbg('recursedown(%r)\n' % (dirname,))
-##  dbg('fix(%r)\n' % (filename,))
+    dbg("recursedown(%r)\n" % (dirname,))
+##  dbg("fix(%r)\n" % (filename,))
 
 """
 
@@ -915,7 +915,7 @@ arr = ("one", "two", "three")
 print(arr[0])
 print(arr)
 
-# arr[1] = 'hello'
+# arr[1] = "hello"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1285,12 +1285,12 @@ print("------------------------------------------------------------")  # 60個
 
 def clean_string(s):
     """
-    刪除字符串中的 '\n', '\r' 和前後的空白
+    刪除字符串中的 "\n", "\r" 和前後的空白
 
     :param s: str，待處理的字符串
     :return: str，刪除後的字符串
     """
-    # 刪除 '\n' 和 '\r'
+    # 刪除 "\n" 和 "\r"
     s = s.replace("\n", "").replace("\r", "")
     # 刪除前後空白
     s = s.strip()
@@ -1742,7 +1742,7 @@ values = [1, 2, 3]
 
 my_dict = create_dict(keys, values)
 
-print(my_dict)  # 輸出: {'apple': 1, 'banana': 2, 'orange': 3}
+print(my_dict)  # 輸出: {"apple": 1, "banana": 2, "orange": 3}
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2071,8 +2071,8 @@ def Pow(x,y):
     return p
 print("請輸入次方運算（ex.2 3）：")
 x,y=input().split()
-print('x=',x)
-print('y=',y)
+print("x=",x)
+print("y=",y)
 print("次方運算結果: %d" %Pow(int(x), int(y)))
 """
 
@@ -2317,10 +2317,10 @@ print("I'm all right, but it's raining.")
 
 print("------------------------------------------------------------")  # 60個
 
-print(type(23))  # 輸出結果 <class 'int'>
-print(type(3.14))  # 輸出結果 <class 'float'>
-print(type("happy birthday"))  # 輸出結果 <class 'str'>
-print(type(True))  # 輸出結果 <class 'bool'>
+print(type(23))  # 輸出結果 <class "int">
+print(type(3.14))  # 輸出結果 <class "float">
+print(type("happy birthday"))  # 輸出結果 <class "str">
+print(type(True))  # 輸出結果 <class "bool">
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2840,9 +2840,9 @@ print("------------------------------------------------------------")  # 60個
 dictBook = {"A001": ["木偶奇遇記", 199], "A002": ["三隻小豬", 120], "A003": ["白雪公主", 99]}
 print(dictBook)
 # 印出 dictBook所有元素
-print("書號A001：", dictBook["A001"])  # 印出dictBook字典鍵A001的值 ['木偶奇遇記', 199]
-print("書號A002：", dictBook["A002"])  # 印出dictBook字典鍵A002的值 ['三隻小豬', 120]
-print("書號A003：", dictBook["A003"])  # 印出dictBook字典鍵A003的值 ['白雪公主', 99]
+print("書號A001：", dictBook["A001"])  # 印出dictBook字典鍵A001的值 ["木偶奇遇記", 199]
+print("書號A002：", dictBook["A002"])  # 印出dictBook字典鍵A002的值 ["三隻小豬", 120]
+print("書號A003：", dictBook["A003"])  # 印出dictBook字典鍵A003的值 ["白雪公主", 99]
 
 
 print("------------------------------------------------------------")  # 60個
@@ -2921,7 +2921,7 @@ print("運算結果-->")
 while result < number:
     result *= b
     print(result)  # 輸出後換行
-    # print(result, end =', ') #輸出後不換行
+    # print(result, end =", ") #輸出後不換行
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3033,23 +3033,23 @@ score = [] # 建立List來存放成績
 
 # for廻圈建立輸入成績的list
 for item in range(5):
-   data = int(input('分數%2d ' %(item + 1)))
+   data = int(input("分數%2d " %(item + 1)))
    score += [data]
-print('%5s %5s ' % ('index', 'score'))
+print("%5s %5s " % ("index", "score"))
 
 ind = 0 #計數器，每讀取一個元素就位移一個
 
 #while廻圈讀取成績並輸出
 while ind < len(score):
-   print(f'{ind:3d} {score[ind]:4d}')
+   print(f"{ind:3d} {score[ind]:4d}")
    ind += 1
 
-print('-' * 12)
+print("-" * 12)
 # 內建函式sum()計算總分
-print(f'總分 = {sum(score)}, 平均 = {sum(score) / 5}')
+print(f"總分 = {sum(score)}, 平均 = {sum(score) / 5}")
 score.sort(reverse = True) # score()方法遞減排序
-print('遞減排序：', score)
-print('遞增排序：', sorted(score)) # 使用BIF
+print("遞減排序：", score)
+print("遞增排序：", sorted(score)) # 使用BIF
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -3125,7 +3125,7 @@ print("------------------------------------------------------------")  # 60個
 def student(name, *score, subject=4):
     if subject >= 1:
         print(f"{name:6}{subject} 科", end="")
-        # print(f'{name}{subject}{*score}')
+        # print(f"{name}{subject}{*score}")
         print("分數 ", *score)
     total = sum(score)  # 合計分數
     print(f"總分: {total}", f"平均: {total / subject:.4f}")
@@ -3671,7 +3671,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 建立內含字串的字典
 sports = {"Curry": ["籃球", "美式足球"], "Durant": ["棒球"], "James": ["美式足球", "棒球", "籃球"]}
-# 列印key名字 + 字串'喜歡的運動'
+# 列印key名字 + 字串"喜歡的運動"
 for name, favorite_sport in sports.items():
     print(f"{name} 喜歡的運動是: ")
     # 列印value,這是串列
@@ -3866,7 +3866,7 @@ print("------------------------------------------------------------")  # 60個
 
 """
 # test locals()
-fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25}
+fruits = {"西瓜":15, "香蕉":20, "水蜜桃":25}
 var_dict = input("請輸入要刪除的變數 : ")
 if var_dict in locals():    # 檢查變數是否存在
     print(f"{var_dict} 變數存在")
@@ -3877,7 +3877,7 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25}
+fruits = {"西瓜":15, "香蕉":20, "水蜜桃":25}
 var = input("請輸入要刪除的字典變數 : ")
 if var in locals():
     var = eval(var)
@@ -3903,7 +3903,7 @@ ret_element = animals.pop( )
 print("刪除後的animals集合 ", animals)
 print("所刪除的元素是      ", ret_element)
 
-boolean = A.isdisjoint(B)       # 有共同的元素'c'
+boolean = A.isdisjoint(B)       # 有共同的元素"c"
 boolean = A.isdisjoint(C)       # 沒有共同的元素
 print("沒有共同的元素傳回值是 ", boolean)
 
@@ -3912,7 +3912,7 @@ boolean = A.issubset(B)         # 所有A的元素皆是B的元素
 boolean = C.issubset(B)         # 有共同的元素k
 
 
-fruits1 = ['apple', 'orange', 'apple', 'banana', 'orange']
+fruits1 = ["apple", "orange", "apple", "banana", "orange"]
 x = set(fruits1)                # 將串列轉成集合
 fruits2 = list(x)               # 將集合轉成串列
 print("原先串列資料fruits1 = ", fruits1)
@@ -4881,11 +4881,11 @@ print(listSport[-1])  # listSport[-1] 表示l串列istSport倒數第1個串列�
 print("------------------------------------------------------------")  # 60個
 
 listSport = ["爬山", "游泳", "跑步", "舉重", "飛輪", "跳水", "瑜珈"]
-print(listSport[1:5])  # [1:5] 表示第2到第5個串列元素，顯示 ['游泳', '跑步', '舉重', '飛輪']
-print(listSport[:4])  # [:4] 表示第1到第4個串列元素，顯示['爬山', '游泳', '跑步', '舉重']
-print(listSport[1:6:2])  # [1:6:2] 表示第2、4、6個串列元素，顯示['游泳', '舉重', '跳水']
-print(listSport[6:1:-2])  # [6:1:-2] 表示第7、5、3個串列元素，顯示['瑜珈', '飛輪', '跑步']
-print(listSport[1::2])  # [1::2] 表示第2、4、6個串列元素，顯示['游泳', '舉重', '跳水']
+print(listSport[1:5])  # [1:5] 表示第2到第5個串列元素，顯示 ["游泳", "跑步", "舉重", "飛輪"]
+print(listSport[:4])  # [:4] 表示第1到第4個串列元素，顯示["爬山", "游泳", "跑步", "舉重"]
+print(listSport[1:6:2])  # [1:6:2] 表示第2、4、6個串列元素，顯示["游泳", "舉重", "跳水"]
+print(listSport[6:1:-2])  # [6:1:-2] 表示第7、5、3個串列元素，顯示["瑜珈", "飛輪", "跑步"]
+print(listSport[1::2])  # [1::2] 表示第2、4、6個串列元素，顯示["游泳", "舉重", "跳水"]
 
 print("------------------------------------------------------------")  # 60個
 
@@ -5062,7 +5062,7 @@ arr.append(42.0)
 
 print(arr)
 
-# arr[1] = 'hello'
+# arr[1] = "hello"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -5084,7 +5084,7 @@ print(arr_list)
 
 print("".join(arr_list))
 
-# arr[1] = 'e'
+# arr[1] = "e"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -6031,7 +6031,7 @@ def division(x, y):
 
 print(division(10, 2))  # 列出10/2
 print(division(5, 0))  # 列出5/0
-print(division("a", "b"))  # 列出'a' / 'b'
+print(division("a", "b"))  # 列出"a" / "b"
 print(division(6, 3))  # 列出6/3
 
 print("------------------------------------------------------------")  # 60個
@@ -6046,7 +6046,7 @@ def division(x, y):
 
 print(division(10, 2))  # 列出10/2
 print(division(5, 0))  # 列出5/0
-print(division("a", "b"))  # 列出'a' / 'b'
+print(division("a", "b"))  # 列出"a" / "b"
 print(division(6, 3))  # 列出6/3
 
 print("------------------------------------------------------------")  # 60個
@@ -6061,7 +6061,7 @@ def division(x, y):
 
 print(division(10, 2))  # 列出10/2
 print(division(5, 0))  # 列出5/0
-print(division("a", "b"))  # 列出'a' / 'b'
+print(division("a", "b"))  # 列出"a" / "b"
 print(division(6, 3))  # 列出6/3
 
 print("------------------------------------------------------------")  # 60個
@@ -6076,7 +6076,7 @@ def division(x, y):
 
 print(division(10, 2))  # 列出10/2
 print(division(5, 0))  # 列出5/0
-print(division("a", "b"))  # 列出'a' / 'b'
+print(division("a", "b"))  # 列出"a" / "b"
 print(division(6, 3))  # 列出6/3
 
 print("------------------------------------------------------------")  # 60個
@@ -6110,7 +6110,7 @@ def division(x, y):
 
 print(division(10, 2))  # 列出10/2
 print(division(5, 0))  # 列出5/0
-print(division("a", "b"))  # 列出'a' / 'b'
+print(division("a", "b"))  # 列出"a" / "b"
 print(division(6, 3))  # 列出6/3
 
 print("------------------------------------------------------------")  # 60個
@@ -6125,14 +6125,14 @@ def taiwanPhoneNum(string):
         if string[i].isdecimal() == False:
             return False  # 傳回非手機號碼格式
 
-    if string[4] != "-":  # 如果不是'-'字元
+    if string[4] != "-":  # 如果不是"-"字元
         return False  # 傳回非手機號碼格式
 
     for i in range(5, 8):  # 如果中間3個字出現非數字字元
         if string[i].isdecimal() == False:
             return False  # 傳回非手機號碼格
 
-    if string[8] != "-":  # 如果不是'-'字元
+    if string[8] != "-":  # 如果不是"-"字元
         return False  # 傳回非手機號碼格式
 
     for i in range(9, 12):  # 如果最後3個字出現非數字字元
@@ -6151,9 +6151,9 @@ print("------------------------------------------------------------")  # 60個
 from twilio.rest import Client
 
 # 你從twilio.com申請的帳號
-accountSid='AC6fdc3efffd15cabcdee8b361e9d4e67'
+accountSid="AC6fdc3efffd15cabcdee8b361e9d4e67"
 # 你從twilio.com獲得的圖騰
-authToken='9a6dfab51a342a480e7cf9c1f88d3e638'
+authToken="9a6dfab51a342a480e7cf9c1f88d3e638"
 
 client = Client(accountSid, authToken)
 message = client.messages.create (
@@ -6751,7 +6751,7 @@ ivan.action1()  # 順序 Ivan -> Father -> Grandfather
 print("------------------------------------------------------------")  # 60個
 
 """ 很多
-secretcode = '112299'                                   # 設定密碼
+secretcode = "112299"                                   # 設定密碼
 codeNotFound = True                                     # 尚未找到密碼為True
 for i1 in range(0, 10):                                 # 第一位數
     if codeNotFound:            # 檢查是否找到沒有找到才會往下執行
@@ -6766,7 +6766,7 @@ for i1 in range(0, 10):                                 # 第一位數
                                         for i6 in range(0, 10):
                                             code = str(i1)+str(i2)+str(i3)+str(i4)+str(i5)+str(i6) # 組成密碼
                                             if code == secretcode:              # 比對密碼
-                                                print('Bingo!', code)
+                                                print("Bingo!", code)
                                                 codeNotFound = False            # 註明已經比對成功
                                                 break
                                             else:
@@ -6776,22 +6776,22 @@ print("------------------------------------------------------------")  # 60個
 
 """
 while(True):
-    a = input('請輸入簡單的數學式：')
-    answer = '你輸入的不是數字呦～'
-    if('+' in a):
-        p = a.split('+')
+    a = input("請輸入簡單的數學式：")
+    answer = "你輸入的不是數字呦～"
+    if("+" in a):
+        p = a.split("+")
         if(p[0].isdigit() and p[1].isdigit()):
             answer = int(p[0]) + int(p[1])
-    elif('-' in a):
-        p = a.split('-')
+    elif("-" in a):
+        p = a.split("-")
         if(p[0].isdigit() and p[1].isdigit()):
             answer = int(p[0]) - int(p[1])
-    elif('/' in a):
-        p = a.split('/')
+    elif("/" in a):
+        p = a.split("/")
         if(p[0].isdigit() and p[1].isdigit()):
             answer = int(p[0]) / int(p[1])
-    elif('*' in a):
-        p = a.split('*')
+    elif("*" in a):
+        p = a.split("*")
         if(p[0].isdigit() and p[1].isdigit()):
             answer = int(p[0]) * int(p[1])
     print(answer)
@@ -6917,9 +6917,9 @@ print(list1[s0], list1[s1])  # list1直接帶入切片範圍
 print("------------------------------------------------------------")  # 60個
 
 fset = frozenset(["a", "b", "c"])
-print(fset)  # frozenset({'a', 'b', 'c'})
+print(fset)  # frozenset({"a", "b", "c"})
 
-# fset.remove('a')      # 不能修改，AttributeError
+# fset.remove("a")      # 不能修改，AttributeError
 # frozenset根本沒有remove()可用！
 
 print("------------------------------------------------------------")  # 60個
@@ -6936,15 +6936,15 @@ print("------------------------------------------------------------")  # 60個
 names = ["Amy", "Bob", "Cathy"]
 scores = [70, 92, 85]
 list1 = list(enumerate(zip(names, scores)))
-# [(0, ('Amy', 70)), (1, ('Bob', 92)), (2, ('Cathy', 85))]
+# [(0, ("Amy", 70)), (1, ("Bob", 92)), (2, ("Cathy", 85))]
 for item in list1:
     print(item[0], item[1][0], item[1][1])
 
 print(list(zip(("a", "b", "c"), (30, 41, 52))))
-# [('a', 30), ('b', 41), ('c', 52)]
+# [("a", 30), ("b", 41), ("c", 52)]
 
 print(list(enumerate(["a", "b", "c"])))
-# [(0, 'a'), (1, 'b'), (2, 'c')]
+# [(0, "a"), (1, "b"), (2, "c")]
 
 print("------------------------------------------------------------")  # 60個
 
@@ -7418,8 +7418,8 @@ print("------------------------------------------------------------")  # 60個
 a = 15  # 新增變數 a，設定金字塔有幾層
 for i in range(1, a + 1):  # 使用 for 迴圈，重複指定的層數
     print(" " * (a - i) + "*" * (2 * i - 1))
-    # ' ' * (a-i) 表示星星數越少，前面空白越多
-    # '*' * (2*i-1) 串接後方星星的數量
+    # " " * (a-i) 表示星星數越少，前面空白越多
+    # "*" * (2*i-1) 串接後方星星的數量
 
 
 print("------------------------------------------------------------")  # 60個
@@ -7511,12 +7511,12 @@ while True:  # 使用 while 迴圈
     if len(id_arr) != 10:
         break  # 判斷如果 id_arr 長度不等於 10，就跳出 while 迴圈
     local = str(local_table[id_arr[0]])  # 將對應的二位數字轉換成字串
-    check_arr = list(local)  # 將字串轉換成陣列，例如 '10' 會轉換成 ['1','0']
+    check_arr = list(local)  # 將字串轉換成陣列，例如 "10" 會轉換成 ["1","0"]
     check_arr[0] = int(check_arr[0])  # 將串列中的第一個項目轉換成數字
     check_arr[1] = int(check_arr[1]) * 9  # 將串列中的第二個項目轉換成數字
     sex = id_arr[1]  # 取得第二碼數字
     if sex != "1" and sex != "2":
-        break  # 判斷如果不是 '1' 也不是 '2' 就跳出 while 迴圈
+        break  # 判斷如果不是 "1" 也不是 "2" 就跳出 while 迴圈
     check_arr.append(int(sex) * 8)  # 將 sex 內容轉換成數字並乘以 8，存入 check_arr 裡
     for i in range(7):  # 使用 for 迴圈，重複七次
         check_arr.append(int(id_arr[i + 2]) * (7 - i))  # 每次重複，按照檢查碼程式，將數字乘以對應的數值
@@ -7664,19 +7664,19 @@ print("------------------------------------------------------------")  # 60個
 #plot 暫存
 x=[1,2,3,4,5,6,7,8,9,10,11,12]
 y=[16800,20000,21600,25400,12800,20000,25000,14600,32800,25400,18000,10600]
-plt.plot(x, y, marker='d',ms=10, mfc='r', mec='b')
+plt.plot(x, y, marker="d",ms=10, mfc="r", mec="b")
 """
 
 print("------------------------------------------------------------")  # 60個
 
 data = b"wxy\x7a"
-print(data)  # b'wxyz'，以ASCII字元輸出
+print(data)  # b"wxyz"，以ASCII字元輸出
 
 print(type(data), type(data[0]))
-# <class 'bytes'>, <class 'int'>
+# <class "bytes">, <class "int">
 
 print(data[0], hex(data[0]))
-# 'w' ASCII碼119，十六進位'0x77'
+# "w" ASCII碼119，十六進位"0x77"
 
 print(b"\x7a" in data)  # 可以用 in 來判斷
 print(data[2:])  # 可以切片
@@ -7684,20 +7684,20 @@ print(data[2:])  # 可以切片
 print("------------------------------------------------------------")  # 60個
 
 data = b"wxy\x7a"
-print(data)  # b'wxyz'，以ASCII字元輸出
+print(data)  # b"wxyz"，以ASCII字元輸出
 
 ba = bytearray(data)
 print(type(ba), type(ba[0]))
-# <class 'bytearray'>, <class 'int'>
+# <class "bytearray">, <class "int">
 
 ba[3] = 0x70  # 修改資料
-print(ba)  # 變成 bytearray(b'wxyp')
+print(ba)  # 變成 bytearray(b"wxyp")
 
 print("------------------------------------------------------------")  # 60個
 """
 def inn():
-    a = input('輸入文字並轉換為 ASCII：')
-    print('{} 的 ASCII：{}'.format(a, ord(a)))
+    a = input("輸入文字並轉換為 ASCII：")
+    print("{} 的 ASCII：{}".format(a, ord(a)))
     inn()
 
 inn()
@@ -7722,13 +7722,13 @@ print("------------------------------------------------------------")  # 60個
 import shutil
 
 PAUSE = 0.1  # (!) Try changing this to 0.0 or 2.0.
-STREAM_CHARS = ['0', '1']  # (!) Try changing this to other characters.
+STREAM_CHARS = ["0", "1"]  # (!) Try changing this to other characters.
 
-print('按 ctrl + c 離開程式')
+print("按 ctrl + c 離開程式")
 
 try:
     while True:
-        print(random.choice(STREAM_CHARS), end='')
+        print(random.choice(STREAM_CHARS), end="")
         sys.stdout.flush()  # Make sure text appears on the screen.
         time.sleep(PAUSE)
 except KeyboardInterrupt:
@@ -7739,20 +7739,20 @@ print("------------------------------------------------------------")  # 60個
 try:
     while True:  # Main program loop.
         # Clear the screen by printing several newlines:
-        print('\n' * 60)
+        print("\n" * 60)
 
         # Get the current time from the computer's clock:
         currentTime = time.localtime()
         # % 12 so we use a 12-hour clock, not 24:
         hours = str(currentTime.tm_hour % 12)
-        if hours == '0':
-            hours = '12'  # 12-hour clocks show 12:00, not 00:00.
+        if hours == "0":
+            hours = "12"  # 12-hour clocks show 12:00, not 00:00.
         minutes = str(currentTime.tm_min)
         seconds = str(currentTime.tm_sec)
 
         print(hours, minutes, seconds)
 
-        print('按 ctrl + c 離開程式')
+        print("按 ctrl + c 離開程式")
 
         # Keep looping until the second changes:
         while True:
@@ -7760,7 +7760,7 @@ try:
             if time.localtime().tm_sec != currentTime.tm_sec:
                 break
 except KeyboardInterrupt:
-    print('Digital Clock, by Al Sweigart al@inventwithpython.com')
+    print("Digital Clock, by Al Sweigart al@inventwithpython.com")
     sys.exit()  # When Ctrl-C is pressed, end the program.
 """
 print("------------------------------------------------------------")  # 60個
@@ -7814,13 +7814,13 @@ import pyautogui
 for i in range(10):
     # 全屏截圖
     # myScreenshot = pyautogui.screenshot()
-    # myScreenshot.save(f'./pic_all{i}.png')
+    # myScreenshot.save(f"./pic_all{i}.png")
 
     # 部分截圖
     x_st, y_st, w, h = 1920 // 2, 1080 // 2, 1920 // 2 - 50, 1080 // 2 - 50
     myScreenshot = pyautogui.screenshot(region=(x_st, y_st, w, h))
     # 偽存檔
-    # myScreenshot.save(f'./pic_part{i}.png')
+    # myScreenshot.save(f"./pic_part{i}.png")
 
     time.sleep(5)
 
@@ -7862,15 +7862,15 @@ print("------------------------------------------------------------")  # 60個
 """
 n = 20                   # 設定進度條總長
 for i in range(n+1):
-    print(f'\r[{"█"*i}{" "*(n-i)}] {i*100/n}%', end='')   # 輸出不換行的內容
+    print(f"\r[{"█"*i}{" "*(n-i)}] {i*100/n}%", end="")   # 輸出不換行的內容
     time.sleep(0.5)
 
 print("------------------------------------------------------------")  # 60個
 
 n = 100
-icon = '⋮⋰⋯⋱'          # 建立旋轉的符號清單
+icon = "⋮⋰⋯⋱"          # 建立旋轉的符號清單
 for i in range(n+1):
-    print(f'\r{icon[i%4]} {i*100/n}%', end='')
+    print(f"\r{icon[i%4]} {i*100/n}%", end="")
     time.sleep(0.1)
 
 """
@@ -7937,13 +7937,13 @@ print("動物%s的體重是%d公斤" % (name, weight))
 
 
 """
-name = input('輸入品名：')
-num = int(input('輸入數量：'))
-price = float(input('輸入單價：'))
+name = input("輸入品名：")
+num = int(input("輸入數量："))
+price = float(input("輸入單價："))
 print()
-print('品名\t\t數量\t單價\t金額')
-print('=========================================')
-print('%-14s%-9d%-9.1f%-9.1f' %(name,num,price,num*price))
+print("品名\t\t數量\t單價\t金額")
+print("=========================================")
+print("%-14s%-9d%-9.1f%-9.1f" %(name,num,price,num*price))
 
 
 
@@ -7980,17 +7980,17 @@ print(5.4321e-3)  # 顯示浮點數常值 0.0054321
 
 print("------------------------------------------------------------")  # 60個
 
-name = "李金星"  # 宣告字串變數name，初值設為'李金星'
+name = "李金星"  # 宣告字串變數name，初值設為"李金星"
 score = 73  # 宣告整數變數score，初值設為73
 msg = "{}的成績是{}分".format(name, score)
 print(msg)
 
-name = "李金星"  # 宣告字串變數name，初值設為'李金星'
+name = "李金星"  # 宣告字串變數name，初值設為"李金星"
 score = 73  # 宣告整數變數score，初值設為73
 msg = "{0}的成績是{1}分".format(name, score)
 print(msg)
 
-name = "李金星"  # 宣告字串變數name，初值設為'李金星'
+name = "李金星"  # 宣告字串變數name，初值設為"李金星"
 score = 73  # 宣告整數變數score，初值設為73
 print("{0}的成績是{1}".format(name, score))
 
@@ -8056,10 +8056,10 @@ print("%-6.2s" % "ABCDE")  # 顯示字串「ABΔΔΔΔ」,寬度設為6,顯示2�
 
 print("------------------------------------------------------------")  # 60個
 
-print("1234567890!\a")  # 出現音效聲,游標位置在'!'字元後面
-print("12345\b67890!")  # 顯示字串「123467890!」,刪除字元'5'
+print("1234567890!\a")  # 出現音效聲,游標位置在"!"字元後面
+print("12345\b67890!")  # 顯示字串「123467890!」,刪除字元"5"
 print("1234567890!\n")  # 顯示字串「123467890!」,游標跳到下一行行首
-print("123\r4567890!")  # 游標跳到行首,刪除'123',顯示字串「4567890!」
+print("123\r4567890!")  # 游標跳到行首,刪除"123",顯示字串「4567890!」
 print("123\t45\\67")  # 顯示字串「123ΔΔΔΔΔ45\67」
 print('123"45"67')  # 顯示字串「123"45"67」
 print("123'4'567")  # 顯示字串「123'4'567」
@@ -8284,7 +8284,7 @@ def batch_resize_images(input_folder, output_folder, size=(300, 300)):
     
     # 遍歷輸入資料夾中的所有影像檔案
     for filename in os.listdir(input_folder):
-        if filename.endswith(('.jpg', '.png')):
+        if filename.endswith((".jpg", ".png")):
             # 打開影像
             image = Image.open(os.path.join(input_folder, filename))
             # 調整影像尺寸
@@ -8292,10 +8292,10 @@ def batch_resize_images(input_folder, output_folder, size=(300, 300)):
             # 保存調整尺寸後的影像到輸出資料夾
             #image.save(os.path.join(output_folder, filename))
 
-# 假設有一個包含原始圖片的資料夾 'input_images' 和
-# 一個用於存放調整後圖片的資料夾 'output_images'
-input_folder = 'input_images'
-output_folder = 'output_images'
+# 假設有一個包含原始圖片的資料夾 "input_images" 和
+# 一個用於存放調整後圖片的資料夾 "output_images"
+input_folder = "input_images"
+output_folder = "output_images"
 
 # 呼叫函數，將所有圖片調整為300x300大小
 batch_resize_images(input_folder, output_folder)
@@ -8304,16 +8304,16 @@ batch_resize_images(input_folder, output_folder)
 print("------------------------------------------------------------")  # 60個
 
 """
-def batch_convert_images(directory, target_format='.jpg'):
+def batch_convert_images(directory, target_format=".jpg"):
     for filename in os.listdir(directory):
-        if filename.endswith('.png'):
+        if filename.endswith(".png"):
             path = os.path.join(directory, filename)
             image = Image.open(path)
-            image_rgb = image.convert('RGB')  # 轉換為RGB模式以便保存為JPEG
-            #image_rgb.save(path.replace('.png', target_format), quality=95)
+            image_rgb = image.convert("RGB")  # 轉換為RGB模式以便保存為JPEG
+            #image_rgb.save(path.replace(".png", target_format), quality=95)
 
 # 呼叫批次更改函數
-batch_convert_images('images_directory')
+batch_convert_images("images_directory")
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -8327,7 +8327,7 @@ pinfile = open(pfile, "r")
 ps = pinfile.read()  
 print(str(len(ps)) + " 字元數") 
 print(str(len(ps.split())) + " 單字數") 
-print(str(len(ps.split('\n'))) + " 行數") 
+print(str(len(ps.split("\n"))) + " 行數") 
 pinfile.close()
 """
 print("------------------------------------------------------------")  # 60個
@@ -8541,7 +8541,7 @@ print("------------------------------------------------------------")  # 60個
 """
 PAUSE = 0.02
 
-print('無限迴圈進行中..... 按 Ctrl+C離開 ')
+print("無限迴圈進行中..... 按 Ctrl+C離開 ")
 
 try:
     while True:
@@ -12684,12 +12684,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-'''
-------------------------------------------------------------
-snippet 片段
-Code Snippet
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
+# snippet 片段
+# Code Snippet
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -12719,34 +12717,34 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-設定 x軸為 log 刻度
-plt.xscale('log')
+# 設定 x軸為 log 刻度
+plt.xscale("log")
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 # 用np.clip函數設定陣列值的上下限，確保繪圖正確
 
 axes[1].plot(np.clip(20 * np.log10(np.abs(fy[:20])), -120, 120), "o")
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 plt.subplot(231)
 plt.imshow(img[:, :, ::-1])
-plt.title('部分')
+plt.title("部分")
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 import re
 
-sentence = '愛因斯坦（德語：Albert Einstein，1879年3月14日－1955年4月18日），猶太裔理論物理學家，創立了現代物理學的兩大支柱之一的相對論[註 2][2]:274[1]，也是質能等價公式（E = mc2）的發現者[3]。'
-s1 = re.sub(r'\[[^\]]*\]', '', sentence)
+sentence = "愛因斯坦（德語：Albert Einstein，1879年3月14日－1955年4月18日），猶太裔理論物理學家，創立了現代物理學的兩大支柱之一的相對論[註 2][2]:274[1]，也是質能等價公式（E = mc2）的發現者[3]。"
+s1 = re.sub(r"\[[^\]]*\]", "", sentence)
 print(s1)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 # GridSearchCV
 
-11. Grid searching and making the model perform better
+# 11. Grid searching and making the model perform better
 
 from sklearn.model_selection import GridSearchCV
 
@@ -12772,74 +12770,80 @@ print("Best: %f using %s" % (best_score, best_params))
 
 # Best: 0.850725 using {'max_iter': 100, 'tol': 0.01}
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
+"""
 LogisticRegression 与 LogisticRegressionCV 的区别
 LogisticRegression 和 LogisticRegressionCV 是 scikit-learn 库中用于逻辑回归的两个类，它们之间的区别如下。
 
 LogisticRegression 是用于二分类或多分类问题的逻辑回归模型
+"""
 
 lr = LogisticRegression()
 lr.fit(X, y)
 
-LogisticRegressionCV 是基于交叉验证的逻辑回归模型，用于自动选择最佳的正则化强度。
+# LogisticRegressionCV 是基于交叉验证的逻辑回归模型，用于自动选择最佳的正则化强度。
 
 from sklearn.linear_model import LogisticRegressionCV
- 
+
 lr_cv = LogisticRegressionCV(cv=5)
 lr_cv.fit(X, y)
 best_C = lr_cv.C_
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
+"""
 1. 從匯入資料(查看資料型態)
 2. 資料前處理(資料 reshape 把他們壓扁、資料標準化 normalize、label 資料 one hot encodeing)
 3. 建立模型(這裡用多元感知器 Multilayer percertron ,MLP?)
- 
-  # 建立模型
-  model = Sequential()
+"""
+# 建立模型
+model = Sequential()
 
-  # 建立輸入層和隱藏層
-  model.add(Dense(units=256,input_dim=784,kernel_initializer='normal',activation='relu'))
-  # 定義隱藏層神經元個數256
-  # 輸入為28*28=784 個float 數字
-  # 使用 normal distribution 常態分布的亂數，初始化 weight權重 bias 偏差
-  # 定義激活函數為 relu
+# 建立輸入層和隱藏層
+model.add(
+    Dense(units=256, input_dim=784, kernel_initializer="normal", activation="relu")
+)
+# 定義隱藏層神經元個數256
+# 輸入為28*28=784 個float 數字
+# 使用 normal distribution 常態分布的亂數，初始化 weight權重 bias 偏差
+# 定義激活函數為 relu
 
-  # 建立輸出層
-  model.add(Dense(units=10,kernel_initializer='normal',activation='softmax'))
-  # 定義輸出層為10個 (數字0~9)
-  # 也是使用常態分佈初始化
-  # 定義激活函數是 softmax
-  # 這裡建立的Dense 層，不用設定 input dim ，因為keras 會自動照上一層的256設定
+# 建立輸出層
+model.add(Dense(units=10, kernel_initializer="normal", activation="softmax"))
+# 定義輸出層為10個 (數字0~9)
+# 也是使用常態分佈初始化
+# 定義激活函數是 softmax
+# 這裡建立的Dense 層，不用設定 input dim ，因為keras 會自動照上一層的256設定
 
-  print(model.summary())
-  
+print(model.summary())
+
+"""
 4. 模型compile訓練+紀錄訓練過程+訓練曲線視覺化(show train history)
 5. 測試(評估測試準確度、進行預測、計算正確率使用confusion table)
 7. 模型優化(方法有:增加神經元、加入 dropout 避免 oberfiting、增加隱藏層)
 8. 結論:多層感知器有其極限，提高準確度可以試試看 CNN
+"""
+print("------------------------------------------------------------")  # 60個
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-------------------------------------------------------------
-
-#登錄微信, 不過, 沒下文
+# 登錄微信, 不過, 沒下文
 
 import itchat
 
 itchat.auto_login()
 
-#查找自己的朋友
+# 查找自己的朋友
 
 friends_list = itchat.get_friends(update=True)
 print(len(friends_list))
 luohao = friends_list[0]
-props = ['NickName', 'Signature', 'Sex']
+props = ["NickName", "Signature", "Sex"]
 for prop in props:
     print(luohao[prop])
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 plt.grid(True)
 plt.grid(which="major", linestyle="-", linewidth="0.5", color="green")
@@ -12853,44 +12857,20 @@ from pylab import mpl
 mpl.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
 mpl.rcParams["axes.unicode_minus"] = False
 
-    x = random.randrange(-200, 200)
-    y = random.randrange(-200, 200)
-    length = random.randrange(75)
+x = random.randrange(-200, 200)
+y = random.randrange(-200, 200)
+length = random.randrange(75)
 
+print("------------------------------------------------------------")  # 60個
 
-            richTextBox1.Text += "filename old = " + filename + "\n";
-
-            string d_name = Path.GetDirectoryName(filename);
-            string f_name = Path.GetFileNameWithoutExtension(filename);
-            string ext_name = Path.GetExtension(filename);
-
-------------------------------------------------------------
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Graphics g = this.CreateGraphics();
-            Size s = this.Size;
-            Bitmap bitmap1 = new Bitmap(s.Width, s.Height, g);
-            Graphics memoryGraphics = Graphics.FromImage(bitmap1);
-            memoryGraphics.CopyFromScreen(this.Location.X, this.Location.Y, 0, 0, s);
-
-            pictureBox1.Image = bitmap1;
-
-            //e.Graphics.DrawImage(memoryImage, 0, 0);
-        }
-
-------------------------------------------------------------
-
-print('原本28欄')
+print("原本28欄")
 df = pd.read_csv("donations.csv")
 cc = df.head()
 print(cc)
 print(df.shape)
 
-print('原本28欄, 開啟時 直接刪除2欄 直欄')
-df = pd.read_csv("donations.csv").drop(
-    ["ID", "TARGET_D"], axis=1
-)
+print("原本28欄, 開啟時 直接刪除2欄 直欄")
+df = pd.read_csv("donations.csv").drop(["ID", "TARGET_D"], axis=1)
 cc = df.head()
 print(cc)
 print(df.shape)
@@ -12899,7 +12879,7 @@ cc = df.head()
 print(cc)
 print(df.shape)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 # 邏輯迴歸參數
 import sklearn.linear_model as linear_model
@@ -12945,20 +12925,20 @@ mlp = MLPClassifier(
     max_iter=1000,
 )  # 多層感知器分類器 函數學習機
 
-------------------------------------------------------------
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-covMat = [[1,2], [3,4]]
+covMat = [[1, 2], [3, 4]]
 
 eigVals, eigVects = np.linalg.eig(np.mat(covMat))
 
 print(eigVals, eigVects)
 
-    # step1:当数据量过大时，为了减少不必要的耗时
-    if orgdata.iloc[:, 1].count() > 5000:
-        data = orgdata.sample(5000)
-    else:
-        data = orgdata
+# step1:当数据量过大时，为了减少不必要的耗时
+if orgdata.iloc[:, 1].count() > 5000:
+    data = orgdata.sample(5000)
+else:
+    data = orgdata
 
 df = pd.read_csv("xxxx.csv")
 print("取出欄名")
@@ -13005,14 +12985,15 @@ plt.annotate(
     arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
 )
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-#不要顯示一些警告
+# 不要顯示一些警告
 import warnings
+
 warnings.filterwarnings("ignore")
 
-error_caption = 'MSE: {}'.format(round(error,2)) 
-fig.text(.1,.1,error_caption)
+error_caption = "MSE: {}".format(round(error, 2))
+fig.text(0.1, 0.1, error_caption)
 
 
 """
@@ -13041,42 +13022,45 @@ def plot_images_together(images):
     image = np.concatenate(images, axis=1)
 """
 
-print('建立資料的方法')
+print("建立資料的方法")
 
-print('range 加條件')
+print("range 加條件")
 list3 = [x for x in range(10) if x % 2 == 0]
 print("[x for x in range(10) if x%2==0]")
 print(str(list3))
-list4 = [x*2 for x in range(10) if x % 2 == 0]
+list4 = [x * 2 for x in range(10) if x % 2 == 0]
 print("[x*2 for x in range(10) if x%2==0]")
 print(str(list4))
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-d1 = {x:x*x for x in range(10)}
+d1 = {x: x * x for x in range(10)}
 print("{x:x*x for x in range(10)}")
 print(str(d1))
-d2 = {x:x*x for x in range(10) if x % 2 == 1}
+d2 = {x: x * x for x in range(10) if x % 2 == 1}
 print("{x:x*x for x in range(11) if x%2==1}")
 print(str(d2))
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
+
 
 def dice_roll():
     v = random.randint(1, 6)
     return v
-    
-trials = []    
+
+
+trials = []
 num_of_trials = 100
 for trial in range(num_of_trials):
     trials.append(dice_roll())
-print(sum(trials)/float(num_of_trials))
+print(sum(trials) / float(num_of_trials))
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 print(X)
 print(len(X))
 
+"""
 df plot
 df_kmeans = pd.DataFrame()
 df_kmeans["inertia_"] = inertia
@@ -13087,42 +13071,44 @@ show()
 df map的寫法
 c = {0: "r", 1: "g", 2: "b"}
 df1["colors"] = df1["pred"].map(c)
+"""
 
-
-#前幾筆資料
+# 前幾筆資料
 plt.plot(X[:3, 0], X[:3, 1], "yx")
 
-#後幾筆資料
+# 後幾筆資料
 plt.plot(X[3:, 0], X[3:, 1], "g.")
 
 
 plt.plot(X[:3, 0], X[:3, 1], "yx")
 plt.plot(X[3:, 0], X[3:, 1], "g.")
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 n = 100000
 cc = np.sum(4.0 / np.r_[1:n:4, -3:-n:-4])
 print(cc)
 
-        noise_sample = noise * np.random.normal(loc=0, scale=1.0, size=n_samples)
-        noise_sample = noise * np.random.uniform(low=0, high=1.0, size=n_samples)
-        noise_sample = noise * np.random.beta(a=0.5, b=1.0, size=n_samples)
-        noise_sample = noise * np.random.gamma(shape=1.0, scale=1.0, size=n_samples)
-        noise_sample = noise * np.random.laplace(loc=0.0, scale=1.0, size=n_samples)
+noise_sample = noise * np.random.normal(loc=0, scale=1.0, size=n_samples)
+noise_sample = noise * np.random.uniform(low=0, high=1.0, size=n_samples)
+noise_sample = noise * np.random.beta(a=0.5, b=1.0, size=n_samples)
+noise_sample = noise * np.random.gamma(shape=1.0, scale=1.0, size=n_samples)
+noise_sample = noise * np.random.laplace(loc=0.0, scale=1.0, size=n_samples)
 
+"""
 meshgrid() : 可接受兩個一維向量，產生一個座標矩陣
 np_c_ : 將兩個矩陣左右相連
 ravel() : 將多維矩陣轉換成一維
-
+"""
 
 import py_compile
 
 # py_compile.compile('usemodule.py');
-py_compile.compile('usemodule.py','usemodule.pyc')
+py_compile.compile("usemodule.py", "usemodule.pyc")
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
+"""
 LogisticRegression 与 LogisticRegressionCV 的区别
 LogisticRegression 和 LogisticRegressionCV 是 scikit-learn 库中用于逻辑回归的两个类，它们之间的区别如下。
 
@@ -13131,37 +13117,45 @@ LogisticRegression 和 LogisticRegressionCV 是 scikit-learn 库中用于逻辑�
 LogisticRegression 是用于二分类或多分类问题的逻辑回归模型。可以使用不同的优化算法（如拟牛顿法、坐标下降法）来拟合逻辑回归模型。可以根据需要设置正则化项（L1正则化或L2正则化）以控制模型的复杂度。可以通过调整超参数（如正则化强度、优化算法等）来改善模型性能。
 
 示例代码：
+"""
 
 from sklearn.linear_model import LogisticRegression
- 
+
 lr = LogisticRegression()
 lr.fit(X, y)
+
+"""
 2、LogisticRegressionCV
 
 LogisticRegressionCV 是基于交叉验证的逻辑回归模型，用于自动选择最佳的正则化强度。在拟合过程中，它会执行交叉验证来评估不同正则化强度的性能，并选择性能最佳的正则化强度。
 可以指定要尝试的正则化强度值的范围，以及交叉验证的折数。自动选择的最佳正则化强度可以通过LogisticRegressionCV对象的C_属性获得。
 
 示例代码：
+"""
 
 from sklearn.linear_model import LogisticRegressionCV
- 
+
 lr_cv = LogisticRegressionCV(cv=5)
 lr_cv.fit(X, y)
 best_C = lr_cv.C_
 
+
+"""
 3、总结
 
 LogisticRegression 用于拟合逻辑回归模型，并手动调整超参数。LogisticRegressionCV 基于交叉验证自动选择最佳的正则化强度，无需手动调整超参数。
 
 根据你的需求，你可以选择使用其中之一。如果你希望手动调整正则化强度或其他超参数，可以使用LogisticRegression。如果你希望自动选择最佳的正则化强度，并进行交叉验证来提高模型性能，可以使用LogisticRegressionCV。
-
+"""
 
 from PIL import Image
 import io
 
 # Open PDF Source #
 app_path = os.path.dirname(__file__)
-src_pdf= PdfFileReader(open(os.path.join(app_path, "../../../uploads/%s" % filename), "rb"))
+src_pdf = PdfFileReader(
+    open(os.path.join(app_path, "../../../uploads/%s" % filename), "rb")
+)
 
 # Get the first page of the PDF #
 dst_pdf = PdfFileWriter()
@@ -13174,23 +13168,26 @@ pdf_bytes.seek(0)
 
 file_name = "../../../uploads/%s_p%s.png" % (name, pagenum)
 img = Image.open(pdf_bytes)
-img.save(file_name, 'PNG')
+img.save(file_name, "PNG")
 pdf_bytes.flush()
 
-
+"""
 \u0000 ~ \uFFFF
 漢字 4E00~9FBB(9FFF)
 
 chr(x) 轉 ASCII
 ord(x) 轉 unicode
+"""
 
-    def learning_curve(self):
-        plt.ion()
-        # plt.figure()
-        E = np.array(self.Errors)
-        E = pd.DataFrame(E)
-        plt.plot(E.rolling(50).mean()[50:])
-        show()
+
+def learning_curve(self):
+    plt.ion()
+    # plt.figure()
+    E = np.array(self.Errors)
+    E = pd.DataFrame(E)
+    plt.plot(E.rolling(50).mean()[50:])
+    show()
+
 
 def sigmoid(x):
     # return x*(x > 0)
@@ -13200,19 +13197,16 @@ def sigmoid(x):
 
 data = np.random.uniform(0, 1, (100, 10))
 
-    classCount = {}
-    # 对分类字典classCount按value重新排序
-    # sorted(data.items(), key=operator.itemgetter(1), reverse=True)
-    # 该句是按字典值排序的固定用法
-    # classCount.items()：字典迭代器函数
-    # key：排序参数；operator.itemgetter(1)：多级排序
-    sortedClassCount = sorted(
-        classCount.items(), key=operator.itemgetter(1), reverse=True
-    )
-n
+classCount = {}
+# 对分类字典classCount按value重新排序
+# sorted(data.items(), key=operator.itemgetter(1), reverse=True)
+# 该句是按字典值排序的固定用法
+# classCount.items()：字典迭代器函数
+# key：排序参数；operator.itemgetter(1)：多级排序
+sortedClassCount = sorted(classCount.items(), key=operator.itemgetter(1), reverse=True)
 
 # dtree.loadDataSet("data03/dataset.dat", ["age", "revenue", "student", "credit"])
-dtree.loadDataSet("data03/lenses.txt",['age','prescript','astigmatic','tearRate'])
+dtree.loadDataSet("data03/lenses.txt", ["age", "prescript", "astigmatic", "tearRate"])
 
 dtree.loadDataSet("tmp_dataset.dat", ["age", "revenue", "student", "credit"])
 
@@ -13222,23 +13216,23 @@ dtree = C45DTree()
 labels = ["age", "revenue", "student", "credit"]
 
 
-matrix_data = np.matrix('22,66,140;42,70,148;30,62,125;35,68,160;25,62,152')
-row_labels = ['A','B','C','D','E']
-column_headings = ['Age', 'Height', 'Weight']
+matrix_data = np.matrix("22,66,140;42,70,148;30,62,125;35,68,160;25,62,152")
+row_labels = ["A", "B", "C", "D", "E"]
+column_headings = ["Age", "Height", "Weight"]
 
 df = pd.DataFrame(data=matrix_data, index=row_labels, columns=column_headings)
 
 
-Top 5 percentile in terms of Flavanoids?
+# Top 5 percentile in terms of Flavanoids?
 
-np.percentile(df3['Flavanoids'],95)
-
-
-df3[df3['Flavanoids']>=3.4975]
-
-df3[df3['Flavanoids']>=3.4975][['Ash','Alcohol','Magnesium']].mean()
+np.percentile(df3["Flavanoids"], 95)
 
 
+df3[df3["Flavanoids"] >= 3.4975]
+
+df3[df3["Flavanoids"] >= 3.4975][["Ash", "Alcohol", "Magnesium"]].mean()
+
+"""
 Numpy 操作
 1. 各種轉換
 2. 生成資料 np.arange  np.linspace
@@ -13267,28 +13261,29 @@ np.std(mat2,axis=0)
 np.sort(mat1.reshape(1,20))
 np.percentile(mat1,50)
 np.percentile(mat1,90)
+"""
 
-
+"""
 Linear Algebra Operations
 內積 外積
+"""
 
-np.dot(A,B)
-np.inner(A,B)
-np.outer(A,B)
+np.dot(A, B)
+np.inner(A, B)
+np.outer(A, B)
 
 
 Transpose
 
-np.transpose(A))
-np.transpose(B))
-np.dot(B, np.transpose(B)))
+np.transpose(A)
+np.transpose(B)
+np.dot(B, np.transpose(B))
 
 
 Trace
-np.trace(A))
-np.trace(A,offset=1))
-np.trace(A,offset=-1))
-
+np.trace(A)
+np.trace(A, offset=1)
+np.trace(A, offset=-1)
 
 
 # Linear equation solving, matrix inverse, linear least suqare
@@ -13297,16 +13292,16 @@ np.trace(A,offset=-1))
 # 3x - 2y - z = -1;
 # x - 3y + z = 4
 
-A = np.array([[2,5,1],[3,-2,-1],[1,-3,1]])
-B = np.array([14,-1,4])
-x = np.linalg.solve(A,B)
+A = np.array([[2, 5, 1], [3, -2, -1], [1, -3, 1]])
+B = np.array([14, -1, 4])
+x = np.linalg.solve(A, B)
 
-print("The solutions are:",x)
+print("The solutions are:", x)
 
----------------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個---------
 
-#from IPython.html import widgets
-#from IPython.html.widgets import interact
+# from IPython.html import widgets
+# from IPython.html.widgets import interact
 
 slider = widgets.FloatSliderWidget(min=0, max=4, value=2)
 
@@ -13321,18 +13316,18 @@ slider = widgets.FloatSliderWidget(min=0, max=4, value=2)
 # Random projections (RP)
 
 
-搜尋開始	python	 interact(
+# 搜尋開始	python	 interact(
 # NG interact(plot_svm, N=[10, 200], kernel='linear')
 # NG interact(plot_3D, elev=[-90, 90], azip=(-180, 180))
 # NG interact(plot_fit, degree=[1, 30], Npts=[2, 100])
 # interact(fit_randomized_tree, random_state=[0, 100])
-上面搜尋到的資料在檔案	D:\_git\vcs\_4.python\__code\data-science-ipython-notebooks-master\scikit-learn\scikit-learn01.py
+# 上面搜尋到的資料在檔案	D:\_git\vcs\_4.python\__code\data-science-ipython-notebooks-master\scikit-learn\scikit-learn01.py
 
 interact(plot_pdfs, cohen_d=slider)
-上面搜尋到的資料在檔案	D:\_git\vcs\_4.python\__code\data-science-ipython-notebooks-master\scipy\scipy_新進1.py
+# 上面搜尋到的資料在檔案	D:\_git\vcs\_4.python\__code\data-science-ipython-notebooks-master\scipy\scipy_新進1.py
 
 
-
+"""
 Python的歷史
 1989年聖誕節：Guido von Rossum開始寫Python語言的編譯器。
 1991年2月：第一個Python編譯器誕生。
@@ -13410,30 +13405,32 @@ df.ix[0, '欄位名']
 after :
 df.loc[0, '欄位名']
 df.iloc[0, column_index]
-
+"""
 print("------------------------------")  # 30個
 
-df之append廢棄, 改成pd.concat
+# df之append廢棄, 改成pd.concat
 
-before :
+# before :
 df = df.append(df_new_data)
 df = df.append(df_new_data, ignore_index=True)
 
-after :
+# after :
 df = pd.concat([df, df_new_data], axis=0, ignore_index=True)
 df = pd.concat([df, pd.DataFrame([df_new_data])], ignore_index=True)
 
 print("------------------------------")  # 30個
 
-df.groupby()之agg的用法 原本字典方式給參數方法廢棄，改用指定參數
+# df.groupby()之agg的用法 原本字典方式給參數方法廢棄，改用指定參數
 
-before :
-df.groupby([‘id’])[‘click’].agg({‘click_std’:‘std’}).reset_index()
-after :
-df.groupby([‘id’])[‘click’].agg(click_std=‘std’).reset_index()
+# before :
+df.groupby(["id"])["click"].agg({"click_std": "std"}).reset_index()
+
+# after :
+df.groupby(["id"])["click"].agg(click_std="std").reset_index()
 
 print("------------------------------")  # 30個
 
+"""
 如何在 CMD 輸出 log 檔
 dir		只在終端機上顯示結果
 
@@ -13462,9 +13459,6 @@ log 種類
 	command >file 2>&1: 將 stdout 和 stderr 同時輸出到 file
 	command >>file: 若 file 存在，就從結尾接續寫下去
 
-
-
-
 其實掌握矩陣, 或很像矩陣的陣列都是「先列後行」就可以!
 
 # axis = 0 : 第0維 直行
@@ -13482,9 +13476,10 @@ print("橫列加:", cc.sum(axis=1))
 圖片特徵(Image Features)
 
 Derived Features
+"""
+print("------------------------------------------------------------")  # 60個
 
-------------------------------------------------------------
-
+"""
 https://ithelp.ithome.com.tw/m/articles/10349618
 
 
@@ -13492,8 +13487,8 @@ AttributeError: 'DataFrame' object has no attribute 'ix'
 
 将 
 
-  df.ix[0, ‘column_name’]
- df.loc[0, ‘column_name’] 或 
+  df.ix[0, 'column_name']
+ df.loc[0, 'column_name'] 或 
 df.iloc[0, column_index]。
 
 
@@ -13501,209 +13496,219 @@ Lasso 為 Linear Regression 加上 L1，
 Ridge 為 Linear Regression 加上 L2，
 正則化函數是⽤來衡量模型的複雜度，
 避免模型有over-fitting的問題。
-
+"""
 from sklearn.linear_model import Lasso
 
-reg = Lasso(alpha=0.1) # 其中可以調整 alpha 值決定正則化的強度
+reg = Lasso(alpha=0.1)  # 其中可以調整 alpha 值決定正則化的強度
 reg.fit(X, y)
-print(reg.coef_) # 印出訓練後的模型參數
+print(reg.coef_)  # 印出訓練後的模型參數
 
 
 from sklearn.linear_model import Ridge
-reg = Ridge (alpha=0.1) #調整alpha值決定正則化的強度
-reg.fit(X, y) 
-print(reg.coef_) # 印出訓練後的模型參數，數值都明顯小於單純的線性回歸
 
-------------------------------------------------------------
+reg = Ridge(alpha=0.1)  # 調整alpha值決定正則化的強度
+reg.fit(X, y)
+print(reg.coef_)  # 印出訓練後的模型參數，數值都明顯小於單純的線性回歸
+
+print("------------------------------------------------------------")  # 60個
 
 print("欲搜尋字串")
 findstr = "aaaa"
-index = str_Obj.find(findstr)     # 搜尋findstr字串是否存在
-if  index >= 0:             # 搜尋檔案是否有欲尋找字串
+index = str_Obj.find(findstr)  # 搜尋findstr字串是否存在
+if index >= 0:  # 搜尋檔案是否有欲尋找字串
     print("搜尋 %s 字串存在 %s 檔案中" % (findstr, filename))
     print("在索引 %s 位置出現" % index)
 else:
     print("搜尋 %s 字串不存在 %s 檔案中" % (findstr, filename))
 
-------------------------------------------------------------
-
+print("------------------------------------------------------------")  # 60個
 
 
 def msgShow():
     label["text"] = "I love Python"
     label["bg"] = "lightyellow"
     label["fg"] = "blue"
-    
+
 
 expression = input("請輸入數學表達式 :")
 print("結果是 : ", eval(expression))
 
 bmi = round(weight / pow(height, 2), 2)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 bufsize = 8096
-usage = """
+usage = (
+    """
 usage: md5sum.py [-b] [-t] [-l] [-s bufsize] [file ...]
 -b        : read files in binary mode (default)
 -t        : read files in text mode (you almost certainly don't want this!)
 -l        : print last pathname component only
 -s bufsize: read buffer size (default %d)
 file ...  : files to sum; '-' or no files means stdin
-""" % bufsize
+"""
+    % bufsize
+)
 
-sys.stderr.write('%s: %s\n%s' % ('aaaa', 'bbbbb', usage))
+sys.stderr.write("%s: %s\n%s" % ("aaaa", "bbbbb", usage))
 
----
+# 撈出一層時 若遇到資料夾 是如何處理的?!
 
-撈出一層時 若遇到資料夾 是如何處理的?!
+print("------------------------------------------------------------")  # 60個
 
-------------------------------------------------------------
 
-# Count each letter in the string 
-def countLetters(line, counts): 
+# Count each letter in the string
+def countLetters(line, counts):
     for ch in line:
         if ch.isalpha():
-            counts[ord(ch) - ord('a')] += 1
+            counts[ord(ch) - ord("a")] += 1
 
-filename = 'data/engnews.txt'
 
-infile = open(filename, "r") # Open the file, 格式要unicode轉ascii
+filename = "data/engnews.txt"
 
-counts = 26 * [0] # Create and initialize counts
+infile = open(filename, "r")  # Open the file, 格式要unicode轉ascii
+
+counts = 26 * [0]  # Create and initialize counts
 for line in infile:
     # Invoke the countLetters function to count each letter
     countLetters(line.lower(), counts)
-    
+
 # Display results
 for i in range(len(counts)):
     if counts[i] != 0:
-        print(chr(ord('a') + i) + " appears " + str(counts[i])
-          + (" time" if counts[i] == 1 else " times"))
+        print(
+            chr(ord("a") + i)
+            + " appears "
+            + str(counts[i])
+            + (" time" if counts[i] == 1 else " times")
+        )
 
-infile.close() # Close file
-  
-------------------------------------------------------------
+infile.close()  # Close file
 
-一檔從頭讀到尾
-text = open(path.join(d, 'test.txt'),'r',encoding = 'utf-8').read()
-text = open(path.join(d, 'test.txt'),'r').read()
+print("------------------------------------------------------------")  # 60個
 
-是否一個 原本開啟後是亂碼的檔案 加上 encoding = xxx 或 .decode xxx 就會好
+# 一檔從頭讀到尾
+text = open(path.join(d, "test.txt"), "r", encoding="utf-8").read()
+text = open(path.join(d, "test.txt"), "r").read()
 
-text = 'abcd'
-text.startswith('ab')
+# 是否一個 原本開啟後是亂碼的檔案 加上 encoding = xxx 或 .decode xxx 就會好
 
-------------------------------------------------------------
-io與print + 1 * / ** int string length type 
+text = "abcd"
+text.startswith("ab")
 
+print("------------------------------------------------------------")  # 60個
+
+# io與print + 1 * / ** int string length type
+"""
 if-else-for-while
 
 function
 
 tk做一個公版的離開按鈕
 tk之button如何做到Enable = false?
+"""
+# for語法
+for rcs_dir in (".svn", ".git", ".hg", "build"):
+    print("取得特定資料夾:", rcs_dir)
 
-for語法
-    for rcs_dir in ('.svn', '.git', '.hg', 'build'):
-        print('取得特定資料夾:', rcs_dir)
 
 def pathdirs():
     # Convert sys.path into a list of absolute, existing, unique paths.
     dirs = []
     normdirs = []
     for dir in sys.path:
-        dir = os.path.abspath(dir or '.')
+        dir = os.path.abspath(dir or ".")
         normdir = os.path.normcase(dir)
         if normdir not in normdirs and os.path.isdir(dir):
             dirs.append(dir)
             normdirs.append(normdir)
     return dirs
-    
-------------------------------------------------------------    
 
-系統參數
-sys.path:
-        scriptdir = os.path.dirname(sys.argv[0])
-        if scriptdir in sys.path:
-            sys.path.remove(scriptdir)
-        sys.path.insert(0, '.')
+
+print("------------------------------------------------------------")  # 60個
+
+# 系統參數
+# sys.path:
+scriptdir = os.path.dirname(sys.argv[0])
+if scriptdir in sys.path:
+    sys.path.remove(scriptdir)
+sys.path.insert(0, ".")
+
 
 def cli():
     # Command-line interface (looks at sys.argv to decide what to do).
     import getopt
-    class BadUsage(Exception): pass
+
+    class BadUsage(Exception):
+        pass
 
     # Scripts don't get the current directory in their path by default
     # unless they are run with the '-m' switch
-    if '' not in sys.path:
+    if "" not in sys.path:
         scriptdir = os.path.dirname(sys.argv[0])
         if scriptdir in sys.path:
             sys.path.remove(scriptdir)
-        sys.path.insert(0, '.')
+        sys.path.insert(0, ".")
 
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-    n = read_uint4(f)
-    assert n >= 0
-    if n > sys.maxsize:
-        raise ValueError("unicodestring4 byte count > sys.maxsize: %d" % n)
+n = read_uint4(f)
+assert n >= 0
+if n > sys.maxsize:
+    raise ValueError("unicodestring4 byte count > sys.maxsize: %d" % n)
 
 
-    def _dbg(self, level, msg):
-        # Write debugging output to sys.stderr.
-        
-        if level <= self.debug:
-            print(msg, file=sys.stderr)
+def _dbg(self, level, msg):
+    # Write debugging output to sys.stderr.
 
-        # default setting for prog
-        if prog is None:
-            prog = _os.path.basename(_sys.argv[0])
+    if level <= self.debug:
+        print(msg, file=sys.stderr)
 
-------------------------------------------------------------
+    # default setting for prog
+    if prog is None:
+        prog = _os.path.basename(_sys.argv[0])
 
-if 'strxfrm' not in globals():
 
+print("------------------------------------------------------------")  # 60個
+
+if "strxfrm" not in globals():
     lookup = os.environ.get
     for variable in envvars:
-        localename = lookup(variable,None)
+        localename = lookup(variable, None)
         if localename:
-            if variable == 'LANGUAGE':
-                localename = localename.split(':')[0]
+            if variable == "LANGUAGE":
+                localename = localename.split(":")[0]
             break
 
+# 要能夠讓自定義的函數放在固定資料夾  讓.py去引用
 
-要能夠讓自定義的函數放在固定資料夾  讓.py去引用
+# 修改檔案的內容
 
+# if not os.path.isfile(m32):
 
-修改檔案的內容
+with open(m32) as fin:
+    with open(makefile, "w") as fout:
+        for line in fin:
+            line = line.replace("=tmp32", "=tmp64")
+            line = line.replace("=out32", "=out64")
+            line = line.replace("=inc32", "=inc64")
+            # force 64 bit machine
+            line = line.replace("MKLIB=lib", "MKLIB=lib /MACHINE:X64")
+            line = line.replace("LFLAGS=", "LFLAGS=/MACHINE:X64 ")
+            # don't link against the lib on 64bit systems
+            line = line.replace("bufferoverflowu.lib", "")
+            fout.write(line)
+os.unlink(m32)
 
-    if not os.path.isfile(m32):
-        return
-    with open(m32) as fin:
-        with open(makefile, 'w') as fout:
-            for line in fin:
-                line = line.replace("=tmp32", "=tmp64")
-                line = line.replace("=out32", "=out64")
-                line = line.replace("=inc32", "=inc64")
-                # force 64 bit machine
-                line = line.replace("MKLIB=lib", "MKLIB=lib /MACHINE:X64")
-                line = line.replace("LFLAGS=", "LFLAGS=/MACHINE:X64 ")
-                # don't link against the lib on 64bit systems
-                line = line.replace("bufferoverflowu.lib", "")
-                fout.write(line)
-    os.unlink(m32)
+print("------------------------------------------------------------")  # 60個
 
-------------------------------------------------------------
+# ord函數		給一個Unicode字符，返回該字符的Unicode數字代碼
+# 例如，給定ord('a') 返回整數 97，ord('\u2020') 返回 8224。同chr相反。
 
-ord函數		給一個Unicode字符，返回該字符的Unicode數字代碼
+print("------------------------------------------------------------")  # 60個
 
-例如，給定ord('a') 返回整數 97，ord('\u2020') 返回 8224。同chr相反。
-
-------------------------------------------------------------
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     if len(sys.argv) == 1:
         _print_tokens(shlex())
     else:
@@ -13711,187 +13716,197 @@ if __name__ == '__main__':
         with open(fn) as f:
             _print_tokens(shlex(f, fn))
 
-    print("%d: %s[%d]%s %s" % (lineno(), filename(), filelineno(),
-                                   isfirstline() and "*" or "", line))
+    print(
+        "%d: %s[%d]%s %s"
+        % (lineno(), filename(), filelineno(), isfirstline() and "*" or "", line)
+    )
 print("%d: %s[%d]" % (lineno(), filename(), filelineno()))
 
-    d = {}
-        
-------------------------------------------------------------
-            print("The latest version of {} on PyPI is {}, but ensurepip "
-                  "has {}".format(project, upstream_version, version))
+d = {}
 
-        sys.stderr.write("can't stat %r: %r\n" % (filename, msg))
+print("------------------------------------------------------------")  # 60個
 
-------------------------------------------------------------
+print(
+    "The latest version of {} on PyPI is {}, but ensurepip "
+    "has {}".format(project, upstream_version, version)
+)
+
+sys.stderr.write("can't stat %r: %r\n" % (filename, msg))
+
+print("------------------------------------------------------------")  # 60個
+
+
 def usage(msg):
     sys.stderr.write("%s: %s\n" % (sys.argv[0], msg))
     sys.stderr.write("Usage: %s [-l] file ...\n" % sys.argv[0])
     sys.stderr.write("Try `%s -h' for more information.\n" % sys.argv[0])
 
-                print("%s:%d:%s" % (filename, row, line), end=' ')
+    print("%s:%d:%s" % (filename, row, line), end=" ")
 
     list = []
-        list.append((tsub, key))
+    list.append((tsub, key))
     list.sort()
     list.reverse()
     width = len(repr(list[0][0]))
 
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-print('format語法 字串填空')
+print("format語法 字串填空")
 
-print('直接打印字串Unknown benchmark: {}'.format('zzzzzzzz', file=sys.stderr))
-print('保留單引號Unknown benchmark: {!r}'.format('zzzzzzzz', file=sys.stderr))
+print("直接打印字串Unknown benchmark: {}".format("zzzzzzzz", file=sys.stderr))
+print("保留單引號Unknown benchmark: {!r}".format("zzzzzzzz", file=sys.stderr))
 
 seconds = 1
-seconds_plural = 's' if seconds > 1 else ''
+seconds_plural = "s" if seconds > 1 else ""
 repeat = 3
-pattern = ('這個字串要填入資料 第一筆 {}, 第二筆 {}, 第三筆 {}\n'
-          '第四筆 {}\n'
-          '第五筆 {!r}\n')
+pattern = "這個字串要填入資料 第一筆 {}, 第二筆 {}, 第三筆 {}\n" "第四筆 {}\n" "第五筆 {!r}\n"
 
-print(pattern.format(3, 8, 3, 4, 'dddd'))
+print(pattern.format(3, 8, 3, 4, "dddd"))
 
 sys.stdout.flush()
 
-print "%s.%s unknown bits %x" % (self.name, name, unk)
-                print "%s.%sunknown integer type %d" % (self.name, name, size)
-        return "CREATE TABLE %s (%s PRIMARY KEY %s)" % (self.name, fields, keys)
+print("%s.%s unknown bits %x" % (self.name, name, unk))
+print("%s.%sunknown integer type %d" % (self.name, name, size))
+# return "CREATE TABLE %s (%s PRIMARY KEY %s)" % (self.name, fields, keys)
 
-    v = db.OpenView("INSERT INTO _Streams (Name, Data) VALUES ('%s', ?)" % name)
-
-
+v = db.OpenView("INSERT INTO _Streams (Name, Data) VALUES ('%s', ?)" % name)
 
 _directories = sets.Set()
-        while logical in _directories:
-            logical = "%s%d" % (_logical, index)
-            index += 1
-        _directories.add(logical)
+while logical in _directories:
+    logical = "%s%d" % (_logical, index)
+    index += 1
+_directories.add(logical)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 prog = sys.argv[0]
 
-sys.stderr.write("Unable to open %s.  " % 'aaaaa')
+sys.stderr.write("Unable to open %s.  " % "aaaaa")
 sys.stderr.write("Check for format or version mismatch.\n")
 
-    def touch_pymods(self):
-        # force a rebuild of all modules that use OpenSSL APIs
-        for fname in self.module_files:
-            os.utime(fname)
 
-------------------------------------------------------------
+def touch_pymods(self):
+    # force a rebuild of all modules that use OpenSSL APIs
+    for fname in self.module_files:
+        os.utime(fname)
 
-def usage(code, msg=''):
+
+print("------------------------------------------------------------")  # 60個
+
+
+def usage(code, msg=""):
     print(__doc__ % globals(), file=sys.stderr)
     if msg:
         print(msg, file=sys.stderr)
     sys.exit(code)
 
 
-            print(_(
-                '*** %(file)s:%(lineno)s: Seen unexpected token "%(token)s"'
-                ) % {
-                'token': tstring,
-                'file': self.__curfile,
-                'lineno': self.__lineno
-                }, file=sys.stderr)
+print(
+    _('*** %(file)s:%(lineno)s: Seen unexpected token "%(token)s"')
+    % {"token": tstring, "file": self.__curfile, "lineno": self.__lineno},
+    file=sys.stderr,
+)
 
 
+print(_("# File: %(filename)s, line: %(lineno)d") % d, file=fp)
 
-                        print(_(
-                            '# File: %(filename)s, line: %(lineno)d') % d, file=fp)
+print("------------------------------------------------------------")  # 60個
 
-------------------------------------------------------------
-            print(_(
-                "Can't read --exclude-file: %s") % options.excludefilename, file=sys.stderr)
+print(_("Can't read --exclude-file: %s") % options.excludefilename, file=sys.stderr)
 
-            fp = sys.stdin.buffer
+fp = sys.stdin.buffer
 
-                print('%s: %s, line %d, column %d' % (
-                    e.args[0], filename, e.args[1][0], e.args[1][1]),
-                    file=sys.stderr)
+print(
+    "%s: %s, line %d, column %d" % (e.args[0], filename, e.args[1][0], e.args[1][1]),
+    file=sys.stderr,
+)
 
-        print(msg, file=sys.stderr)
+print(msg, file=sys.stderr)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-print('No input file given', file=sys.stderr)
+print("No input file given", file=sys.stderr)
 print("Try `msgfmt --help' for more information.", file=sys.stderr)
 
 
 def pprint(data):
     items = sorted(data.items())
     for k, v in items:
-        print('    %-40s%a,' % ('%a:' % k, v))
+        print("    %-40s%a," % ("%a:" % k, v))
+
 
 def print_differences(data, olddata):
     items = sorted(olddata.items())
     for k, v in items:
         if k not in data:
-            print('#    removed %a' % k)
+            print("#    removed %a" % k)
         elif olddata[k] != data[k]:
-            print('#    updated %a -> %a to %a' % \
-                  (k, olddata[k], data[k]))
+            print("#    updated %a -> %a to %a" % (k, olddata[k], data[k]))
         # Additions are not mentioned
 
-------------------------------------------------------------
 
-    def print_label(filename, func):
-        name = re.split(r'[-.]', filename)[0]
+print("------------------------------------------------------------")  # 60個
+
+
+def print_label(filename, func):
+    name = re.split(r"[-.]", filename)[0]
+    sys.stdout.write(("[%s] %s... " % (name.center(7), func.__doc__.strip())).ljust(52))
+    sys.stdout.flush()
+
+
+def print_results(size, n, real, cpu):
+    bw = n * float(size) / 1024**2 / real
+    bw = ("%4d MB/s" if bw > 100 else "%.3g MB/s") % bw
+    sys.stdout.write(bw.rjust(12) + "\n")
+    if cpu < 0.90 * real:
         sys.stdout.write(
-            ("[%s] %s... "
-                % (name.center(7), func.__doc__.strip())
-            ).ljust(52))
-        sys.stdout.flush()
+            "   warning: test above used only %d%% CPU, "
+            "result may be flawed!\n" % (100.0 * cpu / real)
+        )
 
 
-
-    def print_results(size, n, real, cpu):
-        bw = n * float(size) / 1024 ** 2 / real
-        bw = ("%4d MB/s" if bw > 100 else "%.3g MB/s") % bw
-        sys.stdout.write(bw.rjust(12) + "\n")
-        if cpu < 0.90 * real:
-            sys.stdout.write("   warning: test above used only %d%% CPU, "
-                "result may be flawed!\n" % (100.0 * cpu / real))
-
-------------------------------------------------------------
-data = ('abc', '123', '   ', '\u1234\u2345\u3456', '\uFFFF'*10)
-data = ('abc', '123', '   ', '\xe4\xf6\xfc', '\xdf'*10)
+print("------------------------------------------------------------")  # 60個
+data = ("abc", "123", "   ", "\u1234\u2345\u3456", "\uFFFF" * 10)
+data = ("abc", "123", "   ", "\xe4\xf6\xfc", "\xdf" * 10)
 len_data = len(data)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
+
 
 def __repr__(self):
-	return "<Frame filename=%r lineno=%r>" % (self.filename, self.lineno)
+    return "<Frame filename=%r lineno=%r>" % (self.filename, self.lineno)
+
 
 def _normalize_filename(filename):
     filename = os.path.normcase(filename)
-    if filename.endswith(('.pyc', '.pyo')):
+    if filename.endswith((".pyc", ".pyo")):
         filename = filename[:-1]
     return filename
 
-------------------------------------------------------------
 
-sys.stderr.write("WARNING: %s can not be found - standard extensions may not be found\n" % defaultMapName)
-sys.stderr.write("No definition of module %s in any specified map file.\n" % (mod))
-sys.stderr.write("%s: %s\n" % (dsp, msg))
-sys.stderr.write('MARKER 1 never found\n')
+print("------------------------------------------------------------")  # 60個
 
 sys.stderr.write(
-    "Usage:  %s HOSTNAME:PORTNUMBER [, HOSTNAME:PORTNUMBER...]\n" %
-    sys.argv[0])
+    "WARNING: %s can not be found - standard extensions may not be found\n"
+    % defaultMapName
+)
+sys.stderr.write("No definition of module %s in any specified map file.\n" % (mod))
+sys.stderr.write("%s: %s\n" % (dsp, msg))
+sys.stderr.write("MARKER 1 never found\n")
 
-unknown = 'ddddd'
-sys.stderr.write('Warning: unknown modules remain: %s\n' %' '.join(unknown))
+sys.stderr.write(
+    "Usage:  %s HOSTNAME:PORTNUMBER [, HOSTNAME:PORTNUMBER...]\n" % sys.argv[0]
+)
+
+unknown = "ddddd"
+sys.stderr.write("Warning: unknown modules remain: %s\n" % " ".join(unknown))
 
 # Ring bell
-sys.stderr.write('\007')
+sys.stderr.write("\007")
 
-------------------------------------------------------------
-
+print("------------------------------------------------------------")  # 60個
+"""
 磁碟處理 os類, shutil類
 
 1. 建立資料夾
@@ -13899,15 +13914,16 @@ sys.stderr.write('\007')
 3. 資料夾複製
 4. 刪除檔案
 5. 刪除資料夾
-
-------------------------------------------------------------
+"""
+print("------------------------------------------------------------")  # 60個
 
 __version__ = 1, 7, 0
-__version__ = '2.1'
+__version__ = "2.1"
 
-print('PYTHON %s' % __version__)
+print("PYTHON %s" % __version__)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
+
 
 def prdict(d):
     keys = sorted(d.keys())
@@ -13915,43 +13931,47 @@ def prdict(d):
         value = d[key]
         print("%-15s" % key, str(value))
 
-
     keys = sorted(makevars.keys())
     for key in keys:
         outfp.write("%s=%s\n" % (key, makevars[key]))
     outfp.write("\nall: %s\n\n" % target)
 
-------------------------------------------------------------
 
-error = 'mkreal error'
+print("------------------------------------------------------------")  # 60個
 
-BUFSIZE = 32*1024
+error = "mkreal error"
+
+BUFSIZE = 32 * 1024
 
 sys.stdout = sys.stderr
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 import timeit
 import itertools
 import re
 import optparse
 
-VERSION = '2.0'
+VERSION = "2.0"
+
 
 def p(*args):
-    sys.stdout.write(' '.join(str(s) for s in args) + '\n')
+    sys.stdout.write(" ".join(str(s) for s in args) + "\n")
+
 
 if sys.version_info >= (3,):
-    BYTES = bytes_from_str = lambda x: x.encode('ascii')
+    BYTES = bytes_from_str = lambda x: x.encode("ascii")
     UNICODE = unicode_from_str = lambda x: x
 else:
     BYTES = bytes_from_str = lambda x: x
-    UNICODE = unicode_from_str = lambda x: x.decode('ascii')
+    UNICODE = unicode_from_str = lambda x: x.decode("ascii")
+
 
 class UnsupportedType(TypeError):
     pass
 
-p('stringbench v%s' % VERSION)
+
+p("stringbench v%s" % VERSION)
 p(sys.version)
 
 # Flush buffer before each group
@@ -13964,65 +13984,70 @@ p("(in ms)\t(in ms)\t%\tcomment")
 bytes_total = uni_total = 0.0
 
 
-big_s = "A" + ("Z"*128*12)
+big_s = "A" + ("Z" * 128 * 12)
 print(big_s)
 
 _RANGE_1000 = list(range(1000))
 _RANGE_100 = list(range(100))
 _RANGE_10 = list(range(10))
 
-
-
 try:
-    average = bytes_time/uni_time
+    average = bytes_time / uni_time
 except (TypeError, ZeroDivisionError):
     average = 0.0
-print("%s\t%s\t%.1f\t%s (*%d)" % (
-    bytes_time_s, uni_time_s, 100.*average,
-    v.comment, v.repeat_count))
+print(
+    "%s\t%s\t%.1f\t%s (*%d)"
+    % (bytes_time_s, uni_time_s, 100.0 * average, v.comment, v.repeat_count)
+)
 
-p("%.2f\t%.2f\t%.1f\t%s" % (
-1000*bytes_total, 1000*uni_total, 100.*ratio, "TOTAL"))
+p(
+    "%.2f\t%.2f\t%.1f\t%s"
+    % (1000 * bytes_total, 1000 * uni_total, 100.0 * ratio, "TOTAL")
+)
 
-
-------------------------------------------------------------
-
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 self.chars = list(range(256))
 
-------------------------------------------------------------
-print(self.name+":", size*len(self.data), "bytes", file=sys.stderr)
+print("------------------------------------------------------------")  # 60個
 
-print("%d+%d bins at shift %d; %d bytes" % (len(t1), len(t2), shift, bytes), file=sys.stderr)
-print("Size of original table:", len(t)*getsize(t), "bytes", file=sys.stderr)
+print(self.name + ":", size * len(self.data), "bytes", file=sys.stderr)
 
-------------------------------------------------------------
-    table = {}
-    maxkey = 255
-        for key in range(256):
-            table[key] = (key, '')
+print(
+    "%d+%d bins at shift %d; %d bytes" % (len(t1), len(t2), shift, bytes),
+    file=sys.stderr,
+)
+print("Size of original table:", len(t) * getsize(t), "bytes", file=sys.stderr)
 
-    # Create table code
-    maxchar = 0
-    for key in range(256):
-        if key not in table:
-            mapvalue = MISSING_CODE
-            mapcomment = 'UNDEFINED'
+print("------------------------------------------------------------")  # 60個
+
+table = {}
+maxkey = 255
+for key in range(256):
+    table[key] = (key, "")
+
+# Create table code
+maxchar = 0
+for key in range(256):
+    if key not in table:
+        mapvalue = MISSING_CODE
+        mapcomment = "UNDEFINED"
+    else:
+        mapvalue, mapcomment = table[key]
+    if mapvalue == MISSING_CODE:
+        mapchar = UNI_UNDEFINED
+    else:
+        if isinstance(mapvalue, tuple):
+            # 1-n mappings not supported
+            pass  # return None
         else:
-            mapvalue, mapcomment = table[key]
-        if mapvalue == MISSING_CODE:
-            mapchar = UNI_UNDEFINED
-        else:
-            if isinstance(mapvalue, tuple):
-                # 1-n mappings not supported
-                return None
-            else:
-                mapchar = chr(mapvalue)
+            mapchar = chr(mapvalue)
 
-------------------------------------------------------------mix
+print("------------------------------------------------------------")  # 60個mix
 
-#Get a list of module files for a filename, a module or package name, or a directory.
+# Get a list of module files for a filename, a module or package name, or a directory.
+
 
 def getFilesForName(name):
     if not os.path.exists(name):
@@ -14039,27 +14064,34 @@ def getFilesForName(name):
         if not name:
             return []
 
-------------------------------------------------------------
+
+print("------------------------------------------------------------")  # 60個
+
 
 def wrong_user_display(user_metadata: dict = {"name": "John", "age": 30}):
-
-------------------------------------------------------------
-        words = (
-            "Acquaintance", "Rendezvous",
-            "Acquaintance", "House", "Trip", "House", "House")
-        expected_count = {
-            'Acquaintance': 2,
-            'Rendezvous': 1,
-            'House': 3,
-            'Trip': 1,
-        }
+    pass
 
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
+words = (
+    "Acquaintance",
+    "Rendezvous",
+    "Acquaintance",
+    "House",
+    "Trip",
+    "House",
+    "House",
+)
+expected_count = {
+    "Acquaintance": 2,
+    "Rendezvous": 1,
+    "House": 3,
+    "Trip": 1,
+}
 
-
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 self.assertEqual(func(), X + Y)
 self.assertEqual((cn.id_, cn.user, cn.location), (42, "root", "127.0.0.1"))
@@ -14076,36 +14108,41 @@ self.assertDictEqual(obtained, {"x": DEFAULT_X, "y": DEFAULT_Y})
 self.assertDictEqual(obtained, {"x": DEFAULT_X, "y": DEFAULT_Y})
 self.assertNotEqual(end_line, "[clinic]*/[clinic]*/")
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-        for name, group in (
-            ('y', -1), ('x', -1),
-            ('ch', 0),
-            ('attr', 1),
-            ):
-            p = function.parameters[name]
+for name, group in (
+    ("y", -1),
+    ("x", -1),
+    ("ch", 0),
+    ("attr", 1),
+):
+    p = function.parameters[name]
 
 
-        for name, group in (
-            ('y1', -2), ('y2', -2),
-            ('x1', -1), ('x2', -1),
-            ('ch', 0),
-            ('attr1', 1), ('attr2', 1), ('attr3', 1),
-            ('attr4', 2), ('attr5', 2), ('attr6', 2),
-            ):
-            p = function.parameters[name]
-            self.assertEqual(p.group, group)
-            self.assertEqual(p.kind, inspect.Parameter.POSITIONAL_ONLY)
+for name, group in (
+    ("y1", -2),
+    ("y2", -2),
+    ("x1", -1),
+    ("x2", -1),
+    ("ch", 0),
+    ("attr1", 1),
+    ("attr2", 1),
+    ("attr3", 1),
+    ("attr4", 2),
+    ("attr5", 2),
+    ("attr6", 2),
+):
+    p = function.parameters[name]
+    self.assertEqual(p.group, group)
+    self.assertEqual(p.kind, inspect.Parameter.POSITIONAL_ONLY)
 
-        self.assertEqual(function.docstring.strip(),
-imaginary([[y1, y2,] x1, x2,] ch, [attr1, attr2, attr3, [attr4, attr5,
-          attr6]])
+# self.assertEqual(function.docstring.strip(),imaginary([[y1, y2,] x1, x2,] ch, [attr1, attr2, attr3, [attr4, attr5,attr6]])
 
-------------------------------------------------------------
-                         
+print("------------------------------------------------------------")  # 60個
+
 import unittest
 
-#從另一個.py檔取得參數
+# 從另一個.py檔取得參數
 from default_arguments import DEFAULT_X, DEFAULT_Y
 
 DEFAULT_X = 5
@@ -14116,15 +14153,16 @@ print(DEFAULT_Y)
 
 
 class TestUnitTest(unittest.TestCase):
-    print('UnitTest')
-    print('UnitTest')
-    print('UnitTest')
+    print("UnitTest")
+    print("UnitTest")
+    print("UnitTest")
 
 
 if __name__ == "__main__":
     unittest.main()
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
+
 
 class BaseTokenizer:
     """
@@ -14146,6 +14184,7 @@ class UpperIterableMixin:
 
 
 class Tokenizer(UpperIterableMixin, BaseTokenizer):
+    pass
 
 
 tk = Tokenizer("28a2320b-fd3f-4627-9792-a2b38e3c46b0")
@@ -14153,38 +14192,43 @@ dddd = list(tk)
 print(dddd)
 #    ['28A2320B', 'FD3F', '4627', '9792', 'A2B38E3C46B0']
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-    _default_options = {"print_function" : False,
-                        "write_unchanged_files" : False}
+_default_options = {"print_function": False, "write_unchanged_files": False}
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 # Map named tokens to the type value for a LeafPattern
-TOKEN_MAP = {"NAME": token.NAME,
-             "STRING": token.STRING,
-             "NUMBER": token.NUMBER,
-             "TOKEN": None}
+TOKEN_MAP = {
+    "NAME": token.NAME,
+    "STRING": token.STRING,
+    "NUMBER": token.NUMBER,
+    "TOKEN": None,
+}
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 import difflib
 import shutil
 import optparse
 
+
 def diff_texts(a, b, filename):
     # Return a unified diff of two strings.
     a = a.splitlines()
     b = b.splitlines()
-    return difflib.unified_diff(a, b, filename, filename,
-                                "(original)", "(refactored)",
-                                lineterm="")
+    return difflib.unified_diff(
+        a, b, filename, filename, "(original)", "(refactored)", lineterm=""
+    )
+
+
 def warn(msg):
     print("WARNING: %s" % (msg,), file=sys.stderr)
 
-filename1 = 'D:/_git/vcs/_1.data/______test_files1/poetrya.txt'
-filename2 = 'D:/_git/vcs/_1.data/______test_files1/poetryb.txt'
-filename = 'ttttt.txt'
+
+filename1 = "D:/_git/vcs/_1.data/______test_files1/poetrya.txt"
+filename2 = "D:/_git/vcs/_1.data/______test_files1/poetryb.txt"
+filename = "ttttt.txt"
 
 diff_lines = diff_texts(filename1, filename2, filename)
 for line in diff_lines:
@@ -14200,11 +14244,11 @@ print("Use --help to show usage.", file=sys.stderr)
 
 print("Sorry, -j isn't supported on this platform.", file=sys.stderr)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 import ensurepip
 
-version=ensurepip._PIP_VERSION
+version = ensurepip._PIP_VERSION
 print(version)
 
 EXPECTED_VERSION_OUTPUT = "pip " + ensurepip._PIP_VERSION
@@ -14217,15 +14261,16 @@ orig_pip = sys.modules.get("pip", sentinel)
 print(orig_pip)
 
 if orig_pip is sentinel:
-    print('aaaaa')
+    print("aaaaa")
 else:
-    print('bbbbb')
+    print("bbbbb")
 
-#print(ensurepip._main(["--version"]))
+# print(ensurepip._main(["--version"]))
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-def output(string = '', end = '\n'):
+
+def output(string="", end="\n"):
     sys.stdout.write(string + end)
 
 
@@ -14233,77 +14278,84 @@ def output(*strings):
     for s in strings:
         sys.stdout.write(str(s) + "\n")
 
-------------------------------------------------------------
 
-------------------------------------------------------------
-        try:
-            # RFC 1952 requires the FNAME field to be Latin-1. Do not
-            # include filenames that cannot be represented that way.
-            fname = os.path.basename(self.name)
-                fname = fname[:-3]
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-------------------------------------------------------------
+# RFC 1952 requires the FNAME field to be Latin-1. Do not
+# include filenames that cannot be represented that way.
+fname = os.path.basename(self.name)
+fname = fname[:-3]
+
+print("------------------------------------------------------------")  # 60個
 
 import locale, copy, io, re, struct
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-    def __repr__(self):
-        args = ", ".join(map(repr, self.args))
-        keywords = ", ".join("{}={!r}".format(k, v)
-                                 for k, v in self.keywords.items())
-        format_string = "{module}.{cls}({func}, {args}, {keywords})"
-        return format_string.format(module=self.__class__.__module__,
-                                    cls=self.__class__.__name__,
-                                    func=self.func,
-                                    args=args,
-                                    keywords=keywords)
 
-------------------------------------------------------------
+def __repr__(self):
+    args = ", ".join(map(repr, self.args))
+    keywords = ", ".join("{}={!r}".format(k, v) for k, v in self.keywords.items())
+    format_string = "{module}.{cls}({func}, {args}, {keywords})"
+    return format_string.format(
+        module=self.__class__.__module__,
+        cls=self.__class__.__name__,
+        func=self.func,
+        args=args,
+        keywords=keywords,
+    )
 
-    exe_dir, _ = os.path.split(os.path.abspath(executable))
 
-    site_prefix = os.path.dirname(exe_dir)
-            os.path.join(exe_dir, conf_basename),
-            os.path.join(site_prefix, conf_basename)
-        if os.path.isfile(conffile)
-        here = os.path.dirname(os.__file__)
-        dirs.extend([os.path.join(here, os.pardir), here, os.curdir])
+print("------------------------------------------------------------")  # 60個
 
-------------------------------------------------------------
+exe_dir, _ = os.path.split(os.path.abspath(executable))
 
-    ckeys = sorted(caps)
-    for type in ckeys:
-        print(type)
-        entries = caps[type]
-        for e in entries:
-            keys = sorted(e)
-            for k in keys:
-                print("  %-15s" % k, e[k])
-            print()
+site_prefix = os.path.dirname(exe_dir)
+os.path.join(exe_dir, conf_basename),
+os.path.join(site_prefix, conf_basename)
+# if os.path.isfile(conffile)
+here = os.path.dirname(os.__file__)
+dirs.extend([os.path.join(here, os.pardir), here, os.curdir])
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
+
+ckeys = sorted(caps)
+for type in ckeys:
+    print(type)
+    entries = caps[type]
+    for e in entries:
+        keys = sorted(e)
+        for k in keys:
+            print("  %-15s" % k, e[k])
+        print()
+
+print("------------------------------------------------------------")  # 60個
+
 
 def _recursion222(object):
     print(type(object))
     print(type(object).__name__)
     print(id(object))
-    return ("<Recursion on %s with id=%s>"
-            % (type(object).__name__, id(object)))
+    return "<Recursion on %s with id=%s>" % (type(object).__name__, id(object))
+
 
 object = [("string", (1, 2), [3, 4], {5: 6, 7: 8})] * 100000
 nnnn = _recursion222(object)
 print(nnnn)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-warnings.warn('the formatter module is deprecated and will be removed in '
-	'Python 3.6', PendingDeprecationWarning)
+warnings.warn(
+    "the formatter module is deprecated and will be removed in " "Python 3.6",
+    PendingDeprecationWarning,
+)
 
-warnings.warn("This class is deprecated, use the netrc module instead",
-	DeprecationWarning, 2)
+warnings.warn(
+    "This class is deprecated, use the netrc module instead", DeprecationWarning, 2
+)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 
 def errprint(*args):
@@ -14314,38 +14366,42 @@ def errprint(*args):
     sys.stderr.write("\n")
 
 
-file = 'ffff'
-msg = 'mmm'
+file = "ffff"
+msg = "mmm"
 errprint("%r: I/O Error: %s" % (file, msg))
 
-msg = 'aaaaaa'
+msg = "aaaaaa"
 
-errprint('aaaa', 'bbbb', 'kkkk')
+errprint("aaaa", "bbbb", "kkkk")
 errprint("Usage:", sys.argv[0], "[-v] file_or_directory ...")
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
+
 
 def errprint(*args):
     strings = map(str, args)
-    msg = ' '.join(strings)
-    if msg[-1:] != '\n':
-        msg += '\n'
+    msg = " ".join(strings)
+    if msg[-1:] != "\n":
+        msg += "\n"
     sys.stderr.write(msg)
 
-msg = 'aaaaaaaaaaaaaa'
+
+msg = "aaaaaaaaaaaaaa"
 errprint(msg)
 errprint("Usage:", __doc__)
 errprint("Skipping file %r; can't parse line %d:\n%s" % (self.fname, srow, line))
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-    def get_prog_name(self):
-        if self.prog is None:
-            return os.path.basename(sys.argv[0])
-        else:
-            return self.prog
 
-------------------------------------------------------------
+def get_prog_name(self):
+    if self.prog is None:
+        return os.path.basename(sys.argv[0])
+    else:
+        return self.prog
+
+
+print("------------------------------------------------------------")  # 60個
 
 """
 Synopsis: %(prog)s [-h|-b|-g|-r|-a|-d] [ picklefile ] dbfile
@@ -14356,24 +14412,23 @@ database with %(prog)s unless your keys are integers.
 
 prog = sys.argv[0]
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 import re
 
-sys.stderr.write('Cannot open %s\n' % filename)
+sys.stderr.write("Cannot open %s\n" % filename)
 
-    base = os.path.basename(filename)
-    if base[-3:] == '.py':
-        base = base[:-3]
-    s = base + '\t' + filename + '\t' + '1\n'
-    tags.append(s)
-    while 1:
-        line = fp.readline()
-        if not line:
-            break
+base = os.path.basename(filename)
+if base[-3:] == ".py":
+    base = base[:-3]
+s = base + "\t" + filename + "\t" + "1\n"
+tags.append(s)
+while 1:
+    line = fp.readline()
+    if not line:
+        break
 
-
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 USAGE = """\
 Usage: mimetypes.py [options] type
@@ -14381,17 +14436,20 @@ Options:
 More than one type argument may be given.
 """
 
-def usage(code, msg=''):
+
+def usage(code, msg=""):
     print(USAGE)
     if msg:
         print(msg)
 
-msg = 'kkkk'
+
+msg = "kkkk"
 usage(1, msg)
 
 usage(0)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
+
 
 def _modname(path):
     """Return a plausible module name for the patch."""
@@ -14409,7 +14467,7 @@ def _modname(path):
                 longest = dir
 
     if longest:
-        base = path[len(longest) + 1:]
+        base = path[len(longest) + 1 :]
     else:
         base = path
     # the drive letter is never part of the module name
@@ -14420,130 +14478,133 @@ def _modname(path):
     filename, ext = os.path.splitext(base)
     return filename.lstrip(".")
 
-------------------------------------------------------------
 
-            if filename.endswith((".pyc", ".pyo")):
-                filename = filename[:-1]
+print("------------------------------------------------------------")  # 60個
 
-            if coverdir is None:
-                dir = os.path.dirname(os.path.abspath(filename))
-                modulename = _modname(filename)
-            else:
-                dir = coverdir
-                if not os.path.exists(dir):
-                    os.makedirs(dir)
-                modulename = _fullmodname(filename)
+if filename.endswith((".pyc", ".pyo")):
+    filename = filename[:-1]
 
-                s = os.path.expandvars(s)
-                s = os.path.normpath(s)
+if coverdir is None:
+    dir = os.path.dirname(os.path.abspath(filename))
+    modulename = _modname(filename)
+else:
+    dir = coverdir
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+    modulename = _fullmodname(filename)
+    s = os.path.expandvars(s)
+    s = os.path.normpath(s)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-        for n in range(7):
-            values = [5*x-12 for x in range(n)]
-            for r in range(n+2):
-
+for n in range(7):
+    values = [5 * x - 12 for x in range(n)]
+    for r in range(n + 2):
         for n in range(6):
-            s = 'ABCDEFG'[:n]
+            s = "ABCDEFG"[:n]
             for r in range(8):
                 print(r)
 
-        ans = list('abc')
-        long_ans = list(range(10000))
+ans = list("abc")
+long_ans = list(range(10000))
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-    if not isinstance(dt, datetime.datetime):
-        time_str = "000000"
-    else:
-        time_str = "{0.hour:02d}{0.minute:02d}{0.second:02d}".format(dt)
+if not isinstance(dt, datetime.datetime):
+    time_str = "000000"
+else:
+    time_str = "{0.hour:02d}{0.minute:02d}{0.second:02d}".format(dt)
 
-    y = dt.year
-    if legacy:
-        y = y % 100
-        date_str = "{0:02d}{1.month:02d}{1.day:02d}".format(y, dt)
-    else:
-        date_str = "{0:04d}{1.month:02d}{1.day:02d}".format(y, dt)
-    return date_str, time_str
+y = dt.year
+if legacy:
+    y = y % 100
+    date_str = "{0:02d}{1.month:02d}{1.day:02d}".format(y, dt)
+else:
+    date_str = "{0:04d}{1.month:02d}{1.day:02d}".format(y, dt)
+# return date_str, time_str
 
-        cmd = 'NEWNEWS {0} {1} {2}'.format(group, date_str, time_str)
-        return self._longcmdstring(cmd, file)
+cmd = "NEWNEWS {0} {1} {2}".format(group, date_str, time_str)
+# return self._longcmdstring(cmd, file)
 
-
-            self.sock = socket.create_connection((host, port), timeout)
-            self.sock = _encrypt_on(self.sock, ssl_context, host)
-            file = self.sock.makefile("rwb")
-            _NNTPBase.__init__(self, file, host,
-                               readermode=readermode, timeout=timeout)
-            if user or usenetrc:
-                self.login(user, password, usenetrc)
-
-        def _close(self):
-            try:
-                _NNTPBase._close(self)
-            finally:
-
-                self.sock.close()
+self.sock = socket.create_connection((host, port), timeout)
+self.sock = _encrypt_on(self.sock, ssl_context, host)
+file = self.sock.makefile("rwb")
+_NNTPBase.__init__(self, file, host, readermode=readermode, timeout=timeout)
+if user or usenetrc:
+    self.login(user, password, usenetrc)
 
 
-        self.host = host
-        self.port = port
-        self.sock = socket.create_connection((host, port), timeout)
-        file = self.sock.makefile("rwb")
-        _NNTPBase.__init__(self, file, host,
-                           readermode, timeout)
-        if user or usenetrc:
-            self.login(user, password, usenetrc)
-
-    def _close(self):
-        try:
-            _NNTPBase._close(self)
-        finally:
-            self.sock.close()
+def _close(self):
+    try:
+        _NNTPBase._close(self)
+    finally:
+        self.sock.close()
 
 
-    def load_file(self, pathname):
-        dir, name = os.path.split(pathname)
-        name, ext = os.path.splitext(name)
-
-        print()
-        print("  %-25s %s" % ("Name", "File"))
-        print("  %-25s %s" % ("----", "----"))
-
-
-            if m.__path__:
-                print("P", end=' ')
-            else:
-                print("m", end=' ')
-            print("%-25s" % key, m.__file__ or "")
+self.host = host
+self.port = port
+self.sock = socket.create_connection((host, port), timeout)
+file = self.sock.makefile("rwb")
+_NNTPBase.__init__(self, file, host, readermode, timeout)
+if user or usenetrc:
+    self.login(user, password, usenetrc)
 
 
-        new_filename = original_filename = os.path.normpath(co.co_filename)
+def _close(self):
+    try:
+        _NNTPBase._close(self)
+    finally:
+        self.sock.close()
 
-    path[0] = os.path.dirname(script)
 
-    if os.path.isabs(pathname):
-        return '/' + '/'.join(components)
-    else:
-        return '/'.join(components)
+def load_file(self, pathname):
+    dir, name = os.path.split(pathname)
+    name, ext = os.path.splitext(name)
 
-------------------------------------------------------------
-            print(file=self.stream)
-            print(file=self.stream)
-------------------------------------------------------------
+    print()
+    print("  %-25s %s" % ("Name", "File"))
+    print("  %-25s %s" % ("----", "----"))
+
+
+if m.__path__:
+    print("P", end=" ")
+else:
+    print("m", end=" ")
+print("%-25s" % key, m.__file__ or "")
+
+new_filename = original_filename = os.path.normpath(co.co_filename)
+
+path[0] = os.path.dirname(script)
+
+if os.path.isabs(pathname):
+    pass
+    # return '/' + '/'.join(components)
+else:
+    pass
+    # return '/'.join(components)
+
+print("------------------------------------------------------------")  # 60個
+
+print(file=self.stream)
+print(file=self.stream)
+
+print("------------------------------------------------------------")  # 60個
 
 import stat
 
+
 def _get_sep(path):
     if isinstance(path, bytes):
-        return b'/'
+        return b"/"
     else:
-        return '/'
+        return "/"
+
 
 def splitdrive(p):
     """Split a pathname into drive and path. On Posix, drive is always
     empty."""
     return p[:0], p
+
 
 def basename(p):
     """Returns the final component of a pathname"""
@@ -14552,7 +14613,7 @@ def basename(p):
     return p[i:]
 
 
-filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 st = os.lstat(filename)
 print(st)
 isLink = stat.S_ISLNK(st.st_mode)
@@ -14564,49 +14625,51 @@ print(aaa)
 bbb = basename(filename)
 print(bbb)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-    def touch(self, mode=0o666, exist_ok=True):
-        """
-        Create this file with the given access mode, if it doesn't exist.
-        """
-        if self._closed:
-            self._raise_closed()
-        if exist_ok:
-            # First try to bump modification time
-            # Implementation note: GNU touch uses the UTIME_NOW option of
-            # the utimensat() / futimens() functions.
-            try:
-                self._accessor.utime(self, None)
-            except OSError:
-                # Avoid exception chaining
-                pass
-            else:
-                return
-        flags = os.O_CREAT | os.O_WRONLY
-        if not exist_ok:
-            flags |= os.O_EXCL
-        fd = self._raw_open(flags, mode)
-        os.close(fd)
 
-------------------------------------------------------------
+def touch(self, mode=0o666, exist_ok=True):
+    """
+    Create this file with the given access mode, if it doesn't exist.
+    """
+    if self._closed:
+        self._raise_closed()
+    if exist_ok:
+        # First try to bump modification time
+        # Implementation note: GNU touch uses the UTIME_NOW option of
+        # the utimensat() / futimens() functions.
+        try:
+            self._accessor.utime(self, None)
+        except OSError:
+            # Avoid exception chaining
+            pass
+        else:
+            return
+    flags = os.O_CREAT | os.O_WRONLY
+    if not exist_ok:
+        flags |= os.O_EXCL
+    fd = self._raw_open(flags, mode)
+    os.close(fd)
+
+
+print("------------------------------------------------------------")  # 60個
 
 from stat import S_ISDIR, S_ISLNK, S_ISREG, S_ISSOCK, S_ISBLK, S_ISCHR, S_ISFIFO
 
-filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
 
 print(os.lstat(filename))
 print(os.lstat(filename).st_mode)
 print(os.lstat(filename).st_gid)
 
 reserved_names = (
-    {'CON', 'PRN', 'AUX', 'NUL'} |
-    {'COM%d' % i for i in range(1, 10)} |
-    {'LPT%d' % i for i in range(1, 10)}
-    )
+    {"CON", "PRN", "AUX", "NUL"}
+    | {"COM%d" % i for i in range(1, 10)}
+    | {"LPT%d" % i for i in range(1, 10)}
+)
 
 for aaa in reserved_names:
-    print(aaa, end = ' ')
+    print(aaa, end=" ")
 print()
 
 
@@ -14619,39 +14682,39 @@ S_ISDIR(self.stat().st_mode)
 S_ISREG(self.stat().st_mode)
 
 
-    def _iterate_directories(self, parent_path, is_dir, listdir):
-        yield parent_path
-        for name in listdir(parent_path):
+def _iterate_directories(self, parent_path, is_dir, listdir):
+    yield parent_path
+    for name in listdir(parent_path):
+        path = parent_path._make_child_relpath(name)
+        if is_dir(path):
+            for p in self._iterate_directories(path, is_dir, listdir):
+                yield p
+
+
+def _select_from(self, parent_path, is_dir, exists, listdir):
+    if not is_dir(parent_path):
+        return
+    path = parent_path._make_child_relpath(self.name)
+    if exists(path):
+        for p in self.successor._select_from(path, is_dir, exists, listdir):
+            yield p
+
+
+def _select_from(self, parent_path, is_dir, exists, listdir):
+    if not is_dir(parent_path):
+        return
+    cf = parent_path._flavour.casefold
+    for name in listdir(parent_path):
+        casefolded = cf(name)
+        if self.pat.match(casefolded):
             path = parent_path._make_child_relpath(name)
-            if is_dir(path):
-                for p in self._iterate_directories(path, is_dir, listdir):
-                    yield p
-
-
-
-
-    def _select_from(self, parent_path, is_dir, exists, listdir):
-        if not is_dir(parent_path):
-            return
-        path = parent_path._make_child_relpath(self.name)
-        if exists(path):
             for p in self.successor._select_from(path, is_dir, exists, listdir):
                 yield p
 
-    def _select_from(self, parent_path, is_dir, exists, listdir):
-        if not is_dir(parent_path):
-            return
-        cf = parent_path._flavour.casefold
-        for name in listdir(parent_path):
-            casefolded = cf(name)
-            if self.pat.match(casefolded):
-                path = parent_path._make_child_relpath(name)
-                for p in self.successor._select_from(path, is_dir, exists, listdir):
-                    yield p
 
-        path.is_absolute()
+path.is_absolute()
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 import functools
 import io
@@ -14662,61 +14725,62 @@ import warnings
 warnings.warn(
     "The 'filename' attribute will be removed in future versions.  "
     "Use 'source' instead.",
-    DeprecationWarning, stacklevel=1
-    )
+    DeprecationWarning,
+    stacklevel=1,
+)
 
 
-    def read(self, filenames, encoding=None):
-        if isinstance(filenames, str):
-            filenames = [filenames]
-        read_ok = []
-        for filename in filenames:
-            try:
-                with open(filename, encoding=encoding) as fp:
-                    self._read(fp, filename)
-            except OSError:
-                continue
-            read_ok.append(filename)
-        return read_ok
+def read(self, filenames, encoding=None):
+    if isinstance(filenames, str):
+        filenames = [filenames]
+    read_ok = []
+    for filename in filenames:
+        try:
+            with open(filename, encoding=encoding) as fp:
+                self._read(fp, filename)
+        except OSError:
+            continue
+        read_ok.append(filename)
+    return read_ok
 
-    def read_file(self, f, source=None):
-        """Like read() but the argument must be a file-like object.
 
-        The `f' argument must be iterable, returning one line at a time.
-        Optional second argument is the `source' specifying the name of the
-        file being read. If not given, it is taken from f.name. If `f' has no
-        `name' attribute, `<???>' is used.
-        """
-        if source is None:
-            try:
-                source = f.name
-            except AttributeError:
-                source = '<???>'
-        self._read(f, source)
+def read_file(self, f, source=None):
+    """Like read() but the argument must be a file-like object.
 
-        elements_added = set()
-        for section, keys in dictionary.items():
-            section = str(section)
+    The `f' argument must be iterable, returning one line at a time.
+    Optional second argument is the `source' specifying the name of the
+    file being read. If not given, it is taken from f.name. If `f' has no
+    `name' attribute, `<???>' is used.
+    """
+    if source is None:
+        try:
+            source = f.name
+        except AttributeError:
+            source = "<???>"
+    self._read(f, source)
 
-------------------------------------------------------------
+    elements_added = set()
+    for section, keys in dictionary.items():
+        section = str(section)
 
-name = ['mouse', 'ox', 'tiger']
+
+print("------------------------------------------------------------")  # 60個
+
+name = ["mouse", "ox", "tiger"]
 weight = [3, 48, 33]
-print('名稱     編號  體重')
+print("名稱     編號  體重")
 for i in range(0, 3):
-    print(name[i].ljust(10),
-          str(i+1).rjust(10),
-          str(weight[i]).rjust(10))
+    print(name[i].ljust(10), str(i + 1).rjust(10), str(weight[i]).rjust(10))
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-print('glob: {}'.format(foldername))
+print("glob: {}".format(foldername))
 for fname in glob.glob(foldername, recursive=False):
     print("loading: {}".format(fname))
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-print('Python之內建函數')
+print("Python之內建函數")
 r = abs(-10)
 print("abs(-10) = " + str(r))
 r = abs(5)
@@ -14738,17 +14802,17 @@ print("round(3.14568757, 3) = " + str(r))
 r = round(3.14568757, 1)
 print("round(3.14568757, 1) = " + str(r))
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 print("D:\\Python\\ch08")
 print("HEX: \x48\x45\x58")
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 x, y = 10, 20
 s = "Y= {1} X= {0}".format(x, y)
 print(s)
-s = "y = {a} x = {b}".format(b=x, a = y)
+s = "y = {a} x = {b}".format(b=x, a=y)
 print(s)
 print("整數: {0:5d}".format(456))
 print("整數: {0:05d}".format(123))
@@ -14757,9 +14821,9 @@ print("二進位: {0:b}".format(200))
 print("八進位: {0:o}".format(200))
 print("十六進位: {0:x}".format(200))
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-str1 = 'welcome to python'
+str1 = "welcome to python"
 s = str1.capitalize()
 print("str1.capitalize() = " + s)
 s = str1.title()
@@ -14767,26 +14831,26 @@ print("str1.title() = " + s)
 s = str1.swapcase()
 print("str1.swapcase() = " + s)
 
-s = str1.replace('python', 'vcs')
+s = str1.replace("python", "vcs")
 print("str1.replace() = " + s)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-d1 = {x: x*x for x in range(10)}
+d1 = {x: x * x for x in range(10)}
 print(d1)
-d2 = {x: x*x for x in range(10) if x % 2 == 0}
+d2 = {x: x * x for x in range(10) if x % 2 == 0}
 print(d2)
 
 lst1 = [x for x in range(10)]
 print(lst1)
-lst2 = [x+1 for x in range(10)]
+lst2 = [x + 1 for x in range(10)]
 print(lst2)
 lst3 = [x for x in range(10) if x % 2 == 1]
 print(lst3)
-lst4 = [x*2 for x in range(10) if x %2 == 1]
+lst4 = [x * 2 for x in range(10) if x % 2 == 1]
 print(lst4)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 # 字元函數
 ch1 = "A"
@@ -14795,7 +14859,7 @@ a = ord(ch1)
 print("ord(ch1) = " + str(a))
 a = chr(97)
 print("chr(97) = " + a)
-a = ord('B')
+a = ord("B")
 print("ord('B') = " + str(a))
 
 split的用法(3)
@@ -14809,9 +14873,9 @@ str3 = "23\n52\n44\n78"
 lst3 = str3.splitlines()
 print(lst3)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-#eval() 和 exec()，能夠將字串轉換成可以運作的程式碼
+# eval() 和 exec()，能夠將字串轉換成可以運作的程式碼
 
 m = 10
 eval("print('Python')")
@@ -14821,61 +14885,62 @@ eval("print( m  * 5)")
 eval("print('m' * 5)")
 
 a, b, c = 1, 2, 3
-eval('print(a, b, c)')                            # 1, 2, 3
-eval('print(a, b, c)', {'a':4, 'b':5, 'c':6})     # 4, 5, 6
-eval('print(a, b, c)', {'a':4, 'b':5, 'c':6}, {'a':7, 'b':8, 'c':9})   # 7, 8, 9
-eval('print(a, b, c)')   # 1, 2, 3
+eval("print(a, b, c)")  # 1, 2, 3
+eval("print(a, b, c)", {"a": 4, "b": 5, "c": 6})  # 4, 5, 6
+eval("print(a, b, c)", {"a": 4, "b": 5, "c": 6}, {"a": 7, "b": 8, "c": 9})  # 7, 8, 9
+eval("print(a, b, c)")  # 1, 2, 3
 
-a = eval('x+y',{'x':1,'y':2})
-print(a)       # 3
+a = eval("x+y", {"x": 1, "y": 2})
+print(a)  # 3
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 字串處理函數
 msg = """CIA Mark told CIA Linda that the secret USB had given to CIA Peter"""
 print("字串開頭是CIA: ", msg.startswith("CIA"))
 print("字串結尾是CIA: ", msg.endswith("CIA"))
-print("CIA出現的次數: ",msg.count("CIA"))
-msg = msg.replace('Linda','Lxx')
+print("CIA出現的次數: ", msg.count("CIA"))
+msg = msg.replace("Linda", "Lxx")
 print("新的msg內容 : ", msg)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-檢查touch
+# 檢查touch
 
-    mtime = None
-    atime = None
-    try:
-        statbuf = os.stat(filename)
-        mtime = statbuf.st_mtime
-        atime = statbuf.st_atime
-        os.chmod(tempname, statbuf[ST_MODE] & 0o7777)
+mtime = None
+atime = None
 
-    if preserve_timestamps:
-        if atime and mtime:
-            try:
-                os.utime(filename, (atime, mtime))
-            except OSError as msg:
-                err('%s: reset of timestamp failed (%r)\n' % (filename, msg))
-                return 1
+statbuf = os.stat(filename)
+mtime = statbuf.st_mtime
+atime = statbuf.st_atime
+os.chmod(tempname, statbuf[ST_MODE] & 0o7777)
 
-------------------------------------------------------------
+if preserve_timestamps:
+    if atime and mtime:
+        try:
+            os.utime(filename, (atime, mtime))
+        except OSError as msg:
+            err("%s: reset of timestamp failed (%r)\n" % (filename, msg))
+            # return 1
 
-filename = 'D:/_git/vcs/_4.python/_data/picture1.jpg'
-filename = 'D:/_git/vcs/_1.data/______test_files1/poetry2.txt'
+print("------------------------------------------------------------")  # 60個
+
+filename = "D:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "D:/_git/vcs/_1.data/______test_files1/poetry2.txt"
 
 with open(filename, "rb") as f:
     data = f.read()
-if b'\0' in data:
+if b"\0" in data:
     print(filename, "\tBinary")
 else:
     print(filename, "\tASCII")
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 """Reverse grep.
 Usage: rgrep [-i] pattern file
 """
+
 
 def usage(msg, code=2):
     sys.stdout = sys.stderr
@@ -14886,33 +14951,44 @@ def usage(msg, code=2):
 
 usage("not enough arguments")
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 set
 
-consuming_calls = {"sorted", "list", "set", "any", "all", "tuple", "sum",
-                   "min", "max", "enumerate"}
+consuming_calls = {
+    "sorted",
+    "list",
+    "set",
+    "any",
+    "all",
+    "tuple",
+    "sum",
+    "min",
+    "max",
+    "enumerate",
+}
 
 print(type(consuming_calls))
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
+"""
 串的格式化	使用 format
 
 Python 字串可以做一些格式化, 比如說...
-
+"""
 message = "你好, 來自{}的{}!".format(bp, name)
 
 
 "1 美金是 {:.2f} 台幣。".format(30.1077859)
-print("平均 = {:.2f}".format(s/5))
+print("平均 = {:.2f}".format(s / 5))
 
 list(range(10))
-list(range(1,10))
+list(range(1, 10))
 list(range(3, 15))
 
-------------------------------------------------------------    
-
+print("------------------------------------------------------------")  # 60個
+"""
     factors = []
 :
 :
@@ -14922,15 +14998,15 @@ list(range(3, 15))
 list 轉 set 轉 list
 
 這樣可以把重複地排除掉
+"""
+print("------------------------------------------------------------")  # 60個
 
-------------------------------------------------------------
+textvars = dict(
+    VER="aaaaa",
+    FULLVER="bbbbb",
+)
 
-        textvars = dict(
-            VER='aaaaa',
-            FULLVER='bbbbb',
-        )
-
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 s = "   this is a sample sentance. this is a cat\n "
 print(s.capitalize())
@@ -14947,94 +15023,103 @@ print(s.rstrip())
 print(s.rfind("is"))
 print(s.zfill(50))
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-for name in sorted(players.keys( )):
+for name in sorted(players.keys()):
     print(name)
     print(f"Hi! {name} 我喜歡看你在 {players[name]} 的表現")
-    
-    
-for team in players.values( ):
-    print(team)
-    
-------------------------------------------------------------    
 
-cars = ['honda','bmw','toyota','ford']     
+
+for team in players.values():
+    print(team)
+
+print("------------------------------------------------------------")  # 60個
+
+cars = ["honda", "bmw", "toyota", "ford"]
 print(f"目前串列car內容 = {cars}")
 print("使用sorted()由小排到大")
-cars_sorted = sorted(cars)            
+cars_sorted = sorted(cars)
 print(f"從小排到大的排序串列結果 = {cars_sorted}")
-print("-"*60)
+print("-" * 60)
 print(f"原先串列car內容 = {cars}")
-cars_sorted = sorted(cars,reverse=True)            
+cars_sorted = sorted(cars, reverse=True)
 print(f"從大排到小的排序串列結果 = {cars_sorted}")
 print(f"原先串列car內容不變 = {cars}")
-print("="*60)
-nums = [5, 3, 9, 2]     
+print("=" * 60)
+nums = [5, 3, 9, 2]
 print(f"目前串列num內容 = {nums}")
 print("使用sorted()由小排到大")
-nums_sorted = sorted(nums)            
+nums_sorted = sorted(nums)
 print(f"從小排到大的排序串列結果 = {nums_sorted}")
-print("-"*60)
+print("-" * 60)
 print(f"原先串列num內容 = {nums}")
-nums_sorted = sorted(nums,reverse=True)            
+nums_sorted = sorted(nums, reverse=True)
 print(f"從大排到小的排序串列結果 = {nums_sorted}")
 print(f"原先串列num內容不變 = {nums}")
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 # If this program was run (instead of imported), run the game:
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
         sys.exit()  # When Ctrl-C is pressed, end the program.
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-ans = 0                         # 讀者心中的數字
+ans = 0  # 讀者心中的數字
 print("猜生日日期遊戲,請回答下列5個問題,這個程式即可列出你的生日")
 
 truefalse = "輸入y或Y代表有, 其它代表無 : "
 # 檢測2進位的第1位是否含1
-q1 = "有沒有看到自己的生日日期 : \n" + \
-     "1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31 \n"
+q1 = (
+    "有沒有看到自己的生日日期 : \n" + "1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31 \n"
+)
 num = input(q1 + truefalse)
 print(num)
 if num == "y" or num == "Y":
     ans += 1
 # 檢測2進位的第2位是否含1
 truefalse = "輸入y或Y代表有, 其它代表無 : "
-q2 = "有沒有看到自己的生日日期 : \n" + \
-     "2, 3, 6, 7, 10, 11, 14, 15, 18, 19, 22, 23, 26, 27, 30, 31 \n"
+q2 = (
+    "有沒有看到自己的生日日期 : \n"
+    + "2, 3, 6, 7, 10, 11, 14, 15, 18, 19, 22, 23, 26, 27, 30, 31 \n"
+)
 num = input(q2 + truefalse)
 if num == "y" or num == "Y":
     ans += 2
 # 檢測2進位的第3位是否含1
 truefalse = "輸入y或Y代表有, 其它代表無 : "
-q3 = "有沒有看到自己的生日日期 : \n" + \
-     "4, 5, 6, 7, 12, 13, 14, 15, 20, 21, 22, 23, 28, 29, 30, 31 \n"
+q3 = (
+    "有沒有看到自己的生日日期 : \n"
+    + "4, 5, 6, 7, 12, 13, 14, 15, 20, 21, 22, 23, 28, 29, 30, 31 \n"
+)
 num = input(q3 + truefalse)
 if num == "y" or num == "Y":
     ans += 4
 # 檢測2進位的第4位是否含1
 truefalse = "輸入y或Y代表有, 其它代表無 : "
-q4 = "有沒有看到自己的生日日期 : \n" + \
-     "8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27, 28, 29, 30, 31 \n"
+q4 = (
+    "有沒有看到自己的生日日期 : \n"
+    + "8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27, 28, 29, 30, 31 \n"
+)
 num = input(q4 + truefalse)
 if num == "y" or num == "Y":
     ans += 8
 # 檢測2進位的第5位是否含1
 truefalse = "輸入y或Y代表有, 其它代表無 : "
-q5 = "有沒有看到自己的生日日期 : \n" + \
-     "16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 \n"
+q5 = (
+    "有沒有看到自己的生日日期 : \n"
+    + "16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 \n"
+)
 num = input(q5 + truefalse)
 if num == "y" or num == "Y":
     ans += 16
 
 print(f"讀者的生日日期是 : {ans}")
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 song = """
 The Zen of Python, by Tim Peters
@@ -15060,68 +15145,70 @@ If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!"""
 
 # 以下是將單字大寫字母全部改成小寫
-songLower = song.lower()            # 單字改為小寫
+songLower = song.lower()  # 單字改為小寫
 
 # 將段落的標點符號用空字元取代
-for ch in songLower:                
+for ch in songLower:
     if ch in ".,?!-*":
-        songLower = songLower.replace(ch,'')
+        songLower = songLower.replace(ch, "")
 
 # 將文字段落字串轉成串列
-songList = songLower.split()        
+songList = songLower.split()
 
-# 將單字串列處理成字典 
-mydict = {wd:songList.count(wd) for wd in songList}
+# 將單字串列處理成字典
+mydict = {wd: songList.count(wd) for wd in songList}
 for wd, count in sorted(mydict.items()):
-    print(wd, ":", count)                 
-    
-------------------------------------------------------------
+    print(wd, ":", count)
 
-    
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-sc = {'John':80, 'Tom':90, 'Kevin':77}
-newsc1 = sorted(sc.items(), key = lambda x:x[0])  # 依照key排序
+
+print("------------------------------------------------------------")  # 60個
+
+sc = {"John": 80, "Tom": 90, "Kevin": 77}
+newsc1 = sorted(sc.items(), key=lambda x: x[0])  # 依照key排序
 print("依照人名排序")
 for i in range(len(newsc1)):
     print(f"{newsc1[i][0]:5s}:{newsc1[i][1]}")
 
 print("依照分數排序")
-newsc2 = sorted(sc.items(), key = lambda x:x[1])  # 依照value排序
+newsc2 = sorted(sc.items(), key=lambda x: x[1])  # 依照value排序
 for i in range(len(newsc2)):
     print(f"{newsc2[i][0]:5s}:{newsc2[i][1]}")
-    
-------------------------------------------------------------
 
-DATA = b'Jack is my hero'
+print("------------------------------------------------------------")  # 60個
 
-f = open(self.fname1, 'wb')
+DATA = b"Jack is my hero"
+
+f = open(self.fname1, "wb")
 f.write(self.DATA)
 f.close()
 
 
-f = open(self.fname1, 'rb')
+f = open(self.fname1, "rb")
 finish = f.readline()
 f.close()
 
 self.assertEqual(self.DATA, finish)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-        for k, v in dict.items():
-            if k.endswith('_pre') or k.endswith('_post'):
-                assert isinstance(v, function)
-            elif isinstance(v, function):
-                methods.append(k)
-        for m in methods:
-            pre = dict.get("%s_pre" % m)
-            post = dict.get("%s_post" % m)
-            if pre or post:
-                dict[m] = cls.make_eiffel_method(dict[m], pre, post)
+for k, v in dict.items():
+    if k.endswith("_pre") or k.endswith("_post"):
+        assert isinstance(v, function)
+    elif isinstance(v, function):
+        methods.append(k)
+for m in methods:
+    pre = dict.get("%s_pre" % m)
+    post = dict.get("%s_post" % m)
+    if pre or post:
+        dict[m] = cls.make_eiffel_method(dict[m], pre, post)
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-print('zip 測試')
+print("zip 測試")
+
+
 def iterate_simul():
     xpts = [1, 5, 4, 2, 10, 7]
     ypts = [101, 78, 37, 15, 62, 99]
@@ -15129,28 +15216,27 @@ def iterate_simul():
         print(x, y)
 
     a = [1, 2, 3]
-    b = ['w', 'x', 'y', 'z']
-    for i in zip(a,b):
+    b = ["w", "x", "y", "z"]
+    for i in zip(a, b):
         print(i)  # 默认是按最短长度
 
-    headers = ['name', 'shares', 'price']
-    values = ['ACME', 100, 490.1]
-    s = dict(zip(headers,values))
+    headers = ["name", "shares", "price"]
+    values = ["ACME", 100, 490.1]
+    s = dict(zip(headers, values))
 
     for name, val in zip(headers, values):
-        print(name, '=', val)
+        print(name, "=", val)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     iterate_simul()
 
-
-
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 # 字典转换成XML格式
 from xml.etree.ElementTree import Element
 from xml.etree.ElementTree import tostring
+
 
 def dict_to_xml(tag, d):
     """
@@ -15163,59 +15249,56 @@ def dict_to_xml(tag, d):
         elem.append(child)
     return elem
 
-if __name__ == '__main__':
-    r = dict_to_xml('root', {'鼠':'mouse', '牛':'ox'})
+
+if __name__ == "__main__":
+    r = dict_to_xml("root", {"鼠": "mouse", "牛": "ox"})
     print(r)
     print(tostring(r))
-    r.set('虎', 'tiger')
+    r.set("虎", "tiger")
     print(tostring(r))
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 import shutil
-    
-image_foldername = 'tmp_images'
-filename = 'tmp_countryfood2222.html'
-print('存檔檔案 :', filename)
-if os.path.exists(filename):  
-    os.remove(filename)     # 若有 tmp_countryfood.html 網頁即刪除
-if os.path.exists(image_foldername): 
-    shutil.rmtree(image_foldername)    # 若有images目錄即刪除
+
+image_foldername = "tmp_images"
+filename = "tmp_countryfood2222.html"
+print("存檔檔案 :", filename)
+if os.path.exists(filename):
+    os.remove(filename)  # 若有 tmp_countryfood.html 網頁即刪除
+if os.path.exists(image_foldername):
+    shutil.rmtree(image_foldername)  # 若有images目錄即刪除
 else:
-    os.mkdir(image_foldername)        # 若無images目錄即刪除
+    os.mkdir(image_foldername)  # 若無images目錄即刪除
 
+# 從網址取得檔名
+imgUrl = col["PicURL"]
+print(cnt)
+# 網址用'/'分隔取最後一筆資料 => *.jpg
+filename = imgUrl.split("/")[-1]  # 擷取圖片名稱
+print("圖片網址：", imgUrl)
+print("圖片檔名：", filename)
 
-    #從網址取得檔名
-    imgUrl=col['PicURL']
-    print(cnt)
-    #網址用'/'分隔取最後一筆資料 => *.jpg
-    filename = imgUrl.split('/')[-1] #擷取圖片名稱
-    print('圖片網址：', imgUrl)
-    print('圖片檔名：', filename)
+# 網址用'/'分隔取最後一筆資料 => *.jpg
+picName = row["PicURL"].split("/")[-1]
+print("圖片網址：", row["PicURL"])
+print("圖片檔名：", picName)
 
-    #網址用'/'分隔取最後一筆資料 => *.jpg
-    picName=row['PicURL'].split('/')[-1]
-    print('圖片網址：', row['PicURL'])
-    print('圖片檔名：', picName)
-    
+# 建立取得圖片的 response 物件
+response = requests.get(imgUrl)
+f = open((image_foldername + "/" + filename), "wb")  # 開啟圖片檔案
+f.write(response.content)  # 將response.content二進位內容寫入檔案
+print(filename, "下載完畢")
 
-        #建立取得圖片的 response 物件
-        response=requests.get(imgUrl) 
-        f=open((image_foldername+'/'+filename),'wb')    #開啟圖片檔案                    
-        f.write(response.content)  # 將response.content二進位內容寫入檔案
-        print(filename,'下載完畢')
-
-
-
-filename = 'aaaaa.html'
+filename = "aaaaa.html"
 
 print("%s 網頁建置完成" % (filename))
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 
 def checkpassword(password):
-    #檢查密碼長度必須是5到10個字元
+    # 檢查密碼長度必須是5到10個字元
     length = len(password)  # 密碼長度
     if length < 5:  # 密碼長度不足
         raise Exception("密碼長度不足")
@@ -15223,7 +15306,8 @@ def checkpassword(password):
         raise Exception("密碼長度太長")
     print("密碼長度正確")
 
-print('測試 raise Exception')
+
+print("測試 raise Exception")
 
 password = "lion-mouse"
 
@@ -15233,7 +15317,7 @@ except Exception as err:
     print("密碼檢查異常發生: ", str(err))
 
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 
 def passWord(pwd):
@@ -15252,8 +15336,6 @@ for pwd in ("aaabbbccc", "aaa", "aaabbb"):  # 測試系列密碼值
     except Exception as err:
         print("密碼長度檢查異常發生: ", str(err))
 
-
-
 # PIL
 
 from PIL import Image, ImageOps
@@ -15271,7 +15353,7 @@ image = ImageOps.fit(image, size, Image.ANTIALIAS)
 
 # display the resized image
 image.show()
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 # 設定中文字型及負號正確顯示
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
@@ -15282,42 +15364,32 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["font.sans-serif"] = "mingliu"
 
 
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
-pip freeze > requirements.txt
-
+# pip freeze > requirements.txt
 
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-
-
-
-
-
 # plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 也可設mingliu或DFKai-SB
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 也可設 mingliu 或 DFKai-SB
-
+"""
 一個df可以將多筆資料畫在多圖
 一個df可以將多筆資料畫在一圖
 
 目前不能畫多個df至一圖
+"""
 
+plt.rcParams["figure.figsize"] = [10, 10]
+plt.rcParams["figure.dpi"] = 72
 
-
-plt.rcParams['figure.figsize'] = [10, 10]
-plt.rcParams['figure.dpi'] = 72
-
-print('打印 plt 參數')
+print("打印 plt 參數")
 cc = plt.rcParams.keys
 print(cc)
 
-
-
-一大圖上畫上各小圖
+# 一大圖上畫上各小圖
 plt.figure(figsize=[8, 4])
 plt.axes([0, 0, 0.8, 1])
 plt.title(label="Chart 1")
@@ -15329,9 +15401,7 @@ plt.plot([1, 2, 3], "g--o")
 
 plt.show()
 
-
-
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 
 print("姓名   座號  國文  數學  英文")
@@ -15342,8 +15412,8 @@ print("%3s  %2d   %3d   %3d  %3d" % ("張小英", 11, 82, 65, 8))
 # print("本班總成績：%d 分，平均成績：%5.2f 分" % (total, average))
 # print("本班總成績：%d 分，平均成績：%5.2f 分" % (total, average))
 
-------------------------------------------------------------
-------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 edge_x[edge_x > 255] = 255
 edge_y[edge_y > 255] = 255
@@ -15357,8 +15427,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-'''
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -15374,3 +15442,12 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+# 基本 python function 內建基本函數
+"""
+len() max() min() bin() hex() oct() str() int() print() range()
+ord()
+
+
+"""

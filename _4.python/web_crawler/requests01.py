@@ -274,31 +274,6 @@ fo.close()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-url = "https://zh.wikipedia.org/zh-tw/愛因斯坦"
-
-headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36"
-}
-
-# 不使用 headers, 不能抓
-# response = requests.get(url) # 403 Forbidden
-
-response = requests.get(url, headers=headers)
-
-print("HTTP狀態碼 :", response.status_code)
-
-if response.status_code == 200:
-    print(response.text)
-
-bs = BeautifulSoup(response.text, "lxml")
-p_list = bs.find_all("p")
-for p in p_list:
-    if keyword in p.text[0:10]:
-        print(p.text)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("無 cookies, 無 headers, 抓網頁")
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
@@ -947,10 +922,10 @@ def get_photolist(photo_name, download_num):
     while True:
         html = browser.page_source
         #        print(html)
-        bs = BeautifulSoup(html, "lxml")  # 解析網頁
+        soup = BeautifulSoup(html, "lxml")  # 解析網頁
         # 先尋找標籤為 div, calss 為 'flex_grid ...' 的元素 (這區中才是免負圖庫)
         #  再尋找所有標籤為 div, calss 為 'item' 的元素
-        photo_item = bs.find(
+        photo_item = soup.find(
             "div", {"class": "flex_grid credits search_results"}
         ).find_all("div", {"class": "item"})
         if len(photo_item) == 0:
@@ -1073,10 +1048,10 @@ def get_photolist(photo_name, download_num):
     while True:
         html = browser.page_source
         #        print(html)
-        bs = BeautifulSoup(html, "lxml")  # 解析網頁
+        soup = BeautifulSoup(html, "lxml")  # 解析網頁
         #  先尋找標籤為 div, calss 為 'flex_grid ...' 的元素 (這區中才是免費圖庫)
         #  再尋找所有標籤為 div, calss 為 'item' 的元素
-        photo_item = bs.find(
+        photo_item = soup.find(
             "div", {"class": "flex_grid credits search_results"}
         ).find_all("div", {"class": "item"})
         if len(photo_item) == 0:
@@ -2757,45 +2732,16 @@ print(str)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# show_RSS
-
-value1 = "https://www.shoeisha.co.jp/rss/book/index.xml"
-value2 = "title"
-
-
-# 【函數: 取得RSS的標籤】
-def readRSSitem(url, tag):
-    msg = ""
-    r = requests.get(url)  # 取得URL的資料
-    r.encoding = r.apparent_encoding  # 自動辨識字元編碼
-    soup = BeautifulSoup(r.text, "lxml")  # 剖析XML資料
-    for i, element in enumerate(soup.findAll(tag)):
-        msg += str(i) + ":" + element.text + "\n"  # 新增標籤的元素
-    return msg
-
-
-# 【執行函數】
-msg = readRSSitem(value1, value2)
-print(msg)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
+# 翔泳社, 取得RSS的標籤
 url = "https://www.shoeisha.co.jp/rss/book/index.xml"
-r = requests.get(url)  # 取得URL的資料
-r.encoding = r.apparent_encoding  # 自動辨識字元編碼
-print(r.text)
+response = requests.get(url)  # 取得URL的資料
+response.encoding = response.apparent_encoding  # 自動辨識字元編碼
+print(response.text)
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-url = "https://www.shoeisha.co.jp/rss/book/index.xml"
 tag = "title"
-r = requests.get(url)  # 取得URL的資料
-r.encoding = r.apparent_encoding  # 自動辨識字元編碼
-soup = BeautifulSoup(r.text, "lxml")  # 剖析XML資料
+soup = BeautifulSoup(response.text, "lxml")  # 剖析XML資料
 for i, element in enumerate(soup.findAll(tag)):
-    print(i, element.text)  # 顯示編號與文字
+    print("第", i, "筆 :", element.text)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -2964,9 +2910,9 @@ print("------------------------------------------------------------")  # 60個
 # 資料
 my_data = {"key1": "value1", "key2": "value2"}
 # 將資料加入POST 請求中
-r = requests.post("http://httpbin.org/post", data=my_data)
-print(r.text)
-print(r.status_code)
+response = requests.post("http://httpbin.org/post", data=my_data)
+print(response.text)
+print(response.status_code)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2975,8 +2921,8 @@ print("用 httpbin 測試 檔案的 POST")
 # 要上傳的檔案
 my_files = {"my_filename": open("bankRate.csv", "rb")}
 # 將檔案加入POST 請求中
-r = requests.post("http://httpbin.org/post", files=my_files)
-print(r.status_code)
+response = requests.post("http://httpbin.org/post", files=my_files)
+print(response.status_code)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3071,25 +3017,25 @@ print("------------------------------------------------------------")  # 60個
 url = "https://httpbin.org/get"
 hd = {"user-key": "7ADGS9S"}  # 標頭參數(以字典儲存)
 pm = {"id": 1023, "neme": "joe"}  # 網址參數(以字典儲存)
-r = requests.get(url, headers=hd, params=pm)  # 加入 headers 及 params 參數
-print(r.text)  # 將回應的文字印出來
+response = requests.get(url, headers=hd, params=pm)  # 加入 headers 及 params 參數
+print(response.text)  # 將回應的文字印出來
 
 print("------------------------------------------------------------")  # 60個
 
 url = "http://httpbin.org/post"  # 使用測試服務網站, POST 方法網址要加 /post
-r = requests.post(url, data="Hello")  # 送出字串資料
-print(r.text)
-r = requests.post(url, data={"id": "123", "name": "Joe"})
-print(r.text)
+response = requests.post(url, data="Hello")  # 送出字串資料
+print(response.text)
+response = requests.post(url, data={"id": "123", "name": "Joe"})
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
-r = requests.put("https://httpbin.org/put", data={"key": "abc"})
-print(r.text)
-r = requests.patch("https://httpbin.org/patch", data={"key": "xyz"})
-print(r.text)
-r = requests.delete("https://httpbin.org/delete")
-print(r.text)
+response = requests.put("https://httpbin.org/put", data={"key": "abc"})
+print(response.text)
+response = requests.patch("https://httpbin.org/patch", data={"key": "xyz"})
+print(response.text)
+response = requests.delete("https://httpbin.org/delete")
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3098,34 +3044,33 @@ url = "http://httpbin.org/user-agent"
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
 }
-r = requests.get(url, headers=headers)
-print(r.text)
+response = requests.get(url, headers=headers)
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
 url = "http://httpbin.org/user-agent"
 
-r = requests.get(url)
-print(r.text)
+response = requests.get(url)
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
 url = "http://httpbin.org/cookies"
 
 cookies = dict(name="Joe Chen")
-r = requests.get(url, cookies=cookies)
-print(r.text)
+response = requests.get(url, cookies=cookies)
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
 """ fail
 proxy = {'http': 'http://109.161.48.141:3128',
          'https': 'https://109.161.48.141:3128'}
-r = requests.get("http://httpbin.org/ip", proxies=proxy)
-print(r.status_code)
-print(r.text)
+response = requests.get("http://httpbin.org/ip", proxies=proxy)
+print(response.status_code)
+print(response.text)
 """
-
 print("------------------------------------------------------------")  # 60個
 
 """ fail
@@ -3154,9 +3099,9 @@ while True:
    try:
       headers = {'user-agent': ua.random}
       url = "http://httpbin.org/ip"
-      r = requests.get(url, headers=headers, proxies=proxy, verify=False)
-      print(r.status_code)
-      print(r.text)
+      response = requests.get(url, headers=headers, proxies=proxy, verify=False)
+      print(response.status_code)
+      print(response.text)
       break
    except:
       print("連線錯誤! 搜尋其他的代理伺服器!")
@@ -3173,48 +3118,49 @@ print(html.text)
 
 # 將查詢參數加入 POST 請求中
 payload = {"key1": "value1", "key2": "value2"}
-r = requests.post("http://httpbin.org/post", data=payload)
-print(r.text)
+response = requests.post("http://httpbin.org/post", data=payload)
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
 url_params = {"name": "陳會安", "score": 95}
-r = requests.get("http://httpbin.org/get", params=url_params)
-print(r.url)
-print(r.text)
+response = requests.get("http://httpbin.org/get", params=url_params)
+print(response.url)
+print(response.text)
 
-if r.status_code == 200:
-    print(r.text)
+if response.status_code == 200:
+    print(response.text)
 else:
     print("錯誤! HTTP請求失敗...")
 
 print("------------------------------------------------------------")  # 60個
 
 post_data = {"name": "陳會安", "grade": 95}
-r = requests.post("http://httpbin.org/post", data=post_data)
-print(r.text)
+response = requests.post("http://httpbin.org/post", data=post_data)
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
 url = "http://httpbin.org/user-agent"
 
-r = requests.get(url)
-print(r.text)
-print("----------------------")
+response = requests.get(url)
+print(response.text)
+
+print("------------------------------")  # 30個
 
 url_headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0"
 }
-r = requests.get(url, headers=url_headers)
-print(r.text)
+response = requests.get(url, headers=url_headers)
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
 print("使用POST方式抓取數據")
 
 params = {"key1": "value1", "key2": "value2"}
-r = requests.post("http://httpbin.org/post", data=params)
-print(r.text)
+response = requests.post("http://httpbin.org/post", data=params)
+print(response.text)
 
 
 print("------------------------------------------------------------")  # 60個

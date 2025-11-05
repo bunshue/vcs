@@ -3518,6 +3518,38 @@ scrappy(full_url)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+url = "https://zh.wikipedia.org/zh-tw/愛因斯坦"
+
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36"
+}
+
+# 不使用 headers, 不能抓
+# response = requests.get(url) # 403 Forbidden
+
+# 使用 headers, 可以抓
+response = requests.get(url, headers=headers)
+
+print("HTTP狀態碼 :", response.status_code)
+
+if response.status_code == 200:
+    print(response.text)
+
+soup = BeautifulSoup(response.text, "lxml")
+p_list = soup.find_all("p")
+
+""" many
+print(len(p_list))
+print(p_list)
+
+keyword = "愛因斯坦"
+for p in p_list:
+    if keyword in p.text[0:10]:
+        print(p.text)
+"""
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("專項")

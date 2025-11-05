@@ -134,7 +134,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 70);
             this.button4.TabIndex = 6;
-            this.button4.Text = "獲得硬盤空間";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -145,7 +144,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 70);
             this.button5.TabIndex = 7;
-            this.button5.Text = "取得本機MAC地址";
+            this.button5.Text = "取得網卡參數";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -156,7 +155,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 70);
             this.button6.TabIndex = 8;
-            this.button6.Text = "取得設備網卡的MAC地址";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -167,7 +165,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 70);
             this.button7.TabIndex = 9;
-            this.button7.Text = "獲得網卡參數";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -178,7 +175,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 70);
             this.button8.TabIndex = 10;
-            this.button8.Text = "獲得主板序列號";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -233,7 +229,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(200, 70);
             this.button13.TabIndex = 14;
-            this.button13.Text = "取得設備硬盤的卷標號";
+            this.button13.Text = "取得磁盤配額";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -244,7 +240,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 70);
             this.button14.TabIndex = 15;
-            this.button14.Text = "獲得cpu序列號和硬盤序列號";
+            this.button14.Text = "獲得硬盤空間";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -288,7 +284,6 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(200, 70);
             this.button18.TabIndex = 19;
-            this.button18.Text = "獲取硬盤相應序列號";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -299,7 +294,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(200, 70);
             this.button19.TabIndex = 20;
-            this.button19.Text = "用C#獲取硬盤序列號,CPU序列號,網卡MAC地址";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -310,7 +304,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(200, 70);
             this.button20.TabIndex = 21;
-            this.button20.Text = "主機名稱/IP/MAC";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -321,7 +314,6 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(200, 70);
             this.button21.TabIndex = 22;
-            this.button21.Text = "取得處理器參數";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -343,7 +335,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(200, 70);
             this.button23.TabIndex = 24;
-            this.button23.Text = "獲取本機電腦名稱,IP,MAC地址,硬碟ID";
+            this.button23.Text = "獲取本機電腦名稱,IP,MAC地址,硬碟序號";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -365,7 +357,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(200, 70);
             this.button25.TabIndex = 26;
-            this.button25.Text = "CPU信息 HDD信息";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -376,7 +367,6 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(200, 70);
             this.button26.TabIndex = 26;
-            this.button26.Text = "取得CPU的型號和溫度";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -387,7 +377,6 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(200, 70);
             this.button27.TabIndex = 27;
-            this.button27.Text = "取得磁盤配額";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
