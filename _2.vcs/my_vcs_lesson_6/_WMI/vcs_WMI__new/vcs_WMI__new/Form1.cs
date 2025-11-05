@@ -9,7 +9,6 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Net;       //for Dns
-using System.Management;    //for WMI
 using Microsoft.Win32;  //for Registry
 
 // WMI(Windows Management Instrumentation)
@@ -17,7 +16,7 @@ using Microsoft.Win32;  //for Registry
 // 2. using System.Management;
 
 //參考 / 加入參考 / .NET  System.Management
-using System.Management;
+using System.Management;    //for WMI
 
 //WMI是Windows Management Instrumentation的簡稱，即：視窗管理規范。
 
@@ -25,6 +24,19 @@ namespace vcs_WMI__new
 {
     public partial class Form1 : Form
     {
+        class USBDeviceInfo
+        {
+            public USBDeviceInfo(string deviceID, string pnpDeviceID, string description)
+            {
+                this.DeviceID = deviceID;
+                this.PnpDeviceID = pnpDeviceID;
+                this.Description = description;
+            }
+            public string DeviceID { get; private set; }
+            public string PnpDeviceID { get; private set; }
+            public string Description { get; private set; }
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -113,9 +125,9 @@ namespace vcs_WMI__new
             richTextBox1.Text += "\nWMI寫法三：\n";
             String strQry = "SELECT * FROM Win32_LogicalDisk"; // 指定查詢Win32_LogicalDisk ( 邏輯磁碟)
             // ManagementObjectSearcher 類別, 根據指定的查詢擷取管理物件的集合。
-            ManagementObjectSearcher mos3 = new ManagementObjectSearcher(strQry);
+            mos = new ManagementObjectSearcher(strQry);
             // 使用Foreach 陳述式存取集合類別中物件(元素), Get 方法, 叫用指定的WMI 查詢, 並傳回產生的集合。
-            foreach (ManagementObject mo3 in mos3.Get())
+            foreach (ManagementObject mo3 in mos.Get())
             {
                 // 取得磁碟Volumne 名稱跟序號
                 richTextBox1.Text += mo3["Name"].ToString() + "\t";
@@ -124,6 +136,539 @@ namespace vcs_WMI__new
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            //WMI 使用
+            SelectQuery query = new SelectQuery("SELECT * FROM Win32_LogicalDisk");
+            ManagementObjectSearcher mos = new ManagementObjectSearcher(query);
+
+            foreach (ManagementBaseObject disk in mos.Get())
+            {
+                richTextBox1.Text += disk["Name"] + " " + disk["DriveType"] + " " + disk["VolumeName"] + "\n";
+            }
+            /*
+            disk["DriveType"] 的返回值意義如下:
+            1 No type
+            2 Floppy disk
+            3 Hard disk
+            4 Removable drive or network drive
+            5 CD-ROM
+            6 RAM disk
+            */
+
+            //3、如何用WMI獲得指定磁盤的容量？	  TBD
+
+            //"win32_logicaldisk.deviceid=/"c:/"");
+            /*
+            ManagementObject disk2 = new ManagementObject("win32_logicaldisk.deviceid=C://");
+            disk2.Get();
+            Console.WriteLine("Logical Disk Size = " + disk2["Size"] + " bytes");
+            richTextBox1.Text += "Logical Disk Size = " + disk2["Size"] + " bytes\n";
+            */
+
+            ManagementClass diskClass = new ManagementClass("Win32_LogicalDisk");
+            ManagementObjectCollection disks = diskClass.GetInstances();
+            ManagementObjectCollection.ManagementObjectEnumerator disksEnumerator = disks.GetEnumerator();
+            while (disksEnumerator.MoveNext())
+            {
+                ManagementObject disk = (ManagementObject)disksEnumerator.Current;
+                richTextBox1.Text += "Disk found: " + disk["deviceid"] + "\n";
+            }
+
+            richTextBox1.Text += "列出機器中所有的共享資源\n";
+            ManagementObjectSearcher searcher2 = new ManagementObjectSearcher("SELECT * FROM Win32_share");
+            foreach (ManagementObject mo in searcher2.Get())
+            {
+                richTextBox1.Text += mo.GetText(TextFormat.Mof) + "\n";
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //獲得CPU的編號
+            ManagementClass mc = new ManagementClass("win32_processor"); //建立ManagementClass物件
+            ManagementObjectCollection moc = mc.GetInstances();          //取得CPU訊息
+            foreach (ManagementObject mo in moc)
+            {
+                richTextBox1.Text += "獲得CPU的編號 :\n";
+                richTextBox1.Text += mo["processorid"].ToString() + "\n";   //取得CPU編號
+                richTextBox1.Text += "cpu info:\t" + mo.Properties["ProcessorId"].Value.ToString() + "\n";
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //取得處理器參數
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                try
+                {
+                    richTextBox1.Text += "製造商 :\t" + mo.GetPropertyValue("Manufacturer").ToString() + "\n";
+                    richTextBox1.Text += "序號 :\t" + mo.GetPropertyValue("ProcessorId").ToString() + "\n";
+                    richTextBox1.Text += mo["Manufacturer"].ToString() + "\n";//取得CPU製造商名稱
+                    richTextBox1.Text += mo["Version"].ToString() + "\n";     //取得CPU版本號 
+                    richTextBox1.Text += mo["Name"].ToString() + "\n";        //取得CPU產品名稱
+
+                    richTextBox1.Text += "製造商 : " + mo.GetPropertyValue("Manufacturer").ToString() + "\n";
+                    richTextBox1.Text += "序號 : " + mo.GetPropertyValue("ProcessorId").ToString() + "\n";
+                    //ID[i] = mo.GetPropertyValue("Id").ToString(); not known
+
+                    richTextBox1.Text += "CPU型號：" + (mo["ProcessorId"].ToString()) + "\n";
+                    richTextBox1.Text += "CPU名稱：" + mo["Name"].ToString() + "\n";
+                    richTextBox1.Text += "CPU版本信息：" + mo["Version"].ToString() + "\n";
+                    richTextBox1.Text += "CPU製造廠商：" + mo["Manufacturer"].ToString() + "\n";
+
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "讀取CPU的序號\n";
+
+            string result = GetCpuID1();
+            richTextBox1.Text += result + "\n";
+
+
+            richTextBox1.Text += "讀取CPU的序號\n";
+
+            string CpuID = GetCpuID1();
+            richTextBox1.Text += "CpuID\t" + CpuID + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "讀取CPU的序號\n";
+
+            //獲得cpu序號
+            string cpu_serial = getCpu();
+            richTextBox1.Text += "cpu序號 : " + cpu_serial + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "讀取CPU的序號\n";
+
+            ManagementClass mcCpu = new ManagementClass("win32_Processor");
+            ManagementObjectCollection mocCpu = mcCpu.GetInstances();
+            foreach (ManagementObject m in mocCpu)
+            {
+                string result1 = m["ProcessorId"].ToString();
+                richTextBox1.Text += "取得 : " + result1 + "\n";
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "讀取CPU的序號\n";
+
+            //取得CPU的型號
+            GetCPUCode();
+
+            //取得CPU的溫度
+            //GetCPUTemperature();  溫度fail
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            int num_physical_processors, num_cores, num_logical_processors;
+            GetProcessorCounts(out num_physical_processors, out num_cores, out num_logical_processors);
+
+            richTextBox1.Text += "PhysicalProcessors\t" + num_physical_processors.ToString() + "\n";
+            richTextBox1.Text += "Cores\t" + num_cores.ToString() + "\n";
+            richTextBox1.Text += "LogicalProcessors\t" + num_logical_processors.ToString() + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "讀取CPU的序號\n";
+
+            List<string> results = GetCpuIds();
+            richTextBox1.Text += results.Count.ToString() + "\n";
+            for (int i = 0; i < results.Count; i++)
+            {
+                richTextBox1.Text += results[i] + "\n";
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "讀取CPU序號\t" + GetCPUSerialNumber() + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+        }
+
+        private List<string> GetCpuIds()
+        {
+            List<string> results = new List<string>();
+
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                results.Add(mo.GetPropertyValue("ProcessorId").ToString());
+                richTextBox1.Text += "CPU ID:\t" + mo.GetPropertyValue("ProcessorId").ToString() + "\n";
+            }
+            return results;
+        }
+
+        //讀取CPU的序號
+        private string GetCpuID1()
+        {
+            string cpuInfo = "";//cpu序號
+            using (ManagementClass mc = new ManagementClass("Win32_Processor"))
+            {
+                ManagementObjectCollection moc = mc.GetInstances();
+                foreach (ManagementObject mo in moc)
+                {
+                    //cpuInfo = mo.Properties["ProcessorId"].Value.ToString();
+                    cpuInfo += mo["ProcessorId"].ToString().Trim();
+                    cpuInfo = mo.Properties["ProcessorId"].Value.ToString();   //取得CPU編號
+                    //cpuInfo = mo["ProcessorId"].ToString();   //取得CPU編號  same
+                }
+            }
+            return cpuInfo;
+        }
+
+        // Return the numbers of physical processors, cores,
+        // and logical processors.
+        private void GetProcessorCounts(out int num_physical_processors,
+            out int num_cores, out int num_logical_processors)
+        {
+            ManagementObjectSearcher mos;
+
+            // Get the number of physical processors.
+            num_physical_processors = 0;
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
+            foreach (ManagementObject sys in mos.Get())
+                num_physical_processors =
+                    int.Parse(sys["NumberOfProcessors"].ToString());
+
+            // Get the number of cores.
+            num_cores = 0;
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            foreach (ManagementObject proc in mos.Get())
+                num_cores += int.Parse(proc["NumberOfCores"].ToString());
+
+            num_logical_processors = Environment.ProcessorCount;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "讀取CPU編號\n";
+            ManagementClass MyClass = new ManagementClass("Win32_Processor");
+            ManagementObjectCollection MyCollection = MyClass.GetInstances();
+            String MyInfo = "當前系統CPU編號是：";
+            string MyCPUID = "";
+            foreach (ManagementObject MyObject in MyCollection)
+            {
+                MyCPUID = MyObject.Properties["ProcessorId"].Value.ToString();
+                break;
+            }
+            MyInfo += MyCPUID;
+            richTextBox1.Text += MyInfo + "\n";
+
+            richTextBox1.Text += "讀取計算機CPU的當前電壓\n";
+            MyInfo = "計算機CPU的當前電壓是：";
+            ManagementObjectSearcher MySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            foreach (ManagementObject MyObject in MySearcher.Get())
+            {
+                try
+                {
+                    MyInfo += "/n" + String.Format("CurrentVoltage : " + MyObject["CurrentVoltage"].ToString());
+                    MyInfo += "/n=========================================================";
+                }
+                catch { }
+            }
+            richTextBox1.Text += MyInfo + "\n";
+
+            richTextBox1.Text += "讀取計算機CPU的外部頻率\n";
+            MyInfo = "計算機CPU的外部頻率是：";
+            MySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            foreach (ManagementObject MyObject in MySearcher.Get())
+            {
+                try
+                {
+                    MyInfo += "/n" + String.Format("ExtClock : " + MyObject["ExtClock"].ToString());
+                    MyInfo += "/n=========================================================";
+                }
+                catch { }
+            }
+            richTextBox1.Text += MyInfo + "\n";
+
+            richTextBox1.Text += "讀取計算機CPU的二級緩存\n";
+            MyInfo = "計算機CPU的二級緩存尺寸是：";
+            MySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            foreach (ManagementObject MyObject in MySearcher.Get())
+            {
+                MyInfo += "/n" + String.Format("L2CacheSize: " + MyObject["L2CacheSize"].ToString());
+                MyInfo += "/n=========================================================";
+            }
+            richTextBox1.Text += MyInfo + "\n";
+
+            richTextBox1.Text += "讀取計算機CPU的制造商名稱\n";
+            MyInfo = "計算機CPU的制造商名稱是：";
+            MySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            foreach (ManagementObject MyObject in MySearcher.Get())
+            {
+                MyInfo += "/n" + String.Format("Manufacturer : " + MyObject["Manufacturer"].ToString());
+                MyInfo += "/n=========================================================";
+            }
+            richTextBox1.Text += MyInfo + "\n";
+
+            richTextBox1.Text += "讀取計算機CPU的產品名稱\n";
+            MyInfo = "計算機CPU的產品名稱是：";
+            MySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            foreach (ManagementObject MyObject in MySearcher.Get())
+            {
+                MyInfo += "/n" + String.Format("Name : " + MyObject["Name"].ToString());
+                MyInfo += "/n=========================================================";
+            }
+            richTextBox1.Text += MyInfo + "\n";
+
+
+            richTextBox1.Text += "讀取計算機CPU的版本信息\n";
+            MyInfo = "計算機CPU的版本信息如下：";
+            MySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            foreach (ManagementObject MyObject in MySearcher.Get())
+            {
+                MyInfo += "/n" + String.Format("Version: " + MyObject["Version"].ToString());
+                MyInfo += "/n=========================================================";
+            }
+            richTextBox1.Text += MyInfo + "\n";
+
+            richTextBox1.Text += "讀取計算機CPU的當前使用百分比 注意要把SQLserver或者其他耗CPU的軟件開著否則看不到效果就一直為0\n";
+            MyInfo = "計算機CPU的當前使用百分比是：";
+            MySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            foreach (ManagementObject MyObject in MySearcher.Get())
+            {
+                //NG
+                //MyInfo += "/n" + String.Format("LoadPercentage : " + MyObject["LoadPercentage"].ToString());
+                MyInfo += "/n=========================================================";
+            }
+            richTextBox1.Text += MyInfo + "\n";
+
+
+            richTextBox1.Text += "讀取計算機CPU的最大時鐘頻率\n";
+            MyInfo = "計算機CPU的最大時鐘頻率是：";
+            MySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            foreach (ManagementObject MyObject in MySearcher.Get())
+            {
+                MyInfo += "/n" + String.Format("MaxClockSpeed : " + MyObject["MaxClockSpeed"].ToString());
+                MyInfo += "/n=========================================================";
+            }
+            richTextBox1.Text += MyInfo + "\n";
+
+
+            richTextBox1.Text += "讀取計算機CPU的當前時鐘頻率\n";
+            MyInfo = "計算機CPU的當前時鐘頻率是：";
+            MySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            foreach (ManagementObject MyObject in MySearcher.Get())
+            {
+                MyInfo += "/n" + String.Format("CurrentClockSpeed : " + MyObject["CurrentClockSpeed"].ToString());
+                MyInfo += "/n=========================================================";
+            }
+            richTextBox1.Text += MyInfo + "\n";
+
+
+            richTextBox1.Text += "讀取計算機的CPU地址寬度\n";
+            MyInfo = "當前計算機的CPU地址寬度是：";
+            MySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            foreach (ManagementObject MyObject in MySearcher.Get())
+            {
+                MyInfo += "/n" + String.Format("AddressWidth: " + MyObject["AddressWidth"].ToString());
+                MyInfo += "/n=========================================================";
+            }
+            richTextBox1.Text += MyInfo + "\n";
+
+
+            richTextBox1.Text += "讀取計算機的CPU數據寬度\n";
+            MyInfo = "當前計算機的CPU數據寬度是：";
+            MySearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            foreach (ManagementObject MyObject in MySearcher.Get())
+            {
+                MyInfo += "/n" + String.Format("DataWidth : " + MyObject["DataWidth"].ToString());
+                MyInfo += "/n=========================================================";
+            }
+            richTextBox1.Text += MyInfo + "\n";
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //取得網卡參數
+
+            //取得本機MAC地址
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapterConfiguration");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                if (Convert.ToBoolean(mo["ipEnabled"]) == true)
+                {
+                    richTextBox1.Text += "取得本機MAC地址 : " + Convert.ToString(mo["MACAddress"]) + "\n";
+                }
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "取得本機mac地址1\n";
+
+            string mac = "";
+            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            ManagementObjectCollection moc = mc.GetInstances();
+
+            foreach (ManagementObject mo in moc)
+            {
+                if ((bool)mo["IPEnabled"])
+                {
+                    mac = mo["MacAddress"].ToString();
+
+                    richTextBox1.Text += "本機MAC：" + mac + "\n";
+                }
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "取得本機mac地址2\n";
+
+            string mac_address = "本機的MAC地址:";
+
+            using (mc = new ManagementClass("Win32_NetworkAdapterConfiguration"))
+            {
+                moc = mc.GetInstances();
+                foreach (ManagementObject mo in moc)
+                {
+                    if ((bool)mo["IPEnabled"])
+                    {
+                        string[] tmpMac = mo["MacAddress"].ToString().Split(':');
+                        for (int i = 0; i < tmpMac.Length; i++)
+                        {
+                            mac_address = tmpMac[i];
+                            richTextBox1.Text += "取得MAC : " + mac_address + "\n";
+                        }
+                    }
+                }
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //取得設備網卡的MAC地址
+
+            //ManagementClass mc;
+            //ManagementObjectCollection moc;
+
+            mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            moc = mc.GetInstances();
+            string str = "";
+            foreach (ManagementObject mo in moc)
+            {
+                if ((bool)mo["IPEnabled"] == true)
+                {
+                    str = mo["MacAddress"].ToString();
+                }
+            }
+            richTextBox1.Text += "取得設備網卡的MAC地址 : " + str + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //取得網路卡參數
+            ManagementClass mcMAC = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            ManagementObjectCollection mocMAC = mcMAC.GetInstances();
+            foreach (ManagementObject mo in mocMAC)
+            {
+                if ((bool)mo["IPEnabled"])
+                {
+                    string result = mo["MacAddress"].ToString();
+                    richTextBox1.Text += "取得 : " + result + "\n";
+                    break;
+                }
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //取得網路卡參數
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                try
+                {
+                    richTextBox1.Text += "製造商 :\t" + mo.GetPropertyValue("Manufacturer").ToString() + "\n";
+                    richTextBox1.Text += "MAC位址 :\t" + mo.GetPropertyValue("MACAddress").ToString() + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapterConfiguration");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                if ((bool)mo["IPEnabled"] == true)
+                {
+                    richTextBox1.Text += "取得本機的MAC地址：" + mo["MacAddress"].ToString() + "\n";
+                    richTextBox1.Text += "IP " + mo["IpAddress"] + "\n";
+                }
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //C#.Net 使用WMI取得網路卡資訊
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
+            ManagementObjectCollection collection = mos.Get();
+            var networkList = from n in collection.Cast<ManagementBaseObject>()
+                              select new
+                              {
+                                  guid = n.GetPropertyValue("GUID"),
+                                  name = n.GetPropertyValue("Name"),
+                                  mac = n.GetPropertyValue("MACAddress")
+
+                              };
+            foreach (var n in networkList)
+                richTextBox1.Text += String.Format("{0}{2}{1}{2}{2}", n.name, n.mac, Environment.NewLine);
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "IP地址：" + getIPAddress() + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            string MacAddress = GetMacAddress();
+            string IpAddress = GetIPAddress();
+            richTextBox1.Text += "MacAddress\t" + MacAddress + "\n";
+            richTextBox1.Text += "IpAddress\t" + IpAddress + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "讀取網路卡位址\t" + GetNetCardMACAddress() + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+        }
+
+        private static string getIPAddress()
+        {
+            IPAddress addr;
+            // 獲得本機局域網IP地址
+            addr = new IPAddress(Dns.GetHostByName(Dns.GetHostName()).AddressList[0].Address);
+            return addr.ToString();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button7_Click(object sender, EventArgs e)
         {
             //使用WMI取得USB資訊
 
@@ -153,339 +698,64 @@ namespace vcs_WMI__new
             {
                 richTextBox1.Text += String.Format("{0}{7}{1}{7}{2}{7}{3}{7}{4}{7}{5}{7}{6}{7}{7}{7}", u.id, u.name, u.status, u.system, u.caption, u.pnp, u.description, Environment.NewLine);
             }
-        }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //獲得CPU的編號
-            ManagementClass mc = new ManagementClass("win32_processor"); //建立ManagementClass物件
-            ManagementObjectCollection moc = mc.GetInstances();          //取得CPU訊息
-            foreach (ManagementObject mo in moc)
-            {
-                richTextBox1.Text += "獲得CPU的編號 :\n";
-                richTextBox1.Text += mo["processorid"].ToString() + "\n";   //取得CPU編號
-                richTextBox1.Text += "cpu info:\t" + mo.Properties["ProcessorId"].Value.ToString() + "\n";
-            }
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_Processor"); //查詢CPU訊息
-            foreach (ManagementObject mo in mos.Get())
+            //C#.Net 使用WMI取得USB資訊 
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_USBHub");
+            collection = mos.Get();
+            usbList = from u in collection.Cast<ManagementBaseObject>()
+                      select new
+                      {
+                          id = u.GetPropertyValue("DeviceID"),
+                          name = u.GetPropertyValue("Name"),
+                          status = u.GetPropertyValue("Status"),
+                          system = u.GetPropertyValue("SystemName"),
+                          caption = u.GetPropertyValue("Caption"),
+                          pnp = u.GetPropertyValue("PNPDeviceID"),
+                          description = u.GetPropertyValue("Description")
+                      };
+            foreach (var u in usbList)
             {
-                richTextBox1.Text += mo["Manufacturer"].ToString() + "\n";//取得CPU製造商名稱
-                richTextBox1.Text += mo["Version"].ToString() + "\n";     //取得CPU版本號 
-                richTextBox1.Text += mo["Name"].ToString() + "\n";        //取得CPU產品名稱
+                richTextBox1.Text += String.Format("{0}{7}{1}{7}{2}{7}{3}{7}{4}{7}{5}{7}{6}{7}{7}{7}", u.id, u.name, u.status, u.system, u.caption, u.pnp, u.description, Environment.NewLine);
             }
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            richTextBox1.Text += "\ncall Processor() ST\n";
-            Processor();
-            richTextBox1.Text += "call Processor() SP\n";
+            var usbDevices = GetUSBDevices();
 
-            richTextBox1.Text += "\n獲取CPU的序號\n";
+            foreach (var usbDevice in usbDevices)
+            {
+                //richTextBox1.Text += "Device ID: {0}, PNP Device ID: {1}, Description: {2}",
+                //    usbDevice.DeviceID, usbDevice.PnpDeviceID, usbDevice.Description);
 
-            string result = GetCpuID1();
-            richTextBox1.Text += result + "\n";
+                richTextBox1.Text += "Device ID: " + usbDevice.DeviceID + "\n" + "PNP Device ID" + usbDevice.PnpDeviceID + "\n"
+                + "Description: " + usbDevice.Description + "\n\n";
 
-
-            //獲得cpu序號
-            string cpu_serial = getCpu();
-            richTextBox1.Text += "cpu序號 : " + cpu_serial + "\n";
+            }
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //CPU序號
-
-            ManagementClass mcCpu = new ManagementClass("win32_Processor");
-            ManagementObjectCollection mocCpu = mcCpu.GetInstances();
-            foreach (ManagementObject m in mocCpu)
-            {
-                string result1 = m["ProcessorId"].ToString();
-                richTextBox1.Text += "取得 : " + result1 + "\n";
-            }
-
-
-            richTextBox1.Text += "CPU信息: \t" + GetCpuID5() + "\n";
-
-            //取得CPU的型號
-            GetCPUCode();
-
-            //取得CPU的溫度
-            //GetCPUTemperature();  溫度fail
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //取得處理器參數
-            mos = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-            int len = mos.Get().Count;
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
-            foreach (ManagementObject mo in mos.Get())
-            {
-                try
-                {
-                    richTextBox1.Text += "製造商 :\t" + mo.GetPropertyValue("Manufacturer").ToString() + "\n";
-                    richTextBox1.Text += "序號 :\t" + mo.GetPropertyValue("ProcessorId").ToString() + "\n";
-                }
-                catch (System.Exception er)
-                {
-                }
-            }
-
         }
 
-        //C# 獲得處理器參數程序代碼
-        //public void Processor(out string[] Manufacturer, out string[] ID, out string[] ProcessorId)
-        private void Processor()
+        static List<USBDeviceInfo> GetUSBDevices()
         {
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-            int len = mos.Get().Count;
-            string[] Manufacturer = new string[len];
-            string[] ID = new string[len];
-            string[] ProcessorId = new string[len];
-            richTextBox1.Text += "count = " + len.ToString() + "\n";
-            int i = 0;
-            foreach (ManagementObject mo in mos.Get())
+            List<USBDeviceInfo> devices = new List<USBDeviceInfo>();
+
+            ManagementObjectCollection collection;
+            using (var mos = new ManagementObjectSearcher(@"SELECT * From Win32_USBHub"))
+                collection = mos.Get();
+
+            foreach (var device in collection)
             {
-                try
-                {
-                    Manufacturer[i] = mo.GetPropertyValue("Manufacturer").ToString();//製造商
-                    //ID[i] = mo.GetPropertyValue("Id").ToString(); not known
-                    ProcessorId[i] = mo.GetPropertyValue("ProcessorId").ToString();//序號
-
-                    richTextBox1.Text += "i = " + i.ToString() + "\n";
-                    richTextBox1.Text += "Manufacturer : " + Manufacturer[i] + "\n";
-                    richTextBox1.Text += "ProcessorId : " + ProcessorId[i] + "\n";
-
-                }
-                catch (System.Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-                i++;
-            }
-        }
-
-        //讀取CPU的序號
-        private string GetCpuID1()
-        {
-            string cpuInfo = "";//cpu序號
-            ManagementClass mc = new ManagementClass("Win32_Processor");
-            ManagementObjectCollection moc = mc.GetInstances();
-            foreach (ManagementObject mo in moc)
-            {
-                cpuInfo = mo.Properties["ProcessorId"].Value.ToString();
-            }
-            moc = null;
-            mc = null;
-            return cpuInfo;
-        }
-
-        //讀取CPU的序號
-        private string GetCpuID3()
-        {
-            string cpuInfo = "";//cpu序號
-            using (ManagementClass mc = new ManagementClass("Win32_Processor"))
-            {
-                ManagementObjectCollection moc = mc.GetInstances();
-                foreach (ManagementObject item in moc)
-                {
-                    cpuInfo += item["ProcessorId"].ToString().Trim();
-                }
-            }
-            return cpuInfo + "\r\n";
-        }
-
-        //讀取CPU的序號
-        private string GetCpuID4()
-        {
-            string cpuInfo = "";//cpu序號
-            ManagementClass mc = new ManagementClass("Win32_Processor");
-            ManagementObjectCollection moc = mc.GetInstances();
-            foreach (ManagementObject mo in moc)
-            {
-                cpuInfo = mo.Properties["ProcessorId"].Value.ToString();
-                break;
-            }
-            return cpuInfo;
-        }
-
-        //讀取CPU的序號
-        private string GetCpuID5()
-        {
-            string cpuInfo = "";//cpu序號
-            ManagementClass mc = new ManagementClass("win32_processor"); //建立ManagementClass物件
-            ManagementObjectCollection moc = mc.GetInstances();          //取得CPU訊息
-            foreach (ManagementObject mo in moc)
-            {
-                cpuInfo = mo.Properties["ProcessorId"].Value.ToString();   //取得CPU編號
-                //cpuInfo = mo["ProcessorId"].ToString();   //取得CPU編號  same
-                return cpuInfo;
-            }
-            return "";
-        }
-
-        //讀取CPU的序號
-        private string GetCpuID6()
-        {
-            string cpuInfo = "";//cpu序號
-            using (ManagementClass cimobject = new ManagementClass("Win32_Processor"))
-            {
-                ManagementObjectCollection moc = cimobject.GetInstances();
-                foreach (ManagementObject mo in moc)
-                {
-                    cpuInfo = mo.Properties["ProcessorId"].Value.ToString();
-                    mo.Dispose();
-                }
-            }
-            return cpuInfo.ToString();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //獲得處理器參數程序代碼
-
-            string[] 制造商;
-            string[] 型號;
-            string[] 序號;
-
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-            int len = mos.Get().Count;
-            制造商 = new string[len];
-            型號 = new string[len];
-            序號 = new string[len];
-            int i = 0;
-            foreach (ManagementObject mo in mos.Get())
-            {
-                try
-                {
-                    制造商[i] = mo.GetPropertyValue("Manufacturer").ToString();
-                    序號[i] = mo.GetPropertyValue("ProcessorId").ToString();
-
-                    richTextBox1.Text += "制造商[" + i.ToString() + "] : " + 制造商[i].ToString() + "\n";
-                    richTextBox1.Text += "序號[" + i.ToString() + "] : " + 序號[i].ToString() + "\n";
-                }
-                catch (System.Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-                i++;
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //取得網卡參數
-
-            //取得本機MAC地址
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapterConfiguration");
-            foreach (ManagementObject mo in mos.Get())
-            {
-                if (Convert.ToBoolean(mo["ipEnabled"]) == true)
-                {
-                    richTextBox1.Text += "取得本機MAC地址 : " + Convert.ToString(mo["MACAddress"]) + "\n";
-                }
+                devices.Add(new USBDeviceInfo(
+                (string)device.GetPropertyValue("DeviceID"),
+                (string)device.GetPropertyValue("PNPDeviceID"),
+                (string)device.GetPropertyValue("Description")
+                ));
             }
 
-
-            //本機mac地址
-
-            string mac = "";
-            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
-            ManagementObjectCollection moc = mc.GetInstances();
-
-            foreach (ManagementObject mo in moc)
-            {
-                if ((bool)mo["IPEnabled"])
-                {
-                    mac = mo["MacAddress"].ToString();
-
-                    //本機MAC
-                    richTextBox1.Text += "本機MAC：" + mac + "\n";
-                }
-            }
-
-            //取得設備網卡的MAC地址
-
-            //ManagementClass mc;
-            //ManagementObjectCollection moc;
-
-            mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
-            moc = mc.GetInstances();
-            string str = "";
-            foreach (ManagementObject mo in moc)
-            {
-                if ((bool)mo["IPEnabled"] == true)
-                {
-                    str = mo["MacAddress"].ToString();
-                }
-            }
-            richTextBox1.Text += "取得設備網卡的MAC地址 : " + str + "\n";
-
-
-            //獲得網卡參數
-            //NetworkAdapter
-
-            //取得網路卡參數
-            mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
-            int len = mos.Get().Count;
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
-            foreach (ManagementObject mo in mos.Get())
-            {
-                try
-                {
-                    richTextBox1.Text += "製造商 :\t" + mo.GetPropertyValue("Manufacturer").ToString() + "\n";
-                    richTextBox1.Text += "MAC位址 :\t" + mo.GetPropertyValue("MACAddress").ToString() + "\n";
-                }
-                catch (System.Exception er)
-                {
-                }
-            }
-
-            //C# 獲得網卡參數
-            mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
-            len = mos.Get().Count;
-            string[] 制造商 = new string[len];
-            string[] MAC地址 = new string[len];
-            int i = 0;
-            foreach (ManagementObject mo in mos.Get())
-            {
-                try
-                {
-                    制造商[i] = mo.GetPropertyValue("Manufacturer").ToString();
-                    MAC地址[i] = mo.GetPropertyValue("MACAddress").ToString();
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-                i++;
-            }
-
-            ManagementClass mcMAC = new ManagementClass("Win32_NetworkAdapterConfiguration");
-            ManagementObjectCollection mocMAC = mcMAC.GetInstances();
-            foreach (ManagementObject m in mocMAC)
-            {
-                if ((bool)m["IPEnabled"])
-                {
-                    string result = m["MacAddress"].ToString();
-                    richTextBox1.Text += "取得 : " + result + "\n";
-                    break;
-                }
-            }
-
-
-            richTextBox1.Text += "IP地址：" + getIPAddress() + "\n";
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
+            collection.Dispose();
+            return devices;
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -517,11 +787,13 @@ namespace vcs_WMI__new
                 i++;
             }
 
-            //獲取主板序號
-            //獲取主板序號
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //讀取主板序號
             string sn = GetBIOSNumber();
             richTextBox1.Text += "主板序號:\t" + sn + "\n";
 
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //取得主機板序號
             mos = new ManagementObjectSearcher("SELECT * FROM Win32_BIOS");
@@ -532,9 +804,17 @@ namespace vcs_WMI__new
                 richTextBox1.Text += "取得主機板序號 :\t" + mo.GetPropertyValue("SerialNumber").ToString() + "\n";
             }
 
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //獲得主板參數
-            //Mainboard
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "製造商 : " + mo.GetPropertyValue("Manufacturer").ToString() + "\n";
+                richTextBox1.Text += "型號 : " + mo.GetPropertyValue("Product").ToString() + "\n";
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //取得主機板參數
             mos = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
@@ -545,22 +825,49 @@ namespace vcs_WMI__new
                 richTextBox1.Text += "製造商 :\t" + mo.GetPropertyValue("Manufacturer").ToString() + "\n";
                 richTextBox1.Text += "取得Product :\t" + mo.GetPropertyValue("Product").ToString() + "\n";
             }
-        }
 
-        //C# 獲得主板參數
-        public static void Mainboard(out string[] 制造商, out string[] 型號)
-        {
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
-            int len = mos.Get().Count;
-            制造商 = new string[len];
-            型號 = new string[len];
-            int i = 0;
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "\n讀取主機板資訊\n";
+            richTextBox1.Text += "\nWin32_BaseBoard\n";
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
             foreach (ManagementObject mo in mos.Get())
             {
-                制造商[i] = mo.GetPropertyValue("Manufacturer").ToString();
-                型號[i] = mo.GetPropertyValue("Product").ToString();
-                i++;
+                richTextBox1.Text += "主機板製造商：" + mo["Manufacturer"].ToString() + "\n";
+                richTextBox1.Text += "產品：" + mo["Product"].ToString() + "\n";
+                richTextBox1.Text += "主機板序號：" + mo["SerialNumber"].ToString() + "\n";
             }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            // Board SerialNumber
+            GetBoardSerialNumbers();
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "讀取主機板序號\t" + GetBIOSSerialNumber() + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+        }
+
+        // Use WMI to return the system's base board serial numbers.
+        private List<string> GetBoardSerialNumbers()
+        {
+            List<string> results = new List<string>();
+
+            ManagementObjectSearcher mos =
+                new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                results.Add(mo.GetPropertyValue("SerialNumber").ToString());
+                richTextBox1.Text += "Board SerialNumber:\t" + mo.GetPropertyValue("SerialNumber").ToString() + "\n";
+            }
+            return results;
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -572,7 +879,6 @@ namespace vcs_WMI__new
             ManagementObjectSearcher mos = new ManagementObjectSearcher(selectQuery);
             foreach (ManagementObject mo in mos.Get())
             {
-                //comboBox1.Items.Add(mo["Name"].ToString());
                 richTextBox1.Text += "取得驅動器 : " + mo["Name"].ToString() + "\t" + get_drive_type(mo["Name"].ToString()) + "\n";
             }
         }
@@ -614,12 +920,10 @@ namespace vcs_WMI__new
             return type;
         }
 
-
         private void button11_Click(object sender, EventArgs e)
         {
             //取得系統其他進程的啟動參數
             //使用WMI來查詢得到數據
-
             foreach (ManagementObject p in new ManagementObjectSearcher(new SelectQuery("SELECT * FROM Win32_Process")).Get())
             {
                 richTextBox1.Text += p.Properties["commandLine"].Value + "\n";
@@ -656,8 +960,6 @@ namespace vcs_WMI__new
             }
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            //------------------------------------------------------------  # 60個
-
             richTextBox1.Text += "本機的硬碟序號 :\n";
 
             string HardID = "";
@@ -693,21 +995,21 @@ namespace vcs_WMI__new
             string hdd_serial = GetDiskVolumeSerialNumber();
             richTextBox1.Text += "硬碟序號 : " + hdd_serial + "\n";
 
-            //獲取硬碟相應分區的序號
+            //讀取硬碟相應分區的序號
             string Drive = "C";
             string result = GetSpecialVolumeSerialNumber(Drive);
-            richTextBox1.Text += "獲取硬碟相應分區的序號 : " + result + "\n";
+            richTextBox1.Text += "讀取硬碟相應分區的序號 : " + result + "\n";
 
             //取得設備硬碟的卷標號
             richTextBox1.Text += "取得設備硬碟的卷標號 : " + GetDiskVolumeSerialNumber() + "\n";
 
-            //獲取硬碟相應序號
+            //讀取硬碟相應序號
             string result2 = GetSpecialVolumeSerialNumber2();
             richTextBox1.Text += "硬碟相應分區的序號 : " + result2 + "\n";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            //用C#獲取硬碟序號
+            //用C#讀取硬碟序號
 
             ManagementClass mcHD = new ManagementClass("win32_logicaldisk");
             ManagementObjectCollection mocHD = mcHD.GetInstances();
@@ -745,6 +1047,61 @@ namespace vcs_WMI__new
                 break;
             }
             richTextBox1.Text += "硬碟編號 : " + strHardDiskID + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "\n讀取硬碟序號\n";
+            richTextBox1.Text += "\nWin32_DiskDrive\n";
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+            richTextBox1.Text += "硬碟個數：" + mos.Get().Count.ToString() + "\n";
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "硬碟 Model：" + mo["Model"].ToString() + "\n";
+                richTextBox1.Text += "硬碟 DeviceID：" + mo["DeviceID"].ToString() + "\n";
+                richTextBox1.Text += "\n";
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "Get HDD serial\n";
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += mo["DeviceID"].ToString() + "\t";
+                richTextBox1.Text += "Model: " + mo["Model"].ToString() + "\t";
+                richTextBox1.Text += "Interface: " + mo["InterfaceType"].ToString() + "\t";
+                richTextBox1.Text += "Serial#: " + mo["SerialNumber"].ToString() + "\n";
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //WMI 從C＃中的USB閃存驅動器讀取VID/PID
+
+            // Get all the disk drives 
+
+            ManagementObjectSearcher mosDisks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+
+            // Loop through each object (disk) retrieved by WMI 
+
+            foreach (ManagementObject moDisk in mosDisks.Get())
+            {
+                // Add the HDD to the list (use the Model field as the item's caption) 
+
+                string diskname = moDisk["Model"].ToString();
+                richTextBox1.Text += "取得 : " + diskname + "\n";
+                get_detail_data(diskname);
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "讀取硬碟序號\t" + GetHardDiskSerialNumber() + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
@@ -796,6 +1153,40 @@ namespace vcs_WMI__new
             return parsedValue;
         }
 
+        void get_detail_data(string diskname)
+        {
+            // Get all the disk drives from WMI that match the Model name selected in the ComboBox 
+
+            richTextBox1.Text += "你選擇了 : " + diskname + "\n";
+
+            ManagementObjectSearcher mosDisks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive WHERE Model = '" + diskname + "'");
+
+            // Loop through the drives retrieved, although it should normally be only one loop going on here 
+
+            foreach (ManagementObject moDisk in mosDisks.Get())
+            {
+                // Set all the fields to the appropriate values 
+
+                richTextBox1.Text += "Type: " + moDisk["MediaType"].ToString() + "\n";
+                richTextBox1.Text += "Model: " + moDisk["Model"].ToString() + "\n";
+                richTextBox1.Text += "Serial: " + moDisk["SerialNumber"].ToString() + "\n";
+                richTextBox1.Text += "Interface: " + moDisk["InterfaceType"].ToString() + "\n";
+
+                // The capacity in gigabytes is easily calculated 
+                richTextBox1.Text += "Capacity: " + moDisk["Size"].ToString() + " bytes (" + Math.Round(((((double)Convert.ToDouble(moDisk["Size"]) / 1024) / 1024) / 1024), 2) + " GB)" + "\n";
+                richTextBox1.Text += "Partitions: " + moDisk["Partitions"].ToString() + "\n";
+                richTextBox1.Text += "Signature: " + moDisk["Signature"].ToString() + "\n";
+                richTextBox1.Text += "Firmware: " + moDisk["FirmwareRevision"].ToString() + "\n";
+                richTextBox1.Text += "Cylinders: " + moDisk["TotalCylinders"].ToString() + "\n";
+                richTextBox1.Text += "Sectors: " + moDisk["TotalSectors"].ToString() + "\n";
+                richTextBox1.Text += "Heads: " + moDisk["TotalHeads"].ToString() + "\n";
+                richTextBox1.Text += "Tracks: " + moDisk["TotalTracks"].ToString() + "\n";
+                richTextBox1.Text += "Bytes per Sector: " + moDisk["BytesPerSector"].ToString() + "\n";
+                richTextBox1.Text += "Sectors per Track: " + moDisk["SectorsPerTrack"].ToString() + "\n";
+                richTextBox1.Text += "Tracks per Cylinder: " + moDisk["TracksPerCylinder"].ToString() + "\n";
+            }
+        }
+
         private void button13_Click(object sender, EventArgs e)
         {
             //取得磁盤配額
@@ -826,7 +1217,7 @@ namespace vcs_WMI__new
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "error\n";
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
         }
 
@@ -848,7 +1239,7 @@ namespace vcs_WMI__new
         }
 
         /// <summary>
-        /// 獲取硬碟相應分區的序號
+        /// 讀取硬碟相應分區的序號
         /// </summary>
         /// <param name="Drive">盤符（如 C）</param>
         /// <returns></returns>
@@ -875,7 +1266,7 @@ namespace vcs_WMI__new
             return Dri;
         }
 
-        /// 獲取硬碟相應分區的序號
+        /// 讀取硬碟相應分區的序號
         private string GetSpecialVolumeSerialNumber2()
         {
             string Dri = "";
@@ -912,7 +1303,6 @@ namespace vcs_WMI__new
         //獲得硬碟的序號
         public string GetDiskVolumeSerialNumber()
         {
-            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
             ManagementObject disk = new ManagementObject("win32_logicaldisk.deviceid=\"c:\"");
             disk.Get();
             return disk.GetPropertyValue("VolumeSerialNumber").ToString();
@@ -931,7 +1321,7 @@ namespace vcs_WMI__new
             }
 
             /*
-            c#，使用WMI對象獲取筆記本電池剩余電量的百分比
+            c#，使用WMI對象讀取筆記本電池剩余電量的百分比
 
             有時候需要監控到筆記本電池的剩余電量，調查後發現WMI對象可以搞定。
             在使用WMI對象前，先要添加對System.Management的引用，然後就可以調用WMI對象。
@@ -952,9 +1342,6 @@ namespace vcs_WMI__new
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //取得Windows版本
-            string version = OSInfoMation.GetOsVersion();
-            richTextBox1.Text += version + "\n";
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -964,138 +1351,312 @@ namespace vcs_WMI__new
             string id = sysInfo.GetMonitorPnpDeviceId()[0];
             SizeF size = sysInfo.GetMonitorPhysicalSize(id);
             richTextBox1.Text += SystemInfo.MonitorScaler(size).ToString() + " 吋\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //取得螢幕數量
+            //检测已连接显示器
+            richTextBox1.Text += "取得螢幕數量 :\n";
+
+            // 获取屏幕数量
+            string text = string.Empty;
+            int count = 0;
+            ManagementObjectSearcher mos = new ManagementObjectSearcher(@"root\wmi", "SELECT * FROM WmiMonitorID");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                text += mo.GetText(TextFormat.Mof);
+                count++;
+            }
+            richTextBox1.Text += "共有 : " + count.ToString() + " 個螢幕\n";
+
+
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "\n一些資訊\n";
+
+            richTextBox1.Text += "\n顯卡PNPDeviceID\n";
+            richTextBox1.Text += "\nWin32_VideoController\n";
+            ManagementObjectSearcher mos1 = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
+            foreach (ManagementObject mo in mos1.Get())
+            {
+                richTextBox1.Text += "顯卡PNPDeviceID：" + mo["PNPDeviceID"].ToString() + "\n";
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "\n聲卡PNPDeviceID\n";
+            richTextBox1.Text += "\nWin32_SoundDevice\n";
+            ManagementObjectSearcher mos2 = new ManagementObjectSearcher("SELECT * FROM Win32_SoundDevice");
+            foreach (ManagementObject mo in mos2.Get())
+            {
+                richTextBox1.Text += "聲卡PNPDeviceID：" + mo["PNPDeviceID"].ToString() + "\n";
+            }
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
+            // 抓取硬碟&USB儲存裝置磁碟代號
+            using (ManagementClass devs = new ManagementClass(@"Win32_Diskdrive"))
+            {
+                ManagementObjectCollection moc = devs.GetInstances();
+                foreach (ManagementObject mo in moc)
+                {
+                    richTextBox1.Text += "==========================================================\n";
+                    richTextBox1.Text += "Description: ";
+                    richTextBox1.Text += mo["Description"] + "\n";
+                    richTextBox1.Text += "Name: ";
+                    richTextBox1.Text += mo["Name"] + "\n";
+                }
+                richTextBox1.Text += "==========================================================\n";
 
-        }
+                foreach (ManagementObject mo in moc)
+                {
+                    richTextBox1.Text += "==========================================================";
+                    richTextBox1.Text += "Description: " + mo["Description"] + "\n";
+                    richTextBox1.Text += "Name: " + mo["Name"] + "\n";
+                    richTextBox1.Text += "Model: " + mo["Model"] + "\n";
+                    richTextBox1.Text += "DeviceID: " + mo["DeviceId"] + "\n";
+                    richTextBox1.Text += "BytesPerSector: " + mo["BytesPerSector".ToString()] + "\n";
+                    richTextBox1.Text += "Size: " + mo["Size".ToString()] + "\n";
+                    richTextBox1.Text += "InterfaceType: " + mo["InterfaceType"] + "\n";
+                    richTextBox1.Text += "PNPDeviceID: " + mo["PNPDeviceID"] + "\n";
+                    //richTextBox1.Text += "bbbbbb ";
+                    // + mo["SerialNumber"] + "\n";
+                    //richTextBox1.Text += "Manufacturer: " + mo["Manufacturer"] + "\n";
 
-        //取機器名 
-        public string GetHostName()
-        {
-            return System.Net.Dns.GetHostName();
+                    richTextBox1.Text += "CapabilityDescriptions: " + mo["CapabilityDescriptions"] + "\n";
+                    richTextBox1.Text += "Caption: " + mo["Caption"] + "\n";
+                    richTextBox1.Text += "CompressionMethod: " + mo["CompressionMethod"] + "\n";
+                    richTextBox1.Text += "CreationClassName: " + mo["CreationClassName"] + "\n";
+                    richTextBox1.Text += "SystemCreationClassName: " + mo["SystemCreationClassName"] + "\n";
+                    richTextBox1.Text += "SystemName: " + mo["SystemName"] + "\n";
+                    richTextBox1.Text += "ErrorDescription: " + mo["ErrorDescription"] + "\n";
+                    richTextBox1.Text += "ErrorMethodology: " + mo["ErrorMethodology"] + "\n";
+                    //richTextBox1.Text += "FirmwareRevision: " + mo["FirmwareRevision"] + "\n";
+                    richTextBox1.Text += "MediaType: " + mo["MediaType"] + "\n";
+                    richTextBox1.Text += "Status: " + mo["Status"] + "\n";
+
+                    richTextBox1.Text += "Index: " + mo["Index".ToString()] + "\n";
+                    richTextBox1.Text += "LastErrorCode: " + mo["LastErrorCode".ToString()] + "\n";
+                    richTextBox1.Text += "MediaLoaded: " + mo["MediaLoaded".ToString()] + "\n";
+                    richTextBox1.Text += "Partitions: " + mo["Partitions".ToString()] + "\n";
+                    richTextBox1.Text += "SectorsPerTrack: " + mo["SectorsPerTrack".ToString()] + "\n";
+                    richTextBox1.Text += "Signature: " + mo["Signature".ToString()] + "\n";
+                    richTextBox1.Text += "CYLINDER: " + mo["TotalCylinders".ToString()] + "\n";
+                    richTextBox1.Text += "HEAD: : " + mo["TotalHeads".ToString()] + "\n";
+                    richTextBox1.Text += "SECTOR: " + mo["TotalSectors".ToString()] + "\n";
+                    richTextBox1.Text += "TRACK: " + mo["TotalTracks".ToString()] + "\n";
+                    richTextBox1.Text += "TracksPerCylinder: " + mo["TracksPerCylinder".ToString()] + "\n";
+
+                    richTextBox1.Text += "DiskPartition: ";
+                    foreach (ManagementObject b in mo.GetRelated("Win32_DiskPartition"))
+                    {
+                        richTextBox1.Text += "Name: " + b["Name"] + "\n";
+                        richTextBox1.Text += "Caption: " + b["Caption"] + "\n";
+                        richTextBox1.Text += "CreationClassName: " + b["CreationClassName"] + "\n";
+                        richTextBox1.Text += "Description: " + b["Description"] + "\n";
+                        richTextBox1.Text += "DeviceID: " + b["DeviceID"] + "\n";
+                        richTextBox1.Text += "SystemCreationClassName: " + b["SystemCreationClassName"] + "\n";
+                        richTextBox1.Text += "SystemName: " + b["SystemName"] + "\n";
+                        richTextBox1.Text += "Type: " + b["Type"] + "\n";
+
+                        richTextBox1.Text += "Index: " + b["Index".ToString()] + "\n";
+                        richTextBox1.Text += "DiskIndex: " + b["DiskIndex".ToString()] + "\n";
+                        richTextBox1.Text += "BlockSize: " + b["BlockSize".ToString()] + "\n";
+                        richTextBox1.Text += "NumberOfBlocks: " + b["NumberOfBlocks".ToString()] + "\n";
+                        richTextBox1.Text += "Size: " + b["Size".ToString()] + "\n";
+                        richTextBox1.Text += "Bootable: " + b["Bootable".ToString()] + "\n";
+                        richTextBox1.Text += "BootPartition: " + b["BootPartition".ToString()] + "\n";
+                        richTextBox1.Text += "PrimaryPartition: " + b["PrimaryPartition".ToString()] + "\n";
+                        richTextBox1.Text += "StartingOffset: " + b["StartingOffset".ToString()] + "\n";
+
+                        foreach (ManagementBaseObject c in b.GetRelated("Win32_LogicalDisk"))
+                        {
+                            richTextBox1.Text += "LogicalDisk: " + c["Name"] + "\n";
+                            richTextBox1.Text += "SystemCreationClassName: " + c["SystemCreationClassName"] + "\n";
+                            richTextBox1.Text += "SystemName: " + c["SystemName"] + "\n";
+                            richTextBox1.Text += "VolumeName: " + c["VolumeName"] + "\n";
+                            richTextBox1.Text += "VolumeSerialNumber: " + c["VolumeSerialNumber"] + "\n";
+                            richTextBox1.Text += "CreationClassName: " + c["CreationClassName"] + "\n";
+                            richTextBox1.Text += "Description: " + c["Description"] + "\n";
+                            richTextBox1.Text += "DeviceID: " + c["DeviceID"] + "\n";
+                            richTextBox1.Text += "FileSystem: " + c["FileSystem"] + "\n";
+                            richTextBox1.Text += "Caption: " + c["Caption"] + "\n";
+                            richTextBox1.Text += "DriveType: " + c["DriveType".ToString()] + "\n";
+                            richTextBox1.Text += "FreeSpace: " + c["FreeSpace".ToString()] + "\n";
+                            richTextBox1.Text += "MaximumComponentLength: " + c["MaximumComponentLength".ToString()] + "\n";
+                            richTextBox1.Text += "MediaType: " + c["MediaType".ToString()] + "\n";
+                            richTextBox1.Text += "Size: " + c["Size".ToString()] + "\n";
+                        }
+                    }
+                }
+            }
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //用WMI取出作業系統資訊1
+            //用WMI取出作業系統資訊
+            get_wmi_os_info();
         }
 
-        private static string getIPAddress()
+        void get_wmi_os_info()
         {
-            IPAddress addr;
-            // 獲得本機局域網IP地址
-            addr = new IPAddress(Dns.GetHostByName(Dns.GetHostName()).AddressList[0].Address);
-            return addr.ToString();
+            // Get and display OS properties.
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
+
+            foreach (ManagementObject mobj in mos.Get())
+            {
+                GetValue(mobj, "BootDevice");
+                GetValue(mobj, "BuildNumber");
+                GetValue(mobj, "BuildType");
+                GetValue(mobj, "Caption");
+                GetValue(mobj, "CodeSet");
+                GetValue(mobj, "CountryCode");
+                GetValue(mobj, "CreationClassName");
+                GetValue(mobj, "CSCreationClassName");
+                GetValue(mobj, "CSDVersion");
+                GetValue(mobj, "CSName");
+                GetValue(mobj, "CurrentTimeZone");
+                GetValue(mobj, "DataExecutionPrevention_Available");
+                GetValue(mobj, "DataExecutionPrevention_32BitApplications");
+                GetValue(mobj, "DataExecutionPrevention_Drivers");
+                GetValue(mobj, "DataExecutionPrevention_SupportPolicy");
+                GetValue(mobj, "Debug");
+                GetValue(mobj, "Description");
+                GetValue(mobj, "Distributed");
+                GetValue(mobj, "EncryptionLevel");
+                GetValue(mobj, "ForegroundApplicationBoost");
+                GetValue(mobj, "FreePhysicalMemory");
+                GetValue(mobj, "FreeSpaceInPagingFiles");
+                GetValue(mobj, "FreeVirtualMemory");
+                GetValue(mobj, "InstallDate");
+                GetValue(mobj, "LargeSystemCache");
+                GetValue(mobj, "LastBootUpTime");
+                GetValue(mobj, "LocalDateTime");
+                GetValue(mobj, "Locale");
+                GetValue(mobj, "Manufacturer");
+                GetValue(mobj, "MaxNumberOfProcesses");
+                GetValue(mobj, "MaxProcessMemorySize");
+                GetValue(mobj, "MUILanguages[]");
+                GetValue(mobj, "Name");
+                GetValue(mobj, "NumberOfLicensedUsers");
+                GetValue(mobj, "NumberOfProcesses");
+                GetValue(mobj, "NumberOfUsers");
+                GetValue(mobj, "OperatingSystemSKU");
+                GetValue(mobj, "Organization");
+                GetValue(mobj, "OSArchitecture");
+                GetValue(mobj, "OSLanguage");
+                GetValue(mobj, "OSProductSuite");
+                GetValue(mobj, "OSType");
+                GetValue(mobj, "OtherTypeDescription");
+                GetValue(mobj, "PAEEnabled");
+                GetValue(mobj, "PlusProductID");
+                GetValue(mobj, "PlusVersionNumber");
+                GetValue(mobj, "Primary");
+                GetValue(mobj, "ProductType");
+                GetValue(mobj, "QuantumLength");
+                GetValue(mobj, "QuantumType");
+                GetValue(mobj, "RegisteredUser");
+                GetValue(mobj, "SerialNumber");
+                GetValue(mobj, "ServicePackMajorVersion");
+                GetValue(mobj, "ServicePackMinorVersion");
+                GetValue(mobj, "SizeStoredInPagingFiles");
+                GetValue(mobj, "Status");
+                GetValue(mobj, "SuiteMask");
+                GetValue(mobj, "SystemDevice");
+                GetValue(mobj, "SystemDirectory");
+                GetValue(mobj, "SystemDrive");
+                GetValue(mobj, "TotalSwapSpaceSize");
+                GetValue(mobj, "TotalVirtualMemorySize");
+                GetValue(mobj, "TotalVisibleMemorySize");
+                GetValue(mobj, "Version");
+                GetValue(mobj, "WindowsDirectory");
+            }
+        }
+
+        // Get a value from the ManagementObject.
+        private void GetValue(ManagementObject mobj, string property_name)
+        {
+            string value;
+            try
+            {
+                value = mobj[property_name].ToString();
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                value = "錯誤訊息 : " + ex.Message;
+            }
+            richTextBox1.Text += property_name + "\t" + value + "\n";
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //用WMI取出作業系統資訊2
+            // Display the operating system's name.
+            // Get the OS information.
+            // For more information from this query, see:
+            //      http://msdn.microsoft.com/library/aa394239.aspx
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                //lblCaption.Text = mo.Properties["Caption"].Value.ToString().Trim();
+                //lblVersion.Text = "Version " + mo.Properties["Version"].Value.ToString() + " SP " + mo.Properties["ServicePackMajorVersion"].Value.ToString() + "." + mo.Properties["ServicePackMinorVersion"].Value.ToString();
+
+                richTextBox1.Text += mo.Properties["Caption"].Value.ToString().Trim() + "\n";
+                richTextBox1.Text += "Version " + mo.Properties["Version"].Value.ToString() + " SP " + mo.Properties["ServicePackMajorVersion"].Value.ToString() + "." + mo.Properties["ServicePackMinorVersion"].Value.ToString() + "\n";
+            }
+
+            // Get number of processors.
+            // For more information from this query, see:
+            //      http://msdn.microsoft.com/library/aa394373.aspx
+            string cpus_query = "SELECT * FROM Win32_ComputerSystem";
+            ManagementObjectSearcher cpus_searcher = new ManagementObjectSearcher(cpus_query);
+            foreach (ManagementObject mo in cpus_searcher.Get())
+            {
+                richTextBox1.Text += mo.Properties["NumberOfLogicalProcessors"].Value.ToString() + " processors" + "\n";
+            }
+
+            // Get 32- versus 64-bit.
+            // For more information from this query, see:
+            //      http://msdn.microsoft.com/library/aa394373.aspx
+            string proc_query = "SELECT * FROM Win32_Processor";
+            ManagementObjectSearcher proc_searcher = new ManagementObjectSearcher(proc_query);
+            foreach (ManagementObject mo in proc_searcher.Get())
+            {
+                richTextBox1.Text += mo.Properties["AddressWidth"].Value.ToString() + "-bit" + "\n";
+            }
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
-            //WMI 使用
-            SelectQuery query = new SelectQuery("SELECT * FROM Win32_LogicalDisk");
-            ManagementObjectSearcher mos = new ManagementObjectSearcher(query);
-
-            foreach (ManagementBaseObject disk in mos.Get())
-            {
-                richTextBox1.Text += disk["Name"] + " " + disk["DriveType"] + " " + disk["VolumeName"] + "\n";
-            }
-            /*
-            disk["DriveType"] 的返回值意義如下:
-            1 No type
-            2 Floppy disk
-            3 Hard disk
-            4 Removable drive or network drive
-            5 CD-ROM
-            6 RAM disk
-            */
-
-            //3、如何用WMI獲得指定磁盤的容量？	  TBD
-
-            //"win32_logicaldisk.deviceid=/"c:/"");
-            /*
-            ManagementObject disk2 = new ManagementObject("win32_logicaldisk.deviceid=C://");
-            disk2.Get();
-            Console.WriteLine("Logical Disk Size = " + disk2["Size"] + " bytes");
-            richTextBox1.Text += "Logical Disk Size = " + disk2["Size"] + " bytes\n";
-            */
-
-            ManagementClass diskClass = new ManagementClass("Win32_LogicalDisk");
-            ManagementObjectCollection disks = diskClass.GetInstances();
-            ManagementObjectCollection.ManagementObjectEnumerator disksEnumerator = disks.GetEnumerator();
-            while (disksEnumerator.MoveNext())
-            {
-                ManagementObject disk = (ManagementObject)disksEnumerator.Current;
-                richTextBox1.Text += "Disk found: " + disk["deviceid"] + "\n";
-            }
-
-            richTextBox1.Text += "列出機器中所有的共享資源\n";
-            ManagementObjectSearcher searcher2 = new ManagementObjectSearcher("SELECT * FROM Win32_share");
-            foreach (ManagementObject mo in searcher2.Get())
-            {
-                richTextBox1.Text += mo.GetText(TextFormat.Mof) + "\n";
-            }
+            //取得Windows版本
+            string version = OSInfoMation.GetOsVersion();
+            richTextBox1.Text += version + "\n";
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
             //主機名稱
-            richTextBox1.Text += "主機名稱：" + Dns.GetHostName() + "\n";
+            richTextBox1.Text += "主機名稱 : " + Dns.GetHostName() + "\n";
 
-            //獲取本機電腦名稱,IP,MAC地址
+            //取得電腦名稱
+            string ComputerName = System.Environment.GetEnvironmentVariable("ComputerName");
+            richTextBox1.Text += "ComputerName\t" + ComputerName + "\n";
 
-            string CpuID = GetCpuID1();
-            string MacAddress = GetMacAddress();
-            string IpAddress = GetIPAddress();
             string LoginUserName = GetUserName();
             string SystemType = GetSystemType();
             string TotalPhysicalMemory = GetTotalPhysicalMemory(); //單位：M
 
-            //取得電腦名稱
-            string ComputerName = System.Environment.GetEnvironmentVariable("ComputerName");
-
-            richTextBox1.Text += "CpuID\t" + CpuID + "\n";
-            richTextBox1.Text += "MacAddress\t" + MacAddress + "\n";
-            richTextBox1.Text += "IpAddress\t" + IpAddress + "\n";
             richTextBox1.Text += "LoginUserName\t" + LoginUserName + "\n";
             richTextBox1.Text += "SystemType\t" + SystemType + "\n";
             richTextBox1.Text += "TotalPhysicalMemory\t" + TotalPhysicalMemory + "\n";
-            richTextBox1.Text += "ComputerName\t" + ComputerName + "\n";
         }
 
-        /// <summary>
-        /// 顯示MAC地址
-        /// </summary>
-        /// <returns></returns>
-        private string GetMAC()
-        {
-            string mac = "本機的MAC地址:";
-            using (ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration"))
-            {
-                ManagementObjectCollection moc = mc.GetInstances();
-                foreach (ManagementObject mo in moc)
-                {
-                    if ((bool)mo["IPEnabled"])
-                    {
-                        string[] tmpMac = mo["MacAddress"].ToString().Split(':');
-                        for (int i = 0; i < tmpMac.Length; i++)
-                        {
-                            mac += tmpMac[i];
-                        }
-                    }
-                }
-            }
-            return mac + "\r\n";
-        }
-
-        //獲取網卡硬件地址
+        //讀取網卡硬件地址
         public string GetMacAddress()
         {
             try
@@ -1124,7 +1685,7 @@ namespace vcs_WMI__new
             }
         }
 
-        //獲取IP地址
+        //讀取IP地址
         public string GetIPAddress()
         {
             try
@@ -1235,21 +1796,6 @@ namespace vcs_WMI__new
 
         private void button24_Click(object sender, EventArgs e)
         {
-            //取得螢幕數量
-            //取得螢幕數量
-            //检测已连接显示器
-            richTextBox1.Text += "取得螢幕數量 :\n";
-
-            // 获取屏幕数量
-            string text = string.Empty;
-            int count = 0;
-            ManagementObjectSearcher mos = new ManagementObjectSearcher(@"root\wmi", "SELECT * FROM WmiMonitorID");
-            foreach (ManagementObject mo in mos.Get())
-            {
-                text += mo.GetText(TextFormat.Mof);
-                count++;
-            }
-            richTextBox1.Text += "共有 : " + count.ToString() + " 個螢幕\n";
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -1260,14 +1806,88 @@ namespace vcs_WMI__new
         {
         }
 
+        //讀取CPU序號
+        public string GetCPUSerialNumber()
+        {
+            try
+            {
+                ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * From Win32_Processor");
+                string sCPUSerialNumber = "";
+                foreach (ManagementObject mo in mos.Get())
+                {
+                    sCPUSerialNumber = mo["ProcessorId"].ToString().Trim();
+                    break;
+                }
+                return sCPUSerialNumber;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+        //讀取主機板序號
+        public string GetBIOSSerialNumber()
+        {
+            try
+            {
+                ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * From Win32_BIOS");
+                string sBIOSSerialNumber = "";
+                foreach (ManagementObject mo in mos.Get())
+                {
+                    sBIOSSerialNumber = mo.GetPropertyValue("SerialNumber").ToString().Trim();
+                    break;
+                }
+                return sBIOSSerialNumber;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+        //讀取硬碟序號
+        public string GetHardDiskSerialNumber()
+        {
+            try
+            {
+                ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
+                string sHardDiskSerialNumber = "";
+                foreach (ManagementObject mo in mos.Get())
+                {
+                    sHardDiskSerialNumber = mo["SerialNumber"].ToString().Trim();
+                    break;
+                }
+                return sHardDiskSerialNumber;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+        //讀取網路卡位址
+        public string GetNetCardMACAddress()
+        {
+            try
+            {
+                ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((MACAddress Is Not NULL) AND (Manufacturer <> 'Microsoft'))");
+                string NetCardMACAddress = "";
+                foreach (ManagementObject mo in mos.Get())
+                {
+                    NetCardMACAddress = mo["MACAddress"].ToString().Trim();
+                    break;
+                }
+                return NetCardMACAddress;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
         private void GetCPUCode()
         {
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-
-            foreach (ManagementObject mo in mos.Get())
-            {
-                richTextBox1.Text += "CPU型號：" + (mo["ProcessorId"].ToString()) + "\n";
-            }
         }
 
         private void GetCPUTemperature()
@@ -1288,21 +1908,20 @@ namespace vcs_WMI__new
 
         private void button28_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
             //新進待測
             /*
-            用C#和WMI獲取邏輯驅動器詳細信息
+            用C#和WMI讀取邏輯驅動器詳細信息
 	
                 SelectQuery selectQuery = new SelectQuery("win32_logicaldisk");
 	
                   或者使用wql查詢來創建查詢類的實例，代碼如下：
 	              SelectQuery selectQuery = new SelectQuery("SELECT * FROM win32_logicaldisk");
 	
-                  或者只獲取類的部分屬性，代碼如下：
+                  或者只讀取類的部分屬性，代碼如下：
 	              SelectQuery selectQuery = new SelectQuery("SELECT Name,DriveType FROM win32_logicaldisk");
 		
                 SelectQuery selectQuery = new SelectQuery("SELECT * FROM win32_logicaldisk");
@@ -1310,7 +1929,7 @@ namespace vcs_WMI__new
                 ManagementObjectSearcher mos = new ManagementObjectSearcher(selectQuery);
                   int i=0;
                 foreach (ManagementObject disk in mos.Get()) {
-                 //獲取驅動器盤符
+                 //讀取驅動器盤符
                  listView1.Items.Add(disk["Name"].ToString());
                 }
             */
@@ -1338,7 +1957,7 @@ namespace vcs_WMI__new
             }
             catch
             {
-                return "獲取錯誤";
+                return "讀取錯誤";
             }
         }
 
@@ -1397,6 +2016,7 @@ namespace vcs_WMI__new
         }
     }
 }
+
 
 //6060
 //------------------------------------------------------------  # 60個

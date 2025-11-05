@@ -69,7 +69,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 70);
             this.button1.TabIndex = 0;
-            this.button1.Text = "使用WMI取得USB資訊";
+            this.button1.Text = "WMI 使用";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -90,7 +90,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 70);
             this.button2.TabIndex = 2;
-            this.button2.Text = "獲得CPU的編號";
+            this.button2.Text = "CPU相關";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -101,7 +101,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 70);
             this.button3.TabIndex = 3;
-            this.button3.Text = "獲得處理器參數程序代碼";
+            this.button3.Text = "CPU";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -144,7 +144,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 70);
             this.button5.TabIndex = 7;
-            this.button5.Text = "取得網卡參數";
+            this.button5.Text = "網路卡相關";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -165,6 +165,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 70);
             this.button7.TabIndex = 9;
+            this.button7.Text = "USB相關";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -185,7 +186,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(200, 70);
             this.button9.TabIndex = 10;
-            this.button9.Text = "獲得主板參數";
+            this.button9.Text = "主機板相關";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -218,7 +219,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 70);
             this.button12.TabIndex = 13;
-            this.button12.Text = "Win32_DiskDrive";
+            this.button12.Text = "硬碟相關Win32_DiskDrive";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -262,7 +263,6 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 70);
             this.button16.TabIndex = 17;
-            this.button16.Text = "取得Windows版本";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -273,7 +273,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(200, 70);
             this.button17.TabIndex = 18;
-            this.button17.Text = "取得螢幕尺寸";
+            this.button17.Text = "取得螢幕尺寸/數量";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -284,6 +284,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(200, 70);
             this.button18.TabIndex = 19;
+            this.button18.Text = "顯示卡/音效卡";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -294,6 +295,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(200, 70);
             this.button19.TabIndex = 20;
+            this.button19.Text = "抓取硬碟&USB儲存裝置磁碟代號";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -304,6 +306,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(200, 70);
             this.button20.TabIndex = 21;
+            this.button20.Text = "作業系統資訊1";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -314,6 +317,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(200, 70);
             this.button21.TabIndex = 22;
+            this.button21.Text = "作業系統資訊2";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -324,7 +328,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(200, 70);
             this.button22.TabIndex = 23;
-            this.button22.Text = "WMI 使用";
+            this.button22.Text = "取得Windows版本";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -335,7 +339,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(200, 70);
             this.button23.TabIndex = 24;
-            this.button23.Text = "獲取本機電腦名稱,IP,MAC地址,硬碟序號";
+            this.button23.Text = "主機名稱";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -346,7 +350,6 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(200, 70);
             this.button24.TabIndex = 25;
-            this.button24.Text = "取得螢幕數量";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
