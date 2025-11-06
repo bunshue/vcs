@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net;       //for Dns
 using System.Diagnostics;       //for Process
+using System.Collections;   //for DictionaryEntry
 using Microsoft.Win32;  //for Registry
 
 // WMI(Windows Management Instrumentation)
@@ -46,6 +47,13 @@ namespace vcs_WMI__new
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            listView1.Columns.Add("項目", 150, HorizontalAlignment.Center);
+            listView1.Columns.Add("內容", 250, HorizontalAlignment.Center);
+
+            string[] win32_cmd = new string[] { "Win32_BaseBoard", "Win32_Battery", "Win32_BIOS", "Win32_DiskDrive", "Win32_IDEController", "Win32_NetworkAdapter", "Win32_NetworkAdapterConfiguration", "Win32_Processor", "Win32_SerialPort", "Win32_USBController", "Win32_USBHub", "Win32_VideoController", "Win32_VideoSettings" };
+            comboBox1.Items.AddRange(win32_cmd);
+            comboBox1.Text = win32_cmd[0];
         }
 
         void show_item_location()
@@ -94,14 +102,25 @@ namespace vcs_WMI__new
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
+            richTextBox1.Size = new Size(400, 700 + 40);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            comboBox1.Location = new Point(x_st + dx * 3 + 400 + 10, y_st + dy * 0);
+            bt_get.Location = new Point(x_st + dx * 3 + 400 + 10 + comboBox1.Width + 10, y_st + dy * 0);
+            listView1.Size = new Size(400, 700);
+            listView1.Location = new Point(x_st + dx * 3 + 400 + 10, y_st + dy * 0 + 40);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //設定表單Client的大小
+            this.SetClientSizeCore(1050 + 400, 770);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+            listView1.Clear();
+            listView1.Columns.Add("項目", 150, HorizontalAlignment.Center);
+            listView1.Columns.Add("內容", 250, HorizontalAlignment.Center);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -403,6 +422,8 @@ namespace vcs_WMI__new
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //取得CPU編號、硬盤編號等系統有關環境、屬性
+            //TBD
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -520,7 +541,39 @@ namespace vcs_WMI__new
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //取得記憶體狀態
+            //取得記憶體狀態2
+            ManagementObjectSearcher os_searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
+
+            foreach (ManagementObject mobj in os_searcher.Get())
+            {
+                GetInfo(mobj, "FreePhysicalMemory");
+                GetInfo(mobj, "FreeSpaceInPagingFiles");
+                GetInfo(mobj, "FreeVirtualMemory");
+                GetInfo(mobj, "SizeStoredInPagingFiles");
+                GetInfo(mobj, "TotalSwapSpaceSize");
+                GetInfo(mobj, "TotalVirtualMemorySize");
+                GetInfo(mobj, "TotalVisibleMemorySize");
+            }
         }
+
+        // Add information about the property to the ListView.
+        private void GetInfo(ManagementObject mobj, string property_name)
+        {
+            object property_obj = mobj[property_name];
+            if (property_obj == null)
+            {
+                //lvwInfo.AddRow(property_name, "???");
+                richTextBox1.Text += property_name + "\t\t???\n";
+            }
+            else
+            {
+                ulong property_value = (ulong)property_obj * 1024;
+                //lvwInfo.AddRow(property_name, property_value.ToFileSizeApi());
+                richTextBox1.Text += property_name + "\t\t" + property_value.ToFileSizeApi() + "\n";
+            }
+        }
+
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -611,7 +664,58 @@ namespace vcs_WMI__new
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //取得系統相關資訊
 
+            // part 1
+            ListView lv = new ListView();
+            lv.Left = 900;
+            lv.Top = 680;
+            lv.Width = 360;
+            lv.Height = 380;
+            lv.BackColor = Color.Pink;
+            this.Controls.Add(lv);
+            this.Size = new Size(this.Size.Width + 330, this.Size.Height);
+
+            lv.View = View.Details;//設定控制元件顯示方式
+            lv.GridLines = true;//是否顯示網格
+            lv.Columns.Add("環境變數", 150, HorizontalAlignment.Left);//新增列標頭
+            lv.Columns.Add("變數值", 150, HorizontalAlignment.Left);//新增列標頭
+            ListViewItem myItem;//建立ListViewItem對像
+            //取得系統環境變數及對應的變數值，並顯示在ListView控制元件中
+            foreach (DictionaryEntry DEntry in Environment.GetEnvironmentVariables())
+            {
+                myItem = new ListViewItem(DEntry.Key.ToString(), 0);//建立ListViewItem對像
+                myItem.SubItems.Add(DEntry.Value.ToString());//新增子項集合
+                lv.Items.Add(myItem);//將子項集合新增到控制元件中
+            }
+
+            // part 2
+            ManagementClass mc = new ManagementClass("win32_processor"); //建立ManagementClass物件
+            ManagementObjectCollection moc = mc.GetInstances();          //取得CPU訊息
+
+            foreach (ManagementObject mo in moc)
+            {
+                richTextBox1.Text += "CPU編號\t\t" + mo["processorid"].ToString() + "\n";//取得CPU編號
+            }
+
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("Select * From Win32_Processor"); //查詢CPU訊息
+
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "CPU製造商名稱\t\t" + mo["Manufacturer"].ToString() + "\n";//取得CPU製造商名稱
+                richTextBox1.Text += "CPU版本號\t\t" + mo["Version"].ToString() + "\n";     //取得CPU版本號
+                richTextBox1.Text += "CPU產品名稱\t\t" + mo["Name"].ToString() + "\n";        //取得CPU產品名稱
+            }
+
+            // part 3
+            SelectQuery query = new SelectQuery("Select * from Win32_BaseBoard"); // 查詢主板
+            ManagementObjectSearcher dev = new ManagementObjectSearcher(query);   // 執行query
+            ManagementObjectCollection.ManagementObjectEnumerator enumerator = dev.Get().GetEnumerator();
+            enumerator.MoveNext();
+            ManagementBaseObject mbo = enumerator.Current;                    // 取得目前主板
+            richTextBox1.Text += "主板編號\t\t" + mbo.GetPropertyValue("SerialNumber").ToString() + "\n";  //取得主板編號
+            richTextBox1.Text += "主板製造商\t\t" + mbo.GetPropertyValue("Manufacturer").ToString() + "\n";  //取得主板製造商
+            richTextBox1.Text += "主板型號\t\t" + mbo.GetPropertyValue("Name").ToString() + "\n";          //取得主板型號
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -1030,6 +1134,20 @@ namespace vcs_WMI__new
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //獲取硬碟資訊
+
+            richTextBox1.Text += "\n獲取硬碟資訊\n";
+            richTextBox1.Text += "\nWin32_DiskDrive\n";
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+
+            foreach (ManagementObject mo in mos.Get())
+            {
+                //印出所有參數名稱及內容
+                foreach (var prop in mo.Properties)
+                {
+                    richTextBox1.Text += prop.Name + ": " + prop.Value + "\n";
+                }
+            }
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -1067,6 +1185,183 @@ namespace vcs_WMI__new
 
         private void button16_Click(object sender, EventArgs e)
         {
+            //Win32_LogicalDisk
+            string drive = "C";
+            richTextBox1.Text += "硬碟： " + drive + "\n";
+            double dblSize = 0;
+            double dblFree = 0;
+            uint drive_type = 0;
+            uint media_type = 0;
+
+            if (string.IsNullOrEmpty(drive) || drive == null)
+            {
+                drive = "C";
+            }
+            //create our ManagementObject, passing it the drive letter to the
+            //DevideID using WQL
+            ManagementObject disk = new ManagementObject("Win32_LogicalDisk.DeviceID=\"" + drive + ":\"");
+            //bind our management object
+            disk.Get();
+
+            richTextBox1.Text += "\n字串類\n";
+
+            richTextBox1.Text += "Name: " + disk["Name"] + "\n";
+            richTextBox1.Text += "Caption: " + disk["Caption"] + "\n";
+            richTextBox1.Text += "FileSystem: " + disk["FileSystem"] + "\n";
+            richTextBox1.Text += "CreationClassName: " + disk["CreationClassName"] + "\n";
+            richTextBox1.Text += "Description: " + disk["Description"] + "\n";
+            richTextBox1.Text += "DeviceID: " + disk["DeviceID"] + "\n";
+            richTextBox1.Text += "SystemCreationClassName: " + disk["SystemCreationClassName"] + "\n";
+            richTextBox1.Text += "SystemName: " + disk["SystemName"] + "\n";
+            richTextBox1.Text += "VolumeName: " + disk["VolumeName"] + "\n";
+            richTextBox1.Text += "序號VolumeSerialNumber: " + disk["VolumeSerialNumber"] + "\n";
+            /*  無資料
+            richTextBox1.Text += "LogicalDisk: " + disk["ProviderName"] + "\n";
+            richTextBox1.Text += "LogicalDisk: " + disk["PNPDeviceID"] + "\n";
+            richTextBox1.Text += "LogicalDisk: " + disk["Purpose"] + "\n";
+            richTextBox1.Text += "LogicalDisk: " + disk["Status"] + "\n";
+            richTextBox1.Text += "LogicalDisk: " + disk["ErrorDescription"] + "\n";
+            richTextBox1.Text += "LogicalDisk: " + disk["ErrorMethodology"] + "\n";
+            */
+
+            richTextBox1.Text += "\n數字類\n";
+
+            richTextBox1.Text += "Size: " + disk["Size"].ToString() + "\n";
+            richTextBox1.Text += "FreeSpace: " + disk["FreeSpace"].ToString() + "\n";
+            richTextBox1.Text += "MaximumComponentLength: " + disk["MaximumComponentLength"].ToString() + "\n";
+            try
+            {
+                richTextBox1.Text += "MediaType: " + disk["MediaType"].ToString() + "\n";
+                media_type = (uint)disk["MediaType"];
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息 : " + ex.Message + "\n";
+            }
+
+            //richTextBox1.Text += "Access: " + disk["Access"].ToString() + "\n";
+            richTextBox1.Text += "DriveType: " + disk["DriveType"].ToString() + "\t";
+
+            drive_type = (uint)disk["DriveType"];
+
+            switch (drive_type)
+            {
+                case 0:
+                    richTextBox1.Text += "Unknown." + "\n";
+                    break;
+                case 1:
+                    richTextBox1.Text += "No Root Directory." + "\n";
+                    break;
+                case 2:
+                    richTextBox1.Text += "Removable Disk." + "\n";
+                    break;
+                case 3:
+                    richTextBox1.Text += "Local Disk." + "\n";
+                    break;
+                case 4:
+                    richTextBox1.Text += "Network Drive." + "\n";
+                    break;
+                case 5:
+                    richTextBox1.Text += "Compact Disc." + "\n";
+                    break;
+                case 6:
+                    richTextBox1.Text += "RAM Disk." + "\n";
+                    break;
+                default:
+                    richTextBox1.Text += "Drive type could not be determined." + "\n";
+                    break;
+            }
+
+            dblSize = Math.Round(Convert.ToDouble(disk["Size"]) / 1024 / 1024 / 1024);
+            //1 KB = 1024 - KiloByte
+            //1 MB = 1024 ^ 2 - MegaByte
+            //1 GB = 1024 ^ 3 - GigaByte
+            //1 TB = 1024 ^ 4 - TeraByte
+            //1 PB = 1024 ^ 5 - PetaByte
+            //1 EB = 1024 ^ 6 - ExaByte
+            //1 ZB = 1024 ^ 7 - ZettaByte
+            //1 YB = 1024 ^ 8 - YottaByte
+            //1 BB = 1024 ^ 9 - BrontoByte
+            richTextBox1.Text += "Hard Disk Size = " + dblSize.ToString() + " GB" + "\n";
+
+            dblFree = Math.Round(Convert.ToDouble(disk["FreeSpace"]) / 1024 / 1024 / 1024);
+            //1 KB = 1024 - KiloByte
+            //1 MB = 1024 ^ 2 - MegaByte
+            //1 GB = 1024 ^ 3 - GigaByte
+            //1 TB = 1024 ^ 4 - TeraByte
+            //1 PB = 1024 ^ 5 - PetaByte
+            //1 EB = 1024 ^ 6 - ExaByte
+            //1 ZB = 1024 ^ 7 - ZettaByte
+            //1 YB = 1024 ^ 8 - YottaByte
+            //1 BB = 1024 ^ 9 - BrontoByte
+
+            richTextBox1.Text += "Hard Disk Free Space = " + dblFree.ToString() + " GB\n";
+
+            switch (media_type)
+            {
+                case 0:
+                    richTextBox1.Text += "MediaType 無資料\n"; break;
+                case 1:
+                    richTextBox1.Text += "5¼-Inch Floppy Disk (1), 5 1/4-Inch Floppy Disk - 1.2 MB - 512 bytes/sector." + "\n"; break;
+                case 2:
+                    richTextBox1.Text += "3½-Inch Floppy Disk (2), 3 1/2-Inch Floppy Disk - 1.44 MB -512 bytes/sector." + "\n"; break;
+                case 3:
+                    richTextBox1.Text += "3½-Inch Floppy Disk (3), 3 1/2-Inch Floppy Disk - 2.88 MB - 512 bytes/sector." + "\n"; break;
+                case 4:
+                    richTextBox1.Text += "3½-Inch Floppy Disk (4), 3 1/2-Inch Floppy Disk - 20.8 MB - 512 bytes/sector." + "\n"; break;
+                case 5:
+                    richTextBox1.Text += "3½-Inch Floppy Disk (5), 3 1/2-Inch Floppy Disk - 720 KB - 512 bytes/sector." + "\n"; break;
+                case 6:
+                    richTextBox1.Text += "5¼-Inch Floppy Disk (6), 5 1/4-Inch Floppy Disk - 360 KB - 512 bytes/sector." + "\n"; break;
+                case 7:
+                    richTextBox1.Text += "5¼-Inch Floppy Disk (7), 5 1/4-Inch Floppy Disk - 320 KB - 512 bytes/sector." + "\n"; break;
+                case 8:
+                    richTextBox1.Text += "5¼-Inch Floppy Disk (8), 5 1/4-Inch Floppy Disk - 320 KB - 1024 bytes/sector." + "\n"; break;
+                case 9:
+                    richTextBox1.Text += "5¼-Inch Floppy Disk (9), 5 1/4-Inch Floppy Disk - 180 KB - 512 bytes/sector." + "\n"; break;
+                case 10:
+                    richTextBox1.Text += "5¼-Inch Floppy Disk (10), 5 1/4-Inch Floppy Disk - 160 KB - 512 bytes/sector." + "\n"; break;
+                case 11:
+                    richTextBox1.Text += "Removable media other than floppy (11)." + "\n"; break;
+                case 12:
+                    richTextBox1.Text += "Fixed hard disk media (12)." + "\n"; break;
+                case 13:
+                    richTextBox1.Text += "3½-Inch Floppy Disk (13), 3 1/2-Inch Floppy Disk - 120 MB - 512 bytes/sector." + "\n"; break;
+                case 14:
+                    richTextBox1.Text += "3½-Inch Floppy Disk (14), 3 1/2-Inch Floppy Disk - 640 KB - 512 bytes/sector." + "\n"; break;
+                case 15:
+                    richTextBox1.Text += "5¼-Inch Floppy Disk (15), 5 1/4-Inch Floppy Disk - 640 KB - 512 bytes/sector." + "\n"; break;
+                case 16:
+                    richTextBox1.Text += "5¼-Inch Floppy Disk (16), 5 1/4-Inch Floppy Disk - 720 KB - 512 bytes/sector." + "\n"; break;
+                case 17:
+                    richTextBox1.Text += "3½-Inch Floppy Disk (17), 3 1/2-Inch Floppy Disk - 1.2 MB - 512 bytes/sector." + "\n"; break;
+                case 18:
+                    richTextBox1.Text += "3½-Inch Floppy Disk (18), 3 1/2-Inch Floppy Disk - 1.23 MB - 1024 bytes/sector." + "\n"; break;
+                case 19:
+                    richTextBox1.Text += "5¼-Inch Floppy Disk (19), 5 1/4-Inch Floppy Disk - 1.23 MB - 1024 bytes/sector." + "\n"; break;
+                case 20:
+                    richTextBox1.Text += "3½-Inch Floppy Disk (20), 3 1/2-Inch Floppy Disk - 128 MB - 512 bytes/sector." + "\n"; break;
+                case 21:
+                    richTextBox1.Text += "3½-Inch Floppy Disk (21), 3 1/2-Inch Floppy Disk - 230 MB - 512 bytes/sector." + "\n"; break;
+                case 22:
+                    richTextBox1.Text += "8-Inch Floppy Disk (22), 8-Inch Floppy Disk - 256 KB - 128 bytes/sector." + "\n"; break;
+                default:
+                    richTextBox1.Text += "Media type could not be determined." + "\n"; break;
+            }
+
+            /*  無資料
+            //richTextBox1.Text += "Size: " + disk["Availability"].ToString() + "\n";
+            //richTextBox1.Text += "Size: " + disk["BlockSize"].ToString() + "\n";
+            //richTextBox1.Text += "Size: " + disk["ConfigManagerErrorCode"].ToString() + "\n";
+            //richTextBox1.Text += "Size: " + disk["LastErrorCode"].ToString() + "\n";
+            //richTextBox1.Text += "Size: " + disk["NumberOfBlocks"].ToString() + "\n";
+            //richTextBox1.Text += "Size: " + disk["PowerManagementCapabilities[]"].ToString() + "\n";
+            //richTextBox1.Text += "Size: " + disk["StatusInfo"].ToString() + "\n";
+            */
+            /*  無資料
+            richTextBox1.Text += "InstallDate: " + disk["InstallDate"] + "\n";
+            */
+
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -1109,6 +1404,32 @@ namespace vcs_WMI__new
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+            richTextBox1.Text += "\n獲取顯示卡資訊\n";
+            richTextBox1.Text += "\nWin32_VideoController\n";
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
+            //ManagementObjectSearcher mos = new ManagementObjectSearcher(@"root\CIMV2", "SELECT * FROM Win32_VideoController");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "顯示設備訊息\n";
+                richTextBox1.Text += "名稱： " + mo["Name"].ToString() + "\n";//顯示設備名稱
+                richTextBox1.Text += "設備ID" + mo["DeviceID"].ToString() + "\n";
+                richTextBox1.Text += "PNPDeviceID： " + mo["PNPDeviceID"].ToString() + "\n";//顯示設備的PNPDeviceID
+                richTextBox1.Text += "驅動程序文件： " + mo["InstalledDisplayDrivers"].ToString() + "\n";//顯示設備的驅動程序文件
+                richTextBox1.Text += "驅動版本號： " + mo["DriverVersion"].ToString() + "\n";//顯示設備的驅動版本號
+                richTextBox1.Text += "顯示處理器： " + mo["VideoProcessor"].ToString() + "\n";//顯示設備的顯示處理器
+                richTextBox1.Text += "最大更新率： " + mo["MaxRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
+                richTextBox1.Text += "最小更新率： " + mo["MinRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
+                richTextBox1.Text += "顯示設備目前顯示模式： " + mo["VideoModeDescription"].ToString() + "\n";//顯示設備目前顯示模式
+                richTextBox1.Text += "配接器相容性 " + mo["AdapterCompatibility"].ToString() + "\n";
+                richTextBox1.Text += "配接器類型 " + mo["AdapterDACType"].ToString() + "\n";
+                richTextBox1.Text += "字幕" + mo["Caption"].ToString() + "\n";
+                richTextBox1.Text += "目前比特每圖元" + mo["CurrentBitsPerPixel"].ToString() + "\n";
+                richTextBox1.Text += "目前的水準解析度" + mo["CurrentHorizontalResolution"].ToString() + "\n";
+                richTextBox1.Text += "描述" + mo["Description"].ToString() + "\n";
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
             richTextBox1.Text += "\n聲卡PNPDeviceID\n";
             richTextBox1.Text += "\nWin32_SoundDevice\n";
             ManagementObjectSearcher mos2 = new ManagementObjectSearcher("SELECT * FROM Win32_SoundDevice");
@@ -1116,6 +1437,18 @@ namespace vcs_WMI__new
             {
                 richTextBox1.Text += "聲卡PNPDeviceID：" + mo["PNPDeviceID"].ToString() + "\n";
             }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            /*
+            richTextBox1.Text += "\n獲取音效卡資訊\n";
+            richTextBox1.Text += "\nWin32_SoundDevice\n";
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_SoundDevice");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "音效設備名稱：" + mo["ProductName"].ToString() + "\n"; //在当前文本框中显示声音设备的名称
+                richTextBox1.Text += "PNPDeviceID：" + mo["PNPDeviceID"].ToString() + "\n";//在当前文本框中显示声音设备的PNPDeviceID
+            }
+            */
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -1222,6 +1555,20 @@ namespace vcs_WMI__new
         {
             //用WMI取出作業系統資訊1
             get_wmi_os_info();
+
+            //取得作業系統安裝時間
+            ObjectQuery MyQuery = new ObjectQuery("SELECT * FROM Win32_OperatingSystem");
+            ManagementScope MyScope = new ManagementScope();
+            ManagementObjectSearcher MySearch = new ManagementObjectSearcher(MyScope, MyQuery);
+            ManagementObjectCollection MyCollection = MySearch.Get();
+            string StrInfo = "";
+            foreach (ManagementObject MyObject in MyCollection)
+            {
+                StrInfo = MyObject.GetText(TextFormat.Mof);
+            }
+            string InstallDate = StrInfo.Substring(StrInfo.LastIndexOf("InstallDate") + 15, 14);
+
+            richTextBox1.Text += "取得作業系統安裝時間 :\t" + InstallDate + "\n";
         }
 
         void get_wmi_os_info()
@@ -1513,6 +1860,70 @@ namespace vcs_WMI__new
 
         private void button29_Click(object sender, EventArgs e)
         {
+            //Win32_LogicalDisk
+
+            richTextBox1.Text += "\n獲取硬碟分區資訊\n";
+            richTextBox1.Text += "\nWin32_LogicalDisk\n";
+
+            richTextBox1.Text += "\n指定邏輯磁碟機\n";
+
+            //寫法一，直接寫D槽
+            //ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDisk WHERE DeviceID = 'D:'");
+
+            //寫法二，用變數
+            string strDrive = "C:"; // 指定C: 邏輯磁碟機
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDisk WHERE DeviceID = " + "\"" + strDrive + "\"");
+
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "磁片類型: " + mo["Description"].ToString() + "\n";
+                richTextBox1.Text += "分區類型: " + mo["FileSystem"].ToString() + "\n";
+                richTextBox1.Text += "可用空間: " + mo["FreeSpace"].ToString() + "\n";
+                richTextBox1.Text += "實際大小: " + mo["Size"].ToString() + "\n";
+                richTextBox1.Text += "Name: " + mo["Name"].ToString() + "\n";
+                richTextBox1.Text += "VolumeSerialNumber: " + mo["VolumeSerialNumber"] + "\n";
+                richTextBox1.Text += "DeviceID: " + mo["DeviceID"] + "\n";
+            }
+
+            richTextBox1.Text += "\n所有硬碟\n";
+            ManagementObjectSearcher mos2 = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDisk");
+            foreach (ManagementObject mo2 in mos2.Get())
+            {
+                // 取得磁碟Volumne 名稱跟序號
+                richTextBox1.Text += "Name: " + mo2["Name"].ToString() + "\t";
+                richTextBox1.Text += "VolumeSerialNumber: " + mo2["VolumeSerialNumber"] + "\n";
+            }
+        }
+
+        private void bt_get_Click(object sender, EventArgs e)
+        {
+            string win32_command;
+
+            richTextBox1.Text += "選擇了： " + comboBox1.SelectedItem + "\n";
+
+            win32_command = "SELECT * FROM " + comboBox1.SelectedItem;
+
+            //richTextBox1.Text += "\n獲取硬碟資訊\n";
+            //richTextBox1.Text += "\nWin32_DiskDrive\n";
+            ManagementObjectSearcher mos = new ManagementObjectSearcher(win32_command);
+
+            foreach (ManagementObject mo in mos.Get())
+            {
+                //印出所有參數名稱及內容
+                foreach (var prop in mo.Properties)
+                {
+                    richTextBox1.Text += prop.Name + ": " + prop.Value + "\n";
+
+                    ListViewItem i1 = new ListViewItem(prop.Name);
+                    ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+                    sub_i1a.Text = (prop.Value == null) ? String.Empty : prop.Value.ToString();
+                    i1.SubItems.Add(sub_i1a);
+                    listView1.Items.Add(i1);
+                }
+            }
+            //設置ListView最後一行可見
+            listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+
         }
     }
 

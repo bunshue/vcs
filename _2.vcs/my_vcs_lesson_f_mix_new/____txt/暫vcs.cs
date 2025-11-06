@@ -1,4 +1,25 @@
 ﻿
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+            ListViewItem i1 = new ListViewItem("aaaaaaa");
+            ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+            sub_i1a.Text = "bbbbb";
+            i1.SubItems.Add(sub_i1a);
+            listView1.Items.Add(i1);
+
+
+            //設置ListView最後一行可見
+            listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -7,9 +28,8 @@ splitContainer1 預設兩個Panel, Panel1 和 Panel2，Dock 選 DockStyle.Fill
 放控件至Panel中，Dock 選 DockStyle.Fill
 
 
-
-this.TreeViewFile.Dock = System.Windows.Forms.DockStyle.Fill;
-
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
 
 
@@ -38,16 +58,15 @@ vcs_ListView3_ContextMenuStrip
         }
 
 
-            //設定表單Client的大小
-            this.SetClientSizeCore(300, 300);
-
-
-
-
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
 
+this.TreeViewFile.Dock = System.Windows.Forms.DockStyle.Fill;
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
 
 TreeView 加 圖片icon設定
@@ -78,28 +97,9 @@ TreeView 加 圖片icon設定
 			孫休
 			孫亮
 
-
-父節點個數 tv.Nodes.Count = 3
----------------------------------------------------
-Model: CT1000MX CT1000MX500SSD1 SCSI Disk Device
-Interface: IDE
-Serial#: 2109E5820A34        
----------------------------------------------------
-Model: ST2000DM ST2000DM001-1ER1 SCSI Disk Device
-Interface: IDE
-Serial#:             W4Z3HVF8
----------------------------------------------------
-Model: Mass Storage Device USB Device
-Interface: USB
-Serial#: 
----------------------------------------------------
-
-
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-
-vcs
 //把控件當引數傳遞
 result = image_processing19(pictureBox1, cx, cy, R, 150F);
 
@@ -123,7 +123,6 @@ String ccc = String.Format("{0,-30} | {1,-20} | {2,5}", "aaaa", "b", 3);
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
 
                     Color pt;
                     x_st = WW / 2 - ww / 2 + flag_right_left_cnt * awb_step + flag_right_left_point_cnt;
@@ -164,11 +163,7 @@ richTextBox1.Text += "----------------------------------------------------------
             this.ShowInTaskbar = false;
         }
 
-
-vcs
 vcs 之 radioButton 可以用Image, Text設為空
-
-
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -220,12 +215,8 @@ vcs
                 richTextBox1.Text += "取得檔案 : " + filename + "\n";
             }
 
-
-
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
 
 /*
 //圖片檔案 => Image => MemoryStream(ms) => 拜列
@@ -239,7 +230,6 @@ richTextBox1.Text += byte_data[i].ToString("D03");
 # new_image = old_image * 2 - contrast + brightness
 
  output = image * (contrast / 127 + 1) - contrast + brightness
-
 
     //內存法
     public class LockBitmap

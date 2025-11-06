@@ -5,7 +5,7 @@ using System.Text;
 
 using System.Runtime.InteropServices;
 
-namespace vcs_System1
+namespace vcs_WMI__new
 {
     public static class NumberExtensions
     {

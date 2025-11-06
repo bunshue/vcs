@@ -423,53 +423,10 @@ namespace vcs_System1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //取得作業系統安裝時間
-            ObjectQuery MyQuery = new ObjectQuery("SELECT * FROM Win32_OperatingSystem");
-            ManagementScope MyScope = new ManagementScope();
-            ManagementObjectSearcher MySearch = new ManagementObjectSearcher(MyScope, MyQuery);
-            ManagementObjectCollection MyCollection = MySearch.Get();
-            string StrInfo = "";
-            foreach (ManagementObject MyObject in MyCollection)
-            {
-                StrInfo = MyObject.GetText(TextFormat.Mof);
-            }
-            string InstallDate = StrInfo.Substring(StrInfo.LastIndexOf("InstallDate") + 15, 14);
-
-            richTextBox1.Text += "取得作業系統安裝時間 :\t" + InstallDate + "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //取得記憶體狀態2
-            ManagementObjectSearcher os_searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
-
-            foreach (ManagementObject mobj in os_searcher.Get())
-            {
-                GetInfo(mobj, "FreePhysicalMemory");
-                GetInfo(mobj, "FreeSpaceInPagingFiles");
-                GetInfo(mobj, "FreeVirtualMemory");
-                GetInfo(mobj, "SizeStoredInPagingFiles");
-                GetInfo(mobj, "TotalSwapSpaceSize");
-                GetInfo(mobj, "TotalVirtualMemorySize");
-                GetInfo(mobj, "TotalVisibleMemorySize");
-            }
-        }
-
-        // Add information about the property to the ListView.
-        private void GetInfo(ManagementObject mobj, string property_name)
-        {
-            object property_obj = mobj[property_name];
-            if (property_obj == null)
-            {
-                //lvwInfo.AddRow(property_name, "???");
-                richTextBox1.Text += property_name + "\t\t???\n";
-            }
-            else
-            {
-                ulong property_value = (ulong)property_obj * 1024;
-                //lvwInfo.AddRow(property_name, property_value.ToFileSizeApi());
-                richTextBox1.Text += property_name + "\t\t" + property_value.ToFileSizeApi() + "\n";
-            }
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -689,8 +646,8 @@ namespace vcs_System1
 
         private void button18_Click(object sender, EventArgs e)
         {
-            Environment 類別
-            rihTextBox1.Text += "Environment 類別\n";
+            //Environment 類別
+            richTextBox1.Text += "Environment 類別\n";
 
             richTextBox1.Text += "處理序的命令列：" + Environment.CommandLine + "\n";
             richTextBox1.Text += "工作目錄的完整路徑：" + Environment.CurrentDirectory + "\n";
@@ -858,57 +815,6 @@ namespace vcs_System1
 
         private void button31_Click(object sender, EventArgs e)
         {
-            // part 1
-            ListView lv = new ListView();
-            lv.Left = 900;
-            lv.Top = 680;
-            lv.Width = 360;
-            lv.Height = 380;
-            lv.BackColor = Color.Pink;
-            this.Controls.Add(lv);
-            this.Size = new Size(this.Size.Width + 330, this.Size.Height);
-
-            lv.View = View.Details;//設定控制元件顯示方式
-            lv.GridLines = true;//是否顯示網格
-            lv.Columns.Add("環境變數", 150, HorizontalAlignment.Left);//新增列標頭
-            lv.Columns.Add("變數值", 150, HorizontalAlignment.Left);//新增列標頭
-            ListViewItem myItem;//建立ListViewItem對像
-            //取得系統環境變數及對應的變數值，並顯示在ListView控制元件中
-            foreach (DictionaryEntry DEntry in Environment.GetEnvironmentVariables())
-            {
-                myItem = new ListViewItem(DEntry.Key.ToString(), 0);//建立ListViewItem對像
-                myItem.SubItems.Add(DEntry.Value.ToString());//新增子項集合
-                lv.Items.Add(myItem);//將子項集合新增到控制元件中
-            }
-
-            // part 2
-            ManagementClass mc = new ManagementClass("win32_processor"); //建立ManagementClass物件
-            ManagementObjectCollection moc = mc.GetInstances();          //取得CPU訊息
-
-            foreach (ManagementObject mo in moc)
-            {
-                richTextBox1.Text += "CPU編號\t\t" + mo["processorid"].ToString() + "\n";//取得CPU編號
-            }
-
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("Select * From Win32_Processor"); //查詢CPU訊息
-
-            foreach (ManagementObject mo in mos.Get())
-            {
-                richTextBox1.Text += "CPU製造商名稱\t\t" + mo["Manufacturer"].ToString() + "\n";//取得CPU製造商名稱
-                richTextBox1.Text += "CPU版本號\t\t" + mo["Version"].ToString() + "\n";     //取得CPU版本號
-                richTextBox1.Text += "CPU產品名稱\t\t" + mo["Name"].ToString() + "\n";        //取得CPU產品名稱
-            }
-
-            // part 3
-            SelectQuery query = new SelectQuery("Select * from Win32_BaseBoard"); // 查詢主板
-            ManagementObjectSearcher dev = new ManagementObjectSearcher(query);   // 執行query
-            ManagementObjectCollection.ManagementObjectEnumerator enumerator = dev.Get().GetEnumerator();
-            enumerator.MoveNext();
-            ManagementBaseObject mbo = enumerator.Current;                    // 取得目前主板
-            richTextBox1.Text += "主板編號\t\t" + mbo.GetPropertyValue("SerialNumber").ToString() + "\n";  //取得主板編號
-            richTextBox1.Text += "主板製造商\t\t" + mbo.GetPropertyValue("Manufacturer").ToString() + "\n";  //取得主板製造商
-            richTextBox1.Text += "主板型號\t\t" + mbo.GetPropertyValue("Name").ToString() + "\n";          //取得主板型號
-
         }
 
         private void button32_Click(object sender, EventArgs e)

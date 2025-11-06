@@ -60,6 +60,9 @@
             this.button27 = new System.Windows.Forms.Button();
             this.button28 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.bt_get = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // button1
@@ -76,9 +79,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(763, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(626, 60);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(393, 788);
+            this.richTextBox1.Size = new System.Drawing.Size(300, 300);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "春雁\t王恭\n春风一夜到衡阳，楚水燕山万里长。\n莫道春来便归去，江南虽好是他乡。\n\nWMI(Windows Management Instrumentation)\n" +
                 "1. 專案->參考->右鍵->加入參考->.NET->選System.Management->確定\n2. using System.Management;\n";
@@ -108,9 +111,9 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1097, 748);
+            this.bt_clear.Location = new System.Drawing.Point(831, 305);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(74, 47);
+            this.bt_clear.Size = new System.Drawing.Size(70, 40);
             this.bt_clear.TabIndex = 4;
             this.bt_clear.Text = "clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -129,11 +132,12 @@
             // 
             // button4
             // 
-            this.button4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button4.Location = new System.Drawing.Point(12, 275);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 70);
             this.button4.TabIndex = 6;
+            this.button4.Text = "取得CPU編號、硬盤編號等系統有關環境、屬性";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -155,6 +159,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 70);
             this.button6.TabIndex = 8;
+            this.button6.Text = "取得記憶體狀態";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -176,6 +181,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 70);
             this.button8.TabIndex = 10;
+            this.button8.Text = "取得系統相關資訊";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -241,6 +247,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 70);
             this.button14.TabIndex = 15;
+            this.button14.Text = "獲取硬碟資訊";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -262,6 +269,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 70);
             this.button16.TabIndex = 17;
+            this.button16.Text = "Win32_LogicalDisk";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -393,6 +401,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(200, 70);
             this.button28.TabIndex = 28;
+            this.button28.Text = "Win32_LogicalDisk";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -403,14 +412,47 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(200, 70);
             this.button29.TabIndex = 29;
+            this.button29.Text = "Win32_LogicalDisk";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(626, 12);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(315, 27);
+            this.comboBox1.TabIndex = 30;
+            // 
+            // bt_get
+            // 
+            this.bt_get.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_get.Location = new System.Drawing.Point(947, 12);
+            this.bt_get.Name = "bt_get";
+            this.bt_get.Size = new System.Drawing.Size(70, 30);
+            this.bt_get.TabIndex = 31;
+            this.bt_get.Text = "get";
+            this.bt_get.UseVisualStyleBackColor = true;
+            this.bt_get.Click += new System.EventHandler(this.bt_get_Click);
+            // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point(626, 366);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(150, 150);
+            this.listView1.TabIndex = 32;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1183, 812);
+            this.ClientSize = new System.Drawing.Size(1024, 682);
+            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.bt_get);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
             this.Controls.Add(this.button27);
@@ -484,6 +526,9 @@
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.Button button29;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button bt_get;
+        private System.Windows.Forms.ListView listView1;
     }
 }
 

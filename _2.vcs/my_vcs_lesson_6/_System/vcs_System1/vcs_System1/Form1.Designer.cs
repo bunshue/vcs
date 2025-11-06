@@ -149,7 +149,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(240, 50);
             this.button5.TabIndex = 5;
-            this.button5.Text = "取得作業系統安裝時間";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -160,7 +159,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(240, 50);
             this.button6.TabIndex = 6;
-            this.button6.Text = "取得記憶體狀態2";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -442,7 +440,6 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(240, 50);
             this.button31.TabIndex = 48;
-            this.button31.Text = "取得系統相關資訊";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
