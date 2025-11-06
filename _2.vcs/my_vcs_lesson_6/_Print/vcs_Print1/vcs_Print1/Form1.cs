@@ -247,7 +247,7 @@ namespace vcs_Print1
             richTextBox1.Text += "列印一個純文字檔\n";
             // The text contained in the file.
             string FileContents;
-            string filename = @@"D:\_git\vcs\_1.data\______test_files1\article.txt";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\article.txt";
 
             // Read the file's contents.
             try
@@ -1285,7 +1285,7 @@ namespace vcs_Print1
                 {"Cindy Carruthers", "352 Cherry Ct", "Chicago", "IL", "35271"},
                 {"Dean Dent", "4526 Deerfield Dr", "Denver", "CO", "47848"},
             };
-        
+
         // Print the document's page.
         // Note that this version doesn't handle multiple pages.
         private void printDocument_grid2_PrintPage(object sender, PrintPageEventArgs e)
@@ -1452,10 +1452,8 @@ namespace vcs_Print1
                 "Door Open", "Server_Unknown", "Power Save"};
 
             // Get a ManagementObjectSearcher for the printer.
-            string query = "SELECT * FROM Win32_Printer WHERE Name='" +
-                cboPrinters.SelectedItem.ToString() + "'";
-            ManagementObjectSearcher searcher =
-                new ManagementObjectSearcher(query);
+            string query = "SELECT * FROM Win32_Printer WHERE Name='" + cboPrinters.SelectedItem.ToString() + "'";
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
 
             // Get the ManagementObjectCollection representing
             // the result of the WMI query. Loop through its
@@ -1596,8 +1594,5 @@ namespace vcs_Print1
             // Start with page 0.
             m_NextPage = 0;
         }
-
-
-
     }
 }

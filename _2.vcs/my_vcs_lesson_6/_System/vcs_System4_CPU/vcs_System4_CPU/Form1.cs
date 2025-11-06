@@ -18,7 +18,6 @@ namespace vcs_System4_CPU
     {
         Process[] MyProcesses;
         Thread td;
-        int mheight = 0;
 
         public Form1()
         {
@@ -27,24 +26,14 @@ namespace vcs_System4_CPU
 
         private void myUser()
         {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from Win32_Processor");
-            foreach (ManagementObject myobject in searcher.Get())
-            {
-                tssluse.Text = myobject["LoadPercentage"].ToString()+" %";
-                lblCPU.Text = myobject["LoadPercentage"].ToString() + " %";
-                mheight = Convert.ToInt32(myobject["LoadPercentage"].ToString());
-                if (mheight == 100)
-                    panel3.Height = 100;
-                CreateImage();
-                Memory();
-            }
+            Memory();
         }
 
         private void Memory()
         {
             Microsoft.VisualBasic.Devices.Computer myInfo = new Microsoft.VisualBasic.Devices.Computer();
             //获取物理内存总量
-            pbMemorySum.Maximum = Convert.ToInt32(myInfo.Info.TotalPhysicalMemory/1024/1024);
+            pbMemorySum.Maximum = Convert.ToInt32(myInfo.Info.TotalPhysicalMemory / 1024 / 1024);
             pbMemorySum.Value = Convert.ToInt32(myInfo.Info.TotalPhysicalMemory / 1024 / 1024);
             lblSum.Text = (myInfo.Info.TotalPhysicalMemory / 1024).ToString();
             //获取可用物理内存总量
@@ -57,7 +46,7 @@ namespace vcs_System4_CPU
             lblVinfo.Text = (myInfo.Info.TotalVirtualMemory / 1024).ToString();
             //获取可用虚拟内存总量
             pbVmemoryuse.Maximum = Convert.ToInt32(myInfo.Info.TotalVirtualMemory / 1024 / 1024);
-            pbVmemoryuse.Value = Convert.ToInt32(myInfo.Info.AvailableVirtualMemory/ 1024 / 1024);
+            pbVmemoryuse.Value = Convert.ToInt32(myInfo.Info.AvailableVirtualMemory / 1024 / 1024);
             lblVuse.Text = (myInfo.Info.AvailableVirtualMemory / 1024).ToString();
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -83,18 +72,21 @@ namespace vcs_System4_CPU
                 td.Abort();
             }
         }
-
-        private void CreateImage()
-        {
-            int i=panel3.Height/100;
-            Bitmap image = new Bitmap(panel3.Width,panel3.Height);
-            //创建Graphics类对象
-            Graphics g = Graphics.FromImage(image);
-            g.Clear(Color.Green);
-            SolidBrush mybrush = new SolidBrush(Color.Lime);
-            g.FillRectangle(mybrush,0,panel3.Height-mheight*i,26,mheight*i);
-            panel3.BackgroundImage = image;
-
-        }
     }
 }
+
+
+//6060
+//------------------------------------------------------------  # 60個
+
+//3030
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//richTextBox1.Text += "---------------\n";  // 15個
+
+

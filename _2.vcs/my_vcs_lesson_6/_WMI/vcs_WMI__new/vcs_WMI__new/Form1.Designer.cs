@@ -241,7 +241,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 70);
             this.button14.TabIndex = 15;
-            this.button14.Text = "獲得硬盤空間";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -350,6 +349,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(200, 70);
             this.button24.TabIndex = 25;
+            this.button24.Text = "Win32_ComputerSystem";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -360,6 +360,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(200, 70);
             this.button25.TabIndex = 26;
+            this.button25.Text = "獲取系統進程的用戶名";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -370,6 +371,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(200, 70);
             this.button26.TabIndex = 26;
+            this.button26.Text = "aaa";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -380,6 +382,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(200, 70);
             this.button27.TabIndex = 27;
+            this.button27.Text = "Win32_Processor";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -400,7 +403,6 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(200, 70);
             this.button29.TabIndex = 29;
-            this.button29.Text = "新進待測";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 

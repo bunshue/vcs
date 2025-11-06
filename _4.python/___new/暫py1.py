@@ -1,4 +1,6 @@
 
+
+
 hist_b = cv2.calcHist([image0], [0], None, [256], [0, 256])
 hist_g = cv2.calcHist([image0], [1], None, [256], [0, 256])
 hist_r = cv2.calcHist([image0], [2], None, [256], [0, 256])
@@ -24,6 +26,8 @@ cur_pid = os.getpid()
 print('cur_pid = ', cur_pid)
 
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 filename = "aaaa.csv"
@@ -41,6 +45,8 @@ print("存檔檔案 :", filename)
         writer.writerow(columns[1:5])
         writer.writerows(data)
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 程式內不能用 \　Backslash (反斜線)

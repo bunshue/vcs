@@ -679,10 +679,6 @@ namespace vcs_System_msinfo32_1
 
         }
 
-
-
-
-
         //獲取CPU參數
         /// <summary>
         /// 獲取CPU參數
@@ -1079,9 +1075,5 @@ namespace vcs_System_msinfo32_1
             //
             return ComputerInfoList;
         }
-
-
-
-
     }
 }

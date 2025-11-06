@@ -14,7 +14,7 @@ using System.Reflection;    //for Assembly
 using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
 using System.Threading;
-using System.Management;    //for ManagementObjectSearcher
+using System.Management;
 using System.Net;
 using System.Collections;   //for DictionaryEntry, HashTable
 using System.Text.RegularExpressions;
@@ -132,11 +132,10 @@ namespace vcs_Mix02
             female1.mary.salary = 23000;
             female1.mary.skin = "黃色";
             female1.hair = "直髮";
-            richTextBox1.Text += "年齡："+ female1.mary.age+"\n";
-            richTextBox1.Text += "收入："+ female1.mary.salary+"\n";
-            richTextBox1.Text += "膚色："+ female1.mary.skin+"\n";
-            richTextBox1.Text += "髮型："+ female1.hair+"\n";
-
+            richTextBox1.Text += "年齡：" + female1.mary.age + "\n";
+            richTextBox1.Text += "收入：" + female1.mary.salary + "\n";
+            richTextBox1.Text += "膚色：" + female1.mary.skin + "\n";
+            richTextBox1.Text += "髮型：" + female1.hair + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -224,11 +223,49 @@ namespace vcs_Mix02
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            string filename = Path.Combine(Application.StartupPath, @"..\..\Form1.cs");
+
+            richTextBox1.Text += "filename old = " + filename + "\n";
+
+            string d_name = Path.GetDirectoryName(filename);
+            string f_name = Path.GetFileNameWithoutExtension(filename);
+            string ext_name = Path.GetExtension(filename);
+
+            richTextBox1.Text += "取得 d_name : " + d_name + "\n";
+            richTextBox1.Text += "取得 f_name : " + f_name + "\n";
+            richTextBox1.Text += "取得 ext_name : " + ext_name + "\n";
+
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU";
+            var dinfo = new DirectoryInfo(foldername);
+            var files = dinfo.GetFiles().OrderBy(p => p.Name).ToArray();
+            foreach (var file in files)
+            {
+                if (file.FullName.Contains("id_card") == true)
+                {
+                    Console.WriteLine(file.FullName);
+
+                }
+            }
+
+
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            richTextBox1.Text += "一維陣列的寫法\n";
+            string[] names = new string[] { "鼠", "牛", "虎", "兔", "龍" };
+            richTextBox1.Text += "len = " + names.Length.ToString() + "\n";
+
+            for (int i = names.GetLowerBound(0); i <= names.GetUpperBound(0); i++)
+            {
+                richTextBox1.Text += names[i] + "\n";
+            }
+
+            // 二維陣列的寫法
+            // byte[,] newdata = new byte[Height, Width];
+
         }
 
         //多筆資料比較
@@ -953,3 +990,18 @@ namespace vcs_Mix02
         }
     }
 }
+
+//6060
+//------------------------------------------------------------  # 60個
+
+//3030
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//richTextBox1.Text += "---------------\n";  // 15個
+
+
