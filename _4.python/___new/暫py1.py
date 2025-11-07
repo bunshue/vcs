@@ -1,6 +1,525 @@
 
 
 
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+URL = "https://movies.yahoo.com.tw/movie_intheaters.html/?page={0}"
+
+ua = UserAgent()
+headers = {"user-agent": ua.random}
+
+all_movies = [["中文片名", "英文片名", "期待度", "海報圖片", "上映日"]]
+for page in range(1, 11):
+    url = URL.format(page)
+    print(url)
+
+
+from fake_useragent import UserAgent
+
+URL = "https://movies.yahoo.com.tw/movie_intheaters.html/?page={0}"
+
+ua = UserAgent()
+headers = {"user-agent": ua.random}
+r = requests.get(url, headers=headers)
+if r.status_code == requests.codes.ok:
+    soup = BeautifulSoup(r.text, "lxml")
+    print(soup)
+
+
+with open("movies.csv", "w+", newline="", encoding="utf-8") as fp:
+    writer = csv.writer(fp)
+    for item in all_movies:
+        writer.writerow(item)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+from fake_useragent import UserAgent
+
+url = "https://movies.yahoo.com.tw/movie_intheaters.html/?page=1"
+ua = UserAgent()
+headers = {"user-agent": ua.random}
+
+all_movies = [["中文片名", "英文片名", "期待度", "海報圖片", "上映日"]]
+page = 1
+while True:
+    print("抓取: 第" + str(page) + "頁 網路資料中...")
+    page = page + 1
+    r = requests.get(url, headers=headers)
+    if r.status_code == requests.codes.ok:
+        soup = BeautifulSoup(r.text, "lxml")
+        
+with open("movies2.csv", "w+", newline="", encoding="utf-8") as fp:
+    writer = csv.writer(fp)
+    for item in all_movies:
+        writer.writerow(item)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 要用到 google sheet的
+def auth_gss_client(path, scopes):  # 建立憑證
+    credentials = ServiceAccountCredentials.from_json_keyfile_name(path, scopes)
+    return gspread.authorize(credentials)
+
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+from time import sleep
+
+auth_json_path = "D:/_git/vcs/_1.data/______test_files1/_key/PythonUpload.json"
+gss_scopes = ["https://spreadsheets.google.com/feeds"]
+gss_client = auth_gss_client(auth_json_path, gss_scopes)  # 連線
+
+spreadsheet_key = "您自己的key"
+sheet = gss_client.open_by_key(spreadsheet_key).sheet1  # 開啟工作表
+sheet.clear()  # 清除工作表內容
+
+
+    """ skip
+    # 儲存 Google 試算表
+    print("資料寫入雲端 Google 試算表中，請等侯幾分鐘!")
+    listtitle = ["分類", "書名", "圖片網址", "作者", "出版社", "出版日期", "優惠價", "內容"]
+    sheet.append_row(listtitle)  # 標題
+    for item1 in list1:  # 資料
+        sheet.append_row(item1)
+        sleep(1)  # 必須加上適當的 delay
+    """
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 同一df畫出3圖
+df = pd.DataFrame(
+    [[250, 320, 300, 312, 280], [280, 300, 280, 290, 310], [220, 280, 250, 305, 250]],
+    index=["北部", "中部", "南部"],
+    columns=[2015, 2016, 2017, 2018, 2019],
+)
+g1 = df.plot(kind="bar", title="長條圖", figsize=[10, 5])
+g2 = df.plot(kind="barh", title="橫條圖", figsize=[10, 5])
+g3 = df.plot(kind="bar", stacked=True, title="堆疊圖", figsize=[10, 5])
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 同一df將三筆資料畫在一圖
+
+df = pd.DataFrame(
+    [[250, 320, 300, 312, 280], [280, 300, 280, 290, 310], [220, 280, 250, 305, 250]],
+    index=["北部", "中部", "南部"],
+    columns=[2015, 2016, 2017, 2018, 2019],
+)
+g1 = df.iloc[0].plot(
+    kind="line",
+    legend=True,
+    xticks=range(2015, 2020),
+    title="公司分區年度銷售表",
+    figsize=[10, 5],
+)
+g1 = df.iloc[1].plot(kind="line", legend=True, xticks=range(2015, 2020))
+g1 = df.iloc[2].plot(kind="line", legend=True, xticks=range(2015, 2020))
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+df = pd.DataFrame(
+    [[250, 320, 300, 312, 280], [280, 300, 280, 290, 310], [220, 280, 250, 305, 250]],
+    index=["北部", "中部", "南部"],
+    columns=[2015, 2016, 2017, 2018, 2019],
+)
+df.plot(kind="pie", subplots=True, figsize=[16, 6])
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+url = "https://www.tiobe.com/tiobe-index/"
+tables = pd.read_html(url, header=0, keep_default_na=False)
+print(tables[0])
+
+print("------------------------------------------------------------")  # 60個
+
+from pathlib import Path
+
+infolder = "D:/_git/vcs/_1.data/______test_files1/_mp3"
+ext = "*.mp3"
+
+filelist = []
+for p in Path(infolder).rglob(ext):  # 將這個資料夾以及子資料夾的所有檔案
+    filelist.append(str(p))  # 新增至列表
+for filename in sorted(filelist):  # 再替每個檔案排序
+    print("檔案: ",filename)
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# randrange 過期
+    r = random.randrange(0, 256)  # 不含尾
+    g = random.randrange(0, 256)  # 不含尾
+    b = random.randrange(0, 256)  # 不含尾
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+logger.info("sending %s = %s", metric_name, metric_value)
+
+
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+logger.info("sending %s = %s", metric_name, metric_value)
+
+
+
+import logging
+
+# Display progress logs on stdout
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+
+import logging
+
+logging.basicConfig()
+logger = logging.getLogger(__name__)
+
+
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
+
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
+
+        logger.info(
+            "Call: %s.__get__(%r, %r)",
+            self.__class__.__name__,
+            instance,
+            owner,
+        )
+
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+        logger.debug("%s getting %s", self.__class__.__name__, item)
+        logger.info("Index %d: %s", index, result)
+
+
+        logger.debug(
+            "%s Producing next value: %r", self.__class__.__name__, value
+        )
+
+    logger.info(
+        "\n\tEven records: %s\n\t Odd records: %s", show(even), show(odd)
+    )
+
+
+
+
+"""
+HERE = os.path.abspath(os.getcwd())
+print(HERE)
+DEST_DIR = os.path.abspath(os.path.join(HERE, os.pardir, "openssl"))
+print(DEST_DIR)
+"""
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+from . import aliases
+from . import context # 引入同層資料夾的 context.py
+from . import process # 引入同層資料夾的 process.py
+from . import ABuTradeProxy # 引入同層資料夾的 ABuTradeProxy.py
+from .ABuBenchmark import AbuBenchmark # 從同層資料夾的 ABuBenchmark.py 引入 AbuBenchmark物件
+from .ABuMLFeature import AbuFeatureDegExtend # 從同層資料夾的 ABuMLFeature.py 引入 AbuFeatureDegExtend物件
+
+從上一層資料夾的XXX資料夾的YYY檔案 引入ZZZ
+from ..CoreBu import ABuEnv
+from ..CoreBu.ABuEnv import EMarketTargetType
+from ..MarketBu.ABuSymbolFutures import AbuFuturesCn, AbuFuturesGB
+from ..MarketBu.ABuHkUnit import AbuHkUnit
+from ..MarketBu import ABuMarket
+from ..MarketBu.ABuMarket import MarketMixin
+
+# 從 上一層資料夾CoreBu裡面ABuEnv.py 引入函數xxxx
+from ..CoreBu.ABuEnv import EMarketDataSplitMode, EMarketTargetType
+# 從 上一層資料夾MarketBu 引入函數xxxx
+from ..MarketBu import ABuSymbolPd
+# 從 上一層資料夾MarketBu裡面ABuSymbol.py 引入函數xxxx
+from ..MarketBu.ABuSymbol import IndexSymbol, Symbol
+
+# Dummy file to make this directory a package.
+
+
+
+"""Entry point to the ``statusweb`` package."""
+
+from os import path
+
+static_folder = path.join(path.dirname(__file__), "static")
+
+
+
+here = os.path.dirname(__file__) or os.curdir
+
+
+pkg_dir = os.path.dirname(__file__)
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+import datetime
+import logging
+
+
+
+utc_timestamp = (
+    datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc).isoformat()
+)
+
+logging.info("start")
+
+logging.info("aaaaaaaaaaa")
+
+logging.info("Python timer trigger function 執行時間： %s", utc_timestamp)
+
+
+
+print('dddd')
+
+
+
+
+
+import logging
+
+logger = logging.getLogger(__name__)
+logger.warning('Unable to symlink %r to %r', src, dst)
+logger.warning('unable to copy script %r, ''may be binary: %s', srcfile, e)
+
+
+import os
+
+print(os.name)
+
+
+# 在 os 模組下還有另一個 uname() 函式可以使用，uname() 會回傳作業系統相關的版本資訊，
+
+import os
+
+# print(os.uname())
+
+import sys
+
+print(sys.platform)
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+# pandas忽略赋值警告
+pd.options.mode.chained_assignment = None
+
+# numpy，pandas显示控制，默认开启
+# pandas DataFrame表格最大显示行数
+pd.options.display.max_rows = 20
+# pandas DataFrame表格最大显示列数
+pd.options.display.max_columns = 20
+# pandas精度浮点数显示4位
+pd.options.display.precision = 4
+# numpy精度浮点数显示4位，不使用科学计数法
+np.set_printoptions(precision=4, suppress=True)
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+3. platfrom — 获取底层平台的标识数据
+
+Python 官网介绍: platform — Access to underlying platform’s identifying data
+
+platfrom模块的部分函数和属性:
+
+platform.platform()                 # 平台信息, 如: "Darwin-18.2.0-x86_64-i386-64bit"
+
+platform.system()                   # 系统名称, 如: "Linux", "Darwin", "Java", "Windows"
+platform.node()                     # 计算机的网络中名称
+platform.release()                  # 系统的版本, 如: "18.2.0"
+platform.version()                  # 系统的发行版本, 如: "Darwin Kernel Version 18.2.0: ***"
+platform.machine()                  # 机器类型, 如: "arm64"、"AMD64"、"x86_64"、"i386"
+platform.processor()                # 真实处理器名称, 如: "arm"、"i386"
+
+platform.uname()                    # 一个元祖, 包含了 6 个属性: 
+                                    # uname_result(system='Darwin', 
+                                    #              node='******', 
+                                    #              release='21.0.1', 
+                                    #              version='Darwin Kernel ... /RELEASE_ARM64_T6000', 
+                                    #              machine='x86_64',
+                                    #              processor='arm64')
+
+platform.python_build()             # 内部版本号和日期, 一个元祖: (buildno, builddate)
+platform.python_compiler()          # 编译 Python 的编译器, 如: "Clang 6.0 (clang-600.0.57)"
+platform.python_branch()            # 标识 Python 实现 SCM 分支的字符串
+platform.python_implementation()    # Python 实现, 如: "CPython"、"IronPython"、"Jython"、"PyPy"
+platform.python_revision()          # 标识 Python 实现 SCM 修订版的字符串
+platform.python_version()           # Python 版本, 格式为: "major.minor.patchlevel", 如: "3.7.3"
+
+
+Python sys.platform
+Python 判斷 OS 作業系統的方法可以使用 sys.platform，sys.platform 回傳的結果有 aix、linux、win32、cygwin、darwin 這幾種，
+
+Windows10/Ubuntu16.04/MacOS10.15.7
+win32/linux/darwin
+
+sys.platform 回傳的種類情況分為這幾種，
+系統種類 	回傳值
+AIX 		'aix'
+Linux 		'linux'
+Windows 	'win32'
+Windows/Cygwin 	'cygwin'
+macOS 		'darwin'
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# 第一步：閾值化，生成二值圖
+# 圖像平滑
+
+dst = cv2.GaussianBlur(image1, (3, 3), 0.5)  # 執行高斯模糊化
+# Otsu 閾值分割
+OtsuThresh = 0
+OtsuThresh, dst = cv2.threshold(dst, OtsuThresh, 255, cv2.THRESH_OTSU)
+
+# --- 形態學開運算(消除細小白點)
+# 創建結構元
+s = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+dst = cv2.morphologyEx(dst, cv2.MORPH_OPEN, s, iterations=2)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+height = 3  # 矩陣高度
+width = 5  # 矩陣寬度
+
+image = np.random.randint(2, size=(height, width))  # 建立0, 1矩陣
+print(f"矩陣內容 = \n{image}")
+
+nonzero_img = np.nonzero(image)  # 獲得非0元素座標
+print(f"非0元素的座標 \n{nonzero_img}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+height = 3  # 矩陣高度
+width = 5  # 矩陣寬度
+image = np.random.randint(2, size=(height, width))  # 建立0, 1矩陣
+print(f"矩陣內容 = \n{image}")
+nonzero_img = np.nonzero(image)  # 獲得非0元素座標
+loc_img = np.transpose(nonzero_img)  # 執行矩陣轉置
+print(f"非0元素的座標 \n{loc_img}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+height = 3  # 矩陣高度
+width = 5  # 矩陣寬度
+
+image = np.random.randint(2, size=(height, width))  # 建立0, 1矩陣
+print(f"矩陣內容 = \n{image}")
+
+loc_img = cv2.findNonZero(image)  # 獲得非0元素座標
+print(f"非0元素的座標 \n{loc_img}")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+    def print_label(filename, func):
+        name = re.split(r'[-.]', filename)[0]
+        sys.stdout.write(
+            ("[%s] %s... "
+                % (name.center(7), func.__doc__.strip())
+            ).ljust(52))
+        sys.stdout.flush()
+
+
+
+    def print_results(size, n, real, cpu):
+        bw = n * float(size) / 1024 ** 2 / real
+        bw = ("%4d MB/s" if bw > 100 else "%.3g MB/s") % bw
+        sys.stdout.write(bw.rjust(12) + "\n")
+        if cpu < 0.90 * real:
+            sys.stdout.write("   warning: test above used only %d%% CPU, "
+                "result may be flawed!\n" % (100.0 * cpu / real))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
 hist_b = cv2.calcHist([image0], [0], None, [256], [0, 256])
 hist_g = cv2.calcHist([image0], [1], None, [256], [0, 256])
 hist_r = cv2.calcHist([image0], [2], None, [256], [0, 256])
