@@ -48,12 +48,45 @@ namespace vcs_WMI__new
             int y_st;
             int dx;
             int dy;
+            int w = 320;
+            int h = 50;
 
             //button
             x_st = 12;
             y_st = 12;
-            dx = 205;
-            dy = 75;
+            dx = w+5;
+            dy = h+5;
+
+            button0.Size = new Size(w, h);
+            button1.Size = new Size(w, h);
+            button2.Size = new Size(w, h);
+            button3.Size = new Size(w, h);
+            button4.Size = new Size(w, h);
+            button5.Size = new Size(w, h);
+            button6.Size = new Size(w, h);
+            button7.Size = new Size(w, h);
+            button8.Size = new Size(w, h);
+            button9.Size = new Size(w, h);
+            button10.Size = new Size(w, h);
+            button11.Size = new Size(w, h);
+            button12.Size = new Size(w, h);
+            button13.Size = new Size(w, h);
+            button14.Size = new Size(w, h);
+            button15.Size = new Size(w, h);
+            button16.Size = new Size(w, h);
+            button17.Size = new Size(w, h);
+            button18.Size = new Size(w, h);
+            button19.Size = new Size(w, h);
+            button20.Size = new Size(w, h);
+            button21.Size = new Size(w, h);
+            button22.Size = new Size(w, h);
+            button23.Size = new Size(w, h);
+            button24.Size = new Size(w, h);
+            button25.Size = new Size(w, h);
+            button26.Size = new Size(w, h);
+            button27.Size = new Size(w, h);
+            button28.Size = new Size(w, h);
+            button29.Size = new Size(w, h);
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -65,40 +98,39 @@ namespace vcs_WMI__new
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            button13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
+            button14.Location = new Point(x_st + dx * 0, y_st + dy * 14);
 
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button20.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button22.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button23.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button24.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button25.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button26.Location = new Point(x_st + dx * 1, y_st + dy * 11);
+            button27.Location = new Point(x_st + dx * 1, y_st + dy * 12);
+            button28.Location = new Point(x_st + dx * 1, y_st + dy * 13);
+            button29.Location = new Point(x_st + dx * 1, y_st + dy * 14);
 
             richTextBox1.Size = new Size(500, 700 + 40);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            comboBox1.Location = new Point(x_st + dx * 3 + 500 + 10, y_st + dy * 0);
-            bt_get.Location = new Point(x_st + dx * 3 + 500 + 10 + comboBox1.Width + 10, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            comboBox1.Location = new Point(x_st + dx * 2 + 500 + 10, y_st + dy * 0);
+            bt_get.Location = new Point(x_st + dx * 2 + 500 + 10 + comboBox1.Width + 10, y_st + dy * 0);
             listView1.Size = new Size(400, 700);
-            listView1.Location = new Point(x_st + dx * 3 + 500 + 10, y_st + dy * 0 + 40);
+            listView1.Location = new Point(x_st + dx * 2 + 500 + 10, y_st + dy * 0 + 40);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //設定表單Client的大小
-            this.SetClientSizeCore(1050 + 500, 770);
+            this.SetClientSizeCore(1050 + 600, 850);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -109,56 +141,8 @@ namespace vcs_WMI__new
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //Win32_Processor CPU相關
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "Win32_PageFile 獲取頁面文檔\n";
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_PageFile");
-            foreach (ManagementObject mo in mos.Get())
-            {
-                richTextBox1.Text += "FileName: " + mo["Name"].ToString() + "\n";　　//頁面文檔
-                //richTextBox1.Text += "FileName: " + mo["Manufacturer"].ToString() + "\n";
-                richTextBox1.Text += "FileName: " + mo["Status"].ToString() + "\n";
-                //richTextBox1.Text += "FileName: " + mo["Version"].ToString() + "\n";
-                richTextBox1.Text += "FileName: " + mo["Caption"].ToString() + "\n";
-                richTextBox1.Text += "FileName: " + mo["Description"].ToString() + "\n";
-                //richTextBox1.Text += "FileName: " + mo["CompressionMethod"].ToString() + "\n";
-                richTextBox1.Text += "FileName: " + mo["CSCreationClassName"].ToString() + "\n";
-                richTextBox1.Text += "FileName: " + mo["CSName"].ToString() + "\n";
-                richTextBox1.Text += "FileName: " + mo["Drive"].ToString() + "\n";
-                richTextBox1.Text += "FileName: " + mo["CreationClassName"].ToString() + "\n";
-                richTextBox1.Text += "FileName: " + mo["EightDotThreeFileName"].ToString() + "\n";
-                richTextBox1.Text += "FileName: " + mo["FileType"].ToString() + "\n";
-                //richTextBox1.Text += "FileName: " + mo["EncryptionMethod"].ToString() + "\n";
-                richTextBox1.Text += "FileName: " + mo["Extension"].ToString() + "\n";
-                richTextBox1.Text += "FileName: " + mo["FileName"].ToString() + "\n";
-                richTextBox1.Text += "FileName: " + mo["FSCreationClassName"].ToString() + "\n";
-                richTextBox1.Text += "FileName: " + mo["FSName"].ToString() + "\n";
-                richTextBox1.Text += "FileName: " + mo["Path"].ToString() + "\n";
-
-
-                long FileSize = mo["FileSize"] == null ? 0 : long.Parse(mo["FileSize"].ToString());//頁面文檔大小
-                //計算
-                richTextBox1.Text += "FileSize: " + (FileSize / 1024 / 1024).ToString("#0.00") + "G" + "\n";
-
-                richTextBox1.Text += "FileSize: " + mo["FileSize"].ToString() + "\n";
-                //richTextBox1.Text += "InUseCount: " + mo["InUseCount"].ToString() + "\n";
-                //richTextBox1.Text += "AccessMask: " + mo["AccessMask"].ToString() + "\n";
-                //richTextBox1.Text += "FreeSpace: " + mo["FreeSpace"].ToString() + "\n";
-                richTextBox1.Text += "InitialSize: " + mo["InitialSize"].ToString() + "\n";
-                richTextBox1.Text += "MaximumSize: " + mo["MaximumSize"].ToString() + "\n";
-
-                richTextBox1.Text += "InstallDate: " + mo["InstallDate"].ToString() + "\n";
-                richTextBox1.Text += "CreationDate: " + mo["CreationDate"].ToString() + "\n";
-                richTextBox1.Text += "LastAccessed: " + mo["LastAccessed"].ToString() + "\n";
-                richTextBox1.Text += "LastModified: " + mo["LastModified"].ToString() + "\n";
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
             richTextBox1.Text += "讀取CPU的溫度, NG\n";
 
             //GetCPUTemperature();
@@ -308,7 +292,6 @@ namespace vcs_WMI__new
                 richTextBox1.Text += "讀取計算機的CPU數據寬度\n";
                 result = String.Format("DataWidth : " + mo["DataWidth"].ToString());
                 richTextBox1.Text += result + "\n";
-
             }
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -332,43 +315,448 @@ namespace vcs_WMI__new
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "Win32_PageFile 獲取頁面文檔\n";
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_PageFile");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "FileName: " + mo["Name"].ToString() + "\n";　　//頁面文檔
+                //richTextBox1.Text += "FileName: " + mo["Manufacturer"].ToString() + "\n";
+                richTextBox1.Text += "FileName: " + mo["Status"].ToString() + "\n";
+                //richTextBox1.Text += "FileName: " + mo["Version"].ToString() + "\n";
+                richTextBox1.Text += "FileName: " + mo["Caption"].ToString() + "\n";
+                richTextBox1.Text += "FileName: " + mo["Description"].ToString() + "\n";
+                //richTextBox1.Text += "FileName: " + mo["CompressionMethod"].ToString() + "\n";
+                richTextBox1.Text += "FileName: " + mo["CSCreationClassName"].ToString() + "\n";
+                richTextBox1.Text += "FileName: " + mo["CSName"].ToString() + "\n";
+                richTextBox1.Text += "FileName: " + mo["Drive"].ToString() + "\n";
+                richTextBox1.Text += "FileName: " + mo["CreationClassName"].ToString() + "\n";
+                richTextBox1.Text += "FileName: " + mo["EightDotThreeFileName"].ToString() + "\n";
+                richTextBox1.Text += "FileName: " + mo["FileType"].ToString() + "\n";
+                //richTextBox1.Text += "FileName: " + mo["EncryptionMethod"].ToString() + "\n";
+                richTextBox1.Text += "FileName: " + mo["Extension"].ToString() + "\n";
+                richTextBox1.Text += "FileName: " + mo["FileName"].ToString() + "\n";
+                richTextBox1.Text += "FileName: " + mo["FSCreationClassName"].ToString() + "\n";
+                richTextBox1.Text += "FileName: " + mo["FSName"].ToString() + "\n";
+                richTextBox1.Text += "FileName: " + mo["Path"].ToString() + "\n";
+
+                long FileSize = mo["FileSize"] == null ? 0 : long.Parse(mo["FileSize"].ToString());//頁面文檔大小
+                //計算
+                richTextBox1.Text += "FileSize: " + (FileSize / 1024 / 1024).ToString("#0.00") + "G" + "\n";
+
+                richTextBox1.Text += "FileSize: " + mo["FileSize"].ToString() + "\n";
+                //richTextBox1.Text += "InUseCount: " + mo["InUseCount"].ToString() + "\n";
+                //richTextBox1.Text += "AccessMask: " + mo["AccessMask"].ToString() + "\n";
+                //richTextBox1.Text += "FreeSpace: " + mo["FreeSpace"].ToString() + "\n";
+                richTextBox1.Text += "InitialSize: " + mo["InitialSize"].ToString() + "\n";
+                richTextBox1.Text += "MaximumSize: " + mo["MaximumSize"].ToString() + "\n";
+
+                richTextBox1.Text += "InstallDate: " + mo["InstallDate"].ToString() + "\n";
+                richTextBox1.Text += "CreationDate: " + mo["CreationDate"].ToString() + "\n";
+                richTextBox1.Text += "LastAccessed: " + mo["LastAccessed"].ToString() + "\n";
+                richTextBox1.Text += "LastModified: " + mo["LastModified"].ToString() + "\n";
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //Win32_OperatingSystem 作業系統相關
+            richTextBox1.Text += "取得 作業系統資訊 Win32_OperatingSystem\n";
+
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "Caption : " + mo.Properties["Caption"].Value.ToString().Trim() + "\n";
+                richTextBox1.Text += "Version : " + mo.Properties["Version"].Value.ToString() + " SP " + mo.Properties["ServicePackMajorVersion"].Value.ToString() + "." + mo.Properties["ServicePackMinorVersion"].Value.ToString() + "\n";
+
+                GetValue(mo, "BootDevice");
+                GetValue(mo, "BuildNumber");
+                GetValue(mo, "BuildType");
+                GetValue(mo, "Caption");
+                GetValue(mo, "CodeSet");
+                GetValue(mo, "CountryCode");
+                GetValue(mo, "CreationClassName");
+                GetValue(mo, "CSCreationClassName");
+                GetValue(mo, "CSDVersion");
+                GetValue(mo, "CSName");
+                GetValue(mo, "CurrentTimeZone");
+                GetValue(mo, "DataExecutionPrevention_Available");
+                GetValue(mo, "DataExecutionPrevention_32BitApplications");
+                GetValue(mo, "DataExecutionPrevention_Drivers");
+                GetValue(mo, "DataExecutionPrevention_SupportPolicy");
+                GetValue(mo, "Debug");
+                GetValue(mo, "Description");
+                GetValue(mo, "Distributed");
+                GetValue(mo, "EncryptionLevel");
+                GetValue(mo, "ForegroundApplicationBoost");
+                GetValue(mo, "FreePhysicalMemory");
+                GetValue(mo, "FreeSpaceInPagingFiles");
+                GetValue(mo, "FreeVirtualMemory");
+                GetValue(mo, "InstallDate");
+                GetValue(mo, "LargeSystemCache");
+                GetValue(mo, "LastBootUpTime");
+                GetValue(mo, "LocalDateTime");
+                GetValue(mo, "Locale");
+                GetValue(mo, "Manufacturer");
+                GetValue(mo, "MaxNumberOfProcesses");
+                GetValue(mo, "MaxProcessMemorySize");
+                GetValue(mo, "MUILanguages[]");
+                GetValue(mo, "Name");
+                GetValue(mo, "NumberOfLicensedUsers");
+                GetValue(mo, "NumberOfProcesses");
+                GetValue(mo, "NumberOfUsers");
+                GetValue(mo, "OperatingSystemSKU");
+                GetValue(mo, "Organization");
+                GetValue(mo, "OSArchitecture");
+                GetValue(mo, "OSLanguage");
+                GetValue(mo, "OSProductSuite");
+                GetValue(mo, "OSType");
+                GetValue(mo, "OtherTypeDescription");
+                GetValue(mo, "PAEEnabled");
+                GetValue(mo, "PlusProductID");
+                GetValue(mo, "PlusVersionNumber");
+                GetValue(mo, "Primary");
+                GetValue(mo, "ProductType");
+                GetValue(mo, "QuantumLength");
+                GetValue(mo, "QuantumType");
+                GetValue(mo, "RegisteredUser");
+                GetValue(mo, "SerialNumber");
+                GetValue(mo, "ServicePackMajorVersion");
+                GetValue(mo, "ServicePackMinorVersion");
+                GetValue(mo, "SizeStoredInPagingFiles");
+                GetValue(mo, "Status");
+                GetValue(mo, "SuiteMask");
+                GetValue(mo, "SystemDevice");
+                GetValue(mo, "SystemDirectory");
+                GetValue(mo, "SystemDrive");
+                GetValue(mo, "TotalSwapSpaceSize");
+                GetValue(mo, "TotalVirtualMemorySize");
+                GetValue(mo, "TotalVisibleMemorySize");
+                GetValue(mo, "Version");
+                GetValue(mo, "WindowsDirectory");
+
+                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+                //取得記憶體狀態
+                GetInfo(mo, "FreePhysicalMemory");
+                GetInfo(mo, "FreeSpaceInPagingFiles");
+                GetInfo(mo, "FreeVirtualMemory");
+                GetInfo(mo, "SizeStoredInPagingFiles");
+                GetInfo(mo, "TotalSwapSpaceSize");
+                GetInfo(mo, "TotalVirtualMemorySize");
+                GetInfo(mo, "TotalVisibleMemorySize");
+
+                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+                string StrInfo = mo.GetText(TextFormat.Mof);
+                string InstallDate = StrInfo.Substring(StrInfo.LastIndexOf("InstallDate") + 15, 14);
+                richTextBox1.Text += "取得作業系統安裝時間 :\t" + InstallDate + "\n";
+            }
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "Win32_OperatingSystem 獲取系統的啟動日期和安裝日期\n";
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "Description: " + mo["Description"].ToString() + "\n";
+                richTextBox1.Text += "FreePhysicalMemory: " + mo["FreePhysicalMemory"].ToString() + "\n";
+                richTextBox1.Text += "FreeVirtualMemory: " + mo["FreeVirtualMemory"].ToString() + "\n";
+                richTextBox1.Text += "InstallDate: " + mo["InstallDate"].ToString() + "\n";
+                richTextBox1.Text += "InstallDate: " + mo["InstallDate"].ToString().Substring(0, 14) + "\n";
+                richTextBox1.Text += "LastBootUpTime: " + mo["LastBootUpTime"].ToString() + "\n";
+                richTextBox1.Text += "LastBootUpTime: " + mo["LastBootUpTime"].ToString().Substring(0, 14) + "\n";
+                richTextBox1.Text += "LocalDateTime: " + mo["LocalDateTime"].ToString() + "\n";
+                richTextBox1.Text += "Name: " + mo["Name"].ToString() + "\n";
+                //richTextBox1.Text += "Organization: " + mo["Organization"].ToString() + "\n";
+                richTextBox1.Text += "OSLanguage: " + mo["OSLanguage"].ToString() + "\n";
+                richTextBox1.Text += "OSType: " + mo["OSType"].ToString() + "\n";
+                richTextBox1.Text += "RegisteredUser: " + mo["RegisteredUser"].ToString() + "\n";
+                richTextBox1.Text += "SerialNumber: " + mo["SerialNumber"].ToString() + "\n";
+                richTextBox1.Text += "ServicePackMajorVersion: " + mo["ServicePackMajorVersion"].ToString() + "\n";
+                richTextBox1.Text += "ServicePackMinorVersion: " + mo["ServicePackMinorVersion"].ToString() + "\n";
+
+                richTextBox1.Text += "Caption: " + mo["Caption"].ToString() + "\n";　　//獲取OS　名稱
+                richTextBox1.Text += "Manufacturer: " + mo["Manufacturer"].ToString() + "\n";　　//獲取　OS　製造商
+                richTextBox1.Text += "CountryCode: " + mo["CountryCode"].ToString() + "\n";　　//地區
+                richTextBox1.Text += "CSName: " + mo["CSName"].ToString() + "\n";　　//獲取系統名稱
+                richTextBox1.Text += "WindowsDirectory: " + mo["WindowsDirectory"].ToString() + "\n";　　//獲取Windows　目錄
+                richTextBox1.Text += "SystemDirectory: " + mo["SystemDirectory"].ToString() + "\n";　　//獲取系統目錄
+                richTextBox1.Text += "BootDevice: " + mo["BootDevice"].ToString() + "\n";　　//獲取啟動設備
+                richTextBox1.Text += "Version: " + mo["Version"].ToString() + "\n";//獲取版本
+                //richTextBox1.Text += "CSDVersion: " + mo["CSDVersion"].ToString() + "\n";//獲取SP
+                richTextBox1.Text += "BuildNumber: " + mo["BuildNumber"].ToString() + "\n";//獲取builderNumber
+                richTextBox1.Text += "TotalVisibleMemorySize: " + ((ulong)mo["TotalVisibleMemorySize"] / 1024.0 / 1024).ToString("#0.00") + "G" + "\n";　　//獲取總的物理內存
+                richTextBox1.Text += "FreePhysicalMemory: " + ((ulong)mo["FreePhysicalMemory"] / 1024.0 / 1024).ToString("#0.00") + "G" + "\n";　　//獲取可用物理內存
+                richTextBox1.Text += "TotalVirtualMemorySize: " + ((ulong)mo["TotalVirtualMemorySize"] / 1024.0 / 1024).ToString("#0.00") + "G" + "\n";　　　//獲取總的虛擬內存
+                richTextBox1.Text += "FreeVirtualMemory: " + ((ulong)mo["FreeVirtualMemory"] / 1024.0 / 1024).ToString("#0.00") + "G" + "\n";　　//獲取可用虛擬內存
+                richTextBox1.Text += "SizeStoredInPagingFiles: " + ((ulong)mo["SizeStoredInPagingFiles"] / 1024.0 / 1024).ToString("#0.00") + "G" + "\n";　　//獲取頁面文檔大小
+            }
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+        }
+
+        // Add information about the property to the ListView.
+        private void GetInfo(ManagementObject mobj, string property_name)
+        {
+            object property_obj = mobj[property_name];
+            if (property_obj == null)
+            {
+                //lvwInfo.AddRow(property_name, "???");
+                richTextBox1.Text += property_name + "\t\t???\n";
+            }
+            else
+            {
+                ulong property_value = (ulong)property_obj * 1024;
+                //lvwInfo.AddRow(property_name, property_value.ToFileSizeApi());
+                richTextBox1.Text += property_name + "\t\t" + property_value.ToFileSizeApi() + "\n";
+            }
+        }
+
+        private void GetValue(ManagementObject mo, string property_name)
+        {
+            string value;
+            try
+            {
+                value = mo[property_name].ToString();
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                value = "錯誤訊息 : " + ex.Message;
+            }
+            richTextBox1.Text += property_name + "\t" + value + "\n";
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
+            //Win32_ComputerSystem
+
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                try
+                {
+                    richTextBox1.Text += "------------------------------\n";  // 30個
+                    //richTextBox1.Text += "全部 :\n" + mo.GetText(TextFormat.Mof) + "\n";
+                    //richTextBox1.Text += "------------------------------\n";  // 30個
+
+                    int num_physical_processors = int.Parse(mo["NumberOfProcessors"].ToString());
+                    richTextBox1.Text += "取得實體核心數 : " + num_physical_processors.ToString() + "\n";
+
+                    richTextBox1.Text += "核心數 : " + mo.Properties["NumberOfLogicalProcessors"].Value.ToString() + " processors" + "\n";
+
+                    string UserName = mo["UserName"].ToString();
+                    richTextBox1.Text += "操作系統的登錄用戶名 :\t" + UserName + "\n";
+
+                    string SystemType = mo["SystemType"].ToString();
+                    richTextBox1.Text += "PC類型 :\t" + SystemType + "\n";
+
+                    System.UInt64 TotalPhysicalMemory = UInt64.MinValue;
+                    TotalPhysicalMemory = (System.UInt64)(mo["TotalPhysicalMemory"]);//單位：拜
+
+                    richTextBox1.Text += "物理內存 :\t" + TotalPhysicalMemory.ToString() + " 拜\n";
+                    richTextBox1.Text += "物理內存 :\t" + (TotalPhysicalMemory / 1024).ToString() + " K\n";
+                    richTextBox1.Text += "物理內存 :\t" + (TotalPhysicalMemory / 1024 / 1024).ToString() + " M\n";
+                    richTextBox1.Text += "物理內存 :\t" + (TotalPhysicalMemory / 1024 / 1024 / 1024).ToString() + " G\n";
+                }
+                catch
+                {
+                }
+            }
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "Win32_ComputerSystem 獲取電腦資訊\n";
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "操作系統類型：" + mo["SystemType"] + "\n";
+                richTextBox1.Text += "實體記憶體：" + mo["TotalPhysicalMemory"].ToString() + "\n";
+
+                richTextBox1.Text += "PrimaryOwnerName: " + mo["PrimaryOwnerName"] + "\n";
+                richTextBox1.Text += "Status: " + mo["Status"] + "\n";
+                richTextBox1.Text += "UserName: " + mo["UserName"] + "\n";
+                richTextBox1.Text += "Caption: " + mo["Caption"] + "\n";
+                richTextBox1.Text += "BootupState: " + mo["BootupState"] + "\n";
+                richTextBox1.Text += "CreationClassName: " + mo["CreationClassName"] + "\n";
+                richTextBox1.Text += "Description: " + mo["Description"] + "\n";
+                richTextBox1.Text += "Domain: " + mo["Domain"] + "\n";
+                richTextBox1.Text += "Manufacturer: " + mo["Manufacturer"] + "\n";
+                richTextBox1.Text += "Model: " + mo["Model"] + "\n";
+                richTextBox1.Text += "Name: " + mo["Name"] + "\n";
+                /* 無資料
+                richTextBox1.Text += "aaaaa: " + mo["NameFormat"] + "\n";
+                richTextBox1.Text += "aaaaa: " + mo["Workgroup"] + "\n";
+                richTextBox1.Text += "aaaaa: " + mo["PrimaryOwnerContact"] + "\n";
+                richTextBox1.Text += "aaaaa: " + mo["LastLoadInfo"] + "\n";
+                //richTextBox1.Text += "aaaaa: " + mo["DNSHostName"] + "\n";
+                //richTextBox1.Text += "aaaaa: " + mo["InitialLoadInfo[]"] + "\n";
+                //richTextBox1.Text += "aaaaa: " + mo["Roles[]"] + "\n";
+                //richTextBox1.Text += "aaaaa: " + mo["SystemStartupOptions[]"] + "\n";
+                //richTextBox1.Text += "aaaaa: " + mo["OEMStringArray[]"] + "\n";
+                //richTextBox1.Text += "aaaaa: " + mo["SupportContactDescription[]"] + "\n";
+                //richTextBox1.Text += "aaaaa: " + mo["SystemFamily"] + "\n";
+                //richTextBox1.Text += "aaaaa: " + mo["SystemSKUNumber"] + "\n";
+                //richTextBox1.Text += "aaaaa: " + mo["ChassisSKUNumber"] + "\n";
+                */
+                richTextBox1.Text += "nnnn: " + mo["AdminPasswordStatus"].ToString() + "\n";
+                richTextBox1.Text += "nnnn: " + mo["ChassisBootupState"].ToString() + "\n";
+                richTextBox1.Text += "nnnn: " + mo["CurrentTimeZone"].ToString() + "\n";
+                richTextBox1.Text += "nnnn: " + mo["DomainRole"].ToString() + "\n";
+                richTextBox1.Text += "nnnn: " + mo["FrontPanelResetStatus"].ToString() + "\n";
+                richTextBox1.Text += "nnnn: " + mo["KeyboardPasswordStatus"].ToString() + "\n";
+                richTextBox1.Text += "nnnn: " + mo["NumberOfLogicalProcessors"].ToString() + "\n";
+                richTextBox1.Text += "NumberOfProcessors: " + mo["NumberOfProcessors"].ToString() + "\n";
+                richTextBox1.Text += "nnnn: " + mo["PauseAfterReset"].ToString() + "\n";
+                richTextBox1.Text += "nnnn: " + mo["PowerOnPasswordStatus"].ToString() + "\n";
+                richTextBox1.Text += "nnnn: " + mo["PowerState"].ToString() + "\n";
+                richTextBox1.Text += "nnnn: " + mo["PowerSupplyState"].ToString() + "\n";
+                richTextBox1.Text += "nnnn: " + mo["ResetCapability"].ToString() + "\n";
+                richTextBox1.Text += "nnnn: " + mo["ResetCount"].ToString() + "\n";
+                richTextBox1.Text += "nnnn: " + mo["ResetLimit"].ToString() + "\n";
+                //richTextBox1.Text += "nnnn: " + mo["SystemStartupDelay"].ToString() + "\n";
+                //richTextBox1.Text += "nnnn: " + mo["SystemStartupSetting"].ToString() + "\n";
+                richTextBox1.Text += "nnnn: " + mo["ThermalState"].ToString() + "\n";
+                richTextBox1.Text += "nnnn: " + mo["WakeUpType"].ToString() + "\n";
+                /* 無資料
+                //richTextBox1.Text += "nnnn: " + mo["OEMLogoBitmap[]"].ToString() + "\n";
+                //richTextBox1.Text += "nnnn: " + mo["PCSystemType"].ToString() + "\n";
+                //richTextBox1.Text += "nnnn: " + mo["BootOptionOnLimit"].ToString() + "\n";
+                //richTextBox1.Text += "nnnn: " + mo["BootOptionOnWatchDog"].ToString() + "\n";
+                //richTextBox1.Text += "nnnn: " + mo["BootStatus[]"].ToString() + "\n";
+                //richTextBox1.Text += "nnnn: " + mo["PCSystemTypeEx"].ToString() + "\n";
+                //richTextBox1.Text += "nnnn: " + mo["PowerManagementCapabilities[]"].ToString() + "\n";
+                */
+
+                //richTextBox1.Text += "InstallDate: " + mo["InstallDate"].ToString() + "\n";
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            int num_logical_processors = Environment.ProcessorCount;
+            richTextBox1.Text += "取得邏輯核心數 : " + num_logical_processors.ToString() + "\n";
+            richTextBox1.Text += "LogicalProcessors\t" + num_logical_processors.ToString() + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //取得CPU編號、硬盤編號等系統有關環境、屬性
-
-            richTextBox1.Text += "CPU編號：" + GetCpuId() + "\n";
-            richTextBox1.Text += "硬盤編號：" + GetMainHardDiskId() + "\n";
-        }
-
-        // 查詢CPU編號 
-        private string GetCpuId()
-        {
-            ManagementClass mClass = new ManagementClass("Win32_Processor");
-            ManagementObjectCollection moc = mClass.GetInstances();
-            string cpuId = null;
-            foreach (ManagementObject mo in moc)
+            //WIN32_SerialPort
+            // C# 使用win32 API 取得連接埠裝置名稱
+            using (var searcher = new ManagementObjectSearcher("SELECT * FROM WIN32_SerialPort"))
             {
-                cpuId = mo.Properties["ProcessorId"].Value.ToString();
-                break;
-            }
-            return cpuId;
-        }
+                //使用ManagementObjectSearcher來查詢註冊表中的裝置名稱
+                var ports = searcher.Get().Cast<ManagementBaseObject>().ToList();//取得所有ManagementBaseObject並轉成List
+                string[] PortsName = new string[ports.Count];
+                richTextBox1.Text += "len = " + PortsName.Length.ToString() + "\n";
+                richTextBox1.Text += "len = " + ports.Count.ToString() + "\n";
+                for (int i = 0; i < ports.Count; i++)
+                {
+                    PortsName[i] = ports[i]["DeviceID"] as string + "-" + ports[i]["Caption"] as string;    //取得裝置名稱與連接埠
+                }
 
-        // 查詢硬盤編號 
-        private string GetMainHardDiskId()
-        {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
-            String hardDiskID = null;
-            foreach (ManagementObject mo in searcher.Get())
-            {
-                hardDiskID = mo["SerialNumber"].ToString().Trim();
-                break;
+                richTextBox1.Text += string.Join("\r\n", PortsName) + "\n";
             }
-            return hardDiskID;
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "\nWin32_SerialPort\n";
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_SerialPort");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "Name: " + mo["Name"] + "\n";
+                richTextBox1.Text += "DeviceID: " + mo["DeviceID"] + "\n";
+                richTextBox1.Text += "SystemCreationClassName: " + mo["SystemCreationClassName"] + "\n";
+                richTextBox1.Text += "SystemName: " + mo["SystemName"] + "\n";
+                richTextBox1.Text += "Status: " + mo["Status"] + "\n";
+                richTextBox1.Text += "ProviderType: " + mo["ProviderType"] + "\n";
+                richTextBox1.Text += "PNPDeviceID: " + mo["PNPDeviceID"] + "\n";
+                richTextBox1.Text += "Caption: " + mo["Caption"] + "\n";
+                richTextBox1.Text += "CreationClassName: " + mo["CreationClassName"] + "\n";
+                richTextBox1.Text += "Description: " + mo["Description"] + "\n";
+                richTextBox1.Text += "MaxBaudRate: " + mo["MaxBaudRate".ToString()] + "\n";
+                richTextBox1.Text += "StatusInfo: " + mo["StatusInfo".ToString()] + "\n";
+
+
+                richTextBox1.Text += "Name: " + mo["Name"] + "\n";
+                richTextBox1.Text += "CreationClassName: " + mo["CreationClassName"] + "\n";
+                richTextBox1.Text += "Description: " + mo["Description"] + "\n";
+                richTextBox1.Text += "DeviceID: " + mo["DeviceID"] + "\n";
+                richTextBox1.Text += "Caption: " + mo["Caption"] + "\n";
+                richTextBox1.Text += "ErrorDescription: " + mo["ErrorDescription"] + "\n";
+                richTextBox1.Text += "PNPDeviceID: " + mo["PNPDeviceID"] + "\n";
+                //richTextBox1.Text += "CapabilityDescriptions: " + mo["CapabilityDescriptions[]"] + "\n";
+                richTextBox1.Text += "Status: " + mo["Status"] + "\n";
+                richTextBox1.Text += "ProviderType: " + mo["ProviderType"] + "\n";
+                richTextBox1.Text += "SystemCreationClassName: " + mo["SystemCreationClassName"] + "\n";
+                richTextBox1.Text += "SystemName: " + mo["SystemName"] + "\n";
+
+                richTextBox1.Text += "Availability: " + mo["Availability".ToString()] + "\n";
+                //richTextBox1.Text += "Capabilities: " + mo["Capabilities[]".ToString()] + "\n";
+                richTextBox1.Text += "ConfigManagerErrorCode: " + mo["ConfigManagerErrorCode".ToString()] + "\n";
+                richTextBox1.Text += "LastErrorCode: " + mo["LastErrorCode".ToString()] + "\n";
+                richTextBox1.Text += "MaxBaudRate: " + mo["MaxBaudRate".ToString()] + "\n";
+                richTextBox1.Text += "MaximumInputBufferSize: " + mo["MaximumInputBufferSize".ToString()] + "\n";
+                richTextBox1.Text += "MaximumOutputBufferSize: " + mo["MaximumOutputBufferSize".ToString()] + "\n";
+                richTextBox1.Text += "MaxNumberControlled: " + mo["MaxNumberControlled".ToString()] + "\n";
+                //richTextBox1.Text += "PowerManagementCapabilities: " + mo["PowerManagementCapabilities[]".ToString()] + "\n";
+                richTextBox1.Text += "ProtocolSupported: " + mo["ProtocolSupported".ToString()] + "\n";
+                richTextBox1.Text += "StatusInfo: " + mo["StatusInfo".ToString()] + "\n";
+
+                richTextBox1.Text += "Binary: " + mo["Binary".ToString()] + "\n";
+                richTextBox1.Text += "ConfigManagerUserConfig: " + mo["ConfigManagerUserConfig".ToString()] + "\n";
+                richTextBox1.Text += "ErrorCleared: " + mo["ErrorCleared".ToString()] + "\n";
+                richTextBox1.Text += "OSAutoDiscovered: " + mo["OSAutoDiscovered".ToString()] + "\n";
+                richTextBox1.Text += "PowerManagementSupported: " + mo["PowerManagementSupported".ToString()] + "\n";
+                richTextBox1.Text += "SettableBaudRate: " + mo["SettableBaudRate".ToString()] + "\n";
+                richTextBox1.Text += "SettableDataBits: " + mo["SettableDataBits".ToString()] + "\n";
+                richTextBox1.Text += "SettableFlowControl: " + mo["SettableFlowControl".ToString()] + "\n";
+                richTextBox1.Text += "SettableParity: " + mo["SettableParity".ToString()] + "\n";
+                richTextBox1.Text += "SettableParityCheck: " + mo["SettableParityCheck".ToString()] + "\n";
+                richTextBox1.Text += "SettableRLSD: " + mo["SettableRLSD".ToString()] + "\n";
+                richTextBox1.Text += "SettableStopBits: " + mo["SettableStopBits".ToString()] + "\n";
+                richTextBox1.Text += "Supports16BitMode: " + mo["Supports16BitMode".ToString()] + "\n";
+                richTextBox1.Text += "SupportsDTRDSR: " + mo["SupportsDTRDSR".ToString()] + "\n";
+                richTextBox1.Text += "SupportsElapsedTimeouts: " + mo["SupportsElapsedTimeouts".ToString()] + "\n";
+                richTextBox1.Text += "SupportsIntTimeouts: " + mo["SupportsIntTimeouts".ToString()] + "\n";
+                richTextBox1.Text += "SupportsParityCheck: " + mo["SupportsParityCheck".ToString()] + "\n";
+                richTextBox1.Text += "SupportsRLSD: " + mo["SupportsRLSD".ToString()] + "\n";
+                richTextBox1.Text += "SupportsRTSCTS: " + mo["SupportsRTSCTS".ToString()] + "\n";
+                richTextBox1.Text += "SupportsSpecialCharacters: " + mo["SupportsSpecialCharacters".ToString()] + "\n";
+                richTextBox1.Text += "SupportsXOnXOff: " + mo["SupportsXOnXOff".ToString()] + "\n";
+                richTextBox1.Text += "SupportsXOnXOffSet: " + mo["SupportsXOnXOffSet".ToString()] + "\n";
+
+                richTextBox1.Text += "TimeOfLastReset: " + mo["TimeOfLastReset".ToString()] + "\n";
+                richTextBox1.Text += "InstallDate: " + mo["InstallDate".ToString()] + "\n";
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "\nMSSerial_PortName\n";
+            //找USB插入的佔用的Port name
+            mos = new ManagementObjectSearcher("root\\WMI", "SELECT * FROM MSSerial_PortName");
+            //ManagementObjectSearcher mos = new ManagementObjectSearcher("root\\WMI", "SELECT * FROM MSSerial_PortName Where InstanceName like '%VID_067B&PID_2303%'");   //這裡是利用Prolific做的驅動程式
+            //ManagementObjectSearcher mos = new ManagementObjectSearcher("root\\WMI", "SELECT * FROM MSSerial_PortName Where InstanceName like '%USB%'");                 //搜尋名字含有USB的部分
+
+            //NG 
+            return;
+            foreach (ManagementObject mo in mos.Get())
+            {
+                try
+                {
+                    richTextBox1.Text += "\nInstanceName: " + mo["InstanceName"] + "\n";
+                    richTextBox1.Text += "PortName: " + mo["PortName"] + "\n";
+                    richTextBox1.Text += "Active: " + mo["Active"].ToString() + "\n";
+
+                    //If the serial port's instance name contains USB 
+                    //it must be a USB to serial device
+                    if (mo["InstanceName"].ToString().Contains("USB"))
+                    {
+                        richTextBox1.Text += "\t" + mo["PortName"] + " is a USB to SERIAL adapter/converter" + "\n";
+                    }
+                }
+                catch { }
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -410,7 +798,6 @@ namespace vcs_WMI__new
                     ar = (System.Array)(mo.Properties["IpAddress"].Value);
                     string st = ar.GetValue(0).ToString();
                     richTextBox1.Text += "讀取IP地址 : " + st + "\n";
-
                 }
             }
 
@@ -425,7 +812,6 @@ namespace vcs_WMI__new
                     richTextBox1.Text += "網卡MAC位址: " + mo["MacAddress"].ToString() + "\n";
                 }
             }
-
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -597,6 +983,30 @@ namespace vcs_WMI__new
                 richTextBox1.Text += "Caption : " + caption + "\n";
             }
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_USBHub");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "==========================================================";
+                richTextBox1.Text += Environment.NewLine;
+                richTextBox1.Text += "Name : " + mo["Name"].ToString();
+                richTextBox1.Text += Environment.NewLine;
+                richTextBox1.Text += "DeviceID : " + mo["DeviceID"].ToString();
+                richTextBox1.Text += Environment.NewLine;
+            }
+            richTextBox1.Text += "==========================================================";
+            richTextBox1.Text += Environment.NewLine;
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "\nDevice\t\t\t\tPnP Device ID\t\t\t\tDescription\n";
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_USBHub");
+            foreach (ManagementObject usb_device in mos.Get())
+            {
+                richTextBox1.Text += usb_device.Properties["DeviceID"].Value.ToString() + "\t\t";
+                richTextBox1.Text += usb_device.Properties["PNPDeviceID"].Value.ToString() + "\t\t";
+                richTextBox1.Text += usb_device.Properties["Description"].Value.ToString() + "\n";
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -625,7 +1035,8 @@ namespace vcs_WMI__new
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //取得主機板序號
+            richTextBox1.Text += "Win32_BIOS 獲取主機板BIOS序號\n";
+
             ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_BIOS");
             foreach (ManagementObject mo in mos.Get())
             {
@@ -641,6 +1052,15 @@ namespace vcs_WMI__new
 
                     string sBIOSSerialNumber = mo.GetPropertyValue("SerialNumber").ToString().Trim();
                     richTextBox1.Text += "取得 : " + sBIOSSerialNumber + "\n";
+
+                    richTextBox1.Text += "主機板BIOS序號：" + mo["SerialNumber"].ToString().Trim() + "\n";
+
+                    richTextBox1.Text += "主機板BIOS名稱：" + mo["Name"].ToString().Trim() + "\n";
+
+                    richTextBox1.Text += "主機板BIOS時間：" + mo["ReleaseDate"].ToString().Trim() + "\n";
+                    richTextBox1.Text += "主機板BIOS製造商：" + mo["Manufacturer"].ToString().Trim() + "\n";
+                    richTextBox1.Text += "主機板BIOS版本：" + mo["SMBIOSBIOSVersion"].ToString().Trim() + "\n";
+
                 }
                 catch (Exception ex)
                 {
@@ -668,26 +1088,135 @@ namespace vcs_WMI__new
                 richTextBox1.Text += "主板型號\t\t" + mo.GetPropertyValue("Name").ToString() + "\n";          //取得主板型號
             }
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            richTextBox1.Text += "Win32_BIOS 獲取主機板BIOS序號\n";
-            mos = new ManagementObjectSearcher("SELECT * FROM Win32_BIOS");
-            foreach (ManagementObject mo in mos.Get())
-            {
-                richTextBox1.Text += "主機板BIOS序號：" + mo["SerialNumber"].ToString().Trim() + "\n";
-
-                richTextBox1.Text += "主機板BIOS名稱：" + mo["Name"].ToString().Trim() + "\n";
-
-                richTextBox1.Text += "主機板BIOS時間：" + mo["ReleaseDate"].ToString().Trim() + "\n";
-                richTextBox1.Text += "主機板BIOS製造商：" + mo["Manufacturer"].ToString().Trim() + "\n";
-                richTextBox1.Text += "主機板BIOS版本：" + mo["SMBIOSBIOSVersion"].ToString().Trim() + "\n";
-            }
-
-
-
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //獲取硬碟資訊  (全部)
+            richTextBox1.Text += "\n獲取全部硬碟資訊\n";
+            richTextBox1.Text += "\nWin32_DiskDrive\n";
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "\n\n==========================================================";
+                richTextBox1.Text += "\n";
+
+                richTextBox1.Text += "Description: " + (mo["Description"]) + "\n";
+                richTextBox1.Text += "Name: " + (mo["Name"]) + "\n";
+                richTextBox1.Text += "Model: " + (mo["Model"]) + "\n";
+                richTextBox1.Text += "DeviceID: " + (mo["DeviceId"]) + "\n";
+                richTextBox1.Text += "BytesPerSector: " + (mo["BytesPerSector".ToString()]) + "\n";
+                richTextBox1.Text += "Size: " + (mo["Size".ToString()]) + "\n";
+                richTextBox1.Text += "InterfaceType: " + (mo["InterfaceType"]) + "\n";
+                richTextBox1.Text += "PNPDeviceID: " + (mo["PNPDeviceID"]) + "\n";
+                //richTextBox1.Text += "SerialNumber " + (mo["SerialNumber"]) + "\n";
+
+                richTextBox1.Text += "Manufacturer: " + (mo["Manufacturer"]) + "\n";
+
+                richTextBox1.Text += "CapabilityDescriptions: " + (mo["CapabilityDescriptions"]) + "\n";
+                richTextBox1.Text += "Caption: " + (mo["Caption"]) + "\n";
+                richTextBox1.Text += "CompressionMethod: " + (mo["CompressionMethod"]) + "\n";
+                richTextBox1.Text += "CreationClassName: " + (mo["CreationClassName"]) + "\n";
+                richTextBox1.Text += "SystemCreationClassName: " + (mo["SystemCreationClassName"]) + "\n";
+                richTextBox1.Text += "SystemName: " + (mo["SystemName"]) + "\n";
+                richTextBox1.Text += "ErrorDescription: " + (mo["ErrorDescription"]) + "\n";
+                richTextBox1.Text += "ErrorMethodology: " + (mo["ErrorMethodology"]) + "\n";
+                //richTextBox1.Text += "FirmwareRevision: " + (mo["FirmwareRevision"]) + "\n";
+                richTextBox1.Text += "MediaType: " + (mo["MediaType"]) + "\n";
+                richTextBox1.Text += "Status: " + (mo["Status"]) + "\n";
+
+                richTextBox1.Text += "Index: " + (mo["Index".ToString()]) + "\n";
+                richTextBox1.Text += "LastErrorCode: " + (mo["LastErrorCode".ToString()]) + "\n";
+                richTextBox1.Text += "Partitions: " + (mo["Partitions".ToString()]) + "\n";
+                richTextBox1.Text += "SectorsPerTrack: " + (mo["SectorsPerTrack".ToString()]) + "\n";
+                richTextBox1.Text += "Signature: " + (mo["Signature".ToString()]) + "\n";
+                richTextBox1.Text += "CYLINDER: " + (mo["TotalCylinders".ToString()]) + "\n";
+                richTextBox1.Text += "HEAD: : " + (mo["TotalHeads".ToString()]) + "\n";
+                richTextBox1.Text += "SECTOR: " + (mo["TotalSectors".ToString()]) + "\n";
+                richTextBox1.Text += "TRACK: " + (mo["TotalTracks".ToString()]) + "\n";
+                richTextBox1.Text += "TracksPerCylinder: " + (mo["TracksPerCylinder".ToString()]) + "\n";
+
+                richTextBox1.Text += "Availability: " + (mo["Availability".ToString()]) + "\n";
+                //richTextBox1.Text += "Capabilities: " + (mo["Capabilities[]".ToString()]) + "\n";
+                richTextBox1.Text += "ConfigManagerErrorCode: " + (mo["ConfigManagerErrorCode".ToString()]) + "\n";
+                richTextBox1.Text += "DefaultBlockSize: " + (mo["DefaultBlockSize".ToString()]) + "\n";
+                richTextBox1.Text += "MaxBlockSize: " + (mo["MaxBlockSize".ToString()]) + "\n";
+                richTextBox1.Text += "MaxMediaSize: " + (mo["MaxMediaSize".ToString()]) + "\n";
+                richTextBox1.Text += "MinBlockSize: " + (mo["MinBlockSize".ToString()]) + "\n";
+                richTextBox1.Text += "NumberOfMediaSupported: " + (mo["NumberOfMediaSupported".ToString()]) + "\n";
+                //richTextBox1.Text += "PowerManagementCapabilities: " + (mo["PowerManagementCapabilities[]".ToString()]) + "\n";
+                richTextBox1.Text += "SCSIBus: " + (mo["SCSIBus".ToString()]) + "\n";
+                richTextBox1.Text += "SCSILogicalUnit: " + (mo["SCSILogicalUnit".ToString()]) + "\n";
+                richTextBox1.Text += "SCSIPort: " + (mo["SCSIPort".ToString()]) + "\n";
+                richTextBox1.Text += "SCSITargetId: " + (mo["SCSITargetId".ToString()]) + "\n";
+                richTextBox1.Text += "StatusInfo: " + (mo["StatusInfo".ToString()]) + "\n";
+
+                richTextBox1.Text += "InstallDate: " + (mo["InstallDate".ToString()]) + "\n";
+
+                richTextBox1.Text += "MediaLoaded: " + (mo["MediaLoaded".ToString()]) + "\n";
+                richTextBox1.Text += "ErrorCleared: " + (mo["ErrorCleared".ToString()]) + "\n";
+                richTextBox1.Text += "ConfigManagerUserConfig: " + (mo["ConfigManagerUserConfig".ToString()]) + "\n";
+                richTextBox1.Text += "PowerManagementSupported: " + (mo["PowerManagementSupported".ToString()]) + "\n";
+                richTextBox1.Text += "NeedsCleaning: " + (mo["NeedsCleaning".ToString()]) + "\n";
+
+
+                richTextBox1.Text += "\n";
+                richTextBox1.Text += "DiskPartition: ";
+                richTextBox1.Text += "\n";
+
+
+                foreach (ManagementObject b in mo.GetRelated("Win32_DiskPartition"))    //磁碟分區
+                {
+                    richTextBox1.Text += "\t";
+                    richTextBox1.Text += b["Name"];
+                    richTextBox1.Text += "\n";
+
+                    richTextBox1.Text += "Caption: " + b["Caption"] + "\n";
+                    richTextBox1.Text += "CreationClassName: " + b["CreationClassName"] + "\n";
+                    richTextBox1.Text += "Description: " + b["Description"] + "\n";
+                    richTextBox1.Text += "DeviceID: " + b["DeviceID"] + "\n";
+                    richTextBox1.Text += "SystemCreationClassName: " + b["SystemCreationClassName"] + "\n";
+                    richTextBox1.Text += "SystemName: " + b["SystemName"] + "\n";
+                    richTextBox1.Text += "Type: " + b["Type"] + "\n";
+
+                    richTextBox1.Text += "Index: " + (b["Index".ToString()]) + "\n";
+                    richTextBox1.Text += "DiskIndex: " + (b["DiskIndex".ToString()]) + "\n";
+                    richTextBox1.Text += "BlockSize: " + (b["BlockSize".ToString()]) + "\n";
+                    richTextBox1.Text += "NumberOfBlocks: " + (b["NumberOfBlocks".ToString()]) + "\n";
+                    richTextBox1.Text += "Size: " + (b["Size".ToString()]) + "\n";
+                    richTextBox1.Text += "Bootable: " + (b["Bootable".ToString()]) + "\n";
+                    richTextBox1.Text += "BootPartition: " + (b["BootPartition".ToString()]) + "\n";
+                    richTextBox1.Text += "PrimaryPartition: " + (b["PrimaryPartition".ToString()]) + "\n";
+                    richTextBox1.Text += "StartingOffset: " + (b["StartingOffset".ToString()]) + "\n";
+
+
+                    foreach (ManagementBaseObject c in b.GetRelated("Win32_LogicalDisk"))   //邏輯磁碟
+                    {
+                        richTextBox1.Text += "\t";
+                        richTextBox1.Text += "LogicalDisk: ";
+                        richTextBox1.Text += "\t";
+                        richTextBox1.Text += c["Name"];
+                        richTextBox1.Text += "\n" + "\t";
+
+                        richTextBox1.Text += "SystemCreationClassName: " + c["SystemCreationClassName"] + "\n" + "\t";
+                        richTextBox1.Text += "SystemName: " + c["SystemName"] + "\n" + "\t";
+                        richTextBox1.Text += "VolumeName: " + c["VolumeName"] + "\n" + "\t";
+                        richTextBox1.Text += "VolumeSerialNumber: " + c["VolumeSerialNumber"] + "\n" + "\t";
+                        richTextBox1.Text += "CreationClassName: " + c["CreationClassName"] + "\n" + "\t";
+                        richTextBox1.Text += "Description: " + c["Description"] + "\n" + "\t";
+                        richTextBox1.Text += "DeviceID: " + c["DeviceID"] + "\n" + "\t";
+                        richTextBox1.Text += "FileSystem: " + c["FileSystem"] + "\n" + "\t";
+                        richTextBox1.Text += "Caption: " + c["Caption"] + "\n" + "\t";
+                        richTextBox1.Text += "DriveType: " + c["DriveType".ToString()] + "\n" + "\t";
+                        richTextBox1.Text += "FreeSpace: " + c["FreeSpace".ToString()] + "\n" + "\t";
+                        richTextBox1.Text += "MaximumComponentLength: " + c["MaximumComponentLength".ToString()] + "\n" + "\t";
+                        richTextBox1.Text += "MediaType: " + c["MediaType".ToString()] + "\n" + "\t";
+                        richTextBox1.Text += "Size: " + c["Size".ToString()];
+                    }
+
+                    richTextBox1.Text += "\n";
+                }
+            }
         }
 
         string get_drive_type(string drive)
@@ -729,6 +1258,135 @@ namespace vcs_WMI__new
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //獲取硬碟資訊  (單一)
+
+            richTextBox1.Text += "\n獲取單一硬碟資訊\n";
+            richTextBox1.Text += "\nWin32_DiskDrive\n";
+
+            UInt32 diskNumber = 0;
+            String physicalName = ("\\\\.\\PHYSICALDRIVE" + diskNumber).Replace("\\", "\\\\");
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive WHERE DeviceID = \"" + physicalName + "\"");
+
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "\n\n==========================================================";
+                richTextBox1.Text += "\n";
+
+                richTextBox1.Text += "Description: " + (mo["Description"]) + "\n";
+                richTextBox1.Text += "Name: " + (mo["Name"]) + "\n";
+                richTextBox1.Text += "Model: " + (mo["Model"]) + "\n";
+                richTextBox1.Text += "DeviceID: " + (mo["DeviceId"]) + "\n";
+                richTextBox1.Text += "BytesPerSector: " + (mo["BytesPerSector".ToString()]) + "\n";
+                richTextBox1.Text += "Size: " + (mo["Size".ToString()]) + "\n";
+                richTextBox1.Text += "InterfaceType: " + (mo["InterfaceType"]) + "\n";
+                richTextBox1.Text += "PNPDeviceID: " + (mo["PNPDeviceID"]) + "\n";
+                //richTextBox1.Text += "SerialNumber " + (mo["SerialNumber"]) + "\n";
+
+                richTextBox1.Text += "Manufacturer: " + (mo["Manufacturer"]) + "\n";
+
+                richTextBox1.Text += "CapabilityDescriptions: " + (mo["CapabilityDescriptions"]) + "\n";
+                richTextBox1.Text += "Caption: " + (mo["Caption"]) + "\n";
+                richTextBox1.Text += "CompressionMethod: " + (mo["CompressionMethod"]) + "\n";
+                richTextBox1.Text += "CreationClassName: " + (mo["CreationClassName"]) + "\n";
+                richTextBox1.Text += "SystemCreationClassName: " + (mo["SystemCreationClassName"]) + "\n";
+                richTextBox1.Text += "SystemName: " + (mo["SystemName"]) + "\n";
+                richTextBox1.Text += "ErrorDescription: " + (mo["ErrorDescription"]) + "\n";
+                richTextBox1.Text += "ErrorMethodology: " + (mo["ErrorMethodology"]) + "\n";
+                //richTextBox1.Text += "FirmwareRevision: " + (mo["FirmwareRevision"]) + "\n";
+                richTextBox1.Text += "MediaType: " + (mo["MediaType"]) + "\n";
+                richTextBox1.Text += "Status: " + (mo["Status"]) + "\n";
+
+                richTextBox1.Text += "Index: " + (mo["Index".ToString()]) + "\n";
+                richTextBox1.Text += "LastErrorCode: " + (mo["LastErrorCode".ToString()]) + "\n";
+                richTextBox1.Text += "Partitions: " + (mo["Partitions".ToString()]) + "\n";
+                richTextBox1.Text += "SectorsPerTrack: " + (mo["SectorsPerTrack".ToString()]) + "\n";
+                richTextBox1.Text += "Signature: " + (mo["Signature".ToString()]) + "\n";
+                richTextBox1.Text += "CYLINDER: " + (mo["TotalCylinders".ToString()]) + "\n";
+                richTextBox1.Text += "HEAD: : " + (mo["TotalHeads".ToString()]) + "\n";
+                richTextBox1.Text += "SECTOR: " + (mo["TotalSectors".ToString()]) + "\n";
+                richTextBox1.Text += "TRACK: " + (mo["TotalTracks".ToString()]) + "\n";
+                richTextBox1.Text += "TracksPerCylinder: " + (mo["TracksPerCylinder".ToString()]) + "\n";
+
+                richTextBox1.Text += "Availability: " + (mo["Availability".ToString()]) + "\n";
+                //richTextBox1.Text += "Capabilities: " + (mo["Capabilities[]".ToString()]) + "\n";
+                richTextBox1.Text += "ConfigManagerErrorCode: " + (mo["ConfigManagerErrorCode".ToString()]) + "\n";
+                richTextBox1.Text += "DefaultBlockSize: " + (mo["DefaultBlockSize".ToString()]) + "\n";
+                richTextBox1.Text += "MaxBlockSize: " + (mo["MaxBlockSize".ToString()]) + "\n";
+                richTextBox1.Text += "MaxMediaSize: " + (mo["MaxMediaSize".ToString()]) + "\n";
+                richTextBox1.Text += "MinBlockSize: " + (mo["MinBlockSize".ToString()]) + "\n";
+                richTextBox1.Text += "NumberOfMediaSupported: " + (mo["NumberOfMediaSupported".ToString()]) + "\n";
+                //richTextBox1.Text += "PowerManagementCapabilities: " + (mo["PowerManagementCapabilities[]".ToString()]) + "\n";
+                richTextBox1.Text += "SCSIBus: " + (mo["SCSIBus".ToString()]) + "\n";
+                richTextBox1.Text += "SCSILogicalUnit: " + (mo["SCSILogicalUnit".ToString()]) + "\n";
+                richTextBox1.Text += "SCSIPort: " + (mo["SCSIPort".ToString()]) + "\n";
+                richTextBox1.Text += "SCSITargetId: " + (mo["SCSITargetId".ToString()]) + "\n";
+                richTextBox1.Text += "StatusInfo: " + (mo["StatusInfo".ToString()]) + "\n";
+
+                richTextBox1.Text += "InstallDate: " + (mo["InstallDate".ToString()]) + "\n";
+
+                richTextBox1.Text += "MediaLoaded: " + (mo["MediaLoaded".ToString()]) + "\n";
+                richTextBox1.Text += "ErrorCleared: " + (mo["ErrorCleared".ToString()]) + "\n";
+                richTextBox1.Text += "ConfigManagerUserConfig: " + (mo["ConfigManagerUserConfig".ToString()]) + "\n";
+                richTextBox1.Text += "PowerManagementSupported: " + (mo["PowerManagementSupported".ToString()]) + "\n";
+                richTextBox1.Text += "NeedsCleaning: " + (mo["NeedsCleaning".ToString()]) + "\n";
+
+
+                richTextBox1.Text += "\n";
+                richTextBox1.Text += "DiskPartition: ";
+                richTextBox1.Text += "\n";
+
+
+                foreach (ManagementObject b in mo.GetRelated("Win32_DiskPartition"))    //磁碟分區
+                {
+                    richTextBox1.Text += "\t";
+                    richTextBox1.Text += b["Name"];
+                    richTextBox1.Text += "\n";
+
+                    richTextBox1.Text += "Caption: " + b["Caption"] + "\n";
+                    richTextBox1.Text += "CreationClassName: " + b["CreationClassName"] + "\n";
+                    richTextBox1.Text += "Description: " + b["Description"] + "\n";
+                    richTextBox1.Text += "DeviceID: " + b["DeviceID"] + "\n";
+                    richTextBox1.Text += "SystemCreationClassName: " + b["SystemCreationClassName"] + "\n";
+                    richTextBox1.Text += "SystemName: " + b["SystemName"] + "\n";
+                    richTextBox1.Text += "Type: " + b["Type"] + "\n";
+
+                    richTextBox1.Text += "Index: " + (b["Index".ToString()]) + "\n";
+                    richTextBox1.Text += "DiskIndex: " + (b["DiskIndex".ToString()]) + "\n";
+                    richTextBox1.Text += "BlockSize: " + (b["BlockSize".ToString()]) + "\n";
+                    richTextBox1.Text += "NumberOfBlocks: " + (b["NumberOfBlocks".ToString()]) + "\n";
+                    richTextBox1.Text += "Size: " + (b["Size".ToString()]) + "\n";
+                    richTextBox1.Text += "Bootable: " + (b["Bootable".ToString()]) + "\n";
+                    richTextBox1.Text += "BootPartition: " + (b["BootPartition".ToString()]) + "\n";
+                    richTextBox1.Text += "PrimaryPartition: " + (b["PrimaryPartition".ToString()]) + "\n";
+                    richTextBox1.Text += "StartingOffset: " + (b["StartingOffset".ToString()]) + "\n";
+
+
+                    foreach (ManagementBaseObject c in b.GetRelated("Win32_LogicalDisk"))   //邏輯磁碟
+                    {
+                        richTextBox1.Text += "\t";
+                        richTextBox1.Text += "LogicalDisk: ";
+                        richTextBox1.Text += "\t";
+                        richTextBox1.Text += c["Name"];
+                        richTextBox1.Text += "\n" + "\t";
+
+                        richTextBox1.Text += "SystemCreationClassName: " + c["SystemCreationClassName"] + "\n" + "\t";
+                        richTextBox1.Text += "SystemName: " + c["SystemName"] + "\n" + "\t";
+                        richTextBox1.Text += "VolumeName: " + c["VolumeName"] + "\n" + "\t";
+                        richTextBox1.Text += "VolumeSerialNumber: " + c["VolumeSerialNumber"] + "\n" + "\t";
+                        richTextBox1.Text += "CreationClassName: " + c["CreationClassName"] + "\n" + "\t";
+                        richTextBox1.Text += "Description: " + c["Description"] + "\n" + "\t";
+                        richTextBox1.Text += "DeviceID: " + c["DeviceID"] + "\n" + "\t";
+                        richTextBox1.Text += "FileSystem: " + c["FileSystem"] + "\n" + "\t";
+                        richTextBox1.Text += "Caption: " + c["Caption"] + "\n" + "\t";
+                        richTextBox1.Text += "DriveType: " + c["DriveType".ToString()] + "\n" + "\t";
+                        richTextBox1.Text += "FreeSpace: " + c["FreeSpace".ToString()] + "\n" + "\t";
+                        richTextBox1.Text += "MaximumComponentLength: " + c["MaximumComponentLength".ToString()] + "\n" + "\t";
+                        richTextBox1.Text += "MediaType: " + c["MediaType".ToString()] + "\n" + "\t";
+                        richTextBox1.Text += "Size: " + c["Size".ToString()];
+                    }
+                    richTextBox1.Text += "\n";
+                }
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -810,47 +1468,37 @@ namespace vcs_WMI__new
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+            //獲得硬盤序號
             mos = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
+            string hardDiskID = "";
             foreach (ManagementObject mo in mos.Get())
             {
                 try
                 {
-                    string sHardDiskSerialNumber = mo["SerialNumber"].ToString().Trim();
-                    richTextBox1.Text += "讀取硬碟序號 : " + sHardDiskSerialNumber + "\n";
+                    hardDiskID = mo["SerialNumber"].ToString().Trim();
+                    richTextBox1.Text += "讀取硬碟序號 : " + hardDiskID + "\n";
 
                     string cc = mo.Properties["SerialNumber"].Value.ToString();
                     richTextBox1.Text += cc + "\n";
+
+                    if (mo["SerialNumber"] == null)
+                    {
+                        //hd.SerialNo = "None";
+                        richTextBox1.Text += "None" + "\n";
+                    }
+                    else
+                    {
+                        richTextBox1.Text += mo["SerialNumber"].ToString() + "\n";
+                    }
+
                 }
                 catch (Exception ex)
                 {
                     richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
                 }
             }
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            richTextBox1.Text += "Win32_PhysicalMedia 獲取媒體資訊\n";
-
-            mos = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
-            foreach (ManagementObject mo in mos.Get())
-            {
-                // get the hard drive from collection
-                // using index
-                //HardDrive hd = (HardDrive)hdCollection[i];
-
-                // get the hardware serial no.
-                if (mo["SerialNumber"] == null)
-                {
-                    //hd.SerialNo = "None";
-                    richTextBox1.Text += "None" + "\n";
-                }
-                else
-                {
-                    richTextBox1.Text += mo["SerialNumber"].ToString() + "\n";
-                }
-            }
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
 
             // 抓取硬碟&USB儲存裝置磁碟代號
 
@@ -1033,11 +1681,86 @@ namespace vcs_WMI__new
             ManagementObject account = new ManagementObject("Win32_Account.Domain=\"KILO\",Name=\"Administrators\"");
             account.Get();
             richTextBox1.Text += "取得帳號名 : " + account + "\n";
-
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //獲取硬碟資訊  (全部)
+
+            List<string> HardDriveDeviceID = new List<string>();
+
+            richTextBox1.Text += "\n獲取全部硬碟資訊\n";
+            richTextBox1.Text += "\nWin32_DiskDrive\n";
+            //comboBox1.Items.Clear();
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "==========================================================\n";
+                richTextBox1.Text += "DeviceID: " + (mo["DeviceID"]) + "\n";
+                richTextBox1.Text += "Model: " + (mo["Model"]) + "\n";
+                richTextBox1.Text += "Size: " + (mo["Size".ToString()]) + "\n";
+                //comboBox1.Items.Add(mo["Model"]);
+                HardDriveDeviceID.Add((mo["DeviceID"].ToString()));
+            }
+            richTextBox1.Text += "==========================================================\n";
+            //comboBox1.SelectedIndex = 0;
+
+            //3030
+
+            //string physicalName = HardDriveDeviceID[comboBox1.SelectedIndex].Replace("\\", "\\\\");
+            string physicalName = HardDriveDeviceID[0].Replace("\\", "\\\\");
+
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive WHERE DeviceID = \"" + physicalName + "\"");
+
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "\n硬碟資訊: \n";
+                richTextBox1.Text += "==========================================================\n";
+                richTextBox1.Text += "DeviceID: " + (mo["DeviceID"]) + "\n";
+                richTextBox1.Text += "Model: " + (mo["Model"]) + "\n";
+                richTextBox1.Text += "Size: " + (mo["Size".ToString()]) + "\n";
+                richTextBox1.Text += "InterfaceType: " + (mo["InterfaceType"]) + "\n";
+                richTextBox1.Text += "MediaType: " + (mo["MediaType"]) + "\n";
+
+                richTextBox1.Text += "\n磁碟分區: \n";
+                foreach (ManagementObject b in mo.GetRelated("Win32_DiskPartition"))    //磁碟分區
+                {
+                    richTextBox1.Text += "----------------------------------------------------------\n";
+                    richTextBox1.Text += "\t";
+                    richTextBox1.Text += b["Name"];
+                    richTextBox1.Text += "\n";
+
+                    richTextBox1.Text += "Caption: " + b["Caption"] + "\n";
+                    richTextBox1.Text += "DeviceID: " + b["DeviceID"] + "\n";
+                    richTextBox1.Text += "Type: " + b["Type"] + "\n";
+
+                    richTextBox1.Text += "Index: " + (b["Index".ToString()]) + "\n";
+                    richTextBox1.Text += "NumberOfBlocks: " + (b["NumberOfBlocks".ToString()]) + "\n";
+                    richTextBox1.Text += "Size: " + (b["Size".ToString()]) + "\n";
+
+                    richTextBox1.Text += "\n邏輯磁碟: \n";
+                    foreach (ManagementBaseObject c in b.GetRelated("Win32_LogicalDisk"))   //邏輯磁碟
+                    {
+                        richTextBox1.Text += "\t";
+                        richTextBox1.Text += "LogicalDisk: ";
+                        richTextBox1.Text += "\t";
+                        richTextBox1.Text += c["Name"];
+                        richTextBox1.Text += "\n" + "\t";
+
+                        richTextBox1.Text += "VolumeName: " + c["VolumeName"] + "\n" + "\t";
+                        richTextBox1.Text += "VolumeSerialNumber: " + c["VolumeSerialNumber"] + "\n" + "\t";
+                        richTextBox1.Text += "DeviceID: " + c["DeviceID"] + "\n" + "\t";
+                        richTextBox1.Text += "FileSystem: " + c["FileSystem"] + "\n" + "\t";
+                        richTextBox1.Text += "DriveType: " + c["DriveType".ToString()] + "\n" + "\t";
+                        richTextBox1.Text += "FreeSpace: " + c["FreeSpace".ToString()] + "\n" + "\t";
+                        richTextBox1.Text += "MediaType: " + c["MediaType".ToString()] + "\n" + "\t";
+                        richTextBox1.Text += "Size: " + c["Size".ToString()] + "\n";
+                    }
+                    richTextBox1.Text += "----------------------------------------------------------\n";
+
+                    richTextBox1.Text += "\n";
+                }
+            }
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -1053,6 +1776,8 @@ namespace vcs_WMI__new
             ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDisk");
             foreach (ManagementObject mo1 in mos.Get())
             {
+                richTextBox1.Text += "抓到磁碟分割區 : " + mo1["Name"].ToString() + "\n";
+
                 //讀取驅動器盤符
                 string name = mo1["Name"].ToString();
                 string type = get_drive_type(mo1["Name"].ToString());
@@ -1067,6 +1792,20 @@ namespace vcs_WMI__new
                     string result3 = mo1["VolumeSerialNumber"].ToString();
                     richTextBox1.Text += "磁碟序號 : " + result3 + "\n";
                 }
+
+                richTextBox1.Text += "------------------------------\n";  // 30個
+
+                //檢查硬碟容量
+                string disk_name = mo1["Name"].ToString();
+                richTextBox1.Text += "取得硬碟 : " + disk_name + "\n";
+
+                DriveInfo dinfo = new DriveInfo(disk_name);
+                if (dinfo.IsReady == true)
+                {
+                    richTextBox1.Text += "驅動器總容量：" + dinfo.TotalSize + " B\n";
+                    richTextBox1.Text += "驅動器剩餘容量：" + dinfo.TotalFreeSpace + " B\n"; ;
+                }
+
             }
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -1329,22 +2068,14 @@ namespace vcs_WMI__new
 
         private void button16_Click(object sender, EventArgs e)
         {
-            HardwareInfo hw_info = new HardwareInfo();
-
-            richTextBox1.Text += "HostName : " + hw_info.GetHostName() + "\n";
-            richTextBox1.Text += "CPU ID : " + hw_info.GetCpuID() + "\n";
-            richTextBox1.Text += "HDD ID : " + hw_info.GetHardDiskID() + "\n";
-            richTextBox1.Text += "MAC Addr : " + hw_info.GetMacAddress() + "\n";
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
-
             richTextBox1.Text += "Win32_DesktopMonitor 獲取顯示器資訊\n";
             ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_DesktopMonitor");
             foreach (ManagementObject mo in mos.Get())
             {
-
                 richTextBox1.Text += "Name: " + mo["Name"].ToString() + "\n";
                 richTextBox1.Text += "Status: " + mo["Status"].ToString() + "\n";
                 richTextBox1.Text += "SystemCreationClassName: " + mo["SystemCreationClassName"].ToString() + "\n";
@@ -1447,7 +2178,6 @@ namespace vcs_WMI__new
             {
                 //richTextBox1.Text += "edid[" + i.ToString() + "] = " + edid[i].ToString("X2") + "\n";
             }
-
             return new SizeF(edid[21], edid[22]);
         }
 
@@ -1470,7 +2200,6 @@ namespace vcs_WMI__new
             //ManagementObjectSearcher mos = new ManagementObjectSearcher(@"root\CIMV2", "SELECT * FROM Win32_VideoController");
             foreach (ManagementObject mo in mos.Get())
             {
-
                 richTextBox1.Text += "顯示設備訊息\n";
                 richTextBox1.Text += "名稱： " + mo["Name"].ToString() + "\n";//顯示設備名稱
                 richTextBox1.Text += "設備ID" + mo["DeviceID"].ToString() + "\n";
@@ -1554,169 +2283,6 @@ namespace vcs_WMI__new
 
         private void button20_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "取得 作業系統資訊 Win32_OperatingSystem\n";
-
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
-            foreach (ManagementObject mo in mos.Get())
-            {
-                richTextBox1.Text += "Caption : " + mo.Properties["Caption"].Value.ToString().Trim() + "\n";
-                richTextBox1.Text += "Version : " + mo.Properties["Version"].Value.ToString() + " SP " + mo.Properties["ServicePackMajorVersion"].Value.ToString() + "." + mo.Properties["ServicePackMinorVersion"].Value.ToString() + "\n";
-
-                GetValue(mo, "BootDevice");
-                GetValue(mo, "BuildNumber");
-                GetValue(mo, "BuildType");
-                GetValue(mo, "Caption");
-                GetValue(mo, "CodeSet");
-                GetValue(mo, "CountryCode");
-                GetValue(mo, "CreationClassName");
-                GetValue(mo, "CSCreationClassName");
-                GetValue(mo, "CSDVersion");
-                GetValue(mo, "CSName");
-                GetValue(mo, "CurrentTimeZone");
-                GetValue(mo, "DataExecutionPrevention_Available");
-                GetValue(mo, "DataExecutionPrevention_32BitApplications");
-                GetValue(mo, "DataExecutionPrevention_Drivers");
-                GetValue(mo, "DataExecutionPrevention_SupportPolicy");
-                GetValue(mo, "Debug");
-                GetValue(mo, "Description");
-                GetValue(mo, "Distributed");
-                GetValue(mo, "EncryptionLevel");
-                GetValue(mo, "ForegroundApplicationBoost");
-                GetValue(mo, "FreePhysicalMemory");
-                GetValue(mo, "FreeSpaceInPagingFiles");
-                GetValue(mo, "FreeVirtualMemory");
-                GetValue(mo, "InstallDate");
-                GetValue(mo, "LargeSystemCache");
-                GetValue(mo, "LastBootUpTime");
-                GetValue(mo, "LocalDateTime");
-                GetValue(mo, "Locale");
-                GetValue(mo, "Manufacturer");
-                GetValue(mo, "MaxNumberOfProcesses");
-                GetValue(mo, "MaxProcessMemorySize");
-                GetValue(mo, "MUILanguages[]");
-                GetValue(mo, "Name");
-                GetValue(mo, "NumberOfLicensedUsers");
-                GetValue(mo, "NumberOfProcesses");
-                GetValue(mo, "NumberOfUsers");
-                GetValue(mo, "OperatingSystemSKU");
-                GetValue(mo, "Organization");
-                GetValue(mo, "OSArchitecture");
-                GetValue(mo, "OSLanguage");
-                GetValue(mo, "OSProductSuite");
-                GetValue(mo, "OSType");
-                GetValue(mo, "OtherTypeDescription");
-                GetValue(mo, "PAEEnabled");
-                GetValue(mo, "PlusProductID");
-                GetValue(mo, "PlusVersionNumber");
-                GetValue(mo, "Primary");
-                GetValue(mo, "ProductType");
-                GetValue(mo, "QuantumLength");
-                GetValue(mo, "QuantumType");
-                GetValue(mo, "RegisteredUser");
-                GetValue(mo, "SerialNumber");
-                GetValue(mo, "ServicePackMajorVersion");
-                GetValue(mo, "ServicePackMinorVersion");
-                GetValue(mo, "SizeStoredInPagingFiles");
-                GetValue(mo, "Status");
-                GetValue(mo, "SuiteMask");
-                GetValue(mo, "SystemDevice");
-                GetValue(mo, "SystemDirectory");
-                GetValue(mo, "SystemDrive");
-                GetValue(mo, "TotalSwapSpaceSize");
-                GetValue(mo, "TotalVirtualMemorySize");
-                GetValue(mo, "TotalVisibleMemorySize");
-                GetValue(mo, "Version");
-                GetValue(mo, "WindowsDirectory");
-
-                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-                //取得記憶體狀態
-                GetInfo(mo, "FreePhysicalMemory");
-                GetInfo(mo, "FreeSpaceInPagingFiles");
-                GetInfo(mo, "FreeVirtualMemory");
-                GetInfo(mo, "SizeStoredInPagingFiles");
-                GetInfo(mo, "TotalSwapSpaceSize");
-                GetInfo(mo, "TotalVirtualMemorySize");
-                GetInfo(mo, "TotalVisibleMemorySize");
-
-                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-                string StrInfo = mo.GetText(TextFormat.Mof);
-                string InstallDate = StrInfo.Substring(StrInfo.LastIndexOf("InstallDate") + 15, 14);
-                richTextBox1.Text += "取得作業系統安裝時間 :\t" + InstallDate + "\n";
-            }
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            richTextBox1.Text += "Win32_OperatingSystem 獲取系統的啟動日期和安裝日期\n";
-            mos = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
-            foreach (ManagementObject mo in mos.Get())
-            {
-                richTextBox1.Text += "Description: " + mo["Description"].ToString() + "\n";
-                richTextBox1.Text += "FreePhysicalMemory: " + mo["FreePhysicalMemory"].ToString() + "\n";
-                richTextBox1.Text += "FreeVirtualMemory: " + mo["FreeVirtualMemory"].ToString() + "\n";
-                richTextBox1.Text += "InstallDate: " + mo["InstallDate"].ToString() + "\n";
-                richTextBox1.Text += "InstallDate: " + mo["InstallDate"].ToString().Substring(0, 14) + "\n";
-                richTextBox1.Text += "LastBootUpTime: " + mo["LastBootUpTime"].ToString() + "\n";
-                richTextBox1.Text += "LastBootUpTime: " + mo["LastBootUpTime"].ToString().Substring(0, 14) + "\n";
-                richTextBox1.Text += "LocalDateTime: " + mo["LocalDateTime"].ToString() + "\n";
-                richTextBox1.Text += "Name: " + mo["Name"].ToString() + "\n";
-                //richTextBox1.Text += "Organization: " + mo["Organization"].ToString() + "\n";
-                richTextBox1.Text += "OSLanguage: " + mo["OSLanguage"].ToString() + "\n";
-                richTextBox1.Text += "OSType: " + mo["OSType"].ToString() + "\n";
-                richTextBox1.Text += "RegisteredUser: " + mo["RegisteredUser"].ToString() + "\n";
-                richTextBox1.Text += "SerialNumber: " + mo["SerialNumber"].ToString() + "\n";
-                richTextBox1.Text += "ServicePackMajorVersion: " + mo["ServicePackMajorVersion"].ToString() + "\n";
-                richTextBox1.Text += "ServicePackMinorVersion: " + mo["ServicePackMinorVersion"].ToString() + "\n";
-
-                richTextBox1.Text += "Caption: " + mo["Caption"].ToString() + "\n";　　//獲取OS　名稱
-                richTextBox1.Text += "Manufacturer: " + mo["Manufacturer"].ToString() + "\n";　　//獲取　OS　製造商
-                richTextBox1.Text += "CountryCode: " + mo["CountryCode"].ToString() + "\n";　　//地區
-                richTextBox1.Text += "CSName: " + mo["CSName"].ToString() + "\n";　　//獲取系統名稱
-                richTextBox1.Text += "WindowsDirectory: " + mo["WindowsDirectory"].ToString() + "\n";　　//獲取Windows　目錄
-                richTextBox1.Text += "SystemDirectory: " + mo["SystemDirectory"].ToString() + "\n";　　//獲取系統目錄
-                richTextBox1.Text += "BootDevice: " + mo["BootDevice"].ToString() + "\n";　　//獲取啟動設備
-                richTextBox1.Text += "Version: " + mo["Version"].ToString() + "\n";//獲取版本
-                //richTextBox1.Text += "CSDVersion: " + mo["CSDVersion"].ToString() + "\n";//獲取SP
-                richTextBox1.Text += "BuildNumber: " + mo["BuildNumber"].ToString() + "\n";//獲取builderNumber
-                richTextBox1.Text += "TotalVisibleMemorySize: " + ((ulong)mo["TotalVisibleMemorySize"] / 1024.0 / 1024).ToString("#0.00") + "G" + "\n";　　//獲取總的物理內存
-                richTextBox1.Text += "FreePhysicalMemory: " + ((ulong)mo["FreePhysicalMemory"] / 1024.0 / 1024).ToString("#0.00") + "G" + "\n";　　//獲取可用物理內存
-                richTextBox1.Text += "TotalVirtualMemorySize: " + ((ulong)mo["TotalVirtualMemorySize"] / 1024.0 / 1024).ToString("#0.00") + "G" + "\n";　　　//獲取總的虛擬內存
-                richTextBox1.Text += "FreeVirtualMemory: " + ((ulong)mo["FreeVirtualMemory"] / 1024.0 / 1024).ToString("#0.00") + "G" + "\n";　　//獲取可用虛擬內存
-                richTextBox1.Text += "SizeStoredInPagingFiles: " + ((ulong)mo["SizeStoredInPagingFiles"] / 1024.0 / 1024).ToString("#0.00") + "G" + "\n";　　//獲取頁面文檔大小
-            }
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-        }
-
-        // Add information about the property to the ListView.
-        private void GetInfo(ManagementObject mobj, string property_name)
-        {
-            object property_obj = mobj[property_name];
-            if (property_obj == null)
-            {
-                //lvwInfo.AddRow(property_name, "???");
-                richTextBox1.Text += property_name + "\t\t???\n";
-            }
-            else
-            {
-                ulong property_value = (ulong)property_obj * 1024;
-                //lvwInfo.AddRow(property_name, property_value.ToFileSizeApi());
-                richTextBox1.Text += property_name + "\t\t" + property_value.ToFileSizeApi() + "\n";
-            }
-        }
-
-        private void GetValue(ManagementObject mo, string property_name)
-        {
-            string value;
-            try
-            {
-                value = mo[property_name].ToString();
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                value = "錯誤訊息 : " + ex.Message;
-            }
-            richTextBox1.Text += property_name + "\t" + value + "\n";
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -1789,114 +2355,6 @@ namespace vcs_WMI__new
 
         private void button24_Click(object sender, EventArgs e)
         {
-            //Win32_ComputerSystem
-
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
-            foreach (ManagementObject mo in mos.Get())
-            {
-                try
-                {
-                    richTextBox1.Text += "------------------------------\n";  // 30個
-                    //richTextBox1.Text += "全部 :\n" + mo.GetText(TextFormat.Mof) + "\n";
-                    //richTextBox1.Text += "------------------------------\n";  // 30個
-
-                    int num_physical_processors = int.Parse(mo["NumberOfProcessors"].ToString());
-                    richTextBox1.Text += "取得實體核心數 : " + num_physical_processors.ToString() + "\n";
-
-                    richTextBox1.Text += "核心數 : " + mo.Properties["NumberOfLogicalProcessors"].Value.ToString() + " processors" + "\n";
-
-                    string UserName = mo["UserName"].ToString();
-                    richTextBox1.Text += "操作系統的登錄用戶名 :\t" + UserName + "\n";
-
-                    string SystemType = mo["SystemType"].ToString();
-                    richTextBox1.Text += "PC類型 :\t" + SystemType + "\n";
-
-                    System.UInt64 TotalPhysicalMemory = UInt64.MinValue;
-                    TotalPhysicalMemory = (System.UInt64)(mo["TotalPhysicalMemory"]);//單位：拜
-
-                    richTextBox1.Text += "物理內存 :\t" + TotalPhysicalMemory.ToString() + " 拜\n";
-                    richTextBox1.Text += "物理內存 :\t" + (TotalPhysicalMemory / 1024).ToString() + " K\n";
-                    richTextBox1.Text += "物理內存 :\t" + (TotalPhysicalMemory / 1024 / 1024).ToString() + " M\n";
-                    richTextBox1.Text += "物理內存 :\t" + (TotalPhysicalMemory / 1024 / 1024 / 1024).ToString() + " G\n";
-                }
-                catch
-                {
-                }
-            }
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            richTextBox1.Text += "Win32_ComputerSystem 獲取電腦資訊\n";
-            mos = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
-            foreach (ManagementObject mo in mos.Get())
-            {
-                richTextBox1.Text += "操作系統類型：" + mo["SystemType"] + "\n";
-                richTextBox1.Text += "實體記憶體：" + mo["TotalPhysicalMemory"].ToString() + "\n";
-
-                richTextBox1.Text += "PrimaryOwnerName: " + mo["PrimaryOwnerName"] + "\n";
-                richTextBox1.Text += "Status: " + mo["Status"] + "\n";
-                richTextBox1.Text += "UserName: " + mo["UserName"] + "\n";
-                richTextBox1.Text += "Caption: " + mo["Caption"] + "\n";
-                richTextBox1.Text += "BootupState: " + mo["BootupState"] + "\n";
-                richTextBox1.Text += "CreationClassName: " + mo["CreationClassName"] + "\n";
-                richTextBox1.Text += "Description: " + mo["Description"] + "\n";
-                richTextBox1.Text += "Domain: " + mo["Domain"] + "\n";
-                richTextBox1.Text += "Manufacturer: " + mo["Manufacturer"] + "\n";
-                richTextBox1.Text += "Model: " + mo["Model"] + "\n";
-                richTextBox1.Text += "Name: " + mo["Name"] + "\n";
-                /* 無資料
-                richTextBox1.Text += "aaaaa: " + mo["NameFormat"] + "\n";
-                richTextBox1.Text += "aaaaa: " + mo["Workgroup"] + "\n";
-                richTextBox1.Text += "aaaaa: " + mo["PrimaryOwnerContact"] + "\n";
-                richTextBox1.Text += "aaaaa: " + mo["LastLoadInfo"] + "\n";
-                //richTextBox1.Text += "aaaaa: " + mo["DNSHostName"] + "\n";
-                //richTextBox1.Text += "aaaaa: " + mo["InitialLoadInfo[]"] + "\n";
-                //richTextBox1.Text += "aaaaa: " + mo["Roles[]"] + "\n";
-                //richTextBox1.Text += "aaaaa: " + mo["SystemStartupOptions[]"] + "\n";
-                //richTextBox1.Text += "aaaaa: " + mo["OEMStringArray[]"] + "\n";
-                //richTextBox1.Text += "aaaaa: " + mo["SupportContactDescription[]"] + "\n";
-                //richTextBox1.Text += "aaaaa: " + mo["SystemFamily"] + "\n";
-                //richTextBox1.Text += "aaaaa: " + mo["SystemSKUNumber"] + "\n";
-                //richTextBox1.Text += "aaaaa: " + mo["ChassisSKUNumber"] + "\n";
-                */
-                richTextBox1.Text += "nnnn: " + mo["AdminPasswordStatus"].ToString() + "\n";
-                richTextBox1.Text += "nnnn: " + mo["ChassisBootupState"].ToString() + "\n";
-                richTextBox1.Text += "nnnn: " + mo["CurrentTimeZone"].ToString() + "\n";
-                richTextBox1.Text += "nnnn: " + mo["DomainRole"].ToString() + "\n";
-                richTextBox1.Text += "nnnn: " + mo["FrontPanelResetStatus"].ToString() + "\n";
-                richTextBox1.Text += "nnnn: " + mo["KeyboardPasswordStatus"].ToString() + "\n";
-                richTextBox1.Text += "nnnn: " + mo["NumberOfLogicalProcessors"].ToString() + "\n";
-                richTextBox1.Text += "NumberOfProcessors: " + mo["NumberOfProcessors"].ToString() + "\n";
-                richTextBox1.Text += "nnnn: " + mo["PauseAfterReset"].ToString() + "\n";
-                richTextBox1.Text += "nnnn: " + mo["PowerOnPasswordStatus"].ToString() + "\n";
-                richTextBox1.Text += "nnnn: " + mo["PowerState"].ToString() + "\n";
-                richTextBox1.Text += "nnnn: " + mo["PowerSupplyState"].ToString() + "\n";
-                richTextBox1.Text += "nnnn: " + mo["ResetCapability"].ToString() + "\n";
-                richTextBox1.Text += "nnnn: " + mo["ResetCount"].ToString() + "\n";
-                richTextBox1.Text += "nnnn: " + mo["ResetLimit"].ToString() + "\n";
-                richTextBox1.Text += "nnnn: " + mo["SystemStartupDelay"].ToString() + "\n";
-                richTextBox1.Text += "nnnn: " + mo["SystemStartupSetting"].ToString() + "\n";
-                richTextBox1.Text += "nnnn: " + mo["ThermalState"].ToString() + "\n";
-                richTextBox1.Text += "nnnn: " + mo["WakeUpType"].ToString() + "\n";
-                /* 無資料
-                //richTextBox1.Text += "nnnn: " + mo["OEMLogoBitmap[]"].ToString() + "\n";
-                //richTextBox1.Text += "nnnn: " + mo["PCSystemType"].ToString() + "\n";
-                //richTextBox1.Text += "nnnn: " + mo["BootOptionOnLimit"].ToString() + "\n";
-                //richTextBox1.Text += "nnnn: " + mo["BootOptionOnWatchDog"].ToString() + "\n";
-                //richTextBox1.Text += "nnnn: " + mo["BootStatus[]"].ToString() + "\n";
-                //richTextBox1.Text += "nnnn: " + mo["PCSystemTypeEx"].ToString() + "\n";
-                //richTextBox1.Text += "nnnn: " + mo["PowerManagementCapabilities[]"].ToString() + "\n";
-                */
-
-                //richTextBox1.Text += "InstallDate: " + mo["InstallDate"].ToString() + "\n";
-            }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            int num_logical_processors = Environment.ProcessorCount;
-            richTextBox1.Text += "取得邏輯核心數 : " + num_logical_processors.ToString() + "\n";
-            richTextBox1.Text += "LogicalProcessors\t" + num_logical_processors.ToString() + "\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -1991,35 +2449,18 @@ namespace vcs_WMI__new
 
         private void button27_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Win32_USBHub 1\n";
-            //取得USB資訊
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_USBHub");
+            richTextBox1.Text += "\n取得所有的邏輯磁碟區：\n";
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDisk");
             foreach (ManagementObject mo in mos.Get())
             {
-                richTextBox1.Text += "==========================================================";
-                richTextBox1.Text += Environment.NewLine;
-                richTextBox1.Text += "Name : " + mo["Name"].ToString();
-                richTextBox1.Text += Environment.NewLine;
-                richTextBox1.Text += "DeviceID : " + mo["DeviceID"].ToString();
-                richTextBox1.Text += Environment.NewLine;
+                richTextBox1.Text += mo["Name"].ToString() + "\t";
+                richTextBox1.Text += "VolumeSerialNumber: " + mo["VolumeSerialNumber"] + "\n";
             }
-            richTextBox1.Text += "==========================================================";
-            richTextBox1.Text += Environment.NewLine;
 
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
-            //Win32_USBHub 2
-            richTextBox1.Text += "\nDevice\t\t\t\tPnP Device ID\t\t\t\tDescription\n";
-            ManagementObjectSearcher device_searcher = new ManagementObjectSearcher("SELECT * FROM Win32_USBHub");
-            foreach (ManagementObject usb_device in device_searcher.Get())
-            {
-                richTextBox1.Text += usb_device.Properties["DeviceID"].Value.ToString() + "\t\t";
-                richTextBox1.Text += usb_device.Properties["PNPDeviceID"].Value.ToString() + "\t\t";
-                richTextBox1.Text += usb_device.Properties["Description"].Value.ToString() + "\n";
-            }
-
         }
 
         private void button29_Click(object sender, EventArgs e)
@@ -2109,217 +2550,6 @@ namespace vcs_WMI__new
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
     }
-
-    /// <summary>
-    /// Hardware_Mac 的摘要說明。
-    /// </summary>
-    public class HardwareInfo
-    {
-        //取機器名
-        public string GetHostName()
-        {
-            return System.Net.Dns.GetHostName();
-        }
-
-        //取CPU編號
-        public String GetCpuID()
-        {
-            try
-            {
-                ManagementClass mc = new ManagementClass("Win32_Processor");
-                ManagementObjectCollection moc = mc.GetInstances();
-
-                String strCpuID = null;
-                foreach (ManagementObject mo in moc)
-                {
-                    strCpuID = mo.Properties["ProcessorId"].Value.ToString();
-                    break;
-                }
-                return strCpuID;
-            }
-            catch
-            {
-                return "";
-            }
-
-        }//end method
-
-        //取第一塊硬盤編號
-        public String GetHardDiskID()
-        {
-            try
-            {
-                ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
-                String strHardDiskID = null;
-                foreach (ManagementObject mo in searcher.Get())
-                {
-                    strHardDiskID = mo["SerialNumber"].ToString().Trim();
-                    break;
-                }
-                return strHardDiskID;
-            }
-            catch
-            {
-                return "";
-            }
-        }//end
-
-        public enum NCBCONST
-        {
-            NCBNAMSZ = 16, /* absolute length of a net name */
-            MAX_LANA = 254, /* lana's in range 0 to MAX_LANA inclusive */
-            NCBENUM = 0x37, /* NCB ENUMERATE LANA NUMBERS */
-            NRC_GOODRET = 0x00, /* good return */
-            NCBRESET = 0x32, /* NCB RESET */
-            NCBASTAT = 0x33, /* NCB ADAPTER STATUS */
-            NUM_NAMEBUF = 30, /* Number of NAME's BUFFER */
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct ADAPTER_STATUS
-        {
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
-            public byte[] adapter_address;
-            public byte rev_major;
-            public byte reserved0;
-            public byte adapter_type;
-            public byte rev_minor;
-            public ushort duration;
-            public ushort frmr_recv;
-            public ushort frmr_xmit;
-            public ushort iframe_recv_err;
-            public ushort xmit_aborts;
-            public uint xmit_success;
-            public uint recv_success;
-            public ushort iframe_xmit_err;
-            public ushort recv_buff_unavail;
-            public ushort t1_timeouts;
-            public ushort ti_timeouts;
-            public uint reserved1;
-            public ushort free_ncbs;
-            public ushort max_cfg_ncbs;
-            public ushort max_ncbs;
-            public ushort xmit_buf_unavail;
-            public ushort max_dgram_size;
-            public ushort pending_sess;
-            public ushort max_cfg_sess;
-            public ushort max_sess;
-            public ushort max_sess_pkt_size;
-            public ushort name_count;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct NAME_BUFFER
-        {
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)NCBCONST.NCBNAMSZ)]
-            public byte[] name;
-            public byte name_num;
-            public byte name_flags;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct NCB
-        {
-            public byte ncb_command;
-            public byte ncb_retcode;
-            public byte ncb_lsn;
-            public byte ncb_num;
-            public IntPtr ncb_buffer;
-            public ushort ncb_length;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)NCBCONST.NCBNAMSZ)]
-            public byte[] ncb_callname;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)NCBCONST.NCBNAMSZ)]
-            public byte[] ncb_name;
-            public byte ncb_rto;
-            public byte ncb_sto;
-            public IntPtr ncb_post;
-            public byte ncb_lana_num;
-            public byte ncb_cmd_cplt;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 10)]
-            public byte[] ncb_reserve;
-            public IntPtr ncb_event;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct LANA_ENUM
-        {
-            public byte length;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)NCBCONST.MAX_LANA)]
-            public byte[] lana;
-        }
-
-        [StructLayout(LayoutKind.Auto)]
-        public struct ASTAT
-        {
-            public ADAPTER_STATUS adapt;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = (int)NCBCONST.NUM_NAMEBUF)]
-            public NAME_BUFFER[] NameBuff;
-        }
-
-        public class Win32API
-        {
-            [DllImport("NETAPI32.DLL")]
-            public static extern char Netbios(ref NCB ncb);
-        }
-
-        public string GetMacAddress()
-        {
-            string addr = "";
-            try
-            {
-                int cb;
-                ASTAT adapter;
-                NCB Ncb = new NCB();
-                char uRetCode;
-                LANA_ENUM lenum;
-
-                Ncb.ncb_command = (byte)NCBCONST.NCBENUM;
-                cb = Marshal.SizeOf(typeof(LANA_ENUM));
-                Ncb.ncb_buffer = Marshal.AllocHGlobal(cb);
-                Ncb.ncb_length = (ushort)cb;
-                uRetCode = Win32API.Netbios(ref Ncb);
-                lenum = (LANA_ENUM)Marshal.PtrToStructure(Ncb.ncb_buffer, typeof(LANA_ENUM));
-                Marshal.FreeHGlobal(Ncb.ncb_buffer);
-                if (uRetCode != (short)NCBCONST.NRC_GOODRET)
-                    return "";
-
-                for (int i = 0; i < lenum.length; i++)
-                {
-                    Ncb.ncb_command = (byte)NCBCONST.NCBRESET;
-                    Ncb.ncb_lana_num = lenum.lana[i];
-                    uRetCode = Win32API.Netbios(ref Ncb);
-                    if (uRetCode != (short)NCBCONST.NRC_GOODRET)
-                        return "";
-
-                    Ncb.ncb_command = (byte)NCBCONST.NCBASTAT;
-                    Ncb.ncb_lana_num = lenum.lana[i];
-                    Ncb.ncb_callname[0] = (byte)'*';
-                    cb = Marshal.SizeOf(typeof(ADAPTER_STATUS)) + Marshal.SizeOf(typeof(NAME_BUFFER)) * (int)NCBCONST.NUM_NAMEBUF;
-                    Ncb.ncb_buffer = Marshal.AllocHGlobal(cb);
-                    Ncb.ncb_length = (ushort)cb;
-                    uRetCode = Win32API.Netbios(ref Ncb);
-                    adapter.adapt = (ADAPTER_STATUS)Marshal.PtrToStructure(Ncb.ncb_buffer, typeof(ADAPTER_STATUS));
-                    Marshal.FreeHGlobal(Ncb.ncb_buffer);
-
-                    if (uRetCode == (short)NCBCONST.NRC_GOODRET)
-                    {
-                        if (i > 0)
-                            addr += ":";
-                        addr = string.Format("{0,2:X}{1,2:X}{2,2:X}{3,2:X}{4,2:X}{5,2:X}",
-                        adapter.adapt.adapter_address[0],
-                        adapter.adapt.adapter_address[1],
-                        adapter.adapt.adapter_address[2],
-                        adapter.adapt.adapter_address[3],
-                        adapter.adapt.adapter_address[4],
-                        adapter.adapt.adapter_address[5]);
-                    }
-                }
-            }
-            catch
-            { }
-            return addr.Replace(' ', '0');
-        }
-    }
 }
 
 //------------------------------------------------------------  # 60個
@@ -2334,3 +2564,4 @@ namespace vcs_WMI__new
 // richTextBox1.Text += "------------------------------\n";  // 30個
 // 1515
 // richTextBox1.Text += "---------------\n";  // 15個
+

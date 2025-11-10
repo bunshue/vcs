@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.IO;    //for File
 using System.Diagnostics;       //for Process
 using System.Threading;
-using System.Management;    //for ManagementObjectSearcher
 using System.Runtime.InteropServices;   //for DllImport
 using System.Text.RegularExpressions;
 using System.Drawing.Imaging;           //for PixelFormat

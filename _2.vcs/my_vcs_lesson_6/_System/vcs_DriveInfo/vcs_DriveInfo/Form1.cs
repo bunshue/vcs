@@ -8,8 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;            //for DriveInfo
-using System.Management;    //for ManagementObject, 需加入參考System.Management
-
 using System.Globalization; //for CultureInfo
 
 namespace vcs_DriveInfo
@@ -46,39 +44,19 @@ namespace vcs_DriveInfo
             if (drives.Length > 0)
                 comboBox_drive.Text = drives[0].ToString();
 
+            comboBox_drive.Items.Clear();
 
-            /*
-            //法一
-            comboBox_drive.Items.Clear();   //Clear All items in Combobox
-            DriveInfo[] drives = DriveInfo.GetDrives();
-            foreach (DriveInfo drive in drives)
-            {
-                comboBox_drive.Items.Add(drive.ToString());
-            }
-
-            // same
             //if (comboBox_drive.Items.Count > 0)
-                //comboBox_drive.Text = comboBox_drive.Items[0].ToString();
+            //comboBox_drive.Text = comboBox_drive.Items[0].ToString();
 
             if (drives.Length > 0)
                 comboBox_drive.Text = drives[0].ToString();
-			*/
-            //法二
-            comboBox_drive.Items.Clear();
-            SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(selectQuery);
-            foreach (ManagementObject disk in searcher.Get())
-            {
-                comboBox_drive.Items.Add(disk["Name"].ToString());
-            }
 
             //same
             if (comboBox_drive.Items.Count > 0)
             {
                 comboBox_drive.Text = comboBox_drive.Items[0].ToString();
             }
-            //same
-            comboBox_drive.SelectedIndex = 0;
         }
 
         private void Form1_Load(object sender, EventArgs e)

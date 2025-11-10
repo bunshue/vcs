@@ -9,7 +9,6 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Management;    //參考/加入參考/.NET/System.Management
 
 namespace vcs_DriveInfo1
 {
@@ -24,18 +23,7 @@ namespace vcs_DriveInfo1
         {
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            /*
-            // 找磁碟分割區方法一, 要用System.Management
-            SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");//查询磁盘信息
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(selectQuery);//创建WMI查询对象
-            foreach (ManagementObject disk in searcher.Get())//遍历所有磁盘
-            {
-                comboBox1.Items.Add(disk["Name"].ToString());//将磁盘名称添加到下拉列表中
-                richTextBox1.Text += "抓到磁碟分割區 : " + disk["Name"].ToString() + "\n";
-            }
-            */
-
-            // 找磁碟分割區方法二
+            // 找磁碟分割區
             DriveInfo[] drives = DriveInfo.GetDrives();
             foreach (DriveInfo drive in drives)
             {
@@ -114,36 +102,11 @@ namespace vcs_DriveInfo1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //獲得硬盤序號
-
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
-            string strHardDiskID = "";
-            foreach (ManagementObject mo in mos.Get())
-            {
-                strHardDiskID = mo["SerialNumber"].ToString().Trim();
-                break;
-            }
-            richTextBox1.Text += "獲得硬盤序號 : " + strHardDiskID + "\n";
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //檢查硬碟容量
-            SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
-            ManagementObjectSearcher mos = new ManagementObjectSearcher(selectQuery);
-            foreach (ManagementObject mo in mos.Get())
-            {
-                string disk_name = mo["Name"].ToString();
-                richTextBox1.Text += "取得硬碟 : " + disk_name + "\n";
-
-                DriveInfo dinfo = new DriveInfo(disk_name);
-                if (dinfo.IsReady == true)
-                {
-                    richTextBox1.Text += "驅動器總容量：" + dinfo.TotalSize + " B\n";
-                    richTextBox1.Text += "驅動器剩餘容量：" + dinfo.TotalFreeSpace + " B\n"; ;
-                }
-            }
         }
 
         //取得硬碟資訊 ST
@@ -192,7 +155,6 @@ namespace vcs_DriveInfo1
                 MessageBox.Show("NO");
             }
         }
-
         //取得硬碟資訊 SP
     }
 }
