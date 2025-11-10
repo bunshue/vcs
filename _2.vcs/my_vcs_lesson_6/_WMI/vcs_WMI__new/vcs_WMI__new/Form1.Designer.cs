@@ -72,7 +72,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 70);
             this.button1.TabIndex = 0;
-            this.button1.Text = "WMI 使用";
+            this.button1.Text = "Win32_PageFile";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -104,7 +104,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 70);
             this.button3.TabIndex = 3;
-            this.button3.Text = "CPU";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -158,6 +157,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 70);
             this.button6.TabIndex = 8;
+            this.button6.Text = "Win32_PhysicalMemory";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -179,6 +179,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 70);
             this.button8.TabIndex = 10;
+            this.button8.Text = "Win32_PnPEntity";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -200,7 +201,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 70);
             this.button10.TabIndex = 11;
-            this.button10.Text = "判斷驅動器類型";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -243,7 +243,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 70);
             this.button14.TabIndex = 15;
-            this.button14.Text = "獲取硬碟資訊";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -265,7 +264,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 70);
             this.button16.TabIndex = 17;
-            this.button16.Text = "抓取硬碟&USB儲存裝置磁碟代號";
+            this.button16.Text = "Hardware Info";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -320,6 +319,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(200, 70);
             this.button21.TabIndex = 22;
+            this.button21.Text = "Win32_USBController";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -330,6 +330,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(200, 70);
             this.button22.TabIndex = 23;
+            this.button22.Text = "Win32_USBControllerDevice";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -340,6 +341,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(200, 70);
             this.button23.TabIndex = 24;
+            this.button23.Text = "Win32_TimeZone";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -383,6 +385,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(200, 70);
             this.button27.TabIndex = 27;
+            this.button27.Text = "Win32_USBHub 1";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -393,6 +396,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(200, 70);
             this.button28.TabIndex = 28;
+            this.button28.Text = "Win32_USBHub 2";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 

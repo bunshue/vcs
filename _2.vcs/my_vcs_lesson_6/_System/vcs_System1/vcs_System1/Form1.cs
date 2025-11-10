@@ -15,7 +15,6 @@ using System.Globalization;
 using System.Runtime.InteropServices;   //for DllImport, StructLayout
 using System.Diagnostics;       //for Process
 using System.Reflection;        //for Assembly
-using System.Management;
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Printing;  //for PrinterSettings
 
@@ -385,11 +384,10 @@ namespace vcs_System1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //取得CPU編號、硬盤編號等系統有關環境、屬性
+            //取得系統有關環境、屬性
+
             SystemInfo systemInfo = new SystemInfo();
             richTextBox1.Text += "操作系統：" + systemInfo.GetOperationSystemInName() + "\n";
-            richTextBox1.Text += "CPU編號：" + systemInfo.GetCpuId() + "\n";
-            richTextBox1.Text += "硬盤編號：" + systemInfo.GetMainHardDiskId() + "\n";
             richTextBox1.Text += "Windows目錄所在位置：" + systemInfo.GetSysDirectory() + "\n";
             richTextBox1.Text += "系統目錄所在位置：" + systemInfo.GetWinDirectory() + "\n";
             MemoryInfo memoryInfo = systemInfo.GetMemoryInfo();
@@ -1232,41 +1230,6 @@ namespace vcs_System1
 
         [DllImport("kernel32")]
         private static extern void GetSystemTime(ref SystemTimeInfo sysInfo);
-
-        /**/
-        /// <summary> 
-        /// 查詢CPU編號 
-        /// </summary> 
-        /// <returns></returns> 
-        public string GetCpuId()
-        {
-            ManagementClass mClass = new ManagementClass("Win32_Processor");
-            ManagementObjectCollection moc = mClass.GetInstances();
-            string cpuId = null;
-            foreach (ManagementObject mo in moc)
-            {
-                cpuId = mo.Properties["ProcessorId"].Value.ToString();
-                break;
-            }
-            return cpuId;
-        }
-
-        /**/
-        /// <summary> 
-        /// 查詢硬盤編號 
-        /// </summary> 
-        /// <returns></returns> 
-        public string GetMainHardDiskId()
-        {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
-            String hardDiskID = null;
-            foreach (ManagementObject mo in searcher.Get())
-            {
-                hardDiskID = mo["SerialNumber"].ToString().Trim();
-                break;
-            }
-            return hardDiskID;
-        }
 
         /**/
         /// <summary> 

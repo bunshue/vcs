@@ -19,6 +19,410 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+整理下Python常用的GUI模块
+
+1. tkinter
+2. wxPython
+3. PyQt / PySide
+4. Kivy		用Python做手機App
+5. DearPyGUI
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+輪廓矩(Moments)
+
+Python+opencv+pyaudio实现带声音屏幕录制
+
+轮廓提取模式mode: 不同的轮廓检测算法，常用的有RETR_EXTERNAL/RETR_LIST/RETR_CCOMP/RETR_TREE四种
+
+method: 轮廓逼近方法，见，可使用更少的点表示轮廓，减少内存占用。
+
+            //若無檔案，建立之
+            if (!File.Exists("MainFile.txt")) File.WriteAllText("MainFile.txt", "");
+            if (!File.Exists("Backup1.txt")) File.WriteAllText("Backup1.txt", "");
+            if (!File.Exists("Backup2.txt")) File.WriteAllText("Backup2.txt", "");
+
+            //將純文字檔全部讀出
+            txtFile.Text = File.ReadAllText("MainFile.txt");
+            txtBackup1.Text = File.ReadAllText("Backup1.txt");
+            txtBackup2.Text = File.ReadAllText("Backup2.txt");
+            //檔案移動
+            File.Replace("MainFile.txt", "Backup1.txt", "Backup2.txt");
+
+            // Write into the main file.
+            ///寫入檔案
+            File.WriteAllText("MainFile.txt", txtComment.Text);
+
+# NG
+ffmpeg -i kitano.mp4 -acodec pcm_s16le -f s16le -ac 1 -ar 16000 -f kitano.wav
+ffmpeg -i kitano.mp4 -acodec pcm_s16le -f s16le -ac 1 -ar 16000 -f kitano.wav
+ffmpeg -i kitano.mp4 -acodec pcm_s16le -f s16le -ac 1 -ar 16000 -f kitano.wav
+
+# 這樣就可以了
+ffmpeg -i kitano.mp4 kitano.wav
+ffmpeg -i kitano.mp4 kitano.mp3
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+自動化
+加時時偵測3個信號
+
+MXXXXX HIGH @ 16:32.33
+
+若未偵測，則其他timer來清掉???
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+W, H, D = 5, 4, 3
+image = np.random.randint(0, 256, size=[H, W], dtype=np.uint8)  # np.random之randint不含尾
+
+W, H, D = 5, 5, 3
+image = np.zeros((H, W), dtype=np.uint8)
+
+
+
+
+W = width
+H = height
+filename = "C:/_git//vcs/_4.python/opencv/data/_mask/mask1.png"
+image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+
+image = cv2.resize(image, (W, H))  # 縮小尺寸，加快速度
+
+while True:
+    ret, frame = cap.read()  # 讀取影片的每一個影格
+    if not ret:
+        print("Cannot receive frame")
+        break
+
+    # 透過 for 迴圈合成影像
+    for i in range(W):
+        frame[:, i, 0] = frame[:, i, 0] * (1 - image[:, i, 3] / 255) + image[:, i, 0] * (image[:, i, 3] / 255)
+        # frame[:, i, 1] = frame[:, i, 1] * (1 - image[:, i, 3] / 255) + image[:, i, 1] * (image[:, i, 3] / 255)
+        # frame[:, i, 2] = frame[:, i, 2] * (1 - image[:, i, 3] / 255) + image[:, i, 2] * (image[:, i, 3] / 255)
+
+
+                    r = Marshal.ReadByte(ptr, lineIndex + x + 2);
+                    g = Marshal.ReadByte(ptr, lineIndex + x + 1);
+                    b = Marshal.ReadByte(ptr, lineIndex + x);
+                    Marshal.WriteByte(ptr, lineIndex + x + 2, (byte)(255 - r));
+                    Marshal.WriteByte(ptr, lineIndex + x + 1, (byte)(255 - g));
+                    Marshal.WriteByte(ptr, lineIndex + x, (byte)(255 - b));
+
+return Marshal.ReadInt32(ptr) >= 0;
+return Marshal.ReadInt32(ptr) >= 0;
+
+Marshal.WriteInt32(new IntPtr(Ptr.ToInt64() + (typeof(MCvSeq), "flags").ToInt64()), 
+Marshal.WriteInt32(new IntPtr(Ptr.ToInt64() + (typeof(MCvSeq), "flags").ToInt64()), 
+
+devType = (Win32Wrapper.DBTDEVTYP)Marshal.ReadInt32(LParam, 4);
+devType = (Win32Wrapper.DBTDEVTYP)Marshal.ReadInt32(LParam, 4);
+devType = (Win32Wrapper.DBTDEVTYP)Marshal.ReadInt32(LParam, 4);
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+要用 matplotlib 顯示圖片，要先透過 matplotlib.image 模組中的
+imread() 方法讀取圖片，讀取後使用 imshow() 在圖表中繪製圖片，最後透過 plt.show() 顯示圖表。
+
+
+------------------------------------------------------------
+
+
+函數 註解
+help()
+.__doc__
+
+
+------------------------------------------------------------
+
+
+# plt存圖
+# plt.imsave('tmp_image.png', image)
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+    imgname = (msg[0].split("/"))[-1]               # 使用-1是確定最右索引
+    print(imgname)                                  # 輸出處理過程
+
+print("------------------------------------------------------------")  # 60個
+
+fn = open(path + 'info.txt', 'r')
+row = fn.readline()                                 # 讀取info.txt
+while row:
+
+    row = fn.readline()
+
+fn.close()
+
+print("------------------------------------------------------------")  # 60個
+
+    faces = face_cascade_classifier.detectMultiScale(
+        img, scaleFactor=1.1, minNeighbors=3, minSize=(20, 20)
+    )
+
+imageCrop = img[y : y + h, x : x + w]  # 裁切
+imageResize = cv2.resize(imageCrop, (160, 160))  # 重製大小
+
+print("------------------------------------------------------------")  # 60個
+
+# np.allclose():檢查兩個數組是否每個元素都相似, 預設誤差在1e-05內
+
+NumPy的实用函数整理之allclose
+
+NumPy的实用函数整理之allclose
+allclose()
+NumPy函数allclose()用于匹配两个数组，输出为布尔值，默认在1e-05的误差范围内。如果两个数组中的项在容忍范围内不相等，则返回False。这是一种检查两个数组是否每个元素都相似的好方法。
+
+allclose()
+numpy.allclose(a, b, rtol=1.e-5, atol=1.e-8, equal_nan=False)
+
+array1 = np.array([0.12,0.17,0.24,0.29])
+array2 = np.array([0.13,0.19,0.26,0.31])
+
+np.allclose(array1,array2,0.1)
+# False
+
+#把array1中的0.17改成0.18
+array3 = np.array([0.12,0.18,0.24,0.29])
+
+np.allclose(array3,array2,0.1)
+# True
+
+
+print("------------------------------------------------------------")  # 60個
+
+import os
+os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
+
+print("------------------------------------------------------------")  # 60個
+
+save_name = "{}.abc".format(filename)
+
+------------------------------------------------------------
+執行cmd命令的語法
+
+    suf = abc_file.rstrip('.abc')
+    cmd = "abc2midi {} -o {}".format(abc_file, suf + ".mid")
+    print(cmd)
+    os.system(cmd)
+    cmd = "timidity {}.mid -Ow {}.wav".format(suf, suf)
+    print(cmd)
+    return os.system(cmd) 
+
+------------------------------------------------------------
+log : true/false
+
+plt.xlabel('Episodes (log scale)' if log else 'Episodes')
+
+------------------------------------------------------------
+
+"""
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
+#video_filename = "D:/內視鏡影片/_ims影片2/180824-1025.mp4"
+
+cap = cv2.VideoCapture(video_filename)
+# cap = cv2.VideoCapture(0)
+
+while cap.isOpened():
+    ret, frame = cap.read()
+    frame = process(frame)
+    cv2.imshow("frame", frame)
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+"""
+
+
+
+
+"""
+兩圖 alpha 疊合
+cv2.addWeighted(overlay, 0.1, draw, 1 - 0.1, 0, draw)
+"""
+
+
+------------------------------------------------------------
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+num=1234
+bin(num)	轉二進位
+hex(num)	轉十六0x15 :  : 最大水平圖形尺寸 (單位為公分)。
+進位
+
+可以直接寫 
+0xffff		十六進位
+0b1010_1010	二進位
+
+print:
+用%參數格式化輸出
+format函數格式化輸出
+
+基本內建函數
+bin()
+hex()
+str()
+int()
+len()
+max()
+min()
+print("------------------------------------------------------------")  # 60個
+
+時間模組
+
+time()
+sleep(n)
+asctime()
+ctime()
+localtime()
+clock()
+process_time()
+
+plot	折線
+scatter	散點
+bar	長條
+hist	直方
+pie	圓餅
+
+座標軸設定函數：
+title
+axis
+xlim/ylim
+label
+xlabel/ylabel
+xticks/yticks
+tick_params	設定座標軸的刻度大小、顏色
+legend
+text
+grid
+show
+cla()		清除圖表
+
+linspace(ST, SP, N)
+arange(ST, SP, STEP)	array range
+
+fill_between()	填滿區間
+
+標記符號
+plt.plot(..., "rx")
+plt.plot(..., "g.")
+plt.plot(..., "b^")
+
+plt.legend(("Orange", "Lemons"), loc="upper right")
+
+
+# 樣本點的形狀
+markers = ["x", "o", "^"]
+plt.scatter(X_0, X_1, marker=markers[k], s=50)
+plt.scatter(X_0, X_1, marker="s", s=200, alpha=0.5)
+
+colors = {0: "red", 1: "blue", 2: "y"}
+group.plot(ax=ax, kind="scatter", x="x", y="y", label=key, color=colors[key])
+
+
+詞雲直接存圖
+
+if A in B:
+
+string.replace('A', 'B')
+
+python shell (IDLE)快捷鍵
+可以在option>configure IDLE>keys更改
+
+自動完成 Tab
+上一歷史輸入(history-previous) alt+p
+下一歷史輸入(history-next)alt+n
+打開自動完成選擇 ctrl+space
+查看class alt+c
+中斷執行 ctrl+c
+尋找選取 ctrl+F3
+縮排ctrl+[ / ]
+顯示呼叫提示 ctrl+\
+註解/取消註解 選取範圍 alt+3/ 4
+顯示區段(ex: []or()的範圍)
+
+IDLE常用快捷键
+
+打开IDLE，Option → Configure IDLE → Keys，查看快捷方式
+
+快捷键	说明	适用于
+F1	打开Python帮助文档	Python文件窗口和Shell窗口均可适用
+Alt+P	浏览历史命令（上一条）	仅Python Shell窗口可用
+Alt+N	浏览历史命令（下一条）	仅PythonShell窗口可用
+Alt+/	自动补全前面曾经出现过的单词，如果之前有多个单词具有相同前缀，可以连续按下快捷键，在多个单词中循环选择	Python文件窗口和Shell窗口均可用
+Alt+3	注释代码块	仅Python文件窗口可用
+Alt+4	取消注释代码块	仅Python文件窗口可用
+Alt+g	转到某一行	仅Python文件窗口可用
+Ctrl+Z	撤销一步操作	Python文件窗口和Shell窗口均可用
+Ctrl+Shift+Z	恢复上一次的撤销操作	Python文件窗口和Shell窗口均可用
+Ctrl+S	保存文件	Python文件窗口和Shell窗口均可用
+Ctrl+]	缩进代码块	仅Python文件窗口可用
+Ctrl+[	取消缩进代码块	仅Python文件窗口可用
+Ctrl+F6	重新启动Python Shell	仅Python文件窗口可用
+————————————————
+
+
+IDLE 編輯狀態時：
+Ctrl+[、Ctrl+] 	縮排程式碼（可選取多行）
+Alt+3、Alt+4 	註釋、取消註釋程式碼行（可選取多行）
+Alt+5、Alt+6 	設定 Tab 鍵等於幾個空白格
+Alt+/ 	單詞完成,只要文中出現過,就可以幫你自動補齊。多按幾次可以迴圈選擇
+Alt+M 	開啟模組程式碼,先選中模組,然後按下此快捷鍵,會幫你開啟改模組的py原始碼供瀏覽
+Alt+F+P 	開啟路徑瀏覽器,方便選擇匯入包進行檢視瀏覽
+Tab 	輸入時按 Tab，會出現選單供選擇；輸入物件. 後按 Tab，會出現 method 選單供選擇；選取多行，可以一次縮排多行
+
+封包（套件）
+封包就是存放著模組的資料夾，這時候就有個問題了，任何的程式碼都一定會被放在資料夾中，那到底是怎麼樣的資料夾才能叫做封包呢？關鍵在於那個資料夾中有沒有名為**init.py**的這支檔案，這隻檔案里不用寫任何內容，只要資料夾裡面有這隻檔案，那麼python就會認為這個資料夾是個封包
+-- 專案資料夾 -- 主程式.py -- 封包資料夾 -- __init__.py #有這支檔案的資料夾 就是封包 -- 模組1.py -- 模組2.py
+接著要使用封包裡的模組
+
+#使用封包
+import 封包名稱.模組名稱
+import 封包名稱.模組名稱 as 模組別名
+
+
+Package
+Package 則是將一群 Module 的集合，使用特別的方法將數個 Module 封裝起來:
+
+------------------------------------------------------------
+
+目前
+cv2.imshow('image',image)
+還不能顯示多圖
+
+opencv的應該盡量用 matplotlib顯示
+這樣才可以多個功能畫在一起    好像有問題
+
+
+vcs random color
+
+Random rand = new Random();
+
+Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256))
+
+
+
+
+
+
+
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 

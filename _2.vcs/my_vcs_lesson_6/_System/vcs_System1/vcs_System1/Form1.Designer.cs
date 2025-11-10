@@ -127,7 +127,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(240, 50);
             this.button3.TabIndex = 3;
-            this.button3.Text = "取得CPU編號、硬盤編號等系統有關環境、屬性";
+            this.button3.Text = "取得系統有關環境、屬性";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
