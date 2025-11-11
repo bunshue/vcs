@@ -109,7 +109,7 @@ print("json的資料內容 :", json_str)
 
 print("------------------------------------------------------------")  # 60個
 
-print('字典轉json')
+print("字典轉json")
 
 data_dict = {"英文名": "mouse", "中文名": "米老鼠", "體重": 3}
 print("data_dict字典：", data_dict)
@@ -121,7 +121,7 @@ print("json的資料型態 :", type(json_str))
 
 print("------------------------------")  # 30個
 
-print('字典轉json')
+print("字典轉json")
 
 data_dict = {"英文名": "mouse", "中文名": "米老鼠", "體重": 3}
 print(json.dumps(data_dict, ensure_ascii=False))  # 字典轉json
@@ -1066,4 +1066,3 @@ json字串 = 字典 用''包起來變成json字串
 寫檔讀檔後，會依原本儲存的格式得到格式
 
 """
-

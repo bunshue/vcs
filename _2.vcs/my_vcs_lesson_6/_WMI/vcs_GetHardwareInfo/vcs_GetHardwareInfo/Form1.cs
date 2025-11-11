@@ -8,11 +8,6 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-// Source code designed by Alireza shirazi
-// www.ShiraziOnline.net
-// year 2007
-// This source code is absolutely FREE ! Do whatever you want to do with it ;)
-
 namespace vcs_GetHardwareInfo
 {
     public partial class Form1 : Form
@@ -21,7 +16,6 @@ namespace vcs_GetHardwareInfo
         {
             InitializeComponent();
             cmbxOption.SelectedItem = "Win32_Processor";
-
         }
 
         private void InsertInfo(string Key, ref ListView lst, bool DontInsertNull)

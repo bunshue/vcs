@@ -1,9 +1,5 @@
 """
 pdf 讀寫
-
-pdf2image 需要先下載 poppler, 在 
-https://github.com/oschwartz10612/poppler-windows
-
 """
 
 import re
@@ -13,56 +9,37 @@ pdf_filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text1.pdf"
 
 print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+print("使用 PyPDF2 ST")
+print("------------------------------------------------------------")  # 60個
+
 import PyPDF2
 
-print('印出前10筆合法的密碼')
-with open('data/dictionary.txt', 'r') as txt_file_stream:
-    file_iter = iter(lambda: txt_file_stream.readline(), '')
+print("印出前10筆合法的密碼")
+with open("data/dictionary.txt", "r") as txt_file_stream:
+    file_iter = iter(lambda: txt_file_stream.readline(), "")
     print(type(file_iter))
     cnt = 0
     for word in file_iter:
-        word = re.sub(r'\s', '', word)
+        word = re.sub(r"\s", "", word)
         print(word)
         cnt += 1
         if cnt > 10:
-            break;
-        
+            break
 
-with open('data/Python_Tricks_encrypted.pdf', 'rb') as pdf_file_stream:
+
+with open("data/Python_Tricks_encrypted.pdf", "rb") as pdf_file_stream:
     reader = PyPDF2.PdfReader(pdf_file_stream)
-    with open('data/dictionary.txt', 'r') as txt_file_stream:
-        file_iter = iter(lambda: txt_file_stream.readline(), '')
+    with open("data/dictionary.txt", "r") as txt_file_stream:
+        file_iter = iter(lambda: txt_file_stream.readline(), "")
         for word in file_iter:
-            word = re.sub(r'\s', '', word)
+            word = re.sub(r"\s", "", word)
             if reader.decrypt(word):
-                print('取得密碼')
+                print("取得密碼")
                 print(word)
                 break
 
 
-print('------------------------------------------------------------')	#60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("使用  pdf2image, pdf 轉 jpg")
-print("------------------------------------------------------------")  # 60個
-
-from pdf2image import convert_from_path
-
-pages = convert_from_path(
-    pdf_filename,
-    100,
-    poppler_path=r"D:\___backup\Release-24.08.0-0\poppler-24.08.0\Library\bin",
-)
-
-for i, page in enumerate(pages):
-    pic_filename = "tmp_page" + str(i + 1) + ".png"
-    # page.save(pic_filename, "PNG") # JPEG
-    print("存檔檔名 :", pic_filename)
-
-
-print("------------------------------------------------------------")  # 60個
-print("使用  PyPDF2")
 print("------------------------------------------------------------")  # 60個
 
 import PyPDF2
@@ -115,7 +92,6 @@ with open(pdf_filename, "rb") as f:
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 import PyPDF2
 
@@ -179,16 +155,6 @@ print("------------------------------------------------------------")  # 60個
 import PyPDF2
 
 fn = "data/travel.pdf"  # 欲讀取的PDF檔案
-with open(fn, "rb") as file:  # 以二進位方式開啟
-    pdfRd = PyPDF2.PdfReader(file)  # 讀 pdf
-    page = pdfRd.pages[0]  # 讀第 0 頁
-    txt = page.extract_text()  # 取得頁面內容
-    print(txt)
-
-print("------------------------------------------------------------")  # 60個
-
-import PyPDF2
-
 fn = "data/member.pdf"  # 欲讀取的PDF檔案
 with open(fn, "rb") as file:  # 以二進位方式開啟
     pdfRd = PyPDF2.PdfReader(file)  # 讀 pdf
@@ -381,6 +347,35 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+print("使用 PyPDF2 SP")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("使用  pdf2image, pdf 轉 jpg")
+# pdf2image 需要先下載 poppler, 在
+# https://github.com/oschwartz10612/poppler-windows
+print("------------------------------------------------------------")  # 60個
+
+from pdf2image import convert_from_path
+
+pages = convert_from_path(
+    pdf_filename,
+    100,
+    poppler_path=r"D:\___backup\Release-24.08.0-0\poppler-24.08.0\Library\bin",
+)
+
+for i, page in enumerate(pages):
+    pic_filename = "tmp_page" + str(i + 1) + ".png"
+    # page.save(pic_filename, "PNG") # JPEG
+    print("存檔檔名 :", pic_filename)
+
+
+print("------------------------------------------------------------")  # 60個
+print("使用 pdfplumber ST")
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
 
 pdf_filename = "D:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text1.pdf"
 
@@ -464,6 +459,15 @@ print("ok")
 
 
 print("------------------------------------------------------------")  # 60個
+print("使用 pdfplumber SP")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("使用 pikepdf ST")
+print("------------------------------------------------------------")  # 60個
 
 from pikepdf import Pdf
 
@@ -475,7 +479,9 @@ print(pdf_pwd)
 
 print("------------------------------------------------------------")  # 60個
 
-from pikepdf import Pdf, Permissions, Encryption
+from pikepdf import Pdf
+from pikepdf import Permissions
+from pikepdf import Encryption
 
 pdf = Pdf.open("tmptmp-pwd.pdf", password="1234")  # 開啟密碼為 1234 的 pdf
 no_extracting = Permissions(extract=False)
@@ -484,9 +490,7 @@ pdf.save(
     "tmp_new.pdf", encryption=Encryption(user="qqqq", owner="qqqq", allow=no_extracting)
 )
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 from pikepdf import Pdf
 
@@ -496,9 +500,7 @@ output = Pdf.new()  # 建立新的 pdf 物件
 output.pages.append(pages[0])  # 添加頁面內容
 output.save("tmp_new2.pdf")  # 儲存為新的 pdf
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 from pikepdf import Pdf
 
@@ -511,9 +513,7 @@ for i in pages:
     output.save(f"tmp_new3_{n}.pdf")  # 格式化檔案名稱
     n = n + 1  # 編號加 1
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 from pikepdf import Pdf
 
@@ -523,9 +523,7 @@ output = Pdf.new()
 output.pages.extend(pages[1:3])  # 改用 extend，放入特定範圍的頁面
 output.save("tmp_new4.pdf")
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 from pikepdf import Pdf
 
@@ -539,9 +537,7 @@ output.pages.append(pdf2.pages[0])  # 添加第一頁到第二份
 output.pages.append(pdf3.pages[0])  # 添加第一頁到第三份
 output.save("tmp_output1.pdf")
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 from pikepdf import Pdf
 
@@ -555,7 +551,6 @@ output.pages.extend(pdf2.pages)  # 添加所有頁面到第二份
 output.pages.extend(pdf3.pages)  # 添加所有頁面到第三份
 output.save("tmp_output2.pdf")
 
-
 print("------------------------------------------------------------")  # 60個
 
 from pikepdf import Pdf
@@ -565,7 +560,6 @@ pdf2 = Pdf.open("new.pdf")  # 開啟第二份 pdf
 pdf1.pages.insert(1, pdf2.pages[0])  # 在第一份的第一頁後方，插入第二份的第一頁
 pdf1.save("tmp_output3.pdf")
 
-
 print("------------------------------------------------------------")  # 60個
 
 from pikepdf import Pdf
@@ -573,7 +567,6 @@ from pikepdf import Pdf
 pdf = Pdf.open("tmptmp.pdf")  # 開啟 pdf
 del pdf.pages[1:2]  # 刪除第二頁
 pdf.save("tmp_output4.pdf")
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -584,7 +577,6 @@ pdf2 = Pdf.open("new.pdf")  # 開啟第二份 pdf
 pdf1.pages[2] = pdf2.pages[0]  # 將第一份的第三頁，換成第一份的第一頁
 pdf1.save("tmp_output5.pdf")
 
-
 print("------------------------------------------------------------")  # 60個
 
 from pikepdf import Pdf
@@ -592,6 +584,10 @@ from pikepdf import Pdf
 pdf = Pdf.open("output.pdf")
 pdf.pages.reverse()  # 反轉 pdf
 pdf.save("tmp_output6.pdf")
+
+print("------------------------------------------------------------")  # 60個
+print("使用 pikepdf SP")
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -724,6 +720,12 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

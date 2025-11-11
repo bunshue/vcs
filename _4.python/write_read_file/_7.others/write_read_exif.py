@@ -4,7 +4,7 @@ import time
 import exifread
 
 filename = "D:/_git/vcs/_1.data/______test_files1/orient1.jpg"
-filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_gps/pic_gps2.jpg'
+filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_gps/pic_gps2.jpg"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -238,7 +238,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('修改 Exif 資料')
+print("修改 Exif 資料")
 
 import piexif
 from PIL import Image
@@ -246,7 +246,7 @@ from PIL import Image
 # https://pypi.org/project/piexif/
 # https://bit.ly/2RwbD2y
 
-filename = 'D:/_git/vcs/_1.data/______test_files1/__pic/_gps/pic_gps1.jpg'
+filename = "D:/_git/vcs/_1.data/______test_files1/__pic/_gps/pic_gps1.jpg"
 
 im = Image.open(filename)
 exif_dict = piexif.load(im.info["exif"])
@@ -354,11 +354,7 @@ print("------------------------------------------------------------")  # 60個
 sys.exit()
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
-

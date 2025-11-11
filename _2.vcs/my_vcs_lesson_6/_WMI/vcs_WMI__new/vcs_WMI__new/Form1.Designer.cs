@@ -202,7 +202,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 70);
             this.button10.TabIndex = 11;
-            this.button10.Text = "獲取硬碟資訊  (全部)";
+            this.button10.Text = "獲取硬碟資訊  (全部/單一)";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -213,7 +213,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 70);
             this.button11.TabIndex = 12;
-            this.button11.Text = "獲取硬碟資訊  (單一)";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -332,7 +331,6 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(200, 70);
             this.button22.TabIndex = 23;
-            this.button22.Text = "Win32_USBControllerDevice";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -386,7 +384,6 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(200, 70);
             this.button27.TabIndex = 27;
-            this.button27.Text = "取得所有的邏輯磁碟區";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -397,6 +394,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(200, 70);
             this.button28.TabIndex = 28;
+            this.button28.Text = "固定語法";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
