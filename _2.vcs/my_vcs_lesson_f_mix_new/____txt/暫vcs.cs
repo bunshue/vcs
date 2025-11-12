@@ -4,6 +4,78 @@
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+            string osVersionString = Environment.OSVersion.ToString();
+            richTextBox1.Text += "取得Windows版本 : " + osVersionString + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //主機名稱
+            richTextBox1.Text += "主機名稱 : " + Dns.GetHostName() + "\n";
+
+            //取得電腦名稱
+            string ComputerName = Environment.GetEnvironmentVariable("ComputerName");
+            richTextBox1.Text += "ComputerName\t" + ComputerName + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            IPAddress addr;
+            // 獲得本機局域網IP地址
+            addr = new IPAddress(Dns.GetHostByName(Dns.GetHostName()).AddressList[0].Address);
+            string cc = addr.ToString();
+
+            richTextBox1.Text += "IP地址：" + cc + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //取得系統相關資訊
+
+            //取得系統環境變數及對應的變數值
+            foreach (DictionaryEntry DEntry in Environment.GetEnvironmentVariables())
+            {
+                richTextBox1.Text += "環境變數 : " + DEntry.Key.ToString() + "\t";
+                richTextBox1.Text += "變數值 : " + DEntry.Value.ToString() + "\n";
+            }
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+            //Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定義鼠標 
+
+            string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            //string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
             //using System.Collections;
             richTextBox1.Text += "取得全球時區資訊\n";
 
