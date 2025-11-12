@@ -4,6 +4,13 @@
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+            //using System.Collections;
+            richTextBox1.Text += "取得全球時區資訊\n";
+
+            foreach (TimeZoneInfo info in TimeZoneInfo.GetSystemTimeZones())
+            {
+                richTextBox1.Text += info + "\n";
+            }
 
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

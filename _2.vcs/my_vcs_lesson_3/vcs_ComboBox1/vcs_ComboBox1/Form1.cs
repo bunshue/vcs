@@ -116,10 +116,10 @@ namespace vcs_ComboBox1
 
             //comboBox4
             //添加項 
-            comboBox4.Items.Add(new MyItem("000000", Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_red.jpg")));
-            comboBox4.Items.Add(new MyItem("111111", Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_yellow.jpg")));
-            comboBox4.Items.Add(new MyItem("222222", Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_blue.jpg")));
-            comboBox4.Items.Add(new MyItem("333333", Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_black.jpg")));
+            comboBox4.Items.Add(new MyItem("000000", Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_red.jpg")));
+            comboBox4.Items.Add(new MyItem("111111", Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_yellow.jpg")));
+            comboBox4.Items.Add(new MyItem("222222", Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_blue.jpg")));
+            comboBox4.Items.Add(new MyItem("333333", Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_black.jpg")));
 
             //默認選中項索引 
             comboBox4.SelectedIndex = 0;
@@ -134,6 +134,29 @@ namespace vcs_ComboBox1
             comboBox4.DrawItem += ComboBox4_DrawItem;
 
             setup_comboBox5();
+
+            string[] win32_cmd = new string[] {
+                "Win32_BaseBoard", "Win32_Battery", "Win32_BIOS", "Win32_DiskDrive",
+                "Win32_IDEController", "Win32_NetworkAdapter", "Win32_NetworkAdapterConfiguration",
+                "Win32_Processor", "Win32_SerialPort", "Win32_USBController", "Win32_USBHub",
+                "Win32_VideoController", "Win32_VideoSettings" };
+            comboBox7.Items.AddRange(win32_cmd);
+            comboBox7.Text = win32_cmd[0];
+
+            //預設選項包含關鍵字
+            comboBox7.SelectedItem = FindItemContaining(comboBox7.Items, "Win32_USBHub");
+        }
+
+        private object FindItemContaining(IEnumerable items, string target)
+        {
+            foreach (object item in items)
+            {
+                if (item.ToString().Contains(target))
+                {
+                    return item;
+                }
+            }
+            return null;
         }
 
         private void comboBox2_DrawItem(object sender, DrawItemEventArgs e)

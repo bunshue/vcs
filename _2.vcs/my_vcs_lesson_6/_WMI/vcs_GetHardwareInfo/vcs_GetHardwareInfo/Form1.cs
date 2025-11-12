@@ -18,6 +18,21 @@ namespace vcs_GetHardwareInfo
             cmbxOption.SelectedItem = "Win32_Processor";
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+            int w = 320;
+            int h = 64;
+        }
+
         private void InsertInfo(string Key, ref ListView lst, bool DontInsertNull)
         {
             lst.Items.Clear();
@@ -114,9 +129,6 @@ namespace vcs_GetHardwareInfo
                 if (item.SubItems[1].Text == "No Information available")
                     item.Remove();
         }
-
-
-        #region Control events ...
 
         private void cmbxNetwork_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -221,15 +233,5 @@ namespace vcs_GetHardwareInfo
             else
                 InsertInfo(cmbxUtility.SelectedItem.ToString(), ref lstUtility, false);
         }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            linkLabel1.LinkVisited = true;
-            System.Diagnostics.Process.Start("http://www.ShiraziOnline.net");
-        }
-
-        #endregion
-
-       
     }
 }

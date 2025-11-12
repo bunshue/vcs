@@ -78,9 +78,6 @@ namespace vcs_GetHardwareInfo
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabAbout = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.label1 = new System.Windows.Forms.Label();
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.MainTabControl.SuspendLayout();
@@ -92,7 +89,6 @@ namespace vcs_GetHardwareInfo
             this.tabUserAccount.SuspendLayout();
             this.tabDeveloper.SuspendLayout();
             this.tabUtility.SuspendLayout();
-            this.tabAbout.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabControl
@@ -111,7 +107,7 @@ namespace vcs_GetHardwareInfo
             this.MainTabControl.Multiline = true;
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.SelectedIndex = 0;
-            this.MainTabControl.Size = new System.Drawing.Size(813, 570);
+            this.MainTabControl.Size = new System.Drawing.Size(1147, 761);
             this.MainTabControl.TabIndex = 0;
             // 
             // tabHardware
@@ -122,7 +118,7 @@ namespace vcs_GetHardwareInfo
             this.tabHardware.Location = new System.Drawing.Point(4, 22);
             this.tabHardware.Name = "tabHardware";
             this.tabHardware.Padding = new System.Windows.Forms.Padding(3);
-            this.tabHardware.Size = new System.Drawing.Size(805, 544);
+            this.tabHardware.Size = new System.Drawing.Size(1139, 735);
             this.tabHardware.TabIndex = 0;
             this.tabHardware.Text = "Hardware Info";
             this.tabHardware.UseVisualStyleBackColor = true;
@@ -132,7 +128,7 @@ namespace vcs_GetHardwareInfo
             this.chkHardware.AutoSize = true;
             this.chkHardware.Checked = true;
             this.chkHardware.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkHardware.Location = new System.Drawing.Point(16, 17);
+            this.chkHardware.Location = new System.Drawing.Point(16, 12);
             this.chkHardware.Name = "chkHardware";
             this.chkHardware.Size = new System.Drawing.Size(163, 16);
             this.chkHardware.TabIndex = 2;
@@ -204,9 +200,9 @@ namespace vcs_GetHardwareInfo
             "Win32_VideoController",
             "Win32_VideoSettings",
             "Win32_VoltageProbe"});
-            this.cmbxOption.Location = new System.Drawing.Point(548, 15);
+            this.cmbxOption.Location = new System.Drawing.Point(817, 10);
             this.cmbxOption.Name = "cmbxOption";
-            this.cmbxOption.Size = new System.Drawing.Size(194, 20);
+            this.cmbxOption.Size = new System.Drawing.Size(304, 20);
             this.cmbxOption.Sorted = true;
             this.cmbxOption.TabIndex = 1;
             this.cmbxOption.SelectedIndexChanged += new System.EventHandler(this.cmbxOption_SelectedIndexChanged);
@@ -218,7 +214,7 @@ namespace vcs_GetHardwareInfo
             this.columnHeader2});
             this.lstDisplayHardware.Location = new System.Drawing.Point(16, 38);
             this.lstDisplayHardware.Name = "lstDisplayHardware";
-            this.lstDisplayHardware.Size = new System.Drawing.Size(726, 442);
+            this.lstDisplayHardware.Size = new System.Drawing.Size(1105, 689);
             this.lstDisplayHardware.TabIndex = 0;
             this.lstDisplayHardware.UseCompatibleStateImageBehavior = false;
             this.lstDisplayHardware.View = System.Windows.Forms.View.Details;
@@ -241,7 +237,7 @@ namespace vcs_GetHardwareInfo
             this.tabDataStorage.Location = new System.Drawing.Point(4, 22);
             this.tabDataStorage.Name = "tabDataStorage";
             this.tabDataStorage.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDataStorage.Size = new System.Drawing.Size(640, 396);
+            this.tabDataStorage.Size = new System.Drawing.Size(1139, 735);
             this.tabDataStorage.TabIndex = 4;
             this.tabDataStorage.Text = "Data Storage";
             this.tabDataStorage.UseVisualStyleBackColor = true;
@@ -312,7 +308,7 @@ namespace vcs_GetHardwareInfo
             this.tabMemory.Location = new System.Drawing.Point(4, 22);
             this.tabMemory.Name = "tabMemory";
             this.tabMemory.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMemory.Size = new System.Drawing.Size(640, 396);
+            this.tabMemory.Size = new System.Drawing.Size(1139, 735);
             this.tabMemory.TabIndex = 7;
             this.tabMemory.Text = "Memory";
             this.tabMemory.UseVisualStyleBackColor = true;
@@ -387,7 +383,7 @@ namespace vcs_GetHardwareInfo
             this.tabSystemInfo.Location = new System.Drawing.Point(4, 22);
             this.tabSystemInfo.Name = "tabSystemInfo";
             this.tabSystemInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSystemInfo.Size = new System.Drawing.Size(640, 396);
+            this.tabSystemInfo.Size = new System.Drawing.Size(1139, 735);
             this.tabSystemInfo.TabIndex = 2;
             this.tabSystemInfo.Text = "System Info";
             this.tabSystemInfo.UseVisualStyleBackColor = true;
@@ -505,7 +501,7 @@ namespace vcs_GetHardwareInfo
             this.tabNetwork.Location = new System.Drawing.Point(4, 22);
             this.tabNetwork.Name = "tabNetwork";
             this.tabNetwork.Padding = new System.Windows.Forms.Padding(3);
-            this.tabNetwork.Size = new System.Drawing.Size(640, 396);
+            this.tabNetwork.Size = new System.Drawing.Size(1139, 735);
             this.tabNetwork.TabIndex = 1;
             this.tabNetwork.Text = "Network";
             this.tabNetwork.UseVisualStyleBackColor = true;
@@ -579,7 +575,7 @@ namespace vcs_GetHardwareInfo
             this.tabUserAccount.Location = new System.Drawing.Point(4, 22);
             this.tabUserAccount.Name = "tabUserAccount";
             this.tabUserAccount.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUserAccount.Size = new System.Drawing.Size(640, 396);
+            this.tabUserAccount.Size = new System.Drawing.Size(805, 544);
             this.tabUserAccount.TabIndex = 5;
             this.tabUserAccount.Text = "User Account & Security";
             this.tabUserAccount.UseVisualStyleBackColor = true;
@@ -655,7 +651,7 @@ namespace vcs_GetHardwareInfo
             this.tabDeveloper.Location = new System.Drawing.Point(4, 22);
             this.tabDeveloper.Name = "tabDeveloper";
             this.tabDeveloper.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDeveloper.Size = new System.Drawing.Size(640, 396);
+            this.tabDeveloper.Size = new System.Drawing.Size(805, 544);
             this.tabDeveloper.TabIndex = 6;
             this.tabDeveloper.Text = "Developer";
             this.tabDeveloper.UseVisualStyleBackColor = true;
@@ -814,7 +810,7 @@ namespace vcs_GetHardwareInfo
             this.tabUtility.Location = new System.Drawing.Point(4, 22);
             this.tabUtility.Name = "tabUtility";
             this.tabUtility.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUtility.Size = new System.Drawing.Size(640, 396);
+            this.tabUtility.Size = new System.Drawing.Size(805, 544);
             this.tabUtility.TabIndex = 3;
             this.tabUtility.Text = "Utility";
             this.tabUtility.UseVisualStyleBackColor = true;
@@ -1209,48 +1205,13 @@ namespace vcs_GetHardwareInfo
             // 
             // tabAbout
             // 
-            this.tabAbout.Controls.Add(this.label2);
-            this.tabAbout.Controls.Add(this.linkLabel1);
-            this.tabAbout.Controls.Add(this.label1);
             this.tabAbout.Location = new System.Drawing.Point(4, 22);
             this.tabAbout.Name = "tabAbout";
             this.tabAbout.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAbout.Size = new System.Drawing.Size(640, 396);
+            this.tabAbout.Size = new System.Drawing.Size(1020, 692);
             this.tabAbout.TabIndex = 8;
             this.tabAbout.Text = "About";
             this.tabAbout.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label2.Location = new System.Drawing.Point(261, 69);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Produced by:";
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.linkLabel1.Location = new System.Drawing.Point(228, 118);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(168, 17);
-            this.linkLabel1.TabIndex = 1;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "www.ShiraziOnline.net";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label1.Location = new System.Drawing.Point(247, 90);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Alireza Shirazi\r\n";
             // 
             // columnHeader5
             // 
@@ -1266,12 +1227,13 @@ namespace vcs_GetHardwareInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(813, 570);
+            this.ClientSize = new System.Drawing.Size(1147, 761);
             this.Controls.Add(this.MainTabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Get Hardware Information";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.MainTabControl.ResumeLayout(false);
             this.tabHardware.ResumeLayout(false);
             this.tabHardware.PerformLayout();
@@ -1289,8 +1251,6 @@ namespace vcs_GetHardwareInfo
             this.tabDeveloper.PerformLayout();
             this.tabUtility.ResumeLayout(false);
             this.tabUtility.PerformLayout();
-            this.tabAbout.ResumeLayout(false);
-            this.tabAbout.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1349,8 +1309,5 @@ namespace vcs_GetHardwareInfo
         private System.Windows.Forms.CheckBox chkDeveloper;
         private System.Windows.Forms.CheckBox chkMemory;
         private System.Windows.Forms.TabPage tabAbout;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Label label2;
     }
 }
