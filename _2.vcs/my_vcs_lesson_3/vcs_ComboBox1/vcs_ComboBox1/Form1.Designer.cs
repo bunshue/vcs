@@ -254,6 +254,7 @@
             this.comboBox8.Name = "comboBox8";
             this.comboBox8.Size = new System.Drawing.Size(248, 20);
             this.comboBox8.TabIndex = 24;
+            this.comboBox8.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBox8_DrawItem);
             // 
             // imageList8
             // 

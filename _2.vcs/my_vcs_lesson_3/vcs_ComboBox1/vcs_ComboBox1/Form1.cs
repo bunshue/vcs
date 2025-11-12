@@ -145,6 +145,62 @@ namespace vcs_ComboBox1
 
             //預設選項包含關鍵字
             comboBox7.SelectedItem = FindItemContaining(comboBox7.Items, "Win32_USBHub");
+
+            imageList8.Images.Add(new Bitmap("img/angry_bird/AB_red.jpg"));
+            imageList8.Images.Add(new Bitmap("img/angry_bird/AB_yellow.jpg"));
+            imageList8.Images.Add(new Bitmap("img/angry_bird/AB_blue.jpg"));
+            imageList8.Images.Add(new Bitmap("img/angry_bird/AB_black.jpg"));
+            imageList8.Images.Add(new Bitmap("img/angry_bird/AB_pig1.jpg"));
+            imageList8.Images.Add(new Bitmap("img/angry_bird/AB_pig2.jpg"));
+            imageList8.Images.Add(new Bitmap("img/angry_bird/AB_pig3.jpg"));
+            imageList8.Images.Add(new Bitmap("img/angry_bird/AB_pig4.jpg"));
+
+            richTextBox1.Text += "imageList8 共有 : " + imageList8.Images.Count.ToString() + " 張圖片\n";
+
+            comboBox8.Size = new Size(300, 100);
+            comboBox8.DrawMode = DrawMode.OwnerDrawFixed;
+            comboBox8.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            comboBox8.Items.Add("紅鳥");
+            comboBox8.Items.Add("黃鳥");
+            comboBox8.Items.Add("藍鳥");
+            comboBox8.Items.Add("黑鳥");
+            comboBox8.Items.Add("小豬1");
+            comboBox8.Items.Add("小豬2");
+            comboBox8.Items.Add("小豬3");
+            comboBox8.Items.Add("小豬4");
+            comboBox8.SelectedIndex = 0;//設置ComboBox控件默認選中第一項
+
+            //comboBox8.DrawItem += new DrawItemEventHandler(comboBox8_DrawItem);
+        }
+
+        private void comboBox8_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Graphics gComboBox = e.Graphics;//聲明一個GDI+繪圖圖面類的對象
+            Rectangle rComboBox = e.Bounds;//聲明一個表示矩形的位置和大小類的對象
+            Size imageSize = imageList8.ImageSize;//聲明一個有序整數對的對象
+            FontDialog typeFace = new FontDialog();//定義一個字體類對像
+            Font Style = typeFace.Font;//定義一個定義特定的文本格式類對像
+            if (e.Index >= 0)//當繪製的索引項存在時
+            {
+                string temp = (string)comboBox8.Items[e.Index];//獲取ComboBox控件索引項下的文本內容
+                StringFormat stringFormat = new StringFormat();//定義一個封裝文本佈局信息類的對象
+                stringFormat.Alignment = StringAlignment.Near;//設定文本的佈局方式
+                if (e.State == (DrawItemState.NoAccelerator | DrawItemState.NoFocusRect))//當繪製項沒有鍵盤加速鍵和焦點可視化提示時
+                {
+                    e.Graphics.FillRectangle(new SolidBrush(Color.Red), rComboBox);//用指定的顏色填充自定義矩形的內部
+                    imageList8.Draw(e.Graphics, rComboBox.Left, rComboBox.Top, e.Index);//在指定位置繪製指定索引的圖片
+                    e.Graphics.DrawString(temp, Style, new SolidBrush(Color.Black), rComboBox.Left + imageSize.Width, rComboBox.Top);//在指定的位置並且用指定的Font對像繪製指定的文本字符串
+                    e.DrawFocusRectangle();//在指定的邊界範圍內繪製聚焦框
+                }
+                else //當繪製項有鍵盤加速鍵或者焦點可視化提示時
+                {
+                    e.Graphics.FillRectangle(new SolidBrush(Color.LightBlue), rComboBox);//用指定的顏色填充自定義矩形的內部
+                    imageList8.Draw(e.Graphics, rComboBox.Left, rComboBox.Top, e.Index);//在指定位置繪製指定索引的圖片
+                    e.Graphics.DrawString(temp, Style, new SolidBrush(Color.Black), rComboBox.Left + imageSize.Width, rComboBox.Top);//在指定的位置並且用指定的Font對像繪製指定的文本字符串
+                    e.DrawFocusRectangle();//在指定的邊界範圍內繪製聚焦框
+                }
+            }
         }
 
         private object FindItemContaining(IEnumerable items, string target)

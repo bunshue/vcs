@@ -204,7 +204,6 @@ namespace vcs_Label
             label_auto.AutoSize = false;
             label_auto.Width = 120;
             label_auto.Height = 200;
-
         }
     }
 }
