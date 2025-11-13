@@ -4,8 +4,6 @@
 
 準備撈出
 
-class bank  class Banks():
-
 def
 
 最前面 為 測試區
@@ -47,10 +45,9 @@ def show():
     # plt.tight_layout()
     plt.show()
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 def printlocal():
     lang = "Java"
@@ -132,10 +129,12 @@ if (number % 2 == 0 or number % 3 == 0) and not (number % 2 == 0 and number % 3 
 print("------------------------------------------------------------")  # 60個
 
 print("測試 strip()")
+
 input_string = "ABCDEFG       "
-print("無strip <<<" + input_string + ">>>")
+print("無strip |||" + input_string + "|||")
+
 input_string = input_string.strip()
-print("有strip <<<" + input_string + ">>>")
+print("有strip |||" + input_string + "|||")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -362,12 +361,12 @@ nn = 35948 + 5
 cc = chr(nn)
 print(cc)
 
-
 # ord()回傳參數字元對應的的編碼位置
 print("==Test1==")
 print(ord("H"))
 print(ord("你"))
 print(ord("好"))
+
 # chr()回傳參數編碼位置對應的字元
 print("==Test2==")
 print(chr(72))
@@ -380,10 +379,12 @@ print("==Test3==")
 for i in range(65, 75):
     print(chr(i), end="")
 print()
+
 ##輸出"你"之後的10個中文字
 for i in range(20320, 20330):
     print(chr(i), end="")
 print()
+
 # str()回傳參數為字串
 print("==Test4==")
 print(str(123) + "456")
@@ -449,40 +450,6 @@ ciphertext = encrypt(msg, encry_dict)
 
 print("原始字串 ", msg)
 print("加密字串 ", ciphertext)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("十進位 轉 十六進位")
-
-
-# Convert a decimal to a hex as a string
-def decimalToHex(decimalValue):
-    hex = ""
-
-    while decimalValue != 0:
-        hexValue = decimalValue % 16
-        hex = toHexChar(hexValue) + hex
-        decimalValue = decimalValue // 16
-
-    return hex
-
-
-# Convert an integer to a single hex digit in a character
-def toHexChar(hexValue):
-    if 0 <= hexValue <= 9:
-        return chr(hexValue + ord("0"))
-    else:  # 10 <= hexValue <= 15
-        return chr(hexValue - 10 + ord("A"))
-
-
-decimalValue = 170
-hexValue = decimalToHex(decimalValue)
-print("decimal : %d\thex : %s" % (decimalValue, hexValue))
-
-decimalValue = 65535
-hexValue = decimalToHex(decimalValue)
-print("decimal : %d\thex : %s" % (decimalValue, hexValue))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -769,7 +736,6 @@ print("設計一個函數返回給定文件名的後綴名。\n")
 def get_suffix(filename, has_dot=False):
     """
     獲取文件名的後綴名
-
     :param filename: 文件名
     :param has_dot: 返回的後綴名是否需要帶點
     :return: 文件的後綴名
@@ -798,7 +764,6 @@ print("計算指定的年月日是這一年的第幾天\n")
 def is_leap_year(year):
     """
     判斷指定的年份是不是閏年
-
     :param year: 年份
     :return: 閏年返回True平年返回False
     """
@@ -1217,10 +1182,13 @@ def square_sum(*arg):
 
 ans1 = square_sum(1)
 print("1*1=", ans1)
+
 ans2 = square_sum(1, 2)
 print("1*1+2*2=", ans2)
+
 ans3 = square_sum(1, 2, 3)
 print("1*1+2*2+3*3=", ans3)
+
 ans4 = square_sum(1, 3, 5, 7)
 print("1*1+3*3+5*5+7*7=", ans4)
 
@@ -1245,35 +1213,6 @@ dinner("鐵板豬", "烤玉米")
 dinner("泰式火鍋", "德式香腸", "香焦牛奶", "幸運餅")
 
 print("------------------------------------------------------------")  # 60個
-
-
-def Pow(x, y):
-    p = 1
-    for i in range(y + 1):
-        p *= x
-    return p
-
-
-print("請輸入兩數x及y的值函數：")
-x = 3
-y = 8
-print("次方運算結果：%d" % Pow(x, y))
-
-print("------------------------------------------------------------")  # 60個
-
-
-def swap_test(x, y):
-    print("函數內交換前：x=%d, y=%d" % (x, y))
-    x, y = y, x  # 交換過程
-    print("函數內交換前：x=%d, y=%d" % (x, y))
-
-
-a = 10
-b = 20  # 設定a,b的初值
-print("函數外交換前：a=%d, b=%d" % (a, b))
-swap_test(a, b)  # 函數呼叫
-print("函數外交換後：a=%d, b=%d" % (a, b))
-
 print("------------------------------------------------------------")  # 60個
 
 animals = "Python"
@@ -1286,7 +1225,6 @@ print("------------------------------------------------------------")  # 60個
 def clean_string(s):
     """
     刪除字符串中的 "\n", "\r" 和前後的空白
-
     :param s: str，待處理的字符串
     :return: str，刪除後的字符串
     """
@@ -1332,6 +1270,7 @@ lst1 = [1, 2, 3, 4, 5, 6]
 for e in lst1:
     print(e, end=" ")
 print()
+
 animals = ["cat", "dog", "bat"]
 for index, animal in enumerate(animals):
     print(index, animal)
@@ -1340,6 +1279,7 @@ print("------------------------------------------------------------")  # 60個
 
 lst2 = [[2, 4], ["cat", "dog", "bat"], [1, 3, 5]]
 print(lst2[1][0])
+
 lst2[2][1] = 7
 for e1 in lst2:
     for e2 in e1:
@@ -1355,6 +1295,7 @@ print("------------------------------------------------------------")  # 60個
 lst1 = [1, 5]
 lst1.append(7)
 print(lst1)
+
 lst1.extend([9, 11, 13])
 print(lst1)
 
@@ -1398,6 +1339,8 @@ lst3 = sorted(lst1)
 print("lst3 = sorted(lst1) = ", lst3)
 
 print("------------------------------------------------------------")  # 60個
+
+# 串列的 count 與 index
 
 lst1 = [4, 2, 8, 9, 1, 8]
 print("lst1 = ", lst1)
@@ -1445,7 +1388,6 @@ print("------------------------------------------------------------")  # 60個
 def concatenate_strings(lst1):
     """
     從lst1中抽出是字串的項目，並連接成一個字串回傳。
-
     :param lst1: 一個含有多個項目的串列
     :type lst1: list
     :return: 連接所有字串項目後的字串
@@ -1473,9 +1415,6 @@ print("------------------------------------------------------------")  # 60個
 print("整數: {0:5d}".format(456))
 print("整數: {0:05d}".format(123))
 print("浮點數: {0:6.3f}".format(123.45678))
-print("二進位: {0:b}".format(200))
-print("八進位: {0:o}".format(200))
-print("十六進位: {0:x}".format(200))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1491,10 +1430,6 @@ x = 123
 print(f"整數: {x:05d}")
 x = 123.45678
 print(f"浮點數: {x:6.3f}")
-x = 200
-print(f"二進位: {x:b}")
-print(f"八進位: {x:o}")
-print(f"十六進位: {x:x}")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1515,21 +1450,6 @@ print("t5 = " + str(t5))
 print("t6 = " + str(t6))
 
 print("------------------------------------------------------------")  # 60個
-
-# tuple
-t1 = (1, 2, 3, 4, 5, 6)
-print(t1[0])
-print(t1[1])
-print(t1[-1])
-print(t1[-2])
-
-print("------------------------------------------------------------")  # 60個
-
-# tuple
-t1 = (1, 2, 3, 4, 5, 6)
-for e in t1:
-    print(e, end=" ")
-
 print("------------------------------------------------------------")  # 60個
 
 # tuple
@@ -1553,6 +1473,8 @@ t3 = sorted(t1)
 print("t3 = sorted(t1) = ", t3)
 
 print("------------------------------------------------------------")  # 60個
+
+# 元組的 count 與 index
 
 # tuple
 t1 = (4, 2, 8, 9, 1, 8)
@@ -1745,128 +1667,7 @@ my_dict = create_dict(keys, values)
 print(my_dict)  # 輸出: {"apple": 1, "banana": 2, "orange": 3}
 
 print("------------------------------------------------------------")  # 60個
-
-animals, str2 = "Hello ", "World!"
-str3 = animals + str2
-print(str3)
-lst1, lst2 = [2, 4], [6, 8, 10]
-lst3 = lst1 + lst2
-print(lst3)
-t1, t2 = (2, 4), (6, 8, 10)
-t3 = t1 + t2
-print(t3)
-
-print("------------------------------------------------------------")  # 60個
-
-animals = "Hello"
-str2 = animals * 3
-print(str2)
-lst1 = [1, 2]
-lst2 = lst1 * 3
-print(lst2)
-t1 = (1, 2)
-t2 = t1 * 3
-print(t2)
-
-print("------------------------------------------------------------")  # 60個
-
-str = "Welcome!"
-print("come" in str)
-print("come" not in str)
-lst1 = [2, 4, 6, 8]
-print(8 in lst1)
-print(2 not in lst1)
-t1 = (2, 4, 6, 8)
-print(8 in t1)
-print(2 not in t1)
-d1 = {"tom": 2, "joe": 3}
-print("tom" in d1)
-print("tom" not in d1)
-
-print("------------------------------------------------------------")  # 60個
-
-print("green" == "glow")
-print("green" != "glow")
-print("green" > "glow")
-print("green" >= "glow")
-print("green" < "glow")
-print("green" <= "glow")
-d1 = {"tom": 30, "bobe": 3}
-d2 = {"bobe": 3, "tom": 30}
-print(d1 == d2)
-print(d1 != d2)
-
-print("------------------------------------------------------------")  # 60個
-
-animals = "Hello World!"
-print("animals = ", animals)
-s = animals[1:3]
-print("animals[1:3] = ", s)
-s = animals[1:5]
-print("animals[1:5] = ", s)
-s = animals[:7]
-print("animals[:7] = ", s)
-s = animals[4:]
-print("animals[4:] = ", s)
-s = animals[1:-1]
-print("animals[1:-1] = ", s)
-s = animals[6:-2]
-print("animals[6:-2] = ", s)
-
-print("------------------------------------------------------------")  # 60個
-
-lst1 = list("Hello World!")
-print("lst1 = ", lst1)
-s = lst1[1:3]
-print("lst1[1:3] = ", s)
-s = lst1[1:5]
-print("lst1[1:5] = ", s)
-s = lst1[:7]
-print("lst1[:7] = ", s)
-s = lst1[4:]
-print("lst1[4:] = ", s)
-s = lst1[1:-1]
-print("lst1[1:-1] = ", s)
-s = lst1[6:-2]
-print("lst1[6:-2] = ", s)
-
-print("------------------------------------------------------------")  # 60個
-
-t1 = tuple("Hello World!")
-print("t1 = ", t1)
-s = t1[1:3]
-print("t1[1:3] = ", s)
-s = t1[1:5]
-print("t1[1:5] = ", s)
-s = t1[:7]
-print("t1[:7] = ", s)
-s = t1[4:]
-print("t1[4:] = ", s)
-s = t1[1:-1]
-print("t1[1:-1] = ", s)
-s = t1[6:-2]
-print("t1[6:-2] = ", s)
-
-print("------------------------------------------------------------")  # 60個
-
-lst1 = [2, 4, 6, 8]
-print(lst1)
-lst1[1:4] = [3, 5, 7]
-print(lst1)
-
-print("------------------------------------------------------------")  # 60個
-
-lst1 = [2, 4, 6, 8]
-print(lst1)
-lst1[2:2] = [1, 9]
-print(lst1)
-
-print("------------------------------------------------------------")  # 60個
-
-lst1 = [2, 4, 6, 8]
-print(lst1)
-lst1[1:3] = []
-print(lst1)
+'''
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1888,6 +1689,9 @@ print(d2)
 
 print("------------------------------------------------------------")  # 60個
 
+# 串列的 count 與 index
+print('用串列的count統計串列元素出現的次數')
+
 word = [
     "holiday",
     "happy",
@@ -1907,6 +1711,7 @@ word = [
 ]
 print("holiday 出現的次數", word.count("holiday"))
 
+print('用串列的index找出串列元素出現的位置')
 search_str = "yellow"
 print("單字 %s 第一次出現的索引值%d" % (search_str, word.index(search_str)))
 
@@ -1914,18 +1719,22 @@ print("------------------------------------------------------------")  # 60個
 
 no = [105, 25, 8, 179, 60, 57]
 print("排序前的資料順序：", no)
+
 no.sort()  # 省略reverse參數, 遞增排序
 print("遞增排序：", no)
+
 zoo = ["tiger", "elephant", "lion", "rabbit"]
 print("排序前的資料順序：")
 print(zoo)
+
 zoo.sort(reverse=True)  # 依字母做遞減排序
 print("依單字字母遞減排序：")
 print(zoo)
 
 print("------------------------------------------------------------")  # 60個
 
-print("集合")
+print("集合")# 集合改成高中分組課程
+
 friendA = {"Andy", "Axel", "Michael", "May"}
 friendB = {"Peter", "Axel", "Andy", "Julia"}
 print(friendA & friendB)
@@ -1934,15 +1743,6 @@ print(friendA - friendB)
 print(friendA ^ friendB)
 
 print("------------------------------------------------------------")  # 60個
-
-x = 859
-y = 935
-print("兩數經交換前的值: ")
-print("x={},y={}".format(x, y))
-y, x = x, y
-print("兩數經交換後的值: ")
-print("x={},y={}".format(x, y))
-
 print("------------------------------------------------------------")  # 60個
 
 tup = (28, 39, 58, 67, 97, 54)
@@ -1952,25 +1752,17 @@ for item in range(len(tup)):
 
 print("------------------------------------------------------------")  # 60個
 
+# 排序
 salary = (86000, 72000, 83000, 47000, 55000)
-print("原有資料：")
-print(salary)
-print("--------------------------------")
 
 # 由小而大
 print("薪資由小而大排序：", sorted(salary))
 print("--------------------------------")
-
 # 遞減排序
 print("薪資由大而小排序：", sorted(salary, reverse=True))
 print("--------------------------------")
 
-print("資料經排序後仍保留原資料位置：")
-print(salary)
-print("--------------------------------")
-
 print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 original = [
@@ -2019,6 +1811,7 @@ print("分數:", price1)  # 串列內容已改變
 
 print("------------------------------------------------------------")  # 60個
 
+# 串列的 count 與 index
 str1 = "do your best what you can do"
 s1 = str1.count("do", 0)
 s2 = str1.count("o", 0, 20)
@@ -2252,21 +2045,6 @@ print(bool("XYZ"))
 
 print("------------------------------------------------------------")  # 60個
 
-num = 123
-print(num)
-num1 = bin(num)  # 2進位
-print(num1)
-num2 = oct(num)  # 8進位
-print(num2)
-
-num3 = 1234
-print(num3)
-print(int(num1, 2))  # 將2進位的字串轉換成10進位數值
-print(int(num2, 8))  # 將8進位的字串轉換成10進位數值
-# print(int(num3,16))#將16進位的字串轉換成10進位數值 fail in sugar
-
-print("------------------------------------------------------------")  # 60個
-
 str = "{1} * {0} = {2}"
 a = 3
 b = "5"
@@ -2281,13 +2059,6 @@ print("日期：%s-%s-%s" % (year, month, day))
 
 print("------------------------------------------------------------")  # 60個
 
-print("請輸入一個十進位數: ", end="")
-Val = 1234
-print("Val的八進位數=%o" % Val)  # 以%o格式化字元輸出
-print("Val的十六進位數=%x" % Val)  # 以%x格式化字元輸出
-
-print("------------------------------------------------------------")  # 60個
-
 print("{0:10}收入：{1:_^12}".format("Axel", 52000))
 print("{0:10}收入：{1:>12}".format("Michael", 87000))
 print("{0:10}收入：{1:*<12}".format("May", 36000))
@@ -2296,9 +2067,6 @@ print("------------------------------------------------------------")  # 60個
 
 num = 168
 print("數字 %s 的浮點數：%5.1f" % (num, num))
-print("數字 %s 的八進位：%o" % (num, num))
-print("數字 %s 的十六進位：%x" % (num, num))
-print("數字 %s 的二進位：%s" % (num, bin(num)))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2443,6 +2211,7 @@ while x < y:
 
 print("------------------------------------------------------------")  # 60個
 
+# 串列的 count 與 index
 str1 = "Happy birthday to my best friend."
 s1 = str1.count("to", 0)  # 從str1字串索引0的位置開始搜尋
 s2 = str1.count("e", 0, 34)  # 搜尋str1從索引值0到索引值34-1的位置
@@ -2641,6 +2410,8 @@ print(id(s2))
 
 print("------------------------------------------------------------")  # 60個
 
+# 串列的 count 與 index
+
 msg = """
 翠蓋龍旗出建章,鶯啼百囀柳初黃,
 昆池冰泮三山近,阿閣花深九陌香,
@@ -2655,6 +2426,8 @@ msg = """
 print(f"<鳳>出現的次數 : {msg.count('鳳')}")
 
 print("------------------------------------------------------------")  # 60個
+
+# 串列的 count 與 index
 
 word = [
     "holiday",
@@ -2676,6 +2449,8 @@ word = [
 print("holiday 出現的次數", word.count("holiday"))
 
 print("------------------------------------------------------------")  # 60個
+
+# 串列的 count 與 index
 
 word = [
     "holiday",
@@ -2699,7 +2474,7 @@ print("單字 %s 第一次出現的索引值%d" % (search_str, word.index(search
 
 print("------------------------------------------------------------")  # 60個
 
-
+# 串列的 count 與 index
 word = [
     "holiday",
     "happy",
@@ -2721,12 +2496,15 @@ print("holiday 出現的次數", word.count("holiday"))
 
 print("------------------------------------------------------------")  # 60個
 
+# 串列的 count 與 index
 str1 = "do your best what you can do"
 s1 = str1.count("do", 0)
 s2 = str1.count("o", 0, 20)
 print("{}\n「do」出現{}次,「o」出現{}次".format(str1, s1, s2))
 
 print("------------------------------------------------------------")  # 60個
+
+# 串列的 count 與 index
 
 word = "maintenance"
 word.count("n")
@@ -3615,6 +3393,8 @@ for count, drink in enumerate(drinks, 10):
 
 print("------------------------------------------------------------")  # 60個
 
+# 串列的 count 與 index
+
 fruits = ("apple", "banana", "cherry", "date", "cherry")
 print(f"fruits 元組長度是 {len(fruits)}")  # 輸出 5
 
@@ -3765,6 +3545,8 @@ print(mydict)  # 列印字典
 
 
 print("------------------------------------------------------------")  # 60個
+
+# 串列的 count 與 index
 
 word = "deepmind"
 alphabetCount = {alphabet: word.count(alphabet) for alphabet in word}
@@ -6082,25 +5864,6 @@ print(division(6, 3))  # 列出6/3
 print("------------------------------------------------------------")  # 60個
 
 
-def passWord(pwd):
-    """檢查密碼長度必須是5到8個字元"""
-    pwdlen = len(pwd)  # 密碼長度
-    if pwdlen < 5:  # 密碼長度不足
-        raise Exception("密碼長度不足")
-    if pwdlen > 8:  # 密碼長度太長
-        raise Exception("密碼長度太長")
-    print("密碼長度正確")
-
-
-for pwd in ("aaabbbccc", "aaa", "aaabbb"):  # 測試系列密碼值
-    try:
-        passWord(pwd)
-    except Exception as err:
-        print("密碼長度檢查異常發生: ", str(err))
-
-print("------------------------------------------------------------")  # 60個
-
-
 def division(x, y):
     try:  # try - except指令
         return x / y
@@ -7190,6 +6953,7 @@ print("------------------------------------------------------------")  # 60個
 
 list1 = [50, 40, 20, 40, 20, 60, 20, 80, 90]
 print(" 原始串列:", list1)
+
 list1.sort()
 list1.reverse()
 print(" 由大到小:", list1)
@@ -7214,17 +6978,6 @@ while i <= 9:
     i = i + 1
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print("要轉換的十進位數字 = 255")
-pnum = 255
-presult = ""
-while pnum != 0:
-    pdata = str(pnum % 2)
-    presult = "".join([pdata, presult])
-    pnum = pnum // 2
-print("轉換為二進位數字為:%s" % presult)
-
 print("------------------------------------------------------------")  # 60個
 
 try:
@@ -7998,7 +7751,7 @@ print("------------------------------------------------------------")  # 60個
 
 price = 100
 qty = 30
-print("單價：{0}     數量：{1}".format(price, qty))
+print("單價：{0}  數量：{1}".format(price, qty))
 print("打八折後,總金額：{0}".format(price * qty * 0.8))
 
 print("------------------------------------------------------------")  # 60個
@@ -8096,19 +7849,11 @@ for i in range(5):
     print()
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-print("ddf 搬出")
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -8190,7 +7935,6 @@ for cate in [1, 4]:
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 id_no = 1
 ename = "mouse"
 cname = "米老鼠"
@@ -8242,14 +7986,11 @@ print("{}已成立公司 {} 年".format(company, year))
 
 print("------------------------------------------------------------")  # 60個
 
-
 num = 1234
 print("¨數值 = {0:10d},  數值 = {0:10d}".format(num, num))
 
 num = 123.456789
-
 print("¨數值 = {1:6.3f},  數值 = {1:6.3f}".format(num, num))
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -8331,8 +8072,6 @@ print(str(len(ps.split("\n"))) + " 行數")
 pinfile.close()
 """
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 print("字串replace")
@@ -8401,11 +8140,10 @@ for _ in a:
 print()
 
 """
-    range(101)可以產生一個0到100的整數序列。
-    range(1, 100)可以產生一個1到99的整數序列。
-    range(1, 100, 2)可以產生一個1到99的奇數序列，其中的2是步長，即數值序列的增量。
+range(101)可以產生一個0到100的整數序列。
+range(1, 100)可以產生一個1到99的整數序列。
+range(1, 100, 2)可以產生一個1到99的奇數序列，其中的2是步長，即數值序列的增量。
 """
-
 
 print("使用np.linspace, 和range一樣")
 
@@ -8427,14 +8165,11 @@ for _ in a:
     print(_, end=" ")
 print()
 
-
 # 二維
-
 W = 640
 H = 480
 w = 160
 h = 160
-
 for y in range(0, H, h):
     for x in range(0, W, w):
         print(x, y, end="    ")
@@ -8463,7 +8198,6 @@ N = 11
 x = np.linspace(0, 10, 11)  # 建立含11個元素的陣列
 
 print("包含頭尾之linespace :", x)
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -8537,7 +8271,6 @@ number = 1234.5678
 print("Number :", format(number, ".2f"))
 
 print("------------------------------------------------------------")  # 60個
-
 """
 PAUSE = 0.02
 
@@ -8591,6 +8324,7 @@ print(round(3.5))
 print(round(3.6))
 print(round(4.5))
 print(round(4.6))
+
 ##指定取到小數第一位，根據小數第二位(如果是5要看小數第一位，奇進偶捨)判別
 print("==Test3==")
 print(round(1.35, 1))
@@ -8610,6 +8344,7 @@ print(string1.center(20))
 print(string1.ljust(20))
 # rjust()指定寬度靠右對齊
 print(string1.rjust(20))
+
 print("==Test2==")
 # center()指定寬度置中對齊，指定補齊填補字元
 print(string1.center(20, "-"))
@@ -8617,6 +8352,7 @@ print(string1.center(20, "-"))
 print(string1.ljust(20, "-"))
 # rjust()指定寬度靠右對齊，指定補齊填補字元
 print(string1.rjust(20, "-"))
+
 print("==Test3==")
 # zfill()指定寬度靠右對齊，以'0'補齊
 print(string1.zfill(20))
@@ -8895,63 +8631,6 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
-print("2 進位整數運算")
-x = 0b1101  # 這是2進位整數
-print(x)  # 列出10進位的結果
-y = 13  # 這是10進位整數
-print(bin(y))  # 列出轉換成2進位的結果
-print("8 進位整數運算")
-x = 0o57  # 這是8進位整數
-print(x)  # 列出10進位的結果
-y = 47  # 這是10進位整數
-print(oct(y))  # 列出轉換成8進位的結果
-print("16 進位整數運算")
-x = 0x5D  # 這是16進位整數
-print(x)  # 列出10進位的結果
-
-print("十進位 轉 十六進位")
-y = 65535  # 10進位
-print(hex(y))  # 十進位 轉 十六進位
-
-
-"""
-#hex()回傳參數的十六進位值
-##輸出結果數字前面0x代表十六進位(hexdecimal)
-print(hex(10))
-
-x = 0x5D  # 這是16進為整數
-print(x)  # 列出10進位的結果
-
-y = 93  # 這是10進為整數
-# print(hex(y))  # 列出轉換成16進位的結果  fail in sugar
-
-
-print("十六進位", hex(number))
-
-y = 93  # 這是10進位整數
-print(hex(y))  # 列出轉換成16進位的結果
-
-
-for i in range(32):
-    print(hex(i))
-"""
-
-# 字串轉數值,10進位整數
-print(int("13", 10))
-# 字串轉數值,2進位整數
-print(int("1001", 2))
-# 字串轉數值,浮點數
-print(float("3.14"))
-
-# bin()回傳參數的二進位值
-##輸出結果數字前面0b代表二進位(binary)
-print(bin(10))
-# oct()回傳參數的八進位值
-##輸出結果數字前面0o代表八進位(octal)
-print(oct(10))
-
-print("------------------------------------------------------------")  # 60個
-
 x1 = "22"
 x2 = "33"
 x3 = x1 + x2
@@ -8960,28 +8639,6 @@ print("x3 = ", x3)  # 列印字串相加
 x4 = int(x1) + int(x2)
 print("type(x4) = ", type(x4))
 print("x4 = ", x4)  # 列印整數相加
-x5 = "1100"
-print("2進位  '1100' = ", int(x5, 2))
-print("8進位  '22'   = ", int(x1, 8))
-print("16進位 '22'   = ", int(x1, 16))
-print("16進位 '5A'   = ", int("5A", 16))
-
-print("------------------------------------------------------------")  # 60個
-
-x = 100
-print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
-
-print("------------------------------------------------------------")  # 60個
-
-x = 0b1101  # 這是2進為整數
-print(x)  # 列出10進位的結果
-y = 13  # 這是10進為整數
-print(bin(y))  # 列出轉換成2進位的結果
-
-print("------------------------------------------------------------")  # 60個
-
-x = 100
-print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -9010,84 +8667,6 @@ for number in range(st, sp):  # Main program loop.
 
 print("------------------------------------------------------------")  # 60個
 
-print("進位轉換")
-
-number = 255
-print("型別：", type(number))
-print("二進位：", bin(number))
-print("八進位", oct(number))
-
-print("10進位：", number)
-
-# 配合format函式去除前綴字元
-print("二進位：", format(number, "b"))
-print("八進位：", format(number, "o"))
-print("十六進位：", format(number, "x"))
-
-print("------------------------------------------------------------")  # 60個
-
-x1 = "22"
-x2 = "33"
-x3 = x1 + x2
-x4 = int(x1) + int(x2)
-x5 = "11111111"
-print("2進位  '11111111' = ", int(x5, 2))
-print("8進位  '22'   = ", int(x1, 8))
-print("16進位 '22'   = ", int(x1, 16))
-print("16進位 'FF'   = ", int("FF", 16))
-
-print("------------------------------------------------------------")  # 60個
-
-print("2 進位整數運算")
-x = 0b1101  # 這是2進位整數
-print(x)  # 列出10進位的結果
-y = 13  # 這是10進位整數
-print(bin(y))  # 列出轉換成2進位的結果
-print("8 進位整數運算")
-x = 0o57  # 這是8進位整數
-print(x)  # 列出10進位的結果
-y = 47  # 這是10進位整數
-print(oct(y))  # 列出轉換成8進位的結果
-print("16 進位整數運算")
-x = 0x5D  # 這是16進位整數
-print(x)  # 列出10進位的結果
-
-print("------------------------------------------------------------")  # 60個
-
-x = 100
-print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
-
-print("------------------------------------------------------------")  # 60個
-
-# 將 16 進位數轉為 10 進位
-
-
-def hex_to_dec():
-    hexnum = "ff"
-    decnum = 0
-
-    for power, digit in enumerate(reversed(hexnum)):
-        if digit.isdigit():
-            digit_num = int(digit)
-        else:
-            digit_num = ord(digit.upper()) - ord("A") + 10
-        decnum += digit_num * (16**power)
-
-    print("十進位結果:", decnum)
-
-
-hex_to_dec()
-
-print("------------------------------------------------------------")  # 60個
-
-print("{:#b}".format(12345))  # 顯示0b11000000111001
-print("{:#o}".format(12345))  # 顯示0o30071
-print("{:#x}".format(12345))  # 顯示0x3039
-
-print("------------------------------------------------------------")  # 60個
-
-
-# chap8-01
 # Cars基礎類別
 class Cars:
     # 建構式
@@ -9277,6 +8856,7 @@ a.color = "綠"
 a.seat = 2
 print(a.manufacture())
 a.info()
+
 # 建構第2輛柴油車物件
 print("==Test2==")
 b = DieselCars("福特六和", "C346-9W", "白", 5, 1997)
@@ -9286,6 +8866,7 @@ b.info()
 print(b.fueltax())
 print(b.licensetax())
 print(b.totaltax())
+
 # 建構第3輛電能車物件
 print("==Test3==")
 c = ElectricCars("Tesla", "Model 3", "紅", 5, 346)
@@ -9303,7 +8884,6 @@ tax(c)
 print("------------------------------------------------------------")  # 60個
 
 
-# chap8-02
 # 輪胎類別
 class Wheels:
     # 建構式
@@ -9494,6 +9074,7 @@ d.info()
 print(d.fueltax())
 print(d.licensetax())
 print(d.totaltax())
+
 # 建立第2台機車
 print("==Test2==")
 e = GasolineMotorcycles("功學社", "CT-50", "白紅", 49, Wheels(100, 10))
@@ -9503,6 +9084,7 @@ e.info()
 print(e.fueltax())
 print(e.licensetax())
 print(e.totaltax())
+
 # 建立第3台機車
 print("==Test3==")
 f = ElectricMotorcycles("睿能", "GHS6B2", "白", 8.58, Wheels(100, 10))
@@ -9512,6 +9094,7 @@ f.info()
 print(f.fueltax())
 print(f.licensetax())
 print(f.totaltax())
+
 # 建立第4台機車
 print("==Test4==")
 g = GasolineMotorcycles("光陽", "SK60AF", "深藍", 298, Wheels(100, 10))
@@ -9521,6 +9104,7 @@ g.info()
 print(g.fueltax())
 print(g.licensetax())
 print(g.totaltax())
+
 # 建立第5台機車
 print("==Test5==")
 h = ElectricMotorcycles("睿能", "GHS6B2", "紅", 8.58, Wheels(100, 10))
@@ -9530,7 +9114,9 @@ h.info()
 print(h.fueltax())
 print(h.licensetax())
 print(h.totaltax())
+
 # 判斷f與h這兩台機車是否為相同類型
+
 print("==Test6==")
 f.info()
 h.info()
@@ -9540,6 +9126,7 @@ d.wheel.info()
 e.wheel.info()
 print(d.wheel.eq(e.wheel))
 print(d.wheel == e.wheel)
+
 print("==Test7==")
 # 查看總共新增了幾台機車
 print(Motorcycles.counts)
@@ -9561,8 +9148,6 @@ print(Motorcycles.counts)
 
 print("------------------------------------------------------------")  # 60個
 
-
-# chap8-03
 # 輪胎類別
 class Wheels:
     # 建構式
@@ -9911,6 +9496,7 @@ a.color = "綠"
 a.seat = 2
 print(a.manufacture())
 a.info()
+
 # 建構第2輛柴油車物件
 print("==Test2==")
 b = DieselCars("福特六和", "C346-9W", "白", 5, 1997)
@@ -9920,6 +9506,7 @@ b.info()
 print(b.fueltax())
 print(b.licensetax())
 print(b.totaltax())
+
 # 建構第3輛電能車物件
 print("==Test3==")
 c = ElectricCars("Tesla", "Model 3", "紅", 5, 346)
@@ -9929,6 +9516,7 @@ c.info()
 print(c.fueltax())
 print(c.licensetax())
 print(c.totaltax())
+
 print("==Test4==")
 # 判斷a與b這兩輛汽車是否為相同類型
 a.info()
@@ -9944,6 +9532,7 @@ d.info()
 print(d.fueltax())
 print(d.licensetax())
 print(d.totaltax())
+
 # 建立第2台機車
 print("==Test6==")
 e = GasolineMotorcycles("功學社", "CT-50", "白紅", 49, Wheels(100, 10))
@@ -9953,6 +9542,7 @@ e.info()
 print(e.fueltax())
 print(e.licensetax())
 print(e.totaltax())
+
 # 建立第3台機車
 print("==Test7==")
 f = ElectricMotorcycles("睿能", "GHS6B2", "白", 8.58, Wheels(100, 10))
@@ -9962,6 +9552,7 @@ f.info()
 print(f.fueltax())
 print(f.licensetax())
 print(f.totaltax())
+
 # 建立第4台機車
 print("==Test8==")
 g = GasolineMotorcycles("光陽", "SK60AF", "深藍", 298, Wheels(100, 10))
@@ -9971,6 +9562,7 @@ g.info()
 print(g.fueltax())
 print(g.licensetax())
 print(g.totaltax())
+
 # 建立第5台機車
 print("==Test9==")
 h = ElectricMotorcycles("睿能", "GHS6B2", "紅", 8.58, Wheels(100, 10))
@@ -9980,17 +9572,20 @@ h.info()
 print(h.fueltax())
 print(h.licensetax())
 print(h.totaltax())
+
 print("==Test10==")
 # 判斷f與h這兩台機車是否為相同類型
 f.info()
 h.info()
 print(f == h)
+
 print("==Test11==")
 # 判斷d與e這兩台機車的輪台是否為相同類型
 d.wheel.info()
 e.wheel.info()
 print(d.wheel.eq(e.wheel))
 print(d.wheel == e.wheel)
+
 print("==Test12==")
 tax(a)
 tax(b)
@@ -10000,6 +9595,7 @@ tax(e)
 tax(f)
 tax(g)
 tax(h)
+
 print("==Test13==")
 # 查看總共新增了幾輛汽車
 print(Cars.counts)
@@ -10012,6 +9608,7 @@ print(Cars.counts)
 # 刪除c車
 del c
 print(Cars.counts)
+
 print("==Test14==")
 # 查看總共新增了幾台機車
 print(Motorcycles.counts)
@@ -10153,9 +9750,8 @@ soup = BeautifulSoup(response.text, "html.parser")
 # 把排版後的html印出來
 # print(soup.prettify())
 a_tags = soup.find_all("h1")
-print(">>>>>文章標題")
-print(a_tags[0].contents[0])
-print("\n")
+
+print("文章標題 :", a_tags[0].contents[0])
 
 print("------------------------------------------------------------")  # 60個
 
@@ -10168,9 +9764,9 @@ soup = BeautifulSoup(res.text, "html.parser")
 # 把排版後的html印出來
 # print(soup.prettify())
 a_tags = soup.find_all("h1")
-print(">>>>>文章標題")
-print(a_tags[0].contents[0])
-print("\n")
+
+print("文章標題 :", a_tags[0].contents[0])
+
 a_tags = soup.find_all("div", limit=1)
 a_tag = a_tags[0]
 cc = ""
@@ -10191,9 +9787,9 @@ soup = BeautifulSoup(res.text, "html.parser")
 # 把排版後的html印出來
 # print(soup.prettify())
 a_tags = soup.find_all("h1")
-print(">>>>>文章標題")
-print(a_tags[0].contents[0])
-print()
+
+print("文章標題 :", a_tags[0].contents[0])
+
 a_tags = soup.find_all("div", limit=1)
 a_tag = a_tags[0]
 cc = ""
@@ -10202,7 +9798,9 @@ for b in a_tag.contents:
         b = str(b)
         cc = cc + b
 cc = cc.strip()
-data = ">>>>>原Po文章\n"
+
+data = "原Po文章\n"
+
 # 尋找前四筆，第一個是原Po文章，後三個則為熱門留言
 for j in range(4):
     # 尋找最附近的<div class>有gFINpq
@@ -14163,37 +13761,6 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-
-class BaseTokenizer:
-    """
-    >>> tk = BaseTokenizer("28a2320b-fd3f-4627-9792-a2b38e3c46b0")
-    >>> list(tk)
-    ['28a2320b', 'fd3f', '4627', '9792', 'a2b38e3c46b0']
-    """
-
-    def __init__(self, str_token):
-        self.str_token = str_token
-
-    def __iter__(self):
-        yield from self.str_token.split("-")
-
-
-class UpperIterableMixin:
-    def __iter__(self):
-        return map(str.upper, super().__iter__())
-
-
-class Tokenizer(UpperIterableMixin, BaseTokenizer):
-    pass
-
-
-tk = Tokenizer("28a2320b-fd3f-4627-9792-a2b38e3c46b0")
-dddd = list(tk)
-print(dddd)
-#    ['28A2320B', 'FD3F', '4627', '9792', 'A2B38E3C46B0']
-
-print("------------------------------------------------------------")  # 60個
-
 _default_options = {"print_function": False, "write_unchanged_files": False}
 
 print("------------------------------------------------------------")  # 60個
@@ -14817,9 +14384,6 @@ print(s)
 print("整數: {0:5d}".format(456))
 print("整數: {0:05d}".format(123))
 print("浮點數: {0:6.3f}".format(123.45678))
-print("二進位: {0:b}".format(200))
-print("八進位: {0:o}".format(200))
-print("十六進位: {0:x}".format(200))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -15316,9 +14880,7 @@ try:
 except Exception as err:
     print("密碼檢查異常發生: ", str(err))
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 def passWord(pwd):
     # 檢查密碼長度必須是5到8個字元
@@ -15335,6 +14897,8 @@ for pwd in ("aaabbbccc", "aaa", "aaabbb"):  # 測試系列密碼值
         passWord(pwd)
     except Exception as err:
         print("密碼長度檢查異常發生: ", str(err))
+
+print("------------------------------------------------------------")  # 60個
 
 # PIL
 
@@ -15391,6 +14955,7 @@ print(cc)
 
 # 一大圖上畫上各小圖
 plt.figure(figsize=[8, 4])
+
 plt.axes([0, 0, 0.8, 1])
 plt.title(label="Chart 1")
 plt.plot([1, 2, 3], "r:o")
@@ -15451,3 +15016,268 @@ ord()
 
 
 """
+
+
+
+進位系統 進位制（carry system)
+
+print("十進位 轉 十六進位")
+
+
+# Convert a decimal to a hex as a string
+def decimalToHex(decimalValue):
+    hex = ""
+
+    while decimalValue != 0:
+        hexValue = decimalValue % 16
+        hex = toHexChar(hexValue) + hex
+        decimalValue = decimalValue // 16
+
+    return hex
+
+
+# Convert an integer to a single hex digit in a character
+def toHexChar(hexValue):
+    if 0 <= hexValue <= 9:
+        return chr(hexValue + ord("0"))
+    else:  # 10 <= hexValue <= 15
+        return chr(hexValue - 10 + ord("A"))
+
+
+decimalValue = 170
+hexValue = decimalToHex(decimalValue)
+print("decimal : %d\thex : %s" % (decimalValue, hexValue))
+
+decimalValue = 65535
+hexValue = decimalToHex(decimalValue)
+print("decimal : %d\thex : %s" % (decimalValue, hexValue))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+print("二進位: {0:b}".format(200))
+print("八進位: {0:o}".format(200))
+print("十六進位: {0:x}".format(200))
+
+
+
+print("二進位: {0:b}".format(200))
+print("八進位: {0:o}".format(200))
+print("十六進位: {0:x}".format(200))
+
+
+x = 200
+print(f"二進位: {x:b}")
+print(f"八進位: {x:o}")
+print(f"十六進位: {x:x}")
+
+print("------------------------------------------------------------")  # 60個
+
+num = 123
+print(num)
+num1 = bin(num)  # 2進位
+print(num1)
+num2 = oct(num)  # 8進位
+print(num2)
+
+num3 = 1234
+print(num3)
+print(int(num1, 2))  # 將2進位的字串轉換成10進位數值
+print(int(num2, 8))  # 將8進位的字串轉換成10進位數值
+# print(int(num3,16))#將16進位的字串轉換成10進位數值 fail in sugar
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("請輸入一個十進位數: ", end="")
+Val = 1234
+print("Val的八進位數=%o" % Val)  # 以%o格式化字元輸出
+print("Val的十六進位數=%x" % Val)  # 以%x格式化字元輸出
+
+print("------------------------------------------------------------")  # 60個
+
+
+num = 168
+print("數字 %s 的八進位：%o" % (num, num))
+print("數字 %s 的十六進位：%x" % (num, num))
+print("數字 %s 的二進位：%s" % (num, bin(num)))
+
+
+print("要轉換的十進位數字 = 255")
+pnum = 255
+presult = ""
+while pnum != 0:
+    pdata = str(pnum % 2)
+    presult = "".join([pdata, presult])
+    pnum = pnum // 2
+print("轉換為二進位數字為:%s" % presult)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("2 進位整數運算")
+x = 0b1101  # 這是2進位整數
+print(x)  # 列出10進位的結果
+y = 13  # 這是10進位整數
+print(bin(y))  # 列出轉換成2進位的結果
+print("8 進位整數運算")
+x = 0o57  # 這是8進位整數
+print(x)  # 列出10進位的結果
+y = 47  # 這是10進位整數
+print(oct(y))  # 列出轉換成8進位的結果
+print("16 進位整數運算")
+x = 0x5D  # 這是16進位整數
+print(x)  # 列出10進位的結果
+
+print("十進位 轉 十六進位")
+y = 65535  # 10進位
+print(hex(y))  # 十進位 轉 十六進位
+
+"""
+#hex()回傳參數的十六進位值
+##輸出結果數字前面0x代表十六進位(hexdecimal)
+print(hex(10))
+
+x = 0x5D  # 這是16進為整數
+print(x)  # 列出10進位的結果
+
+y = 93  # 這是10進為整數
+# print(hex(y))  # 列出轉換成16進位的結果  fail in sugar
+
+print("十六進位", hex(number))
+
+y = 93  # 這是10進位整數
+print(hex(y))  # 列出轉換成16進位的結果
+
+for i in range(32):
+    print(hex(i))
+"""
+
+# 字串轉數值,10進位整數
+print(int("13", 10))
+# 字串轉數值,2進位整數
+print(int("1001", 2))
+# 字串轉數值,浮點數
+print(float("3.14"))
+
+# bin()回傳參數的二進位值
+##輸出結果數字前面0b代表二進位(binary)
+print(bin(10))
+# oct()回傳參數的八進位值
+##輸出結果數字前面0o代表八進位(octal)
+print(oct(10))
+
+print("------------------------------------------------------------")  # 60個
+
+x1 = "22"
+x5 = "1100"
+print("2進位  '1100' = ", int(x5, 2))
+print("8進位  '22'   = ", int(x1, 8))
+print("16進位 '22'   = ", int(x1, 16))
+print("16進位 '5A'   = ", int("5A", 16))
+
+print("------------------------------------------------------------")  # 60個
+
+x = 100
+print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
+
+print("------------------------------------------------------------")  # 60個
+
+x = 0b1101  # 這是2進位整數
+print(x)  # 列出10進位的結果
+y = 13  # 這是10進為整數
+print(bin(y))  # 列出轉換成2進位的結果
+
+print("------------------------------------------------------------")  # 60個
+
+x = 100
+print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
+
+print("------------------------------------------------------------")  # 60個
+
+print("進位轉換")
+
+number = 255
+print("型別：", type(number))
+print("二進位：", bin(number))
+print("八進位", oct(number))
+
+print("10進位：", number)
+
+# 配合format函式去除前綴字元
+print("二進位：", format(number, "b"))
+print("八進位：", format(number, "o"))
+print("十六進位：", format(number, "x"))
+
+print("------------------------------------------------------------")  # 60個
+
+x1 = "22"
+x2 = "33"
+x3 = x1 + x2
+x4 = int(x1) + int(x2)
+x5 = "11111111"
+print("2進位  '11111111' = ", int(x5, 2))
+print("8進位  '22'   = ", int(x1, 8))
+print("16進位 '22'   = ", int(x1, 16))
+print("16進位 'FF'   = ", int("FF", 16))
+
+print("------------------------------------------------------------")  # 60個
+
+print("2 進位整數運算")
+x = 0b1101  # 這是2進位整數
+print(x)  # 列出10進位的結果
+y = 13  # 這是10進位整數
+print(bin(y))  # 列出轉換成2進位的結果
+print("8 進位整數運算")
+x = 0o57  # 這是8進位整數
+print(x)  # 列出10進位的結果
+y = 47  # 這是10進位整數
+print(oct(y))  # 列出轉換成8進位的結果
+print("16 進位整數運算")
+x = 0x5D  # 這是16進位整數
+print(x)  # 列出10進位的結果
+
+print("------------------------------------------------------------")  # 60個
+
+x = 100
+print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
+
+print("------------------------------------------------------------")  # 60個
+
+# 將 16 進位數轉為 10 進位
+
+
+def hex_to_dec():
+    hexnum = "ff"
+    decnum = 0
+
+    for power, digit in enumerate(reversed(hexnum)):
+        if digit.isdigit():
+            digit_num = int(digit)
+        else:
+            digit_num = ord(digit.upper()) - ord("A") + 10
+        decnum += digit_num * (16**power)
+
+    print("十進位結果:", decnum)
+
+
+hex_to_dec()
+
+print("------------------------------------------------------------")  # 60個
+
+print("{:#b}".format(12345))  # 顯示0b11000000111001
+print("{:#o}".format(12345))  # 顯示0o30071
+print("{:#x}".format(12345))  # 顯示0x3039
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
