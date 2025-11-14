@@ -1980,61 +1980,6 @@ while index <= 10:
 
 
 print("------------------------------------------------------------")  # 60個
-
-buyers = [
-    ["James", 1030],  # 建立買家購買紀錄
-    ["Curry", 893],
-    ["Durant", 2050],
-    ["Jordan", 990],
-    ["David", 2110],
-]
-goldbuyers = []  # Gold買家串列
-vipbuyers = []  # VIP買家串列
-while buyers:  # 執行買家分類迴圈分類完成迴圈才會結束
-    index_buyer = buyers.pop()
-    if index_buyer[1] >= 1000:  # 用1000圓執行買家分類條件
-        vipbuyers.append(index_buyer)  # 加入VIP買家串列
-    else:
-        goldbuyers.append(index_buyer)  # 加入Gold買家串列
-print("VIP 買家資料", vipbuyers)
-print("Gold買家資料", goldbuyers)
-
-print("------------------------------------------------------------")  # 60個
-
-drinks = ["coffee", "tea", "wine"]
-
-# 解析enumerate物件
-for drink in enumerate(drinks):  # 數值初始是0
-    print(drink)
-for count, drink in enumerate(drinks):
-    print(count, drink)
-
-print("****************")
-
-# 解析enumerate物件
-for drink in enumerate(drinks, 10):  # 數值初始是10
-    print(drink)
-for count, drink in enumerate(drinks, 10):
-    print(count, drink)
-
-print("------------------------------------------------------------")  # 60個
-
-
-def fun(arg):
-    pass
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-def fun(arg):
-    pass
-
-
-print("列出fun的type類型   :      ", type(fun))
-print("列出lambda的type類型:      ", type(lambda x: x))
-print("列出內建函數abs的type類型: ", type(abs))
-
 print("------------------------------------------------------------")  # 60個
 
 print(bool(0))
@@ -5376,9 +5321,6 @@ print("x = ", x)
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
-
-
 def fun(arg):
     pass
 
@@ -5388,6 +5330,20 @@ print("列出lambda的type類型:      ", type(lambda x: x))
 print("列出內建函數abs的type類型: ", type(abs))
 
 print("------------------------------------------------------------")  # 60個
+
+def myRange(start=0, stop=100, step=1):
+    n = start
+    while n < stop:
+        yield n
+        n += step
+
+
+print(type(myRange))
+for x in myRange(0, 5):
+    print(x)
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 def myRange(start=0, stop=100, step=1):
@@ -5483,160 +5439,8 @@ for data in list_square:
     print(data)
 
 print("------------------------------------------------------------")  # 60個
-
-
-def myRange(start=0, stop=100, step=1):
-    n = start
-    while n < stop:
-        yield n
-        n += step
-
-
-print(type(myRange))
-for x in myRange(0, 5):
-    print(x)
-
 print("------------------------------------------------------------")  # 60個
 
-
-def fibonacci(n):
-    a, b = 0, 1
-    count = 0
-    while count < n:
-        yield a
-        a, b = b, a + b
-        count += 1
-
-
-# 呼叫生成器函數，建立迭代器
-fib = fibonacci(10)
-
-# for 迴圈遍歷迭代器，輸出前 10 個 Fib 數
-for num in fib:
-    print(num, end="  ")
-
-print("------------------------------------------------------------")  # 60個
-
-
-def upper(func):  # 裝飾器
-    def newFunc(args):
-        oldresult = func(args)
-        newresult = oldresult.upper()
-        print("函數名稱 : ", func.__name__)
-        print("函數參數 : ", args)
-        return newresult
-
-    return newFunc
-
-
-def greeting(string):  # 問候函數
-    return string
-
-
-mygreeting = upper(greeting)  # 手動裝飾器
-print(mygreeting("Hello! iPhone"))
-
-print("------------------------------------------------------------")  # 60個
-
-
-def upper(func):  # 裝飾器
-    def newFunc(args):
-        oldresult = func(args)
-        newresult = oldresult.upper()
-        print("函數名稱 : ", func.__name__)
-        print("函數參數 : ", args)
-        return newresult
-
-    return newFunc
-
-
-@upper  # 設定裝飾器
-def greeting(string):  # 問候函數
-    return string
-
-
-print(greeting("Hello! iPhone"))
-
-print("------------------------------------------------------------")  # 60個
-
-
-def errcheck(func):  # 裝飾器
-    def newFunc(*args):
-        if args[1] != 0:
-            result = func(*args)
-        else:
-            result = "除數不可為0"
-        print("函數名稱 : ", func.__name__)
-        print("函數參數 : ", args)
-        print("執行結果 : ", result)
-        return result
-
-    return newFunc
-
-
-@errcheck  # 設定裝飾器
-def mydiv(x, y):  # 函數
-    return x / y
-
-
-print(mydiv(6, 2))
-print(mydiv(6, 0))
-
-print("------------------------------------------------------------")  # 60個
-
-
-def upper(func):  # 大寫裝飾器
-    def newFunc(args):
-        oldresult = func(args)
-        newresult = oldresult.upper()
-        return newresult
-
-    return newFunc
-
-
-def bold(func):  # 加粗體字串裝飾器
-    def wrapper(args):
-        return "bold" + func(args) + "bold"
-
-    return wrapper
-
-
-@bold  # 設定加粗體字串裝飾器
-@upper  # 設定大寫裝飾器
-def greeting(string):  # 問候函數
-    return string
-
-
-print(greeting("Hello! iPhone"))
-
-print("------------------------------------------------------------")  # 60個
-
-
-def upper(func):  # 裝飾器
-    def newFunc(args):
-        oldresult = func(args)
-        newresult = oldresult.upper()
-        return newresult
-
-    return newFunc
-
-
-def bold(func):
-    def wrapper(args):
-        return "bold" + func(args) + "bold"
-
-    return wrapper
-
-
-@upper  # 設定大寫裝飾器
-@bold  # 設定加粗體字串大寫裝飾器
-def greeting(string):  # 問候函數
-    return string
-
-
-print(greeting("Hello! iPhone"))
-
-print("------------------------------------------------------------")  # 60個
 
 
 def greeting(name):
@@ -6247,40 +6051,6 @@ data = [5, 7, 9, 15, 21, 6]
 print(f"mysum = {mysum(data)}")
 
 print("------------------------------------------------------------")  # 60個
-
-
-def upper(func):  # 大寫裝飾器
-    def newFunc(args):
-        oldresult = func(args)
-        newresult = oldresult.upper()
-        return newresult
-
-    return newFunc
-
-
-def bold(func):  # 加粗體字串裝飾器
-    def wrapper(args):
-        return "bold" + func(args) + "bold"
-
-    return wrapper
-
-
-def italic(func):  # 加斜體字串裝飾器
-    def wrapper(args):
-        return "italic" + func(args) + "italic"
-
-    return wrapper
-
-
-@italic
-@bold  # 設定加粗體字串裝飾器
-@upper  # 設定大寫裝飾器
-def greeting(string):  # 問候函數
-    return string
-
-
-print(greeting("Hello! iPhone"))
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -6383,135 +6153,8 @@ ivan.action2()  # 順序 Ivan -> Father
 ivan.action1()  # 順序 Ivan -> Father -> Grandfather
 
 print("------------------------------------------------------------")  # 60個
-
-
-class Grandfather:
-    """定義祖父類別"""
-
-    def action1(self):
-        print("Grandfather")
-
-
-class Father(Grandfather):
-    """定義父親類別"""
-
-    def action2(self):  # 定義action2()
-        print("Father")
-
-
-class Uncle(Grandfather):
-    """定義叔父類別"""
-
-    def action2(self):  # 定義action2()
-        print("Uncle")
-
-
-class Aunt(Grandfather):
-    """定義阿姨類別"""
-
-    def action2(self):  # 定義action2()
-        print("Aunt")
-
-
-class Ivan(Father, Uncle, Aunt):
-    """定義Ivan類別"""
-
-    def action3(self):
-        print("Ivan")
-
-
-ivan = Ivan()
-ivan.action3()  # 順序 Ivan
-ivan.action2()  # 順序 Ivan -> Father
-ivan.action1()  # 順序 Ivan -> Father -> Grandfather
-
 print("------------------------------------------------------------")  # 60個
 
-
-class Grandfather:
-    """定義祖父類別"""
-
-    def action1(self):
-        print("Grandfather")
-
-
-class Father(Grandfather):
-    """定義父親類別"""
-
-    def action2(self):  # 定義action2()
-        print("Father")
-
-
-class Uncle(Grandfather):
-    """定義叔父類別"""
-
-    def action2(self):  # 定義action2()
-        print("Uncle")
-
-
-class Aunt(Grandfather):
-    """定義阿姨類別"""
-
-    def action2(self):  # 定義action2()
-        print("Aunt")
-
-
-class Ivan(Uncle, Aunt, Father):
-    """定義Ivan類別"""
-
-    def action3(self):
-        print("Ivan")
-
-
-ivan = Ivan()
-ivan.action3()  # 順序 Ivan
-ivan.action2()  # 順序 Ivan -> Father
-ivan.action1()  # 順序 Ivan -> Father -> Grandfather
-
-print("------------------------------------------------------------")  # 60個
-
-
-class Grandfather:
-    """定義祖父類別"""
-
-    def action1(self):
-        print("Grandfather")
-
-
-class Father(Grandfather):
-    """定義父親類別"""
-
-    def action2(self):  # 定義action2()
-        print("Father")
-
-
-class Uncle(Grandfather):
-    """定義叔父類別"""
-
-    def action2(self):  # 定義action2()
-        print("Uncle")
-
-
-class Aunt(Grandfather):
-    """定義阿姨類別"""
-
-    def action2(self):  # 定義action2()
-        print("Aunt")
-
-
-class Ivan(Aunt, Father, Uncle):
-    """定義Ivan類別"""
-
-    def action3(self):
-        print("Ivan")
-
-
-ivan = Ivan()
-ivan.action3()  # 順序 Ivan
-ivan.action2()  # 順序 Ivan -> Father
-ivan.action1()  # 順序 Ivan -> Father -> Grandfather
-
-print("------------------------------------------------------------")  # 60個
 
 """ 很多
 secretcode = "112299"                                   # 設定密碼
@@ -15019,7 +14662,7 @@ ord()
 
 
 
-進位系統 進位制（carry system)
+# 進位系統 進位制（carry system)
 
 print("十進位 轉 十六進位")
 
