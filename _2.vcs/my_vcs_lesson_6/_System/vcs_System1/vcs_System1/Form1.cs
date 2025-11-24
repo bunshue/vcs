@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;            //for DriveInfo
+using System.IO;    //for DriveInfo
 using System.Net;   //for DNS
-using System.IO.Ports;          //for serial ports
+using System.IO.Ports;  //for serial ports
 using System.Collections;   //for DictionaryEntry
 using System.Globalization;
 using System.Runtime.InteropServices;   //for DllImport, StructLayout
@@ -18,8 +18,6 @@ using System.Reflection;        //for Assembly
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Printing;  //for PrinterSettings
 using System.Threading;
-//using System.Management;
-
 
 using Microsoft.VisualBasic.Devices;    //for Computer
 
@@ -56,7 +54,7 @@ namespace vcs_System1
 
             CheckForIllegalCrossThreadCalls = false;
             MyProcesses = Process.GetProcesses();
-            richTextBox1.Text += "進程數 : " + MyProcesses.Length.ToString() + "\n";
+            lb_processes.Text = "進程數 : " + MyProcesses.Length.ToString();
             myUser();
         }
 
@@ -70,8 +68,8 @@ namespace vcs_System1
             //button
             x_st = 10;
             y_st = 10;
-            dx = 250;
-            dy = 55;
+            dx = 240 + 5;
+            dy = 60 + 5;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -106,42 +104,30 @@ namespace vcs_System1
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
-            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+            lb_processes.Location = new Point(x_st + dx * 3, y_st + dy * 9);//進程數
 
-            groupBox1.Size = new Size(200, 150);
-            groupBox2.Size = new Size(450, 150);
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            groupBox2.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            groupBox1.Size = new Size(200, 150);//Windows 開關機(偽執行)
+            groupBox2.Size = new Size(320, 150);
+            groupBox3.Size = new Size(320, 100);
+            groupBox4.Size = new Size(320, 100);
 
-            groupBox3.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            groupBox4.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            groupBox2.Location = new Point(x_st + dx * 3, y_st + dy * 0);//記憶體狀態
+            groupBox3.Location = new Point(x_st + dx * 3, y_st + dy * 2 + 20);//物理內存
+            groupBox4.Location = new Point(x_st + dx * 3, y_st + dy * 4);//虛擬內存
+            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 6);
 
-            richTextBox1.Size = new Size(450, 400);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 5);
+            richTextBox1.Size = new Size(400, 740);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 80, y_st + dy * 0);
 
-            dy = 0;
-
-            bt_memory.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 13 + 50);
-
-            label1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
-            label2.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 25);
-            label3.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 50);
-            label4.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 75);
-            label5.Location = new Point(x_st + dx * 0 + 280, y_st + dy * 12);
+            dy = 30;
+            label1.Location = new Point(x_st + dx * 0, y_st + 12 + dy * 0);
+            label2.Location = new Point(x_st + dx * 0, y_st + 12 + dy * 1);
+            label3.Location = new Point(x_st + dx * 0, y_st + 12 + dy * 2);
+            label4.Location = new Point(x_st + dx * 0, y_st + 12 + dy * 3);
             label1.Text = "";
             label2.Text = "";
             label3.Text = "";
             label4.Text = "";
-            label5.Text = "";
 
             this.Size = new Size(1500, 800);
 
@@ -240,7 +226,6 @@ namespace vcs_System1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "電腦開機時間 : " + (Environment.TickCount / 1000).ToString() + " 秒\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -302,16 +287,7 @@ namespace vcs_System1
 
             //判斷 User 電腦作業系統與位元數
             richTextBox1.Text += "Windows 作業系統 : " + GetOS() + ", " + GetBit() + "\n";
-
-
-
-
-
-
-
-
         }
-
 
         private static string GetOS()
         {
@@ -395,14 +371,22 @@ namespace vcs_System1
 
         private void button5_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "讀取程式預設值\n";
+            ReadSettings();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "詢問確定關閉表單\n";
+            richTextBox1.Text += "找個地方加入WndProc()即可\n";
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "電腦開機時間 : " + (Environment.TickCount / 1000).ToString() + " 秒\n";
+
+            //------------------------------------------------------------  # 60個
+
             //Environment屬性
             richTextBox1.Text += "顯示系統資訊\n";
             richTextBox1.Text += "系統啟動後經過的時間： " + (Environment.TickCount / 1000).ToString() + "秒" + "\n";
@@ -463,10 +447,9 @@ namespace vcs_System1
 
             string sys_dir = Environment.SystemDirectory;
             richTextBox1.Text += "SystemDirectory :\t" + sys_dir + "\n";
-        }
 
-        private void button8_Click(object sender, EventArgs e)
-        {
+            //------------------------------------------------------------  # 60個
+
             //Environment參數
             richTextBox1.Text += "Environment參數\n";
             richTextBox1.Text += "CommandLine:\t" + Environment.CommandLine + "\n";
@@ -484,18 +467,11 @@ namespace vcs_System1
             {
                 richTextBox1.Text += var.Key + "\t" + var.Value + "\n";
             }
-        }
 
-        private void button9_Click(object sender, EventArgs e)
-        {
-            //temp資料 系統路徑
+            //------------------------------------------------------------  # 60個
 
-            richTextBox1.Text += "臨時文件目錄 : " + Path.GetTempPath() + "\n";
+            richTextBox1.Text += "CurrentDirectory :\t" + Environment.CurrentDirectory + "\n";
 
-            //string temp_filename = Path.GetTempFileName();
-            //richTextBox1.Text += temp_filename + "\n";
-
-            richTextBox1.Text += "取得運用程序所在目錄 : " + Application.StartupPath + "\n";
 
             richTextBox1.Text += "取得系統目前目錄 : " + Environment.CurrentDirectory + "\n";
 
@@ -504,74 +480,11 @@ namespace vcs_System1
             richTextBox1.Text += "設定新的系統目前目錄\n";
             Environment.CurrentDirectory = foldername;
             richTextBox1.Text += "取得系統目前目錄 : " + Environment.CurrentDirectory + "\n";
-        }
 
-        private void button10_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "防止程序多次執行\n";
-            richTextBox1.Text += "要修改 Program.cs\n";
-        }
+            //------------------------------------------------------------  # 60個
 
-        private void button11_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "系統預設路徑\n";
-            richTextBox1.Text += "CurrentDirectory :\t" + Environment.CurrentDirectory + "\n";
-            richTextBox1.Text += "StartupPath :\t" + Application.StartupPath + "\n";
-            richTextBox1.Text += "Form1.cs所在位置 :\t" + Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..")) + "\n";
-        }
+            //------------------------------------------------------------  # 60個
 
-        private void button12_Click(object sender, EventArgs e)
-        {
-            //GetExecutingAssembly() 使用
-
-            //取得目前應用程式版本
-            richTextBox1.Text += "VersionInfo: " + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
-
-            richTextBox1.Text += "取得目前應用程式版本\n";
-            richTextBox1.Text += FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
-
-            richTextBox1.Text += "提供磁碟上實體檔案的版本資訊\n";
-            // Get the file version for the notepad.
-            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(Environment.SystemDirectory + "\\Notepad.exe");
-
-            // Print the file name and version number.
-            richTextBox1.Text += "File: " + myFileVersionInfo.FileDescription + '\n' + "Version number: " + myFileVersionInfo.FileVersion + "\n";
-
-            richTextBox1.Text += "取得NOTEPAD版本資訊\n";
-            richTextBox1.Text += "VersionInfo: " + FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-            //程式所在位置
-            string appPath = Application.ExecutablePath;
-            richTextBox1.Text += "程式所在位置" + appPath + "\n";
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-            System.Net.IPHostEntry IPHost = System.Net.Dns.GetHostEntry(Environment.MachineName);
-            if (IPHost.AddressList.Length > 0)
-            {
-                richTextBox1.Text += "1電腦本機IP : " + IPHost.AddressList[0].ToString() + "\n";
-                //MessageBox.Show(IPHost.AddressList[0].ToString(), "電腦本機IP");
-            }
-
-
-            string hostName = Dns.GetHostName(); //獲取主機名稱
-            IPAddress[] addresses = Dns.GetHostAddresses(hostName); //解析主機IP地址
-
-            string[] IP = new string[addresses.Length]; //轉換為字符串形式
-            for (int i = 0; i < addresses.Length; i++)
-            {
-                IP[i] = addresses[i].ToString();
-                richTextBox1.Text += "2電腦本機IP : " + IP[i] + "\n";
-            }
-
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
             richTextBox1.Text += "MachineName: " + Environment.MachineName + "\n";
             richTextBox1.Text += "# of processors (logical): " + Environment.ProcessorCount + "\n";
             //richTextBox1.Text += "# of processors (physical): " + CountPhysicalProcessors() + "\n";
@@ -579,45 +492,10 @@ namespace vcs_System1
             richTextBox1.Text += "Is OS 64-bit? " + Environment.Is64BitOperatingSystem + "\n";
             richTextBox1.Text += "Is process 64-bit? " + Environment.Is64BitProcess + "\n";
             richTextBox1.Text += "Little-endian: " + BitConverter.IsLittleEndian + "\n";
-        }
 
-        private void button16_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "C# 產生 GUID 1\n";
-            //可以直接透過內建方法，產生 GUID
 
-            Guid guid = Guid.NewGuid();
-            richTextBox1.Text += "GUID1 : " + guid + "\n";
+            //------------------------------------------------------------  # 60個
 
-            guid = Guid.NewGuid();
-            richTextBox1.Text += "GUID2 : " + guid + "\n";
-
-            guid = Guid.NewGuid();
-            richTextBox1.Text += "GUID3 : " + guid + "\n";
-
-            richTextBox1.Text += "C# 產生 GUID 2\n";
-            richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("N") + "\n";//結果為：38bddf48f43c48588e0d78761eaa1ce6
-            richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("D") + "\n";//結果為：57d99d89-caab-482a-a0e9-a0a803eed3ba (默認的為第2種效果)
-            richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("B") + "\n";//結果為：{09f140d5-af72-44ba-a763-c861304b46f8}
-            richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("P") + "\n";//結果為：(778406c2-efff-4262-ab03-70a77d09c2b5)
-
-            string newName = Guid.NewGuid().ToString();
-
-            richTextBox1.Text += "C# 產生 GUID 3\n";
-            richTextBox1.Text += newName + "\n";
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-            //取得電腦名稱
-            richTextBox1.Text += "電腦名稱 1 : " + Environment.MachineName + "\n";
-            richTextBox1.Text += "電腦名稱 2 : " + Dns.GetHostName() + "\n";
-            richTextBox1.Text += "電腦名稱 3 : " + SystemInformation.ComputerName + "\n";
-            richTextBox1.Text += "電腦名稱 4 : " + Environment.GetEnvironmentVariable("COMPUTERNAME") + "\n";
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
             //Environment 類別
             richTextBox1.Text += "Environment 類別\n";
 
@@ -662,16 +540,166 @@ namespace vcs_System1
             richTextBox1.Text += "作業系統在" + str + "\n";
             string dir = str.Substring(0, 2);
             richTextBox1.Text += "作業系統在" + dir + "\n";
-        }
 
-        private void button19_Click(object sender, EventArgs e)
-        {
+
+            //------------------------------------------------------------  # 60個
+
             //取得系統環境變數
             richTextBox1.Text += "環境變數" + "\t\t\t" + "變數值" + "\n";
             foreach (DictionaryEntry DEntry in Environment.GetEnvironmentVariables())
             {
                 richTextBox1.Text += DEntry.Key.ToString() + "\t" + DEntry.Value.ToString() + "\n";
             }
+
+            //------------------------------------------------------------  # 60個
+
+
+
+
+            //------------------------------------------------------------  # 60個
+
+
+
+            //------------------------------------------------------------  # 60個
+
+
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //temp資料 系統路徑
+
+            richTextBox1.Text += "臨時文件目錄 : " + Path.GetTempPath() + "\n";
+
+            //string temp_filename = Path.GetTempFileName();
+            //richTextBox1.Text += temp_filename + "\n";
+
+            richTextBox1.Text += "取得運用程序所在目錄 : " + Application.StartupPath + "\n";
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "防止程序多次執行\n";
+            richTextBox1.Text += "要修改 Program.cs\n";
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "系統預設路徑\n";
+            richTextBox1.Text += "StartupPath :\t" + Application.StartupPath + "\n";
+            richTextBox1.Text += "Form1.cs所在位置 :\t" + Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..")) + "\n";
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //GetExecutingAssembly() 使用
+
+            //取得目前應用程式版本
+            richTextBox1.Text += "VersionInfo: " + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
+
+            richTextBox1.Text += "取得目前應用程式版本\n";
+            richTextBox1.Text += FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
+
+            richTextBox1.Text += "提供磁碟上實體檔案的版本資訊\n";
+            // Get the file version for the notepad.
+            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(Environment.SystemDirectory + "\\Notepad.exe");
+
+            // Print the file name and version number.
+            richTextBox1.Text += "File: " + myFileVersionInfo.FileDescription + '\n' + "Version number: " + myFileVersionInfo.FileVersion + "\n";
+
+            richTextBox1.Text += "取得NOTEPAD版本資訊\n";
+            richTextBox1.Text += "VersionInfo: " + FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //程式所在位置
+            string appPath = Application.ExecutablePath;
+            richTextBox1.Text += "程式所在位置" + appPath + "\n";
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            System.Net.IPHostEntry IPHost = System.Net.Dns.GetHostEntry(Environment.MachineName);
+            if (IPHost.AddressList.Length > 0)
+            {
+                richTextBox1.Text += "1電腦本機IP : " + IPHost.AddressList[0].ToString() + "\n";
+                //MessageBox.Show(IPHost.AddressList[0].ToString(), "電腦本機IP");
+            }
+
+            string hostName = Dns.GetHostName(); //獲取主機名稱
+            IPAddress[] addresses = Dns.GetHostAddresses(hostName); //解析主機IP地址
+
+            string[] IP = new string[addresses.Length]; //轉換為字符串形式
+            for (int i = 0; i < addresses.Length; i++)
+            {
+                IP[i] = addresses[i].ToString();
+                richTextBox1.Text += "2電腦本機IP : " + IP[i] + "\n";
+            }
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "C# 透過Win32取得滑鼠位置 GetCursorPos\n";
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "C# 產生 GUID 1\n";
+            //可以直接透過內建方法，產生 GUID
+
+            Guid guid = Guid.NewGuid();
+            richTextBox1.Text += "GUID1 : " + guid + "\n";
+
+            guid = Guid.NewGuid();
+            richTextBox1.Text += "GUID2 : " + guid + "\n";
+
+            guid = Guid.NewGuid();
+            richTextBox1.Text += "GUID3 : " + guid + "\n";
+
+            richTextBox1.Text += "C# 產生 GUID 2\n";
+            richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("N") + "\n";//結果為：38bddf48f43c48588e0d78761eaa1ce6
+            richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("D") + "\n";//結果為：57d99d89-caab-482a-a0e9-a0a803eed3ba (默認的為第2種效果)
+            richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("B") + "\n";//結果為：{09f140d5-af72-44ba-a763-c861304b46f8}
+            richTextBox1.Text += "GUID N :\t" + Guid.NewGuid().ToString("P") + "\n";//結果為：(778406c2-efff-4262-ab03-70a77d09c2b5)
+
+            string newName = Guid.NewGuid().ToString();
+
+            richTextBox1.Text += "C# 產生 GUID 3\n";
+            richTextBox1.Text += newName + "\n";
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            //取得電腦名稱
+            richTextBox1.Text += "電腦名稱 1 : " + Environment.MachineName + "\n";
+            richTextBox1.Text += "電腦名稱 2 : " + Dns.GetHostName() + "\n";
+            richTextBox1.Text += "電腦名稱 3 : " + SystemInformation.ComputerName + "\n";
+            richTextBox1.Text += "電腦名稱 4 : " + Environment.GetEnvironmentVariable("COMPUTERNAME") + "\n";
+        }
+
+        [DllImport("kernel32.dll")]
+        private static extern int SetComputerName(string ipComputerName);//重寫API函數
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            //取得並修改電腦名(偽執行)
+            Computer computer = new Computer();//創建計算機對象
+            richTextBox1.Text += "取得原計算機名 : " + computer.Name + "\n";
+
+            richTextBox1.Text += "偽執行 計算機名稱修改, 須重啟計算機使之生效\n";
+            //SetComputerName("lion-mouse");//修改計算機名稱
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "寫入程式預設值\n";
+            SaveSettings();
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -708,6 +736,18 @@ namespace vcs_System1
 
         private void button23_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "到 【偵錯】→【視窗】→【即時運算】 看結果\n\r";
+            richTextBox1.Text += "要勾選 【工具】→【選項】→【偵錯】→【將所有輸出視窗文字重新導向到即時運算視窗】\n\r";
+
+            int a = 123;
+            int b = 456;
+
+            System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！" + a.ToString());
+            System.Diagnostics.Debug.WriteLine("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！" + b.ToString());
+
+            Debug.Print("aaaaaaaaaaaaaaaaaaaaaaaaaa無換行符號1");
+            Debug.Print("aaaaaaaaaaaaaaaaaaaaaaaaaa無換行符號2");
+            Debug.Print("aaaaaaaaaaaaaaaaaaaaaaaaaa無換行符號3");
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -787,79 +827,11 @@ namespace vcs_System1
 
         private void button29_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button30_Click(object sender, EventArgs e)
-        {
             //C# 讀取語系區域
             string systemName = System.Globalization.CultureInfo.CurrentCulture.Name;
             string systemName2 = System.Globalization.CultureInfo.CurrentCulture.NativeName;
             richTextBox1.Text += systemName + "\n";
             richTextBox1.Text += systemName2 + "\n";
-        }
-
-        private void button31_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button32_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button33_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button34_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "到 【偵錯】→【視窗】→【即時運算】 看結果\n\r";
-            richTextBox1.Text += "要勾選 【工具】→【選項】→【偵錯】→【將所有輸出視窗文字重新導向到即時運算視窗】\n\r";
-
-            int a = 123;
-            int b = 456;
-
-            System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！" + a.ToString());
-            System.Diagnostics.Debug.WriteLine("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！" + b.ToString());
-
-            Debug.Print("aaaaaaaaaaaaaaaaaaaaaaaaaa無換行符號1");
-            Debug.Print("aaaaaaaaaaaaaaaaaaaaaaaaaa無換行符號2");
-            Debug.Print("aaaaaaaaaaaaaaaaaaaaaaaaaa無換行符號3");
-        }
-
-        private void button35_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "讀取程式預設值\n";
-            ReadSettings();
-        }
-
-        private void button36_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "詢問確定關閉表單\n";
-            richTextBox1.Text += "找個地方加入WndProc()即可\n";
-        }
-
-        [DllImport("kernel32.dll")]
-        private static extern int SetComputerName(string ipComputerName);//重寫API函數
-
-        private void button37_Click(object sender, EventArgs e)
-        {
-            //取得並修改電腦名(偽執行)
-            Computer computer = new Computer();//創建計算機對象
-            richTextBox1.Text += "取得原計算機名 : " + computer.Name + "\n";
-
-            richTextBox1.Text += "偽執行 計算機名稱修改, 須重啟計算機使之生效\n";
-            //SetComputerName("lion-mouse");//修改計算機名稱
-        }
-
-        private void button38_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "C# 透過Win32取得滑鼠位置 GetCursorPos\n";
-        }
-
-        private void button39_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "寫入程式預設值\n";
-            SaveSettings();
         }
 
         [DllImport("User32")]
@@ -881,27 +853,6 @@ namespace vcs_System1
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-        }
-
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            Computer myComputer = new Computer();
-            label1.Text = "物理內存總量(B)： " + Convert.ToString(myComputer.Info.TotalPhysicalMemory);
-            label2.Text = "可用物理內存(B)： " + Convert.ToString(myComputer.Info.AvailablePhysicalMemory);
-            label3.Text = "虛擬內存總量(B)： " + Convert.ToString(myComputer.Info.TotalVirtualMemory);
-            label4.Text = "可用虛擬內存(B)： " + Convert.ToString(myComputer.Info.AvailableVirtualMemory);
-
-            label1.Text = "物理內存總量(B)： " + Convert.ToString(myComputer.Info.TotalPhysicalMemory / 1024 / 1024) + " MB";
-            label2.Text = "可用物理內存(B)： " + Convert.ToString(myComputer.Info.AvailablePhysicalMemory / 1024 / 1024) + " MB";
-            label3.Text = "虛擬內存總量(B)： " + Convert.ToString(myComputer.Info.TotalVirtualMemory / 1024 / 1024) + " MB";
-            label4.Text = "可用虛擬內存(B)： " + Convert.ToString(myComputer.Info.AvailableVirtualMemory / 1024 / 1024) + " MB";
-
-            timer2.Interval = 2000;
-        }
-
-        private void bt_memory_Click(object sender, EventArgs e)
-        {
-            timer2.Enabled = true;
         }
 
         // Save the current settings.
@@ -983,10 +934,6 @@ namespace vcs_System1
 
         #endregion
 
-        private void timer3_Tick(object sender, EventArgs e)
-        {
-        }
-
         private void myUser()
         {
             Memory();
@@ -1015,8 +962,21 @@ namespace vcs_System1
 
         private void timer_memory_Tick(object sender, EventArgs e)
         {
+            Computer myComputer = new Computer();
+            label1.Text = "物理內存總量(B)： " + Convert.ToString(myComputer.Info.TotalPhysicalMemory);
+            label2.Text = "可用物理內存(B)： " + Convert.ToString(myComputer.Info.AvailablePhysicalMemory);
+            label3.Text = "虛擬內存總量(B)： " + Convert.ToString(myComputer.Info.TotalVirtualMemory);
+            label4.Text = "可用虛擬內存(B)： " + Convert.ToString(myComputer.Info.AvailableVirtualMemory);
+
+            label1.Text = "物理內存總量(B)： " + Convert.ToString(myComputer.Info.TotalPhysicalMemory / 1024 / 1024) + " MB";
+            label2.Text = "可用物理內存(B)： " + Convert.ToString(myComputer.Info.AvailablePhysicalMemory / 1024 / 1024) + " MB";
+            label3.Text = "虛擬內存總量(B)： " + Convert.ToString(myComputer.Info.TotalVirtualMemory / 1024 / 1024) + " MB";
+            label4.Text = "可用虛擬內存(B)： " + Convert.ToString(myComputer.Info.AvailableVirtualMemory / 1024 / 1024) + " MB";
+
+            //------------------------------------------------------------  # 60個
+
             MyProcesses = Process.GetProcesses();
-            richTextBox1.Text += "進程數 : " + MyProcesses.Length.ToString() + "\n";
+            lb_processes.Text = "進程數 : " + MyProcesses.Length.ToString();
             td = new Thread(new ThreadStart(myUser));
             td.Start();
         }
@@ -1327,3 +1287,20 @@ namespace vcs_System1
         }
     }
 }
+
+
+//6060
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//richTextBox1.Text += "---------------\n";  // 15個
+
+
