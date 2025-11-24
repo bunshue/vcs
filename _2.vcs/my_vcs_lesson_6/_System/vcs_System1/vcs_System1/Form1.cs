@@ -17,6 +17,9 @@ using System.Diagnostics;       //for Process
 using System.Reflection;        //for Assembly
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Printing;  //for PrinterSettings
+using System.Threading;
+//using System.Management;
+
 
 using Microsoft.VisualBasic.Devices;    //for Computer
 
@@ -31,6 +34,9 @@ namespace vcs_System1
     public partial class Form1 : Form
     {
         DateTime start_time = DateTime.Now;
+
+        Process[] MyProcesses;
+        Thread td;
 
         public Form1()
         {
@@ -47,6 +53,11 @@ namespace vcs_System1
                 i++;
             }
             show_item_location();
+
+            CheckForIllegalCrossThreadCalls = false;
+            MyProcesses = Process.GetProcesses();
+            richTextBox1.Text += "進程數 : " + MyProcesses.Length.ToString() + "\n";
+            myUser();
         }
 
         void show_item_location()
@@ -72,57 +83,54 @@ namespace vcs_System1
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
 
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button20.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button22.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-            button23.Location = new Point(x_st + dx * 1, y_st + dy * 11);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button30.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button31.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button32.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button33.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            button34.Location = new Point(x_st + dx * 2, y_st + dy * 10);
-            button35.Location = new Point(x_st + dx * 2, y_st + dy * 11);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            button36.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button37.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button38.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button39.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button40.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button41.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button42.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button43.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-            button44.Location = new Point(x_st + dx * 3, y_st + dy * 8);
-            button45.Location = new Point(x_st + dx * 3, y_st + dy * 9);
-            button46.Location = new Point(x_st + dx * 3, y_st + dy * 10);
-            button47.Location = new Point(x_st + dx * 3, y_st + dy * 11);
+            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 14);
-            groupBox2.Location = new Point(x_st + dx * 1, y_st + dy * 14);
+            groupBox1.Size = new Size(200, 150);
+            groupBox2.Size = new Size(450, 150);
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            groupBox2.Location = new Point(x_st + dx * 1, y_st + dy * 10);
 
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            richTextBox1.Size = new Size(660, 1040);
+            groupBox3.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            groupBox4.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+
+            richTextBox1.Size = new Size(450, 400);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 5);
 
             dy = 0;
 
-            bt_memory.Location = new Point(x_st + dx * 1 + 70, y_st + dy * 13 + 50);
+            bt_memory.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 13 + 50);
 
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
             label2.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 25);
@@ -135,43 +143,10 @@ namespace vcs_System1
             label4.Text = "";
             label5.Text = "";
 
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            bt_exit_setup();
+            this.Size = new Size(1500, 800);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-        }
-
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
         }
 
         //關閉程式時，系統會問是否確認，只需要加下面這段就好 ST
@@ -219,7 +194,6 @@ namespace vcs_System1
             {
                 richTextBox1.Text += "Offline, " + percent_text + " remaining\n";
             }
-
 
             ShowPowerStatus1();
             ShowPowerStatus2();
@@ -722,6 +696,14 @@ namespace vcs_System1
 
         private void button22_Click(object sender, EventArgs e)
         {
+            //1. 參考 -> 加入參考 -> .NET/Microsoft.VisualBasic
+            //2. using Microsoft.VisualBasic.Devices;
+
+            Computer myComputer = new Computer();
+            richTextBox1.Text += "物理內存總量(M)： " + Convert.ToString(myComputer.Info.TotalPhysicalMemory / 1024 / 1024) + "\n";
+            richTextBox1.Text += "可用物理內存(M)： " + Convert.ToString(myComputer.Info.AvailablePhysicalMemory / 1024 / 1024) + "\n";
+            richTextBox1.Text += "虛擬內存總量(M)： " + Convert.ToString(myComputer.Info.TotalVirtualMemory / 1024 / 1024) + "\n";
+            richTextBox1.Text += "可用虛擬內存(M)： " + Convert.ToString(myComputer.Info.AvailableVirtualMemory / 1024 / 1024) + "\n";
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -794,8 +776,13 @@ namespace vcs_System1
             richTextBox1.Text += "dpiY = " + dpiY.ToString() + "\n";
         }
 
+        [DllImport("user32.dll", EntryPoint = "ExitWindowsEx", CharSet = CharSet.Ansi)]
+        private static extern int ExitWindowsEx(int uFlags, int dwReserved);
+
         private void button28_Click(object sender, EventArgs e)
         {
+            //電腦重新啟動
+            ExitWindowsEx(0, 0);//注销计算机            
         }
 
         private void button29_Click(object sender, EventArgs e)
@@ -873,46 +860,6 @@ namespace vcs_System1
         {
             richTextBox1.Text += "寫入程式預設值\n";
             SaveSettings();
-        }
-
-        private void button40_Click(object sender, EventArgs e)
-        {
-            //1. 參考 -> 加入參考 -> .NET/Microsoft.VisualBasic
-            //2. using Microsoft.VisualBasic.Devices;
-
-            Computer myComputer = new Computer();
-            richTextBox1.Text += "物理內存總量(M)： " + Convert.ToString(myComputer.Info.TotalPhysicalMemory / 1024 / 1024) + "\n";
-            richTextBox1.Text += "可用物理內存(M)： " + Convert.ToString(myComputer.Info.AvailablePhysicalMemory / 1024 / 1024) + "\n";
-            richTextBox1.Text += "虛擬內存總量(M)： " + Convert.ToString(myComputer.Info.TotalVirtualMemory / 1024 / 1024) + "\n";
-            richTextBox1.Text += "可用虛擬內存(M)： " + Convert.ToString(myComputer.Info.AvailableVirtualMemory / 1024 / 1024) + "\n";
-        }
-
-        private void button41_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button42_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button43_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button44_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button45_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button46_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button47_Click(object sender, EventArgs e)
-        {
         }
 
         [DllImport("User32")]
@@ -1038,6 +985,50 @@ namespace vcs_System1
 
         private void timer3_Tick(object sender, EventArgs e)
         {
+        }
+
+        private void myUser()
+        {
+            Memory();
+        }
+
+        private void Memory()
+        {
+            Microsoft.VisualBasic.Devices.Computer myInfo = new Microsoft.VisualBasic.Devices.Computer();
+            //获取物理内存总量
+            pbMemorySum.Maximum = Convert.ToInt32(myInfo.Info.TotalPhysicalMemory / 1024 / 1024);
+            pbMemorySum.Value = Convert.ToInt32(myInfo.Info.TotalPhysicalMemory / 1024 / 1024);
+            lblSum.Text = (myInfo.Info.TotalPhysicalMemory / 1024).ToString();
+            //获取可用物理内存总量
+            pbMemoryUse.Maximum = Convert.ToInt32(myInfo.Info.TotalPhysicalMemory / 1024 / 1024);
+            pbMemoryUse.Value = Convert.ToInt32(myInfo.Info.AvailablePhysicalMemory / 1024 / 1024);
+            lblMuse.Text = (myInfo.Info.AvailablePhysicalMemory / 1024).ToString();
+            //获取虚拟内存总量
+            pbVmemorysum.Maximum = Convert.ToInt32(myInfo.Info.TotalVirtualMemory / 1024 / 1024);
+            pbVmemorysum.Value = Convert.ToInt32(myInfo.Info.TotalVirtualMemory / 1024 / 1024);
+            lblVinfo.Text = (myInfo.Info.TotalVirtualMemory / 1024).ToString();
+            //获取可用虚拟内存总量
+            pbVmemoryuse.Maximum = Convert.ToInt32(myInfo.Info.TotalVirtualMemory / 1024 / 1024);
+            pbVmemoryuse.Value = Convert.ToInt32(myInfo.Info.AvailableVirtualMemory / 1024 / 1024);
+            lblVuse.Text = (myInfo.Info.AvailableVirtualMemory / 1024).ToString();
+        }
+
+        private void timer_memory_Tick(object sender, EventArgs e)
+        {
+            MyProcesses = Process.GetProcesses();
+            richTextBox1.Text += "進程數 : " + MyProcesses.Length.ToString() + "\n";
+            td = new Thread(new ThreadStart(myUser));
+            td.Start();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (td != null)
+            {
+                td.Abort();
+            }
+
+
         }
     }
 
@@ -1336,4 +1327,3 @@ namespace vcs_System1
         }
     }
 }
-

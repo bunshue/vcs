@@ -22,9 +22,10 @@ namespace vcs_ComboBox1
             InitializeComponent();
         }
 
-        // Add colors and pictures to the ComboBoxes.
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             // Colors.
             Color[] colors =
             {
@@ -69,8 +70,6 @@ namespace vcs_ComboBox1
             {
                 comboBox1.Items.Add(cursor);  // 加入到 comboBox1 清單內
             }
-
-
 
             comboBox2.DrawMode = DrawMode.OwnerDrawFixed;//設置繪制元素方式
             comboBox2.DropDownStyle = ComboBoxStyle.DropDownList; //設置組合框樣式
@@ -172,6 +171,54 @@ namespace vcs_ComboBox1
             comboBox8.SelectedIndex = 0;//設置ComboBox控件默認選中第一項
 
             //comboBox8.DrawItem += new DrawItemEventHandler(comboBox8_DrawItem);
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            int w = 350;
+            int h = 150;
+
+            groupBox0.Size = new Size(w, h);
+            groupBox1.Size = new Size(w, h);
+            groupBox2.Size = new Size(w, h);
+            groupBox3.Size = new Size(w, h);
+            groupBox4.Size = new Size(w, h);
+            groupBox5.Size = new Size(w, h);
+            groupBox6.Size = new Size(w, h * 3 / 2);
+            groupBox7.Size = new Size(w, h / 2);
+            groupBox8.Size = new Size(w, h);
+
+            //350, 150
+
+            x_st = 10;
+            y_st = 10;
+            dx = w + 10;
+            dy = h + 10;
+            groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            groupBox4.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            groupBox5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            groupBox6.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            groupBox7.Location = new Point(x_st + dx * 1, y_st + dy * 3 + 75);
+            groupBox8.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(420, 460);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1200, 700);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void comboBox8_DrawItem(object sender, DrawItemEventArgs e)
@@ -378,9 +425,8 @@ namespace vcs_ComboBox1
             comboBox3.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
-
         Hashtable ht = new Hashtable();
-        string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU";
+        string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU";
 
         //多層 且指明副檔名
         public void GetAllFiles(string foldername)
@@ -469,6 +515,7 @@ namespace vcs_ComboBox1
             }
 
         }
+
     }
 
     //自定義組合框項 

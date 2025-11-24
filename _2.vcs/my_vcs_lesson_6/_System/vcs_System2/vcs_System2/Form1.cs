@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Net;   //for Dns
-using System.Runtime.InteropServices;   //for DllImport
+using System.Runtime.InteropServices;   //for DllImport //DllImport 	指定 DLL 的位置
 using System.Diagnostics;   //for Process
 using System.Net.NetworkInformation;    //for Ping & PingReply
 
@@ -52,56 +52,51 @@ namespace vcs_System2
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
 
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button20.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button22.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-            button23.Location = new Point(x_st + dx * 1, y_st + dy * 11);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button30.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button31.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button32.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button33.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            button34.Location = new Point(x_st + dx * 2, y_st + dy * 10);
-            button35.Location = new Point(x_st + dx * 2, y_st + dy * 11);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            button36.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button37.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button38.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button39.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button40.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button41.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button42.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button43.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-            button44.Location = new Point(x_st + dx * 3, y_st + dy * 8);
-            button45.Location = new Point(x_st + dx * 3, y_st + dy * 9);
-            button46.Location = new Point(x_st + dx * 3, y_st + dy * 10);
-            button47.Location = new Point(x_st + dx * 3, y_st + dy * 11);
+            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            label1.Location = new Point(x_st + dx * 4, y_st + dy * 1 / 2 + 5);
-            label1.Text = "";
+            label1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            label1.Text = "aaaaaa";
 
             label2.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            bt_exit.Location = new Point(x_st + dx * 5 + 140, y_st + dy * 0 + 35);
+            bt_exit.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 35);
 
-            richTextBox1.Location = new Point(x_st + dx * 4 + dx / 2, y_st + dy * 0 + 80);
+            richTextBox1.Size = new Size(400, 460);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 2);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1400, 660);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -681,34 +676,171 @@ namespace vcs_System2
 
         private void button39_Click(object sender, EventArgs e)
         {
+            //使用Class取得系統資訊
+            SYSTEMTIME_INFO SystemInfo = new SYSTEMTIME_INFO();
+            ComputerInfo.GetSystemTime(ref SystemInfo);
+
+            richTextBox1.Text += "date : " + SystemInfo.wYear.ToString() + "/" + SystemInfo.wMonth.ToString() + "/" + SystemInfo.wDay.ToString() + " " + SystemInfo.wHour.ToString() + ":" + SystemInfo.wMinute.ToString() + ":" + SystemInfo.wSecond.ToString() + "." + SystemInfo.wMilliseconds.ToString() + "\n";
+
+            //調用GetSystemInfo函數獲取CPU的相關訊息
+            CPU_INFO CpuInfo = new CPU_INFO();
+            ComputerInfo.GetSystemInfo(ref CpuInfo);
+            richTextBox1.Text += "dwOemId = " + CpuInfo.dwOemId.ToString() + "\n";
+            richTextBox1.Text += "dwPageSize = " + CpuInfo.dwPageSize.ToString() + "\n";
+            richTextBox1.Text += "lpMinimumApplicationAddress = " + CpuInfo.lpMinimumApplicationAddress.ToString() + "\n";
+            richTextBox1.Text += "lpMaximumApplicationAddress = " + CpuInfo.lpMaximumApplicationAddress.ToString() + "\n";
+            richTextBox1.Text += "dwActiveProcessorMask = " + CpuInfo.dwActiveProcessorMask.ToString() + "\n";
+            richTextBox1.Text += "dwNumberOfProcessors = " + CpuInfo.dwNumberOfProcessors.ToString() + "\n";
+            richTextBox1.Text += "dwProcessorType = " + CpuInfo.dwProcessorType.ToString() + "\n";
+            richTextBox1.Text += "dwAllocationGranularity = " + CpuInfo.dwAllocationGranularity.ToString() + "\n";
+            richTextBox1.Text += "dwProcessorLevel = " + CpuInfo.dwProcessorLevel.ToString() + "\n";
+            richTextBox1.Text += "dwProcessorRevision = " + CpuInfo.dwProcessorRevision.ToString() + "\n";
+
+            richTextBox1.Text += "本計算機中有" + CpuInfo.dwNumberOfProcessors.ToString() + "個CPU" + "\n";
+            richTextBox1.Text += "CPU的類型為" + CpuInfo.dwProcessorType.ToString() + "\n";
+            richTextBox1.Text += "CPU等級為" + CpuInfo.dwProcessorLevel.ToString() + "\n";
+            richTextBox1.Text += "CPU的OEM ID為" + CpuInfo.dwOemId.ToString() + "\n";
+            richTextBox1.Text += "CPU中的頁面大小為" + CpuInfo.dwPageSize.ToString() + "\n";
+
+
+            //調用GlobalMemoryStatus函數獲取記憶體的相關訊息
+            MEMORY_INFO MemInfo = new MEMORY_INFO();
+            ComputerInfo.GlobalMemoryStatus(ref MemInfo);
+            richTextBox1.Text += "dwLength = " + MemInfo.dwLength.ToString() + "\n";
+            richTextBox1.Text += "dwMemoryLoad = " + MemInfo.dwMemoryLoad.ToString() + "\n";
+            richTextBox1.Text += "dwTotalPhys = " + (MemInfo.dwTotalPhys / 1024 / 1024).ToString().ToString() + "\n";
+            richTextBox1.Text += "dwAvailPhys = " + (MemInfo.dwAvailPhys / 1024 / 1024).ToString().ToString() + "\n";
+            richTextBox1.Text += "dwTotalPageFile = " + (MemInfo.dwTotalPageFile / 1024 / 1024).ToString().ToString() + "\n";
+            richTextBox1.Text += "dwAvailPageFile = " + (MemInfo.dwAvailPageFile / 1024 / 1024).ToString().ToString() + "\n";
+            richTextBox1.Text += "dwTotalVirtual = " + (MemInfo.dwTotalVirtual / 1024 / 1024).ToString().ToString() + "\n";
+            richTextBox1.Text += "dwAvailVirtual = " + (MemInfo.dwAvailVirtual / 1024 / 1024).ToString().ToString() + "\n";
+
+            richTextBox1.Text += MemInfo.dwMemoryLoad.ToString() + "%的內存正在使用" + "\n";
+            richTextBox1.Text += "物理內存共有" + MemInfo.dwTotalPhys.ToString() + "字節" + "\n";
+            richTextBox1.Text += "可使用的物理內存有" + MemInfo.dwAvailPhys.ToString() + "字節" + "\n";
+            richTextBox1.Text += "交換文件總大小為" + MemInfo.dwTotalPageFile.ToString() + "字節" + "\n";
+            richTextBox1.Text += "尚可交換文件大小為" + MemInfo.dwAvailPageFile.ToString() + "字節" + "\n";
+            richTextBox1.Text += "總虛擬內存有" + MemInfo.dwTotalVirtual.ToString() + "字節" + "\n";
+            richTextBox1.Text += "未用虛擬內存有" + MemInfo.dwAvailVirtual.ToString() + "字節" + "\n";
+
+            //調用GetSystemTime函數獲取系統時間訊息
+            SYSTEMTIME_INFO SysInfo = new SYSTEMTIME_INFO();
+            ComputerInfo.GetSystemTime(ref SysInfo);
+            richTextBox1.Text += "wYear = " + SysInfo.wYear.ToString() + "\n";
+            richTextBox1.Text += "wMonth = " + SysInfo.wMonth.ToString() + "\n";
+            richTextBox1.Text += "wDayOfWeek = " + SysInfo.wDayOfWeek.ToString() + "\n";
+            richTextBox1.Text += "wDay = " + SysInfo.wDay.ToString() + "\n";
+            richTextBox1.Text += "wHour = " + SysInfo.wHour.ToString() + "\n";
+            richTextBox1.Text += "wMinute = " + SysInfo.wMinute.ToString() + "\n";
+            richTextBox1.Text += "wSecond = " + SysInfo.wSecond.ToString() + "\n";
+            richTextBox1.Text += "wMilliseconds = " + SysInfo.wMilliseconds.ToString() + "\n";
+
+
+            //調用GetWindowsDirectory和GetSystemDirectory函數分別取得Windows路徑和系統路徑
+            const int nChars = 128;
+            StringBuilder Buff = new StringBuilder(nChars);
+            ComputerInfo.GetWindowsDirectory(Buff, nChars);
+            richTextBox1.Text += "Windows路徑：" + Buff.ToString() + "\n";
+            ComputerInfo.GetSystemDirectory(Buff, nChars);
+            richTextBox1.Text += "系統路徑：" + Buff.ToString() + "\n";
+
+            //調用GetSystemTime函數獲取系統時間信息
+            SYSTEMTIME_INFO StInfo;
+            StInfo = new SYSTEMTIME_INFO();
+            ComputerInfo.GetSystemTime(ref StInfo);
+            richTextBox1.Text += StInfo.wYear.ToString() + "年" + StInfo.wMonth.ToString() + "月" + StInfo.wDay.ToString() + "日" + "\n";
+            richTextBox1.Text += (StInfo.wHour + 8).ToString() + "點" + StInfo.wMinute.ToString() + "分" + StInfo.wSecond.ToString() + "秒" + "\n";
         }
 
-        private void button40_Click(object sender, EventArgs e)
+
+        /// <summary>
+        ///取得計算機的系統信息
+        /// </summary>
+        public class ComputerInfo
         {
+            // 聲明所要用到的API函數
+            /// <summary>
+            /// 取得Windows的目錄
+            /// </summary>
+            /// <param name="WinDir"></param>
+            /// <param name="count"></param>
+            [DllImport("kernel32")]
+            public static extern void GetWindowsDirectory(StringBuilder WinDir, int count);
+
+            /// <summary>
+            /// 獲取系統路徑
+            /// </summary>
+            /// <param name="SysDir"></param>
+            /// <param name="count"></param>
+            [DllImport("kernel32")]
+            public static extern void GetSystemDirectory(StringBuilder SysDir, int count);
+
+            /// <summary>
+            /// 取得CPU信息
+            /// </summary>
+            /// <param name="cpuinfo"></param>
+            [DllImport("kernel32")]
+            public static extern void GetSystemInfo(ref CPU_INFO cpuinfo);
+
+            /// <summary>
+            /// 取得內存狀態
+            /// </summary>
+            /// <param name="meminfo"></param>
+            [DllImport("kernel32")]
+            public static extern void GlobalMemoryStatus(ref MEMORY_INFO meminfo);
+
+            /// <summary>
+            /// 取得系統時間
+            /// </summary>
+            /// <param name="stinfo"></param>
+            [DllImport("kernel32")]
+            public static extern void GetSystemTime(ref SYSTEMTIME_INFO stinfo);
+            public ComputerInfo()
+            {
+            }
+        }
+        //定義CPU的信息結構
+        [StructLayout(LayoutKind.Sequential)]
+        public struct CPU_INFO
+        {
+            public uint dwOemId;
+            public uint dwPageSize;
+            public uint lpMinimumApplicationAddress;
+            public uint lpMaximumApplicationAddress;
+            public uint dwActiveProcessorMask;
+            public uint dwNumberOfProcessors;
+            public uint dwProcessorType;
+            public uint dwAllocationGranularity;
+            public uint dwProcessorLevel;
+            public uint dwProcessorRevision;
+        }
+        //定義內存的信息結構
+        [StructLayout(LayoutKind.Sequential)]
+        public struct MEMORY_INFO
+        {
+            public uint dwLength;
+            public uint dwMemoryLoad;
+            public uint dwTotalPhys;
+            public uint dwAvailPhys;
+            public uint dwTotalPageFile;
+            public uint dwAvailPageFile;
+            public uint dwTotalVirtual;
+            public uint dwAvailVirtual;
+        }
+        //定義系統時間的信息結構
+        [StructLayout(LayoutKind.Sequential)]
+        public struct SYSTEMTIME_INFO
+        {
+            public ushort wYear;
+            public ushort wMonth;
+            public ushort wDayOfWeek;
+            public ushort wDay;
+            public ushort wHour;
+            public ushort wMinute;
+            public ushort wSecond;
+            public ushort wMilliseconds;
         }
 
-        private void button41_Click(object sender, EventArgs e)
-        {
-        }
 
-        private void button42_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button43_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button44_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button45_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button46_Click(object sender, EventArgs e)
-        {
-        }
     }
 }

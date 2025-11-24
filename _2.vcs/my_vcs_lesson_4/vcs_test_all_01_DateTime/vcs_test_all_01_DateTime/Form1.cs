@@ -18,26 +18,29 @@ namespace vcs_test_all_01_DateTime
     {
         int flag_timer_counter_down_enable = 0;
         int wait_seconds = 0;
+
+        DateTime LoginTime;
         DateTime dt_timer_st = DateTime.Now;
         DateTime start_time = DateTime.Now;
 
         public Form1()
         {
             InitializeComponent();
-            LoginTime = DateTime.Now; //取得目前登入的時間
-            richTextBox1.Text += "登入時間： " + LoginTime.ToString() + "\n";
-            label5.Text = "";
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            LoginTime = DateTime.Now; //取得目前登入的時間
+            richTextBox1.Text += "登入時間： " + LoginTime.ToString() + "\n";
+
+            richTextBox1.Text += "現在時間 :\n";
+            richTextBox1.Text += DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\n";
+            richTextBox1.Text += DateTime.Now.ToString("yyyy" + '-' + "MM" + '-' + "dd" + " HH" + ':' + "mm" + ':' + "ss") + "\n";
+
+            label5.Text = "------------";
+
             timer1.Interval = 1000;
             timer1.Enabled = true;
-
-            // Start with a sample date.
-            txtDate.Text = "11 March 2006, 9:15";
-
-            calculate_time_difference();
 
             load_listview_data();
 
@@ -47,35 +50,54 @@ namespace vcs_test_all_01_DateTime
 
             this.monthCalendar1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.monthCalendar1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-
-
         }
 
         void show_item_location()
         {
-            /*
             int x_st;
             int y_st;
             int dx;
             int dy;
 
-            //button
-            x_st = 1700;
-            y_st = 12;
-            dx = 190;
-            dy = 50;
-            */
-
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
+            int w = 220;
+            int h = 60;
 
             //button
             x_st = 10;
             y_st = 10;
-            dx = 170 + 10;
-            dy = 50 + 2;
+            dx = w + 10;
+            dy = h + 2;
+
+            button0.Size = new Size(w, h);
+            button1.Size = new Size(w, h);
+            button2.Size = new Size(w, h);
+            button3.Size = new Size(w, h);
+            button4.Size = new Size(w, h);
+            button5.Size = new Size(w, h);
+            button6.Size = new Size(w, h);
+            button7.Size = new Size(w, h);
+            button8.Size = new Size(w, h);
+            button9.Size = new Size(w, h);
+            button10.Size = new Size(w, h);
+            button11.Size = new Size(w, h);
+            button12.Size = new Size(w, h);
+            button13.Size = new Size(w, h);
+            button14.Size = new Size(w, h);
+            button15.Size = new Size(w, h);
+            button16.Size = new Size(w, h);
+            button17.Size = new Size(w, h);
+            button18.Size = new Size(w, h);
+            button19.Size = new Size(w, h);
+            button20.Size = new Size(w, h);
+            button21.Size = new Size(w, h);
+            button22.Size = new Size(w, h);
+            button23.Size = new Size(w, h);
+            button24.Size = new Size(w, h);
+            button25.Size = new Size(w, h);
+            button26.Size = new Size(w, h);
+            button27.Size = new Size(w, h);
+            button28.Size = new Size(w, h);
+            comboBox1.Size = new Size(w, h);
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -87,112 +109,71 @@ namespace vcs_test_all_01_DateTime
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
-            button13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
-            button14.Location = new Point(x_st + dx * 0, y_st + dy * 14);
-            button15.Location = new Point(x_st + dx * 0, y_st + dy * 15);
-            button16.Location = new Point(x_st + dx * 0, y_st + dy * 16);
-            button17.Location = new Point(x_st + dx * 0, y_st + dy * 17);
-            button18.Location = new Point(x_st + dx * 0, y_st + dy * 18);
-            button19.Location = new Point(x_st + dx * 0, y_st + dy * 19);
 
-            button20.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button24.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button25.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button30.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-            button31.Location = new Point(x_st + dx * 1, y_st + dy * 11);
-            button32.Location = new Point(x_st + dx * 1, y_st + dy * 12);
-            button33.Location = new Point(x_st + dx * 1, y_st + dy * 13);
-            button34.Location = new Point(x_st + dx * 1, y_st + dy * 14);
-            button35.Location = new Point(x_st + dx * 1, y_st + dy * 15);
-            button36.Location = new Point(x_st + dx * 1, y_st + dy * 16);
-            button37.Location = new Point(x_st + dx * 1, y_st + dy * 17);
-            button38.Location = new Point(x_st + dx * 1, y_st + dy * 18);
-            button39.Location = new Point(x_st + dx * 1, y_st + dy * 19);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            button40.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button41.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button42.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button43.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button44.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button45.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button46.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button47.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button48.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button49.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            button50.Location = new Point(x_st + dx * 2, y_st + dy * 10);
-            button51.Location = new Point(x_st + dx * 2, y_st + dy * 11);
-            comboBox1.Location = new Point(x_st + dx * 2, y_st + dy * 12);
-            //button52.Location = new Point(x_st + dx * 2, y_st + dy * 12);
-            button53.Location = new Point(x_st + dx * 2, y_st + dy * 13);
-            button54.Location = new Point(x_st + dx * 2, y_st + dy * 14);
-            button55.Location = new Point(x_st + dx * 2, y_st + dy * 15);
-            button56.Location = new Point(x_st + dx * 2, y_st + dy * 16);
-            button57.Location = new Point(x_st + dx * 2, y_st + dy * 17);
-            button58.Location = new Point(x_st + dx * 2, y_st + dy * 18);
-            button59.Location = new Point(x_st + dx * 2, y_st + dy * 19);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            //button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            comboBox1.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            button60.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button61.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button62.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button63.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button64.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button65.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button66.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button67.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-            button68.Location = new Point(x_st + dx * 3, y_st + dy * 8);
-            button69.Location = new Point(x_st + dx * 3, y_st + dy * 9);
-            button70.Location = new Point(x_st + dx * 3, y_st + dy * 10);
-            button71.Location = new Point(x_st + dx * 3, y_st + dy * 11);
-            button72.Location = new Point(x_st + dx * 3, y_st + dy * 12);
-            button73.Location = new Point(x_st + dx * 3, y_st + dy * 13);
-            button74.Location = new Point(x_st + dx * 3, y_st + dy * 14);
-            button75.Location = new Point(x_st + dx * 3, y_st + dy * 15);
-            button76.Location = new Point(x_st + dx * 3, y_st + dy * 16);
-            button77.Location = new Point(x_st + dx * 3, y_st + dy * 17);
-            button78.Location = new Point(x_st + dx * 3, y_st + dy * 18);
-            button79.Location = new Point(x_st + dx * 3, y_st + dy * 19);
+            groupBox6.Size = new Size(10 * 2 + 120 * 3 + 5 * 2, 20 + 35 * 2 + 5 * 3 + 10);
+            groupBox8.Size = new Size(250, 160);
+            groupBox5.Size = new Size(180, 160);
+            groupBox9.Size = new Size(250, 360);
+            groupBox12.Size = new Size(180, 180);
 
+            groupBox6.Location = new Point(x_st + dx * 3, y_st + dy * 0);//特殊曆法
+            groupBox8.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            groupBox5.Location = new Point(x_st + dx * 3 + 275, y_st + dy * 2);
 
-            groupBox6.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            groupBox8.Location = new Point(x_st + dx * 4, y_st + dy * 8 + 30);
-            groupBox5.Location = new Point(x_st + dx * 4 + 225, y_st + dy * 8 + 30);
-            groupBox7.Location = new Point(x_st + dx * 4, y_st + dy * 12 - 20);
-            groupBox9.Location = new Point(x_st + dx * 4 + 145, y_st + dy * 12 - 20);
-            groupBox10.Location = new Point(x_st + dx * 4, y_st + dy * 16 + 45);
-            groupBox13.Location = new Point(x_st + dx * 4, y_st + dy * 3 + 30);
+            groupBox13.Location = new Point(x_st + dx * 3, y_st + dy * 5);//月相
+            groupBox10.Location = new Point(x_st + dx * 3, y_st + dy * 10); //listView
 
-            groupBox1.Location = new Point(x_st + dx * 6 + 35, y_st + dy * 0);
-            groupBox2.Location = new Point(x_st + dx * 6 + 35, y_st + dy * 5);
-            groupBox4.Location = new Point(x_st + dx * 6 + 35, y_st + dy * 10);
-            groupBox3.Location = new Point(x_st + dx * 6 + 35, y_st + dy * 12);
-            groupBox11.Location = new Point(x_st + dx * 6 + 35, y_st + dy * 14);
-            groupBox12.Location = new Point(x_st + dx * 6 + 110, y_st + dy * 17);
+            groupBox9.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            groupBox12.Location = new Point(x_st + dx * 5, y_st + dy * 6);
 
+            textBox1.Size = new Size(160, 40);
+            textBox2.Size = new Size(160, 40);
+            dateTimePicker1.Size = new Size(160, 40);
             textBox2.Location = new Point(x_st + dx * 0 - 5, y_st + dy * 0 + 10);
-            bt1.Location = new Point(x_st + dx * 1 - 30, y_st + dy * 0 + 10);
+            bt1.Location = new Point(x_st + 170, y_st + dy * 0 + 10);
             textBox1.Location = new Point(x_st + dx * 0 - 5, y_st + dy * 0 + 40 + 10);
-            bt0.Location = new Point(x_st + dx * 1 - 30, y_st + dy * 0 + 50);
+            bt0.Location = new Point(x_st + 170, y_st + dy * 0 + 50);
             dateTimePicker1.Location = new Point(x_st + dx * 0 - 5, y_st + dy * 0 + 80 + 10);
-            bt2.Location = new Point(x_st + dx * 1 - 30, y_st + dy * 0 + 90);
+            bt2.Location = new Point(x_st + 170, y_st + dy * 0 + 90);
 
+            int dd = 30;
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20);
-            label2.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 60);
-            label3.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 100);
-            label4.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 140);
-            label5.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 180);
+            label2.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 1);
+            label3.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 2);
+            label4.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 3);
+            label5.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 4);
+            lb_time0.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 5);
+            lb_time1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 6);
+            lb_time2.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 7);
+            lb_time3.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 8);
+            lb_time4.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 9);
+            lb_time5.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 10);
 
-            richTextBox1.Size = new Size(520, 1040);
-            richTextBox1.Location = new Point(x_st + dx * 8 - 60, y_st + dy * 0);
+            richTextBox1.Size = new Size(420, 1040);
+            richTextBox1.Location = new Point(x_st + dx * 7 - 140, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
@@ -202,25 +183,10 @@ namespace vcs_test_all_01_DateTime
 
             bt_special_00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_special_01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            bt_special_02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            bt_special_03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            bt_special_04.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            bt_special_05.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            bt_special_06.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            bt_special_07.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            bt_special_08.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            bt_special_09.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            bt_special_10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            bt_special_11.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            groupBox6.Size = new Size(10 * 2 + 120 * 3 + 5 * 2, 20 + 35 * 4 + 5 * 3 + 10);
-
-            dx = 120 + 5;
-            dy = 40 + 5;
-            bt_weekday_00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            bt_weekday_01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            bt_weekday_02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            bt_weekday_03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            bt_weekday_04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_special_02.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_special_03.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            bt_special_04.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_special_05.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -261,29 +227,33 @@ namespace vcs_test_all_01_DateTime
         private void button0_Click(object sender, EventArgs e)
         {
             //時間資料範例
+            //DateTime dt = DateTime.Now;
             //DateTime dt = new DateTime(2006, 3, 11);	//年月日
             DateTime dt = new DateTime(2006, 3, 11, 9, 15, 10, 20);	//年月日時分秒毫秒
 
-            richTextBox1.Text += "完整日期： " + dt.ToString() + "\n";       //日期時間模式 2009/8/24 下午 08:09:42
-            richTextBox1.Text += "完整日期： " + dt.ToString("D") + "\n";    //完整日期模式  2009年8月24日
-            richTextBox1.Text += "簡短日期： " + dt.ToString("d") + "\n";    //簡短日期模式  2009/8/24
+            richTextBox1.Text += "全部日期： " + dt.ToString() + "\n";
+            richTextBox1.Text += "完整日期： " + dt.ToString("D") + "\n";
+            richTextBox1.Text += "簡短日期： " + dt.ToString("d") + "\n";
             richTextBox1.Text += "一般日期： " + dt.ToString("G") + "\n";
-            richTextBox1.Text += "年月格式： " + dt.ToString("Y") + "\n";    //年月模式  2009年8月
-            richTextBox1.Text += "月日格式： " + dt.ToString("M") + "\n";    //月日模式  8月24日
-            richTextBox1.Text += "完整時間： " + dt.ToString("T") + "\n";    //完整時間模式   下午 08:09:42
-            richTextBox1.Text += "簡短時間： " + dt.ToString("t") + "\n";    //簡短時間模式   下午 08:09
-            richTextBox1.Text += "完整時間： " + dt.ToString("F") + "\n";    //完整日期時間模式  2009年8月24日 下午 08:09:42
-            richTextBox1.Text += "簡短時間： " + dt.ToString("f") + "\n";    //簡短日期時間模式  2009年8月24日 下午 08:09
+            richTextBox1.Text += "年月格式： " + dt.ToString("Y") + "\n";
+            richTextBox1.Text += "月日格式： " + dt.ToString("M") + "\n";
+            richTextBox1.Text += "完整時間： " + dt.ToString("T") + "\n";
+            richTextBox1.Text += "簡短時間： " + dt.ToString("t") + "\n";
+            richTextBox1.Text += "完整日期時間： " + dt.ToString("F") + "\n";
+            richTextBox1.Text += "簡短日期時間： " + dt.ToString("f") + "\n";
 
-            //時間資料範例
-            richTextBox1.Text += "完整日期： " + DateTime.Now.ToString("D") + "\n";
-            richTextBox1.Text += "簡短日期： " + DateTime.Now.ToString("d") + "\n";
-            richTextBox1.Text += "完整日期及時間： " + DateTime.Now.ToString("F") + "\n";
-            richTextBox1.Text += "一般日期： " + DateTime.Now.ToString("G") + "\n";
-            richTextBox1.Text += "月日格式： " + DateTime.Now.ToString("M") + "\n";
-            richTextBox1.Text += "完整時間： " + DateTime.Now.ToString("T") + "\n";
-            richTextBox1.Text += "簡短時間： " + DateTime.Now.ToString("t") + "\n";
-            richTextBox1.Text += "年月格式： " + DateTime.Now.ToString("Y") + "\n";
+            //------------------------------------------------------------
+
+            dt = DateTime.Parse(textBox1.Text);
+
+            richTextBox1.Text += "D\t完整日期\t" + dt.ToString("D") + "\n";
+            richTextBox1.Text += "d\t簡短日期\t" + dt.ToString("d") + "\n";
+            richTextBox1.Text += "F\t完整日期及時間\t" + dt.ToString("F") + "\n";
+            richTextBox1.Text += "G\t一般日期\t" + dt.ToString("G") + "\n";
+            richTextBox1.Text += "M\t月日格式\t" + dt.ToString("M") + "\n";
+            richTextBox1.Text += "T\t完整時間\t" + dt.ToString("T") + "\n";
+            richTextBox1.Text += "t\t簡短時間\t" + dt.ToString("t") + "\n";
+            richTextBox1.Text += "Y\t年月格式\t" + dt.ToString("Y") + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -311,7 +281,25 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "今天經過時間 " + interval.ToString() + "\n";
             richTextBox1.Text += "今天經過時間 " + interval.TotalSeconds.ToString() + " 秒\n";
 
+            //------------------------------------------------------------
+
             //時間差計算1
+            /*
+            //DateTime dt = new DateTime(年, 月, 日);
+            //DateTime dt = new DateTime(年, 月, 日, 時, 分, 秒);
+            //DateTime dt = new DateTime(年, 月, 日, 時, 分, 秒, 毫秒);
+            DateTime dt1 = new DateTime(2017, 1, 31);
+            DateTime dt2 = new DateTime(2017, 2, 1, 2, 3, 4, 15);
+            DateTime dt3 = DateTime.Now;
+            TimeSpan ts1 = dt2 - dt1;
+            TimeSpan ts2 = dt3 - dt1;
+            richTextBox1.Text += "兩個時間相距：" + ts1.ToString() + "\n";
+            richTextBox1.Text += "與現在相距：" + ts2.ToString() + "\n";
+            */
+
+            //------------------------------------------------------------
+
+            //時間差計算2
 
             //Timestamp 與 DateTime 互轉
             // 現在時間轉秒數
@@ -326,7 +314,8 @@ namespace vcs_test_all_01_DateTime
 
             richTextBox1.Text += "時間：" + dt.ToString() + "秒" + "\n";
 
-            //時間差計算
+            //時間差計算3
+
             //一戰
             //1914年7月28日－1918年11月11日
             //（4年3個月又2周） 
@@ -334,133 +323,8 @@ namespace vcs_test_all_01_DateTime
             DateTime ww1_sp = new DateTime(1918, 11, 11, 17, 8, 17);
             TimeSpan ww1_time = ww1_sp - ww1_st;
             richTextBox1.Text += "一戰經歷時間 = " + ww1_time.ToString("T") + "\n";
-        }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            long seconds = DateTime.Now.Ticks / TimeSpan.TicksPerSecond;
-
-            richTextBox1.Text += "現在時間用Ticks表示 : " + DateTime.Now.Ticks.ToString() + "\n";
-            richTextBox1.Text += "每秒有幾個Ticks : " + TimeSpan.TicksPerSecond.ToString() + "\n";
-            richTextBox1.Text += "現在時間用秒表示 : " + seconds.ToString() + "\n";
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //C# 計算差異天數
-            string startDate = "2007/07/01";
-            string endDate = "2007/07/07";
-            DateTime dtStart = DateTime.ParseExact(startDate, "yyyy/MM/dd", null);
-            DateTime dtEnd = DateTime.ParseExact(endDate, "yyyy/MM/dd", null);
-            // 計算差異天數
-            TimeSpan tsDay = dtEnd - dtStart;
-            int dayCount = (int)tsDay.TotalDays;
-            richTextBox1.Text += "相差" + dayCount.ToString() + "天" + "\n";
-
-            //C# 計算差異天數
-            startDate = "628年7月21日";
-            endDate = "683年12月27日";
-
-            dtStart = DateTime.Parse(startDate);
-            dtEnd = DateTime.Parse(endDate);
-            // 計算差異天數
-            tsDay = dtEnd - dtStart;
-            dayCount = (int)tsDay.TotalDays;
-            richTextBox1.Text += "相差" + dayCount.ToString() + "天" + "\n";
-            richTextBox1.Text += "天1 : " + tsDay.Days.ToString() + "\n";        //same
-            richTextBox1.Text += "天1 : " + tsDay.TotalDays.ToString() + "\n";   //same
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            string data = "";
-            data += "DateTime.Now.ToString(\"yyyyMMdd\")                       20080923" + Environment.NewLine;
-            data += "DateTime.Now.ToString(\"yyyy/MM/dd\")                     2008/09/23" + Environment.NewLine;
-            data += "DateTime.Now.ToString(\"yyyy/M/d\")                          2008/9/23" + Environment.NewLine;
-            data += "DateTime.Now.ToString(\"yyyy/MM/dd HH:mm:ss\")    2008/09/23 13:03:03" + Environment.NewLine;
-            data += "DateTime.Now.ToString(\"T\")                                      下午 01:04:43" + Environment.NewLine;
-            data += "DateTime.Now.ToString(\"t\")                                       下午 01:05" + Environment.NewLine;
-            data += "DateTime.Now.ToString(\"tt\")                                      下午" + Environment.NewLine;
-            data += "DateTime.Now.ToString(\"yyyy/MM/dd tt hh:mm:ss\")  2008/09/23 下午 01:07:27" + Environment.NewLine;
-            data += "DateTime.Now.ToString(\"yyyyMMddhhmmss\")          20080923010921" + Environment.NewLine;
-            data += "HH為24小時制，hh為12小時制" + Environment.NewLine;
-            richTextBox1.Text += data;
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            string sDate = "20100504";
-            DateTime dt = DateTime.ParseExact(sDate, "yyyyMMdd", null, DateTimeStyles.AllowWhiteSpaces);
-            richTextBox1.Text += "時間：" + dt.ToString() + "\n";
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\n";
-            richTextBox1.Text += DateTime.Now.ToString("yyyy" + '-' + "MM" + '-' + "dd" + " HH" + ':' + "mm" + ':' + "ss") + "\n";
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            DateTime dt = DateTime.Now;
-            richTextBox1.Text += "全部格式1a：" + DateTime.Now.ToString() + "\n";
-
-            richTextBox1.Text += "全部格式1b：" + dt.ToString() + "\n";
-            richTextBox1.Text += "全部格式2：" + dt.ToShortTimeString() + "\n";
-            richTextBox1.Text += "全部格式3：" + dt.ToShortDateString() + "\n";
-            //richTextBox1.Text += "全部格式4：" + dt.ToBinary() + "\n";
-            //richTextBox1.Text += "全部格式5：" + dt.ToFileTime() + "\n";
-            //richTextBox1.Text += "全部格式6：" + dt.ToFileTimeUtc() + "\n";
-            richTextBox1.Text += "全部格式7：" + dt.ToLocalTime() + "\n";
-            richTextBox1.Text += "全部格式8：" + dt.ToLongDateString() + "\n";
-            richTextBox1.Text += "全部格式9：" + dt.ToLongTimeString() + "\n";
-            richTextBox1.Text += "全部格式10：" + dt.ToOADate() + "\n";
-            richTextBox1.Text += "全部格式11：" + dt.ToShortDateString() + "\n";
-            richTextBox1.Text += "全部格式12：" + dt.ToShortTimeString() + "\n";
-
-
-            richTextBox1.Text += "年：" + dt.Year.ToString() + "\n";
-            richTextBox1.Text += "月：" + dt.Month.ToString() + "\n";
-            richTextBox1.Text += "日：" + dt.Day.ToString() + "\n";
-            richTextBox1.Text += "天：" + dt.DayOfYear.ToString() + "\n";
-            richTextBox1.Text += "星：" + dt.DayOfWeek.ToString() + "\n";
-            richTextBox1.Text += "時：" + dt.Hour.ToString() + "\n";
-            richTextBox1.Text += "分：" + dt.Minute.ToString() + "\n";
-            richTextBox1.Text += "秒：" + dt.Second.ToString() + "\n";
-            richTextBox1.Text += "毫秒：" + dt.Millisecond.ToString() + "\n";
-            richTextBox1.Text += "Ticks：" + dt.Ticks.ToString() + "\n";
-            richTextBox1.Text += "TimeOfDay：" + dt.TimeOfDay.ToString() + "\n";
-
-            DateTime ThisMonBeginDay = new DateTime(dt.Year, dt.Month, 1);
-            DateTime ThisMonEndDay = ThisMonBeginDay.AddMonths(1).AddDays(-1);
-            richTextBox1.Text += "本月月底日期:" + ThisMonEndDay.Day.ToString() + "\n";
-
-            richTextBox1.Text += "本月月底日期:" + DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month).ToString() + "\n";
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            //時間差計算5
-
-            //DateTime dt = new DateTime(年, 月, 日);
-            //DateTime dt = new DateTime(年, 月, 日, 時, 分, 秒);
-            //DateTime dt = new DateTime(年, 月, 日, 時, 分, 秒, 毫秒);
-            DateTime dt1 = new DateTime(2017, 1, 31);
-            DateTime dt2 = new DateTime(2017, 2, 1, 2, 3, 4, 15);
-            DateTime dt3 = DateTime.Now;
-            TimeSpan ts1 = dt2 - dt1;
-            TimeSpan ts2 = dt3 - dt1;
-            richTextBox1.Text += "兩個時間相距：" + ts1.ToString() + "\n";
-            richTextBox1.Text += "與現在相距：" + ts2.ToString() + "\n";
-
+            //------------------------------------------------------------
 
             //時間差計算5
 
@@ -468,7 +332,7 @@ namespace vcs_test_all_01_DateTime
             int year = 0;
             int month = 0;
             int day = 0;
-            DateTime dt = DateTime.ParseExact(sDate, "yyyy/MM/dd", null, DateTimeStyles.AllowWhiteSpaces);
+            dt = DateTime.ParseExact(sDate, "yyyy/MM/dd", null, DateTimeStyles.AllowWhiteSpaces);
             richTextBox1.Text += "時間：" + dt.ToString() + "\n";
             richTextBox1.Text += "年：" + dt.Year.ToString() + "\n";
             richTextBox1.Text += "月：" + dt.Month.ToString() + "\n";
@@ -478,8 +342,142 @@ namespace vcs_test_all_01_DateTime
             day = dt.Day;
 
             richTextBox1.Text += year.ToString() + "  " + month.ToString() + "   " + day.ToString() + "\n\n";
+
             calculate_date_diff(year, month, day);
+
+            //------------------------------------------------------------
+
+            //時間差計算2
+
+            DateTime d1 = new DateTime(2006, 3, 11, 9, 15, 15);
+            DateTime d2 = DateTime.Now;
+            TimeSpan ts = new TimeSpan(d2.Ticks - d1.Ticks);
+
+            richTextBox1.Text += "兩時間相距 : " + ts.TotalMilliseconds.ToString() + "\n";
+            richTextBox1.Text += "兩時間相距 : " + ts.TotalHours.ToString() + "\n";
+
+            //計算兩個時間差
+            DateTime dt_st = Convert.ToDateTime("2010-10-15 15:50:39");
+            DateTime dt_sp = Convert.ToDateTime("2010-10-25 15:50:39");
+            TimeSpan time_diff = dt_st - dt_sp;
+            double days = time_diff.TotalDays;
+            richTextBox1.Text += "差距 " + Convert.ToInt32(days).ToString() + "天\n";
+
+            /*
+            //兩時間相隔
+            DateTime dt1 = new DateTime(2006, 3, 11, 9, 15, 30);
+            //DateTime dt1 = new DateTime(2021, 5, 21, 9, 15, 30);
+            DateTime dt2 = DateTime.Now;
+            richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Year, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 年\n";
+            richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Month, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 月\n";
+            richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Day, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 天\n";
+
+            //計算耗時任務所需的秒數
+            string diff_time = GetTimeSpan(dt1, dt2);
+            richTextBox1.Text += "相隔 : " + diff_time.ToString() + "\n";
+            */
+
+            //------------------------------------------------------------
+
+            //計算差異天數
+            string startDate = "2007/07/01";
+            string endDate = "2007/07/07";
+            DateTime dtStart = DateTime.ParseExact(startDate, "yyyy/MM/dd", null);
+            DateTime dtEnd = DateTime.ParseExact(endDate, "yyyy/MM/dd", null);
+
+            richTextBox1.Text += "dt1 = " + dtStart.ToString() + "\n";
+            richTextBox1.Text += "dt2 = " + dtEnd.ToString() + "\n";
+
+            // 計算差異天數
+            TimeSpan tsDay = dtEnd - dtStart;
+            int dayCount = (int)tsDay.TotalDays;
+            richTextBox1.Text += "相差" + dayCount.ToString() + "天" + "\n";
+
+            //計算差異天數
+            startDate = "628年7月21日";
+            endDate = "683年12月27日";
+
+            dtStart = DateTime.Parse(startDate);
+            dtEnd = DateTime.Parse(endDate);
+
+            richTextBox1.Text += "dt1 = " + dtStart.ToString() + "\n";
+            richTextBox1.Text += "dt2 = " + dtEnd.ToString() + "\n";
+
+            // 計算差異天數
+            tsDay = dtEnd - dtStart;
+            dayCount = (int)tsDay.TotalDays;
+            richTextBox1.Text += "相差" + dayCount.ToString() + "天" + "\n";
+            richTextBox1.Text += "天1 : " + tsDay.Days.ToString() + "\n";        //same
+            richTextBox1.Text += "天1 : " + tsDay.TotalDays.ToString() + "\n";   //same
+
+            //------------------------------------------------------------
+
+            //日期時間相加減
+            DateTime war_st = Convert.ToDateTime("1937-7-7");
+            DateTime war_sp = Convert.ToDateTime("1945-08-15");
+            ts = war_sp.Subtract(war_st); //兩時間天數相減
+            //dayCount = (int)tsDay.TotalDays;
+            dayCount = ts.Days; //相距天數
+            richTextBox1.Text += "相距天數： " + dayCount.ToString() + " 天\n";
+
+            //------------------------------------------------------------
+
+            dt = DateTime.Now;
+
+            richTextBox1.Text += "登出時間： " + dt.ToString() + "\n";
+            ts = dt.Subtract(LoginTime);
+            richTextBox1.Text += "您在此停留了" + ts.Hours + "小時" + ts.Minutes + "分鐘" + ts.Seconds + "秒" + "\n";
+
+
+            //------------------------------------------------------------
+
+            string str = string.Empty;
+            dt = DateTime.Now;
+            TimeSpan span;
+            span = DateTime.Now - start_time;
+
+            richTextBox1.Text += "程式啟動時間: " + start_time.ToString() + " 秒\n";
+            richTextBox1.Text += "按鍵經歷時間: " + span.ToString() + " 秒\n";
+            str = span.ToString();
+            richTextBox1.Text += "相距時間: " + str + "\n";
+            str = str.Substring(0, str.IndexOf("."));
+            richTextBox1.Text += "相距時間(去掉尾數): " + str + "\n";
+
+            richTextBox1.Text += "程式開啟時間: " + (DateTime.Now - start_time).ToString() + "\n";
+
+            //------------------------------------------------------------
+
+            //計算日期差距
+            //要計算兩個日期間的差距必須要透過 TimeSpan 來達成
+
+            //TimeSpan ts1 = dt2 - dt1;
+            dt1 = Convert.ToDateTime("2006/3/11");
+            //DateTime dt1 = new DateTime(2006, 3, 11);
+
+            dt2 = DateTime.Now;
+
+            ts = dt2 - dt1;
+            richTextBox1.Text += "兩時間相隔 :\n";
+            richTextBox1.Text += ts.Days.ToString() + "天" + ts.Hours.ToString() + "小時" + ts.Minutes.ToString() + "分鐘" + ts.Seconds.ToString() + "秒" + "\n";
+
+            richTextBox1.Text += "日 : " + ts.TotalDays.ToString() + "\n";
+            richTextBox1.Text += "時 : " + ts.TotalHours.ToString() + "\n";
+            richTextBox1.Text += "分 : " + ts.TotalMinutes.ToString() + "\n";
+            richTextBox1.Text += "秒 : " + ts.TotalSeconds.ToString() + "\n";
+
+            //------------------------------------------------------------
+
+            //------------------------------------------------------------
+
+
+
+            //------------------------------------------------------------
+
+
+
         }
+
+
 
         public void calculate_date_diff(int year, int month, int day)
         {
@@ -514,25 +512,721 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "距今：" + year_diff.ToString() + " 年 " + month_diff.ToString() + "月 " + day_diff.ToString() + "日\n";
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        //計算耗時任務所需的秒數
+        public string GetTimeSpan(DateTime dt1, DateTime dt2)
         {
-            TaiwanCalendar TC = new TaiwanCalendar();
-            TaiwanLunisolarCalendar TA = new TaiwanLunisolarCalendar();
+            TimeSpan ts1 = new TimeSpan(dt1.Ticks);
+            TimeSpan ts2 = new TimeSpan(dt2.Ticks);
+            TimeSpan ts = ts2.Subtract(ts1).Duration();//秒
+            string dateDiff = ts.Days.ToString() + "天" + ts.Hours.ToString() + "小時" + ts.Minutes.ToString() + "分鐘" + ts.Seconds.ToString() + "秒";
+            richTextBox1.Text += dateDiff + "\n";
+            return dateDiff;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            long seconds = DateTime.Now.Ticks / TimeSpan.TicksPerSecond;
+
+            richTextBox1.Text += "現在時間用Ticks表示 : " + DateTime.Now.Ticks.ToString() + "\n";
+            richTextBox1.Text += "每秒有幾個Ticks : " + TimeSpan.TicksPerSecond.ToString() + "\n";
+            richTextBox1.Text += "現在時間用秒表示 : " + seconds.ToString() + "\n";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DateTime dt = new DateTime(2006, 3, 11, 9, 15, 23, 34);
+
+            richTextBox1.Text += "Now : " + DateTime.Now + "\n";
+            richTextBox1.Text += "Today : " + DateTime.Today + "\n";
+
+            richTextBox1.Text += "Date : " + dt.Date + "\n";
+            richTextBox1.Text += "Year : " + dt.Year + "\n";
+            richTextBox1.Text += "Month : " + dt.Month + "\n";
+            richTextBox1.Text += "Day : " + dt.Day + "\n";
+            richTextBox1.Text += "Hour : " + dt.Hour + "\n";
+            richTextBox1.Text += "Minute : " + dt.Minute + "\n";
+            richTextBox1.Text += "Second : " + dt.Second + "\n";
+            richTextBox1.Text += "Millisecond : " + dt.Millisecond + "\n";
+
+            richTextBox1.Text += "年：" + dt.Year.ToString() + "\n";
+            richTextBox1.Text += "月：" + dt.Month.ToString() + "\n";
+            richTextBox1.Text += "日：" + dt.Day.ToString() + "\n";
+            richTextBox1.Text += "天：" + dt.DayOfYear.ToString() + "\n";
+            richTextBox1.Text += "星：" + dt.DayOfWeek.ToString() + "\n";
+            richTextBox1.Text += "時：" + dt.Hour.ToString() + "\n";
+            richTextBox1.Text += "分：" + dt.Minute.ToString() + "\n";
+            richTextBox1.Text += "秒：" + dt.Second.ToString() + "\n";
+            richTextBox1.Text += "毫秒：" + dt.Millisecond.ToString() + "\n";
+            richTextBox1.Text += "Ticks：" + dt.Ticks.ToString() + "\n";
+            richTextBox1.Text += "TimeOfDay：" + dt.TimeOfDay.ToString() + "\n";
+
+            //------------------------------------------------------------
+
+            dt = DateTime.Now;
+            richTextBox1.Text += DateTime.Now.ToString("yyyy/MM/dd", DateTimeFormatInfo.InvariantInfo) + "\n";
+
+            //------------------------------------------------------------
+
+            //分出 時:分:秒 再組合
+            dt = DateTime.Now;
+            richTextBox1.Text += dt.Hour.ToString().PadLeft(2, '0') + ":"
+                                    + dt.Minute.ToString().PadLeft(2, '0') + ":"
+                                    + dt.Second.ToString().PadLeft(2, '0') + "\n";
+
+            richTextBox1.Text += "現在時間 : " + dt.ToString("hh:mm:ss.fff") + "\n";
+
+            //------------------------------------------------------------
+
+            dt = DateTime.Now;
+
+            richTextBox1.Text += "星期幾 : " + dt.DayOfWeek.ToString() + "\n";
+
+            richTextBox1.Text += "當前時間 : " + dt.ToLongTimeString() + "\n";
+
+            //DateTime轉字串需顯示毫秒
+            //DateTime.ToString("yyyyMMddhhmmssfff")，fff 格式包含毫秒值中任何結尾的零。
+            richTextBox1.Text += "顯示毫秒 : " + dt.ToString("yyyy_MMdd_hhmmss.fff") + "\n";
+
+            richTextBox1.Text += "日期 : " + dt.ToString("yyyy-MM-dd") + "\n";
+
+            //------------------------------------------------------------
+
+            //僅顯示上下午幾點幾分幾秒
+            richTextBox1.Text += "僅顯示上下午幾點幾分幾秒:\t" + DateTime.Now.ToString("T") + "\n";
+
+            //------------------------------------------------------------
+
+
+            //------------------------------------------------------------
+
+
+            //------------------------------------------------------------
+
+            //------------------------------------------------------------
+
+            dt = DateTime.Now;
+
+            //string.Format 格式化日期
+
+            //日期函數
+
+            richTextBox1.Text += "日期 1:\t" + dt.ToString() + "\n";//2005-11-5 13:21:25
+            richTextBox1.Text += "日期 1:\t" + dt.ToFileTime().ToString() + "\n";//127756416859912816
+            richTextBox1.Text += "日期 1:\t" + dt.ToFileTimeUtc().ToString() + "\n";//127756704859912816
+            richTextBox1.Text += "日期 1:\t" + dt.ToLocalTime().ToString() + "\n";//2005-11-5 21:21:25
+            richTextBox1.Text += "日期 1:\t" + dt.ToLongDateString().ToString() + "\n";//2005年11月5*
+            richTextBox1.Text += "日期 1:\t" + dt.ToLongTimeString().ToString() + "\n";//13:21:25
+            richTextBox1.Text += "日期 1:\t" + dt.ToOADate().ToString() + "\n";//38661.5565508218
+            richTextBox1.Text += "日期 1:\t" + dt.ToShortDateString().ToString() + "\n";//2005-11-5
+            richTextBox1.Text += "日期 1:\t" + dt.ToShortTimeString().ToString() + "\n";//13:21
+            richTextBox1.Text += "日期 1:\t" + dt.ToUniversalTime().ToString() + "\n";//2005-11-5 5:21:25
+
+            //?2005-11-5 13:30:28.4412864
+            richTextBox1.Text += "日期 1:\t" + dt.Year.ToString() + "\n";//2005
+            richTextBox1.Text += "日期 1:\t" + dt.Date.ToString() + "\n";//2005-11-5 0:00:00
+            richTextBox1.Text += "日期 1:\t" + dt.DayOfWeek.ToString() + "\n";//Saturday
+            richTextBox1.Text += "日期 1:\t" + dt.DayOfYear.ToString() + "\n";//309
+            richTextBox1.Text += "日期 1:\t" + dt.Hour.ToString() + "\n";//13
+            richTextBox1.Text += "日期 1:\t" + dt.Millisecond.ToString() + "\n";//441
+            richTextBox1.Text += "日期 1:\t" + dt.Minute.ToString() + "\n";//30
+            richTextBox1.Text += "日期 1:\t" + dt.Month.ToString() + "\n";//11
+            richTextBox1.Text += "日期 1:\t" + dt.Second.ToString() + "\n";//28
+            richTextBox1.Text += "日期 1:\t" + dt.Ticks.ToString() + "\n";//632667942284412864
+            richTextBox1.Text += "日期 1:\t" + dt.TimeOfDay.ToString() + "\n";//13:30:28.4412864
+            richTextBox1.Text += "日期 1:\t" + dt.ToString() + "\n";//2005-11-5 13:47:04
+            richTextBox1.Text += "日期 1:\t" + dt.AddYears(1).ToString() + "\n";//2006-11-5 13:47:04
+            richTextBox1.Text += "日期 1:\t" + dt.AddDays(1.1).ToString() + "\n";//2005-11-6 16:11:04
+            richTextBox1.Text += "日期 1:\t" + dt.AddHours(1.1).ToString() + "\n";//2005-11-5 14:53:04
+            richTextBox1.Text += "日期 1:\t" + dt.AddMilliseconds(1.1).ToString() + "\n";//2005-11-5 13:47:04
+            richTextBox1.Text += "日期 1:\t" + dt.AddMonths(1).ToString() + "\n";//2005-12-5 13:47:04
+            richTextBox1.Text += "日期 1:\t" + dt.AddSeconds(1.1).ToString() + "\n";//2005-11-5 13:47:05
+            richTextBox1.Text += "日期 1:\t" + dt.AddMinutes(1.1).ToString() + "\n";//2005-11-5 13:48:10
+            richTextBox1.Text += "日期 1:\t" + dt.AddTicks(1000).ToString() + "\n";//2005-11-5 13:47:04
+            richTextBox1.Text += "日期 1:\t" + dt.CompareTo(dt).ToString() + "\n";//0
+            //richTextBox1.Text +="日期 1:\t"+ dt.Add(?).ToString()+"\n";//問號為一個時間段
+
+            richTextBox1.Text += "日期 1:\t" + dt.Equals("2005-11-6 16:11:04").ToString() + "\n";//False
+            richTextBox1.Text += "日期 1:\t" + dt.Equals(dt).ToString() + "\n";//True
+            richTextBox1.Text += "日期 1:\t" + dt.GetHashCode().ToString() + "\n";//1474088234
+            richTextBox1.Text += "日期 1:\t" + dt.GetType().ToString() + "\n";//System.DateTime
+            richTextBox1.Text += "日期 1:\t" + dt.GetTypeCode().ToString() + "\n";//DateTime
+
+            /*
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(s)[0].ToString() + "\n";//2005-11-05T14:06:25
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(t)[0].ToString() + "\n";//14:06
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(y)[0].ToString() + "\n";//2005年11月
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[0].ToString() + "\n";//2005年11月5*
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[1].ToString() + "\n";//2005 11 05
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[2].ToString() + "\n";//星期六 2005 11 05
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[3].ToString() + "\n";//星期六 2005年11月5*
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(M)[0].ToString() + "\n";//11月5*
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(f)[0].ToString() + "\n";//2005年11月5* 14:06
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(g)[0].ToString() + "\n";//2005-11-5 14:06
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(r)[0].ToString() + "\n";//Sat, 05 Nov 2005 14:06:25 GMT
+            */
+
+            /*
+            或者dt.ToString("yyyy年MM月dd*");//2005年11月5*
+            dt.ToString("yyyy-MM-dd");//2005-11-5*
+            以此類推……
+            */
+
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:d｝", dt) + "\n";//2005-11-5
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:D｝", dt) + "\n";//2005年11月5*
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:f｝", dt) + "\n";//2005年11月5* 14:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:F｝", dt) + "\n";//2005年11月5* 14:23:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:g｝", dt) + "\n";//2005-11-5 14:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:G｝", dt) + "\n";//2005-11-5 14:23:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:M｝", dt) + "\n";//11月5*
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:R｝", dt) + "\n";//Sat, 05 Nov 2005 14:23:23 GMT
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:s｝", dt) + "\n";//2005-11-05T14:23:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:t｝", dt) + "\n";//14:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:T｝", dt) + "\n";//14:23:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:u｝", dt) + "\n";//2005-11-05 14:23:23Z
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:U｝", dt) + "\n";//2005年11月5* 6:23:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:Y｝", dt) + "\n";//2005年11月
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0｝", dt) + "\n";//2005-11-5 14:23:23?
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:yyyyMMddHHmmssffff｝", dt) + "\n";
+            //yyyymm等可以設置,比如Label16.Text = string.Format("｛0:yyyyMMdd｝",dt)+"\n";
+            //綁定也適用:例:<%# string.Format("｛0:yyyy.MM.dd｝",eval_r("sj"))%>
+
+            //-------- same
+
+            richTextBox1.Text += dt.ToString() + "\n";//2005-11-5 13:21:25
+            richTextBox1.Text += dt.ToFileTime().ToString() + "\n";//127756416859912816
+            richTextBox1.Text += dt.ToFileTimeUtc().ToString() + "\n";//127756704859912816
+            richTextBox1.Text += dt.ToLocalTime().ToString() + "\n";//2005-11-5 21:21:25
+            richTextBox1.Text += dt.ToLongDateString().ToString() + "\n";//2005年11月5日
+            richTextBox1.Text += dt.ToLongTimeString().ToString() + "\n";//13:21:25
+            richTextBox1.Text += dt.ToOADate().ToString() + "\n";//38661.5565508218
+            richTextBox1.Text += dt.ToShortDateString().ToString() + "\n";//2005-11-5
+            richTextBox1.Text += dt.ToShortTimeString().ToString() + "\n";//13:21
+            richTextBox1.Text += dt.ToUniversalTime().ToString() + "\n";//2005-11-5 5:21:25
+            richTextBox1.Text += dt.Year.ToString() + "\n";//2005
+            richTextBox1.Text += dt.Date.ToString() + "\n";//2005-11-5 0:00:00
+            richTextBox1.Text += dt.DayOfWeek.ToString() + "\n";//Saturday
+            richTextBox1.Text += dt.DayOfYear.ToString() + "\n";//309
+            richTextBox1.Text += dt.Hour.ToString() + "\n";//13
+            richTextBox1.Text += dt.Millisecond.ToString() + "\n";//441
+            richTextBox1.Text += dt.Minute.ToString() + "\n";//30
+            richTextBox1.Text += dt.Month.ToString() + "\n";//11
+            richTextBox1.Text += dt.Second.ToString() + "\n";//28
+            richTextBox1.Text += dt.Ticks.ToString() + "\n";//632667942284412864
+            richTextBox1.Text += dt.TimeOfDay.ToString() + "\n";//13:30:28.4412864
+            richTextBox1.Text += dt.ToString() + "\n";//2005-11-5 13:47:04
+            richTextBox1.Text += dt.AddYears(1).ToString() + "\n";//2006-11-5 13:47:04
+            richTextBox1.Text += dt.AddDays(1.1).ToString() + "\n";//2005-11-6 16:11:04
+            richTextBox1.Text += dt.AddHours(1.1).ToString() + "\n";//2005-11-5 14:53:04
+            richTextBox1.Text += dt.AddMilliseconds(1.1).ToString() + "\n";//2005-11-5 13:47:04
+            richTextBox1.Text += dt.AddMonths(1).ToString() + "\n";//2005-12-5 13:47:04
+            richTextBox1.Text += dt.AddSeconds(1.1).ToString() + "\n";//2005-11-5 13:47:05
+            richTextBox1.Text += dt.AddMinutes(1.1).ToString() + "\n";//2005-11-5 13:48:10
+            richTextBox1.Text += dt.AddTicks(1000).ToString() + "\n";//2005-11-5 13:47:04
+            richTextBox1.Text += dt.CompareTo(dt).ToString() + "\n";//0
+
+            //richTextBox1.Text += dt.Add(?).ToString() + "\n";//问号为一个时间段
+
+            richTextBox1.Text += dt.Equals("2005-11-6 16:11:04").ToString() + "\n";//False
+            richTextBox1.Text += dt.Equals(dt).ToString() + "\n";//True
+            richTextBox1.Text += dt.GetHashCode().ToString() + "\n";//1474088234
+            richTextBox1.Text += dt.GetType().ToString() + "\n";//System.DateTime
+            richTextBox1.Text += dt.GetTypeCode().ToString() + "\n";//DateTime
+
+            richTextBox1.Text += dt.GetDateTimeFormats('s')[0].ToString() + "\n";//2005-11-05T14:06:25
+            richTextBox1.Text += dt.GetDateTimeFormats('t')[0].ToString() + "\n";//14:06
+            richTextBox1.Text += dt.GetDateTimeFormats('y')[0].ToString() + "\n";//2005年11月
+            richTextBox1.Text += dt.GetDateTimeFormats('D')[0].ToString() + "\n";//2005年11月5日
+            richTextBox1.Text += dt.GetDateTimeFormats('D')[1].ToString() + "\n";//2005 11 05
+            //richTextBox1.Text += dt.GetDateTimeFormats('D')[2].ToString() + "\n";//星期六 2005 11 05
+            //richTextBox1.Text += dt.GetDateTimeFormats('D')[3].ToString() + "\n";//星期六 2005年11月5日
+            richTextBox1.Text += dt.GetDateTimeFormats('M')[0].ToString() + "\n";//11月5日
+            richTextBox1.Text += dt.GetDateTimeFormats('f')[0].ToString() + "\n";//2005年11月5日 14:06
+            richTextBox1.Text += dt.GetDateTimeFormats('g')[0].ToString() + "\n";//2005-11-5 14:06
+            richTextBox1.Text += dt.GetDateTimeFormats('r')[0].ToString() + "\n";//Sat, 05 Nov 2005 14:06:25 GMT
+
+            richTextBox1.Text += string.Format("{0:d}", dt) + "\n";//2005-11-5
+            richTextBox1.Text += string.Format("{0:D}", dt) + "\n";//2005年11月5日
+            richTextBox1.Text += string.Format("{0:f}", dt) + "\n";//2005年11月5日 14:23
+            richTextBox1.Text += string.Format("{0:F}", dt) + "\n";//2005年11月5日 14:23:23
+            richTextBox1.Text += string.Format("{0:g}", dt) + "\n";//2005-11-5 14:23
+            richTextBox1.Text += string.Format("{0:G}", dt) + "\n";//2005-11-5 14:23:23
+            richTextBox1.Text += string.Format("{0:M}", dt) + "\n";//11月5日
+            richTextBox1.Text += string.Format("{0:R}", dt) + "\n";//Sat, 05 Nov 2005 14:23:23 GMT
+            richTextBox1.Text += string.Format("{0:s}", dt) + "\n";//2005-11-05T14:23:23
+            richTextBox1.Text += string.Format("{0:t}", dt) + "\n";//14:23
+            richTextBox1.Text += string.Format("{0:T}", dt) + "\n";//14:23:23
+            richTextBox1.Text += string.Format("{0:u}", dt) + "\n";//2005-11-05 14:23:23Z
+            richTextBox1.Text += string.Format("{0:U}", dt) + "\n";//2005年11月5日 6:23:23
+            richTextBox1.Text += string.Format("{0:Y}", dt) + "\n";//2005年11月
+            richTextBox1.Text += string.Format("{0}", dt) + "\n";//2005-11-5 14:23:23
+            richTextBox1.Text += string.Format("{0:yyyyMMddHHmmssffff}", dt) + "\n";
+
+            //------------------------------------------------------------
+
+
+
+            //------------------------------------------------------------
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+
+            richTextBox1.Text += "DateTime.Now.ToString(\"yyyyMMdd\")                       20080923\n";
+            richTextBox1.Text += "DateTime.Now.ToString(\"yyyy/MM/dd\")                     2008/09/23\n";
+            richTextBox1.Text += "DateTime.Now.ToString(\"yyyy/M/d\")                          2008/9/23\n";
+            richTextBox1.Text += "DateTime.Now.ToString(\"yyyy/MM/dd HH:mm:ss\")    2008/09/23 13:03:03\n";
+            richTextBox1.Text += "DateTime.Now.ToString(\"T\")                                      下午 01:04:43\n";
+            richTextBox1.Text += "DateTime.Now.ToString(\"t\")                                       下午 01:05\n";
+            richTextBox1.Text += "DateTime.Now.ToString(\"tt\")                                      下午\n";
+            richTextBox1.Text += "DateTime.Now.ToString(\"yyyy/MM/dd tt hh:mm:ss\")  2008/09/23 下午 01:07:27\n";
+            richTextBox1.Text += "DateTime.Now.ToString(\"yyyyMMddhhmmss\")          20080923010921\n";
+            richTextBox1.Text += "HH為24小時制，hh為12小時制\n";
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+
+            richTextBox1.Text += "現在日期： " + dt.ToLongDateString() + "\n";
+            richTextBox1.Text += "現在時間： " + dt.ToLongTimeString() + "\n";
+
+            //現在日期加天數寫法(本例為加5天):
+            DateTime Add5Day = dt.AddDays(5);
+            richTextBox1.Text += "現在日期加5天： " + Add5Day.ToLongDateString() + "\n";
+
+            //現在時間加小時寫法(本例為加12個小時):
+            DateTime Add12Hours = dt.AddHours(12);
+            richTextBox1.Text += "現在時間加12小時： " + Add12Hours.ToLongTimeString() + "\n";
+
+            //現在時間減分鐘寫法(本例為減30分鐘):
+            DateTime Minus30Minutes = dt.AddMinutes(-30);
+            richTextBox1.Text += "現在時間減30分鐘： " + Minus30Minutes.ToLongTimeString() + "\n";
+
+            //------------------------------------------------------------
+
+            dt = new DateTime(2019, 1, 1);
+
+            richTextBox1.Text += "2019/1/1 加一段時間後 : " + dt.AddDays(3125).AddSeconds(14653 * 2).ToString("yyyy/MM/dd HH:mm:ss") + "\n";
+
+            int yy = -280;
+            int dd = -1250;
+            richTextBox1.Text += "2019/1/1 減一段時間後 : " + dt.AddYears(yy).AddDays(dd).AddSeconds(14653 * 2).ToString() + "\n";
+
+            //------------------------------------------------------------
+
+            //------------------------------------------------------------
+
+            //一段時間以後
+            dt = DateTime.Now;
+
+            //?日?時?分?秒 後
+            DateTime dt_new = dt + new TimeSpan(365 * 10, 12, 34, 56);
+
+            richTextBox1.Text += "現在時間 : " + dt.ToString() + "\n";
+            richTextBox1.Text += "一段時間以後 : " + dt_new.ToString() + "\n";
+
+            //------------------------------------------------------------
+
+            //一段時間以後的寫法
+            dt = DateTime.Now;
+            DateTime EventDate = dt + new TimeSpan(1, 13, 42, 59);    //現在時間 + 1天13時42分59秒
+            richTextBox1.Text += "現在時間 + 1天13時42分59秒 = " + EventDate.ToString() + "\n";
+
+
+            //------------------------------------------------------------
+
+
+            //------------------------------------------------------------
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+
+            richTextBox1.Text += "全部格式1a：" + DateTime.Now.ToString() + "\n";
+
+            richTextBox1.Text += "全部格式1b：" + dt.ToString() + "\n";
+            richTextBox1.Text += "全部格式2：" + dt.ToShortTimeString() + "\n";
+            richTextBox1.Text += "全部格式3：" + dt.ToShortDateString() + "\n";
+            //richTextBox1.Text += "全部格式4：" + dt.ToBinary() + "\n";
+            //richTextBox1.Text += "全部格式5：" + dt.ToFileTime() + "\n";
+            //richTextBox1.Text += "全部格式6：" + dt.ToFileTimeUtc() + "\n";
+            richTextBox1.Text += "全部格式7：" + dt.ToLocalTime() + "\n";
+            richTextBox1.Text += "全部格式8：" + dt.ToLongDateString() + "\n";
+            richTextBox1.Text += "全部格式9：" + dt.ToLongTimeString() + "\n";
+            richTextBox1.Text += "全部格式10：" + dt.ToOADate() + "\n";
+            richTextBox1.Text += "全部格式11：" + dt.ToShortDateString() + "\n";
+            richTextBox1.Text += "全部格式12：" + dt.ToShortTimeString() + "\n";
+
+            DateTime ThisMonBeginDay = new DateTime(dt.Year, dt.Month, 1);
+            DateTime ThisMonEndDay = ThisMonBeginDay.AddMonths(1).AddDays(-1);
+            richTextBox1.Text += "本月月底日期:" + ThisMonEndDay.Day.ToString() + "\n";
+
+            richTextBox1.Text += "本月月底日期:" + DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month).ToString() + "\n";
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "印出今年年曆\n";
 
             DateTime dt = DateTime.Now;
-            string message = "";
-            message += string.Format("{0}", dt.Year) + "\n";
-            message += ("西元年:" + dt.Year.ToString()) + "\n";
-            message += ("民國年:" + TC.GetYear(dt)) + "\n";
-            message += (string.Format("西元:{0}/{1}/{2}", dt.Year, dt.Month, dt.Day)) + "\n";
-            message += (string.Format("民國:{0}/{1}/{2}", TC.GetYear(dt), TC.GetMonth(dt), TC.GetDayOfMonth(dt))) + "\n";
-            message += (string.Format("農曆:{0}/{1}/{2}", TA.GetYear(dt), TA.GetMonth(dt), TA.GetDayOfMonth(dt))) + "\n";
 
-            richTextBox1.Text += message;
+            int year = DateTime.Now.Year;
+
+            int nextlinecount;//使用一個計數器沒過一天就加1，逢7換行
+            for (int month = 1; month <= 12; month++)
+            {
+                nextlinecount = 0;//計數器每個月開始需要進行初始化
+                Console.WriteLine("{0}年{1}月", year, month);
+                Console.WriteLine("星期天\t 星期一\t 星期二\t 星期三\t 星期四\t 星期五\t 星期六\t");
+
+                //獲取每個月第一天是星期幾然后輸出對應次數的空格
+                for (int count = 1; count <= GetWeekByDay(year, month, 1); count++)
+                {
+                    Console.Write(" \t ");
+                    nextlinecount++;//計數器增加，這里的空的是上個月的日子
+                }
+
+                for (int day = 1; day <= GetMonthDay(year, month); day++)
+                {
+                    if (nextlinecount % 7 == 0)//每次列印日期前先判斷是否為周六，逢7換行
+                        Console.WriteLine();
+                    Console.Write(day + "\t ");
+                    nextlinecount++;
+                }
+
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("=========================================================================");
+                Console.WriteLine();
+            }
+        }
+
+        /// 輸入年月日，得到這天是星期幾
+        private static int GetWeekByDay(int year, int month, int day)
+        {
+            DateTime dt = new DateTime(year, month, day);
+            return (int)dt.DayOfWeek;
+        }
+
+        /// 獲取某個月的天數，輸入(int)年份，月份，回傳天數(int)
+        private static int GetMonthDay(int year, int month)
+        {
+            int thismonthdays = DateTime.DaysInMonth(year, month);
+            return thismonthdays;
+        }
+
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //打印時間訊息用法
+
+            DateTime dt = DateTime.Now;
+
+            //2007年4月24日
+            richTextBox1.Text += dt.ToString("D") + "\n";
+            //2007-4-24
+            richTextBox1.Text += dt.ToString("d") + "\n";
+
+            //2007年4月24日 16:30:15
+            richTextBox1.Text += dt.ToString("F") + "\n";
+            //2007年4月24日 16:30
+            richTextBox1.Text += dt.ToString("f") + "\n";
+
+            //2007-4-24 16:30:15
+            richTextBox1.Text += dt.ToString("G") + "\n";
+            //2007-4-24 16:30
+            richTextBox1.Text += dt.ToString("g") + "\n";
+
+            //16:30:15
+            richTextBox1.Text += dt.ToString("T") + "\n";
+            //16:30
+            richTextBox1.Text += dt.ToString("t") + "\n";
+
+            //2007年4月24日 8:30:15
+            richTextBox1.Text += dt.ToString("U") + "\n";
+            //2007-04-24 16:30:15Z
+            richTextBox1.Text += dt.ToString("u") + "\n";
+
+            //4月24日
+            richTextBox1.Text += dt.ToString("m") + "\n";
+            richTextBox1.Text += dt.ToString("M") + "\n";
+            //Tue, 24 Apr 2007 16:30:15 GMT
+            richTextBox1.Text += dt.ToString("r") + "\n";
+            richTextBox1.Text += dt.ToString("R") + "\n";
+            //2007年4月 
+            richTextBox1.Text += dt.ToString("y") + "\n";
+            richTextBox1.Text += dt.ToString("Y") + "\n";
+            //2007-04-24T15:52:19.1562500+08:00
+            richTextBox1.Text += dt.ToString("o") + "\n";
+            richTextBox1.Text += dt.ToString("O") + "\n";
+            //2007-04-24T16:30:15
+            richTextBox1.Text += dt.ToString("s") + "\n";
+            //2007-04-24 15:52:19
+            richTextBox1.Text += dt.ToString("yyyy-MM-dd HH：mm：ss：ffff") + "\n";
+            //2007年04月24 15時56分48秒
+            richTextBox1.Text += dt.ToString("yyyy年MM月dd HH時mm分ss秒") + "\n";
+
+            //星期二, 四月 24 2007
+            richTextBox1.Text += dt.ToString("dddd, MMMM dd yyyy") + "\n";
+            //二, 四月 24 '07
+            richTextBox1.Text += dt.ToString("ddd, MMM d \"'\"yy") + "\n";
+            //星期二, 四月 24
+            richTextBox1.Text += dt.ToString("dddd, MMMM dd") + "\n";
+            //4-07
+            richTextBox1.Text += dt.ToString("M/yy") + "\n";
+            //24-04-07
+            richTextBox1.Text += dt.ToString("dd-MM-yy") + "\n";
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            string date_time1 = "21 July 1969, 20:17:40";
+            string date_time2 = "14 December 1972, 19:54:57";
+
+            richTextBox1.Text += "時間1 : " + date_time1 + "\n";
+            richTextBox1.Text += "時間2 : " + date_time2 + "\n";
+
+            DateTime dt1;
+            DateTime dt2;
+
+            if (!DateTime.TryParse(date_time1, out dt1))
+            {
+                return;
+            }
+            richTextBox1.Text += "dt1 : " + dt1.ToString() + "\n";
+
+            if (!DateTime.TryParse(date_time2, out dt2))
+            {
+                return;
+            }
+            richTextBox1.Text += "dt2 : " + dt2.ToString() + "\n";
+
+            int years, months, days, hours, minutes, seconds, milliseconds;
+
+            GetElapsedTime(dt1, dt2, out years, out months, out days, out hours, out minutes, out seconds, out milliseconds);
+
+            // Display the result.
+            string txt = "";
+            if (years != 0)
+            {
+                txt += ", " + years.ToString() + " years";
+            }
+            if (months != 0)
+            {
+                txt += ", " + months.ToString() + " months";
+            }
+            if (days != 0)
+            {
+                txt += ", " + days.ToString() + " days";
+            }
+            if (hours != 0)
+            {
+                txt += ", " + hours.ToString() + " hours";
+            }
+            if (minutes != 0)
+            {
+                txt += ", " + minutes.ToString() + " minutes";
+            }
+            if (seconds != 0)
+            {
+                txt += ", " + seconds.ToString() + " seconds";
+            }
+            if (milliseconds != 0)
+            {
+                txt += ", " + milliseconds.ToString() + " milliseconds";
+            }
+            if (txt.Length > 0)
+            {
+                txt = txt.Substring(2);
+            }
+            if (txt.Length == 0)
+            {
+                txt = "Same";
+            }
+            richTextBox1.Text += "時間差 : " + txt + "\n";
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //比較兩個時間
+
+            //string st1 = "2010/05/30 12:13:50";
+            //string st2 = "2018/09/20 14:14:30";
+            string st1 = "2010/05/30";
+            string st2 = "2018/09/20";
+            DateTime dt1 = Convert.ToDateTime(st1);
+            DateTime dt2 = Convert.ToDateTime(st2);
+
+            if (DateTime.Compare(dt1, dt2) > 0)
+            {
+                richTextBox1.Text += st1 + " 晚於 " + st2 + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += st1 + " 早於 " + st2 + "\n";
+            }
+
+            //------------------------------------------------------------
+
+            //比較兩個時間
+
+            dt1 = new DateTime(2016, 12, 9, 0, 0, 0);
+            dt2 = new DateTime(2016, 12, 9, 11, 0, 0);
+            int result = DateTime.Compare(dt1, dt2);
+            string relationship;
+
+            if (result < 0)
+                relationship = "is earlier than";
+            else if (result == 0)
+                relationship = "is the same time as";
+            else
+                relationship = "is later than";
+
+            richTextBox1.Text += dt1 + " " + relationship + " " + dt2 + "\n";
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //中時間相關知識點小結
+            //一、月份英文簡寫
+
+            DateTime dt = DateTime.Now;
+
+            string MM = dt.AddMonths(-1).ToString("MMM", new CultureInfo("en-us"));//月英文縮寫：Jul
+            richTextBox1.Text += "月份英文簡寫\t" + MM + "\n";
+
+            //二、當月第一天和最后一天
+
+            DateTime ThisMonth_Frist = DateTime.Now.AddDays(1 - DateTime.Now.Day).Date;
+            DateTime ThisMOnth_Last = DateTime.Now.AddDays(1 - DateTime.Now.Day).Date.AddMonths(1).AddSeconds(-1);
+            richTextBox1.Text += "當月第一天\t" + ThisMonth_Frist + "\n";
+            richTextBox1.Text += "當月最后一天\t" + ThisMOnth_Last + "\n";
+
+            //三、上月第一天和最后一天
+
+            DateTime Today = DateTime.Today;//當天時間
+            DateTime ThisMonth = new DateTime(Today.Year, Today.Month, 1);//當前月第一天時間
+            DateTime LastMonth_First = ThisMonth.AddMonths(-1);//上月第一天時間
+            DateTime LastMonth_Last = ThisMonth.AddDays(-1);//上月最后一天時間
+            richTextBox1.Text += "上月第一天\t" + LastMonth_First + "\n";
+            richTextBox1.Text += "上月最后一天\t" + LastMonth_Last + "\n";
+
+            //四、本周第幾天
+
+            int daysInWeek1 = (int)DateTime.Now.DayOfWeek;//注意：此處周,日時回傳0，
+            int daysInWeek2 = (int)DateTime.Now.DayOfWeek == 0 ? 7 : (int)DateTime.Now.DayOfWeek;//當前周第幾天,注釋:周日為0
+            richTextBox1.Text += "本周第幾天\t" + daysInWeek1.ToString() + "\n";
+            richTextBox1.Text += "本周第幾天\t" + daysInWeek2.ToString() + "\n";
+
+            //五、本月第幾周
+
+            //int a = WeekOfMonth(DateTime.Now, false);//
+            //richTextBox1.Text += "本月第幾周\t" + a + "\n";
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            //計算兩個時間差值的函數，傳回時間差的絕對值
+
+            //韓戰	 1950年 6月25日	———————————————————1953年7月27日 簽署停戰協定	4yr
+            string st1 = "1950/6/25";
+            string st2 = "1953/7/27";
+            DateTime dt1 = Convert.ToDateTime(st1);
+            DateTime dt2 = Convert.ToDateTime(st2);
+
+            string result = DateDiff(dt1, dt2);
+            richTextBox1.Text += "result = " + result + "\n";
+
+            //------------------------------------------------------------
+
+            //時間比較
+
+            /*            
+            //時間比較
+            use "DateTime.Compare" static method
+
+            DateTime.Compare( dt1, dt2 ) > 0 : dt1 > dt2
+            DateTime.Compare( dt1, dt2 ) == 0 : dt1 == dt2
+            DateTime.Compare( dt1, dt2 ) < 0 : dt1 < dt2
+       
+
+            DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元9999年12月31日23點59分59秒之間的具體日期時刻。
+            因此，你可以用DateTime值類型來描述任何在想象范圍之內的時間。
+            */
+            dt1 = new DateTime(2006, 3, 11, 9, 15, 20);
+            dt2 = DateTime.Now;
+            string diff = DateDiff(dt1, dt2);
+            richTextBox1.Text += "時間間隔 : " + diff + "\n";
+
+            //------------------------------------------------------------
+
+            dt1 = new DateTime(1939, 9, 1);
+            dt2 = new DateTime(1945, 9, 2);
+            diff = DateDiff(dt1, dt2);
+            richTextBox1.Text += "diff = " + diff + "\n";
+
+            //------------------------------------------------------------
+
+            //計算兩個日期的時間間隔
+            DateTime dt_st = new DateTime(1974, 9, 24);
+            DateTime dt_sp = new DateTime(1999, 3, 8);
+            diff = DateDiff(dt_sp, dt_st);
+            richTextBox1.Text += "時間間隔 : " + diff + "\n";
+
+        }
+
+        /// 計算兩個日期的時間間隔
+        private string DateDiff(DateTime dt1, DateTime dt2)
+        {
+            string dateDiff = null;
+            TimeSpan ts1 = new TimeSpan(dt1.Ticks);
+            TimeSpan ts2 = new TimeSpan(dt2.Ticks);
+            TimeSpan ts = ts1.Subtract(ts2).Duration();
+            dateDiff = ts.Days.ToString() + "天" + ts.Hours.ToString() + "小時" + ts.Minutes.ToString() + "分鐘" + ts.Seconds.ToString() + "秒";
+            return dateDiff;
+        }
+
+
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            string date_old = "11 March 2006, 9:15";
+
+            richTextBox1.Text += "原資料 : " + date_old + "\n";
+
+            DateTime date;
+
+            if (DateTime.TryParse(date_old, out date))
+            {
+                richTextBox1.Text += "取得DateTime :" + date.ToString() + "\n";
+            }
+            else
+            {
+            }
+
+
+
+            //Parse 大全
+            string sDate = "20100504";
+            DateTime dt0 = DateTime.ParseExact(sDate, "yyyyMMdd", null, DateTimeStyles.AllowWhiteSpaces);
+            richTextBox1.Text += "時間：" + dt0.ToString() + "\n";
+
+            //------------------------------------------------------------
+
             DateTime dt;
             richTextBox1.Text += "日期 : " + textBox1.Text + "\n";
             try    // Parse the date and display it in ordinal format.
@@ -553,107 +1247,67 @@ namespace vcs_test_all_01_DateTime
             catch
             {
             }
-        }
 
-        private void button13_Click(object sender, EventArgs e)
-        {
-        }
+            //------------------------------------------------------------
 
-        private void button14_Click(object sender, EventArgs e)
-        {
-            DateTime dt = DateTime.Parse(textBox1.Text);
-            richTextBox1.Text += "D\t完整日期\t" + dt.ToString("D") + "\n";
-            richTextBox1.Text += "d\t簡短日期\t" + dt.ToString("d") + "\n";
-            richTextBox1.Text += "F\t完整日期及時間\t" + dt.ToString("F") + "\n";
-            richTextBox1.Text += "G\t一般日期\t" + dt.ToString("G") + "\n";
-            richTextBox1.Text += "M\t月日格式\t" + dt.ToString("M") + "\n";
-            richTextBox1.Text += "T\t完整時間\t" + dt.ToString("T") + "\n";
-            richTextBox1.Text += "t\t簡短時間\t" + dt.ToString("t") + "\n";
-            richTextBox1.Text += "Y\t年月格式\t" + dt.ToString("Y") + "\n";
+            DateTime timeBirth;
+            string birthstr = "3/11/2006 9:15:30 AM";
+            timeBirth = DateTime.Parse(birthstr);
+            richTextBox1.Text += "生日: " + timeBirth.ToString() + "\n";
 
-            dt = DateTime.Now;
+            TimeSpan span = DateTime.Now - timeBirth;
+            richTextBox1.Text += "經歷時間: " + span.ToString() + "\n";
 
-            richTextBox1.Text += "D\t完整日期\t" + dt.ToString("D") + "\n";
-            richTextBox1.Text += "d\t簡短日期\t" + dt.ToString("d") + "\n";
-            richTextBox1.Text += "F\t完整日期及時間\t" + dt.ToString("F") + "\n";
-            richTextBox1.Text += "G\t一般日期\t" + dt.ToString("G") + "\n";
-            richTextBox1.Text += "M\t月日格式\t" + dt.ToString("M") + "\n";
-            richTextBox1.Text += "T\t完整時間\t" + dt.ToString("T") + "\n";
-            richTextBox1.Text += "t\t簡短時間\t" + dt.ToString("t") + "\n";
-            richTextBox1.Text += "Y\t年月格式\t" + dt.ToString("Y") + "\n";
-        }
+            //------------------------------------------------------------
 
-        private void button15_Click(object sender, EventArgs e)
-        {
+            DateTime myBirthday = DateTime.ParseExact("2006/03/11", "yyyy/MM/dd", null);
+            DateTime flakNow = DateTime.ParseExact("2018/02/01", "yyyy/MM/dd", null);
+            Age myAge = CalculateAge(myBirthday, flakNow);
+            richTextBox1.Text += "年 : " + myAge.Years.ToString() + "\n";
+            richTextBox1.Text += "月 : " + myAge.Months.ToString() + "\n";
+            richTextBox1.Text += "日 : " + myAge.Days.ToString() + "\n";
+
+            //------------------------------------------------------------
+
+
+
+
 
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //時間差計算2
+            DateTime MyEndDate = new DateTime(2023, 01, 01, 00, 00, 00);
+            DateTime MyStartDate = DateTime.Now;
+            TimeSpan MySpan = MyEndDate.Subtract(MyStartDate);
+            string diffDay = Convert.ToString(MySpan.Days);
+            string diffHour = Convert.ToString(MySpan.Hours);
+            string diffMin = Convert.ToString(MySpan.Minutes);
+            string diffSec = Convert.ToString(MySpan.Seconds);
+            richTextBox1.Text += "距離2023新年還有 " + diffDay + " 天 " + diffHour + " 時 " + diffMin + " 分 " + diffSec + " 秒\n";
 
-            DateTime d1 = new DateTime(2006, 3, 11, 9, 15, 15);
-            DateTime d2 = DateTime.Now;
-            TimeSpan ts = new TimeSpan(d2.Ticks - d1.Ticks);
+            //2023年距今還有多久
+            DateTime EventDate = new DateTime(2023, 1, 1, 0, 0, 0);
+            TimeSpan remaining = EventDate - DateTime.Now;
 
-            richTextBox1.Text += "兩時間相距 : " + ts.TotalMilliseconds.ToString() + "\n";
-            richTextBox1.Text += "兩時間相距 : " + ts.TotalHours.ToString() + "\n";
-
-            //計算兩個時間差
-            DateTime dt_st = Convert.ToDateTime("2010-10-15 15:50:39");
-            DateTime dt_sp = Convert.ToDateTime("2010-10-25 15:50:39");
-            TimeSpan time_diff = dt_st - dt_sp;
-            double days = time_diff.TotalDays;
-            richTextBox1.Text = "差距 " + Convert.ToInt32(days).ToString() + "天\n";
-
-            //計算兩個日期的時間間隔
-            dt_st = new DateTime(1974, 9, 24);
-            dt_sp = new DateTime(1999, 3, 8);
-            string diff = DateDiff3(dt_sp, dt_st);
-            richTextBox1.Text += "時間間隔 : " + diff + "\n";
-
-            //兩時間相隔
-            DateTime dt1 = new DateTime(2006, 3, 11, 9, 15, 30);
-            //DateTime dt1 = new DateTime(2021, 5, 21, 9, 15, 30);
-            DateTime dt2 = DateTime.Now;
-            richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Year, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 年\n";
-            richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Month, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 月\n";
-            richTextBox1.Text += "相隔" + DateAndTime.DateDiff(DateInterval.Day, dt1, dt2, FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString() + " 天\n";
-
-            //計算耗時任務所需的秒數
-            string diff_time = GetTimeSpan(dt1, dt2);
-            richTextBox1.Text += "相隔 : " + diff_time.ToString() + "\n";
-        }
-
-        /// <summary>
-        /// 計算兩個日期的時間間隔
-        /// </summary>
-        /// <param name="dt1">第一個日期和時間</param>
-        /// <param name="dt2">第二個日期和時間</param>
-        /// <returns></returns>
-        private string DateDiff3(DateTime dt1, DateTime dt2)
-        {
-            string dateDiff = null;
-            TimeSpan ts1 = new TimeSpan(dt1.Ticks);
-            TimeSpan ts2 = new TimeSpan(dt2.Ticks);
-            TimeSpan ts = ts1.Subtract(ts2).Duration();
-            dateDiff = ts.Days.ToString() + "天" + ts.Hours.ToString() + "小時" + ts.Minutes.ToString() + "分鐘" + ts.Seconds.ToString() + "秒";
-            return dateDiff;
-        }
-
-        //計算耗時任務所需的秒數
-        public string GetTimeSpan(DateTime dt1, DateTime dt2)
-        {
-            TimeSpan ts1 = new TimeSpan(dt1.Ticks);
-            TimeSpan ts2 = new TimeSpan(dt2.Ticks);
-            TimeSpan ts = ts2.Subtract(ts1).Duration();//秒
-            string dateDiff = ts.Days.ToString() + "天" + ts.Hours.ToString() + "小時" + ts.Minutes.ToString() + "分鐘" + ts.Seconds.ToString() + "秒";
-            richTextBox1.Text += dateDiff + "\n";
-            return dateDiff;
+            if (remaining.TotalSeconds < 0)
+            {
+                richTextBox1.Text += "時間 " + EventDate + " 早就過了\n";
+            }
+            else
+            {
+                richTextBox1.Text += "時間 " + EventDate + " 距今:\n";
+                richTextBox1.Text += remaining.Days + "  天\n";
+                richTextBox1.Text += remaining.Hours + "  時\n";
+                richTextBox1.Text += remaining.Minutes + "  分\n";
+                richTextBox1.Text += remaining.Seconds + "  秒\n";
+            }
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
+            DateTime dt = DateTime.Now;
+
             DateTime LastSalaryDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 5);
             DateTime NextSalaryDay = new DateTime(DateTime.Now.AddMonths(1).Year, DateTime.Now.AddMonths(1).Month, 5);
 
@@ -672,8 +1326,10 @@ namespace vcs_test_all_01_DateTime
 
         private void button18_Click(object sender, EventArgs e)
         {
+            DateTime dt = DateTime.Now;
+
             string message = "";
-            message += "C# 怎么显示中文格式的日期、星期几\n";
+            message += "显示中文格式的日期、星期几\n";
             message += "//该语句显示的为英文格式\n";
             message += DateTime.Now.DayOfWeek.ToString() + "\n";
 
@@ -709,154 +1365,50 @@ namespace vcs_test_all_01_DateTime
 
         private void button19_Click(object sender, EventArgs e)
         {
-            string message = "";
-            DateTime dt = DateTime.Now;
+            //OLE自動化日期
+            try
+            {   //可能會產生錯誤的程式區段
 
-            message += dt.ToString() + "\n";//2005-11-5 13:21:25
-            message += dt.ToFileTime().ToString() + "\n";//127756416859912816
-            message += dt.ToFileTimeUtc().ToString() + "\n";//127756704859912816
-            message += dt.ToLocalTime().ToString() + "\n";//2005-11-5 21:21:25
-            message += dt.ToLongDateString().ToString() + "\n";//2005年11月5日
-            message += dt.ToLongTimeString().ToString() + "\n";//13:21:25
-            message += dt.ToOADate().ToString() + "\n";//38661.5565508218
-            message += dt.ToShortDateString().ToString() + "\n";//2005-11-5
-            message += dt.ToShortTimeString().ToString() + "\n";//13:21
-            message += dt.ToUniversalTime().ToString() + "\n";//2005-11-5 5:21:25
-            message += dt.Year.ToString() + "\n";//2005
-            message += dt.Date.ToString() + "\n";//2005-11-5 0:00:00
-            message += dt.DayOfWeek.ToString() + "\n";//Saturday
-            message += dt.DayOfYear.ToString() + "\n";//309
-            message += dt.Hour.ToString() + "\n";//13
-            message += dt.Millisecond.ToString() + "\n";//441
-            message += dt.Minute.ToString() + "\n";//30
-            message += dt.Month.ToString() + "\n";//11
-            message += dt.Second.ToString() + "\n";//28
-            message += dt.Ticks.ToString() + "\n";//632667942284412864
-            message += dt.TimeOfDay.ToString() + "\n";//13:30:28.4412864
-            message += dt.ToString() + "\n";//2005-11-5 13:47:04
-            message += dt.AddYears(1).ToString() + "\n";//2006-11-5 13:47:04
-            message += dt.AddDays(1.1).ToString() + "\n";//2005-11-6 16:11:04
-            message += dt.AddHours(1.1).ToString() + "\n";//2005-11-5 14:53:04
-            message += dt.AddMilliseconds(1.1).ToString() + "\n";//2005-11-5 13:47:04
-            message += dt.AddMonths(1).ToString() + "\n";//2005-12-5 13:47:04
-            message += dt.AddSeconds(1.1).ToString() + "\n";//2005-11-5 13:47:05
-            message += dt.AddMinutes(1.1).ToString() + "\n";//2005-11-5 13:48:10
-            message += dt.AddTicks(1000).ToString() + "\n";//2005-11-5 13:47:04
-            message += dt.CompareTo(dt).ToString() + "\n";//0
+                DateTime dt1 = new DateTime(2021, 5, 5, 12, 34, 56);
 
+                double ole_date1 = dt1.ToOADate();
 
-            //message += dt.Add(?).ToString() + "\n";//问号为一个时间段
+                richTextBox1.Text += "原日期 : " + dt1.ToString() + "\n";
+                richTextBox1.Text += "OLE Automation date 日期 : " + ole_date1.ToString() + "\n";
+            }
+            catch (OverflowException ex)
+            {
+                //定義產生錯誤時的例外處理程式碼
+                richTextBox1.Text += "錯誤訊息 : 類型 : " + ex.GetType() + ", 訊息 : " + ex.Message + "\n";
+            }
+            finally
+            {
+                //一定會被執行的程式區段
+            }
 
-            message += dt.Equals("2005-11-6 16:11:04").ToString() + "\n";//False
-            message += dt.Equals(dt).ToString() + "\n";//True
-            message += dt.GetHashCode().ToString() + "\n";//1474088234
-            message += dt.GetType().ToString() + "\n";//System.DateTime
-            message += dt.GetTypeCode().ToString() + "\n";//DateTime
+            richTextBox1.Text += "\n";
 
-            message += dt.GetDateTimeFormats('s')[0].ToString() + "\n";//2005-11-05T14:06:25
-            message += dt.GetDateTimeFormats('t')[0].ToString() + "\n";//14:06
-            message += dt.GetDateTimeFormats('y')[0].ToString() + "\n";//2005年11月
-            message += dt.GetDateTimeFormats('D')[0].ToString() + "\n";//2005年11月5日
-            message += dt.GetDateTimeFormats('D')[1].ToString() + "\n";//2005 11 05
-            //message += dt.GetDateTimeFormats('D')[2].ToString() + "\n";//星期六 2005 11 05
-            //message += dt.GetDateTimeFormats('D')[3].ToString() + "\n";//星期六 2005年11月5日
-            message += dt.GetDateTimeFormats('M')[0].ToString() + "\n";//11月5日
-            message += dt.GetDateTimeFormats('f')[0].ToString() + "\n";//2005年11月5日 14:06
-            message += dt.GetDateTimeFormats('g')[0].ToString() + "\n";//2005-11-5 14:06
-            message += dt.GetDateTimeFormats('r')[0].ToString() + "\n";//Sat, 05 Nov 2005 14:06:25 GMT
+            double ole_date2 = 43210.123456;
+            DateTime dt2 = DateTime.FromOADate(ole_date2);
 
-            message += string.Format("{0:d}", dt) + "\n";//2005-11-5
-            message += string.Format("{0:D}", dt) + "\n";//2005年11月5日
-            message += string.Format("{0:f}", dt) + "\n";//2005年11月5日 14:23
-            message += string.Format("{0:F}", dt) + "\n";//2005年11月5日 14:23:23
-            message += string.Format("{0:g}", dt) + "\n";//2005-11-5 14:23
-            message += string.Format("{0:G}", dt) + "\n";//2005-11-5 14:23:23
-            message += string.Format("{0:M}", dt) + "\n";//11月5日
-            message += string.Format("{0:R}", dt) + "\n";//Sat, 05 Nov 2005 14:23:23 GMT
-            message += string.Format("{0:s}", dt) + "\n";//2005-11-05T14:23:23
-            message += string.Format("{0:t}", dt) + "\n";//14:23
-            message += string.Format("{0:T}", dt) + "\n";//14:23:23
-            message += string.Format("{0:u}", dt) + "\n";//2005-11-05 14:23:23Z
-            message += string.Format("{0:U}", dt) + "\n";//2005年11月5日 6:23:23
-            message += string.Format("{0:Y}", dt) + "\n";//2005年11月
-            message += string.Format("{0}", dt) + "\n";//2005-11-5 14:23:23
-            message += string.Format("{0:yyyyMMddHHmmssffff}", dt) + "\n";
-
-            message += Environment.NewLine;
-            richTextBox1.Text += message;
+            richTextBox1.Text += "OLE自動化日期 : " + ole_date2.ToString() + "\n";
+            richTextBox1.Text += "新日期 : " + dt2.ToString() + "\n";
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //C#計算日期差距
-            //C#中要計算兩個日期間的差距必須要透過 TimeSpan 來達成
-            DateTime dt1 = Convert.ToDateTime("2006/3/11");
-            TimeSpan ts = DateTime.Now - dt1;
-            string message = "";
-            message += "距今 " + ts.Days + " 天";
-            message += Environment.NewLine;
-            richTextBox1.Text += message;
+            //實現小小的日曆
+            show_calendar();
+
         }
 
-        private void button21_Click(object sender, EventArgs e)
-        {
-            DateTime dt = DateTime.Now;
-            richTextBox1.Text += "現在日期： " + dt.ToLongDateString() + Environment.NewLine;
-            richTextBox1.Text += "現在時間： " + dt.ToLongTimeString() + Environment.NewLine;
-
-            //現在日期加天數寫法(本例為加5天):
-            DateTime Add5Day = dt.AddDays(5);
-            richTextBox1.Text += "現在日期加5天： " + Add5Day.ToLongDateString() + Environment.NewLine;
-
-            //現在時間加小時寫法(本例為加12個小時):
-            DateTime Add12Hours = dt.AddHours(12);
-            richTextBox1.Text += "現在時間加12小時： " + Add12Hours.ToLongTimeString() + Environment.NewLine;
-
-            //現在時間減分鐘寫法(本例為減30分鐘):
-            DateTime Minus30Minutes = dt.AddMinutes(-30);
-            richTextBox1.Text += "現在時間減30分鐘： " + Minus30Minutes.ToLongTimeString() + Environment.NewLine;
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-            DateTime timeBirth;
-            string birthstr = "3/11/2006 9:15:30 AM";
-            timeBirth = DateTime.Parse(birthstr);
-
-            richTextBox1.Text += "生日: " + timeBirth.ToString() + "\n";
-
-            TimeSpan span;
-            span = DateTime.Now - timeBirth;
-
-            richTextBox1.Text += "經歷時間: " + span.ToString() + "\n";
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += DateTime.Now.ToString("yyyy/MM/dd", DateTimeFormatInfo.InvariantInfo) + "\n";
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-            string str = string.Empty;
-            TimeSpan span;
-            span = DateTime.Now - start_time;
-
-            richTextBox1.Text += "程式啟動時間: " + start_time.ToString() + " 秒\n";
-            richTextBox1.Text += "按鍵經歷時間: " + span.ToString() + " 秒\n";
-            str = span.ToString();
-            richTextBox1.Text += "相距時間: " + str + "\n";
-            str = str.Substring(0, str.IndexOf("."));
-            richTextBox1.Text += "相距時間(去掉尾數): " + str + "\n";
-
-            richTextBox1.Text += "程式開啟時間: " + (DateTime.Now - start_time).ToString() + "\n";
-        }
-
-        //C#實現小小的日歷 ST
+        //實現小小的日歷 ST
         void show_calendar()
         {
-            int year = DateTime.Now.Year;
-            int month = DateTime.Now.Month;
+            DateTime dt = DateTime.Now;
+
+            int year = dt.Year;
+            int month = dt.Month;
             int day = 0;
             int sum = 0;
             int i;
@@ -965,37 +1517,243 @@ namespace vcs_test_all_01_DateTime
             Console.WriteLine();
             richTextBox1.Text += "\n";
         }
+        //實現小小的日歷 SP
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            //依時間建立檔案
+            DateTime dt = DateTime.Now;
+
+            string filename = String.Format("{0}-{1}-{2}_{3}-{4}-{5}",
+                                            dt.Year, dt.Month, dt.Day,
+                                            dt.Hour, dt.Minute,
+                                            dt.Second);
+
+            richTextBox1.Text += "依時間建立檔案 :" + filename + "\n";
+
+            string m_fileName = dt.ToFileTime().ToString() + ".jpg";
+            richTextBox1.Text += "依時間建立檔案 :" + m_fileName + "\n";
+
+            richTextBox1.Text += "Conversion finished @ " + dt.ToString() + "\n";
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            //從零點到現在的秒數
+
+            int total_time = inputToSeconds("23:59:59");
+            richTextBox1.Text += "total_time = " + total_time.ToString() + "\n";
+
+            int nn = 86399;
+            string current_time = secondsToTime(nn);
+            richTextBox1.Text += "current_time = " + current_time + "\n";
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            //幾年幾月幾日星期幾
+            int year;
+            int month;
+            int day;
+            string result;
+
+            year = 2006;
+            month = 3;
+            day = 11;
+            result = CaculateWeekDay(year, month, day);
+            richTextBox1.Text += year.ToString() + "年" + month.ToString() + "月" + day.ToString() + "日\t是\t" + result + "\n";
+
+            year = 1941;
+            month = 12;
+            day = 7;
+            result = CaculateWeekDay(year, month, day);
+            richTextBox1.Text += year.ToString() + "年" + month.ToString() + "月" + day.ToString() + "日\t是\t" + result + "\t珍珠港事變\n";
+
+            //------------------------------------------------------------
+
+            //尋找13號星期五
+            int year_st = 2020;
+            int year_sp = 2030;
+            //int year = 0;
+            //int month = 0;
+            DateTime dt;
+
+            // Loop over the selected years.
+            for (year = year_st; year <= year_sp; year++)
+            {
+                // Loop over the months in the year.
+                for (month = 1; month <= 12; month++)
+                {
+                    // See if this month's 13th is a Friday.
+                    dt = new DateTime(year, month, 13);
+
+                    // See if this is a Friday.
+                    if (dt.DayOfWeek == DayOfWeek.Friday)
+                    {
+                        richTextBox1.Text += dt.ToShortDateString() + "\n";
+                    }
+                }
+            }
+
+            //------------------------------------------------------------
+
+            //獲得中文星期名稱
+            richTextBox1.Text += "今天是 : " + GetCnWeek() + "\n";
+
+            //------------------------------------------------------------
+
+            //獲取當前星期幾的三種方法
+
+            //第一種：
+
+            string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+            string week = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
+            richTextBox1.Text += week + "\n";
+
+            string weekday1 = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();    //same
+            string weekday2 = Day[Convert.ToInt16(DateTime.Now.DayOfWeek)]; //same
+            richTextBox1.Text += weekday1 + "\n";
+            richTextBox1.Text += weekday2 + "\n";
+
+            //第二種：
+
+            richTextBox1.Text += CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(DateTime.Now.DayOfWeek) + "\n";
+
+            //第三種：
+
+            //string dt;
+            //string week = string.Empty;
+            //dt = DateTime.Today.DayOfWeek.ToString();
+            switch (DateTime.Today.DayOfWeek.ToString())
+            {
+                case "Monday":
+                    week = "星期一";
+                    break;
+                case "Tuesday":
+                    week = "星期二";
+                    break;
+                case "Wednesday":
+                    week = "星期三";
+                    break;
+                case "Thursday":
+                    week = "星期四";
+                    break;
+                case "Friday":
+                    week = "星期五";
+                    break;
+                case "Saturday":
+                    week = "星期六";
+                    break;
+                case "Sunday":
+                    week = "星期日";
+                    break;
+                default:
+                    week = "星期日";
+                    break;
+            }
+            richTextBox1.Text += week + "\n";
+
+
+            //星期幾
+            string[] Day2 = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+            string week2 = Day2[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
+
+            richTextBox1.Text += week2 + "\n";
+
+            //------------------------------------------------------------
+
+            //星期幾
+            richTextBox1.Text += CalculateWeekDay(2021, 10, 28);
+            richTextBox1.Text += "\n";
+
+            //根據年月日計算星期幾的函數
+            result = CalculateWeekDay(2021, 10, 14);
+            richTextBox1.Text += "日期 " + DateTime.Parse("2021/10/14").ToString() + "\t" + result + "\n";
+
+            result = CalculateWeekDay(1941, 12, 7);
+            richTextBox1.Text += "日期 " + DateTime.Parse("1941/12/7").ToString() + "\t" + result + "\n";
+
+            result = CalculateWeekDay(2006, 3, 11);
+            richTextBox1.Text += "日期 " + DateTime.Parse("2006/3/11").ToString() + "\t" + result + "\n";
+
+            //------------------------------------------------------------
+
+            //------------------------------------------------------------
+
+
+        }
 
         private void button25_Click(object sender, EventArgs e)
         {
-            //C#實現小小的日曆
-            show_calendar();
+            //CultureInfo 相關
+
+            string[] month_names = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
+            foreach (string name in month_names)
+            {
+                if (name.Length > 0)
+                {
+                    richTextBox1.Text += name + "\n";
+                }
+            }
+
+            string[] day_names = CultureInfo.CurrentCulture.DateTimeFormat.DayNames;
+            foreach (string name in day_names)
+            {
+                if (name.Length > 0)
+                {
+                    richTextBox1.Text += name + "\n";
+                }
+            }
+
+            for (int i = 0; i < 7; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + CultureInfo.CurrentCulture.DateTimeFormat.DayNames[i] + "\n";
+            }
+
         }
-        //C#實現小小的日歷 SP
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            DateTime dt = DateTime.Now;
+
             CultureInfo cuinfo = new CultureInfo("zh-TW");
             cuinfo.DateTimeFormat.Calendar = cuinfo.OptionalCalendars[2];
-            //TextBox1.Text = DateTime.Now.ToString("yyyy/MM/dd", cuinfo);
+            //TextBox1.Text = dt.ToString("yyyy/MM/dd", cuinfo);
 
-            label1.Text = DateTime.Now.ToString();
-            label2.Text = DateTime.Now.ToString("yyyy/MM/dd", cuinfo);
-            label3.Text = DateTime.Now.ToString("HH:mm:ss");
-            label4.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            label1.Text = dt.ToString();
+            label2.Text = dt.ToString("yyyy/MM/dd", cuinfo);
+            label3.Text = dt.ToString("HH:mm:ss");
+            label4.Text = dt.ToString("yyyy/MM/dd HH:mm:ss");
+
+            //Local Time / GMT
+            // Display the local time.
+            dt = DateTime.Now;
+            lb_time0.Text = "Local Time";
+            lb_time1.Text = dt.ToLongTimeString() + "\n";
+            lb_time2.Text = dt.ToShortDateString() + "\n";
+
+            // Display the GMT time.
+            DateTimeOffset local_offset = new DateTimeOffset(dt);
+            DateTimeOffset utc_offset = local_offset.ToUniversalTime();
+
+            lb_time3.Text = "GMT Time";
+            lb_time4.Text = utc_offset.DateTime.ToLongTimeString() + "\n";
+            lb_time5.Text = utc_offset.DateTime.ToShortDateString() + "\n";
 
             if (flag_timer_counter_down_enable == 1)
             {
-                //DateTime dt3 = DateTime.Now;
-                //TimeSpan ts2 = dt3 - dt_timer_st;
-                TimeSpan interval = DateTime.Now - dt_timer_st;
+                dt = DateTime.Now;
+                TimeSpan interval = dt - dt_timer_st;
 
                 //richTextBox1.Text += "與現在相距：" + ts2.ToString() + "\n";
 
-
-                //TimeSpan interval = DateTime.Now - DateTime.Now.Date;
-                //richTextBox1.Text += DateTime.Now.ToString() + "\n";
-                //richTextBox1.Text += DateTime.Now.Date.ToString() + "\n";
+                //TimeSpan interval = dt - dt.Date;
+                //richTextBox1.Text += dt.ToString() + "\n";
+                //richTextBox1.Text += dt.Date.ToString() + "\n";
                 //richTextBox1.Text += "xxx " + interval.TotalSeconds.ToString();// +"\n";
                 label5.Text = interval.TotalSeconds.ToString();
 
@@ -1020,9 +1778,10 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "/" + dateTimePicker1.Value.Month.ToString();
             richTextBox1.Text += "/" + dateTimePicker1.Value.Day.ToString();
 
-            richTextBox1.Text += " " + DateTime.Now.Hour;
-            richTextBox1.Text += ":" + DateTime.Now.Minute;
-            richTextBox1.Text += ":" + DateTime.Now.Second;
+            DateTime dt = DateTime.Now;
+            richTextBox1.Text += " " + dt.Hour;
+            richTextBox1.Text += ":" + dt.Minute;
+            richTextBox1.Text += ":" + dt.Second;
             richTextBox1.Text += "\n";
         }
 
@@ -1036,89 +1795,52 @@ namespace vcs_test_all_01_DateTime
 
         private void button28_Click(object sender, EventArgs e)
         {
-            DateTime dt = new DateTime(2006, 3, 11, 9, 15, 23, 34);
-            richTextBox1.Text += "Now : " + DateTime.Now + "\n";
-            richTextBox1.Text += "Today : " + DateTime.Today + "\n";
+            //vcs時間之最早最晚
 
-            richTextBox1.Text += "Date : " + dt.Date + "\n";
-            richTextBox1.Text += "Year : " + dt.Year + "\n";
-            richTextBox1.Text += "Month : " + dt.Month + "\n";
-            richTextBox1.Text += "Day : " + dt.Day + "\n";
-            richTextBox1.Text += "Hour : " + dt.Hour + "\n";
-            richTextBox1.Text += "Minute : " + dt.Minute + "\n";
-            richTextBox1.Text += "Second : " + dt.Second + "\n";
-            richTextBox1.Text += "Millisecond : " + dt.Millisecond + "\n";
-        }
+            //DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元9999年12月31日23點59分59秒之間的具體日期時刻
+            //vcs史上最早時間
+            DateTime minTime = DateTime.MinValue;
 
-        private void button29_Click(object sender, EventArgs e)
-        {
-        }
+            //vcs史上最晚時間
+            DateTime maxTime = DateTime.MaxValue;
 
-        private void button30_Click(object sender, EventArgs e)
-        {
-        }
+            richTextBox1.Text += "vcs史上最早時間 : " + minTime.ToString() + "\n";
+            richTextBox1.Text += "vcs史上最晚時間 : " + maxTime.ToString() + "\n";
 
-        private void button31_Click(object sender, EventArgs e)
-        {
-            //僅顯示上下午幾點幾分幾秒
-            richTextBox1.Text += "僅顯示上下午幾點幾分幾秒:\t" + DateTime.Now.ToString("T") + "\n";
-        }
+            //------------------------------------------------------------
 
-        DateTime LoginTime;
-        DateTime LogoffTime;
-        TimeSpan StayTime = new TimeSpan();
-        private void button32_Click(object sender, EventArgs e)
-        {
-            LogoffTime = DateTime.Now;
-            richTextBox1.Text += "登出時間： " + LogoffTime.ToString() + "\n";
-            StayTime = LogoffTime.Subtract(LoginTime);
-            richTextBox1.Text += "您在此停留了" + StayTime.Hours + "小時" + StayTime.Minutes + "分鐘" + StayTime.Seconds + "秒" + "\n";
-        }
-
-        private void button33_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button34_Click(object sender, EventArgs e)
-        {
-            //OLE自動化日期
-            try
-            {   //可能會產生錯誤的程式區段
-
-                DateTime dt1 = new DateTime(2021, 5, 5, 12, 34, 56);
-
-                double ole_date1 = dt1.ToOADate();
-
-                richTextBox1.Text += "原日期 : " + dt1.ToString() + "\n";
-                richTextBox1.Text += "OLE Automation date 日期 : " + ole_date1.ToString() + "\n";
-            }
-            catch (OverflowException ex)
+            //列出全球時區
+            //列出全球時區
+            // Load the timezone information.
+            foreach (TimeZoneInfo info in TimeZoneInfo.GetSystemTimeZones())
             {
-                //定義產生錯誤時的例外處理程式碼
-                richTextBox1.Text += "錯誤訊息 : 類型 : " + ex.GetType() + ", 訊息 : " + ex.Message + "\n";
-            }
-            finally
-            {
-                //一定會被執行的程式區段
+                richTextBox1.Text += info + "\n";
             }
 
-            richTextBox1.Text += "\n";
+            //------------------------------------------------------------
 
-            double ole_date2 = 43210.123456;
-            DateTime dt2 = DateTime.FromOADate(ole_date2);
+            //取得系統的時區資訊
+            get_system_time_zone();
 
-            richTextBox1.Text += "OLE自動化日期 : " + ole_date2.ToString() + "\n";
-            richTextBox1.Text += "新日期 : " + dt2.ToString() + "\n";
+
+            //------------------------------------------------------------
         }
 
-        private void button35_Click(object sender, EventArgs e)
+        void get_system_time_zone()
         {
-            //日期時間相加減
-            DateTime war_st = Convert.ToDateTime("1937-7-7");
-            DateTime war_sp = Convert.ToDateTime("1945-08-15");
-            TimeSpan ts = war_sp.Subtract(war_st); //兩時間天數相減
-            double dayCount = ts.Days; //相距天數
-            richTextBox1.Text += "相距天數： " + dayCount.ToString() + " 天\n";
+            // Initialize the time zone lists.
+            foreach (TimeZoneInfo info in TimeZoneInfo.GetSystemTimeZones())
+            {
+                comboBox1.Items.Add(info);
+                richTextBox1.Text += info + "\n";
+            }
+
+            // Select a default value
+            comboBox1.SelectedItem = FindItemContaining(comboBox1.Items, "台北");
+
+            TimeZoneInfo zone1 = comboBox1.SelectedItem as TimeZoneInfo;
+            string name1 = zone1.DisplayName;
+            richTextBox1.Text += "name1 = " + name1 + "\n";
         }
 
         public struct Age
@@ -1174,184 +1896,114 @@ namespace vcs_test_all_01_DateTime
             return result;
         }
 
-        private void button36_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 獲得中文星期名稱
+        /// </summary>
+        /// <returns></returns>
+        public static string GetCnWeek()
         {
-            DateTime myBirthday = DateTime.ParseExact("2006/03/11", "yyyy/MM/dd", null);
-            DateTime flakNow = DateTime.ParseExact("2018/02/01", "yyyy/MM/dd", null);
-            Age myAge = CalculateAge(myBirthday, flakNow);
-            richTextBox1.Text += "年 : " + myAge.Years.ToString() + "\n";
-            richTextBox1.Text += "月 : " + myAge.Months.ToString() + "\n";
-            richTextBox1.Text += "日 : " + myAge.Days.ToString() + "\n";
+            switch (DateTime.Now.DayOfWeek)
+            {
+                case DayOfWeek.Monday:
+                    return "星期一";
+                case DayOfWeek.Tuesday:
+                    return "星期二";
+                case DayOfWeek.Wednesday:
+                    return "星期三";
+                case DayOfWeek.Thursday:
+                    return "星期四";
+                case DayOfWeek.Friday:
+                    return "星期五";
+                case DayOfWeek.Saturday:
+                    return "星期六";
+                case DayOfWeek.Sunday:
+                    return "星期日";
+                default:
+                    return "星期一";
+            }
         }
 
-        private void button37_Click(object sender, EventArgs e)
+        /*
+        實現的根據年月日計算星期幾的函數
+        基姆拉爾森計算公式
+        W= (d 2*m 3*(m 1)/5 y y/4-y/100 y/400) mod 7
+        在公式中d表示日期中的日數，m表示月份數，y表示年數。注意：在公式中有個與其他公式不同的地方：把一月和二月看成是上一年的十三月和十四月，例：如果是2004-1-10則換算成：2003-13-10來代入公式計算。
+        */
+
+        //根據年月日計算星期幾的函數
+        //基姆拉爾森計算公式, 外文名是Kim larsen calculation formula。
+
+        //在公式中d表示日期中的日數，m表示月份數，y表示年數。注意：在公式中有個與其他公式不同的地方：
+        //把一月和二月看成是上一年的十三月和十四月，例：如果是2004-1-10則換算成：2003-13-10來代入公式計算。
+
+        string CalculateWeekDay(int y, int m, int d)
         {
-            DateTime MyEndDate = new DateTime(2023, 01, 01, 00, 00, 00);
-            DateTime MyStartDate = DateTime.Now;
-            TimeSpan MySpan = MyEndDate.Subtract(MyStartDate);
-            string diffDay = Convert.ToString(MySpan.Days);
-            string diffHour = Convert.ToString(MySpan.Hours);
-            string diffMin = Convert.ToString(MySpan.Minutes);
-            string diffSec = Convert.ToString(MySpan.Seconds);
-            richTextBox1.Text += "距離2023新年還有 " + diffDay + " 天 " + diffHour + " 時 " + diffMin + " 分 " + diffSec + " 秒\n";
+            if (m == 1) m = 13;
+            if (m == 2) m = 14;
+            int week = (d + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400 + 1) % 7;
 
-            //2023年距今還有多久
-            DateTime EventDate = new DateTime(2023, 1, 1, 0, 0, 0);
-            TimeSpan remaining = EventDate - DateTime.Now;
-
-            if (remaining.TotalSeconds < 0)
+            string weekstr = "";
+            switch (week)
             {
-                richTextBox1.Text += "時間 " + EventDate + " 早就過了\n";
+                case 0: weekstr = "星期日"; break;
+                case 1: weekstr = "星期一"; break;
+                case 2: weekstr = "星期二"; break;
+                case 3: weekstr = "星期三"; break;
+                case 4: weekstr = "星期四"; break;
+                case 5: weekstr = "星期五"; break;
+                case 6: weekstr = "星期六"; break;
+            }
+            return weekstr;
+        }
+
+        // Return the number of years, months, days, hours, minutes, seconds,
+        // and milliseconds you need to add to from_date to get to_date.
+        private void GetElapsedTime(DateTime from_date, DateTime to_date, out int years, out int months, out int days, out int hours, out int minutes, out int seconds, out int milliseconds)
+        {
+            // If from_date > to_date, switch them around.
+            if (from_date > to_date)
+            {
+                GetElapsedTime(to_date, from_date, out years, out months, out days, out hours, out minutes, out seconds, out milliseconds);
+                years = -years;
+                months = -months;
+                days = -days;
+                hours = -hours;
+                minutes = -minutes;
+                seconds = -seconds;
+                milliseconds = -milliseconds;
             }
             else
             {
-                richTextBox1.Text += "時間 " + EventDate + " 距今:\n";
-                richTextBox1.Text += remaining.Days + "  天\n";
-                richTextBox1.Text += remaining.Hours + "  時\n";
-                richTextBox1.Text += remaining.Minutes + "  分\n";
-                richTextBox1.Text += remaining.Seconds + "  秒\n";
-            }
-        }
+                // Handle the years.
+                years = to_date.Year - from_date.Year;
 
-        private void button38_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button39_Click(object sender, EventArgs e)
-        {
-            string[] month_names = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
-            foreach (string name in month_names)
-            {
-                if (name.Length > 0)
+                // See if we went too far.
+                DateTime test_date = from_date.AddMonths(12 * years);
+                if (test_date > to_date)
                 {
-                    richTextBox1.Text += name + "\n";
+                    years--;
+                    test_date = from_date.AddMonths(12 * years);
                 }
-            }
 
-            string[] day_names = CultureInfo.CurrentCulture.DateTimeFormat.DayNames;
-            foreach (string name in day_names)
-            {
-                if (name.Length > 0)
+                // Add months until we go too far.
+                months = 0;
+                while (test_date <= to_date)
                 {
-                    richTextBox1.Text += name + "\n";
+                    months++;
+                    test_date = from_date.AddMonths(12 * years + months);
                 }
+                months--;
+
+                // Subtract to see how many more days,
+                // hours, minutes, etc. we need.
+                from_date = from_date.AddMonths(12 * years + months);
+                TimeSpan remainder = to_date - from_date;
+                days = remainder.Days;
+                hours = remainder.Hours;
+                minutes = remainder.Minutes;
+                seconds = remainder.Seconds;
+                milliseconds = remainder.Milliseconds;
             }
-
-            for (int i = 0; i < 7; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + CultureInfo.CurrentCulture.DateTimeFormat.DayNames[i] + "\n";
-            }
-        }
-
-        private void button40_Click(object sender, EventArgs e)
-        {
-            //從零點到現在的秒數
-
-            int total_time = inputToSeconds("23:59:59");
-            richTextBox1.Text += "total_time = " + total_time.ToString() + "\n";
-
-
-            int nn = 86399;
-            string current_time = secondsToTime(nn);
-            richTextBox1.Text += "current_time = " + current_time + "\n";
-        }
-
-        private void button41_Click(object sender, EventArgs e)
-        {
-            //計算兩個時間差值的函數，傳回時間差的絕對值
-
-            //韓戰	 1950年 6月25日	———————————————————1953年7月27日 簽署停戰協定	4yr
-            string st1 = "1950/6/25";
-            string st2 = "1953/7/27";
-            DateTime dt1 = Convert.ToDateTime(st1);
-            DateTime dt2 = Convert.ToDateTime(st2);
-
-            string result = DateDiff(dt1, dt2);
-            richTextBox1.Text += "result = " + result + "\n";
-
-        }
-
-        private string DateDiff(DateTime DateTime1, DateTime DateTime2)
-        {
-            string dateDiff = null;
-            try
-            {
-                TimeSpan ts1 = new TimeSpan(DateTime1.Ticks);
-                TimeSpan ts2 = new TimeSpan(DateTime2.Ticks);
-                TimeSpan ts = ts1.Subtract(ts2).Duration();
-                dateDiff = ts.Days.ToString() + "天"
-                + ts.Hours.ToString() + "小時"
-                + ts.Minutes.ToString() + "分鐘"
-                + ts.Seconds.ToString() + "秒";
-            }
-            catch
-            {
-
-            }
-            return dateDiff;
-        }
-
-        private void button42_Click(object sender, EventArgs e)
-        {
-            //string st1 = "2010/05/30 12:13:50";
-            //string st2 = "2018/09/20 14:14:30";
-            string st1 = "2010/05/30";
-            string st2 = "2018/09/20";
-            DateTime dt1 = Convert.ToDateTime(st1);
-            DateTime dt2 = Convert.ToDateTime(st2);
-
-            if (DateTime.Compare(dt1, dt2) > 0)
-            {
-                richTextBox1.Text = st1 + " 晚於 " + st2 + "\n";
-            }
-            else
-            {
-                richTextBox1.Text = st1 + " 早於 " + st2 + "\n";
-            }
-        }
-
-        private void button43_Click(object sender, EventArgs e)
-        {
-            //比較兩個時間
-
-            DateTime dt1 = new DateTime(2016, 12, 9, 0, 0, 0);
-            DateTime dt2 = new DateTime(2016, 12, 9, 11, 0, 0);
-            int result = DateTime.Compare(dt1, dt2);
-            string relationship;
-
-            if (result < 0)
-                relationship = "is earlier than";
-            else if (result == 0)
-                relationship = "is the same time as";
-            else
-                relationship = "is later than";
-
-            richTextBox1.Text += dt1 + " " + relationship + " " + dt2 + "\n";
-        }
-
-        private void button44_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button45_Click(object sender, EventArgs e)
-        {
-            //列出全球時區
-            // Load the timezone information.
-            foreach (TimeZoneInfo info in TimeZoneInfo.GetSystemTimeZones())
-            {
-                richTextBox1.Text += info + "\n";
-            }
-        }
-
-        private void button46_Click(object sender, EventArgs e)
-        {
-            DateTime dt = new DateTime(2019, 1, 1);
-
-            richTextBox1.Text += "2019/1/1 加一段時間後 : " + dt.AddDays(3125).AddSeconds(14653 * 2).ToString("yyyy/MM/dd HH:mm:ss") + "\n";
-
-            int yy = -280;
-            int dd = -1250;
-            richTextBox1.Text += "2019/1/1 減一段時間後 : " + dt.AddYears(yy).AddDays(dd).AddSeconds(14653 * 2).ToString() + "\n";
         }
 
         public int inputToSeconds(string timerInput)
@@ -1443,196 +2095,14 @@ namespace vcs_test_all_01_DateTime
             } return weekstr;
         }
 
-        private void button47_Click(object sender, EventArgs e)
-        {
-            //分出 時:分:秒 再組合
-            DateTime dt = DateTime.Now;
-            richTextBox1.Text += dt.Hour.ToString().PadLeft(2, '0') + ":"
-                                    + dt.Minute.ToString().PadLeft(2, '0') + ":"
-                                    + dt.Second.ToString().PadLeft(2, '0') + "\n";
-
-            richTextBox1.Text += "現在時間 : " + DateTime.Now.ToString("hh:mm:ss.fff") + "\n";
-        }
-
-        private void button48_Click(object sender, EventArgs e)
-        {
-            //依時間建立檔案
-            DateTime dt = DateTime.Now;
-            string filename = String.Format("{0}-{1}-{2}_{3}-{4}-{5}",
-                                            dt.Year, dt.Month, dt.Day,
-                                            dt.Hour, dt.Minute,
-                                            dt.Second);
-
-            richTextBox1.Text += "依時間建立檔案 :" + filename + "\n";
-
-            string m_fileName = DateTime.Now.ToFileTime().ToString() + ".jpg";
-            richTextBox1.Text += "依時間建立檔案 :" + m_fileName + "\n";
-
-
-            richTextBox1.Text += DateTime.Now.Ticks.ToString() + "\n";
-            richTextBox1.Text += Environment.NewLine + "Conversion finished @ " + DateTime.Now.ToString();
-        }
-
-        // If the text is a date, display
-        // the elapsed time between then and now.
-        private void txtDate_TextChanged(object sender, EventArgs e)
-        {
-            DateTime date;
-            if (DateTime.TryParse(txtDate.Text, out date))
-            {
-                txtParsed.Text = date.ToString();
-
-                TimeSpan elapsed = DateTime.Now - date;
-                txtDays.Text = elapsed.TotalDays.ToString();
-                txtHours.Text = elapsed.TotalHours.ToString();
-                txtMinutes.Text = elapsed.TotalMinutes.ToString();
-                txtSeconds.Text = elapsed.TotalSeconds.ToString();
-            }
-            else
-            {
-                txtParsed.Clear();
-                txtDays.Clear();
-                txtHours.Clear();
-                txtMinutes.Clear();
-                txtSeconds.Clear();
-            }
-        }
-
-        void calculate_time_difference()
-        {
-            DateTime dt1;
-            DateTime dt2;
-
-            if (!DateTime.TryParse(textBox8.Text, out dt1))
-            {
-                return;
-            }
-            textBox3.Text = dt1.ToString();
-
-            if (!DateTime.TryParse(textBox10.Text, out dt2))
-            {
-                return;
-            }
-            textBox9.Text = dt1.ToString();
-
-            int years, months, days, hours, minutes, seconds, milliseconds;
-
-            GetElapsedTime(dt1, dt2, out years, out months, out days, out hours, out minutes, out seconds, out milliseconds);
-
-            // Display the result.
-            string txt = "";
-            if (years != 0)
-            {
-                txt += ", " + years.ToString() + " years";
-            }
-            if (months != 0)
-            {
-                txt += ", " + months.ToString() + " months";
-            }
-            if (days != 0)
-            {
-                txt += ", " + days.ToString() + " days";
-            }
-            if (hours != 0)
-            {
-                txt += ", " + hours.ToString() + " hours";
-            }
-            if (minutes != 0)
-            {
-                txt += ", " + minutes.ToString() + " minutes";
-            }
-            if (seconds != 0)
-            {
-                txt += ", " + seconds.ToString() + " seconds";
-            }
-            if (milliseconds != 0)
-            {
-                txt += ", " + milliseconds.ToString() + " milliseconds";
-            }
-            if (txt.Length > 0)
-            {
-                txt = txt.Substring(2);
-            }
-            if (txt.Length == 0)
-            {
-                txt = "Same";
-            }
-            textBox7.Text = txt;
-        }
-
-        // Return the number of years, months, days, hours, minutes, seconds,
-        // and milliseconds you need to add to from_date to get to_date.
-        private void GetElapsedTime(DateTime from_date, DateTime to_date, out int years, out int months, out int days, out int hours, out int minutes, out int seconds, out int milliseconds)
-        {
-            // If from_date > to_date, switch them around.
-            if (from_date > to_date)
-            {
-                GetElapsedTime(to_date, from_date, out years, out months, out days, out hours, out minutes, out seconds, out milliseconds);
-                years = -years;
-                months = -months;
-                days = -days;
-                hours = -hours;
-                minutes = -minutes;
-                seconds = -seconds;
-                milliseconds = -milliseconds;
-            }
-            else
-            {
-                // Handle the years.
-                years = to_date.Year - from_date.Year;
-
-                // See if we went too far.
-                DateTime test_date = from_date.AddMonths(12 * years);
-                if (test_date > to_date)
-                {
-                    years--;
-                    test_date = from_date.AddMonths(12 * years);
-                }
-
-                // Add months until we go too far.
-                months = 0;
-                while (test_date <= to_date)
-                {
-                    months++;
-                    test_date = from_date.AddMonths(12 * years + months);
-                }
-                months--;
-
-                // Subtract to see how many more days,
-                // hours, minutes, etc. we need.
-                from_date = from_date.AddMonths(12 * years + months);
-                TimeSpan remainder = to_date - from_date;
-                days = remainder.Days;
-                hours = remainder.Hours;
-                minutes = remainder.Minutes;
-                seconds = remainder.Seconds;
-                milliseconds = remainder.Milliseconds;
-            }
-        }
-
-        // Update the clocks.
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            // Display the local time.
-            DateTime now = DateTime.Now;
-            lblLocalTime.Text = now.ToLongTimeString();
-            lblLocalDate.Text = now.ToShortDateString();
-
-            // Display the GMT time.
-            DateTimeOffset local_offset = new DateTimeOffset(now);
-            DateTimeOffset utc_offset = local_offset.ToUniversalTime();
-            lblGmtTime.Text = utc_offset.DateTime.ToLongTimeString();
-            lblGmtDate.Text = utc_offset.DateTime.ToShortDateString();
-        }
-
         void load_listview_data()
         {
-            DateTime now = DateTime.Now;
-            listView1.Items.Add(new ListViewItem(new String[] { "ToLongDateString", "D", now.ToLongDateString() }));
-            listView1.Items.Add(new ListViewItem(new String[] { "ToLongTimeString", "T", now.ToLongTimeString() }));
-            listView1.Items.Add(new ListViewItem(new String[] { "ToShortDateString", "d", now.ToShortDateString() }));
-            listView1.Items.Add(new ListViewItem(new String[] { "ToShortTimeString", "t", now.ToShortTimeString() }));
-            listView1.Items.Add(new ListViewItem(new String[] { "ToString", "G", now.ToString() }));
+            DateTime dt = DateTime.Now;
+            listView1.Items.Add(new ListViewItem(new String[] { "ToLongDateString", "D", dt.ToLongDateString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToLongTimeString", "T", dt.ToLongTimeString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToShortDateString", "d", dt.ToShortDateString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToShortTimeString", "t", dt.ToShortTimeString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToString", "G", dt.ToString() }));
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -1677,7 +2147,7 @@ namespace vcs_test_all_01_DateTime
 
                 dt_timer_st = DateTime.Now;
                 wait_seconds = int.Parse(textBox2.Text) * 60;
-                richTextBox1.Text += "等待時間： " + wait_seconds.ToString() + Environment.NewLine;
+                richTextBox1.Text += "等待時間： " + wait_seconds.ToString() + "\n";
             }
         }
 
@@ -1700,48 +2170,6 @@ namespace vcs_test_all_01_DateTime
                     richTextBox1.Text += "i = " + i.ToString() + listView1.Items[i] + "\tj = " + j.ToString() + listView1.Items[i].SubItems[j] + "\n";
                 }
             }
-        }
-
-        private void button49_Click(object sender, EventArgs e)
-        {
-            //一段時間以後
-            DateTime dt = DateTime.Now;
-
-            //?日?時?分?秒 後
-            DateTime dt_new = dt + new TimeSpan(365 * 10, 12, 34, 56);
-
-            richTextBox1.Text += "現在時間 : " + dt.ToString() + "\n";
-            richTextBox1.Text += "一段時間以後 : " + dt_new.ToString() + "\n";
-        }
-
-        private void button50_Click(object sender, EventArgs e)
-        {
-            //一段時間以後的寫法
-            DateTime EventDate = DateTime.Now + new TimeSpan(1, 13, 42, 59);    //現在時間 + 1天13時42分59秒
-            richTextBox1.Text += "現在時間 + 1天13時42分59秒 = " + EventDate.ToString() + "\n";
-        }
-
-        private void button51_Click(object sender, EventArgs e)
-        {
-            //取得系統的時區資訊
-            get_system_time_zone();
-        }
-
-        void get_system_time_zone()
-        {
-            // Initialize the time zone lists.
-            foreach (TimeZoneInfo info in TimeZoneInfo.GetSystemTimeZones())
-            {
-                comboBox1.Items.Add(info);
-                richTextBox1.Text += info + "\n";
-            }
-
-            // Select a default value
-            comboBox1.SelectedItem = FindItemContaining(comboBox1.Items, "台北");
-
-            TimeZoneInfo zone1 = comboBox1.SelectedItem as TimeZoneInfo;
-            string name1 = zone1.DisplayName;
-            richTextBox1.Text += "name1 = " + name1 + "\n";
         }
 
         // Select an item containing the target string.
@@ -1774,286 +2202,6 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "12天後的日期是 : " + date2.ToString() + "\n";
         }
 
-        private void button53_Click(object sender, EventArgs e)
-        {
-            string result;
-            //根據年月日計算星期幾的函數
-            result = CalculateWeekDay(2021, 10, 14);
-            richTextBox1.Text += "日期 " + DateTime.Parse("2021/10/14").ToString() + "\t" + result + "\n";
-
-            result = CalculateWeekDay(1941, 12, 7);
-            richTextBox1.Text += "日期 " + DateTime.Parse("1941/12/7").ToString() + "\t" + result + "\n";
-
-            result = CalculateWeekDay(2006, 3, 11);
-            richTextBox1.Text += "日期 " + DateTime.Parse("2006/3/11").ToString() + "\t" + result + "\n";
-        }
-
-        //根據年月日計算星期幾的函數
-        //基姆拉爾森計算公式, 外文名是Kim larsen calculation formula。
-
-        //在公式中d表示日期中的日數，m表示月份數，y表示年數。注意：在公式中有個與其他公式不同的地方：
-        //把一月和二月看成是上一年的十三月和十四月，例：如果是2004-1-10則換算成：2003-13-10來代入公式計算。
-
-        //y－年，m－月，d－日期
-        string CalculateWeekDay(int y, int m, int d)
-        {
-            if (m == 1) m = 13;
-            if (m == 2) m = 14;
-            //int week = (d + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400) % 7;
-
-            int week = (d + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400 + 1) % 7; //C++計算公式
-
-            string weekstr = "";
-            switch (week)
-            {
-                case 0: weekstr = "星期日"; break;
-                case 1: weekstr = "星期一"; break;
-                case 2: weekstr = "星期二"; break;
-                case 3: weekstr = "星期三"; break;
-                case 4: weekstr = "星期四"; break;
-                case 5: weekstr = "星期五"; break;
-                case 6: weekstr = "星期六"; break;
-                case 7: weekstr = "星期日"; break;
-            }
-            return weekstr;
-        }
-
-        private void button54_Click(object sender, EventArgs e)
-        {
-            //時間比較
-
-            /*            
-//時間比較
-use "DateTime.Compare" static method
-
-DateTime.Compare( dt1, dt2 ) > 0 : dt1 > dt2
-DateTime.Compare( dt1, dt2 ) == 0 : dt1 == dt2
-DateTime.Compare( dt1, dt2 ) < 0 : dt1 < dt2
-       
-
-DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元9999年12月31日23點59分59秒之間的具體日期時刻。
-因此，你可以用DateTime值類型來描述任何在想象范圍之內的時間。
-*/
-            DateTime dt1 = new DateTime(2006, 3, 11, 9, 15, 20);
-            DateTime dt2 = DateTime.Now;
-            string diff = DateDiff2(dt1, dt2);
-            richTextBox1.Text += "diff = " + diff + "\n";
-
-            dt1 = new DateTime(1939, 9, 1);
-            dt2 = new DateTime(1945, 9, 2);
-            diff = DateDiff2(dt1, dt2);
-            richTextBox1.Text += "diff = " + diff + "\n";
-        }
-
-        /// <summary>
-        /// 計算兩個日期的時間間隔
-        /// </summary>
-        /// <param name="DateTime1">第一個日期和時間</param>
-        /// <param name="DateTime2">第二個日期和時間</param>
-        /// <returns></returns>
-        private string DateDiff2(DateTime DateTime1, DateTime DateTime2)
-        {
-            string dateDiff = null;
-
-            TimeSpan ts1 = new TimeSpan(DateTime1.Ticks);
-            TimeSpan ts2 = new TimeSpan(DateTime2.Ticks);
-            TimeSpan ts = ts1.Subtract(ts2).Duration();
-            dateDiff = ts.Days.ToString() + "天"
-                + ts.Hours.ToString() + "小時"
-                + ts.Minutes.ToString() + "分鐘"
-                + ts.Seconds.ToString() + "秒";
-
-            return dateDiff;
-        }
-
-        private void button55_Click(object sender, EventArgs e)
-        {
-            //string.Format 格式化日期
-
-            //c# 日期函數
-
-            DateTime dt = DateTime.Now;
-
-            richTextBox1.Text += "日期 1:\t" + dt.ToString() + "\n";//2005-11-5 13:21:25
-            richTextBox1.Text += "日期 1:\t" + dt.ToFileTime().ToString() + "\n";//127756416859912816
-            richTextBox1.Text += "日期 1:\t" + dt.ToFileTimeUtc().ToString() + "\n";//127756704859912816
-            richTextBox1.Text += "日期 1:\t" + dt.ToLocalTime().ToString() + "\n";//2005-11-5 21:21:25
-            richTextBox1.Text += "日期 1:\t" + dt.ToLongDateString().ToString() + "\n";//2005年11月5*
-            richTextBox1.Text += "日期 1:\t" + dt.ToLongTimeString().ToString() + "\n";//13:21:25
-            richTextBox1.Text += "日期 1:\t" + dt.ToOADate().ToString() + "\n";//38661.5565508218
-            richTextBox1.Text += "日期 1:\t" + dt.ToShortDateString().ToString() + "\n";//2005-11-5
-            richTextBox1.Text += "日期 1:\t" + dt.ToShortTimeString().ToString() + "\n";//13:21
-            richTextBox1.Text += "日期 1:\t" + dt.ToUniversalTime().ToString() + "\n";//2005-11-5 5:21:25
-
-            //?2005-11-5 13:30:28.4412864
-            richTextBox1.Text += "日期 1:\t" + dt.Year.ToString() + "\n";//2005
-            richTextBox1.Text += "日期 1:\t" + dt.Date.ToString() + "\n";//2005-11-5 0:00:00
-            richTextBox1.Text += "日期 1:\t" + dt.DayOfWeek.ToString() + "\n";//Saturday
-            richTextBox1.Text += "日期 1:\t" + dt.DayOfYear.ToString() + "\n";//309
-            richTextBox1.Text += "日期 1:\t" + dt.Hour.ToString() + "\n";//13
-            richTextBox1.Text += "日期 1:\t" + dt.Millisecond.ToString() + "\n";//441
-            richTextBox1.Text += "日期 1:\t" + dt.Minute.ToString() + "\n";//30
-            richTextBox1.Text += "日期 1:\t" + dt.Month.ToString() + "\n";//11
-            richTextBox1.Text += "日期 1:\t" + dt.Second.ToString() + "\n";//28
-            richTextBox1.Text += "日期 1:\t" + dt.Ticks.ToString() + "\n";//632667942284412864
-            richTextBox1.Text += "日期 1:\t" + dt.TimeOfDay.ToString() + "\n";//13:30:28.4412864
-            richTextBox1.Text += "日期 1:\t" + dt.ToString() + "\n";//2005-11-5 13:47:04
-            richTextBox1.Text += "日期 1:\t" + dt.AddYears(1).ToString() + "\n";//2006-11-5 13:47:04
-            richTextBox1.Text += "日期 1:\t" + dt.AddDays(1.1).ToString() + "\n";//2005-11-6 16:11:04
-            richTextBox1.Text += "日期 1:\t" + dt.AddHours(1.1).ToString() + "\n";//2005-11-5 14:53:04
-            richTextBox1.Text += "日期 1:\t" + dt.AddMilliseconds(1.1).ToString() + "\n";//2005-11-5 13:47:04
-            richTextBox1.Text += "日期 1:\t" + dt.AddMonths(1).ToString() + "\n";//2005-12-5 13:47:04
-            richTextBox1.Text += "日期 1:\t" + dt.AddSeconds(1.1).ToString() + "\n";//2005-11-5 13:47:05
-            richTextBox1.Text += "日期 1:\t" + dt.AddMinutes(1.1).ToString() + "\n";//2005-11-5 13:48:10
-            richTextBox1.Text += "日期 1:\t" + dt.AddTicks(1000).ToString() + "\n";//2005-11-5 13:47:04
-            richTextBox1.Text += "日期 1:\t" + dt.CompareTo(dt).ToString() + "\n";//0
-            //richTextBox1.Text +="日期 1:\t"+ dt.Add(?).ToString()+"\n";//問號為一個時間段
-
-            richTextBox1.Text += "日期 1:\t" + dt.Equals("2005-11-6 16:11:04").ToString() + "\n";//False
-            richTextBox1.Text += "日期 1:\t" + dt.Equals(dt).ToString() + "\n";//True
-            richTextBox1.Text += "日期 1:\t" + dt.GetHashCode().ToString() + "\n";//1474088234
-            richTextBox1.Text += "日期 1:\t" + dt.GetType().ToString() + "\n";//System.DateTime
-            richTextBox1.Text += "日期 1:\t" + dt.GetTypeCode().ToString() + "\n";//DateTime
-
-            /*
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(s)[0].ToString() + "\n";//2005-11-05T14:06:25
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(t)[0].ToString() + "\n";//14:06
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(y)[0].ToString() + "\n";//2005年11月
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[0].ToString() + "\n";//2005年11月5*
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[1].ToString() + "\n";//2005 11 05
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[2].ToString() + "\n";//星期六 2005 11 05
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[3].ToString() + "\n";//星期六 2005年11月5*
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(M)[0].ToString() + "\n";//11月5*
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(f)[0].ToString() + "\n";//2005年11月5* 14:06
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(g)[0].ToString() + "\n";//2005-11-5 14:06
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(r)[0].ToString() + "\n";//Sat, 05 Nov 2005 14:06:25 GMT
-            */
-
-            /*
-            或者dt.ToString("yyyy年MM月dd*");//2005年11月5*
-            dt.ToString("yyyy-MM-dd");//2005-11-5*
-            以此類推……
-            */
-
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:d｝", dt) + "\n";//2005-11-5
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:D｝", dt) + "\n";//2005年11月5*
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:f｝", dt) + "\n";//2005年11月5* 14:23
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:F｝", dt) + "\n";//2005年11月5* 14:23:23
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:g｝", dt) + "\n";//2005-11-5 14:23
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:G｝", dt) + "\n";//2005-11-5 14:23:23
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:M｝", dt) + "\n";//11月5*
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:R｝", dt) + "\n";//Sat, 05 Nov 2005 14:23:23 GMT
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:s｝", dt) + "\n";//2005-11-05T14:23:23
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:t｝", dt) + "\n";//14:23
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:T｝", dt) + "\n";//14:23:23
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:u｝", dt) + "\n";//2005-11-05 14:23:23Z
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:U｝", dt) + "\n";//2005年11月5* 6:23:23
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:Y｝", dt) + "\n";//2005年11月
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0｝", dt) + "\n";//2005-11-5 14:23:23?
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:yyyyMMddHHmmssffff｝", dt) + "\n";
-            //yyyymm等可以設置,比如Label16.Text = string.Format("｛0:yyyyMMdd｝",dt)+"\n";
-            //綁定也適用:例:<%# string.Format("｛0:yyyy.MM.dd｝",eval_r("sj"))%>
-        }
-
-        private void button56_Click(object sender, EventArgs e)
-        {
-            //打印時間訊息用法
-
-            //2007年4月24日
-            richTextBox1.Text += DateTime.Now.ToString("D") + "\n";
-            //2007-4-24
-            richTextBox1.Text += DateTime.Now.ToString("d") + "\n";
-
-            //2007年4月24日 16:30:15
-            richTextBox1.Text += DateTime.Now.ToString("F") + "\n";
-            //2007年4月24日 16:30
-            richTextBox1.Text += DateTime.Now.ToString("f") + "\n";
-
-            //2007-4-24 16:30:15
-            richTextBox1.Text += DateTime.Now.ToString("G") + "\n";
-            //2007-4-24 16:30
-            richTextBox1.Text += DateTime.Now.ToString("g") + "\n";
-
-            //16:30:15
-            richTextBox1.Text += DateTime.Now.ToString("T") + "\n";
-            //16:30
-            richTextBox1.Text += DateTime.Now.ToString("t") + "\n";
-
-            //2007年4月24日 8:30:15
-            richTextBox1.Text += DateTime.Now.ToString("U") + "\n";
-            //2007-04-24 16:30:15Z
-            richTextBox1.Text += DateTime.Now.ToString("u") + "\n";
-
-            //4月24日
-            richTextBox1.Text += DateTime.Now.ToString("m") + "\n";
-            richTextBox1.Text += DateTime.Now.ToString("M") + "\n";
-            //Tue, 24 Apr 2007 16:30:15 GMT
-            richTextBox1.Text += DateTime.Now.ToString("r") + "\n";
-            richTextBox1.Text += DateTime.Now.ToString("R") + "\n";
-            //2007年4月 
-            richTextBox1.Text += DateTime.Now.ToString("y") + "\n";
-            richTextBox1.Text += DateTime.Now.ToString("Y") + "\n";
-            //2007-04-24T15:52:19.1562500+08:00
-            richTextBox1.Text += DateTime.Now.ToString("o") + "\n";
-            richTextBox1.Text += DateTime.Now.ToString("O") + "\n";
-            //2007-04-24T16:30:15
-            richTextBox1.Text += DateTime.Now.ToString("s") + "\n";
-            //2007-04-24 15:52:19
-            richTextBox1.Text += DateTime.Now.ToString("yyyy-MM-dd HH：mm：ss：ffff") + "\n";
-            //2007年04月24 15時56分48秒
-            richTextBox1.Text += DateTime.Now.ToString("yyyy年MM月dd HH時mm分ss秒") + "\n";
-
-            //星期二, 四月 24 2007
-            richTextBox1.Text += DateTime.Now.ToString("dddd, MMMM dd yyyy") + "\n";
-            //二, 四月 24 '07
-            richTextBox1.Text += DateTime.Now.ToString("ddd, MMM d \"'\"yy") + "\n";
-            //星期二, 四月 24
-            richTextBox1.Text += DateTime.Now.ToString("dddd, MMMM dd") + "\n";
-            //4-07
-            richTextBox1.Text += DateTime.Now.ToString("M/yy") + "\n";
-            //24-04-07
-            richTextBox1.Text += DateTime.Now.ToString("dd-MM-yy") + "\n";
-        }
-
-        private void button57_Click(object sender, EventArgs e)
-        {
-            //C#中時間相關知識點小結
-            //一、月份英文簡寫
-
-            DateTime dt = DateTime.Now;
-            string MM = dt.AddMonths(-1).ToString("MMM", new CultureInfo("en-us"));//月英文縮寫：Jul
-            richTextBox1.Text += "月份英文簡寫\t" + MM + "\n";
-
-            //二、當月第一天和最后一天
-
-            DateTime ThisMonth_Frist = DateTime.Now.AddDays(1 - DateTime.Now.Day).Date;
-            DateTime ThisMOnth_Last = DateTime.Now.AddDays(1 - DateTime.Now.Day).Date.AddMonths(1).AddSeconds(-1);
-            richTextBox1.Text += "當月第一天\t" + ThisMonth_Frist + "\n";
-            richTextBox1.Text += "當月最后一天\t" + ThisMOnth_Last + "\n";
-
-            //三、上月第一天和最后一天
-
-            DateTime Today = DateTime.Today;//當天時間
-            DateTime ThisMonth = new DateTime(Today.Year, Today.Month, 1);//當前月第一天時間
-            DateTime LastMonth_First = ThisMonth.AddMonths(-1);//上月第一天時間
-            DateTime LastMonth_Last = ThisMonth.AddDays(-1);//上月最后一天時間
-            richTextBox1.Text += "上月第一天\t" + LastMonth_First + "\n";
-            richTextBox1.Text += "上月最后一天\t" + LastMonth_Last + "\n";
-
-            //四、本周第幾天
-
-            int daysInWeek1 = (int)DateTime.Now.DayOfWeek;//注意：此處周,日時回傳0，
-            int daysInWeek2 = (int)DateTime.Now.DayOfWeek == 0 ? 7 : (int)DateTime.Now.DayOfWeek;//當前周第幾天,注釋:周日為0
-            richTextBox1.Text += "本周第幾天\t" + daysInWeek1.ToString() + "\n";
-            richTextBox1.Text += "本周第幾天\t" + daysInWeek2.ToString() + "\n";
-
-
-            //五、本月第幾周
-
-            //int a = WeekOfMonth(DateTime.Now, false);//
-            //richTextBox1.Text += "本月第幾周\t" + a + "\n";
-        }
-
         //本年第幾周
         private int WeekOfYear()
         {
@@ -2084,170 +2232,10 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
         private void FristDayToNowInThisWeek()
         {
             int daysInWeek = (int)DateTime.Now.DayOfWeek == 0 ? 7 : (int)DateTime.Now.DayOfWeek;//當前周第幾天,注釋:周日為0
+
             //起始日期
             DateTime firstDay = DateTime.Now.AddDays(1 - daysInWeek);
             DateTime lastDay = DateTime.Now;
-        }
-
-        private void button58_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button59_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button60_Click(object sender, EventArgs e)
-        {
-            //vcs時間之最早最晚
-
-            //DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元9999年12月31日23點59分59秒之間的具體日期時刻
-            //vcs史上最早時間
-            DateTime minTime = DateTime.MinValue;
-
-            //vcs史上最晚時間
-            DateTime maxTime = DateTime.MaxValue;
-
-            richTextBox1.Text += "vcs史上最早時間 : " + minTime.ToString() + "\n";
-            richTextBox1.Text += "vcs史上最晚時間 : " + maxTime.ToString() + "\n";
-        }
-
-        private void button61_Click(object sender, EventArgs e)
-        {
-
-            richTextBox1.Text += "星期幾 : " + DateTime.Now.DayOfWeek.ToString() + "\n";
-
-            richTextBox1.Text += "當前時間 : " + DateTime.Now.ToLongTimeString() + "\n";
-
-            //DateTime轉字串需顯示毫秒
-            //DateTime.ToString("yyyyMMddhhmmssfff")，fff 格式包含毫秒值中任何結尾的零。
-            richTextBox1.Text += "顯示毫秒 : " + DateTime.Now.ToString("yyyy_MMdd_hhmmss.fff") + "\n";
-
-            richTextBox1.Text += "日期 : " + DateTime.Now.ToString("yyyy-MM-dd") + "\n";
-        }
-
-        private void button62_Click(object sender, EventArgs e)
-        {
-            //日曆1
-            Calendar calendar = new Calendar();
-            calendar.Printdate(DateTime.Now.Year);
-            Console.ReadLine();
-        }
-
-        private void button63_Click(object sender, EventArgs e)
-        {
-            //日曆2
-            //萬年曆農曆節日節氣
-
-            DateTime dt = DateTime.Now;
-            ChineseCalendar cc = new ChineseCalendar(dt);
-            Console.WriteLine("阳历：" + cc.DateString);
-            Console.WriteLine("属相：" + cc.AnimalString);
-            Console.WriteLine("农历：" + cc.ChineseDateString);
-            Console.WriteLine("时辰：" + cc.ChineseHour);
-            Console.WriteLine("节气：" + cc.ChineseTwentyFourDay);
-            Console.WriteLine("节日：" + cc.DateHoliday);
-            Console.WriteLine("前一个节气：" + cc.ChineseTwentyFourPrevDay);
-            Console.WriteLine("后一个节气：" + cc.ChineseTwentyFourNextDay);
-            Console.WriteLine("干支：" + cc.GanZhiDateString);
-            Console.WriteLine("星期：" + cc.WeekDayStr);
-            Console.WriteLine("星宿：" + cc.ChineseConstellation);
-            Console.WriteLine("星座：" + cc.Constellation);
-
-            richTextBox1.Text += "阳历：" + cc.DateString + "\n";
-            richTextBox1.Text += "属相：" + cc.AnimalString + "\n";
-            richTextBox1.Text += "农历：" + cc.ChineseDateString + "\n";
-            richTextBox1.Text += "时辰：" + cc.ChineseHour + "\n";
-            richTextBox1.Text += "节气：" + cc.ChineseTwentyFourDay + "\n";
-            richTextBox1.Text += "节日：" + cc.DateHoliday + "\n";
-            richTextBox1.Text += "前一个节气：" + cc.ChineseTwentyFourPrevDay + "\n";
-            richTextBox1.Text += "后一个节气：" + cc.ChineseTwentyFourNextDay + "\n";
-            richTextBox1.Text += "干支：" + cc.GanZhiDateString + "\n";
-            richTextBox1.Text += "星期：" + cc.WeekDayStr + "\n";
-            richTextBox1.Text += "星宿：" + cc.ChineseConstellation + "\n";
-            richTextBox1.Text += "星座：" + cc.Constellation + "\n";
-        }
-
-        private void button64_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button65_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button66_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button67_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button68_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button69_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button70_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button71_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button72_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button73_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button74_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button75_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button76_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button77_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button78_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button79_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void bt_special_00_Click(object sender, EventArgs e)
@@ -2257,21 +2245,14 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
             cui.DateTimeFormat.Calendar = new TaiwanCalendar();
             richTextBox1.Text += dateTimePicker1.Value.ToString("yy/M/d", cui) + "\n";
 
-
             DateTime dd = new DateTime(2006, 3, 11);
             TaiwanCalendar tc = new TaiwanCalendar();
 
-
             int year = tc.GetYear(dd);
-
             int month = tc.GetMonth(dd);
-
             int dayOfMonth = tc.GetDayOfMonth(dd);             //日
-
             int daysInMonth = tc.GetDaysInMonth(year, month);   //整個月的天數
-
             richTextBox1.Text += "民國" + year.ToString() + "年" + month.ToString() + "月" + dayOfMonth.ToString() + "日\n";
-
         }
 
         private void bt_special_01_Click(object sender, EventArgs e)
@@ -2292,7 +2273,6 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
             richTextBox1.Text += "Japanese calendar date: " + date2.ToString("d", jaJp) + "\n";
 
             richTextBox1.Text += "Japanese calendar date: " + DateTime.Now.ToString("d", jaJp) + "\n";
-
 
             CultureInfo culture = new CultureInfo("ja-JP", true);
             culture.DateTimeFormat.Calendar = new JapaneseCalendar();
@@ -2321,46 +2301,14 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
             tlc.GetDayOfMonth(DateTime.Now).ToString();
             */
             richTextBox1.Text += "農曆" + tlc.GetYear(DateTime.Now).ToString() + "年" + tlc.GetMonth(DateTime.Now).ToString() + "月" + tlc.GetDayOfMonth(DateTime.Now).ToString() + "日\n";
-
-
         }
 
         private void bt_special_03_Click(object sender, EventArgs e)
         {
-            //農曆計算
-            DateTime _d = DateTime.Now;
-            LunarDate1 ld = new LunarDate1(_d);
-            string result = "";
-            result += "干支年：" + ld.LunarYear + "\n";
-            result += "生肖：" + ld.Animal + "\n";
-            result += "月：" + ld.LunarMonth + "\n";
-            result += "日：" + ld.LunarDay + "\n";
-            result += "节气：" + ld.SolarTerm + "\n";
-            result += "数字农历年：" + ld.Year + "月" + ld.Month + "日" + ld.Day + "\n";
-
-            richTextBox1.Text += result + "\n";
-
-            //DateTime _d = DateTime.Now;
-            LunarDateClass ldc = new LunarDateClass(_d);
-
-            result = "";
-            result += "干支年：" + ldc.LunarYear + "\n";
-            result += "生肖：" + ldc.Animal + "\n";
-            result += "月：" + ldc.LunarMonth + "\n";
-            result += "日：" + ldc.LunarDay + "\n";
-            result += "节气：" + ldc.SolarTerm + "\n";
-            //ldc.LunarDate 返回 LunarDate对象。。
-            result += "数字农历年：" + ldc.LunarDate.Year + "月" + ldc.LunarDate.Month + "日" + ldc.LunarDate.Day + "\n";
-
-            richTextBox1.Text += result + "\n";
-        }
-
-        private void bt_special_04_Click(object sender, EventArgs e)
-        {
             //取得時辰
             DateTime dt = DateTime.Now;
-            string ctime = getChineseTime(dt.Hour);
 
+            string ctime = getChineseTime(dt.Hour);
             richTextBox1.Text += "目前時辰 : " + ctime + "\n";
         }
 
@@ -2372,174 +2320,64 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
             return "【" + CTime[hour / 2] + "時】";
         }
 
-        //農曆 ST
+        private void bt_special_04_Click(object sender, EventArgs e)
+        {
+            //生肖/星座
+
+            //創建日歷對象ChineseLunisolarCalendar,將時間分成多個部分來表示，如分成年、月和日。 年按農歷計算，而日和月按陰陽歷計算。
+            ChineseLunisolarCalendar chinseCaleander = new ChineseLunisolarCalendar();
+            string TreeYear = "鼠牛虎兔龍蛇馬羊猴雞狗豬";//創建字符串對象
+            int intYear = chinseCaleander.GetSexagenaryYear(DateTime.Now);//計算年信息,GetSexagenaryYear計算與指定日期對應的甲子（60 年）循環中的年。
+
+            //得到生肖信息
+            string Tree = TreeYear.Substring(chinseCaleander.GetTerrestrialBranch(intYear) - 1, 1);//GetTerrestrialBranch計算甲子（60 年）循環中指定年份的地支,
+            //Substring(x,y)從此實例檢索子字符串。 子字符串從指定的字符位置開始且具有指定的長度
+            richTextBox1.Text += "今年是十二生肖 " + Tree + " 年\n";
+
+            //顯示星期信息
+            richTextBox1.Text += "今天是： " + DateTime.Now.ToString("dddd") + "\n";//dddd是星期日,ddd是日,dd是01
+
+            //由日期找出星座
+            int month = 3;
+            int day = 11;
+            string result = getAstro(month, day);
+            richTextBox1.Text += result + "\n";
+        }
+
         private void bt_special_05_Click(object sender, EventArgs e)
         {
+            //萬年曆農曆節日節氣
+
             DateTime dt = DateTime.Now;
-            string lunar_date;
-            lunar_date = GetLunarCalendar(dt);
-            richTextBox1.Text += lunar_date + "\n";
-        }
 
-        //天干
-        private static string[] TianGan = { "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸" };
+            //------------------------------------------------------------
 
-        //地支
-        private static string[] DiZhi = { "子", "醜", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥" };
+            ChineseCalendar cc = new ChineseCalendar(dt);
 
-        //十二生肖
-        private static string[] ShengXiao = { "鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬" };
+            richTextBox1.Text += "阳历：" + cc.DateString + "\n";
+            richTextBox1.Text += "属相：" + cc.AnimalString + "\n";
+            richTextBox1.Text += "农历：" + cc.ChineseDateString + "\n";
+            richTextBox1.Text += "时辰：" + cc.ChineseHour + "\n";
+            richTextBox1.Text += "节气：" + cc.ChineseTwentyFourDay + "\n";
+            richTextBox1.Text += "节日：" + cc.DateHoliday + "\n";
+            richTextBox1.Text += "前一个节气：" + cc.ChineseTwentyFourPrevDay + "\n";
+            richTextBox1.Text += "后一个节气：" + cc.ChineseTwentyFourNextDay + "\n";
+            richTextBox1.Text += "干支：" + cc.GanZhiDateString + "\n";
+            richTextBox1.Text += "星期：" + cc.WeekDayStr + "\n";
+            richTextBox1.Text += "星宿：" + cc.ChineseConstellation + "\n";
+            richTextBox1.Text += "星座：" + cc.Constellation + "\n";
 
-        //農曆日期
-        private static string[] DayName = {"*","初一","初二","初三","初四","初五",
-"初六","初七","初八","初九","初十",
-"十一","十二","十三","十四","十五",
-"十六","十七","十八","十九","二十",
-"廿一","廿二","廿三","廿四","廿五",
-"廿六","廿七","廿八","廿九","三十"};
+            //------------------------------------------------------------
 
-        //農曆月份
-        private static string[] MonthName = { "*", "正", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "臘" };
+            TaiwanCalendar TC = new TaiwanCalendar();
+            TaiwanLunisolarCalendar TA = new TaiwanLunisolarCalendar();
 
-        //西曆月計數天
-        private static int[] MonthAdd = { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 };
-
-        //農曆資料
-        private static int[] LunarData = {2635,333387,1701,1748,267701,694,2391,133423,1175,396438
-,3402,3749,331177,1453,694,201326,2350,465197,3221,3402
-,400202,2901,1386,267611,605,2349,137515,2709,464533,1738
-,2901,330421,1242,2651,199255,1323,529706,3733,1706,398762
-,2741,1206,267438,2647,1318,204070,3477,461653,1386,2413
-,330077,1197,2637,268877,3365,531109,2900,2922,398042,2395
-,1179,267415,2635,661067,1701,1748,398772,2742,2391,330031
-,1175,1611,200010,3749,527717,1452,2742,332397,2350,3222
-,268949,3402,3493,133973,1386,464219,605,2349,334123,2709
-,2890,267946,2773,592565,1210,2651,395863,1323,2707,265877};
-
-        /// <summary>
-        /// 獲取對應日期的農曆
-        /// </summary>
-        /// <param name="dtDay">西曆日期</param>
-        /// <returns></returns>
-
-        public string GetLunarCalendar(DateTime dtDay)
-        {
-            string sYear = dtDay.Year.ToString();
-            string sMonth = dtDay.Month.ToString();
-            string sDay = dtDay.Day.ToString();
-            int year;
-            int month;
-            int day;
-            try
-            {
-                year = int.Parse(sYear);
-                month = int.Parse(sMonth);
-                day = int.Parse(sDay);
-            }
-            catch
-            {
-                year = DateTime.Now.Year;
-                month = DateTime.Now.Month;
-                day = DateTime.Now.Day;
-            }
-
-            int nTheDate;
-            int nIsEnd;
-            int k, m, n, nBit, i;
-            string calendar = string.Empty;
-            //計算到初始時間1921年2月8日的天數：1921-2-8(正月初一)
-            nTheDate = (year - 1921) * 365 + (year - 1921) / 4 + day + MonthAdd[month - 1] - 38;
-            if ((year % 4 == 0) && (month > 2))
-                nTheDate += 1;
-            //計算天干，地支，月，日
-            nIsEnd = 0;
-            m = 0;
-            k = 0;
-            n = 0;
-            while (nIsEnd != 1)
-            {
-                if (LunarData[m] < 4095)
-                {
-                    k = 11;
-                }
-                else
-                {
-                    k = 12;
-                }
-                n = k;
-                while (n >= 0)
-                {
-                    //獲取LunarData[m]的第n個二進位的值
-                    nBit = LunarData[m];
-                    for (i = 1; i < n + 1; i++)
-                    {
-                        nBit = nBit / 2;
-                    }
-                    nBit = nBit % 2;
-                    if (nTheDate <= (29 + nBit))
-                    {
-                        nIsEnd = 1;
-                        break;
-                    }
-                    nTheDate = nTheDate - 29 - nBit;
-                    n = n - 1;
-                }
-                if (nIsEnd == 1)
-                {
-                    break;
-                }
-                m = m + 1;
-            }
-            year = 1921 + m;
-            month = k - n + 1;
-            day = nTheDate;
-            //return year + "-" + month + "-" + day;
-
-            if (k == 12)
-            {
-                if (month == LunarData[m] / 65536 + 1)
-                {
-                    month = 1 - month;
-                }
-                else if (month > LunarData[m] / 65536 + 1)
-                {
-                    month = month - 1;
-                }
-            }
-            //年
-            calendar = year + "年";
-            //生肖
-            calendar += ShengXiao[(year - 4) % 60 % 12].ToString() + "年 ";
-            // //天干
-            calendar += TianGan[(year - 4) % 60 % 10].ToString();
-            // //地支
-            calendar += DiZhi[(year - 4) % 60 % 12].ToString() + " ";
-
-            //農曆月
-            if (month < 1)
-            {
-                calendar += "閏" + MonthName[-1 * month].ToString() + "月";
-            }
-            else
-            {
-                calendar += MonthName[month].ToString() + "月";
-            }
-
-            //農曆日
-            calendar += DayName[day].ToString() + "日";
-
-            return calendar;
-        }
-        //農曆 SP
-
-        private void bt_special_06_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_special_07_Click(object sender, EventArgs e)
-        {
-
+            richTextBox1.Text += string.Format("{0}", dt.Year) + "\n";
+            richTextBox1.Text += ("西元年:" + dt.Year.ToString()) + "\n";
+            richTextBox1.Text += ("民國年:" + TC.GetYear(dt)) + "\n";
+            richTextBox1.Text += (string.Format("西元:{0}/{1}/{2}", dt.Year, dt.Month, dt.Day)) + "\n";
+            richTextBox1.Text += (string.Format("民國:{0}/{1}/{2}", TC.GetYear(dt), TC.GetMonth(dt), TC.GetDayOfMonth(dt))) + "\n";
+            richTextBox1.Text += (string.Format("農曆:{0}/{1}/{2}", TA.GetYear(dt), TA.GetMonth(dt), TA.GetDayOfMonth(dt))) + "\n";
         }
 
         //由日期找出星座
@@ -2558,251 +2396,6 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
             return starArr[index];
         }
 
-        private void bt_special_08_Click(object sender, EventArgs e)
-        {
-            //生肖/星座
-
-            //創建日歷對象ChineseLunisolarCalendar,將時間分成多個部分來表示，如分成年、月和日。 年按農歷計算，而日和月按陰陽歷計算。
-            ChineseLunisolarCalendar chinseCaleander = new ChineseLunisolarCalendar();
-            string TreeYear = "鼠牛虎兔龍蛇馬羊猴雞狗豬";//創建字符串對象
-            int intYear = chinseCaleander.GetSexagenaryYear(DateTime.Now);//計算年信息,GetSexagenaryYear計算與指定日期對應的甲子（60 年）循環中的年。
-            //得到生肖信息
-            string Tree = TreeYear.Substring(chinseCaleander.GetTerrestrialBranch(intYear) - 1, 1);//GetTerrestrialBranch計算甲子（60 年）循環中指定年份的地支,
-            //Substring(x,y)從此實例檢索子字符串。 子字符串從指定的字符位置開始且具有指定的長度
-            richTextBox1.Text += "今年是十二生肖 " + Tree + " 年\n";
-
-            //顯示星期信息
-            richTextBox1.Text += "今天是： " + DateTime.Now.ToString("dddd") + "\n";//dddd是星期日,ddd是日,dd是01
-
-
-            //由日期找出星座
-            int month = 3;
-            int day = 11;
-            string result = getAstro(month, day);
-            richTextBox1.Text += result + "\n";
-        }
-
-        private void bt_special_09_Click(object sender, EventArgs e)
-        {
-            //陽歷轉換成農曆的類
-
-            LunarDate2 date = new LunarDate2(1901, 9, 7);
-
-            richTextBox1.Text += "農曆 = " + date.ToString() + "\n";
-
-            richTextBox1.Text += "天干地支 : " + date.chineseEar + "\n";
-            richTextBox1.Text += "生肖 : " + date.Aminals + "\n";
-
-            richTextBox1.Text += "農曆年 = " + date.LunarYear + "\n";
-            richTextBox1.Text += "農曆月 = " + date.LunarMonth + "\n";
-            richTextBox1.Text += "農曆日 = " + date.LunarDay + "\n";
-        }
-
-        private void bt_special_10_Click(object sender, EventArgs e)
-        {
-            //農曆
-            CNDate dt = new CNDate(DateTime.Today);
-            Console.WriteLine("今天是：" + dt.Date.ToString() + dt.GetConstellationName());
-            Console.WriteLine(dt.l_GetLunarHolDay());
-            Console.WriteLine(dt.GetLunarHolDay());
-            //Console.WriteLine("閏月" + dt.GetLeapMonth(UInt16.Parse(args[0])));
-            //Console.WriteLine("2月的天數" + dt.LunarMonthDays(UInt16.Parse(args[0]), UInt16.Parse(args[1])));
-            //Console.WriteLine("天數" + dt.LunarYearDays(UInt16.Parse(args[0])));
-            Console.WriteLine("" + dt.FormatLunarYear());
-            dt.Date = DateTime.Today.AddDays(1);
-            Console.WriteLine("明天是：" + dt.Date.ToString() + dt.GetConstellationName());
-        }
-
-        private void bt_special_11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_weekday_00_Click(object sender, EventArgs e)
-        {
-            string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-            string week = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
-            richTextBox1.Text += week + "\n";
-
-        }
-
-        private void bt_weekday_01_Click(object sender, EventArgs e)
-        {
-            //幾年幾月幾日星期幾
-            int year;
-            int month;
-            int day;
-            string result;
-
-            year = 2006;
-            month = 3;
-            day = 11;
-            result = CaculateWeekDay(year, month, day);
-            richTextBox1.Text += year.ToString() + "年" + month.ToString() + "月" + day.ToString() + "日\t是\t" + result + "\n";
-
-            year = 1941;
-            month = 12;
-            day = 7;
-            result = CaculateWeekDay(year, month, day);
-            richTextBox1.Text += year.ToString() + "年" + month.ToString() + "月" + day.ToString() + "日\t是\t" + result + "\t珍珠港事變\n";
-        }
-
-        private void bt_weekday_02_Click(object sender, EventArgs e)
-        {
-            //尋找13號星期五
-            int year_st = 2020;
-            int year_sp = 2030;
-
-            // Loop over the selected years.
-            for (int year = year_st; year <= year_sp; year++)
-            {
-                // Loop over the months in the year.
-                for (int month = 1; month <= 12; month++)
-                {
-                    // See if this month's 13th is a Friday.
-                    DateTime dt = new DateTime(year, month, 13);
-
-                    // See if this is a Friday.
-                    if (dt.DayOfWeek == DayOfWeek.Friday)
-                    {
-                        richTextBox1.Text += dt.ToShortDateString() + "\n";
-                    }
-                }
-            }
-
-        }
-
-        private void bt_weekday_03_Click(object sender, EventArgs e)
-        {
-            //獲得中文星期名稱
-            richTextBox1.Text += "今天是 : " + GetCnWeek() + "\n";
-        }
-
-        /// <summary>
-        /// 獲得中文星期名稱
-        /// </summary>
-        /// <returns></returns>
-        public static string GetCnWeek()
-        {
-            switch (DateTime.Now.DayOfWeek)
-            {
-                case DayOfWeek.Monday:
-                    return "星期一";
-                case DayOfWeek.Tuesday:
-                    return "星期二";
-                case DayOfWeek.Wednesday:
-                    return "星期三";
-                case DayOfWeek.Thursday:
-                    return "星期四";
-                case DayOfWeek.Friday:
-                    return "星期五";
-                case DayOfWeek.Saturday:
-                    return "星期六";
-                case DayOfWeek.Sunday:
-                    return "星期日";
-                default:
-                    return "星期一";
-            }
-        }
-
-
-        private void bt_weekday_04_Click(object sender, EventArgs e)
-        {
-            //星期幾
-            richTextBox1.Text += CaculateWeekDay2(2021, 10, 28);
-            richTextBox1.Text += "\n";
-
-            //C#獲取當前星期幾的三種方法
-
-            //第一種：
-
-            string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-            string weekday1 = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();    //same
-            string weekday2 = Day[Convert.ToInt16(DateTime.Now.DayOfWeek)]; //same
-            richTextBox1.Text += weekday1 + "\n";
-            richTextBox1.Text += weekday2 + "\n";
-
-            //第二種：
-
-            richTextBox1.Text += CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(DateTime.Now.DayOfWeek) + "\n";
-
-            //第三種：
-
-            string dt;
-            string week = string.Empty;
-            dt = DateTime.Today.DayOfWeek.ToString();
-            switch (dt)
-            {
-                case "Monday":
-                    week = "星期一";
-                    break;
-                case "Tuesday":
-                    week = "星期二";
-                    break;
-                case "Wednesday":
-                    week = "星期三";
-                    break;
-                case "Thursday":
-                    week = "星期四";
-                    break;
-                case "Friday":
-                    week = "星期五";
-                    break;
-                case "Saturday":
-                    week = "星期六";
-                    break;
-                case "Sunday":
-                    week = "星期日";
-                    break;
-                default:
-                    week = "星期日";
-                    break;
-            }
-            richTextBox1.Text += week + "\n";
-
-
-            //星期幾
-            string[] Day2 = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-            string week2 = Day2[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
-
-            richTextBox1.Text += week2 + "\n";
-        }
-
-        /*
-        C#實現的根據年月日計算星期幾的函數
-        基姆拉爾森計算公式
-        W= (d 2*m 3*(m 1)/5 y y/4-y/100 y/400) mod 7
-        在公式中d表示日期中的日數，m表示月份數，y表示年數。注意：在公式中有個與其他公式不同的地方：把一月和二月看成是上一年的十三月和十四月，例：如果是2004-1-10則換算成：2003-13-10來代入公式計算。
-        */
-
-        //y－年，m－月，d－日期
-        string CaculateWeekDay2(int y, int m, int d)
-        {
-            if (m == 1) m = 13;
-            if (m == 2) m = 14;
-            int week = (d + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400) % 7 + 1;
-
-            string weekstr = "";
-            switch (week)
-            {
-                case 1: weekstr = "星期一"; break;
-                case 2: weekstr = "星期二"; break;
-                case 3: weekstr = "星期三"; break;
-                case 4: weekstr = "星期四"; break;
-                case 5: weekstr = "星期五"; break;
-                case 6: weekstr = "星期六"; break;
-                case 7: weekstr = "星期日"; break;
-            }
-            return weekstr;
-        }
-
-        private void bt_diff_time_Click(object sender, EventArgs e)
-        {
-            //相距天數
-
-
-        }
-
         DateTime dtTarget;
         private void bt_countdown_Click(object sender, EventArgs e)
         {
@@ -2816,22 +2409,13 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
 
         private void timer_countdown_Tick(object sender, EventArgs e)
         {
-            TimeSpan diffTime = dtTarget.Subtract(DateTime.Now);
+            TimeSpan ts = dtTarget.Subtract(DateTime.Now);
 
-            string diffHour = Convert.ToString(diffTime.Hours);
-            string diffMin = Convert.ToString(diffTime.Minutes);
-            string diffSec = Convert.ToString(diffTime.Seconds);
+            string diffHour = Convert.ToString(ts.Hours);
+            string diffMin = Convert.ToString(ts.Minutes);
+            string diffSec = Convert.ToString(ts.Seconds);
             tb_countdown.Text = "距離 " + dtTarget.ToString() + " 還有 " + diffHour + " 時 " + diffMin + " 分 " + diffSec + " 秒";
-
-
         }
-
-        private void textBox7_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
 
         //月相 ST
         //Variables for Moon program
@@ -2907,7 +2491,6 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
 
         private void DrawMoon()
         {
-            richTextBox1.Text += "DrawMoon\n";
             int Xpos, Ypos, Rpos;
             int Xpos1, Xpos2;
             double Phase;
@@ -2979,7 +2562,6 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
 
         private void ShowMoon()
         {
-            richTextBox1.Text += "ShowMoon\n";
             //draw moon and print age in selected days
             this.YourChoice(); //select date
             this.ClearDraw(); //clear pictureBox1 PictureBox
@@ -3014,1590 +2596,6 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
                 richTextBox1.Text += "DateTime.TryParse 失敗\n";
             }
 
-        }
-
-
-        #region LunarDate222
-        public class CNDate
-        {
-            private const ushort START_YEAR = 1901;
-            private const ushort END_YEAR = 2050;
-            private string[] ConstellationName =
-  {
-  "白羊座", "金牛座", "雙子座",
-  "巨蟹座", "獅子座", "處女座",
-  "天秤座", "天蠍座", "射手座",
-  "摩羯座", "水瓶座", "雙魚座"};
-            private string[] LunarHolDayName =
-  {
-  "小寒", "大寒", "立春", "雨水",
-  "驚蟄", "春分", "清明", "谷雨",
-  "立夏", "小滿", "芒種", "夏至",
-  "小暑", "大暑", "立秋", "處暑",
-  "白露", "秋分", "寒露", "霜降",
-  "立冬", "小雪", "大雪", "冬至"};
-
-            //數組gLunarDay存入陰歷1901年到2100年每年中的月天數信息，
-            //陰歷每月只能是29或30天，一年用12（或13）個二進制位表示，對應位為1表30天，否則為29天
-            private int[] gLunarMonthDay = {
-  //測試數據只有1901.1.1 --2050.12.31
-  0x4ae0, 0xa570, 0x5268, 0xd260, 0xd950, 0x6aa8, 0x56a0, 0x9ad0, 0x4ae8, 0x4ae0, //1910
-  0xa4d8, 0xa4d0, 0xd250, 0xd548, 0xb550, 0x56a0, 0x96d0, 0x95b0, 0x49b8, 0x49b0, //1920
-  0xa4b0, 0xb258, 0x6a50, 0x6d40, 0xada8, 0x2b60, 0x9570, 0x4978, 0x4970, 0x64b0, //1930
-  0xd4a0, 0xea50, 0x6d48, 0x5ad0, 0x2b60, 0x9370, 0x92e0, 0xc968, 0xc950, 0xd4a0, //1940
-  0xda50, 0xb550, 0x56a0, 0xaad8, 0x25d0, 0x92d0, 0xc958, 0xa950, 0xb4a8, 0x6ca0, //1950
-  0xb550, 0x55a8, 0x4da0, 0xa5b0, 0x52b8, 0x52b0, 0xa950, 0xe950, 0x6aa0, 0xad50, //1960
-  0xab50, 0x4b60, 0xa570, 0xa570, 0x5260, 0xe930, 0xd950, 0x5aa8, 0x56a0, 0x96d0, //1970
-  0x4ae8, 0x4ad0, 0xa4d0, 0xd268, 0xd250, 0xd528, 0xb540, 0xb6a0, 0x96d0, 0x95b0, //1980
-  0x49b0, 0xa4b8, 0xa4b0, 0xb258, 0x6a50, 0x6d40, 0xada0, 0xab60, 0x9370, 0x4978, //1990
-  0x4970, 0x64b0, 0x6a50, 0xea50, 0x6b28, 0x5ac0, 0xab60, 0x9368, 0x92e0, 0xc960, //2000
-  0xd4a8, 0xd4a0, 0xda50, 0x5aa8, 0x56a0, 0xaad8, 0x25d0, 0x92d0, 0xc958, 0xa950, //2010
-  0xb4a0, 0xb550, 0xb550, 0x55a8, 0x4ba0, 0xa5b0, 0x52b8, 0x52b0, 0xa930, 0x74a8, //2020
-  0x6aa0, 0xad50, 0x4da8, 0x4b60, 0x9570, 0xa4e0, 0xd260, 0xe930, 0xd530, 0x5aa0, //2030
-  0x6b50, 0x96d0, 0x4ae8, 0x4ad0, 0xa4d0, 0xd258, 0xd250, 0xd520, 0xdaa0, 0xb5a0, //2040
-  0x56d0, 0x4ad8, 0x49b0, 0xa4b8, 0xa4b0, 0xaa50, 0xb528, 0x6d20, 0xada0, 0x55b0}; //2050
-
-            //數組gLanarMonth存放陰歷1901年到2050年閏月的月份，如沒有則為0，每字節存兩年
-            byte[] gLunarMonth ={
-  0x00, 0x50, 0x04, 0x00, 0x20, //1910
-  0x60, 0x05, 0x00, 0x20, 0x70, //1920
-  0x05, 0x00, 0x40, 0x02, 0x06, //1930
-  0x00, 0x50, 0x03, 0x07, 0x00, //1940
-  0x60, 0x04, 0x00, 0x20, 0x70, //1950
-  0x05, 0x00, 0x30, 0x80, 0x06, //1960
-  0x00, 0x40, 0x03, 0x07, 0x00, //1970
-  0x50, 0x04, 0x08, 0x00, 0x60, //1980
-  0x04, 0x0a, 0x00, 0x60, 0x05, //1990
-  0x00, 0x30, 0x80, 0x05, 0x00, //2000
-  0x40, 0x02, 0x07, 0x00, 0x50, //2010
-  0x04, 0x09, 0x00, 0x60, 0x04, //2020
-  0x00, 0x20, 0x60, 0x05, 0x00, //2030
-  0x30, 0xb0, 0x06, 0x00, 0x50, //2040
-  0x02, 0x07, 0x00, 0x50, 0x03}; //2050
-
-            //數組gLanarHoliDay存放每年的二十四節氣對應的陽歷日期
-            //每年的二十四節氣對應的陽歷日期幾乎固定，平均分布於十二個月中
-            // 1月 2月 3月 4月 5月 6月
-            //小寒 大寒 立春 雨水 驚蟄 春分 清明 谷雨 立夏 小滿 芒種 夏至
-            // 7月 8月 9月 10月 11月 12月
-            //小暑 大暑 立秋 處暑 白露 秋分 寒露 霜降 立冬 小雪 大雪 冬至
-            //*********************************************************************************
-            // 節氣無任何確定規律,所以只好存表,要節省空間,所以....
-            //**********************************************************************************}
-            //數據格式說明:
-            //如1901年的節氣為
-            // 1月 2月 3月 4月 5月 6月 7月 8月 9月 10月 11月 12月
-            // 6, 21, 4, 19, 6, 21, 5, 21, 6,22, 6,22, 8, 23, 8, 24, 8, 24, 8, 24, 8, 23, 8, 22
-            // 9, 6, 11,4, 9, 6, 10,6, 9,7, 9,7, 7, 8, 7, 9, 7, 9, 7, 9, 7, 8, 7, 15
-            //上面第一行數據為每月節氣對應日期,15減去每月第一個節氣,每月第二個節氣減去15得第二行
-            // 這樣每月兩個節氣對應數據都小於16,每月用一個字節存放,高位存放第一個節氣數據,低位存放
-            //第二個節氣的數據,可得下表
-            byte[] gLunarHolDay ={
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1901
-  0x96, 0xA4, 0x96, 0x96, 0x97, 0x87, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1902
-  0x96, 0xA5, 0x87, 0x96, 0x87, 0x87, 0x79, 0x69, 0x69, 0x69, 0x78, 0x78, //1903
-  0x86, 0xA5, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x78, 0x87, //1904
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1905
-  0x96, 0xA4, 0x96, 0x96, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1906
-  0x96, 0xA5, 0x87, 0x96, 0x87, 0x87, 0x79, 0x69, 0x69, 0x69, 0x78, 0x78, //1907
-  0x86, 0xA5, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1908
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1909
-  0x96, 0xA4, 0x96, 0x96, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1910
-  0x96, 0xA5, 0x87, 0x96, 0x87, 0x87, 0x79, 0x69, 0x69, 0x69, 0x78, 0x78, //1911
-  0x86, 0xA5, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1912
-  0x95, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1913
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1914
-  0x96, 0xA5, 0x97, 0x96, 0x97, 0x87, 0x79, 0x79, 0x69, 0x69, 0x78, 0x78, //1915
-  0x96, 0xA5, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1916
-  0x95, 0xB4, 0x96, 0xA6, 0x96, 0x97, 0x78, 0x79, 0x78, 0x69, 0x78, 0x87, //1917
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x77, //1918
-  0x96, 0xA5, 0x97, 0x96, 0x97, 0x87, 0x79, 0x79, 0x69, 0x69, 0x78, 0x78, //1919
-  0x96, 0xA5, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1920
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x78, 0x79, 0x78, 0x69, 0x78, 0x87, //1921
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x77, //1922
-  0x96, 0xA4, 0x96, 0x96, 0x97, 0x87, 0x79, 0x79, 0x69, 0x69, 0x78, 0x78, //1923
-  0x96, 0xA5, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1924
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x78, 0x79, 0x78, 0x69, 0x78, 0x87, //1925
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1926
-  0x96, 0xA4, 0x96, 0x96, 0x97, 0x87, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1927
-  0x96, 0xA5, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1928
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1929
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1930
-  0x96, 0xA4, 0x96, 0x96, 0x97, 0x87, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1931
-  0x96, 0xA5, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1932
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1933
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1934
-  0x96, 0xA4, 0x96, 0x96, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1935
-  0x96, 0xA5, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1936
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1937
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1938
-  0x96, 0xA4, 0x96, 0x96, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1939
-  0x96, 0xA5, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1940
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1941
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1942
-  0x96, 0xA4, 0x96, 0x96, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1943
-  0x96, 0xA5, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1944
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1945
-  0x95, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x78, 0x69, 0x78, 0x77, //1946
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1947
-  0x96, 0xA5, 0xA6, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //1948
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x79, 0x78, 0x79, 0x77, 0x87, //1949
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x78, 0x79, 0x78, 0x69, 0x78, 0x77, //1950
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1951
-  0x96, 0xA5, 0xA6, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //1952
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1953
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x78, 0x79, 0x78, 0x68, 0x78, 0x87, //1954
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1955
-  0x96, 0xA5, 0xA5, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //1956
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1957
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1958
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1959
-  0x96, 0xA4, 0xA5, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //1960
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1961
-  0x96, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1962
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1963
-  0x96, 0xA4, 0xA5, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //1964
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1965
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1966
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1967
-  0x96, 0xA4, 0xA5, 0xA5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //1968
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1969
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1970
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1971
-  0x96, 0xA4, 0xA5, 0xA5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //1972
-  0xA5, 0xB5, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1973
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1974
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x78, 0x69, 0x78, 0x77, //1975
-  0x96, 0xA4, 0xA5, 0xB5, 0xA6, 0xA6, 0x88, 0x89, 0x88, 0x78, 0x87, 0x87, //1976
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //1977
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x78, 0x87, //1978
-  0x96, 0xB4, 0x96, 0xA6, 0x96, 0x97, 0x78, 0x79, 0x78, 0x69, 0x78, 0x77, //1979
-  0x96, 0xA4, 0xA5, 0xB5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //1980
-  0xA5, 0xB4, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x77, 0x87, //1981
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1982
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x78, 0x79, 0x78, 0x69, 0x78, 0x77, //1983
-  0x96, 0xB4, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x87, //1984
-  0xA5, 0xB4, 0xA6, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //1985
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1986
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x79, 0x78, 0x69, 0x78, 0x87, //1987
-  0x96, 0xB4, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x86, //1988
-  0xA5, 0xB4, 0xA5, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //1989
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1990
-  0x95, 0xB4, 0x96, 0xA5, 0x86, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1991
-  0x96, 0xB4, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x86, //1992
-  0xA5, 0xB3, 0xA5, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //1993
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1994
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x76, 0x78, 0x69, 0x78, 0x87, //1995
-  0x96, 0xB4, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x86, //1996
-  0xA5, 0xB3, 0xA5, 0xA5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //1997
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1998
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1999
-  0x96, 0xB4, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x86, //2000
-  0xA5, 0xB3, 0xA5, 0xA5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //2001
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //2002
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //2003
-  0x96, 0xB4, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x86, //2004
-  0xA5, 0xB3, 0xA5, 0xA5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //2005
-  0xA5, 0xB4, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //2006
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //2007
-  0x96, 0xB4, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x87, 0x78, 0x87, 0x86, //2008
-  0xA5, 0xB3, 0xA5, 0xB5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //2009
-  0xA5, 0xB4, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //2010
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x78, 0x87, //2011
-  0x96, 0xB4, 0xA5, 0xB5, 0xA5, 0xA6, 0x87, 0x88, 0x87, 0x78, 0x87, 0x86, //2012
-  0xA5, 0xB3, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x87, //2013
-  0xA5, 0xB4, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //2014
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //2015
-  0x95, 0xB4, 0xA5, 0xB4, 0xA5, 0xA6, 0x87, 0x88, 0x87, 0x78, 0x87, 0x86, //2016
-  0xA5, 0xC3, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x87, //2017
-  0xA5, 0xB4, 0xA6, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //2018
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //2019
-  0x95, 0xB4, 0xA5, 0xB4, 0xA5, 0xA6, 0x97, 0x87, 0x87, 0x78, 0x87, 0x86, //2020
-  0xA5, 0xC3, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x86, //2021
-  0xA5, 0xB4, 0xA5, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //2022
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //2023
-  0x95, 0xB4, 0xA5, 0xB4, 0xA5, 0xA6, 0x97, 0x87, 0x87, 0x78, 0x87, 0x96, //2024
-  0xA5, 0xC3, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x86, //2025
-  0xA5, 0xB3, 0xA5, 0xA5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //2026
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //2027
-  0x95, 0xB4, 0xA5, 0xB4, 0xA5, 0xA6, 0x97, 0x87, 0x87, 0x78, 0x87, 0x96, //2028
-  0xA5, 0xC3, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x86, //2029
-  0xA5, 0xB3, 0xA5, 0xA5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //2030
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //2031
-  0x95, 0xB4, 0xA5, 0xB4, 0xA5, 0xA6, 0x97, 0x87, 0x87, 0x78, 0x87, 0x96, //2032
-  0xA5, 0xC3, 0xA5, 0xB5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x86, //2033
-  0xA5, 0xB3, 0xA5, 0xA5, 0xA6, 0xA6, 0x88, 0x78, 0x88, 0x78, 0x87, 0x87, //2034
-  0xA5, 0xB4, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //2035
-  0x95, 0xB4, 0xA5, 0xB4, 0xA5, 0xA6, 0x97, 0x87, 0x87, 0x78, 0x87, 0x96, //2036
-  0xA5, 0xC3, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x86, //2037
-  0xA5, 0xB3, 0xA5, 0xA5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //2038
-  0xA5, 0xB4, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //2039
-  0x95, 0xB4, 0xA5, 0xB4, 0xA5, 0xA6, 0x97, 0x87, 0x87, 0x78, 0x87, 0x96, //2040
-  0xA5, 0xC3, 0xA5, 0xB5, 0xA5, 0xA6, 0x87, 0x88, 0x87, 0x78, 0x87, 0x86, //2041
-  0xA5, 0xB3, 0xA5, 0xB5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //2042
-  0xA5, 0xB4, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //2043
-  0x95, 0xB4, 0xA5, 0xB4, 0xA5, 0xA6, 0x97, 0x87, 0x87, 0x88, 0x87, 0x96, //2044
-  0xA5, 0xC3, 0xA5, 0xB4, 0xA5, 0xA6, 0x87, 0x88, 0x87, 0x78, 0x87, 0x86, //2045
-  0xA5, 0xB3, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x87, //2046
-  0xA5, 0xB4, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //2047
-  0x95, 0xB4, 0xA5, 0xB4, 0xA5, 0xA5, 0x97, 0x87, 0x87, 0x88, 0x86, 0x96, //2048
-  0xA4, 0xC3, 0xA5, 0xA5, 0xA5, 0xA6, 0x97, 0x87, 0x87, 0x78, 0x87, 0x86, //2049
-  0xA5, 0xC3, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x78, 0x78, 0x87, 0x87}; //2050
-
-
-            private DateTime m_Date;
-            public DateTime Date
-            {
-                get { return m_Date; }
-                set { m_Date = value; }
-            }
-
-            public CNDate()
-            {
-                Date = DateTime.Today;
-            }
-            public CNDate(DateTime dt)
-            {
-                Date = dt.Date;
-            }
-            //計算指定日期的星座序號
-            public int GetConstellation()
-            {
-                int Y, M, D;
-                Y = m_Date.Year;
-                M = m_Date.Month;
-                D = m_Date.Day;
-                Y = M * 100 + D;
-                if (((Y >= 321) && (Y <= 419))) { return 0; }
-                else if ((Y >= 420) && (Y <= 520)) { return 1; }
-                else if ((Y >= 521) && (Y <= 620)) { return 2; }
-                else if ((Y >= 621) && (Y <= 722)) { return 3; }
-                else if ((Y >= 723) && (Y <= 822)) { return 4; }
-                else if ((Y >= 823) && (Y <= 922)) { return 5; }
-                else if ((Y >= 923) && (Y <= 1022)) { return 6; }
-                else if ((Y >= 1023) && (Y <= 1121)) { return 7; }
-                else if ((Y >= 1122) && (Y <= 1221)) { return 8; }
-                else if ((Y >= 1222) || (Y <= 119)) { return 9; }
-                else if ((Y >= 120) && (Y <= 218)) { return 10; }
-                else if ((Y >= 219) && (Y <= 320)) { return 11; }
-                else { return -1; };
-            }
-
-            //計算指定日期的星座名稱
-            public string GetConstellationName()
-            {
-                int Constellation;
-                Constellation = GetConstellation();
-                if ((Constellation >= 0) && (Constellation <= 11))
-                { return ConstellationName[Constellation]; }
-                else
-                { return ""; };
-            }
-
-            //計算公歷當天對應的節氣 0-23，-1表示不是節氣
-            public int l_GetLunarHolDay()
-            {
-                byte Flag;
-                int Day, iYear, iMonth, iDay;
-                iYear = m_Date.Year;
-                if ((iYear < START_YEAR) || (iYear > END_YEAR))
-                { return -1; };
-                iMonth = m_Date.Month;
-                iDay = m_Date.Day;
-                Flag = gLunarHolDay[(iYear - START_YEAR) * 12 + iMonth - 1];
-                if (iDay < 15)
-                { Day = 15 - ((Flag >> 4) & 0x0f); }
-                else
-                { Day = (Flag & 0x0f) + 15; };
-                if (iDay == Day)
-                {
-                    if (iDay > 15)
-                    { return (iMonth - 1) * 2 + 1; }
-                    else
-                    { return (iMonth - 1) * 2; }
-                }
-                else
-                { return -1; };
-            }
-
-            public string FormatMonth(ushort iMonth, bool bLunar)
-            {
-                string szText = "正二三四五六七八九十";
-                string strMonth;
-                if ((!bLunar) && (iMonth == 1))
-                { return "一月"; }
-                if (iMonth <= 10)
-                {
-                    strMonth = "";
-                    strMonth = strMonth + szText.Substring(iMonth - 1, 1);
-                    strMonth = strMonth + "月";
-                    return strMonth;
-                }
-                if (iMonth == 11)
-                { strMonth = "十一"; }
-                else
-                { strMonth = "十二"; }
-                return strMonth + "月";
-            }
-
-
-            public string FormatLunarDay(ushort iDay)
-            {
-                string szText1 = "初十廿三";
-                string szText2 = "一二三四五六七八九十";
-                string strDay;
-                if ((iDay != 20) && (iDay != 30))
-                {
-                    strDay = szText1.Substring((iDay - 1) / 10, 1);
-                    strDay = strDay + szText2.Substring((iDay - 1) % 10, 1);
-                }
-                else
-                {
-                    strDay = szText1.Substring((iDay / 10) * 2 + 1, 2);
-                    strDay = strDay + "十";
-                }
-                return strDay;
-            }
-
-            public string GetLunarHolDay()
-            {
-                ushort iYear, iMonth, iDay;
-                int i;
-                TimeSpan ts;
-                iYear = (ushort)(m_Date.Year);
-                if ((iYear < START_YEAR) || (iYear > END_YEAR))
-                { return ""; };
-                i = l_GetLunarHolDay();
-                if ((i >= 0) && (i <= 23))
-                { return LunarHolDayName[i]; }
-                else
-                {
-                    ts = m_Date - (new DateTime(START_YEAR, 1, 1));
-                    l_CalcLunarDate(out iYear, out iMonth, out iDay, (uint)(ts.Days));
-                    return FormatMonth(iMonth, true) + FormatLunarDay(iDay);
-                }
-            }
-
-            //返回陰歷iLunarYear年的閏月月份，如沒有返回0 1901年1月---2050年12月
-            public int GetLeapMonth(ushort iLunarYear)
-            {
-                byte Flag;
-                if ((iLunarYear < START_YEAR) || (iLunarYear > END_YEAR))
-                { return 0; };
-                Flag = gLunarMonth[(iLunarYear - START_YEAR) / 2];
-                if ((iLunarYear - START_YEAR) % 2 == 0)
-                { return Flag >> 4; }
-                else
-                { return Flag & 0x0F; }
-            }
-
-            //返回陰歷iLunarYer年陰歷iLunarMonth月的天數，如果iLunarMonth為閏月，
-            //高字為第二個iLunarMonth月的天數，否則高字為0 1901年1月---2050年12月
-            public uint LunarMonthDays(ushort iLunarYear, ushort iLunarMonth)
-            {
-                int Height, Low;
-                int iBit;
-                if ((iLunarYear < START_YEAR) || (iLunarYear > END_YEAR))
-                { return 30; }
-                Height = 0;
-                Low = 29;
-                iBit = 16 - iLunarMonth;
-                if ((iLunarMonth > GetLeapMonth(iLunarYear)) && (GetLeapMonth(iLunarYear) > 0))
-                { iBit--; }
-                if ((gLunarMonthDay[iLunarYear - START_YEAR] & (1 << iBit)) > 0)
-                { Low++; }
-                if (iLunarMonth == GetLeapMonth(iLunarYear))
-                {
-                    if ((gLunarMonthDay[iLunarYear - START_YEAR] & (1 << (iBit - 1))) > 0)
-                    { Height = 30; }
-                    else
-                    { Height = 29; }
-                }
-                return (uint)((uint)(Low) | (uint)(Height) << 16); //合成為uint
-            }
-
-            //返回陰歷iLunarYear年的總天數 1901年1月---2050年12月
-            public int LunarYearDays(ushort iLunarYear)
-            {
-                int Days;
-                uint tmp;
-                if ((iLunarYear < START_YEAR) || (iLunarYear > END_YEAR))
-                { return 0; };
-                Days = 0;
-                for (ushort i = 1; i <= 12; i++)
-                {
-                    tmp = LunarMonthDays(iLunarYear, i);
-                    Days = Days + ((ushort)(tmp >> 16) & 0xFFFF); //取高位
-                    Days = Days + (ushort)(tmp); //取低位
-                }
-                return Days;
-            }
-
-            //計算從1901年1月1日過iSpanDays天後的陰歷日期
-            public void l_CalcLunarDate(out ushort iYear, out ushort iMonth, out ushort iDay, uint iSpanDays)
-            {
-                uint tmp;
-                //陽歷1901年2月19日為陰歷1901年正月初一
-                //陽歷1901年1月1日到2月19日共有49天
-                if (iSpanDays < 49)
-                {
-                    iYear = START_YEAR - 1;
-                    if (iSpanDays < 19)
-                    {
-                        iMonth = 11;
-                        iDay = (ushort)(11 + iSpanDays);
-                    }
-                    else
-                    {
-                        iMonth = 12;
-                        iDay = (ushort)(iSpanDays - 18);
-                    }
-                    return;
-                }
-                //下面從陰歷1901年正月初一算起
-                iSpanDays = iSpanDays - 49;
-                iYear = START_YEAR;
-                iMonth = 1;
-                iDay = 1;
-                //計算年
-                tmp = (uint)LunarYearDays(iYear);
-                while (iSpanDays >= tmp)
-                {
-                    iSpanDays = iSpanDays - tmp;
-                    iYear++;
-                    tmp = (uint)LunarYearDays(iYear);
-                }
-                //計算月
-                tmp = LunarMonthDays(iYear, iMonth); //取低位
-                while (iSpanDays >= tmp)
-                {
-                    iSpanDays = iSpanDays - tmp;
-                    if (iMonth == GetLeapMonth(iYear))
-                    {
-                        tmp = (LunarMonthDays(iYear, iMonth) >> 16) & 0xFFFF; //取高位
-                        if (iSpanDays < tmp)
-                        { break; }
-                        iSpanDays = iSpanDays - tmp;
-                    }
-                    iMonth++;
-                    tmp = LunarMonthDays(iYear, iMonth); //取低位
-                }
-                //計算日
-                iDay = (ushort)(iDay + iSpanDays);
-            }
-
-
-            //把iYear年格式化成天干記年法表示的字符串
-            public string FormatLunarYear()
-            {
-                string strYear;
-                string szText1 = "甲乙丙丁戊己庚辛壬癸";
-                string szText2 = "子丑寅卯辰巳午未申酉戌亥";
-                string szText3 = "鼠牛虎免龍蛇馬羊猴雞狗豬";
-                ushort iYear;
-                iYear = (ushort)(m_Date.Year);
-                strYear = szText1.Substring((iYear - 4) % 10, 1);
-                strYear = strYear + szText2.Substring((iYear - 4) % 12, 1);
-                strYear = strYear + " ";
-                strYear = strYear + szText3.Substring((iYear - 4) % 12, 1);
-                strYear = strYear + "年";
-                return strYear;
-            }
-        }
-
-        #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
-
-    #region LunarDate
-
-    public class LunarDateClass
-    {
-        private const ushort START_YEAR = 1901;
-        private const ushort END_YEAR = 2050;
-        private DateTime m_Date = DateTime.MinValue;
-        private LunarDate1 m_LunarDate = null;
-        private string m_LunarYear = "", m_LunarMonth = "", m_LunarDay = "";
-        private string m_Animal = "", m_Constellation = "", m_SolarTerm = "";
-
-        /// <summary>始化农历类。</summary>
-        public LunarDateClass()
-        {
-            this.Date = DateTime.Today;
-        }
-
-
-        /// <summary>以公历日期初始化农历类。</summary>
-        /// <param name="dt">初始化公历日期。要查询的日期。</param>
-        public LunarDateClass(DateTime dt)
-        {
-            this.Date = dt.Date;
-        }
-
-        /// <summary>初始化公历日期。要查询的日期。</summary>
-        public DateTime Date
-        {
-            get { return m_Date; }
-            set
-            {
-                this.m_Animal = "";
-                this.m_Constellation = "";
-                this.m_LunarDate = null;
-                this.m_LunarDay = "";
-                this.m_LunarMonth = "";
-                this.m_LunarYear = "";
-                this.m_SolarTerm = "";
-                m_Date = value;
-            }
-        }
-
-        #region LunarDateClassData
-
-        /// <summary>星座名称。</summary>
-        private string[] ConstellationName =
-   {
-    "白羊座", "金牛座", "双子座", "巨蟹座", "狮子座", "处女座",
-    "天秤座", "天蝎座", "射手座", "摩羯座", "水瓶座", "双鱼座"
-   };
-
-        /// <summary>节气名称。</summary>
-        private string[] LunarHolDayName =
-   {
-    "小寒", "大寒", "立春", "雨水", "惊蛰", "春分", "清明", "谷雨",
-    "立夏", "小满", "芒种", "夏至", "小暑", "大暑", "立秋", "处暑",
-    "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪", "冬至"
-   };
-
-        /// <summary>
-        /// 数组gLunarDay存入阴历1901年到2050年每年中的月天数信息，
-        /// 阴历每月只能是29或30天，一年用12（或13）个二进制位表示，
-        /// 对应位为1表30天，否则为29天.
-        /// 测试数据只有1901.1.1 --2050.12.31
-        /// </summary>
-        private int[] gLunarMonthDay = {
- 0x4ae0, 0xa570, 0x5268, 0xd260, 0xd950, 0x6aa8, 0x56a0, 0x9ad0, 0x4ae8, 0x4ae0, //1910
- 0xa4d8, 0xa4d0, 0xd250, 0xd548, 0xb550, 0x56a0, 0x96d0, 0x95b0, 0x49b8, 0x49b0, //1920
- 0xa4b0, 0xb258, 0x6a50, 0x6d40, 0xada8, 0x2b60, 0x9570, 0x4978, 0x4970, 0x64b0, //1930
- 0xd4a0, 0xea50, 0x6d48, 0x5ad0, 0x2b60, 0x9370, 0x92e0, 0xc968, 0xc950, 0xd4a0, //1940
- 0xda50, 0xb550, 0x56a0, 0xaad8, 0x25d0, 0x92d0, 0xc958, 0xa950, 0xb4a8, 0x6ca0, //1950
- 0xb550, 0x55a8, 0x4da0, 0xa5b0, 0x52b8, 0x52b0, 0xa950, 0xe950, 0x6aa0, 0xad50, //1960
- 0xab50, 0x4b60, 0xa570, 0xa570, 0x5260, 0xe930, 0xd950, 0x5aa8, 0x56a0, 0x96d0, //1970
- 0x4ae8, 0x4ad0, 0xa4d0, 0xd268, 0xd250, 0xd528, 0xb540, 0xb6a0, 0x96d0, 0x95b0, //1980
- 0x49b0, 0xa4b8, 0xa4b0, 0xb258, 0x6a50, 0x6d40, 0xada0, 0xab60, 0x9370, 0x4978, //1990
- 0x4970, 0x64b0, 0x6a50, 0xea50, 0x6b28, 0x5ac0, 0xab60, 0x9368, 0x92e0, 0xc960, //2000
- 0xd4a8, 0xd4a0, 0xda50, 0x5aa8, 0x56a0, 0xaad8, 0x25d0, 0x92d0, 0xc958, 0xa950, //2010
- 0xb4a0, 0xb550, 0xb550, 0x55a8, 0x4ba0, 0xa5b0, 0x52b8, 0x52b0, 0xa930, 0x74a8, //2020
- 0x6aa0, 0xad50, 0x4da8, 0x4b60, 0x9570, 0xa4e0, 0xd260, 0xe930, 0xd530, 0x5aa0, //2030
- 0x6b50, 0x96d0, 0x4ae8, 0x4ad0, 0xa4d0, 0xd258, 0xd250, 0xd520, 0xdaa0, 0xb5a0, //2040
- 0x56d0, 0x4ad8, 0x49b0, 0xa4b8, 0xa4b0, 0xaa50, 0xb528, 0x6d20, 0xada0, 0x55b0 //2050
-            };
-
-        /// <summary>数组gLanarMonth存放阴历1901年到2050年闰月的月份，如没有则为0，每字节存两年</summary>
-        private byte[] gLunarMonth = {
- 0x00, 0x50, 0x04, 0x00, 0x20, //1910
- 0x60, 0x05, 0x00, 0x20, 0x70, //1920
- 0x05, 0x00, 0x40, 0x02, 0x06, //1930
- 0x00, 0x50, 0x03, 0x07, 0x00, //1940
- 0x60, 0x04, 0x00, 0x20, 0x70, //1950
- 0x05, 0x00, 0x30, 0x80, 0x06, //1960
- 0x00, 0x40, 0x03, 0x07, 0x00, //1970
- 0x50, 0x04, 0x08, 0x00, 0x60, //1980
- 0x04, 0x0a, 0x00, 0x60, 0x05, //1990
- 0x00, 0x30, 0x80, 0x05, 0x00, //2000
- 0x40, 0x02, 0x07, 0x00, 0x50, //2010
- 0x04, 0x09, 0x00, 0x60, 0x04, //2020
- 0x00, 0x20, 0x60, 0x05, 0x00, //2030
- 0x30, 0xb0, 0x06, 0x00, 0x50, //2040
- 0x02, 0x07, 0x00, 0x50, 0x03 //2050
-          };
-
-
-        //数组gLanarHoliDay存放每年的二十四节气对应的阳历日期
-
-        //每年的二十四节气对应的阳历日期几乎固定，平均分布于十二个月中
-        // 1月 2月 3月 4月 5月 6月
-        //小寒 大寒 立春 雨水 惊蛰 春分 清明 谷雨 立夏 小满 芒种 夏至
-        // 7月 8月 9月 10月 11月 12月
-        //小暑 大暑 立秋 处暑 白露 秋分 寒露 霜降 立冬 小雪 大雪 冬至
-        //*********************************************************************************
-        // 节气无任何确定规律,所以只好存表,要节省空间,所以....
-        //**********************************************************************************}
-        //数据格式说明:
-        //如1901年的节气为
-        // 1月 2月 3月 4月 5月 6月 7月 8月 9月 10月 11月 12月
-        // 6, 21, 4, 19, 6, 21, 5, 21, 6,22, 6,22, 8, 23, 8, 24, 8, 24, 8, 24, 8, 23, 8, 22
-        // 9, 6, 11,4, 9, 6, 10,6, 9,7, 9,7, 7, 8, 7, 9, 7, 9, 7, 9, 7, 8, 7, 15
-        //上面第一行数据为每月节气对应日期,15减去每月第一个节气,每月第二个节气减去15得第二行
-        // 这样每月两个节气对应数据都小于16,每月用一个字节存放,高位存放第一个节气数据,低位存放
-        //第二个节气的数据,可得下表
-        private byte[] gLunarHolDay = {
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1901
-  0x96, 0xA4, 0x96, 0x96, 0x97, 0x87, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1902
-  0x96, 0xA5, 0x87, 0x96, 0x87, 0x87, 0x79, 0x69, 0x69, 0x69, 0x78, 0x78, //1903
-  0x86, 0xA5, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x78, 0x87, //1904
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1905
-  0x96, 0xA4, 0x96, 0x96, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1906
-  0x96, 0xA5, 0x87, 0x96, 0x87, 0x87, 0x79, 0x69, 0x69, 0x69, 0x78, 0x78, //1907
-  0x86, 0xA5, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1908
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1909
-  0x96, 0xA4, 0x96, 0x96, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1910
-  0x96, 0xA5, 0x87, 0x96, 0x87, 0x87, 0x79, 0x69, 0x69, 0x69, 0x78, 0x78, //1911
-  0x86, 0xA5, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1912
-  0x95, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1913
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1914
-  0x96, 0xA5, 0x97, 0x96, 0x97, 0x87, 0x79, 0x79, 0x69, 0x69, 0x78, 0x78, //1915
-  0x96, 0xA5, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1916
-  0x95, 0xB4, 0x96, 0xA6, 0x96, 0x97, 0x78, 0x79, 0x78, 0x69, 0x78, 0x87, //1917
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x77, //1918
-  0x96, 0xA5, 0x97, 0x96, 0x97, 0x87, 0x79, 0x79, 0x69, 0x69, 0x78, 0x78, //1919
-  0x96, 0xA5, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1920
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x78, 0x79, 0x78, 0x69, 0x78, 0x87, //1921
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x77, //1922
-  0x96, 0xA4, 0x96, 0x96, 0x97, 0x87, 0x79, 0x79, 0x69, 0x69, 0x78, 0x78, //1923
-  0x96, 0xA5, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1924
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x78, 0x79, 0x78, 0x69, 0x78, 0x87, //1925
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1926
-  0x96, 0xA4, 0x96, 0x96, 0x97, 0x87, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1927
-  0x96, 0xA5, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1928
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1929
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1930
-  0x96, 0xA4, 0x96, 0x96, 0x97, 0x87, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1931
-  0x96, 0xA5, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1932
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1933
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1934
-  0x96, 0xA4, 0x96, 0x96, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1935
-  0x96, 0xA5, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1936
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1937
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1938
-  0x96, 0xA4, 0x96, 0x96, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1939
-  0x96, 0xA5, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1940
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1941
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1942
-  0x96, 0xA4, 0x96, 0x96, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1943
-  0x96, 0xA5, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1944
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1945
-  0x95, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x78, 0x69, 0x78, 0x77, //1946
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1947
-  0x96, 0xA5, 0xA6, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //1948
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x79, 0x78, 0x79, 0x77, 0x87, //1949
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x78, 0x79, 0x78, 0x69, 0x78, 0x77, //1950
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x79, 0x79, 0x79, 0x69, 0x78, 0x78, //1951
-  0x96, 0xA5, 0xA6, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //1952
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1953
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x78, 0x79, 0x78, 0x68, 0x78, 0x87, //1954
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1955
-  0x96, 0xA5, 0xA5, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //1956
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1957
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1958
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1959
-  0x96, 0xA4, 0xA5, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //1960
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1961
-  0x96, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1962
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1963
-  0x96, 0xA4, 0xA5, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //1964
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1965
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1966
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1967
-  0x96, 0xA4, 0xA5, 0xA5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //1968
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1969
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1970
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x79, 0x69, 0x78, 0x77, //1971
-  0x96, 0xA4, 0xA5, 0xA5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //1972
-  0xA5, 0xB5, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1973
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1974
-  0x96, 0xB4, 0x96, 0xA6, 0x97, 0x97, 0x78, 0x79, 0x78, 0x69, 0x78, 0x77, //1975
-  0x96, 0xA4, 0xA5, 0xB5, 0xA6, 0xA6, 0x88, 0x89, 0x88, 0x78, 0x87, 0x87, //1976
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //1977
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x78, 0x87, //1978
-  0x96, 0xB4, 0x96, 0xA6, 0x96, 0x97, 0x78, 0x79, 0x78, 0x69, 0x78, 0x77, //1979
-  0x96, 0xA4, 0xA5, 0xB5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //1980
-  0xA5, 0xB4, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x77, 0x87, //1981
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1982
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x78, 0x79, 0x78, 0x69, 0x78, 0x77, //1983
-  0x96, 0xB4, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x87, //1984
-  0xA5, 0xB4, 0xA6, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //1985
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1986
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x79, 0x78, 0x69, 0x78, 0x87, //1987
-  0x96, 0xB4, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x86, //1988
-  0xA5, 0xB4, 0xA5, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //1989
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //1990
-  0x95, 0xB4, 0x96, 0xA5, 0x86, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1991
-  0x96, 0xB4, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x86, //1992
-  0xA5, 0xB3, 0xA5, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //1993
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1994
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x76, 0x78, 0x69, 0x78, 0x87, //1995
-  0x96, 0xB4, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x86, //1996
-  0xA5, 0xB3, 0xA5, 0xA5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //1997
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //1998
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //1999
-  0x96, 0xB4, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x86, //2000
-  0xA5, 0xB3, 0xA5, 0xA5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //2001
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //2002
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //2003
-  0x96, 0xB4, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x86, //2004
-  0xA5, 0xB3, 0xA5, 0xA5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //2005
-  0xA5, 0xB4, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //2006
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x69, 0x78, 0x87, //2007
-  0x96, 0xB4, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x87, 0x78, 0x87, 0x86, //2008
-  0xA5, 0xB3, 0xA5, 0xB5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //2009
-  0xA5, 0xB4, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //2010
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x78, 0x87, //2011
-  0x96, 0xB4, 0xA5, 0xB5, 0xA5, 0xA6, 0x87, 0x88, 0x87, 0x78, 0x87, 0x86, //2012
-  0xA5, 0xB3, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x87, //2013
-  0xA5, 0xB4, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //2014
-  0x95, 0xB4, 0x96, 0xA5, 0x96, 0x97, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //2015
-  0x95, 0xB4, 0xA5, 0xB4, 0xA5, 0xA6, 0x87, 0x88, 0x87, 0x78, 0x87, 0x86, //2016
-  0xA5, 0xC3, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x87, //2017
-  0xA5, 0xB4, 0xA6, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //2018
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //2019
-  0x95, 0xB4, 0xA5, 0xB4, 0xA5, 0xA6, 0x97, 0x87, 0x87, 0x78, 0x87, 0x86, //2020
-  0xA5, 0xC3, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x86, //2021
-  0xA5, 0xB4, 0xA5, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //2022
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x79, 0x77, 0x87, //2023
-  0x95, 0xB4, 0xA5, 0xB4, 0xA5, 0xA6, 0x97, 0x87, 0x87, 0x78, 0x87, 0x96, //2024
-  0xA5, 0xC3, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x86, //2025
-  0xA5, 0xB3, 0xA5, 0xA5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //2026
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //2027
-  0x95, 0xB4, 0xA5, 0xB4, 0xA5, 0xA6, 0x97, 0x87, 0x87, 0x78, 0x87, 0x96, //2028
-  0xA5, 0xC3, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x86, //2029
-  0xA5, 0xB3, 0xA5, 0xA5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //2030
-  0xA5, 0xB4, 0x96, 0xA5, 0x96, 0x96, 0x88, 0x78, 0x78, 0x78, 0x87, 0x87, //2031
-  0x95, 0xB4, 0xA5, 0xB4, 0xA5, 0xA6, 0x97, 0x87, 0x87, 0x78, 0x87, 0x96, //2032
-  0xA5, 0xC3, 0xA5, 0xB5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x86, //2033
-  0xA5, 0xB3, 0xA5, 0xA5, 0xA6, 0xA6, 0x88, 0x78, 0x88, 0x78, 0x87, 0x87, //2034
-  0xA5, 0xB4, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //2035
-  0x95, 0xB4, 0xA5, 0xB4, 0xA5, 0xA6, 0x97, 0x87, 0x87, 0x78, 0x87, 0x96, //2036
-  0xA5, 0xC3, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x86, //2037
-  0xA5, 0xB3, 0xA5, 0xA5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //2038
-  0xA5, 0xB4, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //2039
-  0x95, 0xB4, 0xA5, 0xB4, 0xA5, 0xA6, 0x97, 0x87, 0x87, 0x78, 0x87, 0x96, //2040
-  0xA5, 0xC3, 0xA5, 0xB5, 0xA5, 0xA6, 0x87, 0x88, 0x87, 0x78, 0x87, 0x86, //2041
-  0xA5, 0xB3, 0xA5, 0xB5, 0xA6, 0xA6, 0x88, 0x88, 0x88, 0x78, 0x87, 0x87, //2042
-  0xA5, 0xB4, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //2043
-  0x95, 0xB4, 0xA5, 0xB4, 0xA5, 0xA6, 0x97, 0x87, 0x87, 0x88, 0x87, 0x96, //2044
-  0xA5, 0xC3, 0xA5, 0xB4, 0xA5, 0xA6, 0x87, 0x88, 0x87, 0x78, 0x87, 0x86, //2045
-  0xA5, 0xB3, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x88, 0x78, 0x87, 0x87, //2046
-  0xA5, 0xB4, 0x96, 0xA5, 0xA6, 0x96, 0x88, 0x88, 0x78, 0x78, 0x87, 0x87, //2047
-  0x95, 0xB4, 0xA5, 0xB4, 0xA5, 0xA5, 0x97, 0x87, 0x87, 0x88, 0x86, 0x96, //2048
-  0xA4, 0xC3, 0xA5, 0xA5, 0xA5, 0xA6, 0x97, 0x87, 0x87, 0x78, 0x87, 0x86, //2049
-  0xA5, 0xC3, 0xA5, 0xB5, 0xA6, 0xA6, 0x87, 0x88, 0x78, 0x78, 0x87, 0x87 //2050
-           };
-
-        #endregion
-
-        #region Core
-
-        /// <summary>
-        /// 取得指定阴历年的阴历闰月月份。
-        /// </summary>
-        /// <param name="iLunarYear">年份。</param>
-        /// <returns>返回指定年的闰月月份。</returns>
-        private int GetLeapMonth(ushort iLunarYear)
-        {
-            byte Flag;
-            if (iLunarYear < START_YEAR || iLunarYear > END_YEAR)
-            {
-                return 0;
-            }
-
-            Flag = gLunarMonth[(iLunarYear - START_YEAR) / 2];
-            if ((iLunarYear - START_YEAR) % 2 == 0)
-            {
-                return Flag >> 4;
-            }
-            else
-            {
-                return Flag & 0x0F;
-            }
-        }
-
-
-        /// <summary>
-        /// 计算指定阴历年月的总天数。
-        /// </summary>
-        /// <param name="iLunarYear">年份。</param>
-        /// <param name="iLunarMonth">月份。</param>
-        /// <returns>
-        /// 返回阴历阴历年月的天数，如果该月为闰月，高字为第二个该月的天数，否则高字为0。
-        /// </returns>
-        /// <remarks>
-        /// 指定年月范围在1901年1月---2050年12月之间。
-        /// </remarks>
-        private uint GetLunarMonthDays(ushort iLunarYear, ushort iLunarMonth)
-        {
-            int Height, Low;
-            int iBit;
-            if (iLunarYear < START_YEAR || iLunarYear > END_YEAR)
-            {
-                return 30;
-            }
-            Height = 0;
-            Low = 29;
-            iBit = 16 - iLunarMonth;
-            if (iLunarMonth > GetLeapMonth(iLunarYear) && GetLeapMonth(iLunarYear) > 0)
-            {
-                iBit--;
-            }
-
-            if ((gLunarMonthDay[iLunarYear - START_YEAR] & (1 << iBit)) > 0)
-            {
-                Low++;
-            }
-
-            if (iLunarMonth == GetLeapMonth(iLunarYear))
-            {
-                if ((gLunarMonthDay[iLunarYear - START_YEAR] & (1 << (iBit - 1))) > 0)
-                {
-                    Height = 30;
-                }
-                else
-                {
-                    Height = 29;
-                }
-            }
-            return (uint)(Low) | (uint)(Height) << 16; //合成为uint
-        }
-
-
-        /// <summary>
-        /// 计算指定阴历年总天数。
-        /// </summary>
-        /// <param name="iLunarYear">指定阴历年，范围1901-2050。</param>
-        /// <returns>返指定阴历年的总天数。</returns>
-        private int GetLunarYearDays(ushort iLunarYear)
-        {
-            int Days;
-            uint tmp;
-            if (iLunarYear < START_YEAR || iLunarYear > END_YEAR)
-            {
-                return 0;
-            }
-
-            Days = 0;
-            for (ushort i = 1; i <= 12; i++)
-            {
-                tmp = GetLunarMonthDays(iLunarYear, i);
-                Days = Days + ((ushort)(tmp >> 16) & 0xFFFF); //取高位
-                Days = Days + (ushort)(tmp); //取低位
-            }
-            return Days;
-        }
-
-
-        /// <summary>
-        /// 计算从1901年1月1日过iSpanDays天后的阴历日期
-        /// </summary>
-        /// <param name="iYear">返回的年份。</param>
-        /// <param name="iMonth">返回的月份。</param>
-        /// <param name="iDay">返回的日子。</param>
-        /// <param name="iSpanDays">天数。</param>
-        private void CalcLunarDate(out ushort iYear, out ushort iMonth, out ushort iDay, uint iSpanDays)
-        {
-            uint tmp;
-            //阳历1901年2月19日为阴历1901年正月初一
-            //阳历1901年1月1日到2月19日共有49天
-            if (iSpanDays < 49)
-            {
-                iYear = START_YEAR - 1;
-                if (iSpanDays < 19)
-                {
-                    iMonth = 11;
-                    iDay = (ushort)(11 + iSpanDays);
-                }
-                else
-                {
-                    iMonth = 12;
-                    iDay = (ushort)(iSpanDays - 18);
-                }
-                return;
-            }
-
-            //下面从阴历1901年正月初一算起
-            iSpanDays = iSpanDays - 49;
-            iYear = START_YEAR;
-            iMonth = 1;
-            iDay = 1;
-            //计算年
-            tmp = (uint)GetLunarYearDays(iYear);
-            while (iSpanDays >= tmp)
-            {
-                iSpanDays = iSpanDays - tmp;
-                iYear++;
-                tmp = (uint)GetLunarYearDays(iYear);
-            }
-            //计算月
-            tmp = GetLunarMonthDays(iYear, iMonth); //取低位
-            while (iSpanDays >= tmp)
-            {
-                iSpanDays = iSpanDays - tmp;
-                if (iMonth == GetLeapMonth(iYear))
-                {
-                    tmp = (GetLunarMonthDays(iYear, iMonth) >> 16) & 0xFFFF; //取高位
-                    if (iSpanDays < tmp)
-                    {
-                        break;
-                    }
-                    iSpanDays = iSpanDays - tmp;
-                }
-                iMonth++;
-                tmp = GetLunarMonthDays(iYear, iMonth); //取低位
-            }
-            //计算日
-            iDay = (ushort)(iDay + iSpanDays);
-        }
-
-        #endregion
-
-        #region 星座
-
-        /// <summary>
-        /// 计算指定当前日期的星座序号。
-        /// </summary>
-        /// <returns>星座序号。</returns>
-        private int GetConstellationIndex()
-        {
-            int Y, M, D;
-            Y = m_Date.Year;
-            M = m_Date.Month;
-            D = m_Date.Day;
-            Y = M * 100 + D;
-            if (Y >= 321 && Y <= 419)
-            {
-                return 0;
-            }
-            else if (Y >= 420 && Y <= 520)
-            {
-                return 1;
-            }
-            else if (Y >= 521 && Y <= 620)
-            {
-                return 2;
-            }
-            else if (Y >= 621 && Y <= 722)
-            {
-                return 3;
-            }
-            else if (Y >= 723 && Y <= 822)
-            {
-                return 4;
-            }
-            else if (Y >= 823 && Y <= 922)
-            {
-                return 5;
-            }
-            else if (Y >= 923 && Y <= 1022)
-            {
-                return 6;
-            }
-            else if (Y >= 1023 && Y <= 1121)
-            {
-                return 7;
-            }
-            else if (Y >= 1122 && Y <= 1221)
-            {
-                return 8;
-            }
-            else if (Y >= 1222 || Y <= 119)
-            {
-                return 9;
-            }
-            else if (Y >= 120 && Y <= 218)
-            {
-                return 10;
-            }
-            else if (Y >= 219 && Y <= 320)
-            {
-                return 11;
-            }
-            else
-            {
-                return -1;
-            }
-        }
-
-
-        /// <summary>
-        /// 格式化星座序号为星座名称。
-        /// </summary>
-        /// <param name="ConstellationIndex">星座序号。</param>
-        /// <returns>星座名称。</returns>
-        private string FormatConstellation(int ConstellationIndex)
-        {
-            if (ConstellationIndex >= 0 && ConstellationIndex <= 11)
-            {
-                return ConstellationName[ConstellationIndex];
-            }
-            else
-            {
-                return "";
-            }
-        }
-
-        #endregion
-
-        #region 节气
-
-        /// <summary>
-        /// 计算公历当天对应的节气序号。
-        /// </summary>
-        /// <returns>返回值0-23为节气序号，-1表示不是节气。</returns>
-        private int GetSolarTermIndex()
-        {
-            byte Flag;
-            int Day, iYear, iMonth, iDay;
-            iYear = m_Date.Year;
-            if (iYear < START_YEAR || iYear > END_YEAR)
-            {
-                return -1;
-            }
-
-            iMonth = m_Date.Month;
-            iDay = m_Date.Day;
-            Flag = gLunarHolDay[(iYear - START_YEAR) * 12 + iMonth - 1];
-            if (iDay < 15)
-            {
-                Day = 15 - ((Flag >> 4) & 0x0f);
-            }
-            else
-            {
-                Day = (Flag & 0x0f) + 15;
-            }
-
-            if (iDay == Day)
-            {
-                if (iDay > 15)
-                {
-                    return (iMonth - 1) * 2 + 1;
-                }
-                else
-                {
-                    return (iMonth - 1) * 2;
-                }
-            }
-            else
-            {
-                return -1;
-            }
-        }
-
-
-        /// <summary>
-        /// 格式化节气序号为节气名称。
-        /// </summary>
-        /// <param name="SolarTermIndex">节气序号。</param>
-        /// <returns>节气名称。</returns>
-        private string FormatSolarTerm(int SolarTermIndex)
-        {
-            //string[] stroe = {"小寒", "大寒", "立春", "雨水", "惊蛰", "春分", "清明", "谷雨", "立夏", "小满", "芒种", "夏至", "小暑", "大暑", "立秋", "处暑", "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪", "冬至"};
-            if (SolarTermIndex <= this.LunarHolDayName.Length && SolarTermIndex >= 0)
-                return this.LunarHolDayName[SolarTermIndex];
-            return "";
-        }
-
-        #endregion
-
-        #region 年月日
-
-        /// <summary>
-        /// 格式化阴历月份。
-        /// </summary>
-        /// <param name="iYear">年份。</param>
-        /// <returns>干支记年。</returns>
-        private string FormatLunarYear(int iYear)
-        {
-            string strG = "甲乙丙丁戊己庚辛壬癸";
-            string strZ = "子丑寅卯辰巳午未申酉戌亥";
-            return strG.Substring((iYear - 4) % 10, 1) + strZ.Substring((iYear - 4) % 12, 1);
-        }
-
-
-        /// <summary>
-        /// 格式化阴历年份。
-        /// </summary>
-        /// <param name="iYear">年份。</param>
-        /// <returns>生肖。</returns>
-        private string FormatAnimalYear(int iYear)
-        {
-            string strSX = "鼠牛虎免龙蛇马羊猴鸡狗猪";
-            return strSX.Substring((iYear - 4) % 12, 1);
-        }
-
-
-        /// <summary>
-        /// 格式化阴历月份。
-        /// </summary>
-        /// <param name="iMonth">月份。</param>
-        /// <returns>中文月份。</returns>
-        private string FormatLunarMonth(int iMonth)
-        {
-            string szText = "正二三四五六七八九十";
-            if (iMonth <= 10) return szText.Substring(iMonth - 1, 1) + "月";
-            if (iMonth == 11) return "十一月";
-            if (iMonth == 12) return "十二月";
-            return "";
-        }
-
-
-        /// <summary>
-        /// 格式化阴历日子。
-        /// </summary>
-        /// <param name="iDay">日子。</param>
-        /// <returns>中文日子。</returns>
-        private string FormatLunarDay(int iDay)
-        {
-            string szText1 = "初十廿三";
-            string szText2 = "一二三四五六七八九十";
-            string strDay = "";
-            if (iDay != 20 && iDay != 30)
-            {
-                try
-                {
-                    strDay = szText1.Substring((iDay - 1) / 10, 1);
-                    strDay = strDay + szText2.Substring((iDay - 1) % 10, 1);
-                }
-                catch (Exception)
-                {
-
-                }
-            }
-            else
-            {
-                strDay = szText1.Substring((iDay / 10), 1);
-                strDay = strDay + "十";
-            }
-            return strDay;
-        }
-
-        #endregion
-
-        #region OutPut
-
-        /// <summary>阴历日期,以LunarDate(年日月)形式表示。</summary>
-        public LunarDate1 LunarDate
-        {
-            get
-            {
-                if (this.m_LunarDate == null)
-                {
-                    ushort iYear, iMonth, iDay;
-                    TimeSpan ts = m_Date - (new DateTime(START_YEAR, 1, 1));
-                    this.CalcLunarDate(out iYear, out iMonth, out iDay, (uint)(ts.Days));
-                    this.m_LunarDate = new LunarDate1(iYear, iMonth, iDay);
-                }
-                return this.m_LunarDate;
-            }
-        }
-
-
-        /// <summary>阴历干支记年。</summary>
-        public string LunarYear
-        {
-            get
-            {
-                if (m_LunarYear == "")
-                    this.m_LunarYear = this.FormatLunarYear(this.LunarDate.Year);
-                return this.m_LunarYear;
-            }
-        }
-
-
-        /// <summary>阴历生肖。</summary>
-        public string Animal
-        {
-            get
-            {
-                if (m_Animal == "")
-                    this.m_Animal = this.FormatAnimalYear(this.LunarDate.Year);
-                return this.m_Animal;
-            }
-        }
-
-
-        /// <summary>格式化后的阴历月份。</summary>
-        public string LunarMonth
-        {
-            get
-            {
-                if (this.m_LunarMonth == "")
-                    this.m_LunarMonth = this.FormatLunarMonth(ushort.Parse(this.LunarDate.Month.ToString()));
-                return this.m_LunarMonth;
-            }
-        }
-
-        /// <summary>格式化后的阴历日子。</summary>
-        public string LunarDay
-        {
-            get
-            {
-                if (this.m_LunarDay == "")
-                    this.m_LunarDay = this.FormatLunarDay(ushort.Parse(this.LunarDate.Day.ToString()));
-                if (this.m_LunarDay == "初一")
-                {
-                    this.m_LunarDay = this.LunarMonth;
-                }
-                return this.m_LunarDay;
-            }
-        }
-
-
-        /// <summary>格式化后的阴历节气。</summary>
-        public string SolarTerm
-        {
-            get
-            {
-                if (this.m_SolarTerm == "")
-                    this.m_SolarTerm = this.FormatSolarTerm(this.GetSolarTermIndex());
-                return this.m_SolarTerm;
-            }
-        }
-
-
-        /// <summary>格式化后的星座。</summary>
-        public string Constellation
-        {
-            get
-            {
-                if (this.m_Constellation == "")
-                    this.m_Constellation = this.FormatConstellation(this.GetConstellationIndex());
-                return this.m_Constellation;
-            }
-        }
-
-        #endregion
-    }
-
-    public class LunarDate1
-    {
-        private int _y, _m, _d;
-        private string lunardate = "";
-        private string lunarmonth = "", lunarday = "", lunaryear = "";
-        private string solarterm = "", animal = "";
-
-
-        public LunarDate1(DateTime dt)
-        {
-            LunarDateClass ldc = new LunarDateClass(dt);
-            this.lunarday = ldc.LunarDay;
-            this.lunarmonth = ldc.LunarMonth;
-            this.lunaryear = ldc.LunarYear;
-            this.solarterm = ldc.SolarTerm;
-            this.animal = ldc.Animal;
-            this.lunardate = this.lunaryear + "(" + this.animal + ")年" + this.lunarmonth + this.lunarday + (this.solarterm == "" ? "" : " " + this.solarterm);
-            this._y = ldc.LunarDate.Year;
-            this._m = ldc.LunarDate.Month;
-            this._d = ldc.LunarDate.Day;
-        }
-        public LunarDate1(int y, int m, int d)
-        {
-            this._y = y;
-            this._m = m;
-            this._d = d;
-        }
-
-        public int Year
-        {
-            get { return this._y; }
-        }
-
-
-        public int Month
-        {
-            get { return this._m; }
-        }
-
-
-        public int Day
-        {
-            get { return this._d; }
-        }
-
-
-        public string LunarDay
-        {
-            get
-            {
-                return this.lunarday;
-            }
-        }
-
-
-        public string LunarMonth
-        {
-            get
-            {
-                return this.lunarmonth;
-            }
-        }
-
-
-        public string LunarYear
-        {
-            get
-            {
-                return this.lunaryear;
-            }
-        }
-
-
-        public string SolarTerm
-        {
-            get
-            {
-                return this.solarterm;
-            }
-        }
-
-
-        public string Animal
-        {
-            get
-            {
-                return this.animal;
-            }
-        }
-
-
-        public new string ToString()
-        {
-            return this.lunardate;
-        }
-
-    }
-
-
-    #endregion
-
-
-
-    public class LunarDate2
-    {
-        public const int MAX_YEAR = 2011;
-        public const int MIN_YEAR = 1900;
-
-        static readonly string[] lookupTable = new string[] 
-    { 
-        "0100101101101080131", "0100101011100000219", "1010010101110000208",
-        "0101001001101050129", "1101001001100000216", "1101100101010000204",
-        "0110101010101040125", "0101011010100000213", "1001101011010000202", 
-        "0100101011101020122", "0100101011100000210", "1010010011011060130",
-        "1010010011010000218", "1101001001010000206", "1101010101001050126",
-        "1011010101010000214", "0101011010100000204", "1001011011010020123", 
-        "1001010110110000211", "0100100110111070201", "0100100110110000220", 
-        "1010010010110000208", "1011001001011050128", "0110101001010000216", 
-        "0110110101000000205", "1010110110101040124", "0010101101100000213", 
-        "1001010101110000202", "0100100101111020123", "0100100101110000210", 
-        "0110010010110060130", "1101010010100000217", "1110101001010000206", 
-        "0110110101001050126", "0101101011010000214", "0010101101100000204", 
-        "1001001101110030124", "1001001011100000211", "1100100101101070131", 
-        "1100100101010000219", "1101010010100000208", "1101101001010060127",
-        "1011010101010000215", "0101011010100000205", "1010101011011040125", 
-        "0010010111010000213", "1001001011010000202", "1100100101011020122", 
-        "1010100101010000210", "1011010010101070129", "0110110010100000217", 
-        "1011010101010000206", "0101010110101050127", "0100110110100000214", 
-        "1010010110110000203", "0101001010111030124", "0101001010110000212", 
-        "1010100101010080131", "1110100101010000218", "0110101010100000208", 
-        "1010110101010060128", "1010101101010000215", "0100101101100000205",
-        "1010010101110040125", "1010010101110000213", "0101001001100000202",
-        "1110100100110030121", "1101100101010000209", "0101101010101070130",
-        "0101011010100000217", "1001011011010000206", "0100101011101050127",
-        "0100101011010000215", "1010010011010000203", "1101001001101040123",
-        "1101001001010000211", "1101010100101080131", "1011010101000000218",
-        "1011011010100000207", "1001011011010060128", "1001010110110000216", 
-        "0100100110110000205", "1010010010111040125", "1010010010110000213", 
-        "1011001001011100202", "0110101001010000220", "0110110101000000209", 
-        "1010110110101060129", "1010101101100000217", "1001001101110000206",
-        "0100100101111050127", "0100100101110000215", "0110010010110000204", 
-        "0110101001010030123", "1110101001010000210", "0110101100101080131",
-        "0101101011000000219", "1010101101100000207", "1001001101101050128", 
-        "1001001011100000216", "1100100101100000205", "1101010010101040124",
-        "1101010010100000212", "1101101001010000201", "0101101010101020122",
-        "0101011010100000209", "1010101011011070129", "0010010111010000218",
-        "1001001011010000207", "1100100101011050126", "1010100101010000214",
-        "1011010010100000214" 
-    };
-
-        /**/
-        /// <summary>十二生肖</summary>
-        static readonly string animalsTable = "鼠牛虎兔龍蛇馬羊猴雞狗豬";
-        static readonly string monthsTable = "正二三四五六七八九十寒臘";
-        static readonly string daysTable = "初一初二初三初四初五初六初七初八初九初十十一十二十三十四十五十六十七十八十九二十廿一廿二廿三廿四廿五廿六廿七廿八廿九三十";
-
-        /**/
-        /// <summary>天干地支</summary>
-        static readonly string[] chineseEra;
-        static LunarDate2()
-        {
-            string sky = "甲乙丙丁戊已庚辛壬癸";        //天干
-            string earth = "子丑寅卯辰巳午未申酉戌亥";  //地支
-            chineseEra = new string[60];
-            for (int i = 0; i < 60; i++)
-                chineseEra[i] = sky.Substring(i % 10, 1) + earth.Substring(i % 12, 1);
-        }
-
-        public LunarDate2(int year, int month, int day)
-        {
-            if ((year < MIN_YEAR) || (year > MAX_YEAR))
-                throw new ArgumentOutOfRangeException("year too large or too small");
-
-            // 計算農歷年
-            int lunarYear;
-            int lunarMonth;
-            int lunarDay;
-
-            lunarYear = year;
-            // 農歷新年月份
-            lunarMonth = Convert.ToInt32((lookupTable[lunarYear - MIN_YEAR].Substring(15, 2)));
-            // 農歷新年日子
-            lunarDay = Convert.ToInt32((lookupTable[lunarYear - MIN_YEAR].Substring(17, 2))); ;
-            if ((month < lunarMonth) || ((month == lunarMonth) && (day < lunarDay)))
-            {
-                lunarYear--;
-                // 農歷新年月份
-                lunarMonth = Convert.ToInt32((lookupTable[lunarYear - MIN_YEAR].Substring(15, 2)));
-                // 農歷新年日子
-                lunarDay = Convert.ToInt32((lookupTable[lunarYear - MIN_YEAR].Substring(17, 2))); ;
-            }
-
-            // 計算農歷月
-            DateTime date = new DateTime(year, month, day);
-            DateTime lunarDate2 = new DateTime(lunarYear, lunarMonth, lunarDay);
-            TimeSpan span = date - lunarDate2;
-            int dayCount = span.Days;
-            lunarMonth = 1;
-            lunarDay = 1;
-            bool leapMonth = false; //閏月
-            for (int i = 0; i < dayCount; i++)
-            {
-                lunarDay++;
-                if (lunarDay == 30 + Convert.ToInt32(lookupTable[lunarYear - MIN_YEAR].Substring(lunarMonth - 1, 1)) ||
-                (leapMonth == true && (lunarDay == 30 + Convert.ToInt32(lookupTable[lunarYear - MIN_YEAR].Substring(12, 1)))))
-                {
-                    if (
-                        (leapMonth == false) &&
-                        (lunarMonth == Convert.ToInt32(lookupTable[lunarYear - MIN_YEAR].Substring(13, 2)))
-                        )
-                    {
-                        leapMonth = true;
-                    }
-                    else
-                    {
-                        leapMonth = false;
-                        lunarMonth++;
-                    }
-                    lunarDay = 1;
-                }
-                else
-                {
-                }
-            }
-
-            // 計算農歷日
-            lunarDayText = daysTable.Substring((lunarDay - 1) * 2, 2);
-            // 計算農歷月
-            lunarMonthText = monthsTable.Substring(lunarMonth - 1, 1) + "月";
-            if (leapMonth == true) lunarMonthText = "閏" + lunarMonthText;
-            // 農歷年
-            lunarYearText = Convert.ToString(lunarYear, 10) + "年";
-            // 計算天干地支
-            chineseEarText = chineseEra[(lunarYear - 4) % 60];
-            // 計算生肖
-            aminalsText = animalsTable.Substring((lunarYear - 4) % 12, 1);
-        }
-
-        //農歷日
-        private string lunarDayText;
-        public string LunarDay { get { return this.lunarDayText; } }
-
-        //農歷月
-        private string lunarMonthText;
-        public string LunarMonth { get { return this.lunarMonthText; } }
-
-        //農歷年
-        private string lunarYearText;
-        public string LunarYear { get { return this.lunarYearText; } }
-
-        //天干地支
-        private string chineseEarText;
-        public string chineseEar { get { return this.chineseEarText; } }
-
-        //生肖
-        private string aminalsText;
-        public string Aminals { get { return this.aminalsText; } }
-
-        public override string ToString()
-        {
-            return aminalsText + "," + chineseEarText + "," + lunarYearText + lunarMonthText + lunarDayText;
-        }
-    }
-
-    class Calendar
-    {
-        /// <summary>
-        /// 輸入年月日，得到這天是星期幾
-        /// </summary>
-        /// <param name="year">年</param>
-        /// <param name="month">月</param>
-        /// <param name="day">日</param>
-        /// <returns>星期幾</returns>
-        private static int GetWeekByDay(int year, int month, int day)
-        {
-            DateTime dt = new DateTime(year, month, day);
-            return (int)dt.DayOfWeek;
-        }
-
-        /// <summary>
-        /// 獲取某個月的天數，輸入(int)年份，月份，回傳天數(int)
-        /// </summary>
-        /// <param name="year">年</param>
-        /// <param name="month">月</param>
-        /// <returns>天數</returns>
-        private static int GetMonthDay(int year, int month)
-        {
-            int thismonthdays = DateTime.DaysInMonth(year, month);
-            return thismonthdays;
-        }
-        /// <summary>
-        /// 列印年歷
-        /// </summary>
-        /// <param name="year"></param>
-        public void Printdate(int year)
-        {
-            int nextlinecount;//使用一個計數器沒過一天就加1，逢7換行
-            for (int month = 1; month <= 12; month++)
-            {
-                nextlinecount = 0;//計數器每個月開始需要進行初始化
-                Console.WriteLine("{0}年{1}月", year, month);
-                Console.WriteLine("星期天\t 星期一\t 星期二\t 星期三\t 星期四\t 星期五\t 星期六\t");
-                //獲取每個月第一天是星期幾然后輸出對應次數的空格
-                for (int count = 1; count <= GetWeekByDay(year, month, 1); count++)
-                {
-                    Console.Write(" \t ");
-                    nextlinecount++;//計數器增加，這里的空的是上個月的日子
-                }
-                for (int day = 1; day <= GetMonthDay(year, month); day++)
-                {
-                    if (nextlinecount % 7 == 0)//每次列印日期前先判斷是否為周六，逢7換行
-                        Console.WriteLine();
-                    Console.Write(day + "\t ");
-                    nextlinecount++;
-                }
-                Console.WriteLine();
-                Console.WriteLine();
-                Console.WriteLine("=========================================================================");
-                Console.WriteLine();
-            }
         }
     }
 
@@ -5081,7 +3079,7 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
         {
             int _hour, _minute, offset, i;
             int indexGan;
-            string ganHour, zhiHour;
+            //string ganHour, zhiHour;
             string tmpGan;
             //计算时辰的地支
             _hour = dt.Hour;    //获得当前时间小时
@@ -5855,3 +3853,48 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
         #endregion
     }
 }
+
+//6060
+//------------------------------------------------------------
+//
+
+
+/*
+
+this.Date = DateTime.Today;
+
+        /// <summary>天干地支</summary>
+        static readonly string[] chineseEra;
+        static LunarDate2()
+        {
+            string sky = "甲乙丙丁戊已庚辛壬癸";        //天干
+            string earth = "子丑寅卯辰巳午未申酉戌亥";  //地支
+            chineseEra = new string[60];
+            for (int i = 0; i < 60; i++)
+                chineseEra[i] = sky.Substring(i % 10, 1) + earth.Substring(i % 12, 1);
+        }
+        
+        
+        
+                private string FormatLunarYear(int iYear)
+        {
+            string strG = "甲乙丙丁戊己庚辛壬癸";
+            string strZ = "子丑寅卯辰巳午未申酉戌亥";
+            return strG.Substring((iYear - 4) % 10, 1) + strZ.Substring((iYear - 4) % 12, 1);
+        }
+
+        private string FormatAnimalYear(int iYear)
+        {
+            string strSX = "鼠牛虎免龙蛇马羊猴鸡狗猪";
+            return strSX.Substring((iYear - 4) % 12, 1);
+        }
+
+
+                year = DateTime.Now.Year;
+                month = DateTime.Now.Month;
+                day = DateTime.Now.Day;
+
+
+*/
+
+
