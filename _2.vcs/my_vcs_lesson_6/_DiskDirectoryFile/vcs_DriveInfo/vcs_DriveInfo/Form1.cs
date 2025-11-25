@@ -133,11 +133,6 @@ namespace vcs_DriveInfo
             {
                 richTextBox1.Text += "磁碟未Ready\n";
             }
-
-
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -301,9 +296,6 @@ namespace vcs_DriveInfo
 
             b = new SolidBrush(Color.White);
             g.FillEllipse(b, WIDTH / 4, WIDTH / 4, WIDTH / 2, WIDTH / 2);
-
-
-
         }
 
         //移除按鈕部分,  一趟並不會將所有panel上的button回傳, 所以加入while迴圈, 真是神奇驚訝 
@@ -326,13 +318,10 @@ namespace vcs_DriveInfo
                     }
                 }
                 if (flag_do_remove_this == false)
+                {
                     flag_do_remove = false;
+                }
             }
         }
-
-
-
-
-
     }
 }

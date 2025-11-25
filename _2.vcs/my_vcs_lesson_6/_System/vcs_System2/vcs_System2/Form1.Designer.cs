@@ -81,7 +81,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 50);
             this.button2.TabIndex = 2;
-            this.button2.Text = "list special folders";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -167,6 +166,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 50);
             this.button10.TabIndex = 11;
+            this.button10.Text = "檢測系統啟動模式";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -187,7 +187,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 50);
             this.button12.TabIndex = 13;
-            this.button12.Text = "是否安裝音效卡";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -198,7 +197,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(200, 50);
             this.button13.TabIndex = 14;
-            this.button13.Text = "光碟機打開";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -209,7 +207,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 50);
             this.button14.TabIndex = 15;
-            this.button14.Text = "光碟機關閉";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -252,7 +249,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(200, 50);
             this.button19.TabIndex = 20;
-            this.button19.Text = "設置系統日期和時間";
+            this.button19.Text = "使用Class取得系統資訊";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -273,7 +270,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(200, 50);
             this.button25.TabIndex = 25;
-            this.button25.Text = "獲取本機所有SQLServer引擎";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -304,7 +300,6 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(200, 50);
             this.button29.TabIndex = 28;
-            this.button29.Text = "使用Class取得系統資訊";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
@@ -325,7 +320,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 50);
             this.button1.TabIndex = 0;
-            this.button1.Text = "get volume information";
+            this.button1.Text = "獲取本機所有SQLServer引擎";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -347,7 +342,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 50);
             this.button0.TabIndex = 50;
-            this.button0.Text = "get os version";
+            this.button0.Text = "判斷電腦中是否安裝了SQL軟體";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -410,7 +405,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(200, 50);
             this.button20.TabIndex = 21;
-            this.button20.Text = "系統已經安裝的打印機訊息";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -421,7 +415,6 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(200, 50);
             this.button28.TabIndex = 29;
-            this.button28.Text = "檢測系統啟動模式";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -432,7 +425,6 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(200, 50);
             this.button24.TabIndex = 52;
-            this.button24.Text = "判斷電腦中是否安裝了SQL軟體";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 

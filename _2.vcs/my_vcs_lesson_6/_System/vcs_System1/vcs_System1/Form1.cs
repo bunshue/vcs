@@ -233,9 +233,21 @@ namespace vcs_System1
             richTextBox1.Text += "Line Status:\t" + status.PowerLineStatus.ToString() + "\n";
         }
 
+        //是否安裝音效卡 ST
+        [DllImport("winmm.dll", EntryPoint = "waveOutGetNumDevs")]
+        public static extern int waveOutGetNumDevs();
         private void button1_Click(object sender, EventArgs e)
         {
+            if (waveOutGetNumDevs() != 0)
+            {
+                richTextBox1.Text += "已安裝音效卡\n";
+            }
+            else
+            {
+                richTextBox1.Text += "未安裝音效卡\n";
+            }
         }
+        //是否安裝音效卡 SP
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -584,8 +596,21 @@ namespace vcs_System1
 
         }
 
+        // List the folder types.
         private void button8_Click(object sender, EventArgs e)
         {
+            //Environment.SpecialFolder
+            foreach (Environment.SpecialFolder folder_type in Enum.GetValues(typeof(Environment.SpecialFolder)))
+            {
+                DescribeFolder(folder_type);
+            }
+            richTextBox1.Select(0, 0);
+        }
+
+        // Add a folder's information to the txtFolders TextBox.
+        private void DescribeFolder(Environment.SpecialFolder folder_type)
+        {
+            richTextBox1.AppendText(String.Format("{0,-25}", folder_type.ToString()) + Environment.GetFolderPath(folder_type) + "\r\n");
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -628,7 +653,31 @@ namespace vcs_System1
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //get os version
+            OperatingSystem os_info = System.Environment.OSVersion;
+            richTextBox1.Text += os_info.VersionString + "\n\nWindows " + GetOsName(os_info) + "\n";
         }
+
+        // Return the OS name.
+        private string GetOsName(OperatingSystem os_info)
+        {
+            string version =
+                os_info.Version.Major.ToString() + "." +
+                os_info.Version.Minor.ToString();
+            switch (version)
+            {
+                case "10.0": return "10/Server 2016";
+                case "6.3": return "8.1/Server 2012 R2";
+                case "6.2": return "8/Server 2012";
+                case "6.1": return "7/Server 2008 R2";
+                case "6.0": return "Server 2008/Vista";
+                case "5.2": return "Server 2003 R2/Server 2003/XP 64-Bit Edition";
+                case "5.1": return "XP";
+                case "5.0": return "2000";
+            }
+            return "Unknown";
+        }
+
 
         private void button12_Click(object sender, EventArgs e)
         {
@@ -651,8 +700,45 @@ namespace vcs_System1
             richTextBox1.Text += "VersionInfo: " + FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
         }
 
+        [DllImport("kernel32.dll")]
+        private static extern long GetVolumeInformation(
+            string PathName,
+            StringBuilder VolumeNameBuffer,
+            UInt32 VolumeNameSize,
+            ref UInt32 VolumeSerialNumber,
+            ref UInt32 MaximumComponentLength,
+            ref UInt32 FileSystemFlags,
+            StringBuilder FileSystemNameBuffer,
+            UInt32 FileSystemNameSize
+        );
+
         private void button13_Click(object sender, EventArgs e)
         {
+            string drive_letter = drive_letter = "c:\\";
+
+            uint serial_number = 0;
+            uint max_component_length = 0;
+            StringBuilder sb_volume_name = new StringBuilder(256);
+            UInt32 file_system_flags = new UInt32();
+            StringBuilder sb_file_system_name = new StringBuilder(256);
+
+            if (GetVolumeInformation(drive_letter, sb_volume_name,
+                (UInt32)sb_volume_name.Capacity, ref serial_number,
+                ref max_component_length, ref file_system_flags,
+                sb_file_system_name,
+                (UInt32)sb_file_system_name.Capacity) == 0)
+            {
+                MessageBox.Show("Error getting volume information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                //richTextBox1.Text +=
+                richTextBox1.Text += "Volume Name\t" + sb_volume_name.ToString() + "\n";
+                richTextBox1.Text += "Serial Number\t" + serial_number.ToString() + "\n";
+                richTextBox1.Text += "Max Component Length\t" + max_component_length.ToString() + "\n";
+                richTextBox1.Text += "File System\t" + sb_file_system_name.ToString() + "\n";
+                richTextBox1.Text += "Flags\t" + "&&H" + file_system_flags.ToString("x") + "\n";
+            }
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -753,9 +839,52 @@ namespace vcs_System1
             chk.ShowDialog();
         }
 
+        //設置系統日期和時間 ST
+        public class SetSystemDateTime
+        {
+            [DllImportAttribute("Kernel32.dll")]
+            public static extern void GetLocalTime(SystemTime st);
+            [DllImportAttribute("Kernel32.dll")]
+            public static extern void SetLocalTime(SystemTime st);
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public class SystemTime
+        {
+            public ushort vYear;
+            public ushort vMonth;
+            public ushort vDayOfWeek;
+            public ushort vDay;
+            public ushort vHour;
+            public ushort vMinute;
+            public ushort vSecond;
+        }
+
         private void button22_Click(object sender, EventArgs e)
         {
+            //設置系統日期和時間
+            //Romeo可用 Sugar不可用
+            //DateTime Year = this.dateTimePicker1.Value;
+            SystemTime MySystemTime = new SystemTime();
+            SetSystemDateTime.GetLocalTime(MySystemTime);
+            /*
+            MySystemTime.vYear = (ushort)this.dateTimePicker1.Value.Year;
+            MySystemTime.vMonth = (ushort)this.dateTimePicker1.Value.Month;
+            MySystemTime.vDay = (ushort)this.dateTimePicker1.Value.Day;
+            MySystemTime.vHour = (ushort)this.dateTimePicker2.Value.Hour;
+            MySystemTime.vMinute = (ushort)this.dateTimePicker2.Value.Minute;
+            MySystemTime.vSecond = (ushort)this.dateTimePicker2.Value.Second;
+            */
+            MySystemTime.vYear = 2021;
+            MySystemTime.vMonth = 11;
+            MySystemTime.vDay = 3;
+            MySystemTime.vHour = 23;
+            MySystemTime.vMinute = 37;
+            MySystemTime.vSecond = 00;
+
+            SetSystemDateTime.SetLocalTime(MySystemTime);
         }
+        //設置系統日期和時間 SP
 
         private void button23_Click(object sender, EventArgs e)
         {
@@ -873,19 +1002,74 @@ namespace vcs_System1
             System.Diagnostics.Process.Start("mmsys.cpl");
         }
 
+        //光碟機開關 ST
+        [DllImport("winmm.dll", EntryPoint = "mciSendString")]
+        public static extern int mciSendString(string lpstrCommand, string lpstrReturnString, System.UInt16 uReturnLength, System.IntPtr HwndCallback);
         private void button31_Click(object sender, EventArgs e)
         {
-
+            //打開光碟機
+            int result = mciSendString("Set cdaudio door open wait", "", 0, this.Handle);
+            if (result == 0)
+            {
+                richTextBox1.Text += "光碟機打開\n";
+            }
         }
 
         private void button32_Click(object sender, EventArgs e)
         {
-
+            //關閉光碟機
+            int result = mciSendString("Set cdaudio door Closed wait", "", 0, this.Handle);
+            if (result == 0)
+            {
+                richTextBox1.Text += "光碟機關閉\n";
+            }
         }
+        //光碟機開關 SP
+
+        /* 另外的寫法
+        [DllImport("winmm.dll", EntryPoint = "mciSendString", CharSet = CharSet.Auto)]
+        public static extern int mciSendString(string lpstrCommand, string lpstrReturnstring, int uReturnLength, int hwndCallback);
+
+        public static void 彈出光驅()
+        {
+            mciSendString("set CDAudio door open", null, 127, 0);
+        }
+
+        public static void 關閉光驅()
+        {
+            mciSendString("set CDAudio door closed", null, 127, 0);
+        }
+        */
 
         private void button33_Click(object sender, EventArgs e)
         {
-
+            //系統已經安裝的打印機訊息
+            foreach (string mPrinterName in System.Drawing.Printing.PrinterSettings.InstalledPrinters)
+            {
+                richTextBox1.Text += "打印機名稱：" + mPrinterName + "\n";
+                System.Drawing.Printing.PrinterSettings mprinter = new System.Drawing.Printing.PrinterSettings();
+                mprinter.PrinterName = mPrinterName;
+                if (mprinter.IsValid)
+                {
+                    foreach (System.Drawing.Printing.PrinterResolution resolution in mprinter.PrinterResolutions)
+                    {
+                        richTextBox1.Text += "分  辨  率：" + resolution.ToString() + "\n";
+                    }
+                    string prinsize = "";
+                    foreach (System.Drawing.Printing.PaperSize size in mprinter.PaperSizes)
+                    {
+                        if (Enum.IsDefined(size.Kind.GetType(), size.Kind))
+                        {
+                            prinsize += size.ToString() + "\n";
+                        }
+                    }
+                    richTextBox1.AppendText("打 印 尺寸：\n" + prinsize + "\n");
+                }
+                else
+                {
+                    richTextBox1.Text += "XXXXXXXX\n";
+                }
+            }
         }
 
         private void button34_Click(object sender, EventArgs e)

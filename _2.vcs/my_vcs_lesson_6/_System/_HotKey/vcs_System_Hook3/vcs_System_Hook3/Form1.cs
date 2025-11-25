@@ -38,7 +38,6 @@ namespace vcs_System_Hook3
             public int dwExtraInfo;
         }
 
-        #region DllImport
         //設置鉤子
         [DllImport("user32.dll")]
         public static extern int SetWindowsHookEx(int idHook, HookProc lpfn, IntPtr hInstance, int threadId);
@@ -149,12 +148,6 @@ namespace vcs_System_Hook3
             return CallNextHookEx(hHook, nCode, wParam, lParam);
         }
 
-        #endregion
-
-
-
-
-
         public Form1()
         {
             InitializeComponent();
@@ -175,13 +168,11 @@ namespace vcs_System_Hook3
             //    RegistryKey r = Registry.CurrentUser.CreateSubKey("Software//Microsoft//Windows//CurrentVersion//Policies//System");
             //    r.SetValue("DisableTaskMgr", "0");
             //}
-
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Hook_Clear();
-
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
@@ -190,3 +181,4 @@ namespace vcs_System_Hook3
         }
     }
 }
+

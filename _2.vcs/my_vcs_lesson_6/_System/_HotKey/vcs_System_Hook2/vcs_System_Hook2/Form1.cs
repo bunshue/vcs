@@ -18,7 +18,7 @@ namespace vcs_System_Hook2
         //委托
         public delegate int HookProc(int nCode, int wParam, IntPtr lParam);
         static int hHook = 0;
-        public const int WH_KEYBOARD_LL = 13;
+        public const int WH_KEYBOARD_LL = 13; // ESC
         //LowLevel鍵盤截獲，如果是WH_KEYBOARD＝2，並不能對系統鍵盤截取，Acrobat Reader會在你截取之前獲得鍵盤。
         HookProc KeyBoardHookProcedure;
         //鍵盤Hook結構函數
@@ -31,7 +31,7 @@ namespace vcs_System_Hook2
             public int time;
             public int dwExtraInfo;
         }
-        #region DllImport
+
         //設置鉤子
         [DllImport("user32.dll")]
         public static extern int SetWindowsHookEx(int idHook, HookProc lpfn, IntPtr hInstance, int threadId);
@@ -48,8 +48,6 @@ namespace vcs_System_Hook2
         [DllImport("kernel32.dll")]
         public static extern IntPtr GetModuleHandle(string name);
 
-        #endregion
-        #region 自定義事件
         public void Hook_Start()
         {
             richTextBox1.Text += "安裝鍵盤鉤子\n";
@@ -118,7 +116,6 @@ namespace vcs_System_Hook2
             }
             return CallNextHookEx(hHook, nCode, wParam, lParam);
         }
-        #endregion
 
         public Form1()
         {
@@ -131,7 +128,6 @@ namespace vcs_System_Hook2
             richTextBox1.Text += "攔截目標 : Ctrl + Alt + Y\n";
             richTextBox1.Text += "攔截目標 : X\n";
             richTextBox1.Text += "攔截目標 : 系統開始菜單\n";
-
             richTextBox1.Text += "未啟動攔截\n";
         }
 

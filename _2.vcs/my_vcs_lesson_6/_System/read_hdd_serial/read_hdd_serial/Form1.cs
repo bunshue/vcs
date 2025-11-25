@@ -20,8 +20,27 @@ namespace read_hdd_serial
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            IDE ide = new IDE();            
+
 
         }
+
+
     }
 
     //C#讀硬盤序列號的原代碼
@@ -235,6 +254,4 @@ namespace read_hdd_serial
             return "";
         }
     }
-
-
 }

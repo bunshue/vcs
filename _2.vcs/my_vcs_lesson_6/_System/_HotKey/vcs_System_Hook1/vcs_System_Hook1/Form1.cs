@@ -29,7 +29,7 @@ namespace vcs_System_Hook1
 
         public delegate int HookProc(int nCode, int wParam, IntPtr lParam);
         static int hHook = 0;
-        public const int WH_KEYBOARD_LL = 13;   //ESC
+        public const int WH_KEYBOARD_LL = 13; // ESC
 
         //LowLevel鍵盤截獲，如果是WH_KEYBOARD＝2，並不能對系統鍵盤截取，Acrobat Reader會在你截取之前獲得鍵盤。
         HookProc KeyBoardHookProcedure;
@@ -63,6 +63,7 @@ namespace vcs_System_Hook1
 
         public void Hook_Start()
         {
+            richTextBox1.Text += "安裝鍵盤鉤子\n";
             // 安裝鍵盤鉤子
             if (hHook == 0)
             {
@@ -80,7 +81,6 @@ namespace vcs_System_Hook1
                 if (hHook == 0)
                 {
                     Hook_Clear();
-
                     //throw new Exception("設置Hook失敗!");
                 }
             }
@@ -89,6 +89,7 @@ namespace vcs_System_Hook1
         //取消鉤子事件
         public void Hook_Clear()
         {
+            richTextBox1.Text += "取消鍵盤鉤子\n";
             bool retKeyboard = true;
             if (hHook != 0)
             {
@@ -96,8 +97,10 @@ namespace vcs_System_Hook1
                 hHook = 0;
             }
             //如果去掉鉤子失敗.
-            if (!retKeyboard) throw new Exception("UnhookWindowsHookEx failed.");
-
+            if (!retKeyboard)
+            {
+                throw new Exception("UnhookWindowsHookEx failed.");
+            }
         }
 
         //這裡可以添加自己想要的信息處理
@@ -105,7 +108,6 @@ namespace vcs_System_Hook1
         {
             this.Text = "抓到ESC";
             richTextBox1.Text += "抓到ESC\n";
-
             return 0;
         }
 
@@ -119,21 +121,21 @@ namespace vcs_System_Hook1
 
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            //ST
+            richTextBox1.Text += "啟動攔截\n";
             Hook_Start();
-            this.Text = "啟動";
-            richTextBox1.Text += "啟動 Hook\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //SP
+            richTextBox1.Text += "停止攔截\n";
             Hook_Clear();
-            this.Text = "取消";
-            richTextBox1.Text += "取消 Hook\n";
-
         }
     }
 }
