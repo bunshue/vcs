@@ -269,37 +269,5 @@ namespace vcs_RegisterHotKey_PrintScreen
 
         [DllImport("user32.dll")]
         public static extern bool UnregisterHotKey(IntPtr wnd, int id);
-
-
-        //在C#中引用名稱空間System.Runtime.InteropServices;來載入非託管類user32.dll
-        /*
-        * RegisterHotKey函式原型及說明：
-        * BOOL RegisterHotKey(
-        * HWND hWnd,   // window to receive hot-key notification
-        * int id,   // identifier of hot key
-        * UINT fsModifiers, // key-modifier flags
-        * UINT vk   // virtual-key code);
-        * 引數 id為你自己定義的一個ID值
-        * 對一個執行緒來講其值必需在0x0000 - 0xBFFF範圍之內,十進位制為0~49151
-        * 對DLL來講其值必需在0xC000 - 0xFFFF 範圍之內,十進位制為49152~65535
-        * 在同一程序內該值必須唯一引數 fsModifiers指明與熱鍵聯合使用按鍵
-        * 可取值為：MOD_ALT MOD_CONTROL MOD_WIN MOD_SHIFT引數，或數字0為無，1為Alt,2為Control，4為Shift，8為Windows
-        * vk指明熱鍵的虛擬鍵碼
-        */
-        
-        /*
-        RegisterHotKey的用法
-        uint ctrlHotKey = (uint)(KeyModifiers.Alt | KeyModifiers.Ctrl);
-        // 註冊熱鍵為Alt+Ctrl+C, "100"為唯一標識熱鍵
-        RegisterHotKey(Handle, 100, ctrlHotKey, Keys.A);
-
-        // 解除安裝熱鍵
-        UnregisterHotKey(Handle, 100);
-
-
-         */
     }
 }
-
-
-

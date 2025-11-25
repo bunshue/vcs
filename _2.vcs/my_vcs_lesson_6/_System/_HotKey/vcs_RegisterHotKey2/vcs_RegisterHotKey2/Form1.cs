@@ -120,7 +120,6 @@ namespace vcs_RegisterHotKey2
             return _Source;
         }
 
-
         private Bitmap CaptureDesktop()//抓取带鼠标的桌面
         {
             try
@@ -286,6 +285,7 @@ namespace vcs_RegisterHotKey2
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             UnregisterHotKey(Handle, 81);   //注销Id号为81的热键设定
+
             this.Hide();
             if (flag == true)
             {

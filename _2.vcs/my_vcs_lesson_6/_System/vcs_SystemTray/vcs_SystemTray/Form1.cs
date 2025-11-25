@@ -58,12 +58,12 @@ namespace vcs_SystemTray
 
             ni.MouseDown += (sender, e) =>
             {
-                if (e.Button == MouseButtons.Left)
+                if (e.Button == MouseButtons.Left) //系統列 按左鍵
                 {
                     this.Activate();
                     this.Visible = true;
                 }
-                if (e.Button == MouseButtons.Right)
+                if (e.Button == MouseButtons.Right) //系統列 按右鍵
                 {
                     if (DialogResult.Yes == MessageBox.Show("Quit? Realy?", "Quit", MessageBoxButtons.YesNo))
                     {
