@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{64705A64-54C9-4C4F-A7D1-41CEF18C7F9B}</ProjectGuid>
+    <ProjectGuid>{65525C31-46FC-4C82-9A58-55F9529B5C0A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_HotKey1</RootNamespace>
-    <AssemblyName>vcs_HotKey1</AssemblyName>
+    <RootNamespace>vcs_RegisterHotKey4</RootNamespace>
+    <AssemblyName>vcs_RegisterHotKey4</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

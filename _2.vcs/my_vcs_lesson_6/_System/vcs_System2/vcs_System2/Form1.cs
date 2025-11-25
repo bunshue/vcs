@@ -75,17 +75,6 @@ namespace vcs_System2
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
-            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
-
             label1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             label1.Text = "aaaaaa";
 
@@ -241,7 +230,6 @@ namespace vcs_System2
         private void button5_Click(object sender, EventArgs e)
         {
             //C# Ping a hostname on the network
-            //C# Ping a hostname on the network
 
             Ping ping = new Ping();
 
@@ -250,47 +238,10 @@ namespace vcs_System2
             {
                 MessageBox.Show("ok");
             }
-
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Environment 類別使用\n";
-            richTextBox1.Text += "處理序的命令列：" + Environment.CommandLine + "\n";
-            richTextBox1.Text += "工作目錄的完整路徑：" + Environment.CurrentDirectory + "\n";
-            richTextBox1.Text += "處理序的結束代碼：" + Environment.ExitCode + "\n";
-            richTextBox1.Text += "是否正常關機：" + Environment.HasShutdownStarted + "\n";
-            richTextBox1.Text += "NetBIOS名稱：" + Environment.MachineName + "\n";
-            richTextBox1.Text += "環境定義的新字串：" + Environment.NewLine + "\n";
-            richTextBox1.Text += "作業系統平台：" + Environment.OSVersion.Platform + "\n";
-            richTextBox1.Text += "Service Pack版本：" + Environment.OSVersion.ServicePack + "\n";
-            richTextBox1.Text += "作業系統版本：" + Environment.OSVersion.Version + "\n";
-            richTextBox1.Text += "串連字串表示：" + Environment.OSVersion.VersionString + "\n";
-            richTextBox1.Text += "處理器數目：" + Environment.ProcessorCount + "\n";
-            richTextBox1.Text += "堆疊追蹤資訊：" + Environment.StackTrace + "\n";
-            richTextBox1.Text += "系統目錄完整路徑：" + Environment.SystemDirectory + "\n";
-            richTextBox1.Text += "系統啟動後的毫秒數：" + Environment.TickCount + "\n";
-            richTextBox1.Text += "使用者網域名稱：" + Environment.UserDomainName + "\n";
-            richTextBox1.Text += "處理序是否與使用者互動：" + Environment.UserInteractive + "\n";
-            richTextBox1.Text += "使用者名稱：" + Environment.UserName + "\n";
-            richTextBox1.Text += "Version：" + Environment.Version + "\n";
-            richTextBox1.Text += "組件元件值：" + Environment.Version.Build + "\n";
-            richTextBox1.Text += "主要元件值：" + Environment.Version.Major + "\n";
-            richTextBox1.Text += "修訂編號的高 16 位元：" + Environment.Version.MajorRevision + "\n";
-            richTextBox1.Text += "次要元件值：" + Environment.Version.Minor + "\n";
-            richTextBox1.Text += "修訂編號的低 16 位元：" + Environment.Version.MinorRevision + "\n";
-            richTextBox1.Text += "修訂元件值：" + Environment.Version.Revision + "\n";
-            richTextBox1.Text += "實際記憶體數量：" + Environment.WorkingSet + "\n";
-
-            string strFinal;
-            string strQuery = "系統磁碟機：%SystemDrive% 與 系統根目錄：%SystemRoot%";
-            strFinal = Environment.ExpandEnvironmentVariables(strQuery);
-            richTextBox1.Text += strFinal + "\n";
-
-            string[] arguments = Environment.GetCommandLineArgs();
-            richTextBox1.Text += string.Format("取得命令列的Args: {0}", string.Join(", ", arguments)) + "\n";
-
-            richTextBox1.Text += "系統特殊資料夾的路徑：" + Environment.GetFolderPath(Environment.SpecialFolder.System);
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -451,9 +402,52 @@ namespace vcs_System2
         {
         }
 
+        //設置系統日期和時間 ST
+        public class SetSystemDateTime
+        {
+            [DllImportAttribute("Kernel32.dll")]
+            public static extern void GetLocalTime(SystemTime st);
+            [DllImportAttribute("Kernel32.dll")]
+            public static extern void SetLocalTime(SystemTime st);
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public class SystemTime
+        {
+            public ushort vYear;
+            public ushort vMonth;
+            public ushort vDayOfWeek;
+            public ushort vDay;
+            public ushort vHour;
+            public ushort vMinute;
+            public ushort vSecond;
+        }
+
         private void button19_Click(object sender, EventArgs e)
         {
+            //設置系統日期和時間
+            //Romeo可用 Sugar不可用
+            //DateTime Year = this.dateTimePicker1.Value;
+            SystemTime MySystemTime = new SystemTime();
+            SetSystemDateTime.GetLocalTime(MySystemTime);
+            /*
+            MySystemTime.vYear = (ushort)this.dateTimePicker1.Value.Year;
+            MySystemTime.vMonth = (ushort)this.dateTimePicker1.Value.Month;
+            MySystemTime.vDay = (ushort)this.dateTimePicker1.Value.Day;
+            MySystemTime.vHour = (ushort)this.dateTimePicker2.Value.Hour;
+            MySystemTime.vMinute = (ushort)this.dateTimePicker2.Value.Minute;
+            MySystemTime.vSecond = (ushort)this.dateTimePicker2.Value.Second;
+            */
+            MySystemTime.vYear = 2021;
+            MySystemTime.vMonth = 11;
+            MySystemTime.vDay = 3;
+            MySystemTime.vHour = 23;
+            MySystemTime.vMinute = 37;
+            MySystemTime.vSecond = 00;
+
+            SetSystemDateTime.SetLocalTime(MySystemTime);
         }
+        //設置系統日期和時間 SP
 
         private void button20_Click(object sender, EventArgs e)
         {
@@ -584,98 +578,6 @@ namespace vcs_System2
 
         private void button29_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button30_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button31_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button32_Click(object sender, EventArgs e)
-        {
-            //打開控制面板中的程序_桌面設定
-            System.Diagnostics.Process.Start("desk.cpl");
-        }
-
-        private void button33_Click(object sender, EventArgs e)
-        {
-            //打開控制面板中的程序_滑鼠游標設定
-            System.Diagnostics.Process.Start("main.cpl");
-        }
-
-        private void button34_Click(object sender, EventArgs e)
-        {
-            //打開控制面板中的程序_網路連接
-            System.Diagnostics.Process.Start("ncpa.cpl");
-        }
-
-        private void button35_Click(object sender, EventArgs e)
-        {
-            //打開控制面板中的程序_聲音設定
-            System.Diagnostics.Process.Start("mmsys.cpl");
-        }
-
-        //設置系統日期和時間 ST
-        public class SetSystemDateTime
-        {
-            [DllImportAttribute("Kernel32.dll")]
-            public static extern void GetLocalTime(SystemTime st);
-            [DllImportAttribute("Kernel32.dll")]
-            public static extern void SetLocalTime(SystemTime st);
-        }
-
-        [StructLayoutAttribute(LayoutKind.Sequential)]
-        public class SystemTime
-        {
-            public ushort vYear;
-            public ushort vMonth;
-            public ushort vDayOfWeek;
-            public ushort vDay;
-            public ushort vHour;
-            public ushort vMinute;
-            public ushort vSecond;
-        }
-
-        private void button36_Click(object sender, EventArgs e)
-        {
-            //設置系統日期和時間
-            //Romeo可用 Sugar不可用
-            //DateTime Year = this.dateTimePicker1.Value;
-            SystemTime MySystemTime = new SystemTime();
-            SetSystemDateTime.GetLocalTime(MySystemTime);
-            /*
-            MySystemTime.vYear = (ushort)this.dateTimePicker1.Value.Year;
-            MySystemTime.vMonth = (ushort)this.dateTimePicker1.Value.Month;
-            MySystemTime.vDay = (ushort)this.dateTimePicker1.Value.Day;
-            MySystemTime.vHour = (ushort)this.dateTimePicker2.Value.Hour;
-            MySystemTime.vMinute = (ushort)this.dateTimePicker2.Value.Minute;
-            MySystemTime.vSecond = (ushort)this.dateTimePicker2.Value.Second;
-            */
-            MySystemTime.vYear = 2021;
-            MySystemTime.vMonth = 11;
-            MySystemTime.vDay = 3;
-            MySystemTime.vHour = 23;
-            MySystemTime.vMinute = 37;
-            MySystemTime.vSecond = 00;
-
-            SetSystemDateTime.SetLocalTime(MySystemTime);
-        }
-        //設置系統日期和時間 SP
-
-        private void button37_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button38_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button39_Click(object sender, EventArgs e)
-        {
             //使用Class取得系統資訊
             SYSTEMTIME_INFO SystemInfo = new SYSTEMTIME_INFO();
             ComputerInfo.GetSystemTime(ref SystemInfo);
@@ -751,7 +653,6 @@ namespace vcs_System2
             richTextBox1.Text += StInfo.wYear.ToString() + "年" + StInfo.wMonth.ToString() + "月" + StInfo.wDay.ToString() + "日" + "\n";
             richTextBox1.Text += (StInfo.wHour + 8).ToString() + "點" + StInfo.wMinute.ToString() + "分" + StInfo.wSecond.ToString() + "秒" + "\n";
         }
-
 
         /// <summary>
         ///取得計算機的系統信息
@@ -840,7 +741,5 @@ namespace vcs_System2
             public ushort wSecond;
             public ushort wMilliseconds;
         }
-
-
     }
 }

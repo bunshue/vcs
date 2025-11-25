@@ -100,7 +100,7 @@ namespace vcs_Hook1
                     return 1;
 
                 }
-                if (kbh.vkCode == (int)Keys.Y&& (int)Control.ModifierKeys == (int)Keys.Control + (int)Keys.Alt)  //截獲Ctrl+Alt+Y
+                if (kbh.vkCode == (int)Keys.Y && (int)Control.ModifierKeys == (int)Keys.Control + (int)Keys.Alt)  //截獲Ctrl+Alt+Y
                 {
                     richTextBox1.Text += "快捷鍵已攔截! Ctrl + Alt + Y\n";
                     return 1;
@@ -135,6 +135,11 @@ namespace vcs_Hook1
             richTextBox1.Text += "未啟動攔截\n";
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "啟動攔截\n";
@@ -143,9 +148,8 @@ namespace vcs_Hook1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "未啟動攔截\n";
+            richTextBox1.Text += "停止攔截\n";
             Hook_Clear();
         }
     }
 }
-

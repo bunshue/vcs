@@ -9,6 +9,8 @@ using System.Windows.Forms;
 
 using System.Runtime.InteropServices;
 
+//快捷鍵部分已搬出
+
 namespace vcs_PictureMagnify2
 {
     public partial class Form1 : Form
@@ -18,7 +20,7 @@ namespace vcs_PictureMagnify2
             InitializeComponent();
         }
 
-        #region 定義快捷鍵
+        // 定義快捷鍵 ST
         //如果函數執行成功，返回值不為0。       
         //如果函數執行失敗，返回值為0。要得到擴展錯誤信息，調用GetLastError。        
         [DllImport("user32.dll", SetLastError = true)]
@@ -43,9 +45,9 @@ namespace vcs_PictureMagnify2
             Shift = 4,
             WindowsKey = 8
         }
-        #endregion
+        // 定義快捷鍵 SP
 
-        #region 獲取鼠標像素的RGB
+        // 獲取鼠標像素的RGB ST
         [DllImport("gdi32.dll")]
         static public extern uint GetPixel(IntPtr hDC, int XPos, int YPos);
         [DllImport("gdi32.dll")]
@@ -78,8 +80,7 @@ namespace vcs_PictureMagnify2
             byte Blue = GetBValue(colorref);
             return Color.FromArgb(Red, Green, Blue);
         }
-        #endregion
-
+        // 獲取鼠標像素的RGB SP
 
         int screenWidth;        //屏幕寬度
         int screenHeight;       //屏幕高度
@@ -98,7 +99,7 @@ namespace vcs_PictureMagnify2
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            RegisterHotKey(Handle, 81, KeyModifiers.None, Keys.Escape);
+            RegisterHotKey(Handle, 81, KeyModifiers.None, Keys.Escape);//已搬出
             mx = Control.MousePosition.X;
             my = Control.MousePosition.Y;
             lblmPos.Text = "(" + mx.ToString() + "," + my.ToString() + ")";
@@ -119,9 +120,9 @@ namespace vcs_PictureMagnify2
             IntPtr dc1 = g.GetHdc();
             g.ReleaseHdc(dc1);
             pictureBox1.Image = (Image)bt;
-
         }
 
+        //已搬出
         protected override void WndProc(ref Message m)
         {
             const int WM_HOTKEY = 0x0312;
@@ -140,9 +141,10 @@ namespace vcs_PictureMagnify2
             base.WndProc(ref m);
         }
 
+        //已搬出
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //注銷Id號為81的熱鍵設定    
+            //注銷Id號為81的熱鍵設定
             UnregisterHotKey(Handle, 81);
         }
 

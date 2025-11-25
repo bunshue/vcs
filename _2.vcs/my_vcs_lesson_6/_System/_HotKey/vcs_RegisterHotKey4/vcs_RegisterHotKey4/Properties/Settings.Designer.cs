@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_HotKey1.Properties
+namespace vcs_RegisterHotKey4.Properties
 {
 
 

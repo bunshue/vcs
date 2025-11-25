@@ -10,20 +10,22 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
 /*
-//C#編寫WIN32系統托盤程序
+WIN32系統托盤程序
 程序運行後駐留系統托盤，左鍵呼出，右鍵退出。後續可加右鍵菜單。
 注冊系統按鍵WIN+F10,呼出程序。
 重寫系統消息，最小化和關閉按鈕隱藏程序
 */
+
+//熱鍵部分已搬出
 
 namespace vcs_SystemTray
 {
     public enum HotkeyModifiers
     {
         Alt = 1,
-        Control = 2,
+        Ctrl = 2,
         Shift = 4,
-        Win = 8
+        WindowsKey = 8
     }
 
     public partial class Form1 : Form
@@ -46,8 +48,8 @@ namespace vcs_SystemTray
 
             NotifyIcon ni = new NotifyIcon() { Icon = this.Icon, Visible = true };
 
-            //RegisterHotKey
-            bool bOK = RegisterHotKey(this.Handle, 0, (int)HotkeyModifiers.Win, Keys.F10);
+            //RegisterHotKey //熱鍵部分已搬出
+            bool bOK = RegisterHotKey(this.Handle, 0, (int)HotkeyModifiers.WindowsKey, Keys.F10);
 
             this.Closing += delegate
             {
@@ -75,7 +77,6 @@ namespace vcs_SystemTray
         {
         }
 
-        //WndProc
         protected override void WndProc(ref Message m)
         {
             switch (m.Msg)
@@ -98,4 +99,3 @@ namespace vcs_SystemTray
         }
     }
 }
-
