@@ -339,6 +339,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form_Setup";
             this.Text = "設定";
+            this.Load += new System.EventHandler(this.Form_Setup_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();

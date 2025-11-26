@@ -154,7 +154,16 @@ namespace vcs_DrawPoem
         public Form_Setup()
         {
             InitializeComponent();
+        }
 
+        private void Form_Setup_Load(object sender, EventArgs e)
+        {
+            show_item_location();
+            load_poetry_ini();
+        }
+
+        void show_item_location()
+        {
             int x_st = 50;
             int y_st = 50;
             int dy = 55;
@@ -186,9 +195,6 @@ namespace vcs_DrawPoem
             numericUpDown4.Location = new Point(x_st + dx, y_st + dy * 4);
             numericUpDown6.Location = new Point(x_st + dx, y_st + dy * 6);
             numericUpDown7.Location = new Point(x_st + dx, y_st + dy * 7);
-
-            load_poetry_ini();
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -247,7 +253,7 @@ namespace vcs_DrawPoem
                 WritePrivateProfileString(strOne, "TopMost", comboBox5.SelectedIndex.ToString(), filename); 		    //修改INI文件中的第1項
                 WritePrivateProfileString(strOne, "RatioWidth", numericUpDown6.Value.ToString(), filename); 		    //修改INI文件中的第1項
                 WritePrivateProfileString(strOne, "RatioHeight", numericUpDown7.Value.ToString(), filename); 		    //修改INI文件中的第1項
-                
+
                 richTextBox1.Text += "修改成功\n";
             }
             //else
@@ -280,12 +286,5 @@ namespace vcs_DrawPoem
         {
             display_height = (int)numericUpDown7.Value;
         }
-
-
     }
 }
-
-
-
-
-

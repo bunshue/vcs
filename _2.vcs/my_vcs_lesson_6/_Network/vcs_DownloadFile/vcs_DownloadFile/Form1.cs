@@ -72,7 +72,7 @@ namespace vcs_DownloadFile
             }
         }
 
-        #region 以断点续传方式下载文件
+        // 以断点续传方式下载文件 ST
         /// <summary>
         /// 以断点续传方式下载文件
         /// </summary>
@@ -119,9 +119,9 @@ namespace vcs_DownloadFile
                 FStream.Close();
             }
         }
-        #endregion
+        // 以断点续传方式下载文件 SP
 
-        #region 为INI文件中指定的节点取得字符串
+        // 为INI文件中指定的节点取得字符串 ST
         /// <summary>
         /// 为INI文件中指定的节点取得字符串
         /// </summary>
@@ -140,9 +140,9 @@ namespace vcs_DownloadFile
             StringBuilder lpReturnedString,
             int nSize,
             string lpFileName);
-        #endregion
+        // 为INI文件中指定的节点取得字符串 SP
 
-        #region 修改INI文件中内容
+        // 修改INI文件中内容 ST
         /// <summary>
         /// 修改INI文件中内容
         /// </summary>
@@ -157,9 +157,9 @@ namespace vcs_DownloadFile
             string lpKeyName,
             string lpString,
             string lpFileName);
-        #endregion
+        // 修改INI文件中内容 SP
 
-        #region 从INI文件中读取指定节点的内容
+        // 从INI文件中读取指定节点的内容 ST
         /// <summary>
         /// 从INI文件中读取指定节点的内容
         /// </summary>
@@ -174,7 +174,7 @@ namespace vcs_DownloadFile
             GetPrivateProfileString(section, key, def, temp, 1024, fileName);
             return temp.ToString();
         }
-        #endregion
+        // 从INI文件中读取指定节点的内容 SP
 
         private void button3_Click(object sender, EventArgs e)
         {
