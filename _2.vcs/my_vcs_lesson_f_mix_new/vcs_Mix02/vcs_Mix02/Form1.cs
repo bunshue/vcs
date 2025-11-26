@@ -223,32 +223,6 @@ namespace vcs_Mix02
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            string filename = Path.Combine(Application.StartupPath, @"..\..\Form1.cs");
-
-            richTextBox1.Text += "filename old = " + filename + "\n";
-
-            string d_name = Path.GetDirectoryName(filename);
-            string f_name = Path.GetFileNameWithoutExtension(filename);
-            string ext_name = Path.GetExtension(filename);
-
-            richTextBox1.Text += "取得 d_name : " + d_name + "\n";
-            richTextBox1.Text += "取得 f_name : " + f_name + "\n";
-            richTextBox1.Text += "取得 ext_name : " + ext_name + "\n";
-
-            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU";
-            var dinfo = new DirectoryInfo(foldername);
-            var files = dinfo.GetFiles().OrderBy(p => p.Name).ToArray();
-            foreach (var file in files)
-            {
-                if (file.FullName.Contains("id_card") == true)
-                {
-                    Console.WriteLine(file.FullName);
-
-                }
-            }
-
-
         }
 
         private void button6_Click(object sender, EventArgs e)

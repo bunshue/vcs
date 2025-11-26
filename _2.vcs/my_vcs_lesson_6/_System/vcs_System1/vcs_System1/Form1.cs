@@ -122,6 +122,7 @@ namespace vcs_System1
 
             richTextBox1.Size = new Size(400, 740);
             richTextBox1.Location = new Point(x_st + dx * 5 + 130, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             dy = 30;
             label1.Location = new Point(x_st + dx * 0, y_st + 12 + dy * 0);
@@ -134,9 +135,6 @@ namespace vcs_System1
             label4.Text = "";
 
             this.Size = new Size(1600, 800);
-
-            //控件位置
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -594,6 +592,28 @@ namespace vcs_System1
             */
             //------------------------------------------------------------  # 60個
 
+            string osVersionString = Environment.OSVersion.ToString();
+            richTextBox1.Text += "取得Windows版本 : " + osVersionString + "\n";
+
+            //取得電腦名稱
+            string ComputerName = Environment.GetEnvironmentVariable("ComputerName");
+            richTextBox1.Text += "ComputerName\t" + ComputerName + "\n";
+
+
+            //取得系統相關資訊
+
+            //取得系統環境變數及對應的變數值
+            foreach (DictionaryEntry DEntry in Environment.GetEnvironmentVariables())
+            {
+                richTextBox1.Text += "環境變數 : " + DEntry.Key.ToString() + "\t";
+                richTextBox1.Text += "變數值 : " + DEntry.Value.ToString() + "\n";
+            }
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+
+
         }
 
         // List the folder types.
@@ -798,6 +818,23 @@ namespace vcs_System1
             richTextBox1.Text += "電腦名稱 2 : " + Dns.GetHostName() + "\n";
             richTextBox1.Text += "電腦名稱 3 : " + SystemInformation.ComputerName + "\n";
             richTextBox1.Text += "電腦名稱 4 : " + Environment.GetEnvironmentVariable("COMPUTERNAME") + "\n";
+
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //主機名稱
+            richTextBox1.Text += "主機名稱 : " + Dns.GetHostName() + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            IPAddress addr;
+            // 獲得本機局域網IP地址
+            addr = new IPAddress(Dns.GetHostByName(Dns.GetHostName()).AddressList[0].Address);
+            string cc = addr.ToString();
+
+            richTextBox1.Text += "IP地址：" + cc + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
 
         [DllImport("kernel32.dll")]
@@ -1072,14 +1109,43 @@ namespace vcs_System1
             }
         }
 
+        [DllImport("kernel32.dll", EntryPoint = "GetDiskFreeSpaceEx")]
+        public static extern int GetDiskFreeSpaceEx(string lpDirectoryName, out long lpFreeBytesAvailable, out long lpTotalNumberOfBytes, out long lpTotalNumberOfFreeBytes);
         private void button34_Click(object sender, EventArgs e)
         {
-
+            //取得本機或網路磁碟機的磁碟訊息
+            //取得本機或網路磁碟機的磁碟訊息, 選擇磁碟或目錄
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                long fb, ftb, tfb;
+                string str = fbd.SelectedPath;
+                richTextBox1.Text += "path : " + str + "\n";
+                if (GetDiskFreeSpaceEx(str, out fb, out ftb, out tfb) != 0)
+                {
+                    string strfb = Convert.ToString(fb / 1024 / 1024 / 1024) + " G";
+                    string strftb = Convert.ToString(ftb / 1024 / 1024 / 1024) + " G";
+                    string strtfb = Convert.ToString(tfb / 1024 / 1024 / 1024) + " G";
+                    richTextBox1.Text += "總空間" + strfb + "\n";
+                    richTextBox1.Text += "可用空間" + strftb + "\n";
+                    richTextBox1.Text += "總剩餘空間" + strtfb + "\n";
+                }
+                else
+                {
+                    MessageBox.Show("NO");
+                }
+            }
         }
 
         private void button35_Click(object sender, EventArgs e)
         {
+            //(偽)將計算機設定為休眠狀態
 
+            if (MessageBox.Show("確定要休眠計算機嗎？") == DialogResult.OK)
+            {
+                //偽執行
+                //Application.SetSuspendState(PowerState.Hibernate, true, true);
+            }
         }
 
         private void button36_Click(object sender, EventArgs e)

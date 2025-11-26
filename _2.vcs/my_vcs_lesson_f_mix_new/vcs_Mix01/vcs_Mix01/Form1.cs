@@ -138,25 +138,6 @@ namespace vcs_Mix01
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
-
-            DirectoryInfo dir = new DirectoryInfo(foldername);
-            if (!dir.Exists)  //判斷資料夾路徑是否不存在
-            {
-                richTextBox1.Text += "路徑不存在\n";
-            }
-            richTextBox1.Text += dir.FullName + "資料夾下的檔案資訊如下：\n";
-
-            //傳回FileInfo物件陣列，並指定給f陣列
-            FileInfo[] f = dir.GetFiles();
-            foreach (FileInfo r in f)
-            {
-                richTextBox1.Text += "完整路徑：" + r.FullName + "\n";
-                richTextBox1.Text += "寫入時間：" + r.LastWriteTime + "\n";
-                richTextBox1.Text += "檔案大小：" + r.Length.ToString() + "\n";
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -288,30 +269,6 @@ namespace vcs_Mix01
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //DateTime Parse
-            string str1 = "20091014223600";
-            IFormatProvider ifp = new CultureInfo("zh-TW", true);
-            DateTime dt1 = DateTime.ParseExact(str1, "yyyyMMddHHmmss", ifp);
-
-            richTextBox1.Text += "原字串:\t" + str1 + "\n";
-            richTextBox1.Text += "解讀後:\t" + dt1.ToString() + "\n";
-            //MessageBox.Show(dt1.ToString());
-
-            string str2 = "20091014223600";
-            DateTime dt2;
-            DateTime dtNow = DateTime.Now;
-            richTextBox1.Text += "原字串:\t" + str2 + "\n";
-            //IFormatProvider ifp = new CultureInfo("zh-TW", true);
-            if (DateTime.TryParseExact(str2, "yyyyMMddHHmmss", ifp, DateTimeStyles.None, out dt2))
-            {
-                //MessageBox.Show(dt2.ToString());
-                richTextBox1.Text += "解讀後1:\t" + dt2.ToString() + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "解讀後2:\t" + dtNow.ToString() + "\n";
-                //MessageBox.Show(dtNow.ToString());
-            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -350,12 +307,6 @@ namespace vcs_Mix01
         private void button12_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            if (MessageBox.Show("確定要休眠計算機嗎？") == DialogResult.OK)
-            {
-                //偽執行
-                //Application.SetSuspendState(PowerState.Hibernate, true, true);
-            }
         }
 
         private void button13_Click(object sender, EventArgs e)

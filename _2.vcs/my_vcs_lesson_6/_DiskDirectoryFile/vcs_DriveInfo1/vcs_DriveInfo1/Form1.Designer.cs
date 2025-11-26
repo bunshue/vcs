@@ -93,6 +93,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(143, 52);
             this.button2.TabIndex = 10;
+            this.button2.Text = "DirectoryInfo 與 FileInfo";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -102,6 +103,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(143, 52);
             this.button3.TabIndex = 11;
+            this.button3.Text = "檔名分析";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 

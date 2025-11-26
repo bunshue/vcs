@@ -173,11 +173,10 @@ namespace vcs_RegisterHotKey
         {
             richTextBox1.Text += "測試快捷鍵範例\n";
             richTextBox1.Text += "Shift + F\n";
-            richTextBox1.Text += "Ctrl + P 全螢幕截圖\n";
-            richTextBox1.Text += "Alt + Ctrl + C 計算機\n";
-            richTextBox1.Text += "按ESC離開\n";
-            richTextBox1.Text += "注冊系統按鍵ESC\n";
-            richTextBox1.Text += "注冊系統按鍵WIN+F10\n";
+            richTextBox1.Text += "註冊快捷鍵 Ctrl + P 全螢幕截圖\n";
+            richTextBox1.Text += "註冊快捷鍵 Alt + Ctrl + C 計算機\n";
+            richTextBox1.Text += "註冊快捷鍵 ESC => 離開\n";
+            richTextBox1.Text += "註冊快捷鍵 WIN + F10\n";
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 

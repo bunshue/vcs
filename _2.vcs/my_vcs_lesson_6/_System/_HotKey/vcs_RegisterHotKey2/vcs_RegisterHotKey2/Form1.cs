@@ -40,12 +40,7 @@ namespace vcs_RegisterHotKey2
         private static extern IntPtr CopyIcon(IntPtr hIcon);
         [DllImport("user32.dll", EntryPoint = "GetIconInfo")]
         private static extern bool GetIconInfo(IntPtr hIcon, out ICONINFO iInfo);
-        [DllImport("kernel32")]
-        private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
-        [DllImport("kernel32")]
-        private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retval, int size, string filePath);
 
-        #region 定义快捷键
         //如果函数执行成功，返回值不为0。       
         //如果函数执行失败，返回值为0。要得到扩展错误信息，调用GetLastError。        
         [DllImport("user32.dll", SetLastError = true)]
@@ -70,9 +65,7 @@ namespace vcs_RegisterHotKey2
             Shift = 4,
             WindowsKey = 8
         }
-        #endregion
 
-        public string path;
 
         string Cursor;
         string foldername = @"C:\dddddddddd";
@@ -96,17 +89,6 @@ namespace vcs_RegisterHotKey2
             {
                 //richTextBox1.Text += "資料夾: " + foldername + " 已存在，不用再建立\n";
             }
-        }
-
-        public void IniWriteValue(string section, string key, string value)
-        {
-            WritePrivateProfileString(section, key, value, path);
-        }
-        public string IniReadValue(string section, string key)
-        {
-            StringBuilder temp = new StringBuilder(255);
-            int i = GetPrivateProfileString(section, key, "", temp, 255, path);
-            return temp.ToString();
         }
 
         private Bitmap CaptureNoCursor()//抓取没有鼠标的桌面
@@ -166,34 +148,6 @@ namespace vcs_RegisterHotKey2
             return null;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                path = Application.StartupPath.ToString();
-                path = path.Substring(0, path.LastIndexOf("\\"));
-                path = path.Substring(0, path.LastIndexOf("\\"));
-                path += @"\Setup.ini";
-
-                if (checkBox1.Checked == true)
-                {
-                    Cursor = "1";
-                }
-                else
-                {
-                    Cursor = "0";
-                }
-
-                IniWriteValue("Setup", "CapMouse", Cursor);
-                IniWriteValue("Setup", "Dir", foldername);
-                MessageBox.Show("保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
         private void Form1_StyleChanged(object sender, EventArgs e)
         {
         }
@@ -206,33 +160,9 @@ namespace vcs_RegisterHotKey2
             Application.Exit();
         }
 
-        string MyCursor;
-        string MyPicPath;
         private void Form1_Activated(object sender, EventArgs e)
         {
             RegisterHotKey(Handle, 81, KeyModifiers.Shift, Keys.F);
-            path = Application.StartupPath.ToString();
-            path = path.Substring(0, path.LastIndexOf("\\"));
-            path = path.Substring(0, path.LastIndexOf("\\"));
-            path += @"\Setup.ini";
-            MyCursor = IniReadValue("Setup", "CapMouse");
-            MyPicPath = IniReadValue("Setup", "Dir");
-
-            if (MyCursor == "" || MyPicPath == "")
-            {
-                checkBox1.Checked = true;
-            }
-            else
-            {
-                if (MyCursor == "1")
-                {
-                    checkBox1.Checked = true;
-                }
-                else
-                {
-                    checkBox1.Checked = false;
-                }
-            }
         }
 
         private void save_fullscreen_to_local_drive()
@@ -240,16 +170,15 @@ namespace vcs_RegisterHotKey2
             //存成bmp檔
             string filename = "C:\\dddddddddd\\full_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
             Bitmap bitmap1;
-            if (MyCursor == "0")
-            {
-                bitmap1 = CaptureNoCursor();
-                bitmap1.Save(filename);
-            }
-            else
-            {
-                bitmap1 = CaptureDesktop();
-                bitmap1.Save(filename);
-            }
+
+            //無鼠標存圖
+            bitmap1 = CaptureNoCursor();
+            
+            //有鼠標存圖
+            //bitmap1 = CaptureDesktop();
+
+            bitmap1.Save(filename);
+
             richTextBox1.Text += "全螢幕截圖，存檔檔名：\n" + filename + "\n";
         }
 

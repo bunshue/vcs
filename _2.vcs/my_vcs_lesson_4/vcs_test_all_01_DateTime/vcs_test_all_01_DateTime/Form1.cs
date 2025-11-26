@@ -303,7 +303,6 @@ namespace vcs_test_all_01_DateTime
             string diff_time = GetTimeSpan(dt1, dt2);
             richTextBox1.Text += "相隔 : " + diff_time.ToString() + "\n";
             */
-
             //------------------------------------------------------------
 
             //計算差異天數
@@ -1304,6 +1303,31 @@ namespace vcs_test_all_01_DateTime
 
             //------------------------------------------------------------
 
+            //DateTime Parse
+            string str1 = "20091014223600";
+            IFormatProvider ifp = new CultureInfo("zh-TW", true);
+            dt1 = DateTime.ParseExact(str1, "yyyyMMddHHmmss", ifp);
+
+            richTextBox1.Text += "原字串:\t" + str1 + "\n";
+            richTextBox1.Text += "解讀後:\t" + dt1.ToString() + "\n";
+            //MessageBox.Show(dt1.ToString());
+
+            string str2 = "20091014223600";
+            //DateTime dt2;
+            DateTime dtNow = DateTime.Now;
+            richTextBox1.Text += "原字串:\t" + str2 + "\n";
+            //IFormatProvider ifp = new CultureInfo("zh-TW", true);
+            if (DateTime.TryParseExact(str2, "yyyyMMddHHmmss", ifp, DateTimeStyles.None, out dt2))
+            {
+                //MessageBox.Show(dt2.ToString());
+                richTextBox1.Text += "解讀後1:\t" + dt2.ToString() + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "解讀後2:\t" + dtNow.ToString() + "\n";
+                //MessageBox.Show(dtNow.ToString());
+            }
+
 
             //------------------------------------------------------------
 
@@ -1408,6 +1432,15 @@ namespace vcs_test_all_01_DateTime
 
         private void button17_Click(object sender, EventArgs e)
         {
+
+            //** 日期時間輸出
+
+            Console.WriteLine(String.Format("{0:dddd, MMM d yyyy}", DateTime.Now));
+            Console.WriteLine(String.Format("{0:HH:mm:ss}", DateTime.Now));
+            Console.WriteLine(String.Format("{0:D}", DateTime.Now));
+            Console.WriteLine(String.Format("{0:hh:mm:ss tt}", DateTime.Now));
+            Console.WriteLine(String.Format("{0:T}", DateTime.Now));
+            Console.WriteLine(String.Format("{0:h:m:s}", DateTime.Now));
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -1663,18 +1696,17 @@ namespace vcs_test_all_01_DateTime
             //------------------------------------------------------------
 
             //列出全球時區
-            //列出全球時區
-            // Load the timezone information.
+            
+            //using System.Collections;
+            richTextBox1.Text += "取得全球時區資訊\n";
+
             foreach (TimeZoneInfo info in TimeZoneInfo.GetSystemTimeZones())
             {
                 richTextBox1.Text += info + "\n";
             }
 
-            //------------------------------------------------------------
-
             //取得系統的時區資訊
             get_system_time_zone();
-
 
             //------------------------------------------------------------
 

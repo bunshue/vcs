@@ -549,31 +549,8 @@ namespace vcs_Mix00
             catch { }
         }
 
-        [DllImport("kernel32.dll", EntryPoint = "GetDiskFreeSpaceEx")]
-        public static extern int GetDiskFreeSpaceEx(string lpDirectoryName, out long lpFreeBytesAvailable, out long lpTotalNumberOfBytes, out long lpTotalNumberOfFreeBytes);
         private void button10_Click(object sender, EventArgs e)
         {
-            //取得本機或網路磁碟機的磁碟訊息, 選擇磁碟或目錄
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            if (fbd.ShowDialog() == DialogResult.OK)
-            {
-                long fb, ftb, tfb;
-                string str = fbd.SelectedPath;
-                richTextBox1.Text += "path : " + str + "\n";
-                if (GetDiskFreeSpaceEx(str, out fb, out ftb, out tfb) != 0)
-                {
-                    string strfb = Convert.ToString(fb / 1024 / 1024 / 1024) + " G";
-                    string strftb = Convert.ToString(ftb / 1024 / 1024 / 1024) + " G";
-                    string strtfb = Convert.ToString(tfb / 1024 / 1024 / 1024) + " G";
-                    richTextBox1.Text += "總空間" + strfb + "\n";
-                    richTextBox1.Text += "可用空間" + strftb + "\n";
-                    richTextBox1.Text += "總剩餘空間" + strtfb + "\n";
-                }
-                else
-                {
-                    MessageBox.Show("NO");
-                }
-            }
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -809,7 +786,7 @@ namespace vcs_Mix00
                     }
                 }
                 line = sr.ReadLine();
-           }
+            }
 
             ArrayList keysList = new ArrayList(ht.Keys);
             //對Hashtable中的Keys按字母序排列
@@ -1272,25 +1249,10 @@ namespace vcs_Mix00
 
         private void button24_Click(object sender, EventArgs e)
         {
-            //tmp1
-
-
-            //** 日期時間輸出
-
-            Console.WriteLine(String.Format("{0:dddd, MMM d yyyy}", DateTime.Now));
-            Console.WriteLine(String.Format("{0:HH:mm:ss}", DateTime.Now));
-            Console.WriteLine(String.Format("{0:D}", DateTime.Now));
-            Console.WriteLine(String.Format("{0:hh:mm:ss tt}", DateTime.Now));
-            Console.WriteLine(String.Format("{0:T}", DateTime.Now));
-            Console.WriteLine(String.Format("{0:h:m:s}", DateTime.Now));
-
             //** 自訂格式化輸出
             Console.WriteLine(String.Format("{0:##,##0.00}", 8567.1));
             Console.WriteLine(String.Format("{0:###0.00}", 566.7));
             Console.WriteLine(String.Format("{0:0.00%}", 8));
-
-
-
         }
 
         static string reverse(string str)
@@ -1340,8 +1302,6 @@ namespace vcs_Mix00
             Book eng = new Book();
             eng.books = 10;
             Console.WriteLine("目前英文類書籍共有{0}本", eng.books);
-
-
         }
 
         static int top = -1;
@@ -1446,7 +1406,6 @@ namespace vcs_Mix00
             protocol_Tls11 = (SecurityProtocolType)768,
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
-
 
     /// <summary>
     /// 表達式計算類。支持數學函數，支持函數嵌套

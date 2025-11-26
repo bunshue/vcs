@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ReadWritePrivateProfileString", "vcs_ReadWritePrivateProfileString\vcs_ReadWritePrivateProfileString.csproj", "{D878DF89-140E-47ED-A3C7-50CCAD0D46B9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D878DF89-140E-47ED-A3C7-50CCAD0D46B9}.Debug|x86.ActiveCfg = Debug|x86
+		{D878DF89-140E-47ED-A3C7-50CCAD0D46B9}.Debug|x86.Build.0 = Debug|x86
+		{D878DF89-140E-47ED-A3C7-50CCAD0D46B9}.Release|x86.ActiveCfg = Release|x86
+		{D878DF89-140E-47ED-A3C7-50CCAD0D46B9}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -102,11 +102,51 @@ namespace vcs_DriveInfo1
 
         private void button2_Click(object sender, EventArgs e)
         {
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
+
+            DirectoryInfo dir = new DirectoryInfo(foldername);
+            if (!dir.Exists)  //判斷資料夾路徑是否不存在
+            {
+                richTextBox1.Text += "路徑不存在\n";
+            }
+            richTextBox1.Text += dir.FullName + "資料夾下的檔案資訊如下：\n";
+
+            //傳回FileInfo物件陣列，並指定給f陣列
+            FileInfo[] f = dir.GetFiles();
+            foreach (FileInfo r in f)
+            {
+                richTextBox1.Text += "完整路徑：" + r.FullName + "\n";
+                richTextBox1.Text += "寫入時間：" + r.LastWriteTime + "\n";
+                richTextBox1.Text += "檔案大小：" + r.Length.ToString() + "\n";
+            }
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            string filename = Path.Combine(Application.StartupPath, @"..\..\Form1.cs");
+
+            richTextBox1.Text += "filename old = " + filename + "\n";
+
+            string d_name = Path.GetDirectoryName(filename);
+            string f_name = Path.GetFileNameWithoutExtension(filename);
+            string ext_name = Path.GetExtension(filename);
+
+            richTextBox1.Text += "取得 d_name : " + d_name + "\n";
+            richTextBox1.Text += "取得 f_name : " + f_name + "\n";
+            richTextBox1.Text += "取得 ext_name : " + ext_name + "\n";
+
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU";
+            var dinfo = new DirectoryInfo(foldername);
+            var files = dinfo.GetFiles().OrderBy(p => p.Name).ToArray();
+            foreach (var file in files)
+            {
+                if (file.FullName.Contains("id_card") == true)
+                {
+                    Console.WriteLine(file.FullName);
+
+                }
+            }
         }
 
         //取得硬碟資訊 ST
