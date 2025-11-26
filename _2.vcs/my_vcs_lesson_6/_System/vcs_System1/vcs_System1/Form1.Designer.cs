@@ -429,7 +429,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 50;
-            this.button0.Text = "讀取電源狀態";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -829,6 +828,7 @@
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(200, 60);
             this.button37.TabIndex = 88;
+            this.button37.Text = "取得任務欄尺寸大小";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
@@ -839,6 +839,7 @@
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(200, 60);
             this.button38.TabIndex = 89;
+            this.button38.Text = "隱藏任務欄";
             this.button38.UseVisualStyleBackColor = true;
             this.button38.Click += new System.EventHandler(this.button38_Click);
             // 
@@ -849,6 +850,7 @@
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(200, 60);
             this.button39.TabIndex = 90;
+            this.button39.Text = "顯示任務欄";
             this.button39.UseVisualStyleBackColor = true;
             this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
@@ -859,6 +861,7 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(200, 60);
             this.button40.TabIndex = 91;
+            this.button40.Text = "使用 SystemInformation";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 

@@ -53,39 +53,17 @@ namespace vcs_System2
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-
-            label1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            label1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             label1.Text = "aaaaaa";
 
-            label2.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            bt_exit.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 35);
+            label2.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt_exit.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 35);
 
             richTextBox1.Size = new Size(400, 460);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1400, 660);
+            this.Size = new Size(1000, 660);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -230,107 +208,6 @@ namespace vcs_System2
 
         private void button9_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            //檢測系統啟動模式
-            string mode = SystemInformation.BootMode.ToString();
-            string str = "目前系統的啟動模式是：";
-            switch (mode)
-            {
-                case "FailSafe":
-                    MessageBox.Show(str + "不具有網絡支援的安全模式");
-                    break;
-                case "FailSafeWithNetwork":
-                    MessageBox.Show(str + "具有網絡支援的安全模式");
-                    break;
-                case "Normal":
-                    MessageBox.Show(str + "標準模式");
-                    break;
-            }
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-        }
-
-        //取得任務欄尺寸大小 ST
-
-        [DllImport("user32.dll")]
-        public static extern int FindWindow(string lpClassName, string lpWindowName);
-
-        [DllImport("user32.dll")]
-        public static extern int GetWindowRect(int hwnd, ref Rectangle lpRect);
-
-        Rectangle myrect;
-
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-            if (GetWindowRect(FindWindow("Shell_TrayWnd", null), ref myrect) == 0)
-            {
-                return;
-            }
-            else
-            {
-                richTextBox1.Text += "取得任務欄尺寸大小\n";
-                richTextBox1.Text += "上 : \t" + Convert.ToString(myrect.Top) + "\n";
-                richTextBox1.Text += "下 : \t" + Convert.ToString(myrect.Bottom) + "\n";
-                richTextBox1.Text += "左 : \t" + Convert.ToString(myrect.Left) + "\n";
-                richTextBox1.Text += "右 : \t" + Convert.ToString(myrect.Right) + "\n";
-            }
-
-
-        }
-        //取得任務欄尺寸大小 SP
-
-        //隱藏任務欄, 顯示任務欄 ST
-
-
-        private const int SW_HIDE = 0;
-        private const int SW_RESTORE = 9;
-
-        /*
-        [DllImport("user32.dll")]
-        public static extern int FindWindow(string lpClassName, string lpWindowName);
-        */
-
-        [DllImport("user32.dll")]
-        public static extern int ShowWindow(int hwnd, int nCmdShow);
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            //隱藏任務欄
-            ShowWindow(FindWindow("Shell_TrayWnd", null), SW_HIDE);
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-            //顯示任務欄
-            ShowWindow(FindWindow("Shell_TrayWnd", null), SW_RESTORE);
-        }
-        //隱藏任務欄, 顯示任務欄 SP
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
             //使用Class取得系統資訊
             SYSTEMTIME_INFO SystemInfo = new SYSTEMTIME_INFO();
             ComputerInfo.GetSystemTime(ref SystemInfo);
@@ -403,47 +280,6 @@ namespace vcs_System2
             ComputerInfo.GetSystemTime(ref StInfo);
             richTextBox1.Text += StInfo.wYear.ToString() + "年" + StInfo.wMonth.ToString() + "月" + StInfo.wDay.ToString() + "日" + "\n";
             richTextBox1.Text += (StInfo.wHour + 8).ToString() + "點" + StInfo.wMinute.ToString() + "分" + StInfo.wSecond.ToString() + "秒" + "\n";
-        }
-
-        private void button20_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button29_Click(object sender, EventArgs e)
-        {
         }
 
         /// <summary>

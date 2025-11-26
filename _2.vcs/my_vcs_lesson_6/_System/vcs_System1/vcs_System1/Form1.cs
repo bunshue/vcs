@@ -178,68 +178,6 @@ namespace vcs_System1
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //讀取電源狀態
-
-            richTextBox1.Text += "讀取電源狀態\n";
-            PowerStatus status = SystemInformation.PowerStatus;
-            float percent = status.BatteryLifePercent;
-
-            string percent_text = percent.ToString("P0");
-
-            richTextBox1.Text += percent_text + "\n";
-            if (status.PowerLineStatus == PowerLineStatus.Online)
-            {
-                if (percent < 1.0f)
-                    richTextBox1.Text += percent_text + ", charging\n";
-                else
-                    richTextBox1.Text += "Online fully charged\n";
-            }
-            else
-            {
-                richTextBox1.Text += "Offline, " + percent_text + " remaining\n";
-            }
-
-            ShowPowerStatus1();
-            ShowPowerStatus2();
-        }
-
-        private void ShowPowerStatus1()
-        {
-            // Get the current charge percent.
-            PowerStatus status = SystemInformation.PowerStatus;
-            int percent = (int)(status.BatteryLifePercent * 100);
-
-            richTextBox1.Text += percent.ToString() + "%" + "\n";
-            richTextBox1.Text += status.PowerLineStatus.ToString() + "\n";
-            richTextBox1.Text += status.BatteryChargeStatus.ToString() + "\n";
-            richTextBox1.Text += status.BatteryFullLifetime.ToString() + "\n";
-            richTextBox1.Text += status.BatteryLifePercent.ToString() + "\n";
-            richTextBox1.Text += status.BatteryLifeRemaining.ToString() + "\n";
-        }
-
-        private void ShowPowerStatus2()
-        {
-            PowerStatus status = SystemInformation.PowerStatus;
-            richTextBox1.Text += "Charge Status:\t" + status.BatteryChargeStatus.ToString() + "\n";
-
-            if (status.BatteryFullLifetime == -1)
-            {
-                richTextBox1.Text += "Full Lifetime:\t" + "Unknown" + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "Full Lifetime (sec):\t" + status.BatteryFullLifetime.ToString() + "\n";
-            }
-            richTextBox1.Text += "Charge:\t\t" + status.BatteryLifePercent.ToString("P0") + "\n";
-            if (status.BatteryLifeRemaining == -1)
-            {
-                richTextBox1.Text += "Life Remaining:\t" + "Unknown" + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "Life Remaining (sec):\t" + status.BatteryLifeRemaining.ToString() + "\n";
-            }
-            richTextBox1.Text += "Line Status:\t" + status.PowerLineStatus.ToString() + "\n";
         }
 
         //是否安裝音效卡 ST
@@ -827,7 +765,6 @@ namespace vcs_System1
         {
             //取得電腦名稱
             richTextBox1.Text += "電腦名稱 2 : " + Dns.GetHostName() + "\n";
-            richTextBox1.Text += "電腦名稱 3 : " + SystemInformation.ComputerName + "\n";
             richTextBox1.Text += "電腦名稱 4 : " + Environment.GetEnvironmentVariable("COMPUTERNAME") + "\n";
 
 
@@ -1008,10 +945,9 @@ namespace vcs_System1
         {
             // 找出字體大小,並算出比例
             // 取出螢幕DPI值
-            float dpiX, dpiY;
             Graphics graphics = this.CreateGraphics();
-            dpiX = graphics.DpiX;
-            dpiY = graphics.DpiY;
+            float dpiX = graphics.DpiX;
+            float dpiY = graphics.DpiY;
             richTextBox1.Text += "dpiX = " + dpiX.ToString() + "\n";
             richTextBox1.Text += "dpiY = " + dpiY.ToString() + "\n";
         }
@@ -1029,9 +965,9 @@ namespace vcs_System1
         {
             richTextBox1.Text += "讀取語系區域\n";
 
-            string systemName = CultureInfo.CurrentCulture.Name;
+            string systemName1 = CultureInfo.CurrentCulture.Name;
             string systemName2 = CultureInfo.CurrentCulture.NativeName;
-            richTextBox1.Text += "Name : " + systemName + "\n";
+            richTextBox1.Text += "Name : " + systemName1 + "\n";
             richTextBox1.Text += "NativeName : " + systemName2 + "\n";
         }
 
@@ -1178,24 +1114,145 @@ namespace vcs_System1
             richTextBox1.Text += "Working Set" + "\t" + ((double)proc.WorkingSet64).ToFileSize() + "\n";
         }
 
+        //取得任務欄尺寸大小 ST
+
+        [DllImport("user32.dll")]
+        public static extern int FindWindow(string lpClassName, string lpWindowName);
+
+        [DllImport("user32.dll")]
+        public static extern int GetWindowRect(int hwnd, ref Rectangle lpRect);
+
+        Rectangle myrect;
+
         private void button37_Click(object sender, EventArgs e)
         {
-
+            //取得任務欄尺寸大小
+            if (GetWindowRect(FindWindow("Shell_TrayWnd", null), ref myrect) == 0)
+            {
+                return;
+            }
+            else
+            {
+                richTextBox1.Text += "取得任務欄尺寸大小\n";
+                richTextBox1.Text += "上 : \t" + Convert.ToString(myrect.Top) + "\n";
+                richTextBox1.Text += "下 : \t" + Convert.ToString(myrect.Bottom) + "\n";
+                richTextBox1.Text += "左 : \t" + Convert.ToString(myrect.Left) + "\n";
+                richTextBox1.Text += "右 : \t" + Convert.ToString(myrect.Right) + "\n";
+            }
         }
+        //取得任務欄尺寸大小 SP
+
+        //隱藏任務欄, 顯示任務欄 ST
+        private const int SW_HIDE = 0;
+        private const int SW_RESTORE = 9;
+
+        /*
+        [DllImport("user32.dll")]
+        public static extern int FindWindow(string lpClassName, string lpWindowName);
+        */
+
+        [DllImport("user32.dll")]
+        public static extern int ShowWindow(int hwnd, int nCmdShow);
 
         private void button38_Click(object sender, EventArgs e)
         {
-
+            //隱藏任務欄
+            ShowWindow(FindWindow("Shell_TrayWnd", null), SW_HIDE);
         }
 
         private void button39_Click(object sender, EventArgs e)
         {
-
+            //顯示任務欄
+            ShowWindow(FindWindow("Shell_TrayWnd", null), SW_RESTORE);
         }
+        //隱藏任務欄, 顯示任務欄 SP
 
         private void button40_Click(object sender, EventArgs e)
         {
+            //使用 SystemInformation
 
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "電腦名稱 3 : " + SystemInformation.ComputerName + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            richTextBox1.Text += "檢測系統啟動模式\n";
+
+            string mode = SystemInformation.BootMode.ToString();
+            richTextBox1.Text += "目前系統的啟動模式是：";
+
+            switch (mode)
+            {
+                case "FailSafe":
+                    richTextBox1.Text += "不具有網絡支援的安全模式\n";
+                    break;
+                case "FailSafeWithNetwork":
+                    richTextBox1.Text += "具有網絡支援的安全模式\n";
+                    break;
+                case "Normal":
+                    richTextBox1.Text += "標準模式\n";
+                    break;
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            richTextBox1.Text += "讀取電源狀態\n";
+
+            PowerStatus status = SystemInformation.PowerStatus;
+            float percent = status.BatteryLifePercent;
+
+            string percent_text = percent.ToString("P0");
+
+            richTextBox1.Text += percent_text + "\n";
+            if (status.PowerLineStatus == PowerLineStatus.Online)
+            {
+                if (percent < 1.0f)
+                    richTextBox1.Text += percent_text + ", charging\n";
+                else
+                    richTextBox1.Text += "Online fully charged\n";
+            }
+            else
+            {
+                richTextBox1.Text += "Offline, " + percent_text + " remaining\n";
+            }
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            // Get the current charge percent.
+            status = SystemInformation.PowerStatus;
+            int percents = (int)(status.BatteryLifePercent * 100);
+
+            richTextBox1.Text += percents.ToString() + "%" + "\n";
+            richTextBox1.Text += status.PowerLineStatus.ToString() + "\n";
+            richTextBox1.Text += status.BatteryChargeStatus.ToString() + "\n";
+            richTextBox1.Text += status.BatteryFullLifetime.ToString() + "\n";
+            richTextBox1.Text += status.BatteryLifePercent.ToString() + "\n";
+            richTextBox1.Text += status.BatteryLifeRemaining.ToString() + "\n";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            status = SystemInformation.PowerStatus;
+            richTextBox1.Text += "Charge Status:\t" + status.BatteryChargeStatus.ToString() + "\n";
+
+            if (status.BatteryFullLifetime == -1)
+            {
+                richTextBox1.Text += "Full Lifetime:\t" + "Unknown" + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "Full Lifetime (sec):\t" + status.BatteryFullLifetime.ToString() + "\n";
+            }
+            richTextBox1.Text += "Charge:\t\t" + status.BatteryLifePercent.ToString("P0") + "\n";
+            if (status.BatteryLifeRemaining == -1)
+            {
+                richTextBox1.Text += "Life Remaining:\t" + "Unknown" + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "Life Remaining (sec):\t" + status.BatteryLifeRemaining.ToString() + "\n";
+            }
+            richTextBox1.Text += "Line Status:\t" + status.PowerLineStatus.ToString() + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
 
         private void button41_Click(object sender, EventArgs e)
@@ -1294,6 +1351,7 @@ namespace vcs_System1
             var psi = new ProcessStartInfo("shutdown", "/s /t 0");
             psi.CreateNoWindow = true;
             psi.UseShellExecute = false;
+
             //偽執行
             //Process.Start(psi);
         }
@@ -1304,6 +1362,7 @@ namespace vcs_System1
             var psi = new ProcessStartInfo("shutdown", "/r /t 0");
             psi.CreateNoWindow = true;
             psi.UseShellExecute = false;
+
             //偽執行
             //Process.Start(psi);
         }
