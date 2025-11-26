@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_System6", "vcs_System6\vcs_System6.csproj", "{D3AABE02-D1D8-456D-9D3B-8C19504A1384}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_RegistryKey", "vcs_RegistryKey\vcs_RegistryKey.csproj", "{D3AABE02-D1D8-456D-9D3B-8C19504A1384}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

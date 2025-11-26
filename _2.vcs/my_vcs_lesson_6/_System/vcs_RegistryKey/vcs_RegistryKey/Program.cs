@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_System6
+namespace vcs_RegistryKey
 {
     static class Program
     {

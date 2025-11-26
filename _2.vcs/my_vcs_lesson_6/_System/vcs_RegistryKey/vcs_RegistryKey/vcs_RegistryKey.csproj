@@ -8,8 +8,8 @@
     <ProjectGuid>{D3AABE02-D1D8-456D-9D3B-8C19504A1384}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_System6</RootNamespace>
-    <AssemblyName>vcs_System6</AssemblyName>
+    <RootNamespace>vcs_RegistryKey</RootNamespace>
+    <AssemblyName>vcs_RegistryKey</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>

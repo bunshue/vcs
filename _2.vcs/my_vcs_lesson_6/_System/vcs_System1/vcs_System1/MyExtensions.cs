@@ -5,7 +5,7 @@ using System.Text;
 
 using System.Runtime.InteropServices;
 
-namespace vcs_System2
+namespace vcs_System1
 {
     public static class MyExtensions
     {

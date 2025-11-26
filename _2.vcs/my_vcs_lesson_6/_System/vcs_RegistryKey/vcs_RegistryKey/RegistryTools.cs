@@ -6,7 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
-namespace vcs_System6
+namespace vcs_RegistryKey
 {
     class RegistryTools
     {

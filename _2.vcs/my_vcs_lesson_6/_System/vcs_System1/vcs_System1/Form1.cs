@@ -108,20 +108,31 @@ namespace vcs_System1
             button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            lb_processes.Location = new Point(x_st + dx * 4, y_st + dy * 9);//進程數
+            button40.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button41.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            button42.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            button43.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            button44.Location = new Point(x_st + dx * 4, y_st + dy * 4);
+            button45.Location = new Point(x_st + dx * 4, y_st + dy * 5);
+            button46.Location = new Point(x_st + dx * 4, y_st + dy * 6);
+            button47.Location = new Point(x_st + dx * 4, y_st + dy * 7);
+            button48.Location = new Point(x_st + dx * 4, y_st + dy * 8);
+            button49.Location = new Point(x_st + dx * 4, y_st + dy * 9);
+
+            lb_processes.Location = new Point(x_st + dx * 5, y_st + dy * 9);//進程數
 
             groupBox1.Size = new Size(200, 150);//Windows 開關機(偽執行)
             groupBox2.Size = new Size(320, 150);
             groupBox3.Size = new Size(320, 100);
             groupBox4.Size = new Size(320, 100);
 
-            groupBox2.Location = new Point(x_st + dx * 4, y_st + dy * 0);//記憶體狀態
-            groupBox3.Location = new Point(x_st + dx * 4, y_st + dy * 2 + 20);//物理內存
-            groupBox4.Location = new Point(x_st + dx * 4, y_st + dy * 4);//虛擬內存
-            groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 6);
+            groupBox2.Location = new Point(x_st + dx * 5, y_st + dy * 0);//記憶體狀態
+            groupBox3.Location = new Point(x_st + dx * 5, y_st + dy * 2 + 20);//物理內存
+            groupBox4.Location = new Point(x_st + dx * 5, y_st + dy * 4);//虛擬內存
+            groupBox1.Location = new Point(x_st + dx * 5, y_st + dy * 6);
 
-            richTextBox1.Size = new Size(400, 740);
-            richTextBox1.Location = new Point(x_st + dx * 5 + 130, y_st + dy * 0);
+            richTextBox1.Size = new Size(300, 640);
+            richTextBox1.Location = new Point(x_st + dx * 6 + 130, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             dy = 30;
@@ -134,7 +145,7 @@ namespace vcs_System1
             label3.Text = "";
             label4.Text = "";
 
-            this.Size = new Size(1600, 800);
+            this.Size = new Size(1710, 700);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -1150,7 +1161,21 @@ namespace vcs_System1
 
         private void button36_Click(object sender, EventArgs e)
         {
+            //取得記憶體使用狀態
 
+            richTextBox1.Text += "Property\t\t\tValue\n";
+            Process proc = Process.GetCurrentProcess();
+
+            richTextBox1.Text += "Min Working Set" + "\t" + ((double)proc.MinWorkingSet).ToFileSize() + "\n";
+            richTextBox1.Text += "Max Working Set" + "\t" + ((double)proc.MaxWorkingSet).ToFileSize() + "\n";
+            richTextBox1.Text += "Non-paged Memory Size" + "\t" + ((double)proc.NonpagedSystemMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Paged Memory Size" + "\t" + ((double)proc.PagedMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Paged System Memory Size" + "\t" + ((double)proc.PagedSystemMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Peak Paged Memory Size" + "\t" + ((double)proc.PeakPagedMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Peak Virtual Memory Size" + "\t" + ((double)proc.PeakVirtualMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Peak Working Set" + "\t" + ((double)proc.PeakWorkingSet64).ToFileSize() + "\n";
+            richTextBox1.Text += "Virtual Memory Size" + "\t" + ((double)proc.VirtualMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Working Set" + "\t" + ((double)proc.WorkingSet64).ToFileSize() + "\n";
         }
 
         private void button37_Click(object sender, EventArgs e)
@@ -1164,6 +1189,56 @@ namespace vcs_System1
         }
 
         private void button39_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button43_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button44_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button45_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button46_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button47_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button48_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button49_Click(object sender, EventArgs e)
         {
 
         }
