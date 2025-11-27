@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Runtime.InteropServices;   //StructLayout
+using System.Runtime.InteropServices;   //for DllImport, StructLayout
 
-namespace read_hdd_serial
+namespace vcs_DriveInfo3
 {
     public partial class Form1 : Form
     {
+        [DllImport("kernel32.dll")]
+        private static extern bool GetDiskFreeSpaceEx(string lpDirectoryName, out ulong lpFreeBytesAvailable, out ulong lpTotalNumberOfBytes, out ulong lpTotalNumberOfFreeBytes);
+
         public Form1()
         {
             InitializeComponent();
@@ -25,7 +28,34 @@ namespace read_hdd_serial
 
         void show_item_location()
         {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 12;
+            y_st = 12;
+            dx = 200 + 10;
+            dy = 50 + 10;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            richTextBox1.Size = new Size(450, 600);
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(700, 700);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -33,17 +63,156 @@ namespace read_hdd_serial
             richTextBox1.Clear();
         }
 
+        private void button0_Click(object sender, EventArgs e)
+        {
+            ulong freesize;
+            freesize = GetFreeSpace("C");
+            richTextBox1.Text += "磁碟C剩餘空間: " + freesize.ToString() + " bytes\n";
+            freesize = GetFreeSpace("D");
+            richTextBox1.Text += "磁碟D剩餘空間: " + freesize.ToString() + " bytes\n";
+            freesize = GetFreeSpace("G");
+            richTextBox1.Text += "磁碟G剩餘空間: " + freesize.ToString() + " bytes\n";
+        }
+
+        /// <summary>
+        /// 取得磁碟剩餘空間
+        /// </summary>
+        /// <param name="driveDirectoryName">驅動器名</param>
+        /// <returns>剩餘空間</returns>
+        private static ulong GetFreeSpace(string driveDirectoryName)
+        {
+            ulong freeBytesAvailable, totalNumberOfBytes, totalNumberOfFreeBytes;
+            if (!driveDirectoryName.EndsWith(":\\"))
+            {
+                driveDirectoryName += ":\\";
+            }
+            GetDiskFreeSpaceEx(driveDirectoryName, out freeBytesAvailable, out totalNumberOfBytes, out totalNumberOfFreeBytes);
+            return freeBytesAvailable;
+        }
+
+        //------------------------------------------------------------
+
+        [DllImport("kernel32.dll", EntryPoint = "GetDiskFreeSpaceEx")]
+        public static extern int GetDiskFreeSpaceEx(string lpDirectoryName, out long lpFreeBytesAvailable, out long lpTotalNumberOfBytes, out long lpTotalNumberOfFreeBytes);
         private void button1_Click(object sender, EventArgs e)
         {
-            IDE ide = new IDE();            
+            //取得本機或網路磁碟機的磁碟訊息, 選擇磁碟或目錄
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                long fb, ftb, tfb;
+                string str = fbd.SelectedPath;
+                richTextBox1.Text += "path : " + str + "\n";
+                if (GetDiskFreeSpaceEx(str, out fb, out ftb, out tfb) != 0)
+                {
+                    string strfb = Convert.ToString(fb / 1024 / 1024 / 1024) + " G";
+                    string strftb = Convert.ToString(ftb / 1024 / 1024 / 1024) + " G";
+                    string strtfb = Convert.ToString(tfb / 1024 / 1024 / 1024) + " G";
+                    richTextBox1.Text += "總空間" + strfb + "\n";
+                    richTextBox1.Text += "可用空間" + strftb + "\n";
+                    richTextBox1.Text += "總剩餘空間" + strtfb + "\n";
+                }
+                else
+                {
+                    MessageBox.Show("NO");
+                }
+            }
+        }
 
+        //------------------------------------------------------------
+
+        //取得硬碟資訊 ST
+        // TBD [DllImport("kernel32.dll", EntryPoint = "GetDiskFreeSpaceEx")]
+        // TBD public static extern int GetDiskFreeSpaceEx(string lpDirectoryName, out long lpFreeBytesAvailable, out long lpTotalNumberOfBytes, out long lpTotalNumberOfFreeBytes);
+
+        const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
+        const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
+        const int MB = 1024 * 1024;//定義MB的計算常量
+        const int KB = 1024;//定義KB的計算常量
+        public string ByteConversionTBGBMBKB(Int64 size)
+        {
+            if (size < 0)
+                return "不合法的數值";
+            else if (size / TB >= 1024)//如果目前Byte的值大於等於1024TB
+                return "無法表示";
+            else if (size / TB >= 1)//如果目前Byte的值大於等於1TB
+                return (Math.Round(size / (float)TB, 2)).ToString() + " TB";//將其轉換成TB
+            else if (size / GB >= 1)//如果目前Byte的值大於等於1GB
+                return (Math.Round(size / (float)GB, 2)).ToString() + " GB";//將其轉換成GB
+            else if (size / MB >= 1)//如果目前Byte的值大於等於1MB
+                return (Math.Round(size / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
+            else if (size / KB >= 1)//如果目前Byte的值大於等於1KB
+                return (Math.Round(size / (float)KB, 2)).ToString() + " KB";//將其轉換成KB
+            else
+                return size.ToString() + " Byte";//顯示Byte值
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //取得硬碟資訊
+            //取得硬碟資訊
+            long fb, ftb, tfb;
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__RW\_excel";
+
+            //this.textBox4.Text = foldername;
+            richTextBox1.Text += "get : " + foldername + "\n";
+            if (GetDiskFreeSpaceEx(foldername, out fb, out ftb, out tfb) != 0)
+            {
+                richTextBox1.Text += "磁碟總容量：" + ByteConversionTBGBMBKB(Convert.ToInt64(ftb)) + "\n";
+                richTextBox1.Text += "可用磁碟空間：" + ByteConversionTBGBMBKB(Convert.ToInt64(fb)) + "\n";
+                richTextBox1.Text += "磁碟剩餘空間：" + ByteConversionTBGBMBKB(Convert.ToInt64(tfb)) + "\n";
+            }
+            else
+            {
+                MessageBox.Show("NO");
+            }
+        }
+        //取得硬碟資訊 SP
+
+        //------------------------------------------------------------
+
+
+        private void button3_Click(object sender, EventArgs e)
+        {
 
         }
 
+        //------------------------------------------------------------
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //僅有類別, 還不會用
+
+            IDE ide = new IDE();
+        }
     }
 
-    //C#讀硬盤序列號的原代碼
+    //讀硬盤序列號
     public class IDE
     {
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]

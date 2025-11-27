@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_test_all_24_DllImport_HDD
+namespace vcs_IP_Power
 {
     static class Program
     {

@@ -651,6 +651,13 @@ namespace vcs_System1
         private void button9_Click(object sender, EventArgs e)
         {
             //Application, Path, 物件
+
+            //------------------------------------------------------------  # 60個
+
+            richTextBox1.Text += "目前應用程式路徑: \t" + Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\n";
+
+            //------------------------------------------------------------  # 60個
+
             richTextBox1.Text += "系統預設路徑\n";
             richTextBox1.Text += "StartupPath :\t" + Application.StartupPath + "\n";
             richTextBox1.Text += "Form1.cs所在位置 :\t" + Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..")) + "\n";
@@ -1117,31 +1124,8 @@ namespace vcs_System1
             }
         }
 
-        [DllImport("kernel32.dll", EntryPoint = "GetDiskFreeSpaceEx")]
-        public static extern int GetDiskFreeSpaceEx(string lpDirectoryName, out long lpFreeBytesAvailable, out long lpTotalNumberOfBytes, out long lpTotalNumberOfFreeBytes);
         private void button34_Click(object sender, EventArgs e)
         {
-            //取得本機或網路磁碟機的磁碟訊息, 選擇磁碟或目錄
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            if (fbd.ShowDialog() == DialogResult.OK)
-            {
-                long fb, ftb, tfb;
-                string str = fbd.SelectedPath;
-                richTextBox1.Text += "path : " + str + "\n";
-                if (GetDiskFreeSpaceEx(str, out fb, out ftb, out tfb) != 0)
-                {
-                    string strfb = Convert.ToString(fb / 1024 / 1024 / 1024) + " G";
-                    string strftb = Convert.ToString(ftb / 1024 / 1024 / 1024) + " G";
-                    string strtfb = Convert.ToString(tfb / 1024 / 1024 / 1024) + " G";
-                    richTextBox1.Text += "總空間" + strfb + "\n";
-                    richTextBox1.Text += "可用空間" + strftb + "\n";
-                    richTextBox1.Text += "總剩餘空間" + strtfb + "\n";
-                }
-                else
-                {
-                    MessageBox.Show("NO");
-                }
-            }
         }
 
         private void button35_Click(object sender, EventArgs e)

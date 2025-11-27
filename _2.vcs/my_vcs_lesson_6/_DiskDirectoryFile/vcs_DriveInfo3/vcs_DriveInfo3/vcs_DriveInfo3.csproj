@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C59E2F2C-711F-4735-961E-E726B31CAD90}</ProjectGuid>
+    <ProjectGuid>{8A222994-B08F-4320-BBF3-FED20C5D98E9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>read_hdd_serial</RootNamespace>
-    <AssemblyName>read_hdd_serial</AssemblyName>
+    <RootNamespace>vcs_DriveInfo3</RootNamespace>
+    <AssemblyName>vcs_DriveInfo3</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

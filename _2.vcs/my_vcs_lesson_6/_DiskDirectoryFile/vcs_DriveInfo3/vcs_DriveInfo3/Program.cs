@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace read_hdd_serial
+namespace vcs_DriveInfo3
 {
     static class Program
     {

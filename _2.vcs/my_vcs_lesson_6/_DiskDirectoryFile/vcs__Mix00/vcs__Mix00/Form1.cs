@@ -62,8 +62,8 @@ namespace vcs__Mix00
             //button
             x_st = 15;
             y_st = 15;
-            dx = 180;
-            dy = 75;
+            dx = 180 + 5;
+            dy = 60 + 5;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -98,13 +98,19 @@ namespace vcs__Mix00
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 4 - 120);
-            richTextBox1.Size = new Size(817, 330);
-            listView1.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-            listBox1.Location = new Point(x_st + dx * 5 + 60, y_st + dy * 7);
+            listView1.Size = new Size(400, 240);
+            listView1.Location = new Point(x_st + dx * 3, y_st + dy * 3 - 20);
+
+            listBox1.Size = new Size(400, 240);
+            listBox1.Location = new Point(x_st + dx * 5 + 60, y_st + dy * 3 - 20);
+
+            richTextBox1.Size = new Size(600, 300);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 7 - 30);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1460, 800);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -864,6 +870,31 @@ namespace vcs__Mix00
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //取得資料夾下所有圖片檔資訊
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
+
+            IEnumerable<FileInfo> images = null;
+            if (Directory.Exists(foldername) == true)
+            {
+                DirectoryInfo dirInfo = new DirectoryInfo(foldername);
+                images = dirInfo.EnumerateFiles("*.jpg").OrderBy(i => i.Name[0]).ThenBy(i => i.Name.Length).ThenBy(i => i.Name);
+
+                int len = images.Count();
+                richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+                if (images != null && images.Count() > 0)
+                {
+
+                }
+
+                foreach (var image in images)
+                {
+                    richTextBox1.Text += image.Name + "\n";
+                    richTextBox1.Text += image.FullName + "\n";
+                    richTextBox1.Text += image.Extension + "\n";
+                    richTextBox1.Text += image.Length.ToString() + "\n";
+                }
+            }
         }
 
         private void button25_Click(object sender, EventArgs e)

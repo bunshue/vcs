@@ -149,53 +149,9 @@ namespace vcs_DriveInfo1
             }
         }
 
-        //取得硬碟資訊 ST
-        [DllImport("kernel32.dll", EntryPoint = "GetDiskFreeSpaceEx")]
-        public static extern int GetDiskFreeSpaceEx(string lpDirectoryName, out long lpFreeBytesAvailable, out long lpTotalNumberOfBytes, out long lpTotalNumberOfFreeBytes);
-
-        const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
-        const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
-        const int MB = 1024 * 1024;//定義MB的計算常量
-        const int KB = 1024;//定義KB的計算常量
-        public string ByteConversionTBGBMBKB(Int64 size)
-        {
-            if (size < 0)
-                return "不合法的數值";
-            else if (size / TB >= 1024)//如果目前Byte的值大於等於1024TB
-                return "無法表示";
-            else if (size / TB >= 1)//如果目前Byte的值大於等於1TB
-                return (Math.Round(size / (float)TB, 2)).ToString() + " TB";//將其轉換成TB
-            else if (size / GB >= 1)//如果目前Byte的值大於等於1GB
-                return (Math.Round(size / (float)GB, 2)).ToString() + " GB";//將其轉換成GB
-            else if (size / MB >= 1)//如果目前Byte的值大於等於1MB
-                return (Math.Round(size / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
-            else if (size / KB >= 1)//如果目前Byte的值大於等於1KB
-                return (Math.Round(size / (float)KB, 2)).ToString() + " KB";//將其轉換成KB
-            else
-                return size.ToString() + " Byte";//顯示Byte值
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
-            //取得硬碟資訊
-            //取得硬碟資訊
-            long fb, ftb, tfb;
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__RW\_excel";
-
-            //this.textBox4.Text = foldername;
-            richTextBox1.Text += "get : " + foldername + "\n";
-            if (GetDiskFreeSpaceEx(foldername, out fb, out ftb, out tfb) != 0)
-            {
-                richTextBox1.Text += "磁碟總容量：" + ByteConversionTBGBMBKB(Convert.ToInt64(ftb)) + "\n";
-                richTextBox1.Text += "可用磁碟空間：" + ByteConversionTBGBMBKB(Convert.ToInt64(fb)) + "\n";
-                richTextBox1.Text += "磁碟剩餘空間：" + ByteConversionTBGBMBKB(Convert.ToInt64(tfb)) + "\n";
-            }
-            else
-            {
-                MessageBox.Show("NO");
-            }
         }
-        //取得硬碟資訊 SP
     }
 }
 

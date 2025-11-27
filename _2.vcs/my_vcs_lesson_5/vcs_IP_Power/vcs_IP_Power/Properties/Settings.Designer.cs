@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace read_hdd_serial.Properties
+namespace vcs_IP_Power.Properties
 {
 
 
