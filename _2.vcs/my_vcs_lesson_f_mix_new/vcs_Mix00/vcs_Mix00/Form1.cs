@@ -165,21 +165,6 @@ namespace vcs_Mix00
         {
             show_button_text(sender);
 
-            //取得目前的Process
-            using (Process curProcess = Process.GetCurrentProcess())
-            {
-                richTextBox1.Text += "aaaa = " + curProcess.ProcessName + "\n";
-                richTextBox1.Text += "aaaa = " + curProcess.MainModule + "\n";
-                richTextBox1.Text += "aaaa = " + curProcess.MainWindowTitle + "\n";
-                richTextBox1.Text += "aaaa = " + curProcess.ProcessorAffinity + "\n";
-                richTextBox1.Text += "處理序的名稱 :\t" + curProcess.ProcessName.ToString().Trim() + "\n";//取得處理序的名稱
-                richTextBox1.Text += "主視窗標題 :\t" + curProcess.MainWindowTitle + "\n";   //取得處理序的主視窗標題
-                richTextBox1.Text += "處理序啟動的時間 :\t" + curProcess.StartTime.ToString() + "\n";   //取得處理序的主視窗標題
-                richTextBox1.Text += "這個處理序的總處理器時間 :\t" + curProcess.TotalProcessorTime.ToString() + "\n";   //取得處理序的主視窗標題
-
-                //程序的退出
-                //Process.GetCurrentProcess().Kill();
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -865,20 +850,6 @@ namespace vcs_Mix00
 
         private void button18_Click(object sender, EventArgs e)
         {
-            //把控件做成串列
-
-            List<Button> Clients = new List<Button>();
-            Clients.Add(button1);
-            Clients.Add(button2);
-            Clients.Add(button3);
-            Clients.Add(button4);
-            Clients.Add(button5);
-
-            foreach (Button client in Clients)
-            {
-                client.Text = client.Name;
-                richTextBox1.Text += "控件 :" + client.Name + "長度 :" + client.Text.Length.ToString() + "\n";
-            }
         }
 
         private void button19_Click(object sender, EventArgs e)

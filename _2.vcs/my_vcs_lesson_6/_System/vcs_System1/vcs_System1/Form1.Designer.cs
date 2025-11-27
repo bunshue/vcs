@@ -132,7 +132,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 2;
-            this.button2.Text = "取得目前Windows版本";
+            this.button2.Text = "取得目前的Process";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -187,7 +187,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 7;
-            this.button7.Text = "Environment屬性";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -198,7 +197,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 8;
-            this.button8.Text = "Environment.SpecialFolder";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -231,7 +229,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 12;
-            this.button11.Text = "get os version";
+            this.button11.Text = "測試防火牆";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -264,7 +262,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 15;
-            this.button14.Text = "電腦本機IP";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -286,7 +283,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(200, 60);
             this.button17.TabIndex = 18;
-            this.button17.Text = "取得電腦名稱";
+            this.button17.Text = "DNS相關";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -429,6 +426,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 50;
+            this.button0.Text = "Environment屬性";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -872,6 +870,7 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(200, 60);
             this.button41.TabIndex = 92;
+            this.button41.Text = "判斷電腦中是否安裝了SQL軟體";
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
@@ -882,6 +881,7 @@
             this.button42.Name = "button42";
             this.button42.Size = new System.Drawing.Size(200, 60);
             this.button42.TabIndex = 93;
+            this.button42.Text = "獲取本機所有SQLServer引擎";
             this.button42.UseVisualStyleBackColor = true;
             this.button42.Click += new System.EventHandler(this.button42_Click);
             // 

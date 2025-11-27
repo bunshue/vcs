@@ -12,8 +12,6 @@ using System.Runtime.InteropServices;   //for DllImport //DllImport 	指定 DLL 
 using System.Diagnostics;   //for Process
 using System.Net.NetworkInformation;    //for Ping & PingReply
 
-using System.ServiceProcess;    //for ServiceController     參考/加入參考/.NET/System.ServiceProcess
-
 namespace vcs_System2
 {
     public partial class Form1 : Form
@@ -91,55 +89,10 @@ namespace vcs_System2
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //判斷電腦中是否安裝了SQL軟體
-            if (ExitSQL())
-            {
-                richTextBox1.Text += "本機電腦中已經安裝SQL軟體\n";
-            }
-            else
-            {
-                richTextBox1.Text += "本機電腦中沒有安裝SQL軟體\n";
-            }
-        }
-
-        public bool ExitSQL()
-        {
-            bool sqlFlag = false;
-            ServiceController[] services = ServiceController.GetServices();
-            for (int i = 0; i < services.Length; i++)
-            {
-                if (services[i].DisplayName.ToString() == "MSSQLSERVER")
-                    sqlFlag = true;
-            }
-            return sqlFlag;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //獲取本機所有SQLServer引擎
-
-            //获得主机名称
-            string HostName = Dns.GetHostName();
-            ServiceController[] services = ServiceController.GetServices();
-
-            //从机器服务列表中找到本机的SqlServer引擎
-
-            richTextBox1.Text += "services len = " + services.Length.ToString() + "\n";
-
-            foreach (ServiceController s in services)
-            {
-                richTextBox1.Text += "s = " + s.ServiceName + "\n";
-                if (s.ServiceName.ToLower().IndexOf("mssql$") != -1)
-                {
-                    //ddlServerName.Items.Add(HostName + "\\" + s.ServiceName.Substring(s.ServiceName.IndexOf("$") + 1));     
-                    richTextBox1.Text += HostName + "\\" + s.ServiceName.Substring(s.ServiceName.IndexOf("$") + 1) + "\n";
-                }
-                else if (s.ServiceName.ToLower() == "mssqlserver")
-                {
-                    //ddlServerName.Items.Add(HostName);
-                    richTextBox1.Text += "bbbb " + HostName + "\n";
-                }
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -191,19 +144,6 @@ namespace vcs_System2
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //測試防火牆
-            // Create the firewall type.
-            Type FWManagerType = Type.GetTypeFromProgID("HNetCfg.FwMgr");
-
-            // Use the firewall type to create a firewall manager object.
-            dynamic FWManager = Activator.CreateInstance(FWManagerType);
-
-            // Check the status of the firewall.
-
-            if (FWManager.LocalPolicy.CurrentProfile.FirewallEnabled == true)
-                richTextBox1.Text += "防火牆已開啟\n";
-            else
-                richTextBox1.Text += "防火牆未開啟\n";
         }
 
         private void button9_Click(object sender, EventArgs e)
