@@ -128,13 +128,14 @@ namespace vcs_test_all_01_Control
             //button
             x_st = 20;
             y_st = 30;
-            dx = 130;
-            dy = 70;
+            dx = 120 + 10;
+            dy = 55 + 10;
 
-            x_st = 1300;
+            x_st = 1050;
+            y_st = 100;
 
-            bt_help.Location = new Point(x_st - dx * 1, y_st + dy * 0);
-            bt_about.Location = new Point(x_st - dx * 1, y_st + dy * 1);
+            bt_help.Location = new Point(x_st + dx * 0, y_st - dy * 1);
+            bt_about.Location = new Point(x_st + dx * 1, y_st - dy * 1);
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -148,11 +149,17 @@ namespace vcs_test_all_01_Control
             button13.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
             button15.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button37.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button40.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button46.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button33.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button34.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button37.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button40.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button46.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button47.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button48.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button49.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button50.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st - dy * 1);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             bt_rtb_info.Location = new Point(richTextBox1.Location.X, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_rtb_info.Size.Height);
@@ -857,8 +864,46 @@ namespace vcs_test_all_01_Control
             form.ShowDialog();
         }
 
+        //在winform中查找控件
+        private Control findControl(Control control, string controlName)
+        {
+            Control c1;
+            foreach (Control c in control.Controls)
+            {
+                if (c.Name == controlName)
+                {
+                    return c;
+                }
+                else if (c.Controls.Count > 0)
+                {
+                    c1 = findControl(c, controlName);
+                    if (c1 != null)
+                    {
+                        return c1;
+                    }
+                }
+            }
+            return null;
+        }
+
         private void button0_Click(object sender, EventArgs e)
         {
+            //在winform中查找控件
+
+            //在winform中查找控件
+
+            //調用
+            for (int i = 1; i <= 5; i++)
+            {
+                string _box = "button" + i.ToString();
+                Button btn = (Button)this.findControl(this, _box);
+
+                btn.BackColor = Color.Pink;
+                //tb.Text = i.ToString();
+
+
+                richTextBox1.Text += "i = " + i.ToString() + "\n";
+            }
 
         }
 
@@ -901,6 +946,36 @@ namespace vcs_test_all_01_Control
         private void bt_move_control_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "控件在窗體內移動\n";
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button47_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button48_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button49_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button50_Click(object sender, EventArgs e)
+        {
+
         }
 
         /* 找panel1內的控件
@@ -1111,4 +1186,3 @@ namespace vcs_test_all_01_Control
         }
     }
 }
-

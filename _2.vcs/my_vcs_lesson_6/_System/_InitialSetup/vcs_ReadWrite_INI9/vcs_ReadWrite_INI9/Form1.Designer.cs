@@ -50,13 +50,22 @@
             this.getAllSectionBtn = new System.Windows.Forms.Button();
             this.getAllKeyBtn = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.bt_clear = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.userGb.SuspendLayout();
             this.ftpGb.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // readBtn
             // 
-            this.readBtn.Location = new System.Drawing.Point(113, 274);
+            this.readBtn.Location = new System.Drawing.Point(23, 284);
             this.readBtn.Name = "readBtn";
             this.readBtn.Size = new System.Drawing.Size(103, 30);
             this.readBtn.TabIndex = 0;
@@ -66,7 +75,7 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(273, 274);
+            this.saveBtn.Location = new System.Drawing.Point(213, 284);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(103, 30);
             this.saveBtn.TabIndex = 1;
@@ -78,7 +87,7 @@
             // 
             this.userGb.Controls.Add(this.webAddresTxt);
             this.userGb.Controls.Add(this.label1);
-            this.userGb.Location = new System.Drawing.Point(26, 12);
+            this.userGb.Location = new System.Drawing.Point(15, 12);
             this.userGb.Name = "userGb";
             this.userGb.Size = new System.Drawing.Size(361, 125);
             this.userGb.TabIndex = 2;
@@ -169,7 +178,7 @@
             // 
             this.ftpGb.Controls.Add(this.ftpAddressTxt);
             this.ftpGb.Controls.Add(this.label6);
-            this.ftpGb.Location = new System.Drawing.Point(26, 143);
+            this.ftpGb.Location = new System.Drawing.Point(15, 143);
             this.ftpGb.Name = "ftpGb";
             this.ftpGb.Size = new System.Drawing.Size(361, 125);
             this.ftpGb.TabIndex = 8;
@@ -194,7 +203,7 @@
             // 
             // removeSectionBtn
             // 
-            this.removeSectionBtn.Location = new System.Drawing.Point(113, 312);
+            this.removeSectionBtn.Location = new System.Drawing.Point(23, 322);
             this.removeSectionBtn.Name = "removeSectionBtn";
             this.removeSectionBtn.Size = new System.Drawing.Size(103, 30);
             this.removeSectionBtn.TabIndex = 13;
@@ -204,7 +213,7 @@
             // 
             // removeKeyBtn
             // 
-            this.removeKeyBtn.Location = new System.Drawing.Point(273, 312);
+            this.removeKeyBtn.Location = new System.Drawing.Point(213, 322);
             this.removeKeyBtn.Name = "removeKeyBtn";
             this.removeKeyBtn.Size = new System.Drawing.Size(136, 30);
             this.removeKeyBtn.TabIndex = 14;
@@ -214,7 +223,7 @@
             // 
             // getAllSectionBtn
             // 
-            this.getAllSectionBtn.Location = new System.Drawing.Point(113, 353);
+            this.getAllSectionBtn.Location = new System.Drawing.Point(23, 363);
             this.getAllSectionBtn.Name = "getAllSectionBtn";
             this.getAllSectionBtn.Size = new System.Drawing.Size(130, 30);
             this.getAllSectionBtn.TabIndex = 15;
@@ -224,7 +233,7 @@
             // 
             // getAllKeyBtn
             // 
-            this.getAllKeyBtn.Location = new System.Drawing.Point(273, 353);
+            this.getAllKeyBtn.Location = new System.Drawing.Point(213, 363);
             this.getAllKeyBtn.Name = "getAllKeyBtn";
             this.getAllKeyBtn.Size = new System.Drawing.Size(145, 30);
             this.getAllKeyBtn.TabIndex = 16;
@@ -234,17 +243,108 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(481, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(586, 16);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(357, 472);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 17;
             this.richTextBox1.Text = "";
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(598, 53);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(73, 40);
+            this.bt_clear.TabIndex = 66;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button6);
+            this.groupBox1.Controls.Add(this.button5);
+            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Location = new System.Drawing.Point(395, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(158, 365);
+            this.groupBox1.TabIndex = 67;
+            this.groupBox1.TabStop = false;
+            // 
+            // button6
+            // 
+            this.button6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button6.Location = new System.Drawing.Point(15, 305);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(103, 54);
+            this.button6.TabIndex = 6;
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button5.Location = new System.Drawing.Point(15, 250);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(103, 49);
+            this.button5.TabIndex = 5;
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button4.Location = new System.Drawing.Point(15, 192);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(103, 35);
+            this.button4.TabIndex = 4;
+            this.button4.Text = "移除key";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button3.Location = new System.Drawing.Point(15, 124);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(103, 51);
+            this.button3.TabIndex = 3;
+            this.button3.Text = "移除指定的section";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Location = new System.Drawing.Point(15, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(103, 35);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Write .ini";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Location = new System.Drawing.Point(15, 69);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(103, 35);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Read .ini";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(850, 496);
+            this.ClientSize = new System.Drawing.Size(731, 490);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.getAllKeyBtn);
             this.Controls.Add(this.getAllSectionBtn);
@@ -270,6 +370,7 @@
             this.userGb.PerformLayout();
             this.ftpGb.ResumeLayout(false);
             this.ftpGb.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -298,6 +399,14 @@
         private System.Windows.Forms.Button getAllSectionBtn;
         private System.Windows.Forms.Button getAllKeyBtn;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

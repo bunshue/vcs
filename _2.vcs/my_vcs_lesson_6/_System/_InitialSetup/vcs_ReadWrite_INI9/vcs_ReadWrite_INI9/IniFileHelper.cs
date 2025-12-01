@@ -13,8 +13,6 @@ namespace vcs_ReadWrite_INI9
     /// </summary>
     public class IniFileHelper
     {
-        #region 引用DLL
-
         /// <summary>
         /// 读取ini配置文件
         /// </summary>
@@ -40,11 +38,6 @@ namespace vcs_ReadWrite_INI9
         /// <returns></returns>
         [DllImport("kernel32")]
         private static extern long WritePrivateProfileString(string sectionName, string key, string value, string filePath);
-
-
-
-
-        #endregion
 
 
         /// <summary>

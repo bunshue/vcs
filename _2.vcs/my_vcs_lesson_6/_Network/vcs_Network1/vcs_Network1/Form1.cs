@@ -132,15 +132,29 @@ namespace vcs_Network1
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             progressBar1.Location = new Point(x_st + dx * 0 + 60, y_st + dy * 10);
 
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            richTextBox1.Size = new Size(800, 400);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            pictureBox1.Size = new Size(800, 400);
+            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 7-70);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Location = new Point(50, 50);
+            this.Size = new Size(1500, 1000);
 
             //離開按鈕的寫法
             //最大化螢幕
@@ -418,6 +432,38 @@ namespace vcs_Network1
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //DNS相關
+            //取得電腦名稱
+            richTextBox1.Text += "電腦名稱 : " + Dns.GetHostName() + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            IPAddress addr;
+            // 獲得本機局域網IP地址
+            addr = new IPAddress(Dns.GetHostByName(Dns.GetHostName()).AddressList[0].Address);
+            string cc = addr.ToString();
+
+            richTextBox1.Text += "IP地址：" + cc + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //電腦本機IP
+            System.Net.IPHostEntry IPHost = System.Net.Dns.GetHostEntry(Environment.MachineName);
+            if (IPHost.AddressList.Length > 0)
+            {
+                richTextBox1.Text += "1電腦本機IP : " + IPHost.AddressList[0].ToString() + "\n";
+                //MessageBox.Show(IPHost.AddressList[0].ToString(), "電腦本機IP");
+            }
+
+            string hostName = Dns.GetHostName(); //獲取主機名稱
+            IPAddress[] addresses = Dns.GetHostAddresses(hostName); //解析主機IP地址
+
+            string[] IP = new string[addresses.Length]; //轉換為字符串形式
+            for (int i = 0; i < addresses.Length; i++)
+            {
+                IP[i] = addresses[i].ToString();
+                richTextBox1.Text += "2電腦本機IP : " + IP[i] + "\n";
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -522,6 +568,14 @@ namespace vcs_Network1
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //C# Ping a hostname on the network
+            Ping ping = new Ping();
+
+            PingReply reply = ping.Send("www.google.com");
+            if (reply.Status == IPStatus.Success)
+            {
+                MessageBox.Show("ok");
+            }
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -560,75 +614,118 @@ namespace vcs_Network1
 
         private void button18_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "測試IPPower\n";
+            string name = "www.google.com";
 
-            //# 2.1 To get firmware version : getversion
-            richTextBox1.Text += "getversion\n";
-            string url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=getversion";
-            WebClient wc = new WebClient();
-            wc.Encoding = Encoding.UTF8;
-            string html = wc.DownloadString(url);
-            richTextBox1.Text += html + "\n";
-
-            //# 2.2 To get MACaddress：getmac
-            richTextBox1.Text += "getmac\n";
-            url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=getmac";
-            wc = new WebClient();
-            wc.Encoding = Encoding.UTF8;
-            html = wc.DownloadString(url);
-            richTextBox1.Text += html + "\n";
-
-
-            //# 2.3 To get the status of power on/ off： getpower
-            richTextBox1.Text += "getpower\n";
-            url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=getpower";
-            wc = new WebClient();
-            wc.Encoding = Encoding.UTF8;
-            html = wc.DownloadString(url);
-            richTextBox1.Text += html + "\n";
-
-            /*
-            //# Example : Turn on POWER1 and turn off POWER1：
-            //# 上電
-            url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=setpower&p61=1";
-            wc = new WebClient();
-            wc.Encoding = Encoding.UTF8;
-            html = wc.DownloadString(url);
-            richTextBox1.Text += html + "\n";
-
-            //# 下電
-            url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=setpower&p61=0";
-            wc = new WebClient();
-            wc.Encoding = Encoding.UTF8;
-            html = wc.DownloadString(url);
-            richTextBox1.Text += html + "\n";
-            */
-
-            //# reset
-
-            url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=setpowercycle&p61=1";
-            richTextBox1.Text += "reset\n";
-            wc = new WebClient();
-            wc.Encoding = Encoding.UTF8;
-            html = wc.DownloadString(url);
-            richTextBox1.Text += html + "\n";
-
-
-            //# 2.6 Get current Amp value : getcurrent
-
-            url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=getcurrent";
-            richTextBox1.Text += "getcurrent\n";
-            wc = new WebClient();
-            wc.Encoding = Encoding.UTF8;
-            html = wc.DownloadString(url);
-            richTextBox1.Text += html + "\n";
+            //透過計算機名取得IP地址
+            IPAddress[] ip = null;
+            try
+            {
+                ip = Dns.GetHostAddresses(name);
+            }
+            catch (Exception ey)
+            {
+                MessageBox.Show(ey.Message);
+                return;
+            }
+            richTextBox1.Text += "電腦名稱 : " + name + "\n";
+            richTextBox1.Text += "IP位址 : " + ip[0].ToString() + "\n";
         }
 
         private void button19_Click(object sender, EventArgs e)
+        {
+            string ip_addr = "140.114.29.100";
+            IPHostEntry hostInfo;
+            try
+            {
+                hostInfo = Dns.Resolve(ip_addr);
+            }
+            catch (Exception ey)
+            {
+                MessageBox.Show(ey.Message);
+                return;
+            }
+            richTextBox1.Text += "IP位址 : " + ip_addr + "\n";
+            richTextBox1.Text += "電腦名稱 : " + hostInfo.HostName + "\n";
+        }
+
+        private MemoryStream GetResponse(string url)
+        {
+            while (true)
+            {
+                try
+                {
+                    HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+                    //request.Headers.Add("Cookie", cookie);
+                    request.Method = "GET";
+                    request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko";
+                    HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+
+                    MemoryStream ms = new MemoryStream();
+                    response.GetResponseStream().CopyTo(ms);
+
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+            }
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //下載HTML
+            string url = @"D:/_git/vcs/_1.data/_html/朱冶蕙老師的電腦教室.html";
+            //foreach (var fileName in fileNameList)
+            {
+                MemoryStream ms = GetResponse(url);
+                File.WriteAllBytes("aaaaa.html", ms.ToArray());
+            }
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
         {
 
         }
     }
 }
-
 

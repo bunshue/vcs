@@ -121,6 +121,7 @@ namespace vcs_System1
             button49.Location = new Point(x_st + dx * 4, y_st + dy * 9);
 
             lb_processes.Location = new Point(x_st + dx * 5, y_st + dy * 9);//進程數
+            lb_DoEvents.Location = new Point(x_st + dx * 5+150, y_st + dy * 9);//進程數
 
             groupBox1.Size = new Size(200, 150);//Windows 開關機(偽執行)
             groupBox2.Size = new Size(320, 150);
@@ -579,14 +580,41 @@ namespace vcs_System1
                 //程序的退出
                 //Process.GetCurrentProcess().Kill();
             }
+
+            Process proc = Process.GetCurrentProcess();
+
+            richTextBox1.Text += "aaa : " + proc.MinWorkingSet + " 拜\n";
+            richTextBox1.Text += "bbb : " + proc.MaxWorkingSet + " 拜\n";
+            richTextBox1.Text += "ccc : " + proc.NonpagedSystemMemorySize64 + " 拜\n";
+            richTextBox1.Text += "ddd : " + proc.PagedMemorySize64 + " 拜\n";
+            richTextBox1.Text += "eee : " + proc.PagedSystemMemorySize64 + " 拜\n";
+
+            richTextBox1.Text += "aaa : " + proc.PeakPagedMemorySize64 + " 拜\n";
+            richTextBox1.Text += "bbb : " + proc.PeakVirtualMemorySize64 + " 拜\n";
+            richTextBox1.Text += "ccc : " + proc.PeakWorkingSet64 + " 拜\n";
+            richTextBox1.Text += "ddd : " + proc.VirtualMemorySize64 + " 拜\n";
+            richTextBox1.Text += "eee : " + proc.WorkingSet64 + " 拜\n";
+
+            //取得記憶體使用狀態
+
+            richTextBox1.Text += "Property\t\t\tValue\n";
+            richTextBox1.Text += "Min Working Set" + "\t" + ((double)proc.MinWorkingSet).ToFileSize() + "\n";
+            richTextBox1.Text += "Max Working Set" + "\t" + ((double)proc.MaxWorkingSet).ToFileSize() + "\n";
+            richTextBox1.Text += "Non-paged Memory Size" + "\t" + ((double)proc.NonpagedSystemMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Paged Memory Size" + "\t" + ((double)proc.PagedMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Paged System Memory Size" + "\t" + ((double)proc.PagedSystemMemorySize64).ToFileSize() + "\n";
+
+            richTextBox1.Text += "Peak Paged Memory Size" + "\t" + ((double)proc.PeakPagedMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Peak Virtual Memory Size" + "\t" + ((double)proc.PeakVirtualMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Peak Working Set" + "\t" + ((double)proc.PeakWorkingSet64).ToFileSize() + "\n";
+            richTextBox1.Text += "Virtual Memory Size" + "\t" + ((double)proc.VirtualMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Working Set" + "\t" + ((double)proc.WorkingSet64).ToFileSize() + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             //自建類別 SystemInfo
             //取得系統有關環境、屬性
-
-
 
             SystemInfo systemInfo = new SystemInfo();
 
@@ -624,14 +652,40 @@ namespace vcs_System1
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //取得程式編譯時間
+            richTextBox1.Text += "編譯時間 : " + GetLinkerTime() + "\n";
+
             //取得程式啟動時間
             richTextBox1.Text += "程式開啟時間: " + (DateTime.Now - start_time).ToString() + " 秒\n";
         }
 
+        //取得程式的編譯時間
+        DateTime GetLinkerTime()
+        {
+            var filePath = Assembly.GetExecutingAssembly().Location;
+
+            const int c_PeHeaderOffset = 60;
+            const int c_LinkerTimestampOffset = 8;
+
+            var buffer = new byte[256];
+
+            using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                stream.Read(buffer, 0, 256);
+            }
+
+            var offset = BitConverter.ToInt32(buffer, c_PeHeaderOffset);
+            var secondsSince1970 = BitConverter.ToInt32(buffer, offset + c_LinkerTimestampOffset);
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+            var linkTimeUtc = epoch.AddSeconds(secondsSince1970);
+            var tz = TimeZoneInfo.Local;
+            var localTime = TimeZoneInfo.ConvertTimeFromUtc(linkTimeUtc, tz);
+            return localTime;
+        }
+
         private void button5_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "讀取程式預設值\n";
-            ReadSettings();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -807,37 +861,6 @@ namespace vcs_System1
 
         private void button17_Click(object sender, EventArgs e)
         {
-            //取得電腦名稱
-            richTextBox1.Text += "電腦名稱 : " + Dns.GetHostName() + "\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            IPAddress addr;
-            // 獲得本機局域網IP地址
-            addr = new IPAddress(Dns.GetHostByName(Dns.GetHostName()).AddressList[0].Address);
-            string cc = addr.ToString();
-
-            richTextBox1.Text += "IP地址：" + cc + "\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //電腦本機IP
-            System.Net.IPHostEntry IPHost = System.Net.Dns.GetHostEntry(Environment.MachineName);
-            if (IPHost.AddressList.Length > 0)
-            {
-                richTextBox1.Text += "1電腦本機IP : " + IPHost.AddressList[0].ToString() + "\n";
-                //MessageBox.Show(IPHost.AddressList[0].ToString(), "電腦本機IP");
-            }
-
-            string hostName = Dns.GetHostName(); //獲取主機名稱
-            IPAddress[] addresses = Dns.GetHostAddresses(hostName); //解析主機IP地址
-
-            string[] IP = new string[addresses.Length]; //轉換為字符串形式
-            for (int i = 0; i < addresses.Length; i++)
-            {
-                IP[i] = addresses[i].ToString();
-                richTextBox1.Text += "2電腦本機IP : " + IP[i] + "\n";
-            }
         }
 
         [DllImport("kernel32.dll")]
@@ -855,22 +878,10 @@ namespace vcs_System1
 
         private void button19_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "寫入程式預設值\n";
-            SaveSettings();
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //UserAppDataRegistry使用
-            richTextBox1.Text += "UserAppDataRegistry使用\n";
-
-            richTextBox1.Text += "把數值寫進系統變數AAAA\n";
-            Application.UserAppDataRegistry.SetValue("AAAA", 123);
-
-            richTextBox1.Text += "把系統變數AAAA的內容讀出來\n";
-            int result;
-            result = (int)Application.UserAppDataRegistry.GetValue("AAAA");
-            richTextBox1.Text += "結果 : " + result.ToString() + "\n";
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -957,33 +968,6 @@ namespace vcs_System1
 
         private void button24_Click(object sender, EventArgs e)
         {
-            //取得程式的編譯時間
-            richTextBox1.Text += "編譯時間 : " + GetLinkerTime() + "\n";
-        }
-
-        //取得程式的編譯時間
-        DateTime GetLinkerTime()
-        {
-            var filePath = Assembly.GetExecutingAssembly().Location;
-
-            const int c_PeHeaderOffset = 60;
-            const int c_LinkerTimestampOffset = 8;
-
-            var buffer = new byte[256];
-
-            using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-            {
-                stream.Read(buffer, 0, 256);
-            }
-
-            var offset = BitConverter.ToInt32(buffer, c_PeHeaderOffset);
-            var secondsSince1970 = BitConverter.ToInt32(buffer, offset + c_LinkerTimestampOffset);
-            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-
-            var linkTimeUtc = epoch.AddSeconds(secondsSince1970);
-            var tz = TimeZoneInfo.Local;
-            var localTime = TimeZoneInfo.ConvertTimeFromUtc(linkTimeUtc, tz);
-            return localTime;
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -1096,32 +1080,35 @@ namespace vcs_System1
         private void button33_Click(object sender, EventArgs e)
         {
             //系統已經安裝的打印機訊息
-            foreach (string mPrinterName in System.Drawing.Printing.PrinterSettings.InstalledPrinters)
+            foreach (string mPrinterName in PrinterSettings.InstalledPrinters)
             {
+                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
                 richTextBox1.Text += "打印機名稱：" + mPrinterName + "\n";
-                System.Drawing.Printing.PrinterSettings mprinter = new System.Drawing.Printing.PrinterSettings();
+                PrinterSettings mprinter = new PrinterSettings();
                 mprinter.PrinterName = mPrinterName;
                 if (mprinter.IsValid)
                 {
-                    foreach (System.Drawing.Printing.PrinterResolution resolution in mprinter.PrinterResolutions)
+                    foreach (PrinterResolution resolution in mprinter.PrinterResolutions)
                     {
                         richTextBox1.Text += "分  辨  率：" + resolution.ToString() + "\n";
                     }
                     string prinsize = "";
-                    foreach (System.Drawing.Printing.PaperSize size in mprinter.PaperSizes)
+                    foreach (PaperSize size in mprinter.PaperSizes)
                     {
                         if (Enum.IsDefined(size.Kind.GetType(), size.Kind))
                         {
                             prinsize += size.ToString() + "\n";
                         }
                     }
-                    richTextBox1.AppendText("打 印 尺寸：\n" + prinsize + "\n");
+                    //many
+                    //richTextBox1.AppendText("打 印 尺寸：\n" + prinsize + "\n");
                 }
                 else
                 {
                     richTextBox1.Text += "XXXXXXXX\n";
                 }
             }
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
 
         private void button34_Click(object sender, EventArgs e)
@@ -1141,34 +1128,6 @@ namespace vcs_System1
 
         private void button36_Click(object sender, EventArgs e)
         {
-            //取得記憶體使用狀態
-
-            Process proc = Process.GetCurrentProcess();
-
-            richTextBox1.Text += "aaa : " + proc.MinWorkingSet + " 拜\n";
-            richTextBox1.Text += "bbb : " + proc.MaxWorkingSet + " 拜\n";
-            richTextBox1.Text += "ccc : " + proc.NonpagedSystemMemorySize64 + " 拜\n";
-            richTextBox1.Text += "ddd : " + proc.PagedMemorySize64 + " 拜\n";
-            richTextBox1.Text += "eee : " + proc.PagedSystemMemorySize64 + " 拜\n";
-
-            richTextBox1.Text += "aaa : " + proc.PeakPagedMemorySize64 + " 拜\n";
-            richTextBox1.Text += "bbb : " + proc.PeakVirtualMemorySize64 + " 拜\n";
-            richTextBox1.Text += "ccc : " + proc.PeakWorkingSet64 + " 拜\n";
-            richTextBox1.Text += "ddd : " + proc.VirtualMemorySize64 + " 拜\n";
-            richTextBox1.Text += "eee : " + proc.WorkingSet64 + " 拜\n";
-
-            richTextBox1.Text += "Property\t\t\tValue\n";
-            richTextBox1.Text += "Min Working Set" + "\t" + ((double)proc.MinWorkingSet).ToFileSize() + "\n";
-            richTextBox1.Text += "Max Working Set" + "\t" + ((double)proc.MaxWorkingSet).ToFileSize() + "\n";
-            richTextBox1.Text += "Non-paged Memory Size" + "\t" + ((double)proc.NonpagedSystemMemorySize64).ToFileSize() + "\n";
-            richTextBox1.Text += "Paged Memory Size" + "\t" + ((double)proc.PagedMemorySize64).ToFileSize() + "\n";
-            richTextBox1.Text += "Paged System Memory Size" + "\t" + ((double)proc.PagedSystemMemorySize64).ToFileSize() + "\n";
-
-            richTextBox1.Text += "Peak Paged Memory Size" + "\t" + ((double)proc.PeakPagedMemorySize64).ToFileSize() + "\n";
-            richTextBox1.Text += "Peak Virtual Memory Size" + "\t" + ((double)proc.PeakVirtualMemorySize64).ToFileSize() + "\n";
-            richTextBox1.Text += "Peak Working Set" + "\t" + ((double)proc.PeakWorkingSet64).ToFileSize() + "\n";
-            richTextBox1.Text += "Virtual Memory Size" + "\t" + ((double)proc.VirtualMemorySize64).ToFileSize() + "\n";
-            richTextBox1.Text += "Working Set" + "\t" + ((double)proc.WorkingSet64).ToFileSize() + "\n";
         }
 
         //取得任務欄尺寸大小 ST
@@ -1237,7 +1196,6 @@ namespace vcs_System1
 
             string mode = SystemInformation.BootMode.ToString();
             richTextBox1.Text += "目前系統的啟動模式是：";
-
             switch (mode)
             {
                 case "FailSafe":
@@ -1253,6 +1211,8 @@ namespace vcs_System1
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
             richTextBox1.Text += "讀取電源狀態\n";
+
+
 
             PowerStatus status = SystemInformation.PowerStatus;
             float percent = status.BatteryLifePercent;
@@ -1274,22 +1234,20 @@ namespace vcs_System1
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            // Get the current charge percent.
             status = SystemInformation.PowerStatus;
-            int percents = (int)(status.BatteryLifePercent * 100);
 
-            richTextBox1.Text += percents.ToString() + "%" + "\n";
-            richTextBox1.Text += status.PowerLineStatus.ToString() + "\n";
-            richTextBox1.Text += status.BatteryChargeStatus.ToString() + "\n";
-            richTextBox1.Text += status.BatteryFullLifetime.ToString() + "\n";
-            richTextBox1.Text += status.BatteryLifePercent.ToString() + "\n";
-            richTextBox1.Text += status.BatteryLifeRemaining.ToString() + "\n";
+            int percents = (int)(status.BatteryLifePercent * 100);
+            richTextBox1.Text += "充電百分比 : " + percents.ToString() + "%" + "\n";
+
+            richTextBox1.Text += "充電百分比:\t\t" + status.BatteryLifePercent.ToString("P0") + "\n";
+            richTextBox1.Text += "BatteryLifePercent : " + status.BatteryLifePercent.ToString() + "\n";
+
+            richTextBox1.Text += "電源線狀態 : " + status.PowerLineStatus.ToString() + "\n";
+            richTextBox1.Text += "電池充電狀態 : " + status.BatteryChargeStatus.ToString() + "\n";
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            status = SystemInformation.PowerStatus;
-            richTextBox1.Text += "Charge Status:\t" + status.BatteryChargeStatus.ToString() + "\n";
-
+            richTextBox1.Text += "BatteryFullLifetime : " + status.BatteryFullLifetime.ToString() + "\n";
             if (status.BatteryFullLifetime == -1)
             {
                 richTextBox1.Text += "Full Lifetime:\t" + "Unknown" + "\n";
@@ -1298,7 +1256,8 @@ namespace vcs_System1
             {
                 richTextBox1.Text += "Full Lifetime (sec):\t" + status.BatteryFullLifetime.ToString() + "\n";
             }
-            richTextBox1.Text += "Charge:\t\t" + status.BatteryLifePercent.ToString("P0") + "\n";
+
+            richTextBox1.Text += "BatteryLifeRemaining : " + status.BatteryLifeRemaining.ToString() + "\n";
             if (status.BatteryLifeRemaining == -1)
             {
                 richTextBox1.Text += "Life Remaining:\t" + "Unknown" + "\n";
@@ -1307,7 +1266,6 @@ namespace vcs_System1
             {
                 richTextBox1.Text += "Life Remaining (sec):\t" + status.BatteryLifeRemaining.ToString() + "\n";
             }
-            richTextBox1.Text += "Line Status:\t" + status.PowerLineStatus.ToString() + "\n";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
@@ -1368,12 +1326,27 @@ namespace vcs_System1
 
         private void button43_Click(object sender, EventArgs e)
         {
+            //使用 Application.DoEvents
+            int i;
+            for (i = 0; i <= 7777; i++)
+            {
+                lb_DoEvents.Text = i.ToString();
+                Application.DoEvents();//實時響應文本框中的值
+                //Application.DoEvents()的作用：处理当前在消息队列中的所有 Windows 消息。
+                //加Application.DoEvents可以防止界面停止响应
+            }
 
         }
 
         private void button44_Click(object sender, EventArgs e)
         {
-
+            //不使用 Application.DoEvents
+            int i;
+            for (i = 0; i <= 7777; i++)
+            {
+                lb_DoEvents.Text = i.ToString();
+                //Application.DoEvents();//實時響應文本框中的值
+            }
         }
 
         private void button45_Click(object sender, EventArgs e)
@@ -1417,27 +1390,6 @@ namespace vcs_System1
             this.Text = point.x.ToString() + ", " + point.y.ToString();
         }
 
-        // Save the current settings.
-        private void SaveSettings()
-        {
-            string dir_name = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony2";
-
-            Properties.Settings.Default.PictureDirectory = dir_name;
-            Properties.Settings.Default.UpdateRegistry = true;
-            Properties.Settings.Default.Location = Location;
-            Properties.Settings.Default.Size = Size;
-            Properties.Settings.Default.Delay = 123;
-            Properties.Settings.Default.Save();
-        }
-
-        private void ReadSettings()
-        {
-            richTextBox1.Text += "Default.PictureDirectory" + "\t" + Properties.Settings.Default.PictureDirectory + "\n";
-            richTextBox1.Text += "Default.UpdateRegistry" + "\t" + Properties.Settings.Default.UpdateRegistry + "\n";
-            richTextBox1.Text += "Default.Location" + "\t" + Properties.Settings.Default.Location + "\n";
-            richTextBox1.Text += "Default.Size" + "\t" + Properties.Settings.Default.Size.ToString() + "\n";
-            richTextBox1.Text += "Default.Delay" + "\t" + Properties.Settings.Default.Delay.ToString() + "\n";
-        }
 
         #region Windows 開關機
         [DllImport("user32")]
@@ -1773,7 +1725,6 @@ namespace vcs_System1
             GetSystemTime(ref systemTimeInfo);
             return systemTimeInfo;
         }
-
     }
 }
 

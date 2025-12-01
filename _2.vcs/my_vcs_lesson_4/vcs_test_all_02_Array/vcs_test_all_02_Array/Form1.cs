@@ -1823,6 +1823,18 @@ namespace vcs_test_all_02_Array
 
         private void button41_Click(object sender, EventArgs e)
         {
+            //一維/二維陣列的寫法
+            richTextBox1.Text += "一維陣列的寫法\n";
+            string[] names = new string[] { "鼠", "牛", "虎", "兔", "龍" };
+            richTextBox1.Text += "len = " + names.Length.ToString() + "\n";
+
+            for (int i = names.GetLowerBound(0); i <= names.GetUpperBound(0); i++)
+            {
+                richTextBox1.Text += names[i] + "\n";
+            }
+
+            // 二維陣列的寫法
+            // byte[,] newdata = new byte[Height, Width];
         }
 
         private void button42_Click(object sender, EventArgs e)

@@ -34,6 +34,28 @@ namespace vcs_UseAppConfig
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 5;
+            dy = 60 + 5;
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -66,6 +88,27 @@ namespace vcs_UseAppConfig
         {
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //UserAppDataRegistry使用
+            richTextBox1.Text += "UserAppDataRegistry使用\n";
+
+            richTextBox1.Text += "把數值寫進系統變數AAAA\n";
+            Application.UserAppDataRegistry.SetValue("AAAA", 123);
+
+            richTextBox1.Text += "把系統變數AAAA的內容讀出來\n";
+            int result;
+            result = (int)Application.UserAppDataRegistry.GetValue("AAAA");
+            richTextBox1.Text += "結果 : " + result.ToString() + "\n";
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 
     public static class ConfigHelper

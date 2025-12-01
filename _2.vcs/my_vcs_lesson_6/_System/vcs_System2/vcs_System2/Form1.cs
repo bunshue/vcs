@@ -51,9 +51,6 @@ namespace vcs_System2
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            label1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            label1.Text = "aaaaaa";
-
             label2.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_exit.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 35);
 
@@ -101,14 +98,6 @@ namespace vcs_System2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            int i;
-            for (i = 0; i <= 7777; i++)
-            {
-                label1.Text = i.ToString();
-                Application.DoEvents();//實時響應文本框中的值
-                //Application.DoEvents()的作用：处理当前在消息队列中的所有 Windows 消息。
-                //加Application.DoEvents可以防止界面停止响应
-            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -117,15 +106,6 @@ namespace vcs_System2
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //C# Ping a hostname on the network
-
-            Ping ping = new Ping();
-
-            PingReply reply = ping.Send("www.google.com");
-            if (reply.Status == IPStatus.Success)
-            {
-                MessageBox.Show("ok");
-            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -134,12 +114,6 @@ namespace vcs_System2
 
         private void button7_Click(object sender, EventArgs e)
         {
-            int i;
-            for (i = 0; i <= 7777; i++)
-            {
-                label1.Text = i.ToString();
-                //Application.DoEvents();//實時響應文本框中的值
-            }
         }
 
         private void button8_Click(object sender, EventArgs e)

@@ -77,7 +77,7 @@
             this.button92 = new System.Windows.Forms.Button();
             this.button91 = new System.Windows.Forms.Button();
             this.button90 = new System.Windows.Forms.Button();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.bt_clock_sp = new System.Windows.Forms.Button();
             this.bt_clock_st = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -85,12 +85,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.lb_cpu2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lb_cpu1 = new System.Windows.Forms.Label();
             this.timer11 = new System.Windows.Forms.Timer(this.components);
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.button101 = new System.Windows.Forms.Button();
+            this.button100 = new System.Windows.Forms.Button();
             this.groupBox0.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -101,9 +104,10 @@
             this.groupBox4.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
-            this.groupBox10.SuspendLayout();
             this.groupBox11.SuspendLayout();
+            this.groupBox12.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -611,21 +615,21 @@
             this.button90.UseVisualStyleBackColor = true;
             this.button90.Click += new System.EventHandler(this.button90_Click);
             // 
-            // groupBox10
+            // groupBox11
             // 
-            this.groupBox10.Controls.Add(this.bt_clock_sp);
-            this.groupBox10.Controls.Add(this.bt_clock_st);
-            this.groupBox10.Controls.Add(this.label1);
-            this.groupBox10.Controls.Add(this.label5);
-            this.groupBox10.Controls.Add(this.label2);
-            this.groupBox10.Controls.Add(this.label4);
-            this.groupBox10.Controls.Add(this.label3);
-            this.groupBox10.Location = new System.Drawing.Point(324, 337);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(374, 88);
-            this.groupBox10.TabIndex = 35;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "時鐘";
+            this.groupBox11.Controls.Add(this.bt_clock_sp);
+            this.groupBox11.Controls.Add(this.bt_clock_st);
+            this.groupBox11.Controls.Add(this.label1);
+            this.groupBox11.Controls.Add(this.label5);
+            this.groupBox11.Controls.Add(this.label2);
+            this.groupBox11.Controls.Add(this.label4);
+            this.groupBox11.Controls.Add(this.label3);
+            this.groupBox11.Location = new System.Drawing.Point(12, 501);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(374, 88);
+            this.groupBox11.TabIndex = 35;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "時鐘";
             // 
             // bt_clock_sp
             // 
@@ -697,16 +701,16 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "秒";
             // 
-            // groupBox11
+            // groupBox12
             // 
-            this.groupBox11.Controls.Add(this.lb_cpu2);
-            this.groupBox11.Controls.Add(this.panel1);
-            this.groupBox11.Location = new System.Drawing.Point(636, 168);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(133, 264);
-            this.groupBox11.TabIndex = 34;
-            this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "CPU使用率";
+            this.groupBox12.Controls.Add(this.lb_cpu2);
+            this.groupBox12.Controls.Add(this.panel1);
+            this.groupBox12.Location = new System.Drawing.Point(636, 168);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(133, 264);
+            this.groupBox12.TabIndex = 34;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "CPU使用率";
             // 
             // lb_cpu2
             // 
@@ -751,13 +755,44 @@
             this.timer11.Interval = 1000;
             this.timer11.Tick += new System.EventHandler(this.timer11_Tick);
             // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.button101);
+            this.groupBox10.Controls.Add(this.button100);
+            this.groupBox10.Location = new System.Drawing.Point(324, 325);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(150, 150);
+            this.groupBox10.TabIndex = 34;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Thread使用範例9";
+            // 
+            // button101
+            // 
+            this.button101.Location = new System.Drawing.Point(23, 104);
+            this.button101.Name = "button101";
+            this.button101.Size = new System.Drawing.Size(90, 30);
+            this.button101.TabIndex = 1;
+            this.button101.UseVisualStyleBackColor = true;
+            this.button101.Click += new System.EventHandler(this.button101_Click);
+            // 
+            // button100
+            // 
+            this.button100.Location = new System.Drawing.Point(23, 21);
+            this.button100.Name = "button100";
+            this.button100.Size = new System.Drawing.Size(90, 68);
+            this.button100.TabIndex = 0;
+            this.button100.Text = "定時檢測子線程是否已經完成";
+            this.button100.UseVisualStyleBackColor = true;
+            this.button100.Click += new System.EventHandler(this.button100_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(781, 568);
-            this.Controls.Add(this.groupBox11);
+            this.ClientSize = new System.Drawing.Size(781, 601);
             this.Controls.Add(this.groupBox10);
+            this.Controls.Add(this.groupBox12);
+            this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
@@ -785,12 +820,13 @@
             this.groupBox4.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox10.PerformLayout();
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox10.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -845,7 +881,7 @@
         private System.Windows.Forms.Button button92;
         private System.Windows.Forms.Button button91;
         private System.Windows.Forms.Button button90;
-        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.Button bt_clock_sp;
         private System.Windows.Forms.Button bt_clock_st;
         private System.Windows.Forms.Label label1;
@@ -853,12 +889,15 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.GroupBox groupBox12;
         private System.Windows.Forms.Label lb_cpu2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lb_cpu1;
         private System.Windows.Forms.Timer timer11;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.Button button101;
+        private System.Windows.Forms.Button button100;
     }
 }
 

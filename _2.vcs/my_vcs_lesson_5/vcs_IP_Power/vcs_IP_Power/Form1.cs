@@ -43,10 +43,8 @@ namespace vcs_IP_Power
                 button4.Location = new Point(x_st + dx * 0, y_st + dy * 2);
 
                 richTextBox1.Size = new Size(400, 530);
-                richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-
+                richTextBox1.Location = new Point(x_st + dx * 2 + 10, y_st + dy * 0);
                 bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
                 this.Size = new Size(800, 590);
             }
             else
@@ -66,9 +64,9 @@ namespace vcs_IP_Power
                 button3.Location = new Point(x_st + dx * 1, y_st + dy * 1);
                 button4.Location = new Point(x_st + dx * 0, y_st + dy * 2);
 
-                richTextBox1.Visible = false;
-                bt_clear.Visible = false;
-
+                richTextBox1.Size = new Size(400, 460);
+                richTextBox1.Location = new Point(x_st + dx * 2+10, y_st + dy * 0);
+                bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
                 this.Size = new Size(340, 520);
             }
         }

@@ -79,6 +79,40 @@ namespace vcs_PropertiesSettingsDefault
         {
             show_form_information();
         }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "讀取程式預設值\n";
+            ReadSettings();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "寫入程式預設值\n";
+            SaveSettings();
+        }
+
+        private void SaveSettings()
+        {
+            string dir_name = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony2";
+
+            Properties.Settings.Default.PictureDirectory = dir_name;
+            Properties.Settings.Default.UpdateRegistry = true;
+            Properties.Settings.Default.Location = Location;
+            Properties.Settings.Default.Size = Size;
+            Properties.Settings.Default.Delay = 123;
+            Properties.Settings.Default.Save();
+        }
+
+        private void ReadSettings()
+        {
+            richTextBox1.Text += "Default.PictureDirectory" + "\t" + Properties.Settings.Default.PictureDirectory + "\n";
+            richTextBox1.Text += "Default.UpdateRegistry" + "\t" + Properties.Settings.Default.UpdateRegistry + "\n";
+            richTextBox1.Text += "Default.Location" + "\t" + Properties.Settings.Default.Location + "\n";
+            richTextBox1.Text += "Default.Size" + "\t" + Properties.Settings.Default.Size.ToString() + "\n";
+            richTextBox1.Text += "Default.Delay" + "\t" + Properties.Settings.Default.Delay.ToString() + "\n";
+        }
+
     }
 }
 

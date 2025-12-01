@@ -41,14 +41,13 @@
             this.button0 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.bt_exit = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(851, 124);
+            this.richTextBox1.Location = new System.Drawing.Point(236, 113);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
@@ -71,7 +70,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 50);
             this.button3.TabIndex = 3;
-            this.button3.Text = "使用\r\nApplication.DoEvents";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -92,7 +90,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 50);
             this.button5.TabIndex = 5;
-            this.button5.Text = "C# Ping a hostname on the network";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -113,7 +110,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 50);
             this.button7.TabIndex = 7;
-            this.button7.Text = "不使用\r\nApplication.DoEvents";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -124,7 +120,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 50);
             this.button8.TabIndex = 8;
-            this.button8.Text = "測試防火牆";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -162,7 +157,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(868, 167);
+            this.bt_clear.Location = new System.Drawing.Point(253, 156);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(73, 40);
             this.bt_clear.TabIndex = 65;
@@ -173,7 +168,7 @@
             // bt_exit
             // 
             this.bt_exit.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_exit.Location = new System.Drawing.Point(1103, 50);
+            this.bt_exit.Location = new System.Drawing.Point(488, 39);
             this.bt_exit.Name = "bt_exit";
             this.bt_exit.Size = new System.Drawing.Size(87, 40);
             this.bt_exit.TabIndex = 66;
@@ -181,21 +176,11 @@
             this.bt_exit.UseVisualStyleBackColor = true;
             this.bt_exit.Click += new System.EventHandler(this.bt_exit_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(847, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 24);
-            this.label1.TabIndex = 67;
-            this.label1.Text = "label1";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(847, 58);
+            this.label2.Location = new System.Drawing.Point(232, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(250, 24);
             this.label2.TabIndex = 68;
@@ -205,9 +190,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1234, 621);
+            this.ClientSize = new System.Drawing.Size(639, 621);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.bt_exit);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button0);
@@ -244,7 +228,6 @@
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button bt_exit;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
     }
 }

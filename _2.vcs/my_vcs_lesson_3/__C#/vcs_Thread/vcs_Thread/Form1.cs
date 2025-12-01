@@ -51,7 +51,6 @@ namespace vcs_Thread
             //CheckForIllegalCrossThreadCalls = false; 另法
             myUser();
 
-
             Thread.CurrentThread.Name = "MainThread";
 
             show_item_location();
@@ -124,7 +123,6 @@ namespace vcs_Thread
             int dx = 140 + 50;
             int dy = 50 + 15;
 
-
             W = 150;
             H = 150;
             dx = W + BORDER;
@@ -140,13 +138,14 @@ namespace vcs_Thread
             groupBox7.Size = new Size(W, H);
             groupBox8.Size = new Size(W, H);
             groupBox9.Size = new Size(W, H);
-            groupBox11.Size = new Size(W * 2 / 3, H + 50);
+            groupBox10.Size = new Size(W, H);
+            groupBox12.Size = new Size(W * 2 / 3, H + 50);
 
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            groupBox11.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            groupBox12.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             groupBox4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             groupBox5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             groupBox6.Location = new Point(x_st + dx * 2, y_st + dy * 1);
@@ -154,6 +153,7 @@ namespace vcs_Thread
             groupBox8.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             groupBox9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            groupBox11.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             richTextBox1.Size = new Size(220, 540);
             richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -196,7 +196,9 @@ namespace vcs_Thread
             button90.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button91.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button92.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            this.Size = new Size(1000, 600);
+            button100.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button101.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            this.Size = new Size(1000, 650);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -790,6 +792,64 @@ namespace vcs_Thread
         }
         //Thread使用範例9 SP
 
+        delegate void Delegate_do();
+
+        static void ThreadRun()
+        {
+            try
+            {
+                Delegate_do Delegate_do = new Delegate_do(FindAllProduct);
+                IAsyncResult result = Delegate_do.BeginInvoke(null, null);
+                while (!result.IsCompleted)
+                {
+                    Console.WriteLine("子線程未完成");
+                    Thread.Sleep(1000);//每隔1秒判斷一下是否完成
+                }
+                while (true)
+                {
+                    if (result.IsCompleted)
+                    {
+                        Console.WriteLine("-------子線程已完成-------");
+                        break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        static void FindAllProduct()
+        {
+            List<int> array = new List<int>();   //宣告int型態的List
+            for (int i = 0; i < 100000000; i++)
+            {
+                array.Add(i);
+            }
+
+            int m = 0;
+            foreach (var i in array)
+            {
+                m++;
+            }
+            Console.WriteLine(m);
+        }
+
+        private void button100_Click(object sender, EventArgs e)
+        {
+            //主線程中啟動一個支線程,執行doSomething這樣的一個方法。
+            Thread thread = new Thread(new ThreadStart(ThreadRun));
+            thread.IsBackground = true;//這樣能隨主程序一起結束
+            thread.Start();
+
+        }
+
+        private void button101_Click(object sender, EventArgs e)
+        {
+
+        }
+
         //Thread使用範例 時鐘 ST
 
         //委派function
@@ -880,8 +940,6 @@ namespace vcs_Thread
             td = new Thread(new ThreadStart(myUser));
             td.Start();
         }
-
-
 
         //Thread使用範例 CPU使用率 SP
     }

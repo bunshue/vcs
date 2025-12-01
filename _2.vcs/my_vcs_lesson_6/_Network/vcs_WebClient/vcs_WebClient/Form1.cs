@@ -24,6 +24,8 @@ namespace vcs_WebClient
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             // Allow TLS 1.1 and TLS 1.2 protocols for file download.
             //for Sugar     3840 Romeo也可用
             ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
@@ -41,8 +43,51 @@ namespace vcs_WebClient
             // For .NET Framework 4.0 through 4.4:
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
             */
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int w = 120;
+            int h = 50;
+            int dx = w + 10;
+            int dy = h + 10;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button7.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button8.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button12.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button13.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button14.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button15.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button16.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button17.Location = new Point(x_st + dx * 2, y_st + dy * 5);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -554,11 +599,6 @@ namespace vcs_WebClient
         }
         //讓 WebClient 擁有 Timeout 功能 SP
 
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
         //下載NASA網頁的圖片 ST
         private void button5_Click(object sender, EventArgs e)
         {
@@ -774,12 +814,6 @@ namespace vcs_WebClient
         {
 
         }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-
-        }
-        
     }
 
     public class Protocols

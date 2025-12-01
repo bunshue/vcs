@@ -49,15 +49,15 @@
             this.button15 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
+            this.button0 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Location = new System.Drawing.Point(12, 59);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(102, 50);
+            this.button1.Size = new System.Drawing.Size(120, 50);
             this.button1.TabIndex = 0;
             this.button1.Text = "WebClient DownloadString";
             this.button1.UseVisualStyleBackColor = true;
@@ -92,9 +92,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(120, 68);
+            this.button2.Location = new System.Drawing.Point(12, 115);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(102, 50);
+            this.button2.Size = new System.Drawing.Size(120, 50);
             this.button2.TabIndex = 4;
             this.button2.Text = "WebClient Download Covid-19 Data";
             this.button2.UseVisualStyleBackColor = true;
@@ -102,9 +102,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(120, 189);
+            this.button3.Location = new System.Drawing.Point(12, 166);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(102, 50);
+            this.button3.Size = new System.Drawing.Size(120, 50);
             this.button3.TabIndex = 5;
             this.button3.Text = "WebClient 使用thread";
             this.button3.UseVisualStyleBackColor = true;
@@ -112,9 +112,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(12, 68);
+            this.button4.Location = new System.Drawing.Point(12, 222);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(102, 50);
+            this.button4.Size = new System.Drawing.Size(120, 50);
             this.button4.TabIndex = 6;
             this.button4.Text = "WebClient DownloadData";
             this.button4.UseVisualStyleBackColor = true;
@@ -122,9 +122,9 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(12, 124);
+            this.button6.Location = new System.Drawing.Point(138, 3);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(102, 50);
+            this.button6.Size = new System.Drawing.Size(120, 50);
             this.button6.TabIndex = 8;
             this.button6.Text = "WebClient OpenRead";
             this.button6.UseVisualStyleBackColor = true;
@@ -132,9 +132,9 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(120, 12);
+            this.button7.Location = new System.Drawing.Point(138, 59);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(102, 50);
+            this.button7.Size = new System.Drawing.Size(120, 50);
             this.button7.TabIndex = 9;
             this.button7.Text = "WebClient DownloadFile";
             this.button7.UseVisualStyleBackColor = true;
@@ -142,9 +142,9 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(12, 189);
+            this.button9.Location = new System.Drawing.Point(138, 166);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(102, 50);
+            this.button9.Size = new System.Drawing.Size(120, 50);
             this.button9.TabIndex = 11;
             this.button9.Text = "讓 WebClient 擁有 Timeout 功能";
             this.button9.UseVisualStyleBackColor = true;
@@ -162,9 +162,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(228, 189);
+            this.button5.Location = new System.Drawing.Point(12, 278);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(102, 50);
+            this.button5.Size = new System.Drawing.Size(120, 50);
             this.button5.TabIndex = 13;
             this.button5.Text = "下載NASA網頁的圖片";
             this.button5.UseVisualStyleBackColor = true;
@@ -172,9 +172,9 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(352, 189);
+            this.button8.Location = new System.Drawing.Point(138, 115);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(102, 50);
+            this.button8.Size = new System.Drawing.Size(120, 50);
             this.button8.TabIndex = 14;
             this.button8.Text = "WebClient test";
             this.button8.UseVisualStyleBackColor = true;
@@ -182,9 +182,9 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(352, 115);
+            this.button10.Location = new System.Drawing.Point(138, 222);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(102, 50);
+            this.button10.Size = new System.Drawing.Size(120, 50);
             this.button10.TabIndex = 15;
             this.button10.Text = "提取並保存網頁源碼";
             this.button10.UseVisualStyleBackColor = true;
@@ -192,9 +192,9 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(12, 254);
+            this.button11.Location = new System.Drawing.Point(138, 278);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(102, 50);
+            this.button11.Size = new System.Drawing.Size(120, 50);
             this.button11.TabIndex = 16;
             this.button11.Text = "WebClient test";
             this.button11.UseVisualStyleBackColor = true;
@@ -202,9 +202,9 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(120, 254);
+            this.button12.Location = new System.Drawing.Point(264, 3);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(102, 50);
+            this.button12.Size = new System.Drawing.Size(120, 50);
             this.button12.TabIndex = 17;
             this.button12.Text = "WebClient test";
             this.button12.UseVisualStyleBackColor = true;
@@ -212,9 +212,9 @@
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(228, 254);
+            this.button13.Location = new System.Drawing.Point(264, 59);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(102, 50);
+            this.button13.Size = new System.Drawing.Size(120, 50);
             this.button13.TabIndex = 18;
             this.button13.Text = "WebClient test";
             this.button13.UseVisualStyleBackColor = true;
@@ -222,9 +222,9 @@
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(352, 254);
+            this.button14.Location = new System.Drawing.Point(264, 115);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(102, 50);
+            this.button14.Size = new System.Drawing.Size(120, 50);
             this.button14.TabIndex = 19;
             this.button14.Text = "WebClient test";
             this.button14.UseVisualStyleBackColor = true;
@@ -232,9 +232,9 @@
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(12, 310);
+            this.button15.Location = new System.Drawing.Point(264, 171);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(102, 50);
+            this.button15.Size = new System.Drawing.Size(120, 50);
             this.button15.TabIndex = 20;
             this.button15.Text = "WebClient test";
             this.button15.UseVisualStyleBackColor = true;
@@ -242,9 +242,9 @@
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(120, 310);
+            this.button16.Location = new System.Drawing.Point(264, 222);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(102, 50);
+            this.button16.Size = new System.Drawing.Size(120, 50);
             this.button16.TabIndex = 21;
             this.button16.Text = "WebClient test";
             this.button16.UseVisualStyleBackColor = true;
@@ -252,30 +252,29 @@
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(228, 310);
+            this.button17.Location = new System.Drawing.Point(264, 278);
             this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(102, 50);
+            this.button17.Size = new System.Drawing.Size(120, 50);
             this.button17.TabIndex = 22;
             this.button17.Text = "WebClient test";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
-            // button18
+            // button0
             // 
-            this.button18.Location = new System.Drawing.Point(352, 310);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(102, 50);
-            this.button18.TabIndex = 23;
-            this.button18.Text = "WebClient test";
-            this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
+            this.button0.Location = new System.Drawing.Point(12, 3);
+            this.button0.Name = "button0";
+            this.button0.Size = new System.Drawing.Size(120, 50);
+            this.button0.TabIndex = 24;
+            this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1261, 747);
-            this.Controls.Add(this.button18);
+            this.Controls.Add(this.button0);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button16);
             this.Controls.Add(this.button15);
@@ -328,7 +327,7 @@
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button0;
     }
 }
 

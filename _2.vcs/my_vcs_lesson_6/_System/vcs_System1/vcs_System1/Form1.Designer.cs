@@ -110,6 +110,7 @@
             this.button47 = new System.Windows.Forms.Button();
             this.button48 = new System.Windows.Forms.Button();
             this.button49 = new System.Windows.Forms.Button();
+            this.lb_DoEvents = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -154,7 +155,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 4;
-            this.button4.Text = "取得程式啟動時間";
+            this.button4.Text = "取得程式的編譯時間/啟動時間";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -165,7 +166,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 5;
-            this.button5.Text = "讀取程式預設值";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -283,7 +283,6 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(200, 60);
             this.button17.TabIndex = 18;
-            this.button17.Text = "DNS相關";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -305,7 +304,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(200, 60);
             this.button19.TabIndex = 20;
-            this.button19.Text = "寫入程式預設值";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -316,7 +314,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(200, 60);
             this.button20.TabIndex = 21;
-            this.button20.Text = "UserAppDataRegistry使用";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -448,7 +445,6 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(200, 60);
             this.button24.TabIndex = 52;
-            this.button24.Text = "取得程式的編譯時間";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -814,7 +810,6 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(200, 60);
             this.button36.TabIndex = 87;
-            this.button36.Text = "取得記憶體使用狀態";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
@@ -891,6 +886,7 @@
             this.button43.Name = "button43";
             this.button43.Size = new System.Drawing.Size(200, 60);
             this.button43.TabIndex = 94;
+            this.button43.Text = "使用 Application.DoEvents";
             this.button43.UseVisualStyleBackColor = true;
             this.button43.Click += new System.EventHandler(this.button43_Click);
             // 
@@ -901,6 +897,7 @@
             this.button44.Name = "button44";
             this.button44.Size = new System.Drawing.Size(200, 60);
             this.button44.TabIndex = 95;
+            this.button44.Text = "不使用 Application.DoEvents";
             this.button44.UseVisualStyleBackColor = true;
             this.button44.Click += new System.EventHandler(this.button44_Click);
             // 
@@ -954,11 +951,22 @@
             this.button49.UseVisualStyleBackColor = true;
             this.button49.Click += new System.EventHandler(this.button49_Click);
             // 
+            // lb_DoEvents
+            // 
+            this.lb_DoEvents.AutoSize = true;
+            this.lb_DoEvents.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_DoEvents.Location = new System.Drawing.Point(1131, 550);
+            this.lb_DoEvents.Name = "lb_DoEvents";
+            this.lb_DoEvents.Size = new System.Drawing.Size(103, 19);
+            this.lb_DoEvents.TabIndex = 101;
+            this.lb_DoEvents.Text = "lb_DoEvents";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 641);
+            this.Controls.Add(this.lb_DoEvents);
             this.Controls.Add(this.button49);
             this.Controls.Add(this.button48);
             this.Controls.Add(this.button47);
@@ -1115,6 +1123,7 @@
         private System.Windows.Forms.Button button47;
         private System.Windows.Forms.Button button48;
         private System.Windows.Forms.Button button49;
+        private System.Windows.Forms.Label lb_DoEvents;
     }
 }
 
