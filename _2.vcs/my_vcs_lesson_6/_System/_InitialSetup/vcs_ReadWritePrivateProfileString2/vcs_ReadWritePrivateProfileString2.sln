@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ReadWrite_INI9", "vcs_ReadWrite_INI9\vcs_ReadWrite_INI9.csproj", "{871F8FCB-D894-4244-ACE6-F9E94173F99B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ReadWritePrivateProfileString2", "vcs_ReadWritePrivateProfileString2\vcs_ReadWritePrivateProfileString2.csproj", "{871F8FCB-D894-4244-ACE6-F9E94173F99B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

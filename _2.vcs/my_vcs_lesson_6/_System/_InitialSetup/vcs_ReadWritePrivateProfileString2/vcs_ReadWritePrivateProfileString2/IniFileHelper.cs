@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace vcs_ReadWrite_INI9
+namespace vcs_ReadWritePrivateProfileString2
 {
     /// <summary>
     /// ini文件操作类

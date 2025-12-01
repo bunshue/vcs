@@ -38,8 +38,8 @@ namespace vcs_Registry5
             //button
             x_st = 10;
             y_st = 10;
-            dx = 180;
-            dy = 90;
+            dx = 175+10;
+            dy = 75+10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -59,10 +59,25 @@ namespace vcs_Registry5
             button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
             button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBox1.Size = new Size(170, 260);
+            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(300, 660);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            x_st = 20;
+            y_st = 20;
+            dy = 60;
+            bt_registry0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_registry1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_registry2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_registry3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+
+            this.Size = new Size(900, 730);
+
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -324,20 +339,20 @@ namespace vcs_Registry5
         {
             //用RegistryKey 讀USB訊息
             /*
-RegistryKey historykey;
-//檢索當前用戶CurrentUser子項Software\\Microsoft\\Internet Explorer\\typedURLs
-historykey = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Internet Explorer\\typedURLs", true);
-if (historykey != null)
-{
-    //獲取檢索的所有值
-    String[] names = historykey.GetValueNames();
-    foreach (String str in names)
-    {
-        //listBox1.Items.Add(historykey.GetValue(str).ToString());
-        richTextBox1.Text += historykey.GetValue(str).ToString() + "\n";
-    }
-}
-*/
+            RegistryKey historykey;
+            //檢索當前用戶CurrentUser子項Software\\Microsoft\\Internet Explorer\\typedURLs
+            historykey = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Internet Explorer\\typedURLs", true);
+            if (historykey != null)
+            {
+                //獲取檢索的所有值
+                String[] names = historykey.GetValueNames();
+                foreach (String str in names)
+                {
+                    //listBox1.Items.Add(historykey.GetValue(str).ToString());
+                    richTextBox1.Text += historykey.GetValue(str).ToString() + "\n";
+                }
+            }
+            */
 
             //獲取USB使用信息	
             //定義注冊表頂級節點 其命名空間是using Microsoft.Win32;
@@ -414,6 +429,94 @@ if (historykey != null)
         {
 
         }
+
+        private void bt_registry0_Click(object sender, EventArgs e)
+        {
+            //讀
+        }
+
+        private void bt_registry1_Click(object sender, EventArgs e)
+        {
+            //寫
+
+        }
+
+        private void bt_registry2_Click(object sender, EventArgs e)
+        {
+            //刪除
+
+        }
+
+        private void bt_registry3_Click(object sender, EventArgs e)
+        {
+            //判斷
+
+        }
+
+        /*
+C#操作註冊表
+以下從『讀』『寫』『刪除』『判斷』四個事例實現對註冊表的簡單操作
+*/
+
+        //1.讀取指定名稱的註冊表的值    
+        private string GetRegistData(string name)
+        {
+            string registData;
+            RegistryKey hkml = Registry.LocalMachine;
+            RegistryKey software = hkml.OpenSubKey("SOFTWARE", true);
+            RegistryKey aimdir = software.OpenSubKey("XXX", true);
+            registData = aimdir.GetValue(name).ToString();
+            return registData;
+        }
+        //以上是讀取的註冊表中HKEY_LOCAL_MACHINE\SOFTWARE目錄下的XXX目錄中名稱為name的註冊表值；    
+
+        //2.向註冊表中寫數據    
+        private void WTRegedit(string name, string tovalue)
+        {
+            RegistryKey hklm = Registry.LocalMachine;
+            RegistryKey software = hklm.OpenSubKey("SOFTWARE", true);
+            RegistryKey aimdir = software.CreateSubKey("XXX");
+            aimdir.SetValue(name, tovalue);
+        }
+        //以上是在註冊表中HKEY_LOCAL_MACHINE\SOFTWARE目錄下新建XXX目錄並在此目錄下創建名稱為name值為tovalue的註冊表項；    
+
+        //3.刪除註冊表中指定的註冊表項    
+        private void DeleteRegist(string name)
+        {
+            string[] aimnames;
+            RegistryKey hkml = Registry.LocalMachine;
+            RegistryKey software = hkml.OpenSubKey("SOFTWARE", true);
+            RegistryKey aimdir = software.OpenSubKey("XXX", true);
+            aimnames = aimdir.GetSubKeyNames();
+            foreach (string aimKey in aimnames)
+            {
+                if (aimKey == name)
+                    aimdir.DeleteSubKeyTree(name);
+            }
+        }
+        //以上是在註冊表中HKEY_LOCAL_MACHINE\SOFTWARE目錄下XXX目錄中刪除名稱為name註冊表項；    
+
+        //4.判斷指定註冊表項是否存在    
+        private bool IsRegeditExit(string name)
+        {
+            bool _exit = false;
+            string[] subkeyNames;
+            RegistryKey hkml = Registry.LocalMachine;
+            RegistryKey software = hkml.OpenSubKey("SOFTWARE", true);
+            RegistryKey aimdir = software.OpenSubKey("XXX", true);
+            subkeyNames = aimdir.GetSubKeyNames();
+            foreach (string keyName in subkeyNames)
+            {
+                if (keyName == name)
+                {
+                    _exit = true;
+                    return _exit;
+                }
+            }
+            return _exit;
+        }
+        //以上是在註冊表中HKEY_LOCAL_MACHINE\SOFTWARE目錄下XXX目錄中判斷名稱為name註冊表項是否存在，這一方法在刪除註冊表時已經存在，在新建一註冊表項時也應有相應判斷；
+
     }
 
     public class RegistryStorage

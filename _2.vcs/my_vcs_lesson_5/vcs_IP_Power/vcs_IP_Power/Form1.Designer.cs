@@ -55,7 +55,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(170, 170);
             this.button0.TabIndex = 113;
-            this.button0.Text = "主機重開";
+            this.button0.Text = "斷電重開";
             this.button0.UseVisualStyleBackColor = false;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -68,7 +68,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(170, 170);
             this.button1.TabIndex = 114;
-            this.button1.Text = "主機訊息";
+            this.button1.Text = "IPP狀態";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -81,7 +81,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(170, 170);
             this.button2.TabIndex = 115;
-            this.button2.Text = "主機上電";
+            this.button2.Text = "上電";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -94,7 +94,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(170, 170);
             this.button3.TabIndex = 116;
-            this.button3.Text = "主機下電";
+            this.button3.Text = "下電";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 

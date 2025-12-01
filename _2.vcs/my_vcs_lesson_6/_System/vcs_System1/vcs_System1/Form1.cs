@@ -121,7 +121,7 @@ namespace vcs_System1
             button49.Location = new Point(x_st + dx * 4, y_st + dy * 9);
 
             lb_processes.Location = new Point(x_st + dx * 5, y_st + dy * 9);//進程數
-            lb_DoEvents.Location = new Point(x_st + dx * 5+150, y_st + dy * 9);//進程數
+            lb_DoEvents.Location = new Point(x_st + dx * 5 + 150, y_st + dy * 9);//進程數
 
             groupBox1.Size = new Size(200, 150);//Windows 開關機(偽執行)
             groupBox2.Size = new Size(320, 150);
@@ -358,22 +358,22 @@ namespace vcs_System1
                 switch (myOS.Version.Minor)
                 {
                     case 0:
-                        MessageBox.Show("系統版本：" + "Windows 2000 " + myOS.ServicePack);
+                        richTextBox1.Text += "系統版本：" + "Windows 2000 " + myOS.ServicePack + "\n";
                         break;
                     case 1:
-                        MessageBox.Show("系統版本：" + "Windows XP " + myOS.ServicePack);
+                        richTextBox1.Text += "系統版本：" + "Windows XP " + myOS.ServicePack + "\n";
                         break;
                     case 2:
-                        MessageBox.Show("系統版本：" + "Windows Server 2003 " + " " + myOS.ServicePack);
+                        richTextBox1.Text += "系統版本：" + "Windows Server 2003 " + " " + myOS.ServicePack + "\n";
                         break;
                     default:
-                        MessageBox.Show("系統版本：" + myOS.ToString() + " " + myOS.ServicePack);
+                        richTextBox1.Text += "系統版本：" + myOS.ToString() + " " + myOS.ServicePack + "\n";
                         break;
                 }
             }
             else
             {
-                MessageBox.Show("系統版本：" + myOS.VersionString + " " + myOS.ServicePack);
+                richTextBox1.Text += "系統版本：" + myOS.VersionString + " " + myOS.ServicePack + "\n";
             }
 
             //檢視目前系統版本
@@ -784,44 +784,8 @@ namespace vcs_System1
             richTextBox1.Text += "VersionInfo: " + FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
         }
 
-        [DllImport("kernel32.dll")]
-        private static extern long GetVolumeInformation(
-            string PathName,
-            StringBuilder VolumeNameBuffer,
-            UInt32 VolumeNameSize,
-            ref UInt32 VolumeSerialNumber,
-            ref UInt32 MaximumComponentLength,
-            ref UInt32 FileSystemFlags,
-            StringBuilder FileSystemNameBuffer,
-            UInt32 FileSystemNameSize
-        );
-
         private void button13_Click(object sender, EventArgs e)
         {
-            string drive_letter = drive_letter = "c:\\";
-
-            uint serial_number = 0;
-            uint max_component_length = 0;
-            StringBuilder sb_volume_name = new StringBuilder(256);
-            UInt32 file_system_flags = new UInt32();
-            StringBuilder sb_file_system_name = new StringBuilder(256);
-
-            if (GetVolumeInformation(drive_letter, sb_volume_name,
-                (UInt32)sb_volume_name.Capacity, ref serial_number,
-                ref max_component_length, ref file_system_flags,
-                sb_file_system_name,
-                (UInt32)sb_file_system_name.Capacity) == 0)
-            {
-                MessageBox.Show("Error getting volume information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            else
-            {
-                richTextBox1.Text += "Volume Name\t" + sb_volume_name.ToString() + "\n";
-                richTextBox1.Text += "Serial Number\t" + serial_number.ToString() + "\n";
-                richTextBox1.Text += "Max Component Length\t" + max_component_length.ToString() + "\n";
-                richTextBox1.Text += "File System\t" + sb_file_system_name.ToString() + "\n";
-                richTextBox1.Text += "Flags\t" + "&&H" + file_system_flags.ToString("x") + "\n";
-            }
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -1727,7 +1691,6 @@ namespace vcs_System1
         }
     }
 }
-
 
 //6060
 //------------------------------------------------------------  # 60個

@@ -98,19 +98,44 @@ namespace vcs__Mix00
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            listView1.Size = new Size(400, 240);
-            listView1.Location = new Point(x_st + dx * 3, y_st + dy * 3 - 20);
+            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            listBox1.Size = new Size(400, 240);
-            listBox1.Location = new Point(x_st + dx * 5 + 60, y_st + dy * 3 - 20);
+            groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+
+            listView1.Size = new Size(300, 240);
+            listView1.Location = new Point(x_st + dx * 4, y_st + dy * 3 - 20);
+
+            listBox1.Size = new Size(300, 240);
+            listBox1.Location = new Point(x_st + dx * 5 + 120, y_st + dy * 3 - 20);
 
             richTextBox1.Size = new Size(600, 300);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 7 - 30);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 7 - 30);
+
+            x_st = 10;
+            y_st = 10;
+            dy = 25;
+            label1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            label2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            label3.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            textBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            textBox2.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            textBox3.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_rename.Location = new Point(x_st + dx * 2 + 20, y_st + dy * 4);
+            groupBox1.Size = new Size(500, 170);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1460, 800);
+            this.Size = new Size(1400, 800);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -431,8 +456,46 @@ namespace vcs__Mix00
             copy_file(MODE2);
         }
 
+        [DllImport("kernel32.dll")]
+        private static extern long GetVolumeInformation(
+            string PathName,
+            StringBuilder VolumeNameBuffer,
+            UInt32 VolumeNameSize,
+            ref UInt32 VolumeSerialNumber,
+            ref UInt32 MaximumComponentLength,
+            ref UInt32 FileSystemFlags,
+            StringBuilder FileSystemNameBuffer,
+            UInt32 FileSystemNameSize
+        );
+
         private void button11_Click(object sender, EventArgs e)
         {
+            //取得磁碟資訊
+            string drive_letter = "C:";
+
+            uint serial_number = 0;
+            uint max_component_length = 0;
+            StringBuilder sb_volume_name = new StringBuilder(256);
+            UInt32 file_system_flags = new UInt32();
+            StringBuilder sb_file_system_name = new StringBuilder(256);
+
+            if (GetVolumeInformation(drive_letter, sb_volume_name,
+                (UInt32)sb_volume_name.Capacity, ref serial_number,
+                ref max_component_length, ref file_system_flags,
+                sb_file_system_name,
+                (UInt32)sb_file_system_name.Capacity) == 0)
+            {
+                richTextBox1.Text += "無法取得磁碟資訊\n";
+            }
+            else
+            {
+                richTextBox1.Text += "磁碟名稱 : " + drive_letter + "\n";
+                richTextBox1.Text += "磁碟名稱 : " + sb_volume_name.ToString() + "\n";
+                richTextBox1.Text += "序號 : " + serial_number.ToString() + "\n";
+                richTextBox1.Text += "Max Component Length\t" + max_component_length.ToString() + "\n";
+                richTextBox1.Text += "檔案系統 : " + sb_file_system_name.ToString() + "\n";
+                richTextBox1.Text += "Flags\t" + "&&H" + file_system_flags.ToString("x") + "\n";
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -1014,6 +1077,56 @@ namespace vcs__Mix00
         //根據文件頭判斷上傳的文件類型 SP
 
         private void button29_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button39_Click(object sender, EventArgs e)
         {
 
         }

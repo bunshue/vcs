@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace vcs_ReadWrite_INI9
+namespace vcs_ReadWritePrivateProfileString2
 {
     public partial class Form1 : Form
     {

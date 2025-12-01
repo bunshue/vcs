@@ -6,6 +6,11 @@ richTextBox1.Text += "----------------------------------------------------------
 
 
 
+        //將屬標限制在表單內
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            Cursor.Clip = new Rectangle(this.Location, this.Size); //控制鼠標在窗口範圍內
+        }
 
 
 

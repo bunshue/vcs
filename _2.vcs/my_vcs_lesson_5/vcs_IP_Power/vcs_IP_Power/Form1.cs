@@ -91,10 +91,11 @@ namespace vcs_IP_Power
 
         void Command_IP_Power_Info()
         {
-            richTextBox1.Text += "測試IPPower\n";
+            richTextBox1.Text += "取得 IP Power 的 狀態\n";
 
-            //# 2.1 To get firmware version : getversion
-            richTextBox1.Text += "getversion\n";
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "取得 IP Power 的 韌體版本 getversion\n";
             string url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=getversion";
             WebClient wc = new WebClient();
             wc.Encoding = Encoding.UTF8;
@@ -103,8 +104,7 @@ namespace vcs_IP_Power
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            //# 2.2 To get MACaddress：getmac
-            richTextBox1.Text += "getmac\n";
+            richTextBox1.Text += "取得 IP Power 的 MAC 位址 getmac\n";
             url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=getmac";
             wc = new WebClient();
             wc.Encoding = Encoding.UTF8;
@@ -113,8 +113,7 @@ namespace vcs_IP_Power
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            //# 2.3 To get the status of power on/ off： getpower
-            richTextBox1.Text += "getpower\n";
+            richTextBox1.Text += "取得 IP Power 的 電源狀態 getpower\n";
             url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=getpower";
             wc = new WebClient();
             wc.Encoding = Encoding.UTF8;
@@ -123,9 +122,8 @@ namespace vcs_IP_Power
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            //# 2.6 Get current Amp value : getcurrent
+            richTextBox1.Text += "取得 IP Power 的 電流值 getcurrent\n";
             url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=getcurrent";
-            richTextBox1.Text += "getcurrent\n";
             wc = new WebClient();
             wc.Encoding = Encoding.UTF8;
             html = wc.DownloadString(url);

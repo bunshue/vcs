@@ -1,4 +1,4 @@
-﻿namespace vcs_ReadWrite_INI9
+﻿namespace vcs_ReadWritePrivateProfileString2
 {
     partial class Form1
     {

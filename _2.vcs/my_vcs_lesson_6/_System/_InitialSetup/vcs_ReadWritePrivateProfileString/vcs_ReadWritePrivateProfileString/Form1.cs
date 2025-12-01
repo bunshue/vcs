@@ -60,7 +60,7 @@ namespace vcs_ReadWritePrivateProfileString
             //button
             x_st = 10;
             y_st = 10;
-            dx = 200 + 5;
+            dx = 170 + 5;
             dy = 60 + 5;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -68,13 +68,15 @@ namespace vcs_ReadWritePrivateProfileString
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
-            richTextBox1.Size = new Size(400, 600);
-            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(460, 600);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(660, 670);
+            this.Size = new Size(860, 670);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -285,4 +287,3 @@ namespace vcs_ReadWritePrivateProfileString
         }
     }
 }
-

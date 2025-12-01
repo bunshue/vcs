@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Registry3
+namespace vcs_ReadWritePrivateProfileString2
 {
     static class Program
     {
         /// <summary>
-        /// 應用程式的主要進入點。
+        /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
         static void Main()

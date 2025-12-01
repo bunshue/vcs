@@ -46,6 +46,12 @@
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
+            this.bt_registry0 = new System.Windows.Forms.Button();
+            this.bt_registry1 = new System.Windows.Forms.Button();
+            this.bt_registry2 = new System.Windows.Forms.Button();
+            this.bt_registry3 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -61,9 +67,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(390, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(585, 21);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(570, 711);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -147,7 +153,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(798, 628);
+            this.bt_clear.Location = new System.Drawing.Point(598, 50);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(69, 34);
             this.bt_clear.TabIndex = 20;
@@ -235,11 +241,69 @@
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
+            // bt_registry0
+            // 
+            this.bt_registry0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_registry0.Location = new System.Drawing.Point(28, 33);
+            this.bt_registry0.Name = "bt_registry0";
+            this.bt_registry0.Size = new System.Drawing.Size(130, 45);
+            this.bt_registry0.TabIndex = 28;
+            this.bt_registry0.Text = "讀";
+            this.bt_registry0.UseVisualStyleBackColor = true;
+            this.bt_registry0.Click += new System.EventHandler(this.bt_registry0_Click);
+            // 
+            // bt_registry1
+            // 
+            this.bt_registry1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_registry1.Location = new System.Drawing.Point(28, 102);
+            this.bt_registry1.Name = "bt_registry1";
+            this.bt_registry1.Size = new System.Drawing.Size(130, 45);
+            this.bt_registry1.TabIndex = 29;
+            this.bt_registry1.Text = "寫";
+            this.bt_registry1.UseVisualStyleBackColor = true;
+            this.bt_registry1.Click += new System.EventHandler(this.bt_registry1_Click);
+            // 
+            // bt_registry2
+            // 
+            this.bt_registry2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_registry2.Location = new System.Drawing.Point(28, 174);
+            this.bt_registry2.Name = "bt_registry2";
+            this.bt_registry2.Size = new System.Drawing.Size(130, 45);
+            this.bt_registry2.TabIndex = 30;
+            this.bt_registry2.Text = "刪除";
+            this.bt_registry2.UseVisualStyleBackColor = true;
+            this.bt_registry2.Click += new System.EventHandler(this.bt_registry2_Click);
+            // 
+            // bt_registry3
+            // 
+            this.bt_registry3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_registry3.Location = new System.Drawing.Point(28, 240);
+            this.bt_registry3.Name = "bt_registry3";
+            this.bt_registry3.Size = new System.Drawing.Size(130, 45);
+            this.bt_registry3.TabIndex = 31;
+            this.bt_registry3.Text = "判斷";
+            this.bt_registry3.UseVisualStyleBackColor = true;
+            this.bt_registry3.Click += new System.EventHandler(this.bt_registry3_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.bt_registry0);
+            this.groupBox1.Controls.Add(this.bt_registry3);
+            this.groupBox1.Controls.Add(this.bt_registry1);
+            this.groupBox1.Controls.Add(this.bt_registry2);
+            this.groupBox1.Location = new System.Drawing.Point(390, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(175, 300);
+            this.groupBox1.TabIndex = 32;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(972, 730);
+            this.ClientSize = new System.Drawing.Size(754, 658);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.button13);
@@ -261,6 +325,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -285,6 +350,11 @@
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button bt_registry0;
+        private System.Windows.Forms.Button bt_registry1;
+        private System.Windows.Forms.Button bt_registry2;
+        private System.Windows.Forms.Button bt_registry3;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 
