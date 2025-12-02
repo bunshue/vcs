@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_ReadWrite_CSV7
+namespace vcs_ReadWrite_TXT1
 {
     static class Program
     {

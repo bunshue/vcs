@@ -1,4 +1,0 @@
-1. 移除參考裡面的 Microsoft.Office.Interop.Excel
-2. 參考/加入參考/COM/Microsoft Excel 11.0 Object Library 和 Microsoft Office 11.0 Object Library
-3. 參考/Excel屬性/內嵌Interop類型 由True改為False
-

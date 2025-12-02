@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{19E8C540-8CFA-4168-9E6E-CBEAB3406218}</ProjectGuid>
+    <ProjectGuid>{FDE29DE8-EA5B-45C3-8754-2B0CA9304492}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_ReadWrite_CSV7</RootNamespace>
-    <AssemblyName>vcs_ReadWrite_CSV7</AssemblyName>
+    <RootNamespace>vcs_ReadWrite_TXT1</RootNamespace>
+    <AssemblyName>vcs_ReadWrite_TXT1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

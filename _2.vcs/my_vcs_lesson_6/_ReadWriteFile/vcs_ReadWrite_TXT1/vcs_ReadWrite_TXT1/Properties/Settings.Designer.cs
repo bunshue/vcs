@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_ReadWrite_CSV7.Properties
+namespace vcs_ReadWrite_TXT1.Properties
 {
 
 
