@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;    //for Path, MemoryStream
 using System.Net;
-using System.IO;    //for MemoryStream
+using System.Xml;
 using System.Threading; //for Thread
 
 using System.Text.RegularExpressions;   //for Regex
@@ -47,16 +48,12 @@ namespace vcs_WebClient
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
+            int x_st = 10;
+            int y_st = 10;
             int w = 120;
             int h = 50;
-            int dx = w + 10;
-            int dy = h + 10;
-
-            //button
-            x_st = 10;
-            y_st = 10;
+            int dx = w + 5;
+            int dy = h + 5;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -64,20 +61,43 @@ namespace vcs_WebClient
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button6.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button7.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button8.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button9.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button12.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button13.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button14.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button15.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button16.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button17.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+
+            richTextBox1.Size = new Size(840, 540);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+
+            webBrowser1.Size = new Size(600, 250);
+            webBrowser1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+
+            pictureBox1.Size = new Size(600, 250);
+            pictureBox1.Location = new Point(x_st + dx * 5, y_st + dy * 10);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1260, 870);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -87,6 +107,24 @@ namespace vcs_WebClient
 
         private void button0_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string url = @"https://www.google.com.tw/";
+                WebClient wc = new WebClient();
+
+                //ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+                //richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls;
+
+                string res = wc.DownloadString(url);
+
+                richTextBox1.Text += res + "\n";
+            }
+
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "ERROR=" + ex.ToString() + "\n";
+            }
 
         }
 
@@ -782,37 +820,508 @@ namespace vcs_WebClient
 
         private void button11_Click(object sender, EventArgs e)
         {
+            // 網頁抓取星座占卜資料
+            // 透過 Regex 取得星座資料
+            // http://vip.astro.sina.com.cn/astro/view/libra
+            var fate = StarSignsUtil.GetFateToday("天秤座");
+            richTextBox1.Text += fate.StarSign.Title + "\n";
+            richTextBox1.Text += fate.StarSign.Id + "\n";
+            richTextBox1.Text += fate.StarSign.DateRange + "\n";
 
+            richTextBox1.Text += fate.Date + "\n";
+
+            richTextBox1.Text += fate.Desc + "\n";
+
+            richTextBox1.Text += "顯示此Dictionary的資料\n";
+            richTextBox1.Text += "共有 " + fate.Datas.Count.ToString() + " 筆資料\n";
+
+            foreach (string n in fate.Datas.Keys)
+            {
+                richTextBox1.Text += "Keys = " + n + "\tValues = " + fate.Datas[n] + "\n";
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
+            WebClient wc = new WebClient();     // 建立 WebClient
+            byte[] buffer = wc.DownloadData("http://k-db.com/?p=all&download=csv");
+            string str = Encoding.Default.GetString(buffer);
+            string[] rows = str.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 
+            richTextBox1.Text += "len = " + rows.Length.ToString() + "\n";
+            foreach (string r in rows)
+            {
+                richTextBox1.Text += r + "\n";
+            }
+
+            // １行目をラベルに表示
+
+            richTextBox1.Text += "取得第一行資料 : " + rows[0] + "\n";
+
+            // ２行目以下はカンマ区切りから文字列の配列に変換しておく
+            List<string[]> list = new List<string[]>();
+            rows.ToList().ForEach(row => list.Add(row.Split(new char[] { ',' })));
+
+            // ヘッダの作成（データバインド用の設計）
+            list.First().Select((item, cnt) => new { Count = cnt, Item = item }).ToList().ForEach(header =>
+            {
+                /*
+                    {
+                        Header = header.Item,
+                        DisplayMemberBinding = new Binding(string.Format("[{0}]", header.Count))
+                    };
+                */
+            });
+        }
+
+        public string[] GetCSVData()
+        {
+            WebClient wc = new WebClient();     // 建立 WebClient
+            byte[] buffer = wc.DownloadData("http://k-db.com/?p=all&download=csv");
+            string str = Encoding.Default.GetString(buffer);
+            return str.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-
+            string[] rows = GetCSVData();
+            richTextBox1.Text += "len = " + rows.Length.ToString() + "\n";
+            foreach (string r in rows)
+            {
+                richTextBox1.Text += r + "\n";
+            }
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-
+            //WebClient 1
+            //string sourceResource = "http://blogs.telerik.com/images/default-source/miroslav-miroslav/super_ninja.png?sfvrsn=2";
+            string sourceResource = @"https://www.telerik.com/sfimages/default-source/blogs/super_ninja-png";
+            string localFileName = Path.GetFileName(sourceResource);
+            using (WebClient wc = new WebClient())  // 建立 WebClient
+            {
+                try
+                {
+                    richTextBox1.Text += "開始下載: " + sourceResource + "\n";
+                    //Console.WriteLine("Start downloading {0}", sourceResource);
+                    wc.DownloadFile(sourceResource, localFileName);
+                    richTextBox1.Text += "下載完成, 在 bin/Debug\n";
+                }
+                catch (WebException ex)
+                {
+                    Console.Write(ex.Message);
+                    if (ex.InnerException != null)
+                    {
+                        Console.WriteLine(" " + ex.InnerException.Message);
+                        richTextBox1.Text += "下載失敗1, 原因 :\t" + ex.InnerException.Message + "\n";
+                    }
+                    else
+                    {
+                        Console.WriteLine();
+                        richTextBox1.Text += "下載失敗3\n";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Something going wrong. Details: " + ex.Message);
+                    richTextBox1.Text += "下載失敗2, 原因 :\t" + ex.Message + "\n";
+                }
+            }
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //WebClient 2
+            WebClient wc = new WebClient();     // 建立 WebClient
+            try
+            {
+                //wc.DownloadFile(url, fileName);
+                wc.DownloadFile("http://www.devbg.org/img/Logo-BASD.jpg", @"C:\dddddddddd\txt.jpg");
+                richTextBox1.Text += "下載完成\n";
+            }
+            catch (ArgumentException ae)
+            {
+                Console.WriteLine("{0} - {1}", ae.GetType(), ae.Message);
+            }
+            catch (WebException webEx)
+            {
+                Console.WriteLine("{0} - {1}", webEx.GetType(), webEx.Message);
+                Console.WriteLine("Destination not found!");
+            }
+            catch (NotSupportedException supportEx)
+            {
+                Console.WriteLine("{0} - {1}", supportEx.GetType(), supportEx.Message);
+                Console.WriteLine(supportEx.Message);
+            }
+            catch (Exception allExp)
+            {
+                Console.WriteLine("{0} - {1}", allExp.GetType(), allExp.Message);
+            }
+        }
 
+        public string SendSms(List<string> mobiles)
+        {
+            using (WebClient wc = new WebClient())    // 建立 WebClient
+            {
+                try
+                {
+                    string langCode = "1";
+                    if (Regex.IsMatch("lion-mouse", @"\p{IsArabic}+") == true)
+                    {
+                        langCode = "2";
+                    }
+
+                    wc.Headers.Add("content-type", "text/plain");
+                    string mobile = String.Join(",", mobiles.ToArray());
+                    string result = wc.DownloadString(String.Format("http://brazilboxtech.com/api/send.aspx?username=smartksa&password=ksasmrt95647&language={0}&sender=NCSS&mobile={1}&message={2}", langCode, mobile, "lion-mouse"));
+                    if (result.StartsWith("OK"))
+                    {
+                        return String.Empty;
+                    }
+                    return result;
+                }
+                catch (Exception ex)
+                {
+
+                    return ex.Message;
+                }
+            }
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
-
+            //WebClient 3
+            //List<string[]> camera_serials = new List<string[]>();
+            List<string> mobiles = new List<string>();
+            mobiles.Clear();
+            mobiles.Add("0922188156");
+            string result = SendSms(mobiles);
+            richTextBox1.Text += "result = " + result + "\n";
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //WebClient 4 解讀一個XML網頁資料
 
+            return;
+
+            //URL 未定
+
+            //分析一個網頁回傳的XML資料
+            try
+            {
+                string xml;
+                using (WebClient wc = new WebClient())  // 建立 WebClient
+                {
+                    xml = wc.DownloadString("url" + "/main.xml");
+                }
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.LoadXml(xml);
+                XmlNodeList elementsByTagName = xmlDocument.GetElementsByTagName("repofile");
+                XmlNodeList elementsByTagName2 = ((XmlElement)elementsByTagName[0]).GetElementsByTagName("information");
+                foreach (XmlElement xmlElement in elementsByTagName2)
+                {
+                    XmlNodeList elementsByTagName3 = xmlElement.GetElementsByTagName("id");
+                    XmlNodeList elementsByTagName4 = xmlElement.GetElementsByTagName("name");
+                    string s0 = elementsByTagName4[0].InnerText;
+                    string s1 = elementsByTagName3[0].InnerText;
+                }
+                XmlNodeList elementsByTagName5 = ((XmlElement)elementsByTagName[0]).GetElementsByTagName("category");
+                foreach (XmlElement xmlElement2 in elementsByTagName5)
+                {
+                    XmlNodeList elementsByTagName3 = xmlElement2.GetElementsByTagName("id");
+                    XmlNodeList elementsByTagName4 = xmlElement2.GetElementsByTagName("name");
+                    //GClass2 gClass = new GClass2();
+                    string s2 = elementsByTagName4[0].InnerText;
+                    string s3 = elementsByTagName3[0].InnerText;
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        public void LoadData()
+        {
+            WebClient wc = new WebClient();     // 建立 WebClient
+            wc.DownloadStringAsync(new Uri("http://data.taipei.gov.tw/opendata/apply/json/RjQzRThDNjUtMzU3OS00MTU5LUEwOUEtMUI2NzFDOTE5NDcz"));
+            wc.DownloadStringCompleted += wc_DownloadStringCompleted;
+        }
+
+        void wc_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            //e.Result
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //WebClient 1
+            WebClient wc = new WebClient();
+            wc.BaseAddress = "http://www.juedui100.com/";   //設置根目錄
+            wc.Encoding = Encoding.UTF8;                    //設置按照何種編碼訪問，如果不加此行，獲取到的字符串中文將是亂碼
+            string str = wc.DownloadString("/");
+            Console.WriteLine(str);
+
+
+            //----------------------以下為OpenRead()以流的方式讀取----------------------
+            wc.Headers.Add("Accept", "image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/x-shockwave-flash, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*");
+            wc.Headers.Add("Accept-Language", "zh-cn");
+            wc.Headers.Add("UA-CPU", "x86");
+            //wc.Headers.Add("Accept-Encoding","gzip, deflate");    //因為我們的程序無法進行gzip解碼所以如果這樣請求獲得的資源可能無法解碼。當然我們可以給程序加入gzip處理的模塊 那是題外話了。
+            wc.Headers.Add("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)");
+            //Headers   用於添加添加請求的頭信息
+            System.IO.Stream objStream = wc.OpenRead("user/6974068.html");      //獲取訪問流
+            System.IO.StreamReader _read = new System.IO.StreamReader(objStream, System.Text.Encoding.UTF8);    //新建一個讀取流，用指定的編碼讀取，此處是utf-8
+            Console.Write(_read.ReadToEnd());   //輸出讀取到的字符串
+
+            //------------------------DownloadFile下載文件-------------------------------
+            wc.DownloadFile("http://www.baidu.com/img/shouye_b5486898c692066bd2cbaeda86d74448.gif", @"D:\123.gif");     //將遠程文件保存到本地
+            //------------------------DownloadFile下載到字節數組-------------------------------
+            byte[] bytes = wc.DownloadData("http://www.baidu.com/img/shouye_b5486898c692066bd2cbaeda86d74448.gif");
+            FileStream fs = new FileStream(@"E:\123.gif", FileMode.Create);
+            fs.Write(bytes, 0, bytes.Length);
+            fs.Flush();
+
+            WebHeaderCollection whc = wc.ResponseHeaders;   //獲取響應頭信息
+            foreach (string s in whc)
+            {
+                Console.WriteLine(s + ":" + whc.Get(s));
+            }
+
+            Console.WriteLine(wc.QueryString.Count);    //輸出0
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            //WebClient 2
+
+            //異步下載頁面的例子：
+            WebClient wc = new WebClient();
+            wc.Encoding = Encoding.UTF8;                    //設置按照何種編碼訪問，如果不加此行，獲取到的字符串中文將是亂碼
+            wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DownComplete);
+            wc.DownloadStringAsync(new Uri("http://www.juedui100.com/"));
+            Console.WriteLine("下載!");
+        }
+
+        public static void DownComplete(object sender, DownloadStringCompletedEventArgs e)
+        {
+            Console.WriteLine(sender.ToString());   //輸出 System.Net.WebClient   觸發事件的對象
+            Console.WriteLine(e.Result);    //輸出頁面源代碼
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            //WebClient 3
+            //將數據下載到字節數組：
+            WebClient wc = new WebClient();
+            //直接下載
+            wc.DownloadFile("http://24.duote.com.cn/kugou.zip", @"ku.zip");
+            Console.WriteLine("下載完成了嗎？");   //下載完成後輸出 下載完成了嗎？
+
+            //將數據下載到字節數組
+            byte[] byteArr = wc.DownloadData("http://24.duote.com.cn/kugou.zip");
+            FileStream fs = new FileStream(@"D:\kugo.zip", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            fs.Write(byteArr, 0, byteArr.Length);
+
+            //至於異步與下載雷同
+
+            Console.WriteLine("現在完成了還是沒完成呢？");
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            WebClient webClient = new WebClient();
+            string publicIp = webClient.DownloadString("https://api.ipify.org");
+            richTextBox1.Text += "My public IP Address is: " + publicIp + "\n";
+            Console.WriteLine("My public IP Address is: {0}", publicIp);
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            //取得 SecurityProtocol
+            //GetSecurityProtocol();
+            ServicePointManager.SecurityProtocol = GetSecurityProtocol();
+        }
+
+        private static SecurityProtocolType GetSecurityProtocol()
+        {
+            var result = 0;
+            foreach (var value in Enum.GetValues(typeof(SecurityProtocolType)))
+            {
+                result += (int)value;
+                Console.WriteLine(result.ToString());
+            }
+
+            return (SecurityProtocolType)result;
+        }
+
+    }
+
+    public static class StarSignsUtil
+    {
+        /// <summary>
+        /// 紀錄星座資料的模型
+        /// </summary>
+        public class StarSignInfo
+        {
+            public string Title { get; set; }
+            public string Id { get; set; }
+            public string DateRange { get; set; }
+        }
+
+        /// <summary>
+        /// 查詢後的回應資料
+        /// </summary>
+        public class FateResult
+        {
+            public StarSignInfo StarSign { get; set; }
+            public string Date { get; set; }
+
+
+            public string Desc { get; set; }
+
+
+            public System.Collections.Generic.Dictionary<string, string> Datas { get; set; }
+
+            public FateResult()
+            {
+                Datas = new System.Collections.Generic.Dictionary<string, string>();
+            }
+
+        }
+
+        /// <summary>
+        /// 星座資料
+        /// </summary>
+        public static System.Collections.Generic.List<StarSignInfo> Datas { get; set; }
+
+
+        //Ctor
+        static StarSignsUtil()
+        {
+            Datas = new System.Collections.Generic.List<StarSignInfo>();
+            Datas.Add(new StarSignInfo { Title = "白羊座", Id = "aries", DateRange = "03/21-04/19" });
+            Datas.Add(new StarSignInfo { Title = "金牛座", Id = "taurus", DateRange = "04/20-05/20" });
+            Datas.Add(new StarSignInfo { Title = "雙子座", Id = "gemini", DateRange = "05/21-06/21" });
+            Datas.Add(new StarSignInfo { Title = "巨蟹座", Id = "cancer", DateRange = "06/22-07/22" });
+            Datas.Add(new StarSignInfo { Title = "獅子座", Id = "leo", DateRange = "07/23-08/22" });
+            Datas.Add(new StarSignInfo { Title = "處女座", Id = "virgo", DateRange = "08/23-09/22" });
+            Datas.Add(new StarSignInfo { Title = "天秤座", Id = "libra", DateRange = "09/23-10/23" });
+            Datas.Add(new StarSignInfo { Title = "天蠍座", Id = "scorpio", DateRange = "10/24-11/22" });
+            Datas.Add(new StarSignInfo { Title = "射手座", Id = "sagittarius", DateRange = "11/23-12/21" });
+            Datas.Add(new StarSignInfo { Title = "魔羯座", Id = "capricorn", DateRange = "12/22-01/19" });
+            Datas.Add(new StarSignInfo { Title = "水瓶座", Id = "aquarius", DateRange = "01/20-02/18" });
+            Datas.Add(new StarSignInfo { Title = "雙魚座", Id = "pisces", DateRange = "02/19-03/20" });
+        }
+
+
+        public static FateResult GetFateToday(string title)
+        {
+            var sInfo = Datas.SingleOrDefault(x => x.Title == title);
+            if (sInfo == null)
+            {
+                throw new System.Exception("此星座我沒有找到");
+            }
+
+
+            var result = new StarSignsUtil.FateResult();
+            result.StarSign = sInfo;
+
+            string url = @"http://vip.astro.sina.com.cn/astro/view/" + sInfo.Id + "/";
+
+            WebClient wc = new WebClient();     // 建立 WebClient
+            wc.Encoding = Encoding.UTF8;        // 指定 WebClient 的編碼
+            string source = wc.DownloadString(url);
+            //MessageBox.Show(sInfo.Id);
+
+            var regex = new System.Text.RegularExpressions.Regex(@"<div class=[\s""']tab[\s""']><h4>(?<KEY>.*?)</h4><p>(?<VALUE>.*?)</p>", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            System.Text.RegularExpressions.MatchCollection matches = regex.Matches(source);
+            foreach (System.Text.RegularExpressions.Match match in matches)
+            {
+                if (match.Success)
+                {
+                    var k = match.Groups["KEY"].Value.Replace("&nbsp;", "");
+                    var v = match.Groups["VALUE"].Value.Replace("&nbsp;", "");
+                    if (!string.IsNullOrEmpty(k) && !string.IsNullOrEmpty(v) && !result.Datas.ContainsKey(k))
+                    {
+                        result.Datas.Add(k, v);
+                    }
+                    //MessageBox.Show(k);
+                    //MessageBox.Show(v);
+                }
+            }
+
+            regex = new System.Text.RegularExpressions.Regex(@"&lt;p&gt;(?<VALUE>.*?)&lt;/p&gt", System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Singleline);
+            matches = regex.Matches(source);
+
+            foreach (System.Text.RegularExpressions.Match match in matches)
+            {
+                if (match.Success)
+                {
+
+                    var v = match.Groups["VALUE"].Value.Trim();
+
+                    if (!string.IsNullOrEmpty(v))
+                    {
+                        if (v.Contains("："))
+                        {
+                            result.Datas.Add(v.Split('：')[0].Trim(), v.Split('：')[1].Trim());
+                        }
+                        else
+                        {
+                            result.Desc = v.Trim();
+                        }
+                    }
+                }
+            }
+
+            regex = new System.Text.RegularExpressions.Regex(@"有效日期:(?<VALUE>.*?)</li>", System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Singleline);
+            matches = regex.Matches(source);
+            foreach (System.Text.RegularExpressions.Match match in matches)
+            {
+                if (match.Success)
+                {
+
+                    result.Date = match.Groups["VALUE"].Value.Trim();
+                }
+            }
+            return result;
         }
     }
 
@@ -826,4 +1335,17 @@ namespace vcs_WebClient
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
 }
+
+/*
+
+        private void SendGETRequest(string url)
+        {
+            using (WebClient wc = new WebClient())  // 建立 WebClient
+            {
+                wc.DownloadStringAsync(new Uri(url));
+            }
+        }
+
+*/
+
 

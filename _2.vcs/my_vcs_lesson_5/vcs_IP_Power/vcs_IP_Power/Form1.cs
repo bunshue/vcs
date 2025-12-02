@@ -65,7 +65,7 @@ namespace vcs_IP_Power
                 button4.Location = new Point(x_st + dx * 0, y_st + dy * 2);
 
                 richTextBox1.Size = new Size(400, 460);
-                richTextBox1.Location = new Point(x_st + dx * 2+10, y_st + dy * 0);
+                richTextBox1.Location = new Point(x_st + dx * 2 + 10, y_st + dy * 0);
                 bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
                 this.Size = new Size(340, 520);
             }
@@ -76,17 +76,39 @@ namespace vcs_IP_Power
             richTextBox1.Clear();
         }
 
+        //讓 WebClient 擁有 Timeout 功能
+        public class MyWebClient : WebClient
+        {
+            protected override WebRequest GetWebRequest(Uri uri)
+            {
+                WebRequest WR = base.GetWebRequest(uri);
+                WR.Timeout = 3 * 1000;     //3秒
+                return WR;
+            }
+        }
+
         void Command_IP_Power_Reset()
         {
-            richTextBox1.Text += "設定主機重開\n";
+            richTextBox1.Text += "斷電重開\n";
+            Application.DoEvents();
 
-            //# reset
             string url = @"http://192.168.2.123/set.cmd?user=admin+pass=12345678+cmd=setpowercycle&p61=1";
-            richTextBox1.Text += "reset\n";
-            WebClient wc = new WebClient();
+            //WebClient wc = new WebClient();
+            MyWebClient wc = new MyWebClient();
             wc.Encoding = Encoding.UTF8;
-            string html = wc.DownloadString(url);
-            richTextBox1.Text += html + "\n";
+            try
+            {
+                string html = wc.DownloadString(url);
+                richTextBox1.Text += html + "\n";
+            }
+            catch (WebException ex)
+            {
+                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error\t" + ex.Message + "\n";
+            }
         }
 
         void Command_IP_Power_Info()
@@ -96,58 +118,145 @@ namespace vcs_IP_Power
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             richTextBox1.Text += "取得 IP Power 的 韌體版本 getversion\n";
+            Application.DoEvents();
+
             string url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=getversion";
-            WebClient wc = new WebClient();
+            //WebClient wc = new WebClient();
+            MyWebClient wc = new MyWebClient();
             wc.Encoding = Encoding.UTF8;
-            string html = wc.DownloadString(url);
-            richTextBox1.Text += html + "\n";
+            string html = string.Empty;
+            try
+            {
+                html = wc.DownloadString(url);
+                richTextBox1.Text += html + "\n";
+            }
+            catch (WebException ex)
+            {
+                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error\t" + ex.Message + "\n";
+            }
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             richTextBox1.Text += "取得 IP Power 的 MAC 位址 getmac\n";
+            Application.DoEvents();
+
             url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=getmac";
-            wc = new WebClient();
+            //wc = new WebClient();
+            wc = new MyWebClient();
             wc.Encoding = Encoding.UTF8;
-            html = wc.DownloadString(url);
-            richTextBox1.Text += html + "\n";
+            try
+            {
+                html = wc.DownloadString(url);
+                richTextBox1.Text += html + "\n";
+            }
+            catch (WebException ex)
+            {
+                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error\t" + ex.Message + "\n";
+            }
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             richTextBox1.Text += "取得 IP Power 的 電源狀態 getpower\n";
+            Application.DoEvents();
+
             url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=getpower";
-            wc = new WebClient();
+            //wc = new WebClient();
+            wc = new MyWebClient();
             wc.Encoding = Encoding.UTF8;
-            html = wc.DownloadString(url);
-            richTextBox1.Text += html + "\n";
+            try
+            {
+                html = wc.DownloadString(url);
+                richTextBox1.Text += html + "\n";
+            }
+            catch (WebException ex)
+            {
+                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error\t" + ex.Message + "\n";
+            }
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             richTextBox1.Text += "取得 IP Power 的 電流值 getcurrent\n";
+            Application.DoEvents();
+
             url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=getcurrent";
-            wc = new WebClient();
+            //wc = new WebClient();
+            wc = new MyWebClient();
             wc.Encoding = Encoding.UTF8;
-            html = wc.DownloadString(url);
-            richTextBox1.Text += html + "\n";
+            try
+            {
+                html = wc.DownloadString(url);
+                richTextBox1.Text += html + "\n";
+            }
+            catch (WebException ex)
+            {
+                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error\t" + ex.Message + "\n";
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
 
         void Command_IP_Power_ON()
         {
-            //# 上電
+            richTextBox1.Text += "上電\n";
+            Application.DoEvents();
+
             string url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=setpower&p61=1";
-            WebClient wc = new WebClient();
+            //WebClient wc = new WebClient();
+            MyWebClient wc = new MyWebClient();
             wc.Encoding = Encoding.UTF8;
-            string html = wc.DownloadString(url);
-            richTextBox1.Text += html + "\n";
+            try
+            {
+                string html = wc.DownloadString(url);
+                richTextBox1.Text += html + "\n";
+            }
+            catch (WebException ex)
+            {
+                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error\t" + ex.Message + "\n";
+            }
         }
 
         void Command_IP_Power_OFF()
         {
-            //# 下電
+            richTextBox1.Text += "下電\n";
+            Application.DoEvents();
+
             string url = @"http://192.168.2.123/set.cmd?user=root+pass=12345678+cmd=setpower&p61=0";
-            WebClient wc = new WebClient();
+            //WebClient wc = new WebClient();
+            MyWebClient wc = new MyWebClient();
             wc.Encoding = Encoding.UTF8;
-            string html = wc.DownloadString(url);
-            richTextBox1.Text += html + "\n";
+            try
+            {
+                string html = wc.DownloadString(url);
+                richTextBox1.Text += html + "\n";
+            }
+            catch (WebException ex)
+            {
+                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error\t" + ex.Message + "\n";
+            }
         }
 
         private void button0_Click(object sender, EventArgs e)
