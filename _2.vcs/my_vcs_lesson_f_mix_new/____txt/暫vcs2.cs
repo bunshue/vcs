@@ -19,7 +19,10 @@ richTextBox1.Text += "----------------------------------------------------------
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-
+dgv1
+            //// Make the columns autosize.
+            //foreach (DataGridViewColumn col in dataGridView1.Columns)
+            //    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
 ------------------------------------------------------------
 ------------------------------------------------------------
