@@ -784,8 +784,25 @@ namespace vcs_System1
             richTextBox1.Text += "VersionInfo: " + FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
         }
 
+        [DllImport("user32.dll", EntryPoint = "GetSystemMetrics")]
+        private static extern int GetSystemMetrics(int mVal);
+
         private void button13_Click(object sender, EventArgs e)
         {
+            //取得螢幕大小
+
+            richTextBox1.Text += "使用 Screen.PrimaryScreen.Bounds\n";
+            int W = Screen.PrimaryScreen.Bounds.Width;
+            int H = Screen.PrimaryScreen.Bounds.Height;
+
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            richTextBox1.Text += "使用 GetSystemMetrics\n";
+            W = GetSystemMetrics(0);
+            H = GetSystemMetrics(1);
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
         }
 
         private void button14_Click(object sender, EventArgs e)

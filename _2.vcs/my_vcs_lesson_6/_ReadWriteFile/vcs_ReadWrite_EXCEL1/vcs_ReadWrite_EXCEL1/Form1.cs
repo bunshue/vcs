@@ -141,7 +141,7 @@ namespace vcs_ReadWrite_EXCEL1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\excel_20210602_131921.xls";
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\excel_20210602_131921.xls";
 
             //string filename = pathFile + ".xls";
             if (File.Exists(filename) == false)
@@ -381,26 +381,6 @@ namespace vcs_ReadWrite_EXCEL1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //Sugar can not open file
-            string filename = Application.StartupPath + "\\excel_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xls";
-            FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
-            StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.GetEncoding("big5"));
-            string s = "第1欄位\t第2欄位\t第3欄位\t第4欄位\t第5欄位\t";
-            sw.WriteLine(s); //設置Excel標題
-
-            //寫入Excel檔資料
-            for (int i = 0; i < 10; i++)  //i代表行，總共10行
-            {
-                s = "";
-                for (int j = 0; j < 5; j++)    //j代表欄位，總共5欄
-                {
-                    s = s + (i * 10 + j).ToString() + "\t";
-                }
-                sw.WriteLine(s);
-            }
-            sw.Close();     //寫入Excel檔資料
-
-            richTextBox1.Text += "存檔檔名: " + filename + "，此檔不能用程式讀取。\n";
         }
     }
 }
