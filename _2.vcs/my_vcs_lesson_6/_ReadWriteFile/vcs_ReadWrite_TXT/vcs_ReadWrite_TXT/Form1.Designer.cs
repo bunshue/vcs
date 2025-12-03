@@ -187,7 +187,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 9;
-            this.button8.Text = "ReadToEnd";
+            this.button8.Text = "StreamReader";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -252,7 +252,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 15;
-            this.button14.Text = "製作純文字檔 File.WriteAllText";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -263,7 +262,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 16;
-            this.button15.Text = "寫入各種編碼檔案 File.WriteAllBytes";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -274,7 +272,6 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 60);
             this.button16.TabIndex = 17;
-            this.button16.Text = "開啟各種編碼檔案 File.ReadAllBytes";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -285,7 +282,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(200, 60);
             this.button17.TabIndex = 18;
-            this.button17.Text = "存純文字檔";
+            this.button17.Text = "StreamWriter";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -296,7 +293,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(200, 60);
             this.button18.TabIndex = 19;
-            this.button18.Text = "ReadLine";
+            this.button18.Text = "StreamReader";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -456,7 +453,7 @@
             this.button49.Name = "button49";
             this.button49.Size = new System.Drawing.Size(200, 60);
             this.button49.TabIndex = 223;
-            this.button49.Text = "FileAttributes";
+            this.button49.Text = "儲存資料(BIN)";
             this.button49.UseVisualStyleBackColor = true;
             this.button49.Click += new System.EventHandler(this.button49_Click);
             // 
@@ -467,6 +464,7 @@
             this.button48.Name = "button48";
             this.button48.Size = new System.Drawing.Size(200, 60);
             this.button48.TabIndex = 222;
+            this.button48.Text = "載入資料(BIN)";
             this.button48.UseVisualStyleBackColor = true;
             this.button48.Click += new System.EventHandler(this.button48_Click);
             // 
@@ -477,7 +475,7 @@
             this.button47.Name = "button47";
             this.button47.Size = new System.Drawing.Size(200, 60);
             this.button47.TabIndex = 221;
-            this.button47.Text = "取得檔案資訊3";
+            this.button47.Text = "儲存資料(TXT)";
             this.button47.UseVisualStyleBackColor = true;
             this.button47.Click += new System.EventHandler(this.button47_Click);
             // 
@@ -488,7 +486,7 @@
             this.button46.Name = "button46";
             this.button46.Size = new System.Drawing.Size(200, 60);
             this.button46.TabIndex = 220;
-            this.button46.Text = "讀檔案的一部分 bmp";
+            this.button46.Text = "載入資料(TXT)";
             this.button46.UseVisualStyleBackColor = true;
             this.button46.Click += new System.EventHandler(this.button46_Click);
             // 
@@ -499,6 +497,7 @@
             this.button45.Name = "button45";
             this.button45.Size = new System.Drawing.Size(200, 60);
             this.button45.TabIndex = 219;
+            this.button45.Text = "輸入資料";
             this.button45.UseVisualStyleBackColor = true;
             this.button45.Click += new System.EventHandler(this.button45_Click);
             // 
@@ -509,6 +508,7 @@
             this.button44.Name = "button44";
             this.button44.Size = new System.Drawing.Size(200, 60);
             this.button44.TabIndex = 218;
+            this.button44.Text = "取得檔案資訊";
             this.button44.UseVisualStyleBackColor = true;
             this.button44.Click += new System.EventHandler(this.button44_Click);
             // 
@@ -563,7 +563,7 @@
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(200, 60);
             this.button39.TabIndex = 213;
-            this.button39.Text = "RTB存檔";
+            this.button39.Text = "讀檔案的一部分 bmp";
             this.button39.UseVisualStyleBackColor = true;
             this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
@@ -627,6 +627,7 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(200, 60);
             this.button33.TabIndex = 207;
+            this.button33.Text = "File.WriteAllText";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
@@ -637,7 +638,7 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(200, 60);
             this.button32.TabIndex = 206;
-            this.button32.Text = "ReadAllBytes";
+            this.button32.Text = "File.WriteAllBytes";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
@@ -648,7 +649,7 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(200, 60);
             this.button31.TabIndex = 205;
-            this.button31.Text = "ReadAllBytes";
+            this.button31.Text = "File.ReadAllBytes";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 

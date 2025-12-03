@@ -114,7 +114,8 @@ namespace vcs_ReadWrite_TXT
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //File.ReadAllLines 1
+            //File.ReadAllLines
+
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\article.txt";
 
             StringBuilder sb = new StringBuilder();
@@ -130,7 +131,6 @@ namespace vcs_ReadWrite_TXT
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            //File.ReadAllLines 2
             //將純文字檔拆成一行一行的字串陣列, 可以去除前後空白
             filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\poem.txt";
             string[] patterns;
@@ -145,7 +145,6 @@ namespace vcs_ReadWrite_TXT
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            //File.ReadAllLines 3
             //開檔ReadAllLines存檔
             filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
             // Read the whole file to a string array
@@ -193,6 +192,20 @@ namespace vcs_ReadWrite_TXT
             sw.Close();
 
             richTextBox2.Text += "\n存檔完成, 檔名 : " + filename + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            /*
+            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+            //XXX richTextBox1.SaveFile(filename, RichTextBoxStreamType.PlainText);    //將richTextBox的資料寫入到指定的文字檔, 這樣會出現怪字型, 還是一行一行儲存比較好
+
+            FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式            
+            sw.Write(richTextBox1.Text);
+            sw.Close();
+            richTextBox1.Text += "存檔完成, 檔名 : " + filename + "\n";
+            */
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -207,7 +220,7 @@ namespace vcs_ReadWrite_TXT
                 MessageBox.Show("找不到檔案");
             }
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             openFileDialog1.Title = "測試讀取一個純文字檔";
             //openFileDialog1.ShowHelp = true;
@@ -253,16 +266,13 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Text += "檔案內容 : " + y + "\n";
             richTextBox1.Text += "長度：" + y.Length.ToString() + "\n";
 
-
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //讀檔4
             string fileReadName = @"D:\_git\vcs\_1.data\______test_files1\data.txt";
             ReadFile(fileReadName);
 
-
-            //6060
-
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //AppendAllText 插入文字
             //C# 將字串插入文件內容尾端
@@ -366,8 +376,7 @@ namespace vcs_ReadWrite_TXT
             string all_text = sr.ReadToEnd();   //一次性讀完所有文字內容
             richTextBox1.Text += all_text + "\n";
 
-
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //讀檔1
             //一次讀取檔案內所有資料
@@ -376,7 +385,7 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Text += sr.ReadToEnd();	//讀取所有文字內容
             sr.Close();
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //讀取中文檔案
             String pathname = @"D:\_git\vcs\_1.data\______test_files1\read_file.txt";
@@ -394,7 +403,7 @@ namespace vcs_ReadWrite_TXT
                 richTextBox1.Text += sw.ReadToEnd();	//讀取所有文字內容
             }
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             openFileDialog1.Title = "測試讀取一個純文字檔";
             //openFileDialog1.ShowHelp = true;
@@ -566,134 +575,14 @@ namespace vcs_ReadWrite_TXT
 
         private void button14_Click(object sender, EventArgs e)
         {
-            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".default.txt";
-            richTextBox1.Clear();
-            int i;
-            for (i = 0; i < 256; i++)
-            {
-                richTextBox1.Text += i.ToString() + " ";
-            }
-            File.WriteAllText(filename, richTextBox1.Text, Encoding.Default);
-            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
-            
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //ReadAllText 讀取文件
-            //使用ReadAllText可以直接讀取文件中的內容，格式為:
-            //File.ReadAllText(檔案位置及名稱);
-            //建立檔案 & 讀取檔案 範例:
-
-            //建立檔案
-            string x = "Hello text";
-            File.WriteAllText("myfilename.txt", x);
-            richTextBox1.Text += "寫檔完成\n";
-
-            //讀取檔案
-            string y = File.ReadAllText("myfilename.txt");
-            richTextBox1.Text += "檔案內容 : " + y + "\n";
-
-
-            //6060
-
-            //WriteAllText 寫入/建立檔案
-            //透過WriteAllText可以將文字寫入檔案(如果檔案不存在，會自動建立)，格式為:
-            //File.WriteAllText(檔案位置及名稱, 字串);
-
-            string xx = "Hello text";
-            File.WriteAllText("myfilename.txt", xx);
-            richTextBox1.Text += "寫檔完成\n";
-
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            int i;
-            byte[] data = new byte[16];     //for TC, SC, JP
-            byte[] data2 = new byte[18];    //for unicode
-
-            string filename1 = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".big5.txt";
-            string filename2 = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".gb2312.txt";
-            string filename3 = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".shift_jis.txt";
-            string filename4 = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".unicode.txt";
-
-            //都はるみ全曲集２ 	繁体中文(Big5) 	950 	big5 	B3 A3 3F 3F 3F A5 FE A6 B1 B6 B0 A2 B1
-            //は C756 る C777 み C766
-            byte[] data_1 = { 0xB3, 0xA3, 0xC7, 0x56, 0xC7, 0x77, 0xC7, 0x66, 0xA5, 0xFE, 0xA6, 0xB1, 0xB6, 0xB0, 0xA2, 0xB1 };
-            //都はるみ全曲集２ 	简体中文(GB2312) 	936 	gb2312 	B6 BC A4 CF A4 EB A4 DF C8 AB C7 FA BC AF A3 B2
-            byte[] data_2 = { 0xB6, 0xBC, 0xA4, 0xCF, 0xA4, 0xEB, 0xA4, 0xDF, 0xC8, 0xAB, 0xC7, 0xFA, 0xBC, 0xAF, 0xA3, 0xB2 };
-            //都はるみ全曲集２ 	日语(Shift-JIS) 	932 	shift_jis 	93 73 82 CD 82 E9 82 DD 91 53 8B C8 8F 57 82 51
-            byte[] data_3 = { 0x93, 0x73, 0x82, 0xCD, 0x82, 0xE9, 0x82, 0xDD, 0x91, 0x53, 0x8B, 0xC8, 0x8F, 0x57, 0x82, 0x51 };
-            //都はるみ全曲集２ 	Unicode 		        1200 	utf-16 		FD 90 6F 30 8B 30 7F 30 68 51 F2 66 C6 96 12 FF     use this
-            //都はるみ全曲集２ 	Unicode (Big-Endian) 	1201 	utf-16BE 	90 FD 30 6F 30 8B 30 7F 51 68 66 F2 96 C6 FF 12
-            byte[] data_4 = { 0xFD, 0x90, 0x6F, 0x30, 0x8B, 0x30, 0x7F, 0x30, 0x68, 0x51, 0xF2, 0x66, 0xC6, 0x96, 0x12, 0xFF };
-
-            for (i = 0; i < 16; i++)
-                data[i] = data_1[i];
-
-            //寫資料
-            File.WriteAllBytes(filename1, data);
-
-            for (i = 0; i < 16; i++)
-                data[i] = data_2[i];
-
-            //寫資料
-            File.WriteAllBytes(filename2, data);
-
-            for (i = 0; i < 16; i++)
-                data[i] = data_3[i];
-
-            //寫資料
-            File.WriteAllBytes(filename3, data);
-
-            data2[0] = 0xFF;
-            data2[1] = 0xFE;
-            for (i = 0; i < 16; i++)
-                data2[i + 2] = data_4[i];
-
-            //寫資料
-            File.WriteAllBytes(filename4, data2);
-
-            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename1 + "\n";
-            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename2 + "\n";
-            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename3 + "\n";
-            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename4 + "\n";
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
-            string filename;
-            byte[] b;
-            string s;
-
-            richTextBox1.Text += "用預設編碼開啟\n";
-            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\Compressor.c";
-            b = File.ReadAllBytes(filename);
-            s = Encoding.Default.GetString(b);
-            richTextBox1.Text += s + "\n";
-
-            richTextBox1.Text += "用Big5編碼開啟\n";
-            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\Compressor.c";
-            b = File.ReadAllBytes(filename);
-            s = Encoding.GetEncoding("big5").GetString(b);
-            richTextBox1.Text += s + "\n";
-
-            richTextBox1.Text += "用gb2312編碼開啟\n";
-            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\sc\001川の流れのように.txt";
-            b = File.ReadAllBytes(filename);
-            s = Encoding.GetEncoding("gb2312").GetString(b);
-            richTextBox1.Text += s + "\n";
-
-            richTextBox1.Text += "用shift_jis編碼開啟\n";
-            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\jap\饩Ⓚ丗钡冦冦葢轿瘅.txt";
-            b = File.ReadAllBytes(filename);
-            s = Encoding.GetEncoding("shift_jis").GetString(b);
-            richTextBox1.Text += s + "\n";
-
-            richTextBox1.Text += "用utf-8編碼開啟\n";
-            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\Form1.cs.txt";
-            b = File.ReadAllBytes(filename);
-            s = Encoding.UTF8.GetString(b);
-            richTextBox1.Text += s + "\n";
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -712,6 +601,8 @@ namespace vcs_ReadWrite_TXT
 
         private void button18_Click(object sender, EventArgs e)
         {
+            string line = string.Empty;
+
             //ReadLine 1
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
             int i;
@@ -720,7 +611,6 @@ namespace vcs_ReadWrite_TXT
             using (TextReader reader = new StreamReader(filename, Encoding.Default))
             {
                 i = 0;
-                string line;
                 line = reader.ReadLine();
                 while (line != null)
                 {
@@ -733,19 +623,11 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //ReadLine 2
-            try
-            {
                 StreamReader sr = new StreamReader(filename, Encoding.Default);
-                string line = string.Empty;
                 while ((line = sr.ReadLine()) != null)
                 {
                     richTextBox1.Text += line + "\n";
                 }
-            }
-            catch
-            {
-
-            }
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -754,9 +636,9 @@ namespace vcs_ReadWrite_TXT
             //一行一行讀取文字檔
             filename = @"D:\_git\vcs\_1.data\______test_files1\_case1\_case1a\_case1aa\eula.3081a.txt";
 
-            StreamReader SReader = new StreamReader(filename, Encoding.Default);
+            sr = new StreamReader(filename, Encoding.Default);
             string strLine = string.Empty;
-            while ((strLine = SReader.ReadLine()) != null)
+            while ((strLine = sr.ReadLine()) != null)
             {
                 richTextBox1.Text += strLine + "\n";
             }
@@ -768,8 +650,8 @@ namespace vcs_ReadWrite_TXT
             filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
             try
             {
-                StreamReader sr = new StreamReader(filename, Encoding.Default);
-                string line = string.Empty;
+                sr = new StreamReader(filename, Encoding.Default);
+                line = string.Empty;
                 i = 0;
 
                 /*
@@ -1315,11 +1197,22 @@ namespace vcs_ReadWrite_TXT
                 richTextBox2.Text += "直接刪除, 不放進垃圾桶\n";
                 File.Delete(filename3);
             }
+
+            richTextBox2.Text += "------------------------------------------------------------\n";  // 60個
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
+
+            richTextBox1.Text += File.GetAttributes(filename) + "\n";
+            File.SetAttributes(filename, FileAttributes.ReadOnly);
+            richTextBox1.Text += File.GetAttributes(filename) + "\n";
+
+
         }
 
         private void button31_Click(object sender, EventArgs e)
         {
-            //ReadAllBytes
+            //File.ReadAllBytes
+
             string fileName1 = @"D:\_git\vcs\_1.data\______test_files1\test_ReadAllBytes.bmp";
             string fileName2 = @"D:\_git\vcs\_1.data\______test_files1\test_WriteAllBytes.bmp";
 
@@ -1348,11 +1241,9 @@ namespace vcs_ReadWrite_TXT
             //寫資料
             File.WriteAllBytes(fileName2, data_read);
             richTextBox1.Text += "寫成檔案" + fileName2 + "\n";
-        }
 
-        private void button32_Click(object sender, EventArgs e)
-        {
-
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            /*
             string fileName1 = @"D:\_git\vcs\_1.data\______test_files1\test_ReadAllBytes.bmp";
             string fileName2 = @"D:\_git\vcs\_1.data\______test_files1\test_ReadAllBytes_half.bmp";
 
@@ -1368,6 +1259,7 @@ namespace vcs_ReadWrite_TXT
                 data_write[i] = data_read[i];
 
             }
+            */
 
             /*
             打印資料
@@ -1379,16 +1271,146 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Text += data_read_result;
             */
 
-
+            /*
             //寫資料
             //File.WriteAllBytes(fileName2, data_write);
             string zzz = Convert.ToString(data_write);
             File.WriteAllText(fileName2, zzz);
             richTextBox1.Text += "寫成檔案" + fileName2 + "\n";
+            */
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            string filename;
+            byte[] b;
+            string s;
+
+            richTextBox1.Text += "用預設編碼開啟\n";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\Compressor.c";
+            b = File.ReadAllBytes(filename);
+            s = Encoding.Default.GetString(b);
+            richTextBox1.Text += s + "\n";
+
+            richTextBox1.Text += "用Big5編碼開啟\n";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\Compressor.c";
+            b = File.ReadAllBytes(filename);
+            s = Encoding.GetEncoding("big5").GetString(b);
+            richTextBox1.Text += s + "\n";
+
+            richTextBox1.Text += "用gb2312編碼開啟\n";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\sc\001川の流れのように.txt";
+            b = File.ReadAllBytes(filename);
+            s = Encoding.GetEncoding("gb2312").GetString(b);
+            richTextBox1.Text += s + "\n";
+
+            richTextBox1.Text += "用shift_jis編碼開啟\n";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\jap\饩Ⓚ丗钡冦冦葢轿瘅.txt";
+            b = File.ReadAllBytes(filename);
+            s = Encoding.GetEncoding("shift_jis").GetString(b);
+            richTextBox1.Text += s + "\n";
+
+            richTextBox1.Text += "用utf-8編碼開啟\n";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__text\Form1.cs.txt";
+            b = File.ReadAllBytes(filename);
+            s = Encoding.UTF8.GetString(b);
+            richTextBox1.Text += s + "\n";
+
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            int i;
+            byte[] data = new byte[16];     //for TC, SC, JP
+            byte[] data2 = new byte[18];    //for unicode
+
+            string filename1 = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".big5.txt";
+            string filename2 = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".gb2312.txt";
+            string filename3 = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".shift_jis.txt";
+            string filename4 = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".unicode.txt";
+
+            //都はるみ全曲集２ 	繁体中文(Big5) 	950 	big5 	B3 A3 3F 3F 3F A5 FE A6 B1 B6 B0 A2 B1
+            //は C756 る C777 み C766
+            byte[] data_1 = { 0xB3, 0xA3, 0xC7, 0x56, 0xC7, 0x77, 0xC7, 0x66, 0xA5, 0xFE, 0xA6, 0xB1, 0xB6, 0xB0, 0xA2, 0xB1 };
+            //都はるみ全曲集２ 	简体中文(GB2312) 	936 	gb2312 	B6 BC A4 CF A4 EB A4 DF C8 AB C7 FA BC AF A3 B2
+            byte[] data_2 = { 0xB6, 0xBC, 0xA4, 0xCF, 0xA4, 0xEB, 0xA4, 0xDF, 0xC8, 0xAB, 0xC7, 0xFA, 0xBC, 0xAF, 0xA3, 0xB2 };
+            //都はるみ全曲集２ 	日语(Shift-JIS) 	932 	shift_jis 	93 73 82 CD 82 E9 82 DD 91 53 8B C8 8F 57 82 51
+            byte[] data_3 = { 0x93, 0x73, 0x82, 0xCD, 0x82, 0xE9, 0x82, 0xDD, 0x91, 0x53, 0x8B, 0xC8, 0x8F, 0x57, 0x82, 0x51 };
+            //都はるみ全曲集２ 	Unicode 		        1200 	utf-16 		FD 90 6F 30 8B 30 7F 30 68 51 F2 66 C6 96 12 FF     use this
+            //都はるみ全曲集２ 	Unicode (Big-Endian) 	1201 	utf-16BE 	90 FD 30 6F 30 8B 30 7F 51 68 66 F2 96 C6 FF 12
+            byte[] data_4 = { 0xFD, 0x90, 0x6F, 0x30, 0x8B, 0x30, 0x7F, 0x30, 0x68, 0x51, 0xF2, 0x66, 0xC6, 0x96, 0x12, 0xFF };
+
+            for (i = 0; i < 16; i++)
+                data[i] = data_1[i];
+
+            //寫資料
+            File.WriteAllBytes(filename1, data);
+
+            for (i = 0; i < 16; i++)
+                data[i] = data_2[i];
+
+            //寫資料
+            File.WriteAllBytes(filename2, data);
+
+            for (i = 0; i < 16; i++)
+                data[i] = data_3[i];
+
+            //寫資料
+            File.WriteAllBytes(filename3, data);
+
+            data2[0] = 0xFF;
+            data2[1] = 0xFE;
+            for (i = 0; i < 16; i++)
+                data2[i + 2] = data_4[i];
+
+            //寫資料
+            File.WriteAllBytes(filename4, data2);
+
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename1 + "\n";
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename2 + "\n";
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename3 + "\n";
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename4 + "\n";
+
+
         }
 
         private void button33_Click(object sender, EventArgs e)
         {
+            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".default.txt";
+            richTextBox1.Clear();
+            int i;
+            for (i = 0; i < 256; i++)
+            {
+                richTextBox1.Text += i.ToString() + " ";
+            }
+            File.WriteAllText(filename, richTextBox1.Text, Encoding.Default);
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //ReadAllText 讀取文件
+            //使用ReadAllText可以直接讀取文件中的內容，格式為:
+            //File.ReadAllText(檔案位置及名稱);
+            //建立檔案 & 讀取檔案 範例:
+
+            //建立檔案
+            string x = "Hello text";
+            File.WriteAllText("myfilename.txt", x);
+            richTextBox1.Text += "寫檔完成\n";
+
+            //讀取檔案
+            string y = File.ReadAllText("myfilename.txt");
+            richTextBox1.Text += "檔案內容 : " + y + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //WriteAllText 寫入/建立檔案
+            //透過WriteAllText可以將文字寫入檔案(如果檔案不存在，會自動建立)，格式為:
+            //File.WriteAllText(檔案位置及名稱, 字串);
+
+            string xx = "Hello text";
+            File.WriteAllText("myfilename.txt", xx);
+            richTextBox1.Text += "寫檔完成\n";
+
 
         }
 
@@ -1405,8 +1427,6 @@ namespace vcs_ReadWrite_TXT
                 richTextBox1.Text += (char)sr.Read();
             }
             sr.Close();
-
-
         }
 
         private void button35_Click(object sender, EventArgs e)
@@ -1432,7 +1452,6 @@ namespace vcs_ReadWrite_TXT
                 sw.Write(richTextBox1.Text);
                 sw.Close();
             }
-
         }
 
         private void button37_Click(object sender, EventArgs e)
@@ -1463,7 +1482,6 @@ namespace vcs_ReadWrite_TXT
             fs = File.Open(fullpath, FileMode.Create);
 
             fs.Close();
-
         }
 
         private void button38_Click(object sender, EventArgs e)
@@ -1473,14 +1491,67 @@ namespace vcs_ReadWrite_TXT
 
         private void button39_Click(object sender, EventArgs e)
         {
-            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-            //XXX richTextBox1.SaveFile(filename, RichTextBoxStreamType.PlainText);    //將richTextBox的資料寫入到指定的文字檔, 這樣會出現怪字型, 還是一行一行儲存比較好
+            //讀檔案的一部分 bmp
+            string filename;
+            int len;
 
-            FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
-            StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式            
-            sw.Write(richTextBox1.Text);
-            sw.Close();
-            richTextBox1.Text += "存檔完成, 檔名 : " + filename + "\n";
+            richTextBox1.Text += "讀檔案的一部分\n";
+
+            filename = @"D:\_git\vcs\_1.data\______test_files1\test_ReadAllBytes.bmp";
+            len = 100;
+            richTextBox1.Text += "讀bmp檔, 從頭讀\t長度: " + len.ToString() + " 拜\n";
+
+            byte[] bmpdata = new byte[len];
+            FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            fs.Seek(0, SeekOrigin.Begin);
+            fs.Read(bmpdata, 0, len);
+            fs.Close();
+
+            //打印資料
+            string data_read_result;
+            int cnt;
+
+            data_read_result = string.Empty;
+            cnt = 0;
+            foreach (byte b in bmpdata)
+            {
+                data_read_result += b.ToString("X2");
+                cnt++;
+                if ((cnt % 16) == 0)
+                {
+                    data_read_result += "\n";
+                }
+                else
+                {
+                    data_read_result += " ";
+                }
+            }
+            richTextBox1.Text += data_read_result + "\n";
+
+            data_read_result = string.Empty;
+            cnt = 0;
+            foreach (byte b in bmpdata)
+            {
+                if (char.IsLetterOrDigit((char)b) == true)
+                {
+                    data_read_result += (char)b;
+                }
+                else
+                {
+                    data_read_result += ".";
+                }
+
+                cnt++;
+                if ((cnt % 16) == 0)
+                {
+                    data_read_result += "\n";
+                }
+                else
+                {
+                    data_read_result += " ";
+                }
+            }
+            richTextBox1.Text += data_read_result + "\n";
         }
 
         private void button40_Click(object sender, EventArgs e)
@@ -1496,8 +1567,7 @@ namespace vcs_ReadWrite_TXT
             }
             sr.Close();
 
-
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             int i = 0;
             String line;
@@ -1592,7 +1662,6 @@ namespace vcs_ReadWrite_TXT
                 // Close FileStream
                 filestream.Close();
             }
-
         }
 
         private void button42_Click(object sender, EventArgs e)
@@ -1646,7 +1715,6 @@ namespace vcs_ReadWrite_TXT
             str_reader.Dispose();
             // Close FileStream
             filestream.Close();
-
         }
 
         private void button43_Click(object sender, EventArgs e)
@@ -1696,135 +1764,165 @@ namespace vcs_ReadWrite_TXT
             str_reader.Dispose();
             // Close FileStream
             filestream.Close();
-
         }
 
         private void button44_Click(object sender, EventArgs e)
         {
+            //取得檔案資訊
 
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\article.txt";
+
+            FileInfo f = new FileInfo(filename);
+            richTextBox1.Text += "Name: " + f.Name + "\n";
+            richTextBox1.Text += "FullName: " + f.FullName + "\n";
+            richTextBox1.Text += "Extension: " + f.Extension + "\n";
+            richTextBox1.Text += "size: " + f.Length.ToString() + "\n";
+            richTextBox1.Text += "Directory: " + f.Directory + "\n";
+            richTextBox1.Text += "DirectoryName: " + f.DirectoryName + "\n";
+        }
+
+        const int MAX_CAPACITY = 50;
+        string[] name = new string[MAX_CAPACITY];
+        int[,] scores = new int[2, MAX_CAPACITY];
+        int counter = 0;
+
+        // 更新界面上顯示的訊息
+        void ShowData()
+        {
+            richTextBox1.Text += "共有" + counter + "人\n";
+
+            string res = "名字\t國文\t數學\r\n";
+            for (int i = 0; i < counter; i++)
+            {
+                res += name[i] + "\t" + scores[0, i] + "\t" + scores[1, i] + "\r\n";
+            }
+            richTextBox1.Text = res;
         }
 
         private void button45_Click(object sender, EventArgs e)
         {
+            if (counter < MAX_CAPACITY)
+            {
+                name[counter] = "david";
+                scores[0, counter] = 100;
+                scores[1, counter] = 90;
 
+                counter++;
+
+                ShowData(); // 更新界面上顯示的訊息
+            }
+            else
+            {
+                richTextBox2.Text += "容量已滿\n";
+            }
         }
 
         private void button46_Click(object sender, EventArgs e)
         {
-            //讀檔案的一部分 bmp
-            string filename;
-            int len;
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\score.txt";
 
-            richTextBox1.Text += "讀檔案的一部分\n";
+            richTextBox2.Text += "開啟檔案 : " + filename + "\n";
 
-            filename = @"D:\_git\vcs\_1.data\______test_files1\test_ReadAllBytes.bmp";
-            len = 100;
-            richTextBox1.Text += "讀bmp檔, 從頭讀\t長度: " + len.ToString() + " 拜\n";
+            FileInfo finfo = new FileInfo(filename);
+            StreamReader sr = finfo.OpenText();
 
-            byte[] bmpdata = new byte[len];
-            FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
-            fs.Seek(0, SeekOrigin.Begin);
-            fs.Read(bmpdata, 0, len);
-            fs.Close();
+            int i = 0;
 
-            //打印資料
-            string data_read_result;
-            int cnt;
-
-            data_read_result = string.Empty;
-            cnt = 0;
-            foreach (byte b in bmpdata)
+            while (sr.Peek() >= 0)
             {
-                data_read_result += b.ToString("X2");
-                cnt++;
-                if ((cnt % 16) == 0)
-                {
-                    data_read_result += "\n";
-                }
-                else
-                {
-                    data_read_result += " ";
-                }
+                name[i] = sr.ReadLine();
+                scores[0, i] = Convert.ToInt32(sr.ReadLine());
+                scores[1, i] = Convert.ToInt32(sr.ReadLine());
+                i++;
             }
-            richTextBox1.Text += data_read_result + "\n";
 
-            data_read_result = string.Empty;
-            cnt = 0;
-            foreach (byte b in bmpdata)
-            {
-                if (char.IsLetterOrDigit((char)b) == true)
-                {
-                    data_read_result += (char)b;
-                }
-                else
-                {
-                    data_read_result += ".";
-                }
+            sr.Close();
 
-                cnt++;
-                if ((cnt % 16) == 0)
-                {
-                    data_read_result += "\n";
-                }
-                else
-                {
-                    data_read_result += " ";
-                }
-            }
-            richTextBox1.Text += data_read_result + "\n";
+            counter = i;
+            ShowData();
         }
 
         private void button47_Click(object sender, EventArgs e)
         {
-            //取得檔案資訊3
+            string filename = Application.StartupPath + "\\score_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
 
-            openFileDialog1.Title = "單選檔案";
-            //openFileDialog1.ShowHelp = true;
-            openFileDialog1.FileName = "";              //預設開啟的檔名
-            openFileDialog1.DefaultExt = "*.txt";
-            openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
-            openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
-            openFileDialog1.RestoreDirectory = true;
-            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
-            openFileDialog1.Multiselect = false;    //單選
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            FileInfo finfo = new FileInfo(filename);
+            StreamWriter sw = finfo.CreateText();
+
+            // 透過StreamWriter物件sw來寫入資料
+            for (int i = 0; i < counter; i++)
             {
-                richTextBox1.Text += "已選取檔案: " + openFileDialog1.FileName + "\n";
-                FileInfo f = new FileInfo(openFileDialog1.FileName);
-                richTextBox1.Text += "Name: " + f.Name + "\n";
-                richTextBox1.Text += "FullName: " + f.FullName + "\n";
-                richTextBox1.Text += "Extension: " + f.Extension + "\n";
-                richTextBox1.Text += "size: " + f.Length.ToString() + "\n";
-                richTextBox1.Text += "Directory: " + f.Directory + "\n";
-                richTextBox1.Text += "DirectoryName: " + f.DirectoryName + "\n";
+                sw.WriteLine(name[i]);
+                sw.WriteLine(scores[0, i]);
+                sw.WriteLine(scores[1, i]);
             }
-            else
-            {
-                richTextBox1.Text += "未選取檔案\n";
-            }
+
+            sw.Flush();
+            sw.Close();
+
+            richTextBox2.Text += "已存檔 : " + filename + "\n";
         }
 
         private void button48_Click(object sender, EventArgs e)
         {
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_bin\score.dat";
 
+            richTextBox2.Text += "開啟檔案 : " + filename + "\n";
+
+            FileStream fs = new FileStream(filename, FileMode.Open);
+            BinaryReader br = new BinaryReader(fs);
+
+            int i = 0;
+
+            while (br.PeekChar() >= 0)
+            {
+                name[i] = br.ReadString();
+                scores[0, i] = br.ReadInt32();
+                scores[1, i] = br.ReadInt32();
+                i++;
+            }
+
+            br.Close();
+            fs.Close();
+
+            counter = i;
+            ShowData();
         }
 
         private void button49_Click(object sender, EventArgs e)
         {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
+            string filename = Application.StartupPath + "\\score_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".dat";
 
-            richTextBox1.Text += File.GetAttributes(filename) + "\n";
-            File.SetAttributes(filename, FileAttributes.ReadOnly);
-            richTextBox1.Text += File.GetAttributes(filename) + "\n";
+            FileStream fs = new FileStream(filename, FileMode.Create);
+            BinaryWriter bw = new BinaryWriter(fs);
 
+            for (int i = 0; i < counter; i++)
+            {
+                bw.Write(name[i]);
+                bw.Write(scores[0, i]);
+                bw.Write(scores[1, i]);
+            }
+
+            bw.Flush();
+            bw.Close();
+            fs.Close();
+
+            richTextBox2.Text += "已存檔 : " + filename + "\n";
         }
+
+        /*  清除資料
+            for (int i = 0; i < counter; i++)
+            {
+                name[i] = "";
+                scores[0, i] = 0;
+                scores[1, i] = 0;
+            }
+            counter = 0;
+
+            richTextBox1.Text += "共有" + counter + "人\n";
+        */
     }
 }
-
-
-
-
 
 
 //6060
