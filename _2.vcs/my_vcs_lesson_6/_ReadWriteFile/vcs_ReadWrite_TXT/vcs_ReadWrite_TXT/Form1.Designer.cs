@@ -82,6 +82,7 @@
             this.button32 = new System.Windows.Forms.Button();
             this.button31 = new System.Windows.Forms.Button();
             this.button30 = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // button1
@@ -120,7 +121,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 3;
-            this.button2.Text = "LoadFile";
+            this.button2.Text = "richTextBox1.LoadFile";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -131,7 +132,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 4;
-            this.button3.Text = "ReadAllText";
+            this.button3.Text = "File.ReadAllText";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -251,7 +252,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 15;
-            this.button14.Text = "製作純文字檔";
+            this.button14.Text = "製作純文字檔 File.WriteAllText";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -262,7 +263,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 16;
-            this.button15.Text = "寫入各種編碼檔案";
+            this.button15.Text = "寫入各種編碼檔案 File.WriteAllBytes";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -273,7 +274,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 60);
             this.button16.TabIndex = 17;
-            this.button16.Text = "開啟各種編碼檔案";
+            this.button16.Text = "開啟各種編碼檔案 File.ReadAllBytes";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -349,7 +350,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 24;
-            this.button0.Text = "ReadAllLines";
+            this.button0.Text = "File.ReadAllLines";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -360,6 +361,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(200, 60);
             this.button23.TabIndex = 25;
+            this.button23.Text = "比較兩個檔案";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -403,6 +405,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(200, 60);
             this.button27.TabIndex = 29;
+            this.button27.Text = "接續寫入檔案";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -413,6 +416,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(200, 60);
             this.button28.TabIndex = 30;
+            this.button28.Text = "儲存檔案 多種";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -423,6 +427,7 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(200, 60);
             this.button29.TabIndex = 31;
+            this.button29.Text = "附加檔案";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
@@ -451,6 +456,7 @@
             this.button49.Name = "button49";
             this.button49.Size = new System.Drawing.Size(200, 60);
             this.button49.TabIndex = 223;
+            this.button49.Text = "FileAttributes";
             this.button49.UseVisualStyleBackColor = true;
             this.button49.Click += new System.EventHandler(this.button49_Click);
             // 
@@ -471,6 +477,7 @@
             this.button47.Name = "button47";
             this.button47.Size = new System.Drawing.Size(200, 60);
             this.button47.TabIndex = 221;
+            this.button47.Text = "取得檔案資訊3";
             this.button47.UseVisualStyleBackColor = true;
             this.button47.Click += new System.EventHandler(this.button47_Click);
             // 
@@ -481,6 +488,7 @@
             this.button46.Name = "button46";
             this.button46.Size = new System.Drawing.Size(200, 60);
             this.button46.TabIndex = 220;
+            this.button46.Text = "讀檔案的一部分 bmp";
             this.button46.UseVisualStyleBackColor = true;
             this.button46.Click += new System.EventHandler(this.button46_Click);
             // 
@@ -511,6 +519,7 @@
             this.button43.Name = "button43";
             this.button43.Size = new System.Drawing.Size(200, 60);
             this.button43.TabIndex = 217;
+            this.button43.Text = "ReadLine";
             this.button43.UseVisualStyleBackColor = true;
             this.button43.Click += new System.EventHandler(this.button43_Click);
             // 
@@ -521,6 +530,7 @@
             this.button42.Name = "button42";
             this.button42.Size = new System.Drawing.Size(200, 60);
             this.button42.TabIndex = 216;
+            this.button42.Text = "ReadLine";
             this.button42.UseVisualStyleBackColor = true;
             this.button42.Click += new System.EventHandler(this.button42_Click);
             // 
@@ -531,6 +541,7 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(200, 60);
             this.button41.TabIndex = 215;
+            this.button41.Text = "ReadLine";
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
@@ -541,6 +552,7 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(200, 60);
             this.button40.TabIndex = 214;
+            this.button40.Text = "ReadLine";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
@@ -551,6 +563,7 @@
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(200, 60);
             this.button39.TabIndex = 213;
+            this.button39.Text = "RTB存檔";
             this.button39.UseVisualStyleBackColor = true;
             this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
@@ -571,6 +584,7 @@
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(200, 60);
             this.button37.TabIndex = 211;
+            this.button37.Text = "製作暫存檔案2";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
@@ -581,6 +595,7 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(200, 60);
             this.button36.TabIndex = 210;
+            this.button36.Text = "製作暫存檔案1";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
@@ -601,6 +616,7 @@
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(200, 60);
             this.button34.TabIndex = 208;
+            this.button34.Text = "sr.Read";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
             // 
@@ -621,6 +637,7 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(200, 60);
             this.button32.TabIndex = 206;
+            this.button32.Text = "ReadAllBytes";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
@@ -631,6 +648,7 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(200, 60);
             this.button31.TabIndex = 205;
+            this.button31.Text = "ReadAllBytes";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
@@ -641,8 +659,13 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(200, 60);
             this.button30.TabIndex = 204;
+            this.button30.Text = "File 操作";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -766,6 +789,7 @@
         private System.Windows.Forms.Button button32;
         private System.Windows.Forms.Button button31;
         private System.Windows.Forms.Button button30;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

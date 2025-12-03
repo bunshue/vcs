@@ -31,10 +31,10 @@ namespace vcs_DiskDirectoryFile2
             int dy;
 
             //button
-            x_st = 12;
-            y_st = 12;
-            dx = 170;
-            dy = 60;
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 5;
+            dy = 60 + 5;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -46,10 +46,22 @@ namespace vcs_DiskDirectoryFile2
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
 
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+
+            richTextBox1.Size = new Size(450, 644);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-            bt_save.Location = new Point(bt_clear.Location.X - 100, bt_clear.Location.Y);
+            this.Size = new Size(900, 700);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -411,7 +423,6 @@ namespace vcs_DiskDirectoryFile2
                 //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
                 //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
                 richTextBox1.Text += fileinfos[i].filename + "\n";
-
             }
 
             richTextBox1.Text += "照大小排序(由大到小):\n";
@@ -435,19 +446,78 @@ namespace vcs_DiskDirectoryFile2
                 //richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\t" + fileinfos[i].filepath + "\t" + fileinfos[i].fileextension + "\t" + fileinfos[i].filecreationtime.ToString() + "\n";
                 richTextBox1.Text += "i = " + i.ToString() + "\t" + fileinfos[i].filename + "\t" + fileinfos[i].filesize.ToString() + "\n";
             }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            string filename_source = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
+            string filename_destination = @"D:\_git\vcs\_1.data\______test_files1\_cpfile\ccc.jpg";   //要寫完整檔名
+
+            richTextBox1.Text += "檔案已存在的FileCopy/Move\n";
+            try
+            {
+                //File.Copy(filename_source, filename_destination);     //若檔案已存在, 會出現IOException
+                //File.Move(filename_source, filename_destination);     //若檔案已存在, 會出現IOException
+                File.Copy(filename_source, filename_destination, true); //覆蓋檔案
+                //File.Move(filename_source, filename_destination, true); //覆蓋檔案
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
+            }
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //Directory.Delete 目錄不是空的
+
+            string pathname = @"D:\_git\vcs\_1.data\______test_files1\_cpfile";
+
+            richTextBox1.Text += "Directory.Delete 目錄不是空的\n";
+            try
+            {
+                //Directory.Delete(pathname); //若目錄不是空的, 會出現IOException
+                Directory.Delete(pathname, true); //強制刪除不是空的目錄
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
+            }
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
 
         }
 
-        private void bt_save_Click(object sender, EventArgs e)
+        private void button14_Click(object sender, EventArgs e)
         {
-            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-            //XXX richTextBox1.SaveFile(filename, RichTextBoxStreamType.PlainText);    //將richTextBox的資料寫入到指定的文字檔, 這樣會出現怪字型, 還是一行一行儲存比較好
 
-            FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
-            StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式            
-            sw.Write(richTextBox1.Text);
-            sw.Close();
-            richTextBox1.Text += "存檔完成, 檔名 : " + filename + "\n";
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
