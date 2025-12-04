@@ -16,6 +16,11 @@ namespace vcs_ReadWrite_XML8
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             string filename = @"D:\_git\vcs\_2.vcs\______test_files1\__RW\_xml\person.xml";
@@ -61,8 +66,6 @@ namespace vcs_ReadWrite_XML8
                 richTextBox1.Text += "電話：" + dr["電話"] + "\n";
                 richTextBox1.Text += "信箱：" + dr["信箱"] + "\n";
             }
-
-
         }
     }
 }

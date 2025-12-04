@@ -11,8 +11,6 @@ namespace vcs_ReadWrite_XMLB
 {
     public partial class Form1 : Form
     {
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\person.xml";
-
         public Form1()
         {
             InitializeComponent();
@@ -22,9 +20,12 @@ namespace vcs_ReadWrite_XMLB
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\person.xml";
+
             // 讀取XML文件並放入DataSet
             ds.ReadXml(filename);
             dataGridView1.DataSource = ds.Tables["學生"];
+
             DataColumn dc = ds.Tables["學生"].Columns["學號"];
             // 在學生DataTable建立學號欄位為主鍵，主鍵名稱為「PK_學號」
             ds.Tables["學生"].Constraints.Add("PK_學號", dc, true);

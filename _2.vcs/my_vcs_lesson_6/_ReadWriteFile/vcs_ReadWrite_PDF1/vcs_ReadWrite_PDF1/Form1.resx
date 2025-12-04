@@ -117,4 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>            // 哪一個滑鼠按鍵處於按下狀態的值。
+            if (Control.MouseButtons == MouseButtons.Left) // 滑鼠按鍵
+                label3.Text = "滑鼠左鍵";
+            else if (Control.MouseButtons == MouseButtons.Right)
+                label3.Text = "滑鼠右鍵";
+            else if (Control.MouseButtons == MouseButtons.Middle)
+                label3.Text = "滑鼠中鍵";
+            else if (Control.MouseButtons == MouseButtons.XButton1)
+                label3.Text = "滑鼠XButton1鍵";
+            else if (Control.MouseButtons == MouseButtons.XButton2)
+                label3.Text = "滑鼠XButton2鍵";
+            else
+                label3.Text = "滑鼠其他鍵 " + Control.MouseButtons.ToString();
+</value>
+  </data>
 </root>

@@ -20,13 +20,14 @@ namespace vcs_ReadWrite_XML6
             InitializeComponent();
         }
 
-        static string strPath = "Employee.xml";
+        static string filename = @"D:\_git\vcs\_2.vcs\______test_files1\__RW\_xml\Employee.xml";
+        //static string filename = "Employee.xml";
         static string strID = "";
 
         //窗體加載時加載XML文件
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (File.Exists(strPath))
+            if (File.Exists(filename))
             {
                 groupBox1.Enabled = false;
                 getXmlInfo();
@@ -47,7 +48,7 @@ namespace vcs_ReadWrite_XML6
                         new XElement(textBox8.Text, textBox9.Text))
                     )
                 );
-            doc.Save(strPath);
+            doc.Save(filename);
             groupBox1.Enabled = false;
             getXmlInfo();
         }
@@ -55,7 +56,7 @@ namespace vcs_ReadWrite_XML6
         //添加XML元素
         private void button2_Click(object sender, EventArgs e)
         {
-            XElement xe = XElement.Load(strPath);
+            XElement xe = XElement.Load(filename);
             IEnumerable<XElement> elements1 = from element in xe.Elements("People")
                                               select element;
             //生成新的編號
@@ -67,7 +68,7 @@ namespace vcs_ReadWrite_XML6
                 new XElement("Salary", textBox12.Text)
                 );
             xe.Add(people);
-            xe.Save(strPath);
+            xe.Save(filename);
             getXmlInfo();
         }
 
@@ -76,7 +77,7 @@ namespace vcs_ReadWrite_XML6
         {
             if (strID != "")
             {
-                XElement xe = XElement.Load(strPath);
+                XElement xe = XElement.Load(filename);
                 IEnumerable<XElement> elements = from element in xe.Elements("People")
                                                  where element.Attribute("ID").Value == strID
                                                  select element;
@@ -90,7 +91,7 @@ namespace vcs_ReadWrite_XML6
                         new XElement("Salary", textBox12.Text)
                         );
                 }
-                xe.Save(strPath);
+                xe.Save(filename);
             }
             getXmlInfo();
         }
@@ -100,13 +101,13 @@ namespace vcs_ReadWrite_XML6
         {
             if (strID != "")
             {
-                XElement xe = XElement.Load(strPath);
+                XElement xe = XElement.Load(filename);
                 IEnumerable<XElement> elements = from element in xe.Elements("People")
                                                  where element.Attribute("ID").Value == strID
                                                  select element;
                 if (elements.Count() > 0)
                     elements.First().Remove();
-                xe.Save(strPath);
+                xe.Save(filename);
             }
             getXmlInfo();
         }
@@ -115,7 +116,7 @@ namespace vcs_ReadWrite_XML6
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             strID = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-            XElement xe = XElement.Load(strPath);
+            XElement xe = XElement.Load(filename);
             IEnumerable<XElement> elements = from PInfo in xe.Elements("People")
                                              where PInfo.Attribute("ID").Value == strID
                                              select PInfo;
@@ -134,7 +135,7 @@ namespace vcs_ReadWrite_XML6
         private void getXmlInfo()
         {
             DataSet myds = new DataSet();
-            myds.ReadXml(strPath);
+            myds.ReadXml(filename);
             dataGridView1.DataSource = myds.Tables[0];
         }
         #endregion
