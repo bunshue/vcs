@@ -58,10 +58,27 @@ namespace vcs_DiskDirectoryFile2
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(450, 644);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+
+            listView1.Size = new Size(240, 240);
+            listView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+
+            listBox1.Size = new Size(200, 240);
+            listBox1.Location = new Point(x_st + dx * 3 + 250, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(450, 380);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 4);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-            this.Size = new Size(900, 700);
+            this.Size = new Size(1100, 700);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -516,6 +533,147 @@ namespace vcs_DiskDirectoryFile2
         }
 
         private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //遍歷文件夾實例1
+            //遍歷文件夾實例 1
+            //還沒加入listView之標題
+
+            listView1.Items.Clear();
+
+            //遍歷文件夾實例
+            //string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
+            //實例化DirectoryInfo對象
+            DirectoryInfo dinfo = new DirectoryInfo(foldername);
+            //獲取指定目錄下的所有子目錄及文件類型
+            FileSystemInfo[] fsinfos = dinfo.GetFileSystemInfos();
+            foreach (FileSystemInfo fsinfo in fsinfos)
+            {
+                if (fsinfo is DirectoryInfo)    //判斷是否文件夾
+                {
+                    //使用獲取的文件夾名稱實例化DirectoryInfo對象
+                    DirectoryInfo dirinfo = new DirectoryInfo(fsinfo.FullName);
+                    //為ListView控件添加文件夾信息
+                    listView1.Items.Add(dirinfo.Name);
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(dirinfo.FullName);
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add("");
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(dirinfo.CreationTime.ToShortDateString());
+                    richTextBox1.Text += dirinfo.Name + "\t" + dirinfo.FullName + "\t" + dirinfo.CreationTime.ToShortDateString() + "\n";
+                }
+                else
+                {
+                    //使用獲取的文件名稱實例化FileInfo對象
+                    FileInfo finfo = new FileInfo(fsinfo.FullName);
+                    //為ListView控件添加文件信息
+                    listView1.Items.Add(finfo.Name);
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.FullName);
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.Length.ToString());
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.CreationTime.ToShortDateString());
+                    richTextBox1.Text += finfo.Name + "\t" + finfo.FullName + "\t" + finfo.Length.ToString() + "\t" + finfo.CreationTime.ToShortDateString() + "\n";
+                }
+            }
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            //遍歷文件夾實例2
+            //遍歷文件夾實例 2
+            //string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
+            DirectoryInfo TheFolder = new DirectoryInfo(foldername);
+
+            richTextBox1.Text += "遍歷文件夾\n";
+            //遍歷文件夾
+            foreach (DirectoryInfo NextFolder in TheFolder.GetDirectories())
+            {
+                this.listBox1.Items.Add(NextFolder.Name);
+                richTextBox1.Text += NextFolder.Name + "\n";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "遍歷文件\n";
+            foreach (FileInfo NextFile in TheFolder.GetFiles())
+            {
+                this.listBox1.Items.Add(NextFile.Name);
+                richTextBox1.Text += NextFile.Name + "\n";
+            }
+            richTextBox1.Text += "\n";
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            //遍歷文件夾實例3
+            //遍歷文件夾實例 3
+            //找出資料夾內所有檔案
+            //string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
+
+            // Enumerate the files.
+            DirectoryInfo dir_info = new DirectoryInfo(foldername);
+
+            foreach (DirectoryInfo d_info in dir_info.GetDirectories())
+            {
+                richTextBox1.Text += d_info.FullName + "\n";
+                richTextBox1.Text += d_info.Name + "\n";
+            }
+
+            richTextBox1.Text += "\n\n";
+
+            foreach (FileInfo file_info in dir_info.GetFiles())
+            {
+                try
+                {
+                    richTextBox1.Text += file_info.FullName + "\n";
+                    //richTextBox1.Text += file_info.Name + "\n";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error processing file '" +
+                        file_info.Name + "'\n" + ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            } // foreach file_info
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
         {
 
         }

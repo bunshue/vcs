@@ -21,6 +21,12 @@ namespace vcs_ReadWrite_GIF1
             show_item_location();
         }
 
+        // 表單重畫事件
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         void show_item_location()
         {
             int x_st;
@@ -34,38 +40,25 @@ namespace vcs_ReadWrite_GIF1
             dx = 200 + 5;
             dy = 60 + 5;
 
+            y_st = 10 + dy * 5;
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button5.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button8.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 4);
 
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 2, y_st + dy * 4);
 
             richTextBox1.Size = new Size(600, 640);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
@@ -154,80 +147,6 @@ namespace vcs_ReadWrite_GIF1
 
         }
 
-        private void button15_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button20_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button29_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
 

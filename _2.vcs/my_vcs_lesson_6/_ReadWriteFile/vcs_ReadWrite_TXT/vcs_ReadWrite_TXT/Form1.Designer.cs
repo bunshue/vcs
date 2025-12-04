@@ -82,7 +82,6 @@
             this.button32 = new System.Windows.Forms.Button();
             this.button31 = new System.Windows.Forms.Button();
             this.button30 = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // button1
@@ -436,6 +435,7 @@
             this.bt_clear1.TabIndex = 32;
             this.bt_clear1.Text = "Clear";
             this.bt_clear1.UseVisualStyleBackColor = true;
+            this.bt_clear1.Click += new System.EventHandler(this.bt_clear1_Click);
             // 
             // bt_clear2
             // 
@@ -445,6 +445,7 @@
             this.bt_clear2.TabIndex = 33;
             this.bt_clear2.Text = "Clear";
             this.bt_clear2.UseVisualStyleBackColor = true;
+            this.bt_clear2.Click += new System.EventHandler(this.bt_clear2_Click);
             // 
             // button49
             // 
@@ -664,10 +665,6 @@
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -790,7 +787,6 @@
         private System.Windows.Forms.Button button32;
         private System.Windows.Forms.Button button31;
         private System.Windows.Forms.Button button30;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 
