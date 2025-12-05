@@ -70,16 +70,8 @@ namespace vcs_ReadWrite_PDF1
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            groupBox1.Size = new Size(200, 580);
+            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
             richTextBox1.Size = new Size(600, 220);
             richTextBox2.Size = new Size(600, 220);
@@ -88,6 +80,84 @@ namespace vcs_ReadWrite_PDF1
             richTextBox2.Location = new Point(x_st + dx * 3, y_st + dy * 4);
             webBrowser1.Location = new Point(x_st + dx * 3, y_st + dy * 7);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            y_st = 20;
+            dx = 180 + 5;
+            dy = 50 + 5;
+            button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+            this.Size = new Size(1260, 700);
+        }
+
+        void show_item_location2()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 5;
+            dy = 60 + 5;
+
+            button0.Visible = false;
+            button1.Visible = false;
+            button2.Visible = false;
+            button3.Visible = false;
+            button4.Visible = false;
+            button5.Visible = false;
+            button6.Visible = false;
+            button7.Visible = false;
+            button8.Visible = false;
+            button9.Visible = false;
+            button10.Visible = false;
+            button11.Visible = false;
+            button12.Visible = false;
+            button13.Visible = false;
+            button14.Visible = false;
+            button15.Visible = false;
+            button16.Visible = false;
+            button17.Visible = false;
+            button18.Visible = false;
+            button19.Visible = false;
+
+            groupBox1.Size = new Size(200, 580);
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(400, 600);
+            richTextBox2.Size = new Size(600, 220);
+            webBrowser1.Size = new Size(600, 600);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            richTextBox2.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            webBrowser1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            richTextBox2.Visible = false;
+
+            y_st = 20;
+            dx = 180 + 5;
+            dy = 50 + 5;
+            button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
             this.Size = new Size(1260, 700);
         }
@@ -303,13 +373,6 @@ namespace vcs_ReadWrite_PDF1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //讀取pdf檔至webbrowser
-
-            webBrowser1.Navigate("about:blank");
-            Application.DoEvents();
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
-            webBrowser1.Navigate(filename);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -384,12 +447,18 @@ namespace vcs_ReadWrite_PDF1
 
         private void button20_Click(object sender, EventArgs e)
         {
-
+            show_item_location2();
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //讀取pdf檔至webbrowser
 
+            webBrowser1.Navigate("about:blank");
+            Application.DoEvents();
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
+            webBrowser1.Navigate(filename);
         }
 
         private void button22_Click(object sender, EventArgs e)
