@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;                        //for StreamReader, SearchOption
+using System.IO;    //for StreamReader, SearchOption
+using System.Security.Cryptography; //for RNGCryptoServiceProvider
+using System.Runtime.InteropServices;   //for DllImport, Marshal, StructLayout
 
 namespace vcs_DiskDirectoryFile2
 {
@@ -504,28 +506,238 @@ namespace vcs_DiskDirectoryFile2
 
         private void button13_Click(object sender, EventArgs e)
         {
-
+            //刪除資料夾下子資料夾(偽)
+            var pathstr = @"D:/_git/vcs/_1.data/______test_files1";
+            if (Directory.Exists(pathstr))
+            {
+                //var strname=DateTime.Now.ToShortDateString().Replace("/","-")+".txt";
+                var dt = DateTime.Now;
+                DirectoryInfo pathinfo = new DirectoryInfo(pathstr);
+                foreach (DirectoryInfo paths in pathinfo.GetDirectories())
+                {
+                    if (paths.CreationTime < Convert.ToDateTime(dt.AddDays(-(dt.Day) + 1)))
+                    {
+                        //paths.Delete();
+                        richTextBox1.Text += "path = " + paths + "\n";
+                    }
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "資料夾 " + pathstr + " 不存在\n";
+            }
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //取得上一層資料夾的名稱
 
+            richTextBox1.Text += "原目錄 : " + Application.StartupPath + "\n";
+
+            string str = Application.StartupPath;
+            string[] split_str = new string[20];
+            split_str = str.Split('\\'); //以\當分隔符號
+            //richTextBox1.Text += "\n";
+            //richTextBox1.Text += "共有 : " + split_str.Length.ToString() + " 個項目\n";
+
+            richTextBox1.Text += "上一層資料夾的名稱 : " + split_str[split_str.Length - 1] + "\n";
+
+            /*
+            int i = 0;
+            foreach (string tmp in split_str)
+            {
+                i++;
+                richTextBox1.Text += i.ToString() + "\t" + tmp + "\n";
+            }
+            */
+        }
+
+        //使用RNGCryptoServiceProvider類創建唯一的最多8位數字符串。
+        private static string GetUniqueKey()
+        {
+            int maxSize = 8;
+            //int minSize = 5;
+            char[] chars = new char[62];
+            string a;
+            a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            chars = a.ToCharArray();
+            int size = maxSize;
+            byte[] data = new byte[1];
+            RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider();
+            crypto.GetNonZeroBytes(data);
+            size = maxSize;
+            data = new byte[size];
+            crypto.GetNonZeroBytes(data);
+            StringBuilder result = new StringBuilder(size);
+            foreach (byte b in data)
+            {
+                result.Append(chars[b % (chars.Length - 1)]);
+            }
+            return result.ToString();
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-
+            //創建唯一的檔案名, 考慮時間因素
+            for (int i = 0; i < 10; i++)
+            {
+                string filename = string.Format("{0}{1}", DateTime.Now.ToString("yyyyMMddHHmmss"), GetUniqueKey());
+                richTextBox1.Text += filename + "\n";
+            }
         }
 
+        //根據文件頭判斷上傳的文件類型 ST
         private void button16_Click(object sender, EventArgs e)
         {
+            //根據文件頭判斷上傳的文件類型
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\doraemon.jpg";
+            string result = getFileType(filename);
+            richTextBox1.Text += "File Type : " + result + "\n";
+        }
+        /// 根據文件頭判斷上傳的文件類型
+        /// <param name="filePath">filePath是文件的完整路徑 </param>
+        /// <returns>返回true或false</returns>
+        public string getFileType(string filePath)
+        {
+            try
+            {
+                FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                BinaryReader reader = new BinaryReader(fs);
+                string fileClass;
+                byte buffer;
+                buffer = reader.ReadByte();
+                fileClass = buffer.ToString();
+                buffer = reader.ReadByte();
+                fileClass += buffer.ToString();
+                reader.Close();
+                fs.Close();
 
+                //richTextBox1.Text += "fileClass == " + fileClass + "\t";
+
+                if (fileClass == "255216")
+                    return "jpg";
+                else if (fileClass == "7173")
+                    return "gif";
+                else if (fileClass == "13780")
+                    return "png";
+                else if (fileClass == "6677")
+                    return "bmp";
+                else if (fileClass == "80114")
+                    return "csv";
+                else if (fileClass == "6063")
+                    return "xml";
+                else if (fileClass == "3780")
+                    return "pdf";
+                else if (fileClass == "4948")
+                    return "txt";
+                else if (fileClass == "8075")
+                    return "zip";
+                else if (fileClass == "XXXX")
+                    return "XXXX";
+                else if (fileClass == "XXXX")
+                    return "XXXX";
+                else if (fileClass == "XXXX")
+                    return "XXXX";
+                else if (fileClass == "XXXX")
+                    return "XXXX";
+                else
+                {
+                    return fileClass + "\tunknown";
+
+                }
+                // 7790是exe,8297是rar 
+            }
+            catch
+            {
+                return "unknown";
+            }
+        }
+        //根據文件頭判斷上傳的文件類型 SP
+
+        //取得檔案類型 ST
+
+        //在shell32.dll導入函數SHGetFileInfo
+        [DllImport("shell32.dll", EntryPoint = "SHGetFileInfo")]
+        public static extern int GetFileInfo(string pszPath, int dwFileAttributes, ref FileInfomation psfi, int cbFileInfo, int uFlags);
+
+        //定義SHFILEINFO結構(名字隨便起，這裡用FileInfomation)
+        [StructLayout(LayoutKind.Sequential)]
+        public struct FileInfomation
+        {
+            public IntPtr hIcon;
+            public int iIcon;
+            public int dwAttributes;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
+            public string szDisplayName;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)]
+            public string szTypeName;
+        }
+
+        //定義文件屬性標識
+        public enum FileAttributeFlags : int
+        {
+            FILE_ATTRIBUTE_READONLY = 0x00000001,
+            FILE_ATTRIBUTE_HIDDEN = 0x00000002,
+            FILE_ATTRIBUTE_SYSTEM = 0x00000004,
+            FILE_ATTRIBUTE_DIRECTORY = 0x00000010,
+            FILE_ATTRIBUTE_ARCHIVE = 0x00000020,
+            FILE_ATTRIBUTE_DEVICE = 0x00000040,
+            FILE_ATTRIBUTE_NORMAL = 0x00000080,
+            FILE_ATTRIBUTE_TEMPORARY = 0x00000100,
+            FILE_ATTRIBUTE_SPARSE_FILE = 0x00000200,
+            FILE_ATTRIBUTE_REPARSE_POINT = 0x00000400,
+            FILE_ATTRIBUTE_COMPRESSED = 0x00000800,
+            FILE_ATTRIBUTE_OFFLINE = 0x00001000,
+            FILE_ATTRIBUTE_NOT_CONTENT_INDEXED = 0x00002000,
+            FILE_ATTRIBUTE_ENCRYPTED = 0x00004000
+        }
+
+        //定義獲取資源標識
+        public enum GetFileInfoFlags : int
+        {
+            SHGFI_ICON = 0x000000100,     // get icon
+            SHGFI_DISPLAYNAME = 0x000000200,     // get display name
+            SHGFI_TYPENAME = 0x000000400,     // get type name
+            SHGFI_ATTRIBUTES = 0x000000800,     // get attributes
+            SHGFI_ICONLOCATION = 0x000001000,     // get icon location
+            SHGFI_EXETYPE = 0x000002000,     // return exe type
+            SHGFI_SYSICONINDEX = 0x000004000,     // get system icon index
+            SHGFI_LINKOVERLAY = 0x000008000,     // put a link overlay on icon
+            SHGFI_SELECTED = 0x000010000,     // show icon in selected state
+            SHGFI_ATTR_SPECIFIED = 0x000020000,     // get only specifIEd attributes
+            SHGFI_LARGEICON = 0x000000000,     // get large icon
+            SHGFI_SMALLICON = 0x000000001,     // get small icon
+            SHGFI_OPENICON = 0x000000002,     // get open icon
+            SHGFI_SHELLICONSIZE = 0x000000004,     // get shell size icon
+            SHGFI_PIDL = 0x000000008,     // pszPath is a pidl
+            SHGFI_USEFILEATTRIBUTES = 0x000000010,     // use passed dwFileAttribute
+            SHGFI_ADDOVERLAYS = 0x000000020,     // apply the appropriate overlays
+            SHGFI_OVERLAYINDEX = 0x000000040      // Get the index of the overlay
+        }
+
+        private string GetTypeName(string fileName)
+        {
+            FileInfomation fileInfo = new FileInfomation();  //初始化FileInfomation結構
+
+            //調用GetFileInfo函數，最後一個參數說明獲取的是文件類型(SHGFI_TYPENAME)
+            int res = GetFileInfo(fileName, (int)FileAttributeFlags.FILE_ATTRIBUTE_NORMAL, ref fileInfo, Marshal.SizeOf(fileInfo), (int)GetFileInfoFlags.SHGFI_TYPENAME);
+
+            return fileInfo.szTypeName;
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //取得檔案類型
 
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string fileTypeName = GetTypeName(filename);
+
+            richTextBox1.Text += "檔案 : " + filename + "\n";
+            richTextBox1.Text += "檔案類型 : " + fileTypeName + "\n";
         }
+        //取得檔案類型 SP
 
         private void button18_Click(object sender, EventArgs e)
         {
@@ -645,7 +857,33 @@ namespace vcs_DiskDirectoryFile2
 
         private void button23_Click(object sender, EventArgs e)
         {
+            //取得資料夾下所有圖片檔資訊
 
+            //取得資料夾下所有圖片檔資訊
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
+
+            IEnumerable<FileInfo> images = null;
+            if (Directory.Exists(foldername) == true)
+            {
+                DirectoryInfo dirInfo = new DirectoryInfo(foldername);
+                images = dirInfo.EnumerateFiles("*.jpg").OrderBy(i => i.Name[0]).ThenBy(i => i.Name.Length).ThenBy(i => i.Name);
+
+                int len = images.Count();
+                richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+                if (images != null && images.Count() > 0)
+                {
+
+                }
+
+                foreach (var image in images)
+                {
+                    richTextBox1.Text += image.Name + "\n";
+                    richTextBox1.Text += image.FullName + "\n";
+                    richTextBox1.Text += image.Extension + "\n";
+                    richTextBox1.Text += image.Length.ToString() + "\n";
+                }
+            }
         }
 
         private void button24_Click(object sender, EventArgs e)

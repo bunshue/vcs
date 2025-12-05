@@ -740,8 +740,70 @@ namespace vcs_ReadWrite_TXT
                 richTextBox1.Text += "檔案" + filename2 + "和檔案" + filename3 + " 不相同\n";
         }
 
+        private bool FileCompare(string file1, string file2)
+        {
+            //　判斷相同的文件是否被參考兩次。
+            if (file1 == file2)
+            {
+                return true;
+            }
+            int file1byte = 0;
+            int file2byte = 0;
+            using (FileStream fs1 = new FileStream(file1, FileMode.Open), fs2 = new FileStream(file2, FileMode.Open))
+            {
+                //　檢查文件大小。如果兩個文件的大小並不相同,則視為不相同。
+                if (fs1.Length != fs2.Length)
+                {
+                    // 關閉文件。
+                    fs1.Close();
+                    fs2.Close();
+                    return false;
+                }
+                //　逐一比較兩個文件的每一個字節，直到發現不相符或已到達文件尾端為止。
+                do
+                {
+                    // 從每一個文件讀取一個字節。
+                    file1byte = fs1.ReadByte();
+                    file2byte = fs2.ReadByte();
+                }
+                while ((file1byte == file2byte) && (file1byte != -1));
+                // 關閉文件。
+                fs1.Close();
+                fs2.Close();
+            }
+            //　返回比較的結果。在這個時候，只有當兩個文件的內容完全相同時， "file1byte" 才會等於 "file2byte"。
+            return ((file1byte - file2byte) == 0);
+        }
+
         private void button22_Click(object sender, EventArgs e)
         {
+            //比較兩個檔案
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\compare\aaaa.txt";
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\compare\bbbb.txt";
+
+            StreamReader sr1 = new StreamReader(filename1);
+            StreamReader sr2 = new StreamReader(filename2);
+            if (object.Equals(sr1.ReadToEnd(), sr2.ReadToEnd()) == true)
+            {
+                richTextBox1.Text += "兩個檔案相同\n";
+            }
+            else
+            {
+                richTextBox1.Text += "兩個檔案不相同\n";
+            }
+            sr1.Close();
+            sr2.Close();
+
+            filename1 = @"D:\_git\vcs\_1.data\______test_files1\compare\aaaa.txt";
+            filename2 = @"D:\_git\vcs\_1.data\______test_files1\compare\bbbb.txt";
+            if (FileCompare(filename1, filename2) == true)
+            {
+                richTextBox1.Text += "兩個檔案相同\n";
+            }
+            else
+            {
+                richTextBox1.Text += "兩個檔案不相同\n";
+            }
         }
 
         private void button23_Click(object sender, EventArgs e)

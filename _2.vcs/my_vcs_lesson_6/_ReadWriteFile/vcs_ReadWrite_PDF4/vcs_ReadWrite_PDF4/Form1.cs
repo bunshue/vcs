@@ -45,10 +45,6 @@ namespace vcs_ReadWrite_PDF4
 
         private void button1_Click(object sender, EventArgs e)
         {
-            webBrowser1.Navigate("about:blank");
-            Application.DoEvents();
-
-            webBrowser1.Navigate(filename);
         }
 
         private void button2_Click(object sender, EventArgs e)

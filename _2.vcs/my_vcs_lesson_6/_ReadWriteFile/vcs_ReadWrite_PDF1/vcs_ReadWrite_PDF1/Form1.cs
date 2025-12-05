@@ -7,15 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;
+using System.IO;    //for Path
 
 using iTextSharp.text;
 using iTextSharp.text.pdf;
-using System.IO;
 
 //使用ICSharpCode.SharZipLib.dll製作pdf檔
 //參考/加入參考/ dll/itextsharp.dll
 //加入/現有項目 ICSharpCode.SharpZipLib.dll 有更新時才複製到輸出目錄
+
+//參考/加入參考/PdfSharp.dll
+using PdfSharp;
+using PdfSharp.Pdf;
+using PdfSharp.Drawing;
 
 namespace vcs_ReadWrite_PDF1
 {
@@ -77,10 +81,12 @@ namespace vcs_ReadWrite_PDF1
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(600, 320);
-            richTextBox2.Size = new Size(600, 320);
+            richTextBox1.Size = new Size(600, 220);
+            richTextBox2.Size = new Size(600, 220);
+            webBrowser1.Size = new Size(600, 220);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            richTextBox2.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            richTextBox2.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            webBrowser1.Location = new Point(x_st + dx * 3, y_st + dy * 7);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1260, 700);
@@ -88,7 +94,7 @@ namespace vcs_ReadWrite_PDF1
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Clear();
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -122,7 +128,7 @@ namespace vcs_ReadWrite_PDF1
             string filename1 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\琵琶行.txt";
             string filename2 = "tmp_pdf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".pdf";
 
-            var document = new Document(PageSize.A4, 30f, 30f, 30f, 30f);
+            var document = new Document(iTextSharp.text.PageSize.A4, 30f, 30f, 30f, 30f);
             PdfWriter.getInstance(document, new FileStream(filename2, FileMode.Create));
             document.Open();
 
@@ -249,20 +255,61 @@ namespace vcs_ReadWrite_PDF1
             return reader.NumberOfPages;
         }
 
+        string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string filename2 = string.Empty;
+        bool success = false;
 
         private void button3_Click(object sender, EventArgs e)
         {
+            filename2 = Path.GetDirectoryName(filename1) + "\\" + Path.GetFileNameWithoutExtension(filename1) + ".pdf";
 
+            success = false;
+            backgroundWorker1.RunWorkerAsync(new string[2] { filename1, filename2 });
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+                string filename2 = Application.StartupPath + "\\pdf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".pdf";
+
+                PdfSharp.Pdf.PdfDocument doc = new PdfSharp.Pdf.PdfDocument();
+                doc.Pages.Add(new PdfSharp.Pdf.PdfPage());
+                XGraphics xgr = XGraphics.FromPdfPage(doc.Pages[0]);
+                XImage img = XImage.FromFile(filename1);
+
+                xgr.DrawImage(img, 0, 0);
+
+                try
+                {
+
+                    doc.Save(filename2);
+                    richTextBox1.Text += "存檔成功\n";
+                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+                doc.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //讀取pdf檔至webbrowser
 
+            webBrowser1.Navigate("about:blank");
+            Application.DoEvents();
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
+            webBrowser1.Navigate(filename);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -383,6 +430,39 @@ namespace vcs_ReadWrite_PDF1
         private void button29_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                string source = (e.Argument as string[])[0];
+                string destinaton = (e.Argument as string[])[1];
+
+                PdfSharp.Pdf.PdfDocument doc = new PdfSharp.Pdf.PdfDocument();
+                doc.Pages.Add(new PdfSharp.Pdf.PdfPage());
+                XGraphics xgr = XGraphics.FromPdfPage(doc.Pages[0]);
+                XImage img = XImage.FromFile(source);
+
+                xgr.DrawImage(img, 0, 0);
+                doc.Save(destinaton);
+                doc.Close();
+                success = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (success == true)
+            {
+                richTextBox1.Text += "圖片 : " + filename1 + "\n";
+                richTextBox1.Text += "pdf :  " + filename2 + "\n";
+                richTextBox1.Text += "轉換完成\n";
+            }
         }
     }
 }
