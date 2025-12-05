@@ -22,7 +22,6 @@ namespace iMS_Video_Flash
         private void Form1_Load(object sender, EventArgs e)
         {
             Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
-
             show_item_location();
         }
 

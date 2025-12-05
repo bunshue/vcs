@@ -38,8 +38,8 @@ namespace vcs_ReadWrite_BMP
             //button
             x_st = 10;
             y_st = 10;
-            dx = 140;
-            dy = 60;
+            dx = 200 + 5;
+            dy = 60 + 5;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -51,6 +51,20 @@ namespace vcs_ReadWrite_BMP
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+            pictureBox1.Size = new Size(500, 640);
+            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(500, 640);
+            richTextBox1.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1250, 700);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -440,9 +454,9 @@ namespace vcs_ReadWrite_BMP
                 richTextBox1.Text += "已存檔 : " + filename3 + "\n";
             }
             else
+            {
                 richTextBox1.Text += "無圖可存\n";
-
-
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -574,7 +588,6 @@ namespace vcs_ReadWrite_BMP
             richTextBox1.Text += "\n製作BMP檔\t" + filename + "\n";
 
             return;
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -587,7 +600,6 @@ namespace vcs_ReadWrite_BMP
             richTextBox1.Text += "height = " + bitmap.Height.ToString() + "\n";
             bitmap.Save(filename2, ImageFormat.Jpeg);
             richTextBox1.Text += filename1 + " to " + filename2 + "轉換完成\n";
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -653,7 +665,6 @@ namespace vcs_ReadWrite_BMP
             //寫資料
             File.WriteAllBytes(filename2, data_read);
             richTextBox1.Text += "寫成檔案" + filename2 + "\n";
-
         }
 
         private void button9_Click(object sender, EventArgs e)

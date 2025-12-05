@@ -86,6 +86,7 @@ namespace vcs_ReadWrite_GIF1
             dy = 60 + 5;
 
             bt_pause.Location = new Point(x_st + dx * 3-100, y_st + dy * 0);
+            bt_play.Location = new Point(x_st + dx * 0, y_st + dy * 2+20);
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 6);
@@ -205,28 +206,8 @@ namespace vcs_ReadWrite_GIF1
             }
         }
 
-
         private void button2_Click(object sender, EventArgs e)
         {
-            //播放GIF檔
-            if (button2.Text == "播放GIF檔")
-            {
-                PlayImage();
-                ImageAnimator.Animate(bitmap2, new EventHandler(this.OnFrameChanged2));//播放
-
-                button2.Text = "停止播放GIF檔";
-            }
-            else
-            {
-                ImageAnimator.StopAnimate(bitmap2, new EventHandler(this.OnFrameChanged2));//停止
-                button2.Text = "播放GIF檔";
-            }
-        }
-
-        // 當動畫框架變更時要呼叫的方法
-        private void OnFrameChanged2(object o, EventArgs e)
-        {
-            this.Invalidate(); // 要求表單重畫
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -288,6 +269,32 @@ namespace vcs_ReadWrite_GIF1
         {
 
         }
+
+        private void bt_play_Click(object sender, EventArgs e)
+        {
+            //播放GIF檔
+            if (bt_play.Text == "啟動")
+            {
+                PlayImage();
+                ImageAnimator.Animate(bitmap2, new EventHandler(this.OnFrameChanged2));//播放
+
+                bt_play.Text = "停止";
+            }
+            else
+            {
+                ImageAnimator.StopAnimate(bitmap2, new EventHandler(this.OnFrameChanged2));//停止
+                bt_play.Text = "啟動";
+            }
+        }
+
+        // 當動畫框架變更時要呼叫的方法
+        private void OnFrameChanged2(object o, EventArgs e)
+        {
+            this.Invalidate(); // 要求表單重畫
+
+
+        }
+
 
         private void bt_pause_Click(object sender, EventArgs e)
         {

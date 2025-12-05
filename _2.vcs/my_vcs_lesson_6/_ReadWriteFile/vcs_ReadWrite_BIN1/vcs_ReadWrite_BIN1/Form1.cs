@@ -78,7 +78,7 @@ namespace vcs_ReadWrite_BIN1
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Clear();
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -90,7 +90,6 @@ namespace vcs_ReadWrite_BIN1
 
             using (FileStream fsWriter = new FileStream(filename2, FileMode.Create, FileAccess.Write))
             {
-
                 using (FileStream fsReader = new FileStream(filename1, FileMode.Open, FileAccess.Read))
                 {
                     byte[] bytes = new byte[1024 * 4];//4kB是合適的；
@@ -99,9 +98,7 @@ namespace vcs_ReadWrite_BIN1
                     {
                         fsWriter.Write(bytes, 0, readNum);
                     }
-
-
-                }//suing reader
+                }//using reader
             }//using writer
 
             richTextBox1.Text += "完成\n";
@@ -177,7 +174,6 @@ namespace vcs_ReadWrite_BIN1
                 {
                     richTextBox1.Text += "  ";
                 }
-
             }
 
             /*
@@ -196,7 +192,6 @@ namespace vcs_ReadWrite_BIN1
             int ww = 640;
             //int hh = 640 * 500 / 2048 / 4 * 16 / 2; //312.5
             int hh = 480;
-
 
             int size = ww * hh * 4 + 0x36;
             int h_res = 0x0EC4;
@@ -440,8 +435,6 @@ namespace vcs_ReadWrite_BIN1
             //寫資料
             File.WriteAllBytes(filename, data);
             richTextBox1.Text += "寫成檔案" + filename + "\n";
-
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -484,8 +477,6 @@ namespace vcs_ReadWrite_BIN1
             }
             sw.Close();
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename2 + "\n";
-
-
         }
 
         private void button5_Click(object sender, EventArgs e)

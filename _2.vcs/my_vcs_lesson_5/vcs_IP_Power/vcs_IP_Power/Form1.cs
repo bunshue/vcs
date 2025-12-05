@@ -278,5 +278,11 @@ namespace vcs_IP_Power
         {
             Command_IP_Power_OFF();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+
+        }
     }
 }

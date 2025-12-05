@@ -46,6 +46,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.bt_pause = new System.Windows.Forms.Button();
+            this.bt_play = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -206,7 +207,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 155;
-            this.button2.Text = "播放GIF檔";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -232,11 +232,23 @@
             this.bt_pause.UseVisualStyleBackColor = true;
             this.bt_pause.Click += new System.EventHandler(this.bt_pause_Click);
             // 
+            // bt_play
+            // 
+            this.bt_play.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_play.Location = new System.Drawing.Point(630, 188);
+            this.bt_play.Name = "bt_play";
+            this.bt_play.Size = new System.Drawing.Size(73, 40);
+            this.bt_play.TabIndex = 207;
+            this.bt_play.Text = "啟動";
+            this.bt_play.UseVisualStyleBackColor = true;
+            this.bt_play.Click += new System.EventHandler(this.bt_play_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 662);
+            this.Controls.Add(this.bt_play);
             this.Controls.Add(this.bt_pause);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
@@ -283,6 +295,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button bt_pause;
+        private System.Windows.Forms.Button bt_play;
     }
 }
 
