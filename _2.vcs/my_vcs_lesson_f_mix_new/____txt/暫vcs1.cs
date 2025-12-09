@@ -26,6 +26,20 @@ richTextBox1.Text += "----------------------------------------------------------
 
 
 
+            int len = richTextBox1.Lines.Length;
+            //richTextBox1.Text += "lines = " + len.ToString() + "\n";
+            for (i = 0; i < len; i++)
+            {
+                //richTextBox1.Text += "i = " + i.ToString() + " : " + richTextBox1.Lines[i] + "\n";
+                sw.WriteLine(richTextBox1.Lines[i]); // 寫入一行
+            }
+
+
+
+
+
+
+
 
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

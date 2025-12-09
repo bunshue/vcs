@@ -11,9 +11,16 @@ using System.IO;
 
 // Open the Add References dialog. On the COM tab, select
 // "Microsoft Word 12.0 Object Library" (or whatever version you have installed on your system). 
+// Add a reference to Microsoft Word 14.0 Object Library.
 
 using Word = Microsoft.Office.Interop.Word;
 using Core = Microsoft.Office.Core;
+
+//using System.Text.RegularExpressions;
+
+// Open the Add References dialog. On the COM tab, select
+// "Microsoft Word 12.0 Object Library" (or whatever version you
+// have installed on your system). 
 
 namespace vcs_ReadWrite_WORD1
 {
@@ -299,17 +306,102 @@ namespace vcs_ReadWrite_WORD1
             word_app.Quit(ref save_changes, ref missing, ref missing);
 
             richTextBox1.Text += "製作一個docx檔案 使用表格 完成\t檔名 : " + filename + "\n";
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //讀取WORD檔案並將顯示純文字部分
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\bmp_format.docx";
 
+            richTextBox1.Text += "讀取檔案 : " + filename + " ...\n";
+            string txt = GrabWordFileWords(filename);
+            richTextBox1.Text += txt + "\n";
+            richTextBox1.Text += "完成\n";
+        }
+
+        // Read the text contents of a Word file.
+        private string GrabWordFileWords(string file_name)
+        {
+            // Get the Word application object.
+            Word._Application word_app = new Word.ApplicationClass();
+
+            // Make Word visible (optional).
+            word_app.Visible = false;
+
+            // Open the file.
+            object filename = file_name;
+            object confirm_conversions = false;
+            object read_only = true;
+            object add_to_recent_files = false;
+            object format = 0;
+            object missing = System.Reflection.Missing.Value;
+
+            Word._Document word_doc =
+                word_app.Documents.Open(ref filename, ref confirm_conversions,
+                    ref read_only, ref add_to_recent_files,
+                    ref missing, ref missing, ref missing, ref missing,
+                    ref missing, ref format, ref missing, ref missing,
+                    ref missing, ref missing, ref missing, ref missing);
+
+            // Return the document's text.
+            string result = word_doc.Content.Text;
+
+            //richTextBox1.Text += result + "\n";
+
+            // Close the document without prompting.
+            object save_changes = false;
+            word_doc.Close(ref save_changes, ref missing, ref missing);
+            word_app.Quit(ref save_changes, ref missing, ref missing);
+
+            // Return the result.
+            return result;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //移除WORD檔裡面的超連結
+
+            string doc_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\vcs_ReadWrite_WORD7.docx";
+
+            richTextBox1.Text += "開啟檔案 : " + doc_filename + "\n";
+
+            Refresh();
+
+            // Get the Word application object.
+            Word._Application word_app = new Word.Application();
+
+            // Make Word visible (optional).
+            word_app.Visible = true;
+
+            // Open the Word document.
+            object missing = Type.Missing;
+            object filename = doc_filename;
+            object confirm_conversions = false;
+            object read_only = false;
+            object add_to_recent_files = false;
+            object format = 0;
+            Word._Document word_doc =
+                word_app.Documents.Open(ref filename, ref confirm_conversions,
+                    ref read_only, ref add_to_recent_files,
+                    ref missing, ref missing, ref missing, ref missing,
+                    ref missing, ref format, ref missing, ref missing,
+                    ref missing, ref missing, ref missing, ref missing);
+
+            // Remove the hyperlinks.
+            object index = 1;
+            while (word_doc.Hyperlinks.Count > 0)
+            {
+                word_doc.Hyperlinks.get_Item(ref index).Delete();
+            }
+
+            // Save and close the document without prompting.
+            object save_changes = true;
+            word_doc.Close(ref save_changes, ref missing, ref missing);
+
+            // Close the word application.
+            word_app.Quit(ref save_changes, ref missing, ref missing);
+
+            richTextBox1.Text += "完成\n";
 
         }
 
@@ -345,7 +437,62 @@ namespace vcs_ReadWrite_WORD1
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //建立一個Word檔案
+            // Make a Word document.
+            // Get the Word application object.
+            Word._Application word_app = new Word.ApplicationClass();
 
+            // Make Word visible (optional).
+            word_app.Visible = true;
+
+            // Create the Word document.
+            object missing = Type.Missing;
+            Word._Document word_doc = word_app.Documents.Add(ref missing, ref missing,
+                ref missing, ref missing);
+
+            // Create a header paragraph.
+            Word.Paragraph para = word_doc.Paragraphs.Add(ref missing);
+            para.Range.Text = "Chrysanthemum Curve";
+            object style_name = "Heading 1";
+            //para.Range.set_Style(ref style_name);
+            para.Range.InsertParagraphAfter();
+
+            // Add more text.
+            para.Range.Text = "To make a chrysanthemum curve, use the following " +
+                "parametric equations as t goes from 0 to 21 * π to generate " +
+                "points and then connect them.";
+            para.Range.InsertParagraphAfter();
+
+            // Save the current font and start using Courier New.
+            string old_font = para.Range.Font.Name;
+            para.Range.Font.Name = "Courier New";
+
+            // Add the equations.
+            para.Range.Text =
+                "  r = 5 * (1 + Sin(11 * t / 5)) -\n" +
+                "      4 * Sin(17 * t / 3) ^ 4 *\n" +
+                "      Sin(2 * Cos(3 * t) - 28 * t) ^ 8\n" +
+                "  x = r * Cos(t)\n" +
+                "  y = r * Sin(t)";
+
+            // Start a new paragraph and then switch back to the original font.
+            para.Range.InsertParagraphAfter();
+            para.Range.Font.Name = old_font;
+
+            // Save the document.
+            object filename = Application.StartupPath + "\\word_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".doc";
+
+            word_doc.SaveAs(ref filename, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing,
+                ref missing, ref missing, ref missing, ref missing, ref missing,
+                ref missing, ref missing);
+
+            // Close.
+            object save_changes = false;
+            word_doc.Close(ref save_changes, ref missing, ref missing);
+            word_app.Quit(ref save_changes, ref missing, ref missing);
+
+            richTextBox1.Text += "建立Word檔案完成, 檔名 : " + filename + "\n";
         }
 
         private void button11_Click(object sender, EventArgs e)

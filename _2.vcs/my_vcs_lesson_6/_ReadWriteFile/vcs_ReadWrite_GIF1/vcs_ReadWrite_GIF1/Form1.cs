@@ -19,12 +19,13 @@ namespace vcs_ReadWrite_GIF1
 {
     public partial class Form1 : Form
     {
-        string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_gif\dog.gif";
-        string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_gif\cat.gif";
+        //檢查是否可刪除檔案:
+        //string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_gif\dog.gif";
+        //string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_gif\cat.gif";
+
+        string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_小綠人\green_man3.gif";
 
         Bitmap bitmap1;
-        Bitmap bitmap2;
-        bool current = false;
 
         public Form1()
         {
@@ -36,41 +37,30 @@ namespace vcs_ReadWrite_GIF1
             show_item_location();
 
             bitmap1 = new Bitmap(filename1);
-            bitmap2 = new Bitmap(filename2);
 
             if (ImageAnimator.CanAnimate(bitmap1)) // 是否 是動畫影像
             {
-                // 播放動畫
-                ImageAnimator.Animate(bitmap1, new EventHandler(this.OnFrameChanged1));
+                ImageAnimator.Animate(bitmap1, new EventHandler(this.OnFrameChanged1));// 播放動畫
             }
         }
 
         // 當動畫框架變更時要呼叫的方法
         private void OnFrameChanged1(object o, EventArgs e)
         {
-            this.Invalidate(); // 要求表單重畫
+            this.pictureBox1.Invalidate();//要求pictureBox1重畫
         }
 
-        // 表單重畫事件
-        private void Form1_Paint(object sender, PaintEventArgs e)
+        // 重畫事件
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            int x_st = 300;
+            int x_st = 0;
             int y_st = 0;
-
-            ImageAnimator.UpdateFrames(); // 推進到下一個動畫框架 Frame
             e.Graphics.DrawImage(bitmap1, x_st, y_st, bitmap1.Width, bitmap1.Height);
+            //e.Graphics.DrawImage(this.bitmap1, new Point(0, 0));//same
+            ImageAnimator.UpdateFrames(); // 推進到下一個動畫框架 Frame
+
+            //bt_pause_Click(sender, e);
         }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            e.Graphics.DrawImage(this.bitmap1, new Point(300, 30));
-            ImageAnimator.UpdateFrames();
-
-            e.Graphics.DrawImage(this.bitmap2, new Point(1, 1));
-            ImageAnimator.UpdateFrames();
-        }
-
-
 
         void show_item_location()
         {
@@ -85,8 +75,7 @@ namespace vcs_ReadWrite_GIF1
             dx = 200 + 5;
             dy = 60 + 5;
 
-            bt_pause.Location = new Point(x_st + dx * 3-100, y_st + dy * 0);
-            bt_play.Location = new Point(x_st + dx * 0, y_st + dy * 2+20);
+            bt_pause.Location = new Point(x_st + dx * 2 - 70, y_st + dy * 0);
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 6);
@@ -105,6 +94,9 @@ namespace vcs_ReadWrite_GIF1
             button12.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button13.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button14.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+
+            pictureBox1.Size = new Size(320, 320);
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
             richTextBox1.Size = new Size(600, 640);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
@@ -129,7 +121,6 @@ namespace vcs_ReadWrite_GIF1
 
             richTextBox1.Text += "檔案 : " + filename + "\n解開到 : " + dirname + "\n";
             richTextBox1.Text += "完成\n\n";
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -143,11 +134,9 @@ namespace vcs_ReadWrite_GIF1
 
             richTextBox1.Text += "資料夾 : " + dirname + "\n製成 : " + filename + "\n";
             richTextBox1.Text += "完成\n\n";
-
         }
 
-
-        /// 把Gif文件转成Png文件，放在directory目录下
+        // 把Gif文件转成Png文件，放在directory目录下
         public static void GifToPngs(string giffile, string directory)
         {
             //把Gif文件转成Png文件
@@ -195,15 +184,6 @@ namespace vcs_ReadWrite_GIF1
                 e.AddFrame(Image.FromFile(pngfiles[i]));
             }
             e.Finish();
-        }
-
-        public void PlayImage()
-        {
-            if (!current)
-            {
-                ImageAnimator.Animate(bitmap2, new EventHandler(this.OnFrameChanged2));
-                current = true;
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -270,40 +250,13 @@ namespace vcs_ReadWrite_GIF1
 
         }
 
-        private void bt_play_Click(object sender, EventArgs e)
-        {
-            //播放GIF檔
-            if (bt_play.Text == "啟動")
-            {
-                PlayImage();
-                ImageAnimator.Animate(bitmap2, new EventHandler(this.OnFrameChanged2));//播放
-
-                bt_play.Text = "停止";
-            }
-            else
-            {
-                ImageAnimator.StopAnimate(bitmap2, new EventHandler(this.OnFrameChanged2));//停止
-                bt_play.Text = "啟動";
-            }
-        }
-
-        // 當動畫框架變更時要呼叫的方法
-        private void OnFrameChanged2(object o, EventArgs e)
-        {
-            this.Invalidate(); // 要求表單重畫
-
-
-        }
-
-
         private void bt_pause_Click(object sender, EventArgs e)
         {
             //停止
-
             if (bt_pause.Text == "停止")
             {
                 // 停止播放動畫
-                ImageAnimator.StopAnimate(bitmap1, new EventHandler(this.OnFrameChanged1));
+                ImageAnimator.StopAnimate(bitmap1, new EventHandler(this.OnFrameChanged1));//停止
                 bt_pause.Text = "繼續";
             }
             else
@@ -312,13 +265,11 @@ namespace vcs_ReadWrite_GIF1
 
                 if (ImageAnimator.CanAnimate(bitmap1)) // 是否 是動畫影像
                 {
-                    // 播放動畫
-                    ImageAnimator.Animate(bitmap1, new EventHandler(this.OnFrameChanged1));
+                    ImageAnimator.Animate(bitmap1, new EventHandler(this.OnFrameChanged1));//繼續
                 }
             }
-
         }
-
     }
 }
+
 

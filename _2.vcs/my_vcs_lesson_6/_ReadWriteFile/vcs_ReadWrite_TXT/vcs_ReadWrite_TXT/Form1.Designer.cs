@@ -30,7 +30,6 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -61,7 +60,6 @@
             this.button28 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
             this.bt_clear1 = new System.Windows.Forms.Button();
-            this.bt_clear2 = new System.Windows.Forms.Button();
             this.button49 = new System.Windows.Forms.Button();
             this.button48 = new System.Windows.Forms.Button();
             this.button47 = new System.Windows.Forms.Button();
@@ -102,16 +100,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "晏殊蝶戀花\n檻菊愁煙蘭泣露，\n羅幕輕寒，\n燕子雙飛去，\n明月不諳離恨苦，\n斜光到曉穿朱戶。\n昨夜西風凋碧樹，\n獨上高樓，\n望盡天涯路，\n欲寄彩箋無尺素，\n山長水闊" +
-                "知何處。";
-            // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Location = new System.Drawing.Point(1034, 113);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(100, 100);
-            this.richTextBox2.TabIndex = 2;
-            this.richTextBox2.Text = "";
+            this.richTextBox1.Text = "";
             // 
             // button2
             // 
@@ -120,7 +109,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 3;
-            this.button2.Text = "richTextBox1.LoadFile";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -131,7 +119,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 4;
-            this.button3.Text = "File.ReadAllText";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -282,6 +269,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(200, 60);
             this.button17.TabIndex = 18;
+            this.button17.Text = "WriteLine / ReadLine";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -334,7 +322,6 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(200, 60);
             this.button22.TabIndex = 23;
-            this.button22.Text = "比較兩個檔案";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -345,7 +332,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 24;
-            this.button0.Text = "File.ReadAllLines";
+            this.button0.Text = "File.ReadAllLines / File.WriteAllLines";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -356,7 +343,6 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(200, 60);
             this.button23.TabIndex = 25;
-            this.button23.Text = "比較兩個檔案";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -434,16 +420,6 @@
             this.bt_clear1.UseVisualStyleBackColor = true;
             this.bt_clear1.Click += new System.EventHandler(this.bt_clear1_Click);
             // 
-            // bt_clear2
-            // 
-            this.bt_clear2.Location = new System.Drawing.Point(1049, 139);
-            this.bt_clear2.Name = "bt_clear2";
-            this.bt_clear2.Size = new System.Drawing.Size(70, 35);
-            this.bt_clear2.TabIndex = 33;
-            this.bt_clear2.Text = "Clear";
-            this.bt_clear2.UseVisualStyleBackColor = true;
-            this.bt_clear2.Click += new System.EventHandler(this.bt_clear2_Click);
-            // 
             // button49
             // 
             this.button49.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -473,7 +449,6 @@
             this.button47.Name = "button47";
             this.button47.Size = new System.Drawing.Size(200, 60);
             this.button47.TabIndex = 221;
-            this.button47.Text = "儲存資料(TXT)";
             this.button47.UseVisualStyleBackColor = true;
             this.button47.Click += new System.EventHandler(this.button47_Click);
             // 
@@ -484,7 +459,7 @@
             this.button46.Name = "button46";
             this.button46.Size = new System.Drawing.Size(200, 60);
             this.button46.TabIndex = 220;
-            this.button46.Text = "載入資料(TXT)";
+            this.button46.Text = "載入資料/加入資料/儲存資料";
             this.button46.UseVisualStyleBackColor = true;
             this.button46.Click += new System.EventHandler(this.button46_Click);
             // 
@@ -495,7 +470,6 @@
             this.button45.Name = "button45";
             this.button45.Size = new System.Drawing.Size(200, 60);
             this.button45.TabIndex = 219;
-            this.button45.Text = "輸入資料";
             this.button45.UseVisualStyleBackColor = true;
             this.button45.Click += new System.EventHandler(this.button45_Click);
             // 
@@ -506,7 +480,7 @@
             this.button44.Name = "button44";
             this.button44.Size = new System.Drawing.Size(200, 60);
             this.button44.TabIndex = 218;
-            this.button44.Text = "取得檔案資訊";
+            this.button44.Text = "取得檔案資訊 FileInfo";
             this.button44.UseVisualStyleBackColor = true;
             this.button44.Click += new System.EventHandler(this.button44_Click);
             // 
@@ -550,7 +524,6 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(200, 60);
             this.button40.TabIndex = 214;
-            this.button40.Text = "ReadLine";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
@@ -582,7 +555,6 @@
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(200, 60);
             this.button37.TabIndex = 211;
-            this.button37.Text = "製作暫存檔案2";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
@@ -593,7 +565,6 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(200, 60);
             this.button36.TabIndex = 210;
-            this.button36.Text = "製作暫存檔案1";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
@@ -614,7 +585,7 @@
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(200, 60);
             this.button34.TabIndex = 208;
-            this.button34.Text = "sr.Read";
+            this.button34.Text = "sr.Read 一次讀一拜";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
             // 
@@ -625,7 +596,7 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(200, 60);
             this.button33.TabIndex = 207;
-            this.button33.Text = "File.WriteAllText";
+            this.button33.Text = "File.ReadAllText / File.WriteAllText";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
@@ -658,7 +629,7 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(200, 60);
             this.button30.TabIndex = 204;
-            this.button30.Text = "File 操作";
+            this.button30.Text = "Directory/File 操作";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
@@ -687,7 +658,6 @@
             this.Controls.Add(this.button32);
             this.Controls.Add(this.button31);
             this.Controls.Add(this.button30);
-            this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.bt_clear1);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
@@ -718,7 +688,6 @@
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
@@ -732,7 +701,6 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
@@ -763,7 +731,6 @@
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.Button button29;
         private System.Windows.Forms.Button bt_clear1;
-        private System.Windows.Forms.Button bt_clear2;
         private System.Windows.Forms.Button button49;
         private System.Windows.Forms.Button button48;
         private System.Windows.Forms.Button button47;

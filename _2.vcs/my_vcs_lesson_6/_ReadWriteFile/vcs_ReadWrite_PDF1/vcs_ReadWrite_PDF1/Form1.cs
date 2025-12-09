@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;    //for Path
+using System.Text.RegularExpressions;
 
 using iTextSharp.text;
 using iTextSharp.text.pdf;
@@ -25,6 +26,9 @@ namespace vcs_ReadWrite_PDF1
 {
     public partial class Form1 : Form
     {
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
+        string command = string.Empty;
+
         public Form1()
         {
             InitializeComponent();
@@ -70,20 +74,22 @@ namespace vcs_ReadWrite_PDF1
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            groupBox1.Size = new Size(200, 580);
+            groupBox1.Visible = false;
+            groupBox1.Size = new Size(200, 630);
             groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(600, 220);
-            richTextBox2.Size = new Size(600, 220);
-            webBrowser1.Size = new Size(600, 220);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            richTextBox2.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            webBrowser1.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            //richTextBox1.Clear();
+            richTextBox1.Size = new Size(600, 250);
+            richTextBox2.Size = new Size(600, 250);
+            webBrowser1.Size = new Size(600, 150);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            richTextBox2.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            webBrowser1.Location = new Point(x_st + dx * 2, y_st + dy * 7 + 70);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             y_st = 20;
-            dx = 180 + 5;
-            dy = 50 + 5;
+            dx = 200 + 5;
+            dy = 60 + 5;
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -94,8 +100,21 @@ namespace vcs_ReadWrite_PDF1
             button27.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button28.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button30.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            comboBox1.Location = new Point(x_st + dx * 0, y_st + dy * 11);
 
-            this.Size = new Size(1260, 700);
+            button21.Enabled = false;
+            button22.Enabled = false;
+            button23.Enabled = false;
+            button24.Enabled = false;
+            button25.Enabled = false;
+            button26.Enabled = false;
+            button27.Enabled = false;
+            button28.Enabled = false;
+            button29.Enabled = false;
+            button30.Enabled = false;
+
+            this.Size = new Size(1080, 740);
         }
 
         void show_item_location2()
@@ -132,34 +151,50 @@ namespace vcs_ReadWrite_PDF1
             button18.Visible = false;
             button19.Visible = false;
 
-            groupBox1.Size = new Size(200, 580);
+            groupBox1.Visible = true;
+            groupBox1.Size = new Size(430, 420);
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(400, 600);
+            richTextBox1.Clear();
+            richTextBox1.Size = new Size(430, 310);
             richTextBox2.Size = new Size(600, 220);
-            webBrowser1.Size = new Size(600, 600);
-            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            webBrowser1.Size = new Size(800, 740);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7 - 30);
             richTextBox2.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            webBrowser1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            webBrowser1.Location = new Point(x_st + dx * 2 + 40, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             richTextBox2.Visible = false;
 
             y_st = 20;
-            dx = 180 + 5;
-            dy = 50 + 5;
+            dx = 200 + 5;
+            dy = 60 + 5;
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button23.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button24.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button25.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button26.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button27.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button28.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button29.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button30.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            comboBox1.Location = new Point(x_st + dx * 1, y_st + dy * 5);
 
-            this.Size = new Size(1260, 700);
+            button20.Enabled = true;
+            button21.Enabled = true;
+            button22.Enabled = true;
+            button23.Enabled = true;
+            button24.Enabled = true;
+            button25.Enabled = true;
+            button26.Enabled = true;
+            button27.Enabled = true;
+            button28.Enabled = true;
+            button29.Enabled = true;
+            button30.Enabled = true;
+
+            this.Size = new Size(1300, 800);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -397,7 +432,8 @@ namespace vcs_ReadWrite_PDF1
 
         private void button10_Click(object sender, EventArgs e)
         {
-
+            //使用WebBrowser
+            show_item_location2();
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -447,11 +483,6 @@ namespace vcs_ReadWrite_PDF1
 
         private void button20_Click(object sender, EventArgs e)
         {
-            show_item_location2();
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
             //讀取pdf檔至webbrowser
 
             webBrowser1.Navigate("about:blank");
@@ -461,44 +492,189 @@ namespace vcs_ReadWrite_PDF1
             webBrowser1.Navigate(filename);
         }
 
+        private void button21_Click(object sender, EventArgs e)
+        {
+            webBrowser1.Navigate("about:blank");
+            Application.DoEvents();
+
+            richTextBox1.Text += "直接顯示第幾頁, 第10頁\n";
+
+            command = filename + "#page=10";    //顯示第幾頁
+            webBrowser1.Navigate(command);
+        }
+
         private void button22_Click(object sender, EventArgs e)
         {
+            webBrowser1.Navigate("about:blank");
+            Application.DoEvents();
 
+            richTextBox1.Text += "顯示比例, 30%\n";
+
+            command = filename + "#zoom = 30 %";    //顯示比例  有無%皆可
+            webBrowser1.Navigate(command);
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
+            webBrowser1.Navigate("about:blank");
+            Application.DoEvents();
 
+            richTextBox1.Text += "搜尋pattern, 找 reboot\n";
+
+            command = filename + "#search=reboot"; //搜尋pattern
+            webBrowser1.Navigate(command);
         }
 
+        int flag_toolbar = 0;
         private void button24_Click(object sender, EventArgs e)
         {
+            webBrowser1.Navigate("about:blank");
+            Application.DoEvents();
 
+            //上方工具列, 預設為開
+            richTextBox1.Text += "上方工具列\t";
+
+            if (flag_toolbar == 0)
+            {
+                flag_toolbar = 1;
+                command = filename + "#toolbar=1";
+                richTextBox1.Text += "打開\n";
+            }
+            else
+            {
+                flag_toolbar = 0;
+                command = filename + "#toolbar=0";
+                richTextBox1.Text += "關閉\n";
+            }
+            webBrowser1.Navigate(command);
         }
 
+        int flag_navpanes = 0;
         private void button25_Click(object sender, EventArgs e)
         {
+            webBrowser1.Navigate("about:blank");
+            Application.DoEvents();
 
+            //左右方工具列, 預設為關
+            richTextBox1.Text += "左右方工具列\t";
+            if (flag_navpanes == 0)
+            {
+                flag_navpanes = 1;
+                command = filename + "#navpanes=1";
+                richTextBox1.Text += "打開\n";
+            }
+            else
+            {
+                flag_navpanes = 0;
+                command = filename + "#navpanes=0";
+                richTextBox1.Text += "關閉\n";
+            }
+            webBrowser1.Navigate(command);
         }
 
+        int flag_scrollbar = 0;
         private void button26_Click(object sender, EventArgs e)
         {
+            webBrowser1.Navigate("about:blank");
+            Application.DoEvents();
 
+            //scrollbar, 預設為開
+            richTextBox1.Text += "scrollbar\t";
+            if (flag_scrollbar == 0)
+            {
+                flag_scrollbar = 1;
+                command = filename + "#scrollbar=1";
+                richTextBox1.Text += "打開\n";
+            }
+            else
+            {
+                flag_scrollbar = 0;
+                command = filename + "#scrollbar=0";
+                richTextBox1.Text += "關閉\n";
+            }
+            webBrowser1.Navigate(command);
         }
 
+        int flag_statusbar = 0;
         private void button27_Click(object sender, EventArgs e)
         {
+            //fail
+            webBrowser1.Navigate("about:blank");
+            Application.DoEvents();
 
+            //statusbar, 預設為開
+            richTextBox1.Text += "statusbar\t";
+            if (flag_statusbar == 0)
+            {
+                flag_statusbar = 1;
+                command = filename + "#statusbar=1";
+                richTextBox1.Text += "打開\n";
+            }
+            else
+            {
+                flag_statusbar = 0;
+                command = filename + "#statusbar=0";
+                richTextBox1.Text += "關閉\n";
+            }
+            webBrowser1.Navigate(command);
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
+            webBrowser1.Navigate("about:blank");
+            Application.DoEvents();
 
+            richTextBox1.Text += "view\t" + comboBox1.Text + "\n";
+
+            command = filename + "#view=" + comboBox1.Text;
+            webBrowser1.Navigate(command);
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
+            webBrowser1.Navigate("about:blank");
+            Application.DoEvents();
 
+            richTextBox1.Text += "只看部分 viewrect\n";
+
+            //viewrect=x_st,y_st,width,height
+            command = filename + "#viewrect=100,100,100,100";
+            webBrowser1.Navigate(command);
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            //頁數
+            richTextBox1.Text += "C#擷取pdf文檔的頁數\n";
+
+            int pages = GetPDFofPageCount(filename);
+            richTextBox1.Text += "檔案 : " + filename + "\n";
+            richTextBox1.Text += "頁數 : " + pages.ToString() + "\n";
+        }
+
+        //[操作pdf文檔]之C#判斷pdf文檔的頁數：
+        /// <summary>
+        /// 擷取pdf文檔的頁數
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns>-1表示檔案不存在</returns>
+        public static int GetPDFofPageCount(string filePath)
+        {
+            int count = -1;//-1表示檔案不存在
+            if (File.Exists(filePath))
+            {
+                using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                {
+                    StreamReader reader = new StreamReader(fs);
+                    //從流的目前位置到末尾讀取流
+                    string pdfText = reader.ReadToEnd();
+                    //richTextBox1.Text += pdfText + "\n";
+                    Regex rgx = new Regex(@"/Type\s*/Page[^s]");
+                    MatchCollection matches = rgx.Matches(pdfText);
+                    count = matches.Count;
+                }
+            }
+            return count;
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -533,6 +709,16 @@ namespace vcs_ReadWrite_PDF1
                 richTextBox1.Text += "轉換完成\n";
             }
         }
+
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            //richTextBox1.Text += "DocumentCompleted\n";
+        }
+
+        private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        {
+            //richTextBox1.Text += "Navigated\n";
+            this.Text = webBrowser1.Url.ToString();
+        }
     }
 }
-

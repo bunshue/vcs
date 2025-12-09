@@ -46,7 +46,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.bt_pause = new System.Windows.Forms.Button();
-            this.bt_play = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -224,7 +225,7 @@
             // bt_pause
             // 
             this.bt_pause.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_pause.Location = new System.Drawing.Point(630, 133);
+            this.bt_pause.Location = new System.Drawing.Point(630, 235);
             this.bt_pause.Name = "bt_pause";
             this.bt_pause.Size = new System.Drawing.Size(73, 40);
             this.bt_pause.TabIndex = 206;
@@ -232,23 +233,23 @@
             this.bt_pause.UseVisualStyleBackColor = true;
             this.bt_pause.Click += new System.EventHandler(this.bt_pause_Click);
             // 
-            // bt_play
+            // pictureBox1
             // 
-            this.bt_play.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_play.Location = new System.Drawing.Point(630, 188);
-            this.bt_play.Name = "bt_play";
-            this.bt_play.Size = new System.Drawing.Size(73, 40);
-            this.bt_play.TabIndex = 207;
-            this.bt_play.Text = "啟動";
-            this.bt_play.UseVisualStyleBackColor = true;
-            this.bt_play.Click += new System.EventHandler(this.bt_play_Click);
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(630, 118);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 207;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 662);
-            this.Controls.Add(this.bt_play);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_pause);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
@@ -270,7 +271,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -295,7 +296,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button bt_pause;
-        private System.Windows.Forms.Button bt_play;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

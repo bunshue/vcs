@@ -51,15 +51,10 @@ namespace vcs_RichTextBox1
 
             show_richtextbox_tabs();
 
-            // Load the previously saved file.
-            // If the file exists, load it.
             if (File.Exists(rtf_filename))
+            {
                 richTextBox_rtf.LoadFile(rtf_filename);
-
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            bt_exit_setup();
+            }
         }
 
         // Select the indicated text.
@@ -103,8 +98,8 @@ namespace vcs_RichTextBox1
             //button
             x_st = 12;
             y_st = 12;
-            dx = 225;
-            dy = 45;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -116,56 +111,65 @@ namespace vcs_RichTextBox1
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
-            button13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
-            button14.Location = new Point(x_st + dx * 0, y_st + dy * 14);
 
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button20.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button22.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button23.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button24.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button25.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-            button26.Location = new Point(x_st + dx * 1, y_st + dy * 11);
-            button27.Location = new Point(x_st + dx * 1, y_st + dy * 12);
-            button28.Location = new Point(x_st + dx * 1, y_st + dy * 13);
-            button29.Location = new Point(x_st + dx * 1, y_st + dy * 14);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            button30.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button31.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button32.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button33.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button34.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button35.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button36.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button37.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button38.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button39.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            button40.Location = new Point(x_st + dx * 2, y_st + dy * 10);
-            button41.Location = new Point(x_st + dx * 2, y_st + dy * 12);
-            button42.Location = new Point(x_st + dx * 2, y_st + dy * 13);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+
+            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            textBox2.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+            bt_set_font_size.Location = new Point(x_st + dx * 3 + 80, y_st + dy * 9);
+
+            richTextBox_format_1.Size = new Size(400, 50);
+            richTextBox_format_1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            richTextBox_format_2.Size = new Size(400, 50);
+            richTextBox_format_2.Location = new Point(x_st + dx * 2, y_st + dy * 10);
 
             richTextBox1.Size = new Size(500, 400);
-            x_st = 820;
+            x_st = 720 + 100 + 30;
             y_st = 12;
             richTextBox1.Location = new Point(x_st, y_st);
 
             richTextBox2.Size = new Size(500, 200);
-            x_st = 820;
+            x_st = 720 + 100 + 30;
             y_st = 12 + 410;
             richTextBox2.Location = new Point(x_st, y_st);
 
-            richTextBox3.Size = new Size(400, 250);
-            x_st = 820 + 510;
+            richTextBox3.Size = new Size(300, 250);
+            x_st = 820 + 510 + 30;
             y_st = 12;
             richTextBox3.Location = new Point(x_st, y_st);
+
+            x_st = 820 + 510 + 30;
+            y_st = 12 + 500;
+            richTextBox_rtf.Size = new Size(300, 200);
+            richTextBox_rtf.Location = new Point(x_st, y_st);
 
             bt_open1.Location = new Point(richTextBox1.Location.X, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height * 2 - 5);
             bt_open2.Location = new Point(richTextBox1.Location.X, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open2.Size.Height);
@@ -180,9 +184,9 @@ namespace vcs_RichTextBox1
             label4.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - 220, richTextBox1.Location.Y + 5);
             label6.Location = new Point(richTextBox1.Location.X + 100, richTextBox1.Location.Y + 5);
 
-            x_st = 1350;
-            y_st = 400;
-            dy = 40;
+            x_st = 1230 + 100 + 30;
+            y_st = 340;
+            dy = 32;
             label1.Location = new Point(x_st, y_st + dy * 0);
             label7.Location = new Point(x_st, y_st + dy * 1);
             label2.Location = new Point(x_st, y_st + dy * 2);
@@ -190,6 +194,8 @@ namespace vcs_RichTextBox1
             label5.Location = new Point(x_st, y_st + dy * 4);
             label8.Location = new Point(x_st, y_st - dy * 2);
             label9.Location = new Point(x_st, y_st - dy * 1);
+
+            this.Size = new Size(1700 + 40, 820);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -723,10 +729,40 @@ namespace vcs_RichTextBox1
 
         private void button37_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "RichTextBox用 += 印1000行資料\n";
+            richTextBox1.Clear();
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            int i;
+            for (i = 0; i < 1000; i++)
+            {
+                richTextBox1.Text += "ABCDEFGHIJKLMNOPQRSTUVWXYZ  " + i.ToString() + "\n";
+            }
+
+            sw.Stop();
+            richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
+
         }
 
         private void button38_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "RichTextBox先製造好1000行資料再一次印出來\n";
+            richTextBox1.Clear();
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            string aaaa = string.Empty;
+            int i;
+            for (i = 0; i < 1000; i++)
+            {
+                aaaa += "ABCDEFGHIJKLMNOPQRSTUVWXYZ  " + i.ToString() + "\n";
+            }
+
+            richTextBox1.Text = aaaa;
+
+            sw.Stop();
+            richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
         }
 
         private void button39_Click(object sender, EventArgs e)
@@ -812,12 +848,14 @@ namespace vcs_RichTextBox1
 
         private void bt_open1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+            //載入, 會覆蓋原本rtb內的資料
+
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\琵琶行.txt";
 
             //讀取純文字檔到richTextBox裏
             try
             {
-                richTextBox1.LoadFile(@"D:\_git\vcs\_1.data\______test_files1\article.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
+                richTextBox1.LoadFile(filename, RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
             }
             catch (FileNotFoundException)
             {
@@ -951,36 +989,6 @@ namespace vcs_RichTextBox1
             richTextBox_rtf.SaveFile(rtf_filename);
         }
 
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
-        }
-
         private void richTextBox3_LinkClicked(object sender, LinkClickedEventArgs e)
         {
             this.Text = e.LinkText;//設置與窗體關聯的文本
@@ -993,47 +1001,9 @@ namespace vcs_RichTextBox1
             richTextBox1.SelectAll();
         }
 
-        private void button41_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "RichTextBox用 += 印1000行資料\n";
-            richTextBox1.Clear();
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-
-            int i;
-            for (i = 0; i < 1000; i++)
-            {
-                richTextBox1.Text += "ABCDEFGHIJKLMNOPQRSTUVWXYZ  " + i.ToString() + "\n";
-            }
-
-            sw.Stop();
-            richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
-        }
-
-        private void button42_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "RichTextBox先製造好1000行資料再一次印出來\n";
-            richTextBox1.Clear();
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-
-            string aaaa = string.Empty;
-            int i;
-            for (i = 0; i < 1000; i++)
-            {
-                aaaa += "ABCDEFGHIJKLMNOPQRSTUVWXYZ  " + i.ToString() + "\n";
-            }
-
-            richTextBox1.Text = aaaa;
-
-            sw.Stop();
-            richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
-        }
-
         private void richTextBox1_SelectionChanged(object sender, EventArgs e)
         {
             label9.Text = "SelectionChanged : ST " + richTextBox1.SelectionStart.ToString() + "   " + "len = " + richTextBox1.SelectionLength.ToString();
-
         }
     }
 }

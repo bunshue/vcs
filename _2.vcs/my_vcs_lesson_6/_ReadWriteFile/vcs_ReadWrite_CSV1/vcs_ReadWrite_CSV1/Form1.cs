@@ -38,7 +38,6 @@ namespace vcs_ReadWrite_CSV1
             show_item_location();
 
             MyList.Clear();
-
         }
 
         void show_item_location()
@@ -87,36 +86,14 @@ namespace vcs_ReadWrite_CSV1
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
-            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+            pictureBox1.Size = new Size(600, 200);
+            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
-            button40.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            button41.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            button42.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            button43.Location = new Point(x_st + dx * 4, y_st + dy * 3);
-            button44.Location = new Point(x_st + dx * 4, y_st + dy * 4);
-            button45.Location = new Point(x_st + dx * 4, y_st + dy * 5);
-            button46.Location = new Point(x_st + dx * 4, y_st + dy * 6);
-            button47.Location = new Point(x_st + dx * 4, y_st + dy * 7);
-            button48.Location = new Point(x_st + dx * 4, y_st + dy * 8);
-            button49.Location = new Point(x_st + dx * 4, y_st + dy * 9);
-
-            pictureBox1.Size = new Size(500, 200);
-            pictureBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-
-            richTextBox1.Size = new Size(500, 430);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 210);
+            richTextBox1.Size = new Size(600, 430);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 210);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1560, 700);
+            this.Size = new Size(1260, 700);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -1511,108 +1488,7 @@ namespace vcs_ReadWrite_CSV1
         {
 
         }
-
-        private void button30_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button31_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button32_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button33_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button34_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button35_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button36_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button37_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button38_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button39_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button40_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button41_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button42_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button43_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button44_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button45_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button46_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button47_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button48_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button49_Click(object sender, EventArgs e)
-        {
-
-        }
     }
-
 
     /// <summary>
     ///  <DL>
@@ -2415,15 +2291,10 @@ namespace vcs_ReadWrite_CSV1
         private string ConvertToSaveCell(string cell)
         {
             cell = cell.Replace("\"", "\"\"");
-
             return "\"" + cell + "\"";
         }
     }
 }
-
-
-
-
 
 //6060
 //------------------------------------------------------------  # 60個
