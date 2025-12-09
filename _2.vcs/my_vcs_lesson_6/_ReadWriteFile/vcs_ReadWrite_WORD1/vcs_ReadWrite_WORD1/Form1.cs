@@ -13,6 +13,7 @@ using System.IO;
 // "Microsoft Word 12.0 Object Library" (or whatever version you have installed on your system). 
 // Add a reference to Microsoft Word 14.0 Object Library.
 
+using Microsoft.Office.Interop.Word;
 using Word = Microsoft.Office.Interop.Word;
 using Core = Microsoft.Office.Core;
 
@@ -21,6 +22,11 @@ using Core = Microsoft.Office.Core;
 // Open the Add References dialog. On the COM tab, select
 // "Microsoft Word 12.0 Object Library" (or whatever version you
 // have installed on your system). 
+
+//using System.Threading;
+
+//using Microsoft.Office.Interop.Word;
+
 
 namespace vcs_ReadWrite_WORD1
 {
@@ -64,43 +70,43 @@ namespace vcs_ReadWrite_WORD1
             dx = 200 + 5;
             dy = 60 + 5;
 
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button0.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 9);
 
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button10.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 9);
 
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button20.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 9);
 
-            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            groupBox1.Location = new System.Drawing.Point(x_st + dx * 3, y_st + dy * 0);
             richTextBox1.Size = new Size(600, 440);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0+200);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            richTextBox1.Location = new System.Drawing.Point(x_st + dx * 3, y_st + dy * 0 + 200);
+            bt_clear.Location = new System.Drawing.Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1260, 700);
         }
@@ -130,7 +136,7 @@ namespace vcs_ReadWrite_WORD1
         {
             //建立一Word檔案
 
-            string pic_filename = Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..")) + "\\test.png";
+            string pic_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\test.png";
 
             // Get the Word application object.
             Word._Application word_app = new Word.ApplicationClass();
@@ -196,7 +202,7 @@ namespace vcs_ReadWrite_WORD1
             shape.Top = (float)Word.WdShapePosition.wdShapeTop;
 
             // Save the document.
-            object filename = Application.StartupPath + "\\word_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".doc";
+            object filename = "tmp_word_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".doc";
 
             word_doc.SaveAs(ref filename, ref missing, ref missing, ref missing,
                 ref missing, ref missing, ref missing, ref missing, ref missing,
@@ -292,7 +298,7 @@ namespace vcs_ReadWrite_WORD1
             word_table.Range.ParagraphFormat.SpaceAfter = 0f;
 
             // Save the document.
-            string filename = Application.StartupPath + "\\word_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+            string filename = "tmp_word_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
 
             object filename_obj = filename;
             word_doc.SaveAs(ref filename_obj, ref missing, ref missing, ref missing,
@@ -407,7 +413,119 @@ namespace vcs_ReadWrite_WORD1
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //生成Word文檔
 
+            CreateDocument();
+        }
+
+        //Create document method  
+        private void CreateDocument()
+        {
+            //Create an instance for word app  
+            Microsoft.Office.Interop.Word.Application winword = new Microsoft.Office.Interop.Word.Application();
+
+            //Set animation status for word application  
+            //winword.ShowAnimation = false;
+
+            //Set status for word application is to be visible or not.  
+            winword.Visible = false;
+
+            //Create a missing variable for missing value  
+            object missing = System.Reflection.Missing.Value;
+
+            //Create a new document  
+            Microsoft.Office.Interop.Word.Document document = winword.Documents.Add(ref missing, ref missing, ref missing, ref missing);
+
+            //頁邊距
+            document.PageSetup.LeftMargin = 40; //1.41CM
+            document.PageSetup.RightMargin = 40;
+            document.PageSetup.TopMargin = 40;
+            document.PageSetup.BottomMargin = 40;
+
+            //頁眉 //Add header into the document
+            foreach (Microsoft.Office.Interop.Word.Section section in document.Sections)
+            {
+                //Get the header range and add the header details.
+                Microsoft.Office.Interop.Word.Range headerRange = section.Headers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                headerRange.Fields.Add(headerRange, Microsoft.Office.Interop.Word.WdFieldType.wdFieldPage);
+                headerRange.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                headerRange.Font.ColorIndex = Microsoft.Office.Interop.Word.WdColorIndex.wdBlue;
+                headerRange.Font.Size = 10;
+                headerRange.Text = "Header text goes here";
+            }
+
+            //頁腳 Add the footers into the document
+            foreach (Microsoft.Office.Interop.Word.Section wordSection in document.Sections)
+            {
+                //Get the footer range and add the footer details.  
+                Microsoft.Office.Interop.Word.Range footerRange = wordSection.Footers[Microsoft.Office.Interop.Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                footerRange.Font.ColorIndex = Microsoft.Office.Interop.Word.WdColorIndex.wdDarkRed;
+                footerRange.Font.Size = 10;
+                footerRange.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                footerRange.Text = "Footer text goes here";
+            }
+
+            //添加內容 adding text to document
+            document.Content.SetRange(0, 0);
+            document.Content.Text = "檢測報告 " + Environment.NewLine;
+
+            //添加段落 Add paragraph with Heading 1 style
+            Microsoft.Office.Interop.Word.Paragraph para1 = document.Content.Paragraphs.Add(ref missing);
+            para1.Range.Text = "Para 1 text";
+            para1.Range.InsertParagraphAfter();
+
+            //Add paragraph with Heading 2 style  
+            Microsoft.Office.Interop.Word.Paragraph para2 = document.Content.Paragraphs.Add(ref missing);
+            para2.Range.Text = "Para 2 text";
+            para2.Range.InsertParagraphAfter();
+
+            //表格 Create a 5X5 table and insert some dummy record
+            Table firstTable = document.Tables.Add(para1.Range, 5, 5, ref missing, ref missing);
+
+            firstTable.Borders.Enable = 1;
+            foreach (Row row in firstTable.Rows)
+            {
+                foreach (Cell cell in row.Cells)
+                {
+                    //表頭 Header row
+                    if (cell.RowIndex == 1)
+                    {
+                        cell.Range.Text = "Column " + cell.ColumnIndex.ToString();
+                        cell.Range.Font.Bold = 1;
+                        //other format properties goes here  
+                        cell.Range.Font.Name = "verdana";
+                        cell.Range.Font.Size = 10;
+                        //cell.Range.Font.ColorIndex = WdColorIndex.wdGray25;                              
+                        cell.Shading.BackgroundPatternColor = WdColor.wdColorGray25;
+                        //Center alignment for the Header cells  
+                        cell.VerticalAlignment = WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                        cell.Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
+                    }
+                    //行 Data row
+                    else
+                    {
+                        cell.Range.Text = (cell.RowIndex - 2 + cell.ColumnIndex).ToString();
+                    }
+                }
+
+                try
+                {
+                    //保存
+                    string filename = System.Windows.Forms.Application.StartupPath + "\\docx_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".docx";
+
+                    document.SaveAs(filename);
+                    document.Close(ref missing, ref missing, ref missing);
+                    document = null;
+
+                    winword.Quit(ref missing, ref missing, ref missing);
+                    winword = null;
+                    richTextBox1.Text += "已存檔 : " + filename + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -480,7 +598,8 @@ namespace vcs_ReadWrite_WORD1
             para.Range.Font.Name = old_font;
 
             // Save the document.
-            object filename = Application.StartupPath + "\\word_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".doc";
+            //object filename = Application.StartupPath + "\\word_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".doc";
+            object filename = "tmp_word_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".doc";
 
             word_doc.SaveAs(ref filename, ref missing, ref missing, ref missing,
                 ref missing, ref missing, ref missing, ref missing, ref missing,
