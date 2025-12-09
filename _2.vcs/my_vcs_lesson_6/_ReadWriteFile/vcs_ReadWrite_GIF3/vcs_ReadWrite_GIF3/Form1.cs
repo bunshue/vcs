@@ -59,6 +59,11 @@ namespace vcs_ReadWrite_GIF3
         {
             ImageAnimator.Animate(bitmap, new EventHandler(this.OnFrameChanged));//播放
         }
+
+        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
 
