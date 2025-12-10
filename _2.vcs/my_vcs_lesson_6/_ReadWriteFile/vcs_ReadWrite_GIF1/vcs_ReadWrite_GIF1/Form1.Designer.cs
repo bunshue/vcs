@@ -50,14 +50,18 @@
             this.bt_stop = new System.Windows.Forms.Button();
             this.bt_reset = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.bt_stop3 = new System.Windows.Forms.Button();
+            this.bt_start3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(647, 39);
+            this.bt_clear.Location = new System.Drawing.Point(289, 162);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(73, 40);
             this.bt_clear.TabIndex = 205;
@@ -68,7 +72,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(630, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(273, 118);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 204;
@@ -229,7 +233,7 @@
             // bt_pause
             // 
             this.bt_pause.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_pause.Location = new System.Drawing.Point(630, 235);
+            this.bt_pause.Location = new System.Drawing.Point(389, 118);
             this.bt_pause.Name = "bt_pause";
             this.bt_pause.Size = new System.Drawing.Size(80, 40);
             this.bt_pause.TabIndex = 206;
@@ -240,7 +244,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(630, 118);
+            this.pictureBox1.Location = new System.Drawing.Point(273, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -251,7 +255,7 @@
             // bt_stop
             // 
             this.bt_stop.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_stop.Location = new System.Drawing.Point(630, 281);
+            this.bt_stop.Location = new System.Drawing.Point(389, 164);
             this.bt_stop.Name = "bt_stop";
             this.bt_stop.Size = new System.Drawing.Size(80, 40);
             this.bt_stop.TabIndex = 208;
@@ -262,7 +266,7 @@
             // bt_reset
             // 
             this.bt_reset.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_reset.Location = new System.Drawing.Point(630, 327);
+            this.bt_reset.Location = new System.Drawing.Point(389, 210);
             this.bt_reset.Name = "bt_reset";
             this.bt_reset.Size = new System.Drawing.Size(80, 40);
             this.bt_reset.TabIndex = 209;
@@ -273,7 +277,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.Location = new System.Drawing.Point(630, 376);
+            this.pictureBox2.Location = new System.Drawing.Point(389, 12);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(100, 100);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -281,15 +285,51 @@
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox2_Paint);
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox3.Location = new System.Drawing.Point(495, 12);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 211;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox3_Paint);
+            // 
+            // bt_stop3
+            // 
+            this.bt_stop3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_stop3.Location = new System.Drawing.Point(495, 118);
+            this.bt_stop3.Name = "bt_stop3";
+            this.bt_stop3.Size = new System.Drawing.Size(80, 40);
+            this.bt_stop3.TabIndex = 212;
+            this.bt_stop3.Text = "Stop";
+            this.bt_stop3.UseVisualStyleBackColor = true;
+            this.bt_stop3.Click += new System.EventHandler(this.bt_stop3_Click);
+            // 
+            // bt_start3
+            // 
+            this.bt_start3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_start3.Location = new System.Drawing.Point(495, 164);
+            this.bt_start3.Name = "bt_start3";
+            this.bt_start3.Size = new System.Drawing.Size(80, 40);
+            this.bt_start3.TabIndex = 213;
+            this.bt_start3.Text = "Start";
+            this.bt_start3.UseVisualStyleBackColor = true;
+            this.bt_start3.Click += new System.EventHandler(this.bt_start3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 662);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.bt_start3);
+            this.Controls.Add(this.bt_stop3);
+            this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.bt_pause);
             this.Controls.Add(this.bt_reset);
             this.Controls.Add(this.bt_stop);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
@@ -314,6 +354,7 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -342,6 +383,9 @@
         private System.Windows.Forms.Button bt_stop;
         private System.Windows.Forms.Button bt_reset;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Button bt_stop3;
+        private System.Windows.Forms.Button bt_start3;
     }
 }
 

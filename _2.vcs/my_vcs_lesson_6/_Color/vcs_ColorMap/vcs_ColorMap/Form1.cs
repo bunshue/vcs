@@ -17,7 +17,7 @@ namespace vcs_ColorMap
         Graphics g;
         Graphics g2;
         Pen p;
-        int W = 1400;
+        int W = 1460;
         int H = 1060;
         int w = 130;
         int h = 56;
@@ -189,8 +189,8 @@ namespace vcs_ColorMap
             //button
             x_st = 10;
             y_st = 80;
-            dx = 140;
-            dy = 70;
+            dx = 200+5;
+            dy = 60+5;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -226,14 +226,15 @@ namespace vcs_ColorMap
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox1.Size = new Size(W, H);
 
-            richTextBox1.Size = new Size(W / 7, H);
-            richTextBox1.Location = new Point(x_st + dx * 8 + 580, y_st + dy * 0);
+            richTextBox1.Size = new Size(400, 320);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 11+26);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             bt_exit_setup();
+            this.Size = new Size(1800, 900);
         }
 
         private void bt_exit_Click(object sender, EventArgs e)
@@ -283,6 +284,28 @@ namespace vcs_ColorMap
             Font f = new Font("標楷體", 12);
             sb = new SolidBrush(Color.FromArgb(255 - clr.R, 255 - clr.G, 255 - clr.B));
             g.DrawString(text, f, sb, new PointF(x_st + w * i, y_st + h * j + h / 3));
+        }
+
+        void drawBox2(int i, int j, int w, int h, Color clr, string text)
+        {
+            int x_st = 0;
+            int y_st = 0;
+            int ww = w * 4 / 5;
+            int hh = h * 3 / 4;
+
+            g.FillRectangle(Brushes.White, x_st + w * i, y_st + h * j, w - 1, h - 1);
+            g.FillRectangle(Brushes.LightGray, x_st + w * i, y_st + h * j + hh, w - 1, h / 4 - 1);
+
+            SolidBrush sb = new SolidBrush(clr);
+            g.FillRectangle(sb, x_st + w * i, y_st + h * j, ww - 1, hh - 1);
+
+            Font f = new Font("標楷體", 20);
+            sb = new SolidBrush(clr);
+            g.DrawString(text, f, sb, new PointF(x_st + w * i + w - 40, y_st + h * j + h / 8), new StringFormat(StringFormatFlags.DirectionVertical));
+
+            sb = new SolidBrush(Color.Black);
+            string draw_text = clr.R.ToString() + "-" + clr.G.ToString() + "-" + clr.B.ToString();
+            g.DrawString(draw_text, f, sb, new PointF(x_st + w * i + w / 8, y_st + h * j + h - 36));
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -382,12 +405,20 @@ namespace vcs_ColorMap
         private void button4_Click(object sender, EventArgs e)
         {
             //顏色名稱4
+            //獲取系統預定義顏色
+
             Bitmap bitmap1 = new Bitmap(W, H);
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
             g.Clear(Color.Pink);
 
             // 將 KnownColor 列舉的內容項目複雜到 allColors 陣列
             Array colorsArray = Enum.GetValues(typeof(KnownColor));
+            foreach (object colorName in colorsArray)
+            {
+                //打印名稱
+                //richTextBox1.Text += "get color : " + colorName.ToString() + "\n";
+            }
+
             KnownColor[] AllColors4 = new KnownColor[colorsArray.Length];
             Array.Copy(colorsArray, AllColors4, colorsArray.Length);
 
@@ -439,7 +470,30 @@ namespace vcs_ColorMap
 
         private void button6_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image = null;
+            //顏色名稱6中國傳統色
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.Clear(Color.Pink);
+
+            int len = AllColors6.GetUpperBound(0) + 1;
+            richTextBox1.Text += "共有 " + len.ToString() + " 種顏色\n";
+            for (int i = 0; i < len; i++)
+            {
+                string color_name = AllColors6[i, 0];
+                string color_rgb = AllColors6[i, 1];
+                string[] rgb = color_rgb.Split(',');
+                byte rr = byte.Parse(rgb[0]);
+                byte gg = byte.Parse(rgb[1]);
+                byte bb = byte.Parse(rgb[2]);
+
+                Color clr = Color.FromArgb(rr, gg, bb);
+
+                w = 200;
+                h = 180;
+                drawBox2(i % 6, i / 6, w, h, clr, color_name);
+            }
+            pictureBox1.Image = bitmap1;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -472,14 +526,7 @@ namespace vcs_ColorMap
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //顏色名稱9
-            //獲取系統預定義顏色
-            Array colors = System.Enum.GetValues(typeof(KnownColor));
-            foreach (object colorName in colors)
-            {
-                richTextBox1.Text += "get color : " + colorName.ToString() + "\n";
-            }
-            pictureBox1.Image = null;
+
         }
 
         public void GetHueExample(Graphics g, Color color, int dx)
@@ -1580,13 +1627,13 @@ namespace vcs_ColorMap
             {"卡其色Khaki","153,107,31"},
             {"橄欖色Olive","128, 128, 0"},
             {"椰褐Coconut Brown","71,31,0"},
-            {"鵝黃?light yellow","255,241,67"},
+            {"鵝黃light yellow","255,241,67"},
             {"鴨黃","250,255,114"},
             {"香檳黃Champagne Yellow","255,255,153"},
             {"櫻草色primrose yellow","234,255,86"},
             {"芥末黃Mustard","204, 204, 77"},
             {"亮檸檬綠Light Lime","204, 255, 0"},
-            {"黃綠 Yellow Green","154, 205, 50"},
+            {"黃綠Yellow Green","154, 205, 50"},
             {"嫩綠pomona green verdancy","189,221,34"},
             {"草綠 Grass Green","153, 230, 77"},
             {"碧綠(寶綠) Emerald","80,200,120"},
@@ -1600,7 +1647,7 @@ namespace vcs_ColorMap
             {"水色Aqua","175, 223, 228"},
             {"淺藍色baby blue","137,207,240"},
             {"藍綠色Aquamarin","127, 255, 212"},
-            {"水藍 Aqua Blue","102, 255, 230"},
+            {"水藍Aqua Blue","102, 255, 230"},
             {"土耳其藍Turquoise Blue","51, 230, 204"},
             {"綠松色Turquoise","48, 213, 200"},
             {"鴨綠色Teal","0, 128, 128"},
@@ -1614,13 +1661,13 @@ namespace vcs_ColorMap
             {"午夜藍Midnight Blue","25, 25, 112"},
             {"藏青(海軍藍)Navy","0,0,128"},
             {"淡紫丁香色Pail Lilac","230, 207, 230"},
-            {"鐵線蓮紫 Clematis","204, 163, 204"},
+            {"鐵線蓮紫Clematis","204, 163, 204"},
             {"亮紫Light Violet","238, 130, 238"},
             {"淡紫丁香色Pail Lilac","230, 207, 230"},
             {"紫水晶色Amethyst","102, 51, 204"},
             {"暗蘭紫 Dark Orchid","153, 50, 204"},
             {"暗紫 Dark Violet","148, 0, 211"},
-            {"三色堇紫 Pansy","116, 0, 161"},
+            {"三色堇紫Pansy","116, 0, 161"},
             {"靛色Indigo","75,0,128"},
             {"金色","234,205,118"},
             {"假金","168,138,77"},
@@ -1796,6 +1843,31 @@ namespace vcs_ColorMap
             {"Gray,灰色", "808080", "128,128,128"},
             {"DimGray,暗淡的灰色", "696969", "105,105,105"},
             {"Black,純黑", "000000", "0,0,0"},
+        };
+
+        string[,] AllColors6 = new string[,]
+        {
+            {"曙紅","168,30,50"},
+            {"朱砂","233,72,41"},
+            {"十樣錦","244,171,172"},
+            {"赤金","234,185,70"},
+            {"琥珀色","195,102,37"},
+            {"琉璃黃","240,200,0"},
+            {"柳色","168,205,52"},
+            {"翡翠色","98,190,157"},
+            {"青白","190,224,208"},
+            {"景泰藍","0,78,162"},
+            {"石青","30,127,160"},
+            {"天青","195,224,231"},
+            {"紫砂","103,46,29"},
+            {"絳紫色","135,65,84"},
+            {"藕荷色","224,196,206"},
+            {"茶色","173,89,66"},
+            {"駝色","165,130,98"},
+            {"香色","213,178,16"},
+            {"漆黑","20,23,34"},
+            {"鴉青","67,76,80"},
+            {"鉛白","240,240,244"},
         };
     }
 }

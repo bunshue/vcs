@@ -16,16 +16,19 @@ using System.IO;
 using System.Drawing.Imaging;
 
 /*
+播放gif
 最近在做一個圖片查看器，由於使用一般的PctureBox，在性能和縮放控制上都無法滿足預期的要求，因此所有組件的呈現均是通過重寫控件的OnPaint事件來繪制。在查看gif圖片時發現Graphics.DrawImage只呈現第一幀，無法滿足預期要求，因此經過摸索尋找到了解決自繪gif的較好辦法。
 這裡介紹一個.net自身攜帶的類ImageAnimator，這個類類似於控制動畫的時間軸，使用ImageAnimator.CanAnimate可以判斷一個圖片是否為動畫，調用ImageAnimator.Animate可以開始播放動畫，即每經過一幀的時間觸發一次OnFrameChanged委托，我們只要在該委托中將Image的活動幀選至下一幀再迫使界面重繪就可以實現動畫效果了。
 為了方便以後的使用，我將這些代碼整合到了一起，形成一個AnimateImage類，該類提供了CanAnimate、FrameCount、CurrentFrame等屬性，以及Play()、Stop()、Reset()等動畫常用的方法，
 */
 
+//用ImageAnimator播放gif檔
+
 namespace vcs_ReadWrite_GIF1
 {
     public partial class Form1 : Form
     {
-        AnimateImage image;
+        AnimateImage image2;
 
         //檢查是否可刪除檔案:
         //string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_gif\dog.gif";
@@ -34,6 +37,24 @@ namespace vcs_ReadWrite_GIF1
         string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_小綠人\green_man3.gif";
 
         Bitmap bitmap1;
+
+        Bitmap bitmap3;
+        bool current3 = false;
+
+        public void AnimateImage3()
+        {
+            if (current3 == false)
+            {
+                ImageAnimator.Animate(bitmap3, new EventHandler(this.OnFrameChanged3));
+                current3 = true;
+            }
+        }
+
+        private void OnFrameChanged3(object o, EventArgs e)
+        {
+            //this.Invalidate();
+            this.pictureBox3.Invalidate();
+        }
 
         public Form1()
         {
@@ -45,32 +66,29 @@ namespace vcs_ReadWrite_GIF1
             show_item_location();
 
             bitmap1 = new Bitmap(filename1);
+            bitmap3 = new Bitmap(filename1);
 
             if (ImageAnimator.CanAnimate(bitmap1)) // 是否 是動畫影像
             {
                 ImageAnimator.Animate(bitmap1, new EventHandler(this.OnFrameChanged1));// 播放動畫
             }
 
-            //3030
+            //------------------------------------------------------------  # 60個
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_小綠人\green_man3.gif";
-            image = new AnimateImage(Image.FromFile(filename));
-            image.OnFrameChanged += new EventHandler<EventArgs>(image_OnFrameChanged);
+            image2 = new AnimateImage(Image.FromFile(filename));
+            image2.OnFrameChanged += new EventHandler<EventArgs>(image_OnFrameChanged2);
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
-            image.Play();
+            image2.Play();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            lock (image.Image)
-            {
-                e.Graphics.DrawImage(image.Image, new Point(400, 0));
-            }
         }
 
-        void image_OnFrameChanged(object sender, EventArgs e)
+        void image_OnFrameChanged2(object sender, EventArgs e)
         {
-            Invalidate();
+            this.pictureBox2.Invalidate();//要求pictureBox2重畫
         }
 
         // 當動畫框架變更時要呼叫的方法
@@ -91,8 +109,18 @@ namespace vcs_ReadWrite_GIF1
             //bt_pause_Click(sender, e);
         }
 
+        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        {
+            lock (image2.Image)
+            {
+                e.Graphics.DrawImage(image2.Image, new Point(0, 0));
+            }
+        }
+
         void show_item_location()
         {
+            int pbx_w = 320;
+            int pbx_h = 320;
             int x_st;
             int y_st;
             int dx;
@@ -122,21 +150,29 @@ namespace vcs_ReadWrite_GIF1
             button13.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button14.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            bt_stop.Location = new Point(x_st + dx * 0 + 220+400, y_st + dy * 0);
-            bt_reset.Location = new Point(x_st + dx * 0 + 220+400, y_st + dy * 0 + 50);
+            pictureBox1.Size = new Size(pbx_w, pbx_h);
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_pause.Location = new Point(x_st + dx * 0 + pbx_w - 80, y_st + dy * 0);
 
-            pictureBox2.Size = new Size(320, 320);
-            pictureBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox2.Size = new Size(pbx_w, pbx_h);
+            pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_stop.Location = new Point(x_st + dx * 2 + pbx_w - 80, y_st + dy * 0);
+            bt_reset.Location = new Point(x_st + dx * 2 + pbx_w - 80, y_st + dy * 0 + 50);
 
-            pictureBox1.Size = new Size(320, 320);
-            pictureBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            bt_pause.Location = new Point(x_st + dx * 4 + 320 - 80, y_st + dy * 0);
+            pictureBox3.Size = new Size(pbx_w, pbx_h);
+            pictureBox3.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            bt_stop3.Location = new Point(x_st + dx * 4 + pbx_w - 80, y_st + dy * 0);
+            bt_start3.Location = new Point(x_st + dx * 4 + pbx_w - 80, y_st + dy * 0 + 50);
 
             richTextBox1.Size = new Size(600, 300);
-            richTextBox1.Location = new Point(x_st + dx * 3+30, y_st + dy * 5);
+            richTextBox1.Location = new Point(x_st + dx * 3 + 30, y_st + dy * 5);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1280, 700);
+            pictureBox1.BackColor = Color.LightPink;
+            pictureBox2.BackColor = Color.LightGreen;
+            pictureBox3.BackColor = Color.LightBlue;
+
+            this.Size = new Size(1300, 700);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -308,27 +344,42 @@ namespace vcs_ReadWrite_GIF1
         {
             if (bt_stop.Text.Equals("Stop"))
             {
-                image.Stop();
+                image2.Stop();
                 bt_stop.Text = "Play";
             }
             else
             {
-                image.Play();
+                image2.Play();
                 bt_stop.Text = "Stop";
             }
-            Invalidate();
+            this.pictureBox1.Invalidate();
         }
 
         private void bt_reset_Click(object sender, EventArgs e)
         {
-            image.Reset();
+            image2.Reset();
             bt_stop.Text = "Play";
-            Invalidate();
+            this.pictureBox1.Invalidate();
         }
 
-        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        private void pictureBox3_Paint(object sender, PaintEventArgs e)
         {
+            AnimateImage3();
+            ImageAnimator.UpdateFrames();
 
+            e.Graphics.DrawImage(this.bitmap3, new Point(0, 0));
+
+
+        }
+
+        private void bt_stop3_Click(object sender, EventArgs e)
+        {
+            ImageAnimator.StopAnimate(bitmap3, new EventHandler(this.OnFrameChanged3));//停止
+        }
+
+        private void bt_start3_Click(object sender, EventArgs e)
+        {
+            ImageAnimator.Animate(bitmap3, new EventHandler(this.OnFrameChanged3));//播放
         }
 
 
@@ -459,3 +510,23 @@ namespace vcs_ReadWrite_GIF1
         }
     }
 }
+
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+

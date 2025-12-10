@@ -742,7 +742,7 @@ namespace vcs_Draw6_String
                 g.Dispose();
                 bitmap1.Dispose();
 
-                bitmap1 = new Biap(nWidth, nHeight, PixelForma.Format32bppPArgb);
+                bitmap1 = new Bitmap(nWidth, nHeight, PixelFormat.Format32bppPArgb);
                 g = Graphics.FromImage(bitmap1);
                 g.FillRectangle(new SolidBrush(Color.Pink),
                 new Rectangle(0, 0, nWidth, nHeight));
@@ -916,8 +916,6 @@ namespace vcs_Draw6_String
 
         private void button26_Click(object sender, EventArgs e)
         {
-            //依字體大小調整圖片大小
-
             //依字體大小調整圖片大小
             string show_word = "群曜醫電";
             Bitmap newBitmap = null;
@@ -1488,10 +1486,16 @@ namespace vcs_Draw6_String
 
             g.Clear(Color.White);
             g.DrawString(str, new Font("CourIEr New", 10), new SolidBrush(Color.Red), 20, 5);
-            //Graphics 類還有很多繪圖方法可以繪制 直線、曲線、圓等等 
-            image.Save(thefullname, System.Drawing.Imaging.ImageFormat.Gif);
+            //Graphics 類還有很多繪圖方法可以繪制 直線、曲線、圓等等
+            try
+            {
+                image.Save(thefullname, System.Drawing.Imaging.ImageFormat.Gif);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
             return thefullname;
         }
     }
-
 }

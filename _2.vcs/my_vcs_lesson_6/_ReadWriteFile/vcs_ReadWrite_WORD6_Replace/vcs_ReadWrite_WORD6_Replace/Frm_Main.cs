@@ -35,8 +35,8 @@ namespace vcs_ReadWrite_WORD6_Replace
             Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
             //Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
 
-            filename1 = Path.GetFullPath(Path.Combine(System.Windows.Forms.Application.StartupPath, @"..\..")) + @"\Step.doc";
-            filename2 = System.Windows.Forms.Application.StartupPath + "\\test_word_file.doc";
+            filename1 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\Step.doc";
+            filename2 = "tmp_test_word_file.doc";
 
             if (File.Exists(filename1) == false)    //確認原始檔案是否存在
             {
