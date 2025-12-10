@@ -30,16 +30,47 @@ namespace vcs_ReadWrite_GIF1
     {
         AnimateImage image2;
 
-        //檢查是否可刪除檔案:
-        //string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_gif\dog.gif";
-        //string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_gif\cat.gif";
-
-        string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_小綠人\green_man3.gif";
+        string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_gif\小綠人\green_man3.gif";
 
         Bitmap bitmap1;
 
         Bitmap bitmap3;
         bool current3 = false;
+
+        byte[] EmptyFont = {
+0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+};
+        byte[] Walking0 = {
+0x0c,0x00,0x1e,0x00,0x0c,0x00,0x06,0x00,0x07,0xc0,0x07,0x20,0x0b,0x10,0x11,0x80,
+0x01,0x80,0x01,0x40,0x02,0x20,0x04,0x10,0x1c,0x08,0x00,0x08,0x00,0x00,0x00,0x00,
+};
+        byte[] Walking1 = {
+0x0c,0x00,0x1e,0x00,0x0c,0x00,0x06,0x00,0x07,0xc0,0x07,0x20,0x0b,0x10,0x11,0x80,
+0x01,0x80,0x01,0x40,0x01,0x30,0x02,0x08,0x04,0x08,0x38,0x08,0x00,0x10,0x00,0x00,
+};
+        byte[] Walking2 = {
+0x0c,0x00,0x1e,0x00,0x0c,0x00,0x06,0x00,0x03,0x80,0x03,0x40,0x07,0x20,0x09,0xa0,
+0x01,0x80,0x01,0x40,0x01,0x40,0x02,0x20,0x02,0x10,0x0e,0x30,0x00,0x00,0x00,0x00,
+};
+        byte[] Walking3 = {
+0x06,0x00,0x0f,0x00,0x06,0x00,0x03,0x00,0x03,0x80,0x03,0x40,0x01,0xa0,0x01,0xa0,
+0x02,0xc0,0x01,0xc0,0x02,0x40,0x04,0x30,0x03,0x08,0x01,0x08,0x07,0x00,0x00,0x00,
+};
+        byte[] Walking4 = {
+0x06,0x00,0x0f,0x00,0x06,0x00,0x03,0x00,0x03,0x80,0x03,0x40,0x01,0xa0,0x01,0xa0,
+0x02,0xc0,0x01,0xc0,0x02,0x40,0x02,0x20,0x01,0x90,0x00,0xb0,0x03,0x80,0x00,0x00,
+};
+        byte[] Walking5 = {
+0x06,0x00,0x0f,0x00,0x06,0x00,0x02,0x00,0x03,0x00,0x03,0x80,0x01,0xc0,0x01,0xc0,
+0x00,0xc0,0x00,0xc0,0x01,0x60,0x00,0xa0,0x00,0xe0,0x00,0x20,0x00,0xe0,0x00,0x00,
+};
+        byte[] Walking6 = {
+0x06,0x00,0x0f,0x00,0x06,0x00,0x03,0x00,0x03,0x80,0x01,0x40,0x03,0xa0,0x03,0xa0,
+0x00,0xc0,0x00,0xc0,0x01,0x80,0x02,0x40,0x01,0x30,0x03,0x08,0x00,0x38,0x00,0x00,
+};
+
+
 
         public void AnimateImage3()
         {
@@ -75,8 +106,7 @@ namespace vcs_ReadWrite_GIF1
 
             //------------------------------------------------------------  # 60個
 
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_小綠人\green_man3.gif";
-            image2 = new AnimateImage(Image.FromFile(filename));
+            image2 = new AnimateImage(Image.FromFile(filename1));
             image2.OnFrameChanged += new EventHandler<EventArgs>(image_OnFrameChanged2);
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
             image2.Play();
@@ -125,6 +155,7 @@ namespace vcs_ReadWrite_GIF1
             int y_st;
             int dx;
             int dy;
+            int dx_pbx = pbx_w + 10;
 
             //button
             x_st = 10;
@@ -144,28 +175,25 @@ namespace vcs_ReadWrite_GIF1
             button8.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            button10.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button11.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button12.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button13.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button14.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-
             pictureBox1.Size = new Size(pbx_w, pbx_h);
-            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            bt_pause.Location = new Point(x_st + dx * 0 + pbx_w - 80, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx_pbx * 0, y_st + dy * 0);
+            bt_pause.Location = new Point(x_st + dx_pbx * 0 + pbx_w - 80, y_st + dy * 0);
 
             pictureBox2.Size = new Size(pbx_w, pbx_h);
-            pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            bt_stop.Location = new Point(x_st + dx * 2 + pbx_w - 80, y_st + dy * 0);
-            bt_reset.Location = new Point(x_st + dx * 2 + pbx_w - 80, y_st + dy * 0 + 50);
+            pictureBox2.Location = new Point(x_st + dx_pbx * 1, y_st + dy * 0);
+            bt_stop.Location = new Point(x_st + dx_pbx * 1 + pbx_w - 80, y_st + dy * 0);
+            bt_reset.Location = new Point(x_st + dx_pbx * 1 + pbx_w - 80, y_st + dy * 0 + 50);
 
             pictureBox3.Size = new Size(pbx_w, pbx_h);
-            pictureBox3.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            bt_stop3.Location = new Point(x_st + dx * 4 + pbx_w - 80, y_st + dy * 0);
-            bt_start3.Location = new Point(x_st + dx * 4 + pbx_w - 80, y_st + dy * 0 + 50);
+            pictureBox3.Location = new Point(x_st + dx_pbx * 2, y_st + dy * 0);
+            bt_stop3.Location = new Point(x_st + dx_pbx * 2 + pbx_w - 80, y_st + dy * 0);
+            bt_start3.Location = new Point(x_st + dx_pbx * 2 + pbx_w - 80, y_st + dy * 0 + 50);
 
-            richTextBox1.Size = new Size(600, 300);
-            richTextBox1.Location = new Point(x_st + dx * 3 + 30, y_st + dy * 5);
+            pictureBox4.Size = new Size(pbx_w, pbx_h);
+            pictureBox4.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+
+            richTextBox1.Size = new Size(530, 320);
+            richTextBox1.Location = new Point(x_st + dx * 4 - 80, y_st + dy * 5);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             pictureBox1.BackColor = Color.LightPink;
@@ -197,8 +225,8 @@ namespace vcs_ReadWrite_GIF1
         {
             //讀PNG 做成GIF
             richTextBox1.Text += "讀PNG 做成GIF\n";
-            string dirname = @"D:\_git\vcs\_1.data\______test_files1\__pic\_gif\png2gif";
-            string filename = Application.StartupPath + "\\gif_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".gif";
+            string dirname = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\png2gif";
+            string filename = "tmp_gif_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".gif";
 
             PngsToGif(dirname, filename, 500, true);
 
@@ -272,7 +300,39 @@ namespace vcs_ReadWrite_GIF1
 
         private void button5_Click(object sender, EventArgs e)
         {
+            int W = 320;
+            int H = 320;
+            int w = 20;
+            int h = 20;
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.Clear(Color.LightGray);
 
+            //測試小綠人
+            byte[] man = Walking0;
+            int len = man.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            int yy;
+            for (yy = 0; yy < len / 2; yy++)
+            {
+                //richTextBox1.Text += "第 " + yy.ToString() + " 行\t" + man[yy * 2].ToString("X2") + " " + man[yy * 2 + 1].ToString("X2") + "\n";
+                int aa = man[yy * 2] * 256 + man[yy * 2 + 1];
+                for (int xx = 0; xx < 16; xx++)
+                {
+                    if (((aa >> (15 - xx)) & 0x01) == 0x01)
+                    {
+                        g.FillEllipse(new SolidBrush(Color.Lime), w * xx, h * yy, w, h);
+                        //g.FillRectangle(new SolidBrush(Color.Red), w * xx, h * yy, w, h);
+                    }
+                    else
+                    {
+                        g.FillEllipse(new SolidBrush(Color.White), w * xx, h * yy, w, h);
+                        //g.FillRectangle(new SolidBrush(Color.White), w * xx, h * yy, w, h);
+                    }
+                }
+            }
+            pictureBox4.Image = bitmap1;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -291,31 +351,6 @@ namespace vcs_ReadWrite_GIF1
         }
 
         private void button9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button14_Click(object sender, EventArgs e)
         {
 
         }
@@ -510,8 +545,6 @@ namespace vcs_ReadWrite_GIF1
         }
     }
 }
-
-
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

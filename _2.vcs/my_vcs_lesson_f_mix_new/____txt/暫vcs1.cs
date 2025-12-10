@@ -3,8 +3,12 @@
 object filename = Application.StartupPath + "\\word_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".doc";
             //string pic_filename = Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..")) + "\\test.png";
 
+filename1 = Path.GetFullPath(Path.Combine(System.Windows.Forms.Application.StartupPath, @"..\..")) + @"\Step.doc";
 
 
+System.Windows.Forms.Application.StartupPath + "\\test_word_file.doc";
+
+string filename = Application.StartupPath + "\\gif_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".gif";
 
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
