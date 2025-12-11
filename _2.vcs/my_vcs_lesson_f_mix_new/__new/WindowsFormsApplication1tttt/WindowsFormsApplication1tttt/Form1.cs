@@ -87,7 +87,7 @@ namespace WindowsFormsApplication1tttt
         /// <param name="e"></param>
         private void button4_Click(object sender, System.EventArgs e)
         {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1.xml";
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\vcs_ReadWrite_XML1.xml";
             XmlDocument doc = new XmlDocument();
             doc.Load(filename);
             richTextBox1.Text += "加載成功\n";

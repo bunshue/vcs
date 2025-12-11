@@ -3859,8 +3859,8 @@ namespace vcs_GMap
 
             gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
 
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\kml_mountain.kml";
-            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\kml_shangxi.kml"; //陝西省
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\kml_mountain.kml";
+            //string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\kml_shangxi.kml"; //陝西省
 
             GMapRoute playRoute = GetRouteFromKml(filename);
 
@@ -3963,7 +3963,7 @@ namespace vcs_GMap
 
             gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
 
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\gps_bicycle.gpx";
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\gps_bicycle.gpx";
 
             try
             {
@@ -4039,7 +4039,7 @@ namespace vcs_GMap
             /*
             gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
 
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\kml_mountain.kml";
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\kml_mountain.kml";
 
             try
             {

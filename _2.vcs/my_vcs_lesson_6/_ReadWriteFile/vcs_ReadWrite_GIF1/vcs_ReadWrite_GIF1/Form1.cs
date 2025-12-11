@@ -152,15 +152,15 @@ namespace vcs_ReadWrite_GIF1
             bt_stop3.Location = new Point(x_st + dx_pbx * 2 + pbx_w - 80, y_st + dy * 0);
             bt_start3.Location = new Point(x_st + dx_pbx * 2 + pbx_w - 80, y_st + dy * 0 + 50);
 
-            richTextBox1.Size = new Size(530, 320);
-            richTextBox1.Location = new Point(x_st + dx * 4 - 80, y_st + dy * 5);
+            richTextBox1.Size = new Size(570, 320);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 5);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             pictureBox1.BackColor = Color.LightPink;
             pictureBox2.BackColor = Color.LightGreen;
             pictureBox3.BackColor = Color.LightBlue;
 
-            this.Size = new Size(1300, 700);
+            this.Size = new Size(1020, 700);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)

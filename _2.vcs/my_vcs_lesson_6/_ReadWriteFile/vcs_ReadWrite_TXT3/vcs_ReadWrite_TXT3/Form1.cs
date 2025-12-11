@@ -21,7 +21,6 @@ namespace vcs_ReadWrite_TXT3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            txtResult.Text = File.ReadAllText("../../test.txt");
             DataGridView1.ColumnHeadersVisible = true;
             // 設定欄標題樣式。
             DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
@@ -35,6 +34,7 @@ namespace vcs_ReadWrite_TXT3
             DataGridView1.Columns[1].Name = "類別名稱";
             DataGridView1.Columns[2].Name = "說明";
             DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
             DataGridView2.ColumnHeadersVisible = true;
             DataGridView2.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
             // 設定 DataGridView 控件的字段數目。
@@ -45,6 +45,7 @@ namespace vcs_ReadWrite_TXT3
             DataGridView2.Columns[2].Name = "單位數量";
             DataGridView2.Columns[3].Name = "單價";
             DataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
             DataGridView3.ColumnHeadersVisible = true;
             DataGridView3.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
             // 設定 DataGridView 控件的字段數目。
@@ -54,6 +55,9 @@ namespace vcs_ReadWrite_TXT3
             DataGridView3.Columns[1].Name = "貨運公司名稱";
             DataGridView3.Columns[2].Name = "電話";
             DataGridView3.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            string text = File.ReadAllText("../../test.txt");
+            richTextBox1.Text += "文字檔內容 :\n" + text + "\n";
         }
 
         private void btnParseTextFiles_Click(object sender, EventArgs e)

@@ -2334,7 +2334,7 @@ namespace MapDownloader
         private void button3_Click(object sender, EventArgs e)
         {
             //讀取KML檔案
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\kml_mountain.kml";
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\kml_mountain.kml";
 
                         this.polygonsOverlay.Clear();
             InitKMLPlaceMarks(KmlUtil.GetPlaceMarksFromKmlFile(filename));

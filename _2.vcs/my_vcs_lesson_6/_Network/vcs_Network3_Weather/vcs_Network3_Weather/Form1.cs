@@ -485,7 +485,7 @@ namespace vcs_Network3_Weather
             clear_data();
             richTextBox1.Text += "解讀XML檔案\tvcs_ReadWrite_XML1 的 標準版XML讀取解析程式, 讀取天氣預測XML檔案\n";
 
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\weather_forecast.xml";
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\weather_forecast.xml";
             ParseXML(filename);
             show_data();
         }
@@ -497,7 +497,7 @@ namespace vcs_Network3_Weather
             clear_data();
             richTextBox1.Text += "解讀XML檔案\tvcsh 的 XML讀取程式, 讀取天氣預測XML檔案\n";
 
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\weather_forecast.xml";
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\weather_forecast.xml";
             ParseXML_weather_forecast(filename);
             show_data();
         }
@@ -508,7 +508,7 @@ namespace vcs_Network3_Weather
             clear_data();
             richTextBox1.Text += "解讀XML檔案\tvcsh 的 XML讀取程式, 讀取即時天氣XML檔案\n";
 
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\weather_current.xml";
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\weather_current.xml";
             ParseXML_weather_current(filename);
             show_data();
         }

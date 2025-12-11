@@ -128,9 +128,9 @@ namespace vcs_ReadWrite_XML1A
         }
 
         //XML操作0
-        string filename0 = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1.xml";
-        string filename0_add = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1_add.xml";
-        string filename0_delete = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1_delete.xml";
+        string filename0 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\vcs_ReadWrite_XML1.xml";
+        string filename0_add = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\vcs_ReadWrite_XML1_add.xml";
+        string filename0_delete = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\vcs_ReadWrite_XML1_delete.xml";
 
         private void button00_Click(object sender, EventArgs e)
         {
@@ -324,7 +324,7 @@ namespace vcs_ReadWrite_XML1A
         //XML操作1
         private void button10_Click(object sender, EventArgs e)
         {
-            string filename1a = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\宅之力R.xml";
+            string filename1a = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\宅之力R.xml";
             if (File.Exists(filename1a))
             {
                 XmlDocument document = new XmlDocument();
@@ -344,7 +344,7 @@ namespace vcs_ReadWrite_XML1A
 
         private void button11_Click(object sender, EventArgs e)
         {
-            string filename1b = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\宅之力W.xml";
+            string filename1b = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\宅之力W.xml";
 
             XmlDocument document = new XmlDocument();
             document.AppendChild(document.CreateXmlDeclaration("1.0", "UTF-8", ""));//將宣告節點加入document中
@@ -375,7 +375,7 @@ namespace vcs_ReadWrite_XML1A
 
         private void button12_Click(object sender, EventArgs e)
         {
-            string filename1c = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\仙人的設計之路2.xml";
+            string filename1c = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\仙人的設計之路2.xml";
             if (File.Exists(filename1c))
             {
                 XmlDocument document = new XmlDocument();
@@ -417,7 +417,7 @@ namespace vcs_ReadWrite_XML1A
 
         //XML操作2
 
-        string xml_filename2 = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML2.xml";
+        string xml_filename2 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\vcs_ReadWrite_XML2.xml";
         private void button20_Click(object sender, EventArgs e)
         {
             XmlDocument xml = new XmlDocument();
@@ -636,7 +636,7 @@ namespace vcs_ReadWrite_XML1A
         {
             //使用LINQ讀取XML
             //使用LINQ讀取XML
-            string sURL = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\weather_current.xml";
+            string sURL = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\weather_current.xml";
 
             UseLINQ(sURL);
 
@@ -646,7 +646,7 @@ namespace vcs_ReadWrite_XML1A
         {
             //使用XML Reader讀取XML
             //使用XML Reader讀取XML
-            string sURL = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\weather_current.xml";
+            string sURL = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\weather_current.xml";
             UseXmlReader(sURL);
         }
 

@@ -75,25 +75,14 @@ namespace vcs_ReadWrite_CSV1
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-
             pictureBox1.Size = new Size(600, 200);
-            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
             richTextBox1.Size = new Size(600, 430);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 210);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 210);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1260, 700);
+            this.Size = new Size(1060, 700);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -1381,33 +1370,14 @@ namespace vcs_ReadWrite_CSV1
 
         private void button16_Click(object sender, EventArgs e)
         {
+            //用Excel開啟.CSV檔
 
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button20_Click(object sender, EventArgs e)
-        {
             /* tmp
             // Open the Add Reference dialog. On the COM tab,
             // add a reference to "Microsoft.Office.Interop.Excel"
             using Excel = Microsoft.Office.Interop.Excel;
             */
 
-            //用Excel開啟.CSV檔
             string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\vcs_ReadWrite_CSV_F0035CH1.CSV";
 
             richTextBox1.Text += "開啟檔案 : " + filename + "\n";
@@ -1435,56 +1405,26 @@ namespace vcs_ReadWrite_CSV1
                 Type.Missing,
                 Type.Missing,
                 Type.Missing);
-
         }
 
-        private void button21_Click(object sender, EventArgs e)
+        private void button17_Click(object sender, EventArgs e)
         {
+            //讀取一CSV檔至DataTable
             /*
             用C#寫的讀寫CSV文件，
             用C#寫的讀取CSV文件的源代碼
             CSV文件的格子中包含逗號，引號，換行等，都能輕松讀取，而且可以把數據轉化成DATATABLE格式
             */
-            //讀取一CSV檔至DataTable
+
             //使用 class CsvStreamReader
         }
 
-        private void button22_Click(object sender, EventArgs e)
+        private void button18_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button23_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button29_Click(object sender, EventArgs e)
+        private void button19_Click(object sender, EventArgs e)
         {
 
         }
@@ -2296,19 +2236,18 @@ namespace vcs_ReadWrite_CSV1
     }
 }
 
+
 //6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
 //------------------------------------------------------------
 
 //3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
 //1515
 //---------------  # 15個
-
-//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-//richTextBox1.Text += "------------------------------\n";  // 30個
-//richTextBox1.Text += "---------------\n";  // 15個
 
 
 /*  可搬出

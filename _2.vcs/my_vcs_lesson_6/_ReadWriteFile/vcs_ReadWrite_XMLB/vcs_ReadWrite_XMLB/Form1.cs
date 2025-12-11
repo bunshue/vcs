@@ -20,7 +20,7 @@ namespace vcs_ReadWrite_XMLB
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_xml\person.xml";
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\person.xml";
 
             // 讀取XML文件並放入DataSet
             ds.ReadXml(filename);

@@ -23,7 +23,7 @@ namespace vcs_ReadWrite_XML8
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"D:\_git\vcs\_2.vcs\______test_files1\__RW\_xml\person.xml";
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\person.xml";
 
             DataSet ds = new DataSet();	//建立ds屬於DataSet物件
             ds.ReadXml(filename);		//讀入person.xml文件檔
@@ -33,7 +33,7 @@ namespace vcs_ReadWrite_XML8
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = @"D:\_git\vcs\_2.vcs\______test_files1\__RW\_xml\person.xml";
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\person.xml";
             DataSet ds = new DataSet();	//建立ds屬於DataSet物件
             ds.ReadXml(filename);		//讀入person.xml文件檔
             //在dataGridView1控制項上顯示person.xml文件檔的所有資料
@@ -43,7 +43,7 @@ namespace vcs_ReadWrite_XML8
         //以學號搜尋學生資料
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = @"D:\_git\vcs\_2.vcs\______test_files1\__RW\_xml\person.xml";
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\person.xml";
             DataSet ds = new DataSet();
             ds.ReadXml(filename);  //將person.xml讀入至ds
             //建立學號為學生DataTable的主鍵
