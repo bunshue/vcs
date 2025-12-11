@@ -21,46 +21,20 @@ namespace vcs_ReadWrite_XML6
         }
 
         static string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\Employee.xml";
-        //static string filename = "Employee.xml";
         static string strID = "";
 
         //窗體加載時加載XML文件
         private void Form1_Load(object sender, EventArgs e)
         {
-            show_item_location();
-
-            if (File.Exists(filename))
-            {
-                richTextBox1.Text += "1111111111111111111\n";
-                groupBox1.Enabled = false;
-                getXmlInfo();
-            }
-            else
-            {
-                richTextBox1.Text += "22222222222222222222\n";
-                groupBox1.Enabled = true;
-            }
-
-        }
-
-        void show_item_location()
-        {
-            //設定執行後的表單起始位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(0, 0);
-
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-            int W = 170;
-            int H = 320;
-
+            richTextBox1.Text += "1111111111111111111\n";
+            getXmlInfo();
         }
 
         //創建XML文件
         private void button1_Click(object sender, EventArgs e)
         {
+            string filename = @"tmp_Employee.xml";
+
             XDocument doc = new XDocument(
                 new XDeclaration("1.0", "utf-8", "yes"),
                 new XElement(textBox1.Text,
@@ -71,7 +45,6 @@ namespace vcs_ReadWrite_XML6
                     )
                 );
             doc.Save(filename);
-            groupBox1.Enabled = false;
             getXmlInfo();
         }
 
@@ -150,7 +123,7 @@ namespace vcs_ReadWrite_XML6
             }
         }
 
-        #region 將XML文件內容綁定到DataGridView控件
+        /// 將XML文件內容綁定到DataGridView控件
         /// <summary>
         /// 將XML文件內容綁定到DataGridView控件
         /// </summary>
@@ -160,16 +133,17 @@ namespace vcs_ReadWrite_XML6
             myds.ReadXml(filename);
             dataGridView1.DataSource = myds.Tables[0];
         }
-        #endregion
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            //讀取
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //建立
 
         }
     }
 }
+

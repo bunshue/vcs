@@ -1,4 +1,4 @@
-﻿namespace vcs_ReadWrite_XML8
+﻿namespace vcs_ReadWrite_XML3
 {
     partial class Form1
     {
@@ -39,17 +39,17 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 257);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 297);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(481, 182);
+            this.richTextBox1.Size = new System.Drawing.Size(481, 271);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(520, 54);
+            this.button2.Location = new System.Drawing.Point(499, 77);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(143, 23);
+            this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 6;
             this.button2.Text = "看老師資料";
             this.button2.UseVisualStyleBackColor = true;
@@ -57,9 +57,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(520, 12);
+            this.button1.Location = new System.Drawing.Point(499, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(143, 23);
+            this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 5;
             this.button1.Text = "看學生資料";
             this.button1.UseVisualStyleBackColor = true;
@@ -71,21 +71,21 @@
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(481, 239);
+            this.dataGridView1.Size = new System.Drawing.Size(481, 279);
             this.dataGridView1.TabIndex = 4;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(520, 126);
+            this.textBox1.Location = new System.Drawing.Point(499, 149);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(143, 22);
+            this.textBox1.Size = new System.Drawing.Size(200, 22);
             this.textBox1.TabIndex = 8;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(520, 165);
+            this.button3.Location = new System.Drawing.Point(499, 195);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(143, 23);
+            this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 9;
             this.button3.Text = "以學號搜尋學生資料";
             this.button3.UseVisualStyleBackColor = true;
@@ -95,7 +95,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 451);
+            this.ClientSize = new System.Drawing.Size(1229, 580);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.richTextBox1);

@@ -24,8 +24,6 @@ using System.Web;   //for HttpUtility, 需改用.Net Framework4, 然後參考/�
 using System.Globalization; //for CultureInfo
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
-using System.Xml;
-using System.Xml.Linq;
 
 using Shell32;  //需/參考/加入參考/COM/Microsoft Shell Controls And Automation 並把 Shell32屬性的內嵌Interop型別改成False
 
@@ -43,6 +41,8 @@ namespace vcs_Mix00
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             //網頁protocol	解決  要求已經中止: 無法建立 SSL/TLS 的安全通道。
             // Allow TLS 1.1 and TLS 1.2 protocols for file download.
             //for Sugar     3840 Romeo也可用
@@ -57,8 +57,6 @@ namespace vcs_Mix00
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
-
-            show_item_location();
         }
 
         void show_item_location()
@@ -71,8 +69,8 @@ namespace vcs_Mix00
             //button
             x_st = 10;
             y_st = 10;
-            dx = 170 + 10;
-            dy = 70 + 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -107,12 +105,19 @@ namespace vcs_Mix00
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            pictureBox1.Size = new Size(820, 520);
+            pictureBox1.Size = new Size(640, 480);
             pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
-            richTextBox1.Location = new Point(x_st + dx * 7 + 120, y_st + dy * 0);
-
+            richTextBox1.Size = new Size(320, 680);
+            richTextBox1.Location = new Point(x_st + dx * 6 + 40, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1700, 750);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -1365,6 +1370,7 @@ namespace vcs_Mix00
         {
 
         }
+
     }
 
     //3Form1之外

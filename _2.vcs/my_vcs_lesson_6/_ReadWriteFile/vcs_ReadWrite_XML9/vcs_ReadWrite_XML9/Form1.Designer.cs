@@ -48,15 +48,15 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(24, 178);
+            this.dataGridView1.Location = new System.Drawing.Point(24, 193);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(477, 169);
+            this.dataGridView1.Size = new System.Drawing.Size(477, 283);
             this.dataGridView1.TabIndex = 25;
             // 
             // btnAllUpdate
             // 
-            this.btnAllUpdate.Location = new System.Drawing.Point(426, 133);
+            this.btnAllUpdate.Location = new System.Drawing.Point(305, 126);
             this.btnAllUpdate.Name = "btnAllUpdate";
             this.btnAllUpdate.Size = new System.Drawing.Size(75, 26);
             this.btnAllUpdate.TabIndex = 24;
@@ -66,7 +66,7 @@
             // 
             // btnDel
             // 
-            this.btnDel.Location = new System.Drawing.Point(426, 96);
+            this.btnDel.Location = new System.Drawing.Point(305, 89);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(75, 26);
             this.btnDel.TabIndex = 23;
@@ -76,7 +76,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(426, 59);
+            this.btnUpdate.Location = new System.Drawing.Point(305, 52);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 26);
             this.btnUpdate.TabIndex = 22;
@@ -86,7 +86,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(426, 22);
+            this.btnAdd.Location = new System.Drawing.Point(305, 15);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 26);
             this.btnAdd.TabIndex = 21;
@@ -160,9 +160,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(24, 353);
+            this.richTextBox1.Location = new System.Drawing.Point(523, 22);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(477, 188);
+            this.richTextBox1.Size = new System.Drawing.Size(439, 561);
             this.richTextBox1.TabIndex = 26;
             this.richTextBox1.Text = "";
             // 
@@ -170,7 +170,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(534, 548);
+            this.ClientSize = new System.Drawing.Size(974, 595);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnAllUpdate);

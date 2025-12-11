@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_ReadWrite_XML8
+namespace vcs_ReadWrite_XML3
 {
     public partial class Form1 : Form
     {

@@ -19,9 +19,6 @@ using System.Web;   //for HttpUtility, 需改用.Net Framework4, 然後參考/�
 using System.Globalization; //for CultureInfo
 using System.Runtime.InteropServices;
 
-using System.Xml;
-using System.Xml.Linq;
-
 using Shell32;  //需/參考/加入參考/COM/Microsoft Shell Controls And Automation 並把 Shell32屬性的內嵌Interop型別改成False
 using Microsoft.Win32;  //for RegistryKey
 
@@ -50,8 +47,8 @@ namespace vcs_Mix01
             //button
             x_st = 10;
             y_st = 10;
-            dx = 170+10;
-            dy = 60+10;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -89,7 +86,7 @@ namespace vcs_Mix01
             richTextBox1.Size = new Size(500, 690);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-            this.Size = new Size(1080, 750);
+            this.Size = new Size(1170, 750);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -977,7 +974,6 @@ namespace vcs_Mix01
             }
         }
 
-
         private void button27_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
@@ -1139,10 +1135,7 @@ namespace vcs_Mix01
             return items;
         }
     }
-
 }
-
-
 
 //6060
 //------------------------------------------------------------  # 60個

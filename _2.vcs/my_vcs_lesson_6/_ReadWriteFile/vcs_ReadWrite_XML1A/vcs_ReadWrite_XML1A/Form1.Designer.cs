@@ -527,6 +527,7 @@
             this.button60.Name = "button60";
             this.button60.Size = new System.Drawing.Size(150, 50);
             this.button60.TabIndex = 4;
+            this.button60.Text = "加載doc";
             this.button60.UseVisualStyleBackColor = true;
             this.button60.Click += new System.EventHandler(this.button60_Click);
             // 
@@ -537,6 +538,7 @@
             this.button61.Name = "button61";
             this.button61.Size = new System.Drawing.Size(150, 50);
             this.button61.TabIndex = 2;
+            this.button61.Text = "加載xml";
             this.button61.UseVisualStyleBackColor = true;
             this.button61.Click += new System.EventHandler(this.button61_Click);
             // 
@@ -591,6 +593,7 @@
             this.button70.Name = "button70";
             this.button70.Size = new System.Drawing.Size(150, 50);
             this.button70.TabIndex = 4;
+            this.button70.Text = "看學生資料";
             this.button70.UseVisualStyleBackColor = true;
             this.button70.Click += new System.EventHandler(this.button70_Click);
             // 
@@ -601,6 +604,7 @@
             this.button71.Name = "button71";
             this.button71.Size = new System.Drawing.Size(150, 50);
             this.button71.TabIndex = 2;
+            this.button71.Text = "看老師資料";
             this.button71.UseVisualStyleBackColor = true;
             this.button71.Click += new System.EventHandler(this.button71_Click);
             // 
@@ -611,6 +615,7 @@
             this.button72.Name = "button72";
             this.button72.Size = new System.Drawing.Size(150, 50);
             this.button72.TabIndex = 3;
+            this.button72.Text = "以學號搜尋學生資料";
             this.button72.UseVisualStyleBackColor = true;
             this.button72.Click += new System.EventHandler(this.button72_Click);
             // 
