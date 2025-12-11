@@ -64,21 +64,31 @@ namespace vcs_Puzzle4
             //button
             x_st = 10;
             y_st = 10;
-            dx = 140;
-            dy = 70;
+            dx = 200 + 5;
+            dy = 60 + 5;
 
-            //button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 5-50, y_st + dy * 0);
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button4.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button5.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button6.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button7.Location = new Point(x_st + dx * 1, y_st + dy * 10);
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox1.Size = new Size(W, H);
 
-            richTextBox1.Size = new Size(200, 900);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            int pbx_w = 320;
+            int pbx_h = 320;
+            pictureBox4.Size = new Size(pbx_w, pbx_h);
+            pictureBox4.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(500, 385);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 5);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(800, 600);
+            this.Size = new Size(950, 770);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -181,6 +191,11 @@ namespace vcs_Puzzle4
 
         }
 
+        private void button0_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -189,6 +204,98 @@ namespace vcs_Puzzle4
         private void button2_Click(object sender, EventArgs e)
         {
             print_puzzle_array(puzzle_array);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        byte[] EmptyFont = {
+0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+};
+        byte[] Walking0 = {
+0x0c,0x00,0x1e,0x00,0x0c,0x00,0x06,0x00,0x07,0xc0,0x07,0x20,0x0b,0x10,0x11,0x80,
+0x01,0x80,0x01,0x40,0x02,0x20,0x04,0x10,0x1c,0x08,0x00,0x08,0x00,0x00,0x00,0x00,
+};
+        byte[] Walking1 = {
+0x0c,0x00,0x1e,0x00,0x0c,0x00,0x06,0x00,0x07,0xc0,0x07,0x20,0x0b,0x10,0x11,0x80,
+0x01,0x80,0x01,0x40,0x01,0x30,0x02,0x08,0x04,0x08,0x38,0x08,0x00,0x10,0x00,0x00,
+};
+        byte[] Walking2 = {
+0x0c,0x00,0x1e,0x00,0x0c,0x00,0x06,0x00,0x03,0x80,0x03,0x40,0x07,0x20,0x09,0xa0,
+0x01,0x80,0x01,0x40,0x01,0x40,0x02,0x20,0x02,0x10,0x0e,0x30,0x00,0x00,0x00,0x00,
+};
+        byte[] Walking3 = {
+0x06,0x00,0x0f,0x00,0x06,0x00,0x03,0x00,0x03,0x80,0x03,0x40,0x01,0xa0,0x01,0xa0,
+0x02,0xc0,0x01,0xc0,0x02,0x40,0x04,0x30,0x03,0x08,0x01,0x08,0x07,0x00,0x00,0x00,
+};
+        byte[] Walking4 = {
+0x06,0x00,0x0f,0x00,0x06,0x00,0x03,0x00,0x03,0x80,0x03,0x40,0x01,0xa0,0x01,0xa0,
+0x02,0xc0,0x01,0xc0,0x02,0x40,0x02,0x20,0x01,0x90,0x00,0xb0,0x03,0x80,0x00,0x00,
+};
+        byte[] Walking5 = {
+0x06,0x00,0x0f,0x00,0x06,0x00,0x02,0x00,0x03,0x00,0x03,0x80,0x01,0xc0,0x01,0xc0,
+0x00,0xc0,0x00,0xc0,0x01,0x60,0x00,0xa0,0x00,0xe0,0x00,0x20,0x00,0xe0,0x00,0x00,
+};
+        byte[] Walking6 = {
+0x06,0x00,0x0f,0x00,0x06,0x00,0x03,0x00,0x03,0x80,0x01,0x40,0x03,0xa0,0x03,0xa0,
+0x00,0xc0,0x00,0xc0,0x01,0x80,0x02,0x40,0x01,0x30,0x03,0x08,0x00,0x38,0x00,0x00,
+};
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //測試小綠人
+            int W = 320;
+            int H = 320;
+            int w = 20;
+            int h = 20;
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.Clear(Color.LightGray);
+
+            //測試小綠人
+            byte[] man = Walking0;
+            int len = man.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            int yy;
+            for (yy = 0; yy < len / 2; yy++)
+            {
+                //richTextBox1.Text += "第 " + yy.ToString() + " 行\t" + man[yy * 2].ToString("X2") + " " + man[yy * 2 + 1].ToString("X2") + "\n";
+                int aa = man[yy * 2] * 256 + man[yy * 2 + 1];
+                for (int xx = 0; xx < 16; xx++)
+                {
+                    if (((aa >> (15 - xx)) & 0x01) == 0x01)
+                    {
+                        g.FillEllipse(new SolidBrush(Color.Lime), w * xx, h * yy, w, h);
+                        //g.FillRectangle(new SolidBrush(Color.Red), w * xx, h * yy, w, h);
+                    }
+                    else
+                    {
+                        g.FillEllipse(new SolidBrush(Color.White), w * xx, h * yy, w, h);
+                        //g.FillRectangle(new SolidBrush(Color.White), w * xx, h * yy, w, h);
+                    }
+                }
+            }
+            pictureBox4.Image = bitmap1;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

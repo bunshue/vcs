@@ -34,10 +34,72 @@ namespace vcs_DynamicAddRemoveControls1
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
             //動態產生button並且綁定click事件
             DynamicGenerateButton1();
 
+            Add_Controls_pictureBox1();//加入控件 pictureBox1
+
             this.MouseDown += new MouseEventHandler(Form1_MouseDown);
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+            int dy2;
+
+            //button
+            x_st = 10;
+            y_st = 20;
+            dx = 100 + 5;
+            dy = 40 + 5;
+
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button5.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button2.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button6.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            //button11.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+
+            groupBox1.Size = new Size(225, 160);
+            groupBox1.Location = new Point(10, 500);
+            groupBox2.Size = new Size(225, 300);
+            groupBox2.Location = new Point(10 + 240, 500);
+
+            int pbx_W = 640 + 10;
+            int pbx_H = 480 + 10;
+            int pbx_W2 = 480 + 60;
+            int pbx_H2 = 520 * 2 / 3;
+            int pbx_W3 = 480;
+
+            label1.Location = new Point(800, 10);
+
+            richTextBox1.Size = new Size(400, 280);
+            richTextBox1.Location = new Point(10 + 400 + 80, 510);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1300, 880);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         int cnt = 1;
@@ -86,69 +148,6 @@ namespace vcs_DynamicAddRemoveControls1
             currentTextBox.BackColor = System.Drawing.SystemColors.ControlLight;    //設定按鈕的背景色
         }
 
-        void show_item_location()
-        {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-            int dy2;
-
-            int pbx_W = 640 + 10;
-            int pbx_H = 480 + 10;
-            int pbx_W2 = 480 + 60;
-            int pbx_H2 = 520 * 2 / 3;
-            int pbx_W3 = 480;
-
-
-            groupBox1.Location = new Point(10, 430);
-            groupBox2.Location = new Point(10, 650);
-
-            richTextBox1.Size = new Size(400, 400);
-            richTextBox1.Location = new Point(1500, 10);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            bt_exit_setup();
-        }
-
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
         private void DynamicGenerateButton1()
         {
             int btn_size;
@@ -193,7 +192,10 @@ namespace vcs_DynamicAddRemoveControls1
                     this.Controls.Add(btn);
                 }
             }
+        }
 
+        void Add_Controls_pictureBox1()
+        {
             // 實例化按鈕
             pictureBox1.Size = new Size(PICTURE_WIDTH, PICTURE_HEIGHT);
             pictureBox1.BackColor = Color.Pink;

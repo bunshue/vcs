@@ -79,6 +79,65 @@ namespace vcs_ReadWrite_BMP_PNG
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //讀檔案的一部分 bmp
+
+            //讀檔案的一部分 bmp
+            richTextBox1.Text += "讀檔案的一部分\n";
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\test_ReadAllBytes.bmp";
+            int len = 100;
+            richTextBox1.Text += "讀bmp檔, 從頭讀\t長度: " + len.ToString() + " 拜\n";
+
+            byte[] bmpdata = new byte[len];
+            FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            fs.Seek(0, SeekOrigin.Begin);
+            fs.Read(bmpdata, 0, len);
+            fs.Close();
+
+            //打印資料
+            string bytes;
+            int cnt = 0;
+
+            bytes = string.Empty;
+            foreach (byte by in bmpdata)
+            {
+                bytes += by.ToString("X2");
+                cnt++;
+                if ((cnt % 16) == 0)
+                {
+                    bytes += "\n";
+                }
+                else
+                {
+                    bytes += " ";
+                }
+            }
+            richTextBox1.Text += bytes + "\n";
+
+            bytes = string.Empty;
+            cnt = 0;
+            foreach (byte by in bmpdata)
+            {
+                if (char.IsLetterOrDigit((char)by) == true)
+                {
+                    bytes += (char)by;
+                }
+                else
+                {
+                    bytes += ".";
+                }
+
+                cnt++;
+                if ((cnt % 16) == 0)
+                {
+                    bytes += "\n";
+                }
+                else
+                {
+                    bytes += " ";
+                }
+            }
+            richTextBox1.Text += bytes + "\n";
 
         }
 
@@ -430,7 +489,7 @@ namespace vcs_ReadWrite_BMP_PNG
             g = Graphics.FromImage(bitmap1);
 
             int xx;
-            int yy;
+            //int yy;
             int ss;
 
             Font f;

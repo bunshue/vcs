@@ -891,20 +891,129 @@ namespace vcs_ReadWrite_BIN1
 
         }
 
+        const int MAX_CAPACITY = 50;
+        string[] name = new string[MAX_CAPACITY];
+        int[,] scores = new int[2, MAX_CAPACITY];
+        int counter = 0;
+
+        // 更新界面上顯示的訊息
+        void ShowData()
+        {
+            richTextBox1.Text += "共有" + counter + "人\n";
+
+            string result = "名字\t國文\t數學\r\n";
+            for (int i = 0; i < counter; i++)
+            {
+                result += name[i] + "\t" + scores[0, i] + "\t" + scores[1, i] + "\r\n";
+            }
+            richTextBox1.Text += result;
+        }
+
         private void button16_Click(object sender, EventArgs e)
         {
+            //載入資料/加入資料/儲存資料
+            //載入資料
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\score.txt";
+            FileInfo fi = new FileInfo(filename);
+            StreamReader sr = fi.OpenText();
+            int i = 0;
+            while (sr.Peek() >= 0)
+            {
+                name[i] = sr.ReadLine(); // 讀出一行
+                scores[0, i] = Convert.ToInt32(sr.ReadLine());
+                scores[1, i] = Convert.ToInt32(sr.ReadLine());
+                i++;
+            }
+            sr.Close();
+            counter = i;
+            ShowData();
 
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //加入資料
+            if (counter < MAX_CAPACITY)
+            {
+                name[counter] = "david";
+                scores[0, counter] = 100;
+                scores[1, counter] = 90;
+
+                counter++;
+
+                ShowData(); // 更新界面上顯示的訊息
+            }
+            else
+            {
+                richTextBox1.Text += "容量已滿\n";
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //儲存資料
+            filename = "tmp_score_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+
+            fi = new FileInfo(filename);
+            StreamWriter sw = fi.CreateText();
+
+            // 透過StreamWriter物件sw來寫入資料
+            for (i = 0; i < counter; i++)
+            {
+                sw.WriteLine(name[i]);
+                sw.WriteLine(scores[0, i]);
+                sw.WriteLine(scores[1, i]);
+            }
+            sw.Flush();
+            sw.Close();
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
-
+            //載入資料(BIN)
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_bin\score.dat";
+            FileStream fs = new FileStream(filename, FileMode.Open);
+            BinaryReader br = new BinaryReader(fs);
+            int i = 0;
+            while (br.PeekChar() >= 0)
+            {
+                name[i] = br.ReadString();
+                scores[0, i] = br.ReadInt32();
+                scores[1, i] = br.ReadInt32();
+                i++;
+            }
+            br.Close();
+            fs.Close();
+            counter = i;
+            ShowData();
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
-
+            //儲存資料(BIN)
+            string filename = "tmp_score_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+            FileStream fs = new FileStream(filename, FileMode.Create);
+            BinaryWriter bw = new BinaryWriter(fs);
+            for (int i = 0; i < counter; i++)
+            {
+                bw.Write(name[i]);
+                bw.Write(scores[0, i]);
+                bw.Write(scores[1, i]);
+            }
+            bw.Flush();
+            bw.Close();
+            fs.Close();
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
+        /*  清除資料
+        for (int i = 0; i < counter; i++)
+        {
+            name[i] = "";
+            scores[0, i] = 0;
+            scores[1, i] = 0;
+        }
+        counter = 0;
+
+        richTextBox1.Text += "共有" + counter + "人\n";
+        */
 
         private void button19_Click(object sender, EventArgs e)
         {
@@ -1025,22 +1134,17 @@ namespace vcs_ReadWrite_BIN1
             {
                 bw.Write(aBall.pt.X);   // 寫入 整數
                 bw.Write(aBall.pt.Y);   // 寫入 整數
-
                 bw.Write(aBall.color.ToArgb());   // 寫入 整數
             }
-
             bw.Close(); // 關閉檔案
-
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button26_Click(object sender, EventArgs e)
