@@ -85,10 +85,10 @@ namespace vcs_RGB2YUV_HLS
             }
         }
 
-        #region RGB <-> HLS
+        //region RGB <-> HLS
         // The selected color.
         private Color SelectedColor;
-        #endregion
+        //endregion
 
         public Form1()
         {
@@ -104,14 +104,14 @@ namespace vcs_RGB2YUV_HLS
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            #region RGB <-> HLS
+            //#region RGB <-> HLS
             // Select the first color from the RGB controls.
             SelectRGBColor();
-            #endregion
+            //#endregion
 
-            #region RGB scroll HLS
+            //#region RGB scroll HLS
             scrRGB_Scroll(null, null);
-            #endregion
+            //#endregion
         }
 
         public static YUV RGBToYUV(RGB rgb)
@@ -230,7 +230,7 @@ namespace vcs_RGB2YUV_HLS
 
         }
 
-        #region RGB <-> HLS
+        //#region RGB <-> HLS
         // True while we're setting the color.
         private bool IgnoreEvents = false;
 
@@ -309,9 +309,9 @@ namespace vcs_RGB2YUV_HLS
             }
             IgnoreEvents = false;
         }
-        #endregion
+        //#endregion
 
-        #region RGB scroll HLS
+        //#region RGB scroll HLS
         // Select a new RGB color.
         private void scrRGB_Scroll(object sender, ScrollEventArgs e)
         {
@@ -364,6 +364,6 @@ namespace vcs_RGB2YUV_HLS
             txtL.Text = L.ToString("0.00");
             txtS.Text = S.ToString("0.00");
         }
-        #endregion
+        //#endregion
     }
 }

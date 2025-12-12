@@ -190,27 +190,6 @@ namespace vcs_ColorHistogram
             return new YUV(y, u, v);
         }
 
-        public static RGB YUVToRGB(YUV yuv)
-        {
-            double r = yuv.Y + 1.4075 * (yuv.V - 128);
-            double g = yuv.Y - 0.3455 * (yuv.U - 128) - (0.7169 * (yuv.V - 128));
-            double b = yuv.Y + 1.7790 * (yuv.U - 128);
-            if (r > 255)
-                r = 255;
-            if (g > 255)
-                g = 255;
-            if (b > 255)
-                b = 255;
-            if (r < 0)
-                r = 0;
-            if (g < 0)
-                g = 0;
-            if (b < 0)
-                b = 0;
-
-            return new RGB((byte)r, (byte)g, (byte)b);
-        }
-
         void get_brigheness_data(Bitmap bmp, int x_st, int y_st, int w, int h)
         {
             richTextBox1.Text += "x_st = " + x_st.ToString() + "\ty_st = " + y_st.ToString() + "\tw = " + w.ToString() + "\th = " + h.ToString() + "\n";

@@ -211,7 +211,6 @@ namespace vcs_Puzzle4
 
         }
 
-
         byte[] EmptyFont = {
 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
@@ -245,6 +244,7 @@ namespace vcs_Puzzle4
 0x00,0xc0,0x00,0xc0,0x01,0x80,0x02,0x40,0x01,0x30,0x03,0x08,0x00,0x38,0x00,0x00,
 };
 
+        int step = 0;
         private void button4_Click(object sender, EventArgs e)
         {
             //測試小綠人
@@ -258,6 +258,43 @@ namespace vcs_Puzzle4
 
             //測試小綠人
             byte[] man = Walking0;
+
+            if (step == 0)
+            {
+                man = Walking0;
+            }
+            else if (step == 1)
+            {
+                man = Walking1;
+            }
+            else if (step == 2)
+            {
+                man = Walking2;
+            }
+            else if (step == 3)
+            {
+                man = Walking3;
+            }
+            else if (step == 4)
+            {
+                man = Walking4;
+            }
+            else if (step == 5)
+            {
+                man = Walking5;
+            }
+            else if (step == 6)
+            {
+                man = Walking6;
+            }
+            else
+            {
+                man = EmptyFont;
+            }
+            step++;
+            if (step > 7)
+                step = 0;
+
             int len = man.Length;
             richTextBox1.Text += "len = " + len.ToString() + "\n";
 
