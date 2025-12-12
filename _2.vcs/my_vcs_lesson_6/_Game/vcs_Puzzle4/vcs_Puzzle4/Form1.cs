@@ -13,7 +13,9 @@ namespace vcs_Puzzle4
     {
         Graphics g;
         //二維陣列
-        int[,] puzzle_array = new int[8, 8];
+        int M = 8;
+        int N = 8;
+        int[,] puzzle_array;
         int W = 400;
         int H = 400;
 
@@ -29,9 +31,9 @@ namespace vcs_Puzzle4
         {
             int i;
             int j;
-            for (j = 0; j < 8; j++)
+            for (j = 0; j < N; j++)
             {
-                for (i = 0; i < 8; i++)
+                for (i = 0; i < M; i++)
                 {
                     richTextBox1.Text += puzzle_array[i, j] + " ";
                 }
@@ -43,11 +45,13 @@ namespace vcs_Puzzle4
         {
             show_item_location();
 
+            puzzle_array = new int[M, N];
+
             int i;
             int j;
-            for (j = 0; j < 8; j++)
+            for (j = 0; j < N; j++)
             {
-                for (i = 0; i < 8; i++)
+                for (i = 0; i < M; i++)
                 {
                     puzzle_array[i, j] = 0;
                 }
@@ -67,14 +71,14 @@ namespace vcs_Puzzle4
             dx = 200 + 5;
             dy = 60 + 5;
 
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            button4.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button5.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button6.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button7.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 7+100);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 8 + 100);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 9 + 100);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 10 + 100);
+            button4.Location = new Point(x_st + dx * 1, y_st + dy * 7 + 100);
+            button5.Location = new Point(x_st + dx * 1, y_st + dy * 8 + 100);
+            button6.Location = new Point(x_st + dx * 1, y_st + dy * 9 + 100);
+            button7.Location = new Point(x_st + dx * 1, y_st + dy * 10 + 100);
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox1.Size = new Size(W, H);
@@ -82,13 +86,13 @@ namespace vcs_Puzzle4
             int pbx_w = 320;
             int pbx_h = 320;
             pictureBox4.Size = new Size(pbx_w, pbx_h);
-            pictureBox4.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
 
             richTextBox1.Size = new Size(500, 385);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 5);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(950, 770);
+            this.Size = new Size(1370, 880);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -152,9 +156,9 @@ namespace vcs_Puzzle4
 
             Color c = Color.Black;
 
-            for (j = 0; j < 8; j++)
+            for (j = 0; j < N; j++)
             {
-                for (i = 0; i < 8; i++)
+                for (i = 0; i < M; i++)
                 {
                     if (puzzle_array[i, j] == 0)
                     {
