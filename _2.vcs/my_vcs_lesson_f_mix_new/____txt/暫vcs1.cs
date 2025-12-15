@@ -1,59 +1,37 @@
 ﻿
 
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
 object filename = Application.StartupPath + "\\word_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".doc";
-            //string pic_filename = Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..")) + "\\test.png";
+
+string pic_filename = Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..")) + "\\test.png";
 
 filename1 = Path.GetFullPath(Path.Combine(System.Windows.Forms.Application.StartupPath, @"..\..")) + @"\Step.doc";
 
-
-System.Windows.Forms.Application.StartupPath + "\\test_word_file.doc";
-
+		  Application.StartupPath + "\\test_word_file.doc";
 string filename = Application.StartupPath + "\\gif_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".gif";
 
+//string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\Step.doc";
+//string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\bmp_format.docx";
+//string doc_filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\vcs__WORD7.docx";
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\my_2d_array.txt";
-            String line;
-            StreamReader sr;
-
-            //sr = new StreamReader(filename, Encoding.GetEncoding("gb2312"), true);
-            sr = new StreamReader(filename, Encoding.GetEncoding("big5"), true);
-            while (!sr.EndOfStream)
-            {               // 每次讀取一行，直到檔尾
-                line = sr.ReadLine();            // 讀取文字到 line 變數
-                if (line.Length > 0)
-                {
-                    
-                }
-            }
-            sr.Close();
-
-
-
-            string filename = "tmp_my_2d_array_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-            StreamWriter sw = File.CreateText(filename);
-
-            //sw.Write(richTextBox1.Text);
-
-            for (j = 0; j < ROWS; j++)
-            {
-                for (i = 0; i < COLUMNS; i++)
-                {
-                    sw.WriteLine(gray[j, i].ToString());
-                }
-            }
-            sw.Dispose();
-            sw.Close();
-            richTextBox1.Text += "存檔檔名: " + filename + "\n";
-
-
-
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
 
 
 
@@ -61,28 +39,6 @@ button1.PerformClick();	把按鍵按一下
 
 
 
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
-
-            int len = richTextBox1.Lines.Length;
-            //richTextBox1.Text += "lines = " + len.ToString() + "\n";
-            for (i = 0; i < len; i++)
-            {
-                //richTextBox1.Text += "i = " + i.ToString() + " : " + richTextBox1.Lines[i] + "\n";
-                sw.WriteLine(richTextBox1.Lines[i]); // 寫入一行
-            }
-
-
-
-            //string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\Step.doc";
-            //string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\bmp_format.docx";
-            //string doc_filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\vcs_ReadWrite_WORD7.docx";
-
-
-
-
 
 
 
@@ -98,10 +54,10 @@ richTextBox1.Text += "----------------------------------------------------------
 
 
 
-            //Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定義鼠標 
+//Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定義鼠標 
 
-            string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            //string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
+string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+//string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
 
 
 

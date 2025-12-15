@@ -1834,3 +1834,23 @@ namespace vcs_test_all_02_Array
 */
 
 
+
+
+
+/*
+//獲取二維陣列的長度
+
+int[,] array2D;
+//使用 C# 中的 Array.GetLength() 函式獲取 2D 陣列的寬度和高度
+//使用 C# 中的 Array.GetUpperBound() 函式獲取二維陣列的寬度和高度
+array2D = new int[5, 10];
+Console.WriteLine(array2D.GetLength(0));	//5
+Console.WriteLine(array2D.GetLength(1));	//10
+
+//使用 C# 中的 Array.GetUpperBound() 函式獲取二維陣列的寬度和高度
+array2D = new int[5, 10];
+Console.WriteLine(array2D.GetUpperBound(0) + 1);	//5
+Console.WriteLine(array2D.GetUpperBound(1) + 1);	//10
+*/
+
+
