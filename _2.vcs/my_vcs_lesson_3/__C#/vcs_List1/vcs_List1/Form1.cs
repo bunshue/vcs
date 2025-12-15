@@ -36,8 +36,8 @@ namespace vcs_List1
             //button
             x_st = 660;
             y_st = 10;
-            dx = 170 + 10;
-            dy = 40 + 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button15.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button16.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -49,12 +49,16 @@ namespace vcs_List1
             button22.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button23.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button24.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button25.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            button26.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            button27.Location = new Point(x_st + dx * 0, y_st + dy * 12);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 13);
+            button25.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button26.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button27.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 1, y_st + dy * 3);
 
+            richTextBox1.Size = new Size(500, 480);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 4);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1420, 820);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -415,6 +419,97 @@ namespace vcs_List1
                         + "\tcamera_serials[" + i.ToString() + "][2] = " + camera_serials[i][2].ToString() + "\n";
                 }
             }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //二維List for string
+            List<string[]> steps = new List<string[]>();
+
+            for (i = 0; i < 9; i++)
+            {
+                steps.Add(new string[] { i.ToString(), ('A' + i).ToString() });
+            }
+
+            //steps.Clear();
+
+            if (steps.Count > 0)
+                richTextBox1.Text += "共有 " + steps.Count.ToString() + " 個項目, 分別是:\n";
+
+            for (i = 0; i < steps.Count; i++)
+            {
+                int tt = int.Parse(steps[i][1]);
+                richTextBox1.Text += "steps[" + i.ToString() + "][0] = " + steps[i][0].ToString() + "\tsteps[" + i.ToString() + "][1] = " + (char)tt + "\n";
+            }
+
+            //刪除第N項
+            int N;
+
+            N = 1; steps.RemoveAt(N);  //index = N, 刪除第N項
+
+            N = 3; steps.RemoveAt(N);  //index = N, 刪除第N項
+
+            N = 5; steps.RemoveAt(N);  //index = N, 刪除第N項
+
+            if (steps.Count > 0)
+                richTextBox1.Text += "共有 " + steps.Count.ToString() + " 個項目, 分別是:\n";
+
+            for (i = 0; i < steps.Count; i++)
+            {
+                int aaa = int.Parse(steps[i][1]);
+                richTextBox1.Text += "steps[" + i.ToString() + "][0] = " + steps[i][0].ToString() + "\tsteps[" + i.ToString() + "][1] = " + (char)aaa + "\n";
+            }
+
+            /*
+            Random r = new Random();
+            string result2 = "";
+            for (i = 0; i < 5; i++)
+            {
+                result2 += r.Next(10).ToString() + " ";
+            }
+            richTextBox1.Text += "取0~10的亂數值：" + result2 + "\n";
+            */
+
+            Random r = new Random();
+
+            int[] selected = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            int tmp;
+
+            for (i = 0; i < selected.Length; i++)
+            {
+                int n = r.Next(selected.Length);
+                //richTextBox1.Text += "第" + i.ToString() + "項和第" + n.ToString() + "項交換\n";
+                tmp = selected[i];
+                selected[i] = selected[n];
+                selected[n] = tmp;
+            }
+            richTextBox1.Text += "方法一結果：";
+            for (i = 0; i < selected.Length; i++)
+            {
+                richTextBox1.Text += selected[i].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            for (i = 0; i < selected.Length; i++)
+            {
+                selected[i] = i;
+            }
+
+            for (i = selected.Length - 1; i > 0; i--)
+            {
+                int n = r.Next(i + 1);
+                //richTextBox1.Text += "第" + i.ToString() + "項和第" + n.ToString() + "項交換\n";
+                tmp = selected[i];
+                selected[i] = selected[n];
+                selected[n] = tmp;
+            }
+
+            richTextBox1.Text += "方法二結果：";
+            for (i = 0; i < selected.Length; i++)
+            {
+                richTextBox1.Text += selected[i].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -677,7 +772,25 @@ namespace vcs_List1
         {
             //讀取一個檔案到List
 
-
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

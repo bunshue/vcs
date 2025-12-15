@@ -114,9 +114,7 @@ namespace vcs_RichTextBox8
             //Font f = new Font("標楷體", 20F, FontStyle.Regular, GraphicsUnit.Point);
             Font f = new Font("標楷體", 20F, FontStyle.Bold, GraphicsUnit.Point);      //粗體
 
-
             richTextBox1.Font = f;
-
         }
 
         private void button6_Click(object sender, EventArgs e)

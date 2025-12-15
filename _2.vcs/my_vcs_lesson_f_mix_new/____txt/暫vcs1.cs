@@ -15,9 +15,39 @@ richTextBox1.Text += "----------------------------------------------------------
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
 
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\my_2d_array.txt";
+            String line;
+            StreamReader sr;
+
+            //sr = new StreamReader(filename, Encoding.GetEncoding("gb2312"), true);
+            sr = new StreamReader(filename, Encoding.GetEncoding("big5"), true);
+            while (!sr.EndOfStream)
+            {               // 每次讀取一行，直到檔尾
+                line = sr.ReadLine();            // 讀取文字到 line 變數
+                if (line.Length > 0)
+                {
+                    
+                }
+            }
+            sr.Close();
 
 
 
+            string filename = "tmp_my_2d_array_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+            StreamWriter sw = File.CreateText(filename);
+
+            //sw.Write(richTextBox1.Text);
+
+            for (j = 0; j < ROWS; j++)
+            {
+                for (i = 0; i < COLUMNS; i++)
+                {
+                    sw.WriteLine(gray[j, i].ToString());
+                }
+            }
+            sw.Dispose();
+            sw.Close();
+            richTextBox1.Text += "存檔檔名: " + filename + "\n";
 
 
 

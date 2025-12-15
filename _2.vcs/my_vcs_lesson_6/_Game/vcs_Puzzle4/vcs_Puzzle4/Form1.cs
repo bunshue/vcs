@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,33 +12,17 @@ namespace vcs_Puzzle4
     public partial class Form1 : Form
     {
         Graphics g;
-        //äºŒç¶­é™£åˆ—
-        int M = 8;
-        int N = 8;
-        int[,] puzzle_array;
-        int W = 400;
-        int H = 400;
-
-        int w = 50;
-        int h = 50;
+        int[,] puzzle_array;//¤Gºû°}¦C
+        int pbx_W = 640;
+        int pbx_H = 480;
+        int box_w = 100;
+        int box_h = 100;
+        int M = 3;
+        int N = 2;
 
         public Form1()
         {
             InitializeComponent();
-        }
-
-        void print_puzzle_array(int[,] puzzle_array)
-        {
-            int i;
-            int j;
-            for (j = 0; j < N; j++)
-            {
-                for (i = 0; i < M; i++)
-                {
-                    richTextBox1.Text += puzzle_array[i, j] + " ";
-                }
-                richTextBox1.Text += "\n";
-            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -71,7 +55,11 @@ namespace vcs_Puzzle4
             dx = 200 + 5;
             dy = 60 + 5;
 
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 7+100);
+            tb_num_m.Location = new Point(x_st + dx * 0, y_st + dy * 7 + 60);
+            tb_num_n.Location = new Point(x_st + dx * 0 + 100, y_st + dy * 7 + 60);
+            tb_num_m.Text = M.ToString();
+            tb_num_n.Text = N.ToString();
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 7 + 100);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 8 + 100);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 9 + 100);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 10 + 100);
@@ -81,7 +69,8 @@ namespace vcs_Puzzle4
             button7.Location = new Point(x_st + dx * 1, y_st + dy * 10 + 100);
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            pictureBox1.Size = new Size(W, H);
+            pictureBox1.Size = new Size(pbx_W, pbx_H);
+            pictureBox1.BackColor = Color.Pink;
 
             int pbx_w = 320;
             int pbx_h = 320;
@@ -100,6 +89,26 @@ namespace vcs_Puzzle4
             richTextBox1.Clear();
         }
 
+        void print_puzzle_array(int[,] puzzle_array)
+        {
+            int i;
+            int j;
+            richTextBox1.Text += "aaaaaaa = {\n";
+            for (j = 0; j < N; j++)
+            {
+                richTextBox1.Text += "{ ";
+                for (i = 0; i < M; i++)
+                {
+                    if (i == (M - 1))
+                        richTextBox1.Text += puzzle_array[i, j];
+                    else
+                        richTextBox1.Text += puzzle_array[i, j] + ", ";
+                }
+                richTextBox1.Text += "},\n";
+            }
+            richTextBox1.Text += "};\n";
+        }
+
         void drawBox(int i, int j, int w, int h, Color c)
         {
             Font f;
@@ -109,15 +118,22 @@ namespace vcs_Puzzle4
             //sb = new SolidBrush(Color.Black);
             sb = new SolidBrush(Color.FromArgb(255 - c.R, 255 - c.G, 255 - c.B));
 
-            f = new Font("æ¨™æ¥·é«”", 12);
+            f = new Font("¼Ð·¢Åé", 12);
             g.DrawString(c.Name, f, sb, new PointF(w * i, h * j + h / 3));
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            //richTextBox1.Text += "å–å¾— : (" + e.X.ToString() +", "+ e.Y.ToString() + ")\n";
-            int x = e.X / w;
-            int y = e.Y / h;
+            //richTextBox1.Text += "¨ú±o : (" + e.X.ToString() +", "+ e.Y.ToString() + ")\n";
+            int W = box_w * M;
+            int H = box_h * N;
+            if (e.X >= W)
+                return;
+            if (e.Y >= H)
+                return;
+
+            int x = e.X / box_w;
+            int y = e.Y / box_h;
 
             if (puzzle_array[x, y] == 0)
                 puzzle_array[x, y] = 1;
@@ -139,22 +155,30 @@ namespace vcs_Puzzle4
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
+            int W = box_w * M;
+            int H = box_h * N;
             int i;
             int j;
 
-            //ç•«åž‚ç›´ç·š
-            for (i = 0; i < W; i += w)
+            //µe««ª½½u
+            for (i = 0; i < W; i += box_w)
             {
                 e.Graphics.DrawLine(Pens.Red, i, 0, i, H);
             }
 
-            //ç•«æ°´å¹³ç·š
-            for (j = 0; j < H; j += h)
+            //µe¤ô¥­½u
+            for (j = 0; j < H; j += box_h)
             {
                 e.Graphics.DrawLine(Pens.Green, 0, j, W, j);
             }
 
             Color c = Color.Black;
+
+
+
+            print_puzzle_array(puzzle_array);
+
+            return;
 
             for (j = 0; j < N; j++)
             {
@@ -170,9 +194,12 @@ namespace vcs_Puzzle4
                     }
                     //drawBox(i, j, w, h, c);
                     SolidBrush sb = new SolidBrush(c);
-                    e.Graphics.FillRectangle(sb, w * i, h * j, w - 1, h - 1);
+                    e.Graphics.FillRectangle(sb, box_w * i, box_h * j, box_w - 1, box_h - 1);
                 }
             }
+
+            //Pen p = new Pen(Color.Red, 20);
+            //e.Graphics.DrawRectangle(p, 0, 0, W, H);
 
             /*
             foreach (int argb in Properties.Settings.Default.Argbs)
@@ -197,129 +224,275 @@ namespace vcs_Puzzle4
 
         private void button0_Click(object sender, EventArgs e)
         {
+            int m = 0;
+            bool conversionSuccessful = int.TryParse(tb_num_m.Text, out m);    //out¬°¥²¶·
+            if (conversionSuccessful == true)
+            {
+                richTextBox1.Text += "M = " + m.ToString() + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "int.TryParse ¥¢±Ñ\n";
+                richTextBox1.Text += "¨ú±oM¥¢±Ñ\n";
+            }
+            int n = 0;
+            conversionSuccessful = int.TryParse(tb_num_n.Text, out n);    //out¬°¥²¶·
+            if (conversionSuccessful == true)
+            {
+                richTextBox1.Text += "N = " + n.ToString() + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "int.TryParse ¥¢±Ñ\n";
+                richTextBox1.Text += "¨ú±oN¥¢±Ñ\n";
+            }
 
+            if ((m <= 0) || (n <= 0))
+            {
+                richTextBox1.Text += "M = " + m.ToString() + ", N = " + n.ToString() + "\n";
+                richTextBox1.Text += "M  ©Î  N ¤£¦Xªk\n";
+            }
+
+            M = m;
+            N = n;
+
+            int ww = 5 * (pbx_W / M / 5);
+            int hh = 5 * (pbx_H / N / 5);
+            box_w = Math.Min(ww, hh);
+            box_h = Math.Min(ww, hh);
+
+            puzzle_array = new int[M, N];
+
+            int i;
+            int j;
+            for (j = 0; j < N; j++)
+            {
+                for (i = 0; i < M; i++)
+                {
+                    puzzle_array[i, j] = 0;
+                }
+            }
+
+            puzzle_array[0, 0] = 1;
+            puzzle_array[1, 0] = 1;
+            puzzle_array[2, 1] = 1;
+
+            //«Ø¥ß¹Ï¤ù®Ø°}¦C
+            pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
+            pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
+            pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
+            pictureBox1.Paint += new PaintEventHandler(pictureBox1_Paint);
+            pictureBox1.Invalidate();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            //§R°£¹Ï¤ù®Ø°}¦C
+            pictureBox1.MouseDown -= new MouseEventHandler(pictureBox1_MouseDown);
+            pictureBox1.MouseMove -= new MouseEventHandler(pictureBox1_MouseMove);
+            pictureBox1.MouseUp -= new MouseEventHandler(pictureBox1_MouseUp);
+            pictureBox1.Paint -= new PaintEventHandler(pictureBox1_Paint);
+            pictureBox1.Invalidate();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            print_puzzle_array(puzzle_array);
+            //¶×¤J°}¦C
+            M = 3;
+            N = 2;
+            int ww = 5 * (pbx_W / M / 5);
+            int hh = 5 * (pbx_H / N / 5);
+            box_w = Math.Min(ww, hh);
+            box_h = Math.Min(ww, hh);
+
+            puzzle_array = new int[M, N];
+            /*
+            puzzle_array = new int[,] {
+            { 0, 1, 0, 1, 0, 1, 0, 1 }, { 1, 0, 1, 0, 1, 0, 1, 0}, { 0, 1, 0, 1, 0, 1, 0, 1 }, { 1, 0, 1, 0, 1, 0, 1, 0 },
+            { 0, 1, 0, 1, 0, 1, 0, 1 }, { 1, 0, 1, 0, 1, 0, 1, 0}, { 0, 1, 0, 1, 0, 1, 0, 1 }, { 1, 0, 1, 0, 1, 0, 1, 0 }
+            };
+            */
+            /*
+            puzzle_array = new int[,] {
+            { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0 },
+            { 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 },
+            { 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            };
+            */
+
+            puzzle_array = new int[M, N];
+
+            int i;
+            int j;
+            for (j = 0; j < N; j++)
+            {
+                for (i = 0; i < M; i++)
+                {
+                    puzzle_array[i, j] = 0;
+                }
+            }
+
+            puzzle_array[0, 0] = 1;
+            puzzle_array[1, 0] = 1;
+            puzzle_array[2, 1] = 1;
+
+
+            puzzle_array = new int[,] {
+            { 1, 1, 0},
+            { 0, 0, 1},
+            };
+
+
+
+
+
+
+            //«Ø¥ß¹Ï¤ù®Ø°}¦C
+            pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
+            pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
+            pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
+            pictureBox1.Paint += new PaintEventHandler(pictureBox1_Paint);
+            pictureBox1.Invalidate();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            //¶×¥X°}¦C
+            print_puzzle_array(puzzle_array);
         }
 
-        byte[] EmptyFont = {
-0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-};
-        byte[] Walking0 = {
+        byte[] Step0 = {
 0x0c,0x00,0x1e,0x00,0x0c,0x00,0x06,0x00,0x07,0xc0,0x07,0x20,0x0b,0x10,0x11,0x80,
 0x01,0x80,0x01,0x40,0x02,0x20,0x04,0x10,0x1c,0x08,0x00,0x08,0x00,0x00,0x00,0x00,
 };
-        byte[] Walking1 = {
+        byte[] Step1 = {
 0x0c,0x00,0x1e,0x00,0x0c,0x00,0x06,0x00,0x07,0xc0,0x07,0x20,0x0b,0x10,0x11,0x80,
 0x01,0x80,0x01,0x40,0x01,0x30,0x02,0x08,0x04,0x08,0x38,0x08,0x00,0x10,0x00,0x00,
 };
-        byte[] Walking2 = {
+        byte[] Step2 = {
 0x0c,0x00,0x1e,0x00,0x0c,0x00,0x06,0x00,0x03,0x80,0x03,0x40,0x07,0x20,0x09,0xa0,
 0x01,0x80,0x01,0x40,0x01,0x40,0x02,0x20,0x02,0x10,0x0e,0x30,0x00,0x00,0x00,0x00,
 };
-        byte[] Walking3 = {
+        byte[] Step3 = {
 0x06,0x00,0x0f,0x00,0x06,0x00,0x03,0x00,0x03,0x80,0x03,0x40,0x01,0xa0,0x01,0xa0,
 0x02,0xc0,0x01,0xc0,0x02,0x40,0x04,0x30,0x03,0x08,0x01,0x08,0x07,0x00,0x00,0x00,
 };
-        byte[] Walking4 = {
+        byte[] Step4 = {
 0x06,0x00,0x0f,0x00,0x06,0x00,0x03,0x00,0x03,0x80,0x03,0x40,0x01,0xa0,0x01,0xa0,
 0x02,0xc0,0x01,0xc0,0x02,0x40,0x02,0x20,0x01,0x90,0x00,0xb0,0x03,0x80,0x00,0x00,
 };
-        byte[] Walking5 = {
+        byte[] Step5 = {
 0x06,0x00,0x0f,0x00,0x06,0x00,0x02,0x00,0x03,0x00,0x03,0x80,0x01,0xc0,0x01,0xc0,
 0x00,0xc0,0x00,0xc0,0x01,0x60,0x00,0xa0,0x00,0xe0,0x00,0x20,0x00,0xe0,0x00,0x00,
 };
-        byte[] Walking6 = {
+        byte[] Step6 = {
 0x06,0x00,0x0f,0x00,0x06,0x00,0x03,0x00,0x03,0x80,0x01,0x40,0x03,0xa0,0x03,0xa0,
 0x00,0xc0,0x00,0xc0,0x01,0x80,0x02,0x40,0x01,0x30,0x03,0x08,0x00,0x38,0x00,0x00,
 };
-
+        byte[] Step7 = {
+0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+};
         int step = 0;
         private void button4_Click(object sender, EventArgs e)
         {
-            //æ¸¬è©¦å°ç¶ äºº
+            //´ú¸Õ¤pºñ¤H
             int W = 320;
             int H = 320;
             int w = 20;
             int h = 20;
             Bitmap bitmap1 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap1);    //ä»¥è¨˜æ†¶é«”åœ–åƒ bitmap1 å»ºç«‹ è¨˜æ†¶é«”ç•«å¸ƒg
+            Graphics g = Graphics.FromImage(bitmap1);    //¥H°O¾ÐÅé¹Ï¹³ bitmap1 «Ø¥ß °O¾ÐÅéµe¥¬g
             g.Clear(Color.LightGray);
 
-            //æ¸¬è©¦å°ç¶ äºº
-            byte[] man = Walking0;
+            //´ú¸Õ¤pºñ¤H
+            byte[] man = Step0;
 
             if (step == 0)
             {
-                man = Walking0;
+                richTextBox1.Text += "Step0\n";
+                man = Step0;
             }
             else if (step == 1)
             {
-                man = Walking1;
+                richTextBox1.Text += "Step1\n";
+                man = Step1;
             }
             else if (step == 2)
             {
-                man = Walking2;
+                richTextBox1.Text += "Step2\n";
+                man = Step2;
             }
             else if (step == 3)
             {
-                man = Walking3;
+                richTextBox1.Text += "Step3\n";
+                man = Step3;
             }
             else if (step == 4)
             {
-                man = Walking4;
+                richTextBox1.Text += "Step4\n";
+                man = Step4;
             }
             else if (step == 5)
             {
-                man = Walking5;
+                richTextBox1.Text += "Step5\n";
+                man = Step5;
             }
             else if (step == 6)
             {
-                man = Walking6;
+                richTextBox1.Text += "Step6\n";
+                man = Step6;
             }
             else
             {
-                man = EmptyFont;
+                richTextBox1.Text += "Step7\n";
+                man = Step7;
             }
             step++;
             if (step > 7)
                 step = 0;
 
             int len = man.Length;
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            //richTextBox1.Text += "len = " + len.ToString() + "\n";
 
             int yy;
             for (yy = 0; yy < len / 2; yy++)
             {
-                //richTextBox1.Text += "ç¬¬ " + yy.ToString() + " è¡Œ\t" + man[yy * 2].ToString("X2") + " " + man[yy * 2 + 1].ToString("X2") + "\n";
+                //richTextBox1.Text += "²Ä " + yy.ToString() + " ¦æ\t" + man[yy * 2].ToString("X2") + " " + man[yy * 2 + 1].ToString("X2") + "\n";
                 int aa = man[yy * 2] * 256 + man[yy * 2 + 1];
+                richTextBox1.Text += "{ ";
                 for (int xx = 0; xx < 16; xx++)
                 {
                     if (((aa >> (15 - xx)) & 0x01) == 0x01)
                     {
                         g.FillEllipse(new SolidBrush(Color.Lime), w * xx, h * yy, w, h);
                         //g.FillRectangle(new SolidBrush(Color.Red), w * xx, h * yy, w, h);
+                        if(xx==15)
+                            richTextBox1.Text += "1";
+                        else
+                            richTextBox1.Text += "1, ";
                     }
                     else
                     {
                         g.FillEllipse(new SolidBrush(Color.White), w * xx, h * yy, w, h);
                         //g.FillRectangle(new SolidBrush(Color.White), w * xx, h * yy, w, h);
+                        richTextBox1.Text += "0, ";
                     }
                 }
+                richTextBox1.Text += "},\n";
             }
             pictureBox4.Image = bitmap1;
         }
@@ -336,7 +509,45 @@ namespace vcs_Puzzle4
 
         private void button7_Click(object sender, EventArgs e)
         {
-
+            //´ú¸Õ2D°}¦C
+            /*
+            °µ¤@­Ó M X N ªº¤Gºû°}¦C column=8, row=3
+            ROW	N
+            COL	M
+            [1 2 3 4 5 6 7 8]
+            [1 2 3 4 5 6 7 8]
+            [1 2 3 4 5 6 7 8]
+            ¤H : 8 X 3°}¦C
+            vcs­n¼g¬Û¤Ï puzzle_array(3, 8)
+            */
+            int[,] puzzle_array = new int[3, 8];    //Row = 3, Column = 8
+            puzzle_array = new int[,] {
+            {0, 1, 2, 3, 4, 5, 6, 7},
+            {0, 1, 2, 3, 4, 5, 6, 7},
+            {0, 1, 2, 3, 4, 5, 6, 7},
+            };
+            int ROW = puzzle_array.GetUpperBound(0) + 1;//Àò¨ú«ü©wºû«×ªº¤W­­¡A¦b ¤W¤@­Ó1´N¬O¦C¼Æ
+            int COL = puzzle_array.GetLength(1);//Àò¨ú«ü©wºû¤¤ªº¤¸ ­Ó¼Æ¡A³o¸Ì¤]´N¬O¦C¼Æ¤F¡C¡]1ªí¥Üªº¬O²Ä¤Gºû¡A0¬O²Ä¤@ºû¡^
+            int i;
+            int j;
+            for (j = 0; j < ROW; j++)
+            {
+                for (i = 0; i < COL; i++)
+                {
+                    //puzzle_array[j, i] = i * 10 + j;	//i j ¬Û¤Ï
+                    richTextBox1.Text += puzzle_array[j, i].ToString() + " ";
+                }
+                richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
         }
     }
 }
+
+
+/*
+puzzle_array = new int[M, N];
+*/
+
+
+
