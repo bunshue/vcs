@@ -3464,6 +3464,45 @@ namespace _vcs_MakePicture
 
         private void button81_Click(object sender, EventArgs e)
         {
+            //Color Bar
+
+            //逐點製作圖檔
+            int width = 640;
+            int height = 480;
+            int w = 80;
+            int h = 480;
+            int x_st = 0;
+            int y_st = 0;
+
+            bitmap1 = new Bitmap(width, height);
+
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.Pink);
+
+            g.FillRectangle(new SolidBrush(Color.White), new Rectangle(x_st, y_st, w, h));
+
+            x_st += w;
+            g.FillRectangle(new SolidBrush(Color.Yellow), new Rectangle(x_st, y_st, w, h));
+
+            x_st += w;
+            g.FillRectangle(new SolidBrush(Color.Cyan), new Rectangle(x_st, y_st, w, h));
+
+            x_st += w;
+            g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(x_st, y_st, w, h));
+
+            x_st += w;
+            g.FillRectangle(new SolidBrush(Color.Magenta), new Rectangle(x_st, y_st, w, h));
+
+            x_st += w;
+            g.FillRectangle(new SolidBrush(Color.Red), new Rectangle(x_st, y_st, w, h));
+
+            x_st += w;
+            g.FillRectangle(new SolidBrush(Color.Blue), new Rectangle(x_st, y_st, w, h));
+
+            x_st += w;
+            g.FillRectangle(new SolidBrush(Color.Black), new Rectangle(x_st, y_st, w, h));
+
+            pictureBox1.Image = bitmap1;
 
         }
 

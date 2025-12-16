@@ -1185,6 +1185,7 @@
             this.button81.Name = "button81";
             this.button81.Size = new System.Drawing.Size(60, 60);
             this.button81.TabIndex = 85;
+            this.button81.Text = "Color Bar";
             this.button81.UseVisualStyleBackColor = true;
             this.button81.Click += new System.EventHandler(this.button81_Click);
             // 
