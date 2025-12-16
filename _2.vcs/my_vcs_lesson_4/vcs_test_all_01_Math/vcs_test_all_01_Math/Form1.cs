@@ -33,8 +33,6 @@ namespace vcs_test_all_01_Math
             show_item_location();
 
             textBox2.Text = "123";
-
-
         }
 
         void show_item_location()
@@ -45,10 +43,10 @@ namespace vcs_test_all_01_Math
             int dy;
 
             //button
-            x_st = 12;
-            y_st = 12;
-            dx = 170;
-            dy = 48;
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 5;
+            dy = 60 + 5;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -76,74 +74,45 @@ namespace vcs_test_all_01_Math
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button20.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 11);
 
-            txtNumber.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 7);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button30.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            textBox2.Location = new Point(x_st + dx * 2, y_st + dy * 10);
-            lb_ordinal.Location = new Point(x_st + dx * 2 + dx / 6, y_st + dy * 11);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            txtNumber.Location = new Point(x_st + dx * 2, y_st + dy * 10);
 
-            button32.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button33.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button34.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button35.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button36.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button37.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button38.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button39.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-            button40.Location = new Point(x_st + dx * 3, y_st + dy * 8);
-            button41.Location = new Point(x_st + dx * 3, y_st + dy * 9);
-            button42.Location = new Point(x_st + dx * 3, y_st + dy * 10);
-            button43.Location = new Point(x_st + dx * 3, y_st + dy * 11);
+            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+            textBox2.Location = new Point(x_st + dx * 3, y_st + dy * 10);
+            lb_ordinal.Location = new Point(x_st + dx * 3, y_st + dy * 11);
 
-            richTextBox1.Location = new Point(x_st + dx * 7 + 20, y_st + dy * 0);
-            richTextBox1.Size = new Size(680, 1000);
+            groupBox2.Location = new Point(x_st + dx * 4 + 20, y_st + dy * 0);
+
+            richTextBox1.Location = new Point(x_st + dx * 4 + 20, y_st + dy * 3);
+            richTextBox1.Size = new Size(640, 600);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            bt_exit_setup();
+            this.Size = new Size(1520, 860);
         }
 
-        private void bt_exit_Click(object sender, EventArgs e)
+        private void bt_clear_Click(object sender, EventArgs e)
         {
-            Application.Exit();
-        }
-
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
+            richTextBox1.Clear();
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -953,15 +922,10 @@ namespace vcs_test_all_01_Math
 
 
 
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Bitmap bitmap1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\_material\sddev1.png");
-            e.Graphics.DrawImage(bitmap1, 8, this.ClientSize.Height - bitmap1.Height - 8);
+            e.Graphics.DrawImage(bitmap1, 1160, 10);
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -973,7 +937,10 @@ namespace vcs_test_all_01_Math
 
             // Get the fraction (and make it positive).
             Fraction frac = new Fraction(textBox1.Text);
-            if (frac < 0) frac = -frac;
+            if (frac < 0)
+            {
+                frac = -frac;
+            }
 
             // Get the Egyptian fraction.
             List<Fraction> fractions = GetEgyptianFraction(frac);
@@ -984,12 +951,12 @@ namespace vcs_test_all_01_Math
             {
                 result = result + unit_fraction.ToString() + " + ";
             }
-            if (result.Length > 0) result = result.Substring(0, result.Length - 3);
+            if (result.Length > 0)
+            {
+                result = result.Substring(0, result.Length - 3);
+            }
 
-            //txtResult.Text = result;
             richTextBox1.Text += result + "\n";
-
-
         }
 
         // Return a string representation of the Egyptian fraction.
@@ -1022,7 +989,6 @@ namespace vcs_test_all_01_Math
                 frac -= unit_fraction;
                 denom++;
             }
-
             return result;
         }
 
@@ -1039,23 +1005,15 @@ namespace vcs_test_all_01_Math
                 richTextBox1.Text += "A除B\t" + (a / b).ToString() + "\n";
                 richTextBox1.Text += "A反相\t" + (-a).ToString() + "\n";
                 richTextBox1.Text += "A轉小數\t" + ((double)a).ToString() + "\n";
-
-
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
-            //把數字讀出來
-            double num = double.Parse(txtNumber.Text);
-            richTextBox1.Text += "原數字:\t" + num.ToString() + "\n";
-            richTextBox1.Text += "讀出來:\t" + num.ToWords() + "\n";
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -1512,46 +1470,22 @@ namespace vcs_test_all_01_Math
 
             tone[21] = tone[20] * aa;
 
-
-
-
             for (i = 0; i < tone.Length; i++)
             {
                 richTextBox1.Text += "i = " + i.ToString() + "\t" + tone[i].ToString() + "\n";
                 if ((i % 7) == 6)
-                    richTextBox1.Text += "\n";
-            }
-
-
-
-        }
-
-        //排序
-        private void button29_Click(object sender, EventArgs e)
-        {
-            string[] name = { "王一", "李二", "陳三", "趙四", "馬五" };
-            int[] score = { 78, 80, 50, 96, 69 };
-            int[] rank = new int[5];
-            int i;
-            int j;
-            for (i = 0; i < 5; i++)
-            {
-                rank[i] = 1; //先假設名次為1
-
-                // 依序和他人比較，只要有人較高分，其名次即遞增1
-                for (j = 0; j < 5; j++)
                 {
-                    if (score[j] > score[i])
-                    {
-                        rank[i] += 1;
-                    }
+                    richTextBox1.Text += "\n";
                 }
             }
+        }
 
-            for (i = 0; i < 5; i++)
-            {
-                richTextBox1.Text += name[i] + "\t第" + rank[i].ToString() + "名\n";
-            }
+        private void button29_Click(object sender, EventArgs e)
+        {
+            //把數字讀出來
+            double num = double.Parse(txtNumber.Text);
+            richTextBox1.Text += "原數字:\t" + num.ToString() + "\n";
+            richTextBox1.Text += "讀出來:\t" + num.ToWords() + "\n";
         }
 
         //MODBUS RTU CRC
@@ -1738,25 +1672,6 @@ namespace vcs_test_all_01_Math
         }
 
         private void button39_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button40_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button41_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button42_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button43_Click(object sender, EventArgs e)
         {
 
         }

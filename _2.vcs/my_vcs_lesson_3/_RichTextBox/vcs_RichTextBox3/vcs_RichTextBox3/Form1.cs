@@ -438,27 +438,66 @@ namespace vcs_RichTextBox3
 
         private void button20_Click(object sender, EventArgs e)
         {
+            int i;
+            int len = richTextBox1.Lines.Length;
+
+            richTextBox2.Text += "richTextBox1 共有 : " + len.ToString() + " 行\n";
+            for (i = 0; i < len; i++)
+            {
+                richTextBox2.Text += "i = " + i.ToString() + "\t" + richTextBox1.Lines[i] + "\tlen = " + richTextBox1.Lines[i].Length.ToString() + "\n";
+            }
 
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //check
+            int i;
+            int j;
+            int len = richTextBox1.Lines.Length;
 
+            richTextBox2.Text += "richTextBox1 共有 : " + len.ToString() + " 行\n";
+            for (i = 0; i < (len - 1); i++)
+            {
+                if (richTextBox1.Lines[i].Length <= 0)
+                    continue;
+
+                for (j = (i + 1); j < len; j++)
+                {
+                    if (richTextBox1.Lines[j].Length <= 0)
+                        continue;
+
+                    if (richTextBox1.Lines[i].Trim().Contains(richTextBox1.Lines[j].Trim()))
+                    {
+                        richTextBox2.Text += "第 " + i.ToString() + " 行 包含 第 " + j.ToString() + " 行\n";
+                    }
+                    else if (richTextBox1.Lines[j].Trim().Contains(richTextBox1.Lines[i].Trim()))
+                    {
+                        richTextBox2.Text += "第 " + j.ToString() + " 行 包含 第 " + i.ToString() + " 行\n";
+                    }
+                }
+            }
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
-
+            //Richtextbox 的比例因子 ZoomFactor
+            richTextBox1.ZoomFactor = (float)3.2;
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
-
+            //Richtextbox 的比例因子 ZoomFactor
+            richTextBox1.ZoomFactor = (float)1.0;
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //字體
+            //Font f = new Font("標楷體", 20F, FontStyle.Regular, GraphicsUnit.Point);
+            Font f = new Font("標楷體", 20F, FontStyle.Bold, GraphicsUnit.Point);      //粗體
 
+            richTextBox1.Font = f;
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -486,5 +525,28 @@ namespace vcs_RichTextBox3
 
         }
 
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            //richTextBox2.Text += "A ";
+        }
+
+        private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //抓 Ctrl + R
+            byte asc = Convert.ToByte(e.KeyChar);
+            //richTextBox2.Text += "|  " + e.KeyChar.ToString() + "  |  " + asc.ToString() + "  |  " + asc.ToString("X2") + "  |\n";
+            if (asc == 18)  //ctrl + A = 1, ctrl + B = 2, ..., ctrl + R = 18
+            {
+                e.Handled = true;
+                richTextBox2.Text += "你按了 ctrl + R\n";
+            }
+
+            //抓 Enter 鍵
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                e.Handled = true;
+                richTextBox2.Text += "你按了 Enter\n";
+            }
+        }
     }
 }

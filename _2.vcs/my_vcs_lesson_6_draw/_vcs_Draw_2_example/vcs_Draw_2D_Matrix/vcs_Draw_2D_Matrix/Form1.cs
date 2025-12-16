@@ -390,198 +390,8 @@ namespace vcs_Draw_2D_Matrix
             pictureBox1.Image = bitmap1;
         }
 
-        int[,] pattern0 = new int[,]
-        {
-        {0,1,1,0,0,0,0,0,0,0},
-        {1,1,1,1,0,0,0,0,0,0},
-        {0,1,1,0,0,0,0,0,0,0},
-        {0,0,1,1,0,0,0,0,0,0},
-        {0,0,1,1,1,1,0,0,0,0},
-        {0,0,1,1,1,0,1,0,0,0},
-        {0,1,0,1,1,0,1,0,0,0},
-        {1,0,0,1,1,0,0,0,0,0},
-        {0,0,0,1,1,1,0,0,0,0},
-        {0,0,0,1,0,1,0,0,0,0},
-        {0,0,1,0,0,0,1,1,0,0},
-        {0,0,1,0,0,0,0,0,1,1},
-        {0,0,1,0,0,0,0,0,0,1},
-        {1,1,0,0,0,0,0,0,1,0}
-        };
-
-        int[,] pattern1 = new int[,]
-        {
-        {0,0,0,0,0,0,0,1,1,0},
-        {0,0,0,0,0,0,1,1,1,1},
-        {0,0,0,0,0,0,0,1,1,0},
-        {0,0,0,0,0,0,1,1,0,0},
-        {0,0,0,0,1,1,1,1,0,0},
-        {0,0,0,1,0,1,1,1,0,0},
-        {0,0,0,1,0,1,1,0,1,0},
-        {0,0,0,0,0,1,1,0,0,1},
-        {0,0,0,0,1,1,1,0,0,0},
-        {0,0,0,0,1,0,1,0,0,0},
-        {0,0,1,1,0,0,0,1,0,0},
-        {1,1,0,0,0,0,0,1,0,0},
-        {1,0,0,0,0,0,0,1,0,0},
-        {0,1,0,0,0,0,0,0,1,1}
-        };
-
-        int[,] pattern2 = new int[,]
-        {
-        {0,1,1,0,0,0,0,0,0,0},
-        {1,1,1,1,0,0,0,0,0,0},
-        {0,1,1,0,0,0,0,0,0,0},
-        {0,0,1,1,0,0,0,0,0,0},
-        {0,0,1,1,1,1,0,0,0,0},
-        {0,0,1,1,1,0,1,0,0,0},
-        {0,1,0,1,1,0,1,0,0,0},
-        {1,0,0,1,1,0,0,0,0,0},
-        {0,0,0,1,1,1,0,0,0,0},
-        {0,0,0,1,0,1,0,0,0,0},
-        {0,0,1,0,0,0,1,1,0,0},
-        {0,0,1,0,0,0,0,0,1,1},
-        {0,0,1,0,0,0,0,0,0,1},
-        {1,1,0,0,0,0,0,0,1,0}
-        };
-
-        int[,] pattern3 = new int[,]
-        {
-        {0,0,0,0,0,0,0,1,1,0},
-        {0,0,0,0,0,0,1,1,1,1},
-        {0,0,0,0,0,0,0,1,1,0},
-        {0,0,0,0,0,0,1,1,0,0},
-        {0,0,0,0,1,1,1,1,0,0},
-        {0,0,0,1,0,1,1,1,0,0},
-        {0,0,0,1,0,1,1,0,1,0},
-        {0,0,0,0,0,1,1,0,0,1},
-        {0,0,0,0,1,1,1,0,0,0},
-        {0,0,0,0,1,0,1,0,0,0},
-        {0,0,1,1,0,0,0,1,0,0},
-        {1,1,0,0,0,0,0,1,0,0},
-        {1,0,0,0,0,0,0,1,0,0},
-        {0,1,0,0,0,0,0,0,1,1}
-        };
-
-        int[,] pattern4 = new int[,]
-        {
-        {0,1,1,0,0,0,0,0,0,0},
-        {1,1,1,1,0,0,0,0,0,0},
-        {0,1,1,0,0,0,0,0,0,0},
-        {0,0,1,1,0,0,0,0,0,0},
-        {0,0,1,1,1,1,0,0,0,0},
-        {0,0,1,1,1,0,1,0,0,0},
-        {0,1,0,1,1,0,1,0,0,0},
-        {1,0,0,1,1,0,0,0,0,0},
-        {0,0,0,1,1,1,0,0,0,0},
-        {0,0,0,1,0,1,0,0,0,0},
-        {0,0,1,0,0,0,1,1,0,0},
-        {0,0,1,0,0,0,0,0,1,1},
-        {0,0,1,0,0,0,0,0,0,1},
-        {1,1,0,0,0,0,0,0,1,0}
-        };
-
-        int[,] pattern5 = new int[,]
-        {
-        {0,0,0,0,0,0,0,1,1,0},
-        {0,0,0,0,0,0,1,1,1,1},
-        {0,0,0,0,0,0,0,1,1,0},
-        {0,0,0,0,0,0,1,1,0,0},
-        {0,0,0,0,1,1,1,1,0,0},
-        {0,0,0,1,0,1,1,1,0,0},
-        {0,0,0,1,0,1,1,0,1,0},
-        {0,0,0,0,0,1,1,0,0,1},
-        {0,0,0,0,1,1,1,0,0,0},
-        {0,0,0,0,1,0,1,0,0,0},
-        {0,0,1,1,0,0,0,1,0,0},
-        {1,1,0,0,0,0,0,1,0,0},
-        {1,0,0,0,0,0,0,1,0,0},
-        {0,1,0,0,0,0,0,0,1,1}
-        };
-
-        int[,] pattern6 = new int[,]
-        {
-        {0,0,0,0,0,0,0,1,1,0},
-        {0,0,0,0,0,0,1,1,1,1},
-        {0,0,0,0,0,0,0,1,1,0},
-        {0,0,0,0,0,0,1,1,0,0},
-        {0,0,0,0,1,1,1,1,0,0},
-        {0,0,0,1,0,1,1,1,0,0},
-        {0,0,0,1,0,1,1,0,1,0},
-        {0,0,0,0,0,1,1,0,0,1},
-        {0,0,0,0,1,1,1,0,0,0},
-        {0,0,0,0,1,0,1,0,0,0},
-        {0,0,1,1,0,0,0,1,0,0},
-        {1,1,0,0,0,0,0,1,0,0},
-        {1,0,0,0,0,0,0,1,0,0},
-        {0,1,0,0,0,0,0,0,1,1}
-        };
-
-        void draw_2d_pattern(int[,] pattern, int offset_x, int offset_y, int brick_size)
-        {
-            //richTextBox1.Text += "二維陣列內容\n";
-            //PrintArray(pattern);
-
-            int ROW = pattern.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
-            int COL = pattern.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
-            int length = pattern.Length;//獲取整個二維陣列的長度，即所有元 的個數
-            /*
-            richTextBox1.Text += "ROW = " + ROW.ToString() + "\n";
-            richTextBox1.Text += "COL = " + COL.ToString() + "\n";
-            richTextBox1.Text += "length = " + length.ToString() + "\n";
-            */
-
-            int x_st = 0;
-            int y_st = 0;
-            SolidBrush redBrush = new SolidBrush(Color.Red);
-            SolidBrush blackBrush = new SolidBrush(Color.Black);
-
-            for (int r = pattern.GetLowerBound(0); r <= pattern.GetUpperBound(0); r++)
-            {
-                for (int c = pattern.GetLowerBound(1); c <= pattern.GetUpperBound(1); c++)
-                {
-                    //richTextBox1.Text += pattern[r, c].ToString() + "\t";
-
-                    //richTextBox1.Text += "(" + c.ToString() + ", " + r.ToString() + ")\t";
-                    //g.DrawRectangle(Pens.Red, 100, 100, 200, 200);
-                    x_st = offset_x + c * brick_size;
-                    y_st = offset_y + r * brick_size;
-                    if (pattern[r, c] == 1)
-                    {
-                        g.FillRectangle(redBrush, x_st, y_st, brick_size, brick_size);
-                    }
-                    else
-                    {
-                        g.FillRectangle(blackBrush, x_st, y_st, brick_size, brick_size);
-                    }
-                }
-                //richTextBox1.Text += "\n";
-            }
-            //richTextBox1.Text += "\n";
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
-            W = pictureBox1.ClientSize.Width;
-            H = pictureBox1.ClientSize.Height;
-
-            Bitmap bitmap1 = new Bitmap(W, H);
-            g = Graphics.FromImage(bitmap1);
-
-            g.Clear(Color.White);
-            pictureBox1.Image = bitmap1;
-
-            int x_st = 20;
-            int y_st = 20;
-            int dx = 170;
-            int dy = 230;
-            int brick_size = 15;
-            draw_2d_pattern(pattern0, x_st + dx * 0, y_st + dy * 0, brick_size);
-            draw_2d_pattern(pattern1, x_st + dx * 1, y_st + dy * 0, brick_size);
-            draw_2d_pattern(pattern2, x_st + dx * 2, y_st + dy * 0, brick_size);
-            draw_2d_pattern(pattern3, x_st + dx * 3, y_st + dy * 0, brick_size);
-            draw_2d_pattern(pattern4, x_st + dx * 0, y_st + dy * 1, brick_size);
-            draw_2d_pattern(pattern5, x_st + dx * 1, y_st + dy * 1, brick_size);
-            draw_2d_pattern(pattern6, x_st + dx * 2, y_st + dy * 1, brick_size);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -980,8 +790,60 @@ namespace vcs_Draw_2D_Matrix
             //richTextBox1.Text += "\n";
         }
 
+        PointF RotationMatrix(PointF pt)
+        {
+            double theta = Math.PI / 6;
+            float xx = (float)(Math.Cos(theta) * pt.X -Math.Sin(theta)* pt.Y);
+            float yy = (float)(Math.Sin(theta) * pt.X + Math.Cos(theta) * pt.Y);
+
+            return new PointF(xx, yy);
+        }
+
+        struct PointS
+        {
+            float X;
+            float Y;
+        }
+
         private void button5_Click(object sender, EventArgs e)
         {
+            W = pictureBox1.ClientSize.Width;
+            H = pictureBox1.ClientSize.Height;
+
+            richTextBox1.Text += "W = " + W.ToString() + "\n";
+            richTextBox1.Text += "H = " + H.ToString() + "\n";
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            Pen p = new Pen(Color.Red, 5);
+            Point point1a = new Point(100, 100);
+            Point point2a = new Point(500, 500);
+            g.DrawLine(p, point1a, point2a);
+
+            p = new Pen(Color.Green, 5);
+
+            point1a = new Point(100, 100);
+            PointF point1aa = RotationMatrix(point1a);
+            point2a = new Point(500, 500);
+            PointF point2aa = RotationMatrix(point2a);
+            g.DrawLine(p, point1aa, point2aa);
+            richTextBox1.Text += "point1aa=" + point1aa + "\n";
+            richTextBox1.Text += "point2aa=" + point2aa + "\n";
+
+            //PointS pts1 = new PointS(100, 100);
+
+
+            pictureBox1.Image = bitmap1;
+
+
+
+            //Point一個點
+            Point point = new Point(10, 20);    //宣告一個Point變數
+            point.X = 30;   //改值
+            point.Y = 40;
+            point = new Point(35, 45);          //同時更改XY兩個整數屬性的值
+
+
         }
 
         private void PrintArray<T>(T[,] arr)

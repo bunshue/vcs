@@ -50,10 +50,6 @@
             this.tb_random_text4 = new System.Windows.Forms.TextBox();
             this.tb_random_text3 = new System.Windows.Forms.TextBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.bt_random23 = new System.Windows.Forms.Button();
-            this.bt_random22 = new System.Windows.Forms.Button();
-            this.bt_random21 = new System.Windows.Forms.Button();
-            this.bt_random20 = new System.Windows.Forms.Button();
             this.bt_random19 = new System.Windows.Forms.Button();
             this.bt_random18 = new System.Windows.Forms.Button();
             this.bt_random17 = new System.Windows.Forms.Button();
@@ -125,10 +121,6 @@
             this.groupBox1.Controls.Add(this.tb_random_text4);
             this.groupBox1.Controls.Add(this.tb_random_text3);
             this.groupBox1.Controls.Add(this.pictureBox4);
-            this.groupBox1.Controls.Add(this.bt_random23);
-            this.groupBox1.Controls.Add(this.bt_random22);
-            this.groupBox1.Controls.Add(this.bt_random21);
-            this.groupBox1.Controls.Add(this.bt_random20);
             this.groupBox1.Controls.Add(this.bt_random19);
             this.groupBox1.Controls.Add(this.bt_random18);
             this.groupBox1.Controls.Add(this.bt_random17);
@@ -324,46 +316,6 @@
             this.pictureBox4.Size = new System.Drawing.Size(50, 50);
             this.pictureBox4.TabIndex = 65;
             this.pictureBox4.TabStop = false;
-            // 
-            // bt_random23
-            // 
-            this.bt_random23.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random23.Location = new System.Drawing.Point(329, 215);
-            this.bt_random23.Name = "bt_random23";
-            this.bt_random23.Size = new System.Drawing.Size(150, 60);
-            this.bt_random23.TabIndex = 64;
-            this.bt_random23.UseVisualStyleBackColor = true;
-            this.bt_random23.Click += new System.EventHandler(this.bt_random23_Click);
-            // 
-            // bt_random22
-            // 
-            this.bt_random22.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random22.Location = new System.Drawing.Point(329, 150);
-            this.bt_random22.Name = "bt_random22";
-            this.bt_random22.Size = new System.Drawing.Size(150, 60);
-            this.bt_random22.TabIndex = 63;
-            this.bt_random22.UseVisualStyleBackColor = true;
-            this.bt_random22.Click += new System.EventHandler(this.bt_random22_Click);
-            // 
-            // bt_random21
-            // 
-            this.bt_random21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random21.Location = new System.Drawing.Point(329, 88);
-            this.bt_random21.Name = "bt_random21";
-            this.bt_random21.Size = new System.Drawing.Size(150, 60);
-            this.bt_random21.TabIndex = 62;
-            this.bt_random21.UseVisualStyleBackColor = true;
-            this.bt_random21.Click += new System.EventHandler(this.bt_random21_Click);
-            // 
-            // bt_random20
-            // 
-            this.bt_random20.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random20.Location = new System.Drawing.Point(329, 21);
-            this.bt_random20.Name = "bt_random20";
-            this.bt_random20.Size = new System.Drawing.Size(150, 60);
-            this.bt_random20.TabIndex = 61;
-            this.bt_random20.UseVisualStyleBackColor = true;
-            this.bt_random20.Click += new System.EventHandler(this.bt_random20_Click);
             // 
             // bt_random19
             // 
@@ -837,10 +789,6 @@
         private System.Windows.Forms.Button bt_random14;
         private System.Windows.Forms.Button bt_random13;
         private System.Windows.Forms.Button bt_random0;
-        private System.Windows.Forms.Button bt_random23;
-        private System.Windows.Forms.Button bt_random22;
-        private System.Windows.Forms.Button bt_random21;
-        private System.Windows.Forms.Button bt_random20;
         private System.Windows.Forms.Button bt_random19;
         private System.Windows.Forms.Button bt_random18;
         private System.Windows.Forms.PictureBox pictureBox4;

@@ -185,4 +185,3 @@ namespace vcs_Struct
         }
     }
 }
-

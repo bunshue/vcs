@@ -1943,9 +1943,13 @@ namespace vcs_ImageProcessing3
                     iAvg = (myColor.R + myColor.G + myColor.B) / 3;
                     iPixel = 0;
                     if (iAvg >= 128)
+                    {
                         iPixel = 255;
+                    }
                     else
+                    {
                         iPixel = 0;
+                    }
                     myNewColor = Color.FromArgb(255, iPixel, iPixel, iPixel);
                     bitmap2.SetPixel(i, j, myNewColor);
                     j = j + 1;
@@ -1986,8 +1990,14 @@ namespace vcs_ImageProcessing3
                 {
                     int newX = (int)(x + (iAmplitude * System.Math.Sin(System.Math.PI * y / iFrequency)));
                     int newY = (int)(y + (iAmplitude * System.Math.Cos(System.Math.PI * x / iFrequency)));
-                    if (newX < 0 || newX >= bitmap1.Width) newX = 0;
-                    if (newY < 0 || newY >= bitmap1.Height) newY = 0;
+                    if (newX < 0 || newX >= bitmap1.Width)
+                    {
+                        newX = 0;
+                    }
+                    if (newY < 0 || newY >= bitmap1.Height)
+                    {
+                        newY = 0;
+                    }
                     bitmap1.SetPixel(x, y, bitmap2.GetPixel(newX, newY));
                 }
             }
