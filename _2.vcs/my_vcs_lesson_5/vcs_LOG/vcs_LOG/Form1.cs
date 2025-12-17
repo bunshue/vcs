@@ -27,9 +27,10 @@ namespace vcs_LOG
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            show_item_location();
 
-            LogFileName = Application.StartupPath + "\\log_" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
+
+            LogFileName = "tmp_log_" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
             richTextBox1.Text += "用Timer1自動存Log中.....\n";
 
             Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
@@ -40,13 +41,27 @@ namespace vcs_LOG
             Register();
 
             LogAPI.InitLogAPI(Application.StartupPath, "aaaaaaa.log");
-
-
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Process.GetCurrentProcess().Kill(); //程序的退出
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 5;
+            dy = 60 + 5;
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -128,8 +143,7 @@ namespace vcs_LOG
                 {
                     finfo.Directory.Create();
                 }
-                string writeString = string.Format("{0:yyyy/MM/dd HH:mm:ss} {1}",
-                    DateTime.Now, message) + Environment.NewLine;
+                string writeString = string.Format("{0:yyyy/MM/dd HH:mm:ss} {1}", DateTime.Now, message) + "\n";
 
                 File.AppendAllText(filename, writeString, Encoding.Unicode);
             }
@@ -276,10 +290,7 @@ namespace vcs_LOG
         */
 
         /*
-        /// <summary>
         /// 实现单例
-        /// </summary>
-        /// <returns></returns>
         public static FlashLogger Instance()
         {
             return _flashLog;
@@ -335,17 +346,13 @@ namespace vcs_LOG
                             break;
                     }
                 }
-
                 // 重新設置信號
                 _mre.Reset();
                 Thread.Sleep(1);
             }
         }
 
-
-        /// <summary>
         /// 写日志
-        /// </summary>
         /// <param name="message">日志文本</param>
         /// <param name="level">等级</param>
         /// <param name="ex">Exception</param>
@@ -497,23 +504,14 @@ namespace vcs_LOG
         private static string myPath = "";
         private static string myName = "";
 
-        /// 
         /// 初始化日志文件
-        /// 
-
-        /// 
-        /// 
         public static void InitLogAPI(string logPath, string logName)
         {
             myPath = logPath;
             myName = logName;
         }
 
-        /// 
-        /// 寫入日志
-        /// 
-
-        /// 日志信息
+        // 寫入日志
         public static void WriteLog(string ex)
         {
             if (myPath == "" || myName == "")
@@ -563,7 +561,6 @@ namespace vcs_LOG
         public static void Log(string msg)
         {
             byte[] data = Encoding.UTF8.GetBytes(msg);
-
             FileStream fs = new FileStream(logFileName, FileMode.OpenOrCreate);
             fs.Position = fs.Length;
             StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);
@@ -576,13 +573,7 @@ namespace vcs_LOG
 
     public class Logger
     {
-        /// <summary>
-        /// 寫入日志.
-        /// </summary>
-        /// <param name="strList">The STR list.</param>
-        /// <remarks> </remarks>
-        /// <Description></Description>
-        //public static void WriteLog(string ex)
+        // 寫入日志.
         public static void WriteLog(params object[] strList)
         {
             if (strList.Count() == 0) return;
@@ -600,8 +591,15 @@ namespace vcs_LOG
                 strPath = strDicPath + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日志記錄.txt";
             }
 
-            if (!Directory.Exists(strDicPath)) Directory.CreateDirectory(strDicPath);
-            if (!File.Exists(strPath)) using (FileStream fs = File.Create(strPath)) { }
+            if (!Directory.Exists(strDicPath))
+            {
+                Directory.CreateDirectory(strDicPath);
+            }
+            if (!File.Exists(strPath))
+            {
+                using (FileStream fs = File.Create(strPath))
+                { }
+            }
             string str = File.ReadAllText(strPath);
             StringBuilder sb = new StringBuilder();
             foreach (var item in strList)
@@ -612,3 +610,4 @@ namespace vcs_LOG
         }
     }
 }
+

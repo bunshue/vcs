@@ -25,6 +25,8 @@ namespace vcs_Clock6
         // Prepare the form.
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
+
             // Attach the context menu.
             // (You could do this at design time.)
             ContextMenuStrip = contextMenuStrip1;

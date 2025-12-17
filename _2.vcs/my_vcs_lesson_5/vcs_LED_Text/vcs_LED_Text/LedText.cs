@@ -127,7 +127,7 @@ namespace vcs_LED_Text
             };
         }
 
-#region Led polygon functions
+        #region Led polygon functions
         public PointF[] MakeLed0(PointF position)
         {
             PointF p1 = new PointF(
@@ -539,7 +539,7 @@ namespace vcs_LED_Text
 
             return points.ToArray();
         }
-#endregion Led polygon functions
+        #endregion Led polygon functions
 
         // Make the polygons that represent a letter.
         public void MakeLetterPgons(char letter, PointF position,

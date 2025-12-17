@@ -75,7 +75,6 @@ namespace vcs_Test_Notifier
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = false;
             cnt = 0;
-
         }
 
         private void button2_Click(object sender, EventArgs e)

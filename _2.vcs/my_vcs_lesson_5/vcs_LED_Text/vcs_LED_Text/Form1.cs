@@ -18,11 +18,16 @@ namespace vcs_LED_Text
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-//            TestLeds(e.Graphics);
-//            TestColorful(e.Graphics);
-//            TestSplat(e.Graphics);
+            //TestLeds(e.Graphics);
+            //TestColorful(e.Graphics);
+            //TestSplat(e.Graphics);
             TestLetters(e.Graphics);
         }
         private void TestSplat(Graphics gr)

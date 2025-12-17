@@ -13,12 +13,12 @@ namespace vcs_Puzzle4
     {
         Graphics g;
         int[,] puzzle_array;//二維陣列
-        int pbx_W = 640;
+        int pbx_W = 800;
         int pbx_H = 480;
         int box_w = 100;
         int box_h = 100;
-        int M = 3;
-        int N = 2;
+        int M = 8;
+        int N = 3;
 
         public Form1()
         {
@@ -29,7 +29,7 @@ namespace vcs_Puzzle4
         {
             show_item_location();
 
-            puzzle_array = new int[M, N];
+            puzzle_array = new int[N, M];
 
             int i;
             int j;
@@ -37,7 +37,7 @@ namespace vcs_Puzzle4
             {
                 for (i = 0; i < M; i++)
                 {
-                    puzzle_array[i, j] = 0;
+                    puzzle_array[j, i] = 0;
                 }
             }
         }
@@ -55,8 +55,10 @@ namespace vcs_Puzzle4
             dx = 200 + 5;
             dy = 60 + 5;
 
-            tb_num_m.Location = new Point(x_st + dx * 0, y_st + dy * 7 + 60);
-            tb_num_n.Location = new Point(x_st + dx * 0 + 100, y_st + dy * 7 + 60);
+            label0.Location = new Point(x_st + dx * 0, y_st + dy * 7 + 60);
+            tb_num_m.Location = new Point(x_st + dx * 0 + 50, y_st + dy * 7 + 60);
+            label1.Location = new Point(x_st + dx * 0 + 140, y_st + dy * 7 + 60);
+            tb_num_n.Location = new Point(x_st + dx * 0 + 140 + 50, y_st + dy * 7 + 60);
             tb_num_m.Text = M.ToString();
             tb_num_n.Text = N.ToString();
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 7 + 100);
@@ -100,9 +102,9 @@ namespace vcs_Puzzle4
                 for (i = 0; i < M; i++)
                 {
                     if (i == (M - 1))
-                        richTextBox1.Text += puzzle_array[i, j];
+                        richTextBox1.Text += puzzle_array[j, i];
                     else
-                        richTextBox1.Text += puzzle_array[i, j] + ", ";
+                        richTextBox1.Text += puzzle_array[j, i] + ", ";
                 }
                 richTextBox1.Text += "},\n";
             }
@@ -135,11 +137,14 @@ namespace vcs_Puzzle4
             int x = e.X / box_w;
             int y = e.Y / box_h;
 
-            if (puzzle_array[x, y] == 0)
-                puzzle_array[x, y] = 1;
+            if (puzzle_array[y, x] == 0)
+            {
+                puzzle_array[y, x] = 1;
+            }
             else
-                puzzle_array[x, y] = 0;
-
+            {
+                puzzle_array[y, x] = 0;
+            }
             this.pictureBox1.Invalidate();
         }
 
@@ -174,17 +179,11 @@ namespace vcs_Puzzle4
 
             Color c = Color.Black;
 
-
-
-            print_puzzle_array(puzzle_array);
-
-            return;
-
             for (j = 0; j < N; j++)
             {
                 for (i = 0; i < M; i++)
                 {
-                    if (puzzle_array[i, j] == 0)
+                    if (puzzle_array[j, i] == 0)
                     {
                         c = Color.Black;
                     }
@@ -261,7 +260,7 @@ namespace vcs_Puzzle4
             box_w = Math.Min(ww, hh);
             box_h = Math.Min(ww, hh);
 
-            puzzle_array = new int[M, N];
+            puzzle_array = new int[N, M];
 
             int i;
             int j;
@@ -269,13 +268,9 @@ namespace vcs_Puzzle4
             {
                 for (i = 0; i < M; i++)
                 {
-                    puzzle_array[i, j] = 0;
+                    puzzle_array[j, i] = 0;
                 }
             }
-
-            puzzle_array[0, 0] = 1;
-            puzzle_array[1, 0] = 1;
-            puzzle_array[2, 1] = 1;
 
             //建立圖片框陣列
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
@@ -298,21 +293,21 @@ namespace vcs_Puzzle4
         private void button2_Click(object sender, EventArgs e)
         {
             //匯入陣列
-            M = 3;
-            N = 2;
+            M = 16;
+            N = 16;
             int ww = 5 * (pbx_W / M / 5);
             int hh = 5 * (pbx_H / N / 5);
             box_w = Math.Min(ww, hh);
             box_h = Math.Min(ww, hh);
 
-            puzzle_array = new int[M, N];
+            puzzle_array = new int[N, M];
             /*
             puzzle_array = new int[,] {
             { 0, 1, 0, 1, 0, 1, 0, 1 }, { 1, 0, 1, 0, 1, 0, 1, 0}, { 0, 1, 0, 1, 0, 1, 0, 1 }, { 1, 0, 1, 0, 1, 0, 1, 0 },
             { 0, 1, 0, 1, 0, 1, 0, 1 }, { 1, 0, 1, 0, 1, 0, 1, 0}, { 0, 1, 0, 1, 0, 1, 0, 1 }, { 1, 0, 1, 0, 1, 0, 1, 0 }
             };
             */
-            /*
+
             puzzle_array = new int[,] {
             { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
             { 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -331,34 +326,6 @@ namespace vcs_Puzzle4
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
             };
-            */
-
-            puzzle_array = new int[M, N];
-
-            int i;
-            int j;
-            for (j = 0; j < N; j++)
-            {
-                for (i = 0; i < M; i++)
-                {
-                    puzzle_array[i, j] = 0;
-                }
-            }
-
-            puzzle_array[0, 0] = 1;
-            puzzle_array[1, 0] = 1;
-            puzzle_array[2, 1] = 1;
-
-
-            puzzle_array = new int[,] {
-            { 1, 1, 0},
-            { 0, 0, 1},
-            };
-
-
-
-
-
 
             //建立圖片框陣列
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
@@ -480,7 +447,7 @@ namespace vcs_Puzzle4
                     {
                         g.FillEllipse(new SolidBrush(Color.Lime), w * xx, h * yy, w, h);
                         //g.FillRectangle(new SolidBrush(Color.Red), w * xx, h * yy, w, h);
-                        if(xx==15)
+                        if (xx == 15)
                             richTextBox1.Text += "1";
                         else
                             richTextBox1.Text += "1, ";
@@ -834,9 +801,24 @@ namespace vcs_Puzzle4
 }
 
 
-/*
-puzzle_array = new int[M, N];
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
 */
+
 
 
 

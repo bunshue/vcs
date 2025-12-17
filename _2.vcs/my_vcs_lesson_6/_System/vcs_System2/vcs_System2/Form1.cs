@@ -51,11 +51,8 @@ namespace vcs_System2
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            label2.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            bt_exit.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 35);
-
             richTextBox1.Size = new Size(400, 460);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1000, 660);
@@ -64,24 +61,6 @@ namespace vcs_System2
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-        }
-
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            //離開
-            Application.Exit();
-        }
-
-        //禁用視窗上的關閉按鈕
-        protected override void WndProc(ref Message m)
-        {
-            const int WM_SYSCOMMAND = 0x0112;
-            const int SC_CLOSE = 0xF060;
-            if ((m.Msg == WM_SYSCOMMAND) && ((int)m.WParam == SC_CLOSE))
-            {
-                return;
-            }
-            base.WndProc(ref m);
         }
 
         private void button0_Click(object sender, EventArgs e)

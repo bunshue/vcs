@@ -42,6 +42,8 @@
             this.button7 = new System.Windows.Forms.Button();
             this.tb_num_m = new System.Windows.Forms.TextBox();
             this.tb_num_n = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label0 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
@@ -190,11 +192,33 @@
             this.tb_num_n.TabIndex = 222;
             this.tb_num_n.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(442, 295);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 19);
+            this.label1.TabIndex = 223;
+            this.label1.Text = "橫列";
+            // 
+            // label0
+            // 
+            this.label0.AutoSize = true;
+            this.label0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label0.Location = new System.Drawing.Point(442, 276);
+            this.label0.Name = "label0";
+            this.label0.Size = new System.Drawing.Size(47, 19);
+            this.label0.TabIndex = 224;
+            this.label0.Text = "直欄";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(632, 411);
+            this.Controls.Add(this.label0);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.tb_num_n);
             this.Controls.Add(this.tb_num_m);
             this.Controls.Add(this.button7);
@@ -235,6 +259,8 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.TextBox tb_num_m;
         private System.Windows.Forms.TextBox tb_num_n;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label0;
     }
 }
 
