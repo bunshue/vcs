@@ -13,8 +13,8 @@ namespace vcs_Puzzle4
     {
         Graphics g;
         int[,] puzzle_array;//二維陣列
-        int pbx_W = 800;
-        int pbx_H = 480;
+        int pbx_W = 1200;
+        int pbx_H = 500;
         int box_w = 100;
         int box_h = 100;
         int M = 8;
@@ -74,16 +74,11 @@ namespace vcs_Puzzle4
             pictureBox1.Size = new Size(pbx_W, pbx_H);
             pictureBox1.BackColor = Color.Pink;
 
-            int pbx_w = 320;
-            int pbx_h = 320;
-            pictureBox4.Size = new Size(pbx_w, pbx_h);
-            pictureBox4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-
-            richTextBox1.Size = new Size(500, 385);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 5);
+            richTextBox1.Size = new Size(790, 295);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 7 + 60);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1370, 880);
+            this.Size = new Size(1250, 880);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -165,6 +160,8 @@ namespace vcs_Puzzle4
             int i;
             int j;
 
+            e.Graphics.Clear(Color.LightGray);
+
             //畫垂直線
             for (i = 0; i < W; i += box_w)
             {
@@ -186,39 +183,18 @@ namespace vcs_Puzzle4
                     if (puzzle_array[j, i] == 0)
                     {
                         c = Color.Black;
+                        //e.Graphics.FillEllipse(new SolidBrush(Color.White), box_w * i, box_h * j, box_w - 1, box_h - 1);
                     }
                     else
                     {
                         c = Color.White;
+                        //e.Graphics.FillEllipse(new SolidBrush(Color.Lime), box_w * i, box_h * j, box_w - 1, box_h - 1);
                     }
-                    //drawBox(i, j, w, h, c);
+                    //drawBox(i, j, w, h, c); TBD
                     SolidBrush sb = new SolidBrush(c);
                     e.Graphics.FillRectangle(sb, box_w * i, box_h * j, box_w - 1, box_h - 1);
                 }
             }
-
-            //Pen p = new Pen(Color.Red, 20);
-            //e.Graphics.DrawRectangle(p, 0, 0, W, H);
-
-            /*
-            foreach (int argb in Properties.Settings.Default.Argbs)
-            {
-                Color color = Color.FromArgb(argb);
-                richTextBox1.Text += "get color " + color.ToString() + "\n";
-                using (SolidBrush br = new SolidBrush(color))
-                {
-                    e.Graphics.FillRectangle(br, x, y,
-                        PatchWidth, PatchHeight);
-                }
-                x += PatchWidth + PatchMargin;
-                if (x > max_x)
-                {
-                    x = 0;
-                    y += PatchHeight + PatchMargin;
-                }
-            }
-            */
-
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -290,47 +266,71 @@ namespace vcs_Puzzle4
             pictureBox1.Invalidate();
         }
 
+        int step = 0;
         private void button2_Click(object sender, EventArgs e)
         {
-            //匯入陣列
+            //匯入陣列 小綠人
             M = 16;
             N = 16;
+            tb_num_m.Text = M.ToString();
+            tb_num_n.Text = N.ToString();
             int ww = 5 * (pbx_W / M / 5);
             int hh = 5 * (pbx_H / N / 5);
             box_w = Math.Min(ww, hh);
             box_h = Math.Min(ww, hh);
 
             puzzle_array = new int[N, M];
+
+            if (step == 0)
+            {
+                richTextBox1.Text += "Step0\n";
+                puzzle_array = greenman_step0;
+            }
+            else if (step == 1)
+            {
+                richTextBox1.Text += "Step1\n";
+                puzzle_array = greenman_step1;
+            }
+            else if (step == 2)
+            {
+                richTextBox1.Text += "Step2\n";
+                puzzle_array = greenman_step2;
+            }
+            else if (step == 3)
+            {
+                richTextBox1.Text += "Step3\n";
+                puzzle_array = greenman_step3;
+            }
+            else if (step == 4)
+            {
+                richTextBox1.Text += "Step4\n";
+                puzzle_array = greenman_step4;
+            }
+            else if (step == 5)
+            {
+                richTextBox1.Text += "Step5\n";
+                puzzle_array = greenman_step5;
+            }
+            else if (step == 6)
+            {
+                richTextBox1.Text += "Step6\n";
+                puzzle_array = greenman_step6;
+            }
+            else
+            {
+                richTextBox1.Text += "Step7\n";
+                puzzle_array = greenman_step7;
+            }
+            step++;
+            if (step > 7)
+                step = 0;
+
             /*
-            puzzle_array = new int[,] {
-            { 0, 1, 0, 1, 0, 1, 0, 1 }, { 1, 0, 1, 0, 1, 0, 1, 0}, { 0, 1, 0, 1, 0, 1, 0, 1 }, { 1, 0, 1, 0, 1, 0, 1, 0 },
-            { 0, 1, 0, 1, 0, 1, 0, 1 }, { 1, 0, 1, 0, 1, 0, 1, 0}, { 0, 1, 0, 1, 0, 1, 0, 1 }, { 1, 0, 1, 0, 1, 0, 1, 0 }
-            };
-            */
-
-            puzzle_array = new int[,] {
-            { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0 },
-            { 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 },
-            { 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            };
-
             //建立圖片框陣列
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
             pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
             pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
+            */
             pictureBox1.Paint += new PaintEventHandler(pictureBox1_Paint);
             pictureBox1.Invalidate();
         }
@@ -340,130 +340,6 @@ namespace vcs_Puzzle4
             //匯出陣列
             print_puzzle_array(puzzle_array);
         }
-
-        byte[] Step0 = {
-0x0c,0x00,0x1e,0x00,0x0c,0x00,0x06,0x00,0x07,0xc0,0x07,0x20,0x0b,0x10,0x11,0x80,
-0x01,0x80,0x01,0x40,0x02,0x20,0x04,0x10,0x1c,0x08,0x00,0x08,0x00,0x00,0x00,0x00,
-};
-        byte[] Step1 = {
-0x0c,0x00,0x1e,0x00,0x0c,0x00,0x06,0x00,0x07,0xc0,0x07,0x20,0x0b,0x10,0x11,0x80,
-0x01,0x80,0x01,0x40,0x01,0x30,0x02,0x08,0x04,0x08,0x38,0x08,0x00,0x10,0x00,0x00,
-};
-        byte[] Step2 = {
-0x0c,0x00,0x1e,0x00,0x0c,0x00,0x06,0x00,0x03,0x80,0x03,0x40,0x07,0x20,0x09,0xa0,
-0x01,0x80,0x01,0x40,0x01,0x40,0x02,0x20,0x02,0x10,0x0e,0x30,0x00,0x00,0x00,0x00,
-};
-        byte[] Step3 = {
-0x06,0x00,0x0f,0x00,0x06,0x00,0x03,0x00,0x03,0x80,0x03,0x40,0x01,0xa0,0x01,0xa0,
-0x02,0xc0,0x01,0xc0,0x02,0x40,0x04,0x30,0x03,0x08,0x01,0x08,0x07,0x00,0x00,0x00,
-};
-        byte[] Step4 = {
-0x06,0x00,0x0f,0x00,0x06,0x00,0x03,0x00,0x03,0x80,0x03,0x40,0x01,0xa0,0x01,0xa0,
-0x02,0xc0,0x01,0xc0,0x02,0x40,0x02,0x20,0x01,0x90,0x00,0xb0,0x03,0x80,0x00,0x00,
-};
-        byte[] Step5 = {
-0x06,0x00,0x0f,0x00,0x06,0x00,0x02,0x00,0x03,0x00,0x03,0x80,0x01,0xc0,0x01,0xc0,
-0x00,0xc0,0x00,0xc0,0x01,0x60,0x00,0xa0,0x00,0xe0,0x00,0x20,0x00,0xe0,0x00,0x00,
-};
-        byte[] Step6 = {
-0x06,0x00,0x0f,0x00,0x06,0x00,0x03,0x00,0x03,0x80,0x01,0x40,0x03,0xa0,0x03,0xa0,
-0x00,0xc0,0x00,0xc0,0x01,0x80,0x02,0x40,0x01,0x30,0x03,0x08,0x00,0x38,0x00,0x00,
-};
-        byte[] Step7 = {
-0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-};
-        int step = 0;
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //測試小綠人1
-            int W = 320;
-            int H = 320;
-            int w = 20;
-            int h = 20;
-            Bitmap bitmap1 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-            g.Clear(Color.LightGray);
-
-            //測試小綠人
-            byte[] man = Step0;
-
-            if (step == 0)
-            {
-                richTextBox1.Text += "Step0\n";
-                man = Step0;
-            }
-            else if (step == 1)
-            {
-                richTextBox1.Text += "Step1\n";
-                man = Step1;
-            }
-            else if (step == 2)
-            {
-                richTextBox1.Text += "Step2\n";
-                man = Step2;
-            }
-            else if (step == 3)
-            {
-                richTextBox1.Text += "Step3\n";
-                man = Step3;
-            }
-            else if (step == 4)
-            {
-                richTextBox1.Text += "Step4\n";
-                man = Step4;
-            }
-            else if (step == 5)
-            {
-                richTextBox1.Text += "Step5\n";
-                man = Step5;
-            }
-            else if (step == 6)
-            {
-                richTextBox1.Text += "Step6\n";
-                man = Step6;
-            }
-            else
-            {
-                richTextBox1.Text += "Step7\n";
-                man = Step7;
-            }
-            step++;
-            if (step > 7)
-                step = 0;
-
-            int len = man.Length;
-            //richTextBox1.Text += "len = " + len.ToString() + "\n";
-
-            int yy;
-            for (yy = 0; yy < len / 2; yy++)
-            {
-                //richTextBox1.Text += "第 " + yy.ToString() + " 行\t" + man[yy * 2].ToString("X2") + " " + man[yy * 2 + 1].ToString("X2") + "\n";
-                int aa = man[yy * 2] * 256 + man[yy * 2 + 1];
-                richTextBox1.Text += "{ ";
-                for (int xx = 0; xx < 16; xx++)
-                {
-                    if (((aa >> (15 - xx)) & 0x01) == 0x01)
-                    {
-                        g.FillEllipse(new SolidBrush(Color.Lime), w * xx, h * yy, w, h);
-                        //g.FillRectangle(new SolidBrush(Color.Red), w * xx, h * yy, w, h);
-                        if (xx == 15)
-                            richTextBox1.Text += "1";
-                        else
-                            richTextBox1.Text += "1, ";
-                    }
-                    else
-                    {
-                        g.FillEllipse(new SolidBrush(Color.White), w * xx, h * yy, w, h);
-                        //g.FillRectangle(new SolidBrush(Color.White), w * xx, h * yy, w, h);
-                        richTextBox1.Text += "0, ";
-                    }
-                }
-                richTextBox1.Text += "},\n";
-            }
-            pictureBox4.Image = bitmap1;
-        }
-
 
         int[,] pattern0 = new int[,]
         {
@@ -634,9 +510,9 @@ namespace vcs_Puzzle4
             //richTextBox1.Text += "\n";
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
-            //測試小綠人2
+            //測試小綠人
 
             int W = pictureBox1.ClientSize.Width;
             int H = pictureBox1.ClientSize.Height;
@@ -661,145 +537,456 @@ namespace vcs_Puzzle4
             draw_2d_pattern(pattern6, x_st + dx * 2, y_st + dy * 1, brick_size);
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        int[,] comma = new int[7, 1] {
+            { 0 },
+            { 1 },
+            { 0 },
+            { 0 },
+            { 0 },
+            { 1 },
+            { 0 }
+            };
+
+        int[,] num0 = new int[7, 3] {
+            { 1, 1, 1 },
+            { 1, 0, 1 },
+            { 1, 0, 1 },
+            { 1, 0, 1 },
+            { 1, 0, 1 },
+            { 1, 0, 1 },
+            { 1, 1, 1 }
+            };
+
+        int[,] num1 = new int[7, 3] {
+            { 0, 0, 1 },
+            { 0, 0, 1 },
+            { 0, 0, 1 },
+            { 0, 0, 1 },
+            { 0, 0, 1 },
+            { 0, 0, 1 },
+            { 0, 0, 1 }
+            };
+
+        int[,] num2 = new int[7, 3] {
+            { 1, 1, 1 },
+            { 0, 0, 1 },
+            { 0, 0, 1 },
+            { 1, 1, 1 },
+            { 1, 0, 0 },
+            { 1, 0, 0 },
+            { 1, 1, 1 }
+            };
+
+        int[,] num3 = new int[7, 3] {
+            { 1, 1, 1 },
+            { 0, 0, 1 },
+            { 0, 0, 1 },
+            { 1, 1, 1 },
+            { 0, 0, 1 },
+            { 0, 0, 1 },
+            { 1, 1, 1 }
+            };
+
+        int[,] num4 = new int[7, 3] {
+            { 1, 0, 1 },
+            { 1, 0, 1 },
+            { 1, 0, 1 },
+            { 1, 1, 1 },
+            { 0, 0, 1 },
+            { 0, 0, 1 },
+            { 0, 0, 1 }
+            };
+
+        int[,] num5 = new int[7, 3] {
+            { 1, 1, 1 },
+            { 1, 0, 0 },
+            { 1, 0, 0 },
+            { 1, 1, 1 },
+            { 0, 0, 1 },
+            { 0, 0, 1 },
+            { 1, 1, 1 }
+            };
+
+        int[,] num6 = new int[7, 3] {
+            { 1, 1, 1 },
+            { 1, 0, 0 },
+            { 1, 0, 0 },
+            { 1, 1, 1 },
+            { 1, 0, 1 },
+            { 1, 0, 1 },
+            { 1, 1, 1 }
+            };
+
+        int[,] num7 = new int[7, 3] {
+            { 1, 1, 1 },
+            { 0, 0, 1 },
+            { 0, 0, 1 },
+            { 0, 0, 1 },
+            { 0, 0, 1 },
+            { 0, 0, 1 },
+            { 0, 0, 1 }
+            };
+
+        int[,] num8 = new int[7, 3] {
+            { 1, 1, 1 },
+            { 1, 0, 1 },
+            { 1, 0, 1 },
+            { 1, 1, 1 },
+            { 1, 0, 1 },
+            { 1, 0, 1 },
+            { 1, 1, 1 }
+            };
+
+        int[,] num9 = new int[7, 3] {
+            { 1, 1, 1 },
+            { 1, 0, 1 },
+            { 1, 0, 1 },
+            { 1, 1, 1 },
+            { 0, 0, 1 },
+            { 0, 0, 1 },
+            { 1, 1, 1 }
+            };
+
+        private void button5_Click(object sender, EventArgs e)
         {
             //測試數字 二維陣列
 
-            int[,] num0 = new int[7, 3] {
-            { 1, 1, 1 },
-            { 1, 0, 1 },
-            { 1, 0, 1 },
-            { 1, 0, 1 },
-            { 1, 0, 1 },
-            { 1, 0, 1 },
-            { 1, 1, 1 }
-            };
-            int[,] num1 = new int[7, 3] {
-            { 0, 0, 1 },
-            { 0, 0, 1 },
-            { 0, 0, 1 },
-            { 0, 0, 1 },
-            { 0, 0, 1 },
-            { 0, 0, 1 },
-            { 0, 0, 1 }
-            };
-            int[,] num2 = new int[7, 3] {
-            { 1, 1, 1 },
-            { 0, 0, 1 },
-            { 0, 0, 1 },
-            { 1, 1, 1 },
-            { 1, 0, 0 },
-            { 1, 0, 0 },
-            { 1, 1, 1 }
-            };
-            int[,] num3 = new int[7, 3] {
-            { 1, 1, 1 },
-            { 0, 0, 1 },
-            { 0, 0, 1 },
-            { 1, 1, 1 },
-            { 0, 0, 1 },
-            { 0, 0, 1 },
-            { 1, 1, 1 }
-            };
-            int[,] num4 = new int[7, 3] {
-            { 1, 0, 1 },
-            { 1, 0, 1 },
-            { 1, 0, 1 },
-            { 1, 1, 1 },
-            { 0, 0, 1 },
-            { 0, 0, 1 },
-            { 0, 0, 1 }
-            };
-            int[,] num5 = new int[7, 3] {
-            { 1, 1, 1 },
-            { 1, 0, 0 },
-            { 1, 0, 0 },
-            { 1, 1, 1 },
-            { 0, 0, 1 },
-            { 0, 0, 1 },
-            { 1, 1, 1 }
-            };
-            int[,] num6 = new int[7, 3] {
-            { 1, 1, 1 },
-            { 1, 0, 0 },
-            { 1, 0, 0 },
-            { 1, 1, 1 },
-            { 1, 0, 1 },
-            { 1, 0, 1 },
-            { 1, 1, 1 }
-            };
-            int[,] num7 = new int[7, 3] {
-            { 1, 1, 1 },
-            { 0, 0, 1 },
-            { 0, 0, 1 },
-            { 0, 0, 1 },
-            { 0, 0, 1 },
-            { 0, 0, 1 },
-            { 0, 0, 1 }
-            };
-            int[,] num8 = new int[7, 3] {
-            { 1, 1, 1 },
-            { 1, 0, 1 },
-            { 1, 0, 1 },
-            { 1, 1, 1 },
-            { 1, 0, 1 },
-            { 1, 0, 1 },
-            { 1, 1, 1 }
-            };
-            int[,] num9 = new int[7, 3] {
-            { 1, 1, 1 },
-            { 1, 0, 1 },
-            { 1, 0, 1 },
-            { 1, 1, 1 },
-            { 0, 0, 1 },
-            { 0, 0, 1 },
-            { 1, 1, 1 }
-            };
+            M = 3;
+            N = 7;
+            tb_num_m.Text = M.ToString();
+            tb_num_n.Text = N.ToString();
+            int ww = 5 * (pbx_W / M / 5);
+            int hh = 5 * (pbx_H / N / 5);
+            box_w = Math.Min(ww, hh);
+            box_h = Math.Min(ww, hh);
 
+            box_w = 42;
+            box_h = 42;
+            richTextBox1.Text += "w = " + box_w.ToString() + ", h = " + box_h.ToString() + "\n";
 
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
 
+            Bitmap bitmap1 = new Bitmap(W, H);
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.FromArgb(50, 50, 50));
+            pictureBox1.Image = bitmap1;
 
+            int x_st = 0;
+            int y_st = 0;
+            int num = 0;
 
+            x_st = 0;
+            y_st = 0;
+            num = 1;
+            drawNumber(g, num, x_st, y_st, box_w, box_h);
 
+            x_st += box_w * 4;
+            num = 2;
+            drawNumber(g, num, x_st, y_st, box_w, box_h);
+
+            x_st += box_w * 4;
+            num = 10;
+            drawNumber(g, num, x_st, y_st, box_w, box_h);
+
+            x_st += box_w * 2;
+            num = 3;
+            drawNumber(g, num, x_st, y_st, box_w, box_h);
+
+            x_st += box_w * 4;
+            num = 4;
+            drawNumber(g, num, x_st, y_st, box_w, box_h);
+
+            x_st += box_w * 4;
+            num = 10;
+            drawNumber(g, num, x_st, y_st, box_w, box_h);
+
+            x_st += box_w * 2;
+            num = 5;
+            drawNumber(g, num, x_st, y_st, box_w, box_h);
+
+            x_st += box_w * 4;
+            num = 6;
+            drawNumber(g, num, x_st, y_st, box_w, box_h);
+
+        }
+
+        void drawNumber(Graphics g, int num, int x_st, int y_st, int box_w, int box_h)
+        {
+            int M = 3;
+            int N = 7;
+            int W = box_w * M;
+            int H = box_h * N;
+            int i;
+            int j;
+
+            if (num == 10)
+            {
+                M = 1;
+            }
+
+            puzzle_array = new int[N, M];
+
+            if (num == 0)
+            {
+                richTextBox1.Text += "num0\n";
+                puzzle_array = num0;
+            }
+            else if (num == 1)
+            {
+                richTextBox1.Text += "num1\n";
+                puzzle_array = num1;
+            }
+            else if (num == 2)
+            {
+                richTextBox1.Text += "num2\n";
+                puzzle_array = num2;
+            }
+            else if (num == 3)
+            {
+                richTextBox1.Text += "num3\n";
+                puzzle_array = num3;
+            }
+            else if (num == 4)
+            {
+                richTextBox1.Text += "num4\n";
+                puzzle_array = num4;
+            }
+            else if (num == 5)
+            {
+                richTextBox1.Text += "num5\n";
+                puzzle_array = num5;
+            }
+            else if (num == 6)
+            {
+                richTextBox1.Text += "num6\n";
+                puzzle_array = num6;
+            }
+            else if (num == 7)
+            {
+                richTextBox1.Text += "num7\n";
+                puzzle_array = num7;
+            }
+            else if (num == 8)
+            {
+                richTextBox1.Text += "num8\n";
+                puzzle_array = num8;
+            }
+            else if (num == 9)
+            {
+                richTextBox1.Text += "num9\n";
+                puzzle_array = num9;
+            }
+            else if (num == 10)
+            {
+                richTextBox1.Text += "comma\n";
+                puzzle_array = comma;
+            }
+            else
+            {
+                richTextBox1.Text += "num0\n";
+                puzzle_array = num0;
+            }
+
+            Color c = Color.Black;
+
+            for (j = 0; j < N; j++)
+            {
+                for (i = 0; i < M; i++)
+                {
+                    if (puzzle_array[j, i] == 0)
+                    {
+                        c = Color.Black;
+                        c = Color.FromArgb(41, 47, 43);
+                        //g.FillEllipse(new SolidBrush(Color.White), box_w * i, box_h * j, box_w - 1, box_h - 1);
+                    }
+                    else
+                    {
+                        c = Color.White;
+                        c = Color.FromArgb(90, 230, 134);
+                        //g.FillEllipse(new SolidBrush(Color.Lime), box_w * i, box_h * j, box_w - 1, box_h - 1);
+                    }
+                    //drawBox(i, j, w, h, c); TBD
+                    SolidBrush sb = new SolidBrush(c);
+                    g.FillRectangle(sb, x_st + box_w * i, y_st + box_h * j, box_w - 1, box_h - 1);
+                }
+            }
+
+            //畫垂直線
+            for (i = 0; i < W; i += box_w)
+            {
+                g.DrawLine(new Pen(Color.FromArgb(36, 38, 35), 4), x_st + i, y_st + 0, x_st + i, y_st + H);
+            }
+
+            //畫水平線
+            for (j = 0; j < H; j += box_h)
+            {
+                g.DrawLine(new Pen(Color.FromArgb(36, 38, 35), 4), x_st + 0, y_st + j, x_st + W, y_st + j);
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //測試2D陣列
-            /*
-            做一個 M X N 的二維陣列 column=8, row=3
-            ROW	N
-            COL	M
-            [1 2 3 4 5 6 7 8]
-            [1 2 3 4 5 6 7 8]
-            [1 2 3 4 5 6 7 8]
-            人 : 8 X 3陣列
-            vcs要寫相反 puzzle_array(3, 8)
-            */
-            int[,] puzzle_array = new int[3, 8];    //Row = 3, Column = 8
-            puzzle_array = new int[,] {
-            {0, 1, 2, 3, 4, 5, 6, 7},
-            {0, 1, 2, 3, 4, 5, 6, 7},
-            {0, 1, 2, 3, 4, 5, 6, 7},
-            };
-            int ROW = puzzle_array.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
-            int COL = puzzle_array.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
-            int i;
-            int j;
-            for (j = 0; j < ROW; j++)
-            {
-                for (i = 0; i < COL; i++)
-                {
-                    //puzzle_array[j, i] = i * 10 + j;	//i j 相反
-                    richTextBox1.Text += puzzle_array[j, i].ToString() + " ";
-                }
-                richTextBox1.Text += "\n";
-            }
-            richTextBox1.Text += "\n";
+
         }
+
+        int[,] greenman_step0 = new int[,] {
+        { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0},
+        { 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+        { 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+
+        int[,] greenman_step1 = new int[,] {
+        { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0},
+        { 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+        { 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+
+        int[,] greenman_step2 = new int[,] {
+        { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+
+        int[,] greenman_step3 = new int[,] {
+        { 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+
+        int[,] greenman_step4 = new int[,] {
+        { 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+
+        int[,] greenman_step5 = new int[,] {
+        { 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+
+        int[,] greenman_step6 = new int[,] {
+        { 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
+
+        int[,] greenman_step7 = new int[,] {
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        };
     }
 }
-
 
 
 //6060
@@ -818,7 +1005,5 @@ namespace vcs_Puzzle4
 /*  可搬出
 
 */
-
-
 
 

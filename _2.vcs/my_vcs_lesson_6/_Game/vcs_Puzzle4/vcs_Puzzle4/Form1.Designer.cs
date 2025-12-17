@@ -34,7 +34,6 @@
             this.bt_clear = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -45,7 +44,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label0 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -70,7 +68,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(240, 276);
+            this.richTextBox1.Location = new System.Drawing.Point(127, 276);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 2;
@@ -79,7 +77,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(265, 328);
+            this.bt_clear.Location = new System.Drawing.Point(152, 328);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(60, 32);
             this.bt_clear.TabIndex = 35;
@@ -94,7 +92,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 36;
-            this.button2.Text = "匯入陣列";
+            this.button2.Text = "匯入陣列 小綠人";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -108,16 +106,6 @@
             this.button0.Text = "建立圖片框陣列";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox4.Location = new System.Drawing.Point(128, 276);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 215;
-            this.pictureBox4.TabStop = false;
             // 
             // button3
             // 
@@ -148,7 +136,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 218;
-            this.button5.Text = "測試小綠人2";
+            this.button5.Text = "測試數字";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -159,7 +147,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 219;
-            this.button6.Text = "測試數字";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -170,14 +157,13 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 220;
-            this.button7.Text = "test 2d array";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // tb_num_m
             // 
             this.tb_num_m.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_num_m.Location = new System.Drawing.Point(347, 276);
+            this.tb_num_m.Location = new System.Drawing.Point(234, 276);
             this.tb_num_m.Name = "tb_num_m";
             this.tb_num_m.Size = new System.Drawing.Size(80, 33);
             this.tb_num_m.TabIndex = 221;
@@ -186,7 +172,7 @@
             // tb_num_n
             // 
             this.tb_num_n.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_num_n.Location = new System.Drawing.Point(347, 328);
+            this.tb_num_n.Location = new System.Drawing.Point(234, 328);
             this.tb_num_n.Name = "tb_num_n";
             this.tb_num_n.Size = new System.Drawing.Size(80, 33);
             this.tb_num_n.TabIndex = 222;
@@ -196,7 +182,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(442, 295);
+            this.label1.Location = new System.Drawing.Point(329, 295);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 19);
             this.label1.TabIndex = 223;
@@ -206,7 +192,7 @@
             // 
             this.label0.AutoSize = true;
             this.label0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label0.Location = new System.Drawing.Point(442, 276);
+            this.label0.Location = new System.Drawing.Point(329, 276);
             this.label0.Name = "label0";
             this.label0.Size = new System.Drawing.Size(47, 19);
             this.label0.TabIndex = 224;
@@ -216,7 +202,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 411);
+            this.ClientSize = new System.Drawing.Size(624, 441);
             this.Controls.Add(this.label0);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tb_num_n);
@@ -226,7 +212,6 @@
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.bt_clear);
@@ -237,7 +222,6 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -251,7 +235,6 @@
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button0;
-        private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;

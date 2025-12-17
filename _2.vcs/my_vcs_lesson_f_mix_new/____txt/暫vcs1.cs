@@ -10,6 +10,25 @@ richTextBox1.Text += "----------------------------------------------------------
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+            /*
+            foreach (int argb in Properties.Settings.Default.Argbs)
+            {
+                Color color = Color.FromArgb(argb);
+                richTextBox1.Text += "get color " + color.ToString() + "\n";
+                using (SolidBrush br = new SolidBrush(color))
+                {
+                    e.Graphics.FillRectangle(br, x, y,
+                        PatchWidth, PatchHeight);
+                }
+                x += PatchWidth + PatchMargin;
+                if (x > max_x)
+                {
+                    x = 0;
+                    y += PatchHeight + PatchMargin;
+                }
+            }
+            */
+
 
 
 
