@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;
+using System.IO;    //for File
+using System.Text.RegularExpressions;
 
 namespace vcs_ReadWrite_TXT
 {
@@ -72,11 +73,22 @@ namespace vcs_ReadWrite_TXT
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
+            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+
             richTextBox1.Size = new Size(440, 640);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear1.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear1.Size.Height);
 
-            this.Size = new Size(1100, 700);
+            this.Size = new Size(1100+210, 700);
         }
 
         private void bt_clear1_Click(object sender, EventArgs e)
@@ -1262,6 +1274,419 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Text += "LastWriteTime : " + fi.LastWriteTime + "\n";
             richTextBox1.Text += "LastWriteTimeUtc : " + fi.LastWriteTimeUtc + "\n";
         }
+
+
+        private const int SEARCH_LEN_MAX = 20;	//搜尋最大長度
+        private const int SEARCH_LEN_MIN = 4;	//搜尋最短長度
+
+        int same_count = 0;
+
+        //統計每個單詞在文章中出現的次數 用的資料
+        string text = @"var query = from info in infoList 
+    where info.AuditFlag == null || info.AuditFlag == false 
+    join emp in empList 
+       on info.SaleMan equals emp.EmployeeCode 
+    join house in houseList 
+       on info.WareHouse equals house.WareHouseCode 
+    join client in clientList 
+       on info.ClientCode equals client.ClientCode 
+    join dictPayMode in dictList 
+       on info.PayMode equals dictPayMode.ValueCode 
+    where dictPayMode.TypeCode == 'PayMode\' 
+    join dictInvoiceType in dictList 
+       on info.InvoiceType equals dictInvoiceType.ValueCode 
+    where dictInvoiceType.TypeCode == 'InvoiceType'
+    select new 
+    { 
+       id = info.ID,
+       SaleBillCode = info.SaleBillCode,
+       SaleMan = emp.Name,
+       SaleDate = info.SaleDate,
+       Provider = client.ShortName,
+       WareHouse = house.ShortName,
+       PayMode = dictPayMode.ValueName,
+       InvoiceType = dictInvoiceType.ValueName,
+       InvoiceCode = info.InvoiceCode,
+       AuditFlag = info.AuditFlag 
+    };";
+
+        public class WordInfo
+        {
+            public int keyword_len;
+            public string keyword;
+            public int keyword_cnt;
+            public WordInfo(int l, string s, int c)
+            {
+                this.keyword_len = l;
+                this.keyword = s;
+                this.keyword_cnt = c;
+            }
+        }
+
+        List<WordInfo> word_statistics = new List<WordInfo>();
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            /*
+            try
+            {
+                richTextBox1.LoadFile("pipa.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                MessageBox.Show("找不到檔案");
+            }
+            */
+
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\novel.txt";
+            string y = File.ReadAllText(filename, System.Text.Encoding.Default);
+            //richTextBox1.Text += "檔案內容 : " + y + "\n";
+            richTextBox1.Text += "總長度：" + y.Length.ToString() + "\n";
+
+            word_statistics.Clear();
+
+            int i, j, k;
+            int t;
+            int ignore = 0;
+            string pattern = string.Empty;
+            string word;
+            int find_pattern_count = 0;
+
+            for (k = SEARCH_LEN_MIN; k < SEARCH_LEN_MAX; k++)
+            {
+                find_pattern_count = 0;
+                richTextBox1.Text += "\n搜尋長度：" + (k + 1).ToString() + "\n";
+                for (i = 0; i < (y.Length - (k + 1)); i++)
+                {
+                    same_count = 1;
+                    ignore = 0;
+                    for (t = 0; t <= k; t++)
+                    {
+                        /*
+                        //需要跳過的字眼
+                        if ((y[i + t] == '，') || (y[i + t] == '。') || (y[i + t] == '\n') || (y[i + t] == 0x0d) || (y[i + t] == 0x0a) || (y[i + t] == ' ') || (y[i + t] == 0x20) || (y[i + t] == '\t') || (y[i + t] == '　') || (y[i + t] == '"'))
+                        {
+                            ignore = 1;
+                            break;
+                        }
+                        if ((y[i + t] == '：') || (y[i + t] == '﹒') || (y[i + t] == '「') || (y[i + t] == '」') || (y[i + t] == '？') || (y[i + t] == '…') || (y[i + t] == '、') || (y[i + t] == '\t') || (y[i + t] == '　') || (y[i + t] == '"'))
+                        {
+                            ignore = 1;
+                            break;
+                        }
+                        */
+                        if ((y[i + t] < 13000) || (y[i + t] > 60000))
+                        {
+                            ignore = 1;
+                            break;
+                        }
+                    }
+
+                    //跳過已經找過的
+                    for (int s = 0; s < word_statistics.Count; s++)
+                    {
+                        word = word_statistics[s].keyword;
+                        if (y.Substring(i, (k + 1)) == word)
+                        {
+                            //richTextBox1.Text += "X " + y.Substring(i, (k + 1));
+                            ignore = 1;
+                            break;
+                        }
+                    }
+
+                    if (ignore == 1)
+                        continue;
+
+                    int find_pattern = 1;
+                    for (j = i + (k + 1); j < (y.Length - k); j++)
+                    {
+                        find_pattern = 1;
+                        for (t = 0; t <= k; t++)
+                        {
+                            if (y[i + t] == y[j + t])
+                            {
+                                find_pattern *= 1;
+                            }
+                            else
+                            {
+                                find_pattern *= 0;
+                            }
+                        }
+
+                        if (find_pattern == 1)
+                        {
+                            same_count++;
+                        }
+
+                        /*
+                        if (k == 0)
+                        {
+                            if (y[i] == y[j])
+                            {
+                                //richTextBox1.Text += "取得 " + y[i] + " i = " + i.ToString() + " j = " + j.ToString() + "\t";
+                                same_count++;
+                            }
+                        }
+                        else if (k == 1)
+                        {
+                            if ((y[i] == y[j]) && (y[i + 1] == y[j + 1]))
+                            {
+                                //richTextBox1.Text += "取得 " + y[i] + y[i + 1] + " i = " + i.ToString() + " j = " + j.ToString() + "\t";
+                                same_count++;
+                            }
+                        }
+                        else if (k == 2)
+                        {
+                            if ((y[i] == y[j]) && (y[i + 1] == y[j + 1]) && (y[i + 2] == y[j + 2]))
+                            {
+                                //richTextBox1.Text += "取得 " + y[i] + y[i + 1] + " i = " + i.ToString() + " j = " + j.ToString() + "\t";
+                                same_count++;
+                            }
+                        }
+                        else if (k == 3)
+                        {
+                            if ((y[i] == y[j]) && (y[i + 1] == y[j + 1]) && (y[i + 2] == y[j + 2]) && (y[i + 3] == y[j + 3]))
+                            {
+                                //richTextBox1.Text += "取得 " + y[i] + y[i + 1] + " i = " + i.ToString() + " j = " + j.ToString() + "\t";
+                                same_count++;
+                            }
+                        }
+                        */
+
+                        if (j == (y.Length - (k + 1)))
+                        {
+                            if (same_count > 2)
+                            {
+                                find_pattern_count++;
+                                richTextBox1.Text += "取得 \"";
+                                for (t = 0; t <= k; t++)
+                                {
+                                    richTextBox1.Text += y[i + t];
+                                }
+                                richTextBox1.Text += "\" 共 " + same_count.ToString() + " 個\n";
+
+                                pattern = y.Substring(i, (k + 1));
+
+                                word_statistics.Add(new WordInfo(k, pattern, same_count));
+
+
+                            }
+                        }
+                    }
+                }
+                richTextBox1.Text += "find_pattern_count = " + find_pattern_count.ToString() + "\n";
+                if (find_pattern_count == 0)
+                {
+                    richTextBox1.Text += "不用再找了\n";
+                    break;
+                }
+            }
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "word_statistics.Count = " + word_statistics.Count.ToString() + "\n";
+
+            int len;
+            string word;
+            int count;
+
+            for (int i = 0; i < word_statistics.Count; i++)
+            {
+                len = word_statistics[i].keyword_len;
+                word = word_statistics[i].keyword;
+                count = word_statistics[i].keyword_cnt;
+
+                richTextBox1.Text += "len = " + len.ToString() + " word = " + word + " count = " + count.ToString() + "\n";
+            }
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            int i;
+            //if ((y[i + t] == '：') || (y[i + t] == '﹒') || (y[i + t] == '「') || (y[i + t] == '」') || (y[i + t] == '？') || (y[i + t] == '…') || (y[i + t] == '、') || (y[i + t] == '\t') || (y[i + t] == '　') || (y[i + t] == '"'))
+            richTextBox1.Text += "：\t" + ((int)'：').ToString() + "\n";
+
+            string ss = "俄羅斯火槍手作亂　";
+            for (i = 0; i < ss.Length; i++)
+            {
+                richTextBox1.Text += ss[i] + "\t" + ((int)ss[i]).ToString() + "\n";
+            }
+
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\novel.txt";
+            string y = File.ReadAllText(filename, System.Text.Encoding.Default);
+            richTextBox1.Text += "\n總長度：" + y.Length.ToString() + "\n";
+
+            for (i = 0; i < y.Length; i++)
+            //for (i = 0; i < 5000; i++)
+            {
+                if ((i % 5) == 4)
+                {
+                    richTextBox1.Text += "\n";
+                }
+
+                if (y[i] == 0x0A)
+                    continue;
+                if (y[i] == 0x0D)
+                    continue;
+                if (y[i] == 0x20)
+                    continue;
+                if (y[i] == 0x22)
+                    continue;
+
+                //if (y[i] < 13000)
+                //richTextBox1.Text += "i = " + i.ToString() + "\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+
+                if ((y[i] >= 0x2E80) && (y[i] <= 0x33FF))
+                {
+                    richTextBox1.Text += "_A\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                }
+
+                if ((y[i] >= 0x3400) && (y[i] <= 0x4DFF))
+                {
+                    richTextBox1.Text += "_B\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                }
+                if ((y[i] >= 0x4E00) && (y[i] <= 0x9FFF))
+                {
+                    richTextBox1.Text += "_C\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                }
+                if ((y[i] >= 0xA000) && (y[i] <= 0xA4FF))
+                {
+                    richTextBox1.Text += "_D\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                }
+                if ((y[i] >= 0xAC00) && (y[i] <= 0xD7FF))
+                {
+                    richTextBox1.Text += "_E\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                }
+                if ((y[i] >= 0xF900) && (y[i] <= 0xFAFF))
+                {
+                    richTextBox1.Text += "_F\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                }
+                if ((y[i] >= 0xFB00) && (y[i] <= 0xFFFD))
+                {
+                    richTextBox1.Text += "_X\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                }
+
+                /*
+                A   2E80～33FFh：中日韓符號區。收容康熙字典部首、中日韓輔助部首、注音符號、日本假名、韓文音符，中日韓的符號、標點、帶圈或帶括符文數字、月份，以及日本的假名組合、單位、年號、月份、日期、時間等。
+                B   3400～4DFFh：中日韓認同表意文字擴充A區，總計收容6,582個中日韓漢字。
+                C   4E00～9FFFh：中日韓認同表意文字區，總計收容20,902個中日韓漢字。
+                D   A000～A4FFh：彝族文字區，收容中國南方彝族文字和字根。
+                E   AC00～D7FFh：韓文拼音組合字區，收容以韓文音符拼成的文字。
+                F   F900～FAFFh：中日韓兼容表意文字區，總計收容302個中日韓漢字。
+                X   FB00～FFFDh：文字表現形式區，收容組合拉丁文字、希伯來文、阿拉伯文、中日韓直式標點、小符號、半角符號、全角符號等。
+                */
+            }
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+            int i;
+            //int j = 0;
+            string aaa = string.Empty;
+            for (i = 0x4E2D; i < 0x4FFF; i++)
+            {
+                //richTextBox1.Text += "_A\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                //richTextBox1.Text += (string)(i) + "\t";
+                //aaa[j] = (char)i;
+                //j++;
+            }
+        }
+
+        //統計每個單詞在文章中出現的次數
+        private void button34_Click(object sender, EventArgs e)
+        {
+            //將單詞轉換為數組
+            string[] allWords = text.Split(new char[] { '.', '?', '!', ' ', ';', ':', ',' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] distinctWords = allWords.Distinct().ToArray<string>(); //去掉單詞數組中重複的單詞
+            int[] counts = new int[distinctWords.Length];//創建一個存放詞頻統計信息的數組
+            for (int i = 0; i < distinctWords.Length; i++)//遍歷每個單詞
+            {
+                string tempWord = distinctWords[i];
+                //計算每個單詞出現的次數
+                var query = from item in allWords
+                            where item.ToLower() == tempWord.ToLower()
+                            select item;
+                counts[i] = query.Count();
+            }
+
+            //輸出詞頻統計結果
+            for (int i = 0; i < counts.Count(); i++)
+            {
+                richTextBox1.Text += distinctWords[i] + " 出現 " + counts[i].ToString() + " 次\n";
+            }
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+            //純文字統計
+            // Get the file's text.
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\article.txt";
+
+            FileInfo file_info = new FileInfo(filename);
+            string extension = file_info.Extension.ToLower();
+            string txt;
+            richTextBox1.Text += "plain text files\n";
+            txt = File.ReadAllText(filename);
+
+            richTextBox1.Text += "原資料\n" + txt + "\n";
+
+            // Use regular expressions to replace characters
+            // that are not letters or numbers with spaces.
+            Regex reg_exp = new Regex("[^a-zA-Z0-9]");
+            txt = reg_exp.Replace(txt, " ");
+
+            richTextBox1.Text += "去標點符號後的資料\n" + txt + "\n";
+
+            // Split the text into words.
+            string[] words = txt.Split(
+                new char[] { ' ' },
+                StringSplitOptions.RemoveEmptyEntries);
+
+            // Use LINQ to get the unique words.
+            var word_query =
+                (from string word in words
+                 orderby word
+                 select word).Distinct();
+
+            // Display the result.
+            string[] result = word_query.ToArray();
+
+            richTextBox1.Text += "\n\n\n" + result.Length.ToString() + "\n";
+            int len = result.Length;
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += i.ToString() + "\t" + result[i] + "\n";
+            }
+
+            richTextBox1.Text += "\n共 " + result.Length.ToString() + " 字\n";
+
+            foreach (string res in result)
+            {
+                richTextBox1.Text += res + "\n";
+            }
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
@@ -1363,3 +1788,26 @@ richTextBox1.Text += "----------------------------------------------------------
 
 */
 
+
+
+
+
+/*
+_X	|～|	FF5E	65374	
+_X	|：|	FF1A	65306	
+_C	|中|	4E2D	20013	_C	|日|	65E5	26085	_C	|韓|	97D3	38867	_C	|符|	7B26	31526	_C	|號|	865F	34399	
+_C	|區|	5340	21312	_A	|。|	3002	12290	_C	|收|	6536	25910	_C	|容|	5BB9	23481	_C	|康|	5EB7	24247	
+_C	|熙|	7199	29081	_C	|字|	5B57	23383	_C	|典|	5178	20856	_C	|部|	90E8	37096	_C	|首|	9996	39318	
+_A	|、|	3001	12289	_C	|中|	4E2D	20013	_C	|日|	65E5	26085	_C	|韓|	97D3	38867	_C	|輔|	8F14	36628	
+_C	|助|	52A9	21161	_C	|部|	90E8	37096	_C	|首|	9996	39318	_A	|、|	3001	12289	_C	|注|	6CE8	27880	
+_C	|音|	97F3	38899	_C	|符|	7B26	31526	_C	|號|	865F	34399	_A	|、|	3001	12289	_C	|日|	65E5	26085	
+_C	|本|	672C	26412	_C	|假|	5047	20551	_C	|名|	540D	21517	_A	|、|	3001	12289	_C	|韓|	97D3	38867	
+_C	|文|	6587	25991	_C	|音|	97F3	38899	_C	|符|	7B26	31526	_X	|，|	FF0C	65292	_C	|中|	4E2D	20013	
+_C	|日|	65E5	26085	_C	|韓|	97D3	38867	_C	|的|	7684	30340	_C	|符|	7B26	31526	_C	|號|	865F	34399	
+_A	|、|	3001	12289	_C	|標|	6A19	27161	_C	|點|	9EDE	40670	_A	|、|	3001	12289	_C	|帶|	5E36	24118	
+_C	|圈|	5708	22280	_C	|或|	6216	25110	_C	|帶|	5E36	24118	_C	|括|	62EC	25324	_C	|符|	7B26	31526	
+_C	|文|	6587	25991	_C	|數|	6578	25976	_C	|字|	5B57	23383	_A	|、|	3001	12289	_C	|月|	6708	26376	
+_C	|份|	4EFD	20221	_X	|，|	FF0C	65292	_C	|以|	4EE5	20197	_C	|及|	53CA	21450	_C	|日|	65E5	26085	
+_C	|本|	672C	26412	_C	|的|	7684	30340	_C	|假|	5047	20551	_C	|名|	540D	21517	_C	|組|	7D44	32068	
+_C	|合|	5408	21512	_A	|、|	3001	12289	_C	|單|	55AE	21934	_C	|位|	4F4D	20301	_A	|、|	3001	12289	
+*/
