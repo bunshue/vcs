@@ -5,6 +5,28 @@ richTextBox1.Text += "----------------------------------------------------------
 
 
 
+                DateTime baseDateAndTime = new DateTime(1900, 1, 6, 2, 5, 0); //#1/6/1900 2:05:00 AM#
+                DateTime newDate;
+                    num = 525948.76 * (y - 1900) + sTermInfo[i - 1];
+                    newDate = baseDateAndTime.AddMinutes(num);//按分钟计算
+
+
+            //後一天
+            DateTime nextDay = _date.AddDays(1);
+            //前一天
+            DateTime pervDay = _date.AddDays(-1);
+            return new ChineseCalendar(pervDay);
+
+
+
+
+        return "公元" + this._date.ToLongDateString();
+        /// 当前是否公历闰年
+                return DateTime.IsLeapYear(this._date.Year);
+
+
+
+
 
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

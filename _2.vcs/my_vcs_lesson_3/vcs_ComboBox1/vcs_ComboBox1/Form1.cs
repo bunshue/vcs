@@ -26,6 +26,8 @@ namespace vcs_ComboBox1
         {
             show_item_location();
 
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
             // Colors.
             Color[] colors =
             {
@@ -52,24 +54,38 @@ namespace vcs_ComboBox1
             cboFace.SelectedIndex = 0;
             cboFace.DropDownHeight = 200;
 
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //字串一維陣列
+            string[] cities = new string[] { "台北", "新竹", "台中", "台南", "高雄" };
+            comboBox1a.Items.AddRange(cities);
+            comboBox1a.Text = cities[0];
+
+            //預設選項包含關鍵字
+            comboBox1a.SelectedItem = FindItemContaining(comboBox1a.Items, "台");
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //從陣列抓資料到combobox清單內
-            Cursor[] cursorList = new Cursor[] {  // 系統內建的全部滑鼠游標圖形 
-                                                   Cursors.AppStarting, Cursors.Arrow, Cursors.Cross,
-                                                   Cursors.Default, Cursors.Hand, Cursors.Help,
-                                                   Cursors.HSplit, Cursors.IBeam, Cursors.No,
-                                                   Cursors.NoMove2D, Cursors.NoMoveHoriz, Cursors.NoMoveVert,
-                                                   Cursors.PanEast, Cursors.PanNE, Cursors.PanNorth,
-                                                   Cursors.PanNW, Cursors.PanSE, Cursors.PanSouth,
-                                                   Cursors.PanSW, Cursors.PanWest, Cursors.SizeAll,
-                                                   Cursors.SizeNESW, Cursors.SizeNS, Cursors.SizeNWSE,
-                                                   Cursors.SizeWE, Cursors.UpArrow, Cursors.VSplit, Cursors.WaitCursor};
-
+            //系統內建的全部滑鼠游標圖形
+            //系統內建資料轉comboBox
+            Cursor[] cursorList = new Cursor[] {
+                Cursors.AppStarting, Cursors.Arrow, Cursors.Cross,
+                Cursors.Default, Cursors.Hand, Cursors.Help,
+                Cursors.HSplit, Cursors.IBeam, Cursors.No,
+                Cursors.NoMove2D, Cursors.NoMoveHoriz, Cursors.NoMoveVert,
+                Cursors.PanEast, Cursors.PanNE, Cursors.PanNorth,
+                Cursors.PanNW, Cursors.PanSE, Cursors.PanSouth,
+                Cursors.PanSW, Cursors.PanWest, Cursors.SizeAll,
+                Cursors.SizeNESW, Cursors.SizeNS, Cursors.SizeNWSE,
+                Cursors.SizeWE, Cursors.UpArrow, Cursors.VSplit, Cursors.WaitCursor};
 
             foreach (Cursor cursor in cursorList)
             {
-                comboBox1.Items.Add(cursor);  // 加入到 comboBox1 清單內
+                comboBox1b.Items.Add(cursor);  // 加入到 comboBox1b 清單內
             }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             comboBox2.DrawMode = DrawMode.OwnerDrawFixed;//設置繪制元素方式
             comboBox2.DropDownStyle = ComboBoxStyle.DropDownList; //設置組合框樣式
@@ -82,6 +98,8 @@ namespace vcs_ComboBox1
             G_ImageList.Images.Add(Properties.Resources.b);//添加圖片
             G_ImageList.Images.Add(Properties.Resources.c);//添加圖片
             G_ImageList.Images.Add(Properties.Resources.d);//添加圖片
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             comboBox3.Items.Clear();
             comboBox3.Items.Add("Arial");
@@ -113,7 +131,8 @@ namespace vcs_ComboBox1
             comboBox3.Items.Add("細明體_HKSCS");
             comboBox3.Items.Add("細明體_HKSCS-ExtB");
 
-            //comboBox4
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
             //添加項 
             comboBox4.Items.Add(new MyItem("000000", Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_red.jpg")));
             comboBox4.Items.Add(new MyItem("111111", Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_yellow.jpg")));
@@ -132,18 +151,11 @@ namespace vcs_ComboBox1
             //添加DrawItem事件處理函數 
             comboBox4.DrawItem += ComboBox4_DrawItem;
 
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
             setup_comboBox5();
 
-            string[] win32_cmd = new string[] {
-                "Win32_BaseBoard", "Win32_Battery", "Win32_BIOS", "Win32_DiskDrive",
-                "Win32_IDEController", "Win32_NetworkAdapter", "Win32_NetworkAdapterConfiguration",
-                "Win32_Processor", "Win32_SerialPort", "Win32_USBController", "Win32_USBHub",
-                "Win32_VideoController", "Win32_VideoSettings" };
-            comboBox7.Items.AddRange(win32_cmd);
-            comboBox7.Text = win32_cmd[0];
-
-            //預設選項包含關鍵字
-            comboBox7.SelectedItem = FindItemContaining(comboBox7.Items, "Win32_USBHub");
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             imageList8.Images.Add(new Bitmap("img/angry_bird/AB_red.jpg"));
             imageList8.Images.Add(new Bitmap("img/angry_bird/AB_yellow.jpg"));
@@ -171,6 +183,9 @@ namespace vcs_ComboBox1
             comboBox8.SelectedIndex = 0;//設置ComboBox控件默認選中第一項
 
             //comboBox8.DrawItem += new DrawItemEventHandler(comboBox8_DrawItem);
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
         }
 
         void show_item_location()
@@ -180,40 +195,56 @@ namespace vcs_ComboBox1
             int dx;
             int dy;
 
-            int w = 350;
+            int w = 400;
             int h = 150;
 
-            groupBox0.Size = new Size(w, h);
-            groupBox1.Size = new Size(w, h);
-            groupBox2.Size = new Size(w, h);
-            groupBox3.Size = new Size(w, h);
-            groupBox4.Size = new Size(w, h);
-            groupBox5.Size = new Size(w, h);
+            groupBox1.Size = new Size(w, h * 4 + 120);
             groupBox6.Size = new Size(w, h * 3 / 2);
-            groupBox7.Size = new Size(w, h / 2);
-            groupBox8.Size = new Size(w, h);
-
-            //350, 150
 
             x_st = 10;
             y_st = 10;
             dx = w + 10;
             dy = h + 10;
-            groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            groupBox4.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            groupBox5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            groupBox6.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            groupBox7.Location = new Point(x_st + dx * 1, y_st + dy * 3 + 75);
-            groupBox8.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            groupBox6.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox1.Size = new Size(200, 150);
+            pictureBox1.BackColor = Color.Pink;
 
-            richTextBox1.Size = new Size(420, 460);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            richTextBox1.Size = new Size(420, 600);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1200, 700);
+            //groupBox內部的
+            x_st = 20;
+            y_st = 30;
+            dx = 200;
+            dy = 80;
+            int dd = 25;
+
+            label1a.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            comboBox1a.Location = new Point(x_st + dx * 0, y_st + dy * 0 + dd);
+
+            label1b.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            comboBox1b.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd);
+
+            label2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            comboBox2.Location = new Point(x_st + dx * 0, y_st + dy * 2 + dd);
+
+            label3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            comboBox3.Location = new Point(x_st + dx * 0, y_st + dy * 3 + dd);
+            button1.Location = new Point(x_st + dx * 0 + 230, y_st + dy * 3 + dd);
+
+            label4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            comboBox4.Location = new Point(x_st + dx * 0, y_st + dy * 4 + dd);
+
+            comboBox5.Location = new Point(x_st + dx * 0, y_st + dy * 5 + dd);
+
+            comboBox8.Location = new Point(x_st + dx * 0, y_st + dy * 6 + dd);
+
+            cboColor.Location = new Point(x_st + dx * 0, y_st + dy * 7 + dd);
+            cboFace.Location = new Point(x_st + dx * 0 + 150, y_st + dy * 7 + dd);
+
+            this.Size = new Size(1200, 800);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -541,3 +572,23 @@ namespace vcs_ComboBox1
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

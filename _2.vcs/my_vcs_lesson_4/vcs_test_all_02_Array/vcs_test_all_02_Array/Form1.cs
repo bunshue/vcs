@@ -99,8 +99,7 @@ namespace vcs_test_all_02_Array
             int[] A3 = { 75, 66, 60, 70, 80, 85, 90, 100 };
 
 
-
-            //一維陣列
+            //整數一維陣列
             int[] B = new int[] { 1, 2, 3, 4, 5 };
             int[] a = new int[5] { 0, 1, 2, 3, 4 };
             int[] index = new int[4] { 2, 4, 6, 8 };
@@ -131,6 +130,13 @@ namespace vcs_test_all_02_Array
             }
             richTextBox1.Text += "\n";
 
+            //整數一維陣列
+            int[] LunarDateArray = new int[]{
+                    0x04BD8,0x04AE0,0x0A570,0x054D5,0x0D260,0x0D950,0x16554,0x056A0,0x09AD0,0x055D2,
+                    0x05AA0,0x076A3,0x096D0,0x04BD7,0x04AD0,0x0A4D0,0x1D0B6,0x0D250,0x0D520,0x0DD45,
+                    0x0B5A0,0x056D0,0x055B2,0x049B0,0x0A577,0x0A4B0,0x0AA50,0x1B255,0x06D20,0x0ADA0,
+                    0x14B63        
+                    };
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -206,53 +212,17 @@ namespace vcs_test_all_02_Array
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //字串一維陣列
-            string[] strings1 = { "This is a string.", "Hello!", "Nothing.", "Yes.", "randomize" };
-            foreach (var str in strings1)
+            string[] strings2 = new string[10];
+            string[] cities1 = { "台北", "新竹", "台中", "台南", "高雄" };
+            string[] cities2 = new string[] { "台北", "新竹", "台中", "台南", "高雄" };
+            string[] cities3 = new string[5] { "台北", "新竹", "台中", "台南", "高雄" };
+            richTextBox1.Text += "共有 " + cities2.Length.ToString() + " 個項目, 分別是:\n";
+            foreach (var str in cities1)
             {
                 richTextBox1.Text += "字串 : " + str + "\n";
             }
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //字串一維陣列
-            string[] strings2 = new string[100];
-            string[] Stu_Name = { "張三", "李四", "王五", "陳六" };
-            ///string[] A = new string[10];
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //字串一維陣列
-            string[] strings3 = new string[] { "火影忍者", "航海王", "史瑞克4", "葉問2", "鋼鐵人2", "松藥局的兒子們" };
-            richTextBox1.Text += "共有 " + strings3.Length.ToString() + " 個項目, 分別是:\n";
-            foreach (var str in strings3)
-            {
-                richTextBox1.Text += "字串 : " + str + "\n";
-            }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //字串一維陣列
-            string[] strings4 = {
-                  "小寒", "大寒", "立春", "雨水",
-                  "驚蟄", "春分", "清明", "谷雨",
-                  "立夏", "小滿", "芒種", "夏至",
-                  "小暑", "大暑", "立秋", "處暑",
-                  "白露", "秋分", "寒露", "霜降",
-                  "立冬", "小雪", "大雪", "冬至"};
-
-            foreach (string str in strings4)
-            {
-                richTextBox1.Text += "字串 : " + str + "\n";
-            }
-            richTextBox1.Text += "\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //字串一維陣列
-            string[] atoms = { "水瓶座", "雙魚座", "牡羊座", "金牛座", "雙子座", "巨蟹座", "獅子座", "處女座", "天秤座", "天蠍座", "射手座", "魔羯座" };
-
-            //字串一維陣列
-            string[] ws = new string[10] { "Acknowledge", "LookDown", "Sad", "Alert", "LookDownBlink", "Search", "Announce", "LookUp", "Think", "Blink" };
 
             //字串一維陣列
             String[] weekday = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
@@ -270,7 +240,6 @@ namespace vcs_test_all_02_Array
             }
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
 
         }
 
@@ -1791,6 +1760,8 @@ namespace vcs_test_all_02_Array
     }
 }
 
+
+
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
@@ -1807,6 +1778,8 @@ namespace vcs_test_all_02_Array
 /*  可搬出
 
 */
+
+
 
 
 /*

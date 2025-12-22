@@ -1275,7 +1275,6 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Text += "LastWriteTimeUtc : " + fi.LastWriteTimeUtc + "\n";
         }
 
-
         private const int SEARCH_LEN_MAX = 20;	//搜尋最大長度
         private const int SEARCH_LEN_MIN = 4;	//搜尋最短長度
 
@@ -1620,15 +1619,8 @@ namespace vcs_ReadWrite_TXT
         private void button35_Click(object sender, EventArgs e)
         {
             //純文字統計
-            // Get the file's text.
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\article.txt";
-
-            FileInfo file_info = new FileInfo(filename);
-            string extension = file_info.Extension.ToLower();
-            string txt;
-            richTextBox1.Text += "plain text files\n";
-            txt = File.ReadAllText(filename);
-
+            string txt = File.ReadAllText(filename);
             richTextBox1.Text += "原資料\n" + txt + "\n";
 
             // Use regular expressions to replace characters
@@ -1639,32 +1631,17 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Text += "去標點符號後的資料\n" + txt + "\n";
 
             // Split the text into words.
-            string[] words = txt.Split(
-                new char[] { ' ' },
-                StringSplitOptions.RemoveEmptyEntries);
+            string[] words = txt.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             // Use LINQ to get the unique words.
-            var word_query =
-                (from string word in words
-                 orderby word
-                 select word).Distinct();
+            var word_query = (from string word in words orderby word select word).Distinct();
 
-            // Display the result.
+            // 結果
             string[] result = word_query.ToArray();
-
-            richTextBox1.Text += "\n\n\n" + result.Length.ToString() + "\n";
-            int len = result.Length;
-            int i;
-            for (i = 0; i < len; i++)
+            richTextBox1.Text += "\n\n共 " + result.Length.ToString() + " 字\n";
+            for (int i = 0; i < result.Length; i++)
             {
                 richTextBox1.Text += i.ToString() + "\t" + result[i] + "\n";
-            }
-
-            richTextBox1.Text += "\n共 " + result.Length.ToString() + " 字\n";
-
-            foreach (string res in result)
-            {
-                richTextBox1.Text += res + "\n";
             }
         }
 
@@ -1685,7 +1662,6 @@ namespace vcs_ReadWrite_TXT
 
         private void button39_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

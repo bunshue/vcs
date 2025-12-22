@@ -301,6 +301,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(170, 60);
             this.button17.TabIndex = 20;
+            this.button17.Text = "ttttttttttttttttttttttt";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -480,6 +481,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(170, 60);
             this.button0.TabIndex = 68;
+            this.button0.Text = "建立DateTime";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 

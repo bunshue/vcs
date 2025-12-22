@@ -11,7 +11,6 @@ namespace vcs_Puzzle4
 {
     public partial class Form1 : Form
     {
-        Graphics g;
         int[,] puzzle_array;//二維陣列
         int pbx_W = 1200;
         int pbx_H = 500;
@@ -19,6 +18,16 @@ namespace vcs_Puzzle4
         int box_h = 100;
         int M = 8;
         int N = 3;
+        int i;
+        int j;
+        int step = 0;
+        bool flag_create_picture_array = false;
+        SolidBrush whiteBrush = new SolidBrush(Color.White);
+        SolidBrush blackBrush = new SolidBrush(Color.Black);
+        SolidBrush greenBrush = new SolidBrush(Color.Lime);
+        SolidBrush pale_blackBrush = new SolidBrush(Color.FromArgb(41, 47, 43));
+        SolidBrush pale_greenBrush = new SolidBrush(Color.FromArgb(90, 230, 134));
+        Color dark_black = Color.FromArgb(36, 38, 35);
 
         public Form1()
         {
@@ -31,8 +40,6 @@ namespace vcs_Puzzle4
 
             puzzle_array = new int[N, M];
 
-            int i;
-            int j;
             for (j = 0; j < N; j++)
             {
                 for (i = 0; i < M; i++)
@@ -86,10 +93,8 @@ namespace vcs_Puzzle4
             richTextBox1.Clear();
         }
 
-        void print_puzzle_array(int[,] puzzle_array)
+        void print_puzzle_array(int[,] array2d)
         {
-            int i;
-            int j;
             richTextBox1.Text += "aaaaaaa = {\n";
             for (j = 0; j < N; j++)
             {
@@ -97,26 +102,13 @@ namespace vcs_Puzzle4
                 for (i = 0; i < M; i++)
                 {
                     if (i == (M - 1))
-                        richTextBox1.Text += puzzle_array[j, i];
+                        richTextBox1.Text += array2d[j, i];
                     else
-                        richTextBox1.Text += puzzle_array[j, i] + ", ";
+                        richTextBox1.Text += array2d[j, i] + ", ";
                 }
                 richTextBox1.Text += "},\n";
             }
             richTextBox1.Text += "};\n";
-        }
-
-        void drawBox(int i, int j, int w, int h, Color c)
-        {
-            Font f;
-            SolidBrush sb = new SolidBrush(c);
-            g.FillRectangle(sb, w * i, h * j, w - 1, h - 1);
-
-            //sb = new SolidBrush(Color.Black);
-            sb = new SolidBrush(Color.FromArgb(255 - c.R, 255 - c.G, 255 - c.B));
-
-            f = new Font("標楷體", 12);
-            g.DrawString(c.Name, f, sb, new PointF(w * i, h * j + h / 3));
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -157,8 +149,6 @@ namespace vcs_Puzzle4
         {
             int W = box_w * M;
             int H = box_h * N;
-            int i;
-            int j;
 
             e.Graphics.Clear(Color.LightGray);
 
@@ -174,31 +164,32 @@ namespace vcs_Puzzle4
                 e.Graphics.DrawLine(Pens.Green, 0, j, W, j);
             }
 
-            Color c = Color.Black;
-
             for (j = 0; j < N; j++)
             {
                 for (i = 0; i < M; i++)
                 {
                     if (puzzle_array[j, i] == 0)
                     {
-                        c = Color.Black;
-                        //e.Graphics.FillEllipse(new SolidBrush(Color.White), box_w * i, box_h * j, box_w - 1, box_h - 1);
+                        //e.Graphics.FillEllipse(blackBrush, box_w * i, box_h * j, box_w - 1, box_h - 1);
+                        e.Graphics.FillRectangle(blackBrush, box_w * i, box_h * j, box_w - 1, box_h - 1);
                     }
                     else
                     {
-                        c = Color.White;
-                        //e.Graphics.FillEllipse(new SolidBrush(Color.Lime), box_w * i, box_h * j, box_w - 1, box_h - 1);
+                        //e.Graphics.FillEllipse(greenBrush, box_w * i, box_h * j, box_w - 1, box_h - 1);
+                        e.Graphics.FillRectangle(whiteBrush, box_w * i, box_h * j, box_w - 1, box_h - 1);
                     }
-                    //drawBox(i, j, w, h, c); TBD
-                    SolidBrush sb = new SolidBrush(c);
-                    e.Graphics.FillRectangle(sb, box_w * i, box_h * j, box_w - 1, box_h - 1);
                 }
             }
         }
 
         private void button0_Click(object sender, EventArgs e)
         {
+            if (flag_create_picture_array == true)
+            {
+                richTextBox1.Text += "已建立圖片框陣列，應先刪除\n";
+                return;
+            }
+
             int m = 0;
             bool conversionSuccessful = int.TryParse(tb_num_m.Text, out m);    //out為必須
             if (conversionSuccessful == true)
@@ -226,6 +217,7 @@ namespace vcs_Puzzle4
             {
                 richTextBox1.Text += "M = " + m.ToString() + ", N = " + n.ToString() + "\n";
                 richTextBox1.Text += "M  或  N 不合法\n";
+                return;
             }
 
             M = m;
@@ -238,8 +230,6 @@ namespace vcs_Puzzle4
 
             puzzle_array = new int[N, M];
 
-            int i;
-            int j;
             for (j = 0; j < N; j++)
             {
                 for (i = 0; i < M; i++)
@@ -254,85 +244,31 @@ namespace vcs_Puzzle4
             pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
             pictureBox1.Paint += new PaintEventHandler(pictureBox1_Paint);
             pictureBox1.Invalidate();
+
+            flag_create_picture_array = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //刪除圖片框陣列
-            pictureBox1.MouseDown -= new MouseEventHandler(pictureBox1_MouseDown);
-            pictureBox1.MouseMove -= new MouseEventHandler(pictureBox1_MouseMove);
-            pictureBox1.MouseUp -= new MouseEventHandler(pictureBox1_MouseUp);
-            pictureBox1.Paint -= new PaintEventHandler(pictureBox1_Paint);
-            pictureBox1.Invalidate();
-        }
-
-        int step = 0;
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //匯入陣列 小綠人
-            M = 16;
-            N = 16;
-            tb_num_m.Text = M.ToString();
-            tb_num_n.Text = N.ToString();
-            int ww = 5 * (pbx_W / M / 5);
-            int hh = 5 * (pbx_H / N / 5);
-            box_w = Math.Min(ww, hh);
-            box_h = Math.Min(ww, hh);
-
-            puzzle_array = new int[N, M];
-
-            if (step == 0)
+            if (flag_create_picture_array == true)
             {
-                richTextBox1.Text += "Step0\n";
-                puzzle_array = greenman_step0;
-            }
-            else if (step == 1)
-            {
-                richTextBox1.Text += "Step1\n";
-                puzzle_array = greenman_step1;
-            }
-            else if (step == 2)
-            {
-                richTextBox1.Text += "Step2\n";
-                puzzle_array = greenman_step2;
-            }
-            else if (step == 3)
-            {
-                richTextBox1.Text += "Step3\n";
-                puzzle_array = greenman_step3;
-            }
-            else if (step == 4)
-            {
-                richTextBox1.Text += "Step4\n";
-                puzzle_array = greenman_step4;
-            }
-            else if (step == 5)
-            {
-                richTextBox1.Text += "Step5\n";
-                puzzle_array = greenman_step5;
-            }
-            else if (step == 6)
-            {
-                richTextBox1.Text += "Step6\n";
-                puzzle_array = greenman_step6;
+                richTextBox1.Text += "刪除圖片框陣列\n";
+                pictureBox1.MouseDown -= new MouseEventHandler(pictureBox1_MouseDown);
+                pictureBox1.MouseMove -= new MouseEventHandler(pictureBox1_MouseMove);
+                pictureBox1.MouseUp -= new MouseEventHandler(pictureBox1_MouseUp);
+                pictureBox1.Paint -= new PaintEventHandler(pictureBox1_Paint);
+                pictureBox1.Invalidate();
+                flag_create_picture_array = false;
             }
             else
             {
-                richTextBox1.Text += "Step7\n";
-                puzzle_array = greenman_step7;
+                richTextBox1.Text += "無須 刪除圖片框陣列\n";
             }
-            step++;
-            if (step > 7)
-                step = 0;
+            pictureBox1.Image = null;
+        }
 
-            /*
-            //建立圖片框陣列
-            pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
-            pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
-            pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
-            */
-            pictureBox1.Paint += new PaintEventHandler(pictureBox1_Paint);
-            pictureBox1.Invalidate();
+        private void button2_Click(object sender, EventArgs e)
+        {
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -467,74 +403,164 @@ namespace vcs_Puzzle4
         {0,1,0,0,0,0,0,0,1,1}
         };
 
-        void draw_2d_pattern(int[,] pattern, int offset_x, int offset_y, int brick_size)
+        void draw_array2d(Graphics g, int[,] array2d, int x_st, int y_st, int box_w, int box_h)
         {
-            //richTextBox1.Text += "二維陣列內容\n";
-            //PrintArray(pattern);
+            int ROW = array2d.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
+            int COL = array2d.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
+            //int length = array2d.Length;//獲取整個二維陣列的長度，即所有元 的個數
+            //richTextBox1.Text += "ROW = " + ROW.ToString() + "\n";
+            //richTextBox1.Text += "COL = " + COL.ToString() + "\n";
+            //richTextBox1.Text += "length = " + length.ToString() + "\n";
 
-            int ROW = pattern.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
-            int COL = pattern.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
-            int length = pattern.Length;//獲取整個二維陣列的長度，即所有元 的個數
-            /*
-            richTextBox1.Text += "ROW = " + ROW.ToString() + "\n";
-            richTextBox1.Text += "COL = " + COL.ToString() + "\n";
-            richTextBox1.Text += "length = " + length.ToString() + "\n";
-            */
+            int W = box_w * COL;
+            int H = box_h * ROW;
 
-            int x_st = 0;
-            int y_st = 0;
-            SolidBrush redBrush = new SolidBrush(Color.Red);
-            SolidBrush blackBrush = new SolidBrush(Color.Black);
-
-            for (int r = pattern.GetLowerBound(0); r <= pattern.GetUpperBound(0); r++)
+            //畫垂直線
+            for (i = 0; i < W; i += box_w)
             {
-                for (int c = pattern.GetLowerBound(1); c <= pattern.GetUpperBound(1); c++)
-                {
-                    //richTextBox1.Text += pattern[r, c].ToString() + "\t";
+                g.DrawLine(Pens.Red, x_st + i, y_st + 0, x_st + i, y_st + H);
+            }
 
-                    //richTextBox1.Text += "(" + c.ToString() + ", " + r.ToString() + ")\t";
-                    //g.DrawRectangle(Pens.Red, 100, 100, 200, 200);
-                    x_st = offset_x + c * brick_size;
-                    y_st = offset_y + r * brick_size;
-                    if (pattern[r, c] == 1)
+            //畫水平線
+            for (j = 0; j < H; j += box_h)
+            {
+                g.DrawLine(Pens.Green, x_st + 0, y_st + j, x_st + W, y_st + j);
+            }
+
+            for (j = 0; j < ROW; j++)
+            {
+                for (i = 0; i < COL; i++)
+                {
+                    if (array2d[j, i] == 0)
                     {
-                        g.FillRectangle(redBrush, x_st, y_st, brick_size, brick_size);
+                        g.FillRectangle(blackBrush, x_st + box_w * i, y_st + box_h * j, box_w - 1, box_h - 1);
+                        //g.FillEllipse(greenBrush, x_st + box_w * i, y_st + box_h * j, box_w - 1, box_h - 1);
                     }
                     else
                     {
-                        g.FillRectangle(blackBrush, x_st, y_st, brick_size, brick_size);
+                        g.FillRectangle(whiteBrush, x_st + box_w * i, y_st + box_h * j, box_w - 1, box_h - 1);
+                        //g.FillEllipse(whiteBrush, x_st + box_w * i, y_st + box_h * j, box_w - 1, box_h - 1);
                     }
                 }
-                //richTextBox1.Text += "\n";
             }
-            //richTextBox1.Text += "\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //測試小綠人
+            if (flag_create_picture_array == true)
+            {
+                button1.PerformClick();
+            }
 
+            int[,] array2d;//二維陣列
+            if (step == 0)
+            {
+                array2d = pattern0;
+            }
+            else if (step == 1)
+            {
+                array2d = pattern1;
+            }
+            else if (step == 2)
+            {
+                array2d = pattern2;
+            }
+            else if (step == 3)
+            {
+                array2d = pattern3;
+            }
+            else if (step == 4)
+            {
+                array2d = pattern4;
+            }
+            else if (step == 5)
+            {
+                array2d = pattern5;
+            }
+            else if (step == 6)
+            {
+                array2d = pattern6;
+            }
+            else
+            {
+                array2d = pattern0;
+            }
+            step++;
+            if (step > 6)
+                step = 0;
+
+            //測試小綠人1
             int W = pictureBox1.ClientSize.Width;
             int H = pictureBox1.ClientSize.Height;
-
             Bitmap bitmap1 = new Bitmap(W, H);
-            g = Graphics.FromImage(bitmap1);
-
-            g.Clear(Color.White);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.LightGray);
             pictureBox1.Image = bitmap1;
 
-            int x_st = 20;
-            int y_st = 20;
-            int dx = 170;
-            int dy = 230;
-            int brick_size = 15;
-            draw_2d_pattern(pattern0, x_st + dx * 0, y_st + dy * 0, brick_size);
-            draw_2d_pattern(pattern1, x_st + dx * 1, y_st + dy * 0, brick_size);
-            draw_2d_pattern(pattern2, x_st + dx * 2, y_st + dy * 0, brick_size);
-            draw_2d_pattern(pattern3, x_st + dx * 3, y_st + dy * 0, brick_size);
-            draw_2d_pattern(pattern4, x_st + dx * 0, y_st + dy * 1, brick_size);
-            draw_2d_pattern(pattern5, x_st + dx * 1, y_st + dy * 1, brick_size);
-            draw_2d_pattern(pattern6, x_st + dx * 2, y_st + dy * 1, brick_size);
+            int x_st = 200;
+            int y_st = 10;
+            box_w = 30;
+            box_h = 30;
+            draw_array2d(g, array2d, x_st, y_st, box_w, box_h);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (flag_create_picture_array == true)
+            {
+                button1.PerformClick();
+            }
+
+            int[,] array2d;//二維陣列
+            if (step == 0)
+            {
+                array2d = greenman_step0;
+            }
+            else if (step == 1)
+            {
+                array2d = greenman_step1;
+            }
+            else if (step == 2)
+            {
+                array2d = greenman_step2;
+            }
+            else if (step == 3)
+            {
+                array2d = greenman_step3;
+            }
+            else if (step == 4)
+            {
+                array2d = greenman_step4;
+            }
+            else if (step == 5)
+            {
+                array2d = greenman_step5;
+            }
+            else if (step == 6)
+            {
+                array2d = greenman_step6;
+            }
+            else
+            {
+                array2d = greenman_step7;
+            }
+            step++;
+            if (step > 7)
+                step = 0;
+
+            //測試小綠人2
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.LightGray);
+            pictureBox1.Image = bitmap1;
+
+            int x_st = 200;
+            int y_st = 10;
+            box_w = 30;
+            box_h = 30;
+            draw_array2d(g, array2d, x_st, y_st, box_w, box_h);
         }
 
         int[,] comma = new int[7, 1] {
@@ -647,34 +673,121 @@ namespace vcs_Puzzle4
             { 1, 1, 1 }
             };
 
-        private void button5_Click(object sender, EventArgs e)
+        void drawNumber(Graphics g, int num, int x_st, int y_st, int box_w, int box_h)
         {
+            int M = 3;
+            int N = 7;
+            int W = box_w * M;
+            int H = box_h * N;
+
+            int[,] array2d = new int[N, M];//二維陣列
+
+            if (num == 10)
+            {
+                M = 1;
+            }
+
+            if (num == 0)
+            {
+                array2d = num0;
+            }
+            else if (num == 1)
+            {
+                array2d = num1;
+            }
+            else if (num == 2)
+            {
+                array2d = num2;
+            }
+            else if (num == 3)
+            {
+                array2d = num3;
+            }
+            else if (num == 4)
+            {
+                array2d = num4;
+            }
+            else if (num == 5)
+            {
+                array2d = num5;
+            }
+            else if (num == 6)
+            {
+                array2d = num6;
+            }
+            else if (num == 7)
+            {
+                array2d = num7;
+            }
+            else if (num == 8)
+            {
+                array2d = num8;
+            }
+            else if (num == 9)
+            {
+                array2d = num9;
+            }
+            else if (num == 10)
+            {
+                array2d = comma;
+            }
+            else
+            {
+                array2d = num0;
+            }
+
+            for (j = 0; j < N; j++)
+            {
+                for (i = 0; i < M; i++)
+                {
+                    if (array2d[j, i] == 0)
+                    {
+                        //g.FillEllipse(pale_blackBrush, x_st + box_w * i, y_st + box_h * j, box_w - 1, box_h - 1);
+                        g.FillRectangle(pale_blackBrush, x_st + box_w * i, y_st + box_h * j, box_w - 1, box_h - 1);
+                    }
+                    else
+                    {
+                        //g.FillEllipse(pale_greenBrush, x_st + box_w * i, y_st + box_h * j, box_w - 1, box_h - 1);
+                        g.FillRectangle(pale_greenBrush, x_st + box_w * i, y_st + box_h * j, box_w - 1, box_h - 1);
+                    }
+                }
+            }
+
+            //畫垂直線
+            for (i = 0; i < W; i += box_w)
+            {
+                g.DrawLine(new Pen(dark_black, 4), x_st + i, y_st + 0, x_st + i, y_st + H);
+            }
+
+            //畫水平線
+            for (j = 0; j < H; j += box_h)
+            {
+                g.DrawLine(new Pen(dark_black, 4), x_st + 0, y_st + j, x_st + W, y_st + j);
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (flag_create_picture_array == true)
+            {
+                button1.PerformClick();
+            }
+
             //測試數字 二維陣列
-
-            M = 3;
-            N = 7;
-            tb_num_m.Text = M.ToString();
-            tb_num_n.Text = N.ToString();
-            int ww = 5 * (pbx_W / M / 5);
-            int hh = 5 * (pbx_H / N / 5);
-            box_w = Math.Min(ww, hh);
-            box_h = Math.Min(ww, hh);
-
-            box_w = 42;
-            box_h = 42;
-            richTextBox1.Text += "w = " + box_w.ToString() + ", h = " + box_h.ToString() + "\n";
 
             int W = pictureBox1.ClientSize.Width;
             int H = pictureBox1.ClientSize.Height;
 
             Bitmap bitmap1 = new Bitmap(W, H);
-            g = Graphics.FromImage(bitmap1);
+            Graphics g = Graphics.FromImage(bitmap1);
             g.Clear(Color.FromArgb(50, 50, 50));
             pictureBox1.Image = bitmap1;
 
             int x_st = 0;
             int y_st = 0;
             int num = 0;
+            box_w = 42;
+            box_h = 42;
 
             x_st = 0;
             y_st = 0;
@@ -708,125 +821,6 @@ namespace vcs_Puzzle4
             x_st += box_w * 4;
             num = 6;
             drawNumber(g, num, x_st, y_st, box_w, box_h);
-
-        }
-
-        void drawNumber(Graphics g, int num, int x_st, int y_st, int box_w, int box_h)
-        {
-            int M = 3;
-            int N = 7;
-            int W = box_w * M;
-            int H = box_h * N;
-            int i;
-            int j;
-
-            if (num == 10)
-            {
-                M = 1;
-            }
-
-            puzzle_array = new int[N, M];
-
-            if (num == 0)
-            {
-                richTextBox1.Text += "num0\n";
-                puzzle_array = num0;
-            }
-            else if (num == 1)
-            {
-                richTextBox1.Text += "num1\n";
-                puzzle_array = num1;
-            }
-            else if (num == 2)
-            {
-                richTextBox1.Text += "num2\n";
-                puzzle_array = num2;
-            }
-            else if (num == 3)
-            {
-                richTextBox1.Text += "num3\n";
-                puzzle_array = num3;
-            }
-            else if (num == 4)
-            {
-                richTextBox1.Text += "num4\n";
-                puzzle_array = num4;
-            }
-            else if (num == 5)
-            {
-                richTextBox1.Text += "num5\n";
-                puzzle_array = num5;
-            }
-            else if (num == 6)
-            {
-                richTextBox1.Text += "num6\n";
-                puzzle_array = num6;
-            }
-            else if (num == 7)
-            {
-                richTextBox1.Text += "num7\n";
-                puzzle_array = num7;
-            }
-            else if (num == 8)
-            {
-                richTextBox1.Text += "num8\n";
-                puzzle_array = num8;
-            }
-            else if (num == 9)
-            {
-                richTextBox1.Text += "num9\n";
-                puzzle_array = num9;
-            }
-            else if (num == 10)
-            {
-                richTextBox1.Text += "comma\n";
-                puzzle_array = comma;
-            }
-            else
-            {
-                richTextBox1.Text += "num0\n";
-                puzzle_array = num0;
-            }
-
-            Color c = Color.Black;
-
-            for (j = 0; j < N; j++)
-            {
-                for (i = 0; i < M; i++)
-                {
-                    if (puzzle_array[j, i] == 0)
-                    {
-                        c = Color.Black;
-                        c = Color.FromArgb(41, 47, 43);
-                        //g.FillEllipse(new SolidBrush(Color.White), box_w * i, box_h * j, box_w - 1, box_h - 1);
-                    }
-                    else
-                    {
-                        c = Color.White;
-                        c = Color.FromArgb(90, 230, 134);
-                        //g.FillEllipse(new SolidBrush(Color.Lime), box_w * i, box_h * j, box_w - 1, box_h - 1);
-                    }
-                    //drawBox(i, j, w, h, c); TBD
-                    SolidBrush sb = new SolidBrush(c);
-                    g.FillRectangle(sb, x_st + box_w * i, y_st + box_h * j, box_w - 1, box_h - 1);
-                }
-            }
-
-            //畫垂直線
-            for (i = 0; i < W; i += box_w)
-            {
-                g.DrawLine(new Pen(Color.FromArgb(36, 38, 35), 4), x_st + i, y_st + 0, x_st + i, y_st + H);
-            }
-
-            //畫水平線
-            for (j = 0; j < H; j += box_h)
-            {
-                g.DrawLine(new Pen(Color.FromArgb(36, 38, 35), 4), x_st + 0, y_st + j, x_st + W, y_st + j);
-            }
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -987,7 +981,6 @@ namespace vcs_Puzzle4
         };
     }
 }
-
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

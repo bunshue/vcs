@@ -81,7 +81,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(180, 60);
             this.button14.TabIndex = 32;
-            this.button14.Text = "複製檔案";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -197,7 +196,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(180, 60);
             this.button4.TabIndex = 21;
-            this.button4.Text = "新增文件";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -208,7 +206,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(180, 60);
             this.button3.TabIndex = 20;
-            this.button3.Text = "新增資料夾";
+            this.button3.Text = "新增資料夾/新增檔案/複製檔案";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -224,7 +222,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(991, 218);
+            this.richTextBox1.Location = new System.Drawing.Point(632, 218);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 18;
@@ -242,7 +240,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(1012, 266);
+            this.bt_clear.Location = new System.Drawing.Point(653, 266);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(60, 30);
             this.bt_clear.TabIndex = 35;
@@ -252,7 +250,7 @@
             // 
             // listView1
             // 
-            this.listView1.Location = new System.Drawing.Point(758, 218);
+            this.listView1.Location = new System.Drawing.Point(399, 218);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(100, 100);
             this.listView1.TabIndex = 36;
@@ -321,7 +319,7 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(875, 218);
+            this.listBox1.Location = new System.Drawing.Point(516, 218);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(100, 100);
             this.listBox1.TabIndex = 44;
@@ -378,7 +376,7 @@
             this.groupBox1.Controls.Add(this.bt_rename);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Location = new System.Drawing.Point(758, 12);
+            this.groupBox1.Location = new System.Drawing.Point(399, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(500, 200);
             this.groupBox1.TabIndex = 59;
@@ -388,7 +386,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1268, 681);
+            this.ClientSize = new System.Drawing.Size(932, 681);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);

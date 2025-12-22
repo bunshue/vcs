@@ -135,77 +135,48 @@ namespace vcs__Mix00
         private void button3_Click(object sender, EventArgs e)
         {
             //新增資料夾
-            //新增資料夾
-            string path = Application.StartupPath;
-            string folder = textBox1.Text;
-            NewFolder(folder, path);
-        }
+            string new_foldername = "FFFFFFF/AAA/BBB/CCC/DDD";
 
-        /// <summary>
-        /// 新建文件夾
-        /// </summary>
-        /// <param name="filename">文件夾名</param>
-        /// <param name="path">文件夾路徑</param>
-        public static void NewFolder(string foldername, string path)
-        {
-            foldername.Trim();
-            //如果輸入信息為空，提示
-            if (foldername == "")
+            if (Directory.Exists(new_foldername) == true)
             {
-                MessageBox.Show("目錄名不能為空");
-                return;
+                richTextBox1.Text += "資料夾已存在, 無法重新建立\n";
             }
             else
             {
-                string FullName = path + "\\" + foldername;
-                //如果該文件以及存在
-                if (Directory.Exists(FullName))
-                {
-                    MessageBox.Show("該目錄已經存在，請重命名");
-                    return;
-                }
-                else
-                {
-                    //新建文件夾
-                    Directory.CreateDirectory(FullName);
-                    MessageBox.Show("新建文件夾 完成");
-                }
+                //新增資料夾
+                Directory.CreateDirectory(new_foldername);
+                richTextBox1.Text += "新增資料夾 完成\n";
             }
+
+            //新增檔案
+            string filename = "tmp_new_file.txt";
+            if (File.Exists(filename) == true)
+            {
+                richTextBox1.Text += "檔案已存在, 無法重新建立\n";
+            }
+            else
+            {
+                StreamWriter Sw = File.CreateText(filename);
+                richTextBox1.Text += "新增檔案 完成\n";
+            }
+
+            //複製檔案
+            string new_filename = "aaaaa.cs";
+            if (File.Exists(new_filename) == true)
+            {
+                richTextBox1.Text += "檔案已存在, 無法複製檔案\n";
+            }
+            else
+            {
+                File.Copy(@"../../Form1.cs", new_filename);
+                richTextBox1.Text += "複製檔案完成\n";
+            }
+
+
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //新增文件
-            string path = Application.StartupPath;
-            string filename = textBox2.Text;
-            NewFile(filename, path);
-        }
-
-        /// <summary>
-        /// 新建文件
-        /// </summary>
-        /// <param name="filename">文件名</param>
-        /// <param name="path">文件路徑</param>
-        public static void NewFile(string filename, string path)
-        {
-            filename.Trim();
-            if (filename == "")
-            {
-                MessageBox.Show("文件名不能為空~！");
-            }
-            else
-            {
-                if (File.Exists(path + "\\" + filename + ".txt"))
-                {
-                    MessageBox.Show("該文件名已經存在，請重命名");
-                }
-                else
-                {
-                    string FullName = path + "\\" + filename + ".txt";　　 //獲得文件完整信息
-                    StreamWriter Sw = File.CreateText(FullName);
-                    MessageBox.Show("新建文件 完成");
-                }
-            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -318,7 +289,6 @@ namespace vcs__Mix00
                 sourceFile.Close();
                 targetFile.Close();
 
-
                 // Stop timing
                 stopwatch.Stop();
                 richTextBox1.Text += "檔案大小: " + (filesize / 1024 / 1024).ToString() + " MB\n";
@@ -394,8 +364,6 @@ namespace vcs__Mix00
 
         private void button14_Click(object sender, EventArgs e)
         {
-            File.Copy(@"../../Form1.cs", @"aaaaa.cs");
-            richTextBox1.Text += "複製檔案完成\n";
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -618,3 +586,25 @@ namespace vcs__Mix00
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
+//string path = Application.StartupPath;
+
