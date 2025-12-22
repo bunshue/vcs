@@ -11,6 +11,14 @@ using System.Windows.Forms;
 //自建ListBox
 //加入/現有項目 選取DrawListBox.cs
 
+/*
+DrawListBox使用方法
+方案總管/加入/現有項目, 選DrawListBox.cs, 會自動帶入DrawListBox.Designer.cs
+改namespace
+工具箱會出現 DrawListBox
+使用方法如同ListBox, 就是多了顏色, 把GradualC改為true
+*/
+
 namespace vcs_ListBox8
 {
     public partial class Form1 : Form
@@ -26,11 +34,9 @@ namespace vcs_ListBox8
 
             for (i = 0; i < 20; i++)
             {
-                drawListBox1.Items.Add("ListBox用多顏色背景表示\t\t" + i.ToString());
+                drawListBox2.Items.Add("ListBox用多顏色背景表示\t\t" + i.ToString());
             }
-
-
-
         }
     }
 }
+

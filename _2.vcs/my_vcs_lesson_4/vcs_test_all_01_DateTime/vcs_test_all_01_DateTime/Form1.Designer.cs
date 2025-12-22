@@ -78,6 +78,8 @@
             this.bt_special_00 = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.lb_time_interval = new System.Windows.Forms.Label();
+            this.lb_time = new System.Windows.Forms.Label();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.bt_countdown = new System.Windows.Forms.Button();
@@ -87,11 +89,8 @@
             this.btn_moon_today = new System.Windows.Forms.Button();
             this.btn_moon_ok = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.lb_moon_age = new System.Windows.Forms.Label();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lb_time = new System.Windows.Forms.Label();
-            this.lb_time_interval = new System.Windows.Forms.Label();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -360,7 +359,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(10, 100);
+            this.dateTimePicker1.Location = new System.Drawing.Point(10, 69);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(150, 30);
             this.dateTimePicker1.TabIndex = 37;
@@ -440,7 +439,7 @@
             // bt2
             // 
             this.bt2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt2.Location = new System.Drawing.Point(166, 105);
+            this.bt2.Location = new System.Drawing.Point(166, 74);
             this.bt2.Name = "bt2";
             this.bt2.Size = new System.Drawing.Size(55, 30);
             this.bt2.TabIndex = 71;
@@ -614,6 +613,26 @@
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Timer顯示時間";
             // 
+            // lb_time_interval
+            // 
+            this.lb_time_interval.AutoSize = true;
+            this.lb_time_interval.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_time_interval.Location = new System.Drawing.Point(21, 63);
+            this.lb_time_interval.Name = "lb_time_interval";
+            this.lb_time_interval.Size = new System.Drawing.Size(139, 21);
+            this.lb_time_interval.TabIndex = 113;
+            this.lb_time_interval.Text = "lb_time_interval";
+            // 
+            // lb_time
+            // 
+            this.lb_time.AutoSize = true;
+            this.lb_time.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_time.Location = new System.Drawing.Point(21, 32);
+            this.lb_time.Name = "lb_time";
+            this.lb_time.Size = new System.Drawing.Size(69, 21);
+            this.lb_time.TabIndex = 57;
+            this.lb_time.Text = "lb_time";
+            // 
             // groupBox10
             // 
             this.groupBox10.Controls.Add(this.bt3);
@@ -669,12 +688,11 @@
             this.groupBox13.Controls.Add(this.btn_moon_today);
             this.groupBox13.Controls.Add(this.btn_moon_ok);
             this.groupBox13.Controls.Add(this.textBox4);
-            this.groupBox13.Controls.Add(this.lb_moon_age);
             this.groupBox13.Controls.Add(this.monthCalendar1);
             this.groupBox13.Controls.Add(this.pictureBox1);
             this.groupBox13.Location = new System.Drawing.Point(422, 256);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(390, 266);
+            this.groupBox13.Size = new System.Drawing.Size(390, 240);
             this.groupBox13.TabIndex = 112;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "月相";
@@ -683,7 +701,7 @@
             // 
             this.btn_moon_today.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.btn_moon_today.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_moon_today.Location = new System.Drawing.Point(171, 190);
+            this.btn_moon_today.Location = new System.Drawing.Point(248, 189);
             this.btn_moon_today.Name = "btn_moon_today";
             this.btn_moon_today.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btn_moon_today.Size = new System.Drawing.Size(75, 28);
@@ -695,32 +713,22 @@
             // 
             this.btn_moon_ok.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.btn_moon_ok.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_moon_ok.Location = new System.Drawing.Point(171, 227);
+            this.btn_moon_ok.Location = new System.Drawing.Point(167, 189);
             this.btn_moon_ok.Name = "btn_moon_ok";
             this.btn_moon_ok.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btn_moon_ok.Size = new System.Drawing.Size(75, 28);
             this.btn_moon_ok.TabIndex = 20;
-            this.btn_moon_ok.Text = "OK";
+            this.btn_moon_ok.Text = "選取";
             this.btn_moon_ok.Click += new System.EventHandler(this.btn_moon_ok_Click);
             // 
             // textBox4
             // 
             this.textBox4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox4.Location = new System.Drawing.Point(5, 227);
+            this.textBox4.Location = new System.Drawing.Point(6, 189);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(155, 33);
             this.textBox4.TabIndex = 19;
             this.textBox4.Text = "2006/03/11";
-            // 
-            // lb_moon_age
-            // 
-            this.lb_moon_age.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lb_moon_age.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_moon_age.Location = new System.Drawing.Point(5, 190);
-            this.lb_moon_age.Name = "lb_moon_age";
-            this.lb_moon_age.Size = new System.Drawing.Size(155, 28);
-            this.lb_moon_age.TabIndex = 18;
-            this.lb_moon_age.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // monthCalendar1
             // 
@@ -738,26 +746,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(160, 160);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // lb_time
-            // 
-            this.lb_time.AutoSize = true;
-            this.lb_time.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_time.Location = new System.Drawing.Point(21, 32);
-            this.lb_time.Name = "lb_time";
-            this.lb_time.Size = new System.Drawing.Size(69, 21);
-            this.lb_time.TabIndex = 57;
-            this.lb_time.Text = "lb_time";
-            // 
-            // lb_time_interval
-            // 
-            this.lb_time_interval.AutoSize = true;
-            this.lb_time_interval.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_time_interval.Location = new System.Drawing.Point(21, 63);
-            this.lb_time_interval.Name = "lb_time_interval";
-            this.lb_time_interval.Size = new System.Drawing.Size(139, 21);
-            this.lb_time_interval.TabIndex = 113;
-            this.lb_time_interval.Text = "lb_time_interval";
             // 
             // Form1
             // 
@@ -875,7 +863,6 @@
         private System.Windows.Forms.GroupBox groupBox13;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label lb_moon_age;
         private System.Windows.Forms.Button btn_moon_today;
         private System.Windows.Forms.Button btn_moon_ok;
         private System.Windows.Forms.TextBox textBox4;

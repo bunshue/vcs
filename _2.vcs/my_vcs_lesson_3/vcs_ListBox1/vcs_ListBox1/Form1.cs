@@ -20,11 +20,12 @@ namespace vcs_ListBox1
         {
             show_item_location();
 
-            apply_listBox1();
+            animal_list = new List<string>(animal_array);       //string 轉 List
 
             apply_listBox2();
 
             apply_listBox3();
+            apply_listBox4();
         }
 
         void show_item_location()
@@ -74,16 +75,6 @@ namespace vcs_ListBox1
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-        }
-
-        void apply_listBox1()
-        {
-            richTextBox1.Text += "字串一維陣列轉listBox\n";
-            //字串一維陣列
-            string[] ZodiacSign = { "水瓶座", "雙魚座", "牡羊座", "金牛座", "雙子座", "巨蟹座", "獅子座", "處女座", "天秤座", "天蠍座", "射手座", "魔羯座" };
-
-            listBox1.DataSource = ZodiacSign;
-            //字串一維陣列直接餵給listBox
         }
 
         private const int ItemMargin2 = 5;
@@ -223,25 +214,58 @@ namespace vcs_ListBox1
 
         }
 
+        void apply_listBox4()
+        {
+            richTextBox1.Text += "字串一維陣列轉listBox\n";
+            //字串一維陣列
+            string[] ZodiacSign = { "水瓶座", "雙魚座", "牡羊座", "金牛座", "雙子座", "巨蟹座", "獅子座", "處女座", "天秤座", "天蠍座", "射手座", "魔羯座" };
 
+            listBox4.DataSource = ZodiacSign;
+            //字串一維陣列直接餵給listBox
+        }
+
+        string[] animal_array = { "ape", "bear", "cat", "dolphin", "eagle", "fox", "giraffe" };
+        List<string> animal_list;
+        List<string> cookies = new List<string>() 
+            { 
+                "Chocolate Chip", 
+                "Snickerdoodle", 
+                "Peanut Butter" 
+            };
 
         private void button0_Click(object sender, EventArgs e)
         {
+            listBox1.DataSource = animal_array;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            listBox1.DataSource = animal_list;
 
+            listBox1.DataSource = cookies;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            Person[] people = 
+            {
+                new Person() { FirstName="Simon", LastName="Green" },
+                new Person() { FirstName="Terry", LastName="Pratchett" },
+                new Person() { FirstName="Eowin", LastName="Colfer" },
+            };
+            listBox1.DataSource = people;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            listBox1.Items.Clear();
+            listBox1.MultiColumn = true;    //多欄
+            listBox1.ColumnWidth = 60;      //欄寬
+            int i;
+            for (i = 0; i < 100; i++)
+            {
+                listBox1.Items.Add(i);
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -257,6 +281,18 @@ namespace vcs_ListBox1
         private void button6_Click(object sender, EventArgs e)
         {
 
+        }
+    }
+
+    // A simple Person class.
+    public class Person
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        public override string ToString()
+        {
+            return FirstName + " " + LastName;
         }
     }
 }

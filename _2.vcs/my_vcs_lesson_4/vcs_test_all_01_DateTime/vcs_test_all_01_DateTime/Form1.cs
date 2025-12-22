@@ -125,36 +125,34 @@ namespace vcs_test_all_01_DateTime
             button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             comboBox1.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            groupBox12.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            groupBox5.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            groupBox5.Location = new Point(x_st + dx * 0, y_st + dy * 10);//DateTimePicker
+            groupBox12.Location = new Point(x_st + dx * 1, y_st + dy * 10);//設定倒數計時
+            groupBox8.Location = new Point(x_st + dx * 2, y_st + dy * 10);//DateTimePicker
+            groupBox13.Location = new Point(x_st + dx * 2, y_st + dy * 4 - 30);//月相
+            groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 8 - 70); //listView
 
-            groupBox6.Size = new Size(10 * 2 + 120 * 3 + 5 * 2, 20 + 35 * 2 + 5 * 3 + 10);
-            groupBox8.Size = new Size(250, 160);
-            groupBox5.Size = new Size(180, 160);
-            groupBox9.Size = new Size(250, 280);
-            groupBox12.Size = new Size(180, 180);
+            groupBox6.Size = new Size(270, 150);
+            groupBox8.Size = new Size(250, 130);
+            groupBox5.Size = new Size(180, 150);
+            groupBox9.Size = new Size(220, 280);
+            groupBox12.Size = new Size(180, 150);
 
             groupBox6.Location = new Point(x_st + dx * 3, y_st + dy * 0);//特殊曆法
-            groupBox8.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            lb_time.Location = new Point(x_st + dx * 4 + 40, y_st + dy * 2 - 10);
 
-            groupBox13.Location = new Point(x_st + dx * 3, y_st + dy * 5);//月相
-            groupBox10.Location = new Point(x_st + dx * 3, y_st + dy * 10 - 45); //listView
-
-            groupBox9.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            groupBox9.Location = new Point(x_st + dx * 4 + 60, y_st + dy * 0);//Timer顯示時間
 
             textBox2.Size = new Size(160, 40);
             dateTimePicker1.Size = new Size(160, 40);
             textBox2.Location = new Point(x_st + dx * 0 - 5, y_st + dy * 0 + 10);
             bt1.Location = new Point(x_st + 170, y_st + dy * 0 + 10);
-            dateTimePicker1.Location = new Point(x_st + dx * 0 - 5, y_st + dy * 0 + 80 + 10);
-            bt2.Location = new Point(x_st + 170, y_st + dy * 0 + 90);
+            dateTimePicker1.Location = new Point(x_st + dx * 0 - 5, y_st + dy * 0 + 60);
+            bt2.Location = new Point(x_st + 170, y_st + dy * 0 + 60);
 
             lb_time.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20);
             lb_time_interval.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 30);
 
-            richTextBox1.Size = new Size(260, 500);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 5);
+            richTextBox1.Size = new Size(480, 530);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 10, y_st + dy * 4 + 30);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -165,12 +163,12 @@ namespace vcs_test_all_01_DateTime
 
             bt_special_00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_special_01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            bt_special_02.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            bt_special_03.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            bt_special_04.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            bt_special_05.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            bt_special_02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_special_03.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_special_04.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            bt_special_05.Location = new Point(x_st + dx * 1, y_st + dy * 2);
 
-            this.Size = new Size(1460, 920);
+            this.Size = new Size(1460, 910);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -2284,20 +2282,6 @@ namespace vcs_test_all_01_DateTime
             return ag;
         }
 
-        private void PrintAge()
-        {
-            string theAge = "Moon age";
-
-            theAge = theAge + " " + ":" + " " + ag.ToString();
-
-            if (ag == 1)
-                theAge = theAge + " " + "day";
-            else
-                theAge = theAge + " " + "days";
-
-            this.lb_moon_age.Text = theAge;
-        }
-
         public void ClearDraw()
         {
             if (pictureBox1.Image != null)
@@ -2383,7 +2367,6 @@ namespace vcs_test_all_01_DateTime
             this.YourChoice(); //select date
             this.ClearDraw(); //clear pictureBox1 PictureBox
             this.DrawMoon(); //draw the moon
-            this.PrintAge(); //print age of moon in days
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
