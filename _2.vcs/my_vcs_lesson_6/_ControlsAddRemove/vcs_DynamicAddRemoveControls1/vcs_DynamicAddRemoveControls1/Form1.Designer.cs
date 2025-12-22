@@ -50,8 +50,8 @@
             this.button17 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.button18 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -276,22 +276,22 @@
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
-            // label1
+            // button18
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(12, 347);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(430, 24);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "單擊視窗的任何地方都會產生Button控件";
+            this.button18.Location = new System.Drawing.Point(510, 356);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(162, 93);
+            this.button18.TabIndex = 18;
+            this.button18.Text = "單擊視窗的任何地方都會產生Button控件";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 461);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.button18);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox1);
@@ -302,7 +302,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -326,11 +325,11 @@
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button button18;
     }
 }
 

@@ -43,7 +43,7 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\n";
             richTextBox1.Text += DateTime.Now.ToString("yyyy" + '-' + "MM" + '-' + "dd" + " HH" + ':' + "mm" + ':' + "ss") + "\n";
 
-            label5.Text = "------------";
+            lb_time_interval.Text = "------------";
 
             timer1.Interval = 1000;
             timer1.Enabled = true;
@@ -72,7 +72,7 @@ namespace vcs_test_all_01_DateTime
             x_st = 10;
             y_st = 10;
             dx = w + 10;
-            dy = h + 2;
+            dy = h + 10;
 
             button0.Size = new Size(w, h);
             button1.Size = new Size(w, h);
@@ -131,12 +131,12 @@ namespace vcs_test_all_01_DateTime
             groupBox6.Size = new Size(10 * 2 + 120 * 3 + 5 * 2, 20 + 35 * 2 + 5 * 3 + 10);
             groupBox8.Size = new Size(250, 160);
             groupBox5.Size = new Size(180, 160);
-            groupBox9.Size = new Size(250, 360);
+            groupBox9.Size = new Size(250, 280);
             groupBox12.Size = new Size(180, 180);
 
             groupBox6.Location = new Point(x_st + dx * 3, y_st + dy * 0);//特殊曆法
             groupBox8.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-
+            lb_time.Location = new Point(x_st + dx * 4 + 40, y_st + dy * 2 - 10);
 
             groupBox13.Location = new Point(x_st + dx * 3, y_st + dy * 5);//月相
             groupBox10.Location = new Point(x_st + dx * 3, y_st + dy * 10 - 45); //listView
@@ -150,21 +150,11 @@ namespace vcs_test_all_01_DateTime
             dateTimePicker1.Location = new Point(x_st + dx * 0 - 5, y_st + dy * 0 + 80 + 10);
             bt2.Location = new Point(x_st + 170, y_st + dy * 0 + 90);
 
-            int dd = 30;
-            label1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20);
-            label2.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 1);
-            label3.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 2);
-            label4.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 3);
-            label5.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 4);
-            lb_time0.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 5);
-            lb_time1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 6);
-            lb_time2.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 7);
-            lb_time3.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 8);
-            lb_time4.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 9);
-            lb_time5.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20 + dd * 10);
+            lb_time.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20);
+            lb_time_interval.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 30);
 
-            richTextBox1.Size = new Size(260, 400);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 6);
+            richTextBox1.Size = new Size(260, 500);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 5);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -180,7 +170,7 @@ namespace vcs_test_all_01_DateTime
             bt_special_04.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_special_05.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
-            this.Size = new Size(1460, 860);
+            this.Size = new Size(1460, 920);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -206,8 +196,6 @@ namespace vcs_test_all_01_DateTime
 
             richTextBox1.Text += "現在日期： " + dt.ToLongDateString() + "\n";
             richTextBox1.Text += "現在時間： " + dt.ToLongTimeString() + "\n";
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1714,25 +1702,27 @@ namespace vcs_test_all_01_DateTime
             cuinfo.DateTimeFormat.Calendar = cuinfo.OptionalCalendars[2];
             //TextBox1.Text = dt.ToString("yyyy/MM/dd", cuinfo);
 
-            label1.Text = dt.ToString();
-            label2.Text = dt.ToString("yyyy/MM/dd", cuinfo);
-            label3.Text = dt.ToString("HH:mm:ss");
-            label4.Text = dt.ToString("yyyy/MM/dd HH:mm:ss");
+            string mesg = string.Empty;
 
-            //Local Time / GMT
-            // Display the local time.
+            mesg += dt.ToString() + "\n";
+            mesg += dt.ToString("yyyy/MM/dd", cuinfo) + "\n";
+            mesg += dt.ToString("HH:mm:ss") + "\n";
+            mesg += dt.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
+
+            // Local Time / GMT
             dt = DateTime.Now;
-            lb_time0.Text = "Local Time";
-            lb_time1.Text = dt.ToLongTimeString() + "\n";
-            lb_time2.Text = dt.ToShortDateString() + "\n";
+            mesg += "Local Time\n";
+            mesg += dt.ToLongTimeString() + "\n";
+            mesg += dt.ToShortDateString() + "\n";
+
 
             // Display the GMT time.
             DateTimeOffset local_offset = new DateTimeOffset(dt);
             DateTimeOffset utc_offset = local_offset.ToUniversalTime();
 
-            lb_time3.Text = "GMT Time";
-            lb_time4.Text = utc_offset.DateTime.ToLongTimeString() + "\n";
-            lb_time5.Text = utc_offset.DateTime.ToShortDateString() + "\n";
+            mesg += "GMT Time\n";
+            mesg += utc_offset.DateTime.ToLongTimeString() + "\n";
+            mesg += utc_offset.DateTime.ToShortDateString() + "\n";
 
             if (flag_timer_counter_down_enable == 1)
             {
@@ -1745,14 +1735,21 @@ namespace vcs_test_all_01_DateTime
                 //richTextBox1.Text += dt.ToString() + "\n";
                 //richTextBox1.Text += dt.Date.ToString() + "\n";
                 //richTextBox1.Text += "xxx " + interval.TotalSeconds.ToString();// +"\n";
-                label5.Text = interval.TotalSeconds.ToString();
+                lb_time_interval.Text = interval.TotalSeconds.ToString();
 
                 if (interval.TotalSeconds > wait_seconds)
                 {
                     this.TopMost = true;
-                    label5.Text += "yyyy";
+                    lb_time_interval.Text += "yyyy";
+                    richTextBox1.Text += "Q ";
                 }
             }
+
+
+            lb_time.Text = mesg;
+
+
+
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)

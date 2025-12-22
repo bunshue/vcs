@@ -88,7 +88,7 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear1.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear1.Size.Height);
 
-            this.Size = new Size(1100+210, 700);
+            this.Size = new Size(1100 + 210, 700);
         }
 
         private void bt_clear1_Click(object sender, EventArgs e)
@@ -132,10 +132,8 @@ namespace vcs_ReadWrite_TXT
             }
 
             string filename2 = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-
-            //存檔
             File.WriteAllLines(filename2, all_lines2.ToArray());
-            richTextBox1.Text += "\n製作TXT檔\t" + filename2 + "\n";
+            richTextBox1.Text += "已存檔 : " + filename2 + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -169,25 +167,19 @@ namespace vcs_ReadWrite_TXT
 
             //ReadAllText 讀取文件
             //使用ReadAllText可以直接讀取文件中的內容, 格式為:
-            //File.ReadAllText(檔案位置及名稱)
+            //File.ReadAllText(filename)
 
             //WriteAllText 寫入/建立檔案
             //透過WriteAllText可以將文字寫入檔案(如果檔案不存在, 會自動建立), 格式為:
-            //File.WriteAllText(檔案位置及名稱, 字串);
+            //File.WriteAllText(filename, 字串);
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\琵琶行.txt";
-            //法一
-            // 運用 ReadAllText 方法 (String, Encoding), 其中 Encoding 針對您txt檔案的編碼做變更, 讀出的資料才不會有亂碼
-            //richTextBox1.Text += System.IO.File.ReadAllText(filename, Encoding.Default);
-
-            //法二
-            //讀取檔案
             //運用 ReadAllText 方法 (String, Encoding), 其中 Encoding 針對您txt檔案的編碼做變更, 讀出的資料才不會有亂碼
-            string y = File.ReadAllText(filename, Encoding.Default);
-            richTextBox1.Text += "檔案內容 : " + y + "\n";
-            richTextBox1.Text += "長度 : " + y.Length.ToString() + "\n";
+            string txt = File.ReadAllText(filename, Encoding.Default);
+            richTextBox1.Text += "檔案內容 : " + txt + "\n";
+            richTextBox1.Text += "長度 : " + txt.Length.ToString() + "\n";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -204,8 +196,8 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Text += "已存檔 : " + filename + "\n";
 
             //讀取檔案
-            y = File.ReadAllText(filename);
-            richTextBox1.Text += "檔案內容 : " + y + "\n";
+            txt = File.ReadAllText(filename);
+            richTextBox1.Text += "檔案內容 : " + txt + "\n";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
@@ -957,8 +949,8 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //儲存檔案5
-            int[] x = { 0, 40, 80, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480, 520, 560, 600 };
-            int[] y = { 200, 328, 396, 373, 268, 131, 26, 3, 71, 200, 328, 396, 373, 268, 131, 26 };
+            int[] xx = { 0, 40, 80, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480, 520, 560, 600 };
+            int[] yy = { 200, 328, 396, 373, 268, 131, 26, 3, 71, 200, 328, 396, 373, 268, 131, 26 };
             //把資料儲存成檔案
             filename = "tmp_aaaaaaa.txt";
             //FileStream
@@ -966,7 +958,7 @@ namespace vcs_ReadWrite_TXT
             sw = new StreamWriter(fs);
             for (int ii = 0; ii < 16; ii++)
             {
-                line = ii.ToString() + "\t" + x[ii].ToString() + "\t" + y[ii].ToString();
+                line = ii.ToString() + "\t" + xx[ii].ToString() + "\t" + yy[ii].ToString();
                 sw.WriteLine(line);
             }
             sw.Dispose();
@@ -1338,9 +1330,9 @@ namespace vcs_ReadWrite_TXT
             */
 
             string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\novel.txt";
-            string y = File.ReadAllText(filename, System.Text.Encoding.Default);
-            //richTextBox1.Text += "檔案內容 : " + y + "\n";
-            richTextBox1.Text += "總長度：" + y.Length.ToString() + "\n";
+            string txt = File.ReadAllText(filename, System.Text.Encoding.Default);
+            //richTextBox1.Text += "檔案內容 : " + txt + "\n";
+            richTextBox1.Text += "總長度：" + txt.Length.ToString() + "\n";
 
             word_statistics.Clear();
 
@@ -1355,7 +1347,7 @@ namespace vcs_ReadWrite_TXT
             {
                 find_pattern_count = 0;
                 richTextBox1.Text += "\n搜尋長度：" + (k + 1).ToString() + "\n";
-                for (i = 0; i < (y.Length - (k + 1)); i++)
+                for (i = 0; i < (txt.Length - (k + 1)); i++)
                 {
                     same_count = 1;
                     ignore = 0;
@@ -1363,18 +1355,18 @@ namespace vcs_ReadWrite_TXT
                     {
                         /*
                         //需要跳過的字眼
-                        if ((y[i + t] == '，') || (y[i + t] == '。') || (y[i + t] == '\n') || (y[i + t] == 0x0d) || (y[i + t] == 0x0a) || (y[i + t] == ' ') || (y[i + t] == 0x20) || (y[i + t] == '\t') || (y[i + t] == '　') || (y[i + t] == '"'))
+                        if ((txt[i + t] == '，') || (txt[i + t] == '。') || (txt[i + t] == '\n') || (txt[i + t] == 0x0d) || (txt[i + t] == 0x0a) || (txt[i + t] == ' ') || (txt[i + t] == 0x20) || (txt[i + t] == '\t') || (txt[i + t] == '　') || (txt[i + t] == '"'))
                         {
                             ignore = 1;
                             break;
                         }
-                        if ((y[i + t] == '：') || (y[i + t] == '﹒') || (y[i + t] == '「') || (y[i + t] == '」') || (y[i + t] == '？') || (y[i + t] == '…') || (y[i + t] == '、') || (y[i + t] == '\t') || (y[i + t] == '　') || (y[i + t] == '"'))
+                        if ((txt[i + t] == '：') || (txt[i + t] == '﹒') || (txt[i + t] == '「') || (txt[i + t] == '」') || (txt[i + t] == '？') || (txt[i + t] == '…') || (txt[i + t] == '、') || (txt[i + t] == '\t') || (txt[i + t] == '　') || (txt[i + t] == '"'))
                         {
                             ignore = 1;
                             break;
                         }
                         */
-                        if ((y[i + t] < 13000) || (y[i + t] > 60000))
+                        if ((txt[i + t] < 13000) || (txt[i + t] > 60000))
                         {
                             ignore = 1;
                             break;
@@ -1385,9 +1377,9 @@ namespace vcs_ReadWrite_TXT
                     for (int s = 0; s < word_statistics.Count; s++)
                     {
                         word = word_statistics[s].keyword;
-                        if (y.Substring(i, (k + 1)) == word)
+                        if (txt.Substring(i, (k + 1)) == word)
                         {
-                            //richTextBox1.Text += "X " + y.Substring(i, (k + 1));
+                            //richTextBox1.Text += "X " + txt.Substring(i, (k + 1));
                             ignore = 1;
                             break;
                         }
@@ -1397,12 +1389,12 @@ namespace vcs_ReadWrite_TXT
                         continue;
 
                     int find_pattern = 1;
-                    for (j = i + (k + 1); j < (y.Length - k); j++)
+                    for (j = i + (k + 1); j < (txt.Length - k); j++)
                     {
                         find_pattern = 1;
                         for (t = 0; t <= k; t++)
                         {
-                            if (y[i + t] == y[j + t])
+                            if (txt[i + t] == txt[j + t])
                             {
                                 find_pattern *= 1;
                             }
@@ -1420,39 +1412,39 @@ namespace vcs_ReadWrite_TXT
                         /*
                         if (k == 0)
                         {
-                            if (y[i] == y[j])
+                            if (txt[i] == txt[j])
                             {
-                                //richTextBox1.Text += "取得 " + y[i] + " i = " + i.ToString() + " j = " + j.ToString() + "\t";
+                                //richTextBox1.Text += "取得 " + txt[i] + " i = " + i.ToString() + " j = " + j.ToString() + "\t";
                                 same_count++;
                             }
                         }
                         else if (k == 1)
                         {
-                            if ((y[i] == y[j]) && (y[i + 1] == y[j + 1]))
+                            if ((txt[i] == txt[j]) && (txt[i + 1] == txt[j + 1]))
                             {
-                                //richTextBox1.Text += "取得 " + y[i] + y[i + 1] + " i = " + i.ToString() + " j = " + j.ToString() + "\t";
+                                //richTextBox1.Text += "取得 " + txt[i] + txt[i + 1] + " i = " + i.ToString() + " j = " + j.ToString() + "\t";
                                 same_count++;
                             }
                         }
                         else if (k == 2)
                         {
-                            if ((y[i] == y[j]) && (y[i + 1] == y[j + 1]) && (y[i + 2] == y[j + 2]))
+                            if ((txt[i] == txt[j]) && (txt[i + 1] == txt[j + 1]) && (txt[i + 2] == txt[j + 2]))
                             {
-                                //richTextBox1.Text += "取得 " + y[i] + y[i + 1] + " i = " + i.ToString() + " j = " + j.ToString() + "\t";
+                                //richTextBox1.Text += "取得 " + txt[i] + txt[i + 1] + " i = " + i.ToString() + " j = " + j.ToString() + "\t";
                                 same_count++;
                             }
                         }
                         else if (k == 3)
                         {
-                            if ((y[i] == y[j]) && (y[i + 1] == y[j + 1]) && (y[i + 2] == y[j + 2]) && (y[i + 3] == y[j + 3]))
+                            if ((txt[i] == txt[j]) && (txt[i + 1] == txt[j + 1]) && (txt[i + 2] == txt[j + 2]) && (txt[i + 3] == txt[j + 3]))
                             {
-                                //richTextBox1.Text += "取得 " + y[i] + y[i + 1] + " i = " + i.ToString() + " j = " + j.ToString() + "\t";
+                                //richTextBox1.Text += "取得 " + txt[i] + txt[i + 1] + " i = " + i.ToString() + " j = " + j.ToString() + "\t";
                                 same_count++;
                             }
                         }
                         */
 
-                        if (j == (y.Length - (k + 1)))
+                        if (j == (txt.Length - (k + 1)))
                         {
                             if (same_count > 2)
                             {
@@ -1460,11 +1452,11 @@ namespace vcs_ReadWrite_TXT
                                 richTextBox1.Text += "取得 \"";
                                 for (t = 0; t <= k; t++)
                                 {
-                                    richTextBox1.Text += y[i + t];
+                                    richTextBox1.Text += txt[i + t];
                                 }
                                 richTextBox1.Text += "\" 共 " + same_count.ToString() + " 個\n";
 
-                                pattern = y.Substring(i, (k + 1));
+                                pattern = txt.Substring(i, (k + 1));
 
                                 word_statistics.Add(new WordInfo(k, pattern, same_count));
 
@@ -1503,7 +1495,7 @@ namespace vcs_ReadWrite_TXT
         private void button32_Click(object sender, EventArgs e)
         {
             int i;
-            //if ((y[i + t] == '：') || (y[i + t] == '﹒') || (y[i + t] == '「') || (y[i + t] == '」') || (y[i + t] == '？') || (y[i + t] == '…') || (y[i + t] == '、') || (y[i + t] == '\t') || (y[i + t] == '　') || (y[i + t] == '"'))
+            //if ((txt[i + t] == '：') || (txt[i + t] == '﹒') || (txt[i + t] == '「') || (txt[i + t] == '」') || (txt[i + t] == '？') || (txt[i + t] == '…') || (txt[i + t] == '、') || (txt[i + t] == '\t') || (txt[i + t] == '　') || (txt[i + t] == '"'))
             richTextBox1.Text += "：\t" + ((int)'：').ToString() + "\n";
 
             string ss = "俄羅斯火槍手作亂　";
@@ -1513,10 +1505,10 @@ namespace vcs_ReadWrite_TXT
             }
 
             string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\novel.txt";
-            string y = File.ReadAllText(filename, System.Text.Encoding.Default);
-            richTextBox1.Text += "\n總長度：" + y.Length.ToString() + "\n";
+            string txt = File.ReadAllText(filename, System.Text.Encoding.Default);
+            richTextBox1.Text += "\n總長度：" + txt.Length.ToString() + "\n";
 
-            for (i = 0; i < y.Length; i++)
+            for (i = 0; i < txt.Length; i++)
             //for (i = 0; i < 5000; i++)
             {
                 if ((i % 5) == 4)
@@ -1524,46 +1516,46 @@ namespace vcs_ReadWrite_TXT
                     richTextBox1.Text += "\n";
                 }
 
-                if (y[i] == 0x0A)
+                if (txt[i] == 0x0A)
                     continue;
-                if (y[i] == 0x0D)
+                if (txt[i] == 0x0D)
                     continue;
-                if (y[i] == 0x20)
+                if (txt[i] == 0x20)
                     continue;
-                if (y[i] == 0x22)
+                if (txt[i] == 0x22)
                     continue;
 
-                //if (y[i] < 13000)
-                //richTextBox1.Text += "i = " + i.ToString() + "\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                //if (txt[i] < 13000)
+                //richTextBox1.Text += "i = " + i.ToString() + "\t|" + txt[i] + "|\t" + ((int)txt[i]).ToString("X2") + "\t" + ((int)txt[i]).ToString() + "\t";
 
-                if ((y[i] >= 0x2E80) && (y[i] <= 0x33FF))
+                if ((txt[i] >= 0x2E80) && (txt[i] <= 0x33FF))
                 {
-                    richTextBox1.Text += "_A\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                    richTextBox1.Text += "_A\t|" + txt[i] + "|\t" + ((int)txt[i]).ToString("X2") + "\t" + ((int)txt[i]).ToString() + "\t";
                 }
 
-                if ((y[i] >= 0x3400) && (y[i] <= 0x4DFF))
+                if ((txt[i] >= 0x3400) && (txt[i] <= 0x4DFF))
                 {
-                    richTextBox1.Text += "_B\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                    richTextBox1.Text += "_B\t|" + txt[i] + "|\t" + ((int)txt[i]).ToString("X2") + "\t" + ((int)txt[i]).ToString() + "\t";
                 }
-                if ((y[i] >= 0x4E00) && (y[i] <= 0x9FFF))
+                if ((txt[i] >= 0x4E00) && (txt[i] <= 0x9FFF))
                 {
-                    richTextBox1.Text += "_C\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                    richTextBox1.Text += "_C\t|" + txt[i] + "|\t" + ((int)txt[i]).ToString("X2") + "\t" + ((int)txt[i]).ToString() + "\t";
                 }
-                if ((y[i] >= 0xA000) && (y[i] <= 0xA4FF))
+                if ((txt[i] >= 0xA000) && (txt[i] <= 0xA4FF))
                 {
-                    richTextBox1.Text += "_D\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                    richTextBox1.Text += "_D\t|" + txt[i] + "|\t" + ((int)txt[i]).ToString("X2") + "\t" + ((int)txt[i]).ToString() + "\t";
                 }
-                if ((y[i] >= 0xAC00) && (y[i] <= 0xD7FF))
+                if ((txt[i] >= 0xAC00) && (txt[i] <= 0xD7FF))
                 {
-                    richTextBox1.Text += "_E\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                    richTextBox1.Text += "_E\t|" + txt[i] + "|\t" + ((int)txt[i]).ToString("X2") + "\t" + ((int)txt[i]).ToString() + "\t";
                 }
-                if ((y[i] >= 0xF900) && (y[i] <= 0xFAFF))
+                if ((txt[i] >= 0xF900) && (txt[i] <= 0xFAFF))
                 {
-                    richTextBox1.Text += "_F\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                    richTextBox1.Text += "_F\t|" + txt[i] + "|\t" + ((int)txt[i]).ToString("X2") + "\t" + ((int)txt[i]).ToString() + "\t";
                 }
-                if ((y[i] >= 0xFB00) && (y[i] <= 0xFFFD))
+                if ((txt[i] >= 0xFB00) && (txt[i] <= 0xFFFD))
                 {
-                    richTextBox1.Text += "_X\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                    richTextBox1.Text += "_X\t|" + txt[i] + "|\t" + ((int)txt[i]).ToString("X2") + "\t" + ((int)txt[i]).ToString() + "\t";
                 }
 
                 /*
@@ -1585,7 +1577,7 @@ namespace vcs_ReadWrite_TXT
             string aaa = string.Empty;
             for (i = 0x4E2D; i < 0x4FFF; i++)
             {
-                //richTextBox1.Text += "_A\t|" + y[i] + "|\t" + ((int)y[i]).ToString("X2") + "\t" + ((int)y[i]).ToString() + "\t";
+                //richTextBox1.Text += "_A\t|" + txt[i] + "|\t" + ((int)txt[i]).ToString("X2") + "\t" + ((int)txt[i]).ToString() + "\t";
                 //richTextBox1.Text += (string)(i) + "\t";
                 //aaa[j] = (char)i;
                 //j++;

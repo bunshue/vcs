@@ -50,7 +50,7 @@ namespace vcs_Process1
             //button
             x_st = 10;
             y_st = 10;
-            dx = 150 + 10;
+            dx = 200 + 10;
             dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -105,10 +105,10 @@ namespace vcs_Process1
             bt_system2.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 10);
 
             richTextBox1.Size = new Size(360, 700);
-            richTextBox1.Location = new Point(x_st + dx * 5 + 30, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 5 - 10, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1230, 760);
+            this.Size = new Size(1440, 760);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -367,6 +367,12 @@ namespace vcs_Process1
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //取得目前的進程數
+
+            Process[] MyProcesses;
+
+            MyProcesses = Process.GetProcesses();
+            richTextBox1.Text += "進程數 : " + MyProcesses.Length.ToString() + "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -801,16 +807,66 @@ namespace vcs_Process1
 
 
 //6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
+//------------------------------------------------------------
 
 //3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
 //1515
 //---------------  # 15個
 
-//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-//richTextBox1.Text += "------------------------------\n";  // 30個
-//richTextBox1.Text += "---------------\n";  // 15個
+
+/*  可搬出
+
+*/
+
+
+/*
+        //獲取窗體的進程標識ID
+        public static int GetPid(string windowTitle)
+        {
+            int rs = 0;
+            Process[] arrayProcess = Process.GetProcesses();
+            foreach (Process p in arrayProcess)
+            {
+                if (p.MainWindowTitle.IndexOf(windowTitle) != -1)
+                {
+                    rs = p.Id;
+                    break;
+                }
+            }
+            return rs;
+        }
+
+        //根據進程名獲取PID
+        public static int GetPidByProcessName(string processName, ref IntPtr baseAddress)
+        {
+            Process[] arrayProcess = Process.GetProcessesByName(processName);
+            foreach (Process p in arrayProcess)
+            {
+                baseAddress = p.MainModule.BaseAddress;
+                return p.Id;
+            }
+
+            return 0;
+        }
+
+        //根據進程名獲取PID
+        public static int GetPidByProcessName(string processName)
+        {
+            Process[] arrayProcess = Process.GetProcessesByName(processName);
+            foreach (Process p in arrayProcess)
+            {
+                return p.Id;
+            }
+
+            return 0;
+        }
+        
+
+*/
 
 

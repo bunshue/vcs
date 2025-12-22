@@ -34,7 +34,6 @@ namespace vcs_System1
     {
         DateTime start_time = DateTime.Now;
 
-        Process[] MyProcesses;
         Thread td;
 
         public Form1()
@@ -47,9 +46,8 @@ namespace vcs_System1
             show_item_location();
 
             CheckForIllegalCrossThreadCalls = false;
-            MyProcesses = Process.GetProcesses();
-            lb_processes.Text = "進程數 : " + MyProcesses.Length.ToString();
-            myUser();
+
+            GetMemoryInfo();
         }
 
         void show_item_location()
@@ -119,9 +117,6 @@ namespace vcs_System1
             button47.Location = new Point(x_st + dx * 4, y_st + dy * 7);
             button48.Location = new Point(x_st + dx * 4, y_st + dy * 8);
             button49.Location = new Point(x_st + dx * 4, y_st + dy * 9);
-
-            lb_processes.Location = new Point(x_st + dx * 5, y_st + dy * 9);//進程數
-            lb_DoEvents.Location = new Point(x_st + dx * 5 + 150, y_st + dy * 9);//進程數
 
             groupBox1.Size = new Size(200, 150);//Windows 開關機(偽執行)
             groupBox2.Size = new Size(320, 150);
@@ -1311,7 +1306,7 @@ namespace vcs_System1
             int i;
             for (i = 0; i <= 7777; i++)
             {
-                lb_DoEvents.Text = i.ToString();
+                //do something lb_DoEvents.Text = i.ToString();
                 Application.DoEvents();//實時響應文本框中的值
                 //Application.DoEvents()的作用：处理当前在消息队列中的所有 Windows 消息。
                 //加Application.DoEvents可以防止界面停止响应
@@ -1325,7 +1320,7 @@ namespace vcs_System1
             int i;
             for (i = 0; i <= 7777; i++)
             {
-                lb_DoEvents.Text = i.ToString();
+                //do something lb_DoEvents.Text = i.ToString();
                 //Application.DoEvents();//實時響應文本框中的值
             }
         }
@@ -1431,7 +1426,7 @@ namespace vcs_System1
 
         #endregion
 
-        private void myUser()
+        private void GetMemoryInfo()
         {
             Memory();
         }
@@ -1480,9 +1475,7 @@ namespace vcs_System1
 
             //------------------------------------------------------------  # 60個
 
-            MyProcesses = Process.GetProcesses();
-            lb_processes.Text = "進程數 : " + MyProcesses.Length.ToString();
-            td = new Thread(new ThreadStart(myUser));
+            td = new Thread(new ThreadStart(GetMemoryInfo));
             td.Start();
         }
 

@@ -20,16 +20,56 @@ namespace vcs_LED_Text
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+        }
 
+        void show_item_location()
+        {
+            int W = 600;
+            int H = 400;
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = W + 10;
+            dy = H + 10;
+            pictureBox0.Size = new Size(W, H);
+            pictureBox1.Size = new Size(W, H);
+            pictureBox2.Size = new Size(W, H);
+            pictureBox3.Size = new Size(W, H);
+
+            pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox3.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+
+            this.ClientSize = new Size(W * 2 + 10 * 3, H * 3 + 10 * 1);
+        }
+
+        private void pictureBox0_Paint(object sender, PaintEventArgs e)
+        {
+            TestLeds(e.Graphics);
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            //TestLeds(e.Graphics);
-            //TestColorful(e.Graphics);
-            //TestSplat(e.Graphics);
+            TestColorful(e.Graphics);
+        }
+
+        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        {
+            TestSplat(e.Graphics);
+        }
+
+        private void pictureBox3_Paint(object sender, PaintEventArgs e)
+        {
             TestLetters(e.Graphics);
         }
+
         private void TestSplat(Graphics gr)
         {
             gr.Clear(Color.Black);
@@ -91,8 +131,6 @@ namespace vcs_LED_Text
             letter.DrawText(gr, bg_brush2, used_brush2, used_pen2,
                     unused_brush2, unused_pen2, position,
                     1.2f, "5");
-
-            this.Size = new Size(505, 410);
         }
 
         private void TestLetters(Graphics gr)

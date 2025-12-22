@@ -39,8 +39,6 @@ namespace vcs_DynamicAddRemoveControls1
             DynamicGenerateButton1();
 
             Add_Controls_pictureBox1();//加入控件 pictureBox1
-
-            this.MouseDown += new MouseEventHandler(Form1_MouseDown);
         }
 
         void show_item_location()
@@ -49,7 +47,6 @@ namespace vcs_DynamicAddRemoveControls1
             int y_st;
             int dx;
             int dy;
-            int dy2;
 
             //button
             x_st = 10;
@@ -88,10 +85,10 @@ namespace vcs_DynamicAddRemoveControls1
             int pbx_H2 = 520 * 2 / 3;
             int pbx_W3 = 480;
 
-            label1.Location = new Point(800, 10);
+            button18.Location = new Point(10 + 240 + 240, 500);
 
-            richTextBox1.Size = new Size(400, 280);
-            richTextBox1.Location = new Point(10 + 400 + 80, 510);
+            richTextBox1.Size = new Size(400, 600);
+            richTextBox1.Location = new Point(840, 10);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1300, 880);
@@ -1064,6 +1061,13 @@ namespace vcs_DynamicAddRemoveControls1
                 }
             }
         }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            //單擊視窗的任何地方都會產生Button控件
+
+            this.MouseDown += new MouseEventHandler(Form1_MouseDown);
+            button18.Enabled = false;
+        }
     }
 }
-

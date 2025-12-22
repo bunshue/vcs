@@ -89,7 +89,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.timer_memory = new System.Windows.Forms.Timer(this.components);
-            this.lb_processes = new System.Windows.Forms.Label();
             this.button30 = new System.Windows.Forms.Button();
             this.button31 = new System.Windows.Forms.Button();
             this.button32 = new System.Windows.Forms.Button();
@@ -110,7 +109,6 @@
             this.button47 = new System.Windows.Forms.Button();
             this.button48 = new System.Windows.Forms.Button();
             this.button49 = new System.Windows.Forms.Button();
-            this.lb_DoEvents = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -728,16 +726,6 @@
             this.timer_memory.Interval = 1000;
             this.timer_memory.Tick += new System.EventHandler(this.timer_memory_Tick);
             // 
-            // lb_processes
-            // 
-            this.lb_processes.AutoSize = true;
-            this.lb_processes.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_processes.Location = new System.Drawing.Point(1059, 550);
-            this.lb_processes.Name = "lb_processes";
-            this.lb_processes.Size = new System.Drawing.Size(66, 19);
-            this.lb_processes.TabIndex = 80;
-            this.lb_processes.Text = "進程數";
-            // 
             // button30
             // 
             this.button30.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -951,22 +939,11 @@
             this.button49.UseVisualStyleBackColor = true;
             this.button49.Click += new System.EventHandler(this.button49_Click);
             // 
-            // lb_DoEvents
-            // 
-            this.lb_DoEvents.AutoSize = true;
-            this.lb_DoEvents.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_DoEvents.Location = new System.Drawing.Point(1131, 550);
-            this.lb_DoEvents.Name = "lb_DoEvents";
-            this.lb_DoEvents.Size = new System.Drawing.Size(103, 19);
-            this.lb_DoEvents.TabIndex = 101;
-            this.lb_DoEvents.Text = "lb_DoEvents";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 641);
-            this.Controls.Add(this.lb_DoEvents);
             this.Controls.Add(this.button49);
             this.Controls.Add(this.button48);
             this.Controls.Add(this.button47);
@@ -987,7 +964,6 @@
             this.Controls.Add(this.button32);
             this.Controls.Add(this.button31);
             this.Controls.Add(this.button30);
-            this.Controls.Add(this.lb_processes);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -1036,7 +1012,6 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -1102,7 +1077,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Timer timer_memory;
-        private System.Windows.Forms.Label lb_processes;
         private System.Windows.Forms.Button button30;
         private System.Windows.Forms.Button button31;
         private System.Windows.Forms.Button button32;
@@ -1123,7 +1097,6 @@
         private System.Windows.Forms.Button button47;
         private System.Windows.Forms.Button button48;
         private System.Windows.Forms.Button button49;
-        private System.Windows.Forms.Label lb_DoEvents;
     }
 }
 
