@@ -161,6 +161,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 5;
+            this.button5.Text = "陣列的維度";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 

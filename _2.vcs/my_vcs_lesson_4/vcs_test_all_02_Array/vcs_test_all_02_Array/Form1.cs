@@ -94,33 +94,31 @@ namespace vcs_test_all_02_Array
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //一維陣列宣告：
-            int[] A1 = new int[8];
-            int[] A3 = { 75, 66, 60, 70, 80, 85, 90, 100 };
-
-
             //整數一維陣列
+            int[] A3 = { 75, 66, 60, 70, 80, 85, 90, 100 };
+            int[] C = { 1, 3, 5, 7, 9 };
             int[] B = new int[] { 1, 2, 3, 4, 5 };
             int[] a = new int[5] { 0, 1, 2, 3, 4 };
-            int[] index = new int[4] { 2, 4, 6, 8 };
-            int[] C = { 1, 3, 5, 7, 9 };
             int[] A = new int[5];
             A[0] = 1;
             A[1] = 2;
             A[2] = 3;
             A[3] = 4;
             A[4] = 5;
-            A = new int[] { 1, 2, 3, 4, 5 };	//改值
+            A = new int[] { 1, 9, 4, 5, 8 };	//改值
 
             richTextBox1.Text += "資料長度 : " + A.Length.ToString() + "\n";
+            Array.Sort(A);
+            richTextBox1.Text += "排序後 :\n";
+            foreach (var v in A)
+            {
+                richTextBox1.Text += v.ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
 
-            int[] a1 = new int[4];
-            a1[0] = 5;
-            a1[1] = 4;
-            a1[2] = 6;
-            a1[3] = 2;
-            Array.Sort(a1);
-            richTextBox1.Text += "\n最大值為：" + a1[3].ToString() + "\n";
+            richTextBox1.Text += "最大值為 : " + A[4].ToString() + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //一維陣列
             int[] iArrary = new int[] { 1, 5, 13, 6, 10, 55, 99, 2, 87, 12, 34, 75, 33, 47 };
@@ -129,14 +127,6 @@ namespace vcs_test_all_02_Array
                 richTextBox1.Text += iArrary[m].ToString() + " ";
             }
             richTextBox1.Text += "\n";
-
-            //整數一維陣列
-            int[] LunarDateArray = new int[]{
-                    0x04BD8,0x04AE0,0x0A570,0x054D5,0x0D260,0x0D950,0x16554,0x056A0,0x09AD0,0x055D2,
-                    0x05AA0,0x076A3,0x096D0,0x04BD7,0x04AD0,0x0A4D0,0x1D0B6,0x0D250,0x0D520,0x0DD45,
-                    0x0B5A0,0x056D0,0x055B2,0x049B0,0x0A577,0x0A4B0,0x0AA50,0x1B255,0x06D20,0x0ADA0,
-                    0x14B63        
-                    };
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -166,6 +156,7 @@ namespace vcs_test_all_02_Array
             richTextBox1.Text += "Rank :\t" + Values.Rank.ToString() + "\t陣列維度值\n";
 
             Array.Sort(Values);
+
             richTextBox1.Text += "排序後\n";
             foreach (var v in Values)
             {
@@ -180,6 +171,26 @@ namespace vcs_test_all_02_Array
                 richTextBox1.Text += v.ToString() + " ";
             }
             richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //字串一維陣列
+            string[] strings2 = new string[10];
+            string[] animals1 = { "鼠", "牛", "虎", "兔", "龍" };
+            string[] animals2 = new string[] { "鼠", "牛", "虎", "兔", "龍" };
+            string[] animals3 = new string[5] { "鼠", "牛", "虎", "兔", "龍" };
+            richTextBox1.Text += "共有 " + animals2.Length.ToString() + " 個項目, 分別是:\n";
+            foreach (var str in animals1)
+            {
+                richTextBox1.Text += "字串 : " + str + "\n";
+            }
+
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //字串一維陣列
+            String[] weekday = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+            string week = weekday[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -208,36 +219,6 @@ namespace vcs_test_all_02_Array
 
             //Point一維陣列
             Point[] pt = new Point[360];    //一維陣列內有360個Point
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //字串一維陣列
-            string[] strings2 = new string[10];
-            string[] cities1 = { "台北", "新竹", "台中", "台南", "高雄" };
-            string[] cities2 = new string[] { "台北", "新竹", "台中", "台南", "高雄" };
-            string[] cities3 = new string[5] { "台北", "新竹", "台中", "台南", "高雄" };
-            richTextBox1.Text += "共有 " + cities2.Length.ToString() + " 個項目, 分別是:\n";
-            foreach (var str in cities1)
-            {
-                richTextBox1.Text += "字串 : " + str + "\n";
-            }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //字串一維陣列
-            String[] weekday = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-            string week = weekday[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //字串一維陣列
-            string[] names = new string[] { "鼠", "牛", "虎", "兔", "龍" };
-            richTextBox1.Text += "len = " + names.Length.ToString() + "\n";
-
-            for (int i = names.GetLowerBound(0); i <= names.GetUpperBound(0); i++)
-            {
-                richTextBox1.Text += names[i] + "\n";
-            }
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -309,6 +290,7 @@ namespace vcs_test_all_02_Array
 
             //二維陣列宣告：
             int[,] Stu_Sum = new int[3, 4];
+
             int[,] Score = new int[,] {
             { 65, 85, 78, 75, 69 },
             { 66, 55, 52, 92, 47 },
@@ -402,7 +384,6 @@ namespace vcs_test_all_02_Array
             {0, 1, 2, 3, 4, 5, 6, 7},
             {0, 1, 2, 3, 4, 5, 6, 7},
             };
-
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -647,6 +628,15 @@ namespace vcs_test_all_02_Array
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //陣列的維度
+
+            string[] animals = new string[] { "鼠", "牛", "虎", "兔", "龍" };
+            richTextBox1.Text += "len = " + animals.Length.ToString() + "\n";
+
+            for (int i = animals.GetLowerBound(0); i <= animals.GetUpperBound(0); i++)
+            {
+                richTextBox1.Text += animals[i] + "\n";
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -728,7 +718,6 @@ namespace vcs_test_all_02_Array
                 // We found the target. Select it.
                 //lstValues.SelectedIndex = index;
                 richTextBox1.Text += "Found target, index = " + index.ToString() + "\tvalue = " + Values[index].ToString() + "\n";
-
             }
             else
             {
@@ -796,7 +785,6 @@ namespace vcs_test_all_02_Array
             }
             //txtMsg.Text = msg;  //顯示資料內容
             richTextBox1.Text += msg + "\n";
-
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -977,7 +965,6 @@ namespace vcs_test_all_02_Array
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //排序
-
             string[] name = { "王一", "李二", "陳三", "趙四", "馬五" };
             int[] score = { 78, 80, 50, 96, 69 };
             int[] rank = new int[5];
@@ -1001,37 +988,35 @@ namespace vcs_test_all_02_Array
             {
                 richTextBox1.Text += name[i] + "\t第" + rank[i].ToString() + "名\n";
             }
-
-
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
             //二陣列排序
             int[] scores = new int[] { 80, 50, 60, 90, 70 };
-            //string[] names = new string[] {"Mary", "Jack", "Tom", "David", "Grace" };  //寫法同下
-            string[] names = { "Mary", "Jack", "Tom", "David", "Grace" };
+            //string[] animals = new string[] {"Mary", "Jack", "Tom", "David", "Grace" };  //寫法同下
+            string[] animals = { "Mary", "Jack", "Tom", "David", "Grace" };
 
             richTextBox1.Text += "排序前：\n";
             for (int i = 0; i < scores.Length; i++)
             {
-                richTextBox1.Text += i.ToString() + "\t" + names[i] + "\t" + scores[i] + "\n";
+                richTextBox1.Text += i.ToString() + "\t" + animals[i] + "\t" + scores[i] + "\n";
             }
             richTextBox1.Text += "\n";
 
-            Array.Sort(names, scores);   //以names為準排序，scores跟著
+            Array.Sort(animals, scores);   //以animals為準排序，scores跟著
             richTextBox1.Text += "依姓名排序：\n";
             for (int i = 0; i < scores.Length; i++)
             {
-                richTextBox1.Text += i.ToString() + "\t" + names[i] + "\t" + scores[i] + "\n";
+                richTextBox1.Text += i.ToString() + "\t" + animals[i] + "\t" + scores[i] + "\n";
             }
             richTextBox1.Text += "\n";
 
-            Array.Sort(scores, names);   //以scores為準排序，names跟著
+            Array.Sort(scores, animals);   //以scores為準排序，animals跟著
             richTextBox1.Text += "依成績排序：\n";
             for (int i = 0; i < scores.Length; i++)
             {
-                richTextBox1.Text += i.ToString() + "\t" + names[i] + "\t" + scores[i] + "\n";
+                richTextBox1.Text += i.ToString() + "\t" + animals[i] + "\t" + scores[i] + "\n";
             }
             richTextBox1.Text += "\n";
         }
@@ -1127,13 +1112,13 @@ namespace vcs_test_all_02_Array
             int[] scores = new int[] { 80, 50, 60, 90, 80 };
             int[] scores_new = new int[5];
             int[] rank = new int[5];
-            //string[] names = new string[] {"Mary", "Jack", "Tom", "David", "Grace" };  //寫法同下
-            string[] names = { "Mary", "Jack", "Tom", "David", "Grace" };
+            //string[] animals = new string[] {"Mary", "Jack", "Tom", "David", "Grace" };  //寫法同下
+            string[] animals = { "Mary", "Jack", "Tom", "David", "Grace" };
 
             richTextBox1.Text += "排序前：\n";
             for (i = 0; i < scores.Length; i++)
             {
-                richTextBox1.Text += (i + 1).ToString() + "\t" + names[i] + "\t" + scores[i] + "\n";
+                richTextBox1.Text += (i + 1).ToString() + "\t" + animals[i] + "\t" + scores[i] + "\n";
             }
             richTextBox1.Text += "\n";
 
@@ -1149,7 +1134,7 @@ namespace vcs_test_all_02_Array
                 else
                     score_last = scores_new[i];
 
-                //richTextBox1.Text += i.ToString() + "\t" + names[i] + "\t" + scores_new[i] + "\n";
+                //richTextBox1.Text += i.ToString() + "\t" + animals[i] + "\t" + scores_new[i] + "\n";
                 for (j = 0; j < scores_new.Length; j++)
                 {
                     if (scores[j] == scores_new[i])
@@ -1162,7 +1147,7 @@ namespace vcs_test_all_02_Array
             richTextBox1.Text += "排名次：\n";
             for (i = 0; i < scores.Length; i++)
             {
-                richTextBox1.Text += (i + 1).ToString() + "\t" + names[i] + "\t" + scores[i] + "\t" + (rank[i] + 1).ToString() + "\n";
+                richTextBox1.Text += (i + 1).ToString() + "\t" + animals[i] + "\t" + scores[i] + "\t" + (rank[i] + 1).ToString() + "\n";
             }
             richTextBox1.Text += "\n";
         }
@@ -1759,7 +1744,6 @@ namespace vcs_test_all_02_Array
         }
     }
 }
-
 
 
 //6060

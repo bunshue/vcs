@@ -5,7 +5,7 @@ using System.Text;
 
 using System.Windows.Forms;
 
-namespace vcs_ListBox5_SetTabs
+namespace vcs_ListBox1
 {
     public static class ListBoxExtensions
     {

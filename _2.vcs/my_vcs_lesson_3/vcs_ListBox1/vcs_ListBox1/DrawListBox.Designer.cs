@@ -1,4 +1,4 @@
-﻿namespace vcs_ListBox8
+﻿namespace vcs_ListBox1
 {
     partial class DrawListBox
     {

@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 
-namespace vcs_ListBox8
+namespace vcs_ListBox1
 {
     public partial class DrawListBox : ListBox
     {
