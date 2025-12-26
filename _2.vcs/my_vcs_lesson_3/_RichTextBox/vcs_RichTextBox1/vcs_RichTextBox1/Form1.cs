@@ -25,29 +25,10 @@ namespace vcs_RichTextBox1
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+            show_richtextbox_font();
 
-            label4.Text = "字數 : " + richTextBox1.TextLength.ToString() + ", 行數 : " + richTextBox1.Lines.Length.ToString();
-            label6.Text = "";
-
-            // Format RichTextBox1.
-            richTextBox_format_1.Select(4, 5);
-            richTextBox_format_1.SelectionColor = Color.Red;
-            richTextBox_format_1.Select(16, 3);
-            richTextBox_format_1.SelectionFont = new Font(richTextBox_format_1.Font, FontStyle.Italic);
-            richTextBox_format_1.Select(35, 4);
-            richTextBox_format_1.SelectionBackColor = Color.Yellow;
-            richTextBox_format_1.SelectionColor = Color.Brown;
-            richTextBox_format_1.Select(0, 0);
-
-            // Format RichTextBox2.
-            SelectRichText(richTextBox_format_2, "quick");
-            richTextBox_format_2.SelectionColor = Color.Red;
-            SelectRichText(richTextBox_format_2, "fox");
-            richTextBox_format_2.SelectionFont = new Font(richTextBox_format_2.Font, FontStyle.Italic);
-            SelectRichText(richTextBox_format_2, "lazy");
-            richTextBox_format_2.SelectionBackColor = Color.Yellow;
-            richTextBox_format_2.SelectionColor = Color.Brown;
-            richTextBox_format_2.Select(0, 0);
+            //RichTextBox 字數統計
+            lb_richtextbox1_fx4.Text = "字數 : " + richTextBox1.TextLength.ToString() + ", 行數 : " + richTextBox1.Lines.Length.ToString();
 
             show_richtextbox_tabs();
 
@@ -57,19 +38,18 @@ namespace vcs_RichTextBox1
             }
         }
 
-        // Select the indicated text.
         private void SelectRichText(RichTextBox rch, string target)
         {
             int pos = rch.Text.IndexOf(target);
             if (pos < 0)
             {
                 // Not found. Select nothing.
-                rch.Select(0, 0);
+                rch.Select(0, 0);//離開選取
             }
             else
             {
                 // Found the text. Select it.
-                rch.Select(pos, target.Length);
+                rch.Select(pos, target.Length);//部分區域位置 ST, len
             }
         }
 
@@ -96,8 +76,8 @@ namespace vcs_RichTextBox1
             int dy;
 
             //button
-            x_st = 12;
-            y_st = 12;
+            x_st = 10;
+            y_st = 10;
             dx = 200 + 10;
             dy = 60 + 10;
 
@@ -130,195 +110,142 @@ namespace vcs_RichTextBox1
             button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
             button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
             button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
-            textBox2.Location = new Point(x_st + dx * 3, y_st + dy * 9);
-            bt_set_font_size.Location = new Point(x_st + dx * 3 + 80, y_st + dy * 9);
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            richTextBox_format_1.Size = new Size(400, 50);
-            richTextBox_format_1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            richTextBox_format_2.Size = new Size(400, 50);
-            richTextBox_format_2.Location = new Point(x_st + dx * 2, y_st + dy * 10);
+            int dd = 30;
+            lb_richtextbox1_fx1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + dd * 0);
+            lb_richtextbox1_fx2.Location = new Point(x_st + dx * 3, y_st + dy * 0 + dd * 1);
+            lb_richtextbox1_fx3.Location = new Point(x_st + dx * 3, y_st + dy * 0 + dd * 2);
+            lb_richtextbox1_fx5.Location = new Point(x_st + dx * 3 + 360, y_st + dy * 0 + dd * 1);
+            lb_richtextbox1_fx6.Location = new Point(x_st + dx * 3 + 360, y_st + dy * 0 + dd * 3 - 10);
+            lb_richtextbox1_fx4.Location = new Point(x_st + dx * 3 + 360, y_st + dy * 0 + dd * 0);
+            lb_richtextbox1_text.Location = new Point(x_st + dx * 3 + 360 + 260, y_st + dy * 0 + dd * 0);
 
-            richTextBox1.Size = new Size(500, 400);
-            x_st = 720 + 100 + 30;
-            y_st = 12;
-            richTextBox1.Location = new Point(x_st, y_st);
+            lb_richtextbox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + dd * 4);
+            richTextBox1.Size = new Size(850, 330);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + dd * 5);
 
-            richTextBox2.Size = new Size(500, 200);
-            x_st = 720 + 100 + 30;
-            y_st = 12 + 410;
-            richTextBox2.Location = new Point(x_st, y_st);
+            lb_richtextbox2.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            richTextBox2.Size = new Size(270, 200);
+            richTextBox2.Location = new Point(x_st + dx * 2, y_st + dy * 7 + dd);
 
-            richTextBox3.Size = new Size(300, 250);
-            x_st = 820 + 510 + 30;
-            y_st = 12;
-            richTextBox3.Location = new Point(x_st, y_st);
+            lb_richtextbox3.Location = new Point(x_st + dx * 3 + 80, y_st + dy * 7);
+            richTextBox3.Size = new Size(270 + 200, 200);
+            richTextBox3.Location = new Point(x_st + dx * 3 + 80, y_st + dy * 7 + dd);
 
-            x_st = 820 + 510 + 30;
-            y_st = 12 + 500;
-            richTextBox_rtf.Size = new Size(300, 200);
-            richTextBox_rtf.Location = new Point(x_st, y_st);
+            lb_richtextbox_rtf.Location = new Point(x_st + dx * 4 + 160 + 200, y_st + dy * 7);
+            richTextBox_rtf.Size = new Size(270, 200);
+            richTextBox_rtf.Location = new Point(x_st + dx * 4 + 160 + 200, y_st + dy * 7 + dd);
 
-            bt_open1.Location = new Point(richTextBox1.Location.X, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height * 2 - 5);
-            bt_open2.Location = new Point(richTextBox1.Location.X, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open2.Size.Height);
-            bt_font.Location = new Point(richTextBox1.Location.X + bt_open2.Size.Width + 5, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open2.Size.Height);
-            bt_save.Location = new Point(richTextBox1.Location.X + bt_open2.Size.Width + 5 + bt_font.Size.Width + 5, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open2.Size.Height);
-            bt_save2.Location = new Point(richTextBox1.Location.X + bt_open2.Size.Width + 5 + bt_font.Size.Width + 5 + bt_save.Size.Width + 5, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open2.Size.Height);
+            dd = 45;
+            bt_shape0.Location = new Point(richTextBox1.Location.X + dd * 0, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height - bt_shape0.Height - 5);
+            bt_shape1.Location = new Point(richTextBox1.Location.X + dd * 1, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height - bt_shape0.Height - 5);
+            bt_shape2.Location = new Point(richTextBox1.Location.X + dd * 2, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height - bt_shape0.Height - 5);
+            bt_shape3.Location = new Point(richTextBox1.Location.X + dd * 3, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height - bt_shape0.Height - 5);
 
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            dd = 65;
+            bt_analyze.Location = new Point(richTextBox1.Location.X + dd * 0, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
+            bt_open1.Location = new Point(richTextBox1.Location.X + dd * 1, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
+            bt_open2.Location = new Point(richTextBox1.Location.X + dd * 2, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
+            bt_open3.Location = new Point(richTextBox1.Location.X + dd * 3, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
+            bt_font.Location = new Point(richTextBox1.Location.X + dd * 4, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
+            bt_backcolor.Location = new Point(richTextBox1.Location.X + dd * 5, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
+            bt_part1.Location = new Point(richTextBox1.Location.X + dd * 6, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
+            bt_search.Location = new Point(richTextBox1.Location.X + dd * 7, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
+            bt_save1.Location = new Point(richTextBox1.Location.X + dd * 8, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
+            bt_save2.Location = new Point(richTextBox1.Location.X + dd * 9 - 20, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
+            bt_save3.Location = new Point(richTextBox1.Location.X + dd * 10 - 40, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
+
+            bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear1.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear1.Size.Height);
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
             bt_clear3.Location = new Point(richTextBox3.Location.X + richTextBox3.Size.Width - bt_clear3.Size.Width, richTextBox3.Location.Y + richTextBox3.Size.Height - bt_clear3.Size.Height);
 
-            label4.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - 220, richTextBox1.Location.Y + 5);
-            label6.Location = new Point(richTextBox1.Location.X + 100, richTextBox1.Location.Y + 5);
+            this.Size = new Size(1500 + 20, 780);
 
-            x_st = 1230 + 100 + 30;
-            y_st = 340;
-            dy = 32;
-            label1.Location = new Point(x_st, y_st + dy * 0);
-            label7.Location = new Point(x_st, y_st + dy * 1);
-            label2.Location = new Point(x_st, y_st + dy * 2);
-            label3.Location = new Point(x_st, y_st + dy * 3);
-            label5.Location = new Point(x_st, y_st + dy * 4);
-            label8.Location = new Point(x_st, y_st - dy * 2);
-            label9.Location = new Point(x_st, y_st - dy * 1);
-
-            this.Size = new Size(1700 + 40, 820);
+            lb_richtextbox1.Text = "richTextBox1";
+            lb_richtextbox2.Text = "richTextBox2";
+            lb_richtextbox3.Text = "richTextBox3";
+            lb_richtextbox_rtf.Text = "richTextBox_rtf";
+            lb_richtextbox1_text.Text = "抓出游標所指的字";
         }
 
+        private void bt_clear1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void bt_clear2_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Clear();
+        }
+
+        private void bt_clear3_Click(object sender, EventArgs e)
+        {
+            richTextBox3.Clear();
+        }
+
+        bool flag_change_rtb_backcolor = false;
         private void button0_Click(object sender, EventArgs e)
         {
-            richTextBox1.BackColor = Color.Pink;
+            //改變/恢復 背景色
+            if (flag_change_rtb_backcolor == false)
+            {
+                flag_change_rtb_backcolor = true;
+                richTextBox1.BackColor = Color.Pink;
+            }
+            else
+            {
+                flag_change_rtb_backcolor = false;
+                richTextBox1.BackColor = Color.FromName("Control");
+            }
+
+            //改變字體大小(加1號)
+            //float oldSize = richTextBox1.SelectionFont.Size;//僅選取部分
+            float oldSize = richTextBox1.Font.Size;//整個RTB
+
+            float newSize = oldSize + 1;
+
+            FontFamily currentFontFamily;
+            Font newFont;
+            currentFontFamily = this.richTextBox1.SelectionFont.FontFamily;//僅選取部分
+            newFont = new Font(currentFontFamily, newSize);//整個RTB
+            //this.richTextBox1.SelectionFont = newFont;//僅選取部分
+            this.richTextBox1.Font = newFont;//整個RTB
+
+            show_richtextbox_font();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.BackColor = Color.FromName("Control");
+            string txt = "\n\nWelcome to the United States and have a nice day.";
+            richTextBox1.Text = txt;
+
+            richTextBox1.Select(txt.IndexOf("Welcome"), "Welcome".Length);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Italic);
+
+            richTextBox1.Select(txt.IndexOf("the"), "the".Length);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Bold);
+            richTextBox1.SelectionColor = Color.Brown;
+
+            richTextBox1.Select(txt.IndexOf("United States"), "United States".Length);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Bold);
+            richTextBox1.SelectionColor = Color.Red;
+
+            richTextBox1.Select(txt.IndexOf("have"), "have".Length);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Underline);
+
+            richTextBox1.Select(txt.IndexOf("nice"), "nice".Length);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Bold);
+
+            richTextBox1.Select(txt.IndexOf("day"), "day".Length);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Bold);
+            richTextBox1.SelectionColor = Color.Blue;
+
+            richTextBox1.Select(0, 0);//離開選取
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            colorDialog1.AllowFullOpen = true;
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.SelectionBackColor = colorDialog1.Color;
-            }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            fontDialog1.ShowApply = true;
-            fontDialog1.ShowColor = true;
-            fontDialog1.ShowEffects = true;
-            fontDialog1.ShowHelp = true;
-            if (fontDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.SelectionFont = fontDialog1.Font;
-                richTextBox1.SelectionColor = fontDialog1.Color;
-                //richTextBox1.SelectionBackColor
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //Hex mode顯示內容
-            string data = "Hex mode顯示內容\n";
-            string result = "";
-            for (int i = 0; i < data.Length; i++)
-            {
-                result += ((int)data[i]).ToString("X2") + " ";
-            }
-            richTextBox1.Text += "\n";
-            richTextBox1.AppendText(result);     //打印一般文字訊息
-            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            richTextBox2.Text += "RichTextBox1, lines = " + richTextBox1.Lines.Length.ToString() + "\t";
-            richTextBox2.Text += "content : \n";
-            int i;
-            for (i = 0; i < richTextBox1.Lines.Length; i++)
-            {
-                richTextBox2.Text += "i = " + i.ToString() + "\t" + richTextBox1.Lines[i].Trim() + "\tlen = \t" + richTextBox1.Lines[i].Trim().Length.ToString() + "\n";
-            }
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-            richTextBox1.Text += "文天祥過零丁洋\n";
-            richTextBox1.Text += "辛苦遭逢起一經\n";
-            richTextBox1.Text += "干戈寥落四周星\n";
-            richTextBox1.Text += "山河破碎風飄絮\n";
-            richTextBox1.Text += "身世浮沉雨打萍\n";
-            richTextBox1.Text += "惶恐灘頭說惶恐\n";
-            richTextBox1.Text += "零丁洋裏歎零丁\n";
-            richTextBox1.Text += "人生自古誰無死\n";
-            richTextBox1.Text += "留取丹心照汗青";
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            //richTextBox2.Text += "There are " + richTextBox1.Lines.Length.ToString() + " lines in richtextBox1\n";
-            //Array.Sort(richTextBox1.Lines);   //useless
-            string[] temp = richTextBox1.Lines;
-            Array.Sort(temp);
-            richTextBox1.Lines = temp;
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            string[] temp = richTextBox1.Lines;
-            double[] randomIndex = new double[temp.Length];
-            Random r = new Random();
-            for (int i = 0; i < temp.Length; i++)
-            {
-                randomIndex[i] = r.NextDouble();
-            }
-            Array.Sort(randomIndex, temp);
-            richTextBox1.Lines = temp;
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            //RichTextBox 全選    TBD
-            //((RichTextBox)sender).SelectAll();
-            //richTextBox1.SelectAll();
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            //顯示百分比
-            //要using System.Globalization; //for CultureInfo
-            int a = 2;
-            int b = 3;
-            richTextBox1.Text += "顯示一位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P1", CultureInfo.InvariantCulture) + "\n";
-            richTextBox1.Text += "顯示兩位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P", CultureInfo.InvariantCulture) + "\n";
-            richTextBox1.Text += "顯示十位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P10", CultureInfo.InvariantCulture) + "\n";
-
-            //表示錢號的方法
-            int n = 12345;
-            richTextBox1.Text += "新台幣 " + n.ToString("C") + " 元\n";
-        }
-
-        #region 日誌記錄、支援其他執行緒訪問
+        //#region 日誌記錄、支援其他執行緒訪問
         public delegate void LogAppendDelegate(Color color, string text);
         /// <summary> 
         /// 追加顯示文字 
@@ -358,9 +285,9 @@ namespace vcs_RichTextBox1
             LogAppendDelegate la = new LogAppendDelegate(LogAppend);
             richTextBox1.Invoke(la, Color.Black, DateTime.Now.ToString("HH:mm:ss ") + text);
         }
-        #endregion
+        //#endregion
 
-        private void button12_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             string str1 = "C# RichTextBox顯示不同顏色文字 一般訊息";
             string str2 = "C# RichTextBox顯示不同顏色文字 錯誤訊息";
@@ -374,7 +301,7 @@ namespace vcs_RichTextBox1
             LogWarning(str3);
         }
 
-        private void button13_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
             //在方案總管vcs_RichTextBox1按加入/現有項目/選擇 RtfTable.cs, RtfTable.cs要改namespace為vcs_RichTextBox1
             RtfTable table = new RtfTable(4, 3, 120);
@@ -391,6 +318,198 @@ namespace vcs_RichTextBox1
             richTextBox1.Rtf = richTextBox1.Rtf.Replace("@@@", table.ToString());
             // 在RichTextBox最後加入表格 Insert the table at the end.
             richTextBox1.Rtf = richTextBox1.Rtf.Trim().TrimEnd('}') + table.ToString() + "}";
+        }
+
+        int flag_rtb_sort = 0;
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (flag_rtb_sort == 0)
+            {
+                flag_rtb_sort = 1;
+                lb_richtextbox1.Text = "richTextBox1,  重新填資料";
+                richTextBox1.Clear();
+                richTextBox1.Text += "文天祥過零丁洋\n";
+                richTextBox1.Text += "辛苦遭逢起一經\n";
+                richTextBox1.Text += "干戈寥落四周星\n";
+                richTextBox1.Text += "山河破碎風飄絮\n";
+                richTextBox1.Text += "身世浮沉雨打萍\n";
+                richTextBox1.Text += "惶恐灘頭說惶恐\n";
+                richTextBox1.Text += "零丁洋裏歎零丁\n";
+                richTextBox1.Text += "人生自古誰無死\n";
+                richTextBox1.Text += "留取丹心照汗青";
+            }
+            else if (flag_rtb_sort == 1)
+            {
+                flag_rtb_sort = 2;
+                lb_richtextbox1.Text = "richTextBox1,  排序";
+                //richTextBox2.Text += "There are " + richTextBox1.Lines.Length.ToString() + " lines in richtextBox1\n";
+                //Array.Sort(richTextBox1.Lines);   //useless
+                string[] temp = richTextBox1.Lines;
+                Array.Sort(temp);
+                richTextBox1.Lines = temp;
+            }
+            else if (flag_rtb_sort == 2)
+            {
+                flag_rtb_sort = 0;
+                lb_richtextbox1.Text = "richTextBox1,  任意排序";
+                string[] temp = richTextBox1.Lines;
+                double[] randomIndex = new double[temp.Length];
+                Random r = new Random();
+                for (int i = 0; i < temp.Length; i++)
+                {
+                    randomIndex[i] = r.NextDouble();
+                }
+                Array.Sort(randomIndex, temp);
+                richTextBox1.Lines = temp;
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //richTextBox 內文變色
+
+            richTextBox1.SelectionColor = Color.Red;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Orange;
+            richTextBox1.AppendText("多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Yellow;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Green;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Blue;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Purple;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+            richTextBox1.AppendText("恢復原色\n");
+            richTextBox1.AppendText("恢復原色\n");
+        }
+
+        int flag_select_all = 0;
+        private void button6_Click(object sender, EventArgs e)
+        {
+            int len = richTextBox1.Text.Length;
+
+            if (flag_select_all == 0)
+            {
+                flag_select_all = 1;
+
+                //richTextBox 選取部分
+                richTextBox1.Focus();
+                richTextBox1.Select(len / 3, len / 3);//部分區域位置 ST, len
+            }
+            else if (flag_select_all == 1)
+            {
+                flag_select_all = 2;
+
+                //RichTextBox 全選
+                richTextBox1.Focus();
+                richTextBox1.SelectAll();
+            }
+            else if (flag_select_all == 2)
+            {
+                flag_select_all = 0;
+
+                //richTextBox 游標跳至指定位置
+
+                //跳至前面
+                richTextBox1.Focus();
+                richTextBox1.Select(0, 0);//離開選取
+
+                //跳至最後面
+                richTextBox1.Focus();
+                richTextBox1.Select(len, 0);//部分區域位置 ST, len
+
+                //跳至某地
+                richTextBox1.Focus();
+                richTextBox1.Select(len * 4 / 5, 0);//部分區域位置 ST, len
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "RichTextBox用 += 印1000行資料\n";
+            richTextBox1.Clear();
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            for (int i = 0; i < 1000; i++)
+            {
+                richTextBox1.Text += "ABCDEFGHIJKLMNOPQRSTUVWXYZ  " + i.ToString() + "\n";
+            }
+
+            sw.Stop();
+            richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "RichTextBox先製造好1000行資料再一次印出來\n";
+            richTextBox1.Clear();
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            string aaaa = string.Empty;
+            for (int i = 0; i < 1000; i++)
+            {
+                aaaa += "ABCDEFGHIJKLMNOPQRSTUVWXYZ  " + i.ToString() + "\n";
+            }
+
+            richTextBox1.Text = aaaa;
+
+            sw.Stop();
+            richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //Hex mode顯示內容
+            string data = "Hex mode顯示內容\n";
+            string result = "";
+            for (int i = 0; i < data.Length; i++)
+            {
+                result += ((int)data[i]).ToString("X2") + " ";
+            }
+            richTextBox1.Text += "\n";
+            richTextBox1.AppendText(result);     //打印一般文字訊息
+            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //顯示百分比
+            //要using System.Globalization; //for CultureInfo
+            int a = 2;
+            int b = 3;
+            richTextBox1.Text += "顯示一位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P1", CultureInfo.InvariantCulture) + "\n";
+            richTextBox1.Text += "顯示兩位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P", CultureInfo.InvariantCulture) + "\n";
+            richTextBox1.Text += "顯示十位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P10", CultureInfo.InvariantCulture) + "\n";
+
+            //表示錢號的方法
+            int n = 12345;
+            richTextBox1.Text += "新台幣 " + n.ToString("C") + " 元\n";
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -469,7 +588,6 @@ namespace vcs_RichTextBox1
                 else
                     j = i;
                 richTextBox1.Text += i.ToString() + "\t" + (char)j + "\n";
-
             }
             */
             for (int i = 0; i < str1.Length; i++)
@@ -500,139 +618,9 @@ namespace vcs_RichTextBox1
             richTextBox1.Text += "\n文字編碼都是Unicode編碼 Unicode (Big-Endian) 	1201 	utf-16BE\n";
         }
 
-        private void button19_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button20_Click(object sender, EventArgs e)
-        {
-            string filename = Application.StartupPath + "\\rtf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".rtf";
-            richTextBox1.SaveFile(filename, RichTextBoxStreamType.RichText);
-            richTextBox1.Text += "已存檔 : " + filename + "\n";
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-            try
-            {
-                string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\SAMPO(PA63)變頻分離式室外機功能規格書_2014.08.18doc.rtf";
-
-                richTextBox1.LoadFile(filename);
-            }
-            catch (FileNotFoundException)
-            {
-                MessageBox.Show("File not found!");
-            }
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Find("壓縮機", RichTextBoxFinds.MatchCase);
-
-            richTextBox1.SelectionFont = new Font("Verdana", 30, FontStyle.Bold);
-            richTextBox1.SelectionColor = Color.Red;
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-            //float oldSize = richTextBox1.SelectionFont.Size;
-            float oldSize = richTextBox1.Font.Size;
-            float newSize = oldSize + 1;
-            FontFamily currentFontFamily;
-            Font newFont;
-            currentFontFamily = this.richTextBox1.SelectionFont.FontFamily;
-            newFont = new Font(currentFontFamily, newSize);
-            //this.richTextBox1.SelectionFont = newFont;
-            this.richTextBox1.Font = newFont;
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-            //選擇設置粗體或取消
-            Font oldFont = this.richTextBox1.SelectionFont;
-            Font newFont;
-            if (oldFont.Bold)
-                newFont = new Font(oldFont, oldFont.Style & ~FontStyle.Bold);
-            else
-                newFont = new Font(oldFont, oldFont.Style | FontStyle.Bold);
-            this.richTextBox1.SelectionFont = newFont;
-            this.richTextBox1.Focus();
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-            //選擇設置斜體或取消
-            Font oldFont = this.richTextBox1.SelectionFont;
-            Font newFont;
-            if (oldFont.Italic)
-                newFont = new Font(oldFont, oldFont.Style & ~FontStyle.Italic);
-            else
-                newFont = new Font(oldFont, oldFont.Style | FontStyle.Italic);
-            this.richTextBox1.SelectionFont = newFont;
-            this.richTextBox1.Focus();
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-            //選擇設置底線或取消
-            Font oldFont = this.richTextBox1.SelectionFont;
-            Font newFont;
-            if (oldFont.Underline)
-                newFont = new Font(oldFont, oldFont.Style & ~FontStyle.Underline);
-            else
-                newFont = new Font(oldFont, oldFont.Style | FontStyle.Underline);
-            this.richTextBox1.SelectionFont = newFont;
-            this.richTextBox1.Focus();
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-            //選擇設置置中或取消
-            if (this.richTextBox1.SelectionAlignment == HorizontalAlignment.Center)
-                this.richTextBox1.SelectionAlignment = HorizontalAlignment.Left;
-            else
-                this.richTextBox1.SelectionAlignment = HorizontalAlignment.Center;
-            this.richTextBox1.Focus();
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-            string txt = "\n\nThe quick brown fox jumps over the lazy dog.";
-            richTextBox1.Text = txt;
-
-            richTextBox1.Select(txt.IndexOf("quick"), "quick".Length);
-            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Italic);
-
-            richTextBox1.Select(txt.IndexOf("brown"), "brown".Length);
-            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Bold);
-            richTextBox1.SelectionColor = Color.Brown;
-
-            richTextBox1.Select(txt.IndexOf("fox"), "fox".Length);
-            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Bold);
-            richTextBox1.SelectionColor = Color.Red;
-
-            richTextBox1.Select(txt.IndexOf("jumps over"), "jumps over".Length);
-            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Underline);
-
-            richTextBox1.Select(txt.IndexOf("lazy"), "lazy".Length);
-            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Bold);
-
-            richTextBox1.Select(txt.IndexOf("dog"), "dog".Length);
-            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Bold);
-            richTextBox1.SelectionColor = Color.Blue;
-
-            richTextBox1.Select(0, 0);
-        }
-
-        private void button29_Click(object sender, EventArgs e)
-        {
-        }
-
         //用WordPad編輯
         // Allow the user to edit the file with WordPad.
-        private void button30_Click(object sender, EventArgs e)
+        private void button19_Click(object sender, EventArgs e)
         {
             // Hide.
             this.ShowInTaskbar = false;
@@ -659,117 +647,34 @@ namespace vcs_RichTextBox1
             // Unhide.
             this.ShowInTaskbar = true;
             this.Show();
+
         }
 
-        private void button31_Click(object sender, EventArgs e)
-        {
-            //richTextBox 內文變色
-
-            richTextBox1.SelectionColor = Color.Red;
-            richTextBox1.AppendText("內文變色\n");
-            richTextBox1.AppendText("恢復原色\n");
-
-            richTextBox1.SelectionColor = Color.Orange;
-            richTextBox1.AppendText("多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n");
-            richTextBox1.AppendText("恢復原色\n");
-
-            richTextBox1.SelectionColor = Color.Yellow;
-            richTextBox1.AppendText("內文變色\n");
-            richTextBox1.AppendText("恢復原色\n");
-
-            richTextBox1.SelectionColor = Color.Green;
-            richTextBox1.AppendText("內文變色\n");
-            richTextBox1.AppendText("恢復原色\n");
-
-            richTextBox1.SelectionColor = Color.Blue;
-            richTextBox1.AppendText("內文變色\n");
-            richTextBox1.AppendText("恢復原色\n");
-
-            richTextBox1.SelectionColor = Color.Purple;
-            richTextBox1.AppendText("內文變色\n");
-            richTextBox1.AppendText("恢復原色\n");
-            richTextBox1.AppendText("恢復原色\n");
-            richTextBox1.AppendText("恢復原色\n");
-        }
-
-        private void button32_Click(object sender, EventArgs e)
-        {
-            //richTextBox 游標跳至指定位置
-
-            //跳至前面
-            richTextBox1.Focus();
-            richTextBox1.Select(0, 0);
-
-            //跳至最後面
-            richTextBox1.Focus();
-            richTextBox1.Select(richTextBox1.Text.Length, 0);
-        }
-
-        private void button33_Click(object sender, EventArgs e)
-        {
-            //richTextBox 選取部分
-
-            int len = richTextBox1.Text.Length;
-
-            richTextBox1.Focus();
-            richTextBox1.Select(len / 3, len / 3);
-        }
-
-        private void button34_Click(object sender, EventArgs e)
+        private void button20_Click(object sender, EventArgs e)
         {
         }
 
-        private void button35_Click(object sender, EventArgs e)
+        private void button21_Click(object sender, EventArgs e)
         {
         }
 
-        private void button36_Click(object sender, EventArgs e)
+        private void button22_Click(object sender, EventArgs e)
         {
         }
 
-        private void button37_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "RichTextBox用 += 印1000行資料\n";
-            richTextBox1.Clear();
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-
-            int i;
-            for (i = 0; i < 1000; i++)
-            {
-                richTextBox1.Text += "ABCDEFGHIJKLMNOPQRSTUVWXYZ  " + i.ToString() + "\n";
-            }
-
-            sw.Stop();
-            richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
-
-        }
-
-        private void button38_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "RichTextBox先製造好1000行資料再一次印出來\n";
-            richTextBox1.Clear();
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-
-            string aaaa = string.Empty;
-            int i;
-            for (i = 0; i < 1000; i++)
-            {
-                aaaa += "ABCDEFGHIJKLMNOPQRSTUVWXYZ  " + i.ToString() + "\n";
-            }
-
-            richTextBox1.Text = aaaa;
-
-            sw.Stop();
-            richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
-        }
-
-        private void button39_Click(object sender, EventArgs e)
+        private void button23_Click(object sender, EventArgs e)
         {
         }
 
-        private void button40_Click(object sender, EventArgs e)
+        private void button24_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button26_Click(object sender, EventArgs e)
         {
         }
 
@@ -806,22 +711,6 @@ namespace vcs_RichTextBox1
             this.Ranks();  //点击鼠标时显示
         }
 
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 13)
-            {
-                e.Handled = true;
-            }
-            else if (e.KeyChar == 13)
-            {
-                int textSize = int.Parse(textBox2.Text);
-                ApplyTextSize(textSize);
-
-                e.Handled = true;
-                this.richTextBox1.Focus();
-            }
-        }
-
         DateTime doubleClickTimer;
         private void richTextBox1_DoubleClick(object sender, EventArgs e)
         {
@@ -833,17 +722,80 @@ namespace vcs_RichTextBox1
             TimeSpan t = (TimeSpan)(DateTime.Now - doubleClickTimer); //DoubleClick後又點了一下, 計算時間差
 
             if (t.TotalMilliseconds <= 200) //如果小於200豪秒就全選
+            {
                 richTextBox1.SelectAll();
+            }
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            label4.Text = "字數 : " + richTextBox1.TextLength.ToString() + ", 行數 : " + richTextBox1.Lines.Length.ToString();
+            //RichTextBox 字數統計
+            lb_richtextbox1_fx4.Text = "字數 : " + richTextBox1.TextLength.ToString() + ", 行數 : " + richTextBox1.Lines.Length.ToString();
         }
 
-        private void bt_clear_Click(object sender, EventArgs e)
+        private void bt_shape0_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+            //粗
+            //選擇設置粗體或取消
+            Font oldFont = this.richTextBox1.SelectionFont;
+            Font newFont;
+            if (oldFont.Bold)
+                newFont = new Font(oldFont, oldFont.Style & ~FontStyle.Bold);
+            else
+                newFont = new Font(oldFont, oldFont.Style | FontStyle.Bold);
+            this.richTextBox1.SelectionFont = newFont;
+            this.richTextBox1.Focus();
+        }
+
+        private void bt_shape1_Click(object sender, EventArgs e)
+        {
+            //選擇設置斜體或取消
+            Font oldFont = this.richTextBox1.SelectionFont;
+            Font newFont;
+            if (oldFont.Italic)
+                newFont = new Font(oldFont, oldFont.Style & ~FontStyle.Italic);
+            else
+                newFont = new Font(oldFont, oldFont.Style | FontStyle.Italic);
+            this.richTextBox1.SelectionFont = newFont;
+            this.richTextBox1.Focus();
+        }
+
+        private void bt_shape2_Click(object sender, EventArgs e)
+        {
+            //選擇設置底線或取消
+            Font oldFont = this.richTextBox1.SelectionFont;
+            Font newFont;
+            if (oldFont.Underline)
+            {
+                newFont = new Font(oldFont, oldFont.Style & ~FontStyle.Underline);
+            }
+            else
+            {
+                newFont = new Font(oldFont, oldFont.Style | FontStyle.Underline);
+            }
+            this.richTextBox1.SelectionFont = newFont;
+            this.richTextBox1.Focus();
+        }
+
+        private void bt_shape3_Click(object sender, EventArgs e)
+        {
+            //選擇設置置中或取消
+            if (this.richTextBox1.SelectionAlignment == HorizontalAlignment.Center)
+                this.richTextBox1.SelectionAlignment = HorizontalAlignment.Left;
+            else
+                this.richTextBox1.SelectionAlignment = HorizontalAlignment.Center;
+            this.richTextBox1.Focus();
+        }
+
+        private void bt_analyze_Click(object sender, EventArgs e)
+        {
+            richTextBox3.Text += "分析RichTextBox1的內容\n";
+            richTextBox3.Text += "RichTextBox1, lines = " + richTextBox1.Lines.Length.ToString() + "\t";
+            richTextBox3.Text += "content : \n";
+            for (int i = 0; i < richTextBox1.Lines.Length; i++)
+            {
+                richTextBox3.Text += "i = " + i.ToString() + "\t" + richTextBox1.Lines[i].Trim() + "\tlen = \t" + richTextBox1.Lines[i].Trim().Length.ToString() + "\n";
+            }
         }
 
         private void bt_open1_Click(object sender, EventArgs e)
@@ -879,74 +831,122 @@ namespace vcs_RichTextBox1
             }
         }
 
+        private void bt_open3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+            try
+            {
+                string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\SAMPO(PA63)變頻分離式室外機功能規格書_2014.08.18doc.rtf";
+
+                richTextBox1.LoadFile(filename);
+            }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("File not found!");
+            }
+        }
+
         private void bt_font_Click(object sender, EventArgs e)
         {
-            if (fontDialog1.ShowDialog().Equals(DialogResult.OK))
+            fontDialog1.ShowApply = true;
+            fontDialog1.ShowColor = true;
+            fontDialog1.ShowEffects = true;
+            fontDialog1.ShowHelp = true;
+            if (fontDialog1.ShowDialog() == DialogResult.OK)
             {
-                // RichTextBox.SelectionFont取得目前選擇的文字，並且將FontDialog所設定的字型結果套入 
-                //richTextBox1.SelectionFont = fontDialog1.Font;
+                /*
+                //僅選取部分
+                //RichTextBox.SelectionFont取得目前選擇的文字，並且將FontDialog所設定的字型結果套入 
+                richTextBox1.SelectionFont = fontDialog1.Font;
+                richTextBox1.SelectionColor = fontDialog1.Color;
+                richTextBox1.SelectionBackColor = Color.Lime;   //選取部分的背景色
+                */
+
+                //全部RTB
+                richTextBox1.ForeColor = fontDialog1.Color;
                 richTextBox1.Font = fontDialog1.Font;
             }
         }
 
-        private void bt_save_Click(object sender, EventArgs e)
+        private void bt_backcolor_Click(object sender, EventArgs e)
         {
-            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+            //設定部分背景顏色
+
+            colorDialog1.AllowFullOpen = true;
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.SelectionBackColor = colorDialog1.Color;//選取部分的背景色
+            }
+        }
+
+        private void bt_part1_Click(object sender, EventArgs e)
+        {
+            //部分區域設定不同顏色
+            richTextBox1.Select(43, 7);//部分區域位置 ST, len
+            SelectRichText(richTextBox1, "莫聽穿林打葉聲");//same
+            richTextBox1.SelectionColor = Color.Red;//部分區域前景色
+            richTextBox1.SelectionBackColor = Color.Green; //部分區域背景色
+
+            //richTextBox1.SelectionFont = new Font("標楷體", 20, FontStyle.Bold);//部分區域字型
+            richTextBox1.SelectionFont = new Font("標楷體", 20, FontStyle.Italic);
+            //richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Italic);
+
+            richTextBox1.Select(0, 0);//離開選取            
+        }
+
+        private void bt_search_Click(object sender, EventArgs e)
+        {
+            //在RTF檔內搜尋
+            richTextBox1.Find("雨", RichTextBoxFinds.MatchCase);
+            richTextBox1.SelectionFont = new Font("標楷體", 30, FontStyle.Bold);
+            richTextBox1.SelectionColor = Color.Red;
+        }
+
+        private void bt_save1_Click(object sender, EventArgs e)
+        {
+            string filename = "tmp1_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
 
             try
             {
                 richTextBox1.SaveFile(filename, RichTextBoxStreamType.PlainText);    //將richTextBox的資料寫入到指定的文字檔
-                richTextBox2.Text += "存檔完成, 檔名 : " + filename + "\n";
+                richTextBox3.Text += "存檔完成, 檔名 : " + filename + "\n";
             }
             catch (System.Exception err)
             {
-                richTextBox2.Text += "存檔失敗, 原因 : " + err.Message + "\n";
+                richTextBox3.Text += "存檔失敗, 原因 : " + err.Message + "\n";
             }
         }
 
         private void bt_save2_Click(object sender, EventArgs e)
         {
-            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+            string filename = "tmp2_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
             //XXX richTextBox1.SaveFile(filename, RichTextBoxStreamType.PlainText);    //將richTextBox的資料寫入到指定的文字檔, 這樣會出現怪字型, 還是一行一行儲存比較好
 
             FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式            
             sw.Write(richTextBox1.Text);
             sw.Close();
-            richTextBox2.Text += "存檔完成, 檔名 : " + filename + "\n";
+            richTextBox3.Text += "存檔完成, 檔名 : " + filename + "\n";
         }
 
-        private void bt_set_font_size_Click(object sender, EventArgs e)
+        private void bt_save3_Click(object sender, EventArgs e)
         {
-            int textSize = int.Parse(textBox2.Text);
-            ApplyTextSize(textSize);
-        }
-
-        //改变字体大小
-        private void ApplyTextSize(int textSize)
-        {
-            FontFamily currentFontFamily;
-            Font newFont;
-            currentFontFamily = this.richTextBox1.SelectionFont.FontFamily;
-            newFont = new Font(currentFontFamily, textSize);
-            this.richTextBox1.SelectionFont = newFont;
-        }
-
-        private void bt_clear2_Click(object sender, EventArgs e)
-        {
-            richTextBox2.Clear();
+            //另存RTF檔
+            string filename = Application.StartupPath + "\\rtf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".rtf";
+            richTextBox1.SaveFile(filename, RichTextBoxStreamType.RichText);
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
 
         // Display the word under the mouse.
         private void richTextBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            label6.Text = WordUnderMouse(richTextBox1, e.X, e.Y);
+            lb_richtextbox1_text.Text = WordUnderMouse(richTextBox1, e.X, e.Y);
 
             char ch = richTextBox1.GetCharFromPosition(e.Location);     //取得指定位置的字元
 
             int nn = richTextBox1.GetCharIndexFromPosition(e.Location); //指定位置處的以零起始的字元索引
 
-            label8.Text = "MouseMove : " + ch.ToString() + " @ " + nn.ToString();
+            lb_richtextbox1_fx5.Text = "MouseMove : " + ch.ToString() + " @ " + nn.ToString();
         }
 
         // Return the word under the mouse.
@@ -1003,7 +1003,35 @@ namespace vcs_RichTextBox1
 
         private void richTextBox1_SelectionChanged(object sender, EventArgs e)
         {
-            label9.Text = "SelectionChanged : ST " + richTextBox1.SelectionStart.ToString() + "   " + "len = " + richTextBox1.SelectionLength.ToString();
+            lb_richtextbox1_fx6.Text = "SelectionChanged : ST " + richTextBox1.SelectionStart.ToString() + "   " + "len = " + richTextBox1.SelectionLength.ToString();
+        }
+
+        void show_richtextbox_font()
+        {
+            Font f = this.richTextBox1.Font;
+            lb_richtextbox1.Text = "richTextBox1,  " + f.Name + ",  " + f.Size;
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
+
+
