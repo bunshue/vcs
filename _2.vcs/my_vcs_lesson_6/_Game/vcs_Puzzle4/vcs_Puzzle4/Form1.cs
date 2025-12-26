@@ -573,7 +573,7 @@ namespace vcs_Puzzle4
             { 0 }
             };
 
-        int[,] num0 = new int[7, 3] {
+        int[,] num_a0 = new int[7, 3] {
             { 1, 1, 1 },
             { 1, 0, 1 },
             { 1, 0, 1 },
@@ -583,7 +583,7 @@ namespace vcs_Puzzle4
             { 1, 1, 1 }
             };
 
-        int[,] num1 = new int[7, 3] {
+        int[,] num_a1 = new int[7, 3] {
             { 0, 0, 1 },
             { 0, 0, 1 },
             { 0, 0, 1 },
@@ -593,7 +593,7 @@ namespace vcs_Puzzle4
             { 0, 0, 1 }
             };
 
-        int[,] num2 = new int[7, 3] {
+        int[,] num_a2 = new int[7, 3] {
             { 1, 1, 1 },
             { 0, 0, 1 },
             { 0, 0, 1 },
@@ -603,7 +603,7 @@ namespace vcs_Puzzle4
             { 1, 1, 1 }
             };
 
-        int[,] num3 = new int[7, 3] {
+        int[,] num_a3 = new int[7, 3] {
             { 1, 1, 1 },
             { 0, 0, 1 },
             { 0, 0, 1 },
@@ -613,7 +613,7 @@ namespace vcs_Puzzle4
             { 1, 1, 1 }
             };
 
-        int[,] num4 = new int[7, 3] {
+        int[,] num_a4 = new int[7, 3] {
             { 1, 0, 1 },
             { 1, 0, 1 },
             { 1, 0, 1 },
@@ -623,7 +623,7 @@ namespace vcs_Puzzle4
             { 0, 0, 1 }
             };
 
-        int[,] num5 = new int[7, 3] {
+        int[,] num_a5 = new int[7, 3] {
             { 1, 1, 1 },
             { 1, 0, 0 },
             { 1, 0, 0 },
@@ -633,7 +633,7 @@ namespace vcs_Puzzle4
             { 1, 1, 1 }
             };
 
-        int[,] num6 = new int[7, 3] {
+        int[,] num_a6 = new int[7, 3] {
             { 1, 1, 1 },
             { 1, 0, 0 },
             { 1, 0, 0 },
@@ -643,7 +643,7 @@ namespace vcs_Puzzle4
             { 1, 1, 1 }
             };
 
-        int[,] num7 = new int[7, 3] {
+        int[,] num_a7 = new int[7, 3] {
             { 1, 1, 1 },
             { 0, 0, 1 },
             { 0, 0, 1 },
@@ -653,7 +653,7 @@ namespace vcs_Puzzle4
             { 0, 0, 1 }
             };
 
-        int[,] num8 = new int[7, 3] {
+        int[,] num_a8 = new int[7, 3] {
             { 1, 1, 1 },
             { 1, 0, 1 },
             { 1, 0, 1 },
@@ -663,7 +663,7 @@ namespace vcs_Puzzle4
             { 1, 1, 1 }
             };
 
-        int[,] num9 = new int[7, 3] {
+        int[,] num_a9 = new int[7, 3] {
             { 1, 1, 1 },
             { 1, 0, 1 },
             { 1, 0, 1 },
@@ -673,7 +673,7 @@ namespace vcs_Puzzle4
             { 1, 1, 1 }
             };
 
-        void drawNumber(Graphics g, int num, int x_st, int y_st, int box_w, int box_h)
+        void drawNumber1(Graphics g, int num, int x_st, int y_st, int box_w, int box_h)
         {
             int M = 3;
             int N = 7;
@@ -689,43 +689,43 @@ namespace vcs_Puzzle4
 
             if (num == 0)
             {
-                array2d = num0;
+                array2d = num_a0;
             }
             else if (num == 1)
             {
-                array2d = num1;
+                array2d = num_a1;
             }
             else if (num == 2)
             {
-                array2d = num2;
+                array2d = num_a2;
             }
             else if (num == 3)
             {
-                array2d = num3;
+                array2d = num_a3;
             }
             else if (num == 4)
             {
-                array2d = num4;
+                array2d = num_a4;
             }
             else if (num == 5)
             {
-                array2d = num5;
+                array2d = num_a5;
             }
             else if (num == 6)
             {
-                array2d = num6;
+                array2d = num_a6;
             }
             else if (num == 7)
             {
-                array2d = num7;
+                array2d = num_a7;
             }
             else if (num == 8)
             {
-                array2d = num8;
+                array2d = num_a8;
             }
             else if (num == 9)
             {
-                array2d = num9;
+                array2d = num_a9;
             }
             else if (num == 10)
             {
@@ -733,7 +733,7 @@ namespace vcs_Puzzle4
             }
             else
             {
-                array2d = num0;
+                array2d = num_a0;
             }
 
             for (j = 0; j < N; j++)
@@ -792,40 +792,310 @@ namespace vcs_Puzzle4
             x_st = 0;
             y_st = 0;
             num = 1;
-            drawNumber(g, num, x_st, y_st, box_w, box_h);
+            drawNumber1(g, num, x_st, y_st, box_w, box_h);
 
             x_st += box_w * 4;
             num = 2;
-            drawNumber(g, num, x_st, y_st, box_w, box_h);
+            drawNumber1(g, num, x_st, y_st, box_w, box_h);
 
             x_st += box_w * 4;
             num = 10;
-            drawNumber(g, num, x_st, y_st, box_w, box_h);
+            drawNumber1(g, num, x_st, y_st, box_w, box_h);
 
             x_st += box_w * 2;
             num = 3;
-            drawNumber(g, num, x_st, y_st, box_w, box_h);
+            drawNumber1(g, num, x_st, y_st, box_w, box_h);
 
             x_st += box_w * 4;
             num = 4;
-            drawNumber(g, num, x_st, y_st, box_w, box_h);
+            drawNumber1(g, num, x_st, y_st, box_w, box_h);
 
             x_st += box_w * 4;
             num = 10;
-            drawNumber(g, num, x_st, y_st, box_w, box_h);
+            drawNumber1(g, num, x_st, y_st, box_w, box_h);
 
             x_st += box_w * 2;
             num = 5;
-            drawNumber(g, num, x_st, y_st, box_w, box_h);
+            drawNumber1(g, num, x_st, y_st, box_w, box_h);
 
             x_st += box_w * 4;
             num = 6;
-            drawNumber(g, num, x_st, y_st, box_w, box_h);
+            drawNumber1(g, num, x_st, y_st, box_w, box_h);
+        }
+
+        int[,] num_b0 = new int[8, 6] {
+        { 0, 1, 1, 1, 1, 0 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 0, 1, 1, 1, 1, 0 }
+        };
+
+        int[,] num_b1 = new int[8, 6] {
+        { 0, 0, 1, 1, 0, 0 },
+        { 0, 1, 1, 1, 0, 0 },
+        { 0, 0, 1, 1, 0, 0 },
+        { 0, 0, 1, 1, 0, 0 },
+        { 0, 0, 1, 1, 0, 0 },
+        { 0, 0, 1, 1, 0, 0 },
+        { 0, 0, 1, 1, 0, 0 },
+        { 0, 1, 1, 1, 1, 0 }
+        };
+
+        int[,] num_b2 = new int[8, 6] {
+        { 0, 1, 1, 1, 1, 0 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 0, 0, 0, 0, 1, 1 },
+        { 0, 1, 1, 1, 1, 0 },
+        { 1, 1, 0, 0, 0, 0 },
+        { 1, 1, 0, 0, 0, 0 },
+        { 1, 1, 1, 1, 1, 1 }
+        };
+
+
+        int[,] num_b3 = new int[8, 6] {
+        { 0, 1, 1, 1, 1, 0 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 0, 0, 0, 0, 1, 1 },
+        { 0, 0, 1, 1, 1, 0 },
+        { 0, 0, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 0, 1, 1, 1, 1, 0 }
+        };
+
+
+        int[,] num_b4 = new int[8, 6] {
+        { 0, 0, 0, 0, 1, 0 },
+        { 0, 0, 0, 1, 1, 0 },
+        { 0, 0, 1, 1, 1, 0 },
+        { 0, 1, 0, 1, 1, 0 },
+        { 1, 0, 0, 1, 1, 0 },
+        { 1, 1, 1, 1, 1, 1 },
+        { 0, 0, 0, 1, 1, 0 },
+        { 0, 0, 0, 1, 1, 0 }
+        };
+
+
+        int[,] num_b5 = new int[8, 6] {
+        { 1, 1, 1, 1, 1, 1 },
+        { 1, 1, 0, 0, 0, 0 },
+        { 1, 1, 0, 0, 0, 0 },
+        { 1, 1, 1, 1, 1, 0 },
+        { 0, 0, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 0, 1, 1, 1, 1, 0 }
+        };
+
+
+        int[,] num_b6 = new int[8, 6] {
+        { 0, 1, 1, 1, 1, 0 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 0, 0 },
+        { 1, 1, 1, 1, 1, 0 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 0, 1, 1, 1, 1, 0 }
+        };
+
+        int[,] num_b7 = new int[8, 6] {
+        { 1, 1, 1, 1, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 0, 0, 0, 0, 1, 1 },
+        { 0, 0, 0, 1, 1, 0 },
+        { 0, 0, 0, 1, 1, 0 },
+        { 0, 0, 1, 1, 0, 0 },
+        { 0, 0, 1, 1, 0, 0 },
+        { 0, 0, 1, 1, 0, 0 }
+        };
+
+
+        int[,] num_b8 = new int[8, 6] {
+        { 0, 1, 1, 1, 1, 0 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 0, 1, 1, 1, 1, 0 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 0, 1, 1, 1, 1, 0 }
+        };
+
+
+        int[,] num_b9 = new int[8, 6] {
+        { 0, 1, 1, 1, 1, 0 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 0, 1, 1, 1, 1, 1 },
+        { 0, 0, 0, 0, 1, 1 },
+        { 1, 1, 0, 0, 1, 1 },
+        { 0, 1, 1, 1, 1, 0 }
+        };
+
+        void drawNumber2(Graphics g, int num, int x_st, int y_st, int box_w, int box_h)
+        {
+            int M = 6;
+            int N = 8;
+            int W = box_w * M;
+            int H = box_h * N;
+
+            int[,] array2d = new int[N, M];//二維陣列
+
+            if (num == 10)
+            {
+                M = 1;
+            }
+
+            if (num == 0)
+            {
+                array2d = num_b0;
+            }
+            else if (num == 1)
+            {
+                array2d = num_b1;
+            }
+            else if (num == 2)
+            {
+                array2d = num_b2;
+            }
+            else if (num == 3)
+            {
+                array2d = num_b3;
+            }
+            else if (num == 4)
+            {
+                array2d = num_b4;
+            }
+            else if (num == 5)
+            {
+                array2d = num_b5;
+            }
+            else if (num == 6)
+            {
+                array2d = num_b6;
+            }
+            else if (num == 7)
+            {
+                array2d = num_b7;
+            }
+            else if (num == 8)
+            {
+                array2d = num_b8;
+            }
+            else if (num == 9)
+            {
+                array2d = num_b9;
+            }
+            else if (num == 10)
+            {
+                array2d = comma;
+            }
+            else
+            {
+                array2d = num_b0;
+            }
+
+            for (j = 0; j < N; j++)
+            {
+                for (i = 0; i < M; i++)
+                {
+                    if (array2d[j, i] == 0)
+                    {
+                        g.FillEllipse(pale_blackBrush, x_st + box_w * i, y_st + box_h * j, box_w - 1, box_h - 1);
+                        //g.FillRectangle(pale_blackBrush, x_st + box_w * i, y_st + box_h * j, box_w - 1, box_h - 1);
+                    }
+                    else
+                    {
+                        g.FillEllipse(pale_greenBrush, x_st + box_w * i, y_st + box_h * j, box_w - 1, box_h - 1);
+                        //g.FillRectangle(pale_greenBrush, x_st + box_w * i, y_st + box_h * j, box_w - 1, box_h - 1);
+                    }
+                }
+            }
+
+            //畫垂直線
+            for (i = 0; i < W; i += box_w)
+            {
+                g.DrawLine(new Pen(dark_black, 4), x_st + i, y_st + 0, x_st + i, y_st + H);
+            }
+
+            //畫水平線
+            for (j = 0; j < H; j += box_h)
+            {
+                g.DrawLine(new Pen(dark_black, 4), x_st + 0, y_st + j, x_st + W, y_st + j);
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            if (flag_create_picture_array == true)
+            {
+                button1.PerformClick();
+            }
 
+            //測試數字 二維陣列
+
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.FromArgb(50, 50, 50));
+            pictureBox1.Image = bitmap1;
+
+            int x_st = 0;
+            int y_st = 0;
+            int num = 0;
+            box_w = 28;
+            box_h = 28;
+
+            x_st = 0;
+            y_st = 0;
+            num = 0;
+            drawNumber2(g, num, x_st, y_st, box_w, box_h);
+
+            x_st += box_w * 7;
+            num = 1;
+            drawNumber2(g, num, x_st, y_st, box_w, box_h);
+
+            x_st += box_w * 7;
+            num = 2;
+            drawNumber2(g, num, x_st, y_st, box_w, box_h);
+
+            x_st += box_w * 7;
+            num = 3;
+            drawNumber2(g, num, x_st, y_st, box_w, box_h);
+
+            x_st += box_w * 7;
+            num = 4;
+            drawNumber2(g, num, x_st, y_st, box_w, box_h);
+
+            x_st = 0;
+            y_st = box_h * 9;
+            num = 5;
+            drawNumber2(g, num, x_st, y_st, box_w, box_h);
+
+            x_st += box_w * 7;
+            num = 6;
+            drawNumber2(g, num, x_st, y_st, box_w, box_h);
+
+            x_st += box_w * 7;
+            num = 7;
+            drawNumber2(g, num, x_st, y_st, box_w, box_h);
+
+            x_st += box_w * 7;
+            num = 8;
+            drawNumber2(g, num, x_st, y_st, box_w, box_h);
+
+            x_st += box_w * 7;
+            num = 9;
+            drawNumber2(g, num, x_st, y_st, box_w, box_h);
         }
 
         int[,] greenman_step0 = new int[,] {

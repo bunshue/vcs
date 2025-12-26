@@ -115,7 +115,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(437, 563);
+            this.richTextBox1.Location = new System.Drawing.Point(422, 502);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
@@ -406,7 +406,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(448, 608);
+            this.bt_clear.Location = new System.Drawing.Point(433, 547);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(79, 37);
             this.bt_clear.TabIndex = 67;
@@ -591,6 +591,7 @@
             // 
             // groupBox8
             // 
+            this.groupBox8.Controls.Add(this.lb_time_interval);
             this.groupBox8.Controls.Add(this.textBox2);
             this.groupBox8.Controls.Add(this.dateTimePicker1);
             this.groupBox8.Controls.Add(this.bt1);
@@ -604,11 +605,10 @@
             // 
             // groupBox9
             // 
-            this.groupBox9.Controls.Add(this.lb_time_interval);
             this.groupBox9.Controls.Add(this.lb_time);
             this.groupBox9.Location = new System.Drawing.Point(1031, 16);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(186, 122);
+            this.groupBox9.Size = new System.Drawing.Size(114, 84);
             this.groupBox9.TabIndex = 88;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Timer顯示時間";
@@ -617,7 +617,7 @@
             // 
             this.lb_time_interval.AutoSize = true;
             this.lb_time_interval.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_time_interval.Location = new System.Drawing.Point(21, 63);
+            this.lb_time_interval.Location = new System.Drawing.Point(9, 106);
             this.lb_time_interval.Name = "lb_time_interval";
             this.lb_time_interval.Size = new System.Drawing.Size(139, 21);
             this.lb_time_interval.TabIndex = 113;
@@ -637,7 +637,7 @@
             // 
             this.groupBox10.Controls.Add(this.bt3);
             this.groupBox10.Controls.Add(this.listView1);
-            this.groupBox10.Location = new System.Drawing.Point(819, 298);
+            this.groupBox10.Location = new System.Drawing.Point(817, 276);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(455, 203);
             this.groupBox10.TabIndex = 111;
@@ -649,7 +649,7 @@
             this.groupBox12.Controls.Add(this.tb_countdown);
             this.groupBox12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox12.ForeColor = System.Drawing.Color.Blue;
-            this.groupBox12.Location = new System.Drawing.Point(1031, 145);
+            this.groupBox12.Location = new System.Drawing.Point(1031, 123);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(186, 147);
             this.groupBox12.TabIndex = 74;

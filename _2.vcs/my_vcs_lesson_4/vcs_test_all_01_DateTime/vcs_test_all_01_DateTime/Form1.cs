@@ -36,6 +36,8 @@ namespace vcs_test_all_01_DateTime
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             LoginTime = DateTime.Now; //取得目前登入的時間
             richTextBox1.Text += "登入時間： " + LoginTime.ToString() + "\n";
 
@@ -49,8 +51,6 @@ namespace vcs_test_all_01_DateTime
             timer1.Enabled = true;
 
             load_listview_data();
-
-            show_item_location();
 
             this.ShowMoon();
 
@@ -123,36 +123,37 @@ namespace vcs_test_all_01_DateTime
 
             button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            comboBox1.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button22.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            comboBox1.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             groupBox5.Location = new Point(x_st + dx * 0, y_st + dy * 10);//DateTimePicker
             groupBox12.Location = new Point(x_st + dx * 1, y_st + dy * 10);//設定倒數計時
             groupBox8.Location = new Point(x_st + dx * 2, y_st + dy * 10);//DateTimePicker
+            groupBox9.Location = new Point(x_st + dx * 2 + 250 + 10, y_st + dy * 10);//Timer顯示時間
+
             groupBox13.Location = new Point(x_st + dx * 2, y_st + dy * 4 - 30);//月相
             groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 8 - 70); //listView
 
-            groupBox6.Size = new Size(270, 150);
-            groupBox8.Size = new Size(250, 130);
-            groupBox5.Size = new Size(180, 150);
-            groupBox9.Size = new Size(220, 280);
-            groupBox12.Size = new Size(180, 150);
+            groupBox6.Size = new Size(420, 110);
+            groupBox8.Size = new Size(250, 160);
+            groupBox5.Size = new Size(180, 160);
+            groupBox9.Size = new Size(200, 160);
+            groupBox12.Size = new Size(180, 160);
 
-            groupBox6.Location = new Point(x_st + dx * 3, y_st + dy * 0);//特殊曆法
+            groupBox6.Location = new Point(x_st + dx * 2, y_st + dy * 2);//特殊曆法
+            richTextBox1.Size = new Size(340, 860);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
 
-            groupBox9.Location = new Point(x_st + dx * 4 + 60, y_st + dy * 0);//Timer顯示時間
 
             textBox2.Size = new Size(160, 40);
             dateTimePicker1.Size = new Size(160, 40);
             textBox2.Location = new Point(x_st + dx * 0 - 5, y_st + dy * 0 + 10);
             bt1.Location = new Point(x_st + 170, y_st + dy * 0 + 10);
             dateTimePicker1.Location = new Point(x_st + dx * 0 - 5, y_st + dy * 0 + 60);
+            lb_time_interval.Location = new Point(x_st + dx * 0 - 5, y_st + dy * 0 + 60 + 40);
             bt2.Location = new Point(x_st + 170, y_st + dy * 0 + 60);
 
-            lb_time.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20);
-            lb_time_interval.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 30);
+            lb_time.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 10);
 
-            richTextBox1.Size = new Size(480, 530);
-            richTextBox1.Location = new Point(x_st + dx * 4 + 10, y_st + dy * 4 + 30);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -163,12 +164,14 @@ namespace vcs_test_all_01_DateTime
 
             bt_special_00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_special_01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            bt_special_02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            bt_special_03.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            bt_special_04.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            bt_special_05.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            bt_special_02.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_special_03.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            bt_special_04.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_special_05.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
-            this.Size = new Size(1460, 910);
+            button21.Text = "CultureInfo\n月名星期名";
+
+            this.Size = new Size(1290, 920);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -1564,10 +1567,6 @@ namespace vcs_test_all_01_DateTime
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            richTextBox1.Text += CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dt.DayOfWeek) + "\n";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
             //string dt;
             weekday = string.Empty;
             //dt = DateTime.Today.DayOfWeek.ToString();
@@ -1634,30 +1633,69 @@ namespace vcs_test_all_01_DateTime
 
         private void button21_Click(object sender, EventArgs e)
         {
-            //CultureInfo 相關
+            richTextBox1.Text += "CultureInfo相關, 月名星期名\n";
+
+            CultureInfo cuinfo = new CultureInfo("zh-TW");
+            cuinfo.DateTimeFormat.Calendar = cuinfo.OptionalCalendars[2];
+            //TextBox1.Text = dt.ToString("yyyy/MM/dd", cuinfo);
+
+            DateTime dt = DateTime.Now;//現在時間
+            string mesg = string.Empty;
+
+            mesg += dt.ToString() + "\n";
+            mesg += dt.ToString("yyyy/MM/dd", cuinfo) + "\n";
+            mesg += dt.ToString("HH:mm:ss") + "\n";
+            mesg += dt.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
+
+            richTextBox1.Text += mesg + "\n";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            richTextBox1.Text += "民國記年\n";
+
+            CultureInfo cui = new CultureInfo("zh-TW", true);
+            cui.DateTimeFormat.Calendar = new TaiwanCalendar();
+            richTextBox1.Text += dateTimePicker1.Value.ToString("yy/M/d", cui) + "\n";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            richTextBox1.Text += CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dt.DayOfWeek) + "\n";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             string[] month_names = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
             foreach (string name in month_names)
             {
                 if (name.Length > 0)
                 {
-                    richTextBox1.Text += name + "\n";
+                    richTextBox1.Text += name + " ";
                 }
             }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             string[] day_names = CultureInfo.CurrentCulture.DateTimeFormat.DayNames;
             foreach (string name in day_names)
             {
                 if (name.Length > 0)
                 {
-                    richTextBox1.Text += name + "\n";
+                    richTextBox1.Text += name + " ";
                 }
             }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             for (int i = 0; i < 7; i++)
             {
                 richTextBox1.Text += "i = " + i.ToString() + "\t" + CultureInfo.CurrentCulture.DateTimeFormat.DayNames[i] + "\n";
             }
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -1696,23 +1734,13 @@ namespace vcs_test_all_01_DateTime
         {
             DateTime dt = DateTime.Now;
 
-            CultureInfo cuinfo = new CultureInfo("zh-TW");
-            cuinfo.DateTimeFormat.Calendar = cuinfo.OptionalCalendars[2];
-            //TextBox1.Text = dt.ToString("yyyy/MM/dd", cuinfo);
-
             string mesg = string.Empty;
-
-            mesg += dt.ToString() + "\n";
-            mesg += dt.ToString("yyyy/MM/dd", cuinfo) + "\n";
-            mesg += dt.ToString("HH:mm:ss") + "\n";
-            mesg += dt.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
 
             // Local Time / GMT
             dt = DateTime.Now;
             mesg += "Local Time\n";
             mesg += dt.ToLongTimeString() + "\n";
             mesg += dt.ToShortDateString() + "\n";
-
 
             // Display the GMT time.
             DateTimeOffset local_offset = new DateTimeOffset(dt);
@@ -1733,7 +1761,7 @@ namespace vcs_test_all_01_DateTime
                 //richTextBox1.Text += dt.ToString() + "\n";
                 //richTextBox1.Text += dt.Date.ToString() + "\n";
                 //richTextBox1.Text += "xxx " + interval.TotalSeconds.ToString();// +"\n";
-                lb_time_interval.Text = interval.TotalSeconds.ToString();
+                lb_time_interval.Text = "經過 : " + interval.TotalSeconds.ToString();
 
                 if (interval.TotalSeconds > wait_seconds)
                 {
@@ -2077,17 +2105,12 @@ namespace vcs_test_all_01_DateTime
 
         private void bt_special_00_Click(object sender, EventArgs e)
         {
-            //民國記年
-            CultureInfo cui = new CultureInfo("zh-TW", true);
-            cui.DateTimeFormat.Calendar = new TaiwanCalendar();
-            richTextBox1.Text += dateTimePicker1.Value.ToString("yy/M/d", cui) + "\n";
-
-            DateTime dd = new DateTime(2006, 3, 11);
+            DateTime dt = new DateTime(2006, 3, 11);
             TaiwanCalendar tc = new TaiwanCalendar();
 
-            int year = tc.GetYear(dd);
-            int month = tc.GetMonth(dd);
-            int dayOfMonth = tc.GetDayOfMonth(dd);             //日
+            int year = tc.GetYear(dt);
+            int month = tc.GetMonth(dt);
+            int dayOfMonth = tc.GetDayOfMonth(dt);             //日
             int daysInMonth = tc.GetDaysInMonth(year, month);   //整個月的天數
             richTextBox1.Text += "民國" + year.ToString() + "年" + month.ToString() + "月" + dayOfMonth.ToString() + "日\n";
         }
@@ -2468,11 +2491,3 @@ namespace vcs_test_all_01_DateTime
 */
 
 // DateTime.Parse()  抓出來
-
-
-/*
-
-
-
-*/
-

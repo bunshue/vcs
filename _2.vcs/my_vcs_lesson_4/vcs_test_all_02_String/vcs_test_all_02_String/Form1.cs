@@ -33,8 +33,8 @@ namespace vcs_test_all_02_String
             //button
             x_st = 10;
             y_st = 10;
-            dx = 180 + 10;
-            dy = 50 + 10;
+            dx = 200 + 5;
+            dy = 60 + 5;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -69,20 +69,10 @@ namespace vcs_test_all_02_String
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
-            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
-            groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-
-            richTextBox1.Location = new Point(x_st + dx * 6 - 80, y_st + dy * 0);
+            richTextBox1.Size = new Size(500, 650);
+            richTextBox1.Location = new Point(x_st + dx * 5 - 120, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
@@ -100,6 +90,9 @@ namespace vcs_test_all_02_String
             bt_show_number7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
             richTextBox1.Text += "\n\n";
+
+            this.Size = new Size(1440, 710);
+            this.Text = "vcs_test_all_02_String";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -137,19 +130,142 @@ namespace vcs_test_all_02_String
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string str = "Alice is a good student!!";
-            richTextBox1.Text += "\n原字串:\t" + str + "\n";
-            richTextBox1.Text += "轉成大寫:\t︰" + str.ToUpper() + "\n";
-            richTextBox1.Text += "轉成小寫:\t" + str.ToLower() + "\n";
-            richTextBox1.Text += "插入字串寫:\t" + str.Insert(6, "Wang ") + "\n";
-            richTextBox1.Text += "原字串依空白拆開:\n";
+            richTextBox1.Text += "字串功能測試\n";
 
+            string str = "Alice is a good student!!";
+            richTextBox1.Text += "原字串:\t\t\t" + str + "\n";
+            richTextBox1.Text += "ToUpper() 轉大寫:\t" + str.ToUpper() + "\n";
+            richTextBox1.Text += "ToLower() 轉小寫:\t" + str.ToLower() + "\n";
+            richTextBox1.Text += "Insert() 插入字串:\t" + str.Insert(6, "Wang ") + "\n";
+
+            richTextBox1.Text += "Split() 依空白拆開:\t";
             string[] strArray = str.Split(' ');
             for (int i = 0; i < strArray.Length; i++)
             {
-                richTextBox1.Text += strArray[i] + "\n";
-                //Console.WriteLine(strArray[i]);
+                richTextBox1.Text += strArray[i] + " ";
             }
+            richTextBox1.Text += "\n";
+
+            //6060
+
+            str = "Welcome to the United States and have a nice day.";
+            string[] split_str = new string[5];
+            split_str = str.Split(' '); //以空白當分隔符號
+            richTextBox1.Text += "\n原字串:\t" + str + "\n";
+            richTextBox1.Text += "原字串依空白拆開:\n";
+            foreach (string tmp in split_str)
+            {
+                richTextBox1.Text += tmp + "\n";
+            }
+
+            //6060
+
+            //分割字串範例
+            string[] word_S = { };
+            char[] split = { '-', ' ', ',', ':', '/' };     //依各種符號來切割字串
+
+            string compile_time = "3/3/2021 01:35 下午";
+            richTextBox1.Text += "原字串\t" + compile_time + "\n";
+            richTextBox1.Text += "切割字串 :\n";
+
+            word_S = compile_time.Split(split);     //切割字串
+
+            foreach (string tmp in word_S)
+            {
+                richTextBox1.Text += tmp + "\n";
+            }
+
+            //6060
+
+
+            //字串的 Split & Join
+            //字串的 Split && Join
+
+            string ols_string = "This is a book.";
+
+            // Split the values at spaces, removing duplicates.
+            string[] values = ols_string.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            int len = values.Length;
+            richTextBox1.Text += "原字串 : " + ols_string + "\t依空白可拆分為 " + len.ToString() + " 個, 分別是：\n";
+            for (int i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "第 " + i.ToString() + " 項 : " + values[i] + "\n";
+            }
+
+            // Rejoin them.
+            string result = String.Join("*", values);
+            richTextBox1.Text += "用星號連結組合起來 : " + result + "\n";
+
+            //6060
+
+            //split
+            str = "this-is-a-lion-mouse";
+            string[] word = str.Split('-');
+            richTextBox1.Text += "原字串: " + str + "\n";
+            richTextBox1.Text += "分割後, len = " + word.Length.ToString() + ", 內容:\n";
+            foreach (string s in word)
+            {
+                richTextBox1.Text += s + "\n";
+            }
+
+            //6060
+
+            //字串處理
+            string str1 = "群曜醫電股份有限公司 Insight Medical Solutions Inc.";
+            string str2 = string.Empty;
+            richTextBox1.Text += "\n原字串:\t" + str1 + "\n";
+            str2 = str1.Substring(0, 4);    //從0取4
+            richTextBox1.Text += "原字串從0取4字:\t" + str2 + "\n";
+            str2 = str1.Substring(4, 6);    //從4取6
+            richTextBox1.Text += "原字串從4取6字:\t" + str2 + "\n";
+            str2 = str1.Substring(8, 10);   //從8取10
+            richTextBox1.Text += "原字串從8取10字:\t" + str2 + "\n";
+
+            //6060
+
+            //String用法
+
+            //String用法 Remove
+
+            str = "0123456789";
+            string delstr1;
+            string delstr2;
+            delstr1 = str.Remove(6);//刪除字符串索引為6後面的字符
+            delstr2 = str.Remove(5, 5);//刪除字符串索引自5開始後數5個長度的字符
+            Console.WriteLine(delstr1);
+            Console.WriteLine(delstr2);
+            Console.ReadLine();
+
+            //String用法 CopyTo
+            str = "This is a string";
+            string copystr;
+            copystr = string.Copy(str);
+            char[] newchar = new char[20];
+            str.CopyTo(5, newchar, 0, 11);
+            Console.WriteLine(copystr);
+            Console.WriteLine(newchar);
+            Console.ReadLine();
+
+            //String用法 字串查找
+            str = "This is a string";
+            int rh1 = str.IndexOf("i");
+            int rh2 = str.LastIndexOf("i");
+            if (rh1 >= 0)
+            {
+                Console.WriteLine("字符i在字符串str第一次出現的位置是：{0}", rh1);
+                Console.WriteLine("字符i在字符串str最後一次出現的位置是：{0}", rh2);
+            }
+            else
+            {
+                Console.WriteLine("字符i在字符串str未出現");
+            }
+
+            //轉義字符 @
+            Console.WriteLine(@"C:\Windows\system32");//第一種輸出格式就是在前面加@
+            Console.WriteLine("C:\\Windows\\system32");//第二種輸出格式就是將"\"改成"\\"
+            Console.ReadLine();
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -165,15 +281,7 @@ namespace vcs_test_all_02_String
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string str = "Welcome to the United States and have a nice day.";
-            string[] split_str = new string[5];
-            split_str = str.Split(' '); //以空白當分隔符號
-            richTextBox1.Text += "\n原字串:\t" + str + "\n";
-            richTextBox1.Text += "原字串依空白拆開:\n";
-            foreach (string tmp in split_str)
-            {
-                richTextBox1.Text += tmp + "\n";
-            }
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -231,68 +339,254 @@ namespace vcs_test_all_02_String
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //字串處理
-            string str1 = "群曜醫電股份有限公司 Insight Medical Solutions Inc.";
-            string str2 = string.Empty;
-            richTextBox1.Text += "\n原字串:\t" + str1 + "\n";
-            str2 = str1.Substring(0, 4);    //從0取4
-            richTextBox1.Text += "原字串從0取4字:\t" + str2 + "\n";
-            str2 = str1.Substring(4, 6);    //從4取6
-            richTextBox1.Text += "原字串從4取6字:\t" + str2 + "\n";
-            str2 = str1.Substring(8, 10);   //從8取10
-            richTextBox1.Text += "原字串從8取10字:\t" + str2 + "\n";
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //分割字串範例
-            string[] word_S = { };
-            char[] split = { '-', ' ', ',', ':', '/' };     //依各種符號來切割字串
+            //各種進位轉換
 
-            string compile_time = "3/3/2021 01:35 下午";
-            richTextBox1.Text += "原字串\t" + compile_time + "\n";
-            richTextBox1.Text += "切割字串 :\n";
+            //各種進位轉換
 
-            word_S = compile_time.Split(split);     //切割字串
+            //十六進位顯示
+            int value1 = 65535;
+            int value2 = 0x12345;
 
-            foreach (string str in word_S)
+            richTextBox1.Text += "十進位：" + value1 + "  十六進位： 0x" + Convert.ToString(value1, 16) + "\n";
+            richTextBox1.Text += "十六進位： 0x" + Convert.ToString(value2, 16) + "  十進位：" + value2 + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //16進制與字符串、字節數組之間的轉換
+            //16進制與字符串、字節數組之間的轉換
+
+            //十進制轉二進制
+            Console.WriteLine("十進制166的二進制表示: " + Convert.ToString(166, 2));
+            //十進制轉八進制
+            Console.WriteLine("十進制166的八進制表示: " + Convert.ToString(166, 8));
+            //十進制轉十六進制
+            Console.WriteLine("十進制166的十六進制表示: " + Convert.ToString(166, 16));
+
+            //二進制轉十進制
+            Console.WriteLine("二進制 111101 的十進制表示: " + Convert.ToInt32("111101", 2));
+            //八進制轉十進制
+            Console.WriteLine("八進制 44 的十進制表示: " + Convert.ToInt32("44", 8));
+            //十六進制轉十進制
+            Console.WriteLine("十六進制 CC的十進制表示: " + Convert.ToInt32("CC", 16));
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //十六進位轉換
+            string hexValues = "48 65 6C 6C 6F 20 57 6F 72 6C 64 21";
+            string[] hexValuesSplit = hexValues.Split(' ');
+            richTextBox1.Text += "hexValues\tvalue\tstringValue\tcharValue\n";
+            foreach (String hex in hexValuesSplit)
             {
-                richTextBox1.Text += str + "\n";
+                // Convert the number expressed in base-16 to an integer.
+                int value = Convert.ToInt32(hex, 16);
+                // Get the character corresponding to the integral value.
+                string stringValue = Char.ConvertFromUtf32(value);
+                char charValue = (char)value;
+                richTextBox1.Text += hex + '\t' + value.ToString() + '\t' + stringValue + '\t' + charValue + '\n';
             }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //10進位轉十六進位
+            int dint = 170;
+            string strHex = String.Format("{0:X2}", dint);    //X2的2代表若缺0會自動補0，所以沒有2也沒關係
+            richTextBox1.Text += "result : " + strHex + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //16進位轉10進位
+            string s2 = "AB";
+
+            //轉換10進位
+            int j = 0;
+            int result = 0;
+
+            for (int i = 0; i < s2.Length; i++)
+            {
+                result = result * 16;
+                j = s2[i] - 48;
+                if (j < 10)
+                {
+                    result = result + j;
+                }
+                else
+                {
+                    result = result + j - 39;
+                }
+            }
+            richTextBox1.Text += "result : " + result.ToString() + "\n";
+
+            //另一種寫法
+            //Convert.ToInt32("100", 16);
+
+            richTextBox1.Text += "result : " + Convert.ToInt32("AB", 16).ToString() + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //10進位轉各種進位
+            //10進位轉各種進位
+            int a, n, r;
+
+            a = 12345;
+
+            string[] m = {"0", "1", "2", "3",
+                           "4", "5", "6", "7",
+                           "8", "9", "A", "B",
+                           "C", "D", "E", "F"};
+            string s = "";
+
+            richTextBox1.Text += "10進位數字\t" + a.ToString() + "\n";
+
+            n = 2;
+            s = "";
+            for (; a > 0; a = a / n)
+            {
+                r = a % n;  //取得餘數
+
+                s = m[r] + s; // 查表，串列左邊
+            }
+
+            richTextBox1.Text += "2進位\t" + s + "\n";
+
+            a = 12345;
+            n = 8;
+            s = "";
+            for (; a > 0; a = a / n)
+            {
+                r = a % n;  //取得餘數
+
+                s = m[r] + s; // 查表，串列左邊
+            }
+
+            richTextBox1.Text += "8進位\t" + s + "\n";
+
+            a = 12345;
+            n = 16;
+            s = "";
+            for (; a > 0; a = a / n)
+            {
+                r = a % n;  //取得餘數
+                s = m[r] + s; // 查表，串列左邊
+            }
+
+            richTextBox1.Text += "16進位\t" + s + "\n";
+
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
         }
 
-        //字串的 Split & Join
         private void button10_Click(object sender, EventArgs e)
         {
-            string ols_string = "This is a book.";
+            //StringBuilder語法
 
-            // Split the values at spaces, removing duplicates.
-            string[] values = ols_string.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            StringBuilder sb1 = new StringBuilder();
+            sb1.Append("字串111\n");
+            sb1.Append("字串222\n");
+            sb1.Append("字串333\n");
+            sb1.Append("字串444\n");
 
-            int len = values.Length;
-            richTextBox1.Text += "原字串 : " + ols_string + "\t依空白可拆分為 " + len.ToString() + " 個, 分別是：\n";
-            int i;
-            for (i = 0; i < len; i++)
+            richTextBox1.Text += "取得字串 : " + sb1.ToString() + "\n";
+
+            //StringBuilder 就是 字符串相加
+            StringBuilder sb2 = new StringBuilder("字串111");
+            sb2.Append("字串222");
+            sb2.Append("字串333");
+            sb2.Append("字串444");
+
+            richTextBox1.Text += "取得字串 : " + sb2 + "\n";
+
+            //StringBuilder語法3
+            richTextBox1.Text += "aaa\n";
+
+            StringBuilder sb3 = new StringBuilder();
+            for (int i = 128; i < 128 + 20; i++)
             {
-                richTextBox1.Text += "第 " + i.ToString() + " 項 : " + values[i] + "\n";
+                sb3.Append(i.ToString("X2"));
             }
 
-            // Rejoin them.
-            string result = String.Join("*", values);
-            richTextBox1.Text += "用星號連結組合起來 : " + result + "\n";
+            string result = sb3.ToString();
+            richTextBox1.Text += result + "\n";
+
+            richTextBox1.Text += "bbb\n";
+
+            StringBuilder sb4 = new StringBuilder();
+            for (int i = 128; i < 128 + 20; i++)
+            {
+                sb4.AppendFormat("{0:X2}", i);
+            }
+            //foreach (byte b in ms.ToArray())
+            {
+                //sb.AppendFormat("{0:X2}", b);
+            }
+            string all_data = sb4.ToString();
+            richTextBox1.Text += all_data + "\n";
+
+            richTextBox1.Text += "ccc\n";
+
+            //6060
+
+            //StringBuilder語法2
+            //StringBuilder
+
+            //建立StringBuilder物件
+            StringBuilder text = new StringBuilder();
+
+            richTextBox1.Text += "預設容量：" + text.Capacity.ToString() + "\n";
+
+            //使用 Append()方法附加字串
+            text.Append("ABCDEFGHIJ");
+            richTextBox1.Text += "目前長度：" + text.Length.ToString() + "\n";
+            richTextBox1.Text += "目前容量：" + text.Capacity.ToString() + "\n";
+
+            //再增加一筆資料 容量會長大
+            text.Append("ABCDEFGHIJ");
+            richTextBox1.Text += "目前長度：" + text.Length.ToString() + "\n";
+            richTextBox1.Text += "目前容量：" + text.Capacity.ToString() + "\n";
+
+            richTextBox1.Text += "在字串尾端加入換行字元後\n";
+            text.AppendLine("\n");
+            richTextBox1.Text += "目前長度：" + text.Length.ToString() + "\n";
+            richTextBox1.Text += "目前容量：" + text.Capacity.ToString() + "\n";
+
+            richTextBox1.Text += "在字串尾端加入另一個字串後\n";
+            text.AppendLine("It is a wonderful English proverb.");
+            richTextBox1.Text += "目前長度：" + text.Length.ToString() + "\n";
+            richTextBox1.Text += "目前容量：" + text.Capacity.ToString() + "\n";
+
+            richTextBox1.Text += "目前字串：" + text + "\n";
+
+            richTextBox1.Text += "改變內容\n";
+            for (int i = 0; i < 3; i++)
+            {
+                text[i] = 'X';
+            }
+
+            richTextBox1.Text += "變更後字串：" + text + "\n";
+
+            //Remove()方法, 只移除一次
+            string dddd = "EFG";    //欲移除字串
+            //取得欲刪除字串的索引編號
+            int index = text.ToString().IndexOf(dddd);
+            if (index >= 0)
+                text.Remove(index, dddd.Length);
+            richTextBox1.Text += "變更後字串：" + text + "\n";
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //split
-            string str = "this-is-a-lion-mouse";
-            string[] word = str.Split('-');
-            richTextBox1.Text += "原字串: " + str + "\n";
-            richTextBox1.Text += "分割後, len = " + word.Length.ToString() + ", 內容:\n";
-            foreach (string s in word)
-            {
-                richTextBox1.Text += s + "\n";
-            }
+            //string.Format語法
+
+
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -425,8 +719,6 @@ namespace vcs_test_all_02_String
 
         private void button18_Click(object sender, EventArgs e)
         {
-            //(Console)各種數據格式的輸出
-
             //(Console)各種數據格式的輸出
 
             Console.WriteLine("各種數據格式的輸出：");
@@ -705,8 +997,6 @@ namespace vcs_test_all_02_String
             richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("en-US")) + "\n";
             richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("ja-JP")) + "\n";
             richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("fr-FR")) + "\n";
-
-
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -727,7 +1017,6 @@ namespace vcs_test_all_02_String
             richTextBox1.Text += "percent = " + percent.ToString() + "\t數字\n";
             string percent_text = percent.ToString("P0");
             richTextBox1.Text += "percent = " + percent_text + "\t百分比\n";
-
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -753,13 +1042,11 @@ namespace vcs_test_all_02_String
             richTextBox1.Text += "d\t" + value.ToString("f4") + "\n"; //生成 12345.0000
             richTextBox1.Text += "e\t" + value.ToString("x") + "\n"; //生成 3039 (16進制)
             richTextBox1.Text += "f\t" + value.ToString("p") + "\n"; //生成 1,234,500.00%
-
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
             //數字顯示
-
 
             /*
             保留兩位小數
@@ -782,253 +1069,6 @@ namespace vcs_test_all_02_String
         }
 
         private void button25_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "111\t" + 12345.ToString("n") + "\n"; //生成 12,345.00
-            richTextBox1.Text += "111\t" + 12345.ToString("C") + "\n"; //生成 ￥12,345.00
-            richTextBox1.Text += "111\t" + 12345.ToString("e") + "\n"; //生成 1.234500e+004
-            richTextBox1.Text += "111\t" + 12345.ToString("f4") + "\n"; //生成 12345.0000
-            richTextBox1.Text += "111\t" + 12345.ToString("x") + "\n"; //生成 3039 (16進制)
-            richTextBox1.Text += "111\t" + 12345.ToString("p") + "\n"; //生成 1,234,500
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-            //十六進位顯示
-            int value1 = 65535;
-            int value2 = 0x12345;
-            MessageBox.Show("十進位：" + value1 + "  十六進位： 0x" + Convert.ToString(value1, 16));
-            MessageBox.Show("十六進位： 0x" + Convert.ToString(value2, 16) + "  十進位：" + value2);
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-            string hexValues = "48 65 6C 6C 6F 20 57 6F 72 6C 64 21";
-            string[] hexValuesSplit = hexValues.Split(' ');
-            richTextBox1.Text += "hexValues\tvalue\tstringValue\tcharValue\n";
-            foreach (String hex in hexValuesSplit)
-            {
-                // Convert the number expressed in base-16 to an integer.
-                int value = Convert.ToInt32(hex, 16);
-                // Get the character corresponding to the integral value.
-                string stringValue = Char.ConvertFromUtf32(value);
-                char charValue = (char)value;
-                richTextBox1.Text += hex + '\t' + value.ToString() + '\t' + stringValue + '\t' + charValue + '\n';
-            }
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-            //10進位轉十六進位
-            int dint = 170;
-            string strHex = String.Format("{0:X2}", dint);    //X2的2代表若缺0會自動補0，所以沒有2也沒關係
-            richTextBox1.Text += "result : " + strHex + "\n";
-        }
-
-        private void button29_Click(object sender, EventArgs e)
-        {
-            //16進位轉10進位
-            string s2 = "AB";
-
-            //轉換10進位
-            int j = 0;
-            int result = 0;
-
-            for (int i = 0; i < s2.Length; i++)
-            {
-                result = result * 16;
-                j = s2[i] - 48;
-                if (j < 10)
-                {
-                    result = result + j;
-                }
-                else
-                {
-                    result = result + j - 39;
-                }
-            }
-            richTextBox1.Text += "result : " + result.ToString() + "\n";
-
-            //另一種寫法
-            //Convert.ToInt32("100", 16);
-
-            richTextBox1.Text += "result : " + Convert.ToInt32("AB", 16).ToString() + "\n";
-
-        }
-
-        private void button30_Click(object sender, EventArgs e)
-        {
-            //10進位轉各種進位
-            int a, n, r;
-
-            a = 12345;
-
-            string[] m = {"0", "1", "2", "3",
-                           "4", "5", "6", "7",
-                           "8", "9", "A", "B",
-                           "C", "D", "E", "F"};
-            string s = "";
-
-            richTextBox1.Text += "10進位數字\t" + a.ToString() + "\n";
-
-            n = 2;
-            s = "";
-            for (; a > 0; a = a / n)
-            {
-                r = a % n;  //取得餘數
-
-                s = m[r] + s; // 查表，串列左邊
-            }
-
-            richTextBox1.Text += "2進位\t" + s + "\n";
-
-            a = 12345;
-            n = 8;
-            s = "";
-            for (; a > 0; a = a / n)
-            {
-                r = a % n;  //取得餘數
-
-                s = m[r] + s; // 查表，串列左邊
-            }
-
-            richTextBox1.Text += "8進位\t" + s + "\n";
-
-            a = 12345;
-            n = 16;
-            s = "";
-            for (; a > 0; a = a / n)
-            {
-                r = a % n;  //取得餘數
-                s = m[r] + s; // 查表，串列左邊
-            }
-
-            richTextBox1.Text += "16進位\t" + s + "\n";
-        }
-
-
-
-        private void button31_Click(object sender, EventArgs e)
-        {
-            //16進制與字符串、字節數組之間的轉換
-
-            //十進制轉二進制
-            Console.WriteLine("十進制166的二進制表示: " + Convert.ToString(166, 2));
-            //十進制轉八進制
-            Console.WriteLine("十進制166的八進制表示: " + Convert.ToString(166, 8));
-            //十進制轉十六進制
-            Console.WriteLine("十進制166的十六進制表示: " + Convert.ToString(166, 16));
-
-            //二進制轉十進制
-            Console.WriteLine("二進制 111101 的十進制表示: " + Convert.ToInt32("111101", 2));
-            //八進制轉十進制
-            Console.WriteLine("八進制 44 的十進制表示: " + Convert.ToInt32("44", 8));
-            //十六進制轉十進制
-            Console.WriteLine("十六進制 CC的十進制表示: " + Convert.ToInt32("CC", 16));
-        }
-
-        private void button32_Click(object sender, EventArgs e)
-        {
-            //StringBuilder語法1
-
-            StringBuilder sb1 = new StringBuilder();
-            sb1.Append("字串111\n");
-            sb1.Append("字串222\n");
-            sb1.Append("字串333\n");
-            sb1.Append("字串444\n");
-
-            richTextBox1.Text += "取得字串 : " + sb1.ToString() + "\n";
-
-            //StringBuilder 就是 字符串相加
-            StringBuilder sb2 = new StringBuilder("字串111");
-            sb2.Append("字串222");
-            sb2.Append("字串333");
-            sb2.Append("字串444");
-
-            richTextBox1.Text += "取得字串 : " + sb2 + "\n";
-
-            //StringBuilder語法3
-            richTextBox1.Text += "aaa\n";
-
-            StringBuilder sb3 = new StringBuilder();
-            for (int i = 128; i < 128 + 20; i++)
-            {
-                sb3.Append(i.ToString("X2"));
-            }
-
-            string result = sb3.ToString();
-            richTextBox1.Text += result + "\n";
-
-            richTextBox1.Text += "bbb\n";
-
-            StringBuilder sb4 = new StringBuilder();
-            for (int i = 128; i < 128 + 20; i++)
-            {
-                sb4.AppendFormat("{0:X2}", i);
-            }
-            //foreach (byte b in ms.ToArray())
-            {
-                //sb.AppendFormat("{0:X2}", b);
-            }
-            string all_data = sb4.ToString();
-            richTextBox1.Text += all_data + "\n";
-
-            richTextBox1.Text += "ccc\n";
-        }
-
-        private void button33_Click(object sender, EventArgs e)
-        {
-            //StringBuilder語法2
-            //StringBuilder
-
-            //建立StringBuilder物件
-            StringBuilder text = new StringBuilder();
-
-            richTextBox1.Text += "預設容量：" + text.Capacity.ToString() + "\n";
-
-            //使用 Append()方法附加字串
-            text.Append("ABCDEFGHIJ");
-            richTextBox1.Text += "目前長度：" + text.Length.ToString() + "\n";
-            richTextBox1.Text += "目前容量：" + text.Capacity.ToString() + "\n";
-
-            //再增加一筆資料 容量會長大
-            text.Append("ABCDEFGHIJ");
-            richTextBox1.Text += "目前長度：" + text.Length.ToString() + "\n";
-            richTextBox1.Text += "目前容量：" + text.Capacity.ToString() + "\n";
-
-            richTextBox1.Text += "在字串尾端加入換行字元後\n";
-            text.AppendLine("\n");
-            richTextBox1.Text += "目前長度：" + text.Length.ToString() + "\n";
-            richTextBox1.Text += "目前容量：" + text.Capacity.ToString() + "\n";
-
-            richTextBox1.Text += "在字串尾端加入另一個字串後\n";
-            text.AppendLine("It is a wonderful English proverb.");
-            richTextBox1.Text += "目前長度：" + text.Length.ToString() + "\n";
-            richTextBox1.Text += "目前容量：" + text.Capacity.ToString() + "\n";
-
-            richTextBox1.Text += "目前字串：" + text + "\n";
-
-            richTextBox1.Text += "改變內容\n";
-            for (int i = 0; i < 3; i++)
-            {
-                text[i] = 'X';
-            }
-
-            richTextBox1.Text += "變更後字串：" + text + "\n";
-
-            //Remove()方法, 只移除一次
-            string dddd = "EFG";    //欲移除字串
-            //取得欲刪除字串的索引編號
-            int index = text.ToString().IndexOf(dddd);
-            if (index >= 0)
-                text.Remove(index, dddd.Length);
-            richTextBox1.Text += "變更後字串：" + text + "\n";
-        }
-
-        private void button34_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button35_Click(object sender, EventArgs e)
         {
             //數字前面補0或是其他符號
 
@@ -1058,10 +1098,6 @@ namespace vcs_test_all_02_String
 
             richTextBox1.Text += "hexString :" + hexString + "\n";
 
-
-
-
-
             //String.Format是將指定的 String類型的數據中的每個格式項替換為相應對象的值的文本等效項。 
 
             string p1 = "Jackie";
@@ -1075,66 +1111,7 @@ namespace vcs_test_all_02_String
             richTextBox1.Text += "string2 = " + string2 + "\n";
         }
 
-        private void button36_Click(object sender, EventArgs e)
-        {
-            //String用法
-
-            //String用法 Remove
-
-            string str = "0123456789";
-            string delstr1;
-            string delstr2;
-            delstr1 = str.Remove(6);//刪除字符串索引為6後面的字符
-            delstr2 = str.Remove(5, 5);//刪除字符串索引自5開始後數5個長度的字符
-            Console.WriteLine(delstr1);
-            Console.WriteLine(delstr2);
-            Console.ReadLine();
-
-
-            //String用法 CopyTo
-            str = "This is a string";
-            string copystr;
-            copystr = string.Copy(str);
-            char[] newchar = new char[20];
-            str.CopyTo(5, newchar, 0, 11);
-            Console.WriteLine(copystr);
-            Console.WriteLine(newchar);
-            Console.ReadLine();
-
-            //String用法 大小寫
-            str = "This is a string";
-            string lowerstr;
-            string upperstr;
-            lowerstr = str.ToLower();
-            upperstr = str.ToUpper();
-            Console.WriteLine("小寫形式：{0}", lowerstr);
-            Console.WriteLine("大寫形式：{0}", upperstr);
-            Console.ReadLine();
-
-
-            //String用法 字串查找
-            str = "This is a string";
-            int rh1 = str.IndexOf("i");
-            int rh2 = str.LastIndexOf("i");
-            if (rh1 >= 0)
-            {
-                Console.WriteLine("字符i在字符串str第一次出現的位置是：{0}", rh1);
-                Console.WriteLine("字符i在字符串str最後一次出現的位置是：{0}", rh2);
-            }
-            else
-            {
-                Console.WriteLine("字符i在字符串str未出現");
-            }
-
-
-            //轉義字符 @
-
-            Console.WriteLine(@"C:\Windows\system32");//第一種輸出格式就是在前面加@
-            Console.WriteLine("C:\\Windows\\system32");//第二種輸出格式就是將"\"改成"\\"
-            Console.ReadLine();
-        }
-
-        private void button37_Click(object sender, EventArgs e)
+        private void button26_Click(object sender, EventArgs e)
         {
             //格式化字符串，向長度小於30的字符串末尾添加特定字符，補足n個字符，使用String類的PadRight(int,char)方法：
             String str = "1234";
@@ -1148,18 +1125,19 @@ namespace vcs_test_all_02_String
             string s2 = string.Format("{0:00000}", Convert.ToInt16(a));
             richTextBox1.Text += s2 + "\n";
 
-            string oldID = "ABCDEFG";
-            string newID = oldID.Insert(6, "19");
-        }
-
-        private void button38_Click(object sender, EventArgs e)
-        {
 
         }
 
-        private void button39_Click(object sender, EventArgs e)
+        private void button27_Click(object sender, EventArgs e)
         {
+        }
 
+        private void button28_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
         }
 
         int value1 = 12345;
@@ -1204,3 +1182,23 @@ namespace vcs_test_all_02_String
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
+

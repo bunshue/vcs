@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -64,7 +63,6 @@
             this.tb_matrix = new System.Windows.Forms.TextBox();
             this.rtb_matrix = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.array_sort = new System.Windows.Forms.Button();
             this.numText8a = new System.Windows.Forms.TextBox();
             this.numText7a = new System.Windows.Forms.TextBox();
             this.numText6a = new System.Windows.Forms.TextBox();
@@ -73,32 +71,7 @@
             this.numText3a = new System.Windows.Forms.TextBox();
             this.numText2a = new System.Windows.Forms.TextBox();
             this.numText1a = new System.Windows.Forms.TextBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.numText8b = new System.Windows.Forms.TextBox();
-            this.numText7b = new System.Windows.Forms.TextBox();
-            this.numText6b = new System.Windows.Forms.TextBox();
-            this.numText5b = new System.Windows.Forms.TextBox();
-            this.numText4b = new System.Windows.Forms.TextBox();
-            this.numText3b = new System.Windows.Forms.TextBox();
-            this.numText2b = new System.Windows.Forms.TextBox();
-            this.numText1b = new System.Windows.Forms.TextBox();
-            this.startButton = new System.Windows.Forms.Button();
-            this.timer_sort = new System.Windows.Forms.Timer(this.components);
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.targetText = new System.Windows.Forms.TextBox();
-            this.numText1c = new System.Windows.Forms.TextBox();
-            this.targetLabel = new System.Windows.Forms.Label();
-            this.stepButton = new System.Windows.Forms.Button();
-            this.numText8c = new System.Windows.Forms.TextBox();
-            this.numText2c = new System.Windows.Forms.TextBox();
-            this.numText7c = new System.Windows.Forms.TextBox();
-            this.numText3c = new System.Windows.Forms.TextBox();
-            this.numText6c = new System.Windows.Forms.TextBox();
-            this.numText4c = new System.Windows.Forms.TextBox();
-            this.numText5c = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -310,7 +283,7 @@
             // button0
             // 
             this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button0.Location = new System.Drawing.Point(10, 10);
+            this.button0.Location = new System.Drawing.Point(10, 9);
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 21;
@@ -466,7 +439,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.array_sort);
             this.groupBox2.Controls.Add(this.numText8a);
             this.groupBox2.Controls.Add(this.numText7a);
             this.groupBox2.Controls.Add(this.numText6a);
@@ -480,17 +452,7 @@
             this.groupBox2.Size = new System.Drawing.Size(320, 80);
             this.groupBox2.TabIndex = 73;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "物件Array";
-            // 
-            // array_sort
-            // 
-            this.array_sort.Location = new System.Drawing.Point(112, 52);
-            this.array_sort.Name = "array_sort";
-            this.array_sort.Size = new System.Drawing.Size(88, 23);
-            this.array_sort.TabIndex = 17;
-            this.array_sort.Text = "物件陣列測試";
-            this.array_sort.UseVisualStyleBackColor = true;
-            this.array_sort.Click += new System.EventHandler(this.array_sort_Click);
+            this.groupBox2.Text = "物件一維陣列";
             // 
             // numText8a
             // 
@@ -556,221 +518,11 @@
             this.numText1a.TabIndex = 9;
             this.numText1a.Text = "0";
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.numText8b);
-            this.groupBox3.Controls.Add(this.numText7b);
-            this.groupBox3.Controls.Add(this.numText6b);
-            this.groupBox3.Controls.Add(this.numText5b);
-            this.groupBox3.Controls.Add(this.numText4b);
-            this.groupBox3.Controls.Add(this.numText3b);
-            this.groupBox3.Controls.Add(this.numText2b);
-            this.groupBox3.Controls.Add(this.numText1b);
-            this.groupBox3.Controls.Add(this.startButton);
-            this.groupBox3.Location = new System.Drawing.Point(630, 214);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(320, 80);
-            this.groupBox3.TabIndex = 74;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "氣泡排序法演示";
-            // 
-            // numText8b
-            // 
-            this.numText8b.Location = new System.Drawing.Point(272, 21);
-            this.numText8b.Name = "numText8b";
-            this.numText8b.Size = new System.Drawing.Size(32, 22);
-            this.numText8b.TabIndex = 17;
-            this.numText8b.Text = "0";
-            // 
-            // numText7b
-            // 
-            this.numText7b.Location = new System.Drawing.Point(234, 21);
-            this.numText7b.Name = "numText7b";
-            this.numText7b.Size = new System.Drawing.Size(32, 22);
-            this.numText7b.TabIndex = 16;
-            this.numText7b.Text = "0";
-            // 
-            // numText6b
-            // 
-            this.numText6b.Location = new System.Drawing.Point(196, 21);
-            this.numText6b.Name = "numText6b";
-            this.numText6b.Size = new System.Drawing.Size(32, 22);
-            this.numText6b.TabIndex = 15;
-            this.numText6b.Text = "0";
-            // 
-            // numText5b
-            // 
-            this.numText5b.Location = new System.Drawing.Point(158, 21);
-            this.numText5b.Name = "numText5b";
-            this.numText5b.Size = new System.Drawing.Size(32, 22);
-            this.numText5b.TabIndex = 14;
-            this.numText5b.Text = "0";
-            // 
-            // numText4b
-            // 
-            this.numText4b.Location = new System.Drawing.Point(120, 21);
-            this.numText4b.Name = "numText4b";
-            this.numText4b.Size = new System.Drawing.Size(32, 22);
-            this.numText4b.TabIndex = 13;
-            this.numText4b.Text = "0";
-            // 
-            // numText3b
-            // 
-            this.numText3b.Location = new System.Drawing.Point(82, 21);
-            this.numText3b.Name = "numText3b";
-            this.numText3b.Size = new System.Drawing.Size(32, 22);
-            this.numText3b.TabIndex = 12;
-            this.numText3b.Text = "0";
-            // 
-            // numText2b
-            // 
-            this.numText2b.Location = new System.Drawing.Point(44, 21);
-            this.numText2b.Name = "numText2b";
-            this.numText2b.Size = new System.Drawing.Size(32, 22);
-            this.numText2b.TabIndex = 11;
-            this.numText2b.Text = "0";
-            // 
-            // numText1b
-            // 
-            this.numText1b.Location = new System.Drawing.Point(6, 21);
-            this.numText1b.Name = "numText1b";
-            this.numText1b.Size = new System.Drawing.Size(32, 22);
-            this.numText1b.TabIndex = 10;
-            this.numText1b.Text = "0";
-            // 
-            // startButton
-            // 
-            this.startButton.Location = new System.Drawing.Point(120, 50);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(75, 23);
-            this.startButton.TabIndex = 9;
-            this.startButton.Text = "開始排序";
-            this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
-            // 
-            // timer_sort
-            // 
-            this.timer_sort.Interval = 1000;
-            this.timer_sort.Tick += new System.EventHandler(this.timer_sort_Tick);
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.targetText);
-            this.groupBox4.Controls.Add(this.numText1c);
-            this.groupBox4.Controls.Add(this.targetLabel);
-            this.groupBox4.Controls.Add(this.stepButton);
-            this.groupBox4.Controls.Add(this.numText8c);
-            this.groupBox4.Controls.Add(this.numText2c);
-            this.groupBox4.Controls.Add(this.numText7c);
-            this.groupBox4.Controls.Add(this.numText3c);
-            this.groupBox4.Controls.Add(this.numText6c);
-            this.groupBox4.Controls.Add(this.numText4c);
-            this.groupBox4.Controls.Add(this.numText5c);
-            this.groupBox4.Location = new System.Drawing.Point(630, 300);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(320, 80);
-            this.groupBox4.TabIndex = 75;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "二分搜尋法演示";
-            // 
-            // targetText
-            // 
-            this.targetText.Location = new System.Drawing.Point(136, 49);
-            this.targetText.Name = "targetText";
-            this.targetText.Size = new System.Drawing.Size(32, 22);
-            this.targetText.TabIndex = 86;
-            this.targetText.Text = "0";
-            // 
-            // numText1c
-            // 
-            this.numText1c.Location = new System.Drawing.Point(14, 18);
-            this.numText1c.Name = "numText1c";
-            this.numText1c.Size = new System.Drawing.Size(32, 22);
-            this.numText1c.TabIndex = 77;
-            this.numText1c.Text = "0";
-            // 
-            // targetLabel
-            // 
-            this.targetLabel.AutoSize = true;
-            this.targetLabel.Location = new System.Drawing.Point(69, 57);
-            this.targetLabel.Name = "targetLabel";
-            this.targetLabel.Size = new System.Drawing.Size(68, 12);
-            this.targetLabel.TabIndex = 85;
-            this.targetLabel.Text = "搜尋目標是:";
-            // 
-            // stepButton
-            // 
-            this.stepButton.Location = new System.Drawing.Point(174, 49);
-            this.stepButton.Name = "stepButton";
-            this.stepButton.Size = new System.Drawing.Size(75, 23);
-            this.stepButton.TabIndex = 76;
-            this.stepButton.Text = "開始";
-            this.stepButton.UseVisualStyleBackColor = true;
-            this.stepButton.Click += new System.EventHandler(this.stepButton_Click);
-            // 
-            // numText8c
-            // 
-            this.numText8c.Location = new System.Drawing.Point(280, 18);
-            this.numText8c.Name = "numText8c";
-            this.numText8c.Size = new System.Drawing.Size(32, 22);
-            this.numText8c.TabIndex = 84;
-            this.numText8c.Text = "0";
-            // 
-            // numText2c
-            // 
-            this.numText2c.Location = new System.Drawing.Point(52, 18);
-            this.numText2c.Name = "numText2c";
-            this.numText2c.Size = new System.Drawing.Size(32, 22);
-            this.numText2c.TabIndex = 78;
-            this.numText2c.Text = "0";
-            // 
-            // numText7c
-            // 
-            this.numText7c.Location = new System.Drawing.Point(242, 18);
-            this.numText7c.Name = "numText7c";
-            this.numText7c.Size = new System.Drawing.Size(32, 22);
-            this.numText7c.TabIndex = 83;
-            this.numText7c.Text = "0";
-            // 
-            // numText3c
-            // 
-            this.numText3c.Location = new System.Drawing.Point(90, 18);
-            this.numText3c.Name = "numText3c";
-            this.numText3c.Size = new System.Drawing.Size(32, 22);
-            this.numText3c.TabIndex = 79;
-            this.numText3c.Text = "0";
-            // 
-            // numText6c
-            // 
-            this.numText6c.Location = new System.Drawing.Point(204, 18);
-            this.numText6c.Name = "numText6c";
-            this.numText6c.Size = new System.Drawing.Size(32, 22);
-            this.numText6c.TabIndex = 82;
-            this.numText6c.Text = "0";
-            // 
-            // numText4c
-            // 
-            this.numText4c.Location = new System.Drawing.Point(128, 18);
-            this.numText4c.Name = "numText4c";
-            this.numText4c.Size = new System.Drawing.Size(32, 22);
-            this.numText4c.TabIndex = 80;
-            this.numText4c.Text = "0";
-            // 
-            // numText5c
-            // 
-            this.numText5c.Location = new System.Drawing.Point(166, 18);
-            this.numText5c.Name = "numText5c";
-            this.numText5c.Size = new System.Drawing.Size(32, 22);
-            this.numText5c.TabIndex = 81;
-            this.numText5c.Text = "0";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1011, 686);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.rtb_matrix);
             this.Controls.Add(this.tb_matrix);
@@ -811,10 +563,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -857,7 +605,6 @@
         private System.Windows.Forms.TextBox tb_matrix;
         private System.Windows.Forms.RichTextBox rtb_matrix;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button array_sort;
         private System.Windows.Forms.TextBox numText8a;
         private System.Windows.Forms.TextBox numText7a;
         private System.Windows.Forms.TextBox numText6a;
@@ -866,29 +613,6 @@
         private System.Windows.Forms.TextBox numText3a;
         private System.Windows.Forms.TextBox numText2a;
         private System.Windows.Forms.TextBox numText1a;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox numText8b;
-        private System.Windows.Forms.TextBox numText7b;
-        private System.Windows.Forms.TextBox numText6b;
-        private System.Windows.Forms.TextBox numText5b;
-        private System.Windows.Forms.TextBox numText4b;
-        private System.Windows.Forms.TextBox numText3b;
-        private System.Windows.Forms.TextBox numText2b;
-        private System.Windows.Forms.TextBox numText1b;
-        private System.Windows.Forms.Button startButton;
-        private System.Windows.Forms.Timer timer_sort;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox targetText;
-        private System.Windows.Forms.TextBox numText1c;
-        private System.Windows.Forms.Label targetLabel;
-        private System.Windows.Forms.Button stepButton;
-        private System.Windows.Forms.TextBox numText8c;
-        private System.Windows.Forms.TextBox numText2c;
-        private System.Windows.Forms.TextBox numText7c;
-        private System.Windows.Forms.TextBox numText3c;
-        private System.Windows.Forms.TextBox numText6c;
-        private System.Windows.Forms.TextBox numText4c;
-        private System.Windows.Forms.TextBox numText5c;
     }
 }
 
