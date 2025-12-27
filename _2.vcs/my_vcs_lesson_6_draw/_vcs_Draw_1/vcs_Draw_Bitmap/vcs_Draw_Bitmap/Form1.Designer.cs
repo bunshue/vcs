@@ -69,9 +69,9 @@
             // button9
             // 
             this.button9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button9.Location = new System.Drawing.Point(17, 700);
+            this.button9.Location = new System.Drawing.Point(12, 559);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(170, 70);
+            this.button9.Size = new System.Drawing.Size(200, 60);
             this.button9.TabIndex = 134;
             this.button9.Text = "從pictureBox取得Bitmap";
             this.button9.UseVisualStyleBackColor = true;
@@ -80,9 +80,9 @@
             // button8
             // 
             this.button8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button8.Location = new System.Drawing.Point(17, 620);
+            this.button8.Location = new System.Drawing.Point(12, 498);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(170, 70);
+            this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 133;
             this.button8.Text = "Bitmap存圖";
             this.button8.UseVisualStyleBackColor = true;
@@ -91,9 +91,9 @@
             // button7
             // 
             this.button7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button7.Location = new System.Drawing.Point(17, 544);
+            this.button7.Location = new System.Drawing.Point(12, 437);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(170, 70);
+            this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 132;
             this.button7.Text = "clone語法1";
             this.button7.UseVisualStyleBackColor = true;
@@ -102,7 +102,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1201, 760);
+            this.bt_clear.Location = new System.Drawing.Point(644, 148);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(66, 40);
             this.bt_clear.TabIndex = 131;
@@ -113,18 +113,18 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(547, 10);
+            this.pictureBox1.Location = new System.Drawing.Point(628, 10);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(720, 720);
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 130;
             this.pictureBox1.TabStop = false;
             // 
             // button0
             // 
             this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button0.Location = new System.Drawing.Point(17, 10);
+            this.button0.Location = new System.Drawing.Point(12, 10);
             this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(170, 70);
+            this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 129;
             this.button0.Text = "Bitmap 經過 Rotate後, 會改變其寬高";
             this.button0.UseVisualStyleBackColor = true;
@@ -133,9 +133,9 @@
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button6.Location = new System.Drawing.Point(17, 468);
+            this.button6.Location = new System.Drawing.Point(12, 377);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(170, 70);
+            this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 128;
             this.button6.Text = "圖片旋轉, 可連續旋轉";
             this.button6.UseVisualStyleBackColor = true;
@@ -144,9 +144,9 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(17, 88);
+            this.button1.Location = new System.Drawing.Point(12, 73);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(170, 70);
+            this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 127;
             this.button1.Text = "將Bitmap的資料放到剪貼簿裏";
             this.button1.UseVisualStyleBackColor = true;
@@ -155,9 +155,9 @@
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button5.Location = new System.Drawing.Point(17, 392);
+            this.button5.Location = new System.Drawing.Point(12, 316);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(170, 70);
+            this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 126;
             this.button5.Text = "圖片轉向";
             this.button5.UseVisualStyleBackColor = true;
@@ -166,9 +166,9 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.Location = new System.Drawing.Point(17, 316);
+            this.button4.Location = new System.Drawing.Point(12, 256);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(170, 70);
+            this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 125;
             this.button4.Text = "一個大bitmap貼上多個小bitmap";
             this.button4.UseVisualStyleBackColor = true;
@@ -177,9 +177,9 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.Location = new System.Drawing.Point(17, 240);
+            this.button3.Location = new System.Drawing.Point(12, 195);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(170, 70);
+            this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 124;
             this.button3.Text = "將圖放大縮小";
             this.button3.UseVisualStyleBackColor = true;
@@ -188,9 +188,9 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(17, 164);
+            this.button2.Location = new System.Drawing.Point(12, 134);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(170, 70);
+            this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 123;
             this.button2.Text = "Bitmap的圖片鏡射";
             this.button2.UseVisualStyleBackColor = true;
@@ -199,18 +199,18 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(1273, 9);
+            this.richTextBox1.Location = new System.Drawing.Point(628, 116);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(214, 790);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 122;
             this.richTextBox1.Text = "";
             // 
             // button10
             // 
             this.button10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button10.Location = new System.Drawing.Point(193, 10);
+            this.button10.Location = new System.Drawing.Point(216, 10);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(170, 70);
+            this.button10.Size = new System.Drawing.Size(200, 60);
             this.button10.TabIndex = 135;
             this.button10.Text = "創建32/24位元深度之Bitmap";
             this.button10.UseVisualStyleBackColor = true;
@@ -219,9 +219,9 @@
             // button11
             // 
             this.button11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button11.Location = new System.Drawing.Point(193, 88);
+            this.button11.Location = new System.Drawing.Point(216, 73);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(170, 70);
+            this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 136;
             this.button11.Text = "改變Bitmap大小";
             this.button11.UseVisualStyleBackColor = true;
@@ -230,9 +230,9 @@
             // button12
             // 
             this.button12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button12.Location = new System.Drawing.Point(193, 164);
+            this.button12.Location = new System.Drawing.Point(216, 134);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(170, 70);
+            this.button12.Size = new System.Drawing.Size(200, 60);
             this.button12.TabIndex = 137;
             this.button12.Text = "設置圖像的分辨率";
             this.button12.UseVisualStyleBackColor = true;
@@ -241,9 +241,9 @@
             // button13
             // 
             this.button13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button13.Location = new System.Drawing.Point(193, 240);
+            this.button13.Location = new System.Drawing.Point(216, 195);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(170, 70);
+            this.button13.Size = new System.Drawing.Size(200, 60);
             this.button13.TabIndex = 138;
             this.button13.Text = "將Bitmap的資料放到剪貼簿裏";
             this.button13.UseVisualStyleBackColor = true;
@@ -252,9 +252,9 @@
             // button14
             // 
             this.button14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button14.Location = new System.Drawing.Point(193, 316);
+            this.button14.Location = new System.Drawing.Point(216, 256);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(170, 70);
+            this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 139;
             this.button14.Text = "縮小一半並存檔";
             this.button14.UseVisualStyleBackColor = true;
@@ -263,9 +263,9 @@
             // button15
             // 
             this.button15.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button15.Location = new System.Drawing.Point(193, 392);
+            this.button15.Location = new System.Drawing.Point(216, 316);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(170, 70);
+            this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 140;
             this.button15.Text = "放大一倍並存檔";
             this.button15.UseVisualStyleBackColor = true;
@@ -274,9 +274,9 @@
             // button16
             // 
             this.button16.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button16.Location = new System.Drawing.Point(193, 468);
+            this.button16.Location = new System.Drawing.Point(216, 377);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(170, 70);
+            this.button16.Size = new System.Drawing.Size(200, 60);
             this.button16.TabIndex = 141;
             this.button16.Text = "設置圖像分辨率";
             this.button16.UseVisualStyleBackColor = true;
@@ -285,9 +285,9 @@
             // button17
             // 
             this.button17.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button17.Location = new System.Drawing.Point(193, 544);
+            this.button17.Location = new System.Drawing.Point(216, 437);
             this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(170, 70);
+            this.button17.Size = new System.Drawing.Size(200, 60);
             this.button17.TabIndex = 142;
             this.button17.Text = "clone語法2";
             this.button17.UseVisualStyleBackColor = true;
@@ -296,9 +296,9 @@
             // button18
             // 
             this.button18.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button18.Location = new System.Drawing.Point(193, 620);
+            this.button18.Location = new System.Drawing.Point(216, 498);
             this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(170, 70);
+            this.button18.Size = new System.Drawing.Size(200, 60);
             this.button18.TabIndex = 143;
             this.button18.Text = "設定bmp檔之位元深度";
             this.button18.UseVisualStyleBackColor = true;
@@ -307,9 +307,9 @@
             // button19
             // 
             this.button19.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button19.Location = new System.Drawing.Point(193, 700);
+            this.button19.Location = new System.Drawing.Point(216, 559);
             this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(170, 70);
+            this.button19.Size = new System.Drawing.Size(200, 60);
             this.button19.TabIndex = 144;
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
@@ -322,9 +322,9 @@
             // button20
             // 
             this.button20.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button20.Location = new System.Drawing.Point(369, 12);
+            this.button20.Location = new System.Drawing.Point(422, 12);
             this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(170, 70);
+            this.button20.Size = new System.Drawing.Size(200, 60);
             this.button20.TabIndex = 145;
             this.button20.Text = "改變圖片透明度";
             this.button20.UseVisualStyleBackColor = true;
@@ -333,9 +333,9 @@
             // button21
             // 
             this.button21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button21.Location = new System.Drawing.Point(369, 88);
+            this.button21.Location = new System.Drawing.Point(422, 73);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(170, 70);
+            this.button21.Size = new System.Drawing.Size(200, 60);
             this.button21.TabIndex = 146;
             this.button21.Text = "改變Bitmap大小";
             this.button21.UseVisualStyleBackColor = true;
@@ -344,9 +344,9 @@
             // button22
             // 
             this.button22.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button22.Location = new System.Drawing.Point(369, 164);
+            this.button22.Location = new System.Drawing.Point(422, 134);
             this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(170, 70);
+            this.button22.Size = new System.Drawing.Size(200, 60);
             this.button22.TabIndex = 147;
             this.button22.Text = "調整影像大小 1";
             this.button22.UseVisualStyleBackColor = true;
@@ -355,9 +355,9 @@
             // button23
             // 
             this.button23.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button23.Location = new System.Drawing.Point(369, 240);
+            this.button23.Location = new System.Drawing.Point(422, 195);
             this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(170, 70);
+            this.button23.Size = new System.Drawing.Size(200, 60);
             this.button23.TabIndex = 148;
             this.button23.Text = "調整影像大小 2";
             this.button23.UseVisualStyleBackColor = true;
@@ -366,9 +366,9 @@
             // button24
             // 
             this.button24.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button24.Location = new System.Drawing.Point(369, 316);
+            this.button24.Location = new System.Drawing.Point(422, 256);
             this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(170, 70);
+            this.button24.Size = new System.Drawing.Size(200, 60);
             this.button24.TabIndex = 149;
             this.button24.Text = "MakeTransparent 使用 去背效果1";
             this.button24.UseVisualStyleBackColor = true;
@@ -377,9 +377,9 @@
             // button25
             // 
             this.button25.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button25.Location = new System.Drawing.Point(369, 392);
+            this.button25.Location = new System.Drawing.Point(422, 316);
             this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(170, 70);
+            this.button25.Size = new System.Drawing.Size(200, 60);
             this.button25.TabIndex = 150;
             this.button25.Text = "MakeTransparent 使用 去背效果2";
             this.button25.UseVisualStyleBackColor = true;
@@ -388,9 +388,9 @@
             // button26
             // 
             this.button26.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button26.Location = new System.Drawing.Point(369, 468);
+            this.button26.Location = new System.Drawing.Point(422, 377);
             this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(170, 70);
+            this.button26.Size = new System.Drawing.Size(200, 60);
             this.button26.TabIndex = 151;
             this.button26.Text = "MakeTransparent 使用 去背效果3";
             this.button26.UseVisualStyleBackColor = true;
@@ -399,9 +399,9 @@
             // button27
             // 
             this.button27.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button27.Location = new System.Drawing.Point(369, 544);
+            this.button27.Location = new System.Drawing.Point(422, 437);
             this.button27.Name = "button27";
-            this.button27.Size = new System.Drawing.Size(170, 70);
+            this.button27.Size = new System.Drawing.Size(200, 60);
             this.button27.TabIndex = 152;
             this.button27.Text = "MakeTransparent 使用 去背效果4";
             this.button27.UseVisualStyleBackColor = true;
@@ -410,9 +410,9 @@
             // button28
             // 
             this.button28.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button28.Location = new System.Drawing.Point(369, 620);
+            this.button28.Location = new System.Drawing.Point(422, 498);
             this.button28.Name = "button28";
-            this.button28.Size = new System.Drawing.Size(170, 70);
+            this.button28.Size = new System.Drawing.Size(200, 60);
             this.button28.TabIndex = 153;
             this.button28.Text = "MakeTransparent 使用 去背效果5";
             this.button28.UseVisualStyleBackColor = true;
@@ -421,9 +421,9 @@
             // button29
             // 
             this.button29.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button29.Location = new System.Drawing.Point(369, 700);
+            this.button29.Location = new System.Drawing.Point(422, 559);
             this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(170, 70);
+            this.button29.Size = new System.Drawing.Size(200, 60);
             this.button29.TabIndex = 154;
             this.button29.Text = "MakeTransparent 使用 去背效果6";
             this.button29.UseVisualStyleBackColor = true;
@@ -433,7 +433,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1510, 811);
+            this.ClientSize = new System.Drawing.Size(744, 642);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
             this.Controls.Add(this.button27);

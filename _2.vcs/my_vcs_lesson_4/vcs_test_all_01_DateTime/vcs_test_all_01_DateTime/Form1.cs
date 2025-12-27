@@ -26,6 +26,7 @@ namespace vcs_test_all_01_DateTime
         DateTime LoginTime = DateTime.Now;
         DateTime dt_timer_st = DateTime.Now;
         DateTime start_time = DateTime.Now;
+        DateTime dtTarget;
 
         string string_datetime1 = "3/11/2006 9:15:30 AM";
 
@@ -56,6 +57,11 @@ namespace vcs_test_all_01_DateTime
 
             this.monthCalendar1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.monthCalendar1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+
+            //設定倒數計時
+            //dtTarget = DateTime.Now.AddHours(2);  //設定兩小時後
+            dtTarget = new DateTime(2026, 9, 30, 12, 0, 0);   //設定特定時間
+            timer_countdown.Start();
         }
 
         void show_item_location()
@@ -71,8 +77,8 @@ namespace vcs_test_all_01_DateTime
             //button
             x_st = 10;
             y_st = 10;
-            dx = w + 10;
-            dy = h + 10;
+            dx = w + 5;
+            dy = h + 5;
 
             button0.Size = new Size(w, h);
             button1.Size = new Size(w, h);
@@ -93,10 +99,6 @@ namespace vcs_test_all_01_DateTime
             button16.Size = new Size(w, h);
             button17.Size = new Size(w, h);
             button18.Size = new Size(w, h);
-            button19.Size = new Size(w, h);
-            button20.Size = new Size(w, h);
-            button21.Size = new Size(w, h);
-            button22.Size = new Size(w, h);
             comboBox1.Size = new Size(w, h);
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -119,30 +121,26 @@ namespace vcs_test_all_01_DateTime
             button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            comboBox1.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            comboBox1.Location = new Point(x_st + dx * 1, y_st + dy * 9);
             groupBox5.Location = new Point(x_st + dx * 0, y_st + dy * 10);//DateTimePicker
-            groupBox12.Location = new Point(x_st + dx * 1, y_st + dy * 10);//設定倒數計時
-            groupBox8.Location = new Point(x_st + dx * 2, y_st + dy * 10);//DateTimePicker
-            groupBox9.Location = new Point(x_st + dx * 2 + 250 + 10, y_st + dy * 10);//Timer顯示時間
+            groupBox8.Location = new Point(x_st + dx * 1, y_st + dy * 10);//DateTimePicker
+            groupBox9.Location = new Point(x_st + dx * 1 + 250 + 10, y_st + dy * 10);//Timer顯示時間
 
-            groupBox13.Location = new Point(x_st + dx * 2, y_st + dy * 4 - 30);//月相
-            groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 8 - 70); //listView
+            groupBox13.Location = new Point(x_st + dx * 2, y_st + dy * 2 - 30);//月相
+            groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 6 - 40); //listView
+            listView1.Location = new Point(5, 10);
+            listView1.Size = new Size(360, 120);
+            bt3.Location = new Point(370, 10);
 
             groupBox6.Size = new Size(420, 110);
             groupBox8.Size = new Size(250, 160);
             groupBox5.Size = new Size(180, 160);
             groupBox9.Size = new Size(200, 160);
-            groupBox12.Size = new Size(180, 160);
+            groupBox10.Size = new Size(432, 140);
 
-            groupBox6.Location = new Point(x_st + dx * 2, y_st + dy * 2);//特殊曆法
-            richTextBox1.Size = new Size(340, 860);
+            groupBox6.Location = new Point(x_st + dx * 2, y_st + dy * 0);//特殊曆法
+            richTextBox1.Size = new Size(340, 800);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-
 
             textBox2.Size = new Size(160, 40);
             dateTimePicker1.Size = new Size(160, 40);
@@ -153,7 +151,6 @@ namespace vcs_test_all_01_DateTime
             bt2.Location = new Point(x_st + 170, y_st + dy * 0 + 60);
 
             lb_time.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 10);
-
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -169,9 +166,9 @@ namespace vcs_test_all_01_DateTime
             bt_special_04.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_special_05.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
-            button21.Text = "CultureInfo\n月名星期名";
+            button17.Text = "CultureInfo\n月名星期名";
 
-            this.Size = new Size(1290, 920);
+            this.Size = new Size(1290, 870);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -402,7 +399,67 @@ namespace vcs_test_all_01_DateTime
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+            //倒數計時, 2026年距今還有多久
+            DateTime dt_target = new DateTime(2026, 1, 1, 0, 0, 0);
+            dt = DateTime.Now;
+            TimeSpan remaining = dt_target.Subtract(dt);
+            remaining = dt_target - dt;//same
 
+            if (remaining.TotalSeconds < 0)
+            {
+                richTextBox1.Text += "時間 " + dt_target + " 已過\n";
+            }
+            else
+            {
+                richTextBox1.Text += "時間 " + dt_target + " 距今:\t";
+                richTextBox1.Text += remaining.Days + " 天\t";
+                richTextBox1.Text += remaining.Hours + " 時\t";
+                richTextBox1.Text += remaining.Minutes + " 分\t";
+                richTextBox1.Text += remaining.Seconds + " 秒\n";
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //計算時間差值
+            //計算兩個時間差值的函數，傳回時間差的絕對值
+
+            //韓戰	 1950年 6月25日	~ 1953年7月27日 簽署停戰協定	4yr
+            string st1 = "1950/6/25";
+            string st2 = "1953/7/27";
+            dt1 = Convert.ToDateTime(st1);
+            dt2 = Convert.ToDateTime(st2);
+            string diff = DateDiff(dt1, dt2);
+            richTextBox1.Text += "時間間隔 : " + diff + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //計算兩個日期的時間間隔
+            dt1 = new DateTime(1939, 9, 1);
+            dt2 = new DateTime(1945, 9, 2);
+            diff = DateDiff(dt1, dt2);
+            richTextBox1.Text += "時間間隔 : " + diff + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //計算兩個日期的時間間隔
+            dt1 = new DateTime(2006, 3, 11, 9, 15, 20);
+            dt2 = DateTime.Now;
+            diff = DateDiff(dt1, dt2);
+            richTextBox1.Text += "時間間隔 : " + diff + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+        }
+
+        /// 計算兩個日期的時間間隔
+        private string DateDiff(DateTime dt1, DateTime dt2)
+        {
+            string dateDiff = string.Empty;
+            TimeSpan ts1 = new TimeSpan(dt1.Ticks);
+            TimeSpan ts2 = new TimeSpan(dt2.Ticks);
+            TimeSpan ts = ts1.Subtract(ts2).Duration();
+            dateDiff = ts.Days.ToString() + "天" + ts.Hours.ToString() + "小時" + ts.Minutes.ToString() + "分鐘" + ts.Seconds.ToString() + "秒";
+            return dateDiff;
         }
 
         public void calculate_date_diff(int year, int month, int day)
@@ -909,9 +966,9 @@ namespace vcs_test_all_01_DateTime
             dt = DateTime.Now;
 
             //?日?時?分?秒 後
-            DateTime EventDate = dt + new TimeSpan(1, 13, 42, 59);    //現在時間 + 1天13時42分59秒
+            DateTime dt_target = dt + new TimeSpan(1, 13, 42, 59);    //現在時間 + 1天13時42分59秒
             richTextBox1.Text += "現在時間 : " + dt.ToString() + "\n";
-            richTextBox1.Text += "現在時間 + 1天13時42分59秒 = " + EventDate.ToString() + "\n";
+            richTextBox1.Text += "現在時間 + 1天13時42分59秒 = " + dt_target.ToString() + "\n";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -947,6 +1004,42 @@ namespace vcs_test_all_01_DateTime
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //時間相關
+            //中時間相關知識點小結
+            //一、月份英文簡寫
+
+            DateTime dt = DateTime.Now;
+
+            string MM = dt.AddMonths(-1).ToString("MMM", new CultureInfo("en-us"));//月英文縮寫：Jul
+            richTextBox1.Text += "月份英文簡寫\t" + MM + "\n";
+
+            //二、當月第一天和最后一天
+
+            DateTime ThisMonth_Frist = dt.AddDays(1 - dt.Day).Date;
+            DateTime ThisMOnth_Last = dt.AddDays(1 - dt.Day).Date.AddMonths(1).AddSeconds(-1);
+            richTextBox1.Text += "當月第一天\t" + ThisMonth_Frist + "\n";
+            richTextBox1.Text += "當月最后一天\t" + ThisMOnth_Last + "\n";
+
+            //三、上月第一天和最后一天
+
+            DateTime Today = DateTime.Today;//當天時間
+            DateTime ThisMonth = new DateTime(Today.Year, Today.Month, 1);//當前月第一天時間
+            DateTime LastMonth_First = ThisMonth.AddMonths(-1);//上月第一天時間
+            DateTime LastMonth_Last = ThisMonth.AddDays(-1);//上月最后一天時間
+            richTextBox1.Text += "上月第一天\t" + LastMonth_First + "\n";
+            richTextBox1.Text += "上月最后一天\t" + LastMonth_Last + "\n";
+
+            //四、本周第幾天
+
+            int daysInWeek1 = (int)dt.DayOfWeek;//注意：此處周,日時回傳0，
+            int daysInWeek2 = (int)dt.DayOfWeek == 0 ? 7 : (int)dt.DayOfWeek;//當前周第幾天,注釋:周日為0
+            richTextBox1.Text += "本周第幾天\t" + daysInWeek1.ToString() + "\n";
+            richTextBox1.Text += "本周第幾天\t" + daysInWeek2.ToString() + "\n";
+
+            //五、本月第幾周
+
+            //int a = WeekOfMonth(dt, false);//
+            //richTextBox1.Text += "本月第幾周\t" + a + "\n";
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -1136,91 +1229,6 @@ namespace vcs_test_all_01_DateTime
 
         private void button12_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-            //中時間相關知識點小結
-            //一、月份英文簡寫
-
-            DateTime dt = DateTime.Now;
-
-            string MM = dt.AddMonths(-1).ToString("MMM", new CultureInfo("en-us"));//月英文縮寫：Jul
-            richTextBox1.Text += "月份英文簡寫\t" + MM + "\n";
-
-            //二、當月第一天和最后一天
-
-            DateTime ThisMonth_Frist = dt.AddDays(1 - dt.Day).Date;
-            DateTime ThisMOnth_Last = dt.AddDays(1 - dt.Day).Date.AddMonths(1).AddSeconds(-1);
-            richTextBox1.Text += "當月第一天\t" + ThisMonth_Frist + "\n";
-            richTextBox1.Text += "當月最后一天\t" + ThisMOnth_Last + "\n";
-
-            //三、上月第一天和最后一天
-
-            DateTime Today = DateTime.Today;//當天時間
-            DateTime ThisMonth = new DateTime(Today.Year, Today.Month, 1);//當前月第一天時間
-            DateTime LastMonth_First = ThisMonth.AddMonths(-1);//上月第一天時間
-            DateTime LastMonth_Last = ThisMonth.AddDays(-1);//上月最后一天時間
-            richTextBox1.Text += "上月第一天\t" + LastMonth_First + "\n";
-            richTextBox1.Text += "上月最后一天\t" + LastMonth_Last + "\n";
-
-            //四、本周第幾天
-
-            int daysInWeek1 = (int)dt.DayOfWeek;//注意：此處周,日時回傳0，
-            int daysInWeek2 = (int)dt.DayOfWeek == 0 ? 7 : (int)dt.DayOfWeek;//當前周第幾天,注釋:周日為0
-            richTextBox1.Text += "本周第幾天\t" + daysInWeek1.ToString() + "\n";
-            richTextBox1.Text += "本周第幾天\t" + daysInWeek2.ToString() + "\n";
-
-            //五、本月第幾周
-
-            //int a = WeekOfMonth(dt, false);//
-            //richTextBox1.Text += "本月第幾周\t" + a + "\n";
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-            //計算兩個時間差值的函數，傳回時間差的絕對值
-
-            //韓戰	 1950年 6月25日	~ 1953年7月27日 簽署停戰協定	4yr
-            string st1 = "1950/6/25";
-            string st2 = "1953/7/27";
-            DateTime dt1 = Convert.ToDateTime(st1);
-            DateTime dt2 = Convert.ToDateTime(st2);
-            string diff = DateDiff(dt1, dt2);
-            richTextBox1.Text += "時間間隔 : " + diff + "\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //計算兩個日期的時間間隔
-            dt1 = new DateTime(1939, 9, 1);
-            dt2 = new DateTime(1945, 9, 2);
-            diff = DateDiff(dt1, dt2);
-            richTextBox1.Text += "時間間隔 : " + diff + "\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //計算兩個日期的時間間隔
-            dt1 = new DateTime(2006, 3, 11, 9, 15, 20);
-            dt2 = DateTime.Now;
-            diff = DateDiff(dt1, dt2);
-            richTextBox1.Text += "時間間隔 : " + diff + "\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-        }
-
-        /// 計算兩個日期的時間間隔
-        private string DateDiff(DateTime dt1, DateTime dt2)
-        {
-            string dateDiff = string.Empty;
-            TimeSpan ts1 = new TimeSpan(dt1.Ticks);
-            TimeSpan ts2 = new TimeSpan(dt2.Ticks);
-            TimeSpan ts = ts1.Subtract(ts2).Duration();
-            dateDiff = ts.Days.ToString() + "天" + ts.Hours.ToString() + "小時" + ts.Minutes.ToString() + "分鐘" + ts.Seconds.ToString() + "秒";
-            return dateDiff;
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
             //Parse 大全
 
             richTextBox1.Text += "DateTime.Parse, 字串轉DateTime物件\n";
@@ -1376,38 +1384,9 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "時間差 : " + txt + "\n";
         }
 
-        private void button16_Click(object sender, EventArgs e)
+        private void button13_Click(object sender, EventArgs e)
         {
-            DateTime MyEndDate = new DateTime(2027, 01, 01, 00, 00, 00);
-            DateTime MyStartDate = DateTime.Now;
-            TimeSpan MySpan = MyEndDate.Subtract(MyStartDate);
-            string diffDay = Convert.ToString(MySpan.Days);
-            string diffHour = Convert.ToString(MySpan.Hours);
-            string diffMin = Convert.ToString(MySpan.Minutes);
-            string diffSec = Convert.ToString(MySpan.Seconds);
-            richTextBox1.Text += "距離2027新年還有 " + diffDay + " 天 " + diffHour + " 時 " + diffMin + " 分 " + diffSec + " 秒\n";
-
-            //2027年距今還有多久
-            DateTime EventDate = new DateTime(2027, 1, 1, 0, 0, 0);
-            TimeSpan remaining = EventDate - DateTime.Now;
-
-            if (remaining.TotalSeconds < 0)
-            {
-                richTextBox1.Text += "時間 " + EventDate + " 早就過了\n";
-            }
-            else
-            {
-                richTextBox1.Text += "時間 " + EventDate + " 距今:\n";
-                richTextBox1.Text += remaining.Days + "  天\n";
-                richTextBox1.Text += remaining.Hours + "  時\n";
-                richTextBox1.Text += remaining.Minutes + "  分\n";
-                richTextBox1.Text += remaining.Seconds + "  秒\n";
-            }
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-            //ttttttttttttttttttttttt
+            //干支
             int i = 0;
             for (i = 0; i < 20; i++)
             {
@@ -1427,11 +1406,7 @@ namespace vcs_test_all_01_DateTime
             return tempStr;
         }
 
-        private void button18_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button19_Click(object sender, EventArgs e)
+        private void button14_Click(object sender, EventArgs e)
         {
             //OLE自動化日期
             try
@@ -1463,7 +1438,11 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "新日期 : " + dt2.ToString() + "\n";
         }
 
-        private void button20_Click(object sender, EventArgs e)
+        private void button15_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button16_Click(object sender, EventArgs e)
         {
             //幾年幾月幾日星期幾
             int year;
@@ -1631,7 +1610,7 @@ namespace vcs_test_all_01_DateTime
 
         }
 
-        private void button21_Click(object sender, EventArgs e)
+        private void button17_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "CultureInfo相關, 月名星期名\n";
 
@@ -1698,8 +1677,9 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "------------------------------\n";  // 30個
         }
 
-        private void button22_Click(object sender, EventArgs e)
+        private void button18_Click(object sender, EventArgs e)
         {
+            //系統時間相關
             //vcs時間之最早最晚
 
             //vcs史上最早時間
@@ -1727,7 +1707,6 @@ namespace vcs_test_all_01_DateTime
             get_system_time_zone();
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -2238,17 +2217,6 @@ namespace vcs_test_all_01_DateTime
             return starArr[index];
         }
 
-        DateTime dtTarget;
-        private void bt_countdown_Click(object sender, EventArgs e)
-        {
-            //設定倒數計時
-
-            //dtTarget = DateTime.Now.AddHours(2);  //設定兩小時後
-            dtTarget = new DateTime(2026, 9, 30, 12, 0, 0);   //設定特定時間
-
-            timer_countdown.Start();
-        }
-
         private void timer_countdown_Tick(object sender, EventArgs e)
         {
             TimeSpan ts = dtTarget.Subtract(DateTime.Now);
@@ -2256,7 +2224,7 @@ namespace vcs_test_all_01_DateTime
             string diffHour = Convert.ToString(ts.Hours);
             string diffMin = Convert.ToString(ts.Minutes);
             string diffSec = Convert.ToString(ts.Seconds);
-            tb_countdown.Text = "距離 " + dtTarget.ToString() + " 還有 " + diffHour + " 時 " + diffMin + " 分 " + diffSec + " 秒";
+            this.Text = "距離 " + dtTarget.ToString() + " 還有 " + diffHour + " 時 " + diffMin + " 分 " + diffSec + " 秒";
         }
 
         //月相 ST
@@ -2459,9 +2427,6 @@ namespace vcs_test_all_01_DateTime
 
             message += "//VS2005后显示星期的新方法是\n";
             message += "星期" + DateTime.Now.DayOfWeek.ToString(("d")) + "\n";
-
-
-
 */
 
 /*

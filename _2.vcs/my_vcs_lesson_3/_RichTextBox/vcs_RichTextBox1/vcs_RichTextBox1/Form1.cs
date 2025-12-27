@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;    //for FILE
 using System.Diagnostics;   //for Process, Stopwatch
-using System.Globalization; //for CultureInfo
+
 
 namespace vcs_RichTextBox1
 {
@@ -20,8 +20,6 @@ namespace vcs_RichTextBox1
             InitializeComponent();
         }
 
-        string rtf_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\text.rtf";
-
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
@@ -30,12 +28,20 @@ namespace vcs_RichTextBox1
             //RichTextBox 字數統計
             lb_richtextbox1_fx4.Text = "字數 : " + richTextBox1.TextLength.ToString() + ", 行數 : " + richTextBox1.Lines.Length.ToString();
 
-            show_richtextbox_tabs();
+            richTextBox1.Text +=
+                "在RichTextBox控制元件上新增超連結文字\n" +
+                "要在RichTextBox加上LinkClicked事件\n" +
+                "雅虎：http://tw.yahoo.com\n" +
+                "Google：http://www.google.com/\n" +
+                "維基百科：https://zh.wikipedia.org/wiki/Wikipedia:%E9%A6%96%E9%A1%B5\n" +
+                "雅虎字典：https://tw.dictionary.search.yahoo.com/\n";
+            richTextBox1.LinkClicked += new LinkClickedEventHandler(richTextBox1_LinkClicked);
+        }
 
-            if (File.Exists(rtf_filename))
-            {
-                richTextBox_rtf.LoadFile(rtf_filename);
-            }
+        private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            this.Text = e.LinkText;//設置與窗體關聯的文本
+            Process.Start("firefox", e.LinkText);// 在firefox瀏覽器中瀏覽單擊的超鏈接
         }
 
         private void SelectRichText(RichTextBox rch, string target)
@@ -51,21 +57,6 @@ namespace vcs_RichTextBox1
                 // Found the text. Select it.
                 rch.Select(pos, target.Length);//部分區域位置 ST, len
             }
-        }
-
-        void show_richtextbox_tabs()
-        {
-            // Set the tabs and enter some text.
-            richTextBox2.SelectionTabs = new int[] { 80, 160, 240 };
-            richTextBox2.AcceptsTab = true;
-
-            richTextBox2.Text += "顯示RichTextBox中的Tab功能\n\n";
-            richTextBox2.Text +=
-                "Breakfast\tLunch\tDinner\n" +
-                "Coffee\tSoda\tWine\n" +
-                "Bagel\tSandwich\tSalad\n" +
-                "Fruit\tChips\tTofuburger\n" +
-                "\tCookie\tVeggies";
         }
 
         void show_item_location()
@@ -110,6 +101,9 @@ namespace vcs_RichTextBox1
             button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
             button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
             button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -123,51 +117,48 @@ namespace vcs_RichTextBox1
             lb_richtextbox1_text.Location = new Point(x_st + dx * 3 + 360 + 260, y_st + dy * 0 + dd * 0);
 
             lb_richtextbox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + dd * 4);
-            richTextBox1.Size = new Size(850, 330);
+            richTextBox1.Size = new Size(850, 290);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + dd * 5);
 
-            lb_richtextbox2.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            richTextBox2.Size = new Size(270, 200);
-            richTextBox2.Location = new Point(x_st + dx * 2, y_st + dy * 7 + dd);
+            lb_richtextbox2.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            richTextBox2.Size = new Size(400, 200);
+            richTextBox2.Location = new Point(x_st + dx * 3, y_st + dy * 7 + dd);
 
-            lb_richtextbox3.Location = new Point(x_st + dx * 3 + 80, y_st + dy * 7);
-            richTextBox3.Size = new Size(270 + 200, 200);
-            richTextBox3.Location = new Point(x_st + dx * 3 + 80, y_st + dy * 7 + dd);
-
-            lb_richtextbox_rtf.Location = new Point(x_st + dx * 4 + 160 + 200, y_st + dy * 7);
-            richTextBox_rtf.Size = new Size(270, 200);
-            richTextBox_rtf.Location = new Point(x_st + dx * 4 + 160 + 200, y_st + dy * 7 + dd);
+            lb_richtextbox_rtf.Location = new Point(x_st + dx * 5, y_st + dy * 7);
+            richTextBox_rtf.Size = new Size(430, 200);
+            richTextBox_rtf.Location = new Point(x_st + dx * 5, y_st + dy * 7 + dd);
 
             dd = 45;
-            bt_shape0.Location = new Point(richTextBox1.Location.X + dd * 0, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height - bt_shape0.Height - 5);
-            bt_shape1.Location = new Point(richTextBox1.Location.X + dd * 1, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height - bt_shape0.Height - 5);
-            bt_shape2.Location = new Point(richTextBox1.Location.X + dd * 2, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height - bt_shape0.Height - 5);
-            bt_shape3.Location = new Point(richTextBox1.Location.X + dd * 3, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height - bt_shape0.Height - 5);
+            bt_open_rtf.Location = new Point(richTextBox_rtf.Location.X + richTextBox_rtf.Width - dd * 2, richTextBox_rtf.Location.Y);
+            bt_save_rtf.Location = new Point(richTextBox_rtf.Location.X + richTextBox_rtf.Width - dd * 1, richTextBox_rtf.Location.Y);
 
-            dd = 65;
-            bt_analyze.Location = new Point(richTextBox1.Location.X + dd * 0, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
-            bt_open1.Location = new Point(richTextBox1.Location.X + dd * 1, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
-            bt_open2.Location = new Point(richTextBox1.Location.X + dd * 2, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
-            bt_open3.Location = new Point(richTextBox1.Location.X + dd * 3, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
-            bt_font.Location = new Point(richTextBox1.Location.X + dd * 4, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
-            bt_backcolor.Location = new Point(richTextBox1.Location.X + dd * 5, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
-            bt_part1.Location = new Point(richTextBox1.Location.X + dd * 6, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
-            bt_search.Location = new Point(richTextBox1.Location.X + dd * 7, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
-            bt_save1.Location = new Point(richTextBox1.Location.X + dd * 8, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
-            bt_save2.Location = new Point(richTextBox1.Location.X + dd * 9 - 20, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
-            bt_save3.Location = new Point(richTextBox1.Location.X + dd * 10 - 40, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height);
+            dd = 60;
+            bt_analyze.Location = new Point(richTextBox1.Location.X + dd * 0, richTextBox1.Location.Y + richTextBox1.Size.Height);
+            bt_open1.Location = new Point(richTextBox1.Location.X + dd * 1, richTextBox1.Location.Y + richTextBox1.Size.Height);
+            bt_open2.Location = new Point(richTextBox1.Location.X + dd * 2, richTextBox1.Location.Y + richTextBox1.Size.Height);
+            bt_open3.Location = new Point(richTextBox1.Location.X + dd * 3, richTextBox1.Location.Y + richTextBox1.Size.Height);
+            bt_font.Location = new Point(richTextBox1.Location.X + dd * 4, richTextBox1.Location.Y + richTextBox1.Size.Height);
+            bt_backcolor.Location = new Point(richTextBox1.Location.X + dd * 5, richTextBox1.Location.Y + richTextBox1.Size.Height);
+            bt_part1.Location = new Point(richTextBox1.Location.X + dd * 6, richTextBox1.Location.Y + richTextBox1.Size.Height);
+            bt_search.Location = new Point(richTextBox1.Location.X + dd * 7, richTextBox1.Location.Y + richTextBox1.Size.Height);
+            bt_save1.Location = new Point(richTextBox1.Location.X + dd * 8, richTextBox1.Location.Y + richTextBox1.Size.Height);
+            bt_save2.Location = new Point(richTextBox1.Location.X + dd * 9 - 20, richTextBox1.Location.Y + richTextBox1.Size.Height);
+            bt_save3.Location = new Point(richTextBox1.Location.X + dd * 10 - 40, richTextBox1.Location.Y + richTextBox1.Size.Height);
+            bt_shape0.Location = new Point(richTextBox1.Location.X + dd * 11 - 60, richTextBox1.Location.Y + richTextBox1.Size.Height);
+            bt_shape1.Location = new Point(richTextBox1.Location.X + dd * 12 - 80, richTextBox1.Location.Y + richTextBox1.Size.Height);
+            bt_shape2.Location = new Point(richTextBox1.Location.X + dd * 13 - 100, richTextBox1.Location.Y + richTextBox1.Size.Height);
+            bt_shape3.Location = new Point(richTextBox1.Location.X + dd * 14 - 120, richTextBox1.Location.Y + richTextBox1.Size.Height);
 
             bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear1.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear1.Size.Height);
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
-            bt_clear3.Location = new Point(richTextBox3.Location.X + richTextBox3.Size.Width - bt_clear3.Size.Width, richTextBox3.Location.Y + richTextBox3.Size.Height - bt_clear3.Size.Height);
 
             this.Size = new Size(1500 + 20, 780);
 
             lb_richtextbox1.Text = "richTextBox1";
-            lb_richtextbox2.Text = "richTextBox2";
-            lb_richtextbox3.Text = "richTextBox3";
+            lb_richtextbox2.Text = "richTextBox2 message";
             lb_richtextbox_rtf.Text = "richTextBox_rtf";
             lb_richtextbox1_text.Text = "抓出游標所指的字";
+            this.Text = "vcs_RichTextBox1";
         }
 
         private void bt_clear1_Click(object sender, EventArgs e)
@@ -178,11 +169,6 @@ namespace vcs_RichTextBox1
         private void bt_clear2_Click(object sender, EventArgs e)
         {
             richTextBox2.Clear();
-        }
-
-        private void bt_clear3_Click(object sender, EventArgs e)
-        {
-            richTextBox3.Clear();
         }
 
         bool flag_change_rtb_backcolor = false;
@@ -491,21 +477,26 @@ namespace vcs_RichTextBox1
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //顯示百分比
-            //要using System.Globalization; //for CultureInfo
-            int a = 2;
-            int b = 3;
-            richTextBox1.Text += "顯示一位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P1", CultureInfo.InvariantCulture) + "\n";
-            richTextBox1.Text += "顯示兩位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P", CultureInfo.InvariantCulture) + "\n";
-            richTextBox1.Text += "顯示十位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P10", CultureInfo.InvariantCulture) + "\n";
 
-            //表示錢號的方法
-            int n = 12345;
-            richTextBox1.Text += "新台幣 " + n.ToString("C") + " 元\n";
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //設定Tabs
+
+            richTextBox1.Clear();
+
+            richTextBox1.SelectionTabs = new int[] { 160, 320, 240 };
+            richTextBox1.AcceptsTab = true;
+
+            richTextBox1.Text += "顯示RichTextBox中的Tab功能\n\n";
+            richTextBox1.Text +=
+                "Breakfast\tLunch\tDinner\n" +
+                "Coffee\tSoda\tWine\n" +
+                "Bagel\tSandwich\tSalad\n" +
+                "a\tb\tc\n" +
+                "Fruit\tChips\tTofuburger\n" +
+                "\tCookie\tVeggies";
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -514,52 +505,10 @@ namespace vcs_RichTextBox1
 
         private void button14_Click(object sender, EventArgs e)
         {
-            // Display some sample values.
-            double value = 12.345;
-            long long_size;
-            for (int i = 1; i < 11; i++)
-            {
-                richTextBox1.Text += "數值 : " + value.ToString() + "\t";
-                richTextBox1.Text += "科學記號 : " + value.ToString("E") + "\t" + "檔案大小 : " + value.ToFileSize() + "\t";
-
-                if (value <= long.MaxValue)
-                {
-                    long_size = (long)value;
-                    richTextBox1.Text += "檔案大小 : " + long_size.ToFileSizeApi() + "\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "\n";
-                }
-                value *= 1000;
-            }
-
-            richTextBox1.Text += "\n";
-
-            value = 1023;
-            richTextBox1.Text += "數值 : " + value.ToString() + "\t";
-            richTextBox1.Text += "科學記號 : " + value.ToString("E") + "\t" + "檔案大小 : " + value.ToFileSize() + "\t";
-            long_size = (long)value;
-            richTextBox1.Text += "檔案大小 : " + long_size.ToFileSizeApi() + "\n";
-
-            value = 1024;
-            richTextBox1.Text += "數值 : " + value.ToString() + "\t";
-            richTextBox1.Text += "科學記號 : " + value.ToString("E") + "\t" + "檔案大小 : " + value.ToFileSize() + "\t";
-            long_size = (long)value;
-            richTextBox1.Text += "檔案大小 : " + long_size.ToFileSizeApi() + "\n";
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            int j = 0;
-            for (int i = 0; i < 256; i++)
-            {
-                if ((i < 32) || (i > 126))
-                    j = '-';
-                else
-                    j = i;
-                richTextBox1.Text += i.ToString() + "\t" + (char)j + "\n";
-            }
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -578,31 +527,19 @@ namespace vcs_RichTextBox1
         private void button17_Click(object sender, EventArgs e)
         {
             string str1 = "徹底修改matlab預設工作目錄";
-            string str2 = "ABCDE";
-            /*  ASCII表
-            int j = 0;
-            for (int i = 0; i < 256; i++)
-            {
-                if ((i < 32) || (i > 126))
-                    j = '-';
-                else
-                    j = i;
-                richTextBox1.Text += i.ToString() + "\t" + (char)j + "\n";
-            }
-            */
             for (int i = 0; i < str1.Length; i++)
             {
                 richTextBox1.Text += i.ToString() + "\t" + str1[i] + "\t" + Convert.ToString(((int)str1[i]), 16) + "\n";
             }
+
+            string str2 = "ABCDE";
             for (int i = 0; i < str2.Length; i++)
             {
                 richTextBox1.Text += i.ToString() + "\t" + str2[i] + "\t" + Convert.ToString(((int)str2[i]), 16) + "\n";
             }
-            richTextBox1.Text += "\n文字編碼都是Unicode編碼 Unicode (Big-Endian) 	1201 	utf-16BE\n";
-        }
 
-        private void button18_Click(object sender, EventArgs e)
-        {
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
             //string input = "Hello World!";
             string input = "基本運算制作USB启动盘ウィキペディア???世?生?????概?表????";
             char[] values = input.ToCharArray();
@@ -618,16 +555,19 @@ namespace vcs_RichTextBox1
             richTextBox1.Text += "\n文字編碼都是Unicode編碼 Unicode (Big-Endian) 	1201 	utf-16BE\n";
         }
 
-        //用WordPad編輯
+        private void button18_Click(object sender, EventArgs e)
+        {
+        }
+
+        //用WordPad編輯rtf檔
         // Allow the user to edit the file with WordPad.
         private void button19_Click(object sender, EventArgs e)
         {
+            string rtf_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\text.rtf";
+
             // Hide.
             this.ShowInTaskbar = false;
             this.Hide();
-
-            // Save the current text into the file.
-            richTextBox_rtf.SaveFile(rtf_filename);
 
             // We will open rtf_filename with wordpad.exe.
             ProcessStartInfo start_info = new ProcessStartInfo("wordpad.exe", rtf_filename);
@@ -641,13 +581,9 @@ namespace vcs_RichTextBox1
             // Wait for wordpad to finish.
             process.WaitForExit();
 
-            // Reload the file.
-            richTextBox_rtf.LoadFile(rtf_filename);
-
             // Unhide.
             this.ShowInTaskbar = true;
             this.Show();
-
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -675,6 +611,18 @@ namespace vcs_RichTextBox1
         }
 
         private void button26_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button29_Click(object sender, EventArgs e)
         {
         }
 
@@ -789,12 +737,12 @@ namespace vcs_RichTextBox1
 
         private void bt_analyze_Click(object sender, EventArgs e)
         {
-            richTextBox3.Text += "分析RichTextBox1的內容\n";
-            richTextBox3.Text += "RichTextBox1, lines = " + richTextBox1.Lines.Length.ToString() + "\t";
-            richTextBox3.Text += "content : \n";
+            richTextBox2.Text += "分析RichTextBox1的內容\n";
+            richTextBox2.Text += "RichTextBox1, lines = " + richTextBox1.Lines.Length.ToString() + "\t";
+            richTextBox2.Text += "content : \n";
             for (int i = 0; i < richTextBox1.Lines.Length; i++)
             {
-                richTextBox3.Text += "i = " + i.ToString() + "\t" + richTextBox1.Lines[i].Trim() + "\tlen = \t" + richTextBox1.Lines[i].Trim().Length.ToString() + "\n";
+                richTextBox2.Text += "i = " + i.ToString() + "\t" + richTextBox1.Lines[i].Trim() + "\tlen = \t" + richTextBox1.Lines[i].Trim().Length.ToString() + "\n";
             }
         }
 
@@ -833,17 +781,6 @@ namespace vcs_RichTextBox1
 
         private void bt_open3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
-            try
-            {
-                string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\SAMPO(PA63)變頻分離式室外機功能規格書_2014.08.18doc.rtf";
-
-                richTextBox1.LoadFile(filename);
-            }
-            catch (FileNotFoundException)
-            {
-                MessageBox.Show("File not found!");
-            }
         }
 
         private void bt_font_Click(object sender, EventArgs e)
@@ -909,11 +846,11 @@ namespace vcs_RichTextBox1
             try
             {
                 richTextBox1.SaveFile(filename, RichTextBoxStreamType.PlainText);    //將richTextBox的資料寫入到指定的文字檔
-                richTextBox3.Text += "存檔完成, 檔名 : " + filename + "\n";
+                richTextBox2.Text += "存檔完成, 檔名 : " + filename + "\n";
             }
             catch (System.Exception err)
             {
-                richTextBox3.Text += "存檔失敗, 原因 : " + err.Message + "\n";
+                richTextBox2.Text += "存檔失敗, 原因 : " + err.Message + "\n";
             }
         }
 
@@ -926,15 +863,11 @@ namespace vcs_RichTextBox1
             StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式            
             sw.Write(richTextBox1.Text);
             sw.Close();
-            richTextBox3.Text += "存檔完成, 檔名 : " + filename + "\n";
+            richTextBox2.Text += "存檔完成, 檔名 : " + filename + "\n";
         }
 
         private void bt_save3_Click(object sender, EventArgs e)
         {
-            //另存RTF檔
-            string filename = Application.StartupPath + "\\rtf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".rtf";
-            richTextBox1.SaveFile(filename, RichTextBoxStreamType.RichText);
-            richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
 
         // Display the word under the mouse.
@@ -954,7 +887,10 @@ namespace vcs_RichTextBox1
         {
             // Get the character's position.
             int pos = rch.GetCharIndexFromPosition(new Point(x, y));
-            if (pos <= 0) return "";
+            if (pos <= 0)
+            {
+                return "";
+            }
 
             // Find the start of the word.
             string txt = rch.Text;
@@ -965,7 +901,10 @@ namespace vcs_RichTextBox1
                 // Allow digits, letters, and underscores
                 // as part of the word.
                 char ch = txt[start_pos];
-                if (!char.IsLetterOrDigit(ch) && !(ch == '_')) break;
+                if (!char.IsLetterOrDigit(ch) && !(ch == '_'))
+                {
+                    break;
+                }
             }
             start_pos++;
 
@@ -974,25 +913,19 @@ namespace vcs_RichTextBox1
             for (end_pos = pos; end_pos < txt.Length; end_pos++)
             {
                 char ch = txt[end_pos];
-                if (!char.IsLetterOrDigit(ch) && !(ch == '_')) break;
+                if (!char.IsLetterOrDigit(ch) && !(ch == '_'))
+                {
+                    break;
+                }
             }
             end_pos--;
 
             // Return the result.
-            if (start_pos > end_pos) return "";
+            if (start_pos > end_pos)
+            {
+                return "";
+            }
             return txt.Substring(start_pos, end_pos - start_pos + 1);
-        }
-
-        // Save the current text into the file.
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            richTextBox_rtf.SaveFile(rtf_filename);
-        }
-
-        private void richTextBox3_LinkClicked(object sender, LinkClickedEventArgs e)
-        {
-            this.Text = e.LinkText;//設置與窗體關聯的文本
-            Process.Start("firefox", e.LinkText);// 在firefox瀏覽器中瀏覽單擊的超鏈接
         }
 
         private void richTextBox1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -1011,9 +944,27 @@ namespace vcs_RichTextBox1
             Font f = this.richTextBox1.Font;
             lb_richtextbox1.Text = "richTextBox1,  " + f.Name + ",  " + f.Size;
         }
+
+        private void bt_open_rtf_Click(object sender, EventArgs e)
+        {
+            //富文字格式（Rich Text Format）即RTF格式，又稱多文字格式
+
+            string rtf_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\text.rtf";
+            //string rtf_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\SAMPO(PA63)變頻分離式室外機功能規格書_2014.08.18doc.rtf";
+
+            richTextBox_rtf.LoadFile(rtf_filename);
+        }
+
+        private void bt_save_rtf_Click(object sender, EventArgs e)
+        {
+            //另存RTF檔
+            string rtf_filename = "tmp_rtf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".rtf";
+            richTextBox_rtf.SaveFile(rtf_filename);
+            //richTextBox_rtf.SaveFile(rtf_filename, RichTextBoxStreamType.RichText);
+            richTextBox2.Text += "已存檔 : " + rtf_filename + "\n";
+        }
     }
 }
-
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

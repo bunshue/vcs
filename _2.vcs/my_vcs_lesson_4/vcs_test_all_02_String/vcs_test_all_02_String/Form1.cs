@@ -21,6 +21,7 @@ namespace vcs_test_all_02_String
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+            show_numbers();
         }
 
         void show_item_location()
@@ -69,29 +70,40 @@ namespace vcs_test_all_02_String
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
+            groupBox1.Size = new Size(326, 650);
             groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
             richTextBox1.Size = new Size(500, 650);
-            richTextBox1.Location = new Point(x_st + dx * 5 - 120, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 5 - 70, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
             y_st = 20;
+            dy = 70;
+            int dd = 26;
+            lb_number0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            lb_number1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            lb_number2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            lb_number3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            lb_number4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            lb_number5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            lb_number6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            lb_number0b.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            lb_number1b.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            lb_number2b.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            lb_number3b.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            lb_number4b.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            lb_number5b.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            lb_number6b.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            tb_number0.Location = new Point(x_st + dx * 0, y_st + dy * 0 + dd);
+            tb_number1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd);
+            tb_number2.Location = new Point(x_st + dx * 0, y_st + dy * 2 + dd);
+            tb_number3.Location = new Point(x_st + dx * 0, y_st + dy * 3 + dd);
+            tb_number4.Location = new Point(x_st + dx * 0, y_st + dy * 4 + dd);
+            tb_number5.Location = new Point(x_st + dx * 0, y_st + dy * 5 + dd);
+            tb_number6.Location = new Point(x_st + dx * 0, y_st + dy * 6 + dd);
 
-            dy = 50;
-
-            textBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            bt_show_number1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            bt_show_number2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            bt_show_number3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            bt_show_number4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            bt_show_number5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            bt_show_number6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            bt_show_number7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-
-            richTextBox1.Text += "\n\n";
-
-            this.Size = new Size(1440, 710);
+            this.Size = new Size(1490, 710);
             this.Text = "vcs_test_all_02_String";
         }
 
@@ -114,7 +126,6 @@ namespace vcs_test_all_02_String
             for (i = 0; i < byte_array1.Length; i++)
             {
                 richTextBox1.Text += "i = " + i.ToString() + "\t" + (char)byte_array1[i] + "\t" + byte_array1[i].ToString("X2") + "\n";
-
             }
 
             richTextBox1.Text += "\n拜列 轉 字串, GetString\n";
@@ -146,7 +157,7 @@ namespace vcs_test_all_02_String
             }
             richTextBox1.Text += "\n";
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             str = "Welcome to the United States and have a nice day.";
             string[] split_str = new string[5];
@@ -158,7 +169,7 @@ namespace vcs_test_all_02_String
                 richTextBox1.Text += tmp + "\n";
             }
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //分割字串範例
             string[] word_S = { };
@@ -175,11 +186,9 @@ namespace vcs_test_all_02_String
                 richTextBox1.Text += tmp + "\n";
             }
 
-            //6060
-
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //字串的 Split & Join
-            //字串的 Split && Join
 
             string ols_string = "This is a book.";
 
@@ -197,7 +206,7 @@ namespace vcs_test_all_02_String
             string result = String.Join("*", values);
             richTextBox1.Text += "用星號連結組合起來 : " + result + "\n";
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //split
             str = "this-is-a-lion-mouse";
@@ -209,7 +218,7 @@ namespace vcs_test_all_02_String
                 richTextBox1.Text += s + "\n";
             }
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //字串處理
             string str1 = "群曜醫電股份有限公司 Insight Medical Solutions Inc.";
@@ -222,10 +231,9 @@ namespace vcs_test_all_02_String
             str2 = str1.Substring(8, 10);   //從8取10
             richTextBox1.Text += "原字串從8取10字:\t" + str2 + "\n";
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //String用法
-
             //String用法 Remove
 
             str = "0123456789";
@@ -286,54 +294,53 @@ namespace vcs_test_all_02_String
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string my_string = "   歡迎來到 The United States of America     ";
+            string old_string = "   歡迎來到 The United States of America     ";
 
             richTextBox1.Text += "\n";
-            richTextBox1.Text += "字串:\t" + my_string + " 長度:\t" + my_string.Length.ToString() + "\n";
+            richTextBox1.Text += "字串:\t" + old_string + " 長度:\t" + old_string.Length.ToString() + "\n";
 
             string new_string = "";
-            for (int i = 0; i < my_string.Length; i++)
+            for (int i = 0; i < old_string.Length; i++)
             {
-                new_string += my_string[i];
+                new_string += old_string[i];
             }
-            richTextBox1.Text += "原字串:\t" + my_string + " 長度:\t" + my_string.Length.ToString() + "\n";
+            richTextBox1.Text += "原字串:\t" + old_string + " 長度:\t" + old_string.Length.ToString() + "\n";
             richTextBox1.Text += "新字串:\t" + new_string + " 長度:\t" + new_string.Length.ToString() + "\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            string my_string = "   歡迎來到 The United States of America     ";
+            string old_string = "   歡迎來到 The United States of America     ";
 
             int result;
-            richTextBox1.Text += "\n原字串:\t" + my_string + "\n";
-            result = my_string.IndexOf("m", 0);
+            richTextBox1.Text += "\n原字串:\t" + old_string + "\n";
+            result = old_string.IndexOf("m", 0);
             richTextBox1.Text += "找到m在 " + result.ToString() + "\n";
 
-            result = my_string.IndexOf("m", result + 1);
+            result = old_string.IndexOf("m", result + 1);
             richTextBox1.Text += "找到m在 " + result.ToString() + "\n";
 
-            result = my_string.IndexOf("m", result + 1);
+            result = old_string.IndexOf("m", result + 1);
             richTextBox1.Text += "找到m在 " + result.ToString() + "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            string my_string = "   歡迎來到 The United States of America     ";
-
+            string old_string = "   歡迎來到 The United States of America     ";
             string new_string = "";
-            richTextBox1.Text += "\n原字串:\t" + my_string + "\n";
-            new_string = my_string.Substring(29, 7);
+            richTextBox1.Text += "\n原字串:\t" + old_string + "\n";
+            new_string = old_string.Substring(29, 7);
             richTextBox1.Text += "從第29字開始抓7字:\t" + new_string + "\n";
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            string my_string = "   歡迎來到 The United States of America     ";
+            string old_string = "   歡迎來到 The United States of America     ";
             string new_string = "";
-            new_string = my_string.Trim();
+            new_string = old_string.Trim();
 
             richTextBox1.Text += "\n";
-            richTextBox1.Text += "原字串:\t|" + my_string + "|\t長度:\t" + my_string.Length.ToString() + "\n";
+            richTextBox1.Text += "原字串:\t|" + old_string + "|\t長度:\t" + old_string.Length.ToString() + "\n";
             richTextBox1.Text += "新字串:\t|" + new_string + "|\t長度:\t" + new_string.Length.ToString() + "\n";
         }
 
@@ -345,8 +352,6 @@ namespace vcs_test_all_02_String
         {
             //各種進位轉換
 
-            //各種進位轉換
-
             //十六進位顯示
             int value1 = 65535;
             int value2 = 0x12345;
@@ -356,7 +361,6 @@ namespace vcs_test_all_02_String
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            //16進制與字符串、字節數組之間的轉換
             //16進制與字符串、字節數組之間的轉換
 
             //十進制轉二進制
@@ -428,7 +432,6 @@ namespace vcs_test_all_02_String
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //10進位轉各種進位
-            //10進位轉各種進位
             int a, n, r;
 
             a = 12345;
@@ -475,13 +478,7 @@ namespace vcs_test_all_02_String
 
             richTextBox1.Text += "16進位\t" + s + "\n";
 
-
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
 
         }
 
@@ -533,10 +530,9 @@ namespace vcs_test_all_02_String
 
             richTextBox1.Text += "ccc\n";
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            //StringBuilder語法2
-            //StringBuilder
+            //StringBuilder語法
 
             //建立StringBuilder物件
             StringBuilder text = new StringBuilder();
@@ -586,44 +582,16 @@ namespace vcs_test_all_02_String
         {
             //string.Format語法
 
+            string animal1 = "Cats";
+            string animal2 = "dogs";
+            string result = string.Format("{0} and {1} are animals.", animal1, animal2);
+            richTextBox1.Text += "string.Format 的用法\n結果 : " + result + "\n";
 
-        }
+            string filename = string.Format("bmp_{0:yyyyMMdd_HHmmss}.bmp", DateTime.Now);
+            richTextBox1.Text += "用string.Format製作依時檔案\n結果 : " + filename + "\n";
 
-        private void button12_Click(object sender, EventArgs e)
-        {
-            //格式化列印
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            Console.WriteLine("The value 99999 in different ways:");
-            Console.WriteLine("c format : {0:c}", 99999);
-            Console.WriteLine("d9 format : {0:d9}", 99999);
-            Console.WriteLine("f format : {0:f3}", 99999);
-            Console.WriteLine("g format : {0:g}", 99999);
-
-            Console.WriteLine("n format : {0:n}", 99999);
-            Console.WriteLine("E format : {0:E}", 99999);
-            Console.WriteLine("e format : {0:e}", 99999);
-            Console.WriteLine("X format : {0:X}", 99999);
-            Console.WriteLine("x format : {0:x}", 99999);
-
-            int x1 = 3;
-            int x2 = 8;
-            int x3 = 3;
-            int x4 = 4;
-            int x5 = 2;
-            string xx = String.Format("{0}-{1}-{2}-{3}-{4}", x1, x2, x3, x4, x5);
-            richTextBox1.Text += "xx = " + xx + "\n";
-
-            richTextBox1.Text += "String.Format是將指定的 String類型的數據中的每個格式項替換為相應對象的值的文本等效項。 \n";
-
-            string p1 = "Jackie";
-            string p2 = "Aillo";
-
-            richTextBox1.Text += String.Format("Hello {0}, I'm {1}", p1, p2) + "\n";
-            richTextBox1.Text += String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo") + "\n";
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
             //格式化列印 String.Format
 
             int a, b, c, d, ee, f;
@@ -656,9 +624,7 @@ namespace vcs_test_all_02_String
             int bb = 1234567890;
             richTextBox1.Text += bb.ToString("N0", CultureInfo.InvariantCulture) + "\n";
 
-
             double used = 197594525696;
-
             double used2 = 184.02;
 
             //已使用空間 :	197,593,485,312 個位元組	184.02 GB
@@ -667,6 +633,54 @@ namespace vcs_test_all_02_String
 
             //richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString("N0", CultureInfo.InvariantCulture) + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
 
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //格式化列印
+
+            Console.WriteLine("The value 99999 in different ways:");
+            Console.WriteLine("c format : {0:c}", 99999);
+            Console.WriteLine("d9 format : {0:d9}", 99999);
+            Console.WriteLine("f format : {0:f3}", 99999);
+            Console.WriteLine("g format : {0:g}", 99999);
+
+            Console.WriteLine("n format : {0:n}", 99999);
+            Console.WriteLine("E format : {0:E}", 99999);
+            Console.WriteLine("e format : {0:e}", 99999);
+            Console.WriteLine("X format : {0:X}", 99999);
+            Console.WriteLine("x format : {0:x}", 99999);
+
+            int x1 = 3;
+            int x2 = 8;
+            int x3 = 3;
+            int x4 = 4;
+            int x5 = 2;
+            string xx = String.Format("{0}-{1}-{2}-{3}-{4}", x1, x2, x3, x4, x5);
+            richTextBox1.Text += "xx = " + xx + "\n";
+
+            richTextBox1.Text += "String.Format是將指定的 String類型的數據中的每個格式項替換為相應對象的值的文本等效項。\n";
+
+            string p1 = "Jackie";
+            string p2 = "Aillo";
+
+            string string1 = String.Format("Hello {0}, I'm {1}", p1, p2);
+            richTextBox1.Text += "string1 = " + string1 + "\n";
+
+            string string2 = String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo");
+            richTextBox1.Text += "string2 = " + string2 + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            int aaa = 15;
+            string s2 = string.Format("{0:00000}", Convert.ToInt16(aaa));
+            richTextBox1.Text += s2 + "\n";
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -679,7 +693,6 @@ namespace vcs_test_all_02_String
             String fnum = String.Format("{0:00000}", Convert.ToInt16(snum));
             //MessageBox.Show("原始字串 : " + snum + "\n 透過 PadLeft : " + pnum + "\n 透過 String.Format : " + fnum);
 
-
             int n = 123;
             string zz1 = n.ToString().PadLeft(10, '0');
             richTextBox1.Text += "\nzz1 = " + zz1 + "\n";
@@ -691,30 +704,87 @@ namespace vcs_test_all_02_String
             string zz3 = n.ToString("D10");
             richTextBox1.Text += "zz3 = " + zz3 + "\n";
 
-        }
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-        private void button15_Click(object sender, EventArgs e)
-        {
-            //string.Format 的用法
-            string animal1 = "Cats";
-            string animal2 = "dogs";
-            string result = string.Format("{0} and {1} are animals.", animal1, animal2);
-            richTextBox1.Text += "string.Format 的用法\n結果 : " + result + "\n";
+            //左邊補空 和 右邊補空
 
-            string filename = string.Format("bmp_{0:yyyyMMdd_HHmmss}.bmp", DateTime.Now);
-            richTextBox1.Text += "用string.Format製作依時檔案\n結果 : " + filename + "\n";
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
             richTextBox1.Text += "左邊補空 和 右邊補空, 共5位數\n";
             int i = 123;
             richTextBox1.Text += "左邊補空-----" + i.ToString().PadLeft(5) + "-----\n";       //共5位數, 左邊補空
             richTextBox1.Text += "右邊補空-----" + i.ToString().PadRight(5) + "-----\n";       //共5位數, 右邊補空
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //數字前面補0或是其他符號
+
+            string s1 = "";
+            string s2 = "";
+            int a = 123;
+            s1 = a.ToString().PadLeft(32, '0');
+
+            richTextBox1.Text += "s1 " + s1 + "\n";
+
+            s2 = a.ToString().PadLeft(32, '#');
+
+            richTextBox1.Text += "s2 " + s2 + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //格式化字符串，向長度小於30的字符串末尾添加特定字符，補足n個字符，使用String類的PadRight(int,char)方法：
+            String str = "1234";
+            str = str.PadRight(30, ' '); //向長度小於30的字符串末尾添加空格，補足30個字符
+
+            richTextBox1.Text += "string.PadLeft 字串統一長度或補字元\n";
+            int aa = 15;
+            string ss1 = aa.ToString().PadLeft(10, '-');
+            richTextBox1.Text += ss1 + "\n";
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //用科學記號與檔案大小表示數值
+
+            // Display some sample values.
+            double value = 12.345;
+            long long_size;
+            for (int i = 1; i < 11; i++)
+            {
+                richTextBox1.Text += "數值 : " + value.ToString() + "\t";
+                richTextBox1.Text += "科學記號 : " + value.ToString("E") + "\t" + "檔案大小 : " + value.ToFileSize() + "\t";
+
+                if (value <= long.MaxValue)
+                {
+                    long_size = (long)value;
+                    richTextBox1.Text += "檔案大小 : " + long_size.ToFileSizeApi() + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "\n";
+                }
+                value *= 1000;
+            }
+
+            richTextBox1.Text += "\n";
+
+            value = 1023;
+            richTextBox1.Text += "數值 : " + value.ToString() + "\t";
+            richTextBox1.Text += "科學記號 : " + value.ToString("E") + "\t" + "檔案大小 : " + value.ToFileSize() + "\t";
+            long_size = (long)value;
+            richTextBox1.Text += "檔案大小 : " + long_size.ToFileSizeApi() + "\n";
+
+            value = 1024;
+            richTextBox1.Text += "數值 : " + value.ToString() + "\t";
+            richTextBox1.Text += "科學記號 : " + value.ToString("E") + "\t" + "檔案大小 : " + value.ToFileSize() + "\t";
+            long_size = (long)value;
+            richTextBox1.Text += "檔案大小 : " + long_size.ToFileSizeApi() + "\n";
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -788,7 +858,6 @@ namespace vcs_test_all_02_String
             Console.WriteLine("{0 :dd/MM/yyyy}", System.DateTime.Now); // 27-03-2012
 
             // TODO: Implement Functionality Here
-
         }
 
         //數字大寫顯示 ST
@@ -997,6 +1066,11 @@ namespace vcs_test_all_02_String
             richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("en-US")) + "\n";
             richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("ja-JP")) + "\n";
             richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("fr-FR")) + "\n";
+
+
+            //表示錢號的方法
+            int n = 12345;
+            richTextBox1.Text += "新台幣 " + n.ToString("C") + " 元\n";
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -1070,23 +1144,7 @@ namespace vcs_test_all_02_String
 
         private void button25_Click(object sender, EventArgs e)
         {
-            //數字前面補0或是其他符號
-
-            string s1 = "";
-            string s2 = "";
-            int a = 123;
-            s1 = a.ToString().PadLeft(32, '0');
-
-            richTextBox1.Text += "s1 " + s1 + "\n";
-
-
-            s2 = a.ToString().PadLeft(32, '#');
-
-            richTextBox1.Text += "s2 " + s2 + "\n";
-
-
             int nudPoint = 3;
-
             double num = 123.123456789;
             //根據nudPoint.Value來格式化顯示的數值
             richTextBox1.Text += num.ToString("F" + nudPoint.ToString()) + "\n";
@@ -1095,36 +1153,11 @@ namespace vcs_test_all_02_String
             //在 C# 中使用 String.Format() 方法將字串轉換為十六進位制
             string decString = "0123456789";
             var hexString = string.Join("", decString.Select(c => String.Format("{0:X2}", Convert.ToInt32(c))));
-
             richTextBox1.Text += "hexString :" + hexString + "\n";
-
-            //String.Format是將指定的 String類型的數據中的每個格式項替換為相應對象的值的文本等效項。 
-
-            string p1 = "Jackie";
-            string p2 = "Aillo";
-
-            string string1 = String.Format("Hello {0}, I'm {1}", p1, p2);
-
-            string string2 = String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo");
-
-            richTextBox1.Text += "string1 = " + string1 + "\n";
-            richTextBox1.Text += "string2 = " + string2 + "\n";
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
-            //格式化字符串，向長度小於30的字符串末尾添加特定字符，補足n個字符，使用String類的PadRight(int,char)方法：
-            String str = "1234";
-            str = str.PadRight(30, ' '); //向長度小於30的字符串末尾添加空格，補足30個字符
-
-            richTextBox1.Text += "string.PadLeft 字串統一長度或補字元\n";
-            int a = 15;
-            string s1 = a.ToString().PadLeft(10, '-');
-            richTextBox1.Text += s1 + "\n";
-
-            string s2 = string.Format("{0:00000}", Convert.ToInt16(a));
-            richTextBox1.Text += s2 + "\n";
-
 
         }
 
@@ -1138,47 +1171,48 @@ namespace vcs_test_all_02_String
 
         private void button29_Click(object sender, EventArgs e)
         {
+            //CultureInfo
+
+            //顯示百分比 錢號的方法
+            //要using System.Globalization; //for CultureInfo
+            int a = 2;
+            int b = 3;
+            richTextBox1.Text += "顯示一位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P1", CultureInfo.InvariantCulture) + "\n";
+            richTextBox1.Text += "顯示兩位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P", CultureInfo.InvariantCulture) + "\n";
+            richTextBox1.Text += "顯示十位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P10", CultureInfo.InvariantCulture) + "\n";
+
         }
 
-        int value1 = 12345;
-        double value2 = 123.456;
-        double value3 = 1234.5678;
-
-        private void bt_show_number1_Click(object sender, EventArgs e)
+        void show_numbers()
         {
-            textBox1.Text = value1.ToString("D");
-        }
+            int value1 = 12345;
+            double value2 = 123.456;
+            double value3 = 1234.5678;
+            tb_number0.Text = value1.ToString("D");
+            tb_number1.Text = value1.ToString("D8");
+            tb_number2.Text = value1.ToString("X");
+            tb_number3.Text = value1.ToString("X8");
 
-        private void bt_show_number2_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = value1.ToString("D8");
-        }
+            tb_number4.Text = value2.ToString("F4");
+            //tb_number4.Text = value2.ToString("F0");  //四捨五入到整數
+            //tb_number4.Text = value2.ToString("F1");  //四捨五入到小數點下一位
+            tb_number5.Text = value3.ToString("#0.00");         //格式化，小數點後留2位，四捨五入
+            tb_number6.Text = value3.ToString("#00000.000");   //格式化，小數點前5位，小數點後留3位四捨五入
 
-        private void bt_show_number3_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = value1.ToString("X");
-        }
-
-        private void bt_show_number4_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = value1.ToString("X8");
-        }
-
-        private void bt_show_number5_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = value2.ToString("F4");
-            //textBox1.Text = value2.ToString("F0");  //四捨五入到整數
-            //textBox1.Text = value2.ToString("F1");  //四捨五入到小數點下一位
-        }
-
-        private void bt_show_number6_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = value3.ToString("#0.00");         //格式化，小數點後留2位，四捨五入
-        }
-
-        private void bt_show_number7_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = value3.ToString("#00000.000");   //格式化，小數點前5位，小數點後留3位四捨五入
+            lb_number0.Text = "十進位顯示";
+            lb_number1.Text = "十進位顯示(8位)";
+            lb_number2.Text = "十六進位顯示";
+            lb_number3.Text = "十六進位顯示(8位)";
+            lb_number4.Text = "小數點後4位";
+            lb_number5.Text = "小數點後2位";
+            lb_number6.Text = "小數點前5位後3位";
+            lb_number0b.Text = value1.ToString();
+            lb_number1b.Text = value1.ToString();
+            lb_number2b.Text = value1.ToString();
+            lb_number3b.Text = value1.ToString();
+            lb_number4b.Text = value2.ToString();
+            lb_number5b.Text = value3.ToString();
+            lb_number6b.Text = value3.ToString();
         }
     }
 }

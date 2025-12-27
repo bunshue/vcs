@@ -60,15 +60,28 @@
             this.button27 = new System.Windows.Forms.Button();
             this.button28 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.bt_show_number7 = new System.Windows.Forms.Button();
-            this.bt_show_number6 = new System.Windows.Forms.Button();
-            this.bt_show_number5 = new System.Windows.Forms.Button();
-            this.bt_show_number4 = new System.Windows.Forms.Button();
-            this.bt_show_number3 = new System.Windows.Forms.Button();
-            this.bt_show_number2 = new System.Windows.Forms.Button();
-            this.bt_show_number1 = new System.Windows.Forms.Button();
+            this.lb_number6b = new System.Windows.Forms.Label();
+            this.lb_number5b = new System.Windows.Forms.Label();
+            this.lb_number4b = new System.Windows.Forms.Label();
+            this.lb_number3b = new System.Windows.Forms.Label();
+            this.lb_number2b = new System.Windows.Forms.Label();
+            this.lb_number1b = new System.Windows.Forms.Label();
+            this.lb_number0b = new System.Windows.Forms.Label();
+            this.lb_number6 = new System.Windows.Forms.Label();
+            this.lb_number5 = new System.Windows.Forms.Label();
+            this.lb_number4 = new System.Windows.Forms.Label();
+            this.lb_number3 = new System.Windows.Forms.Label();
+            this.lb_number2 = new System.Windows.Forms.Label();
+            this.lb_number1 = new System.Windows.Forms.Label();
+            this.lb_number0 = new System.Windows.Forms.Label();
+            this.tb_number6 = new System.Windows.Forms.TextBox();
+            this.tb_number5 = new System.Windows.Forms.TextBox();
+            this.tb_number4 = new System.Windows.Forms.TextBox();
+            this.tb_number3 = new System.Windows.Forms.TextBox();
+            this.tb_number2 = new System.Windows.Forms.TextBox();
+            this.tb_number1 = new System.Windows.Forms.TextBox();
+            this.tb_number0 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,11 +99,11 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(625, 535);
+            this.richTextBox1.Location = new System.Drawing.Point(637, 536);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "李白 越中覽古\n越王勾踐破吳歸，\n戰士還家盡錦衣。\n宮女如花滿春殿，\n只今唯有鷓鴣飛。";
+            this.richTextBox1.Text = "";
             // 
             // button2
             // 
@@ -207,7 +220,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 60);
             this.button12.TabIndex = 13;
-            this.button12.Text = "格式化列印";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -218,7 +230,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(200, 60);
             this.button13.TabIndex = 14;
-            this.button13.Text = "格式化列印 String.Format";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -240,7 +251,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 16;
-            this.button15.Text = "string.Format 的用法";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -251,7 +261,6 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 60);
             this.button16.TabIndex = 17;
-            this.button16.Text = "左邊補空 和 右邊補空";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -262,6 +271,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(200, 60);
             this.button17.TabIndex = 18;
+            this.button17.Text = "用科學記號與檔案大小表示數值";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -290,7 +300,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(625, 563);
+            this.bt_clear.Location = new System.Drawing.Point(637, 564);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(77, 42);
             this.bt_clear.TabIndex = 46;
@@ -382,7 +392,6 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(200, 60);
             this.button26.TabIndex = 54;
-            this.button26.Text = "新進測試2";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -393,7 +402,6 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(200, 60);
             this.button27.TabIndex = 55;
-            this.button27.Text = "新進測試3";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -404,7 +412,6 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(200, 60);
             this.button28.TabIndex = 56;
-            this.button28.Text = "新進測試4";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -415,128 +422,269 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(200, 60);
             this.button29.TabIndex = 57;
-            this.button29.Text = "新進測試5";
+            this.button29.Text = "CultureInfo";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.Color.Green;
-            this.textBox1.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.Color.White;
-            this.textBox1.Location = new System.Drawing.Point(7, 16);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(260, 45);
-            this.textBox1.TabIndex = 58;
-            this.textBox1.Text = "0";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.bt_show_number7);
-            this.groupBox1.Controls.Add(this.bt_show_number6);
-            this.groupBox1.Controls.Add(this.bt_show_number5);
-            this.groupBox1.Controls.Add(this.bt_show_number4);
-            this.groupBox1.Controls.Add(this.bt_show_number3);
-            this.groupBox1.Controls.Add(this.bt_show_number2);
-            this.groupBox1.Controls.Add(this.bt_show_number1);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.lb_number6b);
+            this.groupBox1.Controls.Add(this.lb_number5b);
+            this.groupBox1.Controls.Add(this.lb_number4b);
+            this.groupBox1.Controls.Add(this.lb_number3b);
+            this.groupBox1.Controls.Add(this.lb_number2b);
+            this.groupBox1.Controls.Add(this.lb_number1b);
+            this.groupBox1.Controls.Add(this.lb_number0b);
+            this.groupBox1.Controls.Add(this.lb_number6);
+            this.groupBox1.Controls.Add(this.lb_number5);
+            this.groupBox1.Controls.Add(this.lb_number4);
+            this.groupBox1.Controls.Add(this.lb_number3);
+            this.groupBox1.Controls.Add(this.lb_number2);
+            this.groupBox1.Controls.Add(this.lb_number1);
+            this.groupBox1.Controls.Add(this.lb_number0);
+            this.groupBox1.Controls.Add(this.tb_number6);
+            this.groupBox1.Controls.Add(this.tb_number5);
+            this.groupBox1.Controls.Add(this.tb_number4);
+            this.groupBox1.Controls.Add(this.tb_number3);
+            this.groupBox1.Controls.Add(this.tb_number2);
+            this.groupBox1.Controls.Add(this.tb_number1);
+            this.groupBox1.Controls.Add(this.tb_number0);
             this.groupBox1.Location = new System.Drawing.Point(637, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(280, 420);
+            this.groupBox1.Size = new System.Drawing.Size(265, 392);
             this.groupBox1.TabIndex = 73;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "數字顯示";
             // 
-            // bt_show_number7
+            // lb_number6b
             // 
-            this.bt_show_number7.Font = new System.Drawing.Font("標楷體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_show_number7.Location = new System.Drawing.Point(7, 343);
-            this.bt_show_number7.Name = "bt_show_number7";
-            this.bt_show_number7.Size = new System.Drawing.Size(260, 40);
-            this.bt_show_number7.TabIndex = 74;
-            this.bt_show_number7.Text = "1234.5678小數點前5位後3位";
-            this.bt_show_number7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bt_show_number7.UseVisualStyleBackColor = true;
-            this.bt_show_number7.Click += new System.EventHandler(this.bt_show_number7_Click);
+            this.lb_number6b.AutoSize = true;
+            this.lb_number6b.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_number6b.Location = new System.Drawing.Point(213, 360);
+            this.lb_number6b.Name = "lb_number6b";
+            this.lb_number6b.Size = new System.Drawing.Size(45, 21);
+            this.lb_number6b.TabIndex = 113;
+            this.lb_number6b.Text = "num";
             // 
-            // bt_show_number6
+            // lb_number5b
             // 
-            this.bt_show_number6.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_show_number6.Location = new System.Drawing.Point(7, 297);
-            this.bt_show_number6.Name = "bt_show_number6";
-            this.bt_show_number6.Size = new System.Drawing.Size(260, 40);
-            this.bt_show_number6.TabIndex = 74;
-            this.bt_show_number6.Text = "1234.5678小數點後2位";
-            this.bt_show_number6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bt_show_number6.UseVisualStyleBackColor = true;
-            this.bt_show_number6.Click += new System.EventHandler(this.bt_show_number6_Click);
+            this.lb_number5b.AutoSize = true;
+            this.lb_number5b.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_number5b.Location = new System.Drawing.Point(213, 336);
+            this.lb_number5b.Name = "lb_number5b";
+            this.lb_number5b.Size = new System.Drawing.Size(45, 21);
+            this.lb_number5b.TabIndex = 112;
+            this.lb_number5b.Text = "num";
             // 
-            // bt_show_number5
+            // lb_number4b
             // 
-            this.bt_show_number5.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_show_number5.Location = new System.Drawing.Point(7, 251);
-            this.bt_show_number5.Name = "bt_show_number5";
-            this.bt_show_number5.Size = new System.Drawing.Size(260, 40);
-            this.bt_show_number5.TabIndex = 74;
-            this.bt_show_number5.Text = "123.456小數點後4位";
-            this.bt_show_number5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bt_show_number5.UseVisualStyleBackColor = true;
-            this.bt_show_number5.Click += new System.EventHandler(this.bt_show_number5_Click);
+            this.lb_number4b.AutoSize = true;
+            this.lb_number4b.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_number4b.Location = new System.Drawing.Point(213, 312);
+            this.lb_number4b.Name = "lb_number4b";
+            this.lb_number4b.Size = new System.Drawing.Size(45, 21);
+            this.lb_number4b.TabIndex = 111;
+            this.lb_number4b.Text = "num";
             // 
-            // bt_show_number4
+            // lb_number3b
             // 
-            this.bt_show_number4.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_show_number4.Location = new System.Drawing.Point(7, 205);
-            this.bt_show_number4.Name = "bt_show_number4";
-            this.bt_show_number4.Size = new System.Drawing.Size(260, 40);
-            this.bt_show_number4.TabIndex = 74;
-            this.bt_show_number4.Text = "十六進位顯示(8位)";
-            this.bt_show_number4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bt_show_number4.UseVisualStyleBackColor = true;
-            this.bt_show_number4.Click += new System.EventHandler(this.bt_show_number4_Click);
+            this.lb_number3b.AutoSize = true;
+            this.lb_number3b.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_number3b.Location = new System.Drawing.Point(213, 282);
+            this.lb_number3b.Name = "lb_number3b";
+            this.lb_number3b.Size = new System.Drawing.Size(45, 21);
+            this.lb_number3b.TabIndex = 110;
+            this.lb_number3b.Text = "num";
             // 
-            // bt_show_number3
+            // lb_number2b
             // 
-            this.bt_show_number3.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_show_number3.Location = new System.Drawing.Point(7, 159);
-            this.bt_show_number3.Name = "bt_show_number3";
-            this.bt_show_number3.Size = new System.Drawing.Size(260, 40);
-            this.bt_show_number3.TabIndex = 74;
-            this.bt_show_number3.Text = "十六進位顯示";
-            this.bt_show_number3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bt_show_number3.UseVisualStyleBackColor = true;
-            this.bt_show_number3.Click += new System.EventHandler(this.bt_show_number3_Click);
+            this.lb_number2b.AutoSize = true;
+            this.lb_number2b.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_number2b.Location = new System.Drawing.Point(213, 255);
+            this.lb_number2b.Name = "lb_number2b";
+            this.lb_number2b.Size = new System.Drawing.Size(45, 21);
+            this.lb_number2b.TabIndex = 109;
+            this.lb_number2b.Text = "num";
             // 
-            // bt_show_number2
+            // lb_number1b
             // 
-            this.bt_show_number2.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_show_number2.Location = new System.Drawing.Point(7, 113);
-            this.bt_show_number2.Name = "bt_show_number2";
-            this.bt_show_number2.Size = new System.Drawing.Size(260, 40);
-            this.bt_show_number2.TabIndex = 74;
-            this.bt_show_number2.Text = "十進位顯示(8位)";
-            this.bt_show_number2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bt_show_number2.UseVisualStyleBackColor = true;
-            this.bt_show_number2.Click += new System.EventHandler(this.bt_show_number2_Click);
+            this.lb_number1b.AutoSize = true;
+            this.lb_number1b.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_number1b.Location = new System.Drawing.Point(213, 228);
+            this.lb_number1b.Name = "lb_number1b";
+            this.lb_number1b.Size = new System.Drawing.Size(45, 21);
+            this.lb_number1b.TabIndex = 108;
+            this.lb_number1b.Text = "num";
             // 
-            // bt_show_number1
+            // lb_number0b
             // 
-            this.bt_show_number1.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_show_number1.Location = new System.Drawing.Point(7, 67);
-            this.bt_show_number1.Name = "bt_show_number1";
-            this.bt_show_number1.Size = new System.Drawing.Size(260, 40);
-            this.bt_show_number1.TabIndex = 74;
-            this.bt_show_number1.Text = "十進位顯示";
-            this.bt_show_number1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bt_show_number1.UseVisualStyleBackColor = true;
-            this.bt_show_number1.Click += new System.EventHandler(this.bt_show_number1_Click);
+            this.lb_number0b.AutoSize = true;
+            this.lb_number0b.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_number0b.Location = new System.Drawing.Point(213, 204);
+            this.lb_number0b.Name = "lb_number0b";
+            this.lb_number0b.Size = new System.Drawing.Size(45, 21);
+            this.lb_number0b.TabIndex = 107;
+            this.lb_number0b.Text = "num";
+            // 
+            // lb_number6
+            // 
+            this.lb_number6.AutoSize = true;
+            this.lb_number6.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_number6.Location = new System.Drawing.Point(213, 174);
+            this.lb_number6.Name = "lb_number6";
+            this.lb_number6.Size = new System.Drawing.Size(45, 21);
+            this.lb_number6.TabIndex = 106;
+            this.lb_number6.Text = "num";
+            // 
+            // lb_number5
+            // 
+            this.lb_number5.AutoSize = true;
+            this.lb_number5.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_number5.Location = new System.Drawing.Point(213, 150);
+            this.lb_number5.Name = "lb_number5";
+            this.lb_number5.Size = new System.Drawing.Size(45, 21);
+            this.lb_number5.TabIndex = 105;
+            this.lb_number5.Text = "num";
+            // 
+            // lb_number4
+            // 
+            this.lb_number4.AutoSize = true;
+            this.lb_number4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_number4.Location = new System.Drawing.Point(213, 126);
+            this.lb_number4.Name = "lb_number4";
+            this.lb_number4.Size = new System.Drawing.Size(45, 21);
+            this.lb_number4.TabIndex = 104;
+            this.lb_number4.Text = "num";
+            // 
+            // lb_number3
+            // 
+            this.lb_number3.AutoSize = true;
+            this.lb_number3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_number3.Location = new System.Drawing.Point(213, 96);
+            this.lb_number3.Name = "lb_number3";
+            this.lb_number3.Size = new System.Drawing.Size(45, 21);
+            this.lb_number3.TabIndex = 103;
+            this.lb_number3.Text = "num";
+            // 
+            // lb_number2
+            // 
+            this.lb_number2.AutoSize = true;
+            this.lb_number2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_number2.Location = new System.Drawing.Point(213, 69);
+            this.lb_number2.Name = "lb_number2";
+            this.lb_number2.Size = new System.Drawing.Size(45, 21);
+            this.lb_number2.TabIndex = 102;
+            this.lb_number2.Text = "num";
+            // 
+            // lb_number1
+            // 
+            this.lb_number1.AutoSize = true;
+            this.lb_number1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_number1.Location = new System.Drawing.Point(213, 42);
+            this.lb_number1.Name = "lb_number1";
+            this.lb_number1.Size = new System.Drawing.Size(45, 21);
+            this.lb_number1.TabIndex = 101;
+            this.lb_number1.Text = "num";
+            // 
+            // lb_number0
+            // 
+            this.lb_number0.AutoSize = true;
+            this.lb_number0.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_number0.Location = new System.Drawing.Point(213, 18);
+            this.lb_number0.Name = "lb_number0";
+            this.lb_number0.Size = new System.Drawing.Size(45, 21);
+            this.lb_number0.TabIndex = 100;
+            this.lb_number0.Text = "num";
+            // 
+            // tb_number6
+            // 
+            this.tb_number6.BackColor = System.Drawing.Color.Green;
+            this.tb_number6.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_number6.ForeColor = System.Drawing.Color.White;
+            this.tb_number6.Location = new System.Drawing.Point(6, 327);
+            this.tb_number6.Name = "tb_number6";
+            this.tb_number6.Size = new System.Drawing.Size(200, 39);
+            this.tb_number6.TabIndex = 81;
+            this.tb_number6.Text = "0";
+            this.tb_number6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tb_number5
+            // 
+            this.tb_number5.BackColor = System.Drawing.Color.Green;
+            this.tb_number5.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_number5.ForeColor = System.Drawing.Color.White;
+            this.tb_number5.Location = new System.Drawing.Point(6, 276);
+            this.tb_number5.Name = "tb_number5";
+            this.tb_number5.Size = new System.Drawing.Size(200, 39);
+            this.tb_number5.TabIndex = 80;
+            this.tb_number5.Text = "0";
+            this.tb_number5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tb_number4
+            // 
+            this.tb_number4.BackColor = System.Drawing.Color.Green;
+            this.tb_number4.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_number4.ForeColor = System.Drawing.Color.White;
+            this.tb_number4.Location = new System.Drawing.Point(6, 225);
+            this.tb_number4.Name = "tb_number4";
+            this.tb_number4.Size = new System.Drawing.Size(200, 39);
+            this.tb_number4.TabIndex = 79;
+            this.tb_number4.Text = "0";
+            this.tb_number4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tb_number3
+            // 
+            this.tb_number3.BackColor = System.Drawing.Color.Green;
+            this.tb_number3.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_number3.ForeColor = System.Drawing.Color.White;
+            this.tb_number3.Location = new System.Drawing.Point(7, 174);
+            this.tb_number3.Name = "tb_number3";
+            this.tb_number3.Size = new System.Drawing.Size(200, 39);
+            this.tb_number3.TabIndex = 78;
+            this.tb_number3.Text = "0";
+            this.tb_number3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tb_number2
+            // 
+            this.tb_number2.BackColor = System.Drawing.Color.Green;
+            this.tb_number2.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_number2.ForeColor = System.Drawing.Color.White;
+            this.tb_number2.Location = new System.Drawing.Point(7, 123);
+            this.tb_number2.Name = "tb_number2";
+            this.tb_number2.Size = new System.Drawing.Size(200, 39);
+            this.tb_number2.TabIndex = 77;
+            this.tb_number2.Text = "0";
+            this.tb_number2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tb_number1
+            // 
+            this.tb_number1.BackColor = System.Drawing.Color.Green;
+            this.tb_number1.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_number1.ForeColor = System.Drawing.Color.White;
+            this.tb_number1.Location = new System.Drawing.Point(7, 72);
+            this.tb_number1.Name = "tb_number1";
+            this.tb_number1.Size = new System.Drawing.Size(200, 39);
+            this.tb_number1.TabIndex = 76;
+            this.tb_number1.Text = "0";
+            this.tb_number1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tb_number0
+            // 
+            this.tb_number0.BackColor = System.Drawing.Color.Green;
+            this.tb_number0.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_number0.ForeColor = System.Drawing.Color.White;
+            this.tb_number0.Location = new System.Drawing.Point(7, 21);
+            this.tb_number0.Name = "tb_number0";
+            this.tb_number0.Size = new System.Drawing.Size(200, 39);
+            this.tb_number0.TabIndex = 75;
+            this.tb_number0.Text = "0";
+            this.tb_number0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 652);
+            this.ClientSize = new System.Drawing.Size(944, 652);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
@@ -613,15 +761,28 @@
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.Button button29;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button bt_show_number7;
-        private System.Windows.Forms.Button bt_show_number6;
-        private System.Windows.Forms.Button bt_show_number5;
-        private System.Windows.Forms.Button bt_show_number4;
-        private System.Windows.Forms.Button bt_show_number3;
-        private System.Windows.Forms.Button bt_show_number2;
-        private System.Windows.Forms.Button bt_show_number1;
+        private System.Windows.Forms.TextBox tb_number6;
+        private System.Windows.Forms.TextBox tb_number5;
+        private System.Windows.Forms.TextBox tb_number4;
+        private System.Windows.Forms.TextBox tb_number3;
+        private System.Windows.Forms.TextBox tb_number2;
+        private System.Windows.Forms.TextBox tb_number1;
+        private System.Windows.Forms.TextBox tb_number0;
+        private System.Windows.Forms.Label lb_number6;
+        private System.Windows.Forms.Label lb_number5;
+        private System.Windows.Forms.Label lb_number4;
+        private System.Windows.Forms.Label lb_number3;
+        private System.Windows.Forms.Label lb_number2;
+        private System.Windows.Forms.Label lb_number1;
+        private System.Windows.Forms.Label lb_number0;
+        private System.Windows.Forms.Label lb_number6b;
+        private System.Windows.Forms.Label lb_number5b;
+        private System.Windows.Forms.Label lb_number4b;
+        private System.Windows.Forms.Label lb_number3b;
+        private System.Windows.Forms.Label lb_number2b;
+        private System.Windows.Forms.Label lb_number1b;
+        private System.Windows.Forms.Label lb_number0b;
     }
 }
 

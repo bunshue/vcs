@@ -46,8 +46,8 @@ namespace vcs_Draw_Bitmap
             //button
             x_st = 10;
             y_st = 10;
-            dx = 180;
-            dy = 80;
+            dx = 200+10;
+            dy = 60+10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -59,7 +59,6 @@ namespace vcs_Draw_Bitmap
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -70,7 +69,6 @@ namespace vcs_Draw_Bitmap
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-
             button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
@@ -82,10 +80,15 @@ namespace vcs_Draw_Bitmap
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
+            pictureBox1.Size = new Size(720, 720);
             pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            richTextBox1.Location = new Point(x_st + dx * 7 + 10, y_st + dy * 0);
 
+            richTextBox1.Size = new Size(200, 720);                 
+            richTextBox1.Location = new Point(x_st + dx * 6 + 100, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1600, 790);
+            this.Text = "vcs_Draw_Bitmap";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)

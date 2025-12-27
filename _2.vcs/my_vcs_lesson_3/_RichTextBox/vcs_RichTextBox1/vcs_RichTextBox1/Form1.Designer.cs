@@ -66,12 +66,9 @@
             this.bt_font = new System.Windows.Forms.Button();
             this.bt_clear2 = new System.Windows.Forms.Button();
             this.richTextBox_rtf = new System.Windows.Forms.RichTextBox();
-            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
-            this.bt_clear3 = new System.Windows.Forms.Button();
             this.bt_save2 = new System.Windows.Forms.Button();
             this.lb_richtextbox1 = new System.Windows.Forms.Label();
             this.lb_richtextbox2 = new System.Windows.Forms.Label();
-            this.lb_richtextbox3 = new System.Windows.Forms.Label();
             this.lb_richtextbox_rtf = new System.Windows.Forms.Label();
             this.lb_richtextbox1_text = new System.Windows.Forms.Label();
             this.lb_richtextbox1_fx1 = new System.Windows.Forms.Label();
@@ -92,6 +89,11 @@
             this.bt_search = new System.Windows.Forms.Button();
             this.bt_open3 = new System.Windows.Forms.Button();
             this.bt_save3 = new System.Windows.Forms.Button();
+            this.bt_open_rtf = new System.Windows.Forms.Button();
+            this.bt_save_rtf = new System.Windows.Forms.Button();
+            this.button27 = new System.Windows.Forms.Button();
+            this.button28 = new System.Windows.Forms.Button();
+            this.button29 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -228,17 +230,17 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 12;
-            this.button11.Text = "顯示百分比 錢號的方法";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button12
             // 
-            this.button12.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button12.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button12.Location = new System.Drawing.Point(208, 138);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 60);
             this.button12.TabIndex = 13;
+            this.button12.Text = "設定Tabs";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -259,7 +261,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 15;
-            this.button14.Text = "用科學記號與檔案大小表示數值";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -270,7 +271,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 16;
-            this.button15.Text = "ASCII";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -292,7 +292,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(200, 60);
             this.button17.TabIndex = 18;
-            this.button17.Text = "把字串用ascii顯示出來1";
+            this.button17.Text = "把字串用ascii顯示出來";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -303,7 +303,6 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(200, 60);
             this.button18.TabIndex = 19;
-            this.button18.Text = "把字串用ascii顯示出來2";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -364,7 +363,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(200, 60);
             this.button19.TabIndex = 47;
-            this.button19.Text = "用WordPad編輯";
+            this.button19.Text = "用WordPad編輯rtf檔";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -391,7 +390,7 @@
             // richTextBox2
             // 
             this.richTextBox2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox2.Location = new System.Drawing.Point(414, 453);
+            this.richTextBox2.Location = new System.Drawing.Point(1057, 312);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(100, 100);
             this.richTextBox2.TabIndex = 56;
@@ -417,7 +416,7 @@
             this.bt_open1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_open1.Location = new System.Drawing.Point(687, 222);
             this.bt_open1.Name = "bt_open1";
-            this.bt_open1.Size = new System.Drawing.Size(60, 42);
+            this.bt_open1.Size = new System.Drawing.Size(60, 40);
             this.bt_open1.TabIndex = 75;
             this.bt_open1.Text = "載入";
             this.bt_open1.UseVisualStyleBackColor = true;
@@ -428,7 +427,7 @@
             this.bt_open2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_open2.Location = new System.Drawing.Point(751, 222);
             this.bt_open2.Name = "bt_open2";
-            this.bt_open2.Size = new System.Drawing.Size(60, 42);
+            this.bt_open2.Size = new System.Drawing.Size(60, 40);
             this.bt_open2.TabIndex = 76;
             this.bt_open2.Text = "開啟";
             this.bt_open2.UseVisualStyleBackColor = true;
@@ -439,7 +438,7 @@
             this.bt_font.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_font.Location = new System.Drawing.Point(880, 222);
             this.bt_font.Name = "bt_font";
-            this.bt_font.Size = new System.Drawing.Size(60, 42);
+            this.bt_font.Size = new System.Drawing.Size(60, 40);
             this.bt_font.TabIndex = 77;
             this.bt_font.Text = "字型";
             this.bt_font.UseVisualStyleBackColor = true;
@@ -448,9 +447,9 @@
             // bt_clear2
             // 
             this.bt_clear2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear2.Location = new System.Drawing.Point(431, 485);
+            this.bt_clear2.Location = new System.Drawing.Point(1074, 344);
             this.bt_clear2.Name = "bt_clear2";
-            this.bt_clear2.Size = new System.Drawing.Size(67, 42);
+            this.bt_clear2.Size = new System.Drawing.Size(60, 40);
             this.bt_clear2.TabIndex = 80;
             this.bt_clear2.Text = "clear";
             this.bt_clear2.UseVisualStyleBackColor = true;
@@ -458,32 +457,11 @@
             // 
             // richTextBox_rtf
             // 
-            this.richTextBox_rtf.Location = new System.Drawing.Point(415, 535);
+            this.richTextBox_rtf.Location = new System.Drawing.Point(1057, 418);
             this.richTextBox_rtf.Name = "richTextBox_rtf";
             this.richTextBox_rtf.Size = new System.Drawing.Size(100, 100);
             this.richTextBox_rtf.TabIndex = 89;
             this.richTextBox_rtf.Text = "";
-            // 
-            // richTextBox3
-            // 
-            this.richTextBox3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox3.Location = new System.Drawing.Point(520, 453);
-            this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(100, 100);
-            this.richTextBox3.TabIndex = 91;
-            this.richTextBox3.Text = resources.GetString("richTextBox3.Text");
-            this.richTextBox3.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox3_LinkClicked);
-            // 
-            // bt_clear3
-            // 
-            this.bt_clear3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear3.Location = new System.Drawing.Point(530, 489);
-            this.bt_clear3.Name = "bt_clear3";
-            this.bt_clear3.Size = new System.Drawing.Size(67, 42);
-            this.bt_clear3.TabIndex = 92;
-            this.bt_clear3.Text = "clear";
-            this.bt_clear3.UseVisualStyleBackColor = true;
-            this.bt_clear3.Click += new System.EventHandler(this.bt_clear3_Click);
             // 
             // bt_save2
             // 
@@ -517,21 +495,11 @@
             this.lb_richtextbox2.TabIndex = 100;
             this.lb_richtextbox2.Text = "各種RichTextBox的用途";
             // 
-            // lb_richtextbox3
-            // 
-            this.lb_richtextbox3.AutoSize = true;
-            this.lb_richtextbox3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_richtextbox3.Location = new System.Drawing.Point(614, 365);
-            this.lb_richtextbox3.Name = "lb_richtextbox3";
-            this.lb_richtextbox3.Size = new System.Drawing.Size(250, 24);
-            this.lb_richtextbox3.TabIndex = 101;
-            this.lb_richtextbox3.Text = "各種RichTextBox的用途";
-            // 
             // lb_richtextbox_rtf
             // 
             this.lb_richtextbox_rtf.AutoSize = true;
             this.lb_richtextbox_rtf.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_richtextbox_rtf.Location = new System.Drawing.Point(614, 389);
+            this.lb_richtextbox_rtf.Location = new System.Drawing.Point(614, 365);
             this.lb_richtextbox_rtf.Name = "lb_richtextbox_rtf";
             this.lb_richtextbox_rtf.Size = new System.Drawing.Size(250, 24);
             this.lb_richtextbox_rtf.TabIndex = 102;
@@ -542,7 +510,7 @@
             this.lb_richtextbox1_text.AutoSize = true;
             this.lb_richtextbox1_text.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_richtextbox1_text.ForeColor = System.Drawing.Color.Red;
-            this.lb_richtextbox1_text.Location = new System.Drawing.Point(617, 413);
+            this.lb_richtextbox1_text.Location = new System.Drawing.Point(617, 389);
             this.lb_richtextbox1_text.Name = "lb_richtextbox1_text";
             this.lb_richtextbox1_text.Size = new System.Drawing.Size(376, 24);
             this.lb_richtextbox1_text.TabIndex = 105;
@@ -552,7 +520,7 @@
             // 
             this.lb_richtextbox1_fx1.AutoSize = true;
             this.lb_richtextbox1_fx1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_richtextbox1_fx1.Location = new System.Drawing.Point(620, 437);
+            this.lb_richtextbox1_fx1.Location = new System.Drawing.Point(620, 413);
             this.lb_richtextbox1_fx1.Name = "lb_richtextbox1_fx1";
             this.lb_richtextbox1_fx1.Size = new System.Drawing.Size(292, 24);
             this.lb_richtextbox1_fx1.TabIndex = 106;
@@ -562,7 +530,7 @@
             // 
             this.lb_richtextbox1_fx2.AutoSize = true;
             this.lb_richtextbox1_fx2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_richtextbox1_fx2.Location = new System.Drawing.Point(620, 461);
+            this.lb_richtextbox1_fx2.Location = new System.Drawing.Point(620, 437);
             this.lb_richtextbox1_fx2.Name = "lb_richtextbox1_fx2";
             this.lb_richtextbox1_fx2.Size = new System.Drawing.Size(281, 24);
             this.lb_richtextbox1_fx2.TabIndex = 107;
@@ -572,7 +540,7 @@
             // 
             this.lb_richtextbox1_fx3.AutoSize = true;
             this.lb_richtextbox1_fx3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_richtextbox1_fx3.Location = new System.Drawing.Point(620, 485);
+            this.lb_richtextbox1_fx3.Location = new System.Drawing.Point(620, 461);
             this.lb_richtextbox1_fx3.Name = "lb_richtextbox1_fx3";
             this.lb_richtextbox1_fx3.Size = new System.Drawing.Size(281, 24);
             this.lb_richtextbox1_fx3.TabIndex = 108;
@@ -582,7 +550,7 @@
             // 
             this.lb_richtextbox1_fx4.AutoSize = true;
             this.lb_richtextbox1_fx4.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_richtextbox1_fx4.Location = new System.Drawing.Point(620, 510);
+            this.lb_richtextbox1_fx4.Location = new System.Drawing.Point(620, 486);
             this.lb_richtextbox1_fx4.Name = "lb_richtextbox1_fx4";
             this.lb_richtextbox1_fx4.Size = new System.Drawing.Size(274, 24);
             this.lb_richtextbox1_fx4.TabIndex = 109;
@@ -592,7 +560,7 @@
             // 
             this.lb_richtextbox1_fx5.AutoSize = true;
             this.lb_richtextbox1_fx5.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_richtextbox1_fx5.Location = new System.Drawing.Point(620, 534);
+            this.lb_richtextbox1_fx5.Location = new System.Drawing.Point(620, 510);
             this.lb_richtextbox1_fx5.Name = "lb_richtextbox1_fx5";
             this.lb_richtextbox1_fx5.Size = new System.Drawing.Size(274, 24);
             this.lb_richtextbox1_fx5.TabIndex = 110;
@@ -602,7 +570,7 @@
             // 
             this.lb_richtextbox1_fx6.AutoSize = true;
             this.lb_richtextbox1_fx6.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_richtextbox1_fx6.Location = new System.Drawing.Point(620, 558);
+            this.lb_richtextbox1_fx6.Location = new System.Drawing.Point(620, 534);
             this.lb_richtextbox1_fx6.Name = "lb_richtextbox1_fx6";
             this.lb_richtextbox1_fx6.Size = new System.Drawing.Size(305, 24);
             this.lb_richtextbox1_fx6.TabIndex = 111;
@@ -625,7 +593,7 @@
             this.bt_clear1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_clear1.Location = new System.Drawing.Point(814, 264);
             this.bt_clear1.Name = "bt_clear1";
-            this.bt_clear1.Size = new System.Drawing.Size(60, 42);
+            this.bt_clear1.Size = new System.Drawing.Size(60, 40);
             this.bt_clear1.TabIndex = 114;
             this.bt_clear1.Text = "clear";
             this.bt_clear1.UseVisualStyleBackColor = true;
@@ -636,7 +604,7 @@
             this.bt_analyze.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_analyze.Location = new System.Drawing.Point(621, 222);
             this.bt_analyze.Name = "bt_analyze";
-            this.bt_analyze.Size = new System.Drawing.Size(60, 42);
+            this.bt_analyze.Size = new System.Drawing.Size(60, 40);
             this.bt_analyze.TabIndex = 115;
             this.bt_analyze.Text = "分析";
             this.bt_analyze.UseVisualStyleBackColor = true;
@@ -647,7 +615,7 @@
             this.bt_backcolor.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_backcolor.Location = new System.Drawing.Point(624, 264);
             this.bt_backcolor.Name = "bt_backcolor";
-            this.bt_backcolor.Size = new System.Drawing.Size(60, 42);
+            this.bt_backcolor.Size = new System.Drawing.Size(60, 40);
             this.bt_backcolor.TabIndex = 116;
             this.bt_backcolor.Text = "背色";
             this.bt_backcolor.UseVisualStyleBackColor = true;
@@ -702,7 +670,7 @@
             this.bt_part1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_part1.Location = new System.Drawing.Point(687, 264);
             this.bt_part1.Name = "bt_part1";
-            this.bt_part1.Size = new System.Drawing.Size(60, 42);
+            this.bt_part1.Size = new System.Drawing.Size(60, 40);
             this.bt_part1.TabIndex = 121;
             this.bt_part1.Text = "部分";
             this.bt_part1.UseVisualStyleBackColor = true;
@@ -713,7 +681,7 @@
             this.bt_search.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_search.Location = new System.Drawing.Point(751, 264);
             this.bt_search.Name = "bt_search";
-            this.bt_search.Size = new System.Drawing.Size(60, 42);
+            this.bt_search.Size = new System.Drawing.Size(60, 40);
             this.bt_search.TabIndex = 122;
             this.bt_search.Text = "搜尋";
             this.bt_search.UseVisualStyleBackColor = true;
@@ -724,7 +692,7 @@
             this.bt_open3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_open3.Location = new System.Drawing.Point(814, 222);
             this.bt_open3.Name = "bt_open3";
-            this.bt_open3.Size = new System.Drawing.Size(60, 42);
+            this.bt_open3.Size = new System.Drawing.Size(60, 40);
             this.bt_open3.TabIndex = 123;
             this.bt_open3.Text = "開啟 RTF";
             this.bt_open3.UseVisualStyleBackColor = true;
@@ -742,11 +710,68 @@
             this.bt_save3.UseVisualStyleBackColor = true;
             this.bt_save3.Click += new System.EventHandler(this.bt_save3_Click);
             // 
+            // bt_open_rtf
+            // 
+            this.bt_open_rtf.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_open_rtf.Location = new System.Drawing.Point(1057, 473);
+            this.bt_open_rtf.Name = "bt_open_rtf";
+            this.bt_open_rtf.Size = new System.Drawing.Size(40, 40);
+            this.bt_open_rtf.TabIndex = 125;
+            this.bt_open_rtf.Text = "開";
+            this.bt_open_rtf.UseVisualStyleBackColor = true;
+            this.bt_open_rtf.Click += new System.EventHandler(this.bt_open_rtf_Click);
+            // 
+            // bt_save_rtf
+            // 
+            this.bt_save_rtf.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_save_rtf.Location = new System.Drawing.Point(1103, 473);
+            this.bt_save_rtf.Name = "bt_save_rtf";
+            this.bt_save_rtf.Size = new System.Drawing.Size(40, 40);
+            this.bt_save_rtf.TabIndex = 126;
+            this.bt_save_rtf.Text = "存";
+            this.bt_save_rtf.UseVisualStyleBackColor = true;
+            this.bt_save_rtf.Click += new System.EventHandler(this.bt_save_rtf_Click);
+            // 
+            // button27
+            // 
+            this.button27.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button27.Location = new System.Drawing.Point(413, 451);
+            this.button27.Name = "button27";
+            this.button27.Size = new System.Drawing.Size(200, 60);
+            this.button27.TabIndex = 127;
+            this.button27.UseVisualStyleBackColor = true;
+            this.button27.Click += new System.EventHandler(this.button27_Click);
+            // 
+            // button28
+            // 
+            this.button28.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button28.Location = new System.Drawing.Point(413, 512);
+            this.button28.Name = "button28";
+            this.button28.Size = new System.Drawing.Size(200, 60);
+            this.button28.TabIndex = 128;
+            this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
+            // 
+            // button29
+            // 
+            this.button29.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button29.Location = new System.Drawing.Point(413, 571);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(200, 60);
+            this.button29.TabIndex = 129;
+            this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1164, 642);
+            this.Controls.Add(this.button29);
+            this.Controls.Add(this.button28);
+            this.Controls.Add(this.button27);
+            this.Controls.Add(this.bt_save_rtf);
+            this.Controls.Add(this.bt_open_rtf);
             this.Controls.Add(this.bt_save3);
             this.Controls.Add(this.bt_open3);
             this.Controls.Add(this.bt_search);
@@ -767,12 +792,9 @@
             this.Controls.Add(this.lb_richtextbox1_fx1);
             this.Controls.Add(this.lb_richtextbox1_text);
             this.Controls.Add(this.lb_richtextbox_rtf);
-            this.Controls.Add(this.lb_richtextbox3);
             this.Controls.Add(this.lb_richtextbox2);
             this.Controls.Add(this.lb_richtextbox1);
             this.Controls.Add(this.bt_save2);
-            this.Controls.Add(this.bt_clear3);
-            this.Controls.Add(this.richTextBox3);
             this.Controls.Add(this.richTextBox_rtf);
             this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.bt_font);
@@ -809,7 +831,6 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -855,12 +876,9 @@
         private System.Windows.Forms.Button bt_font;
         private System.Windows.Forms.Button bt_clear2;
         private System.Windows.Forms.RichTextBox richTextBox_rtf;
-        private System.Windows.Forms.RichTextBox richTextBox3;
-        private System.Windows.Forms.Button bt_clear3;
         private System.Windows.Forms.Button bt_save2;
         private System.Windows.Forms.Label lb_richtextbox1;
         private System.Windows.Forms.Label lb_richtextbox2;
-        private System.Windows.Forms.Label lb_richtextbox3;
         private System.Windows.Forms.Label lb_richtextbox_rtf;
         private System.Windows.Forms.Label lb_richtextbox1_text;
         private System.Windows.Forms.Label lb_richtextbox1_fx1;
@@ -881,6 +899,11 @@
         private System.Windows.Forms.Button bt_search;
         private System.Windows.Forms.Button bt_open3;
         private System.Windows.Forms.Button bt_save3;
+        private System.Windows.Forms.Button bt_open_rtf;
+        private System.Windows.Forms.Button bt_save_rtf;
+        private System.Windows.Forms.Button button27;
+        private System.Windows.Forms.Button button28;
+        private System.Windows.Forms.Button button29;
     }
 }
 
