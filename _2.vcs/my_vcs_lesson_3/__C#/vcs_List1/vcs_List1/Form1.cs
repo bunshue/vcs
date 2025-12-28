@@ -53,6 +53,7 @@ namespace vcs_List1
             button26.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button27.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             button3.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
             richTextBox1.Size = new Size(500, 480);
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 4);
@@ -75,7 +76,6 @@ namespace vcs_List1
                 richTextBox1.Text += "(" + points[i].X.ToString() + "," + points[i].Y.ToString() + ") ";
             }
             richTextBox1.Text += "\n";
-
         }
 
         Random r = new Random();
@@ -209,7 +209,6 @@ namespace vcs_List1
         private void button11_Click(object sender, EventArgs e)
         {
             strings.Clear();
-
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -221,7 +220,6 @@ namespace vcs_List1
             {
                 richTextBox1.Text += strings[i] + "\n";
             }
-
 
             // 可用foreach 取出List 裡的值
             richTextBox1.Text += "\n可用foreach 取出List 裡的值\n";
@@ -285,7 +283,6 @@ namespace vcs_List1
 
             richTextBox1.Text += "排序後:\n";
             show_list(myList);
-
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -311,7 +308,6 @@ namespace vcs_List1
             richTextBox1.Text += "排序後:\n";
             show_list(myList);
 
-
             richTextBox1.Text += "移除一些:\n";
             myList.Remove("sue");
             myList.Remove("john");
@@ -324,7 +320,6 @@ namespace vcs_List1
             myList.Insert(6, "sharon");
             myList.Insert(1, "emily");
             show_list(myList);
-
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -443,11 +438,8 @@ namespace vcs_List1
 
             //刪除第N項
             int N;
-
             N = 1; steps.RemoveAt(N);  //index = N, 刪除第N項
-
             N = 3; steps.RemoveAt(N);  //index = N, 刪除第N項
-
             N = 5; steps.RemoveAt(N);  //index = N, 刪除第N項
 
             if (steps.Count > 0)
@@ -509,7 +501,6 @@ namespace vcs_List1
                 richTextBox1.Text += selected[i].ToString() + " ";
             }
             richTextBox1.Text += "\n";
-
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -564,7 +555,6 @@ namespace vcs_List1
             }
             richTextBox1.Text += "\n";
 
-
             richTextBox1.Text += "增加內容：\n";
             myStringLists.Insert(2, "elephant");
             // 可用foreach 取出List 裡的值
@@ -585,7 +575,6 @@ namespace vcs_List1
             }
             richTextBox1.Text += "\n";
         }
-
 
         public class tb_SensorRecordModel
         {
@@ -726,9 +715,7 @@ namespace vcs_List1
 
             foreach (var item in maxIntList)
             {
-
                 Console.WriteLine(item);
-
             }
 
             intList.Add(6);
@@ -737,7 +724,6 @@ namespace vcs_List1
             {
                 Console.WriteLine(item);
             }
-
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -765,13 +751,32 @@ namespace vcs_List1
             {
                 Console.WriteLine(item);
             }
-
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
             //讀取一個檔案到List
 
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            //把控件做成串列
+
+            List<Button> Clients = new List<Button>();
+
+            Clients.Add(button1);
+            Clients.Add(button2);
+            Clients.Add(button3);
+            Clients.Add(button4);
+            Clients.Add(button5);
+
+            foreach (Button client in Clients)
+            {
+                //client.Text = client.Name;
+                client.BackColor = Color.Pink;
+                richTextBox1.Text += "控件 :" + client.Name + "長度 :" + client.Text.Length.ToString() + "\n";
+            }
         }
     }
 }

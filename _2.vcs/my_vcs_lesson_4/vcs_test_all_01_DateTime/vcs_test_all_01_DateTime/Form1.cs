@@ -51,8 +51,6 @@ namespace vcs_test_all_01_DateTime
             timer1.Interval = 1000;
             timer1.Enabled = true;
 
-            load_listview_data();
-
             this.ShowMoon();
 
             this.monthCalendar1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -122,24 +120,21 @@ namespace vcs_test_all_01_DateTime
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             comboBox1.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            groupBox5.Location = new Point(x_st + dx * 0, y_st + dy * 10);//DateTimePicker
-            groupBox8.Location = new Point(x_st + dx * 1, y_st + dy * 10);//DateTimePicker
-            groupBox9.Location = new Point(x_st + dx * 1 + 250 + 10, y_st + dy * 10);//Timer顯示時間
 
+            groupBox6.Location = new Point(x_st + dx * 2, y_st + dy * 0);//特殊曆法
             groupBox13.Location = new Point(x_st + dx * 2, y_st + dy * 2 - 30);//月相
-            groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 6 - 40); //listView
-            listView1.Location = new Point(5, 10);
-            listView1.Size = new Size(360, 120);
-            bt3.Location = new Point(370, 10);
+
+            groupBox5.Location = new Point(x_st + dx * 2, y_st + dy * 5 + 10);//DateTimePicker
+            groupBox8.Location = new Point(x_st + dx * 2 + 200, y_st + dy * 5 + 10);//DateTimePicker
+            groupBox9.Location = new Point(x_st + dx * 2, y_st + dy * 7 + 50);//Timer顯示時間
 
             groupBox6.Size = new Size(420, 110);
             groupBox8.Size = new Size(250, 160);
             groupBox5.Size = new Size(180, 160);
             groupBox9.Size = new Size(200, 160);
-            groupBox10.Size = new Size(432, 140);
+            groupBox13.Size = new Size(390, 230);
 
-            groupBox6.Location = new Point(x_st + dx * 2, y_st + dy * 0);//特殊曆法
-            richTextBox1.Size = new Size(340, 800);
+            richTextBox1.Size = new Size(340, 700);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
 
             textBox2.Size = new Size(160, 40);
@@ -168,7 +163,7 @@ namespace vcs_test_all_01_DateTime
 
             button17.Text = "CultureInfo\n月名星期名";
 
-            this.Size = new Size(1290, 870);
+            this.Size = new Size(1290, 770);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -534,6 +529,14 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "t\t簡短時間 : " + dt.ToString("t") + "\n";
             richTextBox1.Text += "完整日期時間 : " + dt.ToString("F") + "\n";
             richTextBox1.Text += "簡短日期時間 : " + dt.ToString("f") + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "ToLongDateString : " + dt.ToLongDateString() + "\n";
+            richTextBox1.Text += "ToLongTimeString : " + dt.ToLongTimeString() + "\n";
+            richTextBox1.Text += "ToShortDateString : " + dt.ToShortDateString() + "\n";
+            richTextBox1.Text += "ToShortTimeString : " + dt.ToShortTimeString() + "\n";
+            richTextBox1.Text += "ToString : " + dt.ToString() + "\n";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -1529,8 +1532,6 @@ namespace vcs_test_all_01_DateTime
 
             richTextBox1.Text += "今天是 : " + weekday + "\n";
 
-            return;
-
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             dt = DateTime.Now;
@@ -1966,16 +1967,6 @@ namespace vcs_test_all_01_DateTime
             } return weekstr;
         }
 
-        void load_listview_data()
-        {
-            DateTime dt = DateTime.Now;
-            listView1.Items.Add(new ListViewItem(new String[] { "ToLongDateString", "D", dt.ToLongDateString() }));
-            listView1.Items.Add(new ListViewItem(new String[] { "ToLongTimeString", "T", dt.ToLongTimeString() }));
-            listView1.Items.Add(new ListViewItem(new String[] { "ToShortDateString", "d", dt.ToShortDateString() }));
-            listView1.Items.Add(new ListViewItem(new String[] { "ToShortTimeString", "t", dt.ToShortTimeString() }));
-            listView1.Items.Add(new ListViewItem(new String[] { "ToString", "G", dt.ToString() }));
-        }
-
         private void bt1_Click(object sender, EventArgs e)
         {
             this.TopMost = false;
@@ -2001,19 +1992,6 @@ namespace vcs_test_all_01_DateTime
             //dateTimePicker1.Value = Convert.ToDateTime("2006/3/11 9:15:30");  //特定日期與時間
             //this.dateTimePicker1.Value = DateTime.Today;                      //今天日期
             this.dateTimePicker1.Value = DateTime.Now;                          //現在時刻
-        }
-
-        private void bt3_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "c = " + listView1.Items.Count.ToString() + "\n";
-            for (int i = 0; i < listView1.Items.Count; i++)
-            {
-                for (int j = 0; j < listView1.Items[i].SubItems.Count; j++)
-                {
-                    //richTextBox1.Text += "c2 = " + listView1.Items[i].SubItems.Count.ToString() + "\n";
-                    richTextBox1.Text += "i = " + i.ToString() + listView1.Items[i] + "\tj = " + j.ToString() + listView1.Items[i].SubItems[j] + "\n";
-                }
-            }
         }
 
         // Select an item containing the target string.

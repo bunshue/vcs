@@ -34,11 +34,6 @@ namespace vcs_test_all_03_Syntax
             show_item_location();
             textBox_hex.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
 
-            //For 驗證身份證字號
-            txtInput.MaxLength = 10;//設定字元數最大值
-            //txtInput.Focus();//程式啟動就把焦點移到txtInput
-            this.AcceptButton = button36;//按下enter就觸發button click事件     //要改??
-
             //顯示特殊符號
             lb_symbols_2.Text = "\u0460♪♫π∑∂€£∫⊗≥≅∡∞√∜⇒∊∫ℵ↝ℙ‡ЖЊæ÷";
             tb_symbols_2.Text = "\u0460♪♫π∑∂€£∫⊗≥≅∡∞√∜⇒∊∫ℵ↝ℙ‡ЖЊæ÷";
@@ -59,8 +54,8 @@ namespace vcs_test_all_03_Syntax
             int dy;
 
             //button
-            x_st = 12;
-            y_st = 12;
+            x_st = 10;
+            y_st = 10;
             dx = 200 + 10;
             dy = 60 + 10;
 
@@ -105,46 +100,23 @@ namespace vcs_test_all_03_Syntax
             button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             textBox_ratio.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            bt_parse_data.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-
-            label11.Location = new Point(x_st + dx * 4, y_st + dy * 4 + 5);
-            textBox_hex.Location = new Point(x_st + dx * 4 + 32, y_st + dy * 4);
-            lb_dec.Location = new Point(x_st + dx * 4 + 148, y_st + dy * 4 + 5);
+            label11.Location = new Point(x_st + dx * 4, y_st + dy * 2 + 5);
+            textBox_hex.Location = new Point(x_st + dx * 4 + 32, y_st + dy * 2);
+            lb_dec.Location = new Point(x_st + dx * 4 + 148, y_st + dy * 2 + 5);
             lb_dec.Text = "";
 
             groupBox2.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            groupBox1.Location = new Point(x_st + dx * 5 - 50, y_st + dy * 0);
-            groupBox3.Location = new Point(x_st + dx * 6 - 70, y_st + dy * 0);
-            groupBox4.Location = new Point(x_st + dx * 6 - 70, y_st + dy * 2 + 20);
+            groupBox3.Location = new Point(x_st + dx * 4 + 120, y_st + dy * 0);
+            groupBox4.Location = new Point(x_st + dx * 5 + 80, y_st + dy * 0);
 
-            groupBox5.Size = new Size(500, 280);
-            groupBox5.Location = new Point(x_st + dx * 4, y_st + dy * 5);
-            richTextBox2.Size = new Size(250, 200);
+            groupBox7.Size = new Size(420, 200);
+            groupBox7.Location = new Point(x_st + dx * 4, y_st + dy * 3);
 
-            groupBox6.Size = new Size(400, 100);
-            groupBox7.Size = new Size(400, 200);
-            groupBox6.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            groupBox7.Location = new Point(x_st + dx * 2, y_st + dy * 10);
-
-            /*
-            label1.Location = new Point(x_st + dx * 0 / 2, y_st + dy * 7);
-            label2.Location = new Point(x_st + dx * 1 / 2, y_st + dy * 7);
-            label3.Location = new Point(x_st + dx * 2 / 2, y_st + dy * 7);
-            label4.Location = new Point(x_st + dx * 3 / 2, y_st + dy * 7);
-            label5.Location = new Point(x_st + dx * 4 / 2, y_st + dy * 7);
-
-            label6.Location = new Point(x_st + dx * 0 / 2, y_st + dy * 8);
-            label7.Location = new Point(x_st + dx * 1 / 2, y_st + dy * 8);
-            label8.Location = new Point(x_st + dx * 2 / 2, y_st + dy * 8);
-            label9.Location = new Point(x_st + dx * 3 / 2, y_st + dy * 8);
-            label10.Location = new Point(x_st + dx * 4 / 2, y_st + dy * 8);
-            */
-
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 9);
-            richTextBox1.Size = new Size(450, 240);
+            richTextBox1.Size = new Size(500, 270);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 6);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1400, 960);
+            this.Size = new Size(1390, 760);
             this.Text = "vcs_test_all_03_Syntax";
         }
 
@@ -313,9 +285,23 @@ namespace vcs_test_all_03_Syntax
             }
         }
 
+        //swap範例 ST
+        private void Swap(ref int n1, ref int n2)
+        {
+            int temp = n1;
+            n1 = n2;
+            n2 = temp;
+        }
+
         private void button6_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "swap範例\n";
+            int a = 10, b = 15;
+            richTextBox1.Text += "主程式:呼叫Swap方法前: a = " + a.ToString() + "  b = " + b.ToString() + "\n";
+            Swap(ref a, ref b);
+            richTextBox1.Text += "主程式:呼叫Swap方法後: a = " + a.ToString() + "  b = " + b.ToString() + "\n";
         }
+        //swap範例 SP
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -410,20 +396,6 @@ namespace vcs_test_all_03_Syntax
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //把控件做成串列
-
-            List<Button> Clients = new List<Button>();
-            Clients.Add(button1);
-            Clients.Add(button2);
-            Clients.Add(button3);
-            Clients.Add(button4);
-            Clients.Add(button5);
-
-            foreach (Button client in Clients)
-            {
-                client.Text = client.Name;
-                richTextBox1.Text += "控件 :" + client.Name + "長度 :" + client.Text.Length.ToString() + "\n";
-            }
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -485,6 +457,38 @@ namespace vcs_test_all_03_Syntax
 
         private void button20_Click(object sender, EventArgs e)
         {
+            string xx = "123";
+            string yy = "0";
+            int x;  //被除數
+            int y;  //除數
+
+            try
+            {
+                //可能會出錯的部分, parse, 除法
+                x = int.Parse(xx);
+                y = int.Parse(yy);
+                float result = x / y;
+                richTextBox1.Text += "計算結果 : " + result.ToString() + "\n";
+                richTextBox1.Text += "商為: " + x / y + "\t餘數為: " + x % y + "\n";
+            }
+            catch (FormatException)
+            {
+                richTextBox1.Text += "數值錯誤\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "例外發生\n";
+                richTextBox1.Text += "計算錯誤\t原因 : " + ex + "\n";
+                richTextBox1.Text += "計算錯誤\t原因 : " + ex.GetType().Name + "\n";
+                richTextBox1.Text += "訊息 : " + ex.Message + "\n";
+                richTextBox1.Text += "例外來源 : " + ex.Source + "\n";
+                richTextBox1.Text += "丟出例外的方法 : " + ex.TargetSite + "\n";
+                richTextBox1.Text += "詳細文字說明 : " + ex.ToString() + "\n";
+            }
+            finally
+            {
+                richTextBox1.Text += "計算結束\n";
+            }
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -824,25 +828,14 @@ namespace vcs_test_all_03_Syntax
             Console.WriteLine(person2.Skill);
             Console.WriteLine((person2.Skill & Skill.Cook) > 0); //結果為True，（1111 & 0010 = 0010）
             Console.WriteLine((person2.Skill & Skill.Cook) == Skill.Cook); //結果為True
-
         }
 
-        //swap範例 ST
-        private void Swap(ref int n1, ref int n2)
-        {
-            int temp = n1;
-            n1 = n2;
-            n2 = temp;
-        }
         private void button30_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "swap範例\n";
-            int a = 10, b = 15;
-            richTextBox1.Text += "主程式:呼叫Swap方法前: a = " + a.ToString() + "  b = " + b.ToString() + "\n";
-            Swap(ref a, ref b);
-            richTextBox1.Text += "主程式:呼叫Swap方法後: a = " + a.ToString() + "  b = " + b.ToString() + "\n";
+            //各種Parse範例
+            ParseData parse = new ParseData();
+            parse.Show();
         }
-        //swap範例 SP
 
         private void button31_Click(object sender, EventArgs e)
         {
@@ -1132,34 +1125,6 @@ namespace vcs_test_all_03_Syntax
 
         }
 
-        private void btn_check1_Click(object sender, EventArgs e)
-        {
-            //使用正則表達式判斷字串是否符合手機號碼格式。
-            System.Text.RegularExpressions.Regex rex = new System.Text.RegularExpressions.Regex("^[0-9]{4}-[0-9]{6}$");
-            if (rex.IsMatch(txtInput.Text))
-            {
-                MessageBox.Show("符合");
-            }
-            else
-            {
-                MessageBox.Show("不符合");
-            }
-        }
-
-        private void btn_check2_Click(object sender, EventArgs e)
-        {
-            //使用正則表達式判斷字串是否符合身分證格式。
-            System.Text.RegularExpressions.Regex rex = new System.Text.RegularExpressions.Regex("^[A-Z]{1}[0-9]{9}$");
-            if (rex.IsMatch(txtInput.Text))
-            {
-                MessageBox.Show("符合");
-            }
-            else
-            {
-                MessageBox.Show("不符合");
-            }
-        }
-
         bool check_textbox_hexadecimal(KeyPressEventArgs e)
         {
             // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
@@ -1247,54 +1212,6 @@ namespace vcs_test_all_03_Syntax
             }
         }
 
-        private void btn_check3_Click(object sender, EventArgs e)
-        {
-            if (txtInput.Text.Trim().Length == 10)//長度達十個字才驗證
-            {
-                if (isIdentificationId(txtInput.Text))//驗證身份證字號,正確回傳true
-                {
-                    txtInput.Text = txtInput.Text.ToUpper();//英文自動轉成大寫
-                    MessageBox.Show(txtInput.Text + "是正確的身份證字號", "", MessageBoxButtons.OK, MessageBoxIcon.None);
-                }
-                else//驗證身份證字號,不正確回傳false
-                {
-                    MessageBox.Show("身份證字號有誤", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("身份證字號有誤", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        #region checkID
-        public static bool isIdentificationId(string arg_Identify)
-        {
-            var d = false;
-            if (arg_Identify.Length == 10)
-            {
-                arg_Identify = arg_Identify.ToUpper();
-                if (arg_Identify[0] >= 0x41 && arg_Identify[0] <= 0x5A)
-                {
-                    var a = new[] { 10, 11, 12, 13, 14, 15, 16, 17, 34, 18, 19, 20, 21, 22, 35, 23, 24, 25, 26, 27, 28, 29, 32, 30, 31, 33 };
-                    var b = new int[11];
-                    b[1] = a[(arg_Identify[0]) - 65] % 10;
-                    var c = b[0] = a[(arg_Identify[0]) - 65] / 10;
-                    for (var i = 1; i <= 9; i++)
-                    {
-                        b[i + 1] = arg_Identify[i] - 48;
-                        c += b[i] * (10 - i);
-                    }
-                    if (((c % 10) + b[10]) % 10 == 0)
-                    {
-                        d = true;
-                    }
-                }
-            }
-            return d;
-        }
-        #endregion
-
         // Invoke the method.
         private void bt_call_by_name_Click(object sender, EventArgs e)
         {
@@ -1320,7 +1237,7 @@ namespace vcs_test_all_03_Syntax
             richTextBox1.Text += "執行了 Function2";
         }
 
-        #region 使用相同的函數用Tag區分
+        // 使用相同的函數用Tag區分
         // Use the selected color for the form's background.
         private void button_color(object sender, EventArgs e)
         {
@@ -1329,69 +1246,6 @@ namespace vcs_test_all_03_Syntax
 
             // Convert its Tag value into a color.
             this.BackColor = Color.FromName(btn.Tag.ToString());
-        }
-        #endregion
-
-        // Perform the calculation.
-        private void btnCalculate_Click(object sender, EventArgs e)
-        {
-            // Clear the result (in case the calculation fails).
-            txtResult.Clear();
-
-            try
-            {
-                // Perform the operations that might fail.
-                int x = int.Parse(txtX.Text);
-                int y = int.Parse(txtY.Text);
-                float result = x / y;
-                txtResult.Text = result.ToString();
-            }
-            catch (FormatException)
-            {
-                // A formatting error occurred.
-                // Report the error to the user.
-                richTextBox2.Text += "數值錯誤\n";
-            }
-            catch (Exception ex)
-            {
-                // Some other error occurred.
-                // Report the error to the user.
-                richTextBox2.Text += "計算錯誤\t原因 : " + ex + "\n";
-                richTextBox2.Text += "計算錯誤\t原因 : " + ex.GetType().Name + "\n";
-            }
-            finally
-            {
-                richTextBox2.Text += "計算結束\n";
-            }
-        }
-
-        private void bt_parse_data_Click(object sender, EventArgs e)
-        {
-            //各種Parse範例
-            ParseData parse = new ParseData();
-            parse.Show();
-        }
-
-        private void bt_example_Click(object sender, EventArgs e)
-        {
-            int x;  //被除數
-            int y;  //除數
-
-            x = 30;
-            y = 0;
-
-            try
-            {
-                richTextBox2.Text += "商為: " + x / y + "\t餘數為: " + x % y + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox2.Text += "例外發生\n";
-                richTextBox2.Text += "訊息: " + ex.Message + "\n";
-                richTextBox2.Text += "例外來源: " + ex.Source + "\n";
-                richTextBox2.Text += "丟出例外的方法: " + ex.TargetSite + "\n";
-                richTextBox2.Text += "詳細文字說明: " + ex.ToString() + "\n";
-            }
         }
 
         private float GetAspectRatio(string text)
@@ -1460,3 +1314,21 @@ namespace vcs_test_all_03_Syntax
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+
+*/

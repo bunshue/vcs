@@ -51,15 +51,10 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.bt_clear = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
             this.bt1 = new System.Windows.Forms.Button();
             this.bt2 = new System.Windows.Forms.Button();
-            this.bt3 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -76,7 +71,6 @@
             this.lb_time_interval = new System.Windows.Forms.Label();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.lb_time = new System.Windows.Forms.Label();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.timer_countdown = new System.Windows.Forms.Timer(this.components);
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.btn_moon_today = new System.Windows.Forms.Button();
@@ -88,7 +82,6 @@
             this.groupBox6.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
-            this.groupBox10.SuspendLayout();
             this.groupBox13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -324,34 +317,6 @@
             this.textBox2.Text = "10";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
-            this.listView1.Location = new System.Drawing.Point(14, 21);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(100, 100);
-            this.listView1.TabIndex = 65;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Method";
-            this.columnHeader1.Width = 110;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Equivalent";
-            this.columnHeader2.Width = 80;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Result";
-            this.columnHeader3.Width = 160;
-            // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -395,17 +360,6 @@
             this.bt2.Text = "恢復";
             this.bt2.UseVisualStyleBackColor = true;
             this.bt2.Click += new System.EventHandler(this.bt2_Click);
-            // 
-            // bt3
-            // 
-            this.bt3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt3.Location = new System.Drawing.Point(120, 21);
-            this.bt3.Name = "bt3";
-            this.bt3.Size = new System.Drawing.Size(56, 39);
-            this.bt3.TabIndex = 72;
-            this.bt3.Text = "info";
-            this.bt3.UseVisualStyleBackColor = true;
-            this.bt3.Click += new System.EventHandler(this.bt3_Click);
             // 
             // comboBox1
             // 
@@ -582,16 +536,6 @@
             this.lb_time.TabIndex = 57;
             this.lb_time.Text = "lb_time";
             // 
-            // groupBox10
-            // 
-            this.groupBox10.Controls.Add(this.bt3);
-            this.groupBox10.Controls.Add(this.listView1);
-            this.groupBox10.Location = new System.Drawing.Point(422, 502);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(200, 150);
-            this.groupBox10.TabIndex = 111;
-            this.groupBox10.TabStop = false;
-            // 
             // timer_countdown
             // 
             this.timer_countdown.Interval = 1000;
@@ -667,7 +611,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(875, 681);
             this.Controls.Add(this.groupBox13);
-            this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox6);
@@ -703,7 +646,6 @@
             this.groupBox8.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
-            this.groupBox10.ResumeLayout(false);
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -735,15 +677,10 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Button bt1;
         private System.Windows.Forms.Button bt2;
-        private System.Windows.Forms.Button bt3;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.GroupBox groupBox5;
@@ -758,7 +695,6 @@
         private System.Windows.Forms.Button bt_special_05;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.Timer timer_countdown;
         private System.Windows.Forms.GroupBox groupBox13;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
