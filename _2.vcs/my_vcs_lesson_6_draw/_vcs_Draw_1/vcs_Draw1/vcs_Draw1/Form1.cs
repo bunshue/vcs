@@ -66,108 +66,83 @@ namespace vcs_Draw1
             int y_st;
             int dx;
             int dy;
+            int dd = 40;
 
             //button
-            x_st = 1240;
+            x_st = 1060;
             y_st = 40;
-            dx = 130;
-            dy = 50;
+            dx = 200 + 5;
+            dy = 60 + 5;
 
-            pictureBox_uac.Location = new Point(x_st + dx * 0 - 100, y_st + dy * 0);
-            pictureBox_count.Location = new Point(x_st + dx * 0 - 280, y_st + dy * 4);
+            pictureBox_uac.Location = new Point(40, y_st + dy * 12);
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button7.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button8.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button9.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button12.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button14.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            button15.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button17.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button18.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button19.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            button20.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button23.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button24.Location = new Point(x_st + dx * 4, y_st + dy * 4);
+            comboBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            checkBox1.Location = new Point(x_st + dx * 1 - dd * 1, y_st + dy * 10);
+            bt_eraser.Location = new Point(x_st + dx * 2 - dd * 2, y_st + dy * 10);
+            bt_reset.Location = new Point(x_st + dx * 3 - dd * 3, y_st + dy * 10);
+            bt_save.Location = new Point(x_st + dx * 4 - dd * 4, y_st + dy * 10);
 
-            button25.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button28.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button29.Location = new Point(x_st + dx * 4, y_st + dy * 5);
-
-            button30.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button31.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button32.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button33.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button34.Location = new Point(x_st + dx * 4, y_st + dy * 6);
-
-            button35.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button36.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button37.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button38.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-            button39.Location = new Point(x_st + dx * 4, y_st + dy * 7);
-
-            button40.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button41.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button42.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button43.Location = new Point(x_st + dx * 3, y_st + dy * 8);
-            button44.Location = new Point(x_st + dx * 4, y_st + dy * 8);
-
-            button45.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button46.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button47.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            button48.Location = new Point(x_st + dx * 3, y_st + dy * 9);
-            button49.Location = new Point(x_st + dx * 4, y_st + dy * 9);
-
-            button50.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            button51.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-            button52.Location = new Point(x_st + dx * 2, y_st + dy * 10);
-            button53.Location = new Point(x_st + dx * 3, y_st + dy * 10);
-            button54.Location = new Point(x_st + dx * 4, y_st + dy * 10);
-
-            button55.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            button56.Location = new Point(x_st + dx * 1, y_st + dy * 11);
-            button57.Location = new Point(x_st + dx * 2, y_st + dy * 11);
-            button58.Location = new Point(x_st + dx * 3, y_st + dy * 11);
-            button59.Location = new Point(x_st + dx * 4, y_st + dy * 11);
-
-            bt_eraser.Location = new Point(x_st + dx * 2, y_st + dy * 12);
-            bt_reset.Location = new Point(x_st + dx * 3, y_st + dy * 12);
-            bt_save.Location = new Point(x_st + dx * 4, y_st + dy * 12);
-
-            comboBox1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
-            checkBox1.Location = new Point(x_st + dx * 1, y_st + dy * 12);
-
-            comboBox1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 13);
-            richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y + 80);
-
+            richTextBox1.Size = new Size(600, 200);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            //richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y + 80);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
+            pictureBox1.Size = new Size(400, 500);
             pictureBox1.Location = new Point(20, 20);
 
-            y_st = 800;
-            panel1.Size = new Size(200, 100);
-            panel1.Location = new Point(850, y_st);
-            //panel1.BackColor = Color.Lime;
+            pictureBox_count.Size = new Size(260, 50);
+            pictureBox_count.Location = new Point(550, 990);
 
-            pictureBox_text.Location = new Point(50, y_st + 150 - 30);
+            panel1.Size = new Size(50, 50);
+            panel1.Location = new Point(450, 990);
+            panel1.BackColor = Color.Lime;
+
+            pictureBox_text.Size = new Size(1000, 50);
+            pictureBox_text.Location = new Point(50, 970 - 40);
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -365,73 +340,845 @@ namespace vcs_Draw1
             }
         }
 
+        //基本畫圖1
         private void button0_Click(object sender, EventArgs e)
         {
-            //繪圖圖形的Contains功能
-            Graphics g = this.pictureBox1.CreateGraphics();
-            g.DrawRectangle(Pens.Red, 100, 100, 150, 150);
-            Rectangle rec = new Rectangle(100, 100, 150, 150);
-            Point pt1 = new Point(180, 180);
-            Point pt2 = new Point(280, 280);
-            g.FillEllipse(Brushes.Green, pt1.X, pt1.Y, 20, 20);
-            g.FillEllipse(Brushes.Red, pt2.X, pt2.Y, 20, 20);
+            int W = 1100;
+            int H = 750;
+            if (bitmap1 == null)
+            {
+                open_new_file();
+            }
+            bitmap1 = new Bitmap(W, H);
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
+            pictureBox1.Location = new Point(20, 20);
 
-            if (rec.Contains(pt1))
+            //基本畫圖
+
+            p = new Pen(Color.Green, 3);
+            sb = new SolidBrush(Color.Blue);
+            f = new Font("Times New Roman", 14);
+
+            Rectangle rec;
+            Rectangle[] recs;
+
+            int x_st = 20;
+            int y_st = 20;
+            int dx = 100;
+            int dy = 80;
+            int w = 80;
+            int h = 60;
+
+            //空長方形
+            x_st = 20;
+            y_st = 20;
+            g.DrawString("DrawRectangle", f, sb, new PointF(x_st, y_st));
+
+            x_st += dx;
+            x_st += dx / 2;
+            g.DrawRectangle(p, x_st, y_st, w, h);
+
+            x_st += dx;
+            rec = new Rectangle(x_st, y_st, w, h);
+            g.DrawRectangle(p, rec);
+
+            x_st += dx;
+            g.DrawRectangle(new Pen(Color.Lime), new Rectangle(x_st, y_st, w, h));
+
+            //填滿長方形
+            x_st = W / 2;
+            y_st = 20;
+            g.DrawString("FillRectangle", f, sb, new PointF(x_st, y_st));
+
+            x_st += dx;
+            x_st += dx / 2;
+            g.FillRectangle(sb, x_st, y_st, w, h);
+
+            x_st += dx;
+            rec = new Rectangle(x_st, y_st, w, h);
+            g.FillRectangle(sb, rec);
+
+            x_st += dx;
+            g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(x_st, y_st, w, h));
+
+            //空長方形多個
+            x_st = 20;
+            y_st = 20;
+            y_st += dy;
+            g.DrawString("DrawRectangles", f, sb, new PointF(x_st, y_st));
+
+            x_st += dx;
+            x_st += dx / 2;
+            recs = new Rectangle[4] {
+	            new Rectangle(x_st+0, y_st+0, 50, 80),
+	            new Rectangle(x_st+60, y_st+0, 80, 60),
+	            new Rectangle(x_st+60+90, y_st+0, 100, 75),
+	            new Rectangle(x_st+60+90+110, y_st+0, 50, 70)
+            };
+            g.DrawRectangles(p, recs);
+
+            //填滿長方形多個
+            x_st = W / 2;
+            y_st = 20;
+            y_st += dy;
+            g.DrawString("FillRectangles", f, sb, new PointF(x_st, y_st));
+
+            x_st += dx;
+            x_st += dx / 2;
+            recs = new Rectangle[4] {
+	            new Rectangle(x_st+0, y_st+0, 50, 80),
+	            new Rectangle(x_st+60, y_st+0, 80, 60),
+	            new Rectangle(x_st+60+90, y_st+0, 100, 75),
+	            new Rectangle(x_st+60+90+110, y_st+0, 50, 70)
+            };
+            g.FillRectangles(sb, recs);
+
+            //6060
+
+            //空橢圓形
+            x_st = 20;
+            y_st = 20;
+            y_st += dy * 2;
+            g.DrawString("DrawEllipse", f, sb, new PointF(x_st, y_st));
+
+            x_st += dx;
+            x_st += dx / 2;
+            g.DrawEllipse(p, x_st, y_st, w, h);
+
+            x_st += dx;
+            rec = new Rectangle(x_st, y_st, w, h);
+            g.DrawEllipse(p, rec);
+
+            x_st += dx;
+            g.DrawEllipse(new Pen(Color.Lime), new Rectangle(x_st, y_st, w, h));
+
+            //6060
+
+            //填滿橢圓形
+            x_st = W / 2;
+            y_st = 20;
+            y_st += dy * 2;
+            g.DrawString("FillEllipse", f, sb, new PointF(x_st, y_st));
+
+            x_st += dx;
+            x_st += dx / 2;
+            g.FillEllipse(sb, x_st, y_st, w, h);
+
+            x_st += dx;
+            rec = new Rectangle(x_st, y_st, w, h);
+            g.FillEllipse(sb, rec);
+
+            x_st += dx;
+            g.FillEllipse(new SolidBrush(Color.Lime), new Rectangle(x_st, y_st, w, h));
+
+            //6060
+
+            //空多邊形
+            x_st = 20;
+            y_st = 20;
+            y_st += dy * 3;
+            g.DrawString("DrawPolygon", f, sb, new PointF(x_st, y_st));
+
+            x_st += dx;
+            x_st += dx / 2;
+
+            Point[] points1 = new Point[3];
+            points1[0] = new Point(x_st + 0, y_st + 0);
+            points1[1] = new Point(x_st + 0, y_st + 50);
+            points1[2] = new Point(x_st + 100, y_st + 50);
+            g.DrawPolygon(p, points1);
+
+            x_st += dx;
+            Point[] points2 = { 
+                new Point(x_st+0, y_st+0),
+                new Point(x_st+200, y_st+20),
+                new Point(x_st+200, y_st+60),
+                new Point(x_st+150, y_st+20),
+                new Point(x_st+20, y_st+60) };
+            g.DrawPolygon(Pens.Red, points2);
+
+            //6060
+
+            //填滿多邊形
+            x_st = W / 2;
+            y_st = 20;
+            y_st += dy * 3;
+            g.DrawString("FillPolygon", f, sb, new PointF(x_st, y_st));
+
+            x_st += dx;
+            x_st += dx / 2;
+
+            Point[] points3 = new Point[3];
+            points3[0] = new Point(x_st + 0, y_st + 0);
+            points3[1] = new Point(x_st + 0, y_st + 50);
+            points3[2] = new Point(x_st + 100, y_st + 50);
+            g.FillPolygon(sb, points3);
+
+            x_st += dx;
+            Point[] points4 = { 
+                new Point(x_st+0, y_st+0),
+                new Point(x_st+200, y_st+20),
+                new Point(x_st+200, y_st+60),
+                new Point(x_st+150, y_st+20),
+                new Point(x_st+20, y_st+60) };
+            g.FillPolygon(new SolidBrush(Color.Red), points4);
+
+            //空派形
+            x_st = 20;
+            y_st = 20;
+            y_st += dy * 4;
+            g.DrawString("DrawPie", f, sb, new PointF(x_st, y_st));
+
+            x_st += dx;
+            g.DrawPie(p, x_st, y_st, w, h, 0, 30);
+
+            x_st += dx;
+            g.DrawPie(new Pen(Color.Red), new Rectangle(x_st, y_st, w, h), 180, 30);
+
+            x_st += dx / 2;
+            g.DrawPie(p, x_st, y_st, w, h, 0, -30);
+
+            x_st += dx;
+            g.DrawPie(p, x_st, y_st - 20, w, w, 40, 280);
+
+            //6060
+
+            //填滿派形
+            x_st = W / 2;
+            y_st = 20;
+            y_st += dy * 4;
+            g.DrawString("FillPie", f, sb, new PointF(x_st, y_st));
+
+            x_st += dx;
+            g.FillPie(sb, x_st, y_st, w, h, 0, 30);
+
+            x_st += dx;
+            g.FillPie(new SolidBrush(Color.Red), new Rectangle(x_st, y_st, w, h), 180, 30);
+
+            x_st += dx / 2;
+            g.FillPie(sb, x_st, y_st, w, h, 0, -30);
+
+            x_st += dx;
+            g.FillPie(sb, x_st, y_st - 20, w, w, 40, 280);
+
+            //6060
+
+            //畫分佈餅圖
+            x_st = W - 180;
+            y_st = H - 180;
+            int r = 100;
+            Brush bb = new SolidBrush(Color.Navy);
+            g.FillPie(bb, x_st, y_st, r, r, 0, 90);
+            //畫個Pie，顏色是Pink,位置的x、y在50，大小為r*r，角度為從0度開始，畫90度
+
+            bb = new SolidBrush(Color.Green);
+            g.FillPie(bb, x_st, y_st, r, r, 90, 135);
+            //畫個Pie，顏色是Green,位置大小同上，角度為接著從90度開始，畫135度
+
+            bb = new SolidBrush(Color.Purple);
+            g.FillPie(bb, x_st, y_st, r, r, 225, 135);
+            //畫個Pie，顏色是Purple,位置大小同上，角度為接著從90+135=225度開始 畫135度
+            //如此，這3個pie就會合成一個圓
+
+            //6060
+
+            //畫直線
+            x_st = 20;
+            y_st = 20;
+            y_st += dy * 5;
+            g.DrawString("DrawLine", f, sb, new PointF(x_st, y_st));
+
+            x_st += dx;
+            Point point1a = new Point(x_st, y_st);
+            Point point2a = new Point(x_st + 100, y_st + 50);
+            g.DrawLine(p, point1a, point2a);
+
+            Point point3a = new Point(x_st, y_st + 50);
+            Point point4a = new Point(x_st + 100, y_st);
+            g.DrawLine(p, point3a, point4a);
+
+            //6060
+
+            //畫直線連線與曲線
+            x_st += dx * 3 / 2;
+
+            g.DrawString("DrawLines", f, new SolidBrush(Color.Red), new PointF(x_st, y_st));
+            g.DrawString("DrawCurve", f, new SolidBrush(Color.Green), new PointF(x_st, y_st + 50));
+
+            x_st += dx;
+            // Create points that define curve.
+            Point point0 = new Point(x_st + 0, y_st + 0);
+            Point point1 = new Point(x_st + 50, y_st + 150);
+            Point point2 = new Point(x_st + 100, y_st - 50);
+            Point point3 = new Point(x_st + 150, y_st + 120);
+            Point point4 = new Point(x_st + 200, y_st - 20);
+            Point point5 = new Point(x_st + 250, y_st + 150);
+            Point point6 = new Point(x_st + 300, y_st - 20);
+            Point point7 = new Point(x_st + 350, y_st + 50);
+            Point point8 = new Point(x_st + 400, y_st + 0);
+            Point point9 = new Point(x_st + 450, y_st + 150);
+            Point point10 = new Point(x_st + 500, y_st + 0);
+            Point point11 = new Point(x_st + 550, y_st + 150);
+            Point point12 = new Point(x_st + 600, y_st + 50);
+
+            Point[] curvePoints = { point0, point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12 };
+
+            Pen redPen = new Pen(Color.Red, 3); // Create pens.
+            g.DrawLines(redPen, curvePoints);   //畫直線
+
+            Pen greenPen = new Pen(Color.Green, 3); // Create pens.
+            g.DrawCurve(greenPen, curvePoints); //畫曲線
+
+            x_st = 670;
+            y_st = 530;
+            g.DrawString("Sine", f, new SolidBrush(Color.Red), new PointF(x_st, y_st));
+
+            /*
+            Point[] pts = new Point[90];
+            double yy;
+            int i;
+            for (i = 0; i < 90; i++)
             {
-                richTextBox1.Text += "pt1 在 rec 之內\n";
+                yy = Math.Sin(Math.PI * i * 4 / 180) * 50;
+                pts[i].X = x_st + (int)i * 1;
+                pts[i].Y = y_st + (int)yy;
+                //richTextBox1.Text += "x= " + pts[i].X.ToString() + " y = " + pts[i].Y.ToString() + "\n";
             }
-            else
+            p = new Pen(Color.Navy, 3);
+            g.DrawCurve(p, pts);
+            */
+
+            //畫三角函數
+            int omega = 60;  //angular frequency
+            Point[] pts = new Point[360 / omega + 1];    //一維Point陣列內有100個Point
+            int i;
+            int amplitude = 50;
+            for (i = 0; i <= 360 / omega; i++)
             {
-                richTextBox1.Text += "pt1 在 rec 之外\n";
+                pts[i].X = x_st + i * omega / 3;
+                pts[i].Y = y_st - (int)(amplitude * Math.Sin(i * omega * Math.PI / 180));   //Y反相
+                g.FillEllipse(Brushes.Black, pts[i].X - 3, pts[i].Y - 3, 6, 6); //畫點
+            }
+            g.DrawLines(new Pen(Brushes.Red, 1), pts);      //畫直線, 直接把Point陣列畫出來
+            g.DrawCurve(new Pen(Brushes.Blue, 1), pts);     //畫曲線, 直接把Point陣列畫出來
+
+            //6060
+
+            //各種連線
+            x_st = 50;
+            y_st = 20;
+            y_st += dy * 6;
+            w = 100;
+            h = 100;
+
+            Point[] pa = { new Point(x_st, y_st), new Point(x_st, y_st + h), new Point(x_st + w, y_st + h), new Point(x_st + w, y_st), new Point(x_st + w * 2, y_st), new Point(x_st + w * 2, y_st + h), new Point(x_st + w * 3, y_st + h / 2) };
+
+            p = new Pen(Color.Red, 5);
+            g.DrawLines(p, pa);  //陣列的連線
+
+            p = new Pen(Color.LightCoral, 1);
+            for (float k = 0; k < 1.5; k += 0.4F)
+            {
+                g.DrawCurve(p, pa, k);  //DrawCurve 加上 屈度
             }
 
-            if (rec.Contains(pt2))
+            p = new Pen(Color.Red, 1);
+            g.DrawCurve(p, pa);     ////DrawCurve 預設屈度
+
+            p = new Pen(Color.Yellow, 1);
+            g.DrawClosedCurve(p, pa);       //頭尾相連 加上 屈度
+
+            //6060
+
+            //畫弧線
+            x_st = 20;
+            y_st = 20;
+            y_st += dy * 8;
+            g.DrawString("DrawArc", f, sb, new PointF(x_st, y_st));
+
+            y_st -= dy / 2;
+
+            x_st += dx * 1;
+            p = new Pen(Color.Red, 5);
+            g.DrawEllipse(p, x_st, y_st, 150, 100);
+            g.DrawArc(new Pen(Color.Blue, 10), new Rectangle(x_st, y_st, 150, 100), 0, 135);
+
+            x_st += dx * 2;
+            p = new Pen(Color.Red, 5);
+            g.DrawEllipse(p, x_st, y_st, 150, 100);
+            p = new Pen(Color.Blue, 10);
+            p.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+            g.DrawArc(p, x_st, y_st, 150, 100, 0, 135);
+
+            x_st += dx * 2;
+            p = new Pen(Color.Red, 5);
+            g.DrawEllipse(p, x_st, y_st, 150, 100);
+            p = new Pen(Color.Blue, 10);
+            p.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+            g.DrawArc(p, x_st, y_st, 150, 100, 0, -135);
+
+            //6060
+
+            //畫字
+            // Create string to draw.
+            String drawString = "各種畫圖範例";
+
+            // Create font and brush.
+            Font drawFont = new Font("標楷體", 36, FontStyle.Italic | FontStyle.Underline | FontStyle.Strikeout);
+            SolidBrush drawBrush = new SolidBrush(Color.Navy);
+
+            // Create point for upper-left corner of drawing.
+            PointF drawPoint = new PointF(W - 400, H - 70);
+
+            // Draw string to screen.
+            g.DrawString(drawString, drawFont, drawBrush, drawPoint);
+
+            drawPoint = new PointF(W - 400, H - 70 - 50);
+            g.DrawString(drawString, new Font("標楷體", 24, FontStyle.Bold | FontStyle.Italic), new SolidBrush(Color.Navy), drawPoint);
+            //畫字就比較簡單了，會產生一個標楷體，24的大小，粗加斜，顏色為bb，位置在drawPoint
+
+            //6060
+
+            //貼圖
+            g.DrawString("貼圖", new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(W - 80, 30));
+            Bitmap bmp = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_ball\red-ball-icon.png");
+            for (y_st = 60; y_st < H; y_st += 80)
             {
-                richTextBox1.Text += "pt2 在 rec 之內\n";
-            }
-            else
-            {
-                richTextBox1.Text += "pt2 在 rec 之外\n";
+                g.DrawImage(bmp, W - 75, y_st);
             }
 
+            // 剛好等寬畫滿邊框
+            p = new Pen(Color.Green, 10);
+            g.DrawRectangle(p, 0 + p.Width / 2, 0 + p.Width / 2, bitmap1.Width - p.Width, bitmap1.Height - p.Width);
         }
 
+        //基本畫圖2
         private void button1_Click(object sender, EventArgs e)
         {
-            open_new_file();
+            int W = 1100;
+            int H = 750;
+            if (bitmap1 == null)
+            {
+                open_new_file();
+            }
+            bitmap1 = new Bitmap(W, H);
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
+            pictureBox1.Location = new Point(20, 20);
+
+            //基本畫圖
+
+            p = new Pen(Color.Green, 3);
+            sb = new SolidBrush(Color.Blue);
+            f = new Font("Times New Roman", 14);
+
+            //Rectangle rec;
+            //Rectangle[] recs;
+
+            int x_st = 20;
+            int y_st = 20;
+            int dx = 100;
+            int dy = 80;
+            int w = 80;
+            int h = 60;
+
+            //貝茲線
+            x_st = 20;
+            y_st = 20;
+            g.DrawString("DrawBezierAAAA", f, sb, new PointF(x_st, y_st));
+
+            x_st += dx;
+            x_st += dx / 2;
+
+            Point[] points = new Point[4];
+            points[0] = new Point(x_st + 0, y_st + 0);
+            points[1] = new Point(x_st + 0, y_st + h);
+            points[2] = new Point(x_st + w * 2, y_st + h);
+            points[3] = new Point(x_st + w * 2, y_st + 0);
+
+            g.DrawBezier(new Pen(Color.Black), points[0], points[1], points[2], points[3]);
+            g.DrawLines(Pens.Red, points);
+
+            for (int i = 0; i < 4; i++)
+            {
+                points[i] = new Point(points[i].X + dx * 2, points[i].Y);
+            }
+            g.DrawBeziers(new Pen(Color.Black), points);
+            g.DrawLines(Pens.Red, points);
+
+            //畫貝茲線
+            p = new Pen(Color.Red, 5);
+            x_st = 550;
+            y_st = 0;
+            float startX = x_st + 50.0F;
+            float startY = y_st + 80.0F;
+            float controlX1 = x_st + 150.0F;
+            float controlY1 = y_st + 20.0F;
+            float controlX2 = x_st + 230.0F;
+            float controlY2 = y_st + 50.0F;
+            float endX = x_st + 190.0F;
+            float endY = y_st + 80.0F;
+            g.DrawBezier(p, startX, startY, controlX1, controlY1, controlX2, controlY2, endX, endY);
+            //4個Point點分別表示起始點、第一個控制點、第二個控制點和結束點。
+
+            //6060
+
+            //組合路徑
+            x_st = 20;
+            y_st = 20;
+            y_st += dy;
+            g.DrawString("DrawPath", f, sb, new PointF(x_st, y_st));
+
+            x_st += dx;
+            x_st += dx / 2;
+
+            GraphicsPath gp1 = new GraphicsPath();
+            gp1.AddLine(new Point(x_st + 0, y_st + 0), new Point(x_st + w, y_st + h));
+            gp1.AddLine(new Point(x_st + 0, y_st + h), new Point(x_st + w, y_st + 0));
+            gp1.AddRectangle(new Rectangle(x_st + w, y_st - 10, w, h));
+            p = new Pen(Color.Red, 3);
+            g.DrawPath(new Pen(Color.Red), gp1);
+
+            x_st += dx * 2;
+            gp1.Reset();
+            gp1.AddLine(x_st + 0, y_st + 0, x_st + 50, y_st + 50);
+            gp1.AddEllipse(x_st + 50, y_st + 0, 100, 100);
+            gp1.AddBezier(x_st + 50 + 100, y_st + 50, x_st + 200, 0, x_st + 300, 180, x_st + 400, 20);
+            p = new Pen(Color.Green, 3);
+            g.DrawPath(p, gp1);
+
+
+            x_st += dx * 3;
+            GraphicsPath gp2 = new GraphicsPath();  // Create a GraphicsPath object.
+
+            Point[] pa = {
+                    new Point(x_st+0, y_st+0), 
+                    new Point(x_st+0, y_st+100), 
+                    new Point(x_st+100, y_st+100),
+                    new Point(x_st+100, y_st+0)
+                                   };
+
+            gp2.AddArc(x_st + 100, y_st + 0, 100, 100, 180, 180);
+            gp2.StartFigure();
+            gp2.AddCurve(pa);
+            gp2.AddPie(x_st + 100 + 50, y_st + 0, 100, 100, 40, 110);
+            g.DrawPath(p, gp2);
+
+            //填滿組合路徑
+            x_st = 20;
+            y_st = 20;
+            y_st += dy * 2;
+            g.DrawString("FillPath", f, sb, new PointF(x_st, y_st));
+
+
+            GraphicsPath gp3 = new GraphicsPath();  // Create a GraphicsPath object.
+            // Set up all the string parameters.
+            String drawString = "FillPath加入文字範例";
+            FontFamily family = new FontFamily("Times New Roman");
+            int fontStyle = (int)FontStyle.Italic;
+            int emSize = 26;
+            PointF pt = new PointF(x_st + dx, y_st);
+            StringFormat format = StringFormat.GenericDefault;
+            // Add the string to the path.
+            gp3.AddString(drawString, family, fontStyle, emSize, pt, format);
+            //Draw the path to the screen.
+            g.FillPath(Brushes.Black, gp3);
+
+            y_st += dy / 2;
+            //g.DrawString("FillPath", f, sb, new PointF(x_st, y_st));
+
+            x_st += dx;
+
+            GraphicsPath gp4 = new GraphicsPath();
+            gp4.AddLine(new Point(x_st + 10, y_st + 10), new Point(x_st + 60, y_st + 60));
+            gp4.AddLine(new Point(x_st + 60, y_st + 10), new Point(x_st + 10, y_st + 60));
+            gp4.AddRectangle(new Rectangle(x_st + 10, y_st + 10, 50, 50));
+            g.FillPath(new SolidBrush(Color.Blue), gp4);
+
+            //6060
+
+            //畫多個Rectangles
+            x_st = 20;
+            y_st = 20;
+            y_st += dy * 4;
+            g.DrawString("畫多個Rectangles", f, sb, new PointF(x_st, y_st - 25));
+
+            Rectangle[] R = new Rectangle[20];
+            for (int i = 0; i < R.Length; i++)
+            {
+                //R[i] = new Rectangle(0 + 30 * i, 0 + 30 * i);
+                R[i] = new Rectangle(x_st + i * 10, y_st + i * 5, i * 30, i * 15);
+            }
+            g.DrawRectangles(new Pen(Brushes.Red, 2), R);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            bitmap1 = null;
-            pictureBox1.Image = null;
-            richTextBox1.Clear();
+            //畫點圓形星形
+
+            if (bitmap1 == null)
+            {
+                open_new_file();
+            }
+
+            Font f = new Font("標楷體", 16);
+            SolidBrush sb = new SolidBrush(Color.Blue);
+            Point pt = new Point();
+            int xx = 0;
+            int yy = 0;
+
+            for (int size = 1; size <= 10; size++)
+            {
+                xx = 40;
+                yy = 42 * size;
+                pt = new Point(xx, yy);
+                g.DrawString(size.ToString(), f, sb, pt);
+
+                xx = 80;
+                pt = new Point(xx, yy);
+                DrawPoint(g, pt, Color.Red, Color.Pink, 10);
+
+                xx = 120;
+                yy = 42 * size;
+                pt = new Point(xx, yy);
+                g.DrawString(size.ToString(), f, sb, pt);
+
+                xx = 160;
+                pt = new Point(xx, yy);
+                DrawPoint2(g, pt, Brushes.LightBlue, Pens.Blue);
+
+                xx = 200;
+                pt = new Point(xx, yy);
+                DrawPoint2(g, pt, Brushes.HotPink, Pens.Red);
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "畫一些空心圓\n";
+
+            int radius = 60;
+            int linewidth = 10;
+            pt = new Point();
+
+            pt = new Point(300, 60);
+            DrawCircle(g, pt, radius, linewidth, Color.Red);
+
+            pt = new Point(380, 120);
+            DrawCircle(g, pt, radius, linewidth, Color.Green);
+
+            pt = new Point(460, 180);
+            DrawCircle(g, pt, radius, linewidth, Color.Blue);
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "畫一些實心圓\n";
+
+            radius = 60;
+            pt = new Point();
+
+            pt = new Point(300, 60 + 160);
+            FillCircle(g, pt, radius, Color.Red);
+
+            pt = new Point(380, 120 + 160);
+            FillCircle(g, pt, radius, Color.Green);
+
+            pt = new Point(460, 180 + 160);
+            FillCircle(g, pt, radius, Color.Blue);
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "空心星形\n";
+
+            radius = 80;
+            linewidth = 5;
+            Point center = new Point(300, 400);
+            DrawStar(g, center, radius, linewidth, Color.Red);
+
+            richTextBox1.Text += "實心星形\n";
+
+            radius = 80;
+            center = new Point(500, 400);
+            FillStar(g, center, radius, Color.Red);
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //畫多邊形與五角星星
+
+            Point[] pts = new Point[5];  // 五個點
+            int W = 200;
+            int H = 200;
+            int Cx = W / 2 + 450;  // 中心點
+            int Cy = H / 2;
+            int D = (int)(Math.Min(W, H) / 2) - 10; // 半徑
+            double Theta = -Math.PI / 2.0; // 角度
+
+            int i;
+            for (i = 0; i < 5; i++)
+            {
+                pts[i].X = Cx + (int)(D * Math.Cos(Theta));
+                pts[i].Y = Cy + (int)(D * Math.Sin(Theta));
+                Theta += Math.PI * 2.0 / 5.0;  // 五邊形
+                //Theta += 2 * Math.PI * 2.0 / 5.0; // 五角星星
+            }
+            g.DrawPolygon(Pens.Black, pts); // 繪出多邊形
+
+            for (i = 0; i < 5; i++)
+            {
+                pts[i].X = Cx + (int)(D * Math.Cos(Theta));
+                pts[i].Y = Cy + (int)(D * Math.Sin(Theta));
+                //Theta += Math.PI * 2.0 / 5.0;  // 五邊形
+                Theta += 2 * Math.PI * 2.0 / 5.0; // 五角星星
+            }
+            g.DrawPolygon(Pens.Red, pts); // 繪出多邊形
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //畫笑臉
+            int x_st = 530;
+            int y_st = 220;
+            DrawSmileImage(g, x_st, y_st);
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        private void DrawSmileImage(Graphics g, int x_st, int y_st)
+        {
+            Rectangle rect;
+
+            rect = new Rectangle(x_st + 10, y_st + 10, 80, 80);
+            g.FillEllipse(Brushes.LightGreen, rect);
+            g.DrawEllipse(Pens.Green, rect);
+
+            rect = new Rectangle(x_st + 40, y_st + 40, 20, 30);
+            g.FillEllipse(Brushes.LightBlue, rect);
+            g.DrawEllipse(Pens.Blue, rect);
+
+            rect = new Rectangle(x_st + 25, y_st + 30, 50, 50);
+            g.DrawArc(Pens.Red, rect, 20, 140);
+
+            rect = new Rectangle(x_st + 25, y_st + 25, 15, 20);
+            g.FillEllipse(Brushes.White, rect);
+            g.DrawEllipse(Pens.Black, rect);
+            rect = new Rectangle(x_st + 30, y_st + 30, 10, 10);
+            g.FillEllipse(Brushes.Black, rect);
+
+            rect = new Rectangle(x_st + 60, y_st + 25, 15, 20);
+            g.FillEllipse(Brushes.White, rect);
+            g.DrawEllipse(Pens.Black, rect);
+            rect = new Rectangle(x_st + 65, y_st + 30, 10, 10);
+            g.FillEllipse(Brushes.Black, rect);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
+            //箭頭 虛線
 
-            bitmap1 = new Bitmap(filename);
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-            pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
+            //自定義直線箭頭大小
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
+
+            System.Drawing.Drawing2D.AdjustableArrowCap lineCap = new System.Drawing.Drawing2D.AdjustableArrowCap(6, 6, true);
+            Pen RedPen = new Pen(Color.Red, 2);
+            RedPen.CustomEndCap = lineCap;
+
+            g.DrawLine(RedPen, 100, 100, 300, 300);
+
+
+            //畫虛線
+            Control P = (Control)sender;
+            Pen pen = new Pen(Color.FromArgb(255, 0, 0), 5);
+            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;//虛線的樣式
+            pen.DashPattern = new float[] { 2, 2 };//設置虛線中實點和空白區域之間的間隔
+            //g.DrawLine(pen, 0, 0, 0, P.Height - 1);
+            g.DrawRectangle(pen, 50, 50, 300, 300);
+
+
+            //#畫虛線
+            Pen p = new Pen(Color.Red, 5);
+            p.DashStyle = DashStyle.Custom;//虛線的樣式
+            p.DashPattern = new float[] { 2, 2 };//設置虛線中實點和空白區域之間的間隔
+            g.DrawLine(p, 0, 0, this.pictureBox1.Width - 1, this.pictureBox1.Height - 1);
+
+            //虛線樣式
+            using (Pen dash_pen = new Pen(Color.Red))
+            {
+                dash_pen.DashStyle = DashStyle.Custom;
+                dash_pen.DashPattern = new float[] { 4, 4 };
+                g.DrawLine(dash_pen, 100, 300, 300, 100);
+            }
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //逐點製作圖檔
-            int xx;
-            int yy;
-            bitmap1 = new Bitmap(300, 300);
-            for (yy = 0; yy < 300; yy++)
+            //透明色測試
+            richTextBox1.Text += "R = " + Color.Transparent.R.ToString() + "\n";
+            richTextBox1.Text += "G = " + Color.Transparent.G.ToString() + "\n";
+            richTextBox1.Text += "B = " + Color.Transparent.B.ToString() + "\n";
+            richTextBox1.Text += "A = " + Color.Transparent.A.ToString() + "\n";
+            richTextBox1.Text += "A2 = " + Color.Red.A.ToString() + "\n";
+
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            g = Graphics.FromImage(bitmap1);
+
+            //清空畫布並用透明色填充
+            //g.Clear(Color.Transparent);
+
+            Color c1 = Color.FromArgb(255, 255, 0, 0);
+            SolidBrush sb1 = new SolidBrush(c1);
+            g.FillRectangle(sb1, 50, 50, 100, 100);
+
+            Color c2 = Color.FromArgb(255, 0, 255, 0);
+            SolidBrush sb2 = new SolidBrush(c2);
+            g.FillRectangle(sb2, 100, 50, 100, 100);
+
+            Color c3 = Color.FromArgb(255, 255, 0, 0);
+            SolidBrush sb3 = new SolidBrush(c3);
+            g.FillRectangle(sb3, 50, 200, 100, 100);
+
+            Color c4 = Color.FromArgb(128, 0, 255, 0);
+            SolidBrush sb4 = new SolidBrush(c4);
+            g.FillRectangle(sb4, 100, 200, 100, 100);
+
+            //g.FillRectangle(Brushes.Blue, 00, 320, 600, 50);
+            //g.FillRectangle(Brushes.Blue, 00, 420, 600, 50);
+            /*
+            int i;
+            int w = 40;
+            for (i = 0; i < 13; i++)
             {
-                for (xx = 0; xx < 300; xx++)
-                {
-                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0xff, 64, 64));
-                }
+            Color c5 = Color.FromArgb(255, 20 * i, 0, 0);
+            SolidBrush sb5 = new SolidBrush(c5);
+            g.FillRectangle(sb5, 50 + w * i, 300, w, 100);
+
             }
+            for (i = 0; i < 13; i++)
+            {
+            Color c5 = Color.FromArgb(20 * i, 255, 0, 0);
+            SolidBrush sb5 = new SolidBrush(c5);
+            g.FillRectangle(sb5, 50 + w * i, 400, w, 100);
+
+            }
+            */
+
+            Color c6 = Color.FromArgb(200, 255, 255, 255);
+            SolidBrush sb5 = new SolidBrush(c6);
+            g.FillRectangle(sb5, 300, 100, 100, 100);
+
+            //g.DrawString("格子裏", new Font("黑體", 20), new SolidBrush(c6), 200, 100);
+            g.DrawString("格子裏", new Font("黑體", 20), new SolidBrush(Color.Black), 200, 100);
+
+            g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
+
             pictureBox1.Image = bitmap1;
         }
 
@@ -476,16 +1223,6 @@ namespace vcs_Draw1
             int W = 600;
             int H = 500;
             byte[,] rgb = new byte[30, 3];
-
-            /*
-            var random = new Random();
-
-            for (i = 0; i < 100; i++)
-            {
-                //richTextBox1.Text += random.Next(3).ToString() + "  ";
-
-            }
-            */
 
             for (i = 0; i < 30; i++)
             {
@@ -598,7 +1335,6 @@ namespace vcs_Draw1
                     p.B = (byte)(xx % 63);
                     */
 
-
                     //獲取像素的ＲＧＢ顏色值
                     //srcColor = srcBitmap.GetPixel(x, y);
                     //byte temp = (byte)(srcColor.R * .299 + srcColor.G * .587 + srcColor.B * .114);
@@ -613,102 +1349,66 @@ namespace vcs_Draw1
                 }
             }
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            int W = 1920;
-            int H = 1080;
-
-            pictureBox1.Size = new Size(W, H);
-            pictureBox1.Location = new Point(20, 20);
-
-            bitmap1 = new Bitmap(W, H);
-
-            int xx;
-            int yy;
-            for (yy = 0; yy < H; yy++)
-            {
-                for (xx = 0; xx < W; xx++)
-                {
-                    bitmap1.SetPixel(xx, yy, Color.FromArgb(30, 0x11, 0x33, 0x55));
-                }
-            }
-
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-            g.DrawRectangle(p, 0, 0, W - 1, H - 1);
-
-            g.DrawRectangle(p, 50, 50, W - 100 - 1, H - 100 - 1);
-
-            g.DrawRectangle(p, 100, 100, W - 200 - 1, H - 200 - 1);
-
-            SolidBrush sb;
-            Font f;
-            sb = new SolidBrush(Color.Blue);
-            f = new Font("標楷體", 36);
-
-            g.DrawString("1920 X 1080", f, sb, new PointF(W - 500, H - 300));
-
-            pictureBox1.Image = bitmap1;
-
-            this.FormBorderStyle = FormBorderStyle.None;
-            //this.WindowState = FormWindowState.Maximized;
-            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
+            open_new_file();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            int W = 1000;
-            int H = 500;
-            int dd = W / 5;
-            pictureBox1.Size = new Size(W, H);
-            pictureBox1.Location = new Point(20, 20);
-
-            //逐點製作圖檔
-            int xx;
-            int yy;
-            bitmap1 = new Bitmap(W, H);
-            for (yy = 0; yy < H; yy++)
-            {
-                for (xx = 0; xx < W; xx++)
-                {
-                    if ((xx / dd) < 1)
-                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0xff, 0x00, 0x00));
-                    else if ((xx / dd) < 2)
-                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, 0xff, 0x00));
-                    else if ((xx / dd) < 3)
-                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, 0x00, 0xff));
-                    else if ((xx / dd) < 4)
-                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, 0x00, 0x00));
-                    else if ((xx / dd) < 5)
-                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0xff, 0xff, 0xff));
-                    else
-                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                }
-            }
-
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-
-            for (int i = 0; i < 5; i++)
-            {
-                if (i == 3)
-                    sb = new SolidBrush(Color.White);
-                else
-                    sb = new SolidBrush(Color.Black);
-
-                g.FillEllipse(sb, dd * i + dd / 2, 100, 10, 10);
-            }
-
-            Font f = new Font("標楷體", 100);
-            sb = new SolidBrush(Color.White);
-            g.DrawString("ims", f, sb, new PointF(80, 300));
-
-            pictureBox1.Image = bitmap1;
+            bitmap1 = null;
+            pictureBox1.Image = null;
+            richTextBox1.Clear();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
+            if (button19.Text == "在Form上印出滑鼠游標形狀")
+            {
+                flag_print_mouse_cursor = true;
+                this.Cursor = Cursors.Hand;
+                button19.Text = "停止印出滑鼠游標形狀";
+            }
+            else
+            {
+                flag_print_mouse_cursor = false;
+                this.Cursor = Cursors.Default;
+                button19.Text = "在Form上印出滑鼠游標形狀";
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\bear.jpg");
+            Bitmap bitmap2 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__RW\_png\vcs_ReadWrite_PNG.png");
+
+            //將圖２貼到圖１左上角
+            Graphics g = Graphics.FromImage(bitmap1);   //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.DrawImage(bitmap2, 0, 0);
+
+            //在圖１之右下角輸出文字
+            Font f = new Font("Brush Script MT", 24, FontStyle.Italic);
+            Brush b = new SolidBrush(Color.White);
+            Brush bb = new SolidBrush(Color.Red);
+            string ct = "小熊家族";
+            int x_st = bitmap1.Width - 200;
+            int y_st = bitmap1.Height - 50;
+
+            g.DrawString(ct, f, b, x_st, y_st);
+            g.DrawString(ct, f, bb, x_st - 1, y_st - 1);
+            g.DrawString(ct, f, bb, x_st - 1, y_st + 1);
+            g.DrawString(ct, f, bb, x_st + 1, y_st - 1);
+            g.DrawString(ct, f, bb, x_st + 1, y_st + 1);
+            g.DrawString(ct, f, b, x_st, y_st);
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //反鋸齒功能
             if (bitmap1 == null)
             {
                 open_new_file();
@@ -769,89 +1469,6 @@ namespace vcs_Draw1
             pictureBox1.Image = bitmap1;
         }
 
-        private void button9_Click(object sender, EventArgs e)
-        {
-            Bitmap bitmap1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\bear.jpg");
-            Bitmap bitmap2 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__RW\_png\vcs_ReadWrite_PNG.png");
-
-            //將圖２貼到圖１左上角
-            Graphics g = Graphics.FromImage(bitmap1);   //以記憶體圖像 bitmap1 建立 記憶體畫布g
-            g.DrawImage(bitmap2, 0, 0);
-
-            //在圖１之右下角輸出文字
-            Font f = new Font("Brush Script MT", 24, FontStyle.Italic);
-            Brush b = new SolidBrush(Color.White);
-            Brush bb = new SolidBrush(Color.Red);
-            string ct = "小熊家族";
-
-            int x = bitmap1.Width - 200;
-            int y = bitmap1.Height - 50;
-
-            g.DrawString(ct, f, b, x, y);
-            g.DrawString(ct, f, bb, x - 1, y - 1);
-            g.DrawString(ct, f, bb, x - 1, y + 1);
-            g.DrawString(ct, f, bb, x + 1, y - 1);
-            g.DrawString(ct, f, bb, x + 1, y + 1);
-            g.DrawString(ct, f, b, x, y);
-
-            pictureBox1.Image = bitmap1;
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            int W = 1920;
-            int H = 1080;
-
-            richTextBox1.Text += "FullHD點圖 ST\n";
-
-            pictureBox1.Size = new Size(W, H);
-            pictureBox1.Location = new Point(20, 20);
-
-            bitmap1 = new Bitmap(W, H);
-
-            var random = new Random();
-            int xx;
-            int yy;
-            int rr;
-            int gg;
-            int bb;
-            for (yy = 0; yy < H; yy++)
-            {
-                for (xx = 0; xx < W; xx++)
-                {
-                    rr = random.Next(0, 256);
-                    gg = random.Next(0, 256);
-                    bb = random.Next(0, 256);
-                    bitmap1.SetPixel(xx, yy, Color.FromArgb(0xFF, (rr) % 256, (gg) % 256, (bb) % 256));
-                }
-            }
-
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-            g.DrawRectangle(p, 0, 0, W - 1, H - 1);
-
-            g.DrawRectangle(p, 50, 50, W - 100 - 1, H - 100 - 1);
-
-            g.DrawRectangle(p, 100, 100, W - 200 - 1, H - 200 - 1);
-
-            /*
-            SolidBrush sb;
-            Font f;
-            sb = new SolidBrush(Color.Blue);
-            f = new Font("標楷體", 36);
-
-
-            g.DrawString("1920 X 1080", f, sb, new PointF(width - 500, height - 300));
-            */
-
-            pictureBox1.Image = bitmap1;
-
-            this.FormBorderStyle = FormBorderStyle.None;
-            //this.WindowState = FormWindowState.Maximized;
-            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
-
-           richTextBox1.Text += "FullHD點圖 SP\n";
-        }
-
         private void button11_Click(object sender, EventArgs e)
         {
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
@@ -900,6 +1517,66 @@ namespace vcs_Draw1
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //繪圖圖形的Contains功能
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.DrawRectangle(Pens.Red, 100, 100, 150, 150);
+            Rectangle rec = new Rectangle(100, 100, 150, 150);
+            Point pt1 = new Point(180, 180);
+            Point pt2 = new Point(280, 280);
+            g.FillEllipse(Brushes.Green, pt1.X, pt1.Y, 20, 20);
+            g.FillEllipse(Brushes.Red, pt2.X, pt2.Y, 20, 20);
+
+            if (rec.Contains(pt1))
+            {
+                richTextBox1.Text += "pt1 在 rec 之內\n";
+            }
+            else
+            {
+                richTextBox1.Text += "pt1 在 rec 之外\n";
+            }
+
+            if (rec.Contains(pt2))
+            {
+                richTextBox1.Text += "pt2 在 rec 之內\n";
+            }
+            else
+            {
+                richTextBox1.Text += "pt2 在 rec 之外\n";
+            }
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
+
+            bitmap1 = new Bitmap(filename);
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            //半透明筆刷
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            //　寫文字的筆刷，透明度為100,藍色
+            Brush b = new SolidBrush(Color.FromArgb(100, Color.Blue));
+
+            int i;
+            for (i = 0; i < 10; i += 2)
+            {
+                g.DrawString("群曜醫電", new Font("標楷體", 80), b, 100 + i, 100 + i);
+            }
+            //重疊部分 筆色加深
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
             string filename = @"D:\_git\vcs\_1.data\______test_files1\step2.png";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
@@ -915,14 +1592,10 @@ namespace vcs_Draw1
             pictureBox1.Image = bitmap1;
         }
 
-        private void button13_Click(object sender, EventArgs e)
+        private void button16_Click(object sender, EventArgs e)
         {
-            SolidBrush sb;
-            Font f;
-
-            sb = new SolidBrush(Color.Blue);
-            //f = new Font("標楷體", 20);
-            f = new Font("標楷體", 16);
+            SolidBrush sb = new SolidBrush(Color.Blue);
+            Font f = new Font("標楷體", 16);
 
             if (bitmap1 == null)
             {
@@ -950,63 +1623,7 @@ namespace vcs_Draw1
             pictureBox1.Image = bitmap1;
         }
 
-        private void button14_Click(object sender, EventArgs e)
-        {
-            if (bitmap1 == null)
-            {
-                richTextBox1.Text += "尚未開啟圖片\n";
-                return;
-            }
-
-            int ccc = 0;
-            int xx;
-            int yy;
-
-            richTextBox1.Text += "W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
-
-            Color rr = Color.Red;
-            Color gg = Color.Green;
-            Color bb = Color.Blue;
-
-            richTextBox1.Text += "R : " + rr.A.ToString("X2") + rr.R.ToString("X2") + rr.G.ToString("X2") + rr.B.ToString("X2") + "\n";
-            richTextBox1.Text += "G : " + gg.A.ToString("X2") + gg.R.ToString("X2") + gg.G.ToString("X2") + gg.B.ToString("X2") + "\n";
-            richTextBox1.Text += "B : " + bb.A.ToString("X2") + bb.R.ToString("X2") + bb.G.ToString("X2") + bb.B.ToString("X2") + "\n";
-
-            for (yy = 0; yy < bitmap1.Height; yy++)
-            {
-                for (xx = 0; xx < bitmap1.Width; xx++)
-                {
-                    if ((yy % 120) == 0)
-                    {
-                        bitmap1.SetPixel(xx, yy, rr);
-                    }
-                    else if ((yy % 120) == 30)
-                    {
-                        bitmap1.SetPixel(xx, yy, gg);
-                    }
-                    else if ((yy % 120) == 60)
-                    {
-                        bitmap1.SetPixel(xx, yy, bb);
-                    }
-                    else if ((yy % 120) == 90)
-                    {
-                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0, 0, 0));
-                    }
-
-                    ccc++;
-                    if ((ccc % 30000) == 0)
-                    {
-                        Color p = bitmap1.GetPixel(xx, yy);
-                        //richTextBox1.Text += p.ToString() + " ";
-                        richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2") + p.B.ToString("X2") + " ";
-                    }
-                }
-            }
-            pictureBox1.Image = bitmap1;
-            richTextBox1.Text += "\n";
-        }
-
-        private void button15_Click(object sender, EventArgs e)
+        private void button17_Click(object sender, EventArgs e)
         {
             string filename = @"D:\_git\vcs\_1.data\______test_files1\_image_processing\sample.png";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
@@ -1029,7 +1646,7 @@ namespace vcs_Draw1
             this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
         }
 
-        private void button16_Click(object sender, EventArgs e)
+        private void button18_Click(object sender, EventArgs e)
         {
             int LAYER0_WIDTH = 1920;
             //int LAYER0_HEIGHT = 1080;
@@ -1061,7 +1678,6 @@ namespace vcs_Draw1
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
 
             g.FillRectangle(sb, 0, 0, 500, 800);
-
 
             //在指定位置畫上一圖
             // Create image.
@@ -1182,25 +1798,7 @@ namespace vcs_Draw1
             g.DrawString("0          170    200    250", f, sb, new PointF(LAYER1_START_X - 10, BORDER_Y + LAYER1_HEIGHT + 15));
 
             pictureBox1.Image = bitmap1;
-        }
 
-        private void button17_Click(object sender, EventArgs e)
-        {
-            //TBD
-            //畫布塗黑左上1/4
-            int pic_width = pictureBox1.Width;
-            int pic_height = pictureBox1.Height;
-            bitmap1 = new Bitmap(pic_width / 2, pic_height / 2);
-            pictureBox1.Image = bitmap1;
-            //pictureBox1.BackColor = Color.Black;
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-            int w = button18.ClientSize.Width;
-            int h = button18.ClientSize.Height;
-            g = button18.CreateGraphics();
-            g.DrawEllipse(p, 0, 0, w - 1, h - 1);
         }
 
         int x_old = 0;
@@ -1268,22 +1866,6 @@ namespace vcs_Draw1
 
         private void button19_Click(object sender, EventArgs e)
         {
-            if (button19.Text == "在Form上印出滑鼠游標形狀")
-            {
-                flag_print_mouse_cursor = true;
-                this.Cursor = Cursors.Hand;
-                button19.Text = "停止印出滑鼠游標形狀";
-            }
-            else
-            {
-                flag_print_mouse_cursor = false;
-                this.Cursor = Cursors.Default;
-                button19.Text = "在Form上印出滑鼠游標形狀";
-            }
-        }
-
-        private void button20_Click(object sender, EventArgs e)
-        {
             string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
@@ -1304,6 +1886,25 @@ namespace vcs_Draw1
             g = this.CreateGraphics();
             g.DrawImage(bmp, 0, 0);
             */
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //Rectangle的交集與聯集
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            Rectangle rect1 = new Rectangle(30, 30, 150, 150);
+            g.FillRectangle(Brushes.Green, rect1); //綠色矩形區塊 固定 畫綠色
+
+            Rectangle rect2 = new Rectangle(120, 120, 150, 150);
+            g.FillRectangle(Brushes.Red, rect2); //紅色矩形區塊 依滑鼠位置變化 畫紅色
+
+            Rectangle union = Rectangle.Union(rect1, rect2); //聯集區域
+            g.DrawRectangle(Pens.Black, union);                   //聯集 畫 黑色框
+
+            Rectangle intersect = Rectangle.Intersect(rect1, rect2); //交集區域
+            g.FillRectangle(Brushes.Yellow, intersect);    //交集 畫黃色
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -1429,21 +2030,137 @@ namespace vcs_Draw1
             g.FillRectangle(b, w / 4, 50, w / 2, 50);
         }
 
+        int show_position = 1;
         private void button24_Click(object sender, EventArgs e)
         {
-            //畫貝茲線
-            Graphics g = this.pictureBox1.CreateGraphics();
-            Pen p = new Pen(Color.Red, 5);
-            float startX = 50.0F;
-            float startY = 80.0F;
-            float controlX1 = 150.0F;
-            float controlY1 = 20.0F;
-            float controlX2 = 230.0F;
-            float controlY2 = 50.0F;
-            float endX = 190.0F;
-            float endY = 80.0F;
-            g.DrawBezier(p, startX, startY, controlX1, controlY1, controlX2, controlY2, endX, endY);
-            //4個Point點分別表示起始點、第一個控制點、第二個控制點和結束點。
+            //製作圖面的標記文字
+            if (bitmap1 == null)
+            {
+                open_new_file();
+                //製作圖面的標記文字
+                bitmap1 = new Bitmap(filename);
+                g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+                pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+                pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
+            }
+
+            Font f = new Font("標楷體", 24, FontStyle.Bold);
+
+            pictureBox1.Image = SetBadge(pictureBox1, "牡丹亭", f, show_position);//呼叫自定義方法
+            show_position++;  //設定文字的顯示位置
+            if (show_position > 6)
+            {
+                show_position = 1;
+            }
+        }
+
+        public Image SetBadge(PictureBox Pict, String Str, Font font, int place)
+        {
+            Image Var_Image = Pict.Image;//根據圖片實例化Image類
+            int Var_FontSize = (int)font.Size;//取得字體大小
+            bool Var_isSetFont = false;//判斷目前文字是否超出圖片的大小
+            int Var_W = Var_Image.Width;//取得圖片的寬度
+            int Var_H = Var_Image.Height;//取得圖片的高度
+            int Var_StrX = 0;//記錄文字的X位置
+            int Var_StrY = 0;//記錄文字的Y位置
+
+            Bitmap Var_bmp = new Bitmap(Var_W, Var_H);//實例化Image類
+            Bitmap Var_SaveBmp = new Bitmap(Var_Image);//實例化Image類
+            Graphics g = Graphics.FromImage(Var_bmp);//用指定的Bitmap實例化Graphics
+            Graphics tem_Graphics = Graphics.FromImage(Var_Image);//用指定的Bitmap實例化Graphics
+            SizeF Var_Size = new SizeF(Var_W, Var_H);//實例化SizeF類
+            Font tem_Font = font;//取得文字的設定文字
+            g.Clear(Color.White);//清空圖片
+            while (Var_isSetFont == false)//如果文字超出圖片的大小
+            {
+                //設定文字的文字
+                tem_Font = new Font(font.Name, Var_FontSize, font.Bold ? FontStyle.Bold : FontStyle.Regular);
+                Var_Size = g.MeasureString(Str, tem_Font);//對文字進行測量
+                if (Var_Size.Width < Var_bmp.Width - 10)//如果文字的寬度沒有超出圖片
+                {
+                    if (Var_Size.Height < Var_bmp.Height - 10)//如果文字的高度沒有超出圖片
+                        Var_isSetFont = true;//不減小文字的大小
+                }
+                else
+                    Var_FontSize = Var_FontSize - 1;//文字的字體大小減1
+            }
+            switch (place)//選擇文字的顯示位置
+            {
+                case 1://右下角
+                    {
+                        Var_StrX = (int)(Var_bmp.Width - Var_Size.Width - 3);//設定文字的X座標值
+                        Var_StrY = (int)(Var_bmp.Height - Var_Size.Height);//設定文字的Y座標值
+                        break;
+                    }
+                case 2://右上角
+                    {
+                        Var_StrX = (int)(Var_bmp.Width - Var_Size.Width - 3);
+                        Var_StrY = 1;
+                        break;
+                    }
+                case 3://左下角
+                    {
+                        Var_StrX = 1;
+                        Var_StrY = (int)(Var_bmp.Height - Var_Size.Height);
+                        break;
+                    }
+                case 4://左上角
+                    {
+                        Var_StrX = 1;
+                        Var_StrY = 1;
+                        break;
+                    }
+                case 5://頂局中
+                    {
+                        Var_StrX = (int)(Var_bmp.Width - Var_Size.Width - 2) / 2;
+                        Var_StrY = 1;
+                        break;
+                    }
+                case 6://底局中
+                    {
+                        Var_StrX = (int)(Var_bmp.Width - Var_Size.Width - 2) / 2;
+                        Var_StrY = (int)(Var_bmp.Height - Var_Size.Height);
+                        break;
+                    }
+
+            }
+            g.DrawString(Str, tem_Font, new SolidBrush(Color.Black), Var_StrX, Var_StrY);//繪製前景色為黑色的文字
+            int tem_Become = 40;//設定文字的變色深度
+            //搜尋圖片的所有象素
+            for (int x = 1; x < Var_bmp.Width; x++)
+            {
+                for (int y = 1; y < Var_bmp.Height; y++)
+                {
+                    int tem_a, tem_r, tem_g, tem_b, tem_r1, tem_g1, tem_b1;//定義變數
+                    if (Var_bmp.GetPixel(x, y).ToArgb() == Color.Black.ToArgb())//如果目前象素的顏色為黑色
+                    {
+                        tem_a = Var_SaveBmp.GetPixel(x, y).A;//取得目前象素的alpha份量值
+                        tem_r = Var_SaveBmp.GetPixel(x, y).R;//取得目前象素的R色值
+                        tem_g = Var_SaveBmp.GetPixel(x, y).G;//取得目前象素的G色值
+                        tem_b = Var_SaveBmp.GetPixel(x, y).B;//取得目前象素的B色值
+                        tem_r1 = tem_r;//臨時儲存R色值
+                        tem_g1 = tem_g;//臨時儲存G色值
+                        tem_b1 = tem_b;//臨時儲存B色值
+                        //根據加深後的圖片背景顯示文字
+                        if (tem_b + tem_Become < 255)//如果B色值加上目前深度小於255
+                            tem_b = tem_b + 255;//B色值加上深度值
+                        if (tem_g + tem_Become < 255)
+                            tem_g = tem_g + 255;
+                        if (tem_r + tem_Become < 255)
+                            tem_r = tem_r + 255;
+                        if (tem_r1 - tem_Become > 0)//如果B色值加上目前深度大於0
+                            tem_r1 = tem_r1 - tem_Become;//B色值減去深度值
+                        if (tem_g1 - tem_Become > 0)
+                            tem_g1 = tem_g1 - tem_Become;
+                        if (tem_b1 - tem_Become > 0)
+                            tem_b1 = tem_b1 - tem_Become;
+                        tem_Graphics.DrawEllipse(new Pen(new SolidBrush(Color.Black)), x, y + 1, 3, 3);//繪製文字的陰影
+                        //以深後的圖片背景顯示文字
+                        tem_Graphics.DrawEllipse(new Pen(new SolidBrush(Color.FromArgb(tem_a, tem_r1, tem_g1, tem_b1))), x, y, 1, 1);
+                    }
+                }
+            }
+            return Var_Image;
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -1474,39 +2191,32 @@ namespace vcs_Draw1
 
         private void button26_Click(object sender, EventArgs e)
         {
-            if (bitmap1 == null)
+            //DrawPoint
+
+            List<PointF> points = new List<PointF>();
+
+            int i;
+            Random r = new Random();
+
+            Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
+            g.Clear(Color.White);
+
+            for (i = 0; i < 14; i++)
             {
-                open_new_file();
+                points.Add(new PointF(30 * i, r.Next(400)));
             }
-            DrawSmileImage(g);
-        }
 
-        private void DrawSmileImage(Graphics g)
-        {
-            Rectangle rect;
+            if (points.Count > 1)
+            {
+                Pen p = new Pen(Color.Red);
+                g.DrawLines(p, points.ToArray());   //List轉Array
+            }
 
-            rect = new Rectangle(10, 10, 80, 80);
-            g.FillEllipse(Brushes.LightGreen, rect);
-            g.DrawEllipse(Pens.Green, rect);
-
-            rect = new Rectangle(40, 40, 20, 30);
-            g.FillEllipse(Brushes.LightBlue, rect);
-            g.DrawEllipse(Pens.Blue, rect);
-
-            rect = new Rectangle(25, 30, 50, 50);
-            g.DrawArc(Pens.Red, rect, 20, 140);
-
-            rect = new Rectangle(25, 25, 15, 20);
-            g.FillEllipse(Brushes.White, rect);
-            g.DrawEllipse(Pens.Black, rect);
-            rect = new Rectangle(30, 30, 10, 10);
-            g.FillEllipse(Brushes.Black, rect);
-
-            rect = new Rectangle(60, 25, 15, 20);
-            g.FillEllipse(Brushes.White, rect);
-            g.DrawEllipse(Pens.Black, rect);
-            rect = new Rectangle(65, 30, 10, 10);
-            g.FillEllipse(Brushes.Black, rect);
+            foreach (PointF point in points)
+            {
+                const float radius = 4;
+                g.DrawEllipse(Pens.Red, point.X - radius, point.Y - radius, 2 * radius, 2 * radius);
+            }
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -1547,11 +2257,12 @@ namespace vcs_Draw1
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            int x_st = 1000;
-            int y_st = 100;
+            int x_st = 200;
+            int y_st = 800;
 
             Graphics g = e.Graphics; //創建畫板,這裡的畫板是由Form提供的.
             Pen p = new Pen(Color.Blue, 2);//定義了一個藍色,寬度為的畫筆
+            g.DrawString("Form1_Paint", new Font("黑體", 20), new SolidBrush(Color.Black), x_st, y_st - 24);
             g.DrawLine(p, x_st + 10, y_st + 10, x_st + 110, y_st + 110);//在畫板上畫直線,起始坐標為(10,10),終點坐標為(110,110)   //平移 (1000,100)
             g.DrawRectangle(p, x_st + 10, y_st + 10, 100, 100);//在畫板上畫矩形,起始坐標為(10,10),寬為100, 高為100
             g.DrawEllipse(p, x_st + 10, y_st + 10, 100, 100);//在畫板上畫橢圓,起始坐標為(10,10),外接矩形的寬為100, 高為100
@@ -1592,7 +2303,7 @@ namespace vcs_Draw1
             using (Font the_font = new Font("Times New Roman", 40, FontStyle.Regular, GraphicsUnit.Pixel))
             {
                 // See how big the text will be when drawn.
-                string the_text = "群曜醫電股份有限公司";
+                string the_text = "群曜醫電\n股份有限公司";
                 SizeF text_size = e.Graphics.MeasureString(the_text, the_font);
 
                 // Draw a rectangle and two ellipses.
@@ -1770,22 +2481,6 @@ namespace vcs_Draw1
 
         private void button30_Click(object sender, EventArgs e)
         {
-            //虛線樣式
-
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-
-
-            using (Pen dash_pen = new Pen(Color.Red))
-            {
-                dash_pen.DashStyle = DashStyle.Custom;
-                dash_pen.DashPattern = new float[] { 4, 4 };
-                g.DrawLine(dash_pen, 100, 100, 300, 300);
-            }
-
-
         }
 
         private void button31_Click(object sender, EventArgs e)
@@ -1902,14 +2597,81 @@ namespace vcs_Draw1
 
         private void button34_Click(object sender, EventArgs e)
         {
-            //在Button上畫圖
-            richTextBox1.Text += "在Button上畫圖, 要改buttonXX_Paint()\n";
         }
 
-        private void button34_Paint(object sender, PaintEventArgs e)
+        private void button35_Click(object sender, EventArgs e)
         {
-            int W = button34.Width;
-            int H = button34.Height;
+            //為此Button畫陰影
+            int len = 7;    //陰影長度
+            Graphics ag = this.CreateGraphics();
+            for (int i = 0; i < len; i++)
+            {
+                Point p1 = new Point();
+                p1.X = button35.Left - i;
+                p1.Y = button35.Top + button35.Height + i;
+                Point p2 = new Point();
+                p2.X = button35.Left + button35.Width + i;
+                p2.Y = button35.Top + button35.Height + i;
+                ag.DrawLine(new Pen(Color.Black, 1), p1, p2);
+            }
+            for (int i = 0; i < len; i++)
+            {
+                Point p1 = new Point();
+                p1.X = button35.Left + button35.Width + i;
+                p1.Y = button35.Top - i;
+                Point p2 = new Point();
+                p2.X = button35.Left + button35.Width + i;
+                p2.Y = button35.Top + button35.Height + i;
+                ag.DrawLine(new Pen(Color.Black, 1), p1, p2);
+            }
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+            //為此Button畫投影
+            int len = 7;    //投影長度
+            Graphics ag = this.CreateGraphics();
+            for (int i = 0; i < len; i++)
+            {
+                Point p1 = new Point();
+                p1.X = button36.Left - i;
+                p1.Y = button36.Top;
+                Point p2 = new Point();
+                p2.X = button36.Left + i;
+                p2.Y = button36.Top + button36.Height + i;
+                ag.DrawLine(new Pen(Color.Black, 1), p1, p2);
+            }
+            for (int i = 0; i < len; i++)
+            {
+                Point p1 = new Point();
+                p1.X = button36.Left - i;
+                p1.Y = button36.Top - i;
+                Point p2 = new Point();
+                p2.X = button36.Left + button36.Width + i;
+                p2.Y = button36.Top + i;
+                ag.DrawLine(new Pen(Color.Black, 1), p1, p2);
+            }
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+            show_button_text(sender);
+
+            int w = button37.ClientSize.Width;
+            int h = button37.ClientSize.Height;
+            g = ((Button)sender).CreateGraphics();
+            g.DrawEllipse(p, 0, 0, w - 1, h - 1);
+
+            //在Button上畫圖
+            richTextBox1.Text += "在Button上畫圖, 要加上button_Paint()\n";
+
+            ((Button)sender).Paint += new PaintEventHandler(button_Paint);
+        }
+
+        private void button_Paint(object sender, PaintEventArgs e)
+        {
+            int W = button37.Width;
+            int H = button37.Height;
             //e.Graphics.FillRectangle(new SolidBrush(Color.White), x_st, y_st, W, H);
             e.Graphics.FillRectangle(new SolidBrush(Color.Pink), 0, 0, W, H);
 
@@ -1919,892 +2681,11 @@ namespace vcs_Draw1
             e.Graphics.DrawString("在Button上畫圖", new Font("標楷體", 11), new SolidBrush(Color.Blue), 5, 15);
         }
 
-        private void button35_Click(object sender, EventArgs e)
-        {
-            //透明色測試
-            richTextBox1.Text += "R = " + Color.Transparent.R.ToString() + "\n";
-            richTextBox1.Text += "G = " + Color.Transparent.G.ToString() + "\n";
-            richTextBox1.Text += "B = " + Color.Transparent.B.ToString() + "\n";
-            richTextBox1.Text += "A = " + Color.Transparent.A.ToString() + "\n";
-            richTextBox1.Text += "A2 = " + Color.Red.A.ToString() + "\n";
-
-            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            g = Graphics.FromImage(bitmap1);
-
-            //清空畫布並用透明色填充
-            //g.Clear(Color.Transparent);
-
-            Color c1 = Color.FromArgb(255, 255, 0, 0);
-            SolidBrush sb1 = new SolidBrush(c1);
-            g.FillRectangle(sb1, 50, 50, 100, 100);
-
-            Color c2 = Color.FromArgb(255, 0, 255, 0);
-            SolidBrush sb2 = new SolidBrush(c2);
-            g.FillRectangle(sb2, 100, 50, 100, 100);
-
-            Color c3 = Color.FromArgb(255, 255, 0, 0);
-            SolidBrush sb3 = new SolidBrush(c3);
-            g.FillRectangle(sb3, 50, 200, 100, 100);
-
-            Color c4 = Color.FromArgb(128, 0, 255, 0);
-            SolidBrush sb4 = new SolidBrush(c4);
-            g.FillRectangle(sb4, 100, 200, 100, 100);
-
-            //g.FillRectangle(Brushes.Blue, 00, 320, 600, 50);
-            //g.FillRectangle(Brushes.Blue, 00, 420, 600, 50);
-            /*
-            int i;
-            int w = 40;
-            for (i = 0; i < 13; i++)
-            {
-            Color c5 = Color.FromArgb(255, 20 * i, 0, 0);
-            SolidBrush sb5 = new SolidBrush(c5);
-            g.FillRectangle(sb5, 50 + w * i, 300, w, 100);
-
-            }
-            for (i = 0; i < 13; i++)
-            {
-            Color c5 = Color.FromArgb(20 * i, 255, 0, 0);
-            SolidBrush sb5 = new SolidBrush(c5);
-            g.FillRectangle(sb5, 50 + w * i, 400, w, 100);
-
-            }
-            */
-
-            Color c6 = Color.FromArgb(200, 255, 255, 255);
-            SolidBrush sb5 = new SolidBrush(c6);
-            g.FillRectangle(sb5, 300, 100, 100, 100);
-
-            //g.DrawString("格子裏", new Font("黑體", 20), new SolidBrush(c6), 200, 100);
-            g.DrawString("格子裏", new Font("黑體", 20), new SolidBrush(Color.Black), 200, 100);
-
-            g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
-
-            pictureBox1.Image = bitmap1;
-        }
-
-        private void button36_Click(object sender, EventArgs e)
-        {
-            //Rectangle的交集與聯集
-
-            Graphics g = pictureBox1.CreateGraphics();
-
-            Rectangle rect1 = new Rectangle(30, 30, 150, 150);
-            g.FillRectangle(Brushes.Green, rect1); //綠色矩形區塊 固定 畫綠色
-
-            Rectangle rect2 = new Rectangle(120, 120, 150, 150);
-            g.FillRectangle(Brushes.Red, rect2); //紅色矩形區塊 依滑鼠位置變化 畫紅色
-
-            Rectangle union = Rectangle.Union(rect1, rect2); //聯集區域
-            g.DrawRectangle(Pens.Black, union);                   //聯集 畫 黑色框
-
-            Rectangle intersect = Rectangle.Intersect(rect1, rect2); //交集區域
-            g.FillRectangle(Brushes.Yellow, intersect);    //交集 畫黃色
-        }
-
-        private void button37_Click(object sender, EventArgs e)
-        {
-            //箭頭 虛線
-
-            //自定義直線箭頭大小
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-
-            g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
-
-            System.Drawing.Drawing2D.AdjustableArrowCap lineCap = new System.Drawing.Drawing2D.AdjustableArrowCap(6, 6, true);
-            Pen RedPen = new Pen(Color.Red, 2);
-            RedPen.CustomEndCap = lineCap;
-
-            g.DrawLine(RedPen, 100, 100, 300, 300);
-
-
-            //畫虛線
-            Control P = (Control)sender;
-            Pen pen = new Pen(Color.FromArgb(255, 0, 0), 5);
-            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;//虛線的樣式
-            pen.DashPattern = new float[] { 2, 2 };//設置虛線中實點和空白區域之間的間隔
-            //g.DrawLine(pen, 0, 0, 0, P.Height - 1);
-            g.DrawRectangle(pen, 50, 50, 300, 300);
-
-
-            //#畫虛線
-            Pen p = new Pen(Color.Red, 5);
-            p.DashStyle = DashStyle.Custom;//虛線的樣式
-            p.DashPattern = new float[] { 2, 2 };//設置虛線中實點和空白區域之間的間隔
-            g.DrawLine(p, 0, 0, this.pictureBox1.Width - 1, this.pictureBox1.Height - 1);
-
-
-            pictureBox1.Image = bitmap1;
-
-        }
-
         private void button38_Click(object sender, EventArgs e)
         {
-            //為此Button畫陰影
-            int len = 7;    //陰影長度
-            Graphics ag = this.CreateGraphics();
-            for (int i = 0; i < len; i++)
-            {
-                Point p1 = new Point();
-                p1.X = button38.Left - i;
-                p1.Y = button38.Top + button38.Height + i;
-                Point p2 = new Point();
-                p2.X = button38.Left + button38.Width + i;
-                p2.Y = button38.Top + button38.Height + i;
-                ag.DrawLine(new Pen(Color.Black, 1), p1, p2);
-            }
-            for (int i = 0; i < len; i++)
-            {
-                Point p1 = new Point();
-                p1.X = button38.Left + button38.Width + i;
-                p1.Y = button38.Top - i;
-                Point p2 = new Point();
-                p2.X = button38.Left + button38.Width + i;
-                p2.Y = button38.Top + button38.Height + i;
-                ag.DrawLine(new Pen(Color.Black, 1), p1, p2);
-            }
         }
 
         private void button39_Click(object sender, EventArgs e)
-        {
-            //為此Button畫投影
-            int len = 7;    //投影長度
-            Graphics ag = this.CreateGraphics();
-            for (int i = 0; i < len; i++)
-            {
-                Point p1 = new Point();
-                p1.X = button39.Left - i;
-                p1.Y = button39.Top;
-                Point p2 = new Point();
-                p2.X = button39.Left + i;
-                p2.Y = button39.Top + button39.Height + i;
-                ag.DrawLine(new Pen(Color.Black, 1), p1, p2);
-            }
-            for (int i = 0; i < len; i++)
-            {
-                Point p1 = new Point();
-                p1.X = button39.Left - i;
-                p1.Y = button39.Top - i;
-                Point p2 = new Point();
-                p2.X = button39.Left + button39.Width + i;
-                p2.Y = button39.Top + i;
-                ag.DrawLine(new Pen(Color.Black, 1), p1, p2);
-            }
-        }
-
-        private void button40_Click(object sender, EventArgs e)
-        {
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-
-            Font f = new Font("標楷體", 16);
-            SolidBrush sb = new SolidBrush(Color.Blue);
-            Point pt = new Point();
-
-            for (int size = 1; size <= 10; size++)
-            {
-                pt = new Point(100, 42 * size);
-                g.DrawString(size.ToString(), f, sb, pt);
-
-                pt = new Point(200, 42 * size);
-                DrawPoint(g, pt, Color.Red, Color.Pink, 10);
-            }
-
-
-
-            //private void DrawPoint2(Graphics g, PointF pt, Brush brush, Pen pen)
-
-
-            for (int size = 1; size <= 10; size++)
-            {
-                pt = new Point(300, 42 * size);
-                g.DrawString(size.ToString(), f, sb, pt);
-
-                pt = new Point(400, 42 * size);
-                DrawPoint2(g, pt, Brushes.LightBlue, Pens.Blue);
-
-                pt = new Point(500, 42 * size);
-                DrawPoint2(g, pt, Brushes.HotPink, Pens.Red);
-            }
-
-
-            pictureBox1.Image = bitmap1;
-        }
-
-        private void button41_Click(object sender, EventArgs e)
-        {
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-
-            richTextBox1.Text += "畫一些空心圓\n";
-
-            int radius = 80;
-            int linewidth = 10;
-            Point pt = new Point();
-
-            pt = new Point(80, 80);
-            DrawCircle(g, pt, radius, linewidth, Color.Red);
-
-            pt = new Point(160, 160);
-            DrawCircle(g, pt, radius, linewidth, Color.Green);
-
-            pt = new Point(240, 240);
-            DrawCircle(g, pt, radius, linewidth, Color.Blue);
-            pictureBox1.Image = bitmap1;
-        }
-
-        private void button42_Click(object sender, EventArgs e)
-        {
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-
-            richTextBox1.Text += "畫一些實心圓\n";
-
-            int radius = 80;
-            Point pt = new Point();
-
-            pt = new Point(80 + 160, 80);
-            FillCircle(g, pt, radius, Color.Red);
-
-            pt = new Point(160 + 160, 160);
-            FillCircle(g, pt, radius, Color.Green);
-
-            pt = new Point(240 + 160, 240);
-            FillCircle(g, pt, radius, Color.Blue);
-            pictureBox1.Image = bitmap1;
-        }
-
-        private void button43_Click(object sender, EventArgs e)
-        {
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-
-            richTextBox1.Text += "畫一些空心星形\n";
-
-            int radius = 80;
-            int linewidth = 5;
-            Point center = new Point(100, 100);
-            DrawStar(g, center, radius, linewidth, Color.Red);
-            pictureBox1.Image = bitmap1;
-        }
-
-        private void button44_Click(object sender, EventArgs e)
-        {
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-
-            richTextBox1.Text += "畫一些實心星形\n";
-
-            int radius = 80;
-            Point center = new Point(100, 100);
-            FillStar(g, center, radius, Color.Red);
-            pictureBox1.Image = bitmap1;
-        }
-
-        //基本畫圖1
-        private void button45_Click(object sender, EventArgs e)
-        {
-            int W = 1100;
-            int H = 750;
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-            bitmap1 = new Bitmap(W, H);
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-            g.Clear(Color.White);
-            pictureBox1.Image = bitmap1;
-            pictureBox1.Location = new Point(20, 20);
-
-            //基本畫圖
-
-            p = new Pen(Color.Green, 3);
-            sb = new SolidBrush(Color.Blue);
-            f = new Font("Times New Roman", 14);
-
-            Rectangle rec;
-            Rectangle[] recs;
-
-            int x_st = 20;
-            int y_st = 20;
-            int dx = 100;
-            int dy = 80;
-            int w = 80;
-            int h = 60;
-
-            //空長方形
-            x_st = 20;
-            y_st = 20;
-            g.DrawString("DrawRectangle", f, sb, new PointF(x_st, y_st));
-
-            x_st += dx;
-            x_st += dx / 2;
-            g.DrawRectangle(p, x_st, y_st, w, h);
-
-            x_st += dx;
-            rec = new Rectangle(x_st, y_st, w, h);
-            g.DrawRectangle(p, rec);
-
-            x_st += dx;
-            g.DrawRectangle(new Pen(Color.Lime), new Rectangle(x_st, y_st, w, h));
-
-
-            //填滿長方形
-            x_st = W / 2;
-            y_st = 20;
-            g.DrawString("FillRectangle", f, sb, new PointF(x_st, y_st));
-
-            x_st += dx;
-            x_st += dx / 2;
-            g.FillRectangle(sb, x_st, y_st, w, h);
-
-            x_st += dx;
-            rec = new Rectangle(x_st, y_st, w, h);
-            g.FillRectangle(sb, rec);
-
-            x_st += dx;
-            g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(x_st, y_st, w, h));
-
-
-            //空長方形多個
-            x_st = 20;
-            y_st = 20;
-            y_st += dy;
-            g.DrawString("DrawRectangles", f, sb, new PointF(x_st, y_st));
-
-            x_st += dx;
-            x_st += dx / 2;
-            recs = new Rectangle[4] {
-	            new Rectangle(x_st+0, y_st+0, 50, 80),
-	            new Rectangle(x_st+60, y_st+0, 80, 60),
-	            new Rectangle(x_st+60+90, y_st+0, 100, 75),
-	            new Rectangle(x_st+60+90+110, y_st+0, 50, 70)
-            };
-            g.DrawRectangles(p, recs);
-
-
-            //填滿長方形多個
-            x_st = W / 2;
-            y_st = 20;
-            y_st += dy;
-            g.DrawString("FillRectangles", f, sb, new PointF(x_st, y_st));
-
-            x_st += dx;
-            x_st += dx / 2;
-            recs = new Rectangle[4] {
-	            new Rectangle(x_st+0, y_st+0, 50, 80),
-	            new Rectangle(x_st+60, y_st+0, 80, 60),
-	            new Rectangle(x_st+60+90, y_st+0, 100, 75),
-	            new Rectangle(x_st+60+90+110, y_st+0, 50, 70)
-            };
-            g.FillRectangles(sb, recs);
-
-
-            //空橢圓形
-            x_st = 20;
-            y_st = 20;
-            y_st += dy * 2;
-            g.DrawString("DrawEllipse", f, sb, new PointF(x_st, y_st));
-
-            x_st += dx;
-            x_st += dx / 2;
-            g.DrawEllipse(p, x_st, y_st, w, h);
-
-            x_st += dx;
-            rec = new Rectangle(x_st, y_st, w, h);
-            g.DrawEllipse(p, rec);
-
-            x_st += dx;
-            g.DrawEllipse(new Pen(Color.Lime), new Rectangle(x_st, y_st, w, h));
-
-
-            //填滿橢圓形
-            x_st = W / 2;
-            y_st = 20;
-            y_st += dy * 2;
-            g.DrawString("FillEllipse", f, sb, new PointF(x_st, y_st));
-
-            x_st += dx;
-            x_st += dx / 2;
-            g.FillEllipse(sb, x_st, y_st, w, h);
-
-            x_st += dx;
-            rec = new Rectangle(x_st, y_st, w, h);
-            g.FillEllipse(sb, rec);
-
-            x_st += dx;
-            g.FillEllipse(new SolidBrush(Color.Lime), new Rectangle(x_st, y_st, w, h));
-
-
-            //空多邊形
-            x_st = 20;
-            y_st = 20;
-            y_st += dy * 3;
-            g.DrawString("DrawPolygon", f, sb, new PointF(x_st, y_st));
-
-            x_st += dx;
-            x_st += dx / 2;
-
-            Point[] points1 = new Point[3];
-            points1[0] = new Point(x_st + 0, y_st + 0);
-            points1[1] = new Point(x_st + 0, y_st + 50);
-            points1[2] = new Point(x_st + 100, y_st + 50);
-            g.DrawPolygon(p, points1);
-
-            x_st += dx;
-            Point[] points2 = { 
-                new Point(x_st+0, y_st+0),
-                new Point(x_st+200, y_st+20),
-                new Point(x_st+200, y_st+60),
-                new Point(x_st+150, y_st+20),
-                new Point(x_st+20, y_st+60) };
-            g.DrawPolygon(Pens.Red, points2);
-
-
-            //填滿多邊形
-            x_st = W / 2;
-            y_st = 20;
-            y_st += dy * 3;
-            g.DrawString("FillPolygon", f, sb, new PointF(x_st, y_st));
-
-            x_st += dx;
-            x_st += dx / 2;
-
-            Point[] points3 = new Point[3];
-            points3[0] = new Point(x_st + 0, y_st + 0);
-            points3[1] = new Point(x_st + 0, y_st + 50);
-            points3[2] = new Point(x_st + 100, y_st + 50);
-            g.FillPolygon(sb, points3);
-
-            x_st += dx;
-            Point[] points4 = { 
-                new Point(x_st+0, y_st+0),
-                new Point(x_st+200, y_st+20),
-                new Point(x_st+200, y_st+60),
-                new Point(x_st+150, y_st+20),
-                new Point(x_st+20, y_st+60) };
-            g.FillPolygon(new SolidBrush(Color.Red), points4);
-
-            //空派形
-            x_st = 20;
-            y_st = 20;
-            y_st += dy * 4;
-            g.DrawString("DrawPie", f, sb, new PointF(x_st, y_st));
-
-            x_st += dx;
-            g.DrawPie(p, x_st, y_st, w, h, 0, 30);
-
-            x_st += dx;
-            g.DrawPie(new Pen(Color.Red), new Rectangle(x_st, y_st, w, h), 180, 30);
-
-            x_st += dx / 2;
-            g.DrawPie(p, x_st, y_st, w, h, 0, -30);
-
-            x_st += dx;
-            g.DrawPie(p, x_st, y_st - 20, w, w, 40, 280);
-
-
-            //填滿派形
-            x_st = W / 2;
-            y_st = 20;
-            y_st += dy * 4;
-            g.DrawString("FillPie", f, sb, new PointF(x_st, y_st));
-
-            x_st += dx;
-            g.FillPie(sb, x_st, y_st, w, h, 0, 30);
-
-            x_st += dx;
-            g.FillPie(new SolidBrush(Color.Red), new Rectangle(x_st, y_st, w, h), 180, 30);
-
-            x_st += dx / 2;
-            g.FillPie(sb, x_st, y_st, w, h, 0, -30);
-
-            x_st += dx;
-            g.FillPie(sb, x_st, y_st - 20, w, w, 40, 280);
-
-
-            //畫分佈餅圖
-            x_st = W - 180;
-            y_st = H - 180;
-            int r = 100;
-            Brush bb = new SolidBrush(Color.Navy);
-            g.FillPie(bb, x_st, y_st, r, r, 0, 90);
-            //畫個Pie，顏色是Pink,位置的x、y在50，大小為r*r，角度為從0度開始，畫90度
-
-            bb = new SolidBrush(Color.Green);
-            g.FillPie(bb, x_st, y_st, r, r, 90, 135);
-            //畫個Pie，顏色是Green,位置大小同上，角度為接著從90度開始，畫135度
-
-            bb = new SolidBrush(Color.Purple);
-            g.FillPie(bb, x_st, y_st, r, r, 225, 135);
-            //畫個Pie，顏色是Purple,位置大小同上，角度為接著從90+135=225度開始 畫135度
-            //如此，這3個pie就會合成一個圓
-
-
-            //畫直線
-            x_st = 20;
-            y_st = 20;
-            y_st += dy * 5;
-            g.DrawString("DrawLine", f, sb, new PointF(x_st, y_st));
-
-            x_st += dx;
-            Point point1a = new Point(x_st, y_st);
-            Point point2a = new Point(x_st + 100, y_st + 50);
-            g.DrawLine(p, point1a, point2a);
-
-            Point point3a = new Point(x_st, y_st + 50);
-            Point point4a = new Point(x_st + 100, y_st);
-            g.DrawLine(p, point3a, point4a);
-
-
-            //畫直線連線與曲線
-            x_st += dx * 3 / 2;
-
-            g.DrawString("DrawLines", f, new SolidBrush(Color.Red), new PointF(x_st, y_st));
-            g.DrawString("DrawCurve", f, new SolidBrush(Color.Green), new PointF(x_st, y_st + 50));
-
-            x_st += dx;
-            // Create points that define curve.
-            Point point0 = new Point(x_st + 0, y_st + 0);
-            Point point1 = new Point(x_st + 50, y_st + 150);
-            Point point2 = new Point(x_st + 100, y_st - 50);
-            Point point3 = new Point(x_st + 150, y_st + 120);
-            Point point4 = new Point(x_st + 200, y_st - 20);
-            Point point5 = new Point(x_st + 250, y_st + 150);
-            Point point6 = new Point(x_st + 300, y_st - 20);
-            Point point7 = new Point(x_st + 350, y_st + 50);
-            Point point8 = new Point(x_st + 400, y_st + 0);
-            Point point9 = new Point(x_st + 450, y_st + 150);
-            Point point10 = new Point(x_st + 500, y_st + 0);
-            Point point11 = new Point(x_st + 550, y_st + 150);
-            Point point12 = new Point(x_st + 600, y_st + 50);
-
-            Point[] curvePoints = { point0, point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12 };
-
-            Pen redPen = new Pen(Color.Red, 3); // Create pens.
-            g.DrawLines(redPen, curvePoints);   //畫直線
-
-            Pen greenPen = new Pen(Color.Green, 3); // Create pens.
-            g.DrawCurve(greenPen, curvePoints); //畫曲線
-
-            x_st = 670;
-            y_st = 530;
-            g.DrawString("Sine", f, new SolidBrush(Color.Red), new PointF(x_st, y_st));
-
-            /*
-            Point[] pts = new Point[90];
-            double yy;
-            int i;
-            for (i = 0; i < 90; i++)
-            {
-                yy = Math.Sin(Math.PI * i * 4 / 180) * 50;
-                pts[i].X = x_st + (int)i * 1;
-                pts[i].Y = y_st + (int)yy;
-                //richTextBox1.Text += "x= " + pts[i].X.ToString() + " y = " + pts[i].Y.ToString() + "\n";
-            }
-            p = new Pen(Color.Navy, 3);
-            g.DrawCurve(p, pts);
-            */
-
-            //畫三角函數
-            int omega = 60;  //angular frequency
-            Point[] pts = new Point[360 / omega + 1];    //一維Point陣列內有100個Point
-            int i;
-            int amplitude = 50;
-            for (i = 0; i <= 360 / omega; i++)
-            {
-                pts[i].X = x_st + i * omega / 3;
-                pts[i].Y = y_st - (int)(amplitude * Math.Sin(i * omega * Math.PI / 180));   //Y反相
-                g.FillEllipse(Brushes.Black, pts[i].X - 3, pts[i].Y - 3, 6, 6); //畫點
-            }
-            g.DrawLines(new Pen(Brushes.Red, 1), pts);      //畫直線, 直接把Point陣列畫出來
-            g.DrawCurve(new Pen(Brushes.Blue, 1), pts);     //畫曲線, 直接把Point陣列畫出來
-
-
-            //各種連線
-            x_st = 50;
-            y_st = 20;
-            y_st += dy * 6;
-            w = 100;
-            h = 100;
-
-            Point[] pa = { new Point(x_st, y_st), new Point(x_st, y_st + h), new Point(x_st + w, y_st + h), new Point(x_st + w, y_st), new Point(x_st + w * 2, y_st), new Point(x_st + w * 2, y_st + h), new Point(x_st + w * 3, y_st + h / 2) };
-
-            p = new Pen(Color.Red, 5);
-            g.DrawLines(p, pa);  //陣列的連線
-
-            p = new Pen(Color.LightCoral, 1);
-            for (float k = 0; k < 1.5; k += 0.4F)
-            {
-                g.DrawCurve(p, pa, k);  //DrawCurve 加上 屈度
-            }
-
-            p = new Pen(Color.Red, 1);
-            g.DrawCurve(p, pa);     ////DrawCurve 預設屈度
-
-            p = new Pen(Color.Yellow, 1);
-            g.DrawClosedCurve(p, pa);       //頭尾相連 加上 屈度
-
-
-            //畫弧線
-            x_st = 20;
-            y_st = 20;
-            y_st += dy * 8;
-            g.DrawString("DrawArc", f, sb, new PointF(x_st, y_st));
-
-            y_st -= dy / 2;
-
-            x_st += dx * 1;
-            p = new Pen(Color.Red, 5);
-            g.DrawEllipse(p, x_st, y_st, 150, 100);
-            g.DrawArc(new Pen(Color.Blue, 10), new Rectangle(x_st, y_st, 150, 100), 0, 135);
-
-            x_st += dx * 2;
-            p = new Pen(Color.Red, 5);
-            g.DrawEllipse(p, x_st, y_st, 150, 100);
-            p = new Pen(Color.Blue, 10);
-            p.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
-            g.DrawArc(p, x_st, y_st, 150, 100, 0, 135);
-
-            x_st += dx * 2;
-            p = new Pen(Color.Red, 5);
-            g.DrawEllipse(p, x_st, y_st, 150, 100);
-            p = new Pen(Color.Blue, 10);
-            p.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
-            g.DrawArc(p, x_st, y_st, 150, 100, 0, -135);
-
-
-            //畫字
-            // Create string to draw.
-            String drawString = "各種畫圖範例";
-
-            // Create font and brush.
-            Font drawFont = new Font("標楷體", 36, FontStyle.Italic | FontStyle.Underline | FontStyle.Strikeout);
-            SolidBrush drawBrush = new SolidBrush(Color.Navy);
-
-            // Create point for upper-left corner of drawing.
-            PointF drawPoint = new PointF(W - 400, H - 70);
-
-            // Draw string to screen.
-            g.DrawString(drawString, drawFont, drawBrush, drawPoint);
-
-            drawPoint = new PointF(W - 400, H - 70 - 50);
-            g.DrawString(drawString, new Font("標楷體", 24, FontStyle.Bold | FontStyle.Italic), new SolidBrush(Color.Navy), drawPoint);
-            //畫字就比較簡單了，會產生一個標楷體，24的大小，粗加斜，顏色為bb，位置在drawPoint
-
-
-            //貼圖
-            g.DrawString("貼圖", new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(W - 80, 30));
-            Bitmap bmp = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_ball\red-ball-icon.png");
-            for (y_st = 60; y_st < H; y_st += 80)
-            {
-                g.DrawImage(bmp, W - 75, y_st);
-            }
-
-            // 剛好等寬畫滿邊框
-            p = new Pen(Color.Green, 10);
-            g.DrawRectangle(p, 0 + p.Width / 2, 0 + p.Width / 2, bitmap1.Width - p.Width, bitmap1.Height - p.Width);
-        }
-
-        //基本畫圖2
-        private void button46_Click(object sender, EventArgs e)
-        {
-            int W = 1100;
-            int H = 750;
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-            bitmap1 = new Bitmap(W, H);
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-            g.Clear(Color.White);
-            pictureBox1.Image = bitmap1;
-            pictureBox1.Location = new Point(20, 20);
-
-            //基本畫圖
-
-            p = new Pen(Color.Green, 3);
-            sb = new SolidBrush(Color.Blue);
-            f = new Font("Times New Roman", 14);
-
-            //Rectangle rec;
-            //Rectangle[] recs;
-
-            int x_st = 20;
-            int y_st = 20;
-            int dx = 100;
-            int dy = 80;
-            int w = 80;
-            int h = 60;
-
-
-
-            //貝茲線
-            x_st = 20;
-            y_st = 20;
-            g.DrawString("DrawBezier", f, sb, new PointF(x_st, y_st));
-
-            x_st += dx;
-            x_st += dx / 2;
-
-            Point[] points = new Point[4];
-            points[0] = new Point(x_st + 0, y_st + 0);
-            points[1] = new Point(x_st + 0, y_st + h);
-            points[2] = new Point(x_st + w * 2, y_st + h);
-            points[3] = new Point(x_st + w * 2, y_st + 0);
-
-            g.DrawBezier(new Pen(Color.Black), points[0], points[1], points[2], points[3]);
-            g.DrawLines(Pens.Red, points);
-
-            for (int i = 0; i < 4; i++)
-            {
-                points[i] = new Point(points[i].X + dx * 2, points[i].Y);
-            }
-            g.DrawBeziers(new Pen(Color.Black), points);
-            g.DrawLines(Pens.Red, points);
-
-
-
-            //組合路徑
-            x_st = 20;
-            y_st = 20;
-            y_st += dy;
-            g.DrawString("DrawPath", f, sb, new PointF(x_st, y_st));
-
-            x_st += dx;
-            x_st += dx / 2;
-
-            GraphicsPath gp1 = new GraphicsPath();
-            gp1.AddLine(new Point(x_st + 0, y_st + 0), new Point(x_st + w, y_st + h));
-            gp1.AddLine(new Point(x_st + 0, y_st + h), new Point(x_st + w, y_st + 0));
-            gp1.AddRectangle(new Rectangle(x_st + w, y_st - 10, w, h));
-            p = new Pen(Color.Red, 3);
-            g.DrawPath(new Pen(Color.Red), gp1);
-
-            x_st += dx * 2;
-            gp1.Reset();
-            gp1.AddLine(x_st + 0, y_st + 0, x_st + 50, y_st + 50);
-            gp1.AddEllipse(x_st + 50, y_st + 0, 100, 100);
-            gp1.AddBezier(x_st + 50 + 100, y_st + 50, x_st + 200, 0, x_st + 300, 180, x_st + 400, 20);
-            p = new Pen(Color.Green, 3);
-            g.DrawPath(p, gp1);
-
-
-            x_st += dx * 3;
-            GraphicsPath gp2 = new GraphicsPath();  // Create a GraphicsPath object.
-
-            Point[] pa = {
-                    new Point(x_st+0, y_st+0), 
-                    new Point(x_st+0, y_st+100), 
-                    new Point(x_st+100, y_st+100),
-                    new Point(x_st+100, y_st+0)
-                                   };
-
-            gp2.AddArc(x_st + 100, y_st + 0, 100, 100, 180, 180);
-            gp2.StartFigure();
-            gp2.AddCurve(pa);
-            gp2.AddPie(x_st + 100 + 50, y_st + 0, 100, 100, 40, 110);
-            g.DrawPath(p, gp2);
-
-            //填滿組合路徑
-            x_st = 20;
-            y_st = 20;
-            y_st += dy * 2;
-            g.DrawString("FillPath", f, sb, new PointF(x_st, y_st));
-
-
-            GraphicsPath gp3 = new GraphicsPath();  // Create a GraphicsPath object.
-            // Set up all the string parameters.
-            String drawString = "FillPath加入文字範例";
-            FontFamily family = new FontFamily("Times New Roman");
-            int fontStyle = (int)FontStyle.Italic;
-            int emSize = 26;
-            PointF pt = new PointF(x_st + dx, y_st);
-            StringFormat format = StringFormat.GenericDefault;
-            // Add the string to the path.
-            gp3.AddString(drawString, family, fontStyle, emSize, pt, format);
-            //Draw the path to the screen.
-            g.FillPath(Brushes.Black, gp3);
-
-            y_st += dy / 2;
-            //g.DrawString("FillPath", f, sb, new PointF(x_st, y_st));
-
-            x_st += dx;
-
-            GraphicsPath gp4 = new GraphicsPath();
-            gp4.AddLine(new Point(x_st + 10, y_st + 10), new Point(x_st + 60, y_st + 60));
-            gp4.AddLine(new Point(x_st + 60, y_st + 10), new Point(x_st + 10, y_st + 60));
-            gp4.AddRectangle(new Rectangle(x_st + 10, y_st + 10, 50, 50));
-            g.FillPath(new SolidBrush(Color.Blue), gp4);
-
-
-
-            //畫多個Rectangles
-            x_st = 20;
-            y_st = 20;
-            y_st += dy * 4;
-            g.DrawString("畫多個Rectangles", f, sb, new PointF(x_st, y_st - 25));
-
-            Rectangle[] R = new Rectangle[20];
-            for (int i = 0; i < R.Length; i++)
-            {
-                //R[i] = new Rectangle(0 + 30 * i, 0 + 30 * i);
-                R[i] = new Rectangle(x_st + i * 10, y_st + i * 5, i * 30, i * 15);
-            }
-            g.DrawRectangles(new Pen(Brushes.Red, 2), R);
-
-
-        }
-
-        private void button47_Click(object sender, EventArgs e)
-        {
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-
-            //畫多邊形與五角星星
-
-            Point[] pt = new Point[5];  // 五個點
-
-            int Cx = this.pictureBox1.ClientSize.Width / 2;  // 中心點
-            int Cy = this.pictureBox1.ClientSize.Height / 2;
-            int D = (int)(Math.Min(this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height) / 2) - 10; // 半徑
-            double Theta = -Math.PI / 2.0; // 角度
-
-            int i;
-            for (i = 0; i < 5; i++)
-            {
-                pt[i].X = Cx + (int)(D * Math.Cos(Theta));
-                pt[i].Y = Cy + (int)(D * Math.Sin(Theta));
-                Theta += Math.PI * 2.0 / 5.0;  // 五邊形
-                //Theta += 2 * Math.PI * 2.0 / 5.0; // 五角星星
-            }
-            g.DrawPolygon(Pens.Black, pt); // 繪出多邊形
-
-            for (i = 0; i < 5; i++)
-            {
-                pt[i].X = Cx + (int)(D * Math.Cos(Theta));
-                pt[i].Y = Cy + (int)(D * Math.Sin(Theta));
-                //Theta += Math.PI * 2.0 / 5.0;  // 五邊形
-                Theta += 2 * Math.PI * 2.0 / 5.0; // 五角星星
-            }
-            g.DrawPolygon(Pens.Red, pt); // 繪出多邊形
-        }
-
-        private void button48_Click(object sender, EventArgs e)
         {
         }
 
@@ -2876,7 +2757,6 @@ namespace vcs_Draw1
                 g.FillEllipse(sb, e.X - 10, e.Y - 10, 20, 20);
                 pictureBox1.Image = bitmap1;
             }
-
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
@@ -2884,223 +2764,15 @@ namespace vcs_Draw1
             flag_mouse_down = 0;
         }
 
-        private void button49_Click(object sender, EventArgs e)
+        void show_button_text(object sender)
         {
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
+            richTextBox1.Text += ((Button)sender).Text + "\n";
         }
 
-        private void button50_Click(object sender, EventArgs e)
+        private void timer_progress_Tick(object sender, EventArgs e)
         {
-            //半透明筆刷
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-
-            //　寫文字的筆刷，透明度為100,藍色
-            Brush b = new SolidBrush(Color.FromArgb(100, Color.Blue));
-
-            int i;
-            for (i = 0; i < 10; i += 2)
-            {
-                g.DrawString("群曜醫電", new Font("標楷體", 80), b, 100 + i, 100 + i);
-            }
-            //重疊部分 筆色加深
-
-            pictureBox1.Image = bitmap1;
-        }
-
-        private void button51_Click(object sender, EventArgs e)
-        {
-            //DrawPoint
-
-            List<PointF> points = new List<PointF>();
-
-            int i;
-            Random r = new Random();
-
-            Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
-            g.Clear(Color.White);
-
-            for (i = 0; i < 14; i++)
-            {
-                points.Add(new PointF(30 * i, r.Next(400)));
-            }
-
-            if (points.Count > 1)
-            {
-                Pen p = new Pen(Color.Red);
-                g.DrawLines(p, points.ToArray());   //List轉Array
-            }
-
-            foreach (PointF point in points)
-            {
-                const float radius = 4;
-                g.DrawEllipse(Pens.Red, point.X - radius, point.Y - radius, 2 * radius, 2 * radius);
-            }
-        }
-
-        private void button52_Click(object sender, EventArgs e)
-        {
+            //畫進度表
             pictureBox_count.Invalidate();
-        }
-
-        private void button53_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button54_Click(object sender, EventArgs e)
-        {
-        }
-
-        int show_position = 1;
-        private void button55_Click(object sender, EventArgs e)
-        {
-            if (bitmap1 == null)
-            {
-                open_new_file();
-                //製作圖面的標記文字
-                bitmap1 = new Bitmap(filename);
-                g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-                pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-                pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
-            }
-
-            Font f = new Font("標楷體", 24, FontStyle.Bold);
-
-            pictureBox1.Image = SetBadge(pictureBox1, "牡丹亭", f, show_position);//呼叫自定義方法
-            show_position++;  //設定文字的顯示位置
-            if (show_position > 6)
-            {
-                show_position = 1;
-            }
-        }
-
-        public Image SetBadge(PictureBox Pict, String Str, Font font, int place)
-        {
-            Image Var_Image = Pict.Image;//根據圖片實例化Image類
-            int Var_FontSize = (int)font.Size;//取得字體大小
-            bool Var_isSetFont = false;//判斷目前文字是否超出圖片的大小
-            int Var_W = Var_Image.Width;//取得圖片的寬度
-            int Var_H = Var_Image.Height;//取得圖片的高度
-            int Var_StrX = 0;//記錄文字的X位置
-            int Var_StrY = 0;//記錄文字的Y位置
-
-            Bitmap Var_bmp = new Bitmap(Var_W, Var_H);//實例化Image類
-            Bitmap Var_SaveBmp = new Bitmap(Var_Image);//實例化Image類
-            Graphics g = Graphics.FromImage(Var_bmp);//用指定的Bitmap實例化Graphics
-            Graphics tem_Graphics = Graphics.FromImage(Var_Image);//用指定的Bitmap實例化Graphics
-            SizeF Var_Size = new SizeF(Var_W, Var_H);//實例化SizeF類
-            Font tem_Font = font;//取得文字的設定文字
-            g.Clear(Color.White);//清空圖片
-            while (Var_isSetFont == false)//如果文字超出圖片的大小
-            {
-                //設定文字的文字
-                tem_Font = new Font(font.Name, Var_FontSize, font.Bold ? FontStyle.Bold : FontStyle.Regular);
-                Var_Size = g.MeasureString(Str, tem_Font);//對文字進行測量
-                if (Var_Size.Width < Var_bmp.Width - 10)//如果文字的寬度沒有超出圖片
-                {
-                    if (Var_Size.Height < Var_bmp.Height - 10)//如果文字的高度沒有超出圖片
-                        Var_isSetFont = true;//不減小文字的大小
-                }
-                else
-                    Var_FontSize = Var_FontSize - 1;//文字的字體大小減1
-            }
-            switch (place)//選擇文字的顯示位置
-            {
-                case 1://右下角
-                    {
-                        Var_StrX = (int)(Var_bmp.Width - Var_Size.Width - 3);//設定文字的X座標值
-                        Var_StrY = (int)(Var_bmp.Height - Var_Size.Height);//設定文字的Y座標值
-                        break;
-                    }
-                case 2://右上角
-                    {
-                        Var_StrX = (int)(Var_bmp.Width - Var_Size.Width - 3);
-                        Var_StrY = 1;
-                        break;
-                    }
-                case 3://左下角
-                    {
-                        Var_StrX = 1;
-                        Var_StrY = (int)(Var_bmp.Height - Var_Size.Height);
-                        break;
-                    }
-                case 4://左上角
-                    {
-                        Var_StrX = 1;
-                        Var_StrY = 1;
-                        break;
-                    }
-                case 5://頂局中
-                    {
-                        Var_StrX = (int)(Var_bmp.Width - Var_Size.Width - 2) / 2;
-                        Var_StrY = 1;
-                        break;
-                    }
-                case 6://底局中
-                    {
-                        Var_StrX = (int)(Var_bmp.Width - Var_Size.Width - 2) / 2;
-                        Var_StrY = (int)(Var_bmp.Height - Var_Size.Height);
-                        break;
-                    }
-
-            }
-            g.DrawString(Str, tem_Font, new SolidBrush(Color.Black), Var_StrX, Var_StrY);//繪製前景色為黑色的文字
-            int tem_Become = 40;//設定文字的變色深度
-            //搜尋圖片的所有象素
-            for (int x = 1; x < Var_bmp.Width; x++)
-            {
-                for (int y = 1; y < Var_bmp.Height; y++)
-                {
-                    int tem_a, tem_r, tem_g, tem_b, tem_r1, tem_g1, tem_b1;//定義變數
-                    if (Var_bmp.GetPixel(x, y).ToArgb() == Color.Black.ToArgb())//如果目前象素的顏色為黑色
-                    {
-                        tem_a = Var_SaveBmp.GetPixel(x, y).A;//取得目前象素的alpha份量值
-                        tem_r = Var_SaveBmp.GetPixel(x, y).R;//取得目前象素的R色值
-                        tem_g = Var_SaveBmp.GetPixel(x, y).G;//取得目前象素的G色值
-                        tem_b = Var_SaveBmp.GetPixel(x, y).B;//取得目前象素的B色值
-                        tem_r1 = tem_r;//臨時儲存R色值
-                        tem_g1 = tem_g;//臨時儲存G色值
-                        tem_b1 = tem_b;//臨時儲存B色值
-                        //根據加深後的圖片背景顯示文字
-                        if (tem_b + tem_Become < 255)//如果B色值加上目前深度小於255
-                            tem_b = tem_b + 255;//B色值加上深度值
-                        if (tem_g + tem_Become < 255)
-                            tem_g = tem_g + 255;
-                        if (tem_r + tem_Become < 255)
-                            tem_r = tem_r + 255;
-                        if (tem_r1 - tem_Become > 0)//如果B色值加上目前深度大於0
-                            tem_r1 = tem_r1 - tem_Become;//B色值減去深度值
-                        if (tem_g1 - tem_Become > 0)
-                            tem_g1 = tem_g1 - tem_Become;
-                        if (tem_b1 - tem_Become > 0)
-                            tem_b1 = tem_b1 - tem_Become;
-                        tem_Graphics.DrawEllipse(new Pen(new SolidBrush(Color.Black)), x, y + 1, 3, 3);//繪製文字的陰影
-                        //以深後的圖片背景顯示文字
-                        tem_Graphics.DrawEllipse(new Pen(new SolidBrush(Color.FromArgb(tem_a, tem_r1, tem_g1, tem_b1))), x, y, 1, 1);
-                    }
-                }
-            }
-            return Var_Image;
-        }
-
-        private void button56_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button57_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button58_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button59_Click(object sender, EventArgs e)
-        {
         }
 
         int count = 0;
@@ -3138,3 +2810,38 @@ namespace vcs_Draw1
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+            bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0xff, 0x00, 0x00));
+            bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, 0xff, 0x00));
+            bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, 0x00, 0xff));
+
+bitmap1.SetPixel(xx, yy, Color.FromArgb(0xFF, (rr) % 256, (gg) % 256, (bb) % 256));
+
+bitmap1.SetPixel(xx, yy, Color.FromArgb(30, 0x11, 0x33, 0x55));
+
+bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0, 0, 0));
+
+                        Color p = bitmap1.GetPixel(xx, yy);
+                        //richTextBox1.Text += p.ToString() + " ";
+                        richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2") + p.B.ToString("X2") + " ";
+ 
+ */
+
+
+

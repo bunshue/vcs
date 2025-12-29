@@ -31,11 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.p2 = new System.Windows.Forms.Panel();
-            this.p1 = new System.Windows.Forms.Panel();
-            this.p3 = new System.Windows.Forms.Panel();
-            this.p0 = new System.Windows.Forms.Panel();
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer_rotate = new System.Windows.Forms.Timer(this.components);
             this.bt_clear = new System.Windows.Forms.Button();
             this.timer_random_rectangle = new System.Windows.Forms.Timer(this.components);
@@ -70,6 +65,17 @@
             this.pictureBox_random_color = new System.Windows.Forms.PictureBox();
             this.timer_random_color = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_battery2 = new System.Windows.Forms.PictureBox();
+            this.lb_title00 = new System.Windows.Forms.Label();
+            this.lb_title77 = new System.Windows.Forms.Label();
+            this.lb_title03 = new System.Windows.Forms.Label();
+            this.lb_title02 = new System.Windows.Forms.Label();
+            this.lb_title01 = new System.Windows.Forms.Label();
+            this.lb_title04 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lb_title55 = new System.Windows.Forms.Label();
+            this.lb_title44 = new System.Windows.Forms.Label();
+            this.lb_title33 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRainbow)).BeginInit();
@@ -91,54 +97,20 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1343, 451);
+            this.richTextBox1.Location = new System.Drawing.Point(985, 118);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(339, 211);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 16;
             this.richTextBox1.Text = "";
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.LightGreen;
-            this.pictureBox1.Location = new System.Drawing.Point(951, 8);
+            this.pictureBox1.Location = new System.Drawing.Point(985, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
-            // 
-            // p2
-            // 
-            this.p2.Location = new System.Drawing.Point(452, 174);
-            this.p2.Name = "p2";
-            this.p2.Size = new System.Drawing.Size(80, 60);
-            this.p2.TabIndex = 48;
-            // 
-            // p1
-            // 
-            this.p1.Location = new System.Drawing.Point(452, 95);
-            this.p1.Name = "p1";
-            this.p1.Size = new System.Drawing.Size(80, 60);
-            this.p1.TabIndex = 46;
-            // 
-            // p3
-            // 
-            this.p3.Location = new System.Drawing.Point(348, 174);
-            this.p3.Name = "p3";
-            this.p3.Size = new System.Drawing.Size(80, 60);
-            this.p3.TabIndex = 47;
-            // 
-            // p0
-            // 
-            this.p0.Location = new System.Drawing.Point(348, 95);
-            this.p0.Name = "p0";
-            this.p0.Size = new System.Drawing.Size(80, 60);
-            this.p0.TabIndex = 45;
-            // 
-            // timer2
-            // 
-            this.timer2.Enabled = true;
-            this.timer2.Interval = 200;
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // timer_rotate
             // 
@@ -148,7 +120,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1612, 632);
+            this.bt_clear.Location = new System.Drawing.Point(999, 148);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(70, 30);
             this.bt_clear.TabIndex = 52;
@@ -163,7 +135,7 @@
             // picSample
             // 
             this.picSample.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.picSample.Location = new System.Drawing.Point(542, 41);
+            this.picSample.Location = new System.Drawing.Point(328, 483);
             this.picSample.Name = "picSample";
             this.picSample.Size = new System.Drawing.Size(100, 46);
             this.picSample.TabIndex = 54;
@@ -173,7 +145,7 @@
             // 
             // picRainbow
             // 
-            this.picRainbow.Location = new System.Drawing.Point(318, 8);
+            this.picRainbow.Location = new System.Drawing.Point(365, 450);
             this.picRainbow.Name = "picRainbow";
             this.picRainbow.Size = new System.Drawing.Size(579, 27);
             this.picRainbow.TabIndex = 53;
@@ -190,7 +162,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(549, 56);
+            this.label1.Location = new System.Drawing.Point(555, 498);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 19);
             this.label1.TabIndex = 55;
@@ -203,7 +175,7 @@
             // 
             // pictureBox_battery
             // 
-            this.pictureBox_battery.Location = new System.Drawing.Point(756, 53);
+            this.pictureBox_battery.Location = new System.Drawing.Point(219, 171);
             this.pictureBox_battery.Name = "pictureBox_battery";
             this.pictureBox_battery.Size = new System.Drawing.Size(84, 206);
             this.pictureBox_battery.TabIndex = 56;
@@ -211,7 +183,7 @@
             // 
             // pictureBox_gear
             // 
-            this.pictureBox_gear.Location = new System.Drawing.Point(1017, 471);
+            this.pictureBox_gear.Location = new System.Drawing.Point(999, 376);
             this.pictureBox_gear.Name = "pictureBox_gear";
             this.pictureBox_gear.Size = new System.Drawing.Size(100, 100);
             this.pictureBox_gear.TabIndex = 57;
@@ -225,7 +197,7 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(951, 385);
+            this.trackBar1.Location = new System.Drawing.Point(982, 496);
             this.trackBar1.Maximum = 100;
             this.trackBar1.Minimum = 1;
             this.trackBar1.Name = "trackBar1";
@@ -238,7 +210,7 @@
             // 
             this.lb_fps.AutoSize = true;
             this.lb_fps.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_fps.Location = new System.Drawing.Point(1086, 433);
+            this.lb_fps.Location = new System.Drawing.Point(1117, 544);
             this.lb_fps.Name = "lb_fps";
             this.lb_fps.Size = new System.Drawing.Size(31, 19);
             this.lb_fps.TabIndex = 59;
@@ -247,9 +219,9 @@
             // pictureBox_atom
             // 
             this.pictureBox_atom.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox_atom.Location = new System.Drawing.Point(321, 495);
+            this.pictureBox_atom.Location = new System.Drawing.Point(473, 41);
             this.pictureBox_atom.Name = "pictureBox_atom";
-            this.pictureBox_atom.Size = new System.Drawing.Size(320, 240);
+            this.pictureBox_atom.Size = new System.Drawing.Size(100, 100);
             this.pictureBox_atom.TabIndex = 60;
             this.pictureBox_atom.TabStop = false;
             // 
@@ -266,7 +238,7 @@
             // 
             // pictureBox_card
             // 
-            this.pictureBox_card.Location = new System.Drawing.Point(327, 241);
+            this.pictureBox_card.Location = new System.Drawing.Point(162, 544);
             this.pictureBox_card.Name = "pictureBox_card";
             this.pictureBox_card.Size = new System.Drawing.Size(102, 128);
             this.pictureBox_card.TabIndex = 63;
@@ -280,7 +252,7 @@
             // 
             // pictureBox_card2
             // 
-            this.pictureBox_card2.Location = new System.Drawing.Point(434, 241);
+            this.pictureBox_card2.Location = new System.Drawing.Point(290, 544);
             this.pictureBox_card2.Name = "pictureBox_card2";
             this.pictureBox_card2.Size = new System.Drawing.Size(102, 128);
             this.pictureBox_card2.TabIndex = 64;
@@ -294,9 +266,9 @@
             // pictureBox_random
             // 
             this.pictureBox_random.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox_random.Location = new System.Drawing.Point(12, 495);
+            this.pictureBox_random.Location = new System.Drawing.Point(243, 41);
             this.pictureBox_random.Name = "pictureBox_random";
-            this.pictureBox_random.Size = new System.Drawing.Size(320, 240);
+            this.pictureBox_random.Size = new System.Drawing.Size(100, 100);
             this.pictureBox_random.TabIndex = 65;
             this.pictureBox_random.TabStop = false;
             // 
@@ -309,7 +281,7 @@
             // pictureBox_stock
             // 
             this.pictureBox_stock.BackColor = System.Drawing.Color.LightPink;
-            this.pictureBox_stock.Location = new System.Drawing.Point(1068, 8);
+            this.pictureBox_stock.Location = new System.Drawing.Point(1102, 12);
             this.pictureBox_stock.Name = "pictureBox_stock";
             this.pictureBox_stock.Size = new System.Drawing.Size(100, 100);
             this.pictureBox_stock.TabIndex = 68;
@@ -326,7 +298,7 @@
             // pictureBox_rotate
             // 
             this.pictureBox_rotate.BackColor = System.Drawing.Color.Linen;
-            this.pictureBox_rotate.Location = new System.Drawing.Point(1272, 8);
+            this.pictureBox_rotate.Location = new System.Drawing.Point(762, 181);
             this.pictureBox_rotate.Name = "pictureBox_rotate";
             this.pictureBox_rotate.Size = new System.Drawing.Size(100, 100);
             this.pictureBox_rotate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -336,7 +308,7 @@
             // panel_radar
             // 
             this.panel_radar.Controls.Add(this.pictureBox_radar);
-            this.panel_radar.Location = new System.Drawing.Point(12, 8);
+            this.panel_radar.Location = new System.Drawing.Point(12, 53);
             this.panel_radar.Name = "panel_radar";
             this.panel_radar.Size = new System.Drawing.Size(183, 192);
             this.panel_radar.TabIndex = 73;
@@ -357,7 +329,7 @@
             // 
             // pictureBox_hex
             // 
-            this.pictureBox_hex.Location = new System.Drawing.Point(12, 348);
+            this.pictureBox_hex.Location = new System.Drawing.Point(12, 566);
             this.pictureBox_hex.Name = "pictureBox_hex";
             this.pictureBox_hex.Size = new System.Drawing.Size(70, 78);
             this.pictureBox_hex.TabIndex = 75;
@@ -371,7 +343,7 @@
             // 
             // pictureBox_random_color
             // 
-            this.pictureBox_random_color.Location = new System.Drawing.Point(256, 385);
+            this.pictureBox_random_color.Location = new System.Drawing.Point(16, 429);
             this.pictureBox_random_color.Name = "pictureBox_random_color";
             this.pictureBox_random_color.Size = new System.Drawing.Size(100, 100);
             this.pictureBox_random_color.TabIndex = 76;
@@ -386,17 +358,138 @@
             // 
             // pictureBox_battery2
             // 
-            this.pictureBox_battery2.Location = new System.Drawing.Point(567, 136);
+            this.pictureBox_battery2.Location = new System.Drawing.Point(12, 277);
             this.pictureBox_battery2.Name = "pictureBox_battery2";
             this.pictureBox_battery2.Size = new System.Drawing.Size(166, 64);
             this.pictureBox_battery2.TabIndex = 77;
             this.pictureBox_battery2.TabStop = false;
             // 
+            // lb_title00
+            // 
+            this.lb_title00.AutoSize = true;
+            this.lb_title00.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_title00.Location = new System.Drawing.Point(12, 16);
+            this.lb_title00.Name = "lb_title00";
+            this.lb_title00.Size = new System.Drawing.Size(104, 19);
+            this.lb_title00.TabIndex = 225;
+            this.lb_title00.Text = "雷達掃瞄圖";
+            // 
+            // lb_title77
+            // 
+            this.lb_title77.AutoSize = true;
+            this.lb_title77.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_title77.Location = new System.Drawing.Point(260, 451);
+            this.lb_title77.Name = "lb_title77";
+            this.lb_title77.Size = new System.Drawing.Size(99, 19);
+            this.lb_title77.TabIndex = 226;
+            this.lb_title77.Text = "pic_rainbow";
+            // 
+            // lb_title03
+            // 
+            this.lb_title03.AutoSize = true;
+            this.lb_title03.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_title03.Location = new System.Drawing.Point(654, 9);
+            this.lb_title03.Name = "lb_title03";
+            this.lb_title03.Size = new System.Drawing.Size(135, 19);
+            this.lb_title03.TabIndex = 227;
+            this.lb_title03.Text = "pictureBox_color";
+            // 
+            // lb_title02
+            // 
+            this.lb_title02.AutoSize = true;
+            this.lb_title02.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_title02.Location = new System.Drawing.Point(474, 9);
+            this.lb_title02.Name = "lb_title02";
+            this.lb_title02.Size = new System.Drawing.Size(134, 19);
+            this.lb_title02.TabIndex = 228;
+            this.lb_title02.Text = "pictureBox_atom";
+            // 
+            // lb_title01
+            // 
+            this.lb_title01.AutoSize = true;
+            this.lb_title01.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_title01.Location = new System.Drawing.Point(239, 16);
+            this.lb_title01.Name = "lb_title01";
+            this.lb_title01.Size = new System.Drawing.Size(153, 19);
+            this.lb_title01.TabIndex = 229;
+            this.lb_title01.Text = "pictureBox_random";
+            // 
+            // lb_title04
+            // 
+            this.lb_title04.AutoSize = true;
+            this.lb_title04.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_title04.Location = new System.Drawing.Point(469, 255);
+            this.lb_title04.Name = "lb_title04";
+            this.lb_title04.Size = new System.Drawing.Size(153, 19);
+            this.lb_title04.TabIndex = 230;
+            this.lb_title04.Text = "pictureBox_random";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label3.Location = new System.Drawing.Point(995, 344);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(129, 19);
+            this.label3.TabIndex = 231;
+            this.label3.Text = "pictureBox_gear";
+            // 
+            // lb_title55
+            // 
+            this.lb_title55.AutoSize = true;
+            this.lb_title55.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_title55.Location = new System.Drawing.Point(12, 396);
+            this.lb_title55.Name = "lb_title55";
+            this.lb_title55.Size = new System.Drawing.Size(199, 19);
+            this.lb_title55.TabIndex = 232;
+            this.lb_title55.Text = "pictureBox_random_color";
+            // 
+            // lb_title44
+            // 
+            this.lb_title44.AutoSize = true;
+            this.lb_title44.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_title44.Location = new System.Drawing.Point(758, 159);
+            this.lb_title44.Name = "lb_title44";
+            this.lb_title44.Size = new System.Drawing.Size(139, 19);
+            this.lb_title44.TabIndex = 233;
+            this.lb_title44.Text = "pictureBox_rotate";
+            // 
+            // lb_title33
+            // 
+            this.lb_title33.AutoSize = true;
+            this.lb_title33.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_title33.Location = new System.Drawing.Point(8, 544);
+            this.lb_title33.Name = "lb_title33";
+            this.lb_title33.Size = new System.Drawing.Size(124, 19);
+            this.lb_title33.TabIndex = 234;
+            this.lb_title33.Text = "pictureBox_hex";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label7.Location = new System.Drawing.Point(758, 566);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(63, 19);
+            this.label7.TabIndex = 235;
+            this.label7.Text = "xxxxxx";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1693, 750);
+            this.ClientSize = new System.Drawing.Size(1253, 807);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.lb_title33);
+            this.Controls.Add(this.lb_title44);
+            this.Controls.Add(this.lb_title55);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lb_title04);
+            this.Controls.Add(this.lb_title01);
+            this.Controls.Add(this.lb_title02);
+            this.Controls.Add(this.lb_title03);
+            this.Controls.Add(this.lb_title77);
+            this.Controls.Add(this.lb_title00);
             this.Controls.Add(this.pictureBox_battery2);
             this.Controls.Add(this.pictureBox_random_color);
             this.Controls.Add(this.pictureBox_hex);
@@ -415,10 +508,6 @@
             this.Controls.Add(this.picSample);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.p2);
-            this.Controls.Add(this.p1);
-            this.Controls.Add(this.p3);
-            this.Controls.Add(this.p0);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.picRainbow);
             this.DoubleBuffered = true;
@@ -452,11 +541,6 @@
 
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel p2;
-        private System.Windows.Forms.Panel p1;
-        private System.Windows.Forms.Panel p3;
-        private System.Windows.Forms.Panel p0;
-        private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Timer timer_rotate;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Timer timer_random_rectangle;
@@ -491,6 +575,17 @@
         private System.Windows.Forms.PictureBox pictureBox_random_color;
         private System.Windows.Forms.Timer timer_random_color;
         private System.Windows.Forms.PictureBox pictureBox_battery2;
+        private System.Windows.Forms.Label lb_title00;
+        private System.Windows.Forms.Label lb_title77;
+        private System.Windows.Forms.Label lb_title03;
+        private System.Windows.Forms.Label lb_title02;
+        private System.Windows.Forms.Label lb_title01;
+        private System.Windows.Forms.Label lb_title04;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lb_title55;
+        private System.Windows.Forms.Label lb_title44;
+        private System.Windows.Forms.Label lb_title33;
+        private System.Windows.Forms.Label label7;
     }
 }
 

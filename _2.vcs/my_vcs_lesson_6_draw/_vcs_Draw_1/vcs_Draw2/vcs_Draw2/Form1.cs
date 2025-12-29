@@ -28,6 +28,7 @@ namespace vcs_Draw2
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             p = new Pen(Color.Red, 3);
 
@@ -88,10 +89,10 @@ namespace vcs_Draw2
             pictureBox1.Location = new Point(0, 0);
 
             pictureBox_pen.Size = new Size(width / 2, height / 2);
-            pictureBox_pen.Location = new Point(900, 0);
+            pictureBox_pen.Location = new Point(730, 10);
 
-            panel_word.Size = new Size(width * 3, 250);
-            panel_word.Location = new Point(0, height + 200);
+            panel_word.Size = new Size(1200, 200);
+            panel_word.Location = new Point(10, height + 20);
 
             this.pictureBox_pen.Controls.Add(groupBox2);
             this.pictureBox_pen.Controls.Add(groupBox3);
@@ -144,98 +145,52 @@ namespace vcs_Draw2
             groupBox4.Location = new Point(x_st, y_st);
 
             //button
-            x_st = 1300;
+            x_st = 1040;
             y_st = 10;
-            dx = 120;
-            dy = 50;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
 
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button7.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button8.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button9.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            button6.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button7.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button8.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 5);
 
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button12.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button14.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            button12.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button13.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button14.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button15.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button16.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button17.Location = new Point(x_st + dx * 2, y_st + dy * 5);
 
-            button15.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button17.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button18.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button19.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            button18.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button19.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button20.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button21.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button22.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button23.Location = new Point(x_st + dx * 3, y_st + dy * 5);
 
-            button20.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button23.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button24.Location = new Point(x_st + dx * 4, y_st + dy * 4);
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 6);
 
-            button25.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button28.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button29.Location = new Point(x_st + dx * 4, y_st + dy * 5);
+            bt_reset.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            bt_save.Location = new Point(x_st + dx * 3, y_st + dy * 6);
 
-            button30.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button31.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button32.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button33.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button34.Location = new Point(x_st + dx * 4, y_st + dy * 6);
-
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-
-            bt_reset.Location = new Point(x_st + dx * 3, y_st + dy * 8);
-            bt_save.Location = new Point(x_st + dx * 4, y_st + dy * 8);
-
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 9 + 10);
-            richTextBox1.Size = new Size(richTextBox1.Size.Width + 240, this.Height - richTextBox1.Location.Y - 50);
+            richTextBox1.Size = new Size(400, 300);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //pictureBox1.Location = new Point(10, 10);
 
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            bt_exit_setup();
-        }
-
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
-        }
-
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
+            this.Size = new Size(1900, 880);
+            this.Text = "vcs_Draw2";
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -855,9 +810,9 @@ namespace vcs_Draw2
             pic.Image = bm;
             pan.Controls.Add(pic);
         }
-      //HatchStyles SP
+        //HatchStyles SP
 
-       private void button13_Click(object sender, EventArgs e)
+        private void button13_Click(object sender, EventArgs e)
         {
             //直線的開端與末端帽緣樣式
             int x_st = 50;
@@ -1169,24 +1124,7 @@ namespace vcs_Draw2
 
         private void button23_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
             DrawGrid();
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-
         }
 
         void save_image_to_drive()
@@ -1349,14 +1287,6 @@ namespace vcs_Draw2
             }
         }
 
-        private void button30_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button31_Click(object sender, EventArgs e)
-        {
-        }
-
         //畫筆的設定
         Pen pen = new Pen(Color.Red, 1);
         private void radioButton_CheckedChanged(object sender, EventArgs e)
@@ -1430,6 +1360,4 @@ namespace vcs_Draw2
         }
     }
 }
-
-
 
