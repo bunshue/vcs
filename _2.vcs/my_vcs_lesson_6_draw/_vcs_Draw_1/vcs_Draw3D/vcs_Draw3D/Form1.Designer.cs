@@ -45,7 +45,6 @@
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
             this.pictureBox14 = new System.Windows.Forms.PictureBox();
             this.timer10 = new System.Windows.Forms.Timer(this.components);
@@ -76,7 +75,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
             this.SuspendLayout();
@@ -230,16 +228,6 @@
             this.pictureBox11.TabStop = false;
             this.pictureBox11.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox11_Paint);
             // 
-            // pictureBox12
-            // 
-            this.pictureBox12.BackColor = System.Drawing.Color.White;
-            this.pictureBox12.Location = new System.Drawing.Point(162, 154);
-            this.pictureBox12.Name = "pictureBox12";
-            this.pictureBox12.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox12.TabIndex = 81;
-            this.pictureBox12.TabStop = false;
-            this.pictureBox12.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox12_Paint);
-            // 
             // pictureBox13
             // 
             this.pictureBox13.BackColor = System.Drawing.Color.White;
@@ -275,7 +263,6 @@
             // timer12
             // 
             this.timer12.Enabled = true;
-            this.timer12.Interval = 50;
             this.timer12.Tick += new System.EventHandler(this.timer12_Tick);
             // 
             // timer2
@@ -377,7 +364,6 @@
             this.Controls.Add(this.candidateText1);
             this.Controls.Add(this.pictureBox14);
             this.Controls.Add(this.pictureBox13);
-            this.Controls.Add(this.pictureBox12);
             this.Controls.Add(this.pictureBox11);
             this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.pictureBox9);
@@ -408,7 +394,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
             this.ResumeLayout(false);
@@ -434,7 +419,6 @@
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.PictureBox pictureBox11;
-        private System.Windows.Forms.PictureBox pictureBox12;
         private System.Windows.Forms.PictureBox pictureBox13;
         private System.Windows.Forms.PictureBox pictureBox14;
         private System.Windows.Forms.Timer timer10;

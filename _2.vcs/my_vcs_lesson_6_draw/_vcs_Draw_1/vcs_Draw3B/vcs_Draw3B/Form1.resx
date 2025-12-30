@@ -127,30 +127,30 @@
     <value>312, 12</value>
   </metadata>
   <metadata name="timer_draw_rectangle.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>468, 23</value>
+    <value>476, 13</value>
   </metadata>
   <metadata name="timer_progressbar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>349, 90</value>
+    <value>1350, 21</value>
   </metadata>
   <metadata name="timer_compass.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>14, 54</value>
+    <value>636, 20</value>
   </metadata>
   <metadata name="timer_round.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>176, 53</value>
+    <value>758, 19</value>
   </metadata>
   <metadata name="timer_circular.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>459, 56</value>
+    <value>949, 18</value>
   </metadata>
   <metadata name="timer_ball.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>337, 49</value>
+    <value>861, 18</value>
   </metadata>
   <metadata name="timer_ball_in_box.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>19, 88</value>
+    <value>1064, 20</value>
   </metadata>
   <metadata name="timer_double_circle.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>175, 90</value>
+    <value>1198, 19</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>105</value>
+    <value>56</value>
   </metadata>
 </root>

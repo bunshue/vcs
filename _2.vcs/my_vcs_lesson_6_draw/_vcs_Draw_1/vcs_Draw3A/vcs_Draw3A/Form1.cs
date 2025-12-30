@@ -48,12 +48,11 @@ namespace vcs_Draw3A
         Graphics gc2;
         Bitmap bitmap_card2;
 
-        #region 畫random曲線
+        //#region 畫random曲線
         private int Ymid;
         private int YValue;
         private const int GridStep = 40;
-        #endregion
-
+        //#endregion
 
         //for pictureBox_stock ST
 
@@ -169,7 +168,7 @@ namespace vcs_Draw3A
             pictureBox_atom.Image = Background;
             timer_atom.Enabled = true;
 
-            #region 畫random曲線
+            //#region 畫random曲線
             Ymid = pictureBox_random.ClientSize.Height / 2;
             YValue = Ymid;
 
@@ -189,9 +188,8 @@ namespace vcs_Draw3A
             {
                 grnd.DrawLine(Pens.LightBlue, 0, i, wid - 1, i);
             }
-
             pictureBox_random.Image = bm;
-            #endregion
+            //#endregion
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -289,100 +287,87 @@ namespace vcs_Draw3A
             panel_radar.Location = new Point(x_st + dx * 0, y_st + dy * 0 + dd);
             panel_radar.BackColor = Color.Black;
             pictureBox_radar.Size = new Size(W - 20, H - 20);
-            pictureBox_radar.Location = new Point(10,10);
+            pictureBox_radar.Location = new Point(10, 10);
             richTextBox1.Text += "pictureBox_radar W = " + pictureBox_radar.Width.ToString() + ", H = " + pictureBox_radar.Height.ToString() + "\n";
             //畫雷達掃瞄圖 SP
 
-            pictureBox_battery.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 2 + 70);
-            pictureBox_battery2.Location = new Point(x_st + dx * 3 + 20, y_st + dy * 2 + 320);
-
-            pictureBox_card.Location = new Point(x_st + dx * 1 +30, y_st + dy * 1 + 280);
-            pictureBox_card2.Location = new Point(x_st + dx * 1+30 +100, y_st + dy * 1 + 280);
-
             lb_title01.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox_random.Size = new Size(W, H);
-            pictureBox_random.Location = new Point(x_st + dx * 1, y_st + dy * 0+dd);
-
+            pictureBox_random.Location = new Point(x_st + dx * 1, y_st + dy * 0 + dd);
 
             lb_title02.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox_atom.Size = new Size(W, H);
             pictureBox_atom.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd);
 
-
             lb_title03.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-
-            //隨機顏色方塊
-            pictureBox1.Size = new Size(480, 300);
-            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0+dd);
+            lb_title03.Text = "隨機顏色方塊";
+            pictureBox1.Size = new Size(600, 300);
+            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + dd);
             pictureBox1.BackColor = Color.LightGreen;
 
-
-            lb_title04.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd);
-
-
-            int kkx = 710;
-            int kky = 720;
-            //lb_title01.Location = new Point(x_st + dx * 2, kky -20);
-            trackBar1.Location = new Point(kkx, kky);
-            lb_fps.Location = new Point(kkx + 280, kky + 10);
+            //齒輪
+            groupBox_gear.Size = new Size(W, H);
+            groupBox_gear.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd);
+            groupBox_gear.BackColor = Color.Pink;
+            trackBar1.Location = new Point(10, 10);
+            lb_fps.Location = new Point(260, 10);
             lb_fps.Text = trackBar1.Value.ToString();
-            pictureBox_gear.Size = new Size(W, H);
-            pictureBox_gear.Location = new Point(kkx, kky + 20);
+            pictureBox_gear.Size = new Size(W - 50, H - 50);
+            pictureBox_gear.Location = new Point(25, 40);
 
-            richTextBox1.Text += "kkx = " + kkx.ToString() + ", kky = " + kky.ToString() + "\n";
-
-
-
-
-
-
-            //button
-            x_st = 1810;
-            y_st = 80;
-            dx = 120;
-            dy = 50;
-
-
-
-
-
-            pictureBox_stock.Size = new Size(680, 320);
-            pictureBox_stock.Location = new Point(1000 - 700 + 15+600, 10 + 360 + 10);
-            pictureBox_stock.BackColor = Color.LightPink;
-
-            lb_title44.Location = new Point(350, 800-20);
-            pictureBox_rotate.Size = new Size(220, 110);
-            pictureBox_rotate.Location = new Point(350, 800);
-            pictureBox_rotate.BackColor = Color.Linen;
-
-            //pictureBox_rotate
-
-            richTextBox1.Size = new Size(300, 320);
-            richTextBox1.Location = new Point(x_st + dx * 0 - 200, y_st + dy * 12);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            x_st = 10;
-            y_st = 720;
-            dx = 350;
-
-            //六邊形
-            lb_title33.Location = new Point(205, 360 + 400-20);
-            pictureBox_hex.Size = new Size(100, 100);
-            pictureBox_hex.Location = new Point(205, 360 + 400);
-            pictureBox_hex.BackColor = Color.LightGray;
-
-
-            lb_title55.Location = new Point(x_st + dx * 4, y_st-20);
-            pictureBox_random_color.Size = new Size(W * 3 / 5, H);
-            pictureBox_random_color.Location = new Point(x_st + dx * 4, y_st);
+            //random_color
+            groupBox_random_color.Size = new Size(W, H);
+            groupBox_random_color.Location = new Point(x_st + dx * 1, y_st + dy * 1 + dd);
+            groupBox_random_color.BackColor = Color.Pink;
+            pictureBox_random_color.Size = new Size(280, 270);
+            pictureBox_random_color.Location = new Point(10, 20);
             pictureBox_random_color.BackColor = Color.Pink;
 
-            lb_title77.Location = new System.Drawing.Point(165-120, 950);
-            picRainbow.Location = new System.Drawing.Point(165, 950);
+            //battery
+            groupBox_battery.Size = new Size(W, H);
+            groupBox_battery.Location = new Point(x_st + dx * 2, y_st + dy * 1 + dd);
+            groupBox_battery.BackColor = Color.Pink;
+            pictureBox_battery.Size = new Size(84, 206);
+            pictureBox_battery.Location = new Point(10, 50);
+            pictureBox_battery2.Size = new Size(166, 64);
+            pictureBox_battery2.Location = new Point(95, 140);
 
-            //picSample.Location = new System.Drawing.Point(328, 483);
+            //股票
+            pictureBox_stock.Size = new Size(600, 260);
+            pictureBox_stock.Location = new Point(x_st + dx * 3, y_st + dy * 1 + dd);
+            pictureBox_stock.BackColor = Color.LightPink;
 
-            this.Size = new Size(1900, 960);
+            //color bar
+            groupBox_rainbow.Size = new Size(540, 140);
+            groupBox_rainbow.Location = new Point(x_st + dx * 3 - 240, y_st + dy * 2 + dd);
+            groupBox_rainbow.BackColor = Color.Pink;
+
+            x_st = 140;
+            y_st = 720;
+            dx = 350;
+            dy = 50;
+
+            //六邊形
+            lb_title_hex.Location = new Point(x_st + dx * 0, y_st + dy * 2 - 150);
+            pictureBox_hex.Size = new Size(100, 100);
+            pictureBox_hex.Location = new Point(x_st + dx * 0, y_st + dy * 2 - 150 + dd);
+            pictureBox_hex.BackColor = Color.LightGray;
+
+            //card
+            pictureBox_card.Location = new Point(x_st + dx * 0 + 120, y_st + dy * 2 - 150 + dd);
+            pictureBox_card2.Location = new Point(x_st + dx * 0 + 220, y_st + dy * 2 - 150 + dd);
+
+            //rotate
+            lb_title_rotate.Location = new Point(x_st + dx * 0 + 320, y_st + dy * 2 - 150);
+            pictureBox_rotate.Size = new Size(220, 110);
+            pictureBox_rotate.Location = new Point(x_st + dx * 0 + 320, y_st + dy * 2 - 150 + dd);
+            pictureBox_rotate.BackColor = Color.Linen;
+
+            richTextBox1.Size = new Size(300, 200);
+            richTextBox1.Location = new Point(1260, 620);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1590, 880);
             this.Text = "vcs_Draw3A";
         }
 
@@ -907,7 +892,7 @@ namespace vcs_Draw3A
             int index_y = card_no / 13;
 
             GraphicsUnit units = GraphicsUnit.Pixel;
-          //來源矩形的大小會決定要將未縮放原始影像咄個部分繪製到螢幕上。
+            //來源矩形的大小會決定要將未縮放原始影像咄個部分繪製到螢幕上。
 
             int sx;
             int sy;
@@ -1011,7 +996,7 @@ namespace vcs_Draw3A
             Theta += Dtheta;
 
             const int radius = 3;
-            int cx = 50, cy = 860, rx = 45, ry = 15;
+            int cx = 50, cy = 740, rx = 45, ry = 15;
             Rectangle rect = new Rectangle(-rx, -ry, 2 * rx, 2 * ry);
             double x, y;
             Font title_font = new Font("Times New Roman", 20);
@@ -1057,7 +1042,7 @@ namespace vcs_Draw3A
             Refresh();
         }
 
-        #region 畫random曲線
+        //#region 畫random曲線
         private void timer_random_Tick(object sender, EventArgs e)
         {
             DrawGraph();
@@ -1129,7 +1114,7 @@ namespace vcs_Draw3A
 
             grnd.Dispose();
         }
-        #endregion
+        //#endregion
 
         private void FillCircle(Graphics g, PointF center, int radius, Color c)
         {

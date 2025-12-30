@@ -303,7 +303,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1031, 605);
+            this.ClientSize = new System.Drawing.Size(958, 577);
             this.Controls.Add(this.pictureBox_double_circle);
             this.Controls.Add(this.pictureBox_ball_in_box);
             this.Controls.Add(this.pictureBox_ball);

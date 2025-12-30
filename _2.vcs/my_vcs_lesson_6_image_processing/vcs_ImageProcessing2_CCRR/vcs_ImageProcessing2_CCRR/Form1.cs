@@ -41,8 +41,8 @@ namespace vcs_ImageProcessing2_CCRR
             //button
             x_st = 10;
             y_st = 10;
-            dx = 140;
-            dy = 70;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -60,63 +60,26 @@ namespace vcs_ImageProcessing2_CCRR
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
             button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            groupBox1.Size = new Size(150, 300);
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            button20.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 10);
-            button21.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 10);
-            button22.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 10);
-            button23.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 10);
+            //button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
 
-            bt_restore.Location = new Point(x_st + dx * 11 - 50, y_st + dy * 0);
+            groupBox1.Size = new Size(200, 300);
+            groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            bt_lanczos0.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 10);
+            bt_lanczos1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 10);
+            bt_lanczos2.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 10);
+            bt_lanczos3.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 10);
+
+            bt_restore.Location = new Point(x_st + dx * 6 - 50, y_st + dy * 0);
 
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            pictureBox1.Size = new Size(1200, 800);
+            pictureBox1.Size = new Size(800, 800);
 
-            richTextBox1.Size = new Size(360, 900);
-            richTextBox1.Location = new Point(x_st + dx * 11, y_st + dy * 0);
+            richTextBox1.Size = new Size(300, 800);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            bt_exit_setup();
-        }
-
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Name = "bt_exit";
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
+            this.Size = new Size(1600, 870);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -137,15 +100,6 @@ namespace vcs_ImageProcessing2_CCRR
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //圖像截取
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
-            Graphics g = this.pictureBox1.CreateGraphics();
-            Bitmap bitmap1 = new Bitmap(filename);
-            //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
-            Rectangle sr = new Rectangle(80, 60, 400, 400);//要截取的矩形區域
-            Rectangle dr = new Rectangle(0, 0, 200, 200);//要顯示到Form的矩形區域
-            g.DrawImage(bitmap1, dr, sr, GraphicsUnit.Pixel);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -194,15 +148,47 @@ namespace vcs_ImageProcessing2_CCRR
             return newbmp;
         }
 
-
-
         private void button3_Click(object sender, EventArgs e)
         {
             //圖像切割 每100X100 切成一個小圖
-
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            //圖像切割 每100X100 切成一個小圖
-            ImageManager.Cut(filename, 100, 100);
+            ImageCut(filename, 100, 100);
+        }
+
+        void ImageCut(string filename1, int width, int height)
+        {
+            Bitmap bitmap1 = new Bitmap(filename1);
+            int MaxRow = (int)Math.Ceiling((Decimal)bitmap1.Height / height);
+            int MaxColumn = (int)Math.Ceiling((Decimal)bitmap1.Width / width);
+            for (int i = 0; i < MaxRow; i++)
+            {
+                for (int j = 0; j < MaxColumn; j++)
+                {
+                    Bitmap bitmap2 = new Bitmap(width, height);
+                    for (int offsetX = 0; offsetX < width; offsetX++)
+                    {
+                        for (int offsetY = 0; offsetY < height; offsetY++)
+                        {
+                            if (((j * width + offsetX) < bitmap1.Width) && ((i * height + offsetY) < bitmap1.Height))
+                            {
+                                bitmap2.SetPixel(offsetX, offsetY, bitmap1.GetPixel((int)(j * width + offsetX), (int)(i * height + offsetY)));
+                            }
+                        }
+                    }
+                    Graphics g = Graphics.FromImage(bitmap2);
+                    g.DrawString(i.ToString("D2") + " " + j.ToString("D2"), new Font("黑體", 14), new SolidBrush(Color.FromArgb(255, Color.Red)), 5, 5); //加水印
+
+                    string filename2 = "tmp_bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + i.ToString("D2") + "_" + j.ToString("D2") + ".bmp";
+                    try
+                    {
+                        bitmap2.Save(filename2, ImageFormat.Bmp);
+                    }
+                    catch (Exception ex)
+                    {
+                        richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                    }
+                }
+            }
         }
 
         // 圖片裁剪
@@ -474,7 +460,7 @@ namespace vcs_ImageProcessing2_CCRR
             //圖片壓縮
             //圖片壓縮
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string filename2 = Application.StartupPath + "\\compress_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            string filename2 = "tmp_compress_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
             bool result = imageCompress(filename1, 30, filename2);
             if (result == true)
                 richTextBox1.Text += "OK\n";
@@ -483,42 +469,11 @@ namespace vcs_ImageProcessing2_CCRR
         }
 
 
-        //C#獲取圖片的指定部分
-
-        /// <summary>
-        /// http://www.cnblogs.com/KissKnife/archive/2007/10/13/923352.Html
-        /// 獲取圖片指定部分
-        /// </summary>
-        /// <param name="pPath">圖片路徑</param>
-        /// <param name="pPartStartPointX">目標圖片開始繪制處的坐標X值(通常為0)</param>
-        /// <param name="pPartStartPointY">目標圖片開始繪制處的坐標Y值(通常為0)</param>
-        /// <param name="pPartWidth">目標圖片的寬度</param>
-        /// <param name="pPartHeight">目標圖片的高度</param>
-        /// <param name="pOrigStartPointX">原始圖片開始截取處的坐標X值</param>
-        /// <param name="pOrigStartPointY">原始圖片開始截取處的坐標Y值</param>
-        static Bitmap GetPart(string pPath, int pPartStartPointX, int pPartStartPointY, int pPartWidth, int pPartHeight, int pOrigStartPointX, int pOrigStartPointY)
-        {
-            Image originalImg = Image.FromFile(pPath);
-
-            Bitmap partImg = new Bitmap(pPartWidth, pPartHeight);
-            Graphics graphics = Graphics.FromImage(partImg);
-            Rectangle destRect = new Rectangle(new Point(pPartStartPointX, pPartStartPointY), new Size(pPartWidth, pPartHeight));//目標位置
-            Rectangle origRect = new Rectangle(new Point(pOrigStartPointX, pOrigStartPointY), new Size(pPartWidth, pPartHeight));//原圖位置（默認從原圖中截取的圖片大小等於目標圖片的大小）
-
-            graphics.DrawImage(originalImg, destRect, origRect, GraphicsUnit.Pixel);
-
-            return partImg;
-        }
-
         private void button8_Click(object sender, EventArgs e)
         {
-            //獲取圖片的指定部分
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            Bitmap bitmap1 = GetPart(filename, 0, 0, 150, 200, 0, 0);
-
-            pictureBox1.Image = bitmap1;
+            //改變圖片品質
+            //改變圖片品質
+            VaryQualityLevel();
         }
 
         private ImageCodecInfo GetEncoder(ImageFormat format)
@@ -574,15 +529,13 @@ namespace vcs_ImageProcessing2_CCRR
         }
 
 
-
         private void button9_Click(object sender, EventArgs e)
         {
-            //改變圖片品質
-            //改變圖片品質
-            VaryQualityLevel();
+            //jpg縮略圖函數
+            //在下
         }
 
-        //C#編程 jpg縮略圖函數 使用
+        //jpg縮略圖函數 使用
 
         /// <summary>
         /// 生成jpg縮略圖字節,本人的小軟件中需要用到的功能，所以自己做了一個函數，和大家分享
@@ -696,10 +649,6 @@ namespace vcs_ImageProcessing2_CCRR
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //jpg縮略圖函數
-
-            //jpg縮略圖函數
-            //在上
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -718,27 +667,7 @@ namespace vcs_ImageProcessing2_CCRR
         {
         }
 
-        private void button15_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button20_Click(object sender, EventArgs e)
+        private void bt_lanczos0_Click(object sender, EventArgs e)
         {
             //原圖
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
@@ -877,7 +806,7 @@ namespace vcs_ImageProcessing2_CCRR
             return dst;
         }
 
-        private void button21_Click(object sender, EventArgs e)
+        private void bt_lanczos1_Click(object sender, EventArgs e)
         {
             //Lanczos 2倍
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
@@ -916,7 +845,7 @@ namespace vcs_ImageProcessing2_CCRR
             return dst;
         }
 
-        private void button22_Click(object sender, EventArgs e)
+        private void bt_lanczos2_Click(object sender, EventArgs e)
         {
             //copy 拉大兩倍
             string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
@@ -929,7 +858,7 @@ namespace vcs_ImageProcessing2_CCRR
             ///bitmap2.Save("ims02.duplicate.bmp", ImageFormat.Bmp);
         }
 
-        private void button23_Click(object sender, EventArgs e)
+        private void bt_lanczos3_Click(object sender, EventArgs e)
         {
             //StretchImage 拉大兩倍
             string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
@@ -938,55 +867,6 @@ namespace vcs_ImageProcessing2_CCRR
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
-        }
-    }
-
-    public class ImageManager
-    {
-        /// <summary>
-        /// 圖像切割
-        /// </summary>
-        /// <param name="url">圖像文件名稱</param>
-        /// <param name="width">切割後圖像寬度</param>
-        /// <param name="height">切割後圖像高度</param>
-        public static void Cut(string filename1, int width, int height)
-        {
-            Bitmap bitmap1 = new Bitmap(filename1);
-            int MaxRow = (int)Math.Ceiling((Decimal)bitmap1.Height / height);
-            int MaxColumn = (int)Math.Ceiling((Decimal)bitmap1.Width / width);
-            for (int i = 0; i < MaxRow; i++)
-            {
-                for (int j = 0; j < MaxColumn; j++)
-                {
-                    Bitmap bitmap2 = new Bitmap(width, height);
-                    for (int offsetX = 0; offsetX < width; offsetX++)
-                    {
-                        for (int offsetY = 0; offsetY < height; offsetY++)
-                        {
-                            if (((j * width + offsetX) < bitmap1.Width) && ((i * height + offsetY) < bitmap1.Height))
-                            {
-                                bitmap2.SetPixel(offsetX, offsetY, bitmap1.GetPixel((int)(j * width + offsetX), (int)(i * height + offsetY)));
-                            }
-                        }
-                    }
-                    Graphics g = Graphics.FromImage(bitmap2);
-                    g.DrawString(i.ToString("D2") + " " + j.ToString("D2"), new Font("黑體", 14), new SolidBrush(Color.FromArgb(255, Color.Red)), 5, 5); //加水印
-
-                    string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + i.ToString("D2") + "_" + j.ToString("D2") + ".bmp";
-                    //Console.WriteLine(filename2);
-
-                    try
-                    {
-                        bitmap2.Save(filename2, ImageFormat.Bmp);
-                        //richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                        //richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                    }
-                }
-            }
         }
     }
 }

@@ -606,30 +606,6 @@ namespace vcs_Draw2
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //先畫 button5
-            Graphics buttonGraphics = button5.CreateGraphics();
-            Pen p = new Pen(Color.ForestGreen, 4.0F);
-            p.DashStyle = DashStyle.DashDotDot;
-
-            Rectangle theRectangle = button5.ClientRectangle;
-            theRectangle.Inflate(-2, -2);
-            buttonGraphics.DrawRectangle(p, theRectangle);
-            buttonGraphics.DrawRectangle(p, 10, 10, button5.Width - 20, button5.Height - 20);
-            buttonGraphics.Dispose();
-            p.Dispose();
-
-            //再畫 richTextBox1
-            buttonGraphics = richTextBox1.CreateGraphics();
-            p = new Pen(Color.ForestGreen, 4.0F);
-            p.DashStyle = DashStyle.DashDotDot;
-
-            theRectangle = richTextBox1.ClientRectangle;
-            theRectangle.Inflate(-2, -2);
-            buttonGraphics.DrawRectangle(p, theRectangle);
-            buttonGraphics.DrawRectangle(p, 10, 10, richTextBox1.Width - 20, richTextBox1.Height - 20);
-            buttonGraphics.Dispose();
-            p.Dispose();
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -1335,18 +1311,20 @@ namespace vcs_Draw2
             e.Graphics.DrawLine(pen, 20, 20, this.pictureBox_pen.ClientSize.Width - 20, this.pictureBox_pen.ClientSize.Height - 20);
         }
 
-        int size = 1;
+        float size = 1;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            size++;
-            if (size > 6)
+            size += 0.3f;
+            if (size > 3)
+            {
                 size = 1;
+            }
 
             Graphics g = panel_word.CreateGraphics();//建立控制元件的Graphics類
             g.Clear(Color.White);//以指定的顏色清除控制元件背景
             Brush Var_Back = Brushes.Black;//設定畫刷
             FontFamily Var_FontFamily = new FontFamily("標楷體");//設定字體樣式
-            string Var_Str = size.ToString() + "海納百川，有容乃大；壁立千仞，無欲則剛。";//設定字串
+            string Var_Str = size.ToString() + " 海納百川，有容乃大；壁立千仞，無欲則剛。";//設定字串
 
             GraphicsPath Var_Path = new GraphicsPath();//實例化GraphicsPath對像
             Var_Path.AddString(Var_Str, Var_FontFamily, (int)FontStyle.Regular, 50, new Point(0, 0), new StringFormat());//在路徑中新增文字

@@ -103,7 +103,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(200, 60);
             this.button9.TabIndex = 18;
-            this.button9.Text = "在圖上畫圖與寫字";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -149,7 +148,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 20;
-            this.button2.Text = "畫點圓形星形笑臉";
+            this.button2.Text = "畫點圓形星形笑臉寫字";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -226,7 +225,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 26;
-            this.button11.Text = "讀圖寫字";
+            this.button11.Text = "開啟圖片, 在圖上寫字, 貼上小圖";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -275,7 +274,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(200, 60);
             this.button13.TabIndex = 31;
-            this.button13.Text = "開啟圖片";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -286,7 +284,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 32;
-            this.button14.Text = "半透明筆刷";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -297,7 +294,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 33;
-            this.button15.Text = "ims1";
+            this.button15.Text = "ims1 / add1";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -308,7 +305,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 60);
             this.button16.TabIndex = 33;
-            this.button16.Text = "add1";
+            this.button16.Text = "ims2 / add2";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -319,7 +316,6 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(200, 60);
             this.button17.TabIndex = 34;
-            this.button17.Text = "ims2";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -330,7 +326,6 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(200, 60);
             this.button18.TabIndex = 35;
-            this.button18.Text = "add2";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -341,7 +336,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(200, 60);
             this.button19.TabIndex = 36;
-            this.button19.Text = "圖片滿框";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -396,7 +390,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(200, 60);
             this.button26.TabIndex = 42;
-            this.button26.Text = "DrawPoint";
+            this.button26.Text = "DrawPoint / DrawCurve";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -407,7 +401,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(200, 60);
             this.button25.TabIndex = 41;
-            this.button25.Text = "DrawCurve";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -503,7 +496,6 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(200, 60);
             this.button30.TabIndex = 55;
-            this.button30.Text = "半透明筆刷";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
@@ -554,7 +546,6 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(200, 60);
             this.button33.TabIndex = 60;
-            this.button33.Text = "在曲線的上下畫字";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
@@ -608,6 +599,7 @@
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(200, 60);
             this.button38.TabIndex = 65;
+            this.button38.Text = "在控件上畫東西";
             this.button38.UseVisualStyleBackColor = true;
             this.button38.Click += new System.EventHandler(this.button38_Click);
             // 
@@ -665,7 +657,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1224, 761);
+            this.ClientSize = new System.Drawing.Size(1104, 702);
             this.Controls.Add(this.pictureBox_count);
             this.Controls.Add(this.bt_reset);
             this.Controls.Add(this.bt_eraser);
