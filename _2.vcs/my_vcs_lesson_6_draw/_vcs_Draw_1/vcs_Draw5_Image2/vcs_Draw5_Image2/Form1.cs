@@ -27,6 +27,8 @@ namespace vcs_Draw5_Image2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             Image img = Image.FromFile(filename);
 
             W = img.Width;
@@ -34,12 +36,30 @@ namespace vcs_Draw5_Image2
             x_st = W / 2;
             y_st = H / 2;
 
-            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-            pictureBox1.Size = new System.Drawing.Size(W, H);
             pictureBox1.Image = img;
             this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
             this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
             pictureBox2.Size = new System.Drawing.Size(sw * 3, sh * 3);
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
+
+            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            pictureBox1.Size = new System.Drawing.Size(450, 450);
+            pictureBox1.Location = new Point(20, 100);
+            pictureBox2.Size = new Size(300, 300);
+            pictureBox2.Location = new Point(20 + 450 + 10, 100);
         }
 
         void pictureBox1_KeyDown(object sender, KeyEventArgs e)

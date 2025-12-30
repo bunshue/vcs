@@ -109,64 +109,6 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
-            // Make the Bitmap.
-            Bitmap bm = new Bitmap(300, 300);
-            using (Graphics gr = Graphics.FromImage(bm))
-            {
-                // Clear.
-                gr.SmoothingMode = SmoothingMode.AntiAlias;
-                gr.Clear(Color.White);
-                gr.ScaleTransform(15f, -15f, System.Drawing.Drawing2D.MatrixOrder.Append);
-                gr.TranslateTransform(bm.Width * 0.5f, bm.Height * 0.5f,
-                    System.Drawing.Drawing2D.MatrixOrder.Append);
-
-                // 畫坐標軸
-                using (Pen axis_pen = new Pen(Color.LightGray, 0))
-                {
-                    gr.DrawLine(axis_pen, -8, 0, 8, 0);
-                    gr.DrawLine(axis_pen, 0, -8, 0, 8);
-                    for (int i = -8; i <= 8; i++)
-                    {
-                        gr.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
-                        gr.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
-                    }
-                }
-
-                // Graph the equation.
-                float dx = 2f / bm.Width;
-                float dy = 2f / bm.Height;
-                //PlotFunction(gr, func, -8, -8, 8, 8, dx, dy);
-                //        private void PlotFunction(Graphics gr, Func<float, float, float> func,
-                //float xmin, float ymin, float xmax, float ymax,
-                //float dx, float dy)
-                float xmin = -8;
-                float ymin = -8;
-                float xmax = 8;
-                float ymax = 8;
-
-                // Plot the function.
-                using (Pen thin_pen = new Pen(Color.Black, 0))
-                {
-                    // Horizontal comparisons.
-                    for (float x = xmin; x <= xmax; x += dx)
-                    {
-                        for (float y = ymin + dy; y <= ymax; y += dy)
-                        {
-                            //gr.DrawLine(thin_pen, x, y - dy, x, y);
-                        }
-                    } // Horizontal comparisons.
-
-                    // Vertical comparisons.
-                    for (float y = ymin + dy; y <= ymax; y += dy)
-                    {
-                        for (float x = xmin + dx; x <= xmax; x += dx)
-                        {
-                            //gr.DrawLine(thin_pen, x - dx, y, x, y);
-                        }
-                    }
-                }
-            }
-            pictureBox1.Image = bm;
         }
 
         List<String> filenames = new List<String>();
@@ -302,38 +244,6 @@ namespace vcs_Mix03_draw_image
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //設定圖片解析度
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            Bitmap bmp = new Bitmap(filename);
-            g.FillRectangle(Brushes.White, this.ClientRectangle);
-
-            richTextBox1.Text += "H res : " + bmp.HorizontalResolution.ToString() + "\n";
-            richTextBox1.Text += "V res : " + bmp.VerticalResolution.ToString() + "\n";
-
-
-            g.DrawImage(bmp, 0, 0);
-
-            bmp.SetResolution(75f, 75f);
-
-            g.DrawImage(bmp, 350, 0);
-
-            richTextBox1.Text += "H res : " + bmp.HorizontalResolution.ToString() + "\n";
-            richTextBox1.Text += "V res : " + bmp.VerticalResolution.ToString() + "\n";
-
-            /*
-            bmp.SetResolution(300f, 300f);
-            g.DrawImage(bmp, 0, 0);
-            bmp.SetResolution(1200f, 1200f);
-            g.DrawImage(bmp, 350, 0);
-            */
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -387,15 +297,6 @@ namespace vcs_Mix03_draw_image
         private void button12_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            pictureBox1.Image = Image.FromFile(filename);
-
-            double DPI = pictureBox1.Image.HorizontalResolution;//獲得分辨率 gisoracle
-            double w = 1.0 * pictureBox1.Image.Width / DPI * 25.4;
-            double h = 1.0 * pictureBox1.Image.Height / DPI * 25.4;
-
-            richTextBox1.Text += "獲得圖片的分辨率和大小 : " + w.ToString("f2") + ":" + h.ToString("f2") + "\n";
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -411,7 +312,6 @@ namespace vcs_Mix03_draw_image
         private void button15_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
         }
 
         private void button16_Click(object sender, EventArgs e)

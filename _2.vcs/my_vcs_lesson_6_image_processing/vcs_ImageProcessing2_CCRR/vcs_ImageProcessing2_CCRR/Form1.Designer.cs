@@ -147,6 +147,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 9;
+            this.button0.Text = "獲得圖片的分辨率和大小";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -201,6 +202,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 60);
             this.button10.TabIndex = 13;
+            this.button10.Text = "設定圖片解析度";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -211,6 +213,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 14;
+            this.button11.Text = "旋轉轉置";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 

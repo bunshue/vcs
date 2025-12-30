@@ -82,7 +82,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(160, 60);
             this.button0.TabIndex = 105;
-            this.button0.Text = "畫函數";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -215,7 +214,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(160, 60);
             this.button15.TabIndex = 91;
-            this.button15.Text = "jpg縮略圖函數";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -226,7 +224,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(160, 60);
             this.button12.TabIndex = 90;
-            this.button12.Text = "獲得圖片的分辨率和大小";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -237,7 +234,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(160, 60);
             this.button7.TabIndex = 89;
-            this.button7.Text = "設定圖片解析度";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 

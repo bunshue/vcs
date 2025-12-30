@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Drawing.Imaging;
+using System.Drawing.Imaging;   //for PixelFormat
 using System.Drawing.Drawing2D;
 
 namespace vcs_ImageProcessing2_CCRR
@@ -27,7 +27,18 @@ namespace vcs_ImageProcessing2_CCRR
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
+            this.UpdateStyles();
+            //以上兩句是為了設置控件樣式為雙緩沖，這可以有效減少圖片閃爍的問題，關於這個大家可以自己去搜索下
+
+            //this.FormBorderStyle = FormBorderStyle.None;
+            //this.WindowState = FormWindowState.Maximized;
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new System.Drawing.Point(0, 0);
+
             show_item_location();
+
             pictureBox1.Image = Image.FromFile(filename);
         }
 
@@ -100,6 +111,16 @@ namespace vcs_ImageProcessing2_CCRR
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //獲得圖片的分辨率和大小
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            pictureBox1.Image = Image.FromFile(filename);
+
+            double DPI = pictureBox1.Image.HorizontalResolution;//獲得分辨率 gisoracle
+            double w = 1.0 * pictureBox1.Image.Width / DPI * 25.4;
+            double h = 1.0 * pictureBox1.Image.Height / DPI * 25.4;
+
+            richTextBox1.Text += "獲得圖片的分辨率和大小 : " + w.ToString("f2") + ":" + h.ToString("f2") + "\n";
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -649,10 +670,129 @@ namespace vcs_ImageProcessing2_CCRR
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //設定圖片解析度
+            //設定圖片解析度
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            Bitmap bmp = new Bitmap(filename);
+            g.FillRectangle(Brushes.White, this.ClientRectangle);
+
+            richTextBox1.Text += "H res : " + bmp.HorizontalResolution.ToString() + "\n";
+            richTextBox1.Text += "V res : " + bmp.VerticalResolution.ToString() + "\n";
+
+
+            g.DrawImage(bmp, 0, 0);
+
+            bmp.SetResolution(75f, 75f);
+
+            g.DrawImage(bmp, 350, 0);
+
+            richTextBox1.Text += "H res : " + bmp.HorizontalResolution.ToString() + "\n";
+            richTextBox1.Text += "V res : " + bmp.VerticalResolution.ToString() + "\n";
+
+            /*
+            bmp.SetResolution(300f, 300f);
+            g.DrawImage(bmp, 0, 0);
+            bmp.SetResolution(1200f, 1200f);
+            g.DrawImage(bmp, 350, 0);
+            */
+
+            pictureBox1.Image = bitmap1;
+
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //在PictureBox上測試旋轉圖片
+            //測試RotateTransform, TranslateTransform和ResetTransform
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            int W = this.pictureBox1.Width;
+            int H = this.pictureBox1.Height;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            Pen p = new Pen(Color.Gray, 1);
+
+            int i;
+            for (i = 0; i <= W; i += 100)
+            {
+                g.DrawLine(p, i, 0, i, H);
+            }
+            for (i = 0; i <= H; i += 100)
+            {
+                g.DrawLine(p, 0, i, W, i);
+            }
+
+
+            Rectangle srcRect = new Rectangle(0, 0, W, H);   //擷取部分區域
+            GraphicsUnit units = GraphicsUnit.Pixel;
+            Image img = Image.FromFile(filename);
+
+
+            int x_st = 0;
+            int y_st = 0;
+            int angle = 0;
+
+            Point ulCorner = new Point(0, 0);
+            Point urCorner = new Point(W, 0);
+            Point llCorner = new Point(0, H);
+            Point[] destRect = { ulCorner, urCorner, llCorner };
+
+            x_st = 350 * 0;
+            y_st = 200;
+            angle = -10;
+            ulCorner = new Point(0, 0);
+            urCorner = new Point(W, 0);
+            llCorner = new Point(0, H);
+            destRect = new Point[] { ulCorner, urCorner, llCorner };
+
+            g.TranslateTransform(x_st, y_st);
+            g.RotateTransform(angle);//旋轉指定的角度
+            g.DrawImage(img, destRect, srcRect, units);
+            g.ResetTransform();//恢復坐標軸坐標 回 0 度
+
+
+            x_st = 350 * 1;
+            y_st = 200;
+            angle = 0;
+            ulCorner = new Point(0, 0);
+            urCorner = new Point(W, 0);
+            llCorner = new Point(0, H);
+            destRect = new Point[] { ulCorner, urCorner, llCorner };
+
+            g.TranslateTransform(x_st, y_st);
+            g.RotateTransform(angle);//旋轉指定的角度
+            g.DrawImage(img, destRect, srcRect, units);
+            g.ResetTransform();//恢復坐標軸坐標 回 0 度
+
+
+            x_st = 350 * 2;
+            y_st = 200;
+            angle = 10;
+            ulCorner = new Point(0, 0);
+            urCorner = new Point(W, 0);
+            llCorner = new Point(0, H);
+            destRect = new Point[] { ulCorner, urCorner, llCorner };
+
+            g.TranslateTransform(x_st, y_st);
+            g.RotateTransform(angle);//旋轉指定的角度
+            g.DrawImage(img, destRect, srcRect, units);
+            g.ResetTransform();//恢復坐標軸坐標 回 0 度
+
+
+
+
+
+            pictureBox1.Image = bitmap1;
+
         }
 
         private void button12_Click(object sender, EventArgs e)

@@ -27,10 +27,66 @@ namespace vcs_Draw_Word
         {
             pt_st = new Point(100, 100);
 
+            int W = this.Width;
+            int H =this.Height;
+            //this.Width / 2, this.Height / 2);
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            do_word_effect1();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            do_word_effect2();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            do_word_effect3();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            do_word_effect4();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            do_word_effect5();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            do_word_effect6();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            do_word_effect7();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            do_word_effect8();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            do_word_effect9();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        void do_word_effect1()
+        {
+            int x_st = 0;
+            int y_st = 30;
             //投影文字
             Graphics g = this.pictureBox1.CreateGraphics();
             //設置文本輸出質量
@@ -50,16 +106,17 @@ namespace vcs_Draw_Word
             SolidBrush colorBrush = new SolidBrush(Color.BlueViolet);
             string text = "博客園";
             //繪制陰影
-            g.DrawString(text, newFont, grayBrush, new PointF(0, 30));
+            g.DrawString(text, newFont, grayBrush, new PointF(x_st, y_st));
             g.ResetTransform();
             //繪制前景
-            g.DrawString(text, newFont, colorBrush, new PointF(0, 30));
+            g.DrawString(text, newFont, colorBrush, new PointF(x_st, y_st));
         }
 
-        //浮雕效果
-        private void button2_Click(object sender, EventArgs e)
+        void do_word_effect2()
         {
-            //浮雕文字
+            int x_st = 0;
+            int y_st = 30;
+            //浮雕效果
             Brush backBrush = Brushes.Black;
             Brush foreBrush = Brushes.White;
             Font font = new Font("宋體", Convert.ToInt16(40), FontStyle.Regular);
@@ -70,11 +127,13 @@ namespace vcs_Draw_Word
             Single posY = (this.Height - Convert.ToInt16(size.Height)) / 2;
             g.DrawString(text, font, backBrush, posX + 1, posY + 1);
             g.DrawString(text, font, foreBrush, posX, posY);
-
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        void do_word_effect3()
         {
+            int x_st = 0;
+            int y_st = 30;
+
             //印版效果
 
             //印版文字
@@ -94,11 +153,13 @@ namespace vcs_Draw_Word
                 i = i + 1;
             }
             g.DrawString(text, font, foreBrush, posX, posY);
-
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        void do_word_effect4()
         {
+            int x_st = 0;
+            int y_st = 30;
+
             //倒影文字
             Brush backBrush = Brushes.Gray;
             Brush foreBrush = Brushes.Black;
@@ -118,11 +179,13 @@ namespace vcs_Draw_Word
             g.DrawString(text, font, backBrush, 0, -height);
             g.Restore(state);
             g.DrawString(text, font, foreBrush, 0, -height);
-
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        void do_word_effect5()
         {
+            int x_st = 0;
+            int y_st = 30;
+
             //陰影文字
             string text = "博客園";
             Brush shadowBrush = Brushes.Gray;
@@ -135,13 +198,15 @@ namespace vcs_Draw_Word
             g.DrawString(text, font, shadowBrush, posX + Convert.ToInt16(20), posY + Convert.ToInt16(20));
             g.DrawString(text, font, foreBrush, posX, posY);
 
-
             //有點問題
-
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        void do_word_effect6()
         {
+            int x_st = 0;
+            int y_st = 30;
+
+            //紋理效果
             /*
             //紋理效果
             //使用圖像填充文字線條
@@ -151,8 +216,11 @@ namespace vcs_Draw_Word
             */
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        void do_word_effect7()
         {
+            int x_st = 0;
+            int y_st = 30;
+
             //傾斜效果
             Brush foreBrush = Brushes.Blue;
             Font font = new Font("幼圆", Convert.ToInt16(40), FontStyle.Regular);
@@ -175,10 +243,13 @@ namespace vcs_Draw_Word
             g.DrawString(text, font, foreBrush, 0, 0);
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        void do_word_effect8()
         {
+            int x_st = 100;
+            int y_st = 100;
+
             //漸層色文字
-            String text = " 博客园";
+            String text = "天階夜色涼如水";
             Brush ShadowBrush = Brushes.Gray;
             Brush ForeBrush = Brushes.Black;
             Font font = new Font("幼圆", System.Convert.ToInt16(40), FontStyle.Regular);
@@ -191,10 +262,14 @@ namespace vcs_Draw_Word
             int width = (this.Width - Convert.ToInt16(size.Width)) / 2;
             int height = (this.Height - Convert.ToInt16(size.Height)) / 2;
             g.DrawString(text, font, brush, width, height);
+            g.DrawString(text, font, brush, x_st, y_st);
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        void do_word_effect9()
         {
+            int x_st = this.pictureBox1.Width/2;
+            int y_st = this.pictureBox1.Height/2;
+
             //旋轉效果
             //旋轉顯示文字
             Graphics g = this.pictureBox1.CreateGraphics();
@@ -202,22 +277,18 @@ namespace vcs_Draw_Word
             for (int i = 0; i <= 360; i += 10)
             {
                 //平移Graphics對象到窗體中心
-                g.TranslateTransform(this.Width / 2, this.Height / 2);
+                g.TranslateTransform(x_st, y_st);
                 //設置Graphics對象的輸出角度
                 g.RotateTransform(i);
                 //設置文字填充顏色
                 Brush brush = Brushes.DarkViolet;
                 //旋轉顯示文字
-                g.DrawString(".bo ke yuan ", new Font("Lucida Console", 11f), brush, 0, 0);
+                g.DrawString("Happy New Year", new Font("Lucida Console", 11f), brush, 0, 0);
                 //恢復全局變換矩陣
                 g.ResetTransform();
             }
         }
 
-        private void button10_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
 
