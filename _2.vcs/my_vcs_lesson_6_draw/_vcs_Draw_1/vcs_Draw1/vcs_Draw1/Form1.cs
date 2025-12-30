@@ -54,10 +54,8 @@ namespace vcs_Draw1
             int H = this.ClientRectangle.Height;
 
             e.Graphics.FillRectangle(new SolidBrush(Color.White), x_st, y_st, W, H);
-
-            e.Graphics.DrawEllipse(new Pen(Color.Green, 10), x_st + W - 500, y_st + H - 150, 300, 100);
-
             e.Graphics.DrawString("OnPaintBackground", new Font("標楷體", 30), new SolidBrush(Color.Red), 50, y_st + H - 90);
+            e.Graphics.DrawRectangle(new Pen(Color.Green, 4), 50, y_st + H - 90, 370, 40);
         }
 
         void show_item_location()
@@ -1841,6 +1839,14 @@ namespace vcs_Draw1
 
             Rectangle intersect = Rectangle.Intersect(rect1, rect2); //交集區域
             g.FillRectangle(Brushes.Yellow, intersect);    //交集 畫黃色
+
+
+
+
+
+
+
+
         }
 
         private void bt_clear_Click(object sender, EventArgs e)

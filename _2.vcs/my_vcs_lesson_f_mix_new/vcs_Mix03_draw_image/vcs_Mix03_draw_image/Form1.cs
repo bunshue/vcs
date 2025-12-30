@@ -20,6 +20,9 @@ namespace vcs_Mix03_draw_image
 {
     public partial class Form1 : Form
     {
+        //Point一維陣列
+        Point[] pts = new Point[6];    //一維陣列內有6個Point
+
         public Form1()
         {
             InitializeComponent();
@@ -27,17 +30,28 @@ namespace vcs_Mix03_draw_image
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
 
-            show_item_location();
+            int x_st = 400;
+            int y_st = 50;
+            pts[0] = new Point(x_st + 0, y_st + 0);
+            pts[1] = new Point(x_st + 80, y_st + 0);
+            pts[2] = new Point(x_st + 0, y_st + 50);
+            pts[3] = new Point(x_st + 80, y_st + 50);
+            pts[4] = new Point(x_st + 0, y_st + 100);
+            pts[5] = new Point(x_st + 80, y_st + 100);
         }
 
-        //直接寫一個OnPaint在此
+        /*
+        //直接寫一個OnPaint在此, 取代Form1_Paint
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.DrawRectangle(Pens.Red, 5, 5, this.ClientSize.Width - 10, this.ClientSize.Height - 10);
         }
+        */
 
         void show_item_location()
         {
@@ -49,8 +63,8 @@ namespace vcs_Mix03_draw_image
             //button
             x_st = 10;
             y_st = 10;
-            dx = 160+5;
-            dy = 60+5;
+            dx = 160 + 5;
+            dy = 60 + 5;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -73,10 +87,10 @@ namespace vcs_Mix03_draw_image
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            pictureBox1.Size = new Size(780, 640);
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox1.Size = new Size(600, 600);
+            pictureBox1.Location = new Point(x_st + dx * 2 + 180, y_st + dy * 0);
             richTextBox1.Size = new Size(300, 640);
-            richTextBox1.Location = new Point(x_st + dx * 7-40, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 7 - 40, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             this.Size = new Size(1450, 710);
         }
@@ -418,6 +432,43 @@ namespace vcs_Mix03_draw_image
         private void button19_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawString("點選表單中的紅點", new Font("標楷體", 16), new SolidBrush(Color.Black), pts[0].X - 65, pts[0].Y - 30);
+            //e.Graphics.DrawRectangle(Pens.Red, 100, 100, 300, 300);
+            foreach (Point pt in pts)
+            {
+                e.Graphics.FillEllipse(Brushes.Red, pt.X - 10, pt.Y - 10, 20, 20);
+            }
+        }
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            Point pt = FindPointAt(e.X, e.Y);
+            if (pt == new Point(9999, 9999))
+            {
+                richTextBox1.Text += "找不到\n";
+            }
+            else
+            {
+                richTextBox1.Text += "找到 : (" + pt.X.ToString() + ", " + pt.Y.ToString() + ")\n";
+            }
+        }
+
+        private Point FindPointAt(int X, int Y)
+        {
+            foreach (Point pt in pts)
+            {
+                float dx = pt.X - X;
+                float dy = pt.Y - Y;
+                if (dx * dx + dy * dy <= 20 * 20)
+                {
+                    return pt;
+                }
+            }
+            return new Point(9999, 9999);
         }
     }
 }

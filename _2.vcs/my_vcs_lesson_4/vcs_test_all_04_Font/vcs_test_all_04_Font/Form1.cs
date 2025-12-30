@@ -42,6 +42,8 @@ namespace vcs_test_all_04_Font
                 from family in fonts.Families
                 select family.Name;
             comboBox1.DataSource = font_names.ToArray();
+
+            Show_Font_by_ListView();
         }
 
         void show_item_location()
@@ -57,41 +59,31 @@ namespace vcs_test_all_04_Font
             dx = 180;
             dy = 80;
 
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            bt_exit_setup();
+            groupBox4.Size = new Size(460, 580);
+            groupBox4.Location = new Point(1070, 10);
+            comboBox1.Size = new Size(360, 20);
+            comboBox1.Location = new Point(20, 20);
+            pictureBox1.Location = new Point(20, 50);
+            pictureBox1.Size = new Size(430, 500);
+            //pictureBox1.BackColor = Color.Pink;
+
+            groupBox_show_font.Size = new Size(820, 360);
+            groupBox_show_font.Location = new Point(10, 500);
+            textBox1.Text = "2026 Happy New Year";
+            listView1.Size = new Size(760, 270);
+
+            richTextBox1.Size = new Size(460, 200);
+            richTextBox1.Location = new Point(1070, 600);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1600, 920);
         }
 
-        void bt_exit_setup()
+        private void bt_clear_Click(object sender, EventArgs e)
         {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
+            richTextBox1.Clear();
         }
 
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
 
         void search_installed_font()
         {
@@ -148,6 +140,59 @@ namespace vcs_test_all_04_Font
 
                 // Use that font size.
                 lbl.Font = new Font(lbl.Font.FontFamily, best_size);
+            }
+        }
+
+        void Show_Font_by_ListView()
+        {
+            //需要先把 listView1 的 View 屬性設成 Details
+            int iii = 0;
+            //C#專案中常常要獲取系統字型
+            InstalledFontCollection fontCol = new InstalledFontCollection();
+
+            listView1.Clear();
+
+            listView1.Columns.Add("項目", 80, HorizontalAlignment.Center);
+            listView1.Columns.Add("字型", 300, HorizontalAlignment.Center);
+            listView1.Columns.Add("範例", 300, HorizontalAlignment.Center);
+
+            foreach (FontFamily temp in fontCol.Families)
+            {
+                iii++;
+                ListViewItem i1 = new ListViewItem(iii.ToString());
+                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+                sub_i1a.Text = temp.Name;
+                i1.SubItems.Add(sub_i1a);
+                ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
+                if (temp.Name[0] <= 'z')
+                {
+                    if (textBox1.Text.Length > 0)
+                        sub_i1b.Text = textBox1.Text;
+                    else
+                        sub_i1b.Text = "2026 Happy New Year";
+                }
+                else
+                {
+                    if (textBox1.Text.Length > 0)
+                        sub_i1b.Text = textBox1.Text;
+                    else
+                        sub_i1b.Text = "春水碧於天，畫船聽雨眠。";
+                }
+                i1.SubItems.Add(sub_i1b);
+
+                try
+                {
+                    i1.Font = new Font(temp.Name, 24);
+                }
+                catch (Exception ex)
+                {   //定義產生錯誤時的例外處理程式碼
+                    sub_i1b.Text = ex.Message;
+                }
+                finally
+                {
+                    //一定會被執行的程式區段
+                }
+                listView1.Items.Add(i1);
             }
         }
 
@@ -422,7 +467,8 @@ namespace vcs_test_all_04_Font
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.Clear(this.BackColor);
+            //e.Graphics.Clear(this.BackColor);
+            e.Graphics.Clear(Color.Pink);
 
             int x = 20;
             int y = comboBox1.Bottom + 5;
@@ -459,6 +505,11 @@ namespace vcs_test_all_04_Font
         {
             search_installed_font();
         }
+
+        private void bt_show_font_Click(object sender, EventArgs e)
+        {
+            Show_Font_by_ListView();
+        }
+
     }
 }
-
