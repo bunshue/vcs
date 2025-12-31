@@ -147,7 +147,7 @@ namespace vcs_PictureBox1
             for (i = 0; i < 5; i++)
             {
                 Minute = (dt.Minute / 10) * 10;
-                string mapURL = string.Format("https://www.cwb.gov.tw/Data/satellite/LCC_IR1_CR_2750/LCC_IR1_CR_2750-{0}-{1}-{2}-{3}-{4}.jpg",
+                string mapURL = string.Format("https://www.cwa.gov.tw/Data/satellite/LCC_IR1_CR_2750/LCC_IR1_CR_2750-{0}-{1}-{2}-{3}-{4}.jpg",
                     dt.Year,
                     dt.Month.ToString("00"),
                     dt.Day.ToString("00"),
