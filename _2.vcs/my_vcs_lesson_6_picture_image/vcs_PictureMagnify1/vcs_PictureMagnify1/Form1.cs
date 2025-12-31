@@ -38,7 +38,7 @@ namespace vcs_PictureMagnify1
             string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             img = new Bitmap(filename);
 
-            this.ClientSize = new Size(img.Width, img.Height);// 調整視窗客戶區寬高
+            this.ClientSize = new Size(img.Width+200, img.Height+200);// 調整視窗客戶區寬高
 
             if (magnifying_type == 1)       //圓形
             {

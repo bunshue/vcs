@@ -65,10 +65,13 @@ namespace vcs_PictureMagnify4
             Size s = Screen.PrimaryScreen.Bounds.Size;
 
             if (p.X > s.Width - this.Width)
+            {
                 p.X -= this.Width + 20;
+            }
             if (p.Y > s.Height - this.Height)
+            {
                 p.Y -= this.Height + 20;
-
+            }
             this.Location = p;
         }
 
@@ -77,7 +80,6 @@ namespace vcs_PictureMagnify4
             if (e.KeyCode == Keys.Escape)
             {
                 this.Close();
-
             }
         }
     }

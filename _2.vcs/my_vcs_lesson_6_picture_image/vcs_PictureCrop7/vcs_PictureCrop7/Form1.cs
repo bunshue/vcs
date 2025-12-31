@@ -24,14 +24,9 @@ namespace vcs_PictureCrop7
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            using (Bitmap bm = new Bitmap(filename))
-            {
-                TheBitmap = new Bitmap(bm);
-            }
+            Bitmap bm = new Bitmap(filename);
+            TheBitmap = new Bitmap(bm);
             pictureBox1.Image = TheBitmap;
-            this.ClientSize = new Size(
-                pictureBox1.Right + pictureBox1.Left,
-                pictureBox1.Bottom + pictureBox1.Left);
 
         }
 
@@ -48,7 +43,10 @@ namespace vcs_PictureCrop7
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!Drawing) return;
+            if (!Drawing)
+            {
+                return;
+            }
             Bitmap temp_bm = new Bitmap(TheBitmap);
             using (Graphics gr = Graphics.FromImage(temp_bm))
             {
@@ -63,12 +61,14 @@ namespace vcs_PictureCrop7
                 }
             }
             pictureBox1.Image = temp_bm;
-
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (!Drawing) return;
+            if (!Drawing)
+            {
+                return;
+            }
             Drawing = false;
 
             // Process the selected area.
@@ -80,7 +80,6 @@ namespace vcs_PictureCrop7
             Gray_Selection(TheBitmap, rect);
             pictureBox1.Image = TheBitmap;
             pictureBox1.Refresh();
-
         }
 
         private void Gray_Selection(Bitmap bm, Rectangle rect)
@@ -96,6 +95,5 @@ namespace vcs_PictureCrop7
                 }
             }
         }
-
     }
 }

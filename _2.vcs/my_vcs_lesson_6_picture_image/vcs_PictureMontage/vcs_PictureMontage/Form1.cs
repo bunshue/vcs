@@ -268,16 +268,6 @@ namespace vcs_PictureMontage
             }
         }
 
-        // Let the user set the PictureBox's background color.
-        private void button4_Click(object sender, EventArgs e)
-        {
-            colorDialog1.Color = pictureBox1.BackColor;
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                pictureBox1.BackColor = colorDialog1.Color;
-            }
-        }
-
         private void SetupPictureScale(object sender, EventArgs e)
         {
             float scale;

@@ -14,7 +14,7 @@ namespace vcs_PictureMagnify3
 {
     public partial class Form1 : Form
     {
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
         Bitmap bitmap1;
 
         public Form1()
@@ -30,6 +30,8 @@ namespace vcs_PictureMagnify3
             pictureBox1.Image = bitmap1;
             pictureBox1.Height = bitmap1.Height;
             pictureBox1.Width = bitmap1.Width;
+
+            this.Size = new Size(1000, 700);
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)

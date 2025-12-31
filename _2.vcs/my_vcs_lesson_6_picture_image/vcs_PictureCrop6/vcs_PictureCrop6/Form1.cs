@@ -11,11 +11,6 @@ namespace vcs_PictureCrop6
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         private bool flag_select_area = false;  //開始選取的旗標
         private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
         private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
@@ -29,14 +24,39 @@ namespace vcs_PictureCrop6
 
         string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.bmp";
 
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             //讀取圖檔
             pictureBox1.Image = Image.FromFile(filename);
 
             bitmap1 = new Bitmap(pictureBox1.Image);
 
             this.KeyPreview = true;
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 305 + 10;
+            dy = 400 + 10;
+
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+
         }
 
         // Return a Rectangle with these points as corners.
@@ -85,12 +105,14 @@ namespace vcs_PictureCrop6
             pictureBox1.Refresh();
         }
 
-        // Finish selecting the area.
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             // Do nothing if we're not selecting an area.
             if (flag_select_area == false)
+            {
                 return;
+            }
+
             flag_select_area = false;
 
             // Stop selecting.
@@ -100,7 +122,7 @@ namespace vcs_PictureCrop6
             select_rectangle = MakeRectangle(pt_st, pt_sp);
             MadeSelection = ((select_rectangle.Width > 0) && (select_rectangle.Height > 0));
 
-            this.Text = "選取區域 : " + select_rectangle.ToString();
+            richTextBox1.Text += "選取區域 : " + select_rectangle.ToString() + "\n";
         }
 
         // If the user presses Escape, cancel.
@@ -123,7 +145,7 @@ namespace vcs_PictureCrop6
             }
         }
 
-        // Copy the selected area to the clipboard.
+        //複製選取部分到剪貼簿
         private void CopyToClipboard(Rectangle src_rect)
         {
             // Make a bitmap for the selected area's image.
@@ -132,106 +154,67 @@ namespace vcs_PictureCrop6
             // Copy the selected area into the bitmap.
             using (Graphics g2 = Graphics.FromImage(bm))
             {
+                //目標矩形
                 Rectangle dest_rect = new Rectangle(0, 0, src_rect.Width, src_rect.Height);
                 g2.DrawImage(bitmap1, dest_rect, src_rect, GraphicsUnit.Pixel);
+                g2.DrawRectangle(Pens.Red, dest_rect);
             }
 
-            // Copy the selection image to the clipboard.
+            //複製影像到剪貼簿
             Clipboard.SetImage(bm);
         }
 
-        //複製
-        // Copy the selected area to the clipboard.
-        private void button1_Click(object sender, EventArgs e)
+       private void button5_Click(object sender, EventArgs e)
         {
+            //複製選取部分到剪貼簿
             CopyToClipboard(select_rectangle);
         }
 
-        //剪下
-        // Copy the selected area to the clipboard
-        // and blank that area.
-        private void button2_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
         {
-            // Copy the selection to the clipboard.
-            CopyToClipboard(select_rectangle);
-
-            // Blank the selected area in the original image.
-            using (Graphics g2 = Graphics.FromImage(bitmap1))
+            if (!Clipboard.ContainsImage())
             {
-                using (SolidBrush br = new SolidBrush(pictureBox1.BackColor))
-                {
-                    g2.FillRectangle(br, select_rectangle);
-                }
+                richTextBox1.Text += "剪貼簿內 無影像\n";
+                return;
             }
+            richTextBox1.Text += "剪貼簿內 有影像\n";
 
-            // Display the result.
-            bitmap2 = new Bitmap(bitmap1);
-            pictureBox1.Image = bitmap2;
+            //取得剪貼簿內的影像
+            Image clipboard_image = Clipboard.GetImage();
 
-            bitmap2 = null;
-            //g2 = null;
+            Graphics g = this.pictureBox2.CreateGraphics();
+            g.DrawRectangle(Pens.Red, 50, 50, 200, 200);
+
+            //來源矩形
+            int sx = 0;
+            int sy = 0;
+            int sw = clipboard_image.Width;
+            int sh = clipboard_image.Height;
+            Rectangle src_rect = new Rectangle(sx, sy, sw, sh);
+
+            //目標矩形
+            int dx = 0;
+            int dy = 0;
+            int dw = sw;
+            int dh = sh;
+            Rectangle dest_rect = new Rectangle(dx, dy, dw, dh);
+
+            g.DrawImage(clipboard_image, dest_rect, src_rect, GraphicsUnit.Pixel);
+            g.DrawRectangle(Pens.Magenta, dest_rect);
+
+            pictureBox1.Image = bitmap1;
             MadeSelection = false;
         }
 
-        //貼上(中間)
-        // Paste the image on the clipboard, centering it on the selected area.
-        private void button3_Click(object sender, EventArgs e)
+        private void button7_Click(object sender, EventArgs e)
         {
-            // Do nothing if the clipboard doesn't hold an image.
-            if (!Clipboard.ContainsImage())
-                return;
-
-            // Get the clipboard's image.
-            Image clipboard_image = Clipboard.GetImage();
-
-            // Figure out where to put it.
-            int cx = select_rectangle.X + (select_rectangle.Width - clipboard_image.Width) / 2;
-            int cy = select_rectangle.Y + (select_rectangle.Height - clipboard_image.Height) / 2;
-            Rectangle dest_rect = new Rectangle(cx, cy, clipboard_image.Width, clipboard_image.Height);
-
-            // Copy the new image into position.
-            using (Graphics g2 = Graphics.FromImage(bitmap1))
-            {
-                g2.DrawImage(clipboard_image, dest_rect);
-            }
-
-            // Display the result.
+            //挖空
+            Graphics g2 = Graphics.FromImage(bitmap1);
+            SolidBrush br = new SolidBrush(pictureBox1.BackColor);
+            g2.FillRectangle(br, select_rectangle);
             pictureBox1.Image = bitmap1;
-            pictureBox1.Refresh();
 
-            bitmap2 = null;
-            //g2 = null;
-            MadeSelection = false;
-        }
-
-        //貼上(延展)
-        // Paste the image on the clipboard, stretching it to fit the selected area.
-        private void button4_Click(object sender, EventArgs e)
-        {
-            // Do nothing if the clipboard doesn't hold an image.
-            if (!Clipboard.ContainsImage())
-                return;
-
-            // Get the clipboard's image.
-            Image clipboard_image = Clipboard.GetImage();
-
-            // Get the image's bounding Rectangle.
-            Rectangle src_rect = new Rectangle(0, 0, clipboard_image.Width, clipboard_image.Height);
-
-            // Copy the new image into position.
-            using (Graphics g2 = Graphics.FromImage(bitmap1))
-            {
-                g2.DrawImage(clipboard_image, select_rectangle, src_rect, GraphicsUnit.Pixel);
-            }
-
-            // Display the result.
-            pictureBox1.Image = bitmap1;
-            pictureBox1.Refresh();
-
-            bitmap2 = null;
-            //g2 = null;
-            MadeSelection = false;
+            MadeSelection = false;//???
         }
     }
 }
-

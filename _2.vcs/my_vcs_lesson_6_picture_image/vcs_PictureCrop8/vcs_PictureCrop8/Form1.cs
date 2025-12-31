@@ -11,14 +11,11 @@ namespace vcs_PictureCrop8
 {
     public partial class Form1 : Form
     {
-        //private static ScreenBody screenBody = null;
-        //private static Form2 screenBody = null;
-
         private bool CatchStart;//判斷滑鼠是否按下
         private bool CatchFinished;//判斷矩形是否繪製完成
         private Point DownPoint;//滑鼠按下的點
         private Image baseMap;//最基本的圖片
-        private Rectangle CatchRectangle;  
+        private Rectangle CatchRectangle;
 
         public Form1()
         {
@@ -27,11 +24,9 @@ namespace vcs_PictureCrop8
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
             string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             baseMap = Image.FromFile(filename);
             this.BackgroundImage = baseMap;
-
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -44,6 +39,7 @@ namespace vcs_PictureCrop8
                     CatchStart = true;
                     //儲存此時的座標
                     DownPoint = new Point(e.X, e.Y);
+                    richTextBox1.Text += "下 : " + DownPoint.ToString() + "\n";
                 }
             }
         }
@@ -69,8 +65,8 @@ namespace vcs_PictureCrop8
                 if (e.X < DownPoint.X)
                 {
                     newPoint.X = e.X;
+                }
 
-        }
                 if (e.Y < DownPoint.Y)
                 {
                     newPoint.Y = e.Y;
@@ -136,18 +132,7 @@ namespace vcs_PictureCrop8
                 //this.DialogResult = DialogResult.OK;
                 //this.Close();
             }
-
-
-        }
-
-        private void Form1_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-
         }
     }
 }
+
