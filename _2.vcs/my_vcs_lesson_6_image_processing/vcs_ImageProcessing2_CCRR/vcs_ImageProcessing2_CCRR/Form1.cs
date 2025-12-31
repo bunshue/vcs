@@ -309,7 +309,7 @@ namespace vcs_ImageProcessing2_CCRR
             //圖片剪下一塊存檔1
             //圖片剪下一塊存檔, 圖片裁剪
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string filename2 = @"tmp_picture1_cut.jpg";
+            string filename2 = @"tmp_picture1_cut4.jpg";
 
             ImgReduceCutOut(200, 200, filename1, filename2);
 
@@ -347,7 +347,7 @@ namespace vcs_ImageProcessing2_CCRR
             //圖片剪下一塊存檔2
 
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\picture1_cut.jpg";
+            string filename2 = @"tmp_picture1_cut5.jpg";
 
             pictureBox1.Image = CutForCustomx(filename1, 150, 150);
             pictureBox1.Image.Save(filename2);
@@ -437,7 +437,7 @@ namespace vcs_ImageProcessing2_CCRR
 
         //圖片壓縮、縮略圖生成代碼
 
-        #region imageCompress
+        //#region imageCompress
         /**/
         /// <summary>
         /// 圖片壓縮函數
@@ -468,7 +468,7 @@ namespace vcs_ImageProcessing2_CCRR
             }
 
         }
-        #endregion
+        //#endregion
 
         /*  
         圖片壓縮、縮略圖生成代碼匯總
@@ -488,7 +488,6 @@ namespace vcs_ImageProcessing2_CCRR
             else
                 richTextBox1.Text += "FAIL\n";
         }
-
 
         private void button8_Click(object sender, EventArgs e)
         {

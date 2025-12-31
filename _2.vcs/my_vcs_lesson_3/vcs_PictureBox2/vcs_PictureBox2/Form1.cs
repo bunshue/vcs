@@ -26,7 +26,8 @@ namespace vcs_PictureBox2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_04.jpg";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\poster_04.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             OpenImageFile(filename);
             /*
@@ -43,12 +44,10 @@ namespace vcs_PictureBox2
             pictureBox1.AllowDrop = true;
             pictureBox1.Focus();
 
-
             W = this.Width;
             H = this.Height;
 
-
-            this.Text = "W= " + W.ToString() + ", H= " + H.ToString() + ", w= " + w.ToString() + ", h= " + h.ToString();
+            this.Text = "拖曳圖片 滾輪調整大小";
         }
 
         private void pictureBox1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -68,8 +67,6 @@ namespace vcs_PictureBox2
                 pictureBox1.Size = new Size(w, h);
                 pictureBox1.Location = new Point((W - w) / 2, (H - h) / 2);
             }
-
-
         }
 
         private void pictureBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -159,7 +156,6 @@ namespace vcs_PictureBox2
             */
             //richTextBox1.Text += "開啟檔案 : " + filename + "\n";
             //richTextBox1.Text += "開啟檔案 : " + Path.GetFileName(filename) + "\n";   簡檔名
-
         }
 
         private void OpenNextFile(string filename)

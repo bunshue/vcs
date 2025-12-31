@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Drawing2D;//for SmoothingMode
+
 namespace vcs_List1
 {
     public partial class Form1 : Form
@@ -15,6 +17,9 @@ namespace vcs_List1
 
         List<Point> points = new List<Point>(); // 紀錄滑鼠軌跡的陣列。
         List<String> strings = new List<String>();
+
+        // 收集滑鼠點數
+        List<PointF> points_mouse = new List<PointF>();
 
         public Form1()
         {
@@ -54,6 +59,12 @@ namespace vcs_List1
             button27.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             button3.Location = new Point(x_st + dx * 1, y_st + dy * 3);
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBox_mouse_points.Size = new Size(300, 200);
+            groupBox_mouse_points.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            pictureBox1.Size = new Size(260, 130);
+            pictureBox1.Location = new Point(10, 60);
+            bt_points_mouse.Location = new Point(10, 20);
+            bt_clear_points_mouse.Location = new Point(100, 20);
 
             richTextBox1.Size = new Size(500, 480);
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 4);
@@ -778,6 +789,51 @@ namespace vcs_List1
                 richTextBox1.Text += "控件 :" + client.Name + "長度 :" + client.Text.Length.ToString() + "\n";
             }
         }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            points_mouse.Add(new Point(e.X, e.Y));
+
+            this.pictureBox1.Invalidate();
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(this.pictureBox1.BackColor);
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // Fill all of the points.
+            foreach (PointF pt in points_mouse)
+            {
+                e.Graphics.FillEllipse(Brushes.Cyan, pt.X - 3, pt.Y - 3, 7, 7);
+            }
+
+            // Draw all of the points.
+            foreach (PointF pt in points_mouse)
+            {
+                e.Graphics.DrawEllipse(Pens.Black, pt.X - 3, pt.Y - 3, 7, 7);
+            }
+        }
+
+        private void bt_points_mouse_Click(object sender, EventArgs e)
+        {
+            //收集滑鼠點數
+            richTextBox1.Text += "共有點數 : " + points_mouse.Count.ToString() + "\n";
+            foreach (PointF pt in points_mouse)
+            {
+                richTextBox1.Text += pt.ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+        }
+
+        private void bt_clear_points_mouse_Click(object sender, EventArgs e)
+        {
+            //清除
+            points_mouse = new List<PointF>();
+            this.pictureBox1.Invalidate();
+        }
+
+
     }
 }
 

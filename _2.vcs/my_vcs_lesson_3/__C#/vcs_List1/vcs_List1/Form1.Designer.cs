@@ -63,9 +63,15 @@
             this.button26 = new System.Windows.Forms.Button();
             this.button27 = new System.Windows.Forms.Button();
             this.button28 = new System.Windows.Forms.Button();
+            this.groupBox_mouse_points = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.bt_points_mouse = new System.Windows.Forms.Button();
+            this.bt_clear_points_mouse = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox_mouse_points.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -91,7 +97,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1078, 7);
+            this.richTextBox1.Location = new System.Drawing.Point(868, 463);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 2;
@@ -282,7 +288,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1091, 26);
+            this.bt_clear.Location = new System.Drawing.Point(881, 482);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(61, 30);
             this.bt_clear.TabIndex = 15;
@@ -455,11 +461,57 @@
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
+            // groupBox_mouse_points
+            // 
+            this.groupBox_mouse_points.Controls.Add(this.bt_clear_points_mouse);
+            this.groupBox_mouse_points.Controls.Add(this.bt_points_mouse);
+            this.groupBox_mouse_points.Controls.Add(this.pictureBox1);
+            this.groupBox_mouse_points.Location = new System.Drawing.Point(866, 343);
+            this.groupBox_mouse_points.Name = "groupBox_mouse_points";
+            this.groupBox_mouse_points.Size = new System.Drawing.Size(100, 100);
+            this.groupBox_mouse_points.TabIndex = 31;
+            this.groupBox_mouse_points.TabStop = false;
+            this.groupBox_mouse_points.Text = "蒐集滑鼠點數";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(6, 57);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            // 
+            // bt_points_mouse
+            // 
+            this.bt_points_mouse.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_points_mouse.Location = new System.Drawing.Point(6, 21);
+            this.bt_points_mouse.Name = "bt_points_mouse";
+            this.bt_points_mouse.Size = new System.Drawing.Size(60, 30);
+            this.bt_points_mouse.TabIndex = 12;
+            this.bt_points_mouse.Text = "info";
+            this.bt_points_mouse.UseVisualStyleBackColor = true;
+            this.bt_points_mouse.Click += new System.EventHandler(this.bt_points_mouse_Click);
+            // 
+            // bt_clear_points_mouse
+            // 
+            this.bt_clear_points_mouse.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear_points_mouse.Location = new System.Drawing.Point(72, 21);
+            this.bt_clear_points_mouse.Name = "bt_clear_points_mouse";
+            this.bt_clear_points_mouse.Size = new System.Drawing.Size(60, 30);
+            this.bt_clear_points_mouse.TabIndex = 13;
+            this.bt_clear_points_mouse.Text = "clear";
+            this.bt_clear_points_mouse.UseVisualStyleBackColor = true;
+            this.bt_clear_points_mouse.Click += new System.EventHandler(this.bt_clear_points_mouse_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1268, 811);
+            this.Controls.Add(this.groupBox_mouse_points);
             this.Controls.Add(this.button28);
             this.Controls.Add(this.button27);
             this.Controls.Add(this.button26);
@@ -488,6 +540,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox_mouse_points.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -529,6 +583,10 @@
         private System.Windows.Forms.Button button26;
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button button28;
+        private System.Windows.Forms.GroupBox groupBox_mouse_points;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button bt_clear_points_mouse;
+        private System.Windows.Forms.Button bt_points_mouse;
     }
 }
 

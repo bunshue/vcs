@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;    //for File, FileStream
 using System.Drawing.Imaging;   //for PixelFormat
+using System.Drawing.Drawing2D; //for GraphicsPath
 using System.Net;   //for SecurityProtocolType
 
 namespace vcs_PictureBox1
@@ -126,52 +127,13 @@ namespace vcs_PictureBox1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            pictureBox1.ImageLocation = "http://www.myson.com.tw/images/index/ad01.jpg";
+            //NG
+            pictureBox1.ImageLocation = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Taipei_101_2009_amk-EditMylius.jpg/500px-Taipei_101_2009_amk-EditMylius.jpg";
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = null;
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            int i;
-            DateTime dt = DateTime.Now;
-            int Minute;
-            pictureBox1.ClientSize = new Size(800, 800);
-
-            //加入這段語法忽略憑證
-            System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-
-            for (i = 0; i < 5; i++)
-            {
-                Minute = (dt.Minute / 10) * 10;
-                string mapURL = string.Format("https://www.cwa.gov.tw/Data/satellite/LCC_IR1_CR_2750/LCC_IR1_CR_2750-{0}-{1}-{2}-{3}-{4}.jpg",
-                    dt.Year,
-                    dt.Month.ToString("00"),
-                    dt.Day.ToString("00"),
-                    dt.Hour.ToString("00"),
-                    Minute.ToString("00"));
-                //MessageBox.Show("path: " + mapURL);
-
-                try
-                {   //可能會產生錯誤的程式區段
-                    pictureBox1.Load(mapURL);
-                    break;
-                }
-                catch (Exception ex)
-                {   //定義產生錯誤時的例外處理程式碼
-                    richTextBox1.Text += "path: " + mapURL + "\n";
-                    richTextBox1.Text += ex.Message + "\n";
-                }
-                finally
-                {
-                    //一定會被執行的程式區段
-                    //MessageBox.Show("path: " + mapURL);
-                }
-                dt = dt.AddMinutes(-10);
-            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -651,5 +613,34 @@ namespace vcs_PictureBox1
                 richTextBox1.Text += "unknown mode\n";
             }
         }
+
+        //做一個圓形的pictureBox ST
+
+
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_computer\burn1.jpg";
+            pictureBox1.Image = Image.FromFile(filename);
+            pictureBox1.BackColor = Color.Pink;
+
+            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+
+            //做一個圓形的pictureBox
+            // Make a Rectangle that defines the circular area.
+            Rectangle rect = new Rectangle(15, 15, 200, 200);
+
+            // Make a GraphicsPath and add the circle.
+            GraphicsPath path = new GraphicsPath();
+            path.AddEllipse(rect);
+
+            // Convert the GraphicsPath into a Region.
+            Region region = new Region(path);
+
+            // Restrict the PictureBoxes to the Region.
+            pictureBox1.Region = region;
+        }
+
+        //做一個圓形的pictureBox SP
     }
 }
