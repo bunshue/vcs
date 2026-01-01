@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_DrawCircle.Properties
+namespace vcs_PictureCrop9.Properties
 {
 
 

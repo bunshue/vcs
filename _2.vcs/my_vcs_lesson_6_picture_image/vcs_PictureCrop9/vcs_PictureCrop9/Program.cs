@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_DrawCircle
+namespace vcs_PictureCrop9
 {
     static class Program
     {

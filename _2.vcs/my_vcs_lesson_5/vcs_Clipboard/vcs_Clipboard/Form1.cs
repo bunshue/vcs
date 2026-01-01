@@ -23,6 +23,7 @@ namespace vcs_Clipboard
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
             webBrowser_clipboard.Navigate("about:blank");
             richTextBox1.Text += "\n";
 
@@ -40,49 +41,114 @@ namespace vcs_Clipboard
             //button
             x_st = 12;
             y_st = 12;
-            dx = 130;
-            dy = 65;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            groupBox1.Location = new Point(12, 500);
-            y_st = 18;
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-
-            x_st = 350;
-            y_st = 500;
-            dx = 140 + 10;
-            dy = 50 + 10;
-
-            button15.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button16.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button17.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button18.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button19.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button20.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button21.Location = new Point(x_st + dx *1, y_st + dy * 0);
-            button22.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button26.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button27.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button28.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button29.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
             pictureBox1.Size = new Size(450, 450);
-            pictureBox1.Location = new Point(200, 10);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
+            groupBox_clipboard.Location = new Point(x_st + dx * 2, y_st + dy * 6 + 50);
+
+            int W = 300;
+            int H = 250;
+            richTextBox1.Size = new Size(W, H);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 50, y_st + dy * 0);
+            richTextBox2.Size = new Size(W, H);
+            richTextBox2.Location = new Point(x_st + dx * 4 + 50, y_st + dy * 4);
+            groupBox2.Size = new Size(W, H);
+            groupBox2.Location = new Point(x_st + dx * 4 + 50, y_st + dy * 8);
+
+            W = 360;
+            H = 200;
+            pictureBox_clipboard.Size = new Size(W, H);
+            textBox_clipboard.Size = new Size(W, H);
+            richTextBoxp_clipboard.Size = new Size(W, H);
+            webBrowser_clipboard.Size = new Size(W, H);
+
+            pictureBox_clipboard.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            textBox_clipboard.Location = new Point(x_st + dx * 6, y_st + dy * 3);
+            richTextBoxp_clipboard.Location = new Point(x_st + dx * 6, y_st + dy * 6);
+            webBrowser_clipboard.Location = new Point(x_st + dx * 6, y_st + dy * 9);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-            this.Location = new Point(100, 50);
-
+            this.Size = new Size(1680, 910);
+            this.Text = "vcs_Clipboard";
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //檢查剪貼簿內的資料內容 ST
+        private void button0_Click(object sender, EventArgs e)
+        {
+            // List the available formats.
+            IDataObject dataObject = Clipboard.GetDataObject();
+
+            foreach (string format in dataObject.GetFormats())
+            {
+                richTextBox1.Text += "取得剪貼簿內的資料格式 : " + format + "\n";
+            }
+            DisplayData();
+        }
+
+        // Display data if possible.
+        private void DisplayData()
+        {
+            pictureBox_clipboard.Image = null;
+            textBox_clipboard.Clear();
+            richTextBoxp_clipboard.Clear();
+            //webBrowser_clipboard.Navigate("about:blank");
+
+            // Image.
+            if (Clipboard.ContainsImage() == true)
+            {
+                pictureBox_clipboard.Image = Clipboard.GetImage();
+            }
+
+            // Text.
+            if (Clipboard.ContainsText(TextDataFormat.UnicodeText) == true)
+            {
+                textBox_clipboard.Text = Clipboard.GetText(TextDataFormat.UnicodeText);
+            }
+
+            // HTML.
+            if (Clipboard.ContainsText(TextDataFormat.Html) == true)
+            {
+                HtmlDocument doc = webBrowser_clipboard.Document;
+                doc.Body.InnerHtml = Clipboard.GetText(TextDataFormat.Html);
+            }
+
+            // Rich Text.
+            if (Clipboard.ContainsText(TextDataFormat.Rtf) == true)
+            {
+                richTextBoxp_clipboard.Rtf = Clipboard.GetText(TextDataFormat.Rtf);
+            }
+        }
+        //檢查剪貼簿內的資料內容 SP
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -199,7 +265,7 @@ namespace vcs_Clipboard
         private void button5_Click(object sender, EventArgs e)
         {
             //放小圖到剪貼簿中, 並貼到圖上
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\chicken.bmp";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\chicken.bmp";
 
             //放進剪貼簿
             //TBD
@@ -249,153 +315,11 @@ namespace vcs_Clipboard
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //把資料放到系統剪貼簿裏
-            richTextBox1.Text += "按了 複製資料到剪貼簿\n";
-            //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
-            //Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
-            string poem = "\n唐王翰涼州詞\n葡萄美酒夜光杯，欲飲琵琶馬上催。醉臥沙場君莫笑，古來征戰幾人回。\n";
-            Clipboard.SetDataObject("複製資料到剪貼簿" + poem + " " + DateTime.Now.ToString() + "\n");      //建議用此  //將poem字串填到Clipboard裏。
-
-            //復制到剪貼板上，第二個參數表明程序退出時不清空剪貼板 
-            //Clipboard.SetDataObject(dataobj, true);
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "按了 累計複製資料到剪貼簿\n";
-            //Clipboard.SetData(DataFormats.Text, Clipboard.GetData(DataFormats.Text) + richTextBox1.Text + "\n");
-            //Clipboard.SetDataObject(Clipboard.GetText() + richTextBox1.Text + "\n");      //建議用此
-            //Clipboard.GetData(DataFormats.Text) 目前剪貼簿內的文字資料
-            //Clipboard.GetText() 目前剪貼簿內的文字資料
-            Clipboard.SetDataObject(Clipboard.GetText() + "累計複製資料到剪貼簿 " + DateTime.Now.ToString() + "\n");      //建議用此  //將poem字串填到Clipboard裏。
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            Clipboard.Clear();  //清除剪貼板中的對象
-        }
-
-        //Read text from clipboard
-        private void button10_Click(object sender, EventArgs e)
-        {
-            string str = System.String.Empty;
-            if (Clipboard.ContainsText() == true)
-            {
-                str = Clipboard.GetText();
-                richTextBox1.Text += str + "\n";
-            }
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            //C# – 貼上剪貼簿
-            richTextBox1.Text += "\n";
-            //richTextBox1.Text += Clipboard.GetData(DataFormats.Text);
-            richTextBox1.Text += Clipboard.GetText();   //建議用此
-
-            richTextBox1.Text += "\n";
-            int len = Clipboard.GetText().Length;
-            richTextBox1.Text += "Unicode (Big-Endian), len = " + len.ToString() + "\n";
-            int i;
-            for (i = 0; i < len; i++)
-            {
-                //richTextBox1.Text += Clipboard.GetText()[i].ToString() + "\n";
-                richTextBox1.Text += ((int)Clipboard.GetText()[i]).ToString("X2") + " ";
-            }
-            richTextBox1.Text += "\n";
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            // Copy a Person to the Clipboard.
-            Person person = new Person() { FirstName = textBox1.Text, LastName = textBox2.Text };
-            Clipboard.SetDataObject(person);
-            richTextBox1.Text += "已複製類別到剪貼簿\n";
-        }
-
-        // Paste the person from the Clipboard.
-        private void button13_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "貼上類別\t";
-            IDataObject dataObject = Clipboard.GetDataObject();
-            if (dataObject.GetDataPresent("vcs_Clipboard.Person"))
-            {
-                Person person = (Person)dataObject.GetData("vcs_Clipboard.Person");
-                //txtDropFirstName.Text = person.FirstName;
-                //txtDropLastName.Text = person.LastName;
-                richTextBox1.Text += "取得類別資料 First Name = " + person.FirstName + ", Last Name = " + person.LastName + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "類別資料不存在\n";
-            }
-
-        }
-
-        //檢查剪貼簿內的資料內容 ST
-        private void button14_Click(object sender, EventArgs e)
-        {
-            // List the available formats.
-            IDataObject dataObject = Clipboard.GetDataObject();
-
-            foreach (string format in dataObject.GetFormats())
-            {
-                richTextBox1.Text += "取得剪貼簿內的資料格式 : " + format + "\n";
-            }
-            DisplayData();
-        }
-
-        // Display data if possible.
-        private void DisplayData()
-        {
-            pictureBox_clipboard.Image = null;
-            textBox_clipboard.Clear();
-            richTextBoxp_clipboard.Clear();
-            //webBrowser_clipboard.Navigate("about:blank");
-
-            // Image.
-            if (Clipboard.ContainsImage() == true)
-            {
-                pictureBox_clipboard.Image = Clipboard.GetImage();
-            }
-
-            // Text.
-            if (Clipboard.ContainsText(TextDataFormat.UnicodeText) == true)
-            {
-                textBox_clipboard.Text = Clipboard.GetText(TextDataFormat.UnicodeText);
-            }
-
-            // HTML.
-            if (Clipboard.ContainsText(TextDataFormat.Html) == true)
-            {
-                HtmlDocument doc = webBrowser_clipboard.Document;
-                doc.Body.InnerHtml = Clipboard.GetText(TextDataFormat.Html);
-            }
-
-            // Rich Text.
-            if (Clipboard.ContainsText(TextDataFormat.Rtf) == true)
-            {
-                richTextBoxp_clipboard.Rtf = Clipboard.GetText(TextDataFormat.Rtf);
-            }
-        }
-        //檢查剪貼簿內的資料內容 SP
-
-        private void button15_Click(object sender, EventArgs e)
-        {
             bool flag = Clipboard.ContainsImage();  //判斷Clipboard中是否包含圖片資料
             richTextBox1.Text += "Clipboard 是否包含圖片資料 : " + flag.ToString() + "\n";
         }
 
-        private void button16_Click(object sender, EventArgs e)
+        private void button7_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "將圖片資料放置到Clipboard中\n";
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
@@ -403,20 +327,20 @@ namespace vcs_Clipboard
             Clipboard.SetImage(bitmap1);
         }
 
-        private void button17_Click(object sender, EventArgs e)
+        private void button8_Click(object sender, EventArgs e)
         {
             bool flag = Clipboard.ContainsText();   //判斷Clipboard中是否包含文字資料
             richTextBox1.Text += "Clipboard 是否包含文字資料 : " + flag.ToString() + "\n";
         }
 
-        private void button18_Click(object sender, EventArgs e)
+        private void button9_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "將文字資料放置到Clipboard中\n";
             string data = "翠盖龙旗出建章 莺啼百啭柳初黄";
             Clipboard.SetDataObject(data);	//向Clipboard中放置資料
         }
 
-        private void button19_Click(object sender, EventArgs e)
+        private void button10_Click(object sender, EventArgs e)
         {
             bool flag = Clipboard.ContainsText();
             if (flag == true)
@@ -431,7 +355,7 @@ namespace vcs_Clipboard
             }
         }
 
-        private void button20_Click(object sender, EventArgs e)
+        private void button11_Click(object sender, EventArgs e)
         {
             //Clipboard中檔名的集合
 
@@ -469,7 +393,15 @@ namespace vcs_Clipboard
             }
         }
 
-        private void button21_Click(object sender, EventArgs e)
+        private void button12_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button14_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "Clipboard內的影像顯示存檔\t全部\n";
             bool flag = Clipboard.ContainsImage();  //判斷Clipboard中是否包含圖片資料
@@ -506,7 +438,7 @@ namespace vcs_Clipboard
             }
         }
 
-        private void button22_Click(object sender, EventArgs e)
+        private void button15_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "Clipboard內的影像顯示存檔\t部分\t九宮格之正中\n";
 
@@ -562,6 +494,92 @@ namespace vcs_Clipboard
             }
         }
 
+        private void button16_Click(object sender, EventArgs e)
+        {
+            //從剪貼板取出圖片然後寫上字保存到文件
+
+            IDataObject dataObject = Clipboard.GetDataObject();
+            Image image1 = (Image)(dataObject.GetData(typeof(Bitmap)));
+            if (image1 == null)
+            {
+                richTextBox1.Text += "無圖片, 不儲存\n";
+                return;
+            }
+            Graphics g = Graphics.FromImage(image1);
+            SolidBrush sb = new SolidBrush(Color.Red);
+            Font f = new Font("Arial", 10, FontStyle.Bold, GraphicsUnit.Millimeter);
+            int x_st = image1.Height - (image1.Height - 25);
+            int y_st = 3;
+
+            g.DrawString("剪貼簿上的圖片存檔" + DateTime.Now.ToString(), f, sb, x_st, y_st);
+
+            Image small_image;
+
+            string filename = Application.StartupPath + "\\pic_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            string filename_small = Application.StartupPath + "\\pic_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_small.jpg";
+
+            small_image = image1.GetThumbnailImage(image1.Width, image1.Height, null, System.IntPtr.Zero);
+            small_image.Save(filename_small, ImageFormat.Jpeg);
+            image1.Save(filename, ImageFormat.Jpeg);
+            image1 = null;
+            small_image = null;
+
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
+            richTextBox1.Text += "已存檔 : " + filename_small + "\n";
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            //全屏截圖放置到Clipboard中
+            this.Hide();//隱藏當前窗體
+
+            Thread.Sleep(500);//讓線程睡眠一段時間，窗體消失需要一點時間
+
+            //全屏截圖
+            Bitmap bitmap1 = new Bitmap(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height);//新建一個和屏幕大小相同的圖片
+            pictureBox1.Image = bitmap1;
+
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height));//保存全屏圖片
+
+            g.DrawRectangle(new Pen(Color.Red, 10), 100, 100, 200, 200);//畫個東西
+
+            //片資料放置到Clipboard中
+            Clipboard.SetImage(bitmap1);
+            this.Show();//重新顯示窗體
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            //從剪貼板獲取圖片
+            IDataObject newobject = null;
+            Bitmap bitmap1 = null;
+
+            try
+            {
+                Application.DoEvents();
+                newobject = Clipboard.GetDataObject();
+
+                if (Clipboard.ContainsImage() == true)
+                {
+                    bitmap1 = (Bitmap)(Clipboard.GetImage().Clone());
+                }
+
+                //return NewBitmap;
+                pictureBox_clipboard.Image = bitmap1;
+                richTextBox1.Text += "OK\n";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                richTextBox1.Text += "無圖片\n";
+            }
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+        }
+
         private void button23_Click(object sender, EventArgs e)
         {
             //讀出剪貼簿內的資料
@@ -606,91 +624,93 @@ namespace vcs_Clipboard
 
         }
 
-        private void button26_Click(object sender, EventArgs e)
+        private void bt_clipboard0_Click(object sender, EventArgs e)
         {
-            //從剪貼板取出圖片然後寫上字保存到文件
+            //把資料放到系統剪貼簿裏
+            richTextBox1.Text += "按了 複製資料到剪貼簿\n";
+            //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
+            //Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
+            string poem = "\n唐王翰涼州詞\n葡萄美酒夜光杯，欲飲琵琶馬上催。醉臥沙場君莫笑，古來征戰幾人回。\n";
+            Clipboard.SetDataObject("複製資料到剪貼簿" + poem + " " + DateTime.Now.ToString() + "\n");      //建議用此  //將poem字串填到Clipboard裏。
 
+            //復制到剪貼板上，第二個參數表明程序退出時不清空剪貼板 
+            //Clipboard.SetDataObject(dataobj, true);
+        }
+
+        private void bt_clipboard1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "按了 累計複製資料到剪貼簿\n";
+            //Clipboard.SetData(DataFormats.Text, Clipboard.GetData(DataFormats.Text) + richTextBox1.Text + "\n");
+            //Clipboard.SetDataObject(Clipboard.GetText() + richTextBox1.Text + "\n");      //建議用此
+            //Clipboard.GetData(DataFormats.Text) 目前剪貼簿內的文字資料
+            //Clipboard.GetText() 目前剪貼簿內的文字資料
+            Clipboard.SetDataObject(Clipboard.GetText() + "累計複製資料到剪貼簿 " + DateTime.Now.ToString() + "\n");      //建議用此  //將poem字串填到Clipboard裏。
+        }
+
+        private void bt_clipboard2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_clipboard3_Click(object sender, EventArgs e)
+        {
+            Clipboard.Clear();  //清除剪貼板中的對象
+        }
+
+        private void bt_clipboard4_Click(object sender, EventArgs e)
+        {
+            //Read text from clipboard
+            string str = System.String.Empty;
+            if (Clipboard.ContainsText() == true)
+            {
+                str = Clipboard.GetText();
+                richTextBox1.Text += str + "\n";
+            }
+        }
+
+        private void bt_clipboard5_Click(object sender, EventArgs e)
+        {
+            //C# – 貼上剪貼簿
+            richTextBox1.Text += "\n";
+            //richTextBox1.Text += Clipboard.GetData(DataFormats.Text);
+            richTextBox1.Text += Clipboard.GetText();   //建議用此
+
+            richTextBox1.Text += "\n";
+            int len = Clipboard.GetText().Length;
+            richTextBox1.Text += "Unicode (Big-Endian), len = " + len.ToString() + "\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                //richTextBox1.Text += Clipboard.GetText()[i].ToString() + "\n";
+                richTextBox1.Text += ((int)Clipboard.GetText()[i]).ToString("X2") + " ";
+            }
+            richTextBox1.Text += "\n";
+        }
+
+        private void bt_clipboard6_Click(object sender, EventArgs e)
+        {
+            // Copy a Person to the Clipboard.
+            Person person = new Person() { FirstName = textBox1.Text, LastName = textBox2.Text };
+            Clipboard.SetDataObject(person);
+            richTextBox1.Text += "已複製類別到剪貼簿\n";
+        }
+
+        private void bt_clipboard7_Click(object sender, EventArgs e)
+        {
+            // Paste the person from the Clipboard.
+            richTextBox1.Text += "貼上類別\t";
             IDataObject dataObject = Clipboard.GetDataObject();
-            Image image1 = (Image)(dataObject.GetData(typeof(Bitmap)));
-            if (image1 == null)
+            if (dataObject.GetDataPresent("vcs_Clipboard.Person"))
             {
-                richTextBox1.Text += "無圖片, 不儲存\n";
-                return;
+                Person person = (Person)dataObject.GetData("vcs_Clipboard.Person");
+                //txtDropFirstName.Text = person.FirstName;
+                //txtDropLastName.Text = person.LastName;
+                richTextBox1.Text += "取得類別資料 First Name = " + person.FirstName + ", Last Name = " + person.LastName + "\n";
             }
-            Graphics g = Graphics.FromImage(image1);
-            SolidBrush sb = new SolidBrush(Color.Red);
-            Font f = new Font("Arial", 10, FontStyle.Bold, GraphicsUnit.Millimeter);
-            int x_st = image1.Height - (image1.Height - 25);
-            int y_st = 3;
-
-            g.DrawString("剪貼簿上的圖片存檔" + DateTime.Now.ToString(), f, sb, x_st, y_st);
-
-            Image small_image;
-
-            string filename = Application.StartupPath + "\\pic_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            string filename_small = Application.StartupPath + "\\pic_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_small.jpg";
-
-            small_image = image1.GetThumbnailImage(image1.Width, image1.Height, null, System.IntPtr.Zero);
-            small_image.Save(filename_small, ImageFormat.Jpeg);
-            image1.Save(filename, ImageFormat.Jpeg);
-            image1 = null;
-            small_image = null;
-
-            richTextBox1.Text += "已存檔 : " + filename + "\n";
-            richTextBox1.Text += "已存檔 : " + filename_small + "\n";
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-            //全屏截圖放置到Clipboard中
-            this.Hide();//隱藏當前窗體
-
-            Thread.Sleep(500);//讓線程睡眠一段時間，窗體消失需要一點時間
-
-            //全屏截圖
-            Bitmap bitmap1 = new Bitmap(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height);//新建一個和屏幕大小相同的圖片
-            pictureBox1.Image = bitmap1;
-
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(Screen.AllScreens[0].Bounds.Width, Screen.AllScreens[0].Bounds.Height));//保存全屏圖片
-
-            g.DrawRectangle(new Pen(Color.Red, 10), 100, 100, 200, 200);//畫個東西
-
-            //片資料放置到Clipboard中
-            Clipboard.SetImage(bitmap1);
-            this.Show();//重新顯示窗體
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-            //從剪貼板獲取圖片
-            IDataObject newobject = null;
-            Bitmap bitmap1 = null;
-
-            try
+            else
             {
-                Application.DoEvents();
-                newobject = Clipboard.GetDataObject();
-
-                if (Clipboard.ContainsImage() == true)
-                {
-                    bitmap1 = (Bitmap)(Clipboard.GetImage().Clone());
-                }
-
-                //return NewBitmap;
-                pictureBox_clipboard.Image = bitmap1;
-                richTextBox1.Text += "OK\n";
+                richTextBox1.Text += "類別資料不存在\n";
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                richTextBox1.Text += "無圖片\n";
-            }
-        }
-
-        private void button29_Click(object sender, EventArgs e)
-        {
-
         }
     }
 
@@ -701,4 +721,3 @@ namespace vcs_Clipboard
         public string LastName;
     }
 }
-

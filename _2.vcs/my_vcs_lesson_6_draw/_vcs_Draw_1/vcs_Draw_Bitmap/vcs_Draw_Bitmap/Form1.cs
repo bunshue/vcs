@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Imaging;   //for ImageFormat
+using System.Drawing.Imaging;   //for ImageFormat, PixelFormat
 using System.Drawing.Drawing2D; //for GraphicsPath, InterpolationMode
 
 namespace vcs_Draw_Bitmap

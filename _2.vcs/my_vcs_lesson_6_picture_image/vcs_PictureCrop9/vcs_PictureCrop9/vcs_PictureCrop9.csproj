@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C98A8EA0-7746-494B-8821-DC39D0396308}</ProjectGuid>
+    <ProjectGuid>{2DBBBE14-FDE5-40C8-B612-01A5E809775B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_DrawCircle</RootNamespace>
-    <AssemblyName>vcs_DrawCircle</AssemblyName>
+    <RootNamespace>vcs_PictureCrop9</RootNamespace>
+    <AssemblyName>vcs_PictureCrop9</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

@@ -1536,6 +1536,39 @@ namespace vcs_Draw1
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //圓形和矩形
+            List<Rectangle> Circles = new List<Rectangle>();
+
+            Circles.Clear();
+
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+
+            for (int i = 20; i < 250; i += 20)
+            {
+                int x_st = W / 2;
+                int y_st = H / 2;
+                int r = i;
+                Rectangle rect = new Rectangle(x_st - r / 2, y_st - r / 2, r, r);
+                Circles.Add(rect);
+            }
+
+            richTextBox1.Text += Circles.Count.ToString() + "\n";
+
+            foreach (Rectangle rect in Circles)
+            {
+                richTextBox1.Text += rect.ToString() + "\n";
+            }
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            foreach (Rectangle rect in Circles)
+            {
+                g.DrawEllipse(Pens.Blue, rect);
+                g.DrawRectangle(Pens.Red, rect);
+            }
+
         }
 
         private void button14_Click(object sender, EventArgs e)
