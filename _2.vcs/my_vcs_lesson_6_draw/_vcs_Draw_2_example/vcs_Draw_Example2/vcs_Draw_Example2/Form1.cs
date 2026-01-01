@@ -97,113 +97,70 @@ namespace vcs_Draw_Example2
             int dy;
 
             //button
-            x_st = 1050;
+            x_st = 10;
             y_st = 10;
-            dx = 140;
-            dy = 50;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            button5.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            button0.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 6, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 6, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 6, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 6, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 6, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 6, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 6, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            button9.Location = new Point(x_st + dx * 7, y_st + dy * 1);
+            button10.Location = new Point(x_st + dx * 7, y_st + dy * 2);
+            button11.Location = new Point(x_st + dx * 7, y_st + dy * 3);
+            button12.Location = new Point(x_st + dx * 7, y_st + dy * 4);
+            button13.Location = new Point(x_st + dx * 7, y_st + dy * 5);
+            button14.Location = new Point(x_st + dx * 7, y_st + dy * 6);
+            button15.Location = new Point(x_st + dx * 7, y_st + dy * 7);
+            button16.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+            button17.Location = new Point(x_st + dx * 8, y_st + dy * 1);
+            button18.Location = new Point(x_st + dx * 8, y_st + dy * 2);
+            button19.Location = new Point(x_st + dx * 8, y_st + dy * 3);
+            button20.Location = new Point(x_st + dx * 8, y_st + dy * 4);
+            button21.Location = new Point(x_st + dx * 8, y_st + dy * 5);
+            button22.Location = new Point(x_st + dx * 8, y_st + dy * 6);
+            button23.Location = new Point(x_st + dx * 8, y_st + dy * 7);
 
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button7.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button8.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button9.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button10.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            button11.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+            bt_reset.Location = new Point(x_st + dx * 7, y_st + dy * 8);
+            bt_save.Location = new Point(x_st + dx * 8, y_st + dy * 8);
 
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button14.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button15.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button16.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            button17.Location = new Point(x_st + dx * 5, y_st + dy * 2);
-
-            button18.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button21.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button22.Location = new Point(x_st + dx * 4, y_st + dy * 3);
-            button23.Location = new Point(x_st + dx * 5, y_st + dy * 3);
-
-            button24.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button25.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button27.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button28.Location = new Point(x_st + dx * 4, y_st + dy * 4);
-            button29.Location = new Point(x_st + dx * 5, y_st + dy * 4);
-
-            button30.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button31.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button32.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button33.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button34.Location = new Point(x_st + dx * 4, y_st + dy * 5);
-            button35.Location = new Point(x_st + dx * 5, y_st + dy * 5);
-
-            button36.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button37.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button38.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button39.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button40.Location = new Point(x_st + dx * 4, y_st + dy * 6);
-            button41.Location = new Point(x_st + dx * 5, y_st + dy * 6);
-
-            button42.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button43.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button44.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button45.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-            button46.Location = new Point(x_st + dx * 4, y_st + dy * 7);
-            button47.Location = new Point(x_st + dx * 5, y_st + dy * 7);
-
-            button48.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button49.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button50.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button51.Location = new Point(x_st + dx * 3, y_st + dy * 8);
-            button52.Location = new Point(x_st + dx * 4, y_st + dy * 8);
-            button53.Location = new Point(x_st + dx * 5, y_st + dy * 8);
-
-            button54.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button55.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button56.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            button57.Location = new Point(x_st + dx * 3, y_st + dy * 9);
-            button58.Location = new Point(x_st + dx * 4, y_st + dy * 9);
-            button59.Location = new Point(x_st + dx * 5, y_st + dy * 9);
-
-            button60.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            button61.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-            button62.Location = new Point(x_st + dx * 2, y_st + dy * 10);
-            button63.Location = new Point(x_st + dx * 3, y_st + dy * 10);
-            button64.Location = new Point(x_st + dx * 4, y_st + dy * 10);
-            button65.Location = new Point(x_st + dx * 5, y_st + dy * 10);
-
-            button66.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            button67.Location = new Point(x_st + dx * 1, y_st + dy * 11);
-            button68.Location = new Point(x_st + dx * 2, y_st + dy * 11);
-            button69.Location = new Point(x_st + dx * 3, y_st + dy * 11);
-            button70.Location = new Point(x_st + dx * 4, y_st + dy * 11);
-            button71.Location = new Point(x_st + dx * 5, y_st + dy * 11);
-
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
-
-            bt_reset.Location = new Point(x_st + dx * 4, y_st + dy * 15);
-            bt_save.Location = new Point(x_st + dx * 5, y_st + dy * 15);
-
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 16);
-            richTextBox1.Size = new Size(richTextBox1.Size.Width + 200, 250);
+            richTextBox1.Size = new Size(640, 420);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 9);
 
             pictureBox1.Location = new Point(10, 10);
-            pictureBox1.Size = new Size(900, 600);
+            pictureBox1.Size = new Size(900, 400);
             pictureBox1.BackColor = Color.White;
 
-            ucOscilloscope1.Location = new Point(10, 620);
+            ucOscilloscope1.Location = new Point(10, 420);
             ucOscilloscope1.Size = new Size(1024, 200);
             ucOscilloscope1.BackColor = Color.Pink;
 
-            pictureBox_wave.Location = new Point(10, 830);
-            pictureBox_wave.Size = new Size(1024, 240);
+            int W = 250;
+            int H = 250;
+            x_st = 10;
+            //y_st = 800;
+            dx = W + 10;
+            pictureBox_random0.Location = new Point(x_st + dx * 0, y_st + dy * 9 - 10);
+            pictureBox_random1.Location = new Point(x_st + dx * 1, y_st + dy * 9 - 10);
+            pictureBox_random2.Location = new Point(x_st + dx * 2, y_st + dy * 9 - 10);
+            pictureBox_random3.Location = new Point(x_st + dx * 3, y_st + dy * 9 - 10);
+            pictureBox_random0.Size = new Size(W, H);
+            pictureBox_random1.Size = new Size(W, H);
+            pictureBox_random2.Size = new Size(W, H);
+            pictureBox_random3.Size = new Size(W, H);
+            pictureBox_random0.BackColor = Color.Pink;
+            pictureBox_random1.BackColor = Color.Pink;
+            pictureBox_random2.BackColor = Color.Pink;
+            pictureBox_random3.BackColor = Color.Pink;
+
+            pictureBox_wave.Location = new Point(10, 890);
+            pictureBox_wave.Size = new Size(1024, 180);
             pictureBox_wave.BackColor = Color.Pink;
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -2263,14 +2220,6 @@ namespace vcs_Draw_Example2
 
         private void button22_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
             Graphics g;
 
             //新建圖檔, 初始化畫布
@@ -4103,10 +4052,9 @@ namespace vcs_Draw_Example2
             g.DrawRectangle(new Pen(Color.Red), new Rectangle(0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1));
 
             pictureBox1.Image = bitmap1;
-
         }
 
-        private void button25_Click(object sender, EventArgs e)
+        private void button23_Click(object sender, EventArgs e)
         {
             //畫OV亮度圖2
 
@@ -4366,246 +4314,9 @@ namespace vcs_Draw_Example2
 
             g.DrawLines(new Pen(Color.DarkRed, 10), curvePoints);   //畫直線
 
-
-
-
             g.DrawRectangle(new Pen(Color.Red), new Rectangle(0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1));
 
             pictureBox1.Image = bitmap1;
-
-
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button29_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button30_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button31_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button32_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button33_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button34_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button35_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button36_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button37_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button38_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button39_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button40_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button41_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button42_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button43_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button44_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button45_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button46_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button47_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button48_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button49_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button50_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button51_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button52_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button53_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button54_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button55_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button56_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button57_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button58_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button59_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button60_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button61_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button62_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button63_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button64_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button65_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button66_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button67_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button68_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button69_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button70_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button71_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_long0_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_long1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_long2_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_long3_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_long4_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_long5_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_long6_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_long7_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_long8_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_long9_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_long10_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_long11_Click(object sender, EventArgs e)
-        {
         }
 
         private double rad(double d)
@@ -4666,7 +4377,167 @@ namespace vcs_Draw_Example2
         {
             pictureBox_wave.Invalidate();
         }
+
+        private int RetrievRandomCorners(int minCorners, int maxCorners)
+        {
+            return new Random(Guid.NewGuid().GetHashCode()).Next(minCorners, maxCorners);
+        }
+
+        void draw_random_pattern(int type, int minCorners, int maxCorners, PictureBox pbox)
+        {
+            int width = pbox.Width;
+            int height = pbox.Height;
+            int numX = 10;
+            int numY = 10;
+            float perX = width * 1f / numX;
+            float perY = height * 1f / numY;
+            Bitmap bitmap1 = new Bitmap(width, height);
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            g.CompositingQuality = CompositingQuality.HighQuality;
+            g.SmoothingMode = SmoothingMode.HighQuality;
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            g.FillRectangle(Brushes.Black, new Rectangle(0, 0, width, height));
+
+            int lastCorners = minCorners;
+            for (int i = 0; i < numX; i++)
+            {
+                for (int j = 0; j < numY; j++)
+                {
+                    long tick = DateTime.Now.Ticks;
+                    Random random = new Random((int)(tick & 0xffffffff) | (int)(tick >> 32));
+                    int corners = random.Next(minCorners, maxCorners);
+                    if (Math.Abs(corners - lastCorners) < (maxCorners - minCorners) / 2)
+                    {
+                        corners = RetrievRandomCorners(minCorners, maxCorners);
+                    }
+                    lastCorners = corners;
+
+                    if (type == 0)
+                    {
+                        //this.Text = "竹葉";
+                        PointF[] points = Stone.CreateStone(new Point((int)(perX * j), (int)(perY * i)), (int)(perX * 1.4f), (int)(perX * 0.009f), corners);
+                        g.FillClosedCurve(Brushes.Green, points, FillMode.Winding);
+                    }
+                    else if (type == 1)
+                    {
+                        //this.Text = "長葉草";
+                        PointF[] points = Stone.CreateStone(new Point((int)(perX * j), (int)(perY * i)), (int)(perX * 0.88f), (int)(perX * 0.01f), corners);
+                        g.FillClosedCurve(Brushes.Green, points, FillMode.Winding);
+                    }
+                    else if (type == 2)
+                    {
+                        //this.Text = "雜亂石頭";
+                        PointF[] points = Stone.CreateStone(new Point((int)(perX * j), (int)(perY * i)), (int)(perX * 0.4f), (int)(perX * 0.396f), corners);
+                        g.FillClosedCurve(Brushes.Gray, points, FillMode.Winding);
+                    }
+                    else if (type == 3)
+                    {
+                        //this.Text = "天上繁星";
+                        PointF[] points = Stone.CreateStone(new Point((int)(perX * j), (int)(perY * i)), (int)(perX * 0.18f), (int)(perX * 0.06f), corners);
+                        g.FillClosedCurve(Brushes.White, points, FillMode.Winding);
+                    }
+                    else
+                    {
+                        //this.Text = "未選取";
+                        return;
+                    }
+                }
+            }
+            pbox.Image = bitmap1;
+        }
+
+        void draw_random_pattern0()
+        {
+            //this.Text = "竹葉";
+            int type = 0;
+            int minCorners = 3;
+            int maxCorners = 4;
+
+            draw_random_pattern(type, minCorners, maxCorners, pictureBox_random0);
+        }
+
+        void draw_random_pattern1()
+        {
+            //this.Text = "長葉草";
+            int type = 1;
+            int minCorners = 20;
+            int maxCorners = 38;
+
+            draw_random_pattern(type, minCorners, maxCorners, pictureBox_random1);
+        }
+
+        void draw_random_pattern2()
+        {
+            //this.Text = "雜亂石頭";
+            int type = 2;
+            int minCorners = 3;
+            int maxCorners = 4;
+
+            draw_random_pattern(type, minCorners, maxCorners, pictureBox_random2);
+        }
+
+        void draw_random_pattern3()
+        {
+            //this.Text = "天上繁星";
+            int type = 3;
+            int minCorners = 3;
+            int maxCorners = 4;
+
+            draw_random_pattern(type, minCorners, maxCorners, pictureBox_random3);
+        }
+
+
+
+        private void timer_random_pattern_Tick(object sender, EventArgs e)
+        {
+            //模擬雜亂無章的現實場景
+            draw_random_pattern0();
+            draw_random_pattern1();
+            draw_random_pattern2();
+            draw_random_pattern3();
+        }
     }
+
+    public static class Stone
+    {
+        public static PointF[] CreateStone(Point center, int outerRadius, int inner_radius, int arms)
+        {
+            int center_x = center.X;
+            int center_y = center.Y;
+            PointF[] points = new PointF[arms * 2];
+            double offset = Math.PI / 2;
+            double arc = 2 * Math.PI / arms;
+            double half = arc / 2;
+            double angle = 0;
+            for (int i = 0; i < arms; i++)
+            {
+                Random randomOuter = new Random((int)DateTime.Now.Ticks);
+                outerRadius = outerRadius - randomOuter.Next((int)(inner_radius * 0.06 * new Random().Next(-20, 20) / 30d), (int)(inner_radius * 0.08));
+                //outerRadius = outerRadius - randomOuter.Next((int)(inner_radius * 0.16 * new Random().Next(-20, 20) / 30d), (int)(inner_radius * 0.18));
+                Random randomInner = new Random(Guid.NewGuid().GetHashCode());
+                inner_radius = inner_radius + randomInner.Next((int)(inner_radius * 0.02 * new Random().Next(-100, 100) / 150d), (int)(inner_radius * 0.08));
+                //inner_radius = inner_radius + randomInner.Next((int)(inner_radius * 0.02 * new Random().Next(-100, 100) / 150d), (int)(inner_radius * 0.22));
+
+                if (inner_radius > outerRadius)
+                {
+                    int temp = outerRadius;
+                    outerRadius = inner_radius;
+                    inner_radius = temp;
+                }
+                double angleTemp = arc * randomInner.Next(-5, 5) / 10d;
+                angle = i * arc;
+                angle += angleTemp;
+                points[i * 2].X = (float)(center_x + Math.Cos(angle - offset) * outerRadius);
+                points[i * 2].Y = (float)(center_y + Math.Sin(angle - offset) * outerRadius);
+                points[i * 2 + 1].X = (float)(center_x + Math.Cos(angle + half - offset) * inner_radius);
+                points[i * 2 + 1].Y = (float)(center_y + Math.Sin(angle + half - offset) * inner_radius);
+            }
+            return points;
+        }
+    }
+
     class WAVReader //wav 文件讀取類
     {
         private string Id; //文件標識
@@ -4808,4 +4679,3 @@ namespace vcs_Draw_Example2
         }
     }
 }
-

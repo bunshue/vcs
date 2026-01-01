@@ -24,7 +24,52 @@ namespace vcs_Draw_Watermark1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             bt_reset_Click(sender, e);
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+
+            bt_reset.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+            pictureBox1.Size = new Size(800, 700);
+            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+
+            pictureBox2.Size = new Size(400, 120);
+            pictureBox2.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(400, 560);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 2);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1520, 760);
+            this.Text = "vcs_Draw_Watermark1";
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void bt_reset_Click(object sender, EventArgs e)
@@ -37,6 +82,11 @@ namespace vcs_Draw_Watermark1
 
             string filename2 = @"D:\_git\vcs\_1.data\______test_files1\_material\ims-small-logo.png";
             pictureBox2.Image = Image.FromFile(filename2);
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -89,7 +139,7 @@ namespace vcs_Draw_Watermark1
             pictureBox1.Image.Dispose();
 
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\picture1add.jpg";
+            string filename2 = @"tmp_picture1add.jpg";
             string text = "牡丹亭";
             int alpha = 255;
             int fontsize = 30;
@@ -107,57 +157,50 @@ namespace vcs_Draw_Watermark1
         /// <param name="fontsize">字體大小</param>
         void AddWaterText(string oldpath, string newpath, string text, int Alpha, int fontsize)
         {
-            try
-            {
-                text = text + "版權所有";
-                FileStream fs = new FileStream(oldpath, FileMode.Open);
-                BinaryReader br = new BinaryReader(fs);
-                byte[] bytes = br.ReadBytes((int)fs.Length);
-                br.Close();
-                fs.Close();
-                MemoryStream ms = new MemoryStream(bytes);
+            text = text + "版權所有";
+            FileStream fs = new FileStream(oldpath, FileMode.Open);
+            BinaryReader br = new BinaryReader(fs);
+            byte[] bytes = br.ReadBytes((int)fs.Length);
+            br.Close();
+            fs.Close();
+            MemoryStream ms = new MemoryStream(bytes);
 
-                Image imgPhoto = Image.FromStream(ms);
-                int imgPhotoWidth = imgPhoto.Width;
-                int imgPhotoHeight = imgPhoto.Height;
+            Image imgPhoto = Image.FromStream(ms);
+            int imgPhotoWidth = imgPhoto.Width;
+            int imgPhotoHeight = imgPhoto.Height;
 
-                Bitmap bitmap1 = new Bitmap(imgPhotoWidth, imgPhotoHeight, PixelFormat.Format24bppRgb);
+            Bitmap bitmap1 = new Bitmap(imgPhotoWidth, imgPhotoHeight, PixelFormat.Format24bppRgb);
 
-                bitmap1.SetResolution(72, 72);
-                Graphics g = Graphics.FromImage(bitmap1);
-                //gif背景色
-                g.Clear(Color.FromName("white"));
-                g.InterpolationMode = InterpolationMode.High;
-                g.SmoothingMode = SmoothingMode.HighQuality;
-                g.DrawImage(imgPhoto, new Rectangle(0, 0, imgPhotoWidth, imgPhotoHeight), 0, 0, imgPhotoWidth, imgPhotoHeight, GraphicsUnit.Pixel);
-                Font font = null;
-                SizeF crSize = new SizeF();
-                font = new Font("宋體", fontsize, FontStyle.Bold);
-                //測量指定區域 www.2cto.com
-                crSize = g.MeasureString(text, font);
-                float y = imgPhotoHeight - crSize.Height;
-                float x = imgPhotoWidth - crSize.Width;
-                StringFormat StrFormat = new StringFormat();
-                StrFormat.Alignment = StringAlignment.Center;
+            bitmap1.SetResolution(72, 72);
+            Graphics g = Graphics.FromImage(bitmap1);
+            //gif背景色
+            g.Clear(Color.FromName("white"));
+            g.InterpolationMode = InterpolationMode.High;
+            g.SmoothingMode = SmoothingMode.HighQuality;
+            g.DrawImage(imgPhoto, new Rectangle(0, 0, imgPhotoWidth, imgPhotoHeight), 0, 0, imgPhotoWidth, imgPhotoHeight, GraphicsUnit.Pixel);
+            Font font = null;
+            SizeF crSize = new SizeF();
+            font = new Font("宋體", fontsize, FontStyle.Bold);
+            //測量指定區域 www.2cto.com
+            crSize = g.MeasureString(text, font);
+            float y = imgPhotoHeight - crSize.Height;
+            float x = imgPhotoWidth - crSize.Width;
+            StringFormat StrFormat = new StringFormat();
+            StrFormat.Alignment = StringAlignment.Center;
 
-                //畫兩次制造透明效果
-                SolidBrush semiTransBrush2 = new SolidBrush(Color.FromArgb(Alpha, 56, 56, 56));
-                g.DrawString(text, font, semiTransBrush2, x + 1, y + 1);
+            //畫兩次制造透明效果
+            SolidBrush semiTransBrush2 = new SolidBrush(Color.FromArgb(Alpha, 56, 56, 56));
+            g.DrawString(text, font, semiTransBrush2, x + 1, y + 1);
 
-                g.DrawRectangle(Pens.Red, 10, 10, 100, 100);
+            g.DrawRectangle(Pens.Red, 10, 10, 100, 100);
 
-                SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(Alpha, 176, 176, 176));
-                g.DrawString(text, font, semiTransBrush, x, y);
-                bitmap1.Save(newpath, ImageFormat.Jpeg);
-                //g.Dispose();
-                imgPhoto.Dispose();
-                pictureBox1.Image = bitmap1;
-                //bitmap1.Dispose();
-            }
-            catch
-            {
-                ;
-            }
+            SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(Alpha, 176, 176, 176));
+            g.DrawString(text, font, semiTransBrush, x, y);
+            bitmap1.Save(newpath, ImageFormat.Jpeg);
+            //g.Dispose();
+            imgPhoto.Dispose();
+            pictureBox1.Image = bitmap1;
+            //bitmap1.Dispose();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -336,5 +379,3 @@ namespace vcs_Draw_Watermark1
         }
     }
 }
-
-

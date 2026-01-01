@@ -17,7 +17,7 @@ namespace vcs_Draw_GraphicsPath
         Graphics g;
         Pen p;
         SolidBrush sb;
-        Bitmap bitmap1;
+        //Bitmap bitmap1;
 
         public Form1()
         {
@@ -26,11 +26,11 @@ namespace vcs_Draw_GraphicsPath
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             p = new Pen(Color.Red, 3);
             g = pictureBox1.CreateGraphics();
             p = new Pen(Color.Red, 10);     //default pen
-
-            show_item_location();
 
             //繪製圓角表單
             this.BackColor = Color.Pink;
@@ -52,8 +52,8 @@ namespace vcs_Draw_GraphicsPath
             //button
             x_st = 10;
             y_st = 10;
-            dx = 180;
-            dy = 80;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -77,7 +77,17 @@ namespace vcs_Draw_GraphicsPath
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
+            label1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox1.Size = new Size(800, 640);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 30);
+            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 9 + 50);
+
+            richTextBox1.Size = new Size(300, 700);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0 + 30);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1620, 820);
+            this.Text = "vcs_Draw_GraphicsPath";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -794,8 +804,8 @@ namespace vcs_Draw_GraphicsPath
         {
             int diameter = radius;
             Rectangle arcRect = new Rectangle(rect.Location, new Size(diameter, diameter));
-            GraphicsPathath = new GraphicsPath();
-           //   左上角  
+            GraphicsPath path = new GraphicsPath();
+            //   左上角  
             path.AddArc(arcRect, 180, 90);
             //   右上角  
             arcRect.X = rect.Right - diameter;

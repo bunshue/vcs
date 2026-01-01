@@ -30,6 +30,8 @@ namespace vcs_Draw_Bitmap
         {
             show_item_location();
 
+            button15.BackColor = Color.Pink;
+
             p = new Pen(Color.Red, 3);
             bitmap1 = (Bitmap)Bitmap.FromFile(filename);
             pictureBox1.Image = bitmap1;
@@ -187,38 +189,6 @@ namespace vcs_Draw_Bitmap
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //複製部分圖片
-
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
-
-            richTextBox1.Text += "clone語法\t";
-            richTextBox1.Text += "從bitmap1抓取一部分貼到bitmap2上\n";
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            //Bitmap bitmap1 = new Bitmap(filename);//same
-            PixelFormat format = bitmap1.PixelFormat;
-            pictureBox1.Image = bitmap1;
-
-            int x_st = 100;
-            int y_st = 100;
-            int w = 150;
-            int h = 150;
-            RectangleF rect = new RectangleF(x_st, y_st, w, h);
-
-            //Bitmap cloneBitmap = bitmap1.Clone(rect, PixelFormat.DontCare);//PixelFormat.Format32bppArgb
-            Bitmap cloneBitmap = bitmap1.Clone(rect, format);//PixelFormat.Format32bppArgb
-
-            Bitmap bitmap2 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap2);
-            g.Clear(Color.Pink);
-
-            g.DrawImage(cloneBitmap, 50, 50, w, h);
-            g.DrawImage(cloneBitmap, 200, 200, w, h);
-            g.DrawImage(cloneBitmap, 350, 350, w, h);
-
-            pictureBox1.Image = bitmap2;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -309,39 +279,6 @@ namespace vcs_Draw_Bitmap
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //改變Bitmap大小
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);
-
-            double ratio = 1.234f;
-            Bitmap bitmap2 = Resize(bitmap1, ratio);
-
-            pictureBox1.Image = bitmap2;
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-        }
-
-        Bitmap Resize(Bitmap bitmap1, Double ratio)
-        {
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            int w = Convert.ToInt32(W * ratio);
-            int h = Convert.ToInt32(H * ratio);
-
-            return Process(bitmap1, W, H, w, h);
-        }
-
-        Bitmap Process(Bitmap bitmap1, int oriwidth, int oriheight, int width, int height)
-        {
-            Bitmap resizedbitmap = new Bitmap(width, height);
-            Graphics g = Graphics.FromImage(resizedbitmap);
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            g.Clear(Color.Transparent);
-            g.DrawImage(bitmap1, new Rectangle(0, 0, width, height), new Rectangle(0, 0, oriwidth, oriheight), GraphicsUnit.Pixel);
-            return resizedbitmap;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -350,32 +287,6 @@ namespace vcs_Draw_Bitmap
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //獲取圖片的指定部分
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            //來源 sx, sy, sw, sh
-            int sx = 0;
-            int sy = 0;
-            int sw = 150;
-            int sh = 200;
-            //目的 dx, dy, dw, dh
-            int dx = 0;
-            int dy = 0;
-            int dw = 150;
-            int dh = 200;
-
-            //Bitmap bitmap1 = GetPart(filename, dx, dy, dw, dh, sx, sy, sw, sh);
-            Image originalImg = Image.FromFile(filename);
-
-            Bitmap bitmap1 = new Bitmap(dw, dh);
-            Graphics g = Graphics.FromImage(bitmap1);
-            Rectangle destRect = new Rectangle(new Point(dx, dy), new Size(dw, dh));//目標位置
-            Rectangle origRect = new Rectangle(new Point(sx, sy), new Size(sw, sh));//原圖位置（默認從原圖中截取的圖片大小等於目標圖片的大小）
-
-            g.DrawImage(originalImg, destRect, origRect, GraphicsUnit.Pixel);
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -433,7 +344,6 @@ namespace vcs_Draw_Bitmap
 
             filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             Bitmap bmp = new Bitmap(filename);
-
             int W = bmp.Width;
             int H = bmp.Height;
 
@@ -447,12 +357,12 @@ namespace vcs_Draw_Bitmap
             bmp.SetResolution(3f, 3f);
             bmp.Save("圖片30.bmp", ImageFormat.Bmp);
 
-            g.DrawImage(bmp, 0, 0, bmp.Width, bmp.Height);
+            g.DrawImage(bmp, 0, 0, W, H);
 
             bmp.SetResolution(1200f, 1200f);
             bmp.Save("圖片120.bmp", ImageFormat.Bmp);
 
-            g.DrawImage(bmp, 200, 0, bmp.Width, bmp.Height);
+            g.DrawImage(bmp, 200, 0, W, H);
             pictureBox1.Image = bitmap1;
         }
 
@@ -492,9 +402,12 @@ namespace vcs_Draw_Bitmap
         {
             Color col;
             Bitmap bmp2 = new Bitmap(bmp);
-            for (int i = 0; i < bmp.Width; i++)
+            int W = bmp.Width;
+            int H = bmp.Height;
+
+            for (int i = 0; i < W; i++)
             {
-                for (int j = 0; j < bmp.Height; j++)
+                for (int j = 0; j < H; j++)
                 {
                     col = bmp.GetPixel(i, j);
                     if ((col.A - alpha) >= 0)
@@ -517,15 +430,18 @@ namespace vcs_Draw_Bitmap
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //擷取圖片貼上
-            Image img = Image.FromFile(filename);
-            int W = img.Width;
-            int H = img.Height;
+            //bitmap1 是 整個pictureBox1的大小
+            //bmp 是 測試圖片, 不改動
+
+            //讀出測試圖片
+            Bitmap bmp = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            //Bitmap bmp = new Bitmap(filename);//same
+            int W = bmp.Width;
+            int H = bmp.Height;
 
             //貼上位置
             int x_st = 0;
             int y_st = 50;
-
             //來源 sx, sy, sw, sh
             int sx = 0;
             int sy = 0;
@@ -537,14 +453,107 @@ namespace vcs_Draw_Bitmap
             int dw = 0;
             int dh = 0;
 
-            //原圖貼上 縮成1/1
+            //全圖縮放 縮成1/2
             //         影像,貼上位置x,貼上位置y,貼上大小W,貼上大小H
-            g.DrawImage(img, x_st, y_st, W / 2, H / 2);
-            g.DrawString("AAA", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
+            g.DrawImage(bmp, x_st, y_st, W / 2, H / 2);
+            g.DrawString("全圖縮放", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
 
             draw_grid(g);
 
+            x_st = 0;
+            y_st = 300;
+
+            //直接改變Bitmap的大小
+            //Bitmap bitmap1 = new Bitmap(image, image.Width / 2, image.Height / 2);
+            //Bitmap bitmap2 = new Bitmap(bitmap1, bitmap1.Width * 5 / 2, bitmap1.Height * 5 / 2);
+            //Bitmap bmp1b = new Bitmap(bmp, new Size(100, 300));   //用Bitmap直接進行縮放
+            Bitmap bmp1b = new Bitmap(bmp, W / 2, H / 2);   //用Bitmap直接進行縮放
+            g.DrawImage(bmp1b, x_st, y_st);
+            g.DrawString("直接改變Bitmap的大小", new Font("Arial", 16), Brushes.Red, x_st, y_st - 30);
+
+            //clone語法
+            x_st = 800;
+            y_st = 400;
+            double ratio = 0.456f;
+            Bitmap bmp1c = Resize(bmp, ratio);
+            g.DrawImage(bmp1c, x_st, y_st);
+            g.DrawString("直接改變Bitmap的大小", new Font("Arial", 16), Brushes.Red, x_st, y_st - 30);
+
             richTextBox1.Text += "------------------------------\n";  // 30個
+
+            x_st = 200;
+            y_st = 200;
+            dx = 180;
+            dy = 90;
+            //原圖貼上, 改變貼上比例
+            //               貼上位置x      貼上位置y      貼上大小W   貼上大小H
+            g.DrawImage(bmp, x_st + dx * 0, y_st + dy * 0, W * 3 / 10, H * 7 / 10);  //改變貼上比例
+            g.DrawString("改變貼上比例", new Font("Arial", 16), Brushes.Red, x_st, y_st - 30);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //決定繪製影像的縮放比例和切變
+            x_st = 500;
+            y_st = 400;
+            int w = W / 1;
+            int h = H / 1;
+            // Create parallelogram for drawing image.
+            Point ulCorner3 = new Point(x_st, y_st);   //左上
+            Point urCorner3 = new Point(x_st + w, y_st);   //右上
+            Point llCorner3 = new Point(x_st - 50, y_st + h);   //左下
+            Point[] destPara = { ulCorner3, urCorner3, llCorner3 };
+            g.DrawImage(bmp, destPara);
+            g.DrawString("HHH", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //改變影像位置與大小, 用DrawImage貼上影像 並改變影像位置與大小
+            //使用Rectangle結構
+            x_st = 0;
+            y_st = 550;
+            dx = x_st;
+            dy = y_st;
+            dw = W / 2;
+            dh = H / 2;
+            Rectangle destRect4 = new Rectangle(dx, dy, dw, dh);
+            g.DrawImage(bmp, destRect4);
+            g.DrawString("使用Rectangle結構", new Font("Arial", 16), Brushes.Red, x_st, y_st - 30);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //用DrawImage畫出不同圖片大小的圖
+
+            x_st = 200;
+            y_st = 550;
+            float scale;
+            w = 0;
+            h = 0;
+            g.InterpolationMode = InterpolationMode.NearestNeighbor;   // No smoothing.
+
+            Rectangle source = new Rectangle(0, 0, W, H);
+            Point[] dest =
+                {
+                    new Point(x_st+0, y_st +0),
+                    new Point(x_st+w, y_st +0),
+                    new Point(x_st+0, y_st +h),
+                };
+
+            //改變圖形大小
+            for (scale = 0.75f; scale > 0.20f; scale -= 0.25f)
+            {
+                w = (int)(W * scale);
+                h = (int)(H * scale);
+
+                dest[0] = new Point(x_st + 0, y_st + 0);
+                dest[1] = new Point(x_st + w, y_st + 0);
+                dest[2] = new Point(x_st + 0, y_st + h);
+                g.DrawImage(bmp, dest, source, GraphicsUnit.Pixel);
+            }
+            g.DrawString("不同比例", new Font("Arial", 16), Brushes.Red, x_st, y_st - 30);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //以下為部分擷取
 
             //來源
             //Rectangle srcRect = new Rectangle(0, 0, W, H); //擷取全圖
@@ -553,8 +562,7 @@ namespace vcs_Draw_Bitmap
             sy = 110;
             sw = W / 3;
             sh = H / 3;
-
-            Rectangle srcRect = new Rectangle(130, 110, 100, 100);   //擷取部分區域
+            Rectangle srcRect = new Rectangle(sx, sy, sw, sh);   //擷取部分區域
             GraphicsUnit units = GraphicsUnit.Pixel;
 
             x_st = 200;
@@ -566,7 +574,7 @@ namespace vcs_Draw_Bitmap
             Point[] destRect1 = { ulCorner, urCorner, llCorner };
             //擷取部分圖片貼上
             //            貼上位置與大小,擷取部分圖片位置與大小,單位
-            g.DrawImage(img, destRect1, srcRect, units);
+            g.DrawImage(bmp, destRect1, srcRect, units);
             g.DrawString("BBB", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
@@ -580,7 +588,7 @@ namespace vcs_Draw_Bitmap
             Point[] destRect2 = { ulCorner2, urCorner2, llCorner2 };
             //擷取部分圖片貼上
             //            貼上位置與大小,擷取部分圖片位置與大小,單位
-            g.DrawImage(img, destRect2, srcRect, units);
+            g.DrawImage(bmp, destRect2, srcRect, units);
             g.DrawString("CCC", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
@@ -597,7 +605,7 @@ namespace vcs_Draw_Bitmap
             sy = 50;
             sw = 150;
             sh = 150;
-            g.DrawImage(img, destRect3, sx, sy, sw, sh, units);
+            g.DrawImage(bmp, destRect3, sx, sy, sw, sh, units);
             g.DrawRectangle(Pens.Red, destRect3);
             g.DrawString("DDD", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
 
@@ -609,7 +617,7 @@ namespace vcs_Draw_Bitmap
             //來源
             Rectangle srcRect2 = new Rectangle(50, 50, 150, 150);   //來源矩形
             //          影像  目的   來源    單位
-            g.DrawImage(img, x_st, y_st, srcRect2, units);
+            g.DrawImage(bmp, x_st, y_st, srcRect2, units);
             g.DrawString("EEE", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
@@ -623,82 +631,16 @@ namespace vcs_Draw_Bitmap
             //來源
             Rectangle srcRect3 = new Rectangle(100, 100, 100, 50);
             //          影像  目的     來源      單位
-            g.DrawImage(img, destRect, srcRect3, units);
+            g.DrawImage(bmp, destRect, srcRect3, units);
             g.DrawRectangle(Pens.Green, destRect);
             g.DrawString("FFF", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            //原圖貼上
-            //載入圖檔，由檔案
-            Bitmap bmp = new Bitmap(filename);
-            x_st = 200;
-            y_st = 200;
-            dx = 180;
-            dy = 90;
-            //原圖貼上
-            //               貼上位置x      貼上位置y      貼上大小W            貼上大小H
-            g.DrawImage(bmp, x_st + dx * 0, y_st + dy * 0, bmp.Width * 6 / 10, bmp.Height * 6 / 10);
-            g.DrawImage(bmp, x_st + dx * 1+10, y_st + dy * 0, bmp.Width * 4 / 10, bmp.Height * 4 / 10);
-            g.DrawImage(bmp, x_st + dx * 2-40, y_st + dy * 0, bmp.Width * 3 / 10, bmp.Height * 8 / 10);  //改變貼上比例
-            g.DrawString("GGG", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //決定繪製影像的縮放比例和切變
-            x_st = 650;
-            y_st = 200;
-            int w = bmp.Width / 1;
-            int h = bmp.Height / 1;
-            // Create parallelogram for drawing image.
-            Point ulCorner3 = new Point(x_st, y_st);   //左上
-            Point urCorner3 = new Point(x_st + w, y_st);   //右上
-            Point llCorner3 = new Point(x_st - 50, y_st + h);   //左下
-            Point[] destPara = { ulCorner3, urCorner3, llCorner3 };
-            g.DrawImage(bmp, destPara);
-            g.DrawString("HHH", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //使用Rectangle結構
-            x_st = 250;
-            y_st = 550;
-            Rectangle destRect4 = new Rectangle(x_st, y_st, bmp.Width / 2, bmp.Height / 2);
-            g.DrawImage(bmp, destRect4);
-            g.DrawString("III", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            x_st = 0;
-            y_st = 300;
-
-            //改變Bitmap大小1
-            Bitmap bmp1a = new Bitmap(filename, true);
-            Bitmap bmp1b = new Bitmap(bmp1a, bmp1a.Width / 2, bmp1a.Height / 2);   //用Bitmap直接進行縮放
-            g.DrawImage(bmp1b, x_st, y_st);
-            g.DrawString("JJJ", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            x_st = 0;
-            y_st = 550;
-
-            //改變Bitmap大小2
-            Bitmap bmp2a = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            //直接改變Bitmap的大小
-            Bitmap bmp2b = new Bitmap(bmp2a, new Size(100, 300));
-            g.DrawImage(bmp2b, x_st, y_st);
-            g.DrawString("KKK", new Font("Arial", 20), Brushes.Red, x_st, y_st - 30);
-
-            //直接改變 Bitmap的大小
-            //Bitmap bitmap1 = new Bitmap(image, image.Width / 2, image.Height / 2);
-            //Bitmap bitmap2 = new Bitmap(bitmap1, bitmap1.Width * 5 / 2, bitmap1.Height * 5 / 2);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
             //取得圖片的一部分
 
-            x_st = 120;
-            y_st = 550;
+            x_st = 400;
+            y_st = 200;
             sx = 0;
             sy = 0;
             sw = W / 2;
@@ -719,63 +661,69 @@ namespace vcs_Draw_Bitmap
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            //改變影像位置與大小, 用DrawImage貼上影像 並改變影像位置與大小
+            //clone語法, 複製部分圖片
 
-            //g.DrawImage(img, x_st, y_st, W / 2, H / 2);
+            x_st = 100;
+            y_st = 100;
+            w = 150;
+            h = 150;
+            RectangleF rect = new RectangleF(x_st, y_st, w, h);
 
-            g.DrawImage(img, new Rectangle(0, 0, W, H));
-            //g.DrawImage(img, new Rectangle(w / 4, h / 4, w / 2, h / 2));
-            //g.DrawImage(img, new Rectangle(w / 4, h / 4, w / 2, h / 2));
-            //g.DrawImage(img, new Rectangle(w / 10 * 5 / 2, h / 10 * 5 / 2, w / 10 * 5, h / 10 * 5));
+            PixelFormat format = bitmap1.PixelFormat;
+            //Bitmap cloneBitmap = bitmap1.Clone(rect, PixelFormat.DontCare);//PixelFormat.Format32bppArgb
+            Bitmap cloneBitmap = bmp.Clone(rect, format);//PixelFormat.Format32bppArgb
 
-            for (int i = 0; i < 5; i++)
-            {
-                x_st = W / 10 * i / 2;
-                y_st = H / 10 * i / 2;
-                dw = W / 10 * (10 - i);
-                dh = H / 10 * (10 - i);
-                g.DrawImage(img, new Rectangle(x_st, y_st, dw, dh));
-            }
+            //Bitmap bitmap2 = new Bitmap(W, H);
+            //Graphics g = Graphics.FromImage(bitmap2);
+            //g.Clear(Color.Pink);
+
+            g.DrawImage(cloneBitmap, 800, 200, w, h);
+            g.DrawString("Clone語法", new Font("Arial", 16), Brushes.Red, 800, 200 - 30);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            //用DrawImage畫出不同圖片大小的圖
+            //獲取圖片的指定部分
 
-            Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            x_st = 550;
+            y_st = 200;
+            //來源 sx, sy, sw, sh
+            sx = 0;
+            sy = 0;
+            sw = 120;
+            sh = 180;
+            //目的 dx, dy, dw, dh
+            dx = x_st;
+            dy = y_st;
+            dw = 120;
+            dh = 180;
 
-            W = bitmap2.Width;
-            H = bitmap2.Height;
-            float scale;
-            w = 0;
-            h = 0;
-            //Bitmap bitmap2 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-
-            //Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            //Graphics g = Graphics.FromImage(bitmap1);
-            g.InterpolationMode = InterpolationMode.NearestNeighbor;   // No smoothing.
-
-            Rectangle source = new Rectangle(0, 0, W, H);
-            Point[] dest =
-                {
-                    new Point(0, 0),
-                    new Point(w, 0),
-                    new Point(0, h),
-                };
-
-            //改變圖形大小
-            for (scale = 0.90f; scale > 0.20f; scale -= 0.33f)
-            {
-                w = (int)(W * scale);
-                h = (int)(H * scale);
-
-                dest[0] = new Point(0, 0);
-                dest[1] = new Point(w, 0);
-                dest[2] = new Point(0, h);
-                g.DrawImage(bitmap2, dest, source, GraphicsUnit.Pixel);
-            }
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            destRect = new Rectangle(new Point(dx, dy), new Size(dw, dh));//目標位置
+            srcRect = new Rectangle(new Point(sx, sy), new Size(sw, sh));//原圖位置（默認從原圖中截取的圖片大小等於目標圖片的大小）
+            g.DrawImage(bmp, destRect, srcRect, GraphicsUnit.Pixel);
+            g.DrawString("獲取圖片的指定部分", new Font("Arial", 16), Brushes.Red, x_st, y_st - 30);
 
             pictureBox1.Image = bitmap1;
+        }
+
+        Bitmap Resize(Bitmap bitmap1, Double ratio)
+        {
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            int w = Convert.ToInt32(W * ratio);
+            int h = Convert.ToInt32(H * ratio);
+
+            return Process(bitmap1, W, H, w, h);
+        }
+
+        Bitmap Process(Bitmap bitmap1, int oriwidth, int oriheight, int width, int height)
+        {
+            Bitmap resizedbitmap = new Bitmap(width, height);
+            Graphics g = Graphics.FromImage(resizedbitmap);
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            g.Clear(Color.Transparent);
+            g.DrawImage(bitmap1, new Rectangle(0, 0, width, height), new Rectangle(0, 0, oriwidth, oriheight), GraphicsUnit.Pixel);
+            return resizedbitmap;
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -995,8 +943,7 @@ namespace vcs_Draw_Bitmap
             g.DrawString("改變Bitmap大小,\n貼在原點", new Font("Arial", 30), Brushes.Red, new PointF(100, 400));
 
             Bitmap bmp = new Bitmap(filename, true);
-            g.DrawImage(bmp, 0, 0, bmp.Width, bmp.Height);
-            g.DrawImage(bmp, 0, 450, bmp.Width, bmp.Height / 2);
+            g.DrawImage(bmp, 0, 0, W, H);
+            g.DrawImage(bmp, 0, 450, W, H / 2);
  * 
 */
-
