@@ -37,10 +37,6 @@ namespace vcs_PictureBox1
         public Form1()
         {
             InitializeComponent();
-            comboBox1.SelectedIndex = 0;
-            pictureBox2.Visible = false;
-
-            reset_picturebox_setting();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -48,18 +44,113 @@ namespace vcs_PictureBox1
             //.Net 4.0 要強迫使用 TLS 1.2 抓資料
             ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom; //圖片Zoom的方法
+            pictureBox1.ClientSize = new Size(640, 480);    //設定pictureBox的大小
+            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox1.Cursor = Cursors.Cross;  //移到控件上，改變鼠標
+            pictureBox2.Visible = false;
+
+            reset_picturebox_setting();
+
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 120 + 10;
+            dy = 40 + 10;
+
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button7.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button6.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            groupBox_SizeMode.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            button5.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+
+            x_st = 10;
+            y_st = 20;
+            dx = 200 + 10;
+            dy = 20;
+
+            groupBox_SizeMode.Size = new Size(120, 130);
+            rb_size_mode0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            rb_size_mode1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            rb_size_mode2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            rb_size_mode3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            rb_size_mode4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+
+            rb_size_mode0.Text = "Zoom";
+            rb_size_mode1.Text = "Normal";
+            rb_size_mode2.Text = "AutoSize";
+            rb_size_mode3.Text = "CenterImage";
+            rb_size_mode4.Text = "StretchImage";
+
+            rb_size_mode0.CheckedChanged += new EventHandler(rb_size_mode_CheckedChanged);
+            rb_size_mode1.CheckedChanged += new EventHandler(rb_size_mode_CheckedChanged);
+            rb_size_mode2.CheckedChanged += new EventHandler(rb_size_mode_CheckedChanged);
+            rb_size_mode3.CheckedChanged += new EventHandler(rb_size_mode_CheckedChanged);
+            rb_size_mode4.CheckedChanged += new EventHandler(rb_size_mode_CheckedChanged);
+            rb_size_mode0.Checked = true;
+
+            richTextBox1.Size = new Size(1000, 160);
+            richTextBox1.Location = new Point(x_st + dx * 0, 650);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+
+            this.Size = new Size(1100, 860);
+            this.Text = "vcs_PictureBox1";
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        void rb_size_mode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb_size_mode0.Checked == true)
+            {
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+            else if (rb_size_mode1.Checked == true)
+            {
+                pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            }
+            else if (rb_size_mode2.Checked == true)
+            {
+                pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+            }
+            else if (rb_size_mode3.Checked == true)
+            {
+                pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+            }
+            else if (rb_size_mode4.Checked == true)
+            {
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+            else
+            {
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            }
         }
 
         void reset_picturebox_setting()
         {
             zoom_cnt = 0;
 
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom; //圖片Zoom的方法
-            pictureBox1.ClientSize = new Size(640, 480);    //設定pictureBox的大小
-            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox1.Cursor = Cursors.Cross;  //移到控件上，改變鼠標
-
-            image1 = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\ims_image.bmp");
+            //image1 = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\ims_image.bmp");
+            image1 = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\elephant.jpg");
             pictureBox1.Image = image1;
             richTextBox1.Text += "W = " + image1.Width.ToString() + ", H = " + image1.Height.ToString() + "\n";
 
@@ -134,33 +225,6 @@ namespace vcs_PictureBox1
         private void button5_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = null;
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //圖片SizeMode
-            int sizemode = comboBox1.SelectedIndex;
-            switch (sizemode)
-            {
-                case 0:
-                    pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                    break;
-                case 1:
-                    pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-                    break;
-                case 2:
-                    pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-                    break;
-                case 3:
-                    pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-                    break;
-                case 4:
-                    pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-                    break;
-                default:
-                    pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                    break;
-            }
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -564,13 +628,6 @@ namespace vcs_PictureBox1
             }
         }
 
-        private void button9_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-            //richTextBox1.Text += "btn_down_up_cnt = " + btn_down_up_cnt.ToString() + "\n";
-            //richTextBox1.Text += "btn_right_left_cnt = " + btn_right_left_cnt.ToString() + "\n";
-        }
-
         private void picture_mode_CheckedChanged(object sender, EventArgs e)
         {
             if (sender.Equals(radioButton1))
@@ -613,10 +670,7 @@ namespace vcs_PictureBox1
                 richTextBox1.Text += "unknown mode\n";
             }
         }
-
         //做一個圓形的pictureBox ST
-
-
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -640,7 +694,6 @@ namespace vcs_PictureBox1
             // Restrict the PictureBoxes to the Region.
             pictureBox1.Region = region;
         }
-
         //做一個圓形的pictureBox SP
     }
 }

@@ -64,6 +64,8 @@ namespace vcs_Button
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             //加選
             //this.button1a.UseVisualStyleBackColor = true;
 
@@ -88,6 +90,8 @@ namespace vcs_Button
 
             // Constrain the button to the region.
             button1a.Region = polygon_region1;
+
+            button1a.Location = new Point(0, 0);
 
             // Make the button big enough to hold the whole region.
             button1a.SetBounds(
@@ -134,6 +138,7 @@ namespace vcs_Button
             button1b.Region = polygon_region2;
 
             // Make the button big enough to hold the whole region.
+            button1b.Location = new Point(220, 0);
             button1b.SetBounds(
                 button1b.Location.X,
                 button1b.Location.Y,
@@ -147,12 +152,12 @@ namespace vcs_Button
             GraphicsPath gpstirng = new GraphicsPath();
             FontFamily family = new FontFamily("細明體");
             int fontStyle = (int)FontStyle.Italic;
-            int emSize = 55;
+            int emSize = 40;
 
             Point origin = new Point(0, 0);
             StringFormat format = StringFormat.GenericDefault;
 
-            gpstirng.AddString("Conan", family, fontStyle, emSize, origin, format);
+            gpstirng.AddString("文字化按鈕", family, fontStyle, emSize, origin, format);
             button4.Region = new Region(gpstirng);
             //文字化按鈕 button4 SP
 
@@ -199,6 +204,55 @@ namespace vcs_Button
 
             this.Controls.Add(bt_exit); // 將按鈕加入表單
             bt_exit.BringToFront();     //移到最上層
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            groupBox1.Size = new Size(500, 200);
+            groupBox1.Location = new Point(10, 10);
+            bt_star.Location = new Point(350, 10);
+            button4.Location = new Point(260, 150);//文字化按鈕
+
+            //button
+            x_st = 580;
+            y_st = 10;
+            dx = 110 + 10;
+            dy = 120 + 10;
+
+            btn_word_00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            btn_word_01.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            btn_word_02.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            btn_word_10.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            btn_word_11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            btn_word_12.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button18.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            btn_word_20.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            btn_word_21.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            btn_word_22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            btn_word_23.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            btn_word_24.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            btn_word_30.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            btn_word_31.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            btn_word_32.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            btn_word_33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            btn_word_34.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+
+            richTextBox1.Size = new Size(600, 200);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //this.Size = new Size(1220, 800);
+            this.Text = "vcs_Button";
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void button1a_Click(object sender, EventArgs e)
@@ -253,7 +307,7 @@ namespace vcs_Button
         //在Button上畫圖
         private void button2_Paint(object sender, PaintEventArgs e)
         {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_cat\cat1.png";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_貓咪\cat1.png";
             Bitmap bmp;//實例Bitmap對像
             bmp = new Bitmap(filename);
             Graphics g = e.Graphics;
@@ -283,7 +337,7 @@ namespace vcs_Button
 
         private void bt_star_Paint(object sender, PaintEventArgs e)
         {
-            string filename = @"D:\_git\vcs\_2.vcs\______test_files1\__pic\_icon\star.bmp";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_icon\star.bmp";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             GraphicsPath graphicsPath = CalculateControlGraphicsPath(bitmap1);
             this.bt_star.Region = new Region(graphicsPath);
@@ -434,6 +488,7 @@ namespace vcs_Button
             }
             btn_word_34.BackgroundImage = bitmap2;
         }
+
 
     }
 }

@@ -15,6 +15,7 @@ namespace vcs_PictureCrop9
     {
         int X1, Y1, X2, Y2;
         Rectangle rect = new Rectangle(0, 0, 0, 0);
+        private PointF Point1, Point2;
         bool Drawing = false;
         string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
@@ -80,7 +81,6 @@ namespace vcs_PictureCrop9
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-
         }
 
         void draw_grid(Graphics g)
@@ -99,11 +99,14 @@ namespace vcs_PictureCrop9
 
         void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
+            Point1 = e.Location;
+            Point2 = e.Location;
+            pictureBox1.Refresh();
+
             X1 = X2 = e.X;
             Y1 = Y2 = e.Y;
             Drawing = true;
         }
-
 
         void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -111,6 +114,9 @@ namespace vcs_PictureCrop9
             {
                 return;
             }
+
+            Point2 = e.Location;
+            pictureBox1.Refresh();
 
             // Update the new circle's second corner.
             X2 = e.X;
@@ -122,7 +128,12 @@ namespace vcs_PictureCrop9
 
         void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
+            if (!Drawing)
+            {
+                return;
+            }
             Drawing = false;
+            pictureBox1.Refresh();
 
             // Redraw.
             this.pictureBox1.Invalidate();
@@ -134,6 +145,14 @@ namespace vcs_PictureCrop9
             //richTextBox1.Text += "W = " + bitmap1.Width.ToString() + ", H = " + bitmap1.Height.ToString() + "\n";
 
             e.Graphics.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
+
+            //e.Graphics.Clear(pictureBox1.BackColor);
+
+            if (Point1 != Point2)
+            {
+                //e.Graphics.DrawRectangle(Pens.Black, Point1, Point2);
+                e.Graphics.DrawLine(Pens.Black, Point1, Point2);
+            }
 
             int width = 0;
             int height = 0;

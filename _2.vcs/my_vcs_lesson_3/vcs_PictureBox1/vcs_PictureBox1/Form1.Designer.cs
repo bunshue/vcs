@@ -31,10 +31,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button7 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
@@ -51,26 +49,31 @@
             this.btnLeft = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button6 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox_SizeMode = new System.Windows.Forms.GroupBox();
+            this.rb_size_mode4 = new System.Windows.Forms.RadioButton();
+            this.rb_size_mode3 = new System.Windows.Forms.RadioButton();
+            this.rb_size_mode2 = new System.Windows.Forms.RadioButton();
+            this.rb_size_mode1 = new System.Windows.Forms.RadioButton();
+            this.rb_size_mode0 = new System.Windows.Forms.RadioButton();
+            this.bt_clear = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox_SizeMode.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button1.Location = new System.Drawing.Point(12, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 37);
+            this.button1.Size = new System.Drawing.Size(120, 40);
             this.button1.TabIndex = 0;
             this.button1.Text = "LoadPicture 1";
             this.button1.UseVisualStyleBackColor = true;
@@ -78,13 +81,10 @@
             // 
             // button2
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button2.Location = new System.Drawing.Point(234, 12);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(105, 37);
+            this.button2.Size = new System.Drawing.Size(120, 40);
             this.button2.TabIndex = 1;
             this.button2.Text = "LoadPicture 3";
             this.button2.UseVisualStyleBackColor = true;
@@ -92,38 +92,21 @@
             // 
             // button3
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button3.Location = new System.Drawing.Point(345, 12);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(105, 37);
+            this.button3.Size = new System.Drawing.Size(120, 40);
             this.button3.TabIndex = 2;
             this.button3.Text = "LoadPicture 4";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Location = new System.Drawing.Point(12, 55);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(640, 480);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
             // button4
             // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.button4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button4.Location = new System.Drawing.Point(456, 12);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(105, 37);
+            this.button4.Size = new System.Drawing.Size(120, 40);
             this.button4.TabIndex = 4;
             this.button4.Text = "LoadPicture 5";
             this.button4.UseVisualStyleBackColor = true;
@@ -131,46 +114,21 @@
             // 
             // button5
             // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button5.Location = new System.Drawing.Point(869, 12);
+            this.button5.Location = new System.Drawing.Point(854, 10);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(127, 37);
+            this.button5.Size = new System.Drawing.Size(120, 40);
             this.button5.TabIndex = 5;
             this.button5.Text = "clear";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Zoom",
-            "Normal",
-            "AutoSize",
-            "CenterImage",
-            "StretchImage"});
-            this.comboBox1.Location = new System.Drawing.Point(722, 17);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 27);
-            this.comboBox1.TabIndex = 7;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
             // button7
             // 
-            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.button7.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button7.Location = new System.Drawing.Point(123, 12);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(105, 37);
+            this.button7.Size = new System.Drawing.Size(120, 40);
             this.button7.TabIndex = 8;
             this.button7.Text = "LoadPicture 2";
             this.button7.UseVisualStyleBackColor = true;
@@ -180,7 +138,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(12, 653);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(831, 321);
+            this.richTextBox1.Size = new System.Drawing.Size(694, 146);
             this.richTextBox1.TabIndex = 9;
             this.richTextBox1.Text = "";
             // 
@@ -221,9 +179,6 @@
             // 
             // button8
             // 
-            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.button8.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button8.Location = new System.Drawing.Point(804, 520);
             this.button8.Name = "button8";
@@ -353,20 +308,6 @@
             this.btnUp.UseVisualStyleBackColor = true;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
-            // button9
-            // 
-            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button9.Location = new System.Drawing.Point(768, 654);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(74, 37);
-            this.button9.TabIndex = 213;
-            this.button9.Text = "clear";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
@@ -383,9 +324,10 @@
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox2.Location = new System.Drawing.Point(738, 55);
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox2.Location = new System.Drawing.Point(722, 204);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(160, 120);
+            this.pictureBox2.Size = new System.Drawing.Size(228, 120);
             this.pictureBox2.TabIndex = 215;
             this.pictureBox2.TabStop = false;
             // 
@@ -404,23 +346,113 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(590, 0);
+            this.button6.Location = new System.Drawing.Point(582, 12);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(116, 49);
+            this.button6.Size = new System.Drawing.Size(120, 40);
             this.button6.TabIndex = 217;
             this.button6.Text = "做一個圓形的pictureBox";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // groupBox_SizeMode
+            // 
+            this.groupBox_SizeMode.Controls.Add(this.rb_size_mode4);
+            this.groupBox_SizeMode.Controls.Add(this.rb_size_mode3);
+            this.groupBox_SizeMode.Controls.Add(this.rb_size_mode2);
+            this.groupBox_SizeMode.Controls.Add(this.rb_size_mode1);
+            this.groupBox_SizeMode.Controls.Add(this.rb_size_mode0);
+            this.groupBox_SizeMode.Location = new System.Drawing.Point(722, 12);
+            this.groupBox_SizeMode.Name = "groupBox_SizeMode";
+            this.groupBox_SizeMode.Size = new System.Drawing.Size(100, 100);
+            this.groupBox_SizeMode.TabIndex = 218;
+            this.groupBox_SizeMode.TabStop = false;
+            this.groupBox_SizeMode.Text = "SizeMode";
+            // 
+            // rb_size_mode4
+            // 
+            this.rb_size_mode4.AutoSize = true;
+            this.rb_size_mode4.Location = new System.Drawing.Point(20, 110);
+            this.rb_size_mode4.Name = "rb_size_mode4";
+            this.rb_size_mode4.Size = new System.Drawing.Size(85, 16);
+            this.rb_size_mode4.TabIndex = 4;
+            this.rb_size_mode4.TabStop = true;
+            this.rb_size_mode4.Text = "radioButton9";
+            this.rb_size_mode4.UseVisualStyleBackColor = true;
+            // 
+            // rb_size_mode3
+            // 
+            this.rb_size_mode3.AutoSize = true;
+            this.rb_size_mode3.Location = new System.Drawing.Point(20, 88);
+            this.rb_size_mode3.Name = "rb_size_mode3";
+            this.rb_size_mode3.Size = new System.Drawing.Size(85, 16);
+            this.rb_size_mode3.TabIndex = 3;
+            this.rb_size_mode3.TabStop = true;
+            this.rb_size_mode3.Text = "radioButton8";
+            this.rb_size_mode3.UseVisualStyleBackColor = true;
+            // 
+            // rb_size_mode2
+            // 
+            this.rb_size_mode2.AutoSize = true;
+            this.rb_size_mode2.Location = new System.Drawing.Point(20, 66);
+            this.rb_size_mode2.Name = "rb_size_mode2";
+            this.rb_size_mode2.Size = new System.Drawing.Size(85, 16);
+            this.rb_size_mode2.TabIndex = 2;
+            this.rb_size_mode2.TabStop = true;
+            this.rb_size_mode2.Text = "radioButton7";
+            this.rb_size_mode2.UseVisualStyleBackColor = true;
+            // 
+            // rb_size_mode1
+            // 
+            this.rb_size_mode1.AutoSize = true;
+            this.rb_size_mode1.Location = new System.Drawing.Point(20, 44);
+            this.rb_size_mode1.Name = "rb_size_mode1";
+            this.rb_size_mode1.Size = new System.Drawing.Size(85, 16);
+            this.rb_size_mode1.TabIndex = 1;
+            this.rb_size_mode1.TabStop = true;
+            this.rb_size_mode1.Text = "radioButton6";
+            this.rb_size_mode1.UseVisualStyleBackColor = true;
+            // 
+            // rb_size_mode0
+            // 
+            this.rb_size_mode0.AutoSize = true;
+            this.rb_size_mode0.Location = new System.Drawing.Point(20, 22);
+            this.rb_size_mode0.Name = "rb_size_mode0";
+            this.rb_size_mode0.Size = new System.Drawing.Size(85, 16);
+            this.rb_size_mode0.TabIndex = 0;
+            this.rb_size_mode0.TabStop = true;
+            this.rb_size_mode0.Text = "radioButton5";
+            this.rb_size_mode0.UseVisualStyleBackColor = true;
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(25, 663);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(66, 40);
+            this.bt_clear.TabIndex = 219;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 55);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(640, 480);
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 986);
+            this.ClientSize = new System.Drawing.Size(1076, 986);
+            this.Controls.Add(this.bt_clear);
+            this.Controls.Add(this.groupBox_SizeMode);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.button9);
             this.Controls.Add(this.btnCenter);
             this.Controls.Add(this.btnRight);
             this.Controls.Add(this.btnLeft);
@@ -434,7 +466,6 @@
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button7);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.pictureBox1);
@@ -444,11 +475,13 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox_SizeMode.ResumeLayout(false);
+            this.groupBox_SizeMode.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -459,10 +492,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.TrackBar trackBar1;
@@ -479,11 +510,18 @@
         private System.Windows.Forms.Button btnLeft;
         private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button btnUp;
-        private System.Windows.Forms.Button button9;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.GroupBox groupBox_SizeMode;
+        private System.Windows.Forms.RadioButton rb_size_mode4;
+        private System.Windows.Forms.RadioButton rb_size_mode3;
+        private System.Windows.Forms.RadioButton rb_size_mode2;
+        private System.Windows.Forms.RadioButton rb_size_mode1;
+        private System.Windows.Forms.RadioButton rb_size_mode0;
+        private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
