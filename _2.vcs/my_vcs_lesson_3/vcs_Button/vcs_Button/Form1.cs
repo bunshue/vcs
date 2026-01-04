@@ -219,7 +219,7 @@ namespace vcs_Button
             button4.Location = new Point(260, 150);//文字化按鈕
 
             //button
-            x_st = 580;
+            x_st = 720;
             y_st = 10;
             dx = 110 + 10;
             dy = 120 + 10;
@@ -242,12 +242,35 @@ namespace vcs_Button
             btn_word_33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
             btn_word_34.Location = new Point(x_st + dx * 4, y_st + dy * 3);
 
+            //button1.BackgroundImage = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_logo\csharp-programming_210700275.jpg.ashx.jpg");
+            //button1.BackgroundImageLayout = ImageLayout.None;
+            button1.Image = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_logo\csharp-programming_210700275.jpg.ashx.jpg");
+            //button1.ImageAlign = ContentAlignment.BottomRight;
+
+
+            button6.Image = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_logo\csharp-programming_210700275.jpg.ashx.jpg");
+            button6.ImageAlign = ContentAlignment.MiddleCenter;
+            button6.MouseMove += new MouseEventHandler(button6_MouseMove);
+            button6.MouseLeave += new EventHandler(button6_MouseLeave);
+
+
+
             richTextBox1.Size = new Size(600, 200);
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //this.Size = new Size(1220, 800);
             this.Text = "vcs_Button";
+        }
+
+        void button6_MouseMove(object sender, MouseEventArgs e)
+        {
+            button6.ImageAlign = ContentAlignment.MiddleLeft;
+        }
+
+        void button6_MouseLeave(object sender, EventArgs e)
+        {
+            button6.ImageAlign = ContentAlignment.MiddleCenter;
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -489,6 +512,67 @@ namespace vcs_Button
             btn_word_34.BackgroundImage = bitmap2;
         }
 
-
+        ContentAlignment image_align = ContentAlignment.TopLeft;
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (image_align == ContentAlignment.TopLeft)
+            {
+                //     內容垂直靠上對齊，且水平置中對齊。
+                image_align = ContentAlignment.TopCenter;
+                button1.ImageAlign = image_align;
+            }
+            else if (image_align == ContentAlignment.TopCenter)
+            {
+                //     內容垂直靠上對齊，且水平靠右對齊。
+                image_align = ContentAlignment.TopRight;
+                button1.ImageAlign = image_align;
+            }
+            else if (image_align == ContentAlignment.TopRight)
+            {
+                //     內容垂直居中對齊，且水平靠左對齊。
+                image_align = ContentAlignment.MiddleLeft;
+                button1.ImageAlign = image_align;
+            }
+            else if (image_align == ContentAlignment.MiddleLeft)
+            {
+                //     內容垂直居中對齊，且水平置中對齊。
+                image_align = ContentAlignment.MiddleCenter;
+                button1.ImageAlign = image_align;
+            }
+            else if (image_align == ContentAlignment.MiddleCenter)
+            {
+                //     內容垂直居中對齊，且水平置中對齊。
+                image_align = ContentAlignment.MiddleRight;
+                button1.ImageAlign = image_align;
+            }
+            else if (image_align == ContentAlignment.MiddleRight)
+            {
+                //     內容垂直靠下對齊，且水平靠左對齊。
+                image_align = ContentAlignment.BottomLeft;
+                button1.ImageAlign = image_align;
+            }
+            else if (image_align == ContentAlignment.BottomLeft)
+            {
+                //     內容垂直靠下對齊，且水平置中對齊。
+                image_align = ContentAlignment.BottomCenter;
+                button1.ImageAlign = image_align;
+            }
+            else if (image_align == ContentAlignment.BottomCenter)
+            {
+                //     內容垂直靠下對齊，且水平靠右對齊。
+                image_align = ContentAlignment.BottomRight;
+                button1.ImageAlign = image_align;
+            }
+            else if (image_align == ContentAlignment.BottomRight)
+            {
+                //     內容垂直靠上對齊，且水平靠左對齊。
+                image_align = ContentAlignment.TopLeft;
+                button1.ImageAlign = image_align;
+            }
+            else
+            {
+                richTextBox1.Text += "XXXXXXXXXXXXXXXXXXX\n";
+            }
+        }
     }
 }

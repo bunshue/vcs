@@ -51,8 +51,8 @@ namespace vcs_DynamicAddRemoveControls1
             //button
             x_st = 10;
             y_st = 20;
-            dx = 100 + 5;
-            dy = 40 + 5;
+            dx = 200 + 5;
+            dy = 60 + 5;
 
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -65,33 +65,26 @@ namespace vcs_DynamicAddRemoveControls1
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button10.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            //button11.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button15.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button16.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button17.Location = new Point(x_st + dx * 2, y_st + dy * 2);
 
-            groupBox1.Size = new Size(225, 160);
-            groupBox1.Location = new Point(10, 500);
-            groupBox2.Size = new Size(225, 300);
-            groupBox2.Location = new Point(10 + 240, 500);
+            groupBox1.Size = new Size(425, 220);
+            groupBox1.Location = new Point(10, 420);
 
-            int pbx_W = 640 + 10;
-            int pbx_H = 480 + 10;
-            int pbx_W2 = 480 + 60;
-            int pbx_H2 = 520 * 2 / 3;
-            int pbx_W3 = 480;
+            groupBox2.Size = new Size(425+200, 220+70);
+            groupBox2.Location = new Point(10 + 240 + 200, 420);            
 
-            button18.Location = new Point(10 + 240 + 240, 500);
-
-            richTextBox1.Size = new Size(400, 600);
-            richTextBox1.Location = new Point(840, 10);
+            richTextBox1.Size = new Size(280, 300);
+            richTextBox1.Location = new Point(1090, 420);
+            button18.Location = new Point(1090, 420 - 100);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1300, 880);
+            this.Size = new Size(1400, 780);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -165,11 +158,9 @@ namespace vcs_DynamicAddRemoveControls1
             //當有多個按鈕需要產生時, 如何用loop方式動態產生, 並加入對應的click event
             //產生一個新的form, 並在該form上面產生MxN組的按鈕
 
-            int i;
-            int j;
-            for (j = 0; j < ROWS; j++)
+            for (int j = 0; j < ROWS; j++)
             {
-                for (i = 0; i < COLUMNS; i++)
+                for (int i = 0; i < COLUMNS; i++)
                 {
                     // 實例化按鈕
                     Button btn = new Button();
@@ -215,16 +206,12 @@ namespace vcs_DynamicAddRemoveControls1
             else
                 ((Button)sender).BackColor = Color.Gray;
 
-
-            int i;
-            int j;
-
             string tt = ((Button)sender).Tag.ToString();
 
             if (tt != null)
             {
-                i = int.Parse(tt.Substring(7, 2));
-                j = int.Parse(tt.Substring(10, 2));
+                int i = int.Parse(tt.Substring(7, 2));
+                int j = int.Parse(tt.Substring(10, 2));
                 richTextBox1.Text += "i = " + i.ToString() + ", j = " + j.ToString() + "\n";
 
                 if (((Button)sender).BackColor == Color.Gray)
@@ -547,16 +534,14 @@ namespace vcs_DynamicAddRemoveControls1
             //動態創建按鈕和事件, 創建在richTextBox裡
 
             int x_st = 100;
-            int y_st = 100;
-
-            int i = 0;
-            for (i = 0; i < 10; i++)
+            int y_st = 20;
+            for (int i = 0; i < 5; i++)
             {
                 Button btn = new Button();//創建一個新的按鈕
                 btn.Name = "button" + i.ToString();//這是我用來區別各個按鈕的辦法
                 btn.Text = "button" + i.ToString();
-                btn.Size = new Size(80, 45);
-                Point p = new Point(x_st, y_st + i * 60);//創建一個坐標,用來給新的按鈕定位
+                btn.Size = new Size(80, 40);
+                Point p = new Point(x_st, y_st + i * 50);//創建一個坐標,用來給新的按鈕定位
                 btn.Location = p;//把按鈕的位置與剛創建的坐標綁定在一起
 
                 this.richTextBox1.Controls.Add(btn);    //向 某控件 中添加此按鈕
@@ -583,8 +568,8 @@ namespace vcs_DynamicAddRemoveControls1
         {
             //動態創建按鈕和事件, 創建在Form裡
 
-            int x_st = 10;
-            int y_st = 960;
+            int x_st = 800;
+            int y_st = 10;
 
             //1.建立Button物件
             Button[] btuArray = new Button[3];
@@ -592,11 +577,12 @@ namespace vcs_DynamicAddRemoveControls1
             btuArray[1] = new Button();
             btuArray[2] = new Button();
 
-            for (int i = 0; i != btuArray.Length; i++)
+            for (int i = 0; i < btuArray.Length; i++)
             {
                 //2.加入控制項
                 this.Controls.Add(btuArray[i]);
-                btuArray[i].Size = new Size(80, 60);
+                btuArray[i].Size = new Size(80, 80);
+                btuArray[i].BackColor = Color.Yellow;
                 btuArray[i].Text = "Dynamic " + i;
                 //btuArray[i].Top = 12 + btuArray[i].Height * i;
                 //btuArray[i].Left = 13;
@@ -620,8 +606,8 @@ namespace vcs_DynamicAddRemoveControls1
 
         private void DynamicGenerateButton5()
         {
-            int x_st = 10;
-            int y_st = 1030;
+            int x_st = 800;
+            int y_st = 30;
             int count = 5;
             Button[] btn = new Button[count];
             for (int j = 0; j < count; j++)
@@ -648,8 +634,8 @@ namespace vcs_DynamicAddRemoveControls1
 
         private void DynamicGenerateButton6()
         {
-            int x_st = 320;
-            int y_st = 700;
+            int x_st = 800;
+            int y_st = 100;
 
             int ss = 80;
             PictureBox pb_new = new PictureBox();
@@ -684,8 +670,8 @@ namespace vcs_DynamicAddRemoveControls1
 
         private void DynamicGenerateButton2()
         {
-            int x_st = 320;
-            int y_st = 450;
+            int x_st = 820;
+            int y_st = 20;
 
             // 設定位置及按鈕寬高值
             int LEFTANCHOR = x_st;
@@ -735,8 +721,8 @@ namespace vcs_DynamicAddRemoveControls1
         Font font = new Font("微軟正黑體", 12);
         private void DynamicGenerateButton7()
         {
-            int x_st = 600;
-            int y_st = 700;
+            int x_st = 800;
+            int y_st = 20;
 
             int ss = 80;
 
@@ -793,8 +779,8 @@ namespace vcs_DynamicAddRemoveControls1
 
         private void DynamicGenerateButton8()
         {
-            int x_st = 320;
-            int y_st = 550;
+            int x_st = 800;
+            int y_st = 20;
 
             Button[] btn = new Button[10];//Button 陣列
 
@@ -839,14 +825,14 @@ namespace vcs_DynamicAddRemoveControls1
         private void DynamicGenerateButton9()
         {
             // Display all of the images in the Buttons folder.
-            int x_st = 900;
-            int y_st = 50;
+            int x_st = 800;
+            int y_st = 20;
 
             const int w = 40;
             const int h = 40;
 
-            int dx = w + 10;
-            int dy = h + 10;
+            int dx = w + 5;
+            int dy = h + 5;
 
             // Find the images.
             int num = 0;
