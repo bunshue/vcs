@@ -19,11 +19,14 @@ namespace vcs_Paint4a
         public Form1()
         {
             InitializeComponent();
-            this.ClientSize = new Size(640, 480);// 設定視窗客戶區的寬高
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.DoubleBuffered = true;
+
+            this.ClientSize = new Size(640, 480);// 設定視窗客戶區的寬高
+
             pen = new Pen(Color.Red, 1);// 預設畫筆的顏色與筆寬
             buffer = new Bitmap(this.Width, this.Height);　// 新增點陣圖物件
             G = Graphics.FromImage(buffer); // 由點陣圖物件產生畫布

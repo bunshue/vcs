@@ -44,6 +44,8 @@ namespace vcs_Paint1
             comboBox1.SelectedIndex = 1;
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             p = new Pen(Color.Red, 3);
+
+            open_new_file();
         }
 
         void show_item_location()
@@ -73,7 +75,7 @@ namespace vcs_Paint1
             pictureBox1.Location = new Point(10, 150);
         }
 
-        private void button0_Click(object sender, EventArgs e)
+        void open_new_file()
         {
             //指定畫布大小
             pictureBox1.Width = 640;
@@ -85,7 +87,6 @@ namespace vcs_Paint1
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
             ig = Graphics.FromImage(bitmap1);
             g.DrawRectangle(p, 0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1);
-
 
             PenStyle = new Pen(foreColor);
             PenStyle.Width = (int)numericUpDown1.Value;
@@ -100,6 +101,11 @@ namespace vcs_Paint1
             ig.Clear(backColor);
 
             pictureBox1.Image = bitmap1;
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            open_new_file();
         }
 
         private void button1_Click(object sender, EventArgs e)

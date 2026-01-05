@@ -17,15 +17,18 @@ namespace vcs_Paint4b
         public Form1()
         {
             InitializeComponent();
-            this.ClientSize = new Size(640, 480);// 設定視窗客戶區的寬高
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            pen = new Pen(Color.Red, 1);
+            this.DoubleBuffered = true;
+
+            this.ClientSize = new Size(640, 480);// 設定視窗客戶區的寬高
+
+            pen = new Pen(Color.Red, 1);// 預設畫筆的顏色與筆寬
             buffer = new Bitmap(this.Width, this.Height);　// 新增點陣圖物件
-            Graphics g = Graphics.FromImage(buffer);
-            g.Clear(Color.White);
+            Graphics g = Graphics.FromImage(buffer); // 由點陣圖物件產生畫布
+            g.Clear(Color.White); // 將畫布清為白色
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -115,7 +118,7 @@ namespace vcs_Paint4b
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left) // 滑鼠的左鍵
             {
                 Graphics g = Graphics.FromImage(buffer);
                 g.DrawLine(pen, x, y, e.X, e.Y);　// 寫到　buffer
@@ -130,7 +133,7 @@ namespace vcs_Paint4b
 
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("繪圖板 Version 1.0\n作者：Veteran 2009.12","繪圖板");
+            MessageBox.Show("繪圖板 Version 1.0\n作者：lion-mouse 2012.08", "繪圖板");
         }
 
         private void toolStripSeparator1_Click(object sender, EventArgs e)

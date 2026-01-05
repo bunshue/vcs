@@ -190,10 +190,7 @@ namespace vcs_PictureBox
                 pictureBox2.Image = zoomImage;
             }
 
-
-
-
-            //            Bitmap bmpImage = new Bitmap(img);
+            //Bitmap bmpImage = new Bitmap(img);
             //return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
 
             //Bitmap bmpImage = pictureBox1.Image;
@@ -209,15 +206,14 @@ namespace vcs_PictureBox
             //於座標(0,0)開始繪製來源影像，長寬設置為來源影像的1/2
             graphics0.DrawImage(pictureBox1.Image, 0, 0, pictureBox1.Image.Width / 2, pictureBox1.Image.Height / 2);
             graphics0.Dispose();
-
-
             */
-
-
-
-
-
             flag_mouse_down = false;
+        }
+
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         private void rb_picturebox_sizemode(object sender, EventArgs e)
