@@ -10,6 +10,11 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 
+/*
+參考
+http://csharphelper.com/howtos/howto_analog_clock.html
+*/
+
 namespace vcs_Clock6
 {
     public partial class Form1 : Form

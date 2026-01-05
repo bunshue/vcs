@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{ADF998FC-A903-4434-9940-C6294AE2A1C5}</ProjectGuid>
+    <ProjectGuid>{0EA2D690-CC6D-4041-9ED6-F0BA58686833}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_DrawEllipse3</RootNamespace>
-    <AssemblyName>vcs_DrawEllipse3</AssemblyName>
+    <RootNamespace>vcs_Wallpaper5</RootNamespace>
+    <AssemblyName>vcs_Wallpaper5</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

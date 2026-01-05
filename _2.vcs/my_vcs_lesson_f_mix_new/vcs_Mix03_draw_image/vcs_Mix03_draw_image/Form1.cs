@@ -145,7 +145,7 @@ namespace vcs_Mix03_draw_image
         // See: Search for files that match multiple patterns in C#
         //      http://csharphelper.com/blog/2015/06/find-files-that-match-multiple-patterns-in-c/
         // Search for files matching the patterns.
-        private List<string> FindFiles(string fname, string patterns, bool search_subdirectories)
+        private List<string> FindFiles(string dir_name, string patterns, bool search_subdirectories)
         {
             // Make the result list.
             List<string> files = new List<string>();
@@ -158,7 +158,7 @@ namespace vcs_Mix03_draw_image
             if (search_subdirectories) search_option = SearchOption.AllDirectories;
             foreach (string pattern in pattern_array)
             {
-                foreach (string filename in Directory.GetFiles(fname, pattern, search_option))
+                foreach (string filename in Directory.GetFiles(dir_name, pattern, search_option))
                 {
                     if (!files.Contains(filename)) files.Add(filename);
                 }
@@ -223,6 +223,54 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
+            string dir_name = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony2";
+
+            // The list of files we will pick from.
+            List<string> FileNames = new List<string>();
+
+            // Load the list of files.
+            if (Directory.Exists(dir_name))
+            {
+                FileNames = FindFiles(dir_name, "*.bmp;*.png;*.jpg;*.tif;*.gif", false);
+            }
+            else
+            {
+                FileNames = new List<string>();
+            }
+
+            for (int i = 0; i < FileNames.Count; i++)
+            {
+                richTextBox1.Text += "get file \t" + FileNames[i] + "\n";
+            }
+
+            Random Rand = new Random();
+
+            // Repeat until we succeed or run out of files.
+            for (; ; )
+            {
+                // Pick a random image.
+                int file_num = Rand.Next(FileNames.Count);
+
+                // Try to use that image.
+                try
+                {
+                    richTextBox1.Text += "使用圖片 : " + FileNames[file_num] + "\n";
+                    // Set the desktop picture.
+                    //DisplayPicture(FileNames[file_num], checkBox1.Checked);
+                    break;
+                }
+                catch
+                {
+                    // This file doesn't work. Remove it from the list.
+                    FileNames.RemoveAt(file_num);
+
+                    // If there are no more files, stop trying.
+                    if (FileNames.Count == 0)
+                    {
+                        break;
+                    }
+                }
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)

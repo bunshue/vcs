@@ -777,10 +777,6 @@ namespace vcs_test_all_01_Math
             {
                 richTextBox1.Text += string.Join(" ", combination.ToArray()) + "\n";
             }
-
-            // Calculate the number of items.
-            decimal num_combinations = MChooseK(M, N);
-            richTextBox1.Text += "共有 " + num_combinations.ToString() + " 種組合\n";
         }
 
         // Generate selections of n items.
@@ -831,24 +827,6 @@ namespace vcs_test_all_01_Math
                     in_selection[i] = false;
                 }
             }
-        }
-
-        // Return M choose N calculated directly.
-        // For a description of the algorithm, see:
-        //      http://csharphelper.com/blog/2014/08/calculate-the-binomial-coefficient-n-choose-k-efficiently-in-c/
-        private decimal MChooseK(decimal M, decimal N)
-        {
-            //Debug.Assert(M >= 0);
-            //Debug.Assert(N >= 0);
-            //Debug.Assert(M >= N);
-
-            decimal result = 1;
-            for (int i = 1; i <= N; i++)
-            {
-                result *= M - (N - i);
-                result /= i;
-            }
-            return result;
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -1335,19 +1313,6 @@ namespace vcs_test_all_01_Math
                 richTextBox1.Text += "錯誤.....1\n";
             }
 
-            richTextBox1.Text += "C(M, N) = C(" + M.ToString() + ", " + N.ToString() + "), 使用方法2\n";
-            // Calculate using the more direct method.
-            try
-            {
-                result = NChooseK(M, N);
-                richTextBox1.Text += "結果 = " + result.ToString() + "\n";
-            }
-            catch
-            {
-                richTextBox1.Text += "錯誤.....2\n";
-            }
-
-
             M = 26;
             N = 3;
 
@@ -1362,36 +1327,6 @@ namespace vcs_test_all_01_Math
             {
                 richTextBox1.Text += "錯誤.....1\n";
             }
-
-            richTextBox1.Text += "C(M, N) = C(" + M.ToString() + ", " + N.ToString() + "), 使用方法2\n";
-            // Calculate using the more direct method.
-            try
-            {
-                result = NChooseK(M, N);
-                richTextBox1.Text += "結果 = " + result.ToString() + "\n";
-            }
-            catch
-            {
-                richTextBox1.Text += "錯誤.....2\n";
-            }
-        }
-
-        // Return N choose K calculated directly.
-        // For a description of the algorithm, see:
-        //      http://csharphelper.com/blog/2014/08/calculate-the-binomial-coefficient-n-choose-k-efficiently-in-c/
-        private decimal NChooseK(decimal N, decimal K)
-        {
-            Debug.Assert(N >= 0);
-            Debug.Assert(K >= 0);
-            Debug.Assert(N >= K);
-
-            decimal result = 1;
-            for (int i = 1; i <= K; i++)
-            {
-                result *= N - (K - i);
-                result /= i;
-            }
-            return result;
         }
 
         // Use the Factorial function to calculate M choose N.
@@ -1677,3 +1612,28 @@ namespace vcs_test_all_01_Math
         }
     }
 }
+
+
+
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
+
+

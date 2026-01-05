@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1B0CECC0-D3FB-474E-8EC3-BB16ED9BE990}</ProjectGuid>
+    <ProjectGuid>{B04E0745-1CAB-44EA-9730-ADE3F426C731}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Wallpaper</RootNamespace>
-    <AssemblyName>vcs_Wallpaper</AssemblyName>
+    <RootNamespace>vcs_PaintB</RootNamespace>
+    <AssemblyName>vcs_PaintB</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D;
+using System.Drawing.Drawing2D;//for SmoothingMode, DashStyle
 
-namespace vcs_DrawEllipse3
+namespace vcs_PaintB
 {
     public partial class Form1 : Form
     {
@@ -27,10 +27,49 @@ namespace vcs_DrawEllipse3
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
             pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
             pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
             pictureBox1.Paint += new PaintEventHandler(pictureBox1_Paint);
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
+
+            this.Size = new Size(1200, 820);
+
+            pictureBox1.Size = new Size(800, 680);
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            int w = this.ClientSize.Width - richTextBox1.Location.X - 10;   //border : 10
+            int h = this.ClientSize.Height - richTextBox1.Location.Y - 10;   //border : 10
+            richTextBox1.Size = new Size(w, h);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Text = "vcs_Network5";
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void bt_new_Click(object sender, EventArgs e)
+        {
+            Ellipses = new List<Rectangle>();
+            this.Refresh();
         }
 
         // Draw the current ellipses.
@@ -98,14 +137,6 @@ namespace vcs_DrawEllipse3
             }
 
             pictureBox1.Refresh();
-        }
-
-        // Clear the ellipse list.
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Ellipses = new List<Rectangle>();
-            this.Refresh();
-
         }
     }
 }

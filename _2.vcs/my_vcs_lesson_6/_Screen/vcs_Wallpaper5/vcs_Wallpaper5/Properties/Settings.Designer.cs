@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_DrawEllipse3.Properties
+namespace vcs_Wallpaper5.Properties
 {
 
 
