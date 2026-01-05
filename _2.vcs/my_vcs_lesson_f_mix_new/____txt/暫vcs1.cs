@@ -5,6 +5,57 @@ richTextBox1.Text += "----------------------------------------------------------
 
 
 
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+單一圖片模式
+
+
+            button1.Visible = false;
+            richTextBox1.Visible = false;
+            //this.FormBorderStyle = FormBorderStyle.None;
+            this.AutoSize = true;
+            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;     //讓表單大小可以自動隨著圖片大小變化。
+            this.TransparencyKey = SystemColors.ControlLight;   //將表單的TransparencyKey設為Control，這樣可以去掉桌面小玩意外圍多餘的部份
+            this.ShowInTaskbar = false;
+            //this.StartPosition = FormStartPosition.CenterScreen;
+
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            this.BackColor = Color.Black;
+
+            //pictureBox1.Dock = DockStyle..Fill;      //停駐於父容器中
+            pictureBox1.Location = new Point((this.Width - pictureBox1.Image.Width) / 2, (this.Height - pictureBox1.Image.Height) / 2);
+
+
+
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+
+using System.Diagnostics;           //for Debug
+            Debug.Assert(Math.Abs(total) < 0.001f);
+
+
+ 
+  
+  
+  
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
                 DateTime baseDateAndTime = new DateTime(1900, 1, 6, 2, 5, 0); //#1/6/1900 2:05:00 AM#
                 DateTime newDate;
                     num = 525948.76 * (y - 1900) + sTermInfo[i - 1];

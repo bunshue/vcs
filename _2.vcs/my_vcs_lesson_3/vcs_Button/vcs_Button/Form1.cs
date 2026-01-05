@@ -145,8 +145,12 @@ namespace vcs_Button
                 200, 200);	//SetBounds : 設定控件的位置與大小
 
 
+            //6060
 
+            //繪製圓角按鈕 BMW
+            SetButtonRegion();
 
+            //6060
 
             //文字化按鈕 button4 ST
             GraphicsPath gpstirng = new GraphicsPath();
@@ -213,9 +217,10 @@ namespace vcs_Button
             int dx;
             int dy;
 
-            groupBox1.Size = new Size(500, 200);
+            groupBox1.Size = new Size(500 + 130, 200);
             groupBox1.Location = new Point(10, 10);
             bt_star.Location = new Point(350, 10);
+            bt_bmw.Location = new Point(350 + 140, 10);
             button4.Location = new Point(260, 150);//文字化按鈕
 
             //button
@@ -247,13 +252,10 @@ namespace vcs_Button
             button1.Image = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_logo\csharp-programming_210700275.jpg.ashx.jpg");
             //button1.ImageAlign = ContentAlignment.BottomRight;
 
-
             button6.Image = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_logo\csharp-programming_210700275.jpg.ashx.jpg");
             button6.ImageAlign = ContentAlignment.MiddleCenter;
             button6.MouseMove += new MouseEventHandler(button6_MouseMove);
             button6.MouseLeave += new EventHandler(button6_MouseLeave);
-
-
 
             richTextBox1.Size = new Size(600, 200);
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 4);
@@ -397,6 +399,40 @@ namespace vcs_Button
                 }
             }
             return graphicsPath;
+        }
+
+        public void SetButtonRegion()
+        {
+            GraphicsPath ButtonPath;
+            ButtonPath = new GraphicsPath();
+            Rectangle rect = new Rectangle(0, 0, this.bt_bmw.Width, this.bt_bmw.Height);
+            ButtonPath = GetRoundedRectPath(rect, 70);
+            this.bt_bmw.Region = new Region(ButtonPath);
+
+            Bitmap bmp = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\BMW.jfif");
+
+            bt_bmw.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_bmw.BackgroundImage = bmp;
+        }
+
+        private GraphicsPath GetRoundedRectPath(Rectangle rect, int radius)
+        {
+            int diameter = radius;
+            Rectangle arcRect = new Rectangle(rect.Location, new Size(diameter, diameter));
+            GraphicsPath path = new GraphicsPath();
+            //   左上角  
+            path.AddArc(arcRect, 180, 90);
+            //   右上角  
+            arcRect.X = rect.Right - diameter;
+            path.AddArc(arcRect, 270, 90);
+            //   右下角  
+            arcRect.Y = rect.Bottom - diameter;
+            path.AddArc(arcRect, 0, 90);
+            //   左下角  
+            arcRect.X = rect.Left;
+            path.AddArc(arcRect, 90, 90);
+            path.CloseFigure();
+            return path;
         }
 
         private void button18_Click(object sender, EventArgs e)

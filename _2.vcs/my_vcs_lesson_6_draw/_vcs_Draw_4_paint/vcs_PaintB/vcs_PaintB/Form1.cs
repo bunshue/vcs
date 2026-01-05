@@ -29,6 +29,8 @@ namespace vcs_PaintB
         {
             show_item_location();
 
+            this.DoubleBuffered = true;
+
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
             pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
             pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
@@ -72,35 +74,6 @@ namespace vcs_PaintB
             this.Refresh();
         }
 
-        // Draw the current ellipses.
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-
-            // Draw the existing ellipses.
-            foreach (Rectangle rect in Ellipses)
-            {
-                e.Graphics.DrawEllipse(Pens.Black, rect);
-            }
-
-            // If we are creating a new ellipse, draw it.
-            if (DrawingNew)
-            {
-                using (Pen dashed_pen = new Pen(Color.Green, 0))
-                {
-                    dashed_pen.DashStyle = DashStyle.Custom;
-                    dashed_pen.DashPattern = new float[] { 5, 5 };
-                    Rectangle rect = new Rectangle(
-                        Math.Min(StartPoint.X, EndPoint.X),
-                        Math.Min(StartPoint.Y, EndPoint.Y),
-                        Math.Abs(StartPoint.X - EndPoint.X),
-                        Math.Abs(StartPoint.Y - EndPoint.Y));
-                    e.Graphics.DrawEllipse(dashed_pen, rect);
-                }
-            }
-            this.Text = Ellipses.Count.ToString();
-        }
-
         // Start selecting an ellipse.
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -112,7 +85,10 @@ namespace vcs_PaintB
         // Continue drawing the new ellipse.
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!DrawingNew) return;
+            if (!DrawingNew)
+            {
+                return;
+            }
             EndPoint = e.Location;
             pictureBox1.Refresh();
         }
@@ -120,13 +96,15 @@ namespace vcs_PaintB
         // Finish drawing the new ellipse.
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (!DrawingNew) return;
+            if (!DrawingNew)
+            {
+                return;
+            }
             DrawingNew = false;
 
             // If the start and end points are different,
             // save the new ellipse.
-            if (StartPoint.X != EndPoint.X &&
-                StartPoint.Y != EndPoint.Y)
+            if (StartPoint.X != EndPoint.X && StartPoint.Y != EndPoint.Y)
             {
                 Rectangle rect = new Rectangle(
                     Math.Min(StartPoint.X, EndPoint.X),
@@ -135,8 +113,42 @@ namespace vcs_PaintB
                     Math.Abs(StartPoint.Y - EndPoint.Y));
                 Ellipses.Add(rect);
             }
-
             pictureBox1.Refresh();
+        }
+
+        // Draw the current ellipses.
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(this.BackColor);
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            //之前畫的
+            // Draw the existing ellipses.
+            foreach (Rectangle rect in Ellipses)
+            {
+                //e.Graphics.FillEllipse(Brushes.LightBlue, rect);
+                e.Graphics.DrawEllipse(Pens.Black, rect);
+                //e.Graphics.DrawRectangle(Pens.Black, rect);
+            }
+
+            // If we are creating a new ellipse, draw it.
+            if (DrawingNew)//新畫的
+            {
+                using (Pen dashed_pen = new Pen(Color.Green, 0))
+                {
+                    dashed_pen.DashStyle = DashStyle.Custom;
+                    dashed_pen.DashPattern = new float[] { 5, 5 };
+                    Rectangle rect = new Rectangle(
+                        Math.Min(StartPoint.X, EndPoint.X),
+                        Math.Min(StartPoint.Y, EndPoint.Y),
+                        Math.Abs(StartPoint.X - EndPoint.X),
+                        Math.Abs(StartPoint.Y - EndPoint.Y));
+                    e.Graphics.DrawEllipse(dashed_pen, rect);
+                    e.Graphics.DrawRectangle(dashed_pen, rect);
+                }
+            }
+            this.Text = Ellipses.Count.ToString();
         }
     }
 }
+

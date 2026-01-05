@@ -62,6 +62,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.bt_bmw = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -399,13 +400,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bt_bmw);
             this.groupBox1.Controls.Add(this.button1a);
             this.groupBox1.Controls.Add(this.button1b);
             this.groupBox1.Controls.Add(this.bt_star);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Location = new System.Drawing.Point(10, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(399, 213);
+            this.groupBox1.Size = new System.Drawing.Size(540, 200);
             this.groupBox1.TabIndex = 171;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "不規則形狀Button";
@@ -453,6 +455,15 @@
             this.button6.Size = new System.Drawing.Size(100, 64);
             this.button6.TabIndex = 175;
             this.button6.UseVisualStyleBackColor = true;
+            // 
+            // bt_bmw
+            // 
+            this.bt_bmw.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_bmw.Location = new System.Drawing.Point(392, 19);
+            this.bt_bmw.Name = "bt_bmw";
+            this.bt_bmw.Size = new System.Drawing.Size(128, 128);
+            this.bt_bmw.TabIndex = 176;
+            this.bt_bmw.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -534,6 +545,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button bt_bmw;
     }
 }
 

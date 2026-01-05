@@ -669,9 +669,8 @@ namespace vcs_Draw_Bitmap
             h = 150;
             RectangleF rect = new RectangleF(x_st, y_st, w, h);
 
-            PixelFormat format = bitmap1.PixelFormat;
             //Bitmap cloneBitmap = bitmap1.Clone(rect, PixelFormat.DontCare);//PixelFormat.Format32bppArgb
-            Bitmap cloneBitmap = bmp.Clone(rect, format);//PixelFormat.Format32bppArgb
+            Bitmap cloneBitmap = bmp.Clone(rect, bitmap1.PixelFormat);//PixelFormat.Format32bppArgb
 
             //Bitmap bitmap2 = new Bitmap(W, H);
             //Graphics g = Graphics.FromImage(bitmap2);

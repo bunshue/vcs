@@ -237,7 +237,7 @@
             this.button13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button13.Location = new System.Drawing.Point(223, 240);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(70, 70);
+            this.button13.Size = new System.Drawing.Size(200, 60);
             this.button13.TabIndex = 138;
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);

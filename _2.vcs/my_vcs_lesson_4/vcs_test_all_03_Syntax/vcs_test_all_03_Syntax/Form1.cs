@@ -388,6 +388,27 @@ namespace vcs_test_all_03_Syntax
             richTextBox1.Text += aaa.ToString() + " / " + bbb.ToString() + " = " + (aaa / bbb).ToString() + "\n";
 
             bbb--;
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //检查循环变量是否在规定范围内
+            for (int i = 0; i < 10; i++)
+            {
+                Debug.Assert(i >= 0 && i < 5, "i的取值范围是[0,5)");
+                // 你的代码...
+            }
+            //如果循环变量i的值超出了规定范围，则会抛出一个AssertionFailedException异常。
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            string name = null;
+
+            // 你的代码...
+
+            Debug.Assert(name != null, "返回值name不可为空。");
+
+            Debug.Assert(!string.IsNullOrEmpty(name), "参数name不可为空。");
+
         }
 
         private void button13_Click(object sender, EventArgs e)

@@ -11,9 +11,11 @@ using System.Drawing.Text;
 using System.Drawing.Drawing2D;
 
 /*
-C#利用GDI+繪制旋轉文字等效果，
-
-C#中利用GDI+繪制旋轉文本的文字，網上有很多資料，基本都使用矩陣旋轉的方式實現。但基本都只提及按點旋轉，若要實現在矩形范圍內旋轉文本，資料較少。經過琢磨，可以將矩形內旋轉轉化為按點旋轉，不過需要經過不少的計算過程。利用下面的類可以實現該功能。
+C#利用GDI+繪制旋轉文字等效果
+C#中利用GDI+繪制旋轉文本的文字，網上有很多資料，基本都使用矩陣旋轉的方式實現。
+但基本都只提及按點旋轉，若要實現在矩形范圍內旋轉文本，資料較少。
+經過琢磨，可以將矩形內旋轉轉化為按點旋轉，不過需要經過不少的計算過程。
+利用下面的類可以實現該功能。
 */
 
 namespace vcs_Draw6_String2
@@ -27,13 +29,18 @@ namespace vcs_Draw6_String2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            label1.Location = new Point(10, 10);
+            pictureBox1.Size = new Size(988, 470);
+            pictureBox1.Location = new Point(10, 30);
+            label2.Location = new Point(10, 510);
+            pictureBox2.Size = new Size(988, 100);
+            pictureBox2.Location = new Point(10, 540);
+
             pictureBox2.Resize += new EventHandler(pictureBox2_Resize);
             pictureBox2.Paint += new PaintEventHandler(pictureBox2_Paint);
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Invalidate();
+            this.Size = new Size(1167, 693);
+            this.Text = "vcs_Draw6_String2";
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -277,11 +284,6 @@ namespace vcs_Draw6_String2
         // The text to display.
         private const string MessageText = "拉 動 表 單 看 文 字 對 齊 效 果"; //以空白為分界
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         // Draw justified text on the PictureBox.
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
@@ -347,9 +349,6 @@ namespace vcs_Draw6_String2
         {
             pictureBox2.Refresh();
         }
-
         //文字對齊效果 SP
-
     }
 }
-
