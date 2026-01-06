@@ -49,17 +49,9 @@
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.bt_clear = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
-            this.bt1 = new System.Windows.Forms.Button();
-            this.bt2 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.bt_dtp_get = new System.Windows.Forms.Button();
-            this.bt_dtp_set = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.bt_special_05 = new System.Windows.Forms.Button();
             this.bt_special_04 = new System.Windows.Forms.Button();
@@ -67,8 +59,6 @@
             this.bt_special_02 = new System.Windows.Forms.Button();
             this.bt_special_01 = new System.Windows.Forms.Button();
             this.bt_special_00 = new System.Windows.Forms.Button();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.lb_time_interval = new System.Windows.Forms.Label();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.lb_time = new System.Windows.Forms.Label();
             this.timer_countdown = new System.Windows.Forms.Timer(this.components);
@@ -78,9 +68,7 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -298,25 +286,6 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(10, 69);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(150, 30);
-            this.dateTimePicker1.TabIndex = 37;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox2.Location = new System.Drawing.Point(10, 24);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(150, 36);
-            this.textBox2.TabIndex = 49;
-            this.textBox2.Text = "10";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -339,28 +308,6 @@
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
-            // bt1
-            // 
-            this.bt1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt1.Location = new System.Drawing.Point(166, 25);
-            this.bt1.Name = "bt1";
-            this.bt1.Size = new System.Drawing.Size(55, 30);
-            this.bt1.TabIndex = 70;
-            this.bt1.Text = "倒數";
-            this.bt1.UseVisualStyleBackColor = true;
-            this.bt1.Click += new System.EventHandler(this.bt1_Click);
-            // 
-            // bt2
-            // 
-            this.bt2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt2.Location = new System.Drawing.Point(166, 74);
-            this.bt2.Name = "bt2";
-            this.bt2.Size = new System.Drawing.Size(55, 30);
-            this.bt2.TabIndex = 71;
-            this.bt2.Text = "恢復";
-            this.bt2.UseVisualStyleBackColor = true;
-            this.bt2.Click += new System.EventHandler(this.bt2_Click);
-            // 
             // comboBox1
             // 
             this.comboBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -369,47 +316,6 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(200, 29);
             this.comboBox1.TabIndex = 74;
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(10, 104);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(147, 22);
-            this.dateTimePicker2.TabIndex = 83;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.bt_dtp_get);
-            this.groupBox5.Controls.Add(this.bt_dtp_set);
-            this.groupBox5.Controls.Add(this.dateTimePicker2);
-            this.groupBox5.Location = new System.Drawing.Point(665, 119);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(160, 140);
-            this.groupBox5.TabIndex = 84;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "DateTimePicker";
-            // 
-            // bt_dtp_get
-            // 
-            this.bt_dtp_get.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_dtp_get.Location = new System.Drawing.Point(10, 63);
-            this.bt_dtp_get.Name = "bt_dtp_get";
-            this.bt_dtp_get.Size = new System.Drawing.Size(80, 35);
-            this.bt_dtp_get.TabIndex = 86;
-            this.bt_dtp_get.Text = "取得時間";
-            this.bt_dtp_get.UseVisualStyleBackColor = true;
-            this.bt_dtp_get.Click += new System.EventHandler(this.bt_dtp_get_Click);
-            // 
-            // bt_dtp_set
-            // 
-            this.bt_dtp_set.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_dtp_set.Location = new System.Drawing.Point(10, 24);
-            this.bt_dtp_set.Name = "bt_dtp_set";
-            this.bt_dtp_set.Size = new System.Drawing.Size(80, 35);
-            this.bt_dtp_set.TabIndex = 85;
-            this.bt_dtp_set.Text = "設定範圍";
-            this.bt_dtp_set.UseVisualStyleBackColor = true;
-            this.bt_dtp_set.Click += new System.EventHandler(this.bt_dtp_set_Click);
             // 
             // groupBox6
             // 
@@ -491,30 +397,6 @@
             this.bt_special_00.Text = "民國";
             this.bt_special_00.UseVisualStyleBackColor = true;
             this.bt_special_00.Click += new System.EventHandler(this.bt_special_00_Click);
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.lb_time_interval);
-            this.groupBox8.Controls.Add(this.textBox2);
-            this.groupBox8.Controls.Add(this.dateTimePicker1);
-            this.groupBox8.Controls.Add(this.bt1);
-            this.groupBox8.Controls.Add(this.bt2);
-            this.groupBox8.Location = new System.Drawing.Point(428, 118);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(220, 140);
-            this.groupBox8.TabIndex = 87;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "DateTimePicker";
-            // 
-            // lb_time_interval
-            // 
-            this.lb_time_interval.AutoSize = true;
-            this.lb_time_interval.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_time_interval.Location = new System.Drawing.Point(9, 106);
-            this.lb_time_interval.Name = "lb_time_interval";
-            this.lb_time_interval.Size = new System.Drawing.Size(139, 21);
-            this.lb_time_interval.TabIndex = 113;
-            this.lb_time_interval.Text = "lb_time_interval";
             // 
             // groupBox9
             // 
@@ -612,9 +494,7 @@
             this.ClientSize = new System.Drawing.Size(875, 681);
             this.Controls.Add(this.groupBox13);
             this.Controls.Add(this.groupBox9);
-            this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox6);
-            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.bt_clear);
@@ -640,10 +520,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
             this.groupBox13.ResumeLayout(false);
@@ -675,17 +552,9 @@
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button0;
-        private System.Windows.Forms.Button bt1;
-        private System.Windows.Forms.Button bt2;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button bt_dtp_set;
-        private System.Windows.Forms.Button bt_dtp_get;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button bt_special_04;
         private System.Windows.Forms.Button bt_special_03;
@@ -693,7 +562,6 @@
         private System.Windows.Forms.Button bt_special_01;
         private System.Windows.Forms.Button bt_special_00;
         private System.Windows.Forms.Button bt_special_05;
-        private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.Timer timer_countdown;
         private System.Windows.Forms.GroupBox groupBox13;
@@ -703,7 +571,6 @@
         private System.Windows.Forms.Button btn_moon_ok;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label lb_time;
-        private System.Windows.Forms.Label lb_time_interval;
     }
 }
 

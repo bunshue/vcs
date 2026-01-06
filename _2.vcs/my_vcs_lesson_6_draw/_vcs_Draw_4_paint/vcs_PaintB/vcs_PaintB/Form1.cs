@@ -29,6 +29,11 @@ namespace vcs_PaintB
         {
             show_item_location();
 
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);
+            pictureBox1.Image = bitmap1;
+
             this.DoubleBuffered = true;
 
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
@@ -73,6 +78,11 @@ namespace vcs_PaintB
             Ellipses = new List<Rectangle>();
             this.Refresh();
         }
+
+        private void bt_open_Click(object sender, EventArgs e)
+        {
+
+        } 
 
         // Start selecting an ellipse.
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -119,7 +129,7 @@ namespace vcs_PaintB
         // Draw the current ellipses.
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.Clear(this.BackColor);
+            //e.Graphics.Clear(this.BackColor);
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             //之前畫的
@@ -127,14 +137,14 @@ namespace vcs_PaintB
             foreach (Rectangle rect in Ellipses)
             {
                 //e.Graphics.FillEllipse(Brushes.LightBlue, rect);
-                e.Graphics.DrawEllipse(Pens.Black, rect);
+                e.Graphics.DrawEllipse(Pens.Red, rect);
                 //e.Graphics.DrawRectangle(Pens.Black, rect);
             }
 
             // If we are creating a new ellipse, draw it.
             if (DrawingNew)//新畫的
             {
-                using (Pen dashed_pen = new Pen(Color.Green, 0))
+                using (Pen dashed_pen = new Pen(Color.Red, 3))
                 {
                     dashed_pen.DashStyle = DashStyle.Custom;
                     dashed_pen.DashPattern = new float[] { 5, 5 };
@@ -151,4 +161,3 @@ namespace vcs_PaintB
         }
     }
 }
-

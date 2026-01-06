@@ -46,8 +46,6 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\n";
             richTextBox1.Text += DateTime.Now.ToString("yyyy" + '-' + "MM" + '-' + "dd" + " HH" + ':' + "mm" + ':' + "ss") + "\n";
 
-            lb_time_interval.Text = "------------";
-
             timer1.Interval = 1000;
             timer1.Enabled = true;
 
@@ -124,26 +122,15 @@ namespace vcs_test_all_01_DateTime
             groupBox6.Location = new Point(x_st + dx * 2, y_st + dy * 0);//特殊曆法
             groupBox13.Location = new Point(x_st + dx * 2, y_st + dy * 2 - 30);//月相
 
-            groupBox5.Location = new Point(x_st + dx * 2, y_st + dy * 5 + 10);//DateTimePicker
-            groupBox8.Location = new Point(x_st + dx * 2 + 200, y_st + dy * 5 + 10);//DateTimePicker
             groupBox9.Location = new Point(x_st + dx * 2, y_st + dy * 7 + 50);//Timer顯示時間
 
             groupBox6.Size = new Size(420, 110);
-            groupBox8.Size = new Size(250, 160);
-            groupBox5.Size = new Size(180, 160);
             groupBox9.Size = new Size(200, 160);
             groupBox13.Size = new Size(390, 230);
 
             richTextBox1.Size = new Size(340, 700);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
 
-            textBox2.Size = new Size(160, 40);
-            dateTimePicker1.Size = new Size(160, 40);
-            textBox2.Location = new Point(x_st + dx * 0 - 5, y_st + dy * 0 + 10);
-            bt1.Location = new Point(x_st + 170, y_st + dy * 0 + 10);
-            dateTimePicker1.Location = new Point(x_st + dx * 0 - 5, y_st + dy * 0 + 60);
-            lb_time_interval.Location = new Point(x_st + dx * 0 - 5, y_st + dy * 0 + 60 + 40);
-            bt2.Location = new Point(x_st + 170, y_st + dy * 0 + 60);
 
             lb_time.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 10);
 
@@ -1635,7 +1622,8 @@ namespace vcs_test_all_01_DateTime
 
             CultureInfo cui = new CultureInfo("zh-TW", true);
             cui.DateTimeFormat.Calendar = new TaiwanCalendar();
-            richTextBox1.Text += dateTimePicker1.Value.ToString("yy/M/d", cui) + "\n";
+            //改用datetime
+            //richTextBox1.Text += dateTimePicker1.Value.ToString("yy/M/d", cui) + "\n";
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
@@ -1730,52 +1718,7 @@ namespace vcs_test_all_01_DateTime
             mesg += utc_offset.DateTime.ToLongTimeString() + "\n";
             mesg += utc_offset.DateTime.ToShortDateString() + "\n";
 
-            if (flag_timer_counter_down_enable == 1)
-            {
-                dt = DateTime.Now;
-                TimeSpan interval = dt - dt_timer_st;
-
-                //richTextBox1.Text += "與現在相距：" + ts2.ToString() + "\n";
-
-                //TimeSpan interval = dt - dt.Date;
-                //richTextBox1.Text += dt.ToString() + "\n";
-                //richTextBox1.Text += dt.Date.ToString() + "\n";
-                //richTextBox1.Text += "xxx " + interval.TotalSeconds.ToString();// +"\n";
-                lb_time_interval.Text = "經過 : " + interval.TotalSeconds.ToString();
-
-                if (interval.TotalSeconds > wait_seconds)
-                {
-                    this.TopMost = true;
-                    lb_time_interval.Text += "yyyy";
-                    richTextBox1.Text += "Q ";
-                }
-            }
-
-
             lb_time.Text = mesg;
-
-
-
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "The selected value is " + dateTimePicker1.Value + "\n";
-            richTextBox1.Text += "The selected value is " + dateTimePicker1.Text + "\n";
-            richTextBox1.Text += "The day of the week is " + dateTimePicker1.Value.DayOfWeek.ToString() + "\n";
-            richTextBox1.Text += "The day of the year is " + dateTimePicker1.Value.DayOfYear.ToString() + "\n";
-            richTextBox1.Text += "Millisecond is: " + dateTimePicker1.Value.Millisecond.ToString() + "\n";
-
-            richTextBox1.Text += "\n";
-            richTextBox1.Text += dateTimePicker1.Value.Year.ToString();
-            richTextBox1.Text += "/" + dateTimePicker1.Value.Month.ToString();
-            richTextBox1.Text += "/" + dateTimePicker1.Value.Day.ToString();
-
-            DateTime dt = DateTime.Now;
-            richTextBox1.Text += " " + dt.Hour;
-            richTextBox1.Text += ":" + dt.Minute;
-            richTextBox1.Text += ":" + dt.Second;
-            richTextBox1.Text += "\n";
         }
 
         void get_system_time_zone()
@@ -1967,33 +1910,6 @@ namespace vcs_test_all_01_DateTime
             } return weekstr;
         }
 
-        private void bt1_Click(object sender, EventArgs e)
-        {
-            this.TopMost = false;
-            if (flag_timer_counter_down_enable == 1)
-            {
-                flag_timer_counter_down_enable = 0;
-                bt1.Text = "倒數";
-            }
-            else
-            {
-                flag_timer_counter_down_enable = 1;
-                bt1.Text = "停止";
-
-                dt_timer_st = DateTime.Now;
-                wait_seconds = int.Parse(textBox2.Text) * 60;
-                richTextBox1.Text += "等待時間： " + wait_seconds.ToString() + "\n";
-            }
-        }
-
-        private void bt2_Click(object sender, EventArgs e)
-        {
-            //dateTimePicker1.Value = new DateTime(2006, 3, 11);                //特定日期
-            //dateTimePicker1.Value = Convert.ToDateTime("2006/3/11 9:15:30");  //特定日期與時間
-            //this.dateTimePicker1.Value = DateTime.Today;                      //今天日期
-            this.dateTimePicker1.Value = DateTime.Now;                          //現在時刻
-        }
-
         // Select an item containing the target string.
         private object FindItemContaining(IEnumerable items, string target)
         {
@@ -2005,23 +1921,6 @@ namespace vcs_test_all_01_DateTime
                 }
             }
             return null;
-        }
-
-        private void bt_dtp_set_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "設定DateTimePicker的顯示範圍\n";
-            richTextBox1.Text += "顯示現在到未來12天\n";
-            dateTimePicker2.MinDate = DateTime.Today;//當天時間
-            dateTimePicker2.MaxDate = DateTime.Today.AddDays(12);
-        }
-
-        private void bt_dtp_get_Click(object sender, EventArgs e)
-        {
-            string date1 = dateTimePicker2.Value.Month.ToString() + "/" + dateTimePicker2.Value.Day.ToString();
-            richTextBox1.Text += "你選取的日期是 : " + date1.ToString() + "\n";
-
-            string date2 = DateTime.Today.AddDays(12).Month.ToString() + "/" + DateTime.Today.AddDays(12).Day.ToString();
-            richTextBox1.Text += "12天後的日期是 : " + date2.ToString() + "\n";
         }
 
         //本年第幾周

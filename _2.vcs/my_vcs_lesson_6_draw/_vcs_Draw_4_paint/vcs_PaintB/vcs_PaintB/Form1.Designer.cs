@@ -32,6 +32,7 @@
             this.bt_new = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.bt_open = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,7 +47,7 @@
             // 
             // bt_new
             // 
-            this.bt_new.Location = new System.Drawing.Point(12, 12);
+            this.bt_new.Location = new System.Drawing.Point(12, 10);
             this.bt_new.Name = "bt_new";
             this.bt_new.Size = new System.Drawing.Size(75, 36);
             this.bt_new.TabIndex = 5;
@@ -73,11 +74,22 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // bt_open
+            // 
+            this.bt_open.Location = new System.Drawing.Point(93, 10);
+            this.bt_open.Name = "bt_open";
+            this.bt_open.Size = new System.Drawing.Size(75, 36);
+            this.bt_open.TabIndex = 109;
+            this.bt_open.Text = "Open";
+            this.bt_open.UseVisualStyleBackColor = true;
+            this.bt_open.Click += new System.EventHandler(this.bt_open_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(417, 359);
+            this.Controls.Add(this.bt_open);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBox1);
@@ -96,6 +108,7 @@
         private System.Windows.Forms.Button bt_new;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button bt_open;
     }
 }
 
