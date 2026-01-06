@@ -18,9 +18,10 @@ namespace vcs_TextBox
             InitializeComponent();
         }
 
-        // Prepare the TextBox.
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             textBox1.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
             textBox_use_scrollbar.ScrollBars = ScrollBars.Both;
 
@@ -62,6 +63,31 @@ namespace vcs_TextBox
             label11.Text = "TextBox只允許僅允許\n數字, Enter, Backspace, +-*/()";
         }
 
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 5;
+            dy = 60 + 5;
+
+            richTextBox2.Size = new Size(300, 600);
+            richTextBox2.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1380, 780);
+            this.Text = "vcs_TextBox";
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Clear();
+        }
 
         /// <summary>
         /// 限制textBox中的字符輸入, 用KeyPress事件
@@ -75,7 +101,7 @@ namespace vcs_TextBox
             if (!(Char.IsNumber(e.KeyChar)) && e.KeyChar != (char)13 && e.KeyChar != (char)8 && e.KeyChar != (char)40 && e.KeyChar != (char)41 && e.KeyChar != (char)42 && e.KeyChar != (char)43 && e.KeyChar != (char)45 && e.KeyChar != (char)47)
             {
                 e.Handled = true;
-            } 
+            }
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -216,8 +242,6 @@ namespace vcs_TextBox
             e.Effect = DragDropEffects.Copy;//设置复制操作
         }
         //拖曳文字內容到其他TextBox SP
-
-
 
     }
 }

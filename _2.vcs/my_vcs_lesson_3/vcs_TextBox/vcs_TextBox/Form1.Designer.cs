@@ -55,10 +55,12 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.textBox_use_scrollbar = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.bt_clear = new System.Windows.Forms.Button();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -349,6 +351,26 @@
             this.groupBox5.TabIndex = 21;
             this.groupBox5.TabStop = false;
             // 
+            // textBox8
+            // 
+            this.textBox8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox8.Location = new System.Drawing.Point(90, 116);
+            this.textBox8.MaxLength = 0;
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(133, 30);
+            this.textBox8.TabIndex = 19;
+            this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label11.Location = new System.Drawing.Point(21, 57);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(414, 19);
+            this.label11.TabIndex = 18;
+            this.label11.Text = "TextBox只允許僅允許 數字, Enter, Backspace, +-*/()";
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -370,31 +392,32 @@
             this.textBox_use_scrollbar.Text = "TextBox加ScrollBar 1 TextBox加ScrollBar 2 TextBox加ScrollBar 3 TextBox加ScrollBar 4 T" +
                 "extBox加ScrollBar 5 TextBox加ScrollBar 6 TextBox加ScrollBar 7 TextBox加ScrollBar 8";
             // 
-            // label11
+            // bt_clear
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label11.Location = new System.Drawing.Point(21, 57);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(414, 19);
-            this.label11.TabIndex = 18;
-            this.label11.Text = "TextBox只允許僅允許 數字, Enter, Backspace, +-*/()";
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(1073, 64);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(60, 32);
+            this.bt_clear.TabIndex = 37;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
-            // textBox8
+            // richTextBox2
             // 
-            this.textBox8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox8.Location = new System.Drawing.Point(90, 116);
-            this.textBox8.MaxLength = 0;
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(133, 30);
-            this.textBox8.TabIndex = 19;
-            this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.richTextBox2.Location = new System.Drawing.Point(1048, 12);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(100, 100);
+            this.richTextBox2.TabIndex = 36;
+            this.richTextBox2.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1044, 699);
+            this.ClientSize = new System.Drawing.Size(1308, 708);
+            this.Controls.Add(this.bt_clear);
+            this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.textBox_use_scrollbar);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.groupBox5);
@@ -460,6 +483,8 @@
         private System.Windows.Forms.TextBox textBox_use_scrollbar;
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.RichTextBox richTextBox2;
     }
 }
 

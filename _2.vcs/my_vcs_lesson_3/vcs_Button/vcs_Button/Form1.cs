@@ -35,7 +35,6 @@ namespace vcs_Button
             }
         }
 
-
         private void AdjustOnOffButton()
         {
             switch (State)
@@ -65,6 +64,10 @@ namespace vcs_Button
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            this.AllowDrop = true;//for 程序執行時拖曳組件
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //加選
             //this.button1a.UseVisualStyleBackColor = true;
@@ -144,13 +147,12 @@ namespace vcs_Button
                 button1b.Location.Y,
                 200, 200);	//SetBounds : 設定控件的位置與大小
 
-
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //繪製圓角按鈕 BMW
             SetButtonRegion();
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //文字化按鈕 button4 ST
             GraphicsPath gpstirng = new GraphicsPath();
@@ -224,7 +226,18 @@ namespace vcs_Button
             button4.Location = new Point(260, 150);//文字化按鈕
 
             //button
-            x_st = 720;
+            x_st = 670;
+            y_st = 50;
+            dx = 108 + 5;
+            dy = 108 + 5;
+            lb_puzzle.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 30);
+            bt_puzzle0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_puzzle1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_puzzle2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_puzzle3.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+
+            //button
+            x_st = 720 + 200;
             y_st = 10;
             dx = 110 + 10;
             dy = 120 + 10;
@@ -610,5 +623,91 @@ namespace vcs_Button
                 richTextBox1.Text += "XXXXXXXXXXXXXXXXXXX\n";
             }
         }
+
+        //------------------------------------------------------------  // 60個
+
+        //程序執行時拖曳組件 ST
+        //調用移動方法
+        private void bt_puzzle0_MouseDown(object sender, MouseEventArgs e)
+        {
+            DoDragDrop(bt_puzzle0, DragDropEffects.Move);
+        }
+
+        private void bt_puzzle1_MouseDown(object sender, MouseEventArgs e)
+        {
+            DoDragDrop(bt_puzzle1, DragDropEffects.Move);
+        }
+
+        private void bt_puzzle2_MouseDown(object sender, MouseEventArgs e)
+        {
+            DoDragDrop(bt_puzzle2, DragDropEffects.Move);
+        }
+
+        private void bt_puzzle3_MouseDown(object sender, MouseEventArgs e)
+        {
+            DoDragDrop(bt_puzzle3, DragDropEffects.Move);
+        }
+
+        private void Form1_DragDrop(object sender, DragEventArgs e)
+        {
+            //判斷接對哪個按鈕操作//移動後的坐標
+            object data = e.Data.GetData(typeof(Button));
+            if (data == bt_puzzle0)
+            {
+                bt_puzzle0.Top = this.PointToClient(new Point(e.X, e.Y)).Y;
+                bt_puzzle0.Left = this.PointToClient(new Point(e.X, e.Y)).X;
+            }
+            if (data == bt_puzzle1)
+            {
+                bt_puzzle1.Top = this.PointToClient(new Point(e.X, e.Y)).Y;
+                bt_puzzle1.Left = this.PointToClient(new Point(e.X, e.Y)).X;
+            }
+            if (data == bt_puzzle2)
+            {
+                bt_puzzle2.Top = this.PointToClient(new Point(e.X, e.Y)).Y;
+                bt_puzzle2.Left = this.PointToClient(new Point(e.X, e.Y)).X;
+            }
+            if (data == bt_puzzle3)
+            {
+                bt_puzzle3.Top = this.PointToClient(new Point(e.X, e.Y)).Y;
+                bt_puzzle3.Left = this.PointToClient(new Point(e.X, e.Y)).X;
+            }
+        }
+
+        //設置以何種方式移動
+        private void Form1_DragEnter(object sender, DragEventArgs e)
+        {
+            object data = e.Data.GetData(typeof(Button));
+            if (data != null)
+            {
+                e.Effect = DragDropEffects.Move;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+        //程序執行時拖曳組件 SP
+
+        //------------------------------------------------------------  // 60個
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

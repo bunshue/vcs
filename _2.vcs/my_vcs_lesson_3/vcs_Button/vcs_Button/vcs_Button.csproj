@@ -77,6 +77,18 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="img\1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\2.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\3.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\4.bmp" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

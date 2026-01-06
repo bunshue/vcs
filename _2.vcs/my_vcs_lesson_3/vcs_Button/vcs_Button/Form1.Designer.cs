@@ -58,11 +58,16 @@
             this.button18 = new System.Windows.Forms.Button();
             this.button1b = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_bmw = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.bt_bmw = new System.Windows.Forms.Button();
+            this.bt_puzzle3 = new System.Windows.Forms.Button();
+            this.bt_puzzle2 = new System.Windows.Forms.Button();
+            this.bt_puzzle1 = new System.Windows.Forms.Button();
+            this.bt_puzzle0 = new System.Windows.Forms.Button();
+            this.lb_puzzle = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -99,7 +104,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1094, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(1191, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 4;
@@ -190,7 +195,7 @@
             this.btn_word_34.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_word_34.Font = new System.Drawing.Font("微軟正黑體", 63.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btn_word_34.ForeColor = System.Drawing.Color.Brown;
-            this.btn_word_34.Location = new System.Drawing.Point(1211, 411);
+            this.btn_word_34.Location = new System.Drawing.Point(1308, 411);
             this.btn_word_34.Name = "btn_word_34";
             this.btn_word_34.Size = new System.Drawing.Size(110, 120);
             this.btn_word_34.TabIndex = 168;
@@ -202,7 +207,7 @@
             this.btn_word_30.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_word_30.Font = new System.Drawing.Font("微軟正黑體", 63.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btn_word_30.ForeColor = System.Drawing.Color.Brown;
-            this.btn_word_30.Location = new System.Drawing.Point(749, 411);
+            this.btn_word_30.Location = new System.Drawing.Point(846, 411);
             this.btn_word_30.Name = "btn_word_30";
             this.btn_word_30.Size = new System.Drawing.Size(110, 120);
             this.btn_word_30.TabIndex = 167;
@@ -214,7 +219,7 @@
             this.btn_word_31.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_word_31.Font = new System.Drawing.Font("微軟正黑體", 63.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btn_word_31.ForeColor = System.Drawing.Color.Brown;
-            this.btn_word_31.Location = new System.Drawing.Point(866, 411);
+            this.btn_word_31.Location = new System.Drawing.Point(963, 411);
             this.btn_word_31.Name = "btn_word_31";
             this.btn_word_31.Size = new System.Drawing.Size(110, 120);
             this.btn_word_31.TabIndex = 166;
@@ -226,7 +231,7 @@
             this.btn_word_32.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_word_32.Font = new System.Drawing.Font("微軟正黑體", 63.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btn_word_32.ForeColor = System.Drawing.Color.Brown;
-            this.btn_word_32.Location = new System.Drawing.Point(978, 411);
+            this.btn_word_32.Location = new System.Drawing.Point(1075, 411);
             this.btn_word_32.Name = "btn_word_32";
             this.btn_word_32.Size = new System.Drawing.Size(110, 120);
             this.btn_word_32.TabIndex = 165;
@@ -238,7 +243,7 @@
             this.btn_word_33.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_word_33.Font = new System.Drawing.Font("微軟正黑體", 63.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btn_word_33.ForeColor = System.Drawing.Color.Brown;
-            this.btn_word_33.Location = new System.Drawing.Point(1095, 411);
+            this.btn_word_33.Location = new System.Drawing.Point(1192, 411);
             this.btn_word_33.Name = "btn_word_33";
             this.btn_word_33.Size = new System.Drawing.Size(110, 120);
             this.btn_word_33.TabIndex = 164;
@@ -250,7 +255,7 @@
             this.btn_word_12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_word_12.Font = new System.Drawing.Font("微軟正黑體", 63.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btn_word_12.ForeColor = System.Drawing.Color.Brown;
-            this.btn_word_12.Location = new System.Drawing.Point(978, 148);
+            this.btn_word_12.Location = new System.Drawing.Point(1075, 148);
             this.btn_word_12.Name = "btn_word_12";
             this.btn_word_12.Size = new System.Drawing.Size(110, 120);
             this.btn_word_12.TabIndex = 162;
@@ -262,7 +267,7 @@
             this.btn_word_11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_word_11.Font = new System.Drawing.Font("微軟正黑體", 63.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btn_word_11.ForeColor = System.Drawing.Color.Brown;
-            this.btn_word_11.Location = new System.Drawing.Point(866, 148);
+            this.btn_word_11.Location = new System.Drawing.Point(963, 148);
             this.btn_word_11.Name = "btn_word_11";
             this.btn_word_11.Size = new System.Drawing.Size(110, 120);
             this.btn_word_11.TabIndex = 161;
@@ -274,7 +279,7 @@
             this.btn_word_10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_word_10.Font = new System.Drawing.Font("微軟正黑體", 63.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btn_word_10.ForeColor = System.Drawing.Color.Brown;
-            this.btn_word_10.Location = new System.Drawing.Point(749, 148);
+            this.btn_word_10.Location = new System.Drawing.Point(846, 148);
             this.btn_word_10.Name = "btn_word_10";
             this.btn_word_10.Size = new System.Drawing.Size(110, 120);
             this.btn_word_10.TabIndex = 160;
@@ -286,7 +291,7 @@
             this.btn_word_24.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_word_24.Font = new System.Drawing.Font("微軟正黑體", 63.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btn_word_24.ForeColor = System.Drawing.Color.Brown;
-            this.btn_word_24.Location = new System.Drawing.Point(1211, 285);
+            this.btn_word_24.Location = new System.Drawing.Point(1308, 285);
             this.btn_word_24.Name = "btn_word_24";
             this.btn_word_24.Size = new System.Drawing.Size(110, 120);
             this.btn_word_24.TabIndex = 159;
@@ -298,7 +303,7 @@
             this.btn_word_20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_word_20.Font = new System.Drawing.Font("微軟正黑體", 63.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btn_word_20.ForeColor = System.Drawing.Color.Brown;
-            this.btn_word_20.Location = new System.Drawing.Point(749, 285);
+            this.btn_word_20.Location = new System.Drawing.Point(846, 285);
             this.btn_word_20.Name = "btn_word_20";
             this.btn_word_20.Size = new System.Drawing.Size(110, 120);
             this.btn_word_20.TabIndex = 158;
@@ -310,7 +315,7 @@
             this.btn_word_21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_word_21.Font = new System.Drawing.Font("微軟正黑體", 63.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btn_word_21.ForeColor = System.Drawing.Color.Brown;
-            this.btn_word_21.Location = new System.Drawing.Point(866, 285);
+            this.btn_word_21.Location = new System.Drawing.Point(963, 285);
             this.btn_word_21.Name = "btn_word_21";
             this.btn_word_21.Size = new System.Drawing.Size(110, 120);
             this.btn_word_21.TabIndex = 157;
@@ -322,7 +327,7 @@
             this.btn_word_22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_word_22.Font = new System.Drawing.Font("微軟正黑體", 63.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btn_word_22.ForeColor = System.Drawing.Color.Brown;
-            this.btn_word_22.Location = new System.Drawing.Point(978, 285);
+            this.btn_word_22.Location = new System.Drawing.Point(1075, 285);
             this.btn_word_22.Name = "btn_word_22";
             this.btn_word_22.Size = new System.Drawing.Size(110, 120);
             this.btn_word_22.TabIndex = 156;
@@ -334,7 +339,7 @@
             this.btn_word_23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btn_word_23.Font = new System.Drawing.Font("微軟正黑體", 63.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btn_word_23.ForeColor = System.Drawing.Color.Brown;
-            this.btn_word_23.Location = new System.Drawing.Point(1095, 285);
+            this.btn_word_23.Location = new System.Drawing.Point(1192, 285);
             this.btn_word_23.Name = "btn_word_23";
             this.btn_word_23.Size = new System.Drawing.Size(110, 120);
             this.btn_word_23.TabIndex = 155;
@@ -345,7 +350,7 @@
             this.btn_word_02.BackColor = System.Drawing.Color.LightCoral;
             this.btn_word_02.Font = new System.Drawing.Font("微軟正黑體", 63.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btn_word_02.ForeColor = System.Drawing.Color.Brown;
-            this.btn_word_02.Location = new System.Drawing.Point(978, 12);
+            this.btn_word_02.Location = new System.Drawing.Point(1075, 12);
             this.btn_word_02.Name = "btn_word_02";
             this.btn_word_02.Size = new System.Drawing.Size(110, 120);
             this.btn_word_02.TabIndex = 153;
@@ -357,7 +362,7 @@
             this.btn_word_01.BackColor = System.Drawing.Color.LightCoral;
             this.btn_word_01.Font = new System.Drawing.Font("微軟正黑體", 63.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btn_word_01.ForeColor = System.Drawing.Color.Brown;
-            this.btn_word_01.Location = new System.Drawing.Point(866, 12);
+            this.btn_word_01.Location = new System.Drawing.Point(963, 12);
             this.btn_word_01.Name = "btn_word_01";
             this.btn_word_01.Size = new System.Drawing.Size(110, 120);
             this.btn_word_01.TabIndex = 152;
@@ -369,7 +374,7 @@
             this.btn_word_00.BackColor = System.Drawing.Color.LightCoral;
             this.btn_word_00.Font = new System.Drawing.Font("微軟正黑體", 63.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btn_word_00.ForeColor = System.Drawing.Color.Brown;
-            this.btn_word_00.Location = new System.Drawing.Point(749, 12);
+            this.btn_word_00.Location = new System.Drawing.Point(846, 12);
             this.btn_word_00.Name = "btn_word_00";
             this.btn_word_00.Size = new System.Drawing.Size(110, 120);
             this.btn_word_00.TabIndex = 151;
@@ -378,7 +383,7 @@
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(1211, 245);
+            this.button18.Location = new System.Drawing.Point(1308, 245);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(110, 34);
             this.button18.TabIndex = 169;
@@ -412,10 +417,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "不規則形狀Button";
             // 
+            // bt_bmw
+            // 
+            this.bt_bmw.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_bmw.Location = new System.Drawing.Point(392, 19);
+            this.bt_bmw.Name = "bt_bmw";
+            this.bt_bmw.Size = new System.Drawing.Size(128, 128);
+            this.bt_bmw.TabIndex = 176;
+            this.bt_bmw.UseVisualStyleBackColor = true;
+            // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1114, 52);
+            this.bt_clear.Location = new System.Drawing.Point(1211, 52);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(66, 40);
             this.bt_clear.TabIndex = 172;
@@ -456,21 +470,71 @@
             this.button6.TabIndex = 175;
             this.button6.UseVisualStyleBackColor = true;
             // 
-            // bt_bmw
+            // bt_puzzle3
             // 
-            this.bt_bmw.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_bmw.Location = new System.Drawing.Point(392, 19);
-            this.bt_bmw.Name = "bt_bmw";
-            this.bt_bmw.Size = new System.Drawing.Size(128, 128);
-            this.bt_bmw.TabIndex = 176;
-            this.bt_bmw.UseVisualStyleBackColor = true;
+            this.bt_puzzle3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_puzzle3.Image = global::vcs_Button.Properties.Resources._4;
+            this.bt_puzzle3.Location = new System.Drawing.Point(688, 166);
+            this.bt_puzzle3.Name = "bt_puzzle3";
+            this.bt_puzzle3.Size = new System.Drawing.Size(108, 108);
+            this.bt_puzzle3.TabIndex = 180;
+            this.bt_puzzle3.UseVisualStyleBackColor = true;
+            this.bt_puzzle3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.bt_puzzle3_MouseDown);
+            // 
+            // bt_puzzle2
+            // 
+            this.bt_puzzle2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_puzzle2.Image = global::vcs_Button.Properties.Resources._3;
+            this.bt_puzzle2.Location = new System.Drawing.Point(574, 166);
+            this.bt_puzzle2.Name = "bt_puzzle2";
+            this.bt_puzzle2.Size = new System.Drawing.Size(108, 108);
+            this.bt_puzzle2.TabIndex = 179;
+            this.bt_puzzle2.UseVisualStyleBackColor = true;
+            this.bt_puzzle2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.bt_puzzle2_MouseDown);
+            // 
+            // bt_puzzle1
+            // 
+            this.bt_puzzle1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_puzzle1.Image = global::vcs_Button.Properties.Resources._2;
+            this.bt_puzzle1.Location = new System.Drawing.Point(688, 52);
+            this.bt_puzzle1.Name = "bt_puzzle1";
+            this.bt_puzzle1.Size = new System.Drawing.Size(108, 108);
+            this.bt_puzzle1.TabIndex = 178;
+            this.bt_puzzle1.UseVisualStyleBackColor = true;
+            this.bt_puzzle1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.bt_puzzle1_MouseDown);
+            // 
+            // bt_puzzle0
+            // 
+            this.bt_puzzle0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_puzzle0.Image = global::vcs_Button.Properties.Resources._1;
+            this.bt_puzzle0.Location = new System.Drawing.Point(574, 52);
+            this.bt_puzzle0.Name = "bt_puzzle0";
+            this.bt_puzzle0.Size = new System.Drawing.Size(108, 108);
+            this.bt_puzzle0.TabIndex = 177;
+            this.bt_puzzle0.UseVisualStyleBackColor = true;
+            this.bt_puzzle0.MouseDown += new System.Windows.Forms.MouseEventHandler(this.bt_puzzle0_MouseDown);
+            // 
+            // lb_puzzle
+            // 
+            this.lb_puzzle.AutoSize = true;
+            this.lb_puzzle.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_puzzle.Location = new System.Drawing.Point(594, 29);
+            this.lb_puzzle.Name = "lb_puzzle";
+            this.lb_puzzle.Size = new System.Drawing.Size(180, 19);
+            this.lb_puzzle.TabIndex = 226;
+            this.lb_puzzle.Text = "程序執行時拖曳組件";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1329, 744);
+            this.ClientSize = new System.Drawing.Size(1529, 744);
+            this.Controls.Add(this.lb_puzzle);
+            this.Controls.Add(this.bt_puzzle3);
+            this.Controls.Add(this.bt_puzzle2);
+            this.Controls.Add(this.bt_puzzle1);
             this.Controls.Add(this.button6);
+            this.Controls.Add(this.bt_puzzle0);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.bt_clear);
@@ -503,9 +567,12 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -546,6 +613,11 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button bt_bmw;
+        private System.Windows.Forms.Button bt_puzzle3;
+        private System.Windows.Forms.Button bt_puzzle2;
+        private System.Windows.Forms.Button bt_puzzle1;
+        private System.Windows.Forms.Button bt_puzzle0;
+        private System.Windows.Forms.Label lb_puzzle;
     }
 }
 

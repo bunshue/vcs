@@ -1,7 +1,49 @@
 ﻿
 
+製作透明表單
+
+//Form1屬性的BackColor改成Color.White
+//Form1屬性的TransparencyKey改成Color.White
+
+設定表單背景色 與 透明色即可 表單上的影像 畫圖 符合條件的 都會變透明
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.BackColor = Color.White;
+            this.TransparencyKey = Color.White;
+            this.FormBorderStyle = FormBorderStyle.None;
+        }
+        
+        
+
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+StartPiont = (200, 100)
+CutArea = (0,0,300,300)
+
+&lt;pre class="c" name="code">
+private Image CutImage(Image SourceImage, Point StartPoint, Rectangle CutArea)
+{
+    Bitmap NewBitmap = new Bitmap(CutArea.Width, CutArea.Height);
+    Graphics tmpGraph = Graphics.FromImage(NewBitmap);
+    tmpGraph.DrawImage(SourceImage, CutArea, StartPoint.X, StartPoint.Y, CutArea.Width, CutArea.Height, GraphicsUnit.Pixel);
+    tmpGraph.Dispose();
+    return NewBitmap;
+}
+
+
+C# PictureBox图片框用法详解（附带实例）
+
+https://c.biancheng.net/view/ply3egf.html
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
 
             //same
             //Image img = Image.FromFile(filename);
@@ -168,6 +210,159 @@ button1.PerformClick();	把按鍵按一下
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+            pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
+            this.BackgroundImage = bitmap1;//顯示在 表單中
+
+
+
+
+        private void listView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            //listView接受鍵盤的Delete鍵
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (listView1.SelectedItems.Count > 0)
+                {
+                    listView1.SelectedItems[0].Remove();
+                }
+            }
+        }
+        
+        
+
+            string filename = @"../../net/net1.net";
+
+            using (TextReader reader = new StreamReader(filename))
+            {
+                string line = reader.ReadLine();
+                while (line != null)
+                {
+                    richTextBox1.Text += line + "\n";
+
+                    line = reader.ReadLine();
+                }
+            }
+
+
+
+
+
+            //Rectangle 的 Union
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+            Rectangle rec1 = new Rectangle(100, 10, 200, 200);
+            Rectangle rec2 = new Rectangle(150, 100, 200, 200);
+            Rectangle rec3 = new Rectangle(30, 150, 200, 200);
+            g.DrawRectangle(Pens.Red, rec1);
+            g.DrawRectangle(Pens.Green, rec2);
+            g.DrawRectangle(Pens.Blue, rec3);
+
+            Rectangle new_rect = Rectangle.Union(rec1, rec2);
+            new_rect = Rectangle.Union(new_rect, rec3);
+            g.DrawRectangle(Pens.Magenta, new_rect);
+
+
+
+
+                            string txt = link.Cost.ToString();
+                            SizeF txt_size = gr.MeasureString(txt, this.Font);
+                            gr.DrawString(txt, this.Font, Brushes.Black,
+                                x1 - txt_size.Width / 2,
+                                y1 - txt_size.Height / 2);
+
+                string txt = node.Id.ToString();
+                SizeF txt_size = gr.MeasureString(txt, this.Font);
+                gr.DrawString(txt, this.Font, text_brush,
+                    node.Location.X - txt_size.Width / 2,
+                    node.Location.Y - txt_size.Height / 2);
+
+
+
+
+
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "pictureBox1 ";
+
+            PictureBox pic = sender as PictureBox;
+            richTextBox1.Text += pic.Name + " ";
+            //MessageBox.Show(pic.Name);
+        }
+        
+
+        //重寫表單的OnPaint範例 直接寫在此即可
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            e.Graphics.DrawRectangle(Pens.Red, 5, 5, this.Width - 10, this.Height - 10);
+        }
+
+
+
+
+
+
+
+
+            groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 6 - 40); //listView
+            listView1.Location = new Point(5, 10);
+            listView1.Size = new Size(360, 120);
+            bt3.Location = new Point(370, 10);
+
+
+
+        void load_listview_data()
+        {
+            DateTime dt = DateTime.Now;
+
+            listView1.Items.Add(new ListViewItem(new String[] { "ToLongDateString", "D", dt.ToLongDateString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToLongTimeString", "T", dt.ToLongTimeString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToShortDateString", "d", dt.ToShortDateString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToShortTimeString", "t", dt.ToShortTimeString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToString", "G", dt.ToString() }));
+
+
+
+        }
+
+        private void bt3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "c = " + listView1.Items.Count.ToString() + "\n";
+            for (int i = 0; i < listView1.Items.Count; i++)
+            {
+                for (int j = 0; j < listView1.Items[i].SubItems.Count; j++)
+                {
+                    //richTextBox1.Text += "c2 = " + listView1.Items[i].SubItems.Count.ToString() + "\n";
+                    richTextBox1.Text += "i = " + i.ToString() + listView1.Items[i] + "\tj = " + j.ToString() + listView1.Items[i].SubItems[j] + "\n";
+                }
+            }
+        }
+
+
+
+
+
+textBox 的 KeyPress
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 13)
+            {
+                e.Handled = true;
+            }
+            else if (e.KeyChar == 13)
+            {
+                int textSize = int.Parse(textBox2.Text);
+                //ApplyTextSize(textSize);
+
+                e.Handled = true;
+                this.richTextBox1.Focus();
+            }
+        }
+
 
 
 
