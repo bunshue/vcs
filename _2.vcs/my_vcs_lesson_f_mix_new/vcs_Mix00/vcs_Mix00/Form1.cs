@@ -253,8 +253,8 @@ namespace vcs_Mix00
 
             //兩圖檔疊合
 
-            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_03.jpg";
-            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_01.jpg";
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\id_card_03.jpg";
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_MU\id_card_01.jpg";
 
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename1);	//Image.FromFile出來的是Image格式
             Bitmap bitmap2 = (Bitmap)Image.FromFile(filename2);	//Image.FromFile出來的是Image格式
@@ -455,10 +455,6 @@ namespace vcs_Mix00
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-
-            ((Button)sender).Text = "改 Button Text 為 AAAA";
-
 
         }
 

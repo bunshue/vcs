@@ -10,11 +10,11 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;   //for DllImport
 
 /*
-c# 移動窗體和控件
-
-在winform程序裡面，有時候我們需要移動沒有標題欄窗體或是窗體內的控件，用幾個事件如鼠標單擊，移動，等再加上坐標的計算可以完成這一功能，但是最近發現了一個API函數，可以非常簡單方便的完成這個功能。如下：
+移動窗體和控件
+在winform程序裡面，有時候我們需要移動沒有標題欄窗體或是窗體內的控件，
+用幾個事件如鼠標單擊，移動，等再加上坐標的計算可以完成這一功能，
+但是最近發現了一個API函數，可以非常簡單方便的完成這個功能。
 */
-
 
 namespace vcs_Form8_FormMove3
 {
@@ -25,6 +25,14 @@ namespace vcs_Form8_FormMove3
         [DllImportAttribute("user32.dll")]
         private extern static int SendMessage(IntPtr handle, int m, int p, int h);
 
+        //從pictureBox拖曳視窗 ST
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        int nOldWndLeft;
+        int nOldWndTop;
+        int nClickX;
+        int nClickY;
+        //從pictureBox拖曳視窗 SP
+
         public Form1()
         {
             InitializeComponent();
@@ -32,8 +40,37 @@ namespace vcs_Form8_FormMove3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            //從pictureBox拖曳視窗 ST
+            pictureBox1.Image = new Bitmap(filename);
+            pictureBox1.Size = new Size(pictureBox1.Image.Width, pictureBox1.Image.Height);
+            pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
+            pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
+            //從pictureBox拖曳視窗 SP
         }
+
+        //從pictureBox拖曳視窗 ST
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            //紀錄滑鼠點選時的視窗位置與滑鼠點選位置  
+            nOldWndLeft = this.Left;
+            nOldWndTop = this.Top;
+            nClickX = e.X;
+            nClickY = e.Y;
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (pictureBox1.Capture == true)        //如果滑鼠按著拖曳  
+            {
+                //'設定新的視窗位置  
+                this.Top = e.Y + nOldWndTop - nClickY;
+                this.Left = e.X + nOldWndLeft - nClickX;
+                //更新紀錄的視窗位置  
+                nOldWndLeft = this.Left;
+                nOldWndTop = this.Top;
+            }
+        }
+        //從pictureBox拖曳視窗 SP
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -76,15 +113,27 @@ namespace vcs_Form8_FormMove3
             //判斷點擊的是不是左鍵 
             if (e.Button == MouseButtons.Left)
             {
-
                 //重新繪制窗體X 
-
                 this.Left += e.X - startX;
 
                 //重新繪制窗體Y 
-
                 this.Top += e.Y - startY;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
         }
         //鼠標點擊按鈕拖動窗體 SP
     }

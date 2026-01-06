@@ -125,6 +125,11 @@ namespace vcs_test_all_03_Syntax
             richTextBox1.Clear();
         }
 
+        void show_button_text(object sender)
+        {
+            richTextBox1.Text += ((Button)sender).Text + "\n";
+        }
+
         private void button0_Click(object sender, EventArgs e)
         {
             //用法:  string.Format( “{編號0} {編號1}…{編號N}”, 變數0, 變數1, … 變數N );
@@ -354,16 +359,6 @@ namespace vcs_test_all_03_Syntax
 
         private void button10_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "取得控件本身\n";
-            Control con = (Control)sender;  //取得控件本身
-
-            richTextBox1.Text += "控件畫圖\n";
-            Graphics g = con.CreateGraphics();
-            g.DrawRectangle(Pens.Red, 3, 3, 30, 30);
-
-
-            richTextBox1.Text += "顯示控件上的文字: \t";
-            richTextBox1.Text += ((Button)sender).Text + "\n";
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -408,15 +403,30 @@ namespace vcs_test_all_03_Syntax
             Debug.Assert(name != null, "返回值name不可为空。");
 
             Debug.Assert(!string.IsNullOrEmpty(name), "参数name不可为空。");
-
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //取得控件本身1
+            richTextBox1.Text += "取得控件本身\n";
+            Control con = (Control)sender;  //取得控件本身
+
+            richTextBox1.Text += "控件畫圖\n";
+            Graphics g = con.CreateGraphics();
+            g.DrawRectangle(Pens.Red, 3, 3, 30, 30);
+
+
+            richTextBox1.Text += "顯示控件上的文字: \t";
+            richTextBox1.Text += ((Button)sender).Text + "\n";
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //取得控件本身2
+            show_button_text(sender);
+
+
+            ((Button)sender).Text = "改 Button Text 為 AAAA";
         }
 
         private void button15_Click(object sender, EventArgs e)

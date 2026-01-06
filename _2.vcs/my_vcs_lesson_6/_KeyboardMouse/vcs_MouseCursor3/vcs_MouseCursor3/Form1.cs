@@ -55,6 +55,9 @@ namespace vcs_MouseCursor3
         {
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
+
+            //this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
+            //this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -157,3 +160,13 @@ namespace vcs_MouseCursor3
         }
     }
 }
+
+//測試滑鼠移動
+//mouse_event(MOUSEEVENTF_MOVE,-10,-10,0,0);
+/*
+            if (e.Button == MouseButtons.Right)
+                mouse_event(MOUSEEVENTF_MOVE, 0, 20, 0, 0);
+            else
+                mouse_event(MOUSEEVENTF_MOVE, 0, -20, 0, 0);
+
+*/

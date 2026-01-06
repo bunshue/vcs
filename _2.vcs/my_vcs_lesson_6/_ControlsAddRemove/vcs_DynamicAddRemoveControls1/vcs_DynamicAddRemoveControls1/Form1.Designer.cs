@@ -52,8 +52,16 @@
             this.button15 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.button18 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button30 = new System.Windows.Forms.Button();
+            this.button31 = new System.Windows.Forms.Button();
+            this.button34 = new System.Windows.Forms.Button();
+            this.button32 = new System.Windows.Forms.Button();
+            this.button33 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -298,17 +306,95 @@
             this.button18.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button18.Location = new System.Drawing.Point(116, 219);
             this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(162, 93);
+            this.button18.Size = new System.Drawing.Size(220, 60);
             this.button18.TabIndex = 18;
             this.button18.Text = "單擊視窗的任何地方都會產生Button控件";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Location = new System.Drawing.Point(10, 325);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(100, 100);
+            this.panel1.TabIndex = 19;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.button30);
+            this.groupBox3.Controls.Add(this.button31);
+            this.groupBox3.Controls.Add(this.button34);
+            this.groupBox3.Controls.Add(this.button32);
+            this.groupBox3.Controls.Add(this.button33);
+            this.groupBox3.Location = new System.Drawing.Point(467, 300);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(401, 209);
+            this.groupBox3.TabIndex = 10;
+            this.groupBox3.TabStop = false;
+            // 
+            // button30
+            // 
+            this.button30.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button30.Location = new System.Drawing.Point(9, 15);
+            this.button30.Name = "button30";
+            this.button30.Size = new System.Drawing.Size(200, 60);
+            this.button30.TabIndex = 4;
+            this.button30.Text = "showForm";
+            this.button30.UseVisualStyleBackColor = true;
+            this.button30.Click += new System.EventHandler(this.button30_Click);
+            // 
+            // button31
+            // 
+            this.button31.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button31.Location = new System.Drawing.Point(9, 76);
+            this.button31.Name = "button31";
+            this.button31.Size = new System.Drawing.Size(200, 60);
+            this.button31.TabIndex = 1;
+            this.button31.Text = "showOnPanel";
+            this.button31.UseVisualStyleBackColor = true;
+            this.button31.Click += new System.EventHandler(this.button31_Click);
+            // 
+            // button34
+            // 
+            this.button34.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button34.Location = new System.Drawing.Point(215, 76);
+            this.button34.Name = "button34";
+            this.button34.Size = new System.Drawing.Size(200, 60);
+            this.button34.TabIndex = 2;
+            this.button34.Text = "showForm";
+            this.button34.UseVisualStyleBackColor = true;
+            this.button34.Click += new System.EventHandler(this.button34_Click);
+            // 
+            // button32
+            // 
+            this.button32.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button32.Location = new System.Drawing.Point(9, 138);
+            this.button32.Name = "button32";
+            this.button32.Size = new System.Drawing.Size(200, 60);
+            this.button32.TabIndex = 3;
+            this.button32.Text = "removeControlsOnPanel";
+            this.button32.UseVisualStyleBackColor = true;
+            this.button32.Click += new System.EventHandler(this.button32_Click);
+            // 
+            // button33
+            // 
+            this.button33.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button33.Location = new System.Drawing.Point(215, 15);
+            this.button33.Name = "button33";
+            this.button33.Size = new System.Drawing.Size(200, 60);
+            this.button33.TabIndex = 5;
+            this.button33.Text = "動態加入控制項( Controls.Add() )";
+            this.button33.UseVisualStyleBackColor = true;
+            this.button33.Click += new System.EventHandler(this.button33_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1174, 461);
+            this.ClientSize = new System.Drawing.Size(1174, 522);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.bt_clear);
@@ -319,6 +405,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -348,6 +435,13 @@
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button button30;
+        private System.Windows.Forms.Button button31;
+        private System.Windows.Forms.Button button34;
+        private System.Windows.Forms.Button button32;
+        private System.Windows.Forms.Button button33;
     }
 }
 

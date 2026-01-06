@@ -3,6 +3,41 @@
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+            //same
+            //Image img = Image.FromFile(filename);
+            //pictureBox1.Image = img;
+
+            //same
+            //pictureBox1.Image = Image.FromFile(filename); //載入圖檔，由檔案
+
+            //same
+            //Bitmap bitmap1 = new Bitmap(filename);
+            //pictureBox1.Image = bitmap1;
+
+            //same
+            //Image img = Bitmap.FromFile(filename);
+            //pictureBox1.Image = img;
+
+            //same
+            //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);
+            //pictureBox1.Image = bitmap1;
+
+            //same
+            pictureBox1.Image = new Bitmap(filename);
+
+            //pictureBox1.ImageLocation = filename;   //可顯示圖片 但無法抓出圖片的相關資訊
+
+            /*
+            int width = pictureBox1.Image.Width;
+            int height = pictureBox1.Image.Height;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            pictureBox1.Size = new Size(width, height);
+            */
+
+            Image img = Image.FromFile(filename);
+            pictureBox1.Image = img;
+            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+
 
 
 

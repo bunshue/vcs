@@ -212,7 +212,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 60);
             this.button10.TabIndex = 11;
-            this.button10.Text = "取得控件本身";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -245,6 +244,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(200, 60);
             this.button13.TabIndex = 14;
+            this.button13.Text = "取得控件本身1";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -255,6 +255,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 15;
+            this.button14.Text = "取得控件本身2";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -670,7 +671,7 @@
             this.lb_symbols_1.Location = new System.Drawing.Point(12, 39);
             this.lb_symbols_1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_symbols_1.Name = "lb_symbols_1";
-            this.lb_symbols_1.Size = new System.Drawing.Size(373, 19);
+            this.lb_symbols_1.Size = new System.Drawing.Size(357, 19);
             this.lb_symbols_1.TabIndex = 65;
             this.lb_symbols_1.Text = "Ѡ♪♫π∑∂€£∫⊗≥≅∡∞√∜⇒∊∫ℵ↝ℙ‡ЖЊæ÷";
             // 

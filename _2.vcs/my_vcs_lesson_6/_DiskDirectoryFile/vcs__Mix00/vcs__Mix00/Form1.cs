@@ -113,6 +113,7 @@ namespace vcs__Mix00
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1040, 800);
+            this.Text = "vcs__Mix00";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -171,8 +172,6 @@ namespace vcs__Mix00
                 File.Copy(@"../../Form1.cs", new_filename);
                 richTextBox1.Text += "複製檔案完成\n";
             }
-
-
         }
 
         private void button4_Click(object sender, EventArgs e)

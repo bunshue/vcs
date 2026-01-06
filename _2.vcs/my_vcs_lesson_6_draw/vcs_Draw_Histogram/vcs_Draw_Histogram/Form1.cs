@@ -21,7 +21,29 @@ namespace vcs_Draw_Histogram
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 5;
+            dy = 60 + 5;
+
+
+            //richTextBox1.Size = new Size(790, 295);
+            //richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 7 + 60);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //this.Size = new Size(1250, 880);
+            this.Text = "vcs_Draw_Histogram";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -150,7 +172,7 @@ namespace vcs_Draw_Histogram
                 for (i = 0; i < N; i++)
                 {
                     g.FillRectangle(brush, x_st + i * w, H - values[i] * ratio_y - y_st, w, values[i] * ratio_y);
-                    g.DrawString(values[i].ToString(), new Font("標楷體", 8), new SolidBrush(Color.Red), new PointF(x_st + i * w + w / 3, H - y_st+3));
+                    g.DrawString(values[i].ToString(), new Font("標楷體", 8), new SolidBrush(Color.Red), new PointF(x_st + i * w + w / 3, H - y_st + 3));
                 }
 
                 // Draw the histogram.
@@ -328,9 +350,6 @@ namespace vcs_Draw_Histogram
             // Display the histogram.
             pic.Image = bitmap1;
         }
-
         //原本範例 SP
-
-
     }
 }
