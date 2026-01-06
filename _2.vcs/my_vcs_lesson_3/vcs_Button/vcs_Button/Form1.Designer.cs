@@ -68,6 +68,7 @@
             this.bt_puzzle1 = new System.Windows.Forms.Button();
             this.bt_puzzle0 = new System.Windows.Forms.Button();
             this.lb_puzzle = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -425,6 +426,7 @@
             this.bt_bmw.Size = new System.Drawing.Size(128, 128);
             this.bt_bmw.TabIndex = 176;
             this.bt_bmw.UseVisualStyleBackColor = true;
+            this.bt_bmw.Click += new System.EventHandler(this.bt_bmw_Click);
             // 
             // bt_clear
             // 
@@ -446,6 +448,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 150);
             this.button1.TabIndex = 173;
+            this.button1.Text = "Button";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // button5
@@ -464,7 +467,7 @@
             this.button6.BackColor = System.Drawing.Color.Pink;
             this.button6.Font = new System.Drawing.Font("標楷體", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button6.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.button6.Location = new System.Drawing.Point(479, 604);
+            this.button6.Location = new System.Drawing.Point(479, 609);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(100, 64);
             this.button6.TabIndex = 175;
@@ -524,11 +527,22 @@
             this.lb_puzzle.TabIndex = 226;
             this.lb_puzzle.Text = "程序執行時拖曳組件";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(479, 582);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(123, 19);
+            this.label1.TabIndex = 227;
+            this.label1.Text = "測試圖片移動";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1529, 744);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lb_puzzle);
             this.Controls.Add(this.bt_puzzle3);
             this.Controls.Add(this.bt_puzzle2);
@@ -618,6 +632,7 @@
         private System.Windows.Forms.Button bt_puzzle1;
         private System.Windows.Forms.Button bt_puzzle0;
         private System.Windows.Forms.Label lb_puzzle;
+        private System.Windows.Forms.Label label1;
     }
 }
 

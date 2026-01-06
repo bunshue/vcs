@@ -295,12 +295,12 @@ namespace vcs_Button
 
         private void button1a_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "向右\n";
+            richTextBox1.Text += "你按了不規則形狀Button\t向右\n";
         }
 
         private void button1b_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "圓形button\n";
+            richTextBox1.Text += "你按了不規則形狀Button\t圓形\n";
         }
 
         //在Button上畫圖
@@ -365,12 +365,17 @@ namespace vcs_Button
 
         private void button4_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "你按了文字化按鈕\n";
+            richTextBox1.Text += "你按了不規則形狀Button\t文字化按鈕\n";
         }
 
         private void bt_star_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "你按了不規則形狀Button\n";
+            richTextBox1.Text += "你按了不規則形狀Button\tstar\n";
+        }
+
+        private void bt_bmw_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按了不規則形狀Button\tbmw\n";
         }
 
         private void bt_star_Paint(object sender, PaintEventArgs e)
