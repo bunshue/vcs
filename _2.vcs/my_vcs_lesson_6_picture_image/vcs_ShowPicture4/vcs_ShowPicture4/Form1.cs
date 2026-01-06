@@ -37,7 +37,6 @@ namespace vcs_ShowPicture4
         private void button1_Click(object sender, EventArgs e)
         {
             //一. 以上下反轉的方式顯示圖像.
-
             //原理: 計算圖像位置和高度后以高度的一半為軸進行對換上下半邊的圖像.
 
             try
@@ -65,9 +64,7 @@ namespace vcs_ShowPicture4
         private void button2_Click(object sender, EventArgs e)
         {
             //  二. 以上下對接的方式顯示圖像
-
             //  原理: 首先將圖像分為上下兩部分, 然后分別顯示.
-
 
             try
             {
@@ -102,7 +99,6 @@ namespace vcs_ShowPicture4
         private void button3_Click(object sender, EventArgs e)
         {
             //三. 以四周擴散的方式顯示圖像
-
             //原理: 首先設置圖像顯示的位置, 然后按高度和寬度的比例循環輸出, 直到高度和寬度為原始大小.
 
             try
@@ -130,7 +126,6 @@ namespace vcs_ShowPicture4
         private void button4_Click(object sender, EventArgs e)
         {
             //四. 以分塊效果顯示圖像
-
             //原理: 首先將圖分為幾塊, 再使用 Bitmap 類的 Clone方法從原圖指定的塊中復制圖像, 最后將這些塊依次顯示出來便可
 
             Graphics g = this.panel1.CreateGraphics();
@@ -162,8 +157,8 @@ namespace vcs_ShowPicture4
         private void button5_Click(object sender, EventArgs e)
         {
             //五. 以淡入淡出效果顯示圖像
-
-            //原理: 使用 ImageAttrributes 類的 SetColorMatrix() 方法設置顏色, 調整矩陣實現淡出的效果. 此類還可以對顏色進行校正, 調暗, 調亮和移除等.
+            //原理: 使用 ImageAttrributes 類的 SetColorMatrix() 方法設置顏色,
+            //調整矩陣實現淡出的效果. 此類還可以對顏色進行校正, 調暗, 調亮和移除等
 
             try
             {
@@ -286,9 +281,7 @@ namespace vcs_ShowPicture4
         private void button7_Click(object sender, EventArgs e)
         {
             //六. 以左右對接的方式顯示圖像
-
             //原理: 首先將圖像分為左右兩部分, 然后分別顯示.
-
             //以左右對接方式顯示圖像
             try
             {
@@ -446,7 +439,6 @@ namespace vcs_ShowPicture4
             Graphics g = this.panel1.CreateGraphics();
             TextureBrush mybrush = new TextureBrush(MyBitmap);
             g.FillEllipse(mybrush, this.panel1.ClientRectangle);
-
         }
 
         private void button14_Click(object sender, EventArgs e)

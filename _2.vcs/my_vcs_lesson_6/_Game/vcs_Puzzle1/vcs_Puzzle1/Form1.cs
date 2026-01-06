@@ -54,19 +54,22 @@ namespace vcs_Puzzle1
             D = 600.0f / SplitNo; //  小圖的 寬高
 
             RectangleF rect;
-            for (int i = 0; i< SplitNo; i++)
+            for (int i = 0; i < SplitNo; i++)
+            {
                 for (int j = 0; j < SplitNo; j++)
                 {
                     rect = new RectangleF(i * D, j * D, D, D);
                     //small[i, j] = bitmap.Clone(rect, System.Drawing.Imaging.PixelFormat.DontCare);
-                    small_rect[i, j] = new RectangleF(i * D + x0, j * D+y0, D, D);
+                    small_rect[i, j] = new RectangleF(i * D + x0, j * D + y0, D, D);
                     small_rect_0[i, j] = new RectangleF(i * D + x0, j * D + y0, D, D);
-                    small_rect_1[i, j] = new RectangleF(i * D , j * D , D, D);
+                    small_rect_1[i, j] = new RectangleF(i * D, j * D, D, D);
                 }
+            }
 
             //  打亂 小圖
             int i1, j1;
-            for (int i = 0; i< SplitNo; i++)
+            for (int i = 0; i < SplitNo; i++)
+            {
                 for (int j = 0; j < SplitNo; j++)
                 {
                     i1 = rd.Next(SplitNo);
@@ -76,13 +79,14 @@ namespace vcs_Puzzle1
                     small_rect[i, j] = small_rect[i1, j1];
                     small_rect[i1, j1] = rect;
                 }
+            }
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             // 繪出 完整的圖
-            RectangleF dest = new Rectangle(710,10,100,100);
-            RectangleF src = new Rectangle(0,0,600,600);
+            RectangleF dest = new Rectangle(710, 10, 100, 100);
+            RectangleF src = new Rectangle(0, 0, 600, 600);
             e.Graphics.DrawImage(bitmap, dest, src, GraphicsUnit.Pixel);
 
             // 如果有提示  就繪出 提示的圖
@@ -92,35 +96,37 @@ namespace vcs_Puzzle1
 
                 ColorMatrix cm = new ColorMatrix(m_cmArray);
                 ImageAttributes ia = new ImageAttributes();
-                ia.SetColorMatrix(cm,
-                    ColorMatrixFlag.Default,
-                    ColorAdjustType.Bitmap);
+                ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
-                e.Graphics.DrawImage(bitmap,
-                    dest2,
-                    0, 0, 600,600,
-                    GraphicsUnit.Pixel, ia);
+                e.Graphics.DrawImage(bitmap, dest2, 0, 0, 600, 600, GraphicsUnit.Pixel, ia);
             }
 
             // 繪出 全部小圖
-            for (int i = 0; i< SplitNo; i++)
+            for (int i = 0; i < SplitNo; i++)
+            {
                 for (int j = 0; j < SplitNo; j++)
                 {
                     e.Graphics.DrawImage(bitmap, small_rect[i, j], small_rect_1[i, j], GraphicsUnit.Pixel);
                 }
+            }
 
             // 畫出框線
             for (int i = 0; i <= SplitNo; i++)
-                e.Graphics.DrawLine(Pens.White, x0, y0+i * D, x0 + 600, y0+i*D);
+            {
+                e.Graphics.DrawLine(Pens.White, x0, y0 + i * D, x0 + 600, y0 + i * D);
+            }
 
             for (int i = 0; i <= SplitNo; i++)
+            {
                 e.Graphics.DrawLine(Pens.White, x0 + i * D, y0, x0 + i * D, y0 + 600);
+            }
         }
 
         // 滑鼠被按下
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            for (int i = SplitNo-1; i >= 0 ; i--)  // 因為有上下層 的關悉 
+            for (int i = SplitNo - 1; i >= 0; i--)  // 因為有上下層 的關悉 
+            {
                 for (int j = SplitNo - 1; j >= 0; j--) //後畫的在前面 會先被選到
                 {
                     if (e.X >= small_rect[i, j].X && e.X < small_rect[i, j].X + D &&
@@ -134,6 +140,7 @@ namespace vcs_Puzzle1
                         return; // 不用再找了
                     }
                 }
+            }
         }
 
         // 滑鼠被放開 
@@ -155,15 +162,18 @@ namespace vcs_Puzzle1
 
                 // 如果距離夠近 就將小圖擺正
                 for (int i = 0; i < SplitNo; i++)
+                {
                     for (int j = 0; j < SplitNo; j++)
                     {
                         dx = small_rect[selected_X, selected_Y].X - small_rect_0[i, j].X;
                         dy = small_rect[selected_X, selected_Y].Y - small_rect_0[i, j].Y;
 
                         if (dx < epsilon && dx > -epsilon && dy < epsilon && dy > -epsilon)
+                        {
                             small_rect[selected_X, selected_Y] = small_rect_0[i, j];
+                        }
                     }
-
+                }
                 this.Invalidate();
             }
         }
@@ -176,14 +186,34 @@ namespace vcs_Puzzle1
                 e.KeyData == Keys.D7 || e.KeyData == Keys.D8 ||
                 e.KeyData == Keys.D9 || e.KeyData == Keys.Space)
             {
-                if (e.KeyData == Keys.D3)  SplitNo = 3;
-                else if (e.KeyData == Keys.D4) SplitNo = 4;
-                else if (e.KeyData == Keys.D5) SplitNo = 5;
-                else if (e.KeyData == Keys.D6) SplitNo = 6;
-                else if (e.KeyData == Keys.D7) SplitNo = 7;
-                else if (e.KeyData == Keys.D8) SplitNo = 8;
-                else if (e.KeyData == Keys.D9) SplitNo = 9;
-
+                if (e.KeyData == Keys.D3)
+                {
+                    SplitNo = 3;
+                }
+                else if (e.KeyData == Keys.D4)
+                {
+                    SplitNo = 4;
+                }
+                else if (e.KeyData == Keys.D5)
+                {
+                    SplitNo = 5;
+                }
+                else if (e.KeyData == Keys.D6)
+                {
+                    SplitNo = 6;
+                }
+                else if (e.KeyData == Keys.D7)
+                {
+                    SplitNo = 7;
+                }
+                else if (e.KeyData == Keys.D8)
+                {
+                    SplitNo = 8;
+                }
+                else if (e.KeyData == Keys.D9)
+                {
+                    SplitNo = 9;
+                }
                 Cut();
                 this.Invalidate();
             }
@@ -197,9 +227,14 @@ namespace vcs_Puzzle1
         private void panel1_Click(object sender, EventArgs e)
         {
             Panel p = (Panel)(sender);
-            if (p  == panel1) bitmap = Properties.Resources.Picasso_01; // 原圖 是 600 X 600
-            else if (p == panel2) bitmap = Properties.Resources.Picasso_02;
-                        
+            if (p == panel1)
+            {
+                bitmap = Properties.Resources.Picasso_01; // 原圖 是 600 X 600
+            }
+            else if (p == panel2)
+            {
+                bitmap = Properties.Resources.Picasso_02;
+            }
             Cut();
             this.Invalidate();
         }

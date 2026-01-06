@@ -57,6 +57,11 @@
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.label_auto = new System.Windows.Forms.Label();
             this.button9 = new System.Windows.Forms.Button();
+            this.label_picture0 = new System.Windows.Forms.Label();
+            this.label_picture = new System.Windows.Forms.Label();
+            this.label_picture1 = new System.Windows.Forms.Label();
+            this.lb_use_top_left = new System.Windows.Forms.Label();
+            this.timer_use_top_left = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // label4
@@ -316,11 +321,60 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
+            // label_picture0
+            // 
+            this.label_picture0.AutoSize = true;
+            this.label_picture0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label_picture0.Location = new System.Drawing.Point(808, 179);
+            this.label_picture0.Name = "label_picture0";
+            this.label_picture0.Size = new System.Drawing.Size(296, 19);
+            this.label_picture0.TabIndex = 38;
+            this.label_picture0.Text = "使用滑鼠拖曳圖片 圖片藏在label裏";
+            // 
+            // label_picture
+            // 
+            this.label_picture.AutoSize = true;
+            this.label_picture.Location = new System.Drawing.Point(810, 229);
+            this.label_picture.Name = "label_picture";
+            this.label_picture.Size = new System.Drawing.Size(65, 12);
+            this.label_picture.TabIndex = 39;
+            this.label_picture.Text = "label_picture";
+            // 
+            // label_picture1
+            // 
+            this.label_picture1.AutoSize = true;
+            this.label_picture1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label_picture1.Location = new System.Drawing.Point(808, 202);
+            this.label_picture1.Name = "label_picture1";
+            this.label_picture1.Size = new System.Drawing.Size(335, 19);
+            this.label_picture1.TabIndex = 40;
+            this.label_picture1.Text = "實現在Label上按下滑鼠左鍵拖曳的功能";
+            // 
+            // lb_use_top_left
+            // 
+            this.lb_use_top_left.AutoSize = true;
+            this.lb_use_top_left.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_use_top_left.Location = new System.Drawing.Point(907, 409);
+            this.lb_use_top_left.Name = "lb_use_top_left";
+            this.lb_use_top_left.Size = new System.Drawing.Size(106, 19);
+            this.lb_use_top_left.TabIndex = 41;
+            this.lb_use_top_left.Text = "使用TopLeft";
+            // 
+            // timer_use_top_left
+            // 
+            this.timer_use_top_left.Enabled = true;
+            this.timer_use_top_left.Interval = 200;
+            this.timer_use_top_left.Tick += new System.EventHandler(this.timer_use_top_left_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 628);
+            this.ClientSize = new System.Drawing.Size(1184, 628);
+            this.Controls.Add(this.lb_use_top_left);
+            this.Controls.Add(this.label_picture);
+            this.Controls.Add(this.label_picture1);
+            this.Controls.Add(this.label_picture0);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.label_auto);
             this.Controls.Add(this.lb_moving2);
@@ -384,6 +438,11 @@
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Label label_auto;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Label label_picture0;
+        private System.Windows.Forms.Label label_picture;
+        private System.Windows.Forms.Label label_picture1;
+        private System.Windows.Forms.Label lb_use_top_left;
+        private System.Windows.Forms.Timer timer_use_top_left;
     }
 }
 

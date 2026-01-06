@@ -256,5 +256,10 @@ namespace vcs_DynamicAddRemoveControls6_ShowPicture
                     break;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
