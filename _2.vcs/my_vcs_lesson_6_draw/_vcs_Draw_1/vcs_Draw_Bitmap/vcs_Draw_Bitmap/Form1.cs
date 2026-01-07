@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;//for Directory
 using System.Drawing.Imaging;   //for ImageFormat, PixelFormat
 using System.Drawing.Drawing2D; //for GraphicsPath, InterpolationMode
 
@@ -279,6 +280,23 @@ namespace vcs_Draw_Bitmap
 
         private void button5_Click(object sender, EventArgs e)
         {
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙";
+
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.Pink);
+
+            int num = 0;
+            int x_st = 20;
+            int y_st = 60;
+            int dx = 100;
+            int dy = 100;
+            foreach (string filename in Directory.GetFiles(foldername, "*.jpeg"))
+            {
+                Bitmap bmp = new Bitmap(filename);
+                g.DrawImage(bmp, x_st + dx * (num % 10), y_st + dy * (num / 10), bmp.Width / 8, bmp.Height / 8);
+                num++;
+            }
+            pictureBox1.Image = bitmap1;
         }
 
         private void button6_Click(object sender, EventArgs e)
