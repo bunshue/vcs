@@ -33,7 +33,6 @@ namespace vcs_PictureCrop3
         private void Form1_Load(object sender, EventArgs e)
         {
             string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
-
             bitmap1 = new Bitmap(filename);
             pictureBox1.Image = bitmap1;
         }
@@ -65,6 +64,8 @@ namespace vcs_PictureCrop3
         {
             flag_select_area = false;
 
+            richTextBox1.Text += "點數 : " + Points.Count.ToString() + "\n";
+
             // Create a DataObject to hold data
             // in different formats.
             IDataObject data_object = new DataObject();
@@ -95,7 +96,7 @@ namespace vcs_PictureCrop3
         {
             if ((Points != null) && (Points.Count > 1))
             {
-                using (Pen dashed_pen = new Pen(Color.Black))
+                using (Pen dashed_pen = new Pen(Color.Red))
                 {
                     dashed_pen.DashPattern = new float[] { 5, 5 };
                     e.Graphics.DrawLines(Pens.White, Points.ToArray());
@@ -197,6 +198,13 @@ namespace vcs_PictureCrop3
             {
 
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "點數 : " + Points.Count.ToString() + "\n";
+            int len = Points.Count;
+
         }
 
     }

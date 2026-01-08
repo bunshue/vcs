@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{624EFDBF-4627-4190-B955-1C4ED493692B}</ProjectGuid>
+    <ProjectGuid>{D3DC086D-EBD2-4AC9-8814-8F15EAB9A21E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Spider</RootNamespace>
-    <AssemblyName>vcs_Spider</AssemblyName>
+    <RootNamespace>vcs_PictureCropA</RootNamespace>
+    <AssemblyName>vcs_PictureCropA</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

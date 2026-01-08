@@ -13,11 +13,13 @@ namespace vcs_PictureCrop9
 {
     public partial class Form1 : Form
     {
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+        private bool flag_select_area = false;  //開始選取的旗標
+        private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
+        private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
+
         int X1, Y1, X2, Y2;
         Rectangle rect = new Rectangle(0, 0, 0, 0);
-        private PointF Point1, Point2;
-        bool Drawing = false;
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
         public Form1()
         {
@@ -99,23 +101,31 @@ namespace vcs_PictureCrop9
 
         void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            Point1 = e.Location;
-            Point2 = e.Location;
-            pictureBox1.Refresh();
+            if (e.Button == MouseButtons.Left)
+            {
+                pt_st = e.Location;//起始點座標
+                pt_sp = e.Location;
+                pictureBox1.Refresh();
 
-            X1 = X2 = e.X;
-            Y1 = Y2 = e.Y;
-            Drawing = true;
+                X1 = X2 = e.X;
+                Y1 = Y2 = e.Y;
+                flag_select_area = true;
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                richTextBox1.Text += "滑鼠右鍵\t準備貼上選取的部分\n";
+            }
         }
 
         void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!Drawing)
+            if (flag_select_area==false)
             {
                 return;
             }
 
-            Point2 = e.Location;
+            pt_sp = e.Location; //終點座標
+
             pictureBox1.Refresh();
 
             // Update the new circle's second corner.
@@ -128,11 +138,12 @@ namespace vcs_PictureCrop9
 
         void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (!Drawing)
+            if (flag_select_area==false)
             {
                 return;
             }
-            Drawing = false;
+            flag_select_area = false;
+
             pictureBox1.Refresh();
 
             // Redraw.
@@ -148,10 +159,10 @@ namespace vcs_PictureCrop9
 
             //e.Graphics.Clear(pictureBox1.BackColor);
 
-            if (Point1 != Point2)
+            if (pt_st != pt_sp)
             {
-                //e.Graphics.DrawRectangle(Pens.Black, Point1, Point2);
-                e.Graphics.DrawLine(Pens.Black, Point1, Point2);
+                //e.Graphics.DrawRectangle(Pens.Black, pt_st, pt_sp);
+                e.Graphics.DrawLine(Pens.Black, pt_st, pt_sp);
             }
 
             int width = 0;
@@ -177,7 +188,7 @@ namespace vcs_PictureCrop9
             }
 
             draw_grid(e.Graphics);
-            e.Graphics.DrawRectangle(Pens.Blue, rect);
+            e.Graphics.DrawRectangle(Pens.Red, rect);
 
             tb_x.Text = rect.X.ToString();
             tb_y.Text = rect.Y.ToString();

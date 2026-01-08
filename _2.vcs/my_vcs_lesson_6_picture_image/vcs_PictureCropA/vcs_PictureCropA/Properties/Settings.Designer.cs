@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Spider.Properties
+namespace vcs_PictureCropA.Properties
 {
 
 

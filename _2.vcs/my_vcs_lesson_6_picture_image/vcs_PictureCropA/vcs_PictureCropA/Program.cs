@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Spider
+namespace vcs_PictureCropA
 {
     static class Program
     {

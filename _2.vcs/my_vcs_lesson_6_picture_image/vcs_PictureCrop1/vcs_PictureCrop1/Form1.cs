@@ -210,7 +210,7 @@ namespace vcs_PictureCrop1
             if (e.Button == MouseButtons.Left)
             {
                 flag_select_area = true;
-                pt_st = e.Location; //起始點座標
+                pt_st = e.Location;//起始點座標
 
                 nud_w.Value = 0;
                 nud_h.Value = 0;
@@ -231,7 +231,9 @@ namespace vcs_PictureCrop1
         {
             // Do nothing if we're not selecting an area.
             if (flag_select_area == false)
+            {
                 return;
+            }
 
             pt_sp = e.Location; //終點座標
 
@@ -333,7 +335,6 @@ namespace vcs_PictureCrop1
             //清空所選取的區域
             if (bitmap2 != null)
             {
-
                 if ((SelectionRectangle.Width <= 0) || (SelectionRectangle.Height <= 0))
                 {
                     richTextBox1.Text += "未選定區域，無法剪下圖片\n";
@@ -348,17 +349,14 @@ namespace vcs_PictureCrop1
                         gr.FillRectangle(br, SelectionRectangle);
                     }
                 }
-
                 // Display the result.
                 bitmap2 = new Bitmap(bitmap1);
                 pictureBox1.Image = bitmap2;
-
             }
             else
             {
                 richTextBox1.Text += "無選取區域\n";
             }
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -413,7 +411,6 @@ namespace vcs_PictureCrop1
 
             if ((SelectionRectangle2.Width <= 0) || (SelectionRectangle2.Height <= 0))
                 return;
-
             if ((SelectionRectangle2.X < 0) || (SelectionRectangle2.X >= W))
                 return;
             if ((SelectionRectangle2.Y < 0) || (SelectionRectangle2.Y >= H))
