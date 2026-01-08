@@ -22,6 +22,7 @@ namespace vcs_Mix03_draw_image
     {
         //Point一維陣列
         Point[] pts = new Point[6];    //一維陣列內有6個Point
+        int find_point_index = -1;
 
         public Form1()
         {
@@ -36,13 +37,14 @@ namespace vcs_Mix03_draw_image
             pictureBox1.Image = Image.FromFile(filename);
 
             int x_st = 400;
-            int y_st = 50;
-            pts[0] = new Point(x_st + 0, y_st + 0);
-            pts[1] = new Point(x_st + 80, y_st + 0);
-            pts[2] = new Point(x_st + 0, y_st + 50);
-            pts[3] = new Point(x_st + 80, y_st + 50);
-            pts[4] = new Point(x_st + 0, y_st + 100);
-            pts[5] = new Point(x_st + 80, y_st + 100);
+            int y_st = 80;
+            int dy = 50;
+            pts[0] = new Point(x_st + 0, y_st + dy * 0);
+            pts[1] = new Point(x_st + 0, y_st + dy * 1);
+            pts[2] = new Point(x_st + 0, y_st + dy * 2);
+            pts[3] = new Point(x_st + 0, y_st + dy * 3);
+            pts[4] = new Point(x_st + 0, y_st + dy * 4);
+            pts[5] = new Point(x_st + 0, y_st + dy * 5);
         }
 
         /*
@@ -384,7 +386,7 @@ namespace vcs_Mix03_draw_image
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawString("點選表單中的紅點", new Font("標楷體", 16), new SolidBrush(Color.Black), pts[0].X - 65, pts[0].Y - 30);
+            e.Graphics.DrawString("點選表單中的紅點", new Font("標楷體", 16), new SolidBrush(Color.Black), pts[0].X - 65, pts[0].Y - 50);
             //e.Graphics.DrawRectangle(Pens.Red, 100, 100, 300, 300);
             foreach (Point pt in pts)
             {
@@ -392,7 +394,8 @@ namespace vcs_Mix03_draw_image
             }
         }
 
-        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        bool flag_mouse_down = false;
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             Point pt = FindPointAt(e.X, e.Y);
             if (pt == new Point(9999, 9999))
@@ -401,7 +404,11 @@ namespace vcs_Mix03_draw_image
             }
             else
             {
+                flag_mouse_down = true;
                 richTextBox1.Text += "找到 : (" + pt.X.ToString() + ", " + pt.Y.ToString() + ")\n";
+                int index = get_index(pt);
+                richTextBox1.Text += index.ToString() + "\n";
+                find_point_index = index;
             }
         }
 
@@ -417,6 +424,46 @@ namespace vcs_Mix03_draw_image
                 }
             }
             return new Point(9999, 9999);
+        }
+
+        int get_index(Point point)
+        {
+            int len = pts.Length;
+            int index = 0;
+            for (index = 0; index < len; index++)
+            {
+                if (point == pts[index])
+                {
+                    return index;
+                }
+            }
+            return -1;
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (flag_mouse_down == true)
+            {
+                update_pts(find_point_index, e.Location);
+                this.Invalidate();
+            }
+        }
+
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            flag_mouse_down = false;
+        }
+
+        void update_pts(int index, Point point)
+        {
+            int len = pts.Length;
+            if ((index < 0) || index >= len)
+            {
+                richTextBox1.Text += index.ToString();
+                //richTextBox1.Text += "XXXXXXX\n";
+                return;
+            }
+            pts[index] = point;
         }
     }
 }
