@@ -334,7 +334,33 @@ namespace vcs_Draw_Brush
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //使用 TextureBrush 做部分貼上
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
 
+            Bitmap bitmap1 = new Bitmap(filename);
+
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H);
+
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            //W = 990, H = 742
+
+            Graphics g = Graphics.FromImage(bitmap2);
+
+            Brush br = new TextureBrush(bitmap1);
+
+            int cx = W / 2;
+            int cy = H / 2;
+            int R = 700;
+
+            g.FillEllipse(br, new Rectangle(cx - R / 2, cy - R / 2, R, R));
+
+            for (int y = 0; y < (H - 80); y += 40)
+            {
+                g.FillRectangle(br, new Rectangle(0, y, W, 20));
+            }
+            pictureBox1.Image = bitmap2;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -769,3 +795,4 @@ namespace vcs_Draw_Brush
         }
     }
 }
+

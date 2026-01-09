@@ -324,6 +324,10 @@ namespace vcs_Draw_Bitmap
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //step2_sc.png
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\step2_sc.png";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);
+            pictureBox1.Image = bitmap1;
         }
 
         private void button10_Click(object sender, EventArgs e)

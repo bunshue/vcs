@@ -246,6 +246,19 @@ namespace vcs_test_all_02_Array
             //Point一維陣列
             Point[] pt = new Point[360];    //一維陣列內有360個Point
 
+            List<Point> Points = new List<Point>();
+            Points.Clear();
+            int x_st = 570;
+            int y_st = 60;
+            Points.Add(new Point(x_st, y_st));
+            Points.Add(new Point(x_st + 130, y_st));
+            Points.Add(new Point(x_st + 130, y_st + 100));
+            Points.Add(new Point(x_st + 65, y_st + 150));
+            Points.Add(new Point(x_st + 0, y_st + 100));
+            Points.Add(new Point(x_st, y_st));
+
+            richTextBox1.Text += "點數 : " + Points.Count.ToString() + "\n";
+
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
 
@@ -944,6 +957,7 @@ namespace vcs_test_all_02_Array
             }
             richTextBox1.Text += "\n";
 
+            //二維陣列排序
             richTextBox1.Text += "依Name_C排序, ";
             Array.Sort(AnimalDataArray, delegate(AnimalData s1, AnimalData s2)
             {

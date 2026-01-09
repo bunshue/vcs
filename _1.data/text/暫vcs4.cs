@@ -1,5 +1,1016 @@
 ﻿
 
+
+            Array.Copy(array_data, 0, array_data, offset, array_data.Length - offset);
+            Array.Copy(array_data, offset, array_data, 0, array_data.Length - offset);
+
+
+
+
+製作透明表單
+
+//Form1屬性的BackColor改成Color.White
+//Form1屬性的TransparencyKey改成Color.White
+
+設定表單背景色 與 透明色即可 表單上的影像 畫圖 符合條件的 都會變透明
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.BackColor = Color.White;
+            this.TransparencyKey = Color.White;
+            this.FormBorderStyle = FormBorderStyle.None;
+        }
+        
+        
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+StartPiont = (200, 100)
+CutArea = (0,0,300,300)
+
+&lt;pre class="c" name="code">
+private Image CutImage(Image SourceImage, Point StartPoint, Rectangle CutArea)
+{
+    Bitmap NewBitmap = new Bitmap(CutArea.Width, CutArea.Height);
+    Graphics tmpGraph = Graphics.FromImage(NewBitmap);
+    tmpGraph.DrawImage(SourceImage, CutArea, StartPoint.X, StartPoint.Y, CutArea.Width, CutArea.Height, GraphicsUnit.Pixel);
+    tmpGraph.Dispose();
+    return NewBitmap;
+}
+
+
+C# PictureBox图片框用法详解（附带实例）
+
+https://c.biancheng.net/view/ply3egf.html
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+            //same
+            //Image img = Image.FromFile(filename);
+            //pictureBox1.Image = img;
+
+            //same
+            //pictureBox1.Image = Image.FromFile(filename); //載入圖檔，由檔案
+
+            //same
+            //Bitmap bitmap1 = new Bitmap(filename);
+            //pictureBox1.Image = bitmap1;
+
+            //same
+            //Image img = Bitmap.FromFile(filename);
+            //pictureBox1.Image = img;
+
+            //same
+            //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);
+            //pictureBox1.Image = bitmap1;
+
+            //same
+            pictureBox1.Image = new Bitmap(filename);
+
+            //pictureBox1.ImageLocation = filename;   //可顯示圖片 但無法抓出圖片的相關資訊
+
+            /*
+            int width = pictureBox1.Image.Width;
+            int height = pictureBox1.Image.Height;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            pictureBox1.Size = new Size(width, height);
+            */
+
+            Image img = Image.FromFile(filename);
+            pictureBox1.Image = img;
+            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+單一圖片模式
+
+
+            button1.Visible = false;
+            richTextBox1.Visible = false;
+            //this.FormBorderStyle = FormBorderStyle.None;
+            this.AutoSize = true;
+            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;     //讓表單大小可以自動隨著圖片大小變化。
+            this.TransparencyKey = SystemColors.ControlLight;   //將表單的TransparencyKey設為Control，這樣可以去掉桌面小玩意外圍多餘的部份
+            this.ShowInTaskbar = false;
+            //this.StartPosition = FormStartPosition.CenterScreen;
+
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            this.BackColor = Color.Black;
+
+            //pictureBox1.Dock = DockStyle..Fill;      //停駐於父容器中
+            pictureBox1.Location = new Point((this.Width - pictureBox1.Image.Width) / 2, (this.Height - pictureBox1.Image.Height) / 2);
+
+
+
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+
+using System.Diagnostics;           //for Debug
+            Debug.Assert(Math.Abs(total) < 0.001f);
+
+
+ 
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+  
+  
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer, true);
+            Graphics g = e.Graphics;
+            g.SmoothingMode = SmoothingMode.HighQuality;
+
+            foreach (Flakes s in flyFlakeList)
+            {
+                g.ResetTransform();
+                //g.TranslateTransform(-16, -16, MatrixOrder.Append);
+                g.ScaleTransform(s.Scale, s.Scale, MatrixOrder.Append);
+                g.RotateTransform(s.Rotation, MatrixOrder.Append);
+                g.TranslateTransform(s.X, s.Y, MatrixOrder.Append);
+
+                g.DrawImage(s.ShowImage, 0, 0);
+            }
+            //base.OnPaint(e);
+        }
+
+
+
+            //using System.Collections;//for Hashtable
+
+            Hashtable imageList = new Hashtable();
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Image image1 = Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            Image image2 = Image.FromFile(filename2);	//Image.FromFile出來的是Image格式
+
+            string filename3 = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
+            Image image3 = Image.FromFile(filename3);	//Image.FromFile出來的是Image格式
+
+            imageList.Add(imageList.Count + 1, image1);
+            imageList.Add(imageList.Count + 1, image2);
+            imageList.Add(imageList.Count + 1, image3);
+
+            object obj = imageList[1];
+
+            //object obj = imageList[3];
+
+            pictureBox1.Image = (Image)obj;
+
+
+
+
+
+
+  
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+                DateTime baseDateAndTime = new DateTime(1900, 1, 6, 2, 5, 0); //#1/6/1900 2:05:00 AM#
+                DateTime newDate;
+                    num = 525948.76 * (y - 1900) + sTermInfo[i - 1];
+                    newDate = baseDateAndTime.AddMinutes(num);//按分钟计算
+
+
+            //後一天
+            DateTime nextDay = _date.AddDays(1);
+            //前一天
+            DateTime pervDay = _date.AddDays(-1);
+            return new ChineseCalendar(pervDay);
+
+
+
+
+        return "公元" + this._date.ToLongDateString();
+        /// 当前是否公历闰年
+                return DateTime.IsLeapYear(this._date.Year);
+
+
+
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            /*
+            foreach (int argb in Properties.Settings.Default.Argbs)
+            {
+                Color color = Color.FromArgb(argb);
+                richTextBox1.Text += "get color " + color.ToString() + "\n";
+                using (SolidBrush br = new SolidBrush(color))
+                {
+                    e.Graphics.FillRectangle(br, x, y,
+                        PatchWidth, PatchHeight);
+                }
+                x += PatchWidth + PatchMargin;
+                if (x > max_x)
+                {
+                    x = 0;
+                    y += PatchHeight + PatchMargin;
+                }
+            }
+            */
+
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+object filename = Application.StartupPath + "\\word_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".doc";
+		  Application.StartupPath + "\\test_word_file.doc";
+string filename = Application.StartupPath + "\\gif_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".gif";
+
+_filename = Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..")) + "\\test.png";
+filename1 = Path.GetFullPath(Path.Combine(System.Windows.Forms.Application.StartupPath, @"..\..")) + @"\Step.doc";
+
+//string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\Step.doc";
+//string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\bmp_format.docx";
+ring doc_filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\vcs__WORD7.docx";
+
+取得副檔名 包含. .jpg .bmp
+string extension = Path.GetExtension(filename);
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+button1.PerformClick();	把按鍵按一下
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+            pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
+            this.BackgroundImage = bitmap1;//顯示在 表單中
+
+
+
+
+        private void listView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            //listView接受鍵盤的Delete鍵
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (listView1.SelectedItems.Count > 0)
+                {
+                    listView1.SelectedItems[0].Remove();
+                }
+            }
+        }
+        
+        
+
+            string filename = @"../../net/net1.net";
+
+            using (TextReader reader = new StreamReader(filename))
+            {
+                string line = reader.ReadLine();
+                while (line != null)
+                {
+                    richTextBox1.Text += line + "\n";
+
+                    line = reader.ReadLine();
+                }
+            }
+
+
+
+
+
+            //Rectangle 的 Union
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+            Rectangle rec1 = new Rectangle(100, 10, 200, 200);
+            Rectangle rec2 = new Rectangle(150, 100, 200, 200);
+            Rectangle rec3 = new Rectangle(30, 150, 200, 200);
+            g.DrawRectangle(Pens.Red, rec1);
+            g.DrawRectangle(Pens.Green, rec2);
+            g.DrawRectangle(Pens.Blue, rec3);
+
+            Rectangle new_rect = Rectangle.Union(rec1, rec2);
+            new_rect = Rectangle.Union(new_rect, rec3);
+            g.DrawRectangle(Pens.Magenta, new_rect);
+
+
+
+
+                            string txt = link.Cost.ToString();
+                            SizeF txt_size = gr.MeasureString(txt, this.Font);
+                            gr.DrawString(txt, this.Font, Brushes.Black,
+                                x1 - txt_size.Width / 2,
+                                y1 - txt_size.Height / 2);
+
+                string txt = node.Id.ToString();
+                SizeF txt_size = gr.MeasureString(txt, this.Font);
+                gr.DrawString(txt, this.Font, text_brush,
+                    node.Location.X - txt_size.Width / 2,
+                    node.Location.Y - txt_size.Height / 2);
+
+
+
+
+
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "pictureBox1 ";
+
+            PictureBox pic = sender as PictureBox;
+            richTextBox1.Text += pic.Name + " ";
+            //MessageBox.Show(pic.Name);
+        }
+        
+
+        //重寫表單的OnPaint範例 直接寫在此即可
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            e.Graphics.DrawRectangle(Pens.Red, 5, 5, this.Width - 10, this.Height - 10);
+        }
+
+
+
+
+
+
+
+
+            groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 6 - 40); //listView
+            listView1.Location = new Point(5, 10);
+            listView1.Size = new Size(360, 120);
+            bt3.Location = new Point(370, 10);
+
+
+
+        void load_listview_data()
+        {
+            DateTime dt = DateTime.Now;
+
+            listView1.Items.Add(new ListViewItem(new String[] { "ToLongDateString", "D", dt.ToLongDateString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToLongTimeString", "T", dt.ToLongTimeString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToShortDateString", "d", dt.ToShortDateString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToShortTimeString", "t", dt.ToShortTimeString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToString", "G", dt.ToString() }));
+
+
+
+        }
+
+        private void bt3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "c = " + listView1.Items.Count.ToString() + "\n";
+            for (int i = 0; i < listView1.Items.Count; i++)
+            {
+                for (int j = 0; j < listView1.Items[i].SubItems.Count; j++)
+                {
+                    //richTextBox1.Text += "c2 = " + listView1.Items[i].SubItems.Count.ToString() + "\n";
+                    richTextBox1.Text += "i = " + i.ToString() + listView1.Items[i] + "\tj = " + j.ToString() + listView1.Items[i].SubItems[j] + "\n";
+                }
+            }
+        }
+
+
+
+
+
+textBox 的 KeyPress
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 13)
+            {
+                e.Handled = true;
+            }
+            else if (e.KeyChar == 13)
+            {
+                int textSize = int.Parse(textBox2.Text);
+                //ApplyTextSize(textSize);
+
+                e.Handled = true;
+                this.richTextBox1.Focus();
+            }
+        }
+
+
+
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+//Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定義鼠標 
+
+string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+//string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+            ListViewItem i1 = new ListViewItem("aaaaaaa");
+            ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+            sub_i1a.Text = "bbbbb";
+            i1.SubItems.Add(sub_i1a);
+            listView1.Items.Add(i1);
+
+
+            //設置ListView最後一行可見
+            listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+splitContainer1
+splitContainer1 預設兩個Panel, Panel1 和 Panel2，Dock 選 DockStyle.Fill
+放控件至Panel中，Dock 選 DockStyle.Fill
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+listView1 屬性 的 ContextMenuStrip 加 contextMenuStrip1
+
+
+vcs_ListView3_ContextMenuStrip
+
+點選contextMenuStrip1, 在這裡輸入, 項目名稱, 例如 : 取消選擇
+
+使ListView控制元件中的選擇項目以高亮度方式顯示
+使ListView控制元件中的選擇項目以高亮度方式顯示
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Graphics g = this.CreateGraphics();
+            Size s = this.Size;
+            Bitmap bitmap1 = new Bitmap(s.Width, s.Height, g);
+            Graphics memoryGraphics = Graphics.FromImage(bitmap1);
+            memoryGraphics.CopyFromScreen(this.Location.X, this.Location.Y, 0, 0, s);
+
+            pictureBox1.Image = bitmap1;
+
+            //e.Graphics.DrawImage(memoryImage, 0, 0);
+        }
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+this.TreeViewFile.Dock = System.Windows.Forms.DockStyle.Fill;
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+TreeView 加 圖片icon設定
+
+魏
+	曹操
+		曹昂
+		曹丕	曹叡
+		曹彰
+		曹植
+		曹沖
+
+	司馬懿
+		司馬師
+		司馬昭	司馬炎
+		司馬倫
+
+蜀
+	劉備	劉禪、劉永、劉理
+	關羽	關平 關興
+	張飛	張苞 張紹
+吳
+
+	孫堅
+		孫策	孫紹
+		孫權	孫登
+			孫和
+			孫休
+			孫亮
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+//把控件當引數傳遞
+result = image_processing19(pictureBox1, cx, cy, R, 150F);
+
+//函數部分
+public Image image_processing19(string filename, int x, int y, int R, float better)
+{
+    Bitmap bitmap1 = new Bitmap(Pict.Image, Pict.Image.Width, Pict.Image.Height);//根據圖像實例化Bitmap類
+    
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+String.Format("{0，–10}",text)
+//要将字符串向左对齐使用负数，正对齐使用正数，里面的值为当前所占字符的格子。例如:
+
+String aaa = String.Format("{0,-30} | {1,-20} | {2,5}", "a", "b", 3);
+String bbb = String.Format("{0,-30} | {1,-20} | {2,5}", "aaaaaaaaaaaaaaaaaaaaaaaa", "b", 3);
+String ccc = String.Format("{0,-30} | {1,-20} | {2,5}", "aaaa", "b", 3);
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+                    Color pt;
+                    x_st = WW / 2 - ww / 2 + flag_right_left_cnt * awb_step + flag_right_left_point_cnt;
+                    if (x_st < 0)
+                        x_st = 0;
+                    if ((x_st + ww) > WW)
+                        x_st = WW - ww;
+
+                    y_st = HH / 2 - hh / 2 + flag_down_up_cnt * awb_step + flag_down_up_point_cnt;
+                    if (y_st < 0)
+                        y_st = 0;
+                    if ((y_st + hh) > HH)
+                        y_st = HH - hh;
+
+                    total_R = 0;
+                    total_G = 0;
+                    total_B = 0;
+
+                    for (j = 0; j < hh; j++)
+                    {
+                        for (i = 0; i < ww; i++)
+                        {
+                            pt = bitmap1.GetPixel(x_st + i, y_st + j);
+                            total_R += pt.R;
+                            total_G += pt.G;
+                            total_B += pt.B;
+                        }
+                    }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //按Enter連動到button1
+            this.AcceptButton = button1;
+            //按ESC連動到button1
+            this.CancelButton = button2;
+
+            //不再TaskBar上顯示程式
+            this.ShowInTaskbar = false;
+        }
+
+vcs 之 radioButton 可以用Image, Text設為空
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+SaveBitmapUsingExtension(TheBitmap, sfdImage.FileName);
+
+        public void SaveBitmapUsingExtension(Bitmap bm, string filename)
+        {
+            string extension = Path.GetExtension(filename);
+            switch (extension.ToLower())
+            {
+                case ".bmp":
+                    bm.Save(filename, ImageFormat.Bmp);
+                    break;
+                case ".exif":
+                    bm.Save(filename, ImageFormat.Exif);
+                    break;
+                case ".gif":
+                    bm.Save(filename, ImageFormat.Gif);
+                    break;
+                case ".jpg":
+                case ".jpeg":
+                    bm.Save(filename, ImageFormat.Jpeg);
+                    break;
+                case ".png":
+                    bm.Save(filename, ImageFormat.Png);
+                    break;
+                case ".tif":
+                case ".tiff":
+                    bm.Save(filename, ImageFormat.Tiff);
+                    break;
+                default:
+                    throw new NotSupportedException(
+                        "Unknown file extension " + extension);
+            }
+        }
+
+vcs
+            //撈出一層jpg檔
+
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
+            string[] filenames = Directory.GetFiles(foldername, "*.jpg");
+
+            foreach (string filename in filenames)
+            {
+                richTextBox1.Text += "取得檔案 : " + filename + "\n";
+            }
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+/*
+//圖片檔案 => Image => MemoryStream(ms) => 拜列
+//拜列 => MemoryStream(ms) => Image => 圖片檔案
+// bmp/png 資料長度 4*W*H + 檔頭54拜
+// jpg     資料長度 3*W*H + 檔頭54拜
+*/
+
+richTextBox1.Text += byte_data[i].ToString("D03");
+
+# new_image = old_image * 2 - contrast + brightness
+
+ output = image * (contrast / 127 + 1) - contrast + brightness
+
+    //內存法
+    public class LockBitmap
+    {
+        Bitmap bmp = null;
+        IntPtr Iptr = IntPtr.Zero;
+
+        public byte[] byte_data { get; set; }
+        public int Depth { get; private set; }
+        public int Width { get; private set; }
+        public int Height { get; private set; }
+
+
+        /// <summary>
+        /// Get the color of the specified pixel
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public Color GetPixel(int x, int y)
+        {
+            Color clr = Color.Empty;
+
+            // Get color components count
+            int cCount = Depth / 8;
+
+            // Get start index of the specified pixel
+            int i = ((y * Width) + x) * cCount;
+
+            if (i > byte_data.Length - cCount)
+                throw new IndexOutOfRangeException();
+
+            if (Depth == 32) // For 32 bpp get Red, Green, Blue and Alpha
+            {
+                byte b = byte_data[i];
+                byte g = byte_data[i + 1];
+                byte r = byte_data[i + 2];
+                byte a = byte_data[i + 3]; // a
+                clr = Color.FromArgb(a, r, g, b);
+            }
+            if (Depth == 24) // For 24 bpp get Red, Green and Blue
+            {
+                byte b = byte_data[i];
+                byte g = byte_data[i + 1];
+                byte r = byte_data[i + 2];
+                clr = Color.FromArgb(r, g, b);
+            }
+            if (Depth == 8)
+            // For 8 bpp get color value (Red, Green and Blue values are the same)
+            {
+                byte c = byte_data[i];
+                clr = Color.FromArgb(c, c, c);
+            }
+            return clr;
+        }
+
+        /// <summary>
+        /// Set the color of the specified pixel
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="color"></param>
+        public void SetPixel(int x, int y, Color color)
+        {
+            // Get color components count
+            int cCount = Depth / 8;
+
+            // Get start index of the specified pixel
+            int i = ((y * Width) + x) * cCount;
+
+            if (Depth == 32) // For 32 bpp set Red, Green, Blue and Alpha
+            {
+                byte_data[i] = color.B;
+                byte_data[i + 1] = color.G;
+                byte_data[i + 2] = color.R;
+                byte_data[i + 3] = color.A;
+            }
+            if (Depth == 24) // For 24 bpp set Red, Green and Blue
+            {
+                byte_data[i] = color.B;
+                byte_data[i + 1] = color.G;
+                byte_data[i + 2] = color.R;
+            }
+            if (Depth == 8)
+            // For 8 bpp set color value (Red, Green and Blue values are the same)
+            {
+                byte_data[i] = color.B;
+            }
+        }
+    }
+
+
+#-----------------------------
+    //指針法
+    public class PointBitmap
+    {
+        public Color GetPixel(int x, int y)
+        {
+            unsafe
+            {
+                byte* ptr = (byte*)Iptr;
+                ptr = ptr + bmpData.Stride * y;
+                ptr += Depth * x / 8;
+                Color c = Color.Empty;
+                if (Depth == 32)
+                {
+                    int a = ptr[3];
+                    int r = ptr[2];
+                    int g = ptr[1];
+                    int b = ptr[0];
+                    c = Color.FromArgb(a, r, g, b);
+                }
+                else if (Depth == 24)
+                {
+                    int r = ptr[2];
+                    int g = ptr[1];
+                    int b = ptr[0];
+                    c = Color.FromArgb(r, g, b);
+                }
+                else if (Depth == 8)
+                {
+                    int r = ptr[0];
+                    c = Color.FromArgb(r, r, r);
+                }
+                return c;
+            }
+        }
+
+        public void SetPixel(int x, int y, Color c)
+        {
+            unsafe
+            {
+                byte* ptr = (byte*)Iptr;
+                ptr = ptr + bmpData.Stride * y;
+                ptr += Depth * x / 8;
+                if (Depth == 32)
+                {
+                    ptr[3] = c.A;
+                    ptr[2] = c.R;
+                    ptr[1] = c.G;
+                    ptr[0] = c.B;
+                }
+                else if (Depth == 24)
+                {
+                    ptr[2] = c.R;
+                    ptr[1] = c.G;
+                    ptr[0] = c.B;
+                }
+                else if (Depth == 8)
+                {
+                    ptr[2] = c.R;
+                    ptr[1] = c.G;
+                    ptr[0] = c.B;
+                }
+            }
+        }
+    }
+
+
+
+那個vcs影像處理
+
+應該改成
+
+do_grayscale1_pixel()
+
+do_grayscale1_marshal()
+
+do_grayscale1_pixel()
+
+函數包起來，這樣要做做1000次量測時間用
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+/*
+
+            //int i;
+            for (i = 0; i < 100; i++)
+            {
+                richTextBox1.Text += data[i].ToString() + " ";
+            }
+            richTextBox1.Text += "\n\n";
+
+
+                    richTextBox1.Text += "aaa" + data[lineIndex + x + 2].ToString() + " " +
+    data[lineIndex + x + 1].ToString() + " " +
+    data[lineIndex + x + 0].ToString() + "\n";
+
+                    richTextBox1.Text += "bbb" + data[lineIndex + x + 2].ToString() + " " +
+    data[lineIndex + x + 1].ToString() + " " +
+    data[lineIndex + x + 0].ToString() + "\n";
+
+
+ *             Bitmap bmp = new Bitmap(@"C:/_git/vcs/_1.data/______test_files1/pic_256X10.bmp");
+
+            pictureBox1.Image = bmp;
+
+            W = bmp.Width;
+            H = bmp.Height;
+
+            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+
+            w = bmpData.Width;
+            h = bmpData.Height;
+
+            //拷貝出來
+            byte[] data = new byte[bmpData.Width * bmpData.Height * 3];
+            Marshal.Copy(bmpData.Scan0, data, 0, data.Length); //複製記憶體區塊
+
+            bmp.UnlockBits(bmpData);
+
+            richTextBox1.Text += "------------------------------------------------------------------\n";
+*/
+
+        public class EMAFilterRGB2
+        {
+            private Bitmap emaFrame; // [高度, 寬度, 3]
+            private bool initialized = false;
+            private readonly float alpha;
+
+            public EMAFilterRGB2(float alpha)
+            {
+                if (alpha < 0 || alpha > 1)
+                    throw new ArgumentException("Alpha 必須介於 0 和 1 之間。");
+                this.alpha = alpha;
+            }
+
+            public Bitmap Apply(Bitmap currentFrame)
+            {
+                //int height = currentFrame.GetLength(0);
+                //int width = currentFrame.GetLength(1);
+                //int channels = currentFrame.GetLength(2);
+                int height = currentFrame.Height;
+                int width = currentFrame.Width;
+
+                if (!initialized)
+                {
+                    emaFrame = (Bitmap)currentFrame.Clone();
+                }
+
+                Bitmap output = new Bitmap(width, height);
+                Color pt1;
+                Color pt2;
+                Color pt3;
+
+                int total_R = 0;
+                int total_G = 0;
+                int total_B = 0;
+
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        pt1 = currentFrame.GetPixel(x, y);
+                        pt2 = emaFrame.GetPixel(x, y);
+                        total_R = (int)(alpha * pt1.R + (1 - alpha) * pt2.R);
+                        total_G = (int)(alpha * pt1.G + (1 - alpha) * pt2.G);
+                        total_B = (int)(alpha * pt1.B + (1 - alpha) * pt2.B);
+                        
+                        pt3 = Color.FromArgb(total_R, total_G, total_B);
+
+                        emaFrame.SetPixel(x, y, pt3);
+                    }
+                }
+
+                return output;
+            }
+        }
+        
+
+PixelFormat.Format8bppIndexed:
+每像素使用 1 个字节（8 位）表示颜色，通常用于索引颜色表的灰度或调色板图像。
+
+PixelFormat.Format16bppRgb555 或 PixelFormat.Format16bppRgb565:
+每像素使用 2 个字节（16 位）表示 RGB 颜色。
+
+PixelFormat.Format24bppRgb 或 PixelFormat.Format32bppRgb:
+每像素分别使用 3 个字节（24 位）或 4 个字节（32 位，额外字节通常为 0 或填充）表示 RGB 颜色。
+
+PixelFormat.Format32bppArgb 或 PixelFormat.Format32bppPArgb:
+每像素使用 4 个字节（32 位）表示 ARGB 颜色，其中 A 代表 Alpha 透明通道。
+
+PixelFormat.Format48bppRgb 或 PixelFormat.Format64bppArgb:
+每像素分别使用 6 个字节（48 位）或 8 个字节（64 位）表示高精度 RGB 或 ARGB 颜色。
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+vcs 使用 macro
+
+#define Use_IndexOf
+#define Use_HitTest
+
+        // Display the row and column under the mouse.
+        private void listView1_MouseMove(object sender, MouseEventArgs e)
+        {
+            txtRow.Clear();
+            txtColumn.Clear();
+
+#if Use_IndexOf
+            // Method 3: Use HitTest and IndexOf.
+            ListViewHitTestInfo hti = listView1.HitTest(e.Location);
+            if (hti.Item == null) return;
+            ListViewItem item = hti.Item;
+            txtRow.Text = item.Index.ToString();
+
+            // See which sub-item this is.
+            txtColumn.Text = item.SubItems.IndexOf(hti.SubItem).ToString();
+#elif Use_HitTest
+            // Method 2: Use HitTest.
+            ListViewHitTestInfo hti = listView1.HitTest(e.Location);
+            if (hti.Item == null) return;
+            ListViewItem item = hti.Item;
+            txtRow.Text = item.Index.ToString();
+
+            // See which sub-item this is.
+            ListViewItem.ListViewSubItem subitem = hti.SubItem;
+            for (int i = 0; i < item.SubItems.Count; i++)
+            {
+                if (item.SubItems[i] == subitem)
+                {
+                    txtColumn.Text = i.ToString();
+                }
+            }
+#else
+            // Method 1: Use the FindListViewRowColumn method.
+            int row, column;
+            if (listView1.FindListViewRowColumn(e.X, e.Y, out row, out column))
+            {
+                txtRow.Text = row.ToString();
+                txtColumn.Text = column.ToString();
+            }
+#endif
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
 
@@ -1679,5 +2690,563 @@ richTextBox1.Text += "----------------------------------------------------------
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+
+
+
+        private void toggleOption(int camIndex, int optionIndex, bool value)
+        {
+            switch (optionIndex)
+            {
+                case 0:
+                    this.CamMonitor[camIndex].MotionDetection = value;
+                    break;
+                case 1:
+                    this.CamMonitor[camIndex].RecordOnMotion = value;
+                    break;
+                case 2:
+                    this.CamMonitor[camIndex].BeepOnMotion = value;
+                    break;
+            }
+        }
+
+
+print('------------------------------------------------------------')	#60個
+
+MotionDetection1_CheckedChanged(object sender, EventArgs e)
+this.toggleOption(0, 0, true);
+this.toggleOption(0, 0, false);
+
+AutoRecord1_CheckedChanged(object sender, EventArgs e)
+this.toggleOption(0, 1, true);
+this.toggleOption(0, 1, false);
+
+BeepOnMotionCheck1_CheckedChanged(object sender, EventArgs e)
+this.toggleOption(0, 2, true);
+this.toggleOption(0, 2, false);
+
+print('------------------------------------------------------------')	#60個
+
+        
+
+        public FilterInfoCollection USBWebcams = null;
+        public VideoCaptureDevice Cam = null;
+
+        void Init_WebcamSetup()
+        {
+            //richTextBox1.Text += "重新抓取USB影像\t";
+            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
+            {
+                //button12.Enabled = false;
+                Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
+                Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+                Cam.Start();   // WebCam starts capturing images.
+                //richTextBox1.Text += "有影像裝置\n";
+
+                Cam.VideoResolution = Cam.VideoCapabilities[0];
+
+                string webcam_name = string.Empty;
+
+                int ww;
+                int hh;
+                ww = Cam.VideoCapabilities[0].FrameSize.Width;
+                hh = Cam.VideoCapabilities[0].FrameSize.Height;
+
+                webcam_name = USBWebcams[0].Name + " " + Cam.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
+                this.Text = webcam_name;
+
+                if (Screen.PrimaryScreen.Bounds.Width == 1920)
+                {
+                    if (ww >= Screen.PrimaryScreen.Bounds.Width)
+                    {
+                        pictureBox1.Size = new Size(1920, 1080);
+                        pictureBox1.Location = new Point(0, 0);
+                        this.FormBorderStyle = FormBorderStyle.None;
+                        this.WindowState = FormWindowState.Maximized;
+                        //this.Size = new Size(pictureBox1.Size.Width + 200, pictureBox1.Size.Height + 200);
+                    }
+                    else if (ww < Screen.PrimaryScreen.Bounds.Width)
+                    {
+                        pictureBox1.Size = new Size(ww, hh);
+                        pictureBox1.Location = new Point(140, 60);
+                        this.FormBorderStyle = FormBorderStyle.FixedSingle;
+                        this.WindowState = FormWindowState.Normal;
+                        this.ClientSize = new Size(pictureBox1.Location.X + pictureBox1.Width + 50, pictureBox1.Location.Y + pictureBox1.Height + 50);
+                    }
+                }
+            }
+            else
+            {
+                //button12.Enabled = true;
+                //richTextBox1.Text += "無影像裝置\n";
+            }
+
+
+        }
+
+
+print('------------------------------------------------------------')	#60個
+
+
+plt.savefig('tmp_event.png', dpi=300) 	# 將圓餅圖出成圖片，檔名為event.png 
+
+
+
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            this.pictureBox1.Focus();
+
+
+#通用
+Form1_Load()
+Form1_FormClosing()
+show_item_location()
+bt_clear_Click()
+delay()
+show_main_message()
+timer_display_Tick()
+-----------------------------------
+#相機一般
+Init_WebcamSetup()
+Start_Webcam()
+Stop_Webcam()
+Cam_NewFrame()
+save_image_to_drive()
+timer_fps_Tick()
+-----------------------------------
+#相機錄影
+do_record()
+-----------------------------------
+#相機按鈕
+bt_start_Click()
+bt_stop_Click()
+bt_record_start_Click()
+bt_record_stop_Click()
+
+
+print('------------------------------------------------------------')	#60個
+
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from Win32_Processor");
+            foreach (ManagementObject myobject in searcher.Get())
+            {
+                lblCPU.Text = myobject["LoadPercentage"].ToString() + " %";
+                //label2.Text = lblCPU.Text;
+                label2.Text = "CPU使用率：" + lblCPU.Text;
+                mheight = Convert.ToInt32(myobject["LoadPercentage"].ToString());
+                if (mheight == 100)
+                    panel3.Height = 100;
+                CreateImage();
+            }
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+//vcs最小化錄影
+
+//公用變數
+VideoFileWriter writer = new VideoFileWriter();
+
+//開啟檔案
+//writer.Open(filename, W, H, fps);
+
+//寫入影格
+//writer.WriteVideoFrame(bitmap1);
+
+//關閉檔案
+writer.Close();
+
+
+        private void DoRecord()
+        {
+            VideoFileWriter writer = new VideoFileWriter();
+
+            writer.Open(RecordingFilename, this.Width, this.Height, 30);
+
+
+                        Bitmap bitmap1 = frames.Dequeue();
+                        writer.WriteVideoFrame(bitmap1);
+
+
+            writer.Close();
+        }
+
+宣告QUEUE
+
+Queue<Bitmap> frames = new Queue<Bitmap>(); // Queue that stores frames to be written by the recorder thread
+
+加入資料
+frames.Enqueue((Bitmap)bitmap1.Clone());
+
+
+取出資料
+if (frames.Count > 0)
+{
+    try
+    {
+        Bitmap bitmap1 = frames.Dequeue();
+        writer.WriteVideoFrame(bitmap1);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("xxx錯誤訊息e03 : " + ex.Message);
+    }
+}
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+            //serialPort2.Write(data, 0, data.Length);
+            try
+            {   //可能會產生錯誤的程式區段
+                serialPort2.Write(data, 0, data.Length);
+            }
+            catch (Exception ex)
+            {   //定義產生錯誤時的例外處理程式碼
+                richTextBox1.Text += "xxx錯誤訊息e03 : " + ex.Message + "\n";
+            }
+            finally
+            {
+                //一定會被執行的程式區段
+            }
+
+
+WriteToSerialPort2(data, 0, data.Length)
+
+
+void WriteToSerialPort2(byte[] data, int offset, int count)
+{
+            //serialPort2.Write(data, offset, count);
+            try
+            {   //可能會產生錯誤的程式區段
+                serialPort2.Write(data, offset, count);
+            }
+            catch (Exception ex)
+            {   //定義產生錯誤時的例外處理程式碼
+                richTextBox1.Text += "xxx錯誤訊息e02 : " + ex.Message + "\n";
+            }
+            finally
+            {
+                //一定會被執行的程式區段
+            }
+
+}
+
+
+
+
+//
+        // 摘要:
+        //     使用緩衝區中的資料，將指定的位元組數目寫入序列埠。
+        //
+        // 參數:
+        //   buffer:
+        //     包含要寫入通訊埠之資料的位元組陣列。
+        //
+        //   offset:
+        //     buffer 參數中以零起始的位元組位移，用來開始將位元組複製到通訊埠。
+        //
+        //   count:
+        //     要寫入的位元組數。
+        //
+        // 例外狀況:
+        //   System.ArgumentNullException:
+        //     傳遞的 buffer 為 null。
+        //
+        //   System.InvalidOperationException:
+        //     指定的連接埠未開啟。
+        //
+        //   System.ArgumentOutOfRangeException:
+        //     offset 或 count 參數超出所傳遞之 buffer 的有效區域以外。offset 或 count 小於零。
+        //
+        //   System.ArgumentException:
+        //     offset 加上 count 大於 buffer 的長度。
+        //
+        //   System.ServiceProcess.TimeoutException:
+        //     作業沒有在逾時期間結束之前完成。
+        
+        
+        
+        
+        
+        
+
+
+        public bool Get_IMS_Data(byte xx, byte yy, byte zz)
+        {
+            if (get_comport_status() == false)
+                return false;
+
+            byte[] data = new byte[5];
+
+            data[0] = 0xAA;
+            data[1] = xx;
+            data[2] = yy;
+            data[3] = zz;
+            data[4] = CalcCheckSum(data, 4);
+
+            //richTextBox1.AppendText("[TX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + "\n");
+
+            serialPort2.Write(data, 0, data.Length);
+            flag_wait_receive_data = 1;
+
+            return true;
+        }
+
+
+ 如需叫用 Just-In-Time (JIT) 偵錯的詳細資料，
+請參閱本訊息結尾處 (而非這個對話方塊) 的資訊。
+
+************** 例外狀況文字 **************
+System.IO.IOException: 裝置未就緒。
+
+   於 System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   於 System.IO.Ports.SerialStream.EndWrite(IAsyncResult asyncResult)
+   於 System.IO.Ports.SerialStream.Write(Byte[] array, Int32 offset, Int32 count, Int32 timeout)
+   於 System.IO.Ports.SerialPort.Write(Byte[] buffer, Int32 offset, Int32 count)
+   於 iMS_Link.Form1.Get_IMS_Data(Byte xx, Byte yy, Byte zz)
+   於 iMS_Link.Form1.timer_rtc_Tick(Object sender, EventArgs e)
+   於 System.Windows.Forms.Timer.OnTick(EventArgs e)
+   於 System.Windows.Forms.Timer.TimerNativeWindow.WndProc(Message& m)
+   於 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+
+************** 已載入的組件 **************
+mscorlib
+    組件版本: 4.0.0.0
+    Win32 版本: 4.8.9181.0 built by: NET481REL1LAST_C
+    程式碼庫: file:///C:/Windows/Microsoft.NET/Framework/v4.0.30319/mscorlib.dll
+----------------------------------------
+iMS_Link
+    組件版本: 1.0.0.0
+    Win32 版本: 1.0.0.0
+    程式碼庫: file:///C:/Users/070601/Desktop/iMS_Link01/01iMS_AWB_SETUP.exe
+----------------------------------------
+System.Windows.Forms
+    組件版本: 4.0.0.0
+    Win32 版本: 4.8.9181.0 built by: NET481REL1LAST_C
+    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms/v4.0_4.0.0.0__b77a5c561934e089/System.Windows.Forms.dll
+----------------------------------------
+System
+    組件版本: 4.0.0.0
+    Win32 版本: 4.8.9214.0 built by: NET481REL1LAST_B
+    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System/v4.0_4.0.0.0__b77a5c561934e089/System.dll
+----------------------------------------
+System.Drawing
+    組件版本: 4.0.0.0
+    Win32 版本: 4.8.9037.0 built by: NET481REL1
+    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Drawing/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.Drawing.dll
+----------------------------------------
+System.Windows.Forms.DataVisualization
+    組件版本: 4.0.0.0
+    Win32 版本: 4.8.9037.0
+    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms.DataVisualization/v4.0_4.0.0.0__31bf3856ad364e35/System.Windows.Forms.DataVisualization.dll
+----------------------------------------
+AForge.Video.DirectShow
+    組件版本: 2.2.5.0
+    Win32 版本: 2.2.5.0
+    程式碼庫: file:///C:/Users/070601/Desktop/iMS_Link01/AForge.Video.DirectShow.DLL
+----------------------------------------
+AForge.Video
+    組件版本: 2.2.5.0
+    Win32 版本: 2.2.5.0
+    程式碼庫: file:///C:/Users/070601/Desktop/iMS_Link01/AForge.Video.DLL
+----------------------------------------
+System.Configuration
+    組件版本: 4.0.0.0
+    Win32 版本: 4.8.9037.0 built by: NET481REL1
+    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Configuration/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.Configuration.dll
+----------------------------------------
+System.Core
+    組件版本: 4.0.0.0
+    Win32 版本: 4.8.9214.0 built by: NET481REL1LAST_B
+    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Core/v4.0_4.0.0.0__b77a5c561934e089/System.Core.dll
+----------------------------------------
+System.Xml
+    組件版本: 4.0.0.0
+    Win32 版本: 4.8.9037.0 built by: NET481REL1
+    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Xml/v4.0_4.0.0.0__b77a5c561934e089/System.Xml.dll
+----------------------------------------
+System.Windows.Forms.DataVisualization.resources
+    組件版本: 4.0.0.0
+    Win32 版本: 4.8.9037.0
+    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms.DataVisualization.resources/v4.0_4.0.0.0_zh-Hant_31bf3856ad364e35/System.Windows.Forms.DataVisualization.resources.dll
+----------------------------------------
+Accessibility
+    組件版本: 4.0.0.0
+    Win32 版本: 4.8.9037.0 built by: NET481REL1
+    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/Accessibility/v4.0_4.0.0.0__b03f5f7f11d50a3a/Accessibility.dll
+----------------------------------------
+System.DirectoryServices
+    組件版本: 4.0.0.0
+    Win32 版本: 4.8.9037.0 built by: NET481REL1
+    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.DirectoryServices/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.DirectoryServices.dll
+----------------------------------------
+HslCommunication
+    組件版本: 4.3.2.0
+    Win32 版本: 4.3.2.0
+    程式碼庫: file:///C:/Users/070601/Desktop/iMS_Link01/HslCommunication.DLL
+----------------------------------------
+System.Windows.Forms.resources
+    組件版本: 4.0.0.0
+    Win32 版本: 4.8.9037.0 built by: NET481REL1
+    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms.resources/v4.0_4.0.0.0_zh-Hant_b77a5c561934e089/System.Windows.Forms.resources.dll
+----------------------------------------
+mscorlib.resources
+    組件版本: 4.0.0.0
+    Win32 版本: 4.8.9037.0 built by: NET481REL1
+    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/mscorlib.resources/v4.0_4.0.0.0_zh-Hant_b77a5c561934e089/mscorlib.resources.dll
+----------------------------------------
+
+************** JIT 偵錯 **************
+若要啟用 Just-In-Time (JIT) 偵錯功能，則必須在
+此應用程式或電腦的 .config 檔案中，設定
+system.windows.forms 區段內的 jitDebugging 值。
+且該應用程式也必須在啟用偵錯的狀態下進行
+編譯。
+
+例如:
+
+<configuration>
+    <system.windows.forms jitDebugging="true" />
+</configuration>
+
+當 JIT 偵錯功能啟用後，會將所有未處理的例外狀況
+傳送給電腦上已註冊的 JIT 偵錯工具進行處
+理，而不是使用這個對話方塊來處理。
+
+
+
+        
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
 
 
