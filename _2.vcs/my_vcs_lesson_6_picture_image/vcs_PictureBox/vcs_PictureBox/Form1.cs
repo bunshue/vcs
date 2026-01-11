@@ -20,9 +20,48 @@ namespace vcs_PictureBox
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             //讀取圖檔
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+            int W = 160;
+            int H = 60;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = W + 10;
+            dy = H + 10;
+
+            pictureBox1.Location = new Point(10, 10);
+            pictureBox1.Size = new Size(640, 480);
+            pictureBox2.Location = new Point(660, 10);
+            groupBox1.Location = new Point(870, 10);
+
+            rb_0.Checked = true;
+
+            label2.Location = new Point(x_st + dx * 4 - 20, y_st + dy * 3);
+            button6.Location = new Point(x_st + dx * 5, y_st + dy * 3);
+            button3.Location = new Point(x_st + dx * 5, y_st + dy * 4);
+
+            richTextBox1.Size = new Size(500, 270);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            listBox1.Size = new Size(500, 270);
+            listBox1.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+
+            this.Size = new Size(1100, 820);
+            this.Text = "vcs_PictureBox";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -221,11 +260,13 @@ namespace vcs_PictureBox
             if (rb_0.Checked == true)
             {
                 richTextBox1.Text += "Normal\n";
+                pictureBox1.Size = new Size(640, 480);
                 pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             }
             else if (rb_1.Checked == true)
             {
                 richTextBox1.Text += "StretchImage\n";
+                pictureBox1.Size = new Size(640, 480);
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             }
             else if (rb_2.Checked == true)
@@ -238,11 +279,13 @@ namespace vcs_PictureBox
             else if (rb_3.Checked == true)
             {
                 richTextBox1.Text += "CenterImage\n";
+                pictureBox1.Size = new Size(640, 480);
                 pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             }
             else if (rb_4.Checked == true)
             {
                 richTextBox1.Text += "Zoom\n";
+                pictureBox1.Size = new Size(640, 480);
                 pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             }
             else
@@ -253,3 +296,16 @@ namespace vcs_PictureBox
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+

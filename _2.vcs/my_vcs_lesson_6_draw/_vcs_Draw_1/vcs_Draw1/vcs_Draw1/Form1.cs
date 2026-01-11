@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //for ImageFormat
-using System.Drawing.Drawing2D; //for LinearGradientBrush, GraphicsPath, GraphicsState
+using System.Drawing.Drawing2D; //for GraphicsPath, GraphicsState
 using System.Drawing.Text;      //for TextRenderingHint
 
 namespace vcs_Draw1

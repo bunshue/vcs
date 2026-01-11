@@ -31,6 +31,8 @@ namespace vcs_Draw_Drag
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             int w = 400;
             int h = 400;
 
@@ -45,6 +47,28 @@ namespace vcs_Draw_Drag
             {
                 pts[i] = new Point(w / 2 + (int)(r * Math.Cos(Math.PI * angle * i / 180)), h / 2 + (int)(r * Math.Sin(Math.PI * angle * i / 180)));
             }
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+            int W = 160;
+            int H = 60;
+
+
+            richTextBox1.Size = new Size(519, 625);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(965, 688);
+            this.Text = "vcs_Draw_Drag";
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void FillCircle(Graphics g, PointF center, int radius, Color c)

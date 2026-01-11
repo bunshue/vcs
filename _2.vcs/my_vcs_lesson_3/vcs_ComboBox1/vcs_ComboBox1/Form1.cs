@@ -9,7 +9,6 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Collections;   //for Hashtable
-using System.Drawing.Drawing2D; //for LinearGradientBrush   //自繪帶圖片的 ComboBox
 
 namespace vcs_ComboBox1
 {
@@ -327,18 +326,14 @@ namespace vcs_ComboBox1
 
         private void ComboBox4_DrawItem(object sender, DrawItemEventArgs e)
         {
-            //鼠標選中在這個項上 
+            //鼠標選中在這個項上
             if ((e.State & DrawItemState.Selected) != 0)
             {
-                //漸變畫刷 
-                LinearGradientBrush brush = new LinearGradientBrush(e.Bounds, Color.FromArgb(255, 251, 237),
-                                                 Color.FromArgb(255, 236, 181), LinearGradientMode.Vertical);
-                //填充區域 
+                //填充區域, 畫選中項目的背景色
                 Rectangle borderRect = new Rectangle(3, e.Bounds.Y, e.Bounds.Width - 5, e.Bounds.Height - 2);
+                e.Graphics.FillRectangle(Brushes.Pink, borderRect);
 
-                e.Graphics.FillRectangle(brush, borderRect);
-
-                //畫邊框 
+                //畫邊框
                 Pen pen = new Pen(Color.FromArgb(229, 195, 101));
                 e.Graphics.DrawRectangle(pen, borderRect);
             }
@@ -357,8 +352,7 @@ namespace vcs_ComboBox1
             e.Graphics.DrawImage(img, imgRect);
 
             //文本內容顯示區域 
-            Rectangle textRect =
-                    new Rectangle(imgRect.Right + 2, imgRect.Y, e.Bounds.Width - imgRect.Width, e.Bounds.Height - 2);
+            Rectangle textRect = new Rectangle(imgRect.Right + 2, imgRect.Y, e.Bounds.Width - imgRect.Width, e.Bounds.Height - 2);
 
             //獲得項文本內容,繪制文本 
             String itemText = comboBox4.Items[e.Index].ToString();
@@ -504,7 +498,9 @@ namespace vcs_ComboBox1
                 this.comboBox6.Items.Add(de.Key);
             }
             if (comboBox6.Items.Count > 0)
+            {
                 comboBox6.SelectedIndex = 0;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -513,7 +509,9 @@ namespace vcs_ComboBox1
             richTextBox1.Text += comboBox6.SelectedIndex.ToString() + "\n";
 
             if (comboBox6.SelectedIndex == -1)
+            {
                 return;
+            }
             if (ht.Values.Count > 0)
             {
                 showPic(ht[this.comboBox6.Text].ToString());
@@ -544,9 +542,7 @@ namespace vcs_ComboBox1
             {
                 //richTextBox1.Text += "key = " + d.Entry.Key + "\t" + "value = " + d.Entry.Value + "\n";
             }
-
         }
-
     }
 
     //自定義組合框項 
@@ -572,7 +568,6 @@ namespace vcs_ComboBox1
         }
     }
 }
-
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

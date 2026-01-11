@@ -59,15 +59,5 @@ namespace vcs_Draw_Brush.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Bitmap Butterfly {
-            get {
-                object obj = ResourceManager.GetObject("Butterfly", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

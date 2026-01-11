@@ -50,10 +50,11 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Pink;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(605, 421);
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -64,16 +65,16 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(12, 439);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 122);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(401, 311);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.Location = new System.Drawing.Point(829, 298);
+            this.button3.Location = new System.Drawing.Point(443, 298);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(140, 50);
             this.button3.TabIndex = 4;
@@ -84,7 +85,7 @@
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button6.Location = new System.Drawing.Point(829, 242);
+            this.button6.Location = new System.Drawing.Point(443, 242);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(140, 50);
             this.button6.TabIndex = 7;
@@ -100,16 +101,16 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(419, 444);
+            this.listBox1.Location = new System.Drawing.Point(118, 122);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(404, 304);
+            this.listBox1.Size = new System.Drawing.Size(100, 100);
             this.listBox1.TabIndex = 11;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // pictureBox2
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.Location = new System.Drawing.Point(623, 12);
+            this.pictureBox2.Location = new System.Drawing.Point(237, 12);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(200, 200);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -120,7 +121,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(625, 317);
+            this.label2.Location = new System.Drawing.Point(239, 317);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(184, 16);
             this.label2.TabIndex = 19;
@@ -133,7 +134,7 @@
             this.groupBox1.Controls.Add(this.rb_2);
             this.groupBox1.Controls.Add(this.rb_1);
             this.groupBox1.Controls.Add(this.rb_0);
-            this.groupBox1.Location = new System.Drawing.Point(829, 12);
+            this.groupBox1.Location = new System.Drawing.Point(443, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(152, 136);
             this.groupBox1.TabIndex = 20;
@@ -202,7 +203,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(341, 716);
+            this.bt_clear.Location = new System.Drawing.Point(35, 158);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(60, 32);
             this.bt_clear.TabIndex = 21;
@@ -214,7 +215,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(987, 761);
+            this.ClientSize = new System.Drawing.Size(684, 411);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);

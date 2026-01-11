@@ -55,6 +55,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lb_rotate = new System.Windows.Forms.Label();
+            this.bt_pictureBox1_clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -327,11 +328,23 @@
             this.lb_rotate.TabIndex = 225;
             this.lb_rotate.Text = "旋轉 + 鏡射";
             // 
+            // bt_pictureBox1_clear
+            // 
+            this.bt_pictureBox1_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_pictureBox1_clear.Location = new System.Drawing.Point(451, 93);
+            this.bt_pictureBox1_clear.Name = "bt_pictureBox1_clear";
+            this.bt_pictureBox1_clear.Size = new System.Drawing.Size(66, 40);
+            this.bt_pictureBox1_clear.TabIndex = 226;
+            this.bt_pictureBox1_clear.Text = "Clear";
+            this.bt_pictureBox1_clear.UseVisualStyleBackColor = true;
+            this.bt_pictureBox1_clear.Click += new System.EventHandler(this.bt_pictureBox1_clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(744, 642);
+            this.Controls.Add(this.bt_pictureBox1_clear);
             this.Controls.Add(this.lb_rotate);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.button19);
@@ -395,6 +408,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label lb_rotate;
+        private System.Windows.Forms.Button bt_pictureBox1_clear;
     }
 }
 

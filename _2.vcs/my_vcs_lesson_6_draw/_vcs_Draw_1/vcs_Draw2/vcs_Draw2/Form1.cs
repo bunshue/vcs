@@ -29,50 +29,6 @@ namespace vcs_Draw2
         {
             show_item_location();
 
-            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-            p = new Pen(Color.Red, 3);
-
-            if (radioButton1.Checked == true)
-            {
-                g = pictureBox1.CreateGraphics();
-                p = new Pen(Color.Red, 10);     //default pen
-                pictureBox1.Location = new Point(0, 0);
-
-                SolidBrush sb = new SolidBrush(Color.Gold);
-                p = new Pen(sb, 10);
-                richTextBox1.Text += "SolidBrush\n";
-            }
-            else if (radioButton2.Checked == true)
-            {
-                g = pictureBox1.CreateGraphics();
-                p = new Pen(Color.Red, 10);     //default pen
-                pictureBox1.Location = new Point(50, 50);
-
-                TextureBrush tb = new TextureBrush(new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg"));
-                p = new Pen(tb, 10);
-                richTextBox1.Text += "TextureBrush\n";
-            }
-            else if (radioButton3.Checked == true)
-            {
-                g = pictureBox1.CreateGraphics();
-                p = new Pen(Color.Red, 10);     //default pen
-                pictureBox1.Location = new Point(50, 50);
-
-                HatchBrush hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Red);
-                p = new Pen(hb, 10);
-                richTextBox1.Text += "HatchBrush\n";
-            }
-            else if (radioButton4.Checked == true)
-            {
-                g = pictureBox1.CreateGraphics();
-                p = new Pen(Color.Red, 10);     //default pen
-                pictureBox1.Location = new Point(50, 50);
-
-                Rectangle rect1 = new Rectangle(0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
-                LinearGradientBrush lgb = new LinearGradientBrush(rect1, Color.Blue, Color.Red, 90);
-                p = new Pen(lgb, 10);
-                richTextBox1.Text += "LinearGradientBrush\n";
-            }
         }
 
         void show_item_location()
@@ -177,8 +133,6 @@ namespace vcs_Draw2
             button21.Location = new Point(x_st + dx * 3, y_st + dy * 3);
             button22.Location = new Point(x_st + dx * 3, y_st + dy * 4);
             button23.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 6);
 
             bt_reset.Location = new Point(x_st + dx * 2, y_st + dy * 6);
             bt_save.Location = new Point(x_st + dx * 3, y_st + dy * 6);
@@ -1132,84 +1086,7 @@ namespace vcs_Draw2
                 richTextBox1.Text += "無圖可存\n";
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton1.Checked == true)
-            {
-                g = pictureBox1.CreateGraphics();
-                p = new Pen(Color.Red, 10);     //default pen
-                pictureBox1.Location = new Point(50, 50);
 
-                SolidBrush sb = new SolidBrush(Color.Gold);
-                p = new Pen(sb, 10);
-                richTextBox1.Text += "SolidBrush\n";
-            }
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton2.Checked == true)
-            {
-                g = pictureBox1.CreateGraphics();
-                p = new Pen(Color.Red, 10);     //default pen
-                pictureBox1.Location = new Point(50, 50);
-
-                TextureBrush tb = new TextureBrush(new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg"));
-                p = new Pen(tb, 10);
-                richTextBox1.Text += "TextureBrush\n";
-            }
-        }
-
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton3.Checked == true)
-            {
-                g = pictureBox1.CreateGraphics();
-                p = new Pen(Color.Red, 10);     //default pen
-                pictureBox1.Location = new Point(50, 50);
-
-                HatchBrush hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Red);
-                p = new Pen(hb, 10);
-                richTextBox1.Text += "HatchBrush\n";
-            }
-        }
-
-        private void radioButton4_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton4.Checked == true)
-            {
-                g = pictureBox1.CreateGraphics();
-                p = new Pen(Color.Red, 10);     //default pen
-                pictureBox1.Location = new Point(50, 50);
-
-                Rectangle rect1 = new Rectangle(0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
-                LinearGradientBrush lgb = new LinearGradientBrush(rect1, Color.Blue, Color.Red, 90);
-                p = new Pen(lgb, 10);
-                richTextBox1.Text += "LinearGradientBrush\n";
-            }
-        }
-
-        private void bt_draw1_Click(object sender, EventArgs e)
-        {
-            //p = new Pen(Color.Red, 5);
-            int width, height;
-            width = pictureBox1.ClientSize.Width;
-            height = pictureBox1.ClientSize.Height;
-            g.Clear(Color.LightGreen);
-            g.DrawRectangle(p, 0, 0, width - 1, height - 1);
-
-        }
-
-        private void bt_draw2_Click(object sender, EventArgs e)
-        {
-            //g.Clear(Color.LightGreen);
-            p.Width = 10;
-            for (int i = 0; i <= pictureBox1.Width; i = i + 36)
-            {
-                g.DrawLine(p, i, 0, i, pictureBox1.Height);
-                p.Width += 2;
-            }
-        }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
@@ -1338,4 +1215,3 @@ namespace vcs_Draw2
         }
     }
 }
-

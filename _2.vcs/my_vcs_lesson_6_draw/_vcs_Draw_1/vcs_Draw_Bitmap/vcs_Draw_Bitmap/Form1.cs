@@ -82,6 +82,7 @@ namespace vcs_Draw_Bitmap
 
             pictureBox1.Size = new Size(1080, 840);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_pictureBox1_clear.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_pictureBox1_clear.Size.Width, pictureBox1.Location.Y + pictureBox1.Size.Height - bt_pictureBox1_clear.Size.Height);
 
             lb_rotate.Location = new Point(x_st + dx * 7 + 40, y_st + dy * 0);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -99,6 +100,15 @@ namespace vcs_Draw_Bitmap
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void bt_pictureBox1_clear_Click(object sender, EventArgs e)
+        {
+            //指定畫布大小
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.DrawRectangle(p, 0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1);
+            pictureBox1.Image = bitmap1;
         }
 
         void open_new_file()
@@ -933,6 +943,7 @@ namespace vcs_Draw_Bitmap
                 cnt = 0;
             }
         }
+
     }
 }
 

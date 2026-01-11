@@ -16,8 +16,10 @@ namespace vcs_DrawEllipse
         private const float small = 0.1f;
 
         // Rectangles that define the ellipses.
-        private bool GotEllipse1 = false, GotEllipse2 = false;
-        private Rectangle Ellipse1, Ellipse2;
+        private bool GotEllipse1 = false;
+        private bool GotEllipse2 = false;
+        private Rectangle Ellipse1;
+        private Rectangle Ellipse2;
 
         // The points of intersection.
         private List<PointF> Roots = new List<PointF>();
@@ -27,7 +29,10 @@ namespace vcs_DrawEllipse
 
         // Used while drawing ellipses.
         private int DrawingEllipseNum = 0;
-        private int StartX, StartY, EndX, EndY;
+        private int StartX;
+        private int StartY;
+        private int EndX;
+        private int EndY;
 
         public Form1()
         {
@@ -36,8 +41,10 @@ namespace vcs_DrawEllipse
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.DoubleBuffered = true;
+            show_item_location();
 
+            this.DoubleBuffered = true;
+            /*
             // Some sample ellipses to start off.
             Ellipse1 = new Rectangle(234, 223, 255, 150);
             Ellipse2 = new Rectangle(152, 233, 210, 155);
@@ -60,9 +67,32 @@ namespace vcs_DrawEllipse
 
             GotEllipse1 = true;
             GotEllipse2 = true;
-
-
+            */
+            richTextBox1.Text += "左鍵畫一圓, 右鍵畫一圓\n";
         }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+            int W = 160;
+            int H = 60;
+
+            richTextBox1.Size = new Size(305, 420);
+            //richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 7);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1068, 492);
+            this.Text = "vcs_DrawEllipse";
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
 
         // Draw the ellipses.
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -73,6 +103,7 @@ namespace vcs_DrawEllipse
             // Draw the first ellipse.
             if (GotEllipse1)
             {
+                //richTextBox1.Text += "111\n";
                 using (Brush brush = new SolidBrush(Color.FromArgb(128, Color.Blue)))
                 {
                     e.Graphics.FillEllipse(brush, Ellipse1);
@@ -83,6 +114,7 @@ namespace vcs_DrawEllipse
             // Draw the second ellipse.
             if (GotEllipse2)
             {
+                //richTextBox1.Text += "222\n";
                 using (Brush brush = new SolidBrush(Color.FromArgb(128, Color.Red)))
                 {
                     e.Graphics.FillEllipse(brush, Ellipse2);
@@ -93,12 +125,14 @@ namespace vcs_DrawEllipse
             // Draw the new ellipse if we are drawing one.
             if (DrawingEllipseNum == 1)
             {
+                //richTextBox1.Text += "aaa\n";
                 e.Graphics.DrawEllipse(Pens.Blue,
                     Math.Min(StartX, EndX), Math.Min(StartY, EndY),
                     Math.Abs(StartX - EndX), Math.Abs(StartY - EndY));
             }
             else if (DrawingEllipseNum == 2)
             {
+                //richTextBox1.Text += "bbb\n";
                 e.Graphics.DrawEllipse(Pens.Red,
                     Math.Min(StartX, EndX), Math.Min(StartY, EndY),
                     Math.Abs(StartX - EndX), Math.Abs(StartY - EndY));
@@ -108,9 +142,7 @@ namespace vcs_DrawEllipse
             const int radius = 4;
             foreach (PointF pt in PointsOfIntersection)
             {
-                RectangleF rect = new RectangleF(
-                    pt.X - radius, pt.Y - radius,
-                    2 * radius, 2 * radius);
+                RectangleF rect = new RectangleF(pt.X - radius, pt.Y - radius, 2 * radius, 2 * radius);
                 e.Graphics.DrawEllipse(Pens.Green, rect);
             }
         }
@@ -153,7 +185,10 @@ namespace vcs_DrawEllipse
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             // Do nothing if we are not drawing.
-            if (DrawingEllipseNum == 0) return;
+            if (DrawingEllipseNum == 0)
+            {
+                return;
+            }
 
             EndX = e.X;
             EndY = e.Y;
@@ -165,7 +200,10 @@ namespace vcs_DrawEllipse
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             // Do nothing if we are not drawing.
-            if (DrawingEllipseNum == 0) return;
+            if (DrawingEllipseNum == 0)
+            {
+                return;
+            }
 
             EndX = e.X;
             EndY = e.Y;
@@ -196,9 +234,5 @@ namespace vcs_DrawEllipse
             // Redraw.
             pictureBox1.Refresh();
         }
-
-
-
-
     }
 }
